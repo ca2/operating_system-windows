@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='basis|Win32'">
+    <LocalDebuggerCommandArguments>"C:\basis\platform-windows\seed\metaseed\..\..\..\time-windows\x64\basis\app.exe" "app_simple_drawing" "C:\basis\platform-windows\seed\metaseed\..\..\..\time-windows\x64\basis\app_simple_drawing2.exe"</LocalDebuggerCommandArguments>
+    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+    <LocalDebuggerCommand>C:\bergedge\papaya\windows\bin\$(TargetName)$(TargetExt)</LocalDebuggerCommand>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='cube_basis|Win32'">
+    <LocalDebuggerCommandArguments>"C:\basis\platform-windows\seed\metaseed\..\..\..\time-windows\x64\basis\app.exe" "app_simple_drawing" "C:\basis\platform-windows\seed\metaseed\..\..\..\time-windows\x64\basis\app_simple_drawing2.exe"</LocalDebuggerCommandArguments>
+    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+    <LocalDebuggerCommand>C:\bergedge\papaya\windows\bin\$(TargetName)$(TargetExt)</LocalDebuggerCommand>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='cover|Win32'">
+    <LocalDebuggerCommandArguments>"C:\basis\platform-windows\seed\metaseed\..\..\..\time-windows\x64\basis\app.exe" "app_simple_drawing" "C:\basis\platform-windows\seed\metaseed\..\..\..\time-windows\x64\basis\app_simple_drawing2.exe"</LocalDebuggerCommandArguments>
+    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+    <LocalDebuggerCommand>C:\bergedge\papaya\windows\bin\$(TargetName)$(TargetExt)</LocalDebuggerCommand>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='stage|Win32'">
+    <LocalDebuggerCommandArguments>"C:\basis\platform-windows\seed\metaseed\..\..\..\time-windows\x64\basis\app.exe" "app_simple_drawing" "C:\basis\platform-windows\seed\metaseed\..\..\..\time-windows\x64\basis\app_simple_drawing2.exe"</LocalDebuggerCommandArguments>
+    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+    <LocalDebuggerCommand>C:\bergedge\papaya\windows\bin\$(TargetName)$(TargetExt)</LocalDebuggerCommand>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='cube_stage|Win32'">
+    <LocalDebuggerCommandArguments>"C:\basis\platform-windows\seed\metaseed\..\..\..\time-windows\x64\basis\app.exe" "app_simple_drawing" "C:\basis\platform-windows\seed\metaseed\..\..\..\time-windows\x64\basis\app_simple_drawing2.exe"</LocalDebuggerCommandArguments>
+    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+    <LocalDebuggerCommand>C:\bergedge\papaya\windows\bin\$(TargetName)$(TargetExt)</LocalDebuggerCommand>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='basis|x64'">
+    <LocalDebuggerCommandArguments>"C:\basis\platform-windows\seed\metaseed\..\..\..\time-windows\x64\basis\app.exe" "app_simple_drawing" "C:\basis\platform-windows\seed\metaseed\..\..\..\time-windows\x64\basis\app_simple_drawing2.exe"</LocalDebuggerCommandArguments>
+    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+    <LocalDebuggerCommand>C:\archive\tool\bin\$(TargetName)$(TargetExt)</LocalDebuggerCommand>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='cube_basis|x64'">
+    <LocalDebuggerCommandArguments>"C:\basis\platform-windows\seed\metaseed\..\..\..\time-windows\x64\basis\app.exe" "app_simple_drawing" "C:\basis\platform-windows\seed\metaseed\..\..\..\time-windows\x64\basis\app_simple_drawing2.exe"</LocalDebuggerCommandArguments>
+    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+    <LocalDebuggerCommand>$(OutDir)$(TargetName)$(TargetExt)</LocalDebuggerCommand>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='cover|x64'">
+    <LocalDebuggerCommandArguments>"C:\basis\platform-windows\seed\metaseed\..\..\..\time-windows\x64\basis\app.exe" "app_simple_drawing" "C:\basis\platform-windows\seed\metaseed\..\..\..\time-windows\x64\basis\app_simple_drawing2.exe"</LocalDebuggerCommandArguments>
+    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+    <LocalDebuggerCommand>C:\bergedge\papaya\windows\bin\$(TargetName)$(TargetExt)</LocalDebuggerCommand>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='stage|x64'">
+    <LocalDebuggerCommandArguments>"C:\basis\platform-windows\seed\metaseed\..\..\..\time-windows\x64\basis\app.exe" "app_simple_drawing" "C:\basis\platform-windows\seed\metaseed\..\..\..\time-windows\x64\basis\app_simple_drawing2.exe"</LocalDebuggerCommandArguments>
+    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+    <LocalDebuggerCommand>C:\archive\tool\program\app._.exe</LocalDebuggerCommand>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='cube_stage|x64'">
+    <LocalDebuggerCommandArguments>"C:\basis\platform-windows\seed\metaseed\..\..\..\time-windows\x64\basis\app.exe" "app_simple_drawing" "C:\basis\platform-windows\seed\metaseed\..\..\..\time-windows\x64\basis\app_simple_drawing2.exe"</LocalDebuggerCommandArguments>
+    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+    <LocalDebuggerCommand>$(OutDir)$(TargetName)$(TargetExt)</LocalDebuggerCommand>
+  </PropertyGroup>
+</Project>
