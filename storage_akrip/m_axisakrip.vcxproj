@@ -186,8 +186,8 @@ copy "$(SolutionDir)..\..\..\platform\stage\matter\msvc++\msvcr110d.dll" "$(OutD
     <PreBuildEvent>
       <Command>copy "$(SolutionDir)..\..\..\platform\stage\matter\msvc++\msvcp110d.dll" "$(OutDir)"
 copy "$(SolutionDir)..\..\..\platform\stage\matter\msvc++\msvcr110d.dll" "$(OutDir)"
-copy "$(__archive)\third-windows\thirdparty\binary\m_freetype.dll" "$(OutDir)"
-copy "$(__archive)\third-windows\thirdparty\binary\FreeImage.dll" "$(OutDir)"
+copy "$(__archive)\platform-windows\thirdparty\binary\m_freetype.dll" "$(OutDir)"
+copy "$(__archive)\platform-windows\thirdparty\binary\FreeImage.dll" "$(OutDir)"
 </Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
