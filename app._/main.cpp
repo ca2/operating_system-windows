@@ -278,8 +278,8 @@ void main()
 
             if (iFind < 0)
             {
-               strRoot = strApp;
-               strDomain = "main";
+               strRoot = "app";
+               strDomain = strParse;
             }
             else
             {
