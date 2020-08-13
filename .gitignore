@@ -1,5 +1,8 @@
 **/.vs
 **/.DS_Store
+**/.git
+**/.svn
+**/CVS
 .DS_Store
 ._.DS_Store
 *.suo
@@ -9,5 +12,11 @@
 *.aps
 browse.vc.db
 solution.vc.db*
+*.vc.db
+*.depend
+*.layout
+*.gch
+*.pch
 *.expand_fileset
 *.expand_fileset.spa
+Thumbs.db
