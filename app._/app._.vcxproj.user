@@ -46,7 +46,7 @@
     <LocalDebuggerCommand>C:\archive\tool\program\app._.exe</LocalDebuggerCommand>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='cube_stage|x64'">
-    <LocalDebuggerCommandArguments>"C:\basis\platform-windows\seed\metaseed\..\..\..\time-windows\x64\basis\app.exe" "app_simple_drawing" "C:\basis\platform-windows\seed\metaseed\..\..\..\time-windows\x64\basis\app_simple_drawing2.exe"</LocalDebuggerCommandArguments>
+    <LocalDebuggerCommandArguments>"C:\basis\platform-windows\seed\metaseed\..\..\..\time-windows\x64\basis\app.exe" "app_shader" "C:\basis\platform-windows\seed\metaseed\..\..\..\time-windows\x64\basis\app_shader2.exe"</LocalDebuggerCommandArguments>
     <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
     <LocalDebuggerCommand>$(OutDir)$(TargetName)$(TargetExt)</LocalDebuggerCommand>
   </PropertyGroup>

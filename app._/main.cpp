@@ -164,8 +164,10 @@ void copy(MEM_ICON_ITEM * dst, ICON_ITEM * pitem)
 //   }
 
 
-void main()
+void main(int argc, char * argv[])
 {
+
+   console console(argc, argv);
 
    string strSrc;
 
@@ -176,7 +178,7 @@ void main()
       if (file_exists(::dir::system() / "config\\plugin\\appfy_beg_debug_box.txt"))
       {
 
-         debug_box("appfy run", "appfy run", MB_OK);
+         ::MessageBoxA(nullptr,"appfy run", "appfy run", MB_OK);
 
       }
 
