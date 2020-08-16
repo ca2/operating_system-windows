@@ -34,7 +34,7 @@ namespace draw2d_gdiplus
 
       bool bOk = false;
 
-      defer_update(nullptr);
+      defer_update(nullptr, 0);
 
       if (m_pfont != nullptr)
       {
@@ -86,7 +86,7 @@ namespace draw2d_gdiplus
    }
 
 
-   bool font::create(::draw2d::graphics * pgraphics) 
+   bool font::create(::draw2d::graphics * pgraphics, ::index iCreate)
    {
 
       if (m_pfont != nullptr)

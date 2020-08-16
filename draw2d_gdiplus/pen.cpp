@@ -319,7 +319,7 @@ namespace draw2d_gdiplus
    */
 
 
-   bool pen::create(::draw2d::graphics * pgraphics)
+   bool pen::create(::draw2d::graphics * pgraphics, ::index iCreate)
    {
 
       if (m_etype == type_brush)

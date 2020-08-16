@@ -325,7 +325,7 @@ namespace draw2d_gdiplus
    //}
 
 
-   bool path::create(::draw2d::graphics * pgraphicsParam)
+   bool path::create(::draw2d::graphics * pgraphicsParam, ::index iCreate)
    {
 
       auto pgdiplusgraphics = __graphics(pgraphicsParam);

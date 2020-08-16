@@ -36,7 +36,7 @@ namespace draw2d_gdiplus
    bool region::get_bounding_box(RECT * prect, ::draw2d::graphics * pgraphics)
    {
 
-      defer_update(pgraphics);
+      defer_update(pgraphics, 0);
 
       Gdiplus::Rect rect;
 
@@ -70,7 +70,7 @@ namespace draw2d_gdiplus
    bool region::contains(const POINT & point, ::draw2d::graphics * pgraphics)
    {
 
-      defer_update(pgraphics);
+      defer_update(pgraphics, 0);
 
       if (!m_pregion)
       {
@@ -86,7 +86,7 @@ namespace draw2d_gdiplus
    }
 
 
-   bool region::create(::draw2d::graphics * pgraphics)
+   bool region::create(::draw2d::graphics * pgraphics, ::index iCreate)
    {
 
       m_pregion = get(pgraphics);

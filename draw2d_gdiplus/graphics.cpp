@@ -1417,11 +1417,20 @@ namespace draw2d_gdiplus
    bool graphics::fill_rect(const ::rect & rectParam, ::draw2d::brush * pbrush)
    {
 
+      if (::is_null(pbrush))
+      {
+
+         return false;
+
+      }
+
       Gdiplus::Rect rect;
 
       __copy(rect, rectParam);
 
-      bool bOk = m_pgraphics->FillRectangle(pbrush->get_os_data< Brush *> (this), rect) == Gdiplus::Status::Ok;
+      Gdiplus::Brush* posbrush = pbrush->get_os_data< Brush*>(this);
+
+      bool bOk = m_pgraphics->FillRectangle(posbrush, rect) == Gdiplus::Status::Ok;
 
       return bOk;
 
@@ -5459,7 +5468,7 @@ gdi_fallback:
 
       wstring wstrMiddle(str.Mid(iStartParam, iCountParam));
 
-      m_pfont->defer_update(this);
+      m_pfont->defer_update(this, 0);
 
       auto & text = m_pfont->m_mapText[str];
 
@@ -5741,7 +5750,7 @@ gdi_fallback:
 
       }
 
-      m_pfont->defer_update(this);
+      m_pfont->defer_update(this, 0);
 
       auto& text = m_pfont->m_mapText[str];
 
@@ -5914,7 +5923,7 @@ gdi_fallback:
       if(iIndex < 0)
          return false;
 
-      m_pfont->defer_update(this);
+      m_pfont->defer_update(this, 0);
 
       wstring wstr = ::str::international::utf8_to_unicode(pszString, nCount);
 
@@ -6097,7 +6106,7 @@ gdi_fallback:
 
       Gdiplus::PointF origin(0, 0);
 
-      m_pfont->defer_update(this);
+      m_pfont->defer_update(this, 0);
 
       bool bOk = true;
 

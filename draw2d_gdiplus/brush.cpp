@@ -35,7 +35,7 @@ namespace draw2d_gdiplus
 
 #endif
 
-   bool brush::create(::draw2d::graphics * pgraphics)
+   bool brush::create(::draw2d::graphics * pgraphics, ::index iCreate)
    {
 
       if(m_etype == type_solid)
