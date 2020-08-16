@@ -177,7 +177,7 @@ namespace production
 //      auto sz = pgraphics->GetTextExtent("��qg");
       m_iLineHeight = MAX(1, pgraphics->get_current_font()->get_height());
 
-      pgraphics->fill_solid_rect(rectClient, ARGB(255, 255, 255, 255));
+      pgraphics->fill_rect(rectClient, ARGB(255, 255, 255, 255));
 
       ::rect rectText(rectClient);
 
@@ -229,7 +229,7 @@ namespace production
       else
       {
 
-         pgraphics->fill_solid_rect(rectArea, ARGB(255, 100, 200, 255));
+         pgraphics->fill_rect(rectArea, ARGB(255, 100, 200, 255));
          pgraphics->set_text_color(ARGB(255, 255, 255, 255));
 
          pgraphics->draw_text("Production", rectArea, DT_CENTER | DT_VCENTER);

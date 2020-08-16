@@ -122,7 +122,7 @@ namespace draw2d_gdiplus
 
             if(graphicsMem->set(pDest))
             {
-               graphicsMem->fill_solid_rect(0, 0, bm.bmWidth, bm.bmHeight, crBackground);
+               graphicsMem->fill_rect(0, 0, bm.bmWidth, bm.bmHeight, crBackground);
 
                graphicsMem->SetBkColor(RGB(255, 255, 255));
 
@@ -173,7 +173,7 @@ namespace draw2d_gdiplus
          graphicsMem->SetBkColor(RGB(255, 255, 255));
          graphicsMask->BitBlt(0, 0, bm.bmWidth, bm.bmHeight, graphicsMem, 0, 0, NOTSRCERASE);
 
-         pgraphics->fill_solid_rect(x, y, bm.bmWidth, bm.bmHeight, crBackground);
+         pgraphics->fill_rect(x, y, bm.bmWidth, bm.bmHeight, crBackground);
 
          pgraphics->SetBkColor(RGB(255, 255, 255));
 

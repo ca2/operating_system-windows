@@ -475,8 +475,8 @@ namespace draw2d_gdi
       //void DrawDragRect(const ::rect & rect, const ::size & size,
       //                  const ::rect & rectLast, const ::size & sizeLast, ::draw2d::brush* pBrush = nullptr, ::draw2d::brush* pBrushLast = nullptr) override;
 
-      using ::draw2d::graphics::fill_solid_rect;
-      void fill_solid_rect(const ::rect & rect, COLORREF cr) override;
+      using ::draw2d::graphics::fill_rect;
+      void fill_rect(const ::rect & rect, COLORREF cr) override;
 
       using ::draw2d::graphics::draw3d_rect;
       void draw3d_rect(const ::rect & rect, COLORREF crTopLeft, COLORREF crBottomRight, eborder eborder = border_all) override;

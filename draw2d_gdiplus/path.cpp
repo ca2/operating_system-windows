@@ -60,7 +60,7 @@ namespace draw2d_gdiplus
    }
 
 
-   bool path::internal_begin_figure(bool bFill, ::draw2d::e_fill_mode efillmode)
+   bool path::internal_begin_figure()
    {
 
       if (m_ppath == nullptr)
@@ -87,47 +87,38 @@ namespace draw2d_gdiplus
 
    }
 
-   bool path::internal_end_figure(bool bClose)
+
+   bool path::close_figure()
    {
 
 
-
-      if(bClose)
+      if (m_ppath == nullptr)
       {
-
-         if (m_ppath == nullptr)
-         {
-
-            return false;
-
-         }
-
-         try
-         {
-
-            m_bHasPointInternal = false;
-
-            return m_ppath->CloseFigure() == Gdiplus::Status::Ok;
-
-         }
-         catch (...)
-         {
-
-
-         }
 
          return false;
 
-
       }
-      else
+
+      try
       {
+
          m_bHasPointInternal = false;
-         return true;
+
+         return m_ppath->CloseFigure() == Gdiplus::Status::Ok;
 
       }
+      catch (...)
+      {
+
+
+      }
+
+      m_bHasPointInternal = false;
+
+      return true;
 
    }
+
 
    bool path::internal_add_line(double x1, double y1, double x2, double y2)
    {
@@ -268,66 +259,70 @@ namespace draw2d_gdiplus
 
    }
 
-   bool path::internal_add_line(double x, double y)
-   {
 
-      bool bOk1 = true;
+   //bool path::internal_add_line(double x, double y)
+   //{
 
-      if(m_bHasPointInternal)
-      {
+   //   bool bOk1 = true;
 
-         if (almost_integer(m_pointInternal.X)
-               && almost_integer(m_pointInternal.Y)
-               && almost_integer(x)
-               && almost_integer(y))
-         {
+   //   if(m_bHasPointInternal)
+   //   {
 
-            bOk1 = m_ppath->AddLine((INT) m_pointInternal.X, (INT)m_pointInternal.Y, (INT)x, (INT)y) == Gdiplus::Status::Ok;
+   //      if (almost_integer(m_pointInternal.X)
+   //            && almost_integer(m_pointInternal.Y)
+   //            && almost_integer(x)
+   //            && almost_integer(y))
+   //      {
 
-         }
-         else
-         {
+   //         bOk1 = m_ppath->AddLine((INT) m_pointInternal.X, (INT)m_pointInternal.Y, (INT)x, (INT)y) == Gdiplus::Status::Ok;
 
-            bOk1 = m_ppath->AddLine((FLOAT)m_pointInternal.X, (FLOAT) m_pointInternal.Y, (FLOAT)x, (FLOAT)y) == Gdiplus::Status::Ok;
+   //      }
+   //      else
+   //      {
 
-         }
+   //         bOk1 = m_ppath->AddLine((FLOAT)m_pointInternal.X, (FLOAT) m_pointInternal.Y, (FLOAT)x, (FLOAT)y) == Gdiplus::Status::Ok;
 
-      }
+   //      }
 
-      m_bHasPointInternal = true;
+   //   }
 
-      m_pointInternal.X = (Gdiplus::REAL) x;
-      m_pointInternal.Y = (Gdiplus::REAL) y;
+   //   m_bHasPointInternal = true;
 
-      return bOk1;
+   //   m_pointInternal.X = (Gdiplus::REAL) x;
+   //   m_pointInternal.Y = (Gdiplus::REAL) y;
 
-   }
+   //   return bOk1;
+
+   //}
 
    pointd path::internal_current_point()
    {
 
-      return last_point();
+      return get_current_point();
 
    }
 
 
-   bool path::internal_add_move(double x, double y)
-   {
+   //bool path::internal_add_move(double x, double y)
+   //{
 
-      if(!m_bHasPointInternal)
-      {
-         internal_begin_figure(m_bFill,m_efillmode);
-      }
+   //   if(!m_bHasPointInternal)
+   //   {
+   //      //internal_begin_figure(m_bFill,m_efillmode);
 
-      m_pointInternal.X   = (Gdiplus::REAL) x;
-      m_pointInternal.Y   = (Gdiplus::REAL) y;
-      m_bHasPointInternal     = true;
-      m_bHasPath = false;
+   //      internal_begin_figure();
+
+   //   }
+
+   //   m_pointInternal.X   = (Gdiplus::REAL) x;
+   //   m_pointInternal.Y   = (Gdiplus::REAL) y;
+   //   m_bHasPointInternal     = true;
+   //   m_bHasPath = false;
 
 
-      return true;
+   //   return true;
 
-   }
+   //}
 
 
    bool path::create(::draw2d::graphics * pgraphicsParam)
@@ -377,12 +372,14 @@ namespace draw2d_gdiplus
          //internal_begin_figure(m_bFill,m_efillmode);
       }
 
-      for(i32 i = 0; i < m_elementa.get_count(); i++)
-      {
+      //for(i32 i = 0; i < m_elementa.get_count(); i++)
+      //{
 
-         set(pgraphicsParam, m_elementa(i));
+        // set(pgraphicsParam, m_elementa(i));
 
-      }
+      //}
+
+      _set_create(pgraphicsParam);
 
       m_osdata[0] = m_ppath;
 
@@ -399,39 +396,8 @@ namespace draw2d_gdiplus
    }
 
 
-   bool path::set(::draw2d::graphics * pgraphics, const ::draw2d::path::element & e)
-   {
 
-      switch(e.m_etype)
-      {
-      case ::draw2d::path::element::type_arc:
-         set(pgraphics, e.u.m_arc);
-         break;
-      case ::draw2d::path::element::type_move:
-         set(pgraphics, e.u.m_move);
-         break;
-      case ::draw2d::path::element::type_line:
-         set(pgraphics, e.u.m_line);
-         break;
-      case ::draw2d::path::element::type_rect:
-         set(pgraphics, e.u.m_rect);
-         break;
-      case ::draw2d::path::element::type_string:
-      case ::draw2d::path::element::type_draw_text:
-         set(pgraphics,e.m_etype, e.m_stringpath);
-         break;
-      case ::draw2d::path::element::type_end:
-         internal_end_figure(e.u.m_end.m_bClose);
-         break;
-      default:
-         throw "unexpected simple os graphics element type";
-      }
-
-      return false;
-
-   }
-
-   bool path::internal_add_arc(const ::rect & rect, double iStart, double iAngle)
+   bool path::internal_add_arc(const ::rectd & rect, const ::angle& angleBeg, const ::angle& angleEnd)
    {
 
       if (m_ppath == nullptr)
@@ -448,7 +414,7 @@ namespace draw2d_gdiplus
          ::Gdiplus::RectF rectf((Gdiplus::REAL) rect.left, (Gdiplus::REAL) rect.top, (Gdiplus::REAL) width(rect), (Gdiplus::REAL) height(rect));
 
 
-         m_ppath->AddArc(rectf, (Gdiplus::REAL) iStart, (Gdiplus::REAL) iAngle);
+         m_ppath->AddArc(rectf, (Gdiplus::REAL) angleBeg.degree(), (Gdiplus::REAL) (angleEnd - angleBeg).degree());
 
          ::Gdiplus::PointF point;
 
@@ -468,7 +434,7 @@ namespace draw2d_gdiplus
    }
 
 
-   bool path::internal_add_string(::draw2d::graphics * pgraphics,i32 x,i32 y,const string & strText,::draw2d::font * pfont)
+   bool path::internal_add_text_out(::draw2d::graphics * pgraphics,i32 x,i32 y,const string & strText,::draw2d::font * pfont)
    {
 
       if (m_ppath == nullptr)
@@ -553,91 +519,145 @@ namespace draw2d_gdiplus
 
    }
 
-
-   bool path::set(::draw2d::graphics * pgraphics, const ::draw2d::path::arc & arc)
+   
+   bool path::_set(::draw2d::graphics* pgraphics, ::draw2d::path::begin* pbegin)
    {
 
-      ::rect rect;
 
-      rect.left = (LONG)(arc.m_pointCenter.x - arc.m_sizeRadius.cx);
-      rect.right = (LONG)(arc.m_pointCenter.x + arc.m_sizeRadius.cx);
-      rect.top = (LONG)(arc.m_pointCenter.y - arc.m_sizeRadius.cy);
-      rect.bottom = (LONG)(arc.m_pointCenter.y + arc.m_sizeRadius.cy);
-      //if(!m_bHasPointInternal)
+      return true;
+
+   }
+
+
+   bool path::_set(::draw2d::graphics * pgraphics, ::draw2d::path::arc * parc)
+   {
+
+      ::rectd rect;
+
+      rect.left      = parc->m_pointCenter.x - parc->m_sizeRadius.cx;
+      rect.right     = parc->m_pointCenter.x + parc->m_sizeRadius.cx;
+      rect.top       = parc->m_pointCenter.y - parc->m_sizeRadius.cy;
+      rect.bottom    = parc->m_pointCenter.y + parc->m_sizeRadius.cy;
+
+      //if (!m_bHasPath && m_bHasPointInternal)
       //{
 
-      //   internal_add_move(arc.m_pointEnd.x,arc.m_pointEnd.y);
+      //   internal_add_line(parc->m_pointBeg.x, parc->m_pointBeg.y);
 
       //}
-      if (!m_bHasPath && m_bHasPointInternal)
-      {
 
-         internal_add_line(arc.m_pointStart.x, arc.m_pointStart.y);
-
-      }
-
-
-      bool bOk = internal_add_arc(rect,(int)(arc.m_dAngle1 * 180.0 / 3.1415),(int)(arc.m_dAngle* 180.0 / 3.1415));
-
+      bool bOk = internal_add_arc(rect,parc->m_angleBeg, parc->m_angleEnd);
 
       return bOk;
 
    }
 
 
-   bool path::set(::draw2d::graphics * pgraphics, const ::draw2d::path::rect & rect)
+   bool path::_set(::draw2d::graphics * pgraphics, ::draw2d::path::rect * prect)
    {
 
-      return internal_add_rect(rect.m_x, rect.m_y, rect.m_cx, rect.m_cy);
+      return internal_add_rect(
+         prect->m_rect.left, prect->m_rect.top, 
+         prect->m_rect.width(), prect->m_rect.height());
 
    }
 
 
-   bool path::set(::draw2d::graphics * pgraphics, const ::draw2d::path::line & l)
+   bool path::_set(::draw2d::graphics * pgraphics, ::draw2d::path::line * pline)
    {
 
-      internal_add_line(l.m_x, l.m_y);
-
-      return true;
+      return internal_add_line(
+         pline->m_pointBeg.x, pline->m_pointBeg.y,
+         pline->m_pointEnd.x, pline->m_pointEnd.y);
 
    }
 
 
-   bool path::set(::draw2d::graphics * pgraphics, const ::draw2d::path::move & point)
+   bool path::_set(::draw2d::graphics* pgraphics, ::draw2d::path::lines* plines)
    {
 
-      internal_add_move((i32) point.m_x, (i32) point.m_y);
+      ::array < Gdiplus::PointF > pointa;
+      
+      pointa.set_size(plines->m_pointa.get_count());
 
-
-      return true;
-
-   }
-
-   bool path::set(::draw2d::graphics * pgraphics, ::draw2d::path::element::e_type etype, const ::draw2d::path::string_path & s)
-   {
-
-      switch (etype)
+      for (::index i = 0; i < pointa.get_size(); i++)
       {
-      case ::draw2d::path::element::type_string:
-         internal_add_string(pgraphics, (i32)s.m_x, (i32)s.m_y, s.m_strText, s.m_pfont);
-         break;
-      case ::draw2d::path::element::type_draw_text:
-         internal_add_draw_text(pgraphics, s.m_rect, s.m_strText, s.m_pfont, s.m_iDrawTextFlags);
-         break;
-      default:
-         __throw(not_supported_exception());
-         break;
+
+         __copy(pointa[i], plines->m_pointa[i]);
+
       }
 
+      m_ppath->AddLines(pointa.get_data(), pointa.get_count());
+
+      return true;
+
+   }
+
+
+
+   bool path::_set(::draw2d::graphics* pgraphics, ::draw2d::path::polygon * ppolygon)
+   {
+
+      ::array < Gdiplus::PointF > pointa;
+
+      pointa.set_size(ppolygon->m_pointa.get_count());
+
+      for (::index i = 0; i < pointa.get_size(); i++)
+      {
+
+         __copy(pointa[i], ppolygon->m_pointa[i]);
+
+      }
+
+      m_ppath->AddPolygon(pointa.get_data(), pointa.get_count());
+
+      return true;
+
+
+   }
+
+
+
+   bool path::_set(::draw2d::graphics* pgraphics, ::draw2d::path::text_out* ptextout)
+   {
+
+      return internal_add_text_out(
+         pgraphics,
+         (i32)ptextout->m_point.x,
+         (i32)ptextout->m_point.y,
+         ptextout->m_strText,
+         ptextout->m_pfont);
+
+   }
+
+
+   bool path::_set(::draw2d::graphics* pgraphics, ::draw2d::path::draw_text * pdrawtext)
+   {
+
+      return internal_add_draw_text(
+         pgraphics,
+         pdrawtext->m_rect, 
+         pdrawtext->m_strText, 
+         pdrawtext->m_pfont, 
+         pdrawtext->m_iDrawTextFlags);
+
+   }
+
+
+   bool path::_set(::draw2d::graphics* pgraphics, ::draw2d::path::close * pclose)
+   {
 
 
       return true;
 
    }
+
 
 
    bool path::contains(::draw2d::graphics_pointer& pgraphics, const pointd& point)
    {
+
+      return ::draw2d::path::contains(pgraphics, point);
 
       auto pospath = get_os_data <GraphicsPath *>(pgraphics);
 

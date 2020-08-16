@@ -2666,7 +2666,7 @@ namespace draw2d_gdi
    //   {
    //   }
 
-   //   m_spgraphics->fill_solid_rect(rectx, RGB(255, 255, 255));
+   //   m_spgraphics->fill_rect(rectx, RGB(255, 255, 255));
 
    //   pmessage->m_bRet = true;
    //   pbase->set_lresult(0);

@@ -3608,7 +3608,7 @@ namespace draw2d_gdi
    }
 
 
-   void graphics::fill_solid_rect(const ::rect & rect, COLORREF cr)
+   void graphics::fill_rect(const ::rect & rect, COLORREF cr)
    {
 
       sync_lock ml(mutex());
