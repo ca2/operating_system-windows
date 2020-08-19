@@ -2,7 +2,7 @@
 
 
 #include "aura/_.h"
-#include "aura/user/user/user.h"
+#include "aura/user/user.h"
 
 
 #include "app_app_nest_host.h"

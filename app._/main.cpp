@@ -1,5 +1,5 @@
 ﻿#include "aura/console.h"
-#include "aura/user/user/_user.h"
+#include "aura/user/_user.h"
 
 #define PATH_INSTALL_FOLDER_EXE_ARG 1
 

@@ -41,25 +41,25 @@ namespace draw2d_gdiplus
 
 
 extern "C"
-void draw2d_factory_exchange()
+void draw2d_gdiplus_factory_exchange()
 {
 
    draw2d_gdiplus::factory_exchange factoryexchange;
 
 }
 
-#ifdef CUBE
-
-void initialize_draw2d_factory_exchange()
-{
-
-   g_pfnfactoryexchangeDraw2d = &draw2d_factory_exchange;
-
-}
-
-#endif
-
-
+//#ifdef CUBE
+//
+//void initialize_draw2d_factory_exchange()
+//{
+//
+//   g_pfnfactoryexchangeDraw2d = &draw2d_factory_exchange;
+//
+//}
+//
+//#endif
 
 
-draw2d_gdiplus::factory_exchange factoryexchange;
+
+
+//draw2d_gdiplus::factory_exchange factoryexchange;

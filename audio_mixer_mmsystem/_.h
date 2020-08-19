@@ -2,7 +2,7 @@
 
 
 #include "multimedia_mmsystem/_.h"
-#include "aura/user/user/_user.h"
+#include "aura/user/_user.h"
 #include "app-core/multimedia/multimedia/_.h"
 #include "app-core/multimedia/audio_mixer/_.h"
 
