@@ -26,7 +26,7 @@
     <LocalDebuggerCommand>C:\bergedge\papaya\windows\bin\$(TargetName)$(TargetExt)</LocalDebuggerCommand>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='basis|x64'">
-    <LocalDebuggerCommandArguments>"C:\basis\platform-windows\seed\metaseed\..\..\..\time-windows\x64\basis\app.exe" "app_simple_drawing" "C:\basis\platform-windows\seed\metaseed\..\..\..\time-windows\x64\basis\app_simple_drawing2.exe"</LocalDebuggerCommandArguments>
+    <LocalDebuggerCommandArguments>"C:\basis\platform-windows\seed\metaseed\..\..\..\time-windows\x64\basis\app.exe" "app_shader" "C:\basis\platform-windows\seed\metaseed\..\..\..\time-windows\x64\basis\app_shader2.exe"</LocalDebuggerCommandArguments>
     <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
     <LocalDebuggerCommand>C:\archive\tool\bin\$(TargetName)$(TargetExt)</LocalDebuggerCommand>
   </PropertyGroup>
