@@ -2193,9 +2193,9 @@ gdi_fallback:
 
          ::color color = m_pimageimplDraw2dGraphics->colorref()[point.x + point.y * m_pimageimplDraw2dGraphics->scan_size()];
 
-         color.m_iR = color.m_iR * (1.0 - colorChange.da()) + colorChange.m_iR * colorChange.da();
-         color.m_iG = color.m_iG * (1.0 - colorChange.da()) + colorChange.m_iG * colorChange.da();
-         color.m_iB = color.m_iB * (1.0 - colorChange.da()) + colorChange.m_iB * colorChange.da();
+         color.m_iR = (int) (color.m_iR * (1.0 - colorChange.da()) + colorChange.m_iR * colorChange.da());
+         color.m_iG = (int) (color.m_iG * (1.0 - colorChange.da()) + colorChange.m_iG * colorChange.da());
+         color.m_iB = (int) (color.m_iB * (1.0 - colorChange.da()) + colorChange.m_iB * colorChange.da());
 
          m_pimageimplDraw2dGraphics->colorref()[point.x + point.y * m_pimageimplDraw2dGraphics->scan_size()] = color;
          //colorCurrent.m_iA = colorCurrent.m_iA * (1.0 - color.da()) + color.m_iR * color.da();
