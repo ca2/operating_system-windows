@@ -86,7 +86,7 @@ namespace draw2d_gdiplus
    }
 
 
-   bool region::create(::draw2d::graphics * pgraphics, ::index iCreate)
+   bool region::create(::draw2d::graphics * pgraphics, ::i8 iCreate)
    {
 
       m_pregion = get(pgraphics);

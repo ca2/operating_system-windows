@@ -2183,6 +2183,36 @@ gdi_fallback:
    }
 
 
+   ::color graphics::blend_pixel(const ::point& point, const ::color& colorChange)
+   {
+
+      if (m_pimageimplDraw2dGraphics->is_ok())
+      {
+
+         m_pimageimplDraw2dGraphics->map();
+
+         ::color color = m_pimageimplDraw2dGraphics->colorref()[point.x + point.y * m_pimageimplDraw2dGraphics->scan_size()];
+
+         color.m_iR = color.m_iR * (1.0 - colorChange.da()) + colorChange.m_iR * colorChange.da();
+         color.m_iG = color.m_iG * (1.0 - colorChange.da()) + colorChange.m_iG * colorChange.da();
+         color.m_iB = color.m_iB * (1.0 - colorChange.da()) + colorChange.m_iB * colorChange.da();
+
+         m_pimageimplDraw2dGraphics->colorref()[point.x + point.y * m_pimageimplDraw2dGraphics->scan_size()] = color;
+         //colorCurrent.m_iA = colorCurrent.m_iA * (1.0 - color.da()) + color.m_iR * color.da();
+
+      }
+      else
+      {
+
+         fill_solid_rect_dim(point.x, point.y, 1, 1, colorChange);
+
+      }
+
+      return colorChange;
+
+   }
+
+
    bool graphics::FloodFill(i32 x, i32 y, const ::color & color)
    {
 

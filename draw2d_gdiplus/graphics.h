@@ -345,6 +345,7 @@ namespace draw2d_gdiplus
       ::color GetPixel(const ::point & point) override;
       ::color SetPixel(i32 x, i32 y, const ::color & color) override;
       ::color SetPixel(const ::point & point, const ::color & color) override;
+      ::color blend_pixel(const ::point& point, const ::color& color) override;
       bool FloodFill(i32 x, i32 y, const ::color & color) override;
       bool ExtFloodFill(i32 x, i32 y, const ::color & color, UINT nFillType) override;
       bool MaskBlt(i32 x, i32 y, i32 nWidth, i32 nHeight, ::draw2d::graphics * pgraphicsSrc,

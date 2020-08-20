@@ -325,7 +325,7 @@ namespace draw2d_gdiplus
    //}
 
 
-   bool path::create(::draw2d::graphics * pgraphicsParam, ::index iCreate)
+   bool path::create(::draw2d::graphics * pgraphicsParam, ::i8 iCreate)
    {
 
       auto pgdiplusgraphics = __graphics(pgraphicsParam);
@@ -668,7 +668,7 @@ namespace draw2d_gdiplus
 
       }
 
-      Gdiplus::PointF p(point.x, point.y);
+      Gdiplus::PointF p((FLOAT) point.x, (FLOAT) point.y);
 
       return pospath->IsVisible(p);
 

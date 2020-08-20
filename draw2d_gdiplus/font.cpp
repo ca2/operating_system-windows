@@ -86,7 +86,7 @@ namespace draw2d_gdiplus
    }
 
 
-   bool font::create(::draw2d::graphics * pgraphics, ::index iCreate)
+   bool font::create(::draw2d::graphics * pgraphics, ::i8 iCreate)
    {
 
       if (m_pfont != nullptr)

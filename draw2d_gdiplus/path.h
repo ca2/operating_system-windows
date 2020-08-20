@@ -43,7 +43,7 @@ namespace draw2d_gdiplus
       virtual bool internal_add_draw_text(::draw2d::graphics * pgraphics, const ::rect & rect, const string & strText, ::draw2d::font * pfont, int nFormat);
 
 
-      virtual bool create(::draw2d::graphics * pgraphics, ::index iCreate) override;
+      virtual bool create(::draw2d::graphics * pgraphics, ::i8 iCreate) override;
       virtual void destroy() override;
 
       virtual bool _set(::draw2d::graphics* pgraphics, ::draw2d::path::begin* pbegin);
