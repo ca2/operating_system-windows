@@ -309,7 +309,7 @@ namespace multimedia
             m_mapIDToControl.set_at(control->GetMixerControl().dwControlID, control);
             for(i32 l = 0; l < control->get_size(); l++)
             {
-               __pointer(::multimedia::audio_mixer::user::interaction) pinteraction = control->operator [](l);
+               __pointer(::multimedia::audio_mixer::user::control) pinteraction = control->operator [](l);
                m_mapDlgItemIDToControl.set_at(pinteraction->GetDlgCtrlId(), control);
             }
          }
@@ -342,7 +342,7 @@ namespace multimedia
             __pointer(::multimedia::audio_mixer::control) control = controla[k];
             for(i32 l = 0; l < control->get_size(); l++)
             {
-               __pointer(::multimedia::audio_mixer::user::interaction) pinteraction = control->operator[](l);
+               __pointer(::multimedia::audio_mixer::user::control) pinteraction = control->operator[](l);
                m_mapDlgItemIDToControl.set_at(pinteraction->GetDlgCtrlId(), control);
             }
          }

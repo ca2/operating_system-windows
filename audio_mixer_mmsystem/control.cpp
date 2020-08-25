@@ -24,7 +24,7 @@ namespace multimedia
          if(m_mixercontroldetails.paDetails != nullptr)
             free(m_mixercontroldetails.paDetails);
 
-         ::multimedia::audio_mixer::user::interaction * pinteraction;
+         ::multimedia::audio_mixer::user::control * pinteraction;
 
          for(i32 i = 0; i < this->get_size(); i++)
          {
@@ -281,9 +281,9 @@ namespace multimedia
          m_mixercontroldetails.dwControlID = m_mixercontrol.dwControlID;
       }
 
-      /*      __pointer(::multimedia::audio_mixer::user::interaction) control::GetControl(i32 iType)
+      /*      __pointer(::multimedia::audio_mixer::user::control) control::GetControl(i32 iType)
             {
-               ::multimedia::audio_mixer::user::interaction  * pusercontrol = nullptr;
+               ::multimedia::audio_mixer::user::control  * pusercontrol = nullptr;
                for(i32 i = 0; i < this->get_size(); i++)
                {
                   pusercontrol = this->element_at(i);
@@ -297,7 +297,7 @@ namespace multimedia
                return nullptr;
             }
 
-            ::multimedia::audio_mixer::user::interaction * control::GetControlByIndex(::index iIndex)
+            ::multimedia::audio_mixer::user::control * control::GetControlByIndex(::index iIndex)
             {
                return this->element_at(iIndex);
             }
@@ -449,7 +449,7 @@ namespace multimedia
       /*
       ::multimedia::audio_mixer::control_data * control::GetWindowData(i32 iType)
       {
-         ::multimedia::audio_mixer::user::interaction * pusercontrol = nullptr;
+         ::multimedia::audio_mixer::user::control * pusercontrol = nullptr;
          for(i32 i = 0; i < this->get_size(); i++)
          {
             pusercontrol = this->element_at(i);
@@ -600,9 +600,9 @@ namespace multimedia
 
       /*
 
-            ::multimedia::audio_mixer::user::interaction * control::GetControlByDlgCtrlID(u32 nID)
+            ::multimedia::audio_mixer::user::control * control::GetControlByDlgCtrlID(u32 nID)
             {
-               ::multimedia::audio_mixer::user::interaction * pusercontrol = nullptr;
+               ::multimedia::audio_mixer::user::control * pusercontrol = nullptr;
                for(i32 i = 0; i < this->get_size(); i++)
                {
                   pusercontrol = this->element_at(i);
@@ -619,7 +619,7 @@ namespace multimedia
 
             ::multimedia::audio_mixer::control_data * control::GetWindowDataByDlgCtrlID(u32 nID)
             {
-               ::multimedia::audio_mixer::user::interaction * pusercontrol = nullptr;
+               ::multimedia::audio_mixer::user::control * pusercontrol = nullptr;
                for(i32 i = 0; i < this->get_size(); i++)
                {
                   pusercontrol = this->element_at(i);
@@ -655,7 +655,7 @@ namespace multimedia
                nSBCode == SB_PAGEDOWN ||
                nSBCode == SB_TOP )
          {
-            ::multimedia::audio_mixer::user::interaction * pinteraction = GetControlByDlgCtrlID((u32) pParamWnd->GetDlgCtrlId());
+            ::multimedia::audio_mixer::user::control * pinteraction = GetControlByDlgCtrlID((u32) pParamWnd->GetDlgCtrlId());
             if(pinteraction != nullptr)
             {
                ::multimedia::audio_mixer::user::level_control * pSlider = dynamic_cast<::multimedia::audio_mixer::user::level_control*>(pinteraction);
@@ -783,7 +783,7 @@ namespace multimedia
          WORD wNotifyCode = HIWORD(wParam);
          WORD wID = LOWORD(wParam);
 
-         __pointer(::multimedia::audio_mixer::user::interaction) pwnd = GetControlByDlgCtrlID((u32)wID);
+         __pointer(::multimedia::audio_mixer::user::control) pwnd = GetControlByDlgCtrlID((u32)wID);
 
          __pointer(::multimedia::audio_mixer::user::toggle_control) pmutecontrol =pwnd;
 
@@ -862,7 +862,7 @@ namespace multimedia
       }
 
 
-      iptr control::add(::multimedia::audio_mixer::user::interaction * pinteraction)
+      iptr control::add(::multimedia::audio_mixer::user::control * pinteraction)
       {
          pinteraction->get_data()->m_iIndex = this->get_size();
          control_ptr_array::add(pinteraction);

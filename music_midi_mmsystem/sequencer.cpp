@@ -94,7 +94,7 @@ namespace music
             if (m_hstream == nullptr)
             {
 
-               MMRESULT mmr = midiStreamOpen(&m_hstream, &uDeviceID, 1, (DWORD_PTR)get_os_int(), (DWORD_PTR)(sequencer*)this, CALLBACK_THREAD);
+               MMRESULT mmr = midiStreamOpen(&m_hstream, &uDeviceID, 1, (DWORD_PTR)get_ithread(), (DWORD_PTR)(sequencer*)this, CALLBACK_THREAD);
 
                estatus = translate_os_result(mmr, "sequencer::mm_start", "midiStreamOpen error");
 
