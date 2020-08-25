@@ -23,7 +23,7 @@ namespace audio_mmsystem
    ::estatus in::init_thread()
    {
 
-      TRACE("in::initialize_instance %X\n", get_os_int());
+      TRACE("in::initialize_instance %X\n", get_ithread());
 
       //SetMainWnd(nullptr);
       //ASSERT(GetMainWnd() == nullptr);
@@ -98,7 +98,7 @@ namespace audio_mmsystem
                                           &m_hwavein,
                                           audiowave->m_uiWaveInDevice,
                                           wave_format(),
-                                          get_os_int(),
+                                          get_ithread(),
                                           (u32) 0,
                                           CALLBACK_THREAD))))
          goto Opened;
@@ -109,7 +109,7 @@ namespace audio_mmsystem
                                           &m_hwavein,
                                           WAVE_MAPPER,
                                           wave_format(),
-                                          (u32) get_os_int(),
+                                          (u32) get_ithread(),
                                           (u32) 0,
                                           CALLBACK_THREAD))))
          goto Opened;
@@ -120,7 +120,7 @@ namespace audio_mmsystem
                                           &m_hwavein,
                                           WAVE_MAPPER,
                                           wave_format(),
-                                          (u32) get_os_int(),
+                                          (u32) get_ithread(),
                                           (u32) 0,
                                           CALLBACK_THREAD)))
          goto Opened;

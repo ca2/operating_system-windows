@@ -21,7 +21,7 @@ public:
 extern std::string get_starter_version();
 
 int bzuncompress_dup(LPCTSTR lpcszUncompressed, LPCTSTR lpcszGzFileCompressed);
-bool read_resource_as_file_dup(const char * pszFile, HINSTANCE hinst, UINT nID, LPCTSTR lpcszType);
+bool read_resource_as_file(const char * pszFile, HINSTANCE hinst, UINT nID, LPCTSTR lpcszType);
 std::string get_temp_file_name_dup(const char * pszName, const char * pszExtension);
 bool file_exists(const char * path1);
 
@@ -358,7 +358,7 @@ int bzuncompress_dup(LPCTSTR lpcszUncompressed, LPCTSTR lpcszGzFileCompressed)
 
 
 
-bool read_resource_as_file_dup(
+bool read_resource_as_file(
    const char * pszFile,
    HINSTANCE hinst,
    UINT nID, 
@@ -507,12 +507,12 @@ int install_spa()
 
    bool bOk = true;
 
-   bOk = bOk && read_resource_as_file_dup((get_ca2_folder_dup() + "\\ca2\\stage\\" + strPlatform + "\\spa_bspatch.dll").c_str(), ::GetModuleHandleA(ca2_browser_plugin_get_module_name()), ID_SPABOOT, "CA2SP");
+   bOk = bOk && read_resource_as_file((get_ca2_folder_dup() + "\\ca2\\stage\\" + strPlatform + "\\spa_bspatch.dll").c_str(), ::GetModuleHandleA(ca2_browser_plugin_get_module_name()), ID_SPABOOT, "CA2SP");
 
 
 
    std::string strGz = get_ca2_folder_dup() + "\\ca2\\time\\bz\\stage\\" + strPlatform + "\\spalib.bz";
-   bOk = bOk && read_resource_as_file_dup(strGz.c_str(), ::GetModuleHandleA(ca2_browser_plugin_get_module_name()), ID_CST, "CA2SP");
+   bOk = bOk && read_resource_as_file(strGz.c_str(), ::GetModuleHandleA(ca2_browser_plugin_get_module_name()), ID_CST, "CA2SP");
    std::string strSp = get_ca2_folder_dup() + "\\ca2\\stage\\" + strPlatform + "\\spalib.dll";
    SetDllDirectory((get_ca2_folder_dup() + "\\ca2\\stage\\" + strPlatform + "\\").c_str());
    bOk = bOk && !bzuncompress_dup(strSp.c_str(), strGz.c_str());

@@ -242,7 +242,7 @@
     <ClCompile>
       <AdditionalOptions>/bigobj -Zm512</AdditionalOptions>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>$(SolutionDir)../../inc;$(__sensitive)/sensitive/include;$(SolutionDir)../../include;$(__archive)/local/include;$(__archive)/third-windows/$(PlatformName)/$(Configuration)/include;$(__archive)/third-windows/include;$(__archive)/third-windows/third/include;$(SolutionDir)../../platform-windows;$(SolutionDir)../../app/_include;$(SolutionDir)../../third/include;.;$(IntDir);$(SolutionDir)../../;$(SolutionDir)../../app;$(SolutionDir)../../app;$(SolutionDir)../../;$(ProjectDir)../..;$(ProjectDir)../../;$(ProjectDir)../;$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)../../inc;$(__sensitive)/sensitive/include;$(SolutionDir)../../include;$(__archive)/local/include;$(__archive)/third-windows/$(PlatformName)/$(Configuration)/include;$(__archive)/third-windows/include;$(__archive)/third-windows/third/include;$(__archive)/third-windows/third/include/include;$(SolutionDir)../../platform-windows/_include;$(SolutionDir)../../platform-windows;$(SolutionDir)../../app/_include;$(SolutionDir)../../third/include;.;$(IntDir);$(SolutionDir)../../;$(SolutionDir)../../app;$(ProjectDir)../..;$(ProjectDir)../../;$(ProjectDir)../;$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ExceptionHandling>Async</ExceptionHandling>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -327,7 +327,7 @@
     <ClCompile>
       <AdditionalOptions>/bigobj -Zm512</AdditionalOptions>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>$(SolutionDir)../../inc;$(__sensitive)/sensitive/include;$(SolutionDir)../../include;$(__archive)/local/include;$(__archive)/third-windows/$(PlatformName)/$(Configuration)/include;$(__archive)/third-windows/include;$(__archive)/third-windows/third/include;$(SolutionDir)../../platform-windows;$(SolutionDir)../../app/_include;$(SolutionDir)../../third/include;.;$(IntDir);$(SolutionDir)../../;$(SolutionDir)../../app;$(SolutionDir)../../app;$(SolutionDir)../../;$(ProjectDir)../..;$(ProjectDir)../../;$(ProjectDir)../;$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)../../inc;$(__sensitive)/sensitive/include;$(SolutionDir)../../include;$(__archive)/local/include;$(__archive)/third-windows/$(PlatformName)/$(Configuration)/include;$(__archive)/third-windows/include;$(__archive)/third-windows/third/include;$(__archive)/third-windows/third/include/include;$(SolutionDir)../../platform-windows/_include;$(SolutionDir)../../platform-windows;$(SolutionDir)../../app/_include;$(SolutionDir)../../third/include;.;$(IntDir);$(SolutionDir)../../;$(SolutionDir)../../app;$(ProjectDir)../..;$(ProjectDir)../../;$(ProjectDir)../;$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>CUBE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ExceptionHandling>Async</ExceptionHandling>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -413,7 +413,7 @@
     <ClCompile>
       <AdditionalOptions>/bigobj -Zm512</AdditionalOptions>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>$(SolutionDir)../../inc;$(__sensitive)/sensitive/include;$(SolutionDir)../../include;$(__archive)/local/include;$(__archive)/third-windows/$(PlatformName)/$(Configuration)/include;$(__archive)/third-windows/include;$(__archive)/third-windows/third/include;$(SolutionDir)../../platform-windows;$(SolutionDir)../../app/_include;$(SolutionDir)../../third/include;.;$(IntDir);$(SolutionDir)../../;$(SolutionDir)../../app;$(SolutionDir)../../app;$(SolutionDir)../../;$(ProjectDir)../..;$(ProjectDir)../../;$(ProjectDir)../;$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)../../inc;$(__sensitive)/sensitive/include;$(SolutionDir)../../include;$(__archive)/local/include;$(__archive)/third-windows/$(PlatformName)/$(Configuration)/include;$(__archive)/third-windows/include;$(__archive)/third-windows/third/include;$(__archive)/third-windows/third/include/include;$(SolutionDir)../../platform-windows/_include;$(SolutionDir)../../platform-windows;$(SolutionDir)../../app/_include;$(SolutionDir)../../third/include;.;$(IntDir);$(SolutionDir)../../;$(SolutionDir)../../app;$(ProjectDir)../..;$(ProjectDir)../../;$(ProjectDir)../;$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ExceptionHandling>Async</ExceptionHandling>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -499,7 +499,7 @@
     <ClCompile>
       <AdditionalOptions>/bigobj -Zm512</AdditionalOptions>
       <Optimization>MaxSpeed</Optimization>
-      <AdditionalIncludeDirectories>$(SolutionDir)../../inc;$(__sensitive)/sensitive/include;$(SolutionDir)../../include;$(__archive)/local/include;$(__archive)/third-windows/$(PlatformName)/$(Configuration)/include;$(__archive)/third-windows/include;$(__archive)/third-windows/third/include;$(SolutionDir)../../platform-windows;$(SolutionDir)../../app/_include;$(SolutionDir)../../third/include;.;$(IntDir);$(SolutionDir)../../;$(SolutionDir)../../app;$(SolutionDir)../../app;$(SolutionDir)../../;$(ProjectDir)../..;$(ProjectDir)../../;$(ProjectDir)../;$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)../../inc;$(__sensitive)/sensitive/include;$(SolutionDir)../../include;$(__archive)/local/include;$(__archive)/third-windows/$(PlatformName)/$(Configuration)/include;$(__archive)/third-windows/include;$(__archive)/third-windows/third/include;$(__archive)/third-windows/third/include/include;$(SolutionDir)../../platform-windows/_include;$(SolutionDir)../../platform-windows;$(SolutionDir)../../app/_include;$(SolutionDir)../../third/include;.;$(IntDir);$(SolutionDir)../../;$(SolutionDir)../../app;$(ProjectDir)../..;$(ProjectDir)../../;$(ProjectDir)../;$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>false</MinimalRebuild>
       <ExceptionHandling>Async</ExceptionHandling>
@@ -597,7 +597,7 @@
     <ClCompile>
       <AdditionalOptions>/bigobj -Zm512</AdditionalOptions>
       <Optimization>MinSpace</Optimization>
-      <AdditionalIncludeDirectories>$(SolutionDir)../../inc;$(__sensitive)/sensitive/include;$(SolutionDir)../../include;$(__archive)/local/include;$(__archive)/third-windows/$(PlatformName)/$(Configuration)/include;$(__archive)/third-windows/include;$(__archive)/third-windows/third/include;$(SolutionDir)../../platform-windows;$(SolutionDir)../../app/_include;$(SolutionDir)../../third/include;.;$(IntDir);$(SolutionDir)../../;$(SolutionDir)../../app;$(SolutionDir)../../app;$(SolutionDir)../../;$(ProjectDir)../..;$(ProjectDir)../../;$(ProjectDir)../;$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)../../inc;$(__sensitive)/sensitive/include;$(SolutionDir)../../include;$(__archive)/local/include;$(__archive)/third-windows/$(PlatformName)/$(Configuration)/include;$(__archive)/third-windows/include;$(__archive)/third-windows/third/include;$(__archive)/third-windows/third/include/include;$(SolutionDir)../../platform-windows/_include;$(SolutionDir)../../platform-windows;$(SolutionDir)../../app/_include;$(SolutionDir)../../third/include;.;$(IntDir);$(SolutionDir)../../;$(SolutionDir)../../app;$(ProjectDir)../..;$(ProjectDir)../../;$(ProjectDir)../;$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>CUBE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>false</MinimalRebuild>
       <ExceptionHandling>Async</ExceptionHandling>
@@ -693,7 +693,7 @@
     <ClCompile>
       <AdditionalOptions>/bigobj -Zm512</AdditionalOptions>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>$(SolutionDir)../../inc;$(__sensitive)/sensitive/include;$(SolutionDir)../../include;$(__archive)/local/include;$(__archive)/third-windows/$(PlatformName)/$(Configuration)/include;$(__archive)/third-windows/include;$(__archive)/third-windows/third/include;$(SolutionDir)../../platform-windows;$(SolutionDir)../../app/_include;$(SolutionDir)../../third/include;.;$(IntDir);$(SolutionDir)../../;$(SolutionDir)../../app;$(SolutionDir)../../app;$(SolutionDir)../../;$(ProjectDir)../..;$(ProjectDir)../../;$(ProjectDir)../;$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)../../inc;$(__sensitive)/sensitive/include;$(SolutionDir)../../include;$(__archive)/local/include;$(__archive)/third-windows/$(PlatformName)/$(Configuration)/include;$(__archive)/third-windows/include;$(__archive)/third-windows/third/include;$(__archive)/third-windows/third/include/include;$(SolutionDir)../../platform-windows/_include;$(SolutionDir)../../platform-windows;$(SolutionDir)../../app/_include;$(SolutionDir)../../third/include;.;$(IntDir);$(SolutionDir)../../;$(SolutionDir)../../app;$(ProjectDir)../..;$(ProjectDir)../../;$(ProjectDir)../;$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ExceptionHandling>Async</ExceptionHandling>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -778,7 +778,7 @@
     <ClCompile>
       <AdditionalOptions>/bigobj -Zm512</AdditionalOptions>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>$(SolutionDir)../../inc;$(__sensitive)/sensitive/include;$(SolutionDir)../../include;$(__archive)/local/include;$(__archive)/third-windows/$(PlatformName)/$(Configuration)/include;$(__archive)/third-windows/include;$(__archive)/third-windows/third/include;$(SolutionDir)../../platform-windows;$(SolutionDir)../../app/_include;$(SolutionDir)../../third/include;.;$(IntDir);$(SolutionDir)../../;$(SolutionDir)../../app;$(SolutionDir)../../app;$(SolutionDir)../../;$(ProjectDir)../..;$(ProjectDir)../../;$(ProjectDir)../;$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)../../inc;$(__sensitive)/sensitive/include;$(SolutionDir)../../include;$(__archive)/local/include;$(__archive)/third-windows/$(PlatformName)/$(Configuration)/include;$(__archive)/third-windows/include;$(__archive)/third-windows/third/include;$(__archive)/third-windows/third/include/include;$(SolutionDir)../../platform-windows/_include;$(SolutionDir)../../platform-windows;$(SolutionDir)../../app/_include;$(SolutionDir)../../third/include;.;$(IntDir);$(SolutionDir)../../;$(SolutionDir)../../app;$(ProjectDir)../..;$(ProjectDir)../../;$(ProjectDir)../;$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>CUBE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ExceptionHandling>Async</ExceptionHandling>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -863,7 +863,7 @@
     <ClCompile>
       <AdditionalOptions>/bigobj -Zm512</AdditionalOptions>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>$(SolutionDir)../../inc;$(__sensitive)/sensitive/include;$(SolutionDir)../../include;$(__archive)/local/include;$(__archive)/third-windows/$(PlatformName)/$(Configuration)/include;$(__archive)/third-windows/include;$(__archive)/third-windows/third/include;$(SolutionDir)../../platform-windows;$(SolutionDir)../../app/_include;$(SolutionDir)../../third/include;.;$(IntDir);$(SolutionDir)../../;$(SolutionDir)../../app;$(SolutionDir)../../app;$(SolutionDir)../../;$(ProjectDir)../..;$(ProjectDir)../../;$(ProjectDir)../;$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)../../inc;$(__sensitive)/sensitive/include;$(SolutionDir)../../include;$(__archive)/local/include;$(__archive)/third-windows/$(PlatformName)/$(Configuration)/include;$(__archive)/third-windows/include;$(__archive)/third-windows/third/include;$(__archive)/third-windows/third/include/include;$(SolutionDir)../../platform-windows/_include;$(SolutionDir)../../platform-windows;$(SolutionDir)../../app/_include;$(SolutionDir)../../third/include;.;$(IntDir);$(SolutionDir)../../;$(SolutionDir)../../app;$(ProjectDir)../..;$(ProjectDir)../../;$(ProjectDir)../;$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ExceptionHandling>Async</ExceptionHandling>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -948,7 +948,7 @@
     <ClCompile>
       <AdditionalOptions>/bigobj -Zm512</AdditionalOptions>
       <Optimization>MaxSpeed</Optimization>
-      <AdditionalIncludeDirectories>$(SolutionDir)../../inc;$(__sensitive)/sensitive/include;$(SolutionDir)../../include;$(__archive)/local/include;$(__archive)/third-windows/$(PlatformName)/$(Configuration)/include;$(__archive)/third-windows/include;$(__archive)/third-windows/third/include;$(SolutionDir)../../platform-windows;$(SolutionDir)../../app/_include;$(SolutionDir)../../third/include;.;$(IntDir);$(SolutionDir)../../;$(SolutionDir)../../app;$(SolutionDir)../../app;$(SolutionDir)../../;$(ProjectDir)../..;$(ProjectDir)../../;$(ProjectDir)../;$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)../../inc;$(__sensitive)/sensitive/include;$(SolutionDir)../../include;$(__archive)/local/include;$(__archive)/third-windows/$(PlatformName)/$(Configuration)/include;$(__archive)/third-windows/include;$(__archive)/third-windows/third/include;$(__archive)/third-windows/third/include/include;$(SolutionDir)../../platform-windows/_include;$(SolutionDir)../../platform-windows;$(SolutionDir)../../app/_include;$(SolutionDir)../../third/include;.;$(IntDir);$(SolutionDir)../../;$(SolutionDir)../../app;$(ProjectDir)../..;$(ProjectDir)../../;$(ProjectDir)../;$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>false</MinimalRebuild>
       <ExceptionHandling>Async</ExceptionHandling>
@@ -1042,7 +1042,7 @@
     <ClCompile>
       <AdditionalOptions>/bigobj -Zm512</AdditionalOptions>
       <Optimization>MinSpace</Optimization>
-      <AdditionalIncludeDirectories>$(SolutionDir)../../inc;$(__sensitive)/sensitive/include;$(SolutionDir)../../include;$(__archive)/local/include;$(__archive)/third-windows/$(PlatformName)/$(Configuration)/include;$(__archive)/third-windows/include;$(__archive)/third-windows/third/include;$(SolutionDir)../../platform-windows;$(SolutionDir)../../app/_include;$(SolutionDir)../../third/include;.;$(IntDir);$(SolutionDir)../../;$(SolutionDir)../../app;$(SolutionDir)../../app;$(SolutionDir)../../;$(ProjectDir)../..;$(ProjectDir)../../;$(ProjectDir)../;$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)../../inc;$(__sensitive)/sensitive/include;$(SolutionDir)../../include;$(__archive)/local/include;$(__archive)/third-windows/$(PlatformName)/$(Configuration)/include;$(__archive)/third-windows/include;$(__archive)/third-windows/third/include;$(__archive)/third-windows/third/include/include;$(SolutionDir)../../platform-windows/_include;$(SolutionDir)../../platform-windows;$(SolutionDir)../../app/_include;$(SolutionDir)../../third/include;.;$(IntDir);$(SolutionDir)../../;$(SolutionDir)../../app;$(ProjectDir)../..;$(ProjectDir)../../;$(ProjectDir)../;$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>CUBE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>false</MinimalRebuild>
       <ExceptionHandling>Async</ExceptionHandling>
@@ -1136,6 +1136,12 @@
     <ProjectReference Include="..\..\app\aura\aura.vcxproj">
       <Project>{e000ffaf-392f-4e32-bf51-fd7ed638991f}</Project>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\app\level.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\resource1.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

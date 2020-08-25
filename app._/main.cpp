@@ -1,4 +1,6 @@
-﻿#include "aura/console.h"
+﻿#define NO_DRAW2D
+#define NO_IMAGING
+#include "aura/console.h"
 #include "aura/user/_user.h"
 
 #define PATH_INSTALL_FOLDER_EXE_ARG 1
@@ -10,7 +12,8 @@
 #include "aura/_defer.h"
 
 
-#define IDI_CCVOTAGUS_CA2_SPA       107
+#define IDI_CC_CA2_SPA       107
+#define IDI_CC_CA2_LEVEL    108
 
 string path_dir_name_for_relative(const char * pszPath);
 //string solve_relative(const char * pszAbsolute);
@@ -183,7 +186,7 @@ void main(int argc, char * argv[])
       }
 
 
-      if (__argc < 4)
+      if (__argc < 5)
       {
 
          ::message_box(nullptr, "Incorrect Number of Arguments passed to appfy. Expected 3 or 4; passed " + __str(__argc - 1), "", 0);
@@ -196,11 +199,15 @@ void main(int argc, char * argv[])
 
       dprint("Starting!!");
 
-      strSrc = solve_relative(System.get_arg(1));
+      string strLevel = System.get_arg(1);
 
-      strApp = System.get_arg(2);
+      strLevel.trim("\"");
 
-      string strDst = solve_relative(System.get_arg(3));
+      strSrc = solve_relative(System.get_arg(2));
+
+      strApp = System.get_arg(3);
+
+      string strDst = solve_relative(System.get_arg(4));
 
       string strBuild = System.get_arg(2);
 
@@ -465,8 +472,8 @@ void main(int argc, char * argv[])
             ICON_ITEM* pitem = &itema[i];
             MEM_ICON_ITEM item;
             ::copy(&item, pitem);
-            item.nID = IDI_CCVOTAGUS_CA2_SPA + i + 1;
-            UpdateResourceW(hupdate, RT_ICON, MAKEINTRESOURCE(IDI_CCVOTAGUS_CA2_SPA + i + 1), MAKELANGID(LANG_NEUTRAL, SUBLANG_NEUTRAL), memory.get_data() + pitem->dwImageOffset, pitem->dwBytesInRes);
+            item.nID = IDI_CC_CA2_SPA + i + 1;
+            UpdateResourceW(hupdate, RT_ICON, MAKEINTRESOURCE(IDI_CC_CA2_SPA + i + 1), MAKELANGID(LANG_NEUTRAL, SUBLANG_NEUTRAL), memory.get_data() + pitem->dwImageOffset, pitem->dwBytesInRes);
                
             pfileHd->write(&item, 14);
 
@@ -477,6 +484,8 @@ void main(int argc, char * argv[])
          dprint("icon should be updated");
 
       }
+
+      UpdateResourceW(hupdate, L"LEVEL", MAKEINTRESOURCE(IDI_CC_CA2_LEVEL), MAKELANGID(LANG_NEUTRAL, SUBLANG_NEUTRAL), (LPVOID) strLevel.c_str(), strLevel.get_length());
 
       string strCoreApp;
 

@@ -1,6 +1,6 @@
 // Microsoft Visual C++ generated resource script.
 //
-#include "platform/resource1.h"
+#include "resource1.h"
 
 #define APSTUDIO_READONLY_SYMBOLS
 /////////////////////////////////////////////////////////////////////////////
@@ -89,6 +89,14 @@ BEGIN
 END
 
 #endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// LEVEL
+//
+
+IDR_LEVEL1              LEVEL                   "app\\level.txt"
 
 #endif    // English (United States) resources
 /////////////////////////////////////////////////////////////////////////////

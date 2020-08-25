@@ -5,6 +5,11 @@
     <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
     <LocalDebuggerWorkingDirectory>$(OutDir)</LocalDebuggerWorkingDirectory>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='lib_basis|Win32'">
+    <LocalDebuggerCommandArguments> : install app=app-core/hellomultiverse platform=x86 configuration=basis locale=pt-br schema=pt-br</LocalDebuggerCommandArguments>
+    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+    <LocalDebuggerWorkingDirectory>$(OutDir)</LocalDebuggerWorkingDirectory>
+  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='cube_basis|Win32'">
     <LocalDebuggerCommandArguments> : install app=app-core/hellomultiverse platform=x86 configuration=basis locale=pt-br schema=pt-br</LocalDebuggerCommandArguments>
     <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
@@ -49,6 +54,11 @@
     <LocalDebuggerWorkingDirectory>$(OutDir)</LocalDebuggerWorkingDirectory>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='basis|x64'">
+    <LocalDebuggerCommandArguments>: install app=app-core/desk platform=x64 configuration=basis locale=pt-br schema=pt-br</LocalDebuggerCommandArguments>
+    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+    <LocalDebuggerWorkingDirectory>$(OutDir)</LocalDebuggerWorkingDirectory>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='lib_basis|x64'">
     <LocalDebuggerCommandArguments>: install app=app-core/desk platform=x64 configuration=basis locale=pt-br schema=pt-br</LocalDebuggerCommandArguments>
     <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
     <LocalDebuggerWorkingDirectory>$(OutDir)</LocalDebuggerWorkingDirectory>

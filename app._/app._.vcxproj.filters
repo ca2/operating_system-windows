@@ -18,4 +18,10 @@
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\app\level.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\resource1.h" />
+  </ItemGroup>
 </Project>
