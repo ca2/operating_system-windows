@@ -62,8 +62,15 @@ namespace draw2d_gdiplus
    }
 
 
-   bool bitmap::HostDIBSection(::draw2d::graphics * pgraphics, const pixmap * ppixmap, UINT usage, HANDLE hSection, u32 offset)
+   bool bitmap::host_bitmap(::draw2d::graphics * pgraphics, const pixmap * ppixmap)
    {
+
+      if (ppixmap->m_size == m_size)
+      {
+
+         return true;
+
+      }
 
       UNREFERENCED_PARAMETER(pgraphics);
 
@@ -89,13 +96,22 @@ namespace draw2d_gdiplus
 
       m_osdata[0] = m_pbitmap;
 
+      m_size = ppixmap->m_size;
+
       return true;
 
    }
 
 
-   bool bitmap::CreateDIBSection(::draw2d::graphics * pgraphics, const ::size & size, UINT usage, void **ppvBits, int * stride, HANDLE hSection, u32 offset)
+   bool bitmap::create_bitmap(::draw2d::graphics * pgraphics, const ::size & size, void **ppvBits, int * stride)
    {
+
+      if (size == m_size)
+      {
+
+         return true;
+
+      }
 
       BITMAPINFO info = {};
 
@@ -148,6 +164,8 @@ namespace draw2d_gdiplus
       }
 
       m_osdata[0] = m_pbitmap;
+
+      m_size = size;
 
       return true;
 

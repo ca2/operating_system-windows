@@ -86,11 +86,11 @@ namespace draw2d_gdiplus
 
       }
 
-      destroy();
+      //destroy();
 
-      __construct(m_pbitmap);
+      m_pbitmap.defer_create();
 
-      __construct(m_pgraphics);
+      m_pgraphics.defer_create();
 
       if (m_pbitmap.is_null())
       {
@@ -109,7 +109,7 @@ namespace draw2d_gdiplus
 
       }
 
-      if (!m_pbitmap->HostDIBSection(nullptr, ppixmap, DIB_RGB_COLORS, nullptr, 0))
+      if (!m_pbitmap->host_bitmap(nullptr, ppixmap))
       {
 
          m_sizeRaw.cx = 0;
@@ -177,18 +177,18 @@ namespace draw2d_gdiplus
 
       }
 
-      destroy();
+      //destroy();
 
-      if (!size)
-      {
+      //if (!size)
+      //{
 
-         return true;
+      //   return true;
 
-      }
+      //}
 
-      __construct(m_pbitmap);
+      m_pbitmap.defer_create();
 
-      __construct(m_pgraphics);
+      m_pgraphics.defer_create();
 
       if (m_pbitmap.is_null() || m_pgraphics.is_null())
       {
@@ -203,7 +203,7 @@ namespace draw2d_gdiplus
 
       COLORREF* pcolorref = nullptr;
 
-      if (!m_pbitmap->CreateDIBSection(nullptr, size, DIB_RGB_COLORS, (void **)&pcolorref, &iScan, nullptr, 0))
+      if (!m_pbitmap->create_bitmap(nullptr, size, (void**)&pcolorref, &iScan))
       {
 
          destroy();
@@ -225,6 +225,7 @@ namespace draw2d_gdiplus
 
       m_pgraphics->set(m_pbitmap);
       m_pgraphics->SetViewportOrg(origin());
+
       m_pgraphics->m_pimageimplDraw2dGraphics = this;
       //m_sizeRaw.cx = width;
       //m_sizeRaw.cy = height;

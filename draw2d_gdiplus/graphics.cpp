@@ -3262,58 +3262,58 @@ gdi_fallback:
 
       sync_lock slSource(pgraphicsSrc->mutex());
 
-      bool bThreadToolsForIncreasedFps = ::get_thread()->m_bThreadToolsForIncreasedFps;
+      //bool bThreadToolsForIncreasedFps = ::get_thread()->m_bThreadToolsForIncreasedFps;
 
-      bool bAvoidProcFork = ::get_thread()->m_bAvoidProcFork;
+      //bool bAvoidProcFork = ::get_thread()->m_bAvoidProcFork;
 
-      //bAvoidProcFork = true;
+      ////bAvoidProcFork = true;
 
-      if (!bAvoidProcFork && bThreadToolsForIncreasedFps && nDestWidth == nSrcWidth && nDestHeight == nSrcHeight)
-      {
+      //if (!bAvoidProcFork && bThreadToolsForIncreasedFps && nDestWidth == nSrcWidth && nDestHeight == nSrcHeight)
+      //{
 
-         if (m_ealphamode == ::draw2d::alpha_mode_blend)
-         {
+      //   if (m_ealphamode == ::draw2d::alpha_mode_blend)
+      //   {
 
-            auto cProcessor = get_processor_count();
+      //      auto cProcessor = get_processor_count();
 
-            if (nDestHeight >= cProcessor * 4 && (nDestWidth * nDestHeight) >= (cProcessor * 64))
-            {
+      //      if (nDestHeight >= cProcessor * 4 && (nDestWidth * nDestHeight) >= (cProcessor * 64))
+      //      {
 
-               m_pimageimplDraw2dGraphics->fork_blend(point(xDest + GetViewportOrg().x, yDest + GetViewportOrg().y), pgraphicsSrc->m_pimageimplDraw2dGraphics,
-                                                      point(xSrc + pgraphicsSrc->GetViewportOrg().x, ySrc + pgraphicsSrc->GetViewportOrg().y),
-                                                      size(nSrcWidth, nDestHeight), (byte)(dRate * 255.0f));
+      //         m_pimageimplDraw2dGraphics->fork_blend(point(xDest + GetViewportOrg().x, yDest + GetViewportOrg().y), pgraphicsSrc->m_pimageimplDraw2dGraphics,
+      //                                                point(xSrc + pgraphicsSrc->GetViewportOrg().x, ySrc + pgraphicsSrc->GetViewportOrg().y),
+      //                                                size(nSrcWidth, nDestHeight), (byte)(dRate * 255.0f));
 
-               g_cForkBlend++;
+      //         g_cForkBlend++;
 
-               if (g_cForkBlend % 100 == 0)
-               {
-                  output_debug_string("\nfork_blend(" + __str(g_cForkBlend) + ") sample=" + __str(nSrcWidth) + "," + __str(nDestHeight));
-               }
+      //         if (g_cForkBlend % 100 == 0)
+      //         {
+      //            output_debug_string("\nfork_blend(" + __str(g_cForkBlend) + ") sample=" + __str(nSrcWidth) + "," + __str(nDestHeight));
+      //         }
 
-            }
-            else
-            {
+      //      }
+      //      else
+      //      {
 
-               m_pimageimplDraw2dGraphics->blend(point(xDest + GetViewportOrg().x, yDest + GetViewportOrg().y), pgraphicsSrc->m_pimageimplDraw2dGraphics,
-                                                 point(xSrc+pgraphicsSrc->GetViewportOrg().x, ySrc + pgraphicsSrc->GetViewportOrg().y),
-                                                 size(nSrcWidth, nDestHeight), (byte)(dRate * 255.0f));
+      //         m_pimageimplDraw2dGraphics->blend(point(xDest + GetViewportOrg().x, yDest + GetViewportOrg().y), pgraphicsSrc->m_pimageimplDraw2dGraphics,
+      //                                           point(xSrc+pgraphicsSrc->GetViewportOrg().x, ySrc + pgraphicsSrc->GetViewportOrg().y),
+      //                                           size(nSrcWidth, nDestHeight), (byte)(dRate * 255.0f));
 
-            }
+      //      }
 
-         }
-         else
-         {
+      //   }
+      //   else
+      //   {
 
-            m_pimageimplDraw2dGraphics->from(point(xDest + GetViewportOrg().x, yDest + GetViewportOrg().y), pgraphicsSrc->m_pimageimplDraw2dGraphics,
-                                             point(xSrc + pgraphicsSrc->GetViewportOrg().x, ySrc + pgraphicsSrc->GetViewportOrg().y),
-                                             size(nSrcWidth, nDestHeight), (byte) (dRate * 255.0f));
+      //      m_pimageimplDraw2dGraphics->from(point(xDest + GetViewportOrg().x, yDest + GetViewportOrg().y), pgraphicsSrc->m_pimageimplDraw2dGraphics,
+      //                                       point(xSrc + pgraphicsSrc->GetViewportOrg().x, ySrc + pgraphicsSrc->GetViewportOrg().y),
+      //                                       size(nSrcWidth, nDestHeight), (byte) (dRate * 255.0f));
 
 
-         }
+      //   }
 
-         return true;
+      //   return true;
 
-      }
+      //}
 
 
       float fA = (float) (dRate);

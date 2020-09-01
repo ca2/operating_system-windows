@@ -37,8 +37,8 @@ namespace draw2d_gdiplus
 
       bool CreateCompatibleBitmap(::draw2d::graphics * pgraphics, i32 nWidth, i32 nHeight);
       bool CreateDiscardableBitmap(::draw2d::graphics * pgraphics, i32 nWidth, i32 nHeight);
-      virtual bool HostDIBSection(::draw2d::graphics * pgraphics, const pixmap* ppximap, UINT usage, HANDLE hSection, u32 offset) override;
-      virtual bool CreateDIBSection(::draw2d::graphics * pgraphics, const ::size & size, UINT usage, void **ppvBits, int * stride, HANDLE hSection, u32 offset) override;
+      virtual bool host_bitmap(::draw2d::graphics * pgraphics, const pixmap* ppximap) override;
+      virtual bool create_bitmap(::draw2d::graphics * pgraphics, const ::size & size, void **ppvBits, int * stride) override;
       virtual bool CreateDIBitmap(::draw2d::graphics * pgraphics, int cx, int cy, u32 flInit, const void *pjBits, UINT iUsage) override;
 
 
