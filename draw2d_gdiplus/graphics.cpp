@@ -4775,10 +4775,7 @@ gdi_fallback:
    i32 graphics::OffsetClipRgn(i32 x, i32 y)
    {
       i32 nRetVal = ERROR;
-      //if(get_handle1() != nullptr && get_handle1() != get_handle2())
-      //   nRetVal = ::OffsetClipRgn(get_handle1(), x, y);
-      //if(get_handle2() != nullptr)
-      //   nRetVal = ::OffsetClipRgn(get_handle2(), x, y);
+      return OffsetClipRgn({ x, y });
       return nRetVal;
    }
 
@@ -4789,6 +4786,7 @@ gdi_fallback:
       //   nRetVal = ::OffsetClipRgn(get_handle1(), size.cx, size.cy);
       //if(get_handle2() != nullptr)
       //   nRetVal = ::OffsetClipRgn(get_handle2(), size.cx, size.cy);
+      m_pgraphics->TranslateClip(size.cx, size.cy);
       return nRetVal;
    }
 
