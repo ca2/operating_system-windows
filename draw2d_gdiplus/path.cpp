@@ -587,7 +587,7 @@ namespace draw2d_gdiplus
 
       }
 
-      m_ppath->AddLines(pointa.get_data(), pointa.get_count());
+      m_ppath->AddLines(pointa.get_data(), (INT) pointa.get_count());
 
       return true;
 
@@ -609,13 +609,11 @@ namespace draw2d_gdiplus
 
       }
 
-      m_ppath->AddPolygon(pointa.get_data(), pointa.get_count());
+      m_ppath->AddPolygon(pointa.get_data(), (INT) pointa.get_count());
 
       return true;
 
-
    }
-
 
 
    bool path::_set(::draw2d::graphics* pgraphics, ::draw2d::path::text_out* ptextout)
