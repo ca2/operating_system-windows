@@ -2428,6 +2428,13 @@ gdi_fallback:
 
       }
 
+      if (m_pfont == nullptr)
+      {
+
+         return false;
+
+      }
+
       graphics * pgraphics = ((graphics *)this);
 
       Gdiplus::Font * pfont = m_pfont->get_os_data < Font * >(this);
