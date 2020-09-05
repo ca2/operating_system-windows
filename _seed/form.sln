@@ -16,16 +16,16 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_simple_form", "..\..\ap
 	ProjectSection(ProjectDependencies) = postProject
 		{19841115-1984-0411-1977-021977151984} = {19841115-1984-0411-1977-021977151984}
 		{3C892817-9F8B-493C-A3E1-AAC25943A7F9} = {3C892817-9F8B-493C-A3E1-AAC25943A7F9}
-		{57B88350-B899-495A-B087-A3255FB178E8} = {57B88350-B899-495A-B087-A3255FB178E8}
 		{9A5FBFB1-76E6-4F7E-933A-328C1EEC95AF} = {9A5FBFB1-76E6-4F7E-933A-328C1EEC95AF}
+		{D79C7DDB-A727-4B91-803E-41C4431693D6} = {D79C7DDB-A727-4B91-803E-41C4431693D6}
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_simple_os_drag_and_drop", "..\..\app-simple\os_drag_and_drop\simple_os_drag_and_drop.vcxproj", "{527051F1-A381-4D7F-BE3E-5E85CDCED43B}"
 	ProjectSection(ProjectDependencies) = postProject
 		{19841115-1984-0411-1977-021977151984} = {19841115-1984-0411-1977-021977151984}
 		{3C892817-9F8B-493C-A3E1-AAC25943A7F9} = {3C892817-9F8B-493C-A3E1-AAC25943A7F9}
-		{57B88350-B899-495A-B087-A3255FB178E8} = {57B88350-B899-495A-B087-A3255FB178E8}
 		{9A5FBFB1-76E6-4F7E-933A-328C1EEC95AF} = {9A5FBFB1-76E6-4F7E-933A-328C1EEC95AF}
+		{D79C7DDB-A727-4B91-803E-41C4431693D6} = {D79C7DDB-A727-4B91-803E-41C4431693D6}
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app", "..\app\app.vcxproj", "{19841115-1984-0411-1977-021977151984}"
@@ -33,11 +33,11 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app", "..\app\app.vcxproj",
 		{E000FFAF-392F-4E32-BF51-FD7ED638991F} = {E000FFAF-392F-4E32-BF51-FD7ED638991F}
 	EndProjectSection
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "imaging_freeimage", "..\..\app\imaging_freeimage\imaging_freeimage.vcxproj", "{57B88350-B899-495A-B087-A3255FB178E8}"
-EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "axis", "..\..\app\axis\axis.vcxproj", "{4C6F5F2B-56EE-485F-924A-F8F0A9C24EB6}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "base", "..\..\app\base\base.vcxproj", "{A216ABD4-26C4-4746-96B3-9D30ED28CF92}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "imaging_wic", "..\..\app\imaging_wic\imaging_wic.vcxproj", "{D79C7DDB-A727-4B91-803E-41C4431693D6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -175,26 +175,6 @@ Global
 		{19841115-1984-0411-1977-021977151984}.stage|Win32.Build.0 = stage|Win32
 		{19841115-1984-0411-1977-021977151984}.stage|x64.ActiveCfg = stage|x64
 		{19841115-1984-0411-1977-021977151984}.stage|x64.Build.0 = stage|x64
-		{57B88350-B899-495A-B087-A3255FB178E8}.basis|Win32.ActiveCfg = basis|Win32
-		{57B88350-B899-495A-B087-A3255FB178E8}.basis|Win32.Build.0 = basis|Win32
-		{57B88350-B899-495A-B087-A3255FB178E8}.basis|x64.ActiveCfg = basis|x64
-		{57B88350-B899-495A-B087-A3255FB178E8}.basis|x64.Build.0 = basis|x64
-		{57B88350-B899-495A-B087-A3255FB178E8}.cover|Win32.ActiveCfg = cover|Win32
-		{57B88350-B899-495A-B087-A3255FB178E8}.cover|Win32.Build.0 = cover|Win32
-		{57B88350-B899-495A-B087-A3255FB178E8}.cover|x64.ActiveCfg = cover|x64
-		{57B88350-B899-495A-B087-A3255FB178E8}.cover|x64.Build.0 = cover|x64
-		{57B88350-B899-495A-B087-A3255FB178E8}.cube_basis|Win32.ActiveCfg = cube_basis|Win32
-		{57B88350-B899-495A-B087-A3255FB178E8}.cube_basis|Win32.Build.0 = cube_basis|Win32
-		{57B88350-B899-495A-B087-A3255FB178E8}.cube_basis|x64.ActiveCfg = cube_basis|x64
-		{57B88350-B899-495A-B087-A3255FB178E8}.cube_basis|x64.Build.0 = cube_basis|x64
-		{57B88350-B899-495A-B087-A3255FB178E8}.cube_stage|Win32.ActiveCfg = cube_stage|Win32
-		{57B88350-B899-495A-B087-A3255FB178E8}.cube_stage|Win32.Build.0 = cube_stage|Win32
-		{57B88350-B899-495A-B087-A3255FB178E8}.cube_stage|x64.ActiveCfg = cube_stage|x64
-		{57B88350-B899-495A-B087-A3255FB178E8}.cube_stage|x64.Build.0 = cube_stage|x64
-		{57B88350-B899-495A-B087-A3255FB178E8}.stage|Win32.ActiveCfg = stage|Win32
-		{57B88350-B899-495A-B087-A3255FB178E8}.stage|Win32.Build.0 = stage|Win32
-		{57B88350-B899-495A-B087-A3255FB178E8}.stage|x64.ActiveCfg = stage|x64
-		{57B88350-B899-495A-B087-A3255FB178E8}.stage|x64.Build.0 = stage|x64
 		{4C6F5F2B-56EE-485F-924A-F8F0A9C24EB6}.basis|Win32.ActiveCfg = basis|Win32
 		{4C6F5F2B-56EE-485F-924A-F8F0A9C24EB6}.basis|Win32.Build.0 = basis|Win32
 		{4C6F5F2B-56EE-485F-924A-F8F0A9C24EB6}.basis|x64.ActiveCfg = basis|x64
@@ -235,6 +215,26 @@ Global
 		{A216ABD4-26C4-4746-96B3-9D30ED28CF92}.stage|Win32.Build.0 = stage|Win32
 		{A216ABD4-26C4-4746-96B3-9D30ED28CF92}.stage|x64.ActiveCfg = stage|x64
 		{A216ABD4-26C4-4746-96B3-9D30ED28CF92}.stage|x64.Build.0 = stage|x64
+		{D79C7DDB-A727-4B91-803E-41C4431693D6}.basis|Win32.ActiveCfg = basis|Win32
+		{D79C7DDB-A727-4B91-803E-41C4431693D6}.basis|Win32.Build.0 = basis|Win32
+		{D79C7DDB-A727-4B91-803E-41C4431693D6}.basis|x64.ActiveCfg = basis|x64
+		{D79C7DDB-A727-4B91-803E-41C4431693D6}.basis|x64.Build.0 = basis|x64
+		{D79C7DDB-A727-4B91-803E-41C4431693D6}.cover|Win32.ActiveCfg = cover|Win32
+		{D79C7DDB-A727-4B91-803E-41C4431693D6}.cover|Win32.Build.0 = cover|Win32
+		{D79C7DDB-A727-4B91-803E-41C4431693D6}.cover|x64.ActiveCfg = cover|x64
+		{D79C7DDB-A727-4B91-803E-41C4431693D6}.cover|x64.Build.0 = cover|x64
+		{D79C7DDB-A727-4B91-803E-41C4431693D6}.cube_basis|Win32.ActiveCfg = cube_basis|Win32
+		{D79C7DDB-A727-4B91-803E-41C4431693D6}.cube_basis|Win32.Build.0 = cube_basis|Win32
+		{D79C7DDB-A727-4B91-803E-41C4431693D6}.cube_basis|x64.ActiveCfg = cube_basis|x64
+		{D79C7DDB-A727-4B91-803E-41C4431693D6}.cube_basis|x64.Build.0 = cube_basis|x64
+		{D79C7DDB-A727-4B91-803E-41C4431693D6}.cube_stage|Win32.ActiveCfg = cube_stage|Win32
+		{D79C7DDB-A727-4B91-803E-41C4431693D6}.cube_stage|Win32.Build.0 = cube_stage|Win32
+		{D79C7DDB-A727-4B91-803E-41C4431693D6}.cube_stage|x64.ActiveCfg = cube_stage|x64
+		{D79C7DDB-A727-4B91-803E-41C4431693D6}.cube_stage|x64.Build.0 = cube_stage|x64
+		{D79C7DDB-A727-4B91-803E-41C4431693D6}.stage|Win32.ActiveCfg = stage|Win32
+		{D79C7DDB-A727-4B91-803E-41C4431693D6}.stage|Win32.Build.0 = stage|Win32
+		{D79C7DDB-A727-4B91-803E-41C4431693D6}.stage|x64.ActiveCfg = stage|x64
+		{D79C7DDB-A727-4B91-803E-41C4431693D6}.stage|x64.Build.0 = stage|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
