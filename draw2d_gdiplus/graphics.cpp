@@ -5619,13 +5619,6 @@ gdi_fallback:
 
        }
 
-       if (::is_null(m_pfont))
-       {
-
-          __throw(::exception::exception("invalid state"));
-
-       }
-
       if(pszString == nullptr || *pszString == '\0')
 
          return sized(0, 0);
