@@ -32,7 +32,7 @@ namespace draw2d_gdiplus
       //virtual bool internal_end_figure(bool bClose);
 
       virtual bool internal_begin_figure();
-      virtual bool close_figure();
+      virtual bool internal_close_figure();
 
       virtual bool internal_add_line(double x1, double y1, double x2, double y2);
       virtual bool internal_add_rect(double x, double y, double cx, double cy);

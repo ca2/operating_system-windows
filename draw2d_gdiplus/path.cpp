@@ -88,9 +88,8 @@ namespace draw2d_gdiplus
    }
 
 
-   bool path::close_figure()
+   bool path::internal_close_figure()
    {
-
 
       if (m_ppath == nullptr)
       {
@@ -645,6 +644,7 @@ namespace draw2d_gdiplus
    bool path::_set(::draw2d::graphics* pgraphics, ::draw2d::path::close * pclose)
    {
 
+      internal_close_figure();
 
       return true;
 
