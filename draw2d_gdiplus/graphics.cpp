@@ -5571,7 +5571,7 @@ gdi_fallback:
 
          ap(Gdiplus::Region) regiona(new_array, new Gdiplus::Region[count]);
 
-#define new AURA_NEW
+#define new ACME_NEW
 
          Gdiplus::RectF box(0.0f, 0.0f, 0.0f, 0.0f);
 
@@ -5674,7 +5674,7 @@ gdi_fallback:
 
       Gdiplus::Region * pCharRangeRegions = new Gdiplus::Region[count];
 
-#define new AURA_NEW
+#define new ACME_NEW
 
       m_pgraphics->MeasureCharacterRanges(wstr, (INT) wstr.get_length(), m_pfont->get_os_data < Font * >(this), box, &strFormat, (INT) count, pCharRangeRegions);
 
@@ -5754,7 +5754,7 @@ gdi_fallback:
 
       Gdiplus::Region * pCharRangeRegions = new Gdiplus::Region[count];
 
-#define new AURA_NEW
+#define new ACME_NEW
 
       m_pgraphics->MeasureCharacterRanges(wstr, (INT)wstr.get_length(), m_pfont->get_os_data < Font * >(this), box, &strFormat, (INT)count, pCharRangeRegions);
 
@@ -6014,7 +6014,7 @@ gdi_fallback:
 
       Gdiplus::Region * pCharRangeRegions = new Gdiplus::Region[count];
 
-#define new AURA_NEW
+#define new ACME_NEW
 
       //Gdiplus::RectF box(0.0f, 0.0f, 128.0f * 1024.0f, 128.0f * 1024.0f);
 
@@ -6363,7 +6363,7 @@ gdi_fallback:
 
             pmNew = new Gdiplus::Matrix();
 
-#define new AURA_NEW
+#define new ACME_NEW
 
          }
          else
