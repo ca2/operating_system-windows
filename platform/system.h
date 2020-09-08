@@ -193,7 +193,7 @@
 #define __DATADEF
 #define __API CLASS_DECL_BASE
 
-// used when building the "aura.dll" MFC80.DLL
+// used when building the "acme.dll" MFC80.DLL
 #ifndef __CORE_DATA
 #define __CORE_DATA CLASS_DECL_BASE
 #define __CORE_DATADEF
@@ -249,7 +249,7 @@
 
 
 
-// aura API inline constructors (including compiler generated) can get deep
+// acme API inline constructors (including compiler generated) can get deep
 #pragma inline_depth(16)
 
 #ifdef ___DEVBUILD

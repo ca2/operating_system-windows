@@ -159,7 +159,7 @@
 #pragma warning( push )
 #endif
 
-// warnings caerated with common aura API/Windows code
+// warnings caerated with common acme API/Windows code
 #pragma warning(disable: 4134)  // message map member fxn casts
 #pragma warning(disable: 4201)  // nameless unions are part of C++
 #pragma warning(disable: 4320)  // structs with uuid handled as interfaces
