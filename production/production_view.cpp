@@ -7,7 +7,7 @@ namespace production
 {
 
 
-   view::view(::object * pobject) :
+   view::view(::layered * pobjectContext) :
       ::object(pobject),
       ::user::interaction(pobject),
       m_brushBkActive(e_create),

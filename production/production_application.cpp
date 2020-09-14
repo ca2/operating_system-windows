@@ -5,7 +5,7 @@ namespace production
 {
 
 
-   application::application(::object * pobject) :
+   application::application(::layered * pobjectContext) :
       ::object(this),
       ::thread(this),
       ::aura::application(pobject),
@@ -160,7 +160,7 @@ namespace production
 
 
 extern "C"
-::aura::library * platform_production_get_new_library(::object * pobject)
+::apex::library * platform_production_get_new_library(::layered * pobjectContext)
 {
 
    return new ::aura::single_application_library < production::application >(pobject, "platform/production");

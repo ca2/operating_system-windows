@@ -135,7 +135,7 @@ namespace production
       manual_reset_event      m_evFinish;
 
 
-      production(::object * pobject);
+      production(::layered * pobjectContext);
       virtual ~production();
 
 

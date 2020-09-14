@@ -5,7 +5,7 @@ namespace backup
 {
 
 
-   backup::backup(::object * pobject) :
+   backup::backup(::layered * pobjectContext) :
       ::object(pobject),
       thread(pobject),
       production(pobject)

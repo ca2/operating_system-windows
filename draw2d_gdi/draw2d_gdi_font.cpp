@@ -5,7 +5,7 @@ namespace draw2d_gdi
 {
 
 
-   font::font(::object * pobject) :
+   font::font(::layered * pobjectContext) :
       ::draw2d::font(pobject)
    {
 

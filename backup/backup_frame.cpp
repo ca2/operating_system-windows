@@ -5,7 +5,7 @@ namespace backup
 {
 
 
-   frame::frame(::object * pobject) :
+   frame::frame(::layered * pobjectContext) :
       ::object(pobject),
       production::frame(pobject)
    {

@@ -13,7 +13,7 @@ namespace backup
 
 
 
-      backup(::object * pobject);
+      backup(::layered * pobjectContext);
       virtual ~backup();
 
       virtual ::estatus     run() override;

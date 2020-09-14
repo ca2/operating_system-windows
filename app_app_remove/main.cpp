@@ -32,7 +32,7 @@ public:
    bool                       m_bInstallerInstalling;
    HINSTANCE                  m_hinstance;
 
-   removal(::object * pobject);
+   removal(::layered * pobjectContext);
 
    virtual ~removal();
 
@@ -89,7 +89,7 @@ public:
 //}
 
 
-::aura::application * get_acid_app(::object * pobject)
+::aura::application * get_acid_app(::layered * pobjectContext)
 {
 
    return new removal(pobject);
@@ -97,7 +97,7 @@ public:
 }
 
 
-removal::removal(::object * pobject) :
+removal::removal(::layered * pobjectContext) :
    ::object(pobject),
    ::thread(pobject),
    ::aura::application(pobject)

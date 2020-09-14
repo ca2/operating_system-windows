@@ -24,7 +24,7 @@ namespace music
 
 
             
-            player(::object * pobject);
+            player(::layered * pobjectContext);
             virtual ~player();
 
 

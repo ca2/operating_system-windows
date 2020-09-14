@@ -153,7 +153,7 @@ namespace draw2d_gdiplus
    void brush::destroy()
    {
 
-      ::aura::del(m_pbrush);
+      ::acme::del(m_pbrush);
 
       ::draw2d::brush::destroy();
 

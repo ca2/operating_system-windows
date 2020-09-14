@@ -431,7 +431,7 @@ namespace draw2d_gdiplus
    void pen::destroy()
    {
 
-      ::aura::del(m_ppen);
+      ::acme::del(m_ppen);
 
       ::draw2d::pen::clear_os_data();
 

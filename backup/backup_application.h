@@ -14,7 +14,7 @@ namespace backup
       __pointer(::user::single_document_template) m_ptemplate_html;
 
 
-      application(::object * pobject);
+      application(::layered * pobjectContext);
       virtual ~application();
 
 

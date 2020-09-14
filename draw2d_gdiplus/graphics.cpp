@@ -186,7 +186,7 @@ namespace draw2d_gdiplus
    graphics::~graphics()
    {
 
-      ::aura::del(m_pm);
+      ::acme::del(m_pm);
 
       close_graphics();
 
@@ -2465,7 +2465,7 @@ gdi_fallback:
       pmetric->tmHeight              = (LONG)dFontHeight;
 
 
-      double dLineSpacing = MAX(dFontHeight, dSize * family.GetLineSpacing(iStyle) / dHeight);
+      double dLineSpacing = max(dFontHeight, dSize * family.GetLineSpacing(iStyle) / dHeight);
 
       pmetric->tmInternalLeading     = (LONG) (pmetric->tmAscent + pmetric->tmDescent - pmetric->tmHeight);
 
@@ -3636,7 +3636,7 @@ gdi_fallback:
    /////////////////////////////////////////////////////////////////////////////
    // special graphics drawing primitives/helpers
 
-   ::draw2d::brush* graphics::GetHalftoneBrush(::object * pobject)
+   ::draw2d::brush* graphics::GetHalftoneBrush(::layered * pobjectContext)
    {
       /*      ::aura::LockGlobals(CRIT_HALFTONEBRUSH);
             if (gen_HalftoneBrush == nullptr)
@@ -5551,7 +5551,7 @@ gdi_fallback:
 
          }
 
-         iCount = MIN((int) cMaxMeasureCharacterRanges, (int) (cEnd - iStart));
+         iCount = min((int) cMaxMeasureCharacterRanges, (int) (cEnd - iStart));
 
 
          for (index j = 0; j < iCount; j++)
@@ -7143,7 +7143,7 @@ gdi_fallback:
             //            g_pimagea.add(pimage1);
             //#endif
 
-            pimage1 = __create_image(rectText.size());
+            pimage1 = create_image(rectText.size());
 
             pimage1->get_graphics()->set(get_current_font());
 
@@ -7153,7 +7153,7 @@ gdi_fallback:
 
             pimage1->get_graphics()->text_out(0, 0, str);
 
-            pimage1->blend2(nullptr, m_pimageAlphaBlend, point((int)MAX(0, x - m_pointAlphaBlend.x), (int)MAX(0, y - m_pointAlphaBlend.y)), rectText.size(), 255);
+            pimage1->blend2(nullptr, m_pimageAlphaBlend, point((int)max(0, x - m_pointAlphaBlend.x), (int)max(0, y - m_pointAlphaBlend.y)), rectText.size(), 255);
 
             BitBltRaw((int)x, (int)y, rectText.width(), rectText.height(), pimage1->get_graphics(), 0, 0, SRCCOPY);
 

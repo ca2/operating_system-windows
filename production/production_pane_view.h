@@ -19,7 +19,7 @@ namespace production
       __pointer(::user::form_view)      m_pviewOptions;
 
 
-      pane_view(::object * pobject);
+      pane_view(::layered * pobjectContext);
       virtual ~pane_view();
 
 

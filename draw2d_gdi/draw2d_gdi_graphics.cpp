@@ -17,7 +17,7 @@ namespace draw2d_gdi
 {
 
 
-   graphics::graphics(::object * pobject) :
+   graphics::graphics(::layered * pobjectContext) :
       ::object(pobject),
       ::draw2d::graphics(pobject)
    {
@@ -3432,7 +3432,7 @@ namespace draw2d_gdi
    /////////////////////////////////////////////////////////////////////////////
    // special graphics drawing primitives/helpers
 
-   ::draw2d::brush* graphics::GetHalftoneBrush(::object * pobject)
+   ::draw2d::brush* graphics::GetHalftoneBrush(::layered * pobjectContext)
    {
       /*      AfxLockGlobals(CRIT_HALFTONEBRUSH);
       if (_afxHalftoneBrush == nullptr)

@@ -7,7 +7,7 @@ namespace production
 {
 
 
-   production::production(::object * pobject) :
+   production::production(::layered * pobjectContext) :
       ::object(pobject),
       thread(pobject)
    {

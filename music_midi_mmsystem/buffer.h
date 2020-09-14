@@ -29,7 +29,7 @@ namespace music
 
 
          class CLASS_DECL_MUSIC_MIDI_MMSYSTEM buffer :
-             virtual public generic_object
+             virtual public generic
          {
          public:
 

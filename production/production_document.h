@@ -11,7 +11,7 @@ namespace production
    public:
 
 
-      document(::object * pobject);
+      document(::layered * pobjectContext);
 
       DECL_GEN_SIGNAL(data_on_after_change);
 

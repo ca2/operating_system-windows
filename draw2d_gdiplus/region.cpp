@@ -101,7 +101,7 @@ namespace draw2d_gdiplus
    void region::destroy()
    {
 
-      ::aura::del(m_pregion);
+      ::acme::del(m_pregion);
 
       ::draw2d::region::destroy();
 

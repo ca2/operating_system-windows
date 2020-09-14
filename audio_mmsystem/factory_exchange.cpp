@@ -2,7 +2,7 @@
 
 
 extern "C"
-void audio_mmsystem_factory_exchange(::object * pobject)
+void audio_mmsystem_factory_exchange(::layered * pobjectContext)
 {
 
    create_factory < ::audio_mmsystem::in, ::wave::in >();

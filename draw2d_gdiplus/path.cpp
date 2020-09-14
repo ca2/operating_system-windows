@@ -390,7 +390,7 @@ namespace draw2d_gdiplus
    void path::destroy()
    {
 
-      ::aura::del(m_ppath);
+      ::acme::del(m_ppath);
 
    }
 

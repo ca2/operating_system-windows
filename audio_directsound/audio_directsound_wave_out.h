@@ -119,7 +119,7 @@ namespace multimedia
          array < DSBPOSITIONNOTIFY >      m_notifya;
 
 
-         out(::object * pobject);
+         out(::layered * pobjectContext);
          virtual ~out();
 
          ::estatus     out_start(const imedia_position & position);

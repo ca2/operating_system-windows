@@ -19,7 +19,7 @@
 //         public:
 //
 //
-//            factory_exchange(::object * pobject);
+//            factory_exchange(::layered * pobjectContext);
 //            virtual ~factory_exchange();
 //
 //         };

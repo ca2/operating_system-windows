@@ -43,7 +43,7 @@ namespace production
       ::draw2d::brush_pointer          m_brushBkInactive;
 
 
-      view(::object * pobject);
+      view(::layered * pobjectContext);
       virtual ~view();
 #ifdef DEBUG
       virtual void assert_valid() const;

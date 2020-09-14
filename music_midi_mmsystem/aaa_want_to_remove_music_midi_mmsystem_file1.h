@@ -22,7 +22,7 @@ namespace music
             imedia_time m_tkLastOp;
 
 
-            file(::object * pobject);
+            file(::layered * pobjectContext);
             virtual ~file();
 
 

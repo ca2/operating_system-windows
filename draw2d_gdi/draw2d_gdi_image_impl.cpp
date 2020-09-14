@@ -21,7 +21,7 @@ namespace draw2d_gdi
    //////////////////////////////////////////////////////////////////////
 
 
-   image::image_impl(::object * pobject) :
+   image::image_impl(::layered * pobjectContext) :
       ::context_object(pobject),
       ::image_data(pobject),
       ::image_impl(pobject),

@@ -5,7 +5,7 @@ namespace backup
 {
 
 
-   application::application(::object * pobject) :
+   application::application(::layered * pobjectContext) :
       ::object(this),
       ::thread(this),
       ::aura::application(pobject),

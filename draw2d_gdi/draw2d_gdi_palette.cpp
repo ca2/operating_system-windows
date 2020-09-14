@@ -5,7 +5,7 @@ namespace draw2d_gdi
 {
 
 
-   palette::palette(::object * pobject) :
+   palette::palette(::layered * pobjectContext) :
       ::draw2d::palette(pobject)
    {
 

@@ -23,7 +23,7 @@ namespace draw2d_gdiplus
       
       destroy();
 
-      //::aura::del(m_pfontcollection);
+      //::acme::del(m_pfontcollection);
 
    }
 
@@ -79,7 +79,7 @@ namespace draw2d_gdiplus
    void font::destroy()
    {
 
-      ::aura::del(m_pfont);
+      ::acme::del(m_pfont);
 
       ::draw2d::font::destroy();
 
@@ -138,7 +138,7 @@ namespace draw2d_gdiplus
       /*if (m_strFontFamilyName.begins_ci("matter://"))
       {
 
-         ::aura::del(m_pfontcollection);
+         ::acme::del(m_pfontcollection);
 
          m_pfontcollection = new FontCollection();
 

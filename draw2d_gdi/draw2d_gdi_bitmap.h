@@ -12,7 +12,7 @@ namespace draw2d_gdi
    public:
 
 
-      bitmap(::object * pobject);
+      bitmap(::layered * pobjectContext);
       virtual ~bitmap();
 
 
