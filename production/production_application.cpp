@@ -163,7 +163,7 @@ extern "C"
 ::apex::library * platform_production_get_new_library(::layered * pobjectContext)
 {
 
-   return new ::aura::single_application_library < production::application >(pobject, "platform/production");
+   return new ::apex::single_application_library < production::application >(pobject, "platform/production");
 
 }
 

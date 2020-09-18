@@ -10,8 +10,8 @@ namespace multimedia
 
 
       factory_exchange::factory_exchange(::layered * pobjectContext) :
-         ::object(pobject),
-         ::multimedia::mmsystem::factory_exchange(pobject)
+         ::object(pobjectContext),
+         ::multimedia::mmsystem::factory_exchange(pobjectContext)
       {
 
          //create_factory < callback, ::multimedia::audio_mixer::callback >();
@@ -47,7 +47,7 @@ namespace multimedia
 void factory_exchange(::layered * pobjectContext)
 {
 
-   ::multimedia::audio_mixer_mmsystem::factory_exchange factoryexchange(pobject);
+   ::multimedia::audio_mixer_mmsystem::factory_exchange factoryexchange(pobjectContext);
 
 }
 

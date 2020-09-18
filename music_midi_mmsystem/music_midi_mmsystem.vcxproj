@@ -873,6 +873,12 @@
     <ProjectReference Include="..\..\app-veriwell\multimedia\veriwell_multimedia.vcxproj">
       <Project>{6cf16680-cdb9-437d-b24a-b9ba61a91fcd}</Project>
     </ProjectReference>
+    <ProjectReference Include="..\..\app\acme\acme.vcxproj">
+      <Project>{638b242f-0f21-41c3-9f66-724660046133}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\app\apex\apex.vcxproj">
+      <Project>{e000ffaf-392f-4e32-bf51-777ed638991f}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\..\app\aura\aura.vcxproj">
       <Project>{e000ffaf-392f-4e32-bf51-fd7ed638991f}</Project>
     </ProjectReference>
