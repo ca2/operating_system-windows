@@ -1,11 +1,11 @@
 ﻿#define NO_DRAW2D
 #define NO_IMAGING
-#include "aura/console.h"
-#include "aura/user/_user.h"
+#include "apex/console.h"
+#include "apex/user/_.h"
 
 #define PATH_INSTALL_FOLDER_EXE_ARG 1
 
-#include "aura/os/_os.h"
+#include "acme/os/_os.h"
 #include <stdio.h>
 #include <psapi.h>
 #include <tlhelp32.h>
@@ -186,10 +186,10 @@ void main(int argc, char * argv[])
       }
 
 
-      if (__argc < 5)
+      if (__argc < 4)
       {
 
-         ::message_box(nullptr, "Incorrect Number of Arguments passed to appfy. Expected 3 or 4; passed " + __str(__argc - 1), "", 0);
+         os_message_box("Incorrect Number of Arguments passed to appfy. Expected 3 or 4; passed " + __str(__argc - 1), "", 0);
 
          Application.m_result.add(error_invalid_argument);
 
@@ -199,17 +199,13 @@ void main(int argc, char * argv[])
 
       dprint("Starting!!");
 
-      string strLevel = System.get_arg(1);
+      strSrc = solve_relative(System.get_arg(1));
 
-      strLevel.trim("\"");
+      strApp = System.get_arg(2);
 
-      strSrc = solve_relative(System.get_arg(2));
+      string strDst = solve_relative(System.get_arg(3));
 
-      strApp = System.get_arg(3);
-
-      string strDst = solve_relative(System.get_arg(4));
-
-      string strBuild = System.get_arg(2);
+      string strBuild = System.get_arg(4);
 
       if (strBuild.is_empty())
       {
@@ -306,7 +302,7 @@ void main(int argc, char * argv[])
 
             ::file::listing listing(&Application);
 
-            listing.ls_dir("C:\\xcore");
+            Application.dir().ls_dir(listing, "C:\\xcore");
 
             string_array straPrefix;
 
@@ -485,7 +481,7 @@ void main(int argc, char * argv[])
 
       }
 
-      UpdateResourceW(hupdate, L"LEVEL", MAKEINTRESOURCE(IDI_CC_CA2_LEVEL), MAKELANGID(LANG_NEUTRAL, SUBLANG_NEUTRAL), (LPVOID) strLevel.c_str(), strLevel.get_length());
+//      UpdateResourceW(hupdate, L"LEVEL", MAKEINTRESOURCE(IDI_CC_CA2_LEVEL), MAKELANGID(LANG_NEUTRAL, SUBLANG_NEUTRAL), (LPVOID) strLevel.c_str(), strLevel.get_length());
 
       string strCoreApp;
 
