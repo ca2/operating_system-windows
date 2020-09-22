@@ -5093,7 +5093,7 @@ gdi_fallback:
    }
 
 
-   i32 graphics::SelectClipRgn(::draw2d::region* pregion,i32 nMode)
+   i32 graphics::SelectClipRgn(::draw2d::region* pregion, ::draw2d::enum_combine ecombine)
    {
 
       if(pregion == nullptr)
@@ -5105,31 +5105,31 @@ gdi_fallback:
       else
       {
 
-         if(nMode == RGN_AND)
+         if(ecombine == ::draw2d::e_combine_intersect)
          {
 
             m_pgraphics->SetClip(pregion->get_os_data<Region *>(this), Gdiplus::CombineModeIntersect);
 
          }
-         else if(nMode == RGN_OR)
+         else if(ecombine == ::draw2d::e_combine_add)
          {
 
             m_pgraphics->SetClip(pregion-> get_os_data<Region * >(this),Gdiplus::CombineModeUnion);
 
          }
-         else if(nMode == RGN_XOR)
+         else if(ecombine == ::draw2d::e_combine_xor)
          {
 
             m_pgraphics->SetClip(pregion->get_os_data<Region * >(this),Gdiplus::CombineModeXor);
 
          }
-         else if(nMode == RGN_COPY)
+         else if(ecombine == ::draw2d::e_combine_copy)
          {
 
             m_pgraphics->SetClip(pregion->get_os_data<Region * >(this),Gdiplus::CombineModeReplace);
 
          }
-         else if(nMode == RGN_DIFF)
+         else if(ecombine == ::draw2d::e_combine_exclude)
          {
 
             m_pgraphics->SetClip(pregion->get_os_data<Region * >(this),Gdiplus::CombineModeExclude);

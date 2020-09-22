@@ -213,7 +213,7 @@ namespace draw2d_gdiplus
 
       i32 OffsetClipRgn(i32 x, i32 y) override;
       i32 OffsetClipRgn(const ::size & size) override;
-      i32 SelectClipRgn(::draw2d::region* pRgn, i32 nMode) override;
+      i32 SelectClipRgn(::draw2d::region* pRgn, ::draw2d::enum_combine ecombine) override;
 
       // Line-Output Functions
       pointd current_position() override;
