@@ -302,7 +302,17 @@ void main(int argc, char * argv[])
 
             ::file::listing listing(&Application);
 
-            Application.dir().ls_dir(listing, "C:\\xcore");
+            string strListing = strBuild;
+            
+            solve_relative(strBuild);
+
+            ::file::path pathListing = strListing;
+
+            pathListing = pathListing.folder(4);
+
+            auto& dir = Application.dir();
+
+            dir.ls_dir(listing, pathListing);
 
             string_array straPrefix;
 
