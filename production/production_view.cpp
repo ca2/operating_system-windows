@@ -140,7 +140,7 @@ namespace production
       rectClient.deflate(2, 2);
       i32 iW = rectClient.width() / 2;
       i32 iH = rectClient.height() / 2;
-      iH = MIN(iH, 120);
+      iH = min(iH, 120);
       double r = (double) iW / (double) iH;
       double rScreen = (double) rectDesktop.width() / (double) rectDesktop.height();
       if(r < rScreen)
@@ -175,7 +175,7 @@ namespace production
       pgraphics->SelectObject(_001GetFont(::user::font_default));
 
 //      auto sz = pgraphics->GetTextExtent("��qg");
-      m_iLineHeight = MAX(1, pgraphics->get_current_font()->get_height());
+      m_iLineHeight = max(1, pgraphics->get_current_font()->get_height());
 
       pgraphics->fill_rect(rectClient, ARGB(255, 255, 255, 255));
 
@@ -530,7 +530,7 @@ namespace production
                m_sizeTotal.cx = 80;
                m_sizeTotal.cy = (LONG)(m_pproduction.m_straStatus.get_size() * iLineHeight + 84);
                sl.unlock();
-               set_viewport_offset_y(MAX(0,m_sizeTotal.cy - sizePage.cy + iLineHeight));
+               set_viewport_offset_y(max(0,m_sizeTotal.cy - sizePage.cy + iLineHeight));
                on_change_view_size();
             }
             else

@@ -192,7 +192,7 @@ void app_t::win_sync_out(string strLocal,string strRepos)
 
    //file::path pathLog = pathRepos / "sync-log" / strFileTime + ".txt";
 
-   //file_put_contents_dup(pathLog,strLog);
+   //file_put_contents(pathLog,strLog);
 
 
    ::system("C:\\bergedge\\hi5\\program\\hstart /NOCONSOLE \"cmd.exe /D /S /c call C:\\sensitive\\sensitive\\ca2\\fontopus\\script\\repossyncitem.bat " + strLocal + " " + strRepos + "\"");
