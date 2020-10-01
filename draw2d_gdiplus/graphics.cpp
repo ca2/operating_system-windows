@@ -751,17 +751,17 @@ namespace draw2d_gdiplus
    }
 
 
-   bool graphics::Arc(i32 x1,i32 y1,i32 w,i32 h,double start, double extends)
+   bool graphics::Arc(i32 x1,i32 y1,i32 w,i32 h, angle start, angle extends)
    {
 
       ::Gdiplus::Rect rect(x1,y1,w,h);
 
-      return m_pgraphics->DrawArc(m_ppen->get_os_data < Pen * >(this),rect,(Gdiplus::REAL) start,(Gdiplus::REAL) extends) == Gdiplus::Status::Ok;
+      return m_pgraphics->DrawArc(m_ppen->get_os_data < Pen * >(this),rect,(Gdiplus::REAL) start.degree(),(Gdiplus::REAL) extends.degree()) == Gdiplus::Status::Ok;
 
    }
 
 
-   bool graphics::Arc(double x1,double y1,double w,double h,double start,double extends)
+   bool graphics::Arc(double x1,double y1,double w,double h, angle start, angle extends)
    {
 
       ::Gdiplus::RectF rectf((Gdiplus::REAL) x1,(Gdiplus::REAL) y1,(Gdiplus::REAL) w,(Gdiplus::REAL) h);
@@ -2863,7 +2863,7 @@ gdi_fallback:
 
    }
 
-   bool graphics::AngleArc(i32 x, i32 y, i32 nRadius, float fStartAngle, float fSweepAngle)
+   bool graphics::AngleArc(i32 x, i32 y, i32 nRadius, angle fStartAngle, angle fSweepAngle)
    {
       //ASSERT(get_handle1() != nullptr);
       //return ::AngleArc(get_handle1(), x, y, nRadius, fStartAngle, fSweepAngle) != FALSE;
