@@ -629,36 +629,36 @@ namespace draw2d_gdiplus
 
    }
 
-   bool graphics::PtVisible(i32 x, i32 y)
-   {
+   //bool graphics::PtVisible(i32 x, i32 y)
+   //{
 
-      //ASSERT(get_handle1() != nullptr);
+   //   //ASSERT(get_handle1() != nullptr);
 
-      //return ::PtVisible(get_handle1(), x, y) != FALSE;
+   //   //return ::PtVisible(get_handle1(), x, y) != FALSE;
 
-      __throw(interface_only_exception());
+   //   __throw(interface_only_exception());
 
-      return false;
-
-
-   }
-
-   bool graphics::PtVisible(const ::point & point)
-   {
-      //ASSERT(get_handle1() != nullptr);   // call virtual
-      return PtVisible(point.x, point.y);
-   }
+   //   return false;
 
 
-   bool graphics::RectVisible(const rect &  prect)
-   {
+   //}
 
-      //return ::RectVisible(get_handle1(), &prect) != FALSE;
-      __throw(not_implemented());
+   //bool graphics::PtVisible(const ::point & point)
+   //{
+   //   //ASSERT(get_handle1() != nullptr);   // call virtual
+   //   return PtVisible(point.x, point.y);
+   //}
 
-      return false;
 
-   }
+   //bool graphics::RectVisible(const rect &  prect)
+   //{
+
+   //   //return ::RectVisible(get_handle1(), &prect) != FALSE;
+   //   __throw(not_implemented());
+
+   //   return false;
+
+   //}
 
 
    pointd graphics::current_position()
@@ -4711,91 +4711,248 @@ gdi_fallback:
    }
 
 
-   i32 graphics::SelectClipRgn(::draw2d::region * pregion)
+   ::estatus graphics::add_shapes(const shape_array& shapea)
    {
 
-      if(pregion == nullptr)
+      for (int i = 0; i < shapea.get_count(); i++)
       {
 
-         m_pgraphics->ResetClip();
+         if (i + 1 < shapea.get_count())
+         {
+
+            if (shapea[i + 1]->eshape() == e_shape_intersect_clip)
+            {
+
+               switch (shapea[i]->eshape())
+               {
+               case e_shape_rect:
+                  intersect_clip(shapea[i]->shape < ::rect>());
+                  break;
+               case e_shape_rectd:
+                  intersect_clip(shapea[i]->shape < ::rectd>());
+                  break;
+               case e_shape_oval:
+                  intersect_clip(shapea[i]->shape < ::oval>());
+                  break;
+               case e_shape_ovald:
+                  intersect_clip(shapea[i]->shape < ::ovald>());
+                  break;
+               case e_shape_polygon:
+                  intersect_clip(shapea[i]->shape < ::polygon>());
+                  break;
+               case e_shape_polygond:
+                  intersect_clip(shapea[i]->shape < ::polygond>());
+                  break;
+
+               }
+
+               i++;
+
+            }
+
+         }
 
       }
-      else
-      {
 
-         m_pgraphics->SetClip(pregion->get_os_data<Region * >(this));
-
-      }
-
-      return 0;
+      return ::success;
 
    }
 
 
-   i32 graphics::ExcludeClipRect(i32 x1, i32 y1, i32 x2, i32 y2)
+   ::estatus graphics::reset_clip()
    {
-      i32 nRetVal = ERROR;
-      //if(get_handle1() != nullptr && get_handle1() != get_handle2())
-      //   nRetVal = ::ExcludeClipRect(get_handle1(), x1, y1, x2, y2);
-      //if(get_handle2() != nullptr)
-      //   nRetVal = ::ExcludeClipRect(get_handle2(), x1, y1, x2, y2);
-      return nRetVal;
+
+      m_pgraphics->ResetClip();
+
+      return ::success;
+
    }
 
-   i32 graphics::ExcludeClipRect(const rect &  rectParam)
+
+   ::estatus graphics::intersect_clip(const ::rect& rect)
    {
-      i32 nRetVal = ERROR;
-      //if(get_handle1() != nullptr && get_handle1() != get_handle2())
-      //   nRetVal = ::ExcludeClipRect(get_handle1(), rectParam.left, rectParam.top,
-      //                               rectParam.right, rectParam.bottom);
-      //if(get_handle2() != nullptr)
-      //   nRetVal = ::ExcludeClipRect(get_handle2(), rectParam.left, rectParam.top,
-      //                               rectParam.right, rectParam.bottom);
-      return nRetVal;
+
+      Gdiplus::Rect r;
+
+      __copy(r, rect);
+
+      m_pgraphics->IntersectClip(r);
+
+      return ::success;
+
    }
 
-   i32 graphics::IntersectClipRect(i32 x1, i32 y1, i32 x2, i32 y2)
+
+   ::estatus graphics::intersect_clip(const ::rectd& rect)
    {
-      i32 nRetVal = ERROR;
-      //if(get_handle1() != nullptr && get_handle1() != get_handle2())
-      //   nRetVal = ::IntersectClipRect(get_handle1(), x1, y1, x2, y2);
-      //if(get_handle2() != nullptr)
-      //   nRetVal = ::IntersectClipRect(get_handle2(), x1, y1, x2, y2);
-      return nRetVal;
+
+      Gdiplus::RectF r;
+
+      __copy(r, rect);
+
+      m_pgraphics->IntersectClip(r);
+
+      return ::success;
+
    }
 
-   i32 graphics::IntersectClipRect(const rect &  rectBounds)
+
+   ::estatus graphics::intersect_clip(const ::oval& oval)
    {
-      i32 nRetVal = ERROR;
 
-      Gdiplus::Rect rect(rectBounds.left, rectBounds.top, width(rectBounds),  height(rectBounds));
+      auto ppath = __auto(new Gdiplus::GraphicsPath());
 
-      m_pgraphics->IntersectClip(rect);
+      Gdiplus::Rect r;
 
-      //if(get_handle1() != nullptr && get_handle1() != get_handle2())
-      //   nRetVal = ::IntersectClipRect(get_handle1(),rectBounds.left,rectBounds.top,rectBounds.right,rectBounds.bottom);
-      //if(get_handle2() != nullptr)
-      //   nRetVal = ::IntersectClipRect(get_handle2(),rectBounds.left,rectBounds.top,rectBounds.right,rectBounds.bottom);
-      return SIMPLEREGION;
+      __copy(r, oval);
+
+      ppath->AddArc(r, 0.f, 360.0f);
+
+      m_pgraphics->SetClip(ppath, CombineModeIntersect);
+
+      return ::success;
+
    }
 
-   i32 graphics::OffsetClipRgn(i32 x, i32 y)
+
+   ::estatus graphics::intersect_clip(const ::ovald& oval)
    {
-      i32 nRetVal = ERROR;
-      return OffsetClipRgn({ x, y });
-      return nRetVal;
+
+      auto ppath = __auto(new Gdiplus::GraphicsPath());
+
+      Gdiplus::RectF r;
+
+      __copy(r, oval);
+
+      ppath->AddArc(r, 0.f, 360.0f);
+
+      m_pgraphics->SetClip(ppath, CombineModeIntersect);
+
+      return ::success;
+
    }
 
-   i32 graphics::OffsetClipRgn(const ::size & size)
+
+   ::estatus graphics::intersect_clip(const ::polygon& polygon)
    {
-      i32 nRetVal = ERROR;
-      //if(get_handle1() != nullptr && get_handle1() != get_handle2())
-      //   nRetVal = ::OffsetClipRgn(get_handle1(), size.cx, size.cy);
-      //if(get_handle2() != nullptr)
-      //   nRetVal = ::OffsetClipRgn(get_handle2(), size.cx, size.cy);
-      m_pgraphics->TranslateClip(size.cx, size.cy);
-      return nRetVal;
+
+      auto ppath = __auto(new Gdiplus::GraphicsPath());
+
+      ap(Gdiplus::Point) ppoint(polygon.get_data(), polygon.get_count());
+
+      ppath->AddPolygon(ppoint, polygon.get_count());
+
+      m_pgraphics->SetClip(ppath, CombineModeIntersect);
+
+      return ::success;
+
    }
+
+
+   ::estatus graphics::intersect_clip(const ::polygond& polygon)
+   {
+
+      auto ppath = __auto(new Gdiplus::GraphicsPath());
+
+      ap(Gdiplus::PointF) ppoint(polygon.get_data(), polygon.get_count());
+
+      ppath->AddPolygon(ppoint, polygon.get_count());
+
+      m_pgraphics->SetClip(ppath, CombineModeIntersect);
+
+      return ::success;
+
+   }
+
+
+
+
+
+   //i32 graphics::SelectClipRgn(::draw2d::region * pregion)
+   //{
+
+   //   if(pregion == nullptr)
+   //   {
+
+   //      m_pgraphics->ResetClip();
+
+   //   }
+   //   else
+   //   {
+
+   //      m_pgraphics->SetClip(pregion->get_os_data<Region * >(this));
+
+   //   }
+
+   //   return 0;
+
+   //}
+
+
+   //i32 graphics::ExcludeClipRect(i32 x1, i32 y1, i32 x2, i32 y2)
+   //{
+   //   i32 nRetVal = ERROR;
+   //   //if(get_handle1() != nullptr && get_handle1() != get_handle2())
+   //   //   nRetVal = ::ExcludeClipRect(get_handle1(), x1, y1, x2, y2);
+   //   //if(get_handle2() != nullptr)
+   //   //   nRetVal = ::ExcludeClipRect(get_handle2(), x1, y1, x2, y2);
+   //   return nRetVal;
+   //}
+
+   //i32 graphics::ExcludeClipRect(const rect &  rectParam)
+   //{
+   //   i32 nRetVal = ERROR;
+   //   //if(get_handle1() != nullptr && get_handle1() != get_handle2())
+   //   //   nRetVal = ::ExcludeClipRect(get_handle1(), rectParam.left, rectParam.top,
+   //   //                               rectParam.right, rectParam.bottom);
+   //   //if(get_handle2() != nullptr)
+   //   //   nRetVal = ::ExcludeClipRect(get_handle2(), rectParam.left, rectParam.top,
+   //   //                               rectParam.right, rectParam.bottom);
+   //   return nRetVal;
+   //}
+
+   //i32 graphics::IntersectClipRect(i32 x1, i32 y1, i32 x2, i32 y2)
+   //{
+   //   i32 nRetVal = ERROR;
+   //   //if(get_handle1() != nullptr && get_handle1() != get_handle2())
+   //   //   nRetVal = ::IntersectClipRect(get_handle1(), x1, y1, x2, y2);
+   //   //if(get_handle2() != nullptr)
+   //   //   nRetVal = ::IntersectClipRect(get_handle2(), x1, y1, x2, y2);
+   //   return nRetVal;
+   //}
+
+   //i32 graphics::IntersectClipRect(const rect &  rectBounds)
+   //{
+   //   i32 nRetVal = ERROR;
+
+   //   Gdiplus::Rect rect(rectBounds.left, rectBounds.top, width(rectBounds),  height(rectBounds));
+
+   //   m_pgraphics->IntersectClip(rect);
+
+   //   //if(get_handle1() != nullptr && get_handle1() != get_handle2())
+   //   //   nRetVal = ::IntersectClipRect(get_handle1(),rectBounds.left,rectBounds.top,rectBounds.right,rectBounds.bottom);
+   //   //if(get_handle2() != nullptr)
+   //   //   nRetVal = ::IntersectClipRect(get_handle2(),rectBounds.left,rectBounds.top,rectBounds.right,rectBounds.bottom);
+   //   return SIMPLEREGION;
+   //}
+
+   //i32 graphics::OffsetClipRgn(i32 x, i32 y)
+   //{
+   //   i32 nRetVal = ERROR;
+   //   return OffsetClipRgn({ x, y });
+   //   return nRetVal;
+   //}
+
+   //i32 graphics::OffsetClipRgn(const ::size & size)
+   //{
+   //   i32 nRetVal = ERROR;
+   //   //if(get_handle1() != nullptr && get_handle1() != get_handle2())
+   //   //   nRetVal = ::OffsetClipRgn(get_handle1(), size.cx, size.cy);
+   //   //if(get_handle2() != nullptr)
+   //   //   nRetVal = ::OffsetClipRgn(get_handle2(), size.cx, size.cy);
+   //   m_pgraphics->TranslateClip(size.cx, size.cy);
+   //   return nRetVal;
+   //}
 
 
    UINT graphics::SetTextAlign(UINT nFlags)
@@ -5093,54 +5250,54 @@ gdi_fallback:
    }
 
 
-   i32 graphics::SelectClipRgn(::draw2d::region* pregion, ::draw2d::enum_combine ecombine)
-   {
+   //i32 graphics::SelectClipRgn(::draw2d::region* pregion, ::draw2d::enum_combine ecombine)
+   //{
 
-      if(pregion == nullptr)
-      {
+   //   if(pregion == nullptr)
+   //   {
 
-         m_pgraphics->ResetClip();
+   //      m_pgraphics->ResetClip();
 
-      }
-      else
-      {
+   //   }
+   //   else
+   //   {
 
-         if(ecombine == ::draw2d::e_combine_intersect)
-         {
+   //      if(ecombine == ::draw2d::e_combine_intersect)
+   //      {
 
-            m_pgraphics->SetClip(pregion->get_os_data<Region *>(this), Gdiplus::CombineModeIntersect);
+   //         m_pgraphics->SetClip(pregion->get_os_data<Region *>(this), Gdiplus::CombineModeIntersect);
 
-         }
-         else if(ecombine == ::draw2d::e_combine_add)
-         {
+   //      }
+   //      else if(ecombine == ::draw2d::e_combine_add)
+   //      {
 
-            m_pgraphics->SetClip(pregion-> get_os_data<Region * >(this),Gdiplus::CombineModeUnion);
+   //         m_pgraphics->SetClip(pregion-> get_os_data<Region * >(this),Gdiplus::CombineModeUnion);
 
-         }
-         else if(ecombine == ::draw2d::e_combine_xor)
-         {
+   //      }
+   //      else if(ecombine == ::draw2d::e_combine_xor)
+   //      {
 
-            m_pgraphics->SetClip(pregion->get_os_data<Region * >(this),Gdiplus::CombineModeXor);
+   //         m_pgraphics->SetClip(pregion->get_os_data<Region * >(this),Gdiplus::CombineModeXor);
 
-         }
-         else if(ecombine == ::draw2d::e_combine_copy)
-         {
+   //      }
+   //      else if(ecombine == ::draw2d::e_combine_copy)
+   //      {
 
-            m_pgraphics->SetClip(pregion->get_os_data<Region * >(this),Gdiplus::CombineModeReplace);
+   //         m_pgraphics->SetClip(pregion->get_os_data<Region * >(this),Gdiplus::CombineModeReplace);
 
-         }
-         else if(ecombine == ::draw2d::e_combine_exclude)
-         {
+   //      }
+   //      else if(ecombine == ::draw2d::e_combine_exclude)
+   //      {
 
-            m_pgraphics->SetClip(pregion->get_os_data<Region * >(this),Gdiplus::CombineModeExclude);
+   //         m_pgraphics->SetClip(pregion->get_os_data<Region * >(this),Gdiplus::CombineModeExclude);
 
-         }
+   //      }
 
-      }
+   //   }
 
-      return 0;
+   //   return 0;
 
-   }
+   //}
 
 
    /////////////////////////////////////////////////////////////////////////////

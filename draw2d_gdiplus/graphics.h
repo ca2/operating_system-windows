@@ -199,21 +199,33 @@ namespace draw2d_gdiplus
       // Clipping Functions
       virtual i32 GetClipBox(RECT * prect) override;
 
-      virtual bool PtVisible(i32 x, i32 y) override;
-      bool PtVisible(const ::point & point) override;
-      virtual bool RectVisible(const rect &  prect) override;
 
-      i32 SelectClipRgn(::draw2d::region* pRgn) override;
-      i32 ExcludeClipRect(i32 x1, i32 y1, i32 x2, i32 y2) override;
-      i32 ExcludeClipRect(const rect &  prect) override;
+      virtual ::estatus add_shapes(const shape_array& shapea);
+      virtual ::estatus reset_clip();
+      virtual ::estatus intersect_clip(const ::rect& rect);
+      virtual ::estatus intersect_clip(const ::rectd& rect);
+      virtual ::estatus intersect_clip(const ::oval& oval);
+      virtual ::estatus intersect_clip(const ::ovald& oval);
+      virtual ::estatus intersect_clip(const ::polygon& polygon);
+      virtual ::estatus intersect_clip(const ::polygond& polygon);
+
+      //virtual bool PtVisible(i32 x, i32 y) override;
+      //bool PtVisible(const ::point & point) override;
+      //virtual bool RectVisible(const rect &  prect) override;
+
+      //i32 SelectClipRgn(::draw2d::region* pRgn) override;
+      //i32 ExcludeClipRect(i32 x1, i32 y1, i32 x2, i32 y2) override;
+      //i32 ExcludeClipRect(const rect &  prect) override;
+
+
 
 //      i32 ExcludeUpdateRgn(::user::primitive * pwindow) override;
-      i32 IntersectClipRect(i32 x1, i32 y1, i32 x2, i32 y2) override;
-      i32 IntersectClipRect(const rect &  prect) override;
+      //i32 IntersectClipRect(i32 x1, i32 y1, i32 x2, i32 y2) override;
+      //i32 IntersectClipRect(const rect &  prect) override;
 
-      i32 OffsetClipRgn(i32 x, i32 y) override;
-      i32 OffsetClipRgn(const ::size & size) override;
-      i32 SelectClipRgn(::draw2d::region* pRgn, ::draw2d::enum_combine ecombine) override;
+      //i32 OffsetClipRgn(i32 x, i32 y) override;
+      //i32 OffsetClipRgn(const ::size & size) override;
+      //i32 SelectClipRgn(::draw2d::region* pRgn, ::draw2d::enum_combine ecombine) override;
 
       // Line-Output Functions
       pointd current_position() override;
