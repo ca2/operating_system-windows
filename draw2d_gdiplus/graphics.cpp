@@ -4776,6 +4776,10 @@ gdi_fallback:
 
       __copy(r, rect);
 
+      r.X += m_pointAddShapeTranslate.x;
+
+      r.Y += m_pointAddShapeTranslate.y;
+
       m_pgraphics->IntersectClip(r);
 
       return ::success;
@@ -4789,6 +4793,10 @@ gdi_fallback:
       Gdiplus::RectF r;
 
       __copy(r, rect);
+
+      r.X += m_pointAddShapeTranslate.x;
+
+      r.Y += m_pointAddShapeTranslate.y;
 
       m_pgraphics->IntersectClip(r);
 
@@ -4805,6 +4813,10 @@ gdi_fallback:
       Gdiplus::Rect r;
 
       __copy(r, oval);
+
+      r.X += m_pointAddShapeTranslate.x;
+
+      r.Y += m_pointAddShapeTranslate.y;
 
       ppath->AddArc(r, 0.f, 360.0f);
 
@@ -4824,6 +4836,10 @@ gdi_fallback:
 
       __copy(r, oval);
 
+      r.X += m_pointAddShapeTranslate.x;
+
+      r.Y += m_pointAddShapeTranslate.y;
+
       ppath->AddArc(r, 0.f, 360.0f);
 
       m_pgraphics->SetClip(ppath, CombineModeIntersect);
@@ -4838,7 +4854,16 @@ gdi_fallback:
 
       auto ppath = __auto(new Gdiplus::GraphicsPath());
 
-      ap(Gdiplus::Point) ppoint(polygon.get_data(), polygon.get_count());
+      auto copy = [this](Gdiplus::Point* p2, const POINT* p1)
+      {
+
+         p2->X = p1->x + m_pointAddShapeTranslate.x;
+
+         p2->Y = p1->y + m_pointAddShapeTranslate.y;
+
+      };
+
+      ap(Gdiplus::Point) ppoint(polygon.get_data(), polygon.get_count(), copy);
 
       ppath->AddPolygon(ppoint, (INT) polygon.get_count());
 
@@ -4854,7 +4879,16 @@ gdi_fallback:
 
       auto ppath = __auto(new Gdiplus::GraphicsPath());
 
-      ap(Gdiplus::PointF) ppoint(polygon.get_data(), polygon.get_count());
+      auto copy = [this](Gdiplus::PointF* p2, const POINTD* p1)
+      {
+
+         p2->X = p1->x + m_pointAddShapeTranslate.x;
+
+         p2->Y = p1->y + m_pointAddShapeTranslate.y;
+
+      };
+
+      ap(Gdiplus::PointF) ppoint(polygon.get_data(), polygon.get_count(), copy);
 
       ppath->AddPolygon(ppoint, (INT) polygon.get_count());
 
