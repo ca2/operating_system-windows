@@ -477,16 +477,15 @@ Opened:
    }
 
 
-   imedia_time out::out_get_position_millis()
+   imedia_time out::out_get_time()
    {
 
-      return (m_positionStart * 1000 / m_pwaveformat->nSamplesPerSec)
-               + device_out_get_position_millis();
+      return m_timeStart + device_out_get_time();
 
    }
 
 
-   imedia_time out::device_out_get_position_millis()
+   imedia_time out::device_out_get_time()
    {
 
       sync_lock sl(mutex());
@@ -529,13 +528,9 @@ Opened:
          if(mmt.wType == TIME_BYTES)
          {
 
-            i64 i = mmt.u.cb;
+            double d = (mmt.u.cb* 8.0)/ (m_pwaveformat->wBitsPerSample * m_pwaveformat->nChannels * m_pwaveformat->nSamplesPerSec);
 
-            i *= 8 * 1000;
-
-            i /= m_pwaveformat->wBitsPerSample * m_pwaveformat->nChannels * m_pwaveformat->nSamplesPerSec;
-
-            return (double) i;
+            return (double) d;
 
          }
          else
@@ -558,84 +553,84 @@ Opened:
    }
 
 
-   imedia_position out::out_get_position()
-   {
+   //imedia_time out::out_get_time()
+   //{
 
-      return m_positionStart + device_out_get_position();
+   //   return m_positionStart + device_out_get_time();
 
-   }
+   //}
 
 
-   imedia_position out::device_out_get_position()
-   {
+   //imedia_time out::device_out_get_time()
+   //{
 
-      sync_lock sl(mutex());
+   //   sync_lock sl(mutex());
 
-      ::estatus                    estatus;
+   //   ::estatus                    estatus;
 
-      MMTIME                  mmt = {};
+   //   MMTIME                  mmt = {};
 
-      mmt.wType = TIME_BYTES;
+   //   mmt.wType = TIME_BYTES;
 
-      if(m_hwaveout != nullptr)
-      {
+   //   if(m_hwaveout != nullptr)
+   //   {
 
-         estatus = ::multimedia::mmsystem::translate(waveOutGetPosition(m_hwaveout, &mmt, sizeof(mmt)));
+   //      estatus = ::multimedia::mmsystem::translate(waveOutGetPosition(m_hwaveout, &mmt, sizeof(mmt)));
 
-         try
-         {
+   //      try
+   //      {
 
-            if (::success != estatus)
-            {
+   //         if (::success != estatus)
+   //         {
 
-               TRACE( "waveOutGetPosition() returned %lu", (u32)estatus);
+   //            TRACE( "waveOutGetPosition() returned %lu", (u32)estatus);
 
-               return 0;
+   //            return 0;
 
-            }
+   //         }
 
-         }
-         catch(...)
-         {
+   //      }
+   //      catch(...)
+   //      {
 
-            return 0;
+   //         return 0;
 
-         }
+   //      }
 
-         if(mmt.wType == TIME_MS)
-         {
+   //      if(mmt.wType == TIME_MS)
+   //      {
 
-            imedia_position position = (u32) mmt.u.ms;
+   //         imedia_time position = (u32) mmt.u.ms;
 
-            position *= m_pwaveformat->nSamplesPerSec;
+   //         position *= m_pwaveformat->nSamplesPerSec;
 
-            position /= 8 * 1000;
+   //         position /= 8 * 1000;
 
-            return position;
+   //         return position;
 
-         }
-         else if (mmt.wType == TIME_BYTES)
-         {
+   //      }
+   //      else if (mmt.wType == TIME_BYTES)
+   //      {
 
-            return (mmt.u.cb * 8) / (m_pwaveformat->wBitsPerSample * m_pwaveformat->nChannels);
+   //         return (mmt.u.cb * 8) / (m_pwaveformat->wBitsPerSample * m_pwaveformat->nChannels);
 
-         }
-         else
-         {
+   //      }
+   //      else
+   //      {
 
-            return 0;
+   //         return 0;
 
-         }
+   //      }
 
-      }
-      else
-      {
+   //   }
+   //   else
+   //   {
 
-         return 0;
+   //      return 0;
 
-      }
+   //   }
 
-   }
+   //}
 
 
    void out::out_free(index iBuffer)

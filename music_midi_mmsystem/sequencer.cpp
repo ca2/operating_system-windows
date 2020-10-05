@@ -380,7 +380,7 @@ namespace music
          }
 
 
-         ::estatus     sequencer::get_ticks(imedia_position& pTicks)
+         ::estatus     sequencer::get_ticks(imedia_time& pTicks)
          {
 
             sync_lock sl(mutex());
@@ -1108,7 +1108,7 @@ namespace music
          }
 
 
-         imedia_position sequencer::get_position_ticks()
+         imedia_time sequencer::get_position_ticks()
          {
 
             single_lock sl(mutex());
@@ -1161,14 +1161,14 @@ namespace music
          }
 
 
-         //imedia_position sequencer::TimeToPosition(imedia_time millis)
+         //imedia_time sequencer::TimeToPosition(imedia_time millis)
          //{
-         //   return imedia_position(MillisecsToTicks((iptr)millis));
+         //   return imedia_time(MillisecsToTicks((iptr)millis));
          //}
 
-         //imedia_time sequencer::PositionToTime(imedia_position tk)
+         //imedia_time sequencer::PositionToTime(imedia_time tk)
          //{
-         //   return imedia_time(TicksToMillisecs((imedia_position)(iptr)tk));
+         //   return imedia_time(TicksToMillisecs((imedia_time)(iptr)tk));
          //}
 
 
@@ -1186,7 +1186,7 @@ namespace music
          }
 
 
-         imedia_position sequencer::GetQuarterNote()
+         imedia_time sequencer::GetQuarterNote()
          {
 
             return m_psequence->m_pfile->midi_file_header()->GetQuarterNoteTicks();
@@ -1336,10 +1336,10 @@ namespace music
          }
 
 
-         ::estatus     sequencer::StreamEventF1(imedia_position tkDelta,
+         ::estatus     sequencer::StreamEventF1(imedia_time tkDelta,
             array < ::music::midi::event*, ::music::midi::event* >& eventptra,
             LPMIDIHDR lpmh,
-            imedia_position tkMax,
+            imedia_time tkMax,
             u32 cbPrerollNomimalMax
          )
          {
@@ -1402,10 +1402,10 @@ namespace music
          }
 
          ::estatus     sequencer::StreamEvent(
-            imedia_position                   tkDelta,
+            imedia_time                   tkDelta,
             ::music::midi::event * pEvent,
             LPMIDIHDR               lpmh,
-            imedia_position                   tkMax,
+            imedia_time                   tkMax,
             u32                   cbPrerollNominalMax)
          {
             UNREFERENCED_PARAMETER(tkMax);
@@ -1634,7 +1634,7 @@ namespace music
             return ::success;
          }
 
-         ::estatus     sequencer::InsertPadEvent(imedia_position tkDelta, LPMIDIHDR lpmh)
+         ::estatus     sequencer::InsertPadEvent(imedia_time tkDelta, LPMIDIHDR lpmh)
          {
 
             LPDWORD     lpdw;
@@ -1721,7 +1721,7 @@ namespace music
          }
 
 
-         ::estatus     sequencer::InsertParmData(imedia_position tkDelta, LPMIDIHDR lpmh)
+         ::estatus     sequencer::InsertParmData(imedia_time tkDelta, LPMIDIHDR lpmh)
          {
 
             u32               dwLength;
@@ -1787,12 +1787,12 @@ namespace music
          }
 
 
-         ::estatus     sequencer::WorkStreamRender(LPMIDIHDR lpmh, imedia_position tkMax, i32 iBufferNominalMax)
+         ::estatus     sequencer::WorkStreamRender(LPMIDIHDR lpmh, imedia_time tkMax, i32 iBufferNominalMax)
          {
 
             ::estatus                       smfrc;
-            imedia_position            tkDelta;
-            imedia_position            tkLastPosition;
+            imedia_time            tkDelta;
+            imedia_time            tkLastPosition;
 
             ASSERT(lpmh != nullptr);
 
@@ -1801,7 +1801,7 @@ namespace music
             if (m_psequence->m_pfile->m_dwPendingUserEvent)
             {
 
-               smfrc = InsertParmData((imedia_position)0, lpmh);
+               smfrc = InsertParmData((imedia_time)0, lpmh);
 
                if (::success != smfrc)
                {
@@ -1880,9 +1880,9 @@ namespace music
 
                ASSERT(m_psequence->m_pfile->GetPosition() >= tkLastPosition);
 
-               imedia_position tkPosition = m_psequence->m_pfile->GetPosition();
+               imedia_time tkPosition = m_psequence->m_pfile->GetPosition();
 
-               imedia_position tkDiv = m_psequence->GetQuarterNote();
+               imedia_time tkDiv = m_psequence->GetQuarterNote();
 
                while ((m_psequence->TicksToMillisecs(tkLastPosition + tkDiv) - m_psequence->TicksToMillisecs(tkLastPosition)) > 100)
                {
@@ -1894,7 +1894,7 @@ namespace music
                while (true)
                {
 
-                  imedia_position tkOp = floor((m_tkLastOp + tkDiv) / tkDiv) * tkDiv;
+                  imedia_time tkOp = floor((m_tkLastOp + tkDiv) / tkDiv) * tkDiv;
 
                   if (tkOp > tkPosition)
                   {

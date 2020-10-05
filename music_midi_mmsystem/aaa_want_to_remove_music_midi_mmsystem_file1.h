@@ -26,19 +26,19 @@ namespace music
             virtual ~file();
 
 
-            ::estatus     WorkStreamRender(LPMIDIHDR lpmh, imedia_position tkMax, u32 cbPrerollNomimalMax);
+            ::estatus     WorkStreamRender(LPMIDIHDR lpmh, imedia_time tkMax, u32 cbPrerollNomimalMax);
 
             using ::music::midi::file::WorkSeek;
 
-            ::estatus     WorkSeek(imedia_position tkPosition, LPMIDIHDR lpmh);
+            ::estatus     WorkSeek(imedia_time tkPosition, LPMIDIHDR lpmh);
 
-            ::estatus     StreamEvent(imedia_position tkDelta, ::music::midi::event * Event, LPMIDIHDR lpmh, imedia_position tkMax, u32 cbPrerollNomimalMax);
+            ::estatus     StreamEvent(imedia_time tkDelta, ::music::midi::event * Event, LPMIDIHDR lpmh, imedia_time tkMax, u32 cbPrerollNomimalMax);
 
-            ::estatus     StreamEventF1(imedia_position tkDelta, array < ::music::midi::event *, ::music::midi::event * > & eventptra, LPMIDIHDR lpmh, imedia_position tkMax, u32 cbPrerollNomimalMax);
+            ::estatus     StreamEventF1(imedia_time tkDelta, array < ::music::midi::event *, ::music::midi::event * > & eventptra, LPMIDIHDR lpmh, imedia_time tkMax, u32 cbPrerollNomimalMax);
 
-            ::estatus     InsertParmData(imedia_position tkDelta, LPMIDIHDR lpmh);
+            ::estatus     InsertParmData(imedia_time tkDelta, LPMIDIHDR lpmh);
 
-            ::estatus     InsertPadEvent(imedia_position tkDelta, LPMIDIHDR lpmh);
+            ::estatus     InsertPadEvent(imedia_time tkDelta, LPMIDIHDR lpmh);
 
 
          };

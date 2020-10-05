@@ -576,7 +576,7 @@ namespace multimedia
 
       }
 
-      ::estatus     out::out_start(const imedia_position & position)
+      ::estatus     out::out_start(const imedia_time & position)
       {
 
          sync_lock sl(mutex());
@@ -649,7 +649,7 @@ namespace multimedia
             return dwMillis + dwPosition - ((m_dwLostSampleCount) * 1000 / m_pwaveformat->nSamplesPerSec);
       }*/
 
-      imedia_time out::out_get_position_millis()
+      imedia_time out::out_get_time()
       {
 
          sync_lock sl(mutex());
@@ -701,16 +701,16 @@ namespace multimedia
 
       }
 
-      /*imedia_position out::get_position_for_synch()
+      /*imedia_time out::get_position_for_synch()
       {
-         imedia_position position = get_position();
+         imedia_time position = get_position();
          if(m_pprebuffer != nullptr && m_pprebuffer->m_pdecoder != nullptr)
             return m_pprebuffer->m_position + position - m_pprebuffer->m_pdecoder->audio_plugin_get_lost_position_offset(position) - m_dwLostSampleCount * m_pwaveformat->wBitsPerSample * m_pwaveformat->nChannels / 8;
          else
             return m_pprebuffer->m_position + position - m_dwLostSampleCount * m_pwaveformat->wBitsPerSample * m_pwaveformat->nChannels / 8;
       }*/
 
-      imedia_position out::out_get_position()
+      imedia_time out::out_get_time()
       {
 
          sync_lock sl(mutex());
@@ -745,7 +745,7 @@ namespace multimedia
          //   }
          //   if(mmt.wType == TIME_MS)
          //   {
-         //      imedia_position position = (u32) mmt.u.ms;
+         //      imedia_time position = (u32) mmt.u.ms;
          //      position *= m_pwaveformat->wBitsPerSample * m_pwaveformat->nChannels * m_pwaveformat->nSamplesPerSec;
          //      position /= 8 * 1000;
          //      return position;

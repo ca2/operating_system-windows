@@ -27,10 +27,8 @@ namespace audio_mmsystem
       void install_message_routing(::channel * pchannel);
 
 
-      virtual imedia_time        device_out_get_position_millis();
-      virtual imedia_time        out_get_position_millis();
-      virtual imedia_position    device_out_get_position();
-      virtual imedia_position    out_get_position();
+      virtual imedia_time        out_get_time();
+      virtual imedia_time        device_out_get_time();
       virtual void               out_filled(index iBuffer) override;
       virtual void               out_filled(LPWAVEHDR lpwavehdr);
 

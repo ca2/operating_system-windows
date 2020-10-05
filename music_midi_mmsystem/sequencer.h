@@ -91,10 +91,10 @@ namespace music
 
             virtual void on_set_position() override;
 
-            virtual imedia_position get_position_ticks();
-            virtual void karaoke_get_time(imedia_position& time);
+            virtual imedia_time get_position_ticks();
+            virtual void karaoke_get_time(imedia_time& time);
 
-            virtual ::estatus     get_ticks(imedia_position& time);
+            virtual ::estatus     get_ticks(imedia_time& time);
             virtual ::estatus     get_millis(imedia_time& time);
             virtual imedia_time get_millis() override;
 
@@ -104,7 +104,7 @@ namespace music
             bool IsSettingPosition();
             void SetSettingPositionFlag(bool bSet = TRUE);
 
-            imedia_position GetQuarterNote();
+            imedia_time GetQuarterNote();
 
 
 
@@ -115,17 +115,17 @@ namespace music
             virtual void music_midi_on_playback_end();
 
 
-            ::estatus     WorkStreamRender(LPMIDIHDR lpmh, imedia_position tkMax, i32 iBufferNominalMax);
+            ::estatus     WorkStreamRender(LPMIDIHDR lpmh, imedia_time tkMax, i32 iBufferNominalMax);
 
-            ::estatus     WorkSeek(imedia_position tkPosition, LPMIDIHDR lpmh);
+            ::estatus     WorkSeek(imedia_time tkPosition, LPMIDIHDR lpmh);
 
-            ::estatus     StreamEvent(imedia_position tkDelta, ::music::midi::event* Event, LPMIDIHDR lpmh, imedia_position tkMax, u32 cbPrerollNomimalMax);
+            ::estatus     StreamEvent(imedia_time tkDelta, ::music::midi::event* Event, LPMIDIHDR lpmh, imedia_time tkMax, u32 cbPrerollNomimalMax);
 
-            ::estatus     StreamEventF1(imedia_position tkDelta, array < ::music::midi::event*, ::music::midi::event* >& eventptra, LPMIDIHDR lpmh, imedia_position tkMax, u32 cbPrerollNomimalMax);
+            ::estatus     StreamEventF1(imedia_time tkDelta, array < ::music::midi::event*, ::music::midi::event* >& eventptra, LPMIDIHDR lpmh, imedia_time tkMax, u32 cbPrerollNomimalMax);
 
-            ::estatus     InsertParmData(imedia_position tkDelta, LPMIDIHDR lpmh);
+            ::estatus     InsertParmData(imedia_time tkDelta, LPMIDIHDR lpmh);
 
-            ::estatus     InsertPadEvent(imedia_position tkDelta, LPMIDIHDR lpmh);
+            ::estatus     InsertPadEvent(imedia_time tkDelta, LPMIDIHDR lpmh);
 
             DECL_GEN_SIGNAL(_001OnMidiOutDone);
             DECL_GEN_SIGNAL(_001OnMidiOutPositionCB);
