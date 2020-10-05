@@ -4840,7 +4840,7 @@ gdi_fallback:
 
       ap(Gdiplus::Point) ppoint(polygon.get_data(), polygon.get_count());
 
-      ppath->AddPolygon(ppoint, polygon.get_count());
+      ppath->AddPolygon(ppoint, (INT) polygon.get_count());
 
       m_pgraphics->SetClip(ppath, CombineModeIntersect);
 
@@ -4856,7 +4856,7 @@ gdi_fallback:
 
       ap(Gdiplus::PointF) ppoint(polygon.get_data(), polygon.get_count());
 
-      ppath->AddPolygon(ppoint, polygon.get_count());
+      ppath->AddPolygon(ppoint, (INT) polygon.get_count());
 
       m_pgraphics->SetClip(ppath, CombineModeIntersect);
 
