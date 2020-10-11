@@ -124,7 +124,7 @@ namespace draw2d_gdi
          CreatePen(PS_SOLID, (i32) m_dWidth, RGB(255, 255, 255));
 
       }
-      else if(m_etype == type_solid)
+      else if(m_epen == type_solid)
       {
 
          CreatePen(PS_SOLID, (i32) m_dWidth, m_color.get_rgb());

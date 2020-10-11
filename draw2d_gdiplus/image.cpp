@@ -139,7 +139,7 @@ namespace draw2d_gdiplus
 
       m_pgraphics->set(m_pbitmap);
 
-      m_pgraphics->m_pimageimplDraw2dGraphics = this;
+      m_pgraphics->m_pimage = this;
 
       m_pgraphics->SetViewportOrg(0, 0);
 
@@ -226,7 +226,7 @@ namespace draw2d_gdiplus
       m_pgraphics->set(m_pbitmap);
       m_pgraphics->SetViewportOrg(origin());
 
-      m_pgraphics->m_pimageimplDraw2dGraphics = this;
+      m_pgraphics->m_pimage = this;
       //m_sizeRaw.cx = width;
       //m_sizeRaw.cy = height;
       m_sizeAlloc = size;

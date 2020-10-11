@@ -1,7 +1,7 @@
 #include "framework.h"
 
 
-::estatus gdiplus_draw_text(::draw2d::graphics* pgraphicsParam, ::draw2d::path* ppathParam, const string& str, rectd& rectParam, UINT nFormat, ::draw2d::font* pfontParam, double dFontWidth, ::draw2d::brush* pbrushParam, bool bMeasure)
+::estatus gdiplus_draw_text(::draw2d::graphics* pgraphicsParam, ::draw2d::path* ppathParam, const string& str, rectd& rectParam, const ::e_align & ealign, const ::e_draw_text & edrawtext, ::draw2d::font* pfontParam, double dFontWidth, ::draw2d::brush* pbrushParam, bool bMeasure)
 {
 
    if (str.is_empty())
@@ -72,35 +72,35 @@
    format.SetFormatFlags((format.GetFormatFlags()
       //| Gdiplus::StringFormatFlagsNoClip | Gdiplus::StringFormatFlagsMeasureTrailingSpaces
       | Gdiplus::StringFormatFlagsMeasureTrailingSpaces
-      | (nFormat & DT_SINGLELINE ? Gdiplus::StringFormatFlagsNoWrap : 0))
+      | (edrawtext & DT_SINGLELINE ? Gdiplus::StringFormatFlagsNoWrap : 0))
       & ~(Gdiplus::StringFormatFlagsLineLimit));
 
-   if (nFormat & DT_PATH_ELLIPSIS)
+   if (edrawtext & e_draw_text_path_ellipsis)
    {
 
       format.SetTrimming(Gdiplus::StringTrimmingEllipsisPath);
 
    }
-   else if (nFormat & DT_END_ELLIPSIS)
+   else if (edrawtext & e_draw_text_end_ellipsis)
    {
 
       format.SetTrimming(Gdiplus::StringTrimmingEllipsisCharacter);
 
    }
 
-   if (nFormat & DT_LEFT)
+   if (ealign & e_align_left)
    {
 
       format.SetAlignment(Gdiplus::StringAlignmentNear);
 
    }
-   else if (nFormat & DT_RIGHT)
+   else if (ealign & DT_RIGHT)
    {
 
       format.SetAlignment(Gdiplus::StringAlignmentFar);
 
    }
-   else if (nFormat & DT_CENTER)
+   else if (ealign & e_align_horizontal_center)
    {
 
       format.SetAlignment(Gdiplus::StringAlignmentCenter);
@@ -113,19 +113,19 @@
 
    }
 
-   if (nFormat & DT_BOTTOM)
+   if (ealign & e_align_bottom)
    {
 
       format.SetLineAlignment(Gdiplus::StringAlignmentFar);
 
    }
-   else if (nFormat & DT_TOP)
+   else if (ealign & e_align_top)
    {
 
       format.SetLineAlignment(Gdiplus::StringAlignmentNear);
 
    }
-   else if (nFormat & DT_VCENTER)
+   else if (ealign & e_align_vertical_center)
    {
 
       format.SetLineAlignment(Gdiplus::StringAlignmentCenter);

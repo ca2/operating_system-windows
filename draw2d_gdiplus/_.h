@@ -14,7 +14,7 @@
 #endif
 
 
-::estatus gdiplus_draw_text(::draw2d::graphics * pgraphics, ::draw2d::path * ppath, const string & str, rectd & rectParam, UINT nFormat, ::draw2d::font * pfont, double dFontWidth, ::draw2d::brush * pbrush = nullptr, bool bMeasure = false);
+::estatus gdiplus_draw_text(::draw2d::graphics * pgraphics, ::draw2d::path * ppath, const string & str, rectd & rectParam, const ::e_align & ealign, const ::e_draw_text & edrawtext, ::draw2d::font * pfont, double dFontWidth, ::draw2d::brush * pbrush = nullptr, bool bMeasure = false);
 
 
 inline auto gdiplus_color(const ::color& color)
@@ -22,7 +22,7 @@ inline auto gdiplus_color(const ::color& color)
    return Gdiplus::Color(color.m_iA, color.m_iR, color.m_iG, color.m_iB);
 }
 
-#include "factory_exchange.h"
+//#include "factory_exchange.h"
 
 
 #include "object.h"

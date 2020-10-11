@@ -322,7 +322,7 @@ namespace draw2d_gdiplus
    bool pen::create(::draw2d::graphics * pgraphics, ::i8 iCreate)
    {
 
-      if (m_etype == type_brush)
+      if (m_epen == ::draw2d::e_pen_brush)
       {
 
          m_ppen = new Gdiplus::Pen(m_pbrush->get_os_data <Gdiplus::Brush *>(pgraphics), (Gdiplus::REAL) m_dWidth);
@@ -337,47 +337,47 @@ namespace draw2d_gdiplus
 
       switch(m_elinejoin)
       {
-      case line_join_miter:
+      case ::draw2d::e_line_join_miter:
          m_ppen->SetLineJoin(Gdiplus::LineJoinMiter);
          break;
-      case line_join_bevel:
+      case ::draw2d::e_line_join_bevel:
          m_ppen->SetLineJoin(Gdiplus::LineJoinBevel);
          break;
-      case line_join_round:
+      case ::draw2d::e_line_join_round:
          m_ppen->SetLineJoin(Gdiplus::LineJoinRound);
          break;
-      case line_join_miter_clipped:
+      case ::draw2d::e_line_join_miter_clipped:
          m_ppen->SetLineJoin(Gdiplus::LineJoinMiterClipped);
          break;
       }
 
       switch(m_elinecapBeg)
       {
-      case line_cap_flat:
+      case ::draw2d::e_line_cap_flat:
          m_ppen->SetStartCap(Gdiplus::LineCapFlat);
          break;
-      case line_cap_round:
+      case ::draw2d::e_line_cap_round:
          m_ppen->SetStartCap(Gdiplus::LineCapRound);
          break;
-      case line_cap_square:
+      case ::draw2d::e_line_cap_square:
          m_ppen->SetStartCap(Gdiplus::LineCapSquare);
          break;
       }
 
       switch(m_elinecapEnd)
       {
-      case line_cap_flat:
+      case ::draw2d::e_line_cap_flat:
          m_ppen->SetEndCap(Gdiplus::LineCapFlat);
          break;
-      case line_cap_round:
+      case ::draw2d::e_line_cap_round:
          m_ppen->SetEndCap(Gdiplus::LineCapRound);
          break;
-      case line_cap_square:
+      case ::draw2d::e_line_cap_square:
          m_ppen->SetEndCap(Gdiplus::LineCapSquare);
          break;
       }
 
-      if(m_etype == type_dot)
+      if(m_epen == ::draw2d::e_pen_dot)
       {
 
          Gdiplus::REAL dashVals[4];
@@ -391,7 +391,7 @@ namespace draw2d_gdiplus
          m_ppen->SetDashPattern(dashVals,2);
 
       }
-      else if (m_etype == type_dash)
+      else if (m_epen == ::draw2d::e_pen_dash)
       {
 
          Gdiplus::REAL dashVals[4];
@@ -408,13 +408,13 @@ namespace draw2d_gdiplus
 
       }
 
-      if (m_ealign == align_inset)
+      if (m_epenalign == ::draw2d::e_pen_align_inset)
       {
 
          m_ppen->SetAlignment(Gdiplus::PenAlignmentInset);
 
       }
-      else if (m_ealign == align_center)
+      else if (m_epenalign == ::draw2d::e_pen_align_center)
       {
 
          m_ppen->SetAlignment(Gdiplus::PenAlignmentCenter);

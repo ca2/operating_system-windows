@@ -210,7 +210,7 @@ namespace production
          rcItem = rectText;
          rcItem.bottom = y + m_iLineHeight;
          rcItem.top = y ;
-         pgraphics->draw_text(m_pproduction->m_straStatus[i], rcItem, DT_BOTTOM | DT_LEFT);
+         pgraphics->draw_text(m_pproduction->m_straStatus[i], rcItem, e_align_bottom_left);
          y = rcItem.bottom;
       }
       pgraphics->SelectClipRgn(nullptr);
@@ -232,7 +232,7 @@ namespace production
          pgraphics->fill_rect(rectArea, ARGB(255, 100, 200, 255));
          pgraphics->set_text_color(ARGB(255, 255, 255, 255));
 
-         pgraphics->draw_text("Production", rectArea, DT_CENTER | DT_VCENTER);
+         pgraphics->draw_text("Production", rectArea, e_align_horizontal_center | e_align_vertical_center);
 
       }
 

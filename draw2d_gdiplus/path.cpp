@@ -507,36 +507,55 @@ namespace draw2d_gdiplus
    }
 
 
-   bool path::internal_add_draw_text(::draw2d::graphics * pgraphics, const ::rect & rectParam, const string & strText, ::draw2d::font * pfont, int nFormat)
+   bool path::internal_add_draw_text(::draw2d::graphics * pgraphics, const ::rect & rectParam, const string & strText, ::draw2d::font * pfont, const ::e_align & ealign, const ::e_draw_text & edrawtext)
    {
 
       ::rectd rect(rectParam);
 
-      auto estatus = gdiplus_draw_text(pgraphics, this, strText, rect, nFormat, pfont, 1.0);
+      auto estatus = gdiplus_draw_text(pgraphics, this, strText, rect, ealign, edrawtext, pfont, 1.0);
 
       return !estatus;
 
    }
 
    
-   bool path::_set(::draw2d::graphics* pgraphics, ::draw2d::path::begin* pbegin)
+   bool path::_set(::draw2d::graphics* pgraphics, const enum_shape& eshape)
    {
 
+      if (eshape == e_shape_begin_figure)
+      {
 
-      return true;
+         return true;
+
+      }
+      else if(eshape == e_shape_close_figure)
+      {
+
+         internal_close_figure();
+
+         return true;
+
+      }
+      else
+      {
+
+         return ::draw2d::path::_set(pgraphics, eshape);
+
+      }
+
 
    }
 
 
-   bool path::_set(::draw2d::graphics * pgraphics, ::draw2d::path::arc * parc)
+   bool path::_set(::draw2d::graphics * pgraphics, const ::arc & arc)
    {
 
       ::rectd rect;
 
-      rect.left      = parc->m_pointCenter.x - parc->m_sizeRadius.cx;
-      rect.right     = parc->m_pointCenter.x + parc->m_sizeRadius.cx;
-      rect.top       = parc->m_pointCenter.y - parc->m_sizeRadius.cy;
-      rect.bottom    = parc->m_pointCenter.y + parc->m_sizeRadius.cy;
+      rect.left      = arc.m_pointCenter.x - arc.m_sizeRadius.cx;
+      rect.right     = arc.m_pointCenter.x + arc.m_sizeRadius.cx;
+      rect.top       = arc.m_pointCenter.y - arc.m_sizeRadius.cy;
+      rect.bottom    = arc.m_pointCenter.y + arc.m_sizeRadius.cy;
 
       //if (!m_bHasPath && m_bHasPointInternal)
       //{
@@ -545,44 +564,56 @@ namespace draw2d_gdiplus
 
       //}
 
-      bool bOk = internal_add_arc(rect,parc->m_angleBeg, parc->m_angleEnd);
+      bool bOk = internal_add_arc(rect,arc.m_angleBeg, arc.m_angleEnd);
 
       return bOk;
 
    }
 
 
-   bool path::_set(::draw2d::graphics * pgraphics, ::draw2d::path::rect * prect)
+   bool path::_set(::draw2d::graphics * pgraphics, const ::rect & rect)
    {
 
-      return internal_add_rect(
-         prect->m_rect.left, prect->m_rect.top, 
-         prect->m_rect.width(), prect->m_rect.height());
+      return internal_add_rect(rect.left, rect.top,  rect.width(), rect.height());
 
    }
 
 
-   bool path::_set(::draw2d::graphics * pgraphics, ::draw2d::path::line * pline)
+   bool path::_set(::draw2d::graphics* pgraphics, const ::rectd& rect)
    {
 
-      return internal_add_line(
-         pline->m_pointBeg.x, pline->m_pointBeg.y,
-         pline->m_pointEnd.x, pline->m_pointEnd.y);
+      return internal_add_rect(rect.left, rect.top, rect.width(), rect.height());
 
    }
 
 
-   bool path::_set(::draw2d::graphics* pgraphics, ::draw2d::path::lines* plines)
+   bool path::_set(::draw2d::graphics * pgraphics, const ::line & line)
+   {
+
+      return internal_add_line(line.m_p1.x, line.m_p1.y, line.m_p2.x, line.m_p2.y);
+
+   }
+
+
+   bool path::_set(::draw2d::graphics* pgraphics, const ::lined& line)
+   {
+
+      return internal_add_line(line.m_p1.x, line.m_p1.y, line.m_p2.x, line.m_p2.y);
+
+   }
+
+
+   bool path::_set(::draw2d::graphics* pgraphics, const ::lines & lines)
    {
 
       ::array < Gdiplus::PointF > pointa;
       
-      pointa.set_size(plines->m_pointa.get_count());
+      pointa.set_size(lines.get_count());
 
       for (::index i = 0; i < pointa.get_size(); i++)
       {
 
-         __copy(pointa[i], plines->m_pointa[i]);
+         __copy(pointa[i], lines[i]);
 
       }
 
@@ -593,18 +624,38 @@ namespace draw2d_gdiplus
    }
 
 
-
-   bool path::_set(::draw2d::graphics* pgraphics, ::draw2d::path::polygon * ppolygon)
+   bool path::_set(::draw2d::graphics* pgraphics, const ::linesd& lines)
    {
 
       ::array < Gdiplus::PointF > pointa;
 
-      pointa.set_size(ppolygon->m_pointa.get_count());
+      pointa.set_size(lines.get_count());
 
       for (::index i = 0; i < pointa.get_size(); i++)
       {
 
-         __copy(pointa[i], ppolygon->m_pointa[i]);
+         __copy(pointa[i], lines[i]);
+
+      }
+
+      m_ppath->AddLines(pointa.get_data(), (INT)pointa.get_count());
+
+      return true;
+
+   }
+
+
+   bool path::_set(::draw2d::graphics* pgraphics, const ::polygon & polygon)
+   {
+
+      ::array < Gdiplus::PointF > pointa;
+
+      pointa.set_size(polygon.get_count());
+
+      for (::index i = 0; i < pointa.get_size(); i++)
+      {
+
+         __copy(pointa[i], polygon[i]);
 
       }
 
@@ -615,40 +666,55 @@ namespace draw2d_gdiplus
    }
 
 
-   bool path::_set(::draw2d::graphics* pgraphics, ::draw2d::path::text_out* ptextout)
+   bool path::_set(::draw2d::graphics* pgraphics, const ::polygond& polygon)
    {
 
-      return internal_add_text_out(
-         pgraphics,
-         (i32)ptextout->m_point.x,
-         (i32)ptextout->m_point.y,
-         ptextout->m_strText,
-         ptextout->m_pfont);
+      ::array < Gdiplus::PointF > pointa;
 
-   }
+      pointa.set_size(polygon.get_count());
 
+      for (::index i = 0; i < pointa.get_size(); i++)
+      {
 
-   bool path::_set(::draw2d::graphics* pgraphics, ::draw2d::path::draw_text * pdrawtext)
-   {
+         __copy(pointa[i], polygon[i]);
 
-      return internal_add_draw_text(
-         pgraphics,
-         pdrawtext->m_rect, 
-         pdrawtext->m_strText, 
-         pdrawtext->m_pfont, 
-         pdrawtext->m_iDrawTextFlags);
+      }
 
-   }
-
-
-   bool path::_set(::draw2d::graphics* pgraphics, ::draw2d::path::close * pclose)
-   {
-
-      internal_close_figure();
+      m_ppath->AddPolygon(pointa.get_data(), (INT)pointa.get_count());
 
       return true;
 
    }
+
+
+   bool path::_set(::draw2d::graphics* pgraphics, const ::text_out & textout)
+   {
+
+      return internal_add_text_out(
+         pgraphics,
+         (i32)textout.m_point.x,
+         (i32)textout.m_point.y,
+         textout.m_strText,
+         textout.m_pfont);
+
+   }
+
+
+   bool path::_set(::draw2d::graphics* pgraphics, const ::draw_text & drawtext)
+   {
+
+      return internal_add_draw_text(
+         pgraphics,
+         drawtext.m_rect, 
+         drawtext.m_strText, 
+         drawtext.m_pfont, 
+         drawtext.m_ealign,
+         drawtext.m_edrawtext);
+
+   }
+
+
+
 
 
 

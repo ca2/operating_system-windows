@@ -629,7 +629,7 @@ namespace draw2d_gdi
 
       COLORREF cr = pbrush->m_color;
 
-      if (m_pimageimplDraw2dGraphics->is_null())
+      if (m_pimage->is_null())
       {
 
          ::SetBkColor(get_handle1(), cr);
@@ -639,7 +639,7 @@ namespace draw2d_gdi
       else if (colorref_get_a_value(cr) == 255)
       {
 
-         m_pimageimplDraw2dGraphics->fill_rect(rect, ARGB(255, colorref_get_r_value(cr), colorref_get_g_value(cr), colorref_get_b_value(cr)));
+         m_pimage->fill_rect(rect, ARGB(255, colorref_get_r_value(cr), colorref_get_g_value(cr), colorref_get_b_value(cr)));
 
       }
       else
@@ -721,7 +721,7 @@ namespace draw2d_gdi
       if(picon == nullptr)
          return FALSE;
 
-      if(m_pimageimplDraw2dGraphics->is_null())
+      if(m_pimage->is_null())
       {
 
          return ::DrawIconEx(get_handle1(), x, y, (HICON) picon->m_picon, cx, cy, istepIfAniCur, hbrFlickerFreeDraw, diFlags) != FALSE;
@@ -740,7 +740,7 @@ namespace draw2d_gdi
 
          pimage->div_alpha();
 
-         m_pimageimplDraw2dGraphics->from(::point(x, y), pimage, ::point(), size(cx, cy));
+         m_pimage->from(::point(x, y), pimage, ::point(), size(cx, cy));
 
          return true;
 
@@ -1228,7 +1228,7 @@ namespace draw2d_gdi
       if(get_handle1() == nullptr)
          return false;
 
-      if(m_pimageimplDraw2dGraphics->is_null() || GDI_GRAPHICS(pgraphicsSrc)->m_pimageimplDraw2dGraphics->is_null())
+      if(m_pimage->is_null() || GDI_GRAPHICS(pgraphicsSrc)->m_pimage->is_null())
       {
 
          return ::BitBlt(get_handle1(), x, y, nWidth, nHeight, GDI_HDC(pgraphicsSrc), xSrc, ySrc, dwRop) != FALSE;
@@ -1246,7 +1246,7 @@ namespace draw2d_gdi
             ::size size(nWidth, nHeight);
             ::point pointSrc(xSrc, ySrc);
 
-            ::image_pointer pimage = pgraphicsSrc->m_pimageimplDraw2dGraphics;
+            ::image_pointer pimage = pgraphicsSrc->m_pimage;
 
 
             if(xSrc < 0)
@@ -1278,9 +1278,9 @@ namespace draw2d_gdi
             if(size.cy < 0)
                return true;
 
-            int xEnd = min(size.cx, min(pimage->width() - pointSrc.x, m_pimageimplDraw2dGraphics->width() - pointDst->x));
+            int xEnd = min(size.cx, min(pimage->width() - pointSrc.x, m_pimage->width() - pointDst->x));
 
-            int yEnd = min(size.cy, min(pimage->height() - pointSrc.y, m_pimageimplDraw2dGraphics->height() - pointDst->y));
+            int yEnd = min(size.cy, min(pimage->height() - pointSrc.y, m_pimage->height() - pointDst->y));
 
             if(xEnd < 0)
                return false;
@@ -1297,7 +1297,7 @@ namespace draw2d_gdi
             if(pimage->is_ok())
                return false;
 
-            pimage->from(::point(), pgraphicsSrc->m_pimageimplDraw2dGraphics, ::point(xSrc, ySrc), size);
+            pimage->from(::point(), pgraphicsSrc->m_pimage, ::point(xSrc, ySrc), size);
 
 
             BLENDFUNCTION bf;
@@ -1306,15 +1306,15 @@ namespace draw2d_gdi
             bf.SourceConstantAlpha = 0xFF;
             bf.AlphaFormat = AC_SRC_ALPHA;
             /*
-            COLORREF * pcolorref = GDI_GRAPHICS(pgraphicsSrc)->m_pimageimplDraw2dGraphics->m_pcolorref;
-            i32 cx = GDI_GRAPHICS(pgraphicsSrc)->m_pimageimplDraw2dGraphics->cx;
-            i32 cy = GDI_GRAPHICS(pgraphicsSrc)->m_pimageimplDraw2dGraphics->cy;
-            i32 scan = GDI_GRAPHICS(pgraphicsSrc)->m_pimageimplDraw2dGraphics->scan;
+            COLORREF * pcolorref = GDI_GRAPHICS(pgraphicsSrc)->m_pimage->m_pcolorref;
+            i32 cx = GDI_GRAPHICS(pgraphicsSrc)->m_pimage->cx;
+            i32 cy = GDI_GRAPHICS(pgraphicsSrc)->m_pimage->cy;
+            i32 scan = GDI_GRAPHICS(pgraphicsSrc)->m_pimage->scan;
 
-            COLORREF * pcolorref1 = m_pimageimplDraw2dGraphics->m_pcolorref;
-            i32 cx1 = m_pimageimplDraw2dGraphics->cx;
-            i32 cy1 = m_pimageimplDraw2dGraphics->cy;
-            i32 scan1 = m_pimageimplDraw2dGraphics->scan;
+            COLORREF * pcolorref1 = m_pimage->m_pcolorref;
+            i32 cx1 = m_pimage->cx;
+            i32 cy1 = m_pimage->cy;
+            i32 scan1 = m_pimage->scan;
 
             ::point point = GetViewportOrg();
             x += point.x;
@@ -1425,7 +1425,7 @@ namespace draw2d_gdi
          else
          {
 
-            m_pimageimplDraw2dGraphics->from(::point(x, y), GDI_GRAPHICS(pgraphicsSrc)->m_pimageimplDraw2dGraphics, ::point(), size(nWidth, nHeight));
+            m_pimage->from(::point(x, y), GDI_GRAPHICS(pgraphicsSrc)->m_pimage, ::point(), size(nWidth, nHeight));
 
             return true;
 
@@ -1447,7 +1447,7 @@ namespace draw2d_gdi
       if (get_handle1() == nullptr)
          return false;
 
-      if(m_pimageimplDraw2dGraphics->is_null())
+      if(m_pimage->is_null())
       {
 
          return ::StretchBlt(get_handle1(), x, y, nWidth, nHeight, GDI_HDC(pgraphicsSrc), xSrc, ySrc, nSrcWidth, nSrcHeight,  dwRop) != FALSE;
@@ -1466,7 +1466,7 @@ namespace draw2d_gdi
          if(pimage2->is_null())
             return false;
 
-         pimage2->from(::point(), pgraphicsSrc->m_pimageimplDraw2dGraphics, ::point(xSrc, ySrc), pimage2->size());
+         pimage2->from(::point(), pgraphicsSrc->m_pimage, ::point(xSrc, ySrc), pimage2->size());
 
 
          //   ::StretchDIBits(
@@ -1586,7 +1586,7 @@ namespace draw2d_gdi
 
       select_font();
 
-      if(m_pimageimplDraw2dGraphics->is_null())
+      if(m_pimage->is_null())
       {
 
          ::SetBkMode(m_hdc, TRANSPARENT);
@@ -1642,7 +1642,7 @@ namespace draw2d_gdi
 
          ::point point = GetViewportOrg();
 
-         GDI_DIB(pimage.m_p)->process_blend(&brush, (int) x + point.x, (int) y + point.y, m_ealphamode, m_pimageimplDraw2dGraphics);
+         GDI_DIB(pimage.m_p)->process_blend(&brush, (int) x + point.x, (int) y + point.y, m_ealphamode, m_pimage);
 
          if(m_ealphamode == ::draw2d::alpha_mode_blend)
          {
@@ -1723,7 +1723,7 @@ namespace draw2d_gdi
    }
 
 
-   bool graphics::draw_text(const char * lpszString, strsize nCount, const ::rect & rect, UINT nFormat)
+   bool graphics::draw_text(const char * lpszString, strsize nCount, const ::rect & rect, const ::e_align & ealign, const ::e_draw_text & edrawtext)
    {
 
       return _DrawText(lpszString, nCount, rect, nFormat);
@@ -1731,7 +1731,7 @@ namespace draw2d_gdi
    }
 
 
-   bool graphics::draw_text(const string & str,const ::rect & rect,UINT nFormat)
+   bool graphics::draw_text(const string & str,const ::rect & rect, const ::e_align & ealign, const ::e_draw_text & edrawtext)
    {
 
       return draw_text(str, (int) str.get_length(), rect, nFormat);
@@ -1739,7 +1739,7 @@ namespace draw2d_gdi
    }
 
 
-   bool graphics::draw_text_ex(const char * lpszString,strsize nCount,const ::rect & rect,UINT nFormat,LPDRAWTEXTPARAMS lpDTParams)
+   bool graphics::draw_text_ex(const char * lpszString,strsize nCount,const ::rect & rect, const ::e_align & ealign, const ::e_draw_text & edrawtext,LPDRAWTEXTPARAMS lpDTParams)
    {
 
       wstring wstr(string(lpszString, nCount));
@@ -1749,7 +1749,7 @@ namespace draw2d_gdi
    }
 
 
-   bool graphics::draw_text_ex(const string & str,const ::rect & rect,UINT nFormat,LPDRAWTEXTPARAMS lpDTParams)
+   bool graphics::draw_text_ex(const string & str,const ::rect & rect, const ::e_align & ealign, const ::e_draw_text & edrawtext,LPDRAWTEXTPARAMS lpDTParams)
    {
 
       return draw_text_ex((char *) (const char *) str, (int) str.get_length(), rect, nFormat, lpDTParams);
@@ -2066,7 +2066,7 @@ namespace draw2d_gdi
    }
 
 
-   u32 graphics::GetGlyphOutline(UINT nChar, UINT nFormat, LPGLYPHMETRICS lpgm,
+   u32 graphics::GetGlyphOutline(UINT nChar, const ::e_align & ealign, const ::e_draw_text & edrawtext, LPGLYPHMETRICS lpgm,
                                       u32 cbBuffer, LPVOID lpBuffer, const MAT2* lpmat2)
    {
       ASSERT(get_handle2() != nullptr); return ::GetGlyphOutline(get_handle2(), nChar, nFormat,
@@ -2460,7 +2460,7 @@ namespace draw2d_gdi
 
       ::draw2d::brush & brush = get_current_brush();
 
-      if(m_pimageimplDraw2dGraphics->is_null())
+      if(m_pimage->is_null())
       {
 
       set(m_sppath);
@@ -2615,7 +2615,7 @@ namespace draw2d_gdi
       if(brush.m_etype == ::draw2d::brush::type_null)
          return true;
 
-      if(m_pimageimplDraw2dGraphics->is_null())
+      if(m_pimage->is_null())
       {
 
          (this->*pfnInternalSetPath)(pparam);
@@ -2654,7 +2654,7 @@ namespace draw2d_gdi
 
          ::FillPath((HDC) pimage->g()->get_os_data());
 
-         GDI_DIB(pimage.m_p)->process_blend(&brush, rect.left, rect.top, m_ealphamode, m_pimageimplDraw2dGraphics);
+         GDI_DIB(pimage.m_p)->process_blend(&brush, rect.left, rect.top, m_ealphamode, m_pimage);
 
          if(m_ealphamode == ::draw2d::alpha_mode_blend)
          {
@@ -2778,7 +2778,7 @@ namespace draw2d_gdi
       if(pen.m_etype == ::draw2d::pen::type_null)
          return true;
 
-      if(m_pimageimplDraw2dGraphics->is_null())
+      if(m_pimage->is_null())
       {
 
          (this->*pfnInternalSetPath)(pparam);
@@ -2822,7 +2822,7 @@ namespace draw2d_gdi
 
          ::StrokePath(GDI_HDC(pimage->g()));
 
-         GDI_DIB(pimage.m_p)->process_blend(&pen, rect.left, rect.top, m_ealphamode, m_pimageimplDraw2dGraphics);
+         GDI_DIB(pimage.m_p)->process_blend(&pen, rect.left, rect.top, m_ealphamode, m_pimage);
 
          if(m_ealphamode == ::draw2d::alpha_mode_blend)
          {
@@ -2857,7 +2857,7 @@ namespace draw2d_gdi
       if(brush.m_etype == ::draw2d::brush::type_null)
          return internal_stroke_path(pfnInternalSetPath, pparam, rectParam, ppen);
 
-      if(m_pimageimplDraw2dGraphics->is_null())
+      if(m_pimage->is_null())
       {
 
          (this->*pfnInternalSetPath)(pparam);
@@ -2899,7 +2899,7 @@ namespace draw2d_gdi
 
             ::FillPath((HDC) pimage->g()->get_os_data());
 
-            if(GDI_DIB(pimage.m_p)->process_blend(&brush, rect.left, rect.top, m_ealphamode, m_pimageimplDraw2dGraphics))
+            if(GDI_DIB(pimage.m_p)->process_blend(&brush, rect.left, rect.top, m_ealphamode, m_pimage))
             {
 
                if(m_ealphamode == ::draw2d::alpha_mode_blend)
@@ -2914,7 +2914,7 @@ namespace draw2d_gdi
                else
                {
 
-               m_pimageimplDraw2dGraphics->from_ignore_alpha(rect->top_left() + GetViewportOrg(), pimage, ::point(), rect->size());
+               m_pimage->from_ignore_alpha(rect->top_left() + GetViewportOrg(), pimage, ::point(), rect->size());
 
                }
                */
@@ -2939,7 +2939,7 @@ namespace draw2d_gdi
 
             ::StrokePath(GDI_HDC(pimage->g()));
 
-            if(GDI_DIB(pimage.m_p)->process_blend(&pen, rect.left, rect.top, m_ealphamode, m_pimageimplDraw2dGraphics))
+            if(GDI_DIB(pimage.m_p)->process_blend(&pen, rect.left, rect.top, m_ealphamode, m_pimage))
             {
 
                if(m_ealphamode == ::draw2d::alpha_mode_blend)
@@ -2954,7 +2954,7 @@ namespace draw2d_gdi
                else
                {
 
-               m_pimageimplDraw2dGraphics->from_ignore_alpha(rect->top_left() + GetViewportOrg(), pimage, ::point(), rect->size());
+               m_pimage->from_ignore_alpha(rect->top_left() + GetViewportOrg(), pimage, ::point(), rect->size());
 
                }
                */
@@ -3613,7 +3613,7 @@ namespace draw2d_gdi
 
       sync_lock ml(mutex());
 
-      if(m_pimageimplDraw2dGraphics->is_null())
+      if(m_pimage->is_null())
       {
 
          ::SetBkColor(get_handle1(), cr);
@@ -3626,7 +3626,7 @@ namespace draw2d_gdi
 
          ::point point = GetViewportOrg();
 
-         m_pimageimplDraw2dGraphics->fill_rect(rect, ARGB(255, colorref_get_r_value(cr), colorref_get_g_value(cr), colorref_get_b_value(cr)));
+         m_pimage->fill_rect(rect, ARGB(255, colorref_get_r_value(cr), colorref_get_g_value(cr), colorref_get_b_value(cr)));
 
       }
       else

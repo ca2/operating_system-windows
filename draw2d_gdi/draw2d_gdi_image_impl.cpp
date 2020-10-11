@@ -128,7 +128,7 @@ namespace draw2d_gdi
 
       m_spgraphics->CreateCompatibleDC(nullptr);
 
-      m_spgraphics->m_pimageimplDraw2dGraphics = this;
+      m_spgraphics->m_pimage = this;
 
       m_hbitmapOriginal = (HBITMAP) m_spgraphics->get_os_data_ex(::draw2d_gdi::graphics::data_bitmap);
 
@@ -3032,7 +3032,7 @@ namespace draw2d_gdi
 
       }
 
-      if(ppen->m_etype == ::draw2d::pen::type_solid)
+      if(ppen->m_etype == ::draw2d::e_pen_solid)
       {
 
          process_blend(ppen->m_color, x, y, ealphamode, pimpl);
@@ -3058,7 +3058,7 @@ namespace draw2d_gdi
 
       }
 
-      if(ppen->m_etype == ::draw2d::pen::type_solid)
+      if(ppen->m_etype == ::draw2d::e_pen_solid)
       {
 
          GDI_PEN(ppen)->m_bProcess = true;

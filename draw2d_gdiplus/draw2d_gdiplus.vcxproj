@@ -1159,7 +1159,6 @@
     <ClInclude Include="brush.h" />
     <ClInclude Include="printer.h" />
     <ClInclude Include="_.h" />
-    <ClInclude Include="factory_exchange.h" />
     <ClInclude Include="font.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="graphics.h" />

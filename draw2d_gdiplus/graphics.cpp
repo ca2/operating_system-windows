@@ -1523,10 +1523,10 @@ namespace draw2d_gdiplus
          //if (!bAvoidProcFork
          //      &&
          //      bThreadToolsForIncreasedFps &&
-         //      pgraphicsSrc->m_pimageimplDraw2dGraphics->is_ok()
-         //      && m_pimageimplDraw2dGraphics->is_ok()
-         //      && pgraphicsSrc->m_pimageimplDraw2dGraphics->m_bMapped
-         //      && m_pimageimplDraw2dGraphics->m_bMapped)
+         //      pgraphicsSrc->m_pimage->is_ok()
+         //      && m_pimage->is_ok()
+         //      && pgraphicsSrc->m_pimage->m_bMapped
+         //      && m_pimage->m_bMapped)
          //{
 
          //   if (m_ealphamode == ::draw2d::alpha_mode_blend)
@@ -1535,7 +1535,7 @@ namespace draw2d_gdiplus
          //      //single_lock sl(::get_thread_toolset(::thread::tool_draw2d)->mutex());
 
          //      if (nHeight >= get_processor_count() * 4 && (nWidth * nHeight) >= (get_processor_count() * 64)
-         //            &&   m_pimageimplDraw2dGraphics->fork_blend(point(x + GetViewportOrg().x, y + GetViewportOrg().y), pgraphicsSrc->m_pimageimplDraw2dGraphics,
+         //            &&   m_pimage->fork_blend(point(x + GetViewportOrg().x, y + GetViewportOrg().y), pgraphicsSrc->m_pimage,
          //                  point(xSrc + pgraphicsSrc->GetViewportOrg().x, ySrc + pgraphicsSrc->GetViewportOrg().y),
          //                  size(nWidth, nHeight)))
          //      {
@@ -1552,7 +1552,7 @@ namespace draw2d_gdiplus
          //      }
          //      //else
          //      //{
-         //      //   m_pimageimplDraw2dGraphics->blend(point(x + GetViewportOrg().x, y + GetViewportOrg().y), pgraphicsSrc->m_pimageimplDraw2dGraphics,
+         //      //   m_pimage->blend(point(x + GetViewportOrg().x, y + GetViewportOrg().y), pgraphicsSrc->m_pimage,
          //      //                                     point(xSrc + pgraphicsSrc->GetViewportOrg().x, ySrc + pgraphicsSrc->GetViewportOrg().y),
          //      //                                     size(nWidth, nHeight));
 
@@ -1561,7 +1561,7 @@ namespace draw2d_gdiplus
          //   //else
          //   //{
 
-         //   //   m_pimageimplDraw2dGraphics->from(point(x + GetViewportOrg().x, y + GetViewportOrg().y), pgraphicsSrc->m_pimageimplDraw2dGraphics,
+         //   //   m_pimage->from(point(x + GetViewportOrg().x, y + GetViewportOrg().y), pgraphicsSrc->m_pimage,
          //   //                                    point(xSrc + pgraphicsSrc->GetViewportOrg().x, ySrc + pgraphicsSrc->GetViewportOrg().y),
          //   //                                    size(nWidth, nHeight));
 
@@ -1572,14 +1572,14 @@ namespace draw2d_gdiplus
 
          Gdiplus::Bitmap * pbitmap = (Gdiplus::Bitmap *) pgraphicsSrc->get_current_bitmap()->get_os_data();
 
-         if (pgraphicsSrc->m_pimageimplDraw2dGraphics->is_ok() && pgraphicsSrc->m_pimageimplDraw2dGraphics->m_bColorMatrix)
+         if (pgraphicsSrc->m_pimage->is_ok() && pgraphicsSrc->m_pimage->m_bColorMatrix)
          {
 
             Gdiplus::ImageAttributes imageattributes;
 
             Gdiplus::ColorMatrix colormatrix;
 
-            copy_color_matrix(colormatrix.m, pgraphicsSrc->m_pimageimplDraw2dGraphics->m_colormatrix.a);
+            copy_color_matrix(colormatrix.m, pgraphicsSrc->m_pimage->m_colormatrix.a);
 
             imageattributes.SetColorMatrix(
             &colormatrix,
@@ -1677,12 +1677,12 @@ gdi_fallback:
 
       Gdiplus::Status ret = Gdiplus::Status::GenericError;
 
-      if (pgraphicsSrc->m_pimageimplDraw2dGraphics->is_ok())
+      if (pgraphicsSrc->m_pimage->is_ok())
       {
 
-         if (pgraphicsSrc->m_pimageimplDraw2dGraphics->m_emipmap == ::draw2d::mipmap_anisotropic
-               && (pgraphicsSrc->m_pimageimplDraw2dGraphics->width() == nSrcWidth
-                   && pgraphicsSrc->m_pimageimplDraw2dGraphics->height() == nSrcHeight
+         if (pgraphicsSrc->m_pimage->m_emipmap == ::draw2d::mipmap_anisotropic
+               && (pgraphicsSrc->m_pimage->width() == nSrcWidth
+                   && pgraphicsSrc->m_pimage->height() == nSrcHeight
                    && xSrc == 0 && ySrc == 0 && nDstWidth > 0 && nDstHeight > 0))
          {
 
@@ -1698,7 +1698,7 @@ gdi_fallback:
                int cxFound;
                int cyFound;
 
-               for (index i = 0; i < pgraphicsSrc->m_pimageimplDraw2dGraphics->get_image_count(); i++)
+               for (index i = 0; i < pgraphicsSrc->m_pimage->get_image_count(); i++)
                {
 
                   int x1 = 0;
@@ -1767,7 +1767,7 @@ gdi_fallback:
                if (iFind >= 0)
                {
 
-                  ::image_pointer pimage = pgraphicsSrc->m_pimageimplDraw2dGraphics->get_image(iFind);
+                  ::image_pointer pimage = pgraphicsSrc->m_pimage->get_image(iFind);
 
                   auto emode = m_pgraphics->GetInterpolationMode();
 
@@ -1811,14 +1811,14 @@ gdi_fallback:
 
          Gdiplus::Bitmap * pbitmap = (Gdiplus::Bitmap *) pgraphicsSrc->get_current_bitmap()->get_os_data();
 
-         if (pgraphicsSrc->m_pimageimplDraw2dGraphics->is_ok() && pgraphicsSrc->m_pimageimplDraw2dGraphics->m_bColorMatrix)
+         if (pgraphicsSrc->m_pimage->is_ok() && pgraphicsSrc->m_pimage->m_bColorMatrix)
          {
 
             Gdiplus::ImageAttributes imageattributes;
 
             Gdiplus::ColorMatrix colormatrix;
 
-            copy_color_matrix(colormatrix.m, pgraphicsSrc->m_pimageimplDraw2dGraphics->m_colormatrix.a);
+            copy_color_matrix(colormatrix.m, pgraphicsSrc->m_pimage->m_colormatrix.a);
 
             imageattributes.SetColorMatrix(
             &colormatrix,
@@ -1876,12 +1876,12 @@ gdi_fallback:
 
       Gdiplus::Status ret = Gdiplus::Status::GenericError;
 
-      if (pgraphicsSrc->m_pimageimplDraw2dGraphics->is_ok())
+      if (pgraphicsSrc->m_pimage->is_ok())
       {
 
-         if (pgraphicsSrc->m_pimageimplDraw2dGraphics->m_emipmap == ::draw2d::mipmap_anisotropic
-               && (pgraphicsSrc->m_pimageimplDraw2dGraphics->width() == nSrcWidth
-                   && pgraphicsSrc->m_pimageimplDraw2dGraphics->height() == nSrcHeight
+         if (pgraphicsSrc->m_pimage->m_emipmap == ::draw2d::mipmap_anisotropic
+               && (pgraphicsSrc->m_pimage->width() == nSrcWidth
+                   && pgraphicsSrc->m_pimage->height() == nSrcHeight
                    && xSrc == 0 && ySrc == 0 && nDstWidth > 0 && nDstHeight > 0))
          {
 
@@ -1926,9 +1926,9 @@ gdi_fallback:
                   y2 = 0;
                }*/
 
-               //::image_pointer pimage = m_pimageimplDraw2dGraphics;
+               //::image_pointer pimage = m_pimage;
                //int iScan = pimage->m_iScan;
-               //::image_pointer pimageMipmap = pgraphicsSrc->m_pimageimplDraw2dGraphics;
+               //::image_pointer pimageMipmap = pgraphicsSrc->m_pimage;
                //COLORREF * pcrMipmap = imageMipmap.m_pcolorref;
                //int iMimapScan = imageMipmap.m_iScan;
                //size sizeMipmap = imageMipmap.m_size;
@@ -1952,7 +1952,7 @@ gdi_fallback:
                int cxFound;
                int cyFound;
 
-               for (index i = 0; i < pgraphicsSrc->m_pimageimplDraw2dGraphics->get_image_count(); i++)
+               for (index i = 0; i < pgraphicsSrc->m_pimage->get_image_count(); i++)
                {
 
                   int x1 = 0;
@@ -2021,7 +2021,7 @@ gdi_fallback:
                if (iFind >= 0)
                {
 
-                  ::image_pointer pimage = pgraphicsSrc->m_pimageimplDraw2dGraphics->get_image(iFind);
+                  ::image_pointer pimage = pgraphicsSrc->m_pimage->get_image(iFind);
 
                   auto emode = m_pgraphics->GetInterpolationMode();
 
@@ -2075,14 +2075,14 @@ gdi_fallback:
 
          //}
 
-         if (pgraphicsSrc->m_pimageimplDraw2dGraphics->is_ok() && pgraphicsSrc->m_pimageimplDraw2dGraphics->m_bColorMatrix)
+         if (pgraphicsSrc->m_pimage->is_ok() && pgraphicsSrc->m_pimage->m_bColorMatrix)
          {
 
             Gdiplus::ImageAttributes imageattributes;
 
             Gdiplus::ColorMatrix colormatrix;
 
-            copy_color_matrix(colormatrix.m, pgraphicsSrc->m_pimageimplDraw2dGraphics->m_colormatrix.a);
+            copy_color_matrix(colormatrix.m, pgraphicsSrc->m_pimage->m_colormatrix.a);
 
             imageattributes.SetColorMatrix(
             &colormatrix,
@@ -2163,12 +2163,12 @@ gdi_fallback:
    ::color graphics::SetPixel(const ::point & point, const ::color & color)
    {
 
-      if (m_pimageimplDraw2dGraphics->is_ok())
+      if (m_pimage->is_ok())
       {
 
-         m_pimageimplDraw2dGraphics->map();
+         m_pimage->map();
 
-         m_pimageimplDraw2dGraphics->colorref()[point.x + point.y * m_pimageimplDraw2dGraphics->scan_size()] = color;
+         m_pimage->colorref()[point.x + point.y * m_pimage->scan_size()] = color;
 
       }
       else
@@ -2186,18 +2186,18 @@ gdi_fallback:
    ::color graphics::blend_pixel(const ::point& point, const ::color& colorChange)
    {
 
-      if (m_pimageimplDraw2dGraphics->is_ok())
+      if (m_pimage->is_ok())
       {
 
-         m_pimageimplDraw2dGraphics->map();
+         m_pimage->map();
 
-         ::color color = m_pimageimplDraw2dGraphics->colorref()[point.x + point.y * m_pimageimplDraw2dGraphics->scan_size()];
+         ::color color = m_pimage->colorref()[point.x + point.y * m_pimage->scan_size()];
 
          color.m_iR = (int) (color.m_iR * (1.0 - colorChange.da()) + colorChange.m_iR * colorChange.da());
          color.m_iG = (int) (color.m_iG * (1.0 - colorChange.da()) + colorChange.m_iG * colorChange.da());
          color.m_iB = (int) (color.m_iB * (1.0 - colorChange.da()) + colorChange.m_iB * colorChange.da());
 
-         m_pimageimplDraw2dGraphics->colorref()[point.x + point.y * m_pimageimplDraw2dGraphics->scan_size()] = color;
+         m_pimage->colorref()[point.x + point.y * m_pimage->scan_size()] = color;
          //colorCurrent.m_iA = colorCurrent.m_iA * (1.0 - color.da()) + color.m_iR * color.da();
 
       }
@@ -2683,7 +2683,7 @@ gdi_fallback:
 
    //   return -1;
    //}
-   //u32 graphics::GetGlyphOutline(UINT nChar, UINT nFormat, LPGLYPHMETRICS pgm,
+   //u32 graphics::GetGlyphOutline(UINT nChar, const ::e_align & ealign, const ::e_draw_text & edrawtext, LPGLYPHMETRICS pgm,
 
    //                              u32 cbBuffer, LPVOID pBuffer, const MAT2* lpmat2)
 
@@ -3286,7 +3286,7 @@ gdi_fallback:
       //      if (nDestHeight >= cProcessor * 4 && (nDestWidth * nDestHeight) >= (cProcessor * 64))
       //      {
 
-      //         m_pimageimplDraw2dGraphics->fork_blend(point(xDest + GetViewportOrg().x, yDest + GetViewportOrg().y), pgraphicsSrc->m_pimageimplDraw2dGraphics,
+      //         m_pimage->fork_blend(point(xDest + GetViewportOrg().x, yDest + GetViewportOrg().y), pgraphicsSrc->m_pimage,
       //                                                point(xSrc + pgraphicsSrc->GetViewportOrg().x, ySrc + pgraphicsSrc->GetViewportOrg().y),
       //                                                size(nSrcWidth, nDestHeight), (byte)(dRate * 255.0f));
 
@@ -3301,7 +3301,7 @@ gdi_fallback:
       //      else
       //      {
 
-      //         m_pimageimplDraw2dGraphics->blend(point(xDest + GetViewportOrg().x, yDest + GetViewportOrg().y), pgraphicsSrc->m_pimageimplDraw2dGraphics,
+      //         m_pimage->blend(point(xDest + GetViewportOrg().x, yDest + GetViewportOrg().y), pgraphicsSrc->m_pimage,
       //                                           point(xSrc+pgraphicsSrc->GetViewportOrg().x, ySrc + pgraphicsSrc->GetViewportOrg().y),
       //                                           size(nSrcWidth, nDestHeight), (byte)(dRate * 255.0f));
 
@@ -3311,7 +3311,7 @@ gdi_fallback:
       //   else
       //   {
 
-      //      m_pimageimplDraw2dGraphics->from(point(xDest + GetViewportOrg().x, yDest + GetViewportOrg().y), pgraphicsSrc->m_pimageimplDraw2dGraphics,
+      //      m_pimage->from(point(xDest + GetViewportOrg().x, yDest + GetViewportOrg().y), pgraphicsSrc->m_pimage,
       //                                       point(xSrc + pgraphicsSrc->GetViewportOrg().x, ySrc + pgraphicsSrc->GetViewportOrg().y),
       //                                       size(nSrcWidth, nDestHeight), (byte) (dRate * 255.0f));
 
@@ -3328,10 +3328,10 @@ gdi_fallback:
 
       Gdiplus::ColorMatrix colormatrix;
 
-      if (pgraphicsSrc->m_pimageimplDraw2dGraphics->is_ok() && pgraphicsSrc->m_pimageimplDraw2dGraphics->m_bColorMatrix)
+      if (pgraphicsSrc->m_pimage->is_ok() && pgraphicsSrc->m_pimage->m_bColorMatrix)
       {
 
-         copy_color_matrix(colormatrix.m, pgraphicsSrc->m_pimageimplDraw2dGraphics->m_colormatrix.a);
+         copy_color_matrix(colormatrix.m, pgraphicsSrc->m_pimage->m_colormatrix.a);
 
       }
       else
@@ -4882,9 +4882,9 @@ gdi_fallback:
       auto copy = [this](Gdiplus::PointF* p2, const POINTD* p1)
       {
 
-         p2->X = p1->x + m_pointAddShapeTranslate.x;
+         p2->X = (Gdiplus::REAL) (p1->x + m_pointAddShapeTranslate.x);
 
-         p2->Y = p1->y + m_pointAddShapeTranslate.y;
+         p2->Y = (Gdiplus::REAL) (p1->y + m_pointAddShapeTranslate.y);
 
       };
 
@@ -5511,7 +5511,7 @@ gdi_fallback:
    }
 
 
-   bool graphics::_001DrawText(const string & str, rectd & rectParam, UINT nFormat, bool bMeasure)
+   bool graphics::_001DrawText(const string & str, rectd & rectParam, const ::e_align & ealign, const ::e_draw_text & edrawtext, bool bMeasure)
    {
 
       if (::is_null(m_pgraphics))
@@ -5546,39 +5546,39 @@ gdi_fallback:
 
       }
 
-      return gdiplus_draw_text(this, nullptr, str, rectParam, nFormat, m_pfont, m_pfont->m_dFontWidth, m_pbrush, bMeasure) == Gdiplus::Status::Ok;
+      return gdiplus_draw_text(this, nullptr, str, rectParam, ealign, edrawtext, m_pfont, m_pfont->m_dFontWidth, m_pbrush, bMeasure) == Gdiplus::Status::Ok;
 
    }
 
 
-   bool graphics::draw_text_ex(const char * pszString,strsize nCount,const rect & rectParam,UINT nFormat,LPDRAWTEXTPARAMS lpDTParams)
-   {
+   //bool graphics::draw_text_ex(const char * pszString,strsize nCount,const rect & rectParam, const ::e_align & ealign, const ::e_draw_text & edrawtext,LPDRAWTEXTPARAMS lpDTParams)
+   //{
 
-      if (::is_null(m_pgraphics))
-      {
+   //   if (::is_null(m_pgraphics))
+   //   {
 
-         return false;
+   //      return false;
 
-      }
+   //   }
 
-      //if(get_handle1() == nullptr)
-      //   return -1;
+   //   //if(get_handle1() == nullptr)
+   //   //   return -1;
 
-      // these flags would modify the string
-      //ASSERT((nFormat & (DT_END_ELLIPSIS | DT_MODIFYSTRING)) != (DT_END_ELLIPSIS | DT_MODIFYSTRING));
-      //ASSERT((nFormat & (DT_PATH_ELLIPSIS | DT_MODIFYSTRING)) != (DT_PATH_ELLIPSIS | DT_MODIFYSTRING));
-      //wstring text.m_wstr = ::str::international::utf8_to_unicode(string(pszString, nCount));
+   //   // these flags would modify the string
+   //   //ASSERT((nFormat & (DT_END_ELLIPSIS | DT_MODIFYSTRING)) != (DT_END_ELLIPSIS | DT_MODIFYSTRING));
+   //   //ASSERT((nFormat & (DT_PATH_ELLIPSIS | DT_MODIFYSTRING)) != (DT_PATH_ELLIPSIS | DT_MODIFYSTRING));
+   //   //wstring text.m_wstr = ::str::international::utf8_to_unicode(string(pszString, nCount));
 
-      //return ::DrawTextExW(get_handle1(),const_cast<wchar_t *>((const wchar_t *)text.m_wstr),(i32)wcslen(text.m_wstr),(RECT *) &rectParam,nFormat,pDTParams);
+   //   //return ::DrawTextExW(get_handle1(),const_cast<wchar_t *>((const wchar_t *)text.m_wstr),(i32)wcslen(text.m_wstr),(RECT *) &rectParam,nFormat,pDTParams);
 
-      __throw(not_implemented());
+   //   __throw(not_implemented());
 
-      return false;
+   //   return false;
 
-   }
+   //}
 
 
-   bool graphics::draw_text_ex(const string & str,const rect & rectParam,UINT nFormat,LPDRAWTEXTPARAMS pDTParams)
+   bool graphics::draw_text_ex(const string & str,const rect & rectParam, const ::e_align & ealign, const ::e_draw_text & edrawtext,LPDRAWTEXTPARAMS pDTParams)
    {
 
       if (::is_null(m_pgraphics))
@@ -5600,7 +5600,22 @@ gdi_fallback:
    }
 
 
-   bool graphics::draw_text_ex(const char * pszString,strsize nCount,const ::rectd & rectParam,UINT nFormat,LPDRAWTEXTPARAMS lpDTParams)
+   //bool graphics::draw_text_ex(const char * pszString,strsize nCount,const ::rectd & rectParam, const ::e_align & ealign, const ::e_draw_text & edrawtext,LPDRAWTEXTPARAMS lpDTParams)
+   //{
+
+   //   if (::is_null(m_pgraphics))
+   //   {
+
+   //      return false;
+
+   //   }
+
+   //   return ::draw2d::graphics::draw_text_ex(pszString,nCount,rectParam,nFormat,lpDTParams);
+
+   //}
+
+
+   bool graphics::draw_text_ex(const string& str, const ::rectd &rectParam, const ::e_align & ealign, const ::e_draw_text & edrawtext, LPDRAWTEXTPARAMS pDTParams)
    {
 
       if (::is_null(m_pgraphics))
@@ -5610,22 +5625,7 @@ gdi_fallback:
 
       }
 
-      return ::draw2d::graphics::draw_text_ex(pszString,nCount,rectParam,nFormat,lpDTParams);
-
-   }
-
-
-   bool graphics::draw_text_ex(const string& str, const ::rectd &rectParam, UINT nFormat, LPDRAWTEXTPARAMS pDTParams)
-   {
-
-      if (::is_null(m_pgraphics))
-      {
-
-         return false;
-
-      }
-
-      return ::draw2d::graphics::draw_text_ex(str,rectParam,nFormat,pDTParams);
+      return ::draw2d::graphics::draw_text_ex(str,rectParam,ealign, edrawtext,pDTParams);
 
    }
 
@@ -5657,7 +5657,7 @@ gdi_fallback:
    //   for (int iLen : iaLen)
    //   {
 
-   //      sizea.add(GetTextExtent(str, str.get_length(), iLen));
+   //      sizea.add(GetTextExtent(str, iLen));
 
    //   }
 
@@ -6052,7 +6052,7 @@ gdi_fallback:
    //   //if(!GetTextExtent(size, str, (i32) str.get_length(), (i32) str.get_length()))
    //   //   return const ::size & size(0, 0);
 
-   //   return GetTextExtent(str, str.get_length());
+   //   return GetTextExtent(str);
 
    //   //return const ::size & size(0, 0);
 
@@ -6649,7 +6649,7 @@ gdi_fallback:
 
          //m_ppen->get_os_data < Pen * >(this)->SetAlignment(Gdiplus::PenAlignment::PenAlignmentCenter);
 
-         m_ppen->m_ealign = ::draw2d::pen::align_center;
+         m_ppen->m_epenalign = ::draw2d::e_pen_align_center;
 
          m_ppen->set_modified();
 
@@ -7414,7 +7414,7 @@ gdi_fallback:
 
             // The following commented out code does not work well when there is clipping
             // and some calculations are not precise
-            //if (m_pimageimplDraw2dGraphics != nullptr && pgraphicsSrc->m_pimageimplDraw2dGraphics != nullptr)
+            //if (m_pimage != nullptr && pgraphicsSrc->m_pimage != nullptr)
             //{
 
             //   const ::point & pointOff = GetViewportOrg();
@@ -7423,7 +7423,7 @@ gdi_fallback:
 
             //   y += pointOff.y;
 
-            //   return m_pimageimplDraw2dGraphics->blend(::point(x, y), pgraphicsSrc->m_pimageimplDraw2dGraphics, ::point(xSrc, ySrc), m_pimageAlphaBlend, point(m_pointAlphaBlend.x - x, m_pointAlphaBlend.y - y), rectBlt.size());
+            //   return m_pimage->blend(::point(x, y), pgraphicsSrc->m_pimage, ::point(xSrc, ySrc), m_pimageAlphaBlend, point(m_pointAlphaBlend.x - x, m_pointAlphaBlend.y - y), rectBlt.size());
 
             //}
             //else
