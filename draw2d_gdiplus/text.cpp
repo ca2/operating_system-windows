@@ -94,7 +94,7 @@
       format.SetAlignment(Gdiplus::StringAlignmentNear);
 
    }
-   else if (ealign & DT_RIGHT)
+   else if (ealign & e_align_right)
    {
 
       format.SetAlignment(Gdiplus::StringAlignmentFar);
