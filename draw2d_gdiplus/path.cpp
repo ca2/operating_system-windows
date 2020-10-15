@@ -564,7 +564,7 @@ namespace draw2d_gdiplus
 
       //}
 
-      bool bOk = internal_add_arc(rect,arc.m_angleBeg, arc.m_angleEnd);
+      bool bOk = internal_add_arc(rect,arc.m_angleBeg, arc.m_angleEnd2);
 
       return bOk;
 
