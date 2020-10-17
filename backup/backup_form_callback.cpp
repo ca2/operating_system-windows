@@ -31,8 +31,8 @@ namespace backup
          {
             auto pupdate = new_update();
             pupdate->m_actioncontext = ::source_system;
-            pupdate->m_id = id_browse;
-            pupdate->value(id_form) = "filemanager_add_location_lfs.xhtml";
+            paction->id() = id_browse;
+            paction->value(id_form) = "filemanager_add_location_lfs.xhtml";
             dynamic_cast < ::user::form_view * > (pview)->get_document()->update_all_views(pupdate);
             auto pinteraction = pview->get_child_by_name("lfs");
             
@@ -49,8 +49,8 @@ namespace backup
          {
             auto pupdate = new_update();
             pupdate->m_actioncontext = ::source_system;
-            pupdate->m_id = id_browse;
-            pupdate->value(id_form) = "filemanager_add_location_ftp.xhtml";
+            paction->id() = id_browse;
+            paction->value(id_form) = "filemanager_add_location_ftp.xhtml";
             dynamic_cast < ::user::form_view * > (pview)->get_document()->update_all_views(pupdate);
             pevent->Ret();
 

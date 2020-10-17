@@ -489,7 +489,7 @@ namespace draw2d_gdi
 
 
       bool set(::draw2d::path * ppath);
-      bool set(::draw2d::path::element & pelement);
+      bool set(::draw2d::path::matter & pmatter);
       bool set(::draw2d::path::line & pline);
       bool set(::draw2d::path::arc & parc);
       bool set(::draw2d::path::move & pmove);

@@ -53,7 +53,7 @@
  * but it had better be at least 16.
  */
 
-/* Representation of a single sample (pixel element value).
+/* Representation of a single sample (pixel matter value).
  * We frequently allocate large arrays of these, so it's important to keep
  * them small.  But if you have memory to burn and access to char or short
  * arrays is very slow on your hardware, you might want to change these.
@@ -402,10 +402,10 @@ typedef enum { FALSE = 0, TRUE = 1 } boolean;
  *    can't use color quantization if you change that value.
  */
 
-#define RGB_RED		0	/* Offset of Red in an RGB scanline element */
+#define RGB_RED		0	/* Offset of Red in an RGB scanline matter */
 #define RGB_GREEN	1	/* Offset of Green */
 #define RGB_BLUE	2	/* Offset of Blue */
-#define RGB_PIXELSIZE	3	/* JSAMPLEs per RGB scanline element */
+#define RGB_PIXELSIZE	3	/* JSAMPLEs per RGB scanline matter */
 
 
 /* Definitions for speed-related optimizations. */

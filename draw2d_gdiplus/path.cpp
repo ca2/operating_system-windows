@@ -366,7 +366,7 @@ namespace draw2d_gdiplus
 
       m_bHasPointInternal = false;
 
-      //if(m_elementa.get_count() != 1 && m_elementa[0].m_etype != element::type_string)
+      //if(m_elementa.get_count() != 1 && m_elementa[0].m_etype != matter::type_string)
       {
          //internal_begin_figure(m_bFill,m_efillmode);
       }

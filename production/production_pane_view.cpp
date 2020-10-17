@@ -53,10 +53,10 @@ namespace production
    }
 
 
-   void pane_view::update(::update * pupdate)
+   void pane_view::on_apply(::action * paction)
    {
 
-      ::user::tab_view::update(pupdate);
+      ::user::tab_view::on_apply(paction);
 
    }
 
@@ -193,14 +193,14 @@ namespace production
 
          auto pupdate = new_update();
          pupdate->m_actioncontext = ::source_system;
-         pupdate->m_id = id_browse;
-         pupdate->value(id_form) = "production\\options.xhtml";
+         paction->id() = id_browse;
+         paction->value(id_form) = "production\\options.xhtml";
          pdocument->update_all_views(pupdate);
 
-         pupdate->m_id = id_get_form_view;
+         paction->id() = id_get_form_view;
          pdocument->update_all_views(pupdate);
 
-         pupdate->m_id = id_after_browse;
+         paction->id() = id_after_browse;
          pdocument->update_all_views(pupdate);
 
 
@@ -260,8 +260,8 @@ namespace production
             __pointer(::user::interaction) pinteraction = m_pviewOptions->get_child_by_id("clean");
             __pointer(::user::check_box) pcheckbox =  (pinteraction);
             auto pupdate = new_update();
-            pupdate->m_id = id_clean;
-            pupdate->value(id_clean) = pcheckbox->echeck() == ::check_checked;
+            paction->id() = id_clean;
+            paction->value(id_clean) = pcheckbox->echeck() == ::check_checked;
             get_document()->update_all_views(pupdate);
          }
          else if(pevent->m_puie->m_id == "build")
@@ -269,8 +269,8 @@ namespace production
             __pointer(::user::interaction) pinteraction = m_pviewOptions->get_child_by_id("build");
             __pointer(::user::check_box) pcheckbox =  (pinteraction);
             auto pupdate = new_update();
-            pupdate->m_id = id_build;
-            pupdate->value(id_build) = pcheckbox->echeck() == ::check_checked;
+            paction->id() = id_build;
+            paction->value(id_build) = pcheckbox->echeck() == ::check_checked;
             get_document()->update_all_views(pupdate);
 
          }

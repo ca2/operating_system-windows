@@ -81,7 +81,7 @@ int scan2)
          H = line2[index2 + wscan2 + 1];
 
 
-         // trilinear interpolate blue element
+         // trilinear interpolate blue matter
          blue = (A & 0xff)*(1 - w_diff)*(1 - h_diff)*(1 - h3_diff) +
                 (B & 0xff)*(w_diff)*(1 - h_diff)*(1 - h3_diff) +
                 (C & 0xff)*(h_diff)*(1 - w_diff)*(1 - h3_diff) +
@@ -91,7 +91,7 @@ int scan2)
                 (G & 0xff)*(h2_diff)*(1 - w2_diff)*(h3_diff)+
                 (H & 0xff)*(w2_diff)*(h2_diff)*(h3_diff);
 
-         // trilinear interpolate green element
+         // trilinear interpolate green matter
          green = ((A >> 8) & 0xff)*(1 - w_diff)*(1 - h_diff)*(1 - h3_diff) +
                  ((B >> 8) & 0xff)*(w_diff)*(1 - h_diff)*(1 - h3_diff) +
                  ((C >> 8) & 0xff)*(h_diff)*(1 - w_diff)*(1 - h3_diff) +
@@ -101,7 +101,7 @@ int scan2)
                  ((G >> 8) & 0xff)*(h2_diff)*(1 - w2_diff)*(h3_diff)+
                  ((H >> 8) & 0xff)*(w2_diff)*(h2_diff)*(h3_diff);
 
-         // trilinear interpolate red element
+         // trilinear interpolate red matter
          red = ((A >> 16) & 0xff)*(1 - w_diff)*(1 - h_diff)*(1 - h3_diff) +
                ((B >> 16) & 0xff)*(w_diff)*(1 - h_diff)*(1 - h3_diff) +
                ((C >> 16) & 0xff)*(h_diff)*(1 - w_diff)*(1 - h3_diff) +
@@ -111,7 +111,7 @@ int scan2)
                ((G >> 16) & 0xff)*(h2_diff)*(1 - w2_diff)*(h3_diff)+
                ((H >> 16) & 0xff)*(w2_diff)*(h2_diff)*(h3_diff);
 
-         // trilinear interpolate alpha element
+         // trilinear interpolate alpha matter
          alpha = ((A >> 24) & 0xff)*(1 - w_diff)*(1 - h_diff)*(1 - h3_diff) +
                  ((B >> 24) & 0xff)*(w_diff)*(1 - h_diff)*(1 - h3_diff) +
                  ((C >> 24) & 0xff)*(h_diff)*(1 - w_diff)*(1 - h3_diff) +

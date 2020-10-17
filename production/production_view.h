@@ -82,11 +82,11 @@ namespace production
       virtual void _001OnTabClick(i32 iTab);
       virtual void install_message_routing(::channel * pchannel);
       virtual bool pre_create_window(::user::create_struct& cs);
-      virtual void update(::update * pupdate) override;
+      virtual void on_apply(::action * paction) override;
 
       ::user::document * get_document();
 
-      //virtual void update(::update * pupdate) override;
+      //virtual void on_apply(::action * paction) override;
       DECL_GEN_SIGNAL(_001OnLButtonDown);
       DECL_GEN_SIGNAL(_001OnLButtonUp);
       virtual void _001OnTimer(::timer * ptimer);

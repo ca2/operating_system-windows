@@ -29,7 +29,7 @@ namespace music
 
 
          class CLASS_DECL_MUSIC_MIDI_MMSYSTEM buffer :
-             virtual public element
+             virtual public matter
          {
          public:
 

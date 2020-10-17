@@ -53,10 +53,10 @@ namespace backup
    }
 
 
-   void pane_view::update(::update * pupdate)
+   void pane_view::on_apply(::action * paction)
    {
 
-      ::user::tab_view::update(pupdate);
+      ::user::tab_view::on_apply(paction);
 
    }
 
@@ -83,14 +83,14 @@ namespace backup
          __pointer(::user::impact) pview = pdocument->get_view();
          auto pupdate = new_update();
          pupdate->m_actioncontext = ::source_system;
-         pupdate->m_id = id_browse;
-         pupdate->value(id_form) = "filemanager\\replace_name_in_file_system.xhtml";
+         paction->id() = id_browse;
+         paction->value(id_form) = "filemanager\\replace_name_in_file_system.xhtml";
          pdocument->update_all_views(pupdate);
 
-         pupdate->m_id = id_get_form_view;
+         paction->id() = id_get_form_view;
          pdocument->update_all_views(pupdate);
 
-         pupdate->m_id = id_after_browse;
+         paction->id() = id_after_browse;
          pdocument->update_all_views(pupdate);
 
 

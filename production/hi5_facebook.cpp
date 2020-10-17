@@ -38,7 +38,7 @@ namespace hi5
    *
    *--*/
    facebook::facebook(__pointer(base_application) papp) :
-      element(papp),
+      matter(papp),
 
       /* Constants */
       TWIT_COLON(":"),

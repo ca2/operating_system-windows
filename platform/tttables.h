@@ -481,21 +481,21 @@ FT_BEGIN_HEADER
   /*                                                                       */
   /*    maxPoints             :: The maximum number of points in a         */
   /*                             non-reference TrueType glyph.  See also   */
-  /*                             the structure element                     */
+  /*                             the structure matter                     */
   /*                             `maxCompositePoints'.                     */
   /*                                                                       */
   /*    maxContours           :: The maximum number of contours in a       */
   /*                             non-reference TrueType glyph.  See also   */
-  /*                             the structure element                     */
+  /*                             the structure matter                     */
   /*                             `maxCompositeContours'.                   */
   /*                                                                       */
   /*    maxCompositePoints    :: The maximum number of points in a         */
   /*                             reference TrueType glyph.  See also the   */
-  /*                             structure element `maxPoints'.            */
+  /*                             structure matter `maxPoints'.            */
   /*                                                                       */
   /*    maxCompositeContours  :: The maximum number of contours in a       */
   /*                             reference TrueType glyph.  See also the   */
-  /*                             structure element `maxContours'.          */
+  /*                             structure matter `maxContours'.          */
   /*                                                                       */
   /*    maxZones              :: The maximum number of zones used for      */
   /*                             glyph hinting.                            */

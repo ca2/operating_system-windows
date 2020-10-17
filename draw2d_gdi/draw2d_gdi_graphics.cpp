@@ -4788,24 +4788,24 @@ namespace draw2d_gdi
    }
 
 
-   bool graphics::set(::draw2d::path::element & e)
+   bool graphics::set(::draw2d::path::matter & e)
    {
 
       switch(e.m_etype)
       {
-      case ::draw2d::path::element::type_arc:
+      case ::draw2d::path::matter::type_arc:
          set(e.u.m_arc);
          break;
-      case ::draw2d::path::element::type_line:
+      case ::draw2d::path::matter::type_line:
          set(e.u.m_line);
          break;
-      case ::draw2d::path::element::type_move:
+      case ::draw2d::path::matter::type_move:
          set(e.u.m_move);
          break;
-      case ::draw2d::path::element::type_string:
+      case ::draw2d::path::matter::type_string:
          set(e.m_stringpath);
          break;
-      case ::draw2d::path::element::type_end:
+      case ::draw2d::path::matter::type_end:
       {
 
          if(e.u.m_end.m_bClose)
@@ -4818,7 +4818,7 @@ namespace draw2d_gdi
       }
       break;
       default:
-         throw "unexpected simple os graphics element type";
+         throw "unexpected simple os graphics matter type";
       }
 
       return false;
