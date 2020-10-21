@@ -102,7 +102,7 @@ namespace production
       if(update == ::id_update_current_area)
       {
 
-         SetTimer(::timer_update_current_area, 100, nullptr);
+         SetTimer(::e_timer_update_current_area, 100, nullptr);
 
       }
       else if(paction->id() == id_clean)
@@ -454,25 +454,25 @@ namespace production
    void view::_001OnTimer(::timer * ptimer)
    {
       ::user::scroll_view::_001OnTimer(ptimer);
-      if(ptimer->m_nIDEvent == timer_update_current_area)
+      if(ptimer->m_uEvent == e_timer_update_current_area)
       {
          if(is_window_visible())
          {
             //set_need_redraw();
          }
       }
-      else if(ptimer->m_nIDEvent == ::timer_update_current_area)
+      else if(ptimer->m_uEvent == ::e_timer_update_current_area)
       {
-         KillTimer(ptimer->m_nIDEvent);
+         KillTimer(ptimer->m_uEvent);
       }
-      else if(ptimer->m_nIDEvent == 5432180)
+      else if(ptimer->m_uEvent == 5432180)
       {
-         KillTimer(ptimer->m_nIDEvent);
+         KillTimer(ptimer->m_uEvent);
       }
-      else if(ptimer->m_nIDEvent == 3003)
+      else if(ptimer->m_uEvent == 3003)
       {
       }
-      else if(ptimer->m_nIDEvent == 31)
+      else if(ptimer->m_uEvent == 31)
       {
          if(!m_pproduction->m_bFinished)
          {

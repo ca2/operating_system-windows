@@ -1516,9 +1516,9 @@ namespace draw2d_gdiplus
          }
 
 
-         //bool bThreadToolsForIncreasedFps = ::get_thread()== nullptr ? false : ::get_thread()->m_bThreadToolsForIncreasedFps;
+         //bool bThreadToolsForIncreasedFps = ::get_task()== nullptr ? false : ::get_task()->m_bThreadToolsForIncreasedFps;
 
-         //bool bAvoidProcFork = ::get_thread() == nullptr ? true : ::get_thread()->m_bAvoidProcFork;
+         //bool bAvoidProcFork = ::get_task() == nullptr ? true : ::get_task()->m_bAvoidProcFork;
 
          //if (!bAvoidProcFork
          //      &&
@@ -3269,9 +3269,9 @@ gdi_fallback:
 
       sync_lock slSource(pgraphicsSrc->mutex());
 
-      //bool bThreadToolsForIncreasedFps = ::get_thread()->m_bThreadToolsForIncreasedFps;
+      //bool bThreadToolsForIncreasedFps = ::get_task()->m_bThreadToolsForIncreasedFps;
 
-      //bool bAvoidProcFork = ::get_thread()->m_bAvoidProcFork;
+      //bool bAvoidProcFork = ::get_task()->m_bAvoidProcFork;
 
       ////bAvoidProcFork = true;
 

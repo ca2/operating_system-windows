@@ -74,7 +74,7 @@ namespace ca2plugin_container
 
       ::hotplugin::host::_001OnTimer(ptimer);
 
-      if(ptimer->m_nIDEvent == 2000 + 77 + 3)
+      if(ptimer->m_uEvent == 2000 + 77 + 3)
       {
 
          _001UpdateWindow();
