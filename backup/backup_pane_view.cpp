@@ -111,7 +111,7 @@ namespace backup
    void pane_view::install_message_routing(::channel * pchannel)
    {
       ::userex::pane_tab_view::install_message_routing(pchannel);
-      IGUI_MSG_LINK(WM_CREATE, pchannel, this, &pane_view::_001OnCreate);
+      MESSAGE_LINK(e_message_create, pchannel, this, &pane_view::_001OnCreate);
    }
 
 

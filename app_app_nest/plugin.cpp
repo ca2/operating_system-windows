@@ -276,9 +276,9 @@ install:
 
 
 
-   UINT_PTR plugin::message_handler(UINT_PTR uiMessage, WPARAM wparam, LPARAM lparam)
+   UINT_PTR plugin::message_handler(UINT_PTR emessage, WPARAM wparam, LPARAM lparam)
    {
-      switch(uiMessage)
+      switch(emessage)
       {
       case WM_TIMER:
          {
@@ -300,9 +300,9 @@ install:
                return 1;
             }
 
-            if((uiMessage == WM_LBUTTONUP
-            || uiMessage == WM_RBUTTONUP
-            || uiMessage == WM_MBUTTONUP) &&
+            if((emessage == WM_LBUTTONUP
+            || emessage == WM_RBUTTONUP
+            || emessage == WM_MBUTTONUP) &&
                is_installing_ca2())
             {
                m_iHealingSurface++;

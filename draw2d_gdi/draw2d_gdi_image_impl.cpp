@@ -2952,7 +2952,7 @@ namespace draw2d_gdi
    bool image::process_blend(::draw2d::brush * pbrush, i32 x, i32 y, ::draw2d::e_alpha_mode ealphamode, ::image * pimageSrc)
    {
 
-      if(pbrush->m_etype == ::draw2d::brush::type_null)
+      if(pbrush->m_etype == ::draw2d::brush::e_type_null)
       {
 
          return false;
@@ -2994,7 +2994,7 @@ namespace draw2d_gdi
 
    bool image::process_initialize(::draw2d::brush * pbrush, bool bReset)
    {
-      if(pbrush->m_etype == ::draw2d::brush::type_null)
+      if(pbrush->m_etype == ::draw2d::brush::e_type_null)
       {
          return false;
       }
@@ -3025,7 +3025,7 @@ namespace draw2d_gdi
    bool image::process_blend(::draw2d::pen * ppen, i32 x, i32 y, ::draw2d::e_alpha_mode ealphamode, ::image * pimage)
    {
 
-      if(ppen->m_etype == ::draw2d::pen::type_null)
+      if(ppen->m_etype == ::draw2d::pen::e_type_null)
       {
 
          return false;
@@ -3051,7 +3051,7 @@ namespace draw2d_gdi
    bool image::process_initialize(::draw2d::pen * ppen, bool bReset)
    {
 
-      if(ppen->m_etype == ::draw2d::pen::type_null)
+      if(ppen->m_etype == ::draw2d::pen::e_type_null)
       {
 
          return false;

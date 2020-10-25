@@ -1644,7 +1644,7 @@
 //
 // MessageText:
 //
-// The registry value %2, used to specify the maximum number of milliseconds to wait for service %1 to stop after posting a WM_QUIT message to the message queues of threads managed by the application, was not of type REG_DWORD.  The default time of %3 milliseconds will be used.
+// The registry value %2, used to specify the maximum number of milliseconds to wait for service %1 to stop after posting a e_message_quit message to the message queues of threads managed by the application, was not of type REG_DWORD.  The default time of %3 milliseconds will be used.
 //
 #define NSSM_EVENT_BOGUS_KILL_THREADS_GRACE_PERIOD 0x80000422L
 

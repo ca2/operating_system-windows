@@ -29,7 +29,7 @@ namespace ca2plugin_container
 
       virtual oswindow get_host_window();
       virtual bool is_ok();
-      virtual void post_message(u32 uiMessage, WPARAM wparam, LPARAM lparam);
+      virtual void post_message(u32 emessage, WPARAM wparam, LPARAM lparam);
       
 
       bool init();

@@ -18,7 +18,7 @@ class CLASS_DECL_CA2_PRODUCTION ::update :
    public ::object  
 {
 public:
-   enum e_type
+   enum enum_type
    {
       TypeGetView,
       TypeSetView,
@@ -27,15 +27,15 @@ public:
    };
    // DECLARE_DYNAMIC(::update)
 public:
-	void set_type(e_type e_type);
-	bool is_type_of(e_type e_type);
+	void set_type(enum_type enum_type);
+	bool is_type_of(enum_type enum_type);
 
 	::update();
 	virtual ~::update();
 
    EPaneView m_eview;
 protected:
-   e_type m_etype;
+   enum_type m_etype;
 
 };
 
