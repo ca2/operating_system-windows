@@ -765,7 +765,7 @@ static TCHAR *browse_filter(int message) {
   }
 }
 
-UINT_PTR CALLBACK browse_hook(HWND dlg, UINT message, WPARAM w, LPARAM l) {
+UINT_PTR CALLBACK browse_hook(HWND dlg, const ::id & id, WPARAM w, LPARAM l) {
   switch (message) {
     case WM_INITDIALOG:
       return 1;
@@ -829,7 +829,7 @@ void browse(HWND window, TCHAR *current, unsigned long flags, ...) {
   if (ofn.lpstrFile) HeapFree(GetProcessHeap(), 0, ofn.lpstrFile);
 }
 
-INT_PTR CALLBACK tab_dlg(HWND tab, UINT message, WPARAM w, LPARAM l) {
+INT_PTR CALLBACK tab_dlg(HWND tab, const ::id & id, WPARAM w, LPARAM l) {
   switch (message) {
     case WM_INITDIALOG:
       return 1;
@@ -932,7 +932,7 @@ INT_PTR CALLBACK tab_dlg(HWND tab, UINT message, WPARAM w, LPARAM l) {
 }
 
 /* Install/remove dialogue callback */
-INT_PTR CALLBACK nssm_dlg(HWND window, UINT message, WPARAM w, LPARAM l) {
+INT_PTR CALLBACK nssm_dlg(HWND window, const ::id & id, WPARAM w, LPARAM l) {
   nssm_service_t *service;
 
   switch (message) {
@@ -1169,7 +1169,7 @@ INT_PTR CALLBACK nssm_dlg(HWND window, UINT message, WPARAM w, LPARAM l) {
     case WM_CLOSE:
       DestroyWindow(window);
       return 0;
-    case WM_DESTROY:
+    case e_message_destroy:
       PostQuitMessage(0);
   }
   return 0;

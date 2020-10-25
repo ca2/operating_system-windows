@@ -2612,7 +2612,7 @@ namespace draw2d_gdi
 
       ::draw2d::brush & brush = *pbrush;
 
-      if(brush.m_etype == ::draw2d::brush::type_null)
+      if(brush.m_etype == ::draw2d::brush::e_type_null)
          return true;
 
       if(m_pimage->is_null())
@@ -2775,7 +2775,7 @@ namespace draw2d_gdi
 
       ::draw2d::pen & pen = *ppen;
 
-      if(pen.m_etype == ::draw2d::pen::type_null)
+      if(pen.m_etype == ::draw2d::pen::e_type_null)
          return true;
 
       if(m_pimage->is_null())
@@ -2849,12 +2849,12 @@ namespace draw2d_gdi
 
       ::draw2d::pen & pen = *ppen;
 
-      if(pen.m_etype == ::draw2d::pen::type_null)
+      if(pen.m_etype == ::draw2d::pen::e_type_null)
          return internal_fill_path(pfnInternalSetPath, pparam, rectParam, pbrush);
 
       ::draw2d::brush & brush = *pbrush;
 
-      if(brush.m_etype == ::draw2d::brush::type_null)
+      if(brush.m_etype == ::draw2d::brush::e_type_null)
          return internal_stroke_path(pfnInternalSetPath, pparam, rectParam, ppen);
 
       if(m_pimage->is_null())

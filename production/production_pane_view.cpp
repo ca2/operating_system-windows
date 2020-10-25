@@ -230,10 +230,10 @@ namespace production
    {
       ::user::tab_view::install_message_routing(pchannel);
 
-      IGUI_MSG_LINK(WM_USER, pchannel, this, &pane_view::_001OnUserMessage);
-      IGUI_MSG_LINK(WM_CREATE, pchannel, this, &pane_view::_001OnCreate);
-      //	IGUI_MSG_LINK(WM_SIZE, pchannel, this, &pane_view::_001OnSize);
-      IGUI_MSG_LINK(WM_USER + 1122, pchannel, this, &pane_view::_001OnMenuMessage);
+      MESSAGE_LINK(WM_USER, pchannel, this, &pane_view::_001OnUserMessage);
+      MESSAGE_LINK(e_message_create, pchannel, this, &pane_view::_001OnCreate);
+      //	MESSAGE_LINK(e_message_size, pchannel, this, &pane_view::_001OnSize);
+      MESSAGE_LINK(WM_USER + 1122, pchannel, this, &pane_view::_001OnMenuMessage);
 
 
    }

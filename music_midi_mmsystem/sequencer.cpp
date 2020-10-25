@@ -263,8 +263,8 @@ namespace music
 
             ::music::midi::sequencer::install_message_routing(pchannel);
 
-            IGUI_MSG_LINK(MM_MOM_DONE, pchannel, this, &sequencer::_001OnMidiOutDone);
-            IGUI_MSG_LINK(MM_MOM_POSITIONCB, pchannel, this, &sequencer::_001OnMidiOutPositionCB);
+            MESSAGE_LINK(MM_MOM_DONE, pchannel, this, &sequencer::_001OnMidiOutDone);
+            MESSAGE_LINK(MM_MOM_POSITIONCB, pchannel, this, &sequencer::_001OnMidiOutPositionCB);
 
          }
 

@@ -96,13 +96,13 @@ namespace audio_mmsystem
       ASSERT(m_hwaveout == nullptr);
       ASSERT(m_estate == state_initial);
 
-      m_pwaveformat->wFormatTag        = WAVE_FORMAT_PCM;
-      m_pwaveformat->nChannels         = (WORD) uiChannelCount;
-      m_pwaveformat->nSamplesPerSec    = uiSamplesPerSec;
-      m_pwaveformat->wBitsPerSample    = (WORD) uiBitsPerSample;
-      m_pwaveformat->nBlockAlign       = m_pwaveformat->wBitsPerSample * m_pwaveformat->nChannels / 8;
-      m_pwaveformat->nAvgBytesPerSec   = m_pwaveformat->nSamplesPerSec * m_pwaveformat->nBlockAlign;
-      m_pwaveformat->cbSize            = sizeof(m_waveformatex);
+      m_pwaveformat->m_waveformat.wFormatTag        = WAVE_FORMAT_PCM;
+      m_pwaveformat->m_waveformat.nChannels         = (WORD) uiChannelCount;
+      m_pwaveformat->m_waveformat.nSamplesPerSec    = uiSamplesPerSec;
+      m_pwaveformat->m_waveformat.wBitsPerSample    = (WORD) uiBitsPerSample;
+      m_pwaveformat->m_waveformat.nBlockAlign       = m_pwaveformat->m_waveformat.wBitsPerSample * m_pwaveformat->m_waveformat.nChannels / 8;
+      m_pwaveformat->m_waveformat.nAvgBytesPerSec   = m_pwaveformat->m_waveformat.nSamplesPerSec * m_pwaveformat->m_waveformat.nBlockAlign;
+      
 
       auto audiowave = Audio.audiowave();
 
@@ -201,7 +201,7 @@ Opened:
 
       out_get_buffer()->PCMOutOpen(this, iBufferSize, iBufferCount,128, m_pwaveformat, m_pwaveformat);
 
-      m_pprebuffer->open(m_pwaveformat->nChannels, iBufferCount, iBufferSampleCount);
+      m_pprebuffer->open(m_pwaveformat->m_waveformat.nChannels, iBufferCount, iBufferSampleCount);
 
       index i;
 
@@ -528,7 +528,7 @@ Opened:
          if(mmt.wType == TIME_BYTES)
          {
 
-            double d = (mmt.u.cb* 8.0)/ (m_pwaveformat->wBitsPerSample * m_pwaveformat->nChannels * m_pwaveformat->nSamplesPerSec);
+            double d = (mmt.u.cb* 8.0)/ (m_pwaveformat->m_waveformat.wBitsPerSample * m_pwaveformat->m_waveformat.nChannels * m_pwaveformat->m_waveformat.nSamplesPerSec);
 
             return (double) d;
 

@@ -121,7 +121,7 @@ namespace production
       if (!m_bReleased)
          return;
 
-      Application.post_to_all_threads(WM_QUIT, 0, 0);
+      Application.post_to_all_threads(e_message_quit, 0, 0);
 
    }
 
@@ -275,7 +275,7 @@ namespace production
       /*if(System.directrix()->has_property("quit_on_finish"))
       {
 
-      Context.os().post_to_all_threads(WM_QUIT, 0, 0);
+      Context.os().post_to_all_threads(e_message_quit, 0, 0);
 
       }*/
 

@@ -82,13 +82,12 @@ namespace audio_mmsystem
       ASSERT(m_hwavein == nullptr);
       ASSERT(m_estate == state_initial);
 
-      m_pwaveformat->wFormatTag = WAVE_FORMAT_PCM;
-      m_pwaveformat->nChannels = 2;
-      m_pwaveformat->nSamplesPerSec = 44100;
-      m_pwaveformat->wBitsPerSample = sizeof(::wave::WAVEBUFFERDATA) * 8;
-      m_pwaveformat->nBlockAlign = m_pwaveformat->wBitsPerSample * m_pwaveformat->nChannels / 8;
-      m_pwaveformat->nAvgBytesPerSec = m_pwaveformat->nSamplesPerSec * m_pwaveformat->nBlockAlign;
-      m_pwaveformat->cbSize = 0;
+      m_pwaveformat->m_waveformat.wFormatTag = WAVE_FORMAT_PCM;
+      m_pwaveformat->m_waveformat.nChannels = 2;
+      m_pwaveformat->m_waveformat.nSamplesPerSec = 44100;
+      m_pwaveformat->m_waveformat.wBitsPerSample = sizeof(::wave::WAVEBUFFERDATA) * 8;
+      m_pwaveformat->m_waveformat.nBlockAlign = m_pwaveformat->m_waveformat.wBitsPerSample * m_pwaveformat->m_waveformat.nChannels / 8;
+      m_pwaveformat->m_waveformat.nAvgBytesPerSec = m_pwaveformat->m_waveformat.nSamplesPerSec * m_pwaveformat->m_waveformat.nBlockAlign;
       
       auto audiowave = Audio.audiowave();
 
@@ -103,8 +102,8 @@ namespace audio_mmsystem
                                           CALLBACK_THREAD))))
          goto Opened;
 
-      m_pwaveformat->nSamplesPerSec = 22050;
-      m_pwaveformat->nAvgBytesPerSec = m_pwaveformat->nSamplesPerSec * m_pwaveformat->nBlockAlign;
+      m_pwaveformat->m_waveformat.nSamplesPerSec = 22050;
+      m_pwaveformat->m_waveformat.nAvgBytesPerSec = m_pwaveformat->m_waveformat.nSamplesPerSec * m_pwaveformat->m_waveformat.nBlockAlign;
       if(MMSYSERR_NOERROR == (estatus = ::multimedia::mmsystem::translate(waveInOpen(
                                           &m_hwavein,
                                           WAVE_MAPPER,
@@ -113,8 +112,8 @@ namespace audio_mmsystem
                                           (u32) 0,
                                           CALLBACK_THREAD))))
          goto Opened;
-      m_pwaveformat->nSamplesPerSec = 11025;
-      m_pwaveformat->nAvgBytesPerSec = m_pwaveformat->nSamplesPerSec * m_pwaveformat->nBlockAlign;
+      m_pwaveformat->m_waveformat.nSamplesPerSec = 11025;
+      m_pwaveformat->m_waveformat.nAvgBytesPerSec = m_pwaveformat->m_waveformat.nSamplesPerSec * m_pwaveformat->m_waveformat.nBlockAlign;
       int iStatus = MMSYSERR_NOERROR;
       if(MMSYSERR_NOERROR == (iStatus = waveInOpen(
                                           &m_hwavein,
@@ -161,10 +160,10 @@ Opened:
       u32 uiInterestSize;
       u32 uiSkippedSamplesCount;
 
-      if(m_pwaveformat->nSamplesPerSec == 44100)
+      if(m_pwaveformat->m_waveformat.nSamplesPerSec == 44100)
       {
          uiBufferSizeLog2 = 16;
-         uiBufferSize = m_pwaveformat->nChannels * 2 * iBufferSampleCount; // 512 kbytes
+         uiBufferSize = m_pwaveformat->m_waveformat.nChannels * 2 * iBufferSampleCount; // 512 kbytes
          uiAnalysisSize = 4 * 1 << uiBufferSizeLog2;
          if(iBufferCount > 0)
          {
@@ -177,7 +176,7 @@ Opened:
          uiInterestSize = 200;
          uiSkippedSamplesCount = 2;
       }
-      else if(m_pwaveformat->nSamplesPerSec == 22050)
+      else if(m_pwaveformat->m_waveformat.nSamplesPerSec == 22050)
       {
          uiBufferSizeLog2 = 9;
          uiBufferSize = 4 * 1 << uiBufferSizeLog2;
@@ -186,7 +185,7 @@ Opened:
          uiInterestSize = 600;
          uiSkippedSamplesCount = 1;
       }
-      else if(m_pwaveformat->nSamplesPerSec == 11025)
+      else if(m_pwaveformat->m_waveformat.nSamplesPerSec == 11025)
       {
          uiBufferSizeLog2 = 9;
          uiBufferSize = 2 * 1 << uiBufferSizeLog2;

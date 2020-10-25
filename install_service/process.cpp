@@ -113,7 +113,7 @@ int kill_threads(TCHAR *service_name, kill_t *k) {
 
   /* This thread belongs to the doomed process so signal it. */
   if (te.th32OwnerProcessID == k->pid) {
-    ret |= PostThreadMessage(te.th32ThreadID, WM_QUIT, k->exitcode, 0);
+    ret |= PostThreadMessage(te.th32ThreadID, e_message_quit, k->exitcode, 0);
   }
 
   while (true) {
@@ -127,7 +127,7 @@ int kill_threads(TCHAR *service_name, kill_t *k) {
     }
 
     if (te.th32OwnerProcessID == k->pid) {
-      ret |= PostThreadMessage(te.th32ThreadID, WM_QUIT, k->exitcode, 0);
+      ret |= PostThreadMessage(te.th32ThreadID, e_message_quit, k->exitcode, 0);
     }
   }
 

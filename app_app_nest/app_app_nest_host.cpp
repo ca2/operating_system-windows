@@ -64,7 +64,7 @@ namespace ca2plugin_container
 
       ::hotplugin::host::install_message_routing(pchannel);
 
-      ////IGUI_MSG_LINK(WM_TIMER, pchannel, this,&host::_001OnTimer);
+      ////MESSAGE_LINK(WM_TIMER, pchannel, this,&host::_001OnTimer);
 
    }
 
@@ -148,10 +148,10 @@ namespace ca2plugin_container
    }
 
 
-   void host::post_message(u32 uiMessage, WPARAM wparam, LPARAM lparam)
+   void host::post_message(u32 emessage, WPARAM wparam, LPARAM lparam)
    {
 
-      ::PostMessage(m_oswindow, uiMessage, wparam, lparam);
+      ::PostMessage(m_oswindow, emessage, wparam, lparam);
 
    }
 
@@ -499,7 +499,7 @@ namespace ca2plugin_container
 
             MSG * pmsg = (MSG *) pdata;
 
-            if(pmsg->message == WM_ACTIVATE)
+            if(pmsg->message == e_message_activate)
             {
 
                if(LOWORD(pmsg->wParam) == WA_ACTIVE)
@@ -518,7 +518,7 @@ namespace ca2plugin_container
                return;
 
             }
-            else if(pmsg->message == WM_SETFOCUS)
+            else if(pmsg->message == e_message_set_focus)
             {
 
                Session.set_keyboard_focus(this);
@@ -526,7 +526,7 @@ namespace ca2plugin_container
                return;
 
             }
-            else if(pmsg->message == WM_KILLFOCUS)
+            else if(pmsg->message == e_message_kill_focus)
             {
 
                Session.set_keyboard_focus(nullptr);

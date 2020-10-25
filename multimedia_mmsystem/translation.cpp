@@ -13,13 +13,13 @@ namespace multimedia
       {
 
 
-         waveformatex.wFormatTag        = pwaveformat->wFormatTag;           /* format type */
-         waveformatex.nChannels         = pwaveformat->nChannels;            /* number of channels (i.e. mono, stereo...) */
-         waveformatex.nSamplesPerSec    = pwaveformat->nSamplesPerSec;       /* sample rate */
-         waveformatex.nAvgBytesPerSec   = pwaveformat->nAvgBytesPerSec;      /* for buffer estimation */
-         waveformatex.nBlockAlign       = pwaveformat->nBlockAlign;          /* block size of data */
-         waveformatex.wBitsPerSample    = pwaveformat->wBitsPerSample;       /* number of bits per sample of mono data */
-         waveformatex.cbSize            = pwaveformat->cbSize;               /* the count in bytes of the size of */
+         waveformatex.wFormatTag          = pwaveformat->m_waveformat.wFormatTag;           /* format type */
+         waveformatex.nChannels           = pwaveformat->m_waveformat.nChannels;            /* number of channels (i.e. mono, stereo...) */
+         waveformatex.nSamplesPerSec      = pwaveformat->m_waveformat.nSamplesPerSec;       /* sample rate */
+         waveformatex.nAvgBytesPerSec     = pwaveformat->m_waveformat.nAvgBytesPerSec;      /* for buffer estimation */
+         waveformatex.nBlockAlign         = pwaveformat->m_waveformat.nBlockAlign;          /* block size of data */
+         waveformatex.wBitsPerSample      = pwaveformat->m_waveformat.wBitsPerSample;       /* number of bits per sample of mono data */
+         waveformatex.cbSize              = sizeof(waveformatex);
          /* extra information (after cbSize) */
 
       }
