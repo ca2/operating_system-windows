@@ -301,7 +301,7 @@
 
 
 
-#define WINBOOL BOOL
+#define int_bool BOOL
 #define WINUCHAR UCHAR
 #define WINULONG ULONG
 #define PWINUCHAR PUCHAR
