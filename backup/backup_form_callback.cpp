@@ -16,7 +16,7 @@ namespace backup
    void form_callback::update(::user::form * pform, ::update & update)
    {
       UNREFERENCED_PARAMETER(pform);
-      UNREFERENCED_PARAMETER(pupdate);
+      UNREFERENCED_PARAMETER(paction);
    }
 
 
@@ -33,7 +33,7 @@ namespace backup
             pupdate->m_actioncontext = ::source_system;
             paction->id() = id_browse;
             paction->value(id_form) = "filemanager_add_location_lfs.xhtml";
-            dynamic_cast < ::user::form_view * > (pview)->get_document()->update_all_views(pupdate);
+            dynamic_cast < ::user::form_view * > (pview)->get_document()->update_all_views(paction);
             auto pinteraction = pview->get_child_by_name("lfs");
             
             string strPath;
@@ -51,7 +51,7 @@ namespace backup
             pupdate->m_actioncontext = ::source_system;
             paction->id() = id_browse;
             paction->value(id_form) = "filemanager_add_location_ftp.xhtml";
-            dynamic_cast < ::user::form_view * > (pview)->get_document()->update_all_views(pupdate);
+            dynamic_cast < ::user::form_view * > (pview)->get_document()->update_all_views(paction);
             pevent->Ret();
 
             return;
@@ -84,7 +84,7 @@ namespace backup
                         pinteraction = pview->get_child_by_name("substituir");
                         ptext =pinteraction;
                         //ptext->_001GetText(update.m_strReplace);
-                        pview->get_document()->update_all_views(pupdate);
+                        pview->get_document()->update_all_views(paction);
                      }*/
             pevent->Ret();
 

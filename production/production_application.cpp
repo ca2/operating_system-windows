@@ -47,7 +47,7 @@ namespace production
       if(!::aura::application::init_instance())
          return false;
 
-//      User.filemanager()->m_strLevelUp = "levelup";
+//      puser->filemanager()->m_strLevelUp = "levelup";
 
 
       m_pdocumenttemplateMain = new ::user::single_document_template(

@@ -38,7 +38,7 @@ namespace backup
       create_factory <view > ();
       create_factory <pane_view > ();
 
-      User.filemanager()->m_strLevelUp = "levelup";
+      puser->filemanager()->m_strLevelUp = "levelup";
 
 
       m_pdocumenttemplateMain = new ::user::single_document_template(

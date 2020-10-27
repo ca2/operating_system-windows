@@ -253,7 +253,7 @@ namespace production
          //      set["post"]["new_status"] = set["post"]["new_status"] + "Last Stati:<br />";
          //      for (::count i = min(5, m_straStatus.get_count() - 1); i >= 1; i--)
          //      {
-         //         set["post"]["new_status"] = set["post"]["new_status"] + User.m_phtml->entities(m_straStatus.element_at(i));
+         //         set["post"]["new_status"] = set["post"]["new_status"] + puser->m_phtml->entities(m_straStatus.element_at(i));
          //         set["post"]["new_status"] = set["post"]["new_status"] + "<br />";
          //      }
          //      set["post"]["new_status"] = set["post"]["new_status"] + "<br />";
@@ -1599,7 +1599,7 @@ namespace production
 
 
    Context.http().ms_download(strUrl,
-   Context.dir().install() / "time\\spaignition_update.txt"), nullptr, post, headers, Session.user()->get_user());
+   Context.dir().install() / "time\\spaignition_update.txt"), nullptr, post, headers, psession->user()->get_user());
    i += 8;
    }
    }*/

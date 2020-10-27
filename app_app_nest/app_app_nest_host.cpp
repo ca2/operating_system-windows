@@ -505,13 +505,13 @@ namespace ca2plugin_container
                if(LOWORD(pmsg->wParam) == WA_ACTIVE)
                {
 
-                  Session.m_puiActive = this;
+                  psession->m_puiActive = this;
 
                }
                else
                {
 
-                  Session.m_puiActive = nullptr;
+                  psession->m_puiActive = nullptr;
 
                }
 
@@ -521,7 +521,7 @@ namespace ca2plugin_container
             else if(pmsg->message == e_message_set_focus)
             {
 
-               Session.set_keyboard_focus(this);
+               psession->set_keyboard_focus(this);
 
                return;
 
@@ -529,7 +529,7 @@ namespace ca2plugin_container
             else if(pmsg->message == e_message_kill_focus)
             {
 
-               Session.set_keyboard_focus(nullptr);
+               psession->set_keyboard_focus(nullptr);
 
                return;
 

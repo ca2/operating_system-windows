@@ -84,7 +84,7 @@ namespace production
       {
       case CONTEXT_MENU_IMPACT:
       {
-         /*__pointer(::filemanager::manager) pdocument = User.filemanager()->open_child_list(false, true);
+         /*__pointer(::filemanager::manager) pdocument = puser->filemanager()->open_child_list(false, true);
          if(pdocument != nullptr)
          {
             pdocument->get_filemanager_data()->m_iIconSize = 16;
@@ -154,7 +154,7 @@ namespace production
                break;*/
       //case impact_three_action_launch:
       //{
-      //   __pointer(::filemanager::manager) pdocument = User.filemanager()->open_child_list(false, true);
+      //   __pointer(::filemanager::manager) pdocument = puser->filemanager()->open_child_list(false, true);
       //   if(pdocument != nullptr)
       //   {
       //      pdocument->get_filemanager_data()->m_iIconSize = 48;
@@ -191,17 +191,17 @@ namespace production
 
          m_pviewOptions->m_pcallback = this;
 
-         auto pupdate = new_update();
+         auto pupdate = new_action(id_browse);
          pupdate->m_actioncontext = ::source_system;
-         paction->id() = id_browse;
+         paction->id() = ;
          paction->value(id_form) = "production\\options.xhtml";
-         pdocument->update_all_views(pupdate);
+         pdocument->update_all_views(paction);
 
          paction->id() = id_get_form_view;
-         pdocument->update_all_views(pupdate);
+         pdocument->update_all_views(paction);
 
          paction->id() = id_after_browse;
-         pdocument->update_all_views(pupdate);
+         pdocument->update_all_views(paction);
 
 
          pcreatordata->m_puserinteraction = (pview->GetParentFrame());
@@ -259,19 +259,17 @@ namespace production
          {
             __pointer(::user::interaction) pinteraction = m_pviewOptions->get_child_by_id("clean");
             __pointer(::user::check_box) pcheckbox =  (pinteraction);
-            auto pupdate = new_update();
-            paction->id() = id_clean;
+            auto paction = new_action(id_clean);
             paction->value(id_clean) = pcheckbox->echeck() == ::check_checked;
-            get_document()->update_all_views(pupdate);
+            get_document()->update_all_views(paction);
          }
          else if(pevent->m_puie->m_id == "build")
          {
             __pointer(::user::interaction) pinteraction = m_pviewOptions->get_child_by_id("build");
             __pointer(::user::check_box) pcheckbox =  (pinteraction);
-            auto pupdate = new_update();
-            paction->id() = id_build;
+            auto paction = new_action(id_build);
             paction->value(id_build) = pcheckbox->echeck() == ::check_checked;
-            get_document()->update_all_views(pupdate);
+            get_document()->update_all_views(paction);
 
          }
 
