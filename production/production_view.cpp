@@ -57,14 +57,14 @@ namespace production
       MESSAGE_LINK(WM_CONTEXTMENU, pchannel, this, &view::_001OnContextMenu);
       MESSAGE_LINK(WM_SETCURSOR, pchannel, this, &view::_001OnSetCursor);
 
-      //   MESSAGE_LINK(WM_LBUTTONDOWN, pchannel, this, &::user::interaction::_001OnLButtonDown);
-      //   MESSAGE_LINK(WM_LBUTTONUP, pchannel, this, &::user::interaction::_001OnLButtonUp);
+      //   MESSAGE_LINK(e_message_lbutton_down, pchannel, this, &::user::interaction::_001OnLButtonDown);
+      //   MESSAGE_LINK(e_message_lbutton_up, pchannel, this, &::user::interaction::_001OnLButtonUp);
       MESSAGE_LINK(WM_KEYDOWN, pchannel, this, &view::_001OnKeyDown);
       MESSAGE_LINK(WM_KEYUP, pchannel, this, &view::_001OnKeyUp);
 
-      MESSAGE_LINK(WM_LBUTTONDOWN, pchannel, this, &view::_001OnLButtonDown);
-      MESSAGE_LINK(WM_LBUTTONUP, pchannel, this, &view::_001OnLButtonUp);
-      MESSAGE_LINK(WM_RBUTTONUP, pchannel, this, &view::_001OnRButtonUp);
+      MESSAGE_LINK(e_message_lbutton_down, pchannel, this, &view::_001OnLButtonDown);
+      MESSAGE_LINK(e_message_lbutton_up, pchannel, this, &view::_001OnLButtonUp);
+      MESSAGE_LINK(e_message_rbutton_up, pchannel, this, &view::_001OnRButtonUp);
 
 
       MESSAGE_LINK(WM_SHOWWINDOW, pchannel, this, &view::_001OnShowWindow);

@@ -534,7 +534,7 @@ namespace ca2plugin_container
                return;
 
             }
-            else if(pmsg->message == WM_CLOSE)
+            else if(pmsg->message == e_message_close)
             {
 
                m_pcontainerapp->set_finish();

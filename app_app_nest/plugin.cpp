@@ -300,8 +300,8 @@ install:
                return 1;
             }
 
-            if((emessage == WM_LBUTTONUP
-            || emessage == WM_RBUTTONUP
+            if((emessage == e_message_lbutton_up
+            || emessage == e_message_rbutton_up
             || emessage == WM_MBUTTONUP) &&
                is_installing_ca2())
             {

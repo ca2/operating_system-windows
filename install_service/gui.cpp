@@ -51,8 +51,8 @@ int nssm_gui(int resource, nssm_service_t *service) {
     if (resource == IDD_REMOVE) {
       HWND button = GetDlgItem(dlg, IDC_REMOVE);
       if (button) {
-        SendMessage(button, WM_LBUTTONDOWN, 0, 0);
-        SendMessage(button, WM_LBUTTONUP, 0, 0);
+        SendMessage(button, e_message_lbutton_down, 0, 0);
+        SendMessage(button, e_message_lbutton_up, 0, 0);
       }
     }
   }
@@ -1166,7 +1166,7 @@ INT_PTR CALLBACK nssm_dlg(HWND window, const ::id & id, WPARAM w, LPARAM l) {
       return 1;
 
     /* Window closing */
-    case WM_CLOSE:
+    case e_message_close:
       DestroyWindow(window);
       return 0;
     case e_message_destroy:
