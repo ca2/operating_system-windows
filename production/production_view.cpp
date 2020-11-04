@@ -59,8 +59,8 @@ namespace production
 
       //   MESSAGE_LINK(e_message_lbutton_down, pchannel, this, &::user::interaction::_001OnLButtonDown);
       //   MESSAGE_LINK(e_message_lbutton_up, pchannel, this, &::user::interaction::_001OnLButtonUp);
-      MESSAGE_LINK(WM_KEYDOWN, pchannel, this, &view::_001OnKeyDown);
-      MESSAGE_LINK(WM_KEYUP, pchannel, this, &view::_001OnKeyUp);
+      MESSAGE_LINK(e_message_key_down, pchannel, this, &view::_001OnKeyDown);
+      MESSAGE_LINK(e_message_key_up, pchannel, this, &view::_001OnKeyUp);
 
       MESSAGE_LINK(e_message_lbutton_down, pchannel, this, &view::_001OnLButtonDown);
       MESSAGE_LINK(e_message_lbutton_up, pchannel, this, &view::_001OnLButtonUp);
