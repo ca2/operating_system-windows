@@ -3,25 +3,25 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.28705.295
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "fastdelete", "..\..\console-core\fastdelete\fastdelete.vcxproj", "{72DA5949-6313-40C5-BEAD-ECA1944262E6}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "fastdelete", "..\..\..\source\$1.vcxproj", "{72DA5949-6313-40C5-BEAD-ECA1944262E6}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "helloearth", "..\..\console\helloearth\helloearth.vcxproj", "{DD1BBBD3-15E0-4F4E-9B5A-AA78A6A37738}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "helloearth", "..\..\..\source\$1.vcxproj", "{DD1BBBD3-15E0-4F4E-9B5A-AA78A6A37738}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "icat", "..\..\console-core\icat\icat.vcxproj", "{5E7B9C5F-05C4-4A1C-9043-B51EE73172B1}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "icat", "..\..\..\source\$1.vcxproj", "{5E7B9C5F-05C4-4A1C-9043-B51EE73172B1}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "icopy", "..\..\console-core\icopy\icopy.vcxproj", "{1EBB0D6E-64EA-41AB-9916-956D2C766933}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "icopy", "..\..\..\source\$1.vcxproj", "{1EBB0D6E-64EA-41AB-9916-956D2C766933}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ido", "..\..\console-core\ido\ido.vcxproj", "{C09011F9-85FC-44A7-8F74-6CCFABB95FE6}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ido", "..\..\..\source\$1.vcxproj", "{C09011F9-85FC-44A7-8F74-6CCFABB95FE6}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "izoom", "..\..\console-core\izoom\izoom.vcxproj", "{16A41F4E-022B-44C2-A91F-5CE6087D57C1}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "izoom", "..\..\..\source\$1.vcxproj", "{16A41F4E-022B-44C2-A91F-5CE6087D57C1}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app._", "..\app._\app._.vcxproj", "{11AFE887-61B7-4217-913C-36736B359F39}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "_desk_tb", "..\..\app-core\desk_tb\desk_tb.vcxproj", "{19518477-1511-2204-0204-5872E30F2300}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "_desk_tb", "..\..\..\source\$1.vcxproj", "{19518477-1511-2204-0204-5872E30F2300}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "acme", "..\..\app\acme\acme.vcxproj", "{638B242F-0F21-41C3-9F66-724660046133}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "acme", "..\..\..\source\$1.vcxproj", "{638B242F-0F21-41C3-9F66-724660046133}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "apex", "..\..\app\apex\apex.vcxproj", "{E000FFAF-392F-4E32-BF51-777ED638991F}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "apex", "..\..\..\source\$1.vcxproj", "{E000FFAF-392F-4E32-BF51-777ED638991F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
