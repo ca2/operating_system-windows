@@ -1,132 +1,132 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "akrip", "..\..\..\source\$1.vcxproj", "{52ED20F8-BB84-4ED2-8024-FD8F46CAFD65}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "akrip", "..\..\app\thirdparty\akrip\akrip.vcxproj", "{52ED20F8-BB84-4ED2-8024-FD8F46CAFD65}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_veriwell_mplite", "..\..\..\source\$1.vcxproj", "{9E956594-D3DC-47D7-A3D5-E4FE7D2B11BB}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_veriwell_mplite", "..\..\app-veriwell\mplite\mplite.vcxproj", "{9E956594-D3DC-47D7-A3D5-E4FE7D2B11BB}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_veriwell_vmssyncheditor", "..\..\..\source\$1.vcxproj", "{F38EC25C-6897-423D-A1F4-5630F8872C79}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_veriwell_vmssyncheditor", "..\..\app-veriwell\vmssyncheditor\vmssyncheditor.vcxproj", "{F38EC25C-6897-423D-A1F4-5630F8872C79}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_frontpage_clientlogtool", "..\..\..\source\$1.vcxproj", "{3B4F925C-2910-43FD-8B71-CE8063580448}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_frontpage_clientlogtool", "..\..\app-frontpage\clientlogtool\ClientLogTool.vcxproj", "{3B4F925C-2910-43FD-8B71-CE8063580448}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_frontpage_logviewer", "..\..\..\source\$1.vcxproj", "{8C03C927-A5AA-4D59-B803-842A323BA776}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_frontpage_logviewer", "..\..\app-frontpage\logviewer\logviewer.vcxproj", "{8C03C927-A5AA-4D59-B803-842A323BA776}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_sysutils_igd", "..\..\..\source\$1.vcxproj", "{D5870062-4D25-416A-9D63-E36ED6D55D0F}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_sysutils_igd", "..\..\app-sysutils\igd\igd.vcxproj", "{D5870062-4D25-416A-9D63-E36ED6D55D0F}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{425C510B-8C9C-4260-AAF9-FB1F6DB15C4D}"
 	ProjectSection(SolutionItems) = preProject
 		..\..\..\app-veriwell\seed\metaseed\Performance1.psess = ..\..\..\app-veriwell\seed\metaseed\Performance1.psess
 	EndProjectSection
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "_", "..\..\..\source\$1.vcxproj", "{D9E0A96E-C666-45C1-AABE-609DDC85EC33}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "_", "..\..\app\c\_.vcxproj", "{D9E0A96E-C666-45C1-AABE-609DDC85EC33}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ca2", "..\..\..\source\$1.vcxproj", "{AFC48570-75E4-46BD-B8AB-4590B257E1C8}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ca2", "..\..\app\ca2\ca2.vcxproj", "{AFC48570-75E4-46BD-B8AB-4590B257E1C8}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "c", "..\..\..\source\$1.vcxproj", "{4D7D3626-ADA6-4CA2-9566-ED7B131E3D51}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "c", "..\..\app\c\c.vcxproj", "{4D7D3626-ADA6-4CA2-9566-ED7B131E3D51}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ca", "..\..\..\source\$1.vcxproj", "{ACB3FF4B-0B61-45A7-881D-E102E0F85808}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ca", "..\..\app\ca\ca.vcxproj", "{ACB3FF4B-0B61-45A7-881D-E102E0F85808}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_core_alatel", "..\..\..\source\$1.vcxproj", "{19841511-0204-1977-2204-195149AA3AF6}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_core_alatel", "..\..\app-core\alarm\alarm.vcxproj", "{19841511-0204-1977-2204-195149AA3AF6}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_core_backup", "..\..\..\source\$1.vcxproj", "{9FC565B2-1C85-4A57-8A25-2C90680A7F4E}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_core_backup", "..\..\app-core\backup\backup.vcxproj", "{9FC565B2-1C85-4A57-8A25-2C90680A7F4E}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_core_bisba", "..\..\..\source\$1.vcxproj", "{C7DD2C78-071D-4F37-AC05-5B87309F4F86}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_core_bisba", "..\..\app-core\bisba\bisba.vcxproj", "{C7DD2C78-071D-4F37-AC05-5B87309F4F86}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_core_ca2info", "..\..\..\source\$1.vcxproj", "{85CBA1C6-C28B-410C-9F71-FA6899B00CC8}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_core_ca2info", "..\..\app-core\ca2info\ca2info.vcxproj", "{85CBA1C6-C28B-410C-9F71-FA6899B00CC8}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_core_flag", "..\..\..\source\$1.vcxproj", "{4467CF99-AD0F-403B-8E30-3CBA23756713}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_core_flag", "..\..\app-core\flag\flag.vcxproj", "{4467CF99-AD0F-403B-8E30-3CBA23756713}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_core_winutil", "..\..\..\source\$1.vcxproj", "{E8B31EE8-3740-48C8-92EB-F4C866C8A522}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_core_winutil", "..\..\app-core\winutil\winutil.vcxproj", "{E8B31EE8-3740-48C8-92EB-F4C866C8A522}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_core_winshelllink", "..\..\..\source\$1.vcxproj", "{DC1BC8F1-3ECA-4CC9-9DCC-B9D8ADD698ED}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_core_winshelllink", "..\..\app-core\winshelllink\winshelllink.vcxproj", "{DC1BC8F1-3ECA-4CC9-9DCC-B9D8ADD698ED}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_core_winservice_1", "..\..\..\source\$1.vcxproj", "{5E9991E7-EAF4-4BF2-A53C-78DA862E09B9}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_core_winservice_1", "..\..\app-core\winservice_1\winservice_1.vcxproj", "{5E9991E7-EAF4-4BF2-A53C-78DA862E09B9}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_core_windesk", "..\..\..\source\$1.vcxproj", "{7149341E-970F-4C74-87A1-FA1D3C4CD40F}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_core_windesk", "..\..\app-core\windesk\windesk.vcxproj", "{7149341E-970F-4C74-87A1-FA1D3C4CD40F}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_core_winactionarea", "..\..\..\source\$1.vcxproj", "{9E90524D-7E68-4ADB-B5B2-E66944A432C5}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_core_winactionarea", "..\..\app-core\winactionarea\winactionarea.vcxproj", "{9E90524D-7E68-4ADB-B5B2-E66944A432C5}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_core_veievserver", "..\..\..\source\$1.vcxproj", "{DCBA4F0F-2896-49C3-8B0E-A613B6047BB4}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_core_veievserver", "..\..\app-core\veievserver\veievserver.vcxproj", "{DCBA4F0F-2896-49C3-8B0E-A613B6047BB4}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_core_veiev", "..\..\..\source\$1.vcxproj", "{810274AB-CA54-4877-93DE-0F6273844CAC}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_core_veiev", "..\..\app-core\veiev\veiev.vcxproj", "{810274AB-CA54-4877-93DE-0F6273844CAC}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_core_mydns", "..\..\..\source\$1.vcxproj", "{AEF1C751-5174-4AFE-A4BC-8F5C3CEE51B4}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_core_mydns", "..\..\app-core\mydns\mydns.vcxproj", "{AEF1C751-5174-4AFE-A4BC-8F5C3CEE51B4}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_core_hellomultiverse", "..\..\..\source\$1.vcxproj", "{C7AFCEFA-3079-4B23-8F97-4543BB980265}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_core_hellomultiverse", "..\..\app-core\hellomultiverse\hellomultiverse.vcxproj", "{C7AFCEFA-3079-4B23-8F97-4543BB980265}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_core_tesseract", "..\..\..\source\$1.vcxproj", "{437699AD-7464-4E5F-ACF3-7167487A9E3D}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_core_tesseract", "..\..\app-core\tesseract\tesseract.vcxproj", "{437699AD-7464-4E5F-ACF3-7167487A9E3D}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_core_netshareclient", "..\..\..\source\$1.vcxproj", "{A4122E96-400B-4A1A-ACE1-021CC5556A3F}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_core_netshareclient", "..\..\app-core\netshareclient\netshareclient.vcxproj", "{A4122E96-400B-4A1A-ACE1-021CC5556A3F}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_core_production", "..\..\..\source\$1.vcxproj", "{6945864B-2816-46B3-AB26-C31A208A01C9}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_core_production", "..\..\app-core\production\production.vcxproj", "{6945864B-2816-46B3-AB26-C31A208A01C9}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_netshareservercfg", "..\..\..\source\$1.vcxproj", "{04742068-D5D8-428F-9F2D-A62888E6E678}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_netshareservercfg", "..\..\app-core\netshareservercfg\netshareservercfg.vcxproj", "{04742068-D5D8-428F-9F2D-A62888E6E678}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_core_projection", "..\..\..\source\$1.vcxproj", "{5C028FB6-5812-4CFE-B5A6-5B714BEAAD2D}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_core_projection", "..\..\app-core\projection\projection.vcxproj", "{5C028FB6-5812-4CFE-B5A6-5B714BEAAD2D}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_core_querydb", "..\..\..\source\$1.vcxproj", "{54DEC125-5537-4502-AE28-EAFE740C9AF9}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_core_querydb", "..\..\app-core\querydb\querydb.vcxproj", "{54DEC125-5537-4502-AE28-EAFE740C9AF9}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_core_updatednsbk", "..\..\..\source\$1.vcxproj", "{16E345D6-C5AB-40A8-B932-47BD31CF1664}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_core_updatednsbk", "..\..\app-core\updatednsbk\updatednsbk.vcxproj", "{16E345D6-C5AB-40A8-B932-47BD31CF1664}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "iexca2", "..\..\..\source\$1.vcxproj", "{DAAAB8A2-50FE-48F5-B38E-6F39E80FBCDA}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "iexca2", "..\..\app-core\iexca2\iexca2.vcxproj", "{DAAAB8A2-50FE-48F5-B38E-6F39E80FBCDA}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "npca2", "..\..\..\source\$1.vcxproj", "{B0EED411-7FBB-48F2-80FA-6B1DD194FB86}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "npca2", "..\..\app-core\npca2\npca2.vcxproj", "{B0EED411-7FBB-48F2-80FA-6B1DD194FB86}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_cidadedecuritiba_alphaclock", "..\..\..\source\$1.vcxproj", "{E1CAB3A5-A22A-4E50-A12C-C2701740C60C}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_cidadedecuritiba_alphaclock", "..\..\app-cidadedecuritiba\alphaclock\alphaclock.vcxproj", "{E1CAB3A5-A22A-4E50-A12C-C2701740C60C}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_core_i2com", "..\..\..\source\$1.vcxproj", "{65EB5156-932E-482B-9E35-60538887B66F}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_core_i2com", "..\..\app-core\i2com\i2com.vcxproj", "{65EB5156-932E-482B-9E35-60538887B66F}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_core_rtprx", "..\..\..\source\$1.vcxproj", "{732AFD13-B554-4C1E-9543-B6B7AD3B34ED}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_core_rtprx", "..\..\app-core\rtprx\rtprx.vcxproj", "{732AFD13-B554-4C1E-9543-B6B7AD3B34ED}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_core_rtptx", "..\..\..\source\$1.vcxproj", "{9DC6E0BC-7BC5-4E40-A5D9-9EE2075701D9}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_core_rtptx", "..\..\app-core\rtptx\rtptx.vcxproj", "{9DC6E0BC-7BC5-4E40-A5D9-9EE2075701D9}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "audio_decode_cd", "..\..\..\source\$1.vcxproj", "{C12F946A-2A59-4566-B650-D6A84408B165}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "audio_decode_cd", "..\..\app-core\audio_decode_cd\audio_decode_cd.vcxproj", "{C12F946A-2A59-4566-B650-D6A84408B165}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "audio_decode_wave", "..\..\..\source\$1.vcxproj", "{D620EED4-10A9-4C54-8DEE-A52B9D178A4D}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "audio_decode_wave", "..\..\app-core\audio_decode_wave\audio_decode_wave.vcxproj", "{D620EED4-10A9-4C54-8DEE-A52B9D178A4D}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "audio_decode_windows_media", "..\..\..\source\$1.vcxproj", "{2453409D-7D51-4E7E-A739-86234FFF3509}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "audio_decode_windows_media", "..\..\app-veriwell\audio_decode_windows_media\audio_decode_windows_media.vcxproj", "{2453409D-7D51-4E7E-A739-86234FFF3509}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "video_decode_ffmpeg", "..\..\..\source\$1.vcxproj", "{67DC7693-61A5-4991-AF68-559CABB20EAB}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "video_decode_ffmpeg", "..\..\app-veriwell\video_decode_ffmpeg\video_decode_ffmpeg.vcxproj", "{67DC7693-61A5-4991-AF68-559CABB20EAB}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "audio_decode_vorbis", "..\..\..\source\$1.vcxproj", "{FCEBB077-A523-4949-B958-9F7879E56067}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "audio_decode_vorbis", "..\..\app-veriwell\audio_decode_vorbis\audio_decode_vorbis.vcxproj", "{FCEBB077-A523-4949-B958-9F7879E56067}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "audio_decode_libmpg123", "..\..\..\source\$1.vcxproj", "{DA8CDF3B-FA9F-4D59-A053-CF4DBC85E6F0}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "audio_decode_libmpg123", "..\..\app-veriwell\audio_decode_libmpg123\audio_decode_libmpg123.vcxproj", "{DA8CDF3B-FA9F-4D59-A053-CF4DBC85E6F0}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "veriwell_multimedia", "..\..\..\source\$1.vcxproj", "{6CF16680-CDB9-437D-B24A-B9BA61A91FCD}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "veriwell_multimedia", "..\..\app-veriwell\multimedia\veriwell_multimedia.vcxproj", "{6CF16680-CDB9-437D-B24A-B9BA61A91FCD}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_veriwell_mmcube", "..\..\..\source\$1.vcxproj", "{72D84EA4-F45B-499F-84A9-C4A1BAB46419}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_veriwell_mmcube", "..\..\app-core\mmcube\mmcube.vcxproj", "{72D84EA4-F45B-499F-84A9-C4A1BAB46419}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "multimedia", "..\..\..\source\$1.vcxproj", "{20FD0446-AA14-4013-84E0-B5CB63FA354F}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "multimedia", "..\..\app-core\multimedia\multimedia.vcxproj", "{20FD0446-AA14-4013-84E0-B5CB63FA354F}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "math", "..\..\..\source\$1.vcxproj", "{5B03FC53-C0AA-419D-A87F-4338C9DDE3FA}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "math", "..\..\app\math\math.vcxproj", "{5B03FC53-C0AA-419D-A87F-4338C9DDE3FA}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "optca", "..\..\..\source\$1.vcxproj", "{899CC94B-9028-4E57-A7FE-358A564F05F0}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "optca", "..\..\app\optca\optca.vcxproj", "{899CC94B-9028-4E57-A7FE-358A564F05F0}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "os", "..\..\..\source\$1.vcxproj", "{9163E31A-2D5A-4F18-AD6F-B561C76E5054}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "os", "..\..\os.vcxproj", "{9163E31A-2D5A-4F18-AD6F-B561C76E5054}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "os2", "..\..\..\source\$1.vcxproj", "{BF8721E4-B851-4F18-97E1-3E4E0C32F695}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "os2", "..\..\os2\os2.vcxproj", "{BF8721E4-B851-4F18-97E1-3E4E0C32F695}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_core_hash_md5", "..\..\..\source\$1.vcxproj", "{3714B73A-8B01-42B5-981B-0F52E30F041F}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_core_hash_md5", "..\..\app-core\hash_md5\hash_md5.vcxproj", "{3714B73A-8B01-42B5-981B-0F52E30F041F}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_core_hash_sha1", "..\..\..\source\$1.vcxproj", "{FD0C665F-90AB-4E23-813F-996896A46ED4}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_core_hash_sha1", "..\..\app-core\hash_sha1\hash_sha1.vcxproj", "{FD0C665F-90AB-4E23-813F-996896A46ED4}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_core_vericompare", "..\..\..\source\$1.vcxproj", "{5F3503D0-B4B2-448A-B5A5-2B860698D43A}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_core_vericompare", "..\..\app-core\vericompare\vericompare.vcxproj", "{5F3503D0-B4B2-448A-B5A5-2B860698D43A}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_core_hash_crc", "..\..\..\source\$1.vcxproj", "{34C5CACD-1497-4E80-98EC-E857AB7921EF}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_core_hash_crc", "..\..\app-core\hash_crc\hash_crc.vcxproj", "{34C5CACD-1497-4E80-98EC-E857AB7921EF}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app", "..\app\app.vcxproj", "{19841115-1984-0411-1977-021977151984}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "netnodelite_netshareserver", "..\..\..\source\$1.vcxproj", "{7784C5D3-AA89-4978-8A1C-96179FB2192E}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "netnodelite_netshareserver", "..\..\app-core\netnodelite_netshareserver\netnodelite_netshareserver.vcxproj", "{7784C5D3-AA89-4978-8A1C-96179FB2192E}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_veriwell_vmsplayer", "..\..\..\source\$1.vcxproj", "{0EBB4EDE-16AF-480F-B8C8-6494D168A8D7}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_veriwell_vmsplayer", "..\..\app-veriwell\vmsplayer\vmsplayer.vcxproj", "{0EBB4EDE-16AF-480F-B8C8-6494D168A8D7}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app-install", "..\..\..\source\$1.vcxproj", "{71BAB50B-DC41-4570-B676-30380CDA3A17}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app-install", "..\..\app-install\app-install.vcxproj", "{71BAB50B-DC41-4570-B676-30380CDA3A17}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app-sentinel", "..\..\..\source\$1.vcxproj", "{46D3B606-0CF7-4F41-9BFB-2CF22FDCEC03}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app-sentinel", "..\..\app-sentinel\app-sentinel.vcxproj", "{46D3B606-0CF7-4F41-9BFB-2CF22FDCEC03}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "netnodelite_library", "..\..\..\source\$1.vcxproj", "{19849599-9D62-40FB-8056-D48F32C1CAB6}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "netnodelite_library", "..\..\app-core\netnodelite_library\netnodelite_library.vcxproj", "{19849599-9D62-40FB-8056-D48F32C1CAB6}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "netnodelite_script", "..\..\..\source\$1.vcxproj", "{19841977-8E11-42A4-B923-08D809A03F4F}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "netnodelite_script", "..\..\app-core\netnodelite_script\netnodelite_script.vcxproj", "{19841977-8E11-42A4-B923-08D809A03F4F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

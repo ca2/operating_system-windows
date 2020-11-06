@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29020.237
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "aura", "..\..\..\source\$1.vcxproj", "{E000FFAF-392F-4E32-BF51-FD7ED638991F}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "aura", "..\..\app\aura\aura.vcxproj", "{E000FFAF-392F-4E32-BF51-FD7ED638991F}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "game_tictactoe", "..\..\..\source\$1.vcxproj", "{876F5728-775F-4D55-8C9B-0F421F3C9919}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "game_tictactoe", "..\..\game\tictactoe\tictactoe.vcxproj", "{876F5728-775F-4D55-8C9B-0F421F3C9919}"
 	ProjectSection(ProjectDependencies) = postProject
 		{19841115-1984-0411-1977-021977151984} = {19841115-1984-0411-1977-021977151984}
 		{2A6E9644-E659-4F8B-B8A4-DB77461DC071} = {2A6E9644-E659-4F8B-B8A4-DB77461DC071}
@@ -13,11 +13,11 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "game_tictactoe", "..\..\..\
 		{7A9BFF50-1888-4722-8DEE-73A3B5B32BCB} = {7A9BFF50-1888-4722-8DEE-73A3B5B32BCB}
 	EndProjectSection
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "experience_rootkiller", "..\..\..\source\$1.vcxproj", "{EBB7FB48-31AA-4282-999B-D52C9B3B887B}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "experience_rootkiller", "..\..\app-core\experience_rootkiller\experience_rootkiller.vcxproj", "{EBB7FB48-31AA-4282-999B-D52C9B3B887B}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "draw2d_direct2d", "..\..\..\source\$1.vcxproj", "{7A9BFF50-1888-4722-8DEE-73A3B5B32BCB}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "draw2d_direct2d", "..\..\app\draw2d_direct2d\draw2d_direct2d.vcxproj", "{7A9BFF50-1888-4722-8DEE-73A3B5B32BCB}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "game_tetris", "..\..\..\source\$1.vcxproj", "{84775115-0204-2204-2411-201411249919}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "game_tetris", "..\..\game\tetris\tetris.vcxproj", "{84775115-0204-2204-2411-201411249919}"
 	ProjectSection(ProjectDependencies) = postProject
 		{2A6E9644-E659-4F8B-B8A4-DB77461DC071} = {2A6E9644-E659-4F8B-B8A4-DB77461DC071}
 		{21DA4A8C-5A05-40A4-BF5B-FF62B9DDD150} = {21DA4A8C-5A05-40A4-BF5B-FF62B9DDD150}
@@ -25,12 +25,12 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "game_tetris", "..\..\..\sou
 		{54850FD8-653A-43B6-AA90-E59AC030559C} = {54850FD8-653A-43B6-AA90-E59AC030559C}
 	EndProjectSection
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "game_sokoban", "..\..\..\source\$1.vcxproj", "{84517784-1511-2204-0204-1511A92A2FA7}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "game_sokoban", "..\..\game\sokoban\sokoban.vcxproj", "{84517784-1511-2204-0204-1511A92A2FA7}"
 	ProjectSection(ProjectDependencies) = postProject
 		{19841115-1984-0411-1977-021977151984} = {19841115-1984-0411-1977-021977151984}
 	EndProjectSection
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "game_pacman", "..\..\..\source\$1.vcxproj", "{00C3D7E9-A87D-4B6C-95A0-1202C4703642}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "game_pacman", "..\..\game\pacman\pacman.vcxproj", "{00C3D7E9-A87D-4B6C-95A0-1202C4703642}"
 	ProjectSection(ProjectDependencies) = postProject
 		{19841115-1984-0411-1977-021977151984} = {19841115-1984-0411-1977-021977151984}
 		{EBB7FB48-31AA-4282-999B-D52C9B3B887B} = {EBB7FB48-31AA-4282-999B-D52C9B3B887B}
@@ -41,52 +41,52 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "game_pacman", "..\..\..\sou
 		{54850FD8-653A-43B6-AA90-E59AC030559C} = {54850FD8-653A-43B6-AA90-E59AC030559C}
 	EndProjectSection
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "audio_decode_wave", "..\..\..\source\$1.vcxproj", "{D620EED4-10A9-4C54-8DEE-A52B9D178A4D}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "audio_decode_wave", "..\..\app-core\audio_decode_wave\audio_decode_wave.vcxproj", "{D620EED4-10A9-4C54-8DEE-A52B9D178A4D}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "game_arkanoid", "..\..\..\source\$1.vcxproj", "{7DCCE620-4E26-4EE3-B6EA-FFB2A92A2FA7}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "game_arkanoid", "..\..\game\arkanoid\arkanoid.vcxproj", "{7DCCE620-4E26-4EE3-B6EA-FFB2A92A2FA7}"
 	ProjectSection(ProjectDependencies) = postProject
 		{19841115-1984-0411-1977-021977151984} = {19841115-1984-0411-1977-021977151984}
 		{D620EED4-10A9-4C54-8DEE-A52B9D178A4D} = {D620EED4-10A9-4C54-8DEE-A52B9D178A4D}
 		{54850FD8-653A-43B6-AA90-E59AC030559C} = {54850FD8-653A-43B6-AA90-E59AC030559C}
 	EndProjectSection
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "estamira", "..\..\..\source\$1.vcxproj", "{2A6E9644-E659-4F8B-B8A4-DB77461DC071}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "estamira", "..\..\game\estamira\estamira.vcxproj", "{2A6E9644-E659-4F8B-B8A4-DB77461DC071}"
 	ProjectSection(ProjectDependencies) = postProject
 		{D620EED4-10A9-4C54-8DEE-A52B9D178A4D} = {D620EED4-10A9-4C54-8DEE-A52B9D178A4D}
 		{54850FD8-653A-43B6-AA90-E59AC030559C} = {54850FD8-653A-43B6-AA90-E59AC030559C}
 	EndProjectSection
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "game_game_of_life", "..\..\..\source\$1.vcxproj", "{1EB434D5-CB36-4760-AAFF-EA6E69907EFE}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "game_game_of_life", "..\..\game\game_of_life\game_of_life.vcxproj", "{1EB434D5-CB36-4760-AAFF-EA6E69907EFE}"
 	ProjectSection(ProjectDependencies) = postProject
 		{19841115-1984-0411-1977-021977151984} = {19841115-1984-0411-1977-021977151984}
 		{EBB7FB48-31AA-4282-999B-D52C9B3B887B} = {EBB7FB48-31AA-4282-999B-D52C9B3B887B}
 	EndProjectSection
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "experience_core", "..\..\..\source\$1.vcxproj", "{E2D7833B-9B59-4826-BBDF-C270A2115E86}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "experience_core", "..\..\app\experience_core\experience_core.vcxproj", "{E2D7833B-9B59-4826-BBDF-C270A2115E86}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "audio_mmsystem", "..\audio_mmsystem\audio_mmsystem.vcxproj", "{54850FD8-653A-43B6-AA90-E59AC030559C}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app", "..\app\app.vcxproj", "{19841115-1984-0411-1977-021977151984}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "audio", "..\..\..\source\$1.vcxproj", "{20FD0446-AA14-4013-84E0-B5CB63FA354F}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "audio", "..\..\app-core\audio\audio.vcxproj", "{20FD0446-AA14-4013-84E0-B5CB63FA354F}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "multimedia_mmsystem", "..\multimedia_mmsystem\multimedia_mmsystem.vcxproj", "{21DA4A8C-5A05-40A4-BF5B-FF62B9DDD150}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "draw2d_gdiplus", "..\draw2d_gdiplus\draw2d_gdiplus.vcxproj", "{9A5FBFB1-76E6-4F7E-933A-328C1EEC95AF}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "acme", "..\..\..\source\$1.vcxproj", "{638B242F-0F21-41C3-9F66-724660046133}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "acme", "..\..\app\acme\acme.vcxproj", "{638B242F-0F21-41C3-9F66-724660046133}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "apex", "..\..\..\source\$1.vcxproj", "{E000FFAF-392F-4E32-BF51-777CA238991F}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "apex", "..\..\app\apex\apex.vcxproj", "{E000FFAF-392F-4E32-BF51-777CA238991F}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "axis", "..\..\..\source\$1.vcxproj", "{A2CBD4ED-ED0F-482B-9B16-F48F21C32835}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "axis", "..\..\app\axis\axis.vcxproj", "{A2CBD4ED-ED0F-482B-9B16-F48F21C32835}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "base", "..\..\..\source\$1.vcxproj", "{A216ABD4-26C4-4746-96B3-9D30ED28CF92}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "base", "..\..\app\base\base.vcxproj", "{A216ABD4-26C4-4746-96B3-9D30ED28CF92}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "core", "..\..\..\source\$1.vcxproj", "{29C1EB5B-060E-4021-AE12-D1BCFB1B1359}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "core", "..\..\app\core\core.vcxproj", "{29C1EB5B-060E-4021-AE12-D1BCFB1B1359}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "aqua", "..\..\..\source\$1.vcxproj", "{1B06FE5F-F783-41A1-AC68-0E02880DBBAC}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "aqua", "..\..\app\aqua\aqua.vcxproj", "{1B06FE5F-F783-41A1-AC68-0E02880DBBAC}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "bred", "..\..\..\source\$1.vcxproj", "{DFBF067F-AFF9-4BD6-A5E1-72AF984D1476}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "bred", "..\..\app\bred\bred.vcxproj", "{DFBF067F-AFF9-4BD6-A5E1-72AF984D1476}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

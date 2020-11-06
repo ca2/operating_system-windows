@@ -346,9 +346,7 @@
 
 
 #define IMPLEMENT_VISTA_TOOLS
-#ifndef WIN32
 #define WIN32
-#endif
 #define DRAWDIB_INCLUDE_STRETCHDIB
 
 #ifdef __cplusplus

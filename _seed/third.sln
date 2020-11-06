@@ -3,34 +3,34 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.28705.295
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "strophe", "..\..\..\source\$1.vcxproj", "{3F8D41B1-CA9D-4171-B17E-D5A1265C8447}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "strophe", "..\..\third\strophe\strophe.vcxproj", "{3F8D41B1-CA9D-4171-B17E-D5A1265C8447}"
 	ProjectSection(ProjectDependencies) = postProject
 		{2F3AE856-C0BB-413E-A451-0F867A07EBEC} = {2F3AE856-C0BB-413E-A451-0F867A07EBEC}
 	EndProjectSection
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "mpg123", "..\..\..\source\$1.vcxproj", "{67CAA87B-7CF1-4F93-BB67-21C513F40803}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "mpg123", "..\..\third\libmpg123\libmpg123.vcxproj", "{67CAA87B-7CF1-4F93-BB67-21C513F40803}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "qrencode", "..\..\..\source\$1.vcxproj", "{37FCFBF1-E922-4FDC-BC83-B3C04623E8C2}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "qrencode", "..\..\third\qrencode\qrencode.vcxproj", "{37FCFBF1-E922-4FDC-BC83-B3C04623E8C2}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "png", "..\..\..\source\$1.vcxproj", "{7DB10B50-CE00-4D7A-B322-6824F05D2FCB}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "png", "..\..\third\png\png.vcxproj", "{7DB10B50-CE00-4D7A-B322-6824F05D2FCB}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "sqlite", "..\..\..\source\$1.vcxproj", "{424F72D6-053A-41C5-BE03-3B0BD535F1EB}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "sqlite", "..\..\third\sqlite\sqlite.vcxproj", "{424F72D6-053A-41C5-BE03-3B0BD535F1EB}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "pixman", "..\..\..\source\$1.vcxproj", "{0A298E22-839B-4D11-B5A7-456EAD013C11}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "pixman", "..\..\third\pixman\pixman.vcxproj", "{0A298E22-839B-4D11-B5A7-456EAD013C11}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "zlib", "..\..\..\source\$1.vcxproj", "{34FCFBF1-E922-4FDC-BC83-B3C04623E8C2}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "zlib", "..\..\third\zlib\zlib.vcxproj", "{34FCFBF1-E922-4FDC-BC83-B3C04623E8C2}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "pcre", "..\..\..\source\$1.vcxproj", "{19AA8BB5-51FA-46E7-B346-2A89828F3000}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "pcre", "..\..\third\pcre\pcre.vcxproj", "{19AA8BB5-51FA-46E7-B346-2A89828F3000}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "freetype", "..\..\..\source\$1.vcxproj", "{78B079BD-9FC7-4B9E-B4A6-96DA0F00248B}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "freetype", "..\..\third\freetype\freetype.vcxproj", "{78B079BD-9FC7-4B9E-B4A6-96DA0F00248B}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "expat", "..\..\..\source\$1.vcxproj", "{2F3AE856-C0BB-413E-A451-0F867A07EBEC}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "expat", "..\..\third\expat\expat.vcxproj", "{2F3AE856-C0BB-413E-A451-0F867A07EBEC}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "cairo", "..\..\..\source\$1.vcxproj", "{E6C58C82-71E5-48E6-98ED-1B505D6F10C2}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "cairo", "..\..\third\cairo\cairo.vcxproj", "{E6C58C82-71E5-48E6-98ED-1B505D6F10C2}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "bzip2", "..\..\..\source\$1.vcxproj", "{A5A649E1-D516-4F29-A627-DA6884DD421C}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "bzip2", "..\..\third\bzip2\bzip2.vcxproj", "{A5A649E1-D516-4F29-A627-DA6884DD421C}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "id3lib", "..\..\..\source\$1.vcxproj", "{E2D7833B-9B59-4826-BBDF-C27019771984}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "id3lib", "..\..\third\id3lib\id3lib.vcxproj", "{E2D7833B-9B59-4826-BBDF-C27019771984}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

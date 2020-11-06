@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27004.2008
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "_acid", "..\..\..\source\$1.vcxproj", "{05E5B8E7-9E3B-44DD-9EDE-E0A74D52C1C5}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "_acid", "..\..\app\aura\acid.vcxproj", "{05E5B8E7-9E3B-44DD-9EDE-E0A74D52C1C5}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "_draw2d_gdiplus", "..\..\..\source\$1.vcxproj", "{573C4B5E-4132-457A-BE82-05A882A062FF}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "_draw2d_gdiplus", "..\..\draw2d_gdiplus\_draw2d_gdiplus.vcxproj", "{573C4B5E-4132-457A-BE82-05A882A062FF}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "_helloaura", "..\..\..\source\$1.vcxproj", "{DF41F4CA-E115-416F-9A54-4673473FB593}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "_helloaura", "..\..\app\helloaura\_helloaura.vcxproj", "{DF41F4CA-E115-416F-9A54-4673473FB593}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_helloaura", "..\..\..\source\$1.vcxproj", "{C7AFCEFA-3079-4B23-8F97-4543BB980265}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_helloaura", "..\..\app\helloaura\app_helloaura.vcxproj", "{C7AFCEFA-3079-4B23-8F97-4543BB980265}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
