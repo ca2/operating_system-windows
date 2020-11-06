@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27703.2047
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "_netnodenet_context_menu", "..\..\app-core\netnodenet_context_menu\netnodenet_context_menu.vcxproj", "{19518477-1511-2204-0204-5872E30F2300}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "_netnodenet_context_menu", "..\..\..\source\app-core\netnodenet_context_menu\netnodenet_context_menu.vcxproj", "{19518477-1511-2204-0204-5872E30F2300}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "_acid", "..\..\app\aura\acid.vcxproj", "{05E5B8E7-9E3B-44DD-9EDE-E0A74D52C1C5}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "_acid", "..\..\..\source\app\aura\acid.vcxproj", "{05E5B8E7-9E3B-44DD-9EDE-E0A74D52C1C5}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "_draw2d_gdiplus", "..\..\draw2d_gdiplus\_draw2d_gdiplus.vcxproj", "{573C4B5E-4132-457A-BE82-05A882A062FF}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "_draw2d_gdiplus", "..\..\..\source\draw2d_gdiplus\_draw2d_gdiplus.vcxproj", "{573C4B5E-4132-457A-BE82-05A882A062FF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

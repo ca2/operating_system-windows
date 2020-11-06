@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "a_spa", "..\..\a_spa\a_spa.vcxproj", "{A4A61B3B-CC87-4BB6-A130-C68DB95FAA7C}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "a_spa", "..\..\..\source\a_spa\a_spa.vcxproj", "{A4A61B3B-CC87-4BB6-A130-C68DB95FAA7C}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "a_spaadmin", "..\..\a_spaadmin\a_spaadmin.vcxproj", "{AE18AC57-1A37-4D2E-9E73-258D36E35340}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "a_spaadmin", "..\..\..\source\a_spaadmin\a_spaadmin.vcxproj", "{AE18AC57-1A37-4D2E-9E73-258D36E35340}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "a_spalib", "..\..\a_spalib\a_spalib.vcxproj", "{FA039458-2E43-45DE-9FA9-66DFA7E11E64}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "a_spalib", "..\..\..\source\a_spalib\a_spalib.vcxproj", "{FA039458-2E43-45DE-9FA9-66DFA7E11E64}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "acid", "..\..\app\aura\acid.vcxproj", "{A92C920F-C07D-481E-B523-565B56167CD1}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "acid", "..\..\..\source\app\aura\acid.vcxproj", "{A92C920F-C07D-481E-B523-565B56167CD1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

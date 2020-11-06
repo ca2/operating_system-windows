@@ -1,17 +1,17 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "c", "..\..\app\c\c.vcxproj", "{4D7D3626-ADA6-4CA2-9566-ED7B131E3D51}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "c", "..\..\..\source\app\c\c.vcxproj", "{4D7D3626-ADA6-4CA2-9566-ED7B131E3D51}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ca", "..\..\app\ca\ca.vcxproj", "{ACB3FF4B-0B61-45A7-881D-E102E0F85808}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ca", "..\..\..\source\app\ca\ca.vcxproj", "{ACB3FF4B-0B61-45A7-881D-E102E0F85808}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ca2", "..\..\app\ca2\ca2.vcxproj", "{AFC48570-75E4-46BD-B8AB-4590B257E1C8}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ca2", "..\..\..\source\app\ca2\ca2.vcxproj", "{AFC48570-75E4-46BD-B8AB-4590B257E1C8}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "optca", "..\..\app\optca\optca.vcxproj", "{899CC94B-9028-4E57-A7FE-358A564F05F0}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "optca", "..\..\..\source\app\optca\optca.vcxproj", "{899CC94B-9028-4E57-A7FE-358A564F05F0}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "os", "..\..\os.vcxproj", "{9163E31A-2D5A-4F18-AD6F-B561C76E5054}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "os", "..\..\..\source\os.vcxproj", "{9163E31A-2D5A-4F18-AD6F-B561C76E5054}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "os2", "..\..\os2\os2.vcxproj", "{BF8721E4-B851-4F18-97E1-3E4E0C32F695}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "os2", "..\..\..\source\os2\os2.vcxproj", "{BF8721E4-B851-4F18-97E1-3E4E0C32F695}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app", "..\app\app.vcxproj", "{19841115-1984-0411-1977-021977151984}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -21,7 +21,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app", "..\app\app.vcxproj",
 		{BF8721E4-B851-4F18-97E1-3E4E0C32F695} = {BF8721E4-B851-4F18-97E1-3E4E0C32F695}
 	EndProjectSection
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_windesktop", "..\..\app-core\windesktop\windesktop.vcxproj", "{9E90524D-7E68-4ADB-B5B2-E66944A432C5}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_windesktop", "..\..\..\source\app-core\windesktop\windesktop.vcxproj", "{9E90524D-7E68-4ADB-B5B2-E66944A432C5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

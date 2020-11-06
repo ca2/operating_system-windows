@@ -3,16 +3,16 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.28711.60
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "aura", "..\..\app\aura\aura.vcxproj", "{E000FFAF-392F-4E32-BF51-FD7ED638991F}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "aura", "..\..\..\source\app\aura\aura.vcxproj", "{E000FFAF-392F-4E32-BF51-FD7ED638991F}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "draw2d_gdiplus", "..\draw2d_gdiplus\draw2d_gdiplus.vcxproj", "{9A5FBFB1-76E6-4F7E-933A-328C1EEC95AF}"
 	ProjectSection(ProjectDependencies) = postProject
 		{E000FFAF-392F-4E32-BF51-FD7ED638991F} = {E000FFAF-392F-4E32-BF51-FD7ED638991F}
 	EndProjectSection
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "experience_core", "..\..\app\experience_core\experience_core.vcxproj", "{E2D7833B-9B59-4826-BBDF-C270A2115E86}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "experience_core", "..\..\..\source\app\experience_core\experience_core.vcxproj", "{E2D7833B-9B59-4826-BBDF-C270A2115E86}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "albertopibiri_keyboard", "..\..\albertopibiri\keyboard\keyboard.vcxproj", "{3F1119CF-6041-4AE9-970E-4DDAB57C5E48}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "albertopibiri_keyboard", "..\..\..\source\albertopibiri\keyboard\keyboard.vcxproj", "{3F1119CF-6041-4AE9-970E-4DDAB57C5E48}"
 	ProjectSection(ProjectDependencies) = postProject
 		{19841115-1984-0411-1977-021977151984} = {19841115-1984-0411-1977-021977151984}
 		{B2E38F2D-2D8C-4C63-8865-02DC220DC360} = {B2E38F2D-2D8C-4C63-8865-02DC220DC360}
@@ -21,29 +21,29 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "albertopibiri_keyboard", ".
 		{D79C7DDB-A727-4B91-803E-41C4431693D6} = {D79C7DDB-A727-4B91-803E-41C4431693D6}
 	EndProjectSection
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "imaging_wic", "..\..\app\imaging_wic\imaging_wic.vcxproj", "{D79C7DDB-A727-4B91-803E-41C4431693D6}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "imaging_wic", "..\..\..\source\app\imaging_wic\imaging_wic.vcxproj", "{D79C7DDB-A727-4B91-803E-41C4431693D6}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "core", "..\..\app\core\core.vcxproj", "{29C1EB5B-060E-4021-AE12-D1BCFB1B1359}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "core", "..\..\..\source\app\core\core.vcxproj", "{29C1EB5B-060E-4021-AE12-D1BCFB1B1359}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "veriwell_multimedia", "..\..\app-veriwell\multimedia\veriwell_multimedia.vcxproj", "{6CF16680-CDB9-437D-B24A-B9BA61A91FCD}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "veriwell_multimedia", "..\..\..\source\app-veriwell\multimedia\veriwell_multimedia.vcxproj", "{6CF16680-CDB9-437D-B24A-B9BA61A91FCD}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "audio", "..\..\app-core\audio\audio.vcxproj", "{20FD0446-AA14-4013-84E0-B5CB63FA354F}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "audio", "..\..\..\source\app-core\audio\audio.vcxproj", "{20FD0446-AA14-4013-84E0-B5CB63FA354F}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "multimedia", "..\..\app-core\multimedia\multimedia.vcxproj", "{2EE483C6-650E-463D-89D1-0FCE7DFD604C}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "multimedia", "..\..\..\source\app-core\multimedia\multimedia.vcxproj", "{2EE483C6-650E-463D-89D1-0FCE7DFD604C}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "music_midi_mmsystem", "..\music_midi_mmsystem\music_midi_mmsystem.vcxproj", "{B2E38F2D-2D8C-4C63-8865-02DC220DC360}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "multimedia_mmsystem", "..\multimedia_mmsystem\multimedia_mmsystem.vcxproj", "{21DA4A8C-5A05-40A4-BF5B-FF62B9DDD150}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "axis", "..\..\app\axis\axis.vcxproj", "{A2CBD4ED-ED0F-482B-9B16-F48F21C32835}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "axis", "..\..\..\source\app\axis\axis.vcxproj", "{A2CBD4ED-ED0F-482B-9B16-F48F21C32835}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "base", "..\..\app\base\base.vcxproj", "{A216ABD4-26C4-4746-96B3-9D30ED28CF92}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "base", "..\..\..\source\app\base\base.vcxproj", "{A216ABD4-26C4-4746-96B3-9D30ED28CF92}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app", "..\app\app.vcxproj", "{19841115-1984-0411-1977-021977151984}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "acme", "..\..\app\acme\acme.vcxproj", "{638B242F-0F21-41C3-9F66-724660046133}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "acme", "..\..\..\source\app\acme\acme.vcxproj", "{638B242F-0F21-41C3-9F66-724660046133}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "apex", "..\..\app\apex\apex.vcxproj", "{E000FFAF-392F-4E32-BF51-777CA238991F}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "apex", "..\..\..\source\app\apex\apex.vcxproj", "{E000FFAF-392F-4E32-BF51-777CA238991F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

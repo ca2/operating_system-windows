@@ -3,18 +3,18 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.28711.60
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "aura", "..\..\app\aura\aura.vcxproj", "{E000FFAF-392F-4E32-BF51-FD7ED638991F}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "aura", "..\..\..\source\app\aura\aura.vcxproj", "{E000FFAF-392F-4E32-BF51-FD7ED638991F}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "draw2d_gdiplus", "..\draw2d_gdiplus\draw2d_gdiplus.vcxproj", "{9A5FBFB1-76E6-4F7E-933A-328C1EEC95AF}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_app", "..\..\app\app\app_app.vcxproj", "{40F49B85-A888-4A1D-A7F5-7631F14A3D4A}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_app", "..\..\..\source\app\app\app_app.vcxproj", "{40F49B85-A888-4A1D-A7F5-7631F14A3D4A}"
 	ProjectSection(ProjectDependencies) = postProject
 		{9A5FBFB1-76E6-4F7E-933A-328C1EEC95AF} = {9A5FBFB1-76E6-4F7E-933A-328C1EEC95AF}
 	EndProjectSection
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "acme", "..\..\app\acme\acme.vcxproj", "{638B242F-0F21-41C3-9F66-724660046133}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "acme", "..\..\..\source\app\acme\acme.vcxproj", "{638B242F-0F21-41C3-9F66-724660046133}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "apex", "..\..\app\apex\apex.vcxproj", "{E000FFAF-392F-4E32-BF51-777CA238991F}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "apex", "..\..\..\source\app\apex\apex.vcxproj", "{E000FFAF-392F-4E32-BF51-777CA238991F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

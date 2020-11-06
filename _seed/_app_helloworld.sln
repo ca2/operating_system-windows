@@ -3,31 +3,31 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27004.2008
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "_acid", "..\..\app\aura\acid.vcxproj", "{05E5B8E7-9E3B-44DD-9EDE-E0A74D52C1C5}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "_acid", "..\..\..\source\app\aura\acid.vcxproj", "{05E5B8E7-9E3B-44DD-9EDE-E0A74D52C1C5}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "_axis", "..\..\app\axis\_axis.vcxproj", "{31D9E148-1C40-45E1-B3D5-20D8B6738B8E}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "_axis", "..\..\..\source\app\axis\_axis.vcxproj", "{31D9E148-1C40-45E1-B3D5-20D8B6738B8E}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "_draw2d_gdiplus", "..\..\draw2d_gdiplus\_draw2d_gdiplus.vcxproj", "{573C4B5E-4132-457A-BE82-05A882A062FF}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "_draw2d_gdiplus", "..\..\..\source\draw2d_gdiplus\_draw2d_gdiplus.vcxproj", "{573C4B5E-4132-457A-BE82-05A882A062FF}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "_helloaxis", "..\..\app\helloaxis\_helloaxis.vcxproj", "{C7AFCEFA-3079-4B23-8F97-4543BB980265}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "_helloaxis", "..\..\..\source\app\helloaxis\_helloaxis.vcxproj", "{C7AFCEFA-3079-4B23-8F97-4543BB980265}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "_helloaura", "..\..\app\helloaura\_helloaura.vcxproj", "{DF41F4CA-E115-416F-9A54-4673473FB593}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "_helloaura", "..\..\..\source\app\helloaura\_helloaura.vcxproj", "{DF41F4CA-E115-416F-9A54-4673473FB593}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_helloaxis", "..\..\app\helloaxis\app_helloaxis.vcxproj", "{D78E0B01-D329-4023-913C-A3005090BBED}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_helloaxis", "..\..\..\source\app\helloaxis\app_helloaxis.vcxproj", "{D78E0B01-D329-4023-913C-A3005090BBED}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_helloaura", "..\..\app\helloaura\app_helloaura.vcxproj", "{159C0B0C-463E-49CE-A7D9-46DF03F4E6E0}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_helloaura", "..\..\..\source\app\helloaura\app_helloaura.vcxproj", "{159C0B0C-463E-49CE-A7D9-46DF03F4E6E0}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_hellobase", "..\..\app\hellobase\app_hellobase.vcxproj", "{7242A084-8A2F-472E-B56A-0342A197858C}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_hellobase", "..\..\..\source\app\hellobase\app_hellobase.vcxproj", "{7242A084-8A2F-472E-B56A-0342A197858C}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "_hellobase", "..\..\app\hellobase\_hellobase.vcxproj", "{30AFEB88-38F7-4E4B-8CB7-B82C243B9ED4}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "_hellobase", "..\..\..\source\app\hellobase\_hellobase.vcxproj", "{30AFEB88-38F7-4E4B-8CB7-B82C243B9ED4}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "_base", "..\..\app\base\_base.vcxproj", "{4D7D3626-ADA6-4CA2-9566-ED7B131E3D51}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "_base", "..\..\..\source\app\base\_base.vcxproj", "{4D7D3626-ADA6-4CA2-9566-ED7B131E3D51}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_helloworld", "..\..\app\helloworld\app_helloworld.vcxproj", "{2CC1EB1A-2E83-4DBD-BB73-71A8EC1B4C92}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_helloworld", "..\..\..\source\app\helloworld\app_helloworld.vcxproj", "{2CC1EB1A-2E83-4DBD-BB73-71A8EC1B4C92}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "_core", "..\..\app\aura\_core.vcxproj", "{E000FFAF-392F-4E32-BF51-FD7ED638991F}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "_core", "..\..\..\source\app\aura\_core.vcxproj", "{E000FFAF-392F-4E32-BF51-FD7ED638991F}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "_app_helloworld", "..\..\app\helloworld\_helloworld.vcxproj", "{9D114124-667B-4C7B-B8C4-94BC4DD1098D}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "_app_helloworld", "..\..\..\source\app\helloworld\_helloworld.vcxproj", "{9D114124-667B-4C7B-B8C4-94BC4DD1098D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -5,9 +5,9 @@ VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app.removal", "app.removal.vcxproj", "{B18E0FCB-402F-4805-8FCD-AFE8DB6DDF74}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "acid", "..\..\app\aura\acid.vcxproj", "{A92C920F-C07D-481E-B523-565B56167CD1}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "acid", "..\..\..\source\app\aura\acid.vcxproj", "{A92C920F-C07D-481E-B523-565B56167CD1}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "aura", "..\..\app\aura\aura.vcxproj", "{03E5B8E7-9E3B-44DD-9EDE-E0A74D52C1C5}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "aura", "..\..\..\source\app\aura\aura.vcxproj", "{03E5B8E7-9E3B-44DD-9EDE-E0A74D52C1C5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

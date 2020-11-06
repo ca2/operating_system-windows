@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "netnode_dynamic_source_script", "..\..\app-core\netnode_dynamic_source_script\netnode_dynamic_source_script.vcxproj", "{7F80EE33-BA33-4F1D-9EF7-73EB4AC73DCD}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "netnode_dynamic_source_script", "..\..\..\source\app-core\netnode_dynamic_source_script\netnode_dynamic_source_script.vcxproj", "{7F80EE33-BA33-4F1D-9EF7-73EB4AC73DCD}"
 	ProjectSection(ProjectDependencies) = postProject
 		{03E5B8E7-9E3B-44DD-9EDE-E0A74D52C1C5} = {03E5B8E7-9E3B-44DD-9EDE-E0A74D52C1C5}
 		{73A245F9-C92F-4487-AEF7-CB0531F665BD} = {73A245F9-C92F-4487-AEF7-CB0531F665BD}
 	EndProjectSection
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "netnode", "..\..\app-core\netnode\netnode.vcxproj", "{15111984-C807-4AE2-957A-50089268664D}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "netnode", "..\..\..\source\app-core\netnode\netnode.vcxproj", "{15111984-C807-4AE2-957A-50089268664D}"
 	ProjectSection(ProjectDependencies) = postProject
 		{03E5B8E7-9E3B-44DD-9EDE-E0A74D52C1C5} = {03E5B8E7-9E3B-44DD-9EDE-E0A74D52C1C5}
 		{73A245F9-C92F-4487-AEF7-CB0531F665BD} = {73A245F9-C92F-4487-AEF7-CB0531F665BD}
@@ -21,9 +21,9 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "draw2d_gdiplus", "..\draw2d
 		{73A245F9-C92F-4487-AEF7-CB0531F665BD} = {73A245F9-C92F-4487-AEF7-CB0531F665BD}
 	EndProjectSection
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_core", "..\..\app_core\app_core.vcxproj", "{1AB44F85-C63D-4F5E-BB76-B416DC4DA2CB}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_core", "..\..\..\source\app_core\app_core.vcxproj", "{1AB44F85-C63D-4F5E-BB76-B416DC4DA2CB}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app._", "..\..\app-core\appfy\appfy.vcxproj", "{3DDD6C31-218E-4979-B095-8AF22563D9C1}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app._", "..\..\..\source\app-core\appfy\appfy.vcxproj", "{3DDD6C31-218E-4979-B095-8AF22563D9C1}"
 	ProjectSection(ProjectDependencies) = postProject
 		{1AB44F85-C63D-4F5E-BB76-B416DC4DA2CB} = {1AB44F85-C63D-4F5E-BB76-B416DC4DA2CB}
 		{9A5FBFB1-76E6-4F7E-933A-328C1EEC95AF} = {9A5FBFB1-76E6-4F7E-933A-328C1EEC95AF}
@@ -31,26 +31,26 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app._", "..\..\app-core\app
 		{73A245F9-C92F-4487-AEF7-CB0531F665BD} = {73A245F9-C92F-4487-AEF7-CB0531F665BD}
 	EndProjectSection
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "aura", "..\..\app\aura\aura.vcxproj", "{03E5B8E7-9E3B-44DD-9EDE-E0A74D52C1C5}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "aura", "..\..\..\source\app\aura\aura.vcxproj", "{03E5B8E7-9E3B-44DD-9EDE-E0A74D52C1C5}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "axis", "..\..\app\axis\axis.vcxproj", "{73A245F9-C92F-4487-AEF7-CB0531F665BD}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "axis", "..\..\..\source\app\axis\axis.vcxproj", "{73A245F9-C92F-4487-AEF7-CB0531F665BD}"
 	ProjectSection(ProjectDependencies) = postProject
 		{03E5B8E7-9E3B-44DD-9EDE-E0A74D52C1C5} = {03E5B8E7-9E3B-44DD-9EDE-E0A74D52C1C5}
 	EndProjectSection
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "aqua", "..\..\app\aqua\aqua.vcxproj", "{51778453-C0AA-419D-A87F-4338C9DDE3FA}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "aqua", "..\..\..\source\app\aqua\aqua.vcxproj", "{51778453-C0AA-419D-A87F-4338C9DDE3FA}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "data", "..\..\app\data\data.vcxproj", "{A33B9D31-3BFE-496C-A4F5-DC3086D5B27F}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "data", "..\..\..\source\app\data\data.vcxproj", "{A33B9D31-3BFE-496C-A4F5-DC3086D5B27F}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "programming", "..\..\app\programming\programming.vcxproj", "{149AA9B9-9E1A-4612-AD64-A71EE357BCAA}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "programming", "..\..\..\source\app\programming\programming.vcxproj", "{149AA9B9-9E1A-4612-AD64-A71EE357BCAA}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "time", "..\..\app\time\time.vcxproj", "{5B03FC53-5184-7715-1100-000000000000}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "time", "..\..\..\source\app\time\time.vcxproj", "{5B03FC53-5184-7715-1100-000000000000}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "base", "..\..\app\base\base.vcxproj", "{4D7D3626-ADA6-4CA2-9566-ED7B131E3D51}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "base", "..\..\..\source\app\base\base.vcxproj", "{4D7D3626-ADA6-4CA2-9566-ED7B131E3D51}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "aura", "..\..\app\aura\aura.vcxproj", "{E000FFAF-392F-4E32-BF51-FD7ED638991F}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "aura", "..\..\..\source\app\aura\aura.vcxproj", "{E000FFAF-392F-4E32-BF51-FD7ED638991F}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_core_alarm", "..\..\app-core\alarm\alarm.vcxproj", "{19841511-0204-1977-2204-195149AA3AF6}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_core_alarm", "..\..\..\source\app-core\alarm\alarm.vcxproj", "{19841511-0204-1977-2204-195149AA3AF6}"
 	ProjectSection(ProjectDependencies) = postProject
 		{19841115-1984-0411-1977-021977151984} = {19841115-1984-0411-1977-021977151984}
 		{3DDD6C31-218E-4979-B095-8AF22563D9C1} = {3DDD6C31-218E-4979-B095-8AF22563D9C1}
@@ -60,35 +60,35 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_core_alarm", "..\..\app
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app", "..\app\app.vcxproj", "{19841115-1984-0411-1977-021977151984}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "userdatetime", "..\..\app-core\userdatetime\userdatetime.vcxproj", "{51042284-1115-7704-027F-4338C9DDE3FA}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "userdatetime", "..\..\..\source\app-core\userdatetime\userdatetime.vcxproj", "{51042284-1115-7704-027F-4338C9DDE3FA}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "post-commit", "..\..\post-commit\post-commit.vcxproj", "{8451773B-CC87-4BB6-A130-C68DB95FAA7C}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "post-commit", "..\..\..\source\post-commit\post-commit.vcxproj", "{8451773B-CC87-4BB6-A130-C68DB95FAA7C}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ace", "..\..\app\ace\ace.vcxproj", "{21DCC811-4BCE-4F16-B674-C0941F847127}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ace", "..\..\..\source\app\ace\ace.vcxproj", "{21DCC811-4BCE-4F16-B674-C0941F847127}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "acid", "..\..\app\aura\acid.vcxproj", "{A92C920F-C07D-481E-B523-565B56167CD1}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "acid", "..\..\..\source\app\aura\acid.vcxproj", "{A92C920F-C07D-481E-B523-565B56167CD1}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "axisfreeimage", "..\..\app\freeimage\axisfreeimage.vcxproj", "{B39ED2B3-D53A-4077-B957-930979A3577D}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "axisfreeimage", "..\..\..\source\app\freeimage\axisfreeimage.vcxproj", "{B39ED2B3-D53A-4077-B957-930979A3577D}"
 	ProjectSection(ProjectDependencies) = postProject
 		{03E5B8E7-9E3B-44DD-9EDE-E0A74D52C1C5} = {03E5B8E7-9E3B-44DD-9EDE-E0A74D52C1C5}
 	EndProjectSection
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "image_decode_jpeg", "..\..\app\image_jpeg\axis_image_jpeg.vcxproj", "{84517713-2000-419D-A87F-4338C9DDE3FA}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "image_decode_jpeg", "..\..\..\source\app\image_jpeg\axis_image_jpeg.vcxproj", "{84517713-2000-419D-A87F-4338C9DDE3FA}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "image_decode_png", "..\..\app\image_png\axis_image_png.vcxproj", "{84517714-2000-419D-A87F-4338C9DDE3FA}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "image_decode_png", "..\..\..\source\app\image_png\axis_image_png.vcxproj", "{84517714-2000-419D-A87F-4338C9DDE3FA}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "_ace", "..\..\app\ace\_ace.vcxproj", "{699D6807-4F43-40E9-86AB-2A8B856707A9}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "_ace", "..\..\..\source\app\ace\_ace.vcxproj", "{699D6807-4F43-40E9-86AB-2A8B856707A9}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "experience_core", "..\..\app-core\experience_core\experience_core.vcxproj", "{E2D7833B-9B59-4826-BBDF-C270A2115E86}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "experience_core", "..\..\..\source\app-core\experience_core\experience_core.vcxproj", "{E2D7833B-9B59-4826-BBDF-C270A2115E86}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{1CE02137-5040-42A2-99A4-7C80E7379EFD}"
 	ProjectSection(SolutionItems) = preProject
 		Performance1.psess = Performance1.psess
 	EndProjectSection
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "qr", "..\..\app-core\qr\qr.vcxproj", "{19845177-6A40-4458-848A-019220E88C80}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "qr", "..\..\..\source\app-core\qr\qr.vcxproj", "{19845177-6A40-4458-848A-019220E88C80}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_core_netnodeqr", "..\..\app-core\netnodeqr\netnodeqr.vcxproj", "{4C73CC26-F125-4DAA-95B6-D11079EC3453}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_core_netnodeqr", "..\..\..\source\app-core\netnodeqr\netnodeqr.vcxproj", "{4C73CC26-F125-4DAA-95B6-D11079EC3453}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

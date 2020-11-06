@@ -1,25 +1,25 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "audio_decode_wave", "..\..\app-core\audio_decode_wave\audio_decode_wave.vcxproj", "{D620EED4-10A9-4C54-8DEE-A52B9D178A4D}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "audio_decode_wave", "..\..\..\source\app-core\audio_decode_wave\audio_decode_wave.vcxproj", "{D620EED4-10A9-4C54-8DEE-A52B9D178A4D}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "audio_decode_libmpg123", "..\..\app-veriwell\audio_decode_libmpg123\audio_decode_libmpg123.vcxproj", "{DA8CDF3B-FA9F-4D59-A053-CF4DBC85E6F0}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "audio_decode_libmpg123", "..\..\..\source\app-veriwell\audio_decode_libmpg123\audio_decode_libmpg123.vcxproj", "{DA8CDF3B-FA9F-4D59-A053-CF4DBC85E6F0}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "math", "..\..\app\math\math.vcxproj", "{5B03FC53-C0AA-419D-A87F-4338C9DDE3FA}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "math", "..\..\..\source\app\math\math.vcxproj", "{5B03FC53-C0AA-419D-A87F-4338C9DDE3FA}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "optca", "..\..\app\optca\optca.vcxproj", "{899CC94B-9028-4E57-A7FE-358A564F05F0}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "optca", "..\..\..\source\app\optca\optca.vcxproj", "{899CC94B-9028-4E57-A7FE-358A564F05F0}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "multimedia", "..\..\app-core\multimedia\multimedia.vcxproj", "{20FD0446-AA14-4013-84E0-B5CB63FA354F}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "multimedia", "..\..\..\source\app-core\multimedia\multimedia.vcxproj", "{20FD0446-AA14-4013-84E0-B5CB63FA354F}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "veriwell_multimedia", "..\..\app-veriwell\multimedia\veriwell_multimedia.vcxproj", "{6CF16680-CDB9-437D-B24A-B9BA61A91FCD}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "veriwell_multimedia", "..\..\..\source\app-veriwell\multimedia\veriwell_multimedia.vcxproj", "{6CF16680-CDB9-437D-B24A-B9BA61A91FCD}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "os", "..\..\os.vcxproj", "{9163E31A-2D5A-4F18-AD6F-B561C76E5054}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "os", "..\..\..\source\os.vcxproj", "{9163E31A-2D5A-4F18-AD6F-B561C76E5054}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "c", "..\..\app\c\c.vcxproj", "{4D7D3626-ADA6-4CA2-9566-ED7B131E3D51}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "c", "..\..\..\source\app\c\c.vcxproj", "{4D7D3626-ADA6-4CA2-9566-ED7B131E3D51}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ca", "..\..\app\ca\ca.vcxproj", "{ACB3FF4B-0B61-45A7-881D-E102E0F85808}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ca", "..\..\..\source\app\ca\ca.vcxproj", "{ACB3FF4B-0B61-45A7-881D-E102E0F85808}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ca2", "..\..\app\ca2\ca2.vcxproj", "{AFC48570-75E4-46BD-B8AB-4590B257E1C8}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ca2", "..\..\..\source\app\ca2\ca2.vcxproj", "{AFC48570-75E4-46BD-B8AB-4590B257E1C8}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app", "..\app\app.vcxproj", "{19841115-1984-0411-1977-021977151984}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -42,25 +42,25 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app", "..\app\app.vcxproj",
 		{BF8721E4-B851-4F18-97E1-3E4E0C32F695} = {BF8721E4-B851-4F18-97E1-3E4E0C32F695}
 	EndProjectSection
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "os2", "..\..\os2\os2.vcxproj", "{BF8721E4-B851-4F18-97E1-3E4E0C32F695}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "os2", "..\..\..\source\os2\os2.vcxproj", "{BF8721E4-B851-4F18-97E1-3E4E0C32F695}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_veriwell_mplite", "..\..\app-veriwell\mplite\mplite.vcxproj", "{9E956594-D3DC-47D7-A3D5-E4FE7D2B11BB}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_veriwell_mplite", "..\..\..\source\app-veriwell\mplite\mplite.vcxproj", "{9E956594-D3DC-47D7-A3D5-E4FE7D2B11BB}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_core_netnodelite", "..\..\app-core\netnodelite\netnodelite.vcxproj", "{15111984-C807-4AE2-957A-50089268664D}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_core_netnodelite", "..\..\..\source\app-core\netnodelite\netnodelite.vcxproj", "{15111984-C807-4AE2-957A-50089268664D}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "netnodelite_library", "..\..\app-core\netnodelite_library\netnodelite_library.vcxproj", "{19849599-9D62-40FB-8056-D48F32C1CAB6}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "netnodelite_library", "..\..\..\source\app-core\netnodelite_library\netnodelite_library.vcxproj", "{19849599-9D62-40FB-8056-D48F32C1CAB6}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "netnodelite_script", "..\..\app-core\netnodelite_script\netnodelite_script.vcxproj", "{19841977-8E11-42A4-B923-08D809A03F4F}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "netnodelite_script", "..\..\..\source\app-core\netnodelite_script\netnodelite_script.vcxproj", "{19841977-8E11-42A4-B923-08D809A03F4F}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "netnodelite_netshareserver", "..\..\app-core\netnodelite_netshareserver\netnodelite_netshareserver.vcxproj", "{7784C5D3-AA89-4978-8A1C-96179FB2192E}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "netnodelite_netshareserver", "..\..\..\source\app-core\netnodelite_netshareserver\netnodelite_netshareserver.vcxproj", "{7784C5D3-AA89-4978-8A1C-96179FB2192E}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_core_alatel", "..\..\app-core\alarm\alarm.vcxproj", "{19841511-0204-1977-2204-195149AA3AF6}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_core_alatel", "..\..\..\source\app-core\alarm\alarm.vcxproj", "{19841511-0204-1977-2204-195149AA3AF6}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_core_uinteraction", "..\..\app-core\uinteraction\uinteraction.vcxproj", "{E2D7833B-9B59-4826-BBDF-C270A2115E86}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_core_uinteraction", "..\..\..\source\app-core\uinteraction\uinteraction.vcxproj", "{E2D7833B-9B59-4826-BBDF-C270A2115E86}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_core_deepfish", "..\..\app-core\deepfish\deepfish.vcxproj", "{51F51C57-0947-4D1D-850E-2F4BE6C88DCF}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_core_deepfish", "..\..\..\source\app-core\deepfish\deepfish.vcxproj", "{51F51C57-0947-4D1D-850E-2F4BE6C88DCF}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_core_deepfish_alatel", "..\..\app-core\deepfish_alatel\deepfish_alarm.vcxproj", "{11223319-6F3A-45AC-926B-256082D8FF5D}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_core_deepfish_alatel", "..\..\..\source\app-core\deepfish_alatel\deepfish_alarm.vcxproj", "{11223319-6F3A-45AC-926B-256082D8FF5D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
