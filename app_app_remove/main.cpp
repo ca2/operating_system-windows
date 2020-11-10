@@ -157,7 +157,7 @@ void removal::system(const char * pszCmd)
    {
        WaitForSingleObject(pi.hProcess, INFINITE);
        CloseHandle(pi.hProcess);
-       CloseHandle(pi.hThread);
+       CloseHandle(pi.hthread);
    }*/
 
 }

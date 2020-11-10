@@ -1506,14 +1506,14 @@ namespace production
          pointer_array < manual_reset_event > eventa(this);
          eventa.set_size_create(this,uiProcessorCount);
          sync_array ptra;
-         for (index ui = 0; ui < uiProcessorCount; ui++)
+         for (index u = 0; u < uiProcessorCount; u++)
          {
-            compress_thread * pthread = new compress_thread(this, eventa[ui]);
+            compress_thread * pthread = new compress_thread(this, eventa[u]);
             threada.add(pthread);
-            pthread->m_dwThreadAffinityMask = 1 << ui;
+            pthread->m_dwThreadAffinityMask = 1 << u;
             //pthread->m_bAutoDelete = false;
             pthread->begin();
-            ptra.add(eventa[ui]);
+            ptra.add(eventa[u]);
          }
          multi_lock ml(ptra);
          ml.lock();

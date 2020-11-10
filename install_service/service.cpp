@@ -1668,7 +1668,7 @@ int start_service(nssm_service_t *service) {
       log_event(EVENTLOG_WARNING_TYPE, NSSM_EVENT_SETPROCESSAFFINITYMASK_FAILED, service->name, error_string(GetLastError()), 0);
     }
 
-    ResumeThread(pi.hThread);
+    ResumeThread(pi.hthread);
   }
 
   /*

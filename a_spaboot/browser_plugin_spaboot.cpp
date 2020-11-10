@@ -176,15 +176,15 @@ void parse_spaboot(XNode & node)
    if(node.name == "spa" && node.childs.size() > 0)
    {
       LPXNode lpnode = &node;
-      for(unsigned int ui = 0; ui < lpnode->childs.size(); ui++)
+      for(unsigned int u = 0; u < lpnode->childs.size(); u++)
       {
-         if(lpnode->childs[ui]->name == "index")
+         if(lpnode->childs[u]->name == "index")
          {
-            if(lpnode->childs[ui]->GetAttr("start") != nullptr)
+            if(lpnode->childs[u]->GetAttr("start") != nullptr)
             {
-               if(std::string(lpnode->childs[ui]->GetAttrValue("start")).length() > 0)
+               if(std::string(lpnode->childs[u]->GetAttrValue("start")).length() > 0)
                {
-                  spa_set_id(std::string(lpnode->childs[ui]->GetAttrValue("start")).c_str());
+                  spa_set_id(std::string(lpnode->childs[u]->GetAttrValue("start")).c_str());
                }
             }
          }
@@ -208,15 +208,15 @@ bool parse_spaboot_start(XNode & node)
    if(node.name == "spa" && node.childs.size() > 0)
    {
       LPXNode lpnode = &node;
-      for(unsigned int ui = 0; ui < lpnode->childs.size(); ui++)
+      for(unsigned int u = 0; u < lpnode->childs.size(); u++)
       {
-         if(lpnode->childs[ui]->name == "index")
+         if(lpnode->childs[u]->name == "index")
          {
-            if(lpnode->childs[ui]->GetAttr("start") != nullptr)
+            if(lpnode->childs[u]->GetAttr("start") != nullptr)
             {
-               if(std::string(lpnode->childs[ui]->GetAttrValue("start")).length() > 0)
+               if(std::string(lpnode->childs[u]->GetAttrValue("start")).length() > 0)
                {
-                  spa_set_id(std::string(lpnode->childs[ui]->GetAttrValue("start")).c_str());
+                  spa_set_id(std::string(lpnode->childs[u]->GetAttrValue("start")).c_str());
                   iOkCount++;
                }
                else
@@ -233,14 +233,14 @@ bool parse_spaboot_start(XNode & node)
          {
             return false;
          }
-         if(lpnode->childs[ui]->GetAttr("build") != nullptr)
+         if(lpnode->childs[u]->GetAttr("build") != nullptr)
          {
-            if(std::string(lpnode->childs[ui]->GetAttrValue("build")).length() > 0)
+            if(std::string(lpnode->childs[u]->GetAttrValue("build")).length() > 0)
             {
                strInstalledBuild = file::get_contents((get_ca2_folder_dup() + "\\ca2\\app\\build.txt").c_str());
                if(strInstalledBuild.length() <= 0)
                   return false;
-               strRequestedBuild = std::string(lpnode->childs[ui]->GetAttrValue("build")).c_str();
+               strRequestedBuild = std::string(lpnode->childs[u]->GetAttrValue("build")).c_str();
                if(strRequestedBuild.length() <= 0)
                   return false;
                iOkCount++;

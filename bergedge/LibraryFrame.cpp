@@ -187,7 +187,7 @@ int CLibraryFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
          if(m_toolbar.SetBitmap(h))
          {
 
-            UINT ui[]=
+            UINT u[]=
             {
                ID_VIEW_LIBRARY,
                ID_VIEW_PHOTO_LIBRARY
@@ -195,7 +195,7 @@ int CLibraryFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 
             m_toolbar.SetSizes(CSize(39,38),CSize(32,32));
 
-            if(m_toolbar.SetButtons(ui,sizeof(ui) / sizeof(ui[0])))
+            if(m_toolbar.SetButtons(u,sizeof(u) / sizeof(u[0])))
             {
                m_toolbar.SetButtonText(0,"Microspot Data");
                m_toolbar.SetButtonText(1,"Photos");

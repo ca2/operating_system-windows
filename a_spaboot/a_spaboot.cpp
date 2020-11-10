@@ -239,15 +239,15 @@ bool file_exists(const char * path1)
 //   if(node.name == "spa" && node.childs.size() > 0)
 //   {
 //      LPXNode lpnode = &node;
-//      for(unsigned int ui = 0; ui < lpnode->childs.size(); ui++)
+//      for(unsigned int u = 0; u < lpnode->childs.size(); u++)
 //      {
-//         if(lpnode->childs[ui]->name == "index")
+//         if(lpnode->childs[u]->name == "index")
 //         {
-//            if(lpnode->childs[ui]->GetAttr("start") != nullptr)
+//            if(lpnode->childs[u]->GetAttr("start") != nullptr)
 //            {
-//               if(std::string(lpnode->childs[ui]->GetAttrValue("start")).length() > 0)
+//               if(std::string(lpnode->childs[u]->GetAttrValue("start")).length() > 0)
 //               {
-//                  g_strId= std::string(lpnode->childs[ui]->GetAttrValue("start"));
+//                  g_strId= std::string(lpnode->childs[u]->GetAttrValue("start"));
 //               }
 //            }
 //         }
@@ -270,15 +270,15 @@ bool file_exists(const char * path1)
 //   if(node.name == "spa" && node.childs.size() > 0)
 //   {
 //      LPXNode lpnode = &node;
-//      for(unsigned int ui = 0; ui < lpnode->childs.size(); ui++)
+//      for(unsigned int u = 0; u < lpnode->childs.size(); u++)
 //      {
-//         if(lpnode->childs[ui]->name == "index")
+//         if(lpnode->childs[u]->name == "index")
 //         {
-//            if(lpnode->childs[ui]->GetAttr("start") != nullptr)
+//            if(lpnode->childs[u]->GetAttr("start") != nullptr)
 //            {
-//               if(std::string(lpnode->childs[ui]->GetAttrValue("start")).length() > 0)
+//               if(std::string(lpnode->childs[u]->GetAttrValue("start")).length() > 0)
 //               {
-//                  g_strId = std::string(lpnode->childs[ui]->GetAttrValue("start"));
+//                  g_strId = std::string(lpnode->childs[u]->GetAttrValue("start"));
 //                  iOkCount++;
 //               }
 //               else
@@ -295,14 +295,14 @@ bool file_exists(const char * path1)
 //         {
 //            return false;
 //         }
-//         if(lpnode->childs[ui]->GetAttr("build") != nullptr)
+//         if(lpnode->childs[u]->GetAttr("build") != nullptr)
 //         {
-//            if(std::string(lpnode->childs[ui]->GetAttrValue("build")).length() > 0)
+//            if(std::string(lpnode->childs[u]->GetAttrValue("build")).length() > 0)
 //            {
 //               strInstalledBuild = file::get_contents("C:\\ca2\\stage\\app\\build.txt");
 //               if(strInstalledBuild.length() <= 0)
 //                  return false;
-//               strRequestedBuild = std::string(lpnode->childs[ui]->GetAttrValue("build")).c_str();
+//               strRequestedBuild = std::string(lpnode->childs[u]->GetAttrValue("build")).c_str();
 //               if(strRequestedBuild.length() <= 0)
 //                  return false;
 //               iOkCount++;
@@ -401,9 +401,9 @@ bool file_exists(const char * path1)
 //         return 1;
 //      }
 //   }
-//   for(unsigned int ui = 0; ui < g_straRestartCommandLine.size(); ui++)
+//   for(unsigned int u = 0; u < g_straRestartCommandLine.size(); u++)
 //   {
-//      std::string & str = g_straRestartCommandLine.at(ui);
+//      std::string & str = g_straRestartCommandLine.at(u);
 //      __memset(&si, 0, sizeof(si));
 //      __memset(&pi, 0, sizeof(pi));
 //      if(!::CreateProcess(nullptr,(LPSTR)str.c_str(),nullptr,nullptr,FALSE,0,nullptr,nullptr,&si,&pi))
