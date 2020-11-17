@@ -26,6 +26,12 @@
 
 #define PLATFORM_NAMESPACE windows
 
+#define PLATFORM_COMMON_NAMESPACE windows_common
+
+#define PLATFORM_STRING "windows"
+
+#define PLATFORM_COMMON_STRING "windows_common"
+
 #define DEFAULT_DIR_SEPARATOR "\\"
 
 
