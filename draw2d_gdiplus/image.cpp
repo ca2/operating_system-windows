@@ -201,7 +201,7 @@ namespace draw2d_gdiplus
 
       int iScan = 0;
 
-      COLORREF* pcolorref = nullptr;
+      color32_t * pcolorref = nullptr;
 
       if (!m_pbitmap->create_bitmap(nullptr, size, (void**)&pcolorref, &iScan))
       {
@@ -354,7 +354,7 @@ namespace draw2d_gdiplus
 
       }
 
-      return m_pgraphics->draw(pointDest, size, pgraphics, point, SRCCOPY) != FALSE;
+      return m_pgraphics->draw(pointDest, size, pgraphics, point) != FALSE;
 
    }
 
@@ -475,7 +475,7 @@ namespace draw2d_gdiplus
       {
 
 
-         pimageDst->g()->from(pointDst, size, pimageSrc->g(), pointSrc, SRCCOPY);
+         pimageDst->g()->from(pointDst, size, pimageSrc->g(), pointSrc);
 
 
       }
@@ -529,13 +529,7 @@ namespace draw2d_gdiplus
 
       pimage1->set_rgb(255, 255, 255);
 
-      pimage1->g()->DrawIcon(
-      0, 0,
-      picon,
-      cx, cy,
-      0,
-      nullptr,
-      DI_IMAGE | DI_MASK);
+      pimage1->g()->DrawIcon({ 0, 0 }, picon, { cx, cy });
 
       // Black blend image
       ::image_pointer pimage2;
@@ -561,13 +555,10 @@ namespace draw2d_gdiplus
 
       pimage2->fill(0, 0, 0, 0);
 
-      pimage2->g()->DrawIcon(
-      0, 0,
-      picon,
-      cx, cy,
-      0,
-      nullptr,
-      DI_IMAGE | DI_MASK);
+      pimage2->g()->DrawIcon({ 0, 0 }, picon, { cx, cy });
+
+      //nullptr,
+      //DI_IMAGE | DI_MASK);
 
       // Mask image
       ::image_pointer pimageM;
@@ -590,13 +581,8 @@ namespace draw2d_gdiplus
          return estatus;
 
       }
-      pimageM->g()->DrawIcon(
-      0, 0,
-      picon,
-      cx, cy,
-      0,
-      nullptr,
-      DI_MASK);
+
+      pimageM->g()->DrawIcon({ 0, 0 }, picon, { cx, cy });
 
       u8 * r1 = (u8 *)pimage1->colorref();
       u8 * r2 = (u8 *)pimage2->colorref();

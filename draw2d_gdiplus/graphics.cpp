@@ -327,17 +327,17 @@ namespace draw2d_gdiplus
 
    }
 
-   i32 graphics::EnumObjects(i32 nObjectType, i32 (CALLBACK* pfn)(LPVOID, LPARAM), LPARAM lpData)
+   //i32 graphics::EnumObjects(i32 nObjectType, i32 (CALLBACK* pfn)(LPVOID, LPARAM), LPARAM lpData)
 
-   {
-      //ASSERT(get_handle2() != nullptr);
-      //return ::EnumObjects(get_handle2(), nObjectType, (GOBJENUMPROC)pfn, lpData);
+   //{
+   //   //ASSERT(get_handle2() != nullptr);
+   //   //return ::EnumObjects(get_handle2(), nObjectType, (GOBJENUMPROC)pfn, lpData);
 
-      __throw(interface_only_exception());
+   //   __throw(interface_only_exception());
 
-      return -1;
+   //   return -1;
 
-   }
+   //}
 
 
    ::estatus graphics::set(::draw2d::bitmap * pbitmap)
@@ -874,26 +874,18 @@ namespace draw2d_gdiplus
    }
 
 
+   bool graphics::DrawIcon(const ::point & point, ::draw2d::icon * picon, const ::size & size)
+   {
+
+      return draw_image(point, picon->get_image(size), size);
+
+   }
+
+
    bool graphics::DrawIcon(i32 x, i32 y, ::draw2d::icon * picon)
    {
 
-      return BitBlt(x, y, 32, 32, picon->get_image(::size(32, 32))->g());
-
-   }
-
-
-   bool graphics::DrawIcon(const ::point & point, ::draw2d::icon * picon)
-   {
-
-      return DrawIcon(point.x, point.y, picon);
-
-   }
-
-
-   bool graphics::DrawIcon(i32 x, i32 y, ::draw2d::icon * picon, i32 cx, i32 cy, UINT istepIfAniCur, HBRUSH hbrFlickerFreeDraw, UINT diFlags)
-   {
-
-      return BitBlt(x, y, cx, cy, picon->get_image(::size(cx, cy))->g());
+      return BitBlt(x, y,cx, cy, picon->get_image(::size(cx, cy))->g());
 
    }
 

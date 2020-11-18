@@ -91,7 +91,7 @@ namespace draw2d_gdiplus
       point GetBrushOrg() override;
       point SetBrushOrg(i32 x, i32 y) override;
       point SetBrushOrg(const ::point & point) override;
-      i32 EnumObjects(i32 nObjectType, i32 (CALLBACK* pfn)(LPVOID, LPARAM), LPARAM lpData) override;
+      //i32 EnumObjects(i32 nObjectType, i32 (CALLBACK* pfn)(LPVOID, LPARAM), LPARAM lpData) override;
 
 
 
@@ -113,7 +113,7 @@ namespace draw2d_gdiplus
 
       i32 SetPolyFillMode(i32 nPolyFillMode) override;
       i32 SetROP2(i32 nDrawMode) override;
-      i32 SetStretchBltMode(i32 nStretchMode) override;
+      //bool set_interpolation_mode(::draw2d::enum_interpolation_mode einterpolationmode) override;
 
       //bool GetColorAdjustment(LPCOLORADJUSTMENT pColorAdjust) override;
 
@@ -267,29 +267,28 @@ namespace draw2d_gdiplus
 
       void frame_rect(const ::rect & rect, ::draw2d::brush* pBrush) override;
       void invert_rect(const ::rect & rect) override;
-      bool DrawIcon(i32 x, i32 y, ::draw2d::icon * picon) override;
-      bool DrawIcon(const ::point & point, ::draw2d::icon * picon) override;
-      bool DrawIcon(i32 x, i32 y, ::draw2d::icon * picon, i32 cx, i32 cy, UINT istepIfAniCur, HBRUSH hbrFlickerFreeDraw, UINT diFlags) override;
-      bool DrawState(const ::point & point, const ::size & size, HBITMAP hBitmap, UINT nFlags,
-                     HBRUSH hBrush = nullptr) override;
-      bool DrawState(const ::point & point, const ::size & size, ::draw2d::bitmap* pBitmap, UINT nFlags,
-                     ::draw2d::brush* pBrush = nullptr) override;
-      bool DrawState(const ::point & point, const ::size & size, HICON hIcon, UINT nFlags,
-                     HBRUSH hBrush = nullptr) override;
-      bool DrawState(const ::point & point, const ::size & size, HICON hIcon, UINT nFlags,
-                     ::draw2d::brush* pBrush = nullptr) override;
-      bool DrawState(const ::point & point, const ::size & size, const char * pszText, UINT nFlags,
+      bool DrawIcon(const ::point & point, ::draw2d::icon * picon, const ::size & size) override;
+      //bool DrawIcon(i32 x, i32 y, ::draw2d::icon * picon, i32 cx, i32 cy, UINT istepIfAniCur, HBRUSH hbrFlickerFreeDraw, UINT diFlags) override;
+      //bool DrawState(const ::point & point, const ::size & size, HBITMAP hBitmap, UINT nFlags,
+        //             HBRUSH hBrush = nullptr) override;
+      //bool DrawState(const ::point & point, const ::size & size, ::draw2d::bitmap* pBitmap, UINT nFlags,
+        //             ::draw2d::brush* pBrush = nullptr) override;
+      //bool DrawState(const ::point & point, const ::size & size, HICON hIcon, UINT nFlags,
+      //               HBRUSH hBrush = nullptr) override;
+      //bool DrawState(const ::point & point, const ::size & size, HICON hIcon, UINT nFlags,
+      //               ::draw2d::brush* pBrush = nullptr) override;
+      //bool DrawState(const ::point & point, const ::size & size, const char * pszText, UINT nFlags,
 
-                     bool bPrefixText = TRUE, i32 nTextLen = 0, HBRUSH hBrush = nullptr) override;
-      bool DrawState(const ::point & point, const ::size & size, const char * pszText, UINT nFlags,
+      //               bool bPrefixText = TRUE, i32 nTextLen = 0, HBRUSH hBrush = nullptr) override;
+      //bool DrawState(const ::point & point, const ::size & size, const char * pszText, UINT nFlags,
 
-                     bool bPrefixText = TRUE, i32 nTextLen = 0, ::draw2d::brush* pBrush = nullptr) override;
-      bool DrawState(const ::point & point, const ::size & size, DRAWSTATEPROC pDrawProc,
+      //               bool bPrefixText = TRUE, i32 nTextLen = 0, ::draw2d::brush* pBrush = nullptr) override;
+      //bool DrawState(const ::point & point, const ::size & size, DRAWSTATEPROC pDrawProc,
 
-                     LPARAM lData, UINT nFlags, HBRUSH hBrush = nullptr) override;
-      bool DrawState(const ::point & point, const ::size & size, DRAWSTATEPROC pDrawProc,
+      //               LPARAM lData, UINT nFlags, HBRUSH hBrush = nullptr) override;
+      //bool DrawState(const ::point & point, const ::size & size, DRAWSTATEPROC pDrawProc,
 
-                     LPARAM lData, UINT nFlags, ::draw2d::brush* pBrush = nullptr) override;
+      //               LPARAM lData, UINT nFlags, ::draw2d::brush* pBrush = nullptr) override;
 
       // Ellipse and Polygon Functions
       bool Chord(i32 x1, i32 y1, i32 x2, i32 y2, i32 x3, i32 y3,
@@ -342,37 +341,37 @@ namespace draw2d_gdiplus
       bool round_rect(const ::rectd & rect, const ::pointd & point) override;
 
 
-      // Bitmap Functions
-      bool PatBlt(i32 x, i32 y, i32 nWidth, i32 nHeight, u32 dwRop) override;
-      bool BitBltRaw(i32 x, i32 y, i32 nWidth, i32 nHeight, ::draw2d::graphics * pgraphicsSrc,
-                     i32 xSrc, i32 ySrc, u32 dwRop) override;
-      bool StretchBltRaw(double x, double y, double nWidth, double nHeight, ::draw2d::graphics * pgraphicsSrc,
-                         i32 xSrc, i32 ySrc, i32 nSrcWidth, i32 nSrcHeight, u32 dwRop) override;
+      //// Bitmap Functions
+      //bool PatBlt(i32 x, i32 y, i32 nWidth, i32 nHeight, u32 dwRop) override;
+      //bool BitBltRaw(i32 x, i32 y, i32 nWidth, i32 nHeight, ::draw2d::graphics * pgraphicsSrc,
+      //               i32 xSrc, i32 ySrc, u32 dwRop) override;
+      //bool StretchBltRaw(double x, double y, double nWidth, double nHeight, ::draw2d::graphics * pgraphicsSrc,
+      //                   i32 xSrc, i32 ySrc, i32 nSrcWidth, i32 nSrcHeight, u32 dwRop) override;
 
 
-      bool StretchBltRaw(i32 x, i32 y, i32 nWidth, i32 nHeight, ::draw2d::graphics * pgraphicsSrc,
-                         i32 xSrc, i32 ySrc, i32 nSrcWidth, i32 nSrcHeight, u32 dwRop) override;
+      //bool StretchBltRaw(i32 x, i32 y, i32 nWidth, i32 nHeight, ::draw2d::graphics * pgraphicsSrc,
+      //                   i32 xSrc, i32 ySrc, i32 nSrcWidth, i32 nSrcHeight, u32 dwRop) override;
 
       ::color GetPixel(i32 x, i32 y) override;
       ::color GetPixel(const ::point & point) override;
       ::color SetPixel(i32 x, i32 y, const ::color & color) override;
       ::color SetPixel(const ::point & point, const ::color & color) override;
       ::color blend_pixel(const ::point& point, const ::color& color) override;
-      bool FloodFill(i32 x, i32 y, const ::color & color) override;
-      bool ExtFloodFill(i32 x, i32 y, const ::color & color, UINT nFillType) override;
-      bool MaskBlt(i32 x, i32 y, i32 nWidth, i32 nHeight, ::draw2d::graphics * pgraphicsSrc,
-                   i32 xSrc, i32 ySrc, ::draw2d::bitmap& maskBitmap, i32 xMask, i32 yMask,
-                   u32 dwRop) override;
-      bool PlgBlt(LPPOINT pPoint, ::draw2d::graphics * pgraphicsSrc, i32 xSrc, i32 ySrc,
+      //bool FloodFill(i32 x, i32 y, const ::color & color) override;
+      //bool ExtFloodFill(i32 x, i32 y, const ::color & color, UINT nFillType) override;
+      //bool MaskBlt(i32 x, i32 y, i32 nWidth, i32 nHeight, ::draw2d::graphics * pgraphicsSrc,
+      //             i32 xSrc, i32 ySrc, ::draw2d::bitmap& maskBitmap, i32 xMask, i32 yMask,
+      //             u32 dwRop) override;
+      //bool PlgBlt(LPPOINT pPoint, ::draw2d::graphics * pgraphicsSrc, i32 xSrc, i32 ySrc,
 
-                  i32 nWidth, i32 nHeight, ::draw2d::bitmap& maskBitmap, i32 xMask, i32 yMask) override;
+      //            i32 nWidth, i32 nHeight, ::draw2d::bitmap& maskBitmap, i32 xMask, i32 yMask) override;
       bool SetPixelV(i32 x, i32 y, const ::color & color) override;
       bool SetPixelV(const ::point & point, const ::color & color) override;
-      bool GradientFill(TRIVERTEX* pVertices, ULONG nVertices,
-                        void * pMesh, ULONG nMeshElements, u32 dwMode) override;
-      bool TransparentBlt(i32 xDest, i32 yDest, i32 nDestWidth, i32 nDestHeight,
-                          ::draw2d::graphics * pgraphicsSrc, i32 xSrc, i32 ySrc, i32 nSrcWidth, i32 nSrcHeight,
-                          UINT clrTransparent) override;
+      //bool GradientFill(TRIVERTEX* pVertices, ULONG nVertices,
+      //                  void * pMesh, ULONG nMeshElements, u32 dwMode) override;
+      //bool TransparentBlt(i32 xDest, i32 yDest, i32 nDestWidth, i32 nDestHeight,
+      //                    ::draw2d::graphics * pgraphicsSrc, i32 xSrc, i32 ySrc, i32 nSrcWidth, i32 nSrcHeight,
+      //                    UINT clrTransparent) override;
 
       virtual bool alpha_blendRaw(i32 xDest, i32 yDest, i32 nDestWidth, i32 nDestHeight, ::draw2d::graphics * pgraphicsSrc, i32 xSrc, i32 ySrc, i32 nSrcWidth, i32 nSrcHeight, double dOpacity) override;
 
@@ -398,12 +397,12 @@ namespace draw2d_gdiplus
 
       //virtual bool draw_text_ex(const char * pszString,strsize nCount,const ::rect & rect, const ::e_align & ealign = e_align_top_left, const ::e_draw_text & edrawtext = e_draw_text_none,LPDRAWTEXTPARAMS lpDTParams) override;
 
-      virtual bool draw_text_ex(const string & str,const ::rect & rect, const ::e_align & ealign = e_align_top_left, const ::e_draw_text & edrawtext = e_draw_text_none,LPDRAWTEXTPARAMS lpDTParams=nullptr) override;
+      virtual bool draw_text_ex(const string & str,const ::rect & rect, const ::e_align & ealign = e_align_top_left, const ::e_draw_text & edrawtext = e_draw_text_none) override;
 
 
       //virtual bool draw_text_ex(const char * pszString,strsize nCount,const ::rectd & rect, const ::e_align & ealign = e_align_top_left, const ::e_draw_text & edrawtext = e_draw_text_none,LPDRAWTEXTPARAMS lpDTParams) override;
 
-      virtual bool draw_text_ex(const string & str,const ::rectd & rect, const ::e_align & ealign = e_align_top_left, const ::e_draw_text & edrawtext = e_draw_text_none,LPDRAWTEXTPARAMS pDTParams=nullptr) override;
+      virtual bool draw_text_ex(const string & str,const ::rectd & rect, const ::e_align & ealign = e_align_top_left, const ::e_draw_text & edrawtext = e_draw_text_none) override;
 
       virtual ::count get_character_extent(double_array & daLeft, double_array& daRight, const string & str, strsize iStart = 0, strsize iEnd = -1) override;
 
@@ -430,11 +429,11 @@ namespace draw2d_gdiplus
 
       virtual size GetOutputTabbedTextExtent(const string & str,count nTabPositions, LPINT pnTabStopPositions) override;
 
-      virtual bool GrayString(::draw2d::brush* pBrush, bool (CALLBACK* pfnOutput)(HDC, LPARAM, i32), LPARAM lpData, i32 nCount, i32 x, i32 y, i32 nWidth, i32 nHeight) override;
+      //virtual bool GrayString(::draw2d::brush* pBrush, bool (CALLBACK* pfnOutput)(HDC, LPARAM, i32), LPARAM lpData, i32 nCount, i32 x, i32 y, i32 nWidth, i32 nHeight) override;
 
       virtual UINT GetTextAlign() override;
       virtual UINT SetTextAlign(UINT nFlags) override;
-      virtual i32 GetTextFace(count nCount, LPTSTR pszFacename) override;
+      //virtual i32 GetTextFace(count nCount, LPTSTR pszFacename) override;
 
       virtual i32 GetTextFace(string & rString) override;
       virtual bool get_text_metrics(::draw2d::text_metric * pMetrics) override;
@@ -462,9 +461,9 @@ namespace draw2d_gdiplus
 
 
       // Advanced Drawing
-      bool DrawEdge(const ::rect & rect,UINT nEdge,UINT nFlags) override;
+      //bool DrawEdge(const ::rect & rect,UINT nEdge,UINT nFlags) override;
 
-      bool DrawFrameControl(const ::rect & rect,UINT nType,UINT nState) override;
+      //bool DrawFrameControl(const ::rect & rect,UINT nType,UINT nState) override;
 
 
 //      // Scrolling Functions
@@ -526,7 +525,7 @@ namespace draw2d_gdiplus
 
       i32 StartPage() override;
       i32 EndPage() override;
-      i32 SetAbortProc(bool (CALLBACK* pfn)(HDC, i32)) override;
+      //i32 SetAbortProc(bool (CALLBACK* pfn)(HDC, i32)) override;
 
       i32 AbortDoc() override;
       i32 EndDoc() override;
@@ -585,11 +584,11 @@ namespace draw2d_gdiplus
 
 //      HGDIOBJ set(HGDIOBJ) override;      // do not use for regions
 
-      virtual bool set_alpha_mode(::draw2d::e_alpha_mode ealphamode) override;
+      virtual bool set_alpha_mode(::draw2d::enum_alpha_mode ealphamode) override;
 
       virtual bool set_smooth_mode(::draw2d::e_smooth_mode esmoothmode) override;
 
-      virtual bool set_interpolation_mode(::draw2d::e_interpolation_mode einterpolationmode) override;
+      virtual bool set_interpolation_mode(::draw2d::enum_interpolation_mode einterpolationmode) override;
 
       virtual bool set_compositing_quality(::draw2d::e_compositing_quality ecompositingquality) override;
 
@@ -624,7 +623,7 @@ namespace draw2d_gdiplus
 
       virtual bool TextOutAlphaBlend(double x, double y, const string & str) override;
 
-      virtual bool BitBltAlphaBlend(i32 x, i32 y, i32 nWidth, i32 nHeight, ::draw2d::graphics * pgraphicsSrc, i32 xSrc, i32 ySrc, u32 dwRop) override;
+      //virtual bool BitBltAlphaBlend(i32 x, i32 y, i32 nWidth, i32 nHeight, ::draw2d::graphics * pgraphicsSrc, i32 xSrc, i32 ySrc, u32 dwRop) override;
 
       virtual i32 meta_file_procedure(HDC hDC, HANDLETABLE* pHandleTable, METARECORD* pMetaRec, i32 nHandles);
 
