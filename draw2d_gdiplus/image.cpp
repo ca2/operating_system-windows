@@ -276,7 +276,7 @@ namespace draw2d_gdiplus
 
       }
 
-      from(pgraphics);
+      copy(pgraphics->m_pimage);
 
       return true;
 
@@ -292,21 +292,20 @@ namespace draw2d_gdiplus
 
       m_pbitmap.release();
 
-
       return true;
 
    }
 
 
-   bool image::to(::draw2d::graphics * pgraphics, const ::point & point, const ::size & size, const ::point & pointSrc)
-   {
+   //bool image::to(::draw2d::graphics * pgraphics, const ::point & point, const ::size & size, const ::point & pointSrc)
+   //{
 
-      return pgraphics->draw(point, size, get_graphics(), pointSrc);
+   //   return pgraphics->draw(point, size, get_graphics(), pointSrc);
 
-   }
+   //}
 
 
-   bool image::from(::draw2d::graphics * pgraphics)
+   bool image::stretch(::draw2d::graphics * pgraphics)
    {
 
       ::draw2d::bitmap_pointer bitmap(get_context_application());
@@ -344,29 +343,22 @@ namespace draw2d_gdiplus
    }
 
 
-   bool image::from(const ::point & pointDest, ::draw2d::graphics * pgraphics, const ::point & point, const ::size & size)
-   {
+   //bool image::draw(const ::point & pointDest, ::image * pimage, const ::rect & rectSrc)
+   //{
 
-      if (m_pgraphics.is_null())
-      {
+   //   return m_pgraphics->draw(pointDest, pimage, rectSrc) != FALSE;
 
-         return false;
-
-      }
-
-      return m_pgraphics->draw(pointDest, size, pgraphics, point) != FALSE;
-
-   }
+   //}
 
 
-   bool image::from(const ::point & pointDstParam, ::image * pimageSrc, const ::point & pointSrcParam, const ::size & sizeParam)
+   bool image::draw(const ::point & pointDstParam, ::image * pimageSrc, const ::rect & rectSrc)
    {
 
       ::point pointDst(pointDstParam);
 
-      ::point pointSrc(pointSrcParam);
+      ::point pointSrc(rectSrc.top_left());
 
-      ::size size(sizeParam);
+      ::size size(rectSrc.size());
 
       ::image * pimageDst = this;
 
@@ -474,9 +466,7 @@ namespace draw2d_gdiplus
       else
       {
 
-
-         pimageDst->g()->from(pointDst, size, pimageSrc->g(), pointSrc);
-
+         pimageDst->g()->draw(pointDst, pimageSrc->g(), { pointSrc, size });
 
       }
 
@@ -529,7 +519,7 @@ namespace draw2d_gdiplus
 
       pimage1->set_rgb(255, 255, 255);
 
-      pimage1->g()->DrawIcon({ 0, 0 }, picon, { cx, cy });
+      pimage1->g()->draw({ 0, 0 }, picon, { cx, cy });
 
       // Black blend image
       ::image_pointer pimage2;
@@ -555,7 +545,7 @@ namespace draw2d_gdiplus
 
       pimage2->fill(0, 0, 0, 0);
 
-      pimage2->g()->DrawIcon({ 0, 0 }, picon, { cx, cy });
+      pimage2->g()->draw({ 0, 0 }, picon, { cx, cy });
 
       //nullptr,
       //DI_IMAGE | DI_MASK);
@@ -582,7 +572,7 @@ namespace draw2d_gdiplus
 
       }
 
-      pimageM->g()->DrawIcon({ 0, 0 }, picon, { cx, cy });
+      pimageM->g()->draw({ 0, 0 }, picon, { cx, cy });
 
       u8 * r1 = (u8 *)pimage1->colorref();
       u8 * r2 = (u8 *)pimage2->colorref();

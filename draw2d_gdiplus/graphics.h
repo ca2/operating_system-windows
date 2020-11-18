@@ -267,7 +267,7 @@ namespace draw2d_gdiplus
 
       void frame_rect(const ::rect & rect, ::draw2d::brush* pBrush) override;
       void invert_rect(const ::rect & rect) override;
-      bool DrawIcon(const ::point & point, ::draw2d::icon * picon, const ::size & size) override;
+      //bool draw(const ::point & point, ::draw2d::icon * picon, const ::size & size) override;
       //bool DrawIcon(i32 x, i32 y, ::draw2d::icon * picon, i32 cx, i32 cy, UINT istepIfAniCur, HBRUSH hbrFlickerFreeDraw, UINT diFlags) override;
       //bool DrawState(const ::point & point, const ::size & size, HBITMAP hBitmap, UINT nFlags,
         //             HBRUSH hBrush = nullptr) override;
@@ -341,6 +341,10 @@ namespace draw2d_gdiplus
       bool round_rect(const ::rectd & rect, const ::pointd & point) override;
 
 
+      virtual bool draw_raw(const ::point & pointDst, ::draw2d::graphics * pgraphicsSrc, const ::rect & rectSrc = ::rect()) override;
+      virtual bool stretch_raw(const ::rect & rectDst, ::draw2d::graphics * pgraphicsSrc, const ::rect & rectSrc = ::rect()) override;
+
+
       //// Bitmap Functions
       //bool PatBlt(i32 x, i32 y, i32 nWidth, i32 nHeight, u32 dwRop) override;
       //bool BitBltRaw(i32 x, i32 y, i32 nWidth, i32 nHeight, ::draw2d::graphics * pgraphicsSrc,
@@ -391,7 +395,8 @@ namespace draw2d_gdiplus
       virtual size TabbedTextOut(i32 x, i32 y, const string & str,count nTabPositions, LPINT pnTabStopPositions, i32 nTabOrigin) override;
 
 
-
+      //using ::draw2d::graphics::draw;
+      //virtual bool draw(const ::point & point, ::draw2d::graphics * pgraphicsSrc, const ::rect & rectSrc) override;
 
       virtual bool _001DrawText(const string & str, rectd & rectParam, const ::e_align & ealign = e_align_top_left, const ::e_draw_text & edrawtext = e_draw_text_none, bool bMeasure = false) override;
 
