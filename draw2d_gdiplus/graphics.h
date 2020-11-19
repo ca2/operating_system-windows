@@ -341,7 +341,7 @@ namespace draw2d_gdiplus
       bool round_rect(const ::rectd & rect, const ::pointd & point) override;
 
 
-      virtual bool draw_raw(const ::point & pointDst, ::draw2d::graphics * pgraphicsSrc, const ::rect & rectSrc = ::rect()) override;
+      virtual bool draw_raw(const ::rect & rectDst, ::draw2d::graphics * pgraphicsSrc, const ::point & pointSrc = ::point()) override;
       virtual bool stretch_raw(const ::rect & rectDst, ::draw2d::graphics * pgraphicsSrc, const ::rect & rectSrc = ::rect()) override;
 
 

@@ -1471,7 +1471,7 @@ namespace draw2d_gdiplus
    //}
 
 
-   bool graphics::draw_raw(const ::point & point, ::draw2d::graphics * pgraphicsSrc, const ::rect & rectSrc)
+   bool graphics::draw_raw(const ::rect & rectDst, ::draw2d::graphics * pgraphicsSrc, const ::point & pointSrc)
    {
 
       if (m_pgraphics == nullptr)
@@ -1504,6 +1504,13 @@ namespace draw2d_gdiplus
          {
 
             goto gdi_fallback;
+
+         }
+
+         if (::is_ok(pgraphicsSrc->m_pimage))
+         {
+
+            pgraphicsSrc->m_pimage->defer_update_image();
 
          }
 
@@ -1578,15 +1585,15 @@ namespace draw2d_gdiplus
             ColorMatrixFlagsDefault,
             ColorAdjustTypeBitmap);
 
-            Gdiplus::Rect rect(point.x, point.y, rectSrc.width(), rectSrc.height());
+            Gdiplus::Rect rect(rectDst.left, rectDst.top, rectDst.width(), rectDst.height());
 
             ret = m_pgraphics->DrawImage(
                   pbitmap,
                   rect, 
-               rectSrc.left + pgraphicsSrc->GetViewportOrg().x, 
-               rectSrc.top + pgraphicsSrc->GetViewportOrg().y, 
-               rectSrc.width(),
-               rectSrc.height(), 
+               pointSrc.x + pgraphicsSrc->GetViewportOrg().x, 
+               pointSrc.y + pgraphicsSrc->GetViewportOrg().y, 
+               rectDst.width(),
+               rectDst.height(), 
                Gdiplus::UnitPixel, &imageattributes);
 
          }
@@ -1598,13 +1605,13 @@ namespace draw2d_gdiplus
             int ySrcViewport = pgraphicsSrc->GetViewportOrg().y;
 
             ret = m_pgraphics->DrawImage(
-                  pbitmap,
-                  point.x, 
-               point.y,
-               rectSrc.left + xSrcViewport, 
-               rectSrc.top + ySrcViewport, 
-               rectSrc.width(), 
-               rectSrc.height(), Gdiplus::UnitPixel);
+               pbitmap,
+               rectDst.left, 
+               rectDst.top,
+               pointSrc.x + xSrcViewport, 
+               pointSrc.y + ySrcViewport, 
+               rectDst.width(), 
+               rectDst.height(), Gdiplus::UnitPixel);
 
          }
 
@@ -1648,10 +1655,10 @@ gdi_fallback:
       }
 
       bool bOk = ::BitBlt(hdcDst, 
-         point.x, point.y,
-         rectSrc.width(), rectSrc.height(),
+         rectDst.left, rectDst.top,
+         rectDst.width(), rectDst.height(),
          hdcSrc,
-         rectSrc.left, rectSrc.top, SRCCOPY) != FALSE;
+         pointSrc.x, pointSrc.y, SRCCOPY) != FALSE;
 
       __graphics(pgraphicsSrc)->release_hdc(hdcSrc);
 
@@ -7382,7 +7389,7 @@ gdi_fallback:
 
             pimage1->blend2(nullptr, m_pimageAlphaBlend, point((int)max(0, x - m_pointAlphaBlend.x), (int)max(0, y - m_pointAlphaBlend.y)), rectText.size(), 255);
 
-            draw_raw(::point(x, y), pimage1->get_graphics(), { ::point(), rectText.size() });
+            draw_raw({ ::point((LONG)x, (LONG) y), rectText.size() }, pimage1->get_graphics());
 
             return true;
 

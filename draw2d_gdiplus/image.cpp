@@ -351,26 +351,26 @@ namespace draw2d_gdiplus
    //}
 
 
-   bool image::draw(const ::point & pointDstParam, ::image * pimageSrc, const ::rect & rectSrc)
+   bool image::draw(const ::rect & rectDstParam, ::image * pimageSrc, const ::point & pointSrcParam)
    {
 
-      ::point pointDst(pointDstParam);
+      ::rect rectDst(rectDstParam);
 
-      ::point pointSrc(rectSrc.top_left());
+      ::point pointSrc(pointSrcParam);
 
-      ::size size(rectSrc.size());
+      ::size size(rectDst.size());
 
       ::image * pimageDst = this;
 
       if (pimageDst->m_bMapped && pimageSrc->m_bMapped)
       {
 
-         pointDst += m_point;
+         rectDst += m_point;
 
          if (pointSrc.x < 0)
          {
 
-            pointDst.x -= pointSrc.x;
+            rectDst.left -= pointSrc.x;
 
             pointSrc.x = 0;
 
@@ -379,20 +379,20 @@ namespace draw2d_gdiplus
          if (pointSrc.y < 0)
          {
 
-            pointDst.y -= pointSrc.y;
+            rectDst.top -= pointSrc.y;
 
             pointSrc.y = 0;
 
          }
 
-         if (pointDst.x < 0)
+         if (rectDst.left < 0)
          {
 
-            size.cx += pointDst.x;
+            size.cx += rectDst.left;
 
-            pointSrc.x -= pointDst.x;
+            pointSrc.x -= rectDst.left;
 
-            pointDst.x = 0;
+            rectDst.left = 0;
 
          }
 
@@ -403,14 +403,14 @@ namespace draw2d_gdiplus
 
          }
 
-         if (pointDst.y < 0)
+         if (rectDst.top < 0)
          {
 
-            size.cy += pointDst.y;
+            size.cy += rectDst.top;
 
-            pointSrc.y -= pointDst.y;
+            pointSrc.y -= rectDst.top;
 
-            pointDst.y = 0;
+            rectDst.top = 0;
 
          }
 
@@ -421,9 +421,9 @@ namespace draw2d_gdiplus
 
          }
 
-         int xEnd = min(size.cx, min(pimageSrc->width() - pointSrc.x, pimageDst->width() - pointDst.x));
+         int xEnd = min(size.cx, min(pimageSrc->width() - pointSrc.x, pimageDst->width() - rectDst.left));
 
-         int yEnd = min(size.cy, min(pimageSrc->height() - pointSrc.y, pimageDst->height() - pointDst.y));
+         int yEnd = min(size.cy, min(pimageSrc->height() - pointSrc.y, pimageDst->height() - rectDst.top));
 
          if (xEnd < 0)
          {
@@ -443,7 +443,7 @@ namespace draw2d_gdiplus
 
          i32 scanSrc = pimageSrc->scan_size();
 
-         u8 * pdst = &((u8 *)pimageDst->colorref())[scanDst * pointDst.y + pointDst.x * sizeof(COLORREF)];
+         u8 * pdst = &((u8 *)pimageDst->colorref())[scanDst * rectDst.top + rectDst.left * sizeof(COLORREF)];
 
          u8 * psrc = &((u8 *)pimageSrc->colorref())[scanSrc * pointSrc.y + pointSrc.x * sizeof(COLORREF)];
 
@@ -466,7 +466,7 @@ namespace draw2d_gdiplus
       else
       {
 
-         pimageDst->g()->draw(pointDst, pimageSrc->g(), { pointSrc, size });
+         pimageDst->g()->draw({rectDst.top_left(), size }, pimageSrc->g(), pointSrc);
 
       }
 
