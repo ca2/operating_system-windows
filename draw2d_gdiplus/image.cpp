@@ -1,4 +1,4 @@
-﻿#include "framework.h"
+#include "framework.h"
 
 
 namespace draw2d_gdiplus
@@ -12,7 +12,7 @@ namespace draw2d_gdiplus
       m_sizeWnd.cy = 0;
       m_hbitmap = nullptr;
 
-      xxf_zero(m_bitmapinfo);
+      ·zero(m_bitmapinfo);
 
    }
 
@@ -628,7 +628,7 @@ namespace draw2d_gdiplus
       m_pgraphics.release();
       m_hbitmap               = nullptr;
       m_sizeWnd               = ::size64(0, 0);
-      xxf_zero(m_bitmapinfo);
+      ·zero(m_bitmapinfo);
 
    }
 
