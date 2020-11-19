@@ -198,7 +198,7 @@ namespace draw2d_gdiplus
 
       //LOGFONTA lf;
 
-      //xxf_zero(lf);
+      //·zero(lf);
 
       //pfont->GetLogFontA((::Gdiplus::Graphics *) pgraphics->get_os_data(), &lf);
 
