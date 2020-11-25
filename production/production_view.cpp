@@ -97,7 +97,7 @@ namespace production
    
 
 
-   void view::on_apply(::action * paction)
+   void view::on_subject(::promise::subject * psubject, ::promise::context * pcontext)
    {
       if(update == ::id_update_current_area)
       {
@@ -105,16 +105,16 @@ namespace production
          SetTimer(::e_timer_update_current_area, 100, nullptr);
 
       }
-      else if(paction->id() == id_clean)
+      else if(psubject->id() == id_clean)
       {
 
-         m_pproduction->m_bClean = paction->value(id_clean);
+         m_pproduction->m_bClean = psubject->value(id_clean);
 
       }
-      else if(paction->id() == id_build)
+      else if(psubject->id() == id_build)
       {
 
-         m_pproduction->m_bBuild = paction->value(id_build);
+         m_pproduction->m_bBuild = psubject->value(id_build);
 
       }
 

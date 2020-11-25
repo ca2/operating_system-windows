@@ -12,7 +12,7 @@ namespace draw2d_gdiplus
       m_sizeWnd.cy = 0;
       m_hbitmap = nullptr;
 
-      ·zero(m_bitmapinfo);
+      xxf_zero(m_bitmapinfo);
 
    }
 
@@ -628,7 +628,7 @@ namespace draw2d_gdiplus
       m_pgraphics.release();
       m_hbitmap               = nullptr;
       m_sizeWnd               = ::size64(0, 0);
-      ·zero(m_bitmapinfo);
+      xxf_zero(m_bitmapinfo);
 
    }
 

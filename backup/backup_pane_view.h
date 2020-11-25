@@ -20,7 +20,7 @@ namespace backup
       void on_create_impact(::user::impact_data * pcreatordata);
       void install_message_routing(::channel * pchannel);
 
-      virtual void on_apply(::action * paction) override;
+      virtual void on_subject(::promise::subject * psubject, ::promise::context * pcontext) override;
 
 
 
