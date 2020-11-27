@@ -191,7 +191,7 @@ namespace production
 
          m_pviewOptions->m_pcallback = this;
 
-         auto pupdate = new_action(id_browse);
+         auto pupdate = subject(id_browse);
          pupdate->m_actioncontext = ::source_system;
          psubject->id() = ;
          psubject->value(id_form) = "production\\options.xhtml";
@@ -259,7 +259,7 @@ namespace production
          {
             __pointer(::user::interaction) pinteraction = m_pviewOptions->get_child_by_id("clean");
             __pointer(::user::check_box) pcheckbox =  (pinteraction);
-            auto psubject = new_action(id_clean);
+            auto psubject = subject(id_clean);
             psubject->value(id_clean) = pcheckbox->echeck() == ::check_checked;
             get_document()->update_all_views(psubject);
          }
