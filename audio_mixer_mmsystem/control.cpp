@@ -764,7 +764,7 @@ namespace multimedia
                               string strMessage;
                               strMessage.Format("mixerGetControlDetails(ctrlid=%.08lXh) failed on hmx=%.04Xh, mmr=%u!",
                                                 m_mixercontrol.dwControlID, device->m_hMixer, mmrc);
-                              System.message_box(strMessage + message_box_icon_exclamation);
+                              System.message_box(strMessage, nullptr, e_message_box_icon_exclamation);
                            }
                         }
                         return ;
@@ -832,7 +832,7 @@ namespace multimedia
 
                         strMessage.Format("mixerGetControlDetails(ctrlid=%.08lXh) failed on hmx=%.04Xh, mmr=%u!",
                                           m_mixercontrol.dwControlID, device->m_hMixer, mmrc);
-                        System.message_box(strMessage + message_box_icon_exclamation);
+                        System.message_box(strMessage, nullptr, e_message_box_icon_exclamation);
                      }
                      return TRUE;
                   }

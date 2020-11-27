@@ -439,7 +439,7 @@ void main(int argc, char * argv[])
 
          Application.m_result.add(error_failed);
 
-         Application.message_box("Couldn't update resources for \"" + strApp + "\".\n\nDoes the file \"" + strSrc + "\" exists at the moment of this application call and is it valid so far?" + message_box_icon_exclamation);
+         Application.message_box("Couldn't update resources for \"" + strApp + "\".\n\nDoes the file \"" + strSrc + "\" exists at the moment of this application call and is it valid so far?", nullptr, e_message_box_icon_exclamation);
 
          return;
 
