@@ -475,6 +475,14 @@ namespace draw2d_gdiplus
    }
 
 
+ /*  bool image::draw(const ::rect & rectDst, ::image * pimage, const ::point & pointSrc)
+   {
+
+      return ::image::draw(rectDst, pimage, pointSrc);
+
+   }*/
+
+
    ::estatus image::SetIconMask(::draw2d::icon * picon, i32 cx, i32 cy)
    {
 
