@@ -80,7 +80,7 @@ namespace draw2d_gdi
 
       }
 
-      ·zero(m_info);
+      xxf_zero(m_info);
 
       m_info.bmiHeader.biSize          = sizeof (BITMAPINFOHEADER);
       m_info.bmiHeader.biWidth         = size.cx;
