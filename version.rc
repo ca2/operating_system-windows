@@ -13,7 +13,7 @@
 #undef APSTUDIO_READONLY_SYMBOLS
 
 /////////////////////////////////////////////////////////////////////////////
-// Neutral (Default) resources
+// Neutral (m_lDefault) resources
 
 #if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_NEUD)
 LANGUAGE LANG_NEUTRAL, SUBLANG_DEFAULT
@@ -54,7 +54,7 @@ BEGIN
     END
 END
 
-#endif    // Neutral (Default) resources
+#endif    // Neutral (m_lDefault) resources
 /////////////////////////////////////////////////////////////////////////////
 
 
