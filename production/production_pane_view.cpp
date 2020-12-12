@@ -70,11 +70,11 @@ namespace production
 
 
 
-   bool pane_view::pre_create_window(::user::create_struct& cs)
+   bool pane_view::pre_create_window(::user::create_struct * pcreatestruct)
    {
-      cs.dwExStyle &= ~WS_EX_CLIENTEDGE;
+      pcreatestruct->m_createstruct.dwExStyle &= ~WS_EX_CLIENTEDGE;
 
-      return ::user::impact::pre_create_window(cs);
+      return ::user::impact::pre_create_window(pcreatestruct);
    }
 
 

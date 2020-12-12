@@ -88,10 +88,10 @@ namespace production
    }
 #endif //DEBUG
 
-   bool view::pre_create_window(::user::create_struct& cs)
+   bool view::pre_create_window(::user::create_struct * pcreatestruct)
    {
-      cs.style &= ~WS_EX_CLIENTEDGE;
-      return ::user::impact::pre_create_window(cs);
+      pcreatestruct->m_createstruct.style &= ~WS_EX_CLIENTEDGE;
+      return ::user::impact::pre_create_window(pcreatestruct);
    }
 
    
@@ -387,17 +387,17 @@ namespace production
       GetAreaThumbRect(rectArea, m_iV);
       if (rectArea.contains(item.m_pointHitTest))
       {
-         item = {::user::element_area, m_iV   };
+         item = {::user::e_element_area, m_iV   };
          return;
       }
       GetAreaThumbRect(rectArea, m_iVs);
       if(rectArea.contains(item.m_pointHitTest))
       {
-         item = { ::user::element_area, m_iVs };
+         item = { ::user::e_element_area, m_iVs };
          return;
       }
       
-      item = ::user::element_none;
+      item = ::user::e_element_none;
    
 
    }
