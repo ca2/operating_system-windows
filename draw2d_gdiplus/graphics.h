@@ -576,11 +576,11 @@ namespace draw2d_gdiplus
 
       void fill_rect(const ::rectd & rect, const ::color & color) override;
 
-      virtual void draw_3drect(const ::rect & rect, const ::color & colorTopLeft, const ::color& colorBottomRight, eborder eborder = border_all) override;
-      virtual void draw_3drect(const ::rectd & rect, const ::color & colorTopLeft, const ::color& colorBottomRight, eborder eborder = border_all) override;
+      virtual void draw_3drect(const ::rect & rect, const ::color & colorTopLeft, const ::color& colorBottomRight, eborder eborder = e_border_all) override;
+      virtual void draw_3drect(const ::rectd & rect, const ::color & colorTopLeft, const ::color& colorBottomRight, eborder eborder = e_border_all) override;
 
-      virtual void draw_rect(const ::rect& rect, const ::color& color, eborder eborder = border_all);
-      virtual void draw_rect(const rectd& rectd, const ::color& color, eborder eborder = border_all);
+      virtual void draw_rect(const ::rect& rect, const ::color& color, eborder eborder = e_border_all);
+      virtual void draw_rect(const rectd& rectd, const ::color& color, eborder eborder = e_border_all);
 
 #ifdef DEBUG
       virtual void assert_valid() const override;
