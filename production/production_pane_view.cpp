@@ -119,7 +119,7 @@ namespace production
          {
             pcreatordata->m_pdocument = get_document();
          }
-         pcreatordata->m_eflag.add(::user::flag_hide_all_others_on_show);
+         pcreatordata->m_eflag.add(::user::e_flag_hide_all_others_on_show);
       }
       break;
       /*      case PaneViewFileManager:
@@ -253,7 +253,7 @@ namespace production
 
    void pane_view::on_control_event(::user::control_event * pevent)
    {
-      if(pevent->m_eevent == ::user::event_set_check)
+      if(pevent->m_eevent == ::user::e_event_set_check)
       {
          if(pevent->m_puie->m_id == "clean")
          {
