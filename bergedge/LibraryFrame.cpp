@@ -572,7 +572,7 @@ int CALLBACK LibraryFrameBrowseCallbackProc(HWND hwnd, UINT uMsg, LPARAM lParam,
 
       if(!pframe->ValidateNewName(str, strCandidateNewPath))
       {
-         AfxMessageBox("A library with this name already exists at the specified location (" + strCandidateNewPath + "). Please choose another location or another name.",MB_ICONINFORMATION);
+         AfxMessageBox("A library with this name already exists at the specified location (" + strCandidateNewPath + "). Please choose another location or another name.",e_message_box_icon_information);
          return 1;
       }
 
