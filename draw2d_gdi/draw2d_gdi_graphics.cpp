@@ -3655,7 +3655,7 @@ namespace draw2d_gdi
    }
 
 
-   void graphics::draw3d_rect(const ::rect & rect, COLORREF crTopLeft, COLORREF crBottomRight, eborder eborder)
+   void graphics::draw3d_rect(const ::rect & rect, COLORREF crTopLeft, COLORREF crBottomRight, const ::e_border & eborder)
    {
 
       int x = rect.left;

@@ -157,7 +157,7 @@
     </PreBuildEvent>
     <ClCompile>
       <AdditionalOptions>/bigobj -Zm512</AdditionalOptions>
-      <AdditionalIncludeDirectories>$(SolutionDir)../../inc;$(__sensitive)/sensitive/include;$(SolutionDir)../../../source/include;$(__archive)/local/include;$(SolutionDir)../../../archive/platform-windows;$(__archive)/third-windows/include;$(__archive)/third-windows/third/include;$(__archive)/third-windows-common/include;$(SolutionDir)../../../source/app/_include;$(SolutionDir)../../third/include;.;$(SolutionDir)../../../source;$(SolutionDir)../../../source/app;$(SolutionDir)../../../source/app;$(SolutionDir)../../../source;$(ProjectDir)../../include;$(ProjectDir)../..;$(ProjectDir)../../;$(ProjectDir)../;$(ProjectDir);C:\sensitive\sensitive\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)../../inc;$(__sensitive)/sensitive/include;$(SolutionDir)../../../source/include;$(__archive)local/include;$(SolutionDir)../../../archive/platform-windows;$(__archive)third-windows/include;$(__archive)third-windows/third/include;$(__archive)third-windows-common/include;$(SolutionDir)../../../source/app/_include;$(SolutionDir)../../third/include;.;$(SolutionDir)../../../source;$(SolutionDir)../../../source/app;$(SolutionDir)../../../source/app;$(SolutionDir)../../../source;$(ProjectDir)../../include;$(ProjectDir)../..;$(ProjectDir)../../;$(ProjectDir)../;$(ProjectDir);C:\sensitive\sensitive\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>false</MinimalRebuild>
       <ExceptionHandling>Async</ExceptionHandling>
@@ -198,7 +198,7 @@
     <Link>
       <AdditionalDependencies>_zlib.lib;_bzip2.lib;_libcrypto.lib;_libssl.lib;Windowscodecs.lib;dwrite.lib;d3d11.lib;d2d1.lib;Winmm.lib;ws2_32.lib;Normaliz.lib;Crypt32.lib;Secur32.lib;Advapi32.lib;version.lib;gdiplus.lib;Psapi.lib;WinINet.lib;Userenv.lib;Wtsapi32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
-      <AdditionalLibraryDirectories>$(OutDir);$(__archive)\storage-windows\third\library\$(PlatformName)\$(Configuration)\;$(__archive)\storage-windows\library\$(PlatformName)\$(Configuration)\;$(SolutionDir)..\..\..\time\$(PlatformName)\$(Configuration)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(OutDir);$(__archive)storage-windows\third\library\$(PlatformName)\$(Configuration)\;$(__archive)storage-windows\library\$(PlatformName)\$(Configuration)\;$(SolutionDir)..\..\..\time\$(PlatformName)\$(Configuration)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
       <GenerateDebugInformation>DebugFull</GenerateDebugInformation>
@@ -263,7 +263,7 @@ copy "$(SolutionDir)..\..\thirdparty\binary\libvorbisfile.dll" "$(OutDir)libvorb
     <ClCompile>
       <AdditionalOptions>/bigobj -Zm512</AdditionalOptions>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>$(SolutionDir)../../inc;$(__sensitive)/sensitive/include;$(SolutionDir)../../../source/include;$(__archive)/local/include;$(SolutionDir)../../../archive/platform-windows;$(__archive)/third-windows/include;$(__archive)/third-windows/third/include;$(__archive)/third-windows-common/include;$(SolutionDir)../../../source/app/_include;$(SolutionDir)../../third/include;.;$(SolutionDir)../../../source;$(SolutionDir)../../../source/app;$(SolutionDir)../../../source/app;$(SolutionDir)../../../source;$(ProjectDir)../../include;$(ProjectDir)../..;$(ProjectDir)../../;$(ProjectDir)../;$(ProjectDir);C:\sensitive\sensitive\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)../../inc;$(__sensitive)/sensitive/include;$(SolutionDir)../../../source/include;$(__archive)local/include;$(SolutionDir)../../../archive/platform-windows;$(__archive)third-windows/include;$(__archive)third-windows/third/include;$(__archive)third-windows-common/include;$(SolutionDir)../../../source/app/_include;$(SolutionDir)../../third/include;.;$(SolutionDir)../../../source;$(SolutionDir)../../../source/app;$(SolutionDir)../../../source/app;$(SolutionDir)../../../source;$(ProjectDir)../../include;$(ProjectDir)../..;$(ProjectDir)../../;$(ProjectDir)../;$(ProjectDir);C:\sensitive\sensitive\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>false</MinimalRebuild>
       <ExceptionHandling>Async</ExceptionHandling>
@@ -305,7 +305,7 @@ copy "$(SolutionDir)..\..\thirdparty\binary\libvorbisfile.dll" "$(OutDir)libvorb
     <Link>
       <AdditionalDependencies>_zlib.lib;_bzip2.lib;_libcrypto.lib;_libssl.lib;Windowscodecs.lib;dwrite.lib;d3d11.lib;d2d1.lib;Winmm.lib;ws2_32.lib;Normaliz.lib;Crypt32.lib;Secur32.lib;Advapi32.lib;version.lib;gdiplus.lib;Psapi.lib;WinINet.lib;Userenv.lib;Wtsapi32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
-      <AdditionalLibraryDirectories>$(OutDir);$(__archive)\storage-windows\third\library\$(PlatformName)\$(Configuration)\;$(__archive)\storage-windows\library\$(PlatformName)\$(Configuration)\;$(SolutionDir)..\..\..\time\$(PlatformName)\$(Configuration)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(OutDir);$(__archive)storage-windows\third\library\$(PlatformName)\$(Configuration)\;$(__archive)storage-windows\library\$(PlatformName)\$(Configuration)\;$(SolutionDir)..\..\..\time\$(PlatformName)\$(Configuration)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
       <GenerateDebugInformation>DebugFull</GenerateDebugInformation>
@@ -370,7 +370,7 @@ copy "$(SolutionDir)..\..\thirdparty\binary\libvorbisfile.dll" "$(OutDir)libvorb
     <ClCompile>
       <AdditionalOptions>/bigobj -Zm512</AdditionalOptions>
       <Optimization>Full</Optimization>
-      <AdditionalIncludeDirectories>$(SolutionDir)../../inc;$(__sensitive)/sensitive/include;$(SolutionDir)../../../source/include;$(__archive)/local/include;$(SolutionDir)../../../archive/platform-windows;$(__archive)/third-windows/include;$(__archive)/third-windows/third/include;$(__archive)/third-windows-common/include;$(SolutionDir)../../../source/app/_include;$(SolutionDir)../../third/include;.;$(SolutionDir)../../../source;$(SolutionDir)../../../source/app;$(SolutionDir)../../../source/app;$(SolutionDir)../../../source;$(ProjectDir)../../include;$(ProjectDir)../..;$(ProjectDir)../../;$(ProjectDir)../;$(ProjectDir);C:\sensitive\sensitive\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)../../inc;$(__sensitive)/sensitive/include;$(SolutionDir)../../../source/include;$(__archive)local/include;$(SolutionDir)../../../archive/platform-windows;$(__archive)third-windows/include;$(__archive)third-windows/third/include;$(__archive)third-windows-common/include;$(SolutionDir)../../../source/app/_include;$(SolutionDir)../../third/include;.;$(SolutionDir)../../../source;$(SolutionDir)../../../source/app;$(SolutionDir)../../../source/app;$(SolutionDir)../../../source;$(ProjectDir)../../include;$(ProjectDir)../..;$(ProjectDir)../../;$(ProjectDir)../;$(ProjectDir);C:\sensitive\sensitive\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>false</MinimalRebuild>
       <ExceptionHandling>Async</ExceptionHandling>
@@ -414,7 +414,7 @@ copy "$(SolutionDir)..\..\thirdparty\binary\libvorbisfile.dll" "$(OutDir)libvorb
     <Link>
       <AdditionalDependencies>_zlib.lib;_bzip2.lib;_libcrypto.lib;_libssl.lib;Windowscodecs.lib;dwrite.lib;d3d11.lib;d2d1.lib;Winmm.lib;ws2_32.lib;Normaliz.lib;Crypt32.lib;Secur32.lib;Advapi32.lib;version.lib;gdiplus.lib;Psapi.lib;WinINet.lib;Userenv.lib;Wtsapi32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
-      <AdditionalLibraryDirectories>$(OutDir);$(__archive)\storage-windows\third\library\$(PlatformName)\$(Configuration)\;$(__archive)\storage-windows\library\$(PlatformName)\$(Configuration)\;$(SolutionDir)..\..\..\time\$(PlatformName)\$(Configuration)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(OutDir);$(__archive)storage-windows\third\library\$(PlatformName)\$(Configuration)\;$(__archive)storage-windows\library\$(PlatformName)\$(Configuration)\;$(SolutionDir)..\..\..\time\$(PlatformName)\$(Configuration)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
       <GenerateDebugInformation>DebugFull</GenerateDebugInformation>
@@ -479,7 +479,7 @@ copy "$(SolutionDir)..\..\thirdparty\binary\libvorbisfile.dll" "$(OutDir)libvorb
     </PreBuildEvent>
     <ClCompile>
       <AdditionalOptions>/bigobj -Zm512</AdditionalOptions>
-      <AdditionalIncludeDirectories>$(SolutionDir)../../inc;$(__sensitive)/sensitive/include;$(SolutionDir)../../../source/include;$(__archive)/local/include;$(SolutionDir)../../../archive/platform-windows;$(__archive)/third-windows/include;$(__archive)/third-windows/third/include;$(__archive)/third-windows-common/include;$(SolutionDir)../../../source/app/_include;$(SolutionDir)../../third/include;.;$(SolutionDir)../../../source;$(SolutionDir)../../../source/app;$(SolutionDir)../../../source/app;$(SolutionDir)../../../source;$(ProjectDir)../../include;$(ProjectDir)../..;$(ProjectDir)../../;$(ProjectDir)../;$(ProjectDir);C:\sensitive\sensitive\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)../../inc;$(__sensitive)/sensitive/include;$(SolutionDir)../../../source/include;$(__archive)local/include;$(SolutionDir)../../../archive/platform-windows;$(__archive)third-windows/include;$(__archive)third-windows/third/include;$(__archive)third-windows-common/include;$(SolutionDir)../../../source/app/_include;$(SolutionDir)../../third/include;.;$(SolutionDir)../../../source;$(SolutionDir)../../../source/app;$(SolutionDir)../../../source/app;$(SolutionDir)../../../source;$(ProjectDir)../../include;$(ProjectDir)../..;$(ProjectDir)../../;$(ProjectDir)../;$(ProjectDir);C:\sensitive\sensitive\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_CA2_PLUGIN_CONTAINER_DLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>false</MinimalRebuild>
       <ExceptionHandling>Async</ExceptionHandling>
@@ -519,7 +519,7 @@ copy "$(SolutionDir)..\..\thirdparty\binary\libvorbisfile.dll" "$(OutDir)libvorb
     <Link>
       <AdditionalDependencies>_zlib.lib;_bzip2.lib;_libcrypto.lib;_libssl.lib;Windowscodecs.lib;dwrite.lib;d3d11.lib;d2d1.lib;Winmm.lib;ws2_32.lib;Normaliz.lib;Crypt32.lib;Secur32.lib;Advapi32.lib;version.lib;gdiplus.lib;Psapi.lib;WinINet.lib;Userenv.lib;Wtsapi32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
-      <AdditionalLibraryDirectories>$(OutDir);$(__archive)\storage-windows\third\library\$(PlatformName)\$(Configuration)\;$(__archive)\storage-windows\library\$(PlatformName)\$(Configuration)\;$(SolutionDir)..\..\..\time\$(PlatformName)\$(Configuration)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(OutDir);$(__archive)storage-windows\third\library\$(PlatformName)\$(Configuration)\;$(__archive)storage-windows\library\$(PlatformName)\$(Configuration)\;$(SolutionDir)..\..\..\time\$(PlatformName)\$(Configuration)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
       <GenerateDebugInformation>DebugFull</GenerateDebugInformation>
@@ -579,7 +579,7 @@ copy "$(SolutionDir)..\..\thirdparty\binary\libvorbisfile.dll" "$(OutDir)libvorb
     <ClCompile>
       <AdditionalOptions>/bigobj -Zm512</AdditionalOptions>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>$(SolutionDir)../../inc;$(__sensitive)/sensitive/include;$(SolutionDir)../../../source/include;$(__archive)/local/include;$(SolutionDir)../../../archive/platform-windows;$(__archive)/third-windows/include;$(__archive)/third-windows/third/include;$(__archive)/third-windows-common/include;$(SolutionDir)../../../source/app/_include;$(SolutionDir)../../third/include;.;$(SolutionDir)../../../source;$(SolutionDir)../../../source/app;$(SolutionDir)../../../source/app;$(SolutionDir)../../../source;$(ProjectDir)../../include;$(ProjectDir)../..;$(ProjectDir)../../;$(ProjectDir)../;$(ProjectDir);C:\sensitive\sensitive\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)../../inc;$(__sensitive)/sensitive/include;$(SolutionDir)../../../source/include;$(__archive)local/include;$(SolutionDir)../../../archive/platform-windows;$(__archive)third-windows/include;$(__archive)third-windows/third/include;$(__archive)third-windows-common/include;$(SolutionDir)../../../source/app/_include;$(SolutionDir)../../third/include;.;$(SolutionDir)../../../source;$(SolutionDir)../../../source/app;$(SolutionDir)../../../source/app;$(SolutionDir)../../../source;$(ProjectDir)../../include;$(ProjectDir)../..;$(ProjectDir)../../;$(ProjectDir)../;$(ProjectDir);C:\sensitive\sensitive\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_CA2_PLUGIN_CONTAINER_DLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>false</MinimalRebuild>
       <ExceptionHandling>Async</ExceptionHandling>
@@ -620,7 +620,7 @@ copy "$(SolutionDir)..\..\thirdparty\binary\libvorbisfile.dll" "$(OutDir)libvorb
     <Link>
       <AdditionalDependencies>_zlib.lib;_bzip2.lib;_libcrypto.lib;_libssl.lib;Windowscodecs.lib;dwrite.lib;d3d11.lib;d2d1.lib;Winmm.lib;ws2_32.lib;Normaliz.lib;Crypt32.lib;Secur32.lib;Advapi32.lib;version.lib;gdiplus.lib;Psapi.lib;WinINet.lib;Userenv.lib;Wtsapi32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
-      <AdditionalLibraryDirectories>$(OutDir);$(__archive)\storage-windows\third\library\$(PlatformName)\$(Configuration)\;$(__archive)\storage-windows\library\$(PlatformName)\$(Configuration)\;$(SolutionDir)..\..\..\time\$(PlatformName)\$(Configuration)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(OutDir);$(__archive)storage-windows\third\library\$(PlatformName)\$(Configuration)\;$(__archive)storage-windows\library\$(PlatformName)\$(Configuration)\;$(SolutionDir)..\..\..\time\$(PlatformName)\$(Configuration)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
       <GenerateDebugInformation>DebugFull</GenerateDebugInformation>
@@ -680,7 +680,7 @@ copy "$(SolutionDir)..\..\thirdparty\binary\libvorbisfile.dll" "$(OutDir)libvorb
     <ClCompile>
       <AdditionalOptions>/bigobj -Zm512</AdditionalOptions>
       <Optimization>Full</Optimization>
-      <AdditionalIncludeDirectories>$(SolutionDir)../../inc;$(__sensitive)/sensitive/include;$(SolutionDir)../../../source/include;$(__archive)/local/include;$(SolutionDir)../../../archive/platform-windows;$(__archive)/third-windows/include;$(__archive)/third-windows/third/include;$(__archive)/third-windows-common/include;$(SolutionDir)../../../source/app/_include;$(SolutionDir)../../third/include;.;$(SolutionDir)../../../source;$(SolutionDir)../../../source/app;$(SolutionDir)../../../source/app;$(SolutionDir)../../../source;$(ProjectDir)../../include;$(ProjectDir)../..;$(ProjectDir)../../;$(ProjectDir)../;$(ProjectDir);C:\sensitive\sensitive\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)../../inc;$(__sensitive)/sensitive/include;$(SolutionDir)../../../source/include;$(__archive)local/include;$(SolutionDir)../../../archive/platform-windows;$(__archive)third-windows/include;$(__archive)third-windows/third/include;$(__archive)third-windows-common/include;$(SolutionDir)../../../source/app/_include;$(SolutionDir)../../third/include;.;$(SolutionDir)../../../source;$(SolutionDir)../../../source/app;$(SolutionDir)../../../source/app;$(SolutionDir)../../../source;$(ProjectDir)../../include;$(ProjectDir)../..;$(ProjectDir)../../;$(ProjectDir)../;$(ProjectDir);C:\sensitive\sensitive\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_CA2_PLUGIN_CONTAINER_DLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>false</MinimalRebuild>
       <ExceptionHandling>Async</ExceptionHandling>
@@ -726,7 +726,7 @@ copy "$(SolutionDir)..\..\thirdparty\binary\libvorbisfile.dll" "$(OutDir)libvorb
     <Link>
       <AdditionalDependencies>_zlib.lib;_bzip2.lib;_libcrypto.lib;_libssl.lib;Windowscodecs.lib;dwrite.lib;d3d11.lib;d2d1.lib;Winmm.lib;ws2_32.lib;Normaliz.lib;Crypt32.lib;Secur32.lib;Advapi32.lib;version.lib;gdiplus.lib;Psapi.lib;WinINet.lib;Userenv.lib;Wtsapi32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
-      <AdditionalLibraryDirectories>$(OutDir);$(__archive)\storage-windows\third\library\$(PlatformName)\$(Configuration)\;$(__archive)\storage-windows\library\$(PlatformName)\$(Configuration)\;$(SolutionDir)..\..\..\time\$(PlatformName)\$(Configuration)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(OutDir);$(__archive)storage-windows\third\library\$(PlatformName)\$(Configuration)\;$(__archive)storage-windows\library\$(PlatformName)\$(Configuration)\;$(SolutionDir)..\..\..\time\$(PlatformName)\$(Configuration)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
       <GenerateDebugInformation>DebugFull</GenerateDebugInformation>

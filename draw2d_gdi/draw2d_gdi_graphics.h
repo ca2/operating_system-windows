@@ -479,7 +479,7 @@ namespace draw2d_gdi
       void fill_rect(const ::rect & rect, COLORREF cr) override;
 
       using ::draw2d::graphics::draw3d_rect;
-      void draw3d_rect(const ::rect & rect, COLORREF crTopLeft, COLORREF crBottomRight, eborder eborder = e_border_all) override;
+      void draw3d_rect(const ::rect & rect, COLORREF crTopLeft, COLORREF crBottomRight, const ::e_border & eborder = e_border_all) override;
 
       virtual void assert_valid() const override;
       virtual void dump(dump_context & dumpcontext) const override;

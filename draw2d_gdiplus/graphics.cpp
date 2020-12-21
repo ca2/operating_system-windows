@@ -3817,7 +3817,7 @@ gdi_fallback:
    }
 
 
-   void graphics::draw_rect(const ::rect & rect, const ::color& color, eborder eborder)
+   void graphics::draw_rect(const ::rect & rect, const ::color& color, const ::e_border & eborder)
    {
 
       if (!(eborder & (e_border_left | e_border_right | e_border_top | e_border_bottom)))
@@ -3915,7 +3915,7 @@ gdi_fallback:
    }
 
 
-   void graphics::draw_rect(const ::rectd& rect, const ::color& color, eborder eborder)
+   void graphics::draw_rect(const ::rectd& rect, const ::color& color, const ::e_border & eborder)
    {
 
       if (!(eborder & (e_border_left | e_border_right | e_border_top | e_border_bottom)))
@@ -4011,7 +4011,7 @@ gdi_fallback:
    }
 
 
-   void graphics::draw_3drect(const ::rectd & rect, const ::color& colorTopLeft, const ::color& colorBottomRight, eborder eborder)
+   void graphics::draw_3drect(const ::rectd & rect, const ::color& colorTopLeft, const ::color& colorBottomRight, const ::e_border & eborder)
    {
 
       if (!(eborder & (e_border_left | e_border_right | e_border_top | e_border_bottom)))
@@ -4126,7 +4126,7 @@ gdi_fallback:
    }
 
 
-   void graphics::draw_3drect(const ::rect& rect, const ::color& colorTopLeft, const ::color& colorBottomRight, eborder eborder)
+   void graphics::draw_3drect(const ::rect& rect, const ::color& colorTopLeft, const ::color& colorBottomRight, const ::e_border & eborder)
    {
 
       if (!(eborder & (e_border_left | e_border_right | e_border_top | e_border_bottom)))
