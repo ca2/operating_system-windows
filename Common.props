@@ -4,6 +4,7 @@
   <PropertyGroup Label="UserMacros">
     <BaseDir>$(SolutionDir)..\..\..\</BaseDir>
     <TimeDir>$(BaseDir)time-windows\</TimeDir>
+    <__archive>$(BaseDir)archive\</__archive>
   </PropertyGroup>
   <PropertyGroup />
   <ItemDefinitionGroup>
@@ -17,6 +18,9 @@
     </BuildMacro>
     <BuildMacro Include="TimeDir">
       <Value>$(TimeDir)</Value>
+    </BuildMacro>
+    <BuildMacro Include="__archive">
+      <Value>$(__archive)</Value>
     </BuildMacro>
   </ItemGroup>
 </Project>

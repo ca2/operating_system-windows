@@ -149,7 +149,7 @@ namespace production
                || !file_exists(pathMirrorStatus))
          {
 
-            os_message_box(nullptr, "both " + pathMirror + " and " + pathMirrorStatus + " files must exist and maybe empty...", "The h***!!", MB_ICONEXCLAMATION);
+            os_message_box(nullptr, "both " + pathMirror + " and " + pathMirrorStatus + " files must exist and maybe empty...", "The h***!!", e_message_box_icon_exclamation);
             m_result.add(error_failed);
             return error_failed;
 

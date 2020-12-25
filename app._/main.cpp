@@ -388,7 +388,7 @@ void main(int argc, char * argv[])
 
       ::file::path pathMatter = Context.dir().matter("main/icon.ico", false, strRoot, strDomain);
 
-      pathMatter |= ::file::flag_get_local_path;
+      pathMatter |= ::file::e_flag_get_local_path;
 
       pathMatter = System.get_matter_cache_path(pathMatter);
 
@@ -406,7 +406,7 @@ void main(int argc, char * argv[])
 
          pathMatter = Context.dir().matter("main/icon.ico", false);
 
-         pathMatter |= ::file::flag_get_local_path;
+         pathMatter |= ::file::e_flag_get_local_path;
 
          if (Context.file().exists(pathMatter))
          {

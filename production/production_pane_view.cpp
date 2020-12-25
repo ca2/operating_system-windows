@@ -70,11 +70,11 @@ namespace production
 
 
 
-   bool pane_view::pre_create_window(::user::create_struct& cs)
+   bool pane_view::pre_create_window(::user::create_struct * pcreatestruct)
    {
-      cs.dwExStyle &= ~WS_EX_CLIENTEDGE;
+      pcreatestruct->m_createstruct.dwExStyle &= ~WS_EX_CLIENTEDGE;
 
-      return ::user::impact::pre_create_window(cs);
+      return ::user::impact::pre_create_window(pcreatestruct);
    }
 
 
@@ -119,7 +119,7 @@ namespace production
          {
             pcreatordata->m_pdocument = get_document();
          }
-         pcreatordata->m_eflag.add(::user::flag_hide_all_others_on_show);
+         pcreatordata->m_eflag.add(::user::e_flag_hide_all_others_on_show);
       }
       break;
       /*      case PaneViewFileManager:
@@ -253,7 +253,7 @@ namespace production
 
    void pane_view::on_control_event(::user::control_event * pevent)
    {
-      if(pevent->m_eevent == ::user::event_set_check)
+      if(pevent->m_eevent == ::user::e_event_set_check)
       {
          if(pevent->m_puie->m_id == "clean")
          {

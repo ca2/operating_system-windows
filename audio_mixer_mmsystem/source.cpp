@@ -27,7 +27,7 @@ namespace multimedia
          i32 iControlCount = m_mixerline.cControls;
          if (0 == iControlCount)
          {
-            //        System.message_box(nullptr, MB_OK | MB_ICONEXCLAMATION,
+            //        System.message_box(nullptr, MB_OK | e_message_box_icon_exclamation,
             //"There are no controls associated with the selected line.");
             //        EndDialog(oswindow, FALSE);
             return ::success;

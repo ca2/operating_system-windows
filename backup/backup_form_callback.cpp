@@ -25,7 +25,7 @@ namespace backup
 
       auto pview = pevent->get_form();
 
-      if(pevent->m_eevent == ::user::event_button_clicked)
+      if(pevent->m_eevent == ::user::e_event_button_clicked)
       {
          if(pevent->m_puie->m_id == "lfs")
          {

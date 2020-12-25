@@ -373,7 +373,7 @@ namespace multimedia
 
          if (::success != mmrc)
          {
-            //        System.message_box(nullptr, MB_OK | MB_ICONEXCLAMATION,
+            //        System.message_box(nullptr, MB_OK | e_message_box_icon_exclamation,
             //                "mixerGetControlDetails(ctrlid=%.08lXh) failed on hmx=%.04Xh, mmr=%u!",
             //              m_mixercontrol.dwControlID, m_pmixersource->get_device()->m_hMixer, mmrc);
             return;
@@ -557,7 +557,7 @@ namespace multimedia
       }
       else
       {
-      //                                System.message_box(nullptr, MB_OK | MB_ICONEXCLAMATION,
+      //                                System.message_box(nullptr, MB_OK | e_message_box_icon_exclamation,
       //                                        "mixerGetControlDetails(ctrlid=%.08lXh) failed on hmx=%.04Xh, mmr=%u!",
       //                                      m_mixercontrol.dwControlID, m_pmixersource->get_device()->m_hMixer, mmrc);
       }
@@ -581,7 +581,7 @@ namespace multimedia
       }
       else
       {
-      //                                System.message_box(nullptr, MB_OK | MB_ICONEXCLAMATION,
+      //                                System.message_box(nullptr, MB_OK | e_message_box_icon_exclamation,
       ///                                        "mixerGetControlDetails(ctrlid=%.08lXh) failed on hmx=%.04Xh, mmr=%u!",
       //                                     m_mixercontrol.dwControlID, m_pmixersource->get_device()->m_hMixer, mmrc);
       }
@@ -738,7 +738,7 @@ namespace multimedia
                            }
                            else
                            {
-                              //                                System.message_box(nullptr, MB_OK | MB_ICONEXCLAMATION,
+                              //                                System.message_box(nullptr, MB_OK | e_message_box_icon_exclamation,
                               //                                        "mixerGetControlDetails(ctrlid=%.08lXh) failed on hmx=%.04Xh, mmr=%u!",
                               //                                      m_mixercontrol.dwControlID, m_pmixersource->get_device()->m_hMixer, mmrc);
                            }

@@ -3817,10 +3817,10 @@ gdi_fallback:
    }
 
 
-   void graphics::draw_rect(const ::rect & rect, const ::color& color, eborder eborder)
+   void graphics::draw_rect(const ::rect & rect, const ::color& color, const ::e_border & eborder)
    {
 
-      if (!(eborder & (border_left | border_right | border_top | border_bottom)))
+      if (!(eborder & (e_border_left | e_border_right | e_border_top | e_border_bottom)))
       {
 
          return;
@@ -3829,15 +3829,15 @@ gdi_fallback:
 
       Gdiplus::Pen pen(Gdiplus::Color(color.m_iA, color.m_iR, color.m_iG, color.m_iB), 1.0);
 
-      //if ((eborder & border_left) && (eborder & border_top)
-      //   && (eborder & border_right) && (eborder & border_bottom)
+      //if ((eborder & e_border_left) && (eborder & e_border_top)
+      //   && (eborder & e_border_right) && (eborder & e_border_bottom)
       //   && crTopLeft == crBottomRight)
       //{
 
       //   m_pgraphics->DrawRectangle(&pen, rect.left, rect.top, rect.width(), rect.height());
 
       //} else
-      if ((eborder & border_left) && (eborder & border_top))
+      if ((eborder & e_border_left) && (eborder & e_border_top))
       {
 
          Gdiplus::GraphicsPath path;
@@ -3859,13 +3859,13 @@ gdi_fallback:
       else
       {
 
-         if (eborder & border_left)
+         if (eborder & e_border_left)
          {
 
             m_pgraphics->DrawLine(&pen, rect.left, rect.bottom - 1, rect.left, rect.top);
 
          }
-         else if (eborder & border_top)
+         else if (eborder & e_border_top)
          {
 
             m_pgraphics->DrawLine(&pen, rect.left, rect.top, rect.right, rect.top);
@@ -3874,7 +3874,7 @@ gdi_fallback:
 
       }
 
-      if ((eborder & border_right) && (eborder & border_bottom))
+      if ((eborder & e_border_right) && (eborder & e_border_bottom))
       {
 
          Gdiplus::GraphicsPath path;
@@ -3896,13 +3896,13 @@ gdi_fallback:
       else
       {
 
-         if (eborder & border_bottom)
+         if (eborder & e_border_bottom)
          {
 
             m_pgraphics->DrawLine(&pen, rect.left, rect.bottom, rect.right, rect.bottom);
 
          }
-         else if (eborder & border_right)
+         else if (eborder & e_border_right)
          {
 
             m_pgraphics->DrawLine(&pen, rect.right, rect.bottom, rect.right, rect.top + 1);
@@ -3915,10 +3915,10 @@ gdi_fallback:
    }
 
 
-   void graphics::draw_rect(const ::rectd& rect, const ::color& color, eborder eborder)
+   void graphics::draw_rect(const ::rectd& rect, const ::color& color, const ::e_border & eborder)
    {
 
-      if (!(eborder & (border_left | border_right | border_top | border_bottom)))
+      if (!(eborder & (e_border_left | e_border_right | e_border_top | e_border_bottom)))
       {
 
          return;
@@ -3927,15 +3927,15 @@ gdi_fallback:
 
       Gdiplus::Pen pen(Gdiplus::Color(color.m_iA, color.m_iR, color.m_iG, color.m_iB), 1.0);
 
-      //if ((eborder & border_left) && (eborder & border_top)
-      //   && (eborder & border_right) && (eborder & border_bottom)
+      //if ((eborder & e_border_left) && (eborder & e_border_top)
+      //   && (eborder & e_border_right) && (eborder & e_border_bottom)
       //   && crTopLeft == crBottomRight)
       //{
 
       //   m_pgraphics->DrawRectangle(&pen, rect.left, rect.top, rect.width(), rect.height());
 
       //} else
-      if ((eborder & border_left) && (eborder & border_top))
+      if ((eborder & e_border_left) && (eborder & e_border_top))
       {
 
          Gdiplus::GraphicsPath path;
@@ -3957,13 +3957,13 @@ gdi_fallback:
       else
       {
 
-         if (eborder & border_left)
+         if (eborder & e_border_left)
          {
 
             m_pgraphics->DrawLine(&pen, (Gdiplus::REAL) rect.left, (Gdiplus::REAL)rect.bottom-1, (Gdiplus::REAL)rect.left, (Gdiplus::REAL)rect.top);
 
          }
-         else if (eborder & border_top)
+         else if (eborder & e_border_top)
          {
 
             m_pgraphics->DrawLine(&pen, (Gdiplus::REAL)rect.left, (Gdiplus::REAL)rect.top, (Gdiplus::REAL)rect.right, (Gdiplus::REAL)rect.top);
@@ -3973,7 +3973,7 @@ gdi_fallback:
       }
 
 
-      if ((eborder & border_right) && (eborder & border_bottom))
+      if ((eborder & e_border_right) && (eborder & e_border_bottom))
       {
 
          Gdiplus::GraphicsPath path;
@@ -3993,13 +3993,13 @@ gdi_fallback:
       else
       {
 
-         if (eborder & border_bottom)
+         if (eborder & e_border_bottom)
          {
 
             m_pgraphics->DrawLine(&pen, (Gdiplus::REAL)rect.left, (Gdiplus::REAL)rect.bottom, (Gdiplus::REAL)rect.right, (Gdiplus::REAL)rect.bottom);
 
          }
-         else if (eborder & border_right)
+         else if (eborder & e_border_right)
          {
 
             m_pgraphics->DrawLine(&pen, (Gdiplus::REAL)rect.right, (Gdiplus::REAL)rect.bottom, (Gdiplus::REAL)rect.right, (Gdiplus::REAL)rect.top + 1);
@@ -4011,10 +4011,10 @@ gdi_fallback:
    }
 
 
-   void graphics::draw_3drect(const ::rectd & rect, const ::color& colorTopLeft, const ::color& colorBottomRight, eborder eborder)
+   void graphics::draw_3drect(const ::rectd & rect, const ::color& colorTopLeft, const ::color& colorBottomRight, const ::e_border & eborder)
    {
 
-      if (!(eborder & (border_left | border_right | border_top | border_bottom)))
+      if (!(eborder & (e_border_left | e_border_right | e_border_top | e_border_bottom)))
       {
 
          return;
@@ -4032,7 +4032,7 @@ gdi_fallback:
       }
 
 
-      if (!(eborder & (border_left | border_right | border_top | border_bottom)))
+      if (!(eborder & (e_border_left | e_border_right | e_border_top | e_border_bottom)))
       {
 
          return;
@@ -4043,7 +4043,7 @@ gdi_fallback:
 
          Gdiplus::Pen pen(Gdiplus::Color(colorTopLeft.m_iA, colorTopLeft.m_iR, colorTopLeft.m_iG, colorTopLeft.m_iB), 1.0);
 
-         if ((eborder & border_left) && (eborder & border_top))
+         if ((eborder & e_border_left) && (eborder & e_border_top))
          {
 
             Gdiplus::GraphicsPath path;
@@ -4065,13 +4065,13 @@ gdi_fallback:
          else
          {
 
-            if (eborder & border_left)
+            if (eborder & e_border_left)
             {
 
                m_pgraphics->DrawLine(&pen, (Gdiplus::REAL) rect.left, (Gdiplus::REAL)rect.bottom - 1, (Gdiplus::REAL)rect.left, (Gdiplus::REAL)rect.top);
 
             }
-            else if (eborder & border_top)
+            else if (eborder & e_border_top)
             {
 
                m_pgraphics->DrawLine(&pen, (Gdiplus::REAL)rect.left, (Gdiplus::REAL)rect.top, (Gdiplus::REAL)rect.right, (Gdiplus::REAL)rect.top);
@@ -4086,7 +4086,7 @@ gdi_fallback:
 
          Gdiplus::Pen pen(Gdiplus::Color(colorBottomRight.m_iA, colorBottomRight.m_iR, colorBottomRight.m_iG, colorBottomRight.m_iB), 1.0);
 
-         if ((eborder & border_right) && (eborder & border_bottom))
+         if ((eborder & e_border_right) && (eborder & e_border_bottom))
          {
 
             Gdiplus::GraphicsPath path;
@@ -4106,13 +4106,13 @@ gdi_fallback:
          else
          {
 
-            if (eborder & border_bottom)
+            if (eborder & e_border_bottom)
             {
 
                m_pgraphics->DrawLine(&pen, (Gdiplus::REAL)rect.left, (Gdiplus::REAL)rect.bottom, (Gdiplus::REAL)rect.right, (Gdiplus::REAL)rect.bottom);
 
             }
-            else if (eborder & border_right)
+            else if (eborder & e_border_right)
             {
 
                m_pgraphics->DrawLine(&pen, (Gdiplus::REAL)rect.right, (Gdiplus::REAL)rect.bottom, (Gdiplus::REAL)rect.right, (Gdiplus::REAL)rect.top + 1);
@@ -4126,10 +4126,10 @@ gdi_fallback:
    }
 
 
-   void graphics::draw_3drect(const ::rect& rect, const ::color& colorTopLeft, const ::color& colorBottomRight, eborder eborder)
+   void graphics::draw_3drect(const ::rect& rect, const ::color& colorTopLeft, const ::color& colorBottomRight, const ::e_border & eborder)
    {
 
-      if (!(eborder & (border_left | border_right | border_top | border_bottom)))
+      if (!(eborder & (e_border_left | e_border_right | e_border_top | e_border_bottom)))
       {
 
          return;
@@ -4147,7 +4147,7 @@ gdi_fallback:
       }
 
 
-      if (!(eborder & (border_left | border_right | border_top | border_bottom)))
+      if (!(eborder & (e_border_left | e_border_right | e_border_top | e_border_bottom)))
       {
 
          return;
@@ -4158,7 +4158,7 @@ gdi_fallback:
 
          Gdiplus::Pen pen(Gdiplus::Color(colorTopLeft.m_iA, colorTopLeft.m_iR, colorTopLeft.m_iG, colorTopLeft.m_iB), 1.0);
 
-         if ((eborder & border_left) && (eborder & border_top))
+         if ((eborder & e_border_left) && (eborder & e_border_top))
          {
 
             Gdiplus::GraphicsPath path;
@@ -4180,13 +4180,13 @@ gdi_fallback:
          else
          {
 
-            if (eborder & border_left)
+            if (eborder & e_border_left)
             {
 
                m_pgraphics->DrawLine(&pen, rect.left, rect.bottom - 1, rect.left, rect.top);
 
             }
-            else if (eborder & border_top)
+            else if (eborder & e_border_top)
             {
 
                m_pgraphics->DrawLine(&pen, rect.left, rect.top, rect.right, rect.top);
@@ -4201,7 +4201,7 @@ gdi_fallback:
 
          Gdiplus::Pen pen(Gdiplus::Color(colorBottomRight.m_iA, colorBottomRight.m_iR, colorBottomRight.m_iG, colorBottomRight.m_iB), 1.0);
 
-         if ((eborder & border_right) && (eborder & border_bottom))
+         if ((eborder & e_border_right) && (eborder & e_border_bottom))
          {
 
             Gdiplus::GraphicsPath path;
@@ -4221,13 +4221,13 @@ gdi_fallback:
          else
          {
 
-            if (eborder & border_bottom)
+            if (eborder & e_border_bottom)
             {
 
                m_pgraphics->DrawLine(&pen, rect.left, rect.bottom, rect.right, rect.bottom);
 
             }
-            else if (eborder & border_right)
+            else if (eborder & e_border_right)
             {
 
                m_pgraphics->DrawLine(&pen, rect.right, rect.bottom, rect.right, rect.top + 1);

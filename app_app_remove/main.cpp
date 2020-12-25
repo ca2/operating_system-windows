@@ -208,7 +208,7 @@ void removal::g_n_rmdir_n_v(const KNOWNFOLDERID & rfid, const char * pszDir)
    m_hmutex_app_removal = ::CreateMutexW(nullptr, FALSE, wstring("Global\\::ca2::fontopus::ccca2_spa_app_removal::7807e510-5579-11dd-ae16-0800200c7784"));
    if(::GetLastError() == ERROR_ALREADY_EXISTS)
    {
-      os_message_box(nullptr, "ca2 app.removal.exe is already running.\n\nPlease wait for app.removal to finish or close it - using Task Manager - Ctrl+Shift+ESC - to continue.", "app_app_admin.exe is running!", MB_ICONEXCLAMATION);
+      os_message_box(nullptr, "ca2 app.removal.exe is already running.\n\nPlease wait for app.removal to finish or close it - using Task Manager - Ctrl+Shift+ESC - to continue.", "app_app_admin.exe is running!", e_message_box_icon_exclamation);
       m_result.add(error_failed);
       return error_failed;
    }
@@ -350,10 +350,10 @@ void removal::g_n_rmdir_n_v(const KNOWNFOLDERID & rfid, const char * pszDir)
    ::reg_delete_tree_dup(HKEY_CLASSES_ROOT, "ca2os.ca2.fontopus.iexca2.2");
    ::reg_delete_tree_dup(HKEY_CLASSES_ROOT, "ca2_spaboot_file");
 
-   //message_box(nullptr, "Hope Helped!", "Hope Helped!", MB_ICONINFORMATION);
+   //message_box(nullptr, "Hope Helped!", "Hope Helped!", e_message_box_icon_information);
 
 
-   os_message_box(nullptr, "app-removal has finished cleaning ca2 directories.", "ca2 app-removal",MB_ICONINFORMATION);
+   os_message_box(nullptr, "app-removal has finished cleaning ca2 directories.", "ca2 app-removal",e_message_box_icon_information);
 
 
    return ::success;

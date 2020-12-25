@@ -81,7 +81,7 @@ namespace production
 
       virtual void _001OnTabClick(i32 iTab);
       virtual void install_message_routing(::channel * pchannel);
-      virtual bool pre_create_window(::user::create_struct& cs);
+      virtual bool pre_create_window(::user::create_struct * pcreatestruct);
       virtual void on_subject(::promise::subject * psubject, ::promise::context * pcontext) override;
 
       ::user::document * get_document();
