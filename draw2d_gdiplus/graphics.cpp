@@ -2486,39 +2486,20 @@ gdi_fallback:
 
       double dFontHeight = pfont->GetHeight((Gdiplus::REAL) pgraphics->get_dpiy());
 
-      pmetric->m_dAscent              = (LONG) (dSize * family.GetCellAscent(iStyle) / dHeight);
+      pmetric->m_dAscent              = dSize * family.GetCellAscent(iStyle) / dHeight;
 
-      pmetric->m_dDescent             = (LONG) (dSize * family.GetCellDescent(iStyle) / dHeight);
+      pmetric->m_dDescent             = dSize * family.GetCellDescent(iStyle) / dHeight;
 
-      pmetric->m_dHeight              = (LONG)dFontHeight;
+      pmetric->m_dHeight              = dFontHeight;
 
       double dLineSpacing = max(dFontHeight, dSize * family.GetLineSpacing(iStyle) / dHeight);
 
-      pmetric->m_dInternalLeading     = (LONG) (pmetric->m_dAscent + pmetric->m_dDescent - pmetric->m_dHeight);
+      pmetric->m_dInternalLeading     = 0;
 
-      pmetric->m_dExternalLeading     = (LONG) (dLineSpacing - (pmetric->m_dAscent + pmetric->m_dDescent));
+      pmetric->m_dExternalLeading     = dLineSpacing - (pmetric->m_dAscent + pmetric->m_dDescent);
 
+      return true;
 
-      //const Gdiplus::FontFamily * pfamilyMono = family.GenericMonospace();
-
-      //::Gdiplus::Font font2(pfamilyMono, pfamilyMono->GetEmHeight(pfont->GetStyle()));
-
-      //wstring text.m_wstr(L"123AWZwmc123AWZwmcpQ軾");
-      //Gdiplus::RectF rect(0.f, 0.f, 1024.f * 1024.f, 1024.f * 1024.f);
-      //Gdiplus::RectF rect2;
-      //Gdiplus::PointF origin(0, 0);
-
-      //m_pgraphics->MeasureString(text.m_wstr, (INT) text.m_wstr.get_length(), pfont, origin, &rect);
-
-
-      /*text.m_wstr = L"";
-      m_pgraphics->MeasureString(text.m_wstr.m_pwsz, -1, (Gdiplus::Font *) m_font->get_os_data(), origin, &rect2);*/
-
-      //pmetric->tmAveCharWidth = (LONG) (rect.Width * get_current_font()->m_dFontWidth / (double) text.m_wstr.get_length());
-
-
-
-      return TRUE;
    }
 
 
