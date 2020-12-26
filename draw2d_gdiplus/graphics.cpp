@@ -2490,13 +2490,13 @@ gdi_fallback:
 
       pmetric->m_dDescent             = (LONG) (dSize * family.GetCellDescent(iStyle) / dHeight);
 
-      pmetric->m_dHeight              = (LONG) dFontHeight;
+      pmetric->m_dHeight              = (LONG)dFontHeight;
 
       double dLineSpacing = max(dFontHeight, dSize * family.GetLineSpacing(iStyle) / dHeight);
 
       pmetric->m_dInternalLeading     = (LONG) (pmetric->m_dAscent + pmetric->m_dDescent - pmetric->m_dHeight);
 
-      pmetric->m_dExternalLeading     = (LONG) (dLineSpacing - (pmetric->m_dAscent + pmetric->m_dDescent + pmetric->m_dInternalLeading));
+      pmetric->m_dExternalLeading     = (LONG) (dLineSpacing - (pmetric->m_dAscent + pmetric->m_dDescent));
 
 
       //const Gdiplus::FontFamily * pfamilyMono = family.GenericMonospace();
