@@ -35,7 +35,7 @@ namespace backup
    }
 
 
-   ::estatus     backup::run()
+   ::e_status     backup::run()
    {
 
       if(m_iStep == 1)

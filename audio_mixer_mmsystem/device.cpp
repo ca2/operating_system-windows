@@ -25,7 +25,7 @@ namespace multimedia
       }
 
       
-      estatus device::initialize_audio_mixer_device(::multimedia::audio_mixer::audio_mixer * pmixer)
+      ::e_status device::initialize_audio_mixer_device(::multimedia::audio_mixer::audio_mixer * pmixer)
       {
 
          auto estatus = ::multimedia::audio_mixer::device::initialize_audio_mixer_device(pmixer);
@@ -42,10 +42,10 @@ namespace multimedia
       }
 
 
-      ::estatus device::open(u32 uiMixerId, UINT_PTR dwCallback, u32 dwInstance, u32 fdwOpen)
+      ::e_status device::open(u32 uiMixerId, UINT_PTR dwCallback, u32 dwInstance, u32 fdwOpen)
       {
 
-         ::estatus         mmrc;
+         ::e_status         mmrc;
          HMIXER            hmx;
          MIXERCAPS         mxcaps;
 
@@ -53,7 +53,7 @@ namespace multimedia
          if (m_hMixer != nullptr)
          {
 
-            ::estatus mmrct = close();
+            ::e_status mmrct = close();
 
             if(::success != mmrct)
             {
@@ -111,10 +111,10 @@ namespace multimedia
       }
 
 
-      ::estatus     device::initialize_capabilities()
+      ::e_status     device::initialize_capabilities()
       {
 
-         ::estatus     mmrc;
+         ::e_status     mmrc;
 
          mmrc = mmsystem::translate(mixerGetDevCaps((UINT_PTR) m_hMixer, &m_mixercaps, sizeof(MIXERCAPS)));
 
@@ -136,7 +136,7 @@ namespace multimedia
       }
 
 
-      ::estatus     device::initialize_destinations()
+      ::e_status     device::initialize_destinations()
       {
 
          __pointer(::multimedia::audio_mixer_mmsystem::destination)    lpDestination;
@@ -183,7 +183,7 @@ namespace multimedia
 
       }
 
-      ::estatus     device::get_destination(::multimedia::audio_mixer::e_destination edestination, ::multimedia::audio_mixer::destination **ppDestination)
+      ::e_status     device::get_destination(::multimedia::audio_mixer::e_destination edestination, ::multimedia::audio_mixer::destination **ppDestination)
       {
 
          u32 dwComponentType;
@@ -349,10 +349,10 @@ namespace multimedia
       }
 
 
-      ::estatus     device::close()
+      ::e_status     device::close()
       {
 
-         ::estatus     mmrc = ::success;
+         ::e_status     mmrc = ::success;
 
          if(m_hMixer != nullptr)
          {

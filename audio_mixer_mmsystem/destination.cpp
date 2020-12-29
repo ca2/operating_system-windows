@@ -27,7 +27,7 @@ namespace multimedia
 
 
 
-      ::estatus     destination::initialize_source_info()
+      ::e_status     destination::initialize_source_info()
       {
 
          __pointer(::multimedia::audio_mixer_mmsystem::source)     lpSource;
@@ -52,7 +52,7 @@ namespace multimedia
       }
 
 
-      ::estatus     destination::initialize_all_controls()
+      ::e_status     destination::initialize_all_controls()
       {
 
          GetLineControls();

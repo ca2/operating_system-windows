@@ -25,7 +25,7 @@ namespace production
 
       virtual void construct();
 
-      virtual ::estatus init_instance() override;
+      virtual ::e_status init_instance() override;
       virtual void term_instance() override;
 
       virtual bool bergedge_start();

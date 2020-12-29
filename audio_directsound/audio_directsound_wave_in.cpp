@@ -64,7 +64,7 @@ namespace multimedia
          return thread::pre_translate_message(pbase);
       }
 
-      ::estatus     in::in_open(i32 iBufferCount, i32 iBufferSampleCount)
+      ::e_status     in::in_open(i32 iBufferCount, i32 iBufferSampleCount)
       {
 
 //         if(m_hwavein != nullptr && m_estate != state_initial)
@@ -76,7 +76,7 @@ namespace multimedia
 //         }
 //
 //         single_lock sLock(&m_mutex, TRUE);
-//         ::estatus     mmr;
+//         ::e_status     mmr;
 //         ASSERT(m_hwavein == nullptr);
 //         ASSERT(m_estate == state_initial);
 //
@@ -211,7 +211,7 @@ namespace multimedia
 //
 //            in_close();
 //
-//            return (::estatus    ) -1;
+//            return (::e_status    ) -1;
 //
 //         }
 //
@@ -222,12 +222,12 @@ namespace multimedia
       }
 
 
-      ::estatus     in::in_close()
+      ::e_status     in::in_close()
       {
 
          sync_lock sl(mutex());
 
-         //::estatus     mmr;
+         //::e_status     mmr;
 
          //if(m_estate != state_opened && m_estate != state_stopped)
          //   return ::success;
@@ -261,7 +261,7 @@ namespace multimedia
 
       }
 
-      ::estatus     in::in_start()
+      ::e_status     in::in_start()
       {
 
          sync_lock sl(mutex());
@@ -274,7 +274,7 @@ namespace multimedia
          if(m_estate != state_opened && m_estate != state_stopped)
             return ::success;
 
-         //::estatus     mmr;
+         //::e_status     mmr;
 
          //if(::success != (mmr = directsound::translate(waveInStart(m_hwavein))))
          //{
@@ -288,7 +288,7 @@ namespace multimedia
 
       }
 
-      ::estatus     in::in_stop()
+      ::e_status     in::in_stop()
       {
 
          sync_lock sl(mutex());
@@ -296,7 +296,7 @@ namespace multimedia
          if(m_estate != state_recording)
             return error_failed;
 
-         //::estatus     mmr;
+         //::e_status     mmr;
 
          m_estate = state_stopping;
 
@@ -358,7 +358,7 @@ namespace multimedia
       //}
 
 
-      ::estatus     in::in_reset()
+      ::e_status     in::in_reset()
       {
 
          sync_lock sl(mutex());
@@ -372,7 +372,7 @@ namespace multimedia
 
          //}
 
-         //::estatus     mmr;
+         //::e_status     mmr;
 
          //if(m_estate == state_recording)
          //{
@@ -452,7 +452,7 @@ namespace multimedia
       }
 
 
-      ::estatus     in::in_add_buffer(i32 iBuffer)
+      ::e_status     in::in_add_buffer(i32 iBuffer)
       {
 
          //return in_add_buffer(wave_hdr(iBuffer));
@@ -462,10 +462,10 @@ namespace multimedia
       }
 
 
-      //::estatus     in::in_add_buffer(LPWAVEHDR lpwavehdr)
+      //::e_status     in::in_add_buffer(LPWAVEHDR lpwavehdr)
       //{
 
-      //   ::estatus     mmr;
+      //   ::e_status     mmr;
 
       //   if(::success != (mmr = directsound::translate(waveInAddBuffer(m_hwavein, lpwavehdr, sizeof(WAVEHDR)))))
       //   {

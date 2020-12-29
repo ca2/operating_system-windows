@@ -26,8 +26,8 @@ namespace multimedia
          virtual ~source();
 
 
-         ::estatus     mixerGetLineInfo(u32 dwSource, u32 dwDestination, u32 fdwInfo);
-         ::estatus     mixerGetLineInfo(u32 dwSource, ::multimedia::audio_mixer::destination * pdestination);
+         ::e_status     mixerGetLineInfo(u32 dwSource, u32 dwDestination, u32 fdwInfo);
+         ::e_status     mixerGetLineInfo(u32 dwSource, ::multimedia::audio_mixer::destination * pdestination);
 
          virtual ::id GetLineID() override;
 
@@ -46,8 +46,8 @@ namespace multimedia
 
          void OnMixerLineChange();
          //void OnArrayReallocation(void *pNewPointer);
-         //::estatus     GetControl(u32 dwControlType, u32 dwControlFlags, ::multimedia::audio_mixer::control ** ppControl);
-         ::estatus     GetLineControls();
+         //::e_status     GetControl(u32 dwControlType, u32 dwControlFlags, ::multimedia::audio_mixer::control ** ppControl);
+         ::e_status     GetLineControls();
 
          inline bool HasV001Controls();
 

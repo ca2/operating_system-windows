@@ -28,10 +28,10 @@ namespace music
             virtual ~out();
 
 
-            virtual ::estatus     open(int iDeviceId) override;
-            virtual ::estatus     close() override;
+            virtual ::e_status     open(int iDeviceId) override;
+            virtual ::e_status     close() override;
 
-            ::estatus     send_short_message(::music::midi::e_message emessage, int iChannel, int iData1, int iData2);
+            ::e_status     send_short_message(::music::midi::e_message emessage, int iChannel, int iData1, int iData2);
 
          };
 

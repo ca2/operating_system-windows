@@ -30,7 +30,7 @@ namespace backup
          if(pevent->m_puie->m_id == "lfs")
          {
             auto pupdate = new_update();
-            pupdate->m_actioncontext = ::source_system;
+            pupdate->m_actioncontext = ::e_source_system;
             psubject->id() = id_browse;
             psubject->value(id_form) = "filemanager_add_location_lfs.xhtml";
             dynamic_cast < ::user::form_view * > (pview)->get_document()->update_all_views(psubject);
@@ -48,7 +48,7 @@ namespace backup
          else if(pevent->m_puie->m_id == "ftp")
          {
             auto pupdate = new_update();
-            pupdate->m_actioncontext = ::source_system;
+            pupdate->m_actioncontext = ::e_source_system;
             psubject->id() = id_browse;
             psubject->value(id_form) = "filemanager_add_location_ftp.xhtml";
             dynamic_cast < ::user::form_view * > (pview)->get_document()->update_all_views(psubject);

@@ -50,7 +50,7 @@ namespace audio_mmsystem
    }
 
 
-   ::estatus out::init_thread()
+   ::e_status out::init_thread()
    {
 
       if (!::wave::out::init_thread())
@@ -75,7 +75,7 @@ namespace audio_mmsystem
    }
 
 
-   ::estatus out::out_open_ex(thread * pthreadCallback, u32 uiSamplesPerSec, u32 uiChannelCount, u32 uiBitsPerSample,::wave::e_purpose epurpose)
+   ::e_status out::out_open_ex(thread * pthreadCallback, u32 uiSamplesPerSec, u32 uiChannelCount, u32 uiBitsPerSample,::wave::e_purpose epurpose)
    {
 
       sync_lock sl(mutex());
@@ -92,7 +92,7 @@ namespace audio_mmsystem
       MMRESULT mmresult = MMSYSERR_NOERROR;
 
       m_pthreadCallback = pthreadCallback;
-      ::estatus     estatus;
+      ::e_status     estatus;
       ASSERT(m_hwaveout == nullptr);
       ASSERT(m_estate == state_initial);
 
@@ -297,7 +297,7 @@ Opened:
 
 
 
-   ::estatus     out::out_close()
+   ::e_status     out::out_close()
    {
 
       sync_lock sl(mutex());
@@ -316,7 +316,7 @@ Opened:
 
       }
 
-      ::estatus     estatus;
+      ::e_status     estatus;
 
       index i;
 
@@ -370,7 +370,7 @@ Opened:
 
       m_iBufferedCount++;
 
-      ::estatus     estatus = ::multimedia::mmsystem::translate(waveOutWrite(m_hwaveout, lpwavehdr, sizeof(WAVEHDR)));
+      ::e_status     estatus = ::multimedia::mmsystem::translate(waveOutWrite(m_hwaveout, lpwavehdr, sizeof(WAVEHDR)));
 
       if(estatus != ::success)
       {
@@ -382,7 +382,7 @@ Opened:
    }
 
 
-   ::estatus     out::out_stop()
+   ::e_status     out::out_stop()
    {
 
       sync_lock sl(mutex());
@@ -417,7 +417,7 @@ Opened:
    }
 
 
-   ::estatus     out::out_pause()
+   ::e_status     out::out_pause()
    {
 
       single_lock sLock(mutex(), TRUE);
@@ -446,7 +446,7 @@ Opened:
 
    }
 
-   ::estatus     out::out_restart()
+   ::e_status     out::out_restart()
    {
 
       sync_lock sl(mutex());
@@ -490,7 +490,7 @@ Opened:
 
       sync_lock sl(mutex());
 
-      ::estatus                    estatus;
+      ::e_status                    estatus;
 
       MMTIME mmt = {};
 
@@ -566,7 +566,7 @@ Opened:
 
    //   sync_lock sl(mutex());
 
-   //   ::estatus                    estatus;
+   //   ::e_status                    estatus;
 
    //   MMTIME                  mmt = {};
 

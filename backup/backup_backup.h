@@ -16,7 +16,7 @@ namespace backup
       backup(::layered * pobjectContext);
       virtual ~backup();
 
-      virtual ::estatus     run() override;
+      virtual ::e_status     run() override;
 
       bool hotcopy_repos(const char * psz);
       bool compress_repos(const char * psz);

@@ -26,17 +26,17 @@ namespace multimedia
 
          virtual bool in_initialize_encoder();
 
-         virtual ::estatus     in_add_buffer(i32 iBuffer);
-         //virtual ::estatus     in_add_buffer(LPWAVEHDR lpwavehdr);
+         virtual ::e_status     in_add_buffer(i32 iBuffer);
+         //virtual ::e_status     in_add_buffer(LPWAVEHDR lpwavehdr);
 
          //HWAVEIN in_get_safe_HWAVEIN();
          virtual void * get_os_data();
 
-         ::estatus     in_open(i32 iBufferCount, i32 iBufferSampleCount);
-         ::estatus     in_close();
-         ::estatus     in_stop();
-         ::estatus     in_start();
-         ::estatus     in_reset();
+         ::e_status     in_open(i32 iBufferCount, i32 iBufferSampleCount);
+         ::e_status     in_close();
+         ::e_status     in_stop();
+         ::e_status     in_start();
+         ::e_status     in_reset();
 
          virtual void translate_in_message(::message::message * pmessage);
 

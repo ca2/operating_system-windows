@@ -1,7 +1,7 @@
 #include "framework.h"
 
 
-::estatus gdiplus_draw_text(::draw2d::graphics* pgraphicsParam, ::draw2d::path* ppathParam, const string& str, rectd& rectParam, const ::e_align & ealign, const ::e_draw_text & edrawtext, ::draw2d::font* pfontParam, double dFontWidth, ::draw2d::brush* pbrushParam, bool bMeasure)
+::e_status gdiplus_draw_text(::draw2d::graphics* pgraphicsParam, ::draw2d::path* ppathParam, const string& str, rectd& rectParam, const ::e_align & ealign, const ::e_draw_text & edrawtext, ::draw2d::font* pfontParam, double dFontWidth, ::draw2d::brush* pbrushParam, bool bMeasure)
 {
 
    if (str.is_empty())

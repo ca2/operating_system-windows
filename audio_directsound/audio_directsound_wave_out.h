@@ -122,7 +122,7 @@ namespace multimedia
          out(::layered * pobjectContext);
          virtual ~out();
 
-         ::estatus     out_start(const imedia_time & position);
+         ::e_status     out_start(const imedia_time & position);
          void install_message_routing(::channel * pchannel);
 
          virtual imedia_time out_get_time();
@@ -130,12 +130,12 @@ namespace multimedia
          virtual void out_filled(index iBuffer) override;
          //virtual void out_buffer_ready(LPWAVEHDR lpwavehdr);
 
-         virtual ::estatus     out_open(::thread * pthreadCallback, i32 iBufferCount, i32 iBufferSampleCount);
-         virtual ::estatus     out_open_ex(::thread * pthreadCallback, i32 iBufferCount, i32 iBufferSampleCount, u32 uiSamplesPerSec, u32 uiChannelCount, u32 uiBitsPerSample);
-         virtual ::estatus     out_stop();
-         virtual ::estatus     out_close();
-         virtual ::estatus     out_pause();
-         virtual ::estatus     out_restart();
+         virtual ::e_status     out_open(::thread * pthreadCallback, i32 iBufferCount, i32 iBufferSampleCount);
+         virtual ::e_status     out_open_ex(::thread * pthreadCallback, i32 iBufferCount, i32 iBufferSampleCount, u32 uiSamplesPerSec, u32 uiChannelCount, u32 uiBitsPerSample);
+         virtual ::e_status     out_stop();
+         virtual ::e_status     out_close();
+         virtual ::e_status     out_pause();
+         virtual ::e_status     out_restart();
          virtual void * get_os_data();
          //HWAVEOUT out_get_safe_HWAVEOUT();
 
@@ -146,7 +146,7 @@ namespace multimedia
          virtual bool init_thread() override;
          virtual void term_thread() override;
 
-         virtual ::estatus     run() override;
+         virtual ::e_status     run() override;
 
          //DECL_GEN_SIGNAL(OnMultimediaOpen);
          //DECL_GEN_SIGNAL(OnMultimediaDone);

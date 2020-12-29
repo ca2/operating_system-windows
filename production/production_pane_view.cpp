@@ -97,7 +97,7 @@ namespace production
             pdocument->update_all_views(nullptr, 1234);
             pdocument->update_all_views(nullptr, 123458);
             __pointer(::user::impact) pview = pdocument->get_view();
-            pdocument->FileManagerBrowse(Context.dir().appdata()/ "production/menu", ::source_system);
+            pdocument->FileManagerBrowse(Context.dir().appdata()/ "production/menu", ::e_source_system);
             if(pview != nullptr)
             {
                __pointer(::user::frame_window) pframe =  (pview->GetParentFrame());
@@ -166,7 +166,7 @@ namespace production
       //      pdocument->update_all_views(nullptr, 1234);
       //      pdocument->update_all_views(nullptr, 123458);
       //      __pointer(::user::impact) pview = pdocument->get_view();
-      //      pdocument->FileManagerBrowse(Context.dir().appdata()/ "production\\3-action-launch", ::source_system);
+      //      pdocument->FileManagerBrowse(Context.dir().appdata()/ "production\\3-action-launch", ::e_source_system);
       //      if(pview != nullptr)
       //      {
       //         __pointer(::user::frame_window) pframe =  (pview->GetParentFrame());
@@ -192,7 +192,7 @@ namespace production
          m_pviewOptions->m_pcallback = this;
 
          auto pupdate = subject(id_browse);
-         pupdate->m_actioncontext = ::source_system;
+         pupdate->m_actioncontext = ::e_source_system;
          psubject->id() = ;
          psubject->value(id_form) = "production\\options.xhtml";
          pdocument->update_all_views(psubject);

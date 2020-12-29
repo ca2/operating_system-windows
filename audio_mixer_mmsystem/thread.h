@@ -41,7 +41,7 @@ namespace multimedia
 
          void install_message_routing(::channel * pchannel);
 
-         virtual ::estatus init_thread() override;
+         virtual ::e_status init_thread() override;
          virtual void term_thread() override;
          // virtual bool on_idle(LONG lCount);
          virtual void pre_translate_message(::message::message * pmessage);

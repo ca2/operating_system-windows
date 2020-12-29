@@ -35,9 +35,9 @@ namespace production
 
          virtual bool init_thread() override;
 
-         virtual ::estatus     run() override;
+         virtual ::e_status     run() override;
 
-         virtual ::estatus     raw_run();
+         virtual ::e_status     raw_run();
 
       };
 
@@ -51,7 +51,7 @@ namespace production
          manual_reset_event * m_pevFinished;
          production *   m_pproduction;
          u32                m_dwThreadAffinityMask;
-         virtual ::estatus     run() override;
+         virtual ::e_status     run() override;
       };
 
       string_array                 m_straMirror;
@@ -152,10 +152,10 @@ namespace production
       string version_to_international_datetime(const char * psz);
 
 
-      virtual ::estatus     run() override;
+      virtual ::e_status     run() override;
 
 
-      virtual ::estatus     produce();
+      virtual ::e_status     produce();
 
       bool get_file_list(const char * pszBase, const char * pszDir, ::file::listing & stra, bool bFileSet = false);
       // bool ftp_put_dir(CFtpConnection & ftpconn, const char * pszBase, const char * pszDir, i32 iMode);

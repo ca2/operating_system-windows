@@ -323,7 +323,7 @@ namespace music
 
       }
 
-      ::estatus     FillTypeCombo(::user::combo_box * pcombo)
+      ::e_status     FillTypeCombo(::user::combo_box * pcombo)
       {
          UNREFERENCED_PARAMETER(pcombo);
          /*   lpcombo->ResetContent();
@@ -352,7 +352,7 @@ namespace music
          return ::success;
       }
 
-      ::estatus     FillPitchCombo(::user::combo_box * pcombo)
+      ::e_status     FillPitchCombo(::user::combo_box * pcombo)
       {
          UNREFERENCED_PARAMETER(pcombo);
          /*    lpcombo->ResetContent();

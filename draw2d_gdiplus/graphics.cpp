@@ -340,7 +340,7 @@ namespace draw2d_gdiplus
    //}
 
 
-   ::estatus graphics::set(::draw2d::bitmap * pbitmap)
+   ::e_status graphics::set(::draw2d::bitmap * pbitmap)
    {
 
       if (::is_null(pbitmap))
@@ -1047,7 +1047,7 @@ namespace draw2d_gdiplus
    }
 
 
-   ::estatus graphics::clear_current_point()
+   ::e_status graphics::clear_current_point()
    {
 
       return ::success;
@@ -4733,7 +4733,7 @@ gdi_fallback:
    }
 
 
-   ::estatus graphics::add_shapes(const shape_array& shapea)
+   ::e_status graphics::add_shapes(const shape_array& shapea)
    {
 
       for (int i = 0; i < shapea.get_count(); i++)
@@ -4781,7 +4781,7 @@ gdi_fallback:
    }
 
 
-   ::estatus graphics::reset_clip()
+   ::e_status graphics::reset_clip()
    {
 
       m_pgraphics->ResetClip();
@@ -4791,7 +4791,7 @@ gdi_fallback:
    }
 
 
-   ::estatus graphics::intersect_clip(const ::rect& rect)
+   ::e_status graphics::intersect_clip(const ::rect& rect)
    {
 
       Gdiplus::Rect r;
@@ -4809,7 +4809,7 @@ gdi_fallback:
    }
 
 
-   ::estatus graphics::intersect_clip(const ::rectd& rect)
+   ::e_status graphics::intersect_clip(const ::rectd& rect)
    {
 
       Gdiplus::RectF r;
@@ -4827,7 +4827,7 @@ gdi_fallback:
    }
 
 
-   ::estatus graphics::intersect_clip(const ::oval& oval)
+   ::e_status graphics::intersect_clip(const ::oval& oval)
    {
 
       auto ppath = __auto(new Gdiplus::GraphicsPath());
@@ -4849,7 +4849,7 @@ gdi_fallback:
    }
 
 
-   ::estatus graphics::intersect_clip(const ::ovald& oval)
+   ::e_status graphics::intersect_clip(const ::ovald& oval)
    {
 
       auto ppath = __auto(new Gdiplus::GraphicsPath());
@@ -4871,7 +4871,7 @@ gdi_fallback:
    }
 
 
-   ::estatus graphics::intersect_clip(const ::polygon& polygon)
+   ::e_status graphics::intersect_clip(const ::polygon& polygon)
    {
 
       auto ppath = __auto(new Gdiplus::GraphicsPath());
@@ -4896,7 +4896,7 @@ gdi_fallback:
    }
 
 
-   ::estatus graphics::intersect_clip(const ::polygond& polygon)
+   ::e_status graphics::intersect_clip(const ::polygond& polygon)
    {
 
       auto ppath = __auto(new Gdiplus::GraphicsPath());

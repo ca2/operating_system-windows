@@ -107,10 +107,10 @@ namespace music
          }
 
 
-         ::estatus     buffer::midiOutPrepareHeader(HMIDIOUT hmidiout)
+         ::e_status     buffer::midiOutPrepareHeader(HMIDIOUT hmidiout)
          {
 
-            ::estatus     mmr = ::success;
+            ::e_status     mmr = ::success;
 
             if (hmidiout == nullptr)
                return mmr;
@@ -165,10 +165,10 @@ namespace music
          }
 
 
-         ::estatus     buffer::midiOutUnprepareHeader(HMIDIOUT hmidiout)
+         ::e_status     buffer::midiOutUnprepareHeader(HMIDIOUT hmidiout)
          {
 
-            ::estatus     mmr = ::success;
+            ::e_status     mmr = ::success;
 
             if (hmidiout == nullptr)
                return mmr;
@@ -191,15 +191,15 @@ namespace music
          }
 
 
-         ::estatus     buffer_array::midiOutUnprepareHeader(HMIDIOUT hmidiout)
+         ::e_status     buffer_array::midiOutUnprepareHeader(HMIDIOUT hmidiout)
          {
 
-            ::estatus     mmr = ::success;
+            ::e_status     mmr = ::success;
 
             for (i32 i = 0; i < this->buffer_count(); i++)
             {
 
-               ::estatus     mmrBuffer = this->buffer_at(i)->midiOutUnprepareHeader(hmidiout);
+               ::e_status     mmrBuffer = this->buffer_at(i)->midiOutUnprepareHeader(hmidiout);
 
                if (mmrBuffer != ::success)
                {
@@ -215,10 +215,10 @@ namespace music
          }
 
 
-         ::estatus     buffer_array::midiOutPrepareHeader(HMIDIOUT hmidiout)
+         ::e_status     buffer_array::midiOutPrepareHeader(HMIDIOUT hmidiout)
          {
 
-            ::estatus     estatus = ::success;
+            ::e_status     estatus = ::success;
 
             for (i32 i = 0; i < this->buffer_count(); i++)
             {
@@ -246,7 +246,7 @@ namespace music
          }
 
 
-         ::estatus     buffer::midiStreamOut(HMIDISTRM hmidiout)
+         ::e_status     buffer::midiStreamOut(HMIDISTRM hmidiout)
          {
 
             ASSERT(hmidiout != nullptr);
@@ -263,10 +263,10 @@ namespace music
          }
 
 
-         ::estatus     buffer_array::midiStreamOut(HMIDISTRM hmidiout)
+         ::e_status     buffer_array::midiStreamOut(HMIDISTRM hmidiout)
          {
 
-            ::estatus     estatus = ::success;
+            ::e_status     estatus = ::success;
 
             for (i32 i = 0; i < this->buffer_count(); i++)
             {
