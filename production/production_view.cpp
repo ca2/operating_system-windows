@@ -174,7 +174,7 @@ namespace production
 
       pgraphics->SelectObject(_001GetFont(::user::font_default));
 
-//      auto sz = pgraphics->GetTextExtent("��qg");
+//      auto sz = pgraphics->GetTextExtent("qg");
       m_iLineHeight = max(1, pgraphics->get_current_font()->get_height());
 
       pgraphics->fill_rect(rectClient, ARGB(255, 255, 255, 255));

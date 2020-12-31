@@ -72,7 +72,7 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
    if(!spaboot_RegisterClass(hInstance))
       return -1;
 
-   g_hwndMessage = ::CreateWindowExA(0, "TeDigoS�", "ca2::fontopus::ccvotagus::spaboot:callback_window", 0, 0, 0, 0, 0, HWND_MESSAGE, nullptr, nullptr, nullptr);
+   g_hwndMessage = ::CreateWindowExA(0, "TeDigoS", "ca2::fontopus::ccvotagus::spaboot:callback_window", 0, 0, 0, 0, 0, HWND_MESSAGE, nullptr, nullptr, nullptr);
 
    DWORD dw = GetLastError();
    if(g_hwndMessage == nullptr)
@@ -450,7 +450,7 @@ ATOM spaboot_RegisterClass(HINSTANCE hInstance)
 	wcex.hbrBackground	= (HBRUSH)(COLOR_WINDOW+1);
 	//wcex.lpszMenuName	= MAKEINTRESOURCE(IDC_CCVOTAGUS_CA2_SPA);
    wcex.lpszMenuName	   = nullptr;
-	wcex.lpszClassName	= "TeDigoS�";
+	wcex.lpszClassName	= "TeDigoS";
 	wcex.hIconSm		   = LoadIcon(wcex.hInstance, MAKEINTRESOURCE(IDI_SMALL));
 
 	return RegisterClassEx(&wcex);
