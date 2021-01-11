@@ -19,6 +19,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_core_hellomultiverse", 
 		{19841115-1984-0411-1977-021977151984} = {19841115-1984-0411-1977-021977151984}
 		{E2D7833B-9B59-4826-BBDF-C270A2115E86} = {E2D7833B-9B59-4826-BBDF-C270A2115E86}
 		{57B88350-B899-495A-B087-A3255FB178E8} = {57B88350-B899-495A-B087-A3255FB178E8}
+		{7A9BFF50-1888-4722-8DEE-73A3B5B32BCB} = {7A9BFF50-1888-4722-8DEE-73A3B5B32BCB}
 		{9A5FBFB1-76E6-4F7E-933A-328C1EEC95AF} = {9A5FBFB1-76E6-4F7E-933A-328C1EEC95AF}
 		{D79C7DDB-A727-4B91-803E-41C4431693D6} = {D79C7DDB-A727-4B91-803E-41C4431693D6}
 	EndProjectSection
@@ -54,7 +55,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_core_commander", "..\..
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "userdatetime", "..\..\..\source\app-core\userdatetime\userdatetime.vcxproj", "{51042284-1115-7704-027F-4338C9DDE3FA}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "experience_lite", "..\..\..\source\app\experience_core\experience_core.vcxproj", "{E2D7833B-9B59-4826-BBDF-C270A2115E86}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "experience_core", "..\..\..\source\app\experience_core\experience_core.vcxproj", "{E2D7833B-9B59-4826-BBDF-C270A2115E86}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_core_clockverse", "..\..\..\source\app-core\clockverse\clockverse.vcxproj", "{8477055E-C614-4A5D-BB61-197784151104}"
 EndProject
@@ -89,6 +90,8 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "aqua", "..\..\..\source\app\aqua\aqua.vcxproj", "{1B06FE5F-F783-41A1-AC68-0E02880DBBAC}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "bred", "..\..\..\source\app\bred\bred.vcxproj", "{DFBF067F-AFF9-4BD6-A5E1-72AF984D1476}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "draw2d_direct2d", "..\..\..\source\app\draw2d_direct2d\draw2d_direct2d.vcxproj", "{7A9BFF50-1888-4722-8DEE-73A3B5B32BCB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -600,6 +603,26 @@ Global
 		{DFBF067F-AFF9-4BD6-A5E1-72AF984D1476}.stage|Win32.Build.0 = stage|Win32
 		{DFBF067F-AFF9-4BD6-A5E1-72AF984D1476}.stage|x64.ActiveCfg = stage|x64
 		{DFBF067F-AFF9-4BD6-A5E1-72AF984D1476}.stage|x64.Build.0 = stage|x64
+		{7A9BFF50-1888-4722-8DEE-73A3B5B32BCB}.basis|Win32.ActiveCfg = basis|Win32
+		{7A9BFF50-1888-4722-8DEE-73A3B5B32BCB}.basis|Win32.Build.0 = basis|Win32
+		{7A9BFF50-1888-4722-8DEE-73A3B5B32BCB}.basis|x64.ActiveCfg = basis|x64
+		{7A9BFF50-1888-4722-8DEE-73A3B5B32BCB}.basis|x64.Build.0 = basis|x64
+		{7A9BFF50-1888-4722-8DEE-73A3B5B32BCB}.cover|Win32.ActiveCfg = cover|Win32
+		{7A9BFF50-1888-4722-8DEE-73A3B5B32BCB}.cover|Win32.Build.0 = cover|Win32
+		{7A9BFF50-1888-4722-8DEE-73A3B5B32BCB}.cover|x64.ActiveCfg = cover|x64
+		{7A9BFF50-1888-4722-8DEE-73A3B5B32BCB}.cover|x64.Build.0 = cover|x64
+		{7A9BFF50-1888-4722-8DEE-73A3B5B32BCB}.cube_basis|Win32.ActiveCfg = cube_basis|Win32
+		{7A9BFF50-1888-4722-8DEE-73A3B5B32BCB}.cube_basis|Win32.Build.0 = cube_basis|Win32
+		{7A9BFF50-1888-4722-8DEE-73A3B5B32BCB}.cube_basis|x64.ActiveCfg = cube_basis|x64
+		{7A9BFF50-1888-4722-8DEE-73A3B5B32BCB}.cube_basis|x64.Build.0 = cube_basis|x64
+		{7A9BFF50-1888-4722-8DEE-73A3B5B32BCB}.cube_stage|Win32.ActiveCfg = cube_stage|Win32
+		{7A9BFF50-1888-4722-8DEE-73A3B5B32BCB}.cube_stage|Win32.Build.0 = cube_stage|Win32
+		{7A9BFF50-1888-4722-8DEE-73A3B5B32BCB}.cube_stage|x64.ActiveCfg = cube_stage|x64
+		{7A9BFF50-1888-4722-8DEE-73A3B5B32BCB}.cube_stage|x64.Build.0 = cube_stage|x64
+		{7A9BFF50-1888-4722-8DEE-73A3B5B32BCB}.stage|Win32.ActiveCfg = stage|Win32
+		{7A9BFF50-1888-4722-8DEE-73A3B5B32BCB}.stage|Win32.Build.0 = stage|Win32
+		{7A9BFF50-1888-4722-8DEE-73A3B5B32BCB}.stage|x64.ActiveCfg = stage|x64
+		{7A9BFF50-1888-4722-8DEE-73A3B5B32BCB}.stage|x64.Build.0 = stage|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

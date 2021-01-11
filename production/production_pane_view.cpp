@@ -41,7 +41,7 @@ namespace production
 
    void pane_view::_001OnCreate(::message::message * pmessage)
    {
-//      SCAST_PTR(::message::create, pcreate, pmessage);
+//      __pointer(::message::create) pcreate(pmessage);
       if(pmessage->previous())
          return;
 
@@ -100,7 +100,7 @@ namespace production
             pdocument->FileManagerBrowse(Context.dir().appdata()/ "production/menu", ::e_source_system);
             if(pview != nullptr)
             {
-               __pointer(::user::frame_window) pframe =  (pview->GetParentFrame());
+               __pointer(::user::frame_window) pframe =  (pview->get_parent_frame());
                if(pframe != nullptr)
                {
                   pframe->ModifyStyle(WS_CAPTION, WS_CHILD, 0);
@@ -140,7 +140,7 @@ namespace production
                      __pointer(::user::impact) pview = pdocument->get_view();
                      if(pview != nullptr)
                      {
-                        __pointer(::user::frame_window) pframe =  (pview->GetParentFrame());
+                        __pointer(::user::frame_window) pframe =  (pview->get_parent_frame());
                         if(pframe != nullptr)
                         {
                            //pframe->ModifyStyle(WS_CAPTION, WS_CHILD, 0);
@@ -169,7 +169,7 @@ namespace production
       //      pdocument->FileManagerBrowse(Context.dir().appdata()/ "production\\3-action-launch", ::e_source_system);
       //      if(pview != nullptr)
       //      {
-      //         __pointer(::user::frame_window) pframe =  (pview->GetParentFrame());
+      //         __pointer(::user::frame_window) pframe =  (pview->get_parent_frame());
       //         if(pframe != nullptr)
       //         {
       //            pframe->ModifyStyle(WS_CAPTION, WS_CHILD, 0);
@@ -204,7 +204,7 @@ namespace production
          pdocument->update_all_views(psubject);
 
 
-         pcreatordata->m_puserinteraction = (pview->GetParentFrame());
+         pcreatordata->m_puserinteraction = (pview->get_parent_frame());
          __pointer(form_child_frame) pframe = (pcreatordata->m_puserinteraction);
          pcreatordata->m_pdocument = pdocument;
          //pcreatordata->m_puserinteraction = pframe;
@@ -248,7 +248,7 @@ namespace production
       {
          Context.os().file_open(this, itema[0]->m_filepathFinal, "", itema[0]->m_filepathFinal.folder());
       }
-      GetParentFrame()->hide();
+      get_parent_frame()->hide();
    }
 
    void pane_view::on_control_event(::user::control_event * pevent)
@@ -285,7 +285,7 @@ namespace production
 
    void pane_view::_001OnUserMessage(::message::message * pmessage)
    {
-      SCAST_PTR(::message::base, pbase, pmessage);
+      __pointer(::message::base) pbase(pmessage);
       if(pbase->m_wparam == 1)
       {
          set_cur_tab_by_id("tabbed_file_manager");

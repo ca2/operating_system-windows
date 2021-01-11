@@ -10,7 +10,7 @@ namespace audio_mmsystem
 
       m_pencoder = nullptr;
       m_hwavein = nullptr;
-      m_estate = state_initial;
+      m_estate = e_state_initial;
       m_bResetting = false;
 
    }
@@ -49,7 +49,7 @@ namespace audio_mmsystem
 
    void in::pre_translate_message(::message::message * pmessage)
    {
-      SCAST_PTR(::message::base, pbase, pmessage);
+      __pointer(::message::base) pbase(pmessage);
       //ASSERT(GetMainWnd() == nullptr);
       if(pbase->m_id == MM_WIM_OPEN ||
             pbase->m_id == MM_WIM_CLOSE ||
@@ -68,7 +68,7 @@ namespace audio_mmsystem
    ::e_status in::in_open(i32 iBufferCount, i32 iBufferSampleCount)
    {
 
-      if(m_hwavein != nullptr && m_estate != state_initial)
+      if(m_hwavein != nullptr && m_estate != e_state_initial)
       {
 
          in_initialize_encoder();
@@ -80,7 +80,7 @@ namespace audio_mmsystem
       single_lock sLock(mutex(), TRUE);
       ::e_status     estatus;
       ASSERT(m_hwavein == nullptr);
-      ASSERT(m_estate == state_initial);
+      ASSERT(m_estate == e_state_initial);
 
       m_pwaveformat->m_waveformat.wFormatTag = WAVE_FORMAT_PCM;
       m_pwaveformat->m_waveformat.nChannels = 2;
@@ -221,7 +221,7 @@ Opened:
       if(m_pencoder != nullptr && !in_initialize_encoder())
       {
 
-         m_estate = state_opened;
+         m_estate = e_state_opened;
 
          in_close();
 
@@ -229,7 +229,7 @@ Opened:
 
       }
 
-      m_estate = state_opened;
+      m_estate = e_state_opened;
 
       return ::success;
 
@@ -243,7 +243,7 @@ Opened:
 
       ::e_status     estatus;
 
-      if(m_estate != state_opened && m_estate != state_stopped)
+      if(m_estate != e_state_opened && m_estate != state_stopped)
          return ::success;
 
       estatus = in_reset();
@@ -269,7 +269,7 @@ Opened:
 
       m_hwavein = nullptr;
 
-      m_estate = state_initial;
+      m_estate = e_state_initial;
 
       return ::success;
 
@@ -283,9 +283,9 @@ Opened:
       if(m_estate == state_recording)
          return ::success;
 
-      //ASSERT(m_estate == state_opened || m_estate == state_stopped);
+      //ASSERT(m_estate == e_state_opened || m_estate == state_stopped);
 
-      if(m_estate != state_opened && m_estate != state_stopped)
+      if(m_estate != e_state_opened && m_estate != state_stopped)
          return ::success;
 
       ::e_status     estatus;
@@ -312,7 +312,7 @@ Opened:
 
       ::e_status     estatus;
 
-      m_estate = state_stopping;
+      m_estate = e_state_stopping;
 
       try
       {
@@ -420,7 +420,7 @@ Opened:
       {
       }
 
-      m_estate = state_opened;
+      m_estate = e_state_opened;
 
       m_bResetting = false;
 
@@ -432,7 +432,7 @@ Opened:
    void in::translate_in_message(::message::message * pmessage)
    {
 
-      SCAST_PTR(::message::base, pbase, pmessage);
+      __pointer(::message::base) pbase(pmessage);
 
       ASSERT(pbase->m_id == MM_WIM_OPEN || pbase->m_id == MM_WIM_CLOSE || pbase->m_id == MM_WIM_DATA);
 

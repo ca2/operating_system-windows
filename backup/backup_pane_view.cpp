@@ -94,7 +94,7 @@ namespace backup
          pdocument->update_all_views(psubject);
 
 
-         pcreatordata->m_puserinteraction = (pview->GetParentFrame());
+         pcreatordata->m_puserinteraction = (pview->get_parent_frame());
 //         __pointer(form_child_frame) pframe = (pcreatordata->m_puserinteraction);
          pcreatordata->m_pdocument = pdocument;
 

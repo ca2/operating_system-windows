@@ -71,7 +71,7 @@ namespace multimedia
 
       void thread::OnMixerMessage(::message::message * pmessage)
       {
-         SCAST_PTR(::message::base, pbase, pmessage);
+         __pointer(::message::base) pbase(pmessage);
 
          if(pbase->m_wparam ==  23)
          {
@@ -149,7 +149,7 @@ namespace multimedia
 
       void thread::OnUserMessage(::message::message * pmessage)
       {
-         SCAST_PTR(::message::base, pbase, pmessage);
+         __pointer(::message::base) pbase(pmessage);
 
          switch(pbase->m_wparam)
          {

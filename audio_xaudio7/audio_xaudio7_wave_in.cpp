@@ -18,7 +18,7 @@ namespace multimedia
 
          m_pencoder = nullptr;
 //         m_hwavein = nullptr;
-         m_estate = state_initial;
+         m_estate = e_state_initial;
          m_bResetting = false;
 
       }
@@ -45,7 +45,7 @@ namespace multimedia
 
       void in::pre_translate_message(::message::message * pmessage)
       {
-         SCAST_PTR(::message::base, pbase, pmessage);
+         __pointer(::message::base) pbase(pmessage);
          //ASSERT(GetMainWnd() == nullptr);
          //if(pbase->m_id == MM_WIM_OPEN ||
          //   pbase->m_id == MM_WIM_CLOSE ||
@@ -61,7 +61,7 @@ namespace multimedia
       ::e_status     in::in_open(i32 iBufferCount, i32 iBufferSampleCount)
       {
 
-//         if(m_hwavein != nullptr && m_estate != state_initial)
+//         if(m_hwavein != nullptr && m_estate != e_state_initial)
 //         {
 //            in_initialize_encoder();
 //
@@ -72,7 +72,7 @@ namespace multimedia
 //         single_lock sLock(&m_mutex, TRUE);
 //         ::e_status     mmr;
 //         ASSERT(m_hwavein == nullptr);
-//         ASSERT(m_estate == state_initial);
+//         ASSERT(m_estate == e_state_initial);
 //
 //         m_pwaveformat->wFormatTag = WAVE_FORMAT_PCM;
 //         m_pwaveformat->nChannels = 2;
@@ -201,7 +201,7 @@ namespace multimedia
 //         if(m_pencoder != nullptr && !in_initialize_encoder())
 //         {
 //
-//            m_estate = state_opened;
+//            m_estate = e_state_opened;
 //
 //            in_close();
 //
@@ -209,7 +209,7 @@ namespace multimedia
 //
 //         }
 //
-//         m_estate = state_opened;
+//         m_estate = e_state_opened;
 //
          return ::success;
 
@@ -223,7 +223,7 @@ namespace multimedia
 
          //::e_status     mmr;
 
-         //if(m_estate != state_opened && m_estate != state_stopped)
+         //if(m_estate != e_state_opened && m_estate != state_stopped)
          //   return ::success;
 
          //mmr = in_reset();
@@ -249,7 +249,7 @@ namespace multimedia
 
          //m_hwavein = nullptr;
 
-         //m_estate = state_initial;
+         //m_estate = e_state_initial;
 
          return ::success;
 
@@ -263,9 +263,9 @@ namespace multimedia
          if(m_estate == state_recording)
             return ::success;
 
-         //ASSERT(m_estate == state_opened || m_estate == state_stopped);
+         //ASSERT(m_estate == e_state_opened || m_estate == state_stopped);
 
-         if(m_estate != state_opened && m_estate != state_stopped)
+         if(m_estate != e_state_opened && m_estate != state_stopped)
             return ::success;
 
          //::e_status     mmr;
@@ -292,7 +292,7 @@ namespace multimedia
 
          ::e_status     mmr;
 
-         m_estate = state_stopping;
+         m_estate = e_state_stopping;
 
          //try
          //{
@@ -400,7 +400,7 @@ namespace multimedia
          //{
          //}
 
-         //m_estate = state_opened;
+         //m_estate = e_state_opened;
 
          m_bResetting = false;
 
@@ -412,7 +412,7 @@ namespace multimedia
       void in::translate_in_message(::message::message * pmessage)
       {
 
-         SCAST_PTR(::message::base, pbase, pmessage);
+         __pointer(::message::base) pbase(pmessage);
 
          //ASSERT(pbase->m_id == MM_WIM_OPEN || pbase->m_id == MM_WIM_CLOSE || pbase->m_id == MM_WIM_DATA);
 

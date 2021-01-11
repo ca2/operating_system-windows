@@ -29,7 +29,7 @@ namespace audio_mmsystem
 
       m_bDirectOutput      = true;
       m_bMessageThread     = true;
-      m_estate             = state_initial;
+      m_estate             = e_state_initial;
       m_pthreadCallback    = nullptr;
       m_hwaveout           = nullptr;
 
@@ -80,7 +80,7 @@ namespace audio_mmsystem
 
       sync_lock sl(mutex());
 
-      if (m_hwaveout != nullptr && m_estate != state_initial)
+      if (m_hwaveout != nullptr && m_estate != e_state_initial)
       {
 
          return ::success;
@@ -94,7 +94,7 @@ namespace audio_mmsystem
       m_pthreadCallback = pthreadCallback;
       ::e_status     estatus;
       ASSERT(m_hwaveout == nullptr);
-      ASSERT(m_estate == state_initial);
+      ASSERT(m_estate == e_state_initial);
 
       m_pwaveformat->m_waveformat.wFormatTag        = WAVE_FORMAT_PCM;
       m_pwaveformat->m_waveformat.nChannels         = (WORD) uiChannelCount;
@@ -287,7 +287,7 @@ Opened:
 
       }
 
-      m_estate = state_opened;
+      m_estate = e_state_opened;
 
       m_epurpose = epurpose;
 
@@ -302,14 +302,14 @@ Opened:
 
       sync_lock sl(mutex());
 
-      if(m_estate == state_playing)
+      if(m_estate == e_state_playing)
       {
 
          out_stop();
 
       }
 
-      if (m_estate != state_opened)
+      if (m_estate != e_state_opened)
       {
 
          return ::success;
@@ -359,10 +359,10 @@ Opened:
 
       sync_lock sl(mutex());
 
-      if(out_get_state() != state_playing)
+      if(out_get_state() != e_state_playing)
       {
 
-         TRACE("ERROR out::BufferReady while out_get_state() != state_playing");
+         TRACE("ERROR out::BufferReady while out_get_state() != e_state_playing");
 
          return;
 
@@ -387,7 +387,7 @@ Opened:
 
       sync_lock sl(mutex());
 
-      if (m_estate != state_playing && m_estate != state_paused)
+      if (m_estate != e_state_playing && m_estate != e_state_paused)
       {
 
          return error_failed;
@@ -396,7 +396,7 @@ Opened:
 
       //m_pprebuffer->stop();
 
-      m_estate = state_stopping;
+      m_estate = e_state_stopping;
 
       // waveOutReset
       // The waveOutReset function stops playback on the given
@@ -408,7 +408,7 @@ Opened:
       if(m_estatusWave == ::success)
       {
 
-         m_estate = state_opened;
+         m_estate = e_state_opened;
 
       }
 
@@ -422,9 +422,9 @@ Opened:
 
       single_lock sLock(mutex(), TRUE);
 
-      ASSERT(m_estate == state_playing);
+      ASSERT(m_estate == e_state_playing);
 
-      if(m_estate != state_playing)
+      if(m_estate != e_state_playing)
          return error_failed;
 
       // waveOutReset
@@ -439,7 +439,7 @@ Opened:
 
       if(m_estatusWave == ::success)
       {
-         m_estate = state_paused;
+         m_estate = e_state_paused;
       }
 
       return m_estatusWave;
@@ -451,9 +451,9 @@ Opened:
 
       sync_lock sl(mutex());
 
-      ASSERT(m_estate == state_paused);
+      ASSERT(m_estate == e_state_paused);
 
-      if(m_estate != state_paused)
+      if(m_estate != e_state_paused)
          return error_failed;
 
       // waveOutReset
@@ -468,7 +468,7 @@ Opened:
       if(m_estatusWave == ::success)
       {
 
-         m_estate = state_playing;
+         m_estate = e_state_playing;
 
       }
 
@@ -644,13 +644,13 @@ Opened:
    void out::out_on_playback_end()
    {
 
-      out::e_state estate = out_get_state();
+      out::enum_state estate = out_get_state();
 
       out_stop();
 
       m_pprebuffer->m_pstreameffectOut.release();
 
-      m_pplayer->post_event(::wave::player::player_event_playback_end);
+      m_pplayer->post_event(::wave::player::e_player_event_playback_end);
 
    }
 
