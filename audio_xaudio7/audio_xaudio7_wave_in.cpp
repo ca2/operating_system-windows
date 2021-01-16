@@ -18,7 +18,7 @@ namespace multimedia
 
          m_pencoder = nullptr;
 //         m_hwavein = nullptr;
-         m_estate = state_initial;
+         m_estate = e_state_initial;
          m_bResetting = false;
 
       }
@@ -45,7 +45,7 @@ namespace multimedia
 
       void in::pre_translate_message(::message::message * pmessage)
       {
-         SCAST_PTR(::message::base, pbase, pmessage);
+         __pointer(::message::base) pbase(pmessage);
          //ASSERT(GetMainWnd() == nullptr);
          //if(pbase->m_id == MM_WIM_OPEN ||
          //   pbase->m_id == MM_WIM_CLOSE ||
@@ -58,10 +58,10 @@ namespace multimedia
          return thread::pre_translate_message(pbase);
       }
 
-      ::estatus     in::in_open(i32 iBufferCount, i32 iBufferSampleCount)
+      ::e_status     in::in_open(i32 iBufferCount, i32 iBufferSampleCount)
       {
 
-//         if(m_hwavein != nullptr && m_estate != state_initial)
+//         if(m_hwavein != nullptr && m_estate != e_state_initial)
 //         {
 //            in_initialize_encoder();
 //
@@ -70,9 +70,9 @@ namespace multimedia
 //         }
 //
 //         single_lock sLock(&m_mutex, TRUE);
-//         ::estatus     mmr;
+//         ::e_status     mmr;
 //         ASSERT(m_hwavein == nullptr);
-//         ASSERT(m_estate == state_initial);
+//         ASSERT(m_estate == e_state_initial);
 //
 //         m_pwaveformat->wFormatTag = WAVE_FORMAT_PCM;
 //         m_pwaveformat->nChannels = 2;
@@ -201,29 +201,29 @@ namespace multimedia
 //         if(m_pencoder != nullptr && !in_initialize_encoder())
 //         {
 //
-//            m_estate = state_opened;
+//            m_estate = e_state_opened;
 //
 //            in_close();
 //
-//            return (::estatus    ) -1;
+//            return (::e_status    ) -1;
 //
 //         }
 //
-//         m_estate = state_opened;
+//         m_estate = e_state_opened;
 //
          return ::success;
 
       }
 
 
-      ::estatus     in::in_close()
+      ::e_status     in::in_close()
       {
 
          single_lock sLock(&m_mutex, TRUE);
 
-         //::estatus     mmr;
+         //::e_status     mmr;
 
-         //if(m_estate != state_opened && m_estate != state_stopped)
+         //if(m_estate != e_state_opened && m_estate != state_stopped)
          //   return ::success;
 
          //mmr = in_reset();
@@ -249,13 +249,13 @@ namespace multimedia
 
          //m_hwavein = nullptr;
 
-         //m_estate = state_initial;
+         //m_estate = e_state_initial;
 
          return ::success;
 
       }
 
-      ::estatus     in::in_start()
+      ::e_status     in::in_start()
       {
 
          single_lock sLock(&m_mutex, TRUE);
@@ -263,12 +263,12 @@ namespace multimedia
          if(m_estate == state_recording)
             return ::success;
 
-         //ASSERT(m_estate == state_opened || m_estate == state_stopped);
+         //ASSERT(m_estate == e_state_opened || m_estate == state_stopped);
 
-         if(m_estate != state_opened && m_estate != state_stopped)
+         if(m_estate != e_state_opened && m_estate != state_stopped)
             return ::success;
 
-         //::estatus     mmr;
+         //::e_status     mmr;
 
          //if(::success != (mmr = xaudio7::translate(waveInStart(m_hwavein))))
          //{
@@ -282,7 +282,7 @@ namespace multimedia
 
       }
 
-      ::estatus     in::in_stop()
+      ::e_status     in::in_stop()
       {
 
          single_lock sLock(&m_mutex, TRUE);
@@ -290,9 +290,9 @@ namespace multimedia
          if(m_estate != state_recording)
             return error_failed;
 
-         ::estatus     mmr;
+         ::e_status     mmr;
 
-         m_estate = state_stopping;
+         m_estate = e_state_stopping;
 
          //try
          //{
@@ -352,7 +352,7 @@ namespace multimedia
       //}
 
 
-      ::estatus     in::in_reset()
+      ::e_status     in::in_reset()
       {
 
          single_lock sLock(&m_mutex, TRUE);
@@ -366,7 +366,7 @@ namespace multimedia
 
          //}
 
-         //::estatus     mmr;
+         //::e_status     mmr;
 
          //if(m_estate == state_recording)
          //{
@@ -400,7 +400,7 @@ namespace multimedia
          //{
          //}
 
-         //m_estate = state_opened;
+         //m_estate = e_state_opened;
 
          m_bResetting = false;
 
@@ -412,7 +412,7 @@ namespace multimedia
       void in::translate_in_message(::message::message * pmessage)
       {
 
-         SCAST_PTR(::message::base, pbase, pmessage);
+         __pointer(::message::base) pbase(pmessage);
 
          //ASSERT(pbase->m_id == MM_WIM_OPEN || pbase->m_id == MM_WIM_CLOSE || pbase->m_id == MM_WIM_DATA);
 
@@ -446,7 +446,7 @@ namespace multimedia
       }
 
 
-      ::estatus     in::in_add_buffer(i32 iBuffer)
+      ::e_status     in::in_add_buffer(i32 iBuffer)
       {
 
          //return in_add_buffer(wave_hdr(iBuffer));
@@ -456,10 +456,10 @@ namespace multimedia
       }
 
 
-      //::estatus     in::in_add_buffer(LPWAVEHDR lpwavehdr)
+      //::e_status     in::in_add_buffer(LPWAVEHDR lpwavehdr)
       //{
 
-      //   ::estatus     mmr;
+      //   ::e_status     mmr;
 
       //   if(::success != (mmr = xaudio7::translate(waveInAddBuffer(m_hwavein, lpwavehdr, sizeof(WAVEHDR)))))
       //   {

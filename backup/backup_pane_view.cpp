@@ -82,7 +82,7 @@ namespace backup
             return;
          __pointer(::user::impact) pview = pdocument->get_view();
          auto pupdate = new_update();
-         pupdate->m_actioncontext = ::source_system;
+         pupdate->m_actioncontext = ::e_source_system;
          psubject->id() = id_browse;
          psubject->value(id_form) = "filemanager\\replace_name_in_file_system.xhtml";
          pdocument->update_all_views(psubject);
@@ -94,7 +94,7 @@ namespace backup
          pdocument->update_all_views(psubject);
 
 
-         pcreatordata->m_puserinteraction = (pview->GetParentFrame());
+         pcreatordata->m_puserinteraction = (pview->get_parent_frame());
 //         __pointer(form_child_frame) pframe = (pcreatordata->m_puserinteraction);
          pcreatordata->m_pdocument = pdocument;
 

@@ -10,7 +10,7 @@ namespace audio_mmsystem
 
       m_pencoder = nullptr;
       m_hwavein = nullptr;
-      m_estate = state_initial;
+      m_estate = e_state_initial;
       m_bResetting = false;
 
    }
@@ -20,7 +20,7 @@ namespace audio_mmsystem
    }
 
 
-   ::estatus in::init_thread()
+   ::e_status in::init_thread()
    {
 
       TRACE("in::initialize_instance %X\n", get_ithread());
@@ -49,7 +49,7 @@ namespace audio_mmsystem
 
    void in::pre_translate_message(::message::message * pmessage)
    {
-      SCAST_PTR(::message::base, pbase, pmessage);
+      __pointer(::message::base) pbase(pmessage);
       //ASSERT(GetMainWnd() == nullptr);
       if(pbase->m_id == MM_WIM_OPEN ||
             pbase->m_id == MM_WIM_CLOSE ||
@@ -65,10 +65,10 @@ namespace audio_mmsystem
    }
 
 
-   ::estatus in::in_open(i32 iBufferCount, i32 iBufferSampleCount)
+   ::e_status in::in_open(i32 iBufferCount, i32 iBufferSampleCount)
    {
 
-      if(m_hwavein != nullptr && m_estate != state_initial)
+      if(m_hwavein != nullptr && m_estate != e_state_initial)
       {
 
          in_initialize_encoder();
@@ -78,9 +78,9 @@ namespace audio_mmsystem
       }
 
       single_lock sLock(mutex(), TRUE);
-      ::estatus     estatus;
+      ::e_status     estatus;
       ASSERT(m_hwavein == nullptr);
-      ASSERT(m_estate == state_initial);
+      ASSERT(m_estate == e_state_initial);
 
       m_pwaveformat->m_waveformat.wFormatTag = WAVE_FORMAT_PCM;
       m_pwaveformat->m_waveformat.nChannels = 2;
@@ -221,29 +221,29 @@ Opened:
       if(m_pencoder != nullptr && !in_initialize_encoder())
       {
 
-         m_estate = state_opened;
+         m_estate = e_state_opened;
 
          in_close();
 
-         return (::estatus    ) -1;
+         return (::e_status    ) -1;
 
       }
 
-      m_estate = state_opened;
+      m_estate = e_state_opened;
 
       return ::success;
 
    }
 
 
-   ::estatus     in::in_close()
+   ::e_status     in::in_close()
    {
 
       single_lock sLock(mutex(), TRUE);
 
-      ::estatus     estatus;
+      ::e_status     estatus;
 
-      if(m_estate != state_opened && m_estate != state_stopped)
+      if(m_estate != e_state_opened && m_estate != state_stopped)
          return ::success;
 
       estatus = in_reset();
@@ -269,13 +269,13 @@ Opened:
 
       m_hwavein = nullptr;
 
-      m_estate = state_initial;
+      m_estate = e_state_initial;
 
       return ::success;
 
    }
 
-   ::estatus     in::in_start()
+   ::e_status     in::in_start()
    {
 
       single_lock sLock(mutex(), TRUE);
@@ -283,12 +283,12 @@ Opened:
       if(m_estate == state_recording)
          return ::success;
 
-      //ASSERT(m_estate == state_opened || m_estate == state_stopped);
+      //ASSERT(m_estate == e_state_opened || m_estate == state_stopped);
 
-      if(m_estate != state_opened && m_estate != state_stopped)
+      if(m_estate != e_state_opened && m_estate != state_stopped)
          return ::success;
 
-      ::estatus     estatus;
+      ::e_status     estatus;
 
       if(::success != (estatus = ::multimedia::mmsystem::translate(waveInStart(m_hwavein))))
       {
@@ -302,7 +302,7 @@ Opened:
 
    }
 
-   ::estatus     in::in_stop()
+   ::e_status     in::in_stop()
    {
 
       single_lock sLock(mutex(), TRUE);
@@ -310,9 +310,9 @@ Opened:
       if(m_estate != state_recording)
          return error_failed;
 
-      ::estatus     estatus;
+      ::e_status     estatus;
 
-      m_estate = state_stopping;
+      m_estate = e_state_stopping;
 
       try
       {
@@ -372,7 +372,7 @@ Opened:
    }
 
 
-   ::estatus     in::in_reset()
+   ::e_status     in::in_reset()
    {
 
       single_lock sLock(mutex(), TRUE);
@@ -386,7 +386,7 @@ Opened:
 
       }
 
-      ::estatus     estatus;
+      ::e_status     estatus;
 
       if(m_estate == state_recording)
       {
@@ -420,7 +420,7 @@ Opened:
       {
       }
 
-      m_estate = state_opened;
+      m_estate = e_state_opened;
 
       m_bResetting = false;
 
@@ -432,7 +432,7 @@ Opened:
    void in::translate_in_message(::message::message * pmessage)
    {
 
-      SCAST_PTR(::message::base, pbase, pmessage);
+      __pointer(::message::base) pbase(pmessage);
 
       ASSERT(pbase->m_id == MM_WIM_OPEN || pbase->m_id == MM_WIM_CLOSE || pbase->m_id == MM_WIM_DATA);
 
@@ -466,7 +466,7 @@ Opened:
    }
 
 
-   ::estatus     in::in_add_buffer(i32 iBuffer)
+   ::e_status     in::in_add_buffer(i32 iBuffer)
    {
 
       return in_add_buffer(wave_hdr(iBuffer));
@@ -474,10 +474,10 @@ Opened:
    }
 
 
-   ::estatus     in::in_add_buffer(LPWAVEHDR lpwavehdr)
+   ::e_status     in::in_add_buffer(LPWAVEHDR lpwavehdr)
    {
 
-      ::estatus     estatus;
+      ::e_status     estatus;
 
       if(::success != (estatus = ::multimedia::mmsystem::translate(waveInAddBuffer(m_hwavein, lpwavehdr, sizeof(WAVEHDR)))))
       {

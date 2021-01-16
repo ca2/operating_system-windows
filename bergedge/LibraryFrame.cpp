@@ -248,9 +248,9 @@ void CLibraryFrame::OnActivate(UINT nState,CWnd* pWndOther,BOOL bMinimized)
    NotifyFloatingWindows(bStayActive ? FS_ACTIVATE : FS_DEACTIVATE);
 
    // get active view (use active frame if no active view)
-   //CView* pActiveView = GetActiveView();
+   //CView* pActiveView = get_active_view();
    //if(pActiveView == nullptr)
-   //   pActiveView = GetActiveFrame()->GetActiveView();
+   //   pActiveView = GetActiveFrame()->get_active_view();
 
    //// when frame gets activated, re-activate current view
    //if(pActiveView != nullptr)

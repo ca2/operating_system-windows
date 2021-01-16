@@ -20,7 +20,7 @@ namespace multimedia
 
 
 
-         m_estate             = state_initial;
+         m_estate             = e_state_initial;
          m_pthreadCallback    = nullptr;
          m_pxaudio       = nullptr;
          m_pvoice       = nullptr;
@@ -83,22 +83,22 @@ namespace multimedia
 
       }
 
-      ::estatus     out::out_open(thread * pthreadCallback, i32 iBufferCount, i32 iBufferSampleCount)
+      ::e_status     out::out_open(thread * pthreadCallback, i32 iBufferCount, i32 iBufferSampleCount)
       {
 
          single_lock sLock(&m_mutex, TRUE);
 
 
-         if(m_pxaudio != nullptr && m_pvoice != nullptr && m_psourcevoice != nullptr && m_estate != state_initial)
+         if(m_pxaudio != nullptr && m_pvoice != nullptr && m_psourcevoice != nullptr && m_estate != e_state_initial)
             return ::success;
 
 
          m_pthreadCallback = pthreadCallback;
-         ::estatus     mmr;
+         ::e_status     mmr;
          ASSERT(m_pxaudio == nullptr);
          ASSERT(m_pvoice == nullptr);
          ASSERT(m_psourcevoice == nullptr);
-         ASSERT(m_estate == state_initial);
+         ASSERT(m_estate == e_state_initial);
 
          
          if(FAILED(XAudio2Create(&m_pxaudio,0,XAUDIO2_DEFAULT_PROCESSOR)))
@@ -223,28 +223,28 @@ Opened:
 
 
 
-         m_estate = state_opened;
+         m_estate = e_state_opened;
 
          return ::success;
 
       }
 
-      ::estatus     out::out_open_ex(thread * pthreadCallback, i32 iBufferCount, i32 iBufferSampleCount, u32 uiSamplesPerSec, u32 uiChannelCount, u32 uiBitsPerSample)
+      ::e_status     out::out_open_ex(thread * pthreadCallback, i32 iBufferCount, i32 iBufferSampleCount, u32 uiSamplesPerSec, u32 uiChannelCount, u32 uiBitsPerSample)
       {
 
          single_lock sLock(&m_mutex, TRUE);
 
-         if(m_pxaudio != nullptr && m_pvoice != nullptr && m_psourcevoice != nullptr && m_estate != state_initial)
+         if(m_pxaudio != nullptr && m_pvoice != nullptr && m_psourcevoice != nullptr && m_estate != e_state_initial)
             return ::success;
 
          m_iBuffer = 0;
 
          m_pthreadCallback = pthreadCallback;
-         ::estatus     mmr;
+         ::e_status     mmr;
          ASSERT(m_pxaudio == nullptr);
          ASSERT(m_pvoice == nullptr);
          ASSERT(m_psourcevoice == nullptr);
-         ASSERT(m_estate == state_initial);
+         ASSERT(m_estate == e_state_initial);
 
          CoInitializeEx(nullptr,COINIT_MULTITHREADED);
 
@@ -319,7 +319,7 @@ Opened:
 
          m_pprebuffer->SetMinL1BufferCount(out_get_buffer()->GetBufferCount() + 4);
 
-         m_estate = state_opened;
+         m_estate = e_state_opened;
 
          return ::success;
 
@@ -327,20 +327,20 @@ Opened:
 
 
 
-      ::estatus     out::out_close()
+      ::e_status     out::out_close()
       {
 
          single_lock sLock(&m_mutex, TRUE);
 
-         if(m_estate == state_playing)
+         if(m_estate == e_state_playing)
          {
             out_stop();
          }
 
-         if(m_estate != state_opened)
+         if(m_estate != e_state_opened)
             return ::success;
 
-         ::estatus     mmr;
+         ::e_status     mmr;
 
          i32 i, iSize;
 
@@ -364,7 +364,7 @@ Opened:
 
          m_pprebuffer->Reset();
 
-         m_estate = state_initial;
+         m_estate = e_state_initial;
 
          return ::success;
 
@@ -375,16 +375,16 @@ Opened:
       void out::out_buffer_ready(int iBuffer)
       {
 
-         if(out_get_state() != state_playing)
+         if(out_get_state() != e_state_playing)
          {
-            TRACE("ERROR out::BufferReady while out_get_state() != state_playing");
+            TRACE("ERROR out::BufferReady while out_get_state() != e_state_playing");
             return;
          }
 
          ::wave::buffer * pwbuffer = out_get_buffer();
          ::wave::buffer::item * pbuffer = pwbuffer->get_buffer(iBuffer);
 
-         ::estatus     mmr;
+         ::e_status     mmr;
          if(m_peffect != nullptr)
          {
             m_peffect->Process16bits((i16 *)pbuffer->m_pData,pwbuffer->m_uiBufferSize / 2);
@@ -416,19 +416,19 @@ Opened:
 
 
 
-      ::estatus     out::out_stop()
+      ::e_status     out::out_stop()
       {
 
          single_lock sLock(&m_mutex, TRUE);
 
-         if(m_estate != state_playing && m_estate != state_paused)
+         if(m_estate != e_state_playing && m_estate != e_state_paused)
             return error_failed;
 
          m_eventStopped.ResetEvent();
 
          m_pprebuffer->Stop();
 
-         m_estate = state_stopping;
+         m_estate = e_state_stopping;
 
          //// waveOutReset
          //// The waveOutReset function stops playback on the given
@@ -440,7 +440,7 @@ Opened:
          if(m_estatusWave == ::success)
          {
 
-            m_estate = state_opened;
+            m_estate = e_state_opened;
 
          }
 
@@ -449,14 +449,14 @@ Opened:
       }
 
 
-      ::estatus     out::out_pause()
+      ::e_status     out::out_pause()
       {
 
          single_lock sLock(&m_mutex, TRUE);
 
-         ASSERT(m_estate == state_playing);
+         ASSERT(m_estate == e_state_playing);
 
-         if(m_estate != state_playing)
+         if(m_estate != e_state_playing)
             return error_failed;
 
          // waveOutReset
@@ -471,7 +471,7 @@ Opened:
 
          if(m_estatusWave == ::success)
          {
-            m_estate = state_paused;
+            m_estate = e_state_paused;
          }
 
          return m_estatusWave;
@@ -489,17 +489,17 @@ Opened:
 
       }
 
-      ::estatus     out::out_start(const imedia_time & position)
+      ::e_status     out::out_start(const imedia_time & position)
       {
 
          single_lock sLock(&m_mutex,TRUE);
 
-         if(m_estate == state_playing)
+         if(m_estate == e_state_playing)
             return ::success;
 
-         ASSERT(m_estate == state_opened || m_estate == state_stopped);
+         ASSERT(m_estate == e_state_opened || m_estate == state_stopped);
 
-         m_estate = state_playing;
+         m_estate = e_state_playing;
 
          for(index i = 0; i < out_get_buffer()->GetBufferCount(); i++)
          {
@@ -518,14 +518,14 @@ Opened:
       }
 
 
-      ::estatus     out::out_restart()
+      ::e_status     out::out_restart()
       {
 
          single_lock sLock(&m_mutex, TRUE);
 
-         ASSERT(m_estate == state_paused);
+         ASSERT(m_estate == e_state_paused);
 
-         if(m_estate != state_paused)
+         if(m_estate != e_state_paused)
             return error_failed;
 
          // waveOutReset
@@ -540,7 +540,7 @@ Opened:
          if(m_estatusWave == ::success)
          {
 
-            m_estate = state_playing;
+            m_estate = e_state_playing;
 
          }
 
@@ -567,7 +567,7 @@ Opened:
 
          single_lock sLock(&m_mutex, TRUE);
 
-         ::estatus                    mmr;
+         ::e_status                    mmr;
 
          return 0;
 
@@ -628,7 +628,7 @@ Opened:
 
          single_lock sLock(&m_mutex, TRUE);
 
-         ::estatus                    mmr;
+         ::e_status                    mmr;
 
          //MMTIME                  mmt;
 
@@ -793,7 +793,7 @@ Opened:
       i32 out::run_step_thread::run()
       {
 
-         while(m_bRun && m_pout->m_estate == out::state_playing)
+         while(m_bRun && m_pout->m_estate == out::e_state_playing)
          {
             m_pout->out_run_step();
          }

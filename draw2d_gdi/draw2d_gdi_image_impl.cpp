@@ -2587,7 +2587,7 @@ namespace draw2d_gdi
    //bool image::print_window(::aura::draw_interface * pwnd, ::message::message * pmessage)
    //{
 
-   //   SCAST_PTR(::message::base, pbase, pmessage);
+   //   __pointer(::message::base) pbase(pmessage);
 
    //   if (pbase->m_wparam == 0)
    //   {

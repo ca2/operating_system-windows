@@ -54,7 +54,7 @@ namespace draw2d_gdiplus
       u32 SetLayout(u32 dwLayout) override;
 
 
-      virtual ::estatus set(::draw2d::bitmap* pbitmap) override;
+      virtual ::e_status set(::draw2d::bitmap* pbitmap) override;
 
       HDC get_hdc();
       void release_hdc(HDC hdc);
@@ -200,14 +200,14 @@ namespace draw2d_gdiplus
       virtual i32 GetClipBox(RECT * prect) override;
 
 
-      virtual ::estatus add_shapes(const shape_array& shapea);
-      virtual ::estatus reset_clip();
-      virtual ::estatus intersect_clip(const ::rect& rect);
-      virtual ::estatus intersect_clip(const ::rectd& rect);
-      virtual ::estatus intersect_clip(const ::oval& oval);
-      virtual ::estatus intersect_clip(const ::ovald& oval);
-      virtual ::estatus intersect_clip(const ::polygon& polygon);
-      virtual ::estatus intersect_clip(const ::polygond& polygon);
+      virtual ::e_status add_shapes(const shape_array& shapea);
+      virtual ::e_status reset_clip();
+      virtual ::e_status intersect_clip(const ::rect& rect);
+      virtual ::e_status intersect_clip(const ::rectd& rect);
+      virtual ::e_status intersect_clip(const ::oval& oval);
+      virtual ::e_status intersect_clip(const ::ovald& oval);
+      virtual ::e_status intersect_clip(const ::polygon& polygon);
+      virtual ::e_status intersect_clip(const ::polygond& polygon);
 
       //virtual bool PtVisible(i32 x, i32 y) override;
       //bool PtVisible(const ::point & point) override;
@@ -304,7 +304,7 @@ namespace draw2d_gdiplus
       //bool fill_ellipse(i32 x1, i32 y1, i32 x2, i32 y2) override;
       //bool fill_ellipse(const rect &  prect) override;
 
-      virtual ::estatus clear_current_point() override;
+      virtual ::e_status clear_current_point() override;
 
       bool draw_ellipse(double x1,double y1,double x2,double y2) override;
       bool draw_ellipse(const ::rectd & prect) override;

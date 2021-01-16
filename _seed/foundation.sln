@@ -106,6 +106,9 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "experience_core", "..\..\..\source\app\experience_core\experience_core.vcxproj", "{E2D7833B-9B59-4826-BBDF-C270A2115E86}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_core_note", "..\..\..\source\app-core\note\note.vcxproj", "{60D2F4B2-3041-4EDC-A54D-6BECEFB515E8}"
+	ProjectSection(ProjectDependencies) = postProject
+		{20FD0446-AA14-4013-84E0-B5CB63FA354F} = {20FD0446-AA14-4013-84E0-B5CB63FA354F}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "experience_tranquillum", "..\..\..\source\app\experience_tranquillum\experience_tranquillum.vcxproj", "{3C892817-9F8B-493C-A3E1-AAC25943A7F9}"
 EndProject

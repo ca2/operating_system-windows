@@ -32,7 +32,7 @@ namespace music
          }
 
 
-         ::estatus     out::open(int iDeviceId)
+         ::e_status     out::open(int iDeviceId)
          {
 
             sync_lock sl(&get_midi_mutex());
@@ -53,7 +53,7 @@ namespace music
 
          }
 
-         ::estatus     out::close()
+         ::e_status     out::close()
          {
 
             if(m_hmidiout != nullptr)
@@ -68,7 +68,7 @@ namespace music
          }
 
 
-         ::estatus     out::send_short_message(::music::midi::e_message emessage, int iChannel, int iData1, int iData2)
+         ::e_status     out::send_short_message(::music::midi::e_message emessage, int iChannel, int iData1, int iData2)
          {
 
 //            return ::multimedia::mmsystem::translate(midiOutShortMsg(m_hmidiout, MIDIMSG(((int)emessage) >> 4, iChannel, iData1, iData2)), "out::send_short_message");

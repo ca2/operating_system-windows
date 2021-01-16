@@ -128,7 +128,7 @@ namespace production
    void view::_001OnSize(::message::message * pmessage)
    {
       UNREFERENCED_PARAMETER(pmessage);
-//      SCAST_PTR(::message::size, psize, pmessage);
+//      __pointer(::message::size) psize(pmessage);
 
       ::rect rectDesktop;
       best_monitor(rectDesktop);
@@ -174,7 +174,7 @@ namespace production
 
       pgraphics->SelectObject(_001GetFont(::user::font_default));
 
-//      auto sz = pgraphics->GetTextExtent("��qg");
+//      auto sz = pgraphics->GetTextExtent("qg");
       m_iLineHeight = max(1, pgraphics->get_current_font()->get_height());
 
       pgraphics->fill_rect(rectClient, ARGB(255, 255, 255, 255));
@@ -327,7 +327,7 @@ namespace production
 
    void view::_001OnContextMenu(::message::message * pmessage)
    {
-      SCAST_PTR(::message::context_menu, pcontextmenu, pmessage);
+      __pointer(::message::context_menu) pcontextmenu(pmessage);
       ::point point = pcontextmenu->GetPoint();
    }
 
@@ -343,7 +343,7 @@ namespace production
    void view::_001OnSetCursor(::message::message * pmessage)
    {
 
-      SCAST_PTR(::message::mouse, pmouse, pmessage);
+      __pointer(::message::mouse) pmouse(pmessage);
 
       pmouse->m_ecursor = cursor_arrow;
 
@@ -406,7 +406,7 @@ namespace production
    void view::_001OnLButtonDown(::message::message * pmessage)
    {
       UNREFERENCED_PARAMETER(pmessage);
-      //    SCAST_PTR(::message::mouse, pmouse, pmessage);
+      //    __pointer(::message::mouse) pmouse(pmessage);
 
 //      i32 iHitArea = hit_test(pmouse->m_point);
 
@@ -414,7 +414,7 @@ namespace production
 
    void view::_001OnLButtonUp(::message::message * pmessage)
    {
-      SCAST_PTR(::message::mouse, pmouse, pmessage);
+      __pointer(::message::mouse) pmouse(pmessage);
 
       auto point = screen_to_client(pmouse->m_point);
       
@@ -434,7 +434,7 @@ namespace production
    void view::_001OnRButtonUp(::message::message * pmessage)
    {
       UNREFERENCED_PARAMETER(pmessage);
-      //    SCAST_PTR(::message::mouse, pmouse, pmessage);
+      //    __pointer(::message::mouse) pmouse(pmessage);
 
 //      i32 iHitArea = hit_test(pmouse->m_point);
       /*   {
@@ -443,7 +443,7 @@ namespace production
             menu.set_app(get_context_application());
             ::aura::menu menuPopup(menu.GetSubMenu(0));
             menuPopup.set_app(get_context_application());
-            menuPopup.track_popup_menu(0, pmouse->m_point.x, pmouse->m_point.y, GetParentFrame().GetSafeoswindow_());
+            menuPopup.track_popup_menu(0, pmouse->m_point.x, pmouse->m_point.y, get_parent_frame().GetSafeoswindow_());
          }
         */
    }
@@ -490,7 +490,7 @@ namespace production
    void view::_001OnShowWindow(::message::message * pmessage)
    {
       UNREFERENCED_PARAMETER(pmessage);
-//      SCAST_PTR(::message::show_window, pshowwindow, pmessage);
+//      __pointer(::message::show_window) pshowwindow(pmessage);
    }
 
    void view::make_production()
@@ -518,7 +518,7 @@ namespace production
 
    void view::_001OnUser(::message::message * pmessage)
    {
-      SCAST_PTR(::message::base, pbase, pmessage);
+      __pointer(::message::base) pbase(pmessage);
       if(pbase->m_wparam == 1)
       {
          i32 iLineHeight = m_iLineHeight;

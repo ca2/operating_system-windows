@@ -15,7 +15,7 @@ namespace multimedia
       //  CLASS_DECL_MULTIMEDIA_DIRECTSOUND LPWAVEHDR get_os_data(::wave::buffer * pwavebuffer, int iIndex);
 
 
-      CLASS_DECL_MULTIMEDIA_DIRECTSOUND ::estatus     translate(HRESULT mmr);
+      CLASS_DECL_MULTIMEDIA_DIRECTSOUND ::e_status     translate(HRESULT mmr);
 
 
    } // namespace directsound

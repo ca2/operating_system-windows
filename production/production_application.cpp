@@ -35,7 +35,7 @@ namespace production
    }
 
 
-   ::estatus application::init_instance()
+   ::e_status application::init_instance()
    {
 
       create_factory <document >();

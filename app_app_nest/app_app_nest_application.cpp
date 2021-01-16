@@ -94,7 +94,7 @@ namespace ca2plugin_container
    }
 
 
-   ::estatus     application::run()
+   ::e_status     application::run()
    {
 
       return thread::run();

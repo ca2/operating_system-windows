@@ -81,7 +81,7 @@ namespace ca2plugin_container
 
          on_paint(nullptr,m_rectClient);
 
-         //if(!m_bMayProDevian && GetParent() == nullptr)
+         //if(!m_bMayProDevian && get_parent() == nullptr)
          //{
 
          //   //set_need_redraw();

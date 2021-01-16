@@ -87,14 +87,14 @@ namespace music
             ::ikaraoke::data & data);
 
             void SetLevelMeter(i32 iLevel);
-            ::estatus     CloseStream();
-            ::estatus     close_device();
+            ::e_status     CloseStream();
+            ::e_status     close_device();
             //bool SetMidiOutDevice(u32 uiDevice);
             i32 SetKeyShift(i32 iKeyShift);
             i32 GetKeyShift();
 
             void OnMidiPlaybackEnd(::music::midi::sequence::event * pevent);
-            virtual ::estatus     SetTempoShift(double dTempoShift);
+            virtual ::e_status     SetTempoShift(double dTempoShift);
 
             void OnPositionCB(LPMIDIHDR lpmidihdr);
             void OnDone(HMIDISTRM hmidistream, LPMIDIHDR lpmidihdr);
@@ -121,22 +121,22 @@ namespace music
             virtual void OnEvent(::music::midi::sequence::event * pevent);
 
 
-            ::estatus     close_file() override;
+            ::e_status     close_file() override;
 
-            ::estatus     Preroll(::thread * pthread, ::music::midi::LPPREROLL lpPreroll, bool bThrow);
-            ::estatus     Start();
+            ::e_status     Preroll(::thread * pthread, ::music::midi::LPPREROLL lpPreroll, bool bThrow);
+            ::e_status     Start();
 
-            ::estatus     Pause();
+            ::e_status     Pause();
 
-            ::estatus     Restart();
+            ::e_status     Restart();
 
-            ::estatus     Stop();
+            ::e_status     Stop();
 
             virtual imedia_time get_position_ticks() override;
             virtual void karaoke_get_time(imedia_time  & time) override;
 
-            virtual ::estatus     get_ticks(imedia_time & time) override;
-            virtual ::estatus     get_millis(imedia_time & time) override;
+            virtual ::e_status     get_ticks(imedia_time & time) override;
+            virtual ::e_status     get_millis(imedia_time & time) override;
 
 
             bool IsPlaying();
@@ -151,9 +151,9 @@ namespace music
             using ::music::midi::sequence::create_new_event;
             virtual ::music::midi::sequence::event * create_new_event(::music::midi::sequence::e_event eevent, LPMIDIHDR lpmidihdr);
 
-            virtual ::estatus     SendGMReset();
+            virtual ::e_status     SendGMReset();
 
-            virtual ::estatus     mm_start();
+            virtual ::e_status     mm_start();
 
             virtual void music_midi_on_playback_end();
 
