@@ -26,9 +26,8 @@
     <LocalDebuggerCommand>C:\bergedge\papaya\windows\bin\$(TargetName)$(TargetExt)</LocalDebuggerCommand>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='basis|x64'">
-    <LocalDebuggerCommandArguments>"C:\basis\platform-windows\seed\metaseed\..\..\..\time-windows\x64\basis\app.exe" "app_shader" "C:\basis\platform-windows\seed\metaseed\..\..\..\time-windows\x64\basis\app_shader2.exe"</LocalDebuggerCommandArguments>
+    <LocalDebuggerCommandArguments>"C:\netnode\time-windows\x64\basis\app.exe" "Thomas Borregaard Sørensen netnode" "C:\netnode\time-windows\x64\basis\Thomas Borregaard Sørensen netnode.exe"</LocalDebuggerCommandArguments>
     <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
-    <LocalDebuggerCommand>C:\archive\tool\bin\$(TargetName)$(TargetExt)</LocalDebuggerCommand>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='cube_basis|x64'">
     <LocalDebuggerCommandArguments>"C:\basis\platform-windows\seed\metaseed\..\..\..\time-windows\x64\basis\app.exe" "app_simple_drawing" "C:\basis\platform-windows\seed\metaseed\..\..\..\time-windows\x64\basis\app_simple_drawing2.exe"</LocalDebuggerCommandArguments>
