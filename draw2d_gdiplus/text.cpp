@@ -18,7 +18,7 @@
 
    }
 
-   auto pfont = __font(pfontParam)->get_os_data < Font * >(pgraphicsParam);
+   auto pfont = __font(pfontParam)->get_os_data < Gdiplus::Font * >(pgraphicsParam);
 
    if (::is_null(pfont))
    {
@@ -41,7 +41,7 @@
    if (::is_set(ppathParam))
    {
 
-      ppath = __graphics_path(ppathParam)->get_os_data < GraphicsPath * >(pgraphicsParam);
+      ppath = __graphics_path(ppathParam)->get_os_data < Gdiplus::GraphicsPath * >(pgraphicsParam);
 
    }
 
@@ -50,7 +50,7 @@
    if (::is_set(pbrushParam))
    {
 
-      pbrush = __brush(pbrushParam)->get_os_data < Brush * >(pgraphicsParam);
+      pbrush = __brush(pbrushParam)->get_os_data < Gdiplus::Brush * >(pgraphicsParam);
 
       if (::is_null(pbrush))
       {

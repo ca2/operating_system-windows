@@ -11,9 +11,9 @@ count g_cForkBlend = 0;
 /**
 *
 * Trilinear scale two images, pixels and pixels2, to get a new
-* interpolated image with size width * height.
-* pixels is the larger image with size w * h.
-* pixels2 is the smaller image with size w2 * h2.
+* interpolated image with ::sized width * height.
+* pixels is the larger image with ::sized w * h.
+* pixels2 is the smaller image with ::sized w2 * h2.
 * width must be w >= width >= w2, width != 0
 * height must be h >= height >= h2, height != 0
 * Note: in Mip Mapping pixels2 should be half of pixels in dimension.
@@ -26,7 +26,7 @@ count g_cForkBlend = 0;
 * @lparam h2 Smaller image height.
 * @lparam width New width.
 * @lparam height New height.
-* @return New array with size width * height
+* @return New array with ::sized width * height
 */
 void trilinearImageScaling(
 COLORREF * ret, int width, int height, int scan,
@@ -287,7 +287,7 @@ namespace draw2d_gdiplus
    }
 
    
-   point graphics::GetBrushOrg()
+   pointd graphics::GetBrushOrg()
    {
       
       __throw(not_implemented());
@@ -297,7 +297,7 @@ namespace draw2d_gdiplus
    }
 
 
-   point graphics::SetBrushOrg(i32 x, i32 y)
+   pointd graphics::SetBrushOrg(double x, double y)
    {
       
       //ASSERT(get_handle1() != nullptr);
@@ -314,7 +314,7 @@ namespace draw2d_gdiplus
    }
 
 
-   point graphics::SetBrushOrg(const ::point & point)
+   pointd graphics::SetBrushOrg(const ::pointd & point)
    {
       //ASSERT(get_handle1() != nullptr);
       //::point
@@ -370,7 +370,7 @@ namespace draw2d_gdiplus
 
       }
 
-      auto posbitmap = pbitmap->get_os_data < Bitmap * >();
+      auto posbitmap = pbitmap->get_os_data < Gdiplus::Bitmap * >();
 
       m_pgraphics = Gdiplus::Graphics::FromImage(posbitmap);
 
@@ -490,14 +490,14 @@ namespace draw2d_gdiplus
    }
 
    
-   size graphics::GetViewportExt()
+   sized graphics::GetViewportExt()
    {
 
-      //::size size;
+      //::sized ::sized;
 
-      //::GetViewportExtEx(get_handle2(), &size);
+      //::GetViewportExtEx(get_handle2(), &::sized);
 
-      //return size;
+      //return ::sized;
       __throw(not_implemented());
 
       return nullptr;
@@ -506,7 +506,7 @@ namespace draw2d_gdiplus
    }
 
 
-   point graphics::GetWindowOrg()
+   pointd graphics::GetWindowOrg()
    {
       
       //::point point;
@@ -521,11 +521,11 @@ namespace draw2d_gdiplus
    }
 
 
-   size graphics::GetWindowExt()
+   sized graphics::GetWindowExt()
    {
-      //::size size;
-      //::GetWindowExtEx(get_handle2(), &size);
-      //return size;
+      //::sized ::sized;
+      //::GetWindowExtEx(get_handle2(), &::sized);
+      //return ::sized;
 
       __throw(interface_only_exception());
 
@@ -534,7 +534,7 @@ namespace draw2d_gdiplus
    }
 
 
-   size graphics::SetViewportExt(const ::size & size)
+   sized graphics::SetViewportExt(const ::sized & size)
    {
 
       return SetViewportExt(size.cx, size.cy);
@@ -542,45 +542,53 @@ namespace draw2d_gdiplus
    }
 
 
-   point graphics::SetWindowOrg(const ::point & point)
+   pointd graphics::SetWindowOrg(const ::pointd & point)
    {
+
       return SetWindowOrg(point.x, point.y);
-   }
-
-   size graphics::SetWindowExt(const ::size & size)
-   {
-      return SetWindowExt(size.cx, size.cy);
-   }
-
-   void graphics::DPtoLP(LPPOINT pPoints, count nCount)
-
-   {
-      //::DPtoLP(get_handle2(), pPoints, (int) nCount);
 
    }
 
-   void graphics::DPtoLP(RECT * prect)
 
+   sized graphics::set_window_ext(const ::sized & size)
    {
-      //::DPtoLP(get_handle2(), (LPPOINT)prect, 2);
+
+      return set_window_ext(size.cx, size.cy);
 
    }
 
-   void graphics::LPtoDP(LPPOINT pPoints,count nCount)
 
+  void graphics::DPtoLP(::pointd * pPoints, count nCount)
+  {
+
+     //::DPtoLP(get_handle2(), pPoints, (int) nCount);
+
+  }
+
+
+   void graphics::DPtoLP(::rectd * prect)
    {
+
+   //   //::DPtoLP(get_handle2(), (LPPOINT)prect, 2);
+
+   }
+
+   void graphics::LPtoDP(::pointd * pPoints,count nCount)
+   {
+   
       //::LPtoDP(get_handle2(), pPoints, (int)  nCount);
 
    }
 
-   void graphics::LPtoDP(RECT * prect)
+   void graphics::LPtoDP(::rectd * prect)
 
    {
-      //::LPtoDP(get_handle2(), (LPPOINT)prect, 2);
+   //   //::LPtoDP(get_handle2(), (LPPOINT)prect, 2);
 
    }
 
-   bool graphics::FillRgn(::draw2d::region* pRgn, ::draw2d::brush* pBrush)
+
+   bool graphics::fill_region(::draw2d::region * pregion, ::draw2d::brush * pbrush)
    {
 
       //return ::FillRgn(get_handle1(), (HRGN)pRgn->get_os_data(), (HBRUSH)pBrush->get_os_data()) != FALSE;
@@ -590,7 +598,8 @@ namespace draw2d_gdiplus
 
    }
 
-   bool graphics::FrameRgn(::draw2d::region* pRgn, ::draw2d::brush* pBrush, i32 nWidth, i32 nHeight)
+
+   bool graphics::frame_region(::draw2d::region * pregion, ::draw2d::brush * pbrush, double nWidth, double nHeight)
    {
 
       //return ::FrameRgn(get_handle1(), (HRGN)pRgn->get_os_data(), (HBRUSH)pBrush->get_os_data(), nWidth, nHeight) != FALSE;
@@ -598,38 +607,38 @@ namespace draw2d_gdiplus
 
       return false;
 
-
    }
 
-   bool graphics::InvertRgn(::draw2d::region* pRgn)
+
+   bool graphics::invert_region(::draw2d::region * pregion)
    {
 
       //ASSERT(get_handle1() != nullptr);
 
       //return ::InvertRgn(get_handle1(), (HRGN)pRgn->get_os_data()) != FALSE;
 
-
       __throw(interface_only_exception());
 
       return false;
 
    }
 
-   bool graphics::PaintRgn(::draw2d::region* pRgn)
+
+   bool graphics::paint_region(::draw2d::region * pregion)
    {
 
       //ASSERT(get_handle1() != nullptr);
 
       //return ::PaintRgn(get_handle1(), (HRGN)pRgn->get_os_data())  != FALSE;
 
-
       __throw(interface_only_exception());
 
       return false;
 
    }
 
-   //bool graphics::PtVisible(i32 x, i32 y)
+
+   //bool graphics::PtVisible(double x, double y)
    //{
 
    //   //ASSERT(get_handle1() != nullptr);
@@ -675,16 +684,20 @@ namespace draw2d_gdiplus
 
    }
 
-   bool graphics::Polyline(const POINT * ppointsParam,count nCount)
 
+   bool graphics::polyline(const ::pointd * ppointsParam,count nCount)
    {
 
-      if(nCount <= 0)
-         return TRUE;
+      if (nCount <= 0)
+      {
 
-      bool bOk1 = FALSE;
+         return true;
 
-      ap(Gdiplus::Point) ppoints(new_array, nCount);
+      }
+
+      bool bOk1 = false;
+
+      ap(Gdiplus::PointF) ppoints(new_array, nCount);
 
       try
       {
@@ -692,12 +705,12 @@ namespace draw2d_gdiplus
          for(i32 i = 0; i < nCount; i++)
          {
 
-            ppoints[i].X = ppointsParam[i].x;
-            ppoints[i].Y = ppointsParam[i].y;
+            ppoints[i].X = (Gdiplus::REAL) ppointsParam[i].x;
+            ppoints[i].Y = (Gdiplus::REAL) ppointsParam[i].y;
 
          }
 
-         bOk1 = m_pgraphics->DrawLines(m_ppen->get_os_data < Pen * >(this),ppoints,(INT) nCount) == Gdiplus::Status::Ok;
+         bOk1 = m_pgraphics->DrawLines(m_ppen->get_os_data < Gdiplus::Pen * >(this),ppoints,(INT) nCount) == Gdiplus::Status::Ok;
 
       }
       catch(...)
@@ -706,28 +719,29 @@ namespace draw2d_gdiplus
 
 
       return bOk1;
-   }
-
-
-   bool graphics::Arc(i32 x1,i32 y1,i32 x2,i32 y2,i32 x3,i32 y3,i32 x4,i32 y4)
-   {
-
-      double centerx    = (x2 + x1) / 2.0;
-      double centery    = (y2 + y1) / 2.0;
-
-      double start      = atan2(y3 - centery,x3 - centerx) * 180.0 / System.math().GetPi();
-      double end        = atan2(y4 - centery,x4 - centerx) * 180.0 / System.math().GetPi();
-      double sweep      = fabs(end - start);
-
-      /*if(GetArcDirection() == AD_COUNTERCLOCKWISE)
-      {
-         sweep = -sweep;
-      }
-      */
-
-      return Arc(x1,y1,x2-x1,y2-y1,start,sweep);
 
    }
+
+
+   //bool graphics::Arc(double x1,i32 y1,double x2,i32 y2,double x3,i32 y3,double x4,i32 y4)
+   //{
+
+   //   double centerx    = (x2 + x1) / 2.0;
+   //   double centery    = (y2 + y1) / 2.0;
+
+   //   double start      = atan2(y3 - centery,x3 - centerx) * 180.0 / System.math().GetPi();
+   //   double end        = atan2(y4 - centery,x4 - centerx) * 180.0 / System.math().GetPi();
+   //   double sweep      = fabs(end - start);
+
+   //   /*if(GetArcDirection() == AD_COUNTERCLOCKWISE)
+   //   {
+   //      sweep = -sweep;
+   //   }
+   //   */
+
+   //   return Arc(x1,y1,x2-x1,y2-y1,start,sweep);
+
+   //}
 
 
    bool graphics::Arc(double x1,double y1,double x2,double y2,double x3,double y3,double x4,double y4)
@@ -751,14 +765,14 @@ namespace draw2d_gdiplus
    }
 
 
-   bool graphics::Arc(i32 x1,i32 y1,i32 w,i32 h, angle start, angle extends)
-   {
+   //bool graphics::Arc(double x1,i32 y1,i32 w,i32 h, angle start, angle extends)
+   //{
 
-      ::Gdiplus::Rect rect(x1,y1,w,h);
+   //   ::Gdiplus::Rect rect(x1,y1,w,h);
 
-      return m_pgraphics->DrawArc(m_ppen->get_os_data < Pen * >(this),rect,(Gdiplus::REAL) start.degree(),(Gdiplus::REAL) extends.degree()) == Gdiplus::Status::Ok;
+   //   return m_pgraphics->DrawArc(m_ppen->get_os_data < Pen * >(this),rect,(Gdiplus::REAL) start.degree(),(Gdiplus::REAL) extends.degree()) == Gdiplus::Status::Ok;
 
-   }
+   //}
 
 
    bool graphics::Arc(double x1,double y1,double w,double h, angle start, angle extends)
@@ -766,27 +780,15 @@ namespace draw2d_gdiplus
 
       ::Gdiplus::RectF rectf((Gdiplus::REAL) x1,(Gdiplus::REAL) y1,(Gdiplus::REAL) w,(Gdiplus::REAL) h);
 
-      return m_pgraphics->DrawArc(m_ppen->get_os_data < Pen * >(this),rectf,(Gdiplus::REAL) start,(Gdiplus::REAL) extends) == Gdiplus::Status::Ok;
+      return m_pgraphics->DrawArc(m_ppen->get_os_data < Gdiplus::Pen * >(this),rectf,(Gdiplus::REAL) start,(Gdiplus::REAL) extends) == Gdiplus::Status::Ok;
 
    }
 
 
-   void graphics::frame_rect(const ::rect & rect,::draw2d::brush* pBrush)
+   void graphics::frame_rect(const ::rectd & rect, ::draw2d::brush * pbrush)
    {
 
-      draw_rect(rect, pBrush->m_color);
-
-   }
-
-
-   bool graphics::rectangle(const ::rect & rect)
-   {
-
-      bool bOk1 = fill_rect(rect);
-
-      bool bOk2 = draw_rect(rect);
-
-      return bOk1 && bOk2;
+      draw_rect(rect, pbrush->m_color);
 
    }
 
@@ -803,7 +805,19 @@ namespace draw2d_gdiplus
    }
 
 
-   bool graphics::draw_rect(const ::rect & rectParam, ::draw2d::pen * ppen)
+   //bool graphics::rectangle(const ::rectd & rect)
+   //{
+
+   //   bool bOk1 = fill_rect(rect);
+
+   //   bool bOk2 = draw_rect(rect);
+
+   //   return bOk1 && bOk2;
+
+   //}
+
+
+   bool graphics::draw_rect(const ::rectd & rectParam, ::draw2d::pen * ppen)
    {
 
       Gdiplus::Rect rect;
@@ -815,19 +829,19 @@ namespace draw2d_gdiplus
    }
 
 
-   bool graphics::draw_rect(const ::rectd & rectParam, ::draw2d::pen * ppen)
-   {
+   //bool graphics::draw_rect(const ::rectd & rectParam, ::draw2d::pen * ppen)
+   //{
 
-      Gdiplus::RectF rect;
+   //   Gdiplus::RectF rect;
 
-      __copy(rect, rectParam);
+   //   __copy(rect, rectParam);
 
-      return m_pgraphics->DrawRectangle(ppen->get_os_data < Pen * > (this), rect) == ::Gdiplus::Ok;
+   //   return m_pgraphics->DrawRectangle(ppen->get_os_data < Gdiplus::Pen * > (this), rect) == ::Gdiplus::Ok;
 
-   }
+   //}
 
 
-   void graphics::invert_rect(const ::rect & rect)
+   void graphics::invert_rect(const ::rectd & rect)
    {
 
       //::draw2d::savedc save(this);
@@ -874,7 +888,7 @@ namespace draw2d_gdiplus
    }
 
 
-   //bool graphics::draw(const ::point & point, ::draw2d::icon * picon, const ::size & size)
+   //bool graphics::draw(const ::point & point, ::draw2d::icon * picon, const ::sized & size)
    //{
 
    //   
@@ -882,15 +896,15 @@ namespace draw2d_gdiplus
    //}
 
 
-   //bool graphics::DrawIcon(i32 x, i32 y, ::draw2d::icon * picon)
+   //bool graphics::DrawIcon(double x, double y, ::draw2d::icon * picon)
    //{
 
-   //   return BitBlt(x, y,cx, cy, picon->get_image(::size(cx, cy))->g());
+   //   return BitBlt(x, y,cx, cy, picon->get_image(::sized(cx, cy))->g());
 
    //}
 
 
-   //bool graphics::DrawState(const ::point & point, const ::size & size, HBITMAP hBitmap, UINT nFlags, HBRUSH hBrush)
+   //bool graphics::DrawState(const ::point & point, const ::sized & size, HBITMAP hBitmap, UINT nFlags, HBRUSH hBrush)
    //{
 
    //   //ASSERT(get_handle1() != nullptr);
@@ -901,7 +915,7 @@ namespace draw2d_gdiplus
 
    //}
 
-   //bool graphics::DrawState(const ::point & point, const ::size & size, ::draw2d::bitmap* pBitmap, UINT nFlags, ::draw2d::brush* pBrush)
+   //bool graphics::DrawState(const ::point & point, const ::sized & size, ::draw2d::bitmap* pBitmap, UINT nFlags, ::draw2d::brush* pBrush)
    //{
 
    //   //ASSERT(get_handle1() != nullptr);
@@ -912,7 +926,7 @@ namespace draw2d_gdiplus
 
    //}
 
-   //bool graphics::DrawState(const ::point & point, const ::size & size, HICON hIcon, UINT nFlags, HBRUSH hBrush)
+   //bool graphics::DrawState(const ::point & point, const ::sized & size, HICON hIcon, UINT nFlags, HBRUSH hBrush)
    //{
 
    //   //ASSERT(get_handle1() != nullptr);
@@ -924,7 +938,7 @@ namespace draw2d_gdiplus
    //}
 
 
-   //bool graphics::DrawState(const ::point & point, const ::size & size, HICON hIcon, UINT nFlags, ::draw2d::brush* pBrush)
+   //bool graphics::DrawState(const ::point & point, const ::sized & size, HICON hIcon, UINT nFlags, ::draw2d::brush* pBrush)
    //{
 
    //   //ASSERT(get_handle1() != nullptr);
@@ -936,7 +950,7 @@ namespace draw2d_gdiplus
    //}
 
 
-   //bool graphics::DrawState(const ::point & point, const ::size & size, const char * pszText, UINT nFlags, bool bPrefixText, i32 nTextLen, HBRUSH hBrush)
+   //bool graphics::DrawState(const ::point & point, const ::sized & size, const char * pszText, UINT nFlags, bool bPrefixText, i32 nTextLen, HBRUSH hBrush)
    //{
 
    //   //ASSERT(get_handle1() != nullptr);
@@ -948,7 +962,7 @@ namespace draw2d_gdiplus
    //}
 
 
-   //bool graphics::DrawState(const ::point & point, const ::size & size, const char * pszText, UINT nFlags, bool bPrefixText, i32 nTextLen, ::draw2d::brush* pBrush)
+   //bool graphics::DrawState(const ::point & point, const ::sized & size, const char * pszText, UINT nFlags, bool bPrefixText, i32 nTextLen, ::draw2d::brush* pBrush)
    //{
 
    //   //ASSERT(get_handle1() != nullptr);
@@ -960,7 +974,7 @@ namespace draw2d_gdiplus
    //}
 
 
-   //bool graphics::DrawState(const ::point & point, const ::size & size, DRAWSTATEPROC pDrawProc, LPARAM lData, UINT nFlags, HBRUSH hBrush)
+   //bool graphics::DrawState(const ::point & point, const ::sized & size, DRAWSTATEPROC pDrawProc, LPARAM lData, UINT nFlags, HBRUSH hBrush)
    //{
 
    //   //ASSERT(get_handle1() != nullptr);
@@ -973,7 +987,7 @@ namespace draw2d_gdiplus
    //}
 
 
-   //bool graphics::DrawState(const ::point & point, const ::size & size, DRAWSTATEPROC pDrawProc, LPARAM lData, UINT nFlags, ::draw2d::brush* pBrush)
+   //bool graphics::DrawState(const ::point & point, const ::sized & size, DRAWSTATEPROC pDrawProc, LPARAM lData, UINT nFlags, ::draw2d::brush* pBrush)
    //{
 
    //   //ASSERT(get_handle1() != nullptr);
@@ -1010,19 +1024,19 @@ namespace draw2d_gdiplus
    //}
 
 
-   bool graphics::Chord(i32 x1, i32 y1, i32 x2, i32 y2, i32 x3, i32 y3, i32 x4, i32 y4)
-   {
+   //bool graphics::Chord(double x1, i32 y1, double x2, i32 y2, double x3, i32 y3, double x4, i32 y4)
+   //{
 
-      //ASSERT(get_handle1() != nullptr);
-      //return ::Chord(get_handle1(), x1, y1, x2, y2, x3, y3, x4, y4) != FALSE;
-      __throw(not_implemented());
+   //   //ASSERT(get_handle1() != nullptr);
+   //   //return ::Chord(get_handle1(), x1, y1, x2, y2, x3, y3, x4, y4) != FALSE;
+   //   __throw(not_implemented());
 
-      return false;
+   //   return false;
 
-   }
+   //}
 
 
-   bool graphics::Chord(const rect &  rectParam,const point & pointStart,const point & pointEnd)
+   bool graphics::Chord(const rectd & rectParam,const pointd & pointStart, const pointd & pointEnd)
    {
 
       //ASSERT(get_handle1() != nullptr);
@@ -1036,7 +1050,7 @@ namespace draw2d_gdiplus
    }
 
 
-   void graphics::DrawFocusRect(const rect &  rectParam)
+   void graphics::DrawFocusRect(const rectd & rectParam)
    {
 
       //ASSERT(get_handle1() != nullptr);
@@ -1055,7 +1069,7 @@ namespace draw2d_gdiplus
    }
 
 
-   //bool graphics::DrawEllipse(i32 x1, i32 y1, i32 x2, i32 y2)
+   //bool graphics::DrawEllipse(double x1, i32 y1, double x2, i32 y2)
    //{
 
    //   if (m_pgraphics == nullptr)
@@ -1104,28 +1118,28 @@ namespace draw2d_gdiplus
 
 
 
-   bool graphics::draw_ellipse(double x1,double y1,double x2,double y2)
-   {
+   //bool graphics::draw_ellipse(double x1,double y1,double x2,double y2)
+   //{
 
-      if (m_pgraphics == nullptr)
-      {
+   //   if (m_pgraphics == nullptr)
+   //   {
 
-         return false;
+   //      return false;
 
-      }
+   //   }
 
-      Gdiplus::Pen * ppen = m_ppen->get_os_data < Pen * >(this);
+   //   Gdiplus::Pen * ppen = m_ppen->get_os_data < Pen * >(this);
 
-      if (ppen == nullptr)
-      {
+   //   if (ppen == nullptr)
+   //   {
 
-         return false;
+   //      return false;
 
-      }
+   //   }
 
-      return (m_pgraphics->DrawEllipse(ppen,(Gdiplus::REAL)x1,(Gdiplus::REAL)y1,(Gdiplus::REAL)(x2 - x1),(Gdiplus::REAL)(y2 - y1))) == Gdiplus::Status::Ok;
+   //   return (m_pgraphics->DrawEllipse(ppen,(Gdiplus::REAL)x1,(Gdiplus::REAL)y1,(Gdiplus::REAL)(x2 - x1),(Gdiplus::REAL)(y2 - y1))) == Gdiplus::Status::Ok;
 
-   }
+   //}
 
 
    bool graphics::draw_ellipse(const ::rectd & rectParam)
@@ -1138,7 +1152,7 @@ namespace draw2d_gdiplus
 
       }
 
-      Gdiplus::Pen * ppen = m_ppen->get_os_data < Pen * >(this);
+      Gdiplus::Pen * ppen = m_ppen->get_os_data < Gdiplus::Pen * >(this);
 
       if (ppen == nullptr)
       {
@@ -1154,7 +1168,7 @@ namespace draw2d_gdiplus
    }
 
 
-   /*bool graphics::fill_ellipse(i32 x1, i32 y1, i32 x2, i32 y2)
+   /*bool graphics::fill_ellipse(double x1, i32 y1, double x2, i32 y2)
    {
 
       if (m_pgraphics == nullptr)
@@ -1202,28 +1216,28 @@ namespace draw2d_gdiplus
    }*/
 
 
-   bool graphics::fill_ellipse(double x1,double y1,double x2,double y2)
-   {
+   //bool graphics::fill_ellipse(double x1,double y1,double x2,double y2)
+   //{
 
-      if (m_pgraphics == nullptr)
-      {
+   //   if (m_pgraphics == nullptr)
+   //   {
 
-         return false;
+   //      return false;
 
-      }
+   //   }
 
-      Gdiplus::Brush * pbrush = m_pbrush->get_os_data < Brush * >(this);
+   //   Gdiplus::Brush * pbrush = m_pbrush->get_os_data < Brush * >(this);
 
-      if (pbrush == nullptr)
-      {
+   //   if (pbrush == nullptr)
+   //   {
 
-         return false;
+   //      return false;
 
-      }
+   //   }
 
-      return (m_pgraphics->FillEllipse(pbrush,(Gdiplus::REAL)x1,(Gdiplus::REAL)y1,(Gdiplus::REAL)(x2 - x1),(Gdiplus::REAL)(y2 - y1))) == Gdiplus::Status::Ok;
+   //   return (m_pgraphics->FillEllipse(pbrush,(Gdiplus::REAL)x1,(Gdiplus::REAL)y1,(Gdiplus::REAL)(x2 - x1),(Gdiplus::REAL)(y2 - y1))) == Gdiplus::Status::Ok;
 
-   }
+   //}
 
 
    bool graphics::fill_ellipse(const ::rectd & rectParam)
@@ -1236,7 +1250,7 @@ namespace draw2d_gdiplus
 
       }
 
-      Gdiplus::Brush * pbrush = m_pbrush->get_os_data < Brush * >(this);
+      Gdiplus::Brush * pbrush = m_pbrush->get_os_data < Gdiplus::Brush * >(this);
 
       if (pbrush == nullptr)
       {
@@ -1252,19 +1266,19 @@ namespace draw2d_gdiplus
    }
 
 
-   bool graphics::Pie(i32 x1, i32 y1, i32 x2, i32 y2, i32 x3, i32 y3, i32 x4, i32 y4)
-   {
+   //bool graphics::Pie(double x1, i32 y1, double x2, i32 y2, double x3, i32 y3, double x4, i32 y4)
+   //{
 
-      //ASSERT(get_handle1() != nullptr);
-      //return ::Pie(get_handle1(), x1, y1, x2, y2, x3, y3, x4, y4) != FALSE;
-      __throw(not_implemented());
+   //   //ASSERT(get_handle1() != nullptr);
+   //   //return ::Pie(get_handle1(), x1, y1, x2, y2, x3, y3, x4, y4) != FALSE;
+   //   __throw(not_implemented());
 
-      return false;
+   //   return false;
 
-   }
+   //}
 
 
-   bool graphics::Pie(const rect &  rectParam,const point & pointStart,const point & pointEnd)
+   bool graphics::Pie(const rectd &  rectParam, const pointd & pointStart, const pointd & pointEnd)
    {
 
       //ASSERT(get_handle1() != nullptr);
@@ -1276,6 +1290,7 @@ namespace draw2d_gdiplus
       return false;
 
    }
+
 
    bool graphics::fill_polygon(const POINTD * ppointParam,count nCount)
    {
@@ -1296,7 +1311,7 @@ namespace draw2d_gdiplus
 
          //m_pgraphics->SetInterpolationMode(Gdiplus::InterpolationModeHighQualityBicubic);
 
-         bOk1 = m_pgraphics->FillPolygon(m_pbrush->get_os_data < Brush * >(this), ppoint, (INT) nCount, gdiplus_get_fill_mode()) == Gdiplus::Status::Ok;
+         bOk1 = m_pgraphics->FillPolygon(m_pbrush->get_os_data < Gdiplus::Brush * >(this), ppoint, (INT) nCount, gdiplus_get_fill_mode()) == Gdiplus::Status::Ok;
 
       }
       catch(...)
@@ -1308,50 +1323,54 @@ namespace draw2d_gdiplus
    }
 
 
-   bool graphics::fill_polygon(const POINT * ppointParam,count nCount)
+   //bool graphics::fill_polygon(const POINTD * ppointParam,count nCount)
+   //{
+
+   //   if (nCount <= 0)
+   //   {
+
+   //      return true;
+
+   //   }
+
+   //   bool bOk1 = false;
+
+   //   ap(Gdiplus::Point) ppoint(ppointParam, nCount);
+
+   //   try
+   //   {
+
+   //      //m_pgraphics->SetInterpolationMode(Gdiplus::InterpolationModeHighQualityBicubic);
+
+   //      bOk1 = m_pgraphics->FillPolygon(m_pbrush->get_os_data < Gdiplus::Brush * >(this), ppoint, (INT)  nCount, gdiplus_get_fill_mode()) == Gdiplus::Status::Ok;
+
+   //   }
+   //   catch(...)
+   //   {
+   //   }
+
+   //   //try
+   //   //{
+   //   //   delete ppoints;
+   //   //}
+   //   //catch(...)
+   //   //{
+   //   //}
+
+   //   return bOk1;
+
+   //}
+
+
+   bool graphics::draw_polygon(const POINTD * ppointParam, count nCount)
    {
 
       if (nCount <= 0)
       {
 
-         return true;
-
-      }
-
-      bool bOk1 = false;
-
-      ap(Gdiplus::Point) ppoint(ppointParam, nCount);
-
-      try
-      {
-
-         //m_pgraphics->SetInterpolationMode(Gdiplus::InterpolationModeHighQualityBicubic);
-
-         bOk1 = m_pgraphics->FillPolygon(m_pbrush->get_os_data < Brush * >(this), ppoint, (INT)  nCount, gdiplus_get_fill_mode()) == Gdiplus::Status::Ok;
-
-      }
-      catch(...)
-      {
-      }
-
-      //try
-      //{
-      //   delete ppoints;
-      //}
-      //catch(...)
-      //{
-      //}
-
-      return bOk1;
-
-   }
-
-
-   bool graphics::draw_polygon(const POINT * ppointParam, count nCount)
-   {
-
-      if (nCount <= 0)
          return TRUE;
+
+      }
 
       bool bOk1 = FALSE;
 
@@ -1362,7 +1381,7 @@ namespace draw2d_gdiplus
 
          //m_pgraphics->SetInterpolationMode(Gdiplus::InterpolationModeHighQualityBicubic);
 
-         bOk1 = m_pgraphics->DrawPolygon(m_ppen->get_os_data < Pen * >(this), ppoint, (INT) nCount) == Gdiplus::Status::Ok;
+         bOk1 = m_pgraphics->DrawPolygon(m_ppen->get_os_data < Gdiplus::Pen * >(this), ppoint, (INT) nCount) == Gdiplus::Status::Ok;
 
       }
       catch (...)
@@ -1375,38 +1394,38 @@ namespace draw2d_gdiplus
    }
 
 
-   bool graphics::draw_polygon(const POINTD * ppointParam, count nCount)
-   {
+   //bool graphics::draw_polygon(const POINTD * ppointParam, count nCount)
+   //{
 
-      if (nCount <= 0)
-      {
+   //   if (nCount <= 0)
+   //   {
 
-         return true;
+   //      return true;
 
-      }
+   //   }
 
-      bool bOk1 = false;
+   //   bool bOk1 = false;
 
-      ap(Gdiplus::PointF) ppoint(ppointParam, nCount);
+   //   ap(Gdiplus::PointF) ppoint(ppointParam, nCount);
 
-      try
-      {
+   //   try
+   //   {
 
-         //m_pgraphics->SetInterpolationMode(Gdiplus::InterpolationModeHighQualityBicubic);
+   //      //m_pgraphics->SetInterpolationMode(Gdiplus::InterpolationModeHighQualityBicubic);
 
-         bOk1 = m_pgraphics->DrawPolygon(m_ppen->get_os_data < Pen * >(this), ppoint, (INT) nCount) == Gdiplus::Status::Ok;
+   //      bOk1 = m_pgraphics->DrawPolygon(m_ppen->get_os_data < Pen * >(this), ppoint, (INT) nCount) == Gdiplus::Status::Ok;
 
-      }
-      catch(...)
-      {
-      }
+   //   }
+   //   catch(...)
+   //   {
+   //   }
 
-      return bOk1;
+   //   return bOk1;
 
-   }
+   //}
 
 
-   bool graphics::fill_rect(const ::rect & rectParam, ::draw2d::brush * pbrush)
+   bool graphics::fill_rect(const ::rectd & rectParam, ::draw2d::brush * pbrush)
    {
 
       if (::is_null(pbrush))
@@ -1420,7 +1439,7 @@ namespace draw2d_gdiplus
 
       __copy(rect, rectParam);
 
-      Gdiplus::Brush* posbrush = pbrush->get_os_data< Brush*>(this);
+      Gdiplus::Brush* posbrush = pbrush->get_os_data < Gdiplus::Brush * >(this);
 
       bool bOk = m_pgraphics->FillRectangle(posbrush, rect) == Gdiplus::Status::Ok;
 
@@ -1429,28 +1448,19 @@ namespace draw2d_gdiplus
    }
 
 
-   bool graphics::fill_rect(const ::rectd & rectParam, ::draw2d::brush * pbrush)
-   {
+   //bool graphics::fill_rect(const ::rectd & rectParam, ::draw2d::brush * pbrush)
+   //{
 
-      Gdiplus::RectF rect;
+   //   Gdiplus::RectF rect;
 
-      __copy(rect, rectParam);
+   //   __copy(rect, rectParam);
 
-      return m_pgraphics->FillRectangle(pbrush->get_os_data<Brush *>(this), rect) == Gdiplus::Status::Ok;
+   //   return m_pgraphics->FillRectangle(pbrush->get_os_data<Brush *>(this), rect) == Gdiplus::Status::Ok;
 
-   }
-
-
-   bool graphics::round_rect(const ::rect & rect, const ::point & point)
-
-   {
-
-      __throw(todo());
-
-   }
+   //}
 
 
-   bool graphics::round_rect(const ::rectd & rect, const ::pointd & point)
+   bool graphics::round_rect(const ::rectd & rect, double dRadius)
    {
 
       __throw(todo());
@@ -1458,7 +1468,15 @@ namespace draw2d_gdiplus
    }
 
 
-   //bool graphics::PatBlt(i32 x, i32 y, i32 nWidth, i32 nHeight, u32 dwRop)
+   //bool graphics::round_rect(const ::rectd & rect, const ::pointd & point)
+   //{
+
+   //   __throw(todo());
+
+   //}
+
+
+   //bool graphics::PatBlt(double x, double y, double nWidth, double nHeight, u32 dwRop)
    //{
 
    //   //ASSERT(get_handle1() != nullptr);
@@ -1470,206 +1488,207 @@ namespace draw2d_gdiplus
 
    //}
 
-
-   bool graphics::draw_raw(const ::rect & rectDst, ::draw2d::graphics * pgraphicsSrc, const ::point & pointSrc)
-   {
-
-      if (m_pgraphics == nullptr)
-      {
-
-         return false;
-
-      }
-
-      Gdiplus::Status ret = Gdiplus::Status::GenericError;
-
-      try
-      {
-
-         if (pgraphicsSrc == nullptr)
-         {
-
-            return false;
-
-         }
-
-         if (pgraphicsSrc->get_current_bitmap() == nullptr)
-         {
-
-            goto gdi_fallback;
-
-         }
-
-         if (pgraphicsSrc->get_current_bitmap()->get_os_data() == nullptr)
-         {
-
-            goto gdi_fallback;
-
-         }
-
-         if (::is_ok(pgraphicsSrc->m_pimage))
-         {
-
-            pgraphicsSrc->m_pimage->defer_update_image();
-
-         }
-
-
-         //bool bThreadToolsForIncreasedFps = ::get_task()== nullptr ? false : ::get_task()->m_bThreadToolsForIncreasedFps;
-
-         //bool bAvoidProcFork = ::get_task() == nullptr ? true : ::get_task()->m_bAvoidProcFork;
-
-         //if (!bAvoidProcFork
-         //      &&
-         //      bThreadToolsForIncreasedFps &&
-         //      pgraphicsSrc->m_pimage->is_ok()
-         //      && m_pimage->is_ok()
-         //      && pgraphicsSrc->m_pimage->m_bMapped
-         //      && m_pimage->m_bMapped)
-         //{
-
-         //   if (m_ealphamode == ::draw2d::alpha_mode_blend)
-         //   {
-
-         //      //single_lock sl(::get_thread_toolset(::thread::tool_draw2d)->mutex());
-
-         //      if (nHeight >= get_processor_count() * 4 && (nWidth * nHeight) >= (get_processor_count() * 64)
-         //            &&   m_pimage->fork_blend(point(x + GetViewportOrg().x, y + GetViewportOrg().y), pgraphicsSrc->m_pimage,
-         //                  point(xSrc + pgraphicsSrc->GetViewportOrg().x, ySrc + pgraphicsSrc->GetViewportOrg().y),
-         //                  size(nWidth, nHeight)))
-         //      {
-
-         //         g_cForkBlend++;
-
-         //         if (g_cForkBlend % 100 == 0)
-         //         {
-         //            output_debug_string("\nfork_blend(" + __str(g_cForkBlend) + ") sample=" + __str(nWidth) + "," + __str(nHeight));
-         //         }
-
-         //         return true;
-
-         //      }
-         //      //else
-         //      //{
-         //      //   m_pimage->blend(point(x + GetViewportOrg().x, y + GetViewportOrg().y), pgraphicsSrc->m_pimage,
-         //      //                                     point(xSrc + pgraphicsSrc->GetViewportOrg().x, ySrc + pgraphicsSrc->GetViewportOrg().y),
-         //      //                                     size(nWidth, nHeight));
-
-         //      //}
-         //   }
-         //   //else
-         //   //{
-
-         //   //   m_pimage->from(point(x + GetViewportOrg().x, y + GetViewportOrg().y), pgraphicsSrc->m_pimage,
-         //   //                                    point(xSrc + pgraphicsSrc->GetViewportOrg().x, ySrc + pgraphicsSrc->GetViewportOrg().y),
-         //   //                                    size(nWidth, nHeight));
-
-
-         //   //}
-
-         //}
-
-         Gdiplus::Bitmap * pbitmap = (Gdiplus::Bitmap *) pgraphicsSrc->get_current_bitmap()->get_os_data();
-
-         if (pgraphicsSrc->m_pimage->is_ok() && pgraphicsSrc->m_pimage->m_bColorMatrix)
-         {
-
-            Gdiplus::ImageAttributes imageattributes;
-
-            Gdiplus::ColorMatrix colormatrix;
-
-            copy_color_matrix(colormatrix.m, pgraphicsSrc->m_pimage->m_colormatrix.a);
-
-            imageattributes.SetColorMatrix(
-            &colormatrix,
-            ColorMatrixFlagsDefault,
-            ColorAdjustTypeBitmap);
-
-            Gdiplus::Rect rect(rectDst.left, rectDst.top, rectDst.width(), rectDst.height());
-
-            ret = m_pgraphics->DrawImage(
-                  pbitmap,
-                  rect, 
-               pointSrc.x + pgraphicsSrc->GetViewportOrg().x, 
-               pointSrc.y + pgraphicsSrc->GetViewportOrg().y, 
-               rectDst.width(),
-               rectDst.height(), 
-               Gdiplus::UnitPixel, &imageattributes);
-
-         }
-         else
-         {
-
-            int xSrcViewport = pgraphicsSrc->GetViewportOrg().x;
-
-            int ySrcViewport = pgraphicsSrc->GetViewportOrg().y;
-
-            ret = m_pgraphics->DrawImage(
-               pbitmap,
-               rectDst.left, 
-               rectDst.top,
-               pointSrc.x + xSrcViewport, 
-               pointSrc.y + ySrcViewport, 
-               rectDst.width(), 
-               rectDst.height(), Gdiplus::UnitPixel);
-
-         }
-
-         if(ret != Gdiplus::Status::Ok)
-         {
-
-            return false;
-
-         }
-
-      }
-      catch(...)
-      {
-
-         return false;
-
-      }
-
-      return true;
-
-gdi_fallback:
-
-      HDC hdcDst = get_hdc();
-
-      if (hdcDst == nullptr)
-      {
-
-         return false;
-
-      }
-
-      HDC hdcSrc = __graphics(pgraphicsSrc)->get_hdc();
-
-      if(hdcSrc == nullptr)
-      {
-
-         release_hdc(hdcDst);
-
-         return false;
-
-      }
-
-      bool bOk = ::BitBlt(hdcDst, 
-         rectDst.left, rectDst.top,
-         rectDst.width(), rectDst.height(),
-         hdcSrc,
-         pointSrc.x, pointSrc.y, SRCCOPY) != FALSE;
-
-      __graphics(pgraphicsSrc)->release_hdc(hdcSrc);
-
-      release_hdc(hdcDst);
-
-      return bOk;
-
-   }
-
-
-   bool graphics::stretch_raw(const ::rect & rectDstParam, ::draw2d::graphics * pgraphicsSrc, const ::rect & rectSrcParam)
+//
+//   bool graphics::_draw_raw(const ::rectd & rectDst, ::draw2d::graphics * pgraphicsSrc, const ::rectd & rectSrc)
+//   {
+//
+//      if (m_pgraphics == nullptr)
+//      {
+//
+//         return false;
+//
+//      }
+//
+//      Gdiplus::Status ret = Gdiplus::Status::GenericError;
+//
+//      try
+//      {
+//
+//         if (pgraphicsSrc == nullptr)
+//         {
+//
+//            return false;
+//
+//         }
+//
+//         if (pgraphicsSrc->get_current_bitmap() == nullptr)
+//         {
+//
+//            goto gdi_fallback;
+//
+//         }
+//
+//         if (pgraphicsSrc->get_current_bitmap()->get_os_data() == nullptr)
+//         {
+//
+//            goto gdi_fallback;
+//
+//         }
+//
+//         if (::is_ok(pgraphicsSrc->m_pimage))
+//         {
+//
+//            pgraphicsSrc->m_pimage->defer_update_image();
+//
+//         }
+//
+//
+//         //bool bThreadToolsForIncreasedFps = ::get_task()== nullptr ? false : ::get_task()->m_bThreadToolsForIncreasedFps;
+//
+//         //bool bAvoidProcFork = ::get_task() == nullptr ? true : ::get_task()->m_bAvoidProcFork;
+//
+//         //if (!bAvoidProcFork
+//         //      &&
+//         //      bThreadToolsForIncreasedFps &&
+//         //      pgraphicsSrc->m_pimage->is_ok()
+//         //      && m_pimage->is_ok()
+//         //      && pgraphicsSrc->m_pimage->m_bMapped
+//         //      && m_pimage->m_bMapped)
+//         //{
+//
+//         //   if (m_ealphamode == ::draw2d::alpha_mode_blend)
+//         //   {
+//
+//         //      //single_lock sl(::get_thread_toolset(::thread::tool_draw2d)->mutex());
+//
+//         //      if (nHeight >= get_processor_count() * 4 && (nWidth * nHeight) >= (get_processor_count() * 64)
+//         //            &&   m_pimage->fork_blend(point(x + GetViewportOrg().x, y + GetViewportOrg().y), pgraphicsSrc->m_pimage,
+//         //                  point(xSrc + pgraphicsSrc->GetViewportOrg().x, ySrc + pgraphicsSrc->GetViewportOrg().y),
+//         //                  ::sized(nWidth, nHeight)))
+//         //      {
+//
+//         //         g_cForkBlend++;
+//
+//         //         if (g_cForkBlend % 100 == 0)
+//         //         {
+//         //            output_debug_string("\nfork_blend(" + __str(g_cForkBlend) + ") sample=" + __str(nWidth) + "," + __str(nHeight));
+//         //         }
+//
+//         //         return true;
+//
+//         //      }
+//         //      //else
+//         //      //{
+//         //      //   m_pimage->blend(point(x + GetViewportOrg().x, y + GetViewportOrg().y), pgraphicsSrc->m_pimage,
+//         //      //                                     point(xSrc + pgraphicsSrc->GetViewportOrg().x, ySrc + pgraphicsSrc->GetViewportOrg().y),
+//         //      //                                     ::sized(nWidth, nHeight));
+//
+//         //      //}
+//         //   }
+//         //   //else
+//         //   //{
+//
+//         //   //   m_pimage->from(point(x + GetViewportOrg().x, y + GetViewportOrg().y), pgraphicsSrc->m_pimage,
+//         //   //                                    point(xSrc + pgraphicsSrc->GetViewportOrg().x, ySrc + pgraphicsSrc->GetViewportOrg().y),
+//         //   //                                    ::sized(nWidth, nHeight));
+//
+//
+//         //   //}
+//
+//         //}
+//
+//         Gdiplus::Bitmap * pbitmap = (Gdiplus::Bitmap *) pgraphicsSrc->get_current_bitmap()->get_os_data();
+//
+//         if (pgraphicsSrc->m_pimage->is_ok() && pgraphicsSrc->m_pimage->m_bColorMatrix)
+//         {
+//
+//            Gdiplus::ImageAttributes imageattributes;
+//
+//            Gdiplus::ColorMatrix colormatrix;
+//
+//            copy_color_matrix(colormatrix.m, pgraphicsSrc->m_pimage->m_colormatrix.a);
+//
+//            imageattributes.SetColorMatrix(
+//            &colormatrix,
+//            Gdiplus::ColorMatrixFlagsDefault,
+//               Gdiplus::ColorAdjustTypeBitmap);
+//
+//            Gdiplus::Rect rect((INT) rectDst.left, (INT) rectDst.top, (INT) rectDst.width(), (INT) rectDst.height());
+//
+//            ret = m_pgraphics->DrawImage(
+//                  pbitmap,
+//                  rect, 
+//               (INT) (rectSrc.left + pgraphicsSrc->GetViewportOrg().x), 
+//               (INT) (rectSrc.top + pgraphicsSrc->GetViewportOrg().y), 
+//               (INT) (rectSrc.width()),
+//               (INT) (rectSrc.height()), 
+//               Gdiplus::UnitPixel, &imageattributes);
+//
+//         }
+//         else
+//         {
+//
+//            int xSrcViewport = (int) pgraphicsSrc->GetViewportOrg().x;
+//
+//            int ySrcViewport = (int) pgraphicsSrc->GetViewportOrg().y;
+//
+//            ret = m_pgraphics->DrawImage(
+//               pbitmap,
+//               (INT) rectDst.left, 
+//               (INT) rectDst.top,
+//               (INT) (rectSrc.left + xSrcViewport), 
+//               (INT) (rectSrc.top + ySrcViewport), 
+//               (INT) (rectSrc.width()), 
+//               (INT) (rectSrc.height()),
+//               Gdiplus::UnitPixel);
+//
+//         }
+//
+//         if(ret != Gdiplus::Status::Ok)
+//         {
+//
+//            return false;
+//
+//         }
+//
+//      }
+//      catch(...)
+//      {
+//
+//         return false;
+//
+//      }
+//
+//      return true;
+//
+////gdi_fallback:
+////
+////      HDC hdcDst = get_hdc();
+////
+////      if (hdcDst == nullptr)
+////      {
+////
+////         return false;
+////
+////      }
+////
+////      HDC hdcSrc = __graphics(pgraphicsSrc)->get_hdc();
+////
+////      if(hdcSrc == nullptr)
+////      {
+////
+////         release_hdc(hdcDst);
+////
+////         return false;
+////
+////      }
+////
+////      bool bOk = ::BitBlt(hdcDst, 
+////         rectDst.left, rectDst.top,
+////         rectDst.width(), rectDst.height(),
+////         hdcSrc,
+////         pointSrc.x, pointSrc.y, SRCCOPY) != FALSE;
+////
+////      __graphics(pgraphicsSrc)->release_hdc(hdcSrc);
+////
+////      release_hdc(hdcDst);
+////
+////      return bOk;
+//
+//   }
+
+
+   bool graphics::_draw_raw(const ::rectd & rectDstParam, ::draw2d::graphics * pgraphicsSrc, const ::rectd & rectSrcParam)
    {
 
       if (pgraphicsSrc == nullptr)
@@ -1679,19 +1698,19 @@ gdi_fallback:
 
       }
 
-      int nDstWidth = rectDstParam.width();
+      double nDstWidth = rectDstParam.width();
 
-      int nDstHeight = rectDstParam.height();
+      double nDstHeight = rectDstParam.height();
 
-      int xSrc = rectSrcParam.left;
+      double xSrc = rectSrcParam.left;
 
-      int ySrc = rectSrcParam.top;
+      double ySrc = rectSrcParam.top;
 
-      int nSrcWidth = rectSrcParam.width();
+      double nSrcWidth = rectSrcParam.width();
 
-      int nSrcHeight = rectSrcParam.height();
+      double nSrcHeight = rectSrcParam.height();
 
-      Gdiplus::RectF rectDst((REAL) rectDstParam.left, (REAL)rectDstParam.top, (REAL)rectDstParam.width(), (REAL)rectDstParam.height());
+      Gdiplus::RectF rectDst((Gdiplus::REAL) rectDstParam.left, (Gdiplus::REAL)rectDstParam.top, (Gdiplus::REAL)rectDstParam.width(), (Gdiplus::REAL)rectDstParam.height());
 
       if (pgraphicsSrc == nullptr || pgraphicsSrc->get_current_bitmap() == nullptr)
       {
@@ -1731,12 +1750,12 @@ gdi_fallback:
                   int y1 = 0;
                   int x2 = 0;
                   int y2 = 0;
-                  int dx = nSrcWidth;
-                  int dy = nSrcHeight;
-                  int cx1 = nSrcWidth;
-                  int cy1 = nSrcHeight;
-                  int cx2 = nSrcWidth;
-                  int cy2 = nSrcHeight;
+                  int dx = (int) nSrcWidth;
+                  int dy = (int)nSrcHeight;
+                  int cx1 = (int)nSrcWidth;
+                  int cy1 = (int)nSrcHeight;
+                  int cx2 = (int)nSrcWidth;
+                  int cy2 = (int)nSrcHeight;
 
                   while (dx >= nDstWidth)
                   {
@@ -1805,7 +1824,9 @@ gdi_fallback:
 
                   ret = m_pgraphics->DrawImage(
                         (Gdiplus::Bitmap *) pimage->get_bitmap()->get_os_data(),
-                        rectDst, (REAL) xFound, (REAL) yFound, (REAL) cxFound, (REAL) cyFound,
+                        rectDst, 
+                     (Gdiplus::REAL) xFound, (Gdiplus::REAL) yFound, 
+                     (Gdiplus::REAL) cxFound, (Gdiplus::REAL) cyFound,
                         Gdiplus::UnitPixel);
 
                   //m_pgraphics->SetInterpolationMode(emode);
@@ -1848,16 +1869,20 @@ gdi_fallback:
 
             imageattributes.SetColorMatrix(
             &colormatrix,
-            ColorMatrixFlagsDefault,
-            ColorAdjustTypeBitmap);
+            Gdiplus::ColorMatrixFlagsDefault,
+               Gdiplus::ColorAdjustTypeBitmap);
 
-            ret = m_pgraphics->DrawImage(pbitmap, rectDst, (REAL) xSrc, (REAL)ySrc, (REAL)nSrcWidth, (REAL)nSrcHeight, Gdiplus::UnitPixel, &imageattributes);
+            ret = m_pgraphics->DrawImage(pbitmap, rectDst, 
+               (Gdiplus::REAL) xSrc, (Gdiplus::REAL)ySrc, 
+               (Gdiplus::REAL)nSrcWidth, (Gdiplus::REAL)nSrcHeight, Gdiplus::UnitPixel, &imageattributes);
 
          }
          else
          {
 
-            ret = m_pgraphics->DrawImage(pbitmap, rectDst, (REAL)xSrc, (REAL)ySrc, (REAL)nSrcWidth, (REAL)nSrcHeight, Gdiplus::UnitPixel);
+            ret = m_pgraphics->DrawImage(pbitmap, rectDst, 
+               (Gdiplus::REAL)xSrc, (Gdiplus::REAL)ySrc, 
+               (Gdiplus::REAL)nSrcWidth, (Gdiplus::REAL)nSrcHeight, Gdiplus::UnitPixel);
 
          }
 
@@ -1881,7 +1906,7 @@ gdi_fallback:
    }
 
 
-   //bool graphics::draw_raw(const  xDst, i32 yDst, i32 nDstWidth, i32 nDstHeight, ::draw2d::graphics * pgraphicsSrc, i32 xSrc, i32 ySrc, i32 nSrcWidth, i32 nSrcHeight, u32 dwRop)
+   //bool graphics::draw_raw(const  xDst, i32 yDst, i32 nDstWidth, i32 nDstHeight, ::draw2d::graphics * pgraphicsSrc, double xSrc, i32 ySrc, i32 nSrcWidth, i32 nSrcHeight, u32 dwRop)
    //{
 
    //   if (pgraphicsSrc == nullptr)
@@ -1957,7 +1982,7 @@ gdi_fallback:
    //            //::image_pointer pimageMipmap = pgraphicsSrc->m_pimage;
    //            //COLORREF * pcrMipmap = imageMipmap.m_pcolorref;
    //            //int iMimapScan = imageMipmap.m_iScan;
-   //            //size sizeMipmap = imageMipmap.m_size;
+   //            //::sized sizeMipmap = imageMipmap.m_size;
 
    //            //trilinearImageScaling(
    //            //&pimage->m_pcolorref[xDst + iScan * yDst / sizeof(COLORREF)],
@@ -2158,7 +2183,7 @@ gdi_fallback:
 
 
 
-   ::color graphics::GetPixel(i32 x, i32 y)
+   ::color graphics::GetPixel(double x, double y)
    {
       //ASSERT(get_handle1() != nullptr);
       //return ::GetPixel(get_handle1(), x, y);
@@ -2169,7 +2194,7 @@ gdi_fallback:
    }
    
    
-   ::color graphics::GetPixel(const ::point & point)
+   ::color graphics::GetPixel(const ::pointd & point)
    {
       //ASSERT(get_handle1() != nullptr);
       //return ::GetPixel(get_handle1(), point.x, point.y);
@@ -2180,7 +2205,7 @@ gdi_fallback:
    }
 
 
-   ::color graphics::SetPixel(i32 x, i32 y, const ::color & color)
+   ::color graphics::SetPixel(double x, double y, const ::color & color)
    {
 
       return 0;
@@ -2188,7 +2213,7 @@ gdi_fallback:
    }
 
 
-   ::color graphics::SetPixel(const ::point & point, const ::color & color)
+   ::color graphics::SetPixel(const ::pointd & point, const ::color & color)
    {
 
       if (m_pimage->is_ok())
@@ -2196,13 +2221,13 @@ gdi_fallback:
 
          m_pimage->map();
 
-         m_pimage->colorref()[point.x + point.y * m_pimage->scan_size()] = color;
+         m_pimage->colorref()[(int) point.x + (int) point.y * m_pimage->scan_size()] = color;
 
       }
       else
       {
 
-         fill_solid_rect_dim(point.x, point.y, 1, 1, color);
+         fill_rect(::rectd_dim(point.x, point.y, 1, 1), color);
 
       }
 
@@ -2211,7 +2236,7 @@ gdi_fallback:
    }
 
 
-   ::color graphics::blend_pixel(const ::point& point, const ::color& colorChange)
+   ::color graphics::blend_pixel(const ::pointd & point, const ::color& colorChange)
    {
 
       if (m_pimage->is_ok())
@@ -2219,20 +2244,20 @@ gdi_fallback:
 
          m_pimage->map();
 
-         ::color color = m_pimage->colorref()[point.x + point.y * m_pimage->scan_size()];
+         ::color color = m_pimage->colorref()[(int) point.x + (int) point.y * m_pimage->scan_size()];
 
          color.m_iR = (int) (color.m_iR * (1.0 - colorChange.da()) + colorChange.m_iR * colorChange.da());
          color.m_iG = (int) (color.m_iG * (1.0 - colorChange.da()) + colorChange.m_iG * colorChange.da());
          color.m_iB = (int) (color.m_iB * (1.0 - colorChange.da()) + colorChange.m_iB * colorChange.da());
 
-         m_pimage->colorref()[point.x + point.y * m_pimage->scan_size()] = color;
+         m_pimage->colorref()[(int) point.x + (int) point.y * m_pimage->scan_size()] = color;
          //colorCurrent.m_iA = colorCurrent.m_iA * (1.0 - color.da()) + color.m_iR * color.da();
 
       }
       else
       {
 
-         fill_solid_rect_dim(point.x, point.y, 1, 1, colorChange);
+         fill_rect(::rectd_dim(point.x, point.y, 1, 1), colorChange);
 
       }
 
@@ -2241,7 +2266,7 @@ gdi_fallback:
    }
 
 
-   //bool graphics::FloodFill(i32 x, i32 y, const ::color & color)
+   //bool graphics::FloodFill(double x, double y, const ::color & color)
    //{
 
    //   //ASSERT(get_handle1() != nullptr);
@@ -2254,7 +2279,7 @@ gdi_fallback:
    //}
 
 
-   //bool graphics::ExtFloodFill(i32 x, i32 y, const ::color & color, UINT nFillType)
+   //bool graphics::ExtFloodFill(double x, double y, const ::color & color, UINT nFillType)
    //{
    //   //ASSERT(get_handle1() != nullptr);
    //   //return ::ExtFloodFill(get_handle1(), x, y, color, nFillType) != FALSE;
@@ -2272,8 +2297,7 @@ gdi_fallback:
    //// COLOR_DEST = SRC_ALPHA * BLEND_ALPHA * COLOR_SRC  + (1 - SRC_ALPHA * BLEND_ALPHA) * COLOR_DST
 
 
-   bool graphics::ExtTextOut(i32 x,i32 y,UINT nOptions,const rect &  rectParam,const char * pszString,strsize nCount,LPINT lpDxWidths)
-
+   bool graphics::ExtTextOut(double x, double y,UINT nOptions,const rectd &  rectParam,const char * pszString,strsize nCount,LPINT lpDxWidths)
    {
 
       //ASSERT(get_handle1() != nullptr);
@@ -2287,8 +2311,7 @@ gdi_fallback:
    }
 
 
-   bool graphics::ExtTextOut(i32 x,i32 y,UINT nOptions,const rect &  rectParam, const string & str, LPINT pDxWidths)
-
+   bool graphics::ExtTextOut(double x, double y,UINT nOptions,const rectd &  rectParam, const string & str, LPINT pDxWidths)
    {
 
       //ASSERT(get_handle1() != nullptr);
@@ -2302,8 +2325,7 @@ gdi_fallback:
    }
 
 
-   size graphics::TabbedTextOut(i32 x, i32 y, const char * pszString, strsize nCount, count nTabPositions, LPINT lpnTabStopPositions, i32 nTabOrigin)
-
+   sized graphics::TabbedTextOut(double x, double y, const char * pszString, strsize nCount, count nTabPositions, LPINT lpnTabStopPositions, i32 nTabOrigin)
    {
 
       //ASSERT(get_handle1() != nullptr);
@@ -2317,8 +2339,7 @@ gdi_fallback:
    }
 
 
-   size graphics::TabbedTextOut(i32 x, i32 y, const string & str, count nTabPositions, LPINT pnTabStopPositions, i32 nTabOrigin)
-
+   sized graphics::TabbedTextOut(double x, double y, const string & str, count nTabPositions, LPINT pnTabStopPositions, i32 nTabOrigin)
    {
 
       //ASSERT(get_handle1() != nullptr);
@@ -2332,8 +2353,7 @@ gdi_fallback:
    }
 
 
-   size graphics::GetTabbedTextExtent(const char * pszString, strsize nCount, count nTabPositions, LPINT lpnTabStopPositions)
-
+   sized graphics::GetTabbedTextExtent(const char * pszString, strsize nCount, count nTabPositions, LPINT lpnTabStopPositions)
    {
 
       //ASSERT(get_handle2() != nullptr);
@@ -2347,8 +2367,7 @@ gdi_fallback:
    }
 
 
-   size graphics::GetTabbedTextExtent(const string & str, count nTabPositions, LPINT pnTabStopPositions)
-
+   sized graphics::GetTabbedTextExtent(const string & str, count nTabPositions, LPINT pnTabStopPositions)
    {
 
       //ASSERT(get_handle2() != nullptr);
@@ -2362,8 +2381,7 @@ gdi_fallback:
    }
 
 
-   size graphics::GetOutputTabbedTextExtent(const char * pszString, strsize nCount, count nTabPositions, LPINT lpnTabStopPositions)
-
+   sized graphics::GetOutputTabbedTextExtent(const char * pszString, strsize nCount, count nTabPositions, LPINT lpnTabStopPositions)
    {
 
       //ASSERT(get_handle1() != nullptr);
@@ -2377,8 +2395,7 @@ gdi_fallback:
    }
 
 
-   size graphics::GetOutputTabbedTextExtent(const string & str, count nTabPositions, LPINT pnTabStopPositions)
-
+   sized graphics::GetOutputTabbedTextExtent(const string & str, count nTabPositions, LPINT pnTabStopPositions)
    {
 
       //ASSERT(get_handle1() != nullptr);
@@ -2391,7 +2408,7 @@ gdi_fallback:
    }
 
 
-   //bool graphics::GrayString(::draw2d::brush* pBrush, bool (CALLBACK* pfnOutput)(HDC, LPARAM, i32), LPARAM lpData, i32 nCount,i32 x, i32 y, i32 nWidth, i32 nHeight)
+   //bool graphics::GrayString(::draw2d::brush* pBrush, bool (CALLBACK* pfnOutput)(HDC, LPARAM, i32), LPARAM lpData, i32 nCount,double x, double y, double nWidth, double nHeight)
 
    //{
 
@@ -2465,7 +2482,7 @@ gdi_fallback:
 
       graphics * pgraphics = ((graphics *)this);
 
-      Gdiplus::Font * pfont = m_pfont->get_os_data < Font * >(this);
+      Gdiplus::Font * pfont = m_pfont->get_os_data < Gdiplus::Font * >(this);
 
       if (pfont == nullptr)
       {
@@ -2583,12 +2600,12 @@ gdi_fallback:
    //}
 
 
-   //size graphics::GetAspectRatioFilter()
+   //::sized graphics::GetAspectRatioFilter()
    //{
    //   //ASSERT(get_handle2() != nullptr);
-   //   //::size size;
-   //   //VERIFY(::GetAspectRatioFilterEx(get_handle2(), &size));
-   //   //return size;
+   //   //::sized ::sized;
+   //   //VERIFY(::GetAspectRatioFilterEx(get_handle2(), &::sized));
+   //   //return ::sized;
    //   __throw(not_implemented());
 
    //   return nullptr;
@@ -2620,7 +2637,7 @@ gdi_fallback:
    //}
 
    // graphics 3.1 Specific functions
-   UINT graphics::SetBoundsRect(const rect &  rectBounds, UINT flags)
+   UINT graphics::SetBoundsRect(const rectd &  rectBounds, UINT flags)
    {
       //ASSERT(get_handle1() != nullptr);
       //return ::SetBoundsRect(get_handle1(), &rectBounds, flags);
@@ -2630,7 +2647,7 @@ gdi_fallback:
    }
 
 
-   UINT graphics::GetBoundsRect(RECT * pRectBounds, UINT flags)
+   UINT graphics::GetBoundsRect(::rectd * pRectBounds, UINT flags)
    {
 
       //ASSERT(get_handle2() != nullptr);
@@ -2784,8 +2801,8 @@ gdi_fallback:
    }
 
    
-   //bool graphics::MaskBlt(i32 x, i32 y, i32 nWidth, i32 nHeight, ::draw2d::graphics * pgraphicsSrc,
-   //                       i32 xSrc, i32 ySrc, ::draw2d::bitmap& maskBitmap, i32 xMask, i32 yMask, u32 dwRop)
+   //bool graphics::MaskBlt(double x, double y, double nWidth, double nHeight, ::draw2d::graphics * pgraphicsSrc,
+   //                       double xSrc, i32 ySrc, ::draw2d::bitmap& maskBitmap, double xMask, i32 yMask, u32 dwRop)
    //{
    //   //ASSERT(get_handle1() != nullptr);
    //   //return ::MaskBlt(get_handle1(), x, y, nWidth, nHeight, GDIPLUS_HDC(pgraphicsSrc),
@@ -2797,9 +2814,9 @@ gdi_fallback:
    //}
 
 
-   //bool graphics::PlgBlt(LPPOINT pPoint, ::draw2d::graphics * pgraphicsSrc, i32 xSrc, i32 ySrc,
+   //bool graphics::PlgBlt(LPPOINT pPoint, ::draw2d::graphics * pgraphicsSrc, double xSrc, i32 ySrc,
 
-   //                      i32 nWidth, i32 nHeight, ::draw2d::bitmap& maskBitmap, i32 xMask, i32 yMask)
+   //                      double nWidth, double nHeight, ::draw2d::bitmap& maskBitmap, double xMask, i32 yMask)
    //{
 
    //   Gdiplus::Status ret = Gdiplus::Status::GenericError;
@@ -2854,7 +2871,7 @@ gdi_fallback:
 
 
 
-   bool graphics::SetPixelV(i32 x, i32 y, const ::color & color)
+   bool graphics::SetPixelV(double x, double y, const ::color & color)
    {
       //ASSERT(get_handle1() != nullptr);
       //return ::SetPixelV(get_handle1(), x, y, color) != FALSE;
@@ -2863,7 +2880,9 @@ gdi_fallback:
       return false;
 
    }
-   bool graphics::SetPixelV(const ::point & point, const ::color & color)
+   
+   
+   bool graphics::SetPixelV(const ::pointd & point, const ::color & color)
    {
       //ASSERT(get_handle1() != nullptr);
       //return ::SetPixelV(get_handle1(), point.x, point.y, color) != FALSE;
@@ -2873,40 +2892,59 @@ gdi_fallback:
 
    }
 
-   bool graphics::AngleArc(i32 x, i32 y, i32 nRadius, angle fStartAngle, angle fSweepAngle)
+   bool graphics::AngleArc(double x, double y, i32 nRadius, angle fStartAngle, angle fSweepAngle)
    {
-      //ASSERT(get_handle1() != nullptr);
-      //return ::AngleArc(get_handle1(), x, y, nRadius, fStartAngle, fSweepAngle) != FALSE;
-      __throw(not_implemented());
+   //   //ASSERT(get_handle1() != nullptr);
+   //   //return ::AngleArc(get_handle1(), x, y, nRadius, fStartAngle, fSweepAngle) != FALSE;
+   //   __throw(not_implemented());
 
       return false;
 
    }
 
 
-   bool graphics::ArcTo(const rect &  rectParam,const point & pointStart,const point & pointEnd)
+   bool graphics::ArcTo(const rectd & rectParam,const pointd & pointStart,const pointd & pointEnd)
    {
-//      ASSERT(get_handle1() != nullptr);
-      return ArcTo(rectParam.left, rectParam.top, rectParam.right,
-                   rectParam.bottom, pointStart.x, pointStart.y, pointEnd.x, pointEnd.y);
+////      ASSERT(get_handle1() != nullptr);
+      //return ArcTo(rectParam.left, rectParam.top, rectParam.right,
+        //           rectParam.bottom, pointStart.x, pointStart.y, pointEnd.x, pointEnd.y);
+         //   if (::is_null(m_pgraphics))
+   //   {
+
+   //      return false;
+
+   //   }
+
+   //   //ASSERT(get_handle1() != nullptr);
+   //   //bool bResult = ::ArcTo(get_handle1(), x1, y1, x2, y2, x3, y3, x4, y4) != FALSE;
+   //   //if (get_handle1() != get_handle2())
+   //   //{
+   //   //   ::point point;
+   //   //   VERIFY(::GetCurrentPositionEx(get_handle1(), &point));
+   //   //   VERIFY(::MoveToEx(get_handle2(), point.x, point.y, nullptr));
+   //   //}
+   //   //return bResult;
+   //   __throw(not_implemented());
+
+      return false;
    }
-   i32 graphics::GetArcDirection()
-   {
-      //ASSERT(get_handle2() != nullptr);
-      //return ::GetArcDirection(get_handle2());
-      __throw(not_implemented());
+   //i32 graphics::GetArcDirection()
+   //{
+   //   //ASSERT(get_handle2() != nullptr);
+   //   //return ::GetArcDirection(get_handle2());
+   //   __throw(not_implemented());
 
-      return -1;
+   //   return -1;
 
-   }
+   //}
 
 
-   bool graphics::PolyPolyline(const POINT * pPoints, const INT * lpPolyPoints, count nCount)
+   bool graphics::poly_polyline(const ::pointd * pPoints, const INT * lpPolyPoints, count nCount)
    {
 
       //ASSERT(get_handle1() != nullptr);
 
-      //return ::PolyPolyline(get_handle1(), pPoints, (LPDWORD) lpPolyPoints, (DWORD) nCount) != FALSE;
+      //return ::poly_polyline(get_handle1(), pPoints, (LPDWORD) lpPolyPoints, (DWORD) nCount) != FALSE;
 
       __throw(not_implemented());
 
@@ -2927,12 +2965,12 @@ gdi_fallback:
    //}
 
 
-   bool graphics::PolyBezier(const POINT * pPoints, count nCount)
+   bool graphics::poly_bezier(const ::pointd * pPoints, count nCount)
    {
 
       //ASSERT(get_handle1() != nullptr);
 
-      //return ::PolyBezier(get_handle1(), pPoints, (DWORD) nCount) != FALSE;
+      //return ::poly_bezier(get_handle1(), pPoints, (DWORD) nCount) != FALSE;
       __throw(not_implemented());
 
       return false;
@@ -3060,7 +3098,7 @@ gdi_fallback:
    bool graphics::fill_path()
    {
 
-      return m_pgraphics->FillPath(m_pbrush->get_os_data < Brush * >(this), m_ppath) == Gdiplus::Status::Ok;
+      return m_pgraphics->FillPath(m_pbrush->get_os_data < Gdiplus::Brush * >(this), m_ppath) == Gdiplus::Status::Ok;
 
    }
 
@@ -3086,7 +3124,7 @@ gdi_fallback:
    }
 
 
-   i32 graphics::GetPath(LPPOINT pPoints, byte * lpTypes, count nCount)
+   i32 graphics::GetPath(::pointd * pPoints, byte * lpTypes, count nCount)
 
    {
 
@@ -3114,9 +3152,9 @@ gdi_fallback:
    bool graphics::stroke_and_fill_path()
    {
 
-      bool bOk1 = m_pgraphics->FillPath(m_pbrush->get_os_data < Brush * >(this), m_ppathPaint) == Gdiplus::Status::Ok;
+      bool bOk1 = m_pgraphics->FillPath(m_pbrush->get_os_data < Gdiplus::Brush * >(this), m_ppathPaint) == Gdiplus::Status::Ok;
 
-      bool bOk2 = m_pgraphics->DrawPath(m_ppen->get_os_data < Pen * >(this), m_ppathPaint) == Gdiplus::Status::Ok;
+      bool bOk2 = m_pgraphics->DrawPath(m_ppen->get_os_data < Gdiplus::Pen * >(this), m_ppathPaint) == Gdiplus::Status::Ok;
 
       return bOk1 && bOk2;
 
@@ -3126,7 +3164,7 @@ gdi_fallback:
    bool graphics::stroke_path()
    {
 
-      return m_pgraphics->DrawPath(m_ppen->get_os_data < Pen * >(this), m_ppathPaint) == Gdiplus::Status::Ok;
+      return m_pgraphics->DrawPath(m_ppen->get_os_data < Gdiplus::Pen * >(this), m_ppathPaint) == Gdiplus::Status::Ok;
 
    }
 
@@ -3134,7 +3172,7 @@ gdi_fallback:
    bool graphics::widen_path()
    {
 
-      return m_ppath->Widen(m_ppen->get_os_data < Pen * >(this)) == Gdiplus::Status::Ok;
+      return m_ppath->Widen(m_ppen->get_os_data < Gdiplus::Pen * >(this)) == Gdiplus::Status::Ok;
 
    }
 
@@ -3146,7 +3184,7 @@ gdi_fallback:
       //m_pgraphics->SetCompositingQuality(Gdiplus::CompositingQualityGammaCorrected);
       //m_pgraphics->SetInterpolationMode(Gdiplus::InterpolationModeHighQualityBicubic);
 
-      return m_pgraphics->DrawPath(m_ppen->get_os_data < Pen * >(this),ppath->get_os_data<GraphicsPath *>(this)) == Gdiplus::Status::Ok;
+      return m_pgraphics->DrawPath(m_ppen->get_os_data < Gdiplus::Pen * >(this),ppath->get_os_data<Gdiplus::GraphicsPath *>(this)) == Gdiplus::Status::Ok;
 
    }
 
@@ -3154,7 +3192,7 @@ gdi_fallback:
    bool graphics::draw_path(::draw2d::path * ppath, ::draw2d::pen * ppen)
    {
 
-      return m_pgraphics->DrawPath(ppen->get_os_data<Pen *>(this), ppath->get_os_data <GraphicsPath *>(this)) == Gdiplus::Status::Ok;
+      return m_pgraphics->DrawPath(ppen->get_os_data<Gdiplus::Pen *>(this), ppath->get_os_data <Gdiplus::GraphicsPath *>(this)) == Gdiplus::Status::Ok;
 
    }
 
@@ -3162,9 +3200,9 @@ gdi_fallback:
    bool graphics::fill_path(::draw2d::path * ppath)
    {
 
-      Gdiplus::Brush* pbrush = m_pbrush->get_os_data < Brush* >(this);
+      Gdiplus::Brush* pbrush = m_pbrush->get_os_data < Gdiplus::Brush* >(this);
 
-      Gdiplus::GraphicsPath * pgraphicspath = ppath->get_os_data < GraphicsPath* >(this);
+      Gdiplus::GraphicsPath * pgraphicspath = ppath->get_os_data < Gdiplus::GraphicsPath* >(this);
 
       return m_pgraphics->FillPath(pbrush, pgraphicspath) == Gdiplus::Status::Ok;
 
@@ -3195,7 +3233,7 @@ gdi_fallback:
 
       }
 
-      ::Gdiplus::Brush * pbr = pbrush->get_os_data < Brush * >(this);
+      ::Gdiplus::Brush * pbr = pbrush->get_os_data < Gdiplus::Brush * >(this);
 
       if (pbr == nullptr)
       {
@@ -3204,7 +3242,7 @@ gdi_fallback:
 
       }
 
-      auto ppathOs = ppath->get_os_data < GraphicsPath * >(this);
+      auto ppathOs = ppath->get_os_data < Gdiplus::GraphicsPath * >(this);
 
       if (ppathOs == nullptr)
       {
@@ -3230,7 +3268,7 @@ gdi_fallback:
    }
 
 
-   bool graphics::PlayMetaFile(HENHMETAFILE hEnhMF, const rect &  rectBounds)
+   bool graphics::PlayMetaFile(HENHMETAFILE hEnhMF, const rectd &  rectBounds)
    {
 
       Gdiplus::RectF rect((Gdiplus::REAL) rectBounds.left,(Gdiplus::REAL) rectBounds.top,(Gdiplus::REAL) width(rectBounds),(Gdiplus::REAL) height(rectBounds));
@@ -3266,8 +3304,7 @@ gdi_fallback:
 
 
 
-
-   bool graphics::alpha_blendRaw(i32 xDest, i32 yDest, i32 nDestWidth, i32 nDestHeight, ::draw2d::graphics * pgraphicsSrc, i32 xSrc, i32 ySrc, i32 nSrcWidth, i32 nSrcHeight, double dRate)
+   bool graphics::_alpha_blend_raw(const ::rectd & rectDst, ::draw2d::graphics * pgraphicsSrc, const ::rectd & rectSrc , double dRate)
    {
 
       if (m_pgraphics == nullptr || pgraphicsSrc == nullptr)
@@ -3298,7 +3335,7 @@ gdi_fallback:
 
       //         m_pimage->fork_blend(point(xDest + GetViewportOrg().x, yDest + GetViewportOrg().y), pgraphicsSrc->m_pimage,
       //                                                point(xSrc + pgraphicsSrc->GetViewportOrg().x, ySrc + pgraphicsSrc->GetViewportOrg().y),
-      //                                                size(nSrcWidth, nDestHeight), (byte)(dRate * 255.0f));
+      //                                                ::sized(nSrcWidth, nDestHeight), (byte)(dRate * 255.0f));
 
       //         g_cForkBlend++;
 
@@ -3313,7 +3350,7 @@ gdi_fallback:
 
       //         m_pimage->blend(point(xDest + GetViewportOrg().x, yDest + GetViewportOrg().y), pgraphicsSrc->m_pimage,
       //                                           point(xSrc+pgraphicsSrc->GetViewportOrg().x, ySrc + pgraphicsSrc->GetViewportOrg().y),
-      //                                           size(nSrcWidth, nDestHeight), (byte)(dRate * 255.0f));
+      //                                           ::sized(nSrcWidth, nDestHeight), (byte)(dRate * 255.0f));
 
       //      }
 
@@ -3323,7 +3360,7 @@ gdi_fallback:
 
       //      m_pimage->from(point(xDest + GetViewportOrg().x, yDest + GetViewportOrg().y), pgraphicsSrc->m_pimage,
       //                                       point(xSrc + pgraphicsSrc->GetViewportOrg().x, ySrc + pgraphicsSrc->GetViewportOrg().y),
-      //                                       size(nSrcWidth, nDestHeight), (byte) (dRate * 255.0f));
+      //                                       ::sized(nSrcWidth, nDestHeight), (byte) (dRate * 255.0f));
 
 
       //   }
@@ -3359,10 +3396,10 @@ gdi_fallback:
 
       imageattributes.SetColorMatrix(
       &colormatrix,
-      ColorMatrixFlagsDefault,
-      ColorAdjustTypeBitmap);
+         Gdiplus::ColorMatrixFlagsDefault,
+         Gdiplus::ColorAdjustTypeBitmap);
 
-      Gdiplus::RectF rectDst((Gdiplus::REAL) xDest, (Gdiplus::REAL) yDest, (Gdiplus::REAL) nDestWidth, (Gdiplus::REAL) nDestHeight);
+      Gdiplus::RectF rectfDst((Gdiplus::REAL) rectDst.left, (Gdiplus::REAL) rectDst.top, (Gdiplus::REAL) rectDst.width(), (Gdiplus::REAL) rectDst.height());
 
       if (pgraphicsSrc == nullptr)
       {
@@ -3396,7 +3433,12 @@ gdi_fallback:
       if(pbitmap != nullptr)
       {
 
-         ret =  m_pgraphics->DrawImage(pbitmap,rectDst,(Gdiplus::REAL) xSrc,(Gdiplus::REAL) ySrc,(Gdiplus::REAL) nSrcWidth,(Gdiplus::REAL) nSrcHeight,Gdiplus::UnitPixel,&imageattributes);
+         ret =  m_pgraphics->DrawImage(pbitmap,rectfDst,
+            (Gdiplus::REAL) rectSrc.left,
+            (Gdiplus::REAL) rectSrc.top,
+            (Gdiplus::REAL) rectSrc.width(),
+            (Gdiplus::REAL) rectSrc.height(),
+            Gdiplus::UnitPixel,&imageattributes);
 
          if (ret != Gdiplus::Status::Ok)
          {
@@ -3413,138 +3455,13 @@ gdi_fallback:
 
 
 
-   //bool graphics::TransparentBlt(i32 xDest, i32 yDest, i32 nDestWidth, i32 nDestHeight, ::draw2d::graphics * pgraphicsSrc, i32 xSrc, i32 ySrc, i32 nSrcWidth, i32 nSrcHeight, UINT crTransparent)
-   //{
-
-   //   //ASSERT(get_handle1() != nullptr);
-
-   //   //return ::TransparentBlt(get_handle1(), xDest, yDest,  nDestWidth, nDestHeight, GDIPLUS_HDC(pgraphicsSrc), xSrc, ySrc, nSrcWidth,  nSrcHeight, crTransparent) != FALSE;
-
-   //   return true;
-
-   //}
-
-
-   //bool graphics::GradientFill(TRIVERTEX* pVertices, ULONG nVertices, void * pMesh, ULONG nMeshElements, u32 dwMode)
-   //{
-
-   //   //ASSERT(get_handle1() != nullptr);
-
-   //   //return ::GradientFill(get_handle1(), pVertices, nVertices, pMesh, nMeshElements, dwMode) != FALSE;
-
-   //   return true;
-
-   //}
-
-
-   // This is aura API library.
-   //
-   //
-   //
-   //
-   //
-   //
-   //
-   //
-
-   //// Always Inline. Functions only in Win98/Win2K or later
-
-   //inline COLORREF graphics::GetDCBrushColor()
-   //{
-   //   //ASSERT(get_handle1() != nullptr);
-   //   //return ::GetDCBrushColor(get_handle1());
-   //   __throw(not_implemented());
-
-   //   return false;
-
-   //}
-   //inline COLORREF graphics::SetDCBrushColor(const ::color & color)
-   //{
-   //   //ASSERT(get_handle1() != nullptr);
-   //   //return ::SetDCBrushColor(get_handle1(), color);
-   //   __throw(not_implemented());
-
-   //   return -1;
-
-   //}
-
-   //inline COLORREF graphics::GetDCPenColor()
-   //{
-   //   //ASSERT(get_handle1() != nullptr);
-   //   //return ::GetDCPenColor(get_handle1());
-   //   __throw(not_implemented());
-
-   //   return -1;
-
-   //}
-   //inline COLORREF graphics::SetDCPenColor(const ::color & color)
-   //{
-   //   //ASSERT(get_handle1() != nullptr);
-   //   //return ::SetDCPenColor(get_handle1(), color);
-   //   __throw(not_implemented());
-
-   //   return -1;
-
-   //}
-
-   //inline bool graphics::GetCharABCWidthsI(UINT giFirst, UINT cgi, LPWORD pgi, LPABC pabc)
-
-   //{
-   //   //ASSERT(get_handle1() != nullptr);
-   //   //return ::GetCharABCWidthsI(get_handle1(), giFirst, cgi, pgi, pabc) != FALSE;
-   //   __throw(not_implemented());
-
-   //   return false;
-
-   //}
-   //inline bool graphics::GetCharWidthI(UINT giFirst, UINT cgi, LPWORD pgi, LPINT pBuffer)
-
-   //{
-   //   //ASSERT(get_handle1() != nullptr);
-   //   //return ::GetCharWidthI(get_handle1(), giFirst, cgi, pgi, pBuffer) != FALSE;
-   //   __throw(not_implemented());
-
-   //   return false;
-
-   //}
-
-   //inline bool graphics::GetTextExtentExPointI(LPWORD pgiIn, i32 cgi, i32 nMaxExtent, LPINT pnFit, LPINT alpDx, LPSIZE psize)
-
-   //{
-   //   //ENSURE(psize != nullptr);
-
-   //   //ASSERT(get_handle1() != nullptr);
-   //   //return ::GetTextExtentExPointI(get_handle1(), pgiIn, cgi, nMaxExtent, pnFit, alpDx, psize) != FALSE;
-   //   __throw(not_implemented());
-
-   //   return false;
-
-   //}
-   //inline bool graphics::GetTextExtentPointI(LPWORD pgiIn, i32 cgi, LPSIZE psize)
-
-   //{
-   //   ENSURE(psize != nullptr);
-
-   //   //ASSERT(get_handle1() != nullptr);
-   //   //return ::GetTextExtentPointI(get_handle1(), pgiIn, cgi, psize) != FALSE;
-   //   __throw(not_implemented());
-
-   //   return false;
-
-   //}
-
-
-
-
-
-
 
 #define HIMETRIC_INCH   2540    // HIMETRIC units per inch
 
-   void graphics::DPtoHIMETRIC(LPSIZE psize)
+   void graphics::DPtoHIMETRIC(::sized * psize)
 
    {
-      ASSERT(__is_valid_address(psize, sizeof(const size &)));
+      ASSERT(__is_valid_address(psize, sizeof(const sized &)));
 
 
       i32 nMapMode;
@@ -3574,17 +3491,17 @@ gdi_fallback:
             //          cyPerInch = afxData.cyPixelsPerInch;
          }
          ASSERT(cxPerInch != 0 && cyPerInch != 0);
-         psize->cx = MulDiv(psize->cx, HIMETRIC_INCH, cxPerInch);
+         psize->cx = psize->cx * HIMETRIC_INCH / cxPerInch;
 
-         psize->cy = MulDiv(psize->cy, HIMETRIC_INCH, cyPerInch);
+         psize->cy = psize->cy * HIMETRIC_INCH / cyPerInch;
 
       }
    }
 
-   void graphics::HIMETRICtoDP(LPSIZE psize)
+   void graphics::HIMETRICtoDP(::sized * psize)
 
    {
-      ASSERT(__is_valid_address(psize, sizeof(const size &)));
+      ASSERT(__is_valid_address(psize, sizeof(const sized&)));
 
 
       i32 nMapMode;
@@ -3614,17 +3531,17 @@ gdi_fallback:
             //          cyPerInch = afxData.cyPixelsPerInch;
          }
          ASSERT(cxPerInch != 0 && cyPerInch != 0);
-         psize->cx = MulDiv(psize->cx, cxPerInch, HIMETRIC_INCH);
+         psize->cx = psize->cx* cxPerInch/ HIMETRIC_INCH;
 
-         psize->cy = MulDiv(psize->cy, cyPerInch, HIMETRIC_INCH);
+         psize->cy = psize->cy * cyPerInch/ HIMETRIC_INCH;
 
       }
    }
 
-   void graphics::LPtoHIMETRIC(LPSIZE psize)
+   void graphics::LPtoHIMETRIC(::sized * psize)
 
    {
-      ASSERT(__is_valid_address(psize, sizeof(const size &)));
+      ASSERT(__is_valid_address(psize, sizeof(const sized &)));
 
 
       LPtoDP(psize);
@@ -3633,11 +3550,11 @@ gdi_fallback:
 
    }
 
-   void graphics::HIMETRICtoLP(LPSIZE psize)
 
+   void graphics::HIMETRICtoLP(::sized * psize)
    {
-      ASSERT(__is_valid_address(psize, sizeof(const size &)));
 
+      ASSERT(__is_valid_address(psize, sizeof(const sized &)));
 
       HIMETRICtoDP(psize);
 
@@ -3672,7 +3589,7 @@ gdi_fallback:
    }
 
 
-   //void graphics::DrawDragRect(const rect &  prect, const ::size & size, const rect &  lpRectLast, const ::size & sizeLast, ::draw2d::brush* pBrush, ::draw2d::brush* pBrushLast)
+   //void graphics::DrawDragRect(const rect &  prect, const ::sized & size, const rect &  lpRectLast, const ::sized & sizeLast, ::draw2d::brush* pBrush, ::draw2d::brush* pBrushLast)
    //{
 
    //   ::exception::throw_not_implemented();
@@ -3741,7 +3658,7 @@ gdi_fallback:
    //         {
    //            // brushes are different -- erase old region first
    //            SelectClipRgn(&rgnLast);
-   //            GetClipBox(&rect);
+   //            get_clip_box(&rect);
    //            pBrushOld = set(pBrushLast);
    //            PatBlt(rect.left, rect.top, rect.width(), rect.height(), PATINVERT);
    //            set(pBrushOld);
@@ -3750,7 +3667,7 @@ gdi_fallback:
 
    //         // draw into the update/new region
    //         SelectClipRgn(rgnUpdate.get_os_data() != nullptr ? &rgnUpdate : &rgnNew);
-   //         GetClipBox(&rect);
+   //         get_clip_box(&rect);
    //         pBrushOld = set(pBrush);
    //         PatBlt(rect.left, rect.top, rect.width(), rect.height(), PATINVERT);
 
@@ -3770,15 +3687,19 @@ gdi_fallback:
 
    }*/
 
-   void graphics::fill_rect(const ::rectd & rectParam, const ::color & color)
 
+   bool graphics::fill_rect(const ::rectd & rectParam, const ::color & color)
    {
 
       try
       {
 
          if (m_pgraphics == nullptr)
-            return;
+         {
+
+            return false;
+
+         }
 
          Gdiplus::RectF rect;
 
@@ -3797,13 +3718,13 @@ gdi_fallback:
    }
 
 
-   void graphics::draw_rect(const ::rect & rect, const ::color& color, const ::e_border & eborder)
+   bool graphics::draw_rect(const ::rectd & rect, const ::color& color, const ::e_border & eborder)
    {
 
       if (!(eborder & (e_border_left | e_border_right | e_border_top | e_border_bottom)))
       {
 
-         return;
+         return false;
 
       }
 
@@ -3842,13 +3763,21 @@ gdi_fallback:
          if (eborder & e_border_left)
          {
 
-            m_pgraphics->DrawLine(&pen, rect.left, rect.bottom - 1, rect.left, rect.top);
+            m_pgraphics->DrawLine(&pen, 
+               (Gdiplus::REAL) rect.left, 
+               (Gdiplus::REAL)rect.bottom - 1, 
+               (Gdiplus::REAL)rect.left, 
+               (Gdiplus::REAL)rect.top);
 
          }
          else if (eborder & e_border_top)
          {
 
-            m_pgraphics->DrawLine(&pen, rect.left, rect.top, rect.right, rect.top);
+            m_pgraphics->DrawLine(&pen, 
+               (Gdiplus::REAL)rect.left,
+               (Gdiplus::REAL)rect.top, 
+               (Gdiplus::REAL)rect.right, 
+               (Gdiplus::REAL)rect.top);
 
          }
 
@@ -3879,13 +3808,21 @@ gdi_fallback:
          if (eborder & e_border_bottom)
          {
 
-            m_pgraphics->DrawLine(&pen, rect.left, rect.bottom, rect.right, rect.bottom);
+            m_pgraphics->DrawLine(&pen,
+               (Gdiplus::REAL)rect.left, 
+               (Gdiplus::REAL)rect.bottom,
+               (Gdiplus::REAL)rect.right,
+               (Gdiplus::REAL)rect.bottom);
 
          }
          else if (eborder & e_border_right)
          {
 
-            m_pgraphics->DrawLine(&pen, rect.right, rect.bottom, rect.right, rect.top + 1);
+            m_pgraphics->DrawLine(&pen, 
+               (Gdiplus::REAL)rect.right, 
+               (Gdiplus::REAL)rect.bottom, 
+               (Gdiplus::REAL)rect.right, 
+               (Gdiplus::REAL)rect.top + 1);
 
          }
 
@@ -3895,109 +3832,109 @@ gdi_fallback:
    }
 
 
-   void graphics::draw_rect(const ::rectd& rect, const ::color& color, const ::e_border & eborder)
+   //bool graphics::draw_rect(const ::rectd& rect, const ::color& color, const ::e_border & eborder)
+   //{
+
+   //   if (!(eborder & (e_border_left | e_border_right | e_border_top | e_border_bottom)))
+   //   {
+
+   //      return false;
+
+   //   }
+
+   //   Gdiplus::Pen pen(Gdiplus::Color(color.m_iA, color.m_iR, color.m_iG, color.m_iB), 1.0);
+
+   //   //if ((eborder & e_border_left) && (eborder & e_border_top)
+   //   //   && (eborder & e_border_right) && (eborder & e_border_bottom)
+   //   //   && crTopLeft == crBottomRight)
+   //   //{
+
+   //   //   m_pgraphics->DrawRectangle(&pen, rect.left, rect.top, rect.width(), rect.height());
+
+   //   //} else
+   //   if ((eborder & e_border_left) && (eborder & e_border_top))
+   //   {
+
+   //      Gdiplus::GraphicsPath path;
+
+   //      Gdiplus::PointF pa[3];
+
+   //      pa[0].X = (Gdiplus::REAL) rect.left;
+   //      pa[0].Y = (Gdiplus::REAL) rect.bottom - 1;
+   //      pa[1].X = (Gdiplus::REAL) rect.left;
+   //      pa[1].Y = (Gdiplus::REAL) rect.top;
+   //      pa[2].X = (Gdiplus::REAL) rect.right;
+   //      pa[2].Y = (Gdiplus::REAL) rect.top;
+
+   //      path.AddLines(pa, 3);
+
+   //      m_pgraphics->DrawPath(&pen, &path);
+
+   //   }
+   //   else
+   //   {
+
+   //      if (eborder & e_border_left)
+   //      {
+
+   //         m_pgraphics->DrawLine(&pen, (Gdiplus::REAL) rect.left, (Gdiplus::REAL)rect.bottom-1, (Gdiplus::REAL)rect.left, (Gdiplus::REAL)rect.top);
+
+   //      }
+   //      else if (eborder & e_border_top)
+   //      {
+
+   //         m_pgraphics->DrawLine(&pen, (Gdiplus::REAL)rect.left, (Gdiplus::REAL)rect.top, (Gdiplus::REAL)rect.right, (Gdiplus::REAL)rect.top);
+
+   //      }
+
+   //   }
+
+
+   //   if ((eborder & e_border_right) && (eborder & e_border_bottom))
+   //   {
+
+   //      Gdiplus::GraphicsPath path;
+
+   //      Gdiplus::PointF pa[3];
+
+   //      pa[0].X = (Gdiplus::REAL) rect.left;
+   //      pa[0].Y = (Gdiplus::REAL) rect.bottom;
+   //      pa[1].X = (Gdiplus::REAL) rect.right;
+   //      pa[1].Y = (Gdiplus::REAL) rect.top;
+   //      pa[2].X = (Gdiplus::REAL) rect.right;
+   //      pa[2].Y = (Gdiplus::REAL) rect.top + 1;
+
+   //      path.AddLines(pa, 3);
+
+   //   }
+   //   else
+   //   {
+
+   //      if (eborder & e_border_bottom)
+   //      {
+
+   //         m_pgraphics->DrawLine(&pen, (Gdiplus::REAL)rect.left, (Gdiplus::REAL)rect.bottom, (Gdiplus::REAL)rect.right, (Gdiplus::REAL)rect.bottom);
+
+   //      }
+   //      else if (eborder & e_border_right)
+   //      {
+
+   //         m_pgraphics->DrawLine(&pen, (Gdiplus::REAL)rect.right, (Gdiplus::REAL)rect.bottom, (Gdiplus::REAL)rect.right, (Gdiplus::REAL)rect.top + 1);
+
+   //      }
+
+   //   }
+
+   //}
+
+
+   bool graphics::draw_3drect(const ::rectd & rect, const ::color& colorTopLeft, const ::color& colorBottomRight, const ::e_border & eborder)
    {
 
       if (!(eborder & (e_border_left | e_border_right | e_border_top | e_border_bottom)))
       {
 
-         return;
-
-      }
-
-      Gdiplus::Pen pen(Gdiplus::Color(color.m_iA, color.m_iR, color.m_iG, color.m_iB), 1.0);
-
-      //if ((eborder & e_border_left) && (eborder & e_border_top)
-      //   && (eborder & e_border_right) && (eborder & e_border_bottom)
-      //   && crTopLeft == crBottomRight)
-      //{
-
-      //   m_pgraphics->DrawRectangle(&pen, rect.left, rect.top, rect.width(), rect.height());
-
-      //} else
-      if ((eborder & e_border_left) && (eborder & e_border_top))
-      {
-
-         Gdiplus::GraphicsPath path;
-
-         Gdiplus::PointF pa[3];
-
-         pa[0].X = (Gdiplus::REAL) rect.left;
-         pa[0].Y = (Gdiplus::REAL) rect.bottom - 1;
-         pa[1].X = (Gdiplus::REAL) rect.left;
-         pa[1].Y = (Gdiplus::REAL) rect.top;
-         pa[2].X = (Gdiplus::REAL) rect.right;
-         pa[2].Y = (Gdiplus::REAL) rect.top;
-
-         path.AddLines(pa, 3);
-
-         m_pgraphics->DrawPath(&pen, &path);
-
-      }
-      else
-      {
-
-         if (eborder & e_border_left)
-         {
-
-            m_pgraphics->DrawLine(&pen, (Gdiplus::REAL) rect.left, (Gdiplus::REAL)rect.bottom-1, (Gdiplus::REAL)rect.left, (Gdiplus::REAL)rect.top);
-
-         }
-         else if (eborder & e_border_top)
-         {
-
-            m_pgraphics->DrawLine(&pen, (Gdiplus::REAL)rect.left, (Gdiplus::REAL)rect.top, (Gdiplus::REAL)rect.right, (Gdiplus::REAL)rect.top);
-
-         }
-
-      }
-
-
-      if ((eborder & e_border_right) && (eborder & e_border_bottom))
-      {
-
-         Gdiplus::GraphicsPath path;
-
-         Gdiplus::PointF pa[3];
-
-         pa[0].X = (Gdiplus::REAL) rect.left;
-         pa[0].Y = (Gdiplus::REAL) rect.bottom;
-         pa[1].X = (Gdiplus::REAL) rect.right;
-         pa[1].Y = (Gdiplus::REAL) rect.top;
-         pa[2].X = (Gdiplus::REAL) rect.right;
-         pa[2].Y = (Gdiplus::REAL) rect.top + 1;
-
-         path.AddLines(pa, 3);
-
-      }
-      else
-      {
-
-         if (eborder & e_border_bottom)
-         {
-
-            m_pgraphics->DrawLine(&pen, (Gdiplus::REAL)rect.left, (Gdiplus::REAL)rect.bottom, (Gdiplus::REAL)rect.right, (Gdiplus::REAL)rect.bottom);
-
-         }
-         else if (eborder & e_border_right)
-         {
-
-            m_pgraphics->DrawLine(&pen, (Gdiplus::REAL)rect.right, (Gdiplus::REAL)rect.bottom, (Gdiplus::REAL)rect.right, (Gdiplus::REAL)rect.top + 1);
-
-         }
-
-      }
-
-   }
-
-
-   void graphics::draw_3drect(const ::rectd & rect, const ::color& colorTopLeft, const ::color& colorBottomRight, const ::e_border & eborder)
-   {
-
-      if (!(eborder & (e_border_left | e_border_right | e_border_top | e_border_bottom)))
-      {
-
-         return;
+         return false;
 
       }
 
@@ -4005,9 +3942,7 @@ gdi_fallback:
       if (colorTopLeft == colorBottomRight)
       {
 
-         draw_rect(rect, colorTopLeft, eborder);
-
-         return;
+         return draw_rect(rect, colorTopLeft, eborder);
 
       }
 
@@ -4015,7 +3950,7 @@ gdi_fallback:
       if (!(eborder & (e_border_left | e_border_right | e_border_top | e_border_bottom)))
       {
 
-         return;
+         return false;
 
       }
 
@@ -4106,119 +4041,119 @@ gdi_fallback:
    }
 
 
-   void graphics::draw_3drect(const ::rect& rect, const ::color& colorTopLeft, const ::color& colorBottomRight, const ::e_border & eborder)
-   {
+   //void graphics::draw_3drect(const ::rect& rect, const ::color& colorTopLeft, const ::color& colorBottomRight, const ::e_border & eborder)
+   //{
 
-      if (!(eborder & (e_border_left | e_border_right | e_border_top | e_border_bottom)))
-      {
+   //   if (!(eborder & (e_border_left | e_border_right | e_border_top | e_border_bottom)))
+   //   {
 
-         return;
+   //      return;
 
-      }
-
-
-      if (colorTopLeft == colorBottomRight)
-      {
-
-         draw_rect(rect, colorTopLeft, eborder);
-
-         return;
-
-      }
+   //   }
 
 
-      if (!(eborder & (e_border_left | e_border_right | e_border_top | e_border_bottom)))
-      {
+   //   if (colorTopLeft == colorBottomRight)
+   //   {
 
-         return;
+   //      draw_rect(rect, colorTopLeft, eborder);
 
-      }
+   //      return;
 
-      {
+   //   }
 
-         Gdiplus::Pen pen(Gdiplus::Color(colorTopLeft.m_iA, colorTopLeft.m_iR, colorTopLeft.m_iG, colorTopLeft.m_iB), 1.0);
 
-         if ((eborder & e_border_left) && (eborder & e_border_top))
-         {
+   //   if (!(eborder & (e_border_left | e_border_right | e_border_top | e_border_bottom)))
+   //   {
 
-            Gdiplus::GraphicsPath path;
+   //      return;
 
-            Gdiplus::Point pa[3];
+   //   }
 
-            pa[0].X = rect.left;
-            pa[0].Y = rect.bottom - 1;
-            pa[1].X = rect.left;
-            pa[1].Y = rect.top;
-            pa[2].X = rect.right;
-            pa[2].Y = rect.top;
+   //   {
 
-            path.AddLines(pa, 3);
+   //      Gdiplus::Pen pen(Gdiplus::Color(colorTopLeft.m_iA, colorTopLeft.m_iR, colorTopLeft.m_iG, colorTopLeft.m_iB), 1.0);
 
-            m_pgraphics->DrawPath(&pen, &path);
+   //      if ((eborder & e_border_left) && (eborder & e_border_top))
+   //      {
 
-         }
-         else
-         {
+   //         Gdiplus::GraphicsPath path;
 
-            if (eborder & e_border_left)
-            {
+   //         Gdiplus::Point pa[3];
 
-               m_pgraphics->DrawLine(&pen, rect.left, rect.bottom - 1, rect.left, rect.top);
+   //         pa[0].X = rect.left;
+   //         pa[0].Y = rect.bottom - 1;
+   //         pa[1].X = rect.left;
+   //         pa[1].Y = rect.top;
+   //         pa[2].X = rect.right;
+   //         pa[2].Y = rect.top;
 
-            }
-            else if (eborder & e_border_top)
-            {
+   //         path.AddLines(pa, 3);
 
-               m_pgraphics->DrawLine(&pen, rect.left, rect.top, rect.right, rect.top);
+   //         m_pgraphics->DrawPath(&pen, &path);
 
-            }
+   //      }
+   //      else
+   //      {
 
-         }
+   //         if (eborder & e_border_left)
+   //         {
 
-      }
+   //            m_pgraphics->DrawLine(&pen, rect.left, rect.bottom - 1, rect.left, rect.top);
 
-      {
+   //         }
+   //         else if (eborder & e_border_top)
+   //         {
 
-         Gdiplus::Pen pen(Gdiplus::Color(colorBottomRight.m_iA, colorBottomRight.m_iR, colorBottomRight.m_iG, colorBottomRight.m_iB), 1.0);
+   //            m_pgraphics->DrawLine(&pen, rect.left, rect.top, rect.right, rect.top);
 
-         if ((eborder & e_border_right) && (eborder & e_border_bottom))
-         {
+   //         }
 
-            Gdiplus::GraphicsPath path;
+   //      }
 
-            Gdiplus::Point pa[3];
+   //   }
 
-            pa[0].X = rect.left;
-            pa[0].Y = rect.bottom;
-            pa[1].X = rect.right;
-            pa[1].Y = rect.top;
-            pa[2].X = rect.right;
-            pa[2].Y = rect.top + 1;
+   //   {
 
-            path.AddLines(pa, 3);
+   //      Gdiplus::Pen pen(Gdiplus::Color(colorBottomRight.m_iA, colorBottomRight.m_iR, colorBottomRight.m_iG, colorBottomRight.m_iB), 1.0);
 
-         }
-         else
-         {
+   //      if ((eborder & e_border_right) && (eborder & e_border_bottom))
+   //      {
 
-            if (eborder & e_border_bottom)
-            {
+   //         Gdiplus::GraphicsPath path;
 
-               m_pgraphics->DrawLine(&pen, rect.left, rect.bottom, rect.right, rect.bottom);
+   //         Gdiplus::Point pa[3];
 
-            }
-            else if (eborder & e_border_right)
-            {
+   //         pa[0].X = rect.left;
+   //         pa[0].Y = rect.bottom;
+   //         pa[1].X = rect.right;
+   //         pa[1].Y = rect.top;
+   //         pa[2].X = rect.right;
+   //         pa[2].Y = rect.top + 1;
 
-               m_pgraphics->DrawLine(&pen, rect.right, rect.bottom, rect.right, rect.top + 1);
+   //         path.AddLines(pa, 3);
 
-            }
+   //      }
+   //      else
+   //      {
 
-         }
+   //         if (eborder & e_border_bottom)
+   //         {
 
-      }
+   //            m_pgraphics->DrawLine(&pen, rect.left, rect.bottom, rect.right, rect.bottom);
 
-   }
+   //         }
+   //         else if (eborder & e_border_right)
+   //         {
+
+   //            m_pgraphics->DrawLine(&pen, rect.right, rect.bottom, rect.right, rect.top + 1);
+
+   //         }
+
+   //      }
+
+   //   }
+
+   //}
 
 
    void graphics::close_graphics()
@@ -4665,20 +4600,20 @@ gdi_fallback:
    }
 
 
-   size graphics::SetViewportExt(i32 x, i32 y)
+   sized graphics::SetViewportExt(double x, double y)
    {
 
-      ::size size(0, 0);
+      ::sized size(0, 0);
       //if(get_handle1() != nullptr && get_handle1() != get_handle2())
-      //   ::SetViewportExtEx(get_handle1(), x, y, &size);
+      //   ::SetViewportExtEx(get_handle1(), x, y, &::sized);
       //if(get_handle2() != nullptr)
-      //   ::SetViewportExtEx(get_handle2(), x, y, &size);
+      //   ::SetViewportExtEx(get_handle2(), x, y, &::sized);
       return size;
 
    }
 
 
-   point graphics::SetWindowOrg(i32 x, i32 y)
+   pointd graphics::SetWindowOrg(double x, double y)
    {
       //::point point;
       //if(get_handle1() != nullptr && get_handle1() != get_handle2())
@@ -4688,7 +4623,8 @@ gdi_fallback:
       return nullptr;
    }
 
-   point graphics::OffsetWindowOrg(i32 nWidth, i32 nHeight)
+
+   pointd graphics::offset_window_org(double nWidth, double nHeight)
    {
 //      ::point point;
       //if(get_handle1() != nullptr && get_handle1() != get_handle2())
@@ -4698,28 +4634,30 @@ gdi_fallback:
       return nullptr;
    }
 
-   size graphics::SetWindowExt(i32 x, i32 y)
-   {
-      ::size size(0, 0);
-      //if(get_handle1() != nullptr && get_handle1() != get_handle2())
-      //   ::SetWindowExtEx(get_handle1(), x, y, &size);
-      //if(get_handle2() != nullptr)
-      //   ::SetWindowExtEx(get_handle2(), x, y, &size);
-      return size;
-   }
 
-   size graphics::ScaleWindowExt(i32 xNum, i32 xDenom, i32 yNum, i32 yDenom)
+   sized graphics::set_window_ext(double x, double y)
    {
-      ::size size(0, 0);
+      ::sized size(0, 0);
       //if(get_handle1() != nullptr && get_handle1() != get_handle2())
-      //   ::ScaleWindowExtEx(get_handle1(), xNum, xDenom, yNum, yDenom, &size);
+      //   ::SetWindowExtEx(get_handle1(), x, y, &::sized);
       //if(get_handle2() != nullptr)
-      //   ::ScaleWindowExtEx(get_handle2(), xNum, xDenom, yNum, yDenom, &size);
+      //   ::SetWindowExtEx(get_handle2(), x, y, &::sized);
       return size;
    }
 
 
-   i32 graphics::GetClipBox(RECT * prect)
+   sized graphics::scale_window_ext(double xNum, double xDenom, double yNum, double yDenom)
+   {
+      ::sized size(0, 0);
+      //if(get_handle1() != nullptr && get_handle1() != get_handle2())
+      //   ::ScaleWindowExtEx(get_handle1(), xNum, xDenom, yNum, yDenom, &::sized);
+      //if(get_handle2() != nullptr)
+      //   ::ScaleWindowExtEx(get_handle2(), xNum, xDenom, yNum, yDenom, &::sized);
+      return size;
+   }
+
+
+   i32 graphics::get_clip_box(::rectd * prect)
    {
 
       Gdiplus::Rect rect;
@@ -4747,21 +4685,21 @@ gdi_fallback:
 
                switch (shapea[i]->eshape())
                {
-               case e_shape_rect:
-                  intersect_clip(shapea[i]->shape < ::rect>());
-                  break;
+               //case e_shape_rect:
+               //   intersect_clip(shapea[i]->shape < ::rect>());
+               //   break;
                case e_shape_rectd:
                   intersect_clip(shapea[i]->shape < ::rectd>());
                   break;
-               case e_shape_oval:
-                  intersect_clip(shapea[i]->shape < ::oval>());
-                  break;
+               //case e_shape_oval:
+               //   intersect_clip(shapea[i]->shape < ::oval>());
+               //   break;
                case e_shape_ovald:
                   intersect_clip(shapea[i]->shape < ::ovald>());
                   break;
-               case e_shape_polygon:
-                  intersect_clip(shapea[i]->shape < ::polygon>());
-                  break;
+               //case e_shape_polygon:
+               //   intersect_clip(shapea[i]->shape < ::polygon>());
+               //   break;
                case e_shape_polygond:
                   intersect_clip(shapea[i]->shape < ::polygond>());
                   break;
@@ -4842,7 +4780,7 @@ gdi_fallback:
 
       ppath->AddArc(r, 0.f, 360.0f);
 
-      m_pgraphics->SetClip(ppath, CombineModeIntersect);
+      m_pgraphics->SetClip(ppath, Gdiplus::CombineModeIntersect);
 
       return ::success;
 
@@ -4864,7 +4802,7 @@ gdi_fallback:
 
       ppath->AddArc(r, 0.f, 360.0f);
 
-      m_pgraphics->SetClip(ppath, CombineModeIntersect);
+      m_pgraphics->SetClip(ppath, Gdiplus::CombineModeIntersect);
 
       return ::success;
 
@@ -4889,7 +4827,7 @@ gdi_fallback:
 
       ppath->AddPolygon(ppoint, (INT) polygon.get_count());
 
-      m_pgraphics->SetClip(ppath, CombineModeIntersect);
+      m_pgraphics->SetClip(ppath, Gdiplus::CombineModeIntersect);
 
       return ::success;
 
@@ -4914,7 +4852,7 @@ gdi_fallback:
 
       ppath->AddPolygon(ppoint, (INT) polygon.get_count());
 
-      m_pgraphics->SetClip(ppath, CombineModeIntersect);
+      m_pgraphics->SetClip(ppath, Gdiplus::CombineModeIntersect);
 
       return ::success;
 
@@ -4945,7 +4883,7 @@ gdi_fallback:
    //}
 
 
-   //i32 graphics::ExcludeClipRect(i32 x1, i32 y1, i32 x2, i32 y2)
+   //i32 graphics::ExcludeClipRect(double x1, i32 y1, double x2, i32 y2)
    //{
    //   i32 nRetVal = ERROR;
    //   //if(get_handle1() != nullptr && get_handle1() != get_handle2())
@@ -4967,7 +4905,7 @@ gdi_fallback:
    //   return nRetVal;
    //}
 
-   //i32 graphics::IntersectClipRect(i32 x1, i32 y1, i32 x2, i32 y2)
+   //i32 graphics::IntersectClipRect(double x1, i32 y1, double x2, i32 y2)
    //{
    //   i32 nRetVal = ERROR;
    //   //if(get_handle1() != nullptr && get_handle1() != get_handle2())
@@ -4992,14 +4930,14 @@ gdi_fallback:
    //   return SIMPLEREGION;
    //}
 
-   //i32 graphics::OffsetClipRgn(i32 x, i32 y)
+   //i32 graphics::OffsetClipRgn(double x, double y)
    //{
    //   i32 nRetVal = ERROR;
    //   return OffsetClipRgn({ x, y });
    //   return nRetVal;
    //}
 
-   //i32 graphics::OffsetClipRgn(const ::size & size)
+   //i32 graphics::OffsetClipRgn(const ::sized & size)
    //{
    //   i32 nRetVal = ERROR;
    //   //if(get_handle1() != nullptr && get_handle1() != get_handle2())
@@ -5128,7 +5066,46 @@ gdi_fallback:
    /////////////////////////////////////////////////////////////////////////////
    // Advanced Win32 GDI functions
 
-   bool graphics::ArcTo(i32 x1, i32 y1, i32 x2, i32 y2, i32 x3, i32 y3, i32 x4, i32 y4)
+   //bool graphics::ArcTo(double x1, i32 y1, double x2, i32 y2, double x3, double y3, double x4, double y4)
+   //{
+
+   //   if (::is_null(m_pgraphics))
+   //   {
+
+   //      return false;
+
+   //   }
+
+   //   //ASSERT(get_handle1() != nullptr);
+   //   //bool bResult = ::ArcTo(get_handle1(), x1, y1, x2, y2, x3, y3, x4, y4) != FALSE;
+   //   //if (get_handle1() != get_handle2())
+   //   //{
+   //   //   ::point point;
+   //   //   VERIFY(::GetCurrentPositionEx(get_handle1(), &point));
+   //   //   VERIFY(::MoveToEx(get_handle2(), point.x, point.y, nullptr));
+   //   //}
+   //   //return bResult;
+   //   __throw(not_implemented());
+
+   //   return false;
+   //}
+
+   //i32 graphics::SetArcDirection(i32 nArcDirection)
+   //{
+   //   //ASSERT(get_handle1() != nullptr);
+   //   //i32 nResult = 0;
+   //   //if (get_handle1() != get_handle2())
+   //   //   nResult = ::SetArcDirection(get_handle1(), nArcDirection);
+   //   //if (get_handle2() != nullptr)
+   //   //   nResult = ::SetArcDirection(get_handle2(), nArcDirection);
+   //   //return nResult;
+   //   __throw(not_implemented());
+
+   //   return -1;
+   //}
+
+
+   bool graphics::polydraw(const ::pointd * pPoints, const BYTE* lpTypes, count nCount)
    {
 
       if (::is_null(m_pgraphics))
@@ -5139,7 +5116,10 @@ gdi_fallback:
       }
 
       //ASSERT(get_handle1() != nullptr);
-      //bool bResult = ::ArcTo(get_handle1(), x1, y1, x2, y2, x3, y3, x4, y4) != FALSE;
+
+      //bool bResult = ::poly_draw(get_handle1(), pPoints, lpTypes, (int) nCount) != FALSE;
+
+
       //if (get_handle1() != get_handle2())
       //{
       //   ::point point;
@@ -5152,22 +5132,8 @@ gdi_fallback:
       return false;
    }
 
-   i32 graphics::SetArcDirection(i32 nArcDirection)
-   {
-      //ASSERT(get_handle1() != nullptr);
-      //i32 nResult = 0;
-      //if (get_handle1() != get_handle2())
-      //   nResult = ::SetArcDirection(get_handle1(), nArcDirection);
-      //if (get_handle2() != nullptr)
-      //   nResult = ::SetArcDirection(get_handle2(), nArcDirection);
-      //return nResult;
-      __throw(not_implemented());
 
-      return -1;
-   }
-
-
-   bool graphics::PolyDraw(const POINT * pPoints, const BYTE* lpTypes, count nCount)
+   bool graphics::polyline_to(const ::pointd * pPoints, count nCount)
    {
 
       if (::is_null(m_pgraphics))
@@ -5178,35 +5144,7 @@ gdi_fallback:
       }
 
       //ASSERT(get_handle1() != nullptr);
-
-      //bool bResult = ::PolyDraw(get_handle1(), pPoints, lpTypes, (int) nCount) != FALSE;
-
-
-      //if (get_handle1() != get_handle2())
-      //{
-      //   ::point point;
-      //   VERIFY(::GetCurrentPositionEx(get_handle1(), &point));
-      //   VERIFY(::MoveToEx(get_handle2(), point.x, point.y, nullptr));
-      //}
-      //return bResult;
-      __throw(not_implemented());
-
-      return false;
-   }
-
-
-   bool graphics::PolylineTo(const POINT * pPoints, count nCount)
-   {
-
-      if (::is_null(m_pgraphics))
-      {
-
-         return false;
-
-      }
-
-      //ASSERT(get_handle1() != nullptr);
-      //bool bResult = ::PolylineTo(get_handle1(), pPoints, (DWORD) nCount) != FALSE;
+      //bool bResult = ::polyline_to(get_handle1(), pPoints, (DWORD) nCount) != FALSE;
 
       //if (get_handle1() != get_handle2())
       //{
@@ -5247,7 +5185,7 @@ gdi_fallback:
    //}
 
    
-   bool graphics::PolyBezierTo(const POINT * ppoints, count nCount)
+   bool graphics::poly_bezier_to(const ::pointd * ppoints, count nCount)
    {
 
       if (::is_null(m_pgraphics))
@@ -5258,7 +5196,7 @@ gdi_fallback:
       }
 
       //ASSERT(get_handle1() != nullptr);
-      //bool bResult = ::PolyBezierTo(get_handle1(), pPoints, (DWORD) nCount) != FALSE;
+      //bool bResult = ::poly_bezier_to(get_handle1(), pPoints, (DWORD) nCount) != FALSE;
 
       //if (get_handle1() != get_handle2())
       //{
@@ -5381,7 +5319,7 @@ gdi_fallback:
 //         SetMapMode((i32)(i16)pMetaRec->rdParm[0]);
 //         break;
 //      case META_SETWINDOWEXT:
-//         SetWindowExt(
+//         set_window_ext(
 //         (i32)(i16)pMetaRec->rdParm[1], (i32)(i16)pMetaRec->rdParm[0]);
 //         break;
 //      case META_SETWINDOWORG:
@@ -5397,7 +5335,7 @@ gdi_fallback:
 //         (i32)(i16)pMetaRec->rdParm[1], (i32)(i16)pMetaRec->rdParm[0]);
 //         break;
 //      case META_SCALEWINDOWEXT:
-//         ScaleWindowExt(
+//         scale_window_ext(
 //         (i32)(i16)pMetaRec->rdParm[3], (i32)(i16)pMetaRec->rdParm[2],
 //         (i32)(i16)pMetaRec->rdParm[1], (i32)(i16)pMetaRec->rdParm[0]);
 //         break;
@@ -5504,31 +5442,33 @@ gdi_fallback:
    /////////////////////////////////////////////////////////////////////////////
    // Coordinate transforms
 
-   void graphics::LPtoDP(LPSIZE psize)
+   void graphics::LPtoDP(::sized * psize)
 
    {
-      ASSERT(__is_valid_address(psize, sizeof(const size &)));
+      ASSERT(__is_valid_address(psize, sizeof(const sized &)));
 
 
-      size sizeWinExt = GetWindowExt();
-      size sizeVpExt = GetViewportExt();
-      psize->cx = MulDiv(psize->cx, abs(sizeVpExt.cx), abs(sizeWinExt.cx));
+      sized sizeWinExt = GetWindowExt();
+      sized sizeVpExt = GetViewportExt();
+      psize->cx = psize->cx * abs(sizeVpExt.cx) / abs(sizeWinExt.cx);
 
-      psize->cy = MulDiv(psize->cy, abs(sizeVpExt.cy), abs(sizeWinExt.cy));
+      psize->cy = psize->cy * abs(sizeVpExt.cy) / abs(sizeWinExt.cy);
 
    }
 
-   void graphics::DPtoLP(LPSIZE psize)
 
+   void graphics::DPtoLP(::sized * psize)
    {
-      ASSERT(__is_valid_address(psize, sizeof(const size &)));
 
+      ASSERT(__is_valid_address(psize, sizeof(const sized &)));
 
-      size sizeWinExt = GetWindowExt();
-      size sizeVpExt = GetViewportExt();
-      psize->cx = MulDiv(psize->cx, abs(sizeWinExt.cx), abs(sizeVpExt.cx));
+      sized sizeWinExt = GetWindowExt();
 
-      psize->cy = MulDiv(psize->cy, abs(sizeWinExt.cy), abs(sizeVpExt.cy));
+      sized sizeVpExt = GetViewportExt();
+
+      psize->cx = psize->cx * abs(sizeWinExt.cx) / abs(sizeVpExt.cx);
+
+      psize->cy = psize->cy * abs(sizeWinExt.cy) / abs(sizeVpExt.cy);
 
    }
 
@@ -5568,7 +5508,7 @@ gdi_fallback:
 
       }
 
-      return gdiplus_draw_text(this, nullptr, str, rectParam, ealign, edrawtext, m_pfont, m_pfont->m_dFontWidth, m_pbrush, bMeasure) == Gdiplus::Status::Ok;
+      return gdiplus_draw_text(this, nullptr, str, rectParam, ealign, edrawtext, m_pfont, m_pfont->m_dFontWidth, m_pbrush, bMeasure);
 
    }
 
@@ -5600,7 +5540,7 @@ gdi_fallback:
    //}
 
 
-   bool graphics::draw_text_ex(const string & str,const rect & rectParam, const ::e_align & ealign, const ::e_draw_text & edrawtext)
+   bool graphics::draw_text_ex(const string & str,const rectd & rectParam, const ::e_align & ealign, const ::e_draw_text & edrawtext)
    {
 
       if (::is_null(m_pgraphics))
@@ -5637,22 +5577,22 @@ gdi_fallback:
    //}
 
 
-   bool graphics::draw_text_ex(const string& str, const ::rectd &rectParam, const ::e_align & ealign, const ::e_draw_text & edrawtext)
-   {
+   //bool graphics::draw_text_ex(const string& str, const ::rectd &rectParam, const ::e_align & ealign, const ::e_draw_text & edrawtext)
+   //{
 
-      if (::is_null(m_pgraphics))
-      {
+   //   if (::is_null(m_pgraphics))
+   //   {
 
-         return false;
+   //      return false;
 
-      }
+   //   }
 
-      return ::draw2d::graphics::draw_text_ex(str,rectParam,ealign, edrawtext);
+   //   return ::draw2d::graphics::draw_text_ex(str,rectParam,ealign, edrawtext);
 
-   }
+   //}
 
 
-   //::count graphics::GetEachCharTextExtent(array < size > & sizea, const string & str)
+   //::count graphics::GetEachCharTextExtent(array < ::sized > & sizea, const string & str)
    //{
    //   sizea.remove_all();
    //   strsize_array iaLen;
@@ -5790,7 +5730,7 @@ gdi_fallback:
 
          Gdiplus::PointF origin(0.f, 0.f);
 
-         m_pgraphics->MeasureCharacterRanges(text.m_wstr, (INT) cLength, m_pfont->get_os_data < Font * >(this), box, &strFormat, count, regiona);
+         m_pgraphics->MeasureCharacterRanges(text.m_wstr, (INT) cLength, m_pfont->get_os_data < Gdiplus::Font * >(this), box, &strFormat, count, regiona);
 
          Gdiplus::RectF rectBound;
 
@@ -5875,9 +5815,9 @@ gdi_fallback:
 
          wstring wstrRange = ::str::international::utf8_to_unicode(pszString, iIndex);
 
-         m_pgraphics->MeasureString(wstrRange, (i32)wstrRange.get_length(), m_pfont->get_os_data < Font * >(this), origin, Gdiplus::StringFormat::GenericTypographic(), &box);
+         m_pgraphics->MeasureString(wstrRange, (i32)wstrRange.get_length(), m_pfont->get_os_data < Gdiplus::Font * >(this), origin, Gdiplus::StringFormat::GenericTypographic(), &box);
 
-         return ::size((LONG)(box.Width  * m_pfont->m_dFontWidth), (LONG)(box.Height));
+         return ::sized((LONG)(box.Width  * m_pfont->m_dFontWidth), (LONG)(box.Height));
 
       }
 
@@ -5889,7 +5829,7 @@ gdi_fallback:
 
 #define new ACME_NEW
 
-      m_pgraphics->MeasureCharacterRanges(wstr, (INT) wstr.get_length(), m_pfont->get_os_data < Font * >(this), box, &strFormat, (INT) count, pCharRangeRegions);
+      m_pgraphics->MeasureCharacterRanges(wstr, (INT) wstr.get_length(), m_pfont->get_os_data < Gdiplus::Font * >(this), box, &strFormat, (INT) count, pCharRangeRegions);
 
       for(index i = 1; i < count; i++)
       {
@@ -5918,17 +5858,17 @@ gdi_fallback:
 
       if (pszString == nullptr || *pszString == '\0')
 
-         return size(0, 0);
+         return ::sized(0, 0);
 
       if (nCount < 0)
          nCount = strlen(pszString);
 
 
       if (iIndex > nCount)
-         return size(0, 0);
+         return ::sized(0, 0);
 
       if (iIndex < 0)
-         return size(0, 0);
+         return ::sized(0, 0);
 
       wstring wstr = ::str::international::utf8_to_unicode(pszString, nCount);
 
@@ -5955,9 +5895,9 @@ gdi_fallback:
 
          wstrRange = ::str::international::utf8_to_unicode(pszString, iIndex);
 
-         m_pgraphics->MeasureString(wstrRange, (i32)wstrRange.get_length(), m_pfont->get_os_data < Font *  >(this), origin, Gdiplus::StringFormat::GenericTypographic(), &box);
+         m_pgraphics->MeasureString(wstrRange, (i32)wstrRange.get_length(), m_pfont->get_os_data < Gdiplus::Font *  >(this), origin, Gdiplus::StringFormat::GenericTypographic(), &box);
 
-         return ::size((LONG)(box.Width  * m_pfont->m_dFontWidth), (LONG) (box.Height));
+         return ::sized((LONG)(box.Width  * m_pfont->m_dFontWidth), (LONG) (box.Height));
 
       }
 
@@ -5969,7 +5909,7 @@ gdi_fallback:
 
 #define new ACME_NEW
 
-      m_pgraphics->MeasureCharacterRanges(wstr, (INT)wstr.get_length(), m_pfont->get_os_data < Font * >(this), box, &strFormat, (INT)count, pCharRangeRegions);
+      m_pgraphics->MeasureCharacterRanges(wstr, (INT)wstr.get_length(), m_pfont->get_os_data < Gdiplus::Font * >(this), box, &strFormat, (INT)count, pCharRangeRegions);
 
       for (index i = 1; i < count; i++)
       {
@@ -6027,7 +5967,7 @@ gdi_fallback:
                                | Gdiplus::StringFormatFlagsNoClip | Gdiplus::StringFormatFlagsMeasureTrailingSpaces
                               );
 
-      auto pfont = m_pfont->get_os_data < Font * >(this);
+      auto pfont = m_pfont->get_os_data < Gdiplus::Font * >(this);
 
       if (::is_null(pfont))
       {
@@ -6045,43 +5985,43 @@ gdi_fallback:
       return text.m_size;
 
       /*if(get_handle2() == nullptr)
-         return size(0, 0);
-      ::size size;
+         return ::sized(0, 0);
+      ::sized ::sized;
       string str(pszString, nCount);
 
       wstring text.m_wstr = ::str::international::utf8_to_unicode(str);
-      if(!::GetTextExtentPoint32W(get_handle2(), text.m_wstr, (i32)text.m_wstr.get_length(), &size))
+      if(!::GetTextExtentPoint32W(get_handle2(), text.m_wstr, (i32)text.m_wstr.get_length(), &::sized))
       {
-         return const ::size & size(0, 0);
+         return const ::sized & size(0, 0);
       }
-      return size;*/
+      return ::sized;*/
    }
 
    //sized graphics::GetTextExtent(const string & str)
    //{
    //   /*      if(get_handle2() == nullptr)
-   //            return size(0, 0);
-   //         ::size size;
+   //            return ::sized(0, 0);
+   //         ::sized ::sized;
    //         wstring text.m_wstr = ::str::international::utf8_to_unicode(str);
-   //         if(!::GetTextExtentPoint32W(get_handle2(), text.m_wstr, (i32)text.m_wstr.get_length(), &size))
+   //         if(!::GetTextExtentPoint32W(get_handle2(), text.m_wstr, (i32)text.m_wstr.get_length(), &::sized))
    //         {
-   //            return const ::size & size(0, 0);
+   //            return const ::sized & size(0, 0);
    //         }
-   //         return size;*/
+   //         return ::sized;*/
 
-   //   //class sized size;
+   //   //class sized ::sized;
 
-   //   //if(!GetTextExtent(size, str, (i32) str.get_length(), (i32) str.get_length()))
-   //   //   return const ::size & size(0, 0);
+   //   //if(!GetTextExtent(::sized, str, (i32) str.get_length(), (i32) str.get_length()))
+   //   //   return const ::sized & size(0, 0);
 
    //   return GetTextExtent(str);
 
-   //   //return const ::size & size(0, 0);
+   //   //return const ::sized & size(0, 0);
 
-   //   //return const ::size & size((long) size.cx, (long) size.cy);
+   //   //return const ::sized & size((long) size.cx, (long) size.cy);
 
    //   /*if(m_pgraphics == nullptr)
-   //      return size(0, 0);
+   //      return ::sized(0, 0);
 
    //   wstring text.m_wstr = ::str::international::utf8_to_unicode(str);
 
@@ -6091,7 +6031,7 @@ gdi_fallback:
 
 
    //   if(m_pgraphics == nullptr)
-   //      return size(0, 0);
+   //      return ::sized(0, 0);
 
    //   try
    //   {
@@ -6099,24 +6039,24 @@ gdi_fallback:
    //   }
    //   catch(...)
    //   {
-   //      return size(0, 0);
+   //      return ::sized(0, 0);
    //   }
 
-   //   return size((i64) (box.Width * m_fontxyz.m_dFontWidth), (i64) box.Height);*/
+   //   return ::sized((i64) (box.Width * m_fontxyz.m_dFontWidth), (i64) box.Height);*/
 
    //}
 
 
-   size graphics::GetOutputTextExtent(const char * pszString, strsize nCount)
+   ::sized graphics::GetOutputTextExtent(const char * pszString, strsize nCount)
    {
 
       //ASSERT(get_handle1() != nullptr);
-      //::size size;
+      //::sized ::sized;
       //string str(pszString, nCount);
 
       //wstring text.m_wstr = ::str::international::utf8_to_unicode(str);
-      //VERIFY(::GetTextExtentPoint32W(get_handle1(), text.m_wstr, (i32)text.m_wstr.get_length(), &size));
-      //return size;
+      //VERIFY(::GetTextExtentPoint32W(get_handle1(), text.m_wstr, (i32)text.m_wstr.get_length(), &::sized));
+      //return ::sized;
 
       return nullptr;
       
@@ -6126,25 +6066,25 @@ gdi_fallback:
    }
 
 
-   size graphics::GetOutputTextExtent(const string & str)
+   ::sized graphics::GetOutputTextExtent(const string & str)
    {
 
       //ASSERT(get_handle1() != nullptr);
 
-      //::size size;
+      //::sized ::sized;
 
       //wstring text.m_wstr = ::str::international::utf8_to_unicode(str);
 
-      //VERIFY(::GetTextExtentPoint32W(get_handle1(), text.m_wstr, (i32)text.m_wstr.get_length(), &size));
+      //VERIFY(::GetTextExtentPoint32W(get_handle1(), text.m_wstr, (i32)text.m_wstr.get_length(), &::sized));
 
-      //return size;
+      //return ::sized;
 
       return nullptr;
 
    }
 
 
-   bool graphics::GetTextExtent(sized & size, const char * pszString, strsize nCount, strsize iIndex)
+   bool graphics::GetTextExtent(::sized & size, const char * pszString, strsize nCount, strsize iIndex)
    {
 
       if (::is_null(m_pgraphics))
@@ -6237,7 +6177,7 @@ gdi_fallback:
 
       Gdiplus::RectF layoutRect(0, 0, 10000, 10000);
       
-      Gdiplus::Status status = m_pgraphics->MeasureString(wstr, (INT) nCount, m_pfont->get_os_data < Font * >(this), origin, &layoutRect );
+      Gdiplus::Status status = m_pgraphics->MeasureString(wstr, (INT) nCount, m_pfont->get_os_data < Gdiplus::Font * >(this), origin, &layoutRect );
 
       // Prevent clipping
 
@@ -6246,7 +6186,7 @@ gdi_fallback:
 
       //m_pgraphics->MeasureString(text.m_wstr, (i32) text.m_wstr.get_length(), m_pfont->get_os_data < Font * >(this), origin, Gdiplus::StringFormat::GenericTypographic(), &box);
 
-      m_pgraphics->MeasureCharacterRanges(wstr, (INT) nCount, m_pfont->get_os_data < Font * >(this), layoutRect, &strFormat, (INT) count, pCharRangeRegions);
+      m_pgraphics->MeasureCharacterRanges(wstr, (INT) nCount, m_pfont->get_os_data < Gdiplus::Font * >(this), layoutRect, &strFormat, (INT) count, pCharRangeRegions);
 
       Gdiplus::Region * pregion = nullptr;
 
@@ -6286,7 +6226,7 @@ gdi_fallback:
    }
 
    
-   bool graphics::GetTextExtent(sized & size, const char * pszString, strsize nCount)
+   bool graphics::GetTextExtent(::sized & size, const char * pszString, strsize nCount)
    {
 
       if (::is_null(m_pgraphics))
@@ -6313,7 +6253,7 @@ gdi_fallback:
       try
       {
 
-         if (m_pgraphics->MeasureString(wstr, (i32)wstr.get_length(), m_pfont->get_os_data < Font * >(this), origin, &strFormat, &box) != Gdiplus::Status::Ok)
+         if (m_pgraphics->MeasureString(wstr, (i32)wstr.get_length(), m_pfont->get_os_data < Gdiplus::Font * >(this), origin, &strFormat, &box) != Gdiplus::Status::Ok)
          {
 
             bOk = false;
@@ -6338,7 +6278,7 @@ gdi_fallback:
    }
 
 
-   bool graphics::GetTextExtent(sized & size, const string & str)
+   bool graphics::GetTextExtent(::sized & size, const string & str)
    {
 
       if (::is_null(m_pgraphics) && is_null(m_pfont))
@@ -6361,7 +6301,7 @@ gdi_fallback:
       try
       {
 
-         if (m_pgraphics->MeasureString(wstr, (i32)wstr.get_length(), m_pfont->get_os_data < Font * >(this), origin, &box) != Gdiplus::Status::Ok)
+         if (m_pgraphics->MeasureString(wstr, (i32)wstr.get_length(), m_pfont->get_os_data < Gdiplus::Font * >(this), origin, &box) != Gdiplus::Status::Ok)
          {
 
             bOk = false;
@@ -6392,43 +6332,42 @@ gdi_fallback:
    }
 
 
-   void graphics::fill_rect(const ::rect & rect, const ::color & color)
+   //bool graphics::fill_rect(const ::rectd & rect, const ::color & color)
+   //{
 
-   {
+   //   try
+   //   {
 
-      try
-      {
+   //      if(m_pgraphics == nullptr)
+   //         return;
 
-         if(m_pgraphics == nullptr)
-            return;
+   //      auto emodeOld = m_pgraphics->GetSmoothingMode();
 
-         auto emodeOld = m_pgraphics->GetSmoothingMode();
+   //      //if(emodeOld != Gdiplus::SmoothingModeNone)
+   //      //{
 
-         //if(emodeOld != Gdiplus::SmoothingModeNone)
-         //{
+   //      //   m_pgraphics->SetSmoothingMode(Gdiplus::SmoothingModeNone);
 
-         //   m_pgraphics->SetSmoothingMode(Gdiplus::SmoothingModeNone);
+   //      //}
 
-         //}
+   //      Gdiplus::SolidBrush b(Gdiplus::Color(color.m_iA, color.m_iR, color.m_iG, color.m_iB));
 
-         Gdiplus::SolidBrush b(Gdiplus::Color(color.m_iA, color.m_iR, color.m_iG, color.m_iB));
+   //      m_pgraphics->FillRectangle(&b, rect.left, rect.top, rect.width(), rect.height());
 
-         m_pgraphics->FillRectangle(&b, rect.left, rect.top, rect.width(), rect.height());
+   //      //if (emodeOld != Gdiplus::SmoothingModeNone)
+   //      //{
 
-         //if (emodeOld != Gdiplus::SmoothingModeNone)
-         //{
+   //      //   m_pgraphics->SetSmoothingMode(emodeOld);
 
-         //   m_pgraphics->SetSmoothingMode(emodeOld);
+   //      //}
 
-         //}
+   //   }
+   //   catch(...)
+   //   {
 
-      }
-      catch(...)
-      {
+   //   }
 
-      }
-
-   }
+   //}
 
 
    bool graphics::TextOutRaw(double x, double y, const ::string & str)
@@ -6455,7 +6394,7 @@ gdi_fallback:
 
       }
 
-      Font * pfont = m_pfont->get_os_data < Font * > (this);
+      Gdiplus::Font * pfont = m_pfont->get_os_data < Gdiplus::Font * > (this);
 
       auto & text = m_pfont->m_mapText[str];
 
@@ -6473,7 +6412,7 @@ gdi_fallback:
 
       }
 
-      Brush* pbrush = nullptr;
+      Gdiplus::Brush* pbrush = nullptr;
       
       if (::is_null(m_ppath))
       {
@@ -6485,7 +6424,7 @@ gdi_fallback:
 
          }
 
-         pbrush = m_pbrush->get_os_data < Brush * >(this);
+         pbrush = m_pbrush->get_os_data <  Gdiplus::Brush * >(this);
 
          if (pbrush == nullptr)
          {
@@ -6629,7 +6568,7 @@ gdi_fallback:
    }
 
 
-   bool graphics::line_to(const ::pointd & point)
+   bool graphics::line_to(double x, double y)
    {
 
       if (::is_null(m_pgraphics))
@@ -6644,68 +6583,69 @@ gdi_fallback:
       if(m_ppen.cast < ::draw2d_gdiplus::pen >()->m_egdiplusalign != Gdiplus::PenAlignment::PenAlignmentCenter)
       {
 
-         m_ppen->get_os_data < Pen * >(this)->SetAlignment(Gdiplus::PenAlignment::PenAlignmentCenter);
+         m_ppen->get_os_data < Gdiplus::Pen * >(this)->SetAlignment(Gdiplus::PenAlignment::PenAlignmentCenter);
 
          m_ppen.cast < ::draw2d_gdiplus::pen >()->m_egdiplusalign = Gdiplus::PenAlignment::PenAlignmentCenter;
 
       }
 
-      m_pgraphics->DrawLine(m_ppen->get_os_data < Pen * >(this), Gdiplus::PointF((Gdiplus::REAL) m_point.x, (Gdiplus::REAL)  m_point.y), Gdiplus::PointF((Gdiplus::REAL) point.x, (Gdiplus::REAL) point.y));
+      m_pgraphics->DrawLine(m_ppen->get_os_data < Gdiplus::Pen * >(this), Gdiplus::PointF((Gdiplus::REAL) m_point.x, (Gdiplus::REAL)  m_point.y), Gdiplus::PointF((Gdiplus::REAL) x, (Gdiplus::REAL) y));
 
 
-      m_point = point;
+      m_point.x = x;
+      m_point.y = y;
 
 
       return true;
 
    }
 
-   bool graphics::line_to(const ::point & point)
+   //bool graphics::line_to(double x, double y)
 
-   {
+   //{
 
-      sync_lock sl(mutex());
+   //   sync_lock sl(mutex());
 
-      if(m_ppen.cast < ::draw2d_gdiplus::pen >()->m_egdiplusalign != Gdiplus::PenAlignment::PenAlignmentCenter)
-      {
+   //   if(m_ppen.cast < ::draw2d_gdiplus::pen >()->m_egdiplusalign != Gdiplus::PenAlignment::PenAlignmentCenter)
+   //   {
 
-         //m_ppen->get_os_data < Pen * >(this)->SetAlignment(Gdiplus::PenAlignment::PenAlignmentCenter);
+   //      //m_ppen->get_os_data < Pen * >(this)->SetAlignment(Gdiplus::PenAlignment::PenAlignmentCenter);
 
-         m_ppen->m_epenalign = ::draw2d::e_pen_align_center;
+   //      m_ppen->m_epenalign = ::draw2d::e_pen_align_center;
 
-         m_ppen->set_modified();
+   //      m_ppen->set_modified();
 
-         //m_ppen.cast < ::draw2d_gdiplus::pen >()-
+   //      //m_ppen.cast < ::draw2d_gdiplus::pen >()-
 
-      }
+   //   }
 
-      auto ppen = m_ppen->get_os_data < Pen* >(this);
+   //   auto ppen = m_ppen->get_os_data < Pen* >(this);
 
-      if (fmod(m_point.x, 1.0) != 0.0 || fmod(m_point.y, 1.0) != 0)
-      {
+   //   if (fmod(m_point.x, 1.0) != 0.0 || fmod(m_point.y, 1.0) != 0)
+   //   {
 
-         m_pgraphics->DrawLine(ppen, Gdiplus::PointF((Gdiplus::REAL)m_point.x, (Gdiplus::REAL)m_point.y), Gdiplus::PointF((Gdiplus::REAL)point.x, (Gdiplus::REAL) point.y));
-
-
-      }
-      else
-      {
-
-         m_pgraphics->DrawLine(ppen, Gdiplus::Point((INT)m_point.x, (INT)m_point.y), Gdiplus::Point((INT)point.x, (INT)point.y));
+   //      m_pgraphics->DrawLine(ppen, Gdiplus::PointF((Gdiplus::REAL)m_point.x, (Gdiplus::REAL)m_point.y), Gdiplus::PointF((Gdiplus::REAL)point.x, (Gdiplus::REAL) point.y));
 
 
-      }
+   //   }
+   //   else
+   //   {
 
-      m_point.x = point.x;
-
-      m_point.y = point.y;
-
-      return true;
-
-   }
+   //      m_pgraphics->DrawLine(ppen, Gdiplus::Point((INT)m_point.x, (INT)m_point.y), Gdiplus::Point((INT)point.x, (INT)point.y));
 
 
-   bool graphics::draw_line(const ::pointd & point1, const ::pointd & point2, ::draw2d::pen * ppenParam)
+   //   }
+
+   //   m_point.x = point.x;
+
+   //   m_point.y = point.y;
+
+   //   return true;
+
+   //}
+
+
+   bool graphics::draw_line(double x1, double y1, double x2, double y2, ::draw2d::pen * ppenParam)
    {
 
       if (::is_null(ppenParam))
@@ -6717,44 +6657,46 @@ gdi_fallback:
 
       sync_lock sl(mutex());
 
-      auto ppen = ppenParam->get_os_data < Pen * >(this);
+      auto ppen = ppenParam->get_os_data < Gdiplus::Pen * >(this);
 
 //      ppen->SetAlignment(Gdiplus::PenAlignment::PenAlignmentCenter);
 
-      m_pgraphics->DrawLine(ppen, Gdiplus::PointF((Gdiplus::REAL) point1.x, (Gdiplus::REAL) point1.y), Gdiplus::PointF((Gdiplus::REAL) point2.x, (Gdiplus::REAL) point2.y));
+      m_pgraphics->DrawLine(ppen, Gdiplus::PointF((Gdiplus::REAL) x1, (Gdiplus::REAL) y1), Gdiplus::PointF((Gdiplus::REAL) x2, (Gdiplus::REAL) y2));
 
-      m_point = point2;
+      m_point.x = x2;
 
-      return true;
-
-   }
-
-
-   bool graphics::draw_line(const ::point & point1, const ::point & point2, ::draw2d::pen * ppenParam)
-   {
-
-      sync_lock sl(mutex());
-
-      auto ppen = (Pen *) ppenParam->get_os_data(this);
-
-      if (!ppen)
-      {
-
-         return false;
-
-      }
-
-      ppen->SetAlignment(Gdiplus::PenAlignment::PenAlignmentCenter);
-
-      m_pgraphics->DrawLine(ppen, Gdiplus::Point(point1.x, point1.y), Gdiplus::Point(point2.x, point2.y));
-
-      m_point.x = point2.x;
-
-      m_point.y = point2.y;
+      m_point.y = y2;
 
       return true;
 
    }
+
+
+   //bool graphics::draw_line(double x1, double y1, double x2, double y2, ::draw2d::pen * ppenParam)
+   //{
+
+   //   sync_lock sl(mutex());
+
+   //   auto ppen = (Gdiplus::Pen *) ppenParam->get_os_data(this);
+
+   //   if (!ppen)
+   //   {
+
+   //      return false;
+
+   //   }
+
+   //   ppen->SetAlignment(Gdiplus::PenAlignment::PenAlignmentCenter);
+
+   //   m_pgraphics->DrawLine(ppen, Gdiplus::Point(point1.x, point1.y), Gdiplus::Point(point2.x, point2.y));
+
+   //   m_point.x = point2.x;
+
+   //   m_point.y = point2.y;
+
+   //   return true;
+
+   //}
 
 
    bool graphics::set_smooth_mode(::draw2d::e_smooth_mode esmoothmode)
@@ -7189,7 +7131,7 @@ gdi_fallback:
    }
 
 
-   bool graphics::blur(bool bExpand,double dRadius,const rect & rectParam)
+   bool graphics::blur(bool bExpand,double dRadius,const rectd & rectParam)
    {
 
       // Commented Out for Running in cosan machine running Windows 2008
@@ -7341,7 +7283,7 @@ gdi_fallback:
 
          ::rect rectIntersect(m_pointAlphaBlend, m_pimageAlphaBlend->size());
 
-         const ::size & size = ::size(GetTextExtent(str));
+         const ::sized & size = ::sized(GetTextExtent(str));
 
          //size.cx = size.cx * 110 / 100;
 
@@ -7369,7 +7311,7 @@ gdi_fallback:
 
             pimage1->blend2(nullptr, m_pimageAlphaBlend, point((int)max(0, x - m_pointAlphaBlend.x), (int)max(0, y - m_pointAlphaBlend.y)), rectText.size(), 255);
 
-            draw_raw({ ::point((LONG)x, (LONG) y), rectText.size() }, pimage1->get_graphics());
+            _draw_raw({ ::point((LONG)x, (LONG) y), rectText.size() }, pimage1->get_graphics());
 
             return true;
 
@@ -7415,9 +7357,9 @@ gdi_fallback:
    //      }
 
 
-   //      ::rect rectIntersect(m_pointAlphaBlend, m_pimageAlphaBlend->size());
+   //      ::rect rectIntersect(m_pointAlphaBlend, m_pimageAlphaBlend->::sized());
 
-   //      ::rect rectBlt(point((i64)x, (i64)y), size(nWidth, nHeight));
+   //      ::rect rectBlt(point((i64)x, (i64)y), ::sized(nWidth, nHeight));
 
    //      if (rectIntersect.intersect(rectIntersect, rectBlt))
    //      {
@@ -7446,7 +7388,7 @@ gdi_fallback:
 
    //         //   y += pointOff.y;
 
-   //         //   return m_pimage->blend(::point(x, y), pgraphicsSrc->m_pimage, ::point(xSrc, ySrc), m_pimageAlphaBlend, point(m_pointAlphaBlend.x - x, m_pointAlphaBlend.y - y), rectBlt.size());
+   //         //   return m_pimage->blend(::point(x, y), pgraphicsSrc->m_pimage, ::point(xSrc, ySrc), m_pimageAlphaBlend, point(m_pointAlphaBlend.x - x, m_pointAlphaBlend.y - y), rectBlt.::sized());
 
    //         //}
    //         //else
@@ -7463,7 +7405,7 @@ gdi_fallback:
 
    //            }
    //            
-   //            estatus = pimage1->create(rectBlt.size());
+   //            estatus = pimage1->create(rectBlt.::sized());
 
    //            if (!estatus)
    //            {
@@ -7474,10 +7416,10 @@ gdi_fallback:
 
    //            pimage1->g()->set_alpha_mode(::draw2d::alpha_mode_set);
 
-   //            if (!pimage1->from(nullptr, pgraphicsSrc, ::point(xSrc, ySrc), rectBlt.size()))
+   //            if (!pimage1->from(nullptr, pgraphicsSrc, ::point(xSrc, ySrc), rectBlt.::sized()))
    //               return false;
 
-   //            pimage1->blend2(::point(), m_pimageAlphaBlend, point(x - m_pointAlphaBlend.x, y - m_pointAlphaBlend.y), rectBlt.size(), 255);
+   //            pimage1->blend2(::point(), m_pimageAlphaBlend, point(x - m_pointAlphaBlend.x, y - m_pointAlphaBlend.y), rectBlt.::sized(), 255);
 
    //            BitBltRaw(x, y, nWidth, nHeight, pimage1->get_graphics(), 0, 0, dwRop);
 
@@ -7524,7 +7466,7 @@ gdi_fallback:
 
       Gdiplus::Matrix m;
 
-      m.SetElements((REAL) matrix.a1, (REAL)matrix.a2, (REAL)matrix.b1, (REAL)matrix.b2, (REAL)matrix.c1, (REAL)matrix.c2);
+      m.SetElements((Gdiplus::REAL) matrix.a1, (Gdiplus::REAL)matrix.a2, (Gdiplus::REAL)matrix.b1, (Gdiplus::REAL)matrix.b2, (Gdiplus::REAL)matrix.c1, (Gdiplus::REAL)matrix.c2);
 
       return m_pgraphics->SetTransform(&m) == Gdiplus::Ok;
 

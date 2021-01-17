@@ -2513,7 +2513,7 @@ namespace draw2d_gdi
    //}
 
 
-   bool image::_map(bool bApplyAlphaTransform)
+   bool image::map(bool bApplyAlphaTransform)
    {
 
       if (m_bMapped)

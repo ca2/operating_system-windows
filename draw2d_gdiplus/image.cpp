@@ -41,7 +41,7 @@ namespace draw2d_gdiplus
    }
 
 
-   bool image::_map(bool)
+   bool image::map(bool)
    {
 
       return true;
@@ -466,7 +466,7 @@ namespace draw2d_gdiplus
       else
       {
 
-         pimageDst->g()->draw({rectDst.top_left(), size }, pimageSrc->g(), pointSrc);
+         pimageDst->g()->draw(::rectd(rectDst.top_left(), size ), pimageSrc->g(), pointSrc);
 
       }
 

@@ -107,7 +107,7 @@ namespace draw2d_gdiplus
             if (m_pimage->is_ok())
             {
 
-               Gdiplus::Image * pimage = m_pimage->get_bitmap()->get_os_data <Bitmap * >();
+               Gdiplus::Image * pimage = m_pimage->get_bitmap()->get_os_data < Gdiplus::Bitmap * >();
 
                if (::is_set(pimage))
                {

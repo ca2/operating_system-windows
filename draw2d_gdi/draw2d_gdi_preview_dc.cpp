@@ -452,7 +452,7 @@ size preview_dc::ScaleViewportExt(int xNum, int xDenom, int yNum, int yDenom)
    return sizeExtOld;
 }
 
-size preview_dc::SetWindowExt(int x, int y)
+size preview_dc::set_window_ext(int x, int y)
 {
    ASSERT(get_handle2() != nullptr);
    size sizeExtOld;
@@ -461,7 +461,7 @@ size preview_dc::SetWindowExt(int x, int y)
    return sizeExtOld;
 }
 
-size preview_dc::ScaleWindowExt(int xNum, int xDenom, int yNum, int yDenom)
+size preview_dc::scale_window_ext(int xNum, int xDenom, int yNum, int yDenom)
 {
    ASSERT(get_handle2() != nullptr);
    size sizeExtOld;

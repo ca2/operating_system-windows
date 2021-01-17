@@ -138,6 +138,8 @@
 
 
 
+#define MESSAGE_WINDOW_PARENT HWND_MESSAGE
+
 
 #ifndef _DEBUG
 #pragma warning(disable: 4101)  // unreferenced local function has been removed
@@ -186,13 +188,13 @@
 #endif
 
 
-#define FONT_SANS "Segoe UI"
-#define FONT_SERIF "Times New Roman"
-#define FONT_MONO "Courier New"
-#define FONT_SANS_EX "Geneva"
-#define FONT_SERIF_EX "Palatino Linotype"
-#define FONT_SANS_FX "Tahoma"
-#define FONT_SERIF_FX "Georgia"
+// #define FONT_SANS "Segoe UI"
+// #define FONT_SERIF "Times New Roman"
+// #define FONT_MONO "Courier New"
+// #define FONT_SANS_EX "Geneva"
+// #define FONT_SERIF_EX "Palatino Linotype"
+// #define FONT_SANS_FX "Tahoma"
+// #define FONT_SERIF_FX "Georgia"
 
 
 

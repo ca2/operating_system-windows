@@ -466,10 +466,10 @@ namespace draw2d_gdi
    }
 
 
-   ::size graphics::SetWindowExt(const ::size & size)
+   ::size graphics::set_window_ext(const ::size & size)
    {
 
-      return SetWindowExt(size.cx, size.cy);
+      return set_window_ext(size.cx, size.cy);
 
    }
 
@@ -612,12 +612,12 @@ namespace draw2d_gdi
    }
 
 
-   bool graphics::Polyline(const POINT* lpPoints, count nCount)
+   bool graphics::polyline(const POINT* lpPoints, count nCount)
    {
 
       ASSERT(get_handle1() != nullptr);
 
-      return ::Polyline(get_handle1(), lpPoints, (int) nCount) != FALSE;
+      return ::polyline(get_handle1(), lpPoints, (int) nCount) != FALSE;
 
    }
 
@@ -2215,12 +2215,12 @@ namespace draw2d_gdi
 
 
 
-   bool graphics::PolyPolyline(const POINT* lpPoints, const INT * lpPolyPoints, count nCount)
+   bool graphics::poly_polyline(const POINT* lpPoints, const INT * lpPolyPoints, count nCount)
    {
 
       ASSERT(get_handle1() != nullptr);
 
-      return ::PolyPolyline(get_handle1(), lpPoints, (const DWORD *) lpPolyPoints, (int) nCount) != FALSE;
+      return ::poly_polyline(get_handle1(), lpPoints, (const DWORD *) lpPolyPoints, (int) nCount) != FALSE;
 
    }
 
@@ -2348,12 +2348,12 @@ namespace draw2d_gdi
    }
 
 
-   bool graphics::PolyBezier(const POINT* lpPoints, count nCount)
+   bool graphics::poly_bezier(const POINT* lpPoints, count nCount)
    {
 
       ASSERT(get_handle1() != nullptr);
 
-      return ::PolyBezier(get_handle1(), lpPoints, (DWORD) nCount) != FALSE;
+      return ::poly_bezier(get_handle1(), lpPoints, (DWORD) nCount) != FALSE;
 
    }
 
@@ -3518,7 +3518,7 @@ namespace draw2d_gdi
    //   {
    //      // brushes are different -- erase old region first
    //      SelectClipRgn(rgnLast);
-   //      GetClipBox(&rect);
+   //      get_clip_box(&rect);
    //      pBrushOld = SelectObject(pBrushLast);
    //      PatBlt(rect.left, rect.top, rect.width(), rect.height(), PATINVERT);
    //      SelectObject(pBrushOld);
@@ -3527,7 +3527,7 @@ namespace draw2d_gdi
 
    //   // draw into the update/new region
    //   SelectClipRgn(rgnUpdate->get_os_data() != nullptr ? rgnUpdate : rgnNew);
-   //   GetClipBox(&rect);
+   //   get_clip_box(&rect);
    //   pBrushOld = SelectObject(pBrush);
    //   PatBlt(rect.left, rect.top, rect.width(), rect.height(), PATINVERT);
 
@@ -4129,7 +4129,7 @@ namespace draw2d_gdi
       return point;
    }
 
-   point graphics::OffsetWindowOrg(int nWidth, int nHeight)
+   point graphics::offset_window_org(int nWidth, int nHeight)
    {
       ::point point;
       if(get_handle1() != nullptr && get_handle1() != get_handle2())
@@ -4139,7 +4139,7 @@ namespace draw2d_gdi
       return point;
    }
 
-   size graphics::SetWindowExt(int x, int y)
+   size graphics::set_window_ext(int x, int y)
    {
       size size(0, 0);
       if(get_handle1() != nullptr && get_handle1() != get_handle2())
@@ -4149,7 +4149,7 @@ namespace draw2d_gdi
       return size;
    }
 
-   size graphics::ScaleWindowExt(int xNum, int xDenom, int yNum, int yDenom)
+   size graphics::scale_window_ext(int xNum, int xDenom, int yNum, int yDenom)
    {
       size size(0, 0);
       if(get_handle1() != nullptr && get_handle1() != get_handle2())
@@ -4160,10 +4160,10 @@ namespace draw2d_gdi
    }
 
    
-   int graphics::GetClipBox(RECT * prect)
+   int graphics::get_clip_box(RECT * prect)
    {
       
-      return ::GetClipBox(get_handle1(), prect);
+      return ::get_clip_box(get_handle1(), prect);
 
    }
 
@@ -4440,12 +4440,12 @@ namespace draw2d_gdi
    }
 
 
-   bool graphics::PolylineTo(const POINT* lpPoints, count nCount)
+   bool graphics::polyline_to(const POINT* lpPoints, count nCount)
    {
 
       ASSERT(get_handle1() != nullptr);
 
-      bool bResult = ::PolylineTo(get_handle1(), lpPoints, (int) nCount) != FALSE;
+      bool bResult = ::polyline_to(get_handle1(), lpPoints, (int) nCount) != FALSE;
 
       if (get_handle1() != get_handle2())
       {
@@ -4473,12 +4473,12 @@ namespace draw2d_gdi
       return bResult;
    }
 
-   bool graphics::PolyBezierTo(const POINT* lpPoints, strsize nCount)
+   bool graphics::poly_bezier_to(const POINT* lpPoints, strsize nCount)
    {
 
       ASSERT(get_handle1() != nullptr);
 
-      bool bResult = ::PolyBezierTo(get_handle1(), lpPoints, (int) nCount) != FALSE;
+      bool bResult = ::poly_bezier_to(get_handle1(), lpPoints, (int) nCount) != FALSE;
 
       if (get_handle1() != get_handle2())
       {
@@ -4545,7 +4545,7 @@ namespace draw2d_gdi
          (dynamic_cast<::draw2d_gdi::graphics * >(pgraphics))->SetMapMode((int)(short)pMetaRec->rdParm[0]);
          break;
       case META_SETWINDOWEXT:
-         (dynamic_cast<::draw2d_gdi::graphics * >(pgraphics))->SetWindowExt(
+         (dynamic_cast<::draw2d_gdi::graphics * >(pgraphics))->set_window_ext(
          (int)(short)pMetaRec->rdParm[1], (int)(short)pMetaRec->rdParm[0]);
          break;
       case META_SETWINDOWORG:
@@ -4561,7 +4561,7 @@ namespace draw2d_gdi
          (int)(short)pMetaRec->rdParm[1], (int)(short)pMetaRec->rdParm[0]);
          break;
       case META_SCALEWINDOWEXT:
-         (dynamic_cast<::draw2d_gdi::graphics * >(pgraphics))->ScaleWindowExt(
+         (dynamic_cast<::draw2d_gdi::graphics * >(pgraphics))->scale_window_ext(
          (int)(short)pMetaRec->rdParm[3], (int)(short)pMetaRec->rdParm[2],
          (int)(short)pMetaRec->rdParm[1], (int)(short)pMetaRec->rdParm[0]);
          break;

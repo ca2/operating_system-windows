@@ -476,7 +476,7 @@ namespace draw2d_gdiplus
 
          auto pdrawdgdiplusfont = __font(pfont);
 
-         auto pfont = pdrawdgdiplusfont->get_os_data < Font * > (pgraphics);
+         auto pfont = pdrawdgdiplusfont->get_os_data < Gdiplus::Font * > (pgraphics);
 
          INT iStyle = pfont->GetStyle();
 
@@ -723,7 +723,7 @@ namespace draw2d_gdiplus
 
       return ::draw2d::path::contains(pgraphics, point);
 
-      auto pospath = get_os_data <GraphicsPath *>(pgraphics);
+      auto pospath = get_os_data < Gdiplus::GraphicsPath *>(pgraphics);
 
       if (is_null(pospath))
       {

@@ -23,7 +23,7 @@ namespace draw2d_gdi
       virtual ~image_impl();
 
 
-      virtual bool _map(bool bApplyAlphaTransform = true) override;
+      virtual bool map(bool bApplyAlphaTransform = true) override;
       virtual bool _unmap()  override;
 
 
