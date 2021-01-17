@@ -264,8 +264,8 @@ namespace draw2d_gdiplus
 
 
 
-      void frame_rect(const ::rectd & rect, ::draw2d::brush* pBrush) override;
-      void invert_rect(const ::rectd & rect) override;
+      bool frame_rect(const ::rectd & rect, ::draw2d::brush* pBrush) override;
+      bool invert_rect(const ::rectd & rect) override;
       //bool draw(const ::point & point, ::draw2d::icon * picon, const ::size & size) override;
       //bool DrawIcon(double x, double y, ::draw2d::icon * picon, i32 cx, i32 cy, UINT istepIfAniCur, HBRUSH hbrFlickerFreeDraw, UINT diFlags) override;
       //bool DrawState(const ::point & point, const ::size & size, HBITMAP hBitmap, UINT nFlags,

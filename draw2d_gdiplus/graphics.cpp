@@ -785,10 +785,10 @@ namespace draw2d_gdiplus
    }
 
 
-   void graphics::frame_rect(const ::rectd & rect, ::draw2d::brush * pbrush)
+   bool graphics::frame_rect(const ::rectd & rect, ::draw2d::brush * pbrush)
    {
 
-      draw_rect(rect, pbrush->m_color);
+      return draw_rect(rect, pbrush->m_color);
 
    }
 
@@ -805,18 +805,6 @@ namespace draw2d_gdiplus
    }
 
 
-   //bool graphics::rectangle(const ::rectd & rect)
-   //{
-
-   //   bool bOk1 = fill_rect(rect);
-
-   //   bool bOk2 = draw_rect(rect);
-
-   //   return bOk1 && bOk2;
-
-   //}
-
-
    bool graphics::draw_rect(const ::rectd & rectParam, ::draw2d::pen * ppen)
    {
 
@@ -829,19 +817,7 @@ namespace draw2d_gdiplus
    }
 
 
-   //bool graphics::draw_rect(const ::rectd & rectParam, ::draw2d::pen * ppen)
-   //{
-
-   //   Gdiplus::RectF rect;
-
-   //   __copy(rect, rectParam);
-
-   //   return m_pgraphics->DrawRectangle(ppen->get_os_data < Gdiplus::Pen * > (this), rect) == ::Gdiplus::Ok;
-
-   //}
-
-
-   void graphics::invert_rect(const ::rectd & rect)
+   bool graphics::invert_rect(const ::rectd & rect)
    {
 
       //::draw2d::savedc save(this);
@@ -885,155 +861,9 @@ namespace draw2d_gdiplus
 
       //m_pgraphics->SetCompositingMode(e);
 
+      return false;
+
    }
-
-
-   //bool graphics::draw(const ::point & point, ::draw2d::icon * picon, const ::sized & size)
-   //{
-
-   //   
-
-   //}
-
-
-   //bool graphics::DrawIcon(double x, double y, ::draw2d::icon * picon)
-   //{
-
-   //   return BitBlt(x, y,cx, cy, picon->get_image(::sized(cx, cy))->g());
-
-   //}
-
-
-   //bool graphics::DrawState(const ::point & point, const ::sized & size, HBITMAP hBitmap, UINT nFlags, HBRUSH hBrush)
-   //{
-
-   //   //ASSERT(get_handle1() != nullptr);
-   //   //return ::DrawState(get_handle1(), hBrush, nullptr, (LPARAM)hBitmap, 0, point.x, point.y, size.cx, size.cy, nFlags|DST_BITMAP) != FALSE;
-   //   __throw(not_implemented());
-
-   //   return false;
-
-   //}
-
-   //bool graphics::DrawState(const ::point & point, const ::sized & size, ::draw2d::bitmap* pBitmap, UINT nFlags, ::draw2d::brush* pBrush)
-   //{
-
-   //   //ASSERT(get_handle1() != nullptr);
-   //   //return ::DrawState(get_handle1(), (HBRUSH)pBrush->get_os_data(), nullptr, (LPARAM)pBitmap->get_os_data(), 0, point.x, point.y, size.cx, size.cy, nFlags|DST_BITMAP) != FALSE;
-   //   __throw(not_implemented());
-
-   //   return false;
-
-   //}
-
-   //bool graphics::DrawState(const ::point & point, const ::sized & size, HICON hIcon, UINT nFlags, HBRUSH hBrush)
-   //{
-
-   //   //ASSERT(get_handle1() != nullptr);
-   //   //return ::DrawState(get_handle1(), hBrush, nullptr, (LPARAM)hIcon, 0, point.x, point.y, size.cx, size.cy, nFlags|DST_ICON) != FALSE;
-   //   __throw(not_implemented());
-
-   //   return false;
-
-   //}
-
-
-   //bool graphics::DrawState(const ::point & point, const ::sized & size, HICON hIcon, UINT nFlags, ::draw2d::brush* pBrush)
-   //{
-
-   //   //ASSERT(get_handle1() != nullptr);
-   //   //return ::DrawState(get_handle1(), (HBRUSH)pBrush->get_os_data(), nullptr, (LPARAM)hIcon, 0, point.x, point.y, size.cx, size.cy, nFlags|DST_ICON) != FALSE;
-   //   __throw(not_implemented());
-
-   //   return false;
-
-   //}
-
-
-   //bool graphics::DrawState(const ::point & point, const ::sized & size, const char * pszText, UINT nFlags, bool bPrefixText, i32 nTextLen, HBRUSH hBrush)
-   //{
-
-   //   //ASSERT(get_handle1() != nullptr);
-   //   //return ::DrawState(get_handle1(), hBrush,  nullptr, (LPARAM)pszText, (WPARAM)nTextLen, point.x, point.y, size.cx, size.cy, nFlags|(bPrefixText ? DST_PREFIXTEXT : DST_TEXT)) != FALSE;
-   //   __throw(not_implemented());
-
-   //   return false;
-
-   //}
-
-
-   //bool graphics::DrawState(const ::point & point, const ::sized & size, const char * pszText, UINT nFlags, bool bPrefixText, i32 nTextLen, ::draw2d::brush* pBrush)
-   //{
-
-   //   //ASSERT(get_handle1() != nullptr);
-   //   //return ::DrawState(get_handle1(), (HBRUSH)pBrush->get_os_data(), nullptr, (LPARAM)pszText, (WPARAM)nTextLen, point.x, point.y, size.cx, size.cy, nFlags|(bPrefixText ? DST_PREFIXTEXT : DST_TEXT)) != FALSE;
-   //   __throw(not_implemented());
-
-   //   return false;
-
-   //}
-
-
-   //bool graphics::DrawState(const ::point & point, const ::sized & size, DRAWSTATEPROC pDrawProc, LPARAM lData, UINT nFlags, HBRUSH hBrush)
-   //{
-
-   //   //ASSERT(get_handle1() != nullptr);
-   //   //return ::DrawState(get_handle1(), hBrush,
-   //   //                   pDrawProc, lData, 0, point.x, point.y, size.cx, size.cy, nFlags|DST_COMPLEX) != FALSE;
-   //   __throw(not_implemented());
-
-   //   return false;
-
-   //}
-
-
-   //bool graphics::DrawState(const ::point & point, const ::sized & size, DRAWSTATEPROC pDrawProc, LPARAM lData, UINT nFlags, ::draw2d::brush* pBrush)
-   //{
-
-   //   //ASSERT(get_handle1() != nullptr);
-   //   //return ::DrawState(get_handle1(), (HBRUSH)pBrush->get_os_data(),
-   //   //                   pDrawProc, lData, 0, point.x, point.y, size.cx, size.cy, nFlags|DST_COMPLEX) != FALSE;
-   //   __throw(not_implemented());
-
-   //   return false;
-
-   //}
-
-
-   //bool graphics::DrawEdge(const rect & rectParam,UINT nEdge,UINT nFlags)
-   //{
-
-   //   //ASSERT(get_handle1() != nullptr);
-   //   //return ::DrawEdge(get_handle1(),(RECT *)&rectParam,nEdge,nFlags) != FALSE;
-   //   __throw(not_implemented());
-
-   //   return false;
-
-   //}
-
-
-   //bool graphics::DrawFrameControl(const rect & rectParam,UINT nType,UINT nState)
-   //{
-
-   //   //ASSERT(get_handle1() != nullptr);
-   //   //return ::DrawFrameControl(get_handle1(),(RECT *) &rectParam,nType,nState) != FALSE;
-   //   __throw(not_implemented());
-
-   //   return false;
-
-   //}
-
-
-   //bool graphics::Chord(double x1, i32 y1, double x2, i32 y2, double x3, i32 y3, double x4, i32 y4)
-   //{
-
-   //   //ASSERT(get_handle1() != nullptr);
-   //   //return ::Chord(get_handle1(), x1, y1, x2, y2, x3, y3, x4, y4) != FALSE;
-   //   __throw(not_implemented());
-
-   //   return false;
-
-   //}
 
 
    bool graphics::Chord(const rectd & rectParam,const pointd & pointStart, const pointd & pointEnd)
