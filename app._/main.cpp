@@ -167,10 +167,10 @@ void copy(MEM_ICON_ITEM * dst, ICON_ITEM * pitem)
 //   }
 
 
-void main(int argc, char * argv[])
+void wmain(int argc, wchar_t * wargv[])
 {
 
-   console console(argc, argv);
+   console console(argc, wargv);
 
    string strSrc;
 
@@ -178,7 +178,7 @@ void main(int argc, char * argv[])
 
    {
 
-      if (file_exists(::dir::system() / "config\\plugin\\appfy_beg_debug_box.txt"))
+      if (file_exists(::dir::system() / "config/plugin/appfy_beg_debug_box.txt"))
       {
 
          ::MessageBoxA(nullptr,"appfy run", "appfy run", MB_OK);
@@ -189,7 +189,7 @@ void main(int argc, char * argv[])
       if (__argc < 4)
       {
 
-         os_message_box("Incorrect Number of Arguments passed to appfy. Expected 3 or 4; passed " + __str(__argc - 1), "", 0);
+         os_message_box("Incorrect Number of Arguments passed to appfy. Expected 3 or 4; passed " + __str(__argc - 1), "", e_message_box_ok);
 
          Application.m_result.add(error_invalid_argument);
 
@@ -294,13 +294,15 @@ void main(int argc, char * argv[])
          }
          else if (::str::begins_eat_ci(strParse, "platform_"))
          {
+            
             strRoot = "platform";
             strDomain = strParse;
+
          }
          else
          {
 
-            ::file::listing listing(&Application);
+            ::file::listing listing;
 
             string strListing = strBuild;
             
