@@ -780,7 +780,7 @@ namespace draw2d_gdiplus
 
       ::Gdiplus::RectF rectf((Gdiplus::REAL) x1,(Gdiplus::REAL) y1,(Gdiplus::REAL) w,(Gdiplus::REAL) h);
 
-      return m_pgraphics->DrawArc(m_ppen->get_os_data < Gdiplus::Pen * >(this),rectf,(Gdiplus::REAL) start,(Gdiplus::REAL) extends) == Gdiplus::Status::Ok;
+      return m_pgraphics->DrawArc(m_ppen->get_os_data < Gdiplus::Pen * >(this),rectf,(Gdiplus::REAL) start.degree(),(Gdiplus::REAL) extends.degree()) == Gdiplus::Status::Ok;
 
    }
 
