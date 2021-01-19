@@ -4488,12 +4488,14 @@ namespace draw2d_gdi
 
       }
 
-
       return bResult;
+
    }
+
 
    bool graphics::SelectClipPath(int nMode)
    {
+
       ASSERT(get_handle1() != nullptr);
 
       // output DC always holds the current path

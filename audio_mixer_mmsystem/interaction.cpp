@@ -34,7 +34,7 @@ namespace multimedia
 
          SCAST_MSG(base);
 
-         __pointer(audio_mixer) pmixer = m_pmixer;
+         __pointer(audio_mixer) pmixer = m_pmixer.get();
          
          pmixer->OnMixerControlChange((HMIXER)pbase->m_wparam.m_number, (u32)pbase->m_lparam);
 
@@ -48,7 +48,7 @@ namespace multimedia
 
          SCAST_MSG(base);
 
-         __pointer(audio_mixer) pmixer = m_pmixer;
+         __pointer(audio_mixer) pmixer = m_pmixer.get();
 
          pmixer->OnMixerLineChange((HMIXER) pbase->m_wparam.m_number, (u32) pbase->m_lparam);
 

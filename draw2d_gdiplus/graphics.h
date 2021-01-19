@@ -244,7 +244,7 @@ namespace draw2d_gdiplus
       //bool Arc(i32 x1,i32 y1,i32 x2,i32 y2, angle start, angle extends) override;
       bool Arc(double x1,double y1,double x2,double y2,angle start, angle extends) override;
 
-      bool AngleArc(double x,double y,i32 nRadius, angle fStartAngle, angle fSweepAngle) override;
+      bool AngleArc(double x,double y, double nRadius, angle fStartAngle, angle fSweepAngle) override;
       //bool ArcTo(i32 x1, i32 y1, i32 x2, i32 y2, i32 x3, i32 y3, i32 x4, i32 y4) override;
       bool ArcTo(const rectd &  prect, const pointd & pointStart, const pointd & pointEnd) override;
 
@@ -374,8 +374,7 @@ namespace draw2d_gdiplus
         BLENDFUNCTION blend) override;*/
 
       // Text Functions
-      virtual bool TextOutRaw(double x, double y, const string & str) override;
-
+      virtual bool TextOutRaw(double x, double y, const block & block);
       virtual bool ExtTextOut(double x, double y, UINT nOptions, const rectd &  prect, const char * pszString,strsize nCount, LPINT lpDxWidths) override;
 
       virtual bool ExtTextOut(double x, double y, UINT nOptions, const rectd &  prect, const string & str, LPINT lpDxWidths) override;
@@ -552,7 +551,7 @@ namespace draw2d_gdiplus
       bool SetMiterLimit(float fMiterLimit) override;
       i32 GetPath(::pointd * ppoint, byte * lpTypes,count nCount) override;
 
-      bool SelectClipPath(i32 nMode) override;
+      virtual bool SelectClipPath(i32 nMode) override;
 
       // Misc helper Functions
       static ::draw2d::brush* GetHalftoneBrush(::layered * pobjectContext);
@@ -617,7 +616,7 @@ namespace draw2d_gdiplus
 
       virtual bool prefer_mapped_image_on_mix() override;
 
-      virtual bool TextOutAlphaBlend(double x, double y, const string & str) override;
+      virtual bool TextOutAlphaBlend(double x, double y, const block & block) override;
 
       //virtual bool BitBltAlphaBlend(double x, double y, i32 nWidth, i32 nHeight, ::draw2d::graphics * pgraphicsSrc, i32 xSrc, i32 ySrc, u32 dwRop) override;
 

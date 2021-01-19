@@ -175,6 +175,18 @@ namespace draw2d_gdiplus
 
          pgraphicsPrevious = m_pgraphics;
 
+         m_pbitmap.create();
+
+         m_pgraphics.create();
+
+      }
+      else
+      {
+
+         m_pbitmap.defer_create();
+
+         m_pgraphics.defer_create();
+
       }
 
       //destroy();
@@ -186,9 +198,6 @@ namespace draw2d_gdiplus
 
       //}
 
-      m_pbitmap.defer_create();
-
-      m_pgraphics.defer_create();
 
       if (m_pbitmap.is_null() || m_pgraphics.is_null())
       {
@@ -235,8 +244,10 @@ namespace draw2d_gdiplus
       if (pbitmapPrevious && pgraphicsPrevious)
       {
 
+         Gdiplus::Rect r(0, 0, pbitmapPrevious->m_size.cx, pbitmapPrevious->m_size.cy);
          __graphics(m_pgraphics)->m_pgraphics->DrawImage(
-            pbitmapPrevious.cast <::draw2d_gdiplus::bitmap>()->m_pbitmap, 0, 0);
+            pbitmapPrevious.cast <::draw2d_gdiplus::bitmap>()->m_pbitmap,
+            r, r.X, r.Y, r.Width, r.Height, Gdiplus::UnitPixel);
 
       }
       

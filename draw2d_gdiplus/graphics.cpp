@@ -1134,14 +1134,25 @@ namespace draw2d_gdiplus
 
       bool bOk1 = false;
 
-      ap(Gdiplus::Point) ppoint(ppointParam, nCount);
+      //ap(Gdiplus::PointF) ppoint(ppointParam, nCount);
+
+      array < Gdiplus::PointF > pa;
+
+      pa.set_size(nCount);
+
+      for (::index i = 0; i < nCount; i++)
+      {
+
+         pa[i].X = (FLOAT) ppointParam[i].x;
+
+         pa[i].Y = (FLOAT) ppointParam[i].y;
+
+      }
 
       try
       {
 
-         //m_pgraphics->SetInterpolationMode(Gdiplus::InterpolationModeHighQualityBicubic);
-
-         bOk1 = m_pgraphics->FillPolygon(m_pbrush->get_os_data < Gdiplus::Brush * >(this), ppoint, (INT) nCount, gdiplus_get_fill_mode()) == Gdiplus::Status::Ok;
+         bOk1 = m_pgraphics->FillPolygon(m_pbrush->get_os_data < Gdiplus::Brush * >(this), pa.get_data(), (INT) nCount, gdiplus_get_fill_mode()) == Gdiplus::Status::Ok;
 
       }
       catch(...)
@@ -1204,14 +1215,24 @@ namespace draw2d_gdiplus
 
       bool bOk1 = FALSE;
 
-      ap(Gdiplus::Point) ppoint(ppointParam, nCount);
+      array < Gdiplus::PointF > pointa;
+      
+      pointa.set_size(nCount);
+
+      for (int i = 0; i < nCount; i++)
+      {
+
+         pointa[i].X = (Gdiplus::REAL) ppointParam[i].x;
+         pointa[i].Y = (Gdiplus::REAL) ppointParam[i].y;
+
+      }
 
       try
       {
 
          //m_pgraphics->SetInterpolationMode(Gdiplus::InterpolationModeHighQualityBicubic);
 
-         bOk1 = m_pgraphics->DrawPolygon(m_ppen->get_os_data < Gdiplus::Pen * >(this), ppoint, (INT) nCount) == Gdiplus::Status::Ok;
+         bOk1 = m_pgraphics->DrawPolygon(m_ppen->get_os_data < Gdiplus::Pen * >(this), pointa.get_data(), (INT) nCount) == Gdiplus::Status::Ok;
 
       }
       catch (...)
@@ -2722,7 +2743,7 @@ namespace draw2d_gdiplus
 
    }
 
-   bool graphics::AngleArc(double x, double y, i32 nRadius, angle fStartAngle, angle fSweepAngle)
+   bool graphics::AngleArc(double x, double y, double nRadius, angle fStartAngle, angle fSweepAngle)
    {
    //   //ASSERT(get_handle1() != nullptr);
    //   //return ::AngleArc(get_handle1(), x, y, nRadius, fStartAngle, fSweepAngle) != FALSE;
@@ -3545,6 +3566,8 @@ namespace draw2d_gdiplus
 
       }
 
+      return true;
+
    }
 
 
@@ -3573,14 +3596,14 @@ namespace draw2d_gdiplus
 
          Gdiplus::GraphicsPath path;
 
-         Gdiplus::Point pa[3];
+         Gdiplus::PointF pa[3];
 
-         pa[0].X = rect.left;
-         pa[0].Y = rect.bottom;
-         pa[1].X = rect.left;
-         pa[1].Y = rect.top;
-         pa[2].X = rect.right;
-         pa[2].Y = rect.top;
+         pa[0].X = (Gdiplus::REAL) rect.left;
+         pa[0].Y = (Gdiplus::REAL) rect.bottom;
+         pa[1].X = (Gdiplus::REAL) rect.left;
+         pa[1].Y = (Gdiplus::REAL) rect.top;
+         pa[2].X = (Gdiplus::REAL) rect.right;
+         pa[2].Y = (Gdiplus::REAL)rect.top;
 
          path.AddLines(pa, 3);
 
@@ -3618,14 +3641,14 @@ namespace draw2d_gdiplus
 
          Gdiplus::GraphicsPath path;
 
-         Gdiplus::Point pa[3];
+         Gdiplus::PointF pa[3];
 
-         pa[0].X = rect.left;
-         pa[0].Y = rect.bottom;
-         pa[1].X = rect.right;
-         pa[1].Y = rect.bottom;
-         pa[2].X = rect.right;
-         pa[2].Y = rect.top;
+         pa[0].X = (Gdiplus::REAL) rect.left;
+         pa[0].Y = (Gdiplus::REAL) rect.bottom;
+         pa[1].X = (Gdiplus::REAL) rect.right;
+         pa[1].Y = (Gdiplus::REAL) rect.bottom;
+         pa[2].X = (Gdiplus::REAL) rect.right;
+         pa[2].Y = (Gdiplus::REAL) rect.top;
 
          path.AddLines(pa, 3);
 
@@ -3658,6 +3681,7 @@ namespace draw2d_gdiplus
 
       }
 
+      return true;
 
    }
 
@@ -3867,6 +3891,8 @@ namespace draw2d_gdiplus
          }
 
       }
+
+      return true;
 
    }
 
@@ -4562,13 +4588,13 @@ namespace draw2d_gdiplus
    ::e_status graphics::intersect_clip(const ::rect& rect)
    {
 
-      Gdiplus::Rect r;
+      Gdiplus::RectF r;
 
       __copy(r, rect);
 
-      r.X += m_pointAddShapeTranslate.x;
+      r.X += (Gdiplus::REAL)m_pointAddShapeTranslate.x;
 
-      r.Y += m_pointAddShapeTranslate.y;
+      r.Y += (Gdiplus::REAL)m_pointAddShapeTranslate.y;
 
       m_pgraphics->IntersectClip(r);
 
@@ -4584,9 +4610,9 @@ namespace draw2d_gdiplus
 
       __copy(r, rect);
 
-      r.X += m_pointAddShapeTranslate.x;
+      r.X += (Gdiplus::REAL)m_pointAddShapeTranslate.x;
 
-      r.Y += m_pointAddShapeTranslate.y;
+      r.Y += (Gdiplus::REAL)m_pointAddShapeTranslate.y;
 
       m_pgraphics->IntersectClip(r);
 
@@ -4600,13 +4626,13 @@ namespace draw2d_gdiplus
 
       auto ppath = __auto(new Gdiplus::GraphicsPath());
 
-      Gdiplus::Rect r;
+      Gdiplus::RectF r;
 
       __copy(r, oval);
 
-      r.X += m_pointAddShapeTranslate.x;
+      r.X += (Gdiplus::REAL)m_pointAddShapeTranslate.x;
 
-      r.Y += m_pointAddShapeTranslate.y;
+      r.Y += (Gdiplus::REAL)m_pointAddShapeTranslate.y;
 
       ppath->AddArc(r, 0.f, 360.0f);
 
@@ -4626,9 +4652,9 @@ namespace draw2d_gdiplus
 
       __copy(r, oval);
 
-      r.X += m_pointAddShapeTranslate.x;
+      r.X += (Gdiplus::REAL)m_pointAddShapeTranslate.x;
 
-      r.Y += m_pointAddShapeTranslate.y;
+      r.Y += (Gdiplus::REAL)m_pointAddShapeTranslate.y;
 
       ppath->AddArc(r, 0.f, 360.0f);
 
@@ -4644,16 +4670,16 @@ namespace draw2d_gdiplus
 
       auto ppath = __auto(new Gdiplus::GraphicsPath());
 
-      auto copy = [this](Gdiplus::Point* p2, const POINT* p1)
+      auto copy = [this](Gdiplus::PointF* p2, const POINT* p1)
       {
 
-         p2->X = p1->x + m_pointAddShapeTranslate.x;
+         p2->X = (Gdiplus::REAL)(p1->x + m_pointAddShapeTranslate.x);
 
-         p2->Y = p1->y + m_pointAddShapeTranslate.y;
+         p2->Y = (Gdiplus::REAL)(p1->y + m_pointAddShapeTranslate.y);
 
       };
 
-      ap(Gdiplus::Point) ppoint(polygon.get_data(), polygon.get_count(), copy);
+      ap(Gdiplus::PointF) ppoint(polygon.get_data(), polygon.get_count(), copy);
 
       ppath->AddPolygon(ppoint, (INT) polygon.get_count());
 
@@ -6200,10 +6226,10 @@ namespace draw2d_gdiplus
    //}
 
 
-   bool graphics::TextOutRaw(double x, double y, const ::string & str)
+   bool graphics::TextOutRaw(double x, double y, const block & block)
    {
 
-      if (str.is_empty())
+      if (block.is_empty())
       {
 
          return false;
@@ -6226,12 +6252,12 @@ namespace draw2d_gdiplus
 
       Gdiplus::Font * pfont = m_pfont->get_os_data < Gdiplus::Font * > (this);
 
-      auto & text = m_pfont->m_mapText[str];
+      auto & text = m_pfont->m_mapText[block];
 
       if (text.m_wstr.is_empty())
       {
 
-         text.m_wstr = str;
+         text.m_wstr = block;
 
       }
 
@@ -7094,7 +7120,7 @@ namespace draw2d_gdiplus
    }
 
 
-   bool graphics::TextOutAlphaBlend(double x, double y, const string & str)
+   bool graphics::TextOutAlphaBlend(double x, double y, const block & block)
    {
 
       if (m_pimageAlphaBlend->is_set())
@@ -7102,7 +7128,7 @@ namespace draw2d_gdiplus
 
          single_lock sl(mutex());
 
-         if (str.is_empty())
+         if (block.is_empty())
          {
 
             return false;
@@ -7113,7 +7139,7 @@ namespace draw2d_gdiplus
 
          ::rect rectIntersect(m_pointAlphaBlend, m_pimageAlphaBlend->size());
 
-         const ::sized & size = ::sized(GetTextExtent(str));
+         const ::sized & size = ::sized(GetTextExtent(block));
 
          //size.cx = size.cx * 110 / 100;
 
@@ -7137,7 +7163,7 @@ namespace draw2d_gdiplus
 
             pimage1->get_graphics()->set_alpha_mode(::draw2d::alpha_mode_set);
 
-            pimage1->get_graphics()->text_out(0, 0, str);
+            pimage1->get_graphics()->text_out(0, 0, block);
 
             pimage1->blend2(nullptr, m_pimageAlphaBlend, point((int)max(0, x - m_pointAlphaBlend.x), (int)max(0, y - m_pointAlphaBlend.y)), rectText.size(), 255);
 

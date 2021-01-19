@@ -79,6 +79,8 @@ namespace audio_mmsystem
 
       single_lock sLock(mutex(), TRUE);
       ::e_status     estatus;
+      int iStatus = MMSYSERR_NOERROR;
+
       ASSERT(m_hwavein == nullptr);
       ASSERT(m_estate == e_state_initial);
 
@@ -93,28 +95,27 @@ namespace audio_mmsystem
 
       m_iBuffer = 0;
 
-      if(MMSYSERR_NOERROR == (estatus = ::multimedia::mmsystem::translate(waveInOpen(
+      if(estatus = ::multimedia::mmsystem::translate(waveInOpen(
                                           &m_hwavein,
                                           audiowave->m_uiWaveInDevice,
                                           wave_format(),
                                           get_ithread(),
                                           (u32) 0,
-                                          CALLBACK_THREAD))))
+                                          CALLBACK_THREAD)))
          goto Opened;
 
       m_pwaveformat->m_waveformat.nSamplesPerSec = 22050;
       m_pwaveformat->m_waveformat.nAvgBytesPerSec = m_pwaveformat->m_waveformat.nSamplesPerSec * m_pwaveformat->m_waveformat.nBlockAlign;
-      if(MMSYSERR_NOERROR == (estatus = ::multimedia::mmsystem::translate(waveInOpen(
+      if(estatus = ::multimedia::mmsystem::translate(waveInOpen(
                                           &m_hwavein,
                                           WAVE_MAPPER,
                                           wave_format(),
                                           (u32) get_ithread(),
                                           (u32) 0,
-                                          CALLBACK_THREAD))))
+                                          CALLBACK_THREAD)))
          goto Opened;
       m_pwaveformat->m_waveformat.nSamplesPerSec = 11025;
       m_pwaveformat->m_waveformat.nAvgBytesPerSec = m_pwaveformat->m_waveformat.nSamplesPerSec * m_pwaveformat->m_waveformat.nBlockAlign;
-      int iStatus = MMSYSERR_NOERROR;
       if(MMSYSERR_NOERROR == (iStatus = waveInOpen(
                                           &m_hwavein,
                                           WAVE_MAPPER,
