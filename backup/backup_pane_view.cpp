@@ -84,7 +84,7 @@ namespace backup
          auto pupdate = new_update();
          pupdate->m_actioncontext = ::e_source_system;
          psubject->id() = id_browse;
-         psubject->value(id_form) = "filemanager\\replace_name_in_file_system.xhtml";
+         psubject->payload(id_form) = "filemanager\\replace_name_in_file_system.xhtml";
          pdocument->update_all_views(psubject);
 
          psubject->id() = id_get_form_view;

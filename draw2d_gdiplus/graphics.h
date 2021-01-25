@@ -331,7 +331,10 @@ namespace draw2d_gdiplus
       virtual bool round_rect(const ::rectd & rect, double dRadius) override;
 
 
-      virtual bool _draw_raw(const ::rectd & rectDst, ::draw2d::graphics * pgraphicsSrc, const ::rectd & rectSrc = ::rectd()) override;
+      using image_drawer::_draw_raw;
+      virtual bool _draw_raw(const ::image_drawing & imagedrawing) override;
+      
+      
       //virtual bool _stretch_raw(const ::rectd & rectDst, ::draw2d::graphics * pgraphicsSrc, const ::rectd & rectSrc = ::rectd()) override;
 
 
@@ -367,7 +370,7 @@ namespace draw2d_gdiplus
       //                    ::draw2d::graphics * pgraphicsSrc, i32 xSrc, i32 ySrc, i32 nSrcWidth, i32 nSrcHeight,
       //                    UINT clrTransparent) override;
 
-      virtual bool _alpha_blend_raw(const ::rectd & rectDst, ::draw2d::graphics * pgraphicsSrc, const ::rectd & rectSrc, double dOpacity) override;
+      //virtual bool _alpha_blend_raw(const ::rectd & rectDst, ::draw2d::graphics * pgraphicsSrc, const ::rectd & rectSrc, double dOpacity) override;
 
       /*bool alpha_blend(i32 xDest, i32 yDest, i32 nDestWidth, i32 nDestHeight,
         ::draw2d::graphics * pgraphicsSrc, i32 xSrc, i32 ySrc, i32 nSrcWidth, i32 nSrcHeight,

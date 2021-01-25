@@ -101,9 +101,9 @@ BOOL CLibraryFrame::PreCreateWindow(CREATESTRUCT& cs)
    // TODO: Add your specialized code here and/or call the base class
    if(!CMiniFrameWnd::PreCreateWindow(cs))
       return FALSE;
-   pcreatestruct->m_createstruct.dwExStyle &= ~WS_EX_TOOLWINDOW;
-   pcreatestruct->m_createstruct.style |= MFS_SYNCACTIVE;
-   pcreatestruct->m_createstruct.hwndParent = AfxGetApp()->m_pMainWnd->GetSafeHwnd();
+   pusersystem->m_createstruct.dwExStyle &= ~WS_EX_TOOLWINDOW;
+   pusersystem->m_createstruct.style |= MFS_SYNCACTIVE;
+   pusersystem->m_createstruct.hwndParent = AfxGetApp()->m_pMainWnd->GetSafeHwnd();
    return TRUE;
 
 }

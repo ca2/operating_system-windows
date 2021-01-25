@@ -88,10 +88,10 @@ namespace production
    }
 #endif //DEBUG
 
-   bool view::pre_create_window(::user::create_struct * pcreatestruct)
+   bool view::pre_create_window(::user::system * pusersystem)
    {
-      pcreatestruct->m_createstruct.style &= ~WS_EX_CLIENTEDGE;
-      return ::user::impact::pre_create_window(pcreatestruct);
+      pusersystem->m_createstruct.style &= ~WS_EX_CLIENTEDGE;
+      return ::user::impact::pre_create_window(pusersystem);
    }
 
    
@@ -108,13 +108,13 @@ namespace production
       else if(psubject->id() == id_clean)
       {
 
-         m_pproduction->m_bClean = psubject->value(id_clean);
+         m_pproduction->m_bClean = psubject->payload(id_clean);
 
       }
       else if(psubject->id() == id_build)
       {
 
-         m_pproduction->m_bBuild = psubject->value(id_build);
+         m_pproduction->m_bBuild = psubject->payload(id_build);
 
       }
 
@@ -262,7 +262,7 @@ namespace production
       ::rect rect;
       //rect.null();
 
-      //if(!m_pscrollbarHorz->create_window(
+      //if(!m_pscrollbarHorizontal->create_window(
       // orientation_horizontal,
       // WS_CHILD
       // | WS_VISIBLE,
@@ -275,7 +275,7 @@ namespace production
 
       //  rect.null();
 
-      //if(!m_pscrollbarVert->create_window(
+      //if(!m_pscrollbarVertical->create_window(
       // orientation_vertical,
       // WS_CHILD
       // | WS_VISIBLE,

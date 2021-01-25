@@ -391,7 +391,7 @@ Opened:
          }
 
          XAUDIO2_BUFFER b;
-         xxf_zero(b);
+         __zero(b);
          b.pContext = pbuffer;
          b.AudioBytes = pwbuffer->m_uiBufferSize;
          b.pAudioData = (const BYTE *)pbuffer->m_pData;

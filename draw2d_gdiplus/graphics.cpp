@@ -1539,29 +1539,17 @@ namespace draw2d_gdiplus
 //   }
 
 
-   bool graphics::_draw_raw(const ::rectd & rectDstParam, ::draw2d::graphics * pgraphicsSrc, const ::rectd & rectSrcParam)
+   bool graphics::_draw_raw(const ::image_drawing & imagedrawing)
    {
 
-      if (pgraphicsSrc == nullptr)
+      if (::is_null(imagedrawing.m_pimage))
       {
 
          return false;
 
       }
 
-      double nDstWidth = rectDstParam.width();
-
-      double nDstHeight = rectDstParam.height();
-
-      double xSrc = rectSrcParam.left;
-
-      double ySrc = rectSrcParam.top;
-
-      double nSrcWidth = rectSrcParam.width();
-
-      double nSrcHeight = rectSrcParam.height();
-
-      Gdiplus::RectF rectDst((Gdiplus::REAL) rectDstParam.left, (Gdiplus::REAL)rectDstParam.top, (Gdiplus::REAL)rectDstParam.width(), (Gdiplus::REAL)rectDstParam.height());
+      auto pgraphicsSrc = imagedrawing.m_pimage->g();
 
       if (pgraphicsSrc == nullptr || pgraphicsSrc->get_current_bitmap() == nullptr)
       {
@@ -1570,16 +1558,34 @@ namespace draw2d_gdiplus
 
       }
 
+      double xDst = imagedrawing.m_rectDst.left;
+
+      double yDst = imagedrawing.m_rectDst.top;
+
+      double nDstWidth = imagedrawing.m_rectDst.width();
+
+      double nDstHeight = imagedrawing.m_rectDst.height();
+
+      double xSrc = imagedrawing.m_rectSrc.left;
+
+      double ySrc = imagedrawing.m_rectSrc.top;
+
+      double nSrcWidth = imagedrawing.m_rectSrc.width();
+
+      double nSrcHeight = imagedrawing.m_rectSrc.height();
+
+      Gdiplus::RectF rectDst((Gdiplus::REAL) xDst, (Gdiplus::REAL)yDst, (Gdiplus::REAL)nDstWidth, (Gdiplus::REAL)nDstHeight);
+
       Gdiplus::Status ret = Gdiplus::Status::GenericError;
 
       if (pgraphicsSrc->m_pimage->is_ok())
       {
 
          if (pgraphicsSrc->m_pimage->m_emipmap == ::draw2d::mipmap_anisotropic
-               && (pgraphicsSrc->m_pimage->width() == rectSrcParam.width()
-                   && pgraphicsSrc->m_pimage->height() == rectSrcParam.height()
-                   && rectSrcParam.left == 0 && rectSrcParam.top == 0
-                  && rectDstParam.width() > 0 && rectDstParam.height() > 0))
+               && (pgraphicsSrc->m_pimage->width() == nDstWidth
+                   && pgraphicsSrc->m_pimage->height() == nDstHeight
+                   && xSrc == 0 && ySrc == 0
+                  && nDstWidth > 0 && nDstHeight > 0))
          {
 
             try
@@ -1709,17 +1715,19 @@ namespace draw2d_gdiplus
 
          Gdiplus::Bitmap * pbitmap = (Gdiplus::Bitmap *) pgraphicsSrc->get_current_bitmap()->get_os_data();
 
-         if (pgraphicsSrc->m_pimage->is_ok() && pgraphicsSrc->m_pimage->m_bColorMatrix)
+         color_matrix colormatrix;
+
+         if (pgraphicsSrc->m_pimage->is_ok() && imagedrawing.get_color_matrix(colormatrix))
          {
 
             Gdiplus::ImageAttributes imageattributes;
 
-            Gdiplus::ColorMatrix colormatrix;
+            Gdiplus::ColorMatrix gdipluscolormatrix;
 
-            copy_color_matrix(colormatrix.m, pgraphicsSrc->m_pimage->m_colormatrix.a);
+            copy(gdipluscolormatrix, colormatrix);
 
             imageattributes.SetColorMatrix(
-            &colormatrix,
+            &gdipluscolormatrix,
             Gdiplus::ColorMatrixFlagsDefault,
                Gdiplus::ColorAdjustTypeBitmap);
 
@@ -3155,154 +3163,154 @@ namespace draw2d_gdiplus
 
 
 
-   bool graphics::_alpha_blend_raw(const ::rectd & rectDst, ::draw2d::graphics * pgraphicsSrc, const ::rectd & rectSrc , double dRate)
-   {
+   //bool graphics::_alpha_blend_raw(const ::rectd & rectDst, ::draw2d::graphics * pgraphicsSrc, const ::rectd & rectSrc , double dRate)
+   //{
 
-      if (m_pgraphics == nullptr || pgraphicsSrc == nullptr)
-      {
+   //   if (m_pgraphics == nullptr || pgraphicsSrc == nullptr)
+   //   {
 
-         return false;
+   //      return false;
 
-      }
+   //   }
 
-      sync_lock slSource(pgraphicsSrc->mutex());
+   //   sync_lock slSource(pgraphicsSrc->mutex());
 
-      //bool bThreadToolsForIncreasedFps = ::get_task()->m_bThreadToolsForIncreasedFps;
+   //   //bool bThreadToolsForIncreasedFps = ::get_task()->m_bThreadToolsForIncreasedFps;
 
-      //bool bAvoidProcFork = ::get_task()->m_bAvoidProcFork;
+   //   //bool bAvoidProcFork = ::get_task()->m_bAvoidProcFork;
 
-      ////bAvoidProcFork = true;
+   //   ////bAvoidProcFork = true;
 
-      //if (!bAvoidProcFork && bThreadToolsForIncreasedFps && nDestWidth == nSrcWidth && nDestHeight == nSrcHeight)
-      //{
+   //   //if (!bAvoidProcFork && bThreadToolsForIncreasedFps && nDestWidth == nSrcWidth && nDestHeight == nSrcHeight)
+   //   //{
 
-      //   if (m_ealphamode == ::draw2d::alpha_mode_blend)
-      //   {
+   //   //   if (m_ealphamode == ::draw2d::alpha_mode_blend)
+   //   //   {
 
-      //      auto cProcessor = get_processor_count();
+   //   //      auto cProcessor = get_processor_count();
 
-      //      if (nDestHeight >= cProcessor * 4 && (nDestWidth * nDestHeight) >= (cProcessor * 64))
-      //      {
+   //   //      if (nDestHeight >= cProcessor * 4 && (nDestWidth * nDestHeight) >= (cProcessor * 64))
+   //   //      {
 
-      //         m_pimage->fork_blend(point(xDest + GetViewportOrg().x, yDest + GetViewportOrg().y), pgraphicsSrc->m_pimage,
-      //                                                point(xSrc + pgraphicsSrc->GetViewportOrg().x, ySrc + pgraphicsSrc->GetViewportOrg().y),
-      //                                                ::sized(nSrcWidth, nDestHeight), (byte)(dRate * 255.0f));
+   //   //         m_pimage->fork_blend(point(xDest + GetViewportOrg().x, yDest + GetViewportOrg().y), pgraphicsSrc->m_pimage,
+   //   //                                                point(xSrc + pgraphicsSrc->GetViewportOrg().x, ySrc + pgraphicsSrc->GetViewportOrg().y),
+   //   //                                                ::sized(nSrcWidth, nDestHeight), (byte)(dRate * 255.0f));
 
-      //         g_cForkBlend++;
+   //   //         g_cForkBlend++;
 
-      //         if (g_cForkBlend % 100 == 0)
-      //         {
-      //            output_debug_string("\nfork_blend(" + __str(g_cForkBlend) + ") sample=" + __str(nSrcWidth) + "," + __str(nDestHeight));
-      //         }
+   //   //         if (g_cForkBlend % 100 == 0)
+   //   //         {
+   //   //            output_debug_string("\nfork_blend(" + __str(g_cForkBlend) + ") sample=" + __str(nSrcWidth) + "," + __str(nDestHeight));
+   //   //         }
 
-      //      }
-      //      else
-      //      {
+   //   //      }
+   //   //      else
+   //   //      {
 
-      //         m_pimage->blend(point(xDest + GetViewportOrg().x, yDest + GetViewportOrg().y), pgraphicsSrc->m_pimage,
-      //                                           point(xSrc+pgraphicsSrc->GetViewportOrg().x, ySrc + pgraphicsSrc->GetViewportOrg().y),
-      //                                           ::sized(nSrcWidth, nDestHeight), (byte)(dRate * 255.0f));
+   //   //         m_pimage->blend(point(xDest + GetViewportOrg().x, yDest + GetViewportOrg().y), pgraphicsSrc->m_pimage,
+   //   //                                           point(xSrc+pgraphicsSrc->GetViewportOrg().x, ySrc + pgraphicsSrc->GetViewportOrg().y),
+   //   //                                           ::sized(nSrcWidth, nDestHeight), (byte)(dRate * 255.0f));
 
-      //      }
+   //   //      }
 
-      //   }
-      //   else
-      //   {
+   //   //   }
+   //   //   else
+   //   //   {
 
-      //      m_pimage->from(point(xDest + GetViewportOrg().x, yDest + GetViewportOrg().y), pgraphicsSrc->m_pimage,
-      //                                       point(xSrc + pgraphicsSrc->GetViewportOrg().x, ySrc + pgraphicsSrc->GetViewportOrg().y),
-      //                                       ::sized(nSrcWidth, nDestHeight), (byte) (dRate * 255.0f));
-
-
-      //   }
-
-      //   return true;
-
-      //}
+   //   //      m_pimage->from(point(xDest + GetViewportOrg().x, yDest + GetViewportOrg().y), pgraphicsSrc->m_pimage,
+   //   //                                       point(xSrc + pgraphicsSrc->GetViewportOrg().x, ySrc + pgraphicsSrc->GetViewportOrg().y),
+   //   //                                       ::sized(nSrcWidth, nDestHeight), (byte) (dRate * 255.0f));
 
 
-      float fA = (float) (dRate);
+   //   //   }
+
+   //   //   return true;
+
+   //   //}
 
 
-      Gdiplus::ColorMatrix colormatrix;
+   //   float fA = (float) (dRate);
 
-      if (pgraphicsSrc->m_pimage->is_ok() && pgraphicsSrc->m_pimage->m_bColorMatrix)
-      {
 
-         copy_color_matrix(colormatrix.m, pgraphicsSrc->m_pimage->m_colormatrix.a);
+   //   Gdiplus::ColorMatrix colormatrix;
 
-      }
-      else
-      {
+   //   if (pgraphicsSrc->m_pimage->is_ok() && pgraphicsSrc->m_pimage->m_bColorMatrix)
+   //   {
 
-         ::draw2d::color_matrix m;
+   //      copy_color_matrix(colormatrix.m, pgraphicsSrc->m_pimage->m_colormatrix.a);
 
-         copy_color_matrix(colormatrix.m, m.a);
+   //   }
+   //   else
+   //   {
 
-      }
+   //      ::draw2d::color_matrix m;
 
-      colormatrix.m[3][3] = fA;
+   //      copy_color_matrix(colormatrix.m, m.a);
 
-      Gdiplus::ImageAttributes imageattributes;
+   //   }
 
-      imageattributes.SetColorMatrix(
-      &colormatrix,
-         Gdiplus::ColorMatrixFlagsDefault,
-         Gdiplus::ColorAdjustTypeBitmap);
+   //   colormatrix.m[3][3] = fA;
 
-      Gdiplus::RectF rectfDst((Gdiplus::REAL) rectDst.left, (Gdiplus::REAL) rectDst.top, (Gdiplus::REAL) rectDst.width(), (Gdiplus::REAL) rectDst.height());
+   //   Gdiplus::ImageAttributes imageattributes;
 
-      if (pgraphicsSrc == nullptr)
-      {
+   //   imageattributes.SetColorMatrix(
+   //   &colormatrix,
+   //      Gdiplus::ColorMatrixFlagsDefault,
+   //      Gdiplus::ColorAdjustTypeBitmap);
 
-         return false;
+   //   Gdiplus::RectF rectfDst((Gdiplus::REAL) rectDst.left, (Gdiplus::REAL) rectDst.top, (Gdiplus::REAL) rectDst.width(), (Gdiplus::REAL) rectDst.height());
 
-      }
+   //   if (pgraphicsSrc == nullptr)
+   //   {
 
-      if (pgraphicsSrc->get_current_bitmap() == nullptr)
-      {
+   //      return false;
 
-         return false;
+   //   }
 
-      }
+   //   if (pgraphicsSrc->get_current_bitmap() == nullptr)
+   //   {
 
-      Gdiplus::Bitmap * pbitmap = nullptr;
+   //      return false;
 
-      try
-      {
+   //   }
 
-         pbitmap = (Gdiplus::Bitmap *) pgraphicsSrc->get_current_bitmap()->get_os_data();
+   //   Gdiplus::Bitmap * pbitmap = nullptr;
 
-      }
-      catch(...)
-      {
+   //   try
+   //   {
 
-      }
+   //      pbitmap = (Gdiplus::Bitmap *) pgraphicsSrc->get_current_bitmap()->get_os_data();
 
-      Gdiplus::Status ret = Gdiplus::Status::GenericError;
+   //   }
+   //   catch(...)
+   //   {
 
-      if(pbitmap != nullptr)
-      {
+   //   }
 
-         ret =  m_pgraphics->DrawImage(pbitmap,rectfDst,
-            (Gdiplus::REAL) rectSrc.left,
-            (Gdiplus::REAL) rectSrc.top,
-            (Gdiplus::REAL) rectSrc.width(),
-            (Gdiplus::REAL) rectSrc.height(),
-            Gdiplus::UnitPixel,&imageattributes);
+   //   Gdiplus::Status ret = Gdiplus::Status::GenericError;
 
-         if (ret != Gdiplus::Status::Ok)
-         {
+   //   if(pbitmap != nullptr)
+   //   {
 
-            return false;
+   //      ret =  m_pgraphics->DrawImage(pbitmap,rectfDst,
+   //         (Gdiplus::REAL) rectSrc.left,
+   //         (Gdiplus::REAL) rectSrc.top,
+   //         (Gdiplus::REAL) rectSrc.width(),
+   //         (Gdiplus::REAL) rectSrc.height(),
+   //         Gdiplus::UnitPixel,&imageattributes);
 
-         }
+   //      if (ret != Gdiplus::Status::Ok)
+   //      {
 
-      }
+   //         return false;
 
-      return true;
+   //      }
 
-   }
+   //   }
+
+   //   return true;
+
+   //}
 
 
 
@@ -7151,9 +7159,6 @@ namespace draw2d_gdiplus
          {
 
             ::image_pointer pimage1;
-            //#ifdef _UWP
-            //            g_pimagea.add(pimage1);
-            //#endif
 
             pimage1 = create_image(rectText.size());
 
@@ -7167,13 +7172,17 @@ namespace draw2d_gdiplus
 
             pimage1->blend2(nullptr, m_pimageAlphaBlend, point((int)max(0, x - m_pointAlphaBlend.x), (int)max(0, y - m_pointAlphaBlend.y)), rectText.size(), 255);
 
-            _draw_raw({ ::point((LONG)x, (LONG) y), rectText.size() }, pimage1->get_graphics());
+            auto rectDst = ::rectd(::pointd(x, y), rectText.size());
+
+            auto rectSrc = ::rectd(rectText.size());
+
+            image_drawing_options imagedrawingoptions;
+
+            _draw_raw(rectDst, pimage1, imagedrawingoptions, ::pointd());
 
             return true;
 
          }
-
-
 
       }
 

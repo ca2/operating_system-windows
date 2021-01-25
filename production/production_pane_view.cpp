@@ -70,11 +70,11 @@ namespace production
 
 
 
-   bool pane_view::pre_create_window(::user::create_struct * pcreatestruct)
+   bool pane_view::pre_create_window(::user::system * pusersystem)
    {
-      pcreatestruct->m_createstruct.dwExStyle &= ~WS_EX_CLIENTEDGE;
+      pusersystem->m_createstruct.dwExStyle &= ~WS_EX_CLIENTEDGE;
 
-      return ::user::impact::pre_create_window(pcreatestruct);
+      return ::user::impact::pre_create_window(pusersystem);
    }
 
 
@@ -194,7 +194,7 @@ namespace production
          auto pupdate = subject(id_browse);
          pupdate->m_actioncontext = ::e_source_system;
          psubject->id() = ;
-         psubject->value(id_form) = "production\\options.xhtml";
+         psubject->payload(id_form) = "production\\options.xhtml";
          pdocument->update_all_views(psubject);
 
          psubject->id() = id_get_form_view;
@@ -260,7 +260,7 @@ namespace production
             __pointer(::user::interaction) pinteraction = m_pviewOptions->get_child_by_id("clean");
             __pointer(::user::check_box) pcheckbox =  (pinteraction);
             auto psubject = subject(id_clean);
-            psubject->value(id_clean) = pcheckbox->echeck() == ::check_checked;
+            psubject->payload(id_clean) = pcheckbox->echeck() == ::check_checked;
             get_document()->update_all_views(psubject);
          }
          else if(pevent->m_puie->m_id == "build")
@@ -268,7 +268,7 @@ namespace production
             __pointer(::user::interaction) pinteraction = m_pviewOptions->get_child_by_id("build");
             __pointer(::user::check_box) pcheckbox =  (pinteraction);
             auto psubject = new_action(id_build);
-            psubject->value(id_build) = pcheckbox->echeck() == ::check_checked;
+            psubject->payload(id_build) = pcheckbox->echeck() == ::check_checked;
             get_document()->update_all_views(psubject);
 
          }
