@@ -316,42 +316,44 @@ namespace draw2d_gdiplus
    //}
 
 
-   bool image::stretch(::draw2d::graphics * pgraphics)
-   {
+   //bool image::stretch(::image * pimage)
+   //{
 
-      ::draw2d::bitmap_pointer bitmap(get_context_application());
+   ////   ::draw2d::bitmap_pointer bitmap(get_context_application());
 
-      bitmap->CreateCompatibleBitmap(pgraphics, 1, 1);
+   ////   bitmap->CreateCompatibleBitmap(pgraphics, 1, 1);
 
-      const ::size & size = bitmap->get_size();
+   ////   const ::size & size = bitmap->get_size();
 
-      if (!create(size))
-      {
+   ////   if (!create(size))
+   ////   {
 
-         return false;
+   ////      return false;
 
-      }
+   ////   }
 
-      HDC hdc = __graphics(pgraphics)->get_hdc();
+   ////   HDC hdc = __graphics(pgraphics)->get_hdc();
 
-      bool bOk = GetDIBits(hdc, (HBITMAP)bitmap->get_os_data(), 0, height(), m_pcolorrefRaw, nullptr, DIB_RGB_COLORS) != FALSE;
+   ////   bool bOk = GetDIBits(hdc, (HBITMAP)bitmap->get_os_data(), 0, height(), m_pcolorrefRaw, nullptr, DIB_RGB_COLORS) != FALSE;
 
-      g()->set(bitmap);
+   ////   g()->set(bitmap);
 
-      __graphics(pgraphics)->release_hdc(hdc);
+   ////   __graphics(pgraphics)->release_hdc(hdc);
 
-      auto estatus = pgraphics->set(bitmap);
+   ////   auto estatus = pgraphics->set(bitmap);
 
-      if (!estatus)
-      {
+   ////   if (!estatus)
+   ////   {
 
-         return false;
+   ////      return false;
 
-      }
+   ////   }
 
-      return bOk;
+   ////   return bOk;
 
-   }
+   //   return true;
+
+   //}
 
 
    //bool image::draw(const ::point & pointDest, ::image * pimage, const ::rect & rectSrc)
@@ -362,7 +364,7 @@ namespace draw2d_gdiplus
    //}
 
 
-   bool image::draw(const ::rect & rectDstParam, ::image * pimageSrc, const ::point & pointSrcParam)
+   bool image::_draw_raw(const ::rect & rectDstParam, ::image * pimageSrc, const ::point & pointSrcParam)
    {
 
       ::rect rectDst(rectDstParam);

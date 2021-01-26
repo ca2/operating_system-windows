@@ -127,9 +127,12 @@ namespace multimedia
          ::rect rect(0, 0, 0, 0);
 
          __pointer(::multimedia::audio_mixer::user::level_control) plevelcontrol = source->get_device()->get_mixer()->get_audio_mixer_callback()->allocate_level_control();
-         if(plevelcontrol == nullptr)
+         if (plevelcontrol == nullptr)
+         {
             return false;
-         plevelcontrol->create_window(pParent, (::i64)nVolumeID);
+
+         }
+         plevelcontrol->create_control(pParent, nVolumeID);
          __pointer(::multimedia::audio_mixer::control_data_volume) mcdvVolume = plevelcontrol->get_data();
          mcdvVolume->m_iType = ::multimedia::audio_mixer::control_data::TypeStereoVolume;
          mcdvVolume->m_uiMixerID = source->get_device()->m_uiMixerID;
@@ -149,9 +152,9 @@ namespace multimedia
          __pointer(::multimedia::audio_mixer::user::label) plabelVolume = source->get_device()->get_mixer()->get_audio_mixer_callback()->allocate_label();
          if(plabelVolume == nullptr)
             return false;
-         plabelVolume->create_window(pParent, (::i64)nVolumeLabelID);
+         plabelVolume->create_control(pParent, nVolumeLabelID);
          //xxx   str.load_string(IDS_MIXER_VOLUME);
-         plabelVolume->SetText(str);
+         plabelVolume->set_window_text(str);
          __pointer(::multimedia::audio_mixer::control_data) mcdVolumeLabel = plabelVolume->get_data();
          mcdVolumeLabel->m_iType = ::multimedia::audio_mixer::control_data::TypeStereoVolumeLabel;
          mcdVolumeLabel->m_uiMixerID = m_pmixersource->get_device()->m_uiMixerID;
@@ -166,7 +169,7 @@ namespace multimedia
             if(pinteraction == nullptr)
                return false;
 
-            pinteraction->create_window(pParent, (::i64)nBalanceID);
+            pinteraction->create_control(pParent, nBalanceID);
             __pointer(::multimedia::audio_mixer::control_data_volume) mcdvBalance = pinteraction->get_data();
             mcdvBalance->m_iType = ::multimedia::audio_mixer::control_data::TypeStereoBalance;
             mcdvBalance->m_uiMixerID = m_pmixersource->get_device()->m_uiMixerID;
@@ -186,14 +189,14 @@ namespace multimedia
             if(plabel == nullptr)
                return false;
 
-            plabel->create_window(pParent, (::i64)nBalanceLabelID);
+            plabel->create_control(pParent, nBalanceLabelID);
             __pointer(::multimedia::audio_mixer::control_data) mcdBalanceLabel = plabel->get_data();
             mcdBalanceLabel->m_iType = ::multimedia::audio_mixer::control_data::TypeStereoBalanceLabel;
             mcdBalanceLabel->m_uiMixerID = m_pmixersource->get_device()->m_uiMixerID;
             mcdBalanceLabel->m_uiLineID = source->m_mixerline.dwLineID;
             mcdBalanceLabel->m_uiControlID = m_mixercontrol.dwControlID;
             //xxx      str.load_string(IDS_MIXER_BALANCE);
-            plabel->SetText(str);
+            plabel->set_window_text(str);
             add(plabel.m_p);
          }
 
@@ -256,8 +259,8 @@ namespace multimedia
          {
             nMuteID = nID++;
             __pointer(::multimedia::audio_mixer::user::toggle_control) pbtMute = m_pmixersource->get_device()->get_mixer()->get_audio_mixer_callback()->allocate_toggle_control();
-            pbtMute->create_window(pParent, (::i64)nMuteID);
-            pbtMute->set_label(str);
+            pbtMute->create_control(pParent, nMuteID);
+            pbtMute->set_window_text(str);
             __pointer(::multimedia::audio_mixer::control_data_switch) mcdmMute = pbtMute->get_data();
             mcdmMute->m_iType = ::multimedia::audio_mixer::control_data::TypeUniformMute;
             mcdmMute->m_uiMixerID = source->get_device()->m_uiMixerID;

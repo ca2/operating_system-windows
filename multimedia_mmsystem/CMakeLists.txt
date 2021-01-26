@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.17)
-project(draw2d_gdiplus CXX)
+project(multimedia_mmsystem CXX)
 
 set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_EXTENSIONS OFF)
@@ -21,7 +21,7 @@ set(LIBRARY_OUTPUT_PATH ${CMAKE_CURRENT_SOURCE_DIR}/../../../time-${PLATFORM_NAM
 set(EXECUTABLE_OUTPUT_PATH ${CMAKE_CURRENT_SOURCE_DIR}/../../../time-${PLATFORM_NAME}/cmake)
 
 
-list(APPEND draw2d_gdiplus_source
+list(APPEND multimedia_mmsystem_source
         _.cpp
         _.h
         bitmap.cpp
@@ -57,50 +57,50 @@ else()
 endif()
 
 
-add_library(draw2d_gdiplus SHARED ${draw2d_gdiplus_source})
+add_library(multimedia_mmsystem SHARED ${multimedia_mmsystem_source})
 
-target_precompile_headers(draw2d_gdiplus PRIVATE framework.h)
+target_precompile_headers(multimedia_mmsystem PRIVATE framework.h)
 
-set_target_properties(draw2d_gdiplus PROPERTIES LINKER_LANGUAGE CXX)
+set_target_properties(multimedia_mmsystem PROPERTIES LINKER_LANGUAGE CXX)
 
 if (MSVC)
-    target_compile_options(draw2d_gdiplus PRIVATE "/MD$<$<CONFIG:Debug>:d>")
-    target_link_options(draw2d_gdiplus PRIVATE "/DEFAULTLIB:msvcrt$<$<CONFIG:Debug>:d>")
-    target_link_options(draw2d_gdiplus PRIVATE "/IMPLIB:${LIBRARY_OUTPUT_PATH}/draw2d_gdiplus.lib")
-    target_link_options(draw2d_gdiplus PRIVATE "/DEF:${CMAKE_CURRENT_SOURCE_DIR}/draw2d_gdiplus.def")
-    target_link_libraries(draw2d_gdiplus PRIVATE acme apex aqua aura Gdiplus)
+    target_compile_options(multimedia_mmsystem PRIVATE "/MD$<$<CONFIG:Debug>:d>")
+    target_link_options(multimedia_mmsystem PRIVATE "/DEFAULTLIB:msvcrt$<$<CONFIG:Debug>:d>")
+    target_link_options(multimedia_mmsystem PRIVATE "/IMPLIB:${LIBRARY_OUTPUT_PATH}/multimedia_mmsystem.lib")
+    target_link_options(multimedia_mmsystem PRIVATE "/DEF:${CMAKE_CURRENT_SOURCE_DIR}/multimedia_mmsystem.def")
+    target_link_libraries(multimedia_mmsystem PRIVATE acme apex aqua aura Gdiplus)
 elseif(LINUX)
     #pkg_check_modules(PKGCONFIG glib-2.0 gtk+-3.0 gdk-3.0 appindicator-0.1)
     pkg_check_modules(PKGCONFIG glib-2.0 freetype2 gtk+-3.0 gdk-3.0)
-    target_compile_options(draw2d_gdiplus PRIVATE ${PKGCONFIG_CFLAGS})
-    #target_compile_options(draw2d_gdiplus PRIVATE -std=c++14)
-    #target_link_options(draw2d_gdiplus PRIVATE ${GTK_LDFLAGS})
-    target_link_options(draw2d_gdiplus PRIVATE -Wl,-rpath=\$ORIGIN)
-    target_link_libraries(draw2d_gdiplus PRIVATE z dl pthread ncurses X11 Xrender Xinerama Xft ${PKGCONFIG_LIBRARIES})
-    target_link_options(draw2d_gdiplus PRIVATE -Wl,-z,defs)
+    target_compile_options(multimedia_mmsystem PRIVATE ${PKGCONFIG_CFLAGS})
+    #target_compile_options(multimedia_mmsystem PRIVATE -std=c++14)
+    #target_link_options(multimedia_mmsystem PRIVATE ${GTK_LDFLAGS})
+    target_link_options(multimedia_mmsystem PRIVATE -Wl,-rpath=\$ORIGIN)
+    target_link_libraries(multimedia_mmsystem PRIVATE z dl pthread ncurses X11 Xrender Xinerama Xft ${PKGCONFIG_LIBRARIES})
+    target_link_options(multimedia_mmsystem PRIVATE -Wl,-z,defs)
     message("PKGCONFIG_LIBRARIES is " ${PKGCONFIG_LIBRARIES})
 endif()
 
-target_link_directories(draw2d_gdiplus PRIVATE ${LIBRARY_OUTPUT_PATH})
-target_link_directories(draw2d_gdiplus PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../../../archive/storage-${PLATFORM_NAME}/library/x64/basis)
-target_link_directories(draw2d_gdiplus PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../../../archive/storage-${PLATFORM_NAME}/third/library/x64/basis)
+target_link_directories(multimedia_mmsystem PRIVATE ${LIBRARY_OUTPUT_PATH})
+target_link_directories(multimedia_mmsystem PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../../../archive/storage-${PLATFORM_NAME}/library/x64/basis)
+target_link_directories(multimedia_mmsystem PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../../../archive/storage-${PLATFORM_NAME}/third/library/x64/basis)
 
 
-target_include_directories(draw2d_gdiplus PRIVATE $ENV{HOME}/__config)
-target_include_directories(draw2d_gdiplus PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../..)
-target_include_directories(draw2d_gdiplus PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/..)
-target_include_directories(draw2d_gdiplus PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../../../source)
-target_include_directories(draw2d_gdiplus PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../../../source/app)
-target_include_directories(draw2d_gdiplus PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../../../source/app/_include)
-target_include_directories(draw2d_gdiplus PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../../../source/include)
-target_include_directories(draw2d_gdiplus PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../../../archive/platform-${PLATFORM_NAME})
-target_include_directories(draw2d_gdiplus PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../../../archive/platform-${PLATFORM_NAME}/_include)
-target_include_directories(draw2d_gdiplus PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../../../archive/third-${PLATFORM_NAME}/include)
-target_include_directories(draw2d_gdiplus PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../../../archive/third-${PLATFORM_NAME}/third/include)
-target_include_directories(draw2d_gdiplus PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../../../archive/third-${PLATFORM_NAME}/third/include/include)
-target_include_directories(draw2d_gdiplus PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
+target_include_directories(multimedia_mmsystem PRIVATE $ENV{HOME}/__config)
+target_include_directories(multimedia_mmsystem PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../..)
+target_include_directories(multimedia_mmsystem PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/..)
+target_include_directories(multimedia_mmsystem PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../../../source)
+target_include_directories(multimedia_mmsystem PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../../../source/app)
+target_include_directories(multimedia_mmsystem PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../../../source/app/_include)
+target_include_directories(multimedia_mmsystem PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../../../source/include)
+target_include_directories(multimedia_mmsystem PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../../../archive/platform-${PLATFORM_NAME})
+target_include_directories(multimedia_mmsystem PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../../../archive/platform-${PLATFORM_NAME}/_include)
+target_include_directories(multimedia_mmsystem PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../../../archive/third-${PLATFORM_NAME}/include)
+target_include_directories(multimedia_mmsystem PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../../../archive/third-${PLATFORM_NAME}/third/include)
+target_include_directories(multimedia_mmsystem PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../../../archive/third-${PLATFORM_NAME}/third/include/include)
+target_include_directories(multimedia_mmsystem PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
 
 
-target_compile_definitions(draw2d_gdiplus PRIVATE _DRAW2D_GDIPLUS_LIBRARY)
-target_compile_definitions(draw2d_gdiplus PRIVATE UNICODE)
-target_compile_definitions(draw2d_gdiplus PRIVATE _UNICODE)
+target_compile_definitions(multimedia_mmsystem PRIVATE _multimedia_mmsystem_LIBRARY)
+target_compile_definitions(multimedia_mmsystem PRIVATE UNICODE)
+target_compile_definitions(multimedia_mmsystem PRIVATE _UNICODE)

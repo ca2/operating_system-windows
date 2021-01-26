@@ -26,7 +26,10 @@ namespace draw2d_gdiplus
       virtual ::draw2d::bitmap_pointer get_bitmap() const;
       virtual ::draw2d::bitmap_pointer detach_bitmap();
 
-      //void stretch_image(::image * pimage);
+      
+      //using ::image::stretch;
+      //virtual bool stretch(::image * pimage) override;
+
 
       bool dc_select(bool bSelect = true);
 
@@ -47,9 +50,9 @@ namespace draw2d_gdiplus
       virtual bool destroy() override;
 
 
-      virtual bool stretch(::draw2d::graphics * pgraphics) override;
+      //cvirtual bool stretch(::draw2d::graphics * pgraphics) override;
       //virtual bool draw(const ::image * pimage) override;
-      virtual bool draw(const ::rect & rectDst, ::image * pimageSrc, const ::point & pointSrc) override;
+      virtual bool _draw_raw(const ::rect & rectDst, ::image * pimageSrc, const ::point & pointSrc) override;
 
 
       virtual ::e_status SetIconMask(::draw2d::icon * picon, i32 cx, i32 cy) override;

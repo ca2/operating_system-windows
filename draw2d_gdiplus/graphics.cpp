@@ -1717,7 +1717,7 @@ namespace draw2d_gdiplus
 
          color_matrix colormatrix;
 
-         if (pgraphicsSrc->m_pimage->is_ok() && imagedrawing.get_color_matrix(colormatrix))
+         if (pgraphicsSrc->m_pimage->is_ok() && imagedrawing.get_matrix(colormatrix))
          {
 
             Gdiplus::ImageAttributes imageattributes;
