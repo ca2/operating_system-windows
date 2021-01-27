@@ -136,6 +136,7 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_veriwell_keyboard", "..\..\..\source\app-veriwell\keyboard\keyboard.vcxproj", "{3F1119CF-6041-4AE9-970E-4DDAB57C5E48}"
 	ProjectSection(ProjectDependencies) = postProject
 		{B2E38F2D-2D8C-4C63-8865-02DC220DC360} = {B2E38F2D-2D8C-4C63-8865-02DC220DC360}
+		{9A5FBFB1-76E6-4F7E-933A-328C1EEC95AF} = {9A5FBFB1-76E6-4F7E-933A-328C1EEC95AF}
 	EndProjectSection
 EndProject
 Global

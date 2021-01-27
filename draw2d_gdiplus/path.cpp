@@ -721,7 +721,7 @@ namespace draw2d_gdiplus
    bool path::contains(::draw2d::graphics_pointer& pgraphics, const pointd& point)
    {
 
-      return ::draw2d::path::contains(pgraphics, point);
+      //return ::draw2d::path::contains(pgraphics, point);
 
       auto pospath = get_os_data < Gdiplus::GraphicsPath *>(pgraphics);
 
