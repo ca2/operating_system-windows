@@ -1,6 +1,14 @@
 #pragma once
 
 
+#undef UNREFERENCED_PARAMETER
+#undef MAKELONG
+#undef Node
+#undef LOBYTE
+#undef Context
+
+
+
 #ifdef _WINDOWS_
 #error WINDOWS.H already included.  ca2 apps must not #include <windows.h>
 #endif
