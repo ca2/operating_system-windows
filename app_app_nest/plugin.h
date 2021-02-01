@@ -44,7 +44,7 @@ namespace npca2
 
       virtual void on_prepare_memory();
 
-      virtual UINT_PTR message_handler(UINT_PTR emessage, WPARAM wparam, LPARAM lparam);
+      virtual UINT_PTR message_handler(UINT_PTR emessage, wparam wparam, lparam lparam);
 
 
    };

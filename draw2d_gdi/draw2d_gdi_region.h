@@ -18,9 +18,9 @@ namespace draw2d_gdi
 
 
       bool create_rect(int x1, int y1, int x2, int y2);
-      bool create_rect(const ::rect & rect);
+      bool create_rect(const ::rectangle_i32 & rectangle);
       bool create_oval(int x1, int y1, int x2, int y2);
-      bool create_oval(const ::rect & rect);
+      bool create_oval(const ::rectangle_i32 & rectangle);
       bool create_polygon(LPPOINT lpPoints, i32 nCount, ::draw2d::e_fill_mode efillmode);
       bool create_poly_polygon(LPPOINT lpPoints, LPINT lpPolyCounts, i32 nCount, ::draw2d::e_fill_mode efillmode);
       bool CreateRoundRectRgn(int x1, int y1, int x2, int y2, int x3, int y3);
@@ -30,16 +30,16 @@ namespace draw2d_gdi
 
       // Operations
       void SetRectRgn(int x1, int y1, int x2, int y2);
-      void SetRectRgn(const ::rect & rect);
+      void SetRectRgn(const ::rectangle_i32 & rectangle);
       int CombineRgn(const ::draw2d::region* pRgn1, const ::draw2d::region* pRgn2, int nCombineMode);
       int CopyRgn(const ::draw2d::region* pRgnSrc);
       bool EqualRgn(const ::draw2d::region* pRgn) const;
       int OffsetRgn(int x, int y);
-      int OffsetRgn(const ::point & point);
-      int GetRgnBox(RECT * prect) const;
+      int OffsetRgn(const ::point_i32 & point);
+      int GetRgnBox(RECT * prectangle) const;
       bool contains(int x, int y) const;
-      bool contains(const ::point & point) const;
-      bool RectInRegion(const ::rect & rect) const;
+      bool contains(const ::point_i32 & point) const;
+      bool RectInRegion(const ::rectangle_i32 & rectangle) const;
       int GetRegionData(LPRGNDATA lpRgnData, int nCount) const;
 
 

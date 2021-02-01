@@ -9,6 +9,9 @@
 #endif
 
 
+#define PARALLELIZATION_WIN32
+
+
 
 
 //#ifdef _DEBUG
@@ -52,7 +55,14 @@
 #define DECL_SPEC_ANY __declspec(selectany)
 
 
-#include "platform_windows.h"
+#include <stdio.h>
+#include <memory.h>
+#include <string.h>
+#include <wchar.h>
+#include <ctype.h>
+#include <stdarg.h>
+
+//#include "platform_windows.h"
 
 
 #ifdef _CUSTOM
@@ -172,7 +182,7 @@
 #define __API_IMPORT __declspec(dllimport)
 #endif
 
-// This macro is used to reduce size requirements of some classes
+// This macro is used to reduce size_i32 requirements of some classes
 #ifndef __ALWAYS_VTABLE
 #ifndef __NOVTABLE
 #if _MSC_VER >= 1100 && !defined(DEBUG)
@@ -322,12 +332,12 @@
 
 
 
-#if WINVER >= 0x600
-#include <D2d1_1.h>
-#endif
-
-#include <winreg.h>
-#include <winnls.h>
+//#if WINVER >= 0x600
+//#include <D2d1_1.h>
+//#endif
+//
+//#include <winreg.h>
+//#include <winnls.h>
 #include <stddef.h>
 #include <limits.h>
 //#include <malloc.h>

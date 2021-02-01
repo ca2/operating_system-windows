@@ -43,7 +43,7 @@ namespace draw2d_gdiplus
                return;
             }
 
-            LOGPEN point;
+            LOGPEN point_i32;
 
             VERIFY(GetObject(sizeof(point), &lp));
 
@@ -242,7 +242,7 @@ namespace draw2d_gdiplus
                {
                   color1 = graphicsDest->SetTextColor(color1);
                   color2 = graphicsDest->SetBkColor(color2);
-                  graphicsDest->fill_rect(rect(0, 0, bm.bmWidth, bm.bmHeight), &brChecker);
+                  graphicsDest->fill_rect(rectangle_i32(0, 0, bm.bmWidth, bm.bmHeight), &brChecker);
                   graphicsDest->SetTextColor(color1);
                   graphicsDest->SetBkColor(color2);
 
@@ -302,7 +302,7 @@ namespace draw2d_gdiplus
          // Checker the background with white and crBackground
          color1 = pgraphics->SetTextColor(color1);
          color2 = pgraphics->SetBkColor(color2);
-         pgraphics->fill_rect(rect(x, y, x + bm.bmWidth, y + bm.bmHeight), &brChecker);
+         pgraphics->fill_rect(rectangle_i32(x, y, x + bm.bmWidth, y + bm.bmHeight), &brChecker);
          pgraphics->SetTextColor(color1);
          pgraphics->SetBkColor(color2);
 

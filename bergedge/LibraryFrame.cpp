@@ -109,7 +109,7 @@ BOOL CLibraryFrame::PreCreateWindow(CREATESTRUCT& cs)
 }
 Gdiplus::Bitmap * LoadPNG(LPCTSTR pName,LPCTSTR pType,HMODULE hInst);
 //BOOL CLibraryFrame::CreateEx(DWORD dwExStyle,LPCTSTR lpClassName,
-//   LPCTSTR lpszWindowName,DWORD dwStyle,const RECT& rect,
+//   LPCTSTR lpszWindowName,DWORD dwStyle,const RECT& rectangle,
 //   CWnd* pParentWnd,UINT nID)
 //{
 //   // set m_bInRecalcLayout to avoid flashing during creation
@@ -129,7 +129,7 @@ Gdiplus::Bitmap * LoadPNG(LPCTSTR pName,LPCTSTR pType,HMODULE hInst);
 ////   DWORD dwExStyle = 0;
 //   if(!CMiniFrameWnd::CreateEx(dwExStyle,lpClassName ? lpClassName :
 //      AfxRegisterWndClass(CS_DBLCLKS,::LoadCursor(nullptr,IDC_ARROW)),
-//      lpszWindowName,dwStyle,rect,pParentWnd,(UINT_PTR)nID))
+//      lpszWindowName,dwStyle,rectangle_i32,pParentWnd,(UINT_PTR)nID))
 //   {
 //      return false;
 //   }
@@ -339,7 +339,7 @@ void CLibraryFrame::NotifyFloatingWindows(DWORD dwFlags)
 }
 
 
-void CLibraryFrame::OnNcLButtonDown(UINT nHitTest,CPoint point)
+void CLibraryFrame::OnNcLButtonDown(UINT nHitTest,CPoint point_i32)
 {
    //if(nHitTest == HTCAPTION)
    //{
@@ -377,16 +377,16 @@ void CLibraryFrame::OnNcLButtonDown(UINT nHitTest,CPoint point)
 
    //   //// CBRS_SIZE_DYNAMIC toolbars cannot have the CBRS_FLOAT_MULTI style
    //   //ASSERT((m_wndDockBar.m_dwStyle & CBRS_FLOAT_MULTI) == 0);
-   //   //pBar->m_pDockContext->StartResize(nHitTest,point);
+   //   //pBar->m_pDockContext->StartResize(nHitTest,point_i32);
    //   return;
    //}
    m_bTracking = true;
-   CMiniFrameWnd::OnNcLButtonDown(nHitTest,point);
+   CMiniFrameWnd::OnNcLButtonDown(nHitTest,point_i32);
 
    //Default();
 }
 
-void CLibraryFrame::OnNcLButtonDblClk(UINT nHitTest,CPoint point)
+void CLibraryFrame::OnNcLButtonDblClk(UINT nHitTest,CPoint point_i32)
 {
    if(nHitTest == HTCAPTION)
    {
@@ -408,7 +408,7 @@ void CLibraryFrame::OnNcLButtonDblClk(UINT nHitTest,CPoint point)
       //   return;
       //}
    }
-   CMiniFrameWnd::OnNcLButtonDblClk(nHitTest,point);
+   CMiniFrameWnd::OnNcLButtonDblClk(nHitTest,point_i32);
 }
 
 BOOL CLibraryFrame::Create(CWnd* pParent,DWORD dwBarStyle, PVOID p)
@@ -429,10 +429,10 @@ BOOL CLibraryFrame::Create(CWnd* pParent,DWORD dwBarStyle, PVOID p)
    DWORD dwExStyle = 0;
    m_strCaption = "Library";
 
-   CRect rect = rectDefault;
+   CRect rectangle_i32 = rectDefault;
    if(!CWnd::CreateEx(dwExStyle,AfxRegisterWndClass(CS_DBLCLKS,::LoadCursor(nullptr,IDC_ARROW)),
-      m_strCaption,dwStyle,rect.left,rect.top,rect.right - rect.left,
-      rect.bottom - rect.top,pParent->GetSafeHwnd(),(HMENU)(UINT_PTR)0,p))
+      m_strCaption,dwStyle,rectangle.left,rectangle.top,rectangle.right - rectangle.left,
+      rectangle.bottom - rectangle.top,pParent->GetSafeHwnd(),(HMENU)(UINT_PTR)0,p))
    {
       return FALSE;
    }
@@ -509,9 +509,9 @@ BOOL CLibraryFrame::LoadFrame(UINT nIDResource,DWORD dwDefaultStyle,
 }
 
 
-void CLibraryFrame::OnNcLButtonUp(UINT nHitTest,CPoint point)
+void CLibraryFrame::OnNcLButtonUp(UINT nHitTest,CPoint point_i32)
 {
-   CMiniFrameWnd::OnNcLButtonUp(nHitTest,point);
+   CMiniFrameWnd::OnNcLButtonUp(nHitTest,point_i32);
 
    m_bTracking = false;
 }

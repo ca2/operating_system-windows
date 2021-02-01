@@ -1157,6 +1157,7 @@
   <ItemGroup>
     <ClInclude Include="bitmap.h" />
     <ClInclude Include="brush.h" />
+    <ClInclude Include="draw2d.h" />
     <ClInclude Include="printer.h" />
     <ClInclude Include="_.h" />
     <ClInclude Include="font.h" />
@@ -1171,6 +1172,7 @@
   <ItemGroup>
     <ClCompile Include="bitmap.cpp" />
     <ClCompile Include="brush.cpp" />
+    <ClCompile Include="draw2d.cpp" />
     <ClCompile Include="text.cpp" />
     <ClCompile Include="_.cpp" />
     <ClCompile Include="factory_exchange.cpp" />

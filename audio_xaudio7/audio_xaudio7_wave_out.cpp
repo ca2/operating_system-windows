@@ -307,7 +307,7 @@ Opened:
 
          u32 uiBufferSize = iBufferSampleCount * m_pwaveformat->nChannels * 2;
 
-         ASSERT((uiBufferSize % 2048) == 0);// Streaming size must be 2K aligned to use for async I/O
+         ASSERT((uiBufferSize % 2048) == 0);// Streaming size_i32 must be 2K aligned to use for async I/O
 
 
 

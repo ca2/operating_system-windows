@@ -13,6 +13,7 @@ void draw2d_gdiplus_factory_exchange()
    create_factory < ::draw2d_gdiplus::region, ::draw2d::region >();
    create_factory < ::draw2d_gdiplus::font, ::draw2d::font >();
    create_factory < ::draw2d_gdiplus::path, ::draw2d::path >();
+   create_factory < ::draw2d_gdiplus::draw2d, ::draw2d::draw2d >();
 
 }
 

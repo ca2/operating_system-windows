@@ -26,9 +26,9 @@ namespace draw2d_gdiplus
 
       virtual bool contains(const POINT & point, ::draw2d::graphics * pgraphics = nullptr) override;
 
-      virtual bool get_bounding_box(RECT* prect, ::draw2d::graphics * pgraphics = nullptr) override;
+      virtual bool get_bounding_box(RECT* prectangle, ::draw2d::graphics * pgraphics = nullptr) override;
 
-      virtual void max_bounding_box(RECTD * prect, ::draw2d::graphics * pgraphics) override;
+      virtual void max_bounding_box(RECTANGLE_F64 * prectangle, ::draw2d::graphics * pgraphics) override;
 
       Gdiplus::Region * get(::draw2d::graphics * pgraphics);
       Gdiplus::Region * get_rect(::draw2d::graphics * pgraphics);

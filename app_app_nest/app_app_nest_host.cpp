@@ -148,7 +148,7 @@ namespace ca2plugin_container
    }
 
 
-   void host::post_message(u32 emessage, WPARAM wparam, LPARAM lparam)
+   void host::post_message(u32 emessage, wparam wparam, lparam lparam)
    {
 
       ::PostMessage(m_oswindow, emessage, wparam, lparam);
@@ -387,23 +387,23 @@ namespace ca2plugin_container
          if(message == ::hotplugin::message_set_window)
          {
 
-            const RECT & rect = *((LPCRECT) pdata);
+            const RECT & rectangle = *((LPCRECT) pdata);
 
-            //if(m_rect != rect)
+            //if(m_rectangle != rectangle_i32)
             {
 
-               m_rect = rect;
+               m_rectangle = rectangle_i32;
 
-               m_rectClient = rect;
+               m_rectClient = rectangle_i32;
 
                m_rectClient.offset(-m_rectClient.top_left());
 
-               m_rectWindow = rect;
+               m_rectWindow = rectangle_i32;
 
                try
                {
 
-                  SetPlacement(rect);
+                  SetPlacement(rectangle);
 
                }
                catch(...)
@@ -417,7 +417,7 @@ namespace ca2plugin_container
          {
 
 
-            const ::rect & rect = *((LPCRECT) pdata);
+            const ::rectangle_i32 & rectangle = *((LPCRECT) pdata);
 
             try
             {
@@ -428,9 +428,9 @@ namespace ca2plugin_container
 
                //g->CreateCompatibleDC(nullptr);
 
-               //on_paint(g, rect);
+               //on_paint(g, rectangle);
 
-               on_paint(nullptr,rect);
+               on_paint(nullptr,rectangle_i32);
 
             }
             catch(...)

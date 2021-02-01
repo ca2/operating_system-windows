@@ -150,7 +150,7 @@ namespace music
          void midi::mmsystem_GetMidiInDeviceInterface(UINT_PTR i)
          {
 
-            // query the size of the device interface string
+            // query the size_i32 of the device interface string
             HMIDIIN h = reinterpret_cast<HMIDIIN>(i);
             ULONG size = 0;
             MMRESULT mmr = midiInMessage(
@@ -165,14 +165,14 @@ namespace music
                return;
             }
 
-            if (0 == size)
+            if (0 == size_i32)
             {
                LOG("No device interface");
                return;
             }
             if (size % sizeof(WCHAR))
             {
-               LOG("Device interface length in bytes (%u) should be a multiple of the size of a WCHAR!", size);
+               LOG("Device interface length in bytes (%u) should be a multiple of the size_i32 of a WCHAR!", size);
                return;
             }
 
@@ -186,7 +186,7 @@ namespace music
                   h,
                   DRV_QUERYDEVICEINTERFACE,
                   reinterpret_cast<DWORD_PTR>((wchar_t *) wstr),
-                  size
+                  size_i32
                   );
 
             wstr.release_string_buffer();
@@ -205,7 +205,7 @@ namespace music
          void midi::mmsystem_GetMidiOutDeviceInterface(UINT_PTR i)
          {
 
-            // query the size of the device interface string
+            // query the size_i32 of the device interface string
             HMIDIOUT h = reinterpret_cast<HMIDIOUT>(i);
             ULONG size = 0;
             MMRESULT mmr = midiOutMessage(
@@ -220,14 +220,14 @@ namespace music
                return;
             }
 
-            if (0 == size)
+            if (0 == size_i32)
             {
                LOG("No device interface");
                return;
             }
             if (size % sizeof(WCHAR))
             {
-               LOG("Device interface length in bytes (%u) should be a multiple of the size of a WCHAR!", size);
+               LOG("Device interface length in bytes (%u) should be a multiple of the size_i32 of a WCHAR!", size);
                return;
             }
 
@@ -238,7 +238,7 @@ namespace music
                   h,
                   DRV_QUERYDEVICEINTERFACE,
                   reinterpret_cast<DWORD_PTR>((wchar_t *) wstr),
-                  size
+                  size_i32
                   );
 
             wstr.release_string_buffer();

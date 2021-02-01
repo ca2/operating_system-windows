@@ -38,7 +38,7 @@ namespace draw2d_gdiplus
       bool CreateCompatibleBitmap(::draw2d::graphics * pgraphics, i32 nWidth, i32 nHeight);
       bool CreateDiscardableBitmap(::draw2d::graphics * pgraphics, i32 nWidth, i32 nHeight);
       virtual bool host_bitmap(::draw2d::graphics * pgraphics, const pixmap* ppximap) override;
-      virtual bool create_bitmap(::draw2d::graphics * pgraphics, const ::size & size, void **ppvBits, int * stride) override;
+      virtual bool create_bitmap(::draw2d::graphics * pgraphics, const ::size_i32 & size, void **ppvBits, int * stride) override;
       virtual bool CreateDIBitmap(::draw2d::graphics * pgraphics, int cx, int cy, u32 flInit, const void *pjBits, UINT iUsage) override;
 
 
@@ -49,8 +49,8 @@ namespace draw2d_gdiplus
 
       u32 GetBitmapBits(u32 dwCount, LPVOID pBits) const;
 
-      ::size SetBitmapDimension(i32 nWidth, i32 nHeight);
-      ::size GetBitmapDimension() const;
+      ::size_i32 SetBitmapDimension(i32 nWidth, i32 nHeight);
+      ::size_i32 GetBitmapDimension() const;
 
 
       virtual bool attach(void * posdata);

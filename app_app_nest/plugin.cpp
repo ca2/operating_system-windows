@@ -121,32 +121,32 @@ install:
       int cx = rectWindow.right - rectWindow.left;
       int cy = rectWindow.bottom - rectWindow.top;
 
-      RECT rect;
-      rect.left         = 0;
-      rect.top          = 0;
-      rect.right        = cx;
-      rect.bottom       = cy;
+      RECT rectangle_i32;
+      rectangle.left         = 0;
+      rectangle.top          = 0;
+      rectangle.right        = cx;
+      rectangle.bottom       = cy;
 
       HBITMAP hbmp      = ::CreateCompatibleBitmap(hdcWindow, cx, cy);
       HDC hdc           = ::CreateCompatibleDC(hdcWindow);
       HBITMAP hbmpOld   =  (HBITMAP) ::SelectObject(hdc, (HGDIOBJ) hbmp);
    
-      ::BitBlt(hdc, 0, 0, cx, cy, hdcWindow, m_rect.left, m_rect.top, SRCCOPY);
+      ::BitBlt(hdc, 0, 0, cx, cy, hdcWindow, m_rectangle.left, m_rectangle.top, SRCCOPY);
 
       HFONT hfontOld = nullptr;
       HFONT hfont = nullptr;
       if(is_installing_ca2())
       {
-         ca2_install_canvas_on_paint(hdc, &rect, m_iHealingSurface);
+         ca2_install_canvas_on_paint(hdc, &rectangle, m_iHealingSurface);
       }
       else if(!is_ca2_installed())
       {
-         RECT rect;
-         rect.left      = 0;
-         rect.top       = 0;
-         rect.bottom    = cx;
-         rect.right     = cy;
-         ::FillSolidRect_dup(hdc, &rect, RGB(255, 255, 255));
+         RECT rectangle_i32;
+         rectangle.left      = 0;
+         rectangle.top       = 0;
+         rectangle.bottom    = cx;
+         rectangle.right     = cy;
+         ::FillSolidRect_dup(hdc, &rectangle, RGB(255, 255, 255));
          ::SetTextColor(hdc, RGB(255, 0, 255));
          const char * psz = "ca2 is not installed! You may try to install using low level spaboot_install.exe.";
          ::TextOutU_dup(hdc, 10, 10, psz, ansi_length(psz));
@@ -157,7 +157,7 @@ install:
       POINT pointViewport;
       ::SetViewportOrgEx(hdc, 0, 0, &pointViewport);
       ::BitBlt(hdcWindow, lprect->left, lprect->top, lprect->right - lprect->left, lprect->bottom - lprect->top, 
-               hdc,       lprect->left - m_rect.left, lprect.top - m_rect.top, SRCCOPY);
+               hdc,       lprect->left - m_rectangle.left, lprect.top - m_rectangle.top, SRCCOPY);
       ::SelectObject(hdc, (HGDIOBJ) hbmpOld);
       if(hfontOld != nullptr)
       {
@@ -276,7 +276,7 @@ install:
 
 
 
-   UINT_PTR plugin::message_handler(UINT_PTR emessage, WPARAM wparam, LPARAM lparam)
+   UINT_PTR plugin::message_handler(UINT_PTR emessage, wparam wparam, lparam lparam)
    {
       switch(emessage)
       {

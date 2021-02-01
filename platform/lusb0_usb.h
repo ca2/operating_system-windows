@@ -336,9 +336,9 @@ extern "C"
     /* descriptors.c */
     int usb_get_descriptor_by_endpoint(usb_dev_handle *udev, int ep,
                                        unsigned char type, unsigned char index,
-                                       void *buf, int size);
+                                       void *buf, int size_i32);
     int usb_get_descriptor(usb_dev_handle *udev, unsigned char type,
-                           unsigned char index, void *buf, int size);
+                           unsigned char index, void *buf, int size_i32);
 
     /* <arch>.c */
     int usb_bulk_write(usb_dev_handle *dev, int ep, char *bytes, int size,
@@ -412,7 +412,7 @@ extern "C"
     int usb_interrupt_setup_async(usb_dev_handle *dev, void **action_context,
                                   unsigned char ep);
 
-    int usb_submit_async(void *action_context, char *bytes, int size);
+    int usb_submit_async(void *action_context, char *bytes, int size_i32);
     int usb_reap_async(void *action_context, int timeout);
     int usb_reap_async_nocancel(void *action_context, int timeout);
     int usb_cancel_async(void *action_context);

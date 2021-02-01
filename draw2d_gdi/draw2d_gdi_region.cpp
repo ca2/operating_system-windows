@@ -55,10 +55,10 @@ namespace draw2d_gdi
    }
 
 
-   bool region::create_rect(const ::rect & rect)
+   bool region::create_rect(const ::rectangle_i32 & rectangle)
    {
 
-      return Attach(::CreateRectRgnIndirect(rect));
+      return Attach(::CreateRectRgnIndirect(rectangle));
 
    }
 
@@ -71,10 +71,10 @@ namespace draw2d_gdi
    }
 
 
-   bool region::create_oval(const ::rect & rect)
+   bool region::create_oval(const ::rectangle_i32 & rectangle)
    {
 
-      return Attach(::CreateEllipticRgnIndirect(rect));
+      return Attach(::CreateEllipticRgnIndirect(rectangle));
 
    }
 
@@ -128,10 +128,10 @@ namespace draw2d_gdi
       ASSERT(get_os_data() != nullptr); ::SetRectRgn((HRGN)get_os_data(), x1, y1, x2, y2);
    }
 
-   void region::SetRectRgn(const ::rect & rect)
+   void region::SetRectRgn(const ::rectangle_i32 & rectangle)
    {
 
-      ::SetRectRgn((HRGN)get_os_data(), rect.left, rect.top, rect.right, rect.bottom);
+      ::SetRectRgn((HRGN)get_os_data(), rectangle.left, rectangle.top, rectangle.right, rectangle.bottom);
 
    }
 
@@ -177,7 +177,7 @@ namespace draw2d_gdi
    }
 
 
-   int region::OffsetRgn(const ::point & point)
+   int region::OffsetRgn(const ::point_i32 & point)
    {
 
       ASSERT(get_os_data() != nullptr);
@@ -187,12 +187,12 @@ namespace draw2d_gdi
    }
 
 
-   int region::GetRgnBox(RECT * prect) const
+   int region::GetRgnBox(RECT * prectangle) const
    {
 
       ASSERT(get_os_data() != nullptr);
 
-      return ::GetRgnBox((HRGN)get_os_data(), prect);
+      return ::GetRgnBox((HRGN)get_os_data(), prectangle);
 
    }
 
@@ -207,7 +207,7 @@ namespace draw2d_gdi
    }
 
 
-   bool region::contains(const ::point & point) const
+   bool region::contains(const ::point_i32 & point) const
    {
       ASSERT(get_os_data() != nullptr);
 
@@ -216,12 +216,12 @@ namespace draw2d_gdi
    }
 
 
-   bool region::RectInRegion(const ::rect & rect) const
+   bool region::RectInRegion(const ::rectangle_i32 & rectangle) const
    {
 
       ASSERT(get_os_data() != nullptr);
 
-      return ::RectInRegion((HRGN)get_os_data(), rect) != FALSE;
+      return ::RectInRegion((HRGN)get_os_data(), rectangle) != FALSE;
 
    }
 

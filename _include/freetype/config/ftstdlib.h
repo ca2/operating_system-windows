@@ -41,7 +41,7 @@
    *
    *                          integer limits
    *
-   * `UINT_MAX` and `ULONG_MAX` are used to automatically compute the size of
+   * `UINT_MAX` and `ULONG_MAX` are used to automatically compute the size_i32 of
    * `int` and `long` in bytes at compile-time.  So far, this works for all
    * platforms the library has been tested on.
    *

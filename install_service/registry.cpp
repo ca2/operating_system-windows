@@ -180,7 +180,7 @@ int create_exit_action(TCHAR *service_name, const TCHAR *action_string, bool edi
 int get_environment(TCHAR *service_name, HKEY key, TCHAR *value, TCHAR **env, unsigned long *envlen) {
   unsigned long type = REG_MULTI_SZ;
 
-  /* Dummy test to find buffer size */
+  /* Dummy test to find buffer size_i32 */
   unsigned long ret = RegQueryValueEx(key, value, 0, &type, nullptr, envlen);
   if (ret != ERROR_SUCCESS) {
     *env = 0;

@@ -12,7 +12,7 @@ int SetDefaultPrinterOrientation(short dmOrientation)
    LPTSTR pPrinterName = nullptr;
    DWORD size;
    GetDefaultPrinter(nullptr,&size);
-   TCHAR* buffer = new TCHAR[size];
+   TCHAR* buffer = new TCHAR[size_i32];
    if(GetDefaultPrinter(buffer,&size))
       pPrinterName = buffer;
    else
@@ -183,7 +183,7 @@ BOOL SetPaperType(short dmPaperSize)
    LPTSTR pPrinterName = nullptr;
    DWORD size;
    GetDefaultPrinter(nullptr,&size);
-   TCHAR* buffer = new TCHAR[size];
+   TCHAR* buffer = new TCHAR[size_i32];
    if(GetDefaultPrinter(buffer,&size))
       pPrinterName = buffer;
    else

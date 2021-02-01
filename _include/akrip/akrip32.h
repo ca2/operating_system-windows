@@ -223,7 +223,7 @@ typedef struct
 #define CDP_SSS          0x001C     // Software Slot Selection
 #define CDP_MAXSPEED     0x001D     // maximum supported speed of drive
 #define CDP_NUMVOL       0x001E     // number of volume levels
-#define CDP_BUFSIZE      0x001F     // size of output buffer
+#define CDP_BUFSIZE      0x001F     // size_i32 of output buffer
 #define CDP_CURRSPEED    0x0020     // current speed of drive
 #define CDP_SPM          0x0021     // "S" units per "M" (MSF format)
 #define CDP_FPS          0x0022     // "F" units per "S" (MSF format)

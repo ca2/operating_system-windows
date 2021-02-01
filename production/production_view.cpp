@@ -128,14 +128,14 @@ namespace production
    void view::_001OnSize(::message::message * pmessage)
    {
       UNREFERENCED_PARAMETER(pmessage);
-//      __pointer(::message::size) psize(pmessage);
+//      __pointer(::message::size_i32) psize(pmessage);
 
-      ::rect rectDesktop;
+      ::rectangle_i32 rectDesktop;
       best_monitor(rectDesktop);
 
       m_iWScreen = rectDesktop.width();
       m_iHScreen = rectDesktop.height();
-      ::rect rectClient = get_client_rect();
+      ::rectangle_i32 rectClient = get_client_rect();
       //GetClientRect(rectClient);
       rectClient.deflate(2, 2);
       i32 iW = rectClient.width() / 2;
@@ -169,7 +169,7 @@ namespace production
 
       single_lock sl(&m_pproduction->m_mutexStatus,TRUE);
 
-      ::rect rectClient = get_client_rect();
+      ::rectangle_i32 rectClient = get_client_rect();
       //GetClientRect(rectClient);
 
       pgraphics->SelectObject(_001GetFont(::user::font_default));
@@ -179,13 +179,13 @@ namespace production
 
       pgraphics->fill_rect(rectClient, ARGB(255, 255, 255, 255));
 
-      ::rect rectText(rectClient);
+      ::rectangle_i32 rectText(rectClient);
 
       rectText.bottom -= 84;
 
-      ::rect rcItem;
+      ::rectangle_i32 rcItem;
 
-      ::point pointOffset = get_viewport_offset();
+      ::point_i32 pointOffset = get_viewport_offset();
 
       i32 iStart = pointOffset.y / m_iLineHeight;
       i32 y = m_iLineHeight - pointOffset.y % m_iLineHeight;
@@ -194,7 +194,7 @@ namespace production
          iStart--;
          y -= m_iLineHeight;
       }
-      ::rect rectClip(rectText);
+      ::rectangle_i32 rectClip(rectText);
       //ClientToScreen(rectClip);
       ::draw2d::region_pointer rgnClip(e_create);
       rgnClip->create_rect(rectClip);
@@ -217,7 +217,7 @@ namespace production
 
 
 
-      ::rect rectArea;
+      ::rectangle_i32 rectArea;
 
       GetAreaThumbRect(rectArea, m_iV);
       if (m_pimageV)
@@ -259,27 +259,27 @@ namespace production
       if(pmessage->previous())
          return;
 
-      ::rect rect;
-      //rect.null();
+      ::rectangle_i32 rectangle;
+      //rectangle.null();
 
       //if(!m_pscrollbarHorizontal->create_window(
       // orientation_horizontal,
       // WS_CHILD
       // | WS_VISIBLE,
-      // rect,
+      // rectangle_i32,
       // this,
       // 1024))
       //  {
       // return;
       //  }
 
-      //  rect.null();
+      //  rectangle.null();
 
       //if(!m_pscrollbarVertical->create_window(
       // orientation_vertical,
       // WS_CHILD
       // | WS_VISIBLE,
-      // rect,
+      // rectangle_i32,
       // this,
       // 1025))
       //  {
@@ -328,7 +328,7 @@ namespace production
    void view::_001OnContextMenu(::message::message * pmessage)
    {
       __pointer(::message::context_menu) pcontextmenu(pmessage);
-      ::point point = pcontextmenu->GetPoint();
+      ::point_i32 point = pcontextmenu->GetPoint();
    }
 
 
@@ -362,7 +362,7 @@ namespace production
 
    void view::GetAreaThumbRect(LPRECT lprect, i32 iArea)
    {
-      ::rect rectClient = get_client_rect();
+      ::rectangle_i32 rectClient = get_client_rect();
       //GetClientRect(rectClient);
       if(iArea == m_iV)
       {
@@ -383,7 +383,7 @@ namespace production
    void view::on_hit_test(::user::item & item)
    {
 
-      ::rect rectArea;
+      ::rectangle_i32 rectArea;
       GetAreaThumbRect(rectArea, m_iV);
       if (rectArea.contains(item.m_pointHitTest))
       {
@@ -526,7 +526,7 @@ namespace production
             single_lock sl(&m_pproduction->m_mutexStatus,TRUE);
             if(m_pproduction->m_straStatus.get_size() > 0)
             {
-               ::size sizePage = get_page_size();
+               ::size_i32 sizePage = get_page_size();
                m_sizeTotal.cx = 80;
                m_sizeTotal.cy = (LONG)(m_pproduction.m_straStatus.get_size() * iLineHeight + 84);
                sl.unlock();
@@ -589,7 +589,7 @@ namespace production
    }
 
 
-   size view::get_total_size()
+   size_i32 view::get_total_size()
    {
 
       return m_sizeTotal;

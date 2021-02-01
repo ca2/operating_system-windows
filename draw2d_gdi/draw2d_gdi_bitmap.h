@@ -33,8 +33,8 @@ namespace draw2d_gdi
 
       u32 SetBitmapBits(u32 dwCount, const void * lpBits);
       u32 GetBitmapBits(u32 dwCount, LPVOID lpBits) const;
-      ::size SetBitmapDimension(int nWidth, int nHeight);
-      ::size GetBitmapDimension() const;
+      ::size_i32 SetBitmapDimension(int nWidth, int nHeight);
+      ::size_i32 GetBitmapDimension() const;
 
       virtual void dump(dump_context & dumpcontext) const;
 

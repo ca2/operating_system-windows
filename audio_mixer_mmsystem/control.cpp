@@ -124,7 +124,7 @@ namespace multimedia
          u32 nBalanceID = nID++;
          u32 nBalanceLabelID = nID++;
 
-         ::rect rect(0, 0, 0, 0);
+         ::rectangle_i32 rectangle(0, 0, 0, 0);
 
          __pointer(::multimedia::audio_mixer::user::level_control) plevelcontrol = source->get_device()->get_mixer()->get_audio_mixer_callback()->allocate_level_control();
          if (plevelcontrol == nullptr)

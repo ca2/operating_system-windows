@@ -1,7 +1,7 @@
 #include "framework.h"
 
 
-::e_status gdiplus_draw_text(::draw2d::graphics* pgraphicsParam, ::draw2d::path* ppathParam, const string& str, rectd& rectParam, const ::e_align & ealign, const ::e_draw_text & edrawtext, ::draw2d::font* pfontParam, double dFontWidth, ::draw2d::brush* pbrushParam, bool bMeasure)
+::e_status gdiplus_draw_text(::draw2d::graphics* pgraphicsParam, ::draw2d::path* ppathParam, const string& str, rectangle_f64& rectParam, const ::e_align & ealign, const ::e_draw_text & edrawtext, ::draw2d::font* pfontParam, double dFontWidth, ::draw2d::brush* pbrushParam, bool bMeasure)
 {
 
    if (str.is_empty())
@@ -157,7 +157,7 @@
          if (unit == Gdiplus::UnitPoint)
          {
 
-            size = pgraphics->GetDpiY() * size / 73.0f;
+            size = pgraphics->GetDpiY() * size_i32 / 73.0f;
 
          }
 
@@ -175,21 +175,21 @@
       if (dFontWidth == 1.0)
       {
 
-         Gdiplus::RectF rectf((Gdiplus::REAL) rectParam.left, (Gdiplus::REAL) rectParam.top, (Gdiplus::REAL) (width(rectParam) * dFontWidth), (Gdiplus::REAL) (height(rectParam)));
+         Gdiplus::RectF rectangle_f32((Gdiplus::REAL) rectParam.left, (Gdiplus::REAL) rectParam.top, (Gdiplus::REAL) (width(rectParam) * dFontWidth), (Gdiplus::REAL) (height(rectParam)));
 
          strsize iSize = text.m_wstr.get_length();
 
          if (ppath)
          {
 
-            status = ppath->AddString(text.m_wstr, (INT)iSize, &f, nStyle, size, rectf, &format);
+            status = ppath->AddString(text.m_wstr, (INT)iSize, &f, nStyle, size, rectangle_f32, &format);
 
             if (bMeasure)
             {
 
                Gdiplus::RectF box;
 
-               status = pgraphics->MeasureString(text.m_wstr, (INT)iSize, pfont, rectf, &format, &box);
+               status = pgraphics->MeasureString(text.m_wstr, (INT)iSize, pfont, rectangle_f32, &format, &box);
 
                __copy(rectParam, box);
 
@@ -201,14 +201,14 @@
 
             auto e = pgraphics->GetTextRenderingHint();
 
-            status = pgraphics->DrawString(text.m_wstr, (INT)iSize, pfont, rectf, &format, pbrush);
+            status = pgraphics->DrawString(text.m_wstr, (INT)iSize, pfont, rectangle_f32, &format, pbrush);
 
             if (bMeasure)
             {
 
                Gdiplus::RectF box;
 
-               status = pgraphics->MeasureString(text.m_wstr, (INT)iSize, pfont, rectf, &format, &box);
+               status = pgraphics->MeasureString(text.m_wstr, (INT)iSize, pfont, rectangle_f32, &format, &box);
 
                __copy(rectParam, box);
 
@@ -234,20 +234,20 @@
 
          status = pmNew->Scale((Gdiplus::REAL) dFontWidth, (Gdiplus::REAL) 1.0, Gdiplus::MatrixOrderAppend);
 
-         Gdiplus::RectF rectf(0, 0, (Gdiplus::REAL) (width(rectParam) * dFontWidth), (Gdiplus::REAL) (height(rectParam)));
+         Gdiplus::RectF rectangle_f32(0, 0, (Gdiplus::REAL) (width(rectParam) * dFontWidth), (Gdiplus::REAL) (height(rectParam)));
 
          status = pgraphics->SetTransform(pmNew);
 
          strsize iSize = text.m_wstr.get_length();
 
-         status = pgraphics->DrawString(text.m_wstr, (INT)iSize, pfont, rectf, &format, pbrush);
+         status = pgraphics->DrawString(text.m_wstr, (INT)iSize, pfont, rectangle_f32, &format, pbrush);
 
          if (bMeasure)
          {
 
             Gdiplus::RectF box;
 
-            status = pgraphics->MeasureString(text.m_wstr, (INT)iSize, pfont, rectf, &format, &box);
+            status = pgraphics->MeasureString(text.m_wstr, (INT)iSize, pfont, rectangle_f32, &format, &box);
 
             __copy(rectParam, box);
 
@@ -268,7 +268,7 @@
 
          //status = pmNew->Scale((Gdiplus::REAL) m_pfont->m_dFontWidth, (Gdiplus::REAL) 1.0, Gdiplus::MatrixOrderAppend);
 
-         //Gdiplus::RectF rectf(0, 0, (Gdiplus::REAL) (width(rectParam) * m_pfont->m_dFontWidth), (Gdiplus::REAL) (height(rectParam)));
+         //Gdiplus::RectF rectangle_f32(0, 0, (Gdiplus::REAL) (width(rectParam) * m_pfont->m_dFontWidth), (Gdiplus::REAL) (height(rectParam)));
 
          //status = ppath->SetTransform(pmNew);
 
@@ -280,7 +280,7 @@
 
          //strsize iSize = text.m_wstr.get_length();
 
-         //status = ppath->AddString(text.m_wstr, (INT)iSize, f, nStyle, emSize, rectf, &format);
+         //status = ppath->AddString(text.m_wstr, (INT)iSize, f, nStyle, emSize, rectangle_f32, &format);
 
          //status = ppath->SetTransform(m);
 

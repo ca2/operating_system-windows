@@ -445,19 +445,19 @@
 #  define PNG_RESTRICT    /* The C99 "restrict" feature */
 #endif
 
-#ifndef PNG_FP_EXPORT     /* A floating point API. */
+#ifndef PNG_FP_EXPORT     /* A floating point_i32 API. */
 #  ifdef PNG_FLOATING_POINT_SUPPORTED
 #     define PNG_FP_EXPORT(ordinal, type, name, args)\
          PNG_EXPORT(ordinal, type, name, args);
-#  else                   /* No floating point APIs */
+#  else                   /* No floating point_i32 APIs */
 #     define PNG_FP_EXPORT(ordinal, type, name, args)
 #  endif
 #endif
-#ifndef PNG_FIXED_EXPORT  /* A fixed point API. */
+#ifndef PNG_FIXED_EXPORT  /* A fixed point_i32 API. */
 #  ifdef PNG_FIXED_POINT_SUPPORTED
 #     define PNG_FIXED_EXPORT(ordinal, type, name, args)\
          PNG_EXPORT(ordinal, type, name, args);
-#  else                   /* No fixed point APIs */
+#  else                   /* No fixed point_i32 APIs */
 #     define PNG_FIXED_EXPORT(ordinal, type, name, args)
 #  endif
 #endif
@@ -567,7 +567,7 @@ typedef ptrdiff_t png_ptrdiff_t;
  * not been verified recently.
  */
 
-/* Typedef for floating-point numbers that are converted to fixed-point with a
+/* Typedef for floating-point_i32 numbers that are converted to fixed-point_i32 with a
  * multiple of 100,000, e.g., gamma
  */
 typedef png_int_32 png_fixed_point;

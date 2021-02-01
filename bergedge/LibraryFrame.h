@@ -30,9 +30,9 @@ public:
    afx_msg int OnCreate(LPCREATESTRUCT lpCreateStruct);
    afx_msg void OnActivate(UINT nState,CWnd* pWndOther,BOOL bMinimized);
    afx_msg BOOL OnNcActivate(BOOL bActive);
-   afx_msg void OnNcLButtonDblClk(UINT nHitTest,CPoint point);
-   afx_msg void OnNcLButtonDown(UINT nHitTest,CPoint point);
-   afx_msg void OnNcLButtonUp(UINT nHitTest,CPoint point);
+   afx_msg void OnNcLButtonDblClk(UINT nHitTest,CPoint point_i32);
+   afx_msg void OnNcLButtonDown(UINT nHitTest,CPoint point_i32);
+   afx_msg void OnNcLButtonUp(UINT nHitTest,CPoint point_i32);
    afx_msg void OnGetMinMaxInfo(MINMAXINFO* lpMMI);
    afx_msg void OnFileNewlibrary();
    afx_msg void OnFileOpenlibrary();

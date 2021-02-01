@@ -13,7 +13,7 @@
 #endif
 
 
-::e_status gdiplus_draw_text(::draw2d::graphics * pgraphics, ::draw2d::path * ppath, const string & str, rectd & rectParam, const ::e_align & ealign, const ::e_draw_text & edrawtext, ::draw2d::font * pfont, double dFontWidth, ::draw2d::brush * pbrush = nullptr, bool bMeasure = false);
+::e_status gdiplus_draw_text(::draw2d::graphics * pgraphics, ::draw2d::path * ppath, const string & str, rectangle_f64 & rectParam, const ::e_align & ealign, const ::e_draw_text & edrawtext, ::draw2d::font * pfont, double dFontWidth, ::draw2d::brush * pbrush = nullptr, bool bMeasure = false);
 
 
 inline auto gdiplus_color(const ::color& color)
@@ -37,7 +37,7 @@ class g_keep
 
 public:
 
-   Gdiplus::Graphics* point;
+   Gdiplus::Graphics* point_i32;
    Gdiplus::GraphicsState s;
 
    g_keep(Gdiplus::Graphics* point1)
@@ -45,14 +45,14 @@ public:
 
       point = point1;
 
-      s = point->Save();
+      s = point_i32->Save();
 
    }
 
    ~g_keep()
    {
 
-      point->Restore(s);
+      point_i32->Restore(s);
 
    }
 

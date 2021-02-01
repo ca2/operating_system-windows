@@ -29,7 +29,7 @@ namespace multimedia
 
          ::multimedia::audio_mixer::audio_mixer * get_mixer();
          virtual string get_product_name() override;
-         bool OnCommand(WPARAM wparam, LPARAM lparam);
+         bool OnCommand(wparam wparam, lparam lparam);
          ::e_status     close();
          void MapDlgCtrlIDToLineControls(::multimedia::audio_mixer::source * pSource);
          void MapDlgCtrlIDToControls();

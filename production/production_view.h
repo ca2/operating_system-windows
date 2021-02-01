@@ -14,7 +14,7 @@ namespace production
    public:
 
 
-      //size                          m_sizeTotal;
+      //size_i32                          m_sizeTotal;
       i32                     m_iStep;
       bool                    m_bLayout;
 
@@ -102,7 +102,7 @@ namespace production
       DECL_GEN_SIGNAL(_001OnKeyUp);
 
 
-      virtual ::size get_total_size();
+      virtual ::size_i32 get_total_size();
 
 
       virtual void on_viewport_offset(::draw2d::graphics_pointer & pgraphics);

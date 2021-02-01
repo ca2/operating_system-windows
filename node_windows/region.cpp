@@ -33,22 +33,22 @@ namespace draw2d_gdiplus
    }
 
 
-   bool region::get_bounding_box(RECT * prect, ::draw2d::graphics * pgraphics)
+   bool region::get_bounding_box(RECT * prectangle, ::draw2d::graphics * pgraphics)
    {
 
       defer_update(pgraphics, 0);
 
-      Gdiplus::Rect rect;
+      Gdiplus::Rect rectangle_i32;
 
-      m_pregion->GetBounds(&rect, __graphics(pgraphics)->m_pgraphics);
+      m_pregion->GetBounds(&rectangle, __graphics(pgraphics)->m_pgraphics);
 
-      prect->left = rect.X;
+      prectangle->left = rectangle.X;
 
-      prect->top = rect.Y;
+      prectangle->top = rectangle.Y;
 
-      prect->right = rect.X + rect.Width;
+      prectangle->right = rectangle.X + rectangle.Width;
 
-      prect->bottom = rect.Y + rect.Height;
+      prectangle->bottom = rectangle.Y + rectangle.Height;
 
 
       return true;
@@ -57,12 +57,12 @@ namespace draw2d_gdiplus
 
 
 
-   void region::max_bounding_box(RECTD * prect, ::draw2d::graphics * pgraphics)
+   void region::max_bounding_box(RECTANGLE_F64 * prectangle, ::draw2d::graphics * pgraphics)
    {
 
-      ::rect rect;
-      ((region*)this)->get_bounding_box(rect);
-      __copy(prect, rect);
+      ::rectangle_i32 rectangle;
+      ((region*)this)->get_bounding_box(rectangle);
+      __copy(prectangle, rectangle);
 
    }
 
@@ -79,9 +79,9 @@ namespace draw2d_gdiplus
 
       }
 
-      Gdiplus::PointF pointf((Gdiplus::REAL) point.x, (Gdiplus::REAL) point.y);
+      Gdiplus::PointF point_f32((Gdiplus::REAL) point.x, (Gdiplus::REAL) point.y);
 
-      return m_pregion->IsVisible(pointf)  != FALSE;
+      return m_pregion->IsVisible(point_f32)  != FALSE;
 
    }
 
@@ -138,14 +138,14 @@ namespace draw2d_gdiplus
 
       Gdiplus::GraphicsPath path;
 
-      Gdiplus::RectF rect;
+      Gdiplus::RectF rectangle_i32;
 
-      rect.X      = (Gdiplus::REAL) m_x1;
-      rect.Y      = (Gdiplus::REAL) m_y1;
-      rect.Width  = (Gdiplus::REAL) (m_x2 - m_x1);
-      rect.Height = (Gdiplus::REAL) (m_y2 - m_y1);
+      rectangle.X      = (Gdiplus::REAL) m_x1;
+      rectangle.Y      = (Gdiplus::REAL) m_y1;
+      rectangle.Width  = (Gdiplus::REAL) (m_x2 - m_x1);
+      rectangle.Height = (Gdiplus::REAL) (m_y2 - m_y1);
 
-      path.AddRectangle(rect);
+      path.AddRectangle(rectangle);
 
       return new Gdiplus::Region(&path);
 

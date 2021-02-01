@@ -45,7 +45,7 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
                                             FALSE );
       if ( bSetOk )
       {
-         // Make the security attributes point
+         // Make the security attributes point_i32
          // to the security descriptor
          MutexAttributes.lpSecurityDescriptor = &SD;
          g_hmutexBoot = ::CreateMutex(&MutexAttributes, FALSE, "Global\\ca2::fontopus::ccvotagus_ca2_spa_boot::7807e510-5579-11dd-ae16-0800200c7784");

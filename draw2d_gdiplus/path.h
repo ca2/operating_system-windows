@@ -21,11 +21,11 @@ namespace draw2d_gdiplus
       virtual ~path();
 
 
-      virtual bool internal_add_arc(const ::rectd & rect, const ::angle & angleBeg, const ::angle& angleEnd);
+      virtual bool internal_add_arc(const ::rectangle_f64 & rectangle, const ::angle & angleBeg, const ::angle& angleEnd);
 
-      virtual pointd internal_last_point();
+      virtual point_f64 internal_last_point();
 
-      virtual pointd internal_current_point();
+      virtual point_f64 internal_current_point();
 
 
       //virtual bool internal_begin_figure(bool bFill, ::draw2d::e_fill_mode efillmode);
@@ -40,7 +40,7 @@ namespace draw2d_gdiplus
       //virtual bool internal_add_move(double x, double y);
 
       virtual bool internal_add_text_out(::draw2d::graphics * pgraphics, i32 x,i32 y,const string & strText,::draw2d::font * pfont);
-      virtual bool internal_add_draw_text(::draw2d::graphics * pgraphics, const ::rect & rect, const string & strText, ::draw2d::font * pfont, const ::e_align & ealign, const ::e_draw_text & edrawtext);
+      virtual bool internal_add_draw_text(::draw2d::graphics * pgraphics, const ::rectangle_i32 & rectangle, const string & strText, ::draw2d::font * pfont, const ::e_align & ealign, const ::e_draw_text & edrawtext);
 
 
       virtual bool create(::draw2d::graphics * pgraphics, ::i8 iCreate) override;
@@ -58,19 +58,19 @@ namespace draw2d_gdiplus
 
       virtual bool _set(::draw2d::graphics* pgraphics, const ::linesd& pline);
 
-      virtual bool _set(::draw2d::graphics* pgraphics, const ::rect& prect);
+      virtual bool _set(::draw2d::graphics* pgraphics, const ::rectangle_i32& prectangle);
 
-      virtual bool _set(::draw2d::graphics* pgraphics, const ::rectd& prect);
+      virtual bool _set(::draw2d::graphics* pgraphics, const ::rectangle_f64& prectangle);
 
-      virtual bool _set(::draw2d::graphics* pgraphics, const ::polygon& ppolygon);
+      virtual bool _set(::draw2d::graphics* pgraphics, const ::polygon_i32& ppolygon);
 
-      virtual bool _set(::draw2d::graphics* pgraphics, const ::polygond& ppolygond);
+      virtual bool _set(::draw2d::graphics* pgraphics, const ::polygon_f64& ppolygond);
 
       virtual bool _set(::draw2d::graphics* pgraphics, const ::text_out& ptextout);
 
       virtual bool _set(::draw2d::graphics* pgraphics, const ::draw_text& pdrawtext);
 
-      virtual bool contains(::draw2d::graphics_pointer& pgraphics, const pointd& point) override;
+      virtual bool contains(::draw2d::graphics_pointer& pgraphics, const point_f64& point) override;
 
 
    };

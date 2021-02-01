@@ -226,5 +226,5 @@
 
 
 
-#define hcursor_null ((HCURSOR) nullptr)
+#define hcursor_null ((hcursor) nullptr)
 

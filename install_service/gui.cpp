@@ -47,7 +47,7 @@ int nssm_gui(int resource, nssm_service_t *service) {
   /* Set service name if given */
   if (service->name[0]) {
     SetDlgItemText(dlg, IDC_NAME, service->name);
-    /* No point making user click remove if the name is already entered */
+    /* No point_i32 making user click remove if the name is already entered */
     if (resource == IDD_REMOVE) {
       HWND button = GetDlgItem(dlg, IDC_REMOVE);
       if (button) {
@@ -226,14 +226,14 @@ void centre_window(HWND window) {
 
   if (! window) return;
 
-  /* Find window size */
+  /* Find window size_i32 */
   if (! GetWindowRect(window, &size)) return;
 
   /* Find desktop window */
   desktop = GetDesktopWindow();
   if (! desktop) return;
 
-  /* Find desktop window size */
+  /* Find desktop window size_i32 */
   if (! GetWindowRect(desktop, &desktop_size)) return;
 
   /* Centre window */
@@ -1042,11 +1042,11 @@ INT_PTR CALLBACK nssm_dlg(HWND window, const ::id & id, WPARAM w, LPARAM l) {
       */
       if (n < 32) {
         int columns = (n - 1) / 4;
-        RECT rect;
-        GetWindowRect(list, &rect);
-        int width = rect.right - rect.left;
+        RECT rectangle_i32;
+        GetWindowRect(list, &rectangle);
+        int width = rectangle.right - rectangle.left;
         width -= (7 - columns) * 16;
-        int height = rect.bottom - rect.top;
+        int height = rectangle.bottom - rectangle.top;
         if (n < 4) height -= (int) SendMessage(list, LB_GETITEMHEIGHT, 0, 0) * (4 - n);
         set_window_pos(list, 0, 0, 0, width, height, SWP_NOMOVE | SWP_NOOWNERZORDER);
       }

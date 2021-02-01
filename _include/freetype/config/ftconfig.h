@@ -70,7 +70,7 @@ FT_BEGIN_HEADER
 #endif
 
 
-  /* The size of an `int` type. */
+  /* The size_i32 of an `int` type. */
 #if                                 FT_UINT_MAX == 0xFFFFUL
 #define FT_SIZEOF_INT  ( 16 / FT_CHAR_BIT )
 #elif                               FT_UINT_MAX == 0xFFFFFFFFUL
@@ -78,10 +78,10 @@ FT_BEGIN_HEADER
 #elif FT_UINT_MAX > 0xFFFFFFFFUL && FT_UINT_MAX == 0xFFFFFFFFFFFFFFFFUL
 #define FT_SIZEOF_INT  ( 64 / FT_CHAR_BIT )
 #else
-#error "Unsupported size of `int' type!"
+#error "Unsupported size_i32 of `int' type!"
 #endif
 
-  /* The size of a `long` type.  A five-byte `long` (as used e.g. on the */
+  /* The size_i32 of a `long` type.  A five-byte `long` (as used e.g. on the */
   /* DM642) is recognized but avoided.                                   */
 #if                                  FT_ULONG_MAX == 0xFFFFFFFFUL
 #define FT_SIZEOF_LONG  ( 32 / FT_CHAR_BIT )
@@ -90,7 +90,7 @@ FT_BEGIN_HEADER
 #elif FT_ULONG_MAX > 0xFFFFFFFFUL && FT_ULONG_MAX == 0xFFFFFFFFFFFFFFFFUL
 #define FT_SIZEOF_LONG  ( 64 / FT_CHAR_BIT )
 #else
-#error "Unsupported size of `long' type!"
+#error "Unsupported size_i32 of `long' type!"
 #endif
 
 
@@ -191,7 +191,7 @@ FT_BEGIN_HEADER
    *   FT_Int32
    *
    * @description:
-   *   A typedef for a 32bit signed integer type.  The size depends on the
+   *   A typedef for a 32bit signed integer type.  The size_i32 depends on the
    *   configuration.
    */
   typedef signed XXX  FT_Int32;
@@ -202,7 +202,7 @@ FT_BEGIN_HEADER
    * @type:
    *   FT_UInt32
    *
-   *   A typedef for a 32bit unsigned integer type.  The size depends on the
+   *   A typedef for a 32bit unsigned integer type.  The size_i32 depends on the
    *   configuration.
    */
   typedef unsigned XXX  FT_UInt32;
@@ -213,7 +213,7 @@ FT_BEGIN_HEADER
    * @type:
    *   FT_Int64
    *
-   *   A typedef for a 64bit signed integer type.  The size depends on the
+   *   A typedef for a 64bit signed integer type.  The size_i32 depends on the
    *   configuration.  Only defined if there is real 64bit support;
    *   otherwise, it gets emulated with a structure (if necessary).
    */
@@ -225,7 +225,7 @@ FT_BEGIN_HEADER
    * @type:
    *   FT_UInt64
    *
-   *   A typedef for a 64bit unsigned integer type.  The size depends on the
+   *   A typedef for a 64bit unsigned integer type.  The size_i32 depends on the
    *   configuration.  Only defined if there is real 64bit support;
    *   otherwise, it gets emulated with a structure (if necessary).
    */

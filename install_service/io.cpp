@@ -471,7 +471,7 @@ unsigned long WINAPI log_and_rotate(void *arg) {
     }
     else if (ret) continue;
 
-    if (*logger->rotate_online == NSSM_ROTATE_ONLINE_ASAP || (logger->size && size + (__int64) in >= logger->size)) {
+    if (*logger->rotate_online == NSSM_ROTATE_ONLINE_ASAP || (logger->size_i32 && size + (__int64) in >= logger->size_i32)) {
       /* Look for newline. */
       unsigned long i;
       for (i = 0; i < in; i++) {
@@ -533,7 +533,7 @@ unsigned long WINAPI log_and_rotate(void *arg) {
       }
     }
 
-    if (! size) {
+    if (! size_i32) {
       /* Write a BOM to the new file. */
       if (! charsize) charsize = guess_charsize(address, in);
       if (charsize == sizeof(wchar_t)) write_bom(logger, &out);

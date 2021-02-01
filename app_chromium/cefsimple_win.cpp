@@ -14,7 +14,7 @@
 // #define CEF_USE_SANDBOX 1
 
 
-// Entry point function for all processes.
+// Entry point_i32 function for all processes.
 //int APIENTRY cef_main(HINSTANCE hInstance,
 //                      HINSTANCE hPrevInstance,
 //                      LPTSTR lpCmdLine,
