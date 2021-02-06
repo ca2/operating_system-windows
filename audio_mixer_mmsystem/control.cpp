@@ -442,7 +442,7 @@ namespace multimedia
 
 
                PMIXERCONTROLDETAILS_BOOLEAN pmxcd_f = (PMIXERCONTROLDETAILS_BOOLEAN) m_mixercontroldetails.paDetails;
-               bool fValue = pmxcd_f[cMultipleItems - i - 1].fValue != FALSE;
+               bool fValue = pmxcd_f[cMultipleItems - i - 1].fValue != false;
 
                pmutecontrol->_001SetCheck(fValue ? check_checked : check_unchecked, ::e_source_user);
             }
@@ -837,12 +837,12 @@ namespace multimedia
                                           m_mixercontrol.dwControlID, device->m_hMixer, mmrc);
                         System.message_box(strMessage, nullptr, e_message_box_icon_exclamation);
                      }
-                     return TRUE;
+                     return true;
                   }
                }
             }
          }
-         return FALSE;
+         return false;
       }
 
 

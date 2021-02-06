@@ -62,10 +62,10 @@ namespace draw2d_gdiplus
 
 
    // IMPLEMENT_DYNAMIC(resource_exception, ::exception::base)
-   //resource_exception _simpleResourceException(FALSE, __IDS_RESOURCE_EXCEPTION);
+   //resource_exception _simpleResourceException(false, __IDS_RESOURCE_EXCEPTION);
 
    // IMPLEMENT_DYNAMIC(user_exception, ::exception::base)
-   //user_exception _simpleUserException(FALSE, __IDS_USER_EXCEPTION);
+   //user_exception _simpleUserException(false, __IDS_USER_EXCEPTION);
 
    // IMPLEMENT_DYNCREATE(::draw2d::graphics_pointer, object)
    // IMPLEMENT_DYNAMIC(CClientDC, ::draw2d::graphics_pointer)

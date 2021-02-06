@@ -6,7 +6,7 @@ namespace windowing_win32
 {
 
 
-   class CLASS_DECL_ACME monitor :
+   class CLASS_DECL_WINDOWING_WIN32 monitor :
       virtual public ::windowing::monitor
    {
    public:
@@ -20,6 +20,10 @@ namespace windowing_win32
 
 
       virtual ::e_status update_cache() override;
+
+
+      virtual ::u32 get_monitor_color_temperature();
+      virtual bool adjust_monitor(::u32 dwTemperature, double dBrightness, double dGamma) override;
 
 
    };

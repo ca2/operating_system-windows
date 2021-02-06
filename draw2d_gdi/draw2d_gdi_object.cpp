@@ -57,7 +57,7 @@ namespace draw2d_gdi
 
          }
 
-         bool bOk = ::DeleteObject(m_hgdiobj) != FALSE;
+         bool bOk = ::DeleteObject(m_hgdiobj) != false;
 
       }
 
@@ -83,7 +83,7 @@ namespace draw2d_gdi
 
       ASSERT(get_handle() != nullptr);
 
-      return ::UnrealizeObject(get_handle()) != FALSE;
+      return ::UnrealizeObject(get_handle()) != false;
 
    }
 
@@ -124,7 +124,7 @@ namespace draw2d_gdi
       if (hObject == nullptr)
       {
 
-         return FALSE;
+         return false;
 
       }
 
@@ -137,7 +137,7 @@ namespace draw2d_gdi
 
       m_hgdiobj = hObject;
 
-      return TRUE;
+      return true;
 
    }
 
@@ -209,7 +209,7 @@ namespace draw2d_gdi
 
       m_ptraGraphics.remove_all();
 
-      bool bOk = ::DeleteObject(m_hgdiobj) != FALSE;
+      bool bOk = ::DeleteObject(m_hgdiobj) != false;
 
       m_hgdiobj = nullptr;
 

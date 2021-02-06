@@ -384,7 +384,7 @@ namespace multimedia
          for(index i = 0; i < iBufferCount; i++)
          {
 
-            m_haEvent.add(CreateEvent(nullptr,FALSE,FALSE,nullptr));
+            m_haEvent.add(CreateEvent(nullptr,false,false,nullptr));
             m_notifya.element_at_grow(i).dwOffset = (DWORD) (uiBufferSize * i);
             m_notifya.element_at_grow(i).hEventNotify = m_haEvent[i];
          }
@@ -833,7 +833,7 @@ namespace multimedia
 
          int iPlay =  -1;
 
-         int r = WaitForMultipleObjects((DWORD) m_haEvent.get_count(), m_haEvent.get_data(),FALSE,INFINITE);
+         int r = WaitForMultipleObjects((DWORD) m_haEvent.get_count(), m_haEvent.get_data(),false,INFINITE);
 
          if(r >= WAIT_OBJECT_0 && r < WAIT_OBJECT_0 + MAXIMUM_WAIT_OBJECTS)
          {

@@ -100,11 +100,11 @@ BOOL CLibraryFrame::PreCreateWindow(CREATESTRUCT& cs)
 {
    // TODO: Add your specialized code here and/or call the base class
    if(!CMiniFrameWnd::PreCreateWindow(cs))
-      return FALSE;
+      return false;
    pusersystem->m_createstruct.dwExStyle &= ~WS_EX_TOOLWINDOW;
    pusersystem->m_createstruct.style |= MFS_SYNCACTIVE;
    pusersystem->m_createstruct.hwndParent = AfxGetApp()->m_pMainWnd->GetSafeHwnd();
-   return TRUE;
+   return true;
 
 }
 Gdiplus::Bitmap * LoadPNG(LPCTSTR pName,LPCTSTR pType,HMODULE hInst);
@@ -114,7 +114,7 @@ Gdiplus::Bitmap * LoadPNG(LPCTSTR pName,LPCTSTR pType,HMODULE hInst);
 //{
 //   // set m_bInRecalcLayout to avoid flashing during creation
 //   // RecalcLayout will be called once something is docked
-//   m_bInRecalcLayout = TRUE;
+//   m_bInRecalcLayout = true;
 //
 //   dwStyle = WS_POPUP | WS_CAPTION | WS_SYSMENU | MFS_MOVEFRAME |
 //      MFS_4THICKFRAME | MFS_SYNCACTIVE | MFS_BLOCKSYSMENU |
@@ -129,7 +129,7 @@ Gdiplus::Bitmap * LoadPNG(LPCTSTR pName,LPCTSTR pType,HMODULE hInst);
 ////   DWORD dwExStyle = 0;
 //   if(!CMiniFrameWnd::CreateEx(dwExStyle,lpClassName ? lpClassName :
 //      AfxRegisterWndClass(CS_DBLCLKS,::LoadCursor(nullptr,IDC_ARROW)),
-//      lpszWindowName,dwStyle,rectangle_i32,pParentWnd,(UINT_PTR)nID))
+//      lpszWindowName,dwStyle,rectangle,pParentWnd,(UINT_PTR)nID))
 //   {
 //      return false;
 //   }
@@ -137,7 +137,7 @@ Gdiplus::Bitmap * LoadPNG(LPCTSTR pName,LPCTSTR pType,HMODULE hInst);
 //   CBRS_ALIGN_LEFT : CBRS_ALIGN_TOP;
 //   dwStyle |= dwBarStyle & CBRS_FLOAT_MULTI;
 //
-//   CMenu* pSysMenu = GetSystemMenu(FALSE);
+//   CMenu* pSysMenu = GetSystemMenu(false);
 //   if(pSysMenu)
 //   {
 //      pSysMenu->DeleteMenu(SC_SIZE,MF_BYCOMMAND);
@@ -158,15 +158,15 @@ Gdiplus::Bitmap * LoadPNG(LPCTSTR pName,LPCTSTR pType,HMODULE hInst);
 //   if(!m_wndDockBar.Create(pParentWnd,WS_CHILD  | dwStyle,
 //      AFX_IDW_DOCKBAR_FLOAT))
 //   {
-//      m_bInRecalcLayout = FALSE;
-//      return FALSE;
+//      m_bInRecalcLayout = false;
+//      return false;
 //   }
 //
 //   // set parent to CMiniDockFrameWnd
 //   m_wndDockBar.SetParent(this);
-//   m_bInRecalcLayout = FALSE;
+//   m_bInRecalcLayout = false;
 //
-//   return TRUE;
+//   return true;
 //
 //}
 
@@ -239,7 +239,7 @@ void CLibraryFrame::OnActivate(UINT nState,CWnd* pWndOther,BOOL bMinimized)
       (pTopLevel == m_pMainFrame &&
       (pActive == pTopLevel ||
       pActive->SendMessage(WM_FLOATSTATUS,FS_SYNCACTIVE) != 0)))
-      : FALSE;
+      : false;
    pTopLevel->m_nFlags &= ~WF_STAYACTIVE;
    if(bStayActive)
       pTopLevel->m_nFlags |= WF_STAYACTIVE;
@@ -256,7 +256,7 @@ void CLibraryFrame::OnActivate(UINT nState,CWnd* pWndOther,BOOL bMinimized)
    //if(pActiveView != nullptr)
    //{
    //   if(nState != WA_INACTIVE && !bMinimized)
-   //      pActiveView->OnActivateView(TRUE,pActiveView,pActiveView);
+   //      pActiveView->OnActivateView(true,pActiveView,pActiveView);
 
    //   // always notify the view of frame activations
    //   pActiveView->OnActivateFrame(nState,this);
@@ -281,7 +281,7 @@ BOOL CLibraryFrame::OnNcActivate(BOOL bActive)
 BOOL CLibraryFrame::OnNcCreate(LPCREATESTRUCT lpcs)
 {
    if(!CFrameWnd::OnNcCreate(lpcs))
-      return FALSE;
+      return false;
 
    if(GetStyle() & MFS_SYNCACTIVE)
    {
@@ -296,7 +296,7 @@ BOOL CLibraryFrame::OnNcCreate(LPCREATESTRUCT lpcs)
       SendMessage(WM_FLOATSTATUS,bActive ? FS_ACTIVATE : FS_DEACTIVATE);
    }
 
-   return TRUE;
+   return true;
 }
 
 
@@ -319,12 +319,12 @@ void CLibraryFrame::NotifyFloatingWindows(DWORD dwFlags)
          // Excel will try to Activate itself when it receives a
          // WM_NCACTIVATE so we need to keep it from doing that here.
          m_nFlags |= WF_KEEPMINIACTIVE;
-         pParent->SendMessage(WM_NCACTIVATE,TRUE);
+         pParent->SendMessage(WM_NCACTIVATE,true);
          m_nFlags &= ~WF_KEEPMINIACTIVE;
       }
       else
       {
-         pParent->SendMessage(WM_NCACTIVATE,FALSE);
+         pParent->SendMessage(WM_NCACTIVATE,false);
       }
    }
 
@@ -415,7 +415,7 @@ BOOL CLibraryFrame::Create(CWnd* pParent,DWORD dwBarStyle, PVOID p)
 {
    // set m_bInRecalcLayout to avoid flashing during creation
    // RecalcLayout will be called once something is docked
-   m_bInRecalcLayout = TRUE;
+   m_bInRecalcLayout = true;
 
    //DWORD dwStyle = WS_POPUP | WS_CAPTION | WS_SYSMENU | MFS_MOVEFRAME |
    //   MFS_4THICKFRAME | MFS_SYNCACTIVE | MFS_BLOCKSYSMENU |
@@ -434,14 +434,14 @@ BOOL CLibraryFrame::Create(CWnd* pParent,DWORD dwBarStyle, PVOID p)
       m_strCaption,dwStyle,rectangle.left,rectangle.top,rectangle.right - rectangle.left,
       rectangle.bottom - rectangle.top,pParent->GetSafeHwnd(),(HMENU)(UINT_PTR)0,p))
    {
-      return FALSE;
+      return false;
    }
 
    dwStyle = dwBarStyle & (CBRS_ALIGN_LEFT | CBRS_ALIGN_RIGHT) ?
    CBRS_ALIGN_LEFT : CBRS_ALIGN_TOP;
    dwStyle |= dwBarStyle & CBRS_FLOAT_MULTI;
 
-   //CMenu* pSysMenu = GetSystemMenu(FALSE);
+   //CMenu* pSysMenu = GetSystemMenu(false);
    //if(pSysMenu)
    //{
    //   pSysMenu->DeleteMenu(SC_SIZE,MF_BYCOMMAND);
@@ -461,15 +461,15 @@ BOOL CLibraryFrame::Create(CWnd* pParent,DWORD dwBarStyle, PVOID p)
    //if(!m_wndDockBar.Create(pParent,WS_CHILD | WS_VISIBLE | dwStyle,
    //   AFX_IDW_DOCKBAR_FLOAT))
    //{
-   //   m_bInRecalcLayout = FALSE;
-   //   return FALSE;
+   //   m_bInRecalcLayout = false;
+   //   return false;
    //}
 
    //// set parent to CMiniDockFrameWnd
    //m_wndDockBar.SetParent(this);
-   m_bInRecalcLayout = FALSE;
+   m_bInRecalcLayout = false;
 
-   return TRUE;
+   return true;
 }
 
 BOOL CLibraryFrame::LoadFrame(UINT nIDResource,DWORD dwDefaultStyle,
@@ -492,7 +492,7 @@ BOOL CLibraryFrame::LoadFrame(UINT nIDResource,DWORD dwDefaultStyle,
    CString strTitle = m_strTitle;
    if(!Create(AfxGetApp()->m_pMainWnd, 0, pContext))
    {
-      return FALSE;   // will self destruct on failure normally
+      return false;   // will self destruct on failure normally
    }
 
    // save the default menu handle
@@ -503,9 +503,9 @@ BOOL CLibraryFrame::LoadFrame(UINT nIDResource,DWORD dwDefaultStyle,
    LoadAccelTable(ATL_MAKEINTRESOURCE(nIDResource));
 
    if(pContext == nullptr)   // send initial update
-      SendMessageToDescendants(WM_INITIALUPDATE,0,0,TRUE,TRUE);
+      SendMessageToDescendants(WM_INITIALUPDATE,0,0,true,true);
 
-   return TRUE;
+   return true;
 }
 
 

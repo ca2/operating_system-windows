@@ -13,7 +13,7 @@ public:
    {
 
       // Use an event object to track the TimerRoutine execution
-      gDoneEvent = CreateEvent(nullptr,TRUE,FALSE,nullptr);
+      gDoneEvent = CreateEvent(nullptr,true,false,nullptr);
       if(nullptr == gDoneEvent)
       {
          throw - 1;

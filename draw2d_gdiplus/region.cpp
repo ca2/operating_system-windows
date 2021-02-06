@@ -25,7 +25,7 @@ namespace draw2d_gdiplus
    }
 
 
-   bool region::translate(const POINT& point, ::draw2d::graphics * pgraphics)
+   bool region::translate(const POINT_I32& point, ::draw2d::graphics * pgraphics)
    {
 
       return true;
@@ -33,12 +33,12 @@ namespace draw2d_gdiplus
    }
 
 
-   bool region::get_bounding_box(RECT * prectangle, ::draw2d::graphics * pgraphics)
+   bool region::get_bounding_box(RECTANGLE_I32 * prectangle, ::draw2d::graphics * pgraphics)
    {
 
       defer_update(pgraphics, 0);
 
-      Gdiplus::Rect rectangle_i32;
+      Gdiplus::Rect rectangle;
 
       m_pregion->GetBounds(&rectangle, __graphics(pgraphics)->m_pgraphics);
 
@@ -67,7 +67,7 @@ namespace draw2d_gdiplus
    }
 
 
-   bool region::contains(const POINT & point, ::draw2d::graphics * pgraphics)
+   bool region::contains(const POINT_I32 & point, ::draw2d::graphics * pgraphics)
    {
 
       defer_update(pgraphics, 0);
@@ -79,9 +79,9 @@ namespace draw2d_gdiplus
 
       }
 
-      Gdiplus::PointF point_f32((Gdiplus::REAL) point.x, (Gdiplus::REAL) point.y);
+      Gdiplus::PointF pointf((Gdiplus::REAL) point.x, (Gdiplus::REAL) point.y);
 
-      return m_pregion->IsVisible(point_f32)  != FALSE;
+      return m_pregion->IsVisible(pointf)  != false;
 
    }
 
@@ -138,7 +138,7 @@ namespace draw2d_gdiplus
 
       Gdiplus::GraphicsPath path;
 
-      Gdiplus::RectF rectangle_i32;
+      Gdiplus::RectF rectangle;
 
       rectangle.X      = (Gdiplus::REAL) m_x1;
       rectangle.Y      = (Gdiplus::REAL) m_y1;

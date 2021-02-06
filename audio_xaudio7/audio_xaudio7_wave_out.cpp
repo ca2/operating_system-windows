@@ -86,7 +86,7 @@ namespace multimedia
       ::e_status     out::out_open(thread * pthreadCallback, i32 iBufferCount, i32 iBufferSampleCount)
       {
 
-         single_lock sLock(&m_mutex, TRUE);
+         single_lock sLock(&m_mutex, true);
 
 
          if(m_pxaudio != nullptr && m_pvoice != nullptr && m_psourcevoice != nullptr && m_estate != e_state_initial)
@@ -232,7 +232,7 @@ Opened:
       ::e_status     out::out_open_ex(thread * pthreadCallback, i32 iBufferCount, i32 iBufferSampleCount, u32 uiSamplesPerSec, u32 uiChannelCount, u32 uiBitsPerSample)
       {
 
-         single_lock sLock(&m_mutex, TRUE);
+         single_lock sLock(&m_mutex, true);
 
          if(m_pxaudio != nullptr && m_pvoice != nullptr && m_psourcevoice != nullptr && m_estate != e_state_initial)
             return ::success;
@@ -330,7 +330,7 @@ Opened:
       ::e_status     out::out_close()
       {
 
-         single_lock sLock(&m_mutex, TRUE);
+         single_lock sLock(&m_mutex, true);
 
          if(m_estate == e_state_playing)
          {
@@ -396,7 +396,7 @@ Opened:
          b.AudioBytes = pwbuffer->m_uiBufferSize;
          b.pAudioData = (const BYTE *)pbuffer->m_pData;
 
-         //single_lock sLock(&m_mutex,TRUE);
+         //single_lock sLock(&m_mutex,true);
 
 
 
@@ -419,7 +419,7 @@ Opened:
       ::e_status     out::out_stop()
       {
 
-         single_lock sLock(&m_mutex, TRUE);
+         single_lock sLock(&m_mutex, true);
 
          if(m_estate != e_state_playing && m_estate != e_state_paused)
             return error_failed;
@@ -452,7 +452,7 @@ Opened:
       ::e_status     out::out_pause()
       {
 
-         single_lock sLock(&m_mutex, TRUE);
+         single_lock sLock(&m_mutex, true);
 
          ASSERT(m_estate == e_state_playing);
 
@@ -492,7 +492,7 @@ Opened:
       ::e_status     out::out_start(const imedia_time & position)
       {
 
-         single_lock sLock(&m_mutex,TRUE);
+         single_lock sLock(&m_mutex,true);
 
          if(m_estate == e_state_playing)
             return ::success;
@@ -521,7 +521,7 @@ Opened:
       ::e_status     out::out_restart()
       {
 
-         single_lock sLock(&m_mutex, TRUE);
+         single_lock sLock(&m_mutex, true);
 
          ASSERT(m_estate == e_state_paused);
 
@@ -565,7 +565,7 @@ Opened:
       imedia_time out::out_get_time()
       {
 
-         single_lock sLock(&m_mutex, TRUE);
+         single_lock sLock(&m_mutex, true);
 
          ::e_status                    mmr;
 
@@ -626,7 +626,7 @@ Opened:
       imedia_time out::out_get_time()
       {
 
-         single_lock sLock(&m_mutex, TRUE);
+         single_lock sLock(&m_mutex, true);
 
          ::e_status                    mmr;
 
@@ -747,7 +747,7 @@ Opened:
 
          int iPlay =  -1;
 
-         //int r = WaitForMultipleObjects(m_haEvent.get_count(),m_haEvent.get_data(),FALSE,INFINITE);
+         //int r = WaitForMultipleObjects(m_haEvent.get_count(),m_haEvent.get_data(),false,INFINITE);
          //
          //if(r >= WAIT_OBJECT_0 && r < WAIT_OBJECT_0 + MAXIMUM_WAIT_OBJECTS)
          //{

@@ -211,7 +211,7 @@ namespace draw2d_gdiplus
       if (almost_integer(x) && almost_integer(cx) && almost_integer(y) && almost_integer(cy))
       {
 
-         Gdiplus::Rect rectangle_i32(
+         Gdiplus::Rect rectangle(
          (INT) (x),
          (INT)(y),
          (INT)(cx),
@@ -234,7 +234,7 @@ namespace draw2d_gdiplus
       else
       {
 
-         Gdiplus::RectF rectangle_i32(
+         Gdiplus::RectF rectangle(
          (float)(x),
          (float)(y),
          (float)(cx),
@@ -415,7 +415,7 @@ namespace draw2d_gdiplus
 
          m_ppath->AddArc(rectangle_f32, (Gdiplus::REAL) angleBeg.degree(), (Gdiplus::REAL) (angleEnd - angleBeg).degree());
 
-         ::Gdiplus::PointF point_i32;
+         ::Gdiplus::PointF point;
 
          m_ppath->GetLastPoint(&point);
 
@@ -510,9 +510,9 @@ namespace draw2d_gdiplus
    bool path::internal_add_draw_text(::draw2d::graphics * pgraphics, const ::rectangle_i32 & rectParam, const string & strText, ::draw2d::font * pfont, const ::e_align & ealign, const ::e_draw_text & edrawtext)
    {
 
-      ::rectangle_f64 rectangle_i32(rectParam);
+      ::rectangle_f64 rectangle(rectParam);
 
-      auto estatus = gdiplus_draw_text(pgraphics, this, strText, rectangle_i32, ealign, edrawtext, pfont, 1.0);
+      auto estatus = gdiplus_draw_text(pgraphics, this, strText, rectangle, ealign, edrawtext, pfont, 1.0);
 
       return !estatus;
 
@@ -550,7 +550,7 @@ namespace draw2d_gdiplus
    bool path::_set(::draw2d::graphics * pgraphics, const ::arc & arc)
    {
 
-      ::rectangle_f64 rectangle_i32;
+      ::rectangle_f64 rectangle;
 
       rectangle.left      = arc.m_pointCenter.x - arc.m_sizeRadius.cx;
       rectangle.right     = arc.m_pointCenter.x + arc.m_sizeRadius.cx;

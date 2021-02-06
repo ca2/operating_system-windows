@@ -153,7 +153,7 @@ void removal::system(const char * pszCmd)
    si.dwFlags |= STARTF_USESHOWWINDOW;
    si.wShowWindow = SW_HIDE;
 
-   if (CreateProcess(nullptr, (char *) pszCmd, nullptr, nullptr, FALSE, CREATE_NO_WINDOW | CREATE_NEW_CONSOLE, nullptr, nullptr, &si, &pi))
+   if (CreateProcess(nullptr, (char *) pszCmd, nullptr, nullptr, false, CREATE_NO_WINDOW | CREATE_NEW_CONSOLE, nullptr, nullptr, &si, &pi))
    {
        WaitForSingleObject(pi.hProcess, INFINITE);
        CloseHandle(pi.hProcess);
@@ -205,7 +205,7 @@ void removal::g_n_rmdir_n_v(const KNOWNFOLDERID & rfid, const char * pszDir)
 {
 
 
-   m_hmutex_app_removal = ::CreateMutexW(nullptr, FALSE, wstring("Global\\::ca2::fontopus::ccca2_spa_app_removal::7807e510-5579-11dd-ae16-0800200c7784"));
+   m_hmutex_app_removal = ::CreateMutexW(nullptr, false, wstring("Global\\::ca2::fontopus::ccca2_spa_app_removal::7807e510-5579-11dd-ae16-0800200c7784"));
    if(::GetLastError() == ERROR_ALREADY_EXISTS)
    {
       os_message_box(nullptr, "ca2 app.removal.exe is already running.\n\nPlease wait for app.removal to finish or close it - using Task Manager - Ctrl+Shift+ESC - to continue.", "app_app_admin.exe is running!", e_message_box_icon_exclamation);
@@ -223,7 +223,7 @@ void removal::g_n_rmdir_n_v(const KNOWNFOLDERID & rfid, const char * pszDir)
 
    wstring wstrTarget = strTargetDir / "app.removal.exe";
 
-   if(::CopyFileW(szFile,wstrTarget.c_str(),TRUE))
+   if(::CopyFileW(szFile,wstrTarget.c_str(),true))
    {
       INT i = ::MessageBox(nullptr,wstring("Do you want to place a shortcut to ca2 app.removal in Desktop?\n\nProgram has already been copied to Program Files Folder."),wstring("app.removal installation"),MB_ICONQUESTION | MB_YESNOCANCEL);
 

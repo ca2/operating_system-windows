@@ -510,9 +510,9 @@ namespace draw2d_gdiplus
    bool path::internal_add_draw_text(::draw2d::graphics * pgraphics, const ::rectangle_i32 & rectParam, const string & strText, ::draw2d::font * pfont, const ::e_align & ealign, const ::e_draw_text & edrawtext)
    {
 
-      ::rectangle_f64 rectangle_i32(rectParam);
+      ::rectangle_f64 rectangle(rectParam);
 
-      auto estatus = gdiplus_draw_text(pgraphics, this, strText, rectangle_i32, ealign, edrawtext, pfont, 1.0);
+      auto estatus = gdiplus_draw_text(pgraphics, this, strText, rectangle, ealign, edrawtext, pfont, 1.0);
 
       return !estatus;
 
@@ -550,7 +550,7 @@ namespace draw2d_gdiplus
    bool path::_set(::draw2d::graphics * pgraphics, const ::arc & arc)
    {
 
-      ::rectangle_f64 rectangle_i32;
+      ::rectangle_f64 rectangle;
 
       rectangle.left      = arc.m_pointCenter.x - arc.m_sizeRadius.cx;
       rectangle.right     = arc.m_pointCenter.x + arc.m_sizeRadius.cx;

@@ -72,7 +72,7 @@ namespace backup
 
    bool application::bergedge_start()
    {
-      return m_pdocumenttemplateMain->open_document_file(this, nullptr, TRUE) != nullptr;
+      return m_pdocumenttemplateMain->open_document_file(this, nullptr, true) != nullptr;
    }
 
 

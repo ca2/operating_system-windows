@@ -101,7 +101,7 @@ namespace backup
       }
       break;
       default:
-         ASSERT(FALSE);
+         ASSERT(false);
          break;
       }
 

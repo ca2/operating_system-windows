@@ -165,7 +165,7 @@ namespace music
                return;
             }
 
-            if (0 == size_i32)
+            if (0 == size)
             {
                LOG("No device interface");
                return;
@@ -220,7 +220,7 @@ namespace music
                return;
             }
 
-            if (0 == size_i32)
+            if (0 == size)
             {
                LOG("No device interface");
                return;

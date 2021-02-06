@@ -48,7 +48,7 @@ namespace draw2d_gdiplus
 
       m_osdata[0] = m_pbitmap;
 
-      return TRUE;
+      return true;
 
    }
 
@@ -58,7 +58,7 @@ namespace draw2d_gdiplus
 
       UNREFERENCED_PARAMETER(pgraphics);
 
-      return FALSE;
+      return false;
    }
 
 
@@ -174,7 +174,7 @@ namespace draw2d_gdiplus
 
    bool bitmap::CreateDIBitmap(::draw2d::graphics * pgraphics, int cx, int cy, u32 flInit, const void *pjBits, UINT iUsage)
    {
-      return FALSE;
+      return false;
    }
 
 
@@ -200,7 +200,7 @@ namespace draw2d_gdiplus
       //   return attach(::LoadBitmap(::aura::FindResourceHandle(
       //pszResourceName, RT_BITMAP), pszResourceName));
 
-      return FALSE;
+      return false;
 
    }
 
@@ -236,12 +236,12 @@ namespace draw2d_gdiplus
    bool bitmap::LoadBitmap(UINT nIDResource)
    {
       //return attach(::LoadBitmap(::aura::FindResourceHandle(MAKEINTRESOURCE(nIDResource), RT_BITMAP), MAKEINTRESOURCE(nIDResource)));
-      return FALSE;
+      return false;
    }
    bool bitmap::LoadOEMBitmap(UINT nIDBitmap)
    {
       //return attach(::LoadBitmap(nullptr, MAKEINTRESOURCE(nIDBitmap)));
-      return FALSE;
+      return false;
    }
    bool bitmap::CreateCompatibleBitmap(::draw2d::graphics * pgraphics, i32 nWidth, i32 nHeight)
    {

@@ -103,14 +103,14 @@ namespace ca2plugin_container
       m_bInitialized    = true;
 
       if(!::user::interaction::create_message_queue("ca2plugin_container::host::init create_message_queue"))
-         return FALSE;
+         return false;
 
       start_plugin();
 
       if(!plugin_initialize())
-         return FALSE;
+         return false;
 
-      return TRUE;
+      return true;
 
 
    }
@@ -392,13 +392,13 @@ namespace ca2plugin_container
             //if(m_rectangle != rectangle_i32)
             {
 
-               m_rectangle = rectangle_i32;
+               m_rectangle = rectangle;
 
-               m_rectClient = rectangle_i32;
+               m_rectClient = rectangle;
 
                m_rectClient.offset(-m_rectClient.top_left());
 
-               m_rectWindow = rectangle_i32;
+               m_rectWindow = rectangle;
 
                try
                {

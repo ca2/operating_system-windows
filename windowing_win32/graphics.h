@@ -46,7 +46,7 @@ namespace draw2d_gdiplus
       virtual HDC DetachPrinter() override;
 
 
-      bool IsPrinting() override;            // TRUE if being used for printing
+      bool IsPrinting() override;            // true if being used for printing
 
 
       // for bidi and mirrored localization
@@ -278,10 +278,10 @@ namespace draw2d_gdiplus
       //               ::draw2d::brush* pBrush = nullptr) override;
       //bool DrawState(const ::point_i32 & point, const ::size_i32 & size, const char * pszText, UINT nFlags,
 
-      //               bool bPrefixText = TRUE, i32 nTextLen = 0, HBRUSH hBrush = nullptr) override;
+      //               bool bPrefixText = true, i32 nTextLen = 0, HBRUSH hBrush = nullptr) override;
       //bool DrawState(const ::point_i32 & point, const ::size_i32 & size, const char * pszText, UINT nFlags,
 
-      //               bool bPrefixText = TRUE, i32 nTextLen = 0, ::draw2d::brush* pBrush = nullptr) override;
+      //               bool bPrefixText = true, i32 nTextLen = 0, ::draw2d::brush* pBrush = nullptr) override;
       //bool DrawState(const ::point_i32 & point, const ::size_i32 & size, DRAWSTATEPROC pDrawProc,
 
       //               LPARAM lData, UINT nFlags, HBRUSH hBrush = nullptr) override;

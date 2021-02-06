@@ -75,7 +75,7 @@ namespace multimedia
 //
 //         }
 //
-//         single_lock sLock(&m_mutex, TRUE);
+//         single_lock sLock(&m_mutex, true);
 //         ::e_status     mmr;
 //         ASSERT(m_hwavein == nullptr);
 //         ASSERT(m_estate == e_state_initial);
@@ -336,13 +336,13 @@ namespace multimedia
       //   UNREFERENCED_PARAMETER(dwParam2);
       //   if(uMsg == WIM_DATA)
       //   {
-      //      ASSERT(FALSE);
+      //      ASSERT(false);
       //      /*      u32 msSampleTime = timeGetTime();
       //      thread * pthread = (thread *) dwInstance;
       //      ASSERT(pthread != nullptr);
       //      LPWAVEHDR lpWaveHdr = (LPWAVEHDR) dwParam1;
       //      LPWAVEPROCDATAMESSAGE lpxfwm = new WAVEPROCDATAMESSAGE;
-      //      lpxfwm->bDelete = TRUE;
+      //      lpxfwm->bDelete = true;
       //      lpxfwm->msSampleTime = msSampleTime;
       //      //      lpxfwm->tkSamplePosition = tkPosition;
       //      lpxfwm->lpWaveHdr = lpWaveHdr;

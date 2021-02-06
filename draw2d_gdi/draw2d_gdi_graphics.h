@@ -79,7 +79,7 @@ namespace draw2d_gdi
       void internal_set_path_polygon(void * pparam);
       void internal_set_path_poly_polygon(void * pparam);
 
-      bool IsPrinting() override;            // TRUE if being used for printing
+      bool IsPrinting() override;            // true if being used for printing
 
       ::draw2d::pen *      get_current_pen() override;
       ::draw2d::brush *    get_current_brush() override;
@@ -283,9 +283,9 @@ namespace draw2d_gdi
       //bool DrawState(const ::point_i32 & point, const ::size_i32 & size, HICON hIcon, UINT nFlags,
       //               ::draw2d::brush* pBrush = nullptr) override;
       //bool DrawState(const ::point_i32 & point, const ::size_i32 & size, const char * lpszText, UINT nFlags,
-      //               bool bPrefixText = TRUE, int nTextLen = 0, HBRUSH hBrush = nullptr) override;
+      //               bool bPrefixText = true, int nTextLen = 0, HBRUSH hBrush = nullptr) override;
       //bool DrawState(const ::point_i32 & point, const ::size_i32 & size, const char * lpszText, UINT nFlags,
-      //               bool bPrefixText = TRUE, int nTextLen = 0, ::draw2d::brush* pBrush = nullptr) override;
+      //               bool bPrefixText = true, int nTextLen = 0, ::draw2d::brush* pBrush = nullptr) override;
       //bool DrawState(const ::point_i32 & point, const ::size_i32 & size, DRAWSTATEPROC lpDrawProc,
       //               LPARAM lData, UINT nFlags, HBRUSH hBrush = nullptr) override;
       //bool DrawState(const ::point_i32 & point, const ::size_i32 & size, DRAWSTATEPROC lpDrawProc,

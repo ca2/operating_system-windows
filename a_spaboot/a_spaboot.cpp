@@ -29,7 +29,7 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
    SECURITY_ATTRIBUTES MutexAttributes;
    ZeroMemory( &MutexAttributes, sizeof(MutexAttributes) );
    MutexAttributes.nLength = sizeof( MutexAttributes );
-   MutexAttributes.bInheritHandle = FALSE; // object uninheritable
+   MutexAttributes.bInheritHandle = false; // object uninheritable
    // declare and initialize a security descriptor
    SECURITY_DESCRIPTOR SD;
    BOOL bInitOk = InitializeSecurityDescriptor(
@@ -38,17 +38,17 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
    if ( bInitOk )
    {
       // give the security descriptor a Null Dacl
-      // done using the  "TRUE, (PACL)nullptr" here
+      // done using the  "true, (PACL)nullptr" here
       BOOL bSetOk = SetSecurityDescriptorDacl( &SD,
-                                            TRUE,
+                                            true,
                                             (PACL)nullptr,
-                                            FALSE );
+                                            false );
       if ( bSetOk )
       {
          // Make the security attributes point_i32
          // to the security descriptor
          MutexAttributes.lpSecurityDescriptor = &SD;
-         g_hmutexBoot = ::CreateMutex(&MutexAttributes, FALSE, "Global\\ca2::fontopus::ccvotagus_ca2_spa_boot::7807e510-5579-11dd-ae16-0800200c7784");
+         g_hmutexBoot = ::CreateMutex(&MutexAttributes, false, "Global\\ca2::fontopus::ccvotagus_ca2_spa_boot::7807e510-5579-11dd-ae16-0800200c7784");
          if(::GetLastError() == ERROR_ALREADY_EXISTS)
          {
             ::OutputDebugString("another instance of spa is already running");
@@ -363,7 +363,7 @@ bool file_exists(const char * path1)
 //         __memset(&si, 0, sizeof(si));
 //         __memset(&pi, 0, sizeof(pi));
 //         if(!::CreateProcess(nullptr, (LPSTR)  strInstall.c_str(),
-//            nullptr, nullptr, FALSE, 0, nullptr, nullptr,
+//            nullptr, nullptr, false, 0, nullptr, nullptr,
 //            &si, &pi))
 //         {
 //         }
@@ -379,7 +379,7 @@ bool file_exists(const char * path1)
 //      __memset(&si, 0, sizeof(si));
 //      __memset(&pi, 0, sizeof(pi));
 //      if(!::CreateProcess(nullptr, (LPSTR)  strInstall.c_str(),
-//         nullptr, nullptr, FALSE, 0, nullptr, nullptr,
+//         nullptr, nullptr, false, 0, nullptr, nullptr,
 //         &si, &pi))
 //      {
 //         return 1;
@@ -395,7 +395,7 @@ bool file_exists(const char * path1)
 //      __memset(&si, 0, sizeof(si));
 //      __memset(&pi, 0, sizeof(pi));
 //      if(!::CreateProcess(nullptr, (LPSTR)  strInstall.c_str(),
-//         nullptr, nullptr, FALSE, 0, nullptr, nullptr,
+//         nullptr, nullptr, false, 0, nullptr, nullptr,
 //         &si, &pi))
 //      {
 //         return 1;
@@ -406,7 +406,7 @@ bool file_exists(const char * path1)
 //      std::string & str = g_straRestartCommandLine.at(u);
 //      __memset(&si, 0, sizeof(si));
 //      __memset(&pi, 0, sizeof(pi));
-//      if(!::CreateProcess(nullptr,(LPSTR)str.c_str(),nullptr,nullptr,FALSE,0,nullptr,nullptr,&si,&pi))
+//      if(!::CreateProcess(nullptr,(LPSTR)str.c_str(),nullptr,nullptr,false,0,nullptr,nullptr,&si,&pi))
 //      {
 //         trace(("failed to create process " + str).c_str());
 //      }

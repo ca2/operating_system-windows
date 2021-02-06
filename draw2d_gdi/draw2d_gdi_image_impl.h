@@ -68,7 +68,7 @@ namespace draw2d_gdi
       virtual bool process_blend(::draw2d::pen * ppen, i32 x, i32 y, ::draw2d::e_alpha_mode ealphamode, ::image * pimage);
       virtual bool process_initialize(::draw2d::pen * ppen, bool bReset = true);
 
-      virtual COLORREF make_colorref(i32 a, i32 rectangle_i32, i32 g, i32 b);
+      virtual COLORREF make_colorref(i32 a, i32 rectangle, i32 g, i32 b);
 
    };
 

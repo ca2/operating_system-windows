@@ -1,25 +1,14 @@
 #include "framework.h"
-
-
 #include "aura/library.h"
 
 
-
-
-
-#include <gdiplus.h>
-
-
-Gdiplus::GdiplusStartupInput * g_pgdiplusStartupInput = nullptr;
-Gdiplus::GdiplusStartupOutput * g_pgdiplusStartupOutput = nullptr;
+Gdiplus::GdiplusStartupInput *   g_pgdiplusStartupInput = nullptr;
+Gdiplus::GdiplusStartupOutput *  g_pgdiplusStartupOutput = nullptr;
 DWORD_PTR                        g_gdiplusToken = NULL;
 DWORD_PTR                        g_gdiplusHookToken = NULL;
 
 
-void show_error_message(const string & strMessage, const string & strTitle, const ::e_message_box & emessagebox = e_message_box_ok, const ::promise::process & process = nullptr);
-
-
-CLASS_DECL_ACME::e_status init_gdi_plus()
+CLASS_DECL_DRAW2D_GDIPLUS ::e_status initialize_gdiplus()
 {
 
    g_pgdiplusStartupInput = new Gdiplus::GdiplusStartupInput();
@@ -59,7 +48,7 @@ CLASS_DECL_ACME::e_status init_gdi_plus()
 }
 
 
-CLASS_DECL_ACME void term_gdi_plus()
+CLASS_DECL_DRAW2D_GDIPLUS ::e_status terminate_gdiplus()
 {
 
    if (g_pgdiplusStartupOutput != nullptr)
@@ -67,13 +56,16 @@ CLASS_DECL_ACME void term_gdi_plus()
 
       g_pgdiplusStartupOutput->NotificationUnhook(g_gdiplusHookToken);
 
-
       ::Gdiplus::GdiplusShutdown(g_gdiplusToken);
-
 
       ::acme::del(g_pgdiplusStartupInput);
       ::acme::del(g_pgdiplusStartupOutput);
+
    }
 
+   return ::success;
+
 }
+
+
 

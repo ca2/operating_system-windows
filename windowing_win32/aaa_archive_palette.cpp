@@ -35,13 +35,13 @@ namespace draw2d_gdiplus
    {
       //return attach(::CreatePalette(pLogPalette));
 
-      return FALSE;
+      return false;
    }
    bool palette::CreateHalftonePalette(::image * pimage)
    {
       //ASSERT(pgraphics != nullptr && (dynamic_cast<::draw2d_gdiplus::graphics * >(pgraphics))->get_handle1() != nullptr);
       //return attach(::CreateHalftonePalette((dynamic_cast<::draw2d_gdiplus::graphics * >(pgraphics))->get_handle1()));
-      return FALSE;
+      return false;
 
    }
    UINT palette::GetPaletteEntries(UINT nStartIndex, UINT nNumEntries,
@@ -74,7 +74,7 @@ namespace draw2d_gdiplus
    bool palette::ResizePalette(UINT nNumEntries)
    {
       ASSERT(get_os_data() != nullptr);
-      return ::ResizePalette((HPALETTE)get_os_data(), nNumEntries) != FALSE;
+      return ::ResizePalette((HPALETTE)get_os_data(), nNumEntries) != false;
    }
 
    i32 palette::GetEntryCount()

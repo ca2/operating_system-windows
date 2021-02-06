@@ -113,7 +113,7 @@ i32 __win_main(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmdLine, i
 
    string strChannel(get_command_line_param(string(::GetCommandLineW()), "channel"));
 
-   g_hmutex = ::CreateMutexW(nullptr, FALSE, wstring("Global\\::ca2::fontopus::app_app_nest::" + strChannel));
+   g_hmutex = ::CreateMutexW(nullptr, false, wstring("Global\\::ca2::fontopus::app_app_nest::" + strChannel));
 
    if (::GetLastError() == ERROR_ALREADY_EXISTS)
    {

@@ -220,7 +220,7 @@ namespace backup
       Context.dir().mk(strNewRepos.folder());
       str.Format("svnadmin hotcopy C:\\repos\\%s %s", psz, strNewRepos);
 
-      if(!::CreateProcess(nullptr, (LPTSTR) (const char *) str, nullptr, nullptr, FALSE, CREATE_NEW_CONSOLE, nullptr, nullptr, &si, &pi))
+      if(!::CreateProcess(nullptr, (LPTSTR) (const char *) str, nullptr, nullptr, false, CREATE_NEW_CONSOLE, nullptr, nullptr, &si, &pi))
       {
          strStatus.Format("     Error: Check svn installation!!");
          add_status(strStatus);
@@ -266,7 +266,7 @@ namespace backup
       wstring wstr(str);
 
       if(!::CreateProcessW(nullptr, (LPWSTR) (const wchar_t *) wstr,
-                          nullptr, nullptr, FALSE, 0, nullptr,
+                          nullptr, nullptr, false, 0, nullptr,
                           L"C:\\", &si, &pi))
       {
          strStatus.Format("     Error: Check svn installation!!");
@@ -311,7 +311,7 @@ namespace backup
       Context.dir().mk(strTar.folder());
       str.Format("7za.exe a -r -ttar \"%s\" \"%s\"", strTar, strNewRepos);
 
-      if(!::CreateProcess(nullptr, (LPTSTR) (const char *) str, nullptr, nullptr, FALSE, CREATE_NEW_CONSOLE, nullptr, nullptr, &si, &pi))
+      if(!::CreateProcess(nullptr, (LPTSTR) (const char *) str, nullptr, nullptr, false, CREATE_NEW_CONSOLE, nullptr, nullptr, &si, &pi))
       {
          strStatus.Format("     Error: Check 7-zip installation! Cannot 7za.exe command line utility!");
          add_status(strStatus);

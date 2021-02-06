@@ -2,7 +2,9 @@
 
 
 #include "aura/_.h"
-#include "aura/os/windows/gdiplus.h"
+#include "aura/operating_system.h"
+#undef new
+#include <gdiplus.h>
 
 
 #ifdef _DRAW2D_GDIPLUS_STATIC
@@ -14,15 +16,29 @@
 #endif
 
 
+#ifdef WINDOWS_DESKTOP
+
+
+inline void copy(Gdiplus::ColorMatrix & a, const color_matrix & b)
+{
+
+   copy_color_matrix(a.m, b.a);
+
+}
+
+
+#endif
+
+
 ::e_status gdiplus_draw_text(::draw2d::graphics * pgraphics, ::draw2d::path * ppath, const string & str, rectangle_f64 & rectParam, const ::e_align & ealign, const ::e_draw_text & edrawtext, ::draw2d::font * pfont, double dFontWidth, ::draw2d::brush * pbrush = nullptr, bool bMeasure = false);
 
 
 inline auto gdiplus_color(const ::color& color)
 {
-   return Gdiplus::Color(color.m_iA, color.m_iR, color.m_iG, color.m_iB);
-}
 
-//#include "factory_exchange.h"
+   return Gdiplus::Color(color.alpha, color.red, color.green, color.blue);
+
+}
 
 
 #include "object.h"
@@ -30,15 +46,15 @@ inline auto gdiplus_color(const ::color& color)
 #include "bitmap.h"
 #include "brush.h"
 #include "font.h"
-//::thread_pointer#include "palette.h"
 #include "region.h"
 #include "image.h"
 #include "path.h"
 
-//#include "printer.h"
-
 
 #include "graphics.h"
+
+
+#include "draw2d.h"
 
 
 
@@ -61,22 +77,24 @@ class g_keep
 
 public:
 
-   Gdiplus::Graphics* point_i32;
-   Gdiplus::GraphicsState s;
+   
+   Gdiplus::Graphics *        m_p;
+   Gdiplus::GraphicsState     m_state;
 
-   g_keep(Gdiplus::Graphics* point1)
+
+   g_keep(Gdiplus::Graphics* p)
    {
 
-      point = point1;
+      m_p = p;
 
-      s = point_i32->Save();
+      m_state = m_p->Save();
 
    }
 
    ~g_keep()
    {
 
-      point_i32->Restore(s);
+      m_p->Restore(m_state);
 
    }
 

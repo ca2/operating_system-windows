@@ -249,7 +249,7 @@ namespace production
 
          //   if (m_straStatus.get_count() > 1)
          //   {
-         //      single_lock sl(&m_mutexStatus,TRUE);
+         //      single_lock sl(&m_mutexStatus,true);
          //      set["post"]["new_status"] = set["post"]["new_status"] + "Last Stati:<br />";
          //      for (::count i = min(5, m_straStatus.get_count() - 1); i >= 1; i--)
          //      {
@@ -1467,7 +1467,7 @@ namespace production
       string strBz;
       string strUn;
       i32 i = 0;
-      single_lock sl(&m_mutexCompress, TRUE);
+      single_lock sl(&m_mutexCompress, true);
       for (; i < m_straFiles.get_size(); i++)
       {
          ::file::path & strFile = m_straFiles[i];
@@ -1535,7 +1535,7 @@ namespace production
 
    bool production::compress_next()
    {
-      single_lock sl(&m_mutexCompress, TRUE);
+      single_lock sl(&m_mutexCompress, true);
       if (m_straCompress.get_size() <= 0)
          return false;
       string strNext = m_straCompress[0];
@@ -1628,7 +1628,7 @@ namespace production
       {
          str.Format("svn update %s", strBase / psz);
       }
-      if (!::CreateProcess(nullptr, (LPTSTR)(const char *)str, nullptr, nullptr, FALSE, CREATE_NEW_CONSOLE, nullptr, nullptr, &si, &pi))
+      if (!::CreateProcess(nullptr, (LPTSTR)(const char *)str, nullptr, nullptr, false, CREATE_NEW_CONSOLE, nullptr, nullptr, &si, &pi))
       {
          strStatus.Format("     Error: Check svn installation!!");
          add_status(strStatus);
@@ -1696,7 +1696,7 @@ namespace production
          str.Format("git stage .");
 
          wstring wstr(str);
-         if (!::CreateProcessW(nullptr, (LPWSTR)(const wchar_t *)wstr, nullptr, nullptr, FALSE, CREATE_NEW_CONSOLE, nullptr, wstring(pathDir), &si, &pi))
+         if (!::CreateProcessW(nullptr, (LPWSTR)(const wchar_t *)wstr, nullptr, nullptr, false, CREATE_NEW_CONSOLE, nullptr, wstring(pathDir), &si, &pi))
          {
             strStatus.Format("     Error: Check svn installation!!");
             add_status(strStatus);
@@ -1734,7 +1734,7 @@ namespace production
       {
          str.Format("git commit --file=%s %s", m_strBase / "app\\this_version_info.txt", strBase / psz);
       }
-      if (!::CreateProcess(nullptr, (LPTSTR)(const char *)str, nullptr, nullptr, FALSE, CREATE_NEW_CONSOLE, nullptr, nullptr, &si, &pi))
+      if (!::CreateProcess(nullptr, (LPTSTR)(const char *)str, nullptr, nullptr, false, CREATE_NEW_CONSOLE, nullptr, nullptr, &si, &pi))
       {
          strStatus.Format("     Error: Check svn installation!!");
          add_status(strStatus);
@@ -1770,7 +1770,7 @@ namespace production
       {
          str.Format("git push %s", strBase / psz);
       }
-      if (!::CreateProcess(nullptr, (LPTSTR)(const char *)str, nullptr, nullptr, FALSE, CREATE_NEW_CONSOLE, nullptr, nullptr, &si, &pi))
+      if (!::CreateProcess(nullptr, (LPTSTR)(const char *)str, nullptr, nullptr, false, CREATE_NEW_CONSOLE, nullptr, nullptr, &si, &pi))
       {
          strStatus.Format("     Error: Check svn installation!!");
          add_status(strStatus);
@@ -2892,7 +2892,7 @@ namespace production
    void production::add_status(const char * psz)
    {
       {
-         single_lock sl(&m_mutexStatus, TRUE);
+         single_lock sl(&m_mutexStatus, true);
          m_straStatus.add(psz);
       }
       TRACE("%s", psz);
@@ -2902,7 +2902,7 @@ namespace production
    void production::change_status(const char * psz)
    {
       {
-         single_lock sl(&m_mutexStatus, TRUE);
+         single_lock sl(&m_mutexStatus, true);
          if (m_straStatus.get_count() == 0)
          {
             m_straStatus.add(psz);

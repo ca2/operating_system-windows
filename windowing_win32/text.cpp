@@ -157,7 +157,7 @@
          if (unit == Gdiplus::UnitPoint)
          {
 
-            size = pgraphics->GetDpiY() * size_i32 / 73.0f;
+            size = pgraphics->GetDpiY() * size / 73.0f;
 
          }
 

@@ -81,7 +81,7 @@ namespace draw2d_gdiplus
 
       Gdiplus::PointF point_f32((Gdiplus::REAL) point.x, (Gdiplus::REAL) point.y);
 
-      return m_pregion->IsVisible(point_f32)  != FALSE;
+      return m_pregion->IsVisible(point_f32)  != false;
 
    }
 

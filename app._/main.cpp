@@ -422,7 +422,7 @@ void wmain(int argc, wchar_t * wargv[])
       }
 
 
-      HANDLE hupdate = BeginUpdateResourceW(wstring(strDst), FALSE);
+      HANDLE hupdate = BeginUpdateResourceW(wstring(strDst), false);
 
       dprint("BeginUpdateResource");
 
@@ -521,7 +521,7 @@ void wmain(int argc, wchar_t * wargv[])
          dprint("APPID should be updated");
       }
 
-      EndUpdateResourceW(hupdate, FALSE);
+      EndUpdateResourceW(hupdate, false);
 
       printf("%s", ("Program \"" + strDst + "\" successfully generated!!").c_str());
 

@@ -2,11 +2,12 @@
 
 
 #undef UNREFERENCED_PARAMETER
+#undef MAKELPARAM
 #undef MAKELONG
 #undef Node
 #undef LOBYTE
 #undef Context
-
+#undef User
 
 
 #ifdef _WINDOWS_
@@ -26,6 +27,7 @@
 #undef NOOPENFILE
 #undef NORESOURCE
 #undef NOATOM
+#undef NOMETAFILE
 #undef NOLANGUAGE
 #undef NOLSTRING
 #undef NODBCS
@@ -38,7 +40,6 @@
 #undef NOSCALABLEFONT
 #undef NOBITMAP
 #undef NORASTEROPS
-#undef NOMETAFILE
 #undef NOSYSMETRICS
 #undef NOSYSTEMPARAMSINFO
 #undef NOMSG
@@ -108,7 +109,7 @@ typedef struct HKEY__ *HKEY;
 
 
 
-#undef __min
-#undef __max
+#undef minimum
+#undef maximum
 
 

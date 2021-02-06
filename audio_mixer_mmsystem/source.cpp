@@ -29,7 +29,7 @@ namespace multimedia
          {
             //        System.message_box(nullptr, MB_OK | e_message_box_icon_exclamation,
             //"There are no controls associated with the selected line.");
-            //        EndDialog(oswindow, FALSE);
+            //        EndDialog(oswindow, false);
             return ::success;
          }
 
@@ -135,11 +135,11 @@ namespace multimedia
             }
 
             //    ListBox_SetCurSel(ptlb->hlb, 0);
-            //  enable_window(get_child_by_id(oswindow, IDD_LINECONTROLS_BTN_INFO), TRUE);
-            //enable_window(get_child_by_id(oswindow, IDD_LINECONTROLS_BTN_SETTINGS), TRUE);
+            //  enable_window(get_child_by_id(oswindow, IDD_LINECONTROLS_BTN_INFO), true);
+            //enable_window(get_child_by_id(oswindow, IDD_LINECONTROLS_BTN_SETTINGS), true);
          }
 
-         //    SetWindowRedraw(ptlb->hlb, TRUE);
+         //    SetWindowRedraw(ptlb->hlb, true);
          //  LocalFree((HLOCAL)pamxctrl);
          return mmrc;
 

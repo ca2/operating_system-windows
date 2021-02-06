@@ -161,7 +161,7 @@ namespace draw2d_gdi
 
       ASSERT(get_os_data() != nullptr);
 
-      return ::EqualRgn((HRGN)get_os_data(), (HRGN)pRgn->get_os_data()) != FALSE;
+      return ::EqualRgn((HRGN)get_os_data(), (HRGN)pRgn->get_os_data()) != false;
 
    }
 
@@ -171,7 +171,7 @@ namespace draw2d_gdi
 
       ASSERT(get_os_data() != nullptr);
 
-      return ::OffsetRgn((HRGN)get_os_data(), x, y) != FALSE;
+      return ::OffsetRgn((HRGN)get_os_data(), x, y) != false;
 
 
    }
@@ -202,7 +202,7 @@ namespace draw2d_gdi
 
       ASSERT(get_os_data() != nullptr);
 
-      return ::PtInRegion((HRGN)get_os_data(), x, y) != FALSE;
+      return ::PtInRegion((HRGN)get_os_data(), x, y) != false;
 
    }
 
@@ -211,7 +211,7 @@ namespace draw2d_gdi
    {
       ASSERT(get_os_data() != nullptr);
 
-      return ::PtInRegion((HRGN)get_os_data(), point.x, point.y) != FALSE;
+      return ::PtInRegion((HRGN)get_os_data(), point.x, point.y) != false;
 
    }
 
@@ -221,7 +221,7 @@ namespace draw2d_gdi
 
       ASSERT(get_os_data() != nullptr);
 
-      return ::RectInRegion((HRGN)get_os_data(), rectangle) != FALSE;
+      return ::RectInRegion((HRGN)get_os_data(), rectangle) != false;
 
    }
 

@@ -334,7 +334,7 @@ namespace draw2d_gdiplus
 
    ////   HDC hdc = __graphics(pgraphics)->get_hdc();
 
-   ////   bool bOk = GetDIBits(hdc, (HBITMAP)bitmap->get_os_data(), 0, height(), m_pcolorrefRaw, nullptr, DIB_RGB_COLORS) != FALSE;
+   ////   bool bOk = GetDIBits(hdc, (HBITMAP)bitmap->get_os_data(), 0, height(), m_pcolorrefRaw, nullptr, DIB_RGB_COLORS) != false;
 
    ////   g()->set(bitmap);
 
@@ -359,7 +359,7 @@ namespace draw2d_gdiplus
    //bool image::draw(const ::point_i32 & pointDest, ::image * pimage, const ::rectangle_i32 & rectSrc)
    //{
 
-   //   return m_pgraphics->draw(pointDest, pimage, rectSrc) != FALSE;
+   //   return m_pgraphics->draw(pointDest, pimage, rectSrc) != false;
 
    //}
 
@@ -371,7 +371,7 @@ namespace draw2d_gdiplus
 
       ::point_i32 pointSrc(pointSrcParam);
 
-      ::size_i32 size_i32(rectDst.size());
+      ::size_i32 size(rectDst.size());
 
       ::image * pimageDst = this;
 
@@ -479,7 +479,7 @@ namespace draw2d_gdiplus
       else
       {
 
-         pimageDst->g()->draw(::rectangle_f64(rectDst.top_left(), size_i32 ), pimageSrc->g(), pointSrc);
+         pimageDst->g()->draw(::rectangle_f64(rectDst.top_left(), size), pimageSrc->g(), pointSrc);
 
       }
 

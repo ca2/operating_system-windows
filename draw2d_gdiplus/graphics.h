@@ -40,13 +40,13 @@ namespace draw2d_gdiplus
       virtual bool attach(void * pgraphics) override;   // attach/detach affects only the Output DC
       virtual void * detach() override;
 
-      virtual bool attach_hdc(HDC hdc) override;   // attach/detach affects only the Output DC
-      virtual HDC detach_hdc() override;
-      virtual bool AttachPrinter(HDC hdc) override;
-      virtual HDC DetachPrinter() override;
+      //virtual bool attach_hdc(HDC hdc) override;   // attach/detach affects only the Output DC
+      //virtual HDC detach_hdc() override;
+      //virtual bool AttachPrinter(HDC hdc) override;
+      //virtual HDC DetachPrinter() override;
 
 
-      bool IsPrinting() override;            // TRUE if being used for printing
+      bool IsPrinting() override;            // true if being used for printing
 
 
       // for bidi and mirrored localization
@@ -64,13 +64,13 @@ namespace draw2d_gdiplus
       virtual double get_dpiy() override;
 
       // Constructors
-      bool CreateDC(const char * pszDriverName, const char * pszDeviceName,
+      //bool CreateDC(const char * pszDriverName, const char * pszDeviceName,
 
-                    const char * pszOutput, const void * lpInitData) override;
+      //              const char * pszOutput, const void * lpInitData) override;
 
-      bool CreateIC(const char * pszDriverName, const char * pszDeviceName,
+      //bool CreateIC(const char * pszDriverName, const char * pszDeviceName,
 
-                    const char * pszOutput, const void * lpInitData) override;
+      //              const char * pszOutput, const void * lpInitData) override;
 
       bool CreateCompatibleDC(::draw2d::graphics * pgraphics) override;
 
@@ -83,7 +83,7 @@ namespace draw2d_gdiplus
       virtual ::u32 SetBoundsRect(const ::rectangle_f64 & rectBounds, ::u32 flags);
       virtual ::u32 GetBoundsRect(::rectangle_f64 * rectdBounds, ::u32 flags);
 
-      bool ResetDC(const DEVMODE* pDevMode) override;
+      //bool ResetDC(const DEVMODE* pDevMode) override;
 
 
       // Drawing-Tool Functions
@@ -134,9 +134,9 @@ namespace draw2d_gdiplus
       i32 GetGraphicsMode() override;
 
       // World transform
-      bool SetWorldTransform(const XFORM* pXform) override;
-      bool ModifyWorldTransform(const XFORM* pXform,u32 iMode) override;
-      bool GetWorldTransform(XFORM* pXform) override;
+      //bool SetWorldTransform(const XFORM* pXform) override;
+      //bool ModifyWorldTransform(const XFORM* pXform,u32 iMode) override;
+      //bool GetWorldTransform(XFORM* pXform) override;
 
       // Mapping Functions
       virtual i32 GetMapMode() override;
@@ -278,10 +278,10 @@ namespace draw2d_gdiplus
       //               ::draw2d::brush* pBrush = nullptr) override;
       //bool DrawState(const ::point_i32 & point, const ::size_i32 & size, const char * pszText, UINT nFlags,
 
-      //               bool bPrefixText = TRUE, i32 nTextLen = 0, HBRUSH hBrush = nullptr) override;
+      //               bool bPrefixText = true, i32 nTextLen = 0, HBRUSH hBrush = nullptr) override;
       //bool DrawState(const ::point_i32 & point, const ::size_i32 & size, const char * pszText, UINT nFlags,
 
-      //               bool bPrefixText = TRUE, i32 nTextLen = 0, ::draw2d::brush* pBrush = nullptr) override;
+      //               bool bPrefixText = true, i32 nTextLen = 0, ::draw2d::brush* pBrush = nullptr) override;
       //bool DrawState(const ::point_i32 & point, const ::size_i32 & size, DRAWSTATEPROC pDrawProc,
 
       //               LPARAM lData, UINT nFlags, HBRUSH hBrush = nullptr) override;
@@ -378,13 +378,13 @@ namespace draw2d_gdiplus
 
       // Text Functions
       virtual bool TextOutRaw(double x, double y, const block & block);
-      virtual bool ExtTextOut(double x, double y, UINT nOptions, const rectangle_f64 &  prectangle, const char * pszString,strsize nCount, LPINT lpDxWidths) override;
+      //virtual bool ExtTextOut(double x, double y, UINT nOptions, const rectangle_f64 &  prectangle, const char * pszString,strsize nCount, LPINT lpDxWidths) override;
 
-      virtual bool ExtTextOut(double x, double y, UINT nOptions, const rectangle_f64 &  prectangle, const string & str, LPINT lpDxWidths) override;
+      //virtual bool ExtTextOut(double x, double y, UINT nOptions, const rectangle_f64 &  prectangle, const string & str, LPINT lpDxWidths) override;
 
-      virtual size_f64 TabbedTextOut(double x, double y, const char * pszString, strsize nCount,count nTabPositions, LPINT lpnTabStopPositions, i32 nTabOrigin) override;
+      //virtual size_f64 TabbedTextOut(double x, double y, const char * pszString, strsize nCount,count nTabPositions, LPINT lpnTabStopPositions, i32 nTabOrigin) override;
 
-      virtual size_f64 TabbedTextOut(double x, double y, const string & str,count nTabPositions, LPINT pnTabStopPositions, i32 nTabOrigin) override;
+      //virtual size_f64 TabbedTextOut(double x, double y, const string & str,count nTabPositions, LPINT pnTabStopPositions, i32 nTabOrigin) override;
 
 
       //using ::draw2d::graphics::draw;
@@ -418,9 +418,9 @@ namespace draw2d_gdiplus
       virtual size_f64 GetOutputTextExtent(const char * pszString, strsize nCount) override;
 
       virtual size_f64 GetOutputTextExtent(const string & str) override;
-      virtual size_f64 GetTabbedTextExtent(const char * pszString, strsize nCount,count nTabPositions, LPINT lpnTabStopPositions) override;
+      //virtual size_f64 GetTabbedTextExtent(const char * pszString, strsize nCount,count nTabPositions, LPINT lpnTabStopPositions) override;
 
-      virtual size_f64 GetTabbedTextExtent(const string & str,count nTabPositions, LPINT pnTabStopPositions) override;
+      //virtual size_f64 GetTabbedTextExtent(const string & str,count nTabPositions, LPINT pnTabStopPositions) override;
 
       virtual size_f64 GetOutputTabbedTextExtent(const char * pszString, strsize nCount,count nTabPositions, LPINT lpnTabStopPositions) override;
 
@@ -432,7 +432,7 @@ namespace draw2d_gdiplus
       virtual UINT SetTextAlign(UINT nFlags) override;
       //virtual i32 GetTextFace(count nCount, LPTSTR pszFacename) override;
 
-      virtual i32 GetTextFace(string & rString) override;
+      //virtual i32 GetTextFace(string & rString) override;
       virtual bool get_text_metrics(::draw2d::text_metric * pMetrics) override;
 
       virtual bool get_output_text_metrics(::draw2d::text_metric * pMetrics) override;
@@ -516,9 +516,9 @@ namespace draw2d_gdiplus
 
 
       // Escape helpers
-      i32 StartDoc(const char * pszDocName) override;  // old Win3.0 version
+      //i32 StartDoc(const char * pszDocName) override;  // old Win3.0 version
 
-      i32 StartDoc(LPDOCINFOW pDocInfo) override;
+      //i32 StartDoc(LPDOCINFOW pDocInfo) override;
 
       i32 StartPage() override;
       i32 EndPage() override;
@@ -528,8 +528,8 @@ namespace draw2d_gdiplus
       i32 EndDoc() override;
 
       // MetaFile Functions
-      bool PlayMetaFile(HMETAFILE hMF) override;
-      bool PlayMetaFile(HENHMETAFILE hEnhMetaFile, const rectangle_f64 &  pBounds) override;
+      //bool PlayMetaFile(HMETAFILE hMF) override;
+      //bool PlayMetaFile(HENHMETAFILE hEnhMetaFile, const rectangle_f64 &  pBounds) override;
 
       bool AddMetaFileComment(UINT nDataSize, const BYTE* pCommentData) override;
       // can be used for enhanced metafiles only
@@ -615,7 +615,7 @@ namespace draw2d_gdiplus
       //virtual bool draw_line(const ::point_f64 & point1, const ::point_f64 & point2, ::draw2d::pen * ppen) override;
 
 
-      virtual void enum_fonts(::draw2d::font_enum_item_array & itema) override;
+      //virtual void enum_fonts(::draw2d::font_enum_item_array & itema) override;
 
       virtual bool prefer_mapped_image_on_mix() override;
 

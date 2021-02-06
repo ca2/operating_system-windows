@@ -1,8 +1,8 @@
 #include "framework.h"
 
 
-CLASS_DECL_ACME ::e_status init_gdiplus();
-CLASS_DECL_ACME ::e_status term_gdiplus();
+CLASS_DECL_DRAW2D_GDIPLUS ::e_status initialize_gdiplus();
+CLASS_DECL_DRAW2D_GDIPLUS ::e_status terminate_gdiplus();
 
 
 namespace draw2d_gdiplus
@@ -11,8 +11,9 @@ namespace draw2d_gdiplus
 
    draw2d::draw2d()
    {
-
       
+      initialize_gdiplus();
+
 
    }
 
@@ -20,7 +21,7 @@ namespace draw2d_gdiplus
    draw2d::~draw2d()
    {
 
-      term_gdiplus();
+      terminate_gdiplus();
 
    }
 
@@ -37,7 +38,7 @@ namespace draw2d_gdiplus
 
       }
    
-      estatus = init_gdiplus();
+      estatus = initialize_gdiplus();
 
       if (!estatus)
       {

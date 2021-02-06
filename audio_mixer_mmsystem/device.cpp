@@ -178,7 +178,7 @@ namespace multimedia
          //
          //
          //
-         //    SetWindowRedraw(ptlb->hlb, TRUE);
+         //    SetWindowRedraw(ptlb->hlb, true);
          return ::success;
 
       }

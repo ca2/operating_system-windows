@@ -26,7 +26,7 @@ namespace draw2d_gdiplus
       virtual bool create(::draw2d::graphics * pgraphics, ::i8 iCreate) override;
       virtual void destroy() override;
 
-      virtual bool GetLogFont(LOGFONTW * pfontw) override;
+      //virtual bool GetLogFont(LOGFONTW * pfontw) override;
 
       virtual e_char_set calc_char_set(::draw2d::graphics * pgraphics);
 

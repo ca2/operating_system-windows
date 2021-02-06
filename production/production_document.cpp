@@ -18,13 +18,13 @@ namespace production
    {
 
       if (!::user::document::on_new_document())
-         return FALSE;
+         return false;
 
 
       update_all_views(nullptr, 0);
 
 
-      return TRUE;
+      return true;
    }
 
    document::~document()
@@ -63,7 +63,7 @@ namespace production
 
       update_all_views(id_open_document);
 
-      return TRUE;
+      return true;
 
 
    }

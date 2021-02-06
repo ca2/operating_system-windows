@@ -102,7 +102,7 @@ namespace music
             bool IsPlaying();
 
             bool IsSettingPosition();
-            void SetSettingPositionFlag(bool bSet = TRUE);
+            void SetSettingPositionFlag(bool bSet = true);
 
             imedia_time GetQuarterNote();
 

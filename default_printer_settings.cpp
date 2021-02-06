@@ -190,7 +190,7 @@ BOOL SetPaperType(short dmPaperSize)
    {
       if(buffer != nullptr)
          delete buffer;
-      return FALSE;
+      return false;
    }
    // Open printer handle (on Windows NT,
    // you need full-access because you
@@ -202,7 +202,7 @@ BOOL SetPaperType(short dmPaperSize)
    {
       if(buffer != nullptr)
          delete buffer;
-      return FALSE;
+      return false;
    }
    // The first GetPrinter tells you how big the buffer should be in 
    // order to hold all of PRINTER_INFO_2. Note that this should fail with 
@@ -216,7 +216,7 @@ BOOL SetPaperType(short dmPaperSize)
       ClosePrinter(hPrinter);
       if(buffer != nullptr)
          delete buffer;
-      return FALSE;
+      return false;
    }
    // Allocate enough space for PRINTER_INFO_2...
    pi2 = (PRINTER_INFO_2 *)GlobalAlloc(GPTR,dwNeeded);
@@ -225,7 +225,7 @@ BOOL SetPaperType(short dmPaperSize)
       ClosePrinter(hPrinter);
       if(buffer != nullptr)
          delete buffer;
-      return FALSE;
+      return false;
    }
    // The second GetPrinter fills in all the current settings, so all you
    // need to do is modify what you're interested in...
@@ -236,7 +236,7 @@ BOOL SetPaperType(short dmPaperSize)
       ClosePrinter(hPrinter);
       if(buffer != nullptr)
          delete buffer;
-      return FALSE;
+      return false;
    }
    // If GetPrinter didn't fill in the DEVMODE,
    // try to get it by calling DocumentProperties...
@@ -250,7 +250,7 @@ BOOL SetPaperType(short dmPaperSize)
          ClosePrinter(hPrinter);
          if(buffer != nullptr)
             delete buffer;
-         return FALSE;
+         return false;
       }
       pDevMode = (DEVMODE *)GlobalAlloc(GPTR,dwNeeded);
       if(pDevMode == nullptr)
@@ -259,7 +259,7 @@ BOOL SetPaperType(short dmPaperSize)
          ClosePrinter(hPrinter);
          if(buffer != nullptr)
             delete buffer;
-         return FALSE;
+         return false;
       }
       lFlag = DocumentProperties(nullptr,hPrinter,
          pPrinterName,pDevMode,nullptr,DM_OUT_BUFFER);
@@ -270,7 +270,7 @@ BOOL SetPaperType(short dmPaperSize)
          ClosePrinter(hPrinter);
          if(buffer != nullptr)
             delete buffer;
-         return FALSE;
+         return false;
       }
       pi2->pDevMode = pDevMode;
    }
@@ -292,7 +292,7 @@ BOOL SetPaperType(short dmPaperSize)
          GlobalFree(pDevMode);
       if(buffer != nullptr)
          delete buffer;
-      return FALSE;
+      return false;
    }
    // Update printer information...
    bFlag = SetPrinter(hPrinter,2,(LPBYTE)pi2,0);
@@ -305,7 +305,7 @@ BOOL SetPaperType(short dmPaperSize)
          GlobalFree(pDevMode);
       if(buffer != nullptr)
          delete buffer;
-      return FALSE;
+      return false;
    }
    // Tell other apps that there was a change...
    SendMessageTimeout(HWND_BROADCAST,WM_DEVMODECHANGE,0L,
@@ -319,5 +319,5 @@ BOOL SetPaperType(short dmPaperSize)
       GlobalFree(pDevMode);
    if(buffer != nullptr)
       delete buffer;
-   return TRUE;
+   return true;
 }

@@ -29,40 +29,40 @@ namespace draw2d_gdiplus
 
 
 
-   bool font::GetLogFont(LOGFONTW * pfontw)
-   {
+   //bool font::GetLogFont(LOGFONTW * pfontw)
+   //{
 
-      bool bOk = false;
+   //   bool bOk = false;
 
-      defer_update(nullptr, 0);
+   //   defer_update(nullptr, 0);
 
-      if (m_pfont != nullptr)
-      {
+   //   if (m_pfont != nullptr)
+   //   {
 
-         HDC hdc = ::GetDC(nullptr);
+   //      HDC hdc = ::GetDC(nullptr);
 
-         Gdiplus::Status status;
-         {
-            Gdiplus::Graphics g(hdc);
+   //      Gdiplus::Status status;
+   //      {
+   //         Gdiplus::Graphics g(hdc);
 
-            status = m_pfont->GetLogFontW(&g, pfontw);
+   //         status = m_pfont->GetLogFontW(&g, pfontw);
 
-         }
+   //      }
 
-         bOk = status == Gdiplus::Ok;
+   //      bOk = status == Gdiplus::Ok;
 
-         ::ReleaseDC(nullptr, hdc);
-
-
+   //      ::ReleaseDC(nullptr, hdc);
 
 
-      }
 
 
-      return bOk;
+   //   }
 
 
-   }
+   //   return bOk;
+
+
+   //}
 
 
 #ifdef DEBUG

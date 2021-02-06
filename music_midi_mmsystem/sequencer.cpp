@@ -732,7 +732,7 @@ namespace music
                {
 
                   // Unknown operation
-                  ASSERT(FALSE);
+                  ASSERT(false);
 
                }
                
@@ -916,7 +916,7 @@ namespace music
             case EVENT_ID_PAD:
                break;
             default:
-               ASSERT(FALSE);
+               ASSERT(false);
                break;
             }
 
@@ -1428,7 +1428,7 @@ namespace music
 
             if (pEvent->GetFlags() & 1)
             {
-               ASSERT(FALSE);
+               ASSERT(false);
             }
             else if (pEvent->GetFullType() < sys_ex)
             {
@@ -1865,7 +1865,7 @@ namespace music
 
                int iLeft = iBufferNominalMax - lpmh->dwBytesRecorded;
 
-               smfrc = m_psequence->m_pfile->WorkGetNextEvent(pevent, tkMax, TRUE, &iLeft);
+               smfrc = m_psequence->m_pfile->WorkGetNextEvent(pevent, tkMax, true, &iLeft);
 
                if (::error_would_reach_buffer_limit == smfrc)
                {

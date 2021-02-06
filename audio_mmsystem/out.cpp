@@ -420,7 +420,7 @@ Opened:
    ::e_status     out::out_pause()
    {
 
-      single_lock sLock(mutex(), TRUE);
+      single_lock sLock(mutex(), true);
 
       ASSERT(m_estate == e_state_playing);
 

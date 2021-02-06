@@ -90,7 +90,7 @@ namespace draw2d_gdi
 
       ASSERT(get_os_data() != nullptr);
 
-      return ::ResizePalette((HPALETTE)get_os_data(), nNumEntries) != FALSE;
+      return ::ResizePalette((HPALETTE)get_os_data(), nNumEntries) != false;
 
    }
 

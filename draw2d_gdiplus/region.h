@@ -22,11 +22,11 @@ namespace draw2d_gdiplus
       virtual void destroy() override;
 
 
-      virtual bool translate(const POINT& point, ::draw2d::graphics * pgraphics = nullptr) override;
+      virtual bool translate(const POINT_I32 & point, ::draw2d::graphics * pgraphics = nullptr) override;
 
-      virtual bool contains(const POINT & point, ::draw2d::graphics * pgraphics = nullptr) override;
+      virtual bool contains(const POINT_I32 & point, ::draw2d::graphics * pgraphics = nullptr) override;
 
-      virtual bool get_bounding_box(RECT* prectangle, ::draw2d::graphics * pgraphics = nullptr) override;
+      virtual bool get_bounding_box(RECTANGLE_I32 * prectangle, ::draw2d::graphics * pgraphics = nullptr) override;
 
       virtual void max_bounding_box(RECTANGLE_F64 * prectangle, ::draw2d::graphics * pgraphics) override;
 

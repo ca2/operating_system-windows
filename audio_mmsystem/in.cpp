@@ -77,7 +77,7 @@ namespace audio_mmsystem
 
       }
 
-      single_lock sLock(mutex(), TRUE);
+      single_lock sLock(mutex(), true);
       ::e_status     estatus;
       int iStatus = MMSYSERR_NOERROR;
 
@@ -240,7 +240,7 @@ Opened:
    ::e_status     in::in_close()
    {
 
-      single_lock sLock(mutex(), TRUE);
+      single_lock sLock(mutex(), true);
 
       ::e_status     estatus;
 
@@ -279,7 +279,7 @@ Opened:
    ::e_status     in::in_start()
    {
 
-      single_lock sLock(mutex(), TRUE);
+      single_lock sLock(mutex(), true);
 
       if(m_estate == state_recording)
          return ::success;
@@ -306,7 +306,7 @@ Opened:
    ::e_status     in::in_stop()
    {
 
-      single_lock sLock(mutex(), TRUE);
+      single_lock sLock(mutex(), true);
 
       if(m_estate != state_recording)
          return error_failed;
@@ -351,13 +351,13 @@ Opened:
       UNREFERENCED_PARAMETER(dwParam2);
       if(uMsg == WIM_DATA)
       {
-         ASSERT(FALSE);
+         ASSERT(false);
          /*      u32 msSampleTime = timeGetTime();
          thread * pthread = (thread *) dwInstance;
          ASSERT(pthread != nullptr);
          LPWAVEHDR lpWaveHdr = (LPWAVEHDR) dwParam1;
          LPWAVEPROCDATAMESSAGE lpxfwm = new WAVEPROCDATAMESSAGE;
-         lpxfwm->bDelete = TRUE;
+         lpxfwm->bDelete = true;
          lpxfwm->msSampleTime = msSampleTime;
          //      lpxfwm->tkSamplePosition = tkPosition;
          lpxfwm->lpWaveHdr = lpWaveHdr;
@@ -376,7 +376,7 @@ Opened:
    ::e_status     in::in_reset()
    {
 
-      single_lock sLock(mutex(), TRUE);
+      single_lock sLock(mutex(), true);
 
       m_bResetting = true;
 

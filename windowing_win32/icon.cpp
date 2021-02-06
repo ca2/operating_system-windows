@@ -1,7 +1,6 @@
-// created by Camilo <3CamiloSasukeThomasBorregaardSoerensen  - Honoring Thomas Borregaard Sørensen MY ONLY LORD
+// created by Camilo <3CamiloSasukeThomasBorregaardSoerensen  - Honoring Thomas Borregaard Sï¿½rensen MY ONLY LORD
 // recreated by Camilo 2021-01-28 16:44
 #include "framework.h"
-#include "_windowing.h"
 
 
 namespace windowing_win32
@@ -11,23 +10,22 @@ namespace windowing_win32
    icon::icon()
    {
 
-      m_hicon = nullptr;
-
+      
    }
 
 
    icon::~icon()
    {
 
-      ::DestroyIcon(m_hicon);
+      _remove_all();
 
    }
 
 
-   iptr icon::get_os_data() const
+   void * icon::get_os_data(const ::size_i32 & size) const
    {
 
-      return (iptr) m_hicon;
+      return m_iconmap[size];
 
    }
 
@@ -35,9 +33,7 @@ namespace windowing_win32
    bool icon::load_file(string strPath)
    {
 
-#ifdef WINDOWS_DESKTOP
-
-      strPath = Context.defer_process_matter_path(strPath);
+      strPath = get_context()->defer_process_matter_path(strPath);
 
       int_array ia;
 
@@ -47,69 +43,63 @@ namespace windowing_win32
       ia.add(48);
       ia.add(256);
 
-      hicon hIcon = nullptr;
-
       for (auto i : ia)
       {
 
-         hIcon = (hicon) ::LoadImageW(nullptr, wstring(strPath), IMAGE_ICON, i, i, LR_LOADFROMFILE);
+         HICON hicon = (HICON) ::LoadImageW(nullptr, wstring(strPath), IMAGE_ICON, i, i, LR_LOADFROMFILE);
 
-         if (hIcon != nullptr)
+         if (hicon != nullptr)
          {
 
-            m_iconmap[::size_i32(i, i)] = hIcon;
-
-            m_picon = hIcon;
-
-            on_update_icon();
+            m_iconmap[::size_i32(i, i)] = hicon;
 
          }
 
       }
 
-      return m_picon != nullptr;
+      return !m_iconmap.is_empty();
 
-#else
-
-      m_strAppTrayIcon = strPath;
-
-      return true;
-
-#endif
+//#else
+//
+//      m_strAppTrayIcon = strPath;
+//
+//      return true;
+//
+//#endif
 
    }
 
-   //::e_status     icon::attach_os_data(void * picon, bool bTakeOwnership)
-   //{
 
-   //   m_picon = picon;
-
-   //   m_bAutoDelete = bTakeOwnership;
-
-   //   on_update_icon();
-
-   //   return ::success;
-
-   //}
-
-
-   image * icon::get_image(const concrete < ::size_i32 > & size)
+   void icon::get_sizes(array < concrete < ::size_i32 > > & a)
    {
 
-      bool bExists;
+      a.remove_all();
 
-      __defer_construct_new(m_pimagemap);
-
-      auto pimage = m_pimagemap->get(size, bExists);
-
-      if (bExists)
+      for (auto & size : m_iconmap.keys())
       {
 
-         return pimage;
+         a.add(size);
 
       }
 
-#ifdef WINDOWS_DESKTOP
+   }
+
+
+   __pointer(::image) icon::create_image(const concrete < ::size_i32 > & size)
+   {
+
+      HICON hicon = m_iconmap[size];
+
+      if (::is_null(hicon))
+      {
+
+         return nullptr;
+
+      }
+
+      __pointer(::image) pimage;
+
+      __construct(pimage);
 
       bool bOk = false;
 
@@ -148,58 +138,57 @@ namespace windowing_win32
 
          hbitmapOld = (HBITMAP) ::SelectObject(hdc, hbitmap);
 
-         if (!::DrawIconEx(hdc, 0, 0, (hicon)m_picon, size.cx, size.cy, 0, nullptr, DI_IMAGE | DI_MASK))
+         if (!::DrawIconEx(hdc, 0, 0, hicon, size.cx, size.cy, 0, nullptr, DI_IMAGE | DI_MASK))
          {
 
-            output_debug_string("nok");
+            return nullptr;
 
          }
-         else
+
+         bool bAllZeroAlpha = true;
+         bool bTheresUint32 = false;
+
+         pixmap.map();
+
+         int area = size.area();
+
+         auto pc = pixmap.colorref();
+         byte * pA = &((byte *)pc)[3];
+
+         for (int i = 0; i < area; i++)
+         {
+            if (*pc != 0)
+            {
+               bTheresUint32 = true;
+            }
+            if (*pA != 0)
+            {
+               bAllZeroAlpha = false;
+               break;
+            }
+            pc++;
+            pA += 4;
+         }
+
+         if (bAllZeroAlpha && bTheresUint32)
          {
 
-            bool bAllZeroAlpha = true;
-            bool bTheresUint32 = false;
-
-            pixmap.map();
-
-            int area = size.area();
-
-            auto pc = pixmap.colorref();
-            byte * pA = &((byte *)pc)[3];
+            pc = pixmap.colorref();
+            pA = &((byte *)pc)[3];
 
             for (int i = 0; i < area; i++)
             {
                if (*pc != 0)
                {
-                  bTheresUint32 = true;
-               }
-               if (*pA != 0)
-               {
-                  bAllZeroAlpha = false;
-                  break;
+                  *pA = 255;
                }
                pc++;
                pA += 4;
             }
 
-            if (bAllZeroAlpha && bTheresUint32)
-            {
-
-               pc = pixmap.colorref();
-               pA = &((byte *)pc)[3];
-
-               for (int i = 0; i < area; i++)
-               {
-                  if (*pc != 0)
-                  {
-                     *pA = 255;
-                  }
-                  pc++;
-                  pA += 4;
-               }
-            }
-
             ::SelectObject(hdc, hbitmapOld);
+
+            pimage.create(size);
 
             pimage->map();
 
@@ -236,19 +225,26 @@ namespace windowing_win32
 
       }
 
-#endif
-
       return pimage;
 
 
    }
 
 
+   void icon::_remove_all()
+   {
 
+      for (auto hicon : m_iconmap.values())
+      {
+
+         ::DestroyIcon(hicon);
+
+      }
+
+      m_iconmap.remove_all();
+   }
 
 } // namespace windowing_win32
-
-
 
 
 
@@ -258,7 +254,23 @@ namespace windowing_win32
 // http ://stackoverflow.com/questions/1913468/how-to-determine-the-size_i32-of-an-icon-from-a-hicon
 // http://stackoverflow.com/users/739731/sergey
 
-MYICON_INFO MyGetIconInfo(hicon hIcon)
+struct MYICON_INFO
+{
+   int     nWidth;
+   int     nHeight;
+   int     nBitsPerPixel;
+};
+
+MYICON_INFO MyGetIconInfo(HICON hIcon);
+
+#endif
+
+#ifdef WINDOWS_DESKTOP
+
+// http ://stackoverflow.com/questions/1913468/how-to-determine-the-size_i32-of-an-icon-from-a-hicon
+// http://stackoverflow.com/users/739731/sergey
+
+MYICON_INFO MyGetIconInfo(HICON hIcon)
 {
    MYICON_INFO myinfo;
    __zero(myinfo);
@@ -266,7 +278,7 @@ MYICON_INFO MyGetIconInfo(hicon hIcon)
    ICONINFO info;
    __zero(info);
 
-   BOOL bRes = FALSE;
+   BOOL bRes = false;
 
    bRes = GetIconInfo(hIcon, &info);
    if (!bRes)

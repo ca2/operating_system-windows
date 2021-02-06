@@ -167,7 +167,7 @@ namespace production
 
 
 
-      single_lock sl(&m_pproduction->m_mutexStatus,TRUE);
+      single_lock sl(&m_pproduction->m_mutexStatus,true);
 
       ::rectangle_i32 rectClient = get_client_rect();
       //GetClientRect(rectClient);
@@ -200,7 +200,7 @@ namespace production
       rgnClip->create_rect(rectClip);
       //pgraphics->Draw3dRect(rectText, RGB(200, 200, 200), RGB(200, 200, 200));
       pgraphics->SelectClipRgn(rgnClip);
-      //single_lock sl(&m_pproduction->m_mutexStatus, TRUE);
+      //single_lock sl(&m_pproduction->m_mutexStatus, true);
       //pgraphics->set_color(ARGB(0xcc, 90, 90, 90));
       ::draw2d::brush_pointer brush(e_create);
       brush->create_solid(ARGB(0xcc, 90, 90, 90));
@@ -266,7 +266,7 @@ namespace production
       // orientation_horizontal,
       // WS_CHILD
       // | WS_VISIBLE,
-      // rectangle_i32,
+      // rectangle,
       // this,
       // 1024))
       //  {
@@ -279,7 +279,7 @@ namespace production
       // orientation_vertical,
       // WS_CHILD
       // | WS_VISIBLE,
-      // rectangle_i32,
+      // rectangle,
       // this,
       // 1025))
       //  {
@@ -523,7 +523,7 @@ namespace production
       {
          i32 iLineHeight = m_iLineHeight;
          {
-            single_lock sl(&m_pproduction->m_mutexStatus,TRUE);
+            single_lock sl(&m_pproduction->m_mutexStatus,true);
             if(m_pproduction->m_straStatus.get_size() > 0)
             {
                ::size_i32 sizePage = get_page_size();
