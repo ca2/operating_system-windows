@@ -389,7 +389,7 @@ namespace draw2d_gdiplus
    }
 
 
-   //COLORREF graphics::GetNearestColor(const ::color & color)
+   //COLORREF graphics::GetNearestColor(const ::color::color & color)
    //{
 
    //   //return ::GetNearestColor(get_handle2(), color);
@@ -2042,7 +2042,7 @@ namespace draw2d_gdiplus
 
 
 
-   ::color graphics::GetPixel(double x, double y)
+   ::color::color graphics::GetPixel(double x, double y)
    {
       //ASSERT(get_handle1() != nullptr);
       //return ::GetPixel(get_handle1(), x, y);
@@ -2053,7 +2053,7 @@ namespace draw2d_gdiplus
    }
    
    
-   ::color graphics::GetPixel(const ::point_f64 & point)
+   ::color::color graphics::GetPixel(const ::point_f64 & point)
    {
       //ASSERT(get_handle1() != nullptr);
       //return ::GetPixel(get_handle1(), point.x, point.y);
@@ -2064,7 +2064,7 @@ namespace draw2d_gdiplus
    }
 
 
-   ::color graphics::SetPixel(double x, double y, const ::color & color)
+   ::color::color graphics::SetPixel(double x, double y, const ::color::color & color)
    {
 
       return 0;
@@ -2072,7 +2072,7 @@ namespace draw2d_gdiplus
    }
 
 
-   ::color graphics::SetPixel(const ::point_f64 & point, const ::color & color)
+   ::color::color graphics::SetPixel(const ::point_f64 & point, const ::color::color & color)
    {
 
       if (m_pimage->is_ok())
@@ -2095,7 +2095,7 @@ namespace draw2d_gdiplus
    }
 
 
-   ::color graphics::blend_pixel(const ::point_f64 & point, const ::color& colorChange)
+   ::color::color graphics::blend_pixel(const ::point_f64 & point, const ::color::color& colorChange)
    {
 
       if (m_pimage->is_ok())
@@ -2103,7 +2103,7 @@ namespace draw2d_gdiplus
 
          m_pimage->map();
 
-         ::color color = m_pimage->colorref()[(int) point.x + (int) point.y * m_pimage->scan_size()];
+         ::color::color color = m_pimage->colorref()[(int) point.x + (int) point.y * m_pimage->scan_size()];
 
          color.red = (int) (color.red * (1.0 - colorChange.da()) + colorChange.red * colorChange.da());
          color.green = (int) (color.green * (1.0 - colorChange.da()) + colorChange.green * colorChange.da());
@@ -2125,7 +2125,7 @@ namespace draw2d_gdiplus
    }
 
 
-   //bool graphics::FloodFill(double x, double y, const ::color & color)
+   //bool graphics::FloodFill(double x, double y, const ::color::color & color)
    //{
 
    //   //ASSERT(get_handle1() != nullptr);
@@ -2138,7 +2138,7 @@ namespace draw2d_gdiplus
    //}
 
 
-   //bool graphics::ExtFloodFill(double x, double y, const ::color & color, UINT nFillType)
+   //bool graphics::ExtFloodFill(double x, double y, const ::color::color & color, UINT nFillType)
    //{
    //   //ASSERT(get_handle1() != nullptr);
    //   //return ::ExtFloodFill(get_handle1(), x, y, color, nFillType) != false;
@@ -2730,7 +2730,7 @@ namespace draw2d_gdiplus
 
 
 
-   bool graphics::SetPixelV(double x, double y, const ::color & color)
+   bool graphics::SetPixelV(double x, double y, const ::color::color & color)
    {
       //ASSERT(get_handle1() != nullptr);
       //return ::SetPixelV(get_handle1(), x, y, color) != false;
@@ -2741,7 +2741,7 @@ namespace draw2d_gdiplus
    }
    
    
-   bool graphics::SetPixelV(const ::point_f64 & point, const ::color & color)
+   bool graphics::SetPixelV(const ::point_f64 & point, const ::color::color & color)
    {
       //ASSERT(get_handle1() != nullptr);
       //return ::SetPixelV(get_handle1(), point.x, point.y, color) != false;
@@ -3547,7 +3547,7 @@ namespace draw2d_gdiplus
    }*/
 
 
-   bool graphics::fill_rect(const ::rectangle_f64 & rectParam, const ::color & color)
+   bool graphics::fill_rect(const ::rectangle_f64 & rectParam, const ::color::color & color)
    {
 
       try
@@ -3562,11 +3562,18 @@ namespace draw2d_gdiplus
 
          Gdiplus::RectF rectangle;
 
-         __copy(rectangle, rectParam);
+         copy(&rectangle, &rectParam);
 
          Gdiplus::SolidBrush b(Gdiplus::Color(color.alpha, color.red, color.green, color.blue));
 
-         m_pgraphics->FillRectangle(&b, rectangle);
+         auto status = m_pgraphics->FillRectangle(&b, rectangle);
+
+         if (status != Gdiplus::Status::Ok)
+         {
+
+            return false;
+
+         }
 
       }
       catch (...)
@@ -3579,7 +3586,7 @@ namespace draw2d_gdiplus
    }
 
 
-   bool graphics::draw_rect(const ::rectangle_f64 & rectangle, const ::color& color, const ::e_border & eborder)
+   bool graphics::draw_rect(const ::rectangle_f64 & rectangle, const ::color::color& color, const ::e_border & eborder)
    {
 
       if (!(eborder & (e_border_left | e_border_right | e_border_top | e_border_bottom)))
@@ -3694,7 +3701,7 @@ namespace draw2d_gdiplus
    }
 
 
-   //bool graphics::draw_rect(const ::rectangle_f64& rectangle, const ::color& color, const ::e_border & eborder)
+   //bool graphics::draw_rect(const ::rectangle_f64& rectangle, const ::color::color& color, const ::e_border & eborder)
    //{
 
    //   if (!(eborder & (e_border_left | e_border_right | e_border_top | e_border_bottom)))
@@ -3790,7 +3797,7 @@ namespace draw2d_gdiplus
    //}
 
 
-   bool graphics::draw_3drect(const ::rectangle_f64 & rectangle, const ::color& colorTopLeft, const ::color& colorBottomRight, const ::e_border & eborder)
+   bool graphics::draw_3drect(const ::rectangle_f64 & rectangle, const ::color::color& colorTopLeft, const ::color::color& colorBottomRight, const ::e_border & eborder)
    {
 
       if (!(eborder & (e_border_left | e_border_right | e_border_top | e_border_bottom)))
@@ -3905,7 +3912,7 @@ namespace draw2d_gdiplus
    }
 
 
-   //void graphics::draw_3drect(const ::rectangle_i32& rectangle, const ::color& colorTopLeft, const ::color& colorBottomRight, const ::e_border & eborder)
+   //void graphics::draw_3drect(const ::rectangle_i32& rectangle, const ::color::color& colorTopLeft, const ::color::color& colorBottomRight, const ::e_border & eborder)
    //{
 
    //   if (!(eborder & (e_border_left | e_border_right | e_border_top | e_border_bottom)))
@@ -6141,7 +6148,7 @@ namespace draw2d_gdiplus
    }
 
 
-   //bool graphics::fill_rect(const ::rectangle_f64 & rectangle, const ::color & color)
+   //bool graphics::fill_rect(const ::rectangle_f64 & rectangle, const ::color::color & color)
    //{
 
    //   try

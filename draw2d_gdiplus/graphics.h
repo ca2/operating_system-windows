@@ -96,7 +96,7 @@ namespace draw2d_gdiplus
 
 
 
-      //::color GetNearestColor(const ::color & color) override;
+      //::color::color GetNearestColor(const ::color::color & color) override;
       //::draw2d::palette* SelectPalette(::draw2d::palette* pPalette, bool bForceBackground) override;
       //UINT RealizePalette() override;
       //void UpdateColors() override;
@@ -121,11 +121,11 @@ namespace draw2d_gdiplus
 
 //#if (_WIN32_WINNT >= 0x0500)
 //
-//      ::color GetDCBrushColor() override;
-//      ::color SetDCBrushColor(const ::color & color) override;
+//      ::color::color GetDCBrushColor() override;
+//      ::color::color SetDCBrushColor(const ::color::color & color) override;
 //
-//      ::color GetDCPenColor() override;
-//      ::color SetDCPenColor(const ::color & color) override;
+//      ::color::color GetDCPenColor() override;
+//      ::color::color SetDCPenColor(const ::color::color & color) override;
 //
 //#endif
 
@@ -349,21 +349,21 @@ namespace draw2d_gdiplus
       //bool StretchBltRaw(double x, double y, i32 nWidth, i32 nHeight, ::draw2d::graphics * pgraphicsSrc,
       //                   i32 xSrc, i32 ySrc, i32 nSrcWidth, i32 nSrcHeight, u32 dwRop) override;
 
-      ::color GetPixel(double x, double y) override;
-      ::color GetPixel(const ::point_f64 & point) override;
-      ::color SetPixel(double x, double y, const ::color & color) override;
-      ::color SetPixel(const ::point_f64 & point, const ::color & color) override;
-      ::color blend_pixel(const ::point_f64 & point, const ::color & color) override;
-      //bool FloodFill(double x, double y, const ::color & color) override;
-      //bool ExtFloodFill(double x, double y, const ::color & color, UINT nFillType) override;
+      ::color::color GetPixel(double x, double y) override;
+      ::color::color GetPixel(const ::point_f64 & point) override;
+      ::color::color SetPixel(double x, double y, const ::color::color & color) override;
+      ::color::color SetPixel(const ::point_f64 & point, const ::color::color & color) override;
+      ::color::color blend_pixel(const ::point_f64 & point, const ::color::color & color) override;
+      //bool FloodFill(double x, double y, const ::color::color & color) override;
+      //bool ExtFloodFill(double x, double y, const ::color::color & color, UINT nFillType) override;
       //bool MaskBlt(double x, double y, i32 nWidth, i32 nHeight, ::draw2d::graphics * pgraphicsSrc,
       //             i32 xSrc, i32 ySrc, ::draw2d::bitmap& maskBitmap, i32 xMask, i32 yMask,
       //             u32 dwRop) override;
       //bool PlgBlt(LPPOINT pPoint, ::draw2d::graphics * pgraphicsSrc, i32 xSrc, i32 ySrc,
 
       //            i32 nWidth, i32 nHeight, ::draw2d::bitmap& maskBitmap, i32 xMask, i32 yMask) override;
-      bool SetPixelV(double x, double y, const ::color & color) override;
-      bool SetPixelV(const ::point_f64 & point, const ::color & color) override;
+      bool SetPixelV(double x, double y, const ::color::color & color) override;
+      bool SetPixelV(const ::point_f64 & point, const ::color::color & color) override;
       //bool GradientFill(TRIVERTEX* pVertices, ULONG nVertices,
       //                  void * pMesh, ULONG nMeshElements, u32 dwMode) override;
       //bool TransparentBlt(i32 xDest, i32 yDest, i32 nDestWidth, i32 nDestHeight,
@@ -564,15 +564,15 @@ namespace draw2d_gdiplus
 
       //                  ::draw2d::brush* pBrush = nullptr, ::draw2d::brush* pBrushLast = nullptr) override;
 
-      //void fill_rect(const ::rectangle_i32 & rectangle, const ::color & color) override;
+      //void fill_rect(const ::rectangle_i32 & rectangle, const ::color::color & color) override;
 
-      virtual bool fill_rect(const ::rectangle_f64 & rectangle, const ::color & color) override;
+      virtual bool fill_rect(const ::rectangle_f64 & rectangle, const ::color::color & color) override;
 
-      //virtual void draw_3drect(const ::rectangle_i32 & rectangle, const ::color & colorTopLeft, const ::color& colorBottomRight, const ::e_border & eborder = e_border_all) override;
-      virtual bool draw_3drect(const ::rectangle_f64 & rectangle, const ::color & colorTopLeft, const ::color& colorBottomRight, const ::e_border & eborder = e_border_all) override;
+      //virtual void draw_3drect(const ::rectangle_i32 & rectangle, const ::color::color & colorTopLeft, const ::color::color& colorBottomRight, const ::e_border & eborder = e_border_all) override;
+      virtual bool draw_3drect(const ::rectangle_f64 & rectangle, const ::color::color & colorTopLeft, const ::color::color& colorBottomRight, const ::e_border & eborder = e_border_all) override;
 
-      //virtual bool draw_rect(const ::rectangle_i32& rectangle, const ::color& color, const ::e_border & eborder = e_border_all);
-      virtual bool draw_rect(const rectangle_f64& rectangle_f64, const ::color& color, const ::e_border & eborder = e_border_all);
+      //virtual bool draw_rect(const ::rectangle_i32& rectangle, const ::color::color& color, const ::e_border & eborder = e_border_all);
+      virtual bool draw_rect(const rectangle_f64& rectangle_f64, const ::color::color& color, const ::e_border & eborder = e_border_all);
 
 #ifdef DEBUG
       virtual void assert_valid() const override;

@@ -1591,7 +1591,7 @@ namespace draw2d_gdi
 
          ::SetBkMode(m_hdc, TRANSPARENT);
 
-         ::SetTextColor(m_hdc, RGB(colorref_get_r_value(brush.m_color), colorref_get_g_value(brush.m_color), colorref_get_b_value(brush.m_color)));
+         ::SetTextColor(m_hdc, rgb(colorref_get_r_value(brush.m_color), colorref_get_g_value(brush.m_color), colorref_get_b_value(brush.m_color)));
 
          return ::TextOutW(get_handle1(), (int) x, (int) y, wstr, (int) wstr.length()) != false;
 
@@ -1622,14 +1622,14 @@ namespace draw2d_gdi
          if(GDI_BRUSH(&brush)->m_bProcess)
          {
 
-            GDI_GRAPHICS(pimage->g())->SetTextColor(RGB(255, 255, 255));
+            GDI_GRAPHICS(pimage->g())->SetTextColor(rgb(255, 255, 255));
 
          }
          else
          {
 
-            //GDI_GRAPHICS(pimage->g())->SetTextColor(RGB(colorref_get_r_value(brush.m_color), colorref_get_g_value(brush.m_color), colorref_get_b_value(brush.m_color)));
-            GDI_GRAPHICS(pimage->g())->SetTextColor(RGB(colorref_get_b_value(brush.m_color), colorref_get_g_value(brush.m_color), colorref_get_r_value(brush.m_color)));
+            //GDI_GRAPHICS(pimage->g())->SetTextColor(rgb(colorref_get_r_value(brush.m_color), colorref_get_g_value(brush.m_color), colorref_get_b_value(brush.m_color)));
+            GDI_GRAPHICS(pimage->g())->SetTextColor(rgb(colorref_get_b_value(brush.m_color), colorref_get_g_value(brush.m_color), colorref_get_r_value(brush.m_color)));
 
          }
 
@@ -3081,7 +3081,7 @@ namespace draw2d_gdi
    imageWork4.from(point_i32(max(0, m_pointAlphaBlend.x - xDest), max(0, m_pointAlphaBlend.y - yDest)),
    m_pimageAlphaBlend->get_graphics(), point_i32(max(0, xDest - m_pointAlphaBlend.x), max(0, yDest - m_pointAlphaBlend.y)), size);
 
-   imageWork.channel_multiply(::color::channel_alpha, imageWork4);
+   imageWork.channel_multiply(::color::e_channel_alpha, imageWork4);
 
 
    keep < image > keep(&m_pimageAlphaBlend, nullptr, m_pimageAlphaBlend, true);
@@ -3147,7 +3147,7 @@ namespace draw2d_gdi
          image4.from(point_i32(max(0, m_pointAlphaBlend.x - xDest), max(0, m_pointAlphaBlend.y - yDest)),
                      m_pimageAlphaBlend->get_graphics(), point_i32(max(0, xDest - m_pointAlphaBlend.x), max(0, yDest - m_pointAlphaBlend.y)), size);
 
-         pimage1->channel_multiply(::color::channel_alpha, image4);
+         pimage1->channel_multiply(::color::e_channel_alpha, image4);
 
 
          __keep(m_pimageAlphaBlend->m_pimpl, nullptr);

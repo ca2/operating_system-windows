@@ -117,14 +117,14 @@ namespace draw2d_gdiplus
             cr = graphicsMem->SetBkColor(graphicsMem->GetPixel(0, 0));
             graphicsMask->BitBlt(0, 0, bm.bmWidth, bm.bmHeight, graphicsMem, 0, 0, SRCCOPY);
             // Make white pixels transparent too
-            graphicsMem->SetBkColor(RGB(255, 255, 255));
+            graphicsMem->SetBkColor(rgb(255, 255, 255));
             graphicsMask->BitBlt(0, 0, bm.bmWidth, bm.bmHeight, graphicsMem, 0, 0, NOTSRCERASE);
 
             if(graphicsMem->set(pDest))
             {
                graphicsMem->fill_rect(0, 0, bm.bmWidth, bm.bmHeight, crBackground);
 
-               graphicsMem->SetBkColor(RGB(255, 255, 255));
+               graphicsMem->SetBkColor(rgb(255, 255, 255));
 
                spbr = graphicsMem->set(brHighLight);
                graphicsMem->BitBlt(1, 1, bm.bmWidth, bm.bmHeight, graphicsMask, 0, 0, CP_ROP);
@@ -170,12 +170,12 @@ namespace draw2d_gdiplus
 
          cr = graphicsMem->SetBkColor(graphicsMem->GetPixel(0, 0));
          graphicsMask->BitBlt(0, 0, bm.bmWidth, bm.bmHeight, graphicsMem, 0, 0, SRCCOPY);
-         graphicsMem->SetBkColor(RGB(255, 255, 255));
+         graphicsMem->SetBkColor(rgb(255, 255, 255));
          graphicsMask->BitBlt(0, 0, bm.bmWidth, bm.bmHeight, graphicsMem, 0, 0, NOTSRCERASE);
 
          pgraphics->fill_rect(x, y, bm.bmWidth, bm.bmHeight, crBackground);
 
-         pgraphics->SetBkColor(RGB(255, 255, 255));
+         pgraphics->SetBkColor(rgb(255, 255, 255));
 
          spbr = pgraphics->set(brHighLight);
          pgraphics->BitBlt(x + 1, y + 1, bm.bmWidth, bm.bmHeight, graphicsMask, 0, 0, CP_ROP);
@@ -190,7 +190,7 @@ namespace draw2d_gdiplus
       }
    }
 
-   void __get_dithered_bitmap(::aura::application * papp, const ::draw2d::bitmap &rSrc, ::draw2d::bitmap *pDest, const color & color1, const color & color2)
+   void __get_dithered_bitmap(::aura::application * papp, const ::draw2d::bitmap &rSrc, ::draw2d::bitmap *pDest, const ::color::color & color1, const ::color::color & color2)
    {
       ASSERT(pDest);
       ASSERT_KINDOF(::draw2d::bitmap, pDest);
@@ -231,7 +231,7 @@ namespace draw2d_gdiplus
                cr = graphicsSrc->SetBkColor(graphicsSrc->GetPixel(0, 0));
                graphicsMask->BitBlt(0, 0, bm.bmWidth, bm.bmHeight, graphicsSrc, 0, 0, SRCCOPY);
                // Make white pixels of the source "transparent" too
-               graphicsSrc->SetBkColor(RGB(255, 255, 255));
+               graphicsSrc->SetBkColor(rgb(255, 255, 255));
                graphicsMask->BitBlt(0, 0, bm.bmWidth, bm.bmHeight, graphicsSrc, 0, 0, SRCPAINT);
                graphicsSrc->SetBkColor(cr);
 
@@ -259,7 +259,7 @@ namespace draw2d_gdiplus
       }
    }
 
-   void __draw_dithered_bitmap(::aura::application * papp, ::draw2d::graphics * pgraphics, i32 x, i32 y, const ::draw2d::bitmap &rSrc, const color & color1, const color & color2)
+   void __draw_dithered_bitmap(::aura::application * papp, ::draw2d::graphics * pgraphics, i32 x, i32 y, const ::draw2d::bitmap &rSrc, const ::color::color & color1, const ::color::color & color2)
    {
       ASSERT(pgraphics);
       ASSERT_KINDOF(::draw2d::graphics_pointer, pgraphics);
@@ -295,7 +295,7 @@ namespace draw2d_gdiplus
          cr = graphicsSrc->SetBkColor(graphicsSrc->GetPixel(0, 0));
          graphicsMask->BitBlt(0, 0, bm.bmWidth, bm.bmHeight, graphicsSrc, 0, 0, SRCCOPY);
          // Make white pixels of the source "transparent" too
-         graphicsSrc->SetBkColor(RGB(255, 255, 255));
+         graphicsSrc->SetBkColor(rgb(255, 255, 255));
          graphicsMask->BitBlt(0, 0, bm.bmWidth, bm.bmHeight, graphicsSrc, 0, 0, SRCPAINT);
          graphicsSrc->SetBkColor(cr);
 

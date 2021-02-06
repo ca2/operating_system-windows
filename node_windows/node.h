@@ -23,6 +23,15 @@ namespace node_windows
 
       virtual ~node();
 
+
+      string get_user_name();
+
+
+      virtual bool _os_calc_app_dark_mode() override;
+
+      virtual bool _os_calc_system_dark_mode() override;
+
+
    };
 
 

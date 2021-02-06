@@ -146,8 +146,8 @@ install:
          rectangle.top       = 0;
          rectangle.bottom    = cx;
          rectangle.right     = cy;
-         ::FillSolidRect_dup(hdc, &rectangle, RGB(255, 255, 255));
-         ::SetTextColor(hdc, RGB(255, 0, 255));
+         ::FillSolidRect_dup(hdc, &rectangle, rgb(255, 255, 255));
+         ::SetTextColor(hdc, rgb(255, 0, 255));
          const char * psz = "ca2 is not installed! You may try to install using low level spaboot_install.exe.";
          ::TextOutU_dup(hdc, 10, 10, psz, ansi_length(psz));
       }

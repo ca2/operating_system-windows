@@ -64,6 +64,8 @@ namespace windowing_win32
    buffer::buffer()
    {
 
+      defer_create_mutex();
+
       m_rectLast.Null();
 
    }
@@ -418,7 +420,7 @@ namespace windowing_win32
 #ifdef REDRAW_HINTING
 
             {
-               //HBRUSH h = ::CreateSolidBrush(RGB(255, 240, 155));
+               //HBRUSH h = ::CreateSolidBrush(rgb(255, 240, 155));
 
                //rectangle r;
 
@@ -460,7 +462,7 @@ namespace windowing_win32
 
             {
 
-               //HBRUSH h = ::CreateSolidBrush(RGB(180, 200, 255));
+               //HBRUSH h = ::CreateSolidBrush(rgb(180, 200, 255));
 
                //rectangle r;
 
@@ -492,7 +494,7 @@ namespace windowing_win32
 
             //               {
 
-                              //HBRUSH h = ::CreateSolidBrush(RGB(180, 200, 255));
+                              //HBRUSH h = ::CreateSolidBrush(rgb(180, 200, 255));
 
                               //rectangle r;
 
@@ -609,7 +611,7 @@ namespace windowing_win32
                if (r == pimage->m_rectTag)
                {
 
-                  ::UpdateLayeredWindow(hwnd, m_hdcScreen, (POINT*) &point, (SIZE* ) &size, buffer.m_hdc, (POINT *) &pointSrc, RGB(0, 0, 0), &blendPixelFunction, ULW_ALPHA);
+                  ::UpdateLayeredWindow(hwnd, m_hdcScreen, (POINT*) &point, (SIZE* ) &size, buffer.m_hdc, (POINT *) &pointSrc, rgb(0, 0, 0), &blendPixelFunction, ULW_ALPHA);
 
                }
                else

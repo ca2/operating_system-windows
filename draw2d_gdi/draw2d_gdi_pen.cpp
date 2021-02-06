@@ -121,7 +121,7 @@ namespace draw2d_gdi
       if(m_bProcess)
       {
 
-         CreatePen(PS_SOLID, (i32) m_dWidth, RGB(255, 255, 255));
+         CreatePen(PS_SOLID, (i32) m_dWidth, rgb(255, 255, 255));
 
       }
       else if(m_epen == type_solid)

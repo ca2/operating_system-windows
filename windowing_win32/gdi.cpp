@@ -54,7 +54,7 @@ namespace windowing_win32
       // Draw something on the DIB section.
       //hOldBitmap = (HBITMAP)set(hMemDC,hBitmap);
       //PatBlt(hMemDC,0,0,dwWidth,dwHeight,WHITENESS);
-      //SetTextColor(hMemDC,RGB(0,0,0));
+      //SetTextColor(hMemDC,rgb(0,0,0));
       //SetBkMode(hMemDC,TRANSPARENT);
       //text_out(hMemDC,0,9,"rgba",4);
       //set(hMemDC,hOldBitmap);

@@ -256,6 +256,11 @@ namespace windowing_win32
 
          nExStyle |= WS_EX_LAYERED;
 
+         nStyle |= WS_POPUP;
+         
+         nStyle |= WS_SYSMENU | WS_MINIMIZEBOX | WS_MAXIMIZEBOX;
+
+
       }
 
       if (pinteraction->layout().sketch().is_visible())

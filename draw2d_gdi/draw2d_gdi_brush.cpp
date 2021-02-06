@@ -133,7 +133,7 @@ namespace draw2d_gdi
       if(m_bProcess)
       {
 
-         CreateSolid(RGB(255, 255, 255));
+         CreateSolid(rgb(255, 255, 255));
 
       }
       else if(m_etype == type_solid)

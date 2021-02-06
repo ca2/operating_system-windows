@@ -17,7 +17,9 @@ namespace windowing_win32
 
 
       WNDPROC                                m_pfnSuper;
-
+      UINT  m_uiMessage;
+      WPARAM m_wparam;
+      LPARAM m_lparam;
 
       window();
       virtual ~window();
@@ -25,6 +27,9 @@ namespace windowing_win32
 
       virtual void assert_valid() const override;
       virtual void dump(dump_context & dumpcontext) const override;
+
+
+      virtual void install_message_routing(channel * pchannel) override;
 
       
       virtual ::e_status create_window(::user::interaction_impl * pimpl) override;
@@ -157,16 +162,16 @@ namespace windowing_win32
 
       DECL_GEN_SIGNAL(_001OnDestroy);
       DECL_GEN_SIGNAL(_001OnCreate);
-      DECL_GEN_SIGNAL(_001OnKillFocus);
+      //DECL_GEN_SIGNAL(_001OnKillFocus);
       DECL_GEN_SIGNAL(_001OnPaint);
       DECL_GEN_SIGNAL(_001OnPrint);
-      DECL_GEN_SIGNAL(_001OnSetFocus);
+      //DECL_GEN_SIGNAL(_001OnSetFocus);
       DECL_GEN_SIGNAL(_001OnNcCalcSize);
       DECL_GEN_SIGNAL(_001OnSetCursor);
       DECL_GEN_SIGNAL(_001OnEraseBkgnd);
-      DECL_GEN_SIGNAL(_001OnMove);
-      DECL_GEN_SIGNAL(_001OnSize);
-      DECL_GEN_SIGNAL(_001OnShowWindow);
+      //DECL_GEN_SIGNAL(_001OnMove);
+      //DECL_GEN_SIGNAL(_001OnSize);
+      //DECL_GEN_SIGNAL(_001OnShowWindow);
       DECL_GEN_SIGNAL(_001OnActivate);
       DECL_GEN_SIGNAL(_001OnDwmNcRenderingChanged);
       DECL_GEN_SIGNAL(_001OnProdevianSynch);
@@ -848,12 +853,12 @@ namespace windowing_win32
       virtual HRESULT STDMETHODCALLTYPE DragEnter(
          /* [unique][in] */ __RPC__in_opt IDataObject * pDataObj,
          /* [in] */ DWORD grfKeyState,
-         /* [in] */ POINTL point_i32,
+         /* [in] */ POINTL point,
          /* [out][in] */ __RPC__inout DWORD * pdwEffect);
 
       virtual HRESULT STDMETHODCALLTYPE DragOver(
          /* [in] */ DWORD grfKeyState,
-         /* [in] */ POINTL point_i32,
+         /* [in] */ POINTL point,
          /* [out][in] */ __RPC__inout DWORD * pdwEffect);
 
       virtual HRESULT STDMETHODCALLTYPE DragLeave(void);
@@ -861,7 +866,7 @@ namespace windowing_win32
       virtual HRESULT STDMETHODCALLTYPE Drop(
          /* [unique][in] */ __RPC__in_opt IDataObject * pDataObj,
          /* [in] */ DWORD grfKeyState,
-         /* [in] */ POINTL point_i32,
+         /* [in] */ POINTL point,
          /* [out][in] */ __RPC__inout DWORD * pdwEffect);
 
    };

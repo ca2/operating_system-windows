@@ -54,7 +54,7 @@ namespace windowing_win32
    ::e_status gdiplus_draw_text(::draw2d::graphics * pgraphics, ::draw2d::path * ppath, const string & str, rectangle_f64 & rectParam, const ::e_align & ealign, const ::e_draw_text & edrawtext, ::draw2d::font * pfont, double dFontWidth, ::draw2d::brush * pbrush = nullptr, bool bMeasure = false);
 
 
-   inline auto gdiplus_color(const ::color & color)
+   inline auto gdiplus_color(const ::color::color & color)
    {
 
       return Gdiplus::Color(color.alpha, color.red, color.green, color.blue);

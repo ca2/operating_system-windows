@@ -277,7 +277,7 @@ namespace draw2d_gdi
 
    //void image::Fill ( int R, int G, int B )
    //{
-   //   COLORREF color=RGB ( B, G, R );
+   //   COLORREF color=rgb ( B, G, R );
    //   int size_i32=this->cx*this->cy;
 
    //   COLORREF * pcr;
@@ -386,9 +386,9 @@ namespace draw2d_gdi
 
    //   imageWork.Fill(0, 0, 0, 0);
 
-   //   imageWork.channel_from(::color::channel_alpha, this);
+   //   imageWork.channel_from(::color::e_channel_alpha, this);
 
-   //   imageWork.channel_invert(::color::channel_alpha);
+   //   imageWork.channel_invert(::color::e_channel_alpha);
 
 
    //   BLENDFUNCTION bf;
@@ -403,9 +403,9 @@ namespace draw2d_gdi
    //   if(bPreserveAlpha)
    //   {
 
-   //      imageWork.channel_invert(::color::channel_alpha);
+   //      imageWork.channel_invert(::color::e_channel_alpha);
 
-   //      color::channel_from(::color::channel_alpha, imageWork);
+   //      ::color::e_channel_from(::color::e_channel_alpha, imageWork);
 
    //   }
    //   */
@@ -465,18 +465,18 @@ namespace draw2d_gdi
 
    //void image::BitBlt(imagepimage, int op)
    //{
-   //   if(op == 123) // zero dest RGB, invert alpha, and OR src RGB
+   //   if(op == 123) // zero dest rgb, invert alpha, and OR src rgb
    //   {
    //      int isize=this->cx*this->cy;
    //      LPDWORD lpbitsSrc= (LPDWORD) pimage->get_data();
    //      LPDWORD lpbitsDest= (LPDWORD) m_pcolorref;
 
-   //      COLORREF _colorref = RGB ( 0, 0, 0 ) | (255 << 24);
+   //      COLORREF _colorref = rgb ( 0, 0, 0 ) | (255 << 24);
    //      COLORREF colorrefa[2];
    //      colorrefa[0] = _colorref;
    //      colorrefa[1] = _colorref;
 
-   //      COLORREF _colorrefN = RGB ( 255, 255, 255) | (0 << 24);
+   //      COLORREF _colorrefN = rgb ( 255, 255, 255) | (0 << 24);
    //      COLORREF colorrefaN[2];
    //      colorrefaN[0] = _colorrefN;
    //      colorrefaN[1] = _colorrefN;
@@ -530,7 +530,7 @@ namespace draw2d_gdi
    //   }
    //}
 
-   //void image::color::channel_invert(color::color::rgba::echannel echannel)
+   //void image::color::e_channel_invert(color::color::color::rgba::echannel echannel)
    //{
    //   __int64 size_i32=area();
    //   byte * lpb = (byte *) m_pcolorref;
@@ -541,7 +541,7 @@ namespace draw2d_gdi
    //      lpb += 4;
    //   }
    //}
-   //void image::color::channel_multiply(color::color::rgba::echannel echannel, double dRate)
+   //void image::color::e_channel_multiply(color::color::color::rgba::echannel echannel, double dRate)
    //{
    //   if(dRate < 0)
    //      return;
@@ -575,7 +575,7 @@ namespace draw2d_gdi
 
    //void image::FillStippledGlass ( int R, int G, int B )
    //{
-   //   COLORREF color=RGB ( B, G, R );
+   //   COLORREF color=rgb ( B, G, R );
    //   int w=this->cx;
    //   int h=this->cy;
 
@@ -856,7 +856,7 @@ namespace draw2d_gdi
 
    //   // Prepare buffer Address
    //   COLORREF *dst=m_pcolorref+(py*this->cx)+px;
-   //   COLORREF color=RGB ( B, G, R );
+   //   COLORREF color=rgb ( B, G, R );
 
    //   // Do Fill
    //   while ( dy-- )
@@ -916,7 +916,7 @@ namespace draw2d_gdi
 
    //   // Prepare buffer Address
    //   COLORREF *dst=m_pcolorref+(py*this->cx)+px;
-   //   COLORREF color=RGB ( B, G, R );
+   //   COLORREF color=rgb ( B, G, R );
 
    //   // Do FillStippledGlass
    //   for ( int j=0; j<dy; j++ )
@@ -1144,7 +1144,7 @@ namespace draw2d_gdi
    /*void image::Line ( int x1, int y1, int x2, int y2, int R, int G, int B )
    {
       int dx, dy, k1, k2, d, x, y;
-      COLORREF color=RGB ( B, G, R );
+      COLORREF color=rgb ( B, G, R );
 
       dx=x2-x1;
       dy=y2-y1;
@@ -1175,7 +1175,7 @@ namespace draw2d_gdi
 //   void image::Line ( int x1, int y1, int x2, int y2, int R, int G, int B )
 //   {
 //      int d, x, y, ax, ay, sx, sy, dx, dy;
-//      COLORREF color=RGB ( B, G, R );
+//      COLORREF color=rgb ( B, G, R );
 //
 //      dx=x2-x1;
 //      ax=abs ( dx )<<1;
@@ -1221,7 +1221,7 @@ namespace draw2d_gdi
 //   void image::LineGlass ( int x1, int y1, int x2, int y2, int R, int G, int B, int A )
 //   {
 //      int d, x, y, ax, ay, sx, sy, dx, dy;
-////      COLORREF color=RGB ( B, G, R );
+////      COLORREF color=rgb ( B, G, R );
 //      BYTE *dst=(BYTE *)m_pcolorref;
 //
 //      dx=x2-x1;
@@ -1271,9 +1271,9 @@ namespace draw2d_gdi
 //
 //   void image::Mask(COLORREF crMask, COLORREF crInMask, COLORREF crOutMask)
 //   {
-//      COLORREF crFind = RGB(::blue(crMask), ::green(crMask), ::red(crMask));
-//      COLORREF crSet = RGB(::blue(crInMask), ::green(crInMask), ::red(crInMask));
-//      COLORREF crUnset  = RGB(::blue(crOutMask), ::green(crOutMask), ::red(crOutMask));
+//      COLORREF crFind = rgb(::blue(crMask), ::green(crMask), ::red(crMask));
+//      COLORREF crSet = rgb(::blue(crInMask), ::green(crInMask), ::red(crInMask));
+//      COLORREF crUnset  = rgb(::blue(crOutMask), ::green(crOutMask), ::red(crOutMask));
 //
 //      int size_i32=this->cx*this->cy;
 //
@@ -1285,7 +1285,7 @@ namespace draw2d_gdi
 //
 //   }
 //
-//   void image::transparent_color(color color)
+//   void image::transparent_color(::color::color color)
 //   {
 //      COLORREF crFind = color.get_rgb();
 //      __int64 size = area();
@@ -1297,7 +1297,7 @@ namespace draw2d_gdi
 //            ((byte *)&m_pcolorref[i])[3] = 0;
 //   }
 //
-//   void image::color::channel_mask(unsigned char uchFind, unsigned char uchSet, unsigned char uchUnset, color::color::rgba::echannel echannel)
+//   void image::color::e_channel_mask(unsigned char uchFind, unsigned char uchSet, unsigned char uchUnset, color::color::color::rgba::echannel echannel)
 //   {
 //      int size = this->cx * this->cy;
 //      unsigned char * puch = (unsigned char * ) m_pcolorref;
@@ -1316,7 +1316,7 @@ namespace draw2d_gdi
    //u32 image::GetPixel(int x, int y)
    //{
    //   u32 dw = *(m_pcolorref + x + (this->cy - y - 1) * this->cx);
-   //   return RGB(::blue(dw), ::green(dw), ::red(dw));
+   //   return rgb(::blue(dw), ::green(dw), ::red(dw));
    //}
 
    // too slow for animation on AMD XP Atlhon.
@@ -2010,7 +2010,7 @@ namespace draw2d_gdi
 
    //void image::Fill (int A, int R, int G, int B )
    //{
-   //   COLORREF color = RGB ( B, G, R ) | (A << 24);
+   //   COLORREF color = rgb ( B, G, R ) | (A << 24);
    //   int size_i32=this->cx*this->cy;
 
    //   COLORREF * pcr;
@@ -2092,7 +2092,7 @@ namespace draw2d_gdi
    //      int iR = (int) dR;
    //      int iG = (int) dG;
    //      int iB = (int) dB;
-   //      return RGB(iR, iG, iB);
+   //      return rgb(iR, iG, iB);
    //   }
    //   else
    //   {
@@ -2355,7 +2355,7 @@ namespace draw2d_gdi
    //   return dPi;
    //}
 
-   // void image::fill_channel(int intensity, color::color::rgba::echannel echannel)
+   // void image::fill_channel(int intensity, color::color::color::rgba::echannel echannel)
    // {
    //     int offset = ((int)echannel) % 4;
    //    int size_i32=this->cx*this->cy;
@@ -2666,7 +2666,7 @@ namespace draw2d_gdi
    //   {
    //   }
 
-   //   m_spgraphics->fill_rect(rectx, RGB(255, 255, 255));
+   //   m_spgraphics->fill_rect(rectx, rgb(255, 255, 255));
 
    //   pmessage->m_bRet = true;
    //   pbase->set_lresult(0);
@@ -2709,7 +2709,7 @@ namespace draw2d_gdi
 
       i32 a = colorref_get_a_value(clr);
 
-      ::color::e_channel echannel;
+      ::color::color::e_channel echannel;
 
       i32 bTune;
 
@@ -2717,33 +2717,33 @@ namespace draw2d_gdi
       {
          if(colorref_get_b_value(clr) > colorref_get_r_value(clr))
          {
-            echannel = ::color::channel_green;
+            echannel = ::color::e_channel_green;
             bTune = colorref_get_g_value(clr);
          }
          else if(colorref_get_g_value(clr) >  colorref_get_r_value(clr))
          {
-            echannel = ::color::channel_green;
+            echannel = ::color::e_channel_green;
             bTune = colorref_get_g_value(clr);
          }
          else
          {
-            echannel = ::color::channel_red;
+            echannel = ::color::e_channel_red;
             bTune = colorref_get_r_value(clr);
          }
       }
       else if(colorref_get_g_value(clr) > colorref_get_r_value(clr))
       {
-         echannel = ::color::channel_blue;
+         echannel = ::color::e_channel_blue;
          bTune = colorref_get_b_value(clr);
       }
       else if(colorref_get_r_value(clr) > colorref_get_b_value(clr))
       {
-         echannel = ::color::channel_red;
+         echannel = ::color::e_channel_red;
          bTune = colorref_get_r_value(clr);
       }
       else
       {
-         echannel = ::color::channel_blue;
+         echannel = ::color::e_channel_blue;
          bTune = colorref_get_b_value(clr);
       }
 
@@ -3133,7 +3133,7 @@ namespace draw2d_gdi
          }
          else if(pbi->bmiHeader.biBitCount <= 24 && FreeImage_GetTransparencyCount(pfibitmap) <= 0)
          {
-            fill_channel(0xff, ::color::channel_alpha);
+            fill_channel(0xff, ::color::e_channel_alpha);
          }
          else if(FreeImage_GetBackgroundColor(pfibitmap, &bkcolor))
          {
