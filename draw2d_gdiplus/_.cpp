@@ -11,6 +11,13 @@ DWORD_PTR                        g_gdiplusHookToken = NULL;
 CLASS_DECL_DRAW2D_GDIPLUS ::e_status initialize_gdiplus()
 {
 
+   if (g_pgdiplusStartupInput != nullptr)
+   {
+
+      return ::success;
+
+   }
+
    g_pgdiplusStartupInput = new Gdiplus::GdiplusStartupInput();
 
    g_pgdiplusStartupOutput = new Gdiplus::GdiplusStartupOutput();

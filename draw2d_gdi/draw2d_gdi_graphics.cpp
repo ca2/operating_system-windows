@@ -622,7 +622,7 @@ namespace draw2d_gdi
    }
 
 
-   bool graphics::fill_rect(const ::rectangle_i32 & rectangle, ::draw2d::brush * pbrush)
+   bool graphics::fill_rectangle(const ::rectangle_i32 & rectangle, ::draw2d::brush * pbrush)
    {
 
       ASSERT(get_handle1() != nullptr);
@@ -639,7 +639,7 @@ namespace draw2d_gdi
       else if (colorref_get_a_value(cr) == 255)
       {
 
-         m_pimage->fill_rect(rectangle, ARGB(255, colorref_get_r_value(cr), colorref_get_g_value(cr), colorref_get_b_value(cr)));
+         m_pimage->fill_rectangle(rectangle, argb(255, colorref_get_r_value(cr), colorref_get_g_value(cr), colorref_get_b_value(cr)));
 
       }
       else
@@ -662,7 +662,7 @@ namespace draw2d_gdi
    }
 
 
-   void graphics::frame_rect(const ::rectangle_i32 & rectangle, ::draw2d::brush* pbrush)
+   void graphics::frame_rectangle(const ::rectangle_i32 & rectangle, ::draw2d::brush* pbrush)
    {
 
       ASSERT(get_handle1() != nullptr);
@@ -672,7 +672,7 @@ namespace draw2d_gdi
    }
 
 
-   void graphics::invert_rect(const ::rectangle_i32 & rectangle)
+   void graphics::invert_rectangle(const ::rectangle_i32 & rectangle)
    {
 
       ASSERT(get_handle1() != nullptr);
@@ -943,7 +943,7 @@ namespace draw2d_gdi
    }
 
 
-   bool graphics::draw_rect(const ::rectangle_i32 & rectangle, ::draw2d::pen * ppen)
+   bool graphics::draw_rectangle(const ::rectangle_i32 & rectangle, ::draw2d::pen * ppen)
    {
 
       if (width(rectangle) <= 0 || height(rectangle) <= 0)
@@ -977,7 +977,7 @@ namespace draw2d_gdi
    }
 
 
-   bool graphics::draw_rect(const ::rectangle_i32 & rectangle)
+   bool graphics::draw_rectangle(const ::rectangle_i32 & rectangle)
    {
 
       if (width(rectangle) <= 0 || height(rectangle) <= 0)
@@ -994,7 +994,7 @@ namespace draw2d_gdi
    }
 
 
-   bool graphics::fill_rect(const ::rectangle_i32 & rectangle)
+   bool graphics::fill_rectangle(const ::rectangle_i32 & rectangle)
    {
 
       if (width(rectangle) <= 0 || height(rectangle) <= 0)
@@ -1193,7 +1193,7 @@ namespace draw2d_gdi
    }
 
 
-   bool graphics::round_rect(const ::rectangle_i32 & rectangle, const ::point_i32 & point)
+   bool graphics::round_rectangle(const ::rectangle_i32 & rectangle, const ::point_i32 & point)
    {
 
       ASSERT(get_handle1() != nullptr);
@@ -1582,7 +1582,7 @@ namespace draw2d_gdi
       wstring wstr = ::str::international::utf8_to_unicode(str);
 
       ::draw2d::brush & brush = *get_current_brush();
-      ::draw2d::font & font = *get_current_font();
+      ::write_text::font & font = *get_current_font();
 
       select_font();
 
@@ -1850,7 +1850,7 @@ namespace draw2d_gdi
    }
 
 
-   bool graphics::get_text_metrics(::draw2d::text_metric * lpMetrics)
+   bool graphics::get_text_metrics(::write_text::text_metric * lpMetrics)
    {
 
       HDC h2 = get_handle2();
@@ -1889,7 +1889,7 @@ namespace draw2d_gdi
    }
 
 
-   bool graphics::get_output_text_metrics(::draw2d::text_metric * lpMetrics)
+   bool graphics::get_output_text_metrics(::write_text::text_metric * lpMetrics)
    {
 
       ASSERT(get_handle1() != nullptr);
@@ -2318,7 +2318,7 @@ namespace draw2d_gdi
    }
 
 
-   ::draw2d::font * graphics::get_current_font()
+   ::write_text::font * graphics::get_current_font()
    {
 
       if(m_pfont.is_set())
@@ -3087,7 +3087,7 @@ namespace draw2d_gdi
    keep < image > keep(&m_pimageAlphaBlend, nullptr, m_pimageAlphaBlend, true);
 
 
-   return System.draw2d().imaging().true_blend(this, pointDest, size, imageWork.get_graphics(), pointSrc) != false;
+   return System.draw2d()->imaging().true_blend(this, pointDest, size, imageWork.get_graphics(), pointSrc) != false;
 
    }
 
@@ -3498,7 +3498,7 @@ namespace draw2d_gdi
    //      // find difference between new region and old region
    //      rgnLast->create_rect_dim(0, 0, 0, 0);
    //      rgnOutside->create_rect(&lpRectLast);
-   //      rectangle_i32 = lpRectLast;
+   //      rectangle = lpRectLast;
    //      rectangle.inflate(-sizeLast.cx, -sizeLast.cy);
    //      rectangle.intersect(rectangle, &lpRectLast);
    //      rgnInside->create_rect(rectangle);
@@ -3608,7 +3608,7 @@ namespace draw2d_gdi
    }
 
 
-   void graphics::fill_rect(const ::rectangle_i32 & rectangle, COLORREF cr)
+   void graphics::fill_rectangle(const ::rectangle_i32 & rectangle, COLORREF cr)
    {
 
       sync_lock ml(mutex());
@@ -3626,7 +3626,7 @@ namespace draw2d_gdi
 
          ::point_i32 point = GetViewportOrg();
 
-         m_pimage->fill_rect(rectangle, ARGB(255, colorref_get_r_value(cr), colorref_get_g_value(cr), colorref_get_b_value(cr)));
+         m_pimage->fill_rectangle(rectangle, argb(255, colorref_get_r_value(cr), colorref_get_g_value(cr), colorref_get_b_value(cr)));
 
       }
       else
@@ -3891,7 +3891,7 @@ namespace draw2d_gdi
 
 
 
-   ::draw2d::font * graphics::SelectObject(::draw2d::font * pfont)
+   ::write_text::font * graphics::SelectObject(::write_text::font * pfont)
    {
 
       if(get_handle1() == nullptr)
@@ -4619,7 +4619,7 @@ namespace draw2d_gdi
          }
          else if (nObjType == OBJ_FONT)
          {
-            // play back as graphics::SelectObject(::draw2d::font*)
+            // play back as graphics::SelectObject(::write_text::font*)
             //(dynamic_cast<::draw2d_gdi::graphics * >(pgraphics))->SelectObject(::draw2d_gdi::font::from_handle_dup(pgraphics->get_context_application(), (HFONT)hObject));
             break;  // don't play the default record
          }
@@ -5020,7 +5020,7 @@ namespace draw2d_gdi
 
    }
 
-   bool graphics::SelectFont(::draw2d::font * pfont)
+   bool graphics::SelectFont(::write_text::font * pfont)
    {
       // SIOOT - Should implemennt one of them
       // OASOWO - otherwise a stack overflow will occur

@@ -18,7 +18,7 @@ namespace draw2d_gdi
       create_factory < brush, ::draw2d::brush >();
       create_factory < palette, ::draw2d::palette >();
       create_factory < region, ::draw2d::region >();
-      create_factory < font, ::draw2d::font >();
+      create_factory < font, ::write_text::font >();
       create_factory < path, ::draw2d::path >();
 
    }

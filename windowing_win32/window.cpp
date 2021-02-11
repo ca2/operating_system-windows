@@ -5,6 +5,12 @@
 #include "aura/node/windows/interaction_impl.h"
 #include <dwmapi.h>
 
+
+HRESULT SetTouchDisableProperty(HWND hwnd, BOOL fDisableTouch);
+
+::u32 get_dpi_for_window(oswindow hwnd);
+
+
 #undef ALOG_CONTEXT
 #define ALOG_CONTEXT ::trace_object(::trace_category_windowing)
 wstring CLASS_DECL_WINDOWING_WIN32 windows_get_user_interaction_window_class(::user::interaction * puserinteraction);
@@ -198,6 +204,7 @@ namespace windowing_win32
          //MESSAGE_LINK(e_message_show_window, pchannel, this, &window::_001OnShowWindow);
          //MESSAGE_LINK(e_message_kill_focus, pchannel, this, &window::_001OnKillFocus);
          //MESSAGE_LINK(e_message_set_focus, pchannel, this, &window::_001OnSetFocus);
+         MESSAGE_LINK(e_message_set_cursor, pchannel, this, &window::_001OnSetCursor);
 
       }
 
@@ -382,18 +389,21 @@ namespace windowing_win32
 
       HWND hwndParent = nullptr;
 
-      if (puserinteraction->m_bMessageWindow)
-      {
-
-         hwndParent = HWND_MESSAGE;
-
-      }
-
       HMENU hmenu = nullptr;
 
       HINSTANCE hinstance = (HINSTANCE)GetModuleHandleW(L"windowing_win32.dll");
 
       void * lpCreateParams = nullptr;
+
+      if (puserinteraction->m_bMessageWindow)
+      {
+
+         hwndParent = HWND_MESSAGE;
+         dwExStyle = 0;
+         dwStyle = 0;
+         x = y = cx = cy = 0;
+
+      }
 
       if (puserinteraction->m_pusersystem)
       {
@@ -401,7 +411,6 @@ namespace windowing_win32
          lpCreateParams = puserinteraction->m_pusersystem->m_createstruct.lpCreateParams;
 
       }
-
 
       HWND hwnd = ::CreateWindowExW(
          dwExStyle,
@@ -494,6 +503,13 @@ namespace windowing_win32
 
       }
 
+      if (puserinteraction->m_bEdgeGestureDisableTouchWhenFullscreen)
+      {
+
+         SetTouchDisableProperty(hwnd, true);
+
+      }
+
       puserinteraction->m_ewindowflag += ::e_window_flag_is_window;
 
       //puserinteraction->layout().sketch() = ::point_i32(pusersystem->m_createstruct.x, pusersystem->m_createstruct.y);
@@ -548,7 +564,6 @@ namespace windowing_win32
 
 
 
-
    bool window::has_capture() const
    {
 
@@ -568,25 +583,23 @@ namespace windowing_win32
    void window::_001OnMessage(::message::message * pmessage)
    {
 
-      __pointer(::message::base) pbase(pmessage);
-
-      if (pbase != nullptr)
+      if (pmessage != nullptr)
       {
 
-         wparam wparam = pbase->m_wparam;
+         wparam wparam = pmessage->m_wparam;
 
-         lparam lparam = pbase->m_lparam;
+         lparam lparam = pmessage->m_lparam;
 
          string strLparamString;
 
-         if (pbase->m_id == WM_SETTINGCHANGE && wparam == 0)
+         if (pmessage->m_id == WM_SETTINGCHANGE && wparam == 0)
          {
 
             strLparamString = (LPARAM(lparam));
 
          }
 
-         if (pbase->m_id == WM_FONTCHANGE)
+         if (pmessage->m_id == WM_FONTCHANGE)
          {
 
 
@@ -602,16 +615,16 @@ namespace windowing_win32
          //}
          }
          else if (
-            pbase->m_id == WM_SETTINGCHANGE &&
+            pmessage->m_id == WM_SETTINGCHANGE &&
             strLparamString == "ImmersiveColorSet")
          {
 
             System.process_subject(id_os_dark_mode);
 
          }
-         else if (pbase->m_id == e_message_display_change ||
-            (pbase->m_id == WM_SETTINGCHANGE &&
-               (pbase->m_wparam == SPI_SETWORKAREA)))
+         else if (pmessage->m_id == e_message_display_change ||
+            (pmessage->m_id == WM_SETTINGCHANGE &&
+               (pmessage->m_wparam == SPI_SETWORKAREA)))
          {
 
             output_debug_string("test");
@@ -1486,7 +1499,7 @@ namespace windowing_win32
    }
 
 
-   ::e_status window::set_focus()
+   ::e_status window::set_keyboard_focus()
    {
 
       HWND hwnd = get_hwnd();
@@ -1530,12 +1543,16 @@ namespace windowing_win32
    }
 
 
-   ::e_status window::set_capture()
+   ::e_status window::set_mouse_capture()
    {
 
       HWND hwnd = get_hwnd();
 
-      if (!::SetCapture(hwnd))
+      HWND hwndPreviouslyCapturedIfAny = ::SetCapture(hwnd);
+
+      HWND hwndGet = ::GetCapture();
+
+      if (hwndGet != hwnd)
       {
 
          return ::error_failed;
@@ -2042,13 +2059,13 @@ namespace windowing_win32
    //}
 
 
-   //void window::message_handler(::message::base * pbase)
+   //void window::message_handler(::message::message * pmessage)
    //{
    //   
-   //   if (pbase->m_id == (enum_message)WM_SYSCOMMAND)
+   //   if (pmessage->m_id == (enum_message)WM_SYSCOMMAND)
    //   {
 
-   //      if (pbase->m_wparam == SC_SCREENSAVE)
+   //      if (pmessage->m_wparam == SC_SCREENSAVE)
    //      {
 
    //         auto puserinteraction = m_pimpl->m_puserinteraction;
@@ -2056,16 +2073,16 @@ namespace windowing_win32
    //         if (puserinteraction && !puserinteraction->_001CanEnterScreenSaver())
    //         {
 
-   //            pbase->m_bRet = true;
+   //            pmessage->m_bRet = true;
 
-   //            pbase->m_lresult = 0;
+   //            pmessage->m_lresult = 0;
 
    //         }
 
    //         return;
 
    //      }
-   //      else if (pbase->m_wparam == SC_MAXIMIZE)
+   //      else if (pmessage->m_wparam == SC_MAXIMIZE)
    //      {
 
    //         auto puserinteraction = m_pimpl->m_puserinteraction;
@@ -2073,15 +2090,15 @@ namespace windowing_win32
    //         if (puserinteraction && !puserinteraction->_001Maximize())
    //         {
 
-   //            pbase->m_bRet = true;
+   //            pmessage->m_bRet = true;
 
-   //            pbase->m_lresult = 0;
+   //            pmessage->m_lresult = 0;
 
    //         }
 
    //         return;
    //      }
-   //      else if (pbase->m_wparam == SC_RESTORE)
+   //      else if (pmessage->m_wparam == SC_RESTORE)
    //      {
 
    //         auto puserinteraction = m_pimpl->m_puserinteraction;
@@ -2089,9 +2106,9 @@ namespace windowing_win32
    //         if (puserinteraction && !puserinteraction->_001Restore())
    //         {
 
-   //            pbase->m_bRet = true;
+   //            pmessage->m_bRet = true;
 
-   //            pbase->m_lresult = 0;
+   //            pmessage->m_lresult = 0;
 
    //         }
 
@@ -2105,7 +2122,7 @@ namespace windowing_win32
    //   if (puserinteraction)
    //   {
 
-   //      puserinteraction->message_handler(pbase);
+   //      puserinteraction->message_handler(pmessage);
 
    //   }
 
@@ -2212,8 +2229,6 @@ namespace windowing_win32
       //   return;
 
       //}
-
-      __pointer(::message::base) pbase(pmessage);
 
       ::rectangle_i32 rectWindow;
 
@@ -2327,7 +2342,7 @@ namespace windowing_win32
 
       pmessage->m_bRet = true;
 
-      pbase->m_lresult = 0;
+      pmessage->m_lresult = 0;
 
       //ShowCaret();
 
@@ -2566,21 +2581,20 @@ namespace windowing_win32
    //}
 
 
-   void window::default_message_handler(::message::base * pbase)
+   void window::default_message_handler(::message::message * pmessage)
    {
 
-      
-      HWND hwnd = __hwnd(pbase->m_oswindow);
+      HWND hwnd = __hwnd(pmessage->m_oswindow);
 
-      UINT message = pbase->m_id.u32();
+      UINT message = pmessage->m_id.u32();
 
-      WPARAM wparam = pbase->m_wparam;
+      WPARAM wparam = pmessage->m_wparam;
 
-      LPARAM lparam = pbase->m_lparam;
+      LPARAM lparam = pmessage->m_lparam;
 
       LRESULT lresult = ::DefWindowProcW(hwnd, message, wparam, lparam);
 
-      pbase->m_lresult = lresult;
+      pmessage->m_lresult = lresult;
 
    }
 
@@ -3183,24 +3197,52 @@ namespace windowing_win32
    //}
 
 
-   bool window::has_focus()
+   bool window::has_keyboard_focus() const
    {
 
-      HWND hwnd = get_hwnd();
+      ithread_t ithread = 0;
 
-      if (::GetFocus() == hwnd)
+      auto puserinteraction = m_pimpl->m_puserinteraction;
+
+      if (puserinteraction && puserinteraction->m_pthreadUserInteraction)
       {
 
-         return false;
+         ithread = puserinteraction->m_pthreadUserInteraction->get_ithread();
 
       }
 
-      return true;
+      GUITHREADINFO info = {};
+
+      info.cbSize = sizeof(GUITHREADINFO);
+
+      HWND hwndFocus;
+
+      if (GetGUIThreadInfo(ithread, &info))
+      {
+
+         hwndFocus = info.hwndFocus;
+
+      }
+      else
+      {
+
+         hwndFocus = ::GetFocus();
+
+      }
+
+      if (hwndFocus == get_hwnd())
+      {
+
+         return true;
+
+      }
+
+      return false;
 
    }
 
 
-   bool window::is_active()
+   bool window::is_active_window() const
    {
 
       ithread_t ithread = 0;
@@ -3828,7 +3870,7 @@ namespace windowing_win32
       //}
 
 
-   //void window::_001OnSetFocus(::message::message * pbase)
+   //void window::_001OnSetFocus(::message::message * pmessage)
    //{
 
    //   //m_bFocusImpl = true;
@@ -3915,22 +3957,22 @@ namespace windowing_win32
    void window::_001OnSetCursor(::message::message * pmessage)
    {
 
-      //__pointer(::message::base) pbase(pmessage);
+      //__pointer(::message::message) pmessage(pmessage);
 
-      //auto psession = Session;
+      auto pwindowing = windowing();
 
-      //auto pcursor = psession->get_cursor();
+      auto pcursor = pwindowing->get_cursor();
 
-      //if (pcursor != nullptr && pcursor->m_ecursor != cursor_system)
-      //{
+      if (pcursor != nullptr && pcursor->m_ecursor != e_cursor_system)
+      {
 
-      //   pcursor->set_current(puserinteraction, psession);
+         set_cursor(pcursor);
 
-      //}
+      }
 
-      //pbase->m_lresult = 1;
+      pmessage->m_lresult = HTCLIENT;
 
-      //pbase->m_bRet = true;
+      pmessage->m_bRet = true;
 
    }
 
@@ -4081,12 +4123,12 @@ namespace windowing_win32
    }
 
 
-   void window::_001OnGetMinMaxInfo(::message::message * pmessage)
-   {
+   //void window::_001OnGetMinMaxInfo(::message::message * pmessage)
+   //{
 
-      __pointer(::message::base) pbase(pmessage);
+   //   __pointer(::message::message) pmessage(pmessage);
 
-   }
+   //}
 
    //   void window::OnDropFiles(HDROP)
    //   {
@@ -4620,17 +4662,17 @@ namespace windowing_win32
    }
 
 
-   //void window::_001OnTriggerMouseInside()
-   //{
+   void window::track_mouse_hover()
+   {
 
-   //   ::user::window::_001OnTriggerMouseInside();
+      TRACKMOUSEEVENT tme = { sizeof(tme) };
+      tme.dwFlags = TME_LEAVE;
+      tme.hwndTrack = get_hwnd();
+      TrackMouseEvent(&tme);
 
-   //   TRACKMOUSEEVENT tme = { sizeof(tme) };
-   //   tme.dwFlags = TME_LEAVE;
-   //   tme.hwndTrack = get_hwnd();
-   //   TrackMouseEvent(&tme);
+      m_pimpl->track_mouse_leave();
 
-   //}
+   }
 
 
    void window::set_viewport_org(::draw2d::graphics_pointer & pgraphics)
@@ -4870,15 +4912,13 @@ namespace windowing_win32
 
       //#ifdef WINDOWS_DESKTOP
 
-      __pointer(::message::base) pbase(pmessage);
-
       wparam wparam;
 
       lparam lparam;
 
-      wparam = pbase->m_wparam;
+      wparam = pmessage->m_wparam;
 
-      lparam = pbase->m_lparam;
+      lparam = pmessage->m_lparam;
 
       //return Default();
 
@@ -4916,9 +4956,9 @@ namespace windowing_win32
       //      ::InvalidateRect(GetSafeHwnd(),nullptr,true);
       //      ::UpdateWindow(GetSafeHwnd());
       //      //MoveAnchorsImmediatelly(hwndDlg);
-      pbase->m_bRet = true;
+      pmessage->m_bRet = true;
 
-      pbase->m_lresult = 0;
+      pmessage->m_lresult = 0;
 
       //#endif
 
@@ -5026,7 +5066,7 @@ namespace windowing_win32
       }
 
 
-      //__pointer(::message::base) pbase(pmessage);
+      //__pointer(::message::message) pmessage(pmessage);
 
       pcalcsize->m_lresult = 0;
 
@@ -5038,7 +5078,7 @@ namespace windowing_win32
 
 
 
-   //void window::default_message_handler(::message::base * pbase)
+   //void window::default_message_handler(::message::message * pmessage)
    //{
 
    //   if (get_hwnd() == nullptr)
@@ -5109,17 +5149,17 @@ namespace windowing_win32
    }
 
 
-//   void window::message_handler(::message::base * pbase)
+//   void window::message_handler(::message::message * pmessage)
 //   {
 //
 //      if (::is_set(puserinteraction))
 //      {
 //
-//         puserinteraction->pre_translate_message(pbase);
+//         puserinteraction->pre_translate_message(pmessage);
 //
 //      }
 //
-//      if (pbase->m_bRet)
+//      if (pmessage->m_bRet)
 //      {
 //
 //         return;
@@ -5128,13 +5168,13 @@ namespace windowing_win32
 //
 //      ::u32 message;
 //
-//      message = pbase->m_id.umessage();
+//      message = pmessage->m_id.umessage();
 //
 //      m_uiMessage = message;
 //
-//      m_wparam = pbase->m_wparam;
+//      m_wparam = pmessage->m_wparam;
 //
-//      m_lparam = pbase->m_lparam;
+//      m_lparam = pmessage->m_lparam;
 //
 //      if (message == WM_IME_SETCONTEXT)
 //      {
@@ -5146,9 +5186,9 @@ namespace windowing_win32
 //
 //         }
 //
-//         pbase->m_lresult = ::DefWindowProcW(m_oswindow, m_uiMessage, m_wparam, m_lparam);
+//         pmessage->m_lresult = ::DefWindowProcW(m_oswindow, m_uiMessage, m_wparam, m_lparam);
 //
-//         pbase->m_bRet = true;
+//         pmessage->m_bRet = true;
 //
 //         return;
 //
@@ -5174,7 +5214,7 @@ namespace windowing_win32
 //         message == WM_IME_ENDCOMPOSITION)
 //      {
 //
-//         __pointer(::message::key) pkey(pbase);
+//         __pointer(::message::key) pkey(pmessage);
 //
 //         if (message == e_message_key_down)
 //         {
@@ -5253,51 +5293,51 @@ namespace windowing_win32
 //            switch (message)
 //            {
 //            case e_message_create:
-//               TRACE("e_message_create wparam=%08x lparam=%08x", pbase->m_wparam, pbase->m_lparam);
+//               TRACE("e_message_create wparam=%08x lparam=%08x", pmessage->m_wparam, pmessage->m_lparam);
 //
 //               break;
 //            case e_message_window_position_changing:
-//               TRACE("e_message_window_position_changing wparam=%08x lparam=%08x", pbase->m_wparam, pbase->m_lparam);
+//               TRACE("e_message_window_position_changing wparam=%08x lparam=%08x", pmessage->m_wparam, pmessage->m_lparam);
 //
 //               break;
 //            case e_message_window_position_changed:
-//               TRACE("e_message_window_position_changed wparam=%08x lparam=%08x", pbase->m_wparam, pbase->m_lparam);
+//               TRACE("e_message_window_position_changed wparam=%08x lparam=%08x", pmessage->m_wparam, pmessage->m_lparam);
 //
 //               break;
 //            case e_message_activate:
-//               TRACE("e_message_activate wparam=%08x lparam=%08x", pbase->m_wparam, pbase->m_lparam);
+//               TRACE("e_message_activate wparam=%08x lparam=%08x", pmessage->m_wparam, pmessage->m_lparam);
 //
 //               break;
 //            case WM_ACTIVATEAPP:
-//               TRACE("WM_ACTIVATEAPP wparam=%08x lparam=%08x", pbase->m_wparam, pbase->m_lparam);
+//               TRACE("WM_ACTIVATEAPP wparam=%08x lparam=%08x", pmessage->m_wparam, pmessage->m_lparam);
 //
 //               break;
 //            case e_message_mouse_activate:
-//               TRACE("e_message_mouse_activate wparam=%08x lparam=%08x", pbase->m_wparam, pbase->m_lparam);
+//               TRACE("e_message_mouse_activate wparam=%08x lparam=%08x", pmessage->m_wparam, pmessage->m_lparam);
 //
 //               break;
 //            case e_message_ncactivate:
-//               TRACE("e_message_ncactivate wparam=%08x lparam=%08x", pbase->m_wparam, pbase->m_lparam);
+//               TRACE("e_message_ncactivate wparam=%08x lparam=%08x", pmessage->m_wparam, pmessage->m_lparam);
 //
 //               break;
 //            case e_message_set_focus:
-//               TRACE("e_message_set_focus wparam=%08x lparam=%08x", pbase->m_wparam, pbase->m_lparam);
+//               TRACE("e_message_set_focus wparam=%08x lparam=%08x", pmessage->m_wparam, pmessage->m_lparam);
 //
 //               break;
 //            case e_message_kill_focus:
-//               TRACE("e_message_kill_focus wparam=%08x lparam=%08x", pbase->m_wparam, pbase->m_lparam);
+//               TRACE("e_message_kill_focus wparam=%08x lparam=%08x", pmessage->m_wparam, pmessage->m_lparam);
 //
 //               break;
 //            case e_message_move:
-//               TRACE("e_message_move wparam=%08x lparam=%08x", pbase->m_wparam, pbase->m_lparam);
+//               TRACE("e_message_move wparam=%08x lparam=%08x", pmessage->m_wparam, pmessage->m_lparam);
 //
 //               break;
 //            case e_message_size:
-//               TRACE("e_message_size wparam=%08x lparam=%08x", pbase->m_wparam, pbase->m_lparam);
+//               TRACE("e_message_size wparam=%08x lparam=%08x", pmessage->m_wparam, pmessage->m_lparam);
 //
 //               break;
 //            default:
-//               TRACE("MESSAGE %08x wparam=%08x lparam=%08x", message, pbase->m_wparam, pbase->m_lparam);
+//               TRACE("MESSAGE %08x wparam=%08x lparam=%08x", message, pmessage->m_wparam, pmessage->m_lparam);
 //
 //               break;
 //            }
@@ -5314,15 +5354,15 @@ namespace windowing_win32
 //
 //      /*      else if(message == CA2M_BERGEDGE)
 //      {
-//      if(pbase->m_wparam == BERGEDGE_GETAPP)
+//      if(pmessage->m_wparam == BERGEDGE_GETAPP)
 //      {
-//      __pointer(::aura::application)* ppapp= (__pointer(::aura::application)*) pbase->m_lparam;
+//      __pointer(::aura::application)* ppapp= (__pointer(::aura::application)*) pmessage->m_lparam;
 //      *ppapp = get_context_application();
-//      pbase->m_bRet = true;
+//      pmessage->m_bRet = true;
 //      return;
 //      }
 //      }*/
-//      //pbase->set_lresult(0);
+//      //pmessage->set_lresult(0);
 //
 //      if (message == e_message_mouse_leave)
 //      {
@@ -5341,13 +5381,13 @@ namespace windowing_win32
 //         if (psession && psession->m_puiCapture)
 //         {
 //
-//            psession->m_puiCapture->_000OnMouseLeave(pbase);
+//            psession->m_puiCapture->_000OnMouseLeave(pmessage);
 //
 //         }
 //         else if (puserinteraction)
 //         {
 //
-//            puserinteraction->_000OnMouseLeave(pbase);
+//            puserinteraction->_000OnMouseLeave(pmessage);
 //
 //         }
 //
@@ -5367,7 +5407,7 @@ namespace windowing_win32
 //         message == e_message_mouse_wheel)
 //      {
 //
-//         message::mouse * pmouse = dynamic_cast <::message::mouse *> (pbase);
+//         message::mouse * pmouse = dynamic_cast <::message::mouse *> (pmessage);
 //
 //         if (message >= WM_MOUSEFIRST
 //            && message <= WM_MOUSELAST
@@ -5508,7 +5548,7 @@ namespace windowing_win32
 //         message == MESSAGE_OLE_DRAGDROP)
 //      {
 //
-//         message::drag_and_drop * pdrag = (::message::drag_and_drop *)pbase;
+//         message::drag_and_drop * pdrag = (::message::drag_and_drop *)pmessage;
 //
 //         auto puserinteraction = pdrag->userinteraction();
 //
@@ -5554,7 +5594,7 @@ namespace windowing_win32
 //      {
 //
 //
-//         message::key * pkey = (::message::key *)pbase;
+//         message::key * pkey = (::message::key *)pmessage;
 //
 //         __pointer(::user::interaction) puiFocus;
 //
@@ -5581,7 +5621,7 @@ namespace windowing_win32
 //
 //            puiFocus->send(pkey);
 //
-//            if (pbase->m_bRet)
+//            if (pmessage->m_bRet)
 //            {
 //
 //               return;
@@ -5597,7 +5637,7 @@ namespace windowing_win32
 //
 //               puserinteraction->_000OnKey(pkey);
 //
-//               if (pbase->m_bRet)
+//               if (pmessage->m_bRet)
 //               {
 //
 //                  return;
@@ -5610,9 +5650,9 @@ namespace windowing_win32
 //
 //         //m_wparam-
 //
-//         //m_lparam = pbase->m_lparam;
+//         //m_lparam = pmessage->m_lparam;
 //
-//         //pbase->set_lresult(::default_window_procedure(message, pbase->m_wparam, pbase->m_lparam));
+//         //pmessage->set_lresult(::default_window_procedure(message, pmessage->m_wparam, pmessage->m_lparam));
 //
 //         //return;
 //
@@ -5621,17 +5661,17 @@ namespace windowing_win32
 //      if (message == e_message_event)
 //      {
 //
-//         puserinteraction->on_control_event(pbase);
+//         puserinteraction->on_control_event(pmessage);
 //
 //         return;
 //
 //      }
 //
-//      ::user::window::message_handler(pbase);
+//      ::user::window::message_handler(pmessage);
 //
-//      //if(pmessage->m_bRet && !pbase->m_bDoSystemDefault)
+//      //if(pmessage->m_bRet && !pmessage->m_bDoSystemDefault)
 //
-//      if (pbase->m_bRet)
+//      if (pmessage->m_bRet)
 //      {
 //
 //         return;
@@ -5651,19 +5691,19 @@ namespace windowing_win32
 //
 //      }
 //
-//      //if (bUserElementalOk && pbase->m_bWindowProc)
+//      //if (bUserElementalOk && pmessage->m_bWindowProc)
 //      //{
 //      //   
 //      //   if (puserinteraction != nullptr)
 //      //   {
 //      //      
-//      //      puserinteraction->default_window_procedure(pbase);
+//      //      puserinteraction->default_window_procedure(pmessage);
 //
 //      //   }
 //      //   else
 //      //   {
 //      //      
-//      //      pbase->set_lresult(::DefWindowProcW(m_oswindow, pbase->m_id, pbase->m_wparam, pbase->m_lparam));
+//      //      pmessage->set_lresult(::DefWindowProcW(m_oswindow, pmessage->m_id, pmessage->m_wparam, pmessage->m_lparam));
 //
 //      //   }
 //
@@ -6029,18 +6069,40 @@ namespace windowing_win32
 
       //}
 
+   //void interaction_impl::_001OnSetCursor(::message::message * pmessage)
+   //{
+
+   //   __pointer(::user::message) pusermessage(pmessage);
+
+   //   auto psession = Session;
+
+   //   auto pcursor = psession->get_cursor();
+
+   //   if (pcursor != nullptr && pcursor->m_ecursor != cursor_system)
+   //   {
+
+   //      pcursor->set_current(m_puserinteraction, psession);
+
+   //   }
+
+   //   pusermessage->m_lresult = 1;
+
+   //   pusermessage->m_bRet = true;
+
+   //}
+
    
-   void window::message_handler(::message::base * pbase)
+   void window::message_handler(::message::message * pmessage)
    {
 
       if (::is_set(m_pimpl->m_puserinteraction))
       {
 
-         m_pimpl->m_puserinteraction->pre_translate_message(pbase);
+         m_pimpl->m_puserinteraction->pre_translate_message(pmessage);
 
       }
 
-      if (pbase->m_bRet)
+      if (pmessage->m_bRet)
       {
 
          return;
@@ -6049,13 +6111,13 @@ namespace windowing_win32
 
       ::u32 message;
 
-      message = pbase->m_id.umessage();
+      message = pmessage->m_id.umessage();
 
       m_uiMessage = message;
 
-      m_wparam = pbase->m_wparam;
+      m_wparam = pmessage->m_wparam;
 
-      m_lparam = pbase->m_lparam;
+      m_lparam = pmessage->m_lparam;
 
       if (message == WM_IME_SETCONTEXT)
       {
@@ -6067,9 +6129,9 @@ namespace windowing_win32
 
          }
 
-         pbase->m_lresult = ::DefWindowProcW(get_hwnd(), m_uiMessage, m_wparam, m_lparam);
+         pmessage->m_lresult = ::DefWindowProcW(get_hwnd(), m_uiMessage, m_wparam, m_lparam);
 
-         pbase->m_bRet = true;
+         pmessage->m_bRet = true;
 
          return;
 
@@ -6077,62 +6139,62 @@ namespace windowing_win32
 
       bool bUserElementalOk = !m_pimpl->m_bDestroyImplOnly && m_pimpl->m_puserinteraction && m_pimpl->m_puserinteraction->m_bUserPrimitiveOk;
 
-      if (message == e_message_key_down ||
-         message == e_message_key_up ||
-         message == e_message_char ||
-         message == e_message_sys_key_down ||
-         message == e_message_sys_key_up ||
-         message == e_message_sys_char ||
-         message == WM_IME_KEYDOWN ||
-         message == WM_IME_SETCONTEXT ||
-         message == WM_IME_SELECT ||
-         message == WM_IME_KEYUP ||
-         message == WM_IME_CHAR ||
-         message == WM_IME_STARTCOMPOSITION ||
-         message == WM_IME_COMPOSITION ||
-         message == WM_IME_COMPOSITIONFULL ||
-         message == WM_IME_NOTIFY ||
-         message == WM_IME_ENDCOMPOSITION)
-      {
+      //if (message == e_message_key_down ||
+      //   message == e_message_key_up ||
+      //   message == e_message_char ||
+      //   message == e_message_sys_key_down ||
+      //   message == e_message_sys_key_up ||
+      //   message == e_message_sys_char ||
+      //   message == WM_IME_KEYDOWN ||
+      //   message == WM_IME_SETCONTEXT ||
+      //   message == WM_IME_SELECT ||
+      //   message == WM_IME_KEYUP ||
+      //   message == WM_IME_CHAR ||
+      //   message == WM_IME_STARTCOMPOSITION ||
+      //   message == WM_IME_COMPOSITION ||
+      //   message == WM_IME_COMPOSITIONFULL ||
+      //   message == WM_IME_NOTIFY ||
+      //   message == WM_IME_ENDCOMPOSITION)
+      //{
 
-         __pointer(::message::key) pkey(pbase);
+      //   __pointer(::message::key) pkey(pmessage);
 
-         if (message == e_message_key_down)
-         {
+      //   if (message == e_message_key_down)
+      //   {
 
-            output_debug_string("\n Key Down Event ");
+      //      output_debug_string("\n Key Down Event ");
 
-         }
+      //   }
 
-         auto psession = Session;
+      //   auto psession = Session;
 
-         if (message == e_message_key_down || message == e_message_sys_key_down)
-         {
-            try
-            {
-               psession->set_key_pressed(pkey->m_ekey, true);
-            }
-            catch (...)
-            {
-            }
-         }
-         else if (message == e_message_key_up || message == e_message_sys_key_up)
-         {
+      //   if (message == e_message_key_down || message == e_message_sys_key_down)
+      //   {
+      //      try
+      //      {
+      //         psession->set_key_pressed(pkey->m_ekey, true);
+      //      }
+      //      catch (...)
+      //      {
+      //      }
+      //   }
+      //   else if (message == e_message_key_up || message == e_message_sys_key_up)
+      //   {
 
-            try
-            {
+      //      try
+      //      {
 
-               psession->set_key_pressed(pkey->m_ekey, false);
+      //         psession->set_key_pressed(pkey->m_ekey, false);
 
-            }
-            catch (...)
-            {
+      //      }
+      //      catch (...)
+      //      {
 
-            }
+      //      }
 
-         }
+      //   }
 
-      }
+      //}
 
       if (message == e_message_timer)
       {
@@ -6174,51 +6236,51 @@ namespace windowing_win32
             switch (message)
             {
             case e_message_create:
-               TRACE("e_message_create wparam=%08x lparam=%08x", pbase->m_wparam, pbase->m_lparam);
+               TRACE("e_message_create wparam=%08x lparam=%08x", pmessage->m_wparam, pmessage->m_lparam);
 
                break;
             case e_message_window_position_changing:
-               TRACE("e_message_window_position_changing wparam=%08x lparam=%08x", pbase->m_wparam, pbase->m_lparam);
+               TRACE("e_message_window_position_changing wparam=%08x lparam=%08x", pmessage->m_wparam, pmessage->m_lparam);
 
                break;
             case e_message_window_position_changed:
-               TRACE("e_message_window_position_changed wparam=%08x lparam=%08x", pbase->m_wparam, pbase->m_lparam);
+               TRACE("e_message_window_position_changed wparam=%08x lparam=%08x", pmessage->m_wparam, pmessage->m_lparam);
 
                break;
             case e_message_activate:
-               TRACE("e_message_activate wparam=%08x lparam=%08x", pbase->m_wparam, pbase->m_lparam);
+               TRACE("e_message_activate wparam=%08x lparam=%08x", pmessage->m_wparam, pmessage->m_lparam);
 
                break;
-            case WM_ACTIVATEAPP:
-               TRACE("WM_ACTIVATEAPP wparam=%08x lparam=%08x", pbase->m_wparam, pbase->m_lparam);
+            case e_message_activate_app:
+               TRACE("WM_ACTIVATEAPP wparam=%08x lparam=%08x", pmessage->m_wparam, pmessage->m_lparam);
 
                break;
             case e_message_mouse_activate:
-               TRACE("e_message_mouse_activate wparam=%08x lparam=%08x", pbase->m_wparam, pbase->m_lparam);
+               TRACE("e_message_mouse_activate wparam=%08x lparam=%08x", pmessage->m_wparam, pmessage->m_lparam);
 
                break;
             case e_message_ncactivate:
-               TRACE("e_message_ncactivate wparam=%08x lparam=%08x", pbase->m_wparam, pbase->m_lparam);
+               TRACE("e_message_ncactivate wparam=%08x lparam=%08x", pmessage->m_wparam, pmessage->m_lparam);
 
                break;
             case e_message_set_focus:
-               TRACE("e_message_set_focus wparam=%08x lparam=%08x", pbase->m_wparam, pbase->m_lparam);
+               TRACE("e_message_set_focus wparam=%08x lparam=%08x", pmessage->m_wparam, pmessage->m_lparam);
 
                break;
             case e_message_kill_focus:
-               TRACE("e_message_kill_focus wparam=%08x lparam=%08x", pbase->m_wparam, pbase->m_lparam);
+               TRACE("e_message_kill_focus wparam=%08x lparam=%08x", pmessage->m_wparam, pmessage->m_lparam);
 
                break;
             case e_message_move:
-               TRACE("e_message_move wparam=%08x lparam=%08x", pbase->m_wparam, pbase->m_lparam);
+               TRACE("e_message_move wparam=%08x lparam=%08x", pmessage->m_wparam, pmessage->m_lparam);
 
                break;
             case e_message_size:
-               TRACE("e_message_size wparam=%08x lparam=%08x", pbase->m_wparam, pbase->m_lparam);
+               TRACE("e_message_size wparam=%08x lparam=%08x", pmessage->m_wparam, pmessage->m_lparam);
 
                break;
             default:
-               TRACE("MESSAGE %08x wparam=%08x lparam=%08x", message, pbase->m_wparam, pbase->m_lparam);
+               TRACE("MESSAGE %08x wparam=%08x lparam=%08x", message, pmessage->m_wparam, pmessage->m_lparam);
 
                break;
             }
@@ -6235,40 +6297,29 @@ namespace windowing_win32
 
       /*      else if(message == CA2M_BERGEDGE)
       {
-      if(pbase->m_wparam == BERGEDGE_GETAPP)
+      if(pmessage->m_wparam == BERGEDGE_GETAPP)
       {
-      __pointer(::aura::application)* ppapp= (__pointer(::aura::application)*) pbase->m_lparam;
+      __pointer(::aura::application)* ppapp= (__pointer(::aura::application)*) pmessage->m_lparam;
       *ppapp = get_context_application();
-      pbase->m_bRet = true;
+      pmessage->m_bRet = true;
       return;
       }
       }*/
-      //pbase->set_lresult(0);
+      //pmessage->set_lresult(0);
 
       if (message == e_message_mouse_leave)
       {
 
-         auto papexsession = get_context_session();
-
-         ::aura::session * psession = nullptr;
-
-         if (papexsession)
+         if (m_pimpl->m_puserinteractionCapture)
          {
 
-            psession = papexsession->m_paurasession;
-
-         }
-
-         if (psession && m_pimpl->m_puserinteractionCapture)
-         {
-
-            m_pimpl->m_puserinteractionCapture->_000OnMouseLeave(pbase);
+            m_pimpl->m_puserinteractionCapture->_000OnMouseLeave(pmessage);
 
          }
          else if (m_pimpl->m_puserinteraction)
          {
 
-            m_pimpl->m_puserinteraction->_000OnMouseLeave(pbase);
+            m_pimpl->m_puserinteraction->_000OnMouseLeave(pmessage);
 
          }
 
@@ -6288,7 +6339,7 @@ namespace windowing_win32
          message == e_message_mouse_wheel)
       {
 
-         message::mouse * pmouse = dynamic_cast <::message::mouse *> (pbase);
+         message::mouse * pmouse = dynamic_cast <::message::mouse *> (pmessage);
 
          if (message >= WM_MOUSEFIRST
             && message <= WM_MOUSELAST
@@ -6401,19 +6452,14 @@ namespace windowing_win32
             pmouse->m_ecursor = e_cursor_default;
          }
 
-         if (psession)
+         auto puiCapture = m_pimpl->m_puserinteractionCapture;
+
+         if (::is_set(puiCapture))
          {
 
-            auto puiCapture = m_pimpl->m_puserinteractionCapture;
+            puiCapture->message_handler(pmouse);
 
-            if (::is_set(puiCapture))
-            {
-
-               puiCapture->message_handler(pmouse);
-
-               return;
-
-            }
+            return;
 
          }
 
@@ -6421,6 +6467,15 @@ namespace windowing_win32
 
          if (pchild)
          {
+
+            string strType = ::str::demangle(pchild->type_name());
+
+            if (strType.contains_ci("button"))
+            {
+
+               output_debug_string("mouse move on button");
+
+            }
 
             pchild->message_handler(pmouse);
 
@@ -6442,7 +6497,7 @@ namespace windowing_win32
          message == MESSAGE_OLE_DRAGDROP)
       {
 
-         message::drag_and_drop * pdrag = (::message::drag_and_drop *) pbase;
+         auto pdrag = __cast < ::message::drag_and_drop>(pmessage);
 
          auto pinteraction = pdrag->userinteraction();
 
@@ -6468,7 +6523,7 @@ namespace windowing_win32
          }*/
          return;
       }
-      if (message == e_message_key_down ||
+         if (message == e_message_key_down ||
          message == e_message_key_up ||
          message == e_message_char ||
          message == e_message_sys_key_down ||
@@ -6487,35 +6542,67 @@ namespace windowing_win32
          message == WM_INPUTLANGCHANGE)
       {
 
-     
-         message::key * pkey = (::message::key *) pbase;
-
          __pointer(::user::interaction) puiFocus;
          
-         auto papexsession = get_context_session();
+         puiFocus = m_pimpl->m_puserinteractionFocus1;
 
-         ::aura::session * psession = nullptr;
+         auto pkey = __cast <::message::key> (pmessage);
 
-         if (papexsession)
+         if (pkey)
          {
 
-            psession = papexsession->m_paurasession;
+            windowing()->set(pkey, pkey->m_oswindow, pkey->m_pwindow, pkey->m_id, pkey->m_wparam, pkey->m_lparam);
 
          }
 
-         if (psession)
+
+         ///__pointer(::message::key) pkey(pmessage);
+
+         if (message == e_message_key_down)
          {
 
-            puiFocus = m_pimpl->m_puserinteraction->get_keyboard_focus();
+            output_debug_string("\n Key Down Event ");
 
          }
 
-         if (puiFocus && puiFocus->_is_window() && puiFocus != m_pimpl->m_puserinteraction)
+         //auto psession = Session;
+
+         if (message == e_message_key_down || message == e_message_sys_key_down)
          {
 
-            puiFocus->send(pkey);
+            auto psession = Session;
+            try
+            {
+               psession->set_key_pressed(pkey->m_ekey, true);
+            }
+            catch (...)
+            {
+            }
+         }
+         else if (message == e_message_key_up || message == e_message_sys_key_up)
+         {
+            auto psession = Session;
 
-            if (pbase->m_bRet)
+            try
+            {
+
+               psession->set_key_pressed(pkey->m_ekey, false);
+
+            }
+            catch (...)
+            {
+
+            }
+
+         }
+
+
+         if (puiFocus)
+         {
+
+            puiFocus->send(pmessage);
+
+            if (pmessage->m_bRet)
             {
 
                return;
@@ -6523,18 +6610,23 @@ namespace windowing_win32
             }
 
          }
-         else if (!pkey->m_bRet)
+         else
          {
 
-            if (m_pimpl->m_puserinteraction != nullptr)
+            if (pkey && !pkey->m_bRet)
             {
 
-               m_pimpl->m_puserinteraction->_000OnKey(pkey);
-
-               if (pbase->m_bRet)
+               if (m_pimpl->m_puserinteraction != nullptr)
                {
 
-                  return;
+                  m_pimpl->m_puserinteraction->_000OnKey(pkey);
+
+                  if (pmessage->m_bRet)
+                  {
+
+                     return;
+
+                  }
 
                }
 
@@ -6544,9 +6636,9 @@ namespace windowing_win32
 
          //m_wparam-
 
-         //m_lparam = pbase->m_lparam;
+         //m_lparam = pmessage->m_lparam;
 
-         //pbase->set_lresult(::default_window_procedure(message, pbase->m_wparam, pbase->m_lparam));
+         //pmessage->set_lresult(::default_window_procedure(message, pmessage->m_wparam, pmessage->m_lparam));
 
          //return;
 
@@ -6555,17 +6647,17 @@ namespace windowing_win32
       if (message == e_message_event)
       {
 
-         m_pimpl->m_puserinteraction->on_control_event(pbase);
+         m_pimpl->m_puserinteraction->on_control_event(pmessage);
 
          return;
 
       }
 
-      m_pimpl->::user::interaction_impl::message_handler(pbase);
+      m_pimpl->::user::interaction_impl::message_handler(pmessage);
 
-      //if(pmessage->m_bRet && !pbase->m_bDoSystemDefault)
+      //if(pmessage->m_bRet && !pmessage->m_bDoSystemDefault)
 
-      if (pbase->m_bRet)
+      if (pmessage->m_bRet)
       {
 
          return;
@@ -6585,19 +6677,19 @@ namespace windowing_win32
 
       }
 
-      //if (bUserElementalOk && pbase->m_bWindowProc)
+      //if (bUserElementalOk && pmessage->m_bWindowProc)
       //{
       //   
       //   if (m_pimpl->m_puserinteraction != nullptr)
       //   {
       //      
-      //      m_pimpl->m_puserinteraction->default_window_procedure(pbase);
+      //      m_pimpl->m_puserinteraction->default_window_procedure(pmessage);
 
       //   }
       //   else
       //   {
       //      
-      //      pbase->set_lresult(::DefWindowProcW(m_oswindow, pbase->m_id, pbase->m_wparam, pbase->m_lparam));
+      //      pmessage->set_lresult(::DefWindowProcW(m_oswindow, pmessage->m_id, pmessage->m_wparam, pmessage->m_lparam));
 
       //   }
 
@@ -6607,653 +6699,67 @@ namespace windowing_win32
 
 
 
+   float window::get_dpi_for_window()
+   {
+
+      oswindow oswindow = get_oswindow();
+
+      return ::get_dpi_for_window(oswindow);
+
+   }
+
+
+   float window::point_dpi(float points)
+   {
+
+      float fDpi = get_dpi_for_window();
+
+      return points * fDpi / 72.f;
+
+   }
+
+
+   float window::dpiy(float y)
+   {
+
+      float fDpi = get_dpi_for_window();
+
+      return y * fDpi / 96.f;
+
+   }
+
+
+   float window::dpix(float x)
+   {
+
+      float fDpi = get_dpi_for_window();
+
+      return x * fDpi / 96.f;
+
+   }
+
+
+
+
+   float window::y_dpi(float y)
+   {
+
+      float fDpi = get_dpi_for_window();
+
+      return y / fDpi;
+
+   }
+
+
+   float window::x_dpi(float x)
+   {
+
+      float fDpi = get_dpi_for_window();
+
+      return x / fDpi;
+
+   }
+
+
 } // namespace windowing_win32
-
-
-bool is_registered_windows_message(::u32 message)
-{
-
-   return message >= 0xc000 && message <= 0xffff;
-
-}
-
-
-lresult CALLBACK WndProc(HWND hwnd, ::u32 message, wparam wparam, lparam lparam);
-
-
-int g_iCol = 0;
-
-
-lresult CALLBACK __window_procedure(HWND hwnd, UINT message, WPARAM wparam, LPARAM lparam)
-{
-
-   ::windowing::window * pwindow = (::windowing::window *) ::GetWindowLongPtr(hwnd, 0);
-
-   if (!pwindow)
-   {
-
-      if (message == WM_NCCREATE)
-      {
-
-         LPCREATESTRUCTW pcreatestructw = (LPCREATESTRUCTW)lparam;
-
-         ::user::system * psystem = (::user::system *)pcreatestructw->lpCreateParams;
-
-         pwindow = psystem->m_pwindow;
-
-         if (!pwindow)
-         {
-
-            return 0;
-
-
-         }
-          
-         ::SetWindowLongPtr(hwnd, 0, (LONG_PTR) pwindow);
-
-         pwindow->set_oswindow(__oswindow(hwnd));
-
-      }
-      else
-      {
-
-         return 0;
-
-      }
-
-   }
-
-   lresult lresult = 0;
-
-   if (is_registered_windows_message(message))
-   {
-
-      lresult = ::DefWindowProcW(hwnd, message, wparam, lparam);
-
-      return lresult;
-
-   }
-
-   auto pimpl = pwindow->m_pimpl;
-
-   if (pimpl)
-   {
-
-      if (pimpl->__windows_message_bypass(pwindow, message, wparam, lparam, lresult))
-      {
-
-         return lresult;
-
-      }
-
-   }
-
-   //return ::DefWindowProcW(hwnd, message, wparam, lparam);
-
-   if (::get_context_system() == nullptr)
-   {
-
-      return 0;
-
-   }
-
-   if (&System == nullptr)
-   {
-
-      return 0;
-
-   }
-
-   pimpl->m_uiMessage = message;
-
-   pimpl->m_wparam = wparam;
-
-   pimpl->m_lparam = lparam;
-
-   auto puserinteraction = pimpl->m_puserinteraction;
-
-   if (message == e_message_activate)
-   {
-
-      output_debug_string("test");
-
-   }
-
-   if (message == e_message_left_button_up)
-   {
-
-      ::output_debug_string("e_message_left_button_up");
-
-   }
-
-   if (message == e_message_mouse_move)
-   {
-
-      if (lparam == pimpl->m_lparamLastMouseMove)
-      {
-
-         return 0;
-
-      }
-
-      pimpl->m_lparamLastMouseMove = lparam;
-
-      ::point_i32 pointCursor;
-
-      ::GetCursorPos((POINT *) &pointCursor);
-
-      if (pimpl->m_pointCursor == pointCursor)
-      {
-
-         return 0;
-
-      }
-
-      pimpl->m_pointCursor = pointCursor;
-
-   }
-   else if (message == e_message_timer)
-   {
-
-      if (wparam == e_timer_transparent_mouse_event)
-      {
-
-         ::point_i32 pointCursor;
-
-         ::GetCursorPos((POINT *) &pointCursor);
-
-         if (pimpl->m_pointCursor == pointCursor)
-         {
-
-            return 0;
-
-         }
-
-         pimpl->m_pointCursor = pointCursor;
-
-         ::lparam lparam;
-
-         ::ScreenToClient(hwnd, (POINT *) &pointCursor);
-
-         lparam = MAKELPARAM(pointCursor.x, pointCursor.y);
-
-         pimpl->call_message_handler(e_message_mouse_move, 0, lparam);
-
-      }
-      else
-      {
-
-         // ignoring Timer Event
-
-         output_debug_string("iTE\n");
-
-      }
-
-      return 0;
-
-   }
-
-   if (pimpl->m_bDestroyImplOnly || ::is_null(puserinteraction))
-   {
-
-      auto pbase = pimpl->get_message_base((enum_message)message, wparam, lparam);
-
-      try
-      {
-
-         pimpl->message_handler(pbase);
-
-      }
-      catch (...)
-      {
-
-      }
-
-      if (!pbase->m_bRet)
-      {
-
-         pimpl->default_message_handler(pbase);
-
-      }
-
-      lresult = pbase->m_lresult;
-
-   }
-   else if (::is_set(puserinteraction))
-   {
-
-      if (message == WM_GETTEXT)
-      {
-
-         return ::DefWindowProcW(hwnd, message, wparam, lparam);
-
-      }
-      else if (message == WM_GETTEXTLENGTH)
-      {
-
-         return ::DefWindowProcW(hwnd, message, wparam, lparam);
-
-      }
-      else if (message == WM_SETTEXT)
-      {
-
-         return ::DefWindowProcW(hwnd, message, wparam, lparam);
-
-      }
-
-      auto pbase = puserinteraction->get_message_base((enum_message)message, wparam, lparam);
-
-      try
-      {
-
-         //puserinteraction->message_handler(pbase);
-         pwindow->message_handler(pbase);
-
-      }
-      catch (...)
-      {
-
-      }
-
-      if (!pbase->m_bRet)
-      {
-
-         puserinteraction->default_message_handler(pbase);
-
-      }
-
-      lresult = pbase->m_lresult;
-
-   }
-   else
-   {
-
-      lresult = ::DefWindowProcW(hwnd, message, wparam, lparam);
-
-   }
-
-   return lresult;
-
-}
-
-
-
-
-
-
-//CLASS_DECL_WINDOWING_WIN32 bool hook_window_create(::windowing_win32::window * pwindow)
-//{
-//
-//   if (pwindow == nullptr)
-//   {
-//
-//      return false;
-//
-//   }
-//
-//   if (pwindow->get_hwnd() != nullptr)
-//   {
-//
-//      return false;
-//
-//   }
-//
-//   if (t_hHookOldCbtFilter == nullptr)
-//   {
-//
-//      t_hHookOldCbtFilter = ::SetWindowsHookExW(WH_CBT, windows::__cbt_filter_hook, nullptr, ::GetCurrentThreadId());
-//
-//      if (t_hHookOldCbtFilter == nullptr)
-//      {
-//
-//         return false;
-//
-//      }
-//
-//   }
-//
-//   if (t_hHookOldCbtFilter == nullptr)
-//   {
-//
-//      return false;
-//
-//   }
-//
-//   thread_set("wnd_init") = pwindow;
-//
-//   if (thread_set("wnd_init") == nullptr)   // hook not already in progress
-//   {
-//
-//      return false;
-//
-//   }
-//
-//   if (thread_set("wnd_init") != pwindow)
-//   {
-//
-//      return false;
-//
-//   }
-//
-//   return true;
-//
-//}
-//
-//
-//CLASS_DECL_WINDOWING_WIN32 bool unhook_window_create()
-//{
-//
-//   if (thread_set("wnd_init") != nullptr)
-//   {
-//
-//      thread_set("wnd_init") = nullptr;
-//
-//      return false;   // was not successfully hooked
-//
-//   }
-//
-//   return true;
-//
-//}
-//
-
-//void CLASS_DECL_WINDOWING_WIN32 _handle_activate(::windowing::window * pwindow, wparam nState, ::windowing::window * pWndOther)
-//{
-//
-//   ASSERT(pwindow);
-//
-//   // send WM_ACTIVATETOPLEVEL when top-level parents change
-//   if (!(pwindow->get_style() & WS_CHILD))
-//   {
-//
-//      __pointer(::user::interaction) pTopLevel = pwindow->get_top_level();
-//
-//      if (pTopLevel && (!pWndOther || !::IsWindow((pWndOther)->get_hwnd()) || pTopLevel != (pWndOther)->get_top_level()))
-//      {
-//         // lParam points to window getting the e_message_activate message and
-//         //  oswindow_Other from the e_message_activate.
-//         hwnd oswindow_2[2];
-//         oswindow_2[0] = (pwindow)->get_hwnd();
-//         if (!pWndOther)
-//         {
-//            oswindow_2[1] = nullptr;
-//         }
-//         else
-//         {
-//
-//            oswindow_2[1] = (pWndOther)->get_hwnd();
-//
-//         }
-//
-//         // send it...
-//         pTopLevel->send_message(WM_ACTIVATETOPLEVEL, nState, (lparam)&oswindow_2[0]);
-//
-//      }
-//
-//   }
-//
-//}
-
-
-void __term_windowing()
-{
-
-   //if (t_hHookOldCbtFilter != nullptr)
-   //{
-
-   //   ::UnhookWindowsHookEx(t_hHookOldCbtFilter);
-
-   //   t_hHookOldCbtFilter = nullptr;
-
-   //}
-
-}
-
-
-CLASS_DECL_WINDOWING_WIN32 bool windows_register_class(WNDCLASSEXW * pwndclass);
-
-
-
-
-
-wstring windows_calc_icon_window_class(::user::interaction * puserinteraction, u32 dwDefaultStyle, const char * pszMatter)
-{
-
-   string strPath = Ctx(puserinteraction).dir().matter(pszMatter, "icon.ico");
-
-   hicon hIcon = (hicon) ::LoadImageW(nullptr, wstring(Ctx(puserinteraction).get_matter_path(strPath)), IMAGE_ICON, 256, 256, LR_LOADFROMFILE);
-
-   wstring strClass = windows_get_user_interaction_window_class(puserinteraction);
-
-   if (hIcon != nullptr)
-   {
-
-      // will fill pszClassName with default WNDCLASS name
-
-      // ignore instance handle from pre_create_window.
-
-      WNDCLASSEXW wndcls;
-
-      if (strClass.get_length() > 0 && GetClassInfoExW((HINSTANCE) System.m_hinstance, strClass, &wndcls) && wndcls.hIcon != hIcon)
-      {
-
-         // register a very similar WNDCLASS
-
-         return windows_register_window_class(get_context_application(), wndcls.style, wndcls.hCursor, wndcls.hbrBackground, hIcon);
-
-      }
-
-   }
-
-   return strClass;
-
-}
-
-
-
-
-wstring CLASS_DECL_WINDOWING_WIN32 windows_get_user_interaction_window_class(::user::interaction * puserinteraction)
-{
-
-   ::user::interaction::enum_type etype = puserinteraction->get_window_type();
-
-   WNDCLASSEXW wndcls;
-
-   __memset(&wndcls, 0, sizeof(WNDCLASSEXW));   // start with nullptr defaults
-
-   wndcls.lpfnWndProc = windows_user_interaction_impl_get_window_procedure();
-
-   wndcls.hInstance = GetModuleHandleW(L"windowing_win32.dll");
-
-   //INITCOMMONCONTROLSEX init;
-   //init.dwSize = sizeof(init);
-
-   if (etype == ::user::interaction::type_frame || etype == ::user::interaction::type_view)
-   {
-      
-      // SDI Frame or MDI Child windows or views - normal colors
-      
-      wndcls.style = CS_DBLCLKS | CS_HREDRAW | CS_VREDRAW | CS_OWNDC;
-      
-      //wndcls.style = CS_HREDRAW | CS_VREDRAW;
-      
-      wndcls.hbrBackground = (HBRUSH)(COLOR_WINDOW + 1);
-
-      if (windows_register_with_icon(&wndcls, L"ca2_frame", 0))
-      {
-
-         return wndcls.lpszClassName;
-
-      }
-
-   }
-
-
-   return windows_register_window_class(puserinteraction->get_context_application(), 0);
-
-}
-
-
-
-bool CLASS_DECL_WINDOWING_WIN32 windows_register_with_icon(WNDCLASSEXW * pwndclass, const unichar * pszClassName, ::u32 nIDIcon)
-{
-
-   pwndclass->lpszClassName = pszClassName;
-
-   pwndclass->hIcon = ::LoadIconW(nullptr, MAKEINTRESOURCEW(32512));
-
-   return windows_register_class(pwndclass);
-
-}
-
-
-//CLASS_DECL_WINDOWING_WIN32 WNDPROC get_window_procedure();
-
-
-CLASS_DECL_WINDOWING_WIN32 wstring windows_register_window_class(::layered * pobjectContext, ::u32 nClassStyle, hcursor hCursor, HBRUSH hbrBackground, hicon hIcon)
-{
-
-   ::apex::application * papp = ::get_context_application(pobjectContext);
-
-   const int iLen = 4096;
-
-   wstring wstrClassName;
-
-   HINSTANCE hinstance = ::GetModuleHandleW(L"windowing_win32.dll");
-
-
-
-   {
-
-      LPWSTR lpwsz = wstrClassName.get_string_buffer(iLen);
-
-      if (hCursor == nullptr && hbrBackground == nullptr && hIcon == nullptr)
-      {
-
-         C_RUNTIME_ERRORCHECK_SPRINTF(_snwprintf_s(lpwsz, iLen, iLen - 1, L"windows_interaction_impl:%p,%x", hinstance, nClassStyle));
-
-      }
-      else
-      {
-
-         C_RUNTIME_ERRORCHECK_SPRINTF(_snwprintf_s(lpwsz, iLen, iLen - 1, L"windows_interaction_impl:%p,%x,%p,%p,%p", hinstance, nClassStyle, hCursor, hbrBackground, hIcon));
-
-      }
-
-      wstrClassName.release_string_buffer();
-
-   }
-
-   // see if the class already exists
-   WNDCLASSEXW wndcls = {};
-
-   if (::GetClassInfoExW((HINSTANCE)hinstance, wstrClassName, &wndcls))
-   {
-      // already registered, assert everything is good
-      ASSERT(wndcls.style == nClassStyle);
-
-      // NOTE: We have to trust that the hIcon, hbrBackground, and the
-      //  hCursor are semantically the same, because sometimes Windows does
-      //  some internal translation or copying of those handles before
-      //  storing them in the internal WNDCLASS retrieved by GetClassInfo.
-      return wstrClassName;
-
-   }
-   wndcls.cbSize = sizeof(wndcls);
-   // otherwise we need to register a new class
-   wndcls.style = nClassStyle;
-   wndcls.lpfnWndProc = windows_user_interaction_impl_get_window_procedure();
-
-   wndcls.cbClsExtra = wndcls.cbWndExtra = 40;
-   wndcls.hInstance = hinstance;
-   //wndcls.hIcon = hIcon;
-   //wndcls.hCursor = hCursor;
-   wndcls.hCursor = nullptr;
-   wndcls.hbrBackground = hbrBackground;
-   wndcls.lpszMenuName = nullptr;
-
-   wndcls.lpszClassName = wstrClassName;
-
-   if (!windows_register_class(&wndcls))
-   {
-
-      __throw(resource_exception());
-
-   }
-
-   // return thread-local pointer
-   return wstrClassName;
-
-}
-
-
-
-
-lresult CALLBACK WndProc(HWND hWnd, const ::id & id, wparam wParam, lparam lParam);
-
-//bool windows_register_class(HINSTANCE hinstance)
-//{
-//   
-//   WNDCLASSEXW wcex = {};
-//
-//   wcex.cbSize = sizeof(WNDCLASSEXW);
-//   wcex.style = CS_HREDRAW | CS_VREDRAW | CS_OWNDC;
-//   wcex.lpfnWndProc = windows_user_interaction_impl_get_window_procedure();
-//   wcex.cbClsExtra = 0;
-//   wcex.cbWndExtra = 0;
-//   wcex.hInstance = hinstance;
-//   wcex.hbrBackground = (HBRUSH)(COLOR_WINDOW);
-//   wcex.lpszClassName = L"windows_interaction_impl";
-//
-//   if (!RegisterClassExW(&wcex))
-//   {
-//
-//      return false;
-//
-//   }
-//
-//   return true;
-//
-//}
-//
-
-CLASS_DECL_WINDOWING_WIN32 bool windows_register_class(WNDCLASSEXW* pwndclass)
-{
-
-   WNDCLASSEXW wndcls;
-
-   if (GetClassInfoExW(pwndclass->hInstance, pwndclass->lpszClassName, &wndcls))
-
-   {
-
-      return true;
-
-   }
-
-   pwndclass->cbSize = sizeof(WNDCLASSEXW);
-
-   if (!::RegisterClassExW(pwndclass))
-   {
-
-      ::u32 dw = GetLastError();
-
-      return false;
-
-   }
-
-   bool bRet = true;
-
-   return bRet;
-
-}
-
-
-CLASS_DECL_WINDOWING_WIN32 WNDPROC windows_user_interaction_impl_get_window_procedure()
-{
-
-   return &__window_procedure;
-
-}
-
-
 

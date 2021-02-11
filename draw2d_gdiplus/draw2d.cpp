@@ -52,6 +52,13 @@ namespace draw2d_gdiplus
    }
 
 
+   string draw2d::write_text_get_default_library_name()
+   {
+
+      return "win32";
+
+   }
+
 } // namespace draw2d_gdiplus
 
 

@@ -3,6 +3,23 @@
 #include "framework.h"
 
 
+// http ://stackoverflow.com/questions/1913468/how-to-determine-the-size_i32-of-an-icon-from-a-hicon
+// http://stackoverflow.com/users/739731/sergey
+
+
+struct MYICON_INFO
+{
+
+   int     nWidth;
+   int     nHeight;
+   int     nBitsPerPixel;
+
+};
+
+
+MYICON_INFO MyGetIconInfo(HICON hIcon);
+
+
 namespace windowing_win32
 {
 
@@ -30,7 +47,19 @@ namespace windowing_win32
    }
 
 
-   bool icon::load_file(string strPath)
+   bool icon::add_icon(HICON hicon)
+   {
+
+      auto info = MyGetIconInfo(hicon);
+
+      m_iconmap[{info.nWidth, info.nHeight}] = hicon;
+      
+      return true;
+
+   }
+
+
+   ::e_status icon::load_file(string strPath)
    {
 
       strPath = get_context()->defer_process_matter_path(strPath);
@@ -249,21 +278,6 @@ namespace windowing_win32
 
 
 
-#ifdef WINDOWS_DESKTOP
-
-// http ://stackoverflow.com/questions/1913468/how-to-determine-the-size_i32-of-an-icon-from-a-hicon
-// http://stackoverflow.com/users/739731/sergey
-
-struct MYICON_INFO
-{
-   int     nWidth;
-   int     nHeight;
-   int     nBitsPerPixel;
-};
-
-MYICON_INFO MyGetIconInfo(HICON hIcon);
-
-#endif
 
 #ifdef WINDOWS_DESKTOP
 

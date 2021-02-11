@@ -17,7 +17,7 @@ namespace draw2d_gdiplus
 
       virtual ::e_status initialize(::layered * pobjectContext) override;
 
-
+      virtual string write_text_get_default_library_name() override;
 
    };
 

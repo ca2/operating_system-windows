@@ -1,7 +1,4 @@
 #include "framework.h"
-#if !BROAD_PRECOMPILED_HEADER
-#include "_windows.h"
-#endif
 #include "aura/message.h"
 #include "aura/procedure.h"
 #include "system_interaction.h"
@@ -59,7 +56,7 @@ namespace windowing_win32
    void system_interaction::_001OnDestroy(::message::message * pmessage)
    {
 
-      __pointer(::message::base) pbase(pmessage);
+      __pointer(::user::message) pusermessage(pmessage);
 
       ::output_debug_string("system_interaction::_001OnDestroy");
 
@@ -69,25 +66,25 @@ namespace windowing_win32
    void system_interaction::_001OnMessage(::message::message * pmessage)
    {
 
-      __pointer(::message::base) pbase(pmessage);
+      __pointer(::user::message) pusermessage(pmessage);
 
-      if (pbase != nullptr)
+      if (pusermessage != nullptr)
       {
 
-         wparam wparam = pbase->m_wparam;
+         wparam wparam = pusermessage->m_wparam;
 
-         lparam lparam = pbase->m_lparam;
+         lparam lparam = pusermessage->m_lparam;
 
          string strLparamString;
 
-         if (pbase->m_id == WM_SETTINGCHANGE && wparam == 0)
+         if (pusermessage->m_id == WM_SETTINGCHANGE && wparam == 0)
          {
 
             strLparamString = (const WCHAR *)(LPARAM(lparam));
 
          }
 
-         if (pbase->m_id == WM_FONTCHANGE)
+         if (pusermessage->m_id == WM_FONTCHANGE)
          {
 
 
@@ -103,16 +100,16 @@ namespace windowing_win32
          //}
          }
          else if (
-            pbase->m_id == WM_SETTINGCHANGE &&
+            pusermessage->m_id == WM_SETTINGCHANGE &&
             strLparamString == "ImmersiveColorSet")
          {
 
             System.process_subject(id_os_dark_mode);
 
          }
-         else if (pbase->m_id == e_message_display_change ||
-            (pbase->m_id == WM_SETTINGCHANGE &&
-               (pbase->m_wparam == SPI_SETWORKAREA)))
+         else if (pusermessage->m_id == e_message_display_change ||
+            (pusermessage->m_id == WM_SETTINGCHANGE &&
+               (pusermessage->m_wparam == SPI_SETWORKAREA)))
          {
 
             output_debug_string("test");

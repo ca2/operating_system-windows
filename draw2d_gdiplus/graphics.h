@@ -264,8 +264,8 @@ namespace draw2d_gdiplus
 
 
 
-      bool frame_rect(const ::rectangle_f64 & rectangle, ::draw2d::brush* pBrush) override;
-      bool invert_rect(const ::rectangle_f64 & rectangle) override;
+      bool frame_rectangle(const ::rectangle_f64 & rectangle, ::draw2d::brush* pBrush) override;
+      bool invert_rectangle(const ::rectangle_f64 & rectangle) override;
       //bool draw(const ::point_i32 & point, ::draw2d::icon * picon, const ::size_i32 & size) override;
       //bool DrawIcon(double x, double y, ::draw2d::icon * picon, i32 cx, i32 cy, UINT istepIfAniCur, HBRUSH hbrFlickerFreeDraw, UINT diFlags) override;
       //bool DrawState(const ::point_i32 & point, const ::size_i32 & size, HBITMAP hBitmap, UINT nFlags,
@@ -320,15 +320,15 @@ namespace draw2d_gdiplus
       bool draw_polygon(const POINT_F64 * ppoints, count nCount) override;
       //bool fill_polygon(const POINT * ppoints, count nCount) override;
       bool fill_polygon(const POINT_F64 * ppoints, count nCount) override;
-      using ::draw2d::graphics::rectangle_i32;
-      using ::draw2d::graphics::draw_rect;
-      using ::draw2d::graphics::fill_rect;
+      using ::draw2d::graphics::rectangle;
+      using ::draw2d::graphics::draw_rectangle;
+      using ::draw2d::graphics::fill_rectangle;
 
-      virtual bool rectangle_i32(const ::rectangle_f64 & rectangle) override;
-      virtual bool draw_rect(const ::rectangle_f64 & rectangle, ::draw2d::pen * ppen) override;
-      virtual bool fill_rect(const ::rectangle_f64 & rectangle, ::draw2d::brush * pbrush) override;
+      virtual bool rectangle(const ::rectangle_f64 & rectangle) override;
+      virtual bool draw_rectangle(const ::rectangle_f64 & rectangle, ::draw2d::pen * ppen) override;
+      virtual bool fill_rectangle(const ::rectangle_f64 & rectangle, ::draw2d::brush * pbrush) override;
 
-      virtual bool round_rect(const ::rectangle_f64 & rectangle, double dRadius) override;
+      virtual bool round_rectangle(const ::rectangle_f64 & rectangle, double dRadius) override;
 
 
       using image_drawer::_draw_raw;
@@ -433,9 +433,9 @@ namespace draw2d_gdiplus
       //virtual i32 GetTextFace(count nCount, LPTSTR pszFacename) override;
 
       //virtual i32 GetTextFace(string & rString) override;
-      virtual bool get_text_metrics(::draw2d::text_metric * pMetrics) override;
+      virtual bool get_text_metrics(::write_text::text_metric * pMetrics) override;
 
-      virtual bool get_output_text_metrics(::draw2d::text_metric * pMetrics) override;
+      virtual bool get_output_text_metrics(::write_text::text_metric * pMetrics) override;
 
       //virtual i32 SetTextJustification(i32 nBreakExtra, i32 nBreakCount) override;
       //virtual i32 GetTextCharacterExtra() override;
@@ -564,15 +564,15 @@ namespace draw2d_gdiplus
 
       //                  ::draw2d::brush* pBrush = nullptr, ::draw2d::brush* pBrushLast = nullptr) override;
 
-      //void fill_rect(const ::rectangle_i32 & rectangle, const ::color::color & color) override;
+      //void fill_rectangle(const ::rectangle_i32 & rectangle, const ::color::color & color) override;
 
-      virtual bool fill_rect(const ::rectangle_f64 & rectangle, const ::color::color & color) override;
+      virtual bool fill_rectangle(const ::rectangle_f64 & rectangle, const ::color::color & color) override;
 
       //virtual void draw_3drect(const ::rectangle_i32 & rectangle, const ::color::color & colorTopLeft, const ::color::color& colorBottomRight, const ::e_border & eborder = e_border_all) override;
       virtual bool draw_3drect(const ::rectangle_f64 & rectangle, const ::color::color & colorTopLeft, const ::color::color& colorBottomRight, const ::e_border & eborder = e_border_all) override;
 
-      //virtual bool draw_rect(const ::rectangle_i32& rectangle, const ::color::color& color, const ::e_border & eborder = e_border_all);
-      virtual bool draw_rect(const rectangle_f64& rectangle_f64, const ::color::color& color, const ::e_border & eborder = e_border_all);
+      //virtual bool draw_rectangle(const ::rectangle_i32& rectangle, const ::color::color& color, const ::e_border & eborder = e_border_all);
+      virtual bool draw_rectangle(const rectangle_f64& rectangle_f64, const ::color::color& color, const ::e_border & eborder = e_border_all);
 
 #ifdef DEBUG
       virtual void assert_valid() const override;
@@ -589,7 +589,7 @@ namespace draw2d_gdiplus
 
       virtual bool set_compositing_quality(::draw2d::e_compositing_quality ecompositingquality) override;
 
-      virtual bool set_text_rendering_hint(::draw2d::e_text_rendering_hint etextrendering) override;
+      virtual bool set_text_rendering_hint(::write_text::enum_rendering etextrendering) override;
 
       //virtual void * get_os_data() const override;
       //virtual void * get_os_data_ex(int i) const override;
@@ -615,7 +615,7 @@ namespace draw2d_gdiplus
       //virtual bool draw_line(const ::point_f64 & point1, const ::point_f64 & point2, ::draw2d::pen * ppen) override;
 
 
-      //virtual void enum_fonts(::draw2d::font_enum_item_array & itema) override;
+      //virtual void enum_fonts(::write_text::font_enum_item_array & itema) override;
 
       virtual bool prefer_mapped_image_on_mix() override;
 

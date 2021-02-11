@@ -128,7 +128,7 @@ namespace production
    void view::_001OnSize(::message::message * pmessage)
    {
       UNREFERENCED_PARAMETER(pmessage);
-//      __pointer(::message::size_i32) psize(pmessage);
+//      __pointer(::message::size) psize(pmessage);
 
       ::rectangle_i32 rectDesktop;
       best_monitor(rectDesktop);
@@ -177,7 +177,7 @@ namespace production
 //      auto sz = pgraphics->GetTextExtent("qg");
       m_iLineHeight = max(1, pgraphics->get_current_font()->get_height());
 
-      pgraphics->fill_rect(rectClient, ARGB(255, 255, 255, 255));
+      pgraphics->fill_rectangle(rectClient, argb(255, 255, 255, 255));
 
       ::rectangle_i32 rectText(rectClient);
 
@@ -201,9 +201,9 @@ namespace production
       //pgraphics->Draw3dRect(rectText, rgb(200, 200, 200), rgb(200, 200, 200));
       pgraphics->SelectClipRgn(rgnClip);
       //single_lock sl(&m_pproduction->m_mutexStatus, true);
-      //pgraphics->set_color(ARGB(0xcc, 90, 90, 90));
+      //pgraphics->set_color(argb(0xcc, 90, 90, 90));
       ::draw2d::brush_pointer brush(e_create);
-      brush->create_solid(ARGB(0xcc, 90, 90, 90));
+      brush->create_solid(argb(0xcc, 90, 90, 90));
       pgraphics->SelectObject(brush);
       for(i32 i = iStart; i < m_pproduction->m_straStatus.get_size() && y < rectText.bottom; i++)
       {
@@ -229,8 +229,8 @@ namespace production
       else
       {
 
-         pgraphics->fill_rect(rectArea, ARGB(255, 100, 200, 255));
-         pgraphics->set_text_color(ARGB(255, 255, 255, 255));
+         pgraphics->fill_rectangle(rectArea, argb(255, 100, 200, 255));
+         pgraphics->set_text_color(argb(255, 255, 255, 255));
 
          pgraphics->draw_text("Production", rectArea, e_align_horizontal_center | e_align_vertical_center);
 
@@ -263,7 +263,7 @@ namespace production
       //rectangle.null();
 
       //if(!m_pscrollbarHorizontal->create_window(
-      // orientation_horizontal,
+      // e_orientation_horizontal,
       // WS_CHILD
       // | WS_VISIBLE,
       // rectangle,
@@ -276,7 +276,7 @@ namespace production
       //  rectangle.null();
 
       //if(!m_pscrollbarVertical->create_window(
-      // orientation_vertical,
+      // e_orientation_vertical,
       // WS_CHILD
       // | WS_VISIBLE,
       // rectangle,
@@ -290,10 +290,10 @@ namespace production
       SetTimer(3003, 300, nullptr);
       SetTimer(543218, 200, nullptr);
       //m_pimageV->load_image("wild_mountains_and_valleys-123.png");
-      //System.draw2d().imaging().free(pfi);
+      //System.draw2d()->imaging().free(pfi);
 
 /*      //m_pimage->load_image("bambu49transr.png");
-      //System.draw2d().imaging().free(pfi);
+      //System.draw2d()->imaging().free(pfi);
 
 
 
@@ -518,8 +518,8 @@ namespace production
 
    void view::_001OnUser(::message::message * pmessage)
    {
-      __pointer(::message::base) pbase(pmessage);
-      if(pbase->m_wparam == 1)
+      __pointer(::user::message) pusermessage(pmessage);
+      if(pusermessage->m_wparam == 1)
       {
          i32 iLineHeight = m_iLineHeight;
          {
@@ -541,7 +541,7 @@ namespace production
          }
          set_need_redraw();
       }
-      else if(pbase->m_wparam == 2)
+      else if(pusermessage->m_wparam == 2)
       {
 
          string_array stra;
@@ -570,7 +570,7 @@ namespace production
          pdocument->get_operation_doc(true)->m_thread.kick();
 
       }
-      else if(pbase->m_wparam == 0x1000)
+      else if(pusermessage->m_wparam == 0x1000)
       {
          if(m_iStep == 2)
          {

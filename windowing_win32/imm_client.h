@@ -10,6 +10,7 @@ public:
    string                                       m_strImeComposition;
    bool                                         m_bImeCandidateOpened;
    bool                                         m_bImeCancelling;
+   
 
 
    imm_client();
@@ -34,6 +35,10 @@ public:
    virtual void insert_text(string str, bool bForceNewStep, const ::action_context & context) override;
 
    virtual bool is_text_composition_active() const;
+
+   virtual string get_ime_composition() const;
+
+   virtual void clear_ime_composition();
 
 
 };

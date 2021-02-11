@@ -75,7 +75,7 @@ namespace draw2d_gdiplus
 
    // IMPLEMENT_DYNAMIC(pen, ::draw2d::object)
    // IMPLEMENT_DYNAMIC(::draw2d::brush, ::draw2d::object)
-   // IMPLEMENT_DYNAMIC(::draw2d::font, ::draw2d::object)
+   // IMPLEMENT_DYNAMIC(::write_text::font, ::draw2d::object)
    // IMPLEMENT_DYNAMIC(::draw2d::bitmap, ::draw2d::object)
    // IMPLEMENT_DYNAMIC(::draw2d::palette, ::draw2d::object)
    // IMPLEMENT_DYNAMIC(::draw2d::region, ::draw2d::object)
@@ -122,7 +122,7 @@ namespace draw2d_gdiplus
 
             if(graphicsMem->set(pDest))
             {
-               graphicsMem->fill_rect(0, 0, bm.bmWidth, bm.bmHeight, crBackground);
+               graphicsMem->fill_rectangle(0, 0, bm.bmWidth, bm.bmHeight, crBackground);
 
                graphicsMem->SetBkColor(rgb(255, 255, 255));
 
@@ -173,7 +173,7 @@ namespace draw2d_gdiplus
          graphicsMem->SetBkColor(rgb(255, 255, 255));
          graphicsMask->BitBlt(0, 0, bm.bmWidth, bm.bmHeight, graphicsMem, 0, 0, NOTSRCERASE);
 
-         pgraphics->fill_rect(x, y, bm.bmWidth, bm.bmHeight, crBackground);
+         pgraphics->fill_rectangle(x, y, bm.bmWidth, bm.bmHeight, crBackground);
 
          pgraphics->SetBkColor(rgb(255, 255, 255));
 
@@ -242,7 +242,7 @@ namespace draw2d_gdiplus
                {
                   color1 = graphicsDest->SetTextColor(color1);
                   color2 = graphicsDest->SetBkColor(color2);
-                  graphicsDest->fill_rect(rectangle_i32(0, 0, bm.bmWidth, bm.bmHeight), &brChecker);
+                  graphicsDest->fill_rectangle(rectangle_i32(0, 0, bm.bmWidth, bm.bmHeight), &brChecker);
                   graphicsDest->SetTextColor(color1);
                   graphicsDest->SetBkColor(color2);
 
@@ -302,7 +302,7 @@ namespace draw2d_gdiplus
          // Checker the background with white and crBackground
          color1 = pgraphics->SetTextColor(color1);
          color2 = pgraphics->SetBkColor(color2);
-         pgraphics->fill_rect(rectangle_i32(x, y, x + bm.bmWidth, y + bm.bmHeight), &brChecker);
+         pgraphics->fill_rectangle(rectangle_i32(x, y, x + bm.bmWidth, y + bm.bmHeight), &brChecker);
          pgraphics->SetTextColor(color1);
          pgraphics->SetBkColor(color2);
 

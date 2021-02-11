@@ -84,7 +84,7 @@ namespace draw2d_gdi
       ::draw2d::pen *      get_current_pen() override;
       ::draw2d::brush *    get_current_brush() override;
       ::draw2d::palette *  get_current_palette() override;
-      ::draw2d::font *     get_current_font() override;
+      ::write_text::font *     get_current_font() override;
       ::draw2d::bitmap *   get_current_bitmap() override;
 
       // for bidi and mirrored localization
@@ -120,13 +120,13 @@ namespace draw2d_gdi
       //virtual ::draw2d::object* SelectStockObject(int nIndex) override;
       virtual ::draw2d::pen* SelectObject(::draw2d::pen* pPen) override;
       virtual ::draw2d::brush* SelectObject(::draw2d::brush* pBrush) override;
-      virtual ::draw2d::font* SelectObject(::draw2d::font* pFont) override;
+      virtual ::write_text::font* SelectObject(::write_text::font* pFont) override;
       virtual ::draw2d::bitmap* SelectObject(::draw2d::bitmap* pBitmap) override;
       virtual int SelectObject(::draw2d::region* pRgn) override;       // special return for regions
 
       virtual void on_select_object(::draw2d::object * pobjectParam);
 
-      bool SelectFont(::draw2d::font * pfont) override;
+      bool SelectFont(::write_text::font * pfont) override;
 
 
 
@@ -268,9 +268,9 @@ namespace draw2d_gdi
 
 
       // Simple Drawing Functions
-      bool fill_rect(const ::rectangle_i32 & rectangle, ::draw2d::brush* pBrush) override;
-      void frame_rect(const ::rectangle_i32 & rectangle, ::draw2d::brush* pBrush) override;
-      void invert_rect(const ::rectangle_i32 & rectangle) override;
+      bool fill_rectangle(const ::rectangle_i32 & rectangle, ::draw2d::brush* pBrush) override;
+      void frame_rectangle(const ::rectangle_i32 & rectangle, ::draw2d::brush* pBrush) override;
+      void invert_rectangle(const ::rectangle_i32 & rectangle) override;
       bool DrawIcon(int x, int y, ::draw2d::icon * picon) override;
       bool DrawIcon(const ::point_i32 & point, ::draw2d::icon * picon) override;
       bool DrawIcon(int x, int y, ::draw2d::icon * picon, int cx, int cy, UINT istepIfAniCur, HBRUSH hbrFlickerFreeDraw, UINT diFlags) override;
@@ -291,7 +291,7 @@ namespace draw2d_gdi
       //bool DrawState(const ::point_i32 & point, const ::size_i32 & size, DRAWSTATEPROC lpDrawProc,
       //               LPARAM lData, UINT nFlags, ::draw2d::brush* pBrush = nullptr) override;
 
-      virtual bool draw_rect(const ::rectangle_i32 & rectangle, ::draw2d::pen * ppen) override;
+      virtual bool draw_rectangle(const ::rectangle_i32 & rectangle, ::draw2d::pen * ppen) override;
 
       // Ellipse and Polygon Functions
       bool Chord(int x1, int y1, int x2, int y2, int x3, int y3, int x4, int y4) override;
@@ -303,8 +303,8 @@ namespace draw2d_gdi
       bool fill_ellipse(const ::rectangle_f64 & rectangle) override;
 
       bool rectangle_i32(const ::rectangle_i32 & rectangle) override;
-      bool draw_rect(const ::rectangle_i32 & rectangle) override;
-      bool fill_rect(const ::rectangle_i32 & rectangle) override;
+      bool draw_rectangle(const ::rectangle_i32 & rectangle) override;
+      bool fill_rectangle(const ::rectangle_i32 & rectangle) override;
 
       bool polygon_i32(const POINT * ppoint, count nCount) override;
       bool draw_polygon(const POINT * ppoint,count nCount) override;
@@ -317,7 +317,7 @@ namespace draw2d_gdi
       bool Pie(int x1, int y1, int x2, int y2, int x3, int y3, int x4, int y4) override;
       bool Pie(const ::rectangle_i32 & rectangle, const ::point_i32 & pointStart, const ::point_i32 & pointEnd) override;
 
-      bool round_rect(const ::rectangle_i32 & rectangle, const ::point_i32 & lppt) override;
+      bool round_rectangle(const ::rectangle_i32 & rectangle, const ::point_i32 & lppt) override;
 
       // Bitmap Functions
       bool PatBlt(int x, int y, int nWidth, int nHeight, u32 dwRop) override;
@@ -379,8 +379,8 @@ namespace draw2d_gdi
       virtual int GetTextFace(count nCount, LPTSTR lpszFacename) override;
       virtual int GetTextFace(string & rString) override;
 
-      virtual bool get_text_metrics(::draw2d::text_metric * lpMetrics) override;
-      virtual bool get_output_text_metrics(::draw2d::text_metric * lpMetrics) override;
+      virtual bool get_text_metrics(::write_text::text_metric * lpMetrics) override;
+      virtual bool get_output_text_metrics(::write_text::text_metric * lpMetrics) override;
 
       virtual int SetTextJustification(int nBreakExtra, int nBreakCount) override;
       virtual int GetTextCharacterExtra() override;
@@ -475,8 +475,8 @@ namespace draw2d_gdi
       //void DrawDragRect(const ::rectangle_i32 & rectangle, const ::size_i32 & size,
       //                  const ::rectangle_i32 & rectLast, const ::size_i32 & sizeLast, ::draw2d::brush* pBrush = nullptr, ::draw2d::brush* pBrushLast = nullptr) override;
 
-      using ::draw2d::graphics::fill_rect;
-      void fill_rect(const ::rectangle_i32 & rectangle, COLORREF cr) override;
+      using ::draw2d::graphics::fill_rectangle;
+      void fill_rectangle(const ::rectangle_i32 & rectangle, COLORREF cr) override;
 
       using ::draw2d::graphics::draw3d_rect;
       void draw3d_rect(const ::rectangle_i32 & rectangle, COLORREF crTopLeft, COLORREF crBottomRight, const ::e_border & eborder = e_border_all) override;

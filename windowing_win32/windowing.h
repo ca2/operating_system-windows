@@ -12,12 +12,19 @@ namespace windowing_win32
    public:
 
 
-      i64_map < ::user::enum_key >     m_mapKey;
+      //i64_map < ::user::enum_key >     m_mapKey;
 
 
       critical_section                 m_criticalsection;
       window_map                       m_windowmap;
       __pointer(class display)         m_pdisplay;
+
+//#ifdef WINDOWS_DESKTOP
+
+      //#pragma message("at macos??")
+      __pointer(system_interaction)    m_psysteminteraction;
+
+//#endif
 
 
       windowing();
@@ -33,6 +40,15 @@ namespace windowing_win32
       virtual void finalize() override;
 
 
+      virtual bool defer_create_system_window();
+      //virtual __pointer(::user::interaction) create_system_window();
+      result_pointer < system_interaction > create_system_window();
+
+
+      inline system_interaction * system_window() { return m_psysteminteraction; }
+
+
+
       virtual ::windowing::window * window(oswindow oswindow) override;
 
       virtual ::windowing_win32::window * _window(HWND hwnd);
@@ -42,16 +58,19 @@ namespace windowing_win32
       //__pointer(::windowing::monitor) get_main_monitor();
 
 
-      virtual __pointer(::message::base) get_message_base(MESSAGE * pmsg);
+      virtual result_pointer < ::windowing::icon > load_icon(const ::payload & payloadFile) override;
 
 
-      virtual void enum_draw2d_fonts(::draw2d::font_enum_item_array & itema) override;
+      virtual __pointer(::user::message) get_user_message(MESSAGE * pmsg);
+
+
+      //virtual void enum_draw2d_fonts(::write_text::font_enum_item_array & itema) override;
       
       
       virtual ::windowing::window * get_desktop_window() override;
 
 
-      virtual ::windowing::window * get_active_window() override;
+      virtual ::windowing::window * get_active_window(::thread * pthread) override;
 
 
       virtual void __synthesizes_creates_styles(::user::interaction * pinteraction, ::u32 & nExStyle, ::u32 & nStyle);
@@ -61,17 +80,16 @@ namespace windowing_win32
       virtual HWND zorder_to_hwnd(const zorder & zorder);
 
       
-      virtual ::windowing::window * get_focus() override;
+      virtual ::windowing::window * get_keyboard_focus(::thread * pthread) override;
 
 
-      virtual ::windowing::window * get_capture() override;
+      virtual ::windowing::window * get_mouse_capture(::thread * pthread) override;
 
 
       virtual ::e_status release_capture() override;
 
 
-      virtual void get_cursor_pos(POINT_I32 * ppoint);
-
+      
 
       virtual ::e_status remove_window(::windowing::window * pwindow);
     
@@ -82,6 +100,15 @@ namespace windowing_win32
       //virtual bool set_default_cursor(::user::interaction * pinteraction, enum_cursor ecursor);
       virtual ::windowing::cursor * get_cursor();
       virtual ::windowing::cursor * get_default_cursor();
+
+
+      virtual int message_box(const char * pszMessage, const char * pszTitle, const ::e_message_box & emessagebox);
+
+
+      virtual void get_cursor_pos(POINT_I32 * ppoint);
+
+      virtual ::e_status set_cursor_position(const ::point_i32 & point);
+
 
 
       virtual int_bool point_is_window_origin(POINT_I32 ptHitTest, oswindow oswindowExclude, int iMargin);
@@ -99,18 +126,18 @@ namespace windowing_win32
       __pointer(::windowing::window) window_from_point(::aura::application * papp, const ::point_i32 & point);
 
       
-      __pointer(::user::interaction) create_system_window();
 
 
       static BOOL CALLBACK GetAppsEnumWindowsProc(HWND hwnd, LPARAM lParam);
 
 
-      virtual void set(::message::key * pkey, HWND hwnd, ::layered * playeredUserPrimitive, const ::id & id, wparam wparam, ::lparam lparam);
-      virtual void set(::message::mouse * pmouse, HWND hwnd, ::layered * playeredUserPrimitive, const ::id & id, wparam wparam, ::lparam lparam);
+      virtual void set(::message::key * pkey, oswindow oswindow, ::windowing::window * pwindow, const ::id & id, wparam wparam, ::lparam lparam);
+      virtual void set(::message::mouse * pmouse, oswindow oswindow, ::windowing::window * pwindow, const ::id & id, wparam wparam, ::lparam lparam);
 
 
-      virtual void initialize_keyboard(::user::keyboard * pkeyboard) override;
+      virtual void initialize_keyboard(::windowing::keyboard * pkeyboard) override;
 
+      virtual ::e_status lock_set_foreground_window(bool bLock) override;
 
    };
 

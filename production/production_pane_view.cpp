@@ -285,8 +285,8 @@ namespace production
 
    void pane_view::_001OnUserMessage(::message::message * pmessage)
    {
-      __pointer(::message::base) pbase(pmessage);
-      if(pbase->m_wparam == 1)
+      __pointer(::user::message) pusermessage(pmessage);
+      if(pusermessage->m_wparam == 1)
       {
          set_cur_tab_by_id("tabbed_file_manager");
       }

@@ -74,6 +74,13 @@ namespace windowing_win32
 
    }
 
+   ::e_status cursor::initialize_system_default()
+   {
+
+      return load_default_cursor(m_ecursor);
+
+   }
+
 
 } // namespace windowing_win32
 

@@ -32,7 +32,7 @@ namespace production
 
       virtual void on_request(::create * pcreate);
 
-	   virtual void route_command_message(::user::command * pcommand);
+	   virtual void route_command_message(::message::command * pcommand);
    		
 
       virtual void OnFileManagerOpenFile(

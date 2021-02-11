@@ -6,7 +6,7 @@ namespace draw2d_gdi
 
 
    font::font(::layered * pobjectContext) :
-      ::draw2d::font(pobject)
+      ::write_text::font(pobject)
    {
 
    }
@@ -50,7 +50,7 @@ namespace draw2d_gdi
    }
 
 
-   void font::construct(const ::draw2d::font & fontParam)
+   void font::construct(const ::write_text::font & fontParam)
    {
 
       class font & font = const_cast < ::draw2d_gdi::font & > (dynamic_cast < const ::draw2d_gdi::font & > (fontParam));

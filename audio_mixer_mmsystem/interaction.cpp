@@ -36,9 +36,9 @@ namespace multimedia
 
          __pointer(audio_mixer) pmixer = m_pmixer.get();
          
-         pmixer->OnMixerControlChange((HMIXER)pbase->m_wparam.m_number, (u32)pbase->m_lparam);
+         pmixer->OnMixerControlChange((HMIXER)pusermessage->m_wparam.m_number, (u32)pusermessage->m_lparam);
 
-         pbase->m_lresult = 0;
+         pusermessage->m_lresult = 0;
 
       }
 
@@ -50,9 +50,9 @@ namespace multimedia
 
          __pointer(audio_mixer) pmixer = m_pmixer.get();
 
-         pmixer->OnMixerLineChange((HMIXER) pbase->m_wparam.m_number, (u32) pbase->m_lparam);
+         pmixer->OnMixerLineChange((HMIXER) pusermessage->m_wparam.m_number, (u32) pusermessage->m_lparam);
 
-         pbase->m_lresult = 0;
+         pusermessage->m_lresult = 0;
 
       }
 

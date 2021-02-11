@@ -6,12 +6,9 @@ namespace draw2d_gdiplus
 
 
    class CLASS_DECL_DRAW2D_GDIPLUS font :
-      virtual public ::draw2d::font
+      virtual public ::write_text::font
    {
    public:
-
-
-      Gdiplus::Font *   m_pfont;
 
 
       font();
@@ -26,7 +23,10 @@ namespace draw2d_gdiplus
       virtual bool create(::draw2d::graphics * pgraphics, ::i8 iCreate) override;
       virtual void destroy() override;
 
-      //virtual bool GetLogFont(LOGFONTW * pfontw) override;
+
+      Gdiplus::Font * get_gdiplus_font() { return (Gdiplus::Font *) m_osdata[0]; }
+      void set_gdiplus_font(Gdiplus::Font * pfont) { m_osdata[0] = pfont; }
+
 
       virtual e_char_set calc_char_set(::draw2d::graphics * pgraphics);
 

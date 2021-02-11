@@ -7,7 +7,7 @@ namespace draw2d_gdi
 
    class CLASS_DECL_DRAW2D_GDI font :
       virtual public ::draw2d_gdi::object,
-      virtual public ::draw2d::font
+      virtual public ::write_text::font
    {
    public:
 
@@ -20,7 +20,7 @@ namespace draw2d_gdi
       virtual bool GetLogFont(LOGFONTW* pLogFont) override;
 
 
-      virtual void construct(const ::draw2d::font & fontParam);
+      virtual void construct(const ::write_text::font & fontParam);
 
 
       virtual bool CreateFontIndirect(const LOGFONTW* lpLogFont);

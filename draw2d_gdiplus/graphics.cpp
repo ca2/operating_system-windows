@@ -149,7 +149,7 @@ namespace draw2d_gdiplus
       m_hdcGraphics     = nullptr;
       m_ppath           = nullptr;
       m_ppathPaint      = nullptr;
-      m_etextrenderinghint  = ::draw2d::text_rendering_hint_none;
+      m_ewritetextrendering  = ::write_text::e_rendering_none;
       m_dFontFactor     = 1.0;
 
       m_pm = new Gdiplus::Matrix();
@@ -227,7 +227,7 @@ namespace draw2d_gdiplus
       if(pgraphics == nullptr)
       {
 
-         //hdc = ::CreateCompatibleDC(nullptr);
+         hdc = ::CreateCompatibleDC(nullptr);
 
       }
       else if(__graphics(pgraphics)->m_hdc != nullptr)
@@ -253,12 +253,12 @@ namespace draw2d_gdiplus
 
       }
 
-      //if (hdc == nullptr)
-      //{
+      if (hdc == nullptr)
+      {
 
-      //   return false;
+         return false;
 
-      //}
+      }
 
       m_hdcGraphics = hdc;
 
@@ -266,7 +266,7 @@ namespace draw2d_gdiplus
 
       m_pgraphics->SetPageUnit(Gdiplus::UnitPixel);
 
-      set_text_rendering_hint(::draw2d::text_rendering_hint_anti_alias);
+      set_text_rendering_hint(::write_text::e_rendering_anti_alias);
 
       set_smooth_mode(::draw2d::smooth_mode_anti_alias_8x8);
 
@@ -376,7 +376,7 @@ namespace draw2d_gdiplus
 
       m_pgraphics->SetPageUnit(Gdiplus::UnitPixel);
 
-      set_text_rendering_hint(::draw2d::text_rendering_hint_anti_alias);
+      set_text_rendering_hint(::write_text::e_rendering_anti_alias);
 
       set_smooth_mode(::draw2d::smooth_mode_anti_alias_8x8);
 
@@ -785,27 +785,27 @@ namespace draw2d_gdiplus
    }
 
 
-   bool graphics::frame_rect(const ::rectangle_f64 & rectangle, ::draw2d::brush * pbrush)
+   bool graphics::frame_rectangle(const ::rectangle_f64 & rectangle, ::draw2d::brush * pbrush)
    {
 
-      return draw_rect(rectangle, pbrush->m_color);
+      return draw_rectangle(rectangle, pbrush->m_color);
 
    }
 
 
-   bool graphics::rectangle_i32(const ::rectangle_f64 & rectangle)
+   bool graphics::rectangle(const ::rectangle_f64 & rectangle)
    {
 
-      bool bOk1 = fill_rect(rectangle);
+      bool bOk1 = fill_rectangle(rectangle);
 
-      bool bOk2 = draw_rect(rectangle);
+      bool bOk2 = draw_rectangle(rectangle);
 
       return bOk1 && bOk2;
 
    }
 
 
-   bool graphics::draw_rect(const ::rectangle_f64 & rectParam, ::draw2d::pen * ppen)
+   bool graphics::draw_rectangle(const ::rectangle_f64 & rectParam, ::draw2d::pen * ppen)
    {
 
       Gdiplus::Rect rectangle;
@@ -817,7 +817,7 @@ namespace draw2d_gdiplus
    }
 
 
-   bool graphics::invert_rect(const ::rectangle_f64 & rectangle)
+   bool graphics::invert_rectangle(const ::rectangle_f64 & rectangle)
    {
 
       //::draw2d::savedc save(this);
@@ -1276,7 +1276,7 @@ namespace draw2d_gdiplus
    //}
 
 
-   bool graphics::fill_rect(const ::rectangle_f64 & rectParam, ::draw2d::brush * pbrush)
+   bool graphics::fill_rectangle(const ::rectangle_f64 & rectParam, ::draw2d::brush * pbrush)
    {
 
       if (::is_null(pbrush))
@@ -1299,7 +1299,7 @@ namespace draw2d_gdiplus
    }
 
 
-   //bool graphics::fill_rect(const ::rectangle_f64 & rectParam, ::draw2d::brush * pbrush)
+   //bool graphics::fill_rectangle(const ::rectangle_f64 & rectParam, ::draw2d::brush * pbrush)
    //{
 
    //   Gdiplus::RectF rectangle_i32;
@@ -1311,7 +1311,7 @@ namespace draw2d_gdiplus
    //}
 
 
-   bool graphics::round_rect(const ::rectangle_f64 & rectangle, double dRadius)
+   bool graphics::round_rectangle(const ::rectangle_f64 & rectangle, double dRadius)
    {
 
       __throw(todo());
@@ -1319,7 +1319,7 @@ namespace draw2d_gdiplus
    }
 
 
-   //bool graphics::round_rect(const ::rectangle_f64 & rectangle, const ::point_f64 & point)
+   //bool graphics::round_rectangle(const ::rectangle_f64 & rectangle, const ::point_f64 & point)
    //{
 
    //   __throw(todo());
@@ -2086,7 +2086,7 @@ namespace draw2d_gdiplus
       else
       {
 
-         fill_rect(::rectd_dim(point.x, point.y, 1, 1), color);
+         fill_rectangle(::rectd_dim(point.x, point.y, 1, 1), color);
 
       }
 
@@ -2116,7 +2116,7 @@ namespace draw2d_gdiplus
       else
       {
 
-         fill_rect(::rectd_dim(point.x, point.y, 1, 1), colorChange);
+         fill_rectangle(::rectd_dim(point.x, point.y, 1, 1), colorChange);
 
       }
 
@@ -2322,7 +2322,7 @@ namespace draw2d_gdiplus
    //}
 
 
-   bool graphics::get_text_metrics(::draw2d::text_metric * pmetric)
+   bool graphics::get_text_metrics(::write_text::text_metric * pmetric)
    {
 
       if (m_pgraphics == nullptr)
@@ -2379,7 +2379,7 @@ namespace draw2d_gdiplus
    }
 
 
-   bool graphics::get_output_text_metrics(::draw2d::text_metric * pmetric)
+   bool graphics::get_output_text_metrics(::write_text::text_metric * pmetric)
 
    {
 
@@ -2606,7 +2606,7 @@ namespace draw2d_gdiplus
 
       m_pgraphics->SetPageUnit(Gdiplus::UnitPixel);
 
-      set_text_rendering_hint(::draw2d::text_rendering_hint_anti_alias);
+      set_text_rendering_hint(::write_text::e_rendering_anti_alias);
 
       set_smooth_mode(::draw2d::smooth_mode_anti_alias_8x8);
 
@@ -3497,7 +3497,7 @@ namespace draw2d_gdiplus
    //            rgnLast.create_rect(0, 0, 0, 0);
    //            rgnOutside.SetRectRgn(pRectLast);
 
-   //            rectangle_i32 = *pRectLast;
+   //            rectangle = *pRectLast;
 
    //            rectangle.inflate(-sizeLast.cx, -sizeLast.cy);
    //            rectangle.intersect(rectangle, pRectLast);
@@ -3538,7 +3538,7 @@ namespace draw2d_gdiplus
    //   */
    //}
 
-   /*void graphics::fill_rect(const rectangle_i32 &  prectangle, COLORREF clr)
+   /*void graphics::fill_rectangle(const rectangle_i32 &  prectangle, COLORREF clr)
 
    {
       ::SetBkColor(get_handle1(), clr);
@@ -3547,7 +3547,7 @@ namespace draw2d_gdiplus
    }*/
 
 
-   bool graphics::fill_rect(const ::rectangle_f64 & rectParam, const ::color::color & color)
+   bool graphics::fill_rectangle(const ::rectangle_f64 & rectParam, const ::color::color & color)
    {
 
       try
@@ -3586,7 +3586,7 @@ namespace draw2d_gdiplus
    }
 
 
-   bool graphics::draw_rect(const ::rectangle_f64 & rectangle, const ::color::color& color, const ::e_border & eborder)
+   bool graphics::draw_rectangle(const ::rectangle_f64 & rectangle, const ::color::color& color, const ::e_border & eborder)
    {
 
       if (!(eborder & (e_border_left | e_border_right | e_border_top | e_border_bottom)))
@@ -3701,7 +3701,7 @@ namespace draw2d_gdiplus
    }
 
 
-   //bool graphics::draw_rect(const ::rectangle_f64& rectangle, const ::color::color& color, const ::e_border & eborder)
+   //bool graphics::draw_rectangle(const ::rectangle_f64& rectangle, const ::color::color& color, const ::e_border & eborder)
    //{
 
    //   if (!(eborder & (e_border_left | e_border_right | e_border_top | e_border_bottom)))
@@ -3811,7 +3811,7 @@ namespace draw2d_gdiplus
       if (colorTopLeft == colorBottomRight)
       {
 
-         return draw_rect(rectangle, colorTopLeft, eborder);
+         return draw_rectangle(rectangle, colorTopLeft, eborder);
 
       }
 
@@ -3926,7 +3926,7 @@ namespace draw2d_gdiplus
    //   if (colorTopLeft == colorBottomRight)
    //   {
 
-   //      draw_rect(rectangle, colorTopLeft, eborder);
+   //      draw_rectangle(rectangle, colorTopLeft, eborder);
 
    //      return;
 
@@ -5214,7 +5214,7 @@ namespace draw2d_gdiplus
 //         }
 //         else if (nObjType == OBJ_FONT)
 //         {
-//            // play back as graphics::set(::draw2d::font*)
+//            // play back as graphics::set(::write_text::font*)
 ////               set(::draw2d_gdiplus::font::from_handle(pgraphics->get_context_application(), (HFONT)hObject));
 //            __throw(not_implemented());
 //            break;  // don't play the default record
@@ -5317,10 +5317,10 @@ namespace draw2d_gdiplus
 
       Gdiplus::Status status = Gdiplus::Status::GenericError;
 
-      if (m_pfont.is_set() && m_etextrenderinghint != m_pfont->m_etextrenderinghint)
+      if (m_pfont.is_set() && m_ewritetextrendering != m_pfont->m_erendering)
       {
 
-         set_text_rendering_hint(m_pfont->m_etextrenderinghint);
+         set_text_rendering_hint(m_pfont->m_erendering);
 
       }
 
@@ -5536,11 +5536,11 @@ namespace draw2d_gdiplus
 
          i32 count = strFormat.GetMeasurableCharacterRangeCount();
 
-#undef new
+//#undef new
 
          ap(Gdiplus::Region) regiona(new_array, new Gdiplus::Region[count]);
 
-#define new ACME_NEW
+//#define new ACME_NEW
 
          Gdiplus::RectF box(0.0f, 0.0f, 0.0f, 0.0f);
 
@@ -5639,11 +5639,11 @@ namespace draw2d_gdiplus
 
       Gdiplus::RectF box(0.0f, 0.0f, 128.0f * 1024.0f, 128.0f * 1024.0f);
 
-#undef new
+//#undef new
 
       Gdiplus::Region * pCharRangeRegions = new Gdiplus::Region[count];
 
-#define new ACME_NEW
+//#define new ACME_NEW
 
       m_pgraphics->MeasureCharacterRanges(wstr, (INT) wstr.get_length(), m_pfont->get_os_data < Gdiplus::Font * >(this), box, &strFormat, (INT) count, pCharRangeRegions);
 
@@ -5719,11 +5719,11 @@ namespace draw2d_gdiplus
 
       Gdiplus::RectF box(0.0f, 0.0f, 128.0f * 1024.0f, 128.0f * 1024.0f);
 
-#undef new
+//#undef new
 
       Gdiplus::Region * pCharRangeRegions = new Gdiplus::Region[count];
 
-#define new ACME_NEW
+//#define new ACME_NEW
 
       m_pgraphics->MeasureCharacterRanges(wstr, (INT)wstr.get_length(), m_pfont->get_os_data < Gdiplus::Font * >(this), box, &strFormat, (INT)count, pCharRangeRegions);
 
@@ -5771,7 +5771,6 @@ namespace draw2d_gdiplus
          text.m_wstr = str;
 
       }
-      
 
       Gdiplus::RectF box;
 
@@ -5792,7 +5791,13 @@ namespace draw2d_gdiplus
 
       }
 
-      m_pgraphics->MeasureString(text.m_wstr, (i32) text.m_wstr.get_length(), pfont, origin, &strFormat,  &box);
+      const WCHAR * psz = text.m_wstr;
+
+      int iLen = (i32)text.m_wstr.get_length();
+
+#undef new
+
+      auto status = m_pgraphics->MeasureString(psz, iLen, pfont, origin, &strFormat,  &box);
 
       text.m_size = size_f64((double)(box.Width * m_pfont->m_dFontWidth), (double)(box.Height));
 
@@ -5979,11 +5984,11 @@ namespace draw2d_gdiplus
 
       i32 count = strFormat.GetMeasurableCharacterRangeCount();
 
-#undef new
+//#undef new
 
       Gdiplus::Region * pCharRangeRegions = new Gdiplus::Region[count];
 
-#define new ACME_NEW
+//#define new ACME_NEW
 
       //Gdiplus::RectF box(0.0f, 0.0f, 128.0f * 1024.0f, 128.0f * 1024.0f);
 
@@ -6148,7 +6153,7 @@ namespace draw2d_gdiplus
    }
 
 
-   //bool graphics::fill_rect(const ::rectangle_f64 & rectangle, const ::color::color & color)
+   //bool graphics::fill_rectangle(const ::rectangle_f64 & rectangle, const ::color::color & color)
    //{
 
    //   try
@@ -6255,10 +6260,10 @@ namespace draw2d_gdiplus
 
       set_alpha_mode(::draw2d::alpha_mode_blend);
 
-      //if (m_etextrenderinghint != m_pfont->m_etextrenderinghint)
+      //if (m_erendering != m_pfont->m_erendering)
       {
 
-         set_text_rendering_hint(m_pfont->m_etextrenderinghint);
+         set_text_rendering_hint(m_pfont->m_erendering);
 
       }
 
@@ -6327,11 +6332,11 @@ namespace draw2d_gdiplus
          if (m_ppath != nullptr)
          {
 
-#undef new
+//#undef new
 
             pmNew = new Gdiplus::Matrix();
 
-#define new ACME_NEW
+//#define new ACME_NEW
 
          }
          else
@@ -6704,7 +6709,7 @@ namespace draw2d_gdiplus
    }
 
 
-   bool graphics::set_text_rendering_hint(::draw2d::e_text_rendering_hint etextrenderinghint)
+   bool graphics::set_text_rendering_hint(::write_text::enum_rendering etextrenderinghint)
    {
 
       try
@@ -6719,22 +6724,22 @@ namespace draw2d_gdiplus
 
          switch (etextrenderinghint)
          {
-         case ::draw2d::text_rendering_hint_anti_alias:
+         case ::write_text::e_rendering_anti_alias:
             m_pgraphics->SetTextRenderingHint(Gdiplus::TextRenderingHintAntiAlias);
             break;
-         case ::draw2d::text_rendering_hint_anti_alias_grid_fit:
+         case ::write_text::e_rendering_anti_alias_grid_fit:
             m_pgraphics->SetTextRenderingHint(Gdiplus::TextRenderingHintAntiAliasGridFit);
             break;
-         case ::draw2d::text_rendering_hint_single_bit_per_pixel:
+         case ::write_text::e_rendering_single_bit_per_pixel:
             m_pgraphics->SetTextRenderingHint(Gdiplus::TextRenderingHintSingleBitPerPixel);
             break;
-         case ::draw2d::text_rendering_hint_single_bit_per_pixel_grid_fit:
+         case ::write_text::e_rendering_single_bit_per_pixel_grid_fit:
             m_pgraphics->SetTextRenderingHint(Gdiplus::TextRenderingHintSingleBitPerPixelGridFit);
             break;
-         case ::draw2d::text_rendering_hint_clear_type_grid_fit:
+         case ::write_text::e_rendering_clear_type_grid_fit:
             m_pgraphics->SetTextRenderingHint(Gdiplus::TextRenderingHintClearTypeGridFit);
             break;
-         case ::draw2d::text_rendering_hint_none:
+         case ::write_text::e_rendering_none:
             m_pgraphics->SetTextRenderingHint(Gdiplus::TextRenderingHintSystemDefault);
             break;
          }
@@ -7064,7 +7069,7 @@ namespace draw2d_gdiplus
    }
 
 
-   //void graphics::enum_fonts(::draw2d::font_enum_item_array & itema)
+   //void graphics::enum_fonts(::write_text::font_enum_item_array & itema)
    //{
 
    //   ::draw2d::wingdi_enum_fonts(itema, false, true, true);

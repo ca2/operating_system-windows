@@ -2,7 +2,9 @@
 #include "framework.h"
 #include "window.h"
 
+
 #include <HighLevelMonitorConfigurationAPI.h>
+
 
 ::u32 mc_color_kelvin(MC_COLOR_TEMPERATURE e);
 CLASS_DECL_AURA void black_body(float * r, float * g, float * b, ::u32 dwTemp);

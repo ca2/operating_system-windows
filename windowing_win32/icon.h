@@ -21,7 +21,9 @@ namespace windowing_win32
 
       virtual void * get_os_data(const ::size_i32 & size) const;
       
-      virtual bool load_file(string strPath) override;
+      virtual ::e_status load_file(string strPath) override;
+
+      virtual bool add_icon(HICON hicon);
 
       virtual void get_sizes(array < concrete < ::size_i32 > > & a) override;
 

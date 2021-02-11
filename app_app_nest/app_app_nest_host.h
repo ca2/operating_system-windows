@@ -48,7 +48,7 @@ namespace ca2plugin_container
 
 
 
-      void message_handler(::message::base * pbase);
+      void message_handler(::user::message * pusermessage);
 
 
       virtual void * get_context_system();

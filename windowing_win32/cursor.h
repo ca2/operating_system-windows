@@ -26,6 +26,9 @@ namespace windowing_win32
       virtual ::e_status load_default_cursor(enum_cursor ecursor) override;
 
 
+      virtual ::e_status initialize_system_default() override;
+
+
    };
 
 

@@ -30,6 +30,21 @@ namespace windowing_win32
 
       ::EnumDisplayMonitors(nullptr, nullptr, &display::monitor_enum_proc, (LPARAM)this);
 
+      sync_lock sl(mutex());
+
+      m_monitora.remove_all();
+
+      for (index iMonitor = 0; iMonitor < m_monitorinfoa.get_count(); iMonitor++)
+      {
+
+         auto pmonitor = __new(monitor(m_hmonitora[iMonitor]));
+
+         pmonitor->m_iIndex = iMonitor;
+
+         m_monitora.add(pmonitor);
+
+      }
+
 #elif defined(LINUX)
 
       ::enum_display_monitors(this);
@@ -1024,6 +1039,7 @@ namespace windowing_win32
 
       display * pdisplay = (display *)dwData;
 
+
       pdisplay->monitor_enum(hmonitor, hdcMonitor, prcMonitor);
 
 
@@ -1055,6 +1071,7 @@ namespace windowing_win32
       TRACE("rcMonitor(left, top, right, bottom) %d, %d, %d, %d\n", mi.rcMonitor.left, mi.rcMonitor.top, mi.rcMonitor.right, mi.rcMonitor.bottom);
       TRACE("rcWork(left, top, right, bottom) %d, %d, %d, %d\n", mi.rcWork.left, mi.rcWork.top, mi.rcWork.right, mi.rcWork.bottom);
 
+
    }
 
 
@@ -1077,6 +1094,53 @@ namespace windowing_win32
    //   return iIndex;
 
    //}
+
+
+   bool display::impl_set_wallpaper(index iScreen, string strLocalImagePath)
+   {
+
+      return SystemParametersInfoW(SPI_SETDESKWALLPAPER, 0, wstring(strLocalImagePath), SPIF_UPDATEINIFILE | SPIF_SENDCHANGE) != false;
+
+   }
+
+
+   string display::impl_get_wallpaper(index iScreen)
+   {
+
+      wstring  wstr;
+
+      wstr.get_string_buffer(MAX_PATH * 8);
+      //::u32 uLen = pwsz.memsize();
+
+      if (!SystemParametersInfoW(SPI_GETDESKWALLPAPER, (::u32)wstr.get_storage_length(), wstr.m_pdata, 0))
+      {
+         return "";
+
+      }
+      wstr.release_string_buffer();
+
+      return wstr;
+
+   }
+
+
+   //string user::impl_get_os_desktop_theme()
+   //{
+
+   //   return "";
+
+   //}
+
+
+   //bool user::impl_set_os_desktop_theme(string strTheme)
+   //{
+
+   //   UNREFERENCED_PARAMETER(strTheme);
+
+   //   return true;
+
+   //}
+
 
 
 } // namespace windowing_win32

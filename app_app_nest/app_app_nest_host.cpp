@@ -205,10 +205,10 @@ namespace ca2plugin_container
    }
 
 
-   void host::message_handler(::message::base * pbase)
+   void host::message_handler(::user::message * pusermessage)
    {
 
-      ::hotplugin::host::message_handler(pbase);
+      ::hotplugin::host::message_handler(pusermessage);
 
    }
 
@@ -389,7 +389,7 @@ namespace ca2plugin_container
 
             const RECT & rectangle = *((LPCRECT) pdata);
 
-            //if(m_rectangle != rectangle_i32)
+            //if(m_rectangle != rectangle)
             {
 
                m_rectangle = rectangle;
@@ -647,7 +647,7 @@ namespace ca2plugin_container
 
                      str.Format("%0.1f fps",dLast);
 
-                     pgraphics->set_text_color(ARGB(255,255,255,0));
+                     pgraphics->set_text_color(argb(255,255,255,0));
 
                      pgraphics->text_out(300,20,str);
 

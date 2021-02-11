@@ -81,7 +81,7 @@ namespace draw2d_gdiplus
 
       ::acme::del(m_pfont);
 
-      ::draw2d::font::destroy();
+      ::write_text::font::destroy();
 
    }
 
@@ -204,7 +204,7 @@ namespace draw2d_gdiplus
 
       //return ::draw2d::wingdi_get_cs(lf.lfCharSet);
 
-      return ::draw2d::font::calc_char_set(pgraphics);
+      return ::write_text::font::calc_char_set(pgraphics);
 
    }
 

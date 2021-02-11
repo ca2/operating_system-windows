@@ -2587,22 +2587,22 @@ namespace draw2d_gdi
    //bool image::print_window(::aura::draw_interface * pwnd, ::message::message * pmessage)
    //{
 
-   //   __pointer(::message::base) pbase(pmessage);
+   //   __pointer(::user::message) pusermessage(pmessage);
 
-   //   if (pbase->m_wparam == 0)
+   //   if (pusermessage->m_wparam == 0)
    //   {
 
    //      return false;
 
    //   }
 
-   //   m_spgraphics->attach((HDC) pbase->m_wparam);
+   //   m_spgraphics->attach((HDC) pusermessage->m_wparam);
 
    //   ::rectangle_i32 rectx;
 
    //   ::draw2d::bitmap * pbitmap = m_spgraphics->get_current_bitmap();
 
-   //   ::GetCurrentObject((HDC) pbase->m_wparam, OBJ_BITMAP);
+   //   ::GetCurrentObject((HDC) pusermessage->m_wparam, OBJ_BITMAP);
 
    //   //      u32 dw = ::GetLastError();
    //   ::size_i32 size = pbitmap->get_size();
@@ -2666,10 +2666,10 @@ namespace draw2d_gdi
    //   {
    //   }
 
-   //   m_spgraphics->fill_rect(rectx, rgb(255, 255, 255));
+   //   m_spgraphics->fill_rectangle(rectx, rgb(255, 255, 255));
 
    //   pmessage->m_bRet = true;
-   //   pbase->set_lresult(0);
+   //   pusermessage->set_lresult(0);
 
    //   return true;
 
@@ -2758,7 +2758,7 @@ namespace draw2d_gdi
 
       i32 aTune = a * 255;
 
-      i32 rectangle_i32 = colorref_get_r_value(clr);
+      i32 rectangle = colorref_get_r_value(clr);
       i32 g = colorref_get_g_value(clr);
       i32 b = colorref_get_b_value(clr);
 
@@ -3153,7 +3153,7 @@ namespace draw2d_gdi
    COLORREF image::make_colorref(i32 a, i32 rectangle, i32 g, i32 b)
    {
 
-      return ARGB(a, b, g, rectangle);
+      return argb(a, b, g, rectangle);
 
    }
 

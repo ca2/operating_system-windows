@@ -12,7 +12,7 @@ namespace windowing_win32
 
 
       HDC                                 m_hdc;
-      ::draw2d::font_enum_item_array & m_itema;
+      ::write_text::font_enum_item_array & m_itema;
       bool                                m_bRaster;
       bool                                m_bTrueType;
       bool                                m_bOther;
@@ -20,7 +20,7 @@ namespace windowing_win32
       int_array                           m_iaCharSet;
 
 
-      wingdi_font_enum(::draw2d::font_enum_item_array & itema, bool bRaster, bool bTrueType, bool bOther) :
+      wingdi_font_enum(::write_text::font_enum_item_array & itema, bool bRaster, bool bTrueType, bool bOther) :
          m_itema(itema),
          m_bRaster(bRaster),
          m_bTrueType(bTrueType),
@@ -84,7 +84,7 @@ namespace windowing_win32
       }
 
 
-      void enum_cs(::draw2d::font_enum_item * pitem)
+      void enum_cs(::write_text::font_enum_item * pitem)
       {
 
          ::EnumFontFamiliesW(m_hdc, pitem->m_wstrName, (FONTENUMPROCW)&wingdi_font_enum::callback_cs, (lparam)pitem);
@@ -101,12 +101,6 @@ namespace windowing_win32
    };
 
 
-   void windowing::enum_draw2d_fonts(::draw2d::font_enum_item_array & itema)
-   {
-
-      wingdi_font_enum fontenum(itema, true, true, true);
-
-   }
 
 
    BOOL CALLBACK wingdi_font_enum::callback(LPLOGFONTW plf, LPNEWTEXTMETRICW lpntm, ::u32 dwFontType, LPVOID p)
@@ -124,7 +118,7 @@ namespace windowing_win32
          if (penum->m_bRaster)
          {
 
-            penum->m_itema.add(__new(::draw2d::font_enum_item(plf->lfFaceName)));
+            penum->m_itema.add(__new(::write_text::font_enum_item(plf->lfFaceName)));
 
          }
 
@@ -135,7 +129,7 @@ namespace windowing_win32
          if (penum->m_bTrueType)
          {
 
-            penum->m_itema.add(__new(::draw2d::font_enum_item(plf->lfFaceName)));
+            penum->m_itema.add(__new(::write_text::font_enum_item(plf->lfFaceName)));
 
          }
 
@@ -146,7 +140,7 @@ namespace windowing_win32
          if (penum->m_bOther)
          {
 
-            penum->m_itema.add(__new(::draw2d::font_enum_item(plf->lfFaceName)));
+            penum->m_itema.add(__new(::write_text::font_enum_item(plf->lfFaceName)));
 
          }
 
@@ -160,7 +154,7 @@ namespace windowing_win32
    BOOL CALLBACK wingdi_font_enum::callback_cs(LPLOGFONTW plf, LPNEWTEXTMETRICW lpntm, ::u32 dwFontType, LPVOID p)
    {
 
-      ::draw2d::font_enum_item * pitem = (::draw2d::font_enum_item *)p;
+      ::write_text::font_enum_item * pitem = (::write_text::font_enum_item *)p;
 
       ::e_char_set echarset = wingdi_get_cs(plf->lfCharSet);
 
@@ -176,7 +170,7 @@ namespace windowing_win32
    }
 
 
-   CLASS_DECL_WINDOWING_WIN32 void wingdi_enum_fonts(::draw2d::font_enum_item_array & itema, bool bRaster, bool bTrueType, bool bOther)
+   CLASS_DECL_WINDOWING_WIN32 void wingdi_enum_fonts(::write_text::font_enum_item_array & itema, bool bRaster, bool bTrueType, bool bOther)
    {
 
       wingdi_font_enum fonts(itema, bRaster, bTrueType, bOther);

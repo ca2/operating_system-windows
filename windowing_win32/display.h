@@ -102,6 +102,10 @@ namespace windowing_win32
       //virtual index get_good_move(RECTANGLE_I32 * prectangle, const ::rectangle_i32 & rectangle, ::user::interaction * pinteraction);
 
 
+      virtual bool impl_set_wallpaper(index iScreen, string strLocalImagePath) override;
+      virtual string impl_get_wallpaper(index iScreen) override;
+
+
    };
 
 

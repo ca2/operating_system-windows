@@ -38,12 +38,12 @@
 #define GDI_DIB(imageimpl) (dynamic_cast < ::draw2d_gdi::image_impl * > (imageimpl))
 #define GDI_BRUSH(pbrush) (dynamic_cast < ::draw2d_gdi::brush * > (dynamic_cast < ::draw2d::brush * > (pbrush)))
 #define GDI_PEN(ppen) (dynamic_cast < ::draw2d_gdi::pen * > (dynamic_cast < ::draw2d::pen * > (ppen)))
-#define GDI_FONT(pfont) (dynamic_cast < ::draw2d_gdi::font * > (dynamic_cast < ::draw2d::font * > (pfont)))
+#define GDI_FONT(pfont) (dynamic_cast < ::draw2d_gdi::font * > (dynamic_cast < ::write_text::font * > (pfont)))
 #define GDI_BITMAP(pbitmap) (dynamic_cast < ::draw2d_gdi::bitmap * > (dynamic_cast < ::draw2d::bitmap * > (pbitmap)))
 #define GDI_REGION(pregion) (dynamic_cast < ::draw2d_gdi::region * > (dynamic_cast < ::draw2d::region * > (pregion)))
 
 
-#define argb_invert(cr) ARGB(colorref_get_a_value(cr),colorref_get_b_value(cr),colorref_get_g_value(cr),colorref_get_r_value(cr))
+#define argb_invert(cr) argb(colorref_get_a_value(cr),colorref_get_b_value(cr),colorref_get_g_value(cr),colorref_get_r_value(cr))
 
 
 namespace draw2d_gdi

@@ -3,9 +3,7 @@
 
 #include "aura/_.h"
 #include "aura/operating_system.h"
-#undef new
-#include <gdiplus.h>
-#include "aura/user/_user.h"
+#include "node_windows/process_data.h"
 
 
 #ifdef _WINDOWING_WIN32_STATIC
@@ -17,14 +15,6 @@
 #endif
 
 
-// Derived from Microsoft KB318876!!
-// on 2014-06-29!! During World Cup Games 2014!! Oitavas de Final, third game between Nederland and Mexico!!
-// Thank you God!!
-// Thank you Microsoft!!
-// Thank you Pappi!! Pelo passeio no Mercado Municipal de Curitiba com a Mummi e pelo almoo com o-bento de sushi e onigiri delicioso!!
-// Obrigado Mummi por tudo!! E por hoje tambm e por propiciar isso tudo!! Por falar to profundamente do Chico Xavier mesmo com muitas dvidas minhas!!
-// Meu Deus me ajude!!
-
 namespace windowing_win32
 {
 
@@ -33,7 +23,7 @@ namespace windowing_win32
    class hwnd_array;
 
 
-   CLASS_DECL_WINDOWING_WIN32 void wingdi_enum_fonts(::draw2d::font_enum_item_array & itema, bool bRaster, bool bTrueType, bool bOther);
+   CLASS_DECL_WINDOWING_WIN32 void wingdi_enum_fonts(::write_text::font_enum_item_array & itema, bool bRaster, bool bTrueType, bool bOther);
    CLASS_DECL_WINDOWING_WIN32 ::e_char_set wingdi_get_cs(int iCharSet);
 
    CLASS_DECL_WINDOWING_WIN32 HMONITOR get_primary_monitor_handle();
@@ -51,15 +41,15 @@ namespace windowing_win32
    CLASS_DECL_WINDOWING_WIN32 HICON load_icon(::object * pobject, string_array & straMatter, string strIcon, int cx, int cy);
 
 
-   ::e_status gdiplus_draw_text(::draw2d::graphics * pgraphics, ::draw2d::path * ppath, const string & str, rectangle_f64 & rectParam, const ::e_align & ealign, const ::e_draw_text & edrawtext, ::draw2d::font * pfont, double dFontWidth, ::draw2d::brush * pbrush = nullptr, bool bMeasure = false);
+   //::e_status gdiplus_draw_text(::draw2d::graphics * pgraphics, ::draw2d::path * ppath, const string & str, rectangle_f64 & rectParam, const ::e_align & ealign, const ::e_draw_text & edrawtext, ::write_text::font * pfont, double dFontWidth, ::draw2d::brush * pbrush = nullptr, bool bMeasure = false);
 
 
-   inline auto gdiplus_color(const ::color::color & color)
-   {
+   //inline auto gdiplus_color(const ::color::color & color)
+   //{
 
-      return Gdiplus::Color(color.alpha, color.red, color.green, color.blue);
+   //   return Gdiplus::Color(color.alpha, color.red, color.green, color.blue);
 
-   }
+   //}
 
 
    /// from top to bottom
@@ -82,6 +72,16 @@ namespace windowing_win32
 #include "imm_context.h"
 #include "monitor.h"
 #include "keyboard.h"
+
+
+#include "notification_area.h"
+#include "notify_icon.h"
+
+
+#include "copydesk.h"
+
+
+#include "shell.h"
 
 
 #include "top_level_enum.h"

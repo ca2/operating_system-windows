@@ -442,7 +442,7 @@ namespace windowing_win32
                rectangle.Y = 0;
                rectangle.Height = size.cy;
 
-               Gdiplus::SolidBrush b(Gdiplus::Color(ARGB(255, 155, 240, 255)));
+               Gdiplus::SolidBrush b(Gdiplus::Color(argb(255, 155, 240, 255)));
 
                g.FillRectangle(&b, rectangle);
 
@@ -483,7 +483,7 @@ namespace windowing_win32
                rectangle.Y = 0;
                rectangle.Height = size.cy;
 
-               Gdiplus::SolidBrush b(Gdiplus::Color(ARGB(255, 255, 210, 170)));
+               Gdiplus::SolidBrush b(Gdiplus::Color(argb(255, 255, 210, 170)));
 
                g.FillRectangle(&b, rectangle);
             }
@@ -523,7 +523,7 @@ namespace windowing_win32
                rectangle.Width = 49;
                rectangle.Height = 49;
 
-               Gdiplus::SolidBrush b(Gdiplus::Color(ARGB(128, 255, 180, 170)));
+               Gdiplus::SolidBrush b(Gdiplus::Color(argb(128, 255, 180, 170)));
 
                g.FillRectangle(&b, rectangle);
 
@@ -540,7 +540,7 @@ namespace windowing_win32
                wstr = str;
                m_pimpl->prop("iSquaryHint") = i + 1;
 
-               Gdiplus::SolidBrush b2(Gdiplus::Color(ARGB(255, 155, 120, 50)));
+               Gdiplus::SolidBrush b2(Gdiplus::Color(argb(255, 155, 120, 50)));
 
                Gdiplus::PointF origin(0.f, 0.f);
 

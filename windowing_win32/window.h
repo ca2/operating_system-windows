@@ -53,6 +53,9 @@ namespace windowing_win32
       ::windowing_win32::windowing * windowing() const { return (::windowing_win32::windowing *) m_pwindowing->layer(LAYERED_IMPL); }
 
 
+      //virtual void set_oswindow(oswindow oswindow) override;
+
+
       DECL_GEN_SIGNAL(_001OnMessage);
 
 
@@ -79,13 +82,13 @@ namespace windowing_win32
 
       virtual void exit_zoomed() override;
 
-      virtual ::e_status set_focus() override;
+      virtual ::e_status set_keyboard_focus() override;
 
       virtual ::e_status set_active_window() override;
 
       virtual ::e_status set_foreground_window() override;
 
-      virtual ::e_status set_capture() override;
+      virtual ::e_status set_mouse_capture() override;
 
       virtual ::e_status destroy_window() override;
 
@@ -146,7 +149,7 @@ namespace windowing_win32
       //virtual ::user::interaction * get_owner();
       //virtual void set_owner(::user::interaction * pOwnerWnd);
 
-      // virtual void route_command_message(::user::command * pcommand) override;
+      // virtual void route_command_message(::message::command * pcommand) override;
 
       //void _002OnDraw(::image * pimage);
 
@@ -177,18 +180,18 @@ namespace windowing_win32
       DECL_GEN_SIGNAL(_001OnProdevianSynch);
       DECL_GEN_SIGNAL(_001OnWindowPosChanging);
       DECL_GEN_SIGNAL(_001OnWindowPosChanged);
-      DECL_GEN_SIGNAL(_001OnGetMinMaxInfo);
+      //DECL_GEN_SIGNAL(_001OnGetMinMaxInfo);
       DECL_GEN_SIGNAL(_001OnEnable);
 
 
       //virtual void win_update_graphics();
 
-#if(WINVER >= 0x0500)
-
-      bool GetWindowInfo(PWINDOWINFO pwi) const;
-      bool GetTitleBarInfo(PTITLEBARINFO pti) const;
-
-#endif   // WINVER >= 0x0500
+//#if(WINVER >= 0x0500)
+//
+//      bool GetWindowInfo(PWINDOWINFO pwi) const;
+//      bool GetTitleBarInfo(PTITLEBARINFO pti) const;
+//
+//#endif   // WINVER >= 0x0500
 
       //      virtual ::user::interaction * from_os_data(void * pdata);
       //virtual void * get_os_data() const;
@@ -400,8 +403,8 @@ namespace windowing_win32
       //virtual ::user::interaction * GetForegroundWindow();
 
 
-      virtual bool has_focus() override;
-      virtual bool is_active() override;
+      virtual bool has_keyboard_focus() const override;
+      virtual bool is_active_window() const override;
 
       //virtual ::user::interaction * GetFocus();
 
@@ -449,7 +452,7 @@ namespace windowing_win32
       //virtual void GetScrollRange(i32 nBar, LPINT pMinPos, LPINT lpMaxPos) const;
 
       //virtual void ScrollWindow(i32 xAmount, i32 yAmount,
-      //   const RECTANGLE_I32 * rectangle_i32 = nullptr,
+      //   const RECTANGLE_I32 * rectangle = nullptr,
 
       //   const RECTANGLE_I32 * pClipRect = nullptr);
 
@@ -566,8 +569,8 @@ namespace windowing_win32
       //virtual void EndAllModalLoops(id nResult);
 
       // Window-Management message handler member functions
-      //virtual bool OnCommand(::message::base * pbase);
-      //virtual bool OnNotify(::message::base * pbase);
+      //virtual bool OnCommand(::message::message * pusermessage);
+      //virtual bool OnNotify(::message::message * pusermessage);
 
       //void OnActivate(::u32 nState, ::user::interaction_impl * pWndOther, bool bMinimized);
       //void OnActivateApp(bool bActive, u32 dwThreadID);
@@ -729,8 +732,8 @@ namespace windowing_win32
       //virtual void pre_translate_message(::message::message * pmessage);
 
 
-      //virtual void default_message_handler(::message::base * pbase) override;
-      virtual void message_handler(::message::base * pbase);
+      //virtual void default_message_handler(::message::message * pusermessage) override;
+      virtual void message_handler(::message::message * pusermessage);
 
 
       //virtual bool OnWndMsg(const ::id & id, wparam wParam, lparam lParam, lresult* pResult);
@@ -743,10 +746,10 @@ namespace windowing_win32
       //virtual void PostNcDestroy();
 
       //// for notifications from parent
-      //virtual bool OnChildNotify(::message::base * pbase);
+      //virtual bool OnChildNotify(::message::message * pusermessage);
       //// return true if parent should not process this message
-      //virtual bool ReflectChildNotify(::message::base * pbase);
-      //virtual bool ReflectMessage(::windowing::window * pwindow_Child, ::message::base * pbase);
+      //virtual bool ReflectChildNotify(::message::message * pusermessage);
+      //virtual bool ReflectMessage(::windowing::window * pwindow_Child, ::message::message * pusermessage);
 
       // Implementation
       //virtual bool CheckAutoCenter();
@@ -797,7 +800,7 @@ namespace windowing_win32
       //virtual void _task_transparent_mouse_event() override;
 
 
-      //void _001OnTriggerMouseInside();
+      virtual void track_mouse_hover() override;
 
       void set_viewport_org(::draw2d::graphics_pointer & pgraphics);
 
@@ -838,9 +841,19 @@ namespace windowing_win32
       virtual bool modify_ex_style(uptr dwRemove, uptr dwAdd, ::u32 nFlags);
 
 
-      virtual void default_message_handler(::message::base * pbase);
+      virtual void default_message_handler(::message::message * pusermessage);
 
+      virtual float get_dpi_for_window() override;
 
+      virtual float point_dpi(float points) override;
+
+      virtual float y_dpi(float y) override;
+      virtual float x_dpi(float x) override;
+
+      virtual float dpiy(float y) override;
+      virtual float dpix(float x) override;
+ 
+      
 
       // IUnknown
       virtual HRESULT STDMETHODCALLTYPE QueryInterface(REFIID riid, void ** ppvObject);
