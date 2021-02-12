@@ -1,4 +1,4 @@
-﻿#include "framework.h"
+#include "framework.h"
 
 
 namespace audio_mmsystem
@@ -49,18 +49,25 @@ namespace audio_mmsystem
 
    void in::pre_translate_message(::message::message * pmessage)
    {
-      __pointer(::user::message) pusermessage(pmessage);
+
       //ASSERT(GetMainWnd() == nullptr);
-      if(pusermessage->m_id == MM_WIM_OPEN ||
-            pusermessage->m_id == MM_WIM_CLOSE ||
-            pusermessage->m_id == MM_WIM_DATA)
+      if(pmessage->m_id == MM_WIM_OPEN ||
+         pmessage->m_id == MM_WIM_CLOSE ||
+         pmessage->m_id == MM_WIM_DATA)
       {
-         translate_in_message(pusermessage);
-         if(pusermessage->m_bRet)
+         
+         translate_in_message(pmessage);
+
+         if (pmessage->m_bRet)
+         {
+
             return;
+
+         }
+
       }
 
-      return thread::pre_translate_message(pusermessage);
+      return thread::pre_translate_message(pmessage);
 
    }
 
@@ -91,7 +98,7 @@ namespace audio_mmsystem
       m_pwaveformat->m_waveformat.nBlockAlign = m_pwaveformat->m_waveformat.wBitsPerSample * m_pwaveformat->m_waveformat.nChannels / 8;
       m_pwaveformat->m_waveformat.nAvgBytesPerSec = m_pwaveformat->m_waveformat.nSamplesPerSec * m_pwaveformat->m_waveformat.nBlockAlign;
       
-      auto audiowave = Audio.audiowave();
+      auto audiowave = Au(get_context()).audiowave();
 
       m_iBuffer = 0;
 
@@ -433,18 +440,16 @@ Opened:
    void in::translate_in_message(::message::message * pmessage)
    {
 
-      __pointer(::user::message) pusermessage(pmessage);
+      ASSERT(pmessage->m_id == MM_WIM_OPEN || pmessage->m_id == MM_WIM_CLOSE || pmessage->m_id == MM_WIM_DATA);
 
-      ASSERT(pusermessage->m_id == MM_WIM_OPEN || pusermessage->m_id == MM_WIM_CLOSE || pusermessage->m_id == MM_WIM_DATA);
-
-      if(pusermessage->m_id == MM_WIM_DATA)
+      if(pmessage->m_id == MM_WIM_DATA)
       {
 
          m_iBuffer--;
 
          u32 msSampleTime = timeGetTime();
 
-         LPWAVEHDR lpwavehdr = (LPWAVEHDR) pusermessage->m_lparam.m_lparam;
+         LPWAVEHDR lpwavehdr = (LPWAVEHDR)pmessage->m_lparam.m_lparam;
 
          in_get_buffer()->get_buffer((i32) lpwavehdr->dwUser)->OnMultimediaDone();
 
@@ -462,7 +467,7 @@ Opened:
 
       }
 
-      pusermessage->m_bRet = true;
+      pmessage->m_bRet = true;
 
    }
 

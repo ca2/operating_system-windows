@@ -547,7 +547,7 @@ void wmain(int argc, wchar_t * wargv[])
 
       strsize iFind1 = strDir.reverse_find(PATH_SEP1);
       strsize iFind2 = strDir.reverse_find(PATH_SEP2);
-      strsize iFind = max(iFind1, iFind2);
+      strsize iFind = maximum(iFind1, iFind2);
 
       if (iFind < 0)
          return PATH_SEP1;

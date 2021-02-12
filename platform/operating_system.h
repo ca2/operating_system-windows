@@ -8,6 +8,8 @@
 #undef LOBYTE
 #undef Context
 #undef User
+#undef Audio
+
 
 
 #ifdef _WINDOWS_

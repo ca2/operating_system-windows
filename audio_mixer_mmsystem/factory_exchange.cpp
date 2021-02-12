@@ -43,8 +43,8 @@ namespace multimedia
 
 } // namespace multimedia
 
-
-void factory_exchange(::layered * pobjectContext)
+extern "C"
+void audio_mixer_mmsystem_factory_exchange(::layered * pobjectContext)
 {
 
    ::multimedia::audio_mixer_mmsystem::factory_exchange factoryexchange(pobjectContext);

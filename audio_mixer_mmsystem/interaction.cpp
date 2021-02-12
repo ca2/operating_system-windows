@@ -32,13 +32,11 @@ namespace multimedia
       void interaction::_001OnMixerControlChange(::message::message * pmessage)
       {
 
-         SCAST_MSG(base);
-
          __pointer(audio_mixer) pmixer = m_pmixer.get();
          
-         pmixer->OnMixerControlChange((HMIXER)pusermessage->m_wparam.m_number, (u32)pusermessage->m_lparam);
+         pmixer->OnMixerControlChange((HMIXER)pmessage->m_wparam.m_number, (u32)pmessage->m_lparam);
 
-         pusermessage->m_lresult = 0;
+         pmessage->m_lresult = 0;
 
       }
 
@@ -46,13 +44,11 @@ namespace multimedia
       void interaction::_001OnMixerLineChange(::message::message * pmessage)
       {
 
-         SCAST_MSG(base);
-
          __pointer(audio_mixer) pmixer = m_pmixer.get();
 
-         pmixer->OnMixerLineChange((HMIXER) pusermessage->m_wparam.m_number, (u32) pusermessage->m_lparam);
+         pmixer->OnMixerLineChange((HMIXER)pmessage->m_wparam.m_number, (u32)pmessage->m_lparam);
 
-         pusermessage->m_lresult = 0;
+         pmessage->m_lresult = 0;
 
       }
 

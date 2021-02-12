@@ -1,4 +1,4 @@
 LIBRARY  "audio_mixer_mmsystem"
 
 EXPORTS
-factory_exchange
+audio_mixer_mmsystem_factory_exchange

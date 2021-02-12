@@ -334,7 +334,7 @@ namespace windowing_win32
       else
       {
 
-         size = min(size, pimage->size());
+         size = minimum(size, pimage->size());
 
          pimage->map();
 

@@ -176,7 +176,7 @@ namespace user_service
          if (IsSSLServer())
          {
 
-            outheader("strict-transport-security") = "max-age=31536000; includeSubDomains";
+            outheader("strict-transport-security") = "maximum-age=31536000; includeSubDomains";
 
          }
 
@@ -354,7 +354,7 @@ auto tickExecuteEnd = ::tick::now();
             }
          }
 
-         double dRate = min(dRateW, dRateH);
+         double dRate = minimum(dRateW, dRateH);
 
 /*         ::image_pointer pimage;
 

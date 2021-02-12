@@ -663,7 +663,7 @@ namespace windowing_win32
    }
 
    
-   ::e_status windowing::release_capture()
+   ::e_status windowing::release_mouse_capture()
    {
 
       if (!::ReleaseCapture())

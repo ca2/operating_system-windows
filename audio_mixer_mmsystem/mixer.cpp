@@ -46,7 +46,7 @@ namespace multimedia
 
          ::e_status estatus;
 
-         if(!(estatus = m_paudiomixerdevice->open(uiMixerId, (UINT_PTR) m_window.get_handle(), 0,  CALLBACK_WINDOW)))
+         if(!(estatus = m_paudiomixerdevice->open(uiMixerId, (UINT_PTR) m_window.get_oswindow(), 0,  CALLBACK_WINDOW)))
          {
 
             return estatus;

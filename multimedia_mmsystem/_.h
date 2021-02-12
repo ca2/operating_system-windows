@@ -2,6 +2,7 @@
 
 
 #include "app-core/audio/audio/_.h"
+#include "apex/operating_system.h"
 #include <mmsystem.h>
 
 

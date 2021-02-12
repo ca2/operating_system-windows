@@ -1675,7 +1675,7 @@ namespace music
 
             lpdw = (LPDWORD)(lpmh->lpData + lpmh->dwBytesRecorded);
             dwLength = lpmh->dwBufferLength - lpmh->dwBytesRecorded - 3 * sizeof(u32);
-            dwLength = min(dwLength, 8);
+            dwLength = minimum(dwLength, 8);
 
             //u32 dwa = MEVT_F_CALLBACK;
             //   u32 dwb = MEVT_LONGMSG;
@@ -1753,7 +1753,7 @@ namespace music
             lpdw = (LPDWORD)(lpmh->lpData + lpmh->dwBytesRecorded);
 
             dwLength = lpmh->dwBufferLength - lpmh->dwBytesRecorded - 3 * sizeof(u32);
-            dwLength = min(dwLength, m_psequence->m_pfile->m_cbPendingUserEvent);
+            dwLength = minimum(dwLength, m_psequence->m_pfile->m_cbPendingUserEvent);
 
             *lpdw++ = (u32)tkDelta;
             *lpdw++ = 0L;
@@ -1928,7 +1928,7 @@ namespace music
 
                         clip(0, 127, m_psequence->m_iaRefVolume[iTrack]);
 
-                        byte bVolume = (byte)(m_psequence->m_iaRefVolume[iTrack] * max(0.0, min(1.0, dVolume)));
+                        byte bVolume = (byte)(m_psequence->m_iaRefVolume[iTrack] * maximum(0.0, minimum(1.0, dVolume)));
 
                         if (abs((int)m_keyframe.rbControl[iTrack][control_change_volume] - (int)bVolume) < 3)
                         {
@@ -2009,7 +2009,7 @@ namespace music
 
                iLeft = lpmh->dwBufferLength - lpmh->dwBytesRecorded;
 
-               smfrc = StreamEvent(tkDelta, pevent, lpmh, tkMax, min(iBufferNominalMax, iLeft));
+               smfrc = StreamEvent(tkDelta, pevent, lpmh, tkMax, minimum(iBufferNominalMax, iLeft));
                if (::error_would_reach_buffer_limit == smfrc)
                {
 

@@ -61,6 +61,13 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "experience_core", "..\..\..\source\app\experience_core\experience_core.vcxproj", "{E2D7833B-9B59-4826-BBDF-C270A2115E86}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_core_clockverse", "..\..\..\source\app-core\clockverse\clockverse.vcxproj", "{8477055E-C614-4A5D-BB61-197784151104}"
+	ProjectSection(ProjectDependencies) = postProject
+		{77D5757E-2923-40F8-9CC0-A07FA5BCC236} = {77D5757E-2923-40F8-9CC0-A07FA5BCC236}
+		{9A5FBFB1-76E6-4F7E-933A-328C1EEC95AF} = {9A5FBFB1-76E6-4F7E-933A-328C1EEC95AF}
+		{D79C7DDB-A727-4B91-803E-41C4431693D6} = {D79C7DDB-A727-4B91-803E-41C4431693D6}
+		{7CCF2BE1-0D0F-417C-918E-1CC05F7BE96D} = {7CCF2BE1-0D0F-417C-918E-1CC05F7BE96D}
+		{D6B5B8F3-A524-4E73-8343-C3D5D558ADE3} = {D6B5B8F3-A524-4E73-8343-C3D5D558ADE3}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_core_desk", "..\..\..\source\app-core\desk\desk.vcxproj", "{2F713E16-07D5-40C4-A85B-41E97286FA6C}"
 	ProjectSection(ProjectDependencies) = postProject

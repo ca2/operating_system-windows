@@ -411,7 +411,7 @@ bool position_desk_toolbar2()
                m.splice(
                   (byte *)&CLSID_DeskBandSample,
                   sizeof(CLSID_DeskBandSample),
-                  0x18 + min((*pdwArraySize) * 16, 32));
+                  0x18 + minimum((*pdwArraySize) * 16, 32));
 
                (*pdwArraySize)++;
 

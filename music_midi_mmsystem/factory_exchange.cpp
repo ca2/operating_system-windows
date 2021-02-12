@@ -38,7 +38,7 @@
 //} // namespace music
 
 
-void music_midi_mmsystem_factory_exchange()
+void music_midi_mmsystem_factory_exchange(::factory_map * pfactorymap)
 {
 
    create_factory < ::music::midi::mmsystem::midi, ::music::midi::midi                   >();

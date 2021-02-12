@@ -434,9 +434,9 @@ namespace draw2d_gdiplus
 
          }
 
-         int xEnd = min(size.cx, min(pimageSrc->width() - pointSrc.x, pimageDst->width() - rectDst.left));
+         int xEnd = minimum(size.cx, minimum(pimageSrc->width() - pointSrc.x, pimageDst->width() - rectDst.left));
 
-         int yEnd = min(size.cy, min(pimageSrc->height() - pointSrc.y, pimageDst->height() - rectDst.top));
+         int yEnd = minimum(size.cy, minimum(pimageSrc->height() - pointSrc.y, pimageDst->height() - rectDst.top));
 
          if (xEnd < 0)
          {
@@ -613,11 +613,11 @@ namespace draw2d_gdiplus
          {
             bMax = 0;
             b = (byte)(r1[0] - r2[0]);
-            bMax = max(b, bMax);
+            bMax = maximum(b, bMax);
             b = (byte)(r1[1] - r2[1]);
-            bMax = max(b, bMax);
+            bMax = maximum(b, bMax);
             b = (byte)(r1[2] - r2[2]);
-            bMax = max(b, bMax);
+            bMax = maximum(b, bMax);
             bMax = 255 - bMax;
          }
          dest[0] = bMax;

@@ -88,7 +88,7 @@ namespace multimedia
             free(m_mixercontroldetails.paDetails);
          m_mixercontroldetails.paDetails = malloc(cb);
 
-         nRange = (i32) min(32767, m_mixercontrol.Metrics.cSteps - 1);
+         nRange = (i32) minimum(32767, m_mixercontrol.Metrics.cSteps - 1);
          bool bOk = false;
          for(i32 i = 5; i <= 10; i++)
          {
@@ -244,17 +244,21 @@ namespace multimedia
          u32 nID = nStartID;
          u32 nMuteID;
 
-
-
          string str;
+         
          if(m_pmixersource == m_pmixersource->get_destination())
          {
-            str = Context.load_string("mix::mute_all");
+            
+            str = get_context()->load_string("mix::mute_all");
+
          }
          else
          {
-            str = Context.load_string("mix::mute");
+            
+            str = get_context()->load_string("mix::mute");
+
          }
+
          for(i32 iItem = 0; iItem < iItemCount; iItem++)
          {
             nMuteID = nID++;
@@ -403,7 +407,7 @@ namespace multimedia
                i32 nRightValue = (i32)MulDiv(pmxcd_u[1].dwValue - m_mixercontrol.Bounds.dwMinimum, nRange, m_mixercontrol.Bounds.dwMaximum - m_mixercontrol.Bounds.dwMinimum);
 
 
-               i32 nMaxValue = max(nLeftValue, nRightValue);
+               i32 nMaxValue = maximum(nLeftValue, nRightValue);
                i32 nBalance = nMaxValue == 0 ?
                                   nRange / 2 :
                                   (nRange +
@@ -793,7 +797,8 @@ namespace multimedia
          if(pmutecontrol != nullptr)
          {
             __pointer(::multimedia::audio_mixer::control_data) pData;
-            if(nullptr != (pData = GetWindowDataByDlgCtrlID((u32) wID)))
+            __throw(todo("find replacement/fix for GetWindowDataByDlgCtrlID"));
+            //if(nullptr != (pData = GetWindowDataByDlgCtrlID((u32) wID)))
             {
                if(pData->get_type() == ::multimedia::audio_mixer::control_data::TypeUniformMute)
                {

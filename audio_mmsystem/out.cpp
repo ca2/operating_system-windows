@@ -104,7 +104,7 @@ namespace audio_mmsystem
       m_pwaveformat->m_waveformat.nAvgBytesPerSec   = m_pwaveformat->m_waveformat.nSamplesPerSec * m_pwaveformat->m_waveformat.nBlockAlign;
       
 
-      auto audiowave = Audio.audiowave();
+      auto audiowave = Au(get_context()).audiowave();
 
       try
       {

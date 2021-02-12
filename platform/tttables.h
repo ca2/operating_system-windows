@@ -469,7 +469,7 @@ FT_BEGIN_HEADER
   /*    TT_MaxProfile                                                      */
   /*                                                                       */
   /* <Description>                                                         */
-  /*    The maximum profile is a table containing many max values, which   */
+  /*    The maximum profile is a table containing many maximum values, which   */
   /*    can be used to pre-allocate arrays.  This ensures that no memory   */
   /*    allocation occurs during a glyph load.                             */
   /*                                                                       */

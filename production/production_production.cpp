@@ -161,7 +161,7 @@ namespace production
          m_straMirror.remove_empty();
          m_straMirrorStatus.remove_empty();
 
-         m_straMirror.set_size(min(m_straMirror.get_size(), m_straMirrorStatus.get_size()));
+         m_straMirror.set_size(minimum(m_straMirror.get_size(), m_straMirrorStatus.get_size()));
          m_straMirrorStatus.set_size(m_straMirror.get_size());
 
 
@@ -251,7 +251,7 @@ namespace production
          //   {
          //      single_lock sl(&m_mutexStatus,true);
          //      set["post"]["new_status"] = set["post"]["new_status"] + "Last Stati:<br />";
-         //      for (::count i = min(5, m_straStatus.get_count() - 1); i >= 1; i--)
+         //      for (::count i = minimum(5, m_straStatus.get_count() - 1); i >= 1; i--)
          //      {
          //         set["post"]["new_status"] = set["post"]["new_status"] + puser->m_phtml->entities(m_straStatus.element_at(i));
          //         set["post"]["new_status"] = set["post"]["new_status"] + "<br />";
@@ -1588,7 +1588,7 @@ namespace production
    string strUrl;
    string strVar;
    strVar.Empty();
-   m_straCC.implode(strVar, ",", i, min(8, m_straCC.get_size() - i));
+   m_straCC.implode(strVar, ",", i, minimum(8, m_straCC.get_size() - i));
    strUrl = "http://api.ca2.cc/spaignition/compress?file=";
    strUrl += strVar;
 

@@ -1278,9 +1278,9 @@ namespace draw2d_gdi
             if(size.cy < 0)
                return true;
 
-            int xEnd = min(size.cx, min(pimage->width() - pointSrc.x, m_pimage->width() - pointDst->x));
+            int xEnd = minimum(size.cx, minimum(pimage->width() - pointSrc.x, m_pimage->width() - pointDst->x));
 
-            int yEnd = min(size.cy, min(pimage->height() - pointSrc.y, m_pimage->height() - pointDst->y));
+            int yEnd = minimum(size.cy, minimum(pimage->height() - pointSrc.y, m_pimage->height() - pointDst->y));
 
             if(xEnd < 0)
                return false;
@@ -1320,8 +1320,8 @@ namespace draw2d_gdi
             x += point.x;
             y += point.y;
 
-            nWidth  = min(nWidth   , min(cx - xSrc, cx1 - x));
-            nHeight = min(nHeight  , min(cy - ySrc, cy1 - y));
+            nWidth  = minimum(nWidth   , minimum(cx - xSrc, cx1 - x));
+            nHeight = minimum(nHeight  , minimum(cy - ySrc, cy1 - y));
 
             for(int i = 0; i < nHeight; i++)
             {
@@ -3078,8 +3078,8 @@ namespace draw2d_gdi
 
    imageWork4.Fill(255, 0, 0, 0);
 
-   imageWork4.from(point_i32(max(0, m_pointAlphaBlend.x - xDest), max(0, m_pointAlphaBlend.y - yDest)),
-   m_pimageAlphaBlend->get_graphics(), point_i32(max(0, xDest - m_pointAlphaBlend.x), max(0, yDest - m_pointAlphaBlend.y)), size);
+   imageWork4.from(point_i32(maximum(0, m_pointAlphaBlend.x - xDest), maximum(0, m_pointAlphaBlend.y - yDest)),
+   m_pimageAlphaBlend->get_graphics(), point_i32(maximum(0, xDest - m_pointAlphaBlend.x), maximum(0, yDest - m_pointAlphaBlend.y)), size);
 
    imageWork.channel_multiply(::color::e_channel_alpha, imageWork4);
 
@@ -3144,8 +3144,8 @@ namespace draw2d_gdi
 
          image4.fill(255, 0, 0, 0);
 
-         image4.from(point_i32(max(0, m_pointAlphaBlend.x - xDest), max(0, m_pointAlphaBlend.y - yDest)),
-                     m_pimageAlphaBlend->get_graphics(), point_i32(max(0, xDest - m_pointAlphaBlend.x), max(0, yDest - m_pointAlphaBlend.y)), size);
+         image4.from(point_i32(maximum(0, m_pointAlphaBlend.x - xDest), maximum(0, m_pointAlphaBlend.y - yDest)),
+                     m_pimageAlphaBlend->get_graphics(), point_i32(maximum(0, xDest - m_pointAlphaBlend.x), maximum(0, yDest - m_pointAlphaBlend.y)), size);
 
          pimage1->channel_multiply(::color::e_channel_alpha, image4);
 

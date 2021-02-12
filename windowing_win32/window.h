@@ -13,13 +13,13 @@ namespace windowing_win32
    public:
 
 
-      //HWND                                   m_hwnd;
-
+      ::point_i32                            m_pointCursor;
 
       WNDPROC                                m_pfnSuper;
-      UINT  m_uiMessage;
-      WPARAM m_wparam;
-      LPARAM m_lparam;
+      UINT                                   m_uiMessage;
+      WPARAM                                 m_wparam;
+      LPARAM                                 m_lparam;
+
 
       window();
       virtual ~window();
@@ -797,7 +797,7 @@ namespace windowing_win32
       //virtual iptr set_window_long_ptr(i32 nIndex, iptr lValue);
 
 
-      //virtual void _task_transparent_mouse_event() override;
+      virtual void _task_transparent_mouse_event() override;
 
 
       virtual void track_mouse_hover() override;

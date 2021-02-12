@@ -1158,6 +1158,7 @@
     <ClInclude Include="explorer\explorer_restart.h" />
     <ClInclude Include="node.h" />
     <ClInclude Include="process_data.h" />
+    <ClInclude Include="tts_speaker.h" />
     <ClInclude Include="_.h" />
     <ClInclude Include="framework.h" />
   </ItemGroup>

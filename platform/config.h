@@ -67,11 +67,6 @@
 #define HAVE_OPENSSL
 
 
-#define NOMINMAX
-
-
-
-
 #define __PLATFORM   "windows"
 
 

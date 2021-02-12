@@ -2,7 +2,7 @@
 
 
 extern "C"
-void draw2d_gdiplus_factory_exchange()
+void draw2d_gdiplus_factory_exchange(::factory_map * pfactorymap)
 {
 
    create_factory < ::draw2d_gdiplus::image, ::image >();

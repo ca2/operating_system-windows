@@ -35,6 +35,9 @@
     <ClInclude Include="explorer\explorer_restart.h">
       <Filter>Header Files\explorer</Filter>
     </ClInclude>
+    <ClInclude Include="tts_speaker.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="framework.cpp">

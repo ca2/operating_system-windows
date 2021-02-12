@@ -1055,9 +1055,6 @@
     <ProjectReference Include="..\..\..\source\app\aqua\aqua.vcxproj">
       <Project>{1b06fe5f-f783-41a1-ac68-0e02880dbbac}</Project>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\source\app\aura\aura.vcxproj">
-      <Project>{e000ffaf-392f-4e32-bf51-fd7ed638991f}</Project>
-    </ProjectReference>
     <ProjectReference Include="..\multimedia_mmsystem\multimedia_mmsystem.vcxproj">
       <Project>{21da4a8c-5a05-40a4-bf5b-ff62b9ddd150}</Project>
     </ProjectReference>

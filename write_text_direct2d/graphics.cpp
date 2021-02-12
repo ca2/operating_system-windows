@@ -2368,7 +2368,7 @@ namespace draw2d_gdiplus
 
       pmetric->m_dHeight              = dFontHeight;
 
-      double dLineSpacing = max(dFontHeight, dSize * family.GetLineSpacing(iStyle) / dHeight);
+      double dLineSpacing = maximum(dFontHeight, dSize * family.GetLineSpacing(iStyle) / dHeight);
 
       pmetric->m_dInternalLeading     = 0;
 
@@ -5568,7 +5568,7 @@ namespace draw2d_gdiplus
 
          }
 
-         iCount = min((int) cMaxMeasureCharacterRanges, (int) (cEnd - iStart));
+         iCount = minimum((int) cMaxMeasureCharacterRanges, (int) (cEnd - iStart));
 
 
          for (index j = 0; j < iCount; j++)
@@ -7170,7 +7170,7 @@ namespace draw2d_gdiplus
 
             pimage1->get_graphics()->text_out(0, 0, block);
 
-            pimage1->blend2(nullptr, m_pimageAlphaBlend, point_i32((int)max(0, x - m_pointAlphaBlend.x), (int)max(0, y - m_pointAlphaBlend.y)), rectText.size(), 255);
+            pimage1->blend2(nullptr, m_pimageAlphaBlend, point_i32((int)maximum(0, x - m_pointAlphaBlend.x), (int)maximum(0, y - m_pointAlphaBlend.y)), rectText.size(), 255);
 
             auto rectDst = ::rectangle_f64(::point_f64(x, y), rectText.size());
 

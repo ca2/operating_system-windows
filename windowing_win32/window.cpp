@@ -2722,7 +2722,7 @@ namespace windowing_win32
 
       get_window_text(str);
 
-      ansi_count_copy(pszString, str, (size_t)min(nMaxCount, str.get_length()));
+      ansi_count_copy(pszString, str, (size_t)minimum(nMaxCount, str.get_length()));
 
       return str.get_length();
 
@@ -5851,59 +5851,59 @@ namespace windowing_win32
    }
 
 
-   //void window::_task_transparent_mouse_event()
-   //{
+   void window::_task_transparent_mouse_event()
+   {
 
-   //   auto ptask = ::get_task();
+      auto ptask = ::get_task();
 
-   //   ::point_i32 pointCursor;
+      ::point_i32 pointCursor;
 
-   //   auto pimpl = m_pimpl.cast < window>();
+      auto pimpl = m_pimpl;
 
-   //   HWND hwnd = get_safe_handle();
+      HWND hwnd = get_hwnd();
 
-   //   while (ptask->thread_get_run())
-   //   {
+      while (ptask->thread_get_run())
+      {
 
-   //      ::GetCursorPos((POINT *)&pointCursor);
+         ::GetCursorPos((POINT *)&pointCursor);
 
-   //      if (pimpl->m_pointCursor == pointCursor)
-   //      {
+         if (m_pointCursor == pointCursor)
+         {
 
-   //         sleep(30_ms);
+            sleep(30_ms);
 
-   //         continue;
+            continue;
 
-   //      }
+         }
 
-   //      pimpl->m_pointCursor = pointCursor;
+         m_pointCursor = pointCursor;
 
-   //      lparam lparam;
+         lparam lparam;
 
-   //      ::ScreenToClient(hwnd, (POINT *)&pointCursor);
+         ::ScreenToClient(hwnd, (POINT *)&pointCursor);
 
-   //      RECTANGLE_I32 rectClient;
+         ::rectangle_i32 rectClient;
 
-   //      ::GetClientRect(hwnd, (RECT *)&rectClient);
+         ::GetClientRect(hwnd, (RECT *)&rectClient);
 
-   //      if (!PtInRect(&rectClient, (POINT *)&pointCursor))
-   //      {
+         if (!rectClient.contains(pointCursor))
+         {
 
-   //         sleep(100_ms);
+            sleep(100_ms);
 
-   //         continue;
+            continue;
 
-   //      }
+         }
 
-   //      lparam = MAKELPARAM(pointCursor.x, pointCursor.y);
+         lparam = MAKELPARAM(pointCursor.x, pointCursor.y);
 
-   //      output_debug_string("transparent_mouse_event:x=" + __str(pointCursor.x) + ",y=" + __str(pointCursor.y) + "\n");
+         output_debug_string("transparent_mouse_event:x=" + __str(pointCursor.x) + ",y=" + __str(pointCursor.y) + "\n");
 
-   //      pimpl->call_message_handler(e_message_mouse_move, 0, lparam);
+         pimpl->send_message(e_message_mouse_move, 0, lparam);
 
-   //   }
+      }
 
-   //}
+   }
 
 
    void window::_001OnDestroy(::message::message * pmessage)
@@ -6704,7 +6704,7 @@ namespace windowing_win32
 
       oswindow oswindow = get_oswindow();
 
-      return ::get_dpi_for_window(oswindow);
+      return (float) ::get_dpi_for_window(oswindow);
 
    }
 

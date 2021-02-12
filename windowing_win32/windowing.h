@@ -86,7 +86,7 @@ namespace windowing_win32
       virtual ::windowing::window * get_mouse_capture(::thread * pthread) override;
 
 
-      virtual ::e_status release_capture() override;
+      virtual ::e_status release_mouse_capture() override;
 
 
       
