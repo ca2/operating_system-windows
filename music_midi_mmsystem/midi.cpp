@@ -1,4 +1,4 @@
-﻿#include "framework.h"
+#include "framework.h"
 #include <mmddk.h>
 
 // http://blogs.msdn.com/b/matthew_van_eerde/archive/2012/09/21/enumerating-midi-devices.aspx
@@ -186,7 +186,7 @@ namespace music
                   h,
                   DRV_QUERYDEVICEINTERFACE,
                   reinterpret_cast<DWORD_PTR>((wchar_t *) wstr),
-                  size_i32
+                  size
                   );
 
             wstr.release_string_buffer();
@@ -238,7 +238,7 @@ namespace music
                   h,
                   DRV_QUERYDEVICEINTERFACE,
                   reinterpret_cast<DWORD_PTR>((wchar_t *) wstr),
-                  size_i32
+                  size
                   );
 
             wstr.release_string_buffer();
@@ -424,9 +424,9 @@ namespace music
 
                auto pout = __new(out);
 
-               int iPort = get_midi_out_device_port(strMMSystemDevice);
+               auto iPort = get_midi_out_device_port(strMMSystemDevice);
 
-               pout->open(iPort);
+               pout->open((int) iPort);
 
                pmessageout = pout;
 
@@ -449,9 +449,9 @@ namespace music
 
                auto pin = __new(in);
 
-               int iPort = get_midi_in_device_port(strMMSystemDevice);
+               auto iPort = get_midi_in_device_port(strMMSystemDevice);
 
-               pin->open(iPort);
+               pin->open((int) iPort);
 
                pmessagein = pin;
 

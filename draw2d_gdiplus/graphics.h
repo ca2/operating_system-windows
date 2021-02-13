@@ -110,8 +110,8 @@ namespace draw2d_gdiplus
       //bool append(const ::draw2d::matrix & matrix) override;
       //bool prepend(const ::draw2d::matrix & matrix) override;
 
-      i32 SetPolyFillMode(i32 nPolyFillMode) override;
-      i32 SetROP2(i32 nDrawMode) override;
+      //i32 SetPolyFillMode(i32 nPolyFillMode) override;
+      //i32 SetROP2(i32 nDrawMode) override;
       //bool set_interpolation_mode(::draw2d::enum_interpolation_mode einterpolationmode) override;
 
       //bool GetColorAdjustment(LPCOLORADJUSTMENT pColorAdjust) override;
@@ -166,27 +166,27 @@ namespace draw2d_gdiplus
       virtual size_f64 scale_window_ext(double xNum, double xDenom, double yNum, double yDenom) override;
 
       // Coordinate Functions
-      void DPtoLP(::point_f64 * pPoints,count nCount = 1) override;
+      //void DPtoLP(::point_f64 * pPoints,count nCount = 1) override;
 
-      void DPtoLP(::rectangle_f64 * prectangle) override;
+      //void DPtoLP(::rectangle_f64 * prectangle) override;
 
-      void DPtoLP(::size_f64 * pSize) override;
+      //void DPtoLP(::size_f64 * pSize) override;
 
-      void LPtoDP(::point_f64 * pPoints,count nCount = 1) override;
+      //void LPtoDP(::point_f64 * pPoints,count nCount = 1) override;
 
-      void LPtoDP(::rectangle_f64 * prectangle) override;
+      //void LPtoDP(::rectangle_f64 * prectangle) override;
 
-      void LPtoDP(::size_f64 * pSize) override;
+      //void LPtoDP(::size_f64 * pSize) override;
 
 
       // Special Coordinate Functions (useful for dealing with metafiles and OLE)
-      void DPtoHIMETRIC(::size_f64 * pSize) override;
+      //void DPtoHIMETRIC(::size_f64 * pSize) override;
 
-      void LPtoHIMETRIC(::size_f64 * pSize) override;
+      //void LPtoHIMETRIC(::size_f64 * pSize) override;
 
-      void HIMETRICtoDP(::size_f64 * pSize) override;
+      //void HIMETRICtoDP(::size_f64 * pSize) override;
 
-      void HIMETRICtoLP(::size_f64 * pSize) override;
+      //void HIMETRICtoLP(::size_f64 * pSize) override;
 
 
       // Region Functions

@@ -416,32 +416,32 @@ namespace draw2d_gdiplus
 
    //}
 
-   i32 graphics::GetPolyFillMode()
-   {
-      //return ::GetPolyFillMode(get_handle2());
-      __throw(not_implemented());
+   //i32 graphics::GetPolyFillMode()
+   //{
+   //   //return ::GetPolyFillMode(get_handle2());
+   //   __throw(not_implemented());
 
-      return -1;
+   //   return -1;
 
-   }
+   //}
 
-   i32 graphics::GetROP2()
-   {
-      //return ::GetROP2(get_handle2());
-      __throw(not_implemented());
+   //i32 graphics::GetROP2()
+   //{
+   //   //return ::GetROP2(get_handle2());
+   //   __throw(not_implemented());
 
-      return -1;
+   //   return -1;
 
-   }
+   //}
 
-   i32 graphics::GetStretchBltMode()
-   {
-      //return ::GetStretchBltMode(get_handle2());
-      __throw(not_implemented());
+   //i32 graphics::GetStretchBltMode()
+   //{
+   //   //return ::GetStretchBltMode(get_handle2());
+   //   __throw(not_implemented());
 
-      return -1;
+   //   return -1;
 
-   }
+   //}
 
    //i32 graphics::GetMapMode()
    //{
@@ -453,16 +453,16 @@ namespace draw2d_gdiplus
    //}
 
 
-   i32 graphics::GetGraphicsMode()
-   {
+   //i32 graphics::GetGraphicsMode()
+   //{
 
-      //return ::GetGraphicsMode(get_handle2());
-      __throw(not_implemented());
+   //   //return ::GetGraphicsMode(get_handle2());
+   //   __throw(not_implemented());
 
-      return -1;
+   //   return -1;
 
 
-   }
+   //}
 
 
    //bool graphics::GetWorldTransform(XFORM* pXform)
@@ -558,34 +558,34 @@ namespace draw2d_gdiplus
    }
 
 
-  void graphics::DPtoLP(::point_f64 * pPoints, count nCount)
-  {
+  //void graphics::DPtoLP(::point_f64 * pPoints, count nCount)
+  //{
 
-     //::DPtoLP(get_handle2(), pPoints, (int) nCount);
+  //   //::DPtoLP(get_handle2(), pPoints, (int) nCount);
 
-  }
+  //}
 
 
-   void graphics::DPtoLP(::rectangle_f64 * prectangle)
-   {
+  // void graphics::DPtoLP(::rectangle_f64 * prectangle)
+  // {
 
-   //   //::DPtoLP(get_handle2(), (LPPOINT)prectangle, 2);
+  // //   //::DPtoLP(get_handle2(), (LPPOINT)prectangle, 2);
 
-   }
+  // }
 
-   void graphics::LPtoDP(::point_f64 * pPoints,count nCount)
-   {
-   
-      //::LPtoDP(get_handle2(), pPoints, (int)  nCount);
+  // void graphics::LPtoDP(::point_f64 * pPoints,count nCount)
+  // {
+  // 
+  //    //::LPtoDP(get_handle2(), pPoints, (int)  nCount);
 
-   }
+  // }
 
-   void graphics::LPtoDP(::rectangle_f64 * prectangle)
+  // void graphics::LPtoDP(::rectangle_f64 * prectangle)
 
-   {
-   //   //::LPtoDP(get_handle2(), (LPPOINT)prectangle, 2);
+  // {
+  // //   //::LPtoDP(get_handle2(), (LPPOINT)prectangle, 2);
 
-   }
+  // }
 
 
    bool graphics::fill_region(::draw2d::region * pregion, ::draw2d::brush * pbrush)
@@ -3315,111 +3315,111 @@ namespace draw2d_gdiplus
 
 
 
-#define HIMETRIC_INCH   2540    // HIMETRIC units per inch
-
-   void graphics::DPtoHIMETRIC(::size_f64 * psize)
-
-   {
-      ASSERT(__is_valid_address(psize, sizeof(const size_f64 &)));
-
-
-      i32 nMapMode;
-      if (this != nullptr && (nMapMode = GetMapMode()) < MM_ISOTROPIC &&
-            nMapMode != MM_TEXT)
-      {
-         // when using a constrained map mode, map against physical inch
-         ((::draw2d::graphics *)this)->SetMapMode(MM_HIMETRIC);
-         DPtoLP(psize);
-
-         ((::draw2d::graphics *)this)->SetMapMode(nMapMode);
-      }
-      else
-      {
-         // map against logical inch for non-constrained mapping modes
-         i32 cxPerInch, cyPerInch;
-         if (this != nullptr)
-         {
-            ASSERT_VALID(this);
-            //ASSERT(get_handle1() != nullptr);  // no HDC attached or created?
-            cxPerInch = GetDeviceCaps(LOGPIXELSX);
-            cyPerInch = GetDeviceCaps(LOGPIXELSY);
-         }
-         else
-         {
-//            cxPerInch = afxData.cxPixelsPerInch;
-            //          cyPerInch = afxData.cyPixelsPerInch;
-         }
-         ASSERT(cxPerInch != 0 && cyPerInch != 0);
-         psize->cx = psize->cx * HIMETRIC_INCH / cxPerInch;
-
-         psize->cy = psize->cy * HIMETRIC_INCH / cyPerInch;
-
-      }
-   }
-
-   void graphics::HIMETRICtoDP(::size_f64 * psize)
-
-   {
-      ASSERT(__is_valid_address(psize, sizeof(const size_f64&)));
-
-
-      i32 nMapMode;
-      if (this != nullptr && (nMapMode = GetMapMode()) < MM_ISOTROPIC &&
-            nMapMode != MM_TEXT)
-      {
-         // when using a constrained map mode, map against physical inch
-         ((::draw2d::graphics *)this)->SetMapMode(MM_HIMETRIC);
-         LPtoDP(psize);
-
-         ((::draw2d::graphics *)this)->SetMapMode(nMapMode);
-      }
-      else
-      {
-         // map against logical inch for non-constrained mapping modes
-         i32 cxPerInch, cyPerInch;
-         if (this != nullptr)
-         {
-            ASSERT_VALID(this);
-            //ASSERT(get_handle1() != nullptr);  // no HDC attached or created?
-            cxPerInch = GetDeviceCaps(LOGPIXELSX);
-            cyPerInch = GetDeviceCaps(LOGPIXELSY);
-         }
-         else
-         {
-//            cxPerInch = afxData.cxPixelsPerInch;
-            //          cyPerInch = afxData.cyPixelsPerInch;
-         }
-         ASSERT(cxPerInch != 0 && cyPerInch != 0);
-         psize->cx = psize->cx* cxPerInch/ HIMETRIC_INCH;
-
-         psize->cy = psize->cy * cyPerInch/ HIMETRIC_INCH;
-
-      }
-   }
-
-   void graphics::LPtoHIMETRIC(::size_f64 * psize)
-
-   {
-      ASSERT(__is_valid_address(psize, sizeof(const size_f64 &)));
-
-
-      LPtoDP(psize);
-
-      DPtoHIMETRIC(psize);
-
-   }
-
-
-   void graphics::HIMETRICtoLP(::size_f64 * psize)
-   {
-
-      ASSERT(__is_valid_address(psize, sizeof(const size_f64 &)));
-
-      HIMETRICtoDP(psize);
-
-      DPtoLP(psize);
-
-   }
+//#define HIMETRIC_INCH   2540    // HIMETRIC units per inch
+//
+//   void graphics::DPtoHIMETRIC(::size_f64 * psize)
+//
+//   {
+//      ASSERT(__is_valid_address(psize, sizeof(const size_f64 &)));
+//
+//
+//      i32 nMapMode;
+//      if (this != nullptr && (nMapMode = GetMapMode()) < MM_ISOTROPIC &&
+//            nMapMode != MM_TEXT)
+//      {
+//         // when using a constrained map mode, map against physical inch
+//         ((::draw2d::graphics *)this)->SetMapMode(MM_HIMETRIC);
+//         DPtoLP(psize);
+//
+//         ((::draw2d::graphics *)this)->SetMapMode(nMapMode);
+//      }
+//      else
+//      {
+//         // map against logical inch for non-constrained mapping modes
+//         i32 cxPerInch, cyPerInch;
+//         if (this != nullptr)
+//         {
+//            ASSERT_VALID(this);
+//            //ASSERT(get_handle1() != nullptr);  // no HDC attached or created?
+//            cxPerInch = GetDeviceCaps(LOGPIXELSX);
+//            cyPerInch = GetDeviceCaps(LOGPIXELSY);
+//         }
+//         else
+//         {
+////            cxPerInch = afxData.cxPixelsPerInch;
+//            //          cyPerInch = afxData.cyPixelsPerInch;
+//         }
+//         ASSERT(cxPerInch != 0 && cyPerInch != 0);
+//         psize->cx = psize->cx * HIMETRIC_INCH / cxPerInch;
+//
+//         psize->cy = psize->cy * HIMETRIC_INCH / cyPerInch;
+//
+//      }
+//   }
+//
+//   void graphics::HIMETRICtoDP(::size_f64 * psize)
+//
+//   {
+//      ASSERT(__is_valid_address(psize, sizeof(const size_f64&)));
+//
+//
+//      i32 nMapMode;
+//      if (this != nullptr && (nMapMode = GetMapMode()) < MM_ISOTROPIC &&
+//            nMapMode != MM_TEXT)
+//      {
+//         // when using a constrained map mode, map against physical inch
+//         ((::draw2d::graphics *)this)->SetMapMode(MM_HIMETRIC);
+//         LPtoDP(psize);
+//
+//         ((::draw2d::graphics *)this)->SetMapMode(nMapMode);
+//      }
+//      else
+//      {
+//         // map against logical inch for non-constrained mapping modes
+//         i32 cxPerInch, cyPerInch;
+//         if (this != nullptr)
+//         {
+//            ASSERT_VALID(this);
+//            //ASSERT(get_handle1() != nullptr);  // no HDC attached or created?
+//            cxPerInch = GetDeviceCaps(LOGPIXELSX);
+//            cyPerInch = GetDeviceCaps(LOGPIXELSY);
+//         }
+//         else
+//         {
+////            cxPerInch = afxData.cxPixelsPerInch;
+//            //          cyPerInch = afxData.cyPixelsPerInch;
+//         }
+//         ASSERT(cxPerInch != 0 && cyPerInch != 0);
+//         psize->cx = psize->cx* cxPerInch/ HIMETRIC_INCH;
+//
+//         psize->cy = psize->cy * cyPerInch/ HIMETRIC_INCH;
+//
+//      }
+//   }
+//
+//   void graphics::LPtoHIMETRIC(::size_f64 * psize)
+//
+//   {
+//      ASSERT(__is_valid_address(psize, sizeof(const size_f64 &)));
+//
+//
+//      LPtoDP(psize);
+//
+//      DPtoHIMETRIC(psize);
+//
+//   }
+//
+//
+//   void graphics::HIMETRICtoLP(::size_f64 * psize)
+//   {
+//
+//      ASSERT(__is_valid_address(psize, sizeof(const size_f64 &)));
+//
+//      HIMETRICtoDP(psize);
+//
+//      DPtoLP(psize);
+//
+//   }
 
    /////////////////////////////////////////////////////////////////////////////
    // special graphics drawing primitives/helpers
@@ -4258,33 +4258,33 @@ namespace draw2d_gdiplus
    //}
 
 
-   i32 graphics::SetPolyFillMode(i32 nPolyFillMode)
-   {
-      //i32 nRetVal = 0;
-      //if(get_handle1() != nullptr && get_handle1() != get_handle2())
-      //   nRetVal = ::SetPolyFillMode(get_handle1(), nPolyFillMode);
-      //if(get_handle2() != nullptr)
-      //   nRetVal = ::SetPolyFillMode(get_handle2(), nPolyFillMode);
-      //return nRetVal;
-      __throw(not_implemented());
+   //i32 graphics::SetPolyFillMode(i32 nPolyFillMode)
+   //{
+   //   //i32 nRetVal = 0;
+   //   //if(get_handle1() != nullptr && get_handle1() != get_handle2())
+   //   //   nRetVal = ::SetPolyFillMode(get_handle1(), nPolyFillMode);
+   //   //if(get_handle2() != nullptr)
+   //   //   nRetVal = ::SetPolyFillMode(get_handle2(), nPolyFillMode);
+   //   //return nRetVal;
+   //   __throw(not_implemented());
 
-      return -1;
+   //   return -1;
 
-   }
+   //}
 
-   i32 graphics::SetROP2(i32 nDrawMode)
-   {
-      //i32 nRetVal = 0;
-      //if(get_handle1() != nullptr && get_handle1() != get_handle2())
-      //   nRetVal = ::SetROP2(get_handle1(), nDrawMode);
-      //if(get_handle2() != nullptr)
-      //   nRetVal = ::SetROP2(get_handle2(), nDrawMode);
-      //return nRetVal;
-      __throw(not_implemented());
+   //i32 graphics::SetROP2(i32 nDrawMode)
+   //{
+   //   //i32 nRetVal = 0;
+   //   //if(get_handle1() != nullptr && get_handle1() != get_handle2())
+   //   //   nRetVal = ::SetROP2(get_handle1(), nDrawMode);
+   //   //if(get_handle2() != nullptr)
+   //   //   nRetVal = ::SetROP2(get_handle2(), nDrawMode);
+   //   //return nRetVal;
+   //   __throw(not_implemented());
 
-      return -1;
+   //   return -1;
 
-   }
+   //}
 
 
    bool graphics::set_interpolation_mode(::draw2d::enum_interpolation_mode einterpolationmode)
@@ -4328,22 +4328,22 @@ namespace draw2d_gdiplus
    }
 
 
-   i32 graphics::SetGraphicsMode(i32 iMode)
-   {
-      //i32 nRetVal = 0;
-      //if(get_handle1() != nullptr && get_handle1() != get_handle2())
-      //{
-      //   nRetVal = ::SetGraphicsMode(get_handle1(), iMode);
-      //}
-      //if(get_handle2() != nullptr)
-      //{
-      //   nRetVal = ::SetGraphicsMode(get_handle2(), iMode);
-      //}
-      //return nRetVal;
-      __throw(not_implemented());
+   //i32 graphics::SetGraphicsMode(i32 iMode)
+   //{
+   //   //i32 nRetVal = 0;
+   //   //if(get_handle1() != nullptr && get_handle1() != get_handle2())
+   //   //{
+   //   //   nRetVal = ::SetGraphicsMode(get_handle1(), iMode);
+   //   //}
+   //   //if(get_handle2() != nullptr)
+   //   //{
+   //   //   nRetVal = ::SetGraphicsMode(get_handle2(), iMode);
+   //   //}
+   //   //return nRetVal;
+   //   __throw(not_implemented());
 
-      return -1;
-   }
+   //   return -1;
+   //}
 
 
    //bool graphics::SetWorldTransform(const XFORM* pXform)
@@ -4400,18 +4400,18 @@ namespace draw2d_gdiplus
    //   return false;
    //}
 
-   i32 graphics::SetMapMode(i32 nMapMode)
-   {
-      //i32 nRetVal = 0;
-      //if(get_handle1() != nullptr && get_handle1() != get_handle2())
-      //   nRetVal = ::SetMapMode(get_handle1(), nMapMode);
-      //if(get_handle2() != nullptr)
-      //   nRetVal = ::SetMapMode(get_handle2(), nMapMode);
-      //return nRetVal;
-      ///__throw(not_implemented());
+   //i32 graphics::SetMapMode(i32 nMapMode)
+   //{
+   //   //i32 nRetVal = 0;
+   //   //if(get_handle1() != nullptr && get_handle1() != get_handle2())
+   //   //   nRetVal = ::SetMapMode(get_handle1(), nMapMode);
+   //   //if(get_handle2() != nullptr)
+   //   //   nRetVal = ::SetMapMode(get_handle2(), nMapMode);
+   //   //return nRetVal;
+   //   ///__throw(not_implemented());
 
-      return -1;
-   }
+   //   return -1;
+   //}
 
 
    size_f64 graphics::SetViewportExt(double x, double y)
@@ -5258,35 +5258,35 @@ namespace draw2d_gdiplus
    /////////////////////////////////////////////////////////////////////////////
    // Coordinate transforms
 
-   void graphics::LPtoDP(::size_f64 * psize)
+   //void graphics::LPtoDP(::size_f64 * psize)
 
-   {
-      ASSERT(__is_valid_address(psize, sizeof(const size_f64 &)));
-
-
-      size_f64 sizeWinExt = GetWindowExt();
-      size_f64 sizeVpExt = GetViewportExt();
-      psize->cx = psize->cx * abs(sizeVpExt.cx) / abs(sizeWinExt.cx);
-
-      psize->cy = psize->cy * abs(sizeVpExt.cy) / abs(sizeWinExt.cy);
-
-   }
+   //{
+   //   ASSERT(__is_valid_address(psize, sizeof(const size_f64 &)));
 
 
-   void graphics::DPtoLP(::size_f64 * psize)
-   {
+   //   size_f64 sizeWinExt = GetWindowExt();
+   //   size_f64 sizeVpExt = GetViewportExt();
+   //   psize->cx = psize->cx * abs(sizeVpExt.cx) / abs(sizeWinExt.cx);
 
-      ASSERT(__is_valid_address(psize, sizeof(const size_f64 &)));
+   //   psize->cy = psize->cy * abs(sizeVpExt.cy) / abs(sizeWinExt.cy);
 
-      size_f64 sizeWinExt = GetWindowExt();
+   //}
 
-      size_f64 sizeVpExt = GetViewportExt();
 
-      psize->cx = psize->cx * abs(sizeWinExt.cx) / abs(sizeVpExt.cx);
+   //void graphics::DPtoLP(::size_f64 * psize)
+   //{
 
-      psize->cy = psize->cy * abs(sizeWinExt.cy) / abs(sizeVpExt.cy);
+   //   ASSERT(__is_valid_address(psize, sizeof(const size_f64 &)));
 
-   }
+   //   size_f64 sizeWinExt = GetWindowExt();
+
+   //   size_f64 sizeVpExt = GetViewportExt();
+
+   //   psize->cx = psize->cx * abs(sizeWinExt.cx) / abs(sizeVpExt.cx);
+
+   //   psize->cy = psize->cy * abs(sizeWinExt.cy) / abs(sizeVpExt.cy);
+
+   //}
 
 
    bool graphics::_001DrawText(const string & str, rectangle_f64 & rectParam, const ::e_align & ealign, const ::e_draw_text & edrawtext, bool bMeasure)
