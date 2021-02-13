@@ -60,8 +60,8 @@ namespace windowing_win32
 } // namespace windowing_win32
 
 
-CLASS_DECL_ACME int windows_show_window(enum_display edisplay, enum_activation eactivation);
-CLASS_DECL_ACME enum_display windows_show_window_to_edisplay(int iShowWindow, enum_activation & eactivation);
+CLASS_DECL_WINDOWING_WIN32 int windows_show_window(enum_display edisplay, enum_activation eactivation);
+CLASS_DECL_WINDOWING_WIN32 enum_display windows_show_window_to_edisplay(int iShowWindow, enum_activation & eactivation);
 
 
 #include "window_util.h"

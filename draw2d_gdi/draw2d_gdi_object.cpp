@@ -15,7 +15,7 @@ namespace draw2d_gdi
    object::~object()
    {
 
-      sync_lock ml(&draw2d_gdi_mutex());
+      synchronization_lock ml(&draw2d_gdi_mutex());
 
       for(int i = 0; i < m_ptraGraphics.get_size(); i++)
       {
@@ -157,7 +157,7 @@ namespace draw2d_gdi
    bool object::destroy()
    {
 
-      sync_lock ml(&draw2d_gdi_mutex());
+      synchronization_lock ml(&draw2d_gdi_mutex());
 
       for(int i = 0; i < m_ptraGraphics.get_size(); i++)
       {

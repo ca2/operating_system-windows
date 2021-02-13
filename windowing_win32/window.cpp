@@ -231,8 +231,6 @@ namespace windowing_win32
    }
 
 
-
-
    ::e_status window::create_window(::user::interaction_impl * pimpl)
    {
 
@@ -838,7 +836,7 @@ namespace windowing_win32
    //   pdata->m_pimpl = puserinteraction;
    //   pdata->m_osdisplay = nullptr;
    //   pdata->m_parent = 0;
-   //   pdata->m_pmq = puserinteraction->puserinteraction->m_pthreadUserInteraction->get_mq();
+   //   pdata->m_pmq = puserinteraction->puserinteraction->m_pthreadUserInteraction->get_message_queue();
 
    //   ::window::s_pdataptra->add(pdata);
 
@@ -1301,6 +1299,18 @@ namespace windowing_win32
 
       HWND hwnd = get_hwnd();
 
+      if (iShowWindow == SW_MAXIMIZE)
+      {
+
+         if (_get_ex_style() & WS_EX_LAYERED)
+         {
+
+            iShowWindow = SW_NORMAL;
+
+         }
+
+      }
+
       if (!::ShowWindow(hwnd, iShowWindow))
       {
 
@@ -1461,7 +1471,7 @@ namespace windowing_win32
    void window::exit_zoomed()
    {
 
-      //sync_lock sl(x11_mutex());
+      //synchronization_lock synchronizationlock(x11_mutex());
 
       //xdisplay d(display());
 
@@ -1776,7 +1786,7 @@ namespace windowing_win32
 
 #undef SET_WINDOW_POS_LOG
 
-   bool window::set_window_pos(class ::zorder zorder, i32 x, i32 y, i32 cx, i32 cy, ::u32 nFlags)
+   bool window::set_window_position(class ::zorder zorder, i32 x, i32 y, i32 cx, i32 cy, ::u32 nFlags)
    {
 
       HWND hwnd = get_hwnd();
@@ -1795,9 +1805,9 @@ namespace windowing_win32
 //   bool window::_set_window_pos(class ::zorder zorder, i32 x, i32 y, i32 cx, i32 cy, ::u32 nFlags)
 //   {
 //
-//      sync_lock sl(x11_mutex());
+//      synchronization_lock synchronizationlock(x11_mutex());
 //
-//      windowing_output_debug_string("\n::window::set_window_pos 1");
+//      windowing_output_debug_string("\n::window::set_window_position 1");
 //
 //      auto pdisplay = display();
 //
@@ -1810,7 +1820,7 @@ namespace windowing_win32
 //      if (!XGetWindowAttributes(pdisplay, w, &attrs))
 //      {
 //
-//         windowing_output_debug_string("\n::window::set_window_pos 1.1 xgetwindowattr failed");
+//         windowing_output_debug_string("\n::window::set_window_position 1.1 xgetwindowattr failed");
 //
 //         return false;
 //
@@ -1822,7 +1832,7 @@ namespace windowing_win32
 //         if (attrs.map_state == IsUnmapped)
 //         {
 //
-//            windowing_output_debug_string("\n::window::set_window_pos Mapping Window 1.2");
+//            windowing_output_debug_string("\n::window::set_window_position Mapping Window 1.2");
 //
 //            XMapWindow(display(), window());
 //
@@ -1831,7 +1841,7 @@ namespace windowing_win32
 //         if (!XGetWindowAttributes(display(), window(), &attrs))
 //         {
 //
-//            windowing_output_debug_string("\n::window::set_window_pos 1.3 xgetwindowattr failed");
+//            windowing_output_debug_string("\n::window::set_window_position 1.3 xgetwindowattr failed");
 //
 //            return false;
 //
@@ -1849,7 +1859,7 @@ namespace windowing_win32
 //         if (bSize)
 //         {
 //
-//            windowing_output_debug_string("\n::window::set_window_pos Move Resize Window 1.4");
+//            windowing_output_debug_string("\n::window::set_window_position Move Resize Window 1.4");
 //
 //#ifdef SET_WINDOW_POS_LOG
 //
@@ -1878,7 +1888,7 @@ namespace windowing_win32
 //         else
 //         {
 //
-//            windowing_output_debug_string("\n::window::set_window_pos Move Window 1.4.1");
+//            windowing_output_debug_string("\n::window::set_window_position Move Window 1.4.1");
 //
 //            XMoveWindow(display(), window(), x, y);
 //
@@ -1888,7 +1898,7 @@ namespace windowing_win32
 //      else if (bSize)
 //      {
 //
-//         windowing_output_debug_string("\n::window::set_window_pos Resize Window 1.4.2");
+//         windowing_output_debug_string("\n::window::set_window_position Resize Window 1.4.2");
 //
 //         XResizeWindow(display(), window(), cx, cy);
 //
@@ -1927,7 +1937,7 @@ namespace windowing_win32
 //         if (attrs.map_state == IsViewable)
 //         {
 //
-//            windowing_output_debug_string("\n::window::set_window_pos Withdraw Window 1.4.3");
+//            windowing_output_debug_string("\n::window::set_window_position Withdraw Window 1.4.3");
 //
 //            XWithdrawWindow(display(), window(), m_iScreen);
 //
@@ -1938,7 +1948,7 @@ namespace windowing_win32
 //      if (!XGetWindowAttributes(display(), window(), &attrs))
 //      {
 //
-//         windowing_output_debug_string("\n::window::set_window_pos xgetwndattr 1.4.4");
+//         windowing_output_debug_string("\n::window::set_window_position xgetwndattr 1.4.4");
 //
 //         return false;
 //
@@ -2009,7 +2019,7 @@ namespace windowing_win32
 //
 //      //m_pimpl->on_change_visibility();
 //
-//      windowing_output_debug_string("\n::window::set_window_pos 2");
+//      windowing_output_debug_string("\n::window::set_window_position 2");
 //
 //      return 1;
 //
@@ -2043,7 +2053,7 @@ namespace windowing_win32
    //bool window::reset(::windowing::cursor * pcursor, ::aura::session * psession)
    //{
 
-   //   sync_lock sl(psession->mutex());
+   //   synchronization_lock synchronizationlock(psession->mutex());
 
    //   if (::is_null(puserinteraction))
    //   {
@@ -2165,7 +2175,7 @@ namespace windowing_win32
 
       auto puserinteraction = m_pimpl->m_puserinteraction;
 
-      sync_lock sl(puserinteraction->mutex());
+      synchronization_lock synchronizationlock(puserinteraction->mutex());
 
       ASSERT(::IsWindow(get_hwnd()));
 
@@ -2281,7 +2291,7 @@ namespace windowing_win32
 
       //ASSERT(pbuffer.is_set());
 
-      //single_lock sl(pbuffer->mutex());
+      //single_lock synchronizationlock(pbuffer->mutex());
 
       //auto & buffer = pbuffer->m_osbuffera[!pbuffer->m_iCurrentBuffer];
 
@@ -2827,7 +2837,7 @@ namespace windowing_win32
       //
       // Use the BringWindowToTop function to uncover any window
       // that is partially or completely obscured by other windows.
-      // Calling this function is similar to calling the set_window_pos
+      // Calling this function is similar to calling the set_window_position
       // function to change a window's position in the Z order.
       // BringWindowToTop does not make a window a top-level window.
 
@@ -2843,13 +2853,13 @@ namespace windowing_win32
       //      if (!(GetExStyle() & WS_EX_TOPMOST))
       //      {
 
-      //         ::set_window_pos(get_hwnd(), (HWND)e_zorder_top, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_SHOWWINDOW);
+      //         ::set_window_position(get_hwnd(), (HWND)e_zorder_top, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_SHOWWINDOW);
 
-      //         //::set_window_pos(get_hwnd(),(HWND)e_zorder_top,0,0,0,0,SWP_NOMOVE | SWP_NOSIZE | SWP_SHOWWINDOW);
+      //         //::set_window_position(get_hwnd(),(HWND)e_zorder_top,0,0,0,0,SWP_NOMOVE | SWP_NOSIZE | SWP_SHOWWINDOW);
 
-      //         //::set_window_pos(get_hwnd(),(HWND)e_zorder_top_most,0,0,0,0,SWP_NOMOVE | SWP_NOSIZE | SWP_SHOWWINDOW);
+      //         //::set_window_position(get_hwnd(),(HWND)e_zorder_top_most,0,0,0,0,SWP_NOMOVE | SWP_NOSIZE | SWP_SHOWWINDOW);
 
-      //         //::set_window_pos(get_hwnd(),(HWND)e_zorder_top,0,0,0,0,SWP_NOMOVE | SWP_NOSIZE | SWP_SHOWWINDOW);
+      //         //::set_window_position(get_hwnd(),(HWND)e_zorder_top,0,0,0,0,SWP_NOMOVE | SWP_NOSIZE | SWP_SHOWWINDOW);
 
       //      }
 
@@ -4791,7 +4801,7 @@ namespace windowing_win32
    void window::show_task(bool bShow)
    {
 
-      sync_lock sl(mutex());
+      synchronization_lock synchronizationlock(mutex());
 
       // https://www.daniweb.com/programming/software-development/threads/457564/mfc-application-disablehide-taskbar-icon
 
@@ -4837,10 +4847,10 @@ namespace windowing_win32
    }
 
 
-   /*bool window::set_window_pos(class ::user::zorder zorder, i32 x, i32 y, i32 cx, i32 cy, ::u32 nFlags)
+   /*bool window::set_window_position(class ::user::zorder zorder, i32 x, i32 y, i32 cx, i32 cy, ::u32 nFlags)
    {
 
-      if (!::user::window::set_window_pos(zorder, x, y, cx, cy, nFlags))
+      if (!::user::window::set_window_position(zorder, x, y, cx, cy, nFlags))
       {
 
          return false;
@@ -4851,7 +4861,7 @@ namespace windowing_win32
       {
 
 
-         if (!::set_window_pos(get_hwnd(), zorder, x, y, cx, cy, nFlags))
+         if (!::set_window_position(get_hwnd(), zorder, x, y, cx, cy, nFlags))
          {
 
             return false;

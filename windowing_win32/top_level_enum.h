@@ -6,22 +6,22 @@ namespace windowing_win32
 
 
    template < typename PRED >
-   class top_level_boolean_pred
+   class top_level_boolean_predicate
    {
    public:
 
 
-      PRED     m_pred;
+      PRED     m_predicate;
       HWND     m_hwnd;
 
 
-      top_level_boolean_pred(PRED pred, HWND hwndDefault = nullptr) : m_pred(pred), m_hwnd(hwndDefault) {}
+      top_level_boolean_predicate(PRED pred, HWND hwndDefault = nullptr) : m_predicate(pred), m_hwnd(hwndDefault) {}
 
 
       bool found(HWND hwnd)
       {
 
-         return m_pred(hwnd);
+         return m_predicate(hwnd);
 
       }
 
@@ -31,7 +31,7 @@ namespace windowing_win32
       static BOOL CALLBACK EnumWindowsProc(HWND hwnd, LPARAM lParam)
       {
 
-         top_level_boolean_pred * ppred = (top_level_boolean_pred *)lParam;
+         top_level_boolean_predicate * ppred = (top_level_boolean_predicate *)lParam;
 
          if (ppred->found(hwnd))
          {
@@ -52,14 +52,14 @@ namespace windowing_win32
 
 
    template < typename PRED >
-   bool top_level_contains_pred(PRED pred)
+   bool top_level_contains_predicate(PRED pred)
    {
 
-      top_level_boolean_pred<PRED> boolean_pred(pred);
+      top_level_boolean_predicate<PRED> boolean_predicate(pred);
 
-      EnumWindows(&top_level_boolean_pred<PRED>::EnumWindowsProc, (LPARAM)&boolean_pred);
+      EnumWindows(&top_level_boolean_predicate<PRED>::EnumWindowsProc, (LPARAM)&boolean_predicate);
 
-      return boolean_pred.m_hwnd != nullptr;
+      return boolean_predicate.m_hwnd != nullptr;
 
    }
 
@@ -105,7 +105,7 @@ namespace windowing_win32
    bool top_level_contains_name(string str)
    {
 
-      return top_level_contains_pred([str](HWND hwnd)
+      return top_level_contains_predicate([str](HWND hwnd)
          {
 
             //PSEUDO-Code char sz[1024]; GetWindowTextA(sz,1024, oswindow); return !strcmp(sz, str.c_str());
@@ -122,7 +122,7 @@ namespace windowing_win32
    bool visible_top_level_contains_name(string str)
    {
 
-      return top_level_contains_pred([str](HWND hwnd)
+      return top_level_contains_predicate([str](HWND hwnd)
          {
 
             //PSEUDO-Code char sz[1024]; GetWindowTextA(sz,1024, oswindow); return !strcmp(sz, str.c_str());
@@ -145,7 +145,7 @@ namespace windowing_win32
    bool visible_top_level_contains_all_names(string_array & stra)
    {
 
-      return top_level_contains_pred([&stra](HWND hwnd)
+      return top_level_contains_predicate([&stra](HWND hwnd)
          {
 
             //PSEUDO-Code char sz[1024]; GetWindowTextA(sz,1024, oswindow); return !strcmp(sz, str.c_str());

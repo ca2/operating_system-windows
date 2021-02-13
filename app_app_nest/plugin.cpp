@@ -221,7 +221,7 @@ install:
          {
    //            papp->m_pwndMain->SetParent(pview);
             papp->m_pwndMain->ModifyStyle(0, WS_CHILD);
-            papp->m_pwndMain->set_window_pos(nullptr, 0, 0, 400, 400, SWP_SHOWWINDOW);
+            papp->m_pwndMain->set_window_position(nullptr, 0, 0, 400, 400, SWP_SHOWWINDOW);
          }
       }*/
 

@@ -1400,7 +1400,7 @@ namespace draw2d_gdiplus
 //         //   if (m_ealphamode == ::draw2d::alpha_mode_blend)
 //         //   {
 //
-//         //      //single_lock sl(::get_thread_toolset(::thread::tool_draw2d)->mutex());
+//         //      //single_lock synchronizationlock(::get_thread_toolset(::thread::tool_draw2d)->mutex());
 //
 //         //      if (nHeight >= get_processor_count() * 4 && (nWidth * nHeight) >= (get_processor_count() * 64)
 //         //            &&   m_pimage->fork_blend(point_i32(x + GetViewportOrg().x, y + GetViewportOrg().y), pgraphicsSrc->m_pimage,
@@ -3173,7 +3173,7 @@ namespace draw2d_gdiplus
 
    //   }
 
-   //   sync_lock slSource(pgraphicsSrc->mutex());
+   //   synchronization_lock slSource(pgraphicsSrc->mutex());
 
    //   //bool bThreadToolsForIncreasedFps = ::get_task()->m_bThreadToolsForIncreasedFps;
 
@@ -5299,7 +5299,7 @@ namespace draw2d_gdiplus
 
       }
 
-      sync_lock sl(mutex());
+      synchronization_lock synchronizationlock(mutex());
 
       if (m_pfont.is_null())
       {
@@ -6399,7 +6399,7 @@ namespace draw2d_gdiplus
 
       }
 
-      sync_lock sl(mutex());
+      synchronization_lock synchronizationlock(mutex());
 
       if(m_ppen.cast < ::draw2d_gdiplus::pen >()->m_egdiplusalign != Gdiplus::PenAlignment::PenAlignmentCenter)
       {
@@ -6425,7 +6425,7 @@ namespace draw2d_gdiplus
 
    //{
 
-   //   sync_lock sl(mutex());
+   //   synchronization_lock synchronizationlock(mutex());
 
    //   if(m_ppen.cast < ::draw2d_gdiplus::pen >()->m_egdiplusalign != Gdiplus::PenAlignment::PenAlignmentCenter)
    //   {
@@ -6476,7 +6476,7 @@ namespace draw2d_gdiplus
 
       }
 
-      sync_lock sl(mutex());
+      synchronization_lock synchronizationlock(mutex());
 
       auto ppen = ppenParam->get_os_data < Gdiplus::Pen * >(this);
 
@@ -6496,7 +6496,7 @@ namespace draw2d_gdiplus
    //bool graphics::draw_line(double x1, double y1, double x2, double y2, ::draw2d::pen * ppenParam)
    //{
 
-   //   sync_lock sl(mutex());
+   //   synchronization_lock synchronizationlock(mutex());
 
    //   auto ppen = (Gdiplus::Pen *) ppenParam->get_os_data(this);
 
@@ -6916,7 +6916,7 @@ namespace draw2d_gdiplus
    Gdiplus::Pen * graphics::m_ppen->get_os_data < Pen * >(this)
    {
 
-      sync_lock sl(mutex());
+      synchronization_lock synchronizationlock(mutex());
 
       if(m_ppen.is_null())
       {
@@ -7025,7 +7025,7 @@ namespace draw2d_gdiplus
    bool graphics::flush()
    {
 
-      sync_lock sl(mutex());
+      synchronization_lock synchronizationlock(mutex());
 
       m_pgraphics->Flush();
 
@@ -7037,7 +7037,7 @@ namespace draw2d_gdiplus
    bool graphics::sync_flush()
    {
 
-      sync_lock sl(mutex());
+      synchronization_lock synchronizationlock(mutex());
 
       m_pgraphics->Flush(Gdiplus::FlushIntentionSync);
 
@@ -7091,7 +7091,7 @@ namespace draw2d_gdiplus
       if (m_pimageAlphaBlend->is_set())
       {
 
-         single_lock sl(mutex());
+         single_lock synchronizationlock(mutex());
 
          if (block.is_empty())
          {

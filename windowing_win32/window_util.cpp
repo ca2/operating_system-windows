@@ -588,7 +588,7 @@ namespace windowing_win32
       //      if(bModified)
       //      {
       //
-      //         ::set_window_pos(hwnd, HWND_TOP, rectangle.left, rectangle.top, rectangle.width(), rectangle.height(), 0);
+      //         ::set_window_position(hwnd, HWND_TOP, rectangle.left, rectangle.top, rectangle.width(), rectangle.height(), 0);
       //
       //      }
       //

@@ -560,10 +560,10 @@ namespace ca2plugin_container
 
    }
 
-   bool host::set_window_pos(iptr z,i32 x,i32 y,i32 cx,i32 cy,UINT nFlags)
+   bool host::set_window_position(iptr z,i32 x,i32 y,i32 cx,i32 cy,UINT nFlags)
    {
 
-      bool bOk = ::hotplugin::host::set_window_pos(z,x,y,cx,cy,nFlags);
+      bool bOk = ::hotplugin::host::set_window_position(z,x,y,cx,cy,nFlags);
 
 
       try
@@ -581,7 +581,7 @@ namespace ca2plugin_container
                   if(m_pcontainerapp->m_psystem->m_pplugin->m_puiHost != nullptr)
                   {
 
-                     m_pcontainerapp->m_psystem->m_pplugin->m_puiHost->set_window_pos(z,x,y,cx,cy,nFlags);
+                     m_pcontainerapp->m_psystem->m_pplugin->m_puiHost->set_window_position(z,x,y,cx,cy,nFlags);
 
                   }
 

@@ -225,7 +225,7 @@ namespace multimedia
       ::e_status     in::in_close()
       {
 
-         sync_lock sl(mutex());
+         synchronization_lock synchronizationlock(mutex());
 
          //::e_status     mmr;
 
@@ -264,7 +264,7 @@ namespace multimedia
       ::e_status     in::in_start()
       {
 
-         sync_lock sl(mutex());
+         synchronization_lock synchronizationlock(mutex());
 
          if(m_estate == state_recording)
             return ::success;
@@ -291,7 +291,7 @@ namespace multimedia
       ::e_status     in::in_stop()
       {
 
-         sync_lock sl(mutex());
+         synchronization_lock synchronizationlock(mutex());
 
          if(m_estate != state_recording)
             return error_failed;
@@ -361,7 +361,7 @@ namespace multimedia
       ::e_status     in::in_reset()
       {
 
-         sync_lock sl(mutex());
+         synchronization_lock synchronizationlock(mutex());
 
          m_bResetting = true;
 

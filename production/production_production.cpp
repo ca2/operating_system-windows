@@ -249,7 +249,7 @@ namespace production
 
          //   if (m_straStatus.get_count() > 1)
          //   {
-         //      single_lock sl(&m_mutexStatus,true);
+         //      single_lock synchronizationlock(&m_mutexStatus,true);
          //      set["post"]["new_status"] = set["post"]["new_status"] + "Last Stati:<br />";
          //      for (::count i = minimum(5, m_straStatus.get_count() - 1); i >= 1; i--)
          //      {
@@ -1467,7 +1467,7 @@ namespace production
       string strBz;
       string strUn;
       i32 i = 0;
-      single_lock sl(&m_mutexCompress, true);
+      single_lock synchronizationlock(&m_mutexCompress, true);
       for (; i < m_straFiles.get_size(); i++)
       {
          ::file::path & strFile = m_straFiles[i];
@@ -1490,7 +1490,7 @@ namespace production
          //add_status(strStatus);
          m_straCompress.add(strFile.Mid(m_iBaseLen));
       }
-      sl.unlock();
+      synchronizationlock.unlock();
 
       u32 uiProcessorCount = get_current_process_affinity_order();
       //uiProcessorCount = 0;
@@ -1505,7 +1505,7 @@ namespace production
       {
          pointer_array < manual_reset_event > eventa(this);
          eventa.set_size_create(this,uiProcessorCount);
-         sync_array ptra;
+         synchronization_array ptra;
          for (index u = 0; u < uiProcessorCount; u++)
          {
             compress_thread * pthread = new compress_thread(this, eventa[u]);
@@ -1535,12 +1535,12 @@ namespace production
 
    bool production::compress_next()
    {
-      single_lock sl(&m_mutexCompress, true);
+      single_lock synchronizationlock(&m_mutexCompress, true);
       if (m_straCompress.get_size() <= 0)
          return false;
       string strNext = m_straCompress[0];
       m_straCompress.remove_at(0);
-      sl.unlock();
+      synchronizationlock.unlock();
       compress(strNext);
       return true;
    }
@@ -2892,7 +2892,7 @@ namespace production
    void production::add_status(const char * psz)
    {
       {
-         single_lock sl(&m_mutexStatus, true);
+         single_lock synchronizationlock(&m_mutexStatus, true);
          m_straStatus.add(psz);
       }
       TRACE("%s", psz);
@@ -2902,7 +2902,7 @@ namespace production
    void production::change_status(const char * psz)
    {
       {
-         single_lock sl(&m_mutexStatus, true);
+         single_lock synchronizationlock(&m_mutexStatus, true);
          if (m_straStatus.get_count() == 0)
          {
             m_straStatus.add(psz);
@@ -2928,7 +2928,7 @@ namespace production
 
       {
 
-         sync_lock sl(&m_pproduction->m_mutexRelease);
+         synchronization_lock synchronizationlock(&m_pproduction->m_mutexRelease);
 
          m_pproduction->m_iRelease++;
 
@@ -2959,7 +2959,7 @@ namespace production
 
       Context.http().get(m_strRelease, str, set);
 
-      sync_lock sl(&m_pproduction->m_mutexRelease);
+      synchronization_lock synchronizationlock(&m_pproduction->m_mutexRelease);
 
       m_pproduction->m_iRelease--;
 
@@ -3060,7 +3060,7 @@ namespace production
       }
       else if (m_iRelease > 0)
       {
-         sync_lock sl(&m_mutexRelease);
+         synchronization_lock synchronizationlock(&m_mutexRelease);
          string strStatus;
          strStatus.Format("There are %d releases in command list!! (%s)", m_iRelease, m_straRelease.implode(";"));
          add_status(strStatus);

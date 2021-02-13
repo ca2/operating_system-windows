@@ -464,7 +464,7 @@ namespace music
          void midi::enumerate_midi_out_devices()
          {
 
-            sync_lock sl(mutex());
+            synchronization_lock synchronizationlock(mutex());
 
             u32 uDeviceCount = midiOutGetNumDevs();
 
@@ -492,7 +492,7 @@ namespace music
          void midi::enumerate_midi_in_devices()
          {
 
-            sync_lock sl(mutex());
+            synchronization_lock synchronizationlock(mutex());
 
             u32 uDeviceCount = midiInGetNumDevs();
 

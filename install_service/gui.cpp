@@ -1048,7 +1048,7 @@ INT_PTR CALLBACK nssm_dlg(HWND window, const ::id & id, WPARAM w, LPARAM l) {
         width -= (7 - columns) * 16;
         int height = rectangle.bottom - rectangle.top;
         if (n < 4) height -= (int) SendMessage(list, LB_GETITEMHEIGHT, 0, 0) * (4 - n);
-        set_window_pos(list, 0, 0, 0, width, height, SWP_NOMOVE | SWP_NOOWNERZORDER);
+        set_window_position(list, 0, 0, 0, width, height, SWP_NOMOVE | SWP_NOOWNERZORDER);
       }
       SendMessage(list, LB_SELITEMRANGE, 1, MAKELPARAM(0, n));
 

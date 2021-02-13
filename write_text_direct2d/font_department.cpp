@@ -160,7 +160,7 @@ namespace write_text_direct2d
 
       }
 
-      itema.pred_sort([](auto & item1, auto & item2)
+      itema.predicate_sort([](auto & item1, auto & item2)
          {
 
             return item1->m_strName < item2->m_strName;
