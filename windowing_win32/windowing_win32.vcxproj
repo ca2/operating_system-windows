@@ -1201,6 +1201,7 @@
     <ClCompile Include="windowing.cpp" />
     <ClCompile Include="window\window_dpi.cpp" />
     <ClCompile Include="window\window_property.cpp" />
+    <ClCompile Include="window\window_show.cpp" />
     <ClCompile Include="window_util.cpp" />
     <ClCompile Include="window\window_i_drop_target.cpp" />
     <ClCompile Include="window\window_i_unknown.cpp" />

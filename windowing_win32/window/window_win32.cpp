@@ -703,7 +703,3 @@ CLASS_DECL_WINDOWING_WIN32 WNDPROC windows_user_interaction_impl_get_window_proc
 
 
 
-
-
-
-
