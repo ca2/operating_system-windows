@@ -952,6 +952,20 @@ namespace windowing_win32
    }
 
 
+   void windowing::set(::message::key * pkey, oswindow oswindow, ::windowing::window * pwindow, const ::id & id, wparam wparam, ::lparam lparam)
+   {
+
+
+   }
+
+
+   void windowing::set(::message::mouse * pmouse, oswindow oswindow, ::windowing::window * pwindow, const ::id & id, wparam wparam, ::lparam lparam)
+   {
+
+
+   }
+
+
    void windowing::initialize_keyboard(::windowing::keyboard * pkeyboard)
    {
 
