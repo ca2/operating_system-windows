@@ -831,14 +831,6 @@ namespace windowing_win32
       virtual iptr get_window_long_ptr(i32 nIndex) const override;
       virtual bool set_window_long_ptr(i32 nIndex, iptr l) override;
 
-      virtual iptr _get_style() const;
-      virtual iptr _get_ex_style() const;
-
-      virtual bool _set_style(iptr nStyle);
-      virtual bool _set_ex_style(iptr nExStyle);
-
-      virtual bool modify_style(uptr dwRemove, uptr dwAdd, ::u32 nFlags);
-      virtual bool modify_ex_style(uptr dwRemove, uptr dwAdd, ::u32 nFlags);
 
 
       virtual void default_message_handler(::message::message * pusermessage);

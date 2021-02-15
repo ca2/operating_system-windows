@@ -2422,36 +2422,6 @@ namespace windowing_win32
    }
 
 
-   iptr window::_get_style() const
-   {
-      
-      return get_window_long_ptr(GWL_STYLE);
-
-   }
-
-
-   iptr window::_get_ex_style() const
-   {
-
-      return get_window_long_ptr(GWL_EXSTYLE);
-
-   }
-
-
-   bool window::_set_style(iptr nStyle)
-   {
-
-      return set_window_long_ptr(GWL_STYLE, nStyle);
-
-   }
-
-
-   bool window::_set_ex_style(iptr nExStyle)
-   {
-
-      return set_window_long_ptr(GWL_EXSTYLE, nExStyle);
-
-   }
 
 
    ::windowing::window * window::get_owner() const
