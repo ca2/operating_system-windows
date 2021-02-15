@@ -166,7 +166,7 @@ namespace windowing_win32
 
       }
 
-      critical_section_lock sl(&m_criticalsection);
+      critical_section_lock synchronizationlock(&m_criticalsection);
 
       auto & pwindow = m_windowmap[hwnd];
 
@@ -544,7 +544,7 @@ namespace windowing_win32
 
       }
 
-      pusermessage->set(pmsg->oswindow, pwindow, (enum_message)pmsg->message, pmsg->wParam, pmsg->lParam);
+      pusermessage->set(pmsg->oswindow, pwindow, pmsg->m_id, pmsg->wParam, pmsg->lParam);
 
       return pusermessage;
 

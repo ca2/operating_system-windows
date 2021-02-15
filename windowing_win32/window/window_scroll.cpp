@@ -115,7 +115,7 @@ namespace windowing_win32
    //   //         ::rectangle_i32 rectangle;
    //   //         ::get_window_rect(oswindow_Child,&rectangle);
    //   //         _001ScreenToClient(&rectangle);
-   //   //         ::set_window_pos(oswindow_Child,nullptr,rectangle.left + xAmount,rectangle.top + yAmount,0,0,SWP_NOSIZE | SWP_NOACTIVATE | SWP_NOZORDER);
+   //   //         ::set_window_position(oswindow_Child,nullptr,rectangle.left + xAmount,rectangle.top + yAmount,0,0,SWP_NOSIZE | SWP_NOACTIVATE | SWP_NOZORDER);
    //   //      }
    //   //   }
    //   //}

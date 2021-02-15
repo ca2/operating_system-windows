@@ -55,7 +55,7 @@ namespace ca2plugin_container
       virtual void set_system(void * pvoidPluginSystem);
 
       virtual void on_receive(::aura::ipc::rx * prx, i32 message, void * pdata, i32 len);
-      virtual bool set_window_pos(iptr z,i32 x,i32 y,i32 cx,i32 cy,UINT nFlags);
+      virtual bool set_window_position(iptr z,i32 x,i32 y,i32 cx,i32 cy,UINT nFlags);
 
       virtual void start_ca2();
 

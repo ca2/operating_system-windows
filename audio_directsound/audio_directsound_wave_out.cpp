@@ -69,7 +69,7 @@ namespace multimedia
       ::e_status     out::out_open(thread * pthreadCallback, i32 iBufferCount, i32 iBufferSampleCount)
       {
 
-         sync_lock sl(mutex());
+         synchronization_lock synchronizationlock(mutex());
 
          if (m_pdirectsound != nullptr && m_psoundbuffer != nullptr && m_estate != e_state_initial)
          {
@@ -265,7 +265,7 @@ namespace multimedia
       ::e_status     out::out_open_ex(thread * pthreadCallback, i32 iBufferCount, i32 iBufferSampleCount, u32 uiSamplesPerSec, u32 uiChannelCount, u32 uiBitsPerSample)
       {
 
-         sync_lock sl(mutex());
+         synchronization_lock synchronizationlock(mutex());
 
          if(m_pdirectsound != nullptr && m_psoundbuffer != nullptr && m_estate != e_state_initial)
             return ::success;
@@ -413,7 +413,7 @@ namespace multimedia
       ::e_status     out::out_close()
       {
 
-         sync_lock sl(mutex());
+         synchronization_lock synchronizationlock(mutex());
 
          if(m_estate == e_state_playing)
          {
@@ -457,7 +457,7 @@ namespace multimedia
       void out::out_filled(index i)
       {
 
-         sync_lock sl(mutex());
+         synchronization_lock synchronizationlock(mutex());
 
          LPVOID lpvAudio1 = nullptr,lpvAudio2 = nullptr;
 
@@ -521,7 +521,7 @@ namespace multimedia
       ::e_status     out::out_stop()
       {
 
-         sync_lock sl(mutex());
+         synchronization_lock synchronizationlock(mutex());
 
          if(m_estate != e_state_playing && m_estate != e_state_paused)
             return error_failed;
@@ -550,7 +550,7 @@ namespace multimedia
       ::e_status     out::out_pause()
       {
 
-         sync_lock sl(mutex());
+         synchronization_lock synchronizationlock(mutex());
 
          ASSERT(m_estate == e_state_playing);
 
@@ -579,7 +579,7 @@ namespace multimedia
       ::e_status     out::out_start(const imedia_time & position)
       {
 
-         sync_lock sl(mutex());
+         synchronization_lock synchronizationlock(mutex());
 
          if(m_estate == e_state_playing)
             return ::success;
@@ -608,7 +608,7 @@ namespace multimedia
       ::e_status     out::out_restart()
       {
 
-         sync_lock sl(mutex());
+         synchronization_lock synchronizationlock(mutex());
 
          ASSERT(m_estate == e_state_paused);
 
@@ -652,7 +652,7 @@ namespace multimedia
       imedia_time out::out_get_time()
       {
 
-         sync_lock sl(mutex());
+         synchronization_lock synchronizationlock(mutex());
 
          //::e_status                    mmr;
 
@@ -713,7 +713,7 @@ namespace multimedia
       imedia_time out::out_get_time()
       {
 
-         sync_lock sl(mutex());
+         synchronization_lock synchronizationlock(mutex());
 
          //::e_status                    mmr;
 

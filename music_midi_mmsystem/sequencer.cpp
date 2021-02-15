@@ -53,7 +53,7 @@ namespace music
          ::e_status     sequencer::close_file()
          {
 
-            sync_lock sl(mutex());
+            synchronization_lock synchronizationlock(mutex());
 
             m_psequence->m_pfile->close_file();
 
@@ -272,7 +272,7 @@ namespace music
          void sequencer::play(player_command * pcommand)
          {
 
-            sync_lock sl(mutex());
+            synchronization_lock synchronizationlock(mutex());
 
             start_mmsystem_sequencer();
 
@@ -282,7 +282,7 @@ namespace music
          void sequencer::pause(player_command * pcommand)
          {
 
-            sync_lock sl(mutex());
+            synchronization_lock synchronizationlock(mutex());
 
             if (sequence::e_state_playing != m_psequence->get_state())
             {
@@ -312,7 +312,7 @@ namespace music
          void sequencer::restart(player_command* pcommand)
          {
 
-            sync_lock sl(mutex());
+            synchronization_lock synchronizationlock(mutex());
 
             if (sequence::e_state_paused != m_psequence->get_state())
             {
@@ -338,7 +338,7 @@ namespace music
          void sequencer::stop(player_command * pcommand)
          {
 
-            sync_lock sl(mutex());
+            synchronization_lock synchronizationlock(mutex());
 
             if (m_psequence->get_state() == sequence::e_state_stopping)
             {
@@ -383,7 +383,7 @@ namespace music
          ::e_status     sequencer::get_ticks(imedia_time& pTicks)
          {
 
-            sync_lock sl(mutex());
+            synchronization_lock synchronizationlock(mutex());
 
             ::e_status                    mmr;
 
@@ -468,7 +468,7 @@ namespace music
 
          ::e_status     sequencer::get_millis(imedia_time& time)
          {
-            sync_lock sl(mutex());
+            synchronization_lock synchronizationlock(mutex());
 
             ::e_status                    mmr;
             MMTIME                  mmt;
@@ -962,7 +962,7 @@ namespace music
          ::e_status     sequencer::close_stream()
          {
 
-            sync_lock sl(mutex());
+            synchronization_lock synchronizationlock(mutex());
 
             m_buffera.midiOutUnprepareHeader((HMIDIOUT)m_hstream);
 
@@ -981,7 +981,7 @@ namespace music
          ::e_status     sequencer::close_device()
          {
 
-            sync_lock sl(mutex());
+            synchronization_lock synchronizationlock(mutex());
 
             if (m_hstream == nullptr)
                return ::success;
@@ -1048,7 +1048,7 @@ namespace music
             case sequence::e_event_midi_stream_out:
             {
 
-               sync_lock sl(mutex());
+               synchronization_lock synchronizationlock(mutex());
 
                LPMIDIHDR lpmidihdr = (LPMIDIHDR)pevent->m_puserdata;
 
@@ -1111,7 +1111,7 @@ namespace music
          imedia_time sequencer::get_position_ticks()
          {
 
-            single_lock sl(mutex());
+            single_lock synchronizationlock(mutex());
 
             MMTIME mmt;
 
@@ -1235,7 +1235,7 @@ namespace music
          ::e_status     sequencer::SendGMReset()
          {
 
-            sync_lock sl(&get_midi_mutex());
+            synchronization_lock synchronizationlock(&get_midi_mutex());
 
             TRACE("::music::midi::mmsystem::player::SendReset : (0)");
 
@@ -1319,7 +1319,7 @@ namespace music
 
             {
 
-               sync_lock sl(mutex());
+               synchronization_lock synchronizationlock(mutex());
 
                ASSERT(m_iBuffersInMMSYSTEM <= 0);
 

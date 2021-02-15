@@ -118,7 +118,7 @@ namespace windowing_win32
 
       virtual bool _001ScreenToClient(POINT_I32 * ppoint) override;
 
-      virtual bool set_window_pos(class::zorder zorder, i32 x, i32 y, i32 cx, i32 cy, ::u32 nFlags) override;
+      virtual bool set_window_position(class::zorder zorder, i32 x, i32 y, i32 cx, i32 cy, ::u32 nFlags) override;
 
       //virtual bool _set_window_pos(class::zorder zorder, i32 x, i32 y, i32 cx, i32 cy, ::u32 nFlags) override;
 
@@ -277,7 +277,7 @@ namespace windowing_win32
       //virtual void clear_need_zorder() override;
 
 
-      //virtual bool set_window_pos(iptr z, i32 x, i32 y, i32 cx, i32 cy, ::u32 nFlags = SWP_SHOWWINDOW);
+      //virtual bool set_window_position(iptr z, i32 x, i32 y, i32 cx, i32 cy, ::u32 nFlags = SWP_SHOWWINDOW);
 
 
       // Window size_i32 and position Functions

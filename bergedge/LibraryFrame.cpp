@@ -244,7 +244,7 @@ void CLibraryFrame::OnActivate(UINT nState,CWnd* pWndOther,BOOL bMinimized)
    if(bStayActive)
       pTopLevel->m_nFlags |= WF_STAYACTIVE;
 
-   // sync floating windows to the new state
+   // synchronization_object floating windows to the new state
    NotifyFloatingWindows(bStayActive ? FS_ACTIVATE : FS_DEACTIVATE);
 
    // get active view (use active frame if no active view)

@@ -133,12 +133,12 @@ void app_t::win_sync_out(string strLocal,string strRepos)
    //		strLog += "Removing locks...\r\n";
    //		strLog += "UNLOCKING! ATTENTION!\r\n";
    //		strLog += "Only one script like this should run at the same time!\r\n";
-   //		strLog += call("svn pdel --revprop -r 0 svn:sync-lock " + strAlt);
+   //		strLog += call("svn pdel --revprop -r 0 svn:synchronization_object-lock " + strAlt);
    //		strLog += "\r\n";
 
    //		strLog += "\r\n";
 
-   //		strLog += call("svnsync --non-interactive --sync-username " + strUser + " --sync-password " + strPass + " --source-username " + strUser + " --source-password " + strPass + " sync " + strAlt);
+   //		strLog += call("svnsync --non-interactive --synchronization_object-username " + strUser + " --synchronization_object-password " + strPass + " --source-username " + strUser + " --source-password " + strPass + " synchronization_object " + strAlt);
 
    //		strLog += "\r\n";
 
@@ -190,7 +190,7 @@ void app_t::win_sync_out(string strLocal,string strRepos)
 
    //strFileTime.replace(":","-");
 
-   //file::path pathLog = pathRepos / "sync-log" / strFileTime + ".txt";
+   //file::path pathLog = pathRepos / "synchronization_object-log" / strFileTime + ".txt";
 
    //file_put_contents(pathLog,strLog);
 
@@ -284,7 +284,7 @@ i32 app_t::run()
             if (str.has_char())
             {
 
-               ::system("C:\\bergedge\\hi5\\program\\hstart /NOCONSOLE \"svnsync --non-interactive --sync-username " + strUser + " --sync-password " + strPass + " --source-username " + strUser + " --source-password " + strPass + " sync https://" + str + "-repos.ca2.cc:8443/" + strRepos + "\"");
+               ::system("C:\\bergedge\\hi5\\program\\hstart /NOCONSOLE \"svnsync --non-interactive --synchronization_object-username " + strUser + " --synchronization_object-password " + strPass + " --source-username " + strUser + " --source-password " + strPass + " synchronization_object https://" + str + "-repos.ca2.cc:8443/" + strRepos + "\"");
             }
          }
 

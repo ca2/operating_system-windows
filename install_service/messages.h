@@ -1433,7 +1433,7 @@
 //
 // MessageText:
 //
-// Failed to create sync timer for service %1:
+// Failed to create synchronization_object timer for service %1:
 // %2
 // Throttled restarts will not be interruptible.
 //

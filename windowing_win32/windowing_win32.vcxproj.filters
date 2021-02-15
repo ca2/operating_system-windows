@@ -94,6 +94,9 @@
     <ClCompile Include="copydesk.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="window\window_show.cpp">
+      <Filter>Source Files\window</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">

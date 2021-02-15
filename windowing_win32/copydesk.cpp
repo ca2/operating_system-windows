@@ -28,7 +28,7 @@ namespace windowing_win32
    void copydesk::OnClipboardUpdate()
    {
 
-      sync_lock sl(mutex());
+      synchronization_lock synchronizationlock(mutex());
 
       m_cFileCount = -1;
       m_iPriorityTextFormat = -2;
@@ -86,7 +86,7 @@ namespace windowing_win32
 
       }
 
-      sync_lock sl(mutex());
+      synchronization_lock synchronizationlock(mutex());
 
       //WNDCLASS wndcls = {};
 
@@ -344,7 +344,7 @@ namespace windowing_win32
          else
          {
 
-            sync_lock sl(mutex());
+            synchronization_lock synchronizationlock(mutex());
 
             if (!::OpenClipboard(__hwnd(get_oswindow())))
             //if(!OpenClipboard())
@@ -394,7 +394,7 @@ namespace windowing_win32
 
       }
 
-      sync_lock sl(mutex());
+      synchronization_lock synchronizationlock(mutex());
 
       if (!::OpenClipboard(__hwnd(get_oswindow())))
       {
@@ -432,7 +432,7 @@ namespace windowing_win32
 
       //ASSERT(::IsWindow(m_hwnd));
 
-      sync_lock sl(mutex());
+      synchronization_lock synchronizationlock(mutex());
 
       if (!::OpenClipboard(__hwnd(get_oswindow())))
       {
@@ -478,7 +478,7 @@ namespace windowing_win32
 
       //ASSERT(::IsWindow(m_hwnd));
 
-      sync_lock sl(mutex());
+      synchronization_lock synchronizationlock(mutex());
 
       if (!::OpenClipboard(__hwnd(get_oswindow())))
       {
@@ -521,7 +521,7 @@ namespace windowing_win32
 
       }
 
-      sync_lock sl(mutex());
+      synchronization_lock synchronizationlock(mutex());
 
       if (!::OpenClipboard(__hwnd(get_oswindow())))
       {
@@ -587,7 +587,7 @@ namespace windowing_win32
 
       }
 
-      sync_lock sl(mutex());
+      synchronization_lock synchronizationlock(mutex());
 
       if (!::OpenClipboard(__hwnd(get_oswindow())))
       {
@@ -683,7 +683,7 @@ namespace windowing_win32
 
       //ASSERT(::IsWindow(m_hwnd));
 
-      sync_lock sl(mutex());
+      synchronization_lock synchronizationlock(mutex());
 
       if (!::OpenClipboard(__hwnd(get_oswindow())))
       {
