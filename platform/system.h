@@ -372,5 +372,13 @@ typedef std::type_info std_type_info;
 
 typedef wchar_t unichar;
 
+#ifdef UNICODE
 
+using platform_char = wchar_t;
+
+#else
+
+using platform_char = char;
+
+#endif
 
