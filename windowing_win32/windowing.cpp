@@ -402,7 +402,7 @@ namespace windowing_win32
 
       HWND hwndActive;
 
-      if (GetGUIThreadInfo(ithread, &info))
+      if (GetGUIThreadInfo((DWORD) ithread, &info))
       {
 
          hwndActive = info.hwndActive;
@@ -447,7 +447,7 @@ namespace windowing_win32
 
       HWND hwndFocus;
 
-      if (GetGUIThreadInfo(ithread, &info))
+      if (GetGUIThreadInfo((DWORD)ithread, &info))
       {
 
          hwndFocus = info.hwndFocus;
@@ -635,7 +635,7 @@ namespace windowing_win32
 
       HWND hwndCapture = nullptr;
 
-      if (GetGUIThreadInfo(ithread, &info))
+      if (GetGUIThreadInfo((DWORD)ithread, &info))
       {
 
          hwndCapture = info.hwndCapture;
@@ -952,18 +952,18 @@ namespace windowing_win32
    }
 
 
-   void windowing::set(::message::key * pkey, oswindow oswindow, ::windowing::window * pwindow, const ::id & id, wparam wparam, ::lparam lparam)
-   {
+   //void windowing::set(::message::key * pkey, oswindow oswindow, ::windowing::window * pwindow, const ::id & id, wparam wparam, ::lparam lparam)
+   //{
 
 
-   }
+   //}
 
 
-   void windowing::set(::message::mouse * pmouse, oswindow oswindow, ::windowing::window * pwindow, const ::id & id, wparam wparam, ::lparam lparam)
-   {
+   //void windowing::set(::message::mouse * pmouse, oswindow oswindow, ::windowing::window * pwindow, const ::id & id, wparam wparam, ::lparam lparam)
+   //{
 
 
-   }
+   //}
 
 
    void windowing::initialize_keyboard(::windowing::keyboard * pkeyboard)

@@ -327,23 +327,23 @@ namespace draw2d_gdiplus
    bool path::create(::draw2d::graphics * pgraphicsParam, ::i8 iCreate)
    {
 
-      auto pgdiplusgraphics = __graphics(pgraphicsParam);
+      //auto pgdiplusgraphics = __graphics(pgraphicsParam);
 
-      if (::is_null(pgdiplusgraphics))
-      {
+      //if (::is_null(pgdiplusgraphics))
+      //{
 
-         return false;
+      //   return false;
 
-      }
+      //}
 
-      auto pgraphics = pgdiplusgraphics->m_pgraphics;
+      //auto pgraphics = pgdiplusgraphics->m_pgraphics;
 
-      if (::is_null(pgraphics))
-      {
+      //if (::is_null(pgraphics))
+      //{
 
-         return false;
+      //   return false;
 
-      }
+      //}
 
       if(m_efillmode == ::draw2d::fill_mode_winding)
       {

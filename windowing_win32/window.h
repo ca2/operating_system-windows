@@ -118,7 +118,7 @@ namespace windowing_win32
 
       virtual bool _001ScreenToClient(POINT_I32 * ppoint) override;
 
-      virtual bool set_window_position(class::zorder zorder, i32 x, i32 y, i32 cx, i32 cy, ::u32 nFlags) override;
+      virtual bool set_window_position(const class ::zorder & zorder, i32 x, i32 y, i32 cx, i32 cy, ::u32 nFlags) override;
 
       //virtual bool _set_window_pos(class::zorder zorder, i32 x, i32 y, i32 cx, i32 cy, ::u32 nFlags) override;
 
@@ -141,10 +141,14 @@ namespace windowing_win32
       //bool operator==(const interaction_impl & wnd) const;
       //bool operator!=(const interaction_impl & wnd) const;
 
-      //virtual u32 GetStyle() const;
-      //virtual u32 GetExStyle() const;
-      //virtual bool ModifyStyle(u32 dwRemove, u32 dwAdd, ::u32 nFlags = 0);
-      //virtual bool ModifyStyleEx(u32 dwRemove, u32 dwAdd, ::u32 nFlags = 0);
+      virtual iptr _get_style() const;
+      virtual iptr _get_ex_style() const;
+      virtual bool _set_style(iptr iStyle);
+      virtual bool _set_ex_style(iptr iExStyle);
+      virtual bool _modify_style(iptr dwRemove, iptr dwAdd, ::u32 nFlags = 0);
+      virtual bool _modify_ex_style(iptr dwRemove, iptr dwAdd, ::u32 nFlags = 0);
+      virtual iptr _get_window_long_ptr(::i32 iIndex) const;
+      virtual bool _set_window_long_ptr(::i32 iIndex, ::iptr iLong);
 
       //virtual ::user::interaction * get_owner();
       //virtual void set_owner(::user::interaction * pOwnerWnd);
@@ -828,8 +832,8 @@ namespace windowing_win32
       virtual bool set_window_placement(const WINDOWPLACEMENT * pwndpl);
 
 
-      virtual iptr get_window_long_ptr(i32 nIndex) const override;
-      virtual bool set_window_long_ptr(i32 nIndex, iptr l) override;
+      //virtual iptr get_window_long_ptr(i32 nIndex) const override;
+      //virtual bool set_window_long_ptr(i32 nIndex, iptr l) override;
 
 
 
@@ -844,6 +848,9 @@ namespace windowing_win32
 
       virtual float dpiy(float y) override;
       virtual float dpix(float x) override;
+
+      virtual void update_screen() override;
+
  
       
 

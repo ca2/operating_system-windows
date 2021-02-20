@@ -3,6 +3,7 @@
 #include "acme/const/timer.h"
 #include "window.h"
 #include "aura/node/windows/interaction_impl.h"
+#include "aura/user/interaction_prodevian.h"
 #include <dwmapi.h>
 
 
@@ -234,7 +235,6 @@ namespace windowing_win32
    ::e_status window::create_window(::user::interaction_impl * pimpl)
    {
 
-
       auto psession = Session;
 
       auto puser = psession->user();
@@ -242,7 +242,6 @@ namespace windowing_win32
       auto pwindowing = puser->windowing();
 
       m_pwindowing = pwindowing;
-
 
       //__refer(puserinteraction->m_pthreadUserInteraction, ::get_task() OBJ_REF_DBG_COMMA_THIS_FUNCTION_LINE);
 
@@ -1608,7 +1607,7 @@ namespace windowing_win32
    //}
 
 
-   iptr window::get_window_long_ptr(i32 nIndex) const
+   iptr window::_get_window_long_ptr(i32 nIndex) const
    {
 
       HWND hwnd = get_hwnd();
@@ -1620,7 +1619,7 @@ namespace windowing_win32
    }
 
 
-   bool window::set_window_long_ptr(i32 nIndex, iptr i)
+   bool window::_set_window_long_ptr(i32 nIndex, iptr i)
    {
 
       HWND hwnd = get_hwnd();
@@ -1786,7 +1785,7 @@ namespace windowing_win32
 
 #undef SET_WINDOW_POS_LOG
 
-   bool window::set_window_position(class ::zorder zorder, i32 x, i32 y, i32 cx, i32 cy, ::u32 nFlags)
+   bool window::set_window_position(const class ::zorder & zorder, i32 x, i32 y, i32 cx, i32 cy, ::u32 nFlags)
    {
 
       HWND hwnd = get_hwnd();
@@ -2579,16 +2578,47 @@ namespace windowing_win32
    }
 
 
-   bool window::modify_ex_style(uptr dwRemove, uptr dwAdd, ::u32 nFlags)
+   iptr window::_get_style() const
    {
 
-      auto nExStyle = _get_ex_style();
+      return _get_window_long_ptr(GWL_STYLE);
 
-      nExStyle &= ~dwRemove;
+   }
 
-      nExStyle |= dwAdd;
 
-      _set_ex_style(nExStyle);
+   iptr window::_get_ex_style() const
+   {
+
+      return _get_window_long_ptr(GWL_EXSTYLE);
+
+   }
+
+
+   bool window::_set_style(iptr iStyle)
+   {
+
+      return _set_window_long_ptr(GWL_STYLE, iStyle);
+
+   }
+
+
+   bool window::_set_ex_style(iptr iExStyle)
+   {
+
+      return _set_window_long_ptr(GWL_EXSTYLE, iExStyle);
+
+   }
+
+   bool window::_modify_style(iptr dwRemove, iptr dwAdd, ::u32 nFlags)
+   {
+
+      auto nStyle = _get_style();
+
+      nStyle &= ~dwRemove;
+
+      nStyle |= dwAdd;
+
+      _set_style(nStyle);
 
       if (nFlags)
       {
@@ -2602,16 +2632,16 @@ namespace windowing_win32
    }
 
 
-   bool window::modify_style(uptr dwRemove, uptr dwAdd, ::u32 nFlags)
+   bool window::_modify_ex_style(iptr dwRemove, iptr dwAdd, ::u32 nFlags)
    {
 
-      auto nStyle = _get_style();
+      auto nExStyle = _get_ex_style();
 
-      nStyle &= ~dwRemove;
+      nExStyle &= ~dwRemove;
 
-      nStyle |= dwAdd;
+      nExStyle |= dwAdd;
 
-      _set_style(nStyle);
+      _set_ex_style(nExStyle);
 
       if (nFlags)
       {
@@ -3197,7 +3227,7 @@ namespace windowing_win32
 
       HWND hwndFocus;
 
-      if (GetGUIThreadInfo(ithread, &info))
+      if (GetGUIThreadInfo((DWORD) ithread, &info))
       {
 
          hwndFocus = info.hwndFocus;
@@ -3242,7 +3272,7 @@ namespace windowing_win32
 
       HWND hwndActive;
 
-      if (GetGUIThreadInfo(ithread, &info))
+      if (GetGUIThreadInfo((DWORD)ithread, &info))
       {
 
          hwndActive = info.hwndActive;
@@ -4778,13 +4808,13 @@ namespace windowing_win32
       if (bShow)
       {
 
-         modify_ex_style(WS_EX_TOOLWINDOW, 0, SWP_FRAMECHANGED);
+         _modify_ex_style(WS_EX_TOOLWINDOW, 0, SWP_FRAMECHANGED);
 
       }
       else
       {
 
-         modify_ex_style(0, WS_EX_TOOLWINDOW, SWP_FRAMECHANGED);
+         _modify_ex_style(0, WS_EX_TOOLWINDOW, SWP_FRAMECHANGED);
 
       }
 
@@ -5816,13 +5846,13 @@ namespace windowing_win32
       if (bSet)
       {
 
-         modify_ex_style(0, WS_EX_TOOLWINDOW, SWP_FRAMECHANGED);
+         _modify_ex_style(0, WS_EX_TOOLWINDOW, SWP_FRAMECHANGED);
 
       }
       else
       {
 
-         modify_ex_style(WS_EX_TOOLWINDOW, 0, SWP_FRAMECHANGED);
+         _modify_ex_style(WS_EX_TOOLWINDOW, 0, SWP_FRAMECHANGED);
 
       }
 
@@ -6457,7 +6487,7 @@ namespace windowing_win32
 
             }
 
-            pchild->message_handler(pmouse);
+            pchild->route_message(pmouse);
 
          }
          else
@@ -6739,6 +6769,18 @@ namespace windowing_win32
       return x / fDpi;
 
    }
+
+   void window::update_screen()
+   {
+
+      auto puserinteraction = m_pimpl->m_puserinteraction;
+
+      auto pprodevian = m_pimpl->m_pprodevian;
+
+      puserinteraction->post_routine(pprodevian->m_routineUpdateScreen);
+
+   }
+
 
 
 } // namespace windowing_win32
