@@ -1794,6 +1794,8 @@ namespace windowing_win32
 
       HWND hwndInsertAfter = pwindowing->zorder_to_hwnd(zorder);
 
+      bool bNoZorder = nFlags & SWP_NOZORDER;
+
       auto bSetWindowPos = ::SetWindowPos(hwnd, hwndInsertAfter, x, y, cx, cy, nFlags);
 
       return bSetWindowPos != FALSE;
@@ -6149,6 +6151,13 @@ namespace windowing_win32
 
       bool bUserElementalOk = !m_pimpl->m_bDestroyImplOnly && m_pimpl->m_puserinteraction && m_pimpl->m_puserinteraction->m_bUserPrimitiveOk;
 
+      if (m_uiMessage == WM_IME_CHAR)
+      {
+
+         output_debug_string("WM_IME_CHAR");
+
+      }
+
       //if (message == e_message_key_down ||
       //   message == e_message_key_up ||
       //   message == e_message_char ||
@@ -6467,7 +6476,7 @@ namespace windowing_win32
          if (::is_set(puiCapture))
          {
 
-            puiCapture->message_handler(pmouse);
+            puiCapture->route_message(pmouse);
 
             return;
 
@@ -6493,7 +6502,7 @@ namespace windowing_win32
          else
          {
 
-            m_pimpl->m_puserinteraction->message_handler(pmouse);
+            m_pimpl->m_puserinteraction->route_message(pmouse);
 
          }
 
@@ -6610,7 +6619,7 @@ namespace windowing_win32
          if (puiFocus)
          {
 
-            puiFocus->send(pmessage);
+            puiFocus->route_message(pmessage);
 
             if (pmessage->m_bRet)
             {
@@ -6769,6 +6778,19 @@ namespace windowing_win32
       return x / fDpi;
 
    }
+
+
+   void window::window_show()
+   {
+
+      auto puserinteraction = m_pimpl->m_puserinteraction;
+
+      auto pprodevian = m_pimpl->m_pprodevian;
+
+      puserinteraction->post_routine(pprodevian->m_routineWindowShow);
+
+   }
+
 
    void window::update_screen()
    {

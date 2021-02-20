@@ -849,6 +849,7 @@ namespace windowing_win32
       virtual float dpiy(float y) override;
       virtual float dpix(float x) override;
 
+      virtual void window_show() override;
       virtual void update_screen() override;
 
  

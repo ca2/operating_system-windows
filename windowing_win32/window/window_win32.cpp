@@ -96,6 +96,13 @@ LRESULT CALLBACK __window_procedure(HWND hwnd, UINT message, WPARAM wparam, LPAR
 
    lresult lresult = 0;
 
+   if (message == WM_KEYDOWN)
+   {
+
+      output_debug_string("WM_IME_CHAR(2)");
+
+   }
+
    if (is_registered_windows_message(message))
    {
 
