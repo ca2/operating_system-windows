@@ -47,6 +47,8 @@ namespace windowing_win32
    window::window()
    {
 
+      
+
       //set_layer(LAYERED_IMPL, this);
       //m_plongmap  = new iptr_to_iptr;
 

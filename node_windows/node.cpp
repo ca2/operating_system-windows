@@ -397,6 +397,52 @@ namespace node_windows
    }
 
 
+   ::e_status node::start()
+   {
+
+      auto estatus = System.__thread_init();
+
+      if (!estatus)
+      {
+
+         return estatus;
+
+      }
+
+      estatus = System.on_start();
+
+      if (!estatus)
+      {
+
+         return estatus;
+
+      }
+
+      estatus = System.main();
+
+      if (!estatus)
+      {
+
+         return estatus;
+
+      }
+
+      estatus = System.inline_term();
+
+      if (!estatus)
+      {
+
+         return estatus;
+
+      }
+
+      return estatus;
+
+
+   }
+
+
+
 } // namespace node_windows
 
 
