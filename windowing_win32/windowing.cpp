@@ -769,7 +769,7 @@ namespace windowing_win32
    }
 
 
-   int windowing::message_box(const char * pszMessage, const char * pszTitle, const ::e_message_box & emessagebox)
+   string windowing::message_box(const char * pszMessage, const char * pszTitle, const ::e_message_box & emessagebox)
    {
 
       wstring wstrMessage(pszMessage);
@@ -778,7 +778,9 @@ namespace windowing_win32
 
       auto iResult = ::MessageBoxW(nullptr, wstrMessage, wstrTitle, emessagebox);
 
-      return iResult;
+      auto strResult = message_box_result_to_string(iResult);
+
+      return setrResult;
 
    }
 

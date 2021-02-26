@@ -192,7 +192,7 @@ namespace windowing_win32
 
       //}
 
-      defer_initialize_bitmap_source_buffer();
+      //defer_initialize_bitmap_source_buffer();
 
       return double_buffer::on_begin_draw();
 

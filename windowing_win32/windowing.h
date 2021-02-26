@@ -102,7 +102,7 @@ namespace windowing_win32
       virtual ::windowing::cursor * get_default_cursor();
 
 
-      virtual int message_box(const char * pszMessage, const char * pszTitle, const ::e_message_box & emessagebox);
+      virtual string message_box(const char * pszMessage, const char * pszTitle, const ::e_message_box & emessagebox);
 
 
       virtual void get_cursor_pos(POINT_I32 * ppoint);

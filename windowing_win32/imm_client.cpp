@@ -9,7 +9,7 @@ imm_client::imm_client()
 {
 
    m_bImeCancelling = false;
-   m_bImeCandidateOpened = false;
+   m_bTextCompositionActive = false;
 
 }
 
@@ -57,7 +57,7 @@ void imm_client::_001OnSetFocus(::message::message * pmessage)
 void imm_client::_001OnKillFocus(::message::message * pmessage)
 {
 
-   m_bImeCandidateOpened = false;
+   m_bTextCompositionActive = false;
 
 }
 
@@ -312,7 +312,7 @@ void imm_client::_001OnIme(::message::message * pmessage)
 
          output_debug_string("\n" "WM_IME_NOTIFY" " > " "IMN_OPENCANDIDATE");
 
-         m_bImeCandidateOpened = true;
+         m_bTextCompositionActive = true;
 
       }
       else if (pusermessage->m_wparam == IMN_CHANGECANDIDATE)
@@ -320,7 +320,7 @@ void imm_client::_001OnIme(::message::message * pmessage)
 
          output_debug_string("\n" "WM_IME_NOTIFY" " > " "IMN_CHANGECANDIDATE");
 
-         m_bImeCandidateOpened = true;
+         m_bTextCompositionActive = true;
 
       }
       else if (pusermessage->m_wparam == IMN_CLOSECANDIDATE)
@@ -328,7 +328,7 @@ void imm_client::_001OnIme(::message::message * pmessage)
 
          output_debug_string("\n" "WM_IME_NOTIFY" " > " "IMN_CLOSECANDIDATE");
 
-         m_bImeCandidateOpened = false;
+         m_bTextCompositionActive = false;
 
       }
       else if (pusermessage->m_wparam == IMN_OPENSTATUSWINDOW)
@@ -454,7 +454,7 @@ void imm_client::_001OnKeyDown(::message::message * pmessage)
    if (pkey->m_ekey == ::user::e_key_escape)
    {
 
-      if (m_bImeCandidateOpened)
+      if (m_bTextCompositionActive)
       {
 
          imm_context imm(m_ptextcompositionclient);
@@ -501,7 +501,7 @@ void imm_client::on_text_composition(string str)
 void imm_client::on_text_composition_done()
 {
 
-   m_bImeCandidateOpened = false;
+   m_bTextCompositionActive = false;
 
    text_composition_client::on_text_composition_done();
 
@@ -511,7 +511,7 @@ void imm_client::on_text_composition_done()
 bool imm_client::is_text_composition_active() const
 {
 
-   return m_bImeCandidateOpened;
+   return m_bTextCompositionActive;
 
 }
 

@@ -370,7 +370,18 @@ namespace windowing_win32
 
       auto pusersystem = puserinteraction->m_pusersystem;
 
+
+
       auto & createstruct = pusersystem->m_createstruct;
+
+      wstrWindowName = puserinteraction->m_strWindowText;
+
+      if (pusersystem->m_createstruct.lpszName)
+      {
+
+         wstrWindowName = pusersystem->m_createstruct.lpszName;
+
+      }
 
       dwExStyle = createstruct.dwExStyle;
       dwStyle = createstruct.style;

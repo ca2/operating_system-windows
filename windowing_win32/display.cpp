@@ -43,6 +43,10 @@ namespace windowing_win32
 
          m_monitora.add(pmonitor);
 
+         __copy(pmonitor->m_rectangle, m_monitorinfoa[iMonitor].rcMonitor);
+
+         __copy(pmonitor->m_rectangleWorkspace, m_monitorinfoa[iMonitor].rcWork);
+
       }
 
 #elif defined(LINUX)
@@ -79,7 +83,16 @@ namespace windowing_win32
       if (prectangle != nullptr)
       {
 
-         if (!get_monitor_rect(iMainMonitor, prectangle))
+         auto pmonitor = get_monitor(iMainMonitor);
+
+         if (::is_null(pmonitor))
+         {
+
+            return -1;
+
+         }
+
+         if (!pmonitor->get_monitor_rectangle(prectangle))
          {
 
             return -1;
@@ -119,92 +132,92 @@ namespace windowing_win32
    }
 
 
-   bool display::get_monitor_rect(index iMonitor, RECTANGLE_I32 * prectangle)
-   {
-
-#ifdef _UWP
-
-      return false;
-
-      //prectangle->left = 0;
-
-      //prectangle->top = 0;
-
-      //auto puserinteraction = __user_interaction(m_puiHost);
-
-      //prectangle->right = puserinteraction->layout().sketch().width();
-
-      //prectangle->bottom = puserinteraction->layout().sketch().height();
-
-      //return true;
-
-#elif MOBILE_PLATFORM
-
-      GetMainScreenRect(prectangle);
-
-      return true;
-
-#elif defined(WINDOWS_DESKTOP)
-
-      if (iMonitor < 0 || iMonitor >= get_monitor_count())
-      {
-
-         return false;
-
-      }
-
-      __copy(prectangle, m_monitorinfoa[iMonitor].rcMonitor);
-
-
-#elif defined(_UWP)
-
-
-      return false;
-
-
-#elif defined(LINUX)
-
-      synchronization_lock synchronizationlock(mutex());
-
-      if (iMonitor < 0 || iMonitor >= get_monitor_count())
-      {
-
-         return false;
-
-      }
-
-      *prectangle = m_rectaMonitor[iMonitor];
-
-
-#elif defined(__APPLE__)
-
-      if (iMonitor < 0 || iMonitor >= get_monitor_count())
-      {
-
-         return false;
-
-      }
-
-      GetScreenRect(prectangle, (int)iMonitor);
-
-
-#else
-
-      prectangle->left = 0;
-
-      prectangle->top = 0;
-
-      prectangle->right = oslocal().m_iScreenWidth;
-
-      prectangle->bottom = oslocal().m_iScreenHeight;
-
-
-#endif
-
-      return true;
-
-   }
-
+//   bool display::get_monitor_rectangle(index iMonitor, RECTANGLE_I32 * prectangle)
+//   {
+//
+//#ifdef _UWP
+//
+//      return false;
+//
+//      //prectangle->left = 0;
+//
+//      //prectangle->top = 0;
+//
+//      //auto puserinteraction = __user_interaction(m_puiHost);
+//
+//      //prectangle->right = puserinteraction->layout().sketch().width();
+//
+//      //prectangle->bottom = puserinteraction->layout().sketch().height();
+//
+//      //return true;
+//
+//#elif MOBILE_PLATFORM
+//
+//      GetMainScreenRect(prectangle);
+//
+//      return true;
+//
+//#elif defined(WINDOWS_DESKTOP)
+//
+//      if (iMonitor < 0 || iMonitor >= get_monitor_count())
+//      {
+//
+//         return false;
+//
+//      }
+//
+//      __copy(prectangle, m_monitorinfoa[iMonitor].rcMonitor);
+//
+//
+//#elif defined(_UWP)
+//
+//
+//      return false;
+//
+//
+//#elif defined(LINUX)
+//
+//      synchronization_lock synchronizationlock(mutex());
+//
+//      if (iMonitor < 0 || iMonitor >= get_monitor_count())
+//      {
+//
+//         return false;
+//
+//      }
+//
+//      *prectangle = m_rectaMonitor[iMonitor];
+//
+//
+//#elif defined(__APPLE__)
+//
+//      if (iMonitor < 0 || iMonitor >= get_monitor_count())
+//      {
+//
+//         return false;
+//
+//      }
+//
+//      GetScreenRect(prectangle, (int)iMonitor);
+//
+//
+//#else
+//
+//      prectangle->left = 0;
+//
+//      prectangle->top = 0;
+//
+//      prectangle->right = oslocal().m_iScreenWidth;
+//
+//      prectangle->bottom = oslocal().m_iScreenHeight;
+//
+//
+//#endif
+//
+//      return true;
+//
+//   }
+//
 
    ::count display::get_desk_monitor_count()
    {
@@ -214,17 +227,17 @@ namespace windowing_win32
    }
 
 
-   bool display::get_desk_monitor_rect(index iMonitor, RECTANGLE_I32 * prectangle)
+   //bool display::get_desk_monitor_rect(index iMonitor, RECTANGLE_I32 * prectangle)
 
-   {
+   //{
 
-      return get_monitor_rect(iMonitor, prectangle);
-
-
-   }
+   //   return get_monitor_rect(iMonitor, prectangle);
 
 
-   index display::get_main_wkspace(RECTANGLE_I32 * prectangle)
+   //}
+
+
+   index display::get_main_workspace(RECTANGLE_I32 * prectangle)
 
    {
 
@@ -232,7 +245,7 @@ namespace windowing_win32
 
       HMONITOR hwkspacePrimary = get_primary_monitor_handle();
 
-      for (index iWkspace = 0; iWkspace < get_wkspace_count(); iWkspace++)
+      for (index iWkspace = 0; iWkspace < get_workspace_count(); iWkspace++)
       {
 
          if (m_hmonitora[iWkspace] == hwkspacePrimary)
@@ -250,8 +263,16 @@ namespace windowing_win32
       if (prectangle != nullptr)
       {
 
-         get_wkspace_rect(iMainWkspace, prectangle);
+         auto pmonitor = get_monitor(iMainWkspace);
 
+         if (::is_null(prectangle))
+         {
+
+            return -1;
+
+         }
+
+         pmonitor->get_workspace_rectangle(prectangle);
 
       }
 
@@ -260,7 +281,7 @@ namespace windowing_win32
    }
 
 
-   ::count display::get_wkspace_count()
+   ::count display::get_workspace_count()
    {
 
 #ifdef WINDOWS_DESKTOP
@@ -276,91 +297,91 @@ namespace windowing_win32
    }
 
 
-   bool display::get_wkspace_rect(index iWkspace, RECTANGLE_I32 * prectangle)
+//   bool display::get_wkspace_rect(index iWkspace, RECTANGLE_I32 * prectangle)
+//   {
+//
+//#ifdef WINDOWS_DESKTOP
+//
+//      if (iWkspace < 0 || iWkspace >= get_wkspace_count())
+//         return false;
+//
+//      __copy(prectangle, m_monitorinfoa[iWkspace].rcWork);
+//
+//
+//#elif defined(_UWP)
+//
+//      return get_monitor_rect(iWkspace, prectangle);
+//
+//
+//      //#elif defined(LINUX)
+//      //
+//      //return false;
+//      //
+//#elif defined(__APPLE__)
+//
+//      if (iWkspace < 0 || iWkspace >= get_wkspace_count())
+//      {
+//
+//         return false;
+//
+//      }
+//
+//      GetWkspaceRect(prectangle, (int)iWkspace);
+//
+//
+//      //      prectangle->top += ::mac::get_system_main_menu_bar_height();
+//
+//      //    prectangle->bottom -= ::mac::get_system_dock_height();
+//
+//#elif defined(LINUX)
+//
+//      synchronization_lock synchronizationlock(mutex());
+//
+//      if (iWkspace < 0 || iWkspace >= get_wkspace_count())
+//      {
+//
+//         return false;
+//
+//      }
+//
+//      *prectangle = m_rectaWkspace[iWkspace];
+//
+//
+//      return true;
+//
+//#else
+//
+//      //__throw(todo());
+//
+//      //::get_window_rect(::get_desktop_window(),prectangle);
+//
+//
+//      get_monitor_rect(iWkspace, prectangle);
+//
+//
+//#endif
+//
+//      return true;
+//
+//   }
+
+
+   ::count display::get_desk_workspace_count()
    {
 
-#ifdef WINDOWS_DESKTOP
-
-      if (iWkspace < 0 || iWkspace >= get_wkspace_count())
-         return false;
-
-      __copy(prectangle, m_monitorinfoa[iWkspace].rcWork);
-
-
-#elif defined(_UWP)
-
-      return get_monitor_rect(iWkspace, prectangle);
-
-
-      //#elif defined(LINUX)
-      //
-      //return false;
-      //
-#elif defined(__APPLE__)
-
-      if (iWkspace < 0 || iWkspace >= get_wkspace_count())
-      {
-
-         return false;
-
-      }
-
-      GetWkspaceRect(prectangle, (int)iWkspace);
-
-
-      //      prectangle->top += ::mac::get_system_main_menu_bar_height();
-
-      //    prectangle->bottom -= ::mac::get_system_dock_height();
-
-#elif defined(LINUX)
-
-      synchronization_lock synchronizationlock(mutex());
-
-      if (iWkspace < 0 || iWkspace >= get_wkspace_count())
-      {
-
-         return false;
-
-      }
-
-      *prectangle = m_rectaWkspace[iWkspace];
-
-
-      return true;
-
-#else
-
-      //__throw(todo());
-
-      //::get_window_rect(::get_desktop_window(),prectangle);
-
-
-      get_monitor_rect(iWkspace, prectangle);
-
-
-#endif
-
-      return true;
+      return get_workspace_count();
 
    }
 
 
-   ::count display::get_desk_wkspace_count()
-   {
+   //bool display::get_desk_wkspace_rect(index iWkspace, RECTANGLE_I32 * prectangle)
 
-      return get_wkspace_count();
+   //{
 
-   }
-
-
-   bool display::get_desk_wkspace_rect(index iWkspace, RECTANGLE_I32 * prectangle)
-
-   {
-
-      return get_wkspace_rect(iWkspace, prectangle);
+   //   return get_wkspace_rect(iWkspace, prectangle);
 
 
-   }
+   //}
 
 
    bool display::set_main_monitor(index iMonitor)
@@ -392,95 +413,95 @@ namespace windowing_win32
    }
 
 
-   bool display::wkspace_to_monitor(RECTANGLE_I32 * prectangle, index iMonitor, index iWkspace)
-   {
+   //bool display::wkspace_to_monitor(RECTANGLE_I32 * prectangle, index iMonitor, index iWkspace)
+   //{
 
-      ::rectangle_i32 rectangle(*prectangle);
+   //   ::rectangle_i32 rectangle(*prectangle);
 
-      ::rectangle_i32 rectWkspace;
+   //   ::rectangle_i32 rectWkspace;
 
-      if (!get_wkspace_rect(iWkspace, rectWkspace))
-      {
+   //   if (!get_wkspace_rect(iWkspace, rectWkspace))
+   //   {
 
-         return false;
+   //      return false;
 
-      }
+   //   }
 
-      rectangle -= rectWkspace.top_left();
+   //   rectangle -= rectWkspace.top_left();
 
-      ::rectangle_i32 rectMonitor;
+   //   ::rectangle_i32 rectMonitor;
 
-      if (!get_monitor_rect(iMonitor, rectMonitor))
-      {
+   //   if (!get_monitor_rect(iMonitor, rectMonitor))
+   //   {
 
-         return false;
+   //      return false;
 
-      }
+   //   }
 
-      rectangle += rectMonitor.top_left();
+   //   rectangle += rectMonitor.top_left();
 
-      *prectangle = rectangle;
+   //   *prectangle = rectangle;
 
-      return true;
+   //   return true;
 
-   }
-
-
-   bool display::wkspace_to_monitor(RECTANGLE_I32 * prectangle)
-   {
-
-      index iWkspace = get_best_wkspace(nullptr, rectangle_i32(prectangle));
-
-      return wkspace_to_monitor(prectangle, iWkspace, iWkspace);
-
-   }
+   //}
 
 
-   bool display::monitor_to_wkspace(RECTANGLE_I32 * prectangle)
-   {
+   //bool display::wkspace_to_monitor(RECTANGLE_I32 * prectangle)
+   //{
 
-      index iMonitor = get_best_monitor(nullptr, rectangle_i32(prectangle));
+   //   index iWkspace = get_best_wkspace(nullptr, rectangle_i32(prectangle));
 
-      return monitor_to_wkspace(prectangle, iMonitor, iMonitor);
+   //   return wkspace_to_monitor(prectangle, iWkspace, iWkspace);
 
-   }
-
-
-   bool display::monitor_to_wkspace(RECTANGLE_I32 * prectangle, index iWkspace, index iMonitor)
-   {
-
-      ::rectangle_i32 rectangle(prectangle);
-
-      ::rectangle_i32 rectMonitor;
-
-      if (!get_monitor_rect(iMonitor, rectMonitor))
-      {
-
-         return false;
-
-      }
-
-      rectangle -= rectMonitor.top_left();
-
-      ::rectangle_i32 rectWkspace;
-
-      if (!get_wkspace_rect(iWkspace, rectWkspace))
-      {
-
-         return false;
-
-      }
-
-      rectangle += rectWkspace.top_left();
-
-      *prectangle = rectangle;
-
-      return true;
-
-   }
+   //}
 
 
-   void display::get_monitor(rect_array & rectaMonitor, rect_array & rectaIntersect, const rectangle_i32 & rectParam)
+   //bool display::monitor_to_wkspace(RECTANGLE_I32 * prectangle)
+   //{
+
+   //   index iMonitor = get_best_monitor(nullptr, rectangle_i32(prectangle));
+
+   //   return monitor_to_wkspace(prectangle, iMonitor, iMonitor);
+
+   //}
+
+
+   //bool display::monitor_to_wkspace(RECTANGLE_I32 * prectangle, index iWkspace, index iMonitor)
+   //{
+
+   //   ::rectangle_i32 rectangle(prectangle);
+
+   //   ::rectangle_i32 rectMonitor;
+
+   //   if (!get_monitor_rect(iMonitor, rectMonitor))
+   //   {
+
+   //      return false;
+
+   //   }
+
+   //   rectangle -= rectMonitor.top_left();
+
+   //   ::rectangle_i32 rectWkspace;
+
+   //   if (!get_wkspace_rect(iWkspace, rectWkspace))
+   //   {
+
+   //      return false;
+
+   //   }
+
+   //   rectangle += rectWkspace.top_left();
+
+   //   *prectangle = rectangle;
+
+   //   return true;
+
+   //}
+
+
+   void display::_get_monitor(rect_array & rectaMonitor, rect_array & rectaIntersect, const rectangle_i32 & rectParam)
    {
 
       for (index iMonitor = 0; iMonitor < get_monitor_count(); iMonitor++)
@@ -490,20 +511,22 @@ namespace windowing_win32
 
          ::rectangle_i32 rectMonitor;
 
-         if (get_monitor_rect(iMonitor, rectMonitor))
+         auto pmonitor = get_monitor(iMonitor);
+
+         if (pmonitor->get_monitor_rectangle(rectMonitor))
          {
 
-            if (rectIntersect.top_left_null_intersect(&rectParam, rectMonitor))
+         }
+
+         if (rectIntersect.top_left_null_intersect(&rectParam, rectMonitor))
+         {
+
+            if (rectIntersect.area() >= 0)
             {
 
-               if (rectIntersect.area() >= 0)
-               {
+               rectaMonitor.add(rectMonitor);
 
-                  rectaMonitor.add(rectMonitor);
-
-                  rectaIntersect.add(rectIntersect);
-
-               }
+               rectaIntersect.add(rectIntersect);
 
             }
 
@@ -815,7 +838,7 @@ namespace windowing_win32
       if (eactivation & e_activation_under_mouse_cursor || rectangle.is_null())
       {
 
-         ::point_i32 pointCursor = m_pwindowing->get_cursor_pos();
+         ::point_i32 pointCursor = m_pwindowing->get_cursor_position();
 
          rectangle.set(pointCursor - ::size_i32(5, 5), ::size_i32(10, 10));
 
@@ -828,7 +851,9 @@ namespace windowing_win32
 
          ::rectangle_i32 rectMonitor;
 
-         if (get_monitor_rect(iMonitor, rectMonitor))
+         auto pmonitor = get_monitor(iMonitor);
+
+         if (pmonitor->get_monitor_rectangle(rectMonitor))
          {
 
             if (rectIntersect.top_left_null_intersect(rectangle, rectMonitor))
@@ -894,20 +919,22 @@ namespace windowing_win32
       if (eactivation & e_activation_under_mouse_cursor || rectangle.is_null())
       {
 
-         ::point_i32 pointCursor = m_pwindowing->get_cursor_pos();
+         ::point_i32 pointCursor = m_pwindowing->get_cursor_position();
 
          rectangle.set(pointCursor - ::size_i32(5, 5), ::size_i32(10, 10));
 
       }
 
-      for (index iWkspace = 0; iWkspace < get_wkspace_count(); iWkspace++)
+      for (index iWorkspace = 0; iWorkspace < get_workspace_count(); iWorkspace++)
       {
 
          ::rectangle_i32 rectIntersect;
 
          ::rectangle_i32 rectMonitor;
 
-         if (get_wkspace_rect(iWkspace, rectMonitor))
+         auto pmonitor = get_monitor(iWorkspace);
+
+         if (pmonitor->get_workspace_rectangle(rectMonitor))
          {
 
             if (rectIntersect.top_left_null_intersect(rectangle, rectMonitor))
@@ -916,7 +943,7 @@ namespace windowing_win32
                if (rectIntersect.area() > iBestArea)
                {
 
-                  iMatchingWkspace = iWkspace;
+                  iMatchingWkspace = iWorkspace;
 
                   iBestArea = rectIntersect.area();
 
@@ -928,7 +955,7 @@ namespace windowing_win32
             else if (rectMonitor.contains(rectangle))
             {
 
-               iMatchingWkspace = iWkspace;
+               iMatchingWkspace = iWorkspace;
 
                rectMatch = rectMonitor;
 
@@ -952,7 +979,7 @@ namespace windowing_win32
 
       }
 
-      iMatchingWkspace = get_main_wkspace(prectangle);
+      iMatchingWkspace = get_main_workspace(prectangle);
 
       return iMatchingWkspace;
 

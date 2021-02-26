@@ -7,7 +7,7 @@ namespace windowing_win32
 
    class CLASS_DECL_WINDOWING_WIN32 copydesk :
       virtual public ::user::copydesk,
-      virtual public ::user::message_queue
+      virtual public ::user::message_window
    {
    public:
 

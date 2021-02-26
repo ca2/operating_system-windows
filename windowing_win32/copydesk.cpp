@@ -67,7 +67,7 @@ namespace windowing_win32
    void copydesk::install_message_routing(::channel * pchannel)
    {
 
-      ::user::message_queue::install_message_routing(pchannel);
+      ::user::message_window::install_message_routing(pchannel);
 
       MESSAGE_LINK(WM_CLIPBOARDUPDATE, pchannel, this, &copydesk::_001OnClipboardUpdate);
 
@@ -155,7 +155,7 @@ namespace windowing_win32
 
       ::user::copydesk::finalize();
 
-      ::user::message_queue::finalize();
+      ::user::message_window::finalize();
 
    }
 
