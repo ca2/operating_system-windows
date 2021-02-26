@@ -7,7 +7,6 @@ class CLASS_DECL_WINDOWING_WIN32 imm_client :
 public:
 
 
-   string                                       m_strImeComposition;
    bool                                         m_bImeCandidateOpened;
    bool                                         m_bImeCancelling;
    
