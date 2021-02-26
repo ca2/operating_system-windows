@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 
 class CLASS_DECL_WINDOWING_WIN32 imm_client :
@@ -7,7 +7,8 @@ class CLASS_DECL_WINDOWING_WIN32 imm_client :
 public:
 
 
-   bool                                         m_bImeCandidateOpened;
+   //bool   m_bImeCandidateOpened; // replaced by m_bTextCompositionActive in base class.
+
    bool                                         m_bImeCancelling;
    
 
