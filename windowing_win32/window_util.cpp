@@ -252,7 +252,7 @@ namespace windowing_win32
 
 #else
 
-      __throw(todo());
+      __throw(todo);
 
 #endif
 
@@ -521,7 +521,7 @@ namespace windowing_win32
       //
       //#else
       //
-      //         __throw(todo());
+      //         __throw(todo);
       //
       //#endif
       //
@@ -551,7 +551,7 @@ namespace windowing_win32
       //
       //#else
       //
-      //      __throw(todo());
+      //      __throw(todo);
       //
       //#endif
       //
@@ -594,7 +594,7 @@ namespace windowing_win32
       //
       //#else
       //
-      //      __throw(todo());
+      //      __throw(todo);
       //
       //#endif
       //#endif
@@ -677,7 +677,7 @@ namespace windowing_win32
 
 #else
 
-      __throw(todo());
+      __throw(todo);
 
 #endif
 
@@ -872,7 +872,7 @@ namespace windowing_win32
    //
    //#else
    //
-   //      __throw(todo());
+   //      __throw(todo);
    //
    //#endif
    //
@@ -903,7 +903,7 @@ namespace windowing_win32
    //
    //#else
    //
-   //      __throw(todo());
+   //      __throw(todo);
    //
    //#endif
    //

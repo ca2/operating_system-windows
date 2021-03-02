@@ -97,7 +97,7 @@ namespace production
    
 
 
-   void view::on_subject(::promise::subject * psubject, ::promise::context * pcontext)
+   void view::on_subject(::subject::subject * psubject, ::subject::context * pcontext)
    {
       if(update == ::id_update_current_area)
       {

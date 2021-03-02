@@ -112,7 +112,7 @@ namespace windowing_win32
 #elif defined(APPLE_IOS)
 
 #else
-      __throw(todo());
+      __throw(todo);
 
 #endif
 
@@ -291,7 +291,7 @@ namespace windowing_win32
 
 #else
 
-      __throw(todo());
+      __throw(todo);
 
 #endif
 
@@ -389,7 +389,7 @@ namespace windowing_win32
 #else
 
 
-      __throw(todo());
+      __throw(todo);
 
       return true;
 

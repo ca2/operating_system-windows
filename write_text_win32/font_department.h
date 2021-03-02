@@ -64,7 +64,7 @@ namespace write_text_win32
 
 
       //virtual bool is_initialized();
-      //virtual void defer_create_font_enumeration(::promise::subject * psubject);
+      //virtual void defer_create_font_enumeration(::subject::subject * psubject);
 
 
       virtual void enum_fonts(::write_text::font_enum_item_array & itema);

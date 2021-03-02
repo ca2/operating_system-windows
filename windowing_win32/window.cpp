@@ -365,26 +365,29 @@ namespace windowing_win32
 
 #else
 
-      ::u32 dwExStyle = puserinteraction->GetExStyle();
-      ::u32 dwStyle = puserinteraction->GetStyle();
+      //::u32 dwExStyle = puserinteraction->GetExStyle();
+      //::u32 dwStyle = puserinteraction->GetStyle();
+
+      ::u32 dwExStyle = 0;
+      ::u32 dwStyle = 0;
 
       auto pusersystem = puserinteraction->m_pusersystem;
 
+      //CREATESTRUCTW createstruct{};
 
-
-      auto & createstruct = pusersystem->m_createstruct;
+      //auto & createstruct = pusersystem->m_createstruct;
 
       wstrWindowName = puserinteraction->m_strWindowText;
 
-      if (pusersystem->m_createstruct.lpszName)
-      {
+      //if (pusersystem->m_createstruct.lpszName)
+      //{
 
-         wstrWindowName = pusersystem->m_createstruct.lpszName;
+      //   wstrWindowName = pusersystem->m_createstruct.lpszName;
 
-      }
+      //}
 
-      dwExStyle = createstruct.dwExStyle;
-      dwStyle = createstruct.style;
+      //dwExStyle = createstruct.dwExStyle;
+      //dwStyle = createstruct.style;
 
       windowing()->__synthesizes_creates_styles(puserinteraction, dwExStyle, dwStyle);
 
@@ -415,12 +418,12 @@ namespace windowing_win32
 
       }
 
-      if (puserinteraction->m_pusersystem)
-      {
+      //if (puserinteraction->m_pusersystem)
+      //{
 
-         lpCreateParams = puserinteraction->m_pusersystem->m_createstruct.lpCreateParams;
+      //   lpCreateParams = puserinteraction->m_pusersystem->m_createstruct.lpCreateParams;
 
-      }
+      //}
 
       HWND hwnd = ::CreateWindowExW(
          dwExStyle,
@@ -434,7 +437,7 @@ namespace windowing_win32
          hwndParent,
          hmenu,
          hinstance,
-         lpCreateParams);
+         pusersystem);
 
 #endif
 
@@ -1541,7 +1544,7 @@ namespace windowing_win32
    //__pointer(window) window::get_active_window()
    //{
 
-   //   __throw(interface_only_exception());
+   //   __throw(error_interface_only);
 
    //   return nullptr;
 
@@ -1795,6 +1798,22 @@ namespace windowing_win32
       return false;
 
    }
+
+
+   bool window::on_set_window_position(const class ::zorder& zorder, i32 x, i32 y, i32 cx, i32 cy, ::u32 nFlags)
+   {
+
+      if (!(_get_ex_style() & WS_EX_LAYERED))
+      {
+
+         ::windowing::window::on_set_window_position(zorder, x, y, cx, cy, nFlags);
+
+      }
+
+      return false;
+
+   }
+
 
 #undef SET_WINDOW_POS_LOG
 
@@ -2275,7 +2294,7 @@ namespace windowing_win32
       rectPaint = paint.rcPaint;
 
 
-      __throw(todo());
+      __throw(todo);
 
       //if (rectPaint.is_null() || (GetExStyle() & WS_EX_LAYERED))
       //{
@@ -3045,7 +3064,7 @@ namespace windowing_win32
 
       auto pgraphics = __create < ::draw2d::graphics >();
 
-      __throw(todo());
+      __throw(todo);
 
       //pgraphics->attach(::GetDCEx(get_hwnd(), (HRGN)prgnClip->get_os_data(), flags));
 
@@ -4712,12 +4731,12 @@ namespace windowing_win32
 
    void window::on_set_parent(::user::interaction * puserinteraction) {
 
-      __throw(interface_only_exception());
+      __throw(error_interface_only);
    }
 
     bool window::get_rect_normal(RECTANGLE_I32 * prectangle) {
 
-       __throw(interface_only_exception());
+       __throw(error_interface_only);
        return false;
     }
 
@@ -4725,7 +4744,7 @@ namespace windowing_win32
     //void window::show_task(bool bShow)
     //{
 
-    //   __throw(interface_only_exception());
+    //   __throw(error_interface_only);
 
     //}
     //
@@ -4733,7 +4752,7 @@ namespace windowing_win32
     void window::window_show_change_visibility(::e_display edisplay, ::e_activation eactivation)
     {
 
-       __throw(interface_only_exception());
+       __throw(error_interface_only);
 
     }
 
@@ -6817,6 +6836,66 @@ namespace windowing_win32
    }
 
 
+   void window::on_redraw_window(::u32 flags)
+   {
+
+      if (!(_get_ex_style() & WS_EX_LAYERED))
+      {
+
+         ::RedrawWindow(get_hwnd(), nullptr, nullptr, flags);
+
+      }
+
+   }
+
+
+   //void window::show_task(bool bShowTask)
+   //{
+
+   //   if (bShow)
+   //   {
+
+   //      ModifyStyleEx(WS_EX_TOOLWINDOW, 0, SWP_FRAMECHANGED);
+
+   //   }
+   //   else
+   //   {
+
+   //      ModifyStyleEx(0, WS_EX_TOOLWINDOW, SWP_FRAMECHANGED);
+
+   //   }
+
+   //   defer_co_initialize_ex(false);
+
+   //   comptr < ITaskbarList>                     tasklist;
+
+   //   HRESULT hr = tasklist.CoCreateInstance(CLSID_TaskbarList, nullptr, CLSCTX_INPROC_SERVER);
+
+   //   if (SUCCEEDED(hr) && SUCCEEDED(hr = tasklist->HrInit()))
+   //   {
+
+   //      if (bShow)
+   //      {
+
+   //         hr = tasklist->AddTab((HWND)get_oswindow());
+
+   //         TRACE("result = %d", hr);
+
+   //      }
+   //      else
+   //      {
+
+   //         tasklist->DeleteTab((HWND)get_oswindow());
+
+   //      }
+
+   //   }
+
+   //}
+
+
 
 } // namespace windowing_win32
+
+
 

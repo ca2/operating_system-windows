@@ -118,6 +118,8 @@ namespace windowing_win32
 
       virtual bool _001ScreenToClient(POINT_I32 * ppoint) override;
 
+      virtual bool on_set_window_position(const class ::zorder& zorder, i32 x, i32 y, i32 cx, i32 cy, ::u32 nFlags) override;
+
       virtual bool set_window_position(const class ::zorder & zorder, i32 x, i32 y, i32 cx, i32 cy, ::u32 nFlags) override;
 
       //virtual bool _set_window_pos(class::zorder zorder, i32 x, i32 y, i32 cx, i32 cy, ::u32 nFlags) override;
@@ -321,6 +323,10 @@ namespace windowing_win32
 
       //virtual void Print(::draw2d::graphics_pointer & pgraphics, u32 dwFlags) const;
       //virtual void PrintClient(::draw2d::graphics_pointer & pgraphics, u32 dwFlags) const;
+
+      virtual void on_redraw_window(::u32 flags) override;
+
+      virtual void show_task(bool bShowTask) override;
 
       virtual void UpdateWindow();
       virtual void SetRedraw(bool bRedraw = true);
@@ -814,7 +820,7 @@ namespace windowing_win32
 
       virtual bool get_rect_normal(RECTANGLE_I32 * prectangle);
       //virtual void register_drop_target();
-      virtual void show_task(bool bShow);
+      //virtual void show_task(bool bShow);
       virtual void window_show_change_visibility(::e_display edisplay, ::e_activation eactivation) override;
 
 

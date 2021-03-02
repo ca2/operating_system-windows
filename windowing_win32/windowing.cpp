@@ -93,7 +93,7 @@ namespace windowing_win32
    }
 
 
-   result_pointer < system_interaction > windowing::create_system_window()
+   ::extended::transport < system_interaction > windowing::create_system_window()
    {
 
       auto psysteminteraction = __create_new < system_interaction >();
@@ -190,7 +190,7 @@ namespace windowing_win32
    }
 
 
-   result_pointer < ::windowing::icon > windowing::load_icon(const ::payload & payloadFile)
+   ::extended::transport < ::windowing::icon > windowing::load_icon(const ::payload & payloadFile)
    {
 
       auto picon = __new(icon());
@@ -769,20 +769,22 @@ namespace windowing_win32
    }
 
 
-   string windowing::message_box(const char * pszMessage, const char * pszTitle, const ::e_message_box & emessagebox)
-   {
-
-      wstring wstrMessage(pszMessage);
-
-      wstring wstrTitle(pszTitle);
-
-      auto iResult = ::MessageBoxW(nullptr, wstrMessage, wstrTitle, emessagebox);
-
-      auto strResult = message_box_result_to_string(iResult);
-
-      return setrResult;
-
-   }
+//   enum_dialog_result windowing::message_box(const char * pszMessage, const char * pszTitle, const ::e_message_box & emessagebox)
+//   {
+//
+//      wstring wstrMessage(pszMessage);
+//
+//      wstring wstrTitle(pszTitle);
+//
+//      auto iResult = ::MessageBoxW(nullptr, wstrMessage, wstrTitle, emessagebox);
+//
+////      auto strResult = message_box_result_to_string(iResult);
+//
+////      return setrResult;
+//
+//      return (enum_dialog_result) iResult;
+//
+//   }
 
    
    int_bool windowing::point_is_window_origin(POINT_I32 ptHitTest, oswindow oswindowExclude, int iMargin)

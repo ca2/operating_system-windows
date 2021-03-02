@@ -1170,6 +1170,7 @@
     <ClInclude Include="shell.h" />
     <ClInclude Include="system_interaction.h" />
     <ClInclude Include="top_level_enum.h" />
+    <ClInclude Include="user_system.h" />
     <ClInclude Include="win32.h" />
     <ClInclude Include="window.h" />
     <ClInclude Include="windowing.h" />

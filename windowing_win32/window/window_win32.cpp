@@ -630,7 +630,7 @@ CLASS_DECL_WINDOWING_WIN32 wstring windows_register_window_class(::layered * pob
    if (!windows_register_class(&wndcls))
    {
 
-      __throw(resource_exception());
+      __throw(error_resource);
 
    }
 

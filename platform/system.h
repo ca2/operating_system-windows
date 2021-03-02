@@ -78,7 +78,12 @@
 #define VK_KANA             0x15
 #endif
 
-#define debug_break() __debugbreak()
+
+
+#include <intrin.h>
+
+
+#define DEBUG_BREAK __debugbreak()
 
 
 /////////////////////////////////////////////////////////////////////////////

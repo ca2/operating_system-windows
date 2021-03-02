@@ -57,7 +57,6 @@ namespace windowing_win32
 
       }
 
-
    }
 
 
@@ -185,14 +184,6 @@ namespace windowing_win32
       auto pimageBuffer = get_buffer_image();
 
       update_buffer(sizeWindow);
-      //if (!update_buffer(sizeWindow))
-      //{
-
-      //   return nullptr;
-
-      //}
-
-      //defer_initialize_bitmap_source_buffer();
 
       return double_buffer::on_begin_draw();
 
@@ -229,18 +220,36 @@ namespace windowing_win32
          || iScan == 0)
       {
 
+         if (hbitmap != nullptr)
+         {
+
+            ::DeleteObject(hbitmap);
+
+         }
+
          return false;
 
       }
 
       buffer.m_pixmap.init(size, pcolorref, iScan);
 
+      if (buffer.m_hbitmap != nullptr)
+      {
+
+         ::DeleteObject(buffer.m_hbitmap);
+
+      }
+
       buffer.m_hbitmap = hbitmap;
+
+      bool bCreatedCompatibleDC = false;
 
       if (buffer.m_hdc == nullptr)
       {
 
          buffer.m_hdc = ::CreateCompatibleDC(nullptr);
+
+         bCreatedCompatibleDC = true;
 
       }
 
@@ -253,7 +262,14 @@ namespace windowing_win32
 
       }
 
-      buffer.m_hbitmapOld = (HBITMAP) ::SelectObject(buffer.m_hdc, buffer.m_hbitmap);
+      HBITMAP hbitmapPrevious = (HBITMAP) ::SelectObject(buffer.m_hdc, buffer.m_hbitmap);;
+
+      if (bCreatedCompatibleDC)
+      {
+
+         buffer.m_hbitmapOld = hbitmapPrevious;
+
+      }
 
       auto pimageBuffer = get_buffer_image();
 
@@ -613,14 +629,31 @@ namespace windowing_win32
 
                string str;
 
-               auto r = ::rectangle_i32(point, size);
+               rectangle_i32 rectDrawing(point, size);
 
                HWND hwnd = get_hwnd();
 
-               if (r == pimage->m_rectTag)
+               rectangle_i32 rectWindowCurrent;
+
+               GetWindowRect(hwnd, (RECT *) &rectWindowCurrent);
+
+               if (rectDrawing.size() == pimage->m_rectTag.size())
                {
 
+
                   ::UpdateLayeredWindow(hwnd, m_hdcScreen, (POINT*) &point, (SIZE* ) &size, buffer.m_hdc, (POINT *) &pointSrc, rgb(0, 0, 0), &blendPixelFunction, ULW_ALPHA);
+
+                  ::SetWindowPos(hwnd, nullptr,
+                     rectDrawing.left,
+                     rectDrawing.top,
+                     rectDrawing.width(),
+                     rectDrawing.height(),
+                     SWP_NOZORDER
+                     | SWP_ASYNCWINDOWPOS
+                     | SWP_FRAMECHANGED
+                     | SWP_NOREDRAW
+                     | SWP_NOCOPYBITS
+                     | SWP_DEFERERASE);
 
                }
                else

@@ -42,7 +42,7 @@ namespace windowing_win32
 
       virtual bool defer_create_system_window();
       //virtual __pointer(::user::interaction) create_system_window();
-      result_pointer < system_interaction > create_system_window();
+      ::extended::transport < system_interaction > create_system_window();
 
 
       inline system_interaction * system_window() { return m_psysteminteraction; }
@@ -58,7 +58,7 @@ namespace windowing_win32
       //__pointer(::windowing::monitor) get_main_monitor();
 
 
-      virtual result_pointer < ::windowing::icon > load_icon(const ::payload & payloadFile) override;
+      virtual ::extended::transport < ::windowing::icon > load_icon(const ::payload & payloadFile) override;
 
 
       virtual __pointer(::user::message) get_user_message(MESSAGE * pmsg);
@@ -102,7 +102,7 @@ namespace windowing_win32
       virtual ::windowing::cursor * get_default_cursor();
 
 
-      virtual string message_box(const char * pszMessage, const char * pszTitle, const ::e_message_box & emessagebox);
+      //virtual enum_dialog_result message_box(const char * pszMessage, const char * pszTitle, const ::e_message_box & emessagebox);
 
 
       virtual void get_cursor_pos(POINT_I32 * ppoint);
