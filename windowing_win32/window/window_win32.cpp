@@ -135,7 +135,7 @@ LRESULT CALLBACK __window_procedure(HWND hwnd, UINT message, WPARAM wparam, LPAR
 
    }
 
-   if (&System == nullptr)
+   if (System == nullptr)
    {
 
       return 0;

@@ -37,7 +37,7 @@ namespace multimedia
       void thread::term_thread()
       {
          // TODO:  perform any per-thread cleanup here
-         //    CVMSApp * pApp = (CVMSApp *) &System;
+         //    CVMSApp * pApp = (CVMSApp *) System;
          //MessageFilterHookManager * pmfmh;
          //MessageFilterHookManager::AppGetMessageFilterHookManager(&pmfmh);
          //pmfmh->MessageFilterUnhook();
@@ -142,7 +142,7 @@ namespace multimedia
       void thread::OnVmsmException(::message::message * pmessage)
       {
          UNREFERENCED_PARAMETER(pmessage);
-         //__pointer(::axis::application) pApp = (__pointer(::axis::application)) &System;
+         //__pointer(::axis::application) pApp = (__pointer(::axis::application)) System;
          //pApp->post_thread_message(VMSM_EXCEPTION, wParam, lParam);
       }
 

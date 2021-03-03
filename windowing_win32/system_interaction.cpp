@@ -29,10 +29,10 @@ namespace windowing_win32
 
       ::user::interaction::install_message_routing(pchannel);
 
-      MESSAGE_LINK(e_message_destroy, pchannel, this, &system_interaction::_001OnDestroy);
-      MESSAGE_LINK(e_message_display_change, pchannel, this, &system_interaction::_001OnMessage);
-      MESSAGE_LINK(WM_SETTINGCHANGE, pchannel, this, &system_interaction::_001OnMessage);
-      MESSAGE_LINK(WM_FONTCHANGE, pchannel, this, &system_interaction::_001OnMessage);
+      MESSAGE_LINK(e_message_destroy, pchannel, this, System_interaction::_001OnDestroy);
+      MESSAGE_LINK(e_message_display_change, pchannel, this, System_interaction::_001OnMessage);
+      MESSAGE_LINK(WM_SETTINGCHANGE, pchannel, this, System_interaction::_001OnMessage);
+      MESSAGE_LINK(WM_FONTCHANGE, pchannel, this, System_interaction::_001OnMessage);
 
    }
 
