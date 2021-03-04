@@ -199,13 +199,13 @@ void wmain(int argc, wchar_t * wargv[])
 
       dprint("Starting!!");
 
-      strSrc = solve_relative(System.get_arg(1));
+      strSrc = solve_relative(System->get_arg(1));
 
-      strApp = System.get_arg(2);
+      strApp = System->get_arg(2);
 
-      string strDst = solve_relative(System.get_arg(3));
+      string strDst = solve_relative(System->get_arg(3));
 
-      string strBuild = System.get_arg(4);
+      string strBuild = System->get_arg(4);
 
       if (strBuild.is_empty())
       {
@@ -392,7 +392,7 @@ void wmain(int argc, wchar_t * wargv[])
 
       pathMatter |= ::file::e_flag_get_local_path;
 
-      pathMatter = System.get_matter_cache_path(pathMatter);
+      pathMatter = System->get_matter_cache_path(pathMatter);
 
       if (Context.file().exists(pathMatter))
       {

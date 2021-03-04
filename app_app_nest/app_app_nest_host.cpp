@@ -326,7 +326,7 @@ namespace ca2plugin_container
    {
 
 
-      //if(System.install().is_installing_ca2())
+      //if(System->install().is_installing_ca2())
       //{
 
       //   if(!m_bInstalling)
@@ -339,9 +339,9 @@ namespace ca2plugin_container
       //   return;
       //}
 
-      //System.install().update_ca2_installed(false);
+      //System->install().update_ca2_installed(false);
 
-      //if (System.install().is_ca2_installed())
+      //if (System->install().is_ca2_installed())
       //{
 
       //   if(!init())

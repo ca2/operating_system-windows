@@ -3,7 +3,7 @@
 
 #include <ntsecapi.h>
 
-/* Not really an account.  The canonical name is NT Authority\System. */
+/* Not really an account.  The canonical name is NT Authority\System-> */
 #define NSSM_LOCALSYSTEM_ACCOUNT _T("LocalSystem")
 /* Other well-known accounts which can start a service without a password. */
 #define NSSM_LOCALSERVICE_ACCOUNT _T("NT Authority\\LocalService")

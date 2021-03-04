@@ -266,13 +266,13 @@ namespace production
 
          //   ::datetime::time timeNow = ::datetime::time::get_current_time();
 
-         //   string strTwit = "General failure of build " + version_to_international_datetime(m_strBuild) + ". Starting " + m_strTry + " retry of build " + m_strConfiguration + " - " + System.datetime().international().get_gmt_date_time(timeNow) + ". More details at http://status.ca2.cc/" + m_strStatusEmail;
+         //   string strTwit = "General failure of build " + version_to_international_datetime(m_strBuild) + ". Starting " + m_strTry + " retry of build " + m_strConfiguration + " - " + System->datetime().international().get_gmt_date_time(timeNow) + ". More details at http://status.ca2.cc/" + m_strStatusEmail;
 
          //   twitter_twit(strTwit);*/
 
       }
 
-      /*if(System.directrix()->has_property("quit_on_finish"))
+      /*if(System->directrix()->has_property("quit_on_finish"))
       {
 
       Context.os().post_to_all_threads(e_message_quit, 0, 0);
@@ -313,7 +313,7 @@ namespace production
 
             Application.message_box(nullptr, "Not logged in");
 
-            System.set_finish();
+            System->set_finish();
 
             return error_failed;
 
@@ -493,7 +493,7 @@ namespace production
 
             //}
 
-            //strRevision = System.process().get_output(strSvnVersionCmd);
+            //strRevision = System->process().get_output(strSvnVersionCmd);
             //strRevision.trim();
 
             //{
@@ -571,7 +571,7 @@ namespace production
             //         add_status(strStatus);
 
             //      }
-            //      strAddRevision = System.process().get_output(strSvnVersionCmd);
+            //      strAddRevision = System->process().get_output(strSvnVersionCmd);
             //      strAddRevision.trim();
             //      {
 
@@ -1157,7 +1157,7 @@ namespace production
 
                add_status(__str(i + 1) + ". bz - bzip - compressing " + strRoot);
 
-               System.compress().bz(this, get_writer(m_strCCVrelNew + "\\" + strSpa + ".fileset.bz"), get_reader(m_strCCVrelNew + "\\" + strSpa + ".fileset"));
+               System->compress().bz(this, get_writer(m_strCCVrelNew + "\\" + strSpa + ".fileset.bz"), get_reader(m_strCCVrelNew + "\\" + strSpa + ".fileset"));
 
             }
 
@@ -1341,7 +1341,7 @@ namespace production
 
             string strCmdLine = "\"C:\\bergedge\\hi5\\program\\hstart.exe\" \"C:\\bergedge\\papaya\\windows\\scripts\\production\\" + m_strConfiguration + "\\index.bat\"";
             string strDir = "C:\\bergedge\\papaya\\windows\\scripts\\production\\" + m_strConfiguration + "\\";
-            System.process().launch(strCmdLine, SW_SHOWNORMAL, strDir);
+            System->process().launch(strCmdLine, SW_SHOWNORMAL, strDir);
 
          }
 
@@ -1389,7 +1389,7 @@ namespace production
       //   add_status(strStatus);
 
       //   string strCmd = "\"" + m_strSignTool + "\" sign /f \"" + m_strSpc + "\" /p " + m_strSignPass + " \"" + strSrcFile + "\"";
-      //   System.process().synch(strCmd);
+      //   System->process().synch(strCmd);
 
       //   add_status("Signing code ...");
 
@@ -1402,7 +1402,7 @@ namespace production
       //   add_status(strStatus);
 
       //   string strCmd = "\"" + m_strSignTool + "\" sign /v /ac \"" + m_strSpc + "\" /p " + m_strSignPass + " \"" + strSrcFile + "\"";
-      //   System.process().synch(strCmd);
+      //   System->process().synch(strCmd);
 
       //   add_status("Signing driver code ...");
 
@@ -1415,7 +1415,7 @@ namespace production
          try
          {
 
-            System.compress().bz(this, m_strCCAuth / lpcszRelative + ".bz", pathSource);
+            System->compress().bz(this, m_strCCAuth / lpcszRelative + ".bz", pathSource);
 
             break;
 
@@ -2278,11 +2278,11 @@ namespace production
    {
       memory memMd5;
       memory memSha1;
-      memMd5.from_hex(System.crypto().md5(mem));
-      memSha1.from_hex(System.crypto().sha1(mem));
+      memMd5.from_hex(System->crypto().md5(mem));
+      memSha1.from_hex(System->crypto().sha1(mem));
       return string("Digest-Algorithms: MD5 SHA1\n") +
-             "MD5-Digest: " + System.base64().encode(memMd5) + "\n" +
-             "SHA1-Digest: " + System.base64().encode(memSha1) + "\n";
+             "MD5-Digest: " + System->base64().encode(memMd5) + "\n" +
+             "SHA1-Digest: " + System->base64().encode(memSha1) + "\n";
 
    }
 
@@ -2385,7 +2385,7 @@ namespace production
       Context.file().put_contents(pszDir / "META-INF/manifest.mf", strManifest);
       Context.file().put_contents(pszDir / "META-INF/zigbert.sf", strSignature);
 
-      System.crypto().np_make_zigbert_rsa(pszDir, strSignerPath, strKeyPath, strOthersPath, strSignature);
+      System->crypto().np_make_zigbert_rsa(pszDir, strSignerPath, strKeyPath, strOthersPath, strSignature);
 
    }
 
@@ -2473,7 +2473,7 @@ namespace production
       //string strFile = strDir /  "npca2/plugins", "npca2.dll");
       //Context.file().copy(strFile, m_pathVrel / "stage/" + strPlatform + "/npca2.dll"));
       //string strCmd = "\"" + m_strSignTool + "\" sign /f \"" + m_strSpc + "\" /p " + m_strSignPass + " \"" + strFile + "\"";
-      //System.process().synch(strCmd);
+      //System->process().synch(strCmd);
 
 
 
@@ -2481,7 +2481,7 @@ namespace production
       //strFile = strDir /  "npca2/plugins", "app_app_admin.exe");
       //Context.file().copy(strFile, m_pathVrel / "stage/" + strPlatform + "/app_app_admin.exe"));
       //strCmd = "\"" + m_strSignTool + "\" sign /f \"" + m_strSpc + "\" /p " + m_strSignPass + " \"" + strFile + "\"";
-      //System.process().synch(strCmd);
+      //System->process().synch(strCmd);
 
       ::file::listing straBase;
 
@@ -2507,7 +2507,7 @@ namespace production
 
          strCmd = "\"" + m_strSignTool + "\" sign /f \"" + m_strSpc + "\" /p " + m_strSignPass + " \"" + strFile + "\"";
 
-         System.process().synch(strCmd);
+         System->process().synch(strCmd);
 
       }
 
@@ -2516,32 +2516,32 @@ namespace production
       //strFile = strDir /  "npca2/plugins", "base.dll");
       //Context.file().copy(strFile, m_pathVrel / "stage/" + strPlatform + "/base.dll"));
       //strCmd = "\"" + m_strSignTool + "\" sign /f \"" + m_strSpc + "\" /p " + m_strSignPass + " \"" + strFile + "\"";
-      //System.process().synch(strCmd);
+      //System->process().synch(strCmd);
 
       /*
           add_status("Signing os.dll for Firefox ...");
           strFile = strDir /  "npca2/plugins", "os.dll");
           Context.file().copy(strFile, m_pathVrel / "stage/" + strPlatform + "/os.dll"));
           strCmd = "\"" + m_strSignTool + "\" sign /f \"" + m_strSpc + "\" /p " + m_strSignPass + " \"" + strFile + "\"";
-          System.process().synch(strCmd);
+          System->process().synch(strCmd);
           */
 
       //add_status("Signing msvcr120d.dll for Firefox ...");
       //strFile = strDir /  "npca2/plugins", "msvcr120d.dll");
       //Context.file().copy(strFile, m_pathVrel / "stage/" + strPlatform + "/msvcr120d.dll"));
       //strCmd = "\"" + m_strSignTool + "\" sign /f \"" + m_strSpc + "\" /p " + m_strSignPass + " \"" + strFile + "\"";
-      //System.process().synch(strCmd);
+      //System->process().synch(strCmd);
 
       //add_status("Signing msvcp120d.dll for Firefox ...");
       //strFile = strDir /  "npca2/plugins", "msvcp120d.dll");
       //Context.file().copy(strFile, m_pathVrel / "stage/" + strPlatform + "/msvcp120d.dll"));
       //strCmd = "\"" + m_strSignTool + "\" sign /f \"" + m_strSpc + "\" /p " + m_strSignPass + " \"" + strFile + "\"";
-      //System.process().synch(strCmd);
+      //System->process().synch(strCmd);
 
       //strFile = strDir /  "npca2/plugins", "draw2d_gdiplus.dll");
       //Context.file().copy(strFile, m_pathVrel / "stage/" + strPlatform + "/draw2d_gdiplus.dll"));
       //strCmd = "\"" + m_strSignTool + "\" sign /f \"" + m_strSpc + "\" /p " + m_strSignPass + " \"" + strFile + "\"";
-      //System.process().synch(strCmd);
+      //System->process().synch(strCmd);
 
       add_status("Signing code for Firefox ...");
 
@@ -2804,7 +2804,7 @@ namespace production
 
          strCmd = "\"" + m_strSignTool + "\" sign /f \"" + m_strSpc + "\" /p " + m_strSignPass + " \"" + strFile + "\"";
 
-         System.process().synch(strCmd);
+         System->process().synch(strCmd);
 
       }
 
@@ -2812,45 +2812,45 @@ namespace production
       //string strFile = strDir /  "npca2.dll");
       //Context.file().copy(strFile, m_pathVrel / "stage/" + strPlatform + "/npca2.dll"));
       //string strCmd = "\"" + m_strSignTool + "\" sign /f \"" + m_strSpc + "\" /p " + m_strSignPass + " \"" + strFile + "\"";
-      //System.process().synch(strCmd);
+      //System->process().synch(strCmd);
 
       //add_status("Signing app_app_admin.exe for Chrome ...");
       //strFile = strDir /  "app_app_admin.exe");
       //Context.file().copy(strFile, m_pathVrel / "stage/" + strPlatform + "/app_app_admin.exe"));
       //strCmd = "\"" + m_strSignTool + "\" sign /f \"" + m_strSpc + "\" /p " + m_strSignPass + " \"" + strFile + "\"";
-      //System.process().synch(strCmd);
+      //System->process().synch(strCmd);
 
       //add_status("Signing base.dll for Chrome ...");
       //strFile = strDir /  "base.dll");
       //Context.file().copy(strFile, m_pathVrel / "stage/" + strPlatform + "/base.dll"));
       //strCmd = "\"" + m_strSignTool + "\" sign /f \"" + m_strSpc + "\" /p " + m_strSignPass + " \"" + strFile + "\"";
-      //System.process().synch(strCmd);
+      //System->process().synch(strCmd);
 
       /*
           add_status("Signing os.dll for Chrome ...");
           strFile = strDir /  "os.dll");
           Context.file().copy(strFile, m_pathVrel / "stage/" + strPlatform + "/os.dll"));
           strCmd = "\"" + m_strSignTool + "\" sign /f \"" + m_strSpc + "\" /p " + m_strSignPass + " \"" + strFile + "\"";
-          System.process().synch(strCmd);
+          System->process().synch(strCmd);
           */
 
       //add_status("Signing msvcp120d.dll for Chrome ...");
       //strFile = strDir /  "msvcp120d.dll");
       //Context.file().copy(strFile, m_pathVrel / "stage/" + strPlatform + "/msvcp120d.dll"));
       //strCmd = "\"" + m_strSignTool + "\" sign /f \"" + m_strSpc + "\" /p " + m_strSignPass + " \"" + strFile + "\"";
-      //System.process().synch(strCmd);
+      //System->process().synch(strCmd);
 
       //add_status("Signing msvcr120d.dll for Chrome ...");
       //strFile = strDir /  "msvcr120d.dll");
       //Context.file().copy(strFile, m_pathVrel / "stage/" + strPlatform + "/msvcr120d.dll"));
       //strCmd = "\"" + m_strSignTool + "\" sign /f \"" + m_strSpc + "\" /p " + m_strSignPass + " \"" + strFile + "\"";
-      //System.process().synch(strCmd);
+      //System->process().synch(strCmd);
 
       //add_status("Signing draw2d_gdiplus.dll for Chrome ...");
       //strFile = strDir /  "draw2d_gdiplus.dll");
       //Context.file().copy(strFile, m_pathVrel / "stage/" + strPlatform + "/draw2d_gdiplus.dll"));
       //strCmd = "\"" + m_strSignTool + "\" sign /f \"" + m_strSpc + "\" /p " + m_strSignPass + " \"" + strFile + "\"";
-      //System.process().synch(strCmd);
+      //System->process().synch(strCmd);
 
       add_status("Creating crxca2.crx for Chrome ...");
 
@@ -2873,7 +2873,7 @@ namespace production
 
       strCmd += "\\Google\\Chrome\\Application\\chrome.exe\" --no-message-box --pack-extension=\"" + strDir + "\" --pack-extension-key=\"C:\\sensitive\\sensitive\\certificate\\npca2pk.pem\"";
 
-      System.process().synch(strCmd);
+      System->process().synch(strCmd);
 
       string strVersion;
 

@@ -3087,7 +3087,7 @@ namespace draw2d_gdi
    keep < image > keep(&m_pimageAlphaBlend, nullptr, m_pimageAlphaBlend, true);
 
 
-   return System.draw2d()->imaging().true_blend(this, pointDest, size, imageWork.get_graphics(), pointSrc) != false;
+   return System->draw2d()->imaging().true_blend(this, pointDest, size, imageWork.get_graphics(), pointSrc) != false;
 
    }
 

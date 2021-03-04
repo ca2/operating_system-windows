@@ -92,7 +92,7 @@ namespace windowing_win32
 
       //wstring strClass = L"ca2_copydesk_windows_message_queue";
 
-      //HINSTANCE hinstance = System.m_hinstance;
+      //HINSTANCE hinstance = System->m_hinstance;
 
       //if (!GetClassInfoW(hinstance, strClass, &wndcls))
       //{
@@ -102,7 +102,7 @@ namespace windowing_win32
 
       //   wndcls.cbClsExtra = 0;
       //   wndcls.cbWndExtra = 0;
-      //   wndcls.hInstance = System.m_hinstance;
+      //   wndcls.hInstance = System->m_hinstance;
       //   wndcls.hIcon = nullptr;
       //   wndcls.hCursor = nullptr;
       //   wndcls.hbrBackground = nullptr;

@@ -127,7 +127,7 @@ namespace user_service
             //         outheader("Cache-control") = "public";
             //         outheader("Pragma") = "public";
             //         i32 iPathCount;
-            //         outheader("Expires") = Context.http().gmdate(System.datetime().strtotime(nullptr, "+1 day", 0, iPathCount));
+            //         outheader("Expires") = Context.http().gmdate(System->datetime().strtotime(nullptr, "+1 day", 0, iPathCount));
             //#ifdef WINDOWS
             //         simple_file_server(::file::path("Z:\\") / m_request.m_strRequestUri);
             //#else
@@ -144,8 +144,8 @@ namespace user_service
             memory mem;
             mem.assign(strKey);
             memory memSha1;
-            System.crypto().sha1(memSha1, mem);
-            strKey = System.base64().encode(memSha1);
+            System->crypto().sha1(memSha1, mem);
+            strKey = System->base64().encode(memSha1);
             outheader("Sec-WebSocket-Accept") = strKey;
             outheader("Connection") = "Upgrade";
             outheader("Upgrade") = "websocket";
@@ -265,10 +265,10 @@ auto tickExecuteEnd = ::tick::now();
          for (int i = 0; i < straValue.get_size(); i++)
          {
             url_domain domain;
-            domain.create(System.url().get_server(straValue[i]));
+            domain.create(System->url().get_server(straValue[i]));
             if (domain.m_strName == "account.ca2.cc")
             {
-               //straValue[i] = "https://" + Application.m_strFontopusServer + System.url().get_object(straValue[i]);
+               //straValue[i] = "https://" + Application.m_strFontopusServer + System->url().get_object(straValue[i]);
             }
          }
       }

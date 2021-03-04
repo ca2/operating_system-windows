@@ -126,7 +126,7 @@ namespace ca2plugin_container
 
       //}
 
-      //if(System.install().is_installing_ca2())
+      //if(System->install().is_installing_ca2())
       //{
 
       //   return false;

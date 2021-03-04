@@ -561,7 +561,7 @@ namespace windowing_win32
 
       ::e_display edisplayPrevious = *pedisplay;
 
-      double dMargin = System.m_dpi;
+      double dMargin = System->m_dpi;
 
       if (ZONEING_COMPARE::is_equal(rectangle.top, rectWkspace.top, dMargin, !(edisplayPrevious & e_display_top)))
       {

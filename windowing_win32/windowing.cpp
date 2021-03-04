@@ -499,7 +499,7 @@ namespace windowing_win32
 
       //   }
 
-      //   ::user::interaction_impl * pimpl = System.impl_from_handle(pmsg->hwnd);
+      //   ::user::interaction_impl * pimpl = System->impl_from_handle(pmsg->hwnd);
 
       //   if (pimpl != nullptr)
       //   {

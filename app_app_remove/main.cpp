@@ -140,7 +140,7 @@ removal::~removal()
 void removal::system(const char * pszCmd)
 {
 
-   System.process().synch(pszCmd);
+   System->process().synch(pszCmd);
 
 
    /*STARTUPINFO si;

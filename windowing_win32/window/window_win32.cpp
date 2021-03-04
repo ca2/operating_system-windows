@@ -485,7 +485,7 @@ wstring windows_calc_icon_window_class(::user::interaction * puserinteraction, u
 
       WNDCLASSEXW wndcls;
 
-      if (strClass.get_length() > 0 && GetClassInfoExW((HINSTANCE)System.m_hinstance, strClass, &wndcls) && wndcls.hIcon != hIcon)
+      if (strClass.get_length() > 0 && GetClassInfoExW((HINSTANCE)System->m_hinstance, strClass, &wndcls) && wndcls.hIcon != hIcon)
       {
 
          // register a very similar WNDCLASS

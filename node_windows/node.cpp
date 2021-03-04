@@ -368,7 +368,7 @@ namespace node_windows
          
       set["privileged"] = true;
          
-      if (call_sync(path, strParam, path.folder(), ::e_display_none, 3_min, set) != 0)
+      if (!call_sync(path, strParam, path.folder(), ::e_display_none, 3_min, set))
       {
          
          return false;
@@ -400,7 +400,7 @@ namespace node_windows
    ::e_status node::start()
    {
 
-      auto estatus = System.__thread_init();
+      auto estatus = System->__thread_init();
 
       if (!estatus)
       {
@@ -409,7 +409,7 @@ namespace node_windows
 
       }
 
-      estatus = System.on_start();
+      estatus = System->on_start();
 
       if (!estatus)
       {
@@ -418,7 +418,7 @@ namespace node_windows
 
       }
 
-      estatus = System.main();
+      estatus = System->main();
 
       if (!estatus)
       {
@@ -427,7 +427,7 @@ namespace node_windows
 
       }
 
-      estatus = System.inline_term();
+      estatus = System->inline_term();
 
       if (!estatus)
       {

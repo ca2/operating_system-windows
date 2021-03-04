@@ -145,7 +145,7 @@ namespace windowing_win32
       //   return; // don't do anything more
       //}
 
-      ////auto puserinteraction = System.ui_from_handle(((::windowing_win32::window *)this)->get_hwnd());
+      ////auto puserinteraction = System->ui_from_handle(((::windowing_win32::window *)this)->get_hwnd());
       ////if (puserinteraction->m_pimpl != (::user::window *)this)
       ////   dumpcontext << " (Detached or temporary window)";
       ////else
@@ -548,7 +548,7 @@ namespace windowing_win32
 
       //WNDCLASSEXW wndcls;
 
-      //if (wstrClassName.get_length() > 0 && GetClassInfoExW(System.m_hinstance, wstrClassName, &wndcls) && wndcls.hIcon != nullptr)
+      //if (wstrClassName.get_length() > 0 && GetClassInfoExW(System->m_hinstance, wstrClassName, &wndcls) && wndcls.hIcon != nullptr)
       {
 
          //Application.set_icon(puserinteraction, __new(::draw2d::icon(get_context_application(), wndcls.hIcon)), false);
@@ -616,7 +616,7 @@ namespace windowing_win32
          {
 
 
-            System.process_subject(id_os_font_change);
+            System->process_subject(id_os_font_change);
 
             //fork([this]()
               // {
@@ -632,7 +632,7 @@ namespace windowing_win32
             strLparamString == "ImmersiveColorSet")
          {
 
-            System.process_subject(id_os_dark_mode);
+            System->process_subject(id_os_dark_mode);
 
          }
          else if (pmessage->m_id == e_message_display_change ||
@@ -644,11 +644,11 @@ namespace windowing_win32
 
             //throw_todo();
 
-            //System.enum_display_monitors();
+            //System->enum_display_monitors();
 
             //__pointer(::user::interaction) puserinteraction;
 
-            //while(System.get_frame(puserinteraction))
+            //while(System->get_frame(puserinteraction))
             //{
 
             //   try
@@ -2399,7 +2399,7 @@ namespace windowing_win32
 
    //   //ASSERT(::IsWindow(get_hwnd()));
 
-   //   //return System.ui_from_handle(::SetParent(get_hwnd(), pWndNewParent->get_hwnd()));
+   //   //return System->ui_from_handle(::SetParent(get_hwnd(), pWndNewParent->get_hwnd()));
 
    //}
 
@@ -2432,7 +2432,7 @@ namespace windowing_win32
 
    //   //}
 
-   //   //return System.ui_from_handle(hwndParent);
+   //   //return System->ui_from_handle(hwndParent);
 
    //}
 
@@ -2850,7 +2850,7 @@ namespace windowing_win32
 
       //         hwnd = ::GetLastActivePopup(hwnd);
 
-      //         ::user::interaction * puserinteraction = System.ui_from_handle(hwnd);
+      //         ::user::interaction * puserinteraction = System->ui_from_handle(hwnd);
 
       //         if (puserinteraction == nullptr)
       //            BringWindowToTop();
@@ -3326,7 +3326,7 @@ namespace windowing_win32
 
       }
 
-      //auto puserinteraction = System.ui_from_handle(oswindowActive);
+      //auto puserinteraction = System->ui_from_handle(oswindowActive);
 
       //if (::is_set(puserinteraction))
       //{
@@ -3386,7 +3386,7 @@ namespace windowing_win32
    //::user::interaction * window::get_desktop_window()
    //{
 
-   //   return System.ui_from_handle(::get_desktop_window());
+   //   return System->ui_from_handle(::get_desktop_window());
 
    //}
 
@@ -3512,7 +3512,7 @@ namespace windowing_win32
 
    //   ASSERT(::IsWindow(((window *)this)->get_hwnd()));
 
-   //   return System.ui_from_handle(::GetNextDlgGroupItem(((window *)this)->get_hwnd(), pWndCtl->get_hwnd(), bPrevious));
+   //   return System->ui_from_handle(::GetNextDlgGroupItem(((window *)this)->get_hwnd(), pWndCtl->get_hwnd(), bPrevious));
 
    //}
 
@@ -3522,7 +3522,7 @@ namespace windowing_win32
 
    //   ASSERT(::IsWindow(((window *)this)->get_hwnd()));
 
-   //   return System.ui_from_handle(::GetNextDlgTabItem(((window *)this)->get_hwnd(), pWndCtl->get_hwnd(), bPrevious));
+   //   return System->ui_from_handle(::GetNextDlgTabItem(((window *)this)->get_hwnd(), pWndCtl->get_hwnd(), bPrevious));
 
    //}
 
@@ -3582,7 +3582,7 @@ namespace windowing_win32
    //{
    //   ASSERT(::IsWindow(get_hwnd()));
 
-   //   return  System.ui_from_handle(::ChildWindowFromPoint(get_hwnd(), point_i32));
+   //   return  System->ui_from_handle(::ChildWindowFromPoint(get_hwnd(), point_i32));
 
 
    //}
@@ -3591,7 +3591,7 @@ namespace windowing_win32
    //{
    //   ASSERT(::IsWindow(get_hwnd()));
 
-   //   return  System.ui_from_handle(::ChildWindowFromPointEx(get_hwnd(), point, nFlags));
+   //   return  System->ui_from_handle(::ChildWindowFromPointEx(get_hwnd(), point, nFlags));
 
 
    //}
@@ -3743,7 +3743,7 @@ namespace windowing_win32
    //::user::interaction * window::GetOpenClipboardWindow()
    //{
 
-   //   return System.ui_from_handle(::GetOpenClipboardWindow());
+   //   return System->ui_from_handle(::GetOpenClipboardWindow());
 
    //}
 
@@ -3751,7 +3751,7 @@ namespace windowing_win32
    //::user::interaction * window::GetClipboardOwner()
    //{
 
-   //   return System.ui_from_handle(::GetClipboardOwner());
+   //   return System->ui_from_handle(::GetClipboardOwner());
 
    //}
 
@@ -3759,7 +3759,7 @@ namespace windowing_win32
    //::user::interaction * window::GetClipboardViewer()
    //{
 
-   //   return System.ui_from_handle(::GetClipboardViewer());
+   //   return System->ui_from_handle(::GetClipboardViewer());
 
    //}
 
@@ -4549,7 +4549,7 @@ namespace windowing_win32
    //      if (pFrame != nullptr)
    //      hwnd = pFrame->get_hwnd();
    //      else
-   //      hwnd = System.m_puiMain->get_hwnd();*/
+   //      hwnd = System->m_puiMain->get_hwnd();*/
    //   }
 
    //   // a popup window cannot be owned by a child window
@@ -5598,7 +5598,7 @@ namespace windowing_win32
 //
 //         //hwnd_array hwnda;
 //         //user::interaction_pointer_array wnda;
-//         //wnda = *System.m_puiptraFrame;
+//         //wnda = *System->m_puiptraFrame;
 //         //hwnda = wnda.get_hwnda();
 //         //user::window_util::SortByZOrder(hwnda);
 //         //for (i32 i = 0; i < hwnda.get_size(); i++)
@@ -6554,7 +6554,7 @@ namespace windowing_win32
 
          //user::oswindow_array oswindowa;
          //user::interaction_pointer_array wnda;
-         //wnda = *System.m_puiptraFrame;
+         //wnda = *System->m_puiptraFrame;
          //oswindowa = wnda.get_hwnda();
          //user::window_util::SortByZOrder(oswindowa);
          //for (i32 i = 0; i < oswindowa.get_size(); i++)
