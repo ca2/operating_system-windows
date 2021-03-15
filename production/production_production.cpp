@@ -311,7 +311,7 @@ namespace production
          if (::is_null(puser))
          {
 
-            papplication->message_box(nullptr, "Not logged in");
+            message_box(nullptr, "Not logged in");
 
             psystem->set_finish();
 

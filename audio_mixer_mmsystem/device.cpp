@@ -62,7 +62,7 @@ namespace multimedia
 
                strMessage.Format("mixerClose() failed on hmx=%.04Xh, mmr=%u!", m_hMixer, mmrct);
 
-               psystem->message_box(strMessage, nullptr, e_message_box_icon_exclamation);
+               message_box(strMessage, nullptr, e_message_box_icon_exclamation);
 
             }
 
@@ -77,7 +77,7 @@ namespace multimedia
 
             strMessage.Format("mixerGetDevCaps() failed on uMxId=%u, mmr=%u!", uiMixerId, mmrc);
 
-            psystem->message_box(strMessage, nullptr, e_message_box_icon_exclamation);
+            message_box(strMessage, nullptr, e_message_box_icon_exclamation);
 
             return mmrc;
 
@@ -92,7 +92,7 @@ namespace multimedia
 
             strMessage.Format("mixerOpen() failed on uMxId=%u, mmr=%u!", uiMixerId, mmrc);
 
-            psystem->message_box(strMessage, nullptr, e_message_box_icon_exclamation);
+            message_box(strMessage, nullptr, e_message_box_icon_exclamation);
 
             return mmrc;
 
@@ -125,7 +125,7 @@ namespace multimedia
 
             strMessage.Format("mixerGetDevCaps() failed on uMxId=%u, mmr=%u!", m_uiMixerID, mmrc);
 
-            psystem->message_box(strMessage, nullptr, e_message_box_icon_exclamation);
+            message_box(strMessage, nullptr, e_message_box_icon_exclamation);
 
             return mmrc;
 

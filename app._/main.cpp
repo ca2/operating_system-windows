@@ -441,7 +441,7 @@ void wmain(int argc, wchar_t * wargv[])
 
          papplication->m_result.add(error_failed);
 
-         papplication->message_box("Couldn't update resources for \"" + strApp + "\".\n\nDoes the file \"" + strSrc + "\" exists at the moment of this application call and is it valid so far?", nullptr, e_message_box_icon_exclamation);
+         message_box("Couldn't update resources for \"" + strApp + "\".\n\nDoes the file \"" + strSrc + "\" exists at the moment of this application call and is it valid so far?", nullptr, e_message_box_icon_exclamation);
 
          return;
 

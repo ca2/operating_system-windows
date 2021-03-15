@@ -380,7 +380,7 @@ namespace multimedia
 
          if (::success != mmrc)
          {
-            //        psystem->message_box(nullptr, MB_OK | e_message_box_icon_exclamation,
+            //        message_box(nullptr, MB_OK | e_message_box_icon_exclamation,
             //                "mixerGetControlDetails(ctrlid=%.08lXh) failed on hmx=%.04Xh, mmr=%u!",
             //              m_mixercontrol.dwControlID, m_pmixersource->get_device()->m_hMixer, mmrc);
             return;
@@ -564,7 +564,7 @@ namespace multimedia
       }
       else
       {
-      //                                psystem->message_box(nullptr, MB_OK | e_message_box_icon_exclamation,
+      //                                message_box(nullptr, MB_OK | e_message_box_icon_exclamation,
       //                                        "mixerGetControlDetails(ctrlid=%.08lXh) failed on hmx=%.04Xh, mmr=%u!",
       //                                      m_mixercontrol.dwControlID, m_pmixersource->get_device()->m_hMixer, mmrc);
       }
@@ -588,7 +588,7 @@ namespace multimedia
       }
       else
       {
-      //                                psystem->message_box(nullptr, MB_OK | e_message_box_icon_exclamation,
+      //                                message_box(nullptr, MB_OK | e_message_box_icon_exclamation,
       ///                                        "mixerGetControlDetails(ctrlid=%.08lXh) failed on hmx=%.04Xh, mmr=%u!",
       //                                     m_mixercontrol.dwControlID, m_pmixersource->get_device()->m_hMixer, mmrc);
       }
@@ -745,7 +745,7 @@ namespace multimedia
                            }
                            else
                            {
-                              //                                psystem->message_box(nullptr, MB_OK | e_message_box_icon_exclamation,
+                              //                                message_box(nullptr, MB_OK | e_message_box_icon_exclamation,
                               //                                        "mixerGetControlDetails(ctrlid=%.08lXh) failed on hmx=%.04Xh, mmr=%u!",
                               //                                      m_mixercontrol.dwControlID, m_pmixersource->get_device()->m_hMixer, mmrc);
                            }
@@ -771,7 +771,7 @@ namespace multimedia
                               string strMessage;
                               strMessage.Format("mixerGetControlDetails(ctrlid=%.08lXh) failed on hmx=%.04Xh, mmr=%u!",
                                                 m_mixercontrol.dwControlID, device->m_hMixer, mmrc);
-                              psystem->message_box(strMessage, nullptr, e_message_box_icon_exclamation);
+                              message_box(strMessage, nullptr, e_message_box_icon_exclamation);
                            }
                         }
                         return ;
@@ -840,7 +840,7 @@ namespace multimedia
 
                         strMessage.Format("mixerGetControlDetails(ctrlid=%.08lXh) failed on hmx=%.04Xh, mmr=%u!",
                                           m_mixercontrol.dwControlID, device->m_hMixer, mmrc);
-                        psystem->message_box(strMessage, nullptr, e_message_box_icon_exclamation);
+                        message_box(strMessage, nullptr, e_message_box_icon_exclamation);
                      }
                      return true;
                   }

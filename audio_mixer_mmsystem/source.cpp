@@ -27,7 +27,7 @@ namespace multimedia
          i32 iControlCount = m_mixerline.cControls;
          if (0 == iControlCount)
          {
-            //        psystem->message_box(nullptr, MB_OK | e_message_box_icon_exclamation,
+            //        message_box(nullptr, MB_OK | e_message_box_icon_exclamation,
             //"There are no controls associated with the selected line.");
             //        EndDialog(oswindow, false);
             return ::success;
@@ -67,7 +67,7 @@ namespace multimedia
                               m_mixerline.dwLineID, device->m_hMixer, mmrc);
 
 
-            psystem->message_box(strMessage, nullptr, e_message_box_icon_exclamation);
+            message_box(strMessage, nullptr, e_message_box_icon_exclamation);
 
          }
          else
@@ -237,7 +237,7 @@ namespace multimedia
 
             strMessage.Format("mixerGetLineInfo(src=%u) failed on hmx=%.04Xh, mmr=%u!",
                               dwSource, device->m_hMixer, mmrc);
-            psystem->message_box(strMessage, nullptr, e_message_box_icon_exclamation);
+            message_box(strMessage, nullptr, e_message_box_icon_exclamation);
 
          }
 

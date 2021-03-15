@@ -234,7 +234,7 @@ namespace multimedia
             (CDBBuildAlbumThreadData *)lParam;
             if(!lpdata->m_pobjectTaskdlg->create(IDD_TASK))
             {
-            psystem->message_box("Could not create task dialog");
+            message_box("Could not create task dialog");
             return;
             }
 
