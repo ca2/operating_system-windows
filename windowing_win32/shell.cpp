@@ -170,7 +170,7 @@ namespace windowing_win32
       //   //imagekey.m_strExtension = "";
 
       //}
-      auto psession = Session;
+      auto psession = get_session();
 
       auto puser = psession->user();
 
@@ -1058,7 +1058,7 @@ namespace windowing_win32
    //}
 
 
-   ::e_status shell::initialize(::layered * pobjectContext)
+   ::e_status shell::initialize(::context_object * pcontextobject)
    {
 
       if (m_bInitialized)
@@ -1068,7 +1068,7 @@ namespace windowing_win32
 
       }
 
-      auto estatus = ::user::shell::initialize(pobjectContext);
+      auto estatus = ::user::shell::initialize(pcontextobject);
 
       if (!estatus)
       {
@@ -1357,7 +1357,7 @@ namespace windowing_win32
    }
 
 
-   ::e_status shell::finish(::context_object * pcontextobject)
+   ::e_status shell::finish(::property_object * pcontextobject)
    {
 
       return ::user::shell::finish(pcontextobject);

@@ -5,7 +5,7 @@ namespace draw2d_gdi
 {
 
 
-   factory_exchange::factory_exchange(::layered * pobjectContext) :
+   factory_exchange::factory_exchange(::context_object * pcontextobject) :
       object(pobject)
    {
 
@@ -33,7 +33,7 @@ namespace draw2d_gdi
 } // namespace draw2d_gdi
 
 
-void factory_exchange(::layered * pobjectContext)
+void factory_exchange(::context_object * pcontextobject)
 {
 
    draw2d_gdi::factory_exchange factoryexchange(pobject);

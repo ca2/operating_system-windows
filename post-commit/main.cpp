@@ -221,7 +221,7 @@ void app_t::win_sync_out(string strLocal,string strRepos)
 //}
 
 
-::aura::application * get_acid_app(::layered * pobjectContext)
+::aura::application * get_acid_app(::context_object * pcontextobject)
 {
 
    return new app_t();

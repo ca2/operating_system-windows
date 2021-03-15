@@ -46,36 +46,36 @@ namespace windowing_win32
 
    Carray < ::user::interaction_impl *, ::user::interaction_impl * > wndpa2;
 
-   ::user::interaction_impl * pwnd = wndpa[0];
+   ::user::interaction_impl * puserinteraction = wndpa[0];
 
-   ::user::interaction_impl * pwndChild = pwnd->GetWindow(GW_HWNDFIRST);
+   ::user::interaction_impl * puserinteractionChild = puserinteraction->GetWindow(GW_HWNDFIRST);
 
-   while(pwndChild != nullptr
-   && ::IsWindow(pwndChild->GetSafehwnd_()))
+   while(puserinteractionChild != nullptr
+   && ::IsWindow(puserinteractionChild->GetSafehwnd_()))
    {
-   pwnd = interaction_impl::FromHandlePermanent(pwndChild->GetSafehwnd_());
-   if(pwnd == nullptr)
+   puserinteraction = interaction_impl::FromHandlePermanent(puserinteractionChild->GetSafehwnd_());
+   if(puserinteraction == nullptr)
    {
    CTransparentWndInterface * ptwi = nullptr;
    CTransparentWndInterface::CGetProperty getp;
    getp.m_eproperty = CTransparentWndInterface::PropertyInterface;
-   pwndChild->SendMessage(CTransparentWndInterface::MessageGetProperty, 0, (lparam) &getp);
+   puserinteractionChild->SendMessage(CTransparentWndInterface::MessageGetProperty, 0, (lparam) &getp);
    ptwi = getp.m_pinterface;
    if(ptwi != nullptr)
    {
-   pwnd = ptwi->TwiGetWnd();
-   if(pwnd != nullptr)
+   puserinteraction = ptwi->TwiGetWnd();
+   if(puserinteraction != nullptr)
    {
-   wndpa2.add(pwnd);
+   wndpa2.add(puserinteraction);
    }
    }
 
    }
    else
    {
-   wndpa2.add(pwnd);
+   wndpa2.add(puserinteraction);
    }
-   pwndChild = pwndChild->GetWindow(GW_HWNDNEXT);
+   puserinteractionChild = puserinteractionChild->GetWindow(GW_HWNDNEXT);
    }
 
    Carray < ::user::interaction_impl *, ::user::interaction_impl * > wndpa3;
@@ -210,25 +210,25 @@ namespace windowing_win32
 
 
    // This function get all child windows of
-   // the interaction_impl pointed by pwnd and add it
+   // the interaction_impl pointed by puserinteraction and add it
    // to the interaction_impl array wndpa. The top
    // windows come first in the enumeration.
 
-   /*void window_util::EnumChildren(::user::interaction_impl * pwnd, interaction_pointer_array & wndpa)
+   /*void window_util::EnumChildren(::user::interaction_impl * puserinteraction, interaction_pointer_array & wndpa)
    {
-   if(!::IsWindow(pwnd->GetSafehwnd_()))
+   if(!::IsWindow(puserinteraction->GetSafehwnd_()))
    return;
-   ::user::interaction_impl * pwndChild = pwnd->GetTopWindow();
-   while(pwndChild != nullptr)
+   ::user::interaction_impl * puserinteractionChild = puserinteraction->GetTopWindow();
+   while(puserinteractionChild != nullptr)
    {
-   wndpa.add(pwndChild);
-   pwndChild = pwndChild->GetWindow(GW_HWNDNEXT);
+   wndpa.add(puserinteractionChild);
+   puserinteractionChild = puserinteractionChild->GetWindow(GW_HWNDNEXT);
    }
    }*/
 
 
    // This function get all child windows of
-   // the interaction_impl pointed by pwnd and add it
+   // the interaction_impl pointed by puserinteraction and add it
    // to the interaction_impl array wndpa. The top
    // windows come first in the enumeration.
    void window_util::EnumChildren(HWND hwnd, hwnd_array & hwnda)
@@ -343,8 +343,7 @@ namespace windowing_win32
    }
 
 
-   hwnd_tree::hwnd_tree(::layered * pobjectContext) :
-      ::object(pobjectContext)
+   hwnd_tree::hwnd_tree()
    {
 
       m_hwnd = nullptr;
@@ -446,18 +445,18 @@ namespace windowing_win32
 
    interaction_pointer_array wndpa2;
 
-   ::user::interaction_impl * pwnd = wndpa[0];
+   ::user::interaction_impl * puserinteraction = wndpa[0];
 
-   ::user::interaction_impl * pwndChild = pwnd->GetWindow(GW_HWNDFIRST);
+   ::user::interaction_impl * puserinteractionChild = puserinteraction->GetWindow(GW_HWNDFIRST);
 
-   while(pwndChild != nullptr)
+   while(puserinteractionChild != nullptr)
    {
-   pwnd = interaction_impl::FromHandlePermanent(pwndChild->GetSafehwnd_());
-   if(pwnd == nullptr)
+   puserinteraction = interaction_impl::FromHandlePermanent(puserinteractionChild->GetSafehwnd_());
+   if(puserinteraction == nullptr)
    {
-   wndpa2.add(pwnd);
+   wndpa2.add(puserinteraction);
    }
-   pwndChild = pwndChild->GetWindow(GW_HWNDNEXT);
+   puserinteractionChild = puserinteractionChild->GetWindow(GW_HWNDNEXT);
    }
 
    interaction_pointer_array wndpa3;

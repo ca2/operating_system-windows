@@ -6,7 +6,7 @@ namespace production
 {
 
 
-   document::document(::layered * pobjectContext):
+   document::document(::context_object * pcontextobject):
       ::object(pobject),
       ::user::document(pobject),
       ::data::data_container_base(pobject),
@@ -57,7 +57,7 @@ namespace production
    bool document::on_open_document(const var & varFile)
    {
 
-      string str = Context.file().as_string(varFile);
+      string str = pcontext->file().as_string(varFile);
 
       //  m_document.load(str);
 

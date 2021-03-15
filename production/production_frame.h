@@ -7,7 +7,7 @@ namespace production
       public simple_frame_window
    {
    public:
-	   frame(::layered * pobjectContext);
+	   frame(::context_object * pcontextobject);
    public:
 	   virtual ~frame();
    #ifdef DEBUG

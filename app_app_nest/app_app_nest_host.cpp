@@ -127,7 +127,7 @@ namespace ca2plugin_container
 
       m_pplugin->m_psystem               = m_psystem;
 
-      m_pplugin->get_context_application()                  = get_context_application();
+      m_pplugin->get_application()                  = get_application();
 
       m_pplugin->m_phost                     = this;
 
@@ -305,7 +305,7 @@ namespace ca2plugin_container
    void * host::get_context_system()
    {
 
-      return get_context_application()->m_psystem;
+      return get_application()->m_psystem;
 
    }
 
@@ -315,7 +315,7 @@ namespace ca2plugin_container
 
       //::hotplugin::host::set_system(pvoidSystem);
 
-      get_context_application() = (::base::system *) pvoidSystem;
+      get_application() = (::base::system *) pvoidSystem;
 
 
    }
@@ -326,7 +326,7 @@ namespace ca2plugin_container
    {
 
 
-      //if(System->install().is_installing_ca2())
+      //if(psystem->install().is_installing_ca2())
       //{
 
       //   if(!m_bInstalling)
@@ -339,9 +339,9 @@ namespace ca2plugin_container
       //   return;
       //}
 
-      //System->install().update_ca2_installed(false);
+      //psystem->install().update_ca2_installed(false);
 
-      //if (System->install().is_ca2_installed())
+      //if (psystem->install().is_ca2_installed())
       //{
 
       //   if(!init())
@@ -578,10 +578,10 @@ namespace ca2plugin_container
                if(m_pcontainerapp->m_psystem->m_pplugin != nullptr)
                {
 
-                  if(m_pcontainerapp->m_psystem->m_pplugin->m_puiHost != nullptr)
+                  if(m_pcontainerapp->m_psystem->m_pplugin->m_puserinteractionHost != nullptr)
                   {
 
-                     m_pcontainerapp->m_psystem->m_pplugin->m_puiHost->set_window_position(z,x,y,cx,cy,nFlags);
+                     m_pcontainerapp->m_psystem->m_pplugin->m_puserinteractionHost->set_window_position(z,x,y,cx,cy,nFlags);
 
                   }
 
@@ -613,10 +613,10 @@ namespace ca2plugin_container
             if(m_pcontainerapp->m_psystem->m_pplugin != nullptr)
             {
 
-               if(m_pcontainerapp->m_psystem->m_pplugin->m_puiHost != nullptr)
+               if(m_pcontainerapp->m_psystem->m_pplugin->m_puserinteractionHost != nullptr)
                {
 
-                  m_pcontainerapp->m_psystem->m_pplugin->m_puiHost->_001Print(pgraphics);
+                  m_pcontainerapp->m_psystem->m_pplugin->m_puserinteractionHost->_001Print(pgraphics);
 
                   {
 

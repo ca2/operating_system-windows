@@ -50,7 +50,7 @@ namespace draw2d_gdi
       address_array < ::draw2d_gdi::object * >           m_ptraObject;
 
 
-      graphics(::layered * pobjectContext);
+      graphics(::context_object * pcontextobject);
       virtual ~graphics();
 
 
@@ -471,7 +471,7 @@ namespace draw2d_gdi
       bool SelectClipPath(int nMode) override;
 
       // Misc Helper Functions
-      static ::draw2d::brush* GetHalftoneBrush(::layered * pobjectContext);
+      static ::draw2d::brush* GetHalftoneBrush(::context_object * pcontextobject);
       //void DrawDragRect(const ::rectangle_i32 & rectangle, const ::size_i32 & size,
       //                  const ::rectangle_i32 & rectLast, const ::size_i32 & sizeLast, ::draw2d::brush* pBrush = nullptr, ::draw2d::brush* pBrushLast = nullptr) override;
 

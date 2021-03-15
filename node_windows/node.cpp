@@ -257,16 +257,6 @@ namespace node_windows
    }
 
 
-   ::e_status node::get_system_time(system_time_t * psystemtime)
-   {
-
-      ::GetSystemTime((LPSYSTEMTIME)psystemtime);
-
-      return ::success;
-
-   }
-
-   
    ::e_status node::open_folder(::file::path & pathFolder)
    {
 
@@ -400,7 +390,9 @@ namespace node_windows
    ::e_status node::start()
    {
 
-      auto estatus = System->__thread_init();
+      __pointer(::aura::system) psystem = m_psystem;
+
+      auto estatus = psystem->__thread_init();
 
       if (!estatus)
       {
@@ -409,7 +401,7 @@ namespace node_windows
 
       }
 
-      estatus = System->on_start();
+      estatus = m_psystem->on_start();
 
       if (!estatus)
       {
@@ -418,7 +410,7 @@ namespace node_windows
 
       }
 
-      estatus = System->main();
+      estatus = psystem->main();
 
       if (!estatus)
       {
@@ -427,7 +419,7 @@ namespace node_windows
 
       }
 
-      estatus = System->inline_term();
+      estatus = m_psystem->inline_term();
 
       if (!estatus)
       {

@@ -9,8 +9,8 @@ namespace multimedia
    {
 
 
-      factory_exchange::factory_exchange(::layered * pobjectContext) :
-         ::object(pobjectContext)
+      factory_exchange::factory_exchange(::context_object * pcontextobject) :
+         ::object(pobject)
       {
 
       }
@@ -27,10 +27,10 @@ namespace multimedia
 } // namespace multimedia
 
 
-void factory_exchange(::layered * pobjectContext)
+void factory_exchange(::context_object * pcontextobject)
 {
 
-   ::multimedia::mmsystem::factory_exchange factoryexchange(pobjectContext);
+   ::multimedia::mmsystem::factory_exchange factoryexchange(pobject);
 
 }
 

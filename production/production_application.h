@@ -20,7 +20,7 @@ namespace production
       __pointer(::user::single_document_template) m_pdocumenttemplateMain;
 
 
-      application(::layered * pobjectContext);
+      application(::context_object * pcontextobject);
       virtual ~application();
 
       virtual void construct();

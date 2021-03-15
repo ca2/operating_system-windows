@@ -1247,7 +1247,7 @@ namespace hi5
       set.merge(m_setHttp);
 
       /* Send http request */
-      return Context.http().get(getUrl, m_strResponse, set);
+      return pcontext->http().get(getUrl, m_strResponse, set);
 
    }
 
@@ -1275,7 +1275,7 @@ namespace hi5
       set["headers"] = headers;
 
       /* Send http request */
-      return Context.http().get(getUrl, m_strResponse, set);
+      return pcontext->http().get(getUrl, m_strResponse, set);
 
    }
 
@@ -1298,7 +1298,7 @@ namespace hi5
    set["http_method"] = "POST";
 
    /* Send http request */
-   /*bool bOk = Context.http().get(getUrl, m_strResponse, set);
+   /*bool bOk = pcontext->http().get(getUrl, m_strResponse, set);
 
    headers = set["get_headers"].propset();
 
@@ -1332,7 +1332,7 @@ namespace hi5
       set["http_method"] = "DELETE";
 
       /* Send http request */
-      return Context.http().get(deleteUrl, m_strResponse, set);
+      return pcontext->http().get(deleteUrl, m_strResponse, set);
 
    }
 
@@ -1365,7 +1365,7 @@ namespace hi5
 
          }
 
-         return Context.http().get(postUrl, m_strResponse, set);
+         return pcontext->http().get(postUrl, m_strResponse, set);
 
       }
       else
@@ -1382,7 +1382,7 @@ namespace hi5
 
          setHttp["http_method"] = "POST";
 
-         return Context.http().get(postUrl, m_strResponse, setHttp) && setHttp["get_status"].int32() == ::success;
+         return pcontext->http().get(postUrl, m_strResponse, setHttp) && setHttp["get_status"].int32() == ::success;
 
       }
 
@@ -1492,7 +1492,7 @@ namespace hi5
                string strAuth = set["get_headers"]["Authorization"];
                string strDate = set["get_headers"]["date"];
                ::datetime::time time(iTime);
-               string strDateHere = System->datetime().international().get_gmt_date_time(time);
+               string strDateHere = psystem->datetime().international().get_gmt_date_time(time);
                /* Tell OAuth object to save access token and secret from web response */
                m_oauth.extractOAuthTokenKeySecret(get_response());
 

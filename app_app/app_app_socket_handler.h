@@ -11,7 +11,7 @@ namespace user_service
    public:
 
 
-      socket_handler(::layered * pobjectContext);
+      socket_handler(::context_object * pcontextobject);
 
 
    };

@@ -46,7 +46,7 @@ namespace windowing_win32
       Array          m_hwndtreea;
 
 
-      hwnd_tree(::layered * pobjectContext = nullptr);
+      hwnd_tree();
       hwnd_tree(HWND interaction_impl);
       hwnd_tree(const hwnd_tree & tree);
 

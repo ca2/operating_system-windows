@@ -25,7 +25,7 @@ namespace draw2d_gdiplus
    void object::dump(dump_context & dumpcontext) const
    {
 
-      ::context_object::dump(dumpcontext);
+      ::matter::dump(dumpcontext);
 
    }
 
@@ -33,7 +33,7 @@ namespace draw2d_gdiplus
    void object::assert_valid() const
    {
       
-      ::context_object::assert_valid();
+      ::matter::assert_valid();
 
    }
 

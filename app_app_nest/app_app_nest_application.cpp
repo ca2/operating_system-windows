@@ -109,7 +109,7 @@ namespace ca2plugin_container
 
       m_phost->::aura::application::m_psession = m_psession;
 
-      m_phost->get_context_application() = this;
+      m_phost->get_application() = this;
 
       return m_phost;
 
@@ -126,7 +126,7 @@ namespace ca2plugin_container
 
       //}
 
-      //if(System->install().is_installing_ca2())
+      //if(psystem->install().is_installing_ca2())
       //{
 
       //   return false;

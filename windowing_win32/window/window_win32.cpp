@@ -80,7 +80,7 @@ LRESULT CALLBACK __window_procedure(HWND hwnd, UINT message, WPARAM wparam, LPAR
 
          pwindow->set_oswindow(__oswindow(hwnd));
 
-         auto pwindowing = (::windowing_win32::windowing *)pwindow->m_pwindowing->layer(LAYERED_IMPL);
+         auto pwindowing = pwindow->windowing()->cast < ::windowing_win32::windowing >();
 
          pwindowing->m_windowmap[hwnd] = pwindow;
 
@@ -128,19 +128,7 @@ LRESULT CALLBACK __window_procedure(HWND hwnd, UINT message, WPARAM wparam, LPAR
 
    //return ::DefWindowProcW(hwnd, message, wparam, lparam);
 
-   if (::get_context_system() == nullptr)
-   {
-
-      return 0;
-
-   }
-
-   if (System == nullptr)
-   {
-
-      return 0;
-
-   }
+   auto psystem = pimpl->get_system();
 
    pimpl->m_uiMessage = message;
 
@@ -461,36 +449,40 @@ void __term_windowing()
 }
 
 
-CLASS_DECL_WINDOWING_WIN32 bool windows_register_class(WNDCLASSEXW * pwndclass);
+//bool windowing::_windows_register_class(WNDCLASSEXW * puserinteractionclass);
 
 
-
-
-
-wstring windows_calc_icon_window_class(::user::interaction * puserinteraction, u32 dwDefaultStyle, const char * pszMatter)
+namespace windowing_win32
 {
 
-   string strPath = Ctx(puserinteraction).dir().matter(pszMatter, "icon.ico");
 
-   hicon hIcon = (hicon) ::LoadImageW(nullptr, wstring(Ctx(puserinteraction).get_matter_path(strPath)), IMAGE_ICON, 256, 256, LR_LOADFROMFILE);
+wstring windowing::_windows_calc_icon_window_class(::user::interaction * puserinteraction, u32 dwDefaultStyle, const char * pszMatter)
+{
 
-   wstring strClass = windows_get_user_interaction_window_class(puserinteraction);
+   auto pcontext = puserinteraction->get_context();
+
+   string strPath = pcontext->dir().matter(pszMatter, "icon.ico");
+
+   hicon hIcon = (hicon) ::LoadImageW(nullptr, wstring(pcontext->get_matter_path(strPath)), IMAGE_ICON, 256, 256, LR_LOADFROMFILE);
+
+   wstring strClass = _windows_get_user_interaction_window_class(puserinteraction);
 
    if (hIcon != nullptr)
    {
 
+      auto psystem = get_system();
       // will fill pszClassName with default WNDCLASS name
 
       // ignore instance handle from pre_create_window.
 
       WNDCLASSEXW wndcls;
 
-      if (strClass.get_length() > 0 && GetClassInfoExW((HINSTANCE)System->m_hinstance, strClass, &wndcls) && wndcls.hIcon != hIcon)
+      if (strClass.get_length() > 0 && GetClassInfoExW((HINSTANCE)psystem->m_hinstance, strClass, &wndcls) && wndcls.hIcon != hIcon)
       {
 
          // register a very similar WNDCLASS
 
-         return windows_register_window_class(get_context_application(), wndcls.style, wndcls.hCursor, wndcls.hbrBackground, hIcon);
+         return _windows_register_window_class(wndcls.style, wndcls.hCursor, wndcls.hbrBackground, hIcon);
 
       }
 
@@ -503,7 +495,7 @@ wstring windows_calc_icon_window_class(::user::interaction * puserinteraction, u
 
 
 
-wstring CLASS_DECL_WINDOWING_WIN32 windows_get_user_interaction_window_class(::user::interaction * puserinteraction)
+wstring windowing::_windows_get_user_interaction_window_class(::user::interaction * puserinteraction)
 {
 
    ::user::interaction::enum_type etype = puserinteraction->get_window_type();
@@ -532,7 +524,7 @@ wstring CLASS_DECL_WINDOWING_WIN32 windows_get_user_interaction_window_class(::u
 
       wndcls.cbWndExtra = wndcls.cbClsExtra = 40;
 
-      if (windows_register_with_icon(&wndcls, L"ca2_frame", 0))
+      if (_windows_register_with_icon(&wndcls, L"ca2_frame", 0))
       {
 
          return wndcls.lpszClassName;
@@ -542,20 +534,18 @@ wstring CLASS_DECL_WINDOWING_WIN32 windows_get_user_interaction_window_class(::u
    }
 
 
-   return windows_register_window_class(puserinteraction->get_context_application(), 0);
+   return _windows_register_window_class(0);
 
 }
 
-
-
-bool CLASS_DECL_WINDOWING_WIN32 windows_register_with_icon(WNDCLASSEXW * pwndclass, const unichar * pszClassName, ::u32 nIDIcon)
+bool windowing::_windows_register_with_icon(WNDCLASSEXW * puserinteractionclass, const unichar * pszClassName, ::u32 nIDIcon)
 {
 
-   pwndclass->lpszClassName = pszClassName;
+   puserinteractionclass->lpszClassName = pszClassName;
 
-   pwndclass->hIcon = ::LoadIconW(nullptr, MAKEINTRESOURCEW(32512));
+   puserinteractionclass->hIcon = ::LoadIconW(nullptr, MAKEINTRESOURCEW(32512));
 
-   return windows_register_class(pwndclass);
+   return _windows_register_class(puserinteractionclass);
 
 }
 
@@ -563,10 +553,10 @@ bool CLASS_DECL_WINDOWING_WIN32 windows_register_with_icon(WNDCLASSEXW * pwndcla
 //CLASS_DECL_WINDOWING_WIN32 WNDPROC get_window_procedure();
 
 
-CLASS_DECL_WINDOWING_WIN32 wstring windows_register_window_class(::layered * pobjectContext, ::u32 nClassStyle, hcursor hCursor, HBRUSH hbrBackground, hicon hIcon)
+wstring windowing::_windows_register_window_class(::u32 nClassStyle, hcursor hCursor, HBRUSH hbrBackground, hicon hIcon)
 {
 
-   ::apex::application * papp = ::get_context_application(pobjectContext);
+   //auto papp = pobject->get_application();
 
    const int iLen = 4096;
 
@@ -627,7 +617,7 @@ CLASS_DECL_WINDOWING_WIN32 wstring windows_register_window_class(::layered * pob
 
    wndcls.lpszClassName = wstrClassName;
 
-   if (!windows_register_class(&wndcls))
+   if (!_windows_register_class(&wndcls))
    {
 
       __throw(error_resource);
@@ -640,6 +630,8 @@ CLASS_DECL_WINDOWING_WIN32 wstring windows_register_window_class(::layered * pob
 }
 
 
+
+}//namespace windowing_win32
 
 
 lresult CALLBACK WndProc(HWND hWnd, const ::id & id, wparam wParam, lparam lParam);
@@ -670,35 +662,44 @@ lresult CALLBACK WndProc(HWND hWnd, const ::id & id, wparam wParam, lparam lPara
 //}
 //
 
-CLASS_DECL_WINDOWING_WIN32 bool windows_register_class(WNDCLASSEXW * pwndclass)
+
+namespace windowing_win32
 {
 
-   WNDCLASSEXW wndcls;
 
-   if (GetClassInfoExW(pwndclass->hInstance, pwndclass->lpszClassName, &wndcls))
-
+   bool windowing::_windows_register_class(WNDCLASSEXW* puserinteractionclass)
    {
 
-      return true;
+      WNDCLASSEXW wndcls;
+
+      if (GetClassInfoExW(puserinteractionclass->hInstance, puserinteractionclass->lpszClassName, &wndcls))
+
+      {
+
+         return true;
+
+      }
+
+      puserinteractionclass->cbSize = sizeof(WNDCLASSEXW);
+
+      if (!::RegisterClassExW(puserinteractionclass))
+      {
+
+         ::u32 dw = GetLastError();
+
+         return false;
+
+      }
+
+      bool bRet = true;
+
+      return bRet;
 
    }
 
-   pwndclass->cbSize = sizeof(WNDCLASSEXW);
 
-   if (!::RegisterClassExW(pwndclass))
-   {
+} // namespace windowing_win32
 
-      ::u32 dw = GetLastError();
-
-      return false;
-
-   }
-
-   bool bRet = true;
-
-   return bRet;
-
-}
 
 
 CLASS_DECL_WINDOWING_WIN32 WNDPROC windows_user_interaction_impl_get_window_procedure()

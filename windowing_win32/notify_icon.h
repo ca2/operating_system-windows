@@ -49,7 +49,7 @@ namespace windowing_win32
       virtual ~notify_icon();
 
 
-      void AddHiddenWindow(__pointer(::user::interaction) pwnd);
+      void AddHiddenWindow(__pointer(::user::interaction) puserinteraction);
 
 #ifdef WINDOWS_DESKTOP
 

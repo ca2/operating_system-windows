@@ -5,7 +5,7 @@ namespace draw2d_gdi
 {
 
 
-   pen::pen(::layered * pobjectContext) :
+   pen::pen(::context_object * pcontextobject) :
       ::draw2d::pen(pobject)
    {
 

@@ -7,7 +7,7 @@ namespace production
 {
 
 
-   view::view(::layered * pobjectContext) :
+   view::view(::context_object * pcontextobject) :
       ::object(pobject),
       ::user::interaction(pobject),
       m_brushBkActive(e_create),
@@ -16,7 +16,7 @@ namespace production
 
       m_pproduction = nullptr;
 
-      //Context.file().ftd("C:\\home2\\ca2os\\ca2_spa\\stage", "C:\\teste.fileset");
+      //pcontext->file().ftd("C:\\home2\\ca2os\\ca2_spa\\stage", "C:\\teste.fileset");
 
 
       m_iLineHeight = 1;
@@ -290,10 +290,10 @@ namespace production
       SetTimer(3003, 300, nullptr);
       SetTimer(543218, 200, nullptr);
       //m_pimageV->load_image("wild_mountains_and_valleys-123.png");
-      //System->draw2d()->imaging().free(pfi);
+      //psystem->draw2d()->imaging().free(pfi);
 
 /*      //m_pimage->load_image("bambu49transr.png");
-      //System->draw2d()->imaging().free(pfi);
+      //psystem->draw2d()->imaging().free(pfi);
 
 
 
@@ -305,7 +305,7 @@ namespace production
       m_pproduction->m_pview  = this;
 
 
-      Application.m_pview = this;
+      papplication->m_pview = this;
 
       //m_pproduction->twitter_auth();
 //      m_pproduction->twitter_twit("starting ca2 production application");
@@ -439,10 +439,10 @@ namespace production
 //      i32 iHitArea = hit_test(pmouse->m_point);
       /*   {
             ::aura::menu menu;
-            menu.LoadXmlMenu(get_context_application(), "production\\popup_production.xml");
-            menu.set_app(get_context_application());
+            menu.LoadXmlMenu(get_application(), "production\\popup_production.xml");
+            menu.set_app(get_application());
             ::aura::menu menuPopup(menu.GetSubMenu(0));
-            menuPopup.set_app(get_context_application());
+            menuPopup.set_app(get_application());
             menuPopup.track_popup_menu(0, pmouse->m_point.x, pmouse->m_point.y, get_parent_frame().GetSafeoswindow_());
          }
         */
@@ -496,7 +496,7 @@ namespace production
    void view::make_production()
    {
       m_iStep = 1;
-      __pointer(application) papp =  (get_context_application());
+      __pointer(application) papp =  (get_application());
       m_pproduction->start_production(papp->m_eversion);
    }
 
@@ -504,7 +504,7 @@ namespace production
    void view::production_loop(i32 iLoopCount)
    {
       m_iStep = 1;
-      __pointer(application) papp =  (get_context_application());
+      __pointer(application) papp =  (get_application());
       m_pproduction->start_loop(papp->m_eversion, iLoopCount);
    }
 
@@ -583,8 +583,8 @@ namespace production
 
    production * view::create_production()
    {
-      production * pclass = new production(get_context_application());
-      pclass->m_eversion = Application.m_eversion;
+      production * pclass = new production(get_application());
+      pclass->m_eversion = papplication->m_eversion;
       return pclass;
    }
 

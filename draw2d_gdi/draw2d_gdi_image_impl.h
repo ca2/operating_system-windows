@@ -19,7 +19,7 @@ namespace draw2d_gdi
 
 
 
-      image_impl(::layered * pobjectContext);
+      image_impl(::context_object * pcontextobject);
       virtual ~image_impl();
 
 
@@ -55,8 +55,8 @@ namespace draw2d_gdi
 
       bool to(::draw2d::graphics_pointer & pgraphics, const ::point_i32 & point, const ::size_i32 & size, const ::point_i32 & pointSrc) override;
 
-      //virtual bool update_window(::aura::draw_interface * pwnd,::message::message * pmessage,bool bTransferBuffer = true);
-      //virtual bool print_window(::aura::draw_interface * pwnd,::message::message * pmessage);
+      //virtual bool update_window(::aura::draw_interface * puserinteraction,::message::message * pmessage,bool bTransferBuffer = true);
+      //virtual bool print_window(::aura::draw_interface * puserinteraction,::message::message * pmessage);
 
       virtual bool SetIconMask(::draw2d::icon * picon, i32 cx, i32 cy) override;
 

@@ -5,7 +5,7 @@ namespace production
 {
 
 
-   application::application(::layered * pobjectContext) :
+   application::application(::context_object * pcontextobject) :
       ::object(this),
       ::thread(this),
       ::aura::application(pobject),
@@ -124,7 +124,7 @@ namespace production
       //}
       //else if (pcreate->m_pcommandline->m_varQuery.has_property("start_deferred"))
       //{
-      // m_pview->production_loop(Application.handler()->m_varTopicQuery["start_deferred"]);
+      // m_pview->production_loop(papplication->handler()->m_varTopicQuery["start_deferred"]);
       //}
 
       m_pview->release_production();
@@ -150,7 +150,7 @@ namespace production
       UNREFERENCED_PARAMETER(pdata);
       if(itema.get_size() > 0)
       {
-         Context.os().file_open(this, itema[0]->m_filepathFinal, "", itema[0]->m_filepathFinal.folder());
+         pcontext->os().file_open(this, itema[0]->m_filepathFinal, "", itema[0]->m_filepathFinal.folder());
       }
 
    }
@@ -160,7 +160,7 @@ namespace production
 
 
 extern "C"
-::apex::library * platform_production_get_new_library(::layered * pobjectContext)
+::apex::library * platform_production_get_new_library(::context_object * pcontextobject)
 {
 
    return new ::apex::single_application_library < production::application >(pobject, "platform/production");

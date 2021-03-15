@@ -42,7 +42,7 @@ namespace node_windows
 
       virtual double get_time_zone() override;
 
-      virtual ::e_status get_system_time(system_time_t * psystemtime) override;
+      //virtual ::e_status get_system_time(system_time_t * psystemtime) override;
 
 
       virtual ::e_status open_folder(::file::path & pathFolder) override;

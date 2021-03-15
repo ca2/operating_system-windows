@@ -319,7 +319,7 @@ namespace draw2d_gdiplus
    //bool image::stretch(::image * pimage)
    //{
 
-   ////   ::draw2d::bitmap_pointer bitmap(get_context_application());
+   ////   ::draw2d::bitmap_pointer bitmap(get_application());
 
    ////   bitmap->CreateCompatibleBitmap(pgraphics, 1, 1);
 

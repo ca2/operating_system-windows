@@ -31,6 +31,7 @@ namespace windowing_win32
 
       virtual void install_message_routing(channel * pchannel) override;
 
+
       
       virtual ::e_status create_window(::user::interaction_impl * pimpl) override;
 
@@ -50,7 +51,7 @@ namespace windowing_win32
       }
 
 
-      ::windowing_win32::windowing * windowing() const { return (::windowing_win32::windowing *) m_pwindowing->layer(LAYERED_IMPL); }
+      ::windowing_win32::windowing * windowing() const { return m_pwindowing.cast < ::windowing_win32::windowing > (); }
 
 
       //virtual void set_oswindow(oswindow oswindow) override;
@@ -74,13 +75,13 @@ namespace windowing_win32
 
       //virtual void set_wm_class(const char * psz) override;
 
-      virtual void exit_iconify() override;
+      virtual ::e_status exit_iconify() override;
 
-      virtual void full_screen(const::rectangle_i32 & rectangle = nullptr) override;
+      virtual ::e_status full_screen(const::rectangle_i32 & rectangle = nullptr) override;
 
-      virtual void exit_full_screen() override;
+      virtual ::e_status exit_full_screen() override;
 
-      virtual void exit_zoomed() override;
+      virtual ::e_status exit_zoomed() override;
 
       virtual ::e_status set_keyboard_focus() override;
 
@@ -203,7 +204,7 @@ namespace windowing_win32
       //virtual void * get_os_data() const;
 
 
-      virtual ::e_status finish(::context_object * pcontextobjectFinish) override;
+      virtual ::e_status finish(::property_object * pcontextobjectFinish) override;
 
 
       //      virtual ::user::interaction * from_handle(HWND hwnd);
@@ -311,14 +312,14 @@ namespace windowing_win32
       //virtual point_f64 client_screen_top_left() override;
 
 
-      //virtual bool GetWindowPlacement(WINDOWPLACEMENT * pwndpl);
+      //virtual bool GetWindowPlacement(WINDOWPLACEMENT * puserinteractionpl);
 
-      //virtual bool SetWindowPlacement(const WINDOWPLACEMENT * pwndpl);
+      //virtual bool SetWindowPlacement(const WINDOWPLACEMENT * puserinteractionpl);
 
 
-      //virtual void MapWindowPoints(::user::interaction_impl * pwndTo, POINT_I32 * pPoint, ::u32 nCount);
+      //virtual void MapWindowPoints(::user::interaction_impl * puserinteractionTo, POINT_I32 * pPoint, ::u32 nCount);
 
-      //virtual void MapWindowPoints(::user::interaction_impl * pwndTo, RECTANGLE_I32 * prectangle);
+      //virtual void MapWindowPoints(::user::interaction_impl * puserinteractionTo, RECTANGLE_I32 * prectangle);
 
 
       //virtual void Print(::draw2d::graphics_pointer & pgraphics, u32 dwFlags) const;
@@ -824,7 +825,7 @@ namespace windowing_win32
       virtual void window_show_change_visibility(::e_display edisplay, ::e_activation eactivation) override;
 
 
-      virtual void non_top_most_upper_window_rects(::rect_array & recta) override;
+      virtual void non_top_most_upper_window_rects(::rectangle_i32_array & recta) override;
 
 
       // virtual void activate_top_parent();
@@ -834,8 +835,8 @@ namespace windowing_win32
       // internal to windowing library
 
 
-      virtual bool get_window_placement(WINDOWPLACEMENT * pwndpl);
-      virtual bool set_window_placement(const WINDOWPLACEMENT * pwndpl);
+      virtual bool get_window_placement(WINDOWPLACEMENT * puserinteractionpl);
+      virtual bool set_window_placement(const WINDOWPLACEMENT * puserinteractionpl);
 
 
       //virtual iptr get_window_long_ptr(i32 nIndex) const override;
@@ -897,29 +898,29 @@ namespace windowing_win32
 } // namespace windowing_win32
 
 
-inline ::windowing_win32::window * __window(::windowing::window * pwindow)
-{
+//inline ::windowing_win32::window * __window(::windowing::window * pwindow)
+//{
+//
+//   auto pwindowWin32 = (::windowing_win32::window *)pwindow->layer(LAYERED_IMPL);
+//
+//   return pwindowWin32;
+//
+//}
 
-   auto pwindowWin32 = (::windowing_win32::window *)pwindow->layer(LAYERED_IMPL);
 
-   return pwindowWin32;
-
-}
-
-
-inline HWND __hwnd(::windowing::window * pwindow)
-{
-
-   auto pwindowWin32 = __window(pwindow);
-
-   if (::is_null(pwindowWin32))
-   {
-
-      return nullptr;
-
-   }
-
-   return pwindowWin32->get_hwnd();
-
-}
+//inline HWND __hwnd(::windowing::window * pwindow)
+//{
+//
+//   auto pwindowWin32 = __window(pwindow);
+//
+//   if (::is_null(pwindowWin32))
+//   {
+//
+//      return nullptr;
+//
+//   }
+//
+//   return pwindowWin32->get_hwnd();
+//
+//}
 

@@ -4,7 +4,7 @@
 #define NSSM_REGISTRY _T("SYSTEM\\CurrentControlSet\\Services\\%s\\Parameters")
 #define NSSM_REGISTRY_GROUPS _T("SYSTEM\\CurrentControlSet\\Control\\ServiceGroupOrder")
 #define NSSM_REG_GROUPS _T("List")
-#define NSSM_REG_EXE _T("Application")
+#define NSSM_REG_EXE _T("papplication")
 #define NSSM_REG_FLAGS _T("AppParameters")
 #define NSSM_REG_DIR _T("AppDirectory")
 #define NSSM_REG_ENV _T("AppEnvironment")

@@ -12,7 +12,7 @@ namespace windowing_win32
    windowing::windowing()
    {
 
-      set_layer(LAYERED_IMPL, this);
+//      set_layer(LAYERED_IMPL, this);
 
    }
 
@@ -387,12 +387,12 @@ namespace windowing_win32
    ::windowing::window * windowing::get_active_window(::thread * pthread)
    {
 
-      ithread_t ithread = 0;
+      itask_t itask = 0;
 
       if (pthread)
       {
 
-         ithread = pthread->get_ithread();
+         itask = pthread->get_ithread();
 
       }
 
@@ -402,7 +402,7 @@ namespace windowing_win32
 
       HWND hwndActive;
 
-      if (GetGUIThreadInfo((DWORD) ithread, &info))
+      if (GetGUIThreadInfo((DWORD) itask, &info))
       {
 
          hwndActive = info.hwndActive;
@@ -432,12 +432,12 @@ namespace windowing_win32
    ::windowing::window * windowing::get_keyboard_focus(::thread * pthread)
    {
 
-      ithread_t ithread = 0;
+      itask_t itask = 0;
 
       if (pthread)
       {
 
-         ithread = pthread->get_ithread();
+         itask = pthread->get_ithread();
 
       }
 
@@ -447,7 +447,7 @@ namespace windowing_win32
 
       HWND hwndFocus;
 
-      if (GetGUIThreadInfo((DWORD)ithread, &info))
+      if (GetGUIThreadInfo((DWORD)itask, &info))
       {
 
          hwndFocus = info.hwndFocus;
@@ -499,7 +499,7 @@ namespace windowing_win32
 
       //   }
 
-      //   ::user::interaction_impl * pimpl = System->impl_from_handle(pmsg->hwnd);
+      //   ::user::interaction_impl * pimpl = psystem->impl_from_handle(pmsg->hwnd);
 
       //   if (pimpl != nullptr)
       //   {
@@ -620,12 +620,12 @@ namespace windowing_win32
    ::windowing::window * windowing::get_mouse_capture(::thread * pthread)
    {
 
-      ithread_t ithread = 0;
+      itask_t itask = 0;
 
       if (pthread)
       {
 
-         ithread = pthread->get_ithread();
+         itask = pthread->get_ithread();
 
       }
 
@@ -635,7 +635,7 @@ namespace windowing_win32
 
       HWND hwndCapture = nullptr;
 
-      if (GetGUIThreadInfo((DWORD)ithread, &info))
+      if (GetGUIThreadInfo((DWORD)itask, &info))
       {
 
          hwndCapture = info.hwndCapture;
@@ -682,7 +682,7 @@ namespace windowing_win32
    {
 
 
-      if (get_context_session()->m_bSystemSynchronizedCursor)
+      if (get_session()->m_bSystemSynchronizedCursor)
       {
 
          POINT point;
@@ -862,15 +862,17 @@ namespace windowing_win32
    }
 
 
-   hwnd_array get_hwnda(const ::user::primitive_ptra & ptra)
+   hwnd_array windowing::_get_hwnda(const ::user::primitive_pointer_array & primitivepointera)
    {
 
       hwnd_array hwnda;
 
-      for (i32 i = 0; i < ptra.get_size(); i++)
+      for (i32 i = 0; i < primitivepointera.primitive_count(); i++)
       {
 
-         hwnda.add(__hwnd(ptra.element_at(i)->get_oswindow()));
+         __pointer(::user::interaction) puserinteraction = primitivepointera.primitive_at(i);
+
+         hwnda.add((HWND) puserinteraction->get_oswindow());
 
       }
 
@@ -1073,6 +1075,14 @@ namespace windowing_win32
    }
 
 
+   void windowing::get_cursor_position(POINT_I32* ppoint)
+   {
+
+      ::GetCursorPos((POINT *) ppoint);
+
+   }
+
+
    //#ifdef WINDOWS_DESKTOP
 //
 //                  CHOOSECOLOR cc;
@@ -1149,7 +1159,7 @@ namespace windowing_win32
 //
 //      puser->will_use_view_hint(COLORSEL_IMPACT);
 //
-//      auto pdocument = m_mapimpactsystem[COLORSEL_IMPACT]->open_document_file(puiOwner->get_context_application(), ::e_type_null, __visible(true));
+//      auto pdocument = m_mapimpactsystem[COLORSEL_IMPACT]->open_document_file(puiOwner->get_application(), ::e_type_null, __visible(true));
 //
 //      __pointer(::userex::color_view) pview = pdocument->get_typed_view < ::userex::color_view >();
 //

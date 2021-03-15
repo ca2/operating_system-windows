@@ -198,21 +198,23 @@ namespace windowing_win32
    }
 
 
-   HICON load_icon(::object * pobject, string_array & straMatter, string strIcon, int cx, int cy)
+   HICON windowing::_load_icon(string_array & straMatter, string strIcon, int cx, int cy)
    {
 
       HICON hicon = nullptr;
 
       ::file::path path;
 
+      auto pcontext = get_context();
+
       for (auto & strMatter : straMatter)
       {
 
          path = strMatter;
 
-         path = Ctx(pobject).dir().matter(path / strIcon);
+         path = pcontext->dir().matter(path / strIcon);
 
-         path = Ctx(pobject).get_matter_cache_path(path);
+         path = pcontext->get_matter_cache_path(path);
 
          hicon = (HICON) ::LoadImageW(nullptr, wstring(path), IMAGE_ICON, cx, cy, LR_LOADFROMFILE);
 

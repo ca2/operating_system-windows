@@ -5,7 +5,7 @@ namespace backup
 {
 
 
-   view::view(::layered * pobjectContext) :
+   view::view(::context_object * pcontextobject) :
       ::object(pobject),
       ::production::view(pobject)
    {
@@ -22,7 +22,7 @@ namespace backup
    ::production::production * view::create_production()
    {
 
-      return new ::backup::backup(get_context_application());
+      return new ::backup::backup(get_application());
 
    }
 

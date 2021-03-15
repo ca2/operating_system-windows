@@ -9,9 +9,9 @@ namespace multimedia
    {
 
 
-      factory_exchange::factory_exchange(::layered * pobjectContext) :
-         ::object(pobjectContext),
-         ::multimedia::mmsystem::factory_exchange(pobjectContext)
+      factory_exchange::factory_exchange(::context_object * pcontextobject) :
+         ::object(pobject),
+         ::multimedia::mmsystem::factory_exchange(pobject)
       {
 
          //create_factory < callback, ::multimedia::audio_mixer::callback >();
@@ -44,10 +44,10 @@ namespace multimedia
 } // namespace multimedia
 
 extern "C"
-void audio_mixer_mmsystem_factory_exchange(::layered * pobjectContext)
+void audio_mixer_mmsystem_factory_exchange(::context_object * pcontextobject)
 {
 
-   ::multimedia::audio_mixer_mmsystem::factory_exchange factoryexchange(pobjectContext);
+   ::multimedia::audio_mixer_mmsystem::factory_exchange factoryexchange(pobject);
 
 }
 

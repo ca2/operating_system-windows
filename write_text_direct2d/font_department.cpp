@@ -19,10 +19,10 @@ namespace write_text_direct2d
 
    }
 
-   ::e_status font_department::initialize(::layered * pobjectContext)
+   ::e_status font_department::initialize(::context_object * pcontextobject)
    {
 
-      auto estatus = ::font_department::initialize(pobjectContext);
+      auto estatus = ::font_department::initialize(pcontextobject);
 
       if (!estatus)
       {

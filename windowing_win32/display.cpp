@@ -143,7 +143,7 @@ namespace windowing_win32
 //
 //      //prectangle->top = 0;
 //
-//      //auto puserinteraction = __user_interaction(m_puiHost);
+//      //auto puserinteraction = __user_interaction(m_puserinteractionHost);
 //
 //      //prectangle->right = puserinteraction->layout().sketch().width();
 //
@@ -501,7 +501,7 @@ namespace windowing_win32
    //}
 
 
-   void display::_get_monitor(rect_array & rectaMonitor, rect_array & rectaIntersect, const rectangle_i32 & rectParam)
+   void display::_get_monitor(rectangle_i32_array & rectaMonitor, rectangle_i32_array & rectaIntersect, const rectangle_i32 & rectParam)
    {
 
       for (index iMonitor = 0; iMonitor < get_monitor_count(); iMonitor++)
@@ -561,7 +561,9 @@ namespace windowing_win32
 
       ::e_display edisplayPrevious = *pedisplay;
 
-      double dMargin = System->m_dpi;
+      auto psystem = get_system();
+
+      double dMargin = psystem->m_dpi;
 
       if (ZONEING_COMPARE::is_equal(rectangle.top, rectWkspace.top, dMargin, !(edisplayPrevious & e_display_top)))
       {

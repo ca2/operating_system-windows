@@ -6,7 +6,7 @@ namespace backup
 {
 
 
-   pane_view::pane_view(::layered * pobjectContext) :
+   pane_view::pane_view(::context_object * pcontextobject) :
       ::object(pobject),
       ::userex::pane_tab_view(pobject),
       ::user::tab_view(pobject),
@@ -77,7 +77,7 @@ namespace backup
       break;
       case OPTIONS_IMPACT:
       {
-         __pointer(::user::document) pdocument = Application.create_form(this, this);
+         __pointer(::user::document) pdocument = papplication->create_form(this, this);
          if(pdocument == nullptr)
             return;
          __pointer(::user::impact) pview = pdocument->get_view();

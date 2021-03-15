@@ -10,7 +10,7 @@ namespace draw2d_gdi
    public:
 
 
-      region(::layered * pobjectContext);
+      region(::context_object * pcontextobject);
       virtual ~region();
 
 

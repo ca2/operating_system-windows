@@ -19,7 +19,7 @@
 CLASS_DECL_WINDOWING_WIN32 WNDPROC windows_user_interaction_impl_get_window_procedure();
 
 
-CLASS_DECL_WINDOWING_WIN32 wstring windows_register_window_class(::layered * pobjectContext, ::u32 nClassStyle, hcursor hCursor, HBRUSH hbrBackground, hicon hIcon);
+CLASS_DECL_WINDOWING_WIN32 wstring windows_register_window_class(::object * pobject, ::u32 nClassStyle, hcursor hCursor, HBRUSH hbrBackground, hicon hIcon);
 
 
 bool has_autohide_appbar(::u32 edge, const rectangle_i32 & mon)

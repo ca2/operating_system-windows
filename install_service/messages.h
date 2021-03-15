@@ -792,7 +792,7 @@
 //
 // MessageText:
 //
-// Application%0
+// papplication%0
 //
 #define NSSM_GUI_TAB_APPLICATION         0x40000241L
 

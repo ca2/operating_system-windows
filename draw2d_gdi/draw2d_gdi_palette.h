@@ -12,7 +12,7 @@ namespace draw2d_gdi
    public:
 
 
-      palette(::layered * pobjectContext);
+      palette(::context_object * pcontextobject);
       virtual ~palette();
 
 

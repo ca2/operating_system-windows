@@ -11,7 +11,7 @@ namespace backup
    public:
 	   
       
-      view(::layered * pobjectContext);
+      view(::context_object * pcontextobject);
       virtual ~view();
 
 

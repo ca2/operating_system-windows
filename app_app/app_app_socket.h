@@ -17,7 +17,7 @@ namespace app_app
 
       bool                             m_bSetCookie;
 
-      socket(::sockets::base_socket_handler & h);
+      socket();
       ~socket();
 
       virtual void OnExecute();

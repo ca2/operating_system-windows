@@ -69,7 +69,7 @@ int nssm_gui(int resource, nssm_service_t *service) {
     HWND combo;
     HWND list;
 
-    /* Application tab. */
+    /* papplication tab. */
     if (service->native) SetDlgItemText(tablist[NSSM_TAB_APPLICATION], IDC_PATH, service->image);
     else SetDlgItemText(tablist[NSSM_TAB_APPLICATION], IDC_PATH, service->exe);
     SetDlgItemText(tablist[NSSM_TAB_APPLICATION], IDC_DIR, service->dir);
@@ -956,7 +956,7 @@ INT_PTR CALLBACK nssm_dlg(HWND window, const ::id & id, WPARAM w, LPARAM l) {
 
       selected_tab = 0;
 
-      /* Application tab. */
+      /* papplication tab. */
       if (service->native) tab.pszText = message_string(NSSM_GUI_TAB_NATIVE);
       else tab.pszText = message_string(NSSM_GUI_TAB_APPLICATION);
       tab.cchTextMax = (int) _tcslen(tab.pszText);

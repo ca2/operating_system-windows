@@ -74,10 +74,10 @@ namespace windowing_win32
    }
 
 
-   ::e_status copydesk::initialize(::layered * pobjectContext)
+   ::e_status copydesk::initialize(::context_object * pcontextobject)
    {
 
-      auto estatus = ::user::copydesk::initialize(pobjectContext);
+      auto estatus = ::user::copydesk::initialize(pcontextobject);
 
       if (!estatus)
       {
@@ -92,7 +92,7 @@ namespace windowing_win32
 
       //wstring strClass = L"ca2_copydesk_windows_message_queue";
 
-      //HINSTANCE hinstance = System->m_hinstance;
+      //HINSTANCE hinstance = psystem->m_hinstance;
 
       //if (!GetClassInfoW(hinstance, strClass, &wndcls))
       //{
@@ -102,7 +102,7 @@ namespace windowing_win32
 
       //   wndcls.cbClsExtra = 0;
       //   wndcls.cbWndExtra = 0;
-      //   wndcls.hInstance = System->m_hinstance;
+      //   wndcls.hInstance = psystem->m_hinstance;
       //   wndcls.hIcon = nullptr;
       //   wndcls.hCursor = nullptr;
       //   wndcls.hbrBackground = nullptr;

@@ -212,26 +212,26 @@ install:
       /*if(papp->does_launch_window_on_startup())
       {
          int iRetry = 100;
-         while(papp->m_pwndMain == nullptr && (iRetry > 0))
+         while(papp->m_puserinteractionMain == nullptr && (iRetry > 0))
          {
             Sleep(100);
             iRetry--;
          }
-         if(papp->m_pwndMain != nullptr)
+         if(papp->m_puserinteractionMain != nullptr)
          {
-   //            papp->m_pwndMain->SetParent(pview);
-            papp->m_pwndMain->ModifyStyle(0, WS_CHILD);
-            papp->m_pwndMain->set_window_position(nullptr, 0, 0, 400, 400, SWP_SHOWWINDOW);
+   //            papp->m_puserinteractionMain->SetParent(pview);
+            papp->m_puserinteractionMain->ModifyStyle(0, WS_CHILD);
+            papp->m_puserinteractionMain->set_window_position(nullptr, 0, 0, 400, 400, SWP_SHOWWINDOW);
          }
       }*/
 
 
-   //   pplugin->m_pframe = dynamic_cast < bergedge::frame * > (pplugin->get_context_application()->get_edge(0, true)->get_bergedge_view()->get_parent_frame());
+   //   pplugin->m_pframe = dynamic_cast < bergedge::frame * > (pplugin->get_application()->get_edge(0, true)->get_bergedge_view()->get_parent_frame());
 
 
    /*   papp->m_puiInitialPlaceHolderContainer = pplugin->m_pframe;
 
-      App(pplugin->get_context_application()).GetThread()->SetMainWnd(pplugin->m_pframe);
+      App(pplugin->get_application()).GetThread()->SetMainWnd(pplugin->m_pframe);
       pplugin->m_pframe->m_bCustomFrame = false;
       pplugin->m_pframe->get_parent()->on_layout(::draw2d::graphics_pointer & pgraphics);*/
 

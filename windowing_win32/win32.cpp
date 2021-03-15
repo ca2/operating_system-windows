@@ -84,7 +84,7 @@ namespace windowing_win32
    }
 
 
-   void window_create_caret(HWND hwnd, HBITMAP hbitmap)
+   void windowing::_window_create_caret(HWND hwnd, HBITMAP hbitmap)
    {
 
       ASSERT(::IsWindow(hwnd));
@@ -94,7 +94,7 @@ namespace windowing_win32
    }
 
 
-   void window_create_solid_caret(HWND hwnd, i32 nWidth, i32 nHeight)
+   void windowing::_window_create_solid_caret(HWND hwnd, i32 nWidth, i32 nHeight)
    {
 
       ASSERT(::IsWindow(hwnd));
@@ -104,7 +104,7 @@ namespace windowing_win32
    }
 
 
-   void window_create_gray_caret(HWND hwnd, i32 nWidth, i32 nHeight)
+   void windowing::_window_create_gray_caret(HWND hwnd, i32 nWidth, i32 nHeight)
    {
 
       ASSERT(::IsWindow(hwnd));

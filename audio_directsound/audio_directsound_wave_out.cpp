@@ -9,7 +9,7 @@ namespace multimedia
    {
 
 
-      out::out(::layered * pobjectContext) :
+      out::out(::context_object * pcontextobject) :
          ::object(pobject),
          ::thread(pobject),
          wave_base(pobject),
@@ -93,7 +93,7 @@ namespace multimedia
          }
 
 
-         if(FAILED(m_pdirectsound->SetCooperativeLevel((HWND) Application.m_puiMain->get_safe_handle(),DSSCL_PRIORITY)))
+         if(FAILED(m_pdirectsound->SetCooperativeLevel((HWND) papplication->m_puiMain->get_safe_handle(),DSSCL_PRIORITY)))
          {
 
             return error_failed;
@@ -108,7 +108,7 @@ namespace multimedia
          m_pwaveformat->nBlockAlign = m_pwaveformat->wBitsPerSample * m_pwaveformat->nChannels / 8;
          m_pwaveformat->nAvgBytesPerSec = m_pwaveformat->nSamplesPerSec * m_pwaveformat->nBlockAlign;
          m_pwaveformat->cbSize = 0;
-         __pointer(::audio::wave) audiowave = Application.audiowave();
+         __pointer(::audio::wave) audiowave = papplication->audiowave();
 
          {
 
@@ -287,7 +287,7 @@ namespace multimedia
          }
 
 
-         if(FAILED(m_pdirectsound->SetCooperativeLevel((HWND)Application.m_puiMain->get_safe_handle(),DSSCL_PRIORITY)))
+         if(FAILED(m_pdirectsound->SetCooperativeLevel((HWND)papplication->m_puiMain->get_safe_handle(),DSSCL_PRIORITY)))
          {
 
             return error_failed;
@@ -302,7 +302,7 @@ namespace multimedia
          m_pwaveformat->nBlockAlign = m_pwaveformat->wBitsPerSample * m_pwaveformat->nChannels / 8;
          m_pwaveformat->nAvgBytesPerSec = m_pwaveformat->nSamplesPerSec * m_pwaveformat->nBlockAlign;
          m_pwaveformat->cbSize = 0;
-         __pointer(::audio::wave) audiowave = Application.audiowave();
+         __pointer(::audio::wave) audiowave = papplication->audiowave();
 
          {
 
@@ -867,7 +867,7 @@ namespace multimedia
 
 
       //out::run_step_thread::run_step_thread(out * pout):
-      //   ::thread(pout->get_context_application())
+      //   ::thread(pout->get_application())
       //{
       //   m_pout = pout;
       //   begin();
@@ -877,7 +877,7 @@ namespace multimedia
       //void out::run_step_thread::run()
       //{
 
-      //   while(thread_get_run() && m_pout->m_estate == out::e_state_playing)
+      //   while(task_get_run() && m_pout->m_estate == out::e_state_playing)
       //   {
 
       //      m_pout->out_run_step();

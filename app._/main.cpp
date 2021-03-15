@@ -143,7 +143,7 @@ void copy(MEM_ICON_ITEM * dst, ICON_ITEM * pitem)
 //
 //      //m_hinstance = ::GetModuleHandleA(nullptr);
 //
-//      //get_context_application() = this;
+//      //get_application() = this;
 //
 //      m_bLicense = false;
 //
@@ -191,7 +191,7 @@ void wmain(int argc, wchar_t * wargv[])
 
          os_message_box("Incorrect Number of Arguments passed to appfy. Expected 3 or 4; passed " + __str(__argc - 1), "", e_message_box_ok);
 
-         Application.m_result.add(error_invalid_argument);
+         papplication->m_result.add(error_invalid_argument);
 
          return;
 
@@ -199,13 +199,13 @@ void wmain(int argc, wchar_t * wargv[])
 
       dprint("Starting!!");
 
-      strSrc = solve_relative(System->get_arg(1));
+      strSrc = solve_relative(psystem->get_arg(1));
 
-      strApp = System->get_arg(2);
+      strApp = psystem->get_arg(2);
 
-      string strDst = solve_relative(System->get_arg(3));
+      string strDst = solve_relative(psystem->get_arg(3));
 
-      string strBuild = System->get_arg(4);
+      string strBuild = psystem->get_arg(4);
 
       if (strBuild.is_empty())
       {
@@ -312,7 +312,7 @@ void wmain(int argc, wchar_t * wargv[])
 
             pathListing = pathListing.folder(4);
 
-            auto& dir = Application.dir();
+            auto& dir = papplication->dir();
 
             dir.ls_dir(listing, pathListing);
 
@@ -382,19 +382,19 @@ void wmain(int argc, wchar_t * wargv[])
 
       }
 
-      Context.file().copy(strDst, strSrc, false);
+      pcontext->file().copy(strDst, strSrc, false);
 
       dprint("main copy should be done!!");
 
       ::file::path pathIcon;
 
-      ::file::path pathMatter = Context.dir().matter("main/icon.ico", false, strRoot, strDomain);
+      ::file::path pathMatter = pcontext->dir().matter("main/icon.ico", false, strRoot, strDomain);
 
       pathMatter |= ::file::e_flag_get_local_path;
 
-      pathMatter = System->get_matter_cache_path(pathMatter);
+      pathMatter = psystem->get_matter_cache_path(pathMatter);
 
-      if (Context.file().exists(pathMatter))
+      if (pcontext->file().exists(pathMatter))
       {
 
          pathIcon = pathMatter;
@@ -406,11 +406,11 @@ void wmain(int argc, wchar_t * wargv[])
       if (pathIcon.is_empty())
       {
 
-         pathMatter = Context.dir().matter("main/icon.ico", false);
+         pathMatter = pcontext->dir().matter("main/icon.ico", false);
 
          pathMatter |= ::file::e_flag_get_local_path;
 
-         if (Context.file().exists(pathMatter))
+         if (pcontext->file().exists(pathMatter))
          {
 
             pathIcon = pathMatter;
@@ -439,15 +439,15 @@ void wmain(int argc, wchar_t * wargv[])
 
          dprint("hupdate false");
 
-         Application.m_result.add(error_failed);
+         papplication->m_result.add(error_failed);
 
-         Application.message_box("Couldn't update resources for \"" + strApp + "\".\n\nDoes the file \"" + strSrc + "\" exists at the moment of this application call and is it valid so far?", nullptr, e_message_box_icon_exclamation);
+         papplication->message_box("Couldn't update resources for \"" + strApp + "\".\n\nDoes the file \"" + strSrc + "\" exists at the moment of this application call and is it valid so far?", nullptr, e_message_box_icon_exclamation);
 
          return;
 
       }
 
-      if (Context.file().exists(pathIcon))
+      if (pcontext->file().exists(pathIcon))
       {
 
          memory memory;
@@ -456,7 +456,7 @@ void wmain(int argc, wchar_t * wargv[])
 
          auto pfileHd = create_memory_file();
 
-         Context.file().as_memory(pathIcon, memory);
+         pcontext->file().as_memory(pathIcon, memory);
 
          dprint("icon as memory");
 

@@ -13,7 +13,7 @@
 //      {
 //
 //
-//         factory_exchange::factory_exchange(::layered * pobjectContext) :
+//         factory_exchange::factory_exchange(::context_object * pcontextobject) :
 //            ::object(pobject),
 //            ::multimedia::mmsystem::factory_exchange(pobject)
 //         {

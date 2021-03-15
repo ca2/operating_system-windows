@@ -5,7 +5,7 @@ namespace app_app
 {
 
 
-   socket_handler::socket_handler(::layered * pobjectContext) :
+   socket_handler::socket_handler(::context_object * pcontextobject) :
       ::object(papp),
       ::sockets::socket_handler(papp)
    {

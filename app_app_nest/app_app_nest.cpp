@@ -46,9 +46,9 @@ u32 plugin_container_app(const string & strChannel)
 
    papp->m_psession = psystem->m_psession;
 
-   papp->get_context_application() = psystem->get_context_application();
+   papp->get_application() = psystem->get_application();
 
-   papp->get_context_application() = psystem;
+   papp->get_application() = psystem;
 
    papp->m_psystem = psystem;
 

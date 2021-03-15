@@ -59,7 +59,7 @@ namespace write_text_win32
       virtual ~font_department();
 
 
-      virtual ::e_status initialize(::layered * pobjectContext);
+      virtual ::e_status initialize(::context_object * pcontextobject);
       virtual void finalize();
 
 

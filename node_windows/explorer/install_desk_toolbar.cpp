@@ -6,7 +6,7 @@
 
 CLSID CLSID_DeskBandSample = { 0x19970ca2, 0x71a, 0x4b7e,{ 0x8a, 0xa2, 0xe5, 0x60, 0x81, 0xd, 0xab, 0x35 } };
 
-bool register_desk_toolbar();
+bool register_desk_toolbar(::aura::system * psystem);
 
 bool register_desk_toolbar_dll();
 
@@ -17,7 +17,7 @@ bool position_desk_toolbar1();
 
 
 
-bool register_desk_toolbar()
+bool register_desk_toolbar(::aura::system* psystem)
 {
 
    //taskbar position calculating code omitted
@@ -34,8 +34,9 @@ bool register_desk_toolbar()
    //}
 
    //sleep(1_s);
+   //auto psystem = get_system();
 
-   auto pnode = get_context_system()->node()->m_pauranode;
+   auto pnode = psystem->node();
 
    ::file::path pathDll = ::dir::module() / "_desk_tb.dll";
 

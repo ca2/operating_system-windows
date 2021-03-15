@@ -85,8 +85,9 @@ namespace windowing_win32
          if (pmessage->m_id == WM_FONTCHANGE)
          {
 
+            auto psystem = get_system();
 
-            System->process_subject(id_os_font_change);
+            psystem->process_subject(id_os_font_change);
 
             //fork([this]()
               // {
@@ -102,7 +103,9 @@ namespace windowing_win32
             strLparamString == "ImmersiveColorSet")
          {
 
-            System->process_subject(id_os_dark_mode);
+            auto psystem = get_system();
+
+            psystem->process_subject(id_os_dark_mode);
 
          }
          else if (pmessage->m_id == e_message_display_change ||
@@ -114,11 +117,11 @@ namespace windowing_win32
 
             //throw_todo();
 
-            //System->enum_display_monitors();
+            //psystem->enum_display_monitors();
 
             //__pointer(::user::interaction) puserinteraction;
 
-            //while(System->get_frame(puserinteraction))
+            //while(psystem->get_frame(puserinteraction))
             //{
 
             //   try

@@ -11,7 +11,7 @@ namespace backup
    {
    	
    public:
-	   frame(::layered * pobjectContext);
+	   frame(::context_object * pcontextobject);
       virtual ~frame();
 
    };

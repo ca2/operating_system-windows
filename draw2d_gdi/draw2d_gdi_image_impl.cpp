@@ -21,7 +21,7 @@ namespace draw2d_gdi
    //////////////////////////////////////////////////////////////////////
 
 
-   image::image_impl(::layered * pobjectContext) :
+   image::image_impl(::context_object * pcontextobject) :
       ::context_object(pobject),
       ::image_data(pobject),
       ::image_impl(pobject),
@@ -231,7 +231,7 @@ namespace draw2d_gdi
    bool image::from(::draw2d::graphics_pointer & pgraphics)
    {
 
-      ::draw2d::bitmap_pointer bitmap(get_context_application());
+      ::draw2d::bitmap_pointer bitmap(get_application());
 
       bitmap->CreateCompatibleBitmap(pgraphics, 1, 1);
 
@@ -1747,7 +1747,7 @@ namespace draw2d_gdi
 
    //void image::rotate(image_impl image_impl, double dAngle, double dScale)
    //{
-   //  // image_impl image(get_context_application());
+   //  // image_impl image(get_application());
    ////   pimage->Paste(this);
 
    //   int cx = this->cx;
@@ -1908,7 +1908,7 @@ namespace draw2d_gdi
    //   double dAngle,
    //   double dScale)
    //{
-   //  // image_impl image(get_context_application());
+   //  // image_impl image(get_application());
    ////   pimage->Paste(this);
 
 
@@ -2439,12 +2439,12 @@ namespace draw2d_gdi
    // }
 
 
-   //bool image::update_window(::aura::draw_interface * pwnd, ::message::message * pmessage, bool bTransferBuffer)
+   //bool image::update_window(::aura::draw_interface * puserinteraction, ::message::message * pmessage, bool bTransferBuffer)
    //{
 
    //   rectangle_i64 rectWindow;
 
-   //   pwnd->GetWindowRect(rectWindow);
+   //   puserinteraction->GetWindowRect(rectWindow);
 
    //   m_spgraphics->SetViewportOrg(0, 0);
 
@@ -2506,7 +2506,7 @@ namespace draw2d_gdi
 
    //   class ::rectangle_i32 rectangle(rectWindow);
 
-   //   //Application.window_graphics_update_window(pwnd->get_window_graphics(),pwnd->get_handle(),m_pcolorref,rectangle,m_size.cx,m_size.cy,m_iScan, bTransferBuffer);
+   //   //papplication->window_graphics_update_window(puserinteraction->get_window_graphics(),puserinteraction->get_handle(),m_pcolorref,rectangle,m_size.cx,m_size.cy,m_iScan, bTransferBuffer);
 
    //   return true;
 
@@ -2584,7 +2584,7 @@ namespace draw2d_gdi
    }
 
 
-   //bool image::print_window(::aura::draw_interface * pwnd, ::message::message * pmessage)
+   //bool image::print_window(::aura::draw_interface * puserinteraction, ::message::message * pmessage)
    //{
 
    //   __pointer(::user::message) pusermessage(pmessage);
@@ -2617,7 +2617,7 @@ namespace draw2d_gdi
 
    //      ::rectangle_i32 rectWindow;
 
-   //      pwnd->GetWindowRect(rectWindow);
+   //      puserinteraction->GetWindowRect(rectWindow);
 
    //      ::image_pointer pimage = create_image(rectWindow.bottom_right());
 
@@ -2643,12 +2643,12 @@ namespace draw2d_gdi
    //      rectPaint = rectWindow;
    //      rectPaint.offset(-rectPaint.top_left());
    //      m_spgraphics->SelectClipRgn(nullptr);
-   //      pwnd->_001OnDeferPaintLayeredWindowBackground(pimage->g());
+   //      puserinteraction->_001OnDeferPaintLayeredWindowBackground(pimage->g());
    //      m_spgraphics->SelectClipRgn(nullptr);
 
    //      m_spgraphics-> SetViewportOrg(::point_i32());
 
-   //      pwnd->_000OnDraw(pimage->g());
+   //      puserinteraction->_000OnDraw(pimage->g());
 
    //      m_spgraphics->SetViewportOrg(::point_i32());
    //      //(dynamic_cast<::win::graphics * >(pgraphics))->FillSolidRect(rectUpdate.left, rectUpdate.top, 100, 100, 255);
