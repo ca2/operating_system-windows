@@ -90,7 +90,7 @@ namespace production
       DECL_GEN_SIGNAL(_001OnLButtonDown);
       DECL_GEN_SIGNAL(_001OnLButtonUp);
       virtual void _001OnTimer(::timer * ptimer);
-      DECL_GEN_SIGNAL(_001OnRButtonUp);
+      DECL_GEN_SIGNAL(on_message_right_button_up);
       DECL_GEN_SIGNAL(_001OnDestroy);
       DECL_GEN_SIGNAL(_001OnSize);
       DECL_GEN_SIGNAL(_001OnCreate);

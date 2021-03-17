@@ -193,7 +193,7 @@ namespace windowing_win32
    ::extended::transport < ::windowing::icon > windowing::load_icon(const ::payload & payloadFile)
    {
 
-      auto picon = __new(icon());
+      auto picon = __create_new < icon >();
 
       if (!picon)
       {
@@ -1155,7 +1155,7 @@ namespace windowing_win32
 //
 //#else
 //
-//      auto puser = User;
+//      auto puser = user();
 //
 //      puser->will_use_view_hint(COLORSEL_IMPACT);
 //

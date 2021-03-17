@@ -6837,7 +6837,21 @@ namespace windowing_win32
 
       auto puserinteraction = m_pimpl->m_puserinteraction;
 
+      if (!puserinteraction)
+      {
+
+         return;
+
+      }
+
       auto pprodevian = m_pimpl->m_pprodevian;
+
+      if (!pprodevian)
+      {
+
+         return;
+
+      }
 
       puserinteraction->post_routine(pprodevian->m_routineUpdateScreen);
 
