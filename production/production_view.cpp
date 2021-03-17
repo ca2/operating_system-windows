@@ -64,7 +64,7 @@ namespace production
 
       MESSAGE_LINK(e_message_lbutton_down, pchannel, this, &view::_001OnLButtonDown);
       MESSAGE_LINK(e_message_lbutton_up, pchannel, this, &view::_001OnLButtonUp);
-      MESSAGE_LINK(e_message_rbutton_up, pchannel, this, &view::_001OnRButtonUp);
+      MESSAGE_LINK(e_message_rbutton_up, pchannel, this, &view::on_message_right_button_up);
 
 
       MESSAGE_LINK(WM_SHOWWINDOW, pchannel, this, &view::_001OnShowWindow);
@@ -431,7 +431,7 @@ namespace production
 
    }
 
-   void view::_001OnRButtonUp(::message::message * pmessage)
+   void view::on_message_right_button_up(::message::message * pmessage)
    {
       UNREFERENCED_PARAMETER(pmessage);
       //    __pointer(::message::mouse) pmouse(pmessage);
