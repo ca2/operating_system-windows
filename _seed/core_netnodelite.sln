@@ -49,6 +49,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "apex", "..\..\..\source\app
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "aqua", "..\..\..\source\app\aqua\aqua.vcxproj", "{1B06FE5F-F783-41A1-AC68-0E02880DBBAC}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "apex_windows", "..\apex_windows\apex_windows.vcxproj", "{C598E718-55AE-4D6E-81E0-53450FC3A649}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		basis|Win32 = basis|Win32
@@ -361,6 +363,26 @@ Global
 		{1B06FE5F-F783-41A1-AC68-0E02880DBBAC}.stage|Win32.Build.0 = stage|Win32
 		{1B06FE5F-F783-41A1-AC68-0E02880DBBAC}.stage|x64.ActiveCfg = stage|x64
 		{1B06FE5F-F783-41A1-AC68-0E02880DBBAC}.stage|x64.Build.0 = stage|x64
+		{C598E718-55AE-4D6E-81E0-53450FC3A649}.basis|Win32.ActiveCfg = basis|Win32
+		{C598E718-55AE-4D6E-81E0-53450FC3A649}.basis|Win32.Build.0 = basis|Win32
+		{C598E718-55AE-4D6E-81E0-53450FC3A649}.basis|x64.ActiveCfg = basis|x64
+		{C598E718-55AE-4D6E-81E0-53450FC3A649}.basis|x64.Build.0 = basis|x64
+		{C598E718-55AE-4D6E-81E0-53450FC3A649}.cover|Win32.ActiveCfg = cover|Win32
+		{C598E718-55AE-4D6E-81E0-53450FC3A649}.cover|Win32.Build.0 = cover|Win32
+		{C598E718-55AE-4D6E-81E0-53450FC3A649}.cover|x64.ActiveCfg = cover|x64
+		{C598E718-55AE-4D6E-81E0-53450FC3A649}.cover|x64.Build.0 = cover|x64
+		{C598E718-55AE-4D6E-81E0-53450FC3A649}.cube_basis|Win32.ActiveCfg = cube_basis|Win32
+		{C598E718-55AE-4D6E-81E0-53450FC3A649}.cube_basis|Win32.Build.0 = cube_basis|Win32
+		{C598E718-55AE-4D6E-81E0-53450FC3A649}.cube_basis|x64.ActiveCfg = cube_basis|x64
+		{C598E718-55AE-4D6E-81E0-53450FC3A649}.cube_basis|x64.Build.0 = cube_basis|x64
+		{C598E718-55AE-4D6E-81E0-53450FC3A649}.cube_stage|Win32.ActiveCfg = cube_stage|Win32
+		{C598E718-55AE-4D6E-81E0-53450FC3A649}.cube_stage|Win32.Build.0 = cube_stage|Win32
+		{C598E718-55AE-4D6E-81E0-53450FC3A649}.cube_stage|x64.ActiveCfg = cube_stage|x64
+		{C598E718-55AE-4D6E-81E0-53450FC3A649}.cube_stage|x64.Build.0 = cube_stage|x64
+		{C598E718-55AE-4D6E-81E0-53450FC3A649}.stage|Win32.ActiveCfg = stage|Win32
+		{C598E718-55AE-4D6E-81E0-53450FC3A649}.stage|Win32.Build.0 = stage|Win32
+		{C598E718-55AE-4D6E-81E0-53450FC3A649}.stage|x64.ActiveCfg = stage|x64
+		{C598E718-55AE-4D6E-81E0-53450FC3A649}.stage|x64.Build.0 = stage|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
