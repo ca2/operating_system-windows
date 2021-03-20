@@ -392,7 +392,7 @@ namespace windows
    ::e_status apex::start()
    {
 
-      auto estatus = m_psystem->m_papexsystem->m_papex->thread_initialize(psystem);
+      auto estatus = m_psystem->m_papexsystem->m_papex->thread_initialize(m_psystem->m_papexsystem);
 
       if (!estatus)
       {
@@ -410,7 +410,7 @@ namespace windows
 
       }
 
-      estatus = psystem->main();
+      estatus = m_psystem->main();
 
       if (!estatus)
       {

@@ -12,12 +12,14 @@ namespace windows
 {
 
 
-   service * service_handler::s_pservice = nullptr;
+   service_handler * service_handler::s_pservicehandler = nullptr;
 
 
    service_handler::service_handler(u32 controlsAccepted) :
       m_handle(0)
    {
+
+      s_pservicehandler = this;
 
       m_dwStopTimeout = 30 * 1000; // 30 seconds
 
@@ -89,7 +91,7 @@ namespace windows
       // If m_service is zero it means we're not running as a service but
       // rather from the console. This is possible in debug mode.
 
-      if (::is_null(s_pservice))
+      if (::is_null(s_pservicehandler))
       {
 
          return;
@@ -137,11 +139,11 @@ namespace windows
    void service_handler::serve(service * pservice)
    {
 
-      ASSERT(0 == s_pservice);
+      ASSERT(0 == s_pservicehandler);
 
-      s_pservice = pservice;
+      s_pservicehandler->m_pservice = pservice;
 
-      s_pservice->run();
+      s_pservicehandler->run();
 
    }
 
@@ -149,10 +151,10 @@ namespace windows
    void service_handler::control_stop(u32 u)
    {
 
-      s_pservice->stop_service();
-      //s_pservice->m_ = e_service_status_stopping;
+      s_pservicehandler->stop_service();
+      //s_pservicehandler->m_ = e_service_status_stopping;
 
-      //s_pservice->m_stopped.wait(millis((u32)m_dwStopTimeout));
+      //s_pservicehandler->m_stopped.wait(millis((u32)m_dwStopTimeout));
 
    }
 
@@ -184,11 +186,11 @@ namespace windows
       // process terminate. The SCM will diligently log this event.
       //
 
-      ASSERT(s_pservice != nullptr);
+      ASSERT(s_pservicehandler != nullptr);
 
-      s_pservice->set_arguments(argumentCount, arguments);
+      s_pservicehandler->m_pservice->set_arguments(argumentCount, arguments);
 
-      s_pservice->run();
+      s_pservicehandler->run();
 
    }
 
@@ -211,9 +213,9 @@ namespace windows
          case SERVICE_CONTROL_CONTINUE:
          {
 
-            s_pservice->UpdateState(SERVICE_CONTINUE_PENDING);
-            s_pservice->Start(control);
-            s_pservice->UpdateState(SERVICE_RUNNING);
+            s_pservicehandler->update_state(SERVICE_CONTINUE_PENDING);
+            s_pservicehandler->control_start(control);
+            s_pservicehandler->update_state(SERVICE_RUNNING);
 
             break;
 
@@ -221,9 +223,9 @@ namespace windows
          case SERVICE_CONTROL_PAUSE:
          {
 
-            s_pservice->UpdateState(SERVICE_PAUSE_PENDING);
-            s_pservice->Stop(control);
-            s_pservice->UpdateState(SERVICE_PAUSED);
+            s_pservicehandler->update_state(SERVICE_PAUSE_PENDING);
+            s_pservicehandler->control_stop(control);
+            s_pservicehandler->update_state(SERVICE_PAUSED);
 
             break;
 
@@ -232,11 +234,11 @@ namespace windows
          case SERVICE_CONTROL_STOP:
          {
 
-            s_pservice->UpdateState(SERVICE_STOP_PENDING);
-            s_pservice->Stop(control);
-            s_pservice->UpdateState(SERVICE_STOPPED);
+            s_pservicehandler->update_state(SERVICE_STOP_PENDING);
+            s_pservicehandler->control_stop(control);
+            s_pservicehandler->update_state(SERVICE_STOPPED);
 
-            __pointer(::apex::system) psystem = s_pservice->get_system();
+            __pointer(::apex::system) psystem = s_pservicehandler->get_system();
 
             psystem->finalize();
 
@@ -251,7 +253,7 @@ namespace windows
       catch (const ::exception::exception & e)
       {
 
-         s_pservice->UpdateState(SERVICE_STOPPED, e.m_hresult);
+         s_pservicehandler->update_state(SERVICE_STOPPED, e.m_hresult);
 
       }
 
@@ -268,11 +270,11 @@ namespace windows
 
       }
 
-      s_pservice->m_serviceName = arguments[0];
+      s_pservicehandler->m_pservice->m_strServiceName = arguments[0];
 
-      s_pservice->m_handle = ::RegisterServiceCtrlHandlerW(L"", ServiceHandler);
+      s_pservicehandler->m_handle = ::RegisterServiceCtrlHandlerW(L"", ServiceHandler);
 
-      if (s_pservice->m_handle == nullptr)
+      if (s_pservicehandler->m_handle == nullptr)
       {
 
          DWORD dwLastError = ::GetLastError();
@@ -281,14 +283,14 @@ namespace windows
 
       }
 
-      s_pservice->SetServiceStatus();
+      s_pservicehandler->SetServiceStatus();
 
       try
       {
 
-         s_pservice->Start(0);
+         s_pservicehandler->control_start(0);
 
-         s_pservice->UpdateState(SERVICE_RUNNING);
+         s_pservicehandler->update_state(SERVICE_RUNNING);
 
       }
       catch (const ::exception::exception & e)
@@ -300,7 +302,7 @@ namespace windows
          // SCM so that it can log the error code.
          //
 
-         s_pservice->UpdateState(SERVICE_STOPPED, e.m_hresult);
+         s_pservicehandler->update_state(SERVICE_STOPPED, e.m_hresult);
 
       }
 
@@ -312,12 +314,12 @@ namespace windows
 
    //*****************************************************************************
    //
-   //      Name:           UpdateState
+   //      Name:           update_state
    //      Description:    Updates the current state and exit code of the service
    //                      and notifies the service control manager of the machine.
    //
    //*****************************************************************************
-   void service_handler::UpdateState(u32 state, HRESULT errorCode)
+   void service_handler::update_state(u32 state, HRESULT errorCode)
    {
 
 

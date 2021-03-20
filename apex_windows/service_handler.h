@@ -17,7 +17,7 @@ namespace windows
 
       SERVICE_STATUS_HANDLE      m_handle;
 
-      static service *           s_pservice;
+      static service_handler *   s_pservicehandler;
 
       DWORD m_dwStopTimeout;
       
@@ -34,7 +34,7 @@ namespace windows
 
       virtual void SetServiceStatus();
 
-      virtual void UpdateState(u32 state, HRESULT errorCode = S_OK);
+      virtual void update_state(u32 state, HRESULT errorCode = S_OK);
 
       //virtual void _main_server(::u32 argumentCount, wchar_t * arguments);
 
