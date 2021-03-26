@@ -61,8 +61,8 @@ namespace windows
       virtual bool browse_folder(property_set & set) override;
       virtual bool browse_file_or_folder(property_set & set) override;
 
-      virtual ::e_status create_service() override;
-      virtual ::e_status remove_service() override;
+      virtual ::e_status enable_service() override;
+      virtual ::e_status disable_service() override;
 
       virtual ::e_status start_service() override;
       virtual ::e_status stop_service() override;

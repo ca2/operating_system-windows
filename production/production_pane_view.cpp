@@ -6,7 +6,7 @@ namespace production
 {
 
 
-   pane_view::pane_view(::context_object * pcontextobject) :
+   pane_view::pane_view(::object * pobject) :
       ::object(pobject),
       ::user::tab_view(pobject),
       ::userex::pane_tab_view(pobject),
@@ -97,7 +97,7 @@ namespace production
             pdocument->update_all_views(nullptr, 1234);
             pdocument->update_all_views(nullptr, 123458);
             __pointer(::user::impact) pview = pdocument->get_view();
-            pdocument->FileManagerBrowse(pcontext->dir().appdata()/ "production/menu", ::e_source_system);
+            pdocument->FileManagerBrowse(pcontext->m_pcontext->dir().appdata()/ "production/menu", ::e_source_system);
             if(pview != nullptr)
             {
                __pointer(::user::frame_window) pframe =  (pview->get_parent_frame());
@@ -166,7 +166,7 @@ namespace production
       //      pdocument->update_all_views(nullptr, 1234);
       //      pdocument->update_all_views(nullptr, 123458);
       //      __pointer(::user::impact) pview = pdocument->get_view();
-      //      pdocument->FileManagerBrowse(pcontext->dir().appdata()/ "production\\3-action-launch", ::e_source_system);
+      //      pdocument->FileManagerBrowse(pcontext->m_pcontext->dir().appdata()/ "production\\3-action-launch", ::e_source_system);
       //      if(pview != nullptr)
       //      {
       //         __pointer(::user::frame_window) pframe =  (pview->get_parent_frame());
@@ -246,7 +246,7 @@ namespace production
       UNREFERENCED_PARAMETER(pdata);
       if(itema.get_size() > 0)
       {
-         pcontext->os().file_open(this, itema[0]->m_filepathFinal, "", itema[0]->m_filepathFinal.folder());
+         pcontext->m_pcontext->os().file_open(this, itema[0]->m_filepathFinal, "", itema[0]->m_filepathFinal.folder());
       }
       get_parent_frame()->hide();
    }

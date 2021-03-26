@@ -2,6 +2,8 @@
 #include "apex/operating_system.h"
 #include <Shlobj.h>
 #include "dir_system.h"
+#include "acme/filesystem/filesystem/acme_dir.h"
+#include "acme_windows/acme_dir.h"
 //#include "_windows.h"
 //#include "acme/os/windows_common/cotaskptr.h"
 
@@ -9,22 +11,6 @@
 
 
 
-//CLASS_DECL_APEX_WINDOWS::file::path get_known_folder(REFKNOWNFOLDERID kfid)
-//{
-//
-//   ::file::path str;
-//
-//   ::cotaskptr < PWSTR > pwszPath;
-//
-//   HANDLE hToken = nullptr;
-//
-//   ::OpenProcessToken(::GetCurrentProcess(), TOKEN_QUERY | TOKEN_IMPERSONATE | TOKEN_DUPLICATE, &hToken);
-//
-//   HRESULT hr = SHGetKnownFolderPath(kfid, 0, hToken, &pwszPath);
-//
-//   return pwszPath;
-//
-//}
 
 namespace windows
 {
@@ -44,10 +30,10 @@ namespace windows
 
 
 
-   ::e_status dir_system::initialize(::context_object * pcontextobject)
+   ::e_status dir_system::initialize(::object * pobject)
    {
 
-      auto estatus = ::dir_system::initialize(pcontextobject);
+      auto estatus = ::dir_system::initialize(pobject);
 
       if (!estatus)
       {
@@ -56,9 +42,9 @@ namespace windows
 
       }
 
-      m_pathInstall = ::dir::install();
+      m_pathInstall = m_psystem->m_pacmedir->install();
 
-      shell_get_special_folder_path(
+      m_psystem->m_pacmedir->m_pplatformdir->_shell_get_special_folder_path(
          nullptr,
          m_strCommonAppData,
          CSIDL_COMMON_APPDATA,
@@ -69,20 +55,20 @@ namespace windows
       //CSIDL_PROFILE,
       //false);
 
-      m_pathHome = get_known_folder(FOLDERID_Profile);
+      m_pathHome = m_psystem->m_pacmedir->m_pplatformdir->_get_known_folder(FOLDERID_Profile);
 
-      m_pathCa2Config = ::dir::ca2roaming();
+      m_pathCa2Config = m_psystem->m_pacmedir->ca2roaming();
 
       m_strCommonAppData /= "ca2";
 
-      m_strAppData = get_known_folder(FOLDERID_RoamingAppData);
+      m_strAppData = m_psystem->m_pacmedir->m_pplatformdir->_get_known_folder(FOLDERID_RoamingAppData);
 
-      shell_get_special_folder_path(
+      m_psystem->m_pacmedir->m_pplatformdir->_shell_get_special_folder_path(
          nullptr,
          m_strPrograms,
          CSIDL_PROGRAMS,
          false);
-      shell_get_special_folder_path(
+      m_psystem->m_pacmedir->m_pplatformdir->_shell_get_special_folder_path(
          nullptr,
          m_strCommonPrograms,
          CSIDL_COMMON_PROGRAMS,
@@ -108,14 +94,14 @@ namespace windows
       if (m_strTimeFolder.is_empty())
       {
 
-         m_strTimeFolder = ::dir::appdata() / "time";
+         m_strTimeFolder = m_psystem->m_pacmedir->appdata() / "time";
 
       }
 
       if (m_strNetSeedFolder.is_empty())
       {
 
-         m_strNetSeedFolder = ::dir::install() / "net";
+         m_strNetSeedFolder = m_psystem->m_pacmedir->install() / "net";
 
       }
 
@@ -150,6 +136,68 @@ namespace windows
       return ::success;
 
    }
+
+
+
+
+
+
+
+   ::file::path dir_system::application_installer_folder(const ::file::path& pathExe, string strAppId, const char* pszPlatform, const char* pszConfiguration, const char* pszLocale, const char* pszSchema)
+   {
+
+      string strFolder = pathExe.folder();
+
+      strFolder.replace(":", "");
+
+      return m_psystem->m_pacmedir->ca2roaming() / "appdata" / strFolder / strAppId / pszPlatform / pszConfiguration / pszLocale / pszSchema;
+
+   }
+
+
+
+
+   ::file::path dir_system::get_application_path(string strAppId, const char* pszPlatform, const char* pszConfiguration)
+   {
+
+      ::file::path pathFolder;
+
+      pathFolder = m_psystem->m_pacmedir->stage(strAppId, pszPlatform, pszConfiguration);
+
+      string strName;
+
+      strName = ::process::app_id_to_app_name(strAppId);
+
+      ::file::path path;
+
+      path = pathFolder / (strName + ".exe");
+
+      return path;
+
+   }
+
+
+   ::file::path dir_system::get_last_run_application_path_file(string strAppId)
+   {
+
+      ::file::path pathFile = m_psystem->m_pacmedir->local() / "appdata" / strAppId / "last_run_path.txt";
+
+      return pathFile;
+
+   }
+
+
+   ::file::path dir_system::get_last_run_application_path(string strAppId)
+   {
+
+      ::file::path pathFile = get_last_run_application_path_file(strAppId);
+
+      ::file::path path = ::file_as_string(pathFile);
+
+      return path;
+
+   }
+
 
 
 } // namespace windows

@@ -412,7 +412,7 @@ FT_BEGIN_HEADER
   /* <Description>                                                         */
   /*    A structure used to model a TrueType PostScript table.  All fields */
   /*    comply to the TrueType specification.  This structure does not     */
-  /*    context_object the PostScript glyph names, which can be nevertheless    */
+  /*    object the PostScript glyph names, which can be nevertheless    */
   /*    accessed with the `ttpost' module.                                 */
   /*                                                                       */
   typedef struct  TT_Postscript_

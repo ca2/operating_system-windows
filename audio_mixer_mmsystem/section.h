@@ -37,7 +37,7 @@ namespace multimedia
          bool initialize();
 
 
-         virtual void finalize() override;
+         virtual ::e_status finalize() override;
 
 
 

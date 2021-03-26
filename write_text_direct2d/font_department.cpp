@@ -19,10 +19,10 @@ namespace write_text_direct2d
 
    }
 
-   ::e_status font_department::initialize(::context_object * pcontextobject)
+   ::e_status font_department::initialize(::object * pobject)
    {
 
-      auto estatus = ::font_department::initialize(pcontextobject);
+      auto estatus = ::font_department::initialize(pobject);
 
       if (!estatus)
       {
@@ -36,7 +36,7 @@ namespace write_text_direct2d
    }
 
 
-   void font_department::finalize()
+   ::e_status font_department::finalize()
    {
 
          ::font_department::finalize();

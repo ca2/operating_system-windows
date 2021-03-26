@@ -461,16 +461,16 @@ wstring windowing::_windows_calc_icon_window_class(::user::interaction * puserin
 
    auto pcontext = puserinteraction->get_context();
 
-   string strPath = pcontext->dir().matter(pszMatter, "icon.ico");
+   string strPath = pcontext->m_pcontext->dir().matter(pszMatter, "icon.ico");
 
-   hicon hIcon = (hicon) ::LoadImageW(nullptr, wstring(pcontext->get_matter_path(strPath)), IMAGE_ICON, 256, 256, LR_LOADFROMFILE);
+   hicon hIcon = (hicon) ::LoadImageW(nullptr, wstring(pcontext->m_pcontext->get_matter_path(strPath)), IMAGE_ICON, 256, 256, LR_LOADFROMFILE);
 
    wstring strClass = _windows_get_user_interaction_window_class(puserinteraction);
 
    if (hIcon != nullptr)
    {
 
-      auto psystem = get_system();
+      auto psystem = m_psystem->m_paurasystem;
       // will fill pszClassName with default WNDCLASS name
 
       // ignore instance handle from pre_create_window.

@@ -8,9 +8,17 @@
 #include "dir_context.h"
 #include "file_system.h"
 #include "file_context.h"
+#include "process.h"
+#include "os_context.h"
+#include "acme/node/windows/pipe.h"
+#include "crypto.h"
+#include "ip_enum.h"
+#include "interprocess_communication.h"
 //#include "apex/node/windows/buffer.h"
 //#include "apex/os/console.h"
 //#include "console.h"
+#include "apex/platform/apex.h"
+#include "apex.h"
 
 
 
@@ -82,6 +90,10 @@ void apex_windows_factory_exchange(::factory_map * pfactorymap)
    pfactorymap->create_factory < ::file::os_watch, ::file::watch >();
 
    pfactorymap->create_factory < ::windows::file_context, ::file_context >();
+
+
+   pfactorymap->create_factory < ::windows::apex, ::apex::apex >();
+
    //create_factory < ::windows::copydesk, ::user::cop
    // 
    // 

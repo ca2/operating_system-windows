@@ -12,7 +12,7 @@ namespace draw2d_gdi
    public:
 
 
-      font(::context_object * pcontextobject);
+      font(::object * pobject);
       virtual ~font();
 
 

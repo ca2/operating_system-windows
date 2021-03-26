@@ -14,7 +14,7 @@ namespace draw2d_gdi
       bool m_bProcess;
 
       // Constructors
-      brush(::context_object * pcontextobject);
+      brush(::object * pobject);
       virtual ~brush();
 
 

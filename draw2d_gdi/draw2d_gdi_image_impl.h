@@ -19,7 +19,7 @@ namespace draw2d_gdi
 
 
 
-      image_impl(::context_object * pcontextobject);
+      image_impl(::object * pobject);
       virtual ~image_impl();
 
 

@@ -29,7 +29,7 @@ namespace multimedia
       }
 
 
-      void department::finalize()
+      ::e_status department::finalize()
       {
 
          DestroyWindow();

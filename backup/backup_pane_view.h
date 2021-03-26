@@ -10,7 +10,7 @@ namespace backup
       public production::form_callback
    {
    public:
-      pane_view(::context_object * pcontextobject);
+      pane_view(::object * pobject);
       virtual ~pane_view();
 #ifdef DEBUG
       virtual void assert_valid() const;

@@ -5,6 +5,6 @@
 
 
 ::mutex & draw2d_gdi_mutex();
-void init_draw2d_gdi_mutex(::context_object * pcontextobject);
+void init_draw2d_gdi_mutex(::object * pobject);
 
 

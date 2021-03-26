@@ -22,7 +22,7 @@ class SimpleApp : public CefApp, public CefBrowserProcessHandler {
   virtual void OnContextInitialized() OVERRIDE;
 
  private:
-  // Include the default context_object counting implementation.
+  // Include the default object counting implementation.
   IMPLEMENT_REFCOUNTING(SimpleApp);
 };
 

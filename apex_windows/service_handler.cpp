@@ -346,6 +346,30 @@ namespace windows
    }
 
 
+   ::e_status service_handler::defer_service()
+   {
+
+      return ::error_failed;
+
+   }
+
+
+   ::e_status service_handler::start_service()
+   {
+
+      return ::error_failed;
+
+   }
+
+
+   ::e_status service_handler::stop_service()
+   {
+
+      return ::error_failed;
+
+   }
+
+
 } // namespace windows
 
 

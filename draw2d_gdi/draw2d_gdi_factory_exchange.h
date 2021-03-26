@@ -11,7 +11,7 @@ namespace draw2d_gdi
    public:
 
 
-      factory_exchange(::context_object * pcontextobject);
+      factory_exchange(::object * pobject);
       virtual ~factory_exchange();
 
 

@@ -5,7 +5,7 @@ namespace backup
 {
 
 
-   backup::backup(::context_object * pcontextobject) :
+   backup::backup(::object * pobject) :
       ::object(pobject),
       thread(pobject),
       production(pobject)
@@ -50,8 +50,8 @@ namespace backup
          __keep(&m_bFinished, false, true, true);
          string str;
 
-         string strFile = pcontext->dir().install() / "basis/ca2/app/dbbk.bat";
-         if(!pcontext->file().exists(strFile))
+         string strFile = pcontext->m_pcontext->dir().install() / "basis/ca2/app/dbbk.bat";
+         if(!pcontext->m_pcontext->file().exists(strFile))
          {
             string str;
             str.Format("***File %s does not exist. (mysqldump -uroot -ppassword --opt --all-databases > %%1)", strFile);
@@ -217,7 +217,7 @@ namespace backup
       si.dwFlags = STARTF_USESHOWWINDOW;
       si.wShowWindow = SW_HIDE;
       ::file::path strNewRepos = get_new_repos_local_path(psz);
-      pcontext->dir().mk(strNewRepos.folder());
+      pcontext->m_pcontext->dir().mk(strNewRepos.folder());
       str.Format("svnadmin hotcopy C:\\repos\\%s %s", psz, strNewRepos);
 
       if(!::CreateProcess(nullptr, (LPTSTR) (const char *) str, nullptr, nullptr, false, CREATE_NEW_CONSOLE, nullptr, nullptr, &si, &pi))
@@ -259,9 +259,9 @@ namespace backup
       si.dwFlags = STARTF_USESHOWWINDOW;
       si.wShowWindow = SW_HIDE;
       ::file::path strdump = get_new_db_local_path("all.sql");
-      pcontext->dir().mk(strdump.folder());
+      pcontext->m_pcontext->dir().mk(strdump.folder());
 
-      str.Format("%s \"%s\"", pcontext->dir().install() / "basis/ca2/app/dbbk.bat", strdump);
+      str.Format("%s \"%s\"", pcontext->m_pcontext->dir().install() / "basis/ca2/app/dbbk.bat", strdump);
 
       wstring wstr(str);
 
@@ -308,7 +308,7 @@ namespace backup
       string strNewRepos = get_new_repos_local_path(psz);
       ::file::path strTar;
       strTar = ::file::path("C:\\ca2\\bk") / m_strTag  / "repos" / psz + ".tar";
-      pcontext->dir().mk(strTar.folder());
+      pcontext->m_pcontext->dir().mk(strTar.folder());
       str.Format("7za.exe a -r -ttar \"%s\" \"%s\"", strTar, strNewRepos);
 
       if(!::CreateProcess(nullptr, (LPTSTR) (const char *) str, nullptr, nullptr, false, CREATE_NEW_CONSOLE, nullptr, nullptr, &si, &pi))
@@ -346,7 +346,7 @@ namespace backup
       string strSrc = get_new_db_local_path("all.sql");
       string strDst;
       strDst.Format("C:\\ca2\\bk\\%s\\db\\all.sql", m_strTag);
-      pcontext->file().copy(strDst, strSrc);
+      pcontext->m_pcontext->file().copy(strDst, strSrc);
 
       return true;
 

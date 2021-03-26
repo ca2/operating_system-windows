@@ -1,7 +1,9 @@
 #include "framework.h"
 #include "apex/platform/apex.h"
 #include "acme/node/windows/registry.h"
+#include "acme/filesystem/filesystem/acme_dir.h"
 #include "apex.h"
+
 
 namespace windows
 {
@@ -328,7 +330,7 @@ namespace windows
          
       //#else
       //
-      //   strPathDll = ::dir::matter() / "time" / process_platform_dir_name() /"stage/_desk_tb.dll";
+      //   strPathDll = m_psystem->m_pacmedir->matter() / "time" / process_platform_dir_name() /"stage/_desk_tb.dll";
       //
       //#endif
          
@@ -498,25 +500,31 @@ namespace windows
    }
 
 
-   string application::veriwell_multimedia_music_midi_get_default_library_name()
+   string apex::veriwell_multimedia_music_midi_get_default_library_name()
    {
+
       return "music_midi_mmsystem";
+
    }
+
 
    string apex::multimedia_audio_mixer_get_default_library_name()
    {
+
       return "audio_mixer_mmsystem";
+
    }
+
 
    string apex::multimedia_audio_get_default_library_name()
    {
 
       string str;
 
-      if (file_exists(::dir::system() / "config\\system\\audio.txt"))
+      if (file_exists(m_psystem->m_pacmedir->system() / "config\\system\\audio.txt"))
       {
 
-         str = file_as_string(::dir::system() / "config\\system\\audio.txt");
+         str = file_as_string(m_psystem->m_pacmedir->system() / "config\\system\\audio.txt");
 
       }
       else
@@ -524,7 +532,7 @@ namespace windows
 
          ::file::path strPath;
 
-         strPath = ::dir::appdata() / "audio.txt";
+         strPath = m_psystem->m_pacmedir->appdata() / "audio.txt";
 
          str = file_as_string(strPath);
 
@@ -537,9 +545,288 @@ namespace windows
 
    }
 
+   bool apex::is_application_installed(const ::file::path& pathExe, string strAppId, string& strBuild, const char* pszPlatform, const char* pszConfiguration, const char* pszLocale, const char* pszSchema)
+   {
+
+      ::file::path path;
+
+      path = m_psystem->m_papexsystem->m_pdirsystem->application_installer_folder(pathExe, strAppId, pszPlatform, pszConfiguration, pszLocale, pszSchema) / "installed.txt";
+
+      strBuild = file_as_string(path);
+
+      return strBuild.has_char();
+
+   }
 
 
-} // namespace node_windows
+   bool apex::set_application_installed(const ::file::path& pathExe, string strAppId, const char* pszBuild, const char* pszPlatform, const char* pszConfiguration, const char* pszLocale, const char* pszSchema)
+   {
+
+      ::file::path path;
+
+      path = m_psystem->m_papexsystem->m_pdirsystem->application_installer_folder(pathExe, strAppId, pszPlatform, pszConfiguration, pszLocale, pszSchema) / "installed.txt";
+
+      return file_put_contents(path, pszBuild);
+
+   }
+
+
+   bool apex::set_last_run_application_path(string strAppId)
+   {
+
+      ::file::path path = ::file::app_module();
+
+      ::file::path pathFile = m_psystem->m_papexsystem->m_pdirsystem->get_last_run_application_path_file(strAppId);
+
+      return file_put_contents(pathFile, path);
+
+   }
+
+
+   string apex::get_version()
+   {
+
+      unichar pszModuleFilePath[MAX_PATH + 1];
+
+      GetModuleFileNameW(nullptr, pszModuleFilePath, MAX_PATH + 1);
+
+      DWORD dw;
+
+      ::u32 dwResSize = GetFileVersionInfoSizeW(
+         pszModuleFilePath,
+         &dw);
+
+      if (dwResSize > 0)
+      {
+
+         memory memory;
+
+         memory.set_size(dwResSize);
+
+         if (GetFileVersionInfoW(
+            pszModuleFilePath,
+
+            0,
+            dwResSize,
+            memory.get_data()))
+
+         {
+            ::u32 cbTranslate;
+            struct LANGANDCODEPAGE
+            {
+               ::u16 wLanguage;
+               ::u16 wCodePage;
+            } *pTranslate;
+
+
+            // read the list of languages and code pages.
+
+            VerQueryValue(memory.get_data(),
+               TEXT("\\VarFileInfo\\Translation"),
+               (LPVOID*)&pTranslate,
+               &cbTranslate);
+
+            string strKey;
+
+            for (::u32 u = 0; u < (cbTranslate / sizeof(struct LANGANDCODEPAGE)); u++)
+            {
+
+               WCHAR* psz;
+
+               UINT uSize;
+
+               //strKey.Format(
+               //"\\StringFileInfo\\%04x%04x\\FileDescription",
+               //pTranslate[u].wLanguage,
+               //pTranslate[u].wCodePage);
+
+               strKey.Format(
+                  "\\StringFileInfo\\%04x%04x\\FileVersion",
+                  pTranslate[u].wLanguage,
+                  pTranslate[u].wCodePage);
+
+               wstring wstrKey(strKey);
+
+               // Retrieve file description for language and code page "i".
+               if (VerQueryValueW(memory.get_data(),
+                  (WCHAR*)(const WCHAR*)wstrKey,
+                  (LPVOID*)&psz,
+                  &uSize))
+               {
+
+                  string strVersion(psz, uSize);
+
+                  return strVersion;
+
+               }
+
+            }
+
+         }
+
+      }
+
+      return "";
+
+   }
+
+
+   void apex::show_wait_cursor(bool bShow)
+   {
+
+      if (bShow)
+      {
+
+         HCURSOR hcursorWait = ::LoadCursor(nullptr, IDC_WAIT);
+
+         HCURSOR hcursorPrevious = ::SetCursor(hcursorWait);
+
+         //     if(hcursorPrevious != hcursorWait)
+         //         m_hcurWaitCursorRestore = hcursorPrevious;
+
+      }
+      else
+      {
+
+         //         ::SetCursor(m_hcurWaitCursorRestore);
+      }
+
+   }
+
+
+
+
+
+
+
+   ::u32 apex::get_current_directory(string& str)
+   {
+
+      return ::GetCurrentDirectoryW(MAX_PATH * 8, wtostring(str, MAX_PATH * 8));
+
+   }
+
+
+   ::u32 apex::get_temp_path(string& str)
+   {
+
+      return ::GetTempPathW(MAX_PATH * 8, wtostring(str, MAX_PATH * 8));
+
+   }
+
+
+   ::i32 apex::reg_query_value(HKEY hkey, const char* pszSubKey, string& str)
+   {
+
+      DWORD dwType = 0;
+      DWORD dwSize = 0;
+      ::i32 lResult = RegQueryValueExW(hkey, wstring(pszSubKey), nullptr, &dwType, nullptr, &dwSize);
+
+      if (lResult != ERROR_SUCCESS)
+         return lResult;
+      ASSERT(dwType == REG_SZ || dwType == REG_MULTI_SZ || dwType == REG_EXPAND_SZ);
+      if (dwType == REG_SZ || dwType == REG_MULTI_SZ || dwType == REG_EXPAND_SZ)
+      {
+
+         natural_wstring pwsz(byte_count, dwSize);
+
+         lResult = RegQueryValueExW(hkey, wstring(pszSubKey), nullptr, &dwType, (byte*)(unichar*)pwsz, &dwSize);
+
+         str = pwsz;
+
+         //str.release_string_buffer(dwSize);
+
+         return lResult;
+
+      }
+      else
+      {
+
+         return ERROR_NOT_SUPPORTED;
+
+      }
+
+   }
+
+
+   HICON apex::extract_icon(HINSTANCE hInst, const char* pszExeFileName, ::u32 nIconIndex)
+
+   {
+
+      return ::ExtractIconW(hInst, ::str::international::utf8_to_unicode(pszExeFileName), nIconIndex);
+
+
+   }
+
+
+   bool apex::delete_file(const char* pFileName)
+
+   {
+
+      return ::DeleteFileW(::str::international::utf8_to_unicode(pFileName)) != false;
+
+
+   }
+
+   //CLASS_DECL_ACME::file::path user_appdata_local();
+
+   //void apex::time_to_filetime(::matter* pobject, const ::datetime::time& time, LPFILETIME pFileTime)
+   //{
+
+   //   SYSTEMTIME sysTime;
+
+   //   sysTime.wYear = (::u16)time.GetYear();
+   //   sysTime.wMonth = (::u16)time.GetMonth();
+   //   sysTime.wDay = (::u16)time.GetDay();
+   //   sysTime.wHour = (::u16)time.GetHour();
+   //   sysTime.wMinute = (::u16)time.GetMinute();
+   //   sysTime.wSecond = (::u16)time.GetSecond();
+   //   sysTime.wMilliseconds = 0;
+
+   //   // convert system time to local file time
+   //   FILETIME localTime;
+
+   //   DWORD dwLastError = ::GetLastError();
+
+   //   if (!SystemTimeToFileTime((LPSYSTEMTIME)&sysTime, &localTime))
+   //      ::file::throw_os_error(dwLastError);
+
+   //   // convert local file time to UTC file time
+   //   if (!LocalFileTimeToFileTime(&localTime, pFileTime))
+   //      ::file::throw_os_error(dwLastError);
+
+   //}
+
+
+
+   //::file::path apex::user_appdata_local()
+   //{
+
+   //   return shell_get_special_folder_path(CSIDL_LOCAL_APPDATA);
+
+   //}
+
+
+
+   //::file::path get_known_folder(REFKNOWNFOLDERID kfid)
+   //{
+
+   //   ::file::path str;
+
+   //   ::cotaskptr < PWSTR > pwszPath;
+
+   //   HANDLE hToken = nullptr;
+
+   //   ::OpenProcessToken(::GetCurrentProcess(), TOKEN_QUERY | TOKEN_IMPERSONATE | TOKEN_DUPLICATE, &hToken);
+
+   //   HRESULT hr = SHGetKnownFolderPath(kfid, 0, hToken, &pwszPath);
+
+   //   return pwszPath;
+
+   //}
+
+
+} // namespace windows
 
 
 

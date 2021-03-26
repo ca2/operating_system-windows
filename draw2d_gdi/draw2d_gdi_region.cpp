@@ -26,7 +26,7 @@ namespace draw2d_gdi
    }
 
 
-   region::region(::context_object * pcontextobject) :
+   region::region(::object * pobject) :
       ::draw2d::region(pobject)
    {
       m_bUpdated = true;

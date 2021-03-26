@@ -464,7 +464,7 @@ FT_BEGIN_HEADER
   /*                                                                       */
   /* The canonical source for the MS assigned LCIDs is                     */
   /*                                                                       */
-  /*   http://www.microsoft.com/globaldev/context_object/lcid-all.mspx          */
+  /*   http://www.microsoft.com/globaldev/object/lcid-all.mspx          */
   /*                                                                       */
 
 #define TT_MS_LANGID_ARABIC_GENERAL                    0x0001
@@ -495,7 +495,7 @@ FT_BEGIN_HEADER
 #if 1  /* this looks like the correct value */
 #define TT_MS_LANGID_CHINESE_MACAU                     0x1404
 #else  /* but beware, Microsoft may change its mind...
-          the most recent Word context_object has the following: */
+          the most recent Word object has the following: */
 #define TT_MS_LANGID_CHINESE_MACAU  TT_MS_LANGID_CHINESE_HONG_KONG
 #endif
 

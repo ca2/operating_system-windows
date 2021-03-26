@@ -85,7 +85,7 @@ namespace windowing_win32
          if (pmessage->m_id == WM_FONTCHANGE)
          {
 
-            auto psystem = get_system();
+            auto psystem = m_psystem->m_paurasystem;
 
             psystem->process_subject(id_os_font_change);
 
@@ -103,7 +103,7 @@ namespace windowing_win32
             strLparamString == "ImmersiveColorSet")
          {
 
-            auto psystem = get_system();
+            auto psystem = m_psystem->m_paurasystem;
 
             psystem->process_subject(id_os_dark_mode);
 

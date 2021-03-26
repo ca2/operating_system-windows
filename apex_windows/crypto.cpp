@@ -36,7 +36,7 @@ namespace windows
    ::file::path crypto::get_crypt_key_file_path()
    {
 
-      return get_context()->dir().appdata() / ".ca2/databin.bin";
+      return m_pcontext->m_pcontext->dir().appdata() / ".ca2/databin.bin";
 
    }
 

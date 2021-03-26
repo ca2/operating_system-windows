@@ -248,7 +248,7 @@ typedef unsigned int JDIMENSION;
 #define LOCAL(type)		static type
 /* a function referenced thru EXTERNs: */
 #define GLOBAL(type)		type
-/* a context_object to a GLOBAL function: */
+/* a object to a GLOBAL function: */
 #ifdef FREEIMAGE_EXPORTS
 #ifdef _WIN32
 #define EXTERN(type)		__declspec(dllexport) type

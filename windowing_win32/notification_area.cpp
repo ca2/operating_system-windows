@@ -36,7 +36,7 @@ namespace windowing_win32
 #endif
    }
 
-   void notification_area::Initialize(::context_object * pcontextobject)
+   void notification_area::Initialize(::object * pobject)
    {
 
 #ifdef WINDOWS_DESKTOP

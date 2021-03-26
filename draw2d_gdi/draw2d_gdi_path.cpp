@@ -5,7 +5,7 @@ namespace draw2d_gdi
 {
 
 
-   path::path(::context_object * pcontextobject):
+   path::path(::object * pobject):
       ::draw2d::path(pobject)
    {
 

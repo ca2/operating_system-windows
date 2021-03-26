@@ -9,7 +9,7 @@ namespace multimedia
    {
 
 
-      factory_exchange::factory_exchange(::context_object * pcontextobject) :
+      factory_exchange::factory_exchange(::object * pobject) :
          ::object(pobject),
          ::multimedia::directsound::factory_exchange(pobject)
       {
@@ -32,7 +32,7 @@ namespace multimedia
 
 
 extern "C"
-void ca2_factory_exchange(::context_object * pcontextobject)
+void ca2_factory_exchange(::object * pobject)
 {
 
    ::multimedia::audio_directsound::factory_exchange factoryexchange(pobject);

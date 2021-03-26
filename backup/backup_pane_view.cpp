@@ -6,7 +6,7 @@ namespace backup
 {
 
 
-   pane_view::pane_view(::context_object * pcontextobject) :
+   pane_view::pane_view(::object * pobject) :
       ::object(pobject),
       ::userex::pane_tab_view(pobject),
       ::user::tab_view(pobject),

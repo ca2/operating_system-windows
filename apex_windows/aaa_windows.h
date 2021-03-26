@@ -10,8 +10,6 @@
 #include "interprocess_communication.h"
 
 
-//CLASS_DECL_APEX_WINDOWS::file::path get_known_folder(REFKNOWNFOLDERID kfid);
-
 //#include "buffer.h"
 //#include "copydesk.h"
 #include "crypto.h"

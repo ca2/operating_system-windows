@@ -5,7 +5,7 @@
 #undef Usr
 #include "shell.h"
 #include "apex/compress/zip/context.h"
-
+#include "acme/filesystem/filesystem/acme_dir.h"
 
 
 CLASS_DECL_AURA HICON ExtractResourceIcon(const string & strPath, int & cx, int & cy, int iIcon);
@@ -154,10 +154,10 @@ namespace windowing_win32
 
       string strIconLocation;
 
-      //if (strFileParam.compare_ci(::dir::bookmark()) == 0)
+      //if (strFileParam.compare_ci(m_psystem->m_pacmedir->bookmark()) == 0)
       //{
 
-      //   strIconLocation = get_context()->dir().matter("aura.ico");
+      //   strIconLocation = m_pcontext->m_pcontext->dir().matter("aura.ico");
 
       //   output_debug_string("aura.ico");
 
@@ -349,13 +349,13 @@ namespace windowing_win32
 
       if (((FAILED(hrIconLocation) && FAILED(hrGetLocation))
          || imagekey.m_iIcon == 0x80000000
-         || !get_context()->file().exists(strIconLocation))
+         || !m_pcontext->m_pcontext->file().exists(strIconLocation))
          && ::str::ends_ci(strFileParam, ".lnk"))
       {
 
-         get_context()->file().resolve_link(pathTarget, strFileParam);
+         m_pcontext->m_pcontext->file().resolve_link(pathTarget, strFileParam);
 
-         if (!get_context()->file().exists(pathTarget) && !get_context()->dir().is(pathTarget))
+         if (!m_pcontext->m_pcontext->file().exists(pathTarget) && !m_pcontext->m_pcontext->dir().is(pathTarget))
          {
 
             if (pathTarget.ends_ci(".exe"))
@@ -422,9 +422,9 @@ namespace windowing_win32
 
             string strIcon;
 
-            strIcon = ::dir::config() / "shell/app_theme" / imagekey.m_strShellThemePrefix + strExtension + ".ico";
+            strIcon = m_psystem->m_pacmedir->config() / "shell/app_theme" / imagekey.m_strShellThemePrefix + strExtension + ".ico";
 
-            if (get_context()->file().exists(strIcon))
+            if (m_pcontext->m_pcontext->file().exists(strIcon))
             {
 
                if (reserve_image(imagekeyTheme, iImage))
@@ -860,7 +860,7 @@ namespace windowing_win32
          if (reserve_image(imagekey, iImage))
          {
 
-            ::file::path path = get_context()->dir().matter("cloud.ico");
+            ::file::path path = m_pcontext->m_pcontext->dir().matter("cloud.ico");
 
             add_icon_path(path, crBk, iImage);
 
@@ -875,7 +875,7 @@ namespace windowing_win32
          if (reserve_image(imagekey, iImage))
          {
 
-            ::file::path path = get_context()->dir().matter("remote.ico");
+            ::file::path path = m_pcontext->m_pcontext->dir().matter("remote.ico");
 
             add_icon_path(path, crBk, iImage);
 
@@ -890,7 +890,7 @@ namespace windowing_win32
          if (reserve_image(imagekey, iImage))
          {
 
-            ::file::path path = get_context()->dir().matter("ftp.ico");
+            ::file::path path = m_pcontext->m_pcontext->dir().matter("ftp.ico");
 
             add_icon_path(path, crBk, iImage);
 
@@ -903,7 +903,7 @@ namespace windowing_win32
       if (::str::ends_ci(imagekey.m_strPath, ".aura"))
       {
 
-         string str = get_context()->file().as_string(imagekey.m_strPath);
+         string str = m_pcontext->m_pcontext->file().as_string(imagekey.m_strPath);
 
          if (::str::begins_eat_ci(str, "ca2prompt\r\n"))
          {
@@ -1058,7 +1058,7 @@ namespace windowing_win32
    //}
 
 
-   ::e_status shell::initialize(::context_object * pcontextobject)
+   ::e_status shell::initialize(::object * pobject)
    {
 
       if (m_bInitialized)
@@ -1068,7 +1068,7 @@ namespace windowing_win32
 
       }
 
-      auto estatus = ::user::shell::initialize(pcontextobject);
+      auto estatus = ::user::shell::initialize(pobject);
 
       if (!estatus)
       {
@@ -1127,7 +1127,7 @@ namespace windowing_win32
 
       synchronizationlock.unlock();
 
-      path = get_context()->defer_process_path(path);
+      path = m_pcontext->m_pcontext->defer_process_path(path);
 
       for (auto iSize : m_iaSize)
       {
@@ -1357,10 +1357,10 @@ namespace windowing_win32
    }
 
 
-   ::e_status shell::finish(::property_object * pcontextobject)
+   ::e_status shell::finish()
    {
 
-      return ::user::shell::finish(pcontextobject);
+      return ::user::shell::finish();
 
    }
 

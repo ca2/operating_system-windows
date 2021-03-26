@@ -5,7 +5,7 @@ namespace production
 {
 
 
-   application::application(::context_object * pcontextobject) :
+   application::application(::object * pobject) :
       ::object(this),
       ::thread(this),
       ::aura::application(pobject),
@@ -150,7 +150,7 @@ namespace production
       UNREFERENCED_PARAMETER(pdata);
       if(itema.get_size() > 0)
       {
-         pcontext->os().file_open(this, itema[0]->m_filepathFinal, "", itema[0]->m_filepathFinal.folder());
+         pcontext->m_pcontext->os().file_open(this, itema[0]->m_filepathFinal, "", itema[0]->m_filepathFinal.folder());
       }
 
    }
@@ -160,7 +160,7 @@ namespace production
 
 
 extern "C"
-::apex::library * platform_production_get_new_library(::context_object * pcontextobject)
+::apex::library * platform_production_get_new_library(::object * pobject)
 {
 
    return new ::apex::single_application_library < production::application >(pobject, "platform/production");

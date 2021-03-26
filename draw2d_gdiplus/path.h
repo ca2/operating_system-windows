@@ -66,9 +66,9 @@ namespace draw2d_gdiplus
 
       virtual bool _set(::draw2d::graphics* pgraphics, const ::polygon_f64& ppolygond);
 
-      virtual bool _set(::draw2d::graphics* pgraphics, const ::text_out& ptextout);
+      virtual bool _set(::draw2d::graphics* pgraphics, const ::write_text::text_out& ptextout);
 
-      virtual bool _set(::draw2d::graphics* pgraphics, const ::draw_text& pdrawtext);
+      virtual bool _set(::draw2d::graphics* pgraphics, const ::write_text::draw_text& pdrawtext);
 
       virtual bool contains(::draw2d::graphics_pointer& pgraphics, const point_f64& point) override;
 

@@ -11,7 +11,7 @@ namespace draw2d_gdi
    public:
 
 
-      path(::context_object * pcontextobject);
+      path(::object * pobject);
       virtual ~path();
 
 

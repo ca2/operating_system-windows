@@ -2,7 +2,11 @@
 #include "apex/operating_system.h"
 #include "acme/id.h"
 #include <Shlobj.h>
+#include "dir_system.h"
 #include "dir_context.h"
+#include "acme/node/windows/file_find.h"
+#include "acme/filesystem/filesystem/acme_dir.h"
+#include "acme_windows/acme_dir.h"
 
 
 namespace windows
@@ -22,10 +26,10 @@ namespace windows
    }
 
 
-   ::e_status dir_context::initialize(::context_object * pcontextobject)
+   ::e_status dir_context::initialize(::object * pobject)
    {
 
-      auto estatus = ::object::initialize(pcontextobject);
+      auto estatus = ::object::initialize(pobject);
 
       if (!estatus)
       {
@@ -61,7 +65,7 @@ namespace windows
 
       //auto pdocument = create_xml_document();
 
-      //if (pdocument->load(get_context()->file().as_string(::dir::appdata() / "configuration/directory.xml")))
+      //if (pdocument->load(m_pcontext->m_pcontext->file().as_string(::dir::appdata() / "configuration/directory.xml")))
       //{
 
       //   //xxdebug_box("win_dir::initialize (configuration)", "win_dir::initialize", 0);
@@ -71,7 +75,7 @@ namespace windows
 
       //      ::file::path pathFolderTime = pdocument->root()->get_child_value("time");
 
-      //      if (get_context()->dir().is(pathFolderTime))
+      //      if (m_pcontext->m_pcontext->dir().is(pathFolderTime))
       //      {
 
       //         m_pdirsystem->m_strTimeFolder = pathFolderTime;
@@ -80,7 +84,7 @@ namespace windows
 
       //      ::file::path pathFolderNetseed = pdocument->root()->get_child_value("netseed");
 
-      //      if (get_context()->dir().is(pathFolderNetseed))
+      //      if (m_pcontext->m_pcontext->dir().is(pathFolderNetseed))
       //      {
 
       //         m_pdirsystem->m_strNetSeedFolder = pathFolderNetseed;
@@ -424,7 +428,7 @@ namespace windows
 
                }
 
-               get_context()->dir().ls(listing);
+               m_pcontext->m_pcontext->dir().ls(listing);
 
             }
 
@@ -496,7 +500,7 @@ namespace windows
          if (listing.m_pathFinal.is_empty())
          {
 
-            listing.m_pathFinal = get_context()->defer_process_path(listing.m_pathUser);
+            listing.m_pathFinal = m_pcontext->m_pcontext->defer_process_path(listing.m_pathUser);
 
          }
 
@@ -612,7 +616,7 @@ namespace windows
 
                }
 
-               get_context()->dir().ls(listing);
+               m_pcontext->m_pcontext->dir().ls(listing);
 
             }
 
@@ -950,7 +954,7 @@ namespace windows
                try
                {
 
-                  get_context()->file().del(str);
+                  m_pcontext->m_pcontext->file().del(str);
 
                }
                catch (...)
@@ -965,7 +969,7 @@ namespace windows
                try
                {
 
-                  get_context()->file().del(str);
+                  m_pcontext->m_pcontext->file().del(str);
 
                }
                catch (...)
@@ -1272,7 +1276,7 @@ namespace windows
 
       ::file::path path;
 
-      shell_get_special_folder_path(
+      m_psystem->m_pacmedir->m_pplatformdir->_shell_get_special_folder_path(
          nullptr,
          path,
          CSIDL_MYDOCUMENTS,
@@ -1287,7 +1291,7 @@ namespace windows
 
       ::file::path path;
 
-      shell_get_special_folder_path(
+      m_psystem->m_pacmedir->m_pplatformdir->_shell_get_special_folder_path(
          nullptr,
          path,
          CSIDL_DESKTOP,
@@ -1302,7 +1306,7 @@ namespace windows
 
       ::file::path path;
 
-      path = ::get_known_folder(FOLDERID_Downloads);
+      path = m_psystem->m_pacmedir->m_pplatformdir->_get_known_folder(FOLDERID_Downloads);
 
       return path;
 
@@ -1313,7 +1317,7 @@ namespace windows
 
       ::file::path path;
 
-      shell_get_special_folder_path(
+      m_psystem->m_pacmedir->m_pplatformdir->_shell_get_special_folder_path(
          nullptr,
          path,
          CSIDL_MYMUSIC,
@@ -1329,7 +1333,7 @@ namespace windows
 
       ::file::path path;
 
-      shell_get_special_folder_path(
+      m_psystem->m_pacmedir->m_pplatformdir->_shell_get_special_folder_path(
          nullptr,
          path,
          CSIDL_MYVIDEO,
@@ -1345,7 +1349,7 @@ namespace windows
 
       ::file::path path;
 
-      shell_get_special_folder_path(
+      m_psystem->m_pacmedir->m_pplatformdir->_shell_get_special_folder_path(
          nullptr,
          path,
          CSIDL_MYPICTURES,

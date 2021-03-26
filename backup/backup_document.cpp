@@ -5,7 +5,7 @@ namespace backup
 {
 
 
-   document::document(::context_object * pcontextobject) :
+   document::document(::object * pobject) :
       ::object(pobject),
       ::user::document(pobject),
       ::data::data_container_base(pobject),

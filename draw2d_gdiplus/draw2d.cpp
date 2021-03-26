@@ -26,10 +26,10 @@ namespace draw2d_gdiplus
    }
 
 
-   ::e_status draw2d::initialize(::context_object * pcontextobject)
+   ::e_status draw2d::initialize(::object * pobject)
    {
 
-      auto estatus = ::draw2d::draw2d::initialize(pcontextobject);
+      auto estatus = ::draw2d::draw2d::initialize(pobject);
 
       if (!estatus)
       {

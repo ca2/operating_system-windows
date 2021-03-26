@@ -141,10 +141,12 @@ namespace windowing_win32
 
 
 
-   void windowing::finalize()
+   ::e_status windowing::finalize()
    {
 
-      ::windowing::windowing::finalize();
+      auto estatus = ::windowing::windowing::finalize();
+
+      return estatus;
 
    }
 

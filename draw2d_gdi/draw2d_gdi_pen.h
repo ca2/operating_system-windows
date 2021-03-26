@@ -15,7 +15,7 @@ namespace draw2d_gdi
       bool        m_bProcess;
 
 
-      pen(::context_object * pcontextobject);
+      pen(::object * pobject);
       virtual ~pen();
 
       operator HPEN() const;

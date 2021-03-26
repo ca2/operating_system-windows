@@ -382,19 +382,19 @@ void wmain(int argc, wchar_t * wargv[])
 
       }
 
-      pcontext->file().copy(strDst, strSrc, false);
+      pcontext->m_pcontext->file().copy(strDst, strSrc, false);
 
       dprint("main copy should be done!!");
 
       ::file::path pathIcon;
 
-      ::file::path pathMatter = pcontext->dir().matter("main/icon.ico", false, strRoot, strDomain);
+      ::file::path pathMatter = pcontext->m_pcontext->dir().matter("main/icon.ico", false, strRoot, strDomain);
 
       pathMatter |= ::file::e_flag_get_local_path;
 
       pathMatter = psystem->get_matter_cache_path(pathMatter);
 
-      if (pcontext->file().exists(pathMatter))
+      if (pcontext->m_pcontext->file().exists(pathMatter))
       {
 
          pathIcon = pathMatter;
@@ -406,11 +406,11 @@ void wmain(int argc, wchar_t * wargv[])
       if (pathIcon.is_empty())
       {
 
-         pathMatter = pcontext->dir().matter("main/icon.ico", false);
+         pathMatter = pcontext->m_pcontext->dir().matter("main/icon.ico", false);
 
          pathMatter |= ::file::e_flag_get_local_path;
 
-         if (pcontext->file().exists(pathMatter))
+         if (pcontext->m_pcontext->file().exists(pathMatter))
          {
 
             pathIcon = pathMatter;
@@ -447,7 +447,7 @@ void wmain(int argc, wchar_t * wargv[])
 
       }
 
-      if (pcontext->file().exists(pathIcon))
+      if (pcontext->m_pcontext->file().exists(pathIcon))
       {
 
          memory memory;
@@ -456,7 +456,7 @@ void wmain(int argc, wchar_t * wargv[])
 
          auto pfileHd = create_memory_file();
 
-         pcontext->file().as_memory(pathIcon, memory);
+         pcontext->m_pcontext->file().as_memory(pathIcon, memory);
 
          dprint("icon as memory");
 

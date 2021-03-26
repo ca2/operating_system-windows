@@ -1,7 +1,8 @@
 ﻿#include "framework.h"
 #include "apex/operating_system.h"
 #include "process.h"
-#include "pipe.h"
+#include "acme/node/windows/pipe.h"
+#include "acme/node/windows/uac_tools.h"
 
 
 namespace windows
@@ -63,7 +64,7 @@ namespace windows
 
          m_si.hStdOutput      = ppipeOut->m_hWrite;
 
-         pipe * ppipeIn       = m_pipe.m_sppipeIn.cast < pipe >();
+         pipe * ppipeIn       = m_pipe.m_ppipeIn.cast < pipe >();
 
          m_si.hStdInput       = ppipeIn->m_hRead;
 
@@ -78,7 +79,7 @@ namespace windows
       si.cb = sizeof(si);
       si.dwFlags = STARTF_USESHOWWINDOW;
       si.wShowWindow = e_display_none; */
-      //         if(!::CreateProcess(nullptr, (char *) (const char *) get_context()->dir().appdata("production\\build.bat"), nullptr, nullptr, false, CREATE_NEW_CONSOLE, nullptr, nullptr, &si, &pi))
+      //         if(!::CreateProcess(nullptr, (char *) (const char *) m_pcontext->m_pcontext->dir().appdata("production\\build.bat"), nullptr, nullptr, false, CREATE_NEW_CONSOLE, nullptr, nullptr, &si, &pi))
       m_si.dwFlags |= STARTF_USESHOWWINDOW;
       m_si.wShowWindow = e_display_none;
 

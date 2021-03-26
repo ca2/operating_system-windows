@@ -7,7 +7,7 @@ namespace production
 {
 
 
-   view::view(::context_object * pcontextobject) :
+   view::view(::object * pobject) :
       ::object(pobject),
       ::user::interaction(pobject),
       m_brushBkActive(e_create),
@@ -16,7 +16,7 @@ namespace production
 
       m_pproduction = nullptr;
 
-      //pcontext->file().ftd("C:\\home2\\ca2os\\ca2_spa\\stage", "C:\\teste.fileset");
+      //pcontext->m_pcontext->file().ftd("C:\\home2\\ca2os\\ca2_spa\\stage", "C:\\teste.fileset");
 
 
       m_iLineHeight = 1;

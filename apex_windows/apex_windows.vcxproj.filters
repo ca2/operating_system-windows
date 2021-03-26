@@ -175,4 +175,9 @@
       <Filter>Resource Files</Filter>
     </ResourceCompile>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="apex_windows.def">
+      <Filter>Source Files</Filter>
+    </None>
+  </ItemGroup>
 </Project>

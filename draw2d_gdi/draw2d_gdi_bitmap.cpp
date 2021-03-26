@@ -5,7 +5,7 @@ namespace draw2d_gdi
 {
 
 
-   bitmap::bitmap(::context_object * pcontextobject):
+   bitmap::bitmap(::object * pobject):
       ::draw2d::bitmap(pobject)
    {
 

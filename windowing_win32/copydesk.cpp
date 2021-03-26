@@ -74,10 +74,10 @@ namespace windowing_win32
    }
 
 
-   ::e_status copydesk::initialize(::context_object * pcontextobject)
+   ::e_status copydesk::initialize(::object * pobject)
    {
 
-      auto estatus = ::user::copydesk::initialize(pcontextobject);
+      auto estatus = ::user::copydesk::initialize(pobject);
 
       if (!estatus)
       {
@@ -150,12 +150,14 @@ namespace windowing_win32
    }
 
 
-   void copydesk::finalize()
+   ::e_status copydesk::finalize()
    {
 
-      ::user::copydesk::finalize();
+      auto estatus1 = ::user::copydesk::finalize();
 
-      ::user::message_window::finalize();
+      auto estatus2 = ::user::message_window::finalize();
+
+      return minimum(estatus1, estatus2);
 
    }
 

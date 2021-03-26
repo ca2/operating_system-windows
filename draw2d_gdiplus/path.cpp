@@ -687,7 +687,7 @@ namespace draw2d_gdiplus
    }
 
 
-   bool path::_set(::draw2d::graphics* pgraphics, const ::text_out & textout)
+   bool path::_set(::draw2d::graphics* pgraphics, const ::write_text::text_out & textout)
    {
 
       return internal_add_text_out(
@@ -700,7 +700,7 @@ namespace draw2d_gdiplus
    }
 
 
-   bool path::_set(::draw2d::graphics* pgraphics, const ::draw_text & drawtext)
+   bool path::_set(::draw2d::graphics* pgraphics, const ::write_text::draw_text & drawtext)
    {
 
       return internal_add_draw_text(

@@ -37,7 +37,7 @@ namespace windowing_win32
 
       virtual void finalize_windowing() override;
 
-      virtual void finalize() override;
+      virtual ::e_status finalize() override;
 
       virtual void get_cursor_position(POINT_I32* ppoint) override;
 

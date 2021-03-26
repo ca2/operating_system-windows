@@ -20,7 +20,7 @@ namespace multimedia
          WAVEFORMATEX         m_waveformatex;
 
 
-         in(::context_object * pcontextobject);
+         in(::object * pobject);
          virtual ~in();
 
 

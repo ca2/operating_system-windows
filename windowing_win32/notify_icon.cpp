@@ -156,7 +156,7 @@ namespace windowing_win32
 
          ::file::path path = pathFolder / (strNotifyIcon + "_128.png");
 
-         path = pcontext->defer_process_path(path);
+         path = pcontext->m_pcontext->defer_process_path(path);
 
          pathFolder = path.folder();
 
@@ -227,11 +227,11 @@ namespace windowing_win32
       //
       //      string strUrl = "https://server.ca2.cc/matter/" + strFolder + strFile;
       //
-      //      strFile = pcontext->dir().appdata() / strFolder / strFile;
+      //      strFile = pcontext->m_pcontext->dir().appdata() / strFolder / strFile;
       //
       //      int iRetry = 3;
       //
-      //      while(iRetry >= 0 && (!pcontext->file().exists(strFile) || pcontext->file().length(strFile) <= 0))
+      //      while(iRetry >= 0 && (!pcontext->m_pcontext->file().exists(strFile) || pcontext->m_pcontext->file().length(strFile) <= 0))
       //      {
       //
       //         ::property_set set;
@@ -239,7 +239,7 @@ namespace windowing_win32
       //         set["raw_http"] = true;
       //         set["disable_common_name_cert_check"] = true;
       //
-      //         pcontext->http().download(strUrl, strFile, set);
+      //         pcontext->m_pcontext->http().download(strUrl, strFile, set);
       //
       //         iRetry--;
       //
@@ -247,7 +247,7 @@ namespace windowing_win32
 
       string strFile;
 
-      strFile = pcontext->defer_process_matter_path("matter://main/menubar-icon-22.png");
+      strFile = pcontext->m_pcontext->defer_process_matter_path("matter://main/menubar-icon-22.png");
 
       notify_icon_init(strFile);
 

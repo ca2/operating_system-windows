@@ -567,7 +567,7 @@ namespace windowing_win32
 
       }
 
-      /// this Windows native window "holds" context_object to the
+      /// this Windows native window "holds" object to the
       /// wrapping object.
       puserinteraction->add_ref(OBJ_REF_DBG_THIS);
 
@@ -617,7 +617,7 @@ namespace windowing_win32
          if (pmessage->m_id == WM_FONTCHANGE)
          {
 
-            auto psystem = get_system();
+            auto psystem = m_psystem->m_paurasystem;
 
             psystem->process_subject(id_os_font_change);
 
@@ -635,7 +635,7 @@ namespace windowing_win32
             strLparamString == "ImmersiveColorSet")
          {
 
-            auto psystem = get_system();
+            auto psystem = m_psystem->m_paurasystem;
 
             psystem->process_subject(id_os_dark_mode);
 
@@ -5868,17 +5868,10 @@ namespace windowing_win32
    }
 
 
-   ::e_status window::finish(::property_object * pcontextobjectFinish)
+   ::e_status window::set_finish()
    {
 
-      auto estatus = set_finish(pcontextobjectFinish);
-
-      if (estatus == success)
-      {
-
-         on_finish();
-
-      }
+      auto estatus = ::windowing::window::set_finish();
 
       return estatus;
 

@@ -39,7 +39,7 @@ namespace windowing_win32
 
 
    class CLASS_DECL_WINDOWING_WIN32 notification_area :
-      virtual public ::context_object
+      virtual public ::object
    {
    public:
 
@@ -55,7 +55,7 @@ namespace windowing_win32
       notification_area();
       virtual ~notification_area();
 
-      virtual void Initialize(::context_object * pcontextobject);
+      virtual void Initialize(::object * pobject);
 
       void ListTrayIcons(i32 defindex = 0);
       void EditCopy(i32 iItem);

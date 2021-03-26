@@ -40,7 +40,7 @@ static ::mutex * s_pmutex = nullptr;
 }
 
 
-void init_draw2d_gdi_mutex(::context_object * pcontextobject)
+void init_draw2d_gdi_mutex(::object * pobject)
 {
 
    s_pmutex = new ::mutex();

@@ -4,5 +4,5 @@
 
 #include "stdafx.h"
 
-// TODO: context_object any additional headers you need in STDAFX.H
+// TODO: object any additional headers you need in STDAFX.H
 // and not in this file

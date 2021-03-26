@@ -7,9 +7,15 @@
 #include <wtsapi32.h>
 #include <shobjidl.h>
 #include "acme/id.h"
-#include "_node_windows_private.h"
+#include "acme/node/windows/_node_windows_private.h"
 #include "acme/os/windows/_windows.h"
+#include "acme/platform/acme.h"
 #include <ShellApi.h>
+#include "os_context.h"
+#include "apex/platform/apex.h"
+#include "apex.h"
+#include "acme/filesystem/filesystem/acme_dir.h"
+#include "acme_windows/acme_dir.h"
 
 
 ::e_status hresult_to_estatus(HRESULT hresult)
@@ -135,7 +141,7 @@ namespace windows
          return false;
       }
 
-      if(!LIBCALL(wtsapi32,WTSShutdownSystem)(WTS_CURRENT_SERVER_HANDLE,WTS_WSD_REBOOT))
+      if(!WTSShutdownSystem(WTS_CURRENT_SERVER_HANDLE,WTS_WSD_REBOOT))
       {
          TRACELASTERROR();
          return false;
@@ -519,10 +525,10 @@ namespace windows
          key.open(key, "@ca2.cc/npca2", true);
 
          key.set("Description", "ca2 plugin for NPAPI");
-         key.set("Path", get_context()->dir().ca2module() /"npca2.dll");
+         key.set("Path", m_pcontext->m_pcontext->dir().ca2module() /"npca2.dll");
          key.set("ProductName", "ca2 plugin for NPAPI");
          key.set("Vendor", "ca2 Desenvolvimento de Software Ltda.");
-         key.set("Version", get_context()->file().as_string(get_context()->dir().install()/"appdata/x86/ca2_build.txt"));
+         key.set("Version", m_pcontext->m_pcontext->file().as_string(m_pcontext->m_pcontext->dir().install()/"appdata/x86/ca2_build.txt"));
 
          key.open(key, "application/apex", true);
 
@@ -1044,7 +1050,7 @@ namespace windows
       // Call CredPackAuthenticationBufferW once to determine the size,
       // in bytes, of the authentication buffer.
 
-      if(!LIBCALL(credui,CredPackAuthenticationBufferW)(
+      if(!CredPackAuthenticationBufferW(
             0,                // Reserved
             szDomainAndUser,  // Domain\User name
             szPassword,       // User Password
@@ -1071,7 +1077,7 @@ namespace windows
 
       // Call CredPackAuthenticationBufferW again to retrieve the
       // authentication buffer.
-      if(!LIBCALL(credui,CredPackAuthenticationBufferW)(
+      if(!CredPackAuthenticationBufferW(
             0,
             szDomainAndUser,
             szPassword,
@@ -1099,7 +1105,7 @@ namespace windows
 
 retry:
 
-      dwResult = LIBCALL(credui,CredUIPromptForWindowsCredentialsW)(
+      dwResult = CredUIPromptForWindowsCredentialsW(
                  &u,             // Customizing information
                  dwLastError,               // Error code to display
                  &ulAuthPackage,  // Authorization package
@@ -1121,7 +1127,7 @@ retry:
          DWORD lenDomain = maxLenDomain;
          DWORD lenPass = maxLenPass;
 
-         bOk = LIBCALL(credui, CredUnPackAuthenticationBufferW)(CRED_PACK_PROTECTED_CREDENTIALS,
+         bOk = CredUnPackAuthenticationBufferW(CRED_PACK_PROTECTED_CREDENTIALS,
                pvAuthBlob,
                pvAuthBlob.m_size,
                szUsername,
@@ -1142,7 +1148,7 @@ retry:
 
          ::GetUserNameExW(NameSamCompatible,szDomainAndUser,&l);
 
-         bOk = LIBCALL(credui,CredUIParseUserNameW)(
+         bOk = CredUIParseUserNameW(
                szDomainAndUser,
                szUsername,
                CREDUI_MAX_USERNAME_LENGTH,
@@ -1217,7 +1223,7 @@ retry:
 
       if(get_application()->m_strAppName.is_empty()
             || get_application()->m_strAppName.compare_ci("bergedge") == 0
-            || !get_application()->is_serviceable())
+            || !get_application()->is_service())
          return "";
 
       string strServiceName = get_application()->m_strAppId;
@@ -1231,7 +1237,7 @@ retry:
    }
 
 
-   ::e_status os_context::create_service()
+   ::e_status os_context::enable_service()
    {
 
       string strServiceName = calc_service_name();
@@ -1264,7 +1270,7 @@ retry:
 
       strExe += ".exe";
 
-      string strCalling = get_context()->dir().module() / strExe + " : service";
+      string strCalling = m_pcontext->m_pcontext->dir().module() / strExe + " : service";
 
       if(is_true("no_remote_simpledb"))
       {
@@ -1300,12 +1306,12 @@ retry:
 
       }
 
-      return create_service(strServiceName,strDisplayName,strCalling,pname,ppass);
+      return enable_service(strServiceName,strDisplayName,strCalling,pname,ppass);
 
    }
 
 
-   ::e_status os_context::remove_service()
+   ::e_status os_context::disable_service()
    {
 
       string strServiceName = calc_service_name();
@@ -1317,7 +1323,7 @@ retry:
 
       }
 
-      return remove_service(strServiceName);
+      return disable_service(strServiceName);
 
    }
 
@@ -1339,7 +1345,7 @@ retry:
    }
 
 
-   bool os_context::create_service(const string & strServiceName,const string & strDisplayName,const string & strCommand,const string & strUser,const string & strPass)
+   bool os_context::enable_service(const string & strServiceName,const string & strDisplayName,const string & strCommand,const string & strUser,const string & strPass)
    {
 
       if (strServiceName.is_empty())
@@ -1405,7 +1411,7 @@ retry:
    }
 
 
-   bool os_context::remove_service(const string & strServiceName)
+   bool os_context::disable_service(const string & strServiceName)
    {
 
       if (strServiceName.is_empty())
@@ -1601,7 +1607,7 @@ retry:
       if (status.m_mtime.get_time() != 0)
       {
 
-         ::windows::time_to_filetime(get_application(), status.m_mtime, &lastWriteTime);
+         m_psystem->m_pacme->datetime_to_filetime((filetime_t *) &lastWriteTime, status.m_mtime);
 
          pLastWriteTime = &lastWriteTime;
 
@@ -1612,7 +1618,9 @@ retry:
       if (status.m_atime.get_time() != 0)
       {
 
-         ::windows::time_to_filetime(get_application(),status.m_atime, &lastAccessTime);
+         //auto pnode = m_psystem->m_papexsystem->node();
+
+         ::time_to_file_time((filetime_t*)&lastAccessTime, &status.m_atime.m_time);
 
          pLastAccessTime = &lastAccessTime;
 
@@ -1623,7 +1631,7 @@ retry:
       if (status.m_ctime.get_time() != 0)
       {
 
-         ::windows::time_to_filetime(get_application(),status.m_ctime, &creationTime);
+         time_to_file_time((filetime_t *)&creationTime, &status.m_ctime.m_time);
 
          pCreationTime = &creationTime;
 
@@ -1974,7 +1982,7 @@ retry:
 
          ::file::path pathFolder;
 
-         ::windows::shell_get_special_folder_path(nullptr, pathFolder, CSIDL_WINDOWS, false);
+         m_psystem->m_pacmedir->m_pplatformdir->_shell_get_special_folder_path(nullptr, pathFolder, CSIDL_WINDOWS, false);
 
          pathFolder /= "Web/Wallpaper";
 
@@ -1987,7 +1995,7 @@ retry:
    }
 //#elif defined(LINUX)
 //   //string strDir;
-//   //strDir = get_context()->dir().path(getenv("HOME"), "Pictures");
+//   //strDir = m_pcontext->m_pcontext->dir().path(getenv("HOME"), "Pictures");
 //   //imagefileset.add_search(strDir);
 //   string strDir;
 //   strDir = "/usr/share/backgrounds";
@@ -1996,7 +2004,7 @@ retry:
 //
 //#elif defined(MACOS)
 //   //string strDir;
-//   //strDir = get_context()->dir().path(getenv("HOME"), "Pictures");
+//   //strDir = m_pcontext->m_pcontext->dir().path(getenv("HOME"), "Pictures");
 //   //imagefileset.add_search(strDir);
 //   string strDir;
 //   strDir = "/Library/Desktop Pictures";
@@ -2009,7 +2017,7 @@ retry:
    bool os_context::file_open(::file::path path, string strParams, string strFolder)
    {
 
-      path = get_context()->defer_process_path(path);
+      path = m_pcontext->m_pcontext->defer_process_path(path);
 
       fork([=]()
       {

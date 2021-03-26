@@ -3,10 +3,12 @@
 #include <shlobj.h>
 #include <string.h>
 #include "explorer_restart.h"
+#include "acme/filesystem/filesystem/acme_dir.h"
+
 
 CLSID CLSID_DeskBandSample = { 0x19970ca2, 0x71a, 0x4b7e,{ 0x8a, 0xa2, 0xe5, 0x60, 0x81, 0xd, 0xab, 0x35 } };
 
-bool register_desk_toolbar(::aura::system * psystem);
+bool register_desk_toolbar(::apex::system * psystem);
 
 bool register_desk_toolbar_dll();
 
@@ -17,7 +19,7 @@ bool position_desk_toolbar1();
 
 
 
-bool register_desk_toolbar(::aura::system* psystem)
+bool register_desk_toolbar(::apex::system* psystem)
 {
 
    //taskbar position calculating code omitted
@@ -34,11 +36,11 @@ bool register_desk_toolbar(::aura::system* psystem)
    //}
 
    //sleep(1_s);
-   //auto psystem = get_system();
+   //auto psystem = m_psystem->m_paurasystem;
 
-   auto pnode = psystem->node();
+   auto pnode = psystem->node()->m_papexnode;
 
-   ::file::path pathDll = ::dir::module() / "_desk_tb.dll";
+   ::file::path pathDll = psystem->m_pacmedir->module() / "_desk_tb.dll";
 
    pnode->register_dll(pathDll);
 

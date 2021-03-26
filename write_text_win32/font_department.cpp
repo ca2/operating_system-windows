@@ -19,10 +19,10 @@ namespace write_text_win32
 
    }
 
-   ::e_status font_department::initialize(::context_object * pcontextobject)
+   ::e_status font_department::initialize(::object * pobject)
    {
 
-      auto estatus = ::font_department::initialize(pcontextobject);
+      auto estatus = ::font_department::initialize(pobject);
 
       if (!estatus)
       {
@@ -36,14 +36,14 @@ namespace write_text_win32
    }
 
 
-   void font_department::finalize()
+   ::e_status font_department::finalize()
    {
 
-         ::font_department::finalize();
+       auto estatus = ::font_department::finalize();
 
+       return estatus;
       
    }
-
 
 
    void font_department::enum_fonts(::write_text::font_enum_item_array & itema)

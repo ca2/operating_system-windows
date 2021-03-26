@@ -21,8 +21,8 @@ namespace draw2d_gdi
    //////////////////////////////////////////////////////////////////////
 
 
-   image::image_impl(::context_object * pcontextobject) :
-      ::context_object(pobject),
+   image::image_impl(::object * pobject) :
+      ::object(pobject),
       ::image_data(pobject),
       ::image_impl(pobject),
       m_pbitmap(e_create_new, pobject),
