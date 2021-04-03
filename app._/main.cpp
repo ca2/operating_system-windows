@@ -136,7 +136,7 @@ void copy(MEM_ICON_ITEM * dst, ICON_ITEM * pitem)
 //      // |                         |               |
 //      // -----------------------   --       --------
 //      //                       |    |       |
-//      if (file_exists(::dir::system() / "config\\appfy\\appfy_beg_debug_box.txt"))
+//      if (file_exists(pacmedir->system() / "config\\appfy\\appfy_beg_debug_box.txt"))
 //      {
 //         debug_box("app_app_admin", "app", 0);
 //      }
@@ -178,7 +178,7 @@ void wmain(int argc, wchar_t * wargv[])
 
    {
 
-      if (file_exists(::dir::system() / "config/plugin/appfy_beg_debug_box.txt"))
+      if (file_exists(pacmedir->system() / "config/plugin/appfy_beg_debug_box.txt"))
       {
 
          ::MessageBoxA(nullptr,"appfy run", "appfy run", MB_OK);
@@ -312,7 +312,7 @@ void wmain(int argc, wchar_t * wargv[])
 
             pathListing = pathListing.folder(4);
 
-            auto& dir = papplication->dir();
+            auto& dir = pcontext->m_papexcontext->dir();
 
             dir.ls_dir(listing, pathListing);
 
@@ -382,19 +382,19 @@ void wmain(int argc, wchar_t * wargv[])
 
       }
 
-      pcontext->m_pcontext->file().copy(strDst, strSrc, false);
+      pcontext->m_papexcontext->file().copy(strDst, strSrc, false);
 
       dprint("main copy should be done!!");
 
       ::file::path pathIcon;
 
-      ::file::path pathMatter = pcontext->m_pcontext->dir().matter("main/icon.ico", false, strRoot, strDomain);
+      ::file::path pathMatter = pcontext->m_papexcontext->dir().matter("main/icon.ico", false, strRoot, strDomain);
 
       pathMatter |= ::file::e_flag_get_local_path;
 
       pathMatter = psystem->get_matter_cache_path(pathMatter);
 
-      if (pcontext->m_pcontext->file().exists(pathMatter))
+      if (pcontext->m_papexcontext->file().exists(pathMatter))
       {
 
          pathIcon = pathMatter;
@@ -406,11 +406,11 @@ void wmain(int argc, wchar_t * wargv[])
       if (pathIcon.is_empty())
       {
 
-         pathMatter = pcontext->m_pcontext->dir().matter("main/icon.ico", false);
+         pathMatter = pcontext->m_papexcontext->dir().matter("main/icon.ico", false);
 
          pathMatter |= ::file::e_flag_get_local_path;
 
-         if (pcontext->m_pcontext->file().exists(pathMatter))
+         if (pcontext->m_papexcontext->file().exists(pathMatter))
          {
 
             pathIcon = pathMatter;
@@ -447,7 +447,7 @@ void wmain(int argc, wchar_t * wargv[])
 
       }
 
-      if (pcontext->m_pcontext->file().exists(pathIcon))
+      if (pcontext->m_papexcontext->file().exists(pathIcon))
       {
 
          memory memory;
@@ -456,7 +456,7 @@ void wmain(int argc, wchar_t * wargv[])
 
          auto pfileHd = create_memory_file();
 
-         pcontext->m_pcontext->file().as_memory(pathIcon, memory);
+         pcontext->m_papexcontext->file().as_memory(pathIcon, memory);
 
          dprint("icon as memory");
 

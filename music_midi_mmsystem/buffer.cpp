@@ -273,7 +273,7 @@ namespace music
 
                {
 
-                  synchronization_lock synchronizationlock(m_pcallbackdata->m_psequence->mutex());
+                  synchronous_lock synchronouslock(m_pcallbackdata->m_psequence->mutex());
 
                   estatus = this->buffer_at(i)->midiStreamOut(hmidiout);
 

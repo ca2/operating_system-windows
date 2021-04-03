@@ -31,7 +31,7 @@ namespace draw2d_gdi
    graphics::~graphics()
    {
 
-      synchronization_lock ml(mutex());
+      synchronous_lock ml(mutex());
 
       for(int i = 0; i < m_ptraObject.get_count(); i++)
       {
@@ -251,7 +251,7 @@ namespace draw2d_gdi
       if(pbitmap == nullptr)
          return nullptr;
 
-      synchronization_lock ml(mutex());
+      synchronous_lock ml(mutex());
 
       pbitmap->m_bUpdated = true;
 
@@ -269,7 +269,7 @@ namespace draw2d_gdi
    void graphics::on_select_object(::draw2d::object * pobjectParam)
    {
 
-      synchronization_lock ml(mutex());
+      synchronous_lock ml(mutex());
 
       ::draw2d_gdi::object * pobject = dynamic_cast <::draw2d_gdi::object *> (pobjectParam);
 
@@ -1223,7 +1223,7 @@ namespace draw2d_gdi
       i32 xSrc = point.x;
       i32 ySrc = point.y;
 
-      synchronization_lock ml(mutex());
+      synchronous_lock ml(mutex());
 
       if(get_handle1() == nullptr)
          return false;
@@ -1442,7 +1442,7 @@ namespace draw2d_gdi
    bool graphics::StretchBlt(double x, double y, double nWidth, double nHeight, ::draw2d::graphics * pgraphicsSrc, int xSrc, int ySrc, int nSrcWidth, int nSrcHeight, u32 dwRop)
    {
 
-      synchronization_lock ml(mutex());
+      synchronous_lock ml(mutex());
 
       if (get_handle1() == nullptr)
          return false;
@@ -1567,7 +1567,7 @@ namespace draw2d_gdi
    bool graphics::text_out(double x, double y, const char * lpszString, strsize nCount)
    {
 
-      synchronization_lock ml(mutex());
+      synchronous_lock ml(mutex());
 
       if (::draw2d::graphics::text_out(x, y, lpszString, nCount))
          return true;
@@ -2606,7 +2606,7 @@ namespace draw2d_gdi
    bool graphics::internal_fill_path(void(::draw2d_gdi::graphics::* pfnInternalSetPath)(void *),void * pparam,const ::rectangle_i32 & rectParam,::draw2d::brush * pbrush)
    {
 
-      synchronization_lock ml(mutex());
+      synchronous_lock ml(mutex());
 
       ASSERT(get_handle1() != nullptr);
 
@@ -2769,7 +2769,7 @@ namespace draw2d_gdi
    bool graphics::internal_stroke_path(void(::draw2d_gdi::graphics::* pfnInternalSetPath)(void *),void * pparam,const ::rectangle_i32 & rectParam,::draw2d::pen * ppen)
    {
 
-      synchronization_lock ml(mutex());
+      synchronous_lock ml(mutex());
 
       ASSERT(get_handle1() != nullptr);
 
@@ -2843,7 +2843,7 @@ namespace draw2d_gdi
    bool graphics::internal_fill_and_stroke_path(void(::draw2d_gdi::graphics::* pfnInternalSetPath)(void *),void * pparam,const ::rectangle_i32 & rectParam,::draw2d::brush * pbrush,::draw2d::pen * ppen)
    {
 
-      synchronization_lock ml(mutex());
+      synchronous_lock ml(mutex());
 
       ASSERT(get_handle1() != nullptr);
 
@@ -3611,7 +3611,7 @@ namespace draw2d_gdi
    void graphics::fill_rectangle(const ::rectangle_i32 & rectangle, COLORREF cr)
    {
 
-      synchronization_lock ml(mutex());
+      synchronous_lock ml(mutex());
 
       if(m_pimage->is_null())
       {
@@ -3853,7 +3853,7 @@ namespace draw2d_gdi
       if(ppen == nullptr)
          return nullptr;
 
-      synchronization_lock ml(mutex());
+      synchronous_lock ml(mutex());
 
       SelectObject(ppen->get_os_data());
 
@@ -3877,7 +3877,7 @@ namespace draw2d_gdi
       if(pbrush == nullptr)
          return nullptr;
 
-      synchronization_lock ml(mutex());
+      synchronous_lock ml(mutex());
 
       SelectObject(pbrush->get_os_data());
 
@@ -3900,7 +3900,7 @@ namespace draw2d_gdi
       if(pfont == nullptr)
          return nullptr;
 
-      synchronization_lock ml(mutex());
+      synchronous_lock ml(mutex());
 
       SelectObject(pfont->get_os_data());
 
@@ -3925,7 +3925,7 @@ namespace draw2d_gdi
       if(pregion == nullptr)
          return nRetVal;
 
-      synchronization_lock ml(mutex());
+      synchronous_lock ml(mutex());
 
       SelectObject(pregion->get_os_data());
 

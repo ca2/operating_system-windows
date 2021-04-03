@@ -168,7 +168,7 @@ namespace windowing_win32
 
       }
 
-      critical_section_lock synchronizationlock(&m_criticalsection);
+      critical_section_lock synchronouslock(&m_criticalsection);
 
       auto & pwindow = m_windowmap[hwnd];
 

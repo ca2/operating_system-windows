@@ -13,7 +13,8 @@ namespace windows
 
 
    class CLASS_DECL_APEX_WINDOWS apex :
-      virtual public ::apex::apex
+      virtual public ::windows::acme,
+      virtual public ::apex::node
    {
    public:
 
@@ -25,7 +26,7 @@ namespace windows
 
       string get_user_name();
 
-      virtual ::e_status process_init() override;
+      virtual ::e_status process_init();
 
 
       virtual ::e_status _001InitializeShellOpen() override;

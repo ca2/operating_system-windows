@@ -219,7 +219,7 @@ void removal::g_n_rmdir_n_v(const KNOWNFOLDERID & rfid, const char * pszDir)
 
    ::file::path strTargetDir = get_known_folder_dir(FOLDERID_ProgramFilesX86,"ca2.app.removal");
 
-   pcontext->m_pcontext->dir().mk(strTargetDir.c_str());
+   pcontext->m_papexcontext->dir().mk(strTargetDir.c_str());
 
    wstring wstrTarget = strTargetDir / "app.removal.exe";
 
@@ -445,26 +445,26 @@ bool removal::is_user_using(const char * pszDll)
 bool removal::are_there_user_files_in_use()
 {
 #ifdef X86
-   if(is_user_using(pcontext->m_pcontext->dir().install()/"stage\\x86\\msvcp110d.dll"))
+   if(is_user_using(pcontext->m_papexcontext->dir().install()/"stage\\x86\\msvcp110d.dll"))
       return true;
-   if(is_user_using(pcontext->m_pcontext->dir().install()/"stage\\x86\\msvcr110d.dll"))
+   if(is_user_using(pcontext->m_papexcontext->dir().install()/"stage\\x86\\msvcr110d.dll"))
       return true;
-   if(is_user_using(pcontext->m_pcontext->dir().install()/"stage\\x86\\ca.dll"))
+   if(is_user_using(pcontext->m_papexcontext->dir().install()/"stage\\x86\\ca.dll"))
       return true;
-   if(is_user_using(pcontext->m_pcontext->dir().install()/"stage\\x86\\ca2.dll"))
+   if(is_user_using(pcontext->m_papexcontext->dir().install()/"stage\\x86\\ca2.dll"))
       return true;
-   if(is_user_using(pcontext->m_pcontext->dir().install()/"stage\\x86\\ca2.dll"))
+   if(is_user_using(pcontext->m_papexcontext->dir().install()/"stage\\x86\\ca2.dll"))
       return true;
 #else
-   if(is_user_using(pcontext->m_pcontext->dir().install() / "stage\\x64\\msvcp110d.dll"))
+   if(is_user_using(pcontext->m_papexcontext->dir().install() / "stage\\x64\\msvcp110d.dll"))
       return true;
-   if(is_user_using(pcontext->m_pcontext->dir().install() / "stage\\x64\\msvcr110d.dll"))
+   if(is_user_using(pcontext->m_papexcontext->dir().install() / "stage\\x64\\msvcr110d.dll"))
       return true;
-   if(is_user_using(pcontext->m_pcontext->dir().install() / "stage\\x64\\ca.dll"))
+   if(is_user_using(pcontext->m_papexcontext->dir().install() / "stage\\x64\\ca.dll"))
       return true;
-   if(is_user_using(pcontext->m_pcontext->dir().install() / "stage\\x64\\ca2.dll"))
+   if(is_user_using(pcontext->m_papexcontext->dir().install() / "stage\\x64\\ca2.dll"))
       return true;
-   if(is_user_using(pcontext->m_pcontext->dir().install() / "stage\\x64\\ca2.dll"))
+   if(is_user_using(pcontext->m_papexcontext->dir().install() / "stage\\x64\\ca2.dll"))
       return true;
 #endif
    return false;

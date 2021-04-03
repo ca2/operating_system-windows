@@ -78,7 +78,7 @@ namespace audio_mmsystem
    ::e_status out::out_open_ex(thread * pthreadCallback, u32 uiSamplesPerSec, u32 uiChannelCount, u32 uiBitsPerSample,::wave::e_purpose epurpose)
    {
 
-      synchronization_lock synchronizationlock(mutex());
+      synchronous_lock synchronouslock(mutex());
 
       if (m_hwaveout != nullptr && m_estate != e_state_initial)
       {
@@ -300,7 +300,7 @@ Opened:
    ::e_status     out::out_close()
    {
 
-      synchronization_lock synchronizationlock(mutex());
+      synchronous_lock synchronouslock(mutex());
 
       if(m_estate == e_state_playing)
       {
@@ -357,7 +357,7 @@ Opened:
    void out::out_filled(LPWAVEHDR lpwavehdr)
    {
 
-      synchronization_lock synchronizationlock(mutex());
+      synchronous_lock synchronouslock(mutex());
 
       if(out_get_state() != e_state_playing)
       {
@@ -385,7 +385,7 @@ Opened:
    ::e_status     out::out_stop()
    {
 
-      synchronization_lock synchronizationlock(mutex());
+      synchronous_lock synchronouslock(mutex());
 
       if (m_estate != e_state_playing && m_estate != e_state_paused)
       {
@@ -449,7 +449,7 @@ Opened:
    ::e_status     out::out_restart()
    {
 
-      synchronization_lock synchronizationlock(mutex());
+      synchronous_lock synchronouslock(mutex());
 
       ASSERT(m_estate == e_state_paused);
 
@@ -488,7 +488,7 @@ Opened:
    imedia_time out::device_out_get_time()
    {
 
-      synchronization_lock synchronizationlock(mutex());
+      synchronous_lock synchronouslock(mutex());
 
       ::e_status                    estatus;
 
@@ -564,7 +564,7 @@ Opened:
    //imedia_time out::device_out_get_time()
    //{
 
-   //   synchronization_lock synchronizationlock(mutex());
+   //   synchronous_lock synchronouslock(mutex());
 
    //   ::e_status                    estatus;
 

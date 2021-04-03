@@ -62,7 +62,7 @@ namespace draw2d_gdi
    bool image::create(const ::size_i32 & size, ::eobject eobjectCreate, int iGoodStride)
    {
 
-      synchronization_lock ml(&draw2d_gdi_mutex());
+      synchronous_lock ml(&draw2d_gdi_mutex());
 
       if(m_pbitmap.is_set()
             && m_pbitmap->get_os_data() != nullptr
@@ -198,7 +198,7 @@ namespace draw2d_gdi
    bool image::destroy ()
    {
 
-      synchronization_lock ml(&draw2d_gdi_mutex());
+      synchronous_lock ml(&draw2d_gdi_mutex());
 
       m_pbitmap->destroy();
 

@@ -12,7 +12,7 @@ namespace windows
 
 
    class CLASS_DECL_ACME_WINDOWS acme :
-      virtual public ::acme::acme
+      virtual public ::acme::node
    {
    public:
 

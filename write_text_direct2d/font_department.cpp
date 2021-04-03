@@ -39,8 +39,9 @@ namespace write_text_direct2d
    ::e_status font_department::finalize()
    {
 
-         ::font_department::finalize();
+      auto estatus = ::font_department::finalize();
 
+      return estatus;
       
    }
 

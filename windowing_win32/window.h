@@ -91,6 +91,17 @@ namespace windowing_win32
 
       virtual ::e_status set_mouse_capture() override;
 
+
+
+      virtual bool has_mouse_capture() const;
+      virtual bool has_keyboard_focus() const;
+
+
+      virtual bool is_active_window() const override;
+
+
+
+
       virtual ::e_status destroy_window() override;
 
       virtual ::e_status show_window(const ::e_display & edisplay, const ::e_activation & eactivation) override;
@@ -167,6 +178,9 @@ namespace windowing_win32
       virtual ::e_status set_icon(::windowing::icon * pwindow) override;
 
       virtual void on_visual_applied() override;
+
+
+
 
       //virtual void window_apply_visual(const ::user::window_state & windowstate) override;
 
@@ -414,8 +428,8 @@ namespace windowing_win32
       //virtual ::user::interaction * GetForegroundWindow();
 
 
-      virtual bool has_keyboard_focus() const override;
-      virtual bool is_active_window() const override;
+      //virtual bool has_keyboard_focus() const override;
+      
 
       //virtual ::user::interaction * GetFocus();
 

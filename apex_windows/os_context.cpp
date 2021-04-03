@@ -9,13 +9,15 @@
 #include "acme/id.h"
 #include "acme/node/windows/_node_windows_private.h"
 #include "acme/os/windows/_windows.h"
-#include "acme/platform/acme.h"
+#include "acme/platform/node.h"
 #include <ShellApi.h>
 #include "os_context.h"
-#include "apex/platform/apex.h"
+#include "apex/platform/node.h"
+#include "acme_windows/acme.h"
 #include "apex.h"
 #include "acme/filesystem/filesystem/acme_dir.h"
 #include "acme_windows/acme_dir.h"
+#include "acme/filesystem/filesystem/acme_path.h"
 
 
 ::e_status hresult_to_estatus(HRESULT hresult)
@@ -525,10 +527,10 @@ namespace windows
          key.open(key, "@ca2.cc/npca2", true);
 
          key.set("Description", "ca2 plugin for NPAPI");
-         key.set("Path", m_pcontext->m_pcontext->dir().ca2module() /"npca2.dll");
+         key.set("Path", m_pcontext->m_papexcontext->dir().ca2module() /"npca2.dll");
          key.set("ProductName", "ca2 plugin for NPAPI");
          key.set("Vendor", "ca2 Desenvolvimento de Software Ltda.");
-         key.set("Version", m_pcontext->m_pcontext->file().as_string(m_pcontext->m_pcontext->dir().install()/"appdata/x86/ca2_build.txt"));
+         key.set("Version", m_pcontext->m_papexcontext->file().as_string(m_pcontext->m_papexcontext->dir().install()/"appdata/x86/ca2_build.txt"));
 
          key.open(key, "application/apex", true);
 
@@ -1270,7 +1272,7 @@ retry:
 
       strExe += ".exe";
 
-      string strCalling = m_pcontext->m_pcontext->dir().module() / strExe + " : service";
+      string strCalling = m_pcontext->m_papexcontext->dir().module() / strExe + " : service";
 
       if(is_true("no_remote_simpledb"))
       {
@@ -1607,7 +1609,7 @@ retry:
       if (status.m_mtime.get_time() != 0)
       {
 
-         m_psystem->m_pacme->datetime_to_filetime((filetime_t *) &lastWriteTime, status.m_mtime);
+         m_psystem->m_pnode->datetime_to_filetime((filetime_t *) &lastWriteTime, status.m_mtime);
 
          pLastWriteTime = &lastWriteTime;
 
@@ -1995,7 +1997,7 @@ retry:
    }
 //#elif defined(LINUX)
 //   //string strDir;
-//   //strDir = m_pcontext->m_pcontext->dir().path(getenv("HOME"), "Pictures");
+//   //strDir = m_pcontext->m_papexcontext->dir().path(getenv("HOME"), "Pictures");
 //   //imagefileset.add_search(strDir);
 //   string strDir;
 //   strDir = "/usr/share/backgrounds";
@@ -2004,7 +2006,7 @@ retry:
 //
 //#elif defined(MACOS)
 //   //string strDir;
-//   //strDir = m_pcontext->m_pcontext->dir().path(getenv("HOME"), "Pictures");
+//   //strDir = m_pcontext->m_papexcontext->dir().path(getenv("HOME"), "Pictures");
 //   //imagefileset.add_search(strDir);
 //   string strDir;
 //   strDir = "/Library/Desktop Pictures";
@@ -2017,7 +2019,7 @@ retry:
    bool os_context::file_open(::file::path path, string strParams, string strFolder)
    {
 
-      path = m_pcontext->m_pcontext->defer_process_path(path);
+      path = m_pcontext->m_papexcontext->defer_process_path(path);
 
       fork([=]()
       {
@@ -2227,7 +2229,7 @@ repeat:
       ::apex::application * papp = get_application();
 
       string strTargetProgId;
-      string strModule = solve_relative(::file::app_module());
+      string strModule = solve_relative(m_psystem->m_pacmepath->app_module());
 
       strTargetProgId = get_application()->m_strAppName;
 
@@ -2490,7 +2492,7 @@ repeat:
 
       string strTargetProgId;
 
-      string strModule = solve_relative(::file::app_module());
+      string strModule = solve_relative(m_psystem->m_pacmepath->app_module());
 
       string strApplicationRegistryPath = find_string("ApplicationRegistryPath");
 

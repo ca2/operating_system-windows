@@ -1,6 +1,6 @@
 #include "framework.h"
 #include "acme/operating_system.h"
-#include "acme/platform/acme.h"
+#include "acme/platform/node.h"
 #include "acme/filesystem/filesystem/acme_dir.h"
 #include "acme.h"
 #include "acme_dir.h"
@@ -31,7 +31,7 @@ void acme_windows_factory_exchange(::factory_map * pfactorymap)
    //pfactorymap->create_factory < ::windows::crypto, ::crypto::crypto >();
    //pfactorymap->create_factory < ::windows::ip_enum, ::net::ip_enum >();
 
-   pfactorymap->create_factory < ::windows::acme, ::acme::acme >();
+   pfactorymap->create_factory < ::windows::acme, ::acme::node >();
    pfactorymap->create_factory < ::windows::acme_dir, ::acme_dir >();
    pfactorymap->create_factory < ::windows::acme_path, ::acme_path >();
 

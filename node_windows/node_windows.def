@@ -1,5 +1,0 @@
-LIBRARY "node_windows"
-
-EXPORTS
-node_windows_factory_exchange
-

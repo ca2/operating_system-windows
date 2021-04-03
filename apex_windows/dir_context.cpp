@@ -65,7 +65,7 @@ namespace windows
 
       //auto pdocument = create_xml_document();
 
-      //if (pdocument->load(m_pcontext->m_pcontext->file().as_string(::dir::appdata() / "configuration/directory.xml")))
+      //if (pdocument->load(m_pcontext->m_papexcontext->file().as_string(::dir::appdata() / "configuration/directory.xml")))
       //{
 
       //   //xxdebug_box("win_dir::initialize (configuration)", "win_dir::initialize", 0);
@@ -75,7 +75,7 @@ namespace windows
 
       //      ::file::path pathFolderTime = pdocument->root()->get_child_value("time");
 
-      //      if (m_pcontext->m_pcontext->dir().is(pathFolderTime))
+      //      if (m_pcontext->m_papexcontext->dir().is(pathFolderTime))
       //      {
 
       //         m_pdirsystem->m_strTimeFolder = pathFolderTime;
@@ -84,7 +84,7 @@ namespace windows
 
       //      ::file::path pathFolderNetseed = pdocument->root()->get_child_value("netseed");
 
-      //      if (m_pcontext->m_pcontext->dir().is(pathFolderNetseed))
+      //      if (m_pcontext->m_papexcontext->dir().is(pathFolderNetseed))
       //      {
 
       //         m_pdirsystem->m_strNetSeedFolder = pathFolderNetseed;
@@ -428,7 +428,7 @@ namespace windows
 
                }
 
-               m_pcontext->m_pcontext->dir().ls(listing);
+               m_pcontext->m_papexcontext->dir().ls(listing);
 
             }
 
@@ -500,7 +500,7 @@ namespace windows
          if (listing.m_pathFinal.is_empty())
          {
 
-            listing.m_pathFinal = m_pcontext->m_pcontext->defer_process_path(listing.m_pathUser);
+            listing.m_pathFinal = m_pcontext->m_papexcontext->defer_process_path(listing.m_pathUser);
 
          }
 
@@ -616,7 +616,7 @@ namespace windows
 
                }
 
-               m_pcontext->m_pcontext->dir().ls(listing);
+               m_pcontext->m_papexcontext->dir().ls(listing);
 
             }
 
@@ -954,7 +954,7 @@ namespace windows
                try
                {
 
-                  m_pcontext->m_pcontext->file().del(str);
+                  m_pcontext->m_papexcontext->file().del(str);
 
                }
                catch (...)
@@ -969,7 +969,7 @@ namespace windows
                try
                {
 
-                  m_pcontext->m_pcontext->file().del(str);
+                  m_pcontext->m_papexcontext->file().del(str);
 
                }
                catch (...)

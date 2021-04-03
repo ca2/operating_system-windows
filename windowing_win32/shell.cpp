@@ -157,7 +157,7 @@ namespace windowing_win32
       //if (strFileParam.compare_ci(m_psystem->m_pacmedir->bookmark()) == 0)
       //{
 
-      //   strIconLocation = m_pcontext->m_pcontext->dir().matter("aura.ico");
+      //   strIconLocation = m_pcontext->m_papexcontext->dir().matter("aura.ico");
 
       //   output_debug_string("aura.ico");
 
@@ -349,13 +349,13 @@ namespace windowing_win32
 
       if (((FAILED(hrIconLocation) && FAILED(hrGetLocation))
          || imagekey.m_iIcon == 0x80000000
-         || !m_pcontext->m_pcontext->file().exists(strIconLocation))
+         || !m_pcontext->m_papexcontext->file().exists(strIconLocation))
          && ::str::ends_ci(strFileParam, ".lnk"))
       {
 
-         m_pcontext->m_pcontext->file().resolve_link(pathTarget, strFileParam);
+         m_pcontext->m_papexcontext->file().resolve_link(pathTarget, strFileParam);
 
-         if (!m_pcontext->m_pcontext->file().exists(pathTarget) && !m_pcontext->m_pcontext->dir().is(pathTarget))
+         if (!m_pcontext->m_papexcontext->file().exists(pathTarget) && !m_pcontext->m_papexcontext->dir().is(pathTarget))
          {
 
             if (pathTarget.ends_ci(".exe"))
@@ -424,7 +424,7 @@ namespace windowing_win32
 
             strIcon = m_psystem->m_pacmedir->config() / "shell/app_theme" / imagekey.m_strShellThemePrefix + strExtension + ".ico";
 
-            if (m_pcontext->m_pcontext->file().exists(strIcon))
+            if (m_pcontext->m_papexcontext->file().exists(strIcon))
             {
 
                if (reserve_image(imagekeyTheme, iImage))
@@ -459,11 +459,11 @@ namespace windowing_win32
 
             HRESULT hrExtract = E_FAIL;
 
-            synchronization_lock synchronizationlock(mutex());
+            synchronous_lock synchronouslock(mutex());
 
             auto iaSize = m_iaSize;
 
-            synchronizationlock.unlock();
+            synchronouslock.unlock();
 
             for (auto iSize : iaSize)
             {
@@ -860,7 +860,7 @@ namespace windowing_win32
          if (reserve_image(imagekey, iImage))
          {
 
-            ::file::path path = m_pcontext->m_pcontext->dir().matter("cloud.ico");
+            ::file::path path = m_pcontext->m_papexcontext->dir().matter("cloud.ico");
 
             add_icon_path(path, crBk, iImage);
 
@@ -875,7 +875,7 @@ namespace windowing_win32
          if (reserve_image(imagekey, iImage))
          {
 
-            ::file::path path = m_pcontext->m_pcontext->dir().matter("remote.ico");
+            ::file::path path = m_pcontext->m_papexcontext->dir().matter("remote.ico");
 
             add_icon_path(path, crBk, iImage);
 
@@ -890,7 +890,7 @@ namespace windowing_win32
          if (reserve_image(imagekey, iImage))
          {
 
-            ::file::path path = m_pcontext->m_pcontext->dir().matter("ftp.ico");
+            ::file::path path = m_pcontext->m_papexcontext->dir().matter("ftp.ico");
 
             add_icon_path(path, crBk, iImage);
 
@@ -903,7 +903,7 @@ namespace windowing_win32
       if (::str::ends_ci(imagekey.m_strPath, ".aura"))
       {
 
-         string str = m_pcontext->m_pcontext->file().as_string(imagekey.m_strPath);
+         string str = m_pcontext->m_papexcontext->file().as_string(imagekey.m_strPath);
 
          if (::str::begins_eat_ci(str, "ca2prompt\r\n"))
          {
@@ -1100,11 +1100,11 @@ namespace windowing_win32
    int shell::add_icon_set(SHFILEINFOW * pinfo16, SHFILEINFOW * pinfo48, color32_t crBk, bool & bUsed16, bool & bUsed48, int iImage)
    {
 
-      synchronization_lock synchronizationlock(mutex());
+      synchronous_lock synchronouslock(mutex());
 
       auto iaSize = m_iaSize;
 
-      synchronizationlock.unlock();
+      synchronouslock.unlock();
 
       for (auto iSize : iaSize)
       {
@@ -1121,13 +1121,13 @@ namespace windowing_win32
    int shell::add_icon_path(::file::path path, color32_t crBk, int iImage)
    {
 
-      synchronization_lock synchronizationlock(mutex());
+      synchronous_lock synchronouslock(mutex());
 
       auto iaSize = m_iaSize;
 
-      synchronizationlock.unlock();
+      synchronouslock.unlock();
 
-      path = m_pcontext->m_pcontext->defer_process_path(path);
+      path = m_pcontext->m_papexcontext->defer_process_path(path);
 
       for (auto iSize : m_iaSize)
       {
@@ -1157,9 +1157,9 @@ namespace windowing_win32
    int shell::add_icon(int iSize, HICON hicon, color32_t crBk, int iImage)
    {
 
-      synchronization_lock synchronizationlock(m_pil[iSize]->mutex());
+      synchronous_lock synchronouslock(m_pil[iSize]->mutex());
 
-      synchronization_lock slHover(m_pilHover[iSize]->mutex());
+      synchronous_lock slHover(m_pilHover[iSize]->mutex());
 
       auto picon = __new(::windowing_win32::icon);
 
@@ -1326,11 +1326,11 @@ namespace windowing_win32
       if (reserve_image(imagekeyIco, iImage))
       {
 
-         synchronization_lock synchronizationlock(mutex());
+         synchronous_lock synchronouslock(mutex());
 
          auto iaSize = m_iaSize;
 
-         synchronizationlock.unlock();
+         synchronouslock.unlock();
 
          for (auto iSize : iaSize)
          {

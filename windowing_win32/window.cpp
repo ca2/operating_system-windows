@@ -1497,7 +1497,7 @@ namespace windowing_win32
    ::e_status window::exit_zoomed()
    {
 
-      //synchronization_lock synchronizationlock(x11_mutex());
+      //synchronous_lock synchronouslock(x11_mutex());
 
       //xdisplay d(display());
 
@@ -1598,6 +1598,160 @@ namespace windowing_win32
       }
 
       return ::success;
+
+   }
+
+
+   bool window::has_mouse_capture() const
+   {
+
+      itask_t itask = 0;
+
+      auto puserinteraction = m_pimpl->m_puserinteraction;
+
+      if (puserinteraction && puserinteraction->m_pthreadUserInteraction)
+      {
+
+         itask = puserinteraction->m_pthreadUserInteraction->get_ithread();
+
+      }
+
+      GUITHREADINFO info = {};
+
+      info.cbSize = sizeof(GUITHREADINFO);
+
+      HWND hwndCapture;
+
+      if (GetGUIThreadInfo((DWORD)itask, &info))
+      {
+
+         hwndCapture = info.hwndCapture;
+
+      }
+      else
+      {
+
+         hwndCapture = ::GetCapture();
+
+      }
+
+      if (hwndCapture == get_hwnd())
+      {
+
+         return true;
+
+      }
+
+      return false;
+
+   }
+
+
+   bool window::has_keyboard_focus() const
+   {
+
+      itask_t itask = 0;
+
+      auto puserinteraction = m_pimpl->m_puserinteraction;
+
+      if (puserinteraction && puserinteraction->m_pthreadUserInteraction)
+      {
+
+         itask = puserinteraction->m_pthreadUserInteraction->get_ithread();
+
+      }
+
+      GUITHREADINFO info = {};
+
+      info.cbSize = sizeof(GUITHREADINFO);
+
+      HWND hwndFocus;
+
+      if (GetGUIThreadInfo((DWORD)itask, &info))
+      {
+
+         hwndFocus = info.hwndFocus;
+
+      }
+      else
+      {
+
+         hwndFocus = ::GetFocus();
+
+      }
+
+      if (hwndFocus == get_hwnd())
+      {
+
+         return true;
+
+      }
+
+      return false;
+
+   }
+
+
+   bool window::is_active_window() const
+   {
+
+      itask_t itask = 0;
+
+      auto puserinteraction = m_pimpl->m_puserinteraction;
+
+      if (puserinteraction && puserinteraction->m_pthreadUserInteraction)
+      {
+
+         itask = puserinteraction->m_pthreadUserInteraction->get_ithread();
+
+      }
+
+      GUITHREADINFO info = {};
+
+      info.cbSize = sizeof(GUITHREADINFO);
+
+      HWND hwndActive;
+
+      if (GetGUIThreadInfo((DWORD)itask, &info))
+      {
+
+         hwndActive = info.hwndActive;
+
+      }
+      else
+      {
+
+         hwndActive = ::GetActiveWindow();
+
+      }
+
+      if (hwndActive == get_hwnd())
+      {
+
+         return true;
+
+      }
+
+      //auto puserinteraction = psystem->ui_from_handle(oswindowActive);
+
+      //if (::is_set(puserinteraction))
+      //{
+
+      //   if (puserinteraction->m_pthreadUserInteraction == puserinteraction->m_pthreadUserInteraction)
+      //   {
+
+      //      if (puserinteraction->m_ewindowflag & e_window_flag_satellite_window)
+      //      {
+
+      //         return true;
+
+      //      }
+
+      //   }
+
+      //}
+
+      return false;
 
    }
 
@@ -1816,7 +1970,7 @@ namespace windowing_win32
    bool window::on_set_window_position(const class ::zorder& zorder, i32 x, i32 y, i32 cx, i32 cy, ::u32 nFlags)
    {
 
-      if (!(_get_ex_style() & WS_EX_LAYERED))
+      //if (!(_get_ex_style() & WS_EX_LAYERED))
       {
 
          ::windowing::window::on_set_window_position(zorder, x, y, cx, cy, nFlags);
@@ -1851,7 +2005,7 @@ namespace windowing_win32
 //   bool window::_set_window_pos(class ::zorder zorder, i32 x, i32 y, i32 cx, i32 cy, ::u32 nFlags)
 //   {
 //
-//      synchronization_lock synchronizationlock(x11_mutex());
+//      synchronous_lock synchronouslock(x11_mutex());
 //
 //      windowing_output_debug_string("\n::window::set_window_position 1");
 //
@@ -2099,7 +2253,7 @@ namespace windowing_win32
    //bool window::reset(::windowing::cursor * pcursor, ::aura::session * psession)
    //{
 
-   //   synchronization_lock synchronizationlock(psession->mutex());
+   //   synchronous_lock synchronouslock(psession->mutex());
 
    //   if (::is_null(puserinteraction))
    //   {
@@ -2221,7 +2375,7 @@ namespace windowing_win32
 
       auto puserinteraction = m_pimpl->m_puserinteraction;
 
-      synchronization_lock synchronizationlock(puserinteraction->mutex());
+      synchronous_lock synchronouslock(puserinteraction->mutex());
 
       ASSERT(::IsWindow(get_hwnd()));
 
@@ -2337,7 +2491,7 @@ namespace windowing_win32
 
       //ASSERT(pbuffer.is_set());
 
-      //single_lock synchronizationlock(pbuffer->mutex());
+      //single_lock synchronouslock(pbuffer->mutex());
 
       //auto & buffer = pbuffer->m_osbuffera[!pbuffer->m_iCurrentBuffer];
 
@@ -3254,113 +3408,6 @@ namespace windowing_win32
    //}
 
 
-   bool window::has_keyboard_focus() const
-   {
-
-      itask_t itask = 0;
-
-      auto puserinteraction = m_pimpl->m_puserinteraction;
-
-      if (puserinteraction && puserinteraction->m_pthreadUserInteraction)
-      {
-
-         itask = puserinteraction->m_pthreadUserInteraction->get_ithread();
-
-      }
-
-      GUITHREADINFO info = {};
-
-      info.cbSize = sizeof(GUITHREADINFO);
-
-      HWND hwndFocus;
-
-      if (GetGUIThreadInfo((DWORD) itask, &info))
-      {
-
-         hwndFocus = info.hwndFocus;
-
-      }
-      else
-      {
-
-         hwndFocus = ::GetFocus();
-
-      }
-
-      if (hwndFocus == get_hwnd())
-      {
-
-         return true;
-
-      }
-
-      return false;
-
-   }
-
-
-   bool window::is_active_window() const
-   {
-
-      itask_t itask = 0;
-
-      auto puserinteraction = m_pimpl->m_puserinteraction;
-
-      if (puserinteraction && puserinteraction->m_pthreadUserInteraction)
-      {
-
-         itask = puserinteraction->m_pthreadUserInteraction->get_ithread();
-
-      }
-
-      GUITHREADINFO info = {};
-
-      info.cbSize = sizeof(GUITHREADINFO);
-
-      HWND hwndActive;
-
-      if (GetGUIThreadInfo((DWORD)itask, &info))
-      {
-
-         hwndActive = info.hwndActive;
-
-      }
-      else
-      {
-
-         hwndActive = ::GetActiveWindow();
-
-      }
-
-      if (hwndActive == get_hwnd())
-      {
-
-         return true;
-
-      }
-
-      //auto puserinteraction = psystem->ui_from_handle(oswindowActive);
-
-      //if (::is_set(puserinteraction))
-      //{
-
-      //   if (puserinteraction->m_pthreadUserInteraction == puserinteraction->m_pthreadUserInteraction)
-      //   {
-
-      //      if (puserinteraction->m_ewindowflag & e_window_flag_satellite_window)
-      //      {
-
-      //         return true;
-
-      //      }
-
-      //   }
-
-      //}
-
-      return false;
-
-   }
 
 
    //bool window::SetFocus()
@@ -4848,7 +4895,7 @@ namespace windowing_win32
    void window::show_task(bool bShow)
    {
 
-      synchronization_lock synchronizationlock(mutex());
+      synchronous_lock synchronouslock(mutex());
 
       // https://www.daniweb.com/programming/software-development/threads/457564/mfc-application-disablehide-taskbar-icon
 

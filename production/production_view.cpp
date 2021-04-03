@@ -16,7 +16,7 @@ namespace production
 
       m_pproduction = nullptr;
 
-      //pcontext->m_pcontext->file().ftd("C:\\home2\\ca2os\\ca2_spa\\stage", "C:\\teste.fileset");
+      //pcontext->m_papexcontext->file().ftd("C:\\home2\\ca2os\\ca2_spa\\stage", "C:\\teste.fileset");
 
 
       m_iLineHeight = 1;
@@ -167,7 +167,7 @@ namespace production
 
 
 
-      single_lock synchronizationlock(&m_pproduction->m_mutexStatus,true);
+      single_lock synchronouslock(&m_pproduction->m_mutexStatus,true);
 
       ::rectangle_i32 rectClient = get_client_rect();
       //GetClientRect(rectClient);
@@ -200,7 +200,7 @@ namespace production
       rgnClip->create_rect(rectClip);
       //pgraphics->Draw3dRect(rectText, rgb(200, 200, 200), rgb(200, 200, 200));
       pgraphics->SelectClipRgn(rgnClip);
-      //single_lock synchronizationlock(&m_pproduction->m_mutexStatus, true);
+      //single_lock synchronouslock(&m_pproduction->m_mutexStatus, true);
       //pgraphics->set_color(argb(0xcc, 90, 90, 90));
       ::draw2d::brush_pointer brush(e_create);
       brush->create_solid(argb(0xcc, 90, 90, 90));
@@ -523,13 +523,13 @@ namespace production
       {
          i32 iLineHeight = m_iLineHeight;
          {
-            single_lock synchronizationlock(&m_pproduction->m_mutexStatus,true);
+            single_lock synchronouslock(&m_pproduction->m_mutexStatus,true);
             if(m_pproduction->m_straStatus.get_size() > 0)
             {
                ::size_i32 sizePage = get_page_size();
                m_sizeTotal.cx = 80;
                m_sizeTotal.cy = (LONG)(m_pproduction.m_straStatus.get_size() * iLineHeight + 84);
-               synchronizationlock.unlock();
+               synchronouslock.unlock();
                set_viewport_offset_y(maximum(0,m_sizeTotal.cy - sizePage.cy + iLineHeight));
                on_change_view_size();
             }

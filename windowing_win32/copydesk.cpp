@@ -28,7 +28,7 @@ namespace windowing_win32
    void copydesk::OnClipboardUpdate()
    {
 
-      synchronization_lock synchronizationlock(mutex());
+      synchronous_lock synchronouslock(mutex());
 
       m_cFileCount = -1;
       m_iPriorityTextFormat = -2;
@@ -86,7 +86,7 @@ namespace windowing_win32
 
       }
 
-      synchronization_lock synchronizationlock(mutex());
+      synchronous_lock synchronouslock(mutex());
 
       //WNDCLASS wndcls = {};
 
@@ -346,7 +346,7 @@ namespace windowing_win32
          else
          {
 
-            synchronization_lock synchronizationlock(mutex());
+            synchronous_lock synchronouslock(mutex());
 
             if (!::OpenClipboard(__hwnd(get_oswindow())))
             //if(!OpenClipboard())
@@ -396,7 +396,7 @@ namespace windowing_win32
 
       }
 
-      synchronization_lock synchronizationlock(mutex());
+      synchronous_lock synchronouslock(mutex());
 
       if (!::OpenClipboard(__hwnd(get_oswindow())))
       {
@@ -434,7 +434,7 @@ namespace windowing_win32
 
       //ASSERT(::IsWindow(m_hwnd));
 
-      synchronization_lock synchronizationlock(mutex());
+      synchronous_lock synchronouslock(mutex());
 
       if (!::OpenClipboard(__hwnd(get_oswindow())))
       {
@@ -480,7 +480,7 @@ namespace windowing_win32
 
       //ASSERT(::IsWindow(m_hwnd));
 
-      synchronization_lock synchronizationlock(mutex());
+      synchronous_lock synchronouslock(mutex());
 
       if (!::OpenClipboard(__hwnd(get_oswindow())))
       {
@@ -523,7 +523,7 @@ namespace windowing_win32
 
       }
 
-      synchronization_lock synchronizationlock(mutex());
+      synchronous_lock synchronouslock(mutex());
 
       if (!::OpenClipboard(__hwnd(get_oswindow())))
       {
@@ -589,7 +589,7 @@ namespace windowing_win32
 
       }
 
-      synchronization_lock synchronizationlock(mutex());
+      synchronous_lock synchronouslock(mutex());
 
       if (!::OpenClipboard(__hwnd(get_oswindow())))
       {
@@ -685,7 +685,7 @@ namespace windowing_win32
 
       //ASSERT(::IsWindow(m_hwnd));
 
-      synchronization_lock synchronizationlock(mutex());
+      synchronous_lock synchronouslock(mutex());
 
       if (!::OpenClipboard(__hwnd(get_oswindow())))
       {

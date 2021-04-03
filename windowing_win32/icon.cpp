@@ -62,7 +62,7 @@ namespace windowing_win32
    ::e_status icon::load_file(string strPath)
    {
 
-      strPath = m_pcontext->m_pcontext->defer_process_matter_path(strPath);
+      strPath = m_pcontext->m_papexcontext->defer_process_matter_path(strPath);
 
       int_array ia;
 

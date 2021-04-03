@@ -55,7 +55,7 @@ namespace windows
 
       m_pathHome = get_known_folder(FOLDERID_Profile);
 
-      m_pathCa2Config = ::dir::ca2roaming();
+      m_pathCa2Config = pacmedir->roaming();
 
       m_strCommonAppData /= "ca2";
 

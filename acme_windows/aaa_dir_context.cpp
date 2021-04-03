@@ -61,7 +61,7 @@ namespace windows
 
       //auto pdocument = create_xml_document();
 
-      //if (pdocument->load(get_context()->file().as_string(::dir::appdata() / "configuration/directory.xml")))
+      //if (pdocument->load(pcontext->m_papexcontext->file().as_string(::dir::appdata() / "configuration/directory.xml")))
       //{
 
       //   //xxdebug_box("win_dir::initialize (configuration)", "win_dir::initialize", 0);
@@ -71,7 +71,7 @@ namespace windows
 
       //      ::file::path pathFolderTime = pdocument->root()->get_child_value("time");
 
-      //      if (get_context()->dir().is(pathFolderTime))
+      //      if (pcontext->m_papexcontext->dir().is(pathFolderTime))
       //      {
 
       //         m_pdirsystem->m_strTimeFolder = pathFolderTime;
@@ -80,7 +80,7 @@ namespace windows
 
       //      ::file::path pathFolderNetseed = pdocument->root()->get_child_value("netseed");
 
-      //      if (get_context()->dir().is(pathFolderNetseed))
+      //      if (pcontext->m_papexcontext->dir().is(pathFolderNetseed))
       //      {
 
       //         m_pdirsystem->m_strNetSeedFolder = pathFolderNetseed;
@@ -424,7 +424,7 @@ namespace windows
 
                }
 
-               get_context()->dir().ls(listing);
+               pcontext->m_papexcontext->dir().ls(listing);
 
             }
 
@@ -612,7 +612,7 @@ namespace windows
 
                }
 
-               get_context()->dir().ls(listing);
+               pcontext->m_papexcontext->dir().ls(listing);
 
             }
 
@@ -950,7 +950,7 @@ namespace windows
                try
                {
 
-                  get_context()->file().del(str);
+                  pcontext->m_papexcontext->file().del(str);
 
                }
                catch (...)
@@ -965,7 +965,7 @@ namespace windows
                try
                {
 
-                  get_context()->file().del(str);
+                  pcontext->m_papexcontext->file().del(str);
 
                }
                catch (...)

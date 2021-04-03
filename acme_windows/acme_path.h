@@ -16,6 +16,9 @@ namespace windows
       virtual ~acme_path();
 
 
+      virtual ::file::path app_module() override;
+
+
    };
 
 

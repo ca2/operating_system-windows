@@ -37,7 +37,7 @@ namespace music
          ::e_status in::open(int iDeviceId)
          {
 
-            synchronization_lock synchronizationlock(&get_midi_mutex());
+            synchronous_lock synchronouslock(&get_midi_mutex());
 
             MMRESULT estatus;
 

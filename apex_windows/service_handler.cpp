@@ -349,7 +349,7 @@ namespace windows
    ::e_status service_handler::defer_service()
    {
 
-      return ::error_failed;
+      return ::service_handler::defer_service();
 
    }
 

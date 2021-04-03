@@ -2,6 +2,8 @@
 #include "framework.h"
 #include "acme/filesystem/filesystem/acme_dir.h"
 #include "acme_dir.h"
+#include "acme/filesystem/filesystem/acme_path.h"
+#include "acme_path.h"
 
 
 namespace windows
@@ -187,7 +189,7 @@ namespace windows
    ::file::path acme_dir::app_relative()
    {
 
-      ::file::path path = ::file::app_module();
+      ::file::path path = m_psystem->m_pacmepath->app_module();
 
       path = relative(path);
 
@@ -245,11 +247,11 @@ namespace windows
 
    #elif defined(ANDROID)
 
-      return ::dir::roaming();
+      return pacmedir->roaming();
 
    #else
 
-      return ::file::app_module().folder(4);
+      return m_psystem->m_pacmepath->app_module().folder(4);
 
    #endif
 
@@ -276,11 +278,11 @@ namespace windows
 
    #elif defined(ANDROID)
 
-      return ::dir::roaming();
+      return pacmedir->roaming();
 
    #else
 
-      return ::file::app_module().folder(4);
+      return m_psystem->m_pacmepath->app_module().folder(4);
 
    #endif
 
@@ -308,15 +310,15 @@ namespace windows
 
    #ifdef ANDROID
 
-      return ::dir::roaming();
+      return pacmedir->roaming();
 
    #elif defined(__APPLE__)
 
-      return ::file::app_module().folder(3);
+      return m_psystem->m_pacmepath->app_module().folder(3);
 
    #else
 
-      return ::file::app_module().folder(4);
+      return m_psystem->m_pacmepath->app_module().folder(4);
 
    #endif
 
@@ -447,7 +449,7 @@ namespace windows
    ::file::path acme_dir::bookmark()
    {
 
-      return ::dir::localconfig() / "bookmark";
+      return pacmedir->localconfig() / "bookmark";
 
    }
 
@@ -616,7 +618,7 @@ namespace windows
 
          strCandidate = stra[i] / pszTopic;
 
-         //if (m_pcontext->m_pcontext->file().exists(strCandidate))
+         //if (m_pcontext->m_papexcontext->file().exists(strCandidate))
          if (file_exists(strCandidate))
          {
 
@@ -689,6 +691,9 @@ namespace windows
       return pwszPath;
 
    }
+
+
+
 
 
 } // namespace windows

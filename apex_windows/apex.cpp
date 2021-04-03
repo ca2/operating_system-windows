@@ -1,7 +1,9 @@
 #include "framework.h"
-#include "apex/platform/apex.h"
+#include "apex/platform/node.h"
 #include "acme/node/windows/registry.h"
 #include "acme/filesystem/filesystem/acme_dir.h"
+#include "acme/filesystem/filesystem/acme_path.h"
+#include "acme_windows/acme.h"
 #include "apex.h"
 
 
@@ -12,6 +14,7 @@ namespace windows
    apex::apex()
    {
 
+      m_papexnode = this;
 
    }
 
@@ -394,7 +397,7 @@ namespace windows
    ::e_status apex::start()
    {
 
-      auto estatus = m_psystem->m_papexsystem->m_papex->thread_initialize(m_psystem->m_papexsystem);
+      auto estatus = m_psystem->m_papexsystem->m_papexnode->thread_initialize(m_psystem->m_papexsystem);
 
       if (!estatus)
       {
@@ -574,7 +577,7 @@ namespace windows
    bool apex::set_last_run_application_path(string strAppId)
    {
 
-      ::file::path path = ::file::app_module();
+      ::file::path path = m_psystem->m_pacmepath->app_module();
 
       ::file::path pathFile = m_psystem->m_papexsystem->m_pdirsystem->get_last_run_application_path_file(strAppId);
 
