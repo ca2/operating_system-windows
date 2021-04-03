@@ -8,20 +8,21 @@
 #pragma once
 
 
-namespace node_windows
+namespace windows
 {
 
 
 
-   class CLASS_DECL_NODE_WINDOWS node :
+   class CLASS_DECL_AURA_WINDOWS aura :
+      virtual public ::windows::apex,
       virtual public ::aura::node
    {
    public:
 
 
-      node();
+      aura();
 
-      virtual ~node();
+      virtual ~aura();
 
 
       string get_user_name();

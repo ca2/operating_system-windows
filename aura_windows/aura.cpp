@@ -1,26 +1,30 @@
 #include "framework.h"
 #include "acme/node/windows/registry.h"
+#include "acme_windows/acme.h"
+#include "apex_windows/apex.h"
+#include "aura.h"
 
 
-namespace node_windows
+namespace windows
 {
 
 
-   node::node()
+   aura::aura()
+   {
+
+      m_pauranode = this;
+
+   }
+
+
+   aura::~aura()
    {
 
 
    }
 
 
-   node::~node()
-   {
-
-
-   }
-
-
-   string node::get_user_name()
+   string aura::get_user_name()
    {
 
       WCHAR wsz[1024];
@@ -35,7 +39,7 @@ namespace node_windows
 #include "aura/os/windows/_c.h"
 
 
-   bool node::_os_calc_app_dark_mode()
+   bool aura::_os_calc_app_dark_mode()
    {
 
       try
@@ -76,7 +80,7 @@ namespace node_windows
    }
 
 
-   bool node::_os_calc_system_dark_mode()
+   bool aura::_os_calc_system_dark_mode()
    {
 
       try
@@ -117,7 +121,7 @@ namespace node_windows
    }
 
 
-   ::color::color node::get_default_color(::u64 u)
+   ::color::color aura::get_default_color(::u64 u)
    {
 
       switch (u)
@@ -143,7 +147,7 @@ namespace node_windows
    }
 
    
-   void node::set_console_colors(::u32 dwScreenColors, ::u32 dwPopupColors, ::u32 dwWindowAlpha)
+   void aura::set_console_colors(::u32 dwScreenColors, ::u32 dwPopupColors, ::u32 dwWindowAlpha)
    {
 
       ::windows::registry::key key(HKEY_CURRENT_USER, "Console", true);
@@ -156,7 +160,7 @@ namespace node_windows
 
 
 
-   ::e_status node::set_system_dark_mode1(bool bSet)
+   ::e_status aura::set_system_dark_mode1(bool bSet)
    {
 
       ::windows::registry::key key(HKEY_CURRENT_USER, "Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize", true);
@@ -177,7 +181,7 @@ namespace node_windows
    }
 
 
-   ::e_status node::set_app_dark_mode1(bool bSet)
+   ::e_status aura::set_app_dark_mode1(bool bSet)
    {
 
       ::windows::registry::key key(HKEY_CURRENT_USER, "Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize", true);
@@ -199,7 +203,7 @@ namespace node_windows
    }
 
    
-   double node::get_time_zone()
+   double aura::get_time_zone()
    {
 
       double dTimeZone = 0.;
@@ -257,7 +261,7 @@ namespace node_windows
    }
 
 
-   ::e_status node::open_folder(::file::path & pathFolder)
+   ::e_status aura::open_folder(::file::path & pathFolder)
    {
 
       wstring wstrFolder(pathFolder);
@@ -314,7 +318,7 @@ namespace node_windows
 
    }
 
-   ::e_status node::register_dll(const ::file::path & pathDll)
+   ::e_status aura::register_dll(const ::file::path & pathDll)
    {
 
 
@@ -387,21 +391,21 @@ namespace node_windows
    }
 
 
-   ::e_status node::start()
+   ::e_status aura::start()
    {
 
       __pointer(::aura::system) psystem = m_psystem;
 
-      auto estatus = psystem->__thread_init();
+      //auto estatus = psystem->inline_init();
 
-      if (!estatus)
-      {
+      //if (!estatus)
+      //{
 
-         return estatus;
+      //   return estatus;
 
-      }
+      //}
 
-      estatus = m_psystem->on_start();
+      auto estatus = m_psystem->on_start();
 
       if (!estatus)
       {

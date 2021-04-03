@@ -26,7 +26,7 @@
     <ClInclude Include="_.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="node.h">
+    <ClInclude Include="aura.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="process_data.h">
@@ -49,7 +49,7 @@
     <ClCompile Include="_.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="node.cpp">
+    <ClCompile Include="aura.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="explorer\install_desk_toolbar.cpp">
@@ -65,7 +65,7 @@
     </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="node_windows.def">
+    <None Include="aura_windows.def">
       <Filter>Source Files</Filter>
     </None>
   </ItemGroup>

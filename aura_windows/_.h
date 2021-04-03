@@ -3,12 +3,14 @@
 
 #include "aura/_.h"
 #include "aura/operating_system.h"
+#include "apex/operating_system.h"
+#include "apex_windows/_.h"
 
 
-#if defined(_NODE_WINDOWS_LIBRARY)
-#define CLASS_DECL_NODE_WINDOWS  CLASS_DECL_EXPORT
+#if defined(_AURA_WINDOWS_LIBRARY)
+#define CLASS_DECL_AURA_WINDOWS  CLASS_DECL_EXPORT
 #else
-#define CLASS_DECL_NODE_WINDOWS  CLASS_DECL_IMPORT
+#define CLASS_DECL_AURA_WINDOWS  CLASS_DECL_IMPORT
 #endif
 
 
@@ -62,7 +64,7 @@
 
 
 
-#include "node.h"
+//#include "node.h"
 
 
 
