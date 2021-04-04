@@ -5,7 +5,11 @@
 #include "acme/filesystem/filesystem/acme_path.h"
 #include "acme_windows/acme.h"
 #include "apex.h"
+#include "aura/os/windows/_c.h"
 
+
+bool __node_apex_pre_init();
+bool __node_apex_pos_init();
 
 namespace windows
 {
@@ -38,7 +42,38 @@ namespace windows
       return string(wsz);
 
    }
-#include "aura/os/windows/_c.h"
+
+   
+   ::e_status apex::initialize(::object* pobject)
+   {
+
+      auto estatus = ::windows::acme::node::initialize(pobject);
+
+      if (!estatus)
+      {
+
+         return estatus;
+
+      }
+
+      if (!__node_apex_pre_init())
+      {
+
+         return error_failed;
+
+      }
+
+
+      if (!__node_apex_pos_init())
+      {
+
+         return error_failed;
+
+      }
+
+      return estatus;
+
+   }
 
 
    bool apex::_os_calc_app_dark_mode()
@@ -851,3 +886,88 @@ int _os_message_box(const char * pszMessage, const char * pszTitle, const ::e_me
 
 }
 
+
+
+
+bool __node_apex_pre_init()
+{
+
+
+   defer_initialize_winsock();
+
+   //xxdebug_box("__node_apex_pre_init","box",e_message_box_ok);
+
+   //g_pgdiplusStartupInput = new Gdiplus::GdiplusStartupInput();
+
+   //g_pgdiplusStartupOutput = new Gdiplus::GdiplusStartupOutput();
+
+   //g_gdiplusToken = NULL;
+
+   //g_gdiplusHookToken = NULL;
+
+   //g_pgdiplusStartupInput->SuppressBackgroundThread = true;
+
+   //Gdiplus::Status statusStartup = GdiplusStartup(&g_gdiplusToken, g_pgdiplusStartupInput, g_pgdiplusStartupOutput);
+
+   //if (statusStartup != Gdiplus::Ok)
+   //{
+
+   //   message_box("Gdiplus Failed to Startup. ca cannot continue.", "Gdiplus Failure", MB_ICONERROR);
+
+   //   return 0;
+
+   //}
+
+   //statusStartup = g_pgdiplusStartupOutput->NotificationHook(&g_gdiplusHookToken);
+
+   //if (statusStartup != Gdiplus::Ok)
+   //{
+
+   //   os_message_box(nullptr, "Gdiplus Failed to Hook. ca cannot continue.", "Gdiplus Failure", MB_ICONERROR);
+
+   //   return 0;
+
+   //}
+
+   // #ifndef USE_OS_IMAGE_LOADER
+
+   //    try
+   //    {
+
+   //       FreeImage_Initialise(false);
+
+   //    }
+   //    catch (...)
+   //    {
+
+   //       ::message_box(nullptr, "Failure to initialize FreeImage (::apex::init_core)", "FreeImage_Initialise failure", e_message_box_icon_exclamation);
+
+   //       return false;
+
+   //    }
+
+   // #endif // SMALLCODE
+
+
+
+   return true;
+
+}
+
+bool __node_apex_pos_init()
+{
+
+   //_set_purecall_handler(_ca2_purecall);
+
+   //HMODULE hmoduleUser32 = ::LoadLibraryW(L"User32");
+   //g_pfnChangeWindowMessageFilter = (LPFN_ChangeWindowMessageFilter) ::GetProcAddress(hmoduleUser32, "ChangeWindowMessageFilter");
+
+
+   //HMODULE hmoduleAdvApi32 = ::LoadLibraryW(L"AdvApi32");
+   //g_pfnRegGetValueW = (LPFN_RegGetValueW) ::GetProcAddress(hmoduleAdvApi32, "RegGetValueW");
+
+
+
+   return true;
+
+}
