@@ -40,7 +40,7 @@ namespace draw2d_gdi
          {
             ::draw2d_gdi::object * pobject = m_ptraObject[i];
 
-            pobject->m_ptraGraphics.remove(this);
+            pobject->m_ptraGraphics.erase(this);
 
          }
          catch(...)

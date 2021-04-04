@@ -137,7 +137,7 @@
 
 
 #ifndef _DEBUG
-#pragma warning(disable: 4101)  // unreferenced local function has been removed
+#pragma warning(disable: 4101)  // unreferenced local function has been erased
 #endif
 
 
@@ -146,7 +146,7 @@
 // To resume any of these warning: #pragma warning(default: 4xxx)
 // which should be placed after the _ include files
 
-#pragma warning(disable: 4505)  // unreferenced local function has been removed
+#pragma warning(disable: 4505)  // unreferenced local function has been erased
 #pragma warning(disable: 4511)  // private copy constructors are good to have
 #pragma warning(disable: 4512)  // private operator= are good to have
 #pragma warning(disable: 4514)  // unreferenced inlines are common

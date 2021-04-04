@@ -69,9 +69,9 @@ namespace windowing_win32
       
       UNREFERENCED_PARAMETER(defindex);
 
-      m_infoa.remove_all();
+      m_infoa.erase_all();
 
-      m_pil16->remove_all();
+      m_pil16->erase_all();
 
       if (m_hwndTray == nullptr)
       {

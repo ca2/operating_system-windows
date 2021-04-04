@@ -53,7 +53,7 @@ namespace windowing_win32
 
 #ifdef WINDOWS_DESKTOP
 
-      virtual void remove_all_routes() override;
+      virtual void erase_all_routes() override;
 
       virtual bool DestroyWindow() override;
 

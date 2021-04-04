@@ -26,13 +26,13 @@ namespace windowing_win32
 
 #ifdef WINDOWS_DESKTOP
 
-      m_monitorinfoa.remove_all();
+      m_monitorinfoa.erase_all();
 
       ::EnumDisplayMonitors(nullptr, nullptr, &display::monitor_enum_proc, (LPARAM)this);
 
       synchronous_lock synchronouslock(mutex());
 
-      m_monitora.remove_all();
+      m_monitora.erase_all();
 
       for (index iMonitor = 0; iMonitor < m_monitorinfoa.get_count(); iMonitor++)
       {

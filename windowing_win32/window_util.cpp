@@ -385,7 +385,7 @@ namespace windowing_win32
    }
 
 
-   bool hwnd_tree::Array::remove(HWND hwnd)
+   bool hwnd_tree::Array::erase(HWND hwnd)
    {
       if (hwnd == nullptr)
          return true;
@@ -395,7 +395,7 @@ namespace windowing_win32
          hwnd_tree & tree = *this->element_at(i);
          if (tree.m_hwnd == hwnd)
          {
-            remove_at(i);
+            erase_at(i);
             return true;
          }
          else
@@ -406,7 +406,7 @@ namespace windowing_win32
       for (i = 0; i < this->get_size(); i++)
       {
          hwnd_tree & tree = *this->element_at(i);
-         if (tree.m_hwndtreea.remove(hwnd))
+         if (tree.m_hwndtreea.erase(hwnd))
          {
             return true;
          }
@@ -418,7 +418,7 @@ namespace windowing_win32
       hwnd_tree::Array::
       operator = (hwnd_array & hwnda)
    {
-      remove_all();
+      erase_all();
       hwnd_tree hwndtree;
       for (i32 i = 0; i < hwnda.get_size(); i++)
       {
@@ -490,7 +490,7 @@ namespace windowing_win32
    {
    if(wndpa[i]->get_parent() != nullptr)
    {
-   wndpa.remove_at(i);
+   wndpa.erase_at(i);
    }
    else
    {
@@ -793,7 +793,7 @@ namespace windowing_win32
       }
 
       i32 iOrder;
-      ia.remove_all();
+      ia.erase_all();
       while (true)
       {
 

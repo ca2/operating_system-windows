@@ -92,7 +92,7 @@ namespace npca2
    
       {
          XNode node;
-         // remove install tag : should be turned into a function dependant of spalib at maximum
+         // erase install tag : should be turned into a function dependant of spalib at maximum
          if(!node.Load(file_get_contents_dup(dir::appdata("spa_install.xml"))))
             goto install;
          XNode * lpnodeInstalled = node.GetChild("installed");

@@ -722,10 +722,10 @@ namespace windowing_win32
    }
 
 
-   ::e_status windowing::remove_window(::windowing::window * pwindow)
+   ::e_status windowing::erase_window(::windowing::window * pwindow)
    {
 
-      if (!m_windowmap.remove_key(__hwnd(pwindow->get_oswindow())))
+      if (!m_windowmap.erase_key(__hwnd(pwindow->get_oswindow())))
       {
 
          return ::error_failed;

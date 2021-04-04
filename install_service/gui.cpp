@@ -47,7 +47,7 @@ int nssm_gui(int resource, nssm_service_t *service) {
   /* Set service name if given */
   if (service->name[0]) {
     SetDlgItemText(dlg, IDC_NAME, service->name);
-    /* No point_i32 making user click remove if the name is already entered */
+    /* No point_i32 making user click erase if the name is already entered */
     if (resource == IDD_REMOVE) {
       HWND button = GetDlgItem(dlg, IDC_REMOVE);
       if (button) {
@@ -672,7 +672,7 @@ int install(HWND window) {
 }
 
 /* Remove the service */
-int remove(HWND window) {
+int erase(HWND window) {
   if (! window) return 1;
 
   /* See if it works */
@@ -692,9 +692,9 @@ int remove(HWND window) {
     }
   }
 
-  switch (remove_service(service)) {
+  switch (erase_service(service)) {
     case 1:
-      popup_message(window, MB_OK | e_message_box_icon_exclamation, NSSM_EVENT_OUT_OF_MEMORY, _T("service"), _T("remove()"));
+      popup_message(window, MB_OK | e_message_box_icon_exclamation, NSSM_EVENT_OUT_OF_MEMORY, _T("service"), _T("erase()"));
       cleanup_nssm_service(service);
       return 1;
 
@@ -931,7 +931,7 @@ INT_PTR CALLBACK tab_dlg(HWND tab, const ::id & id, WPARAM w, LPARAM l) {
   return 0;
 }
 
-/* Install/remove dialogue callback */
+/* Install/erase dialogue callback */
 INT_PTR CALLBACK nssm_dlg(HWND window, const ::id & id, WPARAM w, LPARAM l) {
   nssm_service_t *service;
 
@@ -1160,7 +1160,7 @@ INT_PTR CALLBACK nssm_dlg(HWND window, const ::id & id, WPARAM w, LPARAM l) {
 
         /* Remove button */
         case IDC_REMOVE:
-          if (! remove(window)) PostQuitMessage(0);
+          if (! erase(window)) PostQuitMessage(0);
           break;
       }
       return 1;

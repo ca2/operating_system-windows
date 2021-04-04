@@ -65,11 +65,11 @@
 // 
 // To show service removal GUI:
 // 
-//         nssm remove [<servicename>]
+//         nssm erase [<servicename>]
 // 
-// To remove a service without confirmation:
+// To erase a service without confirmation:
 // 
-//         nssm remove <servicename> confirm
+//         nssm erase <servicename> confirm
 // 
 // To manage a service:
 // 
@@ -108,7 +108,7 @@
 //
 // MessageText:
 //
-// Administrator access is needed to remove a service.
+// Administrator access is needed to erase a service.
 //
 #define NSSM_MESSAGE_NOT_ADMINISTRATOR_CANNOT_REMOVE 0x400001F8L
 
@@ -117,7 +117,7 @@
 //
 // MessageText:
 //
-// To remove a service without confirmation: nssm remove <servicename> confirm
+// To erase a service without confirmation: nssm erase <servicename> confirm
 //
 #define NSSM_MESSAGE_PRE_REMOVE_SERVICE  0x400001F9L
 
@@ -500,7 +500,7 @@
 //
 // MessageText:
 //
-// Service "%s" removed successfully!
+// Service "%s" erased successfully!
 //
 #define NSSM_MESSAGE_SERVICE_REMOVED     0x40000222L
 
@@ -1019,7 +1019,7 @@
 //
 // The service is configured with a processor affinity range which
 // specifies more CPUs than are present on this system.  Editing the
-// service will result in additional CPUs being removed.
+// service will result in additional CPUs being erased.
 //
 #define NSSM_GUI_WARN_AFFINITY           0x4000025AL
 

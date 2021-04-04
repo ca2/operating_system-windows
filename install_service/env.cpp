@@ -62,7 +62,7 @@ TCHAR *expand_environment_string(TCHAR *string) {
 
 /*
   Set all the environment variables from an environment block in the current
-  environment or remove all the variables in the block from the current
+  environment or erase all the variables in the block from the current
   environment.
 */
 static int set_environment_block(TCHAR *env, bool set) {

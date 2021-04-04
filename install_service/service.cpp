@@ -1036,8 +1036,8 @@ int pre_edit_service(int argc, TCHAR **argv) {
   return 0;
 }
 
-/* About to remove the service */
-int pre_remove_service(int argc, TCHAR **argv) {
+/* About to erase the service */
+int pre_erase_service(int argc, TCHAR **argv) {
   nssm_service_t *service = alloc_nssm_service();
   set_nssm_service_defaults(service);
   if (argc) _sntprintf_s(service->name, _countof(service->name), _TRUNCATE, _T("%s"), argv[0]);
@@ -1045,7 +1045,7 @@ int pre_remove_service(int argc, TCHAR **argv) {
   /* Show dialogue box if we didn't pass service name and "confirm" */
   if (argc < 2) return nssm_gui(IDD_REMOVE, service);
   if (str_equiv(argv[1], _T("confirm"))) {
-    int ret = remove_service(service);
+    int ret = erase_service(service);
     cleanup_nssm_service(service);
     return ret;
   }
@@ -1308,7 +1308,7 @@ int control_service(unsigned long control, int argc, TCHAR **argv) {
 }
 
 /* Remove the service */
-int remove_service(nssm_service_t *service) {
+int erase_service(nssm_service_t *service) {
   if (! service) return 1;
 
   /* Open service manager */

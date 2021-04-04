@@ -210,7 +210,7 @@ FT_BEGIN_HEADER
     T1_BLEND_FAMILY_OTHER_BLUES,
     T1_BLEND_FORCE_BOLD,
 
-    /*# never remove */
+    /*# never erase */
     T1_BLEND_MAX
 
   } T1_Blend_Flags;
@@ -634,7 +634,7 @@ FT_BEGIN_HEADER
    *
    *    PS_DICT_BLUE_SCALE returns a value that is scaled up by 1000.  To
    *    get the value as in the font stream, you need to divide by
-   *    65536000.0 (to remove the FT_Fixed scale, and the x1000 scale).
+   *    65536000.0 (to erase the FT_Fixed scale, and the x1000 scale).
    *
    *    IMPORTANT: Only key/value pairs read by the FreeType interpreter can
    *    be retrieved.  So, for example, PostScript procedures such as NP,

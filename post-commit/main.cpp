@@ -292,7 +292,7 @@ i32 app_t::run()
 
       str = file_as_string("C:\\ca2\\config\\repos\\mirror_list_here.txt");
 
-      stra.remove_all();
+      stra.erase_all();
 
       stra.add_lines(str);
 

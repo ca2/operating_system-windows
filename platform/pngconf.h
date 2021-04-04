@@ -310,7 +310,7 @@
 #define PNG_EXPORT(ordinal, type, name, args) \
    PNG_EXPORTA(ordinal, type, name, args, PNG_EMPTY)
 
-/* Use PNG_REMOVED to comment out a removed interface. */
+/* Use PNG_REMOVED to comment out a erased interface. */
 #ifndef PNG_REMOVED
 #  define PNG_REMOVED(ordinal, type, name, args, attributes)
 #endif
@@ -336,7 +336,7 @@
   /* Support for compiler specific function attributes.  These are used
    * so that where compiler support is available, incorrect use of API
    * functions in png.h will generate compiler warnings.  Added at libpng
-   * version 1.2.41.  Disabling these removes the warnings but may also produce
+   * version 1.2.41.  Disabling these erases the warnings but may also produce
    * less efficient code.
    */
 #  if defined(__clang__) && defined(__has_attribute)

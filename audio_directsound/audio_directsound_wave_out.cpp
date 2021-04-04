@@ -378,8 +378,8 @@ namespace multimedia
             return error_failed;
          }
 
-         m_haEvent.remove_all();
-         m_notifya.remove_all();
+         m_haEvent.erase_all();
+         m_notifya.erase_all();
 
          for(index i = 0; i < iBufferCount; i++)
          {

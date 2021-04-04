@@ -94,7 +94,7 @@ namespace windowing_win32
 
       
 
-      virtual ::e_status remove_window(::windowing::window * pwindow);
+      virtual ::e_status erase_window(::windowing::window * pwindow);
     
 
       using windowing::windowing::get_cursor;

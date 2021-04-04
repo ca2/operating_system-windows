@@ -122,7 +122,7 @@ int _tmain(int argc, TCHAR **argv) {
   if (argc > 1) {
     /*
       Valid commands are:
-      start, stop, pause, continue, install, edit, get, set, reset, unset, remove
+      start, stop, pause, continue, install, edit, get, set, reset, unset, erase
     */
     if (str_equiv(argv[1], _T("start"))) exit(control_service(NSSM_SERVICE_CONTROL_START, argc - 2, argv + 2));
     if (str_equiv(argv[1], _T("stop"))) exit(control_service(SERVICE_CONTROL_STOP, argc - 2, argv + 2));
@@ -146,9 +146,9 @@ int _tmain(int argc, TCHAR **argv) {
       for (int i = 0; i < argc; i++) SecureZeroMemory(argv[i], _tcslen(argv[i]) * sizeof(TCHAR));
       exit(ret);
     }
-    if (str_equiv(argv[1], _T("remove"))) {
+    if (str_equiv(argv[1], _T("erase"))) {
       if (! is_admin) exit(elevate(argc, argv, NSSM_MESSAGE_NOT_ADMINISTRATOR_CANNOT_REMOVE));
-      exit(pre_remove_service(argc - 2, argv + 2));
+      exit(pre_erase_service(argc - 2, argv + 2));
     }
   }
 

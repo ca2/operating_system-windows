@@ -222,7 +222,7 @@ namespace music
 
                m_psequence->set_state(sequence::e_state_pre_rolled);
 
-               m_psequence->m_flags.remove(sequence::e_flag_waiting);
+               m_psequence->m_flags.erase(sequence::e_flag_waiting);
 
             }
             else
@@ -365,7 +365,7 @@ namespace music
 
                   WARN("::music::midi::sequencer::stop -> midiStreamStop returned %lu", (u32)m_psequence->m_estatusLastError);
 
-                  m_psequence->m_flags.remove(sequence::e_flag_waiting);
+                  m_psequence->m_flags.erase(sequence::e_flag_waiting);
 
                   pcommand->m_estatus= error_not_ready;
 
@@ -813,7 +813,7 @@ namespace music
                if (bOperationEnd)
                {
 
-                  m_psequence->m_flags.remove(sequence::e_flag_operation_end);
+                  m_psequence->m_flags.erase(sequence::e_flag_operation_end);
 
                   TRACE("::music::midi::sequencer::MidiOutProc m_flags.has(flag_operation_end)\n");
 
@@ -1329,7 +1329,7 @@ namespace music
 
                m_psequence->m_estatusLastError = ::success;
 
-               m_psequence->m_flags.remove(sequence::e_flag_waiting);
+               m_psequence->m_flags.erase(sequence::e_flag_waiting);
 
             }
 

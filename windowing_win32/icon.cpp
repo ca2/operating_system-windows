@@ -34,7 +34,7 @@ namespace windowing_win32
    icon::~icon()
    {
 
-      _remove_all();
+      _erase_all();
 
    }
 
@@ -102,7 +102,7 @@ namespace windowing_win32
    void icon::get_sizes(array < concrete < ::size_i32 > > & a)
    {
 
-      a.remove_all();
+      a.erase_all();
 
       for (auto & size : m_iconmap.keys())
       {
@@ -260,7 +260,7 @@ namespace windowing_win32
    }
 
 
-   void icon::_remove_all()
+   void icon::_erase_all()
    {
 
       for (auto hicon : m_iconmap.values())
@@ -270,7 +270,7 @@ namespace windowing_win32
 
       }
 
-      m_iconmap.remove_all();
+      m_iconmap.erase_all();
    }
 
 } // namespace windowing_win32

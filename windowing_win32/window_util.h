@@ -31,7 +31,7 @@ namespace windowing_win32
       public:
 
 
-         bool remove(HWND hwnd);
+         bool erase(HWND hwnd);
          index find(HWND hwnd);
          void EnumDescendants();
          Array & operator = (hwnd_array & hwnda);

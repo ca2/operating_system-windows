@@ -30,7 +30,7 @@ namespace windowing_win32
       virtual image_pointer create_image(const concrete < ::size_i32 > & size);
 
 
-      void _remove_all();
+      void _erase_all();
 
       
    };

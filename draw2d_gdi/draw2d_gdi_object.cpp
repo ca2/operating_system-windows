@@ -23,7 +23,7 @@ namespace draw2d_gdi
          try
          {
 
-            m_ptraGraphics[i]->m_ptraObject.remove(this);
+            m_ptraGraphics[i]->m_ptraObject.erase(this);
 
          }
          catch(...)
@@ -167,7 +167,7 @@ namespace draw2d_gdi
 
             ::draw2d_gdi::graphics * pgraphics = m_ptraGraphics[i];
 
-            pgraphics->m_ptraObject.remove(this);
+            pgraphics->m_ptraObject.erase(this);
 
          }
          catch(...)
@@ -180,7 +180,7 @@ namespace draw2d_gdi
       if(m_hgdiobj == nullptr)
       {
 
-         m_ptraGraphics.remove_all();
+         m_ptraGraphics.erase_all();
 
          return true;
 
@@ -207,7 +207,7 @@ namespace draw2d_gdi
 
       }
 
-      m_ptraGraphics.remove_all();
+      m_ptraGraphics.erase_all();
 
       bool bOk = ::DeleteObject(m_hgdiobj) != false;
 
