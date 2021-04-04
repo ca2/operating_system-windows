@@ -24,6 +24,9 @@ namespace windows
       virtual ~apex();
 
 
+      virtual ::e_status initialize(::object* pobject) override;
+
+
       string get_user_name();
 
       virtual ::e_status process_init();
