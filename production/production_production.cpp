@@ -141,9 +141,9 @@ namespace production
 
       {
 
-         ::file::path pathMirror = m_pcontext->m_papexcontext->system() / "config/production/mirror.txt";
+         ::file::path pathMirror = pacmedir->system() / "config/production/mirror.txt";
 
-         ::file::path pathMirrorStatus = m_pcontext->m_papexcontext->system() / "config/production/mirror_status.txt";
+         ::file::path pathMirrorStatus = pacmedir->system() / "config/production/mirror_status.txt";
 
          if (!file_exists(pathMirror)
                || !file_exists(pathMirrorStatus))
@@ -266,7 +266,7 @@ namespace production
 
          //   ::datetime::time timeNow = ::datetime::time::get_current_time();
 
-         //   string strTwit = "General failure of build " + version_to_international_datetime(m_strBuild) + ". Starting " + m_strTry + " retry of build " + m_strConfiguration + " - " + psystem->datetime().international().get_gmt_date_time(timeNow) + ". More details at http://status.ca2.cc/" + m_strStatusEmail;
+         //   string strTwit = "General failure of build " + version_to_international_datetime(m_strBuild) + ". Starting " + m_strTry + " retry of build " + m_strConfiguration + " - " + pdatetime->international().get_gmt_date_time(timeNow) + ". More details at http://status.ca2.cc/" + m_strStatusEmail;
 
          //   twitter_twit(strTwit);*/
 
@@ -2281,8 +2281,8 @@ namespace production
       memMd5.from_hex(psystem->crypto().md5(mem));
       memSha1.from_hex(psystem->crypto().sha1(mem));
       return string("Digest-Algorithms: MD5 SHA1\n") +
-             "MD5-Digest: " + psystem->base64().encode(memMd5) + "\n" +
-             "SHA1-Digest: " + psystem->base64().encode(memSha1) + "\n";
+             "MD5-Digest: " + pbase64->encode(memMd5) + "\n" +
+             "SHA1-Digest: " + pbase64->encode(memSha1) + "\n";
 
    }
 

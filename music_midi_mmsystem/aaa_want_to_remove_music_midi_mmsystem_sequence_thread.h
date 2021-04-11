@@ -50,9 +50,9 @@ namespace music
             virtual void term_thread() override;
 
 
-            DECL_GEN_SIGNAL(OnMidiSequenceEvent);
-            DECL_GEN_SIGNAL(OnDone);
-            DECL_GEN_SIGNAL(OnPositionCB);
+            DECLARE_MESSAGE_HANDLER(OnMidiSequenceEvent);
+            DECLARE_MESSAGE_HANDLER(OnDone);
+            DECLARE_MESSAGE_HANDLER(OnPositionCB);
 
 
          };

@@ -57,7 +57,7 @@ namespace windowing_win32
       //virtual void set_oswindow(oswindow oswindow) override;
 
 
-      DECL_GEN_SIGNAL(_001OnMessage);
+      DECLARE_MESSAGE_HANDLER(_001OnMessage);
 
 
       virtual bool has_capture() const;
@@ -184,25 +184,25 @@ namespace windowing_win32
 
       //virtual void window_apply_visual(const ::user::window_state & windowstate) override;
 
-      DECL_GEN_SIGNAL(_001OnDestroy);
-      DECL_GEN_SIGNAL(_001OnCreate);
-      //DECL_GEN_SIGNAL(_001OnKillFocus);
-      DECL_GEN_SIGNAL(_001OnPaint);
-      DECL_GEN_SIGNAL(_001OnPrint);
-      //DECL_GEN_SIGNAL(_001OnSetFocus);
-      DECL_GEN_SIGNAL(_001OnNcCalcSize);
-      DECL_GEN_SIGNAL(_001OnSetCursor);
-      DECL_GEN_SIGNAL(_001OnEraseBkgnd);
-      //DECL_GEN_SIGNAL(_001OnMove);
-      //DECL_GEN_SIGNAL(_001OnSize);
-      //DECL_GEN_SIGNAL(_001OnShowWindow);
-      DECL_GEN_SIGNAL(_001OnActivate);
-      DECL_GEN_SIGNAL(_001OnDwmNcRenderingChanged);
-      DECL_GEN_SIGNAL(_001OnProdevianSynch);
-      DECL_GEN_SIGNAL(_001OnWindowPosChanging);
-      DECL_GEN_SIGNAL(_001OnWindowPosChanged);
-      //DECL_GEN_SIGNAL(_001OnGetMinMaxInfo);
-      DECL_GEN_SIGNAL(_001OnEnable);
+      DECLARE_MESSAGE_HANDLER(_001OnDestroy);
+      DECLARE_MESSAGE_HANDLER(_001OnCreate);
+      //DECLARE_MESSAGE_HANDLER(_001OnKillFocus);
+      DECLARE_MESSAGE_HANDLER(_001OnPaint);
+      DECLARE_MESSAGE_HANDLER(_001OnPrint);
+      //DECLARE_MESSAGE_HANDLER(_001OnSetFocus);
+      DECLARE_MESSAGE_HANDLER(_001OnNcCalcSize);
+      DECLARE_MESSAGE_HANDLER(_001OnSetCursor);
+      DECLARE_MESSAGE_HANDLER(_001OnEraseBkgnd);
+      //DECLARE_MESSAGE_HANDLER(_001OnMove);
+      //DECLARE_MESSAGE_HANDLER(_001OnSize);
+      //DECLARE_MESSAGE_HANDLER(_001OnShowWindow);
+      DECLARE_MESSAGE_HANDLER(_001OnActivate);
+      DECLARE_MESSAGE_HANDLER(_001OnDwmNcRenderingChanged);
+      DECLARE_MESSAGE_HANDLER(_001OnProdevianSynch);
+      DECLARE_MESSAGE_HANDLER(_001OnWindowPosChanging);
+      DECLARE_MESSAGE_HANDLER(_001OnWindowPosChanged);
+      //DECLARE_MESSAGE_HANDLER(_001OnGetMinMaxInfo);
+      DECLARE_MESSAGE_HANDLER(_001OnEnable);
 
 
       //virtual void win_update_graphics();

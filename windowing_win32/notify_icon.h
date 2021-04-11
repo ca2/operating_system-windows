@@ -55,7 +55,7 @@ namespace windowing_win32
 
       virtual void erase_all_routes() override;
 
-      virtual bool DestroyWindow() override;
+      virtual bool start_destroying_window() override;
 
       virtual void destroy_window() override;
 
@@ -74,8 +74,8 @@ namespace windowing_win32
       virtual bool create_notify_icon(::u32 id, ::user::notify_icon_listener * plistener, ::windowing::icon * picon);
 
 
-      DECL_GEN_SIGNAL(_001OnNotifyIconMessage);
-      DECL_GEN_SIGNAL(_001OnDestroy);
+      DECLARE_MESSAGE_HANDLER(_001OnNotifyIconMessage);
+      DECLARE_MESSAGE_HANDLER(_001OnDestroy);
 
       void install_message_routing(::channel * pchannel) override;
 

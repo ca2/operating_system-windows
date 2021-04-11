@@ -27,7 +27,11 @@ namespace music
 
             defer_create_mutex();
 
-            m_pmidi = Multimedia.midi()->get_device_midi(strDevice);
+            auto psystem = m_psystem->m_paquasystem;
+
+            auto pmultimedia = psystem->multimedia()->m_pveriwellmultimedia;
+
+            m_pmidi = pmultimedia->midi()->get_device_midi(strDevice);
 
             m_hstream = nullptr;
 
@@ -1833,7 +1837,7 @@ namespace music
                if (m_psequence->m_pfile->GetPosition() > 0)
                {
 
-                  if (lpmh->dwBytesRecorded > iBufferNominalMax && lpmh->dwBytesRecorded > 0)
+                  if (::comparison::gt(lpmh->dwBytesRecorded, iBufferNominalMax) && lpmh->dwBytesRecorded > 0)
                   {
 
                      break;

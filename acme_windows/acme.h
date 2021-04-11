@@ -56,6 +56,9 @@ namespace windows
       virtual ::e_status last_error_to_status(DWORD dwLastError);
 
 
+      virtual string audio_get_default_library_name() override;
+
+
    };
 
 

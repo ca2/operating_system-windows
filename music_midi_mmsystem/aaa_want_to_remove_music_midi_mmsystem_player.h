@@ -63,11 +63,11 @@ namespace music
             virtual void SendTempoChange() override;
 
 
-            //DECL_GEN_SIGNAL(OnMultimediaMidiOutputMessageDone);
-            //DECL_GEN_SIGNAL(OnMultimediaMidiOutputMessagePositionCB);
-            DECL_GEN_SIGNAL(OnUserMessage);
+            //DECLARE_MESSAGE_HANDLER(OnMultimediaMidiOutputMessageDone);
+            //DECLARE_MESSAGE_HANDLER(OnMultimediaMidiOutputMessagePositionCB);
+            DECLARE_MESSAGE_HANDLER(OnUserMessage);
 
-            DECL_GEN_SIGNAL(on_attribute_change);
+            DECLARE_MESSAGE_HANDLER(on_attribute_change);
 
 
          };

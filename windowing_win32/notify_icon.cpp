@@ -39,7 +39,7 @@ namespace windowing_win32
    notify_icon::~notify_icon()
    {
 
-      DestroyWindow();
+      destroy_window();
 
       if (g_pnotifyiconLast == this)
       {
@@ -125,7 +125,7 @@ namespace windowing_win32
 
          m_plistener = nullptr;
 
-         DestroyWindow();
+         start_destroying_window();
 
          return false;
 
@@ -178,7 +178,7 @@ namespace windowing_win32
 
          m_plistener = nullptr;
 
-         //DestroyWindow();
+         //start_destroying_window();
 
          return false;
 
@@ -346,7 +346,7 @@ namespace windowing_win32
 #endif // defined(WINDOWS_DESKTOP)
 
 
-   bool notify_icon::DestroyWindow()
+   bool notify_icon::start_destroying_window()
    {
 
       if (!m_bCreated)
@@ -360,7 +360,7 @@ namespace windowing_win32
 
 #ifdef WINDOWS_DESKTOP
 
-      ::user::interaction::DestroyWindow();
+      ::user::interaction::start_destroying_window();
 
       return true;
 

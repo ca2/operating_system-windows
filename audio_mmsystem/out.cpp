@@ -103,13 +103,14 @@ namespace audio_mmsystem
       m_pwaveformat->m_waveformat.nBlockAlign       = m_pwaveformat->m_waveformat.wBitsPerSample * m_pwaveformat->m_waveformat.nChannels / 8;
       m_pwaveformat->m_waveformat.nAvgBytesPerSec   = m_pwaveformat->m_waveformat.nSamplesPerSec * m_pwaveformat->m_waveformat.nBlockAlign;
       
+      auto paudio = m_psystem->m_paquasystem->audio()->m_paudio;
 
-      auto audiowave = Au(get_context()).audiowave();
+      auto paudiowave = paudio->audiowave();
 
       try
       {
 
-         mmresult = waveOutOpen(&m_hwaveout, audiowave->m_uiWaveOutDevice, wave_format(), (DWORD_PTR) &waveOutProc, (DWORD_PTR) this, CALLBACK_FUNCTION);
+         mmresult = waveOutOpen(&m_hwaveout, paudiowave->m_uiWaveOutDevice, wave_format(), (DWORD_PTR) &waveOutProc, (DWORD_PTR) this, CALLBACK_FUNCTION);
 
          if (mmresult == MMSYSERR_NOERROR)
          {

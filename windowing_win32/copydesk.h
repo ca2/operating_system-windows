@@ -35,8 +35,8 @@ namespace windowing_win32
       //static lresult WINAPI WindowProc(HWND hwnd, ::u32 message, wparam wparam, lparam lparam);
 
 
-      DECL_GEN_SIGNAL(_001OnClipboardUpdate);
-      DECL_GEN_SIGNAL(_001OnDestroy);
+      DECLARE_MESSAGE_HANDLER(_001OnClipboardUpdate);
+      DECLARE_MESSAGE_HANDLER(_001OnDestroy);
 
       virtual void install_message_routing(::channel * pchannel) override;
 

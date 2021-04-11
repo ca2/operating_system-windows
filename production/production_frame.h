@@ -17,7 +17,7 @@ namespace production
 
       void install_message_routing(::channel * pchannel);
 
-      DECL_GEN_SIGNAL(_001OnCreate);
+      DECLARE_MESSAGE_HANDLER(_001OnCreate);
    };
 
 } // namespace production

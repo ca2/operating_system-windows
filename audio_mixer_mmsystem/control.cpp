@@ -244,18 +244,20 @@ namespace multimedia
          u32 nID = nStartID;
          u32 nMuteID;
 
-         string str;
+         ::text::text text;
+
+         auto pcontext = pParent->m_pcontext;
          
          if(m_pmixersource == m_pmixersource->get_destination())
          {
             
-            str = get_context()->load_string("mix::mute_all");
+            text = pcontext->__text("mix::mute_all");
 
          }
          else
          {
             
-            str = get_context()->load_string("mix::mute");
+            text = pcontext->__text("mix::mute");
 
          }
 
@@ -264,7 +266,7 @@ namespace multimedia
             nMuteID = nID++;
             __pointer(::multimedia::audio_mixer::user::toggle_control) pbtMute = m_pmixersource->get_device()->get_mixer()->get_audio_mixer_callback()->allocate_toggle_control();
             pbtMute->create_control(pParent, nMuteID);
-            pbtMute->set_window_text(str);
+            pbtMute->set_window_text(text.get_text());
             __pointer(::multimedia::audio_mixer::control_data_switch) mcdmMute = pbtMute->get_data();
             mcdmMute->m_iType = ::multimedia::audio_mixer::control_data::TypeUniformMute;
             mcdmMute->m_uiMixerID = source->get_device()->m_uiMixerID;
@@ -771,7 +773,7 @@ namespace multimedia
                               string strMessage;
                               strMessage.Format("mixerGetControlDetails(ctrlid=%.08lXh) failed on hmx=%.04Xh, mmr=%u!",
                                                 m_mixercontrol.dwControlID, device->m_hMixer, mmrc);
-                              message_box(strMessage, nullptr, e_message_box_icon_exclamation);
+                              pScrollBar->message_box(strMessage, nullptr, e_message_box_icon_exclamation);
                            }
                         }
                         return ;
@@ -797,7 +799,7 @@ namespace multimedia
          if(pmutecontrol != nullptr)
          {
             __pointer(::multimedia::audio_mixer::control_data) pData;
-            __throw(todo("find replacement/fix for GetWindowDataByDlgCtrlID"));
+            __throw(todo, "find replacement/fix for GetWindowDataByDlgCtrlID");
             //if(nullptr != (pData = GetWindowDataByDlgCtrlID((u32) wID)))
             {
                if(pData->get_type() == ::multimedia::audio_mixer::control_data::TypeUniformMute)
@@ -840,7 +842,7 @@ namespace multimedia
 
                         strMessage.Format("mixerGetControlDetails(ctrlid=%.08lXh) failed on hmx=%.04Xh, mmr=%u!",
                                           m_mixercontrol.dwControlID, device->m_hMixer, mmrc);
-                        message_box(strMessage, nullptr, e_message_box_icon_exclamation);
+                        pmutecontrol->message_box(strMessage, nullptr, e_message_box_icon_exclamation);
                      }
                      return true;
                   }

@@ -24,7 +24,7 @@ namespace backup
 
 
 
-      DECL_GEN_SIGNAL(_001OnCreate);
+      DECLARE_MESSAGE_HANDLER(_001OnCreate);
 
       virtual void on_control_event(::user::control_event * pevent) override;
 

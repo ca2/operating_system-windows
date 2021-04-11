@@ -710,6 +710,14 @@ namespace windows
    }
 
 
+   string acme::audio_get_default_library_name()
+   {
+
+      return "audio_mmsystem";
+
+   }
+
+
 
 } // namespace node_windows
 

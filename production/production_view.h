@@ -87,19 +87,19 @@ namespace production
       ::user::document * get_document();
 
       //virtual void on_subject(::subject::subject * psubject, ::subject::context * pcontext) override;
-      DECL_GEN_SIGNAL(_001OnLButtonDown);
-      DECL_GEN_SIGNAL(_001OnLButtonUp);
+      DECLARE_MESSAGE_HANDLER(_001OnLButtonDown);
+      DECLARE_MESSAGE_HANDLER(_001OnLButtonUp);
       virtual void _001OnTimer(::timer * ptimer);
-      DECL_GEN_SIGNAL(on_message_right_button_up);
-      DECL_GEN_SIGNAL(_001OnDestroy);
-      DECL_GEN_SIGNAL(_001OnSize);
-      DECL_GEN_SIGNAL(_001OnCreate);
-      DECL_GEN_SIGNAL(_001OnContextMenu);
-      DECL_GEN_SIGNAL(_001OnSetCursor);
-      DECL_GEN_SIGNAL(_001OnShowWindow);
-      DECL_GEN_SIGNAL(_001OnUser);
-      DECL_GEN_SIGNAL(_001OnKeyDown);
-      DECL_GEN_SIGNAL(_001OnKeyUp);
+      DECLARE_MESSAGE_HANDLER(on_message_right_button_up);
+      DECLARE_MESSAGE_HANDLER(_001OnDestroy);
+      DECLARE_MESSAGE_HANDLER(_001OnSize);
+      DECLARE_MESSAGE_HANDLER(_001OnCreate);
+      DECLARE_MESSAGE_HANDLER(_001OnContextMenu);
+      DECLARE_MESSAGE_HANDLER(_001OnSetCursor);
+      DECLARE_MESSAGE_HANDLER(_001OnShowWindow);
+      DECLARE_MESSAGE_HANDLER(_001OnUser);
+      DECLARE_MESSAGE_HANDLER(_001OnKeyDown);
+      DECLARE_MESSAGE_HANDLER(_001OnKeyUp);
 
 
       virtual ::size_i32 get_total_size();

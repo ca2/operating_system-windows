@@ -127,8 +127,8 @@ namespace music
 
             ::e_status     InsertPadEvent(imedia_time tkDelta, LPMIDIHDR lpmh);
 
-            DECL_GEN_SIGNAL(_001OnMidiOutDone);
-            DECL_GEN_SIGNAL(_001OnMidiOutPositionCB);
+            DECLARE_MESSAGE_HANDLER(_001OnMidiOutDone);
+            DECLARE_MESSAGE_HANDLER(_001OnMidiOutPositionCB);
 
 
          };

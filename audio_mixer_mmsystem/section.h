@@ -10,7 +10,7 @@ namespace multimedia
 
 
       class CLASS_DECL_AUDIO_MIXER_MMSYSTEM department :
-         virtual public ::apex::department,
+         virtual public ::acme::department,
          virtual public ::user::interaction
       {
       public:

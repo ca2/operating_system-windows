@@ -87,7 +87,6 @@ namespace windowing_win32
 
       }
 
-
       return true;
 
    }
@@ -109,6 +108,8 @@ namespace windowing_win32
 
       }
 
+      //add_object(psysteminteraction);
+
       return psysteminteraction;
 
    }
@@ -122,7 +123,7 @@ namespace windowing_win32
       if (m_psysteminteraction)
       {
 
-         m_psysteminteraction->DestroyWindow();
+         m_psysteminteraction->start_destroying_window();
 
       }
 
@@ -139,6 +140,29 @@ namespace windowing_win32
 
    }
 
+   
+   ::e_status windowing::finish()
+   {
+
+      if (m_psysteminteraction)
+      {
+
+         m_psysteminteraction->start_destroying_window();
+
+      }
+
+      auto estatus = ::windowing::windowing::finalize();
+
+      if (!estatus)
+      {
+
+         return estatus;
+
+      }
+
+      return estatus;
+
+   }
 
 
    ::e_status windowing::finalize()

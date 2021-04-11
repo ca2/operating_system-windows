@@ -39,7 +39,7 @@ namespace music
 
             synchronous_lock synchronouslock(&get_midi_mutex());
 
-            MMRESULT estatus;
+            //MMRESULT estatus;
 
             u32 uDeviceID = iDeviceId;
 

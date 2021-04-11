@@ -23,7 +23,7 @@ namespace production
       virtual ~pane_view();
 
 
-      DECL_GEN_SIGNAL(_001OnUserMessage);
+      DECLARE_MESSAGE_HANDLER(_001OnUserMessage);
 
       __pointer(::production::document) get_document();
 
@@ -42,13 +42,13 @@ namespace production
       ::filemanager::data * pdata,
       ::file::item_array & itema);
 
-      DECL_GEN_SIGNAL(_001OnMenuMessage);
+      DECLARE_MESSAGE_HANDLER(_001OnMenuMessage);
 #ifdef DEBUG
       virtual void assert_valid() const;
       virtual void dump(dump_context & dumpcontext) const;
 #endif
 
-      DECL_GEN_SIGNAL(_001OnCreate);
+      DECLARE_MESSAGE_HANDLER(_001OnCreate);
    };
 
 

@@ -25,7 +25,7 @@ namespace multimedia
          if(m_window.is_window())
          {
 
-            m_window.DestroyWindow();
+            m_window.start_destroying_window();
 
          }
 

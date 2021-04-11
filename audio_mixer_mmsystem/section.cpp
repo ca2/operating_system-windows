@@ -32,10 +32,12 @@ namespace multimedia
       ::e_status department::finalize()
       {
 
-         DestroyWindow();
+         start_destroying_window();
 
 
          //return true;
+
+         return ::success;
 
       }
 

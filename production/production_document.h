@@ -13,7 +13,7 @@ namespace production
 
       document(::object * pobject);
 
-      DECL_GEN_SIGNAL(data_on_after_change);
+      DECLARE_MESSAGE_HANDLER(data_on_after_change);
 
 	   virtual bool on_new_document();
 
