@@ -592,9 +592,7 @@ namespace windowing_win32
 
       pkey->m_iVirtualKey = (int)MapLeftRightKeys(wparam, lparam);
 
-      auto pkeyboard = keyboard();
-
-      pkeyboard->translate_os_key_message(pkey);
+      ::windowing::windowing::set(pkey, oswindow, pwindow, id, wparam, lparam);
 
    }
 
