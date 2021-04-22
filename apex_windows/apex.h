@@ -58,7 +58,7 @@ namespace windows
 
       virtual ::e_status register_dll(const ::file::path & pathDll);
 
-      virtual ::e_status start();
+      virtual ::e_status system_main() override;
 
       ::e_status get_firefox_installation_info(string& strPathToExe, string& strInstallDirectory);
 

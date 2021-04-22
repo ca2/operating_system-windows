@@ -391,30 +391,12 @@ namespace windows
    }
 
 
-   ::e_status aura::start()
+   ::e_status aura::system_main()
    {
 
       __pointer(::aura::system) psystem = m_psystem;
 
-      //auto estatus = psystem->inline_init();
-
-      //if (!estatus)
-      //{
-
-      //   return estatus;
-
-      //}
-
-      auto estatus = m_psystem->on_start();
-
-      if (!estatus)
-      {
-
-         return estatus;
-
-      }
-
-      estatus = psystem->main();
+      auto estatus = psystem->main();
 
       if (!estatus)
       {

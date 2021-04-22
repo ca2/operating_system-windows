@@ -30,8 +30,8 @@ bool file_exists(const char * path1);
 HANDLE g_hmutexBoot = nullptr;
 DWORD g_dwPrepareSmallBell = 0;
 
-void parse_spaboot(const char * psz);
-bool parse_spaboot_start(const char * psz);
+void parse_installer(const char * psz);
+bool parse_installer_start(const char * psz);
 //SPALIB_API std::string read_resource_as_string(HINSTANCE hinst, UINT nID, LPCTSTR lpcszType);
 //int gzuncompress(LPCTSTR lpcszUncompressed, LPCTSTR lpcszGzFileCompressed);
 //SPALIB_API bool read_resource_as_file(const char * pszFile, HINSTANCE hinst, UINT nID, LPCTSTR lpcszType);
@@ -68,14 +68,14 @@ int APIENTRY ca2_cube_install(const char * pszId)
          // Make the security attributes point_i32
          // to the security descriptor
          MutexAttributes.lpSecurityDescriptor = &SD;
-         g_hmutexBoot = ::CreateMutex(&MutexAttributes, false, "Global\\ca2::fontopus::ccvotagus_ca2_spa::7807e510-5579-11dd-ae16-0800200c7784");
+         g_hmutexBoot = ::CreateMutex(&MutexAttributes, false, "Global\\ca2::fontopus::ca2_spa::7807e510-5579-11dd-ae16-0800200c7784");
          if(::GetLastError() == ERROR_ALREADY_EXISTS)
          {
             while(::GetLastError() == ERROR_ALREADY_EXISTS)
             {
                ::CloseHandle(g_hmutexBoot);
                Sleep5000;
-               g_hmutexBoot = ::CreateMutex(&MutexAttributes, false, "Global\\ca2::fontopus::ccvotagus_ca2_spa::7807e510-5579-11dd-ae16-0800200c7784");
+               g_hmutexBoot = ::CreateMutex(&MutexAttributes, false, "Global\\ca2::fontopus::ca2_spa::7807e510-5579-11dd-ae16-0800200c7784");
             }
          }
          ::CloseHandle(g_hmutexBoot);
@@ -97,7 +97,7 @@ int APIENTRY ca2_cube_install(const char * pszId)
 
    spa_set_id(pszId);
    std::string strPlatform = spa_get_platform();
-   std::string strSp = get_ca2_folder_dup() + "\\ca2\\stage\\"+strPlatform+"\\spaboot.exe";
+   std::string strSp = get_ca2_folder_dup() + "\\ca2\\stage\\"+strPlatform+"\\installer.exe";
 
    SHELLEXECUTEINFO sei;
    __memset(&sei, 0, sizeof(sei));
@@ -171,7 +171,7 @@ bool file_exists(const char * path1)
 
 
 
-void parse_spaboot(XNode & node)
+void parse_installer(XNode & node)
 {
    if(node.name == "spa" && node.childs.size() > 0)
    {
@@ -192,15 +192,15 @@ void parse_spaboot(XNode & node)
    }
 }
 
-void parse_spaboot(const char * psz)
+void parse_installer(const char * psz)
 {
    XNode node;
    node.Load(file::get_contents(psz).c_str());
-   parse_spaboot(node);
+   parse_installer(node);
 }
 
 
-bool parse_spaboot_start(XNode & node)
+bool parse_installer_start(XNode & node)
 {
    int iOkCount = 0;
    std::string strInstalledBuild;
@@ -265,11 +265,11 @@ bool parse_spaboot_start(XNode & node)
    return true;
 }
 
-bool parse_spaboot_start(const char * psz)
+bool parse_installer_start(const char * psz)
 {
    XNode node;
    node.Load(file::get_contents(psz).c_str());
-   return parse_spaboot_start(node);
+   return parse_installer_start(node);
 }
 
 void trace(const char * psz)
@@ -277,7 +277,7 @@ void trace(const char * psz)
    printf("%s", psz);
 }
 
-int spaboot_start(const char * pszVersion, const char * pszId)
+int installer_start(const char * pszVersion, const char * pszId)
 {
    STARTUPINFO si;
    PROCESS_INFORMATION pi;
@@ -507,7 +507,7 @@ int install_spa()
 
    bool bOk = true;
 
-   bOk = bOk && read_resource_as_file((get_ca2_folder_dup() + "\\ca2\\stage\\" + strPlatform + "\\spa_bspatch.dll").c_str(), ::GetModuleHandleA(ca2_browser_plugin_get_module_name()), ID_SPABOOT, "CA2SP");
+   bOk = bOk && read_resource_as_file((get_ca2_folder_dup() + "\\ca2\\stage\\" + strPlatform + "\\spa_bspatch.dll").c_str(), ::GetModuleHandleA(ca2_browser_plugin_get_module_name()), ID_INSTALLER, "CA2SP");
 
 
 
@@ -527,9 +527,9 @@ int install_spa()
 
 
 
-   strGz = get_ca2_folder_dup() + "\\ca2\\time\\bz\\stage\\" + strPlatform + "\\spaboot.bz";
+   strGz = get_ca2_folder_dup() + "\\ca2\\time\\bz\\stage\\" + strPlatform + "\\installer.bz";
    bOk = bOk && read_resource_as_file(strGz.c_str(), ::GetModuleHandleA(ca2_browser_plugin_get_module_name()), ID_STARTACCA, "CA2SP");
-   strSp = dir::beforeca2() + "\\ca2\\stage\\" + strPlatform + "\\spaboot.exe";
+   strSp = dir::beforeca2() + "\\ca2\\stage\\" + strPlatform + "\\installer.exe";
    bOk = bOk && !bzuncompress(strSp.c_str(), strGz.c_str());
 
 

@@ -59,6 +59,9 @@ namespace windows
       virtual string audio_get_default_library_name() override;
 
 
+      virtual ::e_status on_start_system() override;
+
+
    };
 
 

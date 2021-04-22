@@ -9,7 +9,7 @@ imm_client::imm_client()
 {
 
    m_bImeCancelling = false;
-   m_bTextCompositionActive = false;
+   m_bTextCompositionActive2 = false;
 
 }
 
@@ -21,8 +21,10 @@ imm_client::~imm_client()
 }
 
 
-void imm_client::install_message_routing(::channel * pchannel)
+void imm_client::initialize_text_composition_client(::channel * pchannel, ::user::interaction * puserinteraction)
 {
+
+   m_puserinteraction = puserinteraction;
 
    MESSAGE_LINK(e_message_set_focus, pchannel, this, &::imm_client::_001OnSetFocus);
    MESSAGE_LINK(e_message_kill_focus, pchannel, this, &::imm_client::_001OnKillFocus);
@@ -57,7 +59,7 @@ void imm_client::_001OnSetFocus(::message::message * pmessage)
 void imm_client::_001OnKillFocus(::message::message * pmessage)
 {
 
-   m_bTextCompositionActive = false;
+   set_text_composition_active(false);
 
 }
 
@@ -67,10 +69,10 @@ void imm_client::_011OnChar(::message::message * pmessage)
 
    __pointer(::user::message) pusermessage(pmessage);
 
-   if (pusermessage->m_id == e_message_char)
+   if (pmessage->m_id == e_message_char)
    {
 
-      auto psession = get_session();
+      auto psession = m_puserinteraction->get_session();
 
       if (psession->is_key_pressed(::user::e_key_control)
          || psession->is_key_pressed(::user::e_key_alt))
@@ -80,14 +82,14 @@ void imm_client::_011OnChar(::message::message * pmessage)
 
       }
 
-      if (pusermessage->m_wparam == '\b')
+      if (pmessage->m_wparam == '\b')
       {
 
          return;
 
       }
 
-      if (pusermessage->m_wparam == '\t')
+      if (pmessage->m_wparam == '\t')
       {
 
          return;
@@ -105,7 +107,7 @@ void imm_client::_011OnChar(::message::message * pmessage)
       //if (!::str::begins_eat_ci(m_strImeComposition, strChar))
       //{
 
-      m_ptextcompositionclient->insert_text(strChar, false, e_source_user);
+      m_puserinteraction->insert_text(strChar, false, e_source_user);
 
       //}
 
@@ -183,7 +185,7 @@ void imm_client::_001OnIme(::message::message * pmessage)
          if (m_strImeComposition.has_char())
          {
 
-            m_ptextcompositionclient->edit_undo();
+            m_puserinteraction->edit_undo();
 
             m_strImeComposition.Empty();
 
@@ -200,7 +202,7 @@ void imm_client::_001OnIme(::message::message * pmessage)
 
             ::output_debug_string("\nWM_IME_COMPOSITION Result String... ");
 
-            imm_context imm(m_ptextcompositionclient);
+            imm_context imm(m_puserinteraction);
 
             string strComposition;
 
@@ -220,13 +222,12 @@ void imm_client::_001OnIme(::message::message * pmessage)
             on_text_composition_done();
 
          }
-
-         if ((pmessage->m_lparam & GCS_COMPSTR) != 0)
+         else if ((pmessage->m_lparam & GCS_COMPSTR) != 0)
          {
 
             ::output_debug_string("\nWM_IME_COMPOSITION Compositing... ");
 
-            imm_context imm(m_ptextcompositionclient);
+            imm_context imm(m_puserinteraction);
 
             string strComposition;
 
@@ -266,6 +267,37 @@ void imm_client::_001OnIme(::message::message * pmessage)
    {
 
       INFO("WM_IME_ENDCOMPOSITION");
+
+      if (is_text_composition_active())
+      {
+
+         if ((pmessage->m_lparam & GCS_RESULTSTR) != 0)
+         {
+
+            ::output_debug_string("\nWM_IME_COMPOSITION Result String... ");
+
+            imm_context imm(m_puserinteraction);
+
+            string strComposition;
+
+            strComposition = imm.get_string(GCS_RESULTSTR);
+
+            if (strComposition.is_empty())
+            {
+
+               strComposition = imm.get_string(GCS_RESULTREADSTR);
+
+            }
+
+            ::output_debug_string("\nWM_IME_COMPOSITION Compositè String Length = " + __str(strComposition.get_length()));
+
+            on_text_composition(strComposition);
+
+            on_text_composition_done();
+
+         }
+
+      }
 
    }
    else if (pmessage->m_id == WM_IME_STARTCOMPOSITION)
@@ -312,7 +344,7 @@ void imm_client::_001OnIme(::message::message * pmessage)
 
          output_debug_string("\n" "WM_IME_NOTIFY" " > " "IMN_OPENCANDIDATE");
 
-         m_bTextCompositionActive = true;
+         set_text_composition_active();
 
       }
       else if (pusermessage->m_wparam == IMN_CHANGECANDIDATE)
@@ -320,7 +352,7 @@ void imm_client::_001OnIme(::message::message * pmessage)
 
          output_debug_string("\n" "WM_IME_NOTIFY" " > " "IMN_CHANGECANDIDATE");
 
-         m_bTextCompositionActive = true;
+         set_text_composition_active();
 
       }
       else if (pusermessage->m_wparam == IMN_CLOSECANDIDATE)
@@ -328,7 +360,38 @@ void imm_client::_001OnIme(::message::message * pmessage)
 
          output_debug_string("\n" "WM_IME_NOTIFY" " > " "IMN_CLOSECANDIDATE");
 
-         m_bTextCompositionActive = false;
+         //set_text_composition_active(false);
+
+         if (is_text_composition_active())
+         {
+
+            if ((pmessage->m_lparam & GCS_RESULTSTR) != 0)
+            {
+
+               ::output_debug_string("\nWM_IME_COMPOSITION Result String... ");
+
+               imm_context imm(m_puserinteraction);
+
+               string strComposition;
+
+               strComposition = imm.get_string(GCS_RESULTSTR);
+
+               if (strComposition.is_empty())
+               {
+
+                  strComposition = imm.get_string(GCS_RESULTREADSTR);
+
+               }
+
+               ::output_debug_string("\nWM_IME_COMPOSITION Compositè String Length = " + __str(strComposition.get_length()));
+
+               on_text_composition(strComposition);
+
+               on_text_composition_done();
+
+            }
+
+         }
 
       }
       else if (pusermessage->m_wparam == IMN_OPENSTATUSWINDOW)
@@ -352,7 +415,7 @@ void imm_client::_001OnIme(::message::message * pmessage)
       else if (pusermessage->m_wparam == IMN_SETCONVERSIONMODE)
       {
 
-         imm_context imm(m_ptextcompositionclient);
+         imm_context imm(m_puserinteraction);
 
          DWORD dwConversion = 0;
 
@@ -374,6 +437,7 @@ void imm_client::_001OnIme(::message::message * pmessage)
          }
          else
          {
+
             if (dwConversion & IME_CMODE_NATIVE)
             {
 
@@ -454,10 +518,10 @@ void imm_client::_001OnKeyDown(::message::message * pmessage)
    if (pkey->m_ekey == ::user::e_key_escape)
    {
 
-      if (m_bTextCompositionActive)
+      if (is_text_composition_active())
       {
 
-         imm_context imm(m_ptextcompositionclient);
+         imm_context imm(m_puserinteraction);
 
          imm.close_candidate();
 
@@ -468,11 +532,11 @@ void imm_client::_001OnKeyDown(::message::message * pmessage)
 
          m_bImeCancelling = true;
 
-         imm_context imm(m_ptextcompositionclient);
+         imm_context imm(m_puserinteraction);
 
          ::ImmNotifyIME(imm, NI_COMPOSITIONSTR, CPS_CANCEL, 0);
 
-         m_ptextcompositionclient->edit_undo();
+         m_puserinteraction->edit_undo();
 
          m_strImeComposition.Empty();
 
@@ -492,7 +556,9 @@ void imm_client::_001OnKeyDown(::message::message * pmessage)
 void imm_client::on_text_composition(string str)
 {
 
-   text_composition_client::on_text_composition(str);
+   //text_composition_client::on_text_composition(str);
+
+   m_puserinteraction->on_text_composition(str);
 
 }
 
@@ -501,9 +567,11 @@ void imm_client::on_text_composition(string str)
 void imm_client::on_text_composition_done()
 {
 
-   m_bTextCompositionActive = false;
+   set_text_composition_active(false);
 
-   text_composition_client::on_text_composition_done();
+   //text_composition_client::on_text_composition_done();
+
+   m_puserinteraction->on_text_composition_done();
 
 }
 
@@ -511,7 +579,36 @@ void imm_client::on_text_composition_done()
 bool imm_client::is_text_composition_active() const
 {
 
-   return m_bTextCompositionActive;
+   return m_bTextCompositionActive2;
+
+}
+
+
+void imm_client::set_text_composition_active(bool bActive)
+{
+
+   if (bActive)
+   {
+
+      if (!m_bTextCompositionActive2)
+      {
+
+         m_bTextCompositionActive2 = true;
+
+      }
+
+   }
+   else
+   {
+
+      if (m_bTextCompositionActive2)
+      {
+
+         m_bTextCompositionActive2 = false;
+
+      }
+
+   }
 
 }
 
@@ -569,7 +666,7 @@ int imm_client::on_text_composition_message(int iMessage)
    else if (iMessage == TEXT_COMPOSITION_MESSAGE_UPDATE_CANDIDATE_WINDOW_POSITION)
    {
 
-      imm_context imm(m_ptextcompositionclient);
+      imm_context imm(m_puserinteraction);
 
       if (!imm)
       {
@@ -580,7 +677,7 @@ int imm_client::on_text_composition_message(int iMessage)
 
       ::rectangle_i32 rectangle;
 
-      m_ptextcompositionclient->get_text_composition_area(rectangle);
+      m_puserinteraction->get_text_composition_area(rectangle);
 
       COMPOSITIONFORM com = {};
 

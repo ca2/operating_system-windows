@@ -7,16 +7,16 @@ extern std::string g_strVersion;
 HWND g_hwndMessage = nullptr;
 //MSG g_msg;
 
-void parse_spaboot(const char * psz);
-bool parse_spaboot_start(const char * psz);
+void parse_installer(const char * psz);
+bool parse_installer_start(const char * psz);
 SPALIB_API std::string read_resource_as_string(HINSTANCE hinst, UINT nID, LPCTSTR lpcszType);
 
 
 int start();
 
-ATOM spaboot_RegisterClass(HINSTANCE hInstance);
+ATOM installer_RegisterClass(HINSTANCE hInstance);
 
-LRESULT CALLBACK spaboot_WndProc(HWND hWnd,const ::id & id,WPARAM wParam,LPARAM lParam);
+LRESULT CALLBACK installer_WndProc(HWND hWnd,const ::id & id,WPARAM wParam,LPARAM lParam);
 
 int APIENTRY _tWinMain(HINSTANCE hInstance,
                      HINSTANCE hPrevInstance,
@@ -48,7 +48,7 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
          // Make the security attributes point_i32
          // to the security descriptor
          MutexAttributes.lpSecurityDescriptor = &SD;
-         g_hmutexBoot = ::CreateMutex(&MutexAttributes, false, "Global\\ca2::fontopus::ccvotagus_ca2_spa_boot::7807e510-5579-11dd-ae16-0800200c7784");
+         g_hmutexBoot = ::CreateMutex(&MutexAttributes, false, "Global\\ca2::fontopus::ca2_spa_boot::7807e510-5579-11dd-ae16-0800200c7784");
          if(::GetLastError() == ERROR_ALREADY_EXISTS)
          {
             ::OutputDebugString("another instance of spa is already running");
@@ -69,10 +69,10 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
 
    prepare_small_bell();
 
-   if(!spaboot_RegisterClass(hInstance))
+   if(!installer_RegisterClass(hInstance))
       return -1;
 
-   g_hwndMessage = ::CreateWindowExA(0, "TeDigoS", "ca2::fontopus::ccvotagus::spaboot:callback_window", 0, 0, 0, 0, 0, HWND_MESSAGE, nullptr, nullptr, nullptr);
+   g_hwndMessage = ::CreateWindowExA(0, "TeDigoS", "ca2::fontopus::installer:callback_window", 0, 0, 0, 0, 0, HWND_MESSAGE, nullptr, nullptr, nullptr);
 
    DWORD dw = GetLastError();
    if(g_hwndMessage == nullptr)
@@ -101,7 +101,7 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
    if(numargs >= 2)
    {
       std::string str(u8(argv[1]));
-      if(parse_spaboot_start(str.c_str()))
+      if(parse_installer_start(str.c_str()))
       {
          return start();
       }
@@ -144,7 +144,7 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
       {
          std::string str(u8(argv[1]));
          strParameters = "\""+ str + "\"";
-         parse_spaboot(str.c_str());
+         parse_installer(str.c_str());
       }
    }
    
@@ -234,7 +234,7 @@ bool file_exists(const char * path1)
 
 
 
-//void parse_spaboot(XNode & node)
+//void parse_installer(XNode & node)
 //{
 //   if(node.name == "spa" && node.childs.size() > 0)
 //   {
@@ -255,14 +255,14 @@ bool file_exists(const char * path1)
 //   }
 //}
 //
-//void parse_spaboot(const char * psz)
+//void parse_installer(const char * psz)
 //{
 //   XNode node;
 //   node.Load(file::get_contents(psz).c_str());
-//   parse_spaboot(node);
+//   parse_installer(node);
 //}
 //
-//bool parse_spaboot_start(XNode & node)
+//bool parse_installer_start(XNode & node)
 //{
 //   int iOkCount = 0;
 //   std::string strInstalledBuild;
@@ -329,11 +329,11 @@ bool file_exists(const char * path1)
 //
 //
 //
-//bool parse_spaboot_start(const char * psz)
+//bool parse_installer_start(const char * psz)
 //{
 //   XNode node;
 //   node.Load(file::get_contents(psz).c_str());
-//   return parse_spaboot_start(node);
+//   return parse_installer_start(node);
 //}
 //
 //void trace(const char * psz)
@@ -434,14 +434,14 @@ bool file_exists(const char * path1)
   //  so that the application will get 'well formed' small icons associated
   //  with it.
 
-ATOM spaboot_RegisterClass(HINSTANCE hInstance)
+ATOM installer_RegisterClass(HINSTANCE hInstance)
 {
 	WNDCLASSEX wcex;
 
 	wcex.cbSize = sizeof(WNDCLASSEX);
 
 	wcex.style			   = 0;
-	wcex.lpfnWndProc	   = spaboot_WndProc;
+	wcex.lpfnWndProc	   = installer_WndProc;
 	wcex.cbClsExtra	   = 0;
 	wcex.cbWndExtra	   = 0;
 	wcex.hInstance		   = hInstance;
@@ -466,7 +466,7 @@ ATOM spaboot_RegisterClass(HINSTANCE hInstance)
 //  e_message_destroy	- post a quit message and return
 //
 //
-LRESULT CALLBACK spaboot_WndProc(HWND hWnd, const ::id & id, WPARAM wParam, LPARAM lParam)
+LRESULT CALLBACK installer_WndProc(HWND hWnd, const ::id & id, WPARAM wParam, LPARAM lParam)
 {
 	switch (message)
 	{

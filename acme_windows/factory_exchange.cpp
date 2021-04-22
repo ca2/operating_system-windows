@@ -6,6 +6,8 @@
 #include "acme_dir.h"
 #include "acme/filesystem/filesystem/acme_path.h"
 #include "acme_path.h"
+#include "acme/platform/serial.h"
+#include "serial.h"
 
 void CLASS_DECL_ACME_WINDOWS __cdecl _ca2_purecall();
 
@@ -53,6 +55,8 @@ void acme_windows_factory_exchange(::factory_map * pfactorymap)
    // 
    // ydesk >();
    ////create_factory < ::windows::shell, ::user::shell >();
+
+   pfactorymap->create_factory < ::windows::serial, ::serial::serial >();
 
 
 }

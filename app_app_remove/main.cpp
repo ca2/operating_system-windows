@@ -348,7 +348,7 @@ void removal::g_n_rmdir_n_v(const KNOWNFOLDERID & rfid, const char * pszDir)
 
    ::reg_delete_tree_dup(HKEY_CLASSES_ROOT, "ca2os.ca2.fontopus.iexca2");
    ::reg_delete_tree_dup(HKEY_CLASSES_ROOT, "ca2os.ca2.fontopus.iexca2.2");
-   ::reg_delete_tree_dup(HKEY_CLASSES_ROOT, "ca2_spaboot_file");
+   ::reg_delete_tree_dup(HKEY_CLASSES_ROOT, "ca2_installer_file");
 
    //message_box(nullptr, "Hope Helped!", "Hope Helped!", e_message_box_icon_information);
 

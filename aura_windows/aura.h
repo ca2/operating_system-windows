@@ -51,7 +51,7 @@ namespace windows
       virtual ::e_status register_dll(const ::file::path & pathDll) override;
 
 
-      virtual ::e_status start() override;
+      virtual ::e_status system_main() override;
 
 
    };

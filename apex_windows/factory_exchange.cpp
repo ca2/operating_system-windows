@@ -57,10 +57,15 @@
 void CLASS_DECL_APEX_WINDOWS __cdecl _ca2_purecall();
 
 
+void acme_windows_factory_exchange(::factory_map* pfactorymap);
+
+
 void apex_windows_factory_exchange(::factory_map * pfactorymap)
 {
 
    _set_purecall_handler(_ca2_purecall);
+
+   acme_windows_factory_exchange(pfactorymap);
 
    pfactorymap->create_factory < ::windows::dir_system, ::dir_system >();
    pfactorymap->create_factory < ::windows::file_system, ::file_system >();

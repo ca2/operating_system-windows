@@ -694,14 +694,14 @@ namespace production
 
             m_pathVrel = "C:\\ca2\\vrel\\" + m_strConfiguration + "\\" + m_strFormatBuild;
 
-            m_strCCAuth = "C:\\home\\ccvotagus\\ca2_spa\\" + m_strConfiguration + "\\" + m_strFormatBuild;
-            m_strCCVrel = "C:\\home\\ccvotagus\\ca2_spa\\" + m_strConfiguration + "";
-            m_strCCVrelNew = "C:\\home\\ccvotagus\\ca2_spa\\ccvrelnew\\" + m_strConfiguration + "\\" + m_strFormatBuild;
+            m_strCCAuth = "C:\\home\\ca2_spa\\" + m_strConfiguration + "\\" + m_strFormatBuild;
+            m_strCCVrel = "C:\\home\\ca2_spa\\" + m_strConfiguration + "";
+            m_strCCVrelNew = "C:\\home\\ca2_spa\\ccvrelnew\\" + m_strConfiguration + "\\" + m_strFormatBuild;
 
             i32 i;
             if (m_bClean)
             {
-               add_status("Cleaning ca2 fontopus ccvotagus ...");
+               add_status("Cleaning ca2 fontopus ...");
                //{
                //   string str;
 
@@ -728,7 +728,7 @@ namespace production
                while (!process->has_exited())
                {
                   Sleep(5000);
-                  str.Format("%d Cleaning ca2 fontopus ccvotagus ...", i);
+                  str.Format("%d Cleaning ca2 fontopus ...", i);
                   add_status(str);
                   i++;
                }
@@ -781,7 +781,7 @@ namespace production
 
             //pcontext->m_papexcontext->http().ms_download("http://api.ca2.cc/spaignition/clean",
             //   pcontext->m_papexcontext->dir().install() / "time\\spaignition_update.txt"), nullptr, post, headers, ::ca2::app(get_application()).user()->get_user());
-            /*add_status("Cleaning ccvotagus folder...");
+            /*add_status("Cleaning folder...");
             ::process::process_pointer process(e_create);
             pcontext->m_papexcontext->file().put_contents(strPath, "rmdir /s /q C:\\ca2\\vrel\\" + m_strConfiguration);
             if (!process->create_child_process(strPath, false))
@@ -796,7 +796,7 @@ namespace production
             while (!process->has_exited(&dwExitCode))
             {
                Sleep(500);
-               str.Format("%d Cleaning ccvotagus folder ...", i);
+               str.Format("%d Cleaning folder ...", i);
                add_status(str);
                i++;
             }*/
@@ -989,8 +989,8 @@ namespace production
          {
          return 1;
          }*/
-         pcontext->m_papexcontext->dir().mk("C:\\home\\ccvotagus\\ca2_spa\\" + m_strConfiguration + "\\app\\");
-         pcontext->m_papexcontext->file().put_contents("C:\\home\\ccvotagus\\ca2_spa\\" + m_strConfiguration + "\\app\\build.txt", m_strBuild);
+         pcontext->m_papexcontext->dir().mk("C:\\home\\ca2_spa\\" + m_strConfiguration + "\\app\\");
+         pcontext->m_papexcontext->file().put_contents("C:\\home\\ca2_spa\\" + m_strConfiguration + "\\app\\build.txt", m_strBuild);
          pcontext->m_papexcontext->file().put_contents(m_strCCVrelNew + "\\app\\build.txt", m_strBuild);
          pcontext->m_papexcontext->dir().mk(m_strTagPath.folder());
          pcontext->m_papexcontext->file().put_contents(m_strTagPath, m_strTag);
@@ -1971,7 +1971,7 @@ namespace production
       strMd5 = m_pathVrel / strRelativeMd5;
       pcontext->m_papexcontext->file().put_contents(strMd5, m_strIndexMd5);
 
-      //string strStage = pcontext->m_papexcontext->dir().path("C:\\home\\ccvotagus\\ca2_spa\\" + m_strVersionShift, strRelative) + ".bz";
+      //string strStage = pcontext->m_papexcontext->dir().path("C:\\home\\ca2_spa\\" + m_strVersionShift, strRelative) + ".bz";
       //::DeleteFileW(::str::international::utf8_to_unicode(
       // strStage));
       //pcontext->m_papexcontext->file().copy(strStage, strBz);
@@ -2453,7 +2453,7 @@ namespace production
       string strInstall = pcontext->m_papexcontext->file().as_string(m_strBase / "platform/stage/matter/npca2/install.rdf");
       strInstall.replace("%BUILD%", strNpca2Version);
       strInstall.replace("%PLATFORM%", "/plugin/" + strPlatform);
-      strInstall.replace("%DOWNLOADSITE%", "anycast.ca2.cc/ccvotagus");
+      strInstall.replace("%DOWNLOADSITE%", "anycast.ca2.cc");
       strInstall.replace("%VERSION%", strVersionUrl);
       strInstall.replace("%ICONURL%", strIconUrl);
 
@@ -2463,7 +2463,7 @@ namespace production
       string strWindows = pcontext->m_papexcontext->file().as_string(m_strBase / "platform/stage/matter/npca2/npca2_windows.rdf");
       strWindows.replace("%BUILD%", strNpca2Version);
       strWindows.replace("%PLATFORM%", "/" + m_strFormatBuild + "/stage/" + strPlatform);
-      strWindows.replace("%DOWNLOADSITE%", m_strDownloadSite + "/ccvotagus");
+      strWindows.replace("%DOWNLOADSITE%", m_strDownloadSite + "");
       strWindows.replace("%VERSION%", strVersionUrl);
       strWindows.replace("%ICONURL%", strIconUrl);
       pcontext->m_papexcontext->file().put_contents(strDir / "npca2_windows.rdf", strWindows);
@@ -3409,7 +3409,7 @@ retry1:
 
       string strApp(psz);
 
-      add_status("Building ca2 fontopus ccvotagus " + strApp + "...");
+      add_status("Building ca2 fontopus " + strApp + "...");
       //{
       //   string str;
 
@@ -3445,7 +3445,7 @@ retry1:
       while (!process->has_exited())
       {
          Sleep(100);
-         //str.Format("%d Building ca2 fontopus ccvotagus " + strApp + "...", i);
+         //str.Format("%d Building ca2 fontopus " + strApp + "...", i);
          while (true)
          {
             str = process->read();

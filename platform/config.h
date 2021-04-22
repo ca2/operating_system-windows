@@ -67,7 +67,7 @@
 #define HAVE_OPENSSL
 
 
-#define __PLATFORM   "windows"
+#define PLATFORM_NAME   "windows"
 
 
 

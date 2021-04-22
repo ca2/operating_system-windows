@@ -1,7 +1,7 @@
 #pragma once
 
 
-int spaboot_start(const char * pszVersion, const char * pszId);
+int installer_start(const char * pszVersion, const char * pszId);
 
 
 namespace npca2

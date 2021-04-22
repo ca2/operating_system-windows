@@ -17,4 +17,6 @@ void windowing_win32_factory_exchange(::factory_map * pfactorymap)
    pfactorymap->create_factory < ::windowing_win32::copydesk, ::user::copydesk >();
    pfactorymap->create_factory < imm_client, ::user::text_composition_client >();
 
+   pfactorymap->create_factory < ::windowing_win32::keyboard, ::windowing::keyboard >();
+
 }

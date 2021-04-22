@@ -717,6 +717,24 @@ namespace windows
 
    }
 
+   
+   ::e_status acme::on_start_system()
+   {
+
+      auto psystem = m_psystem;
+
+      auto estatus = psystem->post_initial_request();
+
+      if (!estatus)
+      {
+
+         return estatus;
+
+      }
+
+      return estatus;
+
+   }
 
 
 } // namespace node_windows

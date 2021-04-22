@@ -1160,6 +1160,7 @@
     <ClInclude Include="acme_path.h" />
     <ClInclude Include="factory_exchange.h" />
     <ClInclude Include="folder_watch.h" />
+    <ClInclude Include="serial.h" />
     <ClInclude Include="_.h" />
     <ClInclude Include="framework.h" />
   </ItemGroup>
@@ -1167,6 +1168,7 @@
     <ClCompile Include="acme_dir.cpp" />
     <ClCompile Include="acme.cpp" />
     <ClCompile Include="acme_path.cpp" />
+    <ClCompile Include="serial.cpp" />
     <ClCompile Include="_.cpp" />
     <ClCompile Include="factory_exchange.cpp" />
     <ClCompile Include="framework.cpp">

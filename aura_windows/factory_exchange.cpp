@@ -5,9 +5,14 @@
 #include "aura.h"
 
 
+void apex_windows_factory_exchange(::factory_map* pfactorymap);
+
+
 extern "C"
 void aura_windows_factory_exchange(::factory_map * pfactorymap)
 {
+
+   apex_windows_factory_exchange(pfactorymap);
 
    pfactorymap->create_factory < ::windows::aura, ::acme::node >();
 
