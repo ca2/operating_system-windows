@@ -11,7 +11,7 @@
 #include "process.h"
 #include "os_context.h"
 #include "service_handler.h"
-#include "acme/node/windows/pipe.h"
+#include "acme_windows/pipe.h"
 #include "crypto.h"
 #include "ip_enum.h"
 #include "interprocess_communication.h"

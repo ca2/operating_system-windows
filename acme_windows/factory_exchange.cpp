@@ -2,12 +2,17 @@
 #include "acme/operating_system.h"
 #include "acme/platform/node.h"
 #include "acme/filesystem/filesystem/acme_dir.h"
+#include "acme/os/console.h"
 #include "acme.h"
 #include "acme_dir.h"
 #include "acme/filesystem/filesystem/acme_path.h"
 #include "acme_path.h"
 #include "acme/platform/serial.h"
 #include "serial.h"
+#include "file_memory_map.h"
+#include "pipe.h"
+#include "console.h"
+#include "file.h"
 
 void CLASS_DECL_ACME_WINDOWS __cdecl _ca2_purecall();
 
@@ -57,7 +62,11 @@ void acme_windows_factory_exchange(::factory_map * pfactorymap)
    ////create_factory < ::windows::shell, ::user::shell >();
 
    pfactorymap->create_factory < ::windows::serial, ::serial::serial >();
+   pfactorymap->create_factory < ::windows::file_memory_map, ::file::memory_map >();
 
+   pfactorymap->create_factory < ::windows::pipe, ::process::pipe >();
+   pfactorymap->create_factory < ::windows::file, ::file::file >();
+   pfactorymap->create_factory < ::windows::console, ::console::console >();
 
 }
 

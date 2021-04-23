@@ -1158,8 +1158,11 @@
     <ClInclude Include="acme.h" />
     <ClInclude Include="acme_dir.h" />
     <ClInclude Include="acme_path.h" />
+    <ClInclude Include="console.h" />
     <ClInclude Include="factory_exchange.h" />
-    <ClInclude Include="folder_watch.h" />
+    <ClInclude Include="file.h" />
+    <ClInclude Include="file_memory_map.h" />
+    <ClInclude Include="pipe.h" />
     <ClInclude Include="serial.h" />
     <ClInclude Include="_.h" />
     <ClInclude Include="framework.h" />
@@ -1168,6 +1171,10 @@
     <ClCompile Include="acme_dir.cpp" />
     <ClCompile Include="acme.cpp" />
     <ClCompile Include="acme_path.cpp" />
+    <ClCompile Include="console.cpp" />
+    <ClCompile Include="file.cpp" />
+    <ClCompile Include="file_memory_map.cpp" />
+    <ClCompile Include="pipe.cpp" />
     <ClCompile Include="serial.cpp" />
     <ClCompile Include="_.cpp" />
     <ClCompile Include="factory_exchange.cpp" />

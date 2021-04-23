@@ -3,6 +3,7 @@
 #include "acme/os/windows_common/_file_c.h"
 #include "acme/os/windows_common/cotaskptr.h"
 #include "acme/os/windows_common/file.h"
+#include "acme_windows/file.h"
 #include <wincred.h>
 #include <wtsapi32.h>
 #include <shobjidl.h>
