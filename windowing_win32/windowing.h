@@ -100,9 +100,8 @@ namespace windowing_win32
     
 
       using windowing::windowing::get_cursor;
-      //virtual bool set_cursor(::user::interaction * pinteraction, ::draw2d::cursor * pcursor);
-      //virtual bool set_cursor(::user::interaction * pinteraction, enum_cursor ecursor);
-      //virtual bool set_default_cursor(::user::interaction * pinteraction, enum_cursor ecursor);
+
+
       virtual ::windowing::cursor * get_cursor();
       virtual ::windowing::cursor * get_default_cursor();
 

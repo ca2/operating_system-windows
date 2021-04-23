@@ -207,7 +207,7 @@ namespace windowing_win32
          //MESSAGE_LINK(e_message_show_window, pchannel, this, &window::_001OnShowWindow);
          //MESSAGE_LINK(e_message_kill_focus, pchannel, this, &window::_001OnKillFocus);
          //MESSAGE_LINK(e_message_set_focus, pchannel, this, &window::_001OnSetFocus);
-         MESSAGE_LINK(e_message_set_cursor, pchannel, this, &window::_001OnSetCursor);
+         //MESSAGE_LINK(e_message_set_cursor, pchannel, this, &window::_001OnSetCursor);
 
       }
 
@@ -2226,17 +2226,30 @@ namespace windowing_win32
 //   }
 
 
-   ::e_status window::set_cursor(::windowing::cursor * pcursor)
+   ::e_status window::set_mouse_cursor(::windowing::cursor * pcursor)
    {
 
-      HCURSOR hcursor = (HCURSOR) pcursor->get_os_data();
-
-      if (hcursor == nullptr)
+      HCURSOR hcursor = nullptr;
+      
+      if (::is_set(pcursor))
       {
 
-         return ::error_failed;
+         hcursor = (HCURSOR)pcursor->get_os_data();
+
+         if (hcursor == nullptr)
+         {
+
+            // At windows SetMouseCursor(nullptr) removes the cursor from screen
+            // similar apis in other platforms behave the same?
+
+            return error_failed;
+
+         }
 
       }
+
+      // At windows SetMouseCursor(nullptr) removes the cursor from screen
+      // similar apis in other platforms behave the same?
 
       if (!::SetCursor(hcursor))
       {
@@ -4058,27 +4071,21 @@ namespace windowing_win32
 
    //}
 
-   void window::_001OnSetCursor(::message::message * pmessage)
-   {
+   //void window::_001OnSetCursor(::message::message * pmessage)
+   //{
 
-      //__pointer(::message::message) pmessage(pmessage);
+   //   if (m_pcursor != nullptr)
+   //   {
 
-      auto pwindowing = windowing();
+   //      set_cursor(m_pcursor);
 
-      auto pcursor = pwindowing->get_cursor();
+   //      pmessage->m_lresult = TRUE;
 
-      if (pcursor != nullptr && pcursor->m_ecursor != e_cursor_system)
-      {
+   //      pmessage->m_bRet = true;
 
-         set_cursor(pcursor);
+   //   }
 
-      }
-
-      pmessage->m_lresult = HTCLIENT;
-
-      pmessage->m_bRet = true;
-
-   }
+   //}
 
 
    //void window::OnShowWindow(bool, ::u32)
@@ -5994,7 +6001,7 @@ namespace windowing_win32
 
          lparam = MAKELPARAM(pointCursor.x, pointCursor.y);
 
-         output_debug_string("transparent_mouse_event:x=" + __str(pointCursor.x) + ",y=" + __str(pointCursor.y) + "\n");
+         //output_debug_string("transparent_mouse_event:x=" + __str(pointCursor.x) + ",y=" + __str(pointCursor.y) + "\n");
 
          pimpl->send_message(e_message_mouse_move, 0, lparam);
 
@@ -6516,7 +6523,15 @@ namespace windowing_win32
             // So the procedure starts by setting to the default cursor,
             // what forces, at the end of message processing, setting the bergedge cursor to the default cursor, if no other
             // handler has set it to another one.
-            pmouse->m_ecursor = e_cursor_default;
+            auto psession = get_session();
+
+            auto puser = psession->user();
+
+            auto pwindowing = puser->windowing();
+
+            auto pcursor = pwindowing->get_cursor(e_cursor_default);
+
+            pmouse->m_pcursor = pcursor;
 
             //INFO("windows::e_message_mouse_move(%d,%d)", pmouse->m_point.x, pmouse->m_point.y);
 
@@ -6544,7 +6559,16 @@ namespace windowing_win32
             // So the procedure starts by setting to the default cursor,
             // what forces, at the end of message processing, setting the bergedge cursor to the default cursor, if no other
             // handler has set it to another one.
-            pmouse->m_ecursor = e_cursor_default;
+            auto psession = get_session();
+
+            auto puser = psession->user();
+
+            auto pwindowing = puser->windowing();
+
+            auto pcursor = pwindowing->get_cursor(e_cursor_default);
+
+            pmouse->m_pcursor = pcursor;
+
          }
 
          auto puiCapture = m_pimpl->m_puserinteractionCapture;

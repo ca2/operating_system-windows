@@ -110,7 +110,7 @@ namespace windowing_win32
 
       virtual void post_nc_destroy() override;
 
-      virtual ::e_status set_cursor(::windowing::cursor * pcursor) override;
+      virtual ::e_status set_mouse_cursor(::windowing::cursor * pcursor) override;
 
 //      virtual bool is_child_of(const ::windowing::window * pwindowAscendantCandidate) const override;
       
@@ -191,7 +191,7 @@ namespace windowing_win32
       DECLARE_MESSAGE_HANDLER(_001OnPrint);
       //DECLARE_MESSAGE_HANDLER(_001OnSetFocus);
       DECLARE_MESSAGE_HANDLER(_001OnNcCalcSize);
-      DECLARE_MESSAGE_HANDLER(_001OnSetCursor);
+      //DECLARE_MESSAGE_HANDLER(_001OnSetCursor);
       DECLARE_MESSAGE_HANDLER(_001OnEraseBkgnd);
       //DECLARE_MESSAGE_HANDLER(_001OnMove);
       //DECLARE_MESSAGE_HANDLER(_001OnSize);
