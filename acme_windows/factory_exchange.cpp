@@ -1,5 +1,5 @@
 #include "framework.h"
-#include "acme/operating_system.h"
+//#include "acme/operating_system.h"
 #include "acme/platform/node.h"
 #include "acme/filesystem/filesystem/acme_dir.h"
 #include "acme/os/console.h"
@@ -14,13 +14,21 @@
 #include "console.h"
 #include "file.h"
 
-void CLASS_DECL_ACME_WINDOWS __cdecl _ca2_purecall();
+//void CLASS_DECL_ACME_WINDOWS __cdecl _ca2_purecall();
+
+extern "C"
+void acme_windows_common_factory_exchange(::factory_map* pfactorymap);
 
 
+extern "C"
 void acme_windows_factory_exchange(::factory_map * pfactorymap)
 {
 
-   _set_purecall_handler(_ca2_purecall);
+
+   acme_windows_common_factory_exchange(pfactorymap);
+
+
+   //_set_purecall_handler(_ca2_purecall);
 
    //pfactorymap->create_factory < ::windows::dir_system, ::dir_system >();
    //pfactorymap->create_factory < ::windows::file_system, ::file_system >();

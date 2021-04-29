@@ -96,7 +96,7 @@ The first release.
 */
 
 #include "framework.h"
-#include "acme/operating_system.h"
+//#include "acme/operating_system.h"
 #include "uac_tools.h"
 #include <VersionHelpers.h>
 #include <ShellApi.h>

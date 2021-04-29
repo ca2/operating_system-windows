@@ -2,12 +2,13 @@
 
 
 #include "apex/_.h"
+#include "apex_windows_commmon/_.h"
 
 
-#if defined(_WINDOWING_WIN32_LIBRARY)
-#define CLASS_DECL_WINDOWING_WIN32  CLASS_DECL_EXPORT
+#if defined(_APEX_WINDOWS_LIBRARY)
+#define CLASS_DECL_APEX_WINDOWS  CLASS_DECL_EXPORT
 #else
-#define CLASS_DECL_WINDOWING_WIN32  CLASS_DECL_IMPORT
+#define CLASS_DECL_APEX_WINDOWS  CLASS_DECL_IMPORT
 #endif
 
 

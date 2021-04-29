@@ -53,9 +53,6 @@
     <ClInclude Include="_acme_windows.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="_ (2).h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="_node_windows.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -69,9 +66,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="exception.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="factory_exchange (2).h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="file_change_event.h">
@@ -89,9 +83,6 @@
     <ClInclude Include="shared_memory.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="standard_exception.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="sync_options.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -103,9 +94,6 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="framework.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="factory_exchange.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -142,19 +130,10 @@
     <ClCompile Include="file_find.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="mutex.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="shared_memory.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="standard_exception.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="strdup_array.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="system.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="timer.cpp">
@@ -166,10 +145,10 @@
     <ClCompile Include="uac_tools.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="windows.cpp">
+    <ClCompile Include="windows_desktop.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="windows_desktop.cpp">
+    <ClCompile Include="framework.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

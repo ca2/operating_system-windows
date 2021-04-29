@@ -2,6 +2,7 @@
 
 
 #include "acme/_.h"
+#include "acme_windows_common/_.h"
 
 
 #if defined(_ACME_WINDOWS_LIBRARY)

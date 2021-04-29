@@ -2,7 +2,7 @@
 #pragma once
 
 
-CLASS_DECL_WINDOWING_WIN32 HRESULT win_create_link(const widechar* pszPathObj, const widechar* pszPathLink, const widechar* pszDesc, const widechar* pszIconPath, ::i32 iIcon);
+CLASS_DECL_APEX_WINDOWS HRESULT win_create_link(const widechar* pszPathObj, const widechar* pszPathLink, const widechar* pszDesc, const widechar* pszIconPath, ::i32 iIcon);
 
 
 

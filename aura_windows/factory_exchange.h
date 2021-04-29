@@ -1,7 +1,7 @@
 #pragma once
 
 //
-//namespace acme
+//namespace aura
 //{
 //
 //
@@ -9,8 +9,8 @@
 //   {
 //
 //
-//      class CLASS_DECL_ACME factory_exchange:
-//         virtual public ::matter
+//      class CLASS_DECL_AURA factory_exchange:
+//         virtual public ::object
 //      {
 //      public:
 //
@@ -25,7 +25,7 @@
 //   } // namespace windows
 //
 //
-//} // namespace acme
+//} // namespace aura
 //
 //
 //
