@@ -1,0 +1,7 @@
+; platform_production.def : Declares the module parameters for the DLL.
+
+LIBRARY      "platform_production"
+; DESCRIPTION  'production Windows Dynamic Link Library'
+
+EXPORTS
+platform_production_get_new_library

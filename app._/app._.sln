@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.136
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app._", "app._.vcxproj", "{11AFE887-61B7-4217-913C-36736B359F39}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		basis|x64 = basis|x64
+		basis|x86 = basis|x86
+		cover|x64 = cover|x64
+		cover|x86 = cover|x86
+		stage|x64 = stage|x64
+		stage|x86 = stage|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{11AFE887-61B7-4217-913C-36736B359F39}.basis|x64.ActiveCfg = basis|x64
+		{11AFE887-61B7-4217-913C-36736B359F39}.basis|x64.Build.0 = basis|x64
+		{11AFE887-61B7-4217-913C-36736B359F39}.basis|x86.ActiveCfg = basis|Win32
+		{11AFE887-61B7-4217-913C-36736B359F39}.basis|x86.Build.0 = basis|Win32
+		{11AFE887-61B7-4217-913C-36736B359F39}.cover|x64.ActiveCfg = cover|x64
+		{11AFE887-61B7-4217-913C-36736B359F39}.cover|x64.Build.0 = cover|x64
+		{11AFE887-61B7-4217-913C-36736B359F39}.cover|x86.ActiveCfg = cover|Win32
+		{11AFE887-61B7-4217-913C-36736B359F39}.cover|x86.Build.0 = cover|Win32
+		{11AFE887-61B7-4217-913C-36736B359F39}.stage|x64.ActiveCfg = stage|x64
+		{11AFE887-61B7-4217-913C-36736B359F39}.stage|x64.Build.0 = stage|x64
+		{11AFE887-61B7-4217-913C-36736B359F39}.stage|x86.ActiveCfg = stage|Win32
+		{11AFE887-61B7-4217-913C-36736B359F39}.stage|x86.Build.0 = stage|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4264053E-9B36-4A1A-87F4-06EEFB1A5D61}
+	EndGlobalSection
+EndGlobal

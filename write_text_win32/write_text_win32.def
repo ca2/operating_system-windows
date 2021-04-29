@@ -1,0 +1,5 @@
+LIBRARY "write_text_win32"
+
+EXPORTS
+write_text_win32_factory_exchange
+

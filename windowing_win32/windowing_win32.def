@@ -1,0 +1,5 @@
+LIBRARY "windowing_win32"
+
+EXPORTS
+windowing_win32_factory_exchange
+

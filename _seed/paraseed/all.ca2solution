@@ -1,0 +1,8 @@
+<solution>
+<projects>
+<project path="app/c" />
+<project path="app/ca" />
+<project path="app/ca2" />
+<project path="app/optca" />
+</projects>
+</solution>
