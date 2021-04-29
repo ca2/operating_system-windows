@@ -1,5 +1,0 @@
-LIBRARY "app_common"
-
-EXPORTS
-app_common_main
-

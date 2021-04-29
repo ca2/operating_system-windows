@@ -1,8 +1,0 @@
-hstart "C:\basis\platform\third\openssl\build-openssl.bat build x86 static debug"
-hstart "C:\basis\platform\third\openssl\build-openssl.bat build x86 static release"
-hstart "C:\basis\platform\third\openssl\build-openssl.bat build x86 shared debug"
-hstart "C:\basis\platform\third\openssl\build-openssl.bat build x86 shared release"
-hstart "C:\basis\platform\third\openssl\build-openssl.bat build x64 static debug"
-hstart "C:\basis\platform\third\openssl\build-openssl.bat build x64 static release"
-hstart "C:\basis\platform\third\openssl\build-openssl.bat build x64 shared debug"
-hstart "C:\basis\platform\third\openssl\build-openssl.bat build x64 shared release"

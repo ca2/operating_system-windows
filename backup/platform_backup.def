@@ -1,7 +1,0 @@
-; app_backup.def : Declares the module parameters for the DLL.
-
-LIBRARY      "platform_backup"
-; DESCRIPTION  'backup Windows Dynamic Link Library'
-
-EXPORTS
-    ; Explicit exports can go here

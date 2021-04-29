@@ -1,4 +1,0 @@
-LIBRARY  "music_midi_mmsystem"
-
-EXPORTS
-music_midi_mmsystem_factory_exchange

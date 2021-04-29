@@ -1,5 +1,0 @@
-LIBRARY "draw2d_gdiplus"
-
-EXPORTS
-draw2d_gdiplus_factory_exchange
-
