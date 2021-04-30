@@ -5,7 +5,7 @@ namespace windows
 {
 
 
-   struct CLASS_DECL_ACME path
+   struct CLASS_DECL_ACME_WINDOWS path
    {
 
 #ifdef WINDOWS_DESKTOP

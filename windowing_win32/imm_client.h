@@ -13,7 +13,6 @@ public:
    __pointer(::user::interaction)   m_puserinteraction;
 
 
-
    imm_client();
    virtual ~imm_client();
 

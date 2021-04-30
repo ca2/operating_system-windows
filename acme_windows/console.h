@@ -5,7 +5,7 @@ namespace windows
 {
 
 
-   class CLASS_DECL_ACME_WINDOWS_COMMON console :
+   class CLASS_DECL_ACME_WINDOWS console :
       virtual public ::console::console
    {
    public:

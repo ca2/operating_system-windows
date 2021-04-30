@@ -1,18 +1,23 @@
 #pragma once
 
+//#error ""
 
 #include "aura/operating_system.h"
 
-
 #include <Shobjidl.h>
 #include <Shellapi.h>
+
 
 
 namespace windows
 {
 
 
-   class CLASS_DECL_AURA interaction_impl :
+   //CLASS_DECL_AURA lresult CALLBACK __send_message_hook(i32, wparam, lparam);
+   //CLASS_DECL_AURA lresult CALLBACK __cbt_filter_hook(i32, wparam, lparam);
+
+
+   class CLASS_DECL_AURA_WINDOWS interaction_impl :
       virtual public ::user::interaction_impl
    {
    public:
@@ -691,6 +696,9 @@ namespace windows
       //void PrepareForHelp();
 
 
+      virtual ::e_status set_tool_window(bool bSet);
+
+
       friend class frame_window;
 
       bool CreateDlg(const char * pszTemplateName, ::user::interaction_impl * pParentWnd);
@@ -731,10 +739,6 @@ namespace windows
 
 
       virtual void activate_top_parent();
-
-
-      virtual void set_tool_window(bool bSet);
-
 
 
    };

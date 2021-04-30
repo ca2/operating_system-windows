@@ -168,6 +168,9 @@
     <ClInclude Include="_windowing_win32.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="_impl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="..\version.rc" />

@@ -5,7 +5,7 @@ namespace windows
 {
 
 
-   class CLASS_DECL_ACME file_find :
+   class CLASS_DECL_ACME_WINDOWS file_find :
       public ::matter
    {
       // ementation

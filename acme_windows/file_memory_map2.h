@@ -5,7 +5,7 @@ namespace cross_windows
 {
 
 
-   class CLASS_DECL_ACME file_memory_map :
+   class CLASS_DECL_ACME_WINDOWS file_memory_map :
       virtual public ::file::memory_map
    {
    public:

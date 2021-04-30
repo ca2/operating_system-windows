@@ -5,7 +5,7 @@
 namespace VistaTools
 {
 
-   bool CLASS_DECL_ACME IsVista();
+   bool CLASS_DECL_ACME_WINDOWS IsVista();
 
    /*
    Use IsVista() to determine whether the current process is running under Windows Vista or
@@ -21,7 +21,7 @@ namespace VistaTools
 
 #ifndef WIN64
 
-   bool CLASS_DECL_ACME
+   bool CLASS_DECL_ACME_WINDOWS
    IsWow64();
 
    /*
@@ -42,7 +42,7 @@ namespace VistaTools
 #endif//WIN64
 
 
-   HRESULT CLASS_DECL_ACME
+   HRESULT CLASS_DECL_ACME_WINDOWS
    GetElevationType(__out TOKEN_ELEVATION_TYPE * ptet);
 
    /*
@@ -72,7 +72,7 @@ namespace VistaTools
    call GetLastError().
    */
 
-   HRESULT CLASS_DECL_ACME
+   HRESULT CLASS_DECL_ACME_WINDOWS
    IsElevated(__out_opt bool * pbElevated = nullptr);
 
    /*
@@ -101,7 +101,7 @@ namespace VistaTools
    call GetLastError().
    */
 
-   bool CLASS_DECL_ACME
+   bool CLASS_DECL_ACME_WINDOWS
    RunElevated(
    __in      HWND hwnd,
    __in      const char * pszPath,
@@ -152,7 +152,7 @@ namespace VistaTools
 #endif//NO_DLL_IMPORTS
 
 
-   bool CLASS_DECL_ACME
+   bool CLASS_DECL_ACME_WINDOWS
    RunNonElevated(
    __in      HWND hwnd,
    __in      const char * pszPath,
@@ -202,7 +202,7 @@ namespace VistaTools
    // MyShellExec is just a wrapper around a call to ShellExecuteEx,
    // to be able to specify the verb easily.
 
-   bool CLASS_DECL_ACME
+   bool CLASS_DECL_ACME_WINDOWS
    MyShellExec(::windowing::window * pwindow,
                const char * pszVerb,
                const char * pszPath,

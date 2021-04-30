@@ -1,15 +1,11 @@
 #include "framework.h"
-#include "acme/node/windows/registry.h"
-#include "acme_windows/acme.h"
-#include "apex_windows/apex.h"
-#include "node.h"
 
 
-namespace windows
+namespace aura
 {
 
 
-   namespace aura
+   namespace windows
    {
 
 
@@ -40,7 +36,6 @@ namespace windows
          return string(wsz);
 
       }
-#include "aura/os/windows/_c.h"
 
 
       bool node::_os_calc_app_dark_mode()
@@ -398,7 +393,9 @@ namespace windows
       ::e_status node::system_main()
       {
 
-         __pointer(::node::system) psystem = m_psystem;
+         //__pointer(::node::system) psystem = m_psystem;
+
+         auto psystem = m_psystem;
 
          auto estatus = psystem->main();
 
@@ -424,34 +421,26 @@ namespace windows
       }
 
 
+      int _os_message_box(const char* pszMessage, const char* pszTitle, const ::e_message_box& emessagebox)
+      {
 
-   } // namespace node_windows
+         int iMessageBox = emessagebox.m_eenum & 0x7f;
 
+         wstring wstrText(pszMessage);
 
+         wstring wstrTitle(pszTitle);
 
+         int iResult = ::MessageBox(nullptr, wstrText, wstrTitle, iMessageBox);
 
+         return iResult;
 
-
-   int _os_message_box(const char* pszMessage, const char* pszTitle, const ::e_message_box& emessagebox)
-   {
-
-      int iMessageBox = emessagebox.m_eenum & 0x7f;
-
-      wstring wstrText(pszMessage);
-
-      wstring wstrTitle(pszTitle);
-
-      int iResult = ::MessageBox(nullptr, wstrText, wstrTitle, iMessageBox);
-
-      return iResult;
-
-   }
+      }
 
 
-   } // namespace aura
+   } // namespace windows
 
 
-} // namespace windows
+} // namespace aura
 
 
 

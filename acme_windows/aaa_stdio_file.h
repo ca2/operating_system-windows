@@ -7,7 +7,7 @@ namespace windows
 {
 
 
-   class CLASS_DECL_ACME stdio_file :
+   class CLASS_DECL_ACME_WINDOWS stdio_file :
       virtual public ::file::text_file
    {
    public:

@@ -2,7 +2,7 @@
 #include "framework.h"
 #include "acme/const/timer.h"
 #include "window.h"
-#include "aura/node/windows/interaction_impl.h"
+#include "aura_windows/interaction_impl.h"
 #include "aura/user/interaction_prodevian.h"
 #include <dwmapi.h>
 
@@ -2239,10 +2239,39 @@ namespace windowing_win32
          if (hcursor == nullptr)
          {
 
-            // At windows SetMouseCursor(nullptr) removes the cursor from screen
-            // similar apis in other platforms behave the same?
+            if (pcursor->m_bLoadSystemDefaultCursorHint)
+            {
 
-            return error_failed;
+               auto ecursor = pcursor->m_ecursor;
+
+               auto estatus = pcursor->load_default_cursor(ecursor);
+
+               if (!estatus)
+               {
+
+                  return estatus;
+
+               }
+
+               hcursor = (HCURSOR) pcursor->get_os_data();
+
+               if (hcursor == nullptr)
+               {
+
+                  return error_failed;
+
+               }
+
+            }
+            else
+            {
+
+               // At windows SetMouseCursor(nullptr) removes the cursor from screen
+               // similar apis in other platforms behave the same?
+
+               return error_failed;
+
+            }
 
          }
 

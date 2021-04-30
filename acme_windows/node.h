@@ -7,17 +7,16 @@
 #pragma once
 
 
-namespace windows
+namespace acme
 {
 
    
-   namespace acme
+   namespace windows
    {
 
 
       class CLASS_DECL_ACME_WINDOWS node :
-         virtual public ::acme::node,
-         virtual public ::windows_common::acme::node
+         virtual public ::acme::windows_common::node
       {
       public:
 
@@ -51,6 +50,8 @@ namespace windows
          virtual void install_crash_dump_reporting(const string& strModuleNameWithTheExeExtension) override;
 
 
+         virtual platform_char** get_envp(wcsdup_array& a);
+
          //virtual bool memcnts();
 
          //virtual ::file::path memcnts_base_path();
@@ -70,10 +71,10 @@ namespace windows
          };
 
 
-   } // namespace acme
+   } // namespace windows
 
 
-} // namespace windows
+} // namespace acme
 
 
 

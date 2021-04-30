@@ -96,7 +96,6 @@ END
 // LEVEL
 //
 
-IDR_LEVEL1              LEVEL                   "app\\level.txt"
 
 #endif    // English (United States) resources
 /////////////////////////////////////////////////////////////////////////////

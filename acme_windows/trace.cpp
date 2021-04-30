@@ -6,7 +6,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 //// Build data tables by including data file three times
 //
-//struct CLASS_DECL_ACME __MAP_MESSAGE
+//struct CLASS_DECL_ACME_WINDOWS __MAP_MESSAGE
 //{
 //   ::u32    nMsg;
 //   const char *  pszMsg;

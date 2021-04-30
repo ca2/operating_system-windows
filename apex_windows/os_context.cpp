@@ -1,23 +1,10 @@
 #include "framework.h"
-#include "apex/operating_system.h"
-#include "acme/os/windows_common/_file_c.h"
-#include "acme/os/windows_common/cotaskptr.h"
-#include "acme/os/windows_common/file.h"
-#include "acme_windows/file.h"
 #include <wincred.h>
 #include <wtsapi32.h>
 #include <shobjidl.h>
-#include "acme/id.h"
-#include "acme/node/windows/_node_windows_private.h"
-#include "acme/os/windows/_windows.h"
-#include "acme/platform/node.h"
 #include <ShellApi.h>
-#include "os_context.h"
-#include "apex/platform/node.h"
-#include "acme_windows/node.h"
-#include "node.h"
+#include <Security.h>
 #include "acme/filesystem/filesystem/acme_dir.h"
-#include "acme_windows/acme_dir.h"
 #include "acme/filesystem/filesystem/acme_path.h"
 
 
@@ -1590,7 +1577,7 @@ retry:
 
       }
 
-      if ((u32)status.m_attribute != wAttr && (wAttr & ::windows::file::readOnly))
+      //if ((u32)status.m_attribute != wAttr && (wAttr & ::file::readOnly))
       {
 
          // set file attribute, only if currently readonly.
@@ -1665,7 +1652,7 @@ retry:
 
       }
 
-      if ((u32)status.m_attribute != wAttr && !(wAttr & ::windows::file::readOnly))
+      //if ((u32)status.m_attribute != wAttr && !(wAttr & ::windows::file::readOnly))
       {
 
          if (!::SetFileAttributesW(wstr, (u32)status.m_attribute))
@@ -3640,10 +3627,11 @@ repeat:
 
 
 
-namespace windows
+namespace apex
 {
 
-   namespace apex
+
+   namespace windows
    {
 
 
@@ -3660,7 +3648,10 @@ namespace windows
       }
 
 
-   } // namespace apex
+   } // namespace windows
 
 
-} // namespace windows
+} // namespace apex
+
+
+

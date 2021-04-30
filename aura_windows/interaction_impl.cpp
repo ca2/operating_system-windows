@@ -4,25 +4,50 @@
 #include "aura/message.h"
 #include "aura/user/interaction_thread.h"
 #include "aura/os/windows/windowing.h"
-#include "aura/node/windows/buffer.h"
+//#include "aura/os/windows/imm_context.h"
+//#include "aura/buffer.h"
 #include "acme/const/timer.h"
 #include "apex/platform/app_core.h"
 #include "interaction_impl.h"
 
 
-CLASS_DECL_AURA int g_iMouseDown = 0;
+//const GUID CLSID_TaskbarList = { 0x56FDF344, 0xFD6D, 0x11D0,{ 0x95, 0x8A, 0x00, 0x60, 0x97, 0xC9, 0xA0, 0x90 } };
+//const GUID IID_ITaskbarList = { 0x56FDF342, 0xFD6D, 0x11D0,{ 0x95, 0x8A, 0x00, 0x60, 0x97, 0xC9, 0xA0, 0x90 } };
+//const GUID IID_ITaskbarList2 = { 0x602D4995, 0xB13A, 0x429b,{ 0xA6, 0x6E, 0x19, 0x35, 0xE4, 0x4F, 0x43, 0x17 } };
+//const GUID IID_ITaskList3 = { 0xEA1AFB91, 0x9E28, 0x4B86,{ 0x90, 0xE9, 0x9E, 0x9F, 0x8A, 0x5E, 0xEF, 0xAF } };
 
+CLASS_DECL_AURA_WINDOWS int g_iMouseDown = 0;
+
+//CLASS_DECL_AURA_WINDOWS thread_iptr < DWORD_PTR > t_time1;
+//CLASS_DECL_AURA_WINDOWS thread_iptr < DWORD_PTR > t_time2;
+
+
+//extern CLASS_DECL_AURA_WINDOWS thread_int_ptr < DWORD_PTR > t_time1;
+
+//thread_int_ptr < HHOOK > t_hHookOldCbtFilter;
+//thread_pointer < ::windows::interaction_impl  > thread_set("wnd_init");
+
+//lresult CALLBACK __activation_window_procedure(::windowing::window * pwindow,::u32 nMsg,wparam wParam,lparam lParam);
 
 const char * gen_OldWndProc = "::aura::OldWndProc423";
+
+//CLASS_DECL_AURA_WINDOWS bool hook_window_create(::windows::interaction_impl * pwindow);
+
+
+//#define __WNDCLASS(s)    L"ca2" L##s
+//#define __WND             __WNDCLASS("Wnd")
+//#define __WNDCONTROLBAR   __WNDCLASS("ControlBar")
+//#define __WNDMDIFRAME     __WNDCLASS("MDIFrame")
+//#define __WNDFRAMEORVIEW  __WNDCLASS("FrameOrView")
+//#define __WNDOLECONTROL   __WNDCLASS("OleControl")
+
 
 
 struct __CTLCOLOR
 {
-
-   ::windowing::window *      pwindow;
-   HDC                        hDC;
-   ::u32                      nCtlType;
-
+   ::windowing::window * pwindow;
+   HDC hDC;
+   ::u32 nCtlType;
 };
 
 
@@ -41,6 +66,14 @@ namespace windows
    }
 
 
+   //void interaction_impl::construct(::windowing::window * pwindow)
+   //{
+
+   //   //set_handle(oswindow);
+
+   //}
+
+
    void interaction_impl::user_common_construct()
    {
 
@@ -57,6 +90,8 @@ namespace windows
       m_bUpdateGraphics = false;
       m_bIgnoreSizeEvent = false;
       m_bIgnoreMoveEvent = false;
+
+      //set_handle(nullptr);
 
       __zero(m_size);
       __zero(m_point);
@@ -83,6 +118,50 @@ namespace windows
       return (void *)((::windows::interaction_impl *) this)->get_oswindow();
 
    }
+
+
+
+   //bool interaction_impl::ModifyStyle(::windowing::window * pwindow, u32 dwRemove, u32 dwAdd, ::u32 nFlags)
+   //{
+
+   //   m_pwindow->modify
+
+   //   bool bOk = __modify_style(oswindow, GWL_STYLE, dwRemove, dwAdd, 0);
+
+   //   if (nFlags != 0)
+   //   {
+
+   //      //m_iShowFlags = nFlags;
+
+
+
+   //   }
+
+   //   return bOk;
+
+   //}
+
+
+   //bool interaction_impl::ModifyStyleEx(::windowing::window * pwindow, u32 dwRemove, u32 dwAdd, ::u32 nFlags)
+   //{
+
+   //   return __modify_style(oswindow, GWL_EXSTYLE, dwRemove, dwAdd, nFlags);
+
+   //}
+
+
+   //lresult interaction_impl::Default()
+   //{
+
+   //   return default_window_procedure(m_uiMessage, m_wparam, m_lparam);
+
+   //}
+
+
+   //void interaction_impl::pre_subclass_window()
+   //{
+
+   //}
 
 
    ::e_status interaction_impl::native_create_host()
@@ -119,14 +198,253 @@ namespace windows
    }
 
 
+   // bool interaction_impl::create_message_queue(::user::interaction * pinteraction, const char * lpszName)
+   // {
+
+   //    if (_is_window())
+   //    {
+
+   //       DestroyWindow();
+
+   //    }
+
+   //    ::user::system createstruct(0, nullptr, lpszName, WS_CHILD, nullptr);
+
+   //    pusersystem->m_createstruct.hwndParent = HWND_MESSAGE;
+
+   //    if (!native_create_window_ex(pinteraction, createstruct, HWND_MESSAGE))
+   //    {
+
+   //       return false;
+
+   //    }
+
+   //    return true;
+
+   // }
+
+
+   //void interaction_impl::install_message_routing(::channel * pchannel)
+   //{
+
+   //   last_install_message_routing(pchannel);
+   //   
+   //   ::user::interaction_impl::install_message_routing(pchannel);
+
+   //   if (!m_puserinteraction->m_bMessageWindow)
+   //   {
+   //      
+   //      MESSAGE_LINK(e_message_paint, pchannel, this, &interaction_impl::_001OnPaint);
+   //      MESSAGE_LINK(WM_PRINT, pchannel, this, &interaction_impl::_001OnPrint);
+
+   //   }
+
+   //   m_puserinteraction->install_message_routing(pchannel);
+   //   MESSAGE_LINK(e_message_create, pchannel, this, &interaction_impl::on_message_create);
+   //   if (!m_puserinteraction->m_bMessageWindow)
+   //   {
+   //      MESSAGE_LINK(e_message_set_cursor, pchannel, this, &interaction_impl::_001OnSetCursor);
+   //      MESSAGE_LINK(e_message_erase_background, pchannel, this, &interaction_impl::_001OnEraseBkgnd);
+   //      MESSAGE_LINK(e_message_nccalcsize, pchannel, this, &interaction_impl::_001OnNcCalcSize);
+   //      MESSAGE_LINK(e_message_show_window, pchannel, this, &interaction_impl::_001OnShowWindow);
+   //      MESSAGE_LINK(e_message_activate, pchannel, this, &interaction_impl::_001OnActivate);
+   //      MESSAGE_LINK(WM_DWMNCRENDERINGCHANGED, pchannel, this, &interaction_impl::_001OnDwmNcRenderingChanged);
+   //      MESSAGE_LINK(e_message_move, pchannel, this, &interaction_impl::_001OnMove);
+   //      MESSAGE_LINK(e_message_size, pchannel, this, &interaction_impl::_001OnSize);
+   //      MESSAGE_LINK(e_message_window_position_changing,pchannel,this,&interaction_impl::_001OnWindowPosChanging);
+   //      MESSAGE_LINK(e_message_window_position_changed,pchannel,this,&interaction_impl::_001OnWindowPosChanged);
+   //      MESSAGE_LINK(WM_GETMINMAXINFO,pchannel,this,&interaction_impl::_001OnGetMinMaxInfo);
+
+
+   //   }
+
+   //   prio_install_message_routing(pchannel);
+
+   //   MESSAGE_LINK(e_message_destroy, pchannel, this, &interaction_impl::_001OnDestroy);
+   //   MESSAGE_LINK(e_message_enable, pchannel, this, &interaction_impl::_001OnEnable);
+   //   MESSAGE_LINK(e_message_set_focus, pchannel, this, &interaction_impl::_001OnSetFocus);
+   //   MESSAGE_LINK(e_message_kill_focus, pchannel, this, &interaction_impl::_001OnKillFocus);
+
+
+
+   //}
+
+
+   //void interaction_impl::_001OnShowWindow(::message::message * pmessage)
+   //{
+
+   //   __pointer(::message::show_window) pshowwindow(pmessage);
+
+   //   if (pshowwindow->m_bShow)
+   //   {
+
+   //      output_debug_string("windows::interaction_impl::_001OnShowWindow bShow = true");
+
+   //   }
+   //   else
+   //   {
+
+   //      output_debug_string("windows::interaction_impl::_001OnShowWindow bShow = false");
+
+   //   }
+
+
+   //}
+
+
+
+
+   //void interaction_impl::_001OnMove(::message::message* pmessage)
+   //{
+
+   //   if (m_bDestroyImplOnly)
+   //   {
+
+   //      return;
+
+   //   }
+
+   //   if (m_puserinteraction->layout().m_eflag)
+   //   {
+
+   //      return;
+
+   //   }
+
+   //   __pointer(::message::move) pmove(pmessage);
+
+   //   if (m_puserinteraction->layout().sketch().origin() != pmove->m_point)
+   //   {
+
+   //      if (m_puserinteraction->layout().is_moving())
+   //      {
+
+   //         INFO("Window is Moving :: _001OnMove");
+
+   //      }
+
+   //      m_puserinteraction->layout().sketch().origin()= pmove->m_point;
+
+   //      if (m_puserinteraction->layout().sketch().display() != e_display_normal)
+   //      {
+
+   //         m_puserinteraction->display(e_display_normal);
+
+   //      }
+
+   //      m_puserinteraction->set_reposition();
+
+   //      m_puserinteraction->set_need_redraw();
+
+   //   }
+
+   //}
+
+
+   //void interaction_impl::_001OnSize(::message::message * pmessage)
+   //{
+
+   //   if (m_bDestroyImplOnly)
+   //   {
+
+   //      return;
+
+   //   }
+
+   //   if (m_puserinteraction->layout().m_eflag)
+   //   {
+
+   //      return;
+
+   //   }
+
+   //   __pointer(::message::size) psize(pmessage);
+
+   //   if (m_puserinteraction->layout().sketch().size() != psize->m_size)
+   //   {
+
+   //      m_puserinteraction->layout().sketch().size() = psize->m_size;
+
+   //      if (m_puserinteraction->layout().sketch().display() != e_display_normal)
+   //      {
+
+   //         m_puserinteraction->display(e_display_normal);
+
+   //      }
+
+   //      m_puserinteraction->set_need_layout();
+
+   //      m_puserinteraction->set_need_redraw();
+
+   //   }
+
+   //}
+
+
+   //void interaction_impl::_001OnEnable(::message::message * pmessage)
+   //{
+
+   //   __pointer(::message::enable) penable(pmessage);
+
+   //   if (penable != nullptr)
+   //   {
+
+   //      if (penable->get_enable())
+   //      {
+
+   //         output_debug_string("::window::interaction_impl _001OnEnable = true");
+
+   //      }
+   //      else
+   //      {
+
+   //         output_debug_string("::window::interaction_impl _001OnEnable = false");
+
+   //      }
+
+   //   }
+
+   //}
+
+
+   //void interaction_impl::_001OnDestroy(::message::message * pmessage)
+   //{
+
+   //   UNREFERENCED_PARAMETER(pmessage);
+
+   //   //__release(m_pthreadUserImpl OBJ_REF_DBG_COMMA_THIS);
+
+   //}
+
+
    void interaction_impl::post_nc_destroy()
    {
 
       m_pwindow->post_nc_destroy();
 
+
       ::user::interaction_impl::PostNcDestroy();
 
    }
+
+
+   //void interaction_impl::on_final_release()
+   //{
+
+   //   if (get_handle() != nullptr)
+   //   {
+
+   //      DestroyWindow();    // will call PostNcDestroy
+
+   //   }
+   //   else
+   //   {
+
+   //      PostNcDestroy();
+
+   //   }
+
+   //}
 
 
    void interaction_impl::assert_valid() const
@@ -141,6 +459,8 @@ namespace windows
    {
 
       ::user::interaction_impl::install_message_routing(pchannel);
+
+      //m_puserinteraction->install_message_routing(pchannel);
 
    }
 
@@ -165,6 +485,7 @@ namespace windows
    bool interaction_impl::destroy_impl_only()
    {
 
+
       return ::user::interaction_impl::destroy_impl_only();
 
    }
@@ -186,23 +507,387 @@ namespace windows
    }
 
 
+
+
+   //WNDPROC* interaction_impl::GetSuperWndProcAddr()
+   //{
+
+   //   // Note: it is no longer necessary to override GetSuperWndProcAddr
+   //   //  for each control class with a different WNDCLASS.
+   //   //  This implementation now uses instance data, such that the previous
+   //   //  WNDPROC can be anything.
+
+   //   return &m_pfnSuper;
+
+   //}
+
+
+   //void interaction_impl::pre_translate_message(::message::message * pmessage)
+   //{
+
+   //   __pointer(::user::message) pusermessage(pmessage);
+
+   //}
+
+
+   //i32 interaction_impl::GetChildByIdText(i32 nID, string & rString) const
+   //{
+
+   //   ASSERT(::is_window(((::windows::interaction_impl *)this)->get_handle()));
+
+   //   rString = "";    // is_empty without deallocating
+
+   //   ::windowing::window * pwindow = ::GetDlgItem(((::windows::interaction_impl *)this)->get_handle(), nID);
+
+   //   if (oswindow != nullptr)
+   //   {
+
+   //      i32 nLen = ::GetWindowTextLength(oswindow);
+   //      wstring wstr;
+
+   //      ::GetWindowTextW(oswindow, wstr.get_string_buffer(nLen), nLen + 1);
+
+   //      wstr.release_string_buffer();
+
+   //      rString = wstr;
+
+   //   }
+
+   //   return (i32)rString.get_length();
+
+   //}
+
+
+
+
+   ///////////////////////////////////////////////////////////////////////////////
+   //// interaction_impl will delegate owner draw messages to self drawing controls
+
+   //// Drawing: for all 4 control types
+   //void interaction_impl::OnDrawItem(i32 nIDCtl, LPDRAWITEMSTRUCT pDrawItemStruct)
+
+   //{
+
+   //   // reflect notification to child interaction_impl control
+   //   //      if (ReflectMessage(pDrawItemStruct->hwndItem))
+
+   //   //       return;     // eat it
+
+   //   // not handled - do default
+   //   // Default();
+   //}
+
+   //// Drawing: for all 4 control types
+   //i32 interaction_impl::OnCompareItem(i32 nIDCtl, LPCOMPAREITEMSTRUCT pCompareItemStruct)
+
+   //{
+   //   // reflect notification to child interaction_impl control
+   //   //      lresult lResult;
+   //   //      if (ReflectLastMsg(pCompareItemStruct->hwndItem, &lResult))
+
+   //   //       return (i32)lResult;        // eat it
+
+   //   // not handled - do default
+   //   return (i32)Default();
+   //}
+
+   //void interaction_impl::OnDeleteItem(i32 nIDCtl, LPDELETEITEMSTRUCT pDeleteItemStruct)
+
+   //{
+   //   // reflect notification to child interaction_impl control
+   //   //if (ReflectLastMsg(pDeleteItemStruct->hwndItem))
+
+   //   // return;     // eat it
+   //   // not handled - do default
+   //   //Default();
+   //}
+
+   //bool interaction_impl::_EnableToolTips(bool bEnable, ::u32 nFlag)
+   //{
+   //   UNREFERENCED_PARAMETER(bEnable);
+   //   UNREFERENCED_PARAMETER(nFlag);
+   //   return false;
+   //}
+
+
+
+   //bool interaction_impl::GetWindowInfo(PWINDOWINFO pwi) const
+   //{
+   //   ASSERT(::is_window(((interaction_impl *)this)->get_handle()));
+   //   return ::GetWindowInfo(((interaction_impl *)this)->get_handle(), pwi) != false;
+   //}
+
+   //::user::interaction_impl * interaction_impl::GetAncestor(::u32 gaFlags) const
+   //{
+   //   ASSERT(::is_window(((interaction_impl *)this)->get_handle()));
+   //   return  psystem->ui_from_handle(::GetAncestor(((interaction_impl *)this)->get_handle(), gaFlags));
+   //}
+
+
+
+   //bool interaction_impl::GetScrollBarInfo(::i32 idObject, PSCROLLBARINFO psbi) const
+   //{
+   //   ASSERT(::is_window(((interaction_impl *)this)->get_handle()));
+   //   ASSERT(psbi != nullptr);
+   //   return ::GetScrollBarInfo(((interaction_impl *)this)->get_handle(), idObject, psbi) != false;
+   //}
+
+   //bool interaction_impl::GetTitleBarInfo(PTITLEBARINFO pti) const
+   //{
+   //   ASSERT(::is_window(((interaction_impl *)this)->get_handle()));
+   //   ASSERT(pti != nullptr);
+   //   return ::GetTitleBarInfo(((interaction_impl *)this)->get_handle(), pti) != false;
+   //}
+
+   //bool interaction_impl::AnimateWindow(millis millis, u32 dwFlags)
+   //{
+   //   ASSERT(_is_window());
+   //   return ::AnimateWindow(get_handle(), __os(millis), dwFlags) != false;
+   //}
+
+   //bool interaction_impl::FlashWindowEx(u32 dwFlags, ::u32  uCount, millis tickTimeout)
+   //{
+   //   ASSERT(_is_window());
+   //   FLASHWINFO fwi;
+   //   fwi.cbSize = sizeof(fwi);
+   //   fwi.hwnd = get_handle();
+   //   fwi.dwFlags = dwFlags;
+   //   fwi.uCount = uCount;
+   //   fwi.dwTimeout = __os(tickTimeout);
+
+   //   return ::FlashWindowEx(&fwi) != false;
+   //}
+
+
+
+   //bool interaction_impl::SetLayeredWindowAttributes(color32_t crKey, byte bAlpha, u32 dwFlags)
+   //{
+   //   ASSERT(_is_window());
+   //   return ::SetLayeredWindowAttributes(get_handle(), crKey, bAlpha, dwFlags) != false;
+   //}
+
+   //bool interaction_impl::UpdateLayeredWindow(::draw2d::graphics * pDCDst, POINT_I32 *pptDst, SIZE_I32 *psize,
+   //      ::draw2d::graphics * pDCSrc, POINT_I32 *pptSrc, color32_t crKey, BLENDFUNCTION *pblend, u32 dwFlags)
+   //{
+   //   ASSERT(_is_window());
+   //   ::exception::throw_not_implemented();
+   //   return false;
+   //   /*      return ::UpdateLayeredWindow(get_handle(), WIN_HDC(pDCDst), pptDst, psize,
+   //   WIN_HDC(pDCSrc), pptSrc, crKey, pblend, dwFlags) != false;*/
+   //}
+
+
+   //bool interaction_impl::GetLayeredWindowAttributes(color32_t *pcrKey, byte *pbAlpha, u32 *pdwFlags) const
+   //{
+   //   ASSERT(::is_window(((interaction_impl *)this)->get_handle()));
+   //   return ::GetLayeredWindowAttributes(((interaction_impl *)this)->get_handle(), pcrKey, pbAlpha, (LPDWORD)pdwFlags) != false;
+   //}
+
+   //bool interaction_impl::PrintWindow(::draw2d::graphics_pointer & pgraphics, ::u32 nFlags) const
+   //{
+   //   ASSERT(::is_window(((interaction_impl *)this)->get_handle()));
+   //   ::exception::throw_not_implemented();
+   //   //      return ::PrintWindow(get_handle(), (HDC)(dynamic_cast<::windows::graphics * >(pgraphics))->get_handle(), nFlags) != false;
+   //   return false;
+   //}
+
+
+   //lresult interaction_impl::OnNTCtlColor(wparam wParam, lparam lParam)
+   //{
+   //   // fill in special struct for compatiblity with 16-bit WM_CTLCOLOR
+   //   __CTLCOLOR ctl;
+   //   ctl.hDC = (HDC)wParam;
+   //   ctl.oswindow = (oswindow)lParam;
+   //   return 0;
+   //}
+
+   ///////////////////////////////////////////////////////////////////////////////
+   //// interaction_impl extensions for help support
+
+   //void interaction_impl::WinHelp(uptr dwData, ::u32 nCmd)
+   //{
+   //   UNREFERENCED_PARAMETER(dwData);
+   //   UNREFERENCED_PARAMETER(nCmd);
+   //   ::exception::throw_not_implemented();
+
+   //   /*      application* pApp = ::aura::get_system();
+   //   ASSERT_VALID(pApp);
+   //   ASSERT(pApp->m_pszHelpFilePath != nullptr);
+   //   ASSERT(pApp->m_eHelpType == afxWinHelp);
+
+   //   wait_cursor wait(this);
+
+   //   PrepareForHelp();
+
+   //   // need to use top level parent (for the case where get_handle() is in DLL)
+   //   __pointer(::user::interaction) pwindow = EnsureTopLevelParent();
+
+   //   TRACE(trace_category_appmsg, e_trace_level_warning, "WinHelp: pszHelpFile = '%s', dwData: $%lx, fuCommand: %d.\n", pApp->m_pszHelpFilePath, dwData, nCmd);
+
+   //   // finally, run the Windows Help engine
+   //   /* trans   if (!::WinHelp((pwindow)->get_handle(), pApp->m_pszHelpFilePath, nCmd, dwData))
+   //   {
+   //   // linux message_box(__IDP_FAILED_TO_LAUNCH_HELP);
+   //   message_box("Failed to launch help");
+   //   }*/
+   //}
+
+   ////void interaction_impl::HtmlHelp(uptr dwData, ::u32 nCmd)
+   ////{
+   //// ::exception::throw_not_implemented();
+   ///*
+   //application* pApp = ::aura::get_system();
+   //ASSERT_VALID(pApp);
+   //ASSERT(pApp->m_pszHelpFilePath != nullptr);
+   //// to call HtmlHelp the m_fUseHtmlHelp must be set in
+   //// the application's constructor
+   //ASSERT(pApp->m_eHelpType == afxHTMLHelp);
+
+   //wait_cursor wait(this);
+
+   //PrepareForHelp();
+
+   //// need to use top level parent (for the case where get_handle() is in DLL)
+   //__pointer(::user::interaction) pwindow = EnsureTopLevelParent();
+
+   //TRACE(trace_category_appmsg, e_trace_level_warning, "HtmlHelp: pszHelpFile = '%s', dwData: $%lx, fuCommand: %d.\n", pApp->m_pszHelpFilePath, dwData, nCmd);
+
+   //// run the HTML Help engine
+   ///* trans   if (!::aura::HtmlHelp((pwindow)->get_handle(), pApp->m_pszHelpFilePath, nCmd, dwData))
+   //{
+   //// linux message_box(__IDP_FAILED_TO_LAUNCH_HELP);
+   //message_box("Failed to launch help");
+   //}*/
+   ////}
+
+   //void interaction_impl::PrepareForHelp()
+   //{
+
+   //   __pointer(::user::interaction) pFrameWnd = m_puserinteraction;
+
+   //   if (pFrameWnd.is_set())
+   //   {
+
+   //      // frame_window windows should be allowed to exit help mode first
+
+   //      pFrameWnd->ExitHelpMode();
+
+   //   }
+
+   //   // cancel any tracking modes
+   //   send_message(WM_CANCELMODE);
+   //   send_message_to_descendants(WM_CANCELMODE, 0, 0, true, true);
+
+   //   // need to use top level parent (for the case where get_handle() is in DLL)
+   //   __pointer(::user::interaction) pwindow = EnsureTopLevel();
+   //   (pwindow.m_p)->send_message(WM_CANCELMODE);
+   //   (pwindow.m_p)->send_message_to_descendants(WM_CANCELMODE, 0, 0, true, true);
+
+   //   // attempt to cancel capture
+   //   ::windowing::window * pwindow_Capture = ::GetCapture();
+   //   if (oswindow_Capture != nullptr)
+   //      ::SendMessage(oswindow_Capture, WM_CANCELMODE, 0, 0);
+   //}
+
+
+   //void interaction_impl::WinHelpInternal(uptr dwData, ::u32 nCmd)
+   //{
+   //   UNREFERENCED_PARAMETER(dwData);
+   //   UNREFERENCED_PARAMETER(nCmd);
+   //   ::exception::throw_not_implemented();
+   //   /*
+   //   application* pApp = ::aura::get_system();
+   //   ASSERT_VALID(pApp);
+   //   if (pApp->m_eHelpType == afxHTMLHelp)
+   //   {
+   //   // translate from WinHelp commands and data to to HtmlHelp
+   //   ASSERT((nCmd == HELP_CONTEXT) || (nCmd == HELP_CONTENTS) || (nCmd == HELP_FINDER));
+   //   if (nCmd == HELP_CONTEXT)
+   //   nCmd = HH_HELP_CONTEXT;
+   //   else if (nCmd == HELP_CONTENTS)
+   //   nCmd = HH_DISPLAY_TOC;
+   //   else if (nCmd == HELP_FINDER)
+   //   nCmd = HH_HELP_FINDER;
+   //   HtmlHelp(dwData, nCmd);
+   //   }
+   //   else
+   //   WinHelp(dwData, nCmd);*/
+   //}
+
+
+
    void interaction_impl::route_command_message(::message::command * pcommand)
    {
 
       channel::route_command_message(pcommand);
 
       if (pcommand->m_bRet)
-      {
-
          return;
-
-      }
 
       channel * pcmdtarget = dynamic_cast <channel *> (this);
 
       pcmdtarget->channel::route_command_message(pcommand);
 
    }
+
+
+
+
+   //bool interaction_impl::OnCommand(::user::message * pusermessage)
+   //{
+   //   UNREFERENCED_PARAMETER(pusermessage);
+   //   return false;
+   //}
+
+
+   //bool interaction_impl::OnNotify(::user::message * pusermessage)
+   //{
+
+   //   ASSERT(pusermessage != nullptr);
+   //   NMHDR* pNMHDR = pusermessage->m_lparam.cast < NMHDR>();
+   //   ::windowing::window * pwindow_Ctrl = pNMHDR->hwndFrom;
+
+   //   // get the child ID from the interaction_impl itself
+   //   //      uptr nID = __get_dialog_control_id(oswindow_Ctrl);
+   //   //      i32 nCode = pNMHDR->code;
+
+   //   ASSERT(oswindow_Ctrl != nullptr);
+   //   ASSERT(::is_window(oswindow_Ctrl));
+
+   //   //      if (gen_ThreadState->m_hLockoutNotifyWindow == get_handle())
+   //   //       return true;        // locked out - ignore control notification
+
+   //   // reflect notification to child interaction_impl control
+   //   if (ReflectMessage(oswindow_Ctrl, pusermessage))
+   //      return true;        // eaten by child
+
+   //   //      __NOTIFY notify;
+   //   //    notify.pResult = pResult;
+   //   //  notify.pNMHDR = pNMHDR;
+   //   //xxx   return _001OnCommand(pusermessage);
+   //   return false;
+   //}
+
+
+   //bool interaction_impl::IsTopParentActive()
+   //{
+   //   
+   //   ASSERT(get_handle() != nullptr);
+   //   
+   //   ASSERT_VALID(this);
+
+   //   auto puserinteractionTopLevel = get_top_level();
+
+   //   if (!puserinteractionTopLevel)
+   //   {
+
+   //      return false;
+
+   //   }
+
+   //   return interaction_impl::get_foreground_window() == puserinteractionTopLevel->GetLastActivePopup();
+
+   //}
 
 
    void interaction_impl::activate_top_parent()
@@ -213,6 +898,290 @@ namespace windows
    }
 
 
+
+
+   //bool interaction_impl::HandleFloatingSysCommand(::u32 nID, lparam lParam)
+   //{
+
+   //   __pointer(::user::interaction) pParent = get_top_level();
+
+   //   switch (nID & 0xfff0)
+   //   {
+   //   case SC_PREVWINDOW:
+   //   case SC_NEXTWINDOW:
+   //      if (LOWORD(lParam) == VK_F6 && pParent)
+   //      {
+   //         pParent->SetFocus();
+   //         return true;
+   //      }
+   //      break;
+
+   //   case SC_CLOSE:
+   //   case SC_KEYMENU:
+   //      // Check lParam.  If it is 0L, then the ::account::user may have done
+   //      // an Alt+Tab, so just ignore it.  This breaks the ability to
+   //      // just press the Alt-key and have the first menu selected,
+   //      // but this is minor compared to what happens in the Alt+Tab
+   //      // case.
+   //      if ((nID & 0xfff0) == SC_CLOSE || lParam != 0L)
+   //      {
+   //         if (pParent)
+   //         {
+   //            // Sending the above WM_SYSCOMMAND may destroy the cast,
+   //            // so we have to be careful about restoring activation
+   //            // and focus after sending it.
+   //            ::windowing::window * pwindow_Save = get_handle();
+   //            ::windowing::window * pwindow_Focus = ::GetFocus();
+   //            pParent->SetActiveWindow();
+   //            pParent->send_message(WM_SYSCOMMAND, nID, lParam);
+
+   //            // be very careful here...
+   //            if (::is_window(oswindow_Save))
+   //               ::set_active_window(oswindow_Save);
+   //            if (::is_window(oswindow_Focus))
+   //               ::set_keyboard_focus(oswindow_Focus);
+   //         }
+   //      }
+   //      return true;
+   //   }
+   //   return false;
+   //}
+
+   //bool interaction_impl::ReflectMessage(::windowing::window * pwindow_Child, ::user::message * pusermessage)
+   //{
+
+   //   // check if in permanent map, if it is reflect it (could be OLE control)
+   //   auto pwindow = psystem->ui_from_handle(oswindow_Child);
+   //   ASSERT(!pwindow || (pwindow)->get_handle() == oswindow_Child);
+   //   if (!pwindow)
+   //   {
+   //      return false;
+   //   }
+
+   //   // only OLE controls and permanent windows will get reflected msgs
+   //   ASSERT(pwindow);
+   //   return (pwindow)->OnChildNotify(pusermessage);
+   //}
+
+   //bool interaction_impl::OnChildNotify(::user::message * pusermessage)
+   //{
+
+   //   return ReflectChildNotify(pusermessage);
+   //}
+
+   //bool interaction_impl::ReflectChildNotify(::user::message * pusermessage)
+   //{
+
+   //   // Note: reflected messages are send directly to interaction_impl::OnWndMsg
+   //   //  and interaction_impl::_001OnCommand for speed and because these messages are not
+   //   //  routed by normal _001OnCommand routing (they are only dispatched)
+
+   //   ::u32 message;
+
+   //   message = ::message::translate_to_os_message(pusermessage->m_id);
+
+   //   switch (message)
+   //   {
+   //   // normal messages (just wParam, lParam through OnWndMsg)
+   //   case e_message_hscroll:
+   //   case e_message_vscroll:
+   //   case WM_PARENTNOTIFY:
+   //   case WM_DRAWITEM:
+   //   case e_message_measure_item:
+   //   case WM_DELETEITEM:
+   //   case WM_VKEYTOITEM:
+   //   case WM_CHARTOITEM:
+   //   case WM_COMPAREITEM:
+   //      // reflect the message through the message map as WM_REFLECT_BASE+uMsg
+   //      //return interaction_impl::OnWndMsg(WM_REFLECT_BASE+uMsg, wParam, lParam, pResult);
+   //      return false;
+
+   //   // special case for e_message_command
+   //   case e_message_command:
+   //   {
+   //      // reflect the message through the message map as OCM_COMMAND
+   //      __keep(pusermessage->m_bReflect, true);
+
+   //      if (interaction_impl::OnCommand(pusermessage))
+   //      {
+   //         pusermessage->m_bRet = true;
+   //         return true;
+   //      }
+   //   }
+   //   break;
+
+   //   // special case for WM_NOTIFY
+   //   case WM_NOTIFY:
+   //   {
+   //      // reflect the message through the message map as OCM_NOTIFY
+   //      NMHDR* pNMHDR = pusermessage->m_lparam.cast < NMHDR >();
+   //      //            i32 nCode = pNMHDR->code;
+   //      //            __NOTIFY notify;
+   //      //          notify.pResult = pResult;
+   //      //        notify.pNMHDR = pNMHDR;
+   //      // xxxx         return interaction_impl::_001OnCommand(0, MAKELONG(nCode, WM_REFLECT_BASE+WM_NOTIFY), &notify, nullptr);
+   //   }
+
+   //   // other special cases (WM_CTLCOLOR family)
+   //   default:
+   //      if (message >= WM_CTLCOLORMSGBOX && message <= WM_CTLCOLORSTATIC)
+   //      {
+   //         // fill in special struct for compatiblity with 16-bit WM_CTLCOLOR
+   //         /*__CTLCOLOR ctl;
+   //         ctl.hDC = (HDC)wParam;
+   //         ctl.nCtlType = uMsg - WM_CTLCOLORMSGBOX;
+   //         //ASSERT(ctl.nCtlType >= CTLCOLOR_MSGBOX);
+   //         ASSERT(ctl.nCtlType <= CTLCOLOR_STATIC);
+
+   //         // reflect the message through the message map as OCM_CTLCOLOR
+   //         bool bResult = interaction_impl::OnWndMsg(WM_REFLECT_BASE+WM_CTLCOLOR, 0, (lparam)&ctl, pResult);
+   //         if ((HBRUSH)*pResult == nullptr)
+   //         bResult = false;
+   //         return bResult;*/
+   //         return false;
+   //      }
+   //      break;
+   //   }
+
+   //   return false;   // let the parent handle it
+   //}
+
+//   void interaction_impl::OnParentNotify(const ::id & id, lparam lParam)
+//   {
+//      if ((LOWORD(message) == e_message_create || LOWORD(message) == e_message_destroy))
+//      {
+//         //if (ReflectMessage((oswindow) lParam))
+//         // return;     // eat it
+//      }
+//      // not handled - do default
+//      //Default();
+//   }
+//
+////void interaction_impl::_001OnSetFocus(::message::message * pdetails)
+////{
+////
+////   //bool bHandled;
+//
+////   //bHandled = false;
+////   //if(!bHandled)
+////   //{
+////   //   Default();
+////   //}
+//
+//
+//
+////}
+//
+//
+//   lresult interaction_impl::OnActivateTopLevel(wparam wParam, lparam)
+//   {
+//
+//      return 0;
+//
+//   }
+//
+//
+//   void interaction_impl::OnSysColorChange()
+//   {
+//      ::exception::throw_not_implemented();
+//
+//      /*      application* pApp = ::aura::get_system();
+//      if (pApp != nullptr && pApp->m_puiMain == this)
+//      {
+//      // recolor global brushes used by control bars
+//      afxData.UpdateSysColors();
+//      }
+//
+//      // forward this message to all other child windows
+//      if (!(GetStyle() & WS_CHILD))
+//      send_message_to_descendants(WM_SYSCOLORCHANGE, 0, 0L, true, true);
+//
+//      Default();*/
+//   }
+//
+//   bool gen_GotScrollLines;
+//
+//   void interaction_impl::OnSettingChange(::u32 uFlags, const char * pszSection)
+//
+//   {
+//      UNUSED_ALWAYS(uFlags);
+//      UNUSED_ALWAYS(pszSection);
+//
+//
+//      // force refresh of settings that we cache
+//      gen_GotScrollLines = false;
+//
+//
+//      interaction_impl::OnDisplayChange(0, 0);    // to update system metrics, etc.
+//   }
+//
+//   void interaction_impl::OnDevModeChange(__in char * pDeviceName)
+//
+//   {
+//      UNREFERENCED_PARAMETER(pDeviceName);
+//
+//      ::exception::throw_not_implemented();
+//      /*application* pApp = ::aura::get_system();
+//      if (pApp != nullptr && pApp->m_puiMain == this)
+//      pApp->DevModeChange(pDeviceName);
+//
+//
+//      // forward this message to all other child windows
+//      if (!(GetStyle() & WS_CHILD))
+//      {
+//      const MSG* pMsg = GetCurrentMessage();
+//      send_message_to_descendants(pMsg->message, pMsg->wParam, pMsg->lParam,
+//      true, true);
+//      }*/
+//   }
+//
+//   bool interaction_impl::OnHelpInfo(HELPINFO* /*pHelpInfo*/)
+//   {
+//      //return //Default() != 0;
+//      return false;
+//   }
+//
+//   lresult interaction_impl::OnDisplayChange(wparam wparam, lparam lparam)
+//
+//   {
+//
+//      // forward this message to all other child windows
+//      if (!(GetStyle() & WS_CHILD))
+//      {
+//         //         const MSG* pMsg = GetCurrentMessage();
+//         send_message_to_descendants(e_message_display_change, wparam, lparam, true, true);
+//
+//      }
+//
+//      return Default();
+//   }
+//
+//   lresult interaction_impl::OnDragList(wparam, lparam lParam)
+//   {
+//      LPDRAGLISTINFO pInfo = (LPDRAGLISTINFO)lParam;
+//
+//      ASSERT(pInfo != nullptr);
+//
+//
+//      //      lresult lResult;
+//      //if (ReflectLastMsg(pInfo->hWnd, &lResult))
+//
+//      //   return (i32)lResult;    // eat it
+//
+//      // not handled - do default
+//      //return (i32)Default();
+//      return 0;
+//   }
+//
+//
+   //void interaction_impl::_002OnDraw(::image * pimage)
+   //{
+
+   //   ::exception::throw_not_implemented();
+
+   //}
+
+
    void interaction_impl::present()
    {
 
@@ -221,10 +1190,196 @@ namespace windows
    }
 
 
+   //void interaction_impl::defer_start_prodevian()
+   //{
+
+
+   //   ::user::interaction_impl::defer_start_prodevian();
+
+
+   //}
+
+
+   //void interaction_impl::on_message_create(::message::message * pmessage)
+   //{
+
+   //   __pointer(::message::create) pcreate(pmessage);
+
+
+   //   {
+
+   //      DEVMODE dm;
+
+   //      if (EnumDisplaySettings(nullptr, ENUM_CURRENT_SETTINGS, &dm))
+   //      {
+
+   //         set_config_fps(dm.dmDisplayFrequency);
+
+   //      }
+
+   //   }
+
+   //   default_message_handler(pmessage);
+
+   //   if (m_puserinteraction)
+   //   {
+
+   //      if (m_puserinteraction->is_message_only_window() || m_puserinteraction.cast <::user::system_interaction >())
+   //      {
+
+   //         TRACE("good : opt out!");
+
+   //      }
+
+   //      if (m_puserinteraction->m_bUserPrimitiveOk)
+   //      {
+
+   //         pcreate->m_lresult = 0;
+
+   //      }
+
+   //   }
+
+   //}
+
+
+   //BOOL CALLBACK GetAppsEnumWindowsProc(::windowing::window * pwindow, lparam lParam);
+
+
+
+
    void interaction_impl::_001DeferPaintLayeredWindowBackground(HDC hdc)
    {
 
    }
+
+
+   //void interaction_impl::_001OnProdevianSynch(::message::message * pmessage)
+   //{
+
+   //   UNREFERENCED_PARAMETER(pmessage);
+
+   //}
+
+
+
+
+   //void interaction_impl::_001OnPrint(::message::message * pmessage)
+   //{
+
+   //}
+
+
+
+//   bool interaction_impl::subclass_window(::windowing::window * pwindow)
+//   {
+//
+//      if (!attach(oswindow))
+//         return false;
+//
+//      // allow any other subclassing to occur
+//      pre_subclass_window();
+//
+//      m_pfnSuper = (WNDPROC)::GetWindowLongPtr(oswindow, GWLP_WNDPROC);
+//
+//      WNDPROC * plpfn = GetSuperWndProcAddr();
+//
+//      WNDPROC oldWndProc = (WNDPROC)::SetWindowLongPtr(oswindow, GWLP_WNDPROC, (iptr)windows_user_interaction_impl_get_window_procedure());
+//
+//      ASSERT(oldWndProc != windows_user_interaction_impl_get_window_procedure());
+//
+//      if (*plpfn == nullptr)
+//      {
+//
+//         *plpfn = oldWndProc;   // the first control of that type created
+//
+//      }
+//
+//
+//#ifdef __DEBUG
+//
+//      else if (*plpfn != oldWndProc)
+//      {
+//
+//         TRACE(trace_category_appmsg, e_trace_level_warning, "point_i32: Trying to use subclass_window with incorrect interaction_impl\n");
+//         TRACE(trace_category_appmsg, e_trace_level_warning, "\tderived class.\n");
+//         TRACE(trace_category_appmsg, e_trace_level_warning, "\toswindow_ = $%08X (nIDC=$%08X) is not a %hs.\n", (::u32)(uptr)oswindow, __get_dialog_control_id(oswindow), typeid(*this).name());
+//
+//         ASSERT(false);
+//
+//         // undo the subclassing if continuing after assert
+//
+//         ::SetWindowLongPtr(oswindow, GWLP_WNDPROC, (iptr)oldWndProc);
+//
+//      }
+//
+//#endif //__DEBUG
+//
+//      message::size size;
+//
+//      _001OnSize(&size);
+//
+//      return true;
+//
+//   }
+
+
+   //bool interaction_impl::SubclassDlgItem(::u32 nID, ::user::interaction_impl * pParent)
+   //{
+
+   //   ASSERT(pParent);
+
+   //   ASSERT(::is_window((pParent)->get_handle()));
+
+   //   // check for normal dialog control first
+   //   ::windowing::window * pwindow_Control = ::GetDlgItem((pParent)->get_handle(), nID);
+   //   if (oswindow_Control != nullptr)
+   //      return subclass_window(oswindow_Control);
+
+
+   //   return false;   // control not found
+   //}
+
+
+   //oswindow interaction_impl::unsubclass_window()
+   //{
+   //   //ASSERT(_is_window());
+
+   //   if (!_is_window())
+   //      return nullptr;
+
+   //   // set WNDPROC back to original value
+   //   WNDPROC* plpfn = GetSuperWndProcAddr();
+
+   //   ::SetWindowLongPtr(get_handle(), GWLP_WNDPROC, (iptr)*plpfn);
+
+   //   *plpfn = nullptr;
+
+
+   //   // and detach the oswindow from the interaction_impl object
+   //   return detach();
+   //}
+
+
+   /*
+
+   bool interaction_impl::IsChild(const ::user::interaction * pwindow) const
+   {
+
+   ASSERT(_is_window());
+
+   if(pwindow->get_handle() == nullptr)
+   {
+   return ::user::primitive::IsChild(pwindow);
+   }
+   else
+   {
+   return ::IsChild(get_handle(),pwindow->get_handle()) != false;
+   }
+
+   }
+
+   */
 
 
    bool interaction_impl::_is_window() const
@@ -257,6 +1412,13 @@ namespace windows
          return false;
 
       }
+
+      //if (!_is_window())
+      //{
+
+      //   return false;
+
+      //}
 
       return true;
 
@@ -303,6 +1465,7 @@ namespace windows
 
       //}
 
+
       ////m_puserinteraction->m_sizeScreen = rectScreen.size();
 
       ////m_puserinteraction->m_pointScreenClient.x = 0;
@@ -337,6 +1500,18 @@ namespace windows
       ////m_puserinteraction->m_pointClient -= m_puserinteraction.m_pointScreenClient;
 
    }
+
+
+   //point_f64 interaction_impl::client_screen_top_left()
+   //{
+
+   //   ::point_i32 point;
+
+   //   ::ClientToScreen(m_oswindow, &point);
+
+   //   return point_f64(point.x, point.y);
+
+   //}
 
 
    bool interaction_impl::window_rect_from_os(RECTANGLE_I32 * prectangle)
@@ -2753,7 +3928,13 @@ namespace windows
 //   }
 
 
+::e_status interaction_impl::set_tool_window(bool bSet)
+{
 
+   return m_pwindow->set_tool_window(bSet);
+
+
+}
 
 } // namespace windows
 
@@ -2991,7 +4172,7 @@ namespace windows
 
 
 
-//CLASS_DECL_AURA bool hook_window_create(::windows::interaction_impl * pwindow)
+//CLASS_DECL_AURA_WINDOWS bool hook_window_create(::windows::interaction_impl * pwindow)
 //{
 //
 //   if (pwindow == nullptr)
@@ -3050,7 +4231,7 @@ namespace windows
 //}
 //
 //
-//CLASS_DECL_AURA bool unhook_window_create()
+//CLASS_DECL_AURA_WINDOWS bool unhook_window_create()
 //{
 //
 //   if (thread_set("wnd_init") != nullptr)
@@ -3068,7 +4249,7 @@ namespace windows
 //
 
 //
-//void CLASS_DECL_AURA _handle_activate(::user::interaction_impl * pwindow, wparam nState, ::user::interaction_impl * pWndOther)
+//void CLASS_DECL_AURA_WINDOWS _handle_activate(::user::interaction_impl * pwindow, wparam nState, ::user::interaction_impl * pWndOther)
 //{
 //
 //   ASSERT(pwindow);
@@ -3836,34 +5017,3 @@ namespace windows
 
 
 
-CLASS_DECL_AURA::user::interaction * __user_interaction(::windowing::window * pwindow)
-{
-
-   if (::is_null(pwindow))
-   {
-
-      return nullptr;
-
-   }
-
-   auto pimpl = pwindow->m_pimpl;
-
-   if (::is_null(pimpl))
-   {
-
-      return nullptr;
-
-   }
-
-   auto puserinteraction = pimpl->m_puserinteraction;
-
-   if (::is_null(puserinteraction))
-   {
-
-      return nullptr;
-
-   }
-
-   return puserinteraction;
-
-}

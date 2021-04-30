@@ -1,18 +1,13 @@
 #include "framework.h"
-#include "apex/platform/node.h"
-#include "acme/node/windows/registry.h"
 #include "acme/filesystem/filesystem/acme_dir.h"
 #include "acme/filesystem/filesystem/acme_path.h"
-#include "acme_windows/node.h"
-#include "node.h"
-#include "aura/os/windows/_c.h"
 
 
-namespace windows
+namespace apex
 {
 
 
-   namespace apex
+   namespace windows
    {
 
 
@@ -50,7 +45,7 @@ namespace windows
       ::e_status node::initialize(::object* pobject)
       {
 
-         auto estatus = ::windows::acme::node::initialize(pobject);
+         auto estatus = ::acme::windows::node::initialize(pobject);
 
          if (!estatus)
          {
@@ -58,6 +53,16 @@ namespace windows
             return estatus;
 
          }
+
+         estatus = ::apex::windows_common::node::initialize(pobject);
+
+         if (!estatus)
+         {
+
+            return estatus;
+
+         }
+
 
          //if (!__node_apex_pre_init())
          //{
@@ -866,10 +871,10 @@ namespace windows
       //}
 
 
-   } // namespace node
+   } // namespace windows
 
 
-} // namespace windows
+} // namespace apex
 
 
 

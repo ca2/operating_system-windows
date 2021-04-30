@@ -10,7 +10,7 @@ namespace windows
 {
 
 
-   class CLASS_DECL_ACME_WINDOWS_COMMON pipe :
+   class CLASS_DECL_ACME_WINDOWS pipe :
       virtual public ::process::pipe
    {
    public:

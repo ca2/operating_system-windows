@@ -6,7 +6,7 @@ namespace windows
 {
 
 
-   class CLASS_DECL_ACME_WINDOWS_COMMON acme_dir :
+   class CLASS_DECL_ACME_WINDOWS acme_dir :
       virtual public ::acme_dir
    {
    public:

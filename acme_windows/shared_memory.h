@@ -1,7 +1,7 @@
 #pragma once
 
 
-class CLASS_DECL_ACME shared_memory :
+class CLASS_DECL_ACME_WINDOWS shared_memory :
    public memory_base
 {
 public:

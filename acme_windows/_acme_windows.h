@@ -2,6 +2,7 @@
 
 
 #include "acme_windows_common/_acme_windows_common.h"
+#include "acme/os/console.h"
 
 
 #include "acme/filesystem/filesystem/acme_dir.h"
@@ -14,6 +15,19 @@
 
 #include "file_find.h"
 #include "registry.h"
+
+
+#include "console.h"
+#include "pipe.h"
+
+
+#include "callstack.h"
+
+
+#include "shared_memory.h"
+
+
+#include "uac_tools.h"
 
 
 #include "node.h"

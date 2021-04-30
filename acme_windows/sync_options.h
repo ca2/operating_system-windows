@@ -5,7 +5,7 @@ namespace windows
 {
 
 
-   class CLASS_DECL_AURA sync_options :
+   class CLASS_DECL_ACME_WINDOWS sync_options :
       virtual ::sync_options
    {
    public:

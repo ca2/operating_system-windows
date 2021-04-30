@@ -156,36 +156,18 @@ namespace windowing_win32
       virtual void _window_create_gray_caret(HWND hwnd, i32 nWidth, i32 nHeight);
 
 
-
       template < typename PRED >
-      bool _top_level_contains_predicate(PRED pred)
-      {
-
-         top_level_boolean_predicate<PRED> boolean_predicate(pred);
-
-         EnumWindows(&top_level_boolean_predicate<PRED>::EnumWindowsProc, (LPARAM)&boolean_predicate);
-
-         return boolean_predicate.m_hwnd != nullptr;
-
-      }
+      bool _top_level_contains_predicate(PRED pred);
 
 
       template < typename PREDICATE >
-      bool _top_level_contains_bool_member(PREDICATE predicate)
-      {
-
-         top_level_boolean_predicate<PREDICATE> boolean_predicate(predicate);
-
-         EnumWindows(&top_level_boolean_predicate<PREDICATE>::EnumWindowsProc, (LPARAM)&boolean_predicate);
-
-         return boolean_predicate.m_hwnd != nullptr;
-
-      }
+      bool _top_level_contains_bool_member(PREDICATE predicate);
 
 
+      virtual bool _visible_top_level_contains_all_names(string_array& stra);
       virtual bool _visible_top_level_contains_name(string str);
       virtual bool _top_level_contains_name(string str);
-      virtual string _get_window_text_timeout(HWND hwnd, const ::duration & duration = 1_s);
+      virtual string _get_window_text_timeout(oswindow oswindow, const ::duration & duration = 1_s);
 
 
    };

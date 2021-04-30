@@ -5,17 +5,18 @@
 //#include "acme/filesystem/filesystem/acme_dir.h"
 
 
-namespace windows
+namespace acme
 {
 
 
-   namespace acme
+   namespace windows
    {
 
 
       node::node()
       {
 
+         ::windows::callstack::s_pcriticalsection = new critical_section();
 
       }
 
@@ -23,6 +24,11 @@ namespace windows
       node::~node()
       {
 
+#ifdef WINDOWS
+
+         ::acme::del(::windows::callstack::s_pcriticalsection);
+
+#endif
 
       }
 
@@ -741,10 +747,10 @@ namespace windows
       }
 
 
-   } // namespace acme
+   } // namespace windows
 
 
-} // namespace windows
+} // namespace acme
 
 
 

@@ -5,7 +5,7 @@ namespace windows
 {
 
 
-   class CLASS_DECL_ACME_WINDOWS_COMMON file_memory_map :
+   class CLASS_DECL_ACME_WINDOWS file_memory_map :
       virtual public ::file::memory_map
    {
    public:

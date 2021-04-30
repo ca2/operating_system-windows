@@ -771,7 +771,7 @@
       </EntryPointSymbol>
       <IgnoreSpecificDefaultLibraries>
       </IgnoreSpecificDefaultLibraries>
-      <AdditionalDependencies>Gdiplus.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>Dbghelp.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <MapFileName>
       </MapFileName>
     </Link>
@@ -1155,7 +1155,7 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="event.h" />
+    <ClInclude Include="callstack.h" />
     <ClInclude Include="exception.h" />
     <ClInclude Include="file_change_event.h" />
     <ClInclude Include="file_find.h" />
@@ -1164,7 +1164,6 @@
     <ClInclude Include="acme_dir.h" />
     <ClInclude Include="acme_path.h" />
     <ClInclude Include="console.h" />
-    <ClInclude Include="factory_exchange.h" />
     <ClInclude Include="file.h" />
     <ClInclude Include="file_memory_map.h" />
     <ClInclude Include="path.h" />
@@ -1184,6 +1183,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="acme_dir.cpp" />
+    <ClCompile Include="callstack.cpp" />
     <ClCompile Include="file_find.cpp" />
     <ClCompile Include="node.cpp" />
     <ClCompile Include="acme_path.cpp" />
@@ -1211,6 +1211,9 @@
   <ItemGroup>
     <ProjectReference Include="..\..\..\source\app\acme\acme.vcxproj">
       <Project>{638b242f-0f21-41c3-9f66-724660046133}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\platform-windows_common\acme_windows_common\acme_windows_common.vcxproj">
+      <Project>{eb9dc9c0-0573-4da0-8700-4dbb371773f1}</Project>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

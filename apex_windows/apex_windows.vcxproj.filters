@@ -12,9 +12,6 @@
     <Filter Include="Resource Files">
       <UniqueIdentifier>{2ec8ecd0-d089-4887-98eb-a66497a4e6c3}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\explorer">
-      <UniqueIdentifier>{0ce00e36-f453-4141-91ee-88aaa5963d42}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\explorer">
       <UniqueIdentifier>{37feb373-2a27-451e-a14b-19911d93082a}</UniqueIdentifier>
     </Filter>
@@ -26,31 +23,55 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="framework.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="explorer\explorer_restart.h">
+      <Filter>Header Files\explorer</Filter>
+    </ClInclude>
+    <ClInclude Include="shell\shell.h">
+      <Filter>Header Files\shell</Filter>
     </ClInclude>
     <ClInclude Include="_.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="_apex_windows.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="framework.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="node.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="process_data.h">
+    <ClInclude Include="thread.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="explorer\explorer_restart.h">
-      <Filter>Header Files\explorer</Filter>
-    </ClInclude>
-    <ClInclude Include="tts_speaker.h">
+    <ClInclude Include="_ (2).h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="aaa_node_windows.h">
+    <ClInclude Include="_node_windows1.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="aaa_node_windows_private.h">
+    <ClInclude Include="_node_windows_private1.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="aaa_windows.h">
+    <ClInclude Include="_windows1.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="a.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="aaa_tts_speaker.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="aaa_want_to_remove_handle.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="aaa_want_to_remove_printer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="aaa_want_to_remove_RoundWindowApp.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="aaa_want_to_remove_simple_hold_handle.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="crypto.h">
@@ -89,7 +110,7 @@
     <ClInclude Include="process.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="service_handler.h">
+    <ClInclude Include="service.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="service_pool.h">
@@ -98,16 +119,10 @@
     <ClInclude Include="shell_launcher.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="thread.h">
+    <ClInclude Include="thread (2).h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="launcher.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="shell\shell.h">
-      <Filter>Header Files\shell</Filter>
-    </ClInclude>
-    <ClInclude Include="_apex_windows.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -115,28 +130,25 @@
     <ClCompile Include="framework.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="factory_exchange.cpp">
+    <ClCompile Include="_.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="_.cpp">
+    <ClCompile Include="shell\shell.cpp">
+      <Filter>Source Files\shell</Filter>
+    </ClCompile>
+    <ClCompile Include="dir_context.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="factory_exchange.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="node.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="explorer\install_desk_toolbar.cpp">
-      <Filter>Source Files\explorer</Filter>
-    </ClCompile>
-    <ClCompile Include="explorer\explorer_restart.cpp">
-      <Filter>Source Files\explorer</Filter>
-    </ClCompile>
-    <ClCompile Include="application.cpp">
+    <ClCompile Include="os_context.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="crypto.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="dir_context.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="dir_system.cpp">
@@ -160,13 +172,7 @@
     <ClCompile Include="launcher.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="os_context.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="process.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="service_handler.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="shell_launcher.cpp">
@@ -181,8 +187,11 @@
     <ClCompile Include="trace.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="shell\shell.cpp">
-      <Filter>Source Files\shell</Filter>
+    <ClCompile Include="application.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="service_handler.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

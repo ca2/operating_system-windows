@@ -8,17 +8,17 @@
 #pragma once
 
 
-namespace windows
+namespace apex
 {
 
 
-   namespace apex
+   namespace windows
    {
 
 
       class CLASS_DECL_APEX_WINDOWS node :
-         virtual public ::windows::acme::node,
-         virtual public ::apex::node
+         virtual public ::acme::windows::node,
+         virtual public ::apex::windows_common::node
       {
       public:
 
@@ -102,10 +102,10 @@ namespace windows
       };
 
 
-   } // namespace apex
+   } // namespace windows
 
 
-} // namespace node_windows
+} // namespace apex
 
 
 

@@ -5,7 +5,7 @@
 #include "file.h"
 
 
-bool CLASS_DECL_ACME_WINDOWS_COMMON vfxFullPath(wstring & wstrFullPath,const wstring & wstrPath);
+bool CLASS_DECL_ACME_WINDOWS vfxFullPath(wstring & wstrFullPath,const wstring & wstrPath);
 
 namespace windows
 {
@@ -679,7 +679,7 @@ namespace windows
 
 
 // turn a file, relative path or other into an absolute path
-bool CLASS_DECL_ACME_WINDOWS_COMMON vfxFullPath(wstring & wstrFullPath, const wstring & wstrPath)
+bool CLASS_DECL_ACME_WINDOWS vfxFullPath(wstring & wstrFullPath, const wstring & wstrPath)
 // pszPathOut = buffer of _MAX_PATH
 
 // pszFileIn = file, relative path or absolute path
@@ -777,7 +777,7 @@ bool CLASS_DECL_ACME_WINDOWS_COMMON vfxFullPath(wstring & wstrFullPath, const ws
 }
 
 
-void CLASS_DECL_ACME_WINDOWS_COMMON vfxGetModuleShortFileName(HINSTANCE hInst, string& strShortName)
+void CLASS_DECL_ACME_WINDOWS vfxGetModuleShortFileName(HINSTANCE hInst, string& strShortName)
 {
    WCHAR szLongPathName[_MAX_PATH];
    wstring wstrShortName;
@@ -797,7 +797,7 @@ void CLASS_DECL_ACME_WINDOWS_COMMON vfxGetModuleShortFileName(HINSTANCE hInst, s
 
 
 
-string CLASS_DECL_ACME_WINDOWS_COMMON vfxStringFromCLSID(REFCLSID rclsid)
+string CLASS_DECL_ACME_WINDOWS vfxStringFromCLSID(REFCLSID rclsid)
 {
    WCHAR szCLSID[256];
    wsprintfW(szCLSID, L"{%08X-%04X-%04X-%02X%02X-%02X%02X%02X%02X%02X%02X}",
@@ -807,7 +807,7 @@ string CLASS_DECL_ACME_WINDOWS_COMMON vfxStringFromCLSID(REFCLSID rclsid)
    return szCLSID;
 }
 
-bool CLASS_DECL_ACME_WINDOWS_COMMON vfxGetInProcServer(const char * pszCLSID, string & str)
+bool CLASS_DECL_ACME_WINDOWS vfxGetInProcServer(const char * pszCLSID, string & str)
 
 {
    HKEY hKey = nullptr;
@@ -846,7 +846,7 @@ bool CLASS_DECL_ACME_WINDOWS_COMMON vfxGetInProcServer(const char * pszCLSID, st
 
 
 // turn a file, relative path or other into an absolute path
-bool CLASS_DECL_ACME_WINDOWS_COMMON vfxFullPath(unichar * pszPathOut, const unichar * pszFileIn)
+bool CLASS_DECL_ACME_WINDOWS vfxFullPath(unichar * pszPathOut, const unichar * pszFileIn)
 
 // pszPathOut = buffer of _MAX_PATH
 
@@ -906,7 +906,7 @@ bool CLASS_DECL_ACME_WINDOWS_COMMON vfxFullPath(unichar * pszPathOut, const unic
 
 
 
-void CLASS_DECL_ACME_WINDOWS_COMMON vfxGetRoot(wstring & wstrRoot, const wstring & wstrPath)
+void CLASS_DECL_ACME_WINDOWS vfxGetRoot(wstring & wstrRoot, const wstring & wstrPath)
 {
    //   ASSERT(pszPath != nullptr);
 
@@ -971,7 +971,7 @@ void CLASS_DECL_ACME_WINDOWS_COMMON vfxGetRoot(wstring & wstrRoot, const wstring
 }
 
 
-void CLASS_DECL_ACME_WINDOWS_COMMON vfxGetRoot(const unichar * pszPath, string& strRoot)
+void CLASS_DECL_ACME_WINDOWS vfxGetRoot(const unichar * pszPath, string& strRoot)
 
 {
    ASSERT(pszPath != nullptr);
@@ -1043,7 +1043,7 @@ void CLASS_DECL_ACME_WINDOWS_COMMON vfxGetRoot(const unichar * pszPath, string& 
 
 
 
-::u32 CLASS_DECL_ACME_WINDOWS_COMMON vfxGetFileName(const unichar * pszPathName, unichar * pszTitle, ::u32 nMax)
+::u32 CLASS_DECL_ACME_WINDOWS vfxGetFileName(const unichar * pszPathName, unichar * pszTitle, ::u32 nMax)
 
 {
    ASSERT(pszTitle == nullptr ||

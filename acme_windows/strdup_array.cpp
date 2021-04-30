@@ -2,8 +2,8 @@
 #include "acme/primitive/collection/strdup_array.h"
 //#include "acme/operating_system.h"
 
-
-platform_char** wcsdup_array::windows_get_envp()
+namespace acme { namespace windows { 
+platform_char** node::get_envp(wcsdup_array & wcsdupa)
 {
 
    auto lpvEnv = ::GetEnvironmentStringsW();
@@ -24,7 +24,7 @@ platform_char** wcsdup_array::windows_get_envp()
 
       auto pszVariable = wcsdup(wstrVariable);
 
-      m_wszptra.add(pszVariable);
+      wcsdupa.m_wszptra.add(pszVariable);
 
       while (*lpszVariable)
       {
@@ -42,6 +42,8 @@ platform_char** wcsdup_array::windows_get_envp()
 
    }
 
-   return m_wszptra.get_data();
+   return wcsdupa.m_wszptra.get_data();
 
+}
+}
 }

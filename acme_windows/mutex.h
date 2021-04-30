@@ -5,7 +5,7 @@ namespace windows
 {
 
 
-   class CLASS_DECL_ACME mutex :
+   class CLASS_DECL_ACME_WINDOWS mutex :
       virtual public ::mutex
    {
    public:
@@ -38,11 +38,11 @@ namespace windows
 } // namespace windows
 
 
-CLASS_DECL_ACME void wait_until_mutex_does_not_exist(const char * lpszName);
+CLASS_DECL_ACME_WINDOWS void wait_until_mutex_does_not_exist(const char * lpszName);
 
 
 
-CLASS_DECL_ACME::mutex * get_ui_destroyed_mutex();
+CLASS_DECL_ACME_WINDOWS::mutex * get_ui_destroyed_mutex();
 
 
 
@@ -54,7 +54,7 @@ namespace install
 {
 
 
-   class CLASS_DECL_ACME ::mutex :
+   class CLASS_DECL_ACME_WINDOWS ::mutex :
       public ::mutex
    {
    public:
@@ -65,7 +65,7 @@ namespace install
    };
 
 
-   class CLASS_DECL_ACME admin_mutex :
+   class CLASS_DECL_ACME_WINDOWS admin_mutex :
       public ::mutex
    {
    public:

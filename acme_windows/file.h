@@ -10,16 +10,16 @@ class FileException;
 struct FileStatus;
 
 
-void CLASS_DECL_ACME_WINDOWS_COMMON vfxGetRoot(const unichar * pszPath, string& wstrRoot);
+void CLASS_DECL_ACME_WINDOWS vfxGetRoot(const unichar * pszPath, string& wstrRoot);
 
-void CLASS_DECL_ACME_WINDOWS_COMMON vfxGetRoot(wstring & wstrRoot, const wstring & wstrPath);
+void CLASS_DECL_ACME_WINDOWS vfxGetRoot(wstring & wstrRoot, const wstring & wstrPath);
 
 
 namespace windows
 {
 
 
-   class CLASS_DECL_ACME_WINDOWS_COMMON file :
+   class CLASS_DECL_ACME_WINDOWS file :
       virtual public ::file::file
    {
    public:

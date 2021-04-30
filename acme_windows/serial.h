@@ -46,7 +46,7 @@ namespace windows
    //using serial::serial_exception;
    //using serial::io_exception;
 
-   class CLASS_DECL_ACME_WINDOWS_COMMON serial :
+   class CLASS_DECL_ACME_WINDOWS serial :
       virtual public ::serial::serial
    {
    public:

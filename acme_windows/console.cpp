@@ -1,8 +1,8 @@
 ﻿#include "framework.h"
 //#include "acme/operating_system.h"
-#include "acme/os/console.h"
-#include "console.h"
-#include "acme/node/windows/_windows.h"
+//#include "acme/os/console.h"
+//#include "console.h"
+//#include "acme/node/windows/_windows.h"
 #include <io.h>
 #include <stdio.h>
 #include <fcntl.h>

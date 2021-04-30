@@ -15,26 +15,26 @@
 #include "crypto.h"
 #include "ip_enum.h"
 #include "interprocess_communication.h"
-//#include "apex/node/windows/buffer.h"
-//#include "apex/os/console.h"
-//#include "console.h"
 #include "apex/platform/node.h"
 #include "acme_windows/node.h"
 #include "node.h"
 
 
-void CLASS_DECL_APEX_WINDOWS __cdecl _ca2_purecall();
+extern "C"
+void acme_windows_factory_exchange(::factory_map * pfactorymap);
 
 
-void acme_windows_factory_exchange(::factory_map* pfactorymap);
+extern "C"
+void apex_windows_common_factory_exchange(::factory_map * pfactorymap);
 
 
+extern "C"
 void apex_windows_factory_exchange(::factory_map * pfactorymap)
 {
 
-   _set_purecall_handler(_ca2_purecall);
-
    acme_windows_factory_exchange(pfactorymap);
+
+   apex_windows_common_factory_exchange(pfactorymap);
 
    pfactorymap->create_factory < ::windows::dir_system, ::dir_system >();
    pfactorymap->create_factory < ::windows::file_system, ::file_system >();
@@ -68,7 +68,7 @@ void apex_windows_factory_exchange(::factory_map * pfactorymap)
    pfactorymap->create_factory < ::windows::file_context, ::file_context >();
    pfactorymap->create_factory < ::windows::service_handler, ::service_handler >();
 
-   pfactorymap->create_factory < ::windows::apex::node, ::acme::node >();
+   pfactorymap->create_factory < ::apex::windows::node, ::acme::node >();
 
    //create_factory < ::windows::copydesk, ::user::cop
    // 

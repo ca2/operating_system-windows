@@ -10,7 +10,7 @@ WCHAR szTitle[MAX_LOADSTRING];                  // The title bar text
 //WCHAR szWindowClass[MAX_LOADSTRING];            // the main window class name
 
 // Forward declarations of functions included in this code module:
-CLASS_DECL_ACME ATOM                MyRegisterClass(HINSTANCE hInstance);
+CLASS_DECL_ACME_WINDOWS ATOM                MyRegisterClass(HINSTANCE hInstance);
 BOOL                InitInstance(HINSTANCE, int);
 LRESULT CALLBACK    WndProc(HWND, ::u32, WPARAM, LPARAM);
 INT_PTR CALLBACK    About(HWND, ::u32, WPARAM, LPARAM);
@@ -61,8 +61,8 @@ INT_PTR CALLBACK    About(HWND, ::u32, WPARAM, LPARAM);
 //
 //  PURPOSE: Registers the window class.
 //
-   //WNDPROC get_window_procedure();
-CLASS_DECL_ACME ATOM MyRegisterClass(HINSTANCE hInstance)
+//  WNDPROC get_window_procedure();
+CLASS_DECL_ACME_WINDOWS ATOM MyRegisterClass(HINSTANCE hInstance)
 {
    WNDCLASSEXW wcex = {};
 

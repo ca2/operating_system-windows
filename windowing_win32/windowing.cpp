@@ -1202,6 +1202,121 @@ namespace windowing_win32
 //
 //   }
 
+   string windowing::_get_window_text_timeout(oswindow oswindow, const ::duration& durationSendMessageMax)
+   {
+
+      DWORD_PTR dw = 0;
+
+      //if (!SendMessageTimeoutW(hwnd, WM_GETTEXTLENGTH, 0, 0, SMTO_ABORTIFHUNG | SMTO_NOTIMEOUTIFNOTHUNG, 100, &dw))
+      if (!SendMessageTimeoutW((HWND)oswindow, WM_GETTEXTLENGTH, 0, 0, SMTO_ABORTIFHUNG, __os(durationSendMessageMax), &dw))
+      {
+
+         return "";
+
+      }
+
+      if (!dw)
+      {
+
+         return "";
+
+      }
+
+      wstring wstr;
+
+      auto pwsz = wstr.get_string_buffer(dw);
+
+      if (!SendMessageTimeoutW((HWND)oswindow, WM_GETTEXT, dw + 1, (LPARAM)pwsz, SMTO_ABORTIFHUNG, __os(durationSendMessageMax), &dw))
+      {
+
+         return "";
+
+      }
+
+      wstr.release_string_buffer();
+
+      return wstr;
+
+   }
+
+
+   bool windowing::_top_level_contains_name(string str)
+   {
+
+      return _top_level_contains_predicate([this, str](oswindow oswindow)
+         {
+
+            //PSEUDO-Code char sz[1024]; GetWindowTextA(sz,1024, oswindow); return !strcmp(sz, str.c_str());
+
+            string strWindowText = _get_window_text_timeout(oswindow, 50_ms);
+
+            return strWindowText.contains_ci(str);
+
+         });
+
+   }
+
+
+   bool windowing::_visible_top_level_contains_name(string str)
+   {
+
+      return _top_level_contains_predicate([this, str](oswindow oswindow)
+         {
+
+            //PSEUDO-Code char sz[1024]; GetWindowTextA(sz,1024, oswindow); return !strcmp(sz, str.c_str());
+
+            if (!::IsWindowVisible((HWND)oswindow))
+            {
+
+               return false;
+
+            }
+
+            string strWindowText = _get_window_text_timeout(oswindow, 50_ms);
+
+            return strWindowText.contains_ci(str);
+
+         });
+
+   }
+
+
+   bool windowing::_visible_top_level_contains_all_names(string_array& stra)
+   {
+
+      return _top_level_contains_predicate([this, &stra](oswindow oswindow)
+         {
+
+            //PSEUDO-Code char sz[1024]; GetWindowTextA(sz,1024, oswindow); return !strcmp(sz, str.c_str());
+
+            if (!::IsWindowVisible((HWND)oswindow))
+            {
+
+               return false;
+
+            }
+
+            string strWindowText = _get_window_text_timeout(oswindow, 50_ms);
+
+            for (auto& str : stra)
+            {
+
+               if (!strWindowText.contains_ci(str))
+               {
+
+                  return false;
+
+               }
+
+            }
+
+            return true;
+
+         });
+
+   }
+
+
 
 } // namespace windowing_win32
 
