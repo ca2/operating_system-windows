@@ -68,7 +68,7 @@ namespace windows
       if (!::StartServiceCtrlDispatcherW(serviceTable))
       {
 
-         __throw(exception::exception());
+         __throw(error_failed);
 
       }
 
@@ -105,7 +105,7 @@ namespace windows
 
          DWORD dwLastError = ::GetLastError();
 
-         __throw(exception::exception());
+         __throw(error_failed);
 
       }
 
@@ -279,7 +279,7 @@ namespace windows
 
          DWORD dwLastError = ::GetLastError();
          
-         __throw(exception::exception());
+         __throw(error_failed);
 
       }
 

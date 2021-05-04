@@ -125,6 +125,9 @@
     <ClInclude Include="launcher.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="process_data.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="framework.cpp">

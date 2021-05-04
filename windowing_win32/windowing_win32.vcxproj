@@ -1241,6 +1241,12 @@
     <ProjectReference Include="..\..\..\source\app\aura\aura.vcxproj">
       <Project>{e000ffaf-392f-4e32-bf51-fd7ed638991f}</Project>
     </ProjectReference>
+    <ProjectReference Include="..\..\platform-windows_common\aura_windows_common\aura_windows_common.vcxproj">
+      <Project>{99f5abf0-7377-4cc7-b016-4ca7b365b9f1}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\aura_windows\aura_windows.vcxproj">
+      <Project>{94c3715a-7fbf-4455-917b-20cb7f40c58c}</Project>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="windowing_win32.def" />

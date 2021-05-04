@@ -23,6 +23,7 @@ namespace windows
    public:
 
 
+      HWND                                      m_hwnd;
       bool                                      m_bClipboardOpened : 1;
       bool                                      m_bFocusImpl : 1;
       bool                                      m_bSystemCaret : 1;
@@ -103,6 +104,7 @@ namespace windows
 
       //virtual void window_apply_visual(const ::user::window_state & windowstate) override;
 
+      DECLARE_MESSAGE_HANDLER(_001OnSysCommand);
       //DECLARE_MESSAGE_HANDLER(_001OnDestroy);
       //DECLARE_MESSAGE_HANDLER(on_message_create);
       //DECLARE_MESSAGE_HANDLER(_001OnKillFocus);
@@ -656,6 +658,9 @@ namespace windows
 
       // for translating Windows messages in Main message pump
       //virtual void pre_translate_message(::message::message * pmessage);
+
+
+      virtual void message_handler(::message::message* pmessage) override;
 
 
       //virtual void default_message_handler(::message::message * pmessage) override;

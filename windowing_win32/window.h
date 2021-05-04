@@ -13,13 +13,13 @@ namespace windowing_win32
    public:
 
 
-      ::point_i32                            m_pointCursor;
+      ::point_i32                               m_pointCursor;
 
-      WNDPROC                                m_pfnSuper;
-      UINT                                   m_uiMessage;
-      WPARAM                                 m_wparam;
-      LPARAM                                 m_lparam;
-
+      WNDPROC                                   m_pfnSuper;
+      //UINT                                    m_uiMessage;
+      //WPARAM                                  m_wparam;
+      //LPARAM                                  m_lparam;
+      __pointer(::windows::interaction_impl)    m_pimpl2;
 
       window();
       virtual ~window();
@@ -758,7 +758,7 @@ namespace windowing_win32
 
 
       //virtual void default_message_handler(::message::message * pusermessage) override;
-      virtual void message_handler(::message::message * pusermessage);
+      //virtual void message_handler(::message::message * pusermessage);
 
 
       //virtual bool OnWndMsg(const ::id & id, wparam wParam, lparam lParam, lresult* pResult);

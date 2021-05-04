@@ -2,6 +2,7 @@
 
 
 #include "acme_windows_common/_acme_windows_common.h"
+#include "acme/os/_const_console.h"
 #include "acme/os/console.h"
 
 

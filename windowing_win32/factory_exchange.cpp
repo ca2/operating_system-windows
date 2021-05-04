@@ -2,8 +2,14 @@
 
 
 extern "C"
+void aura_windows_factory_exchange(::factory_map * pfactorymap);
+
+
+extern "C"
 void windowing_win32_factory_exchange(::factory_map * pfactorymap)
 {
+
+   aura_windows_factory_exchange(pfactorymap);
 
    pfactorymap->create_factory < ::windowing_win32::windowing, ::windowing::windowing >();
    pfactorymap->create_factory < ::windowing_win32::window, ::windowing::window >();

@@ -55,7 +55,7 @@ int g_iCol = 0;
 LRESULT CALLBACK __window_procedure(HWND hwnd, UINT message, WPARAM wparam, LPARAM lparam)
 {
 
-   ::windowing::window * pwindow = (::windowing::window *) ::GetWindowLongPtr(hwnd, 0);
+   ::windowing_win32::window * pwindow = (::windowing_win32::window *) ::GetWindowLongPtr(hwnd, 0);
 
    if (!pwindow)
    {
@@ -67,7 +67,7 @@ LRESULT CALLBACK __window_procedure(HWND hwnd, UINT message, WPARAM wparam, LPAR
 
          ::user::system * psystem = (::user::system *)pcreatestructw->lpCreateParams;
 
-         pwindow = psystem->m_pwindow;
+         pwindow = (::windowing_win32::window *) psystem->m_pwindow->m_pWindow;
 
          if (!pwindow)
          {
@@ -84,6 +84,8 @@ LRESULT CALLBACK __window_procedure(HWND hwnd, UINT message, WPARAM wparam, LPAR
 
          pwindowing->m_windowmap[hwnd] = pwindow;
 
+         pwindow->m_pimpl2->m_hwnd = hwnd;
+
       }
       else
       {
@@ -95,6 +97,10 @@ LRESULT CALLBACK __window_procedure(HWND hwnd, UINT message, WPARAM wparam, LPAR
    }
 
    lresult lresult = 0;
+
+   ::point_i32 pointCursor;
+
+   ::GetCursorPos((POINT*)&pointCursor);
 
    if (message == WM_KEYDOWN)
    {
@@ -177,10 +183,6 @@ LRESULT CALLBACK __window_procedure(HWND hwnd, UINT message, WPARAM wparam, LPAR
 
       pimpl->m_lparamLastMouseMove = lparam;
 
-      ::point_i32 pointCursor;
-
-      ::GetCursorPos((POINT *)&pointCursor);
-
       if (pimpl->m_pointCursor == pointCursor)
       {
 
@@ -197,10 +199,6 @@ LRESULT CALLBACK __window_procedure(HWND hwnd, UINT message, WPARAM wparam, LPAR
       if (wparam == e_timer_transparent_mouse_event)
       {
 
-         ::point_i32 pointCursor;
-
-         ::GetCursorPos((POINT *)&pointCursor);
-
          if (pimpl->m_pointCursor == pointCursor)
          {
 
@@ -209,10 +207,6 @@ LRESULT CALLBACK __window_procedure(HWND hwnd, UINT message, WPARAM wparam, LPAR
          }
 
          pimpl->m_pointCursor = pointCursor;
-
-         ::lparam lparam;
-
-         ::ScreenToClient(hwnd, (POINT *)&pointCursor);
 
          lparam = MAKELPARAM(pointCursor.x, pointCursor.y);
 
@@ -235,7 +229,7 @@ LRESULT CALLBACK __window_procedure(HWND hwnd, UINT message, WPARAM wparam, LPAR
    if (pimpl->m_bDestroyImplOnly || ::is_null(puserinteraction))
    {
 
-      auto pmessage = pimpl->get_message((enum_message)message, wparam, lparam);
+      auto pmessage = pimpl->get_message((enum_message)message, wparam, lparam, pointCursor);
 
       try
       {
@@ -280,7 +274,7 @@ LRESULT CALLBACK __window_procedure(HWND hwnd, UINT message, WPARAM wparam, LPAR
 
       }
 
-      auto pmessage = puserinteraction->get_message((enum_message)message, wparam, lparam);
+      auto pmessage = puserinteraction->get_message((enum_message)message, wparam, lparam, pointCursor);
 
       try
       {

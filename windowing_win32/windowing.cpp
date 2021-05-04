@@ -570,7 +570,7 @@ namespace windowing_win32
 
       }
 
-      pusermessage->set(pmsg->oswindow, pwindow, pmsg->m_id, pmsg->wParam, pmsg->lParam);
+      pusermessage->set(pmsg->oswindow, pwindow, pmsg->m_id, pmsg->wParam, pmsg->lParam, pmsg->pt);
 
       return pusermessage;
 
@@ -932,6 +932,23 @@ namespace windowing_win32
       }
 
       return nullptr;
+
+   }
+
+
+   ::e_status windowing::windowing_branch(const ::routine& routine)
+   {
+
+      auto transport = branch(routine);
+
+      if (!transport)
+      {
+
+         return transport.estatus();
+
+      }
+
+      return ::success;
 
    }
 

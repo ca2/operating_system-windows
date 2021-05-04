@@ -1177,6 +1177,7 @@
     <ClInclude Include="node.h" />
     <ClInclude Include="os_context.h" />
     <ClInclude Include="process.h" />
+    <ClInclude Include="process_data.h" />
     <ClInclude Include="service.h" />
     <ClInclude Include="service_pool.h" />
     <ClInclude Include="shell\shell.h" />
