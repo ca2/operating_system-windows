@@ -5399,7 +5399,7 @@ namespace windows
 
          }
 
-         _on_mouse_move_step(pmouse->m_point, true);
+         _on_mouse_move_step(pmessage->m_pointMessage, true);
 
          return;
 
