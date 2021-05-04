@@ -627,11 +627,11 @@ namespace windowing_win32
             if (layout.design().is_screen_visible())
             {
 
+               HWND hwnd = get_hwnd();
+
                string str;
 
                rectangle_i32 rectDrawing(point, size);
-
-               HWND hwnd = get_hwnd();
 
                rectangle_i32 rectWindowCurrent;
 
