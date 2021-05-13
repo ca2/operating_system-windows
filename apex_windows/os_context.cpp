@@ -46,6 +46,7 @@ _Inout_ u32*                                  pcbPackedCredentials
 
 CLASS_DECL_APEX_WINDOWS HBITMAP get_icon_hbitmap(HICON hICON);
 
+
 namespace windows
 {
 
