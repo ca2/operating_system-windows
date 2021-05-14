@@ -212,7 +212,11 @@ namespace windowing_win32
             else
             {
 
-               strIconLocation = expand_env(wszPath);
+               auto psystem = m_psystem;
+
+               auto pnode = psystem->node();
+
+               strIconLocation = pnode->expand_env(wszPath);
 
                imagekey.set_path(strIconLocation);
 
@@ -263,7 +267,11 @@ namespace windowing_win32
                else
                {
 
-                  imagekey.set_path(expand_env(szPath));
+                  auto psystem = m_psystem;
+
+                  auto pnode = psystem->node();
+
+                  imagekey.set_path(pnode->expand_env(szPath));
 
                   imagekey.m_iIcon = iIndex;
 
@@ -321,7 +329,11 @@ namespace windowing_win32
                   else
                   {
 
-                     imagekey.set_path(expand_env(wszPath));
+                     auto psystem = m_psystem;
+
+                     auto pnode = psystem->node();
+
+                     imagekey.set_path(pnode->expand_env(wszPath));
 
                      imagekey.m_iIcon = 0;
 

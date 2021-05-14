@@ -767,7 +767,7 @@ namespace acme
 
          const i32 iImageSize = MAX_PATH * 8;
 
-         wchar_t* szImage = (wchar_t*)memory_alloc(iImageSize * 2);
+         wchar_t* szImage = (wchar_t*)::memory_alloc(iImageSize * 2);
 
          if (EnumProcessModules(hProcess, hMods, sizeof(HMODULE) * iMaxModuleCount, &cbNeeded))
          {

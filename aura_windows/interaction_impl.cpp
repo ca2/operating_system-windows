@@ -5098,12 +5098,18 @@ namespace windows
    void interaction_impl::message_handler(::message::message * pmessage)
    {
 
-      if (pre_message_handler(pmessage))
+      ::message::key* pkey = nullptr;
+
+      bool bKeyMessage = false;
+
+      if (pre_message_handler(pkey, bKeyMessage,pmessage))
       {
 
          return;
 
       }
+
+      auto message = pmessage->m_id.u32();
 
       m_uiMessage = message;
 

@@ -117,7 +117,11 @@ namespace windowing_win32
 
          GetWindowThreadProcessId(tray.hwnd, &dwProcessId);
 
-         info.m_strProcessPath = module_path_from_pid(dwProcessId);
+         auto psystem = m_psystem;
+
+         auto pnode = psystem->node();
+
+         info.m_strProcessPath = pnode->module_path_from_pid(dwProcessId);
 
          unichar TipChar;
          unichar sTip[1024] = { 0 };
