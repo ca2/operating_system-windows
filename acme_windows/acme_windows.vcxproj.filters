@@ -151,6 +151,12 @@
     <ClCompile Include="callstack.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="mutex.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="list_serial_ports.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="..\version.rc">

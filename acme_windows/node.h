@@ -91,6 +91,9 @@ namespace acme
          string expand_env(string str) override;
 
 
+         array <::serial::port_info> list_serial_ports() override;
+
+
       };
 
 
