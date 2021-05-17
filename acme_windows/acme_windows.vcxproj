@@ -1183,6 +1183,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="acme_dir.cpp" />
+    <ClCompile Include="argcargv.cpp" />
     <ClCompile Include="callstack.cpp" />
     <ClCompile Include="file_find.cpp" />
     <ClCompile Include="list_serial_ports.cpp" />
