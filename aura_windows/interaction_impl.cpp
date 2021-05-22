@@ -168,38 +168,13 @@ namespace windows
    //}
 
 
-   ::e_status interaction_impl::native_create_host()
-   {
 
-      auto estatus = __construct(m_pwindow);
+   //bool interaction_impl::pre_create_window(::user::system * pusersystem)
+   //{
 
-      if (!estatus)
-      {
+     // return true;
 
-         return estatus;
-
-      }
-
-      estatus = m_pwindow->create_window(this);
-
-      if (!estatus)
-      {
-
-         return estatus;
-
-      }
-
-      return true;
-
-   }
-
-
-   bool interaction_impl::pre_create_window(::user::system * pusersystem)
-   {
-
-      return true;
-
-   }
+   //}
 
 
    // bool interaction_impl::create_message_queue(::user::interaction * pinteraction, const char * lpszName)

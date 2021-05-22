@@ -164,7 +164,7 @@ namespace windows
       // advanced creation (allows access to extended styles)
       //virtual bool create_window_ex(::user::interaction * pinteraction, __pointer(::user::system) pusersystem, ::user::interaction * puiParent, id id) override;
 
-      virtual ::e_status native_create_host() override;
+      //virtual ::e_status native_create_host() override;
 
       virtual bool destroy_impl_only() override;
       virtual bool start_destroying_window() override;
@@ -172,7 +172,7 @@ namespace windows
       virtual void destroy_window() override;
 
       // special pre-creation and interaction_impl rectangle_i32 adjustment hooks
-      virtual bool pre_create_window(::user::system * pusersystem);
+      //virtual bool pre_create_window(::user::system * pusersystem);
 
       // Advanced: virtual AdjustWindowRect
       //enum AdjustType { adjustBorder = 0, adjustOutside = 1 };
