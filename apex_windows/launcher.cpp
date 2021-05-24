@@ -25,7 +25,11 @@ namespace windows
 
       string strParams = get_params();
 
-      call_async(strPath, strParams, strDir, e_display_none, m_bPrivileged);
+      auto psystem = m_psystem;
+
+      auto pnode = psystem->node();
+
+      pnode->call_async(strPath, strParams, strDir, e_display_none, m_bPrivileged);
 
       return true;
 

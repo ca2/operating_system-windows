@@ -2987,19 +2987,19 @@ namespace draw2d_gdiplus
    }
 
 
-   i32 graphics::GetPath(::point_f64 * pPoints, byte * lpTypes, count nCount)
+   //i32 graphics::GetPath(::point_f64 * pPoints, byte * lpTypes, count nCount)
 
-   {
+   //{
 
-      //ASSERT(get_handle1() != nullptr);
+   //   //ASSERT(get_handle1() != nullptr);
 
-      //return ::GetPath(get_handle1(), pPoints, lpTypes, (int) nCount);
+   //   //return ::GetPath(get_handle1(), pPoints, lpTypes, (int) nCount);
 
-      __throw(error_not_implemented);
+   //   __throw(error_not_implemented);
 
-      return false;
+   //   return false;
 
-   }
+   //}
 
    bool graphics::SetMiterLimit(float fMiterLimit)
    {
@@ -4508,20 +4508,20 @@ namespace draw2d_gdiplus
                //case e_shape_rect:
                //   intersect_clip(shapea[i]->shape < ::rectangle_i32>());
                //   break;
-               case e_shape_rectd:
-                  intersect_clip(shapea[i]->shape < ::rectangle_f64>());
+               case e_shape_rectangle:
+                  intersect_clip(shapea[i]->shape < ::rectangle>());
                   break;
                //case e_shape_oval:
                //   intersect_clip(shapea[i]->shape < ::oval>());
                //   break;
-               case e_shape_ovald:
-                  intersect_clip(shapea[i]->shape < ::ovald>());
+               case e_shape_ellipse:
+                  intersect_clip(shapea[i]->shape < ::ellipse>());
                   break;
                //case e_shape_polygon:
                //   intersect_clip(shapea[i]->shape < ::polygon_i32>());
                //   break;
-               case e_shape_polygond:
-                  intersect_clip(shapea[i]->shape < ::polygon_f64>());
+               case e_shape_polygon:
+                  intersect_clip(shapea[i]->shape < ::polygon>());
                   break;
 
                }
@@ -4549,7 +4549,7 @@ namespace draw2d_gdiplus
    }
 
 
-   ::e_status graphics::intersect_clip(const ::rectangle_i32& rectangle)
+   ::e_status graphics::intersect_clip(const ::rectangle & rectangle)
    {
 
       Gdiplus::RectF r;
@@ -4567,54 +4567,32 @@ namespace draw2d_gdiplus
    }
 
 
-   ::e_status graphics::intersect_clip(const ::rectangle_f64& rectangle)
-   {
+   //::e_status graphics::intersect_clip(const ::rectangle & rectangle)
+   //{
 
-      Gdiplus::RectF r;
+   //   Gdiplus::RectF r;
 
-      __copy(r, rectangle);
+   //   __copy(r, rectangle);
 
-      r.X += (Gdiplus::REAL)m_pointAddShapeTranslate.x;
+   //   r.X += (Gdiplus::REAL)m_pointAddShapeTranslate.x;
 
-      r.Y += (Gdiplus::REAL)m_pointAddShapeTranslate.y;
+   //   r.Y += (Gdiplus::REAL)m_pointAddShapeTranslate.y;
 
-      m_pgraphics->IntersectClip(r);
+   //   m_pgraphics->IntersectClip(r);
 
-      return ::success;
+   //   return ::success;
 
-   }
-
-
-   ::e_status graphics::intersect_clip(const ::oval& oval)
-   {
-
-      auto ppath = __auto(new Gdiplus::GraphicsPath());
-
-      Gdiplus::RectF r;
-
-      __copy(r, oval);
-
-      r.X += (Gdiplus::REAL)m_pointAddShapeTranslate.x;
-
-      r.Y += (Gdiplus::REAL)m_pointAddShapeTranslate.y;
-
-      ppath->AddArc(r, 0.f, 360.0f);
-
-      m_pgraphics->SetClip(ppath, Gdiplus::CombineModeIntersect);
-
-      return ::success;
-
-   }
+   //}
 
 
-   ::e_status graphics::intersect_clip(const ::ovald& oval)
+   ::e_status graphics::intersect_clip(const ::ellipse & ellipse)
    {
 
       auto ppath = __auto(new Gdiplus::GraphicsPath());
 
       Gdiplus::RectF r;
 
-      __copy(r, oval);
+      __copy(r, ellipse);
 
       r.X += (Gdiplus::REAL)m_pointAddShapeTranslate.x;
 
@@ -4629,12 +4607,34 @@ namespace draw2d_gdiplus
    }
 
 
-   ::e_status graphics::intersect_clip(const ::polygon_i32& polygon_i32)
+   //::e_status graphics::intersect_clip(const ::ellipse & ellipse)
+   //{
+
+   //   auto ppath = __auto(new Gdiplus::GraphicsPath());
+
+   //   Gdiplus::RectF r;
+
+   //   __copy(r, oval);
+
+   //   r.X += (Gdiplus::REAL)m_pointAddShapeTranslate.x;
+
+   //   r.Y += (Gdiplus::REAL)m_pointAddShapeTranslate.y;
+
+   //   ppath->AddArc(r, 0.f, 360.0f);
+
+   //   m_pgraphics->SetClip(ppath, Gdiplus::CombineModeIntersect);
+
+   //   return ::success;
+
+   //}
+
+
+   ::e_status graphics::intersect_clip(const ::polygon & polygon)
    {
 
       auto ppath = __auto(new Gdiplus::GraphicsPath());
 
-      auto copy = [this](Gdiplus::PointF* p2, const POINT_I32* p1)
+      auto copy = [this](Gdiplus::PointF* p2, const POINT_F64* p1)
       {
 
          p2->X = (Gdiplus::REAL)(p1->x + m_pointAddShapeTranslate.x);
@@ -4643,40 +4643,40 @@ namespace draw2d_gdiplus
 
       };
 
-      ap(Gdiplus::PointF) ppoint(polygon_i32.get_data(), polygon_i32.get_count(), copy);
+      ap(Gdiplus::PointF) ppoint(polygon.get_data(), polygon.get_count(), copy);
 
-      ppath->AddPolygon(ppoint, (INT) polygon_i32.get_count());
-
-      m_pgraphics->SetClip(ppath, Gdiplus::CombineModeIntersect);
-
-      return ::success;
-
-   }
-
-
-   ::e_status graphics::intersect_clip(const ::polygon_f64& polygon_i32)
-   {
-
-      auto ppath = __auto(new Gdiplus::GraphicsPath());
-
-      auto copy = [this](Gdiplus::PointF* p2, const POINT_F64* p1)
-      {
-
-         p2->X = (Gdiplus::REAL) (p1->x + m_pointAddShapeTranslate.x);
-
-         p2->Y = (Gdiplus::REAL) (p1->y + m_pointAddShapeTranslate.y);
-
-      };
-
-      ap(Gdiplus::PointF) ppoint(polygon_i32.get_data(), polygon_i32.get_count(), copy);
-
-      ppath->AddPolygon(ppoint, (INT) polygon_i32.get_count());
+      ppath->AddPolygon(ppoint, (INT) polygon.get_count());
 
       m_pgraphics->SetClip(ppath, Gdiplus::CombineModeIntersect);
 
       return ::success;
 
    }
+
+
+   //::e_status graphics::intersect_clip(const ::polygon_f64& polygon_i32)
+   //{
+
+   //   auto ppath = __auto(new Gdiplus::GraphicsPath());
+
+   //   auto copy = [this](Gdiplus::PointF* p2, const POINT_F64* p1)
+   //   {
+
+   //      p2->X = (Gdiplus::REAL) (p1->x + m_pointAddShapeTranslate.x);
+
+   //      p2->Y = (Gdiplus::REAL) (p1->y + m_pointAddShapeTranslate.y);
+
+   //   };
+
+   //   ap(Gdiplus::PointF) ppoint(polygon_i32.get_data(), polygon_i32.get_count(), copy);
+
+   //   ppath->AddPolygon(ppoint, (INT) polygon_i32.get_count());
+
+   //   m_pgraphics->SetClip(ppath, Gdiplus::CombineModeIntersect);
+
+   //   return ::success;
+
+   //}
 
 
 

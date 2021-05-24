@@ -31,8 +31,8 @@ namespace draw2d_gdiplus
       virtual void max_bounding_box(RECTANGLE_F64 * prectangle, ::draw2d::graphics * pgraphics) override;
 
       Gdiplus::Region * get(::draw2d::graphics * pgraphics);
-      Gdiplus::Region * get_rect(::draw2d::graphics * pgraphics);
-      Gdiplus::Region * get_oval(::draw2d::graphics * pgraphics);
+      Gdiplus::Region * get_rectangle(::draw2d::graphics * pgraphics);
+      Gdiplus::Region * get_ellipse(::draw2d::graphics * pgraphics);
       Gdiplus::Region * get_polygon(::draw2d::graphics * pgraphics);
       Gdiplus::Region * get_poly_polygon(::draw2d::graphics * pgraphics);
       Gdiplus::Region * get_combine(::draw2d::graphics * pgraphics);

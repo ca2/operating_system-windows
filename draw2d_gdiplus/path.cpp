@@ -571,7 +571,7 @@ namespace draw2d_gdiplus
    }
 
 
-   bool path::_set(::draw2d::graphics * pgraphics, const ::rectangle_i32 & rectangle)
+   bool path::_set(::draw2d::graphics * pgraphics, const ::rectangle & rectangle)
    {
 
       return internal_add_rect(rectangle.left, rectangle.top,  rectangle.width(), rectangle.height());
@@ -579,23 +579,7 @@ namespace draw2d_gdiplus
    }
 
 
-   bool path::_set(::draw2d::graphics* pgraphics, const ::rectangle_f64& rectangle)
-   {
-
-      return internal_add_rect(rectangle.left, rectangle.top, rectangle.width(), rectangle.height());
-
-   }
-
-
    bool path::_set(::draw2d::graphics * pgraphics, const ::line & line)
-   {
-
-      return internal_add_line(line.m_p1.x, line.m_p1.y, line.m_p2.x, line.m_p2.y);
-
-   }
-
-
-   bool path::_set(::draw2d::graphics* pgraphics, const ::lined& line)
    {
 
       return internal_add_line(line.m_p1.x, line.m_p1.y, line.m_p2.x, line.m_p2.y);
@@ -624,63 +608,21 @@ namespace draw2d_gdiplus
    }
 
 
-   bool path::_set(::draw2d::graphics* pgraphics, const ::linesd& lines)
+   bool path::_set(::draw2d::graphics* pgraphics, const ::polygon & polygon)
    {
 
       ::array < Gdiplus::PointF > pointa;
 
-      pointa.set_size(lines.get_count());
+      pointa.set_size(polygon.get_count());
 
       for (::index i = 0; i < pointa.get_size(); i++)
       {
 
-         __copy(pointa[i], lines[i]);
-
-      }
-
-      m_ppath->AddLines(pointa.get_data(), (INT)pointa.get_count());
-
-      return true;
-
-   }
-
-
-   bool path::_set(::draw2d::graphics* pgraphics, const ::polygon_i32 & polygon_i32)
-   {
-
-      ::array < Gdiplus::PointF > pointa;
-
-      pointa.set_size(polygon_i32.get_count());
-
-      for (::index i = 0; i < pointa.get_size(); i++)
-      {
-
-         __copy(pointa[i], polygon_i32[i]);
+         __copy(pointa[i], polygon[i]);
 
       }
 
       m_ppath->AddPolygon(pointa.get_data(), (INT) pointa.get_count());
-
-      return true;
-
-   }
-
-
-   bool path::_set(::draw2d::graphics* pgraphics, const ::polygon_f64& polygon_i32)
-   {
-
-      ::array < Gdiplus::PointF > pointa;
-
-      pointa.set_size(polygon_i32.get_count());
-
-      for (::index i = 0; i < pointa.get_size(); i++)
-      {
-
-         __copy(pointa[i], polygon_i32[i]);
-
-      }
-
-      m_ppath->AddPolygon(pointa.get_data(), (INT)pointa.get_count());
 
       return true;
 

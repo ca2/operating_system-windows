@@ -52,19 +52,11 @@ namespace draw2d_gdiplus
 
       virtual bool _set(::draw2d::graphics* pgraphics, const ::line& pline);
 
-      virtual bool _set(::draw2d::graphics* pgraphics, const ::lined& pline);
-
       virtual bool _set(::draw2d::graphics* pgraphics, const ::lines& pline);
 
-      virtual bool _set(::draw2d::graphics* pgraphics, const ::linesd& pline);
+      virtual bool _set(::draw2d::graphics* pgraphics, const ::rectangle & rectangle);
 
-      virtual bool _set(::draw2d::graphics* pgraphics, const ::rectangle_i32& prectangle);
-
-      virtual bool _set(::draw2d::graphics* pgraphics, const ::rectangle_f64& prectangle);
-
-      virtual bool _set(::draw2d::graphics* pgraphics, const ::polygon_i32& ppolygon);
-
-      virtual bool _set(::draw2d::graphics* pgraphics, const ::polygon_f64& ppolygond);
+      virtual bool _set(::draw2d::graphics* pgraphics, const ::polygon & polygon);
 
       virtual bool _set(::draw2d::graphics* pgraphics, const ::write_text::text_out& ptextout);
 

@@ -116,9 +116,9 @@ namespace draw2d_gdiplus
       case ::draw2d::e_region_none:
          return new Gdiplus::Region();
       case ::draw2d::e_region_rect:
-         return get_rect(pgraphics);
-      case ::draw2d::e_region_oval:
-         return get_oval(pgraphics);
+         return get_rectangle(pgraphics);
+      case ::draw2d::e_region_ellipse:
+         return get_ellipse(pgraphics);
       case ::draw2d::e_region_polygon:
          return get_polygon(pgraphics);
       case ::draw2d::e_region_poly_polygon:
@@ -133,7 +133,8 @@ namespace draw2d_gdiplus
 
    }
 
-   Gdiplus::Region * region::get_rect(::draw2d::graphics * pgraphics)
+
+   Gdiplus::Region * region::get_rectangle(::draw2d::graphics * pgraphics)
    {
 
       Gdiplus::GraphicsPath path;
@@ -152,7 +153,7 @@ namespace draw2d_gdiplus
    }
 
 
-   Gdiplus::Region * region::get_oval(::draw2d::graphics * pgraphics)
+   Gdiplus::Region * region::get_ellipse(::draw2d::graphics * pgraphics)
    {
 
       Gdiplus::GraphicsPath path;
