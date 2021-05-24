@@ -27,7 +27,7 @@ namespace music
 
             i32                        m_iBufferNominalMax;
 
-            buffer_array               m_buffera;
+            __pointer(buffer_array)    m_pbuffera;
 
             HMIDISTRM                  m_hstream;
 

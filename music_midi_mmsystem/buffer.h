@@ -81,7 +81,7 @@ namespace music
             HAVE_ARRAY_OF(buffer, m_buffera, buffer);
 
 
-            buffer_array(sequencer * psequence);
+            buffer_array();
             virtual ~buffer_array();
 
             void Reset();

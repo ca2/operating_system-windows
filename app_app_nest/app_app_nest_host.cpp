@@ -398,7 +398,7 @@ namespace ca2plugin_container
 
                m_rectClient.offset(-m_rectClient.top_left());
 
-               m_rectWindow = rectangle;
+               m_rectangleWindow = rectangle;
 
                try
                {
