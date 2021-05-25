@@ -1210,7 +1210,7 @@ retry:
    string os_context::calc_service_name()
    {
 
-      ::apex::application * papp = get_application();
+      ::application * papp = get_application();
 
       if(get_application()->m_strAppName.is_empty()
             || get_application()->m_strAppName.compare_ci("bergedge") == 0
@@ -1276,7 +1276,7 @@ retry:
       WCHAR lpszName[CREDUI_MAX_USERNAME_LENGTH + CREDUI_MAX_DOMAIN_TARGET_LENGTH + 1];
       WCHAR pszPass[CREDUI_MAX_PASSWORD_LENGTH + 1];
 
-      ::apex::application * papp = get_application();
+      ::application * papp = get_application();
 
       if(get_application()->is_user_service())
       {
@@ -2215,7 +2215,7 @@ repeat:
    {
 
 
-      ::apex::application * papp = get_application();
+      ::application * papp = get_application();
 
       string strTargetProgId;
       string strModule = solve_relative(m_psystem->m_pacmepath->app_module());
