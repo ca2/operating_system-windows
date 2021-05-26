@@ -17,11 +17,14 @@ namespace music
 
 
          sequencer::sequencer(sequence* psequence, const string& strDevice) :
-            ::music::midi::sequencer(psequence, strDevice),
-            m_buffera(this)
+            ::music::midi::sequencer(psequence, strDevice)
          {
 
             initialize(psequence);
+
+            __construct_new(m_pbuffera);
+
+            m_pbuffera->m_psequencer = this;
 
             m_bMessageThread = true;
 
@@ -41,7 +44,7 @@ namespace music
 
             m_midicallbackdata.m_psequence = psequence;
 
-            m_buffera.Initialize(4, m_iBufferSize, &m_midicallbackdata);
+            m_pbuffera->Initialize(4, m_iBufferSize, &m_midicallbackdata);
 
          }
 
@@ -157,7 +160,7 @@ namespace music
 
             estatus = ::success;
 
-            estatus = m_buffera.midiOutPrepareHeader((HMIDIOUT)m_hstream);
+            estatus = m_pbuffera->midiOutPrepareHeader((HMIDIOUT)m_hstream);
 
             if (estatus != ::success)
             {
@@ -181,7 +184,7 @@ namespace music
 
             }
 
-            for (auto & pbuffer : m_buffera.m_buffera)
+            for (auto & pbuffer : m_pbuffera->m_buffera)
             {
 
                if (fill_buffer(&pbuffer->m_midihdr) != success)
@@ -193,7 +196,7 @@ namespace music
 
             }
 
-            estatus = m_buffera.midiStreamOut(m_hstream);
+            estatus = m_pbuffera->midiStreamOut(m_hstream);
 
             if (estatus != ::success)
             {
@@ -968,7 +971,7 @@ namespace music
 
             synchronous_lock synchronouslock(mutex());
 
-            m_buffera.midiOutUnprepareHeader((HMIDIOUT)m_hstream);
+            m_pbuffera->midiOutUnprepareHeader((HMIDIOUT)m_hstream);
 
             if (m_hstream != nullptr)
             {
@@ -999,7 +1002,7 @@ namespace music
             //while (m_iBuffersInMMSYSTEM > 0)
             // Sleep(100);
 
-            if ((estatus = m_buffera.midiOutUnprepareHeader((HMIDIOUT)m_hstream)) != ::success)
+            if ((estatus = m_pbuffera->midiOutUnprepareHeader((HMIDIOUT)m_hstream)) != ::success)
             {
                TRACE("midiOutUnprepareHeader failed in seqBufferDone! (%lu)", (u32)estatus);
             }

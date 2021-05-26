@@ -32,7 +32,7 @@ string get_error_message(::u32 dwError);
 //void CLASS_DECL_ACME_WINDOWS __cdecl _ca2_purecall();
 void CLASS_DECL_ACME_WINDOWS __cdecl _null_se_translator(u32 uiCode, EXCEPTION_POINTERS * ppointers);
 bool CLASS_DECL_ACME_WINDOWS __windows_init();
-//i32 CLASS_DECL_ACME_WINDOWS __windows_main(class ::system * psystem, ::create * pmaininitdata);
+//i32 CLASS_DECL_ACME_WINDOWS __windows_main(::acme::system * psystem, ::create * pmaininitdata);
 
 
 
@@ -119,7 +119,7 @@ CLASS_DECL_ACME_WINDOWS HINSTANCE __find_string_resource_handle(::u32 nID);
 
 
 
-//CLASS_DECL_ACME_WINDOWS i32 app_main(class ::system * psystem, HINSTANCE hInstance, HINSTANCE hPrevInstance, char * pCmdLine, ::e_display edisplay);
+//CLASS_DECL_ACME_WINDOWS i32 app_main(::acme::system * psystem, HINSTANCE hInstance, HINSTANCE hPrevInstance, char * pCmdLine, ::e_display edisplay);
 
 
 

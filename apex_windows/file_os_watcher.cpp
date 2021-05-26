@@ -191,20 +191,20 @@ namespace file
 
             action.m_pathFile = strFile;
 
-            e_action eaction = action_none;
+            enum_action eaction = e_action_none;
 
             switch (ulAction)
             {
             case FILE_ACTION_RENAMED_NEW_NAME:
             case FILE_ACTION_ADDED:
-               eaction = action_add;
+               eaction = e_action_add;
                break;
             case FILE_ACTION_RENAMED_OLD_NAME:
             case FILE_ACTION_REMOVED:
-               eaction = action_delete;
+               eaction = e_action_delete;
                break;
             case FILE_ACTION_MODIFIED:
-               eaction = action_modify;
+               eaction = e_action_modify;
                break;
             };
 

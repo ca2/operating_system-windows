@@ -37,7 +37,7 @@ namespace music
             for (i32 i = 0; i < this->buffer_count(); i++)
             {
 
-               this->buffer_at(i) = __new(buffer);
+               this->buffer_at(i) = __create_new<buffer>();
 
                this->buffer_at(i)->Initialize(iSize, this);
 
@@ -86,8 +86,7 @@ namespace music
          }
 
 
-         buffer_array::buffer_array(sequencer * psequencer) :
-            m_psequencer(psequencer)
+         buffer_array::buffer_array()
          {
 
             m_pcallbackdata = nullptr;

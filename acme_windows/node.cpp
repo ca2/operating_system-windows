@@ -720,6 +720,26 @@ namespace acme
       }
 
 
+      ::e_status node::ExitCode_to_status(DWORD dwExitCode)
+      {
+
+         if (dwExitCode == 0)
+         {
+
+            return ::success;
+
+         }
+         else
+         {
+
+            return error_failed;
+
+         }
+
+
+      }
+
+
       string node::audio_get_default_library_name()
       {
 
@@ -1652,9 +1672,198 @@ namespace acme
       }
 
 
+      ::e_status node::create_process(const char * pszCommandLine, u32 * pprocessId)
+      {
+
+         STARTUPINFO StartupInfo;
+
+         PROCESS_INFORMATION ProcessInfo;
+
+         ULONG rc;
+
+         __memset(&StartupInfo, 0, sizeof(StartupInfo));
+
+         StartupInfo.cb = sizeof(STARTUPINFO);
+
+         StartupInfo.dwFlags = STARTF_USESHOWWINDOW;
+
+         StartupInfo.wShowWindow = SW_HIDE;
 
 
+         if (!CreateProcessW(nullptr, wstring(pszCommandLine), nullptr, nullptr, false,
+            CREATE_NEW_CONSOLE,
+            nullptr,
+            nullptr,
+            &StartupInfo,
+            &ProcessInfo))
+         {
 
+            auto lastError = ::GetLastError();
+            
+            auto estatus = last_error_to_status(lastError);
+
+            return estatus;
+
+         }
+
+         WaitForSingleObject(ProcessInfo.hProcess, U32_INFINITE_TIMEOUT);
+
+         if (!GetExitCodeProcess(ProcessInfo.hProcess, &rc))
+         {
+
+            rc = 0;
+
+         }
+
+         CloseHandle(ProcessInfo.hThread);
+
+         CloseHandle(ProcessInfo.hProcess);
+
+         if (pprocessId)
+         {
+
+            *pprocessId = ProcessInfo.dwProcessId;
+
+         }
+
+         auto estatus = ExitCode_to_status(rc);
+
+         return estatus;
+
+
+      }
+
+
+      ::e_status node::run_silent(const char* strFunct, const char* strstrParams)
+      {
+
+#if defined(_UWP)
+
+         throw interface_only_exception();
+
+#elif defined(WINDOWS_DESKTOP)
+
+         STARTUPINFO StartupInfo;
+
+         PROCESS_INFORMATION ProcessInfo;
+
+         char Args[4096];
+
+         char* pEnvCMD = nullptr;
+
+         const char* pDefaultCMD = "CMD.EXE";
+
+         ULONG rc;
+
+         __memset(&StartupInfo, 0, sizeof(StartupInfo));
+
+         StartupInfo.cb = sizeof(STARTUPINFO);
+
+         StartupInfo.dwFlags = STARTF_USESHOWWINDOW;
+
+         StartupInfo.wShowWindow = SW_HIDE;
+
+         Args[0] = 0;
+
+         pEnvCMD = getenv("COMSPEC");
+
+         if (pEnvCMD)
+         {
+
+            strcpy(Args, pEnvCMD);
+
+         }
+         else
+         {
+
+            strcpy(Args, pDefaultCMD);
+
+         }
+
+         // "/c" option - Do the command then terminate the command window
+         ansi_concatenate(Args, " /c ");
+         //the application you would like to run from the command window
+         ansi_concatenate(Args, strFunct);
+         ansi_concatenate(Args, " ");
+         //the parameters passed to the application being run from the command window.
+         ansi_concatenate(Args, strstrParams);
+
+         if (!CreateProcessW(nullptr, wstring(Args), nullptr, nullptr, false,
+            CREATE_NEW_CONSOLE,
+            nullptr,
+            nullptr,
+            &StartupInfo,
+            &ProcessInfo))
+         {
+
+            auto lastError = ::GetLastError();
+            
+            auto estatus = last_error_to_status(lastError);
+
+            return estatus;
+
+         }
+
+         WaitForSingleObject(ProcessInfo.hProcess, U32_INFINITE_TIMEOUT);
+
+         if (!GetExitCodeProcess(ProcessInfo.hProcess, &rc))
+         {
+
+            rc = 0;
+
+         }
+
+         CloseHandle(ProcessInfo.hThread);
+
+         CloseHandle(ProcessInfo.hProcess);
+
+         auto estatus = ExitCode_to_status(rc);
+
+         return estatus;
+
+#else
+
+         string strCmdLine;
+
+         strCmdLine = strFunct;
+
+         if (ansi_length(strstrParams) > 0)
+         {
+
+            strCmdLine += " ";
+
+            strCmdLine += strstrParams;
+
+         }
+
+         i32 processId;
+
+         if (!create_process(strCmdLine, &processId))
+         {
+
+            return -1;
+
+         }
+
+         while (true)
+         {
+
+            if (kill(processId, 0) == -1 && errno == ESRCH) // No process can be found corresponding to processId
+            {
+
+               break;
+
+            }
+
+            sleep(millis(23));
+
+         }
+
+         return 0;
+
+#endif
+
+      }
 
 
    } // namespace windows

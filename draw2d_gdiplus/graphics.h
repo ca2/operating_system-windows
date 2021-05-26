@@ -201,12 +201,9 @@ namespace draw2d_gdiplus
 
       virtual ::e_status add_shapes(const shape_array& shapea);
       virtual ::e_status reset_clip();
-      virtual ::e_status intersect_clip(const ::rectangle_i32& rectangle);
-      virtual ::e_status intersect_clip(const ::rectangle_f64& rectangle);
-      virtual ::e_status intersect_clip(const ::oval& oval);
-      virtual ::e_status intersect_clip(const ::ovald& oval);
-      virtual ::e_status intersect_clip(const ::polygon_i32& polygon_i32);
-      virtual ::e_status intersect_clip(const ::polygon_f64& polygon_i32);
+      virtual ::e_status intersect_clip(const ::rectangle & rectangle);
+      virtual ::e_status intersect_clip(const ::ellipse & ellipse);
+      virtual ::e_status intersect_clip(const ::polygon & polygon);
 
       //virtual bool PtVisible(double x, double y) override;
       //bool PtVisible(const ::point_i32 & point) override;
@@ -552,7 +549,7 @@ namespace draw2d_gdiplus
 
       float GetMiterLimit() override;
       bool SetMiterLimit(float fMiterLimit) override;
-      i32 GetPath(::point_f64 * ppoint, byte * lpTypes,count nCount) override;
+      //i32 GetPath(::point_f64 * ppoint, byte * lpTypes,count nCount) override;
 
       virtual bool SelectClipPath(i32 nMode) override;
 
