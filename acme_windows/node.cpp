@@ -720,6 +720,26 @@ namespace acme
       }
 
 
+      ::e_status node::ExitCode_to_status(DWORD dwExitCode)
+      {
+
+         if (dwLastError == 0)
+         {
+
+            return ::success;
+
+         }
+         else
+         {
+
+            return error_failed;
+
+         }
+
+
+      }
+
+
       string node::audio_get_default_library_name()
       {
 
@@ -1715,7 +1735,11 @@ namespace acme
             &ProcessInfo))
          {
 
-            return ::GetLastError();
+            auto lastError = ::GetLastError();
+            
+            auto estatus = last_error_to_status(lastError);
+
+            return estatus;
 
          }
 
@@ -1732,7 +1756,9 @@ namespace acme
 
          CloseHandle(ProcessInfo.hProcess);
 
-         return rc;
+         auto estatus = ExitCode_to_status(rc);
+
+         return estatus;
 
 #else
 
