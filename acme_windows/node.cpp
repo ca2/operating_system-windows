@@ -723,7 +723,7 @@ namespace acme
       ::e_status node::ExitCode_to_status(DWORD dwExitCode)
       {
 
-         if (dwLastError == 0)
+         if (dwExitCode == 0)
          {
 
             return ::success;
@@ -1672,6 +1672,67 @@ namespace acme
       }
 
 
+      ::e_status node::create_process(const char * pszCommandLine, u32 * pprocessId)
+      {
+
+         STARTUPINFO StartupInfo;
+
+         PROCESS_INFORMATION ProcessInfo;
+
+         ULONG rc;
+
+         __memset(&StartupInfo, 0, sizeof(StartupInfo));
+
+         StartupInfo.cb = sizeof(STARTUPINFO);
+
+         StartupInfo.dwFlags = STARTF_USESHOWWINDOW;
+
+         StartupInfo.wShowWindow = SW_HIDE;
+
+
+         if (!CreateProcessW(nullptr, wstring(pszCommandLine), nullptr, nullptr, false,
+            CREATE_NEW_CONSOLE,
+            nullptr,
+            nullptr,
+            &StartupInfo,
+            &ProcessInfo))
+         {
+
+            auto lastError = ::GetLastError();
+            
+            auto estatus = last_error_to_status(lastError);
+
+            return estatus;
+
+         }
+
+         WaitForSingleObject(ProcessInfo.hProcess, U32_INFINITE_TIMEOUT);
+
+         if (!GetExitCodeProcess(ProcessInfo.hProcess, &rc))
+         {
+
+            rc = 0;
+
+         }
+
+         CloseHandle(ProcessInfo.hThread);
+
+         CloseHandle(ProcessInfo.hProcess);
+
+         if (pprocessId)
+         {
+
+            *pprocessId = ProcessInfo.dwProcessId;
+
+         }
+
+         auto estatus = ExitCode_to_status(rc);
+
+         return estatus;
+
+
+      }
+
 
       ::e_status node::run_silent(const char* strFunct, const char* strstrParams)
       {
@@ -1803,9 +1864,6 @@ namespace acme
 #endif
 
       }
-
-
-
 
 
    } // namespace windows
