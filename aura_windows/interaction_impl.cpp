@@ -5518,7 +5518,8 @@ namespace windows
          }*/
          return;
       }
-         if (bKeyMessage)
+        
+      if (bKeyMessage)
       {
 
          __pointer(::user::interaction) puiFocus;
@@ -5534,34 +5535,23 @@ namespace windows
 
          }
 
-         //auto psession = get_session();
-
-
-
          if (puiFocus)
          {
 
             puiFocus->route_message(pmessage);
 
-            if (pmessage->m_bRet)
-            {
-
-               return;
-
-            }
-
          }
          else
          {
 
-            m_puserinteraction->_000OnKey(pkey);
+            m_puserinteraction->route_message(pmessage);
 
-            if (pmessage->m_bRet)
-            {
+         }
 
-               return;
+         if (pmessage->m_bRet)
+         {
 
-            }
+            return;
 
          }
 

@@ -23,7 +23,7 @@ namespace windowing_win32
 
       inline void set_hcursor(HCURSOR hcursor) { set_os_data(hcursor); }
 
-      virtual ::e_status create_from_image(const ::image * pimage, ::i32 xHotspot, ::i16 yHotspot) override;
+      ::e_status create_from_image(const ::image * pimage, ::i32 xHotspot, ::i32 yHotspot) override;
 
 
    };

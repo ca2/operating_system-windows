@@ -28,7 +28,7 @@ namespace windowing_win32
    }
 
 
-   ::e_status cursor::create_from_image(const ::image * pimage, ::i32 xHotspot, ::i16 yHotspot)
+   ::e_status cursor::create_from_image(const ::image * pimage, ::i32 xHotspot, ::i32 yHotspot)
    {
 
       HCURSOR hcursor = (HCURSOR) create_alpha_cursor(pimage, xHotspot, yHotspot);
