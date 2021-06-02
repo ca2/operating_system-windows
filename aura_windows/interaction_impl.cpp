@@ -5525,8 +5525,6 @@ namespace windows
          
          puiFocus = m_puserinteractionFocus1;
 
-
-
          ///__pointer(::message::key) pkey(pmessage);
 
          if (message == e_message_key_down)
@@ -5556,22 +5554,12 @@ namespace windows
          else
          {
 
-            if (pkey && !pkey->m_bRet)
+            m_puserinteraction->_000OnKey(pkey);
+
+            if (pmessage->m_bRet)
             {
 
-               if (m_puserinteraction != nullptr)
-               {
-
-                  m_puserinteraction->_000OnKey(pkey);
-
-                  if (pmessage->m_bRet)
-                  {
-
-                     return;
-
-                  }
-
-               }
+               return;
 
             }
 

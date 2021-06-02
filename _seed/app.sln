@@ -60,6 +60,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "aura_windows_common", "..\.
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "node_windows", "..\node_windows\node_windows.vcxproj", "{C1CCDF2E-9F27-45D3-B67A-B2EEB1754E72}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "just_app_message_box", "..\..\..\source\app\just_message_box\just_app_message_box.vcxproj", "{5F24E5DF-0984-45CF-BC93-C850814C0EEB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		basis|Win32 = basis|Win32
@@ -416,6 +418,26 @@ Global
 		{C1CCDF2E-9F27-45D3-B67A-B2EEB1754E72}.stage|Win32.Build.0 = stage|Win32
 		{C1CCDF2E-9F27-45D3-B67A-B2EEB1754E72}.stage|x64.ActiveCfg = stage|x64
 		{C1CCDF2E-9F27-45D3-B67A-B2EEB1754E72}.stage|x64.Build.0 = stage|x64
+		{5F24E5DF-0984-45CF-BC93-C850814C0EEB}.basis|Win32.ActiveCfg = basis|Win32
+		{5F24E5DF-0984-45CF-BC93-C850814C0EEB}.basis|Win32.Build.0 = basis|Win32
+		{5F24E5DF-0984-45CF-BC93-C850814C0EEB}.basis|x64.ActiveCfg = basis|x64
+		{5F24E5DF-0984-45CF-BC93-C850814C0EEB}.basis|x64.Build.0 = basis|x64
+		{5F24E5DF-0984-45CF-BC93-C850814C0EEB}.cover|Win32.ActiveCfg = cover|Win32
+		{5F24E5DF-0984-45CF-BC93-C850814C0EEB}.cover|Win32.Build.0 = cover|Win32
+		{5F24E5DF-0984-45CF-BC93-C850814C0EEB}.cover|x64.ActiveCfg = cover|x64
+		{5F24E5DF-0984-45CF-BC93-C850814C0EEB}.cover|x64.Build.0 = cover|x64
+		{5F24E5DF-0984-45CF-BC93-C850814C0EEB}.cube_basis|Win32.ActiveCfg = cube_basis|Win32
+		{5F24E5DF-0984-45CF-BC93-C850814C0EEB}.cube_basis|Win32.Build.0 = cube_basis|Win32
+		{5F24E5DF-0984-45CF-BC93-C850814C0EEB}.cube_basis|x64.ActiveCfg = cube_basis|x64
+		{5F24E5DF-0984-45CF-BC93-C850814C0EEB}.cube_basis|x64.Build.0 = cube_basis|x64
+		{5F24E5DF-0984-45CF-BC93-C850814C0EEB}.cube_stage|Win32.ActiveCfg = cube_stage|Win32
+		{5F24E5DF-0984-45CF-BC93-C850814C0EEB}.cube_stage|Win32.Build.0 = cube_stage|Win32
+		{5F24E5DF-0984-45CF-BC93-C850814C0EEB}.cube_stage|x64.ActiveCfg = cube_stage|x64
+		{5F24E5DF-0984-45CF-BC93-C850814C0EEB}.cube_stage|x64.Build.0 = cube_stage|x64
+		{5F24E5DF-0984-45CF-BC93-C850814C0EEB}.stage|Win32.ActiveCfg = stage|Win32
+		{5F24E5DF-0984-45CF-BC93-C850814C0EEB}.stage|Win32.Build.0 = stage|Win32
+		{5F24E5DF-0984-45CF-BC93-C850814C0EEB}.stage|x64.ActiveCfg = stage|x64
+		{5F24E5DF-0984-45CF-BC93-C850814C0EEB}.stage|x64.Build.0 = stage|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
