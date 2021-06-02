@@ -595,7 +595,7 @@ namespace apex
 
          ::file::path path;
 
-         path = m_psystem->m_papexsystem->m_pdirsystem->application_installer_folder(pathExe, strAppId, pszPlatform, pszConfiguration, pszLocale, pszSchema) / "installed.txt";
+         path = application_installer_folder(pathExe, strAppId, pszPlatform, pszConfiguration, pszLocale, pszSchema) / "installed.txt";
 
          strBuild = file_as_string(path);
 
@@ -609,7 +609,7 @@ namespace apex
 
          ::file::path path;
 
-         path = m_psystem->m_papexsystem->m_pdirsystem->application_installer_folder(pathExe, strAppId, pszPlatform, pszConfiguration, pszLocale, pszSchema) / "installed.txt";
+         path = application_installer_folder(pathExe, strAppId, pszPlatform, pszConfiguration, pszLocale, pszSchema) / "installed.txt";
 
          return file_put_contents(path, pszBuild);
 
@@ -621,7 +621,7 @@ namespace apex
 
          ::file::path path = m_psystem->m_pacmepath->app_module();
 
-         ::file::path pathFile = m_psystem->m_papexsystem->m_pdirsystem->get_last_run_application_path_file(strAppId);
+         ::file::path pathFile = get_last_run_application_path_file(strAppId);
 
          return file_put_contents(pathFile, path);
 
