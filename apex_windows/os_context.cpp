@@ -1574,7 +1574,9 @@ retry:
       if((wAttr = windows_get_file_attributes(pszFileName)) == (u32)-1L)
       {
 
-         ::file::throw_os_error( (::i32)GetLastError());
+         DWORD dwLastError = ::GetLastError();
+
+         throw windows_file_exception(::error_io, dwLastError, pszFileName);
 
       }
 
@@ -1588,7 +1590,9 @@ retry:
          if (!SetFileAttributesW(wstr, (u32)status.m_attribute))
          {
 
-            ::file::throw_os_error( (::i32)GetLastError());
+            DWORD dwLastError = ::GetLastError();
+
+            throw windows_file_exception(::error_io, dwLastError, wstr);
 
          }
 
@@ -1634,22 +1638,27 @@ retry:
       if(hFile == INVALID_HANDLE_VALUE)
       {
 
-         ::file::throw_os_error( (::i32)::GetLastError());
+         DWORD dwLastError = ::GetLastError();
+
+         throw windows_file_exception(::error_io, dwLastError, wstr);
 
       }
 
       if(!SetFileTime((HANDLE)hFile, pCreationTime, pLastAccessTime, pLastWriteTime))
-
       {
 
-         ::file::throw_os_error( (::i32)::GetLastError());
+         DWORD dwLastError = ::GetLastError();
+
+         throw windows_file_exception(::error_io, dwLastError, wstr);
 
       }
 
       if(!::CloseHandle(hFile))
       {
 
-         ::file::throw_os_error( (::i32)::GetLastError());
+         DWORD dwLastError = ::GetLastError();
+
+         throw windows_file_exception(::error_io, dwLastError, wstr);
 
       }
 
@@ -1659,7 +1668,9 @@ retry:
          if (!::SetFileAttributesW(wstr, (u32)status.m_attribute))
          {
 
-            ::file::throw_os_error( (::i32)GetLastError());
+            DWORD dwLastError = ::GetLastError();
+
+            throw windows_file_exception(::error_io, dwLastError, wstr);
 
          }
 

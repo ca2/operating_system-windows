@@ -49,6 +49,7 @@ namespace windows
 
       HANDLE            m_handleFile;
       ::u32             m_dwAccessMode;
+      int               m_iCharacterPutBack;
 
 
       file();
@@ -81,6 +82,11 @@ namespace windows
       virtual memsize read(void * pdata, memsize nCount) override;
 
       virtual void write(const void * pdata, memsize nCount) override;
+
+
+      virtual int peek_character();
+      virtual int get_character();
+      virtual int put_character_back(int iCharacter);
 
 
       virtual void lock(filesize dwPos, filesize dwCount) override;

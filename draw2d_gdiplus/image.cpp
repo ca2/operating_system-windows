@@ -540,7 +540,7 @@ namespace draw2d_gdiplus
 
       pimage1->set_rgb(255, 255, 255);
 
-      pimage1->g()->draw(::rectangle_dimension(0, 0, cx, cy), picon);
+      pimage1->g()->draw(rectangle_i32_dimension(0, 0, cx, cy), picon);
 
       // Black blend image
       ::image_pointer pimage2;
@@ -566,7 +566,7 @@ namespace draw2d_gdiplus
 
       pimage2->fill(0, 0, 0, 0);
 
-      pimage2->g()->draw(::rectangle_dimension(0, 0, cx, cy), picon);
+      pimage2->g()->draw(rectangle_i32_dimension(0, 0, cx, cy), picon);
 
       //nullptr,
       //DI_IMAGE | DI_MASK);
@@ -593,7 +593,7 @@ namespace draw2d_gdiplus
 
       }
 
-      pimageM->g()->draw(::rectangle_dimension(0, 0, cx, cy), picon);
+      pimageM->g()->draw(rectangle_i32_dimension(0, 0, cx, cy), picon);
 
       u8 * r1 = (u8 *)pimage1->colorref();
       u8 * r2 = (u8 *)pimage2->colorref();

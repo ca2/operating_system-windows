@@ -687,7 +687,9 @@ namespace windows
       if ((wAttr = windows_get_file_attributes(path)) == (::u32)INVALID_FILE_ATTRIBUTES)
       {
 
-         ::file::throw_os_error(::GetLastError());
+         DWORD dwLastError = ::GetLastError();
+
+         throw windows_file_exception(::error_io, dwLastError, path);
 
       }
 
@@ -700,7 +702,9 @@ namespace windows
          if (!SetFileAttributesW((LPWSTR)(const widechar *)pszFileName, (::u32)status.m_attribute))
          {
 
-            ::file::throw_os_error(::GetLastError());
+            DWORD dwLastError = ::GetLastError();
+
+            throw windows_file_exception(::error_io, dwLastError, pszFileName);
 
          }
 

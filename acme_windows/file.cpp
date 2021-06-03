@@ -14,6 +14,8 @@ namespace windows
    file::file()
    {
 
+      m_iCharacterPutBack = -1;
+
       m_handleFile = INVALID_HANDLE_VALUE;
       m_dwAccessMode = 0;
 
@@ -23,6 +25,7 @@ namespace windows
    file::file(HANDLE handleFile)
    {
 
+      m_iCharacterPutBack = -1;
       m_handleFile = handleFile;
       m_dwAccessMode = 0;
 
@@ -31,6 +34,8 @@ namespace windows
 
    file::file(const char* pszFileName, const ::file::e_open & eopen) 
    {
+
+      m_iCharacterPutBack = -1;
 
       ASSERT(__is_valid_string(pszFileName));
 
@@ -229,13 +234,17 @@ namespace windows
 
 
    memsize file::read(void* pdata, memsize nCount)
-
    {
+
       ASSERT_VALID(this);
       ASSERT(m_handleFile != INVALID_HANDLE_VALUE);
 
       if (nCount == 0)
+      {
+
          return 0;   // avoid Win32 "null-read"
+
+      }
 
       ASSERT(pdata != nullptr);
 
@@ -246,16 +255,17 @@ namespace windows
       if (!::ReadFile((HANDLE)m_handleFile, pdata, (::u32)nCount, &dwRead, nullptr))
       {
 
-         ::file::throw_os_error((::i32)::GetLastError());
+         throw ::windows_file_exception(::error_io, ::GetLastError(), m_path);
 
       }
 
       return (::u32)dwRead;
    }
 
-   void file::write(const void* pdata, memsize nCount)
 
+   void file::write(const void* pdata, memsize nCount)
    {
+
       ASSERT_VALID(this);
       ASSERT(m_handleFile != INVALID_HANDLE_VALUE);
 
@@ -273,7 +283,7 @@ namespace windows
 
          DWORD dwLastError = ::GetLastError();
 
-         ::file::throw_os_error(dwLastError, m_path);
+         throw windows_file_exception(::error_io, dwLastError, m_path);
 
       }
 
@@ -286,7 +296,11 @@ namespace windows
    {
 
       if (m_handleFile == INVALID_HANDLE_VALUE)
-         ::file::throw_os_error((::i32)0);
+      {
+
+         throw windows_file_exception(::error_io, -1, m_path);
+
+      }
 
       ASSERT_VALID(this);
       ASSERT(m_handleFile != INVALID_HANDLE_VALUE);
@@ -303,15 +317,63 @@ namespace windows
 
          DWORD dwLastError = ::GetLastError();
 
-         ::file::throw_os_error(dwLastError);
+         throw windows_file_exception(::error_io, dwLastError, m_path);
 
       }
 
       return posNew;
    }
 
+
+   int file::peek_character()
+   {
+
+      if (m_iCharacterPutBack != -1)
+      {
+
+         return m_iCharacterPutBack;
+
+      }
+
+      return ::file::file::peek_character();
+
+   }
+
+
+   int file::get_character()
+   {
+
+      auto iCharacterPutBack = m_iCharacterPutBack;
+
+      if (iCharacterPutBack != -1)
+      {
+
+         m_iCharacterPutBack = -1;
+
+         return iCharacterPutBack;
+
+      }
+
+      return ::file::file::get_character();
+
+   }
+
+
+   int file::put_character_back(int iCharacter)
+   {
+
+      m_iCharacterPutBack = iCharacter;
+
+      seek(-1, ::file::e_seek::seek_current);
+
+      return iCharacter;
+
+   }
+
+
    filesize file::get_position() const
    {
+
       ASSERT_VALID(this);
       ASSERT(m_handleFile != INVALID_HANDLE_VALUE);
 
@@ -325,7 +387,7 @@ namespace windows
 
          DWORD dwLastError = ::GetLastError();
 
-         ::file::throw_os_error(dwLastError);
+         throw windows_file_exception(::error_io, dwLastError, m_path);
 
       }
 
@@ -350,15 +412,24 @@ namespace windows
          }
          else
          {
-            ::file::throw_os_error((::i32)dwLastError);
+
+            throw windows_file_exception(::error_io, dwLastError, m_path);
+
          }
+
       }
+
    }
 
    void file::close()
    {
 
-      flush();
+      if (m_eopen & ::file::e_open_write)
+      {
+
+         flush();
+
+      }
 
       ASSERT_VALID(this);
       ASSERT(m_handleFile != INVALID_HANDLE_VALUE);
@@ -384,7 +455,11 @@ namespace windows
       m_dwAccessMode = 0;
 
       if (bError)
-         ::file::throw_os_error(dwLastError, m_path);
+      {
+
+         throw windows_file_exception(::error_io, dwLastError, m_path);
+
+      }
 
    }
 
@@ -399,7 +474,7 @@ namespace windows
 
          DWORD dwLastError = ::GetLastError();
 
-         ::file::throw_os_error(dwLastError);
+         throw windows_file_exception(::error_io, dwLastError, m_path);
 
       }
    }
@@ -415,9 +490,10 @@ namespace windows
 
          DWORD dwLastError = ::GetLastError();
 
-         ::file::throw_os_error(dwLastError);
+         throw windows_file_exception(::error_io, dwLastError, m_path);
 
       }
+
    }
 
 
@@ -434,7 +510,7 @@ namespace windows
 
          DWORD dwLastError = ::GetLastError();
 
-         ::file::throw_os_error(dwLastError);
+         throw windows_file_exception(::error_io, dwLastError, m_path);
 
       }
 

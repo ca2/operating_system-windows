@@ -28,6 +28,9 @@
 #include "shared_memory.h"
 
 
+#include "file_exception.h"
+
+
 #include "uac_tools.h"
 
 
