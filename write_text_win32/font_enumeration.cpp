@@ -157,9 +157,6 @@ namespace write_text_win32
    }
 
 
-
-
-
 } // namespace windowing_win32
 
 
