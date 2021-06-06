@@ -11,25 +11,6 @@ namespace write_text_win32
    font_enumeration::font_enumeration()
    {
 
-      //m_iaCharSet.add(CHINESEBIG5_CHARSET);
-      //m_iaCharSet.add(GB2312_CHARSET);
-      //m_iaCharSet.add(SHIFTJIS_CHARSET);
-      //m_iaCharSet.add(SYMBOL_CHARSET);
-      ////m_iaCharSet.add(OEM_CHARSET);
-      ////m_iaCharSet.add(DEFAULT_CHARSET);
-      //m_iaCharSet.add(HEBREW_CHARSET);
-      //m_iaCharSet.add(ARABIC_CHARSET);
-      //m_iaCharSet.add(GREEK_CHARSET);
-      //m_iaCharSet.add(TURKISH_CHARSET);
-      //m_iaCharSet.add(VIETNAMESE_CHARSET);
-      //m_iaCharSet.add(THAI_CHARSET);
-      //m_iaCharSet.add(EASTEUROPE_CHARSET);
-      //m_iaCharSet.add(RUSSIAN_CHARSET);
-      //m_iaCharSet.add(JOHAB_CHARSET);
-      //m_iaCharSet.add(HANGUL_CHARSET);
-      //m_iaCharSet.add(BALTIC_CHARSET);
-      ////m_iaCharSet.add(MAC_CHARSET);
-
       m_hdc = nullptr;
 
    }
@@ -58,7 +39,7 @@ namespace write_text_win32
 
       }
 
-      auto estatus = __defer_construct_new(m_pitema);
+      auto estatus = __defer_construct_new(m_pfontenumerationitema);
 
       if (!estatus)
       {
@@ -71,7 +52,7 @@ namespace write_text_win32
 
       ::EnumFontFamiliesW(m_hdc, (const widechar *)nullptr, &font_enumeration::OLDFONTENUMPROCW, (LPARAM)pfontenumeration);
 
-      for (auto & pitem : m_pitema->ptra())
+      for (auto & pitem : m_pfontenumerationitema->ptra())
       {
 
          enumerate_character_set(pitem);
@@ -106,7 +87,7 @@ namespace write_text_win32
 
             auto pfontenumerationitem = __new(::write_text::font_enumeration_item(pszFaceName));
 
-            pfontenumeration->m_pitema->add(pfontenumerationitem);
+            pfontenumeration->m_pfontenumerationitema->add(pfontenumerationitem);
 
          }
 
@@ -121,7 +102,7 @@ namespace write_text_win32
 
             auto pfontenumerationitem = __new(::write_text::font_enumeration_item(pszFaceName));
 
-            pfontenumeration->m_pitema->add(pfontenumerationitem);
+            pfontenumeration->m_pfontenumerationitema->add(pfontenumerationitem);
 
          }
 
@@ -136,7 +117,7 @@ namespace write_text_win32
 
             auto pfontenumerationitem = __new(::write_text::font_enumeration_item(pszFaceName));
 
-            pfontenumeration->m_pitema->add(pfontenumerationitem);
+            pfontenumeration->m_pfontenumerationitema->add(pfontenumerationitem);
 
          }
 

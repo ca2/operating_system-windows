@@ -1155,7 +1155,7 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="font_department.h" />
+    <ClInclude Include="fonts.h" />
     <ClInclude Include="font_enumeration.h" />
     <ClInclude Include="write_text.h" />
     <ClInclude Include="write_text_win32_gdi.h" />
@@ -1165,7 +1165,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="factory_exchange.cpp" />
-    <ClCompile Include="font_department.cpp" />
+    <ClCompile Include="fonts.cpp" />
     <ClCompile Include="font_enumeration.cpp" />
     <ClCompile Include="write_text.cpp" />
     <ClCompile Include="write_text_win32_gdi.cpp" />
