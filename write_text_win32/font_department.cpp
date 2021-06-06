@@ -22,7 +22,7 @@ namespace write_text_win32
    ::e_status font_department::initialize(::object * pobject)
    {
 
-      auto estatus = ::font_department::initialize(pobject);
+      auto estatus = ::write_text::font_department::initialize(pobject);
 
       if (!estatus)
       {
@@ -32,24 +32,6 @@ namespace write_text_win32
       }
 
       return estatus;
-
-   }
-
-
-   ::e_status font_department::finalize()
-   {
-
-       auto estatus = ::font_department::finalize();
-
-       return estatus;
-      
-   }
-
-
-   void font_department::enum_fonts(::write_text::font_enum_item_array & itema)
-   {
-
-      wingdi_font_enum fontenum(itema, true, true, true);
 
    }
 

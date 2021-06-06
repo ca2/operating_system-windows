@@ -28,7 +28,7 @@ namespace draw2d_gdiplus
       void set_gdiplus_font(Gdiplus::Font * pfont) { m_osdata[0] = pfont; }
 
 
-      virtual e_char_set calc_char_set(::draw2d::graphics * pgraphics);
+      virtual enum_character_set calculate_character_set(::draw2d::graphics * pgraphics);
 
 
    };
