@@ -5852,16 +5852,16 @@ namespace windowing_win32
    bool window::get_window_rect(RECTANGLE_I32 * prectangle)
    {
 
-      RECT rect;
+      RECT rectangle;
 
-      if (!::GetWindowRect(get_hwnd(), &rect))
+      if (!::GetWindowRect(get_hwnd(), &rectangle))
       {
 
          return false;
 
       }
 
-      __copy(prectangle, rect);
+      __copy(prectangle, rectangle);
 
       return true;
 
@@ -5884,16 +5884,16 @@ namespace windowing_win32
    bool window::get_client_rect(RECTANGLE_I32 * prectangle)
    {
 
-      RECT rect;
+      RECT rectangle;
 
-      if (!::GetClientRect(get_hwnd(), &rect))
+      if (!::GetClientRect(get_hwnd(), &rectangle))
       {
 
          return false;
 
       }
 
-      __copy(prectangle, rect);
+      __copy(prectangle, rectangle);
 
       return true;
 
