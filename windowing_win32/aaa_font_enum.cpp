@@ -12,7 +12,7 @@ namespace windowing_win32
 
 
       HDC                                 m_hdc;
-      ::write_text::font_enum_item_array & m_itema;
+      ::write_text::font_enumeration_item_array & m_itema;
       bool                                m_bRaster;
       bool                                m_bTrueType;
       bool                                m_bOther;
@@ -20,7 +20,7 @@ namespace windowing_win32
       int_array                           m_iaCharSet;
 
 
-      wingdi_font_enum(::write_text::font_enum_item_array & itema, bool bRaster, bool bTrueType, bool bOther) :
+      wingdi_font_enum(::write_text::font_enumeration_item_array & itema, bool bRaster, bool bTrueType, bool bOther) :
          m_itema(itema),
          m_bRaster(bRaster),
          m_bTrueType(bTrueType),
@@ -170,7 +170,7 @@ namespace windowing_win32
    }
 
 
-   CLASS_DECL_WINDOWING_WIN32 void wingdi_enum_fonts(::write_text::font_enum_item_array & itema, bool bRaster, bool bTrueType, bool bOther)
+   CLASS_DECL_WINDOWING_WIN32 void wingdi_enum_fonts(::write_text::font_enumeration_item_array & itema, bool bRaster, bool bTrueType, bool bOther)
    {
 
       wingdi_font_enum fonts(itema, bRaster, bTrueType, bOther);

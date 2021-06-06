@@ -51,7 +51,25 @@ namespace write_text_win32
 
       }
 
-      ::EnumFontFamiliesW(m_hdc, (const widechar *)nullptr, (FONTENUMPROCW)&font_enumeration::callback, (lparam)this);
+      if (!m_hdc)
+      {
+
+         return error_failed;
+
+      }
+
+      auto estatus = __defer_construct_new(m_pitema);
+
+      if (!estatus)
+      {
+
+         return estatus;
+
+      }
+
+      class font_enumeration* pfontenumeration = this;
+
+      ::EnumFontFamiliesW(m_hdc, (const widechar *)nullptr, &font_enumeration::OLDFONTENUMPROCW, (LPARAM)pfontenumeration);
 
       for (auto & pitem : m_pitema->ptra())
       {
@@ -64,27 +82,31 @@ namespace write_text_win32
 
       m_hdc = nullptr;
 
-      return ::success;
+      return estatus;
 
    }
 
 
-   BOOL CALLBACK font_enumeration::callback(LPLOGFONTW plf, LPNEWTEXTMETRICW lpntm, ::u32 dwFontType, LPVOID p)
+   int CALLBACK font_enumeration::OLDFONTENUMPROCW(CONST LOGFONTW* plogfont, CONST TEXTMETRICW* ptextmetric, DWORD dwFontType, LPARAM lparam)
    {
 
-      font_enumeration * penumeration = (font_enumeration *)p;
+      auto pfontenumeration = (font_enumeration *)lparam;
 
-      if (wcslen(plf->lfFaceName) > 1 && plf->lfFaceName[0] == '@')
+      if (wcslen(plogfont->lfFaceName) > 1 && plogfont->lfFaceName[0] == '@')
       {
 
       }
       else if (dwFontType & RASTER_FONTTYPE)
       {
 
-         if (penumeration->m_bRaster)
+         if (pfontenumeration->m_bRaster)
          {
 
-            penumeration->m_pitema->add(__new(::write_text::font_enumeration_item(plf->lfFaceName)));
+            auto pszFaceName = plogfont->lfFaceName;
+
+            auto pfontenumerationitem = __new(::write_text::font_enumeration_item(pszFaceName));
+
+            pfontenumeration->m_pitema->add(pfontenumerationitem);
 
          }
 
@@ -92,10 +114,14 @@ namespace write_text_win32
       else if (dwFontType & TRUETYPE_FONTTYPE)
       {
 
-         if (penumeration->m_bTrueType)
+         if (pfontenumeration->m_bTrueType)
          {
 
-            penumeration->m_pitema->add(__new(::write_text::font_enumeration_item(plf->lfFaceName)));
+            auto pszFaceName = plogfont->lfFaceName;
+
+            auto pfontenumerationitem = __new(::write_text::font_enumeration_item(pszFaceName));
+
+            pfontenumeration->m_pitema->add(pfontenumerationitem);
 
          }
 
@@ -103,16 +129,20 @@ namespace write_text_win32
       else
       {
 
-         if (penumeration->m_bOther)
+         if (pfontenumeration->m_bOther)
          {
 
-            penumeration->m_pitema->add(__new(::write_text::font_enumeration_item(plf->lfFaceName)));
+            auto pszFaceName = plogfont->lfFaceName;
+
+            auto pfontenumerationitem = __new(::write_text::font_enumeration_item(pszFaceName));
+
+            pfontenumeration->m_pitema->add(pfontenumerationitem);
 
          }
 
       }
 
-      return true;
+      return TRUE;
 
    }
 
@@ -120,27 +150,28 @@ namespace write_text_win32
    void font_enumeration::enumerate_character_set(::write_text::font_enumeration_item* pitem)
    {
 
-      ::EnumFontFamiliesW(m_hdc, pitem->m_wstrName, (FONTENUMPROCW)&font_enumeration::callback_character_set, (lparam)pitem);
+      ::EnumFontFamiliesW(m_hdc, pitem->m_wstrName, &font_enumeration::OLDFONTENUMPROCW_character_set, (LPARAM)pitem);
 
    }
 
 
-   BOOL CALLBACK font_enumeration::callback_character_set(LPLOGFONTW plf, LPNEWTEXTMETRICW lpntm, ::u32 dwFontType, LPVOID p)
+   int CALLBACK font_enumeration::OLDFONTENUMPROCW_character_set(CONST LOGFONTW* plogfont, CONST TEXTMETRICW* ptextmetric, DWORD dwFontType, LPARAM lparam)
    {
 
-      ::write_text::font_enumeration_item * pitem = (::write_text::font_enumeration_item *)p;
+      auto pfontenumerationitem = (::write_text::font_enumeration_item *)lparam;
 
-      ::enum_character_set echarset = ::write_text_win32_gdi::get_character_set(plf->lfCharSet);
+      int iCharacterSet = plogfont->lfCharSet;
 
-      if (echarset != ::e_character_set_ansi && echarset != ::e_character_set_default)
+      ::enum_character_set echaracterset = ::write_text_win32_gdi::get_character_set(iCharacterSet);
+
+      if (echaracterset != ::e_character_set_ansi && echaracterset != ::e_character_set_default)
       {
 
-         pitem->m_echaracterseta.add(echarset);
+         pfontenumerationitem->m_echaracterseta.add(echaracterset);
 
       }
 
-      return true;
-
+      return TRUE;
 
    }
 
