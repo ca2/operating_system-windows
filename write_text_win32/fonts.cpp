@@ -6,23 +6,23 @@ namespace write_text_win32
 {
 
 
-   font_department::font_department()
+   fonts::fonts()
    {
 
 
    }
 
 
-   font_department::~font_department()
+   fonts::~fonts()
    {
 
 
    }
 
-   ::e_status font_department::initialize(::object * pobject)
+   ::e_status fonts::initialize(::object * pobject)
    {
 
-      auto estatus = ::write_text::font_department::initialize(pobject);
+      auto estatus = ::write_text::fonts::initialize(pobject);
 
       if (!estatus)
       {
