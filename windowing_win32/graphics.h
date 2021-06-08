@@ -403,18 +403,18 @@ namespace draw2d_gdiplus
 
       virtual ::count get_character_extent(double_array & daLeft, double_array& daRight, const string & str, strsize iStart = 0, strsize iEnd = -1) override;
 
-      virtual size_f64 GetTextExtent(const char * pszString, strsize nCount, strsize iIndex) override;
+      virtual size_f64 get_text_extent(const char * pszString, strsize nCount, strsize iIndex) override;
 
       virtual size_f64 GetTextBegin(const char * pszString, strsize nCount, strsize iIndex) override;
 
-      //virtual size_f64 GetTextExtent(const char * pszString, strsize nCount) override;
+      //virtual size_f64 get_text_extent(const char * pszString, strsize nCount) override;
 
-      virtual size_f64 GetTextExtent(const string & str) override;
-      virtual bool GetTextExtent(size_f64 & size, const char * pszString, strsize nCount, strsize iIndex) override;
+      virtual size_f64 get_text_extent(const string & str) override;
+      virtual bool get_text_extent(size_f64 & size, const char * pszString, strsize nCount, strsize iIndex) override;
 
-      virtual bool GetTextExtent(size_f64 & size, const char * pszString, strsize nCount) override;
+      virtual bool get_text_extent(size_f64 & size, const char * pszString, strsize nCount) override;
 
-      virtual bool GetTextExtent(size_f64 & size, const string & str) override;
+      virtual bool get_text_extent(size_f64 & size, const string & str) override;
       virtual size_f64 GetOutputTextExtent(const char * pszString, strsize nCount) override;
 
       virtual size_f64 GetOutputTextExtent(const string & str) override;

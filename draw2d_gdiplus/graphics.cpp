@@ -2326,7 +2326,7 @@ namespace draw2d_gdiplus
    //}
 
 
-   bool graphics::get_text_metrics(::write_text::text_metric * pmetric)
+   ::e_status graphics::get_text_metrics(::write_text::text_metric * pmetric)
    {
 
       if (m_pgraphics == nullptr)
@@ -5439,7 +5439,7 @@ namespace draw2d_gdiplus
    //   for (int iLen : iaLen)
    //   {
 
-   //      sizea.add(GetTextExtent(str, iLen));
+   //      sizea.add(get_text_extent(str, iLen));
 
    //   }
 
@@ -5495,7 +5495,7 @@ namespace draw2d_gdiplus
 
       int iCount = 0;
 
-      int iStart = (i32_cast) cBeg;
+      int iStart = (int) cBeg;
 
       int cMaxMeasureCharacterRanges = 32;
 
@@ -5582,7 +5582,7 @@ namespace draw2d_gdiplus
 
 
 
-   size_f64 graphics::GetTextExtent(const char * pszString, strsize nCount, strsize iIndex)
+   size_f64 graphics::get_text_extent(const char * pszString, strsize nCount, strsize iIndex)
    {
 
        if (::is_null(m_pgraphics))
@@ -5748,10 +5748,11 @@ namespace draw2d_gdiplus
 
    }
 
-   size_f64 graphics::GetTextExtent(const string & str)
+
+   size_f64 graphics::get_text_extent(const block & block)
    {
 
-      if (!m_pfont || str.is_empty())
+      if (!m_pfont || block.is_empty())
       {
 
          return ::size_f64(0, 0);
@@ -5759,6 +5760,8 @@ namespace draw2d_gdiplus
       }
 
       m_pfont->defer_update(this, 0);
+
+      string str(block);
 
       auto& text = m_pfont->m_mapText[str];
 
@@ -5822,7 +5825,7 @@ namespace draw2d_gdiplus
       return ::size_f64;*/
    }
 
-   //size_f64 graphics::GetTextExtent(const string & str)
+   //size_f64 graphics::get_text_extent(const string & str)
    //{
    //   /*      if(get_handle2() == nullptr)
    //            return ::size_f64(0, 0);
@@ -5836,10 +5839,10 @@ namespace draw2d_gdiplus
 
    //   //class size_f64 ::size_f64;
 
-   //   //if(!GetTextExtent(::size_f64, str, (i32) str.get_length(), (i32) str.get_length()))
+   //   //if(!get_text_extent(::size_f64, str, (i32) str.get_length(), (i32) str.get_length()))
    //   //   return const ::size_f64 & size(0, 0);
 
-   //   return GetTextExtent(str);
+   //   return get_text_extent(str);
 
    //   //return const ::size_f64 & size(0, 0);
 
@@ -5909,7 +5912,7 @@ namespace draw2d_gdiplus
    }
 
 
-   bool graphics::GetTextExtent(::size_f64 & size, const char * pszString, strsize nCount, strsize iIndex)
+   bool graphics::get_text_extent(::size_f64 & size, const char * pszString, strsize nCount, strsize iIndex)
    {
 
       if (::is_null(m_pgraphics))
@@ -6051,7 +6054,7 @@ namespace draw2d_gdiplus
    }
 
    
-   bool graphics::GetTextExtent(::size_f64 & size, const char * pszString, strsize nCount)
+   bool graphics::get_text_extent(::size_f64 & size, const char * pszString, strsize nCount)
    {
 
       if (::is_null(m_pgraphics))
@@ -6103,7 +6106,7 @@ namespace draw2d_gdiplus
    }
 
 
-   bool graphics::GetTextExtent(::size_f64 & size, const string & str)
+   bool graphics::get_text_extent(::size_f64 & size, const string & str)
    {
 
       if (::is_null(m_pgraphics) && is_null(m_pfont))
@@ -6195,7 +6198,7 @@ namespace draw2d_gdiplus
    //}
 
 
-   bool graphics::TextOutRaw(double x, double y, const block & block)
+   ::e_status graphics::TextOutRaw(double x, double y, const block & block)
    {
 
       if (block.is_empty())
@@ -7108,7 +7111,7 @@ namespace draw2d_gdiplus
 
          ::rectangle_i32 rectIntersect(m_pointAlphaBlend, m_pimageAlphaBlend->size());
 
-         const ::size_f64 & size = ::size_f64(GetTextExtent(block));
+         const ::size_f64 & size = ::size_f64(get_text_extent(block));
 
          //size.cx = size.cx * 110 / 100;
 

@@ -5396,8 +5396,8 @@ namespace windowing_win32
 //      }
 //      else if (message == e_message_left_button_down)
 //      {
-//         ::rectangle_i32 rectClient;
-//         ::GetClientRect(get_hwnd(), rectClient);
+//         ::rectangle_i32 rectangleClient;
+//         ::GetClientRect(get_hwnd(), rectangleClient);
 //         ::rectangle_i32 rectWindow;
 //         ::GetWindowRect(get_hwnd(), rectWindow);
 //         ::rectangle_i32 rectRegion;
@@ -6012,11 +6012,11 @@ namespace windowing_win32
 
          ::ScreenToClient(hwnd, (POINT *)&pointCursor);
 
-         ::rectangle_i32 rectClient;
+         ::rectangle_i32 rectangleClient;
 
-         ::GetClientRect(hwnd, (RECT *)&rectClient);
+         ::GetClientRect(hwnd, (RECT *)&rectangleClient);
 
-         if (!rectClient.contains(pointCursor))
+         if (!rectangleClient.contains(pointCursor))
          {
 
             sleep(100_ms);

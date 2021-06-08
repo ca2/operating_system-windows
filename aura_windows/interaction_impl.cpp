@@ -1495,9 +1495,9 @@ namespace windows
    void interaction_impl::rects_from_os()
    {
 
-      //::rectangle_i32 rectClient;
+      //::rectangle_i32 rectangleClient;
 
-      //::GetClientRect(m_hwnd, rectClient);
+      //::GetClientRect(m_hwnd, rectangleClient);
 
       //::rectangle_i32 rectScreen;
 
@@ -1518,7 +1518,7 @@ namespace windows
 
       //}
 
-      //if (rectClient.size() != m_puserinteraction->m_size)
+      //if (rectangleClient.size() != m_puserinteraction->m_size)
       //{
 
       //   TRACE("ATTENTION!! Client Size <> Window Size");
@@ -4549,8 +4549,8 @@ namespace windows
 //      }
 //      else if (message == e_message_left_button_down)
 //      {
-//         ::rectangle_i32 rectClient;
-//         ::GetClientRect(get_handle(), rectClient);
+//         ::rectangle_i32 rectangleClient;
+//         ::GetClientRect(get_handle(), rectangleClient);
 //         ::rectangle_i32 rectWindow;
 //         ::GetWindowRect(get_handle(), rectWindow);
 //         ::rectangle_i32 rectRegion;
@@ -5182,8 +5182,8 @@ namespace windows
       }
       else if (message == e_message_left_button_down)
       {
-         ::RECT rectClient;
-         ::GetClientRect(m_hwnd, &rectClient);
+         ::RECT rectangleClient;
+         ::GetClientRect(m_hwnd, &rectangleClient);
          ::RECT rectWindow;
          ::GetWindowRect(m_hwnd, &rectWindow);
          ::RECT rectRegion;
@@ -5471,8 +5471,24 @@ namespace windows
                output_debug_string("mouse move on button");
 
             }
+            
+            auto puserinteraction = pchild;
 
-            pchild->route_message(pmouse);
+            while (::is_set(puserinteraction))
+            {
+
+               puserinteraction->route_message(pmouse);
+
+               if (pmouse->m_bRet)
+               {
+
+                  break;
+
+               }
+
+               puserinteraction = puserinteraction->get_parent();
+
+            }
 
          }
          else
