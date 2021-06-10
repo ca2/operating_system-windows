@@ -2,7 +2,6 @@
 
 
 #include "app-core/multimedia/multimedia/_.h"
-#include "aura/user/_user.h"
 #include "app-core/multimedia/audio_mixer/_.h"
 #include "multimedia_mmsystem/_.h"
 
@@ -39,33 +38,4 @@ namespace multimedia
 
 
 } // namespace multimedia
-
-
-#include "interaction.h"
-#include "mixer.h"
-#include "control.h"
-#include "source.h"
-#include "destination.h"
-#include "device.h"
-#include "line_info.h"
-
-
-#include "callback.h"
-
-
-#include "thread.h"          
-
-
-#include "section.h"
-
-
-
-#include "factory_exchange.h"
-
-
-
-
-
-
-
 

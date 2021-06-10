@@ -7,6 +7,9 @@
 #include "audio_mmsystem/_.h"
 
 
+#include "audio_mmsystem/_audio_mmsystem.h"
+
+
 #include "aura/_defer.h"
 
 
