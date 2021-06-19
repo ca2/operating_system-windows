@@ -105,7 +105,7 @@ LRESULT CALLBACK __window_procedure(HWND hwnd, UINT message, WPARAM wparam, LPAR
    if (message == WM_KEYDOWN)
    {
 
-      output_debug_string("WM_IME_CHAR(2)");
+      output_debug_string("WM_KEYDOWN");
 
    }
 

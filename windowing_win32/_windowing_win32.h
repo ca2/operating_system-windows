@@ -9,8 +9,8 @@ namespace windowing_win32
 {
 
 
-   CLASS_DECL_WINDOWING_WIN32 void wingdi_enum_fonts(::write_text::font_enum_item_array& itema, bool bRaster, bool bTrueType, bool bOther);
-   CLASS_DECL_WINDOWING_WIN32::e_char_set wingdi_get_cs(int iCharSet);
+   CLASS_DECL_WINDOWING_WIN32 void wingdi_enum_fonts(::write_text::font_enumeration_item_array& itema, bool bRaster, bool bTrueType, bool bOther);
+   CLASS_DECL_WINDOWING_WIN32::enum_character_set wingdi_get_cs(int iCharSet);
 
    
    CLASS_DECL_WINDOWING_WIN32 HMONITOR get_primary_monitor_handle();

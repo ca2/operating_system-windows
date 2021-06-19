@@ -135,11 +135,11 @@ namespace production
 
       m_iWScreen = rectDesktop.width();
       m_iHScreen = rectDesktop.height();
-      ::rectangle_i32 rectClient = get_client_rect();
-      //GetClientRect(rectClient);
-      rectClient.deflate(2, 2);
-      i32 iW = rectClient.width() / 2;
-      i32 iH = rectClient.height() / 2;
+      ::rectangle_i32 rectangleClient = get_client_rect();
+      //GetClientRect(rectangleClient);
+      rectangleClient.deflate(2, 2);
+      i32 iW = rectangleClient.width() / 2;
+      i32 iH = rectangleClient.height() / 2;
       iH = minimum(iH, 120);
       double r = (double) iW / (double) iH;
       double rScreen = (double) rectDesktop.width() / (double) rectDesktop.height();
@@ -169,17 +169,17 @@ namespace production
 
       single_lock synchronouslock(&m_pproduction->m_mutexStatus,true);
 
-      ::rectangle_i32 rectClient = get_client_rect();
-      //GetClientRect(rectClient);
+      ::rectangle_i32 rectangleClient = get_client_rect();
+      //GetClientRect(rectangleClient);
 
       pgraphics->SelectObject(_001GetFont(::user::font_default));
 
-//      auto sz = pgraphics->GetTextExtent("qg");
+//      auto sz = pgraphics->get_text_extent("qg");
       m_iLineHeight = maximum(1, pgraphics->get_current_font()->get_height());
 
-      pgraphics->fill_rectangle(rectClient, argb(255, 255, 255, 255));
+      pgraphics->fill_rectangle(rectangleClient, argb(255, 255, 255, 255));
 
-      ::rectangle_i32 rectText(rectClient);
+      ::rectangle_i32 rectText(rectangleClient);
 
       rectText.bottom -= 84;
 
@@ -362,18 +362,18 @@ namespace production
 
    void view::GetAreaThumbRect(LPRECT lprect, i32 iArea)
    {
-      ::rectangle_i32 rectClient = get_client_rect();
-      //GetClientRect(rectClient);
+      ::rectangle_i32 rectangleClient = get_client_rect();
+      //GetClientRect(rectangleClient);
       if(iArea == m_iV)
       {
-         lprect->bottom = rectClient.bottom;
+         lprect->bottom = rectangleClient.bottom;
          lprect->top = lprect->bottom - m_iVH;
          lprect->left = 1;
          lprect->right = lprect->left + m_iVW;
       }
       else if(iArea == m_iVs)
       {
-         lprect->bottom = rectClient.bottom;
+         lprect->bottom = rectangleClient.bottom;
          lprect->top = lprect->bottom - m_iVsH;
          lprect->left = 1 + m_iVW + 10;
          lprect->right = lprect->left + m_iVsW;

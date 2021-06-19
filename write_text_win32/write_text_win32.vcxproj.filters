@@ -7,7 +7,7 @@
     <ClCompile Include="_.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="font_enum.cpp">
+    <ClCompile Include="font_enumeration.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="factory_exchange.cpp">
@@ -16,7 +16,10 @@
     <ClCompile Include="write_text.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="font_department.cpp">
+    <ClCompile Include="fonts.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="write_text_win32_gdi.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -30,10 +33,16 @@
     <ClInclude Include="write_text.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="font_department.h">
+    <ClInclude Include="fonts.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="font_enum.h">
+    <ClInclude Include="font_enumeration.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="_write_text_win32.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="write_text_win32_gdi.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -1435,9 +1435,9 @@ namespace windows
    void interaction_impl::rects_from_os()
    {
 
-      //::rectangle_i32 rectClient;
+      //::rectangle_i32 rectangleClient;
 
-      //::GetClientRect(m_oswindow, rectClient);
+      //::GetClientRect(m_oswindow, rectangleClient);
 
       //::rectangle_i32 rectScreen;
 
@@ -1458,7 +1458,7 @@ namespace windows
 
       //}
 
-      //if (rectClient.size() != m_puserinteraction->m_size)
+      //if (rectangleClient.size() != m_puserinteraction->m_size)
       //{
 
       //   TRACE("ATTENTION!! Client Size <> Window Size");
@@ -4490,8 +4490,8 @@ namespace windows
 //      }
 //      else if (message == e_message_left_button_down)
 //      {
-//         ::rectangle_i32 rectClient;
-//         ::GetClientRect(get_handle(), rectClient);
+//         ::rectangle_i32 rectangleClient;
+//         ::GetClientRect(get_handle(), rectangleClient);
 //         ::rectangle_i32 rectWindow;
 //         ::GetWindowRect(get_handle(), rectWindow);
 //         ::rectangle_i32 rectRegion;

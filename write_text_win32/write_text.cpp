@@ -20,7 +20,6 @@ namespace write_text_win32
    }
 
 
-
 } // namespace write_text_win32
 
 

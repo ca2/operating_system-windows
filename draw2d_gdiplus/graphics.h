@@ -374,7 +374,7 @@ namespace draw2d_gdiplus
         BLENDFUNCTION blend) override;*/
 
       // Text Functions
-      virtual bool TextOutRaw(double x, double y, const block & block);
+      virtual ::e_status TextOutRaw(double x, double y, const block & block);
       //virtual bool ExtTextOut(double x, double y, UINT nOptions, const rectangle_f64 &  prectangle, const char * pszString,strsize nCount, LPINT lpDxWidths) override;
 
       //virtual bool ExtTextOut(double x, double y, UINT nOptions, const rectangle_f64 &  prectangle, const string & str, LPINT lpDxWidths) override;
@@ -400,18 +400,19 @@ namespace draw2d_gdiplus
 
       virtual ::count get_character_extent(double_array & daLeft, double_array& daRight, const string & str, strsize iStart = 0, strsize iEnd = -1) override;
 
-      virtual size_f64 GetTextExtent(const char * pszString, strsize nCount, strsize iIndex) override;
+      virtual size_f64 get_text_extent(const char * pszString, strsize nCount, strsize iIndex) override;
 
       virtual size_f64 GetTextBegin(const char * pszString, strsize nCount, strsize iIndex) override;
 
-      //virtual size_f64 GetTextExtent(const char * pszString, strsize nCount) override;
+      //virtual size_f64 get_text_extent(const char * pszString, strsize nCount) override;
 
-      virtual size_f64 GetTextExtent(const string & str) override;
-      virtual bool GetTextExtent(size_f64 & size, const char * pszString, strsize nCount, strsize iIndex) override;
+      size_f64 get_text_extent(const block & block) override;
 
-      virtual bool GetTextExtent(size_f64 & size, const char * pszString, strsize nCount) override;
+      virtual bool get_text_extent(size_f64 & size, const char * pszString, strsize nCount, strsize iIndex) override;
 
-      virtual bool GetTextExtent(size_f64 & size, const string & str) override;
+      virtual bool get_text_extent(size_f64 & size, const char * pszString, strsize nCount) override;
+
+      virtual bool get_text_extent(size_f64 & size, const string & str) override;
       virtual size_f64 GetOutputTextExtent(const char * pszString, strsize nCount) override;
 
       virtual size_f64 GetOutputTextExtent(const string & str) override;
@@ -430,7 +431,7 @@ namespace draw2d_gdiplus
       //virtual i32 GetTextFace(count nCount, LPTSTR pszFacename) override;
 
       //virtual i32 GetTextFace(string & rString) override;
-      virtual bool get_text_metrics(::write_text::text_metric * pMetrics) override;
+      virtual ::e_status get_text_metrics(::write_text::text_metric * pMetrics) override;
 
       virtual bool get_output_text_metrics(::write_text::text_metric * pMetrics) override;
 
@@ -612,7 +613,7 @@ namespace draw2d_gdiplus
       //virtual bool draw_line(const ::point_f64 & point1, const ::point_f64 & point2, ::draw2d::pen * ppen) override;
 
 
-      //virtual void enum_fonts(::write_text::font_enum_item_array & itema) override;
+      //virtual void enum_fonts(::write_text::font_enumeration_item_array & itema) override;
 
       virtual bool prefer_mapped_image_on_mix() override;
 

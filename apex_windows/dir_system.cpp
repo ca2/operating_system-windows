@@ -143,60 +143,60 @@ namespace windows
 
 
 
-   ::file::path dir_system::application_installer_folder(const ::file::path& pathExe, string strAppId, const char* pszPlatform, const char* pszConfiguration, const char* pszLocale, const char* pszSchema)
-   {
+   //::file::path dir_system::application_installer_folder(const ::file::path& pathExe, string strAppId, const char* pszPlatform, const char* pszConfiguration, const char* pszLocale, const char* pszSchema)
+   //{
 
-      string strFolder = pathExe.folder();
+   //   string strFolder = pathExe.folder();
 
-      strFolder.replace(":", "");
+   //   strFolder.replace(":", "");
 
-      return m_psystem->m_pacmedir->ca2roaming() / "appdata" / strFolder / strAppId / pszPlatform / pszConfiguration / pszLocale / pszSchema;
+   //   return m_psystem->m_pacmedir->ca2roaming() / "appdata" / strFolder / strAppId / pszPlatform / pszConfiguration / pszLocale / pszSchema;
 
-   }
-
-
+   //}
 
 
-   ::file::path dir_system::get_application_path(string strAppId, const char* pszPlatform, const char* pszConfiguration)
-   {
-
-      ::file::path pathFolder;
-
-      pathFolder = m_psystem->m_pacmedir->stage(strAppId, pszPlatform, pszConfiguration);
-
-      string strName;
-
-      strName = ::process::app_id_to_app_name(strAppId);
-
-      ::file::path path;
-
-      path = pathFolder / (strName + ".exe");
-
-      return path;
-
-   }
 
 
-   ::file::path dir_system::get_last_run_application_path_file(string strAppId)
-   {
+   //::file::path dir_system::get_application_path(string strAppId, const char* pszPlatform, const char* pszConfiguration)
+   //{
 
-      ::file::path pathFile = m_psystem->m_pacmedir->local() / "appdata" / strAppId / "last_run_path.txt";
+   //   ::file::path pathFolder;
 
-      return pathFile;
+   //   pathFolder = m_psystem->m_pacmedir->stage(strAppId, pszPlatform, pszConfiguration);
 
-   }
+   //   string strName;
+
+   //   strName = ::process::app_id_to_app_name(strAppId);
+
+   //   ::file::path path;
+
+   //   path = pathFolder / (strName + ".exe");
+
+   //   return path;
+
+   //}
 
 
-   ::file::path dir_system::get_last_run_application_path(string strAppId)
-   {
+   // ::file::path dir_system::get_last_run_application_path_file(string strAppId)
+   // {
 
-      ::file::path pathFile = get_last_run_application_path_file(strAppId);
+   //    ::file::path pathFile = m_psystem->m_pacmedir->local() / "appdata" / strAppId / "last_run_path.txt";
 
-      ::file::path path = ::file_as_string(pathFile);
+   //    return pathFile;
 
-      return path;
+   // }
 
-   }
+
+   // ::file::path dir_system::get_last_run_application_path(string strAppId)
+   // {
+
+   //    ::file::path pathFile = get_last_run_application_path_file(strAppId);
+
+   //    ::file::path path = ::file_as_string(pathFile);
+
+   //    return path;
+
+   // }
 
 
 

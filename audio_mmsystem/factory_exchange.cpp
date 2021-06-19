@@ -2,12 +2,12 @@
 
 
 extern "C"
-void audio_mmsystem_factory_exchange(::object * pobject)
+void audio_mmsystem_factory_exchange(::factory_map * pfactorymap)
 {
 
-   create_factory < ::audio_mmsystem::in, ::wave::in >();
+   pfactorymap->create_factory < ::audio_mmsystem::in, ::wave::in >();
 
-   create_factory < ::audio_mmsystem::out, ::wave::out >();
+   pfactorymap->create_factory < ::audio_mmsystem::out, ::wave::out >();
 
 }
 

@@ -5396,8 +5396,8 @@ namespace windowing_win32
 //      }
 //      else if (message == e_message_left_button_down)
 //      {
-//         ::rectangle_i32 rectClient;
-//         ::GetClientRect(get_hwnd(), rectClient);
+//         ::rectangle_i32 rectangleClient;
+//         ::GetClientRect(get_hwnd(), rectangleClient);
 //         ::rectangle_i32 rectWindow;
 //         ::GetWindowRect(get_hwnd(), rectWindow);
 //         ::rectangle_i32 rectRegion;
@@ -5852,16 +5852,16 @@ namespace windowing_win32
    bool window::get_window_rect(RECTANGLE_I32 * prectangle)
    {
 
-      RECT rect;
+      RECT rectangle;
 
-      if (!::GetWindowRect(get_hwnd(), &rect))
+      if (!::GetWindowRect(get_hwnd(), &rectangle))
       {
 
          return false;
 
       }
 
-      __copy(prectangle, rect);
+      __copy(prectangle, rectangle);
 
       return true;
 
@@ -5884,16 +5884,16 @@ namespace windowing_win32
    bool window::get_client_rect(RECTANGLE_I32 * prectangle)
    {
 
-      RECT rect;
+      RECT rectangle;
 
-      if (!::GetClientRect(get_hwnd(), &rect))
+      if (!::GetClientRect(get_hwnd(), &rectangle))
       {
 
          return false;
 
       }
 
-      __copy(prectangle, rect);
+      __copy(prectangle, rectangle);
 
       return true;
 
@@ -6012,11 +6012,11 @@ namespace windowing_win32
 
          ::ScreenToClient(hwnd, (POINT *)&pointCursor);
 
-         ::rectangle_i32 rectClient;
+         ::rectangle_i32 rectangleClient;
 
-         ::GetClientRect(hwnd, (RECT *)&rectClient);
+         ::GetClientRect(hwnd, (RECT *)&rectangleClient);
 
-         if (!rectClient.contains(pointCursor))
+         if (!rectangleClient.contains(pointCursor))
          {
 
             sleep(100_ms);

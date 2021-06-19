@@ -69,7 +69,7 @@ namespace windowing_win32
       virtual __pointer(::user::message) get_user_message(MESSAGE * pmsg);
 
 
-      //virtual void enum_draw2d_fonts(::write_text::font_enum_item_array & itema) override;
+      //virtual void enum_draw2d_fonts(::write_text::font_enumeration_item_array & itema) override;
       
       
       virtual ::windowing::window * get_desktop_window() override;

@@ -40,6 +40,9 @@
     <ClInclude Include="in.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="_music_midi_mmsystem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Header Files">

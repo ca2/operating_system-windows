@@ -349,7 +349,7 @@ namespace draw2d_gdi
                        ::draw2d::graphics * pgraphicsSrc, int xSrc, int ySrc, int nSrcWidth, int nSrcHeight,
                        double dOpacity) override;
 
-      virtual bool GetTextExtent(size_f64 & size, const char * lpszString, strsize nCount, strsize iIndex) override;
+      virtual bool get_text_extent(size_f64 & size, const char * lpszString, strsize nCount, strsize iIndex) override;
 
       // Text Functions
       virtual bool text_out(double x, double y, const char * lpszString, strsize nCount) override;
@@ -365,8 +365,8 @@ namespace draw2d_gdi
       virtual bool draw_text_ex(const char * lpszString,strsize nCount,const ::rectangle_i32 & rectangle, const ::e_align & ealign = e_align_top_left, const ::e_draw_text & edrawtext = e_draw_text_none, LPDRAWTEXTPARAMS lpDTParams) override;
       virtual bool draw_text_ex(const string & str,const ::rectangle_i32 & rectangle, const ::e_align & ealign = e_align_top_left, const ::e_draw_text & edrawtext = e_draw_text_none,LPDRAWTEXTPARAMS lpDTParams) override;
 
-      virtual size_f64 GetTextExtent(const char * lpszString, strsize nCount) override;
-      virtual size_f64 GetTextExtent(const string & str) override;
+      virtual size_f64 get_text_extent(const char * lpszString, strsize nCount) override;
+      virtual size_f64 get_text_extent(const string & str) override;
       virtual ::size_i32 GetOutputTextExtent(const char * lpszString,strsize nCount) override;
       virtual ::size_i32 GetOutputTextExtent(const string & str) override;
       virtual ::size_i32 GetTabbedTextExtent(const char * lpszString,strsize nCount, count nTabPositions, INT * lpnTabStopPositions) override;

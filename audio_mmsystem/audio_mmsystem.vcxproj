@@ -1017,6 +1017,7 @@
     <ClInclude Include="in.h" />
     <ClInclude Include="out.h" />
     <ClInclude Include="framework.h" />
+    <ClInclude Include="_audio_mmsystem.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="factory_exchange.cpp" />

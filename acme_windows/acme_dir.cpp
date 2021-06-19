@@ -693,9 +693,6 @@ namespace windows
    }
 
 
-
-
-
 } // namespace windows
 
 

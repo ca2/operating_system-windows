@@ -1024,6 +1024,7 @@
     <ClInclude Include="section.h" />
     <ClInclude Include="source.h" />
     <ClInclude Include="thread.h" />
+    <ClInclude Include="_audio_mixer_mmsystem.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="callback.cpp" />

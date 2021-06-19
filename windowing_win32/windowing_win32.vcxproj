@@ -1187,7 +1187,6 @@
     <ClCompile Include="cursor.cpp" />
     <ClCompile Include="display.cpp" />
     <ClCompile Include="factory_exchange.cpp" />
-    <ClCompile Include="font_enum.cpp" />
     <ClCompile Include="gdi.cpp" />
     <ClCompile Include="icon.cpp" />
     <ClCompile Include="imm_client.cpp" />

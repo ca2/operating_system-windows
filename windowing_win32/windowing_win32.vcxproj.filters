@@ -46,9 +46,6 @@
     <ClCompile Include="window\window_i_unknown.cpp">
       <Filter>Source Files\window</Filter>
     </ClCompile>
-    <ClCompile Include="font_enum.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="gdi.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>

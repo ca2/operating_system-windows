@@ -13,6 +13,9 @@
     <ClInclude Include="translation.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="_multimedia_mmsystem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Header Files">

@@ -89,6 +89,9 @@
     <ClInclude Include="callstack.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="file_exception.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="factory_exchange.cpp">

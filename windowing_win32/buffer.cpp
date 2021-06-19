@@ -341,7 +341,7 @@ namespace windowing_win32
 
       }
 
-      index iScreenBuffer = (::index_cast)pimage->m_id;
+      index iScreenBuffer = (::index)pimage->m_id;
 
       auto & buffer = m_osbuffera[iScreenBuffer];
 

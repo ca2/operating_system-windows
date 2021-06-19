@@ -3275,10 +3275,10 @@ namespace draw2d_gdi
    }
 
 
-   bool graphics::GetTextExtent(size_f64 & size, const char * lpszString, strsize nCount, strsize iIndex)
+   bool graphics::get_text_extent(size_f64 & size, const char * lpszString, strsize nCount, strsize iIndex)
    {
 
-      ::size_i32 sz = GetTextExtent(string(lpszString), iIndex);
+      ::size_i32 sz = get_text_extent(string(lpszString), iIndex);
 
       size.cx = sz.cx;
       size.cy = sz.cy;
@@ -4684,7 +4684,7 @@ namespace draw2d_gdi
 
 
 
-   size_f64 graphics::GetTextExtent(const char * lpszString, strsize nCount)
+   size_f64 graphics::get_text_extent(const char * lpszString, strsize nCount)
    {
 
       if(get_handle2() == nullptr)
@@ -4708,7 +4708,7 @@ namespace draw2d_gdi
    }
 
 
-   size_f64 graphics::GetTextExtent(const string & str)
+   size_f64 graphics::get_text_extent(const string & str)
    {
 
       if (get_handle2() == nullptr)
