@@ -4718,10 +4718,10 @@ namespace windows
 //
 //            string strType = ::str::demangle(m_puserinteraction->type_name());
 //
-//            if (strType.contains_ci("combo_list"))
+//            if (strType.contains_ci("list_box"))
 //            {
 //
-//               ::output_debug_string("combo_list e_message_left_button_down");
+//               ::output_debug_string("list_box e_message_left_button_down");
 //
 //            }
 //
@@ -4745,10 +4745,10 @@ namespace windows
 //
 //            string strType;
 //
-//            if (strType.contains_ci("combo_list"))
+//            if (strType.contains_ci("list_box"))
 //            {
 //
-//               ::output_debug_string("combo_list e_message_non_client_left_button_down");
+//               ::output_debug_string("list_box e_message_non_client_left_button_down");
 //
 //            }
 //
@@ -4790,10 +4790,10 @@ namespace windows
 //
 //               strType = ::str::demangle(m_puserinteraction->type_name());
 //
-//               if (strType.contains_ci("combo_list"))
+//               if (strType.contains_ci("list_box"))
 //               {
 //
-//                  //::output_debug_string("combo_list e_message_mouse_move");
+//                  //::output_debug_string("list_box e_message_mouse_move");
 //
 //               }
 //
@@ -5345,10 +5345,10 @@ namespace windows
 
             string strType = ::str::demangle(m_puserinteraction->type_name());
 
-            if (strType.contains_ci("combo_list"))
+            if (strType.contains_ci("list_box"))
             {
 
-               ::output_debug_string("combo_list e_message_left_button_down");
+               ::output_debug_string("list_box e_message_left_button_down");
 
             }
 
@@ -5372,10 +5372,10 @@ namespace windows
 
             string strType;
 
-            if (strType.contains_ci("combo_list"))
+            if (strType.contains_ci("list_box"))
             {
 
-               ::output_debug_string("combo_list e_message_non_client_left_button_down");
+               ::output_debug_string("list_box e_message_non_client_left_button_down");
 
             }
 
@@ -5416,10 +5416,10 @@ namespace windows
 
                strType = ::str::demangle(m_puserinteraction->type_name());
 
-               if (strType.contains_ci("combo_list"))
+               if (strType.contains_ci("list_box"))
                {
 
-                  //::output_debug_string("combo_list e_message_mouse_move");
+                  //::output_debug_string("list_box e_message_mouse_move");
 
                }
 

@@ -162,10 +162,10 @@ LRESULT CALLBACK __window_procedure(HWND hwnd, UINT message, WPARAM wparam, LPAR
 
       string strType = puserinteraction->type_name();
 
-      if (strType.contains("combo_list"))
+      if (strType.contains("list_box"))
       {
 
-         ::output_debug_string("combo_list");
+         ::output_debug_string("list_box");
 
       }
 

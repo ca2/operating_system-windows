@@ -3320,7 +3320,7 @@ repeat:
                   if (SUCCEEDED(hr))
                   {
 
-                     set["file_name"] = string(pwszFilePath);
+                     set["file_name"] = string(pwszFilePath.m_p);
 
                       bOk = true;
 
