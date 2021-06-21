@@ -137,7 +137,8 @@ namespace windows
       //   TRACELASTERROR();
       //   return false;
       //}
-      if (!ExitWindowsEx(EWX_REBOOT | EWX_FORCE,
+      //if (!ExitWindowsEx(EWX_REBOOT | EWX_FORCE,
+      if (!ExitWindowsEx(EWX_REBOOT,
       SHTDN_REASON_MAJOR_SOFTWARE | SHTDN_REASON_MINOR_INSTALLATION))
       {
          TRACELASTERROR();
