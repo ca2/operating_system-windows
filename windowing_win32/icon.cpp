@@ -59,10 +59,10 @@ namespace windowing_win32
    }
 
 
-   ::e_status icon::load_file(string strPath)
+   ::e_status icon::load_file(const string & strPath)
    {
 
-      strPath = m_pcontext->m_papexcontext->defer_process_matter_path(strPath);
+      auto strProcessedPath = m_pcontext->m_papexcontext->defer_process_matter_path(strPath);
 
       int_array ia;
 
@@ -75,7 +75,7 @@ namespace windowing_win32
       for (auto i : ia)
       {
 
-         HICON hicon = (HICON) ::LoadImageW(nullptr, wstring(strPath), IMAGE_ICON, i, i, LR_LOADFROMFILE);
+         HICON hicon = (HICON) ::LoadImageW(nullptr, wstring(strProcessedPath), IMAGE_ICON, i, i, LR_LOADFROMFILE);
 
          if (hicon != nullptr)
          {
@@ -95,6 +95,23 @@ namespace windowing_win32
 //      return true;
 //
 //#endif
+
+   }
+
+
+   ::e_status icon::load_app_tray_icon(const string & strApp)
+   {
+
+      string strMatter = "main/icon.ico";
+
+      if (!load_matter(strMatter))
+      {
+
+         return false;
+
+      }
+
+      return true;
 
    }
 
