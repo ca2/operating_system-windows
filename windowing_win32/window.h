@@ -126,9 +126,9 @@ namespace windowing_win32
 
       //virtual ::e_status show_window(const::e_display & edisplay, const::e_activation & eactivation) override;
       
-      virtual bool _001ClientToScreen(POINT_I32 * ppoint) override;
+      virtual bool client_to_screen(POINT_I32 * ppoint) override;
 
-      virtual bool _001ScreenToClient(POINT_I32 * ppoint) override;
+      virtual bool screen_to_client(POINT_I32 * ppoint) override;
 
       virtual bool on_set_window_position(const class ::zorder& zorder, i32 x, i32 y, i32 cx, i32 cy, ::u32 nFlags) override;
 

@@ -11,10 +11,10 @@ extern CLASS_DECL_ACME_WINDOWS const unichar gen_WndControlBar[]; // controls wi
 extern CLASS_DECL_ACME_WINDOWS const unichar gen_WndMDIFrame[];
 extern CLASS_DECL_ACME_WINDOWS const unichar gen_WndFrameOrView[];
 extern CLASS_DECL_ACME_WINDOWS const unichar gen_WndOleControl[];
-CLASS_DECL_ACME_WINDOWS bool __is_combo_box_control(::windowing::window * pwindow, ::u32 nStyle);
+//CLASS_DECL_ACME_WINDOWS bool __is_combo_box_control(::windowing::window * pwindow, ::u32 nStyle);
 CLASS_DECL_ACME_WINDOWS bool __check_center_dialog(const char * pszResource);
 
-CLASS_DECL_ACME_WINDOWS bool __compare_class_name(::windowing::window * pwindow, const char * pszClassName);
+//CLASS_DECL_ACME_WINDOWS bool __compare_class_name(::windowing::window * pwindow, const char * pszClassName);
 
 //CLASS_DECL_ACME_WINDOWS oswindow __child_window_from_point(oswindow, const point_i32 &);
 //CLASS_DECL_ACME_WINDOWS bool hook_window_create(::windows::interaction_impl * pwindow);
