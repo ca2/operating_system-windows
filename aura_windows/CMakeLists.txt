@@ -1,63 +1,13 @@
 cmake_minimum_required(VERSION 3.17)
 project(aura_windows CXX)
+list(APPEND library_source
+   _.cpp
+   _.h
+   factory_exchange.cpp
+   framework.cpp
+   framework.h)
 
-set(CMAKE_CXX_STANDARD 14)
-set(CMAKE_CXX_EXTENSIONS OFF)
-
-
-message(STATUS "CMAKE_SYSTEM_NAME is ${CMAKE_SYSTEM_NAME}")
-
-
-if(${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
-    set(LINUX TRUE)
-    set(PLATFORM_NAME "linux")
-    include(FindPkgConfig)
-elseif(WIN32)
-    set(PLATFORM_NAME "windows")
-endif()
-
-
-set(LIBRARY_OUTPUT_PATH ${CMAKE_CURRENT_SOURCE_DIR}/../../../time-${PLATFORM_NAME}/cmake)
-set(EXECUTABLE_OUTPUT_PATH ${CMAKE_CURRENT_SOURCE_DIR}/../../../time-${PLATFORM_NAME}/cmake)
-
-
-list(APPEND aura_windows_source
-        _.cpp
-        _.h
-        bitmap.cpp
-        bitmap.h
-        brush.cpp
-        brush.h
-        factory_exchange.cpp
-        font.cpp
-        font.h
-        framework.cpp
-        framework.h
-        graphics.cpp
-        graphics.h
-        image.cpp
-        image.h
-        object.cpp
-        object.h
-        path.cpp
-        path.h
-        pen.cpp
-        pen.h
-        preview_dc.cpp
-        region.cpp
-        region.h
-        text.cpp)
-
-
-
-if (MSVC)
-    set(LIBCXX_TARGETING_MSVC ON)
-else()
-    set(LIBCXX_TARGETING_MSVC OFF)
-endif()
-
-
-add_library(aura_windows SHARED ${aura_windows_source})
+add_library(aura_windows SHARED ${library_source})
 
 target_precompile_headers(aura_windows PRIVATE framework.h)
 
