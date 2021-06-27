@@ -63,7 +63,7 @@ namespace windowing_win32
       // Set the alpha values for each pixel in the cursor so that
       // the complete cursor is semi-transparent.
 
-      int iStrideDst = dwWidth * sizeof(::color::color);
+      int iStrideDst = dwWidth * sizeof(::color32_t);
 
       ::copy_colorref((::color::color *)pBits, pimage->width(), pimage->height(), iStrideDst, pimage->get_data(), pimage->scan_size());
 
@@ -133,7 +133,7 @@ namespace windowing_win32
 
       pixmap pixmap;
 
-      pixmap.m_iScan = ppixmap->width() * sizeof(::color::color);
+      pixmap.m_iScan = ppixmap->width() * sizeof(::color32_t);
 
       pixmap.m_size = ppixmap->size();
 
@@ -183,7 +183,7 @@ namespace windowing_win32
 
       }
 
-      ppixmap->m_iScan = ppixmap->width() * sizeof(::color::color);
+      ppixmap->m_iScan = ppixmap->width() * sizeof(::color32_t);
 
       return hbmp;
 
