@@ -172,7 +172,7 @@ namespace windowing_win32
          info.bmiHeader.biCompression = BI_RGB;
          info.bmiHeader.biSizeImage = size.cy * iScan;
 
-         ::color::color * pcolorref = nullptr;
+         ::color32_t * pcolorref = nullptr;
 
          hbitmap = ::CreateDIBSection(nullptr, &info, DIB_RGB_COLORS, (void **)&pcolorref, nullptr, 0);
 
