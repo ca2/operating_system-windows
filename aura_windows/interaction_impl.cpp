@@ -640,14 +640,14 @@ namespace windows
 
 
 
-   //bool interaction_impl::SetLayeredWindowAttributes(color32_t crKey, byte bAlpha, u32 dwFlags)
+   //bool interaction_impl::SetLayeredWindowAttributes(::color::color crKey, byte bAlpha, u32 dwFlags)
    //{
    //   ASSERT(_is_window());
    //   return ::SetLayeredWindowAttributes(get_handle(), crKey, bAlpha, dwFlags) != false;
    //}
 
    //bool interaction_impl::UpdateLayeredWindow(::draw2d::graphics * pDCDst, POINT_I32 *pptDst, SIZE_I32 *psize,
-   //      ::draw2d::graphics * pDCSrc, POINT_I32 *pptSrc, color32_t crKey, BLENDFUNCTION *pblend, u32 dwFlags)
+   //      ::draw2d::graphics * pDCSrc, POINT_I32 *pptSrc, ::color::color crKey, BLENDFUNCTION *pblend, u32 dwFlags)
    //{
    //   ASSERT(_is_window());
    //   ::exception::throw_not_implemented();
@@ -657,7 +657,7 @@ namespace windows
    //}
 
 
-   //bool interaction_impl::GetLayeredWindowAttributes(color32_t *pcrKey, byte *pbAlpha, u32 *pdwFlags) const
+   //bool interaction_impl::GetLayeredWindowAttributes(::color::color *pcrKey, byte *pbAlpha, u32 *pdwFlags) const
    //{
    //   ASSERT(::is_window(((interaction_impl *)this)->get_handle()));
    //   return ::GetLayeredWindowAttributes(((interaction_impl *)this)->get_handle(), pcrKey, pbAlpha, (LPDWORD)pdwFlags) != false;

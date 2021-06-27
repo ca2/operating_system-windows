@@ -210,7 +210,7 @@ namespace draw2d_gdiplus
 
       int iScan = 0;
 
-      color32_t * pcolorref = nullptr;
+      ::color::color * pcolorref = nullptr;
 
       if (!m_pbitmap->create_bitmap(nullptr, size, (void**)&pcolorref, &iScan))
       {

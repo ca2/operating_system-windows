@@ -209,7 +209,7 @@ namespace windowing_win32
 
       }
 
-      color32_t * pcolorref = nullptr;
+      ::color::color * pcolorref = nullptr;
 
       int iScan = -1;
 

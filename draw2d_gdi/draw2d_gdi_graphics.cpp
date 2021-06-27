@@ -627,25 +627,25 @@ namespace draw2d_gdi
 
       ASSERT(get_handle1() != nullptr);
 
-      COLORREF cr = pbrush->m_color;
+      COLORREF color32 = pbrush->m_color;
 
       if (m_pimage->is_null())
       {
 
-         ::SetBkColor(get_handle1(), cr);
+         ::SetBkColor(get_handle1(), color32);
          ::ExtTextOut(get_handle1(), 0, 0, ETO_OPAQUE, rectangle, nullptr, 0, nullptr);
 
       }
-      else if (colorref_get_a_value(cr) == 255)
+      else if (colorref_get_a_value(color32) == 255)
       {
 
-         m_pimage->fill_rectangle(rectangle, argb(255, colorref_get_r_value(cr), colorref_get_g_value(cr), colorref_get_b_value(cr)));
+         m_pimage->fill_rectangle(rectangle, argb(255, colorref_get_r_value(color32), colorref_get_g_value(color32), colorref_get_b_value(color32)));
 
       }
       else
       {
 
-         ::image_pointer pimage = fill_image_work(cr, rectangle.size(), false);
+         ::image_pointer pimage = fill_image_work(color32, rectangle.size(), false);
 
          BLENDFUNCTION bf;
          bf.BlendOp = AC_SRC_OVER;
@@ -3608,7 +3608,7 @@ namespace draw2d_gdi
    }
 
 
-   void graphics::fill_rectangle(const ::rectangle_i32 & rectangle, COLORREF cr)
+   void graphics::fill_rectangle(const ::rectangle_i32 & rectangle, COLORREF color32)
    {
 
       synchronous_lock ml(mutex());
@@ -3616,17 +3616,17 @@ namespace draw2d_gdi
       if(m_pimage->is_null())
       {
 
-         ::SetBkColor(get_handle1(), cr);
+         ::SetBkColor(get_handle1(), color32);
 
          ::ExtTextOut(get_handle1(), 0, 0, ETO_OPAQUE, rectangle, nullptr, 0, nullptr);
 
       }
-      else if(colorref_get_a_value(cr) == 255)
+      else if(colorref_get_a_value(color32) == 255)
       {
 
          ::point_i32 point = GetViewportOrg();
 
-         m_pimage->fill_rectangle(rectangle, argb(255, colorref_get_r_value(cr), colorref_get_g_value(cr), colorref_get_b_value(cr)));
+         m_pimage->fill_rectangle(rectangle, argb(255, colorref_get_r_value(color32), colorref_get_g_value(color32), colorref_get_b_value(color32)));
 
       }
       else
@@ -3640,7 +3640,7 @@ namespace draw2d_gdi
 
          int cy = ::height(rectangle);
 
-         ::image_pointer pimage = fill_image_work(cr, ::size_i32(rectangle), false);
+         ::image_pointer pimage = fill_image_work(color32, ::size_i32(rectangle), false);
 
          BLENDFUNCTION bf;
          bf.BlendOp     = AC_SRC_OVER;

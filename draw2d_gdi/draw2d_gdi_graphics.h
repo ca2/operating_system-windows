@@ -476,7 +476,7 @@ namespace draw2d_gdi
       //                  const ::rectangle_i32 & rectLast, const ::size_i32 & sizeLast, ::draw2d::brush* pBrush = nullptr, ::draw2d::brush* pBrushLast = nullptr) override;
 
       using ::draw2d::graphics::fill_rectangle;
-      void fill_rectangle(const ::rectangle_i32 & rectangle, COLORREF cr) override;
+      void fill_rectangle(const ::rectangle_i32 & rectangle, COLORREF color32) override;
 
       using ::draw2d::graphics::draw3d_rect;
       void draw3d_rect(const ::rectangle_i32 & rectangle, COLORREF crTopLeft, COLORREF crBottomRight, const ::e_border & eborder = e_border_all) override;
