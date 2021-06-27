@@ -32,7 +32,7 @@ namespace music
 
             auto psystem = m_psystem->m_paquasystem;
 
-            auto pmultimedia = psystem->multimedia()->m_pveriwellmultimedia;
+            auto pmultimedia = psystem->multimedia()->m_pveriwellmultimediaThis;
 
             m_pmidi = pmultimedia->midi()->get_device_midi(strDevice);
 
