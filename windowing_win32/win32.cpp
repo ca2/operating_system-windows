@@ -172,7 +172,7 @@ namespace windowing_win32
 
 
 
-   color32_t get_default_sys_color(u64 u)
+   ::color::color get_default_sys_color(u64 u)
    {
 
       switch (u)

@@ -871,6 +871,15 @@ namespace apex
 
       //}
 
+      ::e_status node::node_branch(const ::routine& routine)
+      {
+
+         m_psystem->m_papexsystem->post(routine);
+
+         return ::success;
+
+      }
+
 
    } // namespace windows
 

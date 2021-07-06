@@ -53,7 +53,7 @@ namespace windowing_win32
 
 
 
-   //      i32 shell::thread::get_image_by_file_extension(oswindow image_key & imagekey, color32_t crBk)
+   //      i32 shell::thread::get_image_by_file_extension(oswindow image_key & imagekey, ::color::color crBk)
    //      {
    //
    //#ifdef WINDOWS_DESKTOP
@@ -71,7 +71,7 @@ namespace windowing_win32
 
       // returned image should be "Definitive" icon/pimage->
       // maybe fallback but not temporary
-   i32 shell::get_file_image(image_key imagekey, const itemidlist & pidlAbsolute, const itemidlist & pidlChild, const unichar * pcszExtra, color32_t crBk)
+   i32 shell::get_file_image(image_key imagekey, const itemidlist & pidlAbsolute, const itemidlist & pidlChild, const unichar * pcszExtra, ::color::color crBk)
    {
 
       comptr < IShellFolder> psf;
@@ -860,7 +860,7 @@ namespace windowing_win32
    }
 
 
-   i32 shell::get_file_image(image_key imagekey, const unichar * pcszExtra, color32_t crBk)
+   i32 shell::get_file_image(image_key imagekey, const unichar * pcszExtra, ::color::color crBk)
 
    {
 
@@ -1109,7 +1109,7 @@ namespace windowing_win32
 
 
 
-   int shell::add_icon_set(SHFILEINFOW * pinfo16, SHFILEINFOW * pinfo48, color32_t crBk, bool & bUsed16, bool & bUsed48, int iImage)
+   int shell::add_icon_set(SHFILEINFOW * pinfo16, SHFILEINFOW * pinfo48, ::color::color crBk, bool & bUsed16, bool & bUsed48, int iImage)
    {
 
       synchronous_lock synchronouslock(mutex());
@@ -1130,7 +1130,7 @@ namespace windowing_win32
    }
 
 
-   int shell::add_icon_path(::file::path path, color32_t crBk, int iImage)
+   int shell::add_icon_path(::file::path path, ::color::color crBk, int iImage)
    {
 
       synchronous_lock synchronouslock(mutex());
@@ -1166,7 +1166,7 @@ namespace windowing_win32
    }
 
 
-   int shell::add_icon(int iSize, HICON hicon, color32_t crBk, int iImage)
+   int shell::add_icon(int iSize, HICON hicon, ::color::color crBk, int iImage)
    {
 
       synchronous_lock synchronouslock(m_pil[iSize]->mutex());
@@ -1186,7 +1186,7 @@ namespace windowing_win32
    }
 
 
-   int shell::add_icon_info(int iSize, SHFILEINFOW * pinfo16, SHFILEINFOW * pinfo48, color32_t crBk, bool & bUsed16, bool & bUsed48, int iImage)
+   int shell::add_icon_info(int iSize, SHFILEINFOW * pinfo16, SHFILEINFOW * pinfo48, ::color::color crBk, bool & bUsed16, bool & bUsed48, int iImage)
    {
 
       bool bUsed = false;
@@ -1249,7 +1249,7 @@ namespace windowing_win32
    }
 
 
-   int shell::add_system_icon(int iSize, IImageList * pil, SHFILEINFOW * pinfo, color32_t crBk, bool & bUsedImageList, int iImage)
+   int shell::add_system_icon(int iSize, IImageList * pil, SHFILEINFOW * pinfo, ::color::color crBk, bool & bUsedImageList, int iImage)
    {
 
       if (pil != nullptr)
@@ -1303,7 +1303,7 @@ namespace windowing_win32
 
 
 
-   void shell::set_image_ico(string strIconLocation, i32 & iImage, color32_t crBk)
+   void shell::set_image_ico(string strIconLocation, i32 & iImage, ::color::color crBk)
    {
 
       ASSERT(strIconLocation.ends_ci(".ico"));
@@ -1324,7 +1324,7 @@ namespace windowing_win32
    }
 
 
-   void shell::set_image_resource(string strIconLocation, i32 & iImage, const image_key & imagekey, color32_t crBk)
+   void shell::set_image_resource(string strIconLocation, i32 & iImage, const image_key & imagekey, ::color::color crBk)
    {
 
       ASSERT(!strIconLocation.ends_ci(".ico"));

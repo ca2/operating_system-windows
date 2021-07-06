@@ -63,9 +63,9 @@ namespace windowing_win32
       // Set the alpha values for each pixel in the cursor so that
       // the complete cursor is semi-transparent.
 
-      int iStrideDst = dwWidth * sizeof(color32_t);
+      int iStrideDst = dwWidth * sizeof(::color32_t);
 
-      ::copy_colorref((color32_t *)pBits, pimage->width(), pimage->height(), iStrideDst, pimage->get_data(), pimage->scan_size());
+      ::copy_colorref((::color32_t *)pBits, pimage->width(), pimage->height(), iStrideDst, pimage->get_data(), pimage->scan_size());
 
       return hBitmap;
 
@@ -133,7 +133,7 @@ namespace windowing_win32
 
       pixmap pixmap;
 
-      pixmap.m_iScan = ppixmap->width() * sizeof(color32_t);
+      pixmap.m_iScan = ppixmap->width() * sizeof(::color32_t);
 
       pixmap.m_size = ppixmap->size();
 
@@ -168,7 +168,7 @@ namespace windowing_win32
       bminfo.bmiHeader.biBitCount = 32;
       bminfo.bmiHeader.biCompression = BI_RGB;
 
-      color32_t * pvImageBits = nullptr;
+      ::color::color * pvImageBits = nullptr;
 
       HDC hdcScreen = GetDC(nullptr);
 
@@ -183,7 +183,7 @@ namespace windowing_win32
 
       }
 
-      ppixmap->m_iScan = ppixmap->width() * sizeof(color32_t);
+      ppixmap->m_iScan = ppixmap->width() * sizeof(::color32_t);
 
       return hbmp;
 
@@ -234,7 +234,7 @@ namespace windowing_win32
 
 
 
-   CLASS_DECL_WINDOWING_WIN32 HBITMAP create_windows_dib(const ::size_i32 & size, i32 * piScan, color32_t ** ppdata)
+   CLASS_DECL_WINDOWING_WIN32 HBITMAP create_windows_dib(const ::size_i32 & size, i32 * piScan, ::color32_t ** ppdata)
    {
 
       BITMAPINFO bitmapinfo;
@@ -251,7 +251,7 @@ namespace windowing_win32
       bitmapinfo.bmiHeader.biCompression = BI_RGB;
       bitmapinfo.bmiHeader.biSizeImage = (::i32)(size.cy * iScan);
 
-      color32_t * pcolorref = nullptr;
+      ::color32_t * pcolorref = nullptr;
 
       HBITMAP hbitmap = ::CreateDIBSection(nullptr, &bitmapinfo, DIB_RGB_COLORS, (void **)&pcolorref, nullptr, 0);
 

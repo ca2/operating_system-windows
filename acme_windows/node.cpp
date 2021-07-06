@@ -1866,6 +1866,105 @@ namespace acme
       }
 
 
+      ::e_status node::reboot()
+      {
+
+         HANDLE htoken = nullptr;
+
+         if (!OpenProcessToken(GetCurrentProcess(), TOKEN_ADJUST_PRIVILEGES | TOKEN_QUERY, &htoken))
+         {
+
+            DWORD dwLastError = ::GetLastError();
+
+            TRACELASTERROR();
+
+            return last_error_to_status(dwLastError);
+
+         }
+
+         TOKEN_PRIVILEGES tokenprivileges;
+
+         if (!LookupPrivilegeValue(nullptr, SE_SHUTDOWN_NAME, &tokenprivileges.Privileges[0].Luid))
+         {
+
+            DWORD dwLastError = ::GetLastError();
+
+            TRACELASTERROR();
+
+            return last_error_to_status(dwLastError);
+
+         }
+         
+         tokenprivileges.PrivilegeCount = 1;
+         
+         tokenprivileges.Privileges[0].Attributes = SE_PRIVILEGE_ENABLED;
+
+         if (!AdjustTokenPrivileges(htoken, false, &tokenprivileges, 0, (PTOKEN_PRIVILEGES) nullptr, 0))
+         {
+
+            DWORD dwLastError = ::GetLastError();
+
+            TRACELASTERROR();
+
+            return last_error_to_status(dwLastError);
+
+         }
+         
+         if (GetLastError() == ERROR_NOT_ALL_ASSIGNED)
+         {
+
+            return false;
+
+         }
+
+
+         ////if(!LookupPrivilegeValue(nullptr, SE_REMOTE_SHUTDOWN_NAME, &tokenprivileges.Privileges[0].Luid))
+         ////{
+         ////   TRACELASTERROR();
+         ////   return false;
+         ////}
+         ////tokenprivileges.PrivilegeCount = 1;
+         ////tokenprivileges.Privileges[0].Attributes = SE_PRIVILEGE_ENABLED;
+         ////if(!AdjustTokenPrivileges(htoken, false, &tokenprivileges, 0, (PTOKEN_PRIVILEGES) nullptr, 0))
+         ////{
+         ////   TRACELASTERROR();
+         ////   return false;
+         ////}
+         ////if (GetLastError() == ERROR_NOT_ALL_ASSIGNED)
+         ////{
+         ////   return false;
+         ////}
+
+         //if(!WTSShutdownSystem(WTS_CURRENT_SERVER_HANDLE,WTS_WSD_REBOOT))
+         //{
+         //   TRACELASTERROR();
+         //   return false;
+         //}
+         //if (!ExitWindowsEx(EWX_REBOOT | EWX_FORCE,
+         if (!ExitWindowsEx(EWX_REBOOT, SHTDN_REASON_MAJOR_SOFTWARE | SHTDN_REASON_MINOR_INSTALLATION))
+         {
+            
+            DWORD dwLastError = ::GetLastError();
+
+            TRACELASTERROR();
+
+            return last_error_to_status(dwLastError);
+
+         }
+         
+         //reset the previlages
+         
+         tokenprivileges.Privileges[0].Attributes = 0;
+         
+         AdjustTokenPrivileges(htoken, false, &tokenprivileges, 0, (PTOKEN_PRIVILEGES) nullptr, 0);
+
+         return ::success;
+
+      }
+
+
+
+
    } // namespace windows
 
 

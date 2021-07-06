@@ -126,9 +126,9 @@ namespace windowing_win32
 
       //virtual ::e_status show_window(const::e_display & edisplay, const::e_activation & eactivation) override;
       
-      virtual bool _001ClientToScreen(POINT_I32 * ppoint) override;
+      virtual bool client_to_screen(POINT_I32 * ppoint) override;
 
-      virtual bool _001ScreenToClient(POINT_I32 * ppoint) override;
+      virtual bool screen_to_client(POINT_I32 * ppoint) override;
 
       virtual bool on_set_window_position(const class ::zorder& zorder, i32 x, i32 y, i32 cx, i32 cy, ::u32 nFlags) override;
 
@@ -398,15 +398,15 @@ namespace windowing_win32
 
       //#if(_WIN32_WINNT >= 0x0500)
       //
-      //      virtual bool SetLayeredWindowAttributes(color32_t crKey, byte bAlpha, u32 dwFlags);
+      //      virtual bool SetLayeredWindowAttributes(::color::color crKey, byte bAlpha, u32 dwFlags);
       //      virtual bool UpdateLayeredWindow(::draw2d::graphics * pDCDst, POINT_I32 *pptDst, SIZE_I32 *psize,
-      //                                       ::draw2d::graphics * pDCSrc, POINT_I32 *pptSrc, color32_t crKey, BLENDFUNCTION *pblend, u32 dwFlags);
+      //                                       ::draw2d::graphics * pDCSrc, POINT_I32 *pptSrc, ::color::color crKey, BLENDFUNCTION *pblend, u32 dwFlags);
       //
       //#endif   // _WIN32_WINNT >= 0x0500
 
       //#if(_WIN32_WINNT >= 0x0501)
       //
-      //      virtual bool GetLayeredWindowAttributes(color32_t *pcrKey, byte *pbAlpha, u32 *pdwFlags) const;
+      //      virtual bool GetLayeredWindowAttributes(::color::color *pcrKey, byte *pbAlpha, u32 *pdwFlags) const;
       //
       //#endif   // _WIN32_WINNT >= 0x0501
 
@@ -779,7 +779,7 @@ namespace windowing_win32
       // Implementation
       //virtual bool CheckAutoCenter();
       //virtual bool GrayCtlColor(HDC hDC, HWND hwnd, ::u32 nCtlColor,
-      //                          HBRUSH hbrGray, color32_t clrText);
+      //                          HBRUSH hbrGray, ::color::color clrText);
 
 
       // helper routines for implementation

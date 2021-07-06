@@ -43,7 +43,7 @@
 #define GDI_REGION(pregion) (dynamic_cast < ::draw2d_gdi::region * > (dynamic_cast < ::draw2d::region * > (pregion)))
 
 
-#define argb_invert(cr) argb(colorref_get_a_value(cr),colorref_get_b_value(cr),colorref_get_g_value(cr),colorref_get_r_value(cr))
+#define argb_invert(color32) argb(colorref_get_a_value(color32),colorref_get_b_value(color32),colorref_get_g_value(color32),colorref_get_r_value(color32))
 
 
 namespace draw2d_gdi

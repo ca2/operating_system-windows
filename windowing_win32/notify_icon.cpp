@@ -66,21 +66,19 @@ namespace windowing_win32
    }
 
 
-   bool notify_icon::create_notify_icon(::u32 uId, ::user::notify_icon_listener * plistener, ::windowing::icon * picon)
+   ::e_status notify_icon::create_notify_icon(::u32 uId, ::user::notify_icon_listener * plistener, ::windowing::icon * picon)
    {
 
       if (m_bCreated)
       {
 
-         return false;
+         return ::success_none;
 
       }
 
       m_strId.Format("notify_icon_%d", uId);
 
       m_strId = "ca2-" + picon->get_tray_icon_name() + "-" + m_strId;
-
-#ifdef WINDOWS_DESKTOP
 
       if (!create_message_queue(m_strId))
       {
@@ -89,11 +87,7 @@ namespace windowing_win32
 
       }
 
-#endif
-
       m_uiId = uId;
-
-#ifdef WINDOWS_DESKTOP
 
       m_nid.hWnd = __hwnd(get_oswindow());
       m_nid.uID = uId;
@@ -101,24 +95,8 @@ namespace windowing_win32
       m_nid.uFlags = NIF_ICON | NIF_MESSAGE;
       m_nid.uCallbackMessage = MessageNotifyIcon;
 
-#elif defined(LINUX)
-
-#elif defined(MACOS)
-
-#elif defined(_UWP)
-
-#elif defined(ANDROID)
-
-#elif defined(APPLE_IOS)
-
-#else
-      __throw(todo);
-
-#endif
 
       m_plistener = plistener;
-
-#ifdef WINDOWS_DESKTOP
 
       if (!Shell_NotifyIcon(NIM_ADD, &m_nid))
       {
@@ -131,130 +109,6 @@ namespace windowing_win32
 
       }
 
-#elif defined(LINUX) && !defined(RASPBIAN)
-
-      {
-
-         string strAppId = pvisualicon->get_tray_icon_name();
-
-         string strId(strAppId);
-
-         string strMatterRoot = ::str::token(strId, "/");
-
-         if (strMatterRoot.is_empty())
-         {
-
-            strMatterRoot = "app";
-
-         }
-
-         ::file::path pathFolder("appmatter://" + strMatterRoot);
-
-         pathFolder /= "_matter" / strId / "_std/_std/main";
-
-         string strNotifyIcon = _002Underscore(strAppId);
-
-         ::file::path path = pathFolder / (strNotifyIcon + "_128.png");
-
-         path = pcontext->m_papexcontext->defer_process_path(path);
-
-         pathFolder = path.folder();
-
-         auto pnode = Node;
-
-         pnode->node_sync(5_s, __routine([this, pnode, strNotifyIcon, pathFolder]()
-            {
-
-               m_pindicator = pnode->appindicator_allocate();
-
-               m_pindicator->create(m_strId, strNotifyIcon + "_128", pathFolder, this);
-
-            }));
-
-      }
-
-      if (m_pindicator == nullptr)
-      {
-
-         m_plistener = nullptr;
-
-         //start_destroying_window();
-
-         return false;
-
-      }
-
-#elif defined(MACOS)
-
-      //      string strFolder;
-      //
-      //      string str1 = pvisualicon->m_strAppTrayIcon;
-      //
-      //      str1.replace("-", "_");
-      //
-      //      str1.replace("/", "_");
-      //
-      //      str1.replace("\\", "_");
-      //
-      //      string str(str1);
-      //
-      //      if(::str::begins_eat_ci(str, "app_veriwell_"))
-      //      {
-      //
-      //         strFolder+="app-veriwell";
-      //
-      //      }
-      //      else if(::str::begins_eat_ci(str, "app_core_"))
-      //      {
-      //
-      //         strFolder+="app-core";
-      //
-      //      }
-      //      else
-      //      {
-      //
-      //         strFolder+="app";
-      //
-      //      }
-      //
-      //      //str
-      //
-      //      strFolder+= "/appmatter/" + str;
-      //
-      //      strFolder += "/_std/_std/main/";
-      //
-      //      string strFile = "menubar-icon-22.png";
-      //
-      //      string strUrl = "https://server.ca2.cc/matter/" + strFolder + strFile;
-      //
-      //      strFile = pcontext->m_papexcontext->dir().appdata() / strFolder / strFile;
-      //
-      //      int iRetry = 3;
-      //
-      //      while(iRetry >= 0 && (!pcontext->m_papexcontext->file().exists(strFile) || pcontext->m_papexcontext->file().length(strFile) <= 0))
-      //      {
-      //
-      //         ::property_set set;
-      //
-      //         set["raw_http"] = true;
-      //         set["disable_common_name_cert_check"] = true;
-      //
-      //         pcontext->m_papexcontext->http().download(strUrl, strFile, set);
-      //
-      //         iRetry--;
-      //
-      //      }
-
-      string strFile;
-
-      strFile = pcontext->m_papexcontext->defer_process_matter_path("matter://main/menubar-icon-22.png");
-
-      notify_icon_init(strFile);
-
-#else
-
-#endif
-
       m_bCreated = true;
 
       return true;
@@ -262,17 +116,15 @@ namespace windowing_win32
    }
 
 
-   bool notify_icon::modify_icon(::windowing::icon * picon)
+   ::e_status notify_icon::modify_icon(::windowing::icon * picon)
    {
 
       if (!m_bCreated)
       {
 
-         return false;
+         return error_failed;
 
       }
-
-#ifdef WINDOWS_DESKTOP
 
       m_nid.hIcon = (HICON) picon->get_os_data(::size_i32(16, 16));
 
@@ -287,22 +139,24 @@ namespace windowing_win32
 
       m_piconCurrent = picon;
 
-      return true;
-
-#else
-
-      __throw(todo);
-
-#endif
-
+      return ::success;
 
    }
 
 
-   void notify_icon::AddHiddenWindow(__pointer(::user::interaction) puserinteraction)
+   ::e_status notify_icon::add_hidden_window(::user::interaction * puserinteraction)
    {
 
-      m_wndptraHidden.add_unique(puserinteraction);
+      auto estatus = ::user::notify_icon::add_hidden_window(puserinteraction);
+
+      if (!estatus)
+      {
+
+         return estatus;
+
+      }
+
+      return estatus;
 
    }
 
@@ -414,13 +268,13 @@ namespace windowing_win32
       if (pusermessage->m_lparam == e_message_left_button_down)
       {
 
-         while (m_wndptraHidden.get_size() > 0)
+         while (m_userinteractionaHidden.get_size() > 0)
          {
 
             try
             {
 
-               __pointer(::user::interaction) pframe = (m_wndptraHidden.element_at(0));
+               __pointer(::user::interaction) pframe = (m_userinteractionaHidden.element_at(0));
 
                if (pframe != nullptr)
                {
@@ -431,7 +285,7 @@ namespace windowing_win32
                else
                {
 
-                  m_wndptraHidden.element_at(0)->display(e_display_normal);
+                  m_userinteractionaHidden.element_at(0)->display(e_display_normal);
 
                }
 
@@ -441,7 +295,7 @@ namespace windowing_win32
 
             }
 
-            m_wndptraHidden.erase_at(0);
+            m_userinteractionaHidden.erase_at(0);
 
          }
 
@@ -452,11 +306,11 @@ namespace windowing_win32
    }
 
 
-   void notify_icon::notify_icon_play(const char * action)
-   {
+   //void notify_icon::notify_icon_play(const char * action)
+   //{
 
 
-   }
+   //}
 
 
    ::e_status notify_icon::step()
@@ -478,66 +332,66 @@ namespace windowing_win32
    }
 
 
-#if defined(LINUX) || defined(MACOS)
-
-
-   int notify_icon::_get_notification_area_action_count()
-   {
-
-      return m_plistener->_get_notification_area_action_count();
-
-   }
-
-
-   const char * notify_icon::_get_notification_area_action_name(int iIndex)
-   {
-
-      return m_plistener->_get_notification_area_action_name(iIndex);
-
-   }
-
-
-   const char * notify_icon::_get_notification_area_action_id(int iIndex)
-   {
-
-      return m_plistener->_get_notification_area_action_id(iIndex);
-
-   }
-
-
-   const char * notify_icon::_get_notification_area_action_label(int iIndex)
-   {
-
-      return m_plistener->_get_notification_area_action_label(iIndex);
-
-   }
-
-
-   const char * notify_icon::_get_notification_area_action_accelerator(int iIndex)
-   {
-
-      return m_plistener->_get_notification_area_action_accelerator(iIndex);
-
-   }
-
-
-   const char * notify_icon::_get_notification_area_action_description(int iIndex)
-   {
-
-      return m_plistener->_get_notification_area_action_description(iIndex);
-
-   }
-
-
-   void notify_icon::call_notification_area_action(const char * pszId)
-   {
-
-      m_plistener->call_notification_area_action(pszId);
-
-   }
-
-
-#endif
+//#if defined(LINUX) || defined(MACOS)
+//
+//
+//   int notify_icon::_get_notification_area_action_count()
+//   {
+//
+//      return m_plistener->_get_notification_area_action_count();
+//
+//   }
+//
+//
+//   const char * notify_icon::_get_notification_area_action_name(int iIndex)
+//   {
+//
+//      return m_plistener->_get_notification_area_action_name(iIndex);
+//
+//   }
+//
+//
+//   const char * notify_icon::_get_notification_area_action_id(int iIndex)
+//   {
+//
+//      return m_plistener->_get_notification_area_action_id(iIndex);
+//
+//   }
+//
+//
+//   const char * notify_icon::_get_notification_area_action_label(int iIndex)
+//   {
+//
+//      return m_plistener->_get_notification_area_action_label(iIndex);
+//
+//   }
+//
+//
+//   const char * notify_icon::_get_notification_area_action_accelerator(int iIndex)
+//   {
+//
+//      return m_plistener->_get_notification_area_action_accelerator(iIndex);
+//
+//   }
+//
+//
+//   const char * notify_icon::_get_notification_area_action_description(int iIndex)
+//   {
+//
+//      return m_plistener->_get_notification_area_action_description(iIndex);
+//
+//   }
+//
+//
+//   void notify_icon::call_notification_area_action(const char * pszId)
+//   {
+//
+//      m_plistener->call_notification_area_action(pszId);
+//
+//   }
+//
+//
+//#endif
 
 
 } // namespace windowing_win32

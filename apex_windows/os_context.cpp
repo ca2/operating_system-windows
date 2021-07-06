@@ -115,37 +115,38 @@ namespace windows
       {
          return false;
       }
-      if(!LookupPrivilegeValue(nullptr, SE_REMOTE_SHUTDOWN_NAME, &tkp.Privileges[0].Luid))
-      {
-         TRACELASTERROR();
-         return false;
-      }
-      tkp.PrivilegeCount = 1;
-      tkp.Privileges[0].Attributes = SE_PRIVILEGE_ENABLED;
-      if(!AdjustTokenPrivileges(hToken, false, &tkp, 0, (PTOKEN_PRIVILEGES) nullptr, 0))
-      {
-         TRACELASTERROR();
-         return false;
-      }
-      if (GetLastError() == ERROR_NOT_ALL_ASSIGNED)
-      {
-         return false;
-      }
+      ////if(!LookupPrivilegeValue(nullptr, SE_REMOTE_SHUTDOWN_NAME, &tkp.Privileges[0].Luid))
+      ////{
+      ////   TRACELASTERROR();
+      ////   return false;
+      ////}
+      ////tkp.PrivilegeCount = 1;
+      ////tkp.Privileges[0].Attributes = SE_PRIVILEGE_ENABLED;
+      ////if(!AdjustTokenPrivileges(hToken, false, &tkp, 0, (PTOKEN_PRIVILEGES) nullptr, 0))
+      ////{
+      ////   TRACELASTERROR();
+      ////   return false;
+      ////}
+      ////if (GetLastError() == ERROR_NOT_ALL_ASSIGNED)
+      ////{
+      ////   return false;
+      ////}
 
-      if(!WTSShutdownSystem(WTS_CURRENT_SERVER_HANDLE,WTS_WSD_REBOOT))
-      {
-         TRACELASTERROR();
-         return false;
-      }
-      /*if (!ExitWindowsEx(EWX_REBOOT | EWX_FORCE,
+      //if(!WTSShutdownSystem(WTS_CURRENT_SERVER_HANDLE,WTS_WSD_REBOOT))
+      //{
+      //   TRACELASTERROR();
+      //   return false;
+      //}
+      //if (!ExitWindowsEx(EWX_REBOOT | EWX_FORCE,
+      if (!ExitWindowsEx(EWX_REBOOT,
       SHTDN_REASON_MAJOR_SOFTWARE | SHTDN_REASON_MINOR_INSTALLATION))
       {
-      u32 dwLastError = ::GetLastError();
+         TRACELASTERROR();
       return false;
-      }*/
+      }
       //reset the previlages
-      tkp.Privileges[0].Attributes = 0;
-      AdjustTokenPrivileges(hToken, false, &tkp, 0, (PTOKEN_PRIVILEGES) nullptr, 0);
+//      tkp.Privileges[0].Attributes = 0;
+ //     AdjustTokenPrivileges(hToken, false, &tkp, 0, (PTOKEN_PRIVILEGES) nullptr, 0);
       return true;
    }
 
@@ -3320,7 +3321,7 @@ repeat:
                   if (SUCCEEDED(hr))
                   {
 
-                     set["file_name"] = string(pwszFilePath);
+                     set["file_name"] = string(pwszFilePath.m_p);
 
                       bOk = true;
 

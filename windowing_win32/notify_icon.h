@@ -49,7 +49,7 @@ namespace windowing_win32
       virtual ~notify_icon();
 
 
-      void AddHiddenWindow(__pointer(::user::interaction) puserinteraction);
+      ::e_status add_hidden_window(::user::interaction * puserinteraction) override;
 
 #ifdef WINDOWS_DESKTOP
 
@@ -68,10 +68,10 @@ namespace windowing_win32
 #endif
 
 
-      bool modify_icon(::windowing::icon * picon);
+      ::e_status modify_icon(::windowing::icon * picon) override;
 
       
-      virtual bool create_notify_icon(::u32 id, ::user::notify_icon_listener * plistener, ::windowing::icon * picon);
+      ::e_status create_notify_icon(::u32 id, ::user::notify_icon_listener * plistener, ::windowing::icon * picon) override;
 
 
       DECLARE_MESSAGE_HANDLER(_001OnNotifyIconMessage);
@@ -79,24 +79,24 @@ namespace windowing_win32
 
       void install_message_routing(::channel * pchannel) override;
 
-      virtual ::e_status step() override;
+      ::e_status step() override;
 
-#if defined(APPLE_IOS) || defined(WINDOWS_DESKTOP) || defined(ANDROID) || defined(_UWP)
-      virtual void notify_icon_play(const char * action);
-#else
-#if defined(LINUX)
-      virtual void notify_icon_play(const char * action);
-#else
-      virtual void notify_icon_play(const char * action) override;
-#endif
-      virtual int _get_notification_area_action_count() override;
-      virtual const char * _get_notification_area_action_name(int iIndex) override;
-      virtual const char * _get_notification_area_action_id(int iIndex) override;
-      virtual const char * _get_notification_area_action_label(int iIndex) override;
-      virtual const char * _get_notification_area_action_accelerator(int iIndex) override;
-      virtual const char * _get_notification_area_action_description(int iIndex) override;
-      virtual void call_notification_area_action(const char * pszId) override;
-#endif
+//#if defined(APPLE_IOS) || defined(WINDOWS_DESKTOP) || defined(ANDROID) || defined(_UWP)
+//      virtual void notify_icon_play(const char * action);
+//#else
+//#if defined(LINUX)
+//      virtual void notify_icon_play(const char * action);
+//#else
+//      virtual void notify_icon_play(const char * action) override;
+//#endif
+//      virtual int _get_notification_area_action_count() override;
+//      virtual const char * _get_notification_area_action_name(int iIndex) override;
+//      virtual const char * _get_notification_area_action_id(int iIndex) override;
+//      virtual const char * _get_notification_area_action_label(int iIndex) override;
+//      virtual const char * _get_notification_area_action_accelerator(int iIndex) override;
+//      virtual const char * _get_notification_area_action_description(int iIndex) override;
+//      virtual void call_notification_area_action(const char * pszId) override;
+//#endif
 
 
    };

@@ -640,14 +640,14 @@ namespace windows
 
 
 
-   //bool interaction_impl::SetLayeredWindowAttributes(color32_t crKey, byte bAlpha, u32 dwFlags)
+   //bool interaction_impl::SetLayeredWindowAttributes(::color::color crKey, byte bAlpha, u32 dwFlags)
    //{
    //   ASSERT(_is_window());
    //   return ::SetLayeredWindowAttributes(get_handle(), crKey, bAlpha, dwFlags) != false;
    //}
 
    //bool interaction_impl::UpdateLayeredWindow(::draw2d::graphics * pDCDst, POINT_I32 *pptDst, SIZE_I32 *psize,
-   //      ::draw2d::graphics * pDCSrc, POINT_I32 *pptSrc, color32_t crKey, BLENDFUNCTION *pblend, u32 dwFlags)
+   //      ::draw2d::graphics * pDCSrc, POINT_I32 *pptSrc, ::color::color crKey, BLENDFUNCTION *pblend, u32 dwFlags)
    //{
    //   ASSERT(_is_window());
    //   ::exception::throw_not_implemented();
@@ -657,7 +657,7 @@ namespace windows
    //}
 
 
-   //bool interaction_impl::GetLayeredWindowAttributes(color32_t *pcrKey, byte *pbAlpha, u32 *pdwFlags) const
+   //bool interaction_impl::GetLayeredWindowAttributes(::color::color *pcrKey, byte *pbAlpha, u32 *pdwFlags) const
    //{
    //   ASSERT(::is_window(((interaction_impl *)this)->get_handle()));
    //   return ::GetLayeredWindowAttributes(((interaction_impl *)this)->get_handle(), pcrKey, pbAlpha, (LPDWORD)pdwFlags) != false;
@@ -4718,10 +4718,10 @@ namespace windows
 //
 //            string strType = ::str::demangle(m_puserinteraction->type_name());
 //
-//            if (strType.contains_ci("combo_list"))
+//            if (strType.contains_ci("list_box"))
 //            {
 //
-//               ::output_debug_string("combo_list e_message_left_button_down");
+//               ::output_debug_string("list_box e_message_left_button_down");
 //
 //            }
 //
@@ -4745,10 +4745,10 @@ namespace windows
 //
 //            string strType;
 //
-//            if (strType.contains_ci("combo_list"))
+//            if (strType.contains_ci("list_box"))
 //            {
 //
-//               ::output_debug_string("combo_list e_message_non_client_left_button_down");
+//               ::output_debug_string("list_box e_message_non_client_left_button_down");
 //
 //            }
 //
@@ -4790,10 +4790,10 @@ namespace windows
 //
 //               strType = ::str::demangle(m_puserinteraction->type_name());
 //
-//               if (strType.contains_ci("combo_list"))
+//               if (strType.contains_ci("list_box"))
 //               {
 //
-//                  //::output_debug_string("combo_list e_message_mouse_move");
+//                  //::output_debug_string("list_box e_message_mouse_move");
 //
 //               }
 //
@@ -5345,10 +5345,10 @@ namespace windows
 
             string strType = ::str::demangle(m_puserinteraction->type_name());
 
-            if (strType.contains_ci("combo_list"))
+            if (strType.contains_ci("list_box"))
             {
 
-               ::output_debug_string("combo_list e_message_left_button_down");
+               ::output_debug_string("list_box e_message_left_button_down");
 
             }
 
@@ -5372,10 +5372,10 @@ namespace windows
 
             string strType;
 
-            if (strType.contains_ci("combo_list"))
+            if (strType.contains_ci("list_box"))
             {
 
-               ::output_debug_string("combo_list e_message_non_client_left_button_down");
+               ::output_debug_string("list_box e_message_non_client_left_button_down");
 
             }
 
@@ -5416,10 +5416,10 @@ namespace windows
 
                strType = ::str::demangle(m_puserinteraction->type_name());
 
-               if (strType.contains_ci("combo_list"))
+               if (strType.contains_ci("list_box"))
                {
 
-                  //::output_debug_string("combo_list e_message_mouse_move");
+                  //::output_debug_string("list_box e_message_mouse_move");
 
                }
 

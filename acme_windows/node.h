@@ -50,7 +50,15 @@ namespace acme
          virtual void install_crash_dump_reporting(const string& strModuleNameWithTheExeExtension) override;
 
 
+
+         ::e_status reboot() override;
+
          virtual platform_char** get_envp(wcsdup_array& a);
+
+
+         
+
+
 
          //virtual bool memcnts();
 
