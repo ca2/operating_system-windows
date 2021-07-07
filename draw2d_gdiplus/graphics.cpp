@@ -3882,13 +3882,15 @@ namespace draw2d_gdiplus
             Gdiplus::PointF pa[3];
 
             pa[0].X = (Gdiplus::REAL) rectangle.left;
-            pa[0].Y = (Gdiplus::REAL) rectangle.bottom;
+            pa[0].Y = (Gdiplus::REAL) rectangle.bottom - 1;
             pa[1].X = (Gdiplus::REAL) rectangle.right;
-            pa[1].Y = (Gdiplus::REAL) rectangle.top;
+            pa[1].Y = (Gdiplus::REAL) rectangle.bottom - 1;
             pa[2].X = (Gdiplus::REAL) rectangle.right;
             pa[2].Y = (Gdiplus::REAL) rectangle.top + 1;
 
             path.AddLines(pa, 3);
+
+            m_pgraphics->DrawPath(&pen, &path);
 
          }
          else

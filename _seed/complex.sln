@@ -40,10 +40,10 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_complex_drawing", "..\.
 		{CC8E8200-00A9-414E-9829-7CA3F1091ADD} = {CC8E8200-00A9-414E-9829-7CA3F1091ADD}
 		{C598E718-55AE-4D6E-81E0-53450FC3A649} = {C598E718-55AE-4D6E-81E0-53450FC3A649}
 		{E2D7833B-9B59-4826-BBDF-C270A2115E86} = {E2D7833B-9B59-4826-BBDF-C270A2115E86}
+		{94C3715A-7FBF-4455-917B-20CB7F40C58C} = {94C3715A-7FBF-4455-917B-20CB7F40C58C}
 		{77D5757E-2923-40F8-9CC0-A07FA5BCC236} = {77D5757E-2923-40F8-9CC0-A07FA5BCC236}
 		{9A5FBFB1-76E6-4F7E-933A-328C1EEC95AF} = {9A5FBFB1-76E6-4F7E-933A-328C1EEC95AF}
 		{D79C7DDB-A727-4B91-803E-41C4431693D6} = {D79C7DDB-A727-4B91-803E-41C4431693D6}
-		{94C3715A-7FBF-4455-917B-20CB7F40C58C} = {94C3715A-7FBF-4455-917B-20CB7F40C58C}
 		{D6B5B8F3-A524-4E73-8343-C3D5D558ADE3} = {D6B5B8F3-A524-4E73-8343-C3D5D558ADE3}
 	EndProjectSection
 EndProject
@@ -69,11 +69,16 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "aura_windows_common", "..\.
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "node_windows", "..\node_windows\node_windows.vcxproj", "{C1CCDF2E-9F27-45D3-B67A-B2EEB1754E72}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_complex_oculus", "..\..\..\source\app-complex\glasscapture\glasscapture.vcxproj", "{C7AFCEFA-3079-4B23-8F97-4543BB980265}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_complex_video_capture", "..\..\..\source\app-complex\video_capture\video_capture.vcxproj", "{C7AFCEFA-3079-4B23-8F97-4543BB980265}"
+	ProjectSection(ProjectDependencies) = postProject
+		{FE0FA8A0-D198-40F5-AC4E-4A2B843B496D} = {FE0FA8A0-D198-40F5-AC4E-4A2B843B496D}
+	EndProjectSection
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ocular", "..\..\..\source\app-core\ocular\ocular.vcxproj", "{20FD0446-AA14-4013-84E0-B5CB63FA354F}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "video_input", "..\..\..\source\app-core\video_input\video_input.vcxproj", "{20FD0446-AA14-4013-84E0-B5CB63FA354F}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "video_input", "..\..\..\source\app-core\ocular_media_foundation\ocular_media_foundation.vcxproj", "{FE0FA8A0-D198-40F5-AC4E-4A2B843B496D}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "video_input_media_foundation", "..\..\..\source\app-core\video_input_media_foundation\video_input_media_foundation.vcxproj", "{FE0FA8A0-D198-40F5-AC4E-4A2B843B496D}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "gcom", "..\..\..\source\app-core\gcom\gcom.vcxproj", "{F30BD15A-0EB5-4FA6-88D3-3B4604A41B4E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -651,6 +656,26 @@ Global
 		{FE0FA8A0-D198-40F5-AC4E-4A2B843B496D}.stage|Win32.Build.0 = stage|Win32
 		{FE0FA8A0-D198-40F5-AC4E-4A2B843B496D}.stage|x64.ActiveCfg = stage|x64
 		{FE0FA8A0-D198-40F5-AC4E-4A2B843B496D}.stage|x64.Build.0 = stage|x64
+		{F30BD15A-0EB5-4FA6-88D3-3B4604A41B4E}.basis|Win32.ActiveCfg = basis|Win32
+		{F30BD15A-0EB5-4FA6-88D3-3B4604A41B4E}.basis|Win32.Build.0 = basis|Win32
+		{F30BD15A-0EB5-4FA6-88D3-3B4604A41B4E}.basis|x64.ActiveCfg = basis|x64
+		{F30BD15A-0EB5-4FA6-88D3-3B4604A41B4E}.basis|x64.Build.0 = basis|x64
+		{F30BD15A-0EB5-4FA6-88D3-3B4604A41B4E}.cover|Win32.ActiveCfg = cover|Win32
+		{F30BD15A-0EB5-4FA6-88D3-3B4604A41B4E}.cover|Win32.Build.0 = cover|Win32
+		{F30BD15A-0EB5-4FA6-88D3-3B4604A41B4E}.cover|x64.ActiveCfg = cover|x64
+		{F30BD15A-0EB5-4FA6-88D3-3B4604A41B4E}.cover|x64.Build.0 = cover|x64
+		{F30BD15A-0EB5-4FA6-88D3-3B4604A41B4E}.cube_basis|Win32.ActiveCfg = cube_basis|Win32
+		{F30BD15A-0EB5-4FA6-88D3-3B4604A41B4E}.cube_basis|Win32.Build.0 = cube_basis|Win32
+		{F30BD15A-0EB5-4FA6-88D3-3B4604A41B4E}.cube_basis|x64.ActiveCfg = cube_basis|x64
+		{F30BD15A-0EB5-4FA6-88D3-3B4604A41B4E}.cube_basis|x64.Build.0 = cube_basis|x64
+		{F30BD15A-0EB5-4FA6-88D3-3B4604A41B4E}.cube_stage|Win32.ActiveCfg = cube_stage|Win32
+		{F30BD15A-0EB5-4FA6-88D3-3B4604A41B4E}.cube_stage|Win32.Build.0 = cube_stage|Win32
+		{F30BD15A-0EB5-4FA6-88D3-3B4604A41B4E}.cube_stage|x64.ActiveCfg = cube_stage|x64
+		{F30BD15A-0EB5-4FA6-88D3-3B4604A41B4E}.cube_stage|x64.Build.0 = cube_stage|x64
+		{F30BD15A-0EB5-4FA6-88D3-3B4604A41B4E}.stage|Win32.ActiveCfg = stage|Win32
+		{F30BD15A-0EB5-4FA6-88D3-3B4604A41B4E}.stage|Win32.Build.0 = stage|Win32
+		{F30BD15A-0EB5-4FA6-88D3-3B4604A41B4E}.stage|x64.ActiveCfg = stage|x64
+		{F30BD15A-0EB5-4FA6-88D3-3B4604A41B4E}.stage|x64.Build.0 = stage|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
