@@ -2240,37 +2240,21 @@ namespace windowing_win32
          if (hcursor == nullptr)
          {
 
-            if (pcursor->m_bLoadSystemDefaultCursorHint)
+            auto estatus = pcursor->_create_os_cursor();
+
+            if (!estatus)
             {
 
-               auto ecursor = pcursor->m_ecursor;
+               return estatus;
 
-               auto estatus = pcursor->load_default_cursor(ecursor);
+            };
 
-               if (!estatus)
-               {
+            hcursor = (HCURSOR)pcursor->get_os_data();
 
-                  return estatus;
-
-               }
-
-               hcursor = (HCURSOR) pcursor->get_os_data();
-
-               if (hcursor == nullptr)
-               {
-
-                  return error_failed;
-
-               }
-
-            }
-            else
+            if (!hcursor)
             {
 
-               // At windows SetMouseCursor(nullptr) removes the cursor from screen
-               // similar apis in other platforms behave the same?
-
-               return error_failed;
+               return error_resource;
 
             }
 

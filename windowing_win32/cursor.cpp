@@ -28,7 +28,45 @@ namespace windowing_win32
    }
 
 
-   ::e_status cursor::create_from_image(const ::image * pimage, ::i32 xHotspot, ::i32 yHotspot)
+   ::e_status cursor::_create_os_cursor()
+   {
+
+      if (get_hcursor())
+      {
+
+         return success_none;
+
+      }
+
+      if (m_pimage)
+      {
+
+         auto estatus = _create_from_image(m_pimage, m_szHotspotOffset.cx, m_szHotspotOffset.cy);
+
+         if (estatus)
+         {
+
+            return estatus;
+
+         }
+
+      }
+
+      auto estatus = _load_default_cursor(m_ecursor);
+
+      if (!estatus)
+      {
+
+         return estatus;
+
+      }
+
+      return estatus;
+
+   }
+
+
+   ::e_status cursor::_create_from_image(const ::image * pimage, ::i32 xHotspot, ::i32 yHotspot)
    {
 
       HCURSOR hcursor = (HCURSOR) create_alpha_cursor(pimage, xHotspot, yHotspot);
@@ -47,7 +85,7 @@ namespace windowing_win32
    }
 
 
-   ::e_status cursor::load_default_cursor(enum_cursor ecursor)
+   ::e_status cursor::_load_default_cursor(enum_cursor ecursor)
    {
 
       auto pcursor = windows_get_system_cursor(ecursor);

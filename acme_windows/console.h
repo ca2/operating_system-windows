@@ -14,9 +14,14 @@ namespace windows
 
       int m_iW;
       int m_iH;
+      string_stream m_cout;
+
 
       console();
       virtual ~console();
+
+      ::string_stream& cout() override;
+
 
       void redirect_io();
       void SetWindowSize(int height,int width);

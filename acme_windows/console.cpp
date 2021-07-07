@@ -18,7 +18,7 @@ namespace windows
 
       AllocConsole();
 
-      cout.m_p = __new(std_out_buffer());
+      m_cout.m_p = __new(std_out_buffer());
 
       CONSOLE_FONT_INFOEX info = {};
       info.cbSize = sizeof(info);
@@ -47,6 +47,13 @@ namespace windows
 
    }
 
+
+   ::string_stream& console::cout()
+   {
+
+      return m_cout;
+
+   }
 
    // maximum mumber of lines the output console should have
 
