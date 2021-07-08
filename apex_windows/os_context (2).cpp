@@ -2547,21 +2547,21 @@ repeat:
 
          auto estatusRegistry = regkey._set("HideIconsCommand", "\"" + strModule + "\" : hide_icons");
 
-         if (estatusRegistry)
+         if(estatusRegistry.succeeded())
          {
 
             estatusRegistry = regkey._set("IconsVisible", 1);
 
          }
 
-         if (estatusRegistry)
+         if(estatusRegistry.succeeded())
          {
           
             estatusRegistry = regkey._set("ReinstallCommand", "\"" + strModule + "\" : install");
 
          }
 
-         if (estatusRegistry)
+         if(estatusRegistry.succeeded())
          {
 
             estatusRegistry = regkey._set("ShowIconsCommand", "\"" + strModule + "\" : show_icons");
@@ -2624,14 +2624,14 @@ repeat:
 
          auto estatusRegistry = regkey._set("ApplicationDescription", get_application()->find_string("ApplicationDescription"));
 
-         if (estatusRegistry)
+         if(estatusRegistry.succeeded())
          {
 
             estatusRegistry = regkey._set("ApplicationIcon", get_application()->find_string("ApplicationIcon"));
 
          }
 
-         if (estatusRegistry)
+         if(estatusRegistry.succeeded())
          {
 
             estatusRegistry = regkey._set("ApplicationName", get_application()->find_string("ApplicationName"));
@@ -2735,28 +2735,28 @@ repeat:
 
          auto estatusRegistry = regkey._set("ApplicationCompany", get_application()->find_string("ApplicationCompany"));
 
-         if (estatusRegistry)
+         if(estatusRegistry.succeeded())
          {
 
             estatusRegistry = regkey._set("ApplicationDescription", get_application()->find_string("ApplicationDescription"));
 
          }
 
-         if (estatusRegistry)
+         if(estatusRegistry.succeeded())
          {
 
             estatusRegistry = regkey._set("ApplicationIcon", get_application()->find_string("ApplicationIcon"));
 
          }
          
-         if (estatusRegistry)
+         if(estatusRegistry.succeeded())
          {
 
             estatusRegistry = regkey._set("ApplicationName", get_application()->find_string("ApplicationName"));
 
          }
          
-         if (estatusRegistry)
+         if(estatusRegistry.succeeded())
          {
 
             estatusRegistry = regkey._set("AppUserModelId", get_application()->find_string("AppUserModelId"));

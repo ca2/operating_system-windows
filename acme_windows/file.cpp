@@ -522,16 +522,17 @@ namespace windows
 
       ASSERT_VALID(this);
 
-      filesize dwLen, dwCur;
+      DWORD dwHi = 0;
 
-      // seek is a non const operation
-      __pointer(::windows::file) pFile = (::windows::file*)this;
-      dwCur = pFile->seek(0L, ::file::seek_current);
-      dwLen = pFile->seek_to_end();
-      if (dwCur != (u64)pFile->seek((filesize)dwCur, ::file::seek_begin))
-         __throw(::exception::exception("file cursor not in same place after getting length"));
+      DWORD dwLo = ::GetFileSize(m_handleFile, &dwHi);
+      //// seek is a non const operation
+      //__pointer(::windows::file) pFile = (::windows::file*)this;
+      //dwCur = pFile->seek(0L, ::file::seek_current);
+      //dwLen = pFile->seek_to_end();
+      //if (dwCur != (u64)pFile->seek((filesize)dwCur, ::file::seek_begin))
+      //   __throw(::exception::exception("file cursor not in same place after getting length"));
 
-      return (filesize)dwLen;
+      return (filesize)((dwHi << 32) | dwLo);
 
    }
 
