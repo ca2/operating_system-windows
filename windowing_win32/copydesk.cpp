@@ -162,7 +162,7 @@ namespace windowing_win32
    }
 
 
-   void copydesk::_001OnDestroy(::message::message * pmessage)
+   void copydesk::on_message_destroy(::message::message * pmessage)
    {
 
       bool bOk1 = ::RemoveClipboardFormatListener((HWND)get_oswindow());

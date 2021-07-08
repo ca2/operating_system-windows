@@ -232,7 +232,7 @@ namespace production
 
       MESSAGE_LINK(WM_USER, pchannel, this, &pane_view::_001OnUserMessage);
       MESSAGE_LINK(e_message_create, pchannel, this, &pane_view::_001OnCreate);
-      //	MESSAGE_LINK(e_message_size, pchannel, this, &pane_view::_001OnSize);
+      //	MESSAGE_LINK(e_message_size, pchannel, this, &pane_view::on_message_size);
       MESSAGE_LINK(WM_USER + 1122, pchannel, this, &pane_view::_001OnMenuMessage);
 
 

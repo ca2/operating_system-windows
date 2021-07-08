@@ -91,15 +91,15 @@ namespace production
       DECLARE_MESSAGE_HANDLER(_001OnLButtonUp);
       virtual void _001OnTimer(::timer * ptimer);
       DECLARE_MESSAGE_HANDLER(on_message_right_button_up);
-      DECLARE_MESSAGE_HANDLER(_001OnDestroy);
-      DECLARE_MESSAGE_HANDLER(_001OnSize);
+      DECLARE_MESSAGE_HANDLER(on_message_destroy);
+      DECLARE_MESSAGE_HANDLER(on_message_size);
       DECLARE_MESSAGE_HANDLER(_001OnCreate);
       DECLARE_MESSAGE_HANDLER(_001OnContextMenu);
-      DECLARE_MESSAGE_HANDLER(_001OnSetCursor);
-      DECLARE_MESSAGE_HANDLER(_001OnShowWindow);
+      DECLARE_MESSAGE_HANDLER(on_message_set_cursor);
+      DECLARE_MESSAGE_HANDLER(on_message_show_window);
       DECLARE_MESSAGE_HANDLER(_001OnUser);
-      DECLARE_MESSAGE_HANDLER(_001OnKeyDown);
-      DECLARE_MESSAGE_HANDLER(_001OnKeyUp);
+      DECLARE_MESSAGE_HANDLER(on_message_key_down);
+      DECLARE_MESSAGE_HANDLER(on_message_key_up);
 
 
       virtual ::size_i32 get_total_size();

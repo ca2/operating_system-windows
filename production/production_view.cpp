@@ -50,25 +50,25 @@ namespace production
    {
       ::user::scroll_view::install_message_routing(pchannel);
 
-      MESSAGE_LINK(e_message_destroy, pchannel, this, &view::_001OnDestroy);
-      MESSAGE_LINK(e_message_size, pchannel, this, &view::_001OnSize);
+      MESSAGE_LINK(e_message_destroy, pchannel, this, &view::on_message_destroy);
+      MESSAGE_LINK(e_message_size, pchannel, this, &view::on_message_size);
       //MESSAGE_LINK(WM_PAINT, pchannel, this, &view::_001OnPaint);
       MESSAGE_LINK(e_message_create, pchannel, this, &view::_001OnCreate);
       MESSAGE_LINK(WM_CONTEXTMENU, pchannel, this, &view::_001OnContextMenu);
-      MESSAGE_LINK(WM_SETCURSOR, pchannel, this, &view::_001OnSetCursor);
+      MESSAGE_LINK(WM_SETCURSOR, pchannel, this, &view::on_message_set_cursor);
 
       //   MESSAGE_LINK(e_message_lbutton_down, pchannel, this, &::user::interaction::_001OnLButtonDown);
       //   MESSAGE_LINK(e_message_lbutton_up, pchannel, this, &::user::interaction::_001OnLButtonUp);
-      MESSAGE_LINK(e_message_key_down, pchannel, this, &view::_001OnKeyDown);
-      MESSAGE_LINK(e_message_key_up, pchannel, this, &view::_001OnKeyUp);
+      MESSAGE_LINK(e_message_key_down, pchannel, this, &view::on_message_key_down);
+      MESSAGE_LINK(e_message_key_up, pchannel, this, &view::on_message_key_up);
 
       MESSAGE_LINK(e_message_lbutton_down, pchannel, this, &view::_001OnLButtonDown);
       MESSAGE_LINK(e_message_lbutton_up, pchannel, this, &view::_001OnLButtonUp);
       MESSAGE_LINK(e_message_rbutton_up, pchannel, this, &view::on_message_right_button_up);
 
 
-      MESSAGE_LINK(WM_SHOWWINDOW, pchannel, this, &view::_001OnShowWindow);
-      MESSAGE_LINK(e_message_destroy, pchannel, this, &view::_001OnDestroy);
+      MESSAGE_LINK(WM_SHOWWINDOW, pchannel, this, &view::on_message_show_window);
+      MESSAGE_LINK(e_message_destroy, pchannel, this, &view::on_message_destroy);
 
       MESSAGE_LINK(WM_USER, pchannel, this, &view::_001OnUser);
 
@@ -120,12 +120,12 @@ namespace production
 
    }
 
-   void view::_001OnDestroy(::message::message * pmessage)
+   void view::on_message_destroy(::message::message * pmessage)
    {
-      ::user::impact::_001OnDestroy(pmessage);
+      ::user::impact::on_message_destroy(pmessage);
    }
 
-   void view::_001OnSize(::message::message * pmessage)
+   void view::on_message_size(::message::message * pmessage)
    {
       UNREFERENCED_PARAMETER(pmessage);
 //      __pointer(::message::size) psize(pmessage);
@@ -315,13 +315,13 @@ namespace production
 
    }
 
-   void view::_001OnKeyDown(::message::message * pmessage)
+   void view::on_message_key_down(::message::message * pmessage)
    {
 
    }
 
 
-   void view::_001OnKeyUp(::message::message * pmessage)
+   void view::on_message_key_up(::message::message * pmessage)
    {
    }
 
@@ -340,7 +340,7 @@ namespace production
    }
 
 
-   void view::_001OnSetCursor(::message::message * pmessage)
+   void view::on_message_set_cursor(::message::message * pmessage)
    {
 
       __pointer(::message::mouse) pmouse(pmessage);
@@ -487,7 +487,7 @@ namespace production
 
 
 
-   void view::_001OnShowWindow(::message::message * pmessage)
+   void view::on_message_show_window(::message::message * pmessage)
    {
       UNREFERENCED_PARAMETER(pmessage);
 //      __pointer(::message::show_window) pshowwindow(pmessage);

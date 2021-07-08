@@ -32,7 +32,7 @@
 //
 //      ::user::interaction::install_message_routing(pchannel);
 //
-//      MESSAGE_LINK(e_message_destroy, pchannel, this, System_interaction::_001OnDestroy);
+//      MESSAGE_LINK(e_message_destroy, pchannel, this, System_interaction::on_message_destroy);
 //      MESSAGE_LINK(e_message_display_change, pchannel,this,System_interaction::_001OnMessage);
 //
 //   }
@@ -54,12 +54,12 @@
 //   }
 //
 //
-//   void system_interaction::_001OnDestroy(::message::message * pmessage)
+//   void system_interaction::on_message_destroy(::message::message * pmessage)
 //   {
 //
 //      __pointer(::user::message) pusermessage(pmessage);
 //
-//      ::output_debug_string("system_interaction::_001OnDestroy");
+//      ::output_debug_string("system_interaction::on_message_destroy");
 //
 //   }
 //

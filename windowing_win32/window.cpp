@@ -202,15 +202,15 @@ namespace windowing_win32
 
 
          //#ifndef LINUX
-         //MESSAGE_LINK(e_message_move, pchannel, this, &window::_001OnMove);
-         //MESSAGE_LINK(e_message_size, pchannel, this, &window::_001OnSize);
+         //MESSAGE_LINK(e_message_move, pchannel, this, &window::on_message_move);
+         //MESSAGE_LINK(e_message_size, pchannel, this, &window::on_message_size);
          //#endif
 
 
-         //MESSAGE_LINK(e_message_show_window, pchannel, this, &window::_001OnShowWindow);
+         //MESSAGE_LINK(e_message_show_window, pchannel, this, &window::on_message_show_window);
          //MESSAGE_LINK(e_message_kill_focus, pchannel, this, &window::_001OnKillFocus);
          //MESSAGE_LINK(e_message_set_focus, pchannel, this, &window::_001OnSetFocus);
-         //MESSAGE_LINK(e_message_set_cursor, pchannel, this, &window::_001OnSetCursor);
+         //MESSAGE_LINK(e_message_set_cursor, pchannel, this, &window::on_message_set_cursor);
 
       }
 
@@ -222,7 +222,7 @@ namespace windowing_win32
       pimpl->install_message_routing(pchannel);
 
 
-      MESSAGE_LINK(e_message_destroy, pchannel, this, &window::_001OnDestroy);
+      MESSAGE_LINK(e_message_destroy, pchannel, this, &window::on_message_destroy);
 
       //MESSAGE_LINK(e_message_create, pchannel, pimpl, &::user::interaction_impl::_001OnPrioCreate);
 
@@ -4085,7 +4085,7 @@ namespace windowing_win32
 
    //}
 
-   //void window::_001OnSetCursor(::message::message * pmessage)
+   //void window::on_message_set_cursor(::message::message * pmessage)
    //{
 
    //   if (m_pcursor != nullptr)
@@ -4196,7 +4196,7 @@ namespace windowing_win32
          if (puserinteraction->layout().is_moving())
          {
 
-            INFO("Window is Moving :: _001OnMove");
+            INFO("Window is Moving :: on_message_move");
 
          }
 
@@ -5090,7 +5090,7 @@ namespace windowing_win32
    }
 
 
-   void window::_001OnNcCalcSize(::message::message * pmessage)
+   void window::on_message_non_client_calculate_size(::message::message * pmessage)
    {
 
       __pointer(::message::nc_calc_size) pcalcsize(pmessage);
@@ -6024,7 +6024,7 @@ namespace windowing_win32
    }
 
 
-   void window::_001OnDestroy(::message::message * pmessage)
+   void window::on_message_destroy(::message::message * pmessage)
    {
 
       UNREFERENCED_PARAMETER(pmessage);
@@ -6077,7 +6077,7 @@ namespace windowing_win32
 
 
 
-      //void window::_001OnShowWindow(::message::message * pmessage)
+      //void window::on_message_show_window(::message::message * pmessage)
       //{
 
       //   __pointer(::message::show_window) pshowwindow(pmessage);
@@ -6085,13 +6085,13 @@ namespace windowing_win32
       //   if (pshowwindow->m_bShow)
       //   {
 
-      //      output_debug_string("windows::interaction_impl::_001OnShowWindow bShow = true");
+      //      output_debug_string("windows::interaction_impl::on_message_show_window bShow = true");
 
       //   }
       //   else
       //   {
 
-      //      output_debug_string("windows::interaction_impl::_001OnShowWindow bShow = false");
+      //      output_debug_string("windows::interaction_impl::on_message_show_window bShow = false");
 
       //   }
 
@@ -6101,7 +6101,7 @@ namespace windowing_win32
 
 
 
-      //void window::_001OnMove(::message::message* pmessage)
+      //void window::on_message_move(::message::message* pmessage)
       //{
 
       //   if (m_pimpl->m_bDestroyImplOnly)
@@ -6126,7 +6126,7 @@ namespace windowing_win32
       //      if (m_pimpl->m_puserinteraction->layout().is_moving())
       //      {
 
-      //         INFO("Window is Moving :: _001OnMove");
+      //         INFO("Window is Moving :: on_message_move");
 
       //      }
 
@@ -6148,7 +6148,7 @@ namespace windowing_win32
       //}
 
 
-      //void window::_001OnSize(::message::message * pmessage)
+      //void window::on_message_size(::message::message * pmessage)
       //{
 
       //   if (m_pimpl->m_bDestroyImplOnly)
@@ -6187,7 +6187,7 @@ namespace windowing_win32
 
       //}
 
-   //void interaction_impl::_001OnSetCursor(::message::message * pmessage)
+   //void interaction_impl::on_message_set_cursor(::message::message * pmessage)
    //{
 
    //   __pointer(::user::message) pusermessage(pmessage);

@@ -105,18 +105,18 @@ namespace windows
       //virtual void window_apply_visual(const ::user::window_state & windowstate) override;
 
       DECLARE_MESSAGE_HANDLER(_001OnSysCommand);
-      //DECLARE_MESSAGE_HANDLER(_001OnDestroy);
+      //DECLARE_MESSAGE_HANDLER(on_message_destroy);
       //DECLARE_MESSAGE_HANDLER(on_message_create);
       //DECLARE_MESSAGE_HANDLER(_001OnKillFocus);
       //DECLARE_MESSAGE_HANDLER(_001OnPaint);
       //DECLARE_MESSAGE_HANDLER(_001OnPrint);
       //DECLARE_MESSAGE_HANDLER(_001OnSetFocus);
-      //DECLARE_MESSAGE_HANDLER(_001OnNcCalcSize);
-      //DECLARE_MESSAGE_HANDLER(_001OnSetCursor);
+      //DECLARE_MESSAGE_HANDLER(on_message_non_client_calculate_size);
+      //DECLARE_MESSAGE_HANDLER(on_message_set_cursor);
       //DECLARE_MESSAGE_HANDLER(_001OnEraseBkgnd);
-      //DECLARE_MESSAGE_HANDLER(_001OnMove);
-      //DECLARE_MESSAGE_HANDLER(_001OnSize);
-      //DECLARE_MESSAGE_HANDLER(_001OnShowWindow);
+      //DECLARE_MESSAGE_HANDLER(on_message_move);
+      //DECLARE_MESSAGE_HANDLER(on_message_size);
+      //DECLARE_MESSAGE_HANDLER(on_message_show_window);
       //DECLARE_MESSAGE_HANDLER(_001OnActivate);
       //DECLARE_MESSAGE_HANDLER(_001OnDwmNcRenderingChanged);
       //DECLARE_MESSAGE_HANDLER(_001OnProdevianSynch);

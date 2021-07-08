@@ -1058,12 +1058,12 @@ namespace windowing_win32
        pkeyboard->m_mapKey[VK_F10] = ::user::e_key_f10;
        pkeyboard->m_mapKey[VK_F11] = ::user::e_key_f11;
        pkeyboard->m_mapKey[VK_F12] = ::user::e_key_f12;
-       pkeyboard->m_mapKey[VK_LSHIFT] = ::user::e_key_lshift;
-       pkeyboard->m_mapKey[VK_RSHIFT] = ::user::e_key_rshift;
-       pkeyboard->m_mapKey[VK_LCONTROL] = ::user::e_key_lcontrol;
-       pkeyboard->m_mapKey[VK_RCONTROL] = ::user::e_key_rcontrol;
-       pkeyboard->m_mapKey[VK_LMENU] = ::user::e_key_lalt;
-       pkeyboard->m_mapKey[VK_RMENU] = ::user::e_key_ralt;
+       pkeyboard->m_mapKey[VK_LSHIFT] = ::user::e_key_left_shift;
+       pkeyboard->m_mapKey[VK_RSHIFT] = ::user::e_key_right_shift;
+       pkeyboard->m_mapKey[VK_LCONTROL] = ::user::e_key_left_control;
+       pkeyboard->m_mapKey[VK_RCONTROL] = ::user::e_key_right_control;
+       pkeyboard->m_mapKey[VK_LMENU] = ::user::e_key_left_alt;
+       pkeyboard->m_mapKey[VK_RMENU] = ::user::e_key_right_alt;
 
    }
 

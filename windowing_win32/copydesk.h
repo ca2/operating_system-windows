@@ -36,7 +36,7 @@ namespace windowing_win32
 
 
       DECLARE_MESSAGE_HANDLER(_001OnClipboardUpdate);
-      DECLARE_MESSAGE_HANDLER(_001OnDestroy);
+      DECLARE_MESSAGE_HANDLER(on_message_destroy);
 
       virtual void install_message_routing(::channel * pchannel) override;
 

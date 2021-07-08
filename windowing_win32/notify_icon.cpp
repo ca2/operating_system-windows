@@ -59,7 +59,7 @@ namespace windowing_win32
       ::user::interaction::install_message_routing(pchannel);
 
       MESSAGE_LINK(MessageNotifyIcon, pchannel, this, &notify_icon::_001OnNotifyIconMessage);
-      MESSAGE_LINK(e_message_destroy, pchannel, this, &notify_icon::_001OnDestroy);
+      MESSAGE_LINK(e_message_destroy, pchannel, this, &notify_icon::on_message_destroy);
 
 #endif
 
@@ -252,10 +252,10 @@ namespace windowing_win32
    }
 
 
-   void notify_icon::_001OnDestroy(::message::message * pmessage)
+   void notify_icon::on_message_destroy(::message::message * pmessage)
    {
 
-      output_debug_string("notify_icon::_001OnDestroy");
+      output_debug_string("notify_icon::on_message_destroy");
 
    }
 
