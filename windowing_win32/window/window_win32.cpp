@@ -80,7 +80,9 @@ LRESULT CALLBACK __window_procedure(HWND hwnd, UINT message, WPARAM wparam, LPAR
 
          pwindow->set_oswindow(__oswindow(hwnd));
 
-         auto pwindowing = pwindow->windowing()->cast < ::windowing_win32::windowing >();
+         auto pwindowing = (::windowing_win32::windowing *) pwindow->m_pwindowing->m_pWindowing;
+
+         critical_section_lock synchronouslock(&pwindowing->m_criticalsection);
 
          pwindowing->m_windowmap[hwnd] = pwindow;
 
@@ -134,7 +136,7 @@ LRESULT CALLBACK __window_procedure(HWND hwnd, UINT message, WPARAM wparam, LPAR
 
    //return ::DefWindowProcW(hwnd, message, wparam, lparam);
 
-   auto psystem = pimpl->get_system();
+   //auto psystem = pimpl->get_system();
 
    pimpl->m_uiMessage = message;
 

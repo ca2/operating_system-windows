@@ -12,6 +12,8 @@ namespace windowing_win32
    windowing::windowing()
    {
 
+      m_pWindowing = this;
+
 //      set_layer(LAYERED_IMPL, this);
 
    }
