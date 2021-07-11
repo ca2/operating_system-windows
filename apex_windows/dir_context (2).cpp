@@ -531,6 +531,7 @@ namespace windows
                   {
 
                      TRACE("resident_*");
+
                   }
 
                   if (matches_wildcard_criteria_ci(listing.m_straPattern, strFile))
