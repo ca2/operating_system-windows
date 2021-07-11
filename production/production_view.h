@@ -94,7 +94,7 @@ namespace production
       DECLARE_MESSAGE_HANDLER(on_message_destroy);
       DECLARE_MESSAGE_HANDLER(on_message_size);
       DECLARE_MESSAGE_HANDLER(_001OnCreate);
-      DECLARE_MESSAGE_HANDLER(_001OnContextMenu);
+      DECLARE_MESSAGE_HANDLER(on_message_context_menu);
       DECLARE_MESSAGE_HANDLER(on_message_set_cursor);
       DECLARE_MESSAGE_HANDLER(on_message_show_window);
       DECLARE_MESSAGE_HANDLER(_001OnUser);
