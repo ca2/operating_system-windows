@@ -532,7 +532,7 @@ namespace windows
       //if (dwCur != (u64)pFile->seek((filesize)dwCur, ::file::seek_begin))
       //   __throw(::exception::exception("file cursor not in same place after getting length"));
 
-      return (filesize)((dwHi << 32) | dwLo);
+      return (filesize)((((::u64) dwHi) << 32) | ((::u64) dwLo));
 
    }
 

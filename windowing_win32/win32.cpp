@@ -178,7 +178,7 @@ namespace windowing_win32
       switch (u)
       {
       case COLOR_3DFACE:
-         return argb(127, 192, 192, 184);
+         return argb(127, 192, 192, 200);
       case COLOR_WINDOW:
          return argb(127, 255, 255, 255);
       case COLOR_3DLIGHT:
