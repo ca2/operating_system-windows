@@ -27,7 +27,7 @@ namespace backup
 
       if(pevent->m_eevent == ::user::e_event_button_clicked)
       {
-         if(pevent->m_puie->m_id == "lfs")
+         if(pevent->m_puserinteraction->m_id == "lfs")
          {
             auto pupdate = new_update();
             pupdate->m_actioncontext = ::e_source_system;
@@ -45,7 +45,7 @@ namespace backup
 
 
          }
-         else if(pevent->m_puie->m_id == "ftp")
+         else if(pevent->m_puserinteraction->m_id == "ftp")
          {
             auto pupdate = new_update();
             pupdate->m_actioncontext = ::e_source_system;
@@ -58,7 +58,7 @@ namespace backup
 
 
          }
-         else if(pevent->m_puie->m_id == "submit")
+         else if(pevent->m_puserinteraction->m_id == "submit")
          {
             /*         if(pview->m_strPathName == "filemanager_add_location_lfs.xhtml")
                      {

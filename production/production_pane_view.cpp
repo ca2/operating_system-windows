@@ -255,7 +255,7 @@ namespace production
    {
       if(pevent->m_eevent == ::user::e_event_set_check)
       {
-         if(pevent->m_puie->m_id == "clean")
+         if(pevent->m_puserinteraction->m_id == "clean")
          {
             __pointer(::user::interaction) pinteraction = m_pviewOptions->get_child_by_id("clean");
             __pointer(::user::check_box) pcheckbox =  (pinteraction);
@@ -263,7 +263,7 @@ namespace production
             psubject->payload(id_clean) = pcheckbox->echeck() == ::check_checked;
             get_document()->update_all_views(psubject);
          }
-         else if(pevent->m_puie->m_id == "build")
+         else if(pevent->m_puserinteraction->m_id == "build")
          {
             __pointer(::user::interaction) pinteraction = m_pviewOptions->get_child_by_id("build");
             __pointer(::user::check_box) pcheckbox =  (pinteraction);
