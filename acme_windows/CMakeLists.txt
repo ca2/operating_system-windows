@@ -2,14 +2,45 @@ cmake_minimum_required(VERSION 3.17)
 project(acme_windows CXX)
 
 
-
-
 list(APPEND library_source
-        _.cpp
-        _.h
-        factory_exchange.cpp
-        framework.cpp
-        framework.h)
+   _.cpp
+   _.h
+   acme_dir.cpp
+   acme_dir.h
+   acme_path.cpp
+   acme_path.h
+   argcargv.cpp
+   callstack.cpp
+   console.cpp
+   console.h
+   factory_exchange.cpp
+   file.cpp
+   file.h
+   file_find.cpp
+   file_memory_map.cpp
+   file_memory_map.h
+   framework.cpp
+   framework.h
+   list_serial_ports.cpp
+   mutex.cpp
+   mutex.h
+   node.cpp
+   node.h
+   pipe.cpp
+   pipe.h
+   registry.cpp
+   registry.h
+   serial.cpp
+   serial.h
+   shared_memory.cpp
+   shared_memory.h
+   strdup_array.cpp
+   timer.cpp
+   trace.cpp
+   uac_tools.cpp
+   uac_tools.h
+   windows_desktop.cpp
+   )
 
 
 add_library(acme_windows SHARED ${library_source})
@@ -36,26 +67,13 @@ elseif(LINUX)
     message("PKGCONFIG_LIBRARIES is " ${PKGCONFIG_LIBRARIES})
 endif()
 
-target_link_directories(acme_windows PRIVATE ${LIBRARY_OUTPUT_PATH})
-target_link_directories(acme_windows PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../../../archive/storage-${PLATFORM_NAME}/library/x64/basis)
-target_link_directories(acme_windows PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../../../archive/storage-${PLATFORM_NAME}/third/library/x64/basis)
 
 
-target_include_directories(acme_windows PRIVATE $ENV{HOME}/__config)
 target_include_directories(acme_windows PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../..)
 target_include_directories(acme_windows PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/..)
-target_include_directories(acme_windows PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../../../source)
-target_include_directories(acme_windows PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../../../source/app)
-target_include_directories(acme_windows PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../../../source/app/_include)
-target_include_directories(acme_windows PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../../../source/include)
-target_include_directories(acme_windows PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../../../archive/platform-${PLATFORM_NAME})
-target_include_directories(acme_windows PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../../../archive/platform-${PLATFORM_NAME}/_include)
-target_include_directories(acme_windows PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../../../archive/third-${PLATFORM_NAME}/include)
-target_include_directories(acme_windows PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../../../archive/third-${PLATFORM_NAME}/third/include)
-target_include_directories(acme_windows PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../../../archive/third-${PLATFORM_NAME}/third/include/include)
 target_include_directories(acme_windows PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
 
 
-target_compile_definitions(acme_windows PRIVATE _acme_windows_LIBRARY)
+target_compile_definitions(acme_windows PRIVATE _ACME_WINDOWS_LIBRARY)
 target_compile_definitions(acme_windows PRIVATE UNICODE)
 target_compile_definitions(acme_windows PRIVATE _UNICODE)

@@ -10,15 +10,14 @@ list(APPEND library_source
    framework.h)
 
 
-
-
-
-
 add_library(apex_windows SHARED ${library_source})
+
 
 target_precompile_headers(apex_windows PRIVATE framework.h)
 
+
 set_target_properties(apex_windows PROPERTIES LINKER_LANGUAGE CXX)
+
 
 if (MSVC)
     target_compile_options(apex_windows PRIVATE "/MD$<$<CONFIG:Debug>:d>")
@@ -38,26 +37,13 @@ elseif(LINUX)
     message("PKGCONFIG_LIBRARIES is " ${PKGCONFIG_LIBRARIES})
 endif()
 
-target_link_directories(apex_windows PRIVATE ${LIBRARY_OUTPUT_PATH})
-target_link_directories(apex_windows PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../../../archive/storage-${PLATFORM_NAME}/library/x64/basis)
-target_link_directories(apex_windows PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../../../archive/storage-${PLATFORM_NAME}/third/library/x64/basis)
-
 
 target_include_directories(apex_windows PRIVATE $ENV{HOME}/__config)
 target_include_directories(apex_windows PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../..)
 target_include_directories(apex_windows PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/..)
-target_include_directories(apex_windows PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../../../source)
-target_include_directories(apex_windows PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../../../source/app)
-target_include_directories(apex_windows PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../../../source/app/_include)
-target_include_directories(apex_windows PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../../../source/include)
-target_include_directories(apex_windows PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../../../archive/platform-${PLATFORM_NAME})
-target_include_directories(apex_windows PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../../../archive/platform-${PLATFORM_NAME}/_include)
-target_include_directories(apex_windows PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../../../archive/third-${PLATFORM_NAME}/include)
-target_include_directories(apex_windows PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../../../archive/third-${PLATFORM_NAME}/third/include)
-target_include_directories(apex_windows PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../../../archive/third-${PLATFORM_NAME}/third/include/include)
 target_include_directories(apex_windows PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
 
 
-target_compile_definitions(apex_windows PRIVATE _apex_windows_LIBRARY)
+target_compile_definitions(apex_windows PRIVATE _APEX_WINDOWS_LIBRARY)
 target_compile_definitions(apex_windows PRIVATE UNICODE)
 target_compile_definitions(apex_windows PRIVATE _UNICODE)

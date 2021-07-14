@@ -51,6 +51,6 @@ target_include_directories(aura_windows PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../.
 target_include_directories(aura_windows PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
 
 
-target_compile_definitions(aura_windows PRIVATE _aura_windows_LIBRARY)
+target_compile_definitions(aura_windows PRIVATE _AURA_WINDOWS_LIBRARY)
 target_compile_definitions(aura_windows PRIVATE UNICODE)
 target_compile_definitions(aura_windows PRIVATE _UNICODE)

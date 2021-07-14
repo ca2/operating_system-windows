@@ -10,10 +10,6 @@ list(APPEND library_source
    framework.h)
 
 
-
-
-
-
 add_library(node_windows SHARED ${library_source})
 
 target_precompile_headers(node_windows PRIVATE framework.h)
@@ -58,6 +54,6 @@ target_include_directories(node_windows PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../.
 target_include_directories(node_windows PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
 
 
-target_compile_definitions(node_windows PRIVATE _node_windows_LIBRARY)
+target_compile_definitions(node_windows PRIVATE _NODE_WINDOWS_LIBRARY)
 target_compile_definitions(node_windows PRIVATE UNICODE)
 target_compile_definitions(node_windows PRIVATE _UNICODE)
