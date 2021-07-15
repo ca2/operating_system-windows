@@ -1996,6 +1996,13 @@ namespace windowing_win32
 
       bool bNoZorder = nFlags & SWP_NOZORDER;
 
+      if (::GetWindowLong(hwnd, GWL_EXSTYLE) & WS_EX_LAYERED)
+      {
+
+         return true;
+
+      }
+
       auto bSetWindowPos = ::SetWindowPos(hwnd, hwndInsertAfter, x, y, cx, cy, nFlags);
 
       return bSetWindowPos != FALSE;

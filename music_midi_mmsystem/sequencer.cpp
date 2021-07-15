@@ -1437,6 +1437,10 @@ namespace music
             {
                ASSERT(false);
             }
+            else if (pEvent->GetFullType() < msg)
+            {
+               output_debug_string("Running Status");
+            }
             else if (pEvent->GetFullType() < sys_ex)
             {
                if (pEvent->GetType() == program_change)
@@ -1449,29 +1453,49 @@ namespace music
                   // pEvent->SetChB1(62);
                   //}
                }
+               else if (pEvent->GetType() == control_change)
+               {
+                  i32 iTrack = pEvent->GetTrack();
+                  i32 iController = pEvent->GetChB1();
+                  i32 iControllerValue = pEvent->GetChB2();
+                  if (iController >= 0 && iController < 120)
+                  {
+                   
+                     m_keyframe.rbControl[iTrack][iController] = (byte)iControllerValue;
+
+                  }
+                  //if(iProgramChange == 54)
+                  //{
+                  // pEvent->SetChB1(62);
+                  //}
+               }
                if (pEvent->GetTrack() == 9 ||
                   pEvent->GetTrack() == 15)
                {
                   //         TRACE("ReadEvents Track %d Program %d", pEvent->GetTrack(), m_psequence->m_pfile->m_keyframe.rbProgram[pEvent->GetTrack()]);
                }
-               if ((pEvent->GetType() == note_on ||
-                  pEvent->GetType() == note_off)
-                  && !((m_keyframe.rbProgram[pEvent->GetTrack()] == 0)
-                     ))
-                  //&& (pEvent->GetTrack() == 9 ||
-                  //pEvent->GetTrack() == 15)))
+               if (m_psequence->m_pfile->m_iKeyShift)
                {
-                  i32 iNotePitch = pEvent->GetNotePitch();
-                  iNotePitch += m_psequence->m_pfile->m_iKeyShift;
-                  while (iNotePitch >= 0x80)
+                  if ((pEvent->GetType() == note_on ||
+                     pEvent->GetType() == note_off)
+                     && !((m_keyframe.rbProgram[pEvent->GetTrack()] == 0)
+                        ))
+                     //&& (pEvent->GetTrack() == 9 ||
+                     //pEvent->GetTrack() == 15)))
                   {
-                     iNotePitch -= 12;
+                     i32 iNotePitch = pEvent->GetNotePitch();
+                     iNotePitch += m_psequence->m_pfile->m_iKeyShift;
+                     while (iNotePitch >= 0x80)
+                     {
+                        iNotePitch -= 12;
+                     }
+                     while (iNotePitch < 0)
+                     {
+                        iNotePitch += 12;
+                     }
+                     pEvent->SetNotePitch((byte)iNotePitch);
                   }
-                  while (iNotePitch < 0)
-                  {
-                     iNotePitch += 12;
-                  }
-                  pEvent->SetNotePitch((byte)iNotePitch);
+
                }
 
                if (3 * sizeof(u32) > cbPrerollNominalMax)
@@ -1583,9 +1607,9 @@ namespace music
                //         {
                //                break;
                //            }
-               /* Must be F0 or F7 system exclusive or FF meta
-               ** that we didn't recognize
-               */
+               ///* Must be F0 (ended with F7) system exclusive or FF meta
+               //** that we didn't recognize
+               //*/
 
                if(3 * sizeof(u32) + pEvent->GetDataSize() > cbPrerollNominalMax)
                {
@@ -1594,38 +1618,49 @@ namespace music
 
                }
 
+
+
                m_psequence->m_pfile->m_cbPendingUserEvent = (u32)pEvent->GetDataSize();
                m_psequence->m_pfile->m_hpbPendingUserEvent = pEvent->GetData();
-               m_psequence->m_pfile->m_flags &= ~InsertSysEx;
+               m_psequence->m_pfile->m_dwPendingUserEvent = ((u32)MEVT_LONGMSG) << 24;
+               //m_psequence->m_pfile->m_flags &= ~InsertSysEx;
 
-               if (pEvent->GetFullType() == sys_ex_end)
-               {
-                  m_psequence->m_pfile->m_dwPendingUserEvent = ((u32)MEVT_LONGMSG) << 24;
-               }
-               else if (pEvent->GetFullType() == sys_ex)
-               {
-                  m_psequence->m_pfile->m_flags |= InsertSysEx;
-                  ++m_psequence->m_pfile->m_cbPendingUserEvent;
+               //if (pEvent->GetFullType() == sys_ex_end)
+               //{
+               //   m_psequence->m_pfile->m_dwPendingUserEvent = ((u32)MEVT_LONGMSG) << 24;
+               //}
+               //else if (pEvent->GetFullType() == sys_ex)
+               //{
+               //   //m_psequence->m_pfile->m_flags |= InsertSysEx;
+               //   //m_psequence->m_pfile->m_cbPendingUserEvent;
 
-                  /* Falling through...
-                  */
+               //   /* Falling through...
+               //   */
 
-                  m_psequence->m_pfile->m_dwPendingUserEvent = ((u32)MEVT_LONGMSG) << 24;
-               }
+               //   m_psequence->m_pfile->m_dwPendingUserEvent = ((u32)MEVT_LONGMSG) << 24;
+
+               //}
 
                smfrc = InsertParmData(tkDelta, lpmh);
+
                if (::success != smfrc)
                {
+                  
                   TRACE("smfInsertParmData[2] %u", (u32)smfrc);
+                  
                   return smfrc;
+
                }
 
                lpdw = (LPDWORD)(lpmh->lpData + lpmh->dwBytesRecorded);
+
             }
             else // Meta
             {
-               // se o meta event possuir tkDelta > 0,
-               // insere o evento no stream para que n縊 haja perda de sincronismo
+
+               // if the meta event has tkDelta > 0,
+               // the meta event is inserted in the stream
+               // so syncing is maintained.
                if (tkDelta > 0)
                {
 
@@ -1637,10 +1672,15 @@ namespace music
                   }
 
                   InsertPadEvent(tkDelta, lpmh);
+
                   lpdw = (LPDWORD)(lpmh->lpData + lpmh->dwBytesRecorded);
+
                }
+
             }
+
             return ::success;
+
          }
 
          ::e_status     sequencer::InsertPadEvent(imedia_time tkDelta, LPMIDIHDR lpmh)
@@ -1760,7 +1800,8 @@ namespace music
             lpdw = (LPDWORD)(lpmh->lpData + lpmh->dwBytesRecorded);
 
             dwLength = lpmh->dwBufferLength - lpmh->dwBytesRecorded - 3 * sizeof(u32);
-            dwLength = minimum(dwLength, m_psequence->m_pfile->m_cbPendingUserEvent);
+            auto cbPendingUserEvent = m_psequence->m_pfile->m_cbPendingUserEvent;
+            dwLength = minimum(dwLength, cbPendingUserEvent);
 
             *lpdw++ = (u32)tkDelta;
             *lpdw++ = 0L;
@@ -1768,15 +1809,15 @@ namespace music
 
             dwRounded = (dwLength + 3) & (~3L);
 
-            if (m_psequence->m_pfile->m_flags & InsertSysEx)
-            {
-               byte* lpb = (byte*)lpdw;
-               *lpb++ = sys_ex;
-               m_psequence->m_pfile->m_flags &= ~InsertSysEx;
-               --dwLength;
-               --m_psequence->m_pfile->m_cbPendingUserEvent;
-               lpdw = (LPDWORD)lpb;
-            }
+            //if (m_psequence->m_pfile->m_flags & InsertSysEx)
+            //{
+            //   byte* lpb = (byte*)lpdw;
+            //   //*lpb++ = sys_ex;
+            //   m_psequence->m_pfile->m_flags &= ~InsertSysEx;
+            //   //dwLength;
+            //   //m_psequence->m_pfile->m_cbPendingUserEvent;
+            //   lpdw = (LPDWORD)lpb;
+            //}
 
             if (dwLength & 0x80000000L)
             {
@@ -1787,12 +1828,20 @@ namespace music
             }
 
             memcpy_dup(lpdw, m_psequence->m_pfile->m_hpbPendingUserEvent, dwLength);
-            if (0 == (m_psequence->m_pfile->m_cbPendingUserEvent -= dwLength))
+
+            m_psequence->m_pfile->m_cbPendingUserEvent -= dwLength;
+
+            if (m_psequence->m_pfile->m_cbPendingUserEvent == 0)
+            {
+
                m_psequence->m_pfile->m_dwPendingUserEvent = 0;
+
+            }
 
             lpmh->dwBytesRecorded += 3 * sizeof(u32) + dwRounded;
 
             return ::success;
+
          }
 
 

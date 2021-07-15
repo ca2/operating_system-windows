@@ -641,24 +641,36 @@ namespace windowing_win32
                {
 
 
-                  ::UpdateLayeredWindow(hwnd, m_hdcScreen, (POINT*) &point, (SIZE* ) &size, buffer.m_hdc, (POINT *) &pointSrc, rgb(0, 0, 0), &blendPixelFunction, ULW_ALPHA);
+//               }
+               //else
+               //{
 
-                  ::SetWindowPos(hwnd, nullptr,
-                     rectDrawing.left,
-                     rectDrawing.top,
-                     rectDrawing.width(),
-                     rectDrawing.height(),
-                     SWP_NOZORDER
-                     | SWP_ASYNCWINDOWPOS
-                     | SWP_FRAMECHANGED
-                     | SWP_NOREDRAW
-                     | SWP_NOCOPYBITS
-                     | SWP_DEFERERASE);
+               //   TRACE("Update discarded");
+
+               //}
+
+
+               //if (rectDrawing.size() == pimage->m_rectTag.size())
+               //{
+
+
+                  ::UpdateLayeredWindow(hwnd, m_hdcScreen, (POINT*)&point, (SIZE*)&size, buffer.m_hdc, (POINT*)&pointSrc, rgb(0, 0, 0), &blendPixelFunction, ULW_ALPHA);
+                  //::SetWindowPos(hwnd, nullptr,
+                  //   rectDrawing.left,
+                  //   rectDrawing.top,
+                  //   rectDrawing.width(),
+                  //   rectDrawing.height(),
+                  //   SWP_NOZORDER
+                  //   | SWP_ASYNCWINDOWPOS
+                  //   | SWP_FRAMECHANGED
+                  //   | SWP_NOREDRAW
+                  //   | SWP_NOCOPYBITS
+                  //   | SWP_DEFERERASE
+                  //   | SWP_NOACTIVATE);
 
                }
                else
                {
-
                   TRACE("Update discarded");
 
                }
