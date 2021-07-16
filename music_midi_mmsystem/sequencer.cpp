@@ -36,6 +36,8 @@ namespace music
 
             m_pmidi = pmultimedia->midi()->get_device_midi(strDevice);
 
+            //m_pmessageout = pmultimedia->midi()->get_message_out(strDevice);
+
             m_hstream = nullptr;
 
             m_iBufferSize = 8192;
@@ -81,6 +83,8 @@ namespace music
          ::e_status     sequencer::start_mmsystem_sequencer()
          {
 
+            //m_pmessageout->reset_all_controllers();
+
             bool bThrow = false;
 
             m_tkLastOp = m_psequence->m_tkBase;
@@ -91,12 +95,24 @@ namespace music
 
             MIDIPROPTIMEDIV         mptd;
 
+            
+
             //
             // We've successfully opened the file and all of the tracks; now
             // open the MIDI device and set the time division.
             //
             // NOTE: seqPreroll is equivalent to seek; device might already be open
             //
+
+            m_bSendXGModeOn = true;
+
+            m_bSendXGReset = true;
+
+            m_bSendXGDrumSetup1Reset = true;
+
+            m_bSendXGDrumSetup2Reset = true;
+
+            m_bSendMasterVolumeReset = true;
 
             if (m_hstream == nullptr)
             {
@@ -122,6 +138,199 @@ namespace music
                   goto mm_start_Cleanup;
 
                }
+
+               ::e_status     estatus = ::success;
+
+               if (m_bSendXGModeOn)
+               {
+
+                  const uchar XGModeOn[] =
+                  {
+                     0x00, 0x00, 0x00, 0x00,
+                     0x00, 0x00, 0x00, 0x00,
+                     0x09, 0x00, 0x00, MEVT_LONGMSG,
+                     0xF0, 0x43, 0x10, 0x4C,
+                     0x00, 0x00, 0x7E, 0x00,
+                     0xF7, 0x00, 0x00, 0x00
+                  };
+
+                  MIDIHDR midihdr;
+
+                  __zero(midihdr);
+
+                  midihdr.lpData = (LPSTR) XGModeOn;
+
+                  midihdr.dwBufferLength= sizeof(XGModeOn);
+
+                  auto e = midiOutPrepareHeader((HMIDIOUT)m_hstream, &midihdr, sizeof(midihdr));
+
+                  if (e == MMSYSERR_NOERROR)
+                  {
+
+                     auto e2 = midiOutLongMsg((HMIDIOUT)m_hstream, &midihdr, sizeof(midihdr));
+
+                     auto e3 = midiOutUnprepareHeader((HMIDIOUT)m_hstream, &midihdr, sizeof(midihdr));
+
+                  }
+
+                  m_bSendXGModeOn = false;
+                  
+                  sleep(75_ms);
+
+               }
+
+               if (!m_bSendXGModeOn && m_bSendXGReset)
+               {
+
+                  const uchar XGModeReset[] =
+                  {
+                     0x00, 0x00, 0x00, 0x00,
+                     0x00, 0x00, 0x00, 0x00,
+                     0x09, 0x00, 0x00, MEVT_LONGMSG,
+                     0xF0, 0x43, 0x10, 0x4C,
+                     0x00, 0x00, 0x7F, 0x00,
+                     0xF7, 0x00, 0x00, 0x00
+                  };
+
+                  MIDIHDR midihdr;
+
+                  __zero(midihdr);
+
+                  midihdr.lpData = (LPSTR)XGModeReset;
+
+                  midihdr.dwBufferLength = sizeof(XGModeReset);
+
+                  auto e = midiOutPrepareHeader((HMIDIOUT)m_hstream, &midihdr, sizeof(midihdr));
+
+                  if (e == MMSYSERR_NOERROR)
+                  {
+
+                     auto e2 = midiOutLongMsg((HMIDIOUT)m_hstream, &midihdr, sizeof(midihdr));
+
+                     auto e3 = midiOutUnprepareHeader((HMIDIOUT)m_hstream, &midihdr, sizeof(midihdr));
+
+                  }
+
+                  m_bSendXGReset = false;
+
+                  sleep(75_ms);
+
+               }
+
+               if (!m_bSendXGModeOn && !m_bSendXGReset && m_bSendXGDrumSetup1Reset)
+               {
+
+                  const uchar XGDrumSetup1Reset[] =
+                  {
+                     0x00, 0x00, 0x01, 0x00,
+                     0x00, 0x00, 0x00, 0x00,
+                     0x09, 0x00, 0x00, MEVT_LONGMSG,
+                     0xF0, 0x43, 0x10, 0x4C,
+                     0x00, 0x00, 0x7D, 0x00,
+                     0xF7, 0x00, 0x00, 0x00
+                  };
+
+                  MIDIHDR midihdr;
+
+                  __zero(midihdr);
+
+                  midihdr.lpData = (LPSTR)XGDrumSetup1Reset;
+
+                  midihdr.dwBufferLength = sizeof(XGDrumSetup1Reset);
+
+                  auto e = midiOutPrepareHeader((HMIDIOUT)m_hstream, &midihdr, sizeof(midihdr));
+
+                  if (e == MMSYSERR_NOERROR)
+                  {
+
+                     auto e2 = midiOutLongMsg((HMIDIOUT)m_hstream, &midihdr, sizeof(midihdr));
+
+                     auto e3 = midiOutUnprepareHeader((HMIDIOUT)m_hstream, &midihdr, sizeof(midihdr));
+
+                  }
+
+                  m_bSendXGDrumSetup1Reset = false;
+
+                  sleep(75_ms);
+
+               }
+
+               if (!m_bSendXGModeOn && !m_bSendXGReset && !m_bSendXGDrumSetup1Reset && m_bSendXGDrumSetup2Reset)
+               {
+
+                  const uchar XGDrumSetup2Reset[] =
+                  {
+                     0x00, 0x00, 0x01, 0x00,
+                     0x00, 0x00, 0x00, 0x00,
+                     0x0c, 0x00, 0x00, MEVT_LONGMSG,
+                     0xF0, 0x43, 0x10, 0x4C,
+                     0x00, 0x00, 0x7D, 0x01,
+                     0xF7, 0x00, 0x00, 0x00
+                  };
+
+                  MIDIHDR midihdr;
+
+                  __zero(midihdr);
+
+                  midihdr.lpData = (LPSTR)XGDrumSetup2Reset;
+
+                  midihdr.dwBufferLength = sizeof(XGDrumSetup2Reset);
+
+                  auto e = midiOutPrepareHeader((HMIDIOUT)m_hstream, &midihdr, sizeof(midihdr));
+
+                  if (e == MMSYSERR_NOERROR)
+                  {
+
+                     auto e2 = midiOutLongMsg((HMIDIOUT)m_hstream, &midihdr, sizeof(midihdr));
+
+                     auto e3 = midiOutUnprepareHeader((HMIDIOUT)m_hstream, &midihdr, sizeof(midihdr));
+
+                  }
+
+                  m_bSendXGDrumSetup2Reset = false;
+
+                  sleep(75_ms);
+
+               }
+
+               if (!m_bSendXGModeOn && !m_bSendXGReset && !m_bSendXGDrumSetup1Reset && !m_bSendXGDrumSetup2Reset && m_bSendMasterVolumeReset)
+               {
+                  // MASTER VOLUME
+
+                  const uchar MasterVolume[] =
+                  {
+                     0x00, 0x00, 0x01, 0x00,
+                     0x00, 0x00, 0x00, 0x00,
+                     0x08, 0x00, 0x00, MEVT_LONGMSG,
+                     0xF0, 0x7F, 0x7F, 0x04,
+                     0x01, 0x00, 0x64, 0xF7
+                  };
+
+                  MIDIHDR midihdr;
+
+                  __zero(midihdr);
+
+                  midihdr.lpData = (LPSTR)MasterVolume;
+
+                  midihdr.dwBufferLength = sizeof(MasterVolume);
+
+                  auto e = midiOutPrepareHeader((HMIDIOUT)m_hstream, &midihdr, sizeof(midihdr));
+
+                  if (e == MMSYSERR_NOERROR)
+                  {
+
+                     auto e2 = midiOutLongMsg((HMIDIOUT)m_hstream, &midihdr, sizeof(midihdr));
+
+                     auto e3 = midiOutUnprepareHeader((HMIDIOUT)m_hstream, &midihdr, sizeof(midihdr));
+
+                  }
+
+                  m_bSendMasterVolumeReset = false;
+
+                  sleep(20_ms);
+
+               }
+
 
                estatus = translate_os_result(midiOutSetVolume((HMIDIOUT)m_hstream, 0xFFFF));
 
@@ -643,7 +852,7 @@ namespace music
 
             lpmidihdr->dwBytesRecorded = 0;
 
-            ::e_status     estatus = ::success;
+            ::e_status estatus = ::success;
 
             if (m_psequence->is_in_operation())
             {
@@ -672,7 +881,7 @@ namespace music
                else if (m_psequence->m_eoperation == operation_preroll)
                {
 
-                  while(lpmidihdr->dwBufferLength - lpmidihdr->dwBytesRecorded > 16)
+                  while (lpmidihdr->dwBufferLength - lpmidihdr->dwBytesRecorded > 16)
                   {
 
                      if (m_iPrerollPhase < 0)
