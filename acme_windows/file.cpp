@@ -394,12 +394,18 @@ namespace windows
       return pos;
    }
 
+
    void file::flush()
    {
+
       ASSERT_VALID(this);
 
       if (m_handleFile == INVALID_HANDLE_VALUE || !(m_dwAccessMode & GENERIC_WRITE))
+      {
+
          return;
+
+      }
 
       if (!::FlushFileBuffers((HANDLE)m_handleFile))
       {
@@ -409,6 +415,13 @@ namespace windows
          if (dwLastError == ERROR_INVALID_HANDLE
             || dwLastError == ERROR_ACCESS_DENIED)
          {
+
+         }
+         else if (dwLastError == ERROR_NO_SYSTEM_RESOURCES)
+         {
+
+            output_debug_string("Insufficient system resources exist to complete the requested service.");
+
          }
          else
          {

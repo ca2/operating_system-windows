@@ -159,6 +159,10 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_core_photo", "..\..\..\source\app-core\photo\photo.vcxproj", "{32AFCA36-804D-4FC9-9D86-6EB6655B8EC0}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_core_picture", "..\..\..\source\app-core\picture\picture.vcxproj", "{D7D8298D-3E23-4C53-8520-42891E665165}"
+	ProjectSection(ProjectDependencies) = postProject
+		{C1CCDF2E-9F27-45D3-B67A-B2EEB1754E72} = {C1CCDF2E-9F27-45D3-B67A-B2EEB1754E72}
+		{D79C7DDB-A727-4B91-803E-41C4431693D6} = {D79C7DDB-A727-4B91-803E-41C4431693D6}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
