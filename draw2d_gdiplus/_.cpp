@@ -68,11 +68,13 @@ CLASS_DECL_DRAW2D_GDIPLUS ::e_status terminate_gdiplus()
       ::acme::del(g_pgdiplusStartupInput);
       ::acme::del(g_pgdiplusStartupOutput);
 
+
    }
 
    return ::success;
 
 }
+
 
 
 

@@ -11,7 +11,7 @@ namespace draw2d_gdiplus
    public:
 
 
-      ::Gdiplus::Matrix *           m_pm;
+      //::Gdiplus::Matrix             m_matrix;
       ::Gdiplus::Graphics *         m_pgraphics;
       ::Gdiplus::GraphicsPath *     m_ppath;
       ::Gdiplus::GraphicsPath *     m_ppathPaint;

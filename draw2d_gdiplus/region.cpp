@@ -114,7 +114,11 @@ namespace draw2d_gdiplus
       switch(m_eregion)
       {
       case ::draw2d::e_region_none:
+      {
+
          return new Gdiplus::Region();
+
+      }
       case ::draw2d::e_region_rect:
          return get_rectangle(pgraphics);
       case ::draw2d::e_region_ellipse:

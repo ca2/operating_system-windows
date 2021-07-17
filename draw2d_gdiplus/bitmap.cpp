@@ -103,7 +103,7 @@ namespace draw2d_gdiplus
    }
 
 
-   bool bitmap::create_bitmap(::draw2d::graphics * pgraphics, const ::size_i32 & size, void **ppvBits, int * stride)
+   bool bitmap::create_bitmap(::draw2d::graphics* pgraphics, const ::size_i32& size, void** ppvBits, int* stride)
    {
 
       if (size == m_size)
@@ -123,7 +123,7 @@ namespace draw2d_gdiplus
       info.bmiHeader.biCompression = BI_RGB;
       info.bmiHeader.biSizeImage = size.area() * sizeof(COLORREF);
 
-      const BITMAPINFO * pbmi = &info;
+      const BITMAPINFO* pbmi = &info;
 
       UNREFERENCED_PARAMETER(pgraphics);
 
@@ -242,13 +242,20 @@ namespace draw2d_gdiplus
    {
       //return attach(::LoadBitmap(nullptr, MAKEINTRESOURCE(nIDBitmap)));
       return false;
+
    }
+
+
    bool bitmap::CreateCompatibleBitmap(::draw2d::graphics * pgraphics, i32 nWidth, i32 nHeight)
    {
 
-      ::acme::del(m_pbitmap);
+      {
 
-      m_pbitmap = new ::Gdiplus::Bitmap(nWidth, nHeight, Gdiplus::PixelOffsetModeHighQuality);
+         ::acme::del(m_pbitmap);
+
+         m_pbitmap = new ::Gdiplus::Bitmap(nWidth, nHeight, Gdiplus::PixelOffsetModeHighQuality);
+
+      }
 
       m_osdata[0] = m_pbitmap;
 

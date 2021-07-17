@@ -152,8 +152,6 @@ namespace draw2d_gdiplus
       m_ewritetextrendering  = ::write_text::e_rendering_none;
       m_dFontFactor     = 1.0;
 
-      m_pm = new Gdiplus::Matrix();
-
    }
 
 
@@ -185,8 +183,6 @@ namespace draw2d_gdiplus
 
    graphics::~graphics()
    {
-
-      ::acme::del(m_pm);
 
       close_graphics();
 
@@ -2625,7 +2621,6 @@ namespace draw2d_gdiplus
       ASSERT(m_hdc != nullptr);
 
       delete m_pgraphics;
-
 
       return ::EndPage(m_hdc);
 
@@ -5647,7 +5642,7 @@ namespace draw2d_gdiplus
 
 //#undef new
 
-      Gdiplus::Region * pCharRangeRegions = new Gdiplus::Region[count];
+      Gdiplus::Region* pCharRangeRegions = new Gdiplus::Region[count];
 
 //#define new ACME_NEW
 
@@ -5727,7 +5722,7 @@ namespace draw2d_gdiplus
 
 //#undef new
 
-      Gdiplus::Region * pCharRangeRegions = new Gdiplus::Region[count];
+      Gdiplus::Region* pCharRangeRegions = new Gdiplus::Region[count];
 
 //#define new ACME_NEW
 
@@ -5995,7 +5990,8 @@ namespace draw2d_gdiplus
 
 //#undef new
 
-      Gdiplus::Region * pCharRangeRegions = new Gdiplus::Region[count];
+      Gdiplus::Region* pCharRangeRegions = new Gdiplus::Region[count];
+
 
 //#define new ACME_NEW
 
@@ -6035,8 +6031,12 @@ namespace draw2d_gdiplus
 
       delete [] pCharRangeRegions;
 
-      if(pregion == nullptr)
+      if (pregion == nullptr)
+      {
+
          return false;
+
+      }
 
       Gdiplus::RectF rectBound;
 
