@@ -1582,6 +1582,23 @@ namespace windowing_win32
    }
 
 
+   ::e_status window::bring_to_front()
+   {
+
+      HWND hwnd = get_hwnd();
+
+      if (!::BringWindowToTop(hwnd))
+      {
+
+         return ::error_failed;
+
+      }
+
+      return ::success;
+
+   }
+
+
    ::e_status window::set_mouse_capture()
    {
 
@@ -1999,7 +2016,9 @@ namespace windowing_win32
       if (::GetWindowLong(hwnd, GWL_EXSTYLE) & WS_EX_LAYERED)
       {
 
-         return true;
+         nFlags |= SWP_NOMOVE;
+
+         nFlags |= SWP_NOSIZE;
 
       }
 

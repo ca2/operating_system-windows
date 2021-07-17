@@ -587,7 +587,7 @@ namespace windowing_win32
 
             //size.cy = 200;
 
-            //::SetWindowPos(get_hwnd(), NULL, point.x, point.y, size.cx, size.cy, SWP_NOZORDER);
+            //::SetWindowPos(get_hwnd(), HWND_TOPMOST, point.x, point.y, size.cx, size.cy, SWP_NOZORDER);
 
             string strType = ::str::demangle(m_pimpl->m_puserinteraction->type_name());
 

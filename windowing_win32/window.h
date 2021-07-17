@@ -87,6 +87,8 @@ namespace windowing_win32
 
       virtual ::e_status set_active_window() override;
 
+      ::e_status bring_to_front() override;
+
       virtual ::e_status set_foreground_window() override;
 
       virtual ::e_status set_mouse_capture() override;
