@@ -34,6 +34,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "acme_windows_common", "..\.
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "apex_windows_common", "..\..\platform-windows_common\apex_windows_common\apex_windows_common.vcxproj", "{A094E038-D195-4400-82CE-44A7EDF91B78}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "hello", "..\..\..\source\console\hello\hello.vcxproj", "{21A3EC8F-2012-4D5C-8DBC-0BC11FD36940}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		basis|Win32 = basis|Win32
@@ -248,6 +250,26 @@ Global
 		{A094E038-D195-4400-82CE-44A7EDF91B78}.stage|Win32.Build.0 = stage|Win32
 		{A094E038-D195-4400-82CE-44A7EDF91B78}.stage|x64.ActiveCfg = stage|x64
 		{A094E038-D195-4400-82CE-44A7EDF91B78}.stage|x64.Build.0 = stage|x64
+		{21A3EC8F-2012-4D5C-8DBC-0BC11FD36940}.basis|Win32.ActiveCfg = basis|Win32
+		{21A3EC8F-2012-4D5C-8DBC-0BC11FD36940}.basis|Win32.Build.0 = basis|Win32
+		{21A3EC8F-2012-4D5C-8DBC-0BC11FD36940}.basis|x64.ActiveCfg = basis|x64
+		{21A3EC8F-2012-4D5C-8DBC-0BC11FD36940}.basis|x64.Build.0 = basis|x64
+		{21A3EC8F-2012-4D5C-8DBC-0BC11FD36940}.cover|Win32.ActiveCfg = cover|Win32
+		{21A3EC8F-2012-4D5C-8DBC-0BC11FD36940}.cover|Win32.Build.0 = cover|Win32
+		{21A3EC8F-2012-4D5C-8DBC-0BC11FD36940}.cover|x64.ActiveCfg = cover|x64
+		{21A3EC8F-2012-4D5C-8DBC-0BC11FD36940}.cover|x64.Build.0 = cover|x64
+		{21A3EC8F-2012-4D5C-8DBC-0BC11FD36940}.cube_basis|Win32.ActiveCfg = cube_basis|Win32
+		{21A3EC8F-2012-4D5C-8DBC-0BC11FD36940}.cube_basis|Win32.Build.0 = cube_basis|Win32
+		{21A3EC8F-2012-4D5C-8DBC-0BC11FD36940}.cube_basis|x64.ActiveCfg = cube_basis|x64
+		{21A3EC8F-2012-4D5C-8DBC-0BC11FD36940}.cube_basis|x64.Build.0 = cube_basis|x64
+		{21A3EC8F-2012-4D5C-8DBC-0BC11FD36940}.cube_stage|Win32.ActiveCfg = cube_stage|Win32
+		{21A3EC8F-2012-4D5C-8DBC-0BC11FD36940}.cube_stage|Win32.Build.0 = cube_stage|Win32
+		{21A3EC8F-2012-4D5C-8DBC-0BC11FD36940}.cube_stage|x64.ActiveCfg = cube_stage|x64
+		{21A3EC8F-2012-4D5C-8DBC-0BC11FD36940}.cube_stage|x64.Build.0 = cube_stage|x64
+		{21A3EC8F-2012-4D5C-8DBC-0BC11FD36940}.stage|Win32.ActiveCfg = stage|Win32
+		{21A3EC8F-2012-4D5C-8DBC-0BC11FD36940}.stage|Win32.Build.0 = stage|Win32
+		{21A3EC8F-2012-4D5C-8DBC-0BC11FD36940}.stage|x64.ActiveCfg = stage|x64
+		{21A3EC8F-2012-4D5C-8DBC-0BC11FD36940}.stage|x64.Build.0 = stage|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

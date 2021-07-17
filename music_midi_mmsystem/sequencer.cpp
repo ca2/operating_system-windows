@@ -36,6 +36,8 @@ namespace music
 
             m_pmidi = pmultimedia->midi()->get_device_midi(strDevice);
 
+            //m_pmessageout = pmultimedia->midi()->get_message_out(strDevice);
+
             m_hstream = nullptr;
 
             m_iBufferSize = 8192;
@@ -81,6 +83,8 @@ namespace music
          ::e_status     sequencer::start_mmsystem_sequencer()
          {
 
+            //m_pmessageout->reset_all_controllers();
+
             bool bThrow = false;
 
             m_tkLastOp = m_psequence->m_tkBase;
@@ -91,12 +95,24 @@ namespace music
 
             MIDIPROPTIMEDIV         mptd;
 
+            
+
             //
             // We've successfully opened the file and all of the tracks; now
             // open the MIDI device and set the time division.
             //
             // NOTE: seqPreroll is equivalent to seek; device might already be open
             //
+
+            m_bSendXGModeOn = true;
+
+            m_bSendXGReset = true;
+
+            m_bSendXGDrumSetup1Reset = true;
+
+            m_bSendXGDrumSetup2Reset = true;
+
+            m_bSendMasterVolumeReset = true;
 
             if (m_hstream == nullptr)
             {
@@ -122,6 +138,199 @@ namespace music
                   goto mm_start_Cleanup;
 
                }
+
+               ::e_status     estatus = ::success;
+
+               if (m_bSendXGModeOn)
+               {
+
+                  const uchar XGModeOn[] =
+                  {
+                     0x00, 0x00, 0x00, 0x00,
+                     0x00, 0x00, 0x00, 0x00,
+                     0x09, 0x00, 0x00, MEVT_LONGMSG,
+                     0xF0, 0x43, 0x10, 0x4C,
+                     0x00, 0x00, 0x7E, 0x00,
+                     0xF7, 0x00, 0x00, 0x00
+                  };
+
+                  MIDIHDR midihdr;
+
+                  __zero(midihdr);
+
+                  midihdr.lpData = (LPSTR) XGModeOn;
+
+                  midihdr.dwBufferLength= sizeof(XGModeOn);
+
+                  auto e = midiOutPrepareHeader((HMIDIOUT)m_hstream, &midihdr, sizeof(midihdr));
+
+                  if (e == MMSYSERR_NOERROR)
+                  {
+
+                     auto e2 = midiOutLongMsg((HMIDIOUT)m_hstream, &midihdr, sizeof(midihdr));
+
+                     auto e3 = midiOutUnprepareHeader((HMIDIOUT)m_hstream, &midihdr, sizeof(midihdr));
+
+                  }
+
+                  m_bSendXGModeOn = false;
+                  
+                  sleep(75_ms);
+
+               }
+
+               if (!m_bSendXGModeOn && m_bSendXGReset)
+               {
+
+                  const uchar XGModeReset[] =
+                  {
+                     0x00, 0x00, 0x00, 0x00,
+                     0x00, 0x00, 0x00, 0x00,
+                     0x09, 0x00, 0x00, MEVT_LONGMSG,
+                     0xF0, 0x43, 0x10, 0x4C,
+                     0x00, 0x00, 0x7F, 0x00,
+                     0xF7, 0x00, 0x00, 0x00
+                  };
+
+                  MIDIHDR midihdr;
+
+                  __zero(midihdr);
+
+                  midihdr.lpData = (LPSTR)XGModeReset;
+
+                  midihdr.dwBufferLength = sizeof(XGModeReset);
+
+                  auto e = midiOutPrepareHeader((HMIDIOUT)m_hstream, &midihdr, sizeof(midihdr));
+
+                  if (e == MMSYSERR_NOERROR)
+                  {
+
+                     auto e2 = midiOutLongMsg((HMIDIOUT)m_hstream, &midihdr, sizeof(midihdr));
+
+                     auto e3 = midiOutUnprepareHeader((HMIDIOUT)m_hstream, &midihdr, sizeof(midihdr));
+
+                  }
+
+                  m_bSendXGReset = false;
+
+                  sleep(75_ms);
+
+               }
+
+               if (!m_bSendXGModeOn && !m_bSendXGReset && m_bSendXGDrumSetup1Reset)
+               {
+
+                  const uchar XGDrumSetup1Reset[] =
+                  {
+                     0x00, 0x00, 0x01, 0x00,
+                     0x00, 0x00, 0x00, 0x00,
+                     0x09, 0x00, 0x00, MEVT_LONGMSG,
+                     0xF0, 0x43, 0x10, 0x4C,
+                     0x00, 0x00, 0x7D, 0x00,
+                     0xF7, 0x00, 0x00, 0x00
+                  };
+
+                  MIDIHDR midihdr;
+
+                  __zero(midihdr);
+
+                  midihdr.lpData = (LPSTR)XGDrumSetup1Reset;
+
+                  midihdr.dwBufferLength = sizeof(XGDrumSetup1Reset);
+
+                  auto e = midiOutPrepareHeader((HMIDIOUT)m_hstream, &midihdr, sizeof(midihdr));
+
+                  if (e == MMSYSERR_NOERROR)
+                  {
+
+                     auto e2 = midiOutLongMsg((HMIDIOUT)m_hstream, &midihdr, sizeof(midihdr));
+
+                     auto e3 = midiOutUnprepareHeader((HMIDIOUT)m_hstream, &midihdr, sizeof(midihdr));
+
+                  }
+
+                  m_bSendXGDrumSetup1Reset = false;
+
+                  sleep(75_ms);
+
+               }
+
+               if (!m_bSendXGModeOn && !m_bSendXGReset && !m_bSendXGDrumSetup1Reset && m_bSendXGDrumSetup2Reset)
+               {
+
+                  const uchar XGDrumSetup2Reset[] =
+                  {
+                     0x00, 0x00, 0x01, 0x00,
+                     0x00, 0x00, 0x00, 0x00,
+                     0x0c, 0x00, 0x00, MEVT_LONGMSG,
+                     0xF0, 0x43, 0x10, 0x4C,
+                     0x00, 0x00, 0x7D, 0x01,
+                     0xF7, 0x00, 0x00, 0x00
+                  };
+
+                  MIDIHDR midihdr;
+
+                  __zero(midihdr);
+
+                  midihdr.lpData = (LPSTR)XGDrumSetup2Reset;
+
+                  midihdr.dwBufferLength = sizeof(XGDrumSetup2Reset);
+
+                  auto e = midiOutPrepareHeader((HMIDIOUT)m_hstream, &midihdr, sizeof(midihdr));
+
+                  if (e == MMSYSERR_NOERROR)
+                  {
+
+                     auto e2 = midiOutLongMsg((HMIDIOUT)m_hstream, &midihdr, sizeof(midihdr));
+
+                     auto e3 = midiOutUnprepareHeader((HMIDIOUT)m_hstream, &midihdr, sizeof(midihdr));
+
+                  }
+
+                  m_bSendXGDrumSetup2Reset = false;
+
+                  sleep(75_ms);
+
+               }
+
+               if (!m_bSendXGModeOn && !m_bSendXGReset && !m_bSendXGDrumSetup1Reset && !m_bSendXGDrumSetup2Reset && m_bSendMasterVolumeReset)
+               {
+                  // MASTER VOLUME
+
+                  const uchar MasterVolume[] =
+                  {
+                     0x00, 0x00, 0x01, 0x00,
+                     0x00, 0x00, 0x00, 0x00,
+                     0x08, 0x00, 0x00, MEVT_LONGMSG,
+                     0xF0, 0x7F, 0x7F, 0x04,
+                     0x01, 0x00, 0x64, 0xF7
+                  };
+
+                  MIDIHDR midihdr;
+
+                  __zero(midihdr);
+
+                  midihdr.lpData = (LPSTR)MasterVolume;
+
+                  midihdr.dwBufferLength = sizeof(MasterVolume);
+
+                  auto e = midiOutPrepareHeader((HMIDIOUT)m_hstream, &midihdr, sizeof(midihdr));
+
+                  if (e == MMSYSERR_NOERROR)
+                  {
+
+                     auto e2 = midiOutLongMsg((HMIDIOUT)m_hstream, &midihdr, sizeof(midihdr));
+
+                     auto e3 = midiOutUnprepareHeader((HMIDIOUT)m_hstream, &midihdr, sizeof(midihdr));
+
+                  }
+
+                  m_bSendMasterVolumeReset = false;
+
+                  sleep(20_ms);
+
+               }
+
 
                estatus = translate_os_result(midiOutSetVolume((HMIDIOUT)m_hstream, 0xFFFF));
 
@@ -643,7 +852,7 @@ namespace music
 
             lpmidihdr->dwBytesRecorded = 0;
 
-            ::e_status     estatus = ::success;
+            ::e_status estatus = ::success;
 
             if (m_psequence->is_in_operation())
             {
@@ -672,7 +881,7 @@ namespace music
                else if (m_psequence->m_eoperation == operation_preroll)
                {
 
-                  while(lpmidihdr->dwBufferLength - lpmidihdr->dwBytesRecorded > 16)
+                  while (lpmidihdr->dwBufferLength - lpmidihdr->dwBytesRecorded > 16)
                   {
 
                      if (m_iPrerollPhase < 0)
@@ -1437,6 +1646,10 @@ namespace music
             {
                ASSERT(false);
             }
+            else if (pEvent->GetFullType() < msg)
+            {
+               output_debug_string("Running Status");
+            }
             else if (pEvent->GetFullType() < sys_ex)
             {
                if (pEvent->GetType() == program_change)
@@ -1449,29 +1662,49 @@ namespace music
                   // pEvent->SetChB1(62);
                   //}
                }
+               else if (pEvent->GetType() == control_change)
+               {
+                  i32 iTrack = pEvent->GetTrack();
+                  i32 iController = pEvent->GetChB1();
+                  i32 iControllerValue = pEvent->GetChB2();
+                  if (iController >= 0 && iController < 120)
+                  {
+                   
+                     m_keyframe.rbControl[iTrack][iController] = (byte)iControllerValue;
+
+                  }
+                  //if(iProgramChange == 54)
+                  //{
+                  // pEvent->SetChB1(62);
+                  //}
+               }
                if (pEvent->GetTrack() == 9 ||
                   pEvent->GetTrack() == 15)
                {
                   //         TRACE("ReadEvents Track %d Program %d", pEvent->GetTrack(), m_psequence->m_pfile->m_keyframe.rbProgram[pEvent->GetTrack()]);
                }
-               if ((pEvent->GetType() == note_on ||
-                  pEvent->GetType() == note_off)
-                  && !((m_keyframe.rbProgram[pEvent->GetTrack()] == 0)
-                     ))
-                  //&& (pEvent->GetTrack() == 9 ||
-                  //pEvent->GetTrack() == 15)))
+               if (m_psequence->m_pfile->m_iKeyShift)
                {
-                  i32 iNotePitch = pEvent->GetNotePitch();
-                  iNotePitch += m_psequence->m_pfile->m_iKeyShift;
-                  while (iNotePitch >= 0x80)
+                  if ((pEvent->GetType() == note_on ||
+                     pEvent->GetType() == note_off)
+                     && !((m_keyframe.rbProgram[pEvent->GetTrack()] == 0)
+                        ))
+                     //&& (pEvent->GetTrack() == 9 ||
+                     //pEvent->GetTrack() == 15)))
                   {
-                     iNotePitch -= 12;
+                     i32 iNotePitch = pEvent->GetNotePitch();
+                     iNotePitch += m_psequence->m_pfile->m_iKeyShift;
+                     while (iNotePitch >= 0x80)
+                     {
+                        iNotePitch -= 12;
+                     }
+                     while (iNotePitch < 0)
+                     {
+                        iNotePitch += 12;
+                     }
+                     pEvent->SetNotePitch((byte)iNotePitch);
                   }
-                  while (iNotePitch < 0)
-                  {
-                     iNotePitch += 12;
-                  }
-                  pEvent->SetNotePitch((byte)iNotePitch);
+
                }
 
                if (3 * sizeof(u32) > cbPrerollNominalMax)
@@ -1583,9 +1816,9 @@ namespace music
                //         {
                //                break;
                //            }
-               /* Must be F0 or F7 system exclusive or FF meta
-               ** that we didn't recognize
-               */
+               ///* Must be F0 (ended with F7) system exclusive or FF meta
+               //** that we didn't recognize
+               //*/
 
                if(3 * sizeof(u32) + pEvent->GetDataSize() > cbPrerollNominalMax)
                {
@@ -1594,38 +1827,49 @@ namespace music
 
                }
 
+
+
                m_psequence->m_pfile->m_cbPendingUserEvent = (u32)pEvent->GetDataSize();
                m_psequence->m_pfile->m_hpbPendingUserEvent = pEvent->GetData();
-               m_psequence->m_pfile->m_flags &= ~InsertSysEx;
+               m_psequence->m_pfile->m_dwPendingUserEvent = ((u32)MEVT_LONGMSG) << 24;
+               //m_psequence->m_pfile->m_flags &= ~InsertSysEx;
 
-               if (pEvent->GetFullType() == sys_ex_end)
-               {
-                  m_psequence->m_pfile->m_dwPendingUserEvent = ((u32)MEVT_LONGMSG) << 24;
-               }
-               else if (pEvent->GetFullType() == sys_ex)
-               {
-                  m_psequence->m_pfile->m_flags |= InsertSysEx;
-                  ++m_psequence->m_pfile->m_cbPendingUserEvent;
+               //if (pEvent->GetFullType() == sys_ex_end)
+               //{
+               //   m_psequence->m_pfile->m_dwPendingUserEvent = ((u32)MEVT_LONGMSG) << 24;
+               //}
+               //else if (pEvent->GetFullType() == sys_ex)
+               //{
+               //   //m_psequence->m_pfile->m_flags |= InsertSysEx;
+               //   //m_psequence->m_pfile->m_cbPendingUserEvent;
 
-                  /* Falling through...
-                  */
+               //   /* Falling through...
+               //   */
 
-                  m_psequence->m_pfile->m_dwPendingUserEvent = ((u32)MEVT_LONGMSG) << 24;
-               }
+               //   m_psequence->m_pfile->m_dwPendingUserEvent = ((u32)MEVT_LONGMSG) << 24;
+
+               //}
 
                smfrc = InsertParmData(tkDelta, lpmh);
+
                if (::success != smfrc)
                {
+                  
                   TRACE("smfInsertParmData[2] %u", (u32)smfrc);
+                  
                   return smfrc;
+
                }
 
                lpdw = (LPDWORD)(lpmh->lpData + lpmh->dwBytesRecorded);
+
             }
             else // Meta
             {
-               // se o meta event possuir tkDelta > 0,
-               // insere o evento no stream para que n縊 haja perda de sincronismo
+
+               // if the meta event has tkDelta > 0,
+               // the meta event is inserted in the stream
+               // so syncing is maintained.
                if (tkDelta > 0)
                {
 
@@ -1637,10 +1881,15 @@ namespace music
                   }
 
                   InsertPadEvent(tkDelta, lpmh);
+
                   lpdw = (LPDWORD)(lpmh->lpData + lpmh->dwBytesRecorded);
+
                }
+
             }
+
             return ::success;
+
          }
 
          ::e_status     sequencer::InsertPadEvent(imedia_time tkDelta, LPMIDIHDR lpmh)
@@ -1760,7 +2009,8 @@ namespace music
             lpdw = (LPDWORD)(lpmh->lpData + lpmh->dwBytesRecorded);
 
             dwLength = lpmh->dwBufferLength - lpmh->dwBytesRecorded - 3 * sizeof(u32);
-            dwLength = minimum(dwLength, m_psequence->m_pfile->m_cbPendingUserEvent);
+            auto cbPendingUserEvent = m_psequence->m_pfile->m_cbPendingUserEvent;
+            dwLength = minimum(dwLength, cbPendingUserEvent);
 
             *lpdw++ = (u32)tkDelta;
             *lpdw++ = 0L;
@@ -1768,15 +2018,15 @@ namespace music
 
             dwRounded = (dwLength + 3) & (~3L);
 
-            if (m_psequence->m_pfile->m_flags & InsertSysEx)
-            {
-               byte* lpb = (byte*)lpdw;
-               *lpb++ = sys_ex;
-               m_psequence->m_pfile->m_flags &= ~InsertSysEx;
-               --dwLength;
-               --m_psequence->m_pfile->m_cbPendingUserEvent;
-               lpdw = (LPDWORD)lpb;
-            }
+            //if (m_psequence->m_pfile->m_flags & InsertSysEx)
+            //{
+            //   byte* lpb = (byte*)lpdw;
+            //   //*lpb++ = sys_ex;
+            //   m_psequence->m_pfile->m_flags &= ~InsertSysEx;
+            //   //dwLength;
+            //   //m_psequence->m_pfile->m_cbPendingUserEvent;
+            //   lpdw = (LPDWORD)lpb;
+            //}
 
             if (dwLength & 0x80000000L)
             {
@@ -1787,12 +2037,20 @@ namespace music
             }
 
             memcpy_dup(lpdw, m_psequence->m_pfile->m_hpbPendingUserEvent, dwLength);
-            if (0 == (m_psequence->m_pfile->m_cbPendingUserEvent -= dwLength))
+
+            m_psequence->m_pfile->m_cbPendingUserEvent -= dwLength;
+
+            if (m_psequence->m_pfile->m_cbPendingUserEvent == 0)
+            {
+
                m_psequence->m_pfile->m_dwPendingUserEvent = 0;
+
+            }
 
             lpmh->dwBytesRecorded += 3 * sizeof(u32) + dwRounded;
 
             return ::success;
+
          }
 
 

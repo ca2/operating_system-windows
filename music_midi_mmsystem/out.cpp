@@ -77,6 +77,67 @@ namespace music
          }
 
 
+         ::e_status     out::send_long_message(const block& block)
+         {
+
+            MIDIHDR midihdr;
+
+            __zero(midihdr);
+
+            memory m;
+
+            DWORD dwRounded = (block.get_size() + 3) & ~3;
+
+            m.set_size(3 * sizeof(u32) + dwRounded);
+
+            midihdr.lpData = (LPSTR) m.get_data();
+
+            midihdr.dwBufferLength = m.get_size();
+
+            //midihdr.lpData = (LPSTR) block.get_data();
+
+            //midihdr.dwBufferLength = block.get_size();
+
+            auto lpdw = (LPDWORD)m.get_data();
+
+            m.zero();
+
+            *lpdw++ = 0;
+            *lpdw++ = 0;
+            *lpdw++ = ((MEVT_LONGMSG << 24) & 0xff000000) | (block.get_size() & 0xffffff);
+            memcpy(lpdw, block.get_data(), block.get_size());
+
+            auto e = midiOutPrepareHeader(
+               m_hmidiout,
+               &midihdr,
+               sizeof(midihdr)
+            );
+
+            if (e == MMSYSERR_NOERROR)
+            {
+
+               auto e2 = midiOutLongMsg(m_hmidiout, &midihdr, sizeof(midihdr));
+
+               auto e3 = midiOutUnprepareHeader(
+                  m_hmidiout,
+                  &midihdr,
+                  sizeof(midihdr)
+               );
+
+            }
+
+            return ::multimedia::mmsystem::translate(e);
+
+         }
+
+         void out::sysex(const block& block)
+         {
+
+            send_long_message(block);
+
+         }
+
+
       } //
 
 

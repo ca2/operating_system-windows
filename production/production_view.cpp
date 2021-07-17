@@ -551,7 +551,7 @@ namespace production
 
          __pointer(pane_view) pview = GetTypedParent < pane_view > ();
 
-         pview->set_cur_tab_by_id("filemanager::tabbed");
+         pview->set_current_tab_by_id("filemanager::tabbed");
 
          __pointer(::filemanager::document) pdocument = pview->m_pfilemanagerTabbed;
 
@@ -575,7 +575,7 @@ namespace production
          if(m_iStep == 2)
          {
             __pointer(pane_view) pview = GetTypedParent < pane_view > ();
-            pview->set_cur_tab_by_id(MAIN_IMPACT);
+            pview->set_current_tab_by_id(MAIN_IMPACT);
             m_pproduction->step();
          }
       }

@@ -48,7 +48,7 @@ namespace production
       add_tab("Production", MAIN_IMPACT);
       add_tab("Options", impact_configuration);
 
-      set_cur_tab_by_id(MAIN_IMPACT);
+      set_current_tab_by_id(MAIN_IMPACT);
 
    }
 
@@ -223,7 +223,7 @@ namespace production
    void pane_view::_001OnMenuMessage(::message::message * pmessage)
    {
       UNREFERENCED_PARAMETER(pmessage);
-      set_cur_tab_by_id(m_pimpactdataOld->m_id);
+      set_current_tab_by_id(m_pimpactdataOld->m_id);
    }
 
    void pane_view::install_message_routing(::channel * pchannel)
@@ -288,7 +288,7 @@ namespace production
       __pointer(::user::message) pusermessage(pmessage);
       if(pusermessage->m_wparam == 1)
       {
-         set_cur_tab_by_id("tabbed_file_manager");
+         set_current_tab_by_id("tabbed_file_manager");
       }
    }
 

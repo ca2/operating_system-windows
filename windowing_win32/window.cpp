@@ -1582,6 +1582,23 @@ namespace windowing_win32
    }
 
 
+   ::e_status window::bring_to_front()
+   {
+
+      HWND hwnd = get_hwnd();
+
+      if (!::BringWindowToTop(hwnd))
+      {
+
+         return ::error_failed;
+
+      }
+
+      return ::success;
+
+   }
+
+
    ::e_status window::set_mouse_capture()
    {
 
@@ -1995,6 +2012,15 @@ namespace windowing_win32
       HWND hwndInsertAfter = pwindowing->zorder_to_hwnd(zorder);
 
       bool bNoZorder = nFlags & SWP_NOZORDER;
+
+      if (::GetWindowLong(hwnd, GWL_EXSTYLE) & WS_EX_LAYERED)
+      {
+
+         nFlags |= SWP_NOMOVE;
+
+         nFlags |= SWP_NOSIZE;
+
+      }
 
       auto bSetWindowPos = ::SetWindowPos(hwnd, hwndInsertAfter, x, y, cx, cy, nFlags);
 

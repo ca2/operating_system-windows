@@ -36,6 +36,11 @@ namespace music
             i32                        m_iBuffersInMMSYSTEM;
 
             imedia_time                m_tkLastOp;
+            bool                       m_bSendXGModeOn;
+            bool                       m_bSendXGReset;
+            bool                       m_bSendMasterVolumeReset;
+            bool                       m_bSendXGDrumSetup1Reset;
+            bool                       m_bSendXGDrumSetup2Reset;
 
 
             sequencer( sequence * psequence, const string & strDevice);

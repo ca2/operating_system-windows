@@ -48,7 +48,7 @@ namespace backup
       add_tab("backup", impact_backup);
       add_tab("Options", OPTIONS_IMPACT);
 
-      set_cur_tab_by_id(impact_backup);
+      set_current_tab_by_id(impact_backup);
 
    }
 

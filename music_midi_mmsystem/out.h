@@ -32,6 +32,9 @@ namespace music
             virtual ::e_status     close() override;
 
             ::e_status     send_short_message(::music::midi::e_message emessage, int iChannel, int iData1, int iData2);
+            ::e_status     send_long_message(const block& block);
+
+            virtual void sysex(const block& block);
 
          };
 
