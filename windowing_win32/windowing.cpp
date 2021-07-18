@@ -941,16 +941,16 @@ namespace windowing_win32
    ::e_status windowing::windowing_branch(const ::routine& routine)
    {
 
-      auto transport = branch(routine);
+      auto estatus = m_psystem->m_papexsystem->post(routine);
 
-      if (!transport)
+      if (!estatus)
       {
 
-         return transport.estatus();
+         return estatus;
 
       }
 
-      return ::success;
+      return estatus;
 
    }
 
