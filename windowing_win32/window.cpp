@@ -4807,12 +4807,12 @@ namespace windowing_win32
    //}
 
 
-   void window::_001OnEraseBkgnd(::message::message * pmessage)
-   {
-      __pointer(::message::erase_bkgnd) perasebkgnd(pmessage);
-      perasebkgnd->m_bRet = true;
-      perasebkgnd->set_result(true);
-   }
+   // void window::_001OnEraseBkgnd(::message::message * pmessage)
+   // {
+   //    __pointer(::message::erase_bkgnd) perasebkgnd(pmessage);
+   //    perasebkgnd->m_bRet = true;
+   //    perasebkgnd->set_result(true);
+   // }
 
 
    void window::track_mouse_hover()
