@@ -5310,7 +5310,7 @@ namespace windows
       }
 
       if (
-         message == e_message_set_cursor ||
+         //message == e_message_set_cursor ||
          message == e_message_mouse_move ||
          message == e_message_non_client_mouse_move ||
          message == e_message_mouse_wheel ||

@@ -13,8 +13,11 @@ namespace windowing_win32
    public:
 
 
-      map < ::size_i32, HICON >    m_iconmap;
+      map < ::size_i32, HICON >              m_iconmap;
 
+      ::file::path                           m_pathProcessed;
+
+      map < ::size_i32, image_pointer >      m_imagemap;
 
       icon();
       virtual ~icon();
@@ -27,9 +30,11 @@ namespace windowing_win32
 
       virtual bool add_icon(HICON hicon);
 
-      virtual void get_sizes(array < concrete < ::size_i32 > > & a) override;
+      void get_sizes(array < concrete < ::size_i32 > > & a) override;
 
-      virtual image_pointer create_image(const concrete < ::size_i32 > & size);
+      image_pointer get_image(const concrete < ::size_i32 > & size) override;
+
+      virtual image_pointer _create_image(const concrete < ::size_i32 >& size);
 
 
       void _erase_all();

@@ -12,6 +12,9 @@ namespace windowing_win32
    {
    public:
 
+
+      //HICON                                     m_hiconSmall;
+      //HICON                                     m_hiconBig;
       bool                                      m_bTrackMouseLeave : 1;
       WNDPROC                                   m_pfnSuper;
       //UINT                                    m_uiMessage;
@@ -20,7 +23,7 @@ namespace windowing_win32
       __pointer(::windows::interaction_impl)    m_pimpl2;
       ::millis                                  m_millisLastMouseMove;
       ::point_i32                               m_pointMouseMove;
-
+      
 
 
 
@@ -208,6 +211,7 @@ namespace windowing_win32
       DECLARE_MESSAGE_HANDLER(_001OnWindowPosChanged);
       //DECLARE_MESSAGE_HANDLER(_001OnGetMinMaxInfo);
       DECLARE_MESSAGE_HANDLER(_001OnEnable);
+      DECLARE_MESSAGE_HANDLER(on_message_get_icon);
 
 
       //virtual void win_update_graphics();

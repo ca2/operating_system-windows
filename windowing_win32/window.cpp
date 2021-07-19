@@ -225,6 +225,7 @@ namespace windowing_win32
 
 
       MESSAGE_LINK(e_message_destroy, pchannel, this, &window::on_message_destroy);
+      MESSAGE_LINK(WM_GETICON, pchannel, this, &window::on_message_get_icon);
 
       //MESSAGE_LINK(e_message_create, pchannel, pimpl, &::user::interaction_impl::_001OnPrioCreate);
 
@@ -4814,6 +4815,54 @@ namespace windowing_win32
    //    perasebkgnd->set_result(true);
    // }
 
+   
+   void window::on_message_get_icon(::message::message * pmessage)
+   {
+
+      if (pmessage->m_wparam == ICON_BIG)
+      {
+
+         if (m_picon)
+         {
+
+            ::size_i32 size;
+
+            size.cx = GetSystemMetrics(SM_CXICON);
+            size.cy = GetSystemMetrics(SM_CYICON);
+
+            HICON hicon = (HICON)m_picon->get_os_data(size);
+
+            pmessage->m_lresult = (LRESULT)hicon;
+
+            pmessage->m_bRet = true;
+
+         }
+
+      }
+      else if (pmessage->m_wparam == ICON_SMALL
+         || pmessage->m_wparam == ICON_SMALL2)
+      {
+
+         if (m_picon)
+         {
+
+            ::size_i32 size;
+
+            size.cx = GetSystemMetrics(SM_CXSMICON);
+            size.cy = GetSystemMetrics(SM_CYSMICON);
+
+            HICON hicon = (HICON)m_picon->get_os_data(size);
+
+            pmessage->m_lresult = (LRESULT)hicon;
+
+            pmessage->m_bRet = true;
+
+         }
+
+      }
+
+   }
+
 
    void window::track_mouse_hover()
    {
@@ -5275,36 +5324,59 @@ namespace windowing_win32
    ::e_status window::set_icon(::windowing::icon * picon)
    {
 
-      HICON hiconSmall = nullptr;
+      auto estatus = ::windowing::window::set_icon(picon);
 
-      HICON hiconBig = nullptr;
+      if (!estatus)
+      {
+
+         return estatus;
+
+      }
+
+      return estatus;
+
+    /*  m_hiconSmall = nullptr;
+
+      m_hiconBig = nullptr;
 
       if (::is_set(picon))
       {
 
-         hiconSmall = (HICON) picon->get_os_data(size_i32(16, 16));
+         ::size_i32 sizeSmall;
+           
+         sizeSmall.cx = GetSystemMetrics(SM_CXSMICON);
+         sizeSmall.cy = GetSystemMetrics(SM_CYSMICON);
 
-         hiconBig = (HICON) picon->get_os_data(size_i32(16, 16));
+         m_hiconSmall = (HICON) picon->get_os_data(sizeSmall);
 
-      }
+         ::size_i32 sizeBig;
 
-      SendMessage(get_hwnd(), (::u32)WM_SETICON, ICON_SMALL, 0);
+         sizeBig.cx = GetSystemMetrics(SM_CXICON);
+         sizeBig.cy = GetSystemMetrics(SM_CYICON);
 
-      SendMessage(get_hwnd(), (::u32)WM_SETICON, ICON_BIG, 0);
+         m_hiconBig = (HICON) picon->get_os_data(sizeBig);
 
-      if (hiconSmall)
-      {
+      }*/
 
-         SendMessage(get_hwnd(), (::u32)WM_SETICON, ICON_SMALL, (lparam)hiconSmall);
+      // HWND hwnd = get_hwnd();
 
-      }
+      //SendMessage(hwnd, WM_SETICON, ICON_SMALL, 0);
 
-      if (hiconBig)
-      {
+      //SendMessage(hwnd, WM_SETICON, ICON_BIG, 0);
 
-         SendMessage(get_hwnd(), (::u32)WM_SETICON, ICON_BIG, (lparam)hiconBig);
+      //if (hiconSmall)
+      //{
 
-      }
+      //   ::SendMessage(hwnd, WM_SETICON, ICON_SMALL, (LPARAM)hiconSmall);
+
+      //}
+
+      ////if (hiconBig)
+      //{
+
+      //   ::SendMessage(hwnd, WM_SETICON, ICON_BIG, (LPARAM)hiconBig);
+
+      //}
 
       return true;
 
@@ -6029,18 +6101,17 @@ namespace windowing_win32
 
       ::rectangle_i32 rectangleClient;
 
-      //{
-
-      //   // create message queue ? for GetCapture to work?
-
-      //   MSG msg;
-
-      //   ::PeekMessage(&msg, nullptr, 0, 0xffffffff, FALSE);
-
-      //}
-
       while (ptask->task_get_run())
       {
+
+         if (m_millisLastMouseMove.elapsed() < 20_ms)
+         {
+
+            ::sleep(30_ms);
+
+            continue;
+
+         }
 
          auto hwndCapture = windowing::_get_mouse_capture(itask);
 
@@ -6054,20 +6125,13 @@ namespace windowing_win32
          if (hwndCapture == hwnd)
          {
 
-            sleep(50_ms);
+            ::sleep(50_ms);
 
             continue;
 
          }
 
          ::GetCursorPos((POINT *)&pointCursor);
-
-         if (m_millisLastMouseMove.elapsed() < 20_ms)
-         {
-
-            continue;
-
-         }
 
          pointMouseMove = pointCursor;
 
@@ -6076,7 +6140,7 @@ namespace windowing_win32
          if (m_pointMouseMove == pointMouseMove)
          {
 
-            sleep(30_ms);
+            ::sleep(30_ms);
 
             continue;
 
@@ -6094,7 +6158,7 @@ namespace windowing_win32
 
             }
 
-            sleep(100_ms);
+            ::sleep(100_ms);
 
             continue;
 
@@ -6104,7 +6168,13 @@ namespace windowing_win32
 
          m_millisLastMouseMove.Now();
 
-         pimpl->send_message(e_message_mouse_move, 0, lparam);
+         //pimpl->m_puserinteraction->post_message(e_message_mouse_move, 0, lparam);
+         
+         pimpl->m_puserinteraction->send_message(e_message_mouse_move, 0, lparam);
+
+         //::SendMessage(hwnd, WM_MOUSEMOVE, 0, lparam);
+
+         ::sleep(5_ms);
 
       }
 

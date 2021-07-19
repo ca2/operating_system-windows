@@ -42,7 +42,21 @@ namespace windowing_win32
    void * icon::get_os_data(const ::size_i32 & size) const
    {
 
-      return m_iconmap[size];
+      auto & hicon = ((icon *)this)->m_iconmap[size];
+
+      if (!hicon)
+      {
+
+         if (m_pathProcessed.has_char())
+         {
+
+            hicon = (HICON) ::LoadImageW(nullptr, wstring(m_pathProcessed), IMAGE_ICON, size.cx, size.cy, LR_LOADFROMFILE);
+
+         }
+
+      }
+
+      return hicon;
 
    }
 
@@ -62,31 +76,33 @@ namespace windowing_win32
    ::e_status icon::load_file(const string & strPath)
    {
 
-      auto strProcessedPath = m_pcontext->m_papexcontext->defer_process_matter_path(strPath);
+      m_pathProcessed = m_pcontext->m_papexcontext->defer_process_matter_path(strPath);
 
-      int_array ia;
+      //int_array ia;
 
-      ia.add(16);
-      ia.add(24);
-      ia.add(32);
-      ia.add(48);
-      ia.add(256);
+      //ia.add(16);
+      //ia.add(24);
+      //ia.add(32);
+      //ia.add(48);
+      //ia.add(256);
 
-      for (auto i : ia)
-      {
+      //for (auto i : ia)
+      //{
 
-         HICON hicon = (HICON) ::LoadImageW(nullptr, wstring(strProcessedPath), IMAGE_ICON, i, i, LR_LOADFROMFILE);
+      //   HICON hicon = (HICON) ::LoadImageW(nullptr, wstring(strProcessedPath), IMAGE_ICON, i, i, LR_LOADFROMFILE);
 
-         if (hicon != nullptr)
-         {
+      //   if (hicon != nullptr)
+      //   {
 
-            m_iconmap[::size_i32(i, i)] = hicon;
+      //      m_iconmap[::size_i32(i, i)] = hicon;
 
-         }
+      //   }
 
-      }
+      //}
 
-      return !m_iconmap.is_empty();
+      return m_pathProcessed.has_char();
+
+//      return !m_iconmap.is_empty();
 
 //#else
 //
@@ -130,11 +146,29 @@ namespace windowing_win32
 
    }
 
-
-   __pointer(::image) icon::create_image(const concrete < ::size_i32 > & size)
+   image_pointer icon::get_image(const concrete < ::size_i32 >& size)
    {
 
-      HICON hicon = m_iconmap[size];
+      auto& pimage  = m_imagemap[size];
+
+      if (pimage)
+      {
+
+         return pimage;
+
+      }
+
+      pimage = _create_image(size);
+
+      return pimage;
+
+   }
+
+
+   image_pointer icon::_create_image(const concrete < ::size_i32 > & size)
+   {
+
+      HICON hicon = (HICON) get_os_data(size);
 
       if (::is_null(hicon))
       {
@@ -191,56 +225,56 @@ namespace windowing_win32
 
          }
 
-         bool bAllZeroAlpha = true;
-         bool bTheresUint32 = false;
+         //bool bAllZeroAlpha = true;
+         //bool bTheresUint32 = false;
 
-         pixmap.map();
+         //pixmap.map();
 
-         int area = size.area();
+         //int area = size.area();
 
-         auto pc = pixmap.colorref();
-         byte * pA = &((byte *)pc)[3];
+         //auto pc = pixmap.colorref();
+         //byte * pA = &((byte *)pc)[3];
 
-         for (int i = 0; i < area; i++)
-         {
-            if (*pc != 0)
-            {
-               bTheresUint32 = true;
-            }
-            if (*pA != 0)
-            {
-               bAllZeroAlpha = false;
-               break;
-            }
-            pc++;
-            pA += 4;
-         }
+         //for (int i = 0; i < area; i++)
+         //{
+         //   if (*pc != 0)
+         //   {
+         //      bTheresUint32 = true;
+         //   }
+         //   if (*pA != 0)
+         //   {
+         //      bAllZeroAlpha = false;
+         //      break;
+         //   }
+         //   pc++;
+         //   pA += 4;
+         //}
 
-         if (bAllZeroAlpha && bTheresUint32)
-         {
+         //if (bAllZeroAlpha && bTheresUint32)
+         //{
 
-            pc = pixmap.colorref();
-            pA = &((byte *)pc)[3];
+         //   pc = pixmap.colorref();
+         //   pA = &((byte *)pc)[3];
 
-            for (int i = 0; i < area; i++)
-            {
-               if (*pc != 0)
-               {
-                  *pA = 255;
-               }
-               pc++;
-               pA += 4;
-            }
+         //   for (int i = 0; i < area; i++)
+         //   {
+         //      if (*pc != 0)
+         //      {
+         //         *pA = 255;
+         //      }
+         //      pc++;
+         //      pA += 4;
+         //   }
 
-            ::SelectObject(hdc, hbitmapOld);
+         //   ::SelectObject(hdc, hbitmapOld);
 
-            pimage.create(size);
+            pimage->create(size);
 
             pimage->map();
 
             ::copy_colorref(pimage, pixmap);
 
-         }
+         //}
 
       }
       catch (...)

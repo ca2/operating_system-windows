@@ -343,7 +343,7 @@ namespace production
    void view::on_message_set_cursor(::message::message * pmessage)
    {
 
-      __pointer(::message::mouse) pmouse(pmessage);
+      auto pmouse = pmessage->m_pmouse;
 
       pmouse->m_ecursor = cursor_arrow;
 
@@ -406,7 +406,7 @@ namespace production
    void view::_001OnLButtonDown(::message::message * pmessage)
    {
       UNREFERENCED_PARAMETER(pmessage);
-      //    __pointer(::message::mouse) pmouse(pmessage);
+      //    auto pmouse = pmessage->m_pmouse;
 
 //      i32 iHitArea = hit_test(pmouse->m_point);
 
@@ -414,7 +414,7 @@ namespace production
 
    void view::_001OnLButtonUp(::message::message * pmessage)
    {
-      __pointer(::message::mouse) pmouse(pmessage);
+      auto pmouse = pmessage->m_pmouse;
 
       auto point = screen_to_client(pmouse->m_point);
       
@@ -434,7 +434,7 @@ namespace production
    void view::on_message_right_button_up(::message::message * pmessage)
    {
       UNREFERENCED_PARAMETER(pmessage);
-      //    __pointer(::message::mouse) pmouse(pmessage);
+      //    auto pmouse = pmessage->m_pmouse;
 
 //      i32 iHitArea = hit_test(pmouse->m_point);
       /*   {
