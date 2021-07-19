@@ -572,7 +572,7 @@ namespace windowing_win32
 
       }
 
-      pusermessage->set(pmsg->oswindow, pwindow, pmsg->m_id, pmsg->wParam, pmsg->lParam, pmsg->pt);
+      pusermessage->set(pmsg->oswindow, pwindow, pmsg->m_id, pmsg->wParam, pmsg->lParam);
 
       return pusermessage;
 
@@ -655,18 +655,7 @@ namespace windowing_win32
 
       }
 
-      GUITHREADINFO info = {};
-
-      info.cbSize = sizeof(GUITHREADINFO);
-
-      HWND hwndCapture = nullptr;
-
-      if (GetGUIThreadInfo((DWORD)itask, &info))
-      {
-
-         hwndCapture = info.hwndCapture;
-
-      }
+      auto hwndCapture = _get_mouse_capture(itask);
 
       if(!hwndCapture)
       {
@@ -685,6 +674,27 @@ namespace windowing_win32
       auto pwindow = _window(hwndCapture);
 
       return pwindow;
+
+   }
+
+
+   HWND windowing::_get_mouse_capture(itask_t itask)
+   {
+
+      GUITHREADINFO info = {};
+
+      info.cbSize = sizeof(GUITHREADINFO);
+
+      HWND hwndCapture = nullptr;
+
+      if (GetGUIThreadInfo((DWORD)itask, &info))
+      {
+
+         hwndCapture = info.hwndCapture;
+
+      }
+
+      return hwndCapture;
 
    }
 

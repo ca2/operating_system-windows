@@ -1240,7 +1240,7 @@ namespace draw2d_gdi
          GdiFlush();
 
 
-         if(m_ealphamode == ::draw2d::alpha_mode_blend)
+         if(m_ealphamode == ::draw2d::e_alpha_mode_blend)
          {
             ::point_i32 pointDst(x, y);
             ::size_i32 size(nWidth, nHeight);
@@ -1644,7 +1644,7 @@ namespace draw2d_gdi
 
          GDI_DIB(pimage.m_p)->process_blend(&brush, (int) x + point.x, (int) y + point.y, m_ealphamode, m_pimage);
 
-         if(m_ealphamode == ::draw2d::alpha_mode_blend)
+         if(m_ealphamode == ::draw2d::e_alpha_mode_blend)
          {
 
             pimage->dc_select();
@@ -2656,7 +2656,7 @@ namespace draw2d_gdi
 
          GDI_DIB(pimage.m_p)->process_blend(&brush, rectangle.left, rectangle.top, m_ealphamode, m_pimage);
 
-         if(m_ealphamode == ::draw2d::alpha_mode_blend)
+         if(m_ealphamode == ::draw2d::e_alpha_mode_blend)
          {
 
             GDI_GRAPHICS(pimage->g())->SetViewportOrg(0, 0);
@@ -2824,7 +2824,7 @@ namespace draw2d_gdi
 
          GDI_DIB(pimage.m_p)->process_blend(&pen, rectangle.left, rectangle.top, m_ealphamode, m_pimage);
 
-         if(m_ealphamode == ::draw2d::alpha_mode_blend)
+         if(m_ealphamode == ::draw2d::e_alpha_mode_blend)
          {
 
             GDI_GRAPHICS(pimage->g())->SetViewportOrg(0, 0);
@@ -2902,7 +2902,7 @@ namespace draw2d_gdi
             if(GDI_DIB(pimage.m_p)->process_blend(&brush, rectangle.left, rectangle.top, m_ealphamode, m_pimage))
             {
 
-               if(m_ealphamode == ::draw2d::alpha_mode_blend)
+               if(m_ealphamode == ::draw2d::e_alpha_mode_blend)
                {
 
                   GDI_GRAPHICS(pimage->g())->SetViewportOrg(0, 0);
@@ -2942,7 +2942,7 @@ namespace draw2d_gdi
             if(GDI_DIB(pimage.m_p)->process_blend(&pen, rectangle.left, rectangle.top, m_ealphamode, m_pimage))
             {
 
-               if(m_ealphamode == ::draw2d::alpha_mode_blend)
+               if(m_ealphamode == ::draw2d::e_alpha_mode_blend)
                {
 
                   GDI_GRAPHICS(pimage->g())->SetViewportOrg(0, 0);

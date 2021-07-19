@@ -110,7 +110,7 @@ namespace windows
       //DECLARE_MESSAGE_HANDLER(_001OnPrint);
       //DECLARE_MESSAGE_HANDLER(_001OnSetFocus);
       //DECLARE_MESSAGE_HANDLER(on_message_non_client_calculate_size);
-      //DECLARE_MESSAGE_HANDLER(on_message_set_cursor);
+      ////DECLARE_MESSAGE_HANDLER(on_message_set_cursor);
       //DECLARE_MESSAGE_HANDLER(_001OnEraseBkgnd);
       //DECLARE_MESSAGE_HANDLER(on_message_move);
       //DECLARE_MESSAGE_HANDLER(on_message_size);

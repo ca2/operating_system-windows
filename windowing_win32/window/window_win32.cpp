@@ -100,10 +100,6 @@ LRESULT CALLBACK __window_procedure(HWND hwnd, UINT message, WPARAM wparam, LPAR
 
    lresult lresult = 0;
 
-   ::point_i32 pointCursor;
-
-   ::GetCursorPos((POINT*)&pointCursor);
-
    if (message == WM_KEYDOWN)
    {
 
@@ -191,44 +187,55 @@ LRESULT CALLBACK __window_procedure(HWND hwnd, UINT message, WPARAM wparam, LPAR
 
       pimpl->m_lparamLastMouseMove = lparam;
 
-      if (pimpl->m_pointCursor == pointCursor)
+      ::point_i32 pointMouseMove(GET_X_LPARAM(lparam), GET_Y_LPARAM(lparam));
+
+      if (pimpl->m_pointMouseMove == pointMouseMove)
       {
 
          return 0;
 
       }
 
-      pimpl->m_pointCursor = pointCursor;
+      pimpl->m_pointMouseMove = pointMouseMove;
+
+      if (pwindow->m_pointMouseMove == pointMouseMove)
+      {
+
+         return 0;
+
+      }
+
+      pwindow->m_millisLastMouseMove.Now();
 
    }
    else if (message == e_message_timer)
    {
 
-      if (wparam == e_timer_transparent_mouse_event)
-      {
+      //if (wparam == e_timer_transparent_mouse_event)
+      //{
 
-         if (pimpl->m_pointCursor == pointCursor)
-         {
+      //   if (pimpl->m_pointMouseMove == pointMouseMove)
+      //   {
 
-            return 0;
+      //      return 0;
 
-         }
+      //   }
 
-         pimpl->m_pointCursor = pointCursor;
+      //   pimpl->m_pointCursor = pointCursor;
 
-         lparam = MAKELPARAM(pointCursor.x, pointCursor.y);
+      //   lparam = MAKELPARAM(pointCursor.x, pointCursor.y);
 
-         pimpl->call_message_handler(e_message_mouse_move, 0, lparam);
+      //   pimpl->call_message_handler(e_message_mouse_move, 0, lparam);
 
-      }
-      else
-      {
+      //}
+      //else
+      //{
 
-         // ignoring Timer Event
+      //   // ignoring Timer Event
 
-         output_debug_string("iTE\n");
+      //   output_debug_string("iTE\n");
 
-      }
+      //}
 
       return 0;
 
@@ -237,7 +244,7 @@ LRESULT CALLBACK __window_procedure(HWND hwnd, UINT message, WPARAM wparam, LPAR
    if (pimpl->m_bDestroyImplOnly || ::is_null(puserinteraction))
    {
 
-      auto pmessage = pimpl->get_message((enum_message)message, wparam, lparam, pointCursor);
+      auto pmessage = pimpl->get_message((enum_message)message, wparam, lparam);
 
       try
       {
@@ -282,7 +289,7 @@ LRESULT CALLBACK __window_procedure(HWND hwnd, UINT message, WPARAM wparam, LPAR
 
       }
 
-      auto pmessage = puserinteraction->get_message((enum_message)message, wparam, lparam, pointCursor);
+      auto pmessage = puserinteraction->get_message((enum_message)message, wparam, lparam);
 
       try
       {
