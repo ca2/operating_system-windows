@@ -56,6 +56,61 @@ namespace windowing_win32
 
       }
 
+      if (!hicon)
+      {
+
+         if (!m_iconmap.is_empty())
+         {
+
+            ::size_i32 size1 = size;
+
+            for (auto& hicon1 : m_iconmap.values())
+            {
+
+               auto info = MyGetIconInfo(hicon1);
+
+               if (info.nWidth > size1.cx
+                  && info.nHeight > size1.cy)
+               {
+
+                  size1.cx = info.nWidth;
+                  size1.cy = info.nHeight;
+                  hicon = hicon1;
+
+               }
+
+            }
+
+            if (!hicon)
+            {
+
+               size1.cx = 0;
+               size1.cy = 0;
+
+               for (auto& hicon1 : m_iconmap.values())
+               {
+
+                  auto info = MyGetIconInfo(hicon1);
+
+                  if (info.nWidth > size1.cx
+                     && info.nHeight > size1.cy)
+                  {
+
+                     size1.cx = info.nWidth;
+                     size1.cy = info.nHeight;
+                     hicon = hicon1;
+
+                  }
+
+               }
+
+            }
+
+
+         }
+
+      }
+
       return hicon;
 
    }
@@ -224,6 +279,8 @@ namespace windowing_win32
             return nullptr;
 
          }
+
+         ::GdiFlush();
 
          //bool bAllZeroAlpha = true;
          //bool bTheresUint32 = false;

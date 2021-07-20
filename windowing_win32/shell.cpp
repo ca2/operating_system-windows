@@ -852,7 +852,7 @@ namespace windowing_win32
    }
 
 
-   i32 shell::impl_get_file_image(const image_key & key)
+   i32 shell::_get_file_image(const image_key & key)
    {
 
       return get_file_image(key, nullptr, key.m_cr);
@@ -1177,7 +1177,14 @@ namespace windowing_win32
 
       picon->add_icon(hicon);
 
-      iImage = m_pil[iSize]->add_icon(picon);
+      iImage = m_pil[iSize]->add(picon, iImage);
+
+      if (iImage == 14)
+      {
+
+         //iImage = m_pil[iSize]->add(picon);
+
+      }
 
       iImage = add_hover_image(iSize, iImage, crBk);
 

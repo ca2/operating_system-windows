@@ -31,13 +31,13 @@ namespace windowing_win32
 
 
       shell();
-      virtual ~shell();
+      ~shell() override;
 
 
       virtual ::e_status initialize(::object * pobject) override;
 
 
-      virtual i32 impl_get_file_image(const image_key & key) override;
+      i32 _get_file_image(const image_key & key) override;
 
 
       i32 get_file_image(image_key key, const itemidlist & pidlAbsolute, const itemidlist & pidlChild, const unichar * pcszExtra, ::color::color crBk);
@@ -71,7 +71,7 @@ namespace windowing_win32
       virtual void set_image_ico(string strIconLocation, i32 & iImage, ::color::color crBk);
       virtual void set_image_resource(string strIconLocation, i32 & iImage, const image_key & imagekey, ::color::color crBk);
 
-      virtual ::e_status finish() override;
+      ::e_status finish() override;
 
       //int shell::add_hover_image(int iSize, int iImage, ::color::color crBk)
 
