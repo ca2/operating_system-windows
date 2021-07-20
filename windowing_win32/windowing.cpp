@@ -919,7 +919,7 @@ namespace windowing_win32
    __pointer(::windowing::window) windowing::window_from_point(::aura::application * papp, const ::point_i32 & point)
    {
 
-      auto uia = *papp->m_puiptraFrame;
+      auto uia = *papp->m_puserinteractiona;
 
       hwnd_array hwnda;
 

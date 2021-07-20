@@ -5137,7 +5137,7 @@ namespace windows
       //   message == WM_IME_ENDCOMPOSITION)
       //{
 
-      //   __pointer(::message::key) pkey(pmessage);
+      //   auto pkey = pmessage->m_pkey;
 
       //   if (message == e_message_key_down)
       //   {
@@ -5542,7 +5542,7 @@ namespace windows
          
          puiFocus = m_puserinteractionFocus1;
 
-         ///__pointer(::message::key) pkey(pmessage);
+         ///auto pkey = pmessage->m_pkey;
 
          if (message == e_message_key_down)
          {
