@@ -8,7 +8,7 @@
 
 inline HMIDISTRM __hmidistream(const wparam& wparam) { return wparam.scast < HMIDISTRM >(); }
 inline LPMIDIHDR __lpmidihdr(const wparam& wparam) { return wparam.scast < LPMIDIHDR >(); }
-inline LPMIDIHDR __lpmidihdr(const lparam& lparam) { return lparam.scast < LPMIDIHDR >(); }
+inline LPMIDIHDR __lpmidihdr(const lparam& lparam) { return lparam.raw_cast < LPMIDIHDR >(); }
 
 #include "translation.h"
 
