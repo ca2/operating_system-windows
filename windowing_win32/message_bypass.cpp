@@ -84,7 +84,7 @@ namespace windowing_win32
       //   return true;
 
       //}
-      //else if (message == e_message_nchittest)
+      //else if (message == e_message_non_client_hittest)
       //{
 
       //   //output_debug_string("ht.");
@@ -139,7 +139,7 @@ namespace windowing_win32
             pimpl->m_iState1 = STATE_INPUT_LANGUAGE_CHANGING;
 
          }
-         else if (message == e_message_ncactivate && wparam == 0)
+         else if (message == e_message_non_client_activate && wparam == 0)
          {
 
             pimpl->m_iState1 = STATE_WINDOW_DEACTIVATING;
@@ -169,7 +169,7 @@ namespace windowing_win32
             return true;
 
          }
-         else if (message == e_message_ncactivate && wparam == 0)
+         else if (message == e_message_non_client_activate && wparam == 0)
          {
 
             pimpl->m_iState1 = STATE_WINDOW_DEACTIVATING;

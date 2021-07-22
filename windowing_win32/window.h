@@ -777,7 +777,7 @@ namespace windowing_win32
       //virtual void default_window_procedure(::message::message * pmessage) override;
 
 
-      //virtual void PostNcDestroy();
+      //virtual void post_non_client_destroy();
 
       //// for notifications from parent
       //virtual bool OnChildNotify(::message::message * pusermessage);

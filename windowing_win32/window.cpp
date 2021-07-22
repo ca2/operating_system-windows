@@ -297,7 +297,7 @@ namespace windowing_win32
       //if (!hook_window_create(this))
       //{
 
-      //   PostNcDestroy();
+      //   post_non_client_destroy();
 
       //   return false;
 
@@ -456,7 +456,7 @@ namespace windowing_win32
       //if (!unhook_window_create())
       //{
 
-      //   PostNcDestroy();        // cleanup if CreateWindowEx fails too soon
+      //   post_non_client_destroy();        // cleanup if CreateWindowEx fails too soon
 
       //}
 
@@ -5226,7 +5226,7 @@ namespace windowing_win32
          ::GetWindowInfo(hwnd, &wi);
 
          /* Maximized windows always have a non-client border that hangs over
-         the edge of the screen, so the size_i32 proposed by e_message_nccalcsize is
+         the edge of the screen, so the size_i32 proposed by e_message_non_client_calcsize is
          fine. Just adjust the top border to erase the u title. */
          pncsp->rgrc[0].left = client.left;
 
@@ -5269,7 +5269,7 @@ namespace windowing_win32
       else
       {
          /* For the non-maximized case, set the output const rectangle_i32 & to what it was
-         before e_message_nccalcsize modified it. This will make the client size_i32 the
+         before e_message_non_client_calcsize modified it. This will make the client size_i32 the
          same as the non-client size. */
          __copy(pncsp->rgrc[0],nonclient);
 
@@ -5550,8 +5550,8 @@ namespace windowing_win32
 //               TRACE("e_message_mouse_activate wparam=%08x lparam=%08x", pmessage->m_wparam, pmessage->m_lparam);
 //
 //               break;
-//            case e_message_ncactivate:
-//               TRACE("e_message_ncactivate wparam=%08x lparam=%08x", pmessage->m_wparam, pmessage->m_lparam);
+//            case e_message_non_client_activate:
+//               TRACE("e_message_non_client_activate wparam=%08x lparam=%08x", pmessage->m_wparam, pmessage->m_lparam);
 //
 //               break;
 //            case e_message_set_focus:
