@@ -391,7 +391,7 @@ namespace windows
 
    //   UNREFERENCED_PARAMETER(pmessage);
 
-   //   //__release(m_pthreadUserImpl OBJ_REF_DBG_COMMA_THIS);
+   //   //__release(m_pthreadUserImpl OBJECT_REF_DEBUG_COMMA_THIS);
 
    //}
 

@@ -787,7 +787,7 @@ namespace acme
 
          const i32 iImageSize = MAX_PATH * 8;
 
-         wchar_t* szImage = (wchar_t*)::memory_alloc(iImageSize * 2);
+         wchar_t* szImage = (wchar_t*)::memory_allocate(iImageSize * 2);
 
          if (EnumProcessModules(hProcess, hMods, sizeof(HMODULE) * iMaxModuleCount, &cbNeeded))
          {
@@ -806,7 +806,7 @@ namespace acme
 
          }
 
-         memory_free_dbg(szImage, 0);
+         memory_free_debug(szImage, 0);
 
          delete hMods;
 
@@ -1647,7 +1647,7 @@ namespace acme
 
          DWORD dwSize = GetEnvironmentVariableW(wstrEnvironmentVariable, nullptr, 0);
 
-         acme::memory_alloc < LPWSTR > lpwsz(dwSize + 1);
+         acme::memory_allocate < LPWSTR > lpwsz(dwSize + 1);
 
          dwSize = (DWORD)lpwsz.get_size();
 

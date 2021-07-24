@@ -16,8 +16,8 @@
 
 #include <crtdbg.h>
 #include "vld.h"
-#define memory_alloc malloc
-#define memory_realloc realloc
+#define memory_allocate malloc
+#define memory_reallocate realloc
 #define memory_free free
 #endif
 
@@ -25,8 +25,8 @@
 #define _CRTDBG_MAP_ALLOC
 
 #include <crtdbg.h>
-#define memory_alloc malloc
-#define memory_realloc realloc
+#define memory_allocate malloc
+#define memory_reallocate realloc
 #define memory_free free
 #endif
 

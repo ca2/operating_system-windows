@@ -41,7 +41,7 @@ string extract_mccdi(string str)
 
 
 
-      // pPicture = (WM_PICTURE*)memory_alloc(wLength);
+      // pPicture = (WM_PICTURE*)memory_allocate(wLength);
       mem.set_size(wLength);
 
       if (FAILED(pIWMHeaderInfo3->GetAttributeByName(

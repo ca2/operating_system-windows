@@ -32,7 +32,7 @@ namespace windowing_win32
    ULONG STDMETHODCALLTYPE window::AddRef(void)
    {
 
-      return (ULONG)add_ref(OBJ_REF_DBG_THIS);
+      return (ULONG)add_ref(OBJECT_REF_DEBUG_THIS);
 
    }
 
