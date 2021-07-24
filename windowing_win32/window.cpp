@@ -245,11 +245,11 @@ namespace windowing_win32
 
       m_pimpl2 = pimpl->m_pImpl2;
 
-      //__refer(puserinteraction->m_pthreadUserInteraction, ::get_task() OBJECT_REF_DEBUG_COMMA_THIS_FUNCTION_LINE);
+      //__refer(puserinteraction->m_pthreadUserInteraction, ::get_task() OBJECT_REFERENCE_COUNT_DEBUG_COMMA_THIS_FUNCTION_LINE);
 
       //puserinteraction->m_pthreadUserInteraction->uiptra().add(puserinteraction);
 
-      //__refer(m_pthreadUserImpl, puserinteraction->m_pthreadUserInteraction OBJECT_REF_DEBUG_COMMA_THIS_FUNCTION_LINE);
+      //__refer(m_pthreadUserImpl, puserinteraction->m_pthreadUserInteraction OBJECT_REFERENCE_COUNT_DEBUG_COMMA_THIS_FUNCTION_LINE);
 
       //m_strDebug += ::str::demangle(puserinteraction->type_name()) + ";";
 
@@ -569,7 +569,7 @@ namespace windowing_win32
 
       /// this Windows native window "holds" object to the
       /// wrapping object.
-      puserinteraction->add_ref(OBJECT_REF_DEBUG_THIS);
+      puserinteraction->increment_reference_count(OBJECT_REFERENCE_COUNT_DEBUG_THIS);
 
       puserinteraction->m_ewindowflag |= e_window_flag_window_created;
 

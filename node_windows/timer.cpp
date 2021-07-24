@@ -19,7 +19,7 @@
 //   begin();
 //   //synchronous_lock synchronouslock(mutex());
 //
-//   //add_ref(OBJECT_REF_DEBUG_ARGS);
+//   //increment_reference_count(OBJECT_REFERENCE_COUNT_DEBUG_ARGS);
 //
 //   //if(!CreateTimerQueueTimer(&m_hTimer,m_hTimerQueue,(WAITORTIMERCALLBACK)aura_timer_TimerRoutine,this,m_dwMillis,0,WT_EXECUTEONLYONCE | WT_EXECUTELONGFUNCTION))
 //   //{
@@ -96,7 +96,7 @@
 //
 //   DeleteTimerQueueTimer(m_hTimerQueue, m_hTimer, nullptr);
 //
-//   add_ref(OBJECT_REF_DEBUG_ARGS);
+//   increment_reference_count(OBJECT_REFERENCE_COUNT_DEBUG_ARGS);
 //
 //   if(!CreateTimerQueueTimer(&m_hTimer,m_hTimerQueue,(WAITORTIMERCALLBACK)aura_timer_TimerRoutine,this,m_dwMillis,0,WT_EXECUTEONLYONCE | WT_EXECUTELONGFUNCTION))
 //   {
