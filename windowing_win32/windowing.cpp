@@ -572,7 +572,7 @@ namespace windowing_win32
 
       }
 
-      pusermessage->set(pmsg->oswindow, pwindow, pmsg->m_id, pmsg->wParam, pmsg->lParam, pmsg->pt);
+      pusermessage->set(pmsg->oswindow, pwindow, pmsg->m_id, pmsg->wParam, pmsg->lParam);
 
       return pusermessage;
 
@@ -655,18 +655,7 @@ namespace windowing_win32
 
       }
 
-      GUITHREADINFO info = {};
-
-      info.cbSize = sizeof(GUITHREADINFO);
-
-      HWND hwndCapture = nullptr;
-
-      if (GetGUIThreadInfo((DWORD)itask, &info))
-      {
-
-         hwndCapture = info.hwndCapture;
-
-      }
+      auto hwndCapture = _get_mouse_capture(itask);
 
       if(!hwndCapture)
       {
@@ -685,6 +674,27 @@ namespace windowing_win32
       auto pwindow = _window(hwndCapture);
 
       return pwindow;
+
+   }
+
+
+   HWND windowing::_get_mouse_capture(itask_t itask)
+   {
+
+      GUITHREADINFO info = {};
+
+      info.cbSize = sizeof(GUITHREADINFO);
+
+      HWND hwndCapture = nullptr;
+
+      if (GetGUIThreadInfo((DWORD)itask, &info))
+      {
+
+         hwndCapture = info.hwndCapture;
+
+      }
+
+      return hwndCapture;
 
    }
 
@@ -909,7 +919,7 @@ namespace windowing_win32
    __pointer(::windowing::window) windowing::window_from_point(::aura::application * papp, const ::point_i32 & point)
    {
 
-      auto uia = *papp->m_puiptraFrame;
+      auto uia = *papp->m_puserinteractiona;
 
       hwnd_array hwnda;
 
@@ -941,16 +951,16 @@ namespace windowing_win32
    ::e_status windowing::windowing_branch(const ::routine& routine)
    {
 
-      auto transport = branch(routine);
+      auto estatus = m_psystem->m_papexsystem->post(routine);
 
-      if (!transport)
+      if (!estatus)
       {
 
-         return transport.estatus();
+         return estatus;
 
       }
 
-      return ::success;
+      return estatus;
 
    }
 

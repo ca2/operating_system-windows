@@ -90,6 +90,9 @@ namespace windowing_win32
 
       virtual ::windowing::window * get_mouse_capture(::thread * pthread) override;
 
+      
+      static HWND _get_mouse_capture(itask_t itask);
+
 
       virtual ::e_status release_mouse_capture() override;
 

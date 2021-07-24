@@ -72,6 +72,8 @@ namespace windowing_win32
 //
 //      m_window = None;
 
+      m_bTrackMouseLeave = false;
+
       m_pimpl = nullptr;
 
       m_bMessageOnlyWindow = false;
@@ -223,6 +225,7 @@ namespace windowing_win32
 
 
       MESSAGE_LINK(e_message_destroy, pchannel, this, &window::on_message_destroy);
+      MESSAGE_LINK(WM_GETICON, pchannel, this, &window::on_message_get_icon);
 
       //MESSAGE_LINK(e_message_create, pchannel, pimpl, &::user::interaction_impl::_001OnPrioCreate);
 
@@ -294,7 +297,7 @@ namespace windowing_win32
       //if (!hook_window_create(this))
       //{
 
-      //   PostNcDestroy();
+      //   post_non_client_destroy();
 
       //   return false;
 
@@ -453,7 +456,7 @@ namespace windowing_win32
       //if (!unhook_window_create())
       //{
 
-      //   PostNcDestroy();        // cleanup if CreateWindowEx fails too soon
+      //   post_non_client_destroy();        // cleanup if CreateWindowEx fails too soon
 
       //}
 
@@ -4805,16 +4808,73 @@ namespace windowing_win32
    //}
 
 
-   void window::_001OnEraseBkgnd(::message::message * pmessage)
+   // void window::_001OnEraseBkgnd(::message::message * pmessage)
+   // {
+   //    __pointer(::message::erase_bkgnd) perasebkgnd(pmessage);
+   //    perasebkgnd->m_bRet = true;
+   //    perasebkgnd->set_result(true);
+   // }
+
+   
+   void window::on_message_get_icon(::message::message * pmessage)
    {
-      __pointer(::message::erase_bkgnd) perasebkgnd(pmessage);
-      perasebkgnd->m_bRet = true;
-      perasebkgnd->set_result(true);
+
+      if (pmessage->m_wparam == ICON_BIG)
+      {
+
+         if (m_picon)
+         {
+
+            ::size_i32 size;
+
+            size.cx = GetSystemMetrics(SM_CXICON);
+            size.cy = GetSystemMetrics(SM_CYICON);
+
+            HICON hicon = (HICON)m_picon->get_os_data(size);
+
+            pmessage->m_lresult = (LRESULT)hicon;
+
+            pmessage->m_bRet = true;
+
+         }
+
+      }
+      else if (pmessage->m_wparam == ICON_SMALL
+         || pmessage->m_wparam == ICON_SMALL2)
+      {
+
+         if (m_picon)
+         {
+
+            ::size_i32 size;
+
+            size.cx = GetSystemMetrics(SM_CXSMICON);
+            size.cy = GetSystemMetrics(SM_CYSMICON);
+
+            HICON hicon = (HICON)m_picon->get_os_data(size);
+
+            pmessage->m_lresult = (LRESULT)hicon;
+
+            pmessage->m_bRet = true;
+
+         }
+
+      }
+
    }
 
 
    void window::track_mouse_hover()
    {
+
+      if (m_pimpl->m_bTransparentMouseEvents)
+      {
+
+         m_bTrackMouseLeave = true;
+
+         return;
+
+      }
 
       TRACKMOUSEEVENT tme = { sizeof(tme) };
       tme.dwFlags = TME_LEAVE;
@@ -5166,7 +5226,7 @@ namespace windowing_win32
          ::GetWindowInfo(hwnd, &wi);
 
          /* Maximized windows always have a non-client border that hangs over
-         the edge of the screen, so the size_i32 proposed by e_message_nccalcsize is
+         the edge of the screen, so the size_i32 proposed by e_message_non_client_calcsize is
          fine. Just adjust the top border to erase the u title. */
          pncsp->rgrc[0].left = client.left;
 
@@ -5209,7 +5269,7 @@ namespace windowing_win32
       else
       {
          /* For the non-maximized case, set the output const rectangle_i32 & to what it was
-         before e_message_nccalcsize modified it. This will make the client size_i32 the
+         before e_message_non_client_calcsize modified it. This will make the client size_i32 the
          same as the non-client size. */
          __copy(pncsp->rgrc[0],nonclient);
 
@@ -5264,36 +5324,59 @@ namespace windowing_win32
    ::e_status window::set_icon(::windowing::icon * picon)
    {
 
-      HICON hiconSmall = nullptr;
+      auto estatus = ::windowing::window::set_icon(picon);
 
-      HICON hiconBig = nullptr;
+      if (!estatus)
+      {
+
+         return estatus;
+
+      }
+
+      return estatus;
+
+    /*  m_hiconSmall = nullptr;
+
+      m_hiconBig = nullptr;
 
       if (::is_set(picon))
       {
 
-         hiconSmall = (HICON) picon->get_os_data(size_i32(16, 16));
+         ::size_i32 sizeSmall;
+           
+         sizeSmall.cx = GetSystemMetrics(SM_CXSMICON);
+         sizeSmall.cy = GetSystemMetrics(SM_CYSMICON);
 
-         hiconBig = (HICON) picon->get_os_data(size_i32(16, 16));
+         m_hiconSmall = (HICON) picon->get_os_data(sizeSmall);
 
-      }
+         ::size_i32 sizeBig;
 
-      SendMessage(get_hwnd(), (::u32)WM_SETICON, ICON_SMALL, 0);
+         sizeBig.cx = GetSystemMetrics(SM_CXICON);
+         sizeBig.cy = GetSystemMetrics(SM_CYICON);
 
-      SendMessage(get_hwnd(), (::u32)WM_SETICON, ICON_BIG, 0);
+         m_hiconBig = (HICON) picon->get_os_data(sizeBig);
 
-      if (hiconSmall)
-      {
+      }*/
 
-         SendMessage(get_hwnd(), (::u32)WM_SETICON, ICON_SMALL, (lparam)hiconSmall);
+      // HWND hwnd = get_hwnd();
 
-      }
+      //SendMessage(hwnd, WM_SETICON, ICON_SMALL, 0);
 
-      if (hiconBig)
-      {
+      //SendMessage(hwnd, WM_SETICON, ICON_BIG, 0);
 
-         SendMessage(get_hwnd(), (::u32)WM_SETICON, ICON_BIG, (lparam)hiconBig);
+      //if (hiconSmall)
+      //{
 
-      }
+      //   ::SendMessage(hwnd, WM_SETICON, ICON_SMALL, (LPARAM)hiconSmall);
+
+      //}
+
+      ////if (hiconBig)
+      //{
+
+      //   ::SendMessage(hwnd, WM_SETICON, ICON_BIG, (LPARAM)hiconBig);
+
+      //}
 
       return true;
 
@@ -5365,7 +5448,7 @@ namespace windowing_win32
 //         message == WM_IME_ENDCOMPOSITION)
 //      {
 //
-//         __pointer(::message::key) pkey(pmessage);
+//         auto pkey = pmessage->m_pkey;
 //
 //         if (message == e_message_key_down)
 //         {
@@ -5467,8 +5550,8 @@ namespace windowing_win32
 //               TRACE("e_message_mouse_activate wparam=%08x lparam=%08x", pmessage->m_wparam, pmessage->m_lparam);
 //
 //               break;
-//            case e_message_ncactivate:
-//               TRACE("e_message_ncactivate wparam=%08x lparam=%08x", pmessage->m_wparam, pmessage->m_lparam);
+//            case e_message_non_client_activate:
+//               TRACE("e_message_non_client_activate wparam=%08x lparam=%08x", pmessage->m_wparam, pmessage->m_lparam);
 //
 //               break;
 //            case e_message_set_focus:
@@ -5998,54 +6081,104 @@ namespace windowing_win32
    void window::_task_transparent_mouse_event()
    {
 
+      TRACE("start window::_task_transparent_mouse_event");
+
       auto ptask = ::get_task();
 
       ::point_i32 pointCursor;
 
+      ::point_i32 pointMouseMove;
+
       auto pimpl = m_pimpl;
 
+      auto pwindowing = windowing();
+
+      auto itask = m_pimpl->m_puserinteraction->m_pthreadUserInteraction->m_itask;
+
       HWND hwnd = get_hwnd();
+
+      lparam lparam;
+
+      ::rectangle_i32 rectangleClient;
 
       while (ptask->task_get_run())
       {
 
-         ::GetCursorPos((POINT *)&pointCursor);
-
-         if (m_pointCursor == pointCursor)
+         if (m_millisLastMouseMove.elapsed() < 20_ms)
          {
 
-            sleep(30_ms);
+            ::sleep(30_ms);
 
             continue;
 
          }
 
-         m_pointCursor = pointCursor;
+         auto hwndCapture = windowing::_get_mouse_capture(itask);
 
-         lparam lparam;
+         if (hwndCapture != nullptr)
+         {
 
-         ::ScreenToClient(hwnd, (POINT *)&pointCursor);
+            output_debug_string("a mouse capture");
 
-         ::rectangle_i32 rectangleClient;
+         }
+
+         if (hwndCapture == hwnd)
+         {
+
+            ::sleep(50_ms);
+
+            continue;
+
+         }
+
+         ::GetCursorPos((POINT *)&pointCursor);
+
+         pointMouseMove = pointCursor;
+
+         ::ScreenToClient(hwnd, (POINT *) &pointMouseMove);
+
+         if (m_pointMouseMove == pointMouseMove)
+         {
+
+            ::sleep(30_ms);
+
+            continue;
+
+         }
 
          ::GetClientRect(hwnd, (RECT *)&rectangleClient);
 
-         if (!rectangleClient.contains(pointCursor))
+         if (!rectangleClient.contains(pointMouseMove))
          {
 
-            sleep(100_ms);
+            if (m_bTrackMouseLeave)
+            {
+
+               m_pimpl->m_puserinteraction->post_message(e_message_mouse_leave);
+
+            }
+
+            ::sleep(100_ms);
 
             continue;
 
          }
 
-         lparam = MAKELPARAM(pointCursor.x, pointCursor.y);
+         lparam = MAKELPARAM(pointMouseMove.x, pointMouseMove.y);
 
-         //output_debug_string("transparent_mouse_event:x=" + __str(pointCursor.x) + ",y=" + __str(pointCursor.y) + "\n");
+         m_millisLastMouseMove.Now();
 
-         pimpl->send_message(e_message_mouse_move, 0, lparam);
+         //pimpl->m_puserinteraction->post_message(e_message_mouse_move, 0, lparam);
+         
+         pimpl->m_puserinteraction->send_message(e_message_mouse_move, 0, lparam);
+
+         //::SendMessage(hwnd, WM_MOUSEMOVE, 0, lparam);
+
+         ::sleep(5_ms);
 
       }
+
+      TRACE("end window::_task_transparent_mouse_event");
 
    }
 
@@ -6055,187 +6188,51 @@ namespace windowing_win32
 
       UNREFERENCED_PARAMETER(pmessage);
 
-      //__release(m_pthreadUserImpl OBJECT_REF_DEBUG_COMMA_THIS);
-
    }
 
-      void window::_001OnCreate(::message::message * pmessage)
+
+   void window::_001OnCreate(::message::message * pmessage)
+   {
+
+      __pointer(::message::create) pcreate(pmessage);
+
+
       {
 
-         __pointer(::message::create) pcreate(pmessage);
+/*          DEVMODE dm;
 
-
+         if (EnumDisplaySettings(nullptr, ENUM_CURRENT_SETTINGS, &dm))
          {
 
-  /*          DEVMODE dm;
+            set_config_fps(dm.dmDisplayFrequency);
 
-            if (EnumDisplaySettings(nullptr, ENUM_CURRENT_SETTINGS, &dm))
-            {
+         }*/
 
-               set_config_fps(dm.dmDisplayFrequency);
-
-            }*/
-
-         }
+      }
 
 //         default_message_handler(pmessage);
 
-         if (m_pimpl->m_puserinteraction)
+      if (m_pimpl->m_puserinteraction)
+      {
+
+         if (m_pimpl->m_puserinteraction->is_message_only_window() || m_pimpl->m_puserinteraction.cast <::windowing_win32::system_interaction >())
          {
 
-            if (m_pimpl->m_puserinteraction->is_message_only_window() || m_pimpl->m_puserinteraction.cast <::windowing_win32::system_interaction >())
-            {
+            TRACE("good : opt out!");
 
-               TRACE("good : opt out!");
+         }
 
-            }
+         if (m_pimpl->m_puserinteraction->m_bUserPrimitiveOk)
+         {
 
-            if (m_pimpl->m_puserinteraction->m_bUserPrimitiveOk)
-            {
-
-               pcreate->m_lresult = 0;
-
-            }
+            pcreate->m_lresult = 0;
 
          }
 
       }
 
+   }
 
-
-      //void window::on_message_show_window(::message::message * pmessage)
-      //{
-
-      //   __pointer(::message::show_window) pshowwindow(pmessage);
-
-      //   if (pshowwindow->m_bShow)
-      //   {
-
-      //      output_debug_string("windows::interaction_impl::on_message_show_window bShow = true");
-
-      //   }
-      //   else
-      //   {
-
-      //      output_debug_string("windows::interaction_impl::on_message_show_window bShow = false");
-
-      //   }
-
-
-      //}
-
-
-
-
-      //void window::on_message_move(::message::message* pmessage)
-      //{
-
-      //   if (m_pimpl->m_bDestroyImplOnly)
-      //   {
-
-      //      return;
-
-      //   }
-
-      //   if (m_pimpl->m_puserinteraction->layout().m_eflag)
-      //   {
-
-      //      return;
-
-      //   }
-
-      //   __pointer(::message::move) pmove(pmessage);
-
-      //   if (m_pimpl->m_puserinteraction->layout().sketch().origin() != pmove->m_point)
-      //   {
-
-      //      if (m_pimpl->m_puserinteraction->layout().is_moving())
-      //      {
-
-      //         INFO("Window is Moving :: on_message_move");
-
-      //      }
-
-      //      m_pimpl->m_puserinteraction->layout().sketch().origin()= pmove->m_point;
-
-      //      if (m_pimpl->m_puserinteraction->layout().sketch().display() != e_display_normal)
-      //      {
-
-      //         m_pimpl->m_puserinteraction->display(e_display_normal);
-
-      //      }
-
-      //      m_pimpl->m_puserinteraction->set_reposition();
-
-      //      m_pimpl->m_puserinteraction->set_need_redraw();
-
-      //   }
-
-      //}
-
-
-      //void window::on_message_size(::message::message * pmessage)
-      //{
-
-      //   if (m_pimpl->m_bDestroyImplOnly)
-      //   {
-
-      //      return;
-
-      //   }
-
-      //   if (m_pimpl->m_puserinteraction->layout().m_eflag)
-      //   {
-
-      //      return;
-
-      //   }
-
-      //   __pointer(::message::size) psize(pmessage);
-
-      //   if (m_pimpl->m_puserinteraction->layout().sketch().size() != psize->m_size)
-      //   {
-
-      //      m_pimpl->m_puserinteraction->layout().sketch().size() = psize->m_size;
-
-      //      if (m_pimpl->m_puserinteraction->layout().sketch().display() != e_display_normal)
-      //      {
-
-      //         m_pimpl->m_puserinteraction->display(e_display_normal);
-
-      //      }
-
-      //      m_pimpl->m_puserinteraction->set_need_layout();
-
-      //      m_pimpl->m_puserinteraction->set_need_redraw();
-
-      //   }
-
-      //}
-
-   //void interaction_impl::on_message_set_cursor(::message::message * pmessage)
-   //{
-
-   //   __pointer(::user::message) pusermessage(pmessage);
-
-   //   auto psession = get_session();
-
-   //   auto pcursor = psession->get_cursor();
-
-   //   if (pcursor != nullptr && pcursor->m_ecursor != cursor_system)
-   //   {
-
-   //      pcursor->set_current(m_puserinteraction, psession);
-
-   //   }
-
-   //   pusermessage->m_lresult = 1;
-
-   //   pusermessage->m_bRet = true;
-
-   //}
-
-   
 
    float window::get_dpi_for_window()
    {
@@ -6275,8 +6272,6 @@ namespace windowing_win32
       return x * fDpi / 96.f;
 
    }
-
-
 
 
    float window::y_dpi(float y)

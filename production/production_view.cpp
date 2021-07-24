@@ -55,7 +55,7 @@ namespace production
       //MESSAGE_LINK(WM_PAINT, pchannel, this, &view::_001OnPaint);
       MESSAGE_LINK(e_message_create, pchannel, this, &view::_001OnCreate);
       MESSAGE_LINK(WM_CONTEXTMENU, pchannel, this, &view::on_message_context_menu);
-      MESSAGE_LINK(WM_SETCURSOR, pchannel, this, &view::on_message_set_cursor);
+      //MESSAGE_LINK(WM_SETCURSOR, pchannel, this, &view::on_message_set_cursor);
 
       //   MESSAGE_LINK(e_message_lbutton_down, pchannel, this, &::user::interaction::_001OnLButtonDown);
       //   MESSAGE_LINK(e_message_lbutton_up, pchannel, this, &::user::interaction::_001OnLButtonUp);
@@ -343,7 +343,7 @@ namespace production
    void view::on_message_set_cursor(::message::message * pmessage)
    {
 
-      __pointer(::message::mouse) pmouse(pmessage);
+      auto pmouse = pmessage->m_pmouse;
 
       pmouse->m_ecursor = cursor_arrow;
 
@@ -406,7 +406,7 @@ namespace production
    void view::_001OnLButtonDown(::message::message * pmessage)
    {
       UNREFERENCED_PARAMETER(pmessage);
-      //    __pointer(::message::mouse) pmouse(pmessage);
+      //    auto pmouse = pmessage->m_pmouse;
 
 //      i32 iHitArea = hit_test(pmouse->m_point);
 
@@ -414,7 +414,7 @@ namespace production
 
    void view::_001OnLButtonUp(::message::message * pmessage)
    {
-      __pointer(::message::mouse) pmouse(pmessage);
+      auto pmouse = pmessage->m_pmouse;
 
       auto point = screen_to_client(pmouse->m_point);
       
@@ -434,7 +434,7 @@ namespace production
    void view::on_message_right_button_up(::message::message * pmessage)
    {
       UNREFERENCED_PARAMETER(pmessage);
-      //    __pointer(::message::mouse) pmouse(pmessage);
+      //    auto pmouse = pmessage->m_pmouse;
 
 //      i32 iHitArea = hit_test(pmouse->m_point);
       /*   {

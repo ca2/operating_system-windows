@@ -2789,7 +2789,7 @@ namespace draw2d_gdi
       }
       else
       {
-         if(ealphamode == ::draw2d::alpha_mode_blend)
+         if(ealphamode == ::draw2d::e_alpha_mode_blend)
          {
             while(size > 0)
             {
@@ -2885,7 +2885,7 @@ namespace draw2d_gdi
 
       byte * pdataSrc = (byte *) pimpl->colorref();
 
-      if(ealphamode == ::draw2d::alpha_mode_set)
+      if(ealphamode == ::draw2d::e_alpha_mode_set)
       {
          byte * ps = (byte *) pimageSrc->colorref();
          ps += pimageSrc->m_iScan * y + x * sizeof(COLORREF);

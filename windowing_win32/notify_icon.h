@@ -59,7 +59,7 @@ namespace windowing_win32
 
       virtual void destroy_window() override;
 
-      virtual void PostNcDestroy() override;
+      virtual void post_non_client_destroy() override;
 
 #else
 

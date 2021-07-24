@@ -245,7 +245,7 @@ namespace windows
    //   {
    //      MESSAGE_LINK(e_message_set_cursor, pchannel, this, &interaction_impl::on_message_set_cursor);
    //      MESSAGE_LINK(e_message_erase_background, pchannel, this, &interaction_impl::_001OnEraseBkgnd);
-   //      MESSAGE_LINK(e_message_nccalcsize, pchannel, this, &interaction_impl::on_message_non_client_calculate_size);
+   //      MESSAGE_LINK(e_message_non_client_calcsize, pchannel, this, &interaction_impl::on_message_non_client_calculate_size);
    //      MESSAGE_LINK(e_message_show_window, pchannel, this, &interaction_impl::on_message_show_window);
    //      MESSAGE_LINK(e_message_activate, pchannel, this, &interaction_impl::_001OnActivate);
    //      MESSAGE_LINK(WM_DWMNCRENDERINGCHANGED, pchannel, this, &interaction_impl::_001OnDwmNcRenderingChanged);
@@ -423,7 +423,7 @@ namespace windows
       m_pwindow->post_nc_destroy();
 
 
-      ::user::interaction_impl::PostNcDestroy();
+      ::user::interaction_impl::post_non_client_destroy();
 
    }
 
@@ -434,13 +434,13 @@ namespace windows
    //   if (get_handle() != nullptr)
    //   {
 
-   //      DestroyWindow();    // will call PostNcDestroy
+   //      DestroyWindow();    // will call post_non_client_destroy
 
    //   }
    //   else
    //   {
 
-   //      PostNcDestroy();
+   //      post_non_client_destroy();
 
    //   }
 
@@ -3866,7 +3866,7 @@ namespace windows
 //         ::GetWindowInfo(get_safe_handle(), &wi);
 //
 //         /* Maximized windows always have a non-client border that hangs over
-//         the edge of the screen, so the size_i32 proposed by e_message_nccalcsize is
+//         the edge of the screen, so the size_i32 proposed by e_message_non_client_calcsize is
 //         fine. Just adjust the top border to erase the u title. */
 //         pncsp->rgrc[0].left = client.left;
 //
@@ -3909,7 +3909,7 @@ namespace windows
 //      else
 //      {
 //         /* For the non-maximized case, set the output const rectangle_i32 & to what it was
-//         before e_message_nccalcsize modified it. This will make the client size_i32 the
+//         before e_message_non_client_calcsize modified it. This will make the client size_i32 the
 //         same as the non-client size. */
 //         pncsp->rgrc[0] = nonclient;
 //
@@ -4547,8 +4547,8 @@ namespace windows
 //               TRACE("e_message_mouse_activate wparam=%08x lparam=%08x", pusermessage->m_wparam, pusermessage->m_lparam);
 //
 //               break;
-//            case e_message_ncactivate:
-//               TRACE("e_message_ncactivate wparam=%08x lparam=%08x", pusermessage->m_wparam, pusermessage->m_lparam);
+//            case e_message_non_client_activate:
+//               TRACE("e_message_non_client_activate wparam=%08x lparam=%08x", pusermessage->m_wparam, pusermessage->m_lparam);
 //
 //               break;
 //            case e_message_set_focus:

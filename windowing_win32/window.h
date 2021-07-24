@@ -13,13 +13,19 @@ namespace windowing_win32
    public:
 
 
-      ::point_i32                               m_pointCursor;
-
+      //HICON                                     m_hiconSmall;
+      //HICON                                     m_hiconBig;
+      bool                                      m_bTrackMouseLeave : 1;
       WNDPROC                                   m_pfnSuper;
       //UINT                                    m_uiMessage;
       //WPARAM                                  m_wparam;
       //LPARAM                                  m_lparam;
       __pointer(::windows::interaction_impl)    m_pimpl2;
+      ::millis                                  m_millisLastMouseMove;
+      ::point_i32                               m_pointMouseMove;
+      
+
+
 
       window();
       virtual ~window();
@@ -193,7 +199,7 @@ namespace windowing_win32
       DECLARE_MESSAGE_HANDLER(_001OnPrint);
       //DECLARE_MESSAGE_HANDLER(_001OnSetFocus);
       DECLARE_MESSAGE_HANDLER(on_message_non_client_calculate_size);
-      //DECLARE_MESSAGE_HANDLER(on_message_set_cursor);
+      ////DECLARE_MESSAGE_HANDLER(on_message_set_cursor);
       DECLARE_MESSAGE_HANDLER(_001OnEraseBkgnd);
       //DECLARE_MESSAGE_HANDLER(on_message_move);
       //DECLARE_MESSAGE_HANDLER(on_message_size);
@@ -205,6 +211,7 @@ namespace windowing_win32
       DECLARE_MESSAGE_HANDLER(_001OnWindowPosChanged);
       //DECLARE_MESSAGE_HANDLER(_001OnGetMinMaxInfo);
       DECLARE_MESSAGE_HANDLER(_001OnEnable);
+      DECLARE_MESSAGE_HANDLER(on_message_get_icon);
 
 
       //virtual void win_update_graphics();
@@ -770,7 +777,7 @@ namespace windowing_win32
       //virtual void default_window_procedure(::message::message * pmessage) override;
 
 
-      //virtual void PostNcDestroy();
+      //virtual void post_non_client_destroy();
 
       //// for notifications from parent
       //virtual bool OnChildNotify(::message::message * pusermessage);

@@ -189,10 +189,10 @@ namespace windowing_win32
    }
 
 
-   void notify_icon::PostNcDestroy()
+   void notify_icon::post_non_client_destroy()
    {
 
-      ::user::interaction::PostNcDestroy();
+      ::user::interaction::post_non_client_destroy();
 
 
    }
