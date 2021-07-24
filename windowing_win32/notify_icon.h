@@ -71,10 +71,10 @@ namespace windowing_win32
       ::e_status modify_icon(::windowing::icon * picon) override;
 
       
-      ::e_status create_notify_icon(::u32 id, ::user::notify_icon_listener * plistener, ::windowing::icon * picon) override;
+      ::e_status create_notify_icon(const ::id & id, ::user::interaction * puserinteractionNotify, ::windowing::icon * picon) override;
 
 
-      DECLARE_MESSAGE_HANDLER(_001OnNotifyIconMessage);
+      DECLARE_MESSAGE_HANDLER(on_message_notify_icon);
       DECLARE_MESSAGE_HANDLER(on_message_destroy);
 
       void install_message_routing(::channel * pchannel) override;

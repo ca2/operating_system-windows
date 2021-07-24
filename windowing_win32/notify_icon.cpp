@@ -54,19 +54,15 @@ namespace windowing_win32
    void notify_icon::install_message_routing(::channel * pchannel)
    {
 
-#ifdef WINDOWS_DESKTOP
-
       ::user::interaction::install_message_routing(pchannel);
 
-      MESSAGE_LINK(MessageNotifyIcon, pchannel, this, &notify_icon::_001OnNotifyIconMessage);
+      MESSAGE_LINK(e_message_notify_icon, pchannel, this, &notify_icon::on_message_notify_icon);
       MESSAGE_LINK(e_message_destroy, pchannel, this, &notify_icon::on_message_destroy);
-
-#endif
 
    }
 
 
-   ::e_status notify_icon::create_notify_icon(::u32 uId, ::user::notify_icon_listener * plistener, ::windowing::icon * picon)
+   ::e_status notify_icon::create_notify_icon(const ::id & id, ::user::interaction * puserinteractionNotify, ::windowing::icon * picon)
    {
 
       if (m_bCreated)
@@ -76,9 +72,9 @@ namespace windowing_win32
 
       }
 
-      m_strId.Format("notify_icon_%d", uId);
+      string strId = "notify_icon_" + id.to_string();
 
-      m_strId = "ca2-" + picon->get_tray_icon_name() + "-" + m_strId;
+      m_strId = "ca2-" + picon->get_tray_icon_name() + "-" + strId;
 
       if (!create_message_queue(m_strId))
       {
@@ -87,21 +83,20 @@ namespace windowing_win32
 
       }
 
-      m_uiId = uId;
+      m_id = id;
 
       m_nid.hWnd = __hwnd(get_oswindow());
-      m_nid.uID = uId;
+      m_nid.uID = __u32_hash(id.to_string());
       m_nid.hIcon = (HICON) picon->get_os_data(::size_i32(16, 16));
       m_nid.uFlags = NIF_ICON | NIF_MESSAGE;
-      m_nid.uCallbackMessage = MessageNotifyIcon;
+      m_nid.uCallbackMessage = ::e_message_notify_icon;
 
-
-      m_plistener = plistener;
+      m_puserinteractionNotify = puserinteractionNotify;
 
       if (!Shell_NotifyIcon(NIM_ADD, &m_nid))
       {
 
-         m_plistener = nullptr;
+         m_puserinteractionNotify.release();
 
          start_destroying_window();
 
@@ -260,12 +255,12 @@ namespace windowing_win32
    }
 
 
-   void notify_icon::_001OnNotifyIconMessage(::message::message * pmessage)
+   void notify_icon::on_message_notify_icon(::message::message * pmessage)
    {
 
-      __pointer(::user::message) pusermessage(pmessage);
+      uptr uMessage = pmessage->m_lparam;
 
-      if (pusermessage->m_lparam == e_message_left_button_down)
+      if (uMessage == e_message_left_button_down)
       {
 
          while (m_userinteractionaHidden.get_size() > 0)
@@ -301,7 +296,36 @@ namespace windowing_win32
 
       }
 
-      m_plistener->OnNotifyIconMessage(m_uiId, (::u32)pusermessage->m_lparam);
+      //m_puserinteractionNotify->OnNotifyIconMessage(m_uiId, (::u32)pusermessage->m_lparam);
+
+      auto pevent = __create_new < ::user::control_event >();
+
+      pevent->m_id = m_id;
+
+      pevent->m_puserinteraction = this;
+
+      pevent->m_actioncontext.m_pmessage = pmessage;
+
+      if (uMessage == e_message_right_button_down)
+      {
+
+         pevent->m_eevent = ::user::e_event_context_menu;
+
+      }
+      else if (uMessage == e_message_left_button_double_click)
+      {
+
+         pevent->m_eevent = ::user::e_event_left_button_double_click;
+
+      }
+      else if (uMessage == e_message_left_button_down)
+      {
+
+         pevent->m_eevent = ::user::e_event_left_button_down;
+
+      }
+
+      m_puserinteractionNotify->on_control_event(pevent);
 
    }
 
