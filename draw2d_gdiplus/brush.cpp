@@ -150,12 +150,14 @@ namespace draw2d_gdiplus
    }
 
 
-   void brush::destroy()
+   ::e_status brush::destroy()
    {
 
       ::acme::del(m_pbrush);
 
       ::draw2d::brush::destroy();
+
+      return ::success;
 
    }
 

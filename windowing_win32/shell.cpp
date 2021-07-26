@@ -1376,10 +1376,10 @@ namespace windowing_win32
    }
 
 
-   ::e_status shell::finish()
+   ::e_status shell::destroy()
    {
 
-      return ::user::shell::finish();
+      return ::user::shell::destroy();
 
    }
 

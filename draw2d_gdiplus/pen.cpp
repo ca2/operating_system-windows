@@ -428,12 +428,14 @@ namespace draw2d_gdiplus
    }
 
 
-   void pen::destroy()
+   ::e_status pen::destroy()
    {
 
       ::acme::del(m_ppen);
 
       ::draw2d::pen::clear_os_data();
+
+      return ::success;
 
    }
 

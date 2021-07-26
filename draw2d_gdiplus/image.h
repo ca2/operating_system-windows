@@ -47,7 +47,7 @@ namespace draw2d_gdiplus
       virtual bool host(const ::pixmap * pixmap) override;
       virtual bool on_host_read_pixels(const ::pixmap* pixmap) override;
       virtual ::e_status create(::draw2d::graphics * pgraphics) override;
-      virtual bool destroy() override;
+      ::e_status destroy() override;
 
 
       //cvirtual bool stretch(::draw2d::graphics * pgraphics) override;

@@ -312,7 +312,7 @@ namespace windows
    }
 
 
-   bool interprocess_communication_rx::destroy()
+   ::e_status interprocess_communication_rx::destroy()
    {
 
       if (get_hwnd() != nullptr)
@@ -324,7 +324,7 @@ namespace windows
 
       }
 
-      return true;
+      return ::success;
 
    }
 

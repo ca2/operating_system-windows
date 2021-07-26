@@ -387,10 +387,12 @@ namespace draw2d_gdiplus
    }
 
 
-   void path::destroy()
+   ::e_status path::destroy()
    {
 
       ::acme::del(m_ppath);
+
+      return ::success;
 
    }
 

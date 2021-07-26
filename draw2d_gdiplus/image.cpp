@@ -294,7 +294,7 @@ namespace draw2d_gdiplus
    }
 
 
-   bool image::destroy()
+   ::e_status image::destroy()
    {
 
       ::image::destroy();
@@ -303,7 +303,7 @@ namespace draw2d_gdiplus
 
       m_pbitmap.release();
 
-      return true;
+      return ::success;
 
    }
 
