@@ -26,12 +26,14 @@ namespace draw2d_gdiplus
    }
 
    
-   void bitmap::destroy()
+   ::e_status bitmap::destroy()
    {
 
       ::acme::del(m_pbitmap);
 
       ::draw2d::bitmap::destroy();
+
+      return ::success;
 
    }
 

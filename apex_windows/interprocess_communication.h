@@ -70,7 +70,7 @@ namespace windows
 
 
       bool create(const char * pszChannel);
-      bool destroy();
+      ::e_status destroy() override;
 
 
       virtual void * on_interprocess_receive(::interprocess_communication::rx * prx, const char * pszMessage);

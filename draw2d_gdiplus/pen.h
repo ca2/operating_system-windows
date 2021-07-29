@@ -33,10 +33,8 @@ namespace draw2d_gdiplus
       bool CreatePen(i32 nPenStyle, double nWidth, const LOGBRUSH* pLogBrush, i32 nStyleCount = 0, const DWORD* pStyle = nullptr);*/
 
 
-
       virtual bool create(::draw2d::graphics * pgraphics, ::i8 iCreate) override;
-      virtual void destroy() override;
-
+      ::e_status destroy() override;
 
 
    };

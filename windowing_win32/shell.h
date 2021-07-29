@@ -71,7 +71,7 @@ namespace windowing_win32
       virtual void set_image_ico(string strIconLocation, i32 & iImage, ::color::color crBk);
       virtual void set_image_resource(string strIconLocation, i32 & iImage, const image_key & imagekey, ::color::color crBk);
 
-      ::e_status finish() override;
+      ::e_status destroy() override;
 
       //int shell::add_hover_image(int iSize, int iImage, ::color::color crBk)
 

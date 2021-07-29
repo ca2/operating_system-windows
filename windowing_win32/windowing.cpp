@@ -143,7 +143,7 @@ namespace windowing_win32
    }
 
    
-   ::e_status windowing::finish()
+   ::e_status windowing::destroy()
    {
 
       if (m_psysteminteraction)
