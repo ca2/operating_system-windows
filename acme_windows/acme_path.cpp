@@ -24,16 +24,24 @@ namespace windows
    ::file::path acme_path::app_module()
    {
 
-      wstring wstrPath(get_buffer, MAX_PATH * 16);
+      ::file::path path;
 
-      if (!GetModuleFileNameW(nullptr, wstrPath, (DWORD)wstrPath.get_length()))
       {
 
-         return "";
+         wstring wstrPath(get_buffer, MAX_PATH * 16);
+
+         if (!GetModuleFileNameW(nullptr, wstrPath, (DWORD)wstrPath.get_length()))
+         {
+
+            return "";
+
+         }
+
+         path = wstrPath.release_string_buffer();
 
       }
 
-      return wstrPath.release_string_buffer();
+      return path;
 
    }
 
