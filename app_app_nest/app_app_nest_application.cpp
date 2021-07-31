@@ -86,7 +86,7 @@ namespace ca2plugin_container
    }
 
 
-   bool application::finalize()
+   bool application::destroy()
    {
 
       return true;

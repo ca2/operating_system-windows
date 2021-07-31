@@ -31,7 +31,7 @@ namespace ca2plugin_container
 
       virtual bool initialize_communication();
 
-      virtual bool finalize();
+      virtual bool destroy();
 
       virtual bool os_native_bergedge_start();
 

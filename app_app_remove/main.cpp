@@ -46,7 +46,7 @@ public:
 
    virtual ::e_status     run() override;
 
-   virtual bool finalize();
+   virtual bool destroy();
 
 
    virtual void system(const char * pszCmd);
@@ -471,7 +471,7 @@ bool removal::are_there_user_files_in_use()
 }
 
 
-bool removal::finalize()
+bool removal::destroy()
 {
 
    return true;

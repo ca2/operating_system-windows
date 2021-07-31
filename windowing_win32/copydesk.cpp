@@ -137,7 +137,7 @@ namespace windowing_win32
       if(!::AddClipboardFormatListener((HWND)get_oswindow()))
       {
 
-         finalize();
+         destroy();
 
          return false;
 
@@ -150,12 +150,12 @@ namespace windowing_win32
    }
 
 
-   ::e_status copydesk::finalize()
+   ::e_status copydesk::destroy()
    {
 
-      auto estatus1 = ::user::copydesk::finalize();
+      auto estatus1 = ::user::copydesk::destroy();
 
-      auto estatus2 = ::user::message_window::finalize();
+      auto estatus2 = ::user::message_window::destroy();
 
       return minimum(estatus1, estatus2);
 
@@ -169,7 +169,7 @@ namespace windowing_win32
 
       //bool bOk2 = ::DestroyWindow(m_hwnd);
 
-      //::user::copydesk::finalize();
+      //::user::copydesk::destroy();
 
    }
 

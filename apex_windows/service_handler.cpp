@@ -240,7 +240,7 @@ namespace windows
 
             __pointer(::apex::system) psystem = s_pservicehandler->get_system();
 
-            psystem->finalize();
+            psystem->destroy();
 
             break;
 

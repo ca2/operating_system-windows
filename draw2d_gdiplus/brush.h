@@ -28,7 +28,7 @@ namespace draw2d_gdiplus
 
       virtual bool create(::draw2d::graphics * pgraphics, ::i8 iCreate) override;
       ::e_status destroy() override;
-
+      ::e_status destroy_os_data() override;
 
       //bool create_solid(COLORREF crColor);
       //bool CreateHatchBrush(i32 nIndex, COLORREF crColor);

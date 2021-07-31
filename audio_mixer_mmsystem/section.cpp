@@ -29,7 +29,7 @@ namespace multimedia
       }
 
 
-      ::e_status department::finalize()
+      ::e_status department::destroy()
       {
 
          start_destroying_window();

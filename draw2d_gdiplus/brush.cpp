@@ -104,7 +104,7 @@ namespace draw2d_gdiplus
          try
          {
 
-            if (m_pimage->is_ok())
+            if (::is_ok(m_pimage))
             {
 
                Gdiplus::Image * pimage = m_pimage->get_bitmap()->get_os_data < Gdiplus::Bitmap * >();
@@ -150,10 +150,20 @@ namespace draw2d_gdiplus
    }
 
 
-   ::e_status brush::destroy()
+   ::e_status brush::destroy_os_data()
    {
 
       ::acme::del(m_pbrush);
+
+      return ::success;
+
+   }
+
+
+   ::e_status brush::destroy()
+   {
+
+      destroy_os_data();
 
       ::draw2d::brush::destroy();
 

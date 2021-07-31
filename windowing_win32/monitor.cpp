@@ -405,7 +405,7 @@ namespace windowing_win32
 
       sleep(500_ms);
       
-      //finalize:;
+      //destroy:;
       DestroyPhysicalMonitors(1, &monitor);
       
       //return true;

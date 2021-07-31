@@ -39,7 +39,7 @@ namespace windowing_win32
 
       ::e_status destroy() override;
 
-      ::e_status finalize() override;
+      //::e_status destroy() override;
 
       virtual void get_cursor_position(POINT_I32* ppoint) override;
 

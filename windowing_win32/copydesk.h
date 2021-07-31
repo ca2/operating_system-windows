@@ -43,7 +43,7 @@ namespace windowing_win32
 
 
       virtual ::e_status initialize(::object * pobject) override;
-      virtual ::e_status finalize() override;
+      virtual ::e_status destroy() override;
 
 
       virtual void OnClipboardUpdate();

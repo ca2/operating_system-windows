@@ -21,7 +21,7 @@ namespace audio_mmsystem
 
 
       out();
-      virtual ~out();
+      ~out() override;
 
 
       void install_message_routing(::channel * pchannel);

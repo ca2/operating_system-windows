@@ -153,7 +153,7 @@ namespace windowing_win32
 
       }
 
-      auto estatus = ::windowing::windowing::finalize();
+      auto estatus = ::windowing::windowing::destroy();
 
       if (!estatus)
       {
@@ -167,14 +167,14 @@ namespace windowing_win32
    }
 
 
-   ::e_status windowing::finalize()
-   {
+   //::e_status windowing::destroy()
+   //{
 
-      auto estatus = ::windowing::windowing::finalize();
+   //   auto estatus = ::windowing::windowing::destroy();
 
-      return estatus;
+   //   return estatus;
 
-   }
+   //}
 
 
    ::windowing_win32::window * windowing::_window(HWND hwnd)
