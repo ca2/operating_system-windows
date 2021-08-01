@@ -19,8 +19,10 @@ namespace windowing_win32
 
       map < ::size_i32, image_pointer >      m_imagemap;
 
+      
       icon();
-      virtual ~icon();
+      ~icon() override;
+
 
       virtual void * get_os_data(const ::size_i32 & size) const;
       
