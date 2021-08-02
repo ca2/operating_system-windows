@@ -1653,7 +1653,7 @@ namespace acme
 
          dwSize = GetEnvironmentVariableW(wstrEnvironmentVariable, lpwsz, dwSize);
 
-         str = lpwsz;
+         str = (const WCHAR *) lpwsz;
 
          return str;
 
