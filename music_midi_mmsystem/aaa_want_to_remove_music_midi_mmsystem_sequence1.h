@@ -52,7 +52,7 @@ namespace music
 
 
 
-            sequence(midi * pmidi, const string & strDevice);
+            sequence(midi * pmidi, const ::string & strDevice);
             virtual ~sequence();
 
             virtual i64 increment_reference_count(OBJECT_REFERENCE_COUNT_DEBUG_PARAMETERS)

@@ -57,7 +57,7 @@ namespace windows
 
       virtual ::extended::transport < ::file::file > resource_get_file(const ::file::path & path) override;
 
-      virtual bool get_last_write_time(FILETIME * pfiletime, const string & strFilename);
+      virtual bool get_last_write_time(FILETIME * pfiletime, const ::string & strFilename);
 
       virtual ::e_status update_module_path() override;
 

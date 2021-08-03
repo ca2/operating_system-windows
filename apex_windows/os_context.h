@@ -69,18 +69,18 @@ namespace windows
 
       virtual bool _getCredentialsForService(const string& strService, WCHAR* szUsername, WCHAR* szPassword);
 
-      virtual bool enable_service(const string & strServiceName, const string & strDisplayName, const string & strCommand, const string & strUser = "", const string & strPass = "") override;
-      virtual bool disable_service(const string & strServiceName) override;
+      virtual bool enable_service(const ::string & strServiceName, const ::string & strDisplayName, const ::string & strCommand, const ::string & strUser = "", const ::string & strPass = "") override;
+      virtual bool disable_service(const ::string & strServiceName) override;
 
-      virtual bool start_service(const string & strServiceName) override;
-      virtual bool stop_service(const string & strServiceName) override;
+      virtual bool start_service(const ::string & strServiceName) override;
+      virtual bool stop_service(const ::string & strServiceName) override;
 
       virtual string calc_service_name();
 
 
-      virtual bool resolve_link(::file::path & path, const string & strSource, string * pstrDirectory = nullptr, string * pstrParams = nullptr) override;
+      virtual bool resolve_link(::file::path & path, const ::string & strSource, string * pstrDirectory = nullptr, string * pstrParams = nullptr) override;
 
-      virtual bool resolve_lnk_link(::file::path & path, const string & strSource, string * pstrDirectory = nullptr, string * pstrParams = nullptr);
+      virtual bool resolve_lnk_link(::file::path & path, const ::string & strSource, string * pstrDirectory = nullptr, string * pstrParams = nullptr);
 
 
       DECLSPEC_NO_RETURN void raise_exception(u32 dwExceptionCode, u32 dwExceptionFlags);
@@ -99,7 +99,7 @@ namespace windows
 
       virtual bool is_user_auto_start(string strId) override;
 
-      virtual ::file::path get_app_path(const string & strApp) override;
+      virtual ::file::path get_app_path(const ::string & strApp) override;
 
       virtual bool set_default_browser() override;
 

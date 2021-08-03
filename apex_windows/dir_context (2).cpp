@@ -868,7 +868,7 @@ namespace windows
    }
 
 
-   ::file::path dir_context::time_square(const string & strPrefix, const string & strSuffix)
+   ::file::path dir_context::time_square(const ::string & strPrefix, const ::string & strSuffix)
    {
 
       UNREFERENCED_PARAMETER(strPrefix);

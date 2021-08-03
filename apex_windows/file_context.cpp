@@ -443,7 +443,7 @@ namespace windows
    }
 
 
-   bool file_context::get_last_write_time(FILETIME * pfiletime, const string & strFilename)
+   bool file_context::get_last_write_time(FILETIME * pfiletime, const ::string & strFilename)
    {
 
       WIN32_FILE_ATTRIBUTE_DATA data;

@@ -43,7 +43,7 @@ namespace music
             bool                       m_bSendXGDrumSetup2Reset;
 
 
-            sequencer( sequence * psequence, const string & strDevice);
+            sequencer( sequence * psequence, const ::string & strDevice);
             virtual ~sequencer();
 
 

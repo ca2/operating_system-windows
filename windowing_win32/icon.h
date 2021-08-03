@@ -26,7 +26,7 @@ namespace windowing_win32
 
       virtual void * get_os_data(const ::size_i32 & size) const;
       
-      ::e_status load_file(const string & strPath) override;
+      ::e_status load_file(const ::string & strPath) override;
 
       ::e_status load_app_tray_icon(const string& strApp) override;
 

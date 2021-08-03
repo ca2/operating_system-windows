@@ -968,7 +968,7 @@ namespace windows
    }
 
 
-   bool os_context::_getCredentialsForService(const string & strService,WCHAR * szUsername,WCHAR *szPassword)
+   bool os_context::_getCredentialsForService(const ::string & strService,WCHAR * szUsername,WCHAR *szPassword)
    {
 
       HRESULT hr = S_OK;
@@ -1339,7 +1339,7 @@ retry:
    }
 
 
-   bool os_context::create_service(const string & strServiceName,const string & strDisplayName,const string & strCommand,const string & strUser,const string & strPass)
+   bool os_context::create_service(const ::string & strServiceName,const ::string & strDisplayName,const ::string & strCommand,const ::string & strUser,const ::string & strPass)
    {
 
       if (strServiceName.is_empty())
@@ -1405,7 +1405,7 @@ retry:
    }
 
 
-   bool os_context::remove_service(const string & strServiceName)
+   bool os_context::remove_service(const ::string & strServiceName)
    {
 
       if (strServiceName.is_empty())
@@ -1466,7 +1466,7 @@ retry:
    }
 
 
-   bool os_context::start_service(const string & strServiceName)
+   bool os_context::start_service(const ::string & strServiceName)
    {
 
       if(strServiceName.is_empty())
@@ -1501,7 +1501,7 @@ retry:
       return bOk != false;
    }
 
-   bool os_context::stop_service(const string & strServiceName)
+   bool os_context::stop_service(const ::string & strServiceName)
    {
 
       if(strServiceName.is_empty())
@@ -1669,7 +1669,7 @@ retry:
    }
 
 
-   bool os_context::resolve_link(::file::path & path, const string & strSource, string * pstrDirectory, string * pstrParams)
+   bool os_context::resolve_link(::file::path & path, const ::string & strSource, string * pstrDirectory, string * pstrParams)
    {
 
       if (::os_context::resolve_link(path, strSource, pstrDirectory, pstrParams))
@@ -1696,7 +1696,7 @@ retry:
    }
 
 
-   bool os_context::resolve_lnk_link(::file::path & path, const string & strSource, string * pstrDirectory, string * pstrParams)
+   bool os_context::resolve_lnk_link(::file::path & path, const ::string & strSource, string * pstrDirectory, string * pstrParams)
    {
 
       ASSERT(strSource.ends_ci(".lnk"));
@@ -2170,7 +2170,7 @@ retry:
 
    }
 
-   ::file::path os_context::get_app_path(const string & strApp)
+   ::file::path os_context::get_app_path(const ::string & strApp)
    {
 
       string str(strApp);

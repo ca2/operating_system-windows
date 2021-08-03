@@ -1089,7 +1089,7 @@ namespace acme
       }
 
 
-      //CLASS_DECL_ACME bool launch_application(::matter * pobject, const string & strAppId, const string & strParams, int iBitCount)
+      //CLASS_DECL_ACME bool launch_application(::matter * pobject, const ::string & strAppId, const ::string & strParams, int iBitCount)
       //{
       //
       //   ::file::path path;

@@ -50,7 +50,7 @@ namespace windows
 
       virtual ::file::path module();
       virtual ::file::path ca2module();
-      virtual ::file::path time_square(const string & strPrefix = nullptr, const string & strSuffix = nullptr);
+      virtual ::file::path time_square(const ::string & strPrefix = nullptr, const ::string & strSuffix = nullptr);
       virtual ::file::path time_log();
 
 

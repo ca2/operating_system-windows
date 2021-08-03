@@ -433,7 +433,7 @@ namespace draw2d_gdiplus
    }
 
 
-   bool path::internal_add_text_out(::draw2d::graphics * pgraphics,i32 x,i32 y,const string & strText,::write_text::font * pfont)
+   bool path::internal_add_text_out(::draw2d::graphics * pgraphics,i32 x,i32 y,const ::string & strText,::write_text::font * pfont)
    {
 
       if (m_ppath == nullptr)
@@ -507,7 +507,7 @@ namespace draw2d_gdiplus
    }
 
 
-   bool path::internal_add_draw_text(::draw2d::graphics * pgraphics, const ::rectangle_i32 & rectParam, const string & strText, ::write_text::font * pfont, const ::e_align & ealign, const ::e_draw_text & edrawtext)
+   bool path::internal_add_draw_text(::draw2d::graphics * pgraphics, const ::rectangle_i32 & rectParam, const ::string & strText, ::write_text::font * pfont, const ::e_align & ealign, const ::e_draw_text & edrawtext)
    {
 
       ::rectangle_f64 rectangle(rectParam);

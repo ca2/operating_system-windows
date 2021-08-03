@@ -232,7 +232,7 @@ namespace windowing_win32
    }
 
 
-   HGLOBAL copydesk::hglobal_get_wide_text(const string & str)
+   HGLOBAL copydesk::hglobal_get_wide_text(const ::string & str)
    {
 
       ::count c = ::str::international::utf8_to_unicode_count(str) + 1;
@@ -248,7 +248,7 @@ namespace windowing_win32
    }
 
 
-   HGLOBAL copydesk::hglobal_get_utf8_text(const string & str)
+   HGLOBAL copydesk::hglobal_get_utf8_text(const ::string & str)
    {
 
       HGLOBAL hglb = ::GlobalAlloc(GMEM_MOVEABLE, (SIZE_T) (sizeof(char) * (str.length() + 1)));
@@ -475,7 +475,7 @@ namespace windowing_win32
    }
 
 
-   bool copydesk::_set_plain_text(const string & str)
+   bool copydesk::_set_plain_text(const ::string & str)
    {
 
       //ASSERT(::IsWindow(m_hwnd));

@@ -66,8 +66,8 @@ namespace windows
          ::e_status _set(const char * pcszValueName, ::u32 dwValue);
 
 
-         void set(const char * pcszValueName, const string & strValue);
-         ::e_status _set(const char * pcszValueName, const string & strValue);
+         void set(const char * pcszValueName, const ::string & strValue);
+         ::e_status _set(const char * pcszValueName, const ::string & strValue);
 
 
          void set(const char * pcszValueName, const char * pszValue);

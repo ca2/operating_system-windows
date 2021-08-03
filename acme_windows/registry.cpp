@@ -368,7 +368,7 @@ namespace windows
    }
 
 
-   ::e_status registry::key::_set(const char * pcszValueName, const string & strValue)
+   ::e_status registry::key::_set(const char * pcszValueName, const ::string & strValue)
    {
 
       wstring wstr(strValue);
@@ -443,7 +443,7 @@ namespace windows
    }
 
 
-   void registry::key::set(const char * pcszValueName, const string & strValue)
+   void registry::key::set(const char * pcszValueName, const ::string & strValue)
    { 
 
       auto estatus = _set(pcszValueName, strValue);

@@ -2170,7 +2170,7 @@ namespace draw2d_gdiplus
    //}
 
 
-   //bool graphics::ExtTextOut(double x, double y,UINT nOptions,const rectangle_f64 &  rectParam, const string & str, LPINT pDxWidths)
+   //bool graphics::ExtTextOut(double x, double y,UINT nOptions,const rectangle_f64 &  rectParam, const ::string & str, LPINT pDxWidths)
    //{
 
    //   //ASSERT(get_handle1() != nullptr);
@@ -2198,7 +2198,7 @@ namespace draw2d_gdiplus
    //}
 
 
-   //size_f64 graphics::TabbedTextOut(double x, double y, const string & str, count nTabPositions, LPINT pnTabStopPositions, i32 nTabOrigin)
+   //size_f64 graphics::TabbedTextOut(double x, double y, const ::string & str, count nTabPositions, LPINT pnTabStopPositions, i32 nTabOrigin)
    //{
 
    //   //ASSERT(get_handle1() != nullptr);
@@ -2226,7 +2226,7 @@ namespace draw2d_gdiplus
    //}
 
 
-   //size_f64 graphics::GetTabbedTextExtent(const string & str, count nTabPositions, LPINT pnTabStopPositions)
+   //size_f64 graphics::GetTabbedTextExtent(const ::string & str, count nTabPositions, LPINT pnTabStopPositions)
    //{
 
    //   //ASSERT(get_handle2() != nullptr);
@@ -2254,7 +2254,7 @@ namespace draw2d_gdiplus
    }
 
 
-   size_f64 graphics::GetOutputTabbedTextExtent(const string & str, count nTabPositions, LPINT pnTabStopPositions)
+   size_f64 graphics::GetOutputTabbedTextExtent(const ::string & str, count nTabPositions, LPINT pnTabStopPositions)
    {
 
       //ASSERT(get_handle1() != nullptr);
@@ -5290,7 +5290,7 @@ namespace draw2d_gdiplus
    //}
 
 
-   bool graphics::_001DrawText(const string & str, rectangle_f64 & rectParam, const ::e_align & ealign, const ::e_draw_text & edrawtext, bool bMeasure)
+   bool graphics::_001DrawText(const ::string & str, rectangle_f64 & rectParam, const ::e_align & ealign, const ::e_draw_text & edrawtext, bool bMeasure)
    {
 
       if (::is_null(m_pgraphics))
@@ -5357,7 +5357,7 @@ namespace draw2d_gdiplus
    //}
 
 
-   bool graphics::draw_text_ex(const string & str,const rectangle_f64 & rectParam, const ::e_align & ealign, const ::e_draw_text & edrawtext)
+   bool graphics::draw_text_ex(const ::string & str,const rectangle_f64 & rectParam, const ::e_align & ealign, const ::e_draw_text & edrawtext)
    {
 
       if (::is_null(m_pgraphics))
@@ -5409,7 +5409,7 @@ namespace draw2d_gdiplus
    //}
 
 
-   //::count graphics::GetEachCharTextExtent(array < ::size_f64 > & sizea, const string & str)
+   //::count graphics::GetEachCharTextExtent(array < ::size_f64 > & sizea, const ::string & str)
    //{
    //   sizea.erase_all();
    //   strsize_array iaLen;
@@ -5448,7 +5448,7 @@ namespace draw2d_gdiplus
 
    // return Extents per UTF8 Char Boundaries, so there can be lesser
    // "extents" than bytes
-   ::count graphics::get_character_extent(double_array & daLeft, double_array& daRight, const string & str, strsize iStartParam, strsize iCountParam)
+   ::count graphics::get_character_extent(double_array & daLeft, double_array& daRight, const ::string & str, strsize iStartParam, strsize iCountParam)
    {
 
       if (str.is_empty())
@@ -5822,7 +5822,7 @@ namespace draw2d_gdiplus
       return ::size_f64;*/
    }
 
-   //size_f64 graphics::get_text_extent(const string & str)
+   //size_f64 graphics::get_text_extent(const ::string & str)
    //{
    //   /*      if(get_handle2() == nullptr)
    //            return ::size_f64(0, 0);
@@ -5891,7 +5891,7 @@ namespace draw2d_gdiplus
    }
 
 
-   ::size_f64 graphics::GetOutputTextExtent(const string & str)
+   ::size_f64 graphics::GetOutputTextExtent(const ::string & str)
    {
 
       //ASSERT(get_handle1() != nullptr);
@@ -6108,7 +6108,7 @@ namespace draw2d_gdiplus
    }
 
 
-   bool graphics::get_text_extent(::size_f64 & size, const string & str)
+   bool graphics::get_text_extent(::size_f64 & size, const ::string & str)
    {
 
       if (::is_null(m_pgraphics) && is_null(m_pfont))

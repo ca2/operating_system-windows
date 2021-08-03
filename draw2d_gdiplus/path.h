@@ -39,8 +39,8 @@ namespace draw2d_gdiplus
       //virtual bool internal_add_line(double x, double y);
       //virtual bool internal_add_move(double x, double y);
 
-      virtual bool internal_add_text_out(::draw2d::graphics * pgraphics, i32 x,i32 y,const string & strText,::write_text::font * pfont);
-      virtual bool internal_add_draw_text(::draw2d::graphics * pgraphics, const ::rectangle_i32 & rectangle, const string & strText, ::write_text::font * pfont, const ::e_align & ealign, const ::e_draw_text & edrawtext);
+      virtual bool internal_add_text_out(::draw2d::graphics * pgraphics, i32 x,i32 y,const ::string & strText,::write_text::font * pfont);
+      virtual bool internal_add_draw_text(::draw2d::graphics * pgraphics, const ::rectangle_i32 & rectangle, const ::string & strText, ::write_text::font * pfont, const ::e_align & ealign, const ::e_draw_text & edrawtext);
 
 
       virtual bool create(::draw2d::graphics * pgraphics, ::i8 iCreate) override;
