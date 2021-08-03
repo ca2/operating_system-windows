@@ -610,7 +610,7 @@ namespace windowing_win32
          if (pmessage->m_id == WM_SETTINGCHANGE && wparam == 0)
          {
 
-            strLparamString = (const wchar_t *) (LPARAM(lparam));
+            strLparamString = (const WCHAR *) (LPARAM(lparam));
 
          }
 
