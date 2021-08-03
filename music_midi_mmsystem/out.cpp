@@ -92,7 +92,7 @@ namespace music
 
             midihdr.lpData = (LPSTR) m.get_data();
 
-            midihdr.dwBufferLength = m.get_size();
+            midihdr.dwBufferLength = (DWORD) m.get_size();
 
             //midihdr.lpData = (LPSTR) block.get_data();
 
