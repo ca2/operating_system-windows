@@ -17,7 +17,7 @@ namespace windows
 
 
       interprocess_communication_base();
-      virtual ~interprocess_communication_base();
+      ~interprocess_communication_base() override;
 
 
       HWND get_hwnd() const { return (HWND) m_hwnd; }
@@ -34,23 +34,23 @@ namespace windows
 
 
       interprocess_communication_tx();
-      virtual ~interprocess_communication_tx();
+      ~interprocess_communication_tx() override;
 
 
 
 #if defined(_UWP)
-      bool open(const ::string & pszChannel);
+      bool open(const ::string & pszChannel) override;
 #else
-      bool open(const ::string & pszChannel, ::launcher * plauncher = nullptr);
+      bool open(const ::string & pszChannel, ::launcher * plauncher = nullptr) override;
 #endif
-      bool close();
+      bool close() override;
 
 
-      bool send(const ::string & pszMessage, duration durationTimeout);
-      bool send(int message, void * pdata, int len, duration durationTimeout);
+      bool send(const ::string & pszMessage, duration durationTimeout) override;
+      bool send(int message, void * pdata, int len, duration durationTimeout) override;
 
 
-      bool is_tx_ok();
+      bool is_tx_ok() override;
 
    };
 
@@ -66,19 +66,19 @@ namespace windows
 
 
       interprocess_communication_rx();
-      virtual ~interprocess_communication_rx();
+      ~interprocess_communication_rx() override;
 
 
-      bool create(const ::string & pszChannel);
+      bool create(const ::string & pszChannel) override;
       ::e_status destroy() override;
 
 
-      virtual void * on_interprocess_receive(::interprocess_communication::rx * prx, const ::string & pszMessage);
-      virtual void * on_interprocess_receive(::interprocess_communication::rx * prx, int message, void * pdata, memsize len);
-      virtual void * on_interprocess_post(::interprocess_communication::rx * prx, i64 a, i64 b);
+      void * on_interprocess_receive(::interprocess_communication::rx * prx, const ::string & pszMessage) override;
+      void * on_interprocess_receive(::interprocess_communication::rx * prx, int message, void * pdata, memsize len) override;
+      void * on_interprocess_post(::interprocess_communication::rx * prx, i64 a, i64 b) override;
 
 
-      virtual bool on_idle();
+      virtual bool on_idle() override;
 
 
       LRESULT message_queue_proc(UINT message, WPARAM wparam, LPARAM lparam);
