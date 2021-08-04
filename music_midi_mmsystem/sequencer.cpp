@@ -1776,7 +1776,7 @@ namespace music
             lpmh->dwBytesRecorded += 3*sizeof(u32);*/
             //m_psequence->m_pfile->m_cbPendingUserEvent = ((u32)MEVT_SHORTMSG )<<24;
             //         str = (char *) malloc(pEvent->cbParm + 1);
-            //         strncpy(str, (const char *) pEvent->hpbParm,  pEvent->cbParm);
+            //         strncpy(str, (const ::string &) pEvent->hpbParm,  pEvent->cbParm);
             //         str[pEvent->cbParm] = 0;
             //         printf("%s", str);
 

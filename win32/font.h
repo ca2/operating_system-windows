@@ -19,7 +19,7 @@ namespace win32
       font();
       virtual ~font();
 
-      bool create_point_font(int iPoint, const char * pszFontFamily, int iWeight = FW_NORMAL);
+      bool create_point_font(int iPoint, const ::string & pszFontFamily, int iWeight = FW_NORMAL);
       void destroy();
 
 #ifdef WINDOWS

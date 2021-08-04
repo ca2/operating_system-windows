@@ -15,9 +15,9 @@
 #define IDI_CC_CA2_SPA       107
 #define IDI_CC_CA2_LEVEL    108
 
-string path_dir_name_for_relative(const char * pszPath);
-//string solve_relative(const char * pszAbsolute);
-//string path_defer_solve_relative_name(const char * pszRelative, const char * pszAbsolute);
+string path_dir_name_for_relative(const ::string & pszPath);
+//string solve_relative(const ::string & pszAbsolute);
+//string path_defer_solve_relative_name(const ::string & pszRelative, const ::string & pszAbsolute);
 
 
 // These next two structs represent how the icon information is stored
@@ -42,7 +42,7 @@ struct ICON_HEADER
 };
 
 
-void dprint(const char * psz)
+void dprint(const ::string & psz)
 {
 
 
@@ -535,7 +535,7 @@ void wmain(int argc, wchar_t * wargv[])
 #define PATH_SEP2 "/"
 
 
-   string path_url_dir_name_for_relative(const char* pszPath)
+   string path_url_dir_name_for_relative(const ::string & pszPath)
    {
       string strDir(pszPath);
 

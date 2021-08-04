@@ -153,7 +153,7 @@ namespace win32
    }
 
 
-   void window::_set_window_text(const char * psz)
+   void window::_set_window_text(const ::string & psz)
    {
 
       ::SetWindowTextW(m_hwnd, wstring(psz));

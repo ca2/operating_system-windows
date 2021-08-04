@@ -203,7 +203,7 @@
 /////////////////////////////////////////////////////////////////////////////
 // DDE special case
 
-void TraceDDE(const char * pszPrefix, const MSG* pMsg)
+void TraceDDE(const ::string & pszPrefix, const MSG* pMsg)
 
 {
    ENSURE_ARG(pMsg != nullptr);
@@ -220,7 +220,7 @@ void TraceDDE(const char * pszPrefix, const MSG* pMsg)
       }
       ASSERT(hCommands != nullptr);
 
-      const char * pszCommands = (const char *)::GlobalLock(hCommands);
+      const char * pszCommands = (const ::string &)::GlobalLock(hCommands);
 
       ENSURE_THROW(pszCommands != nullptr, __throw(error_no_memory));
 

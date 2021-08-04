@@ -29,7 +29,7 @@ namespace windows
       ///				it monitors only the specified directory
       ///  \lparam		filter filter conditions that satisfy a machine notification wait
       ///				can take values described by enum filter
-      file_change_event(::matter * pobject, const char * path, bool watchsubtree, u32 filter);
+      file_change_event(::matter * pobject, const ::string & path, bool watchsubtree, u32 filter);
 
       ///  \brief		destructor
       ~file_change_event();

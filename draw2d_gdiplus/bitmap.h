@@ -26,7 +26,7 @@ namespace draw2d_gdiplus
 
       ::e_status destroy() override;
 
-      bool LoadBitmap(const char * pszResourceName);
+      bool LoadBitmap(const ::string & pszResourceName);
 
       bool LoadBitmap(UINT nIDResource);
       bool LoadOEMBitmap(UINT nIDBitmap); // for OBM_/OCR_/OIC_

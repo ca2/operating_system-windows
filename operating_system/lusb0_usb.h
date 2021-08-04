@@ -384,12 +384,12 @@ extern "C"
             LPSTR cmd_line, int cmd_show);
 
 #define LIBUSB_HAS_INSTALL_DRIVER_NP 1
-    int usb_install_driver_np(const char *inf_file);
+    int usb_install_driver_np(const ::string &inf_file);
     void CALLBACK usb_install_driver_np_rundll(HWND wnd, HINSTANCE instance,
             LPSTR cmd_line, int cmd_show);
 
 #define LIBUSB_HAS_TOUCH_INF_FILE_NP 1
-    int usb_touch_inf_file_np(const char *inf_file);
+    int usb_touch_inf_file_np(const ::string &inf_file);
     void CALLBACK usb_touch_inf_file_np_rundll(HWND wnd, HINSTANCE instance,
             LPSTR cmd_line, int cmd_show);
 

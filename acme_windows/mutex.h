@@ -15,7 +15,7 @@ namespace windows
       bool                 m_bAlreadyExists;
 
 
-      mutex(enum_create_new ecreatenew, bool bInitiallyOwn, const char * lpszName, sync_options * psyncoptions = nullptr);
+      mutex(enum_create_new ecreatenew, bool bInitiallyOwn, const ::string & lpszName, sync_options * psyncoptions = nullptr);
       mutex(enum_create_new ecreatenew = e_create_new, bool bInitiallyOwn = false);
       virtual ~mutex();
 
@@ -29,7 +29,7 @@ namespace windows
       bool already_exists();
 
 
-      static ::mutex open_mutex(const char * lpszName) { return ::open_mutex(lpszName); }
+      static ::mutex open_mutex(const ::string & lpszName) { return ::open_mutex(lpszName); }
 
 
    };
@@ -38,7 +38,7 @@ namespace windows
 } // namespace windows
 
 
-CLASS_DECL_ACME_WINDOWS void wait_until_mutex_does_not_exist(const char * lpszName);
+CLASS_DECL_ACME_WINDOWS void wait_until_mutex_does_not_exist(const ::string & lpszName);
 
 
 

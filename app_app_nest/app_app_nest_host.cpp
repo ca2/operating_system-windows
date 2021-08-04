@@ -170,7 +170,7 @@ namespace ca2plugin_container
    }
 
 
-   bool host::open_link(const ::string & strLink,const ::string & strTarget)
+   bool host::open_link(const ::string & strLink, const ::string & strTarget)
    {
 
       ensure_tx(::hotplugin::message_open_url,(void *)strLink.c_str(),(i32)strLink.get_length(), 2000);
@@ -256,10 +256,10 @@ namespace ca2plugin_container
          switch (variable)
          {
          case NPPVpluginNameString:
-            *((const char **)value) = m_vssPluginName;
+            *((const ::string &*)value) = m_vssPluginName;
             break;
          case NPPVpluginDescriptionString:
-            *((const char **)value) = m_vssPluginDescription;
+            *((const ::string &*)value) = m_vssPluginDescription;
             break;
          case NPPVpluginScriptableNPObject:
             *(NPObject **)value = getScriptableObject();
@@ -471,7 +471,7 @@ namespace ca2plugin_container
                //                m_bStream = true;
 
 
-               string str((const char *) m_memory.get_data(), len);
+               string str((const ::string &) m_memory.get_data(), len);
 
                xxdebug_box(str, "ca2plugincontainer::host::on_receive", 0);
 
@@ -487,7 +487,7 @@ namespace ca2plugin_container
          {
 
 
-            string str((const char *) pdata, len);
+            string str((const ::string &) pdata, len);
 
             xxdebug_box(str, "ca2plugincontainer::host::on_receive", 0);
 

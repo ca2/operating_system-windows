@@ -25,7 +25,7 @@ namespace windows
       void dump(dump_context & dumpcontext) const;
 
 
-      virtual void write_string(const char * psz);
+      virtual void write_string(const ::string & psz);
 
       virtual char * read_string(char * psz, ::u32 nMax);
 

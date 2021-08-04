@@ -191,7 +191,7 @@ namespace windows
    }
 
 
-   void console::write(const char * psz)
+   void console::write(const ::string & psz)
    {
 
       write_memory_to_file(stdout,psz,strlen(psz),nullptr);

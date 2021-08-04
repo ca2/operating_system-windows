@@ -110,7 +110,7 @@ namespace windows
 
 
 
-   //string dir_context::path(const char * pszFolder, strsize iLenFolder, const char * pszRelative, strsize iLenRelative, const char * psz2, strsize iLen2, bool bUrl)
+   //string dir_context::path(const ::string & pszFolder, strsize iLenFolder, const ::string & pszRelative, strsize iLenRelative, const ::string & psz2, strsize iLen2, bool bUrl)
    //{
 
    //   bool bEmptyRelative = iLenRelative == 0 || pszRelative == nullptr || *pszRelative == '\0';
@@ -260,7 +260,7 @@ namespace windows
    //      if(::str::begins(pcszRelative,astr.Slash))
 
    //      {
-   //         return path((const char *)string(pcszSource,pszRequest - lpcszSource),lpcszRelative);
+   //         return path((const ::string &)string(pcszSource,pszRequest - lpcszSource),lpcszRelative);
 
    //      }
    //      else if(*pszRequest == '\0' || ::str::ends(pcszSource,"/"))
@@ -271,7 +271,7 @@ namespace windows
    //      }
    //      else
    //      {
-   //         return path((const char *)name(pcszSource),lpcszRelative);
+   //         return path((const ::string &)name(pcszSource),lpcszRelative);
 
    //      }
    //   }
@@ -285,7 +285,7 @@ namespace windows
    //      }
    //      else
    //      {
-   //         return path((const char *)name(pcszSource),lpcszRelative);
+   //         return path((const ::string &)name(pcszSource),lpcszRelative);
 
    //      }
    //   }
@@ -302,7 +302,7 @@ namespace windows
    //      if(::str::begins(pcszRelative,astr.Slash))
 
    //      {
-   //         return path((const char *) string(pcszSource, pszRequest - lpcszSource), lpcszRelative, psz2);
+   //         return path((const ::string &) string(pcszSource, pszRequest - lpcszSource), lpcszRelative, psz2);
 
    //      }
    //      else if(*pszRequest == '\0' || ::str::ends(pcszSource, "/"))
@@ -313,7 +313,7 @@ namespace windows
    //      }
    //      else
    //      {
-   //         return path((const char *) name(pcszSource), lpcszRelative, psz2);
+   //         return path((const ::string &) name(pcszSource), lpcszRelative, psz2);
 
    //      }
    //   }
@@ -327,7 +327,7 @@ namespace windows
    //      }
    //      else
    //      {
-   //         return path((const char *) name(pcszSource), lpcszRelative, psz2);
+   //         return path((const ::string &) name(pcszSource), lpcszRelative, psz2);
 
    //      }
    //   }
@@ -798,7 +798,7 @@ namespace windows
 
       bool bIsDir;
 
-      if (::thread_is_set(id_thread_zip_is_dir) && iLast >= 3 && !ansi_count_compare_ci(&((const char *)str)[iLast - 3], ".zip", 4))
+      if (::thread_is_set(id_thread_zip_is_dir) && iLast >= 3 && !ansi_count_compare_ci(&((const ::string &)str)[iLast - 3], ".zip", 4))
       {
 
          //m_isdirmap.set(str.Left(iLast + 1), true, 0);
@@ -1228,7 +1228,7 @@ namespace windows
 
    }
 
-   //bool file::GetStatus(const char * pszFileName,::file::file_status& rStatus)
+   //bool file::GetStatus(const ::string & pszFileName,::file::file_status& rStatus)
 
    //{
    //   // attempt to fully qualify path first

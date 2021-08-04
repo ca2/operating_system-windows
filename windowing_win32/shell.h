@@ -62,9 +62,9 @@ namespace windowing_win32
       i32 add_system_icon(int iSize, IImageList * plist, SHFILEINFOW * pinfo, ::color::color crBck, bool & bUsedImageList, int iImage);
 
 
-      virtual ::user::shell::e_folder get_folder_type(::object * pobject, const unichar * pcszPath) override;
+      ::user::shell::e_folder get_folder_type(::object * pobject, const ::wstring & wstrPath) override;
 
-      virtual ::user::shell::e_folder get_folder_type(::object * pobject, const char * pcszPath) override;
+      ::user::shell::e_folder get_folder_type(::object * pobject, const ::string & strPath) override;
 
 
 

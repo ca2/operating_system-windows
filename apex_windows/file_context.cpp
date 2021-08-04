@@ -60,7 +60,7 @@ namespace windows
    }
 
 
-   bool file_context::FullPath(string & str, const char * pszFileIn)
+   bool file_context::FullPath(string & str, const ::string & pszFileIn)
 
    {
 
@@ -122,7 +122,7 @@ namespace windows
    }
 
 
-   ::u32 file_context::GetFileName(const char * pszPathName, string & str)
+   ::u32 file_context::GetFileName(const ::string & pszPathName, string & str)
 
    {
       i32 nMax = MAX_PATH * 8;
@@ -419,7 +419,7 @@ namespace windows
       if (strExtension == "HTML")
       {
 
-         psz = (const char *)RT_HTML;
+         psz = (const ::string &)RT_HTML;
 
       }
 
@@ -591,7 +591,7 @@ namespace windows
    //}
 
 
-   //void file::SetStatus(const char * pszFileName,const ::file::file_status& status)
+   //void file::SetStatus(const ::string & pszFileName,const ::file::file_status& status)
 
    //{
    //   ::u32 wAttr;

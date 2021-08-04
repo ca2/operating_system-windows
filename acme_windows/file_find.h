@@ -63,7 +63,7 @@ namespace windows
 
       // Operations
       void close();
-      virtual bool find_file(const char * pstrName = nullptr, ::u32 dwUnused = 0);
+      virtual bool find_file(const ::string & pstrName = nullptr, ::u32 dwUnused = 0);
       virtual bool find_next_file();
 
       virtual void CloseContext();

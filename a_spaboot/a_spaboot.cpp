@@ -7,8 +7,8 @@ extern std::string g_strVersion;
 HWND g_hwndMessage = nullptr;
 //MSG g_msg;
 
-void parse_installer(const char * psz);
-bool parse_installer_start(const char * psz);
+void parse_installer(const ::string & psz);
+bool parse_installer_start(const ::string & psz);
 SPALIB_API std::string read_resource_as_string(HINSTANCE hinst, UINT nID, LPCTSTR lpcszType);
 
 
@@ -222,7 +222,7 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
 
 
 
-bool file_exists(const char * path1)
+bool file_exists(const ::string & path1)
 {
    DWORD dwFileAttributes = ::GetFileAttributes(path1);
    if(dwFileAttributes != INVALID_FILE_ATTRIBUTES &&
@@ -255,7 +255,7 @@ bool file_exists(const char * path1)
 //   }
 //}
 //
-//void parse_installer(const char * psz)
+//void parse_installer(const ::string & psz)
 //{
 //   XNode node;
 //   node.Load(file::get_contents(psz).c_str());
@@ -329,14 +329,14 @@ bool file_exists(const char * path1)
 //
 //
 //
-//bool parse_installer_start(const char * psz)
+//bool parse_installer_start(const ::string & psz)
 //{
 //   XNode node;
 //   node.Load(file::get_contents(psz).c_str());
 //   return parse_installer_start(node);
 //}
 //
-//void trace(const char * psz)
+//void trace(const ::string & psz)
 //{
 //   printf("%s", psz);
 //}
@@ -475,7 +475,7 @@ LRESULT CALLBACK installer_WndProc(HWND hWnd, const ::id & id, WPARAM wParam, LP
          COPYDATASTRUCT * pcds = (COPYDATASTRUCT *) lParam;
          if(pcds->dwData == 15112000)
          {
-            std::string str((const char *) pcds->lpData, pcds->cbData);
+            std::string str((const ::string &) pcds->lpData, pcds->cbData);
             g_straRestartCommandLine.decode_v16(str.c_str());
          }
       }

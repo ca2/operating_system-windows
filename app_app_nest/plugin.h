@@ -1,7 +1,7 @@
 #pragma once
 
 
-int installer_start(const char * pszVersion, const char * pszId);
+int installer_start(const ::string & pszVersion, const ::string & pszId);
 
 
 namespace npca2
@@ -28,14 +28,14 @@ namespace npca2
 
 
 
-      virtual bool hist(const char * pszUrl);
-      virtual void run_start_install(const char * pszRun);
+      virtual bool hist(const ::string & pszUrl);
+      virtual void run_start_install(const ::string & pszRun);
 
 
       virtual void start_ca2();
 
 
-      //int starter_start(const char * pszId);
+      //int starter_start(const ::string & pszId);
 
       virtual bool initialize();
 

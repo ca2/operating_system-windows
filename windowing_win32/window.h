@@ -71,7 +71,7 @@ namespace windowing_win32
 
 
       //void send_client_event(Atom atom, unsigned int numArgs, ...);
-      //i32 store_name(const char * psz);
+      //i32 store_name(const ::string & psz);
       //i32 select_input(i32 iInput);
       //i32 select_all_input();
       
@@ -79,7 +79,7 @@ namespace windowing_win32
       
       //virtual i32 unmap_window(bool bWithdraw) override;
 
-      //virtual void set_wm_class(const char * psz) override;
+      //virtual void set_wm_class(const ::string & psz) override;
 
       virtual ::e_status exit_iconify() override;
 
@@ -239,13 +239,13 @@ namespace windowing_win32
       //oswindow unsubclass_window();
 
       // handling of RT_DLGINIT resource (extension to RT_DIALOG)
-      //bool ExecuteDlgInit(const char * pszResourceName);
+      //bool ExecuteDlgInit(const ::string & pszResourceName);
 
       //bool ExecuteDlgInit(LPVOID pResource);
 
 
       // for child windows, views, panes etc
-      //virtual bool create_interaction(::user::interaction * pinteraction, const char * pszClassName,const char * pszWindowName,u32 dwStyle,const ::rectangle_i32 & rectangle,::user::interaction * pParentWnd,id id, ::create * pcreate = nullptr) override;
+      //virtual bool create_interaction(::user::interaction * pinteraction, const ::string & pszClassName, const ::string & pszWindowName,u32 dwStyle,const ::rectangle_i32 & rectangle,::user::interaction * pParentWnd,id id, ::create * pcreate = nullptr) override;
 
 
       // advanced creation (allows access to extended styles)
@@ -289,7 +289,7 @@ namespace windowing_win32
 
 
       // Window Text Functions
-      virtual void set_window_text(const char * pszString) override;
+      virtual void set_window_text(const ::string & pszString) override;
 
       virtual strsize get_window_text(char * pszStringBuf, strsize nMaxCount) override;
 
@@ -474,7 +474,7 @@ namespace windowing_win32
       //virtual ::u32 IsDlgButtonChecked(i32 nIDButton) const;
       //virtual lresult SendDlgItemMessage(i32 nID, ::u32 message, wparam wParam = 0, lparam lParam = 0);
       //virtual void SetDlgItemInt(i32 nID, ::u32 nValue, bool bSigned = true);
-      //virtual void SetDlgItemText(i32 nID, const char * pszString);
+      //virtual void SetDlgItemText(i32 nID, const ::string & pszString);
 
 
       //virtual bool open_clipboard() override;
@@ -517,9 +517,9 @@ namespace windowing_win32
             // Window Access Functions
       //virtual ::user::interaction * ChildWindowFromPoint(const ::point_i32 & point);
       //virtual ::user::interaction * ChildWindowFromPoint(const ::point_i32 & point, ::u32 nFlags);
-      ///      virtual ::user::interaction_impl * FindWindow(const char * pszClassName,const char * pszWindowName);
+      ///      virtual ::user::interaction_impl * FindWindow(const ::string & pszClassName, const ::string & pszWindowName);
 
-      //   virtual ::user::interaction_impl * FindWindowEx(::windowing::window * pwindowParent,::windowing::window * pwindowChildAfter,const char * lpszClass,const char * pszWindow);
+      //   virtual ::user::interaction_impl * FindWindowEx(::windowing::window * pwindowParent,::windowing::window * pwindowChildAfter, const ::string & lpszClass, const ::string & pszWindow);
 
       //virtual ::point_i64 _client_parent_top_left() override;
       //virtual ::point_i64 _client_screen_top_left() override;
@@ -546,7 +546,7 @@ namespace windowing_win32
 
       // virtual bool FlashWindow(bool bInvert);
 
-      //virtual void message_box(const char * pszText, const char * pszTitle = nullptr, ::u32 nType = e_message_box_ok, const function_arg & functionarg = function_arg());
+      //virtual void message_box(const ::string & pszText, const ::string & pszTitle = nullptr, ::u32 nType = e_message_box_ok, const function_arg & functionarg = function_arg());
 
 
 //
@@ -678,9 +678,9 @@ namespace windowing_win32
       //void OnSpoolerStatus(::u32 nStatus, ::u32 nJobs);
       //void OnSysColorChange();
       //void OnTimeChange();
-      //void OnSettingChange(::u32 uFlags, const char * pszSection);
+      //void OnSettingChange(::u32 uFlags, const ::string & pszSection);
 
-      //void OnWinIniChange(const char * pszSection);
+      //void OnWinIniChange(const ::string & pszSection);
 
 
       //// Input message handler member functions
@@ -809,7 +809,7 @@ namespace windowing_win32
 
       friend class frame_window;
 
-      //bool CreateDlg(const char * pszTemplateName, ::user::interaction_impl * pParentWnd);
+      //bool CreateDlg(const ::string & pszTemplateName, ::user::interaction_impl * pParentWnd);
 
 
 

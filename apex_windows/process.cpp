@@ -39,7 +39,7 @@ namespace windows
    }
 
 
-   bool process::create_child_process(const char * pszCmdLine, bool bPiped, const char * pszDir, ::e_priority epriority)
+   bool process::create_child_process(const ::string & pszCmdLine, bool bPiped, const ::string & pszDir, ::e_priority epriority)
    {
 
       if (!::process::process::create_child_process(pszCmdLine, bPiped, pszDir, epriority))
@@ -79,7 +79,7 @@ namespace windows
       si.cb = sizeof(si);
       si.dwFlags = STARTF_USESHOWWINDOW;
       si.wShowWindow = e_display_none; */
-      //         if(!::CreateProcess(nullptr, (char *) (const char *) m_pcontext->m_papexcontext->dir().appdata("production\\build.bat"), nullptr, nullptr, false, CREATE_NEW_CONSOLE, nullptr, nullptr, &si, &pi))
+      //         if(!::CreateProcess(nullptr, (char *) (const ::string &) m_pcontext->m_papexcontext->dir().appdata("production\\build.bat"), nullptr, nullptr, false, CREATE_NEW_CONSOLE, nullptr, nullptr, &si, &pi))
       m_si.dwFlags |= STARTF_USESHOWWINDOW;
       m_si.wShowWindow = e_display_none;
 
@@ -221,7 +221,7 @@ namespace windows
    }
 
 
-   bool process::synch_elevated(const char * pszCmdLine,int iShow,const ::duration & durationTimeOut,bool * pbTimeOut)
+   bool process::synch_elevated(const ::string & pszCmdLine,int iShow,const ::duration & durationTimeOut,bool * pbTimeOut)
    {
 
       DWORD dwExitCode = 0;

@@ -46,8 +46,8 @@ namespace win32
 
       void enable_children(bool bEnable = true);
 
-      void _set_window_text(const char * psz);
-      //void s_set_window_text(const char * psz);
+      void _set_window_text(const ::string & psz);
+      //void s_set_window_text(const ::string & psz);
 
       void set_parent(window * pwindow);
 

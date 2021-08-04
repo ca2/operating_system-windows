@@ -32,7 +32,7 @@ namespace windows
    }
 
 
-   file::file(const char* pszFileName, const ::file::e_open & eopen) 
+   file::file(const ::string & pszFileName, const ::file::e_open & eopen) 
    {
 
       m_iCharacterPutBack = -1;
@@ -897,7 +897,7 @@ string CLASS_DECL_ACME_WINDOWS vfxStringFromCLSID(REFCLSID rclsid)
    return szCLSID;
 }
 
-bool CLASS_DECL_ACME_WINDOWS vfxGetInProcServer(const char * pszCLSID, string & str)
+bool CLASS_DECL_ACME_WINDOWS vfxGetInProcServer(const ::string & pszCLSID, string & str)
 
 {
    HKEY hKey = nullptr;

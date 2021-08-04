@@ -21,21 +21,21 @@ public:
 extern std::string get_starter_version();
 
 int bzuncompress_dup(LPCTSTR lpcszUncompressed, LPCTSTR lpcszGzFileCompressed);
-bool read_resource_as_file(const char * pszFile, HINSTANCE hinst, UINT nID, LPCTSTR lpcszType);
-std::string get_temp_file_name_dup(const char * pszName, const char * pszExtension);
-bool file_exists(const char * path1);
+bool read_resource_as_file(const ::string & pszFile, HINSTANCE hinst, UINT nID, LPCTSTR lpcszType);
+std::string get_temp_file_name_dup(const ::string & pszName, const ::string & pszExtension);
+bool file_exists(const ::string & path1);
 
 
 
 HANDLE g_hmutexBoot = nullptr;
 DWORD g_dwPrepareSmallBell = 0;
 
-void parse_installer(const char * psz);
-bool parse_installer_start(const char * psz);
+void parse_installer(const ::string & psz);
+bool parse_installer_start(const ::string & psz);
 //SPALIB_API std::string read_resource_as_string(HINSTANCE hinst, UINT nID, LPCTSTR lpcszType);
 //int gzuncompress(LPCTSTR lpcszUncompressed, LPCTSTR lpcszGzFileCompressed);
-//SPALIB_API bool read_resource_as_file(const char * pszFile, HINSTANCE hinst, UINT nID, LPCTSTR lpcszType);
-//SPALIB_API std::string get_temp_file_name(const char * pszName, const char * pszExtension);
+//SPALIB_API bool read_resource_as_file(const ::string & pszFile, HINSTANCE hinst, UINT nID, LPCTSTR lpcszType);
+//SPALIB_API std::string get_temp_file_name(const ::string & pszName, const ::string & pszExtension);
 
 //int start();
 
@@ -43,7 +43,7 @@ bool parse_installer_start(const char * psz);
 //SPALIB_API void defer_play_small_bell();
 //SPALIB_API void play_small_bell();
 
-int APIENTRY ca2_cube_install(const char * pszId)
+int APIENTRY ca2_cube_install(const ::string & pszId)
 {
    g_hmutexBoot = nullptr;
    SECURITY_ATTRIBUTES MutexAttributes;
@@ -159,7 +159,7 @@ int APIENTRY ca2_cube_install(const char * pszId)
 
 
 
-bool file_exists(const char * path1)
+bool file_exists(const ::string & path1)
 {
    DWORD dwFileAttributes = ::GetFileAttributes(path1);
    if(dwFileAttributes != INVALID_FILE_ATTRIBUTES &&
@@ -192,7 +192,7 @@ void parse_installer(XNode & node)
    }
 }
 
-void parse_installer(const char * psz)
+void parse_installer(const ::string & psz)
 {
    XNode node;
    node.Load(file::get_contents(psz).c_str());
@@ -265,19 +265,19 @@ bool parse_installer_start(XNode & node)
    return true;
 }
 
-bool parse_installer_start(const char * psz)
+bool parse_installer_start(const ::string & psz)
 {
    XNode node;
    node.Load(file::get_contents(psz).c_str());
    return parse_installer_start(node);
 }
 
-void trace(const char * psz)
+void trace(const ::string & psz)
 {
    printf("%s", psz);
 }
 
-int installer_start(const char * pszVersion, const char * pszId)
+int installer_start(const ::string & pszVersion, const ::string & pszId)
 {
    STARTUPINFO si;
    PROCESS_INFORMATION pi;
@@ -404,7 +404,7 @@ bool read_resource_as_file(
 }
 
 
-std::string get_temp_file_name_dup(const char * pszName, const char * pszExtension)
+std::string get_temp_file_name_dup(const ::string & pszName, const ::string & pszExtension)
 {
    char lpPathBuffer[MAX_PATH * 16];
  // Get the temp path.
@@ -446,7 +446,7 @@ std::string get_temp_file_name_dup(const char * pszName, const char * pszExtensi
    return "";
 }
 
-bool file_exists(const char * path1)
+bool file_exists(const ::string & path1)
 {
    DWORD dwFileAttributes = ::GetFileAttributes(path1);
    if(dwFileAttributes != INVALID_FILE_ATTRIBUTES &&

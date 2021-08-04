@@ -163,7 +163,7 @@ namespace windows
          ::file::throw_status(error_file, _doserrno, m_path);
    }
 
-   void stdio_file::write_string(const char * psz)
+   void stdio_file::write_string(const ::string & psz)
 
    {
       ASSERT(psz != nullptr);
@@ -256,7 +256,7 @@ namespace windows
 
    }
 
-   /*void stdio_file::write_string(const char * psz)
+   /*void stdio_file::write_string(const ::string & psz)
 
    {
    ASSERT(psz != nullptr);

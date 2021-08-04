@@ -31,7 +31,7 @@ namespace acme
 
 
          node();
-         virtual ~node();
+         ~node() override;
 
 
          virtual ::e_status initialize_matter(::matter* pmatter) override;
@@ -79,15 +79,15 @@ namespace acme
 
          virtual ::e_status on_start_system() override;
 
-         ::e_status create_process(const char* pszCommandLine, u32 * pprocessId) override;
+         ::e_status create_process(const ::string & pszCommandLine, u32 * pprocessId) override;
 
-         ::e_status run_silent(const char* strFunct, const char* strstrParams) override;
+         ::e_status run_silent(const ::string & strFunct, const ::string & strstrParams) override;
 
          bool process_modules(string_array& stra, u32 processID) override;
 
-         bool load_modules_diff(string_array& straOld, string_array& straNew, const char* pszExceptDir) override;
+         bool load_modules_diff(string_array& straOld, string_array& straNew, const ::string & pszExceptDir) override;
 
-         id_array module_path_get_pid(const char* pszModulePath, bool bModuleNameIsPropertyFormatted) override;
+         id_array module_path_get_pid(const ::string & pszModulePath, bool bModuleNameIsPropertyFormatted) override;
 
          string module_path_from_pid(u32 pid) override;
 
@@ -95,13 +95,13 @@ namespace acme
 
          bool is_shared_library_busy(const string_array& stra) override;
 
-         bool process_contains_module(string& strImage, ::u32 processID, const char* pszLibrary) override;
+         bool process_contains_module(string& strImage, ::u32 processID, const ::string & pszLibrary) override;
 
-         void shared_library_process(dword_array& dwa, string_array& straProcesses, const char* pszLibrary) override;
+         void shared_library_process(dword_array& dwa, string_array& straProcesses, const ::string & pszLibrary) override;
 
          bool is_process_running(::u32 pid) override;
 
-         string get_environment_variable(const char* pszEnvironmentVariable) override;
+         string get_environment_variable(const ::string & pszEnvironmentVariable) override;
 
          string expand_env(string str) override;
 

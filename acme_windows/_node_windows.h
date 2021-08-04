@@ -49,13 +49,13 @@ bool CLASS_DECL_ACME_WINDOWS __windows_init();
 
 // Sanity checks for ATOMs
 CLASS_DECL_ACME_WINDOWS bool __is_valid_atom(ATOM nAtom);
-//CLASS_DECL_ACME_WINDOWS bool __is_valid_atom(const char * psz);
+//CLASS_DECL_ACME_WINDOWS bool __is_valid_atom(const ::string & psz);
 CLASS_DECL_ACME_WINDOWS bool __is_valid_atom(const wchar_t * psz);
 
 
 /////////////////////////////////////////////////////////////////////////////
 // locale-invariant comparison helpers till CRT gets that support
-inline i32 __invariant_stricmp(const char *pszLeft,const char *pszRight)
+inline i32 __invariant_stricmp(const ::string &pszLeft, const ::string &pszRight)
 {
 #ifdef WINDOWS_DESKTOP
    return ::CompareStringA(MAKELCID(MAKELANGID(LANG_ENGLISH,SUBLANG_ENGLISH_US),SORT_DEFAULT),
@@ -107,7 +107,7 @@ inline i32 __invariant_stricmp(const unichar *pwszLeft,const unichar *pwszRight)
 
 
 
-CLASS_DECL_ACME_WINDOWS ::i32 delete_registry_tree_helper(HKEY hParentKey,const ::string & strKeyName);
+CLASS_DECL_ACME_WINDOWS ::i32 delete_registry_tree_helper(HKEY hParentKey, const ::string & strKeyName);
 
 
 //CLASS_DECL_ACME_WINDOWS __pointer(::acme::application) __get_app();

@@ -473,7 +473,7 @@ namespace windows
 
 
 
-   void acme_dir::set_path_install_folder(const char* pszPath)
+   void acme_dir::set_path_install_folder(const ::string & pszPath)
    {
 
       m_pathInstallFolder = pszPath;

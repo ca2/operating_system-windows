@@ -46,7 +46,7 @@ namespace windowing_win32
 
 
       notify_icon();
-      virtual ~notify_icon();
+      ~notify_icon() override;
 
 
       ::e_status add_hidden_window(::user::interaction * puserinteraction) override;
@@ -82,12 +82,12 @@ namespace windowing_win32
       ::e_status step() override;
 
 //#if defined(APPLE_IOS) || defined(WINDOWS_DESKTOP) || defined(ANDROID) || defined(_UWP)
-//      virtual void notify_icon_play(const char * action);
+//      virtual void notify_icon_play(const ::string & action);
 //#else
 //#if defined(LINUX)
-//      virtual void notify_icon_play(const char * action);
+//      virtual void notify_icon_play(const ::string & action);
 //#else
-//      virtual void notify_icon_play(const char * action) override;
+//      virtual void notify_icon_play(const ::string & action) override;
 //#endif
 //      virtual int _get_notification_area_action_count() override;
 //      virtual const char * _get_notification_area_action_name(int iIndex) override;
@@ -95,7 +95,7 @@ namespace windowing_win32
 //      virtual const char * _get_notification_area_action_label(int iIndex) override;
 //      virtual const char * _get_notification_area_action_accelerator(int iIndex) override;
 //      virtual const char * _get_notification_area_action_description(int iIndex) override;
-//      virtual void call_notification_area_action(const char * pszId) override;
+//      virtual void call_notification_area_action(const ::string & pszId) override;
 //#endif
 
 

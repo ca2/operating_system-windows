@@ -133,10 +133,10 @@ NPError Private_NewStream(NPP instance, NPMIMEType type, NPStream* stream, NPBoo
 NPError Private_DestroyStream(NPP instance, NPStream* stream, NPError reason);
 int32   Private_WriteReady(NPP instance, NPStream* stream);
 int32   Private_Write(NPP instance, NPStream* stream, int32 offset, int32 len, void* buffer);
-void    Private_StreamAsFile(NPP instance, NPStream* stream, const char* fname);
+void    Private_StreamAsFile(NPP instance, NPStream* stream, const ::string & fname);
 void    Private_Print(NPP instance, NPPrint* platformPrint);
 int16   Private_HandleEvent(NPP instance, void* event);
-void    Private_URLNotify(NPP instance, const char* url, NPReason reason, void* notifyData);
+void    Private_URLNotify(NPP instance, const ::string & url, NPReason reason, void* notifyData);
 jref    Private_GetJavaClass(void);
 NPError Private_GetValue(NPP instance, NPPVariable variable, void *result);
 NPError Private_SetValue(NPP instance, NPNVariable variable, void *value);

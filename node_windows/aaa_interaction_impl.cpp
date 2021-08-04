@@ -198,7 +198,7 @@ namespace windows
    }
 
 
-   // bool interaction_impl::create_message_queue(::user::interaction * pinteraction, const char * lpszName)
+   // bool interaction_impl::create_message_queue(::user::interaction * pinteraction, const ::string & lpszName)
    // {
 
    //    if (_is_window())
@@ -1101,7 +1101,7 @@ namespace windows
 //
 //   bool gen_GotScrollLines;
 //
-//   void interaction_impl::OnSettingChange(::u32 uFlags, const char * pszSection)
+//   void interaction_impl::OnSettingChange(::u32 uFlags, const ::string & pszSection)
 //
 //   {
 //      UNUSED_ALWAYS(uFlags);
@@ -1841,7 +1841,7 @@ namespace windows
    //}
 
 
-   void interaction_impl::set_window_text(const char * pszString)
+   void interaction_impl::set_window_text(const ::string & pszString)
    {
 
       m_pwindow->set_window_text(pszString);
@@ -2437,7 +2437,7 @@ namespace windows
    //   ASSERT(_is_window());
    //   ::SetDlgItemInt(get_handle(), nID, nValue, bSigned);
    //}
-   //void interaction_impl::SetDlgItemText(i32 nID, const char * pszString)
+   //void interaction_impl::SetDlgItemText(i32 nID, const ::string & pszString)
 
    //{
    //   ASSERT(_is_window());
@@ -3368,7 +3368,7 @@ namespace windows
 //
 //   }
 //
-//   void interaction_impl::OnWinIniChange(const char *)
+//   void interaction_impl::OnWinIniChange(const ::string &)
 //   {
 //      Default();
 //   }
@@ -3412,7 +3412,7 @@ namespace windows
    { m_nIdleFlags |= (idleLayout | (bNotify ? idleNotify : 0)); };
    bool frame_window::InModalState() const
    { return m_cModalStack != 0; }
-   void frame_window::set_title(const char * pszTitle)
+   void frame_window::set_title(const ::string & pszTitle)
 
    { m_strTitle = pszTitle; }
 

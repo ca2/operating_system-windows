@@ -652,7 +652,7 @@ namespace windows
    //   if(((::u32) pClassName) >> 16 == 0)
 
    //   {
-   //      pszClassName = (const char *) lpClassName;
+   //      pszClassName = (const ::string &) lpClassName;
 
    //   }
    //   else
@@ -687,7 +687,7 @@ namespace windows
 
    //   /*   if(((::u32) wndclass) >> 16 == 0)
    //   {
-   //   pszClassName = (const char *) lpClassName;
+   //   pszClassName = (const ::string &) lpClassName;
 
    //   }
    //   else
@@ -773,7 +773,7 @@ namespace windows
    //   if(((::u32) pClassName) >> 16 == 0)
 
    //   {
-   //      pszClassName = (const char *) lpClassName;
+   //      pszClassName = (const ::string &) lpClassName;
 
    //   }
    //   else

@@ -21,7 +21,7 @@ HMODULE get_dll(const TCHAR *dll, unsigned long *error) {
   return ret;
 }
 
-FARPROC get_import(HMODULE library, const char *function, unsigned long *error) {
+FARPROC get_import(HMODULE library, const ::string &function, unsigned long *error) {
   *error = 0;
 
   FARPROC ret = GetProcAddress(library, function);

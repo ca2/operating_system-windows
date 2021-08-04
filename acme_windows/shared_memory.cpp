@@ -268,7 +268,7 @@ void shared_memory::set_data(void *pdata, memsize uiSize)
    }
 }
 
-void shared_memory::From(const char * psz)
+void shared_memory::From(const ::string & psz)
 {
    char ch;
    i32 iLen = strlen(psz);
@@ -314,7 +314,7 @@ void shared_memory::ToAsc(string & str)
    }
 }
 
-void shared_memory::FromAsc(const char * psz)
+void shared_memory::FromAsc(const ::string & psz)
 {
    string str;
    while(*psz)
@@ -342,7 +342,7 @@ void shared_memory::FromAsc(const char * psz)
    from_string(::str::international::unicode_to_utf8(pwsz));
 }
 
-void shared_memory::from_string(const char * psz)
+void shared_memory::from_string(const ::string & psz)
 {
    allocate(strlen(psz));
    ::memcpy_dup(get_data(), psz, this->get_size());

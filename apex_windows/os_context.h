@@ -14,80 +14,80 @@ namespace windows
 
 
       os_context();
-      virtual ~os_context();
+      ~os_context() override;
 
 
-      virtual string get_command_line() override;
+      string get_command_line() override;
 
 
-      virtual bool reboot() override;
-      virtual bool shutdown(bool bPowerOff) override;
+      bool reboot() override;
+      bool shutdown(bool bPowerOff) override;
 
-      virtual void terminate_processes_by_title(const char * lpszName) override;
+      void terminate_processes_by_title(const ::string & lpszName) override;
       //virtual ::file::path get_module_path(HMODULE hmodule) override;
-      virtual bool get_pid_by_path(const char * lpszName, u32 & dwPid) override;
-      virtual bool get_pid_by_title(const char * lpszName, u32 & dwPid) override;
-      virtual void get_all_processes(u32_array & dwa) override;
-      virtual ::file::path get_process_path(u32 dwPid) override;
+      bool get_pid_by_path(const ::string & lpszName, u32 & dwPid) override;
+      bool get_pid_by_title(const ::string & lpszName, u32 & dwPid) override;
+      void get_all_processes(u32_array & dwa) override;
+      ::file::path get_process_path(u32 dwPid) override;
 
-      virtual int get_pid() override;
-
-
-      virtual ::payload connection_settings_get_auto_detect() override;
-      virtual ::payload connection_settings_get_auto_config_url() override;
+      int get_pid() override;
 
 
-      virtual bool local_machine_set_run(const char * pszKey, const char * pszCommand, bool bSet) override;
-      virtual bool local_machine_set_run_once(const char * pszKey, const char * pszCommand, bool bSet) override;
-      virtual bool current_user_set_run(const char * pszKey, const char * pszCommand, bool bSet) override;
-      virtual bool current_user_set_run_once(const char * pszKey, const char * pszCommand, bool bSet) override;
-      virtual bool defer_register_ca2_plugin_for_mozilla() override;
-
-      virtual bool file_extension_get_open_with_list_keys(string_array & straKey, const char * pszExtension) override;
-      virtual bool file_extension_get_open_with_list_commands(string_array & straCommand, const char * pszExtension) override;
-
-      virtual bool file_association_set_default_icon(const char * pszExtension, const char * pszExtensionNamingClass, const char * pszIconPath) override;
-      virtual bool file_association_set_shell_open_command(const char * pszExtension, const char * pszExtensionNamingClass, const char * pszCommand, const char * pszParam) override;
-      virtual bool file_association_get_shell_open_command(const char * pszExtension, string & strExtensionNamingClass, string & strCommand, string & strParam) override;
+      ::payload connection_settings_get_auto_detect() override;
+      ::payload connection_settings_get_auto_config_url() override;
 
 
-      virtual bool open_in_ie(const char * pcsz);
+      bool local_machine_set_run(const ::string & pszKey, const ::string & pszCommand, bool bSet) override;
+      bool local_machine_set_run_once(const ::string & pszKey, const ::string & pszCommand, bool bSet) override;
+      bool current_user_set_run(const ::string & pszKey, const ::string & pszCommand, bool bSet) override;
+      bool current_user_set_run_once(const ::string & pszKey, const ::string & pszCommand, bool bSet) override;
+      bool defer_register_ca2_plugin_for_mozilla() override;
+
+      bool file_extension_get_open_with_list_keys(string_array & straKey, const ::string & pszExtension) override;
+      bool file_extension_get_open_with_list_commands(string_array & straCommand, const ::string & pszExtension) override;
+
+      bool file_association_set_default_icon(const ::string & pszExtension, const ::string & pszExtensionNamingClass, const ::string & pszIconPath) override;
+      bool file_association_set_shell_open_command(const ::string & pszExtension, const ::string & pszExtensionNamingClass, const ::string & pszCommand, const ::string & pszParam) override;
+      bool file_association_get_shell_open_command(const ::string & pszExtension, string & strExtensionNamingClass, string & strCommand, string & strParam) override;
 
 
-      virtual bool file_open(::file::path path, string strParams = "", string strFolder = "") override;
+      bool open_in_ie(const ::string & pcsz);
 
-      virtual bool browse_file_open(property_set & set) override;
-      virtual bool browse_file_save(property_set & set) override;
-      virtual bool browse_folder(property_set & set) override;
-      virtual bool browse_file_or_folder(property_set & set) override;
+
+      bool file_open(::file::path path, string strParams = "", string strFolder = "") override;
+
+      bool browse_file_open(property_set & set) override;
+      bool browse_file_save(property_set & set) override;
+      bool browse_folder(property_set & set) override;
+      bool browse_file_or_folder(property_set & set) override;
 
       virtual ::e_status enable_service() override;
-      virtual ::e_status disable_service() override;
+      ::e_status disable_service() override;
 
-      virtual ::e_status start_service() override;
-      virtual ::e_status stop_service() override;
+      ::e_status start_service() override;
+      ::e_status stop_service() override;
 
-      virtual bool _getCredentialsForService(const string& strService, WCHAR* szUsername, WCHAR* szPassword);
+      bool _getCredentialsForService(const string& strService, WCHAR* szUsername, WCHAR* szPassword);
 
-      virtual bool enable_service(const ::string & strServiceName, const ::string & strDisplayName, const ::string & strCommand, const ::string & strUser = "", const ::string & strPass = "") override;
-      virtual bool disable_service(const ::string & strServiceName) override;
+      bool enable_service(const ::string & strServiceName, const ::string & strDisplayName, const ::string & strCommand, const ::string & strUser = "", const ::string & strPass = "") override;
+      bool disable_service(const ::string & strServiceName) override;
 
-      virtual bool start_service(const ::string & strServiceName) override;
-      virtual bool stop_service(const ::string & strServiceName) override;
+      bool start_service(const ::string & strServiceName) override;
+      bool stop_service(const ::string & strServiceName) override;
 
-      virtual string calc_service_name();
+      string calc_service_name();
 
 
-      virtual bool resolve_link(::file::path & path, const ::string & strSource, string * pstrDirectory = nullptr, string * pstrParams = nullptr) override;
+      bool resolve_link(::file::path & path, const ::string & strSource, string * pstrDirectory = nullptr, string * pstrParams = nullptr) override;
 
-      virtual bool resolve_lnk_link(::file::path & path, const ::string & strSource, string * pstrDirectory = nullptr, string * pstrParams = nullptr);
+      bool resolve_lnk_link(::file::path & path, const ::string & strSource, string * pstrDirectory = nullptr, string * pstrParams = nullptr);
 
 
       DECLSPEC_NO_RETURN void raise_exception(u32 dwExceptionCode, u32 dwExceptionFlags);
 
-      virtual bool is_remote_session() override;
+      bool is_remote_session() override;
 
-      virtual void set_file_status(const char * pszFileName, const ::file::file_status& status) override;
+      void set_file_status(const ::string & pszFileName, const ::file::file_status& status) override;
 
 
 
@@ -95,17 +95,17 @@ namespace windows
 
       virtual bool get_default_browser(string & strId, ::file::path & path, string & strParam) override;
 
-      virtual bool register_user_auto_start(string strId, string strCommand, bool bRegister) override;
+      bool register_user_auto_start(string strId, string strCommand, bool bRegister) override;
 
-      virtual bool is_user_auto_start(string strId) override;
+      bool is_user_auto_start(string strId) override;
 
-      virtual ::file::path get_app_path(const ::string & strApp) override;
+      ::file::path get_app_path(const ::string & strApp) override;
 
-      virtual bool set_default_browser() override;
+      bool set_default_browser() override;
 
-      virtual bool add_default_program(string_array & straExtension, string_array & straMimeType) override;
+      bool add_default_program(string_array & straExtension, string_array & straMimeType) override;
 
-      virtual void list_process(::file::patha & patha, u32_array & uaPid) override;
+      void list_process(::file::patha & patha, u32_array & uaPid) override;
 
       //virtual icon_result load_icon(const ::payload & varFile) override;
 

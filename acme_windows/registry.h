@@ -20,66 +20,68 @@ namespace windows
 
 
          key();
-         key(HKEY hkey, const char* pcszSubKey, bool bCreate = false) { _open(hkey, pcszSubKey, bCreate); }
+         key(HKEY hkey, const ::string & pcszSubKey, bool bCreate = false) { _open(hkey, pcszSubKey, bCreate); }
          virtual ~key();
 
       
          operator HKEY();
 
-         void open(HKEY hkey, const char * pcszSubKey, bool bCreate = false);
-         ::e_status _open(HKEY hkey, const char* pcszSubKey, bool bCreate = false);
+         void open(HKEY hkey, const ::string & pcszSubKey, bool bCreate = false);
+         ::e_status _open(HKEY hkey, const ::string & pcszSubKey, bool bCreate = false);
 
          
-         void defer_create(HKEY hkey, const char * pcszSubKey);
-         inline ::e_status _defer_create(HKEY hkey, const char* pcszSubKey) { return _open(hkey, pcszSubKey, true); }
+         void defer_create(HKEY hkey, const ::string & pcszSubKey);
+         inline ::e_status _defer_create(HKEY hkey, const ::string & pcszSubKey) { return _open(hkey, pcszSubKey, true); }
 
 
          void close();
 
          
-         void value(void * pvalue, const char * pcszValueName, ::u32 & dwType, ::u32 & cbValue);
-         ::e_status _value(void * pvalue, const char* pcszValueName, ::u32& dwType, ::u32& cbValue);
+         void value(void * pvalue, const ::string & pcszValueName, ::u32 & dwType, ::u32 & cbValue);
+         ::e_status _value(void * pvalue, const ::string & pcszValueName, ::u32& dwType, ::u32& cbValue);
 
-         ::e_status _set_value(const void* pvalue, const char* pcszValueName, ::u32 dwType, ::u32 cbValue);
-
-
-         void value_type_and_size(const char * pcszValueName, ::u32 & dwType, ::u32 & cbValue);
-         ::e_status _value_type_and_size(const char* pcszValueName, ::u32& dwType, ::u32& cbValue) { return _value(nullptr, pcszValueName, dwType, cbValue); }
+         ::e_status _set_value(const void* pvalue, const ::string & pcszValueName, ::u32 dwType, ::u32 cbValue);
 
 
-         void get(const char * pcszValueName, ::u32 & dwValue);
-         ::e_status _get(const char * pcszValueName, ::u32 & dwValue);
+         void value_type_and_size(const ::string & pcszValueName, ::u32 & dwType, ::u32 & cbValue);
+         ::e_status _value_type_and_size(const ::string & pcszValueName, ::u32& dwType, ::u32& cbValue) { return _value(nullptr, pcszValueName, dwType, cbValue); }
+
+
+         void get(const ::string & pcszValueName, ::u32 & dwValue);
+         ::e_status _get(const ::string & pcszValueName, ::u32 & dwValue);
 
          
-         void get(const char * pcszValueName, string & strValue);
-         ::e_status _get(const char * pcszValueName, string &strValue);
+         void get(const ::string & pcszValueName, string & strValue);
+         ::e_status _get(const ::string & pcszValueName, string &strValue);
 
 
-         void get(const char * pcszValueName, memory & mem);
-         ::e_status _get(const char * pcszValueName, memory & mem);
+         void get(const ::string & pcszValueName, memory & mem);
+         ::e_status _get(const ::string & pcszValueName, memory & mem);
 
 
-         inline ::payload get(const char* pcszValueName);
+         inline ::payload get(const ::string & pcszValueName);
 
 
-         void set(const char * pcszValueName, ::u32 dwValue);
-         ::e_status _set(const char * pcszValueName, ::u32 dwValue);
+         void set(const ::string & pcszValueName, ::u32 dwValue);
+         ::e_status _set(const ::string & pcszValueName, ::u32 dwValue);
 
 
-         void set(const char * pcszValueName, const ::string & strValue);
-         ::e_status _set(const char * pcszValueName, const ::string & strValue);
+         void set(const ::string & strValueName, const char * pszValue);
+         void set(const ::string & strValueName, const ::string & strValue);
+         ::e_status _set(const ::string & strValueName, const char * pszValue);
+         ::e_status _set(const ::string & strValueName, const ::string & strValue);
 
 
-         void set(const char * pcszValueName, const char * pszValue);
-         ::e_status _set(const char * pcszValueName, const char * pszValue);
+         //void set(const ::string & pcszValueName, const ::string & pszValue);
+         //::e_status _set(const ::string & pcszValueName, const ::string & pszValue);
 
 
-         void set(const char * pcszValueName, const memory & mem);
-         ::e_status _set(const char * pcszValueName, const memory & mem);
+         void set(const ::string & pcszValueName, const memory & mem);
+         ::e_status _set(const ::string & pcszValueName, const memory & mem);
 
 
-         void delete_value(const char * pcszValueName);
-         ::e_status _delete_value(const char * pcszValueName);
+         void delete_value(const ::string & pcszValueName);
+         ::e_status _delete_value(const ::string & pcszValueName);
 
 
          void delete_key();

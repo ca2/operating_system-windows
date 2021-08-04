@@ -86,7 +86,7 @@ namespace draw2d_gdi
    }
 
 
-   bool bitmap::LoadBitmap(const char * lpszResourceName)
+   bool bitmap::LoadBitmap(const ::string & lpszResourceName)
    {
 
       //      return Attach(::LoadBitmap(AfxFindResourceHandle(lpszResourceName, RT_BITMAP), lpszResourceName));

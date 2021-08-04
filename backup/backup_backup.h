@@ -18,14 +18,14 @@ namespace backup
 
       virtual ::e_status     run() override;
 
-      bool hotcopy_repos(const char * psz);
-      bool compress_repos(const char * psz);
+      bool hotcopy_repos(const ::string & psz);
+      bool compress_repos(const ::string & psz);
 
       bool all_db_dump();
       bool db_copy();
 
-      string get_new_repos_local_path(const char * psz);
-      string get_new_db_local_path(const char * psz);
+      string get_new_repos_local_path(const ::string & psz);
+      string get_new_db_local_path(const ::string & psz);
 
 
 

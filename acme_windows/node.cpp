@@ -817,7 +817,7 @@ namespace acme
       }
 
 
-      bool node::load_modules_diff(string_array& straOld, string_array& straNew, const char* pszExceptDir)
+      bool node::load_modules_diff(string_array& straOld, string_array& straNew, const ::string & pszExceptDir)
       {
 
          bool bFound;
@@ -908,7 +908,7 @@ namespace acme
       }
 
 
-      id_array node::module_path_get_pid(const char* pszModulePath, bool bModuleNameIsPropertyFormatted)
+      id_array node::module_path_get_pid(const ::string & pszModulePath, bool bModuleNameIsPropertyFormatted)
       {
 
          ::file::path pathModule(pszModulePath);
@@ -1147,7 +1147,7 @@ namespace acme
       //}
 
 
-      bool node::process_contains_module(string& strImage, ::u32 processID, const char* pszLibrary)
+      bool node::process_contains_module(string& strImage, ::u32 processID, const ::string & pszLibrary)
       {
 
          HANDLE hProcess;
@@ -1214,7 +1214,7 @@ namespace acme
       }
 
 
-      void node::shared_library_process(dword_array& dwa, string_array& straProcesses, const char* pszLibrary)
+      void node::shared_library_process(dword_array& dwa, string_array& straProcesses, const ::string & pszLibrary)
       {
 
          // Get the list of process identifiers.
@@ -1301,7 +1301,7 @@ namespace acme
 
 
 
-      //CLASS_DECL_ACME BOOL LaunchAppIntoDifferentSession(const char* pszProcess, const char* pszCommand, const char* pszDir, STARTUPINFOW* psi, PROCESS_INFORMATION* ppi, int iSession)
+      //CLASS_DECL_ACME BOOL LaunchAppIntoDifferentSession(const ::string & pszProcess, const ::string & pszCommand, const ::string & pszDir, STARTUPINFOW* psi, PROCESS_INFORMATION* ppi, int iSession)
       //{
       //   //PROCESS_INFORMATION pi;
       //   //STARTUPINFO si;
@@ -1491,7 +1491,7 @@ namespace acme
       //
       //}
       //
-      //CLASS_DECL_ACME BOOL LaunchAppIntoSystemAcc(const char* pszProcess, const char* pszCommand, const char* pszDir, STARTUPINFOW* psi, PROCESS_INFORMATION* ppi)
+      //CLASS_DECL_ACME BOOL LaunchAppIntoSystemAcc(const ::string & pszProcess, const ::string & pszCommand, const ::string & pszDir, STARTUPINFOW* psi, PROCESS_INFORMATION* ppi)
       //{
       //   //PROCESS_INFORMATION pi;
       //   //STARTUPINFO si;
@@ -1638,7 +1638,7 @@ namespace acme
       }
 
 
-      string node::get_environment_variable(const char* pszEnvironmentVariable)
+      string node::get_environment_variable(const ::string & pszEnvironmentVariable)
       {
 
          string str;
@@ -1672,7 +1672,7 @@ namespace acme
       }
 
 
-      ::e_status node::create_process(const char * pszCommandLine, u32 * pprocessId)
+      ::e_status node::create_process(const ::string & pszCommandLine, u32 * pprocessId)
       {
 
          STARTUPINFO StartupInfo;
@@ -1734,7 +1734,7 @@ namespace acme
       }
 
 
-      ::e_status node::run_silent(const char* strFunct, const char* strstrParams)
+      ::e_status node::run_silent(const ::string & strFunct, const ::string & strstrParams)
       {
 
 #if defined(_UWP)

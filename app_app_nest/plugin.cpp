@@ -81,13 +81,13 @@ namespace npca2
 
 
 
-   bool plugin::hist(const char * pszUrl)
+   bool plugin::hist(const ::string & pszUrl)
    {
       return open_url(pszUrl);
    }
 
 
-   void plugin::run_start_install(const char * pszInstall)
+   void plugin::run_start_install(const ::string & pszInstall)
    {
    
       {

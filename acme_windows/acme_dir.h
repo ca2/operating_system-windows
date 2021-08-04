@@ -60,7 +60,7 @@ namespace windows
       virtual ::file::path inplace_matter_install(string strAppId, string strPlatform, string strConfiguration) override;
 
 
-      virtual void set_path_install_folder(const char* pszPath) override;
+      virtual void set_path_install_folder(const ::string & pszPath) override;
 
       virtual  bool        _shell_get_special_folder_path(HWND hwnd, ::file::path& str, i32 csidl, bool fCreate);
       virtual ::file::path _shell_get_special_folder_path(i32 csidl, bool fCreate = true, ::windowing::window* pwindow = nullptr);

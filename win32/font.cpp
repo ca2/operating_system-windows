@@ -2,7 +2,7 @@
 #include "apex/operating_system.h"
 
 
-//CLASS_DECL_APEX HFONT wingdi_CreatePointFont(int nPointSize, const char * lpszFaceName, HDC hdc, LOGFONTW* lpLogFont);
+//CLASS_DECL_APEX HFONT wingdi_CreatePointFont(int nPointSize, const ::string & lpszFaceName, HDC hdc, LOGFONTW* lpLogFont);
 
 
 namespace win32
@@ -23,7 +23,7 @@ namespace win32
 
    }
 
-   bool font::create_point_font(int iPoint, const char * pszFontFamily, int iWeight)
+   bool font::create_point_font(int iPoint, const ::string & pszFontFamily, int iWeight)
    {
 
       destroy();

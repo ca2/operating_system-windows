@@ -806,7 +806,7 @@ namespace windowing_win32
    //}
 
 
-   shell::e_folder shell::get_folder_type(::object * pobject, const char * pcsz)
+   shell::e_folder shell::get_folder_type(::object * pobject, const ::string & pcsz)
 
    {
 
@@ -816,12 +816,12 @@ namespace windowing_win32
    }
 
 
-   shell::e_folder shell::get_folder_type(::object * pobject, const unichar * pcszPath)
+   shell::e_folder shell::get_folder_type(::object * pobject, const ::wstring & wstrPath)
    {
 
       string strPath;
 
-      ::str::international::unicode_to_utf8(strPath, pcszPath);
+      ::str::international::unicode_to_utf8(strPath, wstrPath);
 
       if (dir::is(strPath))
       {

@@ -197,7 +197,7 @@ namespace draw2d_gdiplus
    }
 
 
-   //bool graphics::CreateDC(const char * pszDriverName, const char * pszDeviceName, const char * pszOutput, const void * lpInitData)
+   //bool graphics::CreateDC(const ::string & pszDriverName, const ::string & pszDeviceName, const ::string & pszOutput, const void * lpInitData)
    //{
 
    //   return attach_hdc(::CreateDCW(wstring(pszDriverName), wstring(pszDeviceName), wstring(pszOutput), (const DEVMODEW*)lpInitData));
@@ -205,7 +205,7 @@ namespace draw2d_gdiplus
    //}
 
 
-   //bool graphics::CreateIC(const char * pszDriverName, const char * pszDeviceName, const char * pszOutput, const void * lpInitData)
+   //bool graphics::CreateIC(const ::string & pszDriverName, const ::string & pszDeviceName, const ::string & pszOutput, const void * lpInitData)
    //{
 
    //   return attach_hdc(::CreateICW(wstring(pszDriverName), wstring(pszDeviceName), wstring(pszOutput), (const DEVMODEW*) lpInitData));
@@ -2156,7 +2156,7 @@ namespace draw2d_gdiplus
    //// COLOR_DEST = SRC_ALPHA * BLEND_ALPHA * COLOR_SRC  + (1 - SRC_ALPHA * BLEND_ALPHA) * COLOR_DST
 
 
-   //bool graphics::ExtTextOut(double x, double y,UINT nOptions,const rectangle_f64 &  rectParam,const char * pszString,strsize nCount,LPINT lpDxWidths)
+   //bool graphics::ExtTextOut(double x, double y,UINT nOptions,const rectangle_f64 &  rectParam, const ::string & pszString,strsize nCount,LPINT lpDxWidths)
    //{
 
    //   //ASSERT(get_handle1() != nullptr);
@@ -2184,7 +2184,7 @@ namespace draw2d_gdiplus
    //}
 
 
-   //size_f64 graphics::TabbedTextOut(double x, double y, const char * pszString, strsize nCount, count nTabPositions, LPINT lpnTabStopPositions, i32 nTabOrigin)
+   //size_f64 graphics::TabbedTextOut(double x, double y, const ::string & pszString, strsize nCount, count nTabPositions, LPINT lpnTabStopPositions, i32 nTabOrigin)
    //{
 
    //   //ASSERT(get_handle1() != nullptr);
@@ -2212,7 +2212,7 @@ namespace draw2d_gdiplus
    //}
 
 
-   //size_f64 graphics::GetTabbedTextExtent(const char * pszString, strsize nCount, count nTabPositions, LPINT lpnTabStopPositions)
+   //size_f64 graphics::GetTabbedTextExtent(const ::string & pszString, strsize nCount, count nTabPositions, LPINT lpnTabStopPositions)
    //{
 
    //   //ASSERT(get_handle2() != nullptr);
@@ -2240,7 +2240,7 @@ namespace draw2d_gdiplus
    //}
 
 
-   size_f64 graphics::GetOutputTabbedTextExtent(const char * pszString, strsize nCount, count nTabPositions, LPINT lpnTabStopPositions)
+   size_f64 graphics::GetOutputTabbedTextExtent(const ::string & pszString, strsize nCount, count nTabPositions, LPINT lpnTabStopPositions)
    {
 
       //ASSERT(get_handle1() != nullptr);
@@ -2431,7 +2431,7 @@ namespace draw2d_gdiplus
    //}
 
 
-   //u32 graphics::GetCharacterPlacement(const char * pString, strsize nCount, strsize nMaxExtent, LPGCP_RESULTS lpResults, u32 dwFlags)
+   //u32 graphics::GetCharacterPlacement(const ::string & pString, strsize nCount, strsize nMaxExtent, LPGCP_RESULTS lpResults, u32 dwFlags)
 
    //{
 
@@ -2451,7 +2451,7 @@ namespace draw2d_gdiplus
 
    //   //ASSERT(get_handle1() != nullptr);
 
-   //   //return ::GetCharacterPlacement(get_handle1(), (const char *)str, (i32) str.get_length(), (int) nMaxExtent, pResults, dwFlags);
+   //   //return ::GetCharacterPlacement(get_handle1(), (const ::string &)str, (i32) str.get_length(), (int) nMaxExtent, pResults, dwFlags);
    //   __throw(error_not_implemented);
 
    //   return -1;
@@ -2485,7 +2485,7 @@ namespace draw2d_gdiplus
    //}
 
    //// Printer Escape Functions
-   //i32 graphics::Escape(i32 nEscape, i32 nCount, const char * pszInData, LPVOID lpOutData)
+   //i32 graphics::Escape(i32 nEscape, i32 nCount, const ::string & pszInData, LPVOID lpOutData)
 
    //{
    //   //ASSERT(get_handle1() != nullptr);
@@ -2837,7 +2837,7 @@ namespace draw2d_gdiplus
    }
 
 
-   //i32 graphics::DrawEscape(i32 nEscape, i32 nInputSize, const char * pszInputData)
+   //i32 graphics::DrawEscape(i32 nEscape, i32 nInputSize, const ::string & pszInputData)
 
    //{
 
@@ -2852,7 +2852,7 @@ namespace draw2d_gdiplus
    //}
 
 
-   //i32 graphics::Escape(i32 nEscape, i32 nInputSize, const char * pszInputData,  i32 nOutputSize, char * pszOutputData)
+   //i32 graphics::Escape(i32 nEscape, i32 nInputSize, const ::string & pszInputData,  i32 nOutputSize, char * pszOutputData)
 
    //{
 
@@ -4206,7 +4206,7 @@ namespace draw2d_gdiplus
    }
 
 
-   //i32 graphics::StartDoc(const char * pszDocName)
+   //i32 graphics::StartDoc(const ::string & pszDocName)
 
    //{
 
@@ -5330,7 +5330,7 @@ namespace draw2d_gdiplus
    }
 
 
-   //bool graphics::draw_text_ex(const char * pszString,strsize nCount,const rectangle_i32 & rectParam, const ::e_align & ealign, const ::e_draw_text & edrawtext,LPDRAWTEXTPARAMS lpDTParams)
+   //bool graphics::draw_text_ex(const ::string & pszString,strsize nCount,const rectangle_i32 & rectParam, const ::e_align & ealign, const ::e_draw_text & edrawtext,LPDRAWTEXTPARAMS lpDTParams)
    //{
 
    //   if (::is_null(m_pgraphics))
@@ -5379,7 +5379,7 @@ namespace draw2d_gdiplus
    }
 
 
-   //bool graphics::draw_text_ex(const char * pszString,strsize nCount,const ::rectangle_f64 & rectParam, const ::e_align & ealign, const ::e_draw_text & edrawtext,LPDRAWTEXTPARAMS lpDTParams)
+   //bool graphics::draw_text_ex(const ::string & pszString,strsize nCount,const ::rectangle_f64 & rectParam, const ::e_align & ealign, const ::e_draw_text & edrawtext,LPDRAWTEXTPARAMS lpDTParams)
    //{
 
    //   if (::is_null(m_pgraphics))
@@ -5669,13 +5669,16 @@ namespace draw2d_gdiplus
 
    }
 
-   size_f64 graphics::GetTextBegin(const char * pszString, strsize nCount, strsize iIndex)
 
+   size_f64 graphics::GetTextBegin(const char * pszString, strsize nCount, strsize iIndex)
    {
 
       if (pszString == nullptr || *pszString == '\0')
+      {
 
          return ::size_f64(0, 0);
+
+      }
 
       if (nCount < 0)
          nCount = strlen(pszString);

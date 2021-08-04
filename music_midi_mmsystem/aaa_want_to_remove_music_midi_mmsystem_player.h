@@ -38,7 +38,7 @@ namespace music
             virtual void term_thread() override;
             virtual void pre_translate_message(::message::message * pmessage) override;
             virtual void OnMmsgDone(::music::midi::sequence *pSeq) override;
-            //virtual void SaveFile(const char * lpszPathName) override;
+            //virtual void SaveFile(const ::string & lpszPathName) override;
             virtual void SetPosition(double dRate) override;
             virtual void pause() override;
             virtual void close_file() override;

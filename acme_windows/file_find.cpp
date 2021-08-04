@@ -55,7 +55,7 @@ namespace windows
    }
 
 
-   bool file_find::find_file(const char * pstrName /* = nullptr */, ::u32 dwUnused /* = 0 */)
+   bool file_find::find_file(const ::string & strNameParam /* = nullptr */, ::u32 dwUnused /* = 0 */)
    {
 
       UNUSED_ALWAYS(dwUnused);
@@ -71,12 +71,18 @@ namespace windows
 
       m_bGotLast = false;
 
-      if (pstrName == nullptr)
-         pstrName = "*.*";
+      string strName(strNameParam);
 
-      ::str::international::MultiByteToUnicode(CP_UTF8, m_pNextInfo->cFileName, MAX_PATH, pstrName);
+      if (strName.is_empty())
+      {
 
-      wstring wstrName = ::str::international::utf8_to_unicode(pstrName);
+         strName = "*.*";
+
+      }
+
+      ::str::international::MultiByteToUnicode(CP_UTF8, m_pNextInfo->cFileName, MAX_PATH, strName);
+
+      wstring wstrName = ::str::international::utf8_to_unicode(strName);
 
       m_hContext = ::FindFirstFileW(wstrName, m_pNextInfo);
 

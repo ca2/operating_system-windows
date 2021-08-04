@@ -61,7 +61,7 @@ namespace windows
       virtual ::file::path appdata();
       virtual ::file::path commonappdata_root();
 
-      //virtual ::file::path usersystemappdata(const char * pcszPrefix);
+      //virtual ::file::path usersystemappdata(const ::string & pcszPrefix);
 
       //virtual ::file::path userappdata();
       //virtual ::file::path userdata();

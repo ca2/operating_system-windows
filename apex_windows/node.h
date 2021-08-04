@@ -77,19 +77,19 @@ namespace apex
          virtual string multimedia_audio_get_default_library_name() override;
 
 
-         //virtual bool is_application_installed(const ::file::path& pathExe, string strAppId, string& strBuild, const char* pszPlatform, const char* pszConfiguration, const char* pszLocale, const char* pszSchema) override;
+         //virtual bool is_application_installed(const ::file::path& pathExe, string strAppId, string& strBuild, const ::string & pszPlatform, const ::string & pszConfiguration, const ::string & pszLocale, const ::string & pszSchema) override;
 
-         //virtual bool set_application_installed(const ::file::path& pathExe, string strAppId, const char* pszBuild, const char* pszPlatform, const char* pszConfiguration, const char* pszLocale, const char* pszSchema) override;
+         //virtual bool set_application_installed(const ::file::path& pathExe, string strAppId, const ::string & pszBuild, const ::string & pszPlatform, const ::string & pszConfiguration, const ::string & pszLocale, const ::string & pszSchema) override;
 
          //virtual bool set_last_run_application_path(string strAppId) override;
 
 
-         //virtual ::u32       get_file_attributes(const char* pFileName);
+         //virtual ::u32       get_file_attributes(const ::string & pFileName);
          virtual ::u32       get_current_directory(string& str);
          virtual ::u32       get_temp_path(string& str);
-         virtual ::i32        reg_query_value(HKEY hkey, const char* pszSubKey, string& str);
-         virtual  HICON       extract_icon(HINSTANCE hInst, const char* pszExeFileName, ::u32 nIconIndex);
-         virtual  bool        delete_file(const char* pFileName);
+         virtual ::i32        reg_query_value(HKEY hkey, const ::string & pszSubKey, string& str);
+         virtual  HICON       extract_icon(HINSTANCE hInst, const ::string & pszExeFileName, ::u32 nIconIndex);
+         virtual  bool        delete_file(const ::string & pFileName);
          // virtual  i32     get_menu_string(HMENU hMenu, ::u32 uDItem, string& str, ::u32 flags);
          //virtual  void        time_to_filetime(::matter* pobject, const ::datetime::time& time, LPFILETIME pFileTime);
 

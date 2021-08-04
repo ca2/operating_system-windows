@@ -51,7 +51,7 @@
 //
 //
 //
-//   //bool application::_001OnDDECommand(const char * pcsz)
+//   //bool application::_001OnDDECommand(const ::string & pcsz)
 //
 //   //{
 //

@@ -18,7 +18,7 @@ namespace windows
 
 
       console();
-      virtual ~console();
+      ~console() override;
 
       ::string_stream& cout() override;
 
@@ -29,7 +29,7 @@ namespace windows
       void SetCursorPosition(int y,int x);
       void SetTextColor(int color);
       void SetScreenColor(enum_dos_color edoscolor, int iLineStart = 0, int iLineCount = -1);
-      void write(const char * psz);
+      void write(const ::string & psz);
 
    };
 

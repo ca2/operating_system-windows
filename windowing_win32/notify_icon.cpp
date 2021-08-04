@@ -330,7 +330,7 @@ namespace windowing_win32
    }
 
 
-   //void notify_icon::notify_icon_play(const char * action)
+   //void notify_icon::notify_icon_play(const ::string & action)
    //{
 
 
@@ -407,7 +407,7 @@ namespace windowing_win32
 //   }
 //
 //
-//   void notify_icon::call_notification_area_action(const char * pszId)
+//   void notify_icon::call_notification_area_action(const ::string & pszId)
 //   {
 //
 //      m_plistener->call_notification_area_action(pszId);

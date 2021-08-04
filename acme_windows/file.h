@@ -54,7 +54,7 @@ namespace windows
 
       file();
       file(HANDLE hFile);
-      file(const char * pszFileName, const ::file::e_open & eopen);
+      file(const ::string & pszFileName, const ::file::e_open & eopen);
 
       virtual ~file();
 

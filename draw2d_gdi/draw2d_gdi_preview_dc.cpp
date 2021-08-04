@@ -492,7 +492,7 @@ AFX_STATIC int CLASS_DECL_DRAW2D_GDI _AfxComputeNextTab(int x, UINT nTabStops, L
 
 // Compute a character delta table for correctly positioning the screen
 // font characters where the printer characters will appear on the page
-size_i32 preview_dc::ComputeDeltas(int& x, const char * lpszString, UINT &nCount,
+size_i32 preview_dc::ComputeDeltas(int& x, const ::string & lpszString, UINT &nCount,
    bool bTabbed, UINT nTabStops, LPINT lpnTabStops, int nTabOrigin,
    __out_z LPTSTR lpszOutputString, int* pnDxWidths, int& nRightFixup)
 {
@@ -635,7 +635,7 @@ size_i32 preview_dc::ComputeDeltas(int& x, const char * lpszString, UINT &nCount
    return sizeExtent;
 }
 
-bool preview_dc::text_out(int x, int y, const char * lpszString, int nCount)
+bool preview_dc::text_out(int x, int y, const ::string & lpszString, int nCount)
 {
    return ExtTextOut(x, y, 0, nullptr, lpszString, nCount, nullptr);
 }
@@ -693,7 +693,7 @@ bool preview_dc::ExtTextOut(int x, int y, UINT nOptions, const ::rectangle_i32 &
    return bSuccess;
 }
 
-size_i32 preview_dc::TabbedTextOut(int x, int y, const char * lpszString, int nCount,
+size_i32 preview_dc::TabbedTextOut(int x, int y, const ::string & lpszString, int nCount,
    int nTabPositions, LPINT lpnTabStopPositions, int nTabOrigin)
 {
    ASSERT(get_handle2() != nullptr);
@@ -746,7 +746,7 @@ size_i32 preview_dc::TabbedTextOut(int x, int y, const char * lpszString, int nC
 
 // This one is too complicated to do character-by-character output positioning
 // All we really need to do here is mirror the current position
-int preview_dc::draw_text(const char * lpszString, int nCount, RECT * prectangle,
+int preview_dc::draw_text(const ::string & lpszString, int nCount, RECT * prectangle,
    UINT nFormat)
 {
    ASSERT(get_handle2() != nullptr);
@@ -791,10 +791,10 @@ bool preview_dc::GrayString(::draw2d::brush*,
                LPARAM lpData, int nCount, int x, int y, int, int)
 {
    TRACE(::radix::trace::category_AppMsg, 0, "text_out() substituted for GrayString() in Print Preview.\n");
-   return text_out(x, y, (const char *)lpData, nCount);
+   return text_out(x, y, (const ::string &)lpData, nCount);
 }
 
-int preview_dc::Escape(int nEscape, int nCount, const char * lpszInData, void * lpOutData)
+int preview_dc::Escape(int nEscape, int nCount, const ::string & lpszInData, void * lpOutData)
 {
    // The tact here is to NOT allow any of the document control escapes
    // to be passed through.  Elimination of StartDoc and EndDoc should
@@ -999,9 +999,9 @@ HDC CLASS_DECL_DRAW2D_GDI AfxCreateDC(HGLOBAL hDevNames, HGLOBAL hDevMode)
    if (lpDevNames == nullptr)
       return nullptr;
 
-   HDC hDC = ::CreateDC((const char *)lpDevNames + lpDevNames->wDriverOffset,
-                 (const char *)lpDevNames + lpDevNames->wDeviceOffset,
-                 (const char *)lpDevNames + lpDevNames->wOutputOffset,
+   HDC hDC = ::CreateDC((const ::string &)lpDevNames + lpDevNames->wDriverOffset,
+                 (const ::string &)lpDevNames + lpDevNames->wDeviceOffset,
+                 (const ::string &)lpDevNames + lpDevNames->wOutputOffset,
                  lpDevMode);
 
    ::GlobalUnlock(hDevNames);

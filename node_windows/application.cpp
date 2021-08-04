@@ -52,7 +52,7 @@ namespace aura
 
 
 
-   //bool application::_001OnDDECommand(const char * pcsz)
+   //bool application::_001OnDDECommand(const ::string & pcsz)
 
    //{
 
@@ -139,7 +139,7 @@ namespace aura
 
    //            // Retrieve file description for language and code page "i".
    //            if (VerQueryValue(memory.get_data(),
-   //               (char *)(const char*)strKey,
+   //               (char *)(const ::string &)strKey,
    //               (LPVOID*)&psz,
    //               &uiSize))
    //            {

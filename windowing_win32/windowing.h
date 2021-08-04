@@ -109,7 +109,7 @@ namespace windowing_win32
       virtual ::windowing::cursor * get_default_cursor();
 
 
-      //virtual enum_dialog_result message_box(const char * pszMessage, const char * pszTitle, const ::e_message_box & emessagebox);
+      //virtual enum_dialog_result message_box(const ::string & pszMessage, const ::string & pszTitle, const ::e_message_box & emessagebox);
 
 
       virtual void get_cursor_pos(POINT_I32 * ppoint);
@@ -151,7 +151,7 @@ namespace windowing_win32
       //CLASS_DECL_WINDOWING_WIN32 wstring windows_register_window_class(::object * pobject, ::u32 nClassStyle, hcursor hCursor = 0, HBRUSH hbrBackground = 0, hicon hIcon = 0);
       virtual bool _windows_register_class(WNDCLASSEXW* puserinteractionclass);
       //
-      virtual wstring _windows_calc_icon_window_class(::user::interaction* pinteraction, u32 dwDefaultStyle, const char* pszMatter) override;
+      virtual wstring _windows_calc_icon_window_class(::user::interaction* pinteraction, u32 dwDefaultStyle, const ::string & pszMatter) override;
       virtual wstring _windows_get_user_interaction_window_class(::user::interaction* pinteraction) override;
       virtual bool _windows_register_with_icon(WNDCLASSEXW* puserinteractionclass, const unichar* pszClassName, ::u32 nIDIcon);
 

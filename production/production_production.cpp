@@ -1605,7 +1605,7 @@ namespace production
    }*/
 
 
-   bool  production::sync_source(const char * psz, const char * pszRevision)
+   bool  production::sync_source(const ::string & psz, const ::string & pszRevision)
    {
       string strStatus;
       strStatus.Format("Updating source: %s ...", psz);
@@ -1628,7 +1628,7 @@ namespace production
       {
          str.Format("svn update %s", strBase / psz);
       }
-      if (!::CreateProcess(nullptr, (LPTSTR)(const char *)str, nullptr, nullptr, false, CREATE_NEW_CONSOLE, nullptr, nullptr, &si, &pi))
+      if (!::CreateProcess(nullptr, (LPTSTR)(const ::string &)str, nullptr, nullptr, false, CREATE_NEW_CONSOLE, nullptr, nullptr, &si, &pi))
       {
          strStatus.Format("     Error: Check svn installation!!");
          add_status(strStatus);
@@ -1670,7 +1670,7 @@ namespace production
       return true;
    }
 
-   bool production::commit_source(const char * psz)
+   bool production::commit_source(const ::string & psz)
    {
       string strStatus;
       strStatus = unitext("Commit ") + psz;
@@ -1734,7 +1734,7 @@ namespace production
       {
          str.Format("git commit --file=%s %s", m_strBase / "app\\this_version_info.txt", strBase / psz);
       }
-      if (!::CreateProcess(nullptr, (LPTSTR)(const char *)str, nullptr, nullptr, false, CREATE_NEW_CONSOLE, nullptr, nullptr, &si, &pi))
+      if (!::CreateProcess(nullptr, (LPTSTR)(const ::string &)str, nullptr, nullptr, false, CREATE_NEW_CONSOLE, nullptr, nullptr, &si, &pi))
       {
          strStatus.Format("     Error: Check svn installation!!");
          add_status(strStatus);
@@ -1770,7 +1770,7 @@ namespace production
       {
          str.Format("git push %s", strBase / psz);
       }
-      if (!::CreateProcess(nullptr, (LPTSTR)(const char *)str, nullptr, nullptr, false, CREATE_NEW_CONSOLE, nullptr, nullptr, &si, &pi))
+      if (!::CreateProcess(nullptr, (LPTSTR)(const ::string &)str, nullptr, nullptr, false, CREATE_NEW_CONSOLE, nullptr, nullptr, &si, &pi))
       {
          strStatus.Format("     Error: Check svn installation!!");
          add_status(strStatus);
@@ -1800,7 +1800,7 @@ namespace production
       return true;
    }
 
-   bool production::get_file_list(const char * pszBase, const char * pszDir, ::file::listing & stra, bool bFileSet)
+   bool production::get_file_list(const ::string & pszBase, const ::string & pszDir, ::file::listing & stra, bool bFileSet)
    {
       ::file::path strBase(pszBase);
       ::file::path strRelease;
@@ -2287,7 +2287,7 @@ namespace production
    }
 
 
-   void production::xpi_section(const char * pszManifest, const char * pszSignature)
+   void production::xpi_section(const ::string & pszManifest, const ::string & pszSignature)
    {
       m_straManifest.add(pszManifest);
       memory memManifest(pszManifest);
@@ -2300,7 +2300,7 @@ namespace production
       m_straPath.last().m_iRelative = strlen(pszDir) + 1;
    }
 
-   void production::xpi_sign_dir(const char * pszPlatform, const ::file::path & pszDir)
+   void production::xpi_sign_dir(const ::string & pszPlatform, const ::file::path & pszDir)
    {
 
       m_straPath.erase_all();
@@ -2391,7 +2391,7 @@ namespace production
 
 
 
-   bool production::release_npca2(const char * pszPlatform)
+   bool production::release_npca2(const ::string & pszPlatform)
    {
 
       string strPlatform(pszPlatform);
@@ -2555,7 +2555,7 @@ namespace production
       return true;
    }
 
-   bool production::create_xpi(const char * pszPlatform, bool bSigned)
+   bool production::create_xpi(const ::string & pszPlatform, bool bSigned)
    {
 
       string strPlatform(pszPlatform);
@@ -2578,7 +2578,7 @@ namespace production
 
    }
 
-   bool production::create_signed_xpi(const char * pszPlatform)
+   bool production::create_signed_xpi(const ::string & pszPlatform)
    {
 
       string strPlatform(pszPlatform);
@@ -2620,7 +2620,7 @@ namespace production
       return true;
    }
 
-   bool production::create_unsigned_xpi(const char * pszPlatform)
+   bool production::create_unsigned_xpi(const ::string & pszPlatform)
    {
 
       string strPlatform(pszPlatform);
@@ -2654,7 +2654,7 @@ namespace production
 
    }
 
-   bool production::release_iexca2(const char * pszPlatform)
+   bool production::release_iexca2(const ::string & pszPlatform)
    {
 
       string strStatus;
@@ -2714,7 +2714,7 @@ namespace production
 
    }
 
-   bool production::release_crxca2(const char * pszPlatform)
+   bool production::release_crxca2(const ::string & pszPlatform)
    {
 
       string strPlatform(pszPlatform);
@@ -2889,7 +2889,7 @@ namespace production
    }
 
 
-   void production::add_status(const char * psz)
+   void production::add_status(const ::string & psz)
    {
       {
          single_lock synchronouslock(&m_mutexStatus, true);
@@ -2899,7 +2899,7 @@ namespace production
       m_pview->post_message(WM_USER, 1);
    }
 
-   void production::change_status(const char * psz)
+   void production::change_status(const ::string & psz)
    {
       {
          single_lock synchronouslock(&m_mutexStatus, true);
@@ -2917,7 +2917,7 @@ namespace production
 
 
 
-   production::release::release(production * pproduction, const char * pszRelease, const char * pszServer) :
+   production::release::release(production * pproduction, const ::string & pszRelease, const ::string & pszServer) :
       ::object(pproduction->get_application()),
       thread(pproduction->get_application()),
       m_strRelease(pszRelease),
@@ -3134,7 +3134,7 @@ namespace production
 
 
 
-   string production::twitter_twit(const char * pszMessage)
+   string production::twitter_twit(const ::string & pszMessage)
    {
 
       i32 iRetry = 0;
@@ -3225,7 +3225,7 @@ retry1:
 
    }
 
-   string production::facebook_status(const char * pszMessage)
+   string production::facebook_status(const ::string & pszMessage)
    {
 
       i32 iRetry = 0;
@@ -3397,7 +3397,7 @@ retry1:
 
 
 
-   void production::build(const char * psz)
+   void production::build(const ::string & psz)
    {
 
       // Build before production!!
@@ -3479,7 +3479,7 @@ retry1:
 
    }
 
-   string production::version_to_international_datetime(const char * psz)
+   string production::version_to_international_datetime(const ::string & psz)
    {
       string str(psz);
       str.replace("-", ":", 11);
@@ -3487,7 +3487,7 @@ retry1:
    }
 
 
-   void production::update_rc_file_version(const char * pszUrl)
+   void production::update_rc_file_version(const ::string & pszUrl)
    {
 
       string str = pcontext->m_papexcontext->file().as_string(pszUrl);

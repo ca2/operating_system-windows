@@ -21,11 +21,11 @@ namespace ca2plugin_container
       ::plugin::system *         m_psystem;
 
 
-      application(::plugin::system * psystem,const char * pszChannel);
+      application(::plugin::system * psystem, const ::string & pszChannel);
       virtual ~application();
 
 
-      virtual void on_receive(::aura::ipc::rx * prx, const char * pszMessage);
+      virtual void on_receive(::aura::ipc::rx * prx, const ::string & pszMessage);
 
       virtual void on_receive(::aura::ipc::rx * prx, i32 message, void * pdata, i32 len);
 

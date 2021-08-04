@@ -39,14 +39,14 @@ namespace windows
 
 
 #if defined(_UWP)
-      bool open(const char * pszChannel);
+      bool open(const ::string & pszChannel);
 #else
-      bool open(const char * pszChannel, ::launcher * plauncher = nullptr);
+      bool open(const ::string & pszChannel, ::launcher * plauncher = nullptr);
 #endif
       bool close();
 
 
-      bool send(const char * pszMessage, duration durationTimeout);
+      bool send(const ::string & pszMessage, duration durationTimeout);
       bool send(int message, void * pdata, int len, duration durationTimeout);
 
 
@@ -69,11 +69,11 @@ namespace windows
       virtual ~interprocess_communication_rx();
 
 
-      bool create(const char * pszChannel);
+      bool create(const ::string & pszChannel);
       ::e_status destroy() override;
 
 
-      virtual void * on_interprocess_receive(::interprocess_communication::rx * prx, const char * pszMessage);
+      virtual void * on_interprocess_receive(::interprocess_communication::rx * prx, const ::string & pszMessage);
       virtual void * on_interprocess_receive(::interprocess_communication::rx * prx, int message, void * pdata, memsize len);
       virtual void * on_interprocess_post(::interprocess_communication::rx * prx, i64 a, i64 b);
 
@@ -102,14 +102,14 @@ namespace windows
 //
 //
 //#if defined(_UWP)
-//      bool open_ab(const char * pszChannel, const char * pszModule);
-//      bool open_ba(const char * pszChannel, const char * pszModule);
+//      bool open_ab(const ::string & pszChannel, const ::string & pszModule);
+//      bool open_ba(const ::string & pszChannel, const ::string & pszModule);
 //#elif defined(WINDOWS)
-//      bool open_ab(const char * pszChannel, const char * pszModule, launcher * plauncher = nullptr);
-//      bool open_ba(const char * pszChannel, const char * pszModule, launcher * plauncher = nullptr);
+//      bool open_ab(const ::string & pszChannel, const ::string & pszModule, launcher * plauncher = nullptr);
+//      bool open_ba(const ::string & pszChannel, const ::string & pszModule, launcher * plauncher = nullptr);
 //#else
-//      bool open_ab(const char * pszChannel, launcher * plauncher = nullptr);
-//      bool open_ba(const char * pszChannel, launcher * plauncher = nullptr);
+//      bool open_ab(const ::string & pszChannel, launcher * plauncher = nullptr);
+//      bool open_ba(const ::string & pszChannel, launcher * plauncher = nullptr);
 //#endif
 //
 //
@@ -118,7 +118,7 @@ namespace windows
 //
 //      virtual void restart_apex_ipc();
 //
-//      //bool ensure_tx(const char * pszMessage, duration durationTimeout = one_hour());
+//      //bool ensure_tx(const ::string & pszMessage, duration durationTimeout = one_hour());
 //      //bool ensure_tx(int message, void * pdata, int len, duration durationTimeout = one_hour());
 //
 //

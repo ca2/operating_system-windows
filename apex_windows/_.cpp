@@ -23,7 +23,7 @@ namespace windows
 
 
 
-   //HINSTANCE load_library(const char* psz)
+   //HINSTANCE load_library(const ::string & psz)
 
    //{
 
@@ -76,7 +76,7 @@ namespace windows
    //}
 
 
-   //::i32 reg_query_value(HKEY hkey, const char* pszSubKey, string& str)
+   //::i32 reg_query_value(HKEY hkey, const ::string & pszSubKey, string& str)
    //{
 
    //   DWORD dwType = 0;
@@ -110,7 +110,7 @@ namespace windows
    //}
 
 
-   //HICON extract_icon(HINSTANCE hInst, const char* pszExeFileName, ::u32 nIconIndex)
+   //HICON extract_icon(HINSTANCE hInst, const ::string & pszExeFileName, ::u32 nIconIndex)
 
    //{
 
@@ -120,7 +120,7 @@ namespace windows
    //}
 
 
-   //bool delete_file(const char* pFileName)
+   //bool delete_file(const ::string & pFileName)
 
    //{
 

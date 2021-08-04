@@ -36,7 +36,7 @@ public:
    afx_msg void OnGetMinMaxInfo(MINMAXINFO* lpMMI);
    afx_msg void OnFileNewlibrary();
    afx_msg void OnFileOpenlibrary();
-   bool ValidateNewName(const char * psz, CString & strCandidateNewPath);
+   bool ValidateNewName(const ::string & psz, CString & strCandidateNewPath);
    virtual HRESULT STDMETHODCALLTYPE QueryInterface(const IID &,void **);
    virtual ULONG STDMETHODCALLTYPE AddRef();
    virtual ULONG STDMETHODCALLTYPE Release();

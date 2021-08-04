@@ -143,7 +143,7 @@ namespace windows
 
 
 
-   //::file::path dir_system::application_installer_folder(const ::file::path& pathExe, string strAppId, const char* pszPlatform, const char* pszConfiguration, const char* pszLocale, const char* pszSchema)
+   //::file::path dir_system::application_installer_folder(const ::file::path& pathExe, string strAppId, const ::string & pszPlatform, const ::string & pszConfiguration, const ::string & pszLocale, const ::string & pszSchema)
    //{
 
    //   string strFolder = pathExe.folder();
@@ -157,7 +157,7 @@ namespace windows
 
 
 
-   //::file::path dir_system::get_application_path(string strAppId, const char* pszPlatform, const char* pszConfiguration)
+   //::file::path dir_system::get_application_path(string strAppId, const ::string & pszPlatform, const ::string & pszConfiguration)
    //{
 
    //   ::file::path pathFolder;

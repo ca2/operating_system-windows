@@ -20,14 +20,14 @@ namespace backup
    {
    }
 
-   string backup::get_new_repos_local_path(const char * psz)
+   string backup::get_new_repos_local_path(const ::string & psz)
    {
       string strNewRepos;
       strNewRepos.Format("V:\\ca2\\bk\\%s\\repos\\%s", m_strTag, psz);
       return strNewRepos;
    }
 
-   string backup::get_new_db_local_path(const char * psz)
+   string backup::get_new_db_local_path(const ::string & psz)
    {
       string strNewRepos;
       strNewRepos.Format("V:\\ca2\\bk\\%s\\db\\%s", m_strTag, psz);
@@ -201,7 +201,7 @@ namespace backup
    }
 
 
-   bool  backup::hotcopy_repos(const char * psz)
+   bool  backup::hotcopy_repos(const ::string & psz)
    {
       string strStatus;
       strStatus.Format("hotcopy repository: %s ...", psz);
@@ -220,7 +220,7 @@ namespace backup
       pcontext->m_papexcontext->dir().mk(strNewRepos.folder());
       str.Format("svnadmin hotcopy C:\\repos\\%s %s", psz, strNewRepos);
 
-      if(!::CreateProcess(nullptr, (LPTSTR) (const char *) str, nullptr, nullptr, false, CREATE_NEW_CONSOLE, nullptr, nullptr, &si, &pi))
+      if(!::CreateProcess(nullptr, (LPTSTR) (const ::string &) str, nullptr, nullptr, false, CREATE_NEW_CONSOLE, nullptr, nullptr, &si, &pi))
       {
          strStatus.Format("     Error: Check svn installation!!");
          add_status(strStatus);
@@ -290,7 +290,7 @@ namespace backup
       return true;
    }
 
-   bool  backup::compress_repos(const char * psz)
+   bool  backup::compress_repos(const ::string & psz)
    {
       string strStatus;
       strStatus.Format("compressing repository: %s ...", psz);
@@ -311,7 +311,7 @@ namespace backup
       pcontext->m_papexcontext->dir().mk(strTar.folder());
       str.Format("7za.exe a -r -ttar \"%s\" \"%s\"", strTar, strNewRepos);
 
-      if(!::CreateProcess(nullptr, (LPTSTR) (const char *) str, nullptr, nullptr, false, CREATE_NEW_CONSOLE, nullptr, nullptr, &si, &pi))
+      if(!::CreateProcess(nullptr, (LPTSTR) (const ::string &) str, nullptr, nullptr, false, CREATE_NEW_CONSOLE, nullptr, nullptr, &si, &pi))
       {
          strStatus.Format("     Error: Check 7-zip installation! Cannot 7za.exe command line utility!");
          add_status(strStatus);

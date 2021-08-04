@@ -24,8 +24,8 @@ namespace draw2d_gdi
 
 
       virtual bool CreateFontIndirect(const LOGFONTW* lpLogFont);
-      virtual bool CreateFont(int nHeight, int nWidth, int nEscapement, int nOrientation, int nWeight, BYTE bItalic, BYTE bUnderline, BYTE cStrikeOut, BYTE nCharSet, BYTE nOutPrecision, BYTE nClipPrecision, BYTE nQuality, BYTE nPitchAndFamily, const char * lpszFacename);
-      virtual bool CreatePointFont(int nPointSize, const char * lpszFaceName, const ::draw2d::graphics_pointer & pgraphics = nullptr);
+      virtual bool CreateFont(int nHeight, int nWidth, int nEscapement, int nOrientation, int nWeight, BYTE bItalic, BYTE bUnderline, BYTE cStrikeOut, BYTE nCharSet, BYTE nOutPrecision, BYTE nClipPrecision, BYTE nQuality, BYTE nPitchAndFamily, const ::string & lpszFacename);
+      virtual bool CreatePointFont(int nPointSize, const ::string & lpszFaceName, const ::draw2d::graphics_pointer & pgraphics = nullptr);
       virtual bool CreatePointFontIndirect(const LOGFONTW* lpLogFont, const ::draw2d::graphics_pointer & pgraphics = nullptr);
 
 
