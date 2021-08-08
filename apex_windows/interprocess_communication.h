@@ -73,9 +73,9 @@ namespace windows
       ::e_status destroy() override;
 
 
-      void * on_interprocess_receive(::interprocess_communication::rx * prx, const ::string & pszMessage) override;
-      void * on_interprocess_receive(::interprocess_communication::rx * prx, int message, void * pdata, memsize len) override;
-      void * on_interprocess_post(::interprocess_communication::rx * prx, i64 a, i64 b) override;
+      //void * on_interprocess_receive(const ::string & pszMessage) override;
+      //void * on_interprocess_receive(int message, void * pdata, memsize len) override;
+      //void * on_interprocess_post(i64 a, i64 b) override;
 
 
       virtual bool on_idle() override;

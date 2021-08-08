@@ -24,7 +24,7 @@ namespace aura
 
 
          node();
-         virtual ~node();
+         ~node() override;
 
 
          string get_user_name();
@@ -56,6 +56,9 @@ namespace aura
          virtual ::e_status system_main() override;
 
 
+         virtual HICON extract_resource_icon(const ::string & strPath, int & cx, int & cy, int iIcon);
+
+         
       };
 
 

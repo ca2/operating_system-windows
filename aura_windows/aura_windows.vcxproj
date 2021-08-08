@@ -1155,6 +1155,7 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="extract_icon.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="interaction_impl.h" />
     <ClInclude Include="node.h" />
@@ -1162,6 +1163,7 @@
     <ClInclude Include="_aura_windows.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="extract_icon.cpp" />
     <ClCompile Include="interaction_impl.cpp" />
     <ClCompile Include="node.cpp" />
     <ClCompile Include="factory_exchange.cpp" />

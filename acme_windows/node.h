@@ -106,7 +106,33 @@ namespace acme
          string expand_env(string str) override;
 
 
+         //virtual ::u32       get_file_attributes(const ::string & pFileName);
+         virtual ::u32       get_current_directory(string& str);
+         virtual ::u32       get_temp_path(string& str);
+         virtual ::i32        reg_query_value(HKEY hkey, const ::string & pszSubKey, string& str);
+         virtual  HICON       extract_icon(HINSTANCE hInst, const ::string & pszExeFileName, ::u32 nIconIndex);
+         virtual  ::e_status        delete_file(const ::string & pFileName);
+         //virtual  i32     get_menu_string(HMENU hMenu, ::u32 uDItem, string& str, ::u32 flags);
+         //virtual  void        time_to_filetime(::matter* pobject, const ::datetime::time& time, LPFILETIME pFileTime);
+
+
          array <::serial::port_info> list_serial_ports() override;
+
+         string get_user_language() override;
+         bool get_application_exclusivity_security_attributes(memory & memory) override;
+         bool register_spa_file_type(const ::string & strAppIdHandler) override;
+         ::e_status start_program_files_app_app_admin(string strPlatform, string strConfiguration) override;
+
+
+         ::e_status get_folder_path_from_user(::file::path & pathFolder) override;
+
+
+         ::e_status register_dll(const ::file::path & pathDll);
+
+
+         ::string expand_environment_variables(const ::string & str) override;
+
+         virtual ::wstring expand_environment_variables(const ::wstring & wstr);
 
 
       };

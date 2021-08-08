@@ -29,6 +29,9 @@
     <ClInclude Include="interaction_impl.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="extract_icon.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="framework.cpp">
@@ -44,6 +47,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="interaction_impl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="extract_icon.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

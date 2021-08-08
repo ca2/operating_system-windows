@@ -330,7 +330,9 @@ namespace windows
 
    ::file::listing & dir_context::root_ones(::file::listing & listing)
    {
+
       ::u32 dwSize = ::GetLogicalDriveStringsW(0, nullptr);
+
       ::acme::malloc < LPWSTR > pszAlloc;
 
       pszAlloc.alloc((dwSize + 1) * sizeof(WCHAR));
@@ -338,7 +340,6 @@ namespace windows
       LPWSTR psz = pszAlloc;
 
       dwSize = ::GetLogicalDriveStringsW(dwSize + 1, psz);
-
 
       string str;
 
@@ -355,17 +356,22 @@ namespace windows
             psz++;
 
          }
+         
          listing.add(::file::path(str));
+         
          ::file::path & path = listing.last();
+         
          path.m_iDir = 1;
+         
          str.trim(":/\\");
+         
          listing.m_straTitle.add("Drive " + str);
+
          psz++;
 
       }
 
       return listing;
-
 
    }
 

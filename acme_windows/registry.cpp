@@ -641,3 +641,169 @@ namespace windows
 } // namespace windows
 
 
+
+
+
+
+typedef
+LSTATUS
+(APIENTRY * LPFN_RegGetValueW) (
+   HKEY hkey,
+   const widechar * pSubKey,
+
+   const widechar * pValue,
+
+   u32 dwFlags,
+   LPDWORD pdwType,
+   PVOID pvData,
+   LPDWORD pcbData
+   );
+
+
+LPFN_RegGetValueW g_pfnRegGetValueW = nullptr;
+
+
+int WinRegGetValueW(HKEY hkey, const widechar * pSubKey, const widechar * lpValue, ::u32 dwFlags, LPDWORD pdwType, PVOID pvData, LPDWORD pcbData)
+{
+
+   if (g_pfnRegGetValueW != nullptr)
+   {
+
+      return g_pfnRegGetValueW(hkey, pSubKey, lpValue, dwFlags, pdwType, pvData, pcbData);
+
+   }
+   else
+   {
+
+      LSTATUS lstatus = RegQueryValueExW(hkey, pSubKey, nullptr, pdwType, (byte *)pvData, pcbData);
+
+      if (lstatus == ERROR_SUCCESS)
+      {
+
+         if (pvData != nullptr && (dwFlags & RRF_RT_REG_SZ) != 0 && *pdwType == REG_SZ)
+         {
+
+            ((WCHAR *)pvData)[*pcbData] = L'\0';
+
+         }
+
+      }
+
+      return lstatus;
+
+   }
+
+}
+
+
+CLASS_DECL_ACME_WINDOWS void reg_delete_tree_dup(HKEY hkey, const char * name)
+{
+
+   HKEY hkeySub = nullptr;
+
+   if (ERROR_SUCCESS == ::RegOpenKeyW(hkey, wstring(name), &hkeySub))
+   {
+
+      u32 dwAlloc = 1026 * 64;
+
+      wchar_t * szKey = (wchar_t *)memory_allocate(dwAlloc * 2);
+
+      u32 dwIndex = 0;
+
+      while (ERROR_SUCCESS == ::RegEnumKeyW(hkeySub, dwIndex, szKey, dwAlloc))
+      {
+
+         reg_delete_tree_dup(hkeySub, string(szKey));
+
+         dwIndex++;
+
+      }
+
+      memory_free_debug(szKey, 0);
+
+      ::RegCloseKey(hkeySub);
+
+   }
+
+   ::RegDeleteKeyW(hkey, wstring(name));
+
+}
+
+
+CLASS_DECL_ACME_WINDOWS void windows_registry_initialize()
+{
+
+   HMODULE hmoduleAdvApi32 = ::LoadLibraryW(L"AdvApi32");
+
+   g_pfnRegGetValueW = (LPFN_RegGetValueW) ::GetProcAddress(hmoduleAdvApi32, "RegGetValueW");
+
+}
+
+
+
+
+
+
+
+
+
+
+string file_get_mozilla_firefox_plugin_container_path()
+{
+
+   string strPath;
+   HKEY hkeyMozillaFirefox;
+
+   if (::RegOpenKeyW(HKEY_LOCAL_MACHINE, L"SOFTWARE\\Mozilla\\Mozilla Firefox", &hkeyMozillaFirefox) != ERROR_SUCCESS)
+      return "";
+   {
+
+      DWORD dwType;
+      DWORD dwData;
+      dwData = 0;
+      if (::WinRegGetValueW(hkeyMozillaFirefox, nullptr, L"CurrentVersion", RRF_RT_REG_SZ, &dwType, nullptr, &dwData) != ERROR_SUCCESS)
+      {
+         goto ret1;
+      }
+
+      wstring wstrVersion;
+      auto pwszVersion = wstrVersion.get_string_buffer(dwData);
+      if (::WinRegGetValueW(hkeyMozillaFirefox, nullptr, L"CurrentVersion", RRF_RT_REG_SZ, &dwType, pwszVersion, &dwData) != ERROR_SUCCESS)
+      {
+         wstrVersion.release_string_buffer();
+         goto ret1;
+      }
+      wstrVersion.release_string_buffer();
+
+      wstring wstrMainSubKey = wstrVersion + L"\\Main";
+      dwData = 0;
+
+      if (::WinRegGetValueW(hkeyMozillaFirefox, wstrMainSubKey, L"Install Directory", RRF_RT_REG_SZ, &dwType, nullptr, &dwData) != ERROR_SUCCESS)
+      {
+         goto ret1;
+      }
+
+      wstring wstrDir;
+      auto pwszDir = wstrDir.get_string_buffer(dwData);
+      if (::WinRegGetValueW(hkeyMozillaFirefox, wstrMainSubKey, L"Install Directory", RRF_RT_REG_SZ, &dwType, pwszDir, &dwData) != ERROR_SUCCESS)
+      {
+         wstrDir.release_string_buffer();
+         goto ret1;
+      }
+      wstrDir.release_string_buffer();
+
+      ::file::path strDir;
+
+      strDir = ::str::international::unicode_to_utf8(wstrDir);
+
+      strPath = strDir / "plugin-container.exe";
+   }
+
+ret1:
+   ::RegCloseKey(hkeyMozillaFirefox);
+   return strPath;
+
+}
+
+
+

@@ -805,12 +805,19 @@ namespace apex
       }
 
 
-      bool node::delete_file(const ::string & pFileName)
-
+      ::e_status node::delete_file(const ::string & pFileName)
       {
 
-         return ::DeleteFileW(::str::international::utf8_to_unicode(pFileName)) != false;
+         if (!::DeleteFileW(::str::international::utf8_to_unicode(pFileName)))
+         {
 
+            DWORD dwLastError = ::GetLastError();
+
+            return last_error_to_status(dwLastError);
+
+         }
+
+         return ::success;
 
       }
 

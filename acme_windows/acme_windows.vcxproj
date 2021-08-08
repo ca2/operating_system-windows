@@ -298,7 +298,7 @@
       <SubSystem>Windows</SubSystem>
       <EntryPointSymbol>
       </EntryPointSymbol>
-      <AdditionalDependencies>Setupapi.lib;Dbghelp.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>Setupapi.lib;Dbghelp.lib;Advapi32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <IgnoreSpecificDefaultLibraries>
       </IgnoreSpecificDefaultLibraries>
     </Link>
@@ -476,7 +476,7 @@
       <SubSystem>Windows</SubSystem>
       <EntryPointSymbol>
       </EntryPointSymbol>
-      <AdditionalDependencies>Setupapi.lib;Dbghelp.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>Setupapi.lib;Dbghelp.lib;Advapi32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <IgnoreSpecificDefaultLibraries>
       </IgnoreSpecificDefaultLibraries>
       <ShowProgress>NotSet</ShowProgress>
@@ -573,7 +573,7 @@
       <SubSystem>Windows</SubSystem>
       <EntryPointSymbol>
       </EntryPointSymbol>
-      <AdditionalDependencies>Setupapi.lib;Dbghelp.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>Setupapi.lib;Dbghelp.lib;Advapi32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <IgnoreSpecificDefaultLibraries>
       </IgnoreSpecificDefaultLibraries>
       <ShowProgress>NotSet</ShowProgress>
@@ -771,7 +771,7 @@
       </EntryPointSymbol>
       <IgnoreSpecificDefaultLibraries>
       </IgnoreSpecificDefaultLibraries>
-      <AdditionalDependencies>Setupapi.lib;Dbghelp.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>Setupapi.lib;Dbghelp.lib;Advapi32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <MapFileName>
       </MapFileName>
     </Link>
@@ -945,7 +945,7 @@
       </EntryPointSymbol>
       <IgnoreSpecificDefaultLibraries>
       </IgnoreSpecificDefaultLibraries>
-      <AdditionalDependencies>Setupapi.lib;Dbghelp.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>Setupapi.lib;Dbghelp.lib;Advapi32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <MapFileName>$(TargetDir)$(TargetName).map</MapFileName>
     </Link>
     <Manifest>
@@ -1037,7 +1037,7 @@
       </EntryPointSymbol>
       <IgnoreSpecificDefaultLibraries>
       </IgnoreSpecificDefaultLibraries>
-      <AdditionalDependencies>Setupapi.lib;Dbghelp.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>Setupapi.lib;Dbghelp.lib;Advapi32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <MapFileName>$(TargetDir)$(TargetName).map</MapFileName>
       <LinkTimeCodeGeneration>UseLinkTimeCodeGeneration</LinkTimeCodeGeneration>
     </Link>
@@ -1160,6 +1160,8 @@
     <ClInclude Include="file_change_event.h" />
     <ClInclude Include="file_exception.h" />
     <ClInclude Include="file_find.h" />
+    <ClInclude Include="itemidlist.h" />
+    <ClInclude Include="known_folder_struct.h" />
     <ClInclude Include="mutex.h" />
     <ClInclude Include="node.h" />
     <ClInclude Include="acme_dir.h" />
@@ -1187,6 +1189,8 @@
     <ClCompile Include="argcargv.cpp" />
     <ClCompile Include="callstack.cpp" />
     <ClCompile Include="file_find.cpp" />
+    <ClCompile Include="itemidlist.cpp" />
+    <ClCompile Include="known_folder_struct.cpp" />
     <ClCompile Include="list_serial_ports.cpp" />
     <ClCompile Include="mutex.cpp" />
     <ClCompile Include="node.cpp" />

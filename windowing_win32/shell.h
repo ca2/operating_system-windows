@@ -28,38 +28,44 @@ namespace windowing_win32
       comptr < IImageList >                           m_pilJumbo;
       //__composite(::user::message_queue)              m_pmessagequeue;
 
-
+      comptr<IKnownFolderManager> m_knownfoldermanager;
 
       shell();
       ~shell() override;
 
 
-      virtual ::e_status initialize(::object * pobject) override;
+      ::e_status initialize(::object * pobject) override;
+
+
+      ::e_status run() override;
 
 
       i32 _get_file_image(const image_key & key) override;
 
 
-      i32 get_file_image(image_key key, const itemidlist & pidlAbsolute, const itemidlist & pidlChild, const unichar * pcszExtra, ::color::color crBk);
+      i32 get_file_image(image_key & key, const itemidlist & pidlAbsolute, const unichar * pcszExtra, const ::color::color & colorBackground);
 
       i32 get_image_by_file_extension(image_key & key);
 
 
-      i32 add_icon_set(SHFILEINFOW * pinfo16, SHFILEINFOW * pinfo48, ::color::color crBk, bool & bUsedImageList16, bool & bUsedImageList48, int iImage);
-      i32 add_icon_info(int iSize, SHFILEINFOW * pinfo16, SHFILEINFOW * pinfo48, ::color::color crBk, bool & bUsedImageList16, bool & bUsedImageList48, int iImage);
+      i32 add_system_icon(int iIcon, const ::color::color & colorBackground, int iImage);
+      //i32 add_icon_info(int iSize, SHFILEINFOW * pinfo16, SHFILEINFOW * pinfo48, ::color::color crBk, bool & bUsedImageList16, bool & bUsedImageList48, int iImage);
+      i32 add_system_icon(int iSize, int iIcon, const ::color::color & colorBackground, int iImage);
 
 
       i32 get_file_image(image_key key, const unichar * pcszExtra, ::color::color crBk);
 
 
 
+
       ///         virtual i32 get_extension_image(const ::string & strExtension, e_file_attribute eattribute, e_icon eicon, ::color::color crBk = 0) override;
 
-      i32 add_icon(int iSize, HICON hicon, ::color::color crBk, int iImage);
+      i32 add_icon(int iSize, HICON hicon, const ::color::color & colocrBackground, int iImage);
 
-      i32 add_icon_path(::file::path path, ::color::color crBk, int iImage);
+      i32 set_icon(int iImage, const ::file::path & path, const ::color::color & colocrBackground) override;
 
-      i32 add_system_icon(int iSize, IImageList * plist, SHFILEINFOW * pinfo, ::color::color crBck, bool & bUsedImageList, int iImage);
+      i32 add_system_icon(int iSize, IImageList * plist, int iIcon, const ::color::color & colorBackground, int iImage);
+
 
 
       ::user::shell::e_folder get_folder_type(::object * pobject, const ::wstring & wstrPath) override;

@@ -92,6 +92,12 @@
     <ClInclude Include="file_exception.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="itemidlist.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="known_folder_struct.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="factory_exchange.cpp">
@@ -161,6 +167,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="argcargv.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="itemidlist.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="known_folder_struct.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

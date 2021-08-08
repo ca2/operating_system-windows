@@ -298,7 +298,7 @@
       <SubSystem>Windows</SubSystem>
       <EntryPointSymbol>
       </EntryPointSymbol>
-      <AdditionalDependencies>Dwmapi.lib;Dxva2.lib;Imm32.lib;Gdiplus.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>Msimg32.lib;Dwmapi.lib;Dxva2.lib;Imm32.lib;Gdiplus.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <IgnoreSpecificDefaultLibraries>
       </IgnoreSpecificDefaultLibraries>
     </Link>
@@ -476,7 +476,7 @@
       <SubSystem>Windows</SubSystem>
       <EntryPointSymbol>
       </EntryPointSymbol>
-      <AdditionalDependencies>Dwmapi.lib;Dxva2.lib;Imm32.lib;Gdiplus.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>Msimg32.lib;Dwmapi.lib;Dxva2.lib;Imm32.lib;Gdiplus.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <IgnoreSpecificDefaultLibraries>
       </IgnoreSpecificDefaultLibraries>
       <ShowProgress>NotSet</ShowProgress>
@@ -573,7 +573,7 @@
       <SubSystem>Windows</SubSystem>
       <EntryPointSymbol>
       </EntryPointSymbol>
-      <AdditionalDependencies>Dwmapi.lib;Dxva2.lib;Imm32.lib;Gdiplus.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>Msimg32.lib;Dwmapi.lib;Dxva2.lib;Imm32.lib;Gdiplus.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <IgnoreSpecificDefaultLibraries>
       </IgnoreSpecificDefaultLibraries>
       <ShowProgress>NotSet</ShowProgress>
@@ -771,7 +771,7 @@
       </EntryPointSymbol>
       <IgnoreSpecificDefaultLibraries>
       </IgnoreSpecificDefaultLibraries>
-      <AdditionalDependencies>Dwmapi.lib;Dxva2.lib;Imm32.lib;Gdiplus.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>Msimg32.lib;Dwmapi.lib;Dxva2.lib;Imm32.lib;Gdiplus.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <MapFileName>
       </MapFileName>
     </Link>
@@ -945,7 +945,7 @@
       </EntryPointSymbol>
       <IgnoreSpecificDefaultLibraries>
       </IgnoreSpecificDefaultLibraries>
-      <AdditionalDependencies>Dwmapi.lib;Dxva2.lib;Imm32.lib;Gdiplus.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>Msimg32.lib;Dwmapi.lib;Dxva2.lib;Imm32.lib;Gdiplus.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <MapFileName>$(TargetDir)$(TargetName).map</MapFileName>
     </Link>
     <Manifest>
@@ -1037,7 +1037,7 @@
       </EntryPointSymbol>
       <IgnoreSpecificDefaultLibraries>
       </IgnoreSpecificDefaultLibraries>
-      <AdditionalDependencies>Dwmapi.lib;Dxva2.lib;Imm32.lib;Gdiplus.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>Msimg32.lib;Dwmapi.lib;Dxva2.lib;Imm32.lib;Gdiplus.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <MapFileName>$(TargetDir)$(TargetName).map</MapFileName>
       <LinkTimeCodeGeneration>UseLinkTimeCodeGeneration</LinkTimeCodeGeneration>
     </Link>
@@ -1242,6 +1242,9 @@
     </ProjectReference>
     <ProjectReference Include="..\..\platform-windows_common\aura_windows_common\aura_windows_common.vcxproj">
       <Project>{99f5abf0-7377-4cc7-b016-4ca7b365b9f1}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\acme_windows\acme_windows.vcxproj">
+      <Project>{cc8e8200-00a9-414e-9829-7ca3f1091add}</Project>
     </ProjectReference>
     <ProjectReference Include="..\aura_windows\aura_windows.vcxproj">
       <Project>{94c3715a-7fbf-4455-917b-20cb7f40c58c}</Project>

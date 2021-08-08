@@ -1,6 +1,12 @@
 #pragma once
 
 
+#include "acme/operating_system.h"
+#include <Shlobj.h>
+#include <shellapi.h>
+#include "acme/os/windows_common/comptr.h"
+
+
 #include "acme_windows_common/_acme_windows_common.h"
 #include "acme/os/_const_console.h"
 #include "acme/os/console.h"
@@ -16,6 +22,9 @@
 
 #include "file_find.h"
 #include "registry.h"
+
+
+#include "itemidlist.h"
 
 
 #include "console.h"
