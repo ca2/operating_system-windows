@@ -141,12 +141,20 @@ namespace production
 
       {
 
-         ::file::path pathMirror = pacmedir->system() / "config/production/mirror.txt";
+         ::file::path pathMirror =          auto psystem = m_psystem;
 
-         ::file::path pathMirrorStatus = pacmedir->system() / "config/production/mirror_status.txt";
+         auto pacmedir = psystem->m_pacmedir;
 
-         if (!file_exists(pathMirror)
-               || !file_exists(pathMirrorStatus))
+pacmedir->system() / "config/production/mirror.txt";
+
+         ::file::path pathMirrorStatus =          auto psystem = m_psystem;
+
+         auto pacmedir = psystem->m_pacmedir;
+
+pacmedir->system() / "config/production/mirror_status.txt";
+
+         if (!m_psystem->m_pacmefile->exists(pathMirror)
+               || !m_psystem->m_pacmefile->exists(pathMirrorStatus))
          {
 
             os_message_box(nullptr, "both " + pathMirror + " and " + pathMirrorStatus + " files must exist and maybe empty...", "The h***!!", e_message_box_icon_exclamation);
@@ -155,8 +163,8 @@ namespace production
 
          }
 
-         m_straMirror.add_lines(::file_as_string(pathMirror));
-         m_straMirrorStatus.add_lines(::file_as_string(pathMirrorStatus));
+         m_straMirror.add_lines(::m_psystem->m_pacmefile->as_string(pathMirror));
+         m_straMirrorStatus.add_lines(::m_psystem->m_pacmefile->as_string(pathMirrorStatus));
 
          m_straMirror.erase_empty();
          m_straMirrorStatus.erase_empty();
@@ -863,10 +871,18 @@ namespace production
             if (pathFolder != pathLastFolder)
             {
 
-               if (!::dir::is(pathTarget.folder()))
+               if (!         auto psystem = m_psystem;
+
+         auto pacmedir = psystem->m_pacmedir;
+
+pacmedir->is(pathTarget.folder()))
                {
 
-                  if (!::dir::mk(pathTarget.folder()))
+                  if (!         auto psystem = m_psystem;
+
+         auto pacmedir = psystem->m_pacmedir;
+
+pacmedir->create(pathTarget.folder()))
                   {
 
                      strStatus += "<1>";

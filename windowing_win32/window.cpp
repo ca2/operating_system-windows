@@ -1172,7 +1172,7 @@ namespace windowing_win32
 //      if (status != 0)
 //      {
 //
-//         //file_put_contents("/home/camilo/window.txt", __str((int)w->window()));
+//         //m_psystem->m_pacmefile->put_contents("/home/camilo/window.txt", __str((int)w->window()));
 //         return false;
 //
 //      }

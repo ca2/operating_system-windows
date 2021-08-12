@@ -1155,12 +1155,6 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="a.h" />
-    <ClInclude Include="aaa_tts_speaker.h" />
-    <ClInclude Include="aaa_want_to_remove_handle.h" />
-    <ClInclude Include="aaa_want_to_remove_printer.h" />
-    <ClInclude Include="aaa_want_to_remove_RoundWindowApp.h" />
-    <ClInclude Include="aaa_want_to_remove_simple_hold_handle.h" />
     <ClInclude Include="crypto.h" />
     <ClInclude Include="dir_context.h" />
     <ClInclude Include="dir_system.h" />
@@ -1184,7 +1178,6 @@
     <ClInclude Include="shell_launcher.h" />
     <ClInclude Include="thread (2).h" />
     <ClInclude Include="thread.h" />
-    <ClInclude Include="_ (2).h" />
     <ClInclude Include="_.h" />
     <ClInclude Include="_apex_windows.h" />
     <ClInclude Include="_node_windows1.h" />

@@ -158,9 +158,15 @@ namespace windowing_win32
          if (GetIconInfo(tray.hIcon, &iinfo) != 0)
          {
 
-            auto picon = __new(::windowing_win32::icon());
+            auto pwindowingicon = __new(::windowing_win32::icon());
 
-            picon->add_icon(tray.hIcon);
+            pwindowingicon->add_icon(tray.hIcon);
+
+            __pointer(::draw2d::icon) picon;
+
+            picon.create();
+
+            picon->initialize_with_windowing_icon(pwindowingicon);
             
             iconindex = m_pil16->add(picon);
 

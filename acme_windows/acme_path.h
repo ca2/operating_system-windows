@@ -7,16 +7,21 @@ namespace windows
 
 
    class CLASS_DECL_ACME_WINDOWS acme_path :
-      virtual public ::acme_path
+      virtual public ::windows_common::acme_path
    {
    public:
 
 
       acme_path();
-      virtual ~acme_path();
+      ~acme_path() override;
 
 
-      virtual ::file::path app_module() override;
+
+
+      //virtual bool __win_find_is_dots(WIN32_FIND_DATAW & data);
+
+
+      ::file::path _final(const char * path) override;
 
 
    };

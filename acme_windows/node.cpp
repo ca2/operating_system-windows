@@ -16,6 +16,8 @@ namespace acme
       node::node()
       {
 
+         create_factory < ::windows::exception::engine, ::exception::engine >();
+
          ::windows::callstack::s_pcriticalsection = new critical_section();
 
       }
@@ -549,10 +551,10 @@ namespace acme
       //
       //      string str;
       //
-      //      if (file_exists(m_psystem->m_pacmedir->system() / "config\\system\\audio.txt"))
+      //      if (m_psystem->m_pacmefile->exists(m_psystem->m_pacmedir->system() / "config\\system\\audio.txt"))
       //      {
       //
-      //         str = file_as_string(m_psystem->m_pacmedir->system() / "config\\system\\audio.txt");
+      //         str = m_psystem->m_pacmefile->as_string(m_psystem->m_pacmedir->system() / "config\\system\\audio.txt");
       //
       //      }
       //      else
@@ -562,7 +564,7 @@ namespace acme
       //
       //         strPath = m_psystem->m_pacmedir->appdata() / "audio.txt";
       //
-      //         str = file_as_string(strPath);
+      //         str = m_psystem->m_pacmefile->as_string(strPath);
       //
       //      }
       //
@@ -610,7 +612,7 @@ namespace acme
       //      if (g_iMemoryCountersStartable && g_iMemoryCounters < 0)
       //      {
       //
-      //         g_iMemoryCounters = file_exists(m_psystem->m_pacmedir->config() / "system/memory_counters.txt") ? 1 : 0;
+      //         g_iMemoryCounters = xxxxfile_exists(m_psystem->m_pacmedir->config() / "system/memory_counters.txt") ? 1 : 0;
       //
       //         if (g_iMemoryCounters)
       //         {
@@ -1662,14 +1664,22 @@ namespace acme
       }
 
 
-      string node::expand_env(string str)
+      string node::expand_environment_variables(const string & str)
       {
 
-         wstring wstr;
+         wstring wstrSource(str);
 
-         ExpandEnvironmentStringsW(wstring(str), wstr.get_string_buffer(8192), (::u32)wstr.get_length());
+         auto len = ExpandEnvironmentStringsW(wstrSource, nullptr, 0);
 
-         return wstr;
+         wstring wstrTarget;
+
+         auto pwszTarget = wstrTarget.get_string_buffer(len);
+
+         ExpandEnvironmentStringsW(wstrSource, pwszTarget, len + 1);
+
+         wstrTarget.release_string_buffer(len);
+
+         return wstrTarget;
 
       }
 
@@ -2112,12 +2122,17 @@ namespace acme
 
          int iRetry = 9;
 
-         while (!file_exists(utf8(wstr.c_str())) && iRetry > 0)
+         while (!m_psystem->m_pacmefile->exists(utf8(wstr.c_str())) && iRetry > 0)
          {
 
-            dir::mk(dir::name(utf8(wstr.c_str())).c_str());
 
-            file_put_contents(utf8(wstr.c_str()).c_str(), "");
+         auto psystem = m_psystem;
+
+         auto pacmedir = psystem->m_pacmedir;
+
+         pacmedir->create(::file_path_folder(utf8(wstr.c_str())).c_str());
+
+            m_psystem->m_pacmefile->put_contents(utf8(wstr.c_str()).c_str(), "");
 
             iRetry--;
 
@@ -2139,9 +2154,9 @@ namespace acme
 
          SHELLEXECUTEINFOW sei = {};
 
-         string str = m_psystem->m_pacmepath->app_app_admin(strPlatform, strConfiguration);
+         string str = m_psystem->m_pacmedir->app_app_admin(strPlatform, strConfiguration);
 
-         if (!::file_exists(str))
+         if (!m_psystem->m_pacmefile->exists(str))
          {
 
             return ::error_failed;
@@ -2389,16 +2404,16 @@ namespace acme
       }
 
 
-      ::string node::expand_environment_variables(const ::string & str)
-      {
+      //::string node::expand_environment_variables(const ::string & str)
+      //{
 
-         wstring wstrSource(str);
+      //   wstring wstrSource(str);
 
-         wstring wstrTarget = expand_environment_variables(wstrSource);
+      //   wstring wstrTarget = expand_environment_variables(wstrSource);
 
-         return wstrTarget;
+      //   return wstrTarget;
 
-      }
+      //}
 
 
       ::wstring node::expand_environment_variables(const ::wstring & wstr)
@@ -2439,7 +2454,7 @@ int windows_desktop1_main(HINSTANCE hInstance, int nCmdShow);
 
 
 
-#include "apex/os/windows/_.h"
+#include "apex/node/operating_system/windows/_.h"
 
 #endif
 

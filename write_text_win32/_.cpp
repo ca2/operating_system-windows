@@ -26,7 +26,7 @@
 //   if (statusStartup != Gdiplus::Ok)
 //   {
 //
-//      show_error_message("Gdiplus Failed to Startup. ca cannot continue.", "Gdiplus Failure", e_message_box_icon_error);
+//      output_debug_string("Gdiplus Failed to Startup. ca cannot continue.");
 //
 //      return ::error_failed;
 //
@@ -37,7 +37,7 @@
 //   if (statusStartup != Gdiplus::Ok)
 //   {
 //
-//      show_error_message("Gdiplus Failed to Hook. ca cannot continue.", "Gdiplus Failure", e_message_box_icon_error);
+//      output_debug_string("Gdiplus Failed to Hook. ca cannot continue.");
 //
 //      return ::error_failed;
 //

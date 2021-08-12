@@ -40,7 +40,11 @@ namespace windows
 
       if ((eopen & ::file::e_open_defer_create_directory) && (eopen & ::file::e_open_write))
       {
-         ::dir::mk(::dir::name(pszFileName));
+                  auto psystem = m_psystem;
+
+         auto pacmedir = psystem->m_pacmedir;
+
+pacmedir->create(::file_path_folder(pszFileName));
 
       }
 

@@ -1,8 +1,7 @@
 #include "framework.h"
-//#include "acme/operating_system.h"
+#include "acme/operating_system.h"
 #include "acme/platform/node.h"
 #include "acme/filesystem/filesystem/acme_dir.h"
-#include "acme/os/console.h"
 #include "node.h"
 #include "acme_dir.h"
 #include "acme/filesystem/filesystem/acme_path.h"
@@ -46,6 +45,7 @@ void acme_windows_factory_exchange(::factory_map * pfactorymap)
 
    pfactorymap->create_factory < ::acme::windows::node, ::acme::node >();
    pfactorymap->create_factory < ::windows::acme_dir, ::acme_dir >();
+   pfactorymap->create_factory < ::windows::acme_file, ::acme_file >();
    pfactorymap->create_factory < ::windows::acme_path, ::acme_path >();
 
    //pfactorymap->create_factory < ::windows::interprocess_communication_base, ::interprocess_communication::base >();

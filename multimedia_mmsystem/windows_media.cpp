@@ -1,9 +1,5 @@
 #include "framework.h"
-
-
-//#include <windows.h>
 #include <wmsdk.h>
-//#include <atlbase.h>
 
 
 #pragma comment(lib, "wmvcore")
@@ -18,17 +14,20 @@ string extract_mccdi(string str)
    bool bOK = false;
 
    WM_PICTURE * pPicture = nullptr;
+
    memory mem;
 
    do
    {
 
       comptr<IWMSyncReader> pIWMSyncReader;
+
       if (FAILED(WMCreateSyncReader(nullptr, 0, &pIWMSyncReader))) break;
 
       if (FAILED(pIWMSyncReader->Open(wszAudioFile))) break;
 
       comptr<IWMHeaderInfo3> pIWMHeaderInfo3;
+
       if (FAILED(pIWMSyncReader->QueryInterface(&pIWMHeaderInfo3))) break;
 
       WMT_ATTR_DATATYPE wmtDataType = WMT_TYPE_STRING;

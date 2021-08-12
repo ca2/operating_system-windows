@@ -103,7 +103,7 @@ namespace acme
 
          string get_environment_variable(const ::string & pszEnvironmentVariable) override;
 
-         string expand_env(string str) override;
+         string expand_environment_variables(const string & str) override;
 
 
          //virtual ::u32       get_file_attributes(const ::string & pFileName);
@@ -130,7 +130,7 @@ namespace acme
          ::e_status register_dll(const ::file::path & pathDll);
 
 
-         ::string expand_environment_variables(const ::string & str) override;
+         //::string expand_environment_variables(const ::string & str) override;
 
          virtual ::wstring expand_environment_variables(const ::wstring & wstr);
 

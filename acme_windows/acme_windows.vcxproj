@@ -1155,63 +1155,117 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="acme_file.h" />
+    <ClInclude Include="api.h" />
     <ClInclude Include="callstack.h" />
+    <ClInclude Include="d2d1_1.h" />
+    <ClInclude Include="dir.h" />
+    <ClInclude Include="environment_variable.h" />
     <ClInclude Include="exception.h" />
     <ClInclude Include="file_change_event.h" />
     <ClInclude Include="file_exception.h" />
     <ClInclude Include="file_find.h" />
+    <ClInclude Include="file_memory_map2.h" />
+    <ClInclude Include="handle.h" />
+    <ClInclude Include="implementation.h" />
+    <ClInclude Include="internal.h" />
     <ClInclude Include="itemidlist.h" />
     <ClInclude Include="known_folder_struct.h" />
     <ClInclude Include="mutex.h" />
+    <ClInclude Include="nano_timer.h" />
     <ClInclude Include="node.h" />
     <ClInclude Include="acme_dir.h" />
     <ClInclude Include="acme_path.h" />
     <ClInclude Include="console.h" />
     <ClInclude Include="file.h" />
     <ClInclude Include="file_memory_map.h" />
+    <ClInclude Include="parallelization.h" />
     <ClInclude Include="path.h" />
     <ClInclude Include="pipe.h" />
+    <ClInclude Include="port_forward.h" />
+    <ClInclude Include="printer.h" />
+    <ClInclude Include="print_job.h" />
+    <ClInclude Include="process.h" />
+    <ClInclude Include="process_data.h" />
     <ClInclude Include="registry.h" />
     <ClInclude Include="serial.h" />
     <ClInclude Include="shared_memory.h" />
+    <ClInclude Include="shell1.h" />
+    <ClInclude Include="simple_hold_handle.h" />
     <ClInclude Include="sync_options.h" />
     <ClInclude Include="uac_tools.h" />
     <ClInclude Include="user.h" />
+    <ClInclude Include="utils.h" />
+    <ClInclude Include="windowing.h" />
     <ClInclude Include="_.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="_acme_windows.h" />
+    <ClInclude Include="_c.h" />
+    <ClInclude Include="_graphics2d.h" />
+    <ClInclude Include="_impl.h" />
     <ClInclude Include="_node_windows.h" />
     <ClInclude Include="_node_windows_private.h" />
     <ClInclude Include="_windows.h" />
+    <ClInclude Include="_windows_impl.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="acme_dir.cpp" />
+    <ClCompile Include="acme_file.cpp" />
+    <ClCompile Include="ansi_file.cpp" />
+    <ClCompile Include="application.cpp" />
     <ClCompile Include="argcargv.cpp" />
     <ClCompile Include="callstack.cpp" />
+    <ClCompile Include="debug.cpp" />
+    <ClCompile Include="dir.cpp" />
+    <ClCompile Include="environment_variable.cpp" />
     <ClCompile Include="file_find.cpp" />
+    <ClCompile Include="internal.cpp" />
     <ClCompile Include="itemidlist.cpp" />
     <ClCompile Include="known_folder_struct.cpp" />
+    <ClCompile Include="language.cpp" />
     <ClCompile Include="list_serial_ports.cpp" />
+    <ClCompile Include="lock.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="message_loop.cpp" />
     <ClCompile Include="mutex.cpp" />
     <ClCompile Include="node.cpp" />
     <ClCompile Include="acme_path.cpp" />
     <ClCompile Include="console.cpp" />
     <ClCompile Include="file.cpp" />
     <ClCompile Include="file_memory_map.cpp" />
+    <ClCompile Include="parallelization.cpp" />
     <ClCompile Include="pipe.cpp" />
+    <ClCompile Include="printer.cpp" />
+    <ClCompile Include="process.cpp" />
     <ClCompile Include="registry.cpp" />
     <ClCompile Include="serial.cpp" />
     <ClCompile Include="shared_memory.cpp" />
     <ClCompile Include="framework.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='basis|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="simple_app.cpp" />
     <ClCompile Include="strdup_array.cpp" />
+    <ClCompile Include="time.cpp" />
     <ClCompile Include="timer.cpp" />
     <ClCompile Include="trace.cpp" />
+    <ClCompile Include="bbb_filesystem_file.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='cover|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='basis|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='stage|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='cover|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='basis|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='stage|x64'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="uac_tools.cpp" />
+    <ClCompile Include="user.cpp" />
+    <ClCompile Include="util.cpp" />
+    <ClCompile Include="windowing.cpp" />
     <ClCompile Include="windows_desktop.cpp" />
     <ClCompile Include="_.cpp" />
     <ClCompile Include="factory_exchange.cpp" />
+    <ClCompile Include="_ansi.cpp" />
+    <ClCompile Include="_wd16.cpp" />
+    <ClCompile Include="_wd32.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="..\version.rc" />

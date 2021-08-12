@@ -431,7 +431,7 @@ namespace windows
 
       }
 
-      return ::file::path(m_pFoundInfo->cFileName, ::file::path_file, IsDirectory() ? 1 : 0, false, get_length());
+      return ::file::path(m_pFoundInfo->cFileName, ::e_path_file, IsDirectory() ? 1 : 0, false, get_length());
 
    }
 

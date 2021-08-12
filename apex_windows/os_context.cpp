@@ -243,7 +243,7 @@ namespace windows
          if(EnumProcessModules(hProcess, &hMod, sizeof(hMod), &cbNeeded))
          {
             
-            strName = ::path::module(hMod);
+            strName = ::get_module_path(hMod);
 
          }
 
@@ -1722,7 +1722,7 @@ retry:
 
       wstring wstrFileIn = ::str::international::utf8_to_unicode(strSource);
 
-      bool bNativeUnicode = is_windows_native_unicode() != false;
+      //bool bNativeUnicode = is_windows_native_unicode() != false;
 
       SHFILEINFOW info;
 
@@ -2231,7 +2231,7 @@ repeat:
       ::application * papp = get_application();
 
       string strTargetProgId;
-      string strModule = solve_relative(m_psystem->m_pacmepath->app_module());
+      string strModule = solve_relative(m_psystem->m_pacmefile->executable());
 
       strTargetProgId = get_application()->m_strAppName;
 
@@ -2494,7 +2494,7 @@ repeat:
 
       string strTargetProgId;
 
-      string strModule = solve_relative(m_psystem->m_pacmepath->app_module());
+      string strModule = solve_relative(m_psystem->m_pacmefile->executable());
 
       string strApplicationRegistryPath = find_string("ApplicationRegistryPath");
 

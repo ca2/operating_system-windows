@@ -1,7 +1,7 @@
 ﻿#include "framework.h"
 //#include "acme/operating_system.h"
 #include "acme/platform/serial.h"
-#include "acme/os/windows_common/file.h"
+//#include "acme/os/windows_common/file.h"
 #include "serial.h"
 
 

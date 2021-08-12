@@ -136,7 +136,11 @@ void copy(MEM_ICON_ITEM * dst, ICON_ITEM * pitem)
 //      // |                         |               |
 //      // -----------------------   --       --------
 //      //                       |    |       |
-//      if (file_exists(pacmedir->system() / "config\\appfy\\appfy_beg_debug_box.txt"))
+//      if (m_psystem->m_pacmefile->exists(         auto psystem = m_psystem;
+
+         auto pacmedir = psystem->m_pacmedir;
+
+pacmedir->system() / "config\\appfy\\appfy_beg_debug_box.txt"))
 //      {
 //         debug_box("app_app_admin", "app", 0);
 //      }
@@ -178,7 +182,11 @@ void wmain(int argc, wchar_t * wargv[])
 
    {
 
-      if (file_exists(pacmedir->system() / "config/plugin/appfy_beg_debug_box.txt"))
+      if (m_psystem->m_pacmefile->exists(         auto psystem = m_psystem;
+
+         auto pacmedir = psystem->m_pacmedir;
+
+pacmedir->system() / "config/plugin/appfy_beg_debug_box.txt"))
       {
 
          ::MessageBoxA(nullptr,"appfy run", "appfy run", MB_OK);
@@ -372,7 +380,7 @@ void wmain(int argc, wchar_t * wargv[])
 
       dprint("a bit of parsing!!");
 
-      if (!file_exists(strSrc))
+      if (!m_psystem->m_pacmefile->exists(strSrc))
       {
 
          printf("%s", 

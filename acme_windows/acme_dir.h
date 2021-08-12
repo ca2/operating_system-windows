@@ -7,13 +7,20 @@ namespace windows
 
 
    class CLASS_DECL_ACME_WINDOWS acme_dir :
-      virtual public ::acme_dir
+      virtual public ::windows_common::acme_dir
    {
    public:
 
 
+
+
+
       acme_dir();
-      virtual ~acme_dir();
+      ~acme_dir() override;
+
+
+      ::file::path module_folder() override;
+
 
       virtual ::file::path install() override;
       virtual ::file::path default_install() override;
@@ -70,7 +77,72 @@ namespace windows
 
       virtual ::file::path user_appdata_local() override;
 
+      bool _is(const char * path1) override;
 
+
+
+// From acme/filesystem/file/dir.cpp by camilo 
+// From acme_posix/acme_dir.h
+// on 2021-08-09 03:20 BRT
+// <3ThomasBorregaardSørensen!!
+
+
+// namespace posix
+// {
+
+
+// class CLASS_DECL_ACME_POSIX acme_dir :
+// virtual public ::acme_dir
+// {
+
+// public:
+
+// acme_dir();
+// ~acme_dir() override;
+
+      //virtual string name(const char * path1) override;
+
+
+      virtual ::file::path base_module() override;
+       bool create(const char * path) override;
+
+
+      bool _create(const char * path) override;
+
+
+      bool create_directory(const char * path) override;
+
+
+      //::file::path module() override;
+
+
+      bool is(const char * path) override;
+
+
+      //string name(const char * path) override;
+
+
+      void rls(::file::patha & stra, const char * psz) override;
+
+
+      void rls_dir(::file::patha & stra, const char * psz) override;
+
+
+      void ls(::file::patha & stra, const char * psz) override;
+
+
+      void ls_dir(::file::patha & stra, const char * psz) override;
+
+      void ls_file(::file::patha & stra, const char * psz) override;
+
+      //::file::path pathfind(const string & pszEnv, const string & pszTopic, const string & pszMode) override;
+
+
+      //::file::path archive() override;
+
+      int make_path(const char * psz) override;
+
+      string get_current_directory() override;
 
 
    };

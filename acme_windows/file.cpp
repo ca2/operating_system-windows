@@ -1,7 +1,7 @@
 #include "framework.h"
 //#include "acme/operating_system.h"
-#include "acme/os/windows_common/_file_c.h"
-#include "acme/os/windows_common/file.h"
+//#include "acme/os/windows_common/_file_c.h"
+//#include "acme/os/windows_common/file.h"
 #include "file.h"
 
 
@@ -14,7 +14,7 @@ namespace windows
    file::file()
    {
 
-      m_iCharacterPutBack = -1;
+      m_iCharacterPutBack = 0x80000000;
 
       m_handleFile = INVALID_HANDLE_VALUE;
       m_dwAccessMode = 0;
@@ -25,7 +25,7 @@ namespace windows
    file::file(HANDLE handleFile)
    {
 
-      m_iCharacterPutBack = -1;
+      m_iCharacterPutBack = 0x80000000;
       m_handleFile = handleFile;
       m_dwAccessMode = 0;
 
@@ -35,7 +35,7 @@ namespace windows
    file::file(const ::string & pszFileName, const ::file::e_open & eopen) 
    {
 
-      m_iCharacterPutBack = -1;
+      m_iCharacterPutBack = 0x80000000;
 
       ASSERT(__is_valid_string(pszFileName));
 
@@ -91,7 +91,11 @@ namespace windows
       if ((eopen & ::file::e_open_defer_create_directory) && (eopen & ::file::e_open_write))
       {
 
-         ::dir::mk(pszFileName.folder());
+                  auto psystem = m_psystem;
+
+         auto pacmedir = psystem->m_pacmedir;
+
+         pacmedir->create(pszFileName.folder());
 
       }
 
@@ -246,6 +250,27 @@ namespace windows
 
       }
 
+      if (m_iCharacterPutBack != 0x80000000)
+      {
+
+         ((byte *)pdata)[0] = (byte)m_iCharacterPutBack;
+
+         m_iCharacterPutBack = 0x80000000;
+
+         pdata = ((char *)pdata) + 1;
+
+         nCount--;
+
+         if (nCount == 0)
+         {
+
+            return 0;   // avoid Win32 "null-read"
+
+         }
+
+
+      }
+
       ASSERT(pdata != nullptr);
 
       ASSERT(__is_valid_address(pdata, nCount));
@@ -328,7 +353,7 @@ namespace windows
    int file::peek_character()
    {
 
-      if (m_iCharacterPutBack != -1)
+      if (m_iCharacterPutBack != 0x80000000)
       {
 
          return m_iCharacterPutBack;
@@ -345,10 +370,10 @@ namespace windows
 
       auto iCharacterPutBack = m_iCharacterPutBack;
 
-      if (iCharacterPutBack != -1)
+      if (iCharacterPutBack != 0x80000000)
       {
 
-         m_iCharacterPutBack = -1;
+         m_iCharacterPutBack = 0x80000000;
 
          return iCharacterPutBack;
 
@@ -364,7 +389,7 @@ namespace windows
 
       m_iCharacterPutBack = iCharacter;
 
-      seek(-1, ::file::e_seek::seek_current);
+      //seek(-1, ::file::e_seek::seek_current);
 
       return iCharacter;
 
@@ -624,7 +649,7 @@ namespace windows
 
    //   ::file::file_status status;
    //   GetStatus(status);
-   //   return file_name_dup(status.m_strFullName);
+   //   return file_path_name(status.m_strFullName);
    //}
 
    //string file::GetFileTitle() const
@@ -633,7 +658,7 @@ namespace windows
 
    //   ::file::file_status status;
    //   GetStatus(status);
-   //   return file_title_dup(status.m_strFullName);
+   //   return file_path_title(status.m_strFullName);
    //}
 
    ::file::path file::get_file_path() const
@@ -1243,11 +1268,182 @@ bool CLASS_DECL_ACME_WINDOWS shell_get_special_folder_path(HWND hwnd, ::file::pa
 
 
 HICON extract_icon(HINSTANCE hInst, const ::string & pszExeFileName, ::u32 nIconIndex)
-
 {
 
    return ::ExtractIconW(hInst, ::str::international::utf8_to_unicode(pszExeFileName), nIconIndex);
 
+}
+
+
+bool ensure_file_size_handle(HANDLE h, u64 iSize)
+{
+
+  DWORD dwHi;
+
+  DWORD dwLo = GetFileSize(h, &dwHi);
+
+  if (((u64)dwLo | ((u64)dwHi << 32)) != iSize)
+  {
+
+     LONG l = (iSize >> 32) & 0xffffffff;
+
+     if (SetFilePointer(h, iSize & 0xffffffff, &l, SEEK_SET) != (DWORD)(iSize & 0xffffffff))
+     {
+
+        return false;
+
+     }
+
+     if (l != ((iSize >> 32) & 0xffffffff))
+     {
+
+        return false;
+
+     }
+
+     if (!SetEndOfFile(h))
+     {
+
+        return false;
+
+     }
+
+  }
+
+  return 1;
 
 }
+
+
+CLASS_DECL_ACME_WINDOWS HANDLE hfile_create(
+   const char * pFileName,
+
+   ::u32                   dwDesiredAccess,
+   ::u32                   dwShareMode,
+   void * pSecurityAttributes,
+   ::u32                   dwCreationDisposition,
+   ::u32                   dwFlagsAndAttributes,
+   HANDLE                  hTemplateFile
+)
+{
+
+   wstring wstr(pFileName);
+
+
+   return ::CreateFileW(
+      wstr,
+      dwDesiredAccess,
+      dwShareMode,
+      (LPSECURITY_ATTRIBUTES)pSecurityAttributes,
+      dwCreationDisposition,
+      dwFlagsAndAttributes,
+      hTemplateFile);
+
+}
+
+
+
+
+CLASS_DECL_ACME bool read_resource_as_memory(memory & m, HINSTANCE hinstance, DWORD nID, const char * pcszType, strsize iReadAtMostByteCount)
+
+{
+
+   HRSRC hrsrc;
+
+   if (::is_set(pcszType))
+   {
+      hrsrc = FindResourceW(hinstance, MAKEINTRESOURCEW(nID), wstring(pcszType));
+   }
+   else
+   {
+      hrsrc = FindResourceW(hinstance, MAKEINTRESOURCEW(nID), (const WCHAR *)(pcszType));
+   }
+
+
+   if (!hrsrc)
+   {
+
+      if (::is_set(pcszType))
+      {
+         hrsrc = FindResourceW(nullptr, MAKEINTRESOURCEW(nID), wstring(pcszType));
+      }
+      else
+      {
+         hrsrc = FindResourceW(nullptr, MAKEINTRESOURCEW(nID), (const WCHAR *)(pcszType));
+      }
+      if (!hrsrc)
+      {
+
+         if (::is_set(pcszType))
+         {
+            hrsrc = FindResourceW(::GetModuleHandle(NULL), MAKEINTRESOURCEW(nID), wstring(pcszType));
+         }
+         else
+         {
+            hrsrc = FindResourceW(::GetModuleHandle(NULL), MAKEINTRESOURCEW(nID), (const WCHAR *)(pcszType));
+         }
+      }
+   }
+
+   HGLOBAL hglobalResource;
+   strsize dwResourceSize;
+   int_bool bOk;
+   DWORD * pResource;
+
+   if (hrsrc == nullptr)
+      return false;
+
+   hglobalResource = LoadResource(hinstance, hrsrc);
+
+   if (hglobalResource == nullptr)
+      return false;
+
+   dwResourceSize = SizeofResource(hinstance, hrsrc);
+
+   if (hglobalResource != nullptr)
+   {
+
+      bOk = true;
+
+      pResource = (DWORD *)LockResource(hglobalResource);
+
+      auto iSize = minimum_non_negative(dwResourceSize, iReadAtMostByteCount);
+
+      m.assign(pResource, iSize);
+
+      return bOk;
+
+   }
+
+   return false;
+
+}
+
+
+
+
+
+
+::file::path get_module_path(HMODULE hmodule)
+{
+
+
+#if defined(_UWP)
+
+   return "m_app.exe";
+
+#else
+
+   wstring wstr(get_buffer, MAX_PATH * 8);
+
+   ::GetModuleFileNameW(hmodule, wstr, (::u32)wstr.length());
+
+   return solve_relative(string(wstr.release_string_buffer()));
+
+#endif
+
+
+}
+
+
 

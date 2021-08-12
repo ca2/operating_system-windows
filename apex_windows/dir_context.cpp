@@ -931,7 +931,7 @@ namespace windows
 
          string strDir = stra[i];
 
-         if (::dir::mkdir(strDir))
+         if (m_psystem->m_pacmedir->create_directory(strDir))
          {
 
             //            m_isdirmap.set(strDir, true, 0);
@@ -977,7 +977,7 @@ namespace windows
 
                }
 
-               if (::dir::mkdir(strDir))
+               if (m_psystem->m_pacmedir->create_directory(strDir))
                {
 
                   //                  m_isdirmap.set(strDir, true, 0);

@@ -1,6 +1,4 @@
 #include "framework.h"
-#include "acme/filesystem/filesystem/acme_dir.h"
-#include "acme/filesystem/filesystem/acme_path.h"
 
 
 namespace apex
@@ -16,7 +14,7 @@ namespace apex
 
          m_papexnode = this;
 
-         defer_initialize_winsock();
+         //defer_initialize_winsock();
 
       }
 
@@ -539,7 +537,7 @@ namespace apex
 
 
 
-         defer_initialize_winsock();
+         //defer_initialize_winsock();
          return success;
 
       }
@@ -566,10 +564,10 @@ namespace apex
 
          string str;
 
-         if (file_exists(m_psystem->m_pacmedir->system() / "config\\system\\audio.txt"))
+         if (m_psystem->m_pacmefile->exists(m_psystem->m_pacmedir->system() / "config\\system\\audio.txt"))
          {
 
-            str = file_as_string(m_psystem->m_pacmedir->system() / "config\\system\\audio.txt");
+            str = m_psystem->m_pacmefile->as_string(m_psystem->m_pacmedir->system() / "config\\system\\audio.txt");
 
          }
          else
@@ -579,7 +577,7 @@ namespace apex
 
             strPath = m_psystem->m_pacmedir->appdata() / "audio.txt";
 
-            str = file_as_string(strPath);
+            str = m_psystem->m_pacmefile->as_string(strPath);
 
          }
 
@@ -598,7 +596,7 @@ namespace apex
 
       //   path = application_installer_folder(pathExe, strAppId, pszPlatform, pszConfiguration, pszLocale, pszSchema) / "installed.txt";
 
-      //   strBuild = file_as_string(path);
+      //   strBuild = m_psystem->m_pacmefile->as_string(path);
 
       //   return strBuild.has_char();
 
@@ -612,7 +610,7 @@ namespace apex
 
       //   path = application_installer_folder(pathExe, strAppId, pszPlatform, pszConfiguration, pszLocale, pszSchema) / "installed.txt";
 
-      //   return file_put_contents(path, pszBuild);
+      //   return m_psystem->m_pacmefile->put_contents(path, pszBuild);
 
       //}
 
@@ -624,7 +622,7 @@ namespace apex
 
       //   ::file::path pathFile = get_last_run_application_path_file(strAppId);
 
-      //   return file_put_contents(pathFile, path);
+      //   return m_psystem->m_pacmefile->put_contents(pathFile, path);
 
       //}
 

@@ -7,9 +7,12 @@
 #include "apex/compress/zip/context.h"
 #include "acme/filesystem/filesystem/acme_dir.h"
 #include "acme_windows/known_folder_struct.h"
+#include <thumbcache.h>
+
 
 bool IsDibSection(HBITMAP bmp)
 {
+
    bool Result = true; //assume that it is a DIBSECTION.
 
    DIBSECTION ds; //initialize everything to zeros
@@ -151,7 +154,18 @@ __pointer(::image) create_image_from_hbitmap(HBITMAP hbitmap)
          auto pimage = create_image({ w, h });
          int iStride = ds.dsBmih.biSizeImage / abs(h );
 
-         ::vertical_swap_copy_colorref(pimage->get_data(), pimage->width(), pimage->height(), pimage->scan_size(), (const color32_t *)pBits, iStride);
+         if (h < 0)
+         {
+         
+            ::vertical_swap_copy_colorref(pimage->get_data(), pimage->width(), pimage->height(), pimage->scan_size(), (const color32_t *)pBits, iStride);
+
+         }
+         else
+         {
+
+            ::copy_colorref(pimage->get_data(), pimage->width(), pimage->height(), pimage->scan_size(), (const color32_t *)pBits, iStride);
+
+         }
 
          return pimage;
 
@@ -173,7 +187,7 @@ __pointer(::image) create_image_from_hbitmap(HBITMAP hbitmap)
    bitmapinfo.bmiHeader.biPlanes = 1;
    bitmapinfo.bmiHeader.biBitCount = 32;
    bitmapinfo.bmiHeader.biCompression = BI_RGB;
-   bitmapinfo.bmiHeader.biSizeImage = pimage->area() * sizeof(COLORREF);
+   bitmapinfo.bmiHeader.biSizeImage = (DWORD) (pimage->area() * sizeof(COLORREF));
    //bitmapinfo.bmiHeader.biXPelsPerMeter;
    //bitmapinfo.bmiHeader.biYPelsPerMeter;
    //bitmapinfo.bmiHeader.biClrUsed;
@@ -221,17 +235,6 @@ namespace windowing_win32
 
       defer_co_initialize_ex(false);
 
-      SHGetDesktopFolder(&m_pfolderDesktop);
-
-      SHGetMalloc(&m_pmalloc);
-
-      SHGetImageList(SHIL_SMALL, IID_IImageList, (void **)&m_pilSmall);
-
-      SHGetImageList(SHIL_LARGE, IID_IImageList, (void **)&m_pilLarge);
-
-      SHGetImageList(SHIL_EXTRALARGE, IID_IImageList, (void **)&m_pilExtraLarge);
-
-      SHGetImageList(SHIL_JUMBO, IID_IImageList, (void **)&m_pilJumbo);
 
 
 
@@ -244,6 +247,28 @@ namespace windowing_win32
    }
 
 
+   ::user::shell::_get_file_image_ * shell::new_get_file_image()
+   {
+
+      auto pgetfileimage = new _get_file_image_;
+
+      pgetfileimage->m_knownfoldermanager.CoCreateInstance(CLSID_KnownFolderManager);
+
+      SHGetDesktopFolder(&pgetfileimage->m_pfolderDesktop);
+
+      SHGetMalloc(&pgetfileimage->m_pmalloc);
+
+      SHGetImageList(SHIL_SMALL, IID_IImageList, (void **)&pgetfileimage->m_pilSmall);
+
+      SHGetImageList(SHIL_LARGE, IID_IImageList, (void **)&pgetfileimage->m_pilLarge);
+
+      SHGetImageList(SHIL_EXTRALARGE, IID_IImageList, (void **)&pgetfileimage->m_pilExtraLarge);
+
+      SHGetImageList(SHIL_JUMBO, IID_IImageList, (void **)&pgetfileimage->m_pilJumbo);
+
+      return pgetfileimage;
+
+   }
 
 
    //      i32 shell::thread::get_image_by_file_extension(oswindow image_key & imagekey, ::color::color colorBackground)
@@ -261,46 +286,120 @@ namespace windowing_win32
    //
    //      }
 
+   
+   bool shell::defer_set_thumbnail(::user::shell::_get_file_image_ & getfileimage)
+   {
+
+      if (m_bRequireHighQualityThumbnail)
+      {
+
+         bool bThumbnail = ::user::shell::defer_set_thumbnail(getfileimage);
+
+         return bThumbnail;
+
+      }
+
+      auto bThumbnail = _defer_set_thumbnail_IThumbnailProvider((_get_file_image_ &)getfileimage);
+
+      return bThumbnail;
+
+   }
+
+
+   bool shell::_defer_set_thumbnail_IThumbnailProvider(_get_file_image_ & getfileimage)
+   {
+      
+      comptr < IThumbnailHandlerFactory > pthumbnailhandlerfactory;
+
+      HRESULT hrThumbnailHandlerFactory = getfileimage.m_pshellfolder.As(pthumbnailhandlerfactory);
+
+      if (SUCCEEDED(hrThumbnailHandlerFactory) && pthumbnailhandlerfactory)
+      {
+
+         comptr < IThumbnailProvider > pthumbnailprovider;
+
+         HRESULT hrGetThumbnailHandler = pthumbnailhandlerfactory->GetThumbnailHandler(
+            getfileimage.m_itemidlistChild,
+            nullptr,
+            __interface_of(pthumbnailprovider));
+
+         if(SUCCEEDED(hrGetThumbnailHandler) && pthumbnailprovider)
+         {
+
+            getfileimage.m_iImage = _reserve_image(getfileimage.m_imagekey);
+
+            if (getfileimage.m_iImage >= 0)
+            {
+
+               for (auto & iSize : m_iaSize)
+               {
+
+                  WTS_ALPHATYPE alphatype = {};
+
+                  HBITMAP hbitmap = nullptr;
+
+                  HRESULT hrThumbnail = pthumbnailprovider->GetThumbnail(iSize, &hbitmap, &alphatype);
+
+                  auto pimage = create_image_from_hbitmap(hbitmap);
+               
+                  set_image(getfileimage.m_iImage, iSize, pimage);
+
+               }
+
+               return true;
+
+            }
+
+         }
+
+      }
+
+      return false;
+
+   }
 
       // returned image should be "Definitive" icon/pimage->
       // maybe fallback but not temporary
-   i32 shell::get_file_image(image_key & imagekey, const itemidlist & itemidlistParam, const unichar * pcszExtra, const ::color::color & colorBackground)
+   void shell::_internal_get_file_image(_get_file_image_ & getfileimage)
    {
 
-      comptr < IShellFolder> pshellfolder;
+      //_get_file_image_data_ getfileimage;
 
-      ::itemidlist itemidlist(itemidlistParam);
+      //getfileimage.m_itemidlist = getfileimage.m_itemidlistParam;
+      //comptr < IShellFolder> pshellfolder;
 
-      ::itemidlist itemidlistChild;
+      //::itemidlist itemidlist(itemidlistParam);
 
-      ::itemidlist itemidlistFolder;
+      //::itemidlist itemidlistChild;
+
+      //::itemidlist itemidlistFolder;
 
       ::string strChild;
 
-      if (itemidlist.has_child())
+      if (getfileimage.m_itemidlist.has_child())
       {
 
-         itemidlistFolder = itemidlist.last_item_id_removed();
+         getfileimage.m_itemidlistFolder = getfileimage.m_itemidlist.last_item_id_removed();
 
-         itemidlistChild = itemidlist.last();
+         getfileimage.m_itemidlistChild = getfileimage.m_itemidlist.last();
 
-         m_pfolderDesktop->BindToObject(
-            itemidlistFolder,
+         getfileimage.m_pfolderDesktop->BindToObject(
+            getfileimage.m_itemidlistFolder,
             nullptr,
             IID_IShellFolder, 
-            (void **) &pshellfolder);
+            (void **) &getfileimage.m_pshellfolder);
 
-         if (pshellfolder && itemidlistChild.m_pidl)
+         if (getfileimage.m_pshellfolder && getfileimage.m_itemidlistChild.m_pidl)
          {
 
             STRRET strretChild;
 
-            HRESULT hr = pshellfolder->GetDisplayNameOf(itemidlistChild, 0, &strretChild);
+            HRESULT hr = getfileimage.m_pshellfolder->GetDisplayNameOf(getfileimage.m_itemidlistChild, 0, &strretChild);
 
             if (SUCCEEDED(hr))
             {
 
-               strChild = ::itemidlist::_display_name(strretChild, itemidlistChild);
+               strChild = ::itemidlist::_display_name(strretChild, getfileimage.m_itemidlistChild);
 
                output_debug_string(strChild);
 
@@ -312,35 +411,36 @@ namespace windowing_win32
       else
       {
 
-         itemidlistChild = itemidlist;
+         getfileimage.m_itemidlistChild = getfileimage.m_itemidlist;
 
       }
 
-      int iImage = 0x80000000;
+      getfileimage.m_iImage = 0x80000000;
 
       i32 iType;
 
-      switch (imagekey.m_eicon)
+      switch (getfileimage.m_imagekey.m_eicon)
       {
-      case icon_normal:
+      case e_icon_normal:
          iType = 0;
          break;
-      case icon_open:
+      case e_icon_open:
          iType = GIL_OPENICON;
          break;
       default:
          // unexpected icon type
          ASSERT(false);
-         return 0x80000000;
+         getfileimage.m_iImage = 0x80000000;
+         return ;
       }
 
-      string strFileParam(imagekey.m_strPath);
+      string strFileParam(getfileimage.m_imagekey.m_strPath);
 
       string strResource;
 
       WCHAR wszPath[_MAX_PATH * 6];
 
-      WCHAR szPath[_MAX_PATH * 6];
+      //WCHAR szPath[_MAX_PATH * 6];
 
       HICON hicon16 = nullptr;
 
@@ -362,7 +462,7 @@ namespace windowing_win32
 
       strPathEx = strFileParam;
 
-      ::str::international::unicode_to_utf8(strExtra, pcszExtra);
+      ::str::international::unicode_to_utf8(strExtra, getfileimage.m_wstrExtra);
 
       if (strExtra.get_length() > 0)
       {
@@ -375,7 +475,7 @@ namespace windowing_win32
 
       auto puser = psession->user();
 
-      auto psystem = m_psystem;
+      auto psystem = m_psystem->m_paurasystem;
 
       auto pnode = psystem->node();
 
@@ -387,51 +487,62 @@ namespace windowing_win32
 
       comptr< IShellItemImageFactory> pfactory;
 
-      string strPath(imagekey.m_strPath);
+      string strPath(getfileimage.m_imagekey.m_strPath);
 
       wstring wstrPath(strPath);
 
-      if (imagekey.m_strPath.ends_ci(".sln"))
+      if (getfileimage.m_imagekey.m_strPath.ends_ci(".sln"))
       {
 
          output_debug_string(".sln");
 
       }
 
-     
+      //auto psystem = m_psystem->m_paurasystem;
+
+      if (defer_set_thumbnail(getfileimage))
+      {
+
+         return;
+
+      }
+
       comptr < IShellIcon > pshellicon;
 
-      HRESULT hrShellIcon=pshellfolder.As(pshellicon);
+      HRESULT hrShellIcon= getfileimage.m_pshellfolder.As(pshellicon);
 
       if (SUCCEEDED(hrShellIcon) && pshellicon)
       {
 
          int iIconIndex = -1;
 
-         HRESULT hrGetIconOf = pshellicon->GetIconOf(itemidlistChild, 0, &iIconIndex);
+         HRESULT hrGetIconOf = pshellicon->GetIconOf(getfileimage.m_itemidlistChild, 0, &iIconIndex);
 
          if (SUCCEEDED(hrGetIconOf))
          {
 
-            imagekey.m_strPath = "::system";
+            getfileimage.m_imagekey.m_strPath = "::system";
 
-            imagekey.m_iIcon = iIconIndex;
+            getfileimage.m_imagekey.m_iIcon = iIconIndex;
 
-            if (contains_image(imagekey, iImage))
+            if (contains_image(getfileimage.m_imagekey, getfileimage.m_iImage))
             {
 
-               return iImage;
+               return;
+               //return getfileimage.m_iImage;
 
             }
 
-            iImage = _reserve_image(imagekey);
+            getfileimage.m_iImage = _reserve_image(getfileimage.m_imagekey);
 
-            if(iImage >= 0)
+            if(getfileimage.m_iImage >= 0)
             {
 
-               add_system_icon(iIconIndex, imagekey.m_cr, iImage);
+               add_system_icon(iIconIndex, getfileimage);
 
-               return iImage;
+               //return getfileimage.m_iImage;
+
+               return;
 
             }
 
@@ -446,7 +557,7 @@ namespace windowing_win32
       //if(SUCCEEDED(hr))
       //{
 
-      //   iImage = _reserve_image(imagekey);
+      //   getfileimage.m_iImage = _reserve_image(imagekey);
 
       //   int iSuccessCount = 0;
 
@@ -462,7 +573,7 @@ namespace windowing_win32
 
       //         auto pimage = create_image_from_hbitmap(hbitmap);
 
-      //         set_image(iImage, pimage, imagekey.m_cr);
+      //         set_image(getfileimage.m_iImage, pimage, imagekey.m_cr);
 
       //         DeleteObject(hbitmap);
 
@@ -472,7 +583,7 @@ namespace windowing_win32
 
       //   }
       //      
-      //   return iImage;
+      //   return getfileimage.m_iImage;
 
       //}
 
@@ -484,7 +595,7 @@ namespace windowing_win32
 
       HRESULT hrExtractImage = E_FAIL;
 
-      if (pshellfolder)
+      if (getfileimage.m_pshellfolder)
       {
 
          //hrIconOverlay = pshellfolder->GetUIObjectOf(
@@ -541,10 +652,10 @@ namespace windowing_win32
          //else
          //{
 
-          hrExtractImage = pshellfolder->GetUIObjectOf(
+          hrExtractImage = getfileimage.m_pshellfolder->GetUIObjectOf(
                hwnd,
                1,
-               itemidlistChild,
+             getfileimage.m_itemidlistChild,
                IID_IExtractImage,
                nullptr,
                (void **)&piextractimage);
@@ -577,11 +688,11 @@ namespace windowing_win32
                   if (wcscmp(wszPath, L"*") == 0)
                   {
 
-                     imagekey.m_iIcon = 0x80000000;
+                     getfileimage.m_imagekey.m_iIcon = 0x80000000;
 
-                     imagekey.set_path(strFileParam);
+                     getfileimage.m_imagekey.set_path(strFileParam);
 
-                     imagekey.m_strPath = "";
+                     getfileimage.m_imagekey.m_strPath = "";
 
                   }
                   else
@@ -591,11 +702,11 @@ namespace windowing_win32
 
                      auto pnode = psystem->node();
 
-                     imagekey.set_path(pnode->expand_env(wszPath));
+                     getfileimage.m_imagekey.set_path(pnode->expand_environment_variables(wszPath));
 
-                     imagekey.m_iIcon = 0;
+                     getfileimage.m_imagekey.m_iIcon = 0;
 
-                     imagekey.m_strExtension = "";
+                     getfileimage.m_imagekey.m_strExtension = "";
 
                   }
 
@@ -605,9 +716,9 @@ namespace windowing_win32
             else
             {
 
-               imagekey.set_path(strFileParam);
+               getfileimage.m_imagekey.set_path(strFileParam);
 
-               imagekey.m_iIcon = 0;
+               getfileimage.m_imagekey.m_iIcon = 0;
 
             }
 
@@ -615,15 +726,13 @@ namespace windowing_win32
 
       }
 
-
-
-      if (FAILED(hrExtractImage) && pshellfolder)
+      if (FAILED(hrExtractImage) && getfileimage.m_pshellfolder)
       {
 
-         hrExtractIconUI = pshellfolder->GetUIObjectOf(
+         hrExtractIconUI = getfileimage.m_pshellfolder->GetUIObjectOf(
             hwnd,
             1,
-            itemidlistChild,
+            getfileimage.m_itemidlistChild,
             IID_IExtractIconW,
             nullptr,
             (void **)&piextracticon);
@@ -650,23 +759,23 @@ namespace windowing_win32
             if (wcscmp(wszPath, L"*") == 0)
             {
 
-               imagekey.m_iIcon = 0x80000000;
+               getfileimage.m_imagekey.m_iIcon = 0x80000000;
 
-               imagekey.set_extension(strFileParam);
+               getfileimage.m_imagekey.set_extension(strFileParam);
 
-               imagekey.m_strPath = "";
+               getfileimage.m_imagekey.m_strPath = "";
 
             }
             else
             {
 
-               strIconLocation = pnode->expand_env(wszPath);
+               strIconLocation = pnode->expand_environment_variables(wszPath);
 
-               imagekey.set_path(strIconLocation);
+               getfileimage.m_imagekey.set_path(strIconLocation);
 
-               imagekey.m_iIcon = iIcon;
+               getfileimage.m_imagekey.m_iIcon = iIcon;
 
-               imagekey.m_strExtension = "";
+               getfileimage.m_imagekey.m_strExtension = "";
 
             }
 
@@ -677,7 +786,7 @@ namespace windowing_win32
       ::file::path pathTarget;
 
       if (((FAILED(hrIconLocation) && FAILED(hrGetLocation))
-         || imagekey.m_iIcon == 0x80000000
+         || getfileimage.m_imagekey.m_iIcon == 0x80000000
          || !m_pcontext->m_papexcontext->file().exists(strIconLocation))
          && ::str::ends_ci(strFileParam, ".lnk"))
       {
@@ -690,30 +799,34 @@ namespace windowing_win32
             if (pathTarget.ends_ci(".exe"))
             {
 
-               imagekey.set_path(pathTarget);
+               getfileimage.m_imagekey.set_path(pathTarget);
 
             }
             else
             {
 
-               imagekey.set_path("");
+               getfileimage.m_imagekey.set_path("");
 
             }
 
-            iImage = get_image_by_file_extension(imagekey);
+            get_image_by_file_extension(getfileimage);
 
-            return iImage;
+            //return getfileimage.m_iImage;
+            return;
 
          }
 
          if (FAILED(hrIconLocation) && FAILED(hrGetLocation))
          {
 
-            imagekey.set_path(pathTarget);
+            getfileimage.m_imagekey.set_path(pathTarget);
 
-            iImage = get_file_image(imagekey, pcszExtra, colorBackground);
+            //getfileimage.m_iImage = get_file_image(getfileimage.m_imagekey, getfileimage.m_wstrExtra, getfileimage.m_imagekey.m_cr);
 
-            return iImage;
+            _get_file_image(getfileimage);
+
+            //return getfileimage.m_iImage;
+            return;
 
          }
 
@@ -725,44 +838,47 @@ namespace windowing_win32
 
       }
 
-      if (imagekey.m_iIcon == 0x80000000)
+      if (getfileimage.m_imagekey.m_iIcon == 0x80000000)
       {
 
-         if (imagekey.m_strShellThemePrefix.has_char())
+         if (getfileimage.m_imagekey.m_strShellThemePrefix.has_char())
          {
 
-            string strExtension = file_extension_dup(pathTarget);
+            string strExtension = pathTarget.final_extension();
 
             image_key imagekeyTheme;
 
-            string strFooPath = imagekey.m_strShellThemePrefix + "foo." + strExtension;
+            string strFooPath = getfileimage.m_imagekey.m_strShellThemePrefix + "foo." + strExtension;
 
             imagekeyTheme.set_path(strFooPath);
 
             imagekeyTheme.m_iIcon = 0;
 
-            if (contains_image(imagekeyTheme, iImage))
+            if (contains_image(imagekeyTheme, getfileimage.m_iImage))
             {
 
-               return iImage;
+               //return getfileimage.m_iImage;
+
+               return;
 
             }
 
             string strIcon;
 
-            strIcon = m_psystem->m_pacmedir->config() / "shell/app_theme" / imagekey.m_strShellThemePrefix + strExtension + ".ico";
+            strIcon = m_psystem->m_pacmedir->config() / "shell/app_theme" / getfileimage.m_imagekey.m_strShellThemePrefix + strExtension + ".ico";
 
             if (m_pcontext->m_papexcontext->file().exists(strIcon))
             {
 
-               if (reserve_image(imagekeyTheme, iImage))
+               if (reserve_image(imagekeyTheme, getfileimage.m_iImage))
                {
 
-                  set_icon(iImage,  strIcon, colorBackground);
+                  set_icon(strIcon, getfileimage);
 
                }
 
-               return iImage;
+               //return getfileimage.m_iImage;
+               return;
 
             }
 
@@ -771,7 +887,9 @@ namespace windowing_win32
          if (wcscmp(wszPath, L"*") == 0)
          {
 
-            return get_image_by_file_extension(imagekey);
+            get_image_by_file_extension(getfileimage);
+
+            return;
 
          }
 
@@ -780,7 +898,7 @@ namespace windowing_win32
       if (uExtractIconLocationFlags & GIL_NOTFILENAME)
       {
 
-         if (reserve_image(imagekey, iImage))
+         if (reserve_image(getfileimage.m_imagekey, getfileimage.m_iImage))
          {
 
             HICON hicon = nullptr;
@@ -802,13 +920,13 @@ namespace windowing_win32
                   if (SUCCEEDED(hrExtract = piextracticon->Extract(
 
                      wszPath,
-                     imagekey.m_iIcon,
+                     getfileimage.m_imagekey.m_iIcon,
                      nullptr,
                      &hicon,
                      iSize << 16)))
                   {
 
-                     add_icon(iSize, hicon, colorBackground, iImage);
+                     add_icon(iSize, hicon, getfileimage);
 
                      ::DestroyIcon(hicon);
 
@@ -821,13 +939,13 @@ namespace windowing_win32
                   if (SUCCEEDED(hrExtract = piextracticon->Extract(
 
                      wszPath,
-                     imagekey.m_iIcon,
+                     getfileimage.m_imagekey.m_iIcon,
                      &hicon,
                      nullptr,
                      iSize)))
                   {
 
-                     add_icon(iSize, hicon, colorBackground, iImage);
+                     add_icon(iSize, hicon, getfileimage);
 
                      ::DestroyIcon(hicon);
 
@@ -839,7 +957,9 @@ namespace windowing_win32
 
          }
 
-         return iImage;
+         //return getfileimage.m_iImage;
+
+         return;
 
       }
       else if (strIconLocation.has_char())
@@ -848,18 +968,19 @@ namespace windowing_win32
          if (strIconLocation.ends_ci(".ico"))
          {
 
-            set_image_ico(strIconLocation, iImage, colorBackground);
+            set_image_ico(strIconLocation, getfileimage);
 
          }
          else
          {
 
-            set_image_resource(strIconLocation, iImage, imagekey, colorBackground);
-
+            set_image_resource(strIconLocation, getfileimage);
 
          }
 
-         return iImage;
+         //return getfileimage.m_iImage;
+
+         return;
 
       }
 
@@ -896,10 +1017,10 @@ namespace windowing_win32
       //   if (shfi16.hIcon != nullptr || shfi48.hIcon != nullptr)
       //   {
 
-      //      if (reserve_image(imagekey, iImage))
+      //      if (reserve_image(imagekey, getfileimage.m_iImage))
       //      {
 
-      //         add_icon_set(&shfi16, &shfi48, colorBackground, b16, b48, iImage);
+      //         add_icon_set(&shfi16, &shfi48, colorBackground, b16, b48, getfileimage.m_iImage);
 
       //         if (!b16 && shfi16.hIcon != nullptr)
       //         {
@@ -922,30 +1043,30 @@ namespace windowing_win32
 
       //}
 
-      imagekey.set_extension(pathTarget);
+      getfileimage.m_imagekey.set_extension(pathTarget);
 
-      imagekey.m_strPath.Empty();
+      getfileimage.m_imagekey.m_strPath.Empty();
 
-      imagekey.m_iIcon = 0;
+      getfileimage.m_imagekey.m_iIcon = 0;
 
-      return get_image_by_file_extension(imagekey);
+      get_image_by_file_extension(getfileimage);
+
+      return;
 
    }
 
 
-   i32 shell::get_image_by_file_extension(image_key & imagekey)
+   void shell::get_image_by_file_extension(_get_file_image_ & getfileimage)
    {
 
-      i32 iImage;
-
-      if (reserve_image(imagekey, iImage))
+      if (reserve_image(getfileimage.m_imagekey, getfileimage.m_iImage))
       {
 
          SHFILEINFOW shfi = {};
 
          wstring wstrFilePath;
 
-         if (imagekey.m_eattribute.has(file_attribute_directory))
+         if (getfileimage.m_imagekey.m_eattribute.has(e_file_attribute_directory))
          {
 
             SHGetFileInfoW(
@@ -961,7 +1082,7 @@ namespace windowing_win32
          else
          {
 
-            wstrFilePath = wstring(L"foo.") + wstring(imagekey.m_strExtension);
+            wstrFilePath = wstring(L"foo.") + wstring(getfileimage.m_imagekey.m_strExtension);
 
             SHGetFileInfoW(
                wstrFilePath,
@@ -973,11 +1094,11 @@ namespace windowing_win32
 
          }
 
-         add_system_icon(shfi.iIcon, imagekey.m_cr, iImage);
+         add_system_icon(shfi.iIcon, getfileimage);
 
       }
 
-      return iImage;
+//      return iImage;
 
    }
 
@@ -1043,8 +1164,7 @@ namespace windowing_win32
    //}
 
 
-
-   shell::e_folder shell::get_folder_type(::object * pobject, const ::string & pcsz)
+   shell::enum_folder shell::get_folder_type(::object * pobject, const ::string & pcsz)
    {
 
       return get_folder_type(pobject, ::str::international::utf8_to_unicode(pcsz));
@@ -1052,17 +1172,21 @@ namespace windowing_win32
    }
 
 
-   shell::e_folder shell::get_folder_type(::object * pobject, const ::wstring & wstrPath)
+   shell::enum_folder shell::get_folder_type(::object * pobject, const ::wstring & wstrPath)
    {
 
       string strPath;
 
       ::str::international::unicode_to_utf8(strPath, wstrPath);
 
-      if (dir::is(strPath))
+      auto psystem = m_psystem;
+
+      auto pacmedir = psystem->m_pacmedir;
+
+      if (pacmedir->is(strPath))
       {
 
-         return folder_file_system;
+         return e_folder_file_system;
 
       }
       else
@@ -1073,13 +1197,13 @@ namespace windowing_win32
          if (zipcontext.is_unzippable(strPath))
          {
 
-            return folder_zip;
+            return e_folder_zip;
 
          }
          else
          {
 
-            return folder_none;
+            return e_folder_none;
 
          }
 
@@ -1088,69 +1212,75 @@ namespace windowing_win32
    }
 
 
-   i32 shell::_get_file_image(const image_key & key)
+   //i32 shell::_get_file_image(const image_key & key)
+   void shell::_get_file_image(::user::shell::_get_file_image_ & getfileimage)
    {
 
-      return get_file_image(key, nullptr, key.m_cr);
+      return _get_file_image((_get_file_image_ &)getfileimage);
 
    }
 
 
-   i32 shell::get_file_image(image_key imagekey, const unichar * pcszExtra, ::color::color colorBackground)
+   void shell::_get_file_image(_get_file_image_ & getfileimage)
    {
 
-      i32 iImage = 0x80000000;
+      getfileimage.m_iImage = 0x80000000;
 
-      if (::str::begins_ci(imagekey.m_strPath, "uifs:"))
+      if (::str::begins_ci(getfileimage.m_imagekey.m_strPath, "uifs:"))
       {
 
-         if (reserve_image(imagekey, iImage))
+         if (reserve_image(getfileimage.m_imagekey, getfileimage.m_iImage))
          {
 
             ::file::path path = m_pcontext->m_papexcontext->dir().matter("cloud.ico");
 
-            set_icon(iImage, path, colorBackground);
+            set_icon(path, getfileimage);
 
          }
 
-         return iImage;
+         //return iImage;
+         return;
 
       }
-      else if (::str::begins_ci(imagekey.m_strPath, "fs:"))
+      else if (::str::begins_ci(getfileimage.m_imagekey.m_strPath, "fs:"))
       {
 
-         if (reserve_image(imagekey, iImage))
+         if (reserve_image(getfileimage.m_imagekey, getfileimage.m_iImage))
          {
 
             ::file::path path = m_pcontext->m_papexcontext->dir().matter("remote.ico");
 
-            set_icon(iImage, path, colorBackground);
+            set_icon(path, getfileimage);
 
          }
 
-         return iImage;
+         //return iImage;
+
+         return;
 
       }
-      else if (::str::begins_ci(imagekey.m_strPath, "ftp:"))
+      else if (::str::begins_ci(getfileimage.m_imagekey.m_strPath, "ftp:"))
       {
 
-         if (reserve_image(imagekey, iImage))
+         if (reserve_image(getfileimage.m_imagekey, getfileimage.m_iImage))
          {
 
             ::file::path path = m_pcontext->m_papexcontext->dir().matter("ftp.ico");
 
-            set_icon(iImage, path, colorBackground);
+            set_icon(path, getfileimage);
 
          }
 
-         return iImage;
+         //return iImage;
+
+         return;
 
       }
 
-      if (::str::ends_ci(imagekey.m_strPath, ".aura"))
+      if (::str::ends_ci(getfileimage.m_imagekey.m_strPath, ".aura"))
       {
 
-         string str = m_pcontext->m_papexcontext->file().as_string(imagekey.m_strPath);
+         string str = m_pcontext->m_papexcontext->file().as_string(getfileimage.m_imagekey.m_strPath);
 
          if (::str::begins_eat_ci(str, "ca2prompt\r\n"))
          {
@@ -1160,21 +1290,23 @@ namespace windowing_win32
 
          }
 
-         return iImage;
+         //return iImage;
+
+         return;
 
       }
 
-      if (m_knownfoldermanager)
+      if (getfileimage.m_knownfoldermanager)
       {
 
-         auto pknownfolderstruct = get_known_folder_struct(imagekey.m_strPath);
+         auto pknownfolderstruct = get_known_folder_struct(getfileimage.m_imagekey.m_strPath);
 
          if (pknownfolderstruct)
          {
 
             comptr < IKnownFolder > pknownfolder;
 
-            HRESULT hrGetFolder = m_knownfoldermanager->GetFolder(pknownfolderstruct->m_idKnownFolder, &pknownfolder);
+            HRESULT hrGetFolder = getfileimage.m_knownfoldermanager->GetFolder(pknownfolderstruct->m_idKnownFolder, &pknownfolder);
 
             if (SUCCEEDED(hrGetFolder) && pknownfolder)
             {
@@ -1186,9 +1318,9 @@ namespace windowing_win32
                if (SUCCEEDED(hrFolderDefinition))
                {
 
-                  iImage = _reserve_image(imagekey);
+                  getfileimage.m_iImage = _reserve_image(getfileimage.m_imagekey);
 
-                  if(iImage >= 0)
+                  if(getfileimage.m_iImage >= 0)
                   {
 
                      string strResource = definition.pszIcon;
@@ -1200,13 +1332,15 @@ namespace windowing_win32
                      if (stra.get_size() == 2)
                      {
 
-                        imagekey.m_strPath = stra[0];
+                        getfileimage.m_imagekey.m_strPath = stra[0];
 
-                        imagekey.m_iIcon = atoi(stra[1]);
+                        getfileimage.m_imagekey.m_iIcon = atoi(stra[1]);
 
-                        set_image_resource(stra[0], iImage, imagekey, colorBackground);
+                        set_image_resource(stra[0], getfileimage);
 
-                        return iImage;
+                        //return getfileimage.m_iImage;
+
+                        return;
 
                      }
 
@@ -1222,12 +1356,12 @@ namespace windowing_win32
 
       SHFILEINFOW shfi = {};
 
-      if (imagekey.m_strPath.get_length() == 2
-         && ansi_char_is_alphabetic(imagekey.m_strPath[0])
-         && imagekey.m_strPath[1] == ':')
+      if (getfileimage.m_imagekey.m_strPath.get_length() == 2
+         && ansi_char_is_alphabetic(getfileimage.m_imagekey.m_strPath[0])
+         && getfileimage.m_imagekey.m_strPath[1] == ':')
       {
 
-         ::wstring wstrPath(imagekey.m_strPath);
+         ::wstring wstrPath(getfileimage.m_imagekey.m_strPath);
 
          if (SHGetFileInfoW(wstrPath, 0, &shfi, sizeof(shfi), SHGFI_ICONLOCATION))
          {
@@ -1237,11 +1371,12 @@ namespace windowing_win32
             if (strPath.has_char())
             {
 
-               imagekey.m_iIcon = shfi.iIcon;
+               getfileimage.m_imagekey.m_iIcon = shfi.iIcon;
 
-               set_image_resource(strPath, iImage, imagekey, colorBackground);
+               set_image_resource(strPath, getfileimage);
 
-               return iImage;
+               //return getfileimage.m_iImage;
+               return;
 
             }
 
@@ -1293,41 +1428,45 @@ namespace windowing_win32
 
       string strExtension;
 
-      if (::str::ends_ci(imagekey.m_strPath, ".sln"))
+      if (::str::ends_ci(getfileimage.m_imagekey.m_strPath, ".sln"))
       {
 
          //output_debug_string("test .sln");
 
       }
 
-      string str(imagekey.m_strPath);
+      string str(getfileimage.m_imagekey.m_strPath);
 
       if (str == "foo")
       {
 
-         return get_image_by_file_extension(imagekey);
+         get_image_by_file_extension(getfileimage);
+
+         return;
 
       }
 
       if (::str::begins_eat(str, "foo."))
       {
 
-         return get_image_by_file_extension(imagekey);
+         get_image_by_file_extension(getfileimage);
+
+         return;
 
       }
 
-      ::file::path path = imagekey.m_strPath;
+      ::file::path path = getfileimage.m_imagekey.m_strPath;
 
       ::file::path pathFolder = path.folder();
 
-      itemidlist idlist;
+      //itemidlist idlist;
 
       bool bParseError = false;
 
       try
       {
 
-         idlist.parse(imagekey.m_strPath);
+         getfileimage.m_itemidlist.parse(getfileimage.m_imagekey.m_strPath);
 
       }
       catch (...)
@@ -1340,7 +1479,9 @@ namespace windowing_win32
       if (bParseError)
       {
 
-         return get_image_by_file_extension(imagekey);
+         get_image_by_file_extension(getfileimage);
+
+         return;
 
       }
 
@@ -1367,9 +1508,11 @@ namespace windowing_win32
 
 
 
-      iImage = get_file_image(imagekey, idlist, pcszExtra, colorBackground);
+      _internal_get_file_image(getfileimage);
 
-      return iImage;
+      //return getfileimage.m_iImage;
+
+      return;
 
    }
 
@@ -1444,7 +1587,12 @@ namespace windowing_win32
    ::e_status shell::run()
    {
 
-      m_knownfoldermanager.CoCreateInstance(CLSID_KnownFolderManager);
+      defer_co_initialize_ex(false);
+
+
+
+
+      //m_thumbnailhandlerfactory.CoCreateInstance(CLSID_ThumbnailHandlerFactory);
 
       auto estatus = ::user::shell::run();
 
@@ -1460,7 +1608,7 @@ namespace windowing_win32
    }
 
 
-   int shell::add_system_icon(int iIcon, const ::color::color & colorBackground, int iImage)
+   void shell::add_system_icon(int iIcon, _get_file_image_ & getfileimage)
    {
 
       synchronous_lock synchronouslock(mutex());
@@ -1472,17 +1620,20 @@ namespace windowing_win32
       for (auto iSize : iaSize)
       {
 
-         iImage = add_system_icon(iSize, iIcon, colorBackground, iImage);
+         //getfileimage.m_iImage = add_system_icon(iSize, iIcon, getfileimage);
+         add_system_icon(iSize, iIcon, getfileimage);
 
       }
 
-      return iImage;
+      //return iImage;
 
    }
 
 
-   int shell::set_icon(int iImage, const ::file::path & pathIconParam, const ::color::color & colorBackground)
+   void shell::set_icon(const ::file::path & pathIconParam, ::user::shell::_get_file_image_ & getfileimageParam)
    {
+
+      auto & getfileimage = (_get_file_image_ &)getfileimageParam;
 
       if (pathIconParam.ends_ci(".ico"))
       {
@@ -1509,7 +1660,7 @@ namespace windowing_win32
 
             }
 
-            iImage = add_icon(iSize, hicon, colorBackground, iImage);
+            add_icon(iSize, hicon, getfileimage);
 
             ::DestroyIcon(hicon);
 
@@ -1519,43 +1670,47 @@ namespace windowing_win32
       else
       {
 
-         ::user::shell::set_icon(iImage, pathIconParam, colorBackground);
+         ::user::shell::set_icon(pathIconParam, getfileimage);
 
       }
 
-      return iImage;
+      //return get;
 
    }
 
 
-   int shell::add_icon(int iSize, HICON hicon, const ::color::color & colorBackground, int iImage)
+   void shell::add_icon(int iSize, HICON hicon, _get_file_image_ & getfileimage)
    {
 
       synchronous_lock synchronouslock(m_pil[iSize]->mutex());
 
       synchronous_lock slHover(m_pilHover[iSize]->mutex());
 
-      auto picon = __create_new < ::windowing_win32::icon >();
+      auto pwindowingicon = __create < ::windowing_win32::icon >();
 
-      picon->add_icon(hicon);
+      pwindowingicon->add_icon(hicon);
 
-      iImage = m_pil[iSize]->add(picon, iImage);
+      auto pdrawicon = __create < ::draw2d::icon >();
+     
+      pdrawicon->initialize_with_windowing_icon(pwindowingicon);
 
-      if (iImage == 14)
+      getfileimage.m_iImage = m_pil[iSize]->add(pwindowingicon, getfileimage.m_iImage);
+
+      if (getfileimage.m_iImage == 14)
       {
 
          //iImage = m_pil[iSize]->add(picon);
 
       }
 
-      iImage = add_hover_image(iSize, iImage, colorBackground);
+      getfileimage.m_iImage = add_hover_image(iSize, getfileimage.m_iImage, getfileimage.m_imagekey.m_cr);
 
-      return iImage;
+      //return iImage;
 
    }
 
 
-   int shell::add_system_icon(int iSize, int iIcon, const ::color::color & colorBackground, int iImage)
+   void shell::add_system_icon(int iSize, int iIcon, _get_file_image_ & getfileimage)
    {
 
       bool bUsed = false;
@@ -1563,34 +1718,32 @@ namespace windowing_win32
       if (iSize <= 16)
       {
 
-         iImage = add_system_icon(iSize, m_pilSmall, iIcon, colorBackground, iImage);
+         add_system_icon(iSize, getfileimage.m_pilSmall, iIcon, getfileimage);
 
       }
       else if (iSize <= 32)
       {
 
-         iImage = add_system_icon(iSize, m_pilLarge, iIcon, colorBackground, iImage);
+         add_system_icon(iSize, getfileimage.m_pilLarge, iIcon, getfileimage);
 
       }
       else if (iSize <= 48)
       {
 
-         iImage = add_system_icon(iSize, m_pilExtraLarge, iIcon, colorBackground, iImage);
+         add_system_icon(iSize, getfileimage.m_pilExtraLarge, iIcon, getfileimage);
 
       }
       else
       {
 
-         iImage = add_system_icon(iSize, m_pilJumbo, iIcon, colorBackground, iImage);
+         add_system_icon(iSize, getfileimage.m_pilJumbo, iIcon, getfileimage);
 
       }
-
-      return iImage;
 
    }
 
 
-   int shell::add_system_icon(int iSize, IImageList * pil, int iIcon, const ::color::color & colorBackground, int iImage)
+   void shell::add_system_icon(int iSize, IImageList * pil, int iIcon, _get_file_image_ & getfileimage)
    {
 
       if (pil != nullptr)
@@ -1603,7 +1756,7 @@ namespace windowing_win32
          if (hicon != nullptr)
          {
 
-            iImage = add_icon(iSize, hicon, colorBackground, iImage);
+            add_icon(iSize, hicon, getfileimage);
 
             ::DestroyIcon(hicon);
 
@@ -1611,16 +1764,12 @@ namespace windowing_win32
 
       }
 
-      return iImage;
+      //return iImage;
 
    }
 
 
-
-
-
-
-   void shell::set_image_ico(string strIconLocation, i32 & iImage, ::color::color colorBackground)
+   void shell::set_image_ico(string strIconLocation, _get_file_image_ & getfileimage)
    {
 
       ASSERT(strIconLocation.ends_ci(".ico"));
@@ -1631,28 +1780,28 @@ namespace windowing_win32
 
       imagekeyIco.m_iIcon = 0;
 
-      if (reserve_image(imagekeyIco, iImage))
+      if (reserve_image(imagekeyIco, getfileimage.m_iImage))
       {
 
-         set_icon(iImage, strIconLocation, colorBackground);
+         set_icon(strIconLocation, getfileimage);
 
       }
 
    }
 
 
-   void shell::set_image_resource(string strIconLocation, i32 & iImage, const image_key & imagekey, ::color::color colorBackground)
+   void shell::set_image_resource(string strIconLocation, _get_file_image_ & getfileimage)
    {
 
       ASSERT(!strIconLocation.ends_ci(".ico"));
 
-      image_key imagekeyIco;
+      //image_key imagekeyIco;
 
-      imagekeyIco.set_path(strIconLocation, false);
+      getfileimage.m_imagekey.set_path(strIconLocation, false);
 
-      imagekeyIco.m_iIcon = imagekey.m_iIcon;
+      //getfileimage.m_imagekey.m_iIcon = imagekey.m_iIcon;
 
-      if (reserve_image(imagekeyIco, iImage))
+      if (reserve_image(getfileimage.m_imagekey, getfileimage.m_iImage))
       {
 
          auto psystem = m_psystem->m_paurasystem;
@@ -1670,16 +1819,16 @@ namespace windowing_win32
 
             int iSizeOut = iSize;
 
-            HICON hicon = pnode->extract_resource_icon(strIconLocation, iSizeOut, iSizeOut, imagekey.m_iIcon);
+            HICON hicon = pnode->extract_resource_icon(strIconLocation, iSizeOut, iSizeOut, getfileimage.m_imagekey.m_iIcon);
 
-            if (hicon == nullptr && imagekey.m_iIcon == 0)
+            if (hicon == nullptr && getfileimage.m_imagekey.m_iIcon == 0)
             {
 
                hicon = pnode->extract_resource_icon(strIconLocation, iSizeOut, iSizeOut, 0x80000000);
 
             }
 
-            add_icon(iSize, hicon, colorBackground, iImage);
+            add_icon(iSize, hicon, getfileimage);
 
             ::DestroyIcon(hicon);
 

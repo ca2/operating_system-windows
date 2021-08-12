@@ -150,7 +150,7 @@ namespace windows
 
          DWORD dwLastError = ::GetLastError();
 
-         string strMessage = get_system_error_message(dwLastError);
+         string strMessage = get_last_error_message(dwLastError);
 
          output_debug_string(pwszCommandLine);
          output_debug_string("\r\n");

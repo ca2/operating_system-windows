@@ -2,6 +2,7 @@
 
 
 #include "app-core/audio/audio/_.h"
+#include "apex_windows/_.h"
 
 
 #if defined(_MULTIMEDIA_MMSYSTEM_LIBRARY)
