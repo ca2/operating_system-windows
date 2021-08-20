@@ -317,7 +317,8 @@ namespace windows
          ::file::throw_status(error_disk_full, -1, m_path);
    }
 
-   filesize file::seek(filesize lOff, ::file::e_seek nFrom)
+
+   ::index file::translate(::count offset, ::enum_seek nFrom)
    {
 
       if (m_handleFile == INVALID_HANDLE_VALUE)
@@ -329,11 +330,11 @@ namespace windows
 
       ASSERT_VALID(this);
       ASSERT(m_handleFile != INVALID_HANDLE_VALUE);
-      ASSERT(nFrom == ::file::seek_begin || nFrom == ::file::seek_end || nFrom == ::file::seek_current);
-      ASSERT(::file::seek_begin == FILE_BEGIN && ::file::seek_end == FILE_END && ::file::seek_current == FILE_CURRENT);
+      ASSERT(nFrom == ::e_seek_set || nFrom == ::e_seek_from_end || nFrom == ::e_seek_current);
+      ASSERT(::e_seek_set == FILE_BEGIN && ::e_seek_from_end == FILE_END && ::e_seek_current == FILE_CURRENT);
 
-      LONG lLoOffset = lOff & 0xffffffff;
-      LONG lHiOffset = (lOff >> 32) & 0xffffffff;
+      LONG lLoOffset = offset & 0xffffffff;
+      LONG lHiOffset = (offset >> 32) & 0xffffffff;
 
       filesize posNew = ::SetFilePointer((HANDLE)m_handleFile, lLoOffset, &lHiOffset, (::u32)nFrom);
       posNew |= ((filesize)lHiOffset) << 32;
@@ -389,7 +390,7 @@ namespace windows
 
       m_iCharacterPutBack = iCharacter;
 
-      //seek(-1, ::file::e_seek::seek_current);
+      //seek(-1, ::enum_seek::seek_current);
 
       return iCharacter;
 
@@ -541,7 +542,7 @@ namespace windows
       ASSERT_VALID(this);
       ASSERT(m_handleFile != INVALID_HANDLE_VALUE);
 
-      seek((::i32)dwNewLen, (::file::e_seek)::file::seek_begin);
+      set_position(dwNewLen);
 
       if (!::SetEndOfFile((HANDLE)m_handleFile))
       {
@@ -565,9 +566,9 @@ namespace windows
       DWORD dwLo = ::GetFileSize(m_handleFile, &dwHi);
       //// seek is a non const operation
       //__pointer(::windows::file) pFile = (::windows::file*)this;
-      //dwCur = pFile->seek(0L, ::file::seek_current);
+      //dwCur = pFile->seek(0L, ::e_seek_current);
       //dwLen = pFile->seek_to_end();
-      //if (dwCur != (u64)pFile->seek((filesize)dwCur, ::file::seek_begin))
+      //if (dwCur != (u64)pFile->seek((filesize)dwCur, ::e_seek_set))
       //   __throw(::exception::exception("file cursor not in same place after getting length"));
 
       return (filesize)((((::u64) dwHi) << 32) | ((::u64) dwLo));

@@ -926,7 +926,7 @@ namespace acme
 
          }
 
-         ::mutex veri_global_ca2(e_create_new, NULL, "Global\\the_veri_global_ca2");
+         ::mutex veri_global_ca2(this, NULL, "Global\\the_veri_global_ca2");
 
          synchronous_lock lock_the_veri_global_ca2(&veri_global_ca2);
 
@@ -2060,7 +2060,7 @@ namespace acme
       }
 
 
-      bool node::register_spa_file_type(const ::string & strAppIdHandler)
+      ::e_status node::register_spa_file_type(const ::string & strAppIdHandler)
       {
 
 #ifdef WINDOWS_DESKTOP
@@ -2163,7 +2163,7 @@ namespace acme
 
          }
 
-         ::install::admin_mutex mutexStartup("-startup");
+         ::install::admin_mutex mutexStartup(this, "-startup");
 
          wstring wstr(str);
 

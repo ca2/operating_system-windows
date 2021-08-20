@@ -1071,7 +1071,7 @@ namespace windows
             if (!SwitchToThread())
             {
 
-               sleep(10_ms); // forces switch to another thread
+               preempt(10_ms); // forces switch to another thread
 
             }
 

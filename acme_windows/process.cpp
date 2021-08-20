@@ -185,7 +185,7 @@ struct shell_execute :
 
          }
 
-         sleep(1000_ms);
+         preempt(1000_ms);
 
       }
 

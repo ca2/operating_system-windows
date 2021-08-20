@@ -500,7 +500,7 @@ namespace windows
       duration dur;
       dur.m_nanos = count * m_uiByteTimeNs;
       dur.normalize();
-      sleep(dur);
+      preempt(dur);
 
    }
 
@@ -596,7 +596,7 @@ namespace windows
             }
 
             // time_out occured on reading 1 byte
-            sleep(maximum(100_ms, m_timeout.m_millisReadTimeoutConstant / 10));
+            preempt(maximum(100_ms, m_timeout.m_millisReadTimeoutConstant / 10));
 
             if (!::task_get_run())
             {

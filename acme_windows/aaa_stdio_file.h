@@ -40,7 +40,7 @@ namespace windows
 
       virtual void write(const void * pdata, memsize nCount);
 
-      virtual filesize seek(filesize lOff, ::file::e_seek nFrom);
+      virtual filesize seek(filesize lOff, ::enum_seek nFrom);
       virtual void Abort();
       virtual void Flush();
       virtual void close();

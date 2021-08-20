@@ -103,42 +103,25 @@ namespace windows
       //virtual string name(const char * path1) override;
 
 
-      virtual ::file::path base_module() override;
-       bool create(const char * path) override;
-
+      //virtual ::file::path module_folder() override;
+      
+      bool create(const char * path) override;
 
       bool _create(const char * path) override;
 
-
       bool create_directory(const char * path) override;
-
-
-      //::file::path module() override;
-
 
       bool is(const char * path) override;
 
-
-      //string name(const char * path) override;
-
-
       void rls(::file::patha & stra, const char * psz) override;
-
 
       void rls_dir(::file::patha & stra, const char * psz) override;
 
-
       void ls(::file::patha & stra, const char * psz) override;
-
 
       void ls_dir(::file::patha & stra, const char * psz) override;
 
       void ls_file(::file::patha & stra, const char * psz) override;
-
-      //::file::path pathfind(const string & pszEnv, const string & pszTopic, const string & pszMode) override;
-
-
-      //::file::path archive() override;
 
       int make_path(const char * psz) override;
 

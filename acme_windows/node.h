@@ -120,7 +120,7 @@ namespace acme
 
          string get_user_language() override;
          bool get_application_exclusivity_security_attributes(memory & memory) override;
-         bool register_spa_file_type(const ::string & strAppIdHandler) override;
+         ::e_status register_spa_file_type(const ::string & strAppIdHandler) override;
          ::e_status start_program_files_app_app_admin(string strPlatform, string strConfiguration) override;
 
 

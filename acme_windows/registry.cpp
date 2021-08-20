@@ -1,7 +1,5 @@
 ﻿#include "framework.h"
-//#include "acme/operating_system.h"
-//#include "acme/node/windows/_windows.h"
-#include "acme/const/id.h"
+#include "acme/constant/id.h"
 
 
 namespace windows
@@ -12,6 +10,7 @@ namespace windows
    {
 
    }
+
 
    registry::~registry()
    {

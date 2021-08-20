@@ -59,9 +59,9 @@ namespace windows
 
       virtual bool get_last_write_time(FILETIME * pfiletime, const ::string & strFilename);
 
-      virtual ::e_status update_module_path() override;
+      ::e_status update_module_path() override;
 
-      virtual file_result get_file(const ::payload & varFile, const ::file::e_open & nOpenFlags) override;
+      file_transport get_file(const ::payload & varFile, const ::file::e_open & nOpenFlags) override;
 
 
 
