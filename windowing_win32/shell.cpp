@@ -341,8 +341,14 @@ namespace windowing_win32
                   HRESULT hrThumbnail = pthumbnailprovider->GetThumbnail(iSize, &hbitmap, &alphatype);
 
                   auto pimage = create_image_from_hbitmap(hbitmap);
-               
-                  set_image(getfileimage.m_iImage, iSize, pimage);
+
+                  {
+
+                     image_source imagesource(pimage);
+
+                     set_image(getfileimage.m_iImage, iSize, imagesource);
+
+                  }
 
                }
 
@@ -870,7 +876,7 @@ namespace windowing_win32
             if (m_pcontext->m_papexcontext->file().exists(strIcon))
             {
 
-               if (reserve_image(imagekeyTheme, getfileimage.m_iImage))
+               if (reserve_image(getfileimage))
                {
 
                   set_icon(strIcon, getfileimage);
@@ -898,7 +904,7 @@ namespace windowing_win32
       if (uExtractIconLocationFlags & GIL_NOTFILENAME)
       {
 
-         if (reserve_image(getfileimage.m_imagekey, getfileimage.m_iImage))
+         if (reserve_image(getfileimage))
          {
 
             HICON hicon = nullptr;
@@ -1059,7 +1065,7 @@ namespace windowing_win32
    void shell::get_image_by_file_extension(_get_file_image_ & getfileimage)
    {
 
-      if (reserve_image(getfileimage.m_imagekey, getfileimage.m_iImage))
+      if (reserve_image(getfileimage))
       {
 
          SHFILEINFOW shfi = {};
@@ -1213,7 +1219,7 @@ namespace windowing_win32
 
 
    //i32 shell::_get_file_image(const image_key & key)
-   void shell::_get_file_image(::user::shell::_get_file_image_ & getfileimage)
+   bool shell::_get_file_image(::user::shell::_get_file_image_ & getfileimage)
    {
 
       return _get_file_image((_get_file_image_ &)getfileimage);
@@ -1221,7 +1227,7 @@ namespace windowing_win32
    }
 
 
-   void shell::_get_file_image(_get_file_image_ & getfileimage)
+   bool shell::_get_file_image(_get_file_image_ & getfileimage)
    {
 
       getfileimage.m_iImage = 0x80000000;
@@ -1229,7 +1235,7 @@ namespace windowing_win32
       if (::str::begins_ci(getfileimage.m_imagekey.m_strPath, "uifs:"))
       {
 
-         if (reserve_image(getfileimage.m_imagekey, getfileimage.m_iImage))
+         if (reserve_image(getfileimage))
          {
 
             ::file::path path = m_pcontext->m_papexcontext->dir().matter("cloud.ico");
@@ -1239,13 +1245,13 @@ namespace windowing_win32
          }
 
          //return iImage;
-         return;
+         return true;
 
       }
       else if (::str::begins_ci(getfileimage.m_imagekey.m_strPath, "fs:"))
       {
 
-         if (reserve_image(getfileimage.m_imagekey, getfileimage.m_iImage))
+         if (reserve_image(getfileimage))
          {
 
             ::file::path path = m_pcontext->m_papexcontext->dir().matter("remote.ico");
@@ -1256,13 +1262,13 @@ namespace windowing_win32
 
          //return iImage;
 
-         return;
+         return true;
 
       }
       else if (::str::begins_ci(getfileimage.m_imagekey.m_strPath, "ftp:"))
       {
 
-         if (reserve_image(getfileimage.m_imagekey, getfileimage.m_iImage))
+         if (reserve_image(getfileimage))
          {
 
             ::file::path path = m_pcontext->m_papexcontext->dir().matter("ftp.ico");
@@ -1273,7 +1279,7 @@ namespace windowing_win32
 
          //return iImage;
 
-         return;
+         return true;
 
       }
 
@@ -1292,7 +1298,7 @@ namespace windowing_win32
 
          //return iImage;
 
-         return;
+         return true;
 
       }
 
@@ -1340,7 +1346,7 @@ namespace windowing_win32
 
                         //return getfileimage.m_iImage;
 
-                        return;
+                        return true;
 
                      }
 
@@ -1376,7 +1382,7 @@ namespace windowing_win32
                set_image_resource(strPath, getfileimage);
 
                //return getfileimage.m_iImage;
-               return;
+               return true;
 
             }
 
@@ -1442,7 +1448,7 @@ namespace windowing_win32
 
          get_image_by_file_extension(getfileimage);
 
-         return;
+         return true;
 
       }
 
@@ -1451,7 +1457,7 @@ namespace windowing_win32
 
          get_image_by_file_extension(getfileimage);
 
-         return;
+         return true;
 
       }
 
@@ -1481,7 +1487,7 @@ namespace windowing_win32
 
          get_image_by_file_extension(getfileimage);
 
-         return;
+         return true;
 
       }
 
@@ -1506,13 +1512,11 @@ namespace windowing_win32
 
       }*/
 
-
-
       _internal_get_file_image(getfileimage);
 
       //return getfileimage.m_iImage;
 
-      return;
+      return true;
 
    }
 
@@ -1670,7 +1674,7 @@ namespace windowing_win32
       else
       {
 
-         ::user::shell::set_icon(pathIconParam, getfileimage);
+         ::user::shell::set_icon(getfileimage.m_iImage, pathIconParam);
 
       }
 
@@ -1694,18 +1698,28 @@ namespace windowing_win32
      
       pdrawicon->initialize_with_windowing_icon(pwindowingicon);
 
-      getfileimage.m_iImage = m_pil[iSize]->add(pwindowingicon, getfileimage.m_iImage);
-
-      if (getfileimage.m_iImage == 14)
       {
 
-         //iImage = m_pil[iSize]->add(picon);
+         image_source imagesource(pdrawicon);
+
+         //   m_pil[iSize]->set(getfileimage.m_iImage, imagesource);
+
+         //}
+
+         //if (getfileimage.m_iImage == 14)
+         //{
+
+         //   //iImage = m_pil[iSize]->add(picon);
+
+         //}
+
+         //getfileimage.m_iImage = add_hover_image(iSize, getfileimage.m_iImage, getfileimage.m_imagekey.m_cr);
+
+         //return iImage;
+
+         set_image(getfileimage.m_iImage, iSize, imagesource);
 
       }
-
-      getfileimage.m_iImage = add_hover_image(iSize, getfileimage.m_iImage, getfileimage.m_imagekey.m_cr);
-
-      //return iImage;
 
    }
 
@@ -1780,7 +1794,7 @@ namespace windowing_win32
 
       imagekeyIco.m_iIcon = 0;
 
-      if (reserve_image(imagekeyIco, getfileimage.m_iImage))
+      if (reserve_image(getfileimage))
       {
 
          set_icon(strIconLocation, getfileimage);
@@ -1801,7 +1815,7 @@ namespace windowing_win32
 
       //getfileimage.m_imagekey.m_iIcon = imagekey.m_iIcon;
 
-      if (reserve_image(getfileimage.m_imagekey, getfileimage.m_iImage))
+      if (reserve_image(getfileimage))
       {
 
          auto psystem = m_psystem->m_paurasystem;

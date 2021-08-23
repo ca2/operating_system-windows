@@ -479,7 +479,13 @@ namespace draw2d_gdiplus
       else
       {
 
-         pimageDst->g()->draw(::rectangle_f64(rectDst.top_left(), size), pimageSrc->g(), pointSrc);
+         image_source imagesource(pimageSrc, pointSrc);
+
+         image_drawing_options imagedrawingoptions(::rectangle_f64(rectDst.top_left(), size));
+
+         image_drawing imagedrawing(imagedrawingoptions, imagesource);
+
+         pimageDst->g()->draw(imagedrawing);
 
       }
 
@@ -540,7 +546,17 @@ namespace draw2d_gdiplus
 
       pimage1->set_rgb(255, 255, 255);
 
-      pimage1->g()->draw(rectangle_i32_dimension(0, 0, cx, cy), picon);
+      {
+      
+         image_source imagesource(picon);
+
+         image_drawing_options imagedrawingoptions(rectangle_i32_dimension(0, 0, cx, cy));
+
+         image_drawing imagedrawing(imagedrawingoptions, imagesource);
+
+         pimage1->g()->draw(imagedrawing);
+
+      }
 
       // Black blend image
       ::image_pointer pimage2;
@@ -566,7 +582,17 @@ namespace draw2d_gdiplus
 
       pimage2->fill(0, 0, 0, 0);
 
-      pimage2->g()->draw(rectangle_i32_dimension(0, 0, cx, cy), picon);
+      {
+
+         image_source imagesource(picon);
+
+         image_drawing_options imagedrawingoptions(rectangle_i32_dimension(0, 0, cx, cy));
+
+         image_drawing imagedrawing(imagedrawingoptions, imagesource);
+
+         pimage2->g()->draw(imagedrawing);
+
+      }
 
       //nullptr,
       //DI_IMAGE | DI_MASK);
@@ -593,7 +619,17 @@ namespace draw2d_gdiplus
 
       }
 
-      pimageM->g()->draw(rectangle_i32_dimension(0, 0, cx, cy), picon);
+      {
+
+         image_source imagesource(picon);
+
+         image_drawing_options imagedrawingoptions(rectangle_i32_dimension(0, 0, cx, cy));
+
+         image_drawing imagedrawing(imagedrawingoptions, imagesource);
+
+         pimageM->g()->draw(imagedrawing);
+
+      }
 
       u8 * r1 = (u8 *)pimage1->colorref();
       u8 * r2 = (u8 *)pimage2->colorref();

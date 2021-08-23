@@ -57,8 +57,8 @@ namespace windowing_win32
       ::e_status run() override;
 
 
-      void _get_file_image(::user::shell::_get_file_image_ & getfileimage) override;
-      void _get_file_image(_get_file_image_ & getfileimage);
+      bool _get_file_image(::user::shell::_get_file_image_ & getfileimage) override;
+      bool _get_file_image(_get_file_image_ & getfileimage);
 
 
       bool defer_set_thumbnail(::user::shell::_get_file_image_ & getfileimage) override;

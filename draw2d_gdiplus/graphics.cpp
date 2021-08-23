@@ -788,7 +788,7 @@ namespace draw2d_gdiplus
    bool graphics::frame_rectangle(const ::rectangle_f64 & rectangle, ::draw2d::brush * pbrush)
    {
 
-      return draw_rectangle(rectangle, pbrush->m_color);
+      return draw_inset_rectangle(rectangle, pbrush->m_color);
 
    }
 
@@ -1558,21 +1558,21 @@ namespace draw2d_gdiplus
 
       }
 
-      double xDst = imagedrawing.m_rectDst.left;
+      double xDst = imagedrawing.m_rectangleTarget.left;
 
-      double yDst = imagedrawing.m_rectDst.top;
+      double yDst = imagedrawing.m_rectangleTarget.top;
 
-      double nDstWidth = imagedrawing.m_rectDst.width();
+      double nDstWidth = imagedrawing.m_rectangleTarget.width();
 
-      double nDstHeight = imagedrawing.m_rectDst.height();
+      double nDstHeight = imagedrawing.m_rectangleTarget.height();
 
-      double xSrc = imagedrawing.m_rectSrc.left;
+      double xSrc = imagedrawing.m_rectangleSource.left;
 
-      double ySrc = imagedrawing.m_rectSrc.top;
+      double ySrc = imagedrawing.m_rectangleSource.top;
 
-      double nSrcWidth = imagedrawing.m_rectSrc.width();
+      double nSrcWidth = imagedrawing.m_rectangleSource.width();
 
-      double nSrcHeight = imagedrawing.m_rectSrc.height();
+      double nSrcHeight = imagedrawing.m_rectangleSource.height();
 
       Gdiplus::RectF rectDst((Gdiplus::REAL) xDst, (Gdiplus::REAL)yDst, (Gdiplus::REAL)nDstWidth, (Gdiplus::REAL)nDstHeight);
 
@@ -3585,119 +3585,119 @@ namespace draw2d_gdiplus
    }
 
 
-   bool graphics::draw_rectangle(const ::rectangle_f64 & rectangle, const ::color::color& color, const ::e_border & eborder)
-   {
+   //bool graphics::draw_rectangle(const ::rectangle_f64 & rectangle, const ::color::color& color, const ::e_border & eborder)
+   //{
 
-      if (!(eborder & (e_border_left | e_border_right | e_border_top | e_border_bottom)))
-      {
+   //   if (!(eborder & (e_border_left | e_border_right | e_border_top | e_border_bottom)))
+   //   {
 
-         return false;
+   //      return false;
 
-      }
+   //   }
 
-      Gdiplus::Pen pen(Gdiplus::Color(color.alpha, color.red, color.green, color.blue), 1.0);
+   //   Gdiplus::Pen pen(Gdiplus::Color(color.alpha, color.red, color.green, color.blue), 1.0);
 
-      //if ((eborder & e_border_left) && (eborder & e_border_top)
-      //   && (eborder & e_border_right) && (eborder & e_border_bottom)
-      //   && crTopLeft == crBottomRight)
-      //{
+   //   //if ((eborder & e_border_left) && (eborder & e_border_top)
+   //   //   && (eborder & e_border_right) && (eborder & e_border_bottom)
+   //   //   && crTopLeft == crBottomRight)
+   //   //{
 
-      //   m_pgraphics->DrawRectangle(&pen, rectangle.left, rectangle.top, rectangle.width(), rectangle.height());
+   //   //   m_pgraphics->DrawRectangle(&pen, rectangle.left, rectangle.top, rectangle.width(), rectangle.height());
 
-      //} else
-      if ((eborder & e_border_left) && (eborder & e_border_top))
-      {
+   //   //} else
+   //   if ((eborder & e_border_left) && (eborder & e_border_top))
+   //   {
 
-         Gdiplus::GraphicsPath path;
+   //      Gdiplus::GraphicsPath path;
 
-         Gdiplus::PointF pa[3];
+   //      Gdiplus::PointF pa[3];
 
-         pa[0].X = (Gdiplus::REAL) rectangle.left;
-         pa[0].Y = (Gdiplus::REAL) rectangle.bottom;
-         pa[1].X = (Gdiplus::REAL) rectangle.left;
-         pa[1].Y = (Gdiplus::REAL) rectangle.top;
-         pa[2].X = (Gdiplus::REAL) rectangle.right;
-         pa[2].Y = (Gdiplus::REAL)rectangle.top;
+   //      pa[0].X = (Gdiplus::REAL) rectangle.left;
+   //      pa[0].Y = (Gdiplus::REAL) rectangle.bottom;
+   //      pa[1].X = (Gdiplus::REAL) rectangle.left;
+   //      pa[1].Y = (Gdiplus::REAL) rectangle.top;
+   //      pa[2].X = (Gdiplus::REAL) rectangle.right;
+   //      pa[2].Y = (Gdiplus::REAL)rectangle.top;
 
-         path.AddLines(pa, 3);
+   //      path.AddLines(pa, 3);
 
-         m_pgraphics->DrawPath(&pen, &path);
+   //      m_pgraphics->DrawPath(&pen, &path);
 
-      }
-      else
-      {
+   //   }
+   //   else
+   //   {
 
-         if (eborder & e_border_left)
-         {
+   //      if (eborder & e_border_left)
+   //      {
 
-            m_pgraphics->DrawLine(&pen, 
-               (Gdiplus::REAL) rectangle.left, 
-               (Gdiplus::REAL)rectangle.bottom - 1, 
-               (Gdiplus::REAL)rectangle.left, 
-               (Gdiplus::REAL)rectangle.top);
+   //         m_pgraphics->DrawLine(&pen, 
+   //            (Gdiplus::REAL) rectangle.left, 
+   //            (Gdiplus::REAL)rectangle.bottom - 1, 
+   //            (Gdiplus::REAL)rectangle.left, 
+   //            (Gdiplus::REAL)rectangle.top);
 
-         }
-         else if (eborder & e_border_top)
-         {
+   //      }
+   //      else if (eborder & e_border_top)
+   //      {
 
-            m_pgraphics->DrawLine(&pen, 
-               (Gdiplus::REAL)rectangle.left,
-               (Gdiplus::REAL)rectangle.top, 
-               (Gdiplus::REAL)rectangle.right, 
-               (Gdiplus::REAL)rectangle.top);
+   //         m_pgraphics->DrawLine(&pen, 
+   //            (Gdiplus::REAL)rectangle.left,
+   //            (Gdiplus::REAL)rectangle.top, 
+   //            (Gdiplus::REAL)rectangle.right, 
+   //            (Gdiplus::REAL)rectangle.top);
 
-         }
+   //      }
 
-      }
+   //   }
 
-      if ((eborder & e_border_right) && (eborder & e_border_bottom))
-      {
+   //   if ((eborder & e_border_right) && (eborder & e_border_bottom))
+   //   {
 
-         Gdiplus::GraphicsPath path;
+   //      Gdiplus::GraphicsPath path;
 
-         Gdiplus::PointF pa[3];
+   //      Gdiplus::PointF pa[3];
 
-         pa[0].X = (Gdiplus::REAL) rectangle.left;
-         pa[0].Y = (Gdiplus::REAL) rectangle.bottom;
-         pa[1].X = (Gdiplus::REAL) rectangle.right;
-         pa[1].Y = (Gdiplus::REAL) rectangle.bottom;
-         pa[2].X = (Gdiplus::REAL) rectangle.right;
-         pa[2].Y = (Gdiplus::REAL) rectangle.top;
+   //      pa[0].X = (Gdiplus::REAL) rectangle.left;
+   //      pa[0].Y = (Gdiplus::REAL) rectangle.bottom;
+   //      pa[1].X = (Gdiplus::REAL) rectangle.right;
+   //      pa[1].Y = (Gdiplus::REAL) rectangle.bottom;
+   //      pa[2].X = (Gdiplus::REAL) rectangle.right;
+   //      pa[2].Y = (Gdiplus::REAL) rectangle.top;
 
-         path.AddLines(pa, 3);
+   //      path.AddLines(pa, 3);
 
-         m_pgraphics->DrawPath(&pen, &path);
+   //      m_pgraphics->DrawPath(&pen, &path);
 
-      }
-      else
-      {
+   //   }
+   //   else
+   //   {
 
-         if (eborder & e_border_bottom)
-         {
+   //      if (eborder & e_border_bottom)
+   //      {
 
-            m_pgraphics->DrawLine(&pen,
-               (Gdiplus::REAL)rectangle.left, 
-               (Gdiplus::REAL)rectangle.bottom,
-               (Gdiplus::REAL)rectangle.right,
-               (Gdiplus::REAL)rectangle.bottom);
+   //         m_pgraphics->DrawLine(&pen,
+   //            (Gdiplus::REAL)rectangle.left, 
+   //            (Gdiplus::REAL)rectangle.bottom,
+   //            (Gdiplus::REAL)rectangle.right,
+   //            (Gdiplus::REAL)rectangle.bottom);
 
-         }
-         else if (eborder & e_border_right)
-         {
+   //      }
+   //      else if (eborder & e_border_right)
+   //      {
 
-            m_pgraphics->DrawLine(&pen, 
-               (Gdiplus::REAL)rectangle.right, 
-               (Gdiplus::REAL)rectangle.bottom, 
-               (Gdiplus::REAL)rectangle.right, 
-               (Gdiplus::REAL)rectangle.top + 1);
+   //         m_pgraphics->DrawLine(&pen, 
+   //            (Gdiplus::REAL)rectangle.right, 
+   //            (Gdiplus::REAL)rectangle.bottom, 
+   //            (Gdiplus::REAL)rectangle.right, 
+   //            (Gdiplus::REAL)rectangle.top + 1);
 
-         }
+   //      }
 
-      }
+   //   }
 
-      return true;
+   //   return true;
 
-   }
+   //}
 
 
    //bool graphics::draw_rectangle(const ::rectangle_f64& rectangle, const ::color::color& color, const ::e_border & eborder)
@@ -3796,124 +3796,124 @@ namespace draw2d_gdiplus
    //}
 
 
-   bool graphics::draw_3drect(const ::rectangle_f64 & rectangle, const ::color::color& colorTopLeft, const ::color::color& colorBottomRight, const ::e_border & eborder)
-   {
+   //bool graphics::draw_inset_3drect(const ::rectangle_f64 & rectangle, const ::color::color& colorTopLeft, const ::color::color& colorBottomRight, const ::e_border & eborder)
+   //{
 
-      if (!(eborder & (e_border_left | e_border_right | e_border_top | e_border_bottom)))
-      {
+   //   if (!(eborder & (e_border_left | e_border_right | e_border_top | e_border_bottom)))
+   //   {
 
-         return false;
+   //      return false;
 
-      }
-
-
-      if (colorTopLeft == colorBottomRight)
-      {
-
-         return draw_rectangle(rectangle, colorTopLeft, eborder);
-
-      }
+   //   }
 
 
-      if (!(eborder & (e_border_left | e_border_right | e_border_top | e_border_bottom)))
-      {
+   //   if (colorTopLeft == colorBottomRight)
+   //   {
 
-         return false;
+   //      return draw_rectangle(rectangle, colorTopLeft, eborder);
 
-      }
-
-      {
-
-         Gdiplus::Pen pen(Gdiplus::Color(colorTopLeft.alpha, colorTopLeft.red, colorTopLeft.green, colorTopLeft.blue), 1.0);
-
-         if ((eborder & e_border_left) && (eborder & e_border_top))
-         {
-
-            Gdiplus::GraphicsPath path;
-
-            Gdiplus::PointF pa[3];
-
-            pa[0].X = (Gdiplus::REAL) rectangle.left;
-            pa[0].Y = (Gdiplus::REAL) rectangle.bottom - 1;
-            pa[1].X = (Gdiplus::REAL) rectangle.left;
-            pa[1].Y = (Gdiplus::REAL) rectangle.top;
-            pa[2].X = (Gdiplus::REAL) rectangle.right;
-            pa[2].Y = (Gdiplus::REAL) rectangle.top;
-
-            path.AddLines(pa, 3);
-
-            m_pgraphics->DrawPath(&pen, &path);
-
-         }
-         else
-         {
-
-            if (eborder & e_border_left)
-            {
-
-               m_pgraphics->DrawLine(&pen, (Gdiplus::REAL) rectangle.left, (Gdiplus::REAL)rectangle.bottom - 1, (Gdiplus::REAL)rectangle.left, (Gdiplus::REAL)rectangle.top);
-
-            }
-            else if (eborder & e_border_top)
-            {
-
-               m_pgraphics->DrawLine(&pen, (Gdiplus::REAL)rectangle.left, (Gdiplus::REAL)rectangle.top, (Gdiplus::REAL)rectangle.right, (Gdiplus::REAL)rectangle.top);
-
-            }
-
-         }
-
-      }
-
-      {
-
-         Gdiplus::Pen pen(Gdiplus::Color(colorBottomRight.alpha, colorBottomRight.red, colorBottomRight.green, colorBottomRight.blue), 1.0);
-
-         if ((eborder & e_border_right) && (eborder & e_border_bottom))
-         {
-
-            Gdiplus::GraphicsPath path;
-
-            Gdiplus::PointF pa[3];
-
-            pa[0].X = (Gdiplus::REAL) rectangle.left;
-            pa[0].Y = (Gdiplus::REAL) rectangle.bottom - 1;
-            pa[1].X = (Gdiplus::REAL) rectangle.right;
-            pa[1].Y = (Gdiplus::REAL) rectangle.bottom - 1;
-            pa[2].X = (Gdiplus::REAL) rectangle.right;
-            pa[2].Y = (Gdiplus::REAL) rectangle.top + 1;
-
-            path.AddLines(pa, 3);
-
-            m_pgraphics->DrawPath(&pen, &path);
-
-         }
-         else
-         {
-
-            if (eborder & e_border_bottom)
-            {
-
-               m_pgraphics->DrawLine(&pen, (Gdiplus::REAL)rectangle.left, (Gdiplus::REAL)rectangle.bottom, (Gdiplus::REAL)rectangle.right, (Gdiplus::REAL)rectangle.bottom);
-
-            }
-            else if (eborder & e_border_right)
-            {
-
-               m_pgraphics->DrawLine(&pen, (Gdiplus::REAL)rectangle.right, (Gdiplus::REAL)rectangle.bottom, (Gdiplus::REAL)rectangle.right, (Gdiplus::REAL)rectangle.top + 1);
-
-            }
-
-         }
-
-      }
-
-      return true;
-
-   }
+   //   }
 
 
-   //void graphics::draw_3drect(const ::rectangle_i32& rectangle, const ::color::color& colorTopLeft, const ::color::color& colorBottomRight, const ::e_border & eborder)
+   //   if (!(eborder & (e_border_left | e_border_right | e_border_top | e_border_bottom)))
+   //   {
+
+   //      return false;
+
+   //   }
+
+   //   {
+
+   //      Gdiplus::Pen pen(Gdiplus::Color(colorTopLeft.alpha, colorTopLeft.red, colorTopLeft.green, colorTopLeft.blue), 1.0);
+
+   //      if ((eborder & e_border_left) && (eborder & e_border_top))
+   //      {
+
+   //         Gdiplus::GraphicsPath path;
+
+   //         Gdiplus::PointF pa[3];
+
+   //         pa[0].X = (Gdiplus::REAL) rectangle.left;
+   //         pa[0].Y = (Gdiplus::REAL) rectangle.bottom - 1;
+   //         pa[1].X = (Gdiplus::REAL) rectangle.left;
+   //         pa[1].Y = (Gdiplus::REAL) rectangle.top;
+   //         pa[2].X = (Gdiplus::REAL) rectangle.right;
+   //         pa[2].Y = (Gdiplus::REAL) rectangle.top;
+
+   //         path.AddLines(pa, 3);
+
+   //         m_pgraphics->DrawPath(&pen, &path);
+
+   //      }
+   //      else
+   //      {
+
+   //         if (eborder & e_border_left)
+   //         {
+
+   //            m_pgraphics->DrawLine(&pen, (Gdiplus::REAL) rectangle.left, (Gdiplus::REAL)rectangle.bottom - 1, (Gdiplus::REAL)rectangle.left, (Gdiplus::REAL)rectangle.top);
+
+   //         }
+   //         else if (eborder & e_border_top)
+   //         {
+
+   //            m_pgraphics->DrawLine(&pen, (Gdiplus::REAL)rectangle.left, (Gdiplus::REAL)rectangle.top, (Gdiplus::REAL)rectangle.right, (Gdiplus::REAL)rectangle.top);
+
+   //         }
+
+   //      }
+
+   //   }
+
+   //   {
+
+   //      Gdiplus::Pen pen(Gdiplus::Color(colorBottomRight.alpha, colorBottomRight.red, colorBottomRight.green, colorBottomRight.blue), 1.0);
+
+   //      if ((eborder & e_border_right) && (eborder & e_border_bottom))
+   //      {
+
+   //         Gdiplus::GraphicsPath path;
+
+   //         Gdiplus::PointF pa[3];
+
+   //         pa[0].X = (Gdiplus::REAL) rectangle.left;
+   //         pa[0].Y = (Gdiplus::REAL) rectangle.bottom - 1;
+   //         pa[1].X = (Gdiplus::REAL) rectangle.right;
+   //         pa[1].Y = (Gdiplus::REAL) rectangle.bottom - 1;
+   //         pa[2].X = (Gdiplus::REAL) rectangle.right;
+   //         pa[2].Y = (Gdiplus::REAL) rectangle.top + 1;
+
+   //         path.AddLines(pa, 3);
+
+   //         m_pgraphics->DrawPath(&pen, &path);
+
+   //      }
+   //      else
+   //      {
+
+   //         if (eborder & e_border_bottom)
+   //         {
+
+   //            m_pgraphics->DrawLine(&pen, (Gdiplus::REAL)rectangle.left, (Gdiplus::REAL)rectangle.bottom, (Gdiplus::REAL)rectangle.right, (Gdiplus::REAL)rectangle.bottom);
+
+   //         }
+   //         else if (eborder & e_border_right)
+   //         {
+
+   //            m_pgraphics->DrawLine(&pen, (Gdiplus::REAL)rectangle.right, (Gdiplus::REAL)rectangle.bottom, (Gdiplus::REAL)rectangle.right, (Gdiplus::REAL)rectangle.top + 1);
+
+   //         }
+
+   //      }
+
+   //   }
+
+   //   return true;
+
+   //}
+
+
+   //void graphics::draw_inset_3drect(const ::rectangle_i32& rectangle, const ::color::color& colorTopLeft, const ::color::color& colorBottomRight, const ::e_border & eborder)
    //{
 
    //   if (!(eborder & (e_border_left | e_border_right | e_border_top | e_border_bottom)))

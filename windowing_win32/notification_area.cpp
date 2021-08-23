@@ -167,8 +167,10 @@ namespace windowing_win32
             picon.create();
 
             picon->initialize_with_windowing_icon(pwindowingicon);
-            
-            iconindex = m_pil16->add(picon);
+
+            image_source imagesource(picon);
+
+            iconindex = m_pil16->add(imagesource);
 
          }
 

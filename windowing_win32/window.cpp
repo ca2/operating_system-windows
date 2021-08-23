@@ -1,10 +1,10 @@
 // created by Camilo 2021-01-31 04:56 BRT <3CamiloSasukeThomasBorregaardSoerensen
 #include "framework.h"
-#include "acme/const/timer.h"
+#include "acme/constant/timer.h"
 #include "window.h"
 #include "aura_windows/interaction_impl.h"
 #include "aura/user/interaction_prodevian.h"
-#include "acme/const/activate.h"
+#include "acme/constant/activate.h"
 #include "aura/message/user.h"
 #include <dwmapi.h>
 
@@ -6107,7 +6107,7 @@ namespace windowing_win32
          if (m_millisLastMouseMove.elapsed() < 20_ms)
          {
 
-            ::sleep(30_ms);
+            ::preempt(30_ms);
 
             continue;
 
@@ -6125,7 +6125,7 @@ namespace windowing_win32
          if (hwndCapture == hwnd)
          {
 
-            ::sleep(50_ms);
+            ::preempt(50_ms);
 
             continue;
 
@@ -6140,7 +6140,7 @@ namespace windowing_win32
          if (m_pointMouseMove == pointMouseMove)
          {
 
-            ::sleep(30_ms);
+            ::preempt(30_ms);
 
             continue;
 
@@ -6158,7 +6158,7 @@ namespace windowing_win32
 
             }
 
-            ::sleep(100_ms);
+            ::preempt(100_ms);
 
             continue;
 
@@ -6174,7 +6174,7 @@ namespace windowing_win32
 
          //::SendMessage(hwnd, WM_MOUSEMOVE, 0, lparam);
 
-         ::sleep(5_ms);
+         ::preempt(5_ms);
 
       }
 
