@@ -12,12 +12,12 @@ namespace draw2d_gdiplus
 
 
       HBITMAP                    m_hbitmap;
-      ::size_i64                   m_sizeWnd;
+      ::size_i64                 m_sizeWnd;
       BITMAPINFO                 m_bitmapinfo;
 
 
       image();
-      virtual ~image();
+      ~image() override;
 
 
       void draw2d_gdiplus_image_common_construct();
@@ -52,7 +52,7 @@ namespace draw2d_gdiplus
 
       //cvirtual bool stretch(::draw2d::graphics * pgraphics) override;
       //virtual bool draw(const ::image * pimage) override;
-      virtual bool _draw_raw(const ::rectangle_i32 & rectDst, ::image * pimageSrc, const ::point_i32 & pointSrc) override;
+      virtual bool _draw_raw(const ::rectangle_i32 & rectangleTarget, ::image * pimageSrc, const ::point_i32 & pointSrc) override;
 
 
       virtual ::e_status SetIconMask(::draw2d::icon * picon, i32 cx, i32 cy) override;

@@ -335,7 +335,7 @@ namespace draw2d_gdiplus
       virtual bool _draw_raw(const ::image_drawing & imagedrawing) override;
       
       
-      //virtual bool _stretch_raw(const ::rectangle_f64 & rectDst, ::draw2d::graphics * pgraphicsSrc, const ::rectangle_f64 & rectSrc = ::rectangle_f64()) override;
+      //virtual bool _stretch_raw(const ::rectangle_f64 & rectangleTarget, ::draw2d::graphics * pgraphicsSrc, const ::rectangle_f64 & rectangleSource = ::rectangle_f64()) override;
 
 
       //// Bitmap Functions
@@ -370,7 +370,7 @@ namespace draw2d_gdiplus
       //                    ::draw2d::graphics * pgraphicsSrc, i32 xSrc, i32 ySrc, i32 nSrcWidth, i32 nSrcHeight,
       //                    UINT clrTransparent) override;
 
-      //virtual bool _alpha_blend_raw(const ::rectangle_f64 & rectDst, ::draw2d::graphics * pgraphicsSrc, const ::rectangle_f64 & rectSrc, double dOpacity) override;
+      //virtual bool _alpha_blend_raw(const ::rectangle_f64 & rectangleTarget, ::draw2d::graphics * pgraphicsSrc, const ::rectangle_f64 & rectangleSource, double dOpacity) override;
 
       /*bool alpha_blend(i32 xDest, i32 yDest, i32 nDestWidth, i32 nDestHeight,
         ::draw2d::graphics * pgraphicsSrc, i32 xSrc, i32 ySrc, i32 nSrcWidth, i32 nSrcHeight,
@@ -388,7 +388,7 @@ namespace draw2d_gdiplus
 
 
       //using ::draw2d::graphics::draw;
-      //virtual bool draw(const ::point_i32 & point, ::draw2d::graphics * pgraphicsSrc, const ::rectangle_i32 & rectSrc) override;
+      //virtual bool draw(const ::point_i32 & point, ::draw2d::graphics * pgraphicsSrc, const ::rectangle_i32 & rectangleSource) override;
 
       virtual bool _001DrawText(const ::string & str, rectangle_f64 & rectParam, const ::e_align & ealign = e_align_top_left, const ::e_draw_text & edrawtext = e_draw_text_none, bool bMeasure = false) override;
 

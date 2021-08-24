@@ -1690,7 +1690,7 @@ namespace windowing_win32
 
       synchronous_lock slHover(m_pilHover[iSize]->mutex());
 
-      auto pwindowingicon = __create < ::windowing_win32::icon >();
+      auto pwindowingicon = __create_new < ::windowing_win32::icon >();
 
       pwindowingicon->add_icon(hicon);
 

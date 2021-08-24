@@ -107,7 +107,7 @@ namespace windows
 
       void list_process(::file::patha & patha, u32_array & uaPid) override;
 
-      //virtual icon_result load_icon(const ::payload & varFile) override;
+      //virtual icon_transport load_icon(const ::payload & varFile) override;
 
 
    };

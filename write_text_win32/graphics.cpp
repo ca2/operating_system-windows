@@ -1340,7 +1340,7 @@ namespace draw2d_gdiplus
    //}
 
 //
-//   bool graphics::_draw_raw(const ::rectangle_f64 & rectDst, ::draw2d::graphics * pgraphicsSrc, const ::rectangle_f64 & rectSrc)
+//   bool graphics::_draw_raw(const ::rectangle_f64 & rectangleTarget, ::draw2d::graphics * pgraphicsSrc, const ::rectangle_f64 & rectangleSource)
 //   {
 //
 //      if (m_pgraphics == nullptr)
@@ -1454,15 +1454,15 @@ namespace draw2d_gdiplus
 //            Gdiplus::ColorMatrixFlagsDefault,
 //               Gdiplus::ColorAdjustTypeBitmap);
 //
-//            Gdiplus::Rect rectangle_i32((INT) rectDst.left, (INT) rectDst.top, (INT) rectDst.width(), (INT) rectDst.height());
+//            Gdiplus::Rect rectangle_i32((INT) rectangleTarget.left, (INT) rectangleTarget.top, (INT) rectangleTarget.width(), (INT) rectangleTarget.height());
 //
 //            ret = m_pgraphics->DrawImage(
 //                  pbitmap,
 //                  rectangle, 
-//               (INT) (rectSrc.left + pgraphicsSrc->GetViewportOrg().x), 
-//               (INT) (rectSrc.top + pgraphicsSrc->GetViewportOrg().y), 
-//               (INT) (rectSrc.width()),
-//               (INT) (rectSrc.height()), 
+//               (INT) (rectangleSource.left + pgraphicsSrc->GetViewportOrg().x), 
+//               (INT) (rectangleSource.top + pgraphicsSrc->GetViewportOrg().y), 
+//               (INT) (rectangleSource.width()),
+//               (INT) (rectangleSource.height()), 
 //               Gdiplus::UnitPixel, &imageattributes);
 //
 //         }
@@ -1475,12 +1475,12 @@ namespace draw2d_gdiplus
 //
 //            ret = m_pgraphics->DrawImage(
 //               pbitmap,
-//               (INT) rectDst.left, 
-//               (INT) rectDst.top,
-//               (INT) (rectSrc.left + xSrcViewport), 
-//               (INT) (rectSrc.top + ySrcViewport), 
-//               (INT) (rectSrc.width()), 
-//               (INT) (rectSrc.height()),
+//               (INT) rectangleTarget.left, 
+//               (INT) rectangleTarget.top,
+//               (INT) (rectangleSource.left + xSrcViewport), 
+//               (INT) (rectangleSource.top + ySrcViewport), 
+//               (INT) (rectangleSource.width()), 
+//               (INT) (rectangleSource.height()),
 //               Gdiplus::UnitPixel);
 //
 //         }
@@ -1525,8 +1525,8 @@ namespace draw2d_gdiplus
 ////      }
 ////
 ////      bool bOk = ::BitBlt(hdcDst, 
-////         rectDst.left, rectDst.top,
-////         rectDst.width(), rectDst.height(),
+////         rectangleTarget.left, rectangleTarget.top,
+////         rectangleTarget.width(), rectangleTarget.height(),
 ////         hdcSrc,
 ////         pointSrc.x, pointSrc.y, SRCCOPY) != false;
 ////
@@ -1574,7 +1574,7 @@ namespace draw2d_gdiplus
 
       double nSrcHeight = imagedrawing.m_rectSrc.height();
 
-      Gdiplus::RectF rectDst((Gdiplus::REAL) xDst, (Gdiplus::REAL)yDst, (Gdiplus::REAL)nDstWidth, (Gdiplus::REAL)nDstHeight);
+      Gdiplus::RectF rectangleTarget((Gdiplus::REAL) xDst, (Gdiplus::REAL)yDst, (Gdiplus::REAL)nDstWidth, (Gdiplus::REAL)nDstHeight);
 
       Gdiplus::Status ret = Gdiplus::Status::GenericError;
 
@@ -1681,7 +1681,7 @@ namespace draw2d_gdiplus
 
                   ret = m_pgraphics->DrawImage(
                         (Gdiplus::Bitmap *) pimage->get_bitmap()->get_os_data(),
-                        rectDst, 
+                        rectangleTarget, 
                      (Gdiplus::REAL) xFound, (Gdiplus::REAL) yFound, 
                      (Gdiplus::REAL) cxFound, (Gdiplus::REAL) cyFound,
                         Gdiplus::UnitPixel);
@@ -1731,7 +1731,7 @@ namespace draw2d_gdiplus
             Gdiplus::ColorMatrixFlagsDefault,
                Gdiplus::ColorAdjustTypeBitmap);
 
-            ret = m_pgraphics->DrawImage(pbitmap, rectDst, 
+            ret = m_pgraphics->DrawImage(pbitmap, rectangleTarget, 
                (Gdiplus::REAL) xSrc, (Gdiplus::REAL)ySrc, 
                (Gdiplus::REAL)nSrcWidth, (Gdiplus::REAL)nSrcHeight, Gdiplus::UnitPixel, &imageattributes);
 
@@ -1739,7 +1739,7 @@ namespace draw2d_gdiplus
          else
          {
 
-            ret = m_pgraphics->DrawImage(pbitmap, rectDst, 
+            ret = m_pgraphics->DrawImage(pbitmap, rectangleTarget, 
                (Gdiplus::REAL)xSrc, (Gdiplus::REAL)ySrc, 
                (Gdiplus::REAL)nSrcWidth, (Gdiplus::REAL)nSrcHeight, Gdiplus::UnitPixel);
 
@@ -1775,7 +1775,7 @@ namespace draw2d_gdiplus
 
    //   }
 
-   //   Gdiplus::Rect rectDst(xDst, yDst, nDstWidth, nDstHeight);
+   //   Gdiplus::Rect rectangleTarget(xDst, yDst, nDstWidth, nDstHeight);
 
    //   if (pgraphicsSrc == nullptr || pgraphicsSrc->get_current_bitmap() == nullptr)
    //   {
@@ -1943,7 +1943,7 @@ namespace draw2d_gdiplus
 
    //               ret = m_pgraphics->DrawImage(
    //                     (Gdiplus::Bitmap *) pimage->get_bitmap()->get_os_data(),
-   //                     rectDst, xFound, yFound, cxFound, cyFound, Gdiplus::UnitPixel);
+   //                     rectangleTarget, xFound, yFound, cxFound, cyFound, Gdiplus::UnitPixel);
 
    //               //m_pgraphics->SetInterpolationMode(emode);
 
@@ -1999,22 +1999,22 @@ namespace draw2d_gdiplus
    //         ColorMatrixFlagsDefault,
    //         ColorAdjustTypeBitmap);
 
-   //         ret = m_pgraphics->DrawImage(pbitmap, rectDst, xSrc, ySrc, nSrcWidth, nSrcHeight, Gdiplus::UnitPixel, &imageattributes);
+   //         ret = m_pgraphics->DrawImage(pbitmap, rectangleTarget, xSrc, ySrc, nSrcWidth, nSrcHeight, Gdiplus::UnitPixel, &imageattributes);
 
    //      }
    //      else
    //      {
 
-   //         if (rectDst.Width == nSrcWidth && rectDst.Height == nSrcHeight)
+   //         if (rectangleTarget.Width == nSrcWidth && rectangleTarget.Height == nSrcHeight)
    //         {
 
-   //            ret = m_pgraphics->DrawImage(pbitmap, rectDst.X, rectDst.Y, xSrc, ySrc, nSrcWidth, nSrcHeight, Gdiplus::UnitPixel);
+   //            ret = m_pgraphics->DrawImage(pbitmap, rectangleTarget.X, rectangleTarget.Y, xSrc, ySrc, nSrcWidth, nSrcHeight, Gdiplus::UnitPixel);
 
    //         }
    //         else
    //         {
 
-   //            ret = m_pgraphics->DrawImage(pbitmap, rectDst, xSrc, ySrc, nSrcWidth, nSrcHeight, Gdiplus::UnitPixel);
+   //            ret = m_pgraphics->DrawImage(pbitmap, rectangleTarget, xSrc, ySrc, nSrcWidth, nSrcHeight, Gdiplus::UnitPixel);
 
    //         }
 
@@ -3163,7 +3163,7 @@ namespace draw2d_gdiplus
 
 
 
-   //bool graphics::_alpha_blend_raw(const ::rectangle_f64 & rectDst, ::draw2d::graphics * pgraphicsSrc, const ::rectangle_f64 & rectSrc , double dRate)
+   //bool graphics::_alpha_blend_raw(const ::rectangle_f64 & rectangleTarget, ::draw2d::graphics * pgraphicsSrc, const ::rectangle_f64 & rectangleSource , double dRate)
    //{
 
    //   if (m_pgraphics == nullptr || pgraphicsSrc == nullptr)
@@ -3258,7 +3258,7 @@ namespace draw2d_gdiplus
    //      Gdiplus::ColorMatrixFlagsDefault,
    //      Gdiplus::ColorAdjustTypeBitmap);
 
-   //   Gdiplus::RectF rectfDst((Gdiplus::REAL) rectDst.left, (Gdiplus::REAL) rectDst.top, (Gdiplus::REAL) rectDst.width(), (Gdiplus::REAL) rectDst.height());
+   //   Gdiplus::RectF rectfDst((Gdiplus::REAL) rectangleTarget.left, (Gdiplus::REAL) rectangleTarget.top, (Gdiplus::REAL) rectangleTarget.width(), (Gdiplus::REAL) rectangleTarget.height());
 
    //   if (pgraphicsSrc == nullptr)
    //   {
@@ -3293,10 +3293,10 @@ namespace draw2d_gdiplus
    //   {
 
    //      ret =  m_pgraphics->DrawImage(pbitmap,rectfDst,
-   //         (Gdiplus::REAL) rectSrc.left,
-   //         (Gdiplus::REAL) rectSrc.top,
-   //         (Gdiplus::REAL) rectSrc.width(),
-   //         (Gdiplus::REAL) rectSrc.height(),
+   //         (Gdiplus::REAL) rectangleSource.left,
+   //         (Gdiplus::REAL) rectangleSource.top,
+   //         (Gdiplus::REAL) rectangleSource.width(),
+   //         (Gdiplus::REAL) rectangleSource.height(),
    //         Gdiplus::UnitPixel,&imageattributes);
 
    //      if (ret != Gdiplus::Status::Ok)
@@ -7172,13 +7172,13 @@ namespace draw2d_gdiplus
 
             pimage1->blend2(nullptr, m_pimageAlphaBlend, point_i32((int)maximum(0, x - m_pointAlphaBlend.x), (int)maximum(0, y - m_pointAlphaBlend.y)), rectText.size(), 255);
 
-            auto rectDst = ::rectangle_f64(::point_f64(x, y), rectText.size());
+            auto rectangleTarget = ::rectangle_f64(::point_f64(x, y), rectText.size());
 
-            auto rectSrc = ::rectangle_f64(rectText.size());
+            auto rectangleSource = ::rectangle_f64(rectText.size());
 
             image_drawing_options imagedrawingoptions;
 
-            _draw_raw(rectDst, pimage1, imagedrawingoptions, ::point_f64());
+            _draw_raw(rectangleTarget, pimage1, imagedrawingoptions, ::point_f64());
 
             return true;
 
@@ -7191,7 +7191,7 @@ namespace draw2d_gdiplus
    }
 
 
-   //bool graphics::draw_blend(const ::point_i32 & pointDst, ::draw2d::graphics * pgraphicsSrc, const ::rectangle_i32 & rectSrc)
+   //bool graphics::draw_blend(const ::point_i32 & pointDst, ::draw2d::graphics * pgraphicsSrc, const ::rectangle_i32 & rectangleSource)
    //{
 
    //   //return ::draw2d::graphics::BitBltAlphaBlend(x, y, nWidth, nHeight, pgraphicsSrc, xSrc, ySrc, dwRop);

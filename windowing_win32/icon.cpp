@@ -201,7 +201,7 @@ namespace windowing_win32
 
    }
 
-   image_pointer icon::get_image(const concrete < ::size_i32 >& size)
+   image_pointer icon::get_image(const concrete < ::size_i32 > & size)
    {
 
       auto& pimage  = m_imagemap[size];
