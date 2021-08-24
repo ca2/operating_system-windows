@@ -6274,7 +6274,12 @@ namespace draw2d_gdiplus
 
       ::draw2d::savedc k(this);
 
-      set_alpha_mode(::draw2d::e_alpha_mode_blend);
+      //if(get_alpha_mode() == ::draw2d::e_alpha_mode_blend)
+      //{
+
+      //if (m_pfont->m_erendering)
+
+         // set_alpha_mode(::draw2d::e_alpha_mode_blend);
 
       //if (m_erendering != m_pfont->m_erendering)
       {
@@ -6737,6 +6742,16 @@ namespace draw2d_gdiplus
             return false;
 
          }
+
+         if (m_pgraphics->GetCompositingMode() == Gdiplus::CompositingModeSourceCopy)
+         {
+
+            m_pgraphics->SetTextRenderingHint(Gdiplus::TextRenderingHintSingleBitPerPixel);
+
+            return true;
+
+         }
+
 
          switch (etextrenderinghint)
          {

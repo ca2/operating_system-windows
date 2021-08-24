@@ -366,7 +366,7 @@ namespace windowing_win32
 
       // returned image should be "Definitive" icon/pimage->
       // maybe fallback but not temporary
-   void shell::_internal_get_file_image(_get_file_image_ & getfileimage)
+   bool shell::_internal_get_file_image(_get_file_image_ & getfileimage)
    {
 
       //_get_file_image_data_ getfileimage;
@@ -423,6 +423,15 @@ namespace windowing_win32
 
       getfileimage.m_iImage = 0x80000000;
 
+      if (defer_set_thumbnail(getfileimage))
+      {
+
+         return true;
+
+      }
+
+
+
       i32 iType;
 
       switch (getfileimage.m_imagekey.m_eicon)
@@ -437,8 +446,11 @@ namespace windowing_win32
          // unexpected icon type
          ASSERT(false);
          getfileimage.m_iImage = 0x80000000;
-         return ;
+         return false;
       }
+
+
+
 
       string strFileParam(getfileimage.m_imagekey.m_strPath);
 
@@ -506,12 +518,6 @@ namespace windowing_win32
 
       //auto psystem = m_psystem->m_paurasystem;
 
-      if (defer_set_thumbnail(getfileimage))
-      {
-
-         return;
-
-      }
 
       comptr < IShellIcon > pshellicon;
 
@@ -534,7 +540,7 @@ namespace windowing_win32
             if (contains_image(getfileimage.m_imagekey, getfileimage.m_iImage))
             {
 
-               return;
+               return true;
                //return getfileimage.m_iImage;
 
             }
@@ -548,7 +554,7 @@ namespace windowing_win32
 
                //return getfileimage.m_iImage;
 
-               return;
+               return true;
 
             }
 
@@ -818,7 +824,7 @@ namespace windowing_win32
             get_image_by_file_extension(getfileimage);
 
             //return getfileimage.m_iImage;
-            return;
+            return true;
 
          }
 
@@ -832,7 +838,7 @@ namespace windowing_win32
             _get_file_image(getfileimage);
 
             //return getfileimage.m_iImage;
-            return;
+            return true;
 
          }
 
@@ -865,7 +871,7 @@ namespace windowing_win32
 
                //return getfileimage.m_iImage;
 
-               return;
+               return true;
 
             }
 
@@ -884,7 +890,7 @@ namespace windowing_win32
                }
 
                //return getfileimage.m_iImage;
-               return;
+               return true;
 
             }
 
@@ -895,7 +901,7 @@ namespace windowing_win32
 
             get_image_by_file_extension(getfileimage);
 
-            return;
+            return true;
 
          }
 
@@ -965,7 +971,7 @@ namespace windowing_win32
 
          //return getfileimage.m_iImage;
 
-         return;
+         return true;
 
       }
       else if (strIconLocation.has_char())
@@ -986,7 +992,7 @@ namespace windowing_win32
 
          //return getfileimage.m_iImage;
 
-         return;
+         return true;
 
       }
 
@@ -1057,7 +1063,7 @@ namespace windowing_win32
 
       get_image_by_file_extension(getfileimage);
 
-      return;
+      return true;
 
    }
 
@@ -1512,11 +1518,11 @@ namespace windowing_win32
 
       }*/
 
-      _internal_get_file_image(getfileimage);
+      return _internal_get_file_image(getfileimage);
 
       //return getfileimage.m_iImage;
 
-      return true;
+      //return true;
 
    }
 

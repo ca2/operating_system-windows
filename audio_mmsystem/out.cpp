@@ -507,7 +507,7 @@ Opened:
             if (::success != estatus)
             {
 
-               TRACE( "waveOutGetPosition() returned %lu", (u32)estatus);
+               TRACE( "waveOutGetPosition() returned %lu", (u32)estatus.m_estatus);
 
                //      return MCIERR_DEVICE_NOT_READY;
 

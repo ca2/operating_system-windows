@@ -65,7 +65,7 @@ namespace windowing_win32
 
       bool _defer_set_thumbnail_IThumbnailProvider(_get_file_image_ & getfileimage);
 
-      void _internal_get_file_image(_get_file_image_ & getfileimage);
+      bool _internal_get_file_image(_get_file_image_ & getfileimage);
 
       //i32 get_image_by_file_extension(image_key & key);
 
