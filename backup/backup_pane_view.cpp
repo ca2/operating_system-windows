@@ -68,7 +68,7 @@ namespace backup
       {
       case impact_backup:
       {
-         pcreatordata->m_puserinteraction = create_view < view > ();
+         pcreatordata->m_puserinteraction = create_view < impact > ();
          if(pcreatordata->m_puserinteraction != nullptr)
          {
             pcreatordata->m_pdocument = get_document();

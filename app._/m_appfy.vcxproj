@@ -100,7 +100,7 @@
     <ClInclude Include="hellomultiverse.h" />
     <ClInclude Include="pane_view.h" />
     <ClInclude Include="::impact_update.h" />
-    <ClInclude Include="view.h" />
+    <ClInclude Include="impact.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="framework.cpp">

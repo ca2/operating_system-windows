@@ -8,7 +8,7 @@ namespace production
    class document;
 
 
-   class CLASS_DECL_CA2_PRODUCTION view :
+   class CLASS_DECL_CA2_PRODUCTION impact :
       virtual public ::user::scroll_view
    {
    public:
@@ -43,8 +43,8 @@ namespace production
       ::draw2d::brush_pointer          m_brushBkInactive;
 
 
-      view(::object * pobject);
-      virtual ~view();
+      impact(::object * pobject);
+      virtual ~impact();
 #ifdef DEBUG
       virtual void assert_valid() const;
       virtual void dump(dump_context & dumpcontext) const;

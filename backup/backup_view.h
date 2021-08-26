@@ -5,14 +5,14 @@ namespace backup
 {
 
 
-   class CLASS_DECL_CA2_BACKUP view :
-      virtual public production::view
+   class CLASS_DECL_CA2_BACKUP impact :
+      virtual public production::impact
    {
    public:
 	   
       
-      view(::object * pobject);
-      virtual ~view();
+      impact(::object * pobject);
+      virtual ~impact();
 
 
       virtual ::production::production * create_production();

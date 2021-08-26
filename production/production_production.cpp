@@ -938,7 +938,7 @@ pacmedir->create(pathTarget.folder()))
 
          m_iStep = 2;
 
-         //m_pview->post_message(WM_USER, 2);
+         //m_pimpact->post_message(WM_USER, 2);
          //{
          //   string str;
 
@@ -2912,7 +2912,7 @@ pacmedir->create(pathTarget.folder()))
          m_straStatus.add(psz);
       }
       TRACE("%s", psz);
-      m_pview->post_message(WM_USER, 1);
+      m_pimpact->post_message(WM_USER, 1);
    }
 
    void production::change_status(const ::string & psz)
@@ -2928,7 +2928,7 @@ pacmedir->create(pathTarget.folder()))
             m_straStatus.last() = psz;
          }
       }
-      m_pview->post_message(WM_USER, 1);
+      m_pimpact->post_message(WM_USER, 1);
    }
 
 

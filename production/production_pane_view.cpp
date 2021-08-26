@@ -114,7 +114,7 @@ namespace production
       break;
       case MAIN_IMPACT:
       {
-         __pointer(::user::interaction) puie = ::user::impact::create_view < ::production::view > (pcreatordata);
+         __pointer(::user::interaction) puie = ::user::impact::create_view < ::production::impact > (pcreatordata);
          if(puie != nullptr)
          {
             pcreatordata->m_pdocument = get_document();

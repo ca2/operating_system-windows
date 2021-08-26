@@ -1562,13 +1562,15 @@ namespace draw2d_gdiplus
 
       auto rectangleSource = imagedrawing.source_rectangle();
 
-      double xDst = imagedrawing.m_rectangleTarget.left;
+      auto rectangleTarget = imagedrawing.target_rectangle();
 
-      double yDst = imagedrawing.m_rectangleTarget.top;
+      double xDst = rectangleTarget.left;
 
-      double nDstWidth = imagedrawing.m_rectangleTarget.width();
+      double yDst = rectangleTarget.top;
 
-      double nDstHeight = imagedrawing.m_rectangleTarget.height();
+      double nDstWidth = rectangleTarget.width();
+
+      double nDstHeight = rectangleTarget.height();
 
       double xSrc = rectangleSource.left;
 
@@ -1578,7 +1580,7 @@ namespace draw2d_gdiplus
 
       double nSrcHeight = rectangleSource.height();
 
-      Gdiplus::RectF rectangleTarget((Gdiplus::REAL) xDst, (Gdiplus::REAL)yDst, (Gdiplus::REAL)nDstWidth, (Gdiplus::REAL)nDstHeight);
+      Gdiplus::RectF rectTarget((Gdiplus::REAL) xDst, (Gdiplus::REAL)yDst, (Gdiplus::REAL)nDstWidth, (Gdiplus::REAL)nDstHeight);
 
       Gdiplus::Status ret = Gdiplus::Status::GenericError;
 
@@ -1685,7 +1687,7 @@ namespace draw2d_gdiplus
 
                   ret = m_pgraphics->DrawImage(
                         (Gdiplus::Bitmap *) pimage->get_bitmap()->get_os_data(),
-                        rectangleTarget, 
+                     rectTarget,
                      (Gdiplus::REAL) xFound, (Gdiplus::REAL) yFound, 
                      (Gdiplus::REAL) cxFound, (Gdiplus::REAL) cyFound,
                         Gdiplus::UnitPixel);
@@ -1735,7 +1737,7 @@ namespace draw2d_gdiplus
             Gdiplus::ColorMatrixFlagsDefault,
                Gdiplus::ColorAdjustTypeBitmap);
 
-            ret = m_pgraphics->DrawImage(pbitmap, rectangleTarget, 
+            ret = m_pgraphics->DrawImage(pbitmap, rectTarget,
                (Gdiplus::REAL) xSrc, (Gdiplus::REAL)ySrc, 
                (Gdiplus::REAL)nSrcWidth, (Gdiplus::REAL)nSrcHeight, Gdiplus::UnitPixel, &imageattributes);
 
@@ -1743,7 +1745,7 @@ namespace draw2d_gdiplus
          else
          {
 
-            ret = m_pgraphics->DrawImage(pbitmap, rectangleTarget, 
+            ret = m_pgraphics->DrawImage(pbitmap, rectTarget,
                (Gdiplus::REAL)xSrc, (Gdiplus::REAL)ySrc, 
                (Gdiplus::REAL)nSrcWidth, (Gdiplus::REAL)nSrcHeight, Gdiplus::UnitPixel);
 
@@ -5322,7 +5324,9 @@ namespace draw2d_gdiplus
 
       Gdiplus::Status status = Gdiplus::Status::GenericError;
 
-      if (m_pfont.is_set() && m_ewritetextrendering != m_pfont->m_erendering)
+      if (m_pfont.is_set() 
+         && m_ewritetextrendering != m_pfont->m_erendering
+         && m_pfont->m_erendering != ::write_text::e_rendering_undefined)
       {
 
          set_text_rendering_hint(m_pfont->m_erendering);
@@ -6281,10 +6285,15 @@ namespace draw2d_gdiplus
 
          // set_alpha_mode(::draw2d::e_alpha_mode_blend);
 
-      //if (m_erendering != m_pfont->m_erendering)
+      if (m_pfont->m_erendering != ::write_text::e_rendering_anti_alias)
       {
 
-         set_text_rendering_hint(m_pfont->m_erendering);
+         if (m_ewritetextrendering != m_pfont->m_erendering)
+         {
+
+            set_text_rendering_hint(m_pfont->m_erendering);
+
+         }
 
       }
 

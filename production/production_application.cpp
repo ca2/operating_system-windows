@@ -18,7 +18,7 @@ namespace production
       m_strAppName         = "production";
       m_strBaseSupportId   = "ca2_production";
       m_bLicense           = false;
-      m_pview = nullptr;
+      m_pimpact = nullptr;
 
    }
 
@@ -40,7 +40,7 @@ namespace production
 
       create_factory <document >();
       create_factory <frame >();
-      create_factory <view >();
+      create_factory <impact >();
       create_factory <pane_view >();
 
 
@@ -120,14 +120,14 @@ namespace production
 
       //if (pcreate->m_pcommandline->m_varQuery.has_property("start"))
       //{
-      // m_pview->make_production();
+      // m_pimpact->make_production();
       //}
       //else if (pcreate->m_pcommandline->m_varQuery.has_property("start_deferred"))
       //{
-      // m_pview->production_loop(papplication->handler()->m_varTopicQuery["start_deferred"]);
+      // m_pimpact->production_loop(papplication->handler()->m_varTopicQuery["start_deferred"]);
       //}
 
-      m_pview->release_production();
+      m_pimpact->release_production();
 
 
    }

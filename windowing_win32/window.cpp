@@ -4889,7 +4889,7 @@ namespace windowing_win32
    void window::set_viewport_org(::draw2d::graphics_pointer & pgraphics)
    {
 
-      // graphics will be already set its view port to the window for linux - cairo with xlib
+      // graphics will be already set its impact port to the window for linux - cairo with xlib
 
       pgraphics->SetViewportOrg(::point_i32());
 

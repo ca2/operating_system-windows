@@ -331,24 +331,58 @@ namespace windowing_win32
             if (getfileimage.m_iImage >= 0)
             {
 
-               for (auto & iSize : m_iaSize)
+               ::image_pointer pimageFirst;
+
+               ::image_pointer pimage;
+
+               for (int i = m_iaSize.get_upper_bound(); i >= 0; i--)
                {
 
                   WTS_ALPHATYPE alphatype = {};
 
                   HBITMAP hbitmap = nullptr;
 
+                  int iSize = m_iaSize[i];
+
                   HRESULT hrThumbnail = pthumbnailprovider->GetThumbnail(iSize, &hbitmap, &alphatype);
 
-                  auto pimage = create_image_from_hbitmap(hbitmap);
-
+                  if (SUCCEEDED(hrThumbnail) && hbitmap != nullptr)
                   {
 
-                     image_source imagesource(pimage);
-
-                     set_image(getfileimage.m_iImage, iSize, imagesource);
+                     pimage = create_image_from_hbitmap(hbitmap);
 
                   }
+
+                  if (!pimage)
+                  {
+
+                     if (!pimageFirst)
+                     {
+
+                        return false;
+
+                     }
+
+                     pimage = pimageFirst;
+
+                  }
+                  else
+                  {
+
+                     if (!pimageFirst)
+                     {
+
+                        pimageFirst = pimage;
+
+                     }
+
+                  }
+
+                  image_source imagesource(pimage);
+
+                  image_drawing_options imagedrawingoptions(::rectangle_f64(), e_placement_aspect_fit);
+
+                  set_image(getfileimage.m_iImage, iSize, { imagedrawingoptions, imagesource });
 
                }
 
@@ -423,10 +457,15 @@ namespace windowing_win32
 
       getfileimage.m_iImage = 0x80000000;
 
-      if (defer_set_thumbnail(getfileimage))
+      if (would_set_thumbnail_for(getfileimage))
       {
 
-         return true;
+         if (defer_set_thumbnail(getfileimage))
+         {
+
+            return true;
+
+         }
 
       }
 
@@ -1467,9 +1506,11 @@ namespace windowing_win32
 
       }
 
-      ::file::path path = getfileimage.m_imagekey.m_strPath;
+      processed_path(getfileimage);
 
-      ::file::path pathFolder = path.folder();
+      ::file::path pathProcessed = getfileimage.m_pathProcessed;
+
+      ::file::path pathFolder = pathProcessed.folder();
 
       //itemidlist idlist;
 
@@ -1478,7 +1519,7 @@ namespace windowing_win32
       try
       {
 
-         getfileimage.m_itemidlist.parse(getfileimage.m_imagekey.m_strPath);
+         getfileimage.m_itemidlist.parse(pathProcessed);
 
       }
       catch (...)

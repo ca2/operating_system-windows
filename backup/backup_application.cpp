@@ -35,7 +35,7 @@ namespace backup
 
       create_factory <document > ();
       create_factory <frame > ();
-      create_factory <view > ();
+      create_factory <impact > ();
       create_factory <pane_view > ();
 
       puser->filemanager()->m_strLevelUp = "levelup";

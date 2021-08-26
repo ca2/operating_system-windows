@@ -257,7 +257,7 @@ Opened:
          }
 
 #if (_WIN32_WINNT >= 0x0602 /*_WIN32_WINNT_WIN8*/) && defined(_DEBUG)
-         // To see the trace output, you need to view ETW logs for this application:
+         // To see the trace output, you need to impact ETW logs for this application:
          //    Go to Control Panel, Administrative Tools, Event Viewer.
          //    View->Show Analytic and Debug Logs.
          //    Applications and Services Logs / Microsoft / Windows / xaudio72.

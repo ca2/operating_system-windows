@@ -30,7 +30,7 @@
     <ClInclude Include="::impact_update.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="view.h">
+    <ClInclude Include="impact.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
