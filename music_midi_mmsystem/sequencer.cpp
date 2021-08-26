@@ -348,7 +348,7 @@ namespace music
                if (estatus != ::success)
                {
 
-                  TRACE("midiStreamProperty() -> %04X", (WORD)estatus);
+                  TRACE("midiStreamProperty() -> %04X", (WORD)estatus.m_estatus);
 
                   close_device();
 
@@ -374,7 +374,7 @@ namespace music
             if (estatus != ::success)
             {
 
-               TRACE("sequencer::mm_start midiOutPrepareHeader Error!! -> %lu", (u32)estatus);
+               TRACE("sequencer::mm_start midiOutPrepareHeader Error!! -> %lu", (u32)estatus.m_estatus);
 
                if (bThrow)
                {
@@ -410,7 +410,7 @@ namespace music
             if (estatus != ::success)
             {
 
-               TRACE("midiStreamOut(preroll) -> %lu!", (u32)estatus);
+               TRACE("midiStreamOut(preroll) -> %lu!", (u32)estatus.m_estatus);
 
                estatus = error_not_ready;
 
@@ -579,7 +579,7 @@ namespace music
                if (::success != m_psequence->m_estatusLastError)
                {
 
-                  WARN("::music::midi::sequencer::stop -> midiStreamStop returned %lu", (u32)m_psequence->m_estatusLastError);
+                  WARN("::music::midi::sequencer::stop -> midiStreamStop returned %lu", (u32)m_psequence->m_estatusLastError.m_estatus);
 
                   m_psequence->m_flags.erase(sequence::e_flag_waiting);
 
@@ -641,7 +641,7 @@ namespace music
                         if (::success != mmr)
                         {
 
-                           TRACE("midiStreamPosition() returned %lu", (u32)mmr);
+                           TRACE("midiStreamPosition() returned %lu", (u32)mmr.m_estatus);
 
                            return error_not_ready;
 
@@ -722,7 +722,7 @@ namespace music
                         mmr = translate_os_result(midiStreamPosition(m_hstream, &mmt, sizeof(mmt)), "get_millis", "midiStreamPosition");
                         if (::success != mmr)
                         {
-                           TRACE("midiStreamPosition() returned %lu", (u32)mmr);
+                           TRACE("midiStreamPosition() returned %lu", (u32)mmr.m_estatus);
                            return error_not_ready;
                         }
                      }
@@ -961,7 +961,7 @@ namespace music
 
                estatus = WorkStreamRender(lpmidihdr, m_psequence->m_tkEnd, m_iBufferNominalMax);
 
-               switch (estatus)
+               switch (estatus.m_estatus)
                {
                case ::success:
 
@@ -978,7 +978,7 @@ namespace music
                default:
 
 
-                  TRACE("smfReadEvents returned %lu in callback!", (u32)estatus);
+                  TRACE("smfReadEvents returned %lu in callback!", (u32)estatus.m_estatus);
 
                   m_psequence->set_state(sequence::e_state_stopping);
 
@@ -1213,7 +1213,7 @@ namespace music
 
             if ((estatus = m_pbuffera->midiOutUnprepareHeader((HMIDIOUT)m_hstream)) != ::success)
             {
-               TRACE("midiOutUnprepareHeader failed in seqBufferDone! (%lu)", (u32)estatus);
+               TRACE("midiOutUnprepareHeader failed in seqBufferDone! (%lu)", (u32)estatus.m_estatus);
             }
 
             midiStreamClose(m_hstream);
@@ -1270,7 +1270,7 @@ namespace music
 
                ::e_status     estatus = fill_buffer(lpmidihdr);
 
-               switch (estatus)
+               switch (estatus.m_estatus)
                {
                case ::success:
 
@@ -1286,7 +1286,7 @@ namespace music
 
                default:
 
-                  INFO("sequencer::fill_buffer returned %lu", (u32)estatus);
+                  INFO("sequencer::fill_buffer returned %lu", (u32)estatus.m_estatus);
 
                   m_psequence->set_state(sequence::e_state_stopping);
 
@@ -1308,7 +1308,7 @@ namespace music
                   else
                   {
 
-                     INFO("e_event_midi_stream_out : midiStreamOut returned %lu", (u32)estatus);
+                     INFO("e_event_midi_stream_out : midiStreamOut returned %lu", (u32)estatus.m_estatus);
 
                      m_psequence->set_state(sequence::e_state_stopping);
 
@@ -1613,7 +1613,7 @@ namespace music
             smfrc = InsertParmData(tkDelta, lpmh);
             if (::success != smfrc)
             {
-               TRACE("smfInsertParmData[2] %u", (u32)smfrc);
+               TRACE("smfInsertParmData[2] %u", (u32)smfrc.m_estatus);
                return smfrc;
             }
             return smfrc;
@@ -1855,7 +1855,7 @@ namespace music
                if (::success != smfrc)
                {
                   
-                  TRACE("smfInsertParmData[2] %u", (u32)smfrc);
+                  TRACE("smfInsertParmData[2] %u", (u32)smfrc.m_estatus);
                   
                   return smfrc;
 
@@ -2073,7 +2073,7 @@ namespace music
                if (::success != smfrc)
                {
 
-                  TRACE("smfInsertParmData() -> %u", (u32)smfrc);
+                  TRACE("smfInsertParmData() -> %u", (u32)smfrc.m_estatus);
 
                   return smfrc;
 

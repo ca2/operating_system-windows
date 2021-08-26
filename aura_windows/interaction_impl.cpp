@@ -394,10 +394,10 @@ namespace windows
    //}
 
 
-   void interaction_impl::post_nc_destroy()
+   void interaction_impl::post_non_client_destroy()
    {
 
-      m_pwindow->post_nc_destroy();
+      m_pwindow->post_non_client_destroy();
 
 
       ::user::interaction_impl::post_non_client_destroy();

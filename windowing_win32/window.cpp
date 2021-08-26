@@ -216,8 +216,6 @@ namespace windowing_win32
 
       }
 
-      //MESSAGE_LINK(e_message_destroy_window, pchannel, pimpl, &::user::interaction_impl::_001OnDestroyWindow);
-
       MESSAGE_LINK(WM_ACTIVATE, pchannel, this, &window::_001OnActivate);
       MESSAGE_LINK(WM_DWMNCRENDERINGCHANGED, pchannel, this, &window::_001OnDwmNcRenderingChanged);
 
@@ -1230,7 +1228,7 @@ namespace windowing_win32
    //}
 
 
-   void window::post_nc_destroy()
+   void window::post_non_client_destroy()
    {
 
 

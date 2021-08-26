@@ -674,7 +674,7 @@ namespace windows
       //virtual void default_window_procedure(::message::message * pmessage) override;
 
 
-      virtual void post_nc_destroy();
+      void post_non_client_destroy() override;
 
       // for notifications from parent
       //virtual bool OnChildNotify(::message::message * pmessage);
