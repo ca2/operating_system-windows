@@ -4,19 +4,14 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 16.0.28705.295
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "helloearth", "..\..\..\source\console\helloearth\helloearth.vcxproj", "{DD1BBBD3-15E0-4F4E-9B5A-AA78A6A37738}"
-	ProjectSection(ProjectDependencies) = postProject
-		{CC8E8200-00A9-414E-9829-7CA3F1091ADD} = {CC8E8200-00A9-414E-9829-7CA3F1091ADD}
-	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "hellosolarsystem", "..\..\..\source\console\hellosolarsystem\hellosolarsystem.vcxproj", "{1E0627A7-4245-4978-BE24-87D2447B6971}"
 	ProjectSection(ProjectDependencies) = postProject
-		{CC8E8200-00A9-414E-9829-7CA3F1091ADD} = {CC8E8200-00A9-414E-9829-7CA3F1091ADD}
 		{C598E718-55AE-4D6E-81E0-53450FC3A649} = {C598E718-55AE-4D6E-81E0-53450FC3A649}
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "readlines", "..\..\..\source\console\readlines\readlines.vcxproj", "{6E5240D2-B8C9-4B61-B87A-A979B3C0EB4B}"
 	ProjectSection(ProjectDependencies) = postProject
-		{CC8E8200-00A9-414E-9829-7CA3F1091ADD} = {CC8E8200-00A9-414E-9829-7CA3F1091ADD}
 		{C598E718-55AE-4D6E-81E0-53450FC3A649} = {C598E718-55AE-4D6E-81E0-53450FC3A649}
 	EndProjectSection
 EndProject
@@ -26,8 +21,6 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "apex", "..\..\..\source\app
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "aqua", "..\..\..\source\app\aqua\aqua.vcxproj", "{1B06FE5F-F783-41A1-AC68-0E02880DBBAC}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "acme_windows", "..\acme_windows\acme_windows.vcxproj", "{CC8E8200-00A9-414E-9829-7CA3F1091ADD}"
-EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "apex_windows", "..\apex_windows\apex_windows.vcxproj", "{C598E718-55AE-4D6E-81E0-53450FC3A649}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "acme_windows_common", "..\..\platform-windows_common\acme_windows_common\acme_windows_common.vcxproj", "{EB9DC9C0-0573-4DA0-8700-4DBB371773F1}"
@@ -35,9 +28,6 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "apex_windows_common", "..\..\platform-windows_common\apex_windows_common\apex_windows_common.vcxproj", "{A094E038-D195-4400-82CE-44A7EDF91B78}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "hello", "..\..\..\source\console\hello\hello.vcxproj", "{21A3EC8F-2012-4D5C-8DBC-0BC11FD36940}"
-	ProjectSection(ProjectDependencies) = postProject
-		{CC8E8200-00A9-414E-9829-7CA3F1091ADD} = {CC8E8200-00A9-414E-9829-7CA3F1091ADD}
-	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -173,26 +163,6 @@ Global
 		{1B06FE5F-F783-41A1-AC68-0E02880DBBAC}.stage|Win32.Build.0 = basis|Win32
 		{1B06FE5F-F783-41A1-AC68-0E02880DBBAC}.stage|x64.ActiveCfg = stage|x64
 		{1B06FE5F-F783-41A1-AC68-0E02880DBBAC}.stage|x64.Build.0 = stage|x64
-		{CC8E8200-00A9-414E-9829-7CA3F1091ADD}.basis|Win32.ActiveCfg = basis|Win32
-		{CC8E8200-00A9-414E-9829-7CA3F1091ADD}.basis|Win32.Build.0 = basis|Win32
-		{CC8E8200-00A9-414E-9829-7CA3F1091ADD}.basis|x64.ActiveCfg = basis|x64
-		{CC8E8200-00A9-414E-9829-7CA3F1091ADD}.basis|x64.Build.0 = basis|x64
-		{CC8E8200-00A9-414E-9829-7CA3F1091ADD}.cover|Win32.ActiveCfg = cover|Win32
-		{CC8E8200-00A9-414E-9829-7CA3F1091ADD}.cover|Win32.Build.0 = cover|Win32
-		{CC8E8200-00A9-414E-9829-7CA3F1091ADD}.cover|x64.ActiveCfg = cover|x64
-		{CC8E8200-00A9-414E-9829-7CA3F1091ADD}.cover|x64.Build.0 = cover|x64
-		{CC8E8200-00A9-414E-9829-7CA3F1091ADD}.cube_basis|Win32.ActiveCfg = cube_basis|Win32
-		{CC8E8200-00A9-414E-9829-7CA3F1091ADD}.cube_basis|Win32.Build.0 = cube_basis|Win32
-		{CC8E8200-00A9-414E-9829-7CA3F1091ADD}.cube_basis|x64.ActiveCfg = cube_basis|x64
-		{CC8E8200-00A9-414E-9829-7CA3F1091ADD}.cube_basis|x64.Build.0 = cube_basis|x64
-		{CC8E8200-00A9-414E-9829-7CA3F1091ADD}.cube_stage|Win32.ActiveCfg = cube_stage|Win32
-		{CC8E8200-00A9-414E-9829-7CA3F1091ADD}.cube_stage|Win32.Build.0 = cube_stage|Win32
-		{CC8E8200-00A9-414E-9829-7CA3F1091ADD}.cube_stage|x64.ActiveCfg = cube_stage|x64
-		{CC8E8200-00A9-414E-9829-7CA3F1091ADD}.cube_stage|x64.Build.0 = cube_stage|x64
-		{CC8E8200-00A9-414E-9829-7CA3F1091ADD}.stage|Win32.ActiveCfg = stage|Win32
-		{CC8E8200-00A9-414E-9829-7CA3F1091ADD}.stage|Win32.Build.0 = stage|Win32
-		{CC8E8200-00A9-414E-9829-7CA3F1091ADD}.stage|x64.ActiveCfg = stage|x64
-		{CC8E8200-00A9-414E-9829-7CA3F1091ADD}.stage|x64.Build.0 = stage|x64
 		{C598E718-55AE-4D6E-81E0-53450FC3A649}.basis|Win32.ActiveCfg = basis|Win32
 		{C598E718-55AE-4D6E-81E0-53450FC3A649}.basis|Win32.Build.0 = basis|Win32
 		{C598E718-55AE-4D6E-81E0-53450FC3A649}.basis|x64.ActiveCfg = basis|x64

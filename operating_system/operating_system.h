@@ -84,7 +84,6 @@
 
 #pragma warning(pop)
 
-
 #include <zmouse.h>
 
 struct HKEY__;
