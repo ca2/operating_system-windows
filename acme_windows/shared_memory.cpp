@@ -134,7 +134,7 @@ void shared_memory::SetHandle(HGLOBAL hGlobalMemory, bool bAllowGrow)
 
    m_memory.m_pdata = m_memory.m_pbStorage;
 
-   m_memory.m_iSize = m_memory.m_cbStorage = (WINULONG)::GlobalSize(m_hGlobalMemory);
+   m_memory.m_iSize = m_memory.m_cbStorage = ::GlobalSize(m_hGlobalMemory);
 
    // xxx m_bAllowGrow = bAllowGrow;
 

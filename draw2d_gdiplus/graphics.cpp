@@ -189,12 +189,12 @@ namespace draw2d_gdiplus
    }
 
 
-   bool graphics::IsPrinting()
-   {
+   //bool graphics::IsPrinting()
+   //{
 
-      return m_bPrinting;
+   //   return m_bPrinting;
 
-   }
+   //}
 
 
    //bool graphics::CreateDC(const ::string & pszDriverName, const ::string & pszDeviceName, const ::string & pszOutput, const void * lpInitData)
@@ -1315,6 +1315,8 @@ namespace draw2d_gdiplus
    {
 
       __throw(todo);
+
+      return false;
 
    }
 
@@ -5593,7 +5595,7 @@ namespace draw2d_gdiplus
        if (::is_null(m_pgraphics))
        {
 
-           __throw(::exception::exception("invalid state"));
+           throw ::exception::exception(error_wrong_state, "invalid state");
 
        }
 

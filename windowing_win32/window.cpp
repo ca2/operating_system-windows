@@ -475,7 +475,7 @@ namespace windowing_win32
 
          //}
 
-         string strLastError = FormatMessageFromSystem(dwLastError);
+         string strLastError = last_error_message(dwLastError);
 
          string strMessage;
 

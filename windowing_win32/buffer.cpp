@@ -7,6 +7,9 @@ namespace windowing_win32
 {
 
 
+   //CLASS_DECL_WINDOWING_WIN32 HBITMAP create_windows_dib(const ::size_i32 & size, i32 * piScan, ::color32_t ** ppdata);
+
+
    buffer::os_buffer::os_buffer()
    {
 

@@ -248,7 +248,7 @@ namespace windows
 
 #elif defined(_UWP)
 
-      ::Windows::Storage::StorageFile ^ file = get_os_file(psz, 0, 0, nullptr, OPEN_EXISTING, 0, nullptr);
+      ::winrt::Windows::Storage::StorageFile ^ file = get_os_file(psz, 0, 0, nullptr, OPEN_EXISTING, 0, nullptr);
 
       if (file == nullptr)
       {
@@ -277,7 +277,7 @@ namespace windows
       }
       else
       {
-         ::Windows::Storage::StorageFolder ^ folder = get_os_folder(strDirNew);
+         ::winrt::Windows::Storage::StorageFolder ^ folder = get_os_folder(strDirNew);
          if (strNameOld == strNameNew)
          {
             ::wait(file->MoveAsync(folder));
@@ -746,21 +746,21 @@ namespace windows
          if (hFile == INVALID_HANDLE_VALUE)
          {
 
-            return ::os_error_to_status(::GetLastError());
+            return ::last_error_to_status(::GetLastError());
 
          }
 
          if (!SetFileTime((HANDLE)hFile, pCreationTime, pLastAccessTime, pLastWriteTime))
          {
 
-            return ::os_error_to_status(::GetLastError());
+            return ::last_error_to_status(::GetLastError());
 
          }
 
          if (!::CloseHandle(hFile))
          {
 
-            return ::os_error_to_status(::GetLastError());
+            return ::last_error_to_status(::GetLastError());
 
          }
 
@@ -772,7 +772,7 @@ namespace windows
          if (!SetFileAttributesW((LPWSTR)(const widechar *)pszFileName, (::u32)status.m_attribute))
          {
 
-            return ::os_error_to_status(::GetLastError());
+            return ::last_error_to_status(::GetLastError());
 
          }
 

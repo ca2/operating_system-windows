@@ -77,7 +77,7 @@ namespace acme
          virtual string audio_get_default_library_name() override;
 
 
-         virtual ::e_status on_start_system() override;
+         //virtual ::e_status on_start_system() override;
 
          ::e_status create_process(const ::string & pszCommandLine, u32 * pprocessId) override;
 
@@ -133,6 +133,11 @@ namespace acme
          //::string expand_environment_variables(const ::string & str) override;
 
          virtual ::wstring expand_environment_variables(const ::wstring & wstr);
+
+         ::e_status implement() override;
+
+
+         ::e_status on_start_system() override;
 
 
       };

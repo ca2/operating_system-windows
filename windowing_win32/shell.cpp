@@ -335,7 +335,7 @@ namespace windowing_win32
 
                ::image_pointer pimage;
 
-               for (int i = m_iaSize.get_upper_bound(); i >= 0; i--)
+               for (auto i = m_iaSize.get_upper_bound(); i >= 0; i--)
                {
 
                   WTS_ALPHATYPE alphatype = {};

@@ -39,7 +39,7 @@ namespace windows
    }
 
 
-   bool process::create_child_process(const ::string & pszCmdLine, bool bPiped, const ::string & pszDir, ::e_priority epriority)
+   bool process::create_child_process(const ::string & pszCmdLine, bool bPiped, const ::string & pszDir, ::enum_priority epriority)
    {
 
       if (!::process::process::create_child_process(pszCmdLine, bPiped, pszDir, epriority))
@@ -150,7 +150,7 @@ namespace windows
 
          DWORD dwLastError = ::GetLastError();
 
-         string strMessage = get_last_error_message(dwLastError);
+         string strMessage = last_error_message(dwLastError);
 
          output_debug_string(pwszCommandLine);
          output_debug_string("\r\n");

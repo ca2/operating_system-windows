@@ -33,9 +33,9 @@ extern "C"
 void apex_windows_factory_exchange(::factory_map * pfactorymap)
 {
 
-   acme_windows_factory_exchange(pfactorymap);
-
    apex_windows_common_factory_exchange(pfactorymap);
+
+   acme_windows_factory_exchange(pfactorymap);
 
    pfactorymap->create_factory < ::windows::dir_system, ::dir_system >();
    pfactorymap->create_factory < ::windows::file_system, ::file_system >();

@@ -13,9 +13,9 @@ extern "C"
 void aura_windows_factory_exchange(::factory_map * pfactorymap)
 {
 
-   apex_windows_factory_exchange(pfactorymap);
-
    aura_windows_common_factory_exchange(pfactorymap);
+
+   apex_windows_factory_exchange(pfactorymap);
 
    //create_factory < ::windows::console, ::console::console >();
    //create_factory < ::windows::crypto, ::crypto::crypto >();

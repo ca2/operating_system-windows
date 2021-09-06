@@ -339,7 +339,7 @@ string app_t::call(string str)
 
       ::process::process_pointer process(e_create);
 
-      process->create_child_process(str, true, nullptr, ::priority_highest);
+      process->create_child_process(str, true, nullptr, ::e_priority_highest);
 auto tickStart = ::tick::now();
 
       u32 dwExitCode;

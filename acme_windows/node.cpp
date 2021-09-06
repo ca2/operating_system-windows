@@ -1,4 +1,5 @@
 #include "framework.h"
+#include "acme/parallelization/install_mutex.h"
 //#include "acme/platform/node.h"
 //#include "acme/node/windows/registry.h"
 //#include "node.h"
@@ -752,23 +753,23 @@ namespace acme
       }
 
 
-      ::e_status node::on_start_system()
-      {
+      //::e_status node::on_start_system()
+      //{
 
-         auto psystem = m_psystem;
+      //   auto psystem = m_psystem;
 
-         auto estatus = psystem->post_initial_request();
+      //   auto estatus = psystem->post_initial_request();
 
-         if (!estatus)
-         {
+      //   if (!estatus)
+      //   {
 
-            return estatus;
+      //      return estatus;
 
-         }
+      //   }
 
-         return estatus;
+      //   return estatus;
 
-      }
+      //}
 
 
       bool node::process_modules(string_array& stra, u32 processID)
@@ -1985,7 +1986,7 @@ namespace acme
 //      try
 //      {
 //
-//         stra.explode("-", ::Windows::Globalization::ApplicationLanguages::PrimaryLanguageOverride);
+//         stra.explode("-", ::winrt::Windows::Globalization::ApplicationLanguages::PrimaryLanguageOverride);
 //
 //      }
 //      catch (long)
@@ -2439,6 +2440,42 @@ namespace acme
       }
 
 
+      ::e_status node::implement()
+      {
+
+         auto psystem = m_psystem;
+
+         auto estatus = psystem->main();
+
+         if (!estatus)
+         {
+
+            return estatus;
+
+         }
+
+         return estatus;
+
+      }
+
+
+      ::e_status node::on_start_system()
+      {
+
+         auto estatus = m_psystem->post_initial_request();
+
+         if (!estatus)
+         {
+
+            return estatus;
+
+         }
+
+         return estatus;
+
+      }
+
+
    } // namespace windows
 
 
@@ -2458,41 +2495,3 @@ int windows_desktop1_main(HINSTANCE hInstance, int nCmdShow);
 
 #endif
 
-
-//
-//#ifdef WINDOWS_DESKTOP
-//
-//
-//bool Is_Vista_or_Later()
-//{
-//   OSVERSIONINFOEX osvi;
-//   DWORDLONG dwlConditionMask = 0;
-//   byte op = VER_GREATER_EQUAL;
-//
-//   // Initialize the OSVERSIONINFOEX structure.
-//
-//   ZeroMemory(&osvi, sizeof(OSVERSIONINFOEX));
-//   osvi.dwOSVersionInfoSize = sizeof(OSVERSIONINFOEX);
-//   osvi.dwMajorVersion = 6;
-//   //   osvi.dwMinorVersion = 1;
-//   //   osvi.wServicePackMajor = 0;
-//   //   osvi.wServicePackMinor = 0;
-//
-//   // Initialize the condition mask.
-//
-//   VER_SET_CONDITION(dwlConditionMask, VER_MAJORVERSION, op);
-//   //VER_SET_CONDITION( dwlConditionMask, VER_MINORVERSION, op );
-//   //VER_SET_CONDITION( dwlConditionMask, VER_SERVICEPACKMAJOR, op );
-//   //VER_SET_CONDITION( dwlConditionMask, VER_SERVICEPACKMINOR, op );
-//
-//   // Perform the test.
-//
-//   return VerifyVersionInfo(
-//      &osvi,
-//      VER_MAJORVERSION | VER_MINORVERSION |
-//      VER_SERVICEPACKMAJOR | VER_SERVICEPACKMINOR,
-//      dwlConditionMask) != false;
-//}
-//
-//
-//#endif

@@ -77,7 +77,7 @@ namespace windows
 
       virtual ::file::path user_appdata_local() override;
 
-      bool _is(const char * path1) override;
+      // bool _is(const char * path1) override;
 
 
 
@@ -105,11 +105,13 @@ namespace windows
 
       //virtual ::file::path module_folder() override;
       
-      bool create(const char * path) override;
+      //bool create(const char * path) override;
 
-      bool _create(const char * path) override;
+      //bool _create(const char * path) override;
 
-      bool create_directory(const char * path) override;
+      //bool create_directory(const char * path) override;
+
+      ::e_status _create_directory(const char * path) override;
 
       bool is(const char * path) override;
 
@@ -123,7 +125,7 @@ namespace windows
 
       void ls_file(::file::patha & stra, const char * psz) override;
 
-      int make_path(const char * psz) override;
+      //int make_path(const char * psz) override;
 
       string get_current_directory() override;
 

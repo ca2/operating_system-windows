@@ -3,7 +3,6 @@
 
 #undef INLINE
 
-
 #ifdef __cplusplus
 #define MOVE_SEMANTICS
 #endif
@@ -69,6 +68,10 @@
 // Put any custom configuration items in afxv_cfg.h
 #include <afxv_cfg.h>
 #endif
+
+
+#include <concepts>
+
 
 
 #include "platform_dll.h"
@@ -309,19 +312,6 @@
 #define __CONCAT3(xxx, yyy, zzz) xxx ## yyy ## zzz
 
 
-
-
-
-
-
-
-
-#define int_bool BOOL
-#define WINUCHAR UCHAR
-#define WINULONG ULONG
-#define PWINUCHAR PUCHAR
-#define PWINULONG PULONG
-#define WINUSHORT USHORT
 
 
 

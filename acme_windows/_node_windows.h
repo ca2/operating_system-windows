@@ -40,7 +40,7 @@ bool CLASS_DECL_ACME_WINDOWS __windows_init();
 
 
 //#include "file_find.h"
-//#include "file.h"
+#include "file.h"
 //#include "shell.h"
 //#include "stdio_file.h"
 //#include "registry.h"

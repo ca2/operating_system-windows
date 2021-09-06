@@ -212,7 +212,7 @@ namespace windows
 
          }
 
-         ::e_status estatus = ::os_error_to_status(dwLastError);
+         ::e_status estatus = last_error_to_status(dwLastError);
 
          if (::file::should_ignore_file_exception_callstack(estatus))
          {
@@ -1343,10 +1343,7 @@ CLASS_DECL_ACME_WINDOWS HANDLE hfile_create(
 }
 
 
-
-
-CLASS_DECL_ACME bool read_resource_as_memory(memory & m, HINSTANCE hinstance, DWORD nID, const char * pcszType, strsize iReadAtMostByteCount)
-
+CLASS_DECL_ACME_WINDOWS bool read_resource_as_memory(memory & m, HINSTANCE hinstance, DWORD nID, const char * pcszType, strsize iReadAtMostByteCount)
 {
 
    HRSRC hrsrc;

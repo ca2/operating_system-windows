@@ -34,7 +34,7 @@ namespace multimedia
          TRACE("in::initialize_instance %X\n", get_os_int());
          //SetMainWnd(nullptr);
          //ASSERT(GetMainWnd() == nullptr);
-         set_thread_priority(::priority_highest);
+         set_thread_priority(::e_priority_highest);
          return true;
       }
 

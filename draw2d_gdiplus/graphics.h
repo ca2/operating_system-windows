@@ -46,7 +46,7 @@ namespace draw2d_gdiplus
       //virtual HDC DetachPrinter() override;
 
 
-      bool IsPrinting() override;            // true if being used for printing
+      //bool IsPrinting() override;            // true if being used for printing
 
 
       // for bidi and mirrored localization

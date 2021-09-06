@@ -643,126 +643,126 @@ pacmedir->roaming();
    }
 
    
-   bool acme_dir::_is(const char * path1)
-   {
-
-#ifdef _UWP
-
-      //string str;
-
-      ////str = "\\\\?\\";
-      ////str += path1;
-
-      //str = path1;
-
-      //str.ends_eat_ci("\\");
-      //str.ends_eat_ci("/");
-      //str.ends_eat_ci("\\");
-      //str.ends_eat_ci("/");
-
-      u32 dwFileAttributes = ::windows_get_file_attributes(path1);
-
-      if (dwFileAttributes != INVALID_FILE_ATTRIBUTES)
-      {
-
-         return dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY;
-
-      }
-      else
-      {
-
-         ::u32 dwLastError = ::GetLastError();
-
-         string strPrefix;
-
-         {
-
-            string strRelative = path1;
-
-            auto folderBase = winrt_folder(strRelative, strPrefix);
-
-            if (folderBase != nullptr)
-            {
-
-               strRelative.replace("/", "\\");
-
-               strPrefix.replace("/", "\\");
-
-               ::str::begins_eat_ci(strRelative, strPrefix);
-
-               strRelative.trim("/\\");
-
-               //strPrefix.trim_right("/\\");
-
-               try
-               {
-
-                  auto folder = folderBase->GetFolderAsync(strRelative);
-
-                  if (folder != nullptr)
-                  {
-
-                     return true;
-
-                  }
-
-               }
-               catch (...)
-               {
-
-               }
-
-            }
-
-         }
-
-         return false;
-
-         //auto folder = wait(::Windows::Storage::StorageFolder::GetFolderFromPathAsync(path1));
-
-         //bool bOk = folder != nullptr;
-
-         //if (!bOk)
-         //{
-
-         //   set_last_error(dwLastError);
-
-         //}
-
-         //if (bOk)
-         //{
-
-         //   return true;
-
-         //}
-
-         //return bOk;
-
-      }
-
-
-#elif defined(WINDOWS_DESKTOP)
-
-      auto dwFileAttributes = ::windows_get_file_attributes(path1);
-
-      if (dwFileAttributes == INVALID_FILE_ATTRIBUTES || !(dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY))
-      {
-
-         return false;
-
-      }
-
-      return true;
-
-#else
-
-      // dedicaverse stat -> Sir And Arthur - Cesar Serenato
-
-      return is_dir(path1);
-
-#endif
-
-   }
+//   bool acme_dir::_is(const char * path1)
+//   {
+//
+//#ifdef _UWP
+//
+//      //string str;
+//
+//      ////str = "\\\\?\\";
+//      ////str += path1;
+//
+//      //str = path1;
+//
+//      //str.ends_eat_ci("\\");
+//      //str.ends_eat_ci("/");
+//      //str.ends_eat_ci("\\");
+//      //str.ends_eat_ci("/");
+//
+//      u32 dwFileAttributes = ::windows_get_file_attributes(path1);
+//
+//      if (dwFileAttributes != INVALID_FILE_ATTRIBUTES)
+//      {
+//
+//         return dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY;
+//
+//      }
+//      else
+//      {
+//
+//         ::u32 dwLastError = ::GetLastError();
+//
+//         string strPrefix;
+//
+//         {
+//
+//            string strRelative = path1;
+//
+//            auto folderBase = winrt_folder(strRelative, strPrefix);
+//
+//            if (folderBase != nullptr)
+//            {
+//
+//               strRelative.replace("/", "\\");
+//
+//               strPrefix.replace("/", "\\");
+//
+//               ::str::begins_eat_ci(strRelative, strPrefix);
+//
+//               strRelative.trim("/\\");
+//
+//               //strPrefix.trim_right("/\\");
+//
+//               try
+//               {
+//
+//                  auto folder = folderBase->GetFolderAsync(strRelative);
+//
+//                  if (folder != nullptr)
+//                  {
+//
+//                     return true;
+//
+//                  }
+//
+//               }
+//               catch (...)
+//               {
+//
+//               }
+//
+//            }
+//
+//         }
+//
+//         return false;
+//
+//         //auto folder = wait(::winrt::Windows::Storage::StorageFolder::GetFolderFromPathAsync(path1));
+//
+//         //bool bOk = folder != nullptr;
+//
+//         //if (!bOk)
+//         //{
+//
+//         //   set_last_error(dwLastError);
+//
+//         //}
+//
+//         //if (bOk)
+//         //{
+//
+//         //   return true;
+//
+//         //}
+//
+//         //return bOk;
+//
+//      }
+//
+//
+//#elif defined(WINDOWS_DESKTOP)
+//
+//      auto dwFileAttributes = ::windows_get_file_attributes(path1);
+//
+//      if (dwFileAttributes == INVALID_FILE_ATTRIBUTES || !(dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY))
+//      {
+//
+//         return false;
+//
+//      }
+//
+//      return true;
+//
+//#else
+//
+//      // dedicaverse stat -> Sir And Arthur - Cesar Serenato
+//
+//      return is_dir(path1);
+//
+//#endif
+//
+//   }
 
 #include "framework.h"
 #include "acme/operating_system.h"
@@ -783,7 +783,7 @@ pacmedir->roaming();
 #include <sys/stat.h>
 #include <dirent.h>
 #elif defined(_UWP)
-#include "acme/os/uwp/file_winrt.h"
+#include "acme/os/universal_windows/file_winrt.h"
 #endif
 
 
@@ -836,7 +836,7 @@ bool windows_file_find_is_dots(WIN32_FIND_DATAW & data)
 
 #undef get_system()
 
-   using namespace ::Windows::get_system();
+   using namespace ::winrt::Windows::get_system();
 
 #pragma pop_macro("get_system()")
 
@@ -1327,20 +1327,12 @@ bool windows_file_find_is_dots(WIN32_FIND_DATAW & data)
       //   }
 
 
+      //bool acme_dir::create(const char * path)
+      //{
 
-      bool acme_dir::create(const char * path)
-      {
+      //   return _create(path);
 
-         //if (::file::system_dir::g_pthis == nullptr)
-         //{
-
-         return _create(path);
-
-         //}
-
-         //return ::file::system_dir::g_pthis->mk(path, ::get_context_system());
-
-      }
+      //}
 
 
 #ifndef WINDOWS_DESKTOP
@@ -1501,29 +1493,8 @@ pacmedir->create CreateDirectoryW last error(%d)=%s", dwError, pszError);
 #endif
 
 
-      bool acme_dir::create_directory(const char * path)
+      ::e_status acme_dir::_create_directory(const char * path)
       {
-
-         if (is(path))
-         {
-
-            return true;
-
-         }
-
-         if (m_pacmefile->exists(path))
-         {
-
-            if (!m_pacmefile->delete_file(path))
-            {
-
-               set_last_status(error_already_exists);
-
-               return false;
-
-            }
-
-         }
 
 #ifdef WINDOWS
 
@@ -1684,7 +1655,7 @@ pacmedir->create CreateDirectoryW last error(%d)=%s", dwError, pszError);
 
 #elif defined(_UWP)
 
-         ::Windows::Storage::StorageFolder ^ folder = nullptr;
+         ::winrt::Windows::Storage::StorageFolder ^ folder = nullptr;
 
          string strPrefix;
 
@@ -1701,7 +1672,7 @@ pacmedir->create CreateDirectoryW last error(%d)=%s", dwError, pszError);
                try
                {
 
-                  folder = ::Windows::Storage::KnownFolders::PicturesLibrary;
+                  folder = ::winrt::Windows::Storage::KnownFolders::PicturesLibrary;
 
                }
                catch (...)
@@ -1720,7 +1691,7 @@ pacmedir->create CreateDirectoryW last error(%d)=%s", dwError, pszError);
                try
                {
 
-                  folder = ::Windows::Storage::KnownFolders::MusicLibrary;
+                  folder = ::winrt::Windows::Storage::KnownFolders::MusicLibrary;
 
                }
                catch (...)
@@ -1739,7 +1710,7 @@ pacmedir->create CreateDirectoryW last error(%d)=%s", dwError, pszError);
                try
                {
 
-                  folder = ::Windows::Storage::KnownFolders::VideosLibrary;
+                  folder = ::winrt::Windows::Storage::KnownFolders::VideosLibrary;
 
                }
                catch (...)
@@ -1758,7 +1729,7 @@ pacmedir->create CreateDirectoryW last error(%d)=%s", dwError, pszError);
                try
                {
 
-                  folder = ::Windows::Storage::KnownFolders::DocumentsLibrary;
+                  folder = ::winrt::Windows::Storage::KnownFolders::DocumentsLibrary;
 
                }
                catch (...)
@@ -1780,7 +1751,7 @@ pacmedir->create CreateDirectoryW last error(%d)=%s", dwError, pszError);
                   try
                   {
 
-                     folder = ::Windows::Storage::KnownFolders::PicturesLibrary;
+                     folder = ::winrt::Windows::Storage::KnownFolders::PicturesLibrary;
 
                   }
                   catch (...)
@@ -1800,7 +1771,7 @@ pacmedir->create CreateDirectoryW last error(%d)=%s", dwError, pszError);
                   try
                   {
 
-                     folder = ::Windows::Storage::KnownFolders::MusicLibrary;
+                     folder = ::winrt::Windows::Storage::KnownFolders::MusicLibrary;
 
                   }
                   catch (...)
@@ -1820,7 +1791,7 @@ pacmedir->create CreateDirectoryW last error(%d)=%s", dwError, pszError);
                   try
                   {
 
-                     folder = ::Windows::Storage::KnownFolders::VideosLibrary;
+                     folder = ::winrt::Windows::Storage::KnownFolders::VideosLibrary;
 
                   }
                   catch (...)
@@ -1840,7 +1811,7 @@ pacmedir->create CreateDirectoryW last error(%d)=%s", dwError, pszError);
                   try
                   {
 
-                     folder = ::Windows::Storage::KnownFolders::DocumentsLibrary;
+                     folder = ::winrt::Windows::Storage::KnownFolders::DocumentsLibrary;
 
                   }
                   catch (...)
@@ -1883,7 +1854,7 @@ pacmedir->create CreateDirectoryW last error(%d)=%s", dwError, pszError);
                else
                {
 
-                  folder = ::Windows::Storage::StorageFolder::GetFolderFromPathAsync(str).get();
+                  folder = ::winrt::Windows::Storage::StorageFolder::GetFolderFromPathAsync(str).get();
 
                   strPrefix = str + "/";
 
@@ -1919,7 +1890,7 @@ pacmedir->create CreateDirectoryW last error(%d)=%s", dwError, pszError);
 
             string str = path;
 
-            path.m_iDir = a->GetAt(u)->IsOfType(::Windows::Storage::StorageItemTypes::Folder) ? 1 : 0;
+            path.m_iDir = a->GetAt(u)->IsOfType(::winrt::Windows::Storage::StorageItemTypes::Folder) ? 1 : 0;
 
             stra.add(path);
 
@@ -2001,9 +1972,9 @@ pacmedir->create CreateDirectoryW last error(%d)=%s", dwError, pszError);
 
 #elif defined(_UWP)
 
-         ::Windows::Storage::StorageFolder ^ folder = wait(::Windows::Storage::StorageFolder::GetFolderFromPathAsync(string(psz)));
+         ::winrt::Windows::Storage::StorageFolder ^ folder = wait(::winrt::Windows::Storage::StorageFolder::GetFolderFromPathAsync(string(psz)));
 
-         ::Windows::Foundation::Collections::IVectorView < ::Windows::Storage::StorageFolder ^ > ^ a = wait(folder->GetFoldersAsync());
+         ::winrt::Windows::Foundation::Collections::IVectorView < ::winrt::Windows::Storage::StorageFolder ^ > ^ a = wait(folder->GetFoldersAsync());
 
          for (u32 u = 0; u < a->Size; u++)
          {
@@ -2083,9 +2054,9 @@ pacmedir->create CreateDirectoryW last error(%d)=%s", dwError, pszError);
 
 #elif defined(_UWP)
 
-         ::Windows::Storage::StorageFolder ^ folder = wait(::Windows::Storage::StorageFolder::GetFolderFromPathAsync(string(psz)));
+         ::winrt::Windows::Storage::StorageFolder ^ folder = wait(::winrt::Windows::Storage::StorageFolder::GetFolderFromPathAsync(string(psz)));
 
-         ::Windows::Foundation::Collections::IVectorView < ::Windows::Storage::StorageFolder ^ > ^ a = wait(folder->GetFoldersAsync());
+         ::winrt::Windows::Foundation::Collections::IVectorView < ::winrt::Windows::Storage::StorageFolder ^ > ^ a = wait(folder->GetFoldersAsync());
 
          for (u32 u = 0; u < a->Size; u++)
          {
@@ -2185,146 +2156,146 @@ pacmedir->create CreateDirectoryW last error(%d)=%s", dwError, pszError);
       }
 
 
-      int acme_dir::make_path(const char * psz)
-      {
+      //int acme_dir::make_path(const char * psz)
+      //{
 
 
-         return create(psz) != false;
+      //   return create(psz) != false;
 
-      }
-
-
-      bool acme_dir::_create(const char * pathParam)
-      {
-
-         if (is(pathParam))
-         {
-
-            return true;
-
-         }
-
-         ::file::path path(pathParam);
-
-         string strName;
-
-         ::file::path pathDir;
-
-         strsize iLastPo = -1;
-
-         ::file::patha stra;
+      //}
 
 
-         path.ascendants_path(stra);
-
-         index i = stra.get_upper_bound();
-
-         for (; i >= 0; i--)
-         {
-
-            string strDir = stra[i];
-
-            if (is(strDir))
-            {
-
-               break;
-
-            }
-
-         }
-
-         if (i < 0)
-         {
-
-            return true;
-
-         }
-
-         for (; i < stra.get_count(); i++)
-         {
-
-            string strDir = stra[i];
-
-            if (create_directory(strDir))
-            {
-
-            }
-            else
-            {
-
-               DWORD dwError = ::GetLastError();
-
-               if (dwError == ERROR_ALREADY_EXISTS)
-               {
-
-                  try
-                  {
-
-                     m_pacmefile->delete_file(strDir);
-
-                  }
-                  catch (...)
-                  {
-
-                  }
-
-                  string str = stra[i];
-
-                  str.trim_right("\\/");
-
-                  try
-                  {
-
-                     m_pacmefile->delete_file(str);
-
-                  }
-                  catch (...)
-                  {
-
-                  }
-
-                  if (create_directory(stra[i]))
-                  {
-
-                     continue;
-
-                  }
-                  else
-                  {
-
-                     dwError = ::GetLastError();
-
-                  }
-
-               }
-
-#ifdef WINDOWS_DESKTOP
-
-               WCHAR * pwszError;
-
-               FormatMessage(FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_SYSTEM, nullptr, dwError, 0, (WCHAR *)&pwszError, 8, nullptr);
-
-               //TRACE("         auto psystem = m_psystem;
-
-//         auto pacmedir = psystem->m_pacmedir;
+//      bool acme_dir::_create(const char * pathParam)
+//      {
 //
-//pacmedir->create CreateDirectoryW last error(%d)=%s", dwError, pszError);
+//         if (is(pathParam))
+//         {
 //
-               ::LocalFree(pwszError);
-
-               //m_isdirmap.set(stra[i], false);
-
-#endif
-
-               return false;
-
-            }
-
-         }
-
-         return true;
-
-      }
+//            return true;
+//
+//         }
+//
+//         ::file::path path(pathParam);
+//
+//         string strName;
+//
+//         ::file::path pathDir;
+//
+//         strsize iLastPo = -1;
+//
+//         ::file::patha stra;
+//
+//
+//         path.ascendants_path(stra);
+//
+//         index i = stra.get_upper_bound();
+//
+//         for (; i >= 0; i--)
+//         {
+//
+//            string strDir = stra[i];
+//
+//            if (is(strDir))
+//            {
+//
+//               break;
+//
+//            }
+//
+//         }
+//
+//         if (i < 0)
+//         {
+//
+//            return true;
+//
+//         }
+//
+//         for (; i < stra.get_count(); i++)
+//         {
+//
+//            string strDir = stra[i];
+//
+//            if (create_directory(strDir))
+//            {
+//
+//            }
+//            else
+//            {
+//
+//               DWORD dwError = ::GetLastError();
+//
+//               if (dwError == ERROR_ALREADY_EXISTS)
+//               {
+//
+//                  try
+//                  {
+//
+//                     m_pacmefile->delete_file(strDir);
+//
+//                  }
+//                  catch (...)
+//                  {
+//
+//                  }
+//
+//                  string str = stra[i];
+//
+//                  str.trim_right("\\/");
+//
+//                  try
+//                  {
+//
+//                     m_pacmefile->delete_file(str);
+//
+//                  }
+//                  catch (...)
+//                  {
+//
+//                  }
+//
+//                  if (create_directory(stra[i]))
+//                  {
+//
+//                     continue;
+//
+//                  }
+//                  else
+//                  {
+//
+//                     dwError = ::GetLastError();
+//
+//                  }
+//
+//               }
+//
+//#ifdef WINDOWS_DESKTOP
+//
+//               WCHAR * pwszError;
+//
+//               FormatMessage(FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_SYSTEM, nullptr, dwError, 0, (WCHAR *)&pwszError, 8, nullptr);
+//
+//               //TRACE("         auto psystem = m_psystem;
+//
+////         auto pacmedir = psystem->m_pacmedir;
+////
+////pacmedir->create CreateDirectoryW last error(%d)=%s", dwError, pszError);
+////
+//               ::LocalFree(pwszError);
+//
+//               //m_isdirmap.set(stra[i], false);
+//
+//#endif
+//
+//               return false;
+//
+//            }
+//
+//         }
+//
+//         return true;
+//
+//      }
 
 
 
