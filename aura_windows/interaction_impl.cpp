@@ -5067,6 +5067,34 @@ namespace windows
 //
 //
 
+   bool interaction_impl::on_mouse_message(::message::mouse * pmouse)
+   {
+
+      if (pmouse->m_id >= e_message_mouse_first
+         && pmouse->m_id <= e_message_mouse_last
+         && m_bTranslateMouseMessageCursor
+         && !pmouse->m_bTranslated)
+      {
+
+         pmouse->m_bTranslated = true;
+
+         ::ClientToScreen(m_hwnd, (POINT *)&pmouse->m_point);
+
+      }
+
+      auto bRet = ::user::interaction_impl::on_mouse_message(pmouse);
+
+      if (!bRet)
+      {
+
+         return false;
+
+      }
+
+      return true;
+
+   }
+
 
    void interaction_impl::message_handler(::message::message * pmessage)
    {
@@ -5322,181 +5350,14 @@ namespace windows
          )
       {
 
-         auto pmouse = dynamic_cast <::message::mouse_base*> (pmessage);
+         auto pmouse = pmessage->m_pmouse;
 
-         if (message >= WM_MOUSEFIRST
-            && message <= WM_MOUSELAST
-            && m_bTranslateMouseMessageCursor
-            && !pmouse->m_bTranslated)
+         if (on_mouse_message(pmouse))
          {
-
-            pmouse->m_bTranslated = true;
-
-            ::ClientToScreen(m_hwnd, (POINT*)&pmouse->m_point);
-
-         }
-
-         if (message == e_message_left_button_down)
-         {
-
-            TRACE("e_message_left_button_down");
-
-            string strType = ::str::demangle(m_puserinteraction->type_name());
-
-            if (strType.contains_ci("list_box"))
-            {
-
-               ::output_debug_string("list_box e_message_left_button_down");
-
-            }
-
-         }
-         else if (message == e_message_left_button_up)
-         {
-
-            TRACE("e_message_left_button_up");
-
-         }
-         else if (message == e_message_non_client_left_button_up)
-         {
-
-            TRACE("e_message_non_client_left_button_up");
-
-         }
-         else if (message == e_message_non_client_left_button_down)
-         {
-
-            TRACE("e_message_non_client_left_button_down");
-
-            string strType;
-
-            if (strType.contains_ci("list_box"))
-            {
-
-               ::output_debug_string("list_box e_message_non_client_left_button_down");
-
-            }
-
-         }
-
-         auto psession = get_session();
-
-         if (psession)
-         {
-
-            psession->on_ui_mouse_message(pmouse);
-
-         }
-
-         if (message == e_message_mouse_move)
-         {
-            // We are at the message handler procedure.
-            // mouse messages originated from message handler and that are mouse move events should end up with the correct cursor.
-            // So the procedure starts by setting to the default cursor,
-            // what forces, at the end of message processing, setting the bergedge cursor to the default cursor, if no other
-            // handler has set it to another one.
-            auto psession = get_session();
-
-            auto puser = psession->user();
-
-            auto pwindowing = puser->windowing();
-
-            auto pcursor = pwindowing->get_cursor(e_cursor_default);
-
-            pmouse->m_pcursor = pcursor;
-
-            //INFO("windows::e_message_mouse_move(%d,%d)", pmouse->m_point.x, pmouse->m_point.y);
-
-            string strType;
-
-            if (m_puserinteraction)
-            {
-
-               strType = ::str::demangle(m_puserinteraction->type_name());
-
-               if (strType.contains_ci("list_box"))
-               {
-
-                  //::output_debug_string("list_box e_message_mouse_move");
-
-               }
-
-            }
-
-         }
-         else if (message == e_message_non_client_mouse_move)
-         {
-            // We are at the message handler procedure.
-            // mouse messages originated from message handler and that are mouse move events should end up with the correct cursor.
-            // So the procedure starts by setting to the default cursor,
-            // what forces, at the end of message processing, setting the bergedge cursor to the default cursor, if no other
-            // handler has set it to another one.
-            auto psession = get_session();
-
-            auto puser = psession->user();
-
-            auto pwindowing = puser->windowing();
-
-            auto pcursor = pwindowing->get_cursor(e_cursor_default);
-
-            pmouse->m_pcursor = pcursor;
-
-         }
-
-         _on_mouse_move_step(pmouse->m_point);
-
-         auto puserinteractionCapture = m_puserinteractionCapture;
-
-         if (::is_set(puserinteractionCapture))
-         {
-
-            puserinteractionCapture->route_message(pmouse);
 
             return;
 
          }
-
-         auto pchild = m_puserinteraction->child_from_point(pmouse->m_point);
-
-         if (pchild)
-         {
-
-            string strType = ::str::demangle(pchild->type_name());
-
-            if (strType.contains_ci("button"))
-            {
-
-               output_debug_string("mouse move on button");
-
-            }
-            
-            auto puserinteraction = pchild;
-
-            while (::is_set(puserinteraction))
-            {
-
-               puserinteraction->route_message(pmouse);
-
-               if (pmouse->m_bRet)
-               {
-
-                  break;
-
-               }
-
-               puserinteraction = puserinteraction->get_parent();
-
-            }
-
-         }
-         else
-         {
-
-            m_puserinteraction->route_message(pmouse);
-
-         }
-
-         return;
 
       }
 

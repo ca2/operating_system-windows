@@ -660,6 +660,9 @@ namespace windows
       //virtual void pre_translate_message(::message::message * pmessage);
 
 
+      bool on_mouse_message(::message::mouse * pmouse) override;
+
+
       virtual void message_handler(::message::message* pmessage) override;
 
 
