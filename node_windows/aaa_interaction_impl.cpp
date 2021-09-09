@@ -728,7 +728,7 @@ namespace windows
    //   /* trans   if (!::WinHelp((pwindow)->get_handle(), pApp->m_pszHelpFilePath, nCmd, dwData))
    //   {
    //   // linux message_box(__IDP_FAILED_TO_LAUNCH_HELP);
-   //   message_box("Failed to launch help");
+   //   output_message_box_error("Failed to launch help");
    //   }*/
    //}
 
@@ -756,7 +756,7 @@ namespace windows
    ///* trans   if (!::aura::HtmlHelp((pwindow)->get_handle(), pApp->m_pszHelpFilePath, nCmd, dwData))
    //{
    //// linux message_box(__IDP_FAILED_TO_LAUNCH_HELP);
-   //message_box("Failed to launch help");
+   //output_message_box_error("Failed to launch help");
    //}*/
    ////}
 
