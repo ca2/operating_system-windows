@@ -219,7 +219,7 @@ namespace windows
    )
    {
 
-      UNREFERENCED_PARAMETER(dwErrorCode);
+      __UNREFERENCED_PARAMETER(dwErrorCode);
 
       overlapped * plap = nullptr;
 

@@ -325,7 +325,7 @@ namespace music
 
       ::e_status     FillTypeCombo(::user::combo_box * pcombo)
       {
-         UNREFERENCED_PARAMETER(pcombo);
+         __UNREFERENCED_PARAMETER(pcombo);
          /*   lpcombo->ResetContent();
 
          string str;
@@ -354,7 +354,7 @@ namespace music
 
       ::e_status     FillPitchCombo(::user::combo_box * pcombo)
       {
-         UNREFERENCED_PARAMETER(pcombo);
+         __UNREFERENCED_PARAMETER(pcombo);
          /*    lpcombo->ResetContent();
 
          for(i32 i = 0; i < 128; i++)

@@ -127,7 +127,7 @@ namespace production
 
    void impact::on_message_size(::message::message * pmessage)
    {
-      UNREFERENCED_PARAMETER(pmessage);
+      __UNREFERENCED_PARAMETER(pmessage);
 //      __pointer(::message::size) psize(pmessage);
 
       ::rectangle_i32 rectDesktop;
@@ -405,7 +405,7 @@ namespace production
 
    void impact::_001OnLButtonDown(::message::message * pmessage)
    {
-      UNREFERENCED_PARAMETER(pmessage);
+      __UNREFERENCED_PARAMETER(pmessage);
       //    auto pmouse = pmessage->m_pmouse;
 
 //      i32 iHitArea = hit_test(pmouse->m_point);
@@ -433,7 +433,7 @@ namespace production
 
    void impact::on_message_right_button_up(::message::message * pmessage)
    {
-      UNREFERENCED_PARAMETER(pmessage);
+      __UNREFERENCED_PARAMETER(pmessage);
       //    auto pmouse = pmessage->m_pmouse;
 
 //      i32 iHitArea = hit_test(pmouse->m_point);
@@ -489,7 +489,7 @@ namespace production
 
    void impact::on_message_show_window(::message::message * pmessage)
    {
-      UNREFERENCED_PARAMETER(pmessage);
+      __UNREFERENCED_PARAMETER(pmessage);
 //      __pointer(::message::show_window) pshowwindow(pmessage);
    }
 

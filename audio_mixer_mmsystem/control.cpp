@@ -42,8 +42,8 @@ namespace multimedia
 
       bool control::CreateWindows(__pointer(::user::interaction) pParent, i32 iStyle)
       {
-         UNREFERENCED_PARAMETER(pParent);
-         UNREFERENCED_PARAMETER(iStyle);
+         __UNREFERENCED_PARAMETER(pParent);
+         __UNREFERENCED_PARAMETER(iStyle);
          return true;
       }
 
@@ -474,7 +474,7 @@ namespace multimedia
 
       /*bool control::OnNotify(u32 nID, LPNMHDR lpnmhdr)
       {
-      UNREFERENCED_PARAMETER(nID);
+      __UNREFERENCED_PARAMETER(nID);
       if(lpnmhdr->code == TB_BOTTOM ||
       lpnmhdr->code == TB_ENDTRACK ||
       lpnmhdr->code == TB_LINEDOWN ||
@@ -645,7 +645,7 @@ namespace multimedia
 
       void control::OnVHScroll(u32 nSBCode, u32 nPos, __pointer(::user::interaction) pScrollBar)
       {
-         UNREFERENCED_PARAMETER(nPos);
+         __UNREFERENCED_PARAMETER(nPos);
          __pointer(::user::interaction) pParamWnd = pScrollBar;
          if(nSBCode == SB_LEFT ||
                nSBCode == SB_ENDSCROLL ||
@@ -788,7 +788,7 @@ namespace multimedia
 
       bool control::OnCommand(WPARAM wParam, LPARAM lParam)
       {
-         UNREFERENCED_PARAMETER(lParam);
+         __UNREFERENCED_PARAMETER(lParam);
          WORD wNotifyCode = HIWORD(wParam);
          WORD wID = LOWORD(wParam);
 

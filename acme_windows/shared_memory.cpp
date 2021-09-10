@@ -115,7 +115,7 @@ byte * shared_memory::detach_shared_memory(HGLOBAL & hglobal)
 void shared_memory::SetHandle(HGLOBAL hGlobalMemory, bool bAllowGrow)
 {
 
-   UNREFERENCED_PARAMETER(bAllowGrow);
+   __UNREFERENCED_PARAMETER(bAllowGrow);
 
    ASSERT(m_hGlobalMemory == nullptr);        // do once only
 

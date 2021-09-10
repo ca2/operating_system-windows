@@ -2398,7 +2398,7 @@ namespace windowing_win32
 //
 //#ifdef WINDOWS_DESKTOP
 //
-//      UNREFERENCED_PARAMETER(window);
+//      __UNREFERENCED_PARAMETER(window);
 //
 //      if (!::SetCursor(hcursor))
 //      {
@@ -6184,7 +6184,7 @@ namespace windowing_win32
    void window::on_message_destroy(::message::message * pmessage)
    {
 
-      UNREFERENCED_PARAMETER(pmessage);
+      __UNREFERENCED_PARAMETER(pmessage);
 
    }
 

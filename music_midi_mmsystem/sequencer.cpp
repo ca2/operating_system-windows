@@ -996,7 +996,7 @@ namespace music
          void sequencer::OnDone(HMIDISTRM hmidistream, LPMIDIHDR lpmidihdr)
          {
 
-            UNREFERENCED_PARAMETER(hmidistream);
+            __UNREFERENCED_PARAMETER(hmidistream);
 
             ::e_status                   smfrc;
 
@@ -1142,8 +1142,8 @@ namespace music
          void CALLBACK sequencer::MidiOutProc(HMIDIOUT hmo, UINT wMsg, DWORD_PTR dwInstance, DWORD_PTR dwParam1, DWORD_PTR dwParam2)
          {
 
-            UNREFERENCED_PARAMETER(hmo);
-            UNREFERENCED_PARAMETER(dwParam2);
+            __UNREFERENCED_PARAMETER(hmo);
+            __UNREFERENCED_PARAMETER(dwParam2);
 
             LPMIDIHDR lpmidihdr     = (LPMIDIHDR) dwParam1;
             sequencer * psequence    = (sequencer *)dwInstance;
@@ -1561,8 +1561,8 @@ namespace music
             u32 cbPrerollNomimalMax
          )
          {
-            UNREFERENCED_PARAMETER(tkMax);
-            UNREFERENCED_PARAMETER(cbPrerollNomimalMax);
+            __UNREFERENCED_PARAMETER(tkMax);
+            __UNREFERENCED_PARAMETER(cbPrerollNomimalMax);
             ::e_status                   smfrc;
 
             if (eventptra.get_size() <= 0)
@@ -1626,7 +1626,7 @@ namespace music
             imedia_time                   tkMax,
             u32                   cbPrerollNominalMax)
          {
-            UNREFERENCED_PARAMETER(tkMax);
+            __UNREFERENCED_PARAMETER(tkMax);
             //   TRACE("file::StreamEvent tkDelta %d\n", tkDelta);
             if (pEvent->GetFlags() & 1)
             {

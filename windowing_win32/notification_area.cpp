@@ -67,7 +67,7 @@ namespace windowing_win32
 
 #ifdef WINDOWS_DESKTOP
       
-      UNREFERENCED_PARAMETER(defindex);
+      __UNREFERENCED_PARAMETER(defindex);
 
       m_infoa.erase_all();
 
@@ -201,7 +201,7 @@ namespace windowing_win32
 
    void notification_area::EditCopy(i32 iItem)
    {
-      UNREFERENCED_PARAMETER(iItem);
+      __UNREFERENCED_PARAMETER(iItem);
       /*   POSITION pos = GetListCtrl().GetFirstSelectedItemPosition();
          if(pos)
          {

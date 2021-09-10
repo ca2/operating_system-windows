@@ -141,7 +141,7 @@ namespace multimedia
 
       void thread::OnVmsmException(::message::message * pmessage)
       {
-         UNREFERENCED_PARAMETER(pmessage);
+         __UNREFERENCED_PARAMETER(pmessage);
          //__pointer(::axis::application) pApp = (__pointer(::axis::application)) System;
          //pApp->post_thread_message(VMSM_EXCEPTION, wParam, lParam);
       }

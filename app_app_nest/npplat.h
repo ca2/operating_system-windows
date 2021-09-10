@@ -147,8 +147,8 @@ NPError Private_SetValue(NPP instance, NPNVariable variable, void *value);
 #define HIBYTE(i) (i >> 8)
 #endif
 
-#ifndef LOBYTE
-#define LOBYTE(i) (i & 0xff)
+#ifndef __LOBYTE
+#define __LOBYTE(i) (i & 0xff)
 #endif
 
 

@@ -67,7 +67,7 @@ public:
 //extern "C" i32 WINAPI _tWinMain(HINSTANCE hInstance,HINSTANCE hPrevInstance,LPTSTR lpCmdLine,i32 nCmdShow)
 //{
 //
-//   UNREFERENCED_PARAMETER(lpCmdLine);
+//   __UNREFERENCED_PARAMETER(lpCmdLine);
 //
 //   if(!defer_aura_init())
 //   {

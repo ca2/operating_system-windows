@@ -354,10 +354,10 @@ Opened:
    void CALLBACK in::in_proc(HWAVEIN hwi, UINT uMsg, DWORD dwInstance, DWORD dwParam1, DWORD dwParam2)
    {
 
-      UNREFERENCED_PARAMETER(hwi);
-      UNREFERENCED_PARAMETER(dwInstance);
-      UNREFERENCED_PARAMETER(dwParam1);
-      UNREFERENCED_PARAMETER(dwParam2);
+      __UNREFERENCED_PARAMETER(hwi);
+      __UNREFERENCED_PARAMETER(dwInstance);
+      __UNREFERENCED_PARAMETER(dwParam1);
+      __UNREFERENCED_PARAMETER(dwParam2);
       if(uMsg == WIM_DATA)
       {
          ASSERT(false);
