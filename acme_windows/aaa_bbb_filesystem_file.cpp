@@ -48,11 +48,9 @@ string file_final_extension_dup(const char * path)
 }
 
 
-
-
-
 string url_dir_name_for_relative(const char * pszPath)
 {
+
    string strDir(pszPath);
 
    if (str::ends(strDir, "/"))
