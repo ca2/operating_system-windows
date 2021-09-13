@@ -75,7 +75,7 @@ namespace windows
       virtual ::extended::status open(const ::file::path & pszFileName, const ::file::e_open & eopen) override;
 
 
-      virtual ::index translate(::count offset, ::enum_seek nFrom) override;
+      virtual filesize translate(filesize filesize, ::enum_seek nFrom) override;
       virtual void set_size(filesize dwNewLen) override;
       virtual filesize get_size() const override;
 

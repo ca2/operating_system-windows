@@ -127,7 +127,7 @@ LRESULT CALLBACK __window_procedure(HWND hwnd, UINT message, WPARAM wparam, LPAR
    if (pimpl)
    {
 
-      if (pimpl->__windows_message_bypass(pwindow, message, wparam, lparam, lresult))
+      if (pimpl->__windows_message_bypass(pwindow, message, wparam, (iptr)lparam, lresult))
       {
 
          return lresult;
@@ -246,7 +246,7 @@ LRESULT CALLBACK __window_procedure(HWND hwnd, UINT message, WPARAM wparam, LPAR
    if (pimpl->m_bDestroyImplOnly || ::is_null(puserinteraction))
    {
 
-      auto pmessage = pimpl->get_message((enum_message)message, wparam, lparam);
+      auto pmessage = pimpl->get_message((enum_message)message, wparam, (iptr) lparam);
 
       try
       {
@@ -291,7 +291,7 @@ LRESULT CALLBACK __window_procedure(HWND hwnd, UINT message, WPARAM wparam, LPAR
 
       }
 
-      auto pmessage = puserinteraction->get_message((enum_message)message, wparam, lparam);
+      auto pmessage = puserinteraction->get_message((enum_message)message, wparam, (iptr) lparam);
 
       try
       {

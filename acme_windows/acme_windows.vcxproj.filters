@@ -307,9 +307,6 @@
     <ClCompile Include="windowing.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="bbb_filesystem_file.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="acme_file.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>

@@ -1101,7 +1101,7 @@ namespace windows
 
 #else
 
-            pcontext->m_papexcontext->signal = GetThreadContext(pcontext->m_papexcontext->thread, pcontext) ? 1 : -1;
+            pcontext->signal = GetThreadContext(pcontext->thread, pcontext) ? 1 : -1;
 
 #endif
 

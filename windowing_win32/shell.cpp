@@ -131,7 +131,7 @@ bool IsDibSection(HBITMAP bmp)
 //
 //}
 
-__pointer(::image) create_image_from_hbitmap(HBITMAP hbitmap)
+__pointer(::image) create_image_from_hbitmap(::object * pobject, HBITMAP hbitmap)
 {
 
 
@@ -151,7 +151,7 @@ __pointer(::image) create_image_from_hbitmap(HBITMAP hbitmap)
          int h = ds.dsBmih.biHeight;
 
          auto pBits = ds.dsBm.bmBits;
-         auto pimage = create_image({ w, h });
+         auto pimage = pobject->m_pcontext->context_image()->create_image({ w, h });
          int iStride = ds.dsBmih.biSizeImage / abs(h );
 
          if (h < 0)
@@ -177,7 +177,7 @@ __pointer(::image) create_image_from_hbitmap(HBITMAP hbitmap)
 
    ::GetObject(hbitmap, sizeof(bitmap), &bitmap);
 
-   auto pimage = create_image({ bitmap.bmWidth, bitmap.bmHeight });
+   auto pimage = pobject->m_pcontext->context_image()->create_image({ bitmap.bmWidth, bitmap.bmHeight });
 
    BITMAPINFO bitmapinfo = {};
 
@@ -311,7 +311,7 @@ namespace windowing_win32
       
       comptr < IThumbnailHandlerFactory > pthumbnailhandlerfactory;
 
-      HRESULT hrThumbnailHandlerFactory = getfileimage.m_pshellfolder.As(pthumbnailhandlerfactory);
+      HRESULT hrThumbnailHandlerFactory = getfileimage.m_pshellfolder.as(pthumbnailhandlerfactory);
 
       if (SUCCEEDED(hrThumbnailHandlerFactory) && pthumbnailhandlerfactory)
       {
@@ -349,7 +349,7 @@ namespace windowing_win32
                   if (SUCCEEDED(hrThumbnail) && hbitmap != nullptr)
                   {
 
-                     pimage = create_image_from_hbitmap(hbitmap);
+                     pimage = create_image_from_hbitmap(this, hbitmap);
 
                   }
 
@@ -560,7 +560,7 @@ namespace windowing_win32
 
       comptr < IShellIcon > pshellicon;
 
-      HRESULT hrShellIcon= getfileimage.m_pshellfolder.As(pshellicon);
+      HRESULT hrShellIcon= getfileimage.m_pshellfolder.as(pshellicon);
 
       if (SUCCEEDED(hrShellIcon) && pshellicon)
       {

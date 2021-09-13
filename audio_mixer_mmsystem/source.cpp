@@ -67,7 +67,7 @@ namespace multimedia
                               m_mixerline.dwLineID, device->m_hMixer, mmrc);
 
 
-            message_box(strMessage, nullptr, e_message_box_icon_exclamation);
+            //message_box(strMessage, nullptr, e_message_box_icon_exclamation);
 
          }
          else
@@ -237,7 +237,7 @@ namespace multimedia
 
             strMessage.Format("mixerGetLineInfo(src=%u) failed on hmx=%.04Xh, mmr=%u!",
                               dwSource, device->m_hMixer, mmrc);
-            message_box(strMessage, nullptr, e_message_box_icon_exclamation);
+            //message_box(strMessage, nullptr, e_message_box_icon_exclamation);
 
          }
 

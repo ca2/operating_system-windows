@@ -25,4 +25,6 @@ void windowing_win32_factory_exchange(::factory_map * pfactorymap)
 
    pfactorymap->create_factory < ::windowing_win32::keyboard, ::windowing::keyboard >();
 
+   pfactorymap->create_factory < ::windowing_win32::node, ::acme::node >();
+
 }

@@ -7159,7 +7159,7 @@ namespace draw2d_gdiplus
 
             ::image_pointer pimage1;
 
-            pimage1 = create_image(rectText.size());
+            pimage1 = m_pcontext->context_image()->create_image(rectText.size());
 
             pimage1->get_graphics()->set(get_current_font());
 

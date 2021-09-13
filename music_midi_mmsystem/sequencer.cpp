@@ -131,7 +131,7 @@ namespace music
                      
                      m_psequence->set_state(sequence::e_state_opened);
 
-                     __throw(multimedia::exception(multimedia::exception_midi, estatus));
+                     throw multimedia::exception(multimedia::exception_midi, estatus);
 
                   }
 
@@ -357,7 +357,7 @@ namespace music
 
                      m_psequence->set_state(sequence::e_state_opened);
 
-                     __throw(multimedia::exception(multimedia::exception_midi, estatus));
+                     throw multimedia::exception(multimedia::exception_midi, estatus);
 
                   }
 
@@ -381,7 +381,7 @@ namespace music
 
                   m_psequence->set_state(sequence::e_state_opened);
 
-                  __throw(multimedia::exception(multimedia::exception_midi, estatus));
+                  throw multimedia::exception(multimedia::exception_midi, estatus);
 
                }
                else
@@ -419,7 +419,7 @@ namespace music
 
                   m_psequence->set_state(sequence::e_state_opened);
 
-                  __throw(multimedia::exception(multimedia::exception_midi, estatus));
+                  throw multimedia::exception(multimedia::exception_midi, estatus);
 
                }
                else

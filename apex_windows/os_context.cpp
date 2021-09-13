@@ -1769,7 +1769,7 @@ retry:
 
       comptr < IPersistFile > ppersistfile;
 
-      if (SUCCEEDED(hr = pshelllink.As(ppersistfile)))
+      if (SUCCEEDED(hr = pshelllink.as(ppersistfile)))
       {
 
          if (SUCCEEDED(hr = ppersistfile->Load(wstrFileIn, STGM_READ)))
