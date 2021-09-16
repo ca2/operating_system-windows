@@ -21,85 +21,97 @@ namespace windowing_win32
    }
 
 
-   ::e_status node::register_extended_event_listener(::matter * pmatter, bool bMouse, bool bKeyboard)
+   ::e_status node::install_keyboard_hook(::matter * pmatterListener)
    {
 
-      ::e_status estatusMouse = ::success_none;
+      auto estatus = ::keyboard_hook::install(pmatterListener);
 
-      ::e_status estatusKeyboard = ::success_none;
-
-      if (bMouse)
+      if (estatus.succeeded())
       {
 
-         estatusMouse = ::mouse_hook::install(pmatter);
+         fork(__routine([]()
+            {
 
-         if (estatusMouse.succeeded())
-         {
+               ::keyboard_hook::run();
 
-            fork(__routine([]()
-               {
-
-                  ::mouse_hook::run();
-
-               }));
-
-         }
+            }));
 
       }
 
-      if (bKeyboard)
+      if (!estatus)
       {
 
-         estatusKeyboard = ::keyboard_hook::install(pmatter);
-
-         if (estatusKeyboard.succeeded())
-         {
-
-            fork(__routine([]()
-               {
-
-                  ::keyboard_hook::run();
-
-               }));
-
-         }
+         return estatus;
 
       }
-
-      auto estatus = estatusMouse & estatusKeyboard;
 
       return estatus;
 
    }
 
 
-   ::e_status node::unregister_extended_event_listener(::matter * pmatter, bool bMouse, bool bKeyboard)
+   ::e_status node::uninstall_keyboard_hook(::matter * pmatterListener)
    {
 
-      ::e_status estatusMouse = ::success_none;
+      auto estatus = ::keyboard_hook::uninstall(pmatterListener);
 
-      ::e_status estatusKeyboard = ::success_none;
-
-      if (bMouse)
+      if (!estatus)
       {
 
-         estatusMouse = ::mouse_hook::uninstall(pmatter);
-
-
-      }
-
-      if (bKeyboard)
-      {
-
-         estatusKeyboard = ::keyboard_hook::uninstall(pmatter);
+         return estatus;
 
       }
-
-      auto estatus = estatusMouse & estatusKeyboard;
 
       return estatus;
 
    }
+
+
+   ::e_status node::install_mouse_hook(::matter * pmatterListener)
+   {
+
+      auto estatus = ::mouse_hook::install(pmatterListener);
+
+      if (estatus.succeeded())
+      {
+
+         fork(__routine([]()
+            {
+
+               ::mouse_hook::run();
+
+            }));
+
+      }
+
+      if (!estatus)
+      {
+
+         return estatus;
+
+      }
+
+      return estatus;
+
+   }
+
+
+   ::e_status node::uninstall_mouse_hook(::matter * pmatterListener)
+   {
+
+      auto estatus = ::mouse_hook::uninstall(pmatterListener);
+
+      if (!estatus)
+      {
+
+         return estatus;
+
+      }
+
+      return estatus;
+
+   }
+
 
 
 } // namespace linux
