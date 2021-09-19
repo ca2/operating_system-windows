@@ -255,7 +255,7 @@ namespace windows
 
          //output_debug_string("test");
 
-         __throw(::exception::exception("file::file_context::move Could not move file, could not open source file"));
+         __throw(::exception("file::file_context::move Could not move file, could not open source file"));
 
       }
 
@@ -295,7 +295,7 @@ namespace windows
          i32 err = errno;
          string strError;
          strError.Format("Failed to delete file error=%d", err);
-         __throw(::exception::exception(strError));
+         __throw(::exception(strError));
       }
 #endif
 
@@ -359,7 +359,7 @@ namespace windows
          {
             string strError;
             strError.Format("Failed to delete file error=%d", err);
-            __throw(::exception::exception(strError));
+            __throw(::exception(strError));
          }
       }
 #endif

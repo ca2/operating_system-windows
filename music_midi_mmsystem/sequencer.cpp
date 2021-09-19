@@ -1243,7 +1243,7 @@ namespace music
 
             ::music::midi::sequencer::OnEvent(pevent);
 
-            switch (pevent->m_eevent)
+            switch (psubject->m_id)
             {
             case sequence::e_event_operation:
             {
@@ -1266,7 +1266,7 @@ namespace music
 
                synchronous_lock synchronouslock(mutex());
 
-               LPMIDIHDR lpmidihdr = (LPMIDIHDR)pevent->m_puserdata;
+               LPMIDIHDR lpmidihdr = (LPMIDIHDR)psubject->m_puserdata;
 
                ::e_status     estatus = fill_buffer(lpmidihdr);
 
@@ -1439,9 +1439,9 @@ namespace music
 
          //   event * pevent = new event();
 
-         //   pevent->m_eevent = eevent;
-         //   pevent->m_psequence = this;
-         //   pevent->m_puserdata = lpmidihdr;
+         //   psubject->m_id = eevent;
+         //   psubject->m_psequence = this;
+         //   psubject->m_puserdata = lpmidihdr;
 
          //   return pevent;
 
@@ -1463,9 +1463,9 @@ namespace music
 
             manual_reset_event ev;
 
-            ev.ResetEvent();
+            subject.ResetEvent();
 
-            mmr = midiOutOpen(&hmidiout, uDeviceID, (DWORD_PTR)ev.hsync(), 0, CALLBACK_THREAD);
+            mmr = midiOutOpen(&hmidiout, uDeviceID, (DWORD_PTR)subject.hsync(), 0, CALLBACK_THREAD);
 
             if (mmr != MMSYSERR_NOERROR)
                return translate_os_result(mmr);
@@ -1503,7 +1503,7 @@ namespace music
             while (!(mh.dwFlags & MHDR_DONE))
             {
 
-               ev.wait();
+               subject.wait();
 
             }
 
@@ -1576,8 +1576,8 @@ namespace music
             for (i = 0; i < eventptra.get_size(); i++)
             {
                pevent = eventptra[i];
-               ASSERT(pevent->GetFlags() & 1);
-               iSize += (i32)pevent->GetDataSize();
+               ASSERT(psubject->GetFlags() & 1);
+               iSize += (i32)psubject->GetDataSize();
                iSize += sizeof(file::midi_stream_event_header);
             }
 
@@ -1592,10 +1592,10 @@ namespace music
             for (i = 0; i < eventptra.get_size(); i++)
             {
                pevent = eventptra[i];
-               lpbParam = pevent->GetData();
+               lpbParam = psubject->GetData();
                lpdwType = (LPDWORD)lpbParam;
                pheader = (file::midi_stream_event_header*)& m_psequence->m_pfile->m_memstorageF1.get_data()[iSize];
-               pheader->m_dwLength = (u32)pevent->GetDataSize();
+               pheader->m_dwLength = (u32)psubject->GetDataSize();
                pheader->m_dwType = *lpdwType;
                memcpy_dup(
                   &m_psequence->m_pfile->m_memstorageF1.get_data()[iSize + sizeof(file::midi_stream_event_header)],

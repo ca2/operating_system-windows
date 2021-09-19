@@ -50,8 +50,8 @@ void __node_apex_factory_exchange(::factory_map * pfactorymap)
    //create_factory < ::windows::stdio_file, ::file::text_file >();
    //create_factory < ::windows::file, ::file::file >();
    create_factory < ::windows::os_context, ::os_context >();
-   create_factory < ::windows::pipe, ::process::pipe >();
-   create_factory < ::windows::process, ::process::process >();
+   create_factory < ::windows::pipe, ::operating_system::pipe >();
+   create_factory < ::windows::process, ::operating_system::process >();
 
    //create_factory < ::windows::console, ::console::console >();
    create_factory < ::windows::crypto, ::crypto::crypto >();

@@ -68,7 +68,7 @@ namespace production
 
 
       void GetAreaThumbRect(LPRECT lprect, i32 iArea);
-      void on_hit_test(::user::item & item);
+      void on_hit_test(::item & item);
 
 
       void release_production();
@@ -82,11 +82,11 @@ namespace production
       virtual void _001OnTabClick(i32 iTab);
       virtual void install_message_routing(::channel * pchannel);
       virtual bool pre_create_window(::user::system * pusersystem);
-      virtual void on_subject(::subject::subject * psubject, ::subject::context * pcontext) override;
+      virtual void handle(::subject * psubject, ::context * pcontext) override;
 
       ::user::document * get_document();
 
-      //virtual void on_subject(::subject::subject * psubject, ::subject::context * pcontext) override;
+      //virtual void handle(::subject * psubject, ::context * pcontext) override;
       DECLARE_MESSAGE_HANDLER(_001OnLButtonDown);
       DECLARE_MESSAGE_HANDLER(_001OnLButtonUp);
       virtual void _001OnTimer(::timer * ptimer);

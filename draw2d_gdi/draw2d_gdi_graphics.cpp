@@ -3941,7 +3941,7 @@ namespace draw2d_gdi
 
       // return dynamic_cast < ::draw2d::palette * > (::draw2d_gdi::object::from_handle(get_application(), ::SelectPalette(get_handle1(), (HPALETTE)pPalette->get_os_data(), bForceBackground))) != false;
 
-      ::exception::throw_not_implemented();
+      throw interface_only_exception();
 
       return nullptr;
 

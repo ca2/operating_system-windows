@@ -53,10 +53,10 @@ namespace production
    }
 
 
-   void pane_view::on_subject(::subject::subject * psubject, ::subject::context * pcontext)
+   void pane_view::handle(::subject * psubject, ::context * pcontext)
    {
 
-      ::user::tab_view::on_subject(psubject, pcontext);
+      ::user::tab_view::handle(psubject, pcontext);
 
    }
 
@@ -251,11 +251,11 @@ namespace production
       get_parent_frame()->hide();
    }
 
-   void pane_view::on_control_event(::user::control_event * pevent)
+   void pane_view::handle(::subject * psubject, ::context * pcontext)
    {
-      if(pevent->m_eevent == ::user::e_event_set_check)
+      if(psubject->m_id == ::e_subject_set_check)
       {
-         if(pevent->m_puserinteraction->m_id == "clean")
+         if(psubject->m_puserinteraction->m_id == "clean")
          {
             __pointer(::user::interaction) pinteraction = m_pviewOptions->get_child_by_id("clean");
             __pointer(::user::check_box) pcheckbox =  (pinteraction);
@@ -263,7 +263,7 @@ namespace production
             psubject->payload(id_clean) = pcheckbox->echeck() == ::check_checked;
             get_document()->update_all_views(psubject);
          }
-         else if(pevent->m_puserinteraction->m_id == "build")
+         else if(psubject->m_puserinteraction->m_id == "build")
          {
             __pointer(::user::interaction) pinteraction = m_pviewOptions->get_child_by_id("build");
             __pointer(::user::check_box) pcheckbox =  (pinteraction);

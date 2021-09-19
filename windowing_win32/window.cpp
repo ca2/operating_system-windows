@@ -1559,7 +1559,7 @@ namespace windowing_win32
    //__pointer(window) window::get_active_window()
    //{
 
-   //   __throw(error_interface_only);
+   //   throw ::interface_only_exception();
 
    //   return nullptr;
 
@@ -1974,7 +1974,7 @@ namespace windowing_win32
 
       auto puserinteraction = m_pimpl->m_puserinteraction;
 
-      if (!puserinteraction->m_bUserPrimitiveOk)
+      if (!puserinteraction->m_bUserElementOk)
       {
 
          return true;
@@ -3421,7 +3421,7 @@ namespace windowing_win32
 
       ASSERT(::IsWindow(get_hwnd()));
 
-      ::exception::throw_not_implemented();
+      throw interface_only_exception();
       return false;
       //      return ::DrawCaption(get_hwnd(), (HDC)(dynamic_cast<::windows::graphics * >(pgraphics))->get_hwnd(), prc, uFlags) != false;
 
@@ -3935,7 +3935,7 @@ namespace windowing_win32
 
    //   ASSERT(::IsWindow(((window *)this)->get_hwnd()));
 
-   //   ::exception::throw_not_implemented();
+   //   throw interface_only_exception();
    //   //      const_cast < ::windowing_win32::window * > (this)->send_message(WM_PRINT, (wparam)(dynamic_cast<::windows::graphics * >(pgraphics))->get_hwnd(), (lparam) dwFlags);
 
    //}
@@ -3945,7 +3945,7 @@ namespace windowing_win32
 
    //   ASSERT(::IsWindow(((window *)this)->get_hwnd()));
 
-   //   ::exception::throw_not_implemented();
+   //   throw interface_only_exception();
    //   //const_cast < ::windowing_win32::window * > (this)->send_message(WM_PRINTCLIENT, (wparam)(dynamic_cast<::windows::graphics * >(pgraphics))->get_hwnd(), (lparam) dwFlags);
 
    //}
@@ -4896,12 +4896,12 @@ namespace windowing_win32
 
    void window::on_set_parent(::user::interaction * puserinteraction) {
 
-      __throw(error_interface_only);
+      throw ::interface_only_exception();
    }
 
     bool window::get_rect_normal(RECTANGLE_I32 * prectangle) {
 
-       __throw(error_interface_only);
+       throw ::interface_only_exception();
        return false;
     }
 
@@ -4909,7 +4909,7 @@ namespace windowing_win32
     //void window::show_task(bool bShow)
     //{
 
-    //   __throw(error_interface_only);
+    //   throw ::interface_only_exception();
 
     //}
     //
@@ -4917,7 +4917,7 @@ namespace windowing_win32
     void window::window_show_change_visibility(::e_display edisplay, ::e_activation eactivation)
     {
 
-       __throw(error_interface_only);
+       throw ::interface_only_exception();
 
     }
 
@@ -5426,7 +5426,7 @@ namespace windowing_win32
 //
 //      }
 //
-//      bool bUserElementalOk = !m_bDestroyImplOnly && puserinteraction && puserinteraction->m_bUserPrimitiveOk;
+//      bool bUserElementalOk = !m_bDestroyImplOnly && puserinteraction && puserinteraction->m_bUserElementOk;
 //
 //      if (message == e_message_key_down ||
 //         message == e_message_key_up ||
@@ -5893,7 +5893,7 @@ namespace windowing_win32
 //      if (message == e_message_event)
 //      {
 //
-//         puserinteraction->on_control_event(pmessage);
+//         puserinteraction->handle_event(pmessage);
 //
 //         return;
 //
@@ -6220,7 +6220,7 @@ namespace windowing_win32
 
          }
 
-         if (m_pimpl->m_puserinteraction->m_bUserPrimitiveOk)
+         if (m_pimpl->m_puserinteraction->m_bUserElementOk)
          {
 
             pcreate->m_lresult = 0;

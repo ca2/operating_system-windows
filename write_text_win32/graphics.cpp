@@ -321,7 +321,7 @@ namespace draw2d_gdiplus
       //VERIFY(::SetBrushOrgEx(get_handle1(), point.x, point.y, &point));
       //return point;
 
-      __throw(error_interface_only);
+      throw ::interface_only_exception();
 
       return nullptr;
 
@@ -333,7 +333,7 @@ namespace draw2d_gdiplus
    //   //ASSERT(get_handle2() != nullptr);
    //   //return ::EnumObjects(get_handle2(), nObjectType, (GOBJENUMPROC)pfn, lpData);
 
-   //   __throw(error_interface_only);
+   //   throw ::interface_only_exception();
 
    //   return -1;
 
@@ -405,7 +405,7 @@ namespace draw2d_gdiplus
 
    //   return 0;
 
-   //   //__throw(error_interface_only);
+   //   //throw ::interface_only_exception();
 
    //   //return ::RealizePalette(get_handle1());
    //}
@@ -514,7 +514,7 @@ namespace draw2d_gdiplus
       //::GetWindowOrgEx(get_handle2(), &point);
 
       //return point;
-      __throw(error_interface_only);
+      throw ::interface_only_exception();
 
       return nullptr;
 
@@ -527,7 +527,7 @@ namespace draw2d_gdiplus
       //::GetWindowExtEx(get_handle2(), &::size_f64);
       //return ::size_f64;
 
-      __throw(error_interface_only);
+      throw ::interface_only_exception();
 
       return nullptr;
 
@@ -592,7 +592,7 @@ namespace draw2d_gdiplus
    {
 
       //return ::FillRgn(get_handle1(), (HRGN)pRgn->get_os_data(), (HBRUSH)pBrush->get_os_data()) != false;
-      __throw(error_interface_only);
+      throw ::interface_only_exception();
 
       return false;
 
@@ -603,7 +603,7 @@ namespace draw2d_gdiplus
    {
 
       //return ::FrameRgn(get_handle1(), (HRGN)pRgn->get_os_data(), (HBRUSH)pBrush->get_os_data(), nWidth, nHeight) != false;
-      __throw(error_interface_only);
+      throw ::interface_only_exception();
 
       return false;
 
@@ -617,7 +617,7 @@ namespace draw2d_gdiplus
 
       //return ::InvertRgn(get_handle1(), (HRGN)pRgn->get_os_data()) != false;
 
-      __throw(error_interface_only);
+      throw ::interface_only_exception();
 
       return false;
 
@@ -631,7 +631,7 @@ namespace draw2d_gdiplus
 
       //return ::PaintRgn(get_handle1(), (HRGN)pRgn->get_os_data())  != false;
 
-      __throw(error_interface_only);
+      throw ::interface_only_exception();
 
       return false;
 
@@ -645,7 +645,7 @@ namespace draw2d_gdiplus
 
    //   //return ::PtVisible(get_handle1(), x, y) != false;
 
-   //   __throw(error_interface_only);
+   //   throw ::interface_only_exception();
 
    //   return false;
 
@@ -677,7 +677,7 @@ namespace draw2d_gdiplus
       //VERIFY(::GetCurrentPositionEx(get_handle2(), &point));
       //return point;
 
-      __throw(error_interface_only);
+      throw ::interface_only_exception();
 
       return nullptr;
 
@@ -2388,7 +2388,7 @@ namespace draw2d_gdiplus
       //return ::GetTextMetricsW(get_handle1(), pmetric) != false;
 
 
-      ::exception::throw_not_implemented();
+      throw interface_only_exception();
 
       return false;
 
@@ -3451,7 +3451,7 @@ namespace draw2d_gdiplus
    //void graphics::DrawDragRect(const rectangle_i32 &  prectangle, const ::size_f64 & size, const rectangle_i32 &  lpRectLast, const ::size_f64 & sizeLast, ::draw2d::brush* pBrush, ::draw2d::brush* pBrushLast)
    //{
 
-   //   ::exception::throw_not_implemented();
+   //   throw interface_only_exception();
 
    //   /*
 
@@ -5632,7 +5632,7 @@ namespace draw2d_gdiplus
        if (::is_null(m_pgraphics))
        {
 
-           __throw(::exception::exception("invalid state"));
+           __throw(::exception("invalid state"));
 
        }
 

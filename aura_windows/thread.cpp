@@ -98,7 +98,7 @@ void __term_threading()
 //   try
 //   {
 //
-//      pthread->::exception::translator::attach();
+//      pthread->::exception_translator::attach();
 //
 //   }
 //   catch(...)
@@ -126,7 +126,7 @@ void __term_threading()
 //      if(pthread != nullptr)
 //      {
 //
-//         pthread->::exception::translator::detach();
+//         pthread->::exception_translator::detach();
 //
 //      }
 //

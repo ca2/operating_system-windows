@@ -99,7 +99,7 @@ bool __node_init_thread(::thread * pthread)
    try
    {
 
-      pthread->::exception::translator::attach();
+      pthread->::exception_translator::attach();
 
    }
    catch(...)
@@ -127,7 +127,7 @@ bool __node_term_thread(::thread * pthread)
       if(pthread != nullptr)
       {
 
-         pthread->::exception::translator::detach();
+         pthread->::exception_translator::detach();
 
       }
 

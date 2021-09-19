@@ -49,7 +49,7 @@ void __node_acme_factory_exchange(::factory_map * pfactorymap)
 
    //pfactorymap->create_factory < ::windows::stdio_file, ::file::text_file >();
    //pfactorymap->create_factory < ::windows::os_context, ::os_context >();
-   //pfactorymap->create_factory < ::windows::future, ::process::process >();
+   //pfactorymap->create_factory < ::windows::future, ::operating_system::process >();
 
    //pfactorymap->create_factory < ::windows::crypto, ::crypto::crypto >();
    //pfactorymap->create_factory < ::windows::ip_enum, ::net::ip_enum >();

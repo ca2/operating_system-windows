@@ -134,7 +134,7 @@ namespace audio_mmsystem
          }
 
       }
-      catch(const ::exception::exception &)
+      catch(const ::exception &)
       {
 
          return error_failed;

@@ -97,7 +97,7 @@ namespace production
    
 
 
-   void impact::on_subject(::subject::subject * psubject, ::subject::context * pcontext)
+   void impact::handle(::subject * psubject, ::context * pcontext)
    {
       if(update == ::id_update_current_area)
       {
@@ -380,24 +380,24 @@ namespace production
       }
    }
 
-   void impact::on_hit_test(::user::item & item)
+   void impact::on_hit_test(::item & item)
    {
 
       ::rectangle_i32 rectArea;
       GetAreaThumbRect(rectArea, m_iV);
       if (rectArea.contains(item.m_pointHitTest))
       {
-         item = {::user::e_element_area, m_iV   };
+         item = {::e_element_area, m_iV   };
          return;
       }
       GetAreaThumbRect(rectArea, m_iVs);
       if(rectArea.contains(item.m_pointHitTest))
       {
-         item = { ::user::e_element_area, m_iVs };
+         item = { ::e_element_area, m_iVs };
          return;
       }
       
-      item = ::user::e_element_none;
+      item = ::e_element_none;
    
 
    }

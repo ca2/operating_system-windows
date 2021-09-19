@@ -47,7 +47,7 @@
 //   if(nullptr == m_hTimerQueue)
 //   {
 //
-//      __throw(::exception::exception("integer_exception -1"));
+//      __throw(::exception("integer_exception -1"));
 //
 //   }
 //
@@ -168,7 +168,7 @@ bool on_init_timer_thread();
 //      }
 //
 //   }
-//   catch (::exception::exception &)
+//   catch (::exception &)
 //   {
 //
 //   }

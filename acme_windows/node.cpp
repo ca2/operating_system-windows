@@ -17,7 +17,7 @@ namespace acme
       node::node()
       {
 
-         create_factory < ::windows::exception::engine, ::exception::engine >();
+         create_factory < ::windows::exception_engine, ::exception_engine >();
 
          ::windows::callstack::s_pcriticalsection = new critical_section();
 
@@ -1752,7 +1752,7 @@ namespace acme
 
 #if defined(_UWP)
 
-         throw interface_only_exception();
+         throw ::interface_only_exception();
 
 #elif defined(WINDOWS_DESKTOP)
 

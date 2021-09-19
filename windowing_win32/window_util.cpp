@@ -971,7 +971,7 @@ namespace windowing_win32
 //
 //#else
 //
-//      ::exception::throw_not_implemented();
+//      throw interface_only_exception();
 //
 //#endif
 

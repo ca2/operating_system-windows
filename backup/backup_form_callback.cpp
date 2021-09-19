@@ -20,14 +20,14 @@ namespace backup
    }
 
 
-   void form_callback::on_control_event(::user::control_event * pevent)
+   void form_callback::handle(::subject * psubject, ::context * pcontext)
    {
 
-      auto pview = pevent->get_form();
+      auto pview = psubject->get_form();
 
-      if(pevent->m_eevent == ::user::e_event_click)
+      if(psubject->m_id == ::e_subject_click)
       {
-         if(pevent->m_puserinteraction->m_id == "lfs")
+         if(psubject->m_puserinteraction->m_id == "lfs")
          {
             auto pupdate = new_update();
             pupdate->m_actioncontext = ::e_source_system;
@@ -39,26 +39,26 @@ namespace backup
             string strPath;
             pinteraction->_001SetText(strPath, pupdate->m_actioncontext);
 
-            pevent->Ret();
+            psubject->Ret();
 
             return;
 
 
          }
-         else if(pevent->m_puserinteraction->m_id == "ftp")
+         else if(psubject->m_puserinteraction->m_id == "ftp")
          {
             auto pupdate = new_update();
             pupdate->m_actioncontext = ::e_source_system;
             psubject->id() = id_browse;
             psubject->payload(id_form) = "filemanager_add_location_ftp.xhtml";
             dynamic_cast < ::user::form_view * > (pview)->get_document()->update_all_views(psubject);
-            pevent->Ret();
+            psubject->Ret();
 
             return;
 
 
          }
-         else if(pevent->m_puserinteraction->m_id == "submit")
+         else if(psubject->m_puserinteraction->m_id == "submit")
          {
             /*         if(pview->m_strPathName == "filemanager_add_location_lfs.xhtml")
                      {
@@ -86,7 +86,7 @@ namespace backup
                         //ptext->_001GetText(update.m_strReplace);
                         pview->get_document()->update_all_views(psubject);
                      }*/
-            pevent->Ret();
+            psubject->Ret();
 
             return;
 

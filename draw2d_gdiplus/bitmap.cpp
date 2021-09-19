@@ -210,7 +210,7 @@ namespace draw2d_gdiplus
    {
 
 
-      ::exception::throw_not_implemented();
+      throw interface_only_exception();
 
       //::size_i32 size;
       //VERIFY(::SetBitmapDimensionEx((HBITMAP)get_handle(), nWidth, nHeight, &size));

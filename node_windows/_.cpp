@@ -5,7 +5,7 @@
 //void CLASS_DECL_ACME_WINDOWS __cdecl _ca2_purecall()
 //{
 //
-//   __throw(::exception::exception());
+//   __throw(::exception());
 //
 //}
 //

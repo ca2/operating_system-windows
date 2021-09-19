@@ -53,7 +53,7 @@ namespace draw2d_gdiplus
       else
       {
 
-         throw ::exception::exception("path does not have last point_i32");
+         throw ::exception("path does not have last point_i32");
 
       }
 

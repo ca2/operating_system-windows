@@ -10,7 +10,7 @@ namespace windows
 
 
       class CLASS_DECL_ACME engine :
-         virtual public ::exception::engine
+         virtual public ::exception_engine
       {
       public:
 

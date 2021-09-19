@@ -53,10 +53,10 @@ namespace backup
    }
 
 
-   void pane_view::on_subject(::subject::subject * psubject, ::subject::context * pcontext)
+   void pane_view::handle(::subject * psubject, ::context * pcontext)
    {
 
-      ::user::tab_view::on_subject(psubject, pcontext);
+      ::user::tab_view::handle(psubject, pcontext);
 
    }
 
@@ -115,21 +115,21 @@ namespace backup
    }
 
 
-   void pane_view::on_control_event(::user::control_event * pevent)
+   void pane_view::handle(::subject * psubject, ::context * pcontext)
    {
 
-      ::userex::pane_tab_view::on_control_event(pevent);
+      ::userex::pane_tab_view::handle(psubject, pcontext);
 
-      if (pevent->m_bRet)
+      if (psubject->m_bRet)
       {
 
          return;
 
       }
 
-      ::production::form_callback::on_control_event(pevent);
+      ::production::form_callback::handle(psubject, pcontext);
 
-      if (pevent->m_bRet)
+      if (psubject->m_bRet)
       {
 
          return;
