@@ -29,7 +29,7 @@ namespace keyboard_hook
 
             auto emessage = (enum_message)wParam;
 
-            g_pmatter->handle(emessage, pk->vkCode);
+            g_pmatter->call(emessage, pk->vkCode);
 
             output_debug_string("X");
 
@@ -69,7 +69,7 @@ namespace keyboard_hook
 
             auto emessage = (enum_message)wParam;
 
-            g_pmatter->handle(emessage, pk->vkCode);
+            g_pmatter->call(emessage, pk->vkCode);
 
             output_debug_string("Y");
 

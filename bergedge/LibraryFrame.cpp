@@ -429,7 +429,7 @@ BOOL CLibraryFrame::Create(CWnd* pParent,DWORD dwBarStyle, PVOID p)
    DWORD dwExStyle = 0;
    m_strCaption = "Library";
 
-   CRect rectangle = rectDefault;
+   CRect rectangle = rectangleDefault;
    if(!CWnd::CreateEx(dwExStyle,AfxRegisterWndClass(CS_DBLCLKS,::LoadCursor(nullptr,IDC_ARROW)),
       m_strCaption,dwStyle,rectangle.left,rectangle.top,rectangle.right - rectangle.left,
       rectangle.bottom - rectangle.top,pParent->GetSafeHwnd(),(HMENU)(UINT_PTR)0,p))

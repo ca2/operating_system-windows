@@ -39,8 +39,8 @@ namespace production
       i32                     m_iVsW;
       ::image_pointer             m_pimageV;
       ::image_pointer             m_pimageVs;
-      ::draw2d::brush_pointer          m_brushBkActive;
-      ::draw2d::brush_pointer          m_brushBkInactive;
+      ::draw2d::brush_pointer          m_pbrushBkActive;
+      ::draw2d::brush_pointer          m_pbrushBkInactive;
 
 
       impact(::object * pobject);

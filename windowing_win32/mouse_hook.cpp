@@ -30,7 +30,7 @@ namespace mouse_hook
 
             enum_message emessage = (enum_message)wParam;
 
-            g_pmatter->handle(emessage);
+            g_pmatter->call(emessage);
 
          }
 

@@ -20,7 +20,7 @@ namespace draw2d_gdi
       virtual bool GetLogFont(LOGFONTW* pLogFont) override;
 
 
-      virtual void construct(const ::write_text::font & fontParam);
+      virtual void construct(const ::write_text::font & pfontParam);
 
 
       virtual bool CreateFontIndirect(const LOGFONTW* lpLogFont);

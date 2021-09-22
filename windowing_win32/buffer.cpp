@@ -68,7 +68,7 @@ namespace windowing_win32
 
       defer_create_mutex();
 
-      m_rectLast.Null();
+      m_rectangleLast.Null();
 
    }
 
@@ -614,12 +614,12 @@ namespace windowing_win32
 
                }
 
-               RECT rectProbe;
+               RECT rectangleProbe;
 
-               if (::GetWindowRect(get_hwnd(), &rectProbe))
+               if (::GetWindowRect(get_hwnd(), &rectangleProbe))
                {
 
-                  INFO("GetWindowRect (%d, %d) - (%d, %d)", rectProbe.left, rectProbe.top, rectProbe.right, rectProbe.bottom);
+                  INFO("GetWindowRect (%d, %d) - (%d, %d)", rectangleProbe.left, rectangleProbe.top, rectangleProbe.right, rectangleProbe.bottom);
 
                }
 
@@ -634,13 +634,13 @@ namespace windowing_win32
 
                string str;
 
-               rectangle_i32 rectDrawing(point, size);
+               rectangle_i32 rectangleDrawing(point, size);
 
-               rectangle_i32 rectWindowCurrent;
+               rectangle_i32 rectangleWindowCurrent;
 
-               GetWindowRect(hwnd, (RECT *) &rectWindowCurrent);
+               GetWindowRect(hwnd, (RECT *) &rectangleWindowCurrent);
 
-               if (rectDrawing.size() == pimage->m_rectTag.size())
+               if (rectangleDrawing.size() == pimage->m_rectangleTag.size())
                {
 
 
@@ -653,16 +653,16 @@ namespace windowing_win32
                //}
 
 
-               //if (rectDrawing.size() == pimage->m_rectTag.size())
+               //if (rectangleDrawing.size() == pimage->m_rectangleTag.size())
                //{
 
 
                   ::UpdateLayeredWindow(hwnd, m_hdcScreen, (POINT*)&point, (SIZE*)&size, buffer.m_hdc, (POINT*)&pointSrc, rgb(0, 0, 0), &blendPixelFunction, ULW_ALPHA);
                   //::SetWindowPos(hwnd, nullptr,
-                  //   rectDrawing.left,
-                  //   rectDrawing.top,
-                  //   rectDrawing.width(),
-                  //   rectDrawing.height(),
+                  //   rectangleDrawing.left,
+                  //   rectangleDrawing.top,
+                  //   rectangleDrawing.width(),
+                  //   rectangleDrawing.height(),
                   //   SWP_NOZORDER
                   //   | SWP_ASYNCWINDOWPOS
                   //   | SWP_FRAMECHANGED

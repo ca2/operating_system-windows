@@ -68,9 +68,9 @@ namespace draw2d_gdi
       ::image_pointer pimage_work(const ::size_i32 & size, bool bReset);
       image fill_image_work(COLORREF clr, const ::size_i32 & size, bool bReset);
 
-      bool internal_fill_path(void (::draw2d_gdi::graphics::* pfnInternalSetPath)(void *), void * pparam, const ::rectangle_i32 & rectParam, ::draw2d::brush * pbrush);
-      bool internal_stroke_path(void (::draw2d_gdi::graphics::* pfnInternalSetPath)(void *), void * pparam, const ::rectangle_i32 & rectParam, ::draw2d::pen * ppen);
-      bool internal_fill_and_stroke_path(void(::draw2d_gdi::graphics::* pfnInternalSetPath)(void *),void * pparam, const ::rectangle_i32 & rectParam,::draw2d::brush * pbrush,::draw2d::pen * ppen);
+      bool internal_fill_path(void (::draw2d_gdi::graphics::* pfnInternalSetPath)(void *), void * pparam, const ::rectangle_i32 & rectangleParam, ::draw2d::brush * pbrush);
+      bool internal_stroke_path(void (::draw2d_gdi::graphics::* pfnInternalSetPath)(void *), void * pparam, const ::rectangle_i32 & rectangleParam, ::draw2d::pen * ppen);
+      bool internal_fill_and_stroke_path(void(::draw2d_gdi::graphics::* pfnInternalSetPath)(void *),void * pparam, const ::rectangle_i32 & rectangleParam,::draw2d::brush * pbrush,::draw2d::pen * ppen);
 
       void internal_set_path(void * pparam);
       void internal_set_path_ellipse(void * pparam);
@@ -104,8 +104,8 @@ namespace draw2d_gdi
       virtual int SaveDC() override;
       virtual bool RestoreDC(int nSavedDC) override;
       int GetDeviceCaps(int nIndex) override;
-      UINT SetBoundsRect(const ::rectangle_i32 & rectBounds, UINT flags) override;
-      UINT GetBoundsRect(LPRECT rectBounds, UINT flags) override;
+      UINT SetBoundsRect(const ::rectangle_i32 & rectangleBounds, UINT flags) override;
+      UINT GetBoundsRect(LPRECT rectangleBounds, UINT flags) override;
       bool ResetDC(const DEVMODE* lpDevMode) override;
 
       // Drawing-Tool Functions
@@ -473,7 +473,7 @@ namespace draw2d_gdi
       // Misc Helper Functions
       static ::draw2d::brush* GetHalftoneBrush(::object * pobject);
       //void DrawDragRect(const ::rectangle_i32 & rectangle, const ::size_i32 & size,
-      //                  const ::rectangle_i32 & rectLast, const ::size_i32 & sizeLast, ::draw2d::brush* pBrush = nullptr, ::draw2d::brush* pBrushLast = nullptr) override;
+      //                  const ::rectangle_i32 & rectangleLast, const ::size_i32 & sizeLast, ::draw2d::brush* pBrush = nullptr, ::draw2d::brush* pBrushLast = nullptr) override;
 
       using ::draw2d::graphics::fill_rectangle;
       void fill_rectangle(const ::rectangle_i32 & rectangle, COLORREF color32) override;

@@ -39,13 +39,15 @@ namespace draw2d_gdiplus
       virtual bool _load_thumbnail(const ::string & psz);
 
 
-      virtual bool map(bool) override;
+      virtual bool _map(bool) override;
       virtual bool _unmap() override;
 
-
-      virtual ::e_status create(const ::size_i32 & size, ::eobject eobjectCreate = DEFAULT_CREATE_IMAGE_OBJECT_FLAG, int iGoodStride = -1, bool bPreserve = false) override;
+      virtual ::e_status create_ex(const ::size_i32 & size, ::color32_t * pcolorref, int iScan, ::eobject eobjectCreate = DEFAULT_CREATE_IMAGE_OBJECT_FLAG, int iGoodStride = -1, bool bPreserve = false);
+      //::e_status create(const ::size_i32 & size, ::eobject eobjectCreate = DEFAULT_CREATE_IMAGE_OBJECT_FLAG, int iGoodStride = -1, bool bPreserve = false) override;
+      //::e_status initialize(const ::size_i32 & size, ::color32_t * pcolorref, int iScan, ::eobject eobjectCreate = DEFAULT_CREATE_IMAGE_OBJECT_FLAG) override;
       virtual bool host(const ::pixmap * pixmap) override;
       virtual bool on_host_read_pixels(const ::pixmap* pixmap) override;
+      using ::image::create;
       virtual ::e_status create(::draw2d::graphics * pgraphics) override;
       ::e_status destroy() override;
 

@@ -10,8 +10,8 @@ namespace production
    impact::impact(::object * pobject) :
       ::object(pobject),
       ::user::interaction(pobject),
-      m_brushBkActive(e_create),
-      m_brushBkInactive(e_create)
+      m_pbrushBkActive(e_create),
+      m_pbrushBkInactive(e_create)
    {
 
       m_pproduction = nullptr;
@@ -21,8 +21,8 @@ namespace production
 
       m_iLineHeight = 1;
       m_bLayout = false;
-      m_brushBkActive->create_solid(rgb(150, 255, 130));
-      m_brushBkInactive->create_solid(rgb(128, 208, 120));
+      m_pbrushBkActive->create_solid(rgb(150, 255, 130));
+      m_pbrushBkInactive->create_solid(rgb(128, 208, 120));
       LOGFONT lf;
       __memset(&lf, 0, sizeof(lf));
 
@@ -130,11 +130,11 @@ namespace production
       __UNREFERENCED_PARAMETER(pmessage);
 //      __pointer(::message::size) psize(pmessage);
 
-      ::rectangle_i32 rectDesktop;
-      best_monitor(rectDesktop);
+      ::rectangle_i32 rectangleDesktop;
+      best_monitor(rectangleDesktop);
 
-      m_iWScreen = rectDesktop.width();
-      m_iHScreen = rectDesktop.height();
+      m_iWScreen = rectangleDesktop.width();
+      m_iHScreen = rectangleDesktop.height();
       ::rectangle_i32 rectangleClient = get_client_rect();
       //GetClientRect(rectangleClient);
       rectangleClient.deflate(2, 2);
@@ -142,7 +142,7 @@ namespace production
       i32 iH = rectangleClient.height() / 2;
       iH = minimum(iH, 120);
       double r = (double) iW / (double) iH;
-      double rScreen = (double) rectDesktop.width() / (double) rectDesktop.height();
+      double rScreen = (double) rectangleDesktop.width() / (double) rectangleDesktop.height();
       if(r < rScreen)
       {
          iH = (i32) (iW / rScreen);
@@ -179,9 +179,9 @@ namespace production
 
       pgraphics->fill_rectangle(rectangleClient, argb(255, 255, 255, 255));
 
-      ::rectangle_i32 rectText(rectangleClient);
+      ::rectangle_i32 rectangleText(rectangleClient);
 
-      rectText.bottom -= 84;
+      rectangleText.bottom -= 84;
 
       ::rectangle_i32 rcItem;
 
@@ -194,20 +194,20 @@ namespace production
          iStart--;
          y -= m_iLineHeight;
       }
-      ::rectangle_i32 rectClip(rectText);
-      //ClientToScreen(rectClip);
+      ::rectangle_i32 rectangleClip(rectangleText);
+      //ClientToScreen(rectangleClip);
       ::draw2d::region_pointer rgnClip(e_create);
-      rgnClip->create_rect(rectClip);
-      //pgraphics->Draw3dRect(rectText, rgb(200, 200, 200), rgb(200, 200, 200));
+      rgnClip->create_rect(rectangleClip);
+      //pgraphics->Draw3dRect(rectangleText, rgb(200, 200, 200), rgb(200, 200, 200));
       pgraphics->SelectClipRgn(rgnClip);
       //single_lock synchronouslock(&m_pproduction->m_mutexStatus, true);
       //pgraphics->set_color(argb(0xcc, 90, 90, 90));
-      ::draw2d::brush_pointer brush(e_create);
-      brush->create_solid(argb(0xcc, 90, 90, 90));
+      auto pbrush = __create < ::draw2d::brush >();
+      pbrush->create_solid(argb(0xcc, 90, 90, 90));
       pgraphics->SelectObject(brush);
-      for(i32 i = iStart; i < m_pproduction->m_straStatus.get_size() && y < rectText.bottom; i++)
+      for(i32 i = iStart; i < m_pproduction->m_straStatus.get_size() && y < rectangleText.bottom; i++)
       {
-         rcItem = rectText;
+         rcItem = rectangleText;
          rcItem.bottom = y + m_iLineHeight;
          rcItem.top = y ;
          pgraphics->draw_text(m_pproduction->m_straStatus[i], rcItem, e_align_bottom_left);
@@ -217,29 +217,29 @@ namespace production
 
 
 
-      ::rectangle_i32 rectArea;
+      ::rectangle_i32 rectangleArea;
 
-      GetAreaThumbRect(rectArea, m_iV);
+      GetAreaThumbRect(rectangleArea, m_iV);
       if (m_pimageV)
       {
 
-         m_pimageV->to(pgraphics, rectArea);
+         m_pimageV->to(pgraphics, rectangleArea);
 
       }
       else
       {
 
-         pgraphics->fill_rectangle(rectArea, argb(255, 100, 200, 255));
+         pgraphics->fill_rectangle(rectangleArea, argb(255, 100, 200, 255));
          pgraphics->set_text_color(argb(255, 255, 255, 255));
 
-         pgraphics->draw_text("Production", rectArea, e_align_horizontal_center | e_align_vertical_center);
+         pgraphics->draw_text("Production", rectangleArea, e_align_horizontal_center | e_align_vertical_center);
 
       }
 
-      GetAreaThumbRect(rectArea, m_iVs);
+      GetAreaThumbRect(rectangleArea, m_iVs);
       if (m_pimageVs)
       {
-/*         m_pimage->to(pgraphics, rectArea);
+/*         m_pimage->to(pgraphics, rectangleArea);
 
       }
 
@@ -249,7 +249,7 @@ namespace production
          auto dwMin = (m_pproduction->m_tickEnd - m_pproduction->m_tickStart) / 1000 / 60;
          auto dwSeg = ((m_pproduction->m_tickEnd - m_pproduction->m_tickStart) / 1000) % 60;
          strTime.Format("%dm %ds", dwMin, dwSeg);
-         pgraphics->text_out(rectArea.right + 23, rectArea.top, strTime);
+         pgraphics->text_out(rectangleArea.right + 23, rectangleArea.top, strTime);
       }
 
    }
@@ -383,15 +383,15 @@ namespace production
    void impact::on_hit_test(::item & item)
    {
 
-      ::rectangle_i32 rectArea;
-      GetAreaThumbRect(rectArea, m_iV);
-      if (rectArea.contains(item.m_pointHitTest))
+      ::rectangle_i32 rectangleArea;
+      GetAreaThumbRect(rectangleArea, m_iV);
+      if (rectangleArea.contains(item.m_pointHitTest))
       {
          item = {::e_element_area, m_iV   };
          return;
       }
-      GetAreaThumbRect(rectArea, m_iVs);
-      if(rectArea.contains(item.m_pointHitTest))
+      GetAreaThumbRect(rectangleArea, m_iVs);
+      if(rectangleArea.contains(item.m_pointHitTest))
       {
          item = { ::e_element_area, m_iVs };
          return;

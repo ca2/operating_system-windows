@@ -80,7 +80,7 @@ namespace draw2d_gdiplus
       virtual i32 SaveDC() override;
       virtual bool RestoreDC(i32 nSavedDC) override;
       i32 GetDeviceCaps(i32 nIndex) override;
-      virtual ::u32 SetBoundsRect(const ::rectangle_f64 & rectBounds, ::u32 flags);
+      virtual ::u32 SetBoundsRect(const ::rectangle_f64 & rectangleBounds, ::u32 flags);
       virtual ::u32 GetBoundsRect(::rectangle_f64 * rectdBounds, ::u32 flags);
 
       bool ResetDC(const DEVMODE* pDevMode) override;
@@ -390,7 +390,7 @@ namespace draw2d_gdiplus
       //using ::draw2d::graphics::draw;
       //virtual bool draw(const ::point_i32 & point, ::draw2d::graphics * pgraphicsSrc, const ::rectangle_i32 & rectangleSource) override;
 
-      virtual bool _001DrawText(const ::string & str, rectangle_f64 & rectParam, const ::e_align & ealign = e_align_top_left, const ::e_draw_text & edrawtext = e_draw_text_none, bool bMeasure = false) override;
+      virtual bool _001DrawText(const ::string & str, rectangle_f64 & rectangleParam, const ::e_align & ealign = e_align_top_left, const ::e_draw_text & edrawtext = e_draw_text_none, bool bMeasure = false) override;
 
       //virtual bool draw_text_ex(const ::string & pszString,strsize nCount,const ::rectangle_i32 & rectangle, const ::e_align & ealign = e_align_top_left, const ::e_draw_text & edrawtext = e_draw_text_none,LPDRAWTEXTPARAMS lpDTParams) override;
 

@@ -837,7 +837,7 @@ namespace windowing_win32
 
       }
 
-      ::RECT rectWindow;
+      ::RECT rectangleWindow;
 
       for (auto & hwnd : *phwnda)
       {
@@ -852,16 +852,16 @@ namespace windowing_win32
 
             }
 
-            if (::GetWindowRect(hwnd, &rectWindow))
+            if (::GetWindowRect(hwnd, &rectangleWindow))
             {
 
-               ::rectangle_i32 rectHitTest;
+               ::rectangle_i32 rectangleHitTest;
 
-               __copy(rectHitTest, rectWindow);
+               __copy(rectangleHitTest, rectangleWindow);
 
-               rectHitTest.inflate(iMargin + 1);
+               rectangleHitTest.inflate(iMargin + 1);
 
-               if (rectHitTest.contains(ptHitTest))
+               if (rectangleHitTest.contains(ptHitTest))
                {
 
                   return true;

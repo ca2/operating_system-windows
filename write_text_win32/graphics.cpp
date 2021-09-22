@@ -805,12 +805,12 @@ namespace draw2d_gdiplus
    }
 
 
-   bool graphics::draw_rectangle(const ::rectangle_f64 & rectParam, ::draw2d::pen * ppen)
+   bool graphics::draw_rectangle(const ::rectangle_f64 & rectangleParam, ::draw2d::pen * ppen)
    {
 
       Gdiplus::Rect rectangle_i32;
 
-      __copy(rectangle, rectParam);
+      __copy(rectangle, rectangleParam);
 
       return m_pgraphics->DrawRectangle(ppen->get_os_data < ::Gdiplus::Pen *> (this), rectangle) == ::Gdiplus::Ok;
 
@@ -866,12 +866,12 @@ namespace draw2d_gdiplus
    }
 
 
-   bool graphics::Chord(const rectangle_f64 & rectParam,const point_f64 & pointStart, const point_f64 & pointEnd)
+   bool graphics::Chord(const rectangle_f64 & rectangleParam,const point_f64 & pointStart, const point_f64 & pointEnd)
    {
 
       //ASSERT(get_handle1() != nullptr);
-      //return ::Chord(get_handle1(),rectParam.left,rectParam.top,
-      //               rectParam.right,rectParam.bottom,pointStart.x,pointStart.y,
+      //return ::Chord(get_handle1(),rectangleParam.left,rectangleParam.top,
+      //               rectangleParam.right,rectangleParam.bottom,pointStart.x,pointStart.y,
       //               pointEnd.x, pointEnd.y) != false;
       __throw(error_not_implemented);
 
@@ -880,11 +880,11 @@ namespace draw2d_gdiplus
    }
 
 
-   void graphics::DrawFocusRect(const rectangle_f64 & rectParam)
+   void graphics::DrawFocusRect(const rectangle_f64 & rectangleParam)
    {
 
       //ASSERT(get_handle1() != nullptr);
-      //::DrawFocusRect(get_handle1(),&rectParam);
+      //::DrawFocusRect(get_handle1(),&rectangleParam);
       __throw(error_not_implemented);
 
 
@@ -923,7 +923,7 @@ namespace draw2d_gdiplus
    //}
 
 
-   //bool graphics::DrawEllipse(const rectangle_i32 &  rectParam)
+   //bool graphics::DrawEllipse(const rectangle_i32 &  rectangleParam)
    //{
 
    //   if (m_pgraphics == nullptr)
@@ -942,7 +942,7 @@ namespace draw2d_gdiplus
 
    //   }
 
-   //   return (m_pgraphics->DrawEllipse(ppen,rectParam.left,rectParam.top,rectParam.right - rectParam.left,rectParam.bottom - rectParam.top)) == Gdiplus::Status::Ok;
+   //   return (m_pgraphics->DrawEllipse(ppen,rectangleParam.left,rectangleParam.top,rectangleParam.right - rectangleParam.left,rectangleParam.bottom - rectangleParam.top)) == Gdiplus::Status::Ok;
 
    //}
 
@@ -972,7 +972,7 @@ namespace draw2d_gdiplus
    //}
 
 
-   bool graphics::draw_ellipse(const ::rectangle_f64 & rectParam)
+   bool graphics::draw_ellipse(const ::rectangle_f64 & rectangleParam)
    {
 
       if (m_pgraphics == nullptr)
@@ -991,9 +991,9 @@ namespace draw2d_gdiplus
 
       }
 
-      return (m_pgraphics->DrawEllipse(ppen,(Gdiplus::REAL)rectParam.left,(Gdiplus::REAL)rectParam.top,
-                                       (Gdiplus::REAL)(rectParam.right - rectParam.left),
-                                       (Gdiplus::REAL)(rectParam.bottom - rectParam.top))) == Gdiplus::Status::Ok;
+      return (m_pgraphics->DrawEllipse(ppen,(Gdiplus::REAL)rectangleParam.left,(Gdiplus::REAL)rectangleParam.top,
+                                       (Gdiplus::REAL)(rectangleParam.right - rectangleParam.left),
+                                       (Gdiplus::REAL)(rectangleParam.bottom - rectangleParam.top))) == Gdiplus::Status::Ok;
 
    }
 
@@ -1022,7 +1022,7 @@ namespace draw2d_gdiplus
    }
 
 
-   bool graphics::FillEllipse(const rectangle_i32 &  rectParam)
+   bool graphics::FillEllipse(const rectangle_i32 &  rectangleParam)
    {
 
       if (m_pgraphics == nullptr)
@@ -1041,7 +1041,7 @@ namespace draw2d_gdiplus
 
       }
 
-      return (m_pgraphics->FillEllipse(pbrush, rectParam.left, rectParam.top, rectParam.right - rectParam.left, rectParam.bottom - rectParam.top)) == Gdiplus::Status::Ok;
+      return (m_pgraphics->FillEllipse(pbrush, rectangleParam.left, rectangleParam.top, rectangleParam.right - rectangleParam.left, rectangleParam.bottom - rectangleParam.top)) == Gdiplus::Status::Ok;
 
    }*/
 
@@ -1070,7 +1070,7 @@ namespace draw2d_gdiplus
    //}
 
 
-   bool graphics::fill_ellipse(const ::rectangle_f64 & rectParam)
+   bool graphics::fill_ellipse(const ::rectangle_f64 & rectangleParam)
    {
 
       if (m_pgraphics == nullptr)
@@ -1089,9 +1089,9 @@ namespace draw2d_gdiplus
 
       }
 
-      return (m_pgraphics->FillEllipse(pbrush,(Gdiplus::REAL)rectParam.left,(Gdiplus::REAL)rectParam.top,
-                                       (Gdiplus::REAL)(rectParam.right - rectParam.left),
-                                       (Gdiplus::REAL)(rectParam.bottom - rectParam.top))) == Gdiplus::Status::Ok;
+      return (m_pgraphics->FillEllipse(pbrush,(Gdiplus::REAL)rectangleParam.left,(Gdiplus::REAL)rectangleParam.top,
+                                       (Gdiplus::REAL)(rectangleParam.right - rectangleParam.left),
+                                       (Gdiplus::REAL)(rectangleParam.bottom - rectangleParam.top))) == Gdiplus::Status::Ok;
 
    }
 
@@ -1108,12 +1108,12 @@ namespace draw2d_gdiplus
    //}
 
 
-   bool graphics::Pie(const rectangle_f64 &  rectParam, const point_f64 & pointStart, const point_f64 & pointEnd)
+   bool graphics::Pie(const rectangle_f64 &  rectangleParam, const point_f64 & pointStart, const point_f64 & pointEnd)
    {
 
       //ASSERT(get_handle1() != nullptr);
-      //return ::Pie(get_handle1(), rectParam.left, rectParam.top,
-      //             rectParam.right, rectParam.bottom, pointStart.x, pointStart.y,
+      //return ::Pie(get_handle1(), rectangleParam.left, rectangleParam.top,
+      //             rectangleParam.right, rectangleParam.bottom, pointStart.x, pointStart.y,
       //             pointEnd.x, pointEnd.y) != false;
       __throw(error_not_implemented);
 
@@ -1276,7 +1276,7 @@ namespace draw2d_gdiplus
    //}
 
 
-   bool graphics::fill_rectangle(const ::rectangle_f64 & rectParam, ::draw2d::brush * pbrush)
+   bool graphics::fill_rectangle(const ::rectangle_f64 & rectangleParam, ::draw2d::brush * pbrush)
    {
 
       if (::is_null(pbrush))
@@ -1288,7 +1288,7 @@ namespace draw2d_gdiplus
 
       Gdiplus::Rect rectangle_i32;
 
-      __copy(rectangle, rectParam);
+      __copy(rectangle, rectangleParam);
 
       Gdiplus::Brush* posbrush = pbrush->get_os_data < Gdiplus::Brush * >(this);
 
@@ -1299,12 +1299,12 @@ namespace draw2d_gdiplus
    }
 
 
-   //bool graphics::fill_rectangle(const ::rectangle_f64 & rectParam, ::draw2d::brush * pbrush)
+   //bool graphics::fill_rectangle(const ::rectangle_f64 & rectangleParam, ::draw2d::brush * pbrush)
    //{
 
    //   Gdiplus::RectF rectangle_i32;
 
-   //   __copy(rectangle, rectParam);
+   //   __copy(rectangle, rectangleParam);
 
    //   return m_pgraphics->FillRectangle(pbrush->get_os_data<Brush *>(this), rectangle) == Gdiplus::Status::Ok;
 
@@ -1558,21 +1558,21 @@ namespace draw2d_gdiplus
 
       }
 
-      double xDst = imagedrawing.m_rectDst.left;
+      double xDst = imagedrawing.m_rectangleDst.left;
 
-      double yDst = imagedrawing.m_rectDst.top;
+      double yDst = imagedrawing.m_rectangleDst.top;
 
-      double nDstWidth = imagedrawing.m_rectDst.width();
+      double nDstWidth = imagedrawing.m_rectangleDst.width();
 
-      double nDstHeight = imagedrawing.m_rectDst.height();
+      double nDstHeight = imagedrawing.m_rectangleDst.height();
 
-      double xSrc = imagedrawing.m_rectSrc.left;
+      double xSrc = imagedrawing.m_rectangleSrc.left;
 
-      double ySrc = imagedrawing.m_rectSrc.top;
+      double ySrc = imagedrawing.m_rectangleSrc.top;
 
-      double nSrcWidth = imagedrawing.m_rectSrc.width();
+      double nSrcWidth = imagedrawing.m_rectangleSrc.width();
 
-      double nSrcHeight = imagedrawing.m_rectSrc.height();
+      double nSrcHeight = imagedrawing.m_rectangleSrc.height();
 
       Gdiplus::RectF rectangleTarget((Gdiplus::REAL) xDst, (Gdiplus::REAL)yDst, (Gdiplus::REAL)nDstWidth, (Gdiplus::REAL)nDstHeight);
 
@@ -2156,12 +2156,12 @@ namespace draw2d_gdiplus
    //// COLOR_DEST = SRC_ALPHA * BLEND_ALPHA * COLOR_SRC  + (1 - SRC_ALPHA * BLEND_ALPHA) * COLOR_DST
 
 
-   bool graphics::ExtTextOut(double x, double y,UINT nOptions,const rectangle_f64 &  rectParam, const ::string & pszString,strsize nCount,LPINT lpDxWidths)
+   bool graphics::ExtTextOut(double x, double y,UINT nOptions,const rectangle_f64 &  rectangleParam, const ::string & pszString,strsize nCount,LPINT lpDxWidths)
    {
 
       //ASSERT(get_handle1() != nullptr);
 
-      //return ::ExtTextOut(get_handle1(),x,y,nOptions,&rectParam,pszString,(UINT) nCount,lpDxWidths) != false;
+      //return ::ExtTextOut(get_handle1(),x,y,nOptions,&rectangleParam,pszString,(UINT) nCount,lpDxWidths) != false;
       __throw(error_not_implemented);
 
       return false;
@@ -2170,12 +2170,12 @@ namespace draw2d_gdiplus
    }
 
 
-   bool graphics::ExtTextOut(double x, double y,UINT nOptions,const rectangle_f64 &  rectParam, const ::string & str, LPINT pDxWidths)
+   bool graphics::ExtTextOut(double x, double y,UINT nOptions,const rectangle_f64 &  rectangleParam, const ::string & str, LPINT pDxWidths)
    {
 
       //ASSERT(get_handle1() != nullptr);
 
-      //return ::ExtTextOut(get_handle1(),x,y,nOptions,&rectParam, str, (UINT)str.get_length(), pDxWidths) != false;
+      //return ::ExtTextOut(get_handle1(),x,y,nOptions,&rectangleParam, str, (UINT)str.get_length(), pDxWidths) != false;
       __throw(error_not_implemented);
 
       return false;
@@ -2470,14 +2470,14 @@ namespace draw2d_gdiplus
    //   return nullptr;
    //}
    //bool graphics::ScrollDC(i32 dx, i32 dy,
-   //                        const rectangle_i32 &  pRectScroll,const rectangle_i32 &  rectClip,
+   //                        const rectangle_i32 &  pRectScroll,const rectangle_i32 &  rectangleClip,
 
    //                        ::draw2d::region* pRgnUpdate, RECT * pRectUpdate)
 
    //{
    //   //ASSERT(get_handle1() != nullptr);
-   //   //return ::ScrollDC(get_handle1(),dx,dy,&rectClip,
-   //   //                  &rectClip, (HRGN)pRgnUpdate->get_os_data(), pRectUpdate) != false;
+   //   //return ::ScrollDC(get_handle1(),dx,dy,&rectangleClip,
+   //   //                  &rectangleClip, (HRGN)pRgnUpdate->get_os_data(), pRectUpdate) != false;
 
    //   __throw(error_not_implemented);
 
@@ -2496,10 +2496,10 @@ namespace draw2d_gdiplus
    //}
 
    // graphics 3.1 Specific functions
-   UINT graphics::SetBoundsRect(const rectangle_f64 &  rectBounds, UINT flags)
+   UINT graphics::SetBoundsRect(const rectangle_f64 &  rectangleBounds, UINT flags)
    {
       //ASSERT(get_handle1() != nullptr);
-      //return ::SetBoundsRect(get_handle1(), &rectBounds, flags);
+      //return ::SetBoundsRect(get_handle1(), &rectangleBounds, flags);
       __throw(error_not_implemented);
 
       return -1;
@@ -2762,11 +2762,11 @@ namespace draw2d_gdiplus
    }
 
 
-   bool graphics::ArcTo(const rectangle_f64 & rectParam,const point_f64 & pointStart,const point_f64 & pointEnd)
+   bool graphics::ArcTo(const rectangle_f64 & rectangleParam,const point_f64 & pointStart,const point_f64 & pointEnd)
    {
 ////      ASSERT(get_handle1() != nullptr);
-      //return ArcTo(rectParam.left, rectParam.top, rectParam.right,
-        //           rectParam.bottom, pointStart.x, pointStart.y, pointEnd.x, pointEnd.y);
+      //return ArcTo(rectangleParam.left, rectangleParam.top, rectangleParam.right,
+        //           rectangleParam.bottom, pointStart.x, pointStart.y, pointEnd.x, pointEnd.y);
          //   if (::is_null(m_pgraphics))
    //   {
 
@@ -3127,10 +3127,10 @@ namespace draw2d_gdiplus
    }
 
 
-   bool graphics::PlayMetaFile(HENHMETAFILE hEnhMF, const rectangle_f64 &  rectBounds)
+   bool graphics::PlayMetaFile(HENHMETAFILE hEnhMF, const rectangle_f64 &  rectangleBounds)
    {
 
-      Gdiplus::RectF rectangle_i32((Gdiplus::REAL) rectBounds.left,(Gdiplus::REAL) rectBounds.top,(Gdiplus::REAL) width(rectBounds),(Gdiplus::REAL) height(rectBounds));
+      Gdiplus::RectF rectangle_i32((Gdiplus::REAL) rectangleBounds.left,(Gdiplus::REAL) rectangleBounds.top,(Gdiplus::REAL) width(rectangleBounds),(Gdiplus::REAL) height(rectangleBounds));
 
       ap(Gdiplus::Metafile) pMeta = new Gdiplus::Metafile(hEnhMF, false);
 
@@ -3547,7 +3547,7 @@ namespace draw2d_gdiplus
    }*/
 
 
-   bool graphics::fill_rectangle(const ::rectangle_f64 & rectParam, const ::color::color & color)
+   bool graphics::fill_rectangle(const ::rectangle_f64 & rectangleParam, const ::color::color & color)
    {
 
       try
@@ -3562,7 +3562,7 @@ namespace draw2d_gdiplus
 
          Gdiplus::RectF rectangle_i32;
 
-         __copy(rectangle, rectParam);
+         __copy(rectangle, rectangleParam);
 
          Gdiplus::SolidBrush b(Gdiplus::Color(color.m_iA, color.m_iR, color.m_iG, color.m_iB));
 
@@ -4757,15 +4757,15 @@ namespace draw2d_gdiplus
    //   return nRetVal;
    //}
 
-   //i32 graphics::ExcludeClipRect(const rectangle_i32 &  rectParam)
+   //i32 graphics::ExcludeClipRect(const rectangle_i32 &  rectangleParam)
    //{
    //   i32 nRetVal = ERROR;
    //   //if(get_handle1() != nullptr && get_handle1() != get_handle2())
-   //   //   nRetVal = ::ExcludeClipRect(get_handle1(), rectParam.left, rectParam.top,
-   //   //                               rectParam.right, rectParam.bottom);
+   //   //   nRetVal = ::ExcludeClipRect(get_handle1(), rectangleParam.left, rectangleParam.top,
+   //   //                               rectangleParam.right, rectangleParam.bottom);
    //   //if(get_handle2() != nullptr)
-   //   //   nRetVal = ::ExcludeClipRect(get_handle2(), rectParam.left, rectParam.top,
-   //   //                               rectParam.right, rectParam.bottom);
+   //   //   nRetVal = ::ExcludeClipRect(get_handle2(), rectangleParam.left, rectangleParam.top,
+   //   //                               rectangleParam.right, rectangleParam.bottom);
    //   return nRetVal;
    //}
 
@@ -4779,18 +4779,18 @@ namespace draw2d_gdiplus
    //   return nRetVal;
    //}
 
-   //i32 graphics::IntersectClipRect(const rectangle_i32 &  rectBounds)
+   //i32 graphics::IntersectClipRect(const rectangle_i32 &  rectangleBounds)
    //{
    //   i32 nRetVal = ERROR;
 
-   //   Gdiplus::Rect rectangle_i32(rectBounds.left, rectBounds.top, width(rectBounds),  height(rectBounds));
+   //   Gdiplus::Rect rectangle_i32(rectangleBounds.left, rectangleBounds.top, width(rectangleBounds),  height(rectangleBounds));
 
    //   m_pgraphics->IntersectClip(rectangle);
 
    //   //if(get_handle1() != nullptr && get_handle1() != get_handle2())
-   //   //   nRetVal = ::IntersectClipRect(get_handle1(),rectBounds.left,rectBounds.top,rectBounds.right,rectBounds.bottom);
+   //   //   nRetVal = ::IntersectClipRect(get_handle1(),rectangleBounds.left,rectangleBounds.top,rectangleBounds.right,rectangleBounds.bottom);
    //   //if(get_handle2() != nullptr)
-   //   //   nRetVal = ::IntersectClipRect(get_handle2(),rectBounds.left,rectBounds.top,rectBounds.right,rectBounds.bottom);
+   //   //   nRetVal = ::IntersectClipRect(get_handle2(),rectangleBounds.left,rectangleBounds.top,rectangleBounds.right,rectangleBounds.bottom);
    //   return SIMPLEREGION;
    //}
 
@@ -5220,17 +5220,17 @@ namespace draw2d_gdiplus
 //         break;
 //      case META_SETBKCOLOR:
 //      {
-//         ::draw2d::brush_pointer brush(e_create);
-//         brush->create_solid(*(UNALIGNED COLORREF*)&pMetaRec->rdParm[0]);
-//         set(brush);
+//         auto pbrush = __create < ::draw2d::brush >();
+//         pbrush->create_solid(*(UNALIGNED COLORREF*)&pMetaRec->rdParm[0]);
+//         set(pbrush);
 //      }
 //      break;
 //      case META_SETTEXTCOLOR:
 //      {
-//         ::draw2d::brush_pointer brush(e_create);
+//         auto pbrush = __create < ::draw2d::brush >();
 //
-//         brush->create_solid(*(UNALIGNED COLORREF*)&pMetaRec->rdParm[0]);
-//         set(brush);
+//         pbrush->create_solid(*(UNALIGNED COLORREF*)&pMetaRec->rdParm[0]);
+//         set(pbrush);
 //      }
 //      break;
 //
@@ -5337,7 +5337,7 @@ namespace draw2d_gdiplus
    }
 
 
-   bool graphics::_001DrawText(const ::string & str, rectangle_f64 & rectParam, const ::e_align & ealign, const ::e_draw_text & edrawtext, bool bMeasure)
+   bool graphics::_001DrawText(const ::string & str, rectangle_f64 & rectangleParam, const ::e_align & ealign, const ::e_draw_text & edrawtext, bool bMeasure)
    {
 
       if (::is_null(m_pgraphics))
@@ -5372,12 +5372,12 @@ namespace draw2d_gdiplus
 
       }
 
-      return gdiplus_draw_text(this, nullptr, str, rectParam, ealign, edrawtext, m_pfont, m_pfont->m_dFontWidth, m_pbrush, bMeasure);
+      return gdiplus_draw_text(this, nullptr, str, rectangleParam, ealign, edrawtext, m_pfont, m_pfont->m_dFontWidth, m_pbrush, bMeasure);
 
    }
 
 
-   //bool graphics::draw_text_ex(const ::string & pszString,strsize nCount,const rectangle_i32 & rectParam, const ::e_align & ealign, const ::e_draw_text & edrawtext,LPDRAWTEXTPARAMS lpDTParams)
+   //bool graphics::draw_text_ex(const ::string & pszString,strsize nCount,const rectangle_i32 & rectangleParam, const ::e_align & ealign, const ::e_draw_text & edrawtext,LPDRAWTEXTPARAMS lpDTParams)
    //{
 
    //   if (::is_null(m_pgraphics))
@@ -5395,7 +5395,7 @@ namespace draw2d_gdiplus
    //   //ASSERT((nFormat & (DT_PATH_ELLIPSIS | DT_MODIFYSTRING)) != (DT_PATH_ELLIPSIS | DT_MODIFYSTRING));
    //   //wstring text.m_wstr = ::str::international::utf8_to_unicode(string(pszString, nCount));
 
-   //   //return ::DrawTextExW(get_handle1(),const_cast<wchar_t *>((const wchar_t *)text.m_wstr),(i32)wcslen(text.m_wstr),(RECT *) &rectParam,nFormat,pDTParams);
+   //   //return ::DrawTextExW(get_handle1(),const_cast<wchar_t *>((const wchar_t *)text.m_wstr),(i32)wcslen(text.m_wstr),(RECT *) &rectangleParam,nFormat,pDTParams);
 
    //   __throw(error_not_implemented);
 
@@ -5404,7 +5404,7 @@ namespace draw2d_gdiplus
    //}
 
 
-   bool graphics::draw_text_ex(const ::string & str,const rectangle_f64 & rectParam, const ::e_align & ealign, const ::e_draw_text & edrawtext)
+   bool graphics::draw_text_ex(const ::string & str,const rectangle_f64 & rectangleParam, const ::e_align & ealign, const ::e_draw_text & edrawtext)
    {
 
       if (::is_null(m_pgraphics))
@@ -5419,14 +5419,14 @@ namespace draw2d_gdiplus
       //ASSERT((nFormat & (DT_END_ELLIPSIS | DT_MODIFYSTRING)) != (DT_END_ELLIPSIS | DT_MODIFYSTRING));
       //ASSERT((nFormat & (DT_PATH_ELLIPSIS | DT_MODIFYSTRING)) != (DT_PATH_ELLIPSIS | DT_MODIFYSTRING));
       //wstring text.m_wstr = ::str::international::utf8_to_unicode(str);
-      //return ::DrawTextExW(get_handle1(),const_cast<wchar_t *>((const wchar_t *)text.m_wstr),(i32)wcslen(text.m_wstr),(RECT *) &rectParam,nFormat,pDTParams);
+      //return ::DrawTextExW(get_handle1(),const_cast<wchar_t *>((const wchar_t *)text.m_wstr),(i32)wcslen(text.m_wstr),(RECT *) &rectangleParam,nFormat,pDTParams);
       __throw(error_not_implemented);
 
       return false;
    }
 
 
-   //bool graphics::draw_text_ex(const ::string & pszString,strsize nCount,const ::rectangle_f64 & rectParam, const ::e_align & ealign, const ::e_draw_text & edrawtext,LPDRAWTEXTPARAMS lpDTParams)
+   //bool graphics::draw_text_ex(const ::string & pszString,strsize nCount,const ::rectangle_f64 & rectangleParam, const ::e_align & ealign, const ::e_draw_text & edrawtext,LPDRAWTEXTPARAMS lpDTParams)
    //{
 
    //   if (::is_null(m_pgraphics))
@@ -5436,12 +5436,12 @@ namespace draw2d_gdiplus
 
    //   }
 
-   //   return ::draw2d::graphics::draw_text_ex(pszString,nCount,rectParam,nFormat,lpDTParams);
+   //   return ::draw2d::graphics::draw_text_ex(pszString,nCount,rectangleParam,nFormat,lpDTParams);
 
    //}
 
 
-   //bool graphics::draw_text_ex(const string& str, const ::rectangle_f64 &rectParam, const ::e_align & ealign, const ::e_draw_text & edrawtext)
+   //bool graphics::draw_text_ex(const string& str, const ::rectangle_f64 &rectangleParam, const ::e_align & ealign, const ::e_draw_text & edrawtext)
    //{
 
    //   if (::is_null(m_pgraphics))
@@ -5451,7 +5451,7 @@ namespace draw2d_gdiplus
 
    //   }
 
-   //   return ::draw2d::graphics::draw_text_ex(str,rectParam,ealign, edrawtext);
+   //   return ::draw2d::graphics::draw_text_ex(str,rectangleParam,ealign, edrawtext);
 
    //}
 
@@ -5596,12 +5596,12 @@ namespace draw2d_gdiplus
 
          m_pgraphics->MeasureCharacterRanges(text.m_wstr, (INT) cLength, m_pfont->get_os_data < Gdiplus::Font * >(this), box, &strFormat, count, regiona);
 
-         Gdiplus::RectF rectBound;
+         Gdiplus::RectF rectangleBound;
 
          for (int i = 0; i < count; i++)
          {
 
-            regiona[i].GetBounds(&rectBound, m_pgraphics);
+            regiona[i].GetBounds(&rectangleBound, m_pgraphics);
 
             wchar_t wch = text.m_wstr.c_str()[i + iStart];
 
@@ -5610,9 +5610,9 @@ namespace draw2d_gdiplus
             for (index iAnsiChar = 0; iAnsiChar < iUtf8Length; iAnsiChar++)
             {
 
-               daLeft.add(rectBound.GetLeft());
+               daLeft.add(rectangleBound.GetLeft());
 
-               daRight.add(rectBound.GetRight());
+               daRight.add(rectangleBound.GetRight());
 
             }
 
@@ -5702,15 +5702,15 @@ namespace draw2d_gdiplus
 
       }
 
-      Gdiplus::RectF rectBound;
+      Gdiplus::RectF rectangleBound;
 
-      pCharRangeRegions[0].GetBounds(&rectBound, m_pgraphics);
+      pCharRangeRegions[0].GetBounds(&rectangleBound, m_pgraphics);
 
       delete[] pCharRangeRegions;
 
       Gdiplus::SizeF size;
 
-      rectBound.GetSize(&size);
+      rectangleBound.GetSize(&size);
 
       return class ::size_f64((double)(size.Width  * m_pfont->m_dFontWidth), (double)(size.Height));
 
@@ -5782,13 +5782,13 @@ namespace draw2d_gdiplus
 
       }
 
-      Gdiplus::RectF rectBound;
+      Gdiplus::RectF rectangleBound;
 
-      pCharRangeRegions[0].GetBounds(&rectBound, m_pgraphics);
+      pCharRangeRegions[0].GetBounds(&rectangleBound, m_pgraphics);
 
       delete[] pCharRangeRegions;
 
-      return class ::size_f64((double)(rectBound.X  * m_pfont->m_dFontWidth), (double)(rectBound.Height));
+      return class ::size_f64((double)(rectangleBound.X  * m_pfont->m_dFontWidth), (double)(rectangleBound.Height));
 
    }
 
@@ -6072,15 +6072,15 @@ namespace draw2d_gdiplus
       if(pregion == nullptr)
          return false;
 
-      Gdiplus::RectF rectBound;
+      Gdiplus::RectF rectangleBound;
 
-      pregion->GetBounds(&rectBound, m_pgraphics);
+      pregion->GetBounds(&rectangleBound, m_pgraphics);
 
       delete pregion;
 
       Gdiplus::SizeF size_f32;
 
-      rectBound.GetSize(&size_f32);
+      rectangleBound.GetSize(&size_f32);
 
       size.cx = size_f32.Width * m_pfont->m_dFontWidth;
 
@@ -6995,7 +6995,7 @@ namespace draw2d_gdiplus
    }
 
 
-   bool graphics::blur(bool bExpand,double dRadius,const rectangle_f64 & rectParam)
+   bool graphics::blur(bool bExpand,double dRadius,const rectangle_f64 & rectangleParam)
    {
 
       // Commented Out for Running in cosan machine running Windows 2008
@@ -7018,10 +7018,10 @@ namespace draw2d_gdiplus
 
       //Gdiplus::PointF points[2];
 
-      //points[0].X    = (Gdiplus::REAL) rectParam.left;
-      //points[0].Y    = (Gdiplus::REAL) rectParam.top;
-      //points[1].X    = (Gdiplus::REAL) rectParam.right;
-      //points[1].Y    = (Gdiplus::REAL) rectParam.bottom;
+      //points[0].X    = (Gdiplus::REAL) rectangleParam.left;
+      //points[0].Y    = (Gdiplus::REAL) rectangleParam.top;
+      //points[1].X    = (Gdiplus::REAL) rectangleParam.right;
+      //points[1].Y    = (Gdiplus::REAL) rectangleParam.bottom;
 
       //m.TransformPoints(points, 2);
 
@@ -7145,7 +7145,7 @@ namespace draw2d_gdiplus
 
          // "Reference" implementation for TextOutAlphaBlend
 
-         ::rectangle_i32 rectIntersect(m_pointAlphaBlend, m_pimageAlphaBlend->size());
+         ::rectangle_i32 rectangleIntersect(m_pointAlphaBlend, m_pimageAlphaBlend->size());
 
          const ::size_f64 & size = ::size_f64(get_text_extent(block));
 
@@ -7153,14 +7153,14 @@ namespace draw2d_gdiplus
 
          //size.cy = size.cy * 110 / 100;
 
-         ::rectangle_i32 rectText(point_i32((LONG)x, (LONG)y), size);
+         ::rectangle_i32 rectangleText(point_i32((LONG)x, (LONG)y), size);
 
-         if (rectIntersect.intersect(rectIntersect, rectText))
+         if (rectangleIntersect.intersect(rectangleIntersect, rectangleText))
          {
 
             ::image_pointer pimage1;
 
-            pimage1 = create_image(rectText.size());
+            pimage1 = create_image(rectangleText.size());
 
             pimage1->get_graphics()->set(get_current_font());
 
@@ -7170,11 +7170,11 @@ namespace draw2d_gdiplus
 
             pimage1->get_graphics()->text_out(0, 0, block);
 
-            pimage1->blend2(nullptr, m_pimageAlphaBlend, point_i32((int)maximum(0, x - m_pointAlphaBlend.x), (int)maximum(0, y - m_pointAlphaBlend.y)), rectText.size(), 255);
+            pimage1->blend2(nullptr, m_pimageAlphaBlend, point_i32((int)maximum(0, x - m_pointAlphaBlend.x), (int)maximum(0, y - m_pointAlphaBlend.y)), rectangleText.size(), 255);
 
-            auto rectangleTarget = ::rectangle_f64(::point_f64(x, y), rectText.size());
+            auto rectangleTarget = ::rectangle_f64(::point_f64(x, y), rectangleText.size());
 
-            auto rectangleSource = ::rectangle_f64(rectText.size());
+            auto rectangleSource = ::rectangle_f64(rectangleText.size());
 
             image_drawing_options imagedrawingoptions;
 
@@ -7222,11 +7222,11 @@ namespace draw2d_gdiplus
    //      }
 
 
-   //      ::rectangle_i32 rectIntersect(m_pointAlphaBlend, m_pimageAlphaBlend->::size_f64());
+   //      ::rectangle_i32 rectangleIntersect(m_pointAlphaBlend, m_pimageAlphaBlend->::size_f64());
 
-   //      ::rectangle_i32 rectBlt(point_i32((i64)x, (i64)y), ::size_f64(nWidth, nHeight));
+   //      ::rectangle_i32 rectangleBlt(point_i32((i64)x, (i64)y), ::size_f64(nWidth, nHeight));
 
-   //      if (rectIntersect.intersect(rectIntersect, rectBlt))
+   //      if (rectangleIntersect.intersect(rectangleIntersect, rectangleBlt))
    //      {
 
    //         //if (m_pointAlphaBlend.x < 0)
@@ -7253,7 +7253,7 @@ namespace draw2d_gdiplus
 
    //         //   y += pointOff.y;
 
-   //         //   return m_pimage->blend(::point_i32(x, y), pgraphicsSrc->m_pimage, ::point_i32(xSrc, ySrc), m_pimageAlphaBlend, point_i32(m_pointAlphaBlend.x - x, m_pointAlphaBlend.y - y), rectBlt.::size_f64());
+   //         //   return m_pimage->blend(::point_i32(x, y), pgraphicsSrc->m_pimage, ::point_i32(xSrc, ySrc), m_pimageAlphaBlend, point_i32(m_pointAlphaBlend.x - x, m_pointAlphaBlend.y - y), rectangleBlt.::size_f64());
 
    //         //}
    //         //else
@@ -7270,7 +7270,7 @@ namespace draw2d_gdiplus
 
    //            }
    //            
-   //            estatus = pimage1->create(rectBlt.::size_f64());
+   //            estatus = pimage1->create(rectangleBlt.::size_f64());
 
    //            if (!estatus)
    //            {
@@ -7281,10 +7281,10 @@ namespace draw2d_gdiplus
 
    //            pimage1->g()->set_alpha_mode(::draw2d::e_alpha_mode_set);
 
-   //            if (!pimage1->from(nullptr, pgraphicsSrc, ::point_i32(xSrc, ySrc), rectBlt.::size_f64()))
+   //            if (!pimage1->from(nullptr, pgraphicsSrc, ::point_i32(xSrc, ySrc), rectangleBlt.::size_f64()))
    //               return false;
 
-   //            pimage1->blend2(::point_i32(), m_pimageAlphaBlend, point_i32(x - m_pointAlphaBlend.x, y - m_pointAlphaBlend.y), rectBlt.::size_f64(), 255);
+   //            pimage1->blend2(::point_i32(), m_pimageAlphaBlend, point_i32(x - m_pointAlphaBlend.x, y - m_pointAlphaBlend.y), rectangleBlt.::size_f64(), 255);
 
    //            BitBltRaw(x, y, nWidth, nHeight, pimage1->get_graphics(), 0, 0, dwRop);
 

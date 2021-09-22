@@ -953,7 +953,7 @@ namespace draw2d_gdi
 
       }
 
-      ::draw2d::pen_pointer penPrevious = m_ppen;
+      ::draw2d::pen_pointer ppenPrevious = m_ppen;
 
       SelectObject(ppen);
 
@@ -970,7 +970,7 @@ namespace draw2d_gdi
 
       }
 
-      SelectObject(penPrevious);
+      SelectObject(ppenPrevious);
 
       return bOk;
 
@@ -2018,19 +2018,19 @@ namespace draw2d_gdi
    }
 
    // graphics 3.1 Specific functions
-   UINT graphics::SetBoundsRect(const ::rectangle_i32 & rectBounds, UINT flags)
+   UINT graphics::SetBoundsRect(const ::rectangle_i32 & rectangleBounds, UINT flags)
    {
 
       ASSERT(get_handle1() != nullptr);
 
-      return ::SetBoundsRect(get_handle1(), &rectBounds, flags);
+      return ::SetBoundsRect(get_handle1(), &rectangleBounds, flags);
 
    }
 
 
-   UINT graphics::GetBoundsRect(LPRECT rectBounds, UINT flags)
+   UINT graphics::GetBoundsRect(LPRECT rectangleBounds, UINT flags)
    {
-      ASSERT(get_handle2() != nullptr); return ::GetBoundsRect(get_handle2(), rectBounds, flags);
+      ASSERT(get_handle2() != nullptr); return ::GetBoundsRect(get_handle2(), rectangleBounds, flags);
 
    }
 
@@ -2603,7 +2603,7 @@ namespace draw2d_gdi
    }
 
 
-   bool graphics::internal_fill_path(void(::draw2d_gdi::graphics::* pfnInternalSetPath)(void *),void * pparam,const ::rectangle_i32 & rectParam,::draw2d::brush * pbrush)
+   bool graphics::internal_fill_path(void(::draw2d_gdi::graphics::* pfnInternalSetPath)(void *),void * pparam,const ::rectangle_i32 & rectangleParam,::draw2d::brush * pbrush)
    {
 
       synchronous_lock ml(mutex());
@@ -2626,7 +2626,7 @@ namespace draw2d_gdi
       else
       {
 
-         ::rectangle_i32 rectangle(rectParam);
+         ::rectangle_i32 rectangle(rectangleParam);
 
          ::image_pointer pimage = image_work(rectangle.size(), false);
 
@@ -2766,7 +2766,7 @@ namespace draw2d_gdi
    }
 
 
-   bool graphics::internal_stroke_path(void(::draw2d_gdi::graphics::* pfnInternalSetPath)(void *),void * pparam,const ::rectangle_i32 & rectParam,::draw2d::pen * ppen)
+   bool graphics::internal_stroke_path(void(::draw2d_gdi::graphics::* pfnInternalSetPath)(void *),void * pparam,const ::rectangle_i32 & rectangleParam,::draw2d::pen * ppen)
    {
 
       synchronous_lock ml(mutex());
@@ -2789,11 +2789,11 @@ namespace draw2d_gdi
       else
       {
 
-         ::rectangle_i32 rectBound(rectParam);
+         ::rectangle_i32 rectangleBound(rectangleParam);
 
-         //m_sppath->get_bounding_rect(rectBound);
+         //m_sppath->get_bounding_rect(rectangleBound);
 
-         ::rectangle_i32 rectangle(rectBound);
+         ::rectangle_i32 rectangle(rectangleBound);
 
          rectangle.left   -= (i32) floor(pen.m_dWidth / 2.0);
          rectangle.right  += (i32) ceil(pen.m_dWidth / 2.0);
@@ -2816,7 +2816,7 @@ namespace draw2d_gdi
 
          pimage->g()->SelectObject(&pen);
 
-         pimage->g()->SetViewportOrg(-rectBound.top_left());
+         pimage->g()->SetViewportOrg(-rectangleBound.top_left());
 
          (GDI_GRAPHICS(pimage->g())->*pfnInternalSetPath)(pparam);
 
@@ -2840,7 +2840,7 @@ namespace draw2d_gdi
    }
 
 
-   bool graphics::internal_fill_and_stroke_path(void(::draw2d_gdi::graphics::* pfnInternalSetPath)(void *),void * pparam,const ::rectangle_i32 & rectParam,::draw2d::brush * pbrush,::draw2d::pen * ppen)
+   bool graphics::internal_fill_and_stroke_path(void(::draw2d_gdi::graphics::* pfnInternalSetPath)(void *),void * pparam,const ::rectangle_i32 & rectangleParam,::draw2d::brush * pbrush,::draw2d::pen * ppen)
    {
 
       synchronous_lock ml(mutex());
@@ -2850,12 +2850,12 @@ namespace draw2d_gdi
       ::draw2d::pen & pen = *ppen;
 
       if(pen.m_etype == ::draw2d::pen::e_type_null)
-         return internal_fill_path(pfnInternalSetPath, pparam, rectParam, pbrush);
+         return internal_fill_path(pfnInternalSetPath, pparam, rectangleParam, pbrush);
 
       ::draw2d::brush & brush = *pbrush;
 
       if(brush.m_etype == ::draw2d::brush::e_type_null)
-         return internal_stroke_path(pfnInternalSetPath, pparam, rectParam, ppen);
+         return internal_stroke_path(pfnInternalSetPath, pparam, rectangleParam, ppen);
 
       if(m_pimage->is_null())
       {
@@ -2868,9 +2868,9 @@ namespace draw2d_gdi
       else
       {
 
-         ::rectangle_i32 rectBound(rectParam);
+         ::rectangle_i32 rectangleBound(rectangleParam);
 
-         ::rectangle_i32 rectangle(rectBound);
+         ::rectangle_i32 rectangle(rectangleBound);
 
          rectangle.left   -= (i32) floor(pen.m_dWidth / 2.0);
          rectangle.right  += (i32) floor(pen.m_dWidth / 2.0);
@@ -2933,7 +2933,7 @@ namespace draw2d_gdi
 
             pimage->g()->SelectObject(&pen);
 
-            pimage->g()->SetViewportOrg(-rectBound.top_left());
+            pimage->g()->SetViewportOrg(-rectangleBound.top_left());
 
             (GDI_GRAPHICS(pimage->g())->*pfnInternalSetPath)(pparam);
 
@@ -2992,10 +2992,10 @@ namespace draw2d_gdi
    }
 
 
-   bool graphics::PlayMetaFile(HENHMETAFILE hEnhMF, const ::rectangle_i32 & rectBounds)
+   bool graphics::PlayMetaFile(HENHMETAFILE hEnhMF, const ::rectangle_i32 & rectangleBounds)
    {
 
-      return ::PlayEnhMetaFile(get_handle1(), hEnhMF, rectBounds) != false;
+      return ::PlayEnhMetaFile(get_handle1(), hEnhMF, rectangleBounds) != false;
 
    }
 
@@ -3018,7 +3018,7 @@ namespace draw2d_gdi
    {
 
 
-   ::rectangle_i32 rectIntersect(m_pointAlphaBlend, m_pimageAlphaBlend->size());
+   ::rectangle_i32 rectangleIntersect(m_pointAlphaBlend, m_pimageAlphaBlend->size());
 
 
    ::image_pointer pimageWork = nullptr;
@@ -3109,7 +3109,7 @@ namespace draw2d_gdi
       if(m_pimageAlphaBlend->is_set())
       {
 
-         ::rectangle_i32 rectIntersect(m_pointAlphaBlend, m_pimageAlphaBlend->size());
+         ::rectangle_i32 rectangleIntersect(m_pointAlphaBlend, m_pimageAlphaBlend->size());
 
          ::point_i32 pointSrc(xSrc, ySrc);
 
@@ -3462,7 +3462,7 @@ namespace draw2d_gdi
 
 
    //void graphics::DrawDragRect(const ::rectangle_i32 & rectangle, const ::size_i32 & size,
-   //                            const ::rectangle_i32 & rectLast, const ::size_i32 & sizeLast, ::draw2d::brush* pBrush, ::draw2d::brush* pBrushLast)
+   //                            const ::rectangle_i32 & rectangleLast, const ::size_i32 & sizeLast, ::draw2d::brush* pBrush, ::draw2d::brush* pBrushLast)
    //{
 
    //   // first, determine the update region and select it
@@ -4275,13 +4275,13 @@ namespace draw2d_gdi
 
       rectangle.bottom_right() = point;
 
-      ::rectangle_i32 rectBound(rectangle);
+      ::rectangle_i32 rectangleBound(rectangle);
 
-      __sort(rectBound.left, rectBound.right);
+      __sort(rectangleBound.left, rectangleBound.right);
 
-      __sort(rectBound.top, rectBound.bottom);
+      __sort(rectangleBound.top, rectangleBound.bottom);
 
-      internal_stroke_path(&::draw2d_gdi::graphics::internal_set_path_line, &rectangle, rectBound, m_ppen);
+      internal_stroke_path(&::draw2d_gdi::graphics::internal_set_path_line, &rectangle, rectangleBound, m_ppen);
 
       ::MoveToEx(m_hdc, rectangle.right, rectangle.bottom, nullptr);
 

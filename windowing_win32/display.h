@@ -20,11 +20,11 @@ namespace windowing_win32
 
 #else
 
-      //rectangle_i32_array                                         m_rectaMonitor;
-      //rectangle_i32_array                                             m_rectaWork;
+      //rectangle_i32_array                                         m_rectangleaMonitor;
+      //rectangle_i32_array                                             m_rectangleaWork;
 
-      rectangle_i32_array                                               m_rectaMonitor;
-      rectangle_i32_array                                               m_rectaWkspace;
+      rectangle_i32_array                                               m_rectangleaMonitor;
+      rectangle_i32_array                                               m_rectangleaWkspace;
 #endif
       //#pragma message("at macos??")
       raw_array < MONITORINFO >                          m_monitorinfoa;
@@ -84,7 +84,7 @@ namespace windowing_win32
       //virtual bool monitor_to_wkspace(RECTANGLE_I32 * prectangle) override;
 
 
-      virtual void _get_monitor(rectangle_i32_array & rectaMonitor, rectangle_i32_array& rectaIntersect, const rectangle_i32 & rectParam);
+      virtual void _get_monitor(rectangle_i32_array & rectaMonitor, rectangle_i32_array& rectaIntersect, const rectangle_i32 & rectangleParam);
 
 
       virtual index _get_best_zoneing(edisplay * pedisplay, ::rectangle_i32 * prectangle, const ::rectangle_i32 & rectangle, bool bPreserveSize = false);

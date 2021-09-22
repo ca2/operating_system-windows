@@ -298,11 +298,9 @@ namespace windowing_win32
 
       //m_puserinteractionNotify->OnNotifyIconMessage(m_uiId, (::u32)pusermessage->m_lparam);
 
-      auto pevent = __create_new < ::user::control_event >();
+      auto psubject = __create_new < ::subject >();
 
-      psubject->m_puserelement->m_id = m_id;
-
-      psubject->m_puserinteraction = this;
+      psubject->m_puserelement = this;
 
       psubject->m_actioncontext.m_pmessage = pmessage;
 
@@ -325,7 +323,7 @@ namespace windowing_win32
 
       }
 
-      m_puserinteractionNotify->handle(psubject, pcontext);
+      m_puserinteractionNotify->handle(psubject, nullptr);
 
    }
 

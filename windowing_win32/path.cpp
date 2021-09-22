@@ -446,7 +446,7 @@ namespace draw2d_gdiplus
       try
       {
 
-         Gdiplus::FontFamily fontFamily;
+         Gdiplus::FontFamily pfontFamily;
 
          Gdiplus::StringFormat format(Gdiplus::StringFormat::GenericTypographic());
 
@@ -480,7 +480,7 @@ namespace draw2d_gdiplus
 
          INT iStyle = pfont->GetStyle();
 
-         pfont->GetFamily(&fontFamily);
+         pfont->GetFamily(&pfontFamily);
          //      Gdiplus::Status status;
 
          //Gdiplus::StringFormat format();
@@ -494,7 +494,7 @@ namespace draw2d_gdiplus
          format.SetLineAlignment(Gdiplus::StringAlignmentNear);
 
 
-         m_ppath->AddString(wstr, (INT)wstr.get_length(), &fontFamily, iStyle, dSize, Gdiplus::Point(x, y), &format);
+         m_ppath->AddString(wstr, (INT)wstr.get_length(), &pfontFamily, iStyle, dSize, Gdiplus::Point(x, y), &format);
 
       }
       catch (...)
@@ -507,10 +507,10 @@ namespace draw2d_gdiplus
    }
 
 
-   bool path::internal_add_draw_text(::draw2d::graphics * pgraphics, const ::rectangle_i32 & rectParam, const ::string & strText, ::write_text::font * pfont, const ::e_align & ealign, const ::e_draw_text & edrawtext)
+   bool path::internal_add_draw_text(::draw2d::graphics * pgraphics, const ::rectangle_i32 & rectangleParam, const ::string & strText, ::write_text::font * pfont, const ::e_align & ealign, const ::e_draw_text & edrawtext)
    {
 
-      ::rectangle_f64 rectangle(rectParam);
+      ::rectangle_f64 rectangle(rectangleParam);
 
       auto estatus = gdiplus_draw_text(pgraphics, this, strText, rectangle, ealign, edrawtext, pfont, 1.0);
 

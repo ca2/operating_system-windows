@@ -1490,9 +1490,9 @@ namespace windows
 
       //::GetClientRect(m_hwnd, rectangleClient);
 
-      //::rectangle_i32 rectScreen;
+      //::rectangle_i32 rectangleScreen;
 
-      //::GetWindowRect(m_hwnd, rectScreen);
+      //::GetWindowRect(m_hwnd, rectangleScreen);
 
       //if (::IsIconic(m_hwnd))
       //{
@@ -1503,9 +1503,9 @@ namespace windows
       //else
       //{
 
-      //   m_puserinteraction->m_pointScreen = rectScreen.origin();
+      //   m_puserinteraction->m_pointScreen = rectangleScreen.origin();
 
-      //   m_puserinteraction->m_size = rectScreen.size();
+      //   m_puserinteraction->m_size = rectangleScreen.size();
 
       //}
 
@@ -1517,7 +1517,7 @@ namespace windows
       //}
 
 
-      ////m_puserinteraction->m_sizeScreen = rectScreen.size();
+      ////m_puserinteraction->m_sizeScreen = rectangleScreen.size();
 
       ////m_puserinteraction->m_pointScreenClient.x = 0;
 
@@ -1575,26 +1575,26 @@ namespace windows
 
       }
 
-      ::rectangle_i32 rectWindow;
+      ::rectangle_i32 rectangleWindow;
 
       //if (!(GetExStyle() & WS_EX_LAYERED))
       //{
 
-      //   ::GetWindowRect(m_hwnd, rectWindow);
+      //   ::GetWindowRect(m_hwnd, rectangleWindow);
 
-      //   m_puserinteraction->m_pointParentClientRequest = rectWindow.origin();
+      //   m_puserinteraction->m_pointParentClientRequest = rectangleWindow.origin();
 
-      //   m_puserinteraction->m_sizeClientRequest = rectWindow.size();
+      //   m_puserinteraction->m_sizeClientRequest = rectangleWindow.size();
 
       //}
       //else
       //{
 
-      //   ::set_rect_point_size(&rectWindow, m_puserinteraction->m_pointParentClientRequest, m_puserinteraction.m_sizeClientRequest);
+      //   ::set_rect_point_size(&rectangleWindow, m_puserinteraction->m_pointParentClientRequest, m_puserinteraction.m_sizeClientRequest);
 
       //}
 
-      //*prectangle = rectWindow;
+      //*prectangle = rectangleWindow;
 
       //if (get_parent() != nullptr)
       //{
@@ -1639,11 +1639,11 @@ namespace windows
 
       //   }
 
-      //   //::copy(m_puserinteraction->m_rectParentClient, rect32);
+      //   //::copy(m_puserinteraction->m_rectangleParentClient, rect32);
 
       //}
 
-      //rect32 = m_puserinteraction->m_rectParentClient;
+      //rect32 = m_puserinteraction->m_rectangleParentClient;
 
       //rect32.offset(-rect32.top_left());
 
@@ -1670,10 +1670,10 @@ namespace windows
    }
 
 
-   void interaction_impl::sketch_prepare_window_full_screen(const ::rectangle_i32 & rectHint)
+   void interaction_impl::sketch_prepare_window_full_screen(const ::rectangle_i32 & rectangleHint)
    {
 
-      primitive_impl::sketch_prepare_window_full_screen(rectHint);
+      primitive_impl::sketch_prepare_window_full_screen(rectangleHint);
 
    }
 
@@ -2157,7 +2157,7 @@ namespace windows
    }
 
 
-   bool interaction_impl::RedrawWindow(const ::rectangle_i32& rectUpdate, ::draw2d::region* prgnUpdate, ::u32 flags)
+   bool interaction_impl::RedrawWindow(const ::rectangle_i32& rectangleUpdate, ::draw2d::region* prgnUpdate, ::u32 flags)
    {
 
       if (m_bDestroyImplOnly)
@@ -4542,14 +4542,14 @@ namespace windows
 //      {
 //         ::rectangle_i32 rectangleClient;
 //         ::GetClientRect(get_handle(), rectangleClient);
-//         ::rectangle_i32 rectWindow;
-//         ::GetWindowRect(get_handle(), rectWindow);
-//         ::rectangle_i32 rectRegion;
+//         ::rectangle_i32 rectangleWindow;
+//         ::GetWindowRect(get_handle(), rectangleWindow);
+//         ::rectangle_i32 rectangleRegion;
 //         HRGN hrgn = CreateRectRgn(0, 0, 0, 0);
 //         int regionType = ::GetWindowRgn(get_handle(), hrgn);
 //         if (regionType != ERROR)
 //         {
-//            ::GetRgnBox(hrgn, rectRegion);
+//            ::GetRgnBox(hrgn, rectangleRegion);
 //         }
 //         ::DeleteObject(hrgn); /* finished with region */
 //         WINDOWPLACEMENT wp;
@@ -5203,14 +5203,14 @@ namespace windows
       {
          ::RECT rectangleClient;
          ::GetClientRect(m_hwnd, &rectangleClient);
-         ::RECT rectWindow;
-         ::GetWindowRect(m_hwnd, &rectWindow);
-         ::RECT rectRegion;
+         ::RECT rectangleWindow;
+         ::GetWindowRect(m_hwnd, &rectangleWindow);
+         ::RECT rectangleRegion;
          HRGN hrgn = CreateRectRgn(0, 0, 0, 0);
          int regionType = ::GetWindowRgn(m_hwnd, hrgn);
          if (regionType != ERROR)
          {
-            ::GetRgnBox(hrgn, &rectRegion);
+            ::GetRgnBox(hrgn, &rectangleRegion);
          }
          ::DeleteObject(hrgn); /* finished with region */
          WINDOWPLACEMENT wp;
@@ -5433,14 +5433,14 @@ namespace windows
 
       }
 
-      if (message == e_message_event)
-      {
+      //if (message == e_message_subject)
+      //{
 
-         m_puserinteraction->handle_event(pmessage);
+      //   m_puserinteraction->handle(pmessage);
 
-         return;
+      //   return;
 
-      }
+      //}
 
       ::user::interaction_impl::message_handler(pmessage);
 

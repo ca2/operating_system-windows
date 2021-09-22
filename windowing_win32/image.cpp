@@ -364,10 +364,10 @@ namespace draw2d_gdiplus
    //}
 
 
-   bool image::_draw_raw(const ::rectangle_i32 & rectDstParam, ::image * pimageSrc, const ::point_i32 & pointSrcParam)
+   bool image::_draw_raw(const ::rectangle_i32 & rectangleDstParam, ::image * pimageSrc, const ::point_i32 & pointSrcParam)
    {
 
-      ::rectangle_i32 rectangleTarget(rectDstParam);
+      ::rectangle_i32 rectangleTarget(rectangleDstParam);
 
       ::point_i32 pointSrc(pointSrcParam);
 

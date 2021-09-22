@@ -174,14 +174,14 @@ namespace windowing_win32
    for(i32 i = 0; i < hwnda.get_size(); i++)
    {
    HWND hwndChild = hwnda[i];
-   ::rectangle_i32 rectChild;
-   ::get_client_rect(hwndChild, rectChild);
-   ::_001ClientToScreen(hwndChild, &rectChild.top_left());
-   ::_001ClientToScreen(hwndChild, &rectChild.bottom_right());
-   ::_001ScreenToClient(hwnd, &rectChild.top_left());
-   ::_001ScreenToClient(hwnd, &rectChild.bottom_right());
-   rectChild.offset(pointOffset);
-   HRGN hrgnChild = ::create_rect(rectChild);
+   ::rectangle_i32 rectangleChild;
+   ::get_client_rect(hwndChild, rectangleChild);
+   ::_001ClientToScreen(hwndChild, &rectangleChild.top_left());
+   ::_001ClientToScreen(hwndChild, &rectangleChild.bottom_right());
+   ::_001ScreenToClient(hwnd, &rectangleChild.top_left());
+   ::_001ScreenToClient(hwnd, &rectangleChild.bottom_right());
+   rectangleChild.offset(pointOffset);
+   HRGN hrgnChild = ::create_rect(rectangleChild);
    ::CombineRgn(hrgn, hrgn, hrgnChild, ::draw2d::region::combine_exclude);
    ::DeleteObject(hrgnChild);
    }
@@ -193,10 +193,10 @@ namespace windowing_win32
 
    /*HRGN window_util::GetAClipRgn(HWND hwnd, const point_i32 & pointOffset, bool bExludeChildren)
    {
-   ::rectangle_i32 rectWnd;
-   ::get_client_rect(hwnd, rectWnd);
-   rectWnd.offset(pointOffset);
-   HRGN hrgn = ::create_rect(rectWnd);
+   ::rectangle_i32 rectangleWnd;
+   ::get_client_rect(hwnd, rectangleWnd);
+   rectangleWnd.offset(pointOffset);
+   HRGN hrgn = ::create_rect(rectangleWnd);
 
    if(bExludeChildren)
    {
@@ -506,17 +506,17 @@ namespace windowing_win32
    void window_util::ContraintPosToParent(HWND hwnd)
    {
       //#if !defined(_UWP) && !defined(APPLE_IOS)
-      //      ::rectangle_i32 rectMajor;
+      //      ::rectangle_i32 rectangleMajor;
       //      HWND hwndParent = ::get_parent(hwnd);
       //      if(hwndParent == nullptr)
       //      {
       //
       //#ifdef WINDOWS_DESKTOP
       //
-      //         rectMajor.left = 0;
-      //         rectMajor.top = 0;
-      //         rectMajor.right = GetSystemMetrics(SM_CXSCREEN);
-      //         rectMajor.bottom = GetSystemMetrics(SM_CYSCREEN);
+      //         rectangleMajor.left = 0;
+      //         rectangleMajor.top = 0;
+      //         rectangleMajor.right = GetSystemMetrics(SM_CXSCREEN);
+      //         rectangleMajor.bottom = GetSystemMetrics(SM_CYSCREEN);
       //
       //#else
       //
@@ -527,7 +527,7 @@ namespace windowing_win32
       //      }
       //      else
       //      {
-      //         ::get_client_rect(hwndParent, rectMajor);
+      //         ::get_client_rect(hwndParent, rectangleMajor);
       //      }
       //
       //      ::rectangle_i32 rectangle;
@@ -556,26 +556,26 @@ namespace windowing_win32
       //
       //      bool bModified = false;
       //
-      //      if(rectangle.left > rectMajor.right)
+      //      if(rectangle.left > rectangleMajor.right)
       //      {
-      //         rectangle.offset(- rectangle.width() - (rectangle.left - rectMajor.right), 0);
+      //         rectangle.offset(- rectangle.width() - (rectangle.left - rectangleMajor.right), 0);
       //         bModified = true;
       //      }
-      //      if(rectangle.right < rectMajor.left)
+      //      if(rectangle.right < rectangleMajor.left)
       //      {
-      //         rectangle.offset(rectangle.width() + (rectMajor.left - rectangle.right), 0);
+      //         rectangle.offset(rectangle.width() + (rectangleMajor.left - rectangle.right), 0);
       //         bModified = true;
       //      }
-      //      if(rectangle.top > rectMajor.bottom)
+      //      if(rectangle.top > rectangleMajor.bottom)
       //      {
-      //         rectangle.offset(0, - rectangle.height() - (rectangle.top - rectMajor.bottom));
+      //         rectangle.offset(0, - rectangle.height() - (rectangle.top - rectangleMajor.bottom));
       //         bModified = true;
       //      }
       //
-      //      if(rectangle.bottom < rectMajor.top)
+      //      if(rectangle.bottom < rectangleMajor.top)
       //      {
       //
-      //         rectangle.offset(0, rectangle.height() + (rectMajor.top - rectangle.bottom));
+      //         rectangle.offset(0, rectangle.height() + (rectangleMajor.top - rectangle.bottom));
       //
       //         bModified = true;
       //
@@ -847,21 +847,21 @@ namespace windowing_win32
    //
    //         HWND hwndChild = hwnda[i];
    //
-   //         ::rectangle_i32 rectChild;
+   //         ::rectangle_i32 rectangleChild;
    //
-   //         ::GetClientRect(hwndChild, rectChild);
+   //         ::GetClientRect(hwndChild, rectangleChild);
    //
-   //         ::ClientToScreen(hwndChild, &rectChild.top_left());
+   //         ::ClientToScreen(hwndChild, &rectangleChild.top_left());
    //
-   //         ::ClientToScreen(hwndChild, &rectChild.bottom_right());
+   //         ::ClientToScreen(hwndChild, &rectangleChild.bottom_right());
    //
-   //         ::ScreenToClient(hwnd, &rectChild.top_left());
+   //         ::ScreenToClient(hwnd, &rectangleChild.top_left());
    //
-   //         ::ScreenToClient(hwnd, &rectChild.bottom_right());
+   //         ::ScreenToClient(hwnd, &rectangleChild.bottom_right());
    //
-   //         rectChild.offset(pointOffset);
+   //         rectangleChild.offset(pointOffset);
    //
-   //         HRGN hrgnChild = ::CreateRectRgnIndirect(rectChild);
+   //         HRGN hrgnChild = ::CreateRectRgnIndirect(rectangleChild);
    //
    //         ::CombineRgn(hrgn, hrgn, hrgnChild, ::draw2d::e_combine_exclude);
    //
@@ -883,13 +883,13 @@ namespace windowing_win32
    //
    //#ifdef WINDOWS_DESKTOP
    //
-   //      ::rectangle_i32 rectWnd;
+   //      ::rectangle_i32 rectangleWnd;
    //
-   //      ::GetClientRect(hwnd, rectWnd);
+   //      ::GetClientRect(hwnd, rectangleWnd);
    //
-   //      rectWnd.offset(pointOffset);
+   //      rectangleWnd.offset(pointOffset);
    //
-   //      HRGN hrgn = ::CreateRectRgnIndirect(rectWnd);
+   //      HRGN hrgn = ::CreateRectRgnIndirect(rectangleWnd);
    //
    //      if (bExludeChildren)
    //      {

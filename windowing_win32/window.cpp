@@ -617,9 +617,11 @@ namespace windowing_win32
 
             auto psystem = m_psystem->m_paurasystem;
 
-            auto psubject = psystem->subject(id_os_font_change);
+            psystem->signal(id_os_font_change);
 
-            psystem->handle_subject(psubject);
+            //auto psubject = psystem->subject(id_os_font_change);
+
+            //psystem->handle_subject(psubject);
 
             //fork([this]()
               // {
@@ -637,9 +639,13 @@ namespace windowing_win32
 
             auto psystem = m_psystem->m_paurasystem;
 
-            auto psubject = psystem->subject(id_os_dark_mode);
+            //auto psubject = psystem->subject(id_os_dark_mode);
 
-            psystem->handle_subject(psubject);
+            //psystem->handle_subject(psubject);
+
+            psystem->m_pnode->fetch_user_color();
+
+            //psystem->handle_subject(psubject);
 
          }
          else if (pmessage->m_id == e_message_display_change ||
@@ -2494,11 +2500,11 @@ namespace windowing_win32
 
       //}
 
-      ::rectangle_i32 rectWindow;
+      ::rectangle_i32 rectangleWindow;
 
       auto puserinteraction = m_pimpl->m_puserinteraction;
 
-      rectWindow = puserinteraction->screen_rect();
+      rectangleWindow = puserinteraction->screen_rect();
 
       PAINTSTRUCT paint;
 
@@ -2508,29 +2514,29 @@ namespace windowing_win32
 
       ::SelectClipRgn(hdc, nullptr);
 
-      ::rectangle_i32 rectPaint;
+      ::rectangle_i32 rectanglePaint;
 
-      ::rectangle_i32 rectUpdate;
+      ::rectangle_i32 rectangleUpdate;
 
-      rectPaint = paint.rcPaint;
+      rectanglePaint = paint.rcPaint;
 
 
       __throw(todo);
 
-      //if (rectPaint.is_null() || (GetExStyle() & WS_EX_LAYERED))
+      //if (rectanglePaint.is_null() || (GetExStyle() & WS_EX_LAYERED))
       //{
 
-      //   rectUpdate = rectWindow;
+      //   rectangleUpdate = rectangleWindow;
 
-      //   rectPaint = rectWindow;
+      //   rectanglePaint = rectangleWindow;
 
-      //   puserinteraction->_001ScreenToClient(rectPaint, ::user::e_layout_design);
+      //   puserinteraction->_001ScreenToClient(rectanglePaint, ::user::e_layout_design);
 
       //}
       //else
       //{
 
-      //   rectUpdate = rectPaint;
+      //   rectangleUpdate = rectanglePaint;
 
       //}
 
@@ -2549,7 +2555,7 @@ namespace windowing_win32
 
       //auto & buffer = pbuffer->m_osbuffera[!pbuffer->m_iCurrentBuffer];
 
-      //::BitBlt(hdc, rectUpdate.left, rectUpdate.top, rectUpdate.width(), rectUpdate.height(), buffer.m_hdc, 0, 0, SRCCOPY);
+      //::BitBlt(hdc, rectangleUpdate.left, rectangleUpdate.top, rectangleUpdate.width(), rectangleUpdate.height(), buffer.m_hdc, 0, 0, SRCCOPY);
 
 
 
@@ -2588,7 +2594,7 @@ namespace windowing_win32
 
       //            pgraphics->SetViewportOrg(0, 0);
 
-      //            g->BitBlt(rectPaint.left, rectPaint.top, rectPaint.width(), rectPaint.height(), pgraphics, rectUpdate.left, rectUpdate.top);
+      //            g->BitBlt(rectanglePaint.left, rectanglePaint.top, rectanglePaint.width(), rectanglePaint.height(), pgraphics, rectangleUpdate.left, rectangleUpdate.top);
 
       //         }
 
@@ -3314,7 +3320,7 @@ namespace windowing_win32
    }
 
 
-   bool window::RedrawWindow(const ::rectangle_i32 & rectUpdate, ::draw2d::region * prgnUpdate, ::u32 flags)
+   bool window::RedrawWindow(const ::rectangle_i32 & rectangleUpdate, ::draw2d::region * prgnUpdate, ::u32 flags)
    {
 
       //if (m_bDestroyImplOnly)
@@ -5493,14 +5499,14 @@ namespace windowing_win32
 //      {
 //         ::rectangle_i32 rectangleClient;
 //         ::GetClientRect(get_hwnd(), rectangleClient);
-//         ::rectangle_i32 rectWindow;
-//         ::GetWindowRect(get_hwnd(), rectWindow);
-//         ::rectangle_i32 rectRegion;
+//         ::rectangle_i32 rectangleWindow;
+//         ::GetWindowRect(get_hwnd(), rectangleWindow);
+//         ::rectangle_i32 rectangleRegion;
 //         HRGN hrgn = CreateRectRgn(0, 0, 0, 0);
 //         int regionType = ::GetWindowRgn(get_hwnd(), hrgn);
 //         if (regionType != ERROR)
 //         {
-//            ::GetRgnBox(hrgn, rectRegion);
+//            ::GetRgnBox(hrgn, rectangleRegion);
 //         }
 //         ::DeleteObject(hrgn); /* finished with region */
 //         WINDOWPLACEMENT wp;

@@ -9,7 +9,7 @@ namespace windows
 {
 
 
-   operating_system::process()
+   process::process()
    {
 
       __memset(&m_pi,0,sizeof(PROCESS_INFORMATION));

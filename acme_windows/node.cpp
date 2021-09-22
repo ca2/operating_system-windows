@@ -17,7 +17,7 @@ namespace acme
       node::node()
       {
 
-         create_factory < ::windows::exception_engine, ::exception_engine >();
+         //create_factory < ::windows::exception_engine, ::exception_engine >();
 
          ::windows::callstack::s_pcriticalsection = new critical_section();
 

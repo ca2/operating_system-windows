@@ -50,10 +50,10 @@ namespace draw2d_gdi
    }
 
 
-   void font::construct(const ::write_text::font & fontParam)
+   void font::construct(const ::write_text::font & pfontParam)
    {
 
-      class font & font = const_cast < ::draw2d_gdi::font & > (dynamic_cast < const ::draw2d_gdi::font & > (fontParam));
+      class font & font = const_cast < ::draw2d_gdi::font & > (dynamic_cast < const ::draw2d_gdi::font & > (pfontParam));
 
       if(get_handle() != nullptr)
          destroy();

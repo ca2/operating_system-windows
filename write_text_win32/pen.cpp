@@ -95,8 +95,8 @@ namespace draw2d_gdiplus
       ::draw2d::bitmap_pointer bmpMask(papp);
       ::draw2d::bitmap *pOldMask, *pOldMem;
       const DWORD   CP_ROP = 0xE20746;
-      ::draw2d::brush_pointer brHighLight(papp, psession->get_default_color(COLOR_3DHIGHLIGHT)),
-         brShadow(papp, psession->get_default_color(COLOR_3DSHADOW)), spbr;
+      ::draw2d::brush_pointer pbrushHighLight(papp, psession->get_default_color(COLOR_3DHIGHLIGHT)),
+         pbrushShadow(papp, psession->get_default_color(COLOR_3DSHADOW)), spbr;
 
       if(graphicsMem->CreateCompatibleDC(nullptr) &&
          graphicsMask->CreateCompatibleDC(nullptr))
@@ -126,10 +126,10 @@ namespace draw2d_gdiplus
 
                graphicsMem->SetBkColor(rgb(255, 255, 255));
 
-               spbr = graphicsMem->set(brHighLight);
+               spbr = graphicsMem->set(pbrushHighLight);
                graphicsMem->BitBlt(1, 1, bm.bmWidth, bm.bmHeight, graphicsMask, 0, 0, CP_ROP);
 
-               graphicsMem->set(brShadow);
+               graphicsMem->set(pbrushShadow);
                graphicsMem->BitBlt(0, 0, bm.bmWidth, bm.bmHeight, graphicsMask, 0, 0, CP_ROP);
 
                graphicsMem->set(spbr);
@@ -153,8 +153,8 @@ namespace draw2d_gdiplus
       ::draw2d::bitmap_pointer bmpMask(papp);
       ::draw2d::bitmap *pOldMask, *pOldMem;
       const DWORD   CP_ROP = 0xE20746;
-      ::draw2d::brush_pointer brHighLight(papp, psession->get_default_color(COLOR_3DHIGHLIGHT)),
-         brShadow(papp, psession->get_default_color(COLOR_3DSHADOW)), spbr;
+      ::draw2d::brush_pointer pbrushHighLight(papp, psession->get_default_color(COLOR_3DHIGHLIGHT)),
+         pbrushShadow(papp, psession->get_default_color(COLOR_3DSHADOW)), spbr;
 
       if(graphicsMem->CreateCompatibleDC(pgraphics) &&
          graphicsMask->CreateCompatibleDC(pgraphics) &&
@@ -177,10 +177,10 @@ namespace draw2d_gdiplus
 
          pgraphics->SetBkColor(rgb(255, 255, 255));
 
-         spbr = pgraphics->set(brHighLight);
+         spbr = pgraphics->set(pbrushHighLight);
          pgraphics->BitBlt(x + 1, y + 1, bm.bmWidth, bm.bmHeight, graphicsMask, 0, 0, CP_ROP);
 
-         pgraphics->set(brShadow);
+         pgraphics->set(pbrushShadow);
          pgraphics->BitBlt(x, y, bm.bmWidth, bm.bmHeight, graphicsMask, 0, 0, CP_ROP);
 
          pgraphics->set(spbr);
@@ -200,7 +200,7 @@ namespace draw2d_gdiplus
       COLORREF color32;
       ::draw2d::bitmap_pointer bmpMask(papp);
       ::draw2d::bitmap *pOldMask, *pOldSrc;
-      ::draw2d::brush brChecker;
+      ::draw2d::brush pbrushChecker;
       static const WORD wPat[8] = {0x55, 0xaa, 0x55, 0xaa, 0x55, 0xaa, 0x55, 0xaa};
 
       if(graphicsSrc->CreateCompatibleDC(nullptr) &&
@@ -214,7 +214,7 @@ namespace draw2d_gdiplus
             {
                // create checker brush
                bmpMask->CreateBitmap(8, 8, 1, 1, wPat);
-               brChecker.CreatePatternBrush(bmpMask);
+               pbrushChecker.CreatePatternBrush(bmpMask);
                //bmpMask->delete_object();
 
                // Mask
@@ -242,7 +242,7 @@ namespace draw2d_gdiplus
                {
                   color1 = graphicsDest->SetTextColor(color1);
                   color2 = graphicsDest->SetBkColor(color2);
-                  graphicsDest->fill_rectangle(rectangle_i32(0, 0, bm.bmWidth, bm.bmHeight), &brChecker);
+                  graphicsDest->fill_rectangle(rectangle_i32(0, 0, bm.bmWidth, bm.bmHeight), &pbrushChecker);
                   graphicsDest->SetTextColor(color1);
                   graphicsDest->SetBkColor(color2);
 
@@ -269,7 +269,7 @@ namespace draw2d_gdiplus
       COLORREF color32;
       ::draw2d::bitmap_pointer bmpMask(papp);
       ::draw2d::bitmap *pOldMask, *pOldSrc;
-      ::draw2d::brush brChecker;
+      ::draw2d::brush pbrushChecker;
       static const WORD wPat[8] = {0x55, 0xaa, 0x55, 0xaa, 0x55, 0xaa, 0x55, 0xaa};
 
       if(graphicsSrc->CreateCompatibleDC(pgraphics) &&
@@ -278,7 +278,7 @@ namespace draw2d_gdiplus
       {
          // create checker brush
          bmpMask->CreateBitmap(8, 8, 1, 1, wPat);
-         brChecker.CreatePatternBrush(bmpMask);
+         pbrushChecker.CreatePatternBrush(bmpMask);
          //bmpMask->delete_object();
 
          // Mask
@@ -302,7 +302,7 @@ namespace draw2d_gdiplus
          // Checker the background with white and crBackground
          color1 = pgraphics->SetTextColor(color1);
          color2 = pgraphics->SetBkColor(color2);
-         pgraphics->fill_rectangle(rectangle_i32(x, y, x + bm.bmWidth, y + bm.bmHeight), &brChecker);
+         pgraphics->fill_rectangle(rectangle_i32(x, y, x + bm.bmWidth, y + bm.bmHeight), &pbrushChecker);
          pgraphics->SetTextColor(color1);
          pgraphics->SetBkColor(color2);
 

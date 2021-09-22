@@ -293,7 +293,7 @@ namespace windowing_win32
 
       virtual strsize get_window_text(char * pszStringBuf, strsize nMaxCount) override;
 
-      virtual void get_window_text(string & rectString) override;
+      virtual void get_window_text(string & rectangleString) override;
       virtual strsize get_window_text_length() override;
 
       //virtual void on_layout(::draw2d::graphics_pointer & pgraphics) override;
@@ -369,7 +369,7 @@ namespace windowing_win32
 
       //virtual void sketch_prepare_window_minimize(::e_activation eactivation) override;
       //virtual void sketch_prepare_window_maximize() override;
-      //virtual void sketch_prepare_window_full_screen(const ::rectangle_i32 & rectHint = nullptr) override;
+      //virtual void sketch_prepare_window_full_screen(const ::rectangle_i32 & rectangleHint = nullptr) override;
       //virtual void sketch_prepare_window_restore(edisplay edisplay) override;
 
 
@@ -380,7 +380,7 @@ namespace windowing_win32
       virtual bool LockWindowUpdate();
       virtual void UnlockWindowUpdate();
 
-      virtual bool RedrawWindow(const ::rectangle_i32 & rectUpdate = nullptr,
+      virtual bool RedrawWindow(const ::rectangle_i32 & rectangleUpdate = nullptr,
          ::draw2d::region * prgnUpdate = nullptr,
          ::u32 flags = RDW_INVALIDATE | RDW_ERASE);
 
@@ -468,7 +468,7 @@ namespace windowing_win32
 
       //virtual i32 GetChildByIdText(__in i32 nID, __out_ecount_part_z(nMaxCount, return +1) TCHAR * pStr, __in i32 nMaxCount) const;
 
-      ///virtual i32 GetChildByIdText(i32 nID, string & rectString) const;
+      ///virtual i32 GetChildByIdText(i32 nID, string & rectangleString) const;
       //virtual ::user::interaction * GetNextDlgGroupItem(::user::interaction * pWndCtl, bool bPrevious = false) const;
       //virtual ::user::interaction * GetNextDlgTabItem(::user::interaction * pWndCtl, bool bPrevious = false) const;
       //virtual ::u32 IsDlgButtonChecked(i32 nIDButton) const;
