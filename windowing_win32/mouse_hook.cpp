@@ -13,6 +13,8 @@ namespace mouse_hook
 
    HHOOK g_hhook = nullptr;
 
+   itask_t g_itask = 0;
+
    LRESULT CALLBACK LowLevelMouseProc(int nCode, WPARAM wParam, LPARAM lParam)
    {
 
@@ -58,6 +60,8 @@ namespace mouse_hook
       }*/
 
       // g_hhook = nullptr;
+
+      g_itask = ::GetCurrentThreadId();
 
       MSG msg;
 
@@ -123,7 +127,7 @@ namespace mouse_hook
 
       g_pmatter = nullptr;
 
-      //m_bRunAuraClick = false;
+      PostThreadMessage(g_itask, WM_QUIT, 0, 0);
 
       g_bRun = false;
 
