@@ -77,7 +77,7 @@ namespace windowing_win32
    ::e_status copydesk::initialize_copydesk(::windowing::window * pwindow)
    {
 
-      auto estatus = ::user::copydesk::initialize(pwindow);
+      auto estatus = ::user::copydesk::initialize_copydesk(pwindow);
 
       if (!estatus)
       {
