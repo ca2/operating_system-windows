@@ -577,20 +577,20 @@ namespace windowing_win32
 
 
 
-   bool window::has_capture() const
-   {
+   //bool window::has_capture() const
+   //{
 
-      return ::GetCapture() == get_hwnd();
+   //   return ::GetCapture() == get_hwnd();
 
-   }
+   //}
 
 
-   bool window::has_focus() const
-   {
+   //bool window::has_focus() const
+   //{
 
-      return ::GetFocus() == get_hwnd();
+   //   return ::GetFocus() == get_hwnd();
 
-   }
+   //}
 
 
    void window::_001OnMessage(::message::message * pmessage)
@@ -2302,6 +2302,25 @@ namespace windowing_win32
    }
 
 
+   ::point_i32 window::get_mouse_cursor_position()
+   {
+
+      POINT point;
+
+      ::GetCursorPos(&point);
+
+      ::point_i32 point_i32;
+
+      point_i32.x = point.x;
+
+      point_i32.y = point.y;
+
+      return point_i32;
+
+   }
+   
+   
+   
    //bool window::reset(::windowing::cursor * pcursor, ::aura::session * psession)
    //{
 

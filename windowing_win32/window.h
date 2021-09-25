@@ -23,23 +23,21 @@ namespace windowing_win32
       __pointer(::windows::interaction_impl)    m_pimpl2;
       ::millis                                  m_millisLastMouseMove;
       ::point_i32                               m_pointMouseMove;
-      
-
 
 
       window();
-      virtual ~window();
+      ~window() override;
 
 
-      virtual void assert_valid() const override;
-      virtual void dump(dump_context & dumpcontext) const override;
+      void assert_valid() const override;
+      void dump(dump_context & dumpcontext) const override;
 
 
-      virtual void install_message_routing(channel * pchannel) override;
+      void install_message_routing(channel * pchannel) override;
 
 
       
-      virtual ::e_status create_window(::user::interaction_impl * pimpl) override;
+      ::e_status create_window(::user::interaction_impl * pimpl) override;
 
 
       inline HWND get_hwnd() const { return (HWND) get_oswindow(); }
@@ -66,8 +64,8 @@ namespace windowing_win32
       DECLARE_MESSAGE_HANDLER(_001OnMessage);
 
 
-      virtual bool has_capture() const;
-      virtual bool has_focus() const;
+      //bool has_capture() const override;
+      //bool has_focus() const override;
 
 
       //void send_client_event(Atom atom, unsigned int numArgs, ...);
@@ -81,50 +79,52 @@ namespace windowing_win32
 
       //virtual void set_wm_class(const ::string & psz) override;
 
-      virtual ::e_status exit_iconify() override;
+      ::e_status exit_iconify() override;
 
-      virtual ::e_status full_screen(const::rectangle_i32 & rectangle = nullptr) override;
+      ::e_status full_screen(const::rectangle_i32 & rectangle = nullptr) override;
 
-      virtual ::e_status exit_full_screen() override;
+      ::e_status exit_full_screen() override;
 
-      virtual ::e_status exit_zoomed() override;
+      ::e_status exit_zoomed() override;
 
-      virtual ::e_status set_keyboard_focus() override;
+      ::e_status set_keyboard_focus() override;
 
-      virtual ::e_status set_active_window() override;
+      ::e_status set_active_window() override;
 
       ::e_status bring_to_front() override;
 
-      virtual ::e_status set_foreground_window() override;
+      ::e_status set_foreground_window() override;
 
-      virtual ::e_status set_mouse_capture() override;
-
-
-
-      virtual bool has_mouse_capture() const;
-      virtual bool has_keyboard_focus() const;
-
-
-      virtual bool is_active_window() const override;
+      ::e_status set_mouse_capture() override;
 
 
 
+      bool has_mouse_capture() const override;
+      bool has_keyboard_focus() const override;
 
-      virtual ::e_status destroy_window() override;
 
-      virtual ::e_status show_window(const ::e_display & edisplay, const ::e_activation & eactivation) override;
+      bool is_active_window() const override;
+
+
+
+
+      ::e_status destroy_window() override;
+
+      ::e_status show_window(const ::e_display & edisplay, const ::e_activation & eactivation) override;
 
       //virtual void set_user_interaction(::layered * pinteraction) override;
 
-      virtual void post_non_client_destroy() override;
+      void post_non_client_destroy() override;
 
-      virtual ::e_status set_mouse_cursor(::windowing::cursor * pcursor) override;
+      ::e_status set_mouse_cursor(::windowing::cursor * pcursor) override;
+
+      ::point_i32 get_mouse_cursor_position() override;
 
 //      virtual bool is_child_of(const ::windowing::window * pwindowAscendantCandidate) const override;
       
       //virtual long get_state() override;
 
-      virtual bool is_iconic() override;
+      bool is_iconic() override;
 
       virtual bool is_window() override;
 
@@ -134,17 +134,17 @@ namespace windowing_win32
 
       //virtual ::e_status show_window(const::e_display & edisplay, const::e_activation & eactivation) override;
       
-      virtual bool client_to_screen(POINT_I32 * ppoint) override;
+      bool client_to_screen(POINT_I32 * ppoint) override;
 
-      virtual bool screen_to_client(POINT_I32 * ppoint) override;
+      bool screen_to_client(POINT_I32 * ppoint) override;
 
-      virtual bool on_set_window_position(const class ::zorder& zorder, i32 x, i32 y, i32 cx, i32 cy, ::u32 nFlags) override;
+      bool on_set_window_position(const class ::zorder& zorder, i32 x, i32 y, i32 cx, i32 cy, ::u32 nFlags) override;
 
-      virtual bool set_window_position(const class ::zorder & zorder, i32 x, i32 y, i32 cx, i32 cy, ::u32 nFlags) override;
+      bool set_window_position(const class ::zorder & zorder, i32 x, i32 y, i32 cx, i32 cy, ::u32 nFlags) override;
 
       //virtual bool _set_window_pos(class::zorder zorder, i32 x, i32 y, i32 cx, i32 cy, ::u32 nFlags) override;
 
-      virtual bool is_destroying() override;
+      bool is_destroying() override;
 
       //virtual bool bamf_set_icon() override;
 
