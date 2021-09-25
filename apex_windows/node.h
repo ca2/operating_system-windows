@@ -40,9 +40,9 @@ namespace apex
          virtual ::e_status shell_create_link(::file::path pathObj, ::file::path pathLnk, string strDesc, ::file::path pathIco, int iIcon);
 
 
-         virtual bool _os_calc_app_dark_mode();
+         //virtual bool _os_calc_app_dark_mode();
 
-         virtual bool _os_calc_system_dark_mode();
+         //virtual bool _os_calc_system_dark_mode();
 
 
          virtual ::color::color get_default_color(::u64 u);

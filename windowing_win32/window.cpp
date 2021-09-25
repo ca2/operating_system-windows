@@ -632,20 +632,12 @@ namespace windowing_win32
 
          //}
          }
-         else if (
-            pmessage->m_id == WM_SETTINGCHANGE &&
-            strLparamString == "ImmersiveColorSet")
+         else if (pmessage->m_id == WM_SETTINGCHANGE && strLparamString == "ImmersiveColorSet")
          {
 
-            auto psystem = m_psystem->m_paurasystem;
+            auto pnode = m_psystem->m_pnode;
 
-            //auto psubject = psystem->subject(id_os_dark_mode);
-
-            //psystem->handle_subject(psubject);
-
-            psystem->m_pnode->fetch_user_color();
-
-            //psystem->handle_subject(psubject);
+            pnode->fetch_user_color();
 
          }
          else if (pmessage->m_id == e_message_display_change ||

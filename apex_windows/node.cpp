@@ -81,86 +81,86 @@ namespace apex
       }
 
 
-      bool node::_os_calc_app_dark_mode()
-      {
+      //bool node::_os_calc_app_dark_mode()
+      //{
 
-         try
-         {
+      //   try
+      //   {
 
-            ::windows::registry::key key;
+      //      ::windows::registry::key key;
 
-            key.open(HKEY_CURRENT_USER, "Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize");
+      //      key.open(HKEY_CURRENT_USER, "Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize");
 
-            ::u32 dw;
+      //      ::u32 dw;
 
-            auto estatus = key._get("AppsUseLightTheme", dw);
+      //      auto estatus = key._get("AppsUseLightTheme", dw);
 
-            if (::failed(estatus))
-            {
+      //      if (::failed(estatus))
+      //      {
 
-               estatus = key._get("SystemUseLightTheme", dw);
+      //         estatus = key._get("SystemUseLightTheme", dw);
 
-               if (::failed(estatus))
-               {
+      //         if (::failed(estatus))
+      //         {
 
-                  return false;
+      //            return false;
 
-               }
+      //         }
 
-            }
+      //      }
 
-            return dw == 0;
+      //      return dw == 0;
 
-         }
-         catch (...)
-         {
+      //   }
+      //   catch (...)
+      //   {
 
-            return false;
+      //      return false;
 
-         }
+      //   }
 
-      }
+      //}
 
 
-      bool node::_os_calc_system_dark_mode()
-      {
+      //bool node::_os_calc_system_dark_mode()
+      //{
 
-         try
-         {
+      //   try
+      //   {
 
-            ::windows::registry::key key;
+      //      ::windows::registry::key key;
 
-            key.open(HKEY_CURRENT_USER, "Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize");
+      //      key.open(HKEY_CURRENT_USER, "Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize");
 
-            ::u32 dw;
+      //      ::u32 dw;
 
-            auto estatus = key._get("SystemUseLightTheme", dw);
+      //      auto estatus = key._get("SystemUseLightTheme", dw);
 
-            if (::failed(estatus))
-            {
+      //      if (::failed(estatus))
+      //      {
 
-               estatus = key._get("AppsUseLightTheme", dw);
+      //         estatus = key._get("AppsUseLightTheme", dw);
 
-               if (::failed(estatus))
-               {
+      //         if (::failed(estatus))
+      //         {
 
-                  return false;
+      //            return false;
 
-               }
+      //         }
 
-            }
+      //      }
 
-            return dw == 0;
+      //      return dw == 0;
 
-         }
-         catch (...)
-         {
+      //   }
+      //   catch (...)
+      //   {
 
-            return false;
+      //      return false;
 
-         }
+      //   }
 
-      }
+      //}
 
 
       ::color::color node::get_default_color(::u64 u)

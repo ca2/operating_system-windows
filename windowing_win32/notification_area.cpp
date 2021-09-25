@@ -164,7 +164,7 @@ namespace windowing_win32
 
             __pointer(::draw2d::icon) picon;
 
-            picon.create();
+            picon.create(this);
 
             picon->initialize_with_windowing_icon(pwindowingicon);
 

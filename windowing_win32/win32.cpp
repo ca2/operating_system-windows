@@ -40,7 +40,7 @@ namespace windowing_win32
       m_bVisible(bVisible)
    {
 
-      __construct_new(m_phwnda);
+      m_phwnda = __new(hwnd_array);
 
       if (bDesktop)
       {

@@ -47,6 +47,17 @@ namespace acme
          //virtual ::file::path roaming() override;
 
 
+         virtual bool win32_registry_windows_dark_mode_for_app();
+         virtual bool win32_registry_windows_dark_mode_for_system();
+         virtual bool win32_registry_windows_darkness();
+
+
+         virtual ::color::color reinterpreted_windows_darkness_background_color();
+
+
+         void fetch_user_color() override;
+
+
          virtual void install_crash_dump_reporting(const string& strModuleNameWithTheExeExtension) override;
 
 
@@ -56,14 +67,6 @@ namespace acme
          virtual platform_char** get_envp(wcsdup_array& a);
 
 
-         
-
-
-
-         //virtual bool memcnts();
-
-         //virtual ::file::path memcnts_base_path();
-
          virtual ::e_status datetime_to_filetime(filetime_t* pFileTime, const ::datetime::time& time) override;
 
 
@@ -71,21 +74,22 @@ namespace acme
 
 
          virtual ::e_status ExitCode_to_status(DWORD dwExitCode);
-         
 
 
          virtual string audio_get_default_library_name() override;
 
 
-         //virtual ::e_status on_start_system() override;
-
          ::e_status create_process(const ::string & pszCommandLine, u32 * pprocessId) override;
+
 
          ::e_status run_silent(const ::string & strFunct, const ::string & strstrParams) override;
 
+
          bool process_modules(string_array& stra, u32 processID) override;
 
+
          bool load_modules_diff(string_array& straOld, string_array& straNew, const ::string & pszExceptDir) override;
+
 
          id_array module_path_get_pid(const ::string & pszModulePath, bool bModuleNameIsPropertyFormatted) override;
 

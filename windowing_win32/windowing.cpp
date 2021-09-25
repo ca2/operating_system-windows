@@ -37,7 +37,7 @@ namespace windowing_win32
 
       }
 
-      estatus = ::__construct(m_pdisplay);
+      estatus = __construct(m_pdisplay);
 
       if (!estatus)
       {

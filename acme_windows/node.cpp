@@ -1,9 +1,5 @@
 #include "framework.h"
 #include "acme/parallelization/install_mutex.h"
-//#include "acme/platform/node.h"
-//#include "acme/node/windows/registry.h"
-//#include "node.h"
-//#include "acme/filesystem/filesystem/acme_dir.h"
 
 
 namespace acme
@@ -17,7 +13,6 @@ namespace acme
       node::node()
       {
 
-         //create_factory < ::windows::exception_engine, ::exception_engine >();
 
          ::windows::callstack::s_pcriticalsection = new critical_section();
 
@@ -53,6 +48,132 @@ namespace acme
          return estatus;
 
       }
+
+
+      bool node::win32_registry_windows_dark_mode_for_app()
+      {
+
+         try
+         {
+
+            ::windows::registry::key key;
+
+            key.open(HKEY_CURRENT_USER, "Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize");
+
+            ::u32 dw;
+
+            auto estatus = key._get("AppsUseLightTheme", dw);
+
+            if (::failed(estatus))
+            {
+
+               estatus = key._get("SystemUseLightTheme", dw);
+
+               if (::failed(estatus))
+               {
+
+                  return false;
+
+               }
+
+            }
+
+            return dw == 0;
+
+         }
+         catch (...)
+         {
+
+            return false;
+
+         }
+
+      }
+
+
+      bool node::win32_registry_windows_dark_mode_for_system()
+      {
+
+         try
+         {
+
+            ::windows::registry::key key;
+
+            key.open(HKEY_CURRENT_USER, "Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize");
+
+            ::u32 dw;
+
+            auto estatus = key._get("SystemUseLightTheme", dw);
+
+            if (::failed(estatus))
+            {
+
+               estatus = key._get("AppsUseLightTheme", dw);
+
+               if (::failed(estatus))
+               {
+
+                  return false;
+
+               }
+
+            }
+
+            return dw == 0;
+
+         }
+         catch (...)
+         {
+
+            return false;
+
+         }
+
+      }
+
+
+      bool node::win32_registry_windows_darkness()
+      {
+
+         return win32_registry_windows_dark_mode_for_app() || win32_registry_windows_dark_mode_for_system();
+
+      }
+
+
+      ::color::color node::reinterpreted_windows_darkness_background_color()
+      {
+
+         if (win32_registry_windows_darkness())
+         {
+
+            return ::color::black;
+
+         }
+
+         return ::color::white;
+
+      }
+         
+         
+      void node::fetch_user_color()
+      {
+
+         //DWORD dwBackgroundWindowColor = ::GetSysColor(COLOR_WINDOW);
+
+         //auto colorWindowBackground = argb(255, GetRValue(dwBackgroundWindowColor), GetGValue(dwBackgroundWindowColor), GetBValue(dwBackgroundWindowColor));
+
+         auto colorWindowBackground = reinterpreted_windows_darkness_background_color();
+
+         string str;
+
+         str.Format("\n\n\nWindow Background Color rgb(%d,%d,%d)\n\n", colorWindowBackground.red, colorWindowBackground.green, colorWindowBackground.blue);
+
+         ::output_debug_string(str);
+
+         background_color(colorWindowBackground);
+
+      }
+
 
       //   string node::get_user_name()
       //   {
