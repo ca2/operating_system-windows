@@ -532,9 +532,7 @@ namespace windowing_win32
 
       auto puser = psession->user();
 
-      auto psystem = m_psystem->m_paurasystem;
-
-      auto pnode = psystem->node();
+      auto pnode = m_psystem->node();
 
       auto pwindowing = puser->windowing()->cast < windowing >();
 

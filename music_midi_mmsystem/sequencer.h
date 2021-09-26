@@ -20,10 +20,17 @@ namespace music
          public:
 
 
+            bool     m_bHadNoteOn;
+
             KEYFRAME                   m_keyframe;
             __pointer(midi)                   m_pmidi;
 
             i32                        m_iBufferSize;
+            
+            
+            manual_reset_event         m_eventLongMessage;
+            HMIDIOUT                   m_hmidiout;
+
 
             i32                        m_iBufferNominalMax;
 
@@ -35,7 +42,7 @@ namespace music
 
             i32                        m_iBuffersInMMSYSTEM;
 
-            imedia_time                m_tkLastOp;
+            musical_tick                m_tkLastOp;
             bool                       m_bSendXGModeOn;
             bool                       m_bSendXGReset;
             bool                       m_bSendMasterVolumeReset;
@@ -96,10 +103,10 @@ namespace music
 
             virtual void on_set_position() override;
 
-            virtual imedia_time get_position_ticks();
+            virtual musical_tick get_position_ticks();
             virtual void karaoke_get_time(imedia_time& time);
 
-            virtual ::e_status     get_ticks(imedia_time& time);
+            virtual ::e_status     get_ticks(musical_tick& time);
             virtual ::e_status     get_millis(imedia_time& time);
             virtual imedia_time get_millis() override;
 
@@ -109,8 +116,19 @@ namespace music
             bool IsSettingPosition();
             void SetSettingPositionFlag(bool bSet = true);
 
-            imedia_time GetQuarterNote();
+            musical_tick GetQuarterNote();
 
+
+            virtual ::e_status midi_out_open();
+            virtual ::e_status midi_out_long_message(const block & block, const ::millis & millisWait = 0_ms);
+
+            virtual ::e_status midi_out_xg_mode_on();
+            virtual ::e_status midi_out_xg_mode_reset();
+            virtual ::e_status midi_out_xg_drum_setup1_reset();
+            virtual ::e_status midi_out_xg_drum_setup2_reset();
+            virtual ::e_status midi_out_master_volume_reset();
+
+            virtual ::e_status midi_out_close();
 
 
             virtual ::e_status     SendGMReset();
@@ -120,20 +138,35 @@ namespace music
             virtual void music_midi_on_playback_end();
 
 
-            ::e_status     WorkStreamRender(LPMIDIHDR lpmh, imedia_time tkMax, i32 iBufferNominalMax);
+            ::e_status     WorkStreamRender(LPMIDIHDR lpmh, musical_tick tkMax, i32 iBufferNominalMax);
 
-            ::e_status     WorkSeek(imedia_time tkPosition, LPMIDIHDR lpmh);
+            ::e_status     WorkSeek(musical_tick tkPosition, LPMIDIHDR lpmh);
 
-            ::e_status     StreamEvent(imedia_time tkDelta, ::music::midi::event* Event, LPMIDIHDR lpmh, imedia_time tkMax, u32 cbPrerollNomimalMax);
+            ::e_status     StreamEvent(musical_tick tkDelta, ::music::midi::event* Event, LPMIDIHDR lpmh, musical_tick tkMax, u32 cbPrerollNomimalMax);
 
-            ::e_status     StreamEventF1(imedia_time tkDelta, array < ::music::midi::event*, ::music::midi::event* >& eventptra, LPMIDIHDR lpmh, imedia_time tkMax, u32 cbPrerollNomimalMax);
+            ::e_status     StreamEventF1(musical_tick tkDelta, array < ::music::midi::event*, ::music::midi::event* >& eventptra, LPMIDIHDR lpmh, musical_tick tkMax, u32 cbPrerollNomimalMax);
 
-            ::e_status     InsertParmData(imedia_time tkDelta, LPMIDIHDR lpmh);
+            ::e_status     InsertParmData(musical_tick tkDelta, LPMIDIHDR lpmh);
 
-            ::e_status     InsertPadEvent(imedia_time tkDelta, LPMIDIHDR lpmh);
+            ::e_status     InsertPadEvent(musical_tick tkDelta, LPMIDIHDR lpmh);
 
-            DECLARE_MESSAGE_HANDLER(_001OnMidiOutDone);
-            DECLARE_MESSAGE_HANDLER(_001OnMidiOutPositionCB);
+            //DECLARE_MESSAGE_HANDLER(_001OnMidiOutDone);
+            //DECLARE_MESSAGE_HANDLER(_001OnMidiOutPositionCB);
+
+
+            static void CALLBACK MidiOutProc(
+               HMIDIOUT hmo,
+               UINT wMsg,
+               DWORD_PTR dwInstance,
+               DWORD_PTR dwParam1,
+               DWORD_PTR dwParam2
+            );
+
+            void midi_out_proc(               HMIDIOUT hmo,
+               UINT wMsg,
+               DWORD_PTR dwParam1,
+               DWORD_PTR dwParam2
+            );
 
 
          };

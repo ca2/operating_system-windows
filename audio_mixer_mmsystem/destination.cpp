@@ -34,7 +34,7 @@ namespace multimedia
 
          i32 iConnections = (i32) m_mixerline.cConnections;
 
-         m_mixersourcea.set_size_create(iConnections);
+         m_mixersourcea.set_size_create(this, iConnections);
 
          for (i32 i = 0; i < iConnections; i++)
          {

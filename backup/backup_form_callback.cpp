@@ -27,7 +27,7 @@ namespace backup
 
       if(psubject->m_id == ::e_subject_click)
       {
-         if(psubject->m_puserinteraction->m_id == "lfs")
+         if(psubject->user_element_id() == "lfs")
          {
             auto pupdate = new_update();
             pupdate->m_actioncontext = ::e_source_system;
@@ -45,7 +45,7 @@ namespace backup
 
 
          }
-         else if(psubject->m_puserinteraction->m_id == "ftp")
+         else if(psubject->user_element_id() == "ftp")
          {
             auto pupdate = new_update();
             pupdate->m_actioncontext = ::e_source_system;
@@ -58,7 +58,7 @@ namespace backup
 
 
          }
-         else if(psubject->m_puserinteraction->m_id == "submit")
+         else if(psubject->user_element_id() == "submit")
          {
             /*         if(pview->m_strPathName == "filemanager_add_location_lfs.xhtml")
                      {

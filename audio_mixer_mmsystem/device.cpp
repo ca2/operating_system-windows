@@ -141,7 +141,7 @@ namespace multimedia
 
          __pointer(::multimedia::audio_mixer_mmsystem::destination)    lpDestination;
 
-         m_mixerdestinationa.set_size_create(m_mixercaps.cDestinations);
+         m_mixerdestinationa.set_size_create(this, m_mixercaps.cDestinations);
 
          for (i32 i = 0; (u32) i < m_mixercaps.cDestinations; i++)
          {

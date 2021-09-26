@@ -33,7 +33,7 @@ namespace multimedia
             return ::success;
          }
 
-         m_mixercontrola.set_size_create(iControlCount);
+         m_mixercontrola.set_size_create(this, iControlCount);
 
          if (m_mixerlinecontrols.pamxctrl != nullptr)
          {
