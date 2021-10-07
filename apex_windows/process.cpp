@@ -156,7 +156,7 @@ namespace windows
          output_debug_string("\r\n");
          output_debug_string("CreateProcessW Error!!");
          output_debug_string("\r\n");
-         output_debug_string(strMessage + " (" + __str((u32) dwLastError) + ")");
+         output_debug_string(strMessage + " (" + __string((u32) dwLastError) + ")");
          output_debug_string("\r\n");
 
          return false;
@@ -260,9 +260,9 @@ namespace windows
 
       bool bTimedOut = true;
 
-      auto tickStart = ::millis::now();
+      auto tickStart = ::duration::now();
 
-      auto tickTimeout = durationTimeOut.u32_millis();
+      auto tickTimeout = durationTimeOut;
 
       while(tickStart.elapsed() < tickTimeout)
       {
@@ -306,7 +306,7 @@ namespace windows
 
       __throw("serious?! I don't believe... LOL...");
       
-      //::system(string("taskkill /F /T /PID " ) + __str((i32) m_pi.dwProcessId));
+      //::system(string("taskkill /F /T /PID " ) + __string((i32) m_pi.dwProcessId));
 
       return true;
       //return TerminateProcess(m_pi.hthread, -1) != false;

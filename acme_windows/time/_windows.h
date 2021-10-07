@@ -33,7 +33,7 @@
 // // namespace str
 // // {
 
-// //    string CLASS_DECL_ACME get_window_text_timeout(oswindow oswindow, millis tickTimeout = 1000);
+// //    string CLASS_DECL_ACME get_window_text_timeout(oswindow oswindow, ::duration tickTimeout = 1000);
 
 // // } // namespace str
 

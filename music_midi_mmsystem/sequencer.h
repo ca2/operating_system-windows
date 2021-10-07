@@ -120,7 +120,7 @@ namespace music
 
 
             virtual ::e_status midi_out_open();
-            virtual ::e_status midi_out_long_message(const block & block, const ::millis & millisWait = 0_ms);
+            virtual ::e_status midi_out_long_message(const block & block, const ::duration & millisWait = 0_ms);
 
             virtual ::e_status midi_out_xg_mode_on();
             virtual ::e_status midi_out_xg_mode_reset();

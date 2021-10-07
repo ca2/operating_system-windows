@@ -207,7 +207,7 @@ LRESULT CALLBACK __window_procedure(HWND hwnd, UINT message, WPARAM wparam, LPAR
 
       pwindow->m_pointMouseMove = pointMouseMove;
 
-      pwindow->m_millisLastMouseMove.Now();
+      pwindow->m_durationLastMouseMove.Now();
 
    }
    else if (message == e_message_timer)

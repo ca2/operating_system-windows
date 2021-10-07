@@ -56,7 +56,7 @@ namespace multimedia
 
       i32 out::run()
       {
-         m_durationRunLock = millis(1);
+         m_durationRunLock = ::duration(1);
          while(m_bRun)
          {
             ::thread::run();

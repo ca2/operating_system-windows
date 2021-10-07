@@ -91,7 +91,7 @@
 //#endif // _WIN32
 
 ///* Windows sleep in 100ns units */
-//void sleep(const ::nanos & nanos)
+//void sleep(const ::nanosecond & nanosecond)
 //{
 //
 //   /* Declarations */
@@ -103,14 +103,14 @@
 //   if (!(timer = CreateWaitableTimer(nullptr, true, nullptr)))
 //   {
 //
-//      sleep((const ::millis &) nanos);
+//      sleep((const ::duration &) nanosecond);
 //
 //      return;
 //
 //   }
 //
 //   /* Set timer properties */
-//   li.QuadPart = -(nanos.m_i / 100LL );
+//   li.QuadPart = -(nanosecond.m_i / 100LL );
 //
 //   if (!SetWaitableTimer(timer, &li, 0, nullptr, nullptr, false))
 //   {

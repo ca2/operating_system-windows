@@ -198,7 +198,7 @@ void imm_client::_001OnIme(::message::message * pmessage)
       else
       {
 
-         ::output_debug_string("\nWM_IME_COMPOSITION " + __str((::i64)pusermessage->m_lparam.m_lparam));
+         ::output_debug_string("\nWM_IME_COMPOSITION " + __string((::i64)pusermessage->m_lparam.m_lparam));
 
          if ((pmessage->m_lparam & GCS_RESULTSTR) != 0)
          {
@@ -372,7 +372,7 @@ void imm_client::_001OnIme(::message::message * pmessage)
 
          //      }
 
-         //      ::output_debug_string("\nWM_IME_COMPOSITION Compositè String Length = " + __str(strComposition.get_length()));
+         //      ::output_debug_string("\nWM_IME_COMPOSITION Compositè String Length = " + __string(strComposition.get_length()));
 
          //      on_text_composition(strComposition);
 
@@ -532,7 +532,7 @@ void imm_client::_001OnIme(::message::message * pmessage)
 
          int wparam = (int) pusermessage->m_wparam;
 
-         output_debug_string("\n" "WM_IME_NOTIFY" " > " + __str(wparam) + "    ");
+         output_debug_string("\n" "WM_IME_NOTIFY" " > " + __string(wparam) + "    ");
 
       }
 

@@ -76,27 +76,27 @@ int usage(int);
 
 /*
   Throttle the restart of the service if it stops before this many
-  milliseconds have elapsed since startup.  Override in registry.
+  ::durations have elapsed since startup.  Override in registry.
 */
 #define NSSM_RESET_THROTTLE_RESTART 1500
 
 /*
-  How many milliseconds to wait for the application to die after sending
+  How many ::durations to wait for the application to die after sending
   a Control-C event to its console.  Override in registry.
 */
 #define NSSM_KILL_CONSOLE_GRACE_PERIOD 1500
 /*
-  How many milliseconds to wait for the application to die after posting to
+  How many ::durations to wait for the application to die after posting to
   its windows' message queues.  Override in registry.
 */
 #define NSSM_KILL_WINDOW_GRACE_PERIOD 1500
 /*
-  How many milliseconds to wait for the application to die after posting to
+  How many ::durations to wait for the application to die after posting to
   its threads' message queues.  Override in registry.
 */
 #define NSSM_KILL_THREADS_GRACE_PERIOD 1500
 
-/* Margin of error for service status wait hints in milliseconds. */
+/* Margin of error for service status wait hints in ::durations. */
 #define NSSM_WAITHINT_MARGIN 2000
 
 /* Methods used to try to stop the application. */
@@ -126,7 +126,7 @@ int usage(int);
 #define NSSM_BELOW_NORMAL_PRIORITY 4
 #define NSSM_IDLE_PRIORITY 5
 
-/* How many milliseconds to wait before updating service status. */
+/* How many ::durations to wait before updating service status. */
 #define NSSM_SERVICE_STATUS_DEADLINE 20000
 
 /* User-defined service controls can be in the range 128-255. */

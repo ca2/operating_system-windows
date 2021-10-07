@@ -1705,7 +1705,7 @@ namespace windowing_win32
 
                ::u32 dwLastError = ::GetLastError();
 
-               output_debug_string("LastError = " + __str(dwLastError));
+               output_debug_string("LastError = " + __string(dwLastError));
 
             }
 

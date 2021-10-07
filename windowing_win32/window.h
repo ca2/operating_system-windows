@@ -21,7 +21,7 @@ namespace windowing_win32
       //WPARAM                                  m_wparam;
       //LPARAM                                  m_lparam;
       __pointer(::windows::interaction_impl)    m_pimpl2;
-      ::millis                                  m_millisLastMouseMove;
+      ::duration                                  m_durationLastMouseMove;
       ::point_i32                               m_pointMouseMove;
 
 
@@ -393,7 +393,7 @@ namespace windowing_win32
 
       //#if(WINVER >= 0x0500)
       //
-      //      virtual bool AnimateWindow(millis millis, u32 dwFlags);
+      //      virtual bool AnimateWindow(::duration ::duration, u32 dwFlags);
       //
       //#endif   // WINVER >= 0x0500
       //
@@ -552,7 +552,7 @@ namespace windowing_win32
 //
 //#if(WINVER >= 0x0500)
 //
-//      virtual bool FlashWindowEx(u32 dwFlags, ::u32  uCount, millis tickTimeout);
+//      virtual bool FlashWindowEx(u32 dwFlags, ::u32  uCount, ::duration tickTimeout);
 //
 //#endif   // WINVER >= 0x0500
 //

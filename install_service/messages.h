@@ -1405,8 +1405,8 @@
 //
 // MessageText:
 //
-// Service %1 ran for less than %2 milliseconds.
-// Restart will be delayed by %3 milliseconds.
+// Service %1 ran for less than %2 ::durations.
+// Restart will be delayed by %3 ::durations.
 //
 #define NSSM_EVENT_THROTTLED             0x8000040AL
 
@@ -1424,7 +1424,7 @@
 //
 // MessageText:
 //
-// The registry value %2, used to specify the minimum number of milliseconds which must elapse before service %1 is considered to have started successfully, was not of type REG_DWORD.  The default time of %3 milliseconds will be used.
+// The registry value %2, used to specify the minimum number of ::durations which must elapse before service %1 is considered to have started successfully, was not of type REG_DWORD.  The default time of %3 ::durations will be used.
 //
 #define NSSM_EVENT_BOGUS_THROTTLE        0x8000040CL
 
@@ -1626,7 +1626,7 @@
 //
 // MessageText:
 //
-// The registry value %2, used to specify the maximum number of milliseconds to wait for service %1 to stop after sending a Control-C event, was not of type REG_DWORD.  The default time of %3 milliseconds will be used.
+// The registry value %2, used to specify the maximum number of ::durations to wait for service %1 to stop after sending a Control-C event, was not of type REG_DWORD.  The default time of %3 ::durations will be used.
 //
 #define NSSM_EVENT_BOGUS_KILL_CONSOLE_GRACE_PERIOD 0x80000420L
 
@@ -1635,7 +1635,7 @@
 //
 // MessageText:
 //
-// The registry value %2, used to specify the maximum number of milliseconds to wait for service %1 to stop after posting a e_message_close message to windows managed by the application, was not of type REG_DWORD.  The default time of %3 milliseconds will be used.
+// The registry value %2, used to specify the maximum number of ::durations to wait for service %1 to stop after posting a e_message_close message to windows managed by the application, was not of type REG_DWORD.  The default time of %3 ::durations will be used.
 //
 #define NSSM_EVENT_BOGUS_KILL_WINDOW_GRACE_PERIOD 0x80000421L
 
@@ -1644,7 +1644,7 @@
 //
 // MessageText:
 //
-// The registry value %2, used to specify the maximum number of milliseconds to wait for service %1 to stop after posting a e_message_quit message to the message queues of threads managed by the application, was not of type REG_DWORD.  The default time of %3 milliseconds will be used.
+// The registry value %2, used to specify the maximum number of ::durations to wait for service %1 to stop after posting a e_message_quit message to the message queues of threads managed by the application, was not of type REG_DWORD.  The default time of %3 ::durations will be used.
 //
 #define NSSM_EVENT_BOGUS_KILL_THREADS_GRACE_PERIOD 0x80000422L
 
@@ -1653,8 +1653,8 @@
 //
 // MessageText:
 //
-// %1 has waited %3 of %5 milliseconds for the %2 service to exit.
-// Next update in %4 milliseconds.
+// %1 has waited %3 of %5 ::durations for the %2 service to exit.
+// Next update in %4 ::durations.
 //
 #define NSSM_EVENT_AWAITING_SHUTDOWN     0x40000423L
 
@@ -1673,7 +1673,7 @@
 //
 // MessageText:
 //
-// The minimum number of milliseconds which must pass before service %1 is considered to have been started successfully is set to %2.  Access to the Windows service control manager is blocked until the service updates its status, therefore %3 will wait a maximum of %4 milliseconds before reporting the service's state as running.  Service restart throttling will be enforced if the service runs for less than the full %2 milliseconds.
+// The minimum number of ::durations which must pass before service %1 is considered to have been started successfully is set to %2.  Access to the Windows service control manager is blocked until the service updates its status, therefore %3 will wait a maximum of %4 ::durations before reporting the service's state as running.  Service restart throttling will be enforced if the service runs for less than the full %2 ::durations.
 //
 #define NSSM_EVENT_STARTUP_DELAY_TOO_LONG 0x40000425L
 
@@ -1778,7 +1778,7 @@
 //
 // MessageText:
 //
-// The registry value %2, used to specify the number of milliseconds by which restarts of service %1 will be delayed, was not of type REG_DWORD.
+// The registry value %2, used to specify the number of ::durations by which restarts of service %1 will be delayed, was not of type REG_DWORD.
 // No mandatory delay will be employed.
 //
 #define NSSM_EVENT_BOGUS_RESTART_DELAY   0x8000042FL
@@ -1788,7 +1788,7 @@
 //
 // MessageText:
 //
-// Restart of service %1 will be delayed by %2 milliseconds.
+// Restart of service %1 will be delayed by %2 ::durations.
 //
 #define NSSM_EVENT_RESTART_DELAY         0x40000430L
 

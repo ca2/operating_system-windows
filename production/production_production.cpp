@@ -48,7 +48,7 @@ namespace production
       m_iLoopCount = iLoopCount;
       m_iRelease = 0;
       m_bEndProduction = false;
-      m_timeStart = ::datetime::time::get_current_time();
+      m_timeStart = ::datetime::time::now();
       m_eversion = eversion;
 
 
@@ -93,7 +93,7 @@ namespace production
 
       m_iRelease = 0;
       m_bEndProduction = false;
-      m_timeStart = ::datetime::time::get_current_time();
+      m_timeStart = ::datetime::time::now();
       m_eversion = eversion;
 
 
@@ -198,26 +198,26 @@ pacmedir->system() / "config/production/mirror_status.txt";
 
          m_iStep = 1;
 
-         //m_timeStart = ::datetime::time::get_current_time();
+         //m_timeStart = ::datetime::time::now();
 
          if (m_iGlobalRetry > 8)
          {
 
-            add_status("Retried " + __str(m_iGlobalRetry) + " times - \"giving up\" this command!");
+            add_status("Retried " + __string(m_iGlobalRetry) + " times - \"giving up\" this command!");
 
             //if (m_eversion == version_basis)
             //{
-            //   set["post"]["new_status"] = "<div style=\"display: block; " + strBackPostColor + "\"><h3 style=\"margin-bottom:0px; color: #555550;\">" + version_to_international_datetime(m_strStartTime) + "</h3><span style=\"color: #882266; display: block; margin-bottom: 1.5em;\">Retried " + __str(m_iGlobalRetry) + " times - \"giving up\" " + m_strConfiguration + " build command!</span>";
+            //   set["post"]["new_status"] = "<div style=\"display: block; " + strBackPostColor + "\"><h3 style=\"margin-bottom:0px; color: #555550;\">" + version_to_international_datetime(m_strStartTime) + "</h3><span style=\"color: #882266; display: block; margin-bottom: 1.5em;\">Retried " + __string(m_iGlobalRetry) + " times - \"giving up\" " + m_strConfiguration + " build command!</span>";
             //}
             //else
             //{
-            //   set["post"]["new_status"] = "<div style=\"display: block; " + strBackPostColor + "\"><h3 style=\"margin-bottom:0px; color: #555550;\">" + version_to_international_datetime(m_strStartTime) + "</h3><span style=\"color: #228855; display: block; margin-bottom: 1.5em;\">Retried " + __str(m_iGlobalRetry) + " times - \"giving up\" " + m_strConfiguration + " build command!</span>";
+            //   set["post"]["new_status"] = "<div style=\"display: block; " + strBackPostColor + "\"><h3 style=\"margin-bottom:0px; color: #555550;\">" + version_to_international_datetime(m_strStartTime) + "</h3><span style=\"color: #228855; display: block; margin-bottom: 1.5em;\">Retried " + __string(m_iGlobalRetry) + " times - \"giving up\" " + m_strConfiguration + " build command!</span>";
             //}
 
             //pcontext->m_papexcontext->http().get("http://api.ca2.cc/status/insert", str, set);
 
 
-            //string strTwit =  version_to_international_datetime(m_strStartTime) + " UTC Retried " + __str(m_iGlobalRetry) + " times - \"giving up\" " + m_strConfiguration + " build command!";
+            //string strTwit =  version_to_international_datetime(m_strStartTime) + " UTC Retried " + __string(m_iGlobalRetry) + " times - \"giving up\" " + m_strConfiguration + " build command!";
 
             //twitter_twit(strTwit);
 
@@ -243,7 +243,7 @@ pacmedir->system() / "config/production/mirror_status.txt";
          //   }
          //   else
          //   {
-         //      m_strTry = __str(m_iGlobalRetry) + "th";
+         //      m_strTry = __string(m_iGlobalRetry) + "th";
          //   }
 
          //   if (m_eversion == version_basis)
@@ -272,7 +272,7 @@ pacmedir->system() / "config/production/mirror_status.txt";
 
          //   pcontext->m_papexcontext->http().get("http://api.ca2.cc/status/insert", str, set);
 
-         //   ::datetime::time timeNow = ::datetime::time::get_current_time();
+         //   ::datetime::time timeNow = ::datetime::time::now();
 
          //   string strTwit = "General failure of build " + version_to_international_datetime(m_strBuild) + ". Starting " + m_strTry + " retry of build " + m_strConfiguration + " - " + pdatetime->international().get_gmt_date_time(timeNow) + ". More details at http://status.ca2.cc/" + m_strStatusEmail;
 
@@ -716,7 +716,7 @@ pacmedir->system() / "config/production/mirror_status.txt";
 
                //   property_set set;
 
-               //   set["post"]["new_status"] = "<div style=\"display: block; " + m_strBackPostColor + "\"><h5 style=\"margin-bottom:0px; " + m_strEmpPostColor + "\">" + version_to_international_datetime(m_strStartTime) + "</h5><span style=\"" + m_strStdPostColor + m_strBackPostColor + " display: block; margin-bottom: 0.95em;\">" + version_to_international_datetime(::datetime::time::get_current_time().FormatGmt("%Y-%m-%d %H-%M-%S")) + " Cleaning...</span></div>";
+               //   set["post"]["new_status"] = "<div style=\"display: block; " + m_strBackPostColor + "\"><h5 style=\"margin-bottom:0px; " + m_strEmpPostColor + "\">" + version_to_international_datetime(m_strStartTime) + "</h5><span style=\"" + m_strStdPostColor + m_strBackPostColor + " display: block; margin-bottom: 0.95em;\">" + version_to_international_datetime(::datetime::time::now().FormatGmt("%Y-%m-%d %H-%M-%S")) + " Cleaning...</span></div>";
 
                //   pcontext->m_papexcontext->http().get("http://api.ca2.cc/status/insert", str, set);
 
@@ -777,7 +777,7 @@ pacmedir->system() / "config/production/mirror_status.txt";
 
             //   property_set set;
 
-            //   set["post"]["new_status"] = "<div style=\"display: block; " + m_strBackPostColor + "\"><h5 style=\"margin-bottom:0px; " + m_strEmpPostColor + "\">" + version_to_international_datetime(m_strStartTime) + "</h5><span style=\"" + m_strStdPostColor + m_strBackPostColor + " display: block; margin-bottom: 0.95em;\">" + version_to_international_datetime(::datetime::time::get_current_time().FormatGmt("%Y-%m-%d %H-%M-%S")) + " Cleaning...</span></div>";
+            //   set["post"]["new_status"] = "<div style=\"display: block; " + m_strBackPostColor + "\"><h5 style=\"margin-bottom:0px; " + m_strEmpPostColor + "\">" + version_to_international_datetime(m_strStartTime) + "</h5><span style=\"" + m_strStdPostColor + m_strBackPostColor + " display: block; margin-bottom: 0.95em;\">" + version_to_international_datetime(::datetime::time::now().FormatGmt("%Y-%m-%d %H-%M-%S")) + " Cleaning...</span></div>";
 
             //   pcontext->m_papexcontext->http().get("http://api.ca2.cc/status/insert", str, set);
 
@@ -932,7 +932,7 @@ pacmedir->create(pathTarget.folder()))
          else
          {
 
-            output_debug_string(__str(cDirMkErrorCount) + " errors attempting to create directory and " + __str(cFileCopyErrorCount) + " errors attempting to do file copy batch at \"" + m_pathVrel + "\"\n");
+            output_debug_string(__string(cDirMkErrorCount) + " errors attempting to create directory and " + __string(cFileCopyErrorCount) + " errors attempting to do file copy batch at \"" + m_pathVrel + "\"\n");
 
          }
 
@@ -945,7 +945,7 @@ pacmedir->create(pathTarget.folder()))
 
          //   property_set set;
 
-         //   set["post"]["new_status"] = "<div style=\"display: block; " + m_strBackPostColor + "\"><h5 style=\"margin-bottom:0px; " + m_strEmpPostColor + "\">" + version_to_international_datetime(m_strStartTime) + "</h5><span style=\"" + m_strStdPostColor + m_strBackPostColor + " display: block; margin-bottom: 0.95em;\">" + version_to_international_datetime(::datetime::time::get_current_time().FormatGmt("%Y-%m-%d %H-%M-%S")) + " Copying...</span></div>";
+         //   set["post"]["new_status"] = "<div style=\"display: block; " + m_strBackPostColor + "\"><h5 style=\"margin-bottom:0px; " + m_strEmpPostColor + "\">" + version_to_international_datetime(m_strStartTime) + "</h5><span style=\"" + m_strStdPostColor + m_strBackPostColor + " display: block; margin-bottom: 0.95em;\">" + version_to_international_datetime(::datetime::time::now().FormatGmt("%Y-%m-%d %H-%M-%S")) + " Copying...</span></div>";
 
          //   pcontext->m_papexcontext->http().get("http://api.ca2.cc/status/insert", str, set);
 
@@ -961,7 +961,7 @@ pacmedir->create(pathTarget.folder()))
 
          //   property_set set;
 
-         //   set["post"]["new_status"] = "<div style=\"display: block; " + m_strBackPostColor + "\"><h5 style=\"margin-bottom:0px; " + m_strEmpPostColor + "\">" + version_to_international_datetime(m_strStartTime) + "</h5><span style=\"" + m_strStdPostColor + m_strBackPostColor + " display: block; margin-bottom: 0.95em;\">" + version_to_international_datetime(::datetime::time::get_current_time().FormatGmt("%Y-%m-%d %H-%M-%S")) + " Compressing...</span></div>";
+         //   set["post"]["new_status"] = "<div style=\"display: block; " + m_strBackPostColor + "\"><h5 style=\"margin-bottom:0px; " + m_strEmpPostColor + "\">" + version_to_international_datetime(m_strStartTime) + "</h5><span style=\"" + m_strStdPostColor + m_strBackPostColor + " display: block; margin-bottom: 0.95em;\">" + version_to_international_datetime(::datetime::time::now().FormatGmt("%Y-%m-%d %H-%M-%S")) + " Compressing...</span></div>";
 
          //   pcontext->m_papexcontext->http().get("http://api.ca2.cc/status/insert", str, set);
 
@@ -973,7 +973,7 @@ pacmedir->create(pathTarget.folder()))
 
          //   property_set set;
 
-         //   set["post"]["new_status"] = "<div style=\"display: block; " + m_strBackPostColor + "\"><h5 style=\"margin-bottom:0px; " + m_strEmpPostColor + "\">" + version_to_international_datetime(m_strStartTime) + "</h5><span style=\"" + m_strStdPostColor + m_strBackPostColor + " display: block; margin-bottom: 0.95em;\">" + version_to_international_datetime(::datetime::time::get_current_time().FormatGmt("%Y-%m-%d %H-%M-%S")) + " Resources...</span></div>";
+         //   set["post"]["new_status"] = "<div style=\"display: block; " + m_strBackPostColor + "\"><h5 style=\"margin-bottom:0px; " + m_strEmpPostColor + "\">" + version_to_international_datetime(m_strStartTime) + "</h5><span style=\"" + m_strStdPostColor + m_strBackPostColor + " display: block; margin-bottom: 0.95em;\">" + version_to_international_datetime(::datetime::time::now().FormatGmt("%Y-%m-%d %H-%M-%S")) + " Resources...</span></div>";
 
          //   pcontext->m_papexcontext->http().get("http://api.ca2.cc/status/insert", str, set);
 
@@ -1019,7 +1019,7 @@ pacmedir->create(pathTarget.folder()))
 
          //   property_set set;
 
-         //   set["post"]["new_status"] = "<div style=\"display: block; " + m_strBackPostColor + "\"><h5 style=\"margin-bottom:0px; " + m_strEmpPostColor + "\">" + version_to_international_datetime(m_strStartTime) + "</h5><span style=\"" + m_strStdPostColor + m_strBackPostColor + " display: block; margin-bottom: 0.95em;\">" + version_to_international_datetime(::datetime::time::get_current_time().FormatGmt("%Y-%m-%d %H-%M-%S")) + " Storing Symbols...</span></div>";
+         //   set["post"]["new_status"] = "<div style=\"display: block; " + m_strBackPostColor + "\"><h5 style=\"margin-bottom:0px; " + m_strEmpPostColor + "\">" + version_to_international_datetime(m_strStartTime) + "</h5><span style=\"" + m_strStdPostColor + m_strBackPostColor + " display: block; margin-bottom: 0.95em;\">" + version_to_international_datetime(::datetime::time::now().FormatGmt("%Y-%m-%d %H-%M-%S")) + " Storing Symbols...</span></div>";
 
          //   pcontext->m_papexcontext->http().get("http://api.ca2.cc/status/insert", str, set);
 
@@ -1116,7 +1116,7 @@ pacmedir->create(pathTarget.folder()))
 
          //   property_set set;
 
-         //   set["post"]["new_status"] = "<div style=\"display: block; " + m_strBackPostColor + "\"><h5 style=\"margin-bottom:0px; " + m_strEmpPostColor + "\">" + version_to_international_datetime(m_strStartTime) + "</h5><span style=\"" + m_strStdPostColor + m_strBackPostColor + " display: block; margin-bottom: 0.95em;\">" + version_to_international_datetime(::datetime::time::get_current_time().FormatGmt("%Y-%m-%d %H-%M-%S")) + " Packaging...</span></div>";
+         //   set["post"]["new_status"] = "<div style=\"display: block; " + m_strBackPostColor + "\"><h5 style=\"margin-bottom:0px; " + m_strEmpPostColor + "\">" + version_to_international_datetime(m_strStartTime) + "</h5><span style=\"" + m_strStdPostColor + m_strBackPostColor + " display: block; margin-bottom: 0.95em;\">" + version_to_international_datetime(::datetime::time::now().FormatGmt("%Y-%m-%d %H-%M-%S")) + " Packaging...</span></div>";
 
          //   pcontext->m_papexcontext->http().get("http://api.ca2.cc/status/insert", str, set);
 
@@ -1141,7 +1141,7 @@ pacmedir->create(pathTarget.folder()))
 
             straRoot.add("time");
 
-            add_status("***Preparing to release to mirrors in two phases with " + __str(straRoot.get_count()) + " steps each...");
+            add_status("***Preparing to release to mirrors in two phases with " + __string(straRoot.get_count()) + " steps each...");
 
             add_status("1st phase : archiving files and directories into one archive...");
 
@@ -1152,7 +1152,7 @@ pacmedir->create(pathTarget.folder()))
 
                string strSpa = "ca2_spa_" + ::str::replace("-", "_", strRoot);
 
-               add_status(__str(i + 1) + ". dtf - fileset - file from directory " + strRoot);
+               add_status(__string(i + 1) + ". dtf - fileset - file from directory " + strRoot);
 
                pcontext->m_papexcontext->file().dtf(m_strCCVrelNew + "\\" + strSpa + ".fileset", m_strCCVrelNew + "\\" + strRoot, get_application());
 
@@ -1171,7 +1171,7 @@ pacmedir->create(pathTarget.folder()))
 
                string strSpa = "ca2_spa_" + ::str::replace("-", "_", strRoot);
 
-               add_status(__str(i + 1) + ". bz - bzip - compressing " + strRoot);
+               add_status(__string(i + 1) + ". bz - bzip - compressing " + strRoot);
 
                psystem->compress().bz(this, get_writer(m_strCCVrelNew + "\\" + strSpa + ".fileset.bz"), get_reader(m_strCCVrelNew + "\\" + strSpa + ".fileset"));
 
@@ -1304,7 +1304,7 @@ pacmedir->create(pathTarget.folder()))
 
                //   property_set set;
 
-               //   set["post"]["new_status"] = "<div style=\"display: block; " + m_strBackPostColor + "\"><h5 style=\"margin-bottom:0px; " + m_strEmpPostColor + "\">" + version_to_international_datetime(m_strStartTime) + "</h5><span style=\"" + m_strStdPostColor + m_strBackPostColor + " display: block; margin-bottom: 0.95em;\">" + version_to_international_datetime(::datetime::time::get_current_time().FormatGmt("%Y-%m-%d %H-%M-%S")) + " " + strStatus + "</span></div>";
+               //   set["post"]["new_status"] = "<div style=\"display: block; " + m_strBackPostColor + "\"><h5 style=\"margin-bottom:0px; " + m_strEmpPostColor + "\">" + version_to_international_datetime(m_strStartTime) + "</h5><span style=\"" + m_strStdPostColor + m_strBackPostColor + " display: block; margin-bottom: 0.95em;\">" + version_to_international_datetime(::datetime::time::now().FormatGmt("%Y-%m-%d %H-%M-%S")) + " " + strStatus + "</span></div>";
 
                //   pcontext->m_papexcontext->http().get("http://api.ca2.cc/status/insert", str, set);
 
@@ -1323,7 +1323,7 @@ pacmedir->create(pathTarget.folder()))
 
          //   property_set set;
 
-         //   set["post"]["new_status"] = "<div style=\"display: block; " + m_strBackPostColor + "\"><h5 style=\"margin-bottom:0px; " + m_strEmpPostColor + "\">" + version_to_international_datetime(m_strStartTime) + "</h5><span style=\"" + m_strStdPostColor + m_strBackPostColor + " display: block; margin-bottom: 0.95em;\">" + version_to_international_datetime(::datetime::time::get_current_time().FormatGmt("%Y-%m-%d %H-%M-%S")) + " Releasing...</span></div>";
+         //   set["post"]["new_status"] = "<div style=\"display: block; " + m_strBackPostColor + "\"><h5 style=\"margin-bottom:0px; " + m_strEmpPostColor + "\">" + version_to_international_datetime(m_strStartTime) + "</h5><span style=\"" + m_strStdPostColor + m_strBackPostColor + " display: block; margin-bottom: 0.95em;\">" + version_to_international_datetime(::datetime::time::now().FormatGmt("%Y-%m-%d %H-%M-%S")) + " Releasing...</span></div>";
 
          //   pcontext->m_papexcontext->http().get("http://api.ca2.cc/status/insert", str, set);
 
@@ -1331,7 +1331,7 @@ pacmedir->create(pathTarget.folder()))
 
          m_bFinished = true;
 
-         m_timeEnd = ::datetime::time::get_current_time();
+         m_timeEnd = ::datetime::time::now();
          m_tickEnd = ::GetTickCount();
          tick tickMin = (m_tickEnd - m_tickStart) / 1000 / 60;
          tick tickSeg = ((m_tickEnd - m_tickStart) / 1000) % 60;
@@ -3048,7 +3048,7 @@ pacmedir->create(pathTarget.folder()))
             }
             else
             {
-               strTwit += " with " + __str(m_iGlobalRetry) + " retries";
+               strTwit += " with " + __string(m_iGlobalRetry) + " retries";
             }
          }
 
@@ -3101,8 +3101,8 @@ pacmedir->create(pathTarget.folder()))
       twitterObj.get_oauth().setConsumerKey(m_strTwitterConsumerKey);
       twitterObj.get_oauth().setConsumerSecret(m_strTwitterConsumerSecret);
 
-      string strPathKey = pcontext->m_papexcontext->dir().appdata() / "twitterClient_token_key" + __str((int)m_eversion) + ".txt";
-      string strPathSecret = pcontext->m_papexcontext->dir().appdata() / "twitterClient_token_secret" + __str((int)m_eversion) + ".txt";
+      string strPathKey = pcontext->m_papexcontext->dir().appdata() / "twitterClient_token_key" + __string((int)m_eversion) + ".txt";
+      string strPathSecret = pcontext->m_papexcontext->dir().appdata() / "twitterClient_token_secret" + __string((int)m_eversion) + ".txt";
       /* Step 1: Check if we alredy have OAuth access token from a previous run */
       //    char szKey[1024];
       string myOAuthAccessTokenKey = pcontext->m_papexcontext->file().as_string(strPathKey);
@@ -3166,8 +3166,8 @@ Retry2:
       twitterObj.get_oauth().setConsumerKey(m_strTwitterConsumerKey);
       twitterObj.get_oauth().setConsumerSecret(m_strTwitterConsumerSecret);
 
-      string strPathKey = pcontext->m_papexcontext->dir().appdata() / "twitterClient_token_key" + __str((int)m_eversion) + ".txt";
-      string strPathSecret = pcontext->m_papexcontext->dir().appdata() / "twitterClient_token_secret" + __str((int)m_eversion) + ".txt";
+      string strPathKey = pcontext->m_papexcontext->dir().appdata() / "twitterClient_token_key" + __string((int)m_eversion) + ".txt";
+      string strPathSecret = pcontext->m_papexcontext->dir().appdata() / "twitterClient_token_secret" + __string((int)m_eversion) + ".txt";
       /* Step 1: Check if we alredy have OAuth access token from a previous run */
       //    char szKey[1024];
       string myOAuthAccessTokenKey = pcontext->m_papexcontext->file().as_string(strPathKey);
@@ -3432,7 +3432,7 @@ retry1:
 
       //   property_set set;
 
-      //   set["post"]["new_status"] = "<div style=\"display: block; " + m_strBackPostColor + "\"><h5 style=\"margin-bottom:0px; " + m_strEmpPostColor + "\">" + version_to_international_datetime(m_strStartTime) + "</h5><span style=\"" + m_strStdPostColor + m_strBackPostColor + " display: block; margin-bottom: 0.95em;\">" + version_to_international_datetime(::datetime::time::get_current_time().FormatGmt("%Y-%m-%d %H-%M-%S")) + " Building " + strApp + "...</span></div>";
+      //   set["post"]["new_status"] = "<div style=\"display: block; " + m_strBackPostColor + "\"><h5 style=\"margin-bottom:0px; " + m_strEmpPostColor + "\">" + version_to_international_datetime(m_strStartTime) + "</h5><span style=\"" + m_strStdPostColor + m_strBackPostColor + " display: block; margin-bottom: 0.95em;\">" + version_to_international_datetime(::datetime::time::now().FormatGmt("%Y-%m-%d %H-%M-%S")) + " Building " + strApp + "...</span></div>";
 
       //   pcontext->m_papexcontext->http().get("http://api.ca2.cc/status/insert", str, set);
 

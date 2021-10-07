@@ -180,7 +180,8 @@ namespace windows
       HANDLE handleFile = INVALID_HANDLE_VALUE;
 
       ::u32 dwWaitSharingViolation = 84;
-      auto millisStart = ::millis::now();
+
+      auto durationStart = ::duration::now();
 
       //::u32 dwFileSharingViolationRetryTimeout = ::get_task() != nullptr ? ::get_task()->get_file_sharing_violation_timeout_total_milliseconds() : 0;
 
@@ -201,10 +202,10 @@ namespace windows
          if (!(eopen & ::file::e_open_no_share_violation_wait))
          {
 
-            if (dwLastError == ERROR_SHARING_VIOLATION && ::task_get_run() && millisStart.elapsed() < m_millisErrorBlockTimeout)
+            if (dwLastError == ERROR_SHARING_VIOLATION && ::task_get_run() && durationStart.elapsed() < m_durationErrorBlockTimeout)
             {
 
-               sleep(maximum(m_millisErrorBlockTimeout / 10, 50_ms));
+               preempt(maximum(m_durationErrorBlockTimeout.integral_millisecond() / 10, 50_ms));
 
                goto retry;
 
@@ -711,9 +712,9 @@ namespace windows
          }
 
          // convert times as appropriate
-         file_time_to_time(&rStatus.m_ctime.m_time, (filetime_t *) &information.ftCreationTime);
-         file_time_to_time(&rStatus.m_atime.m_time, (filetime_t *) &information.ftLastAccessTime);
-         file_time_to_time(&rStatus.m_mtime.m_time, (filetime_t *) &information.ftLastWriteTime);
+         file_time_to_time(&rStatus.m_ctime.m_i, (filetime_t *) &information.ftCreationTime);
+         file_time_to_time(&rStatus.m_atime.m_i, (filetime_t *) &information.ftLastAccessTime);
+         file_time_to_time(&rStatus.m_mtime.m_i, (filetime_t *) &information.ftLastWriteTime);
 
          if (rStatus.m_ctime.get_time() == 0)
          {

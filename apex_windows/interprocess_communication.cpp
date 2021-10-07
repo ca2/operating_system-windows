@@ -160,7 +160,7 @@ namespace windows
 
          DWORD_PTR dwptr;
 
-         if (!::SendMessageTimeout((HWND)get_hwnd(), WM_COPYDATA, (WPARAM)0, (LPARAM)&cds, SMTO_ABORTIFHUNG, (::u32)(durationTimeout.u32_millis()), &dwptr))
+         if (!::SendMessageTimeout((HWND)get_hwnd(), WM_COPYDATA, (WPARAM)0, (LPARAM)&cds, SMTO_ABORTIFHUNG, (class ::wait)durationTimeout, &dwptr))
          {
 
             return false;
@@ -221,7 +221,7 @@ namespace windows
 
          DWORD_PTR dwptr;
 
-         if (!::SendMessageTimeout((HWND)get_hwnd(), WM_COPYDATA, (WPARAM)0, (LPARAM)&cds, SMTO_BLOCK, (::u32)(durationTimeout.u32_millis()), &dwptr))
+         if (!::SendMessageTimeout((HWND)get_hwnd(), WM_COPYDATA, (WPARAM)0, (LPARAM)&cds, SMTO_BLOCK, (::u32)(durationTimeout), &dwptr))
          {
 
             return false;
@@ -306,7 +306,7 @@ namespace windows
       if (!ChangeWindowMessageFilterEx((HWND)get_hwnd(), WM_COPYDATA, MSGFLT_ADD, NULL))
       {
 
-         TRACE("Failed to change WM_COPYDATA message filter");
+         INFORMATION("Failed to change WM_COPYDATA message filter");
 
       }
 
@@ -550,7 +550,7 @@ namespace windows
    //interprocess_communication::interprocess_communication()
    //{
 
-   //   m_millisTimeout = (5000) * 11;
+   //   m_durationTimeout = (5000) * 11;
 
    //}
 

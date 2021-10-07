@@ -146,7 +146,7 @@ struct shell_execute :
    }
 
 
-   bool synchronization_object(::duration durationTimeout)
+   bool synchronization_object(const class ::wait & wait)
    {
 
       fMask = SEE_MASK_NOASYNC | SEE_MASK_NOCLOSEPROCESS;
@@ -158,13 +158,13 @@ struct shell_execute :
 
       }
 
-      ::datetime::time timeEnd = ::datetime::time::get_current_time() + durationTimeout;
+      auto start = ::wait::now();
 
       DWORD dwError = ::GetLastError();
 
       DWORD dwExitCode = 0;
 
-      while(::datetime::time::get_current_time() < timeEnd)
+      while(true)
       {
 
          if (::GetExitCodeProcess(hProcess, &dwExitCode))
@@ -185,7 +185,16 @@ struct shell_execute :
 
          }
 
-         preempt(1000_ms);
+         auto waitNow = minimum(wait - start.elapsed(), 1000_ms);
+
+         if (waitNow.is_null())
+         {
+
+            break;
+
+         }
+
+         preempt(waitNow);
 
       }
 
@@ -347,9 +356,9 @@ bool root_execute_sync(const char * pszFile, const char * pszParams, ::duration 
 
    DWORD dwExitCode = (DWORD) -1;
 
-   ::millis millis;
+   ::duration durationStart;
 
-   millis.Now();
+   durationStart.Now();
 
    while (::task_get_run())
    {
@@ -362,7 +371,7 @@ bool root_execute_sync(const char * pszFile, const char * pszParams, ::duration 
 
       }
 
-      if (millis.elapsed() > durationTimeout)
+      if (durationStart.elapsed() > durationTimeout)
       {
 
          set["timed_out"] = true;

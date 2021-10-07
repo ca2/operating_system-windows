@@ -296,7 +296,7 @@ namespace windows
    //      if (m_puserinteraction->layout().is_moving())
    //      {
 
-   //         INFO("Window is Moving :: on_message_move");
+   //         INFORMATION("Window is Moving :: on_message_move");
 
    //      }
 
@@ -617,13 +617,13 @@ namespace windows
    //   return ::GetTitleBarInfo(((interaction_impl *)this)->get_handle(), pti) != false;
    //}
 
-   //bool interaction_impl::AnimateWindow(millis millis, u32 dwFlags)
+   //bool interaction_impl::AnimateWindow(::duration ::duration, u32 dwFlags)
    //{
    //   ASSERT(_is_window());
-   //   return ::AnimateWindow(get_handle(), __os(millis), dwFlags) != false;
+   //   return ::AnimateWindow(get_handle(), __os(::duration), dwFlags) != false;
    //}
 
-   //bool interaction_impl::FlashWindowEx(u32 dwFlags, ::u32  uCount, millis tickTimeout)
+   //bool interaction_impl::FlashWindowEx(u32 dwFlags, ::u32  uCount, ::duration tickTimeout)
    //{
    //   ASSERT(_is_window());
    //   FLASHWINFO fwi;
@@ -1497,7 +1497,7 @@ namespace windows
       //if (::IsIconic(m_hwnd))
       //{
 
-      //   INFO("interaction_impl::rects_from_os window is iconic");
+      //   INFORMATION("interaction_impl::rects_from_os window is iconic");
 
       //}
       //else
@@ -3069,7 +3069,7 @@ namespace windows
    //      if (m_puserinteraction->layout().is_moving())
    //      {
 
-   //         INFO("Window is Moving :: on_message_move");
+   //         INFORMATION("Window is Moving :: on_message_move");
 
    //      }
 
@@ -4772,7 +4772,7 @@ namespace windows
 //            // handler has set it to another one.
 //            pmouse->m_ecursor = cursor_default;
 //
-//            //INFO("windows::e_message_mouse_move(%d,%d)", pmouse->m_point.x, pmouse->m_point.y);
+//            //INFORMATION("windows::e_message_mouse_move(%d,%d)", pmouse->m_point.x, pmouse->m_point.y);
 //
 //            string strType;
 //
@@ -5208,7 +5208,7 @@ namespace windows
          ::RECT rectangleRegion;
          HRGN hrgn = CreateRectRgn(0, 0, 0, 0);
          int regionType = ::GetWindowRgn(m_hwnd, hrgn);
-         if (regionType != ERROR)
+         if (regionType != 0)
          {
             ::GetRgnBox(hrgn, &rectangleRegion);
          }

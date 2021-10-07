@@ -481,9 +481,9 @@ namespace windowing_win32
 
          strMessage.Format("%s\n\nSystem Error Code: %d", strLastError, dwLastError);
 
-         TRACE(trace_category_appmsg, e_trace_level_warning, "Warning: Window creation failed: get_last_error returned:\n");
+         CATEGORY_WARNING(appmsg, "Warning: Window creation failed: get_last_error returned:");
 
-         TRACE(trace_category_appmsg, e_trace_level_warning, "%s\n", strMessage);
+         CATEGORY_WARNING(appmsg, strMessage);
 
          try
          {
@@ -1168,7 +1168,7 @@ namespace windowing_win32
 //      if (status != 0)
 //      {
 //
-//         //m_psystem->m_pacmefile->put_contents("/home/camilo/window.txt", __str((int)w->window()));
+//         //m_psystem->m_pacmefile->put_contents("/home/camilo/window.txt", __string((int)w->window()));
 //         return false;
 //
 //      }
@@ -2089,7 +2089,7 @@ namespace windowing_win32
 //
 //#ifdef SET_WINDOW_POS_LOG
 //
-//            INFO("XMoveResizeWindow (%d, %d) - (%d, %d)", x, y, cx, cy);
+//            INFORMATION("XMoveResizeWindow (%d, %d) - (%d, %d)", x, y, cx, cy);
 //
 //#endif
 //
@@ -2102,7 +2102,7 @@ namespace windowing_win32
 //
 //#ifdef SET_WINDOW_POS_LOG
 //
-//               INFO("Changing parameters... (%d, %d) - (%d, %d)", x, y, cx, cy);
+//               INFORMATION("Changing parameters... (%d, %d) - (%d, %d)", x, y, cx, cy);
 //
 //#endif
 //
@@ -2146,7 +2146,7 @@ namespace windowing_win32
 //      //            if(!XChangeWindowAttributes(display(), window(), CWOverrideRedirect, &set))
 //      //            {
 //      //
-//      //               INFO("linux::window::_native_create_window_ex failed to clear override_redirect");
+//      //               INFORMATION("linux::window::_native_create_window_ex failed to clear override_redirect");
 //      //
 //      //            }
 //      //
@@ -4240,7 +4240,7 @@ namespace windowing_win32
          if (puserinteraction->layout().is_moving())
          {
 
-            INFO("Window is Moving :: on_message_move");
+            INFORMATION("Window is Moving :: on_message_move");
 
          }
 
@@ -5740,7 +5740,7 @@ namespace windowing_win32
 //            // handler has set it to another one.
 //            pmouse->m_ecursor = cursor_default;
 //
-//            //INFO("windows::e_message_mouse_move(%d,%d)", pmouse->m_point.x, pmouse->m_point.y);
+//            //INFORMATION("windows::e_message_mouse_move(%d,%d)", pmouse->m_point.x, pmouse->m_point.y);
 //
 //            string strType;
 //
@@ -6119,7 +6119,7 @@ namespace windowing_win32
       while (ptask->task_get_run())
       {
 
-         if (m_millisLastMouseMove.elapsed() < 20_ms)
+         if (m_durationLastMouseMove.elapsed() < 20_ms)
          {
 
             ::preempt(30_ms);
@@ -6181,7 +6181,7 @@ namespace windowing_win32
 
          lparam = MAKELPARAM(pointMouseMove.x, pointMouseMove.y);
 
-         m_millisLastMouseMove.Now();
+         m_durationLastMouseMove.Now();
 
          //pimpl->m_puserinteraction->post_message(e_message_mouse_move, 0, lparam);
          

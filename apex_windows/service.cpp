@@ -150,7 +150,7 @@ namespace windows
 
       m_bStopping = true;
 
-      m_stopped.wait(millis((u32)m_dwStopTimeout));
+      m_stopped.wait(::duration((u32)m_dwStopTimeout));
 
    }
 

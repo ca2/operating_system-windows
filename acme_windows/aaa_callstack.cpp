@@ -870,7 +870,7 @@ namespace windows
       if (!::SymInitialize(hprocess, 0, true))
       {
          ::u32 dw = ::GetLastError();
-         output_debug_string("Last Error = " + __str(dw));
+         output_debug_string("Last Error = " + __string(dw));
          ASSERT(0);
 
          //load_modules();

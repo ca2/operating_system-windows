@@ -33,7 +33,7 @@ namespace user
       //   if (pusermessage->m_wparam == SC_MAXIMIZE)
       //   {
 
-      //      INFO("SC_MAXIMIZE");
+      //      INFORMATION("SC_MAXIMIZE");
 
       //      display(e_display_zoomed);
 
@@ -47,7 +47,7 @@ namespace user
          //else if (pusermessage->m_wparam == SC_RESTORE)
          //{
 
-         //   INFO("SC_RESTORE");
+         //   INFORMATION("SC_RESTORE");
 
          //   if (layout().sketch().display() == e_display_default)
          //   {
@@ -72,7 +72,7 @@ namespace user
          //else if (pusermessage->m_wparam == SC_MINIMIZE)
          //{
 
-            //INFO("SC_MINIMIZE");
+            //INFORMATION("SC_MINIMIZE");
 
             //display_system_minimize();
 

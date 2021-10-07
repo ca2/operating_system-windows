@@ -597,20 +597,20 @@ namespace windowing_win32
             if (strType.contains_ci("font_format"))
             {
 
-               INFO("font_format going to UpdateLayeredWindow");
+               INFORMATION("font_format going to UpdateLayeredWindow");
 
                bool bVisible = IsWindowVisible(get_hwnd());
 
                if (bVisible)
                {
 
-                  INFO("font_format is visible!!");
+                  INFORMATION("font_format is visible!!");
 
                }
                else
                {
 
-                  INFO("font_format ISN'T visible!!");
+                  INFORMATION("font_format ISN'T visible!!");
 
                }
 
@@ -619,7 +619,7 @@ namespace windowing_win32
                if (::GetWindowRect(get_hwnd(), &rectangleProbe))
                {
 
-                  INFO("GetWindowRect (%d, %d) - (%d, %d)", rectangleProbe.left, rectangleProbe.top, rectangleProbe.right, rectangleProbe.bottom);
+                  INFORMATION("GetWindowRect (%d, %d) - (%d, %d)", rectangleProbe.left, rectangleProbe.top, rectangleProbe.right, rectangleProbe.bottom);
 
                }
 
@@ -752,7 +752,7 @@ namespace windowing_win32
 
                int iResult = ::GetClipBox(m_hdcScreen, &rClipScreen);
 
-               if (iResult == ERROR || iResult == NULLREGION)
+               if (iResult == ERROR_REGION || iResult == NULLREGION)
                {
 
                }
@@ -776,7 +776,7 @@ namespace windowing_win32
 
                int iResult = ::GetClipBox(buffer.m_hdc, &rClip);
 
-               if (iResult == ERROR || iResult == NULLREGION)
+               if (iResult == ERROR_REGION || iResult == NULLREGION)
                {
                }
                else

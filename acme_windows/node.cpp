@@ -769,7 +769,7 @@ namespace acme
       //
       //         ::file::path strModule = module_path_from_pid(getpid());
       //
-      //         string strBasePath = m_psystem->m_pacmedir->system() / "memory_counters" / strModule.title() / __str(getpid());
+      //         string strBasePath = m_psystem->m_pacmedir->system() / "memory_counters" / strModule.title() / __string(getpid());
       //
       //#endif
       //
@@ -1840,7 +1840,7 @@ namespace acme
 
          }
 
-         WaitForSingleObject(ProcessInfo.hProcess, U32_INFINITE_TIMEOUT);
+         WaitForSingleObject(ProcessInfo.hProcess, INFINITE);
 
          if (!GetExitCodeProcess(ProcessInfo.hProcess, &rc))
          {
@@ -1938,7 +1938,7 @@ namespace acme
 
          }
 
-         WaitForSingleObject(ProcessInfo.hProcess, U32_INFINITE_TIMEOUT);
+         WaitForSingleObject(ProcessInfo.hProcess, INFINITE);
 
          if (!GetExitCodeProcess(ProcessInfo.hProcess, &rc))
          {
@@ -1989,7 +1989,7 @@ namespace acme
 
             }
 
-            sleep(millis(23));
+            sleep(::duration(23));
 
          }
 
@@ -2497,7 +2497,7 @@ namespace acme
 
          set["privileged"] = true;
 
-         if (!call_sync(path, strParam, path.folder(), ::e_display_none, 3_min, set))
+         if (!call_sync(path, strParam, path.folder(), ::e_display_none, 3_minute, set))
          {
 
             return false;

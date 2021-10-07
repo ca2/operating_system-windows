@@ -60,7 +60,7 @@ namespace windowing_win32
       if (!bCreateSessionWindow)
       {
 
-         WARN("Could not create session window");
+         WARNING("Could not create session window");
 
       }
 
@@ -1231,13 +1231,14 @@ namespace windowing_win32
 //
 //   }
 
+   
    string windowing::_get_window_text_timeout(oswindow oswindow, const ::duration& durationSendMessageMax)
    {
 
       DWORD_PTR dw = 0;
 
       //if (!SendMessageTimeoutW(hwnd, WM_GETTEXTLENGTH, 0, 0, SMTO_ABORTIFHUNG | SMTO_NOTIMEOUTIFNOTHUNG, 100, &dw))
-      if (!SendMessageTimeoutW((HWND)oswindow, WM_GETTEXTLENGTH, 0, 0, SMTO_ABORTIFHUNG, __os(durationSendMessageMax), &dw))
+      if (!SendMessageTimeoutW((HWND)oswindow, WM_GETTEXTLENGTH, 0, 0, SMTO_ABORTIFHUNG, (class ::wait) durationSendMessageMax, &dw))
       {
 
          return "";
@@ -1255,7 +1256,7 @@ namespace windowing_win32
 
       auto pwsz = wstr.get_string_buffer(dw);
 
-      if (!SendMessageTimeoutW((HWND)oswindow, WM_GETTEXT, dw + 1, (LPARAM)pwsz, SMTO_ABORTIFHUNG, __os(durationSendMessageMax), &dw))
+      if (!SendMessageTimeoutW((HWND)oswindow, WM_GETTEXT, dw + 1, (LPARAM)pwsz, SMTO_ABORTIFHUNG, (class ::wait) durationSendMessageMax, &dw))
       {
 
          return "";

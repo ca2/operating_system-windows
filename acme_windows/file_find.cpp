@@ -219,7 +219,7 @@ namespace windows
       if (m_pFoundInfo != nullptr)
       {
 
-         file_time_to_time(&refTime.m_time,(filetime_t*)&m_pFoundInfo->ftLastAccessTime);
+         file_time_to_time(&refTime.m_i,(filetime_t*)&m_pFoundInfo->ftLastAccessTime);
 
          return true;
 
@@ -243,7 +243,7 @@ namespace windows
 
       }
        
-      file_time_to_time(&refTime.m_time, (filetime_t *)&m_pFoundInfo->ftLastWriteTime);
+      file_time_to_time(&refTime.m_i, (filetime_t *)&m_pFoundInfo->ftLastWriteTime);
 
       return true;
 
@@ -264,7 +264,7 @@ namespace windows
 
       }
          
-      file_time_to_time(&refTime.m_time , (filetime_t *)&((LPWIN32_FIND_DATAW)m_pFoundInfo)->ftCreationTime);
+      file_time_to_time(&refTime.m_i, (filetime_t *)&((LPWIN32_FIND_DATAW)m_pFoundInfo)->ftCreationTime);
       
       return true;
       

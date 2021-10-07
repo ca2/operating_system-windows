@@ -226,7 +226,7 @@ namespace windows
 
                   strError.Format("Failed to delete the file to move \"%s\" error=%d", psz, dwError);
 
-                  TRACE("%s", strError);
+                  INFORMATION("%s", strError);
 
                }
 
@@ -498,9 +498,9 @@ namespace windows
       //auto pnode = psystem->node();
 
       // convert times as appropriate
-      file_time_to_time(&rStatus.m_ctime.m_time, (filetime_t *)&findFileData.ftCreationTime);
-      file_time_to_time(&rStatus.m_atime.m_time, (filetime_t *)&findFileData.ftLastAccessTime);
-      file_time_to_time(&rStatus.m_mtime.m_time, (filetime_t *)&findFileData.ftLastWriteTime);
+      file_time_to_time(&rStatus.m_ctime.m_i, (filetime_t *)&findFileData.ftCreationTime);
+      file_time_to_time(&rStatus.m_atime.m_i, (filetime_t *)&findFileData.ftLastAccessTime);
+      file_time_to_time(&rStatus.m_mtime.m_i, (filetime_t *)&findFileData.ftLastWriteTime);
 
       if (rStatus.m_ctime.get_time() == 0)
          rStatus.m_ctime = rStatus.m_mtime;

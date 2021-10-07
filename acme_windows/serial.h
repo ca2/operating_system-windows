@@ -83,7 +83,7 @@ namespace windows
 
       virtual size_t available () override;
 
-      virtual bool waitReadable (::millis timeout);
+      virtual bool waitReadable (::duration timeout);
 
       virtual void waitByteTimes (size_t count) override;
 

@@ -47,7 +47,7 @@ public:
       ptimer->on_millis_timer_step();
    }
 
-   bool wait(int millis)
+   bool wait(int ::duration)
    {
 
       ::ResetEvent(gDoneEvent);
@@ -55,7 +55,7 @@ public:
       HANDLE hTimer = nullptr;
 
       // Set a timer to call the timer routine in 10 seconds.
-      if(!CreateTimerQueueTimer(&hTimer,hTimerQueue,(WAITORTIMERCALLBACK)TimerRoutine,this,millis,0,0))
+      if(!CreateTimerQueueTimer(&hTimer,hTimerQueue,(WAITORTIMERCALLBACK)TimerRoutine,this,::duration,0,0))
       {
          return false;
       }
@@ -67,7 +67,7 @@ public:
 
       return true;
    }
-   bool timer(int millis)
+   bool timer(int ::duration)
    {
 
       ::ResetEvent(gDoneEvent);
@@ -75,7 +75,7 @@ public:
       HANDLE hTimer = nullptr;
 
       // Set a timer to call the timer routine in 10 seconds.
-      if(!CreateTimerQueueTimer(&hTimer,hTimerQueue,(WAITORTIMERCALLBACK)TimerRoutine,this,millis,millis,0))
+      if(!CreateTimerQueueTimer(&hTimer,hTimerQueue,(WAITORTIMERCALLBACK)TimerRoutine,this,::duration,::duration,0))
       {
          return false;
       }

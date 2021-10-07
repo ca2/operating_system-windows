@@ -47,7 +47,7 @@ namespace windows
 
       edisplay                                  m_edisplayLayout;
       rectangle_i64                             m_rectangleLastPos;
-      millis                                    m_millisLastPos;
+      ::duration                                    m_durationLastPos;
       string                                    m_strDebug;
 
       ::point_i32                               m_pointCursor;
@@ -304,7 +304,7 @@ namespace windows
 
 //#if(WINVER >= 0x0500)
 //
-//      virtual bool AnimateWindow(millis millis, u32 dwFlags);
+//      virtual bool AnimateWindow(::duration ::duration, u32 dwFlags);
 //
 //#endif   // WINVER >= 0x0500
 //
@@ -444,7 +444,7 @@ namespace windows
 //
 //#if(WINVER >= 0x0500)
 //
-//      virtual bool FlashWindowEx(u32 dwFlags, ::u32  uCount, millis tickTimeout);
+//      virtual bool FlashWindowEx(u32 dwFlags, ::u32  uCount, ::duration tickTimeout);
 //
 //#endif   // WINVER >= 0x0500
 //

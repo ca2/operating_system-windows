@@ -16,7 +16,7 @@ namespace windowing_win32
       HDC m_hdc;
 
 
-      print_window(::object * pobject, HWND hwnd, HDC hdc, millis tickTimeout) :
+      print_window(::object * pobject, HWND hwnd, HDC hdc, ::duration tickTimeout) :
          ::object(pobject)
       {
 
@@ -29,7 +29,7 @@ namespace windowing_win32
          if (m_event.wait(tickTimeout).timeout())
          {
 
-            TRACE("print_window::time_out");
+            INFORMATION("print_window::time_out");
 
          }
 

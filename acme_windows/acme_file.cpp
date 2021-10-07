@@ -232,7 +232,7 @@ namespace windows
 
    //      path /= lpszName;
 
-   //      path /= __str(i);
+   //      path /= __string(i);
 
    //      path /= (string(lpszName) + "." + string(pszExtension));
 
@@ -366,7 +366,7 @@ namespace windows
 
    //   FILE * pfile = nullptr;
 
-   //   auto millisStart = ::millis::now();
+   //   auto millisStart = ::duration::now();
 
    //   while (true)
    //   {

@@ -793,14 +793,14 @@ namespace windowing_win32
       //      strP += "B";
 
       //   ::output_debug_string(
-      //      "w" + ::str::from(rectangleWkspace.left) + ","
-      //      + ::str::from(rectangleWkspace.top) + ","
-      //      + ::str::from(rectangleWkspace.right) + ","
-      //      + ::str::from(rectangleWkspace.bottom) + " " +
-      //      "r" + ::str::from(prectangle->left) + ","
-      //      + ::str::from(prectangle->top) + ","
-      //      + ::str::from(prectangle->right) + ","
-      //      + ::str::from(prectangle->bottom) + " " +
+      //      "w" + __string(rectangleWkspace.left) + ","
+      //      + __string(rectangleWkspace.top) + ","
+      //      + __string(rectangleWkspace.right) + ","
+      //      + __string(rectangleWkspace.bottom) + " " +
+      //      "r" + __string(prectangle->left) + ","
+      //      + __string(prectangle->top) + ","
+      //      + __string(prectangle->right) + ","
+      //      + __string(prectangle->bottom) + " " +
       //      strE + " " + strP + "\n");
 
       //}

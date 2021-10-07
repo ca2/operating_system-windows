@@ -512,7 +512,7 @@ namespace music
                if (::success != m_psequence->m_estatusLastError)
                {
 
-                  WARN("::music::midi::sequencer::stop -> midiStreamStop returned %lu", (u32)m_psequence->m_estatusLastError.m_estatus);
+                  WARNING("::music::midi::sequencer::stop -> midiStreamStop returned %lu", (u32)m_psequence->m_estatusLastError.m_estatus);
 
                   m_psequence->m_flags.erase(sequence::e_flag_waiting);
 
@@ -1005,7 +1005,7 @@ namespace music
 
                default:
 
-                  INFO("sequencer::fill_buffer returned %lu", (u32)estatus.m_estatus);
+                  INFORMATION("sequencer::fill_buffer returned %lu", (u32)estatus.m_estatus);
 
                   m_psequence->set_state(sequence::e_state_stopping);
 
@@ -1027,7 +1027,7 @@ namespace music
                   else
                   {
 
-                     INFO("e_event_midi_stream_out : midiStreamOut returned %lu", (u32)estatus.m_estatus);
+                     INFORMATION("e_event_midi_stream_out : midiStreamOut returned %lu", (u32)estatus.m_estatus);
 
                      m_psequence->set_state(sequence::e_state_stopping);
 
@@ -1271,7 +1271,7 @@ namespace music
 
                //default:
 
-               //   INFO("sequencer::fill_buffer returned %lu", (u32)estatus.m_estatus);
+               //   INFORMATION("sequencer::fill_buffer returned %lu", (u32)estatus.m_estatus);
 
                //   m_psequence->set_state(sequence::e_state_stopping);
 
@@ -1293,7 +1293,7 @@ namespace music
                //   else
                //   {
 
-               //      INFO("e_event_midi_stream_out : midiStreamOut returned %lu", (u32)estatus.m_estatus);
+               //      INFORMATION("e_event_midi_stream_out : midiStreamOut returned %lu", (u32)estatus.m_estatus);
 
                //      m_psequence->set_state(sequence::e_state_stopping);
 
@@ -1362,9 +1362,9 @@ namespace music
          }
 
 
-         //musical_tick sequencer::TimeToPosition(imedia_time millis)
+         //musical_tick sequencer::TimeToPosition(imedia_time ::duration)
          //{
-         //   return musical_tick(MillisecsToTicks((iptr)millis));
+         //   return musical_tick(MillisecsToTicks((iptr)::duration));
          //}
 
          //imedia_time sequencer::PositionToTime(musical_tick tk)
@@ -1460,7 +1460,7 @@ namespace music
          }
 
 
-         ::e_status sequencer::midi_out_long_message(const block & block, const ::millis & millis)
+         ::e_status sequencer::midi_out_long_message(const block & block, const ::duration & duration)
          {
 
             if ((block.get_size() & 0x3) != 0)
@@ -1502,7 +1502,7 @@ namespace music
 
             }
 
-            ::preempt(millis);
+            ::preempt(::duration);
 
             while (!(mh.dwFlags & MHDR_DONE))
             {
@@ -1743,7 +1743,7 @@ namespace music
 
                ASSERT(m_iBuffersInMMSYSTEM <= 0);
 
-               INFO("music_midi_on_playback_end");
+               INFORMATION("music_midi_on_playback_end");
 
                close_device();
 

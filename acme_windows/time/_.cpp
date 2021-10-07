@@ -660,7 +660,7 @@ CLASS_DECL_ACME hinstance get_module_handle(const platform_char * psz)
 
 }
 
-// CLASS_DECL_ACME ::millis os_get_system_update_poll_time(const ::id & id)
+// CLASS_DECL_ACME ::duration os_get_system_update_poll_time(const ::id & id)
 // {
 
 //    if (id == id_os_dark_mode)
