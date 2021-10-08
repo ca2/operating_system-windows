@@ -477,7 +477,7 @@ Opened:
    }
 
 
-   imedia_time out::out_get_time()
+   ::duration out::out_get_time()
    {
 
       return m_timeStart + device_out_get_time();
@@ -485,7 +485,7 @@ Opened:
    }
 
 
-   imedia_time out::device_out_get_time()
+   ::duration out::device_out_get_time()
    {
 
       synchronous_lock synchronouslock(mutex());
@@ -553,7 +553,7 @@ Opened:
    }
 
 
-   //imedia_time out::out_get_time()
+   //::duration out::out_get_time()
    //{
 
    //   return m_positionStart + device_out_get_time();
@@ -561,7 +561,7 @@ Opened:
    //}
 
 
-   //imedia_time out::device_out_get_time()
+   //::duration out::device_out_get_time()
    //{
 
    //   synchronous_lock synchronouslock(mutex());
@@ -600,7 +600,7 @@ Opened:
    //      if(mmt.wType == TIME_MS)
    //      {
 
-   //         imedia_time position = (u32) mmt.u.ms;
+   //         ::duration position = (u32) mmt.u.ms;
 
    //         position *= m_pwaveformat->nSamplesPerSec;
 

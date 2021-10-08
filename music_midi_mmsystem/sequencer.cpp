@@ -606,7 +606,7 @@ namespace music
          double sequencer::get_millis()
          {
             
-            imedia_time time =0.0;
+            ::duration time =0.0;
          
             get_millis(time);
 
@@ -615,7 +615,7 @@ namespace music
          }
 
 
-         ::e_status     sequencer::get_millis(imedia_time& time)
+         ::e_status     sequencer::get_millis(::duration& time)
          {
             synchronous_lock synchronouslock(mutex());
 
@@ -1362,18 +1362,18 @@ namespace music
          }
 
 
-         //musical_tick sequencer::TimeToPosition(imedia_time ::duration)
+         //musical_tick sequencer::TimeToPosition(::duration ::duration)
          //{
          //   return musical_tick(MillisecsToTicks((iptr)::duration));
          //}
 
-         //imedia_time sequencer::PositionToTime(musical_tick tk)
+         //::duration sequencer::PositionToTime(musical_tick tk)
          //{
-         //   return imedia_time(TicksToMillisecs((musical_tick)(iptr)tk));
+         //   return ::duration(TicksToMillisecs((musical_tick)(iptr)tk));
          //}
 
 
-         void sequencer::karaoke_get_time(imedia_time & time)
+         void sequencer::karaoke_get_time(::duration & time)
          {
 
             get_millis(time);

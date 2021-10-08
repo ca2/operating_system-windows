@@ -104,11 +104,11 @@ namespace music
             virtual void on_set_position() override;
 
             virtual musical_tick get_position_ticks();
-            virtual void karaoke_get_time(imedia_time& time);
+            virtual void karaoke_get_time(::duration& time);
 
             virtual ::e_status     get_ticks(musical_tick& time);
-            virtual ::e_status     get_millis(imedia_time& time);
-            virtual imedia_time get_millis() override;
+            virtual ::e_status     get_millis(::duration& time);
+            virtual ::duration get_milliseconds() override;
 
 
             bool IsPlaying();

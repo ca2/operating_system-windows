@@ -122,11 +122,11 @@ namespace multimedia
          out(::object * pobject);
          virtual ~out();
 
-         ::e_status     out_start(const imedia_time & position);
+         ::e_status     out_start(const ::duration & position);
          void install_message_routing(::channel * pchannel);
 
-         virtual imedia_time out_get_time();
-         imedia_time out_get_time();
+         virtual ::duration out_get_time();
+         ::duration out_get_time();
          virtual void out_filled(index iBuffer) override;
          //virtual void out_buffer_ready(LPWAVEHDR lpwavehdr);
 

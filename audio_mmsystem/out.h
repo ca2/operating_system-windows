@@ -13,8 +13,8 @@ namespace audio_mmsystem
 
       HWAVEOUT                         m_hwaveout;
       WAVEFORMATEX                     m_waveformatex;
-      imedia_time                      m_imediatime;
-      imedia_time                      m_imediaposition;
+      ::duration                      m_imediatime;
+      ::duration                      m_imediaposition;
       manual_reset_event               m_evFree;
       int_array                        m_iaFree;
       ::mutex                          m_mutexFree;
@@ -27,8 +27,8 @@ namespace audio_mmsystem
       void install_message_routing(::channel * pchannel);
 
 
-      virtual imedia_time        out_get_time();
-      virtual imedia_time        device_out_get_time();
+      virtual ::duration        out_get_time();
+      virtual ::duration        device_out_get_time();
       virtual void               out_filled(index iBuffer) override;
       virtual void               out_filled(LPWAVEHDR lpwavehdr);
 

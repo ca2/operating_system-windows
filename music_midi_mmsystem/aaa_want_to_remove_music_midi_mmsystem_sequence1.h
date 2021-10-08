@@ -98,14 +98,14 @@ namespace music
 
             void OnPositionCB(LPMIDIHDR lpmidihdr);
             void OnDone(HMIDISTRM hmidistream, LPMIDIHDR lpmidihdr);
-            virtual void GetTimeLength(imedia_time & time);
-            virtual void GetPositionLength(imedia_time & position);
+            virtual void GetTimeLength(::duration & time);
+            virtual void GetPositionLength(::duration & position);
 
             using ::ikaraoke::karaoke::TimeToPosition;
             using ::ikaraoke::karaoke::PositionToTime;
 
-            virtual imedia_time TimeToPosition(imedia_time time);
-            virtual imedia_time PositionToTime(imedia_time position);
+            virtual ::duration TimeToPosition(::duration time);
+            virtual ::duration PositionToTime(::duration position);
 
             virtual bool IsOpened();
 
@@ -132,11 +132,11 @@ namespace music
 
             ::e_status     Stop();
 
-            virtual imedia_time get_position_ticks() override;
-            virtual void karaoke_get_time(imedia_time  & time) override;
+            virtual ::duration get_position_ticks() override;
+            virtual void karaoke_get_time(::duration  & time) override;
 
-            virtual ::e_status     get_ticks(imedia_time & time) override;
-            virtual ::e_status     get_millis(imedia_time & time) override;
+            virtual ::e_status     get_ticks(::duration & time) override;
+            virtual ::e_status     get_millis(::duration & time) override;
 
 
             bool IsPlaying();
@@ -144,7 +144,7 @@ namespace music
             bool IsSettingPosition();
             void SetSettingPositionFlag(bool bSet = true);
 
-            imedia_time GetQuarterNote();
+            ::duration GetQuarterNote();
 
 
 

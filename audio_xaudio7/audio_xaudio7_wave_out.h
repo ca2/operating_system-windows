@@ -158,12 +158,12 @@ namespace multimedia
          virtual ~out();
 
 
-         ::e_status     out_start(const imedia_time & position);
+         ::e_status     out_start(const ::duration & position);
          virtual bool  on_run_step();
          void install_message_routing(::channel * pchannel);
 
-         virtual imedia_time out_get_time();
-         imedia_time out_get_time();
+         virtual ::duration out_get_time();
+         ::duration out_get_time();
          virtual void out_buffer_ready(int iBuffer);
          //virtual void out_buffer_ready(LPWAVEHDR lpwavehdr);
 
