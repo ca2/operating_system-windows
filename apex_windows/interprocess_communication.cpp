@@ -221,7 +221,7 @@ namespace windows
 
          DWORD_PTR dwptr;
 
-         if (!::SendMessageTimeout((HWND)get_hwnd(), WM_COPYDATA, (WPARAM)0, (LPARAM)&cds, SMTO_BLOCK, (::u32)(durationTimeout), &dwptr))
+         if (!::SendMessageTimeout((HWND)get_hwnd(), WM_COPYDATA, (WPARAM)0, (LPARAM)&cds, SMTO_BLOCK, (class ::wait)durationTimeout, &dwptr))
          {
 
             return false;
