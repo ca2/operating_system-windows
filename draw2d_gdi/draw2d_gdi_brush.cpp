@@ -29,7 +29,7 @@ namespace draw2d_gdi
    }
 
 
-   bool brush::CreateSolid(COLORREF crColor)
+   bool brush::CreateSolid(::color::color crColor)
    {
 
       return Attach(::CreateSolidBrush(argb_invert(crColor)));
@@ -37,7 +37,7 @@ namespace draw2d_gdi
    }
 
 
-   bool brush::CreateHatchBrush(int nIndex, COLORREF crColor)
+   bool brush::CreateHatchBrush(int nIndex, ::color::color crColor)
    {
 
       return Attach(::CreateHatchBrush(nIndex, argb_invert(crColor)));
@@ -68,7 +68,7 @@ namespace draw2d_gdi
    }
 
 
-   void brush::construct(COLORREF crColor)
+   void brush::construct(::color::color crColor)
    {
 
       if (!Attach(::CreateSolidBrush(crColor)))
@@ -76,7 +76,7 @@ namespace draw2d_gdi
 
    }
 
-   void brush::construct(int nIndex, COLORREF crColor)
+   void brush::construct(int nIndex, ::color::color crColor)
    {
       if (!Attach(::CreateHatchBrush(nIndex, crColor)))
          throw resource_exception();

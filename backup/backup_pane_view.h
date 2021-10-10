@@ -13,8 +13,8 @@ namespace backup
       pane_view(::object * pobject);
       virtual ~pane_view();
 #ifdef DEBUG
-      virtual void assert_valid() const;
-      virtual void dump(dump_context & dumpcontext) const;
+      void assert_valid() const override;
+      void dump(dump_context & dumpcontext) const override;
 #endif
 
       void on_create_impact(::user::impact_data * pcreatordata);

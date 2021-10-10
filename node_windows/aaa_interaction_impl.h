@@ -63,8 +63,8 @@ namespace windows
 
       //virtual void construct(::windowing::window * pwindow);
 
-      virtual void assert_valid() const;
-      virtual void dump(dump_context & dumpcontext) const;
+      void assert_valid() const override;
+      void dump(dump_context & dumpcontext) const override;
 
 
       //bool create_message_queue(::user::interaction * pinteraction, const ::string & lpszName);
@@ -76,7 +76,7 @@ namespace windows
 
       //virtual bool __windows_message_bypass(HWND oswindow, ::u32 message, wparam wparam, lparam lparam, lresult & lresult);
 
-      virtual void install_message_routing(::channel * pchannel);
+      void install_message_routing(::channel * pchannel) override;
 
       bool operator==(const interaction_impl& wnd) const;
       bool operator!=(const interaction_impl& wnd) const;

@@ -628,7 +628,7 @@ namespace windows
 
       m_bUpdateGraphics = false;
 
-      ::rect rectWindow;
+      ::rectangle_i32 rectWindow;
 
       m_puserinteraction->get_window_rect(rectWindow);
 
@@ -942,7 +942,7 @@ namespace windows
       ::GetClassName(((::windows::interaction_impl *)this)->get_handle(), szBuf, _countof(szBuf));
       dumpcontext << "\nclass name = \"" << szBuf << "\"";
 
-      ::rect rect;
+      ::rectangle_i32 rect;
       ((::windows::interaction_impl *) this)->m_puserinteraction->get_window_rect(&rect);
       dumpcontext << "\nrect = " << rect;
       dumpcontext << "\nparent ::window_sp = " << ((::windows::interaction_impl *)this)->GetParent();
@@ -1563,11 +1563,11 @@ namespace windows
       }
       else if (emessage == e_message_left_button_down)
       {
-         ::rect rectClient;
+         ::rectangle_i32 rectClient;
          ::GetClientRect(get_handle(), rectClient);
-         ::rect rectWindow;
+         ::rectangle_i32 rectWindow;
          ::GetWindowRect(get_handle(), rectWindow);
-         ::rect rectRegion;
+         ::rectangle_i32 rectRegion;
          HRGN hrgn = CreateRectRgn(0, 0, 0, 0);
          int regionType = ::GetWindowRgn(get_handle(), hrgn);
          if (regionType != ERROR)
@@ -1694,13 +1694,13 @@ namespace windows
          if (m_bTranslateMouseMessageCursor && !pmouse->m_bTranslated)
          {
             pmouse->m_bTranslated = true;
-            ::rect rectWindow;
+            ::rectangle_i32 rectWindow;
             // People always ask for feature centric Flag/Macros...
             // ok, sometimes we attend them, besides it is easier to name the pigs...
             // (but I like pigs... and the porks... :-)
             if (m_bScreenRelativeMouseMessagePosition)
             {
-               ::rect rectWindow32;
+               ::rectangle_i32 rectWindow32;
                ::GetWindowRect(get_handle(), rectWindow32);
                ::copy(rectWindow, rectWindow32);
             }
@@ -2051,7 +2051,7 @@ namespace windows
       //      for(; oswindow_Child != nullptr;
       //            oswindow_Child = ::GetNextWindow(oswindow_Child,GW_HWNDNEXT))
       //      {
-      //         ::rect rect;
+      //         ::rectangle_i32 rect;
       //         ::get_window_rect(oswindow_Child,&rect);
       //         screen_to_client(&rect);
       //         ::set_window_pos(oswindow_Child,nullptr,rect.left + xAmount,rect.top + yAmount,0,0,SWP_NOSIZE | SWP_NOACTIVATE | SWP_NOZORDER);
@@ -2512,7 +2512,7 @@ namespace windows
 
       SCAST_PTR(::message::base, pbase, pmessage);
 
-      ::rect rectWindow;
+      ::rectangle_i32 rectWindow;
 
       m_puserinteraction->get_window_rect(rectWindow);
 
@@ -2524,9 +2524,9 @@ namespace windows
 
       ::SelectClipRgn(hdc, nullptr);
 
-      ::rect rectPaint;
+      ::rectangle_i32 rectPaint;
 
-      ::rect rectUpdate;
+      ::rectangle_i32 rectUpdate;
 
       rectPaint = paint.rcPaint;
 
@@ -3209,11 +3209,11 @@ namespace windows
    void interaction_impl::rects_from_os()
    {
 
-      ::rect rectClient;
+      ::rectangle_i32 rectClient;
 
       ::GetClientRect(m_oswindow, rectClient);
 
-      ::rect rectScreen;
+      ::rectangle_i32 rectScreen;
 
       ::GetWindowRect(m_oswindow, rectScreen);
 
@@ -3287,7 +3287,7 @@ namespace windows
 
       }
 
-      ::rect rectWindow;
+      ::rectangle_i32 rectWindow;
 
       //if (!(GetExStyle() & WS_EX_LAYERED))
       //{
@@ -3332,7 +3332,7 @@ namespace windows
 
       //}
 
-      //::rect rect32;
+      //::rectangle_i32 rect32;
 
       //if (!(GetExStyle() & WS_EX_LAYERED))
       //{
@@ -3382,7 +3382,7 @@ namespace windows
    }
 
 
-   void interaction_impl::_001WindowFullScreen(const ::rect & rectHint)
+   void interaction_impl::_001WindowFullScreen(const ::rectangle_i32 & rectHint)
    {
 
       primitive_impl::_001WindowFullScreen(rectHint);
@@ -3961,7 +3961,7 @@ namespace windows
    }
 
 
-   bool interaction_impl::RedrawWindow(const ::rect& rectUpdate, ::draw2d::region* prgnUpdate, UINT flags)
+   bool interaction_impl::RedrawWindow(const ::rectangle_i32& rectUpdate, ::draw2d::region* prgnUpdate, UINT flags)
    {
 
       if (m_bDestroyImplOnly)

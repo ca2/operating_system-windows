@@ -20,7 +20,7 @@ namespace draw2d_gdiplus
 
 #ifdef DEBUG
 
-      virtual void dump(dump_context & dumpcontext) const;
+      void dump(dump_context & dumpcontext) const override;
 
 #endif
 

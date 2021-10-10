@@ -34,7 +34,7 @@ namespace draw2d_gdiplus
       void AnimatePalette(UINT nStartIndex, UINT nNumEntries,
                           LPPALETTEENTRY pPaletteColors);
 
-      UINT GetNearestPaletteIndex(COLORREF crColor) const;
+      UINT GetNearestPaletteIndex(::color::color crColor) const;
       bool ResizePalette(UINT nNumEntries);
 
 

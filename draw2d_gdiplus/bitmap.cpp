@@ -123,7 +123,7 @@ namespace draw2d_gdiplus
       info.bmiHeader.biPlanes = 1;
       info.bmiHeader.biBitCount = 32;
       info.bmiHeader.biCompression = BI_RGB;
-      info.bmiHeader.biSizeImage = size.area() * sizeof(COLORREF);
+      info.bmiHeader.biSizeImage = size.area() * sizeof(::color::color);
 
       const BITMAPINFO* pbmi = &info;
 

@@ -5201,16 +5201,16 @@ namespace windows
       }
       else if (message == e_message_left_button_down)
       {
-         ::RECT rectangleClient;
-         ::GetClientRect(m_hwnd, &rectangleClient);
-         ::RECT rectangleWindow;
-         ::GetWindowRect(m_hwnd, &rectangleWindow);
-         ::RECT rectangleRegion;
+         ::RECT rectClient;
+         ::GetClientRect(m_hwnd, &rectClient);
+         ::RECT rectWindow;
+         ::GetWindowRect(m_hwnd, &rectWindow);
+         ::RECT rectRegion;
          HRGN hrgn = CreateRectRgn(0, 0, 0, 0);
          int regionType = ::GetWindowRgn(m_hwnd, hrgn);
          if (regionType != 0)
          {
-            ::GetRgnBox(hrgn, &rectangleRegion);
+            ::GetRgnBox(hrgn, &rectRegion);
          }
          ::DeleteObject(hrgn); /* finished with region */
          WINDOWPLACEMENT wp;

@@ -216,12 +216,12 @@ namespace draw2d_gdi
    }
 
 
-   bool region::RectInRegion(const ::rectangle_i32 & rectangle) const
+   bool region::rectInRegion(const ::rectangle_i32 & rectangle) const
    {
 
       ASSERT(get_os_data() != nullptr);
 
-      return ::RectInRegion((HRGN)get_os_data(), rectangle) != false;
+      return ::rectInRegion((HRGN)get_os_data(), rectangle) != false;
 
    }
 

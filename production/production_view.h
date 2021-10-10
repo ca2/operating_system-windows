@@ -46,8 +46,8 @@ namespace production
       impact(::object * pobject);
       virtual ~impact();
 #ifdef DEBUG
-      virtual void assert_valid() const;
-      virtual void dump(dump_context & dumpcontext) const;
+      void assert_valid() const override;
+      void dump(dump_context & dumpcontext) const override;
 #endif
 
       enum e_message
@@ -80,7 +80,7 @@ namespace production
       virtual void _001OnDraw(::draw2d::graphics_pointer & pgraphics);
 
       virtual void _001OnTabClick(i32 iTab);
-      virtual void install_message_routing(::channel * pchannel);
+      void install_message_routing(::channel * pchannel) override;
       virtual bool pre_create_window(::user::system * pusersystem);
       virtual void handle(::subject * psubject, ::context * pcontext) override;
 

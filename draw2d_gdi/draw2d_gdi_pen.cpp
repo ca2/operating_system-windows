@@ -26,7 +26,7 @@ namespace draw2d_gdi
    }
 
 
-   bool pen::CreatePen(int nPenStyle, int nWidth, COLORREF crColor)
+   bool pen::CreatePen(int nPenStyle, int nWidth, ::color::color crColor)
    {
 
       return Attach(::CreatePen(nPenStyle, nWidth, crColor));
@@ -71,7 +71,7 @@ namespace draw2d_gdi
    }
 
 
-   void pen::construct(int nPenStyle, int nWidth, COLORREF crColor)
+   void pen::construct(int nPenStyle, int nWidth, ::color::color crColor)
    {
 
       if (!Attach(::CreatePen(nPenStyle, nWidth, crColor)))

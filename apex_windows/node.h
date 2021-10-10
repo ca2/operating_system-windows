@@ -97,7 +97,7 @@ namespace apex
          virtual string get_version();
          virtual void show_wait_cursor(bool bShow);
 
-         ::e_status node_branch(const ::routine& routine) override;
+         ::e_status node_post(const ::routine& routine) override;
 
 
 

@@ -16,7 +16,7 @@ namespace windowing_win32
       virtual ~system_interaction();
 
 
-      virtual void install_message_routing(::channel * pchannel) override;
+      void install_message_routing(::channel * pchannel) override;
 
       DECLARE_MESSAGE_HANDLER(_001OnMessage);
       DECLARE_MESSAGE_HANDLER(on_message_destroy);

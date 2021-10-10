@@ -837,7 +837,7 @@ namespace windowing_win32
 
       }
 
-      ::RECT rectangleWindow;
+      ::RECT rectWindow;
 
       for (auto & hwnd : *phwnda)
       {
@@ -852,12 +852,12 @@ namespace windowing_win32
 
             }
 
-            if (::GetWindowRect(hwnd, &rectangleWindow))
+            if (::GetWindowRect(hwnd, &rectWindow))
             {
 
                ::rectangle_i32 rectangleHitTest;
 
-               __copy(rectangleHitTest, rectangleWindow);
+               __copy(rectangleHitTest, rectWindow);
 
                rectangleHitTest.inflate(iMargin + 1);
 
@@ -1151,7 +1151,7 @@ namespace windowing_win32
 //                  ZeroMemory(&cc, sizeof(cc));
 //                  cc.lStructSize = sizeof(CHOOSECOLOR);
 //                  cc.rgbResult = rgb(0, 0, 0);
-//                  cc.lpCustColors = (COLORREF *) crCustColors;
+//                  cc.lpCustColors = (::color::color *) crCustColors;
 //
 //                  cc.Flags = CC_RGBINIT | CC_FULLOPEN;
 //                  cc.hwndOwner = get_safe_handle() ; // this hangs parent, as well as me
@@ -1188,7 +1188,7 @@ namespace windowing_win32
 //      ZeroMemory(&cc, sizeof(cc));
 //      cc.lStructSize = sizeof(CHOOSECOLOR);
 //      cc.rgbResult = c.get_rgb();
-//      cc.lpCustColors = (COLORREF *)crCustColors;
+//      cc.lpCustColors = (::color::color *)crCustColors;
 //
 //      cc.Flags = CC_RGBINIT | CC_FULLOPEN;
 //      cc.hwndOwner = puiOwner->get_safe_handle(); // this hangs parent, as well as me

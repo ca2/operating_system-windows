@@ -876,12 +876,19 @@ namespace apex
 
       //}
 
-      ::e_status node::node_branch(const ::routine& routine)
+      ::e_status node::node_post(const ::routine& routine)
       {
 
-         m_psystem->m_papexsystem->post_routine(routine);
+         auto estatus = m_psystem->m_papexsystem->post_routine(routine);
 
-         return ::success;
+         if (!estatus)
+         {
+
+            return estatus;
+
+         }
+
+         return estatus;
 
       }
 

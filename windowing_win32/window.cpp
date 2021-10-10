@@ -6187,7 +6187,7 @@ namespace windowing_win32
          
          pimpl->m_puserinteraction->send_message(e_message_mouse_move, 0, lparam);
 
-         //::SendMessage(hwnd, WM_MOUSEMOVE, 0, lparam);
+         //::SendMessage(hwnd, e_message_mouse_move, 0, lparam);
 
          ::preempt(5_ms);
 

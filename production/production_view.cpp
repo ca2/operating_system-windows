@@ -67,7 +67,7 @@ namespace production
       MESSAGE_LINK(e_message_rbutton_up, pchannel, this, &impact::on_message_right_button_up);
 
 
-      MESSAGE_LINK(WM_SHOWWINDOW, pchannel, this, &impact::on_message_show_window);
+      MESSAGE_LINK(e_message_show_window, pchannel, this, &impact::on_message_show_window);
       MESSAGE_LINK(e_message_destroy, pchannel, this, &impact::on_message_destroy);
 
       MESSAGE_LINK(WM_USER, pchannel, this, &impact::_001OnUser);

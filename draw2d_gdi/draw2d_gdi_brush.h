@@ -22,13 +22,13 @@ namespace draw2d_gdi
       int GetLogBrush(LOGBRUSH* pLogBrush);
 
 
-      virtual void construct(COLORREF crColor);                // CreateSolidBrush
-      virtual void construct(int nIndex, COLORREF crColor);    // CreateHatchBrush
+      virtual void construct(::color::color crColor);                // CreateSolidBrush
+      virtual void construct(int nIndex, ::color::color crColor);    // CreateHatchBrush
       virtual void construct(::draw2d::bitmap * pbitmap);                // CreatePatternBrush
 
 
-      bool CreateSolid(COLORREF crColor);
-      bool CreateHatchBrush(int nIndex, COLORREF crColor);
+      bool CreateSolid(::color::color crColor);
+      bool CreateHatchBrush(int nIndex, ::color::color crColor);
       bool CreateBrushIndirect(const LOGBRUSH* lpLogBrush);
       bool CreatePatternBrush(::draw2d::bitmap* pBitmap);
       bool CreateDIBPatternBrush(HGLOBAL hPackedDIB, UINT nUsage);
@@ -36,7 +36,7 @@ namespace draw2d_gdi
       bool CreateSysColorBrush(int nIndex);
 
 
-      virtual void dump(dump_context & dumpcontext) const;
+      void dump(dump_context & dumpcontext) const override;
 
 
       virtual bool create();

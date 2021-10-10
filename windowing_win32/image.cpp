@@ -456,20 +456,20 @@ namespace draw2d_gdiplus
 
          i32 scanSrc = pimageSrc->scan_size();
 
-         u8 * pdst = &((u8 *)pimageDst->colorref())[scanDst * rectangleTarget.top + rectangleTarget.left * sizeof(COLORREF)];
+         u8 * pdst = &((u8 *)pimageDst->colorref())[scanDst * rectangleTarget.top + rectangleTarget.left * sizeof(::color::color)];
 
-         u8 * psrc = &((u8 *)pimageSrc->colorref())[scanSrc * pointSrc.y + pointSrc.x * sizeof(COLORREF)];
+         u8 * psrc = &((u8 *)pimageSrc->colorref())[scanSrc * pointSrc.y + pointSrc.x * sizeof(::color::color)];
 
-         COLORREF * pdst2;
+         ::color::color * pdst2;
 
-         COLORREF * psrc2;
+         ::color::color * psrc2;
 
          for (int y = 0; y < yEnd; y++)
          {
 
-            pdst2 = (COLORREF *)&pdst[scanDst * y];
+            pdst2 = (::color::color *)&pdst[scanDst * y];
 
-            psrc2 = (COLORREF *)&psrc[scanSrc * y];
+            psrc2 = (::color::color *)&psrc[scanSrc * y];
 
             memcpy_dup(pdst2, psrc2, xEnd * 4);
 

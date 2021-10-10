@@ -29,8 +29,8 @@ namespace windows
       virtual ~file_find();
 
 
-      virtual void assert_valid() const override;
-      virtual void dump(dump_context & dumpcontext) const override;
+      void assert_valid() const override;
+      void dump(dump_context & dumpcontext) const override;
 
 
       // Attributes

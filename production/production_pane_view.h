@@ -30,9 +30,9 @@ namespace production
       void handle(::subject * psubject, ::context * pcontext);
 
       virtual void on_create_impact(::user::impact_data * pcreatordata) override;
-      virtual void on_change_cur_sel() override;
+      void on_change_cur_sel() override;
 
-      virtual void install_message_routing(::channel * pchannel);
+      void install_message_routing(::channel * pchannel) override;
 
       virtual void handle(::subject * psubject, ::context * pcontext) override;
       virtual bool pre_create_window(::user::system * pusersystem);
@@ -44,8 +44,8 @@ namespace production
 
       DECLARE_MESSAGE_HANDLER(_001OnMenuMessage);
 #ifdef DEBUG
-      virtual void assert_valid() const;
-      virtual void dump(dump_context & dumpcontext) const;
+      void assert_valid() const override;
+      void dump(dump_context & dumpcontext) const override;
 #endif
 
       DECLARE_MESSAGE_HANDLER(_001OnCreate);

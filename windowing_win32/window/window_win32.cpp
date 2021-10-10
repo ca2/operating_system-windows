@@ -106,10 +106,10 @@ LRESULT CALLBACK __window_procedure(HWND hwnd, UINT message, WPARAM wparam, LPAR
       output_debug_string("WM_KEYDOWN");
 
    }
-   else if (message == WM_SHOWWINDOW)
+   else if (message == e_message_show_window)
    {
 
-      output_debug_string("WM_SHOWWINDOW");
+      output_debug_string("e_message_show_window");
 
    }
 

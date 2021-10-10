@@ -19,7 +19,7 @@ namespace draw2d_gdiplus
 
 #ifdef DEBUG
 
-      virtual void dump(dump_context & dumpcontext) const;
+      void dump(dump_context & dumpcontext) const override;
 
 #endif
 
@@ -30,8 +30,8 @@ namespace draw2d_gdiplus
       ::e_status destroy() override;
       ::e_status destroy_os_data() override;
 
-      //bool create_solid(COLORREF crColor);
-      //bool CreateHatchBrush(i32 nIndex, COLORREF crColor);
+      //bool create_solid(::color::color crColor);
+      //bool CreateHatchBrush(i32 nIndex, ::color::color crColor);
       //bool CreatePatternBrush(::draw2d::bitmap* pBitmap);
       //bool CreateDIBPatternBrush(HGLOBAL hPackedDIB, UINT nUsage);
       //bool CreateDIBPatternBrush(const void * pPackedDIB, UINT nUsage);

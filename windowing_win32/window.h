@@ -158,7 +158,7 @@ namespace windowing_win32
 
       virtual bool __windows_message_bypass(HWND oswindow, ::u32 message, wparam wparam, lparam lparam, lresult & lresult);
 
-      //virtual void install_message_routing(::channel * pchannel);
+      //void install_message_routing(::channel * pchannel) override;
 
       //bool operator==(const interaction_impl & wnd) const;
       //bool operator!=(const interaction_impl & wnd) const;

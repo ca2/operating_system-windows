@@ -29,14 +29,14 @@ count g_cForkBlend = 0;
 * @return New array with ::size_f64 width * height
 */
 void trilinearImageScaling(
-COLORREF * ret, int width, int height, int scan,
-COLORREF * pixels, int w, int h, // larger image
-COLORREF * pixels2, int w2, int h2, // smaller image
+   ::color32_t * ret, int width, int height, int scan,
+   ::color32_t * pixels, int w, int h, // larger image
+   ::color32_t * pixels2, int w2, int h2, // smaller image
 int scan2)
 {
 
    int index, index2;
-   COLORREF A, B, C, D, E, F, G, H;
+   ::color32_t A, B, C, D, E, F, G, H;
    float x, y, x2, y2, w_diff, h_diff, w2_diff, h2_diff, red, green, blue, alpha;
    // find ratio for larger image
    float w_ratio = ((float)(w - 1)) / width;
@@ -47,11 +47,11 @@ int scan2)
    // estimate h3 distance
    float h3_diff = (w - width) / (float)(w - w2);
    int offset = 0;
-   COLORREF * line;
-   COLORREF * line2;
-   COLORREF * lineRet;
-   int wscan = scan / sizeof(COLORREF);
-   int wscan2 = scan2 / sizeof(COLORREF);
+   ::color32_t * line;
+   ::color32_t * line2;
+   ::color32_t * lineRet;
+   int wscan = scan / sizeof(::color::color);
+   int wscan2 = scan2 / sizeof(::color::color);
    for (int i = 0; i<height; i++)
    {
       lineRet = ret + wscan * i;
@@ -385,7 +385,7 @@ namespace draw2d_gdiplus
    }
 
 
-   //COLORREF graphics::GetNearestColor(const ::color::color & color)
+   //::color::color graphics::GetNearestColor(const ::color::color & color)
    //{
 
    //   //return ::GetNearestColor(get_handle2(), color);
@@ -655,10 +655,10 @@ namespace draw2d_gdiplus
    //}
 
 
-   //bool graphics::RectVisible(const rectangle_i32 &  prectangle)
+   //bool graphics::rectVisible(const rectangle_i32 &  prectangle)
    //{
 
-   //   //return ::RectVisible(get_handle1(), &prectangle) != false;
+   //   //return ::rectVisible(get_handle1(), &prectangle) != false;
    //   __throw(error_not_implemented);
 
    //   return false;
@@ -1847,17 +1847,17 @@ namespace draw2d_gdiplus
    //            //::image_pointer pimage = m_pimage;
    //            //int iScan = pimage->m_iScan;
    //            //::image_pointer pimageMipmap = pgraphicsSrc->m_pimage;
-   //            //COLORREF * pcrMipmap = imageMipmap.m_pcolorref;
+   //            //::color::color * pcrMipmap = imageMipmap.m_pcolorref;
    //            //int iMimapScan = imageMipmap.m_iScan;
    //            //::size_f64 sizeMipmap = imageMipmap.m_size;
 
    //            //trilinearImageScaling(
-   //            //&pimage->m_pcolorref[xDst + iScan * yDst / sizeof(COLORREF)],
+   //            //&pimage->m_pcolorref[xDst + iScan * yDst / sizeof(::color::color)],
    //            //nDstWidth, nDstHeight,
    //            //iScan,
-   //            //&pcrMipmap[x1 + y1 * iMimapScan / sizeof(COLORREF)],
+   //            //&pcrMipmap[x1 + y1 * iMimapScan / sizeof(::color::color)],
    //            //cx1, cy1,
-   //            //&pcrMipmap[x2 + y2 * iMimapScan / sizeof(COLORREF)],
+   //            //&pcrMipmap[x2 + y2 * iMimapScan / sizeof(::color::color)],
    //            //cx2, cy2,
    //            //iMimapScan);
 
@@ -3545,7 +3545,7 @@ namespace draw2d_gdiplus
    //   */
    //}
 
-   /*void graphics::fill_rectangle(const rectangle_i32 &  prectangle, COLORREF clr)
+   /*void graphics::fill_rectangle(const rectangle_i32 &  prectangle, ::color::color clr)
 
    {
       ::SetBkColor(get_handle1(), clr);
@@ -3804,7 +3804,7 @@ namespace draw2d_gdiplus
    //}
 
 
-   //bool graphics::draw_inset_3drect(const ::rectangle_f64 & rectangle, const ::color::color& colorTopLeft, const ::color::color& colorBottomRight, const ::e_border & eborder)
+   //bool graphics::draw_inset_3d_rectangle(const ::rectangle_f64 & rectangle, const ::color::color& colorTopLeft, const ::color::color& colorBottomRight, const ::e_border & eborder)
    //{
 
    //   if (!(eborder & (e_border_left | e_border_right | e_border_top | e_border_bottom)))
@@ -3921,7 +3921,7 @@ namespace draw2d_gdiplus
    //}
 
 
-   //void graphics::draw_inset_3drect(const ::rectangle_i32& rectangle, const ::color::color& colorTopLeft, const ::color::color& colorBottomRight, const ::e_border & eborder)
+   //void graphics::draw_inset_3d_rectangle(const ::rectangle_i32& rectangle, const ::color::color& colorTopLeft, const ::color::color& colorBottomRight, const ::e_border & eborder)
    //{
 
    //   if (!(eborder & (e_border_left | e_border_right | e_border_top | e_border_bottom)))
@@ -5182,7 +5182,7 @@ namespace draw2d_gdiplus
 //      case META_SETBKCOLOR:
 //      {
 //         auto pbrush = __create < ::draw2d::brush >();
-//         pbrush->create_solid(*(UNALIGNED COLORREF*)&pMetaRec->rdParm[0]);
+//         pbrush->create_solid(*(UNALIGNED ::color::color*)&pMetaRec->rdParm[0]);
 //         set(pbrush);
 //      }
 //      break;
@@ -5190,7 +5190,7 @@ namespace draw2d_gdiplus
 //      {
 //         auto pbrush = __create < ::draw2d::brush >();
 //
-//         pbrush->create_solid(*(UNALIGNED COLORREF*)&pMetaRec->rdParm[0]);
+//         pbrush->create_solid(*(UNALIGNED ::color::color*)&pMetaRec->rdParm[0]);
 //         set(pbrush);
 //      }
 //      break;

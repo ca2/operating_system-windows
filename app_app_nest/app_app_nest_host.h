@@ -40,7 +40,7 @@ namespace ca2plugin_container
       virtual bool reload_plugin();
 
 
-      virtual void install_message_routing(::channel * pchannel);
+      void install_message_routing(::channel * pchannel) override;
 
       void start_plugin();
 

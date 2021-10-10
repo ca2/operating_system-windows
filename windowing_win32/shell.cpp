@@ -95,7 +95,7 @@ bool IsDibSection(HBITMAP bmp)
 //   auto hOld  =::SelectObject(sourceHdc, hbitmap);
 //
 //   // This pixel has partial transparency, but ::GetPixel returns just RGB.
-//   COLORREF c = ::GetPixel(sourceHdc, 20, 20);
+//   ::color::color c = ::GetPixel(sourceHdc, 20, 20);
 //
 //   // Draw the bitmap to hdcDraw
 //   BLENDFUNCTION bf1;
@@ -187,7 +187,7 @@ __pointer(::image) create_image_from_hbitmap(::object * pobject, HBITMAP hbitmap
    bitmapinfo.bmiHeader.biPlanes = 1;
    bitmapinfo.bmiHeader.biBitCount = 32;
    bitmapinfo.bmiHeader.biCompression = BI_RGB;
-   bitmapinfo.bmiHeader.biSizeImage = (DWORD) (pimage->area() * sizeof(COLORREF));
+   bitmapinfo.bmiHeader.biSizeImage = (DWORD) (pimage->area() * sizeof(::color::color));
    //bitmapinfo.bmiHeader.biXPelsPerMeter;
    //bitmapinfo.bmiHeader.biYPelsPerMeter;
    //bitmapinfo.bmiHeader.biClrUsed;
