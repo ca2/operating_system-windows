@@ -51,7 +51,7 @@ namespace music
 
 
             sequencer( sequence * psequence, const ::string & strDevice);
-            virtual ~sequencer();
+            ~sequencer() override;
 
 
 
@@ -103,12 +103,16 @@ namespace music
 
             virtual void on_set_position() override;
 
-            virtual musical_tick get_position_ticks();
-            virtual void karaoke_get_time(::duration& time);
+            
+            //virtual void karaoke_get_time(::duration& time);
 
-            virtual ::e_status     get_ticks(musical_tick& time);
-            virtual ::e_status     get_millis(::duration& time);
-            virtual ::duration get_milliseconds() override;
+            
+            virtual ::e_status      get_position(musical_tick & tk);
+            virtual musical_tick    get_position();
+
+
+            virtual ::e_status      get_time_position(::duration & duration);
+            virtual ::duration      get_time_position() override;
 
 
             bool IsPlaying();

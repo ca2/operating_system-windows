@@ -948,10 +948,10 @@ namespace windowing_win32
    }
 
 
-   ::e_status windowing::windowing_branch(const ::routine& routine)
+   ::e_status windowing::windowing_post(const ::routine& routine)
    {
 
-      auto estatus = m_psystem->m_papexsystem->post(routine);
+      auto estatus = m_psystem->m_papexsystem->post_routine(routine);
 
       if (!estatus)
       {

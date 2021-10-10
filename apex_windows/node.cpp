@@ -879,7 +879,7 @@ namespace apex
       ::e_status node::node_branch(const ::routine& routine)
       {
 
-         m_psystem->m_papexsystem->post(routine);
+         m_psystem->m_papexsystem->post_routine(routine);
 
          return ::success;
 
@@ -890,10 +890,6 @@ namespace apex
 
 
 } // namespace apex
-
-
-
-
 
 
 

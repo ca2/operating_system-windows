@@ -32,16 +32,16 @@ namespace music
          }
 
 
-         ::e_status     out::open(int iDeviceId)
+         ::e_status out::open()
          {
 
             synchronous_lock synchronouslock(&get_midi_mutex());
 
             MMRESULT estatus;
 
-            u32 uDeviceID = iDeviceId;
-
             m_hmidiout = nullptr;
+
+            auto uDeviceID = ((midi*)m_pmidi->m_pMidi)->get_os_out_device_id(m_strDeviceId);
 
             estatus = midiOutOpen(&m_hmidiout, uDeviceID,  0, 0, CALLBACK_NULL);
 

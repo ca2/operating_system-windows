@@ -529,14 +529,14 @@ namespace music
          }
 
 
-         ::e_status     sequencer::get_ticks(musical_tick& pTicks)
+         ::e_status sequencer::get_position(musical_tick & tk)
          {
 
             synchronous_lock synchronouslock(mutex());
 
-            ::e_status                    mmr;
+            ::e_status mmr;
 
-            MMTIME                  mmt;
+            MMTIME mmt;
 
             if ((sequence::e_state_playing != m_psequence->get_state() &&
                sequence::e_state_paused != m_psequence->get_state() &&
@@ -549,19 +549,25 @@ namespace music
 
             }
 
-            pTicks = 0;
+            tk = 0;
+
             if (sequence::e_state_opened != m_psequence->get_state())
             {
-               pTicks = m_psequence->m_tkBase;
+
+               tk = m_psequence->m_tkBase;
+
                if (sequence::e_state_pre_rolled != m_psequence->get_state())
                {
+
                   mmt.wType = TIME_TICKS;
-                  //            single_lock slStream(&m_csStream, false);
-                  //          slStream.lock();
+
                   if (m_hstream == nullptr)
                   {
+
                      TRACE("m_hmidi == nullptr!!!!");
+
                      return error_not_ready;
+
                   }
                   else
                   {
@@ -588,11 +594,9 @@ namespace music
 
                      }
 
-                     pTicks += mmt.u.ticks;
+                     tk += mmt.u.ticks;
 
                   }
-
-                  //        slStream.unlock();
 
                }
 
@@ -603,24 +607,26 @@ namespace music
          }
 
 
-         double sequencer::get_millis()
+         ::duration sequencer::get_time_position()
          {
             
-            ::duration time =0.0;
+            ::duration duration;
          
-            get_millis(time);
+            get_time_position(duration);
 
-            return time;
+            return duration;
 
          }
 
 
-         ::e_status     sequencer::get_millis(::duration& time)
+         ::e_status sequencer::get_time_position(::duration & duration)
          {
+
             synchronous_lock synchronouslock(mutex());
 
-            ::e_status                    mmr;
-            MMTIME                  mmt;
+            ::e_status estatus;
+
+            MMTIME mmtime;
 
             if (sequence::e_state_playing != m_psequence->get_state() &&
                sequence::e_state_paused != m_psequence->get_state() &&
@@ -629,44 +635,62 @@ namespace music
                sequence::e_state_opened != m_psequence->get_state() &&
                sequence::e_state_stopping != m_psequence->get_state())
             {
+               
                TRACE("seqTime(): State wrong! [is %u]", m_psequence->get_state());
+               
                return error_unsupported_function;
+
             }
 
             if (sequence::e_state_opened != m_psequence->get_state())
             {
-               time = m_psequence->m_msBase;
-               //time = (iptr)m_psequence->TicksToMillisecs(m_psequence->m_tkBase);
+
+               duration = m_psequence->m_durationBase;
+
                if (sequence::e_state_pre_rolled != m_psequence->get_state())
                {
-                  mmt.wType = TIME_MS;
-                  //            single_lock slStream(&m_csStream, false);
-                  //          slStream.lock();
+                  
+                  mmtime.wType = TIME_MS;
+
                   if (m_hstream == nullptr)
                   {
+
                      TRACE("m_hmidi == nullptr!!!!");
+
                      return error_not_ready;
+
                   }
                   else
                   {
+
                      try
                      {
 
-                        mmr = translate_os_result(midiStreamPosition(m_hstream, &mmt, sizeof(mmt)), "get_millis", "midiStreamPosition");
-                        if (::success != mmr)
+                        estatus = translate_os_result(midiStreamPosition(m_hstream, &mmtime, sizeof(mmtime)), "get_millis", "midiStreamPosition");
+
+                        if (::success != estatus)
                         {
-                           TRACE("midiStreamPosition() returned %lu", (u32)mmr.m_estatus);
+
+                           TRACE("midiStreamPosition() returned %lu", (u32)estatus.m_estatus);
+
                            return error_not_ready;
+
                         }
+
                      }
                      catch (...)
                      {
+
                         return error_not_ready;
+
                      }
-                     time += mmt.u.ms;
+
+                     duration += INTEGRAL_MILLISECOND(mmtime.u.ms);
+
                   }
-                  //        slStream.unlock();
+
                }
+
             }
 
             return ::success;
@@ -1215,7 +1239,7 @@ namespace music
 
 
 
-         //void sequencer::OnMidiPlaybackEnd(sequence::event * pevent)
+         //void sequencer::on_midi_playback_end(sequence::event * pevent)
          //{
 
 
@@ -1309,7 +1333,7 @@ namespace music
          }
 
 
-         musical_tick sequencer::get_position_ticks()
+         musical_tick sequencer::get_position()
          {
 
             single_lock synchronouslock(mutex());
@@ -1373,12 +1397,12 @@ namespace music
          //}
 
 
-         void sequencer::karaoke_get_time(::duration & time)
-         {
+         //void sequencer::get_time(::duration & time)
+         //{
 
-            get_millis(time);
+         //   get_time_position(time);
 
-         }
+         //}
 
 
          bool sequencer::IsOpened()
@@ -1502,7 +1526,7 @@ namespace music
 
             }
 
-            ::preempt(::duration);
+            ::preempt(duration);
 
             while (!(mh.dwFlags & MHDR_DONE))
             {
@@ -2479,7 +2503,7 @@ namespace music
 
                musical_tick tkDiv = m_psequence->GetQuarterNote();
 
-               while ((m_psequence->TicksToMillisecs(tkLastPosition + tkDiv) - m_psequence->TicksToMillisecs(tkLastPosition)) > 100)
+               while ((m_psequence->tick_to_time(tkLastPosition + tkDiv) - m_psequence->tick_to_time(tkLastPosition)) > 100_ms)
                {
 
                   tkDiv /= 2;
@@ -2514,7 +2538,7 @@ namespace music
                   if (m_psequence->m_eeffect == effect_fade_in || m_psequence->m_eeffect == effect_fade_out)
                   {
 
-                     double dVolume = m_psequence->get_fade_volume(m_psequence->TicksToMillisecs(tkOp));
+                     double dVolume = m_psequence->get_fade_volume(m_psequence->tick_to_time(tkOp));
 
                      for (int iTrack = 0; iTrack < 16; iTrack++)
                      {

@@ -13,8 +13,8 @@ namespace audio_mmsystem
 
       HWAVEOUT                         m_hwaveout;
       WAVEFORMATEX                     m_waveformatex;
-      ::duration                      m_imediatime;
-      ::duration                      m_imediaposition;
+      ::duration                       m_duration;
+      ::duration                       m_durationPosition;
       manual_reset_event               m_evFree;
       int_array                        m_iaFree;
       ::mutex                          m_mutexFree;
@@ -51,14 +51,10 @@ namespace audio_mmsystem
       LPWAVEHDR                  wave_hdr(index iBuffer);
 
 
-      //virtual bool raw_pump_message() override;
-
-      //virtual void out_launch_buffers() override;
-
-
    };
 
 
 } // namespace audio_mmsystem
+
 
 
