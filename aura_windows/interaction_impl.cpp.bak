@@ -576,7 +576,7 @@ namespace windows
          MESSAGE_LINK(e_message_set_cursor, pchannel, this, &interaction_impl::_001OnSetCursor);
          MESSAGE_LINK(e_message_erase_background, pchannel, this, &interaction_impl::_001OnEraseBkgnd);
          MESSAGE_LINK(e_message_nccalcsize, pchannel, this, &interaction_impl::_001OnNcCalcSize);
-         MESSAGE_LINK(e_message_show_window, pchannel, this, &interaction_impl::_001OnShowWindow);
+         MESSAGE_LINK(e_message_show_window, pchannel, this, &interaction_impl::on_message_show_window);
          MESSAGE_LINK(e_message_move, pchannel, this, &interaction_impl::_001OnMove);
          MESSAGE_LINK(e_message_size, pchannel, this, &interaction_impl::_001OnSize);
          MESSAGE_LINK(e_message_window_position_changing, pchannel, this,&interaction_impl::_001OnWindowPosChanging);
@@ -594,7 +594,7 @@ namespace windows
 
    }
 
-   void interaction_impl::_001OnShowWindow(::message::message * pmessage)
+   void interaction_impl::on_message_show_window(::message::message * pmessage)
    {
 
       SCAST_PTR(::message::show_window, pshowwindow, pmessage);
@@ -602,13 +602,13 @@ namespace windows
       if (pshowwindow->m_bShow)
       {
 
-         output_debug_string("windows::interaction_impl::_001OnShowWindow bShow = true");
+         output_debug_string("windows::interaction_impl::on_message_show_window bShow = true");
 
       }
       else
       {
 
-         output_debug_string("windows::interaction_impl::_001OnShowWindow bShow = false");
+         output_debug_string("windows::interaction_impl::on_message_show_window bShow = false");
 
       }
 

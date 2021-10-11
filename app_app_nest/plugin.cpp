@@ -233,7 +233,7 @@ install:
 
       App(pplugin->get_application()).GetThread()->SetMainWnd(pplugin->m_pframe);
       pplugin->m_pframe->m_bCustomFrame = false;
-      pplugin->m_pframe->get_parent()->on_layout(::draw2d::graphics_pointer & pgraphics);*/
+      pplugin->m_pframe->get_parent()->on_layout(pgraphics);*/
 
 
 
