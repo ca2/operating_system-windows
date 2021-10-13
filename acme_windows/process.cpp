@@ -187,7 +187,7 @@ struct shell_execute :
 
          auto waitNow = minimum(wait - start.elapsed(), 1000_ms);
 
-         if (waitNow.is_null())
+         if (!waitNow)
          {
 
             break;

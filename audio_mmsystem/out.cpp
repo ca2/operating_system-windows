@@ -479,6 +479,14 @@ Opened:
    }
 
 
+   ::duration out::out_get_position()
+   {
+
+      return device_out_get_time();
+
+   }
+
+
    ::duration out::out_get_time()
    {
 
@@ -519,7 +527,9 @@ Opened:
 
          double d = (mmt.u.cb* 8.0)/ (m_pwaveformat->m_waveformat.wBitsPerSample * m_pwaveformat->m_waveformat.nChannels * m_pwaveformat->m_waveformat.nSamplesPerSec);
 
-         return FLOATING_SECOND((double) d / (double) wave_base_get_byte_count_per_second());
+         //return FLOATING_SECOND((double) d / (double) wave_base_get_byte_count_per_second());
+
+         return FLOATING_SECOND((double)d);
 
       }
       else

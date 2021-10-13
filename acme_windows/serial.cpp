@@ -497,10 +497,14 @@ namespace windows
    {
 
       //__throw (io_exception, "waitByteTimes is not implemented on Windows.");
-      duration dur;
-      dur.m_iNanosecond = count * m_uiByteTimeNs;
-      dur.normalize();
-      preempt(dur);
+
+      duration duration;
+
+      duration.m_iSecond = muldiv64(count, m_uiByteTimeNs, 1'000'000'000);
+
+      duration.m_iNanosecond = (count * m_uiByteTimeNs) % 1'000'000'000;
+
+      preempt(duration);
 
    }
 
