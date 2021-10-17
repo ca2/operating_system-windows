@@ -5343,7 +5343,7 @@ namespace windows
          )
       {
 
-         auto pmouse = pmessage->m_pmouse;
+         auto pmouse = pmessage->m_union.m_pmouse;
 
          if (on_mouse_message(pmouse))
          {
