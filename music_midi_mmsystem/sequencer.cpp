@@ -1252,7 +1252,7 @@ namespace music
 
             ::music::midi::sequencer::OnEvent(pevent);
 
-            switch (pevent->m_id)
+            switch (pevent->m_eevent)
             {
             case sequence::e_event_operation:
             {
