@@ -697,6 +697,8 @@ namespace music
 
          }
 
+
+
          
          ::e_status     sequencer::preroll_operation(LPMIDIHDR lpmh)
          {
@@ -804,19 +806,19 @@ namespace music
          }
 
 
-         ::e_status     sequencer::fill_buffer(LPMIDIHDR lpmidihdr)
+         ::e_status sequencer::fill_buffer(LPMIDIHDR lpmidihdr)
          {
 
             lpmidihdr->dwBytesRecorded = 0;
 
             ::e_status estatus = ::success;
 
-            if (m_psequence->is_in_operation())
+            if (m_psequence->has_operation())
             {
-               
-               if (m_psequence->m_eoperation == operation_general_midi_reset)
+
+               if (m_psequence->has_operation(operation_general_midi_reset))
                {
-                  
+
                   const uchar gmModeOn[] =
                   {
                      0x00, 0x00, 0x00, 0x00,
@@ -825,17 +827,17 @@ namespace music
                      0xf0, 0x7e, 0x7f, 0x09,
                      0x01, 0xf7, 0x00, 0x00
                   };
-                  
+
                   lpmidihdr->dwBytesRecorded = sizeof(gmModeOn);
 
                   memcpy_dup(lpmidihdr->lpData, gmModeOn, sizeof(gmModeOn));
 
-                  m_psequence->set_operation_on(false);
+                  m_psequence->clear_operation(operation_general_midi_reset);
 
                   return ::success;
 
                }
-               else if (m_psequence->m_eoperation == operation_preroll)
+               else if (m_psequence->has_operation(operation_preroll))
                {
 
                   while (lpmidihdr->dwBufferLength - lpmidihdr->dwBytesRecorded > 16)
@@ -849,7 +851,7 @@ namespace music
                         if (estatus != success)
                         {
 
-                           m_psequence->set_operation_on(false);
+                           m_psequence->clear_operation(operation_preroll);
 
                            break;
 
@@ -874,7 +876,7 @@ namespace music
                      else if (estatus == ::success)
                      {
 
-                        m_psequence->set_operation_on(false);
+                        m_psequence->clear_operation(operation_preroll);
 
                         m_psequence->set_state(::music::midi::sequence::e_state_pre_rolled);
 
@@ -887,31 +889,24 @@ namespace music
                   }
 
                }
-               else if (m_psequence->m_eoperation == operation_tempo_change)
+               else if (m_psequence->has_operation(operation_tempo_change))
                {
-                  
+
                   ::music::midi::event event;
-                  
+
                   m_psequence->m_pfile->GetTempoEvent(event);
-                  
+
                   StreamEvent(event.GetDelta(), &event, lpmidihdr, 0x7fffffff, 256);
 
-                  m_psequence->set_operation_on(false);
+                  m_psequence->clear_operation(operation_tempo_change);
 
                   return ::success;
-                  
-               }
-               else
-               {
-
-                  // Unknown operation
-                  ASSERT(false);
 
                }
-               
-               estatus = ::success;
 
             }
+               
+            estatus = ::success;
 
             if(lpmidihdr->dwBufferLength - lpmidihdr->dwBytesRecorded > 16)
             {
@@ -1257,7 +1252,7 @@ namespace music
             case sequence::e_event_operation:
             {
                
-               m_psequence->set_operation_on(false);
+//               m_psequence->set_operation_on(false);
                
                m_psequence->set_state(m_psequence->m_estatePreOperation);
 

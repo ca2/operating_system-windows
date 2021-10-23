@@ -41,13 +41,25 @@ namespace music
 
             m_hmidiout = nullptr;
 
-            auto uDeviceID = ((midi*)m_pmidi->m_pMidi)->get_os_out_device_id(m_strDeviceId);
+            auto iDeviceId = ((midi*)m_pmidi->m_pMidi)->get_os_out_device_id(m_strDeviceId);
+
+            if (iDeviceId < 0)
+            {
+
+               return error_not_found;
+
+            }
+
+            UINT uDeviceID = (UINT) iDeviceId;
 
             estatus = midiOutOpen(&m_hmidiout, uDeviceID,  0, 0, CALLBACK_NULL);
 
-            if(estatus != MMSYSERR_NOERROR)
+            if (estatus != MMSYSERR_NOERROR)
+            {
+
                return error_failed;
 
+            }
 
             return ::success;
 

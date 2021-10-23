@@ -152,7 +152,7 @@ namespace draw2d_gdiplus
    }
 
 
-   ::e_status image::create_ex(const ::size_i32& size, ::color32_t * pcolorref, int iScan, ::eobject eobjectCreate, int iGoodStride, bool bPreserve)
+   ::e_status image::create_ex(const ::size_i32& size, ::color32_t * pcolorref, int iScan, ::enum_flag eflagCreate, int iGoodStride, bool bPreserve)
    {
 
       if (m_pbitmap.is_set()
@@ -287,7 +287,7 @@ namespace draw2d_gdiplus
       
       m_bMapped = false;
 
-      m_eobject = eobjectCreate;
+      set(eflagCreate);
 
       return true;
 

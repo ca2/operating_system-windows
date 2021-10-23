@@ -27,9 +27,9 @@ namespace music
             ~midi() override;
 
 
-            ::u32 get_os_out_device_id(const ::string & strDevice);
+            ::index get_os_out_device_id(const ::string & strDevice);
 
-            ::u32 get_os_in_device_id(const ::string & strDevice);
+            ::index get_os_in_device_id(const ::string & strDevice);
 
 
             virtual __pointer(::music::midi::sequencer) create_midi_sequencer(sequence * psequence, const string& strDevice) override;
