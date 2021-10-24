@@ -46,7 +46,7 @@ namespace draw2d_gdiplus
       //virtual HDC DetachPrinter() override;
 
 
-      bool IsPrinting() override;            // true if being used for printing
+      //bool IsPrinting() override;            // true if being used for printing
 
 
       // for bidi and mirrored localization
@@ -80,7 +80,7 @@ namespace draw2d_gdiplus
       virtual i32 SaveDC() override;
       virtual bool RestoreDC(i32 nSavedDC) override;
       i32 GetDeviceCaps(i32 nIndex) override;
-      virtual ::u32 SetBoundsRect(const ::rectangle_f64 & rectBounds, ::u32 flags);
+      virtual ::u32 SetBoundsRect(const ::rectangle_f64 & rectangleBounds, ::u32 flags);
       virtual ::u32 GetBoundsRect(::rectangle_f64 * rectdBounds, ::u32 flags);
 
       //bool ResetDC(const DEVMODE* pDevMode) override;
@@ -332,7 +332,7 @@ namespace draw2d_gdiplus
       virtual bool _draw_raw(const ::image_drawing & imagedrawing) override;
       
       
-      //virtual bool _stretch_raw(const ::rectangle_f64 & rectDst, ::draw2d::graphics * pgraphicsSrc, const ::rectangle_f64 & rectSrc = ::rectangle_f64()) override;
+      //virtual bool _stretch_raw(const ::rectangle_f64 & rectangleTarget, ::draw2d::graphics * pgraphicsSrc, const ::rectangle_f64 & rectangleSource = ::rectangle_f64()) override;
 
 
       //// Bitmap Functions
@@ -367,7 +367,7 @@ namespace draw2d_gdiplus
       //                    ::draw2d::graphics * pgraphicsSrc, i32 xSrc, i32 ySrc, i32 nSrcWidth, i32 nSrcHeight,
       //                    UINT clrTransparent) override;
 
-      //virtual bool _alpha_blend_raw(const ::rectangle_f64 & rectDst, ::draw2d::graphics * pgraphicsSrc, const ::rectangle_f64 & rectSrc, double dOpacity) override;
+      //virtual bool _alpha_blend_raw(const ::rectangle_f64 & rectangleTarget, ::draw2d::graphics * pgraphicsSrc, const ::rectangle_f64 & rectangleSource, double dOpacity) override;
 
       /*bool alpha_blend(i32 xDest, i32 yDest, i32 nDestWidth, i32 nDestHeight,
         ::draw2d::graphics * pgraphicsSrc, i32 xSrc, i32 ySrc, i32 nSrcWidth, i32 nSrcHeight,
@@ -385,9 +385,9 @@ namespace draw2d_gdiplus
 
 
       //using ::draw2d::graphics::draw;
-      //virtual bool draw(const ::point_i32 & point, ::draw2d::graphics * pgraphicsSrc, const ::rectangle_i32 & rectSrc) override;
+      //virtual bool draw(const ::point_i32 & point, ::draw2d::graphics * pgraphicsSrc, const ::rectangle_i32 & rectangleSource) override;
 
-      virtual bool _001DrawText(const ::string & str, rectangle_f64 & rectParam, const ::e_align & ealign = e_align_top_left, const ::e_draw_text & edrawtext = e_draw_text_none, bool bMeasure = false) override;
+      virtual bool _001DrawText(const ::string & str, rectangle_f64 & rectangleParam, const ::e_align & ealign = e_align_top_left, const ::e_draw_text & edrawtext = e_draw_text_none, bool bMeasure = false) override;
 
       //virtual bool draw_text_ex(const ::string & pszString,strsize nCount,const ::rectangle_i32 & rectangle, const ::e_align & ealign = e_align_top_left, const ::e_draw_text & edrawtext = e_draw_text_none,LPDRAWTEXTPARAMS lpDTParams) override;
 
@@ -566,15 +566,15 @@ namespace draw2d_gdiplus
 
       virtual bool fill_rectangle(const ::rectangle_f64 & rectangle, const ::color::color & color) override;
 
-      //virtual void draw_3drect(const ::rectangle_i32 & rectangle, const ::color::color & colorTopLeft, const ::color::color& colorBottomRight, const ::e_border & eborder = e_border_all) override;
-      virtual bool draw_3drect(const ::rectangle_f64 & rectangle, const ::color::color & colorTopLeft, const ::color::color& colorBottomRight, const ::e_border & eborder = e_border_all) override;
+      //virtual void draw_inset_3d_rectangle(const ::rectangle_i32 & rectangle, const ::color::color & colorTopLeft, const ::color::color& colorBottomRight, const ::e_border & eborder = e_border_all) override;
+      //virtual bool draw_inset_3d_rectangle(const ::rectangle_f64 & rectangle, const ::color::color & colorTopLeft, const ::color::color& colorBottomRight, const ::e_border & eborder = e_border_all) override;
 
       //virtual bool draw_rectangle(const ::rectangle_i32& rectangle, const ::color::color& color, const ::e_border & eborder = e_border_all);
-      virtual bool draw_rectangle(const rectangle_f64& rectangle_f64, const ::color::color& color, const ::e_border & eborder = e_border_all);
+      //virtual bool draw_rectangle(const rectangle_f64& rectangle_f64, const ::color::color& color, const ::e_border & eborder = e_border_all);
 
 #ifdef DEBUG
-      virtual void assert_valid() const override;
-      virtual void dump(dump_context & dumpcontext) const override;
+      void assert_valid() const override;
+      void dump(dump_context & dumpcontext) const override;
 #endif
 
 //      HGDIOBJ set(HGDIOBJ) override;      // do not use for regions

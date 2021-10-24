@@ -52,7 +52,7 @@ namespace draw2d_gdiplus
 
       //cvirtual bool stretch(::draw2d::graphics * pgraphics) override;
       //virtual bool draw(const ::image * pimage) override;
-      virtual bool _draw_raw(const ::rectangle_i32 & rectDst, ::image * pimageSrc, const ::point_i32 & pointSrc) override;
+      virtual bool _draw_raw(const ::rectangle_i32 & rectangleTarget, ::image * pimageSrc, const ::point_i32 & pointSrc) override;
 
 
       virtual ::e_status SetIconMask(::draw2d::icon * picon, i32 cx, i32 cy) override;

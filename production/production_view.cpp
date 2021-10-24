@@ -7,11 +7,11 @@ namespace production
 {
 
 
-   view::view(::object * pobject) :
+   impact::impact(::object * pobject) :
       ::object(pobject),
       ::user::interaction(pobject),
-      m_brushBkActive(e_create),
-      m_brushBkInactive(e_create)
+      m_pbrushBkActive(e_create),
+      m_pbrushBkInactive(e_create)
    {
 
       m_pproduction = nullptr;
@@ -21,8 +21,8 @@ namespace production
 
       m_iLineHeight = 1;
       m_bLayout = false;
-      m_brushBkActive->create_solid(rgb(150, 255, 130));
-      m_brushBkInactive->create_solid(rgb(128, 208, 120));
+      m_pbrushBkActive->create_solid(rgb(150, 255, 130));
+      m_pbrushBkInactive->create_solid(rgb(128, 208, 120));
       LOGFONT lf;
       __memset(&lf, 0, sizeof(lf));
 
@@ -40,55 +40,55 @@ namespace production
    }
 
 
-   view::~view()
+   impact::~impact()
    {
 
    }
 
 
-   void view::install_message_routing(::channel * pchannel)
+   void impact::install_message_routing(::channel * pchannel)
    {
       ::user::scroll_view::install_message_routing(pchannel);
 
-      MESSAGE_LINK(e_message_destroy, pchannel, this, &view::on_message_destroy);
-      MESSAGE_LINK(e_message_size, pchannel, this, &view::on_message_size);
-      //MESSAGE_LINK(WM_PAINT, pchannel, this, &view::_001OnPaint);
-      MESSAGE_LINK(e_message_create, pchannel, this, &view::_001OnCreate);
-      MESSAGE_LINK(WM_CONTEXTMENU, pchannel, this, &view::on_message_context_menu);
-      //MESSAGE_LINK(WM_SETCURSOR, pchannel, this, &view::on_message_set_cursor);
+      MESSAGE_LINK(e_message_destroy, pchannel, this, &impact::on_message_destroy);
+      MESSAGE_LINK(e_message_size, pchannel, this, &impact::on_message_size);
+      //MESSAGE_LINK(WM_PAINT, pchannel, this, &impact::_001OnPaint);
+      MESSAGE_LINK(e_message_create, pchannel, this, &impact::_001OnCreate);
+      MESSAGE_LINK(WM_CONTEXTMENU, pchannel, this, &impact::on_message_context_menu);
+      //MESSAGE_LINK(WM_SETCURSOR, pchannel, this, &impact::on_message_set_cursor);
 
       //   MESSAGE_LINK(e_message_lbutton_down, pchannel, this, &::user::interaction::_001OnLButtonDown);
       //   MESSAGE_LINK(e_message_lbutton_up, pchannel, this, &::user::interaction::_001OnLButtonUp);
-      MESSAGE_LINK(e_message_key_down, pchannel, this, &view::on_message_key_down);
-      MESSAGE_LINK(e_message_key_up, pchannel, this, &view::on_message_key_up);
+      MESSAGE_LINK(e_message_key_down, pchannel, this, &impact::on_message_key_down);
+      MESSAGE_LINK(e_message_key_up, pchannel, this, &impact::on_message_key_up);
 
-      MESSAGE_LINK(e_message_lbutton_down, pchannel, this, &view::_001OnLButtonDown);
-      MESSAGE_LINK(e_message_lbutton_up, pchannel, this, &view::_001OnLButtonUp);
-      MESSAGE_LINK(e_message_rbutton_up, pchannel, this, &view::on_message_right_button_up);
+      MESSAGE_LINK(e_message_lbutton_down, pchannel, this, &impact::_001OnLButtonDown);
+      MESSAGE_LINK(e_message_lbutton_up, pchannel, this, &impact::_001OnLButtonUp);
+      MESSAGE_LINK(e_message_rbutton_up, pchannel, this, &impact::on_message_right_button_up);
 
 
-      MESSAGE_LINK(WM_SHOWWINDOW, pchannel, this, &view::on_message_show_window);
-      MESSAGE_LINK(e_message_destroy, pchannel, this, &view::on_message_destroy);
+      MESSAGE_LINK(e_message_show_window, pchannel, this, &impact::on_message_show_window);
+      MESSAGE_LINK(e_message_destroy, pchannel, this, &impact::on_message_destroy);
 
-      MESSAGE_LINK(WM_USER, pchannel, this, &view::_001OnUser);
+      MESSAGE_LINK(WM_USER, pchannel, this, &impact::_001OnUser);
 
 
 
    }
 
 #ifdef DEBUG
-   void view::assert_valid() const
+   void impact::assert_valid() const
    {
       ::user::impact::assert_valid();
    }
 
-   void view::dump(dump_context & dumpcontext) const
+   void impact::dump(dump_context & dumpcontext) const
    {
       ::user::impact::dump(dumpcontext);
    }
 #endif //DEBUG
 
-   bool view::pre_create_window(::user::system * pusersystem)
+   bool impact::pre_create_window(::user::system * pusersystem)
    {
       pusersystem->m_createstruct.style &= ~WS_EX_CLIENTEDGE;
       return ::user::impact::pre_create_window(pusersystem);
@@ -97,7 +97,7 @@ namespace production
    
 
 
-   void view::on_subject(::subject::subject * psubject, ::subject::context * pcontext)
+   void impact::handle(::subject * psubject, ::context * pcontext)
    {
       if(update == ::id_update_current_area)
       {
@@ -120,21 +120,21 @@ namespace production
 
    }
 
-   void view::on_message_destroy(::message::message * pmessage)
+   void impact::on_message_destroy(::message::message * pmessage)
    {
       ::user::impact::on_message_destroy(pmessage);
    }
 
-   void view::on_message_size(::message::message * pmessage)
+   void impact::on_message_size(::message::message * pmessage)
    {
-      UNREFERENCED_PARAMETER(pmessage);
+      __UNREFERENCED_PARAMETER(pmessage);
 //      __pointer(::message::size) psize(pmessage);
 
-      ::rectangle_i32 rectDesktop;
-      best_monitor(rectDesktop);
+      ::rectangle_i32 rectangleDesktop;
+      best_monitor(rectangleDesktop);
 
-      m_iWScreen = rectDesktop.width();
-      m_iHScreen = rectDesktop.height();
+      m_iWScreen = rectangleDesktop.width();
+      m_iHScreen = rectangleDesktop.height();
       ::rectangle_i32 rectangleClient = get_client_rect();
       //GetClientRect(rectangleClient);
       rectangleClient.deflate(2, 2);
@@ -142,7 +142,7 @@ namespace production
       i32 iH = rectangleClient.height() / 2;
       iH = minimum(iH, 120);
       double r = (double) iW / (double) iH;
-      double rScreen = (double) rectDesktop.width() / (double) rectDesktop.height();
+      double rScreen = (double) rectangleDesktop.width() / (double) rectangleDesktop.height();
       if(r < rScreen)
       {
          iH = (i32) (iW / rScreen);
@@ -156,13 +156,13 @@ namespace production
    }
 
 
-   void view::on_viewport_offset(::draw2d::graphics_pointer & pgraphics)
+   void impact::on_viewport_offset(::draw2d::graphics_pointer & pgraphics)
    {
 
    }
 
 
-   void view:: _001OnDraw(::draw2d::graphics_pointer & pgraphics)
+   void impact:: _001OnDraw(::draw2d::graphics_pointer & pgraphics)
    {
 
 
@@ -179,9 +179,9 @@ namespace production
 
       pgraphics->fill_rectangle(rectangleClient, argb(255, 255, 255, 255));
 
-      ::rectangle_i32 rectText(rectangleClient);
+      ::rectangle_i32 rectangleText(rectangleClient);
 
-      rectText.bottom -= 84;
+      rectangleText.bottom -= 84;
 
       ::rectangle_i32 rcItem;
 
@@ -194,20 +194,20 @@ namespace production
          iStart--;
          y -= m_iLineHeight;
       }
-      ::rectangle_i32 rectClip(rectText);
-      //ClientToScreen(rectClip);
+      ::rectangle_i32 rectangleClip(rectangleText);
+      //ClientToScreen(rectangleClip);
       ::draw2d::region_pointer rgnClip(e_create);
-      rgnClip->create_rect(rectClip);
-      //pgraphics->Draw3dRect(rectText, rgb(200, 200, 200), rgb(200, 200, 200));
+      rgnClip->create_rect(rectangleClip);
+      //pgraphics->Draw3dRect(rectangleText, rgb(200, 200, 200), rgb(200, 200, 200));
       pgraphics->SelectClipRgn(rgnClip);
       //single_lock synchronouslock(&m_pproduction->m_mutexStatus, true);
       //pgraphics->set_color(argb(0xcc, 90, 90, 90));
-      ::draw2d::brush_pointer brush(e_create);
-      brush->create_solid(argb(0xcc, 90, 90, 90));
+      auto pbrush = __create < ::draw2d::brush >();
+      pbrush->create_solid(argb(0xcc, 90, 90, 90));
       pgraphics->SelectObject(brush);
-      for(i32 i = iStart; i < m_pproduction->m_straStatus.get_size() && y < rectText.bottom; i++)
+      for(i32 i = iStart; i < m_pproduction->m_straStatus.get_size() && y < rectangleText.bottom; i++)
       {
-         rcItem = rectText;
+         rcItem = rectangleText;
          rcItem.bottom = y + m_iLineHeight;
          rcItem.top = y ;
          pgraphics->draw_text(m_pproduction->m_straStatus[i], rcItem, e_align_bottom_left);
@@ -217,29 +217,29 @@ namespace production
 
 
 
-      ::rectangle_i32 rectArea;
+      ::rectangle_i32 rectangleArea;
 
-      GetAreaThumbRect(rectArea, m_iV);
+      GetAreaThumbRect(rectangleArea, m_iV);
       if (m_pimageV)
       {
 
-         m_pimageV->to(pgraphics, rectArea);
+         m_pimageV->to(pgraphics, rectangleArea);
 
       }
       else
       {
 
-         pgraphics->fill_rectangle(rectArea, argb(255, 100, 200, 255));
+         pgraphics->fill_rectangle(rectangleArea, argb(255, 100, 200, 255));
          pgraphics->set_text_color(argb(255, 255, 255, 255));
 
-         pgraphics->draw_text("Production", rectArea, e_align_horizontal_center | e_align_vertical_center);
+         pgraphics->draw_text("Production", rectangleArea, e_align_horizontal_center | e_align_vertical_center);
 
       }
 
-      GetAreaThumbRect(rectArea, m_iVs);
+      GetAreaThumbRect(rectangleArea, m_iVs);
       if (m_pimageVs)
       {
-/*         m_pimage->to(pgraphics, rectArea);
+/*         m_pimage->to(pgraphics, rectangleArea);
 
       }
 
@@ -249,12 +249,12 @@ namespace production
          auto dwMin = (m_pproduction->m_tickEnd - m_pproduction->m_tickStart) / 1000 / 60;
          auto dwSeg = ((m_pproduction->m_tickEnd - m_pproduction->m_tickStart) / 1000) % 60;
          strTime.Format("%dm %ds", dwMin, dwSeg);
-         pgraphics->text_out(rectArea.right + 23, rectArea.top, strTime);
+         pgraphics->text_out(rectangleArea.right + 23, rectangleArea.top, strTime);
       }
 
    }
 
-   void view::_001OnCreate(::message::message * pmessage)
+   void impact::_001OnCreate(::message::message * pmessage)
    {
       if(pmessage->previous())
          return;
@@ -302,10 +302,10 @@ namespace production
 
       m_pproduction = create_production();
 
-      m_pproduction->m_pview  = this;
+      m_pproduction->m_pimpact  = this;
 
 
-      papplication->m_pview = this;
+      papplication->m_pimpact = this;
 
       //m_pproduction->twitter_auth();
 //      m_pproduction->twitter_twit("starting ca2 production application");
@@ -315,24 +315,24 @@ namespace production
 
    }
 
-   void view::on_message_key_down(::message::message * pmessage)
+   void impact::on_message_key_down(::message::message * pmessage)
    {
 
    }
 
 
-   void view::on_message_key_up(::message::message * pmessage)
+   void impact::on_message_key_up(::message::message * pmessage)
    {
    }
 
-   void view::on_message_context_menu(::message::message * pmessage)
+   void impact::on_message_context_menu(::message::message * pmessage)
    {
       __pointer(::message::context_menu) pcontextmenu(pmessage);
       ::point_i32 point = pcontextmenu->GetPoint();
    }
 
 
-   void view::_001OnTabClick(i32 iTab)
+   void impact::_001OnTabClick(i32 iTab)
    {
       if(iTab == 1)
       {
@@ -340,7 +340,7 @@ namespace production
    }
 
 
-   void view::on_message_set_cursor(::message::message * pmessage)
+   void impact::on_message_set_cursor(::message::message * pmessage)
    {
 
       auto pmouse = pmessage->m_pmouse;
@@ -352,7 +352,7 @@ namespace production
    }
 
 
-   ::user::document * view::get_document()
+   ::user::document * impact::get_document()
    {
 
       return ::user::impact::get_document();
@@ -360,7 +360,7 @@ namespace production
    }
 
 
-   void view::GetAreaThumbRect(LPRECT lprect, i32 iArea)
+   void impact::GetAreaThumbRect(LPRECT lprect, i32 iArea)
    {
       ::rectangle_i32 rectangleClient = get_client_rect();
       //GetClientRect(rectangleClient);
@@ -380,39 +380,39 @@ namespace production
       }
    }
 
-   void view::on_hit_test(::user::item & item)
+   void impact::on_hit_test(::item & item)
    {
 
-      ::rectangle_i32 rectArea;
-      GetAreaThumbRect(rectArea, m_iV);
-      if (rectArea.contains(item.m_pointHitTest))
+      ::rectangle_i32 rectangleArea;
+      GetAreaThumbRect(rectangleArea, m_iV);
+      if (rectangleArea.contains(item.m_pointHitTest))
       {
-         item = {::user::e_element_area, m_iV   };
+         item = {::e_element_area, m_iV   };
          return;
       }
-      GetAreaThumbRect(rectArea, m_iVs);
-      if(rectArea.contains(item.m_pointHitTest))
+      GetAreaThumbRect(rectangleArea, m_iVs);
+      if(rectangleArea.contains(item.m_pointHitTest))
       {
-         item = { ::user::e_element_area, m_iVs };
+         item = { ::e_element_area, m_iVs };
          return;
       }
       
-      item = ::user::e_element_none;
+      item = ::e_element_none;
    
 
    }
 
 
-   void view::_001OnLButtonDown(::message::message * pmessage)
+   void impact::_001OnLButtonDown(::message::message * pmessage)
    {
-      UNREFERENCED_PARAMETER(pmessage);
+      __UNREFERENCED_PARAMETER(pmessage);
       //    auto pmouse = pmessage->m_pmouse;
 
 //      i32 iHitArea = hit_test(pmouse->m_point);
 
    }
 
-   void view::_001OnLButtonUp(::message::message * pmessage)
+   void impact::_001OnLButtonUp(::message::message * pmessage)
    {
       auto pmouse = pmessage->m_pmouse;
 
@@ -431,9 +431,9 @@ namespace production
 
    }
 
-   void view::on_message_right_button_up(::message::message * pmessage)
+   void impact::on_message_right_button_up(::message::message * pmessage)
    {
-      UNREFERENCED_PARAMETER(pmessage);
+      __UNREFERENCED_PARAMETER(pmessage);
       //    auto pmouse = pmessage->m_pmouse;
 
 //      i32 iHitArea = hit_test(pmouse->m_point);
@@ -451,7 +451,7 @@ namespace production
 
 
 
-   void view::_001OnTimer(::timer * ptimer)
+   void impact::_001OnTimer(::timer * ptimer)
    {
       ::user::scroll_view::_001OnTimer(ptimer);
       if(ptimer->m_uEvent == e_timer_update_current_area)
@@ -487,13 +487,13 @@ namespace production
 
 
 
-   void view::on_message_show_window(::message::message * pmessage)
+   void impact::on_message_show_window(::message::message * pmessage)
    {
-      UNREFERENCED_PARAMETER(pmessage);
+      __UNREFERENCED_PARAMETER(pmessage);
 //      __pointer(::message::show_window) pshowwindow(pmessage);
    }
 
-   void view::make_production()
+   void impact::make_production()
    {
       m_iStep = 1;
       __pointer(application) papp =  (get_application());
@@ -501,14 +501,14 @@ namespace production
    }
 
 
-   void view::production_loop(i32 iLoopCount)
+   void impact::production_loop(i32 iLoopCount)
    {
       m_iStep = 1;
       __pointer(application) papp =  (get_application());
       m_pproduction->start_loop(papp->m_eversion, iLoopCount);
    }
 
-   void view::release_production()
+   void impact::release_production()
    {
 
       production_loop(1);
@@ -516,7 +516,7 @@ namespace production
    }
 
 
-   void view::_001OnUser(::message::message * pmessage)
+   void impact::_001OnUser(::message::message * pmessage)
    {
       __pointer(::user::message) pusermessage(pmessage);
       if(pusermessage->m_wparam == 1)
@@ -581,7 +581,7 @@ namespace production
       }
    }
 
-   production * view::create_production()
+   production * impact::create_production()
    {
       production * pclass = new production(get_application());
       pclass->m_eversion = papplication->m_eversion;
@@ -589,7 +589,7 @@ namespace production
    }
 
 
-   size_i32 view::get_total_size()
+   size_i32 impact::get_total_size()
    {
 
       return m_sizeTotal;

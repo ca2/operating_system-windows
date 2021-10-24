@@ -332,7 +332,7 @@
 				</FileConfiguration>
 			</File>
 			<File
-				RelativePath=".\view.cpp"
+				RelativePath=".\impact.cpp"
 				>
 			</File>
 		</Filter>
@@ -382,7 +382,7 @@
 				>
 			</File>
 			<File
-				RelativePath=".\view.h"
+				RelativePath=".\impact.h"
 				>
 			</File>
 		</Filter>

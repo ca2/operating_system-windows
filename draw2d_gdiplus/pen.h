@@ -22,14 +22,14 @@ namespace draw2d_gdiplus
 
 #ifdef DEBUG
 
-      virtual void dump(dump_context & dumpcontext) const;
+      void dump(dump_context & dumpcontext) const override;
 
 #endif
 
-      /*virtual void construct(i32 nPenStyle, double nWidth, COLORREF crColor);
+      /*virtual void construct(i32 nPenStyle, double nWidth, ::color::color crColor);
       virtual void construct(i32 nPenStyle, double nWidth, const LOGBRUSH* pLogBrush, i32 nStyleCount = 0, const DWORD* pStyle = nullptr);
 
-      bool CreatePen(i32 nPenStyle, double nWidth, COLORREF crColor);
+      bool CreatePen(i32 nPenStyle, double nWidth, ::color::color crColor);
       bool CreatePen(i32 nPenStyle, double nWidth, const LOGBRUSH* pLogBrush, i32 nStyleCount = 0, const DWORD* pStyle = nullptr);*/
 
 

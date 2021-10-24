@@ -42,8 +42,8 @@ namespace multimedia
 
       bool control::CreateWindows(__pointer(::user::interaction) pParent, i32 iStyle)
       {
-         UNREFERENCED_PARAMETER(pParent);
-         UNREFERENCED_PARAMETER(iStyle);
+         __UNREFERENCED_PARAMETER(pParent);
+         __UNREFERENCED_PARAMETER(iStyle);
          return true;
       }
 
@@ -474,7 +474,7 @@ namespace multimedia
 
       /*bool control::OnNotify(u32 nID, LPNMHDR lpnmhdr)
       {
-      UNREFERENCED_PARAMETER(nID);
+      __UNREFERENCED_PARAMETER(nID);
       if(lpnmhdr->code == TB_BOTTOM ||
       lpnmhdr->code == TB_ENDTRACK ||
       lpnmhdr->code == TB_LINEDOWN ||
@@ -645,7 +645,7 @@ namespace multimedia
 
       void control::OnVHScroll(u32 nSBCode, u32 nPos, __pointer(::user::interaction) pScrollBar)
       {
-         UNREFERENCED_PARAMETER(nPos);
+         __UNREFERENCED_PARAMETER(nPos);
          __pointer(::user::interaction) pParamWnd = pScrollBar;
          if(nSBCode == SB_LEFT ||
                nSBCode == SB_ENDSCROLL ||
@@ -773,7 +773,7 @@ namespace multimedia
                               string strMessage;
                               strMessage.Format("mixerGetControlDetails(ctrlid=%.08lXh) failed on hmx=%.04Xh, mmr=%u!",
                                                 m_mixercontrol.dwControlID, device->m_hMixer, mmrc);
-                              pScrollBar->message_box(strMessage, nullptr, e_message_box_icon_exclamation);
+                              //pScrollBar->message_box(strMessage, nullptr, e_message_box_icon_exclamation);
                            }
                         }
                         return ;
@@ -788,7 +788,7 @@ namespace multimedia
 
       bool control::OnCommand(WPARAM wParam, LPARAM lParam)
       {
-         UNREFERENCED_PARAMETER(lParam);
+         __UNREFERENCED_PARAMETER(lParam);
          WORD wNotifyCode = HIWORD(wParam);
          WORD wID = LOWORD(wParam);
 
@@ -842,7 +842,7 @@ namespace multimedia
 
                         strMessage.Format("mixerGetControlDetails(ctrlid=%.08lXh) failed on hmx=%.04Xh, mmr=%u!",
                                           m_mixercontrol.dwControlID, device->m_hMixer, mmrc);
-                        pmutecontrol->message_box(strMessage, nullptr, e_message_box_icon_exclamation);
+                        //pmutecontrol->message_box(this, strMessage, nullptr, e_message_box_icon_exclamation);
                      }
                      return true;
                   }

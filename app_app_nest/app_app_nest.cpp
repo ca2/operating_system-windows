@@ -92,7 +92,7 @@ u32 plugin_container_app(const ::string & strChannel)
 i32 __win_main(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmdLine, i32 nCmdShow)
 {
 
-   UNREFERENCED_PARAMETER(lpCmdLine);
+   __UNREFERENCED_PARAMETER(lpCmdLine);
 
    if(!defer_core_init())
    {
@@ -102,7 +102,7 @@ i32 __win_main(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmdLine, i
    }
 
 
-   //if(file_exists("C:\\ca2\\config\\plugin\\npca2_beg_debug_box.txt"))
+   //if(m_psystem->m_pacmefile->exists("C:\\ca2\\config\\plugin\\npca2_beg_debug_box.txt"))
    //{
 
    //   debug_box("app_app_nest boxmain NP_Initialize","app_app_nest box",MB_OK);
@@ -122,7 +122,7 @@ i32 __win_main(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmdLine, i
 
    }
 
-   if (file_exists("C:\\ca2\\config\\system\\beg_debug_box.txt"))
+   if (m_psystem->m_pacmefile->exists("C:\\ca2\\config\\system\\beg_debug_box.txt"))
    {
 
       debug_box("app_app_nest", "app_app_nest", MB_OK);

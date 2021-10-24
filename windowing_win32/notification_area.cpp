@@ -67,7 +67,7 @@ namespace windowing_win32
 
 #ifdef WINDOWS_DESKTOP
       
-      UNREFERENCED_PARAMETER(defindex);
+      __UNREFERENCED_PARAMETER(defindex);
 
       m_infoa.erase_all();
 
@@ -158,11 +158,19 @@ namespace windowing_win32
          if (GetIconInfo(tray.hIcon, &iinfo) != 0)
          {
 
-            auto picon = __new(::windowing_win32::icon());
+            auto pwindowingicon = __new(::windowing_win32::icon());
 
-            picon->add_icon(tray.hIcon);
-            
-            iconindex = m_pil16->add(picon);
+            pwindowingicon->add_icon(tray.hIcon);
+
+            __pointer(::draw2d::icon) picon;
+
+            picon.create(this);
+
+            picon->initialize_with_windowing_icon(pwindowingicon);
+
+            image_source imagesource(picon);
+
+            iconindex = m_pil16->add(imagesource);
 
          }
 
@@ -193,7 +201,7 @@ namespace windowing_win32
 
    void notification_area::EditCopy(i32 iItem)
    {
-      UNREFERENCED_PARAMETER(iItem);
+      __UNREFERENCED_PARAMETER(iItem);
       /*   POSITION pos = GetListCtrl().GetFirstSelectedItemPosition();
          if(pos)
          {

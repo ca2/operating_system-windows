@@ -11,7 +11,7 @@ namespace windows
 
 
    class CLASS_DECL_ACME_WINDOWS pipe :
-      virtual public ::process::pipe
+      virtual public ::operating_system::pipe
    {
    public:
 

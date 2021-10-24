@@ -44,9 +44,6 @@
     <ClInclude Include="thread.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="_ (2).h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="_node_windows1.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -54,24 +51,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="_windows1.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="a.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="aaa_tts_speaker.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="aaa_want_to_remove_handle.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="aaa_want_to_remove_printer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="aaa_want_to_remove_RoundWindowApp.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="aaa_want_to_remove_simple_hold_handle.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="crypto.h">

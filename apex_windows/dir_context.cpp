@@ -535,7 +535,8 @@ namespace windows
                   if (strFile.begins_ci("resident_"))
                   {
 
-                     TRACE("resident_*");
+                     INFORMATION("resident_*");
+
                   }
 
                   if (matches_wildcard_criteria_ci(listing.m_straPattern, strFile))
@@ -798,7 +799,7 @@ namespace windows
 
       bool bIsDir;
 
-      if (::thread_is_set(id_thread_zip_is_dir) && iLast >= 3 && !ansi_count_compare_ci(&((const ::string &)str)[iLast - 3], ".zip", 4))
+      if (::task_flag().is_set(e_task_flag_zip_is_dir) && iLast >= 3 && !ansi_count_compare_ci(&((const ::string &)str)[iLast - 3], ".zip", 4))
       {
 
          //m_isdirmap.set(str.Left(iLast + 1), true, 0);
@@ -875,8 +876,8 @@ namespace windows
    ::file::path dir_context::time_square(const ::string & strPrefix, const ::string & strSuffix)
    {
 
-      UNREFERENCED_PARAMETER(strPrefix);
-      UNREFERENCED_PARAMETER(strSuffix);
+      __UNREFERENCED_PARAMETER(strPrefix);
+      __UNREFERENCED_PARAMETER(strSuffix);
       return time() / "time";
 
    }
@@ -931,7 +932,7 @@ namespace windows
 
          string strDir = stra[i];
 
-         if (::dir::mkdir(strDir))
+         if (m_psystem->m_pacmedir->create_directory(strDir))
          {
 
             //            m_isdirmap.set(strDir, true, 0);
@@ -977,7 +978,7 @@ namespace windows
 
                }
 
-               if (::dir::mkdir(strDir))
+               if (m_psystem->m_pacmedir->create_directory(strDir))
                {
 
                   //                  m_isdirmap.set(strDir, true, 0);
@@ -1128,7 +1129,7 @@ namespace windows
          str += "\\trash_that_is_not_trash\\";
          string strFormat;
          ::datetime::time time;
-         time = ::datetime::time::get_current_time();
+         time = ::datetime::time::now();
          strFormat.Format("%04d-%02d-%02d %02d-%02d-%02d\\", time.GetYear(), time.GetMonth(), time.GetDay(), time.GetHour(), time.GetMinute(), time.GetSecond());
          str += strFormat;
          if (strDir.m_pdata[2] == '\\')

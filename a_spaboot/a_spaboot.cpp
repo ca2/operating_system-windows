@@ -222,7 +222,7 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
 
 
 
-bool file_exists(const ::string & path1)
+bool m_psystem->m_pacmefile->exists(const ::string & path1)
 {
    DWORD dwFileAttributes = ::GetFileAttributes(path1);
    if(dwFileAttributes != INVALID_FILE_ATTRIBUTES &&
@@ -347,7 +347,7 @@ bool file_exists(const ::string & path1)
 //   PROCESS_INFORMATION pi;
 ////   SHELLEXECUTEINFO sei;
 //   std::string strInstall;
-//   std::string strCommand = file_as_string("C:\\ca2\\machine\\on_after_spaadmin.txt");
+//   std::string strCommand = m_psystem->m_pacmefile->as_string("C:\\ca2\\machine\\on_after_spaadmin.txt");
 //
 //   if(strCommand.length() > 0)
 //   {

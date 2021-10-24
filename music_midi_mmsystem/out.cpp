@@ -32,22 +32,34 @@ namespace music
          }
 
 
-         ::e_status     out::open(int iDeviceId)
+         ::e_status out::open()
          {
 
             synchronous_lock synchronouslock(&get_midi_mutex());
 
             MMRESULT estatus;
 
-            u32 uDeviceID = iDeviceId;
-
             m_hmidiout = nullptr;
+
+            auto iDeviceId = ((midi*)m_pmidi->m_pMidi)->get_os_out_device_id(m_strDeviceId);
+
+            if (iDeviceId < 0)
+            {
+
+               return error_not_found;
+
+            }
+
+            UINT uDeviceID = (UINT) iDeviceId;
 
             estatus = midiOutOpen(&m_hmidiout, uDeviceID,  0, 0, CALLBACK_NULL);
 
-            if(estatus != MMSYSERR_NOERROR)
+            if (estatus != MMSYSERR_NOERROR)
+            {
+
                return error_failed;
 
+            }
 
             return ::success;
 

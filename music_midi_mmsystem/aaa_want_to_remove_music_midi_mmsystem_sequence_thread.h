@@ -30,14 +30,14 @@ namespace music
             void install_message_routing(::channel * pchannel);
 
             //::music::midi::sequence * get_sequence();
-            void Stop(imedia_time msEllapse);
+            void Stop(::duration msEllapse);
 
             void PostNotifyEvent(::music::midi::e_notify_event eevent);
 
             void PrerollRateAndWait(double rate = 0.0);
-            void PrerollAndWait(imedia_time tkStart);
+            void PrerollAndWait(::duration tkStart);
             void PlayRate(double dRate = 0.0);
-            void Play(imedia_time tkStart);
+            void Play(::duration tkStart);
             void PostGMReset();
             void PostTempoChange();
             void SendTempoChange();

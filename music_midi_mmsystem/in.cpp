@@ -128,13 +128,13 @@ namespace music
          void in::on_os_message(byte b, byte b1, byte b2)
          {
 
-            fork([this, b, b1, b2]()
-               {
+            //fork([this, b, b1, b2]()
+               //{
 
                   ::music::midi::in::on_os_message(b, b1, b2);
 
 
-               });
+               //});
 
          }
 

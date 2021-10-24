@@ -42,7 +42,7 @@ namespace apex
    //}
 
 
-   //::user::document *  application::_001OpenDocumentFile(::payload varFile)
+   //::user::document *  application::_001OpenDocumentFile(::payload payloadFile)
    //{
 
    //   return nullptr;
@@ -68,7 +68,7 @@ namespace apex
 
    //{
 
-   //   UNREFERENCED_PARAMETER(pcsz);
+   //   __UNREFERENCED_PARAMETER(pcsz);
 
 
    //   return false;
@@ -209,10 +209,10 @@ namespace apex
 
       string str;
 
-      if (file_exists(::dir::system() / "config\\system\\audio.txt"))
+      if (m_psystem->m_pacmefile->exists(::dir::system() / "config\\system\\audio.txt"))
       {
 
-         str = file_as_string(::dir::system() / "config\\system\\audio.txt");
+         str = m_psystem->m_pacmefile->as_string(::dir::system() / "config\\system\\audio.txt");
 
       }
       else
@@ -222,7 +222,7 @@ namespace apex
 
          strPath = ::dir::appdata() / "audio.txt";
 
-         str = file_as_string(strPath);
+         str = m_psystem->m_pacmefile->as_string(strPath);
 
       }
 

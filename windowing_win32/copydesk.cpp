@@ -74,10 +74,10 @@ namespace windowing_win32
    }
 
 
-   ::e_status copydesk::initialize(::object * pobject)
+   ::e_status copydesk::initialize_copydesk(::windowing::window * pwindow)
    {
 
-      auto estatus = ::user::copydesk::initialize(pobject);
+      auto estatus = ::user::copydesk::initialize_copydesk(pwindow);
 
       if (!estatus)
       {
@@ -384,7 +384,7 @@ namespace windowing_win32
    }
 
 
-   bool copydesk::_get_filea(::file::patha & patha, e_op & eop)
+   ::e_status copydesk::_get_filea(::file::patha & patha, e_op & eop)
    {
 
       ::count c = _get_file_count();
@@ -392,7 +392,7 @@ namespace windowing_win32
       if (c <= 0)
       {
 
-         return false;
+         return error_failed;
 
       }
 
@@ -401,7 +401,7 @@ namespace windowing_win32
       if (!::OpenClipboard(__hwnd(get_oswindow())))
       {
 
-         return false;
+         return error_failed;
 
       }
 
@@ -414,7 +414,9 @@ namespace windowing_win32
 
          wstring wstr(get_buffer, uLen);
 
-         ::DragQueryFileW(hdrop, (::u32) i, wstr, (::u32) wstr.length());
+         auto x = wstr.length();
+
+         ::DragQueryFileW(hdrop, (::u32) i, wstr, (::u32) wstr.length() + 1);
 
          wstr.release_string_buffer();
 
@@ -424,22 +426,20 @@ namespace windowing_win32
 
       ::CloseClipboard();
 
-      return true;
+      return ::success;
 
    }
 
 
-   bool copydesk::_set_filea(const ::file::patha & patha, e_op eop)
+   ::e_status copydesk::_set_filea(const ::file::patha & patha, e_op eop)
    {
-
-      //ASSERT(::IsWindow(m_hwnd));
 
       synchronous_lock synchronouslock(mutex());
 
       if (!::OpenClipboard(__hwnd(get_oswindow())))
       {
 
-         return false;
+         return error_failed;
 
       }
 
@@ -453,7 +453,7 @@ namespace windowing_win32
 
       VERIFY(::CloseClipboard());
 
-      return true;
+      return ::success;
 
    }
 
@@ -475,7 +475,7 @@ namespace windowing_win32
    }
 
 
-   bool copydesk::_set_plain_text(const ::string & str)
+   ::e_status copydesk::_set_plain_text(const ::string & str)
    {
 
       //ASSERT(::IsWindow(m_hwnd));
@@ -485,7 +485,7 @@ namespace windowing_win32
       if (!::OpenClipboard(__hwnd(get_oswindow())))
       {
 
-         return false;
+         return error_failed;
 
       }
 
@@ -506,12 +506,12 @@ namespace windowing_win32
 
       VERIFY(::CloseClipboard());
 
-      return true;
+      return ::success;
 
    }
 
 
-   bool copydesk::_get_plain_text(string & str)
+   ::e_status copydesk::_get_plain_text(string & str)
    {
 
       int iFormat = _get_priority_text_format();
@@ -528,7 +528,7 @@ namespace windowing_win32
       if (!::OpenClipboard(__hwnd(get_oswindow())))
       {
 
-         return false;
+         return error_failed;
 
       }
 
@@ -557,7 +557,7 @@ namespace windowing_win32
 
       VERIFY(::CloseClipboard());
 
-      return true;
+      return ::success;
 
    }
 
@@ -579,13 +579,13 @@ namespace windowing_win32
    }
 
 
-   bool copydesk::_desk_to_image(::image * pimage)
+   ::e_status copydesk::_desk_to_image(::image * pimage)
    {
 
       if (!_has_image())
       {
 
-         return false;
+         return error_failed;
 
       }
 
@@ -598,7 +598,7 @@ namespace windowing_win32
 
          TRACELASTERROR();
 
-         return false;
+         return error_failed;
 
       }
 
@@ -608,7 +608,6 @@ namespace windowing_win32
 
       if(hbitmap != nullptr)
       {
-
 
          HDC hdcMem = nullptr;
 
@@ -623,7 +622,7 @@ namespace windowing_win32
 
             ::GetObject(hbitmap, sizeof(bm), &bm);
 
-            pimage->create(::size_i32(bm.bmWidth, bm.bmHeight), NOK_IMAGE_OBJECT);
+            pimage->create(::size_i32(bm.bmWidth, bm.bmHeight), NOK_IMAGE);
 
             if (pimage->area() > 0)
             {
@@ -675,12 +674,19 @@ namespace windowing_win32
 
       }
 
-      return bOk;
+      if (!bOk)
+      {
+
+         return error_failed;
+
+      }
+
+      return ::success;
 
    }
 
 
-   bool copydesk::_image_to_desk(const ::image * pimage)
+   ::e_status copydesk::_image_to_desk(const ::image * pimage)
    {
 
       //ASSERT(::IsWindow(m_hwnd));
@@ -690,23 +696,19 @@ namespace windowing_win32
       if (!::OpenClipboard(__hwnd(get_oswindow())))
       {
 
-         return false;
+         return error_failed;
 
       }
 
       EmptyClipboard();
 
-
       SetClipboardData(CF_DIB, hglobal_get_image(pimage));
-
 
       VERIFY(::CloseClipboard());
 
-      return true;
+      return ::success;
 
    }
-
-#define new ACME_NEW
 
 
 } // namespace windowing_win32

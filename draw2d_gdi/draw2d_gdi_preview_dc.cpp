@@ -391,7 +391,7 @@ void preview_dc::MirrorFont()
 /////////////////////////////////////////////////////////////////////////////
 // Drawing-Attribute Functions
 
-COLORREF preview_dc::SetBkColor(COLORREF crColor)
+::color::color preview_dc::SetBkColor(::color::color crColor)
 {
    ASSERT(get_handle2() != nullptr);
    if (get_os_data() != nullptr)
@@ -399,7 +399,7 @@ COLORREF preview_dc::SetBkColor(COLORREF crColor)
    return ::SetBkColor(get_handle2(), crColor);
 }
 
-COLORREF preview_dc::SetTextColor(COLORREF crColor)
+::color::color preview_dc::SetTextColor(::color::color crColor)
 {
    ASSERT(get_handle2() != nullptr);
    if (get_os_data() != nullptr)

@@ -87,9 +87,9 @@ namespace windowing_win32
 
             auto psystem = m_psystem->m_paurasystem;
 
-            auto psubject = psystem->subject(id_os_font_change);
+            psystem->signal(id_os_font_change);/*
 
-            psystem->handle_subject(psubject);
+            psystem->handle_subject(psubject);*/
 
             //fork([this]()
               // {
@@ -107,9 +107,11 @@ namespace windowing_win32
 
             auto psystem = m_psystem->m_paurasystem;
 
-            auto psubject = psystem->subject(id_os_dark_mode);
+            psystem->m_pnode->fetch_user_color();
 
-            psystem->handle_subject(psubject);
+            /*auto psubject = psystem->subject(id_os_dark_mode);
+
+            psystem->handle_subject(psubject);*/
 
          }
          else if (pmessage->m_id == e_message_display_change ||

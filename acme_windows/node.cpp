@@ -1,8 +1,5 @@
 #include "framework.h"
-//#include "acme/platform/node.h"
-//#include "acme/node/windows/registry.h"
-//#include "node.h"
-//#include "acme/filesystem/filesystem/acme_dir.h"
+#include "acme/parallelization/install_mutex.h"
 
 
 namespace acme
@@ -15,6 +12,7 @@ namespace acme
 
       node::node()
       {
+
 
          ::windows::callstack::s_pcriticalsection = new critical_section();
 
@@ -45,9 +43,137 @@ namespace acme
 
          }
 
+         windows_registry_initialize();
+
          return estatus;
 
       }
+
+
+      bool node::win32_registry_windows_dark_mode_for_app()
+      {
+
+         try
+         {
+
+            ::windows::registry::key key;
+
+            key.open(HKEY_CURRENT_USER, "Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize");
+
+            ::u32 dw;
+
+            auto estatus = key._get("AppsUseLightTheme", dw);
+
+            if (::failed(estatus))
+            {
+
+               estatus = key._get("SystemUseLightTheme", dw);
+
+               if (::failed(estatus))
+               {
+
+                  return false;
+
+               }
+
+            }
+
+            return dw == 0;
+
+         }
+         catch (...)
+         {
+
+            return false;
+
+         }
+
+      }
+
+
+      bool node::win32_registry_windows_dark_mode_for_system()
+      {
+
+         try
+         {
+
+            ::windows::registry::key key;
+
+            key.open(HKEY_CURRENT_USER, "Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize");
+
+            ::u32 dw;
+
+            auto estatus = key._get("SystemUseLightTheme", dw);
+
+            if (::failed(estatus))
+            {
+
+               estatus = key._get("AppsUseLightTheme", dw);
+
+               if (::failed(estatus))
+               {
+
+                  return false;
+
+               }
+
+            }
+
+            return dw == 0;
+
+         }
+         catch (...)
+         {
+
+            return false;
+
+         }
+
+      }
+
+
+      bool node::win32_registry_windows_darkness()
+      {
+
+         return win32_registry_windows_dark_mode_for_app() || win32_registry_windows_dark_mode_for_system();
+
+      }
+
+
+      ::color::color node::reinterpreted_windows_darkness_background_color()
+      {
+
+         if (win32_registry_windows_darkness())
+         {
+
+            return ::color::black;
+
+         }
+
+         return ::color::white;
+
+      }
+         
+         
+      void node::fetch_user_color()
+      {
+
+         //DWORD dwBackgroundWindowColor = ::GetSysColor(COLOR_WINDOW);
+
+         //auto colorWindowBackground = argb(255, GetRValue(dwBackgroundWindowColor), GetGValue(dwBackgroundWindowColor), GetBValue(dwBackgroundWindowColor));
+
+         auto colorWindowBackground = reinterpreted_windows_darkness_background_color();
+
+         string str;
+
+         str.Format("\n\n\nWindow Background Color rgb(%d,%d,%d)\n\n", colorWindowBackground.red, colorWindowBackground.green, colorWindowBackground.blue);
+
+         ::output_debug_string(str);
+
+         background_color(colorWindowBackground);
+
+      }
+
 
       //   string node::get_user_name()
       //   {
@@ -547,10 +673,10 @@ namespace acme
       //
       //      string str;
       //
-      //      if (file_exists(m_psystem->m_pacmedir->system() / "config\\system\\audio.txt"))
+      //      if (m_psystem->m_pacmefile->exists(m_psystem->m_pacmedir->system() / "config\\system\\audio.txt"))
       //      {
       //
-      //         str = file_as_string(m_psystem->m_pacmedir->system() / "config\\system\\audio.txt");
+      //         str = m_psystem->m_pacmefile->as_string(m_psystem->m_pacmedir->system() / "config\\system\\audio.txt");
       //
       //      }
       //      else
@@ -560,7 +686,7 @@ namespace acme
       //
       //         strPath = m_psystem->m_pacmedir->appdata() / "audio.txt";
       //
-      //         str = file_as_string(strPath);
+      //         str = m_psystem->m_pacmefile->as_string(strPath);
       //
       //      }
       //
@@ -608,7 +734,7 @@ namespace acme
       //      if (g_iMemoryCountersStartable && g_iMemoryCounters < 0)
       //      {
       //
-      //         g_iMemoryCounters = file_exists(m_psystem->m_pacmedir->config() / "system/memory_counters.txt") ? 1 : 0;
+      //         g_iMemoryCounters = xxxxfile_exists(m_psystem->m_pacmedir->config() / "system/memory_counters.txt") ? 1 : 0;
       //
       //         if (g_iMemoryCounters)
       //         {
@@ -643,7 +769,7 @@ namespace acme
       //
       //         ::file::path strModule = module_path_from_pid(getpid());
       //
-      //         string strBasePath = m_psystem->m_pacmedir->system() / "memory_counters" / strModule.title() / __str(getpid());
+      //         string strBasePath = m_psystem->m_pacmedir->system() / "memory_counters" / strModule.title() / __string(getpid());
       //
       //#endif
       //
@@ -748,23 +874,23 @@ namespace acme
       }
 
 
-      ::e_status node::on_start_system()
-      {
+      //::e_status node::on_start_system()
+      //{
 
-         auto psystem = m_psystem;
+      //   auto psystem = m_psystem;
 
-         auto estatus = psystem->post_initial_request();
+      //   auto estatus = psystem->post_initial_request();
 
-         if (!estatus)
-         {
+      //   if (!estatus)
+      //   {
 
-            return estatus;
+      //      return estatus;
 
-         }
+      //   }
 
-         return estatus;
+      //   return estatus;
 
-      }
+      //}
 
 
       bool node::process_modules(string_array& stra, u32 processID)
@@ -922,7 +1048,7 @@ namespace acme
 
          }
 
-         ::mutex veri_global_ca2(e_create_new, NULL, "Global\\the_veri_global_ca2");
+         ::mutex veri_global_ca2(this, NULL, "Global\\the_veri_global_ca2");
 
          synchronous_lock lock_the_veri_global_ca2(&veri_global_ca2);
 
@@ -1660,14 +1786,22 @@ namespace acme
       }
 
 
-      string node::expand_env(string str)
+      string node::expand_environment_variables(const string & str)
       {
 
-         wstring wstr;
+         wstring wstrSource(str);
 
-         ExpandEnvironmentStringsW(wstring(str), wstr.get_string_buffer(8192), (::u32)wstr.get_length());
+         auto len = ExpandEnvironmentStringsW(wstrSource, nullptr, 0);
 
-         return wstr;
+         wstring wstrTarget;
+
+         auto pwszTarget = wstrTarget.get_string_buffer(len);
+
+         ExpandEnvironmentStringsW(wstrSource, pwszTarget, len + 1);
+
+         wstrTarget.release_string_buffer(len);
+
+         return wstrTarget;
 
       }
 
@@ -1706,7 +1840,7 @@ namespace acme
 
          }
 
-         WaitForSingleObject(ProcessInfo.hProcess, U32_INFINITE_TIMEOUT);
+         WaitForSingleObject(ProcessInfo.hProcess, INFINITE);
 
          if (!GetExitCodeProcess(ProcessInfo.hProcess, &rc))
          {
@@ -1739,7 +1873,7 @@ namespace acme
 
 #if defined(_UWP)
 
-         throw interface_only_exception();
+         throw ::interface_only_exception();
 
 #elif defined(WINDOWS_DESKTOP)
 
@@ -1804,7 +1938,7 @@ namespace acme
 
          }
 
-         WaitForSingleObject(ProcessInfo.hProcess, U32_INFINITE_TIMEOUT);
+         WaitForSingleObject(ProcessInfo.hProcess, INFINITE);
 
          if (!GetExitCodeProcess(ProcessInfo.hProcess, &rc))
          {
@@ -1855,7 +1989,7 @@ namespace acme
 
             }
 
-            sleep(millis(23));
+            sleep(::duration(23));
 
          }
 
@@ -1963,6 +2097,504 @@ namespace acme
       }
 
 
+      string node::get_user_language()
+      {
+
+//#ifdef _UWP
+//
+//      string_array stra;
+//
+//      try
+//      {
+//
+//         stra.explode("-", ::winrt::Windows::Globalization::ApplicationLanguages::PrimaryLanguageOverride);
+//
+//      }
+//      catch (long)
+//      {
+//
+//      }
+//
+//      strLocale = stra[0];
+//
+//      strSchema = stra[0];
+//
+//#elif defined(WINDOWS)
+
+         LANGID langid = ::GetUserDefaultLangID();
+
+         string strIso = ::windows::langid_to_iso(langid);
+
+//#endif
+         string strUserlanguage = strIso;
+
+         return strUserlanguage;
+
+      }
+
+      
+      bool node::get_application_exclusivity_security_attributes(memory & memory)
+      {
+
+         bool bSetOk = false;
+
+         memory.set_size(sizeof(SECURITY_ATTRIBUTES) + sizeof(SECURITY_DESCRIPTOR));
+
+         auto pMutexAttributes = (SECURITY_ATTRIBUTES *)memory.get_data();
+
+         ZeroMemory(pMutexAttributes, sizeof(*pMutexAttributes));
+
+         pMutexAttributes->nLength = sizeof(*pMutexAttributes);
+
+         pMutexAttributes->bInheritHandle = false; // object uninheritable
+
+         // declare and initialize a security descriptor
+         auto pSD = (SECURITY_DESCRIPTOR *) (pMutexAttributes + 1);
+
+         bool bInitOk = InitializeSecurityDescriptor(pSD, SECURITY_DESCRIPTOR_REVISION) != false;
+
+         if (bInitOk)
+         {
+            // give the security descriptor a Null Dacl
+            // done using the  "true, (PACL)nullptr" here
+            bSetOk = SetSecurityDescriptorDacl(pSD,
+               true,
+               (PACL)nullptr,
+               false) != false;
+
+         }
+
+         if (bSetOk)
+         {
+
+            pMutexAttributes->lpSecurityDescriptor = pSD;
+
+         }
+         else
+         {
+
+            memory.set_size(0);
+
+         }
+
+         return bSetOk;
+
+      }
+
+
+      ::e_status node::register_spa_file_type(const ::string & strAppIdHandler)
+      {
+
+#ifdef WINDOWS_DESKTOP
+
+         HKEY hkey;
+
+         wstring extension = L".spa";                     // file extension
+         wstring desc = L"spafile";          // file type description
+         wstring content_type = L"application/x-spa";
+
+         wstring app(m_psystem->m_pacmedir->stage(strAppIdHandler, process_platform_dir_name(), process_configuration_dir_name()));
+
+         wstring icon(app);
+
+         app = L"\"" + app + L"\"" + L" \"%1\"";
+         icon = L"\"" + icon + L"\",107";
+
+         wstring action = L"Open";
+
+         wstring sub = L"\\shell\\";
+
+         wstring path = L"spafile\\shell\\open\\command";
+
+
+         // 1: Create subkey for extension -> HKEY_CLASSES_ROOT\.002
+         if (RegCreateKeyExW(HKEY_CLASSES_ROOT, extension.c_str(), 0, 0, 0, KEY_ALL_ACCESS, 0, &hkey, 0) != ERROR_SUCCESS)
+         {
+            output_debug_string("Could not create or open a registrty key\n");
+            return 0;
+         }
+         RegSetValueExW(hkey, L"", 0, REG_SZ, (byte *)desc.c_str(), ::u32(desc.length() * sizeof(wchar_t))); // default vlaue is description of file extension
+         RegSetValueExW(hkey, L"ContentType", 0, REG_SZ, (byte *)content_type.c_str(), ::u32(content_type.length() * sizeof(wchar_t))); // default vlaue is description of file extension
+         RegCloseKey(hkey);
+
+
+
+         // 2: Create Subkeys for action ( "Open with my program" )
+         // HKEY_CLASSES_ROOT\.002\Shell\\open with my program\\command
+         if (RegCreateKeyExW(HKEY_CLASSES_ROOT, path.c_str(), 0, 0, 0, KEY_ALL_ACCESS, 0, &hkey, 0) != ERROR_SUCCESS)
+         {
+            output_debug_string("Could not create or open a registrty key\n");
+            return 0;
+         }
+         RegSetValueExW(hkey, L"", 0, REG_SZ, (byte *)app.c_str(), ::u32(app.length() * sizeof(wchar_t)));
+         RegCloseKey(hkey);
+
+
+         path = L"spafile\\DefaultIcon";
+
+         if (RegCreateKeyExW(HKEY_CLASSES_ROOT, path.c_str(), 0, 0, 0, KEY_ALL_ACCESS, 0, &hkey, 0) != ERROR_SUCCESS)
+         {
+            output_debug_string("Could not create or open a registrty key\n");
+            return 0;
+         }
+         RegSetValueExW(hkey, L"", 0, REG_SZ, (byte *)icon.c_str(), ::u32(icon.length() * sizeof(wchar_t)));
+         RegCloseKey(hkey);
+
+         wstring wstr(m_psystem->m_pacmedir->stage(strAppIdHandler, process_platform_dir_name(), process_configuration_dir_name()) / "spa_register.txt");
+
+         int iRetry = 9;
+
+         while (!m_psystem->m_pacmefile->exists(utf8(wstr.c_str())) && iRetry > 0)
+         {
+
+
+         auto psystem = m_psystem;
+
+         auto pacmedir = psystem->m_pacmedir;
+
+         pacmedir->create(::file_path_folder(utf8(wstr.c_str())).c_str());
+
+            m_psystem->m_pacmefile->put_contents(utf8(wstr.c_str()).c_str(), "");
+
+            iRetry--;
+
+            sleep(100_ms);
+
+         }
+
+#endif
+
+         return true;
+
+      }
+
+
+      ::e_status node::start_program_files_app_app_admin(string strPlatform, string strConfiguration)
+      {
+
+#ifdef WINDOWS_DESKTOP
+
+         SHELLEXECUTEINFOW sei = {};
+
+         string str = m_psystem->m_pacmedir->app_app_admin(strPlatform, strConfiguration);
+
+         if (!m_psystem->m_pacmefile->exists(str))
+         {
+
+            return ::error_failed;
+
+         }
+
+         ::install::admin_mutex mutexStartup(this, "-startup");
+
+         wstring wstr(str);
+
+         sei.cbSize = sizeof(SHELLEXECUTEINFOW);
+         sei.fMask = SEE_MASK_NOASYNC | SEE_MASK_NOCLOSEPROCESS;
+         sei.lpVerb = L"RunAs";
+
+         sei.lpFile = wstr.c_str();
+
+         ::ShellExecuteExW(&sei);
+
+         DWORD dwGetLastError = GetLastError();
+
+#endif
+
+         return ::success;
+
+      }
+
+      
+      ::e_status node::get_folder_path_from_user(::file::path & pathFolder)
+      {
+
+         wstring wstrFolder(pathFolder);
+
+         int i = (int)(iptr) ::ShellExecuteW(nullptr, L"open", wstrFolder, nullptr, nullptr, SW_NORMAL);
+
+         if (i < 32)
+         {
+
+            switch (i)
+            {
+            case 0:
+               //The operating system is out of memory or resources.
+               return error_no_memory;
+            case ERROR_FILE_NOT_FOUND:
+               return error_file_not_found;
+               //The specified file was not found.
+            case ERROR_PATH_NOT_FOUND:
+               return error_path_not_found;
+               //            The specified path was not found.
+            case          ERROR_BAD_FORMAT:
+               return error_bad_format;
+               //The.exe file is invalid(non - Win32.exe or error in.exe image).
+               //case SE_ERR_ACCESSDENIED:
+               //         return error_access_denied;
+               ////The operating system denied access to the specified file.
+               //SE_ERR_ASSOCINCOMPLETE
+               //The file name association is incomplete or invalid.
+               //SE_ERR_DDEBUSY
+               //The DDE transaction could not be completed because other DDE transactions were being processed.
+               //SE_ERR_DDEFAIL
+               //The DDE transaction failed.
+               //SE_ERR_DDETIMEOUT
+               //The DDE transaction could not be completed because the request timed out.
+               //SE_ERR_DLLNOTFOUND
+               //The specified DLL was not found.
+               //SE_ERR_FNF
+               //The specified file was not found.
+               //SE_ERR_NOASSOC
+               //There is no application associated with the given file name extension.This error will also be returned if you attempt to print a file that is not printable.
+               //SE_ERR_OOM
+               //There was not enough memory to complete the operation.
+               //SE_ERR_PNF
+               //The specified path was not found.
+               //SE_ERR_SHARE
+               //A sharing violation occurred.*/
+            default:
+               return error_failed;
+            }
+
+         }
+
+         return ::success;
+
+      }
+
+
+
+      HICON node::extract_icon(HINSTANCE hInst, const ::string & pszExeFileName, ::u32 nIconIndex)
+
+      {
+
+         return ::ExtractIconW(hInst, ::str::international::utf8_to_unicode(pszExeFileName), nIconIndex);
+
+
+      }
+
+
+      ::u32 node::get_temp_path(string & str)
+      {
+
+         return ::GetTempPathW(MAX_PATH * 8, wtostring(str, MAX_PATH * 8));
+
+      }
+
+
+      ::i32 node::reg_query_value(HKEY hkey, const ::string & pszSubKey, string & str)
+      {
+
+         DWORD dwType = 0;
+         DWORD dwSize = 0;
+         ::i32 lResult = RegQueryValueExW(hkey, wstring(pszSubKey), nullptr, &dwType, nullptr, &dwSize);
+
+         if (lResult != ERROR_SUCCESS)
+            return lResult;
+         ASSERT(dwType == REG_SZ || dwType == REG_MULTI_SZ || dwType == REG_EXPAND_SZ);
+         if (dwType == REG_SZ || dwType == REG_MULTI_SZ || dwType == REG_EXPAND_SZ)
+         {
+
+            natural_wstring pwsz(byte_count, dwSize);
+
+            lResult = RegQueryValueExW(hkey, wstring(pszSubKey), nullptr, &dwType, (byte *)(unichar *)pwsz, &dwSize);
+
+            str = pwsz;
+
+            //str.release_string_buffer(dwSize);
+
+            return lResult;
+
+         }
+         else
+         {
+
+            return ERROR_NOT_SUPPORTED;
+
+         }
+
+      }
+
+
+      //HICON node::extract_icon(HINSTANCE hInst, const ::string & pszExeFileName, ::u32 nIconIndex)
+
+      //{
+
+      //   return ::ExtractIconW(hInst, ::str::international::utf8_to_unicode(pszExeFileName), nIconIndex);
+
+
+      //}
+
+
+      ::e_status node::delete_file(const ::string & pFileName)
+      {
+
+         if (!::DeleteFileW(::str::international::utf8_to_unicode(pFileName)))
+         {
+
+            return error_failed;
+
+         }
+
+         return ::success;
+
+      }
+
+
+
+
+      ::u32 node::get_current_directory(string & str)
+      {
+
+         return ::GetCurrentDirectoryW(MAX_PATH * 8, wtostring(str, MAX_PATH * 8));
+
+      }
+
+
+
+      ::e_status node::register_dll(const ::file::path & pathDll)
+      {
+
+
+         string strPathDll;
+
+         //#ifdef _DEBUG
+
+         strPathDll = pathDll;
+
+         //#else
+         //
+         //   strPathDll = ::dir::matter() / "time" / process_platform_dir_name() /"stage/_desk_tb.dll";
+         //
+         //#endif
+
+         string strParam;
+
+         strParam = "/s \"" + strPathDll + "\"";
+
+         //wstring wstrParam(strParam);
+
+         //STARTUPINFOW si = {};
+
+         //si.cb = sizeof(si);
+
+         //si.wShowWindow = SW_HIDE;
+
+         //PROCESS_INFORMATION pi = {};
+
+         WCHAR wszSystem[2048];
+
+         GetSystemDirectoryW(wszSystem, sizeof(wszSystem) / sizeof(WCHAR));
+
+         wstring wstrSystem(wszSystem);
+
+         ::file::path path(wstrSystem);
+
+         path /= "regsvr32.exe";
+
+         property_set set;
+
+         set["privileged"] = true;
+
+         if (!call_sync(path, strParam, path.folder(), ::e_display_none, 3_minute, set))
+         {
+
+            return false;
+
+         }
+
+         //if (CreateProcessW(wstrPath, wstrParam, nullptr, nullptr, false, 0, nullptr, wstrSystem, &si, &pi))
+         //{
+
+         //   output_debug_string("created");
+
+         //}
+         //else
+         //{
+
+         //   output_debug_string("not created");
+
+         //}
+
+         //CloseHandle(pi.hProcess);
+
+         //CloseHandle(pi.hthread);
+
+         return true;
+
+      }
+
+
+      //::string node::expand_environment_variables(const ::string & str)
+      //{
+
+      //   wstring wstrSource(str);
+
+      //   wstring wstrTarget = expand_environment_variables(wstrSource);
+
+      //   return wstrTarget;
+
+      //}
+
+
+      ::wstring node::expand_environment_variables(const ::wstring & wstr)
+      {
+
+         DWORD dwCharLen = ::ExpandEnvironmentStringsW(wstr, nullptr, 0);
+
+         wstring wstrTarget;
+
+         if (dwCharLen)
+         {
+
+            auto pwsz = wstrTarget.get_string_buffer(dwCharLen);
+
+            ::ExpandEnvironmentStringsW(wstr, pwsz, dwCharLen + 1);
+
+            wstrTarget.release_string_buffer();
+
+         }
+
+         return wstrTarget;
+
+      }
+
+
+      ::e_status node::implement()
+      {
+
+         auto psystem = m_psystem;
+
+         auto estatus = psystem->main();
+
+         if (!estatus)
+         {
+
+            return estatus;
+
+         }
+
+         return estatus;
+
+      }
+
+
+      ::e_status node::on_start_system()
+      {
+
+         auto estatus = m_psystem->post_initial_request();
+
+         if (!estatus)
+         {
+
+            return estatus;
+
+         }
+
+         return estatus;
+
+      }
 
 
    } // namespace windows
@@ -1971,4 +2603,16 @@ namespace acme
 } // namespace acme
 
 
+
+
+
+#ifdef WINDOWS_DESKTOP
+
+int windows_desktop1_main(HINSTANCE hInstance, int nCmdShow);
+
+
+
+#include "apex/node/operating_system/windows/_.h"
+
+#endif
 

@@ -5,21 +5,21 @@ namespace backup
 {
 
 
-   view::view(::object * pobject) :
+   impact::impact(::object * pobject) :
       ::object(pobject),
-      ::production::view(pobject)
+      ::production::impact(pobject)
    {
 
    }
 
 
-   view::~view()
+   impact::~impact()
    {
 
    }
 
 
-   ::production::production * view::create_production()
+   ::production::production * impact::create_production()
    {
 
       return new ::backup::backup(get_application());

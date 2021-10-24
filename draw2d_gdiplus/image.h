@@ -12,12 +12,12 @@ namespace draw2d_gdiplus
 
 
       HBITMAP                    m_hbitmap;
-      ::size_i64                   m_sizeWnd;
+      ::size_i64                 m_sizeWnd;
       BITMAPINFO                 m_bitmapinfo;
 
 
       image();
-      virtual ~image();
+      ~image() override;
 
 
       void draw2d_gdiplus_image_common_construct();
@@ -39,20 +39,22 @@ namespace draw2d_gdiplus
       virtual bool _load_thumbnail(const ::string & psz);
 
 
-      virtual bool map(bool) override;
+      virtual bool _map(bool) override;
       virtual bool _unmap() override;
 
-
-      virtual ::e_status create(const ::size_i32 & size, ::eobject eobjectCreate = DEFAULT_CREATE_IMAGE_OBJECT_FLAG, int iGoodStride = -1, bool bPreserve = false) override;
+      virtual ::e_status create_ex(const ::size_i32 & size, ::color32_t * pcolorref, int iScan, ::enum_flag eflagCreate = DEFAULT_CREATE_IMAGE_FLAG, int iGoodStride = -1, bool bPreserve = false);
+      //::e_status create(const ::size_i32 & size, ::enum_flag eflagCreate = DEFAULT_CREATE_IMAGE_OBJECT_FLAG, int iGoodStride = -1, bool bPreserve = false) override;
+      //::e_status initialize(const ::size_i32 & size, ::color32_t * pcolorref, int iScan, ::enum_flag eflagCreate = DEFAULT_CREATE_IMAGE_OBJECT_FLAG) override;
       virtual bool host(const ::pixmap * pixmap) override;
       virtual bool on_host_read_pixels(const ::pixmap* pixmap) override;
+      using ::image::create;
       virtual ::e_status create(::draw2d::graphics * pgraphics) override;
       ::e_status destroy() override;
 
 
       //cvirtual bool stretch(::draw2d::graphics * pgraphics) override;
       //virtual bool draw(const ::image * pimage) override;
-      virtual bool _draw_raw(const ::rectangle_i32 & rectDst, ::image * pimageSrc, const ::point_i32 & pointSrc) override;
+      virtual bool _draw_raw(const ::rectangle_i32 & rectangleTarget, ::image * pimageSrc, const ::point_i32 & pointSrc) override;
 
 
       virtual ::e_status SetIconMask(::draw2d::icon * picon, i32 cx, i32 cy) override;

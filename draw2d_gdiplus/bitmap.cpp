@@ -42,7 +42,7 @@ namespace draw2d_gdiplus
 
    {
 
-      UNREFERENCED_PARAMETER(pgraphics);
+      __UNREFERENCED_PARAMETER(pgraphics);
 
       ::acme::del(m_pbitmap);
 
@@ -58,7 +58,7 @@ namespace draw2d_gdiplus
 
    {
 
-      UNREFERENCED_PARAMETER(pgraphics);
+      __UNREFERENCED_PARAMETER(pgraphics);
 
       return false;
    }
@@ -74,7 +74,7 @@ namespace draw2d_gdiplus
 
       }
 
-      UNREFERENCED_PARAMETER(pgraphics);
+      __UNREFERENCED_PARAMETER(pgraphics);
 
       ::acme::del(m_pbitmap);
 
@@ -123,11 +123,11 @@ namespace draw2d_gdiplus
       info.bmiHeader.biPlanes = 1;
       info.bmiHeader.biBitCount = 32;
       info.bmiHeader.biCompression = BI_RGB;
-      info.bmiHeader.biSizeImage = size.area() * sizeof(COLORREF);
+      info.bmiHeader.biSizeImage = size.area() * sizeof(::color::color);
 
       const BITMAPINFO* pbmi = &info;
 
-      UNREFERENCED_PARAMETER(pgraphics);
+      __UNREFERENCED_PARAMETER(pgraphics);
 
       ::acme::del(m_pbitmap);
 
@@ -210,7 +210,7 @@ namespace draw2d_gdiplus
    {
 
 
-      ::exception::throw_not_implemented();
+      throw interface_only_exception();
 
       //::size_i32 size;
       //VERIFY(::SetBitmapDimensionEx((HBITMAP)get_handle(), nWidth, nHeight, &size));

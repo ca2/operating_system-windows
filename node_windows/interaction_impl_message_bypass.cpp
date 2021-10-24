@@ -277,7 +277,7 @@
 //      if (bTrace)
 //      {
 //
-//         INFO("\n" + str);
+//         INFORMATION("\n" + str);
 //
 //      }
 //

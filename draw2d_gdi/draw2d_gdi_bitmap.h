@@ -36,7 +36,7 @@ namespace draw2d_gdi
       ::size_i32 SetBitmapDimension(int nWidth, int nHeight);
       ::size_i32 GetBitmapDimension() const;
 
-      virtual void dump(dump_context & dumpcontext) const;
+      void dump(dump_context & dumpcontext) const override;
 
 
       virtual HBITMAP _GetHBITMAP();

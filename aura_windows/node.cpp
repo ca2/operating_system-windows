@@ -13,6 +13,7 @@ namespace aura
       {
 
          m_pauranode = this;
+         m_pAuraPlatform = this;
 
       }
 

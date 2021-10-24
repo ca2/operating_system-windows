@@ -41,7 +41,7 @@ namespace draw2d_gdiplus
    }
 
 
-   bool image::map(bool)
+   bool image::_map(bool)
    {
 
       return true;
@@ -88,9 +88,9 @@ namespace draw2d_gdiplus
 
       //destroy();
 
-      m_pbitmap.defer_create();
+      m_pbitmap.defer_create(this);
 
-      m_pgraphics.defer_create();
+      m_pgraphics.defer_create(this);
 
       if (m_pbitmap.is_null())
       {
@@ -152,7 +152,7 @@ namespace draw2d_gdiplus
    }
 
 
-   ::e_status image::create(const ::size_i32& size, ::eobject eobjectCreate, int iGoodStride, bool bPreserve)
+   ::e_status image::create_ex(const ::size_i32& size, ::color32_t * pcolorref, int iScan, ::enum_flag eflagCreate, int iGoodStride, bool bPreserve)
    {
 
       if (m_pbitmap.is_set()
@@ -160,34 +160,34 @@ namespace draw2d_gdiplus
             && size == m_sizeRaw)
       {
 
-         return true;
+         auto ppen = __create < ::draw2d::pen > ();         return true;
 
       }
 
-      ::draw2d::bitmap_pointer pbitmapPrevious;
+      //::draw2d::bitmap_pointer pbitmapPrevious;
 
-      ::draw2d::graphics_pointer pgraphicsPrevious;
+      //::draw2d::graphics_pointer pgraphicsPrevious;
 
-      if (bPreserve)
-      {
+      //if (bPreserve)
+      //{
 
-         pbitmapPrevious = m_pbitmap;
+        // pbitmapPrevious = m_pbitmap;
 
-         pgraphicsPrevious = m_pgraphics;
+//         pgraphicsPrevious = m_pgraphics;
 
-         m_pbitmap.create();
+//         m_pbitmap.create();
 
-         m_pgraphics.create();
+//         m_pgraphics.create();
 
-      }
-      else
-      {
+//      }
+//      else
+//      {
 
-         m_pbitmap.defer_create();
+//         m_pbitmap.defer_create();
 
-         m_pgraphics.defer_create();
+//         m_pgraphics.defer_create();
 
-      }
+//      }
 
       //destroy();
 
@@ -198,42 +198,80 @@ namespace draw2d_gdiplus
 
       //}
 
+      
+      auto pbitmap = __create < ::draw2d::bitmap >();
 
-      if (m_pbitmap.is_null() || m_pgraphics.is_null())
+      auto pgraphics = __create < ::draw2d::graphics >();
+
+      if (pbitmap.is_null() || pgraphics.is_null())
       {
 
-         destroy();
+         //destroy();
 
          return false;
 
       }
 
-      int iScan = 0;
+      //int iScan = 0;
 
-      ::color32_t * pcolorref = nullptr;
+      //::color32_t * pcolorref = nullptr;
 
-      if (!m_pbitmap->create_bitmap(nullptr, size, (void**)&pcolorref, &iScan))
+      if (!pbitmap->create_bitmap(nullptr, size, (void**)&pcolorref, &iScan))
       {
 
-         destroy();
+         //destroy();
 
          return false;
 
       }
 
-      if (m_pbitmap->get_os_data() == nullptr)
+      if (pbitmap->get_os_data() == nullptr)
       {
 
-         destroy();
+         //destroy();
 
          return false;
 
       }
+
+      if (!pgraphics->set(pbitmap))
+      {
+
+         return false;
+
+      }
+      
+      if (!pgraphics->SetViewportOrg(origin()))
+      {
+
+         return false;
+
+      }
+
+      if (bPreserve
+         && pbitmap
+         && pgraphics
+         && m_pbitmap
+         && m_pgraphics)
+      {
+
+         auto w = minimum(m_pbitmap->m_size.cx, pbitmap->m_size.cx);
+
+         auto h = minimum(m_pbitmap->m_size.cy, pbitmap->m_size.cy);
+
+         Gdiplus::Rect rect(0, 0, w, h);
+         
+         __graphics(pgraphics)->m_pgraphics->DrawImage(
+            m_pbitmap.cast <::draw2d_gdiplus::bitmap>()->m_pbitmap,
+            rect, 0, 0, w, h, Gdiplus::UnitPixel);
+
+      }
+
+      m_pbitmap = pbitmap;
+
+      m_pgraphics = pgraphics;
 
       pixmap::init(size, pcolorref, iScan);
-
-      m_pgraphics->set(m_pbitmap);
-      m_pgraphics->SetViewportOrg(origin());
 
       m_pgraphics->m_pimage = this;
       //m_sizeRaw.cx = width;
@@ -241,23 +279,126 @@ namespace draw2d_gdiplus
       m_sizeAlloc = size;
       //m_sizeAlloc.cy = height;
 
-      if (pbitmapPrevious && pgraphicsPrevious)
-      {
+      //if (pbitmapPrevious && pgraphicsPrevious)
+      //{
 
-         Gdiplus::Rect r(0, 0, pbitmapPrevious->m_size.cx, pbitmapPrevious->m_size.cy);
-         __graphics(m_pgraphics)->m_pgraphics->DrawImage(
-            pbitmapPrevious.cast <::draw2d_gdiplus::bitmap>()->m_pbitmap,
-            r, r.X, r.Y, r.Width, r.Height, Gdiplus::UnitPixel);
 
-      }
+      //}
       
       m_bMapped = false;
 
-      m_eobject = eobjectCreate;
+      set(eflagCreate);
 
       return true;
 
    }
+
+   //::e_status image::create(const ::size_i32 & size, ::eobject eobjectCreate, int iGoodStride, bool bPreserve)
+   //{
+
+   //   //if (m_pbitmap.is_set()
+   //   //   && m_pbitmap->get_os_data() != nullptr
+   //   //   && size == m_sizeRaw)
+   //   //{
+
+   //   //   return true;
+
+   //   //}
+
+   //   //::draw2d::bitmap_pointer pbitmapPrevious;
+
+   //   //::draw2d::graphics_pointer pgraphicsPrevious;
+
+   //   //if (bPreserve)
+   //   //{
+
+   //   //   pbitmapPrevious = m_pbitmap;
+
+   //   //   pgraphicsPrevious = m_pgraphics;
+
+   //   //   m_pbitmap.create();
+
+   //   //   m_pgraphics.create();
+
+   //   //}
+   //   //else
+   //   //{
+
+   //   //   m_pbitmap.defer_create();
+
+   //   //   m_pgraphics.defer_create();
+
+   //   //}
+
+   //   ////destroy();
+
+   //   ////if (!size_i32)
+   //   ////{
+
+   //   ////   return true;
+
+   //   ////}
+
+
+   //   //if (m_pbitmap.is_null() || m_pgraphics.is_null())
+   //   //{
+
+   //   //   destroy();
+
+   //   //   return false;
+
+   //   //}
+
+   //   //int iScan = 0;
+
+   //   //::color32_t * pcolorref = nullptr;
+
+   //   //if (!m_pbitmap->create_bitmap(nullptr, size, (void **)&pcolorref, &iScan))
+   //   //{
+
+   //   //   destroy();
+
+   //   //   return false;
+
+   //   //}
+
+   //   //if (m_pbitmap->get_os_data() == nullptr)
+   //   //{
+
+   //   //   destroy();
+
+   //   //   return false;
+
+   //   //}
+
+   //   //pixmap::init(size, pcolorref, iScan);
+
+   //   //m_pgraphics->set(m_pbitmap);
+   //   //m_pgraphics->SetViewportOrg(origin());
+
+   //   //m_pgraphics->m_pimage = this;
+   //   ////m_sizeRaw.cx = width;
+   //   ////m_sizeRaw.cy = height;
+   //   //m_sizeAlloc = size;
+   //   ////m_sizeAlloc.cy = height;
+
+   //   //if (pbitmapPrevious && pgraphicsPrevious)
+   //   //{
+
+   //   //   Gdiplus::Rect r(0, 0, pbitmapPrevious->m_size.cx, pbitmapPrevious->m_size.cy);
+   //   //   __graphics(m_pgraphics)->m_pgraphics->DrawImage(
+   //   //      pbitmapPrevious.cast <::draw2d_gdiplus::bitmap>()->m_pbitmap,
+   //   //      r, r.X, r.Y, r.Width, r.Height, Gdiplus::UnitPixel);
+
+   //   //}
+
+   //   //m_bMapped = false;
+
+   //   //m_eobject = eobjectCreate;
+
+   //   //return true;
+
+   //}
 
 
    bool image::dc_select(bool bSelect)
@@ -287,7 +428,7 @@ namespace draw2d_gdiplus
 
       }
 
-      copy(pgraphics->m_pimage);
+      copy_from(pgraphics->m_pimage);
 
       return true;
 
@@ -356,34 +497,34 @@ namespace draw2d_gdiplus
    //}
 
 
-   //bool image::draw(const ::point_i32 & pointDest, ::image * pimage, const ::rectangle_i32 & rectSrc)
+   //bool image::draw(const ::point_i32 & pointDest, ::image * pimage, const ::rectangle_i32 & rectangleSource)
    //{
 
-   //   return m_pgraphics->draw(pointDest, pimage, rectSrc) != false;
+   //   return m_pgraphics->draw(pointDest, pimage, rectangleSource) != false;
 
    //}
 
 
-   bool image::_draw_raw(const ::rectangle_i32 & rectDstParam, ::image * pimageSrc, const ::point_i32 & pointSrcParam)
+   bool image::_draw_raw(const ::rectangle_i32 & rectangleDstParam, ::image * pimageSrc, const ::point_i32 & pointSrcParam)
    {
 
-      ::rectangle_i32 rectDst(rectDstParam);
+      ::rectangle_i32 rectangleTarget(rectangleDstParam);
 
       ::point_i32 pointSrc(pointSrcParam);
 
-      ::size_i32 size(rectDst.size());
+      ::size_i32 size(rectangleTarget.size());
 
       ::image * pimageDst = this;
 
       if (pimageDst->m_bMapped && pimageSrc->m_bMapped)
       {
 
-         rectDst += m_point;
+         rectangleTarget += m_point;
 
          if (pointSrc.x < 0)
          {
 
-            rectDst.left -= pointSrc.x;
+            rectangleTarget.left -= pointSrc.x;
 
             pointSrc.x = 0;
 
@@ -392,20 +533,20 @@ namespace draw2d_gdiplus
          if (pointSrc.y < 0)
          {
 
-            rectDst.top -= pointSrc.y;
+            rectangleTarget.top -= pointSrc.y;
 
             pointSrc.y = 0;
 
          }
 
-         if (rectDst.left < 0)
+         if (rectangleTarget.left < 0)
          {
 
-            size.cx += rectDst.left;
+            size.cx += rectangleTarget.left;
 
-            pointSrc.x -= rectDst.left;
+            pointSrc.x -= rectangleTarget.left;
 
-            rectDst.left = 0;
+            rectangleTarget.left = 0;
 
          }
 
@@ -416,14 +557,14 @@ namespace draw2d_gdiplus
 
          }
 
-         if (rectDst.top < 0)
+         if (rectangleTarget.top < 0)
          {
 
-            size.cy += rectDst.top;
+            size.cy += rectangleTarget.top;
 
-            pointSrc.y -= rectDst.top;
+            pointSrc.y -= rectangleTarget.top;
 
-            rectDst.top = 0;
+            rectangleTarget.top = 0;
 
          }
 
@@ -434,9 +575,9 @@ namespace draw2d_gdiplus
 
          }
 
-         int xEnd = minimum(size.cx, minimum(pimageSrc->width() - pointSrc.x, pimageDst->width() - rectDst.left));
+         int xEnd = minimum(size.cx, minimum(pimageSrc->width() - pointSrc.x, pimageDst->width() - rectangleTarget.left));
 
-         int yEnd = minimum(size.cy, minimum(pimageSrc->height() - pointSrc.y, pimageDst->height() - rectDst.top));
+         int yEnd = minimum(size.cy, minimum(pimageSrc->height() - pointSrc.y, pimageDst->height() - rectangleTarget.top));
 
          if (xEnd < 0)
          {
@@ -456,20 +597,20 @@ namespace draw2d_gdiplus
 
          i32 scanSrc = pimageSrc->scan_size();
 
-         u8 * pdst = &((u8 *)pimageDst->colorref())[scanDst * rectDst.top + rectDst.left * sizeof(COLORREF)];
+         u8 * pdst = &((u8 *)pimageDst->colorref())[scanDst * rectangleTarget.top + rectangleTarget.left * sizeof(::color::color)];
 
-         u8 * psrc = &((u8 *)pimageSrc->colorref())[scanSrc * pointSrc.y + pointSrc.x * sizeof(COLORREF)];
+         u8 * psrc = &((u8 *)pimageSrc->colorref())[scanSrc * pointSrc.y + pointSrc.x * sizeof(::color::color)];
 
-         COLORREF * pdst2;
+         ::color::color * pdst2;
 
-         COLORREF * psrc2;
+         ::color::color * psrc2;
 
          for (int y = 0; y < yEnd; y++)
          {
 
-            pdst2 = (COLORREF *)&pdst[scanDst * y];
+            pdst2 = (::color::color *)&pdst[scanDst * y];
 
-            psrc2 = (COLORREF *)&psrc[scanSrc * y];
+            psrc2 = (::color::color *)&psrc[scanSrc * y];
 
             memcpy_dup(pdst2, psrc2, xEnd * 4);
 
@@ -479,7 +620,13 @@ namespace draw2d_gdiplus
       else
       {
 
-         pimageDst->g()->draw(::rectangle_f64(rectDst.top_left(), size), pimageSrc->g(), pointSrc);
+         image_source imagesource(pimageSrc, ::rectangle_f64(pointSrc, size));
+
+         image_drawing_options imagedrawingoptions(::rectangle_f64(rectangleTarget.top_left(), size));
+
+         image_drawing imagedrawing(imagedrawingoptions, imagesource);
+
+         pimageDst->g()->draw(imagedrawing);
 
       }
 
@@ -488,10 +635,10 @@ namespace draw2d_gdiplus
    }
 
 
- /*  bool image::draw(const ::rectangle_i32 & rectDst, ::image * pimage, const ::point_i32 & pointSrc)
+ /*  bool image::draw(const ::rectangle_i32 & rectangleTarget, ::image * pimage, const ::point_i32 & pointSrc)
    {
 
-      return ::image::draw(rectDst, pimage, pointSrc);
+      return ::image::draw(rectangleTarget, pimage, pointSrc);
 
    }*/
 
@@ -540,7 +687,17 @@ namespace draw2d_gdiplus
 
       pimage1->set_rgb(255, 255, 255);
 
-      pimage1->g()->draw(rectangle_i32_dimension(0, 0, cx, cy), picon);
+      {
+      
+         image_source imagesource(picon);
+
+         image_drawing_options imagedrawingoptions(rectangle_i32_dimension(0, 0, cx, cy));
+
+         image_drawing imagedrawing(imagedrawingoptions, imagesource);
+
+         pimage1->g()->draw(imagedrawing);
+
+      }
 
       // Black blend image
       ::image_pointer pimage2;
@@ -566,7 +723,17 @@ namespace draw2d_gdiplus
 
       pimage2->fill(0, 0, 0, 0);
 
-      pimage2->g()->draw(rectangle_i32_dimension(0, 0, cx, cy), picon);
+      {
+
+         image_source imagesource(picon);
+
+         image_drawing_options imagedrawingoptions(rectangle_i32_dimension(0, 0, cx, cy));
+
+         image_drawing imagedrawing(imagedrawingoptions, imagesource);
+
+         pimage2->g()->draw(imagedrawing);
+
+      }
 
       //nullptr,
       //DI_IMAGE | DI_MASK);
@@ -593,7 +760,17 @@ namespace draw2d_gdiplus
 
       }
 
-      pimageM->g()->draw(rectangle_i32_dimension(0, 0, cx, cy), picon);
+      {
+
+         image_source imagesource(picon);
+
+         image_drawing_options imagedrawingoptions(rectangle_i32_dimension(0, 0, cx, cy));
+
+         image_drawing imagedrawing(imagedrawingoptions, imagesource);
+
+         pimageM->g()->draw(imagedrawing);
+
+      }
 
       u8 * r1 = (u8 *)pimage1->colorref();
       u8 * r2 = (u8 *)pimage2->colorref();

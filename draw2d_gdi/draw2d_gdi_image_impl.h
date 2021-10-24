@@ -32,7 +32,7 @@ namespace draw2d_gdi
       virtual ::draw2d::bitmap_pointer detach_bitmap();
 
 
-      //virtual COLORREF * get_data();
+      //virtual ::color::color * get_data();
 
 
       bool stretch_image(::image * pimage);
@@ -61,14 +61,14 @@ namespace draw2d_gdi
       virtual bool SetIconMask(::draw2d::icon * picon, i32 cx, i32 cy) override;
 
 
-      virtual bool process_blend(COLORREF clr, i32 x, i32 y, ::draw2d::e_alpha_mode ealphamode, ::image * pimageSrc);
+      virtual bool process_blend(::color::color clr, i32 x, i32 y, ::draw2d::e_alpha_mode ealphamode, ::image * pimageSrc);
       virtual bool process_blend(::image * pimage, i32 x, i32 y, ::draw2d::e_alpha_mode ealphamode, ::image * pimageSrc);
       virtual bool process_blend(::draw2d::brush * pbrush, i32 x, i32 y, ::draw2d::e_alpha_mode ealphamode, ::image * pimageSrc);
       virtual bool process_initialize(::draw2d::brush * pbrush, bool bReset = true);
       virtual bool process_blend(::draw2d::pen * ppen, i32 x, i32 y, ::draw2d::e_alpha_mode ealphamode, ::image * pimage);
       virtual bool process_initialize(::draw2d::pen * ppen, bool bReset = true);
 
-      virtual COLORREF make_colorref(i32 a, i32 rectangle, i32 g, i32 b);
+      virtual ::color::color make_colorref(i32 a, i32 rectangle, i32 g, i32 b);
 
    };
 

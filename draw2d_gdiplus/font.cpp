@@ -124,6 +124,8 @@ namespace draw2d_gdiplus
 
       set_gdiplus_font(pfont);
 
+      m_mapText.erase_all();
+
       return true;
 
    }

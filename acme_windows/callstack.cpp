@@ -844,7 +844,7 @@ namespace windows
    bool callstack::init()
    {
 
-      //if(!::file_exists("C:\\acme\\callstack.txt"))
+      //if(!::m_pacmefile->exists("C:\\acme\\callstack.txt"))
       //{
       //   return false;
       //}
@@ -869,7 +869,7 @@ namespace windows
       if (!::SymInitialize(hprocess, 0, true))
       {
          ::u32 dw = ::GetLastError();
-         output_debug_string("Last Error = " + __str(dw));
+         output_debug_string("Last Error = " + __string(dw));
          ASSERT(0);
 
          //load_modules();
@@ -1071,7 +1071,7 @@ namespace windows
             if (!SwitchToThread())
             {
 
-               sleep(10_ms); // forces switch to another thread
+               preempt(10_ms); // forces switch to another thread
 
             }
 
@@ -1101,7 +1101,7 @@ namespace windows
 
 #else
 
-            pcontext->m_papexcontext->signal = GetThreadContext(pcontext->m_papexcontext->thread, pcontext) ? 1 : -1;
+            pcontext->signal = GetThreadContext(pcontext->thread, pcontext) ? 1 : -1;
 
 #endif
 

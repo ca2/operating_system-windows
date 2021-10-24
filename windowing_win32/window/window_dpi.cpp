@@ -1,4 +1,5 @@
 #include "framework.h"
+#include "aura/operating_system.h"
 
 
 typedef ::u32 FN_GetDpiForWindow(HWND hwnd);

@@ -59,8 +59,8 @@ namespace windows
       virtual ~file();
 
 
-      virtual void assert_valid() const override;
-      virtual void dump(dump_context & dumpcontext) const override;
+      void assert_valid() const override;
+      void dump(dump_context & dumpcontext) const override;
 
 
 
@@ -75,7 +75,7 @@ namespace windows
       virtual ::extended::status open(const ::file::path & pszFileName, const ::file::e_open & eopen) override;
 
 
-      virtual filesize seek(filesize lOff, ::file::e_seek nFrom) override;
+      virtual filesize translate(filesize filesize, ::enum_seek nFrom) override;
       virtual void set_size(filesize dwNewLen) override;
       virtual filesize get_size() const override;
 

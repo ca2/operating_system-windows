@@ -1,8 +1,7 @@
 #include "framework.h"
-//#include "acme/operating_system.h"
+#include "acme/operating_system.h"
 #include "acme/platform/node.h"
 #include "acme/filesystem/filesystem/acme_dir.h"
-#include "acme/os/console.h"
 #include "node.h"
 #include "acme_dir.h"
 #include "acme/filesystem/filesystem/acme_path.h"
@@ -37,8 +36,8 @@ void acme_windows_factory_exchange(::factory_map * pfactorymap)
    //create_factory < ::windows::stdio_file, ::file::text_file >();
    //create_factory < ::windows::file, ::file::file >();
    //pfactorymap->create_factory < ::windows::os_context, ::os_context >();
-   //pfactorymap->create_factory < ::windows::pipe, ::process::pipe >();
-   //pfactorymap->create_factory < ::windows::process, ::process::process >();
+   //pfactorymap->create_factory < ::windows::pipe, ::operating_system::pipe >();
+   //pfactorymap->create_factory < ::windows::process, ::operating_system::process >();
 
    ////create_factory < ::windows::console, ::console::console >();
    //pfactorymap->create_factory < ::windows::crypto, ::crypto::crypto >();
@@ -46,6 +45,7 @@ void acme_windows_factory_exchange(::factory_map * pfactorymap)
 
    pfactorymap->create_factory < ::acme::windows::node, ::acme::node >();
    pfactorymap->create_factory < ::windows::acme_dir, ::acme_dir >();
+   pfactorymap->create_factory < ::windows::acme_file, ::acme_file >();
    pfactorymap->create_factory < ::windows::acme_path, ::acme_path >();
 
    //pfactorymap->create_factory < ::windows::interprocess_communication_base, ::interprocess_communication::base >();
@@ -70,7 +70,7 @@ void acme_windows_factory_exchange(::factory_map * pfactorymap)
    pfactorymap->create_factory < ::windows::serial, ::serial::serial >();
    pfactorymap->create_factory < ::windows::file_memory_map, ::file::memory_map >();
 
-   pfactorymap->create_factory < ::windows::pipe, ::process::pipe >();
+   pfactorymap->create_factory < ::windows::pipe, ::operating_system::pipe >();
    pfactorymap->create_factory < ::windows::file, ::file::file >();
    pfactorymap->create_factory < ::windows::console, ::console::console >();
 
@@ -82,7 +82,7 @@ void acme_windows_factory_exchange(::factory_map * pfactorymap)
 
    //pfactorymap->create_factory < ::windows::stdio_file, ::file::text_file >();
    //pfactorymap->create_factory < ::windows::os_context, ::os_context >();
-   //pfactorymap->create_factory < ::windows::future, ::process::process >();
+   //pfactorymap->create_factory < ::windows::future, ::operating_system::process >();
 
    //pfactorymap->create_factory < ::windows::crypto, ::crypto::crypto >();
    //pfactorymap->create_factory < ::windows::ip_enum, ::net::ip_enum >();

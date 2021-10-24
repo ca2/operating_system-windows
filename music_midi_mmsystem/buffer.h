@@ -20,7 +20,7 @@ namespace music
          public:
 
 
-            sequence* m_psequence;
+            __pointer(sequence)     m_psequence;
 
 
          };

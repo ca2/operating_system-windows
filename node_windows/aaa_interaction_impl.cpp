@@ -319,7 +319,7 @@ namespace windows
    //      if (m_puserinteraction->layout().is_moving())
    //      {
 
-   //         INFO("Window is Moving :: on_message_move");
+   //         INFORMATION("Window is Moving :: on_message_move");
 
    //      }
 
@@ -410,7 +410,7 @@ namespace windows
    //void interaction_impl::on_message_destroy(::message::message * pmessage)
    //{
 
-   //   UNREFERENCED_PARAMETER(pmessage);
+   //   __UNREFERENCED_PARAMETER(pmessage);
 
    //   //__release(m_pthreadUserImpl OBJECT_REFERENCE_COUNT_DEBUG_COMMA_THIS);
 
@@ -604,8 +604,8 @@ namespace windows
 
    //bool interaction_impl::_EnableToolTips(bool bEnable, ::u32 nFlag)
    //{
-   //   UNREFERENCED_PARAMETER(bEnable);
-   //   UNREFERENCED_PARAMETER(nFlag);
+   //   __UNREFERENCED_PARAMETER(bEnable);
+   //   __UNREFERENCED_PARAMETER(nFlag);
    //   return false;
    //}
 
@@ -639,13 +639,13 @@ namespace windows
    //   return ::GetTitleBarInfo(((interaction_impl *)this)->get_handle(), pti) != false;
    //}
 
-   //bool interaction_impl::AnimateWindow(millis millis, u32 dwFlags)
+   //bool interaction_impl::AnimateWindow(::duration ::duration, u32 dwFlags)
    //{
    //   ASSERT(_is_window());
-   //   return ::AnimateWindow(get_handle(), __os(millis), dwFlags) != false;
+   //   return ::AnimateWindow(get_handle(), __os(::duration), dwFlags) != false;
    //}
 
-   //bool interaction_impl::FlashWindowEx(u32 dwFlags, ::u32  uCount, millis tickTimeout)
+   //bool interaction_impl::FlashWindowEx(u32 dwFlags, ::u32  uCount, ::duration tickTimeout)
    //{
    //   ASSERT(_is_window());
    //   FLASHWINFO fwi;
@@ -670,7 +670,7 @@ namespace windows
    //      ::draw2d::graphics * pDCSrc, POINT_I32 *pptSrc, color32_t crKey, BLENDFUNCTION *pblend, u32 dwFlags)
    //{
    //   ASSERT(_is_window());
-   //   ::exception::throw_not_implemented();
+   //   throw interface_only_exception();
    //   return false;
    //   /*      return ::UpdateLayeredWindow(get_handle(), WIN_HDC(pDCDst), pptDst, psize,
    //   WIN_HDC(pDCSrc), pptSrc, crKey, pblend, dwFlags) != false;*/
@@ -686,7 +686,7 @@ namespace windows
    //bool interaction_impl::PrintWindow(::draw2d::graphics_pointer & pgraphics, ::u32 nFlags) const
    //{
    //   ASSERT(::is_window(((interaction_impl *)this)->get_handle()));
-   //   ::exception::throw_not_implemented();
+   //   throw interface_only_exception();
    //   //      return ::PrintWindow(get_handle(), (HDC)(dynamic_cast<::windows::graphics * >(pgraphics))->get_handle(), nFlags) != false;
    //   return false;
    //}
@@ -706,9 +706,9 @@ namespace windows
 
    //void interaction_impl::WinHelp(uptr dwData, ::u32 nCmd)
    //{
-   //   UNREFERENCED_PARAMETER(dwData);
-   //   UNREFERENCED_PARAMETER(nCmd);
-   //   ::exception::throw_not_implemented();
+   //   __UNREFERENCED_PARAMETER(dwData);
+   //   __UNREFERENCED_PARAMETER(nCmd);
+   //   throw interface_only_exception();
 
    //   /*      application* pApp = ::aura::get_system();
    //   ASSERT_VALID(pApp);
@@ -728,13 +728,13 @@ namespace windows
    //   /* trans   if (!::WinHelp((pwindow)->get_handle(), pApp->m_pszHelpFilePath, nCmd, dwData))
    //   {
    //   // linux message_box(__IDP_FAILED_TO_LAUNCH_HELP);
-   //   message_box("Failed to launch help");
+   //   output_error_message("Failed to launch help");
    //   }*/
    //}
 
    ////void interaction_impl::HtmlHelp(uptr dwData, ::u32 nCmd)
    ////{
-   //// ::exception::throw_not_implemented();
+   //// throw interface_only_exception();
    ///*
    //application* pApp = ::aura::get_system();
    //ASSERT_VALID(pApp);
@@ -756,7 +756,7 @@ namespace windows
    ///* trans   if (!::aura::HtmlHelp((pwindow)->get_handle(), pApp->m_pszHelpFilePath, nCmd, dwData))
    //{
    //// linux message_box(__IDP_FAILED_TO_LAUNCH_HELP);
-   //message_box("Failed to launch help");
+   //output_error_message("Failed to launch help");
    //}*/
    ////}
 
@@ -792,9 +792,9 @@ namespace windows
 
    //void interaction_impl::WinHelpInternal(uptr dwData, ::u32 nCmd)
    //{
-   //   UNREFERENCED_PARAMETER(dwData);
-   //   UNREFERENCED_PARAMETER(nCmd);
-   //   ::exception::throw_not_implemented();
+   //   __UNREFERENCED_PARAMETER(dwData);
+   //   __UNREFERENCED_PARAMETER(nCmd);
+   //   throw interface_only_exception();
    //   /*
    //   application* pApp = ::aura::get_system();
    //   ASSERT_VALID(pApp);
@@ -816,17 +816,10 @@ namespace windows
 
 
 
-   void interaction_impl::route_command_message(::message::command * pcommand)
+   void interaction_impl::route_command(::message::command * pcommand, bool bRouteToKeyDescendant)
    {
 
-      channel::route_command_message(pcommand);
-
-      if (pcommand->m_bRet)
-         return;
-
-      channel * pcmdtarget = dynamic_cast <channel *> (this);
-
-      pcmdtarget->channel::route_command_message(pcommand);
+      channel::route_command(pcommand, bRouteToKeyDescendant);
 
    }
 
@@ -835,7 +828,7 @@ namespace windows
 
    //bool interaction_impl::OnCommand(::user::message * pusermessage)
    //{
-   //   UNREFERENCED_PARAMETER(pusermessage);
+   //   __UNREFERENCED_PARAMETER(pusermessage);
    //   return false;
    //}
 
@@ -1083,7 +1076,7 @@ namespace windows
 //
 //   void interaction_impl::OnSysColorChange()
 //   {
-//      ::exception::throw_not_implemented();
+//      throw interface_only_exception();
 //
 //      /*      application* pApp = ::aura::get_system();
 //      if (pApp != nullptr && pApp->m_puiMain == this)
@@ -1118,9 +1111,9 @@ namespace windows
 //   void interaction_impl::OnDevModeChange(__in char * pDeviceName)
 //
 //   {
-//      UNREFERENCED_PARAMETER(pDeviceName);
+//      __UNREFERENCED_PARAMETER(pDeviceName);
 //
-//      ::exception::throw_not_implemented();
+//      throw interface_only_exception();
 //      /*application* pApp = ::aura::get_system();
 //      if (pApp != nullptr && pApp->m_puiMain == this)
 //      pApp->DevModeChange(pDeviceName);
@@ -1177,7 +1170,7 @@ namespace windows
    //void interaction_impl::_002OnDraw(::image * pimage)
    //{
 
-   //   ::exception::throw_not_implemented();
+   //   throw interface_only_exception();
 
    //}
 
@@ -1231,7 +1224,7 @@ namespace windows
 
    //      }
 
-   //      if (m_puserinteraction->m_bUserPrimitiveOk)
+   //      if (m_puserinteraction->m_bUserElementOk)
    //      {
 
    //         pcreate->m_lresult = 0;
@@ -1257,7 +1250,7 @@ namespace windows
    //void interaction_impl::_001OnProdevianSynch(::message::message * pmessage)
    //{
 
-   //   UNREFERENCED_PARAMETER(pmessage);
+   //   __UNREFERENCED_PARAMETER(pmessage);
 
    //}
 
@@ -1385,7 +1378,7 @@ namespace windows
    bool interaction_impl::_is_window() const
    {
 
-      if (!m_bUserPrimitiveOk)
+      if (!m_bUserElementOk)
       {
 
          return false;
@@ -1439,22 +1432,22 @@ namespace windows
 
       //::GetClientRect(m_oswindow, rectangleClient);
 
-      //::rectangle_i32 rectScreen;
+      //::rectangle_i32 rectangleScreen;
 
-      //::GetWindowRect(m_oswindow, rectScreen);
+      //::GetWindowRect(m_oswindow, rectangleScreen);
 
       //if (::IsIconic(m_oswindow))
       //{
 
-      //   INFO("interaction_impl::rects_from_os window is iconic");
+      //   INFORMATION("interaction_impl::rects_from_os window is iconic");
 
       //}
       //else
       //{
 
-      //   m_puserinteraction->m_pointScreen = rectScreen.origin();
+      //   m_puserinteraction->m_pointScreen = rectangleScreen.origin();
 
-      //   m_puserinteraction->m_size = rectScreen.size();
+      //   m_puserinteraction->m_size = rectangleScreen.size();
 
       //}
 
@@ -1466,7 +1459,7 @@ namespace windows
       //}
 
 
-      ////m_puserinteraction->m_sizeScreen = rectScreen.size();
+      ////m_puserinteraction->m_sizeScreen = rectangleScreen.size();
 
       ////m_puserinteraction->m_pointScreenClient.x = 0;
 
@@ -1524,26 +1517,26 @@ namespace windows
 
       }
 
-      ::rectangle_i32 rectWindow;
+      ::rectangle_i32 rectangleWindow;
 
       //if (!(GetExStyle() & WS_EX_LAYERED))
       //{
 
-      //   ::GetWindowRect(m_oswindow, rectWindow);
+      //   ::GetWindowRect(m_oswindow, rectangleWindow);
 
-      //   m_puserinteraction->m_pointParentClientRequest = rectWindow.origin();
+      //   m_puserinteraction->m_pointParentClientRequest = rectangleWindow.origin();
 
-      //   m_puserinteraction->m_sizeClientRequest = rectWindow.size();
+      //   m_puserinteraction->m_sizeClientRequest = rectangleWindow.size();
 
       //}
       //else
       //{
 
-      //   ::set_rect_point_size(&rectWindow, m_puserinteraction->m_pointParentClientRequest, m_puserinteraction.m_sizeClientRequest);
+      //   ::set_rect_point_size(&rectangleWindow, m_puserinteraction->m_pointParentClientRequest, m_puserinteraction.m_sizeClientRequest);
 
       //}
 
-      //*prectangle = rectWindow;
+      //*prectangle = rectangleWindow;
 
       //if (get_parent() != nullptr)
       //{
@@ -1588,11 +1581,11 @@ namespace windows
 
       //   }
 
-      //   //::copy(m_puserinteraction->m_rectParentClient, rect32);
+      //   //::copy(m_puserinteraction->m_rectangleParentClient, rect32);
 
       //}
 
-      //rect32 = m_puserinteraction->m_rectParentClient;
+      //rect32 = m_puserinteraction->m_rectangleParentClient;
 
       //rect32.offset(-rect32.top_left());
 
@@ -1619,10 +1612,10 @@ namespace windows
    }
 
 
-   void interaction_impl::sketch_prepare_window_full_screen(const ::rectangle_i32 & rectHint)
+   void interaction_impl::sketch_prepare_window_full_screen(const ::rectangle_i32 & rectangleHint)
    {
 
-      primitive_impl::sketch_prepare_window_full_screen(rectHint);
+      primitive_impl::sketch_prepare_window_full_screen(rectangleHint);
 
    }
 
@@ -2106,7 +2099,7 @@ namespace windows
    }
 
 
-   bool interaction_impl::RedrawWindow(const ::rectangle_i32& rectUpdate, ::draw2d::region* prgnUpdate, ::u32 flags)
+   bool interaction_impl::RedrawWindow(const ::rectangle_i32& rectangleUpdate, ::draw2d::region* prgnUpdate, ::u32 flags)
    {
 
       if (m_bDestroyImplOnly)
@@ -2206,7 +2199,7 @@ namespace windows
 
    //   ASSERT(_is_window());
 
-   //   ::exception::throw_not_implemented();
+   //   throw interface_only_exception();
    //   return false;
    //   //      return ::DrawCaption(get_handle(), (HDC)(dynamic_cast<::windows::graphics * >(pgraphics))->get_handle(), prc, uFlags) != false;
 
@@ -2727,7 +2720,7 @@ namespace windows
 
       ASSERT(_is_window());
 
-      ::exception::throw_not_implemented();
+      throw interface_only_exception();
       //      const_cast < ::windows::interaction_impl * > (this)->send_message(WM_PRINT, (wparam)(dynamic_cast<::windows::graphics * >(pgraphics))->get_handle(), (lparam) dwFlags);
 
    }
@@ -2738,7 +2731,7 @@ namespace windows
 
       ASSERT(_is_window());
 
-      ::exception::throw_not_implemented();
+      throw interface_only_exception();
       //const_cast < ::windows::interaction_impl * > (this)->send_message(WM_PRINTCLIENT, (wparam)(dynamic_cast<::windows::graphics * >(pgraphics))->get_handle(), (lparam) dwFlags);
 
    }
@@ -3018,7 +3011,7 @@ namespace windows
    //      if (m_puserinteraction->layout().is_moving())
    //      {
 
-   //         INFO("Window is Moving :: on_message_move");
+   //         INFORMATION("Window is Moving :: on_message_move");
 
    //      }
 
@@ -3625,7 +3618,7 @@ namespace windows
    void interaction_impl::set_viewport_org(::draw2d::graphics_pointer & pgraphics)
    {
 
-      // graphics will be already set its view port to the interaction_impl for linux - cairo with xlib
+      // graphics will be already set its impact port to the interaction_impl for linux - cairo with xlib
 
       pgraphics->SetViewportOrg(::point_i32());
 
@@ -4425,7 +4418,7 @@ namespace windows
 //
 //      }
 //
-//      bool bUserElementalOk = !m_bDestroyImplOnly && m_puserinteraction && m_puserinteraction->m_bUserPrimitiveOk;
+//      bool bUserElementalOk = !m_bDestroyImplOnly && m_puserinteraction && m_puserinteraction->m_bUserElementOk;
 //
 //      if (message == e_message_key_down ||
 //         message == e_message_key_up ||
@@ -4492,14 +4485,14 @@ namespace windows
 //      {
 //         ::rectangle_i32 rectangleClient;
 //         ::GetClientRect(get_handle(), rectangleClient);
-//         ::rectangle_i32 rectWindow;
-//         ::GetWindowRect(get_handle(), rectWindow);
-//         ::rectangle_i32 rectRegion;
+//         ::rectangle_i32 rectangleWindow;
+//         ::GetWindowRect(get_handle(), rectangleWindow);
+//         ::rectangle_i32 rectangleRegion;
 //         HRGN hrgn = CreateRectRgn(0, 0, 0, 0);
 //         int regionType = ::GetWindowRgn(get_handle(), hrgn);
 //         if (regionType != ERROR)
 //         {
-//            ::GetRgnBox(hrgn, rectRegion);
+//            ::GetRgnBox(hrgn, rectangleRegion);
 //         }
 //         ::DeleteObject(hrgn); /* finished with region */
 //         WINDOWPLACEMENT wp;
@@ -4722,7 +4715,7 @@ namespace windows
 //            // handler has set it to another one.
 //            pmouse->m_ecursor = cursor_default;
 //
-//            //INFO("windows::e_message_mouse_move(%d,%d)", pmouse->m_point.x, pmouse->m_point.y);
+//            //INFORMATION("windows::e_message_mouse_move(%d,%d)", pmouse->m_point.x, pmouse->m_point.y);
 //
 //            string strType;
 //
@@ -4892,7 +4885,7 @@ namespace windows
 //      if (message == e_message_event)
 //      {
 //
-//         m_puserinteraction->on_control_event(pusermessage);
+//         m_puserinteraction->handle_event(pusermessage);
 //
 //         return;
 //

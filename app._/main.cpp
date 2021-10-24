@@ -136,7 +136,11 @@ void copy(MEM_ICON_ITEM * dst, ICON_ITEM * pitem)
 //      // |                         |               |
 //      // -----------------------   --       --------
 //      //                       |    |       |
-//      if (file_exists(pacmedir->system() / "config\\appfy\\appfy_beg_debug_box.txt"))
+//      if (m_psystem->m_pacmefile->exists(         auto psystem = m_psystem;
+
+         auto pacmedir = psystem->m_pacmedir;
+
+pacmedir->system() / "config\\appfy\\appfy_beg_debug_box.txt"))
 //      {
 //         debug_box("app_app_admin", "app", 0);
 //      }
@@ -178,7 +182,11 @@ void wmain(int argc, wchar_t * wargv[])
 
    {
 
-      if (file_exists(pacmedir->system() / "config/plugin/appfy_beg_debug_box.txt"))
+      if (m_psystem->m_pacmefile->exists(         auto psystem = m_psystem;
+
+         auto pacmedir = psystem->m_pacmedir;
+
+pacmedir->system() / "config/plugin/appfy_beg_debug_box.txt"))
       {
 
          ::MessageBoxA(nullptr,"appfy run", "appfy run", MB_OK);
@@ -189,7 +197,7 @@ void wmain(int argc, wchar_t * wargv[])
       if (__argc < 4)
       {
 
-         os_message_box("Incorrect Number of Arguments passed to appfy. Expected 3 or 4; passed " + __str(__argc - 1), "", e_message_box_ok);
+         os_output_error_message("Incorrect Number of Arguments passed to appfy. Expected 3 or 4; passed " + __string(__argc - 1), "", e_message_box_ok);
 
          papplication->m_result.add(error_invalid_argument);
 
@@ -372,7 +380,7 @@ void wmain(int argc, wchar_t * wargv[])
 
       dprint("a bit of parsing!!");
 
-      if (!file_exists(strSrc))
+      if (!m_psystem->m_pacmefile->exists(strSrc))
       {
 
          printf("%s", 
@@ -441,7 +449,7 @@ void wmain(int argc, wchar_t * wargv[])
 
          papplication->m_result.add(error_failed);
 
-         message_box("Couldn't update resources for \"" + strApp + "\".\n\nDoes the file \"" + strSrc + "\" exists at the moment of this application call and is it valid so far?", nullptr, e_message_box_icon_exclamation);
+         output_error_message("Couldn't update resources for \"" + strApp + "\".\n\nDoes the file \"" + strSrc + "\" exists at the moment of this application call and is it valid so far?", nullptr, e_message_box_icon_exclamation);
 
          return;
 

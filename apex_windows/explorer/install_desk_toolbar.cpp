@@ -455,7 +455,7 @@ bool position_desk_toolbar2()
 
          }
 
-         //::file_put_contents("C:\\archive\\hell_cached.txt", ::hex::upper_from(m.get_data(), m.get_size()));
+         //::m_psystem->m_pacmefile->put_contents("C:\\archive\\hell_cached.txt", ::hex::upper_from(m.get_data(), m.get_size()));
 
       }
 
@@ -502,7 +502,7 @@ bool position_desk_toolbar2()
 
          }
 
-         //::file_put_contents("C:\\archive\\hells.txt", ::hex::upper_from(&m[16], 56));
+         //::m_psystem->m_pacmefile->put_contents("C:\\archive\\hells.txt", ::hex::upper_from(&m[16], 56));
 
       }
 

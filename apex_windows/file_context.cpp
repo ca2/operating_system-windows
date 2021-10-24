@@ -11,6 +11,8 @@ namespace windows
    file_context::file_context()
    {
 
+      m_bZipFileResourceCalculated = false;
+
    }
 
 
@@ -226,7 +228,7 @@ namespace windows
 
                   strError.Format("Failed to delete the file to move \"%s\" error=%d", psz, dwError);
 
-                  TRACE("%s", strError);
+                  INFORMATION("%s", strError);
 
                }
 
@@ -248,14 +250,14 @@ namespace windows
 
 #elif defined(_UWP)
 
-      ::Windows::Storage::StorageFile ^ file = get_os_file(psz, 0, 0, nullptr, OPEN_EXISTING, 0, nullptr);
+      ::winrt::Windows::Storage::StorageFile ^ file = get_os_file(psz, 0, 0, nullptr, OPEN_EXISTING, 0, nullptr);
 
       if (file == nullptr)
       {
 
          //output_debug_string("test");
 
-         __throw(::exception::exception("file::file_context::move Could not move file, could not open source file"));
+         __throw(::exception("file::file_context::move Could not move file, could not open source file"));
 
       }
 
@@ -277,7 +279,7 @@ namespace windows
       }
       else
       {
-         ::Windows::Storage::StorageFolder ^ folder = get_os_folder(strDirNew);
+         ::winrt::Windows::Storage::StorageFolder ^ folder = get_os_folder(strDirNew);
          if (strNameOld == strNameNew)
          {
             ::wait(file->MoveAsync(folder));
@@ -295,7 +297,7 @@ namespace windows
          i32 err = errno;
          string strError;
          strError.Format("Failed to delete file error=%d", err);
-         __throw(::exception::exception(strError));
+         __throw(::exception(strError));
       }
 #endif
 
@@ -359,7 +361,7 @@ namespace windows
          {
             string strError;
             strError.Format("Failed to delete file error=%d", err);
-            __throw(::exception::exception(strError));
+            __throw(::exception(strError));
          }
       }
 #endif
@@ -403,10 +405,126 @@ namespace windows
    }
 
 
-   ::extended::transport < ::file::file > file_context::resource_get_file(const ::file::path & path)
+   zip::in_file* file_context::_defer_resource_file()
    {
 
-#ifdef WINDOWS_DESKTOP
+      if (m_bZipFileResourceCalculated)
+      {
+
+         return m_pzipfileResource;
+
+      }
+
+      m_bZipFileResourceCalculated = true;
+
+      memsize s;
+
+      const void* pdata = get_resource_pointer((HINSTANCE)m_psystem->m_papexsystem->m_hinstance, 1024, "ZIP", s);
+
+      if (::is_null(pdata) || s <= 0)
+      {
+
+         return nullptr;
+
+      }
+
+      auto pmemory = __new(read_only_memory(pdata, s));
+
+      auto pfile = __new(::memory_file(pmemory));
+
+      m_pzipfileResource.create_new(this);
+
+      if (!m_pzipfileResource->unzip_open(pfile, {}, 0))
+      {
+
+
+         return nullptr;
+
+      }
+
+      return m_pzipfileResource;
+
+   }
+
+
+   ::file_transport file_context::create_resource_file(const char* path)
+   {
+
+      synchronous_lock synchronouslock(&m_mutexResource);
+
+      auto pfile = _defer_resource_file();
+
+      if (is_null(pfile))
+      {
+
+         return nullptr;
+
+      }
+
+      string strPath(path);
+
+      strPath.replace("\\", "/");
+
+      if (!pfile->locate(strPath))
+      {
+
+         return nullptr;
+
+      }
+
+      char buffer[1024];
+
+      auto pfileOutput = create_memory_file();
+
+      memsize read;
+
+      while ((read = pfile->read(buffer, sizeof(buffer))) > 0)
+      {
+
+         pfileOutput->write(buffer, read);
+
+      }
+
+      pfileOutput->seek_to_begin();
+
+      return pfileOutput;
+
+   }
+
+
+   bool file_context::resource_is_file_or_dir(const char* path)
+   {
+
+      synchronous_lock synchronouslock(&m_mutexResource);
+
+      auto pfile = _defer_resource_file();
+
+      if (is_null(pfile))
+      {
+
+         return false;
+
+      }
+
+      string strPath(path);
+
+      strPath.replace("\\", "/");
+
+      if (!pfile->locate(strPath))
+      {
+
+         return false;
+
+      }
+
+      return true;
+
+   }
+
+
+
+   ::extended::transport < ::file::file > file_context::resource_get_file(const ::file::path & path)
+   {
 
       auto pfile = create_memory_file();
 
@@ -419,7 +537,7 @@ namespace windows
       if (strExtension == "HTML")
       {
 
-         psz = (const ::string &)RT_HTML;
+         psz = (const char *)RT_HTML;
 
       }
 
@@ -432,11 +550,6 @@ namespace windows
 
       }
 
-#else
-
-      throw_todo();
-
-#endif
 
       return nullptr;
 
@@ -498,9 +611,9 @@ namespace windows
       //auto pnode = psystem->node();
 
       // convert times as appropriate
-      file_time_to_time(&rStatus.m_ctime.m_time, (filetime_t *)&findFileData.ftCreationTime);
-      file_time_to_time(&rStatus.m_atime.m_time, (filetime_t *)&findFileData.ftLastAccessTime);
-      file_time_to_time(&rStatus.m_mtime.m_time, (filetime_t *)&findFileData.ftLastWriteTime);
+      file_time_to_time(&rStatus.m_ctime.m_i, (filetime_t *)&findFileData.ftCreationTime);
+      file_time_to_time(&rStatus.m_atime.m_i, (filetime_t *)&findFileData.ftLastAccessTime);
+      file_time_to_time(&rStatus.m_mtime.m_i, (filetime_t *)&findFileData.ftLastWriteTime);
 
       if (rStatus.m_ctime.get_time() == 0)
          rStatus.m_ctime = rStatus.m_mtime;
@@ -746,21 +859,21 @@ namespace windows
          if (hFile == INVALID_HANDLE_VALUE)
          {
 
-            return ::os_error_to_status(::GetLastError());
+            return ::last_error_to_status(::GetLastError());
 
          }
 
          if (!SetFileTime((HANDLE)hFile, pCreationTime, pLastAccessTime, pLastWriteTime))
          {
 
-            return ::os_error_to_status(::GetLastError());
+            return ::last_error_to_status(::GetLastError());
 
          }
 
          if (!::CloseHandle(hFile))
          {
 
-            return ::os_error_to_status(::GetLastError());
+            return ::last_error_to_status(::GetLastError());
 
          }
 
@@ -772,7 +885,7 @@ namespace windows
          if (!SetFileAttributesW((LPWSTR)(const widechar *)pszFileName, (::u32)status.m_attribute))
          {
 
-            return ::os_error_to_status(::GetLastError());
+            return ::last_error_to_status(::GetLastError());
 
          }
 
@@ -800,10 +913,10 @@ namespace windows
    }
 
 
-   file_result file_context::get_file(const ::payload & varFile, const ::file::e_open & eopenFlags)
+   file_transport file_context::get_file(const ::payload & payloadFile, const ::file::e_open & eopenFlags)
    {
 
-      return ::file_context::get_file(varFile, eopenFlags);
+      return ::file_context::get_file(payloadFile, eopenFlags);
 
    }
 

@@ -133,7 +133,7 @@ namespace windows
    }
 
 
-   bool interprocess_communication_tx::send(const ::string & pszMessage, duration durationTimeout)
+   bool interprocess_communication_tx::send(const ::string & strMessage, duration durationTimeout)
    {
 
       if (!is_tx_ok())
@@ -146,8 +146,8 @@ namespace windows
       COPYDATASTRUCT cds;
 
       cds.dwData = 0x80000000;
-      cds.cbData = (unsigned int)strlen(pszMessage);
-      cds.lpData = (void *)pszMessage.c_str();
+      cds.cbData = (unsigned int) strMessage.get_length();
+      cds.lpData = (void *) strMessage.c_str();
 
       if (durationTimeout.is_pos_infinity())
       {
@@ -160,7 +160,7 @@ namespace windows
 
          DWORD_PTR dwptr;
 
-         if (!::SendMessageTimeout((HWND)get_hwnd(), WM_COPYDATA, (WPARAM)0, (LPARAM)&cds, SMTO_ABORTIFHUNG, (::u32)(durationTimeout.u32_millis()), &dwptr))
+         if (!::SendMessageTimeout((HWND)get_hwnd(), WM_COPYDATA, (WPARAM)0, (LPARAM)&cds, SMTO_ABORTIFHUNG, (class ::wait)durationTimeout, &dwptr))
          {
 
             return false;
@@ -170,12 +170,18 @@ namespace windows
          unsigned int dwError = ::GetLastError();
 
          if (dwError == ERROR_TIMEOUT)
+         {
+
             return false;
+
+         }
 
       }
 
       return true;
+
    }
+
 
    bool interprocess_communication_tx::send(int message, void * pdata, int len, duration durationTimeout)
    {
@@ -215,7 +221,7 @@ namespace windows
 
          DWORD_PTR dwptr;
 
-         if (!::SendMessageTimeout((HWND)get_hwnd(), WM_COPYDATA, (WPARAM)0, (LPARAM)&cds, SMTO_BLOCK, (::u32)(durationTimeout.u32_millis()), &dwptr))
+         if (!::SendMessageTimeout((HWND)get_hwnd(), WM_COPYDATA, (WPARAM)0, (LPARAM)&cds, SMTO_BLOCK, (class ::wait)durationTimeout, &dwptr))
          {
 
             return false;
@@ -300,7 +306,7 @@ namespace windows
       if (!ChangeWindowMessageFilterEx((HWND)get_hwnd(), WM_COPYDATA, MSGFLT_ADD, NULL))
       {
 
-         TRACE("Failed to change WM_COPYDATA message filter");
+         INFORMATION("Failed to change WM_COPYDATA message filter");
 
       }
 
@@ -332,79 +338,76 @@ namespace windows
    }
 
 
+   //void * interprocess_communication_rx::on_interprocess_receive(::interprocess_communication::rx * prx, const ::string & strMessage)
+   //{
 
-   void * interprocess_communication_rx::on_interprocess_receive(::interprocess_communication::rx * prx, const ::string & pszMessage)
-   {
+   //   if (::str::begins_ci(strMessage, "synch_"))
+   //   {
 
-      string strMessage(pszMessage);
+   //      if (m_preceiver != nullptr)
+   //      {
 
-      if (::str::begins_ci(strMessage, "synch_"))
-      {
+   //         m_preceiver->on_interprocess_receive(prx, strMessage);
 
-         if (m_preceiver != nullptr)
-         {
+   //      }
 
-            m_preceiver->on_interprocess_receive(prx, strMessage);
+   //   }
+   //   else
+   //   {
 
-         }
+   //      get_application()->fork([=]()
+   //         {
 
-      }
-      else
-      {
+   //            if (m_preceiver != nullptr)
+   //            {
 
-         get_application()->fork([=]()
-            {
+   //               m_preceiver->on_interprocess_receive(prx, strMessage);
 
-               if (m_preceiver != nullptr)
-               {
+   //            }
 
-                  m_preceiver->on_interprocess_receive(prx, strMessage);
+   //         });
 
-               }
+   //   }
 
-            });
+   //   // ODOW - on date of writing : return ignored by this windows implementation
 
-      }
+   //   return nullptr;
 
-      // ODOW - on date of writing : return ignored by this windows implementation
-
-      return nullptr;
-
-   }
+   //}
 
 
-   void * interprocess_communication_rx::on_interprocess_receive(::interprocess_communication::rx * prx, int message, void * pdata, memsize len)
-   {
+   //void * interprocess_communication_rx::on_interprocess_receive(::interprocess_communication::rx * prx, int message, void * pdata, memsize len)
+   //{
 
-      if (m_preceiver != nullptr)
-      {
+   //   if (m_preceiver != nullptr)
+   //   {
 
-         m_preceiver->on_interprocess_receive(prx, message, pdata, len);
+   //      m_preceiver->on_interprocess_receive(prx, message, pdata, len);
 
-      }
+   //   }
 
-      // ODOW - on date of writing : return ignored by this windows implementation
+   //   // ODOW - on date of writing : return ignored by this windows implementation
 
-      return nullptr;
+   //   return nullptr;
 
-   }
+   //}
 
 
-   void * interprocess_communication_rx::on_interprocess_post(::interprocess_communication::rx * prx, long long int a, long long int b)
-   {
+   //void * interprocess_communication_rx::on_interprocess_post(::interprocess_communication::rx * prx, long long int a, long long int b)
+   //{
 
-      if (m_preceiver != nullptr)
-      {
+   //   if (m_preceiver != nullptr)
+   //   {
 
-         m_preceiver->on_interprocess_post(prx, a, b);
+   //      m_preceiver->on_interprocess_post(prx, a, b);
 
-      }
+   //   }
 
-      // ODOW - on date of writing : return ignored by this windows implementation
+   //   // ODOW - on date of writing : return ignored by this windows implementation
 
-      return nullptr;
+   //   return nullptr;
 
-   }
+   //}
 
 
    LRESULT CALLBACK s_rx_message_queue_proc(HWND hwnd, UINT message, WPARAM wparam, LPARAM lparam)
@@ -432,6 +435,7 @@ namespace windows
 
    ATOM rx_register_class(HINSTANCE hInstance)
    {
+
       WNDCLASSEXW wcex = {};
 
       wcex.cbSize = sizeof(WNDCLASSEX);
@@ -453,6 +457,7 @@ namespace windows
       wcex.hIconSm = nullptr;
 
       return RegisterClassExW(&wcex);
+
    }
 
 
@@ -462,43 +467,58 @@ namespace windows
       if (message == WM_USER + 100)
       {
 
-         on_interprocess_post(this, wparam, lparam);
+         on_interprocess_post(wparam, lparam);
 
       }
       else if (message == WM_COPYDATA)
       {
 
-         COPYDATASTRUCT * pcds = (COPYDATASTRUCT *)lparam;
+         COPYDATASTRUCT * pcopydatastruct = (COPYDATASTRUCT *)lparam;
 
-
-         if (pcds == nullptr)
+         if (pcopydatastruct == nullptr)
          {
 
             return 0;
 
          }
-         else if (pcds->dwData == 0x80000000)
+         else if (pcopydatastruct->dwData == 0x80000000)
          {
 
-            string strMessage((const ::string &)pcds->lpData, pcds->cbData);
+            auto pszData = (const char *)pcopydatastruct->lpData;
 
-            on_interprocess_receive(this, strMessage.c_str());
+            auto szLen = (strsize)pcopydatastruct->cbData;
+
+            string strMessage(pszData, szLen);
+
+            on_interprocess_receive(::move(strMessage));
 
          }
          else
          {
 
-            on_interprocess_receive(this, (int)pcds->dwData, pcds->lpData, pcds->cbData);
+            auto pdata = (void *) pcopydatastruct->lpData;
+
+            auto size = (memsize) pcopydatastruct->cbData;
+
+            memory memory(pdata, size);
+
+            on_interprocess_receive((int)pcopydatastruct->dwData, ::move(memory));
 
          }
 
       }
-      else if (message >= WM_APP)
-      {
+      //else if (message >= WM_APP)
+      //{
 
-         on_interprocess_receive(this, message, (void *)wparam, lparam);
+      //   auto pdata = (void *)pcopydatastruct->lpData;
 
-      }
+      //   auto size = (memsize)pcopydatastruct->cbData;
+
+      //   memory memory(pdata, size);
+
+      //   on_interprocess_receive(message, (void *)wparam, lparam);
+
+      //}
       else
       {
 
@@ -530,7 +550,7 @@ namespace windows
    //interprocess_communication::interprocess_communication()
    //{
 
-   //   m_millisTimeout = (5000) * 11;
+   //   m_durationTimeout = (5000) * 11;
 
    //}
 

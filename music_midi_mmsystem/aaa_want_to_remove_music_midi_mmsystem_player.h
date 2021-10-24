@@ -32,7 +32,7 @@ namespace music
 
 
             virtual bool PlayRate(double dRate = 0.0, u32 dwEllapse = (u32) -1) override;
-            virtual bool Play(imedia_time tkStart, u32 dwEllapse = (u32)-1) override;
+            virtual bool Play(::duration tkStart, u32 dwEllapse = (u32)-1) override;
 
             virtual bool init_thread() override;
             virtual void term_thread() override;
@@ -48,7 +48,7 @@ namespace music
             //virtual var get_midi_out_device() override;
             virtual void PostNotifyEvent(::music::midi::e_notify_event eevent) override;
 
-            virtual imedia_time RateToTicks(double dRate) override;
+            virtual ::duration RateToTicks(double dRate) override;
 
             virtual ::e_status     SetTempoShift(double dTempoShift) override;
 

@@ -1,5 +1,5 @@
 #include "framework.h"
-#include "acme/const/timer.h"
+#include "acme/constant/timer.h"
 
 CLASS_DECL_WINDOWING_WIN32 WNDPROC windows_user_interaction_impl_get_window_procedure();
 
@@ -106,10 +106,10 @@ LRESULT CALLBACK __window_procedure(HWND hwnd, UINT message, WPARAM wparam, LPAR
       output_debug_string("WM_KEYDOWN");
 
    }
-   else if (message == WM_SHOWWINDOW)
+   else if (message == e_message_show_window)
    {
 
-      output_debug_string("WM_SHOWWINDOW");
+      output_debug_string("e_message_show_window");
 
    }
 
@@ -127,7 +127,7 @@ LRESULT CALLBACK __window_procedure(HWND hwnd, UINT message, WPARAM wparam, LPAR
    if (pimpl)
    {
 
-      if (pimpl->__windows_message_bypass(pwindow, message, wparam, lparam, lresult))
+      if (pimpl->__windows_message_bypass(pwindow, message, wparam, (iptr)lparam, lresult))
       {
 
          return lresult;
@@ -164,7 +164,7 @@ LRESULT CALLBACK __window_procedure(HWND hwnd, UINT message, WPARAM wparam, LPAR
    else if (message == 33815)
    {
 
-      string strType = puserinteraction->type_name();
+      string strType = __type_name(puserinteraction);
 
       if (strType.contains("list_box"))
       {
@@ -207,7 +207,7 @@ LRESULT CALLBACK __window_procedure(HWND hwnd, UINT message, WPARAM wparam, LPAR
 
       pwindow->m_pointMouseMove = pointMouseMove;
 
-      pwindow->m_millisLastMouseMove.Now();
+      pwindow->m_durationLastMouseMove.Now();
 
    }
    else if (message == e_message_timer)
@@ -246,7 +246,7 @@ LRESULT CALLBACK __window_procedure(HWND hwnd, UINT message, WPARAM wparam, LPAR
    if (pimpl->m_bDestroyImplOnly || ::is_null(puserinteraction))
    {
 
-      auto pmessage = pimpl->get_message((enum_message)message, wparam, lparam);
+      auto pmessage = pimpl->get_message((enum_message)message, wparam, (iptr) lparam);
 
       try
       {
@@ -291,7 +291,7 @@ LRESULT CALLBACK __window_procedure(HWND hwnd, UINT message, WPARAM wparam, LPAR
 
       }
 
-      auto pmessage = puserinteraction->get_message((enum_message)message, wparam, lparam);
+      auto pmessage = puserinteraction->get_message((enum_message)message, wparam, (iptr) lparam);
 
       try
       {

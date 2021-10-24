@@ -1,7 +1,7 @@
 ﻿#include "framework.h"
 //#include "acme/operating_system.h"
 #include "acme/platform/serial.h"
-#include "acme/os/windows_common/file.h"
+//#include "acme/os/windows_common/file.h"
 #include "serial.h"
 
 
@@ -380,10 +380,10 @@ namespace windows
 
             // Setup timeouts
             COMMTIMEOUTS timeouts = { 0 };
-            timeouts.ReadIntervalTimeout = (DWORD)m_timeout.m_millisInterByteTimeout.m_i;
-            timeouts.ReadTotalTimeoutConstant = (DWORD)m_timeout.m_millisReadTimeoutConstant.m_i;
+            timeouts.ReadIntervalTimeout = (class ::wait)m_timeout.m_durationInterByteTimeout;
+            timeouts.ReadTotalTimeoutConstant = (class ::wait)m_timeout.m_durationReadTimeoutConstant;
             timeouts.ReadTotalTimeoutMultiplier = m_timeout.m_uReadTimeoutMultiplier;
-            timeouts.WriteTotalTimeoutConstant = (DWORD)m_timeout.m_millisWriteTimeoutConstant.m_i;
+            timeouts.WriteTotalTimeoutConstant = (class ::wait)m_timeout.m_durationWriteTimeoutConstant;
             timeouts.WriteTotalTimeoutMultiplier = m_timeout.m_uWriteTimeoutMultiplier;
             if (!SetCommTimeouts(m_hFile, &timeouts))
             {
@@ -483,7 +483,7 @@ namespace windows
    }
 
 
-   bool serial::waitReadable(::millis /*timeout*/)
+   bool serial::waitReadable(::duration /*timeout*/)
    {
 
       __throw(error_io, "waitReadable is not implemented on Windows.");
@@ -497,10 +497,14 @@ namespace windows
    {
 
       //__throw (io_exception, "waitByteTimes is not implemented on Windows.");
-      duration dur;
-      dur.m_nanos = count * m_uiByteTimeNs;
-      dur.normalize();
-      sleep(dur);
+
+      duration duration;
+
+      duration.m_iSecond = muldiv64(count, m_uiByteTimeNs, 1'000'000'000);
+
+      duration.m_iNanosecond = (count * m_uiByteTimeNs) % 1'000'000'000;
+
+      preempt(duration);
 
    }
 
@@ -574,7 +578,7 @@ namespace windows
 
       u8* buffer_ = static_cast <u8*> (alloca(size * sizeof(u8)));
 
-      auto tickStart = ::millis::now();
+      auto durationStart = ::duration::now();
 
       size_t read_so_far = 0;
 
@@ -588,7 +592,7 @@ namespace windows
          if (bytes_read == 0)
          {
 
-            if (tickStart.elapsed() > m_timeout.m_millisReadTimeoutConstant)
+            if (durationStart.elapsed() > m_timeout.m_durationReadTimeoutConstant)
             {
 
                break;
@@ -596,7 +600,7 @@ namespace windows
             }
 
             // time_out occured on reading 1 byte
-            sleep(maximum(100_ms, m_timeout.m_millisReadTimeoutConstant / 10));
+            preempt(maximum(100_ns, m_timeout.m_durationReadTimeoutConstant.integral_nanosecond() / 10));
 
             if (!::task_get_run())
             {
@@ -609,7 +613,7 @@ namespace windows
 
          }
 
-         auto tickStart = ::millis::now();
+         auto tickStart = ::duration::now();
 
          if (string(reinterpret_cast<const char*> (buffer_ + read_so_far - eol_len), eol_len) == eol)
          {

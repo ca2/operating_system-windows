@@ -13,20 +13,20 @@ namespace backup
       pane_view(::object * pobject);
       virtual ~pane_view();
 #ifdef DEBUG
-      virtual void assert_valid() const;
-      virtual void dump(dump_context & dumpcontext) const;
+      void assert_valid() const override;
+      void dump(dump_context & dumpcontext) const override;
 #endif
 
       void on_create_impact(::user::impact_data * pcreatordata);
       void install_message_routing(::channel * pchannel);
 
-      virtual void on_subject(::subject::subject * psubject, ::subject::context * pcontext) override;
+      virtual void handle(::subject * psubject, ::context * pcontext) override;
 
 
 
       DECLARE_MESSAGE_HANDLER(_001OnCreate);
 
-      virtual void on_control_event(::user::control_event * pevent) override;
+      virtual void handle(::subject * psubject, ::context * pcontext) override;
 
 
    };

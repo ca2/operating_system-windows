@@ -56,7 +56,7 @@ namespace multimedia
 
       i32 out::run()
       {
-         m_durationRunLock = millis(1);
+         m_durationRunLock = ::duration(1);
          while(m_bRun)
          {
             ::thread::run();
@@ -257,7 +257,7 @@ Opened:
          }
 
 #if (_WIN32_WINNT >= 0x0602 /*_WIN32_WINNT_WIN8*/) && defined(_DEBUG)
-         // To see the trace output, you need to view ETW logs for this application:
+         // To see the trace output, you need to impact ETW logs for this application:
          //    Go to Control Panel, Administrative Tools, Event Viewer.
          //    View->Show Analytic and Debug Logs.
          //    Applications and Services Logs / Microsoft / Windows / xaudio72.
@@ -489,7 +489,7 @@ Opened:
 
       }
 
-      ::e_status     out::out_start(const imedia_time & position)
+      ::e_status     out::out_start(const ::duration & position)
       {
 
          single_lock sLock(&m_mutex,true);
@@ -549,7 +549,7 @@ Opened:
       }
 
 
-      /*imedia_time out::GetPositionMillisForSynch()
+      /*::duration out::GetPositionMillisForSynch()
       {
          i64 dwMillis = GetPositionMillis();
          i64 dwPosition = m_pprebuffer->m_position * 8;
@@ -562,7 +562,7 @@ Opened:
             return dwMillis + dwPosition - ((m_dwLostSampleCount) * 1000 / m_pwaveformat->nSamplesPerSec);
       }*/
 
-      imedia_time out::out_get_time()
+      ::duration out::out_get_time()
       {
 
          single_lock sLock(&m_mutex, true);
@@ -614,16 +614,16 @@ Opened:
 
       }
 
-      /*imedia_time out::get_position_for_synch()
+      /*::duration out::get_position_for_synch()
       {
-         imedia_time position = get_position();
+         ::duration position = get_position();
          if(m_pprebuffer != nullptr && m_pprebuffer->m_pdecoder != nullptr)
             return m_pprebuffer->m_position + position - m_pprebuffer->m_pdecoder->audio_plugin_get_lost_position_offset(position) - m_dwLostSampleCount * m_pwaveformat->wBitsPerSample * m_pwaveformat->nChannels / 8;
          else
             return m_pprebuffer->m_position + position - m_dwLostSampleCount * m_pwaveformat->wBitsPerSample * m_pwaveformat->nChannels / 8;
       }*/
 
-      imedia_time out::out_get_time()
+      ::duration out::out_get_time()
       {
 
          single_lock sLock(&m_mutex, true);
@@ -658,7 +658,7 @@ Opened:
          //   }
          //   if(mmt.wType == TIME_MS)
          //   {
-         //      imedia_time position = (u32) mmt.u.ms;
+         //      ::duration position = (u32) mmt.u.ms;
          //      position *= m_pwaveformat->wBitsPerSample * m_pwaveformat->nChannels * m_pwaveformat->nSamplesPerSec;
          //      position /= 8 * 1000;
          //      return position;

@@ -15,8 +15,8 @@ namespace draw2d_gdiplus
          virtual ~object();
 
 #ifdef DEBUG
-         virtual void assert_valid() const override;
-         virtual void dump(dump_context & dumpcontext) const override;
+         void assert_valid() const override;
+         void dump(dump_context & dumpcontext) const override;
 #endif
 
    };

@@ -40,7 +40,11 @@ namespace windows
 
       if ((eopen & ::file::e_open_defer_create_directory) && (eopen & ::file::e_open_write))
       {
-         ::dir::mk(::dir::name(pszFileName));
+                  auto psystem = m_psystem;
+
+         auto pacmedir = psystem->m_pacmedir;
+
+pacmedir->create(::file_path_folder(pszFileName));
 
       }
 
@@ -75,7 +79,7 @@ namespace windows
       if (szMode[0] == 'r' && (eopen & ::file::e_open_read_write) ||
             szMode[0] != 'r' && !(eopen & ::file::e_open_write))
       {
-         // ::file::seek_current szMode mismatched, need to add '+' to fix
+         // ::e_seek_current szMode mismatched, need to add '+' to fix
          szMode[nMode++] = '+';
       }
 
@@ -289,10 +293,10 @@ namespace windows
 
    }*/
 
-   filesize stdio_file::seek(filesize lOff, ::file::e_seek nFrom)
+   filesize stdio_file::seek(filesize lOff, ::enum_seek nFrom)
    {
       ASSERT_VALID(this);
-      ASSERT(nFrom == ::file::seek_begin || nFrom == ::file::seek_end || nFrom == ::file::seek_current);
+      ASSERT(nFrom == ::e_seek_set || nFrom == ::e_seek_from_end || nFrom == ::e_seek_current);
       ASSERT(m_pStream != nullptr);
 
       if (fseek(m_pStream, (long) lOff, nFrom) != 0)

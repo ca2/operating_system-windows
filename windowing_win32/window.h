@@ -21,25 +21,23 @@ namespace windowing_win32
       //WPARAM                                  m_wparam;
       //LPARAM                                  m_lparam;
       __pointer(::windows::interaction_impl)    m_pimpl2;
-      ::millis                                  m_millisLastMouseMove;
+      ::duration                                  m_durationLastMouseMove;
       ::point_i32                               m_pointMouseMove;
-      
-
 
 
       window();
-      virtual ~window();
+      ~window() override;
 
 
-      virtual void assert_valid() const override;
-      virtual void dump(dump_context & dumpcontext) const override;
+      void assert_valid() const override;
+      void dump(dump_context & dumpcontext) const override;
 
 
-      virtual void install_message_routing(channel * pchannel) override;
+      void install_message_routing(channel * pchannel) override;
 
 
       
-      virtual ::e_status create_window(::user::interaction_impl * pimpl) override;
+      ::e_status create_window(::user::interaction_impl * pimpl) override;
 
 
       inline HWND get_hwnd() const { return (HWND) get_oswindow(); }
@@ -66,8 +64,8 @@ namespace windowing_win32
       DECLARE_MESSAGE_HANDLER(_001OnMessage);
 
 
-      virtual bool has_capture() const;
-      virtual bool has_focus() const;
+      //bool has_capture() const override;
+      //bool has_focus() const override;
 
 
       //void send_client_event(Atom atom, unsigned int numArgs, ...);
@@ -81,50 +79,52 @@ namespace windowing_win32
 
       //virtual void set_wm_class(const ::string & psz) override;
 
-      virtual ::e_status exit_iconify() override;
+      ::e_status exit_iconify() override;
 
-      virtual ::e_status full_screen(const::rectangle_i32 & rectangle = nullptr) override;
+      ::e_status full_screen(const::rectangle_i32 & rectangle = nullptr) override;
 
-      virtual ::e_status exit_full_screen() override;
+      ::e_status exit_full_screen() override;
 
-      virtual ::e_status exit_zoomed() override;
+      ::e_status exit_zoomed() override;
 
-      virtual ::e_status set_keyboard_focus() override;
+      ::e_status set_keyboard_focus() override;
 
-      virtual ::e_status set_active_window() override;
+      ::e_status set_active_window() override;
 
       ::e_status bring_to_front() override;
 
-      virtual ::e_status set_foreground_window() override;
+      ::e_status set_foreground_window() override;
 
-      virtual ::e_status set_mouse_capture() override;
-
-
-
-      virtual bool has_mouse_capture() const;
-      virtual bool has_keyboard_focus() const;
-
-
-      virtual bool is_active_window() const override;
+      ::e_status set_mouse_capture() override;
 
 
 
+      bool has_mouse_capture() const override;
+      bool has_keyboard_focus() const override;
 
-      virtual ::e_status destroy_window() override;
 
-      virtual ::e_status show_window(const ::e_display & edisplay, const ::e_activation & eactivation) override;
+      bool is_active_window() const override;
+
+
+
+
+      ::e_status destroy_window() override;
+
+      ::e_status show_window(const ::e_display & edisplay, const ::e_activation & eactivation) override;
 
       //virtual void set_user_interaction(::layered * pinteraction) override;
 
-      virtual void post_nc_destroy() override;
+      void post_non_client_destroy() override;
 
-      virtual ::e_status set_mouse_cursor(::windowing::cursor * pcursor) override;
+      ::e_status set_mouse_cursor(::windowing::cursor * pcursor) override;
+
+      ::point_i32 get_mouse_cursor_position() override;
 
 //      virtual bool is_child_of(const ::windowing::window * pwindowAscendantCandidate) const override;
       
       //virtual long get_state() override;
 
-      virtual bool is_iconic() override;
+      bool is_iconic() override;
 
       virtual bool is_window() override;
 
@@ -134,17 +134,17 @@ namespace windowing_win32
 
       //virtual ::e_status show_window(const::e_display & edisplay, const::e_activation & eactivation) override;
       
-      virtual bool client_to_screen(POINT_I32 * ppoint) override;
+      bool client_to_screen(POINT_I32 * ppoint) override;
 
-      virtual bool screen_to_client(POINT_I32 * ppoint) override;
+      bool screen_to_client(POINT_I32 * ppoint) override;
 
-      virtual bool on_set_window_position(const class ::zorder& zorder, i32 x, i32 y, i32 cx, i32 cy, ::u32 nFlags) override;
+      bool on_set_window_position(const class ::zorder& zorder, i32 x, i32 y, i32 cx, i32 cy, ::u32 nFlags) override;
 
-      virtual bool set_window_position(const class ::zorder & zorder, i32 x, i32 y, i32 cx, i32 cy, ::u32 nFlags) override;
+      bool set_window_position(const class ::zorder & zorder, i32 x, i32 y, i32 cx, i32 cy, ::u32 nFlags) override;
 
       //virtual bool _set_window_pos(class::zorder zorder, i32 x, i32 y, i32 cx, i32 cy, ::u32 nFlags) override;
 
-      virtual bool is_destroying() override;
+      bool is_destroying() override;
 
       //virtual bool bamf_set_icon() override;
 
@@ -158,7 +158,7 @@ namespace windowing_win32
 
       virtual bool __windows_message_bypass(HWND oswindow, ::u32 message, wparam wparam, lparam lparam, lresult & lresult);
 
-      //virtual void install_message_routing(::channel * pchannel);
+      //void install_message_routing(::channel * pchannel) override;
 
       //bool operator==(const interaction_impl & wnd) const;
       //bool operator!=(const interaction_impl & wnd) const;
@@ -175,7 +175,7 @@ namespace windowing_win32
       //virtual ::user::interaction * get_owner();
       //virtual void set_owner(::user::interaction * pOwnerWnd);
 
-      // virtual void route_command_message(::message::command * pcommand) override;
+      // void route_command(::message::command * pcommand, bool bRouteToKeyDescendant = false) override;
 
       //void _002OnDraw(::image * pimage);
 
@@ -293,7 +293,7 @@ namespace windowing_win32
 
       virtual strsize get_window_text(char * pszStringBuf, strsize nMaxCount) override;
 
-      virtual void get_window_text(string & rectString) override;
+      virtual void get_window_text(string & rectangleString) override;
       virtual strsize get_window_text_length() override;
 
       //virtual void on_layout(::draw2d::graphics_pointer & pgraphics) override;
@@ -369,7 +369,7 @@ namespace windowing_win32
 
       //virtual void sketch_prepare_window_minimize(::e_activation eactivation) override;
       //virtual void sketch_prepare_window_maximize() override;
-      //virtual void sketch_prepare_window_full_screen(const ::rectangle_i32 & rectHint = nullptr) override;
+      //virtual void sketch_prepare_window_full_screen(const ::rectangle_i32 & rectangleHint = nullptr) override;
       //virtual void sketch_prepare_window_restore(edisplay edisplay) override;
 
 
@@ -380,7 +380,7 @@ namespace windowing_win32
       virtual bool LockWindowUpdate();
       virtual void UnlockWindowUpdate();
 
-      virtual bool RedrawWindow(const ::rectangle_i32 & rectUpdate = nullptr,
+      virtual bool RedrawWindow(const ::rectangle_i32 & rectangleUpdate = nullptr,
          ::draw2d::region * prgnUpdate = nullptr,
          ::u32 flags = RDW_INVALIDATE | RDW_ERASE);
 
@@ -393,7 +393,7 @@ namespace windowing_win32
 
       //#if(WINVER >= 0x0500)
       //
-      //      virtual bool AnimateWindow(millis millis, u32 dwFlags);
+      //      virtual bool AnimateWindow(const ::duration & duration, u32 dwFlags);
       //
       //#endif   // WINVER >= 0x0500
       //
@@ -468,7 +468,7 @@ namespace windowing_win32
 
       //virtual i32 GetChildByIdText(__in i32 nID, __out_ecount_part_z(nMaxCount, return +1) TCHAR * pStr, __in i32 nMaxCount) const;
 
-      ///virtual i32 GetChildByIdText(i32 nID, string & rectString) const;
+      ///virtual i32 GetChildByIdText(i32 nID, string & rectangleString) const;
       //virtual ::user::interaction * GetNextDlgGroupItem(::user::interaction * pWndCtl, bool bPrevious = false) const;
       //virtual ::user::interaction * GetNextDlgTabItem(::user::interaction * pWndCtl, bool bPrevious = false) const;
       //virtual ::u32 IsDlgButtonChecked(i32 nIDButton) const;
@@ -552,7 +552,7 @@ namespace windowing_win32
 //
 //#if(WINVER >= 0x0500)
 //
-//      virtual bool FlashWindowEx(u32 dwFlags, ::u32  uCount, millis tickTimeout);
+//      virtual bool FlashWindowEx(u32 dwFlags, ::u32  uCount, ::duration tickTimeout);
 //
 //#endif   // WINVER >= 0x0500
 //

@@ -66,11 +66,11 @@ namespace draw2d_gdi
 
 
       ::image_pointer pimage_work(const ::size_i32 & size, bool bReset);
-      image fill_image_work(COLORREF clr, const ::size_i32 & size, bool bReset);
+      image fill_image_work(::color::color clr, const ::size_i32 & size, bool bReset);
 
-      bool internal_fill_path(void (::draw2d_gdi::graphics::* pfnInternalSetPath)(void *), void * pparam, const ::rectangle_i32 & rectParam, ::draw2d::brush * pbrush);
-      bool internal_stroke_path(void (::draw2d_gdi::graphics::* pfnInternalSetPath)(void *), void * pparam, const ::rectangle_i32 & rectParam, ::draw2d::pen * ppen);
-      bool internal_fill_and_stroke_path(void(::draw2d_gdi::graphics::* pfnInternalSetPath)(void *),void * pparam, const ::rectangle_i32 & rectParam,::draw2d::brush * pbrush,::draw2d::pen * ppen);
+      bool internal_fill_path(void (::draw2d_gdi::graphics::* pfnInternalSetPath)(void *), void * pparam, const ::rectangle_i32 & rectangleParam, ::draw2d::brush * pbrush);
+      bool internal_stroke_path(void (::draw2d_gdi::graphics::* pfnInternalSetPath)(void *), void * pparam, const ::rectangle_i32 & rectangleParam, ::draw2d::pen * ppen);
+      bool internal_fill_and_stroke_path(void(::draw2d_gdi::graphics::* pfnInternalSetPath)(void *),void * pparam, const ::rectangle_i32 & rectangleParam,::draw2d::brush * pbrush,::draw2d::pen * ppen);
 
       void internal_set_path(void * pparam);
       void internal_set_path_ellipse(void * pparam);
@@ -104,8 +104,8 @@ namespace draw2d_gdi
       virtual int SaveDC() override;
       virtual bool RestoreDC(int nSavedDC) override;
       int GetDeviceCaps(int nIndex) override;
-      UINT SetBoundsRect(const ::rectangle_i32 & rectBounds, UINT flags) override;
-      UINT GetBoundsRect(LPRECT rectBounds, UINT flags) override;
+      UINT SetBoundsRect(const ::rectangle_i32 & rectangleBounds, UINT flags) override;
+      UINT GetBoundsRect(LPRECT rectangleBounds, UINT flags) override;
       bool ResetDC(const DEVMODE* lpDevMode) override;
 
       // Drawing-Tool Functions
@@ -138,36 +138,36 @@ namespace draw2d_gdi
 
 
       // color and color Palette Functions
-      COLORREF GetNearestColor(COLORREF crColor) override;
+      ::color::color GetNearestColor(::color::color crColor) override;
       ::draw2d::palette* SelectPalette(::draw2d::palette* pPalette, bool bForceBackground) override;
       UINT RealizePalette() override;
       void UpdateColors() override;
 
       // Drawing-Attribute Functions
-      COLORREF GetBkColor();
+      ::color::color GetBkColor();
       int GetBkMode();
       int GetPolyFillMode() override;
       int GetROP2() override;
       int GetStretchBltMode() override;
-      COLORREF GetTextColor();
+      ::color::color GetTextColor();
 
-      virtual COLORREF SetBkColor(COLORREF crColor);
+      virtual ::color::color SetBkColor(::color::color crColor);
       int SetBkMode(int nBkMode);
       int SetPolyFillMode(int nPolyFillMode) override;
       int SetROP2(int nDrawMode) override;
       int SetStretchBltMode(int nStretchMode) override;
-      virtual COLORREF SetTextColor(COLORREF crColor);
+      virtual ::color::color SetTextColor(::color::color crColor);
 
       bool GetColorAdjustment(LPCOLORADJUSTMENT lpColorAdjust) override;
       bool SetColorAdjustment(const COLORADJUSTMENT* lpColorAdjust) override;
 
 #if (_WIN32_WINNT >= 0x0500)
 
-      COLORREF GetDCBrushColor() override;
-      COLORREF SetDCBrushColor(COLORREF crColor) override;
+      ::color::color GetDCBrushColor() override;
+      ::color::color SetDCBrushColor(::color::color crColor) override;
 
-      COLORREF GetDCPenColor() override;
-      COLORREF SetDCPenColor(COLORREF crColor) override;
+      ::color::color GetDCPenColor() override;
+      ::color::color SetDCPenColor(::color::color crColor) override;
 
 #endif
 
@@ -324,19 +324,19 @@ namespace draw2d_gdi
       bool draw(const ::rectangle_i32 & rectangle, ::draw2d::graphics * pgraphicsSrc, const ::point_i32 & lppt, u32 dwRop) override;
       bool StretchBlt(double x, double y, double nWidth, double nHeight, ::draw2d::graphics * pgraphicsSrc,
                       int xSrc, int ySrc, int nSrcWidth, int nSrcHeight, u32 dwRop) override;
-      COLORREF GetPixel(int x, int y) override;
-      COLORREF GetPixel(const ::point_i32 & point) override;
-      COLORREF SetPixel(int x, int y, COLORREF crColor) override;
-      COLORREF SetPixel(const ::point_i32 & point, COLORREF crColor) override;
-      bool FloodFill(int x, int y, COLORREF crColor) override;
-      bool ExtFloodFill(int x, int y, COLORREF crColor, UINT nFillType) override;
+      ::color::color GetPixel(int x, int y) override;
+      ::color::color GetPixel(const ::point_i32 & point) override;
+      ::color::color SetPixel(int x, int y, ::color::color crColor) override;
+      ::color::color SetPixel(const ::point_i32 & point, ::color::color crColor) override;
+      bool FloodFill(int x, int y, ::color::color crColor) override;
+      bool ExtFloodFill(int x, int y, ::color::color crColor, UINT nFillType) override;
       bool MaskBlt(int x, int y, int nWidth, int nHeight, ::draw2d::graphics * pgraphicsSrc,
                    int xSrc, int ySrc, ::draw2d::bitmap& maskBitmap, int xMask, int yMask,
                    u32 dwRop) override;
       bool PlgBlt(LPPOINT lpPoint, ::draw2d::graphics * pgraphicsSrc, int xSrc, int ySrc,
                   int nWidth, int nHeight, ::draw2d::bitmap& maskBitmap, int xMask, int yMask) override;
-      bool SetPixelV(int x, int y, COLORREF crColor) override;
-      bool SetPixelV(const ::point_i32 & point, COLORREF crColor) override;
+      bool SetPixelV(int x, int y, ::color::color crColor) override;
+      bool SetPixelV(const ::point_i32 & point, ::color::color crColor) override;
       bool GradientFill(TRIVERTEX* pVertices, ULONG nVertices,
                         void * pMesh, ULONG nMeshElements, u32 dwMode) override;
       bool TransparentBlt(int xDest, int yDest, int nDestWidth, int nDestHeight,
@@ -473,16 +473,16 @@ namespace draw2d_gdi
       // Misc Helper Functions
       static ::draw2d::brush* GetHalftoneBrush(::object * pobject);
       //void DrawDragRect(const ::rectangle_i32 & rectangle, const ::size_i32 & size,
-      //                  const ::rectangle_i32 & rectLast, const ::size_i32 & sizeLast, ::draw2d::brush* pBrush = nullptr, ::draw2d::brush* pBrushLast = nullptr) override;
+      //                  const ::rectangle_i32 & rectangleLast, const ::size_i32 & sizeLast, ::draw2d::brush* pBrush = nullptr, ::draw2d::brush* pBrushLast = nullptr) override;
 
       using ::draw2d::graphics::fill_rectangle;
-      void fill_rectangle(const ::rectangle_i32 & rectangle, COLORREF color32) override;
+      void fill_rectangle(const ::rectangle_i32 & rectangle, ::color::color color32) override;
 
-      using ::draw2d::graphics::draw3d_rect;
-      void draw3d_rect(const ::rectangle_i32 & rectangle, COLORREF crTopLeft, COLORREF crBottomRight, const ::e_border & eborder = e_border_all) override;
+      using ::draw2d::graphics::draw_inset_3d_rectangle;
+      void draw_inset_3d_rectangle(const ::rectangle_i32 & rectangle, ::color::color crTopLeft, ::color::color crBottomRight, const ::e_border & eborder = e_border_all) override;
 
-      virtual void assert_valid() const override;
-      virtual void dump(dump_context & dumpcontext) const override;
+      void assert_valid() const override;
+      void dump(dump_context & dumpcontext) const override;
 
 
       HGDIOBJ SelectObject(HGDIOBJ);      // do not use for regions

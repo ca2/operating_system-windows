@@ -1,7 +1,7 @@
 #include "framework.h"
 
 
-::e_status gdiplus_draw_text(::draw2d::graphics* pgraphicsParam, ::draw2d::path* ppathParam, const string& str, rectangle_f64& rectParam, const ::e_align & ealign, const ::e_draw_text & edrawtext, ::write_text::font* pfontParam, double dFontWidth, ::draw2d::brush* pbrushParam, bool bMeasure)
+::e_status gdiplus_draw_text(::draw2d::graphics* pgraphicsParam, ::draw2d::path* ppathParam, const string& str, rectangle_f64& rectangleParam, const ::e_align & ealign, const ::e_draw_text & edrawtext, ::write_text::font* pfontParam, double dFontWidth, ::draw2d::brush* pbrushParam, bool bMeasure)
 {
 
    if (str.is_empty())
@@ -175,7 +175,7 @@
       if (dFontWidth == 1.0)
       {
 
-         Gdiplus::RectF rectangle_f32((Gdiplus::REAL) rectParam.left, (Gdiplus::REAL) rectParam.top, (Gdiplus::REAL) (width(rectParam) * dFontWidth), (Gdiplus::REAL) (height(rectParam)));
+         Gdiplus::RectF rectangle_f32((Gdiplus::REAL) rectangleParam.left, (Gdiplus::REAL) rectangleParam.top, (Gdiplus::REAL) (width(rectangleParam) * dFontWidth), (Gdiplus::REAL) (height(rectangleParam)));
 
          strsize iSize = text.m_wstr.get_length();
 
@@ -191,7 +191,7 @@
 
                status = pgraphics->MeasureString(text.m_wstr, (INT)iSize, pfont, rectangle_f32, &format, &box);
 
-               __copy(rectParam, box);
+               __copy(rectangleParam, box);
 
             }
 
@@ -210,7 +210,7 @@
 
                status = pgraphics->MeasureString(text.m_wstr, (INT)iSize, pfont, rectangle_f32, &format, &box);
 
-               __copy(rectParam, box);
+               __copy(rectangleParam, box);
 
             }
 
@@ -230,11 +230,11 @@
 
          ap(Gdiplus::Matrix) pmNew = m.Clone();
 
-         status = pmNew->Translate((Gdiplus::REAL) rectParam.left, (Gdiplus::REAL) rectParam.top);
+         status = pmNew->Translate((Gdiplus::REAL) rectangleParam.left, (Gdiplus::REAL) rectangleParam.top);
 
          status = pmNew->Scale((Gdiplus::REAL) dFontWidth, (Gdiplus::REAL) 1.0, Gdiplus::MatrixOrderAppend);
 
-         Gdiplus::RectF rectangle_f32(0, 0, (Gdiplus::REAL) (width(rectParam) * dFontWidth), (Gdiplus::REAL) (height(rectParam)));
+         Gdiplus::RectF rectangle_f32(0, 0, (Gdiplus::REAL) (width(rectangleParam) * dFontWidth), (Gdiplus::REAL) (height(rectangleParam)));
 
          status = pgraphics->SetTransform(pmNew);
 
@@ -249,7 +249,7 @@
 
             status = pgraphics->MeasureString(text.m_wstr, (INT)iSize, pfont, rectangle_f32, &format, &box);
 
-            __copy(rectParam, box);
+            __copy(rectangleParam, box);
 
          }
 
@@ -264,11 +264,11 @@
 
          //ap(Gdiplus::Matrix) pmNew = m.Clone();
 
-         //status = pmNew->Translate((Gdiplus::REAL) rectParam.left, (Gdiplus::REAL) rectParam.top);
+         //status = pmNew->Translate((Gdiplus::REAL) rectangleParam.left, (Gdiplus::REAL) rectangleParam.top);
 
          //status = pmNew->Scale((Gdiplus::REAL) m_pfont->m_dFontWidth, (Gdiplus::REAL) 1.0, Gdiplus::MatrixOrderAppend);
 
-         //Gdiplus::RectF rectangle_f32(0, 0, (Gdiplus::REAL) (width(rectParam) * m_pfont->m_dFontWidth), (Gdiplus::REAL) (height(rectParam)));
+         //Gdiplus::RectF rectangle_f32(0, 0, (Gdiplus::REAL) (width(rectangleParam) * m_pfont->m_dFontWidth), (Gdiplus::REAL) (height(rectangleParam)));
 
          //status = ppath->SetTransform(pmNew);
 

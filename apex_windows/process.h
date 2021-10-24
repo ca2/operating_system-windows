@@ -6,7 +6,7 @@ namespace windows
 
 
    class CLASS_DECL_APEX_WINDOWS process :
-      virtual public ::process::process
+      virtual public ::operating_system::process
    {
    public:
 
@@ -19,7 +19,7 @@ namespace windows
       ~process() override;
 
 
-      virtual bool create_child_process(const ::string & pszCmdLine, bool bPiped, const ::string & pszDir = nullptr, ::e_priority epriority = ::priority_none) override;
+      virtual bool create_child_process(const ::string & pszCmdLine, bool bPiped, const ::string & pszDir = nullptr, ::enum_priority epriority = ::e_priority_none) override;
 
       virtual bool has_exited() override;
 

@@ -8,6 +8,7 @@
 #include "acme/filesystem/filesystem/acme_path.h"
 
 
+
 ::e_status hresult_to_estatus(HRESULT hresult)
 {
 
@@ -242,7 +243,7 @@ namespace windows
          if(EnumProcessModules(hProcess, &hMod, sizeof(hMod), &cbNeeded))
          {
             
-            strName = ::path::module(hMod);
+            strName = ::get_module_path(hMod);
 
          }
 
@@ -1616,7 +1617,7 @@ retry:
 
          //auto pnode = m_psystem->m_papexsystem->node();
 
-         ::time_to_file_time((filetime_t*)&lastAccessTime, &status.m_atime.m_time);
+         ::time_to_file_time((filetime_t*)&lastAccessTime, &status.m_atime.m_i);
 
          pLastAccessTime = &lastAccessTime;
 
@@ -1627,7 +1628,7 @@ retry:
       if (status.m_ctime.get_time() != 0)
       {
 
-         time_to_file_time((filetime_t *)&creationTime, &status.m_ctime.m_time);
+         time_to_file_time((filetime_t *)&creationTime, &status.m_ctime.m_i);
 
          pCreationTime = &creationTime;
 
@@ -1721,7 +1722,7 @@ retry:
 
       wstring wstrFileIn = ::str::international::utf8_to_unicode(strSource);
 
-      bool bNativeUnicode = is_windows_native_unicode() != false;
+      //bool bNativeUnicode = is_windows_native_unicode() != false;
 
       SHFILEINFOW info;
 
@@ -1768,7 +1769,7 @@ retry:
 
       comptr < IPersistFile > ppersistfile;
 
-      if (SUCCEEDED(hr = pshelllink.As(ppersistfile)))
+      if (SUCCEEDED(hr = pshelllink.as(ppersistfile)))
       {
 
          if (SUCCEEDED(hr = ppersistfile->Load(wstrFileIn, STGM_READ)))
@@ -2230,7 +2231,7 @@ repeat:
       ::application * papp = get_application();
 
       string strTargetProgId;
-      string strModule = solve_relative(m_psystem->m_pacmepath->app_module());
+      string strModule = solve_relative(m_psystem->m_pacmefile->executable());
 
       strTargetProgId = get_application()->m_strAppName;
 
@@ -2493,7 +2494,7 @@ repeat:
 
       string strTargetProgId;
 
-      string strModule = solve_relative(m_psystem->m_pacmepath->app_module());
+      string strModule = solve_relative(m_psystem->m_pacmefile->executable());
 
       string strApplicationRegistryPath = find_string("ApplicationRegistryPath");
 
@@ -2818,7 +2819,7 @@ repeat:
             if(!estatusRegistry)
             {
 
-               TRACE("Failure to set ." + strExtension + "\\OpenWithProgids");
+               INFORMATION("Failure to set ." + strExtension + "\\OpenWithProgids");
 
                estatus = estatusRegistry;
 
@@ -3033,21 +3034,21 @@ repeat:
             if (set["default_file_extension"].get_length() > 0)
             {
 
-               pfileopen->SetDefaultExtension(wstring(set["default_file_extension"]));
+               pfileopen->SetDefaultExtension(wstring(set["default_file_extension"].get_string()));
 
             }
 
             if (set["file_name"].get_length() > 0)
             {
 
-               pfileopen->SetFileName(wstring(set["file_name"]));
+               pfileopen->SetFileName(wstring(set["file_name"].get_string()));
 
             }
 
             if (set["folder"].get_length() > 0)
             {
 
-               wstring wstr(set["folder"]);
+               wstring wstr(set["folder"].get_string());
 
                comptr < IShellItem > psi;
 
@@ -3270,21 +3271,21 @@ repeat:
             if (set["default_file_extension"].get_length() > 0)
             {
 
-               pfilesave->SetDefaultExtension(wstring(set["default_file_extension"]));
+               pfilesave->SetDefaultExtension(wstring(set["default_file_extension"].get_string()));
 
             }
 
             if (set["file_name"].get_length() > 0)
             {
 
-               pfilesave->SetFileName(wstring(set["file_name"]));
+               pfilesave->SetFileName(wstring(set["file_name"].get_string()));
 
             }
 
             if (set["folder"].get_length() > 0)
             {
 
-               wstring wstr(set["folder"]);
+               wstring wstr(set["folder"].get_string());
 
                comptr < IShellItem > psi;
 
@@ -3399,7 +3400,7 @@ repeat:
             if (set["folder"].get_length() > 0)
             {
 
-               wstring wstr(set["folder"]);
+               wstring wstr(set["folder"].get_string());
 
                comptr < IShellItem > psi;
 
@@ -3516,7 +3517,7 @@ repeat:
             if (set["folder"].get_length() > 0)
             {
 
-               wstring wstr(set["folder"]);
+               wstring wstr(set["folder"].get_string());
 
                comptr < IShellItem > psi;
 

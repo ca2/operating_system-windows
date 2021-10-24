@@ -5,10 +5,10 @@
 // Maurits [MSFT]
 //21 Sep 2012 9:31 AM
 
-//0
-// MSDN Blogs > Matthew van Eerde's web log > Enumerating MIDI devices
-#undef LOG
-#define LOG(format, ...) TRACE(format, __VA_ARGS__)
+////0
+//// MSDN Blogs > Matthew van Eerde's web log > Enumerating MIDI devices
+//#undef LOG
+//#define INFORMATION(format, ...) TRACE(format, __VA_ARGS__)
 
 
 
@@ -27,6 +27,8 @@ namespace music
 
          midi::midi()
          {
+
+            m_pMidi = this;
 
             defer_create_mutex();
 
@@ -90,7 +92,7 @@ namespace music
 
          //   UINT_PTR devs = midiInGetNumDevs();
 
-         //   LOG("midiIn devices: %u", devs);
+         //   INFORMATION("midiIn devices: %u", devs);
 
          //   for (UINT_PTR dev = 0; dev < devs; dev++)
          //   {
@@ -116,7 +118,7 @@ namespace music
 
          //   devs = midiOutGetNumDevs();
 
-         //   LOG("midiOut devices: %u", devs);
+         //   INFORMATION("midiOut devices: %u", devs);
 
          //   for (UINT dev = 0; dev < devs; dev++)
          //   {
@@ -161,18 +163,18 @@ namespace music
                            );
             if (MMSYSERR_NOERROR != mmr)
             {
-               LOG("midiInMessage(DRV_QUERYDEVICEINTERFACESIZE) failed: mmr = 0x%08x", mmr);
+               INFORMATION("midiInMessage(DRV_QUERYDEVICEINTERFACESIZE) failed: mmr = 0x%08x", mmr);
                return;
             }
 
             if (0 == size)
             {
-               LOG("No device interface");
+               INFORMATION("No device interface");
                return;
             }
             if (size % sizeof(WCHAR))
             {
-               LOG("Device interface length in bytes (%u) should be a multiple of the size_i32 of a WCHAR!", size);
+               INFORMATION("Device interface length in bytes (%u) should be a multiple of the size_i32 of a WCHAR!", size);
                return;
             }
 
@@ -193,13 +195,13 @@ namespace music
 
             if (MMSYSERR_NOERROR != mmr)
             {
-               LOG("midiInMessage(DRV_QUERYDEVICEINTERFACE) failed: mmr = 0x%08x", mmr);
+               INFORMATION("midiInMessage(DRV_QUERYDEVICEINTERFACE) failed: mmr = 0x%08x", mmr);
                return;
             }
 
             string str(wstr);
 
-            LOG("    Device interface: \"%s\"", str);
+            INFORMATION("    Device interface: \"%s\"", str);
          }
 
          void midi::mmsystem_GetMidiOutDeviceInterface(UINT_PTR i)
@@ -216,18 +218,18 @@ namespace music
                            );
             if (MMSYSERR_NOERROR != mmr)
             {
-               LOG("midiOutMessage(DRV_QUERYDEVICEINTERFACESIZE) failed: mmr = 0x%08x", mmr);
+               INFORMATION("midiOutMessage(DRV_QUERYDEVICEINTERFACESIZE) failed: mmr = 0x%08x", mmr);
                return;
             }
 
             if (0 == size)
             {
-               LOG("No device interface");
+               INFORMATION("No device interface");
                return;
             }
             if (size % sizeof(WCHAR))
             {
-               LOG("Device interface length in bytes (%u) should be a multiple of the size_i32 of a WCHAR!", size);
+               INFORMATION("Device interface length in bytes (%u) should be a multiple of the size_i32 of a WCHAR!", size);
                return;
             }
 
@@ -244,18 +246,18 @@ namespace music
             wstr.release_string_buffer();
             if (MMSYSERR_NOERROR != mmr)
             {
-               LOG("midiOutMessage(DRV_QUERYDEVICEINTERFACE) failed: mmr = 0x%08x", mmr);
+               INFORMATION("midiOutMessage(DRV_QUERYDEVICEINTERFACE) failed: mmr = 0x%08x", mmr);
                return;
             }
 
             string str(wstr);
 
-            LOG("    Device interface: \"%s\"", str);
+            INFORMATION("    Device interface: \"%s\"", str);
          }
 
          void midi::mmsystem_LogMidiInCaps(UINT_PTR i, MIDIINCAPSW caps)
          {
-            LOG(
+            INFORMATION(
             "-- %u: %S --\n"
             "    Device ID: %u\n"
             "    Manufacturer identifier: %u\n"
@@ -297,7 +299,7 @@ namespace music
          void midi::mmsystem_LogMidiOutCaps(UINT_PTR i, MIDIOUTCAPSW caps)
          {
 
-            LOG(
+            INFORMATION(
             "-- %u: %S --\n"
             "    Device ID: %u\n"
             "    Manufacturer identifier: %u\n"
@@ -412,21 +414,19 @@ namespace music
          //}
 
 
-         __pointer(::music::midi::message_out) midi::get_message_out(const string& strDevice)
+         __pointer(::music::midi::message_out) midi::get_message_out(const string& strDeviceId)
          {
 
-            string strMMSystemDevice = strDevice;
-
-            auto & pmessageout = m_mapMessageOut[strMMSystemDevice];
+            auto & pmessageout = m_mapMessageOut[strDeviceId];
 
             if (!pmessageout)
             {
 
                auto pout = __new(out);
 
-               auto iPort = get_midi_out_device_port(strMMSystemDevice);
+               pout->initialize_message_out(this, strDeviceId);
 
-               pout->open((int) iPort);
+               pout->open();
 
                pmessageout = pout;
 
@@ -461,6 +461,23 @@ namespace music
 
          }
 
+
+         ::index midi::get_os_out_device_id(const ::string & strDevice)
+         {
+
+            return m_straDeviceOut.find_first(strDevice);
+
+         }
+
+
+         ::index midi::get_os_in_device_id(const ::string & strDevice)
+         {
+
+            return m_straDeviceIn.find_first(strDevice);
+
+         }
+
+
          void midi::enumerate_midi_out_devices()
          {
 
@@ -478,7 +495,13 @@ namespace music
                if (MMSYSERR_NOERROR == midiOutGetDevCapsW(uDev, &midioutcaps, sizeof(midioutcaps)))
                {
 
-                  add_midi_out_device(midioutcaps.szPname, m_strName);
+                  string strDeviceName = midioutcaps.szPname;
+
+                  string strDeviceId = m_strName + ":" + strDeviceName;
+
+                  add_midi_out_device(strDeviceName, strDeviceId);
+
+                  m_straDeviceOut.add(strDeviceId);
 
                }
 
@@ -506,7 +529,13 @@ namespace music
                if (MMSYSERR_NOERROR == midiInGetDevCapsW(uDev, &midiincaps, sizeof(midiincaps)))
                {
 
-                  add_midi_in_device(midiincaps.szPname, m_strName);
+                  string strDeviceName = midiincaps.szPname;
+
+                  string strDeviceId = m_strName + ":" + strDeviceName;
+
+                  add_midi_in_device(strDeviceName, strDeviceId);
+
+                  m_straDeviceIn.add(strDeviceId);
 
                }
 

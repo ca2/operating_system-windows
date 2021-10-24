@@ -289,7 +289,7 @@ namespace draw2d_gdi
 
    }
 
-   COLORREF graphics::GetNearestColor(COLORREF crColor)
+   ::color::color graphics::GetNearestColor(::color::color crColor)
    {
 
       return ::GetNearestColor(get_handle2(), crColor) ;
@@ -316,7 +316,7 @@ namespace draw2d_gdi
 
 
 
-   COLORREF graphics::GetBkColor()
+   ::color::color graphics::GetBkColor()
    {
 
       return ::GetBkColor(get_handle2());
@@ -362,7 +362,7 @@ namespace draw2d_gdi
 
 
 
-   COLORREF graphics::GetTextColor()
+   ::color::color graphics::GetTextColor()
    {
 
       return ::GetTextColor(get_handle2());
@@ -568,12 +568,12 @@ namespace draw2d_gdi
    }
 
 
-   bool graphics::RectVisible(const ::rectangle_i32 & rectangle)
+   bool graphics::rectVisible(const ::rectangle_i32 & rectangle)
    {
 
       ASSERT(get_handle1() != nullptr);
 
-      return ::RectVisible(get_handle1(),&rectangle) != false;
+      return ::rectVisible(get_handle1(),&rectangle) != false;
 
    }
 
@@ -627,7 +627,7 @@ namespace draw2d_gdi
 
       ASSERT(get_handle1() != nullptr);
 
-      COLORREF color32 = pbrush->m_color;
+      ::color::color color32 = pbrush->m_color;
 
       if (m_pimage->is_null())
       {
@@ -953,7 +953,7 @@ namespace draw2d_gdi
 
       }
 
-      ::draw2d::pen_pointer penPrevious = m_ppen;
+      ::draw2d::pen_pointer ppenPrevious = m_ppen;
 
       SelectObject(ppen);
 
@@ -970,7 +970,7 @@ namespace draw2d_gdi
 
       }
 
-      SelectObject(penPrevious);
+      SelectObject(ppenPrevious);
 
       return bOk;
 
@@ -1306,12 +1306,12 @@ namespace draw2d_gdi
             bf.SourceConstantAlpha = 0xFF;
             bf.AlphaFormat = AC_SRC_ALPHA;
             /*
-            COLORREF * pcolorref = GDI_GRAPHICS(pgraphicsSrc)->m_pimage->m_pcolorref;
+            ::color::color * pcolorref = GDI_GRAPHICS(pgraphicsSrc)->m_pimage->m_pcolorref;
             i32 cx = GDI_GRAPHICS(pgraphicsSrc)->m_pimage->cx;
             i32 cy = GDI_GRAPHICS(pgraphicsSrc)->m_pimage->cy;
             i32 scan = GDI_GRAPHICS(pgraphicsSrc)->m_pimage->scan;
 
-            COLORREF * pcolorref1 = m_pimage->m_pcolorref;
+            ::color::color * pcolorref1 = m_pimage->m_pcolorref;
             i32 cx1 = m_pimage->cx;
             i32 cy1 = m_pimage->cy;
             i32 scan1 = m_pimage->scan;
@@ -1325,8 +1325,8 @@ namespace draw2d_gdi
 
             for(int i = 0; i < nHeight; i++)
             {
-            byte * p = &((byte *) pcolorref)[scan * (i + ySrc) + xSrc * sizeof(COLORREF)];
-            byte * p1 = &((byte *) pcolorref1)[scan1 * (i + y) + x * sizeof(COLORREF)];
+            byte * p = &((byte *) pcolorref)[scan * (i + ySrc) + xSrc * sizeof(::color::color)];
+            byte * p1 = &((byte *) pcolorref1)[scan1 * (i + y) + x * sizeof(::color::color)];
             for(int j = 0; j < nWidth; j++)
             {
             p1[0] = ((p[0] * p[3]) + ((255 - p[3]) * p1[0]))/ 255;
@@ -1379,7 +1379,7 @@ namespace draw2d_gdi
 
             /*for(int y = 0; y < nHeight; y++)
             {
-            byte * p = &((byte *) pcolorref)[scan * (y + ySrc) + xSrc * sizeof(COLORREF)];
+            byte * p = &((byte *) pcolorref)[scan * (y + ySrc) + xSrc * sizeof(::color::color)];
             for(int x = 0; x < nWidth; x++)
             {
             if(p[3] == 0)
@@ -1400,7 +1400,7 @@ namespace draw2d_gdi
 
             /*            for(int i = 0; i < nHeight; i++)
             {
-            byte * p1 = &((byte *) pcolorref1)[scan1 * (i + y) + x * sizeof(COLORREF)];
+            byte * p1 = &((byte *) pcolorref1)[scan1 * (i + y) + x * sizeof(::color::color)];
             for(int j = 0; j < nWidth;jx++)
             {
             if(p1[3] == 0)
@@ -1503,7 +1503,7 @@ namespace draw2d_gdi
    }
 
 
-   COLORREF graphics::GetPixel(int x, int y)
+   ::color::color graphics::GetPixel(int x, int y)
    {
 
       ASSERT(get_handle1() != nullptr);
@@ -1513,7 +1513,7 @@ namespace draw2d_gdi
    }
 
 
-   COLORREF graphics::GetPixel(const ::point_i32 & point)
+   ::color::color graphics::GetPixel(const ::point_i32 & point)
    {
 
       ASSERT(get_handle1() != nullptr);
@@ -1523,7 +1523,7 @@ namespace draw2d_gdi
    }
 
 
-   COLORREF graphics::SetPixel(int x, int y, COLORREF crColor)
+   ::color::color graphics::SetPixel(int x, int y, ::color::color crColor)
    {
 
       ASSERT(get_handle1() != nullptr);
@@ -1533,7 +1533,7 @@ namespace draw2d_gdi
    }
 
 
-   COLORREF graphics::SetPixel(const ::point_i32 & point, COLORREF crColor)
+   ::color::color graphics::SetPixel(const ::point_i32 & point, ::color::color crColor)
    {
 
       ASSERT(get_handle1() != nullptr);
@@ -1543,7 +1543,7 @@ namespace draw2d_gdi
    }
 
 
-   bool graphics::FloodFill(int x, int y, COLORREF crColor)
+   bool graphics::FloodFill(int x, int y, ::color::color crColor)
    {
 
       ASSERT(get_handle1() != nullptr);
@@ -1553,7 +1553,7 @@ namespace draw2d_gdi
    }
 
 
-   bool graphics::ExtFloodFill(int x, int y, COLORREF crColor, UINT nFillType)
+   bool graphics::ExtFloodFill(int x, int y, ::color::color crColor, UINT nFillType)
    {
 
       ASSERT(get_handle1() != nullptr);
@@ -2018,19 +2018,19 @@ namespace draw2d_gdi
    }
 
    // graphics 3.1 Specific functions
-   UINT graphics::SetBoundsRect(const ::rectangle_i32 & rectBounds, UINT flags)
+   UINT graphics::SetBoundsRect(const ::rectangle_i32 & rectangleBounds, UINT flags)
    {
 
       ASSERT(get_handle1() != nullptr);
 
-      return ::SetBoundsRect(get_handle1(), &rectBounds, flags);
+      return ::SetBoundsRect(get_handle1(), &rectangleBounds, flags);
 
    }
 
 
-   UINT graphics::GetBoundsRect(LPRECT rectBounds, UINT flags)
+   UINT graphics::GetBoundsRect(LPRECT rectangleBounds, UINT flags)
    {
-      ASSERT(get_handle2() != nullptr); return ::GetBoundsRect(get_handle2(), rectBounds, flags);
+      ASSERT(get_handle2() != nullptr); return ::GetBoundsRect(get_handle2(), rectangleBounds, flags);
 
    }
 
@@ -2162,7 +2162,7 @@ namespace draw2d_gdi
    }
 
 
-   bool graphics::SetPixelV(int x, int y, COLORREF crColor)
+   bool graphics::SetPixelV(int x, int y, ::color::color crColor)
    {
 
       ASSERT(get_handle1() != nullptr);
@@ -2172,7 +2172,7 @@ namespace draw2d_gdi
    }
 
 
-   bool graphics::SetPixelV(const ::point_i32 & point, COLORREF crColor)
+   bool graphics::SetPixelV(const ::point_i32 & point, ::color::color crColor)
    {
 
       ASSERT(get_handle1() != nullptr);
@@ -2552,7 +2552,7 @@ namespace draw2d_gdi
 
       begin_path();
 
-      ::Rectangle(m_hdc, lprect->left, lprect->top, lprect->right, lprect->bottom);
+      ::rectangle(m_hdc, lprect->left, lprect->top, lprect->right, lprect->bottom);
 
       end_path();
 
@@ -2603,7 +2603,7 @@ namespace draw2d_gdi
    }
 
 
-   bool graphics::internal_fill_path(void(::draw2d_gdi::graphics::* pfnInternalSetPath)(void *),void * pparam,const ::rectangle_i32 & rectParam,::draw2d::brush * pbrush)
+   bool graphics::internal_fill_path(void(::draw2d_gdi::graphics::* pfnInternalSetPath)(void *),void * pparam,const ::rectangle_i32 & rectangleParam,::draw2d::brush * pbrush)
    {
 
       synchronous_lock ml(mutex());
@@ -2626,7 +2626,7 @@ namespace draw2d_gdi
       else
       {
 
-         ::rectangle_i32 rectangle(rectParam);
+         ::rectangle_i32 rectangle(rectangleParam);
 
          ::image_pointer pimage = image_work(rectangle.size(), false);
 
@@ -2766,7 +2766,7 @@ namespace draw2d_gdi
    }
 
 
-   bool graphics::internal_stroke_path(void(::draw2d_gdi::graphics::* pfnInternalSetPath)(void *),void * pparam,const ::rectangle_i32 & rectParam,::draw2d::pen * ppen)
+   bool graphics::internal_stroke_path(void(::draw2d_gdi::graphics::* pfnInternalSetPath)(void *),void * pparam,const ::rectangle_i32 & rectangleParam,::draw2d::pen * ppen)
    {
 
       synchronous_lock ml(mutex());
@@ -2789,11 +2789,11 @@ namespace draw2d_gdi
       else
       {
 
-         ::rectangle_i32 rectBound(rectParam);
+         ::rectangle_i32 rectangleBound(rectangleParam);
 
-         //m_sppath->get_bounding_rect(rectBound);
+         //m_sppath->get_bounding_rect(rectangleBound);
 
-         ::rectangle_i32 rectangle(rectBound);
+         ::rectangle_i32 rectangle(rectangleBound);
 
          rectangle.left   -= (i32) floor(pen.m_dWidth / 2.0);
          rectangle.right  += (i32) ceil(pen.m_dWidth / 2.0);
@@ -2816,7 +2816,7 @@ namespace draw2d_gdi
 
          pimage->g()->SelectObject(&pen);
 
-         pimage->g()->SetViewportOrg(-rectBound.top_left());
+         pimage->g()->SetViewportOrg(-rectangleBound.top_left());
 
          (GDI_GRAPHICS(pimage->g())->*pfnInternalSetPath)(pparam);
 
@@ -2840,7 +2840,7 @@ namespace draw2d_gdi
    }
 
 
-   bool graphics::internal_fill_and_stroke_path(void(::draw2d_gdi::graphics::* pfnInternalSetPath)(void *),void * pparam,const ::rectangle_i32 & rectParam,::draw2d::brush * pbrush,::draw2d::pen * ppen)
+   bool graphics::internal_fill_and_stroke_path(void(::draw2d_gdi::graphics::* pfnInternalSetPath)(void *),void * pparam,const ::rectangle_i32 & rectangleParam,::draw2d::brush * pbrush,::draw2d::pen * ppen)
    {
 
       synchronous_lock ml(mutex());
@@ -2850,12 +2850,12 @@ namespace draw2d_gdi
       ::draw2d::pen & pen = *ppen;
 
       if(pen.m_etype == ::draw2d::pen::e_type_null)
-         return internal_fill_path(pfnInternalSetPath, pparam, rectParam, pbrush);
+         return internal_fill_path(pfnInternalSetPath, pparam, rectangleParam, pbrush);
 
       ::draw2d::brush & brush = *pbrush;
 
       if(brush.m_etype == ::draw2d::brush::e_type_null)
-         return internal_stroke_path(pfnInternalSetPath, pparam, rectParam, ppen);
+         return internal_stroke_path(pfnInternalSetPath, pparam, rectangleParam, ppen);
 
       if(m_pimage->is_null())
       {
@@ -2868,9 +2868,9 @@ namespace draw2d_gdi
       else
       {
 
-         ::rectangle_i32 rectBound(rectParam);
+         ::rectangle_i32 rectangleBound(rectangleParam);
 
-         ::rectangle_i32 rectangle(rectBound);
+         ::rectangle_i32 rectangle(rectangleBound);
 
          rectangle.left   -= (i32) floor(pen.m_dWidth / 2.0);
          rectangle.right  += (i32) floor(pen.m_dWidth / 2.0);
@@ -2933,7 +2933,7 @@ namespace draw2d_gdi
 
             pimage->g()->SelectObject(&pen);
 
-            pimage->g()->SetViewportOrg(-rectBound.top_left());
+            pimage->g()->SetViewportOrg(-rectangleBound.top_left());
 
             (GDI_GRAPHICS(pimage->g())->*pfnInternalSetPath)(pparam);
 
@@ -2992,10 +2992,10 @@ namespace draw2d_gdi
    }
 
 
-   bool graphics::PlayMetaFile(HENHMETAFILE hEnhMF, const ::rectangle_i32 & rectBounds)
+   bool graphics::PlayMetaFile(HENHMETAFILE hEnhMF, const ::rectangle_i32 & rectangleBounds)
    {
 
-      return ::PlayEnhMetaFile(get_handle1(), hEnhMF, rectBounds) != false;
+      return ::PlayEnhMetaFile(get_handle1(), hEnhMF, rectangleBounds) != false;
 
    }
 
@@ -3018,7 +3018,7 @@ namespace draw2d_gdi
    {
 
 
-   ::rectangle_i32 rectIntersect(m_pointAlphaBlend, m_pimageAlphaBlend->size());
+   ::rectangle_i32 rectangleIntersect(m_pointAlphaBlend, m_pimageAlphaBlend->size());
 
 
    ::image_pointer pimageWork = nullptr;
@@ -3109,7 +3109,7 @@ namespace draw2d_gdi
       if(m_pimageAlphaBlend->is_set())
       {
 
-         ::rectangle_i32 rectIntersect(m_pointAlphaBlend, m_pimageAlphaBlend->size());
+         ::rectangle_i32 rectangleIntersect(m_pointAlphaBlend, m_pimageAlphaBlend->size());
 
          ::point_i32 pointSrc(xSrc, ySrc);
 
@@ -3213,7 +3213,7 @@ namespace draw2d_gdi
 
    // Always Inline. Functions only in Win98/Win2K or later
 
-   inline COLORREF graphics::GetDCBrushColor()
+   inline ::color::color graphics::GetDCBrushColor()
    {
 
       ASSERT(get_handle1() != nullptr);
@@ -3223,7 +3223,7 @@ namespace draw2d_gdi
    }
 
 
-   inline COLORREF graphics::SetDCBrushColor(COLORREF crColor)
+   inline ::color::color graphics::SetDCBrushColor(::color::color crColor)
    {
 
       ASSERT(get_handle1() != nullptr);
@@ -3234,7 +3234,7 @@ namespace draw2d_gdi
 
 
 
-   inline COLORREF graphics::GetDCPenColor()
+   inline ::color::color graphics::GetDCPenColor()
    {
 
       ASSERT(get_handle1() != nullptr);
@@ -3244,7 +3244,7 @@ namespace draw2d_gdi
    }
 
 
-   inline COLORREF graphics::SetDCPenColor(COLORREF crColor)
+   inline ::color::color graphics::SetDCPenColor(::color::color crColor)
    {
 
       ASSERT(get_handle1() != nullptr);
@@ -3462,7 +3462,7 @@ namespace draw2d_gdi
 
 
    //void graphics::DrawDragRect(const ::rectangle_i32 & rectangle, const ::size_i32 & size,
-   //                            const ::rectangle_i32 & rectLast, const ::size_i32 & sizeLast, ::draw2d::brush* pBrush, ::draw2d::brush* pBrushLast)
+   //                            const ::rectangle_i32 & rectangleLast, const ::size_i32 & sizeLast, ::draw2d::brush* pBrush, ::draw2d::brush* pBrushLast)
    //{
 
    //   // first, determine the update region and select it
@@ -3576,7 +3576,7 @@ namespace draw2d_gdi
    }
 
 
-   image graphics::fill_image_work(COLORREF clr, const ::size_i32 & size, bool bReset)
+   image graphics::fill_image_work(::color::color clr, const ::size_i32 & size, bool bReset)
    {
 
       image_descriptor d;
@@ -3608,7 +3608,7 @@ namespace draw2d_gdi
    }
 
 
-   void graphics::fill_rectangle(const ::rectangle_i32 & rectangle, COLORREF color32)
+   void graphics::fill_rectangle(const ::rectangle_i32 & rectangle, ::color::color color32)
    {
 
       synchronous_lock ml(mutex());
@@ -3655,7 +3655,7 @@ namespace draw2d_gdi
    }
 
 
-   void graphics::draw3d_rect(const ::rectangle_i32 & rectangle, COLORREF crTopLeft, COLORREF crBottomRight, const ::e_border & eborder)
+   void graphics::draw_inset_3d_rectangle(const ::rectangle_i32 & rectangle, ::color::color crTopLeft, ::color::color crBottomRight, const ::e_border & eborder)
    {
 
       int x = rectangle.left;
@@ -3941,7 +3941,7 @@ namespace draw2d_gdi
 
       // return dynamic_cast < ::draw2d::palette * > (::draw2d_gdi::object::from_handle(get_application(), ::SelectPalette(get_handle1(), (HPALETTE)pPalette->get_os_data(), bForceBackground))) != false;
 
-      ::exception::throw_not_implemented();
+      throw interface_only_exception();
 
       return nullptr;
 
@@ -3949,9 +3949,9 @@ namespace draw2d_gdi
 
 
 
-   COLORREF graphics::SetBkColor(COLORREF crColor)
+   ::color::color graphics::SetBkColor(::color::color crColor)
    {
-      COLORREF crRetVal = CLR_INVALID;
+      ::color::color crRetVal = CLR_INVALID;
       if(get_handle1() != nullptr && get_handle1() != get_handle2())
          crRetVal = ::SetBkColor(get_handle1(), crColor);
       if(get_handle2() != nullptr)
@@ -3999,9 +3999,9 @@ namespace draw2d_gdi
       return nRetVal;
    }
 
-   COLORREF graphics::SetTextColor(COLORREF crColor)
+   ::color::color graphics::SetTextColor(::color::color crColor)
    {
-      COLORREF crRetVal = CLR_INVALID;
+      ::color::color crRetVal = CLR_INVALID;
       if(get_handle1() != nullptr && get_handle1() != get_handle2())
          crRetVal = ::SetTextColor(get_handle1(), crColor);
       if(get_handle2() != nullptr)
@@ -4275,13 +4275,13 @@ namespace draw2d_gdi
 
       rectangle.bottom_right() = point;
 
-      ::rectangle_i32 rectBound(rectangle);
+      ::rectangle_i32 rectangleBound(rectangle);
 
-      __sort(rectBound.left, rectBound.right);
+      __sort(rectangleBound.left, rectangleBound.right);
 
-      __sort(rectBound.top, rectBound.bottom);
+      __sort(rectangleBound.top, rectangleBound.bottom);
 
-      internal_stroke_path(&::draw2d_gdi::graphics::internal_set_path_line, &rectangle, rectBound, m_ppen);
+      internal_stroke_path(&::draw2d_gdi::graphics::internal_set_path_line, &rectangle, rectangleBound, m_ppen);
 
       ::MoveToEx(m_hdc, rectangle.right, rectangle.bottom, nullptr);
 
@@ -4583,10 +4583,10 @@ namespace draw2d_gdi
          (dynamic_cast<::draw2d_gdi::graphics * >(pgraphics))->RestoreDC((int)(short)pMetaRec->rdParm[0]);
          break;
       case META_SETBKCOLOR:
-         (dynamic_cast<::draw2d_gdi::graphics * >(pgraphics))->SetBkColor(*(UNALIGNED COLORREF*)&pMetaRec->rdParm[0]);
+         (dynamic_cast<::draw2d_gdi::graphics * >(pgraphics))->SetBkColor(*(UNALIGNED ::color::color*)&pMetaRec->rdParm[0]);
          break;
       case META_SETTEXTCOLOR:
-         (dynamic_cast<::draw2d_gdi::graphics * >(pgraphics))->SetTextColor(*(UNALIGNED COLORREF*)&pMetaRec->rdParm[0]);
+         (dynamic_cast<::draw2d_gdi::graphics * >(pgraphics))->SetTextColor(*(UNALIGNED ::color::color*)&pMetaRec->rdParm[0]);
          break;
 
       // need to watch out for SelectObject(HFONT), for custom font mapping

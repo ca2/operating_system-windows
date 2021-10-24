@@ -1,70 +1,67 @@
 #pragma once
 
 
-#undef UNREFERENCED_PARAMETER
-#undef MAKELPARAM
-#undef MAKELONG
-#undef Node
-#undef LOBYTE
-#undef Context
-#undef User
-#undef Audio
-
-
-
 #ifdef _WINDOWS_
 #error WINDOWS.H already included.  ca2 apps must not #include <windows.h>
 #endif
 
 
-// certain parts of WINDOWS.H are necessary
-#undef NOKERNEL
-#undef NOGDI
-#undef NOUSER
-#undef NODRIVERS
-#undef NOLOGERROR
-#undef NOPROFILER
-#undef NOMEMMGR
-#undef NOLFILEIO
-#undef NOOPENFILE
-#undef NORESOURCE
-#undef NOATOM
-#undef NOMETAFILE
-#undef NOLANGUAGE
-#undef NOLSTRING
-#undef NODBCS
-#undef NOKEYBOARDINFO
-#undef NOGDICAPMASKS
-#undef NOCOLOR
-#undef NOGDIOBJ
-#undef NODRAWTEXT
-#undef NOTEXTMETRICW
-#undef NOSCALABLEFONT
-#undef NOBITMAP
-#undef NORASTEROPS
-#undef NOSYSMETRICS
-#undef NOSYSTEMPARAMSINFO
-#undef NOMSG
-#undef NOWINSTYLES
-#undef NOWINOFFSETS
-#undef NOSHOWWINDOW
-#undef NODEFERWINDOWPOS
-#undef NOVIRTUALKEYCODES
-#undef NOKEYSTATES
-#undef NOWH
-#undef NOMENUS
-#undef NOSCROLL
-#undef NOCLIPBOARD
-#undef NOICONS
-#undef NOMB
-#undef NOSYSCOMMANDS
-#undef NOMDI
-#undef NOCTLMGR
-#undef NOWINMESSAGES
+#define boolean windows_boolean
+#undef ERROR
+
+//
+//
+//// certain parts of WINDOWS.H are necessary
+//#undef NOKERNEL
+//#define NOGDI
+//#undef NOUSER
+//#undef NODRIVERS
+//#undef NOLOGERROR
+//#undef NOPROFILER
+//#undef NOMEMMGR
+//#undef NOLFILEIO
+//#undef NOOPENFILE
+//#undef NORESOURCE
+//#undef NOATOM
+//#undef NOMETAFILE
+//#undef NOLANGUAGE
+//#undef NOLSTRING
+//#undef NODBCS
+//#undef NOKEYBOARDINFO
+//#undef NOGDICAPMASKS
+//#undef NOCOLOR
+//#undef NOGDIOBJ
+//#undef NODRAWTEXT
+//#undef NOTEXTMETRICW
+//#undef NOSCALABLEFONT
+//#undef NOBITMAP
+//#undef NORASTEROPS
+//#undef NOSYSMETRICS
+//#undef NOSYSTEMPARAMSINFO
+//#undef NOMSG
+//#undef NOWINSTYLES
+//#undef NOWINOFFSETS
+//#undef NOSHOWWINDOW
+//#undef NODEFERWINDOWPOS
+//#undef NOVIRTUALKEYCODES
+//#undef NOKEYSTATES
+//#undef NOWH
+//#undef NOMENUS
+//#undef NOSCROLL
+//#undef NOCLIPBOARD
+//#undef NOICONS
+//#undef NOMB
+//#undef NOSYSCOMMANDS
+//#undef NOMDI
+//#undef NOCTLMGR
+//#undef NOWINMESSAGES
+//
+
 
 #ifndef WIN32
 #define WIN32
 #endif
+
 
 #ifndef WIN32_LEAN_AND_MEAN
 #define WIN32_LEAN_AND_MEAN
@@ -83,7 +80,6 @@
 #include <inttypes.h>
 
 #pragma warning(pop)
-
 
 #include <zmouse.h>
 
@@ -113,5 +109,10 @@ typedef struct HKEY__ *HKEY;
 
 #undef minimum
 #undef maximum
+#undef boolean
+#undef ERROR
+#define ERROR_REGION 0
+#define ERROR(...) TRACE_LOG_ERROR(__VA_ARGS__)
+
 
 

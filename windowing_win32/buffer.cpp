@@ -7,6 +7,9 @@ namespace windowing_win32
 {
 
 
+   //CLASS_DECL_WINDOWING_WIN32 HBITMAP create_windows_dib(const ::size_i32 & size, i32 * piScan, ::color32_t ** ppdata);
+
+
    buffer::os_buffer::os_buffer()
    {
 
@@ -65,7 +68,7 @@ namespace windowing_win32
 
       defer_create_mutex();
 
-      m_rectLast.Null();
+      m_rectangleLast.Null();
 
    }
 
@@ -589,34 +592,34 @@ namespace windowing_win32
 
             //::SetWindowPos(get_hwnd(), HWND_TOPMOST, point.x, point.y, size.cx, size.cy, SWP_NOZORDER);
 
-            string strType = ::str::demangle(m_pimpl->m_puserinteraction->type_name());
+            string strType = __type_name(m_pimpl->m_puserinteraction);
 
             if (strType.contains_ci("font_format"))
             {
 
-               INFO("font_format going to UpdateLayeredWindow");
+               INFORMATION("font_format going to UpdateLayeredWindow");
 
                bool bVisible = IsWindowVisible(get_hwnd());
 
                if (bVisible)
                {
 
-                  INFO("font_format is visible!!");
+                  INFORMATION("font_format is visible!!");
 
                }
                else
                {
 
-                  INFO("font_format ISN'T visible!!");
+                  INFORMATION("font_format ISN'T visible!!");
 
                }
 
-               RECT rectProbe;
+               RECT rectangleProbe;
 
-               if (::GetWindowRect(get_hwnd(), &rectProbe))
+               if (::GetWindowRect(get_hwnd(), &rectangleProbe))
                {
 
-                  INFO("GetWindowRect (%d, %d) - (%d, %d)", rectProbe.left, rectProbe.top, rectProbe.right, rectProbe.bottom);
+                  INFORMATION("GetWindowRect (%d, %d) - (%d, %d)", rectangleProbe.left, rectangleProbe.top, rectangleProbe.right, rectangleProbe.bottom);
 
                }
 
@@ -631,13 +634,13 @@ namespace windowing_win32
 
                string str;
 
-               rectangle_i32 rectDrawing(point, size);
+               rectangle_i32 rectangleDrawing(point, size);
 
-               rectangle_i32 rectWindowCurrent;
+               rectangle_i32 rectangleWindowCurrent;
 
-               GetWindowRect(hwnd, (RECT *) &rectWindowCurrent);
+               GetWindowRect(hwnd, (RECT *) &rectangleWindowCurrent);
 
-               if (rectDrawing.size() == pimage->m_rectTag.size())
+               if (rectangleDrawing.size() == pimage->m_rectangleTag.size())
                {
 
 
@@ -650,16 +653,16 @@ namespace windowing_win32
                //}
 
 
-               //if (rectDrawing.size() == pimage->m_rectTag.size())
+               //if (rectangleDrawing.size() == pimage->m_rectangleTag.size())
                //{
 
 
                   ::UpdateLayeredWindow(hwnd, m_hdcScreen, (POINT*)&point, (SIZE*)&size, buffer.m_hdc, (POINT*)&pointSrc, rgb(0, 0, 0), &blendPixelFunction, ULW_ALPHA);
                   //::SetWindowPos(hwnd, nullptr,
-                  //   rectDrawing.left,
-                  //   rectDrawing.top,
-                  //   rectDrawing.width(),
-                  //   rectDrawing.height(),
+                  //   rectangleDrawing.left,
+                  //   rectangleDrawing.top,
+                  //   rectangleDrawing.width(),
+                  //   rectangleDrawing.height(),
                   //   SWP_NOZORDER
                   //   | SWP_ASYNCWINDOWPOS
                   //   | SWP_FRAMECHANGED
@@ -686,7 +689,7 @@ namespace windowing_win32
 
                }
 
-               TRACE("UpdateLayeredWindow Bottom Right (%d, %d)", pointBottomRight.x, pointBottomRight.y);
+               //TRACE("UpdateLayeredWindow Bottom Right (%d, %d)", pointBottomRight.x, pointBottomRight.y);
 
 
             }
@@ -749,7 +752,7 @@ namespace windowing_win32
 
                int iResult = ::GetClipBox(m_hdcScreen, &rClipScreen);
 
-               if (iResult == ERROR || iResult == NULLREGION)
+               if (iResult == ERROR_REGION || iResult == NULLREGION)
                {
 
                }
@@ -773,7 +776,7 @@ namespace windowing_win32
 
                int iResult = ::GetClipBox(buffer.m_hdc, &rClip);
 
-               if (iResult == ERROR || iResult == NULLREGION)
+               if (iResult == ERROR_REGION || iResult == NULLREGION)
                {
                }
                else

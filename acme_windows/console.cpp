@@ -194,7 +194,7 @@ namespace windows
    void console::write(const ::string & psz)
    {
 
-      write_memory_to_file(stdout,psz,strlen(psz),nullptr);
+      m_psystem->m_pacmefile->write(stdout,psz,strlen(psz),nullptr);
 
    }
 

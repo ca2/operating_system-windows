@@ -121,7 +121,7 @@ namespace windowing_win32
 
       synchronous_lock synchronouslock(mutex());
 
-      return m_rectaMonitor.get_count();
+      return m_rectangleaMonitor.get_count();
 
 #else
 
@@ -186,7 +186,7 @@ namespace windowing_win32
 //
 //      }
 //
-//      *prectangle = m_rectaMonitor[iMonitor];
+//      *prectangle = m_rectangleaMonitor[iMonitor];
 //
 //
 //#elif defined(__APPLE__)
@@ -344,7 +344,7 @@ namespace windowing_win32
 //
 //      }
 //
-//      *prectangle = m_rectaWkspace[iWkspace];
+//      *prectangle = m_rectangleaWkspace[iWkspace];
 //
 //
 //      return true;
@@ -418,27 +418,27 @@ namespace windowing_win32
 
    //   ::rectangle_i32 rectangle(*prectangle);
 
-   //   ::rectangle_i32 rectWkspace;
+   //   ::rectangle_i32 rectangleWkspace;
 
-   //   if (!get_wkspace_rect(iWkspace, rectWkspace))
+   //   if (!get_wkspace_rect(iWkspace, rectangleWkspace))
    //   {
 
    //      return false;
 
    //   }
 
-   //   rectangle -= rectWkspace.top_left();
+   //   rectangle -= rectangleWkspace.top_left();
 
-   //   ::rectangle_i32 rectMonitor;
+   //   ::rectangle_i32 rectangleMonitor;
 
-   //   if (!get_monitor_rect(iMonitor, rectMonitor))
+   //   if (!get_monitor_rect(iMonitor, rectangleMonitor))
    //   {
 
    //      return false;
 
    //   }
 
-   //   rectangle += rectMonitor.top_left();
+   //   rectangle += rectangleMonitor.top_left();
 
    //   *prectangle = rectangle;
 
@@ -472,27 +472,27 @@ namespace windowing_win32
 
    //   ::rectangle_i32 rectangle(prectangle);
 
-   //   ::rectangle_i32 rectMonitor;
+   //   ::rectangle_i32 rectangleMonitor;
 
-   //   if (!get_monitor_rect(iMonitor, rectMonitor))
+   //   if (!get_monitor_rect(iMonitor, rectangleMonitor))
    //   {
 
    //      return false;
 
    //   }
 
-   //   rectangle -= rectMonitor.top_left();
+   //   rectangle -= rectangleMonitor.top_left();
 
-   //   ::rectangle_i32 rectWkspace;
+   //   ::rectangle_i32 rectangleWkspace;
 
-   //   if (!get_wkspace_rect(iWkspace, rectWkspace))
+   //   if (!get_wkspace_rect(iWkspace, rectangleWkspace))
    //   {
 
    //      return false;
 
    //   }
 
-   //   rectangle += rectWkspace.top_left();
+   //   rectangle += rectangleWkspace.top_left();
 
    //   *prectangle = rectangle;
 
@@ -501,32 +501,32 @@ namespace windowing_win32
    //}
 
 
-   void display::_get_monitor(rectangle_i32_array & rectaMonitor, rectangle_i32_array & rectaIntersect, const rectangle_i32 & rectParam)
+   void display::_get_monitor(rectangle_i32_array & rectaMonitor, rectangle_i32_array & rectaIntersect, const rectangle_i32 & rectangleParam)
    {
 
       for (index iMonitor = 0; iMonitor < get_monitor_count(); iMonitor++)
       {
 
-         ::rectangle_i32 rectIntersect;
+         ::rectangle_i32 rectangleIntersect;
 
-         ::rectangle_i32 rectMonitor;
+         ::rectangle_i32 rectangleMonitor;
 
          auto pmonitor = get_monitor(iMonitor);
 
-         if (pmonitor->get_monitor_rectangle(rectMonitor))
+         if (pmonitor->get_monitor_rectangle(rectangleMonitor))
          {
 
          }
 
-         if (rectIntersect.top_left_null_intersect(&rectParam, rectMonitor))
+         if (rectangleIntersect.top_left_null_intersect(&rectangleParam, rectangleMonitor))
          {
 
-            if (rectIntersect.area() >= 0)
+            if (rectangleIntersect.area() >= 0)
             {
 
-               rectaMonitor.add(rectMonitor);
+               rectaMonitor.add(rectangleMonitor);
 
-               rectaIntersect.add(rectIntersect);
+               rectaIntersect.add(rectangleIntersect);
 
             }
 
@@ -548,14 +548,14 @@ namespace windowing_win32
    i64 g_i_get_best_zoneing = 0;
 
    
-   index display::_get_best_zoneing(edisplay * pedisplay, ::rectangle_i32 * prectangle, const ::rectangle_i32 & rectRequest, bool bPreserveSize)
+   index display::_get_best_zoneing(edisplay * pedisplay, ::rectangle_i32 * prectangle, const ::rectangle_i32 & rectangleRequest, bool bPreserveSize)
    {
 
-      ::rectangle_i32 rectangle(rectRequest);
+      ::rectangle_i32 rectangle(rectangleRequest);
 
-      ::rectangle_i32 rectWkspace;
+      ::rectangle_i32 rectangleWkspace;
 
-      index iBestWkspace = get_best_wkspace(&rectWkspace, rectangle);
+      index iBestWkspace = get_best_wkspace(&rectangleWkspace, rectangle);
 
       edisplay edisplay;
 
@@ -565,7 +565,7 @@ namespace windowing_win32
 
       double dMargin = psystem->m_dpi;
 
-      if (ZONEING_COMPARE::is_equal(rectangle.top, rectWkspace.top, dMargin, !(edisplayPrevious & e_display_top)))
+      if (ZONEING_COMPARE::is_equal(rectangle.top, rectangleWkspace.top, dMargin, !(edisplayPrevious & e_display_top)))
       {
 
          edisplay |= e_display_top;
@@ -573,18 +573,18 @@ namespace windowing_win32
          if (bPreserveSize)
          {
 
-            rectangle.move_top_to(rectWkspace.top);
+            rectangle.move_top_to(rectangleWkspace.top);
 
          }
          else
          {
 
-            rectangle.top = rectWkspace.top;
+            rectangle.top = rectangleWkspace.top;
 
          }
 
       }
-      else if (ZONEING_COMPARE::is_equal(rectangle.bottom, rectWkspace.bottom, dMargin, !(edisplayPrevious & e_display_bottom)))
+      else if (ZONEING_COMPARE::is_equal(rectangle.bottom, rectangleWkspace.bottom, dMargin, !(edisplayPrevious & e_display_bottom)))
       {
 
          edisplay |= e_display_bottom;
@@ -592,19 +592,19 @@ namespace windowing_win32
          if (bPreserveSize)
          {
 
-            rectangle.move_bottom_to(rectWkspace.bottom);
+            rectangle.move_bottom_to(rectangleWkspace.bottom);
 
          }
          else
          {
 
-            rectangle.bottom = rectWkspace.bottom;
+            rectangle.bottom = rectangleWkspace.bottom;
 
          }
 
       }
 
-      if (ZONEING_COMPARE::is_equal(rectRequest.left, rectWkspace.left, dMargin, !(edisplayPrevious & e_display_left)))
+      if (ZONEING_COMPARE::is_equal(rectangleRequest.left, rectangleWkspace.left, dMargin, !(edisplayPrevious & e_display_left)))
       {
 
          edisplay |= e_display_left;
@@ -612,18 +612,18 @@ namespace windowing_win32
          if (bPreserveSize)
          {
 
-            rectangle.move_left_to(rectWkspace.left);
+            rectangle.move_left_to(rectangleWkspace.left);
 
          }
          else
          {
 
-            rectangle.left = rectWkspace.left;
+            rectangle.left = rectangleWkspace.left;
 
          }
 
       }
-      else if (ZONEING_COMPARE::is_equal(rectRequest.right, rectWkspace.right, dMargin, !(edisplayPrevious & e_display_right)))
+      else if (ZONEING_COMPARE::is_equal(rectangleRequest.right, rectangleWkspace.right, dMargin, !(edisplayPrevious & e_display_right)))
       {
 
          edisplay |= e_display_right;
@@ -631,13 +631,13 @@ namespace windowing_win32
          if (bPreserveSize)
          {
 
-            rectangle.move_right_to(rectWkspace.right);
+            rectangle.move_right_to(rectangleWkspace.right);
 
          }
          else
          {
 
-            rectangle.right = rectWkspace.right;
+            rectangle.right = rectangleWkspace.right;
 
          }
 
@@ -647,16 +647,16 @@ namespace windowing_win32
          && is_different(edisplay & e_display_left, edisplay & e_display_right))
       {
 
-         if (ZONEING_COMPARE::is_centered(rectWkspace.top, rectangle.top, rectangle.bottom, rectWkspace.bottom))
+         if (ZONEING_COMPARE::is_centered(rectangleWkspace.top, rectangle.top, rectangle.bottom, rectangleWkspace.bottom))
          {
 
             edisplay |= e_display_bottom;
 
             edisplay |= e_display_top;
 
-            rectangle.bottom = rectWkspace.bottom;
+            rectangle.bottom = rectangleWkspace.bottom;
 
-            rectangle.top = rectWkspace.top;
+            rectangle.top = rectangleWkspace.top;
 
          }
 
@@ -666,16 +666,16 @@ namespace windowing_win32
          && is_different(edisplay & e_display_top, edisplay & e_display_bottom))
       {
 
-         if (ZONEING_COMPARE::is_centered(rectWkspace.left, rectangle.left, rectangle.right, rectWkspace.right))
+         if (ZONEING_COMPARE::is_centered(rectangleWkspace.left, rectangle.left, rectangle.right, rectangleWkspace.right))
          {
 
             edisplay |= e_display_left;
 
             edisplay |= e_display_right;
 
-            rectangle.left = rectWkspace.left;
+            rectangle.left = rectangleWkspace.left;
 
-            rectangle.right = rectWkspace.right;
+            rectangle.right = rectangleWkspace.right;
 
          }
 
@@ -752,13 +752,13 @@ namespace windowing_win32
       else if (edisplay == e_display_zoomed)
       {
 
-         *prectangle = rectWkspace;
+         *prectangle = rectangleWkspace;
 
       }
       else
       {
 
-         *prectangle = rectRequest;
+         *prectangle = rectangleRequest;
 
       }
 
@@ -793,14 +793,14 @@ namespace windowing_win32
       //      strP += "B";
 
       //   ::output_debug_string(
-      //      "w" + ::str::from(rectWkspace.left) + ","
-      //      + ::str::from(rectWkspace.top) + ","
-      //      + ::str::from(rectWkspace.right) + ","
-      //      + ::str::from(rectWkspace.bottom) + " " +
-      //      "r" + ::str::from(prectangle->left) + ","
-      //      + ::str::from(prectangle->top) + ","
-      //      + ::str::from(prectangle->right) + ","
-      //      + ::str::from(prectangle->bottom) + " " +
+      //      "w" + __string(rectangleWkspace.left) + ","
+      //      + __string(rectangleWkspace.top) + ","
+      //      + __string(rectangleWkspace.right) + ","
+      //      + __string(rectangleWkspace.bottom) + " " +
+      //      "r" + __string(prectangle->left) + ","
+      //      + __string(prectangle->top) + ","
+      //      + __string(prectangle->right) + ","
+      //      + __string(prectangle->bottom) + " " +
       //      strE + " " + strP + "\n");
 
       //}
@@ -808,10 +808,10 @@ namespace windowing_win32
 
       //g_i_get_best_zoneing++;
 
-      //   rectWkspace.left,
-      //   rectWkspace.top,
-      //   rectWkspace.right,
-      //   rectWkspace.bottom,
+      //   rectangleWkspace.left,
+      //   rectangleWkspace.top,
+      //   rectangleWkspace.right,
+      //   rectangleWkspace.bottom,
       //   (edisplay & e_display_left)?'L':' ',
       //   (edisplay & e_display_top) ? 'T':' ',
       //   (edisplay & e_display_right) ? 'R':' ',
@@ -826,16 +826,16 @@ namespace windowing_win32
    }
 
 
-   index display::get_best_monitor(RECTANGLE_I32 * prectangle, const rectangle_i32 & rectParam, ::e_activation eactivation)
+   index display::get_best_monitor(RECTANGLE_I32 * prectangle, const rectangle_i32 & rectangleParam, ::e_activation eactivation)
    {
 
       index iMatchingMonitor = -1;
 
       i64 iBestArea = -1;
 
-      ::rectangle_i32 rectMatch;
+      ::rectangle_i32 rectangleMatch;
 
-      ::rectangle_i32 rectangle(rectParam);
+      ::rectangle_i32 rectangle(rectangleParam);
 
       if (eactivation & e_activation_under_mouse_cursor || rectangle.is_null())
       {
@@ -849,36 +849,36 @@ namespace windowing_win32
       for (index iMonitor = 0; iMonitor < get_monitor_count(); iMonitor++)
       {
 
-         ::rectangle_i32 rectIntersect;
+         ::rectangle_i32 rectangleIntersect;
 
-         ::rectangle_i32 rectMonitor;
+         ::rectangle_i32 rectangleMonitor;
 
          auto pmonitor = get_monitor(iMonitor);
 
-         if (pmonitor->get_monitor_rectangle(rectMonitor))
+         if (pmonitor->get_monitor_rectangle(rectangleMonitor))
          {
 
-            if (rectIntersect.top_left_null_intersect(rectangle, rectMonitor))
+            if (rectangleIntersect.top_left_null_intersect(rectangle, rectangleMonitor))
             {
 
-               if (rectIntersect.area() > iBestArea)
+               if (rectangleIntersect.area() > iBestArea)
                {
 
                   iMatchingMonitor = iMonitor;
 
-                  iBestArea = rectIntersect.area();
+                  iBestArea = rectangleIntersect.area();
 
-                  rectMatch = rectMonitor;
+                  rectangleMatch = rectangleMonitor;
 
                }
 
             }
-            else if (rectMonitor.contains(rectangle))
+            else if (rectangleMonitor.contains(rectangle))
             {
 
                iMatchingMonitor = iMonitor;
 
-               rectMatch = rectMonitor;
+               rectangleMatch = rectangleMonitor;
 
             }
 
@@ -892,7 +892,7 @@ namespace windowing_win32
          if (prectangle != nullptr)
          {
 
-            *prectangle = rectMatch;
+            *prectangle = rectangleMatch;
 
          }
 
@@ -907,16 +907,16 @@ namespace windowing_win32
    }
 
 
-   index display::get_best_wkspace(::rectangle_i32 * prectangle, const rectangle_i32 & rectParam, ::e_activation eactivation)
+   index display::get_best_wkspace(::rectangle_i32 * prectangle, const rectangle_i32 & rectangleParam, ::e_activation eactivation)
    {
 
       index iMatchingWkspace = -1;
 
       i64 iBestArea = -1;
 
-      ::rectangle_i32 rectMatch;
+      ::rectangle_i32 rectangleMatch;
 
-      ::rectangle_i32 rectangle(rectParam);
+      ::rectangle_i32 rectangle(rectangleParam);
 
       if (eactivation & e_activation_under_mouse_cursor || rectangle.is_null())
       {
@@ -930,36 +930,36 @@ namespace windowing_win32
       for (index iWorkspace = 0; iWorkspace < get_workspace_count(); iWorkspace++)
       {
 
-         ::rectangle_i32 rectIntersect;
+         ::rectangle_i32 rectangleIntersect;
 
-         ::rectangle_i32 rectMonitor;
+         ::rectangle_i32 rectangleMonitor;
 
          auto pmonitor = get_monitor(iWorkspace);
 
-         if (pmonitor->get_workspace_rectangle(rectMonitor))
+         if (pmonitor->get_workspace_rectangle(rectangleMonitor))
          {
 
-            if (rectIntersect.top_left_null_intersect(rectangle, rectMonitor))
+            if (rectangleIntersect.top_left_null_intersect(rectangle, rectangleMonitor))
             {
 
-               if (rectIntersect.area() > iBestArea)
+               if (rectangleIntersect.area() > iBestArea)
                {
 
                   iMatchingWkspace = iWorkspace;
 
-                  iBestArea = rectIntersect.area();
+                  iBestArea = rectangleIntersect.area();
 
-                  rectMatch = rectMonitor;
+                  rectangleMatch = rectangleMonitor;
 
                }
 
             }
-            else if (rectMonitor.contains(rectangle))
+            else if (rectangleMonitor.contains(rectangle))
             {
 
                iMatchingWkspace = iWorkspace;
 
-               rectMatch = rectMonitor;
+               rectangleMatch = rectangleMonitor;
 
             }
 
@@ -973,7 +973,7 @@ namespace windowing_win32
          if (prectangle != nullptr)
          {
 
-            *prectangle = rectMatch;
+            *prectangle = rectangleMatch;
 
          }
 
@@ -988,20 +988,20 @@ namespace windowing_win32
    }
 
 
-   index display::get_good_iconify(RECTANGLE_I32 * prectangle, const rectangle_i32 & rectParam)
+   index display::get_good_iconify(RECTANGLE_I32 * prectangle, const rectangle_i32 & rectangleParam)
    {
 
-      ::rectangle_i32 rectMonitor;
+      ::rectangle_i32 rectangleMonitor;
 
-      index iMatchingMonitor = get_best_monitor(rectMonitor, rectParam);
+      index iMatchingMonitor = get_best_monitor(rectangleMonitor, rectangleParam);
 
-      prectangle->left = rectMonitor.left;
+      prectangle->left = rectangleMonitor.left;
 
-      prectangle->top = rectMonitor.top;
+      prectangle->top = rectangleMonitor.top;
 
-      prectangle->right = rectMonitor.left;
+      prectangle->right = rectangleMonitor.left;
 
-      prectangle->bottom = rectMonitor.top;
+      prectangle->bottom = rectangleMonitor.top;
 
       return iMatchingMonitor;
 
@@ -1080,8 +1080,8 @@ namespace windowing_win32
    void display::monitor_enum(HMONITOR hmonitor, HDC hdcMonitor, LPRECT prcMonitor)
    {
 
-      UNREFERENCED_PARAMETER(hdcMonitor);
-      UNREFERENCED_PARAMETER(prcMonitor);
+      __UNREFERENCED_PARAMETER(hdcMonitor);
+      __UNREFERENCED_PARAMETER(prcMonitor);
 
       m_monitorinfoa.allocate(m_monitorinfoa.get_size() + 1);
 
@@ -1164,7 +1164,7 @@ namespace windowing_win32
    //bool user::impl_set_os_desktop_theme(string strTheme)
    //{
 
-   //   UNREFERENCED_PARAMETER(strTheme);
+   //   __UNREFERENCED_PARAMETER(strTheme);
 
    //   return true;
 

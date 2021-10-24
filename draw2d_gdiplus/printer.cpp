@@ -83,7 +83,7 @@ namespace draw2d_gdiplus
 
    bool printer::document_properties::initialize(::draw2d::printer * pprinterParam, DEVMODE * pdevmode)
    {
-      UNREFERENCED_PARAMETER(pdevmode);
+      __UNREFERENCED_PARAMETER(pdevmode);
       if (m_pdevmode != nullptr)
          return false;
       if (m_hdc != nullptr)
@@ -93,7 +93,7 @@ namespace draw2d_gdiplus
       m_pdevmode = (DEVMODE *)malloc(iSize);
       if (!DocumentProperties(nullptr, pprinter->m_hPrinter, (LPWSTR)(LPCWSTR)pprinter->m_wstrName, m_pdevmode, nullptr, DM_OUT_BUFFER))
       {
-         __throw(::exception::exception("failed to get printer DocumentProperties"));
+         __throw(::exception("failed to get printer DocumentProperties"));
          return false;
       }
       return true;

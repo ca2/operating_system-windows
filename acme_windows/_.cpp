@@ -5,7 +5,7 @@
 //void CLASS_DECL_ACME_WINDOWS __cdecl _ca2_purecall()
 //{
 //
-//   __throw(::exception::exception());
+//   __throw(::exception());
 //
 //}
 //
@@ -74,38 +74,38 @@ namespace windows
    }
 
 
-   ::i32 reg_query_value(HKEY hkey, const ::string & pszSubKey, string& str)
-   {
+   //::i32 reg_query_value(HKEY hkey, const ::string & pszSubKey, string& str)
+   //{
 
-      DWORD dwType = 0;
-      DWORD dwSize = 0;
-      ::i32 lResult = RegQueryValueExW(hkey, wstring(pszSubKey), nullptr, &dwType, nullptr, &dwSize);
+   //   DWORD dwType = 0;
+   //   DWORD dwSize = 0;
+   //   ::i32 lResult = RegQueryValueExW(hkey, wstring(pszSubKey), nullptr, &dwType, nullptr, &dwSize);
 
-      if (lResult != ERROR_SUCCESS)
-         return lResult;
-      ASSERT(dwType == REG_SZ || dwType == REG_MULTI_SZ || dwType == REG_EXPAND_SZ);
-      if (dwType == REG_SZ || dwType == REG_MULTI_SZ || dwType == REG_EXPAND_SZ)
-      {
+   //   if (lResult != ERROR_SUCCESS)
+   //      return lResult;
+   //   ASSERT(dwType == REG_SZ || dwType == REG_MULTI_SZ || dwType == REG_EXPAND_SZ);
+   //   if (dwType == REG_SZ || dwType == REG_MULTI_SZ || dwType == REG_EXPAND_SZ)
+   //   {
 
-         natural_wstring pwsz(byte_count, dwSize);
+   //      natural_wstring pwsz(byte_count, dwSize);
 
-         lResult = RegQueryValueExW(hkey, wstring(pszSubKey), nullptr, &dwType, (byte*)(unichar*)pwsz, &dwSize);
+   //      lResult = RegQueryValueExW(hkey, wstring(pszSubKey), nullptr, &dwType, (byte*)(unichar*)pwsz, &dwSize);
 
-         str = pwsz;
+   //      str = pwsz;
 
-         //str.release_string_buffer(dwSize);
+   //      //str.release_string_buffer(dwSize);
 
-         return lResult;
+   //      return lResult;
 
-      }
-      else
-      {
+   //   }
+   //   else
+   //   {
 
-         return ERROR_NOT_SUPPORTED;
+   //      return ERROR_NOT_SUPPORTED;
 
-      }
+   //   }
 
-   }
+   //}
 
 
    HICON extract_icon(HINSTANCE hInst, const ::string & pszExeFileName, ::u32 nIconIndex)

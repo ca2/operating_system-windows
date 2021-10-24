@@ -5,7 +5,7 @@ namespace production
 {
 
 
-   class view;
+   class impact;
 
 
    class CLASS_DECL_CA2_PRODUCTION application :
@@ -14,7 +14,7 @@ namespace production
    public:
 
 
-      view * m_pview;
+      impact * m_pimpact;
       
       
       __pointer(::user::single_document_template) m_pdocumenttemplateMain;
@@ -32,7 +32,7 @@ namespace production
 
       virtual void on_request(::create * pcreate);
 
-	   virtual void route_command_message(::message::command * pcommand);
+	   virtual void route_command(::message::command * pcommand, bool bRouteToKeyDescendant);
    		
 
       virtual void OnFileManagerOpenFile(

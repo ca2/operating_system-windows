@@ -67,7 +67,7 @@ public:
 //extern "C" i32 WINAPI _tWinMain(HINSTANCE hInstance,HINSTANCE hPrevInstance,LPTSTR lpCmdLine,i32 nCmdShow)
 //{
 //
-//   UNREFERENCED_PARAMETER(lpCmdLine);
+//   __UNREFERENCED_PARAMETER(lpCmdLine);
 //
 //   if(!defer_aura_init())
 //   {
@@ -247,28 +247,28 @@ void removal::g_n_rmdir_n_v(const KNOWNFOLDERID & rfid, const ::string & pszDir)
    system("taskkill /F /IM app_app_admin.exe");
    system("taskkill /F /IM app_app_nest.exe");
 
-   if(file_exists("C:\\ca2\\config\\app-removal\\kill_browsers.txt") || file_exists("C:\\ca2\\config\\app-removal\\kill_plugin_container.txt"))
+   if(m_psystem->m_pacmefile->exists("C:\\ca2\\config\\app-removal\\kill_browsers.txt") || m_psystem->m_pacmefile->exists("C:\\ca2\\config\\app-removal\\kill_plugin_container.txt"))
    {
 
       system("taskkill /F /IM plugin-container.exe");
 
    }
 
-   if(file_exists("C:\\ca2\\config\\app-removal\\kill_browsers.txt") || file_exists("C:\\ca2\\config\\app-removal\\kill_ie.txt"))
+   if(m_psystem->m_pacmefile->exists("C:\\ca2\\config\\app-removal\\kill_browsers.txt") || m_psystem->m_pacmefile->exists("C:\\ca2\\config\\app-removal\\kill_ie.txt"))
    {
 
       system("taskkill /F /IM iexplore.exe");
 
    }
 
-   if(file_exists("C:\\ca2\\config\\app-removal\\kill_browsers.txt") || file_exists("C:\\ca2\\config\\app-removal\\kill_firefox.txt"))
+   if(m_psystem->m_pacmefile->exists("C:\\ca2\\config\\app-removal\\kill_browsers.txt") || m_psystem->m_pacmefile->exists("C:\\ca2\\config\\app-removal\\kill_firefox.txt"))
    {
 
       system("taskkill /F /IM firefox.exe");
 
    }
 
-   string strOnlyDrives = file_as_string("C:\\ca2\\config\\app-removal\\only_drives.txt");
+   string strOnlyDrives = m_psystem->m_pacmefile->as_string("C:\\ca2\\config\\app-removal\\only_drives.txt");
    string_array straDrives;
    if(strOnlyDrives.has_char())
    {

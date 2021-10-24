@@ -1,5 +1,6 @@
 #include "framework.h"
-#include "apex/operating_system.h"
+#include "apex/parallelization/service.h"
+#include "apex/parallelization/service_handler.h"
 #include "service_handler.h"
 
 
@@ -114,7 +115,7 @@ namespace windows
    }
 
 
-   ::e_status service_handler::queue_user_work_item(WINULONG flags)
+   ::e_status service_handler::queue_user_work_item(ULONG flags)
    {
 
       if (::QueueUserWorkItem(thread_proc, this, flags))
@@ -154,7 +155,7 @@ namespace windows
       s_pservicehandler->stop_service();
       //s_pservicehandler->m_ = e_service_status_stopping;
 
-      //s_pservicehandler->m_stopped.wait(millis((u32)m_dwStopTimeout));
+      //s_pservicehandler->m_stopped.wait(::duration((u32)m_dwStopTimeout));
 
    }
 
@@ -250,7 +251,7 @@ namespace windows
          }
 
       }
-      catch (const ::exception::exception & e)
+      catch (const ::exception & e)
       {
 
          s_pservicehandler->update_state(SERVICE_STOPPED, e.m_hresult);
@@ -293,7 +294,7 @@ namespace windows
          s_pservicehandler->update_state(SERVICE_RUNNING);
 
       }
-      catch (const ::exception::exception & e)
+      catch (const ::exception & e)
       {
 
          //

@@ -49,15 +49,15 @@ namespace production
    {
 
 
-      UNREFERENCED_PARAMETER(pmessage);
+      __UNREFERENCED_PARAMETER(pmessage);
 
 
    }
 
-   bool document::on_open_document(const var & varFile)
+   bool document::on_open_document(const var & payloadFile)
    {
 
-      string str = pcontext->m_papexcontext->file().as_string(varFile);
+      string str = pcontext->m_papexcontext->file().as_string(payloadFile);
 
       //  m_document.load(str);
 

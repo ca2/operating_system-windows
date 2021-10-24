@@ -325,8 +325,8 @@ namespace music
 
       ::e_status     FillTypeCombo(::user::combo_box * pcombo)
       {
-         UNREFERENCED_PARAMETER(pcombo);
-         /*   lpcombo->ResetContent();
+         __UNREFERENCED_PARAMETER(pcombo);
+         /*   lpcombo->reset_content();
 
          string str;
          str.load_string(IDS_MIDI_NOTEOFF);
@@ -354,8 +354,8 @@ namespace music
 
       ::e_status     FillPitchCombo(::user::combo_box * pcombo)
       {
-         UNREFERENCED_PARAMETER(pcombo);
-         /*    lpcombo->ResetContent();
+         __UNREFERENCED_PARAMETER(pcombo);
+         /*    lpcombo->reset_content();
 
          for(i32 i = 0; i < 128; i++)
          {

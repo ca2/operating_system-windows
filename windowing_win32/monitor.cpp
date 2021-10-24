@@ -177,7 +177,7 @@ namespace windowing_win32
 
       bSuccess = GetPhysicalMonitorsFromHMONITOR(m_hmonitor, 1, &monitor);
 
-      sleep(500_ms);
+      preempt(500_ms);
 
       //MC_COLOR_TEMPERATURE e = kelvin_mc_color(dwTemperature);
 
@@ -311,9 +311,9 @@ namespace windowing_win32
 
             if (dwCurDriveR != dwMaxDriveR)
             {
-               sleep(500_ms);
+               preempt(500_ms);
                SetMonitorRedGreenOrBlueDrive(monitor.hPhysicalMonitor, MC_RED_DRIVE, dwMaxDriveR);
-               sleep(500_ms);
+               preempt(500_ms);
                bDifferent = true;
             }
 
@@ -325,9 +325,9 @@ namespace windowing_win32
 
             if (dwCurDriveG != dwMaxDriveG)
             {
-               sleep(500_ms);
+               preempt(500_ms);
                SetMonitorRedGreenOrBlueDrive(monitor.hPhysicalMonitor, MC_GREEN_DRIVE, dwMaxDriveG);
-               sleep(500_ms);
+               preempt(500_ms);
                bDifferent = true;
             }
 
@@ -339,9 +339,9 @@ namespace windowing_win32
 
             if (dwCurDriveB != dwMaxDriveB)
             {
-               sleep(500_ms);
+               preempt(500_ms);
                SetMonitorRedGreenOrBlueDrive(monitor.hPhysicalMonitor, MC_BLUE_DRIVE, dwMaxDriveB);
-               sleep(500_ms);
+               preempt(500_ms);
                bDifferent = true;
             }
 
@@ -352,9 +352,9 @@ namespace windowing_win32
 
             if (dwCurGainR != dwR)
             {
-               sleep(500_ms);
+               preempt(500_ms);
                SetMonitorRedGreenOrBlueGain(monitor.hPhysicalMonitor, MC_RED_GAIN, dwR);
-               sleep(500_ms);
+               preempt(500_ms);
                bDifferent = true;
             }
 
@@ -366,9 +366,9 @@ namespace windowing_win32
 
             if (dwCurGainG != dwG)
             {
-               sleep(500_ms);
+               preempt(500_ms);
                SetMonitorRedGreenOrBlueGain(monitor.hPhysicalMonitor, MC_GREEN_GAIN, dwG);
-               sleep(500_ms);
+               preempt(500_ms);
                bDifferent = true;
             }
 
@@ -379,9 +379,9 @@ namespace windowing_win32
 
             if (dwCurGainB != dwB)
             {
-               sleep(500_ms);
+               preempt(500_ms);
                SetMonitorRedGreenOrBlueGain(monitor.hPhysicalMonitor, MC_BLUE_GAIN, dwB);
-               sleep(500_ms);
+               preempt(500_ms);
                bDifferent = true;
             }
 
@@ -403,7 +403,7 @@ namespace windowing_win32
 
       }
 
-      sleep(500_ms);
+      preempt(500_ms);
       
       //destroy:;
       DestroyPhysicalMonitors(1, &monitor);
@@ -411,7 +411,7 @@ namespace windowing_win32
       //return true;
    
       //error:;
-      sleep(500_ms);
+      preempt(500_ms);
       
       // Close the monitor handles.
       DestroyPhysicalMonitors(1, &monitor);

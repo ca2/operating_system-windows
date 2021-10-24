@@ -247,18 +247,18 @@ void CLibraryFrame::OnActivate(UINT nState,CWnd* pWndOther,BOOL bMinimized)
    // synchronization_object floating windows to the new state
    NotifyFloatingWindows(bStayActive ? FS_ACTIVATE : FS_DEACTIVATE);
 
-   // get active view (use active frame if no active view)
+   // get active impact (use active frame if no active impact)
    //CView* pActiveView = get_active_view();
    //if(pActiveView == nullptr)
    //   pActiveView = GetActiveFrame()->get_active_view();
 
-   //// when frame gets activated, re-activate current view
+   //// when frame gets activated, re-activate current impact
    //if(pActiveView != nullptr)
    //{
    //   if(nState != WA_INACTIVE && !bMinimized)
    //      pActiveView->OnActivateView(true,pActiveView,pActiveView);
 
-   //   // always notify the view of frame activations
+   //   // always notify the impact of frame activations
    //   pActiveView->OnActivateFrame(nState,this);
    //}
 
@@ -429,7 +429,7 @@ BOOL CLibraryFrame::Create(CWnd* pParent,DWORD dwBarStyle, PVOID p)
    DWORD dwExStyle = 0;
    m_strCaption = "Library";
 
-   CRect rectangle = rectDefault;
+   CRect rectangle = rectangleDefault;
    if(!CWnd::CreateEx(dwExStyle,AfxRegisterWndClass(CS_DBLCLKS,::LoadCursor(nullptr,IDC_ARROW)),
       m_strCaption,dwStyle,rectangle.left,rectangle.top,rectangle.right - rectangle.left,
       rectangle.bottom - rectangle.top,pParent->GetSafeHwnd(),(HMENU)(UINT_PTR)0,p))

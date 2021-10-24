@@ -1,6 +1,4 @@
 #include "framework.h"
-#include "acme/filesystem/filesystem/acme_dir.h"
-#include "acme/filesystem/filesystem/acme_path.h"
 
 
 namespace apex
@@ -16,7 +14,7 @@ namespace apex
 
          m_papexnode = this;
 
-         defer_initialize_winsock();
+         //defer_initialize_winsock();
 
       }
 
@@ -83,86 +81,86 @@ namespace apex
       }
 
 
-      bool node::_os_calc_app_dark_mode()
-      {
+      //bool node::_os_calc_app_dark_mode()
+      //{
 
-         try
-         {
+      //   try
+      //   {
 
-            ::windows::registry::key key;
+      //      ::windows::registry::key key;
 
-            key.open(HKEY_CURRENT_USER, "Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize");
+      //      key.open(HKEY_CURRENT_USER, "Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize");
 
-            ::u32 dw;
+      //      ::u32 dw;
 
-            auto estatus = key._get("AppsUseLightTheme", dw);
+      //      auto estatus = key._get("AppsUseLightTheme", dw);
 
-            if (::failed(estatus))
-            {
+      //      if (::failed(estatus))
+      //      {
 
-               estatus = key._get("SystemUseLightTheme", dw);
+      //         estatus = key._get("SystemUseLightTheme", dw);
 
-               if (::failed(estatus))
-               {
+      //         if (::failed(estatus))
+      //         {
 
-                  return false;
+      //            return false;
 
-               }
+      //         }
 
-            }
+      //      }
 
-            return dw == 0;
+      //      return dw == 0;
 
-         }
-         catch (...)
-         {
+      //   }
+      //   catch (...)
+      //   {
 
-            return false;
+      //      return false;
 
-         }
+      //   }
 
-      }
+      //}
 
 
-      bool node::_os_calc_system_dark_mode()
-      {
+      //bool node::_os_calc_system_dark_mode()
+      //{
 
-         try
-         {
+      //   try
+      //   {
 
-            ::windows::registry::key key;
+      //      ::windows::registry::key key;
 
-            key.open(HKEY_CURRENT_USER, "Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize");
+      //      key.open(HKEY_CURRENT_USER, "Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize");
 
-            ::u32 dw;
+      //      ::u32 dw;
 
-            auto estatus = key._get("SystemUseLightTheme", dw);
+      //      auto estatus = key._get("SystemUseLightTheme", dw);
 
-            if (::failed(estatus))
-            {
+      //      if (::failed(estatus))
+      //      {
 
-               estatus = key._get("AppsUseLightTheme", dw);
+      //         estatus = key._get("AppsUseLightTheme", dw);
 
-               if (::failed(estatus))
-               {
+      //         if (::failed(estatus))
+      //         {
 
-                  return false;
+      //            return false;
 
-               }
+      //         }
 
-            }
+      //      }
 
-            return dw == 0;
+      //      return dw == 0;
 
-         }
-         catch (...)
-         {
+      //   }
+      //   catch (...)
+      //   {
 
-            return false;
+      //      return false;
 
-         }
+      //   }
 
-      }
+      //}
 
 
       ::color::color node::get_default_color(::u64 u)
@@ -407,7 +405,7 @@ namespace apex
 
          set["privileged"] = true;
 
-         if (!call_sync(path, strParam, path.folder(), ::e_display_none, 3_min, set))
+         if (!call_sync(path, strParam, path.folder(), ::e_display_none, 3_minute, set))
          {
 
             return false;
@@ -539,7 +537,7 @@ namespace apex
 
 
 
-         defer_initialize_winsock();
+         //defer_initialize_winsock();
          return success;
 
       }
@@ -566,10 +564,10 @@ namespace apex
 
          string str;
 
-         if (file_exists(m_psystem->m_pacmedir->system() / "config\\system\\audio.txt"))
+         if (m_psystem->m_pacmefile->exists(m_psystem->m_pacmedir->system() / "config\\system\\audio.txt"))
          {
 
-            str = file_as_string(m_psystem->m_pacmedir->system() / "config\\system\\audio.txt");
+            str = m_psystem->m_pacmefile->as_string(m_psystem->m_pacmedir->system() / "config\\system\\audio.txt");
 
          }
          else
@@ -579,7 +577,7 @@ namespace apex
 
             strPath = m_psystem->m_pacmedir->appdata() / "audio.txt";
 
-            str = file_as_string(strPath);
+            str = m_psystem->m_pacmefile->as_string(strPath);
 
          }
 
@@ -598,7 +596,7 @@ namespace apex
 
       //   path = application_installer_folder(pathExe, strAppId, pszPlatform, pszConfiguration, pszLocale, pszSchema) / "installed.txt";
 
-      //   strBuild = file_as_string(path);
+      //   strBuild = m_psystem->m_pacmefile->as_string(path);
 
       //   return strBuild.has_char();
 
@@ -612,7 +610,7 @@ namespace apex
 
       //   path = application_installer_folder(pathExe, strAppId, pszPlatform, pszConfiguration, pszLocale, pszSchema) / "installed.txt";
 
-      //   return file_put_contents(path, pszBuild);
+      //   return m_psystem->m_pacmefile->put_contents(path, pszBuild);
 
       //}
 
@@ -624,7 +622,7 @@ namespace apex
 
       //   ::file::path pathFile = get_last_run_application_path_file(strAppId);
 
-      //   return file_put_contents(pathFile, path);
+      //   return m_psystem->m_pacmefile->put_contents(pathFile, path);
 
       //}
 
@@ -805,12 +803,19 @@ namespace apex
       }
 
 
-      bool node::delete_file(const ::string & pFileName)
-
+      ::e_status node::delete_file(const ::string & pFileName)
       {
 
-         return ::DeleteFileW(::str::international::utf8_to_unicode(pFileName)) != false;
+         if (!::DeleteFileW(::str::international::utf8_to_unicode(pFileName)))
+         {
 
+            DWORD dwLastError = ::GetLastError();
+
+            return last_error_to_status(dwLastError);
+
+         }
+
+         return ::success;
 
       }
 
@@ -871,12 +876,19 @@ namespace apex
 
       //}
 
-      ::e_status node::node_branch(const ::routine& routine)
+      ::e_status node::node_post(const ::routine& routine)
       {
 
-         m_psystem->m_papexsystem->post(routine);
+         auto estatus = m_psystem->m_papexsystem->post_routine(routine);
 
-         return ::success;
+         if (!estatus)
+         {
+
+            return estatus;
+
+         }
+
+         return estatus;
 
       }
 
@@ -885,10 +897,6 @@ namespace apex
 
 
 } // namespace apex
-
-
-
-
 
 
 

@@ -62,7 +62,7 @@ namespace multimedia
 
                strMessage.Format("mixerClose() failed on hmx=%.04Xh, mmr=%u!", m_hMixer, mmrct);
 
-               message_box(strMessage, nullptr, e_message_box_icon_exclamation);
+               //message_box(this, strMessage, nullptr, e_message_box_icon_exclamation);
 
             }
 
@@ -77,7 +77,7 @@ namespace multimedia
 
             strMessage.Format("mixerGetDevCaps() failed on uMxId=%u, mmr=%u!", uiMixerId, mmrc);
 
-            message_box(strMessage, nullptr, e_message_box_icon_exclamation);
+            //message_box(strMessage, nullptr, e_message_box_icon_exclamation);
 
             return mmrc;
 
@@ -92,7 +92,7 @@ namespace multimedia
 
             strMessage.Format("mixerOpen() failed on uMxId=%u, mmr=%u!", uiMixerId, mmrc);
 
-            message_box(strMessage, nullptr, e_message_box_icon_exclamation);
+            //message_box(strMessage, nullptr, e_message_box_icon_exclamation);
 
             return mmrc;
 
@@ -125,7 +125,7 @@ namespace multimedia
 
             strMessage.Format("mixerGetDevCaps() failed on uMxId=%u, mmr=%u!", m_uiMixerID, mmrc);
 
-            message_box(strMessage, nullptr, e_message_box_icon_exclamation);
+            //message_box(strMessage, nullptr, e_message_box_icon_exclamation);
 
             return mmrc;
 
@@ -141,7 +141,7 @@ namespace multimedia
 
          __pointer(::multimedia::audio_mixer_mmsystem::destination)    lpDestination;
 
-         m_mixerdestinationa.set_size_create(m_mixercaps.cDestinations);
+         m_mixerdestinationa.set_size_create(this, m_mixercaps.cDestinations);
 
          for (i32 i = 0; (u32) i < m_mixercaps.cDestinations; i++)
          {

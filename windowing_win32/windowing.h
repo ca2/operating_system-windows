@@ -133,7 +133,7 @@ namespace windowing_win32
       __pointer(::windowing::window) window_from_point(::aura::application * papp, const ::point_i32 & point);
 
       
-      virtual ::e_status windowing_branch(const ::routine& routine) override;
+      virtual ::e_status windowing_post(const ::routine& routine) override;
 
 
       static BOOL CALLBACK GetAppsEnumWindowsProc(HWND hwnd, LPARAM lParam);

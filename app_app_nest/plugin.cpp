@@ -102,7 +102,7 @@ namespace npca2
          if(pnode == nullptr)
             goto install;
          lpnodeInstalled->RemoveChild(pnode);
-         file_put_contents(dir::appdata("spa_install.xml"), node.GetXML(nullptr));
+         m_psystem->m_pacmefile->put_contents(dir::appdata("spa_install.xml"), node.GetXML(nullptr));
       }
 install:
 
@@ -115,11 +115,11 @@ install:
 
    void plugin::on_paint(HDC hdcWindow, LPCRECT lprect)
    {
-      RECT rectWindow;
-      get_window_rect(&rectWindow);
+      RECT rectangleWindow;
+      get_window_rect(&rectangleWindow);
 
-      int cx = rectWindow.right - rectWindow.left;
-      int cy = rectWindow.bottom - rectWindow.top;
+      int cx = rectangleWindow.right - rectangleWindow.left;
+      int cy = rectangleWindow.bottom - rectangleWindow.top;
 
       RECT rectangle_i32;
       rectangle.left         = 0;
@@ -233,7 +233,7 @@ install:
 
       App(pplugin->get_application()).GetThread()->SetMainWnd(pplugin->m_pframe);
       pplugin->m_pframe->m_bCustomFrame = false;
-      pplugin->m_pframe->get_parent()->on_layout(::draw2d::graphics_pointer & pgraphics);*/
+      pplugin->m_pframe->get_parent()->on_layout(pgraphics);*/
 
 
 

@@ -33,7 +33,7 @@ namespace multimedia
             return ::success;
          }
 
-         m_mixercontrola.set_size_create(iControlCount);
+         m_mixercontrola.set_size_create(this, iControlCount);
 
          if (m_mixerlinecontrols.pamxctrl != nullptr)
          {
@@ -67,7 +67,7 @@ namespace multimedia
                               m_mixerline.dwLineID, device->m_hMixer, mmrc);
 
 
-            message_box(strMessage, nullptr, e_message_box_icon_exclamation);
+            //message_box(strMessage, nullptr, e_message_box_icon_exclamation);
 
          }
          else
@@ -237,7 +237,7 @@ namespace multimedia
 
             strMessage.Format("mixerGetLineInfo(src=%u) failed on hmx=%.04Xh, mmr=%u!",
                               dwSource, device->m_hMixer, mmrc);
-            message_box(strMessage, nullptr, e_message_box_icon_exclamation);
+            //message_box(strMessage, nullptr, e_message_box_icon_exclamation);
 
          }
 

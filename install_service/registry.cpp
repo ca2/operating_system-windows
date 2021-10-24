@@ -429,7 +429,7 @@ int unformat_double_null(TCHAR *dn, unsigned long dnlen, TCHAR **unformatted, un
   return 0;
 }
 
-void override_milliseconds(TCHAR *service_name, HKEY key, TCHAR *value, unsigned long *buffer, unsigned long default_value, unsigned long event) {
+void override_::durations(TCHAR *service_name, HKEY key, TCHAR *value, unsigned long *buffer, unsigned long default_value, unsigned long event) {
   unsigned long type = REG_DWORD;
   unsigned long buflen = sizeof(unsigned long);
   bool ok = false;
@@ -437,9 +437,9 @@ void override_milliseconds(TCHAR *service_name, HKEY key, TCHAR *value, unsigned
   if (ret != ERROR_SUCCESS) {
     if (ret != ERROR_FILE_NOT_FOUND) {
       if (type != REG_DWORD) {
-        TCHAR milliseconds[16];
-        _sntprintf_s(milliseconds, _countof(milliseconds), _TRUNCATE, _T("%lu"), default_value);
-        log_event(EVENTLOG_WARNING_TYPE, event, service_name, value, milliseconds, 0);
+        TCHAR ::durations[16];
+        _sntprintf_s(::durations, _countof(::durations), _TRUNCATE, _T("%lu"), default_value);
+        log_event(EVENTLOG_WARNING_TYPE, event, service_name, value, ::durations, 0);
       }
       else log_event(EVENTLOG_ERROR_TYPE, NSSM_EVENT_QUERYVALUE_FAILED, value, error_string(GetLastError()), 0);
     }
@@ -619,10 +619,10 @@ int get_parameters(nssm_service_t *service, STARTUPINFO *si) {
   SetCurrentDirectory(cwd);
 
   /* Try to get mandatory restart delay */
-  override_milliseconds(service->name, key, NSSM_REG_RESTART_DELAY, &service->restart_delay, 0, NSSM_EVENT_BOGUS_RESTART_DELAY);
+  override_::durations(service->name, key, NSSM_REG_RESTART_DELAY, &service->restart_delay, 0, NSSM_EVENT_BOGUS_RESTART_DELAY);
 
   /* Try to get throttle restart delay */
-  override_milliseconds(service->name, key, NSSM_REG_THROTTLE, &service->throttle_delay, NSSM_RESET_THROTTLE_RESTART, NSSM_EVENT_BOGUS_THROTTLE);
+  override_::durations(service->name, key, NSSM_REG_THROTTLE, &service->throttle_delay, NSSM_RESET_THROTTLE_RESTART, NSSM_EVENT_BOGUS_THROTTLE);
 
   /* Try to get service stop flags. */
   unsigned long type = REG_DWORD;
@@ -645,9 +645,9 @@ int get_parameters(nssm_service_t *service, STARTUPINFO *si) {
   if (stop_ok) service->stop_method &= ~stop_method_skip;
 
   /* Try to get kill delays - may fail. */
-  override_milliseconds(service->name, key, NSSM_REG_KILL_CONSOLE_GRACE_PERIOD, &service->kill_console_delay, NSSM_KILL_CONSOLE_GRACE_PERIOD, NSSM_EVENT_BOGUS_KILL_CONSOLE_GRACE_PERIOD);
-  override_milliseconds(service->name, key, NSSM_REG_KILL_WINDOW_GRACE_PERIOD, &service->kill_window_delay, NSSM_KILL_WINDOW_GRACE_PERIOD, NSSM_EVENT_BOGUS_KILL_WINDOW_GRACE_PERIOD);
-  override_milliseconds(service->name, key, NSSM_REG_KILL_THREADS_GRACE_PERIOD, &service->kill_threads_delay, NSSM_KILL_THREADS_GRACE_PERIOD, NSSM_EVENT_BOGUS_KILL_THREADS_GRACE_PERIOD);
+  override_::durations(service->name, key, NSSM_REG_KILL_CONSOLE_GRACE_PERIOD, &service->kill_console_delay, NSSM_KILL_CONSOLE_GRACE_PERIOD, NSSM_EVENT_BOGUS_KILL_CONSOLE_GRACE_PERIOD);
+  override_::durations(service->name, key, NSSM_REG_KILL_WINDOW_GRACE_PERIOD, &service->kill_window_delay, NSSM_KILL_WINDOW_GRACE_PERIOD, NSSM_EVENT_BOGUS_KILL_WINDOW_GRACE_PERIOD);
+  override_::durations(service->name, key, NSSM_REG_KILL_THREADS_GRACE_PERIOD, &service->kill_threads_delay, NSSM_KILL_THREADS_GRACE_PERIOD, NSSM_EVENT_BOGUS_KILL_THREADS_GRACE_PERIOD);
 
   /* Try to get default exit psubject-> */
   bool default_action;

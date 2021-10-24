@@ -40,9 +40,9 @@ namespace apex
          virtual ::e_status shell_create_link(::file::path pathObj, ::file::path pathLnk, string strDesc, ::file::path pathIco, int iIcon);
 
 
-         virtual bool _os_calc_app_dark_mode();
+         //virtual bool _os_calc_app_dark_mode();
 
-         virtual bool _os_calc_system_dark_mode();
+         //virtual bool _os_calc_system_dark_mode();
 
 
          virtual ::color::color get_default_color(::u64 u);
@@ -89,7 +89,7 @@ namespace apex
          virtual ::u32       get_temp_path(string& str);
          virtual ::i32        reg_query_value(HKEY hkey, const ::string & pszSubKey, string& str);
          virtual  HICON       extract_icon(HINSTANCE hInst, const ::string & pszExeFileName, ::u32 nIconIndex);
-         virtual  bool        delete_file(const ::string & pFileName);
+         virtual  ::e_status        delete_file(const ::string & pFileName);
          // virtual  i32     get_menu_string(HMENU hMenu, ::u32 uDItem, string& str, ::u32 flags);
          //virtual  void        time_to_filetime(::matter* pobject, const ::datetime::time& time, LPFILETIME pFileTime);
 
@@ -97,7 +97,7 @@ namespace apex
          virtual string get_version();
          virtual void show_wait_cursor(bool bShow);
 
-         ::e_status node_branch(const ::routine& routine) override;
+         ::e_status node_post(const ::routine& routine) override;
 
 
 

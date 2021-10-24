@@ -27,7 +27,7 @@ namespace windows
       bool                                      m_bFocusImpl : 1;
       bool                                      m_bSystemCaret : 1;
 
-      ::rectangle_i32                           m_rectLast;
+      ::rectangle_i32                           m_rectangleLast;
 
       bool                                      m_bUpdateGraphics;
 
@@ -46,8 +46,8 @@ namespace windows
       WNDPROC                                   m_pfnSuper; // for subclassing of controls
 
       edisplay                                  m_edisplayLayout;
-      rectangle_i64                             m_rectLastPos;
-      millis                                    m_millisLastPos;
+      rectangle_i64                             m_rectangleLastPos;
+      ::duration                                    m_durationLastPos;
       string                                    m_strDebug;
 
       ::point_i32                               m_pointCursor;
@@ -63,8 +63,8 @@ namespace windows
 
       //virtual void construct(::windowing::window * pwindow);
 
-      virtual void assert_valid() const;
-      virtual void dump(dump_context & dumpcontext) const;
+      void assert_valid() const override;
+      void dump(dump_context & dumpcontext) const override;
 
 
       //bool create_message_queue(::user::interaction * pinteraction, const ::string & lpszName);
@@ -76,7 +76,7 @@ namespace windows
 
       //virtual bool __windows_message_bypass(HWND oswindow, ::u32 message, wparam wparam, lparam lparam, lresult & lresult);
 
-      virtual void install_message_routing(::channel * pchannel);
+      void install_message_routing(::channel * pchannel) override;
 
       bool operator==(const interaction_impl& wnd) const;
       bool operator!=(const interaction_impl& wnd) const;
@@ -89,7 +89,7 @@ namespace windows
       //virtual ::user::interaction * get_owner();
       //virtual void set_owner(::user::interaction * pOwnerWnd);
 
-      virtual void route_command_message(::message::command * pcommand) override;
+      void route_command(::message::command * pcommand, bool bRouteToKeyDescendant = false) override;
 
       //void _002OnDraw(::image * pimage);
 
@@ -208,7 +208,7 @@ namespace windows
 
       virtual strsize get_window_text(char * pszStringBuf, strsize nMaxCount) override;
 
-      virtual void get_window_text(string & rectString) override;
+      virtual void get_window_text(string & rectangleString) override;
       virtual strsize get_window_text_length() override;
 
       virtual void on_layout(::draw2d::graphics_pointer & pgraphics) override;
@@ -280,7 +280,7 @@ namespace windows
 
       virtual void sketch_prepare_window_minimize(::e_activation eactivation) override;
       virtual void sketch_prepare_window_maximize() override;
-      virtual void sketch_prepare_window_full_screen(const ::rectangle_i32 & rectHint = nullptr) override;
+      virtual void sketch_prepare_window_full_screen(const ::rectangle_i32 & rectangleHint = nullptr) override;
       virtual void sketch_prepare_window_restore(edisplay edisplay) override;
 
 
@@ -291,7 +291,7 @@ namespace windows
       virtual bool LockWindowUpdate();
       virtual void UnlockWindowUpdate();
 
-      virtual bool RedrawWindow(const ::rectangle_i32 & rectUpdate = nullptr, 
+      virtual bool RedrawWindow(const ::rectangle_i32 & rectangleUpdate = nullptr, 
          ::draw2d::region* prgnUpdate = nullptr,
          ::u32 flags = RDW_INVALIDATE | RDW_ERASE);
 
@@ -304,7 +304,7 @@ namespace windows
 
 //#if(WINVER >= 0x0500)
 //
-//      virtual bool AnimateWindow(millis millis, u32 dwFlags);
+//      virtual bool AnimateWindow(const ::duration & duration, u32 dwFlags);
 //
 //#endif   // WINVER >= 0x0500
 //
@@ -366,7 +366,7 @@ namespace windows
 
       //virtual i32 GetChildByIdText(__in i32 nID, __out_ecount_part_z(nMaxCount, return +1) TCHAR * pStr, __in i32 nMaxCount) const;
 
-      /////virtual i32 GetChildByIdText(i32 nID, string & rectString) const;
+      /////virtual i32 GetChildByIdText(i32 nID, string & rectangleString) const;
       ////virtual ::user::interaction * GetNextDlgGroupItem(::user::interaction * pWndCtl, bool bPrevious = false) const;
       ////virtual ::user::interaction * GetNextDlgTabItem(::user::interaction * pWndCtl, bool bPrevious = false) const;
       //virtual ::u32 IsDlgButtonChecked(i32 nIDButton) const;
@@ -444,7 +444,7 @@ namespace windows
 //
 //#if(WINVER >= 0x0500)
 //
-//      virtual bool FlashWindowEx(u32 dwFlags, ::u32  uCount, millis tickTimeout);
+//      virtual bool FlashWindowEx(u32 dwFlags, ::u32  uCount, ::duration tickTimeout);
 //
 //#endif   // WINVER >= 0x0500
 //

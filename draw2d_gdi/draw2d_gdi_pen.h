@@ -23,15 +23,15 @@ namespace draw2d_gdi
       int GetExtLogPen(EXTLOGPEN* pLogPen);
 
 
-      virtual void construct(int nPenStyle, int nWidth, COLORREF crColor);
+      virtual void construct(int nPenStyle, int nWidth, ::color::color crColor);
       virtual void construct(int nPenStyle, int nWidth, const LOGBRUSH* pLogBrush, int nStyleCount = 0, const u32* lpStyle = nullptr);
-      bool CreatePen(int nPenStyle, int nWidth, COLORREF crColor);
+      bool CreatePen(int nPenStyle, int nWidth, ::color::color crColor);
       bool CreatePen(int nPenStyle, int nWidth, const LOGBRUSH* pLogBrush,
                      int nStyleCount = 0, const u32* lpStyle = nullptr);
       bool CreatePenIndirect(LPLOGPEN lpLogPen);
 
 
-      virtual void dump(dump_context & dumpcontext) const;
+      void dump(dump_context & dumpcontext) const override;
 
 
       virtual bool create();

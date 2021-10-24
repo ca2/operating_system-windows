@@ -53,10 +53,10 @@ namespace production
    }
 
 
-   void pane_view::on_subject(::subject::subject * psubject, ::subject::context * pcontext)
+   void pane_view::handle(::subject * psubject, ::context * pcontext)
    {
 
-      ::user::tab_view::on_subject(psubject, pcontext);
+      ::user::tab_view::handle(psubject, pcontext);
 
    }
 
@@ -114,7 +114,7 @@ namespace production
       break;
       case MAIN_IMPACT:
       {
-         __pointer(::user::interaction) puie = ::user::impact::create_view < ::production::view > (pcreatordata);
+         __pointer(::user::interaction) puie = ::user::impact::create_view < ::production::impact > (pcreatordata);
          if(puie != nullptr)
          {
             pcreatordata->m_pdocument = get_document();
@@ -222,7 +222,7 @@ namespace production
 
    void pane_view::_001OnMenuMessage(::message::message * pmessage)
    {
-      UNREFERENCED_PARAMETER(pmessage);
+      __UNREFERENCED_PARAMETER(pmessage);
       set_current_tab_by_id(m_pimpactdataOld->m_id);
    }
 
@@ -243,7 +243,7 @@ namespace production
    ::filemanager::data * pdata,
    ::file::item_array & itema)
    {
-      UNREFERENCED_PARAMETER(pdata);
+      __UNREFERENCED_PARAMETER(pdata);
       if(itema.get_size() > 0)
       {
          pcontext->m_papexcontext->os().file_open(this, itema[0]->m_filepathFinal, "", itema[0]->m_filepathFinal.folder());
@@ -251,11 +251,11 @@ namespace production
       get_parent_frame()->hide();
    }
 
-   void pane_view::on_control_event(::user::control_event * pevent)
+   void pane_view::handle(::subject * psubject, ::context * pcontext)
    {
-      if(pevent->m_eevent == ::user::e_event_set_check)
+      if(psubject->m_id == ::e_subject_set_check)
       {
-         if(pevent->m_puserinteraction->m_id == "clean")
+         if(psubject->user_element_id() == "clean")
          {
             __pointer(::user::interaction) pinteraction = m_pviewOptions->get_child_by_id("clean");
             __pointer(::user::check_box) pcheckbox =  (pinteraction);
@@ -263,7 +263,7 @@ namespace production
             psubject->payload(id_clean) = pcheckbox->echeck() == ::check_checked;
             get_document()->update_all_views(psubject);
          }
-         else if(pevent->m_puserinteraction->m_id == "build")
+         else if(psubject->user_element_id() == "build")
          {
             __pointer(::user::interaction) pinteraction = m_pviewOptions->get_child_by_id("build");
             __pointer(::user::check_box) pcheckbox =  (pinteraction);

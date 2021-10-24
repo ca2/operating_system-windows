@@ -42,7 +42,7 @@ namespace aura
    //}
 
 
-   //::user::document *  application::_001OpenDocumentFile(::payload varFile)
+   //::user::document *  application::_001OpenDocumentFile(::payload payloadFile)
    //{
 
    //   return nullptr;
@@ -56,7 +56,7 @@ namespace aura
 
    //{
 
-   //   UNREFERENCED_PARAMETER(pcsz);
+   //   __UNREFERENCED_PARAMETER(pcsz);
 
 
    //   return false;
@@ -197,10 +197,18 @@ namespace aura
 
    //   string str;
 
-   //   if (file_exists(pacmedir->system() / "config\\system\\audio.txt"))
+   //   if (m_psystem->m_pacmefile->exists(         auto psystem = m_psystem;
+
+         auto pacmedir = psystem->m_pacmedir;
+
+pacmedir->system() / "config\\system\\audio.txt"))
    //   {
 
-   //      str = file_as_string(pacmedir->system() / "config\\system\\audio.txt");
+   //      str = m_psystem->m_pacmefile->as_string(         auto psystem = m_psystem;
+
+         auto pacmedir = psystem->m_pacmedir;
+
+pacmedir->system() / "config\\system\\audio.txt");
 
    //   }
    //   else
@@ -210,7 +218,7 @@ namespace aura
 
    //      strPath = ::dir::appdata() / "audio.txt";
 
-   //      str = file_as_string(strPath);
+   //      str = m_psystem->m_pacmefile->as_string(strPath);
 
    //   }
 

@@ -47,6 +47,17 @@ namespace acme
          //virtual ::file::path roaming() override;
 
 
+         virtual bool win32_registry_windows_dark_mode_for_app();
+         virtual bool win32_registry_windows_dark_mode_for_system();
+         virtual bool win32_registry_windows_darkness();
+
+
+         virtual ::color::color reinterpreted_windows_darkness_background_color();
+
+
+         void fetch_user_color() override;
+
+
          virtual void install_crash_dump_reporting(const string& strModuleNameWithTheExeExtension) override;
 
 
@@ -56,14 +67,6 @@ namespace acme
          virtual platform_char** get_envp(wcsdup_array& a);
 
 
-         
-
-
-
-         //virtual bool memcnts();
-
-         //virtual ::file::path memcnts_base_path();
-
          virtual ::e_status datetime_to_filetime(filetime_t* pFileTime, const ::datetime::time& time) override;
 
 
@@ -71,21 +74,22 @@ namespace acme
 
 
          virtual ::e_status ExitCode_to_status(DWORD dwExitCode);
-         
 
 
          virtual string audio_get_default_library_name() override;
 
 
-         virtual ::e_status on_start_system() override;
-
          ::e_status create_process(const ::string & pszCommandLine, u32 * pprocessId) override;
+
 
          ::e_status run_silent(const ::string & strFunct, const ::string & strstrParams) override;
 
+
          bool process_modules(string_array& stra, u32 processID) override;
 
+
          bool load_modules_diff(string_array& straOld, string_array& straNew, const ::string & pszExceptDir) override;
+
 
          id_array module_path_get_pid(const ::string & pszModulePath, bool bModuleNameIsPropertyFormatted) override;
 
@@ -103,10 +107,41 @@ namespace acme
 
          string get_environment_variable(const ::string & pszEnvironmentVariable) override;
 
-         string expand_env(string str) override;
+         string expand_environment_variables(const string & str) override;
+
+
+         //virtual ::u32       get_file_attributes(const ::string & pFileName);
+         virtual ::u32       get_current_directory(string& str);
+         virtual ::u32       get_temp_path(string& str);
+         virtual ::i32        reg_query_value(HKEY hkey, const ::string & pszSubKey, string& str);
+         virtual  HICON       extract_icon(HINSTANCE hInst, const ::string & pszExeFileName, ::u32 nIconIndex);
+         virtual  ::e_status        delete_file(const ::string & pFileName);
+         //virtual  i32     get_menu_string(HMENU hMenu, ::u32 uDItem, string& str, ::u32 flags);
+         //virtual  void        time_to_filetime(::matter* pobject, const ::datetime::time& time, LPFILETIME pFileTime);
 
 
          array <::serial::port_info> list_serial_ports() override;
+
+         string get_user_language() override;
+         bool get_application_exclusivity_security_attributes(memory & memory) override;
+         ::e_status register_spa_file_type(const ::string & strAppIdHandler) override;
+         ::e_status start_program_files_app_app_admin(string strPlatform, string strConfiguration) override;
+
+
+         ::e_status get_folder_path_from_user(::file::path & pathFolder) override;
+
+
+         ::e_status register_dll(const ::file::path & pathDll);
+
+
+         //::string expand_environment_variables(const ::string & str) override;
+
+         virtual ::wstring expand_environment_variables(const ::wstring & wstr);
+
+         ::e_status implement() override;
+
+
+         ::e_status on_start_system() override;
 
 
       };

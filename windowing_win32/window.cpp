@@ -1,10 +1,10 @@
 // created by Camilo 2021-01-31 04:56 BRT <3CamiloSasukeThomasBorregaardSoerensen
 #include "framework.h"
-#include "acme/const/timer.h"
+#include "acme/constant/timer.h"
 #include "window.h"
 #include "aura_windows/interaction_impl.h"
 #include "aura/user/interaction_prodevian.h"
-#include "acme/const/activate.h"
+#include "acme/constant/activate.h"
 #include "aura/message/user.h"
 #include <dwmapi.h>
 
@@ -215,8 +215,6 @@ namespace windowing_win32
          //MESSAGE_LINK(e_message_set_cursor, pchannel, this, &window::on_message_set_cursor);
 
       }
-
-      //MESSAGE_LINK(e_message_destroy_window, pchannel, pimpl, &::user::interaction_impl::_001OnDestroyWindow);
 
       MESSAGE_LINK(WM_ACTIVATE, pchannel, this, &window::_001OnActivate);
       MESSAGE_LINK(WM_DWMNCRENDERINGCHANGED, pchannel, this, &window::_001OnDwmNcRenderingChanged);
@@ -477,15 +475,15 @@ namespace windowing_win32
 
          //}
 
-         string strLastError = FormatMessageFromSystem(dwLastError);
+         string strLastError = last_error_message(dwLastError);
 
          string strMessage;
 
          strMessage.Format("%s\n\nSystem Error Code: %d", strLastError, dwLastError);
 
-         TRACE(trace_category_appmsg, e_trace_level_warning, "Warning: Window creation failed: get_last_error returned:\n");
+         CATEGORY_WARNING(appmsg, "Warning: Window creation failed: get_last_error returned:");
 
-         TRACE(trace_category_appmsg, e_trace_level_warning, "%s\n", strMessage);
+         CATEGORY_WARNING(appmsg, strMessage);
 
          try
          {
@@ -579,20 +577,20 @@ namespace windowing_win32
 
 
 
-   bool window::has_capture() const
-   {
+   //bool window::has_capture() const
+   //{
 
-      return ::GetCapture() == get_hwnd();
+   //   return ::GetCapture() == get_hwnd();
 
-   }
+   //}
 
 
-   bool window::has_focus() const
-   {
+   //bool window::has_focus() const
+   //{
 
-      return ::GetFocus() == get_hwnd();
+   //   return ::GetFocus() == get_hwnd();
 
-   }
+   //}
 
 
    void window::_001OnMessage(::message::message * pmessage)
@@ -619,9 +617,11 @@ namespace windowing_win32
 
             auto psystem = m_psystem->m_paurasystem;
 
-            auto psubject = psystem->subject(id_os_font_change);
+            psystem->signal(id_os_font_change);
 
-            psystem->handle_subject(psubject);
+            //auto psubject = psystem->subject(id_os_font_change);
+
+            //psystem->handle_subject(psubject);
 
             //fork([this]()
               // {
@@ -632,16 +632,12 @@ namespace windowing_win32
 
          //}
          }
-         else if (
-            pmessage->m_id == WM_SETTINGCHANGE &&
-            strLparamString == "ImmersiveColorSet")
+         else if (pmessage->m_id == WM_SETTINGCHANGE && strLparamString == "ImmersiveColorSet")
          {
 
-            auto psystem = m_psystem->m_paurasystem;
+            auto pnode = m_psystem->m_pnode;
 
-            auto psubject = psystem->subject(id_os_dark_mode);
-
-            psystem->handle_subject(psubject);
+            pnode->fetch_user_color();
 
          }
          else if (pmessage->m_id == e_message_display_change ||
@@ -1172,7 +1168,7 @@ namespace windowing_win32
 //      if (status != 0)
 //      {
 //
-//         //file_put_contents("/home/camilo/window.txt", __str((int)w->window()));
+//         //m_psystem->m_pacmefile->put_contents("/home/camilo/window.txt", __string((int)w->window()));
 //         return false;
 //
 //      }
@@ -1230,7 +1226,7 @@ namespace windowing_win32
    //}
 
 
-   void window::post_nc_destroy()
+   void window::post_non_client_destroy()
    {
 
 
@@ -1561,7 +1557,7 @@ namespace windowing_win32
    //__pointer(window) window::get_active_window()
    //{
 
-   //   __throw(error_interface_only);
+   //   throw ::interface_only_exception();
 
    //   return nullptr;
 
@@ -1976,7 +1972,7 @@ namespace windowing_win32
 
       auto puserinteraction = m_pimpl->m_puserinteraction;
 
-      if (!puserinteraction->m_bUserPrimitiveOk)
+      if (!puserinteraction->m_bUserElementOk)
       {
 
          return true;
@@ -2093,7 +2089,7 @@ namespace windowing_win32
 //
 //#ifdef SET_WINDOW_POS_LOG
 //
-//            INFO("XMoveResizeWindow (%d, %d) - (%d, %d)", x, y, cx, cy);
+//            INFORMATION("XMoveResizeWindow (%d, %d) - (%d, %d)", x, y, cx, cy);
 //
 //#endif
 //
@@ -2106,7 +2102,7 @@ namespace windowing_win32
 //
 //#ifdef SET_WINDOW_POS_LOG
 //
-//               INFO("Changing parameters... (%d, %d) - (%d, %d)", x, y, cx, cy);
+//               INFORMATION("Changing parameters... (%d, %d) - (%d, %d)", x, y, cx, cy);
 //
 //#endif
 //
@@ -2150,7 +2146,7 @@ namespace windowing_win32
 //      //            if(!XChangeWindowAttributes(display(), window(), CWOverrideRedirect, &set))
 //      //            {
 //      //
-//      //               INFO("linux::window::_native_create_window_ex failed to clear override_redirect");
+//      //               INFORMATION("linux::window::_native_create_window_ex failed to clear override_redirect");
 //      //
 //      //            }
 //      //
@@ -2306,6 +2302,25 @@ namespace windowing_win32
    }
 
 
+   ::point_i32 window::get_mouse_cursor_position()
+   {
+
+      POINT point;
+
+      ::GetCursorPos(&point);
+
+      ::point_i32 point_i32;
+
+      point_i32.x = point.x;
+
+      point_i32.y = point.y;
+
+      return point_i32;
+
+   }
+   
+   
+   
    //bool window::reset(::windowing::cursor * pcursor, ::aura::session * psession)
    //{
 
@@ -2400,7 +2415,7 @@ namespace windowing_win32
 //
 //#ifdef WINDOWS_DESKTOP
 //
-//      UNREFERENCED_PARAMETER(window);
+//      __UNREFERENCED_PARAMETER(window);
 //
 //      if (!::SetCursor(hcursor))
 //      {
@@ -2496,11 +2511,11 @@ namespace windowing_win32
 
       //}
 
-      ::rectangle_i32 rectWindow;
+      ::rectangle_i32 rectangleWindow;
 
       auto puserinteraction = m_pimpl->m_puserinteraction;
 
-      rectWindow = puserinteraction->screen_rect();
+      rectangleWindow = puserinteraction->screen_rect();
 
       PAINTSTRUCT paint;
 
@@ -2510,29 +2525,29 @@ namespace windowing_win32
 
       ::SelectClipRgn(hdc, nullptr);
 
-      ::rectangle_i32 rectPaint;
+      ::rectangle_i32 rectanglePaint;
 
-      ::rectangle_i32 rectUpdate;
+      ::rectangle_i32 rectangleUpdate;
 
-      rectPaint = paint.rcPaint;
+      rectanglePaint = paint.rcPaint;
 
 
       __throw(todo);
 
-      //if (rectPaint.is_null() || (GetExStyle() & WS_EX_LAYERED))
+      //if (rectanglePaint.is_null() || (GetExStyle() & WS_EX_LAYERED))
       //{
 
-      //   rectUpdate = rectWindow;
+      //   rectangleUpdate = rectangleWindow;
 
-      //   rectPaint = rectWindow;
+      //   rectanglePaint = rectangleWindow;
 
-      //   puserinteraction->_001ScreenToClient(rectPaint, ::user::e_layout_design);
+      //   puserinteraction->_001ScreenToClient(rectanglePaint, ::user::e_layout_design);
 
       //}
       //else
       //{
 
-      //   rectUpdate = rectPaint;
+      //   rectangleUpdate = rectanglePaint;
 
       //}
 
@@ -2551,7 +2566,7 @@ namespace windowing_win32
 
       //auto & buffer = pbuffer->m_osbuffera[!pbuffer->m_iCurrentBuffer];
 
-      //::BitBlt(hdc, rectUpdate.left, rectUpdate.top, rectUpdate.width(), rectUpdate.height(), buffer.m_hdc, 0, 0, SRCCOPY);
+      //::BitBlt(hdc, rectangleUpdate.left, rectangleUpdate.top, rectangleUpdate.width(), rectangleUpdate.height(), buffer.m_hdc, 0, 0, SRCCOPY);
 
 
 
@@ -2590,7 +2605,7 @@ namespace windowing_win32
 
       //            pgraphics->SetViewportOrg(0, 0);
 
-      //            g->BitBlt(rectPaint.left, rectPaint.top, rectPaint.width(), rectPaint.height(), pgraphics, rectUpdate.left, rectUpdate.top);
+      //            g->BitBlt(rectanglePaint.left, rectanglePaint.top, rectanglePaint.width(), rectanglePaint.height(), pgraphics, rectangleUpdate.left, rectangleUpdate.top);
 
       //         }
 
@@ -3316,7 +3331,7 @@ namespace windowing_win32
    }
 
 
-   bool window::RedrawWindow(const ::rectangle_i32 & rectUpdate, ::draw2d::region * prgnUpdate, ::u32 flags)
+   bool window::RedrawWindow(const ::rectangle_i32 & rectangleUpdate, ::draw2d::region * prgnUpdate, ::u32 flags)
    {
 
       //if (m_bDestroyImplOnly)
@@ -3423,7 +3438,7 @@ namespace windowing_win32
 
       ASSERT(::IsWindow(get_hwnd()));
 
-      ::exception::throw_not_implemented();
+      throw interface_only_exception();
       return false;
       //      return ::DrawCaption(get_hwnd(), (HDC)(dynamic_cast<::windows::graphics * >(pgraphics))->get_hwnd(), prc, uFlags) != false;
 
@@ -3937,7 +3952,7 @@ namespace windowing_win32
 
    //   ASSERT(::IsWindow(((window *)this)->get_hwnd()));
 
-   //   ::exception::throw_not_implemented();
+   //   throw interface_only_exception();
    //   //      const_cast < ::windowing_win32::window * > (this)->send_message(WM_PRINT, (wparam)(dynamic_cast<::windows::graphics * >(pgraphics))->get_hwnd(), (lparam) dwFlags);
 
    //}
@@ -3947,7 +3962,7 @@ namespace windowing_win32
 
    //   ASSERT(::IsWindow(((window *)this)->get_hwnd()));
 
-   //   ::exception::throw_not_implemented();
+   //   throw interface_only_exception();
    //   //const_cast < ::windowing_win32::window * > (this)->send_message(WM_PRINTCLIENT, (wparam)(dynamic_cast<::windows::graphics * >(pgraphics))->get_hwnd(), (lparam) dwFlags);
 
    //}
@@ -4225,7 +4240,7 @@ namespace windowing_win32
          if (puserinteraction->layout().is_moving())
          {
 
-            INFO("Window is Moving :: on_message_move");
+            INFORMATION("Window is Moving :: on_message_move");
 
          }
 
@@ -4889,7 +4904,7 @@ namespace windowing_win32
    void window::set_viewport_org(::draw2d::graphics_pointer & pgraphics)
    {
 
-      // graphics will be already set its view port to the window for linux - cairo with xlib
+      // graphics will be already set its impact port to the window for linux - cairo with xlib
 
       pgraphics->SetViewportOrg(::point_i32());
 
@@ -4898,12 +4913,12 @@ namespace windowing_win32
 
    void window::on_set_parent(::user::interaction * puserinteraction) {
 
-      __throw(error_interface_only);
+      throw ::interface_only_exception();
    }
 
     bool window::get_rect_normal(RECTANGLE_I32 * prectangle) {
 
-       __throw(error_interface_only);
+       throw ::interface_only_exception();
        return false;
     }
 
@@ -4911,7 +4926,7 @@ namespace windowing_win32
     //void window::show_task(bool bShow)
     //{
 
-    //   __throw(error_interface_only);
+    //   throw ::interface_only_exception();
 
     //}
     //
@@ -4919,7 +4934,7 @@ namespace windowing_win32
     void window::window_show_change_visibility(::e_display edisplay, ::e_activation eactivation)
     {
 
-       __throw(error_interface_only);
+       throw ::interface_only_exception();
 
     }
 
@@ -5428,7 +5443,7 @@ namespace windowing_win32
 //
 //      }
 //
-//      bool bUserElementalOk = !m_bDestroyImplOnly && puserinteraction && puserinteraction->m_bUserPrimitiveOk;
+//      bool bUserElementalOk = !m_bDestroyImplOnly && puserinteraction && puserinteraction->m_bUserElementOk;
 //
 //      if (message == e_message_key_down ||
 //         message == e_message_key_up ||
@@ -5495,14 +5510,14 @@ namespace windowing_win32
 //      {
 //         ::rectangle_i32 rectangleClient;
 //         ::GetClientRect(get_hwnd(), rectangleClient);
-//         ::rectangle_i32 rectWindow;
-//         ::GetWindowRect(get_hwnd(), rectWindow);
-//         ::rectangle_i32 rectRegion;
+//         ::rectangle_i32 rectangleWindow;
+//         ::GetWindowRect(get_hwnd(), rectangleWindow);
+//         ::rectangle_i32 rectangleRegion;
 //         HRGN hrgn = CreateRectRgn(0, 0, 0, 0);
 //         int regionType = ::GetWindowRgn(get_hwnd(), hrgn);
 //         if (regionType != ERROR)
 //         {
-//            ::GetRgnBox(hrgn, rectRegion);
+//            ::GetRgnBox(hrgn, rectangleRegion);
 //         }
 //         ::DeleteObject(hrgn); /* finished with region */
 //         WINDOWPLACEMENT wp;
@@ -5725,7 +5740,7 @@ namespace windowing_win32
 //            // handler has set it to another one.
 //            pmouse->m_ecursor = cursor_default;
 //
-//            //INFO("windows::e_message_mouse_move(%d,%d)", pmouse->m_point.x, pmouse->m_point.y);
+//            //INFORMATION("windows::e_message_mouse_move(%d,%d)", pmouse->m_point.x, pmouse->m_point.y);
 //
 //            string strType;
 //
@@ -5895,7 +5910,7 @@ namespace windowing_win32
 //      if (message == e_message_event)
 //      {
 //
-//         puserinteraction->on_control_event(pmessage);
+//         puserinteraction->handle_event(pmessage);
 //
 //         return;
 //
@@ -6104,10 +6119,10 @@ namespace windowing_win32
       while (ptask->task_get_run())
       {
 
-         if (m_millisLastMouseMove.elapsed() < 20_ms)
+         if (m_durationLastMouseMove.elapsed() < 20_ms)
          {
 
-            ::sleep(30_ms);
+            ::preempt(30_ms);
 
             continue;
 
@@ -6125,7 +6140,7 @@ namespace windowing_win32
          if (hwndCapture == hwnd)
          {
 
-            ::sleep(50_ms);
+            ::preempt(50_ms);
 
             continue;
 
@@ -6140,7 +6155,7 @@ namespace windowing_win32
          if (m_pointMouseMove == pointMouseMove)
          {
 
-            ::sleep(30_ms);
+            ::preempt(30_ms);
 
             continue;
 
@@ -6158,7 +6173,7 @@ namespace windowing_win32
 
             }
 
-            ::sleep(100_ms);
+            ::preempt(100_ms);
 
             continue;
 
@@ -6166,15 +6181,15 @@ namespace windowing_win32
 
          lparam = MAKELPARAM(pointMouseMove.x, pointMouseMove.y);
 
-         m_millisLastMouseMove.Now();
+         m_durationLastMouseMove.Now();
 
          //pimpl->m_puserinteraction->post_message(e_message_mouse_move, 0, lparam);
          
          pimpl->m_puserinteraction->send_message(e_message_mouse_move, 0, lparam);
 
-         //::SendMessage(hwnd, WM_MOUSEMOVE, 0, lparam);
+         //::SendMessage(hwnd, e_message_mouse_move, 0, lparam);
 
-         ::sleep(5_ms);
+         ::preempt(5_ms);
 
       }
 
@@ -6186,7 +6201,7 @@ namespace windowing_win32
    void window::on_message_destroy(::message::message * pmessage)
    {
 
-      UNREFERENCED_PARAMETER(pmessage);
+      __UNREFERENCED_PARAMETER(pmessage);
 
    }
 
@@ -6222,7 +6237,7 @@ namespace windowing_win32
 
          }
 
-         if (m_pimpl->m_puserinteraction->m_bUserPrimitiveOk)
+         if (m_pimpl->m_puserinteraction->m_bUserElementOk)
          {
 
             pcreate->m_lresult = 0;

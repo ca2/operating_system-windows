@@ -8,7 +8,7 @@ namespace production
    class document;
 
 
-   class CLASS_DECL_CA2_PRODUCTION view :
+   class CLASS_DECL_CA2_PRODUCTION impact :
       virtual public ::user::scroll_view
    {
    public:
@@ -39,15 +39,15 @@ namespace production
       i32                     m_iVsW;
       ::image_pointer             m_pimageV;
       ::image_pointer             m_pimageVs;
-      ::draw2d::brush_pointer          m_brushBkActive;
-      ::draw2d::brush_pointer          m_brushBkInactive;
+      ::draw2d::brush_pointer          m_pbrushBkActive;
+      ::draw2d::brush_pointer          m_pbrushBkInactive;
 
 
-      view(::object * pobject);
-      virtual ~view();
+      impact(::object * pobject);
+      virtual ~impact();
 #ifdef DEBUG
-      virtual void assert_valid() const;
-      virtual void dump(dump_context & dumpcontext) const;
+      void assert_valid() const override;
+      void dump(dump_context & dumpcontext) const override;
 #endif
 
       enum e_message
@@ -68,7 +68,7 @@ namespace production
 
 
       void GetAreaThumbRect(LPRECT lprect, i32 iArea);
-      void on_hit_test(::user::item & item);
+      void on_hit_test(::item & item);
 
 
       void release_production();
@@ -80,13 +80,13 @@ namespace production
       virtual void _001OnDraw(::draw2d::graphics_pointer & pgraphics);
 
       virtual void _001OnTabClick(i32 iTab);
-      virtual void install_message_routing(::channel * pchannel);
+      void install_message_routing(::channel * pchannel) override;
       virtual bool pre_create_window(::user::system * pusersystem);
-      virtual void on_subject(::subject::subject * psubject, ::subject::context * pcontext) override;
+      virtual void handle(::subject * psubject, ::context * pcontext) override;
 
       ::user::document * get_document();
 
-      //virtual void on_subject(::subject::subject * psubject, ::subject::context * pcontext) override;
+      //virtual void handle(::subject * psubject, ::context * pcontext) override;
       DECLARE_MESSAGE_HANDLER(_001OnLButtonDown);
       DECLARE_MESSAGE_HANDLER(_001OnLButtonUp);
       virtual void _001OnTimer(::timer * ptimer);

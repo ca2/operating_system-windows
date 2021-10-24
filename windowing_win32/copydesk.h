@@ -29,21 +29,18 @@ namespace windowing_win32
 
 
       copydesk();
-      virtual ~copydesk();
-
-
-      //static lresult WINAPI WindowProc(HWND hwnd, ::u32 message, wparam wparam, lparam lparam);
+      ~copydesk() override;
 
 
       DECLARE_MESSAGE_HANDLER(_001OnClipboardUpdate);
       DECLARE_MESSAGE_HANDLER(on_message_destroy);
 
-      virtual void install_message_routing(::channel * pchannel) override;
+      
+      void install_message_routing(::channel * pchannel) override;
 
 
-
-      virtual ::e_status initialize(::object * pobject) override;
-      virtual ::e_status destroy() override;
+      ::e_status initialize_copydesk(::windowing::window * pwindow) override;
+      ::e_status destroy() override;
 
 
       virtual void OnClipboardUpdate();
@@ -51,22 +48,27 @@ namespace windowing_win32
       virtual ::count _get_file_count();
       virtual int _get_priority_text_format();
 
+
       virtual HGLOBAL hglobal_get_filea(const ::file::patha & stra);
       virtual HGLOBAL hglobal_get_wide_text(const ::string & str);
       virtual HGLOBAL hglobal_get_utf8_text(const ::string & str);
       virtual HGLOBAL hglobal_get_image(const ::image * pimage);
 
-      virtual bool _set_filea(const ::file::patha & stra, e_op eop) override;
-      virtual bool _get_filea(::file::patha & stra, e_op & eop) override;
-      virtual bool _has_filea() override;
 
-      virtual bool _set_plain_text(const ::string & str) override;
-      virtual bool _get_plain_text(string & str) override;
-      virtual bool _has_plain_text() override;
+      ::e_status _set_filea(const ::file::patha & stra, e_op eop) override;
+      ::e_status _get_filea(::file::patha & stra, e_op & eop) override;
+      bool _has_filea() override;
 
-      virtual bool _desk_to_image(::image * pimage) override;
-      virtual bool _image_to_desk(const ::image * pimage) override;
-      virtual bool _has_image() override;
+
+      ::e_status _set_plain_text(const ::string & str) override;
+      ::e_status _get_plain_text(string & str) override;
+      bool _has_plain_text() override;
+
+
+      ::e_status _desk_to_image(::image * pimage) override;
+      ::e_status _image_to_desk(const ::image * pimage) override;
+      bool _has_image() override;
+
 
    };
 

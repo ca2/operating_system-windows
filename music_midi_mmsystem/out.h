@@ -22,13 +22,14 @@ namespace music
 
             
             HMIDIOUT       m_hmidiout;
+            u32            m_uDeviceID;
 
 
             out();
-            virtual ~out();
+            ~out() override;
 
 
-            virtual ::e_status     open(int iDeviceId) override;
+            virtual ::e_status     open() override;
             virtual ::e_status     close() override;
 
             ::e_status     send_short_message(::music::midi::e_message emessage, int iChannel, int iData1, int iData2);

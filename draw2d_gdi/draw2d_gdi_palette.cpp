@@ -75,7 +75,7 @@ namespace draw2d_gdi
    }
 
 
-   UINT palette::GetNearestPaletteIndex(COLORREF crColor) const
+   UINT palette::GetNearestPaletteIndex(::color::color crColor) const
    {
 
       ASSERT(get_os_data() != nullptr);

@@ -4,7 +4,7 @@
 namespace production
 {
 
-   class view;
+   class impact;
 
 
    class CLASS_DECL_CA2_PRODUCTION production : 
@@ -95,7 +95,7 @@ namespace production
 
       i32                     m_iStep;
                               
-      __pointer(::user::impact)                m_pview;
+      __pointer(::user::impact)                m_pimpact;
       bool                    m_bFinished;
       tick m_tickStart;
       tick m_tickEnd;

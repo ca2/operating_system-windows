@@ -330,7 +330,9 @@ namespace windows
 
    ::file::listing & dir_context::root_ones(::file::listing & listing)
    {
+
       ::u32 dwSize = ::GetLogicalDriveStringsW(0, nullptr);
+
       ::acme::malloc < LPWSTR > pszAlloc;
 
       pszAlloc.alloc((dwSize + 1) * sizeof(WCHAR));
@@ -338,7 +340,6 @@ namespace windows
       LPWSTR psz = pszAlloc;
 
       dwSize = ::GetLogicalDriveStringsW(dwSize + 1, psz);
-
 
       string str;
 
@@ -355,17 +356,22 @@ namespace windows
             psz++;
 
          }
+         
          listing.add(::file::path(str));
+         
          ::file::path & path = listing.last();
+         
          path.m_iDir = 1;
+         
          str.trim(":/\\");
+         
          listing.m_straTitle.add("Drive " + str);
+
          psz++;
 
       }
 
       return listing;
-
 
    }
 
@@ -794,7 +800,7 @@ namespace windows
 
       bool bIsDir;
 
-      if (::thread_is_set(id_thread_zip_is_dir) && iLast >= 3 && !ansi_count_compare_ci(&((const ::string &)str)[iLast - 3], ".zip", 4))
+      if (::task_flag().is_set(e_task_flag_zip_is_dir) && iLast >= 3 && !ansi_count_compare_ci(&((const ::string &)str)[iLast - 3], ".zip", 4))
       {
 
          //m_isdirmap.set(str.Left(iLast + 1), true, 0);
@@ -871,8 +877,8 @@ namespace windows
    ::file::path dir_context::time_square(const ::string & strPrefix, const ::string & strSuffix)
    {
 
-      UNREFERENCED_PARAMETER(strPrefix);
-      UNREFERENCED_PARAMETER(strSuffix);
+      __UNREFERENCED_PARAMETER(strPrefix);
+      __UNREFERENCED_PARAMETER(strSuffix);
       return time() / "time";
 
    }
@@ -1124,7 +1130,7 @@ namespace windows
          str += "\\trash_that_is_not_trash\\";
          string strFormat;
          ::datetime::time time;
-         time = ::datetime::time::get_current_time();
+         time = ::datetime::time::now();
          strFormat.Format("%04d-%02d-%02d %02d-%02d-%02d\\", time.GetYear(), time.GetMonth(), time.GetDay(), time.GetHour(), time.GetMinute(), time.GetSecond());
          str += strFormat;
          if (strDir.m_pdata[2] == '\\')

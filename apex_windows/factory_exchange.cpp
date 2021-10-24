@@ -1,6 +1,5 @@
 #include "framework.h"
 #include "apex/operating_system.h"
-//#include "apex/node/windows/_windows.h"
 #include "file_os_watcher.h"
 #include "apex/platform/launcher.h"
 #include "launcher.h"
@@ -10,6 +9,8 @@
 #include "file_context.h"
 #include "process.h"
 #include "os_context.h"
+#include "apex/parallelization/service.h"
+#include "apex/parallelization/service_handler.h"
 #include "service_handler.h"
 #include "acme_windows/pipe.h"
 #include "crypto.h"
@@ -32,9 +33,9 @@ extern "C"
 void apex_windows_factory_exchange(::factory_map * pfactorymap)
 {
 
-   acme_windows_factory_exchange(pfactorymap);
-
    apex_windows_common_factory_exchange(pfactorymap);
+
+   acme_windows_factory_exchange(pfactorymap);
 
    pfactorymap->create_factory < ::windows::dir_system, ::dir_system >();
    pfactorymap->create_factory < ::windows::file_system, ::file_system >();
@@ -45,8 +46,8 @@ void apex_windows_factory_exchange(::factory_map * pfactorymap)
    //create_factory < ::windows::stdio_file, ::file::text_file >();
    //create_factory < ::windows::file, ::file::file >();
    pfactorymap->create_factory < ::windows::os_context, ::os_context >();
-   pfactorymap->create_factory < ::windows::pipe, ::process::pipe >();
-   pfactorymap->create_factory < ::windows::process, ::process::process >();
+   pfactorymap->create_factory < ::windows::pipe, ::operating_system::pipe >();
+   pfactorymap->create_factory < ::windows::process, ::operating_system::process >();
 
    //create_factory < ::windows::console, ::console::console >();
    pfactorymap->create_factory < ::windows::crypto, ::crypto::crypto >();

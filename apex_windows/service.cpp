@@ -65,7 +65,7 @@ namespace windows
       if (!::StartServiceCtrlDispatcherW(serviceTable))
       {
 
-         __throw(exception::exception());
+         __throw(::exception());
 
       }
 
@@ -102,7 +102,7 @@ namespace windows
 
          DWORD dwLastError = ::GetLastError();
 
-         __throw(exception::exception());
+         __throw(::exception());
 
       }
 
@@ -150,7 +150,7 @@ namespace windows
 
       m_bStopping = true;
 
-      m_stopped.wait(millis((u32)m_dwStopTimeout));
+      m_stopped.wait(::duration((u32)m_dwStopTimeout));
 
    }
 
@@ -244,7 +244,7 @@ namespace windows
          }
 
       }
-      catch (const ::exception::exception & e)
+      catch (const ::exception & e)
       {
 
          s_pservice->UpdateState(SERVICE_STOPPED, e.m_hresult);
@@ -273,7 +273,7 @@ namespace windows
 
          DWORD dwLastError = ::GetLastError();
          
-         __throw(exception::exception());
+         __throw(::exception());
 
       }
 
@@ -287,7 +287,7 @@ namespace windows
          s_pservice->UpdateState(SERVICE_RUNNING);
 
       }
-      catch (const ::exception::exception & e)
+      catch (const ::exception & e)
       {
 
          //
