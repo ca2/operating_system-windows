@@ -171,6 +171,7 @@ inline void __copy(DWORD * pdw, const payload * ppayload)
 CLASS_DECL_ACME_WINDOWS ::file::path get_module_path(HMODULE hmodule = nullptr);
 //CLASS_DECL_ACME_WINDOWS ::file::path module(HMODULE pmoduleosdata = nullptr);
 CLASS_DECL_ACME_WINDOWS string read_resource_as_string(hinstance hinst, ::u32 nID, const char * pcszType, strsize iReadAtMostByteCount = -1);
+CLASS_DECL_ACME_WINDOWS const void * get_resource_pointer(HINSTANCE hinst, DWORD nID, const char* pcszType, memsize & memsize);
 CLASS_DECL_ACME_WINDOWS bool read_resource_as_memory(memory & m, HINSTANCE hinst, DWORD nID, const char * pcszType, strsize iReadAtMostByteCount = -1);
 
 

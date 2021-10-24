@@ -42,7 +42,7 @@ namespace apex
    //}
 
 
-   //::user::document *  application::_001OpenDocumentFile(::payload varFile)
+   //::user::document *  application::_001OpenDocumentFile(::payload payloadFile)
    //{
 
    //   return nullptr;

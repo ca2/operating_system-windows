@@ -22,10 +22,16 @@ namespace windows
 
       __reference(file_system)      m_pfilesystem;
       __reference(dir_system)       m_pdirsystem;
+      ::mutex                       m_mutexResource;
+      __pointer(zip::in_file)       m_pzipfileResource;
+      bool                          m_bZipFileResourceCalculated;
 
 
       file_context();
-      virtual ~file_context();
+      ~file_context() override;
+
+
+      
 
 
       virtual ::e_status initialize(::object * pobject) override;
@@ -55,13 +61,17 @@ namespace windows
 
       virtual bool is_read_only(const ::file::path & psz) override;
 
+      zip::in_file * _defer_resource_file();
+      ::file_transport create_resource_file(const char* path) override;
+      bool resource_is_file_or_dir(const char* path) override;
+
       virtual ::extended::transport < ::file::file > resource_get_file(const ::file::path & path) override;
 
       virtual bool get_last_write_time(FILETIME * pfiletime, const ::string & strFilename);
 
       ::e_status update_module_path() override;
 
-      file_transport get_file(const ::payload & varFile, const ::file::e_open & nOpenFlags) override;
+      file_transport get_file(const ::payload & payloadFile, const ::file::e_open & nOpenFlags) override;
 
 
 

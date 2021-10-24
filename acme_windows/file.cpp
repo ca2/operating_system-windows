@@ -1343,6 +1343,81 @@ CLASS_DECL_ACME_WINDOWS HANDLE hfile_create(
 
 }
 
+CLASS_DECL_ACME_WINDOWS const void * get_resource_pointer(HINSTANCE hinstance, DWORD nID, const char* pcszType, memsize & memsize)
+{
+
+   HRSRC hrsrc;
+
+   if (::is_set(pcszType))
+   {
+      hrsrc = FindResourceW(hinstance, MAKEINTRESOURCEW(nID), wstring(pcszType));
+   }
+   else
+   {
+      hrsrc = FindResourceW(hinstance, MAKEINTRESOURCEW(nID), (const WCHAR*)(pcszType));
+   }
+
+
+   if (!hrsrc)
+   {
+
+      if (::is_set(pcszType))
+      {
+         hrsrc = FindResourceW(nullptr, MAKEINTRESOURCEW(nID), wstring(pcszType));
+      }
+      else
+      {
+         hrsrc = FindResourceW(nullptr, MAKEINTRESOURCEW(nID), (const WCHAR*)(pcszType));
+      }
+      if (!hrsrc)
+      {
+
+         if (::is_set(pcszType))
+         {
+            hrsrc = FindResourceW(::GetModuleHandle(NULL), MAKEINTRESOURCEW(nID), wstring(pcszType));
+         }
+         else
+         {
+            hrsrc = FindResourceW(::GetModuleHandle(NULL), MAKEINTRESOURCEW(nID), (const WCHAR*)(pcszType));
+         }
+      }
+   }
+
+   HGLOBAL hglobalResource;
+   strsize dwResourceSize;
+   int_bool bOk;
+   DWORD* pResource;
+
+   if (hrsrc == nullptr)
+      return nullptr;
+
+   hglobalResource = LoadResource(hinstance, hrsrc);
+
+   if (hglobalResource == nullptr)
+      return nullptr;
+
+   memsize = SizeofResource(hinstance, hrsrc);
+
+   if (hglobalResource == nullptr)
+   {
+
+      return nullptr;
+
+   }
+
+   bOk = true;
+
+   pResource = (DWORD*)LockResource(hglobalResource);
+
+   return pResource;
+
+}
+
+
+
+
+
+
 
 CLASS_DECL_ACME_WINDOWS bool read_resource_as_memory(memory & m, HINSTANCE hinstance, DWORD nID, const char * pcszType, strsize iReadAtMostByteCount)
 {

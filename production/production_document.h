@@ -24,7 +24,7 @@ namespace production
 	   void dump(dump_context & dumpcontext) const override;
    #endif
 
-      bool on_open_document(const var & varFile) override;
+      bool on_open_document(const var & payloadFile) override;
 
 
    };

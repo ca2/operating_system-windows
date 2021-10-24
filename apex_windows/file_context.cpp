@@ -11,6 +11,8 @@ namespace windows
    file_context::file_context()
    {
 
+      m_bZipFileResourceCalculated = false;
+
    }
 
 
@@ -403,10 +405,112 @@ namespace windows
    }
 
 
-   ::extended::transport < ::file::file > file_context::resource_get_file(const ::file::path & path)
+   zip::in_file* file_context::_defer_resource_file()
    {
 
-#ifdef WINDOWS_DESKTOP
+      if (m_bZipFileResourceCalculated)
+      {
+
+         return m_pzipfileResource;
+
+      }
+
+      m_bZipFileResourceCalculated = true;
+
+      memsize s;
+
+      const void* pdata = get_resource_pointer((HINSTANCE)m_psystem->m_papexsystem->m_hinstance, 1024, "ZIP", s);
+
+      if (::is_null(pdata) || s <= 0)
+      {
+
+         return nullptr;
+
+      }
+
+      auto pmemory = __new(read_only_memory(pdata, s));
+
+      auto pfile = __new(::memory_file(pmemory));
+
+      m_pzipfileResource.create_new(this);
+
+      if (!m_pzipfileResource->unzip_open(pfile, {}, 0))
+      {
+
+
+         return nullptr;
+
+      }
+
+      return m_pzipfileResource;
+
+   }
+
+
+   ::file_transport file_context::create_resource_file(const char* path)
+   {
+
+      synchronous_lock synchronouslock(&m_mutexResource);
+
+      auto pfile = _defer_resource_file();
+
+      string strPath(path);
+
+      strPath.replace("\\", "/");
+
+      if (!pfile->locate(strPath))
+      {
+
+         return nullptr;
+
+      }
+
+      char buffer[1024];
+
+      auto pfileOutput = create_memory_file();
+
+      memsize read;
+
+      while ((read = pfile->read(buffer, sizeof(buffer))) > 0)
+      {
+
+         pfileOutput->write(buffer, read);
+
+      }
+
+      pfileOutput->seek_to_begin();
+
+      return pfileOutput;
+
+   }
+
+
+   bool file_context::resource_is_file_or_dir(const char* path)
+   {
+
+      synchronous_lock synchronouslock(&m_mutexResource);
+
+      auto pfile = _defer_resource_file();
+
+      string strPath(path);
+
+      strPath.replace("\\", "/");
+
+      if (!pfile->locate(strPath))
+      {
+
+         return false;
+
+      }
+
+      return true;
+
+   }
+
+
+
+   ::extended::transport < ::file::file > file_context::resource_get_file(const ::file::path & path)
+   {
 
       auto pfile = create_memory_file();
 
@@ -419,7 +523,7 @@ namespace windows
       if (strExtension == "HTML")
       {
 
-         psz = (const ::string &)RT_HTML;
+         psz = (const char *)RT_HTML;
 
       }
 
@@ -432,11 +536,6 @@ namespace windows
 
       }
 
-#else
-
-      throw_todo();
-
-#endif
 
       return nullptr;
 
@@ -800,10 +899,10 @@ namespace windows
    }
 
 
-   file_transport file_context::get_file(const ::payload & varFile, const ::file::e_open & eopenFlags)
+   file_transport file_context::get_file(const ::payload & payloadFile, const ::file::e_open & eopenFlags)
    {
 
-      return ::file_context::get_file(varFile, eopenFlags);
+      return ::file_context::get_file(payloadFile, eopenFlags);
 
    }
 
