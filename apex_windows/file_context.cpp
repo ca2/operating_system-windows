@@ -454,6 +454,13 @@ namespace windows
 
       auto pfile = _defer_resource_file();
 
+      if (is_null(pfile))
+      {
+
+         return nullptr;
+
+      }
+
       string strPath(path);
 
       strPath.replace("\\", "/");
@@ -491,6 +498,13 @@ namespace windows
       synchronous_lock synchronouslock(&m_mutexResource);
 
       auto pfile = _defer_resource_file();
+
+      if (is_null(pfile))
+      {
+
+         return false;
+
+      }
 
       string strPath(path);
 
