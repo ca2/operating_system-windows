@@ -1130,7 +1130,7 @@ namespace windows
          string strFormat;
          ::datetime::time time;
          time = ::datetime::time::now();
-         strFormat.Format("%04d-%02d-%02d %02d-%02d-%02d\\", time.GetYear(), time.GetMonth(), time.GetDay(), time.GetHour(), time.GetMinute(), time.GetSecond());
+         strFormat.Format("%04d-%02d-%02d %02d-%02d-%02d\\", time.year(), time.month(), time.day(), time.hour(), time.minute(), time.second());
          str += strFormat;
          if (strDir.m_pdata[2] == '\\')
          {

@@ -127,7 +127,7 @@ namespace mouse_hook
 
       g_pmatter = nullptr;
 
-      PostThreadMessage(g_itask, WM_QUIT, 0, 0);
+      PostThreadMessage((DWORD) g_itask, WM_QUIT, 0, 0);
 
       g_bRun = false;
 

@@ -789,12 +789,12 @@ namespace acme
 
          SYSTEMTIME sysTime;
 
-         sysTime.wYear = (::u16)time.GetYear();
-         sysTime.wMonth = (::u16)time.GetMonth();
-         sysTime.wDay = (::u16)time.GetDay();
-         sysTime.wHour = (::u16)time.GetHour();
-         sysTime.wMinute = (::u16)time.GetMinute();
-         sysTime.wSecond = (::u16)time.GetSecond();
+         sysTime.wYear = (::u16)time.year();
+         sysTime.wMonth = (::u16)time.month();
+         sysTime.wDay = (::u16)time.day();
+         sysTime.wHour = (::u16)time.hour();
+         sysTime.wMinute = (::u16)time.minute();
+         sysTime.wSecond = (::u16)time.second();
          sysTime.wMilliseconds = 0;
 
          // convert system time to local file time
