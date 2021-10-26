@@ -291,7 +291,7 @@ namespace windows
    //   
    //   u32 dwSize = 1;
 
-   //   while(natural(wstrPath.get_length() + 1) == dwSize)
+   //   while(natural(wstrPath.length() + 1) == dwSize)
    //   {
 
    //      dwSize = ::GetModuleFileNameW(
@@ -3031,21 +3031,21 @@ repeat:
 
             hr = pfileopen->SetOptions(options);
 
-            if (set["default_file_extension"].get_length() > 0)
+            if (set["default_file_extension"].length() > 0)
             {
 
                pfileopen->SetDefaultExtension(wstring(set["default_file_extension"].get_string()));
 
             }
 
-            if (set["file_name"].get_length() > 0)
+            if (set["file_name"].length() > 0)
             {
 
                pfileopen->SetFileName(wstring(set["file_name"].get_string()));
 
             }
 
-            if (set["folder"].get_length() > 0)
+            if (set["folder"].length() > 0)
             {
 
                wstring wstr(set["folder"].get_string());
@@ -3268,21 +3268,21 @@ repeat:
 
             }
 
-            if (set["default_file_extension"].get_length() > 0)
+            if (set["default_file_extension"].length() > 0)
             {
 
                pfilesave->SetDefaultExtension(wstring(set["default_file_extension"].get_string()));
 
             }
 
-            if (set["file_name"].get_length() > 0)
+            if (set["file_name"].length() > 0)
             {
 
                pfilesave->SetFileName(wstring(set["file_name"].get_string()));
 
             }
 
-            if (set["folder"].get_length() > 0)
+            if (set["folder"].length() > 0)
             {
 
                wstring wstr(set["folder"].get_string());
@@ -3397,7 +3397,7 @@ repeat:
          if (SUCCEEDED(hr))
          {
 
-            if (set["folder"].get_length() > 0)
+            if (set["folder"].length() > 0)
             {
 
                wstring wstr(set["folder"].get_string());
@@ -3514,7 +3514,7 @@ repeat:
          if (SUCCEEDED(hr))
          {
 
-            if (set["folder"].get_length() > 0)
+            if (set["folder"].length() > 0)
             {
 
                wstring wstr(set["folder"].get_string());
