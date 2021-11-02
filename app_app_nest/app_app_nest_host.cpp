@@ -645,7 +645,7 @@ namespace ca2plugin_container
 
                      string str;
 
-                     str.Format("%0.1f fps",dLast);
+                     str.format("%0.1f fps",dLast);
 
                      pgraphics->set_text_color(argb(255,255,255,0));
 

@@ -63,7 +63,7 @@ namespace multimedia
 
             string strMessage;
 
-            strMessage.Format("mixerGetLineControls(ctrlid=%.08lXh) failed on hmx=%.04Xh, mmr=%u!",
+            strMessage.format("mixerGetLineControls(ctrlid=%.08lXh) failed on hmx=%.04Xh, mmr=%u!",
                               m_mixerline.dwLineID, device->m_hMixer, mmrc);
 
 
@@ -235,7 +235,7 @@ namespace multimedia
          {
             string strMessage;
 
-            strMessage.Format("mixerGetLineInfo(src=%u) failed on hmx=%.04Xh, mmr=%u!",
+            strMessage.format("mixerGetLineInfo(src=%u) failed on hmx=%.04Xh, mmr=%u!",
                               dwSource, device->m_hMixer, mmrc);
             //message_box(strMessage, nullptr, e_message_box_icon_exclamation);
 

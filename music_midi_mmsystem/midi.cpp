@@ -281,13 +281,13 @@ namespace music
             if (caps.szPname != nullptr)
             {
 
-               strName.Format("%s (%d)", caps.szPname, i);
+               strName.format("%s (%d)", caps.szPname, i);
 
             }
             else
             {
 
-               strName.Format("(no name midi In device) (%d)", i);
+               strName.format("(no name midi In device) (%d)", i);
 
             }
 
@@ -344,7 +344,7 @@ namespace music
             if (caps.szPname != nullptr)
             {
 
-               strName.Format("%S (%d)", caps.szPname, i);
+               strName.format("%S (%d)", caps.szPname, i);
 
                m_straMidiOutName.add(caps.szPname);
 
@@ -352,7 +352,7 @@ namespace music
             else
             {
 
-               strName.Format("(no name midi Out device) (%d)", i);
+               strName.format("(no name midi Out device) (%d)", i);
 
                m_straMidiOutName.add(strName);
 

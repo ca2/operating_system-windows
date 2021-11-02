@@ -54,7 +54,7 @@ namespace backup
          if(!pcontext->m_papexcontext->file().exists(strFile))
          {
             string str;
-            str.Format("***File %s does not exist. (mysqldump -uroot -ppassword --opt --all-databases > %%1)", strFile);
+            str.format("***File %s does not exist. (mysqldump -uroot -ppassword --opt --all-databases > %%1)", strFile);
             add_status(str);
             return error_failed;
          }
@@ -218,7 +218,7 @@ namespace backup
       si.wShowWindow = SW_HIDE;
       ::file::path strNewRepos = get_new_repos_local_path(psz);
       pcontext->m_papexcontext->dir().mk(strNewRepos.folder());
-      str.Format("svnadmin hotcopy C:\\repos\\%s %s", psz, strNewRepos);
+      str.format("svnadmin hotcopy C:\\repos\\%s %s", psz, strNewRepos);
 
       if(!::CreateProcess(nullptr, (LPTSTR) (const ::string &) str, nullptr, nullptr, false, CREATE_NEW_CONSOLE, nullptr, nullptr, &si, &pi))
       {
@@ -236,7 +236,7 @@ namespace backup
          if(dwExitCode != STILL_ACTIVE)
             break;
          Sleep(2300);
-         str.Format("%d hotcopy repository: %s ...", i, psz);
+         str.format("%d hotcopy repository: %s ...", i, psz);
          add_status(str);
          i++;
       }
@@ -261,7 +261,7 @@ namespace backup
       ::file::path strdump = get_new_db_local_path("all.sql");
       pcontext->m_papexcontext->dir().mk(strdump.folder());
 
-      str.Format("%s \"%s\"", pcontext->m_papexcontext->dir().install() / "basis/ca2/app/dbbk.bat", strdump);
+      str.format("%s \"%s\"", pcontext->m_papexcontext->dir().install() / "basis/ca2/app/dbbk.bat", strdump);
 
       wstring wstr(str);
 
@@ -283,7 +283,7 @@ namespace backup
          if(dwExitCode != STILL_ACTIVE)
             break;
          Sleep(2300);
-         str.Format("%d dumping all databases ...", i);
+         str.format("%d dumping all databases ...", i);
          add_status(str);
          i++;
       }
@@ -309,7 +309,7 @@ namespace backup
       ::file::path strTar;
       strTar = ::file::path("C:\\ca2\\bk") / m_strTag  / "repos" / psz + ".tar";
       pcontext->m_papexcontext->dir().mk(strTar.folder());
-      str.Format("7za.exe a -r -ttar \"%s\" \"%s\"", strTar, strNewRepos);
+      str.format("7za.exe a -r -ttar \"%s\" \"%s\"", strTar, strNewRepos);
 
       if(!::CreateProcess(nullptr, (LPTSTR) (const ::string &) str, nullptr, nullptr, false, CREATE_NEW_CONSOLE, nullptr, nullptr, &si, &pi))
       {
@@ -327,7 +327,7 @@ namespace backup
          if(dwExitCode != STILL_ACTIVE)
             break;
          Sleep(2300);
-         str.Format("%d compressing repository: %s ...", i, psz);
+         str.format("%d compressing repository: %s ...", i, psz);
          add_status(str);
          i++;
       }

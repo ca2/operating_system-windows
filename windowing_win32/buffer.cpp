@@ -563,7 +563,7 @@ namespace windowing_win32
 
                int i = m_pimpl->prop("iSquaryHint");
                string str;
-               str.Format("%d", i);
+               str.format("%d", i);
                //iSquaryHint++;
                wstr = str;
                m_pimpl->prop("iSquaryHint") = i + 1;

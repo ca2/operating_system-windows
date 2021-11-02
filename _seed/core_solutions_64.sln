@@ -1315,11 +1315,9 @@ Global
 		{ABDFF656-2F2C-4EE5-970A-75FFA444F767}.cover|x64.ActiveCfg = cover|x64
 		{ABDFF656-2F2C-4EE5-970A-75FFA444F767}.cover|x64.Build.0 = cover|x64
 		{ABDFF656-2F2C-4EE5-970A-75FFA444F767}.cube_basis|Win32.ActiveCfg = basis|Win32
-		{ABDFF656-2F2C-4EE5-970A-75FFA444F767}.cube_basis|Win32.Build.0 = basis|Win32
 		{ABDFF656-2F2C-4EE5-970A-75FFA444F767}.cube_basis|x64.ActiveCfg = basis|x64
 		{ABDFF656-2F2C-4EE5-970A-75FFA444F767}.cube_basis|x64.Build.0 = basis|x64
 		{ABDFF656-2F2C-4EE5-970A-75FFA444F767}.cube_stage|Win32.ActiveCfg = stage|Win32
-		{ABDFF656-2F2C-4EE5-970A-75FFA444F767}.cube_stage|Win32.Build.0 = stage|Win32
 		{ABDFF656-2F2C-4EE5-970A-75FFA444F767}.cube_stage|x64.ActiveCfg = stage|x64
 		{ABDFF656-2F2C-4EE5-970A-75FFA444F767}.cube_stage|x64.Build.0 = stage|x64
 		{ABDFF656-2F2C-4EE5-970A-75FFA444F767}.stage|Win32.ActiveCfg = stage|Win32
@@ -1327,11 +1325,9 @@ Global
 		{ABDFF656-2F2C-4EE5-970A-75FFA444F767}.stage|x64.ActiveCfg = stage|x64
 		{ABDFF656-2F2C-4EE5-970A-75FFA444F767}.stage|x64.Build.0 = stage|x64
 		{B3C2FC2F-00B5-4B57-BA6A-5BAE18CE8761}.basis|Win32.ActiveCfg = cube_basis|Win32
-		{B3C2FC2F-00B5-4B57-BA6A-5BAE18CE8761}.basis|Win32.Build.0 = cube_basis|Win32
 		{B3C2FC2F-00B5-4B57-BA6A-5BAE18CE8761}.basis|x64.ActiveCfg = cube_basis|x64
 		{B3C2FC2F-00B5-4B57-BA6A-5BAE18CE8761}.basis|x64.Build.0 = cube_basis|x64
 		{B3C2FC2F-00B5-4B57-BA6A-5BAE18CE8761}.cover|Win32.ActiveCfg = cube_stage|Win32
-		{B3C2FC2F-00B5-4B57-BA6A-5BAE18CE8761}.cover|Win32.Build.0 = cube_stage|Win32
 		{B3C2FC2F-00B5-4B57-BA6A-5BAE18CE8761}.cover|x64.ActiveCfg = cube_stage|x64
 		{B3C2FC2F-00B5-4B57-BA6A-5BAE18CE8761}.cover|x64.Build.0 = cube_stage|x64
 		{B3C2FC2F-00B5-4B57-BA6A-5BAE18CE8761}.cube_basis|Win32.ActiveCfg = cube_basis|Win32
@@ -1343,7 +1339,6 @@ Global
 		{B3C2FC2F-00B5-4B57-BA6A-5BAE18CE8761}.cube_stage|x64.ActiveCfg = cube_stage|x64
 		{B3C2FC2F-00B5-4B57-BA6A-5BAE18CE8761}.cube_stage|x64.Build.0 = cube_stage|x64
 		{B3C2FC2F-00B5-4B57-BA6A-5BAE18CE8761}.stage|Win32.ActiveCfg = cube_stage|Win32
-		{B3C2FC2F-00B5-4B57-BA6A-5BAE18CE8761}.stage|Win32.Build.0 = cube_stage|Win32
 		{B3C2FC2F-00B5-4B57-BA6A-5BAE18CE8761}.stage|x64.ActiveCfg = cube_stage|x64
 		{B3C2FC2F-00B5-4B57-BA6A-5BAE18CE8761}.stage|x64.Build.0 = cube_stage|x64
 	EndGlobalSection

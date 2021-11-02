@@ -117,10 +117,10 @@ namespace windows
          {
          case ERROR_FILE_NOT_FOUND:
             // Use this->getPort to convert to a std::string
-            str.Format("Specified port, %d, does not exist.", this->getPort());
+            str.format("Specified port, %d, does not exist.", this->getPort());
             __throw(error_serial, str);
          default:
-            str.Format("Unknown error opening the serial port: %d", dwLastError);
+            str.format("Unknown error opening the serial port: %d", dwLastError);
             __throw(error_serial, str);
          }
       }
@@ -430,7 +430,7 @@ namespace windows
 
                DWORD dwLastError = ::GetLastError();
 
-               str.Format("Error while closing serial port: %d", dwLastError);
+               str.format("Error while closing serial port: %d", dwLastError);
                __throw(error_io, str);
             }
             else
@@ -472,7 +472,7 @@ namespace windows
 
          DWORD dwLastError = ::GetLastError();
 
-         str.Format("Error while checking status of the serial port: %d", dwLastError);
+         str.format("Error while checking status of the serial port: %d", dwLastError);
 
          __throw(error_io, str);
 
@@ -528,7 +528,7 @@ namespace windows
 
          DWORD dwLastError = ::GetLastError();
 
-         ss.Format("Error while reading from the serial port: %d", dwLastError);
+         ss.format("Error while reading from the serial port: %d", dwLastError);
 
          __throw(error_io, ss);
 
@@ -558,7 +558,7 @@ namespace windows
 
          DWORD dwLastError = ::GetLastError();
 
-         str.Format("Error while writing to the serial port: %d", dwLastError);
+         str.format("Error while writing to the serial port: %d", dwLastError);
 
          __throw(error_io, str);
 
