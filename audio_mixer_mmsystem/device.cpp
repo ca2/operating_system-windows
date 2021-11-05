@@ -60,7 +60,7 @@ namespace multimedia
 
                string strMessage;
 
-               strMessage.Format("mixerClose() failed on hmx=%.04Xh, mmr=%u!", m_hMixer, mmrct);
+               strMessage.format("mixerClose() failed on hmx=%.04Xh, mmr=%u!", m_hMixer, mmrct);
 
                //message_box(this, strMessage, nullptr, e_message_box_icon_exclamation);
 
@@ -75,7 +75,7 @@ namespace multimedia
 
             string strMessage;
 
-            strMessage.Format("mixerGetDevCaps() failed on uMxId=%u, mmr=%u!", uiMixerId, mmrc);
+            strMessage.format("mixerGetDevCaps() failed on uMxId=%u, mmr=%u!", uiMixerId, mmrc);
 
             //message_box(strMessage, nullptr, e_message_box_icon_exclamation);
 
@@ -90,7 +90,7 @@ namespace multimedia
 
             string strMessage;
 
-            strMessage.Format("mixerOpen() failed on uMxId=%u, mmr=%u!", uiMixerId, mmrc);
+            strMessage.format("mixerOpen() failed on uMxId=%u, mmr=%u!", uiMixerId, mmrc);
 
             //message_box(strMessage, nullptr, e_message_box_icon_exclamation);
 
@@ -123,7 +123,7 @@ namespace multimedia
 
             string strMessage;
 
-            strMessage.Format("mixerGetDevCaps() failed on uMxId=%u, mmr=%u!", m_uiMixerID, mmrc);
+            strMessage.format("mixerGetDevCaps() failed on uMxId=%u, mmr=%u!", m_uiMixerID, mmrc);
 
             //message_box(strMessage, nullptr, e_message_box_icon_exclamation);
 

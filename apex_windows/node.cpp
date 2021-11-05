@@ -684,7 +684,7 @@ namespace apex
                   //pTranslate[u].wLanguage,
                   //pTranslate[u].wCodePage);
 
-                  strKey.Format(
+                  strKey.format(
                      "\\StringFileInfo\\%04x%04x\\FileVersion",
                      pTranslate[u].wLanguage,
                      pTranslate[u].wCodePage);

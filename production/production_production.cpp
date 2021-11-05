@@ -728,7 +728,7 @@ pacmedir->system() / "config/production/mirror_status.txt";
                {
                   u32 dw = GetLastError();
                   string str;
-                  str.Format("Error creating clean process: %d", dw);
+                  str.format("Error creating clean process: %d", dw);
                   add_status(str);
                   return error_failed;
                }
@@ -736,7 +736,7 @@ pacmedir->system() / "config/production/mirror_status.txt";
                while (!process->has_exited())
                {
                   Sleep(5000);
-                  str.Format("%d Cleaning ca2 fontopus ...", i);
+                  str.format("%d Cleaning ca2 fontopus ...", i);
                   add_status(str);
                   i++;
                }
@@ -796,7 +796,7 @@ pacmedir->system() / "config/production/mirror_status.txt";
             {
                u32 dw = GetLastError();
                string str;
-               str.Format("Error creating process: %d", dw);
+               str.format("Error creating process: %d", dw);
                add_status(str);
                return 0;
             }
@@ -804,7 +804,7 @@ pacmedir->system() / "config/production/mirror_status.txt";
             while (!process->has_exited(&dwExitCode))
             {
                Sleep(500);
-               str.Format("%d Cleaning folder ...", i);
+               str.format("%d Cleaning folder ...", i);
                add_status(str);
                i++;
             }*/
@@ -1049,7 +1049,7 @@ pacmedir->create(pathTarget.folder()))
             {
                u32 dw = GetLastError();
                string str;
-               str.Format("Error creating process: %d", dw);
+               str.format("Error creating process: %d", dw);
                add_status(str);
                return error_failed;
             }
@@ -1061,7 +1061,7 @@ pacmedir->create(pathTarget.folder()))
             while (!process->has_exited())
             {
                Sleep(500);
-               str.Format("%d Storing Symbols x86 ...", i);
+               str.format("%d Storing Symbols x86 ...", i);
                add_status(str);
                i++;
             }
@@ -1085,7 +1085,7 @@ pacmedir->create(pathTarget.folder()))
             {
                u32 dw = GetLastError();
                string str;
-               str.Format("Error creating process: %d", dw);
+               str.format("Error creating process: %d", dw);
                add_status(str);
                return error_failed;
             }
@@ -1097,7 +1097,7 @@ pacmedir->create(pathTarget.folder()))
             while (!process->has_exited())
             {
                Sleep(500);
-               str.Format("%d Storing Symbols x86 ...", i);
+               str.format("%d Storing Symbols x86 ...", i);
                add_status(str);
                i++;
             }
@@ -1638,11 +1638,11 @@ pacmedir->create(pathTarget.folder()))
       si.wShowWindow = SW_HIDE;
       if (pszRevision != nullptr && pszRevision[0] != '\0')
       {
-         str.Format("svn update --revision %s %s", pszRevision, strBase / psz);
+         str.format("svn update --revision %s %s", pszRevision, strBase / psz);
       }
       else
       {
-         str.Format("svn update %s", strBase / psz);
+         str.format("svn update %s", strBase / psz);
       }
       if (!::CreateProcess(nullptr, (LPTSTR)(const ::string &)str, nullptr, nullptr, false, CREATE_NEW_CONSOLE, nullptr, nullptr, &si, &pi))
       {
@@ -1660,7 +1660,7 @@ pacmedir->create(pathTarget.folder()))
          if (dwExitCode != STILL_ACTIVE)
             break;
          Sleep(2300);
-         str.Format("%d Updating source: %s ...", i, psz);
+         str.format("%d Updating source: %s ...", i, psz);
          add_status(str);
          i++;
       }
@@ -1709,7 +1709,7 @@ pacmedir->create(pathTarget.folder()))
 
       if (string(psz).find(":\\") <= 0)
       {
-         str.Format("git stage .");
+         str.format("git stage .");
 
          wstring wstr(str);
          if (!::CreateProcessW(nullptr, (LPWSTR)(const wchar_t *)wstr, nullptr, nullptr, false, CREATE_NEW_CONSOLE, nullptr, wstring(pathDir), &si, &pi))
@@ -1726,7 +1726,7 @@ pacmedir->create(pathTarget.folder()))
             if (dwExitCode != STILL_ACTIVE)
                break;
             Sleep(2300);
-            str.Format("%d: Stage for new Build and new Release : %s ...", i, psz);
+            str.format("%d: Stage for new Build and new Release : %s ...", i, psz);
             add_status(str);
             i++;
          }
@@ -1744,11 +1744,11 @@ pacmedir->create(pathTarget.folder()))
 
       if (string(psz).find(":\\") > 0)
       {
-         str.Format("git commit --file=%s %s", m_strBase / "app\\this_version_info.txt", psz);
+         str.format("git commit --file=%s %s", m_strBase / "app\\this_version_info.txt", psz);
       }
       else
       {
-         str.Format("git commit --file=%s %s", m_strBase / "app\\this_version_info.txt", strBase / psz);
+         str.format("git commit --file=%s %s", m_strBase / "app\\this_version_info.txt", strBase / psz);
       }
       if (!::CreateProcess(nullptr, (LPTSTR)(const ::string &)str, nullptr, nullptr, false, CREATE_NEW_CONSOLE, nullptr, nullptr, &si, &pi))
       {
@@ -1765,7 +1765,7 @@ pacmedir->create(pathTarget.folder()))
          if (dwExitCode != STILL_ACTIVE)
             break;
          Sleep(2300);
-         str.Format("%d: Commit for new Build and new Release : %s ...", i, psz);
+         str.format("%d: Commit for new Build and new Release : %s ...", i, psz);
          add_status(str);
          i++;
       }
@@ -1780,11 +1780,11 @@ pacmedir->create(pathTarget.folder()))
       add_status(strStatus);
       if (string(psz).find(":\\") > 0)
       {
-         str.Format("git push %s", psz);
+         str.format("git push %s", psz);
       }
       else
       {
-         str.Format("git push %s", strBase / psz);
+         str.format("git push %s", strBase / psz);
       }
       if (!::CreateProcess(nullptr, (LPTSTR)(const ::string &)str, nullptr, nullptr, false, CREATE_NEW_CONSOLE, nullptr, nullptr, &si, &pi))
       {
@@ -1801,7 +1801,7 @@ pacmedir->create(pathTarget.folder()))
          if (dwExitCode != STILL_ACTIVE)
             break;
          Sleep(2300);
-         str.Format("%d: Push for new Build and new Release : %s ...", i, psz);
+         str.format("%d: Push for new Build and new Release : %s ...", i, psz);
          add_status(str);
          i++;
       }
@@ -2622,14 +2622,14 @@ pacmedir->create(pathTarget.folder()))
          {
             u32 dw = GetLastError();
             string str;
-            str.Format("Error compressing npca2: %d is zip command line utility installed?", dw);
+            str.format("Error compressing npca2: %d is zip command line utility installed?", dw);
             add_status(str);
             return 0;
          }
          while (!process->has_exited())
          {
             Sleep(300);
-            str.Format("%d Compressing npca2 ...", i);
+            str.format("%d Compressing npca2 ...", i);
             add_status(str);
          }
       }
@@ -2653,7 +2653,7 @@ pacmedir->create(pathTarget.folder()))
       {
          u32 dw = GetLastError();
          string str;
-         str.Format("Error compressing npca2: %d is zip command line utilty installed?", dw);
+         str.format("Error compressing npca2: %d is zip command line utilty installed?", dw);
          add_status(str);
          return 0;
       }
@@ -2661,7 +2661,7 @@ pacmedir->create(pathTarget.folder()))
       while (!process->has_exited())
       {
          Sleep(300);
-         str.Format("%d Compressing npca2 ...", i);
+         str.format("%d Compressing npca2 ...", i);
          add_status(str);
          i++;
       }
@@ -2710,7 +2710,7 @@ pacmedir->create(pathTarget.folder()))
       {
          u32 dw = GetLastError();
          string str;
-         str.Format("Error creating iexca2.cab: %d", dw);
+         str.format("Error creating iexca2.cab: %d", dw);
          add_status(str);
          return 0;
       }
@@ -2719,7 +2719,7 @@ pacmedir->create(pathTarget.folder()))
       while (!process->has_exited())
       {
          Sleep(5000);
-         str.Format("%d Creating iexca2.cab  " + string(pszPlatform) + "...", i);
+         str.format("%d Creating iexca2.cab  " + string(pszPlatform) + "...", i);
          add_status(str);
          i++;
       }
@@ -3451,7 +3451,7 @@ retry1:
       {
          u32 dw = GetLastError();
          string str;
-         str.Format("Error creating build process: %d for build of " + strApp, dw);
+         str.format("Error creating build process: %d for build of " + strApp, dw);
          add_status(str);
          return;
       }
@@ -3461,7 +3461,7 @@ retry1:
       while (!process->has_exited())
       {
          Sleep(100);
-         //str.Format("%d Building ca2 fontopus " + strApp + "...", i);
+         //str.format("%d Building ca2 fontopus " + strApp + "...", i);
          while (true)
          {
             str = process->read();

@@ -488,7 +488,7 @@ wstring windowing::_windows_calc_icon_window_class(::user::interaction * puserin
 
       WNDCLASSEXW wndcls;
 
-      if (strClass.get_length() > 0 && GetClassInfoExW((HINSTANCE)psystem->m_hinstance, strClass, &wndcls) && wndcls.hIcon != hIcon)
+      if (strClass.get_length() > 0 && GetClassInfoExW((HINSTANCE)psystem->m_hinstanceThis, strClass, &wndcls) && wndcls.hIcon != hIcon)
       {
 
          // register a very similar WNDCLASS

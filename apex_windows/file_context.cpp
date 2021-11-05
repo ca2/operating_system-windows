@@ -226,7 +226,7 @@ namespace windows
 
                   string strError;
 
-                  strError.Format("Failed to delete the file to move \"%s\" error=%d", psz, dwError);
+                  strError.format("Failed to delete the file to move \"%s\" error=%d", psz, dwError);
 
                   INFORMATION("%s", strError);
 
@@ -242,7 +242,7 @@ namespace windows
 
          string strError;
 
-         strError.Format("Failed to move file \"%s\" to \"%s\" error=%d", psz, pszNew, dwError);
+         strError.format("Failed to move file \"%s\" to \"%s\" error=%d", psz, pszNew, dwError);
 
          __throw(::error_io, strError);
 
@@ -330,7 +330,7 @@ namespace windows
 
          string strError;
 
-         strError.Format("Failed to delete file \"%s\" error=%d", psz, dwError);
+         strError.format("Failed to delete file \"%s\" error=%d", psz, dwError);
 
          return ::error_failed;
 
@@ -419,7 +419,7 @@ namespace windows
 
       memsize s;
 
-      const void* pdata = get_resource_pointer((HINSTANCE)m_psystem->m_papexsystem->m_hinstance, 1024, "ZIP", s);
+      const void* pdata = get_resource_pointer((HINSTANCE)m_psystem->m_papexsystem->m_hinstanceThis, 1024, "ZIP", s);
 
       if (::is_null(pdata) || s <= 0)
       {
@@ -543,7 +543,7 @@ namespace windows
 
       __pointer(::apex::system) psystem = get_system();
 
-      if (read_resource_as_memory(*pfile->get_primitive_memory(), (HINSTANCE) psystem->m_hinstance, iId, psz))
+      if (read_resource_as_memory(*pfile->get_primitive_memory(), (HINSTANCE) psystem->m_hinstanceThis, iId, psz))
       {
 
          return pfile;

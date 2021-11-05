@@ -166,7 +166,7 @@ namespace acme
 
          string str;
 
-         str.Format("\n\n\nWindow Background Color rgb(%d,%d,%d)\n\n", colorWindowBackground.red, colorWindowBackground.green, colorWindowBackground.blue);
+         str.format("\n\n\nWindow Background Color rgb(%d,%d,%d)\n\n", colorWindowBackground.red, colorWindowBackground.green, colorWindowBackground.blue);
 
          ::output_debug_string(str);
 
@@ -1692,7 +1692,7 @@ namespace acme
       //   {
       //      DWORD dwError = ::GetLastError();
       //      string str;
-      //      str.Format("lookup Privilege value Error: %u\n", dwError);
+      //      str.format("lookup Privilege value Error: %u\n", dwError);
       //      message_box(str, "Help Me", e_message_box_ok);
       //      return false;
       //   }
@@ -2564,18 +2564,7 @@ namespace acme
       ::e_status node::implement()
       {
 
-         auto psystem = m_psystem;
-
-         auto estatus = psystem->main();
-
-         if (!estatus)
-         {
-
-            return estatus;
-
-         }
-
-         return estatus;
+         return ::acme::node::implement();
 
       }
 
