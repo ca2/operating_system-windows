@@ -106,11 +106,11 @@ namespace hi5
       TWIT_SAVEDSEARCHDESTROY_URL("http://twitter.com/saved_searches/destroy/"),
 
       /* Trends URLs */
-      TWIT_TRENDS_URL("http://api.twitter.com/1/trends.json"),
-      TWIT_TRENDSDAILY_URL("http://api.twitter.com/1/trends/daily.json"),
-      TWIT_TRENDSCURRENT_URL("http://api.twitter.com/1/trends/current.json"),
-      TWIT_TRENDSWEEKLY_URL("http://api.twitter.com/1/trends/weekly.json"),
-      TWIT_TRENDSAVAILABLE_URL("http://api.twitter.com/1/trends/available.json"),
+      TWIT_TRENDS_URL("http://api.twitter.com/1/trends.network_payload"),
+      TWIT_TRENDSDAILY_URL("http://api.twitter.com/1/trends/daily.network_payload"),
+      TWIT_TRENDSCURRENT_URL("http://api.twitter.com/1/trends/current.network_payload"),
+      TWIT_TRENDSWEEKLY_URL("http://api.twitter.com/1/trends/weekly.network_payload"),
+      TWIT_TRENDSAVAILABLE_URL("http://api.twitter.com/1/trends/available.network_payload"),
       m_oauth(papp)
    {
 
@@ -251,7 +251,7 @@ namespace hi5
          post["status"] = newStatus;
 
          /* Perform POST */
-         retVal = performPost("https://api.twitter.com/1.1/statuses/update.json", post);
+         retVal = performPost("https://api.twitter.com/1.1/statuses/update.network_payload", post);
       }
       return retVal;
    }
