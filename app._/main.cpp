@@ -49,7 +49,7 @@ void dprint(const ::string & psz)
 
    //string str;
 
-   //str.Format("app._ : %s : %s\n",_wargv[2],psz);
+   //str.format("app._ : %s : %s\n",_wargv[2],psz);
 
    //printf("%s", str);
 

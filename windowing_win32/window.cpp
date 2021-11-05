@@ -479,7 +479,7 @@ namespace windowing_win32
 
          string strMessage;
 
-         strMessage.Format("%s\n\nSystem Error Code: %d", strLastError, dwLastError);
+         strMessage.format("%s\n\nSystem Error Code: %d", strLastError, dwLastError);
 
          CATEGORY_WARNING(appmsg, "Warning: Window creation failed: get_last_error returned:");
 

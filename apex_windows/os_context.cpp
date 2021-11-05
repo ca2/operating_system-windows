@@ -668,7 +668,7 @@ namespace windows
 
          string strFormat;
 
-         strFormat.Format("\"%s\" %s", strCommand.c_str(), pszParam);
+         strFormat.format("\"%s\" %s", strCommand.c_str(), pszParam);
 
          estatusRegistry = keyLink1._set("", strFormat);
 
@@ -2089,7 +2089,7 @@ retry:
 
          //string str;
 
-         //str.Format("ShellExecuteExW %d GetLastError = %d", iResult, dwLastError);
+         //str.format("ShellExecuteExW %d GetLastError = %d", iResult, dwLastError);
 
          //output_debug_string(str);
 

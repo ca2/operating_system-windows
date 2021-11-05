@@ -75,7 +75,7 @@ namespace windows
 
 
 
-      virtual ::file::path dropbox_info_json() override;
+      virtual ::file::path dropbox_info_network_payload() override;
 
       //virtual ::file::path onedrive_global_ini(::object * pobject) override;
       //virtual ::file::path onedrive_cid_ini(::object * pobject) override;
