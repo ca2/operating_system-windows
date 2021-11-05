@@ -2772,12 +2772,12 @@ pacmedir->create(pathTarget.folder()))
       }
 
 
-      string strManifestJson = pcontext->m_papexcontext->file().as_string(m_strBase / "platform/stage/matter/crxca2/manifest.json");
+      string strManifestJson = pcontext->m_papexcontext->file().as_string(m_strBase / "platform/stage/matter/crxca2/manifest.network_payload");
       strManifestJson.replace("%BUILD%", strCrxca2Version);
       strManifestJson.replace("%PLATFORM%", strPlatform);
       strManifestJson.replace("%DOWNLOADSITE%", m_strDownloadSite);
       strManifestJson.replace("%ICONURL%", strIconUrl);
-      pcontext->m_papexcontext->file().put_contents(strDir / "manifest.json", strManifestJson);
+      pcontext->m_papexcontext->file().put_contents(strDir / "manifest.network_payload", strManifestJson);
 
       string strIcon;
       string strIconName;
@@ -3199,7 +3199,7 @@ Retry2:
 
          //property_set set;
 
-         //set.parse_json(replyMsg);
+         //set.parse_network_payload(replyMsg);
 
          //set[""]
          /*xml::document document(get_application());
@@ -3290,7 +3290,7 @@ Retry2:
 
          //property_set set;
 
-         //set.parse_json(replyMsg);
+         //set.parse_network_payload(replyMsg);
 
          //set[""]
          /*xml::document document(get_application());
