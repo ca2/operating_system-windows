@@ -1,4 +1,4 @@
-#ifndef SETTINGS_H
+﻿#ifndef SETTINGS_H
 #define SETTINGS_H
 
 #define NSSM_NATIVE_DEPENDONGROUP _T("DependOnGroup")

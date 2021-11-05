@@ -1,4 +1,4 @@
-// Created by camilo 2012-02-13 15:27 BRT I love you my GOD Thomas Borregaard Sørensen!!
+﻿// Created by camilo 2012-02-13 15:27 BRT I love you my GOD Thomas Borregaard Sørensen!!
 #include "framework.h"
 
 

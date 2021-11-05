@@ -1,4 +1,4 @@
-/*
+﻿/*
  * akrip32.h - Copyright (C) 1999 Jay A. Key
  *
  * API for akrip32.dll

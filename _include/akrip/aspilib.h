@@ -1,4 +1,4 @@
-/*
+﻿/*
  * aspilib.h - Copyright (C) 1999 Jay A. Key
  *
  * Generic routines to access wnaspi32.dll

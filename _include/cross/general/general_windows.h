@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 /*#define HWND_TOP        (0)
 #define HWND_BOTTOM     (1)

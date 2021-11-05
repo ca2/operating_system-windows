@@ -1,4 +1,4 @@
-#include "nssm.h"
+﻿#include "nssm.h"
 /* XXX: (value && value->string) is probably bogus because value is probably never null */
 
 /* Affinity. */

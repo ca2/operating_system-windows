@@ -1,4 +1,4 @@
-#include "framework.h"
+﻿#include "framework.h"
 #include "apex/operating_system.h"
 #include "aura/node/windows/buffer.h"
 #include "shell_open.h"

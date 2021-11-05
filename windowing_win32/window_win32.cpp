@@ -1,4 +1,4 @@
-
+﻿
 
 void interaction_impl::CalcWindowRect(RECTANGLE_I32 * pClientRect, ::u32 nAdjustType)
 {

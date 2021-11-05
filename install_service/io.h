@@ -1,4 +1,4 @@
-#ifndef IO_H
+﻿#ifndef IO_H
 #define IO_H
 
 #define NSSM_STDIN_SHARING FILE_SHARE_WRITE

@@ -1,4 +1,4 @@
-#include "nssm.h"
+﻿#include "nssm.h"
 
 #define NSSM_SOURCE _T("nssm")
 #define NSSM_ERROR_BUFSIZE 65535

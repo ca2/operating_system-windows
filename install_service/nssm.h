@@ -1,4 +1,4 @@
-#ifndef NSSM_H
+﻿#ifndef NSSM_H
 #define NSSM_H
 
 /*

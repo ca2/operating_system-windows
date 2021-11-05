@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include "aura/.h"
 #include "aura/os/windows/windows_app_console.inl"

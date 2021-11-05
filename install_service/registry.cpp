@@ -1,4 +1,4 @@
-#include "nssm.h"
+﻿#include "nssm.h"
 
 extern const TCHAR *exit_action_strings[];
 

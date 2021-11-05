@@ -1,4 +1,4 @@
-/* Copyright 2000, Clark Cooper
+﻿/* Copyright 2000, Clark Cooper
    All rights reserved.
 
    This is free software. You are permitted to copy, distribute, or modify
