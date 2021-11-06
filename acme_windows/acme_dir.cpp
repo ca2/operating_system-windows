@@ -1309,7 +1309,11 @@ pacmedir->create CreateDirectoryW last error(%d)=%s", dwError, pszError);
 
          }
 
-         ::file::path pathFolder = file_path_name(string(path));
+         string strPath(path);
+
+         strPath = solve_relative(strPath);
+
+         ::file::path pathFolder = file_path_folder(strPath);
 
          return pathFolder;
 
