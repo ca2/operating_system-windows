@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 
 
 #include "app-core/audio/audio/_.h"

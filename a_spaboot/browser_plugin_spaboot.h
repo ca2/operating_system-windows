@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 
 #include "../spalib/spalib.h"
 #include "ca2/compress/bsdiff/bzlib.h"

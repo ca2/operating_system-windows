@@ -1,4 +1,4 @@
-﻿#include "nssm.h"
+#include "nssm.h"
 
 imports_t imports;
 

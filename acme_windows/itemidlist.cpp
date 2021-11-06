@@ -1,4 +1,4 @@
-﻿#include "framework.h"
+#include "framework.h"
 #include "acme/operating_system.h"
 #include "itemidlist.h"
 #include "known_folder_struct.h"

@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 
 
 int installer_start(const ::string & pszVersion, const ::string & pszId);

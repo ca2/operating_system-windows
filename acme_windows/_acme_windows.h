@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 
 
 #include "acme_windows_common/_acme_windows_common.h"

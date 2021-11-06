@@ -1,4 +1,4 @@
-﻿// Moved from app_core_auraclick by camilo 2021-09-12 15:52 BRT <3ThomasBS_!!
+// Moved from app_core_auraclick by camilo 2021-09-12 15:52 BRT <3ThomasBS_!!
 #include "framework.h"
 #include "aura/operating_system.h"
 #include "mouse_hook.h"

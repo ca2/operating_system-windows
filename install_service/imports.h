@@ -1,4 +1,4 @@
-﻿#ifndef IMPORTS_H
+#ifndef IMPORTS_H
 #define IMPORTS_H
 
 typedef BOOL (WINAPI *AttachConsole_ptr)(DWORD);

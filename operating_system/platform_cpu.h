@@ -1,4 +1,4 @@
-﻿// This is a part of the Microsoft Foundation Classes C++ library.
+// This is a part of the Microsoft Foundation Classes C++ library.
 // Copyright (C) Microsoft Corporation
 // All rights reserved.
 //

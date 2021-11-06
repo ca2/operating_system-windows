@@ -1,4 +1,4 @@
-﻿#ifndef REGISTRY_H
+#ifndef REGISTRY_H
 #define REGISTRY_H
 
 #define NSSM_REGISTRY _T("SYSTEM\\CurrentControlSet\\Services\\%s\\Parameters")

@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 
 
 //using environment_variable_value = ::pair < string, string>;

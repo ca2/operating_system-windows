@@ -1,4 +1,4 @@
-﻿#include "nssm.h"
+#include "nssm.h"
 
 /* See if we were launched from a console window. */
 void check_console() {

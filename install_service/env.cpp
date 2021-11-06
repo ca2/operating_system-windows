@@ -1,4 +1,4 @@
-﻿#include "nssm.h"
+#include "nssm.h"
 
 /* Copy an environment block. */
 TCHAR *copy_environment_block(TCHAR *env) {

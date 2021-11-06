@@ -1,4 +1,4 @@
-﻿#include "StdAfx.h"
+#include "StdAfx.h"
 #include <process.h>
 
 void simple_se_translator(unsigned int uiCode, EXCEPTION_POINTERS * ppointers)

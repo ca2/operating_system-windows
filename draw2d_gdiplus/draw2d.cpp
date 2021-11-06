@@ -1,4 +1,4 @@
-﻿#include "framework.h"
+#include "framework.h"
 
 
 CLASS_DECL_DRAW2D_GDIPLUS ::e_status initialize_gdiplus();

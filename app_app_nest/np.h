@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 
 #include "npapi.h"
 #include "npfunctions.h"

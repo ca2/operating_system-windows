@@ -1,4 +1,4 @@
-﻿#include "aura/app/acid.inl"
+#include "aura/app/acid.inl"
 
 
 ::aura::application * get_acid_app(::object * pobject)

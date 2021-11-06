@@ -1,4 +1,4 @@
-﻿#include "framework.h"
+#include "framework.h"
 #include <wincred.h>
 #include <wtsapi32.h>
 #include <shobjidl.h>

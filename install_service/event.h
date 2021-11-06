@@ -1,4 +1,4 @@
-﻿#ifndef EVENT_H
+#ifndef EVENT_H
 #define EVENT_H
 
 TCHAR *error_string(unsigned long);

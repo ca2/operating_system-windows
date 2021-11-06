@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 
 
 #include "app-core/multimedia/multimedia/_.h"

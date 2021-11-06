@@ -1,4 +1,4 @@
-﻿#include "../spalib/spalib.h"
+#include "../spalib/spalib.h"
 
 HANDLE g_hmutexBoot = nullptr;
 extern std::string g_strId;

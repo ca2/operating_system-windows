@@ -1,4 +1,4 @@
-﻿#include "framework.h"
+#include "framework.h"
 #include <mmddk.h>
 
 // http://blogs.msdn.com/b/matthew_van_eerde/archive/2012/09/21/enumerating-midi-devices.aspx

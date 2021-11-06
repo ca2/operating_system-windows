@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 
 
 #define THIRD_PRIVATE_C_H

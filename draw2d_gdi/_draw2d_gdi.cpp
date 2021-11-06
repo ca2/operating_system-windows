@@ -1,4 +1,4 @@
-﻿#include "framework.h"
+#include "framework.h"
 
 #include "draw2d_gdi.cpp"
 #include "draw2d_gdi_bitmap.cpp"

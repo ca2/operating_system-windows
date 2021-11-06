@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 
 
 class CLASS_DECL_WINDOWING_WIN32 imm_context

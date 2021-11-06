@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 
 
 #if defined(_M_X64)  // X64

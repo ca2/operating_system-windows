@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 
 
 #include "platform-windows/multimedia_mmsystem/_multimedia_mmsystem.h"

@@ -1,4 +1,4 @@
-﻿#include "nssm.h"
+#include "nssm.h"
 
 extern unsigned long thread_data_index;
 extern bool is_admin;

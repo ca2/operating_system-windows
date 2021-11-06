@@ -1,4 +1,4 @@
-﻿// Created by camilo on 2021/09/12 16:06 BRT <3TBS!!
+// Created by camilo on 2021/09/12 16:06 BRT <3TBS!!
 #include "framework.h"
 #include "mouse_hook.h"
 #include "keyboard_hook.h"

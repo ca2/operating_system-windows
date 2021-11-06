@@ -1,4 +1,4 @@
-﻿#ifndef SERVICE_H
+#ifndef SERVICE_H
 #define SERVICE_H
 
 /*

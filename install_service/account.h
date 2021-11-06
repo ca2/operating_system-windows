@@ -1,4 +1,4 @@
-﻿#ifndef ACCOUNT_H
+#ifndef ACCOUNT_H
 #define ACCOUNT_H
 
 #include <ntsecapi.h>

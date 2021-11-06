@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 
 
 #include "platform/app_core/app_core.h"
