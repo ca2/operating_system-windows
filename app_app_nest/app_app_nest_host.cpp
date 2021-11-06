@@ -1,4 +1,4 @@
-﻿#include "framework.h"
+#include "framework.h"
 #include <eh.h>
 
 u32 g_nRedrawThreadID;

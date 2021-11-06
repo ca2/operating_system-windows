@@ -1,4 +1,4 @@
-﻿#include "framework.h"
+#include "framework.h"
 
 //
 //void CLASS_DECL_AURA __init_thread()

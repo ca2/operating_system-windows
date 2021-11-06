@@ -1,4 +1,4 @@
-﻿#include "aura/.h"
+#include "aura/.h"
 
 extern int APIENTRY app_chromium_deferred_run(HINSTANCE hInstance,
       HINSTANCE hPrevInstance,

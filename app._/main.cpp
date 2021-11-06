@@ -1,4 +1,4 @@
-﻿#define NO_DRAW2D
+#define NO_DRAW2D
 #define NO_IMAGING
 #include "apex/console.h"
 #include "apex/user/_.h"

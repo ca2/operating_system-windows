@@ -1,4 +1,4 @@
-﻿// Thank you TBS!!
+// Thank you TBS!!
 #include "framework.h"
 //#include "acme/operating_system.h"
 

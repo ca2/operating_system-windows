@@ -1,4 +1,4 @@
-﻿#include "winspool.h"
+#include "winspool.h"
 
 int SetDefaultPrinterOrientation(short dmOrientation)
 {

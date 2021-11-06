@@ -1,4 +1,4 @@
-﻿#include "framework.h"
+#include "framework.h"
 //#include "apex/operating_system.h"
 //#include "process.h"
 //#include "acme_windows/pipe.h"
