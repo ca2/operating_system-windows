@@ -924,11 +924,11 @@ namespace windows
    ::file::path file_context::dropbox_info_network_payload()
    {
 
-      ::file::path pathJson;
+      ::file::path pathNetworkPayload;
 
-      pathJson = m_psystem->m_pacmedir->user_appdata_local() / "Dropbox/info.network_payload";
+      pathNetworkPayload = m_psystem->m_pacmedir->user_appdata_local() / "Dropbox/info" NETWORK_PAYLOAD_DEFAULT_EXTENSION;
 
-      return pathJson;
+      return pathNetworkPayload;
 
    }
 
