@@ -5014,25 +5014,14 @@ namespace windowing_win32
    //}
 
 
-   void window::show_task(bool bShow)
+   void window::show_task(bool bShowTaskBar)
    {
 
       synchronous_lock synchronouslock(mutex());
 
       // https://www.daniweb.com/programming/software-development/threads/457564/mfc-application-disablehide-taskbar-icon
 
-      if (bShow)
-      {
-
-         _modify_ex_style(WS_EX_TOOLWINDOW, 0, SWP_FRAMECHANGED);
-
-      }
-      else
-      {
-
-         _modify_ex_style(0, WS_EX_TOOLWINDOW, SWP_FRAMECHANGED);
-
-      }
+      set_tool_window(!bShowTaskBar);
 
       defer_co_initialize_ex(false);
 
@@ -5043,7 +5032,7 @@ namespace windowing_win32
       if (SUCCEEDED(hr) && SUCCEEDED(hr = tasklist->HrInit()))
       {
 
-         if (bShow)
+         if (bShowTaskBar)
          {
 
             hr = tasklist->AddTab(get_hwnd());
@@ -6360,22 +6349,7 @@ namespace windowing_win32
    }
 
 
-   //void window::show_task(bool bShowTask)
-   //{
-
-   //   if (bShow)
-   //   {
-
-   //      ModifyStyleEx(WS_EX_TOOLWINDOW, 0, SWP_FRAMECHANGED);
-
-   //   }
-   //   else
-   //   {
-
-   //      ModifyStyleEx(0, WS_EX_TOOLWINDOW, SWP_FRAMECHANGED);
-
-   //   }
-
+  
    //   defer_co_initialize_ex(false);
 
    //   comptr < ITaskbarList>                     tasklist;
