@@ -1,4 +1,4 @@
-#include "framework.h"
+﻿#include "framework.h"
 #include "acme/parallelization/install_mutex.h"
 
 
@@ -2564,18 +2564,7 @@ namespace acme
       ::e_status node::implement()
       {
 
-         auto psystem = m_psystem;
-
-         auto estatus = psystem->main();
-
-         if (!estatus)
-         {
-
-            return estatus;
-
-         }
-
-         return estatus;
+         return ::acme::node::implement();
 
       }
 

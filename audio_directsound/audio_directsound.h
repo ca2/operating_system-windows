@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 
 #include "platform/multimedia_directsound/multimedia_directsound.h"

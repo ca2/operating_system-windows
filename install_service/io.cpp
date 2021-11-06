@@ -1,4 +1,4 @@
-#include "nssm.h"
+﻿#include "nssm.h"
 
 #define COMPLAINED_READ (1 << 0)
 #define COMPLAINED_WRITE (1 << 1)

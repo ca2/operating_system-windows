@@ -1,4 +1,4 @@
-/*
+﻿/*
  * distilled information from various header files from Microsoft's
  * DDK for Windows NT 4.0
  */

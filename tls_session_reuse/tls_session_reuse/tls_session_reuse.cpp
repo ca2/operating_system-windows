@@ -1,4 +1,4 @@
-// tls_session_reuse.cpp : Defines the entry point_i32 for the console application.
+﻿// tls_session_reuse.cpp : Defines the entry point_i32 for the console application.
 //
 
 #include "stdafx.h"

@@ -1,4 +1,4 @@
-/*
+﻿/*
  * cdcache.h - Copyright (C) 1999 Jay A. Key
  *
  * Access routines to local cd cache and cddb

@@ -1,4 +1,4 @@
-// Create on 2021-03-21 20:00 <3ThomasBS_
+﻿// Create on 2021-03-21 20:00 <3ThomasBS_
 #include "framework.h"
 
 
@@ -1309,7 +1309,11 @@ pacmedir->create CreateDirectoryW last error(%d)=%s", dwError, pszError);
 
          }
 
-         ::file::path pathFolder = file_path_name(string(path));
+         string strPath(path);
+
+         strPath = solve_relative(strPath);
+
+         ::file::path pathFolder = file_path_folder(strPath);
 
          return pathFolder;
 

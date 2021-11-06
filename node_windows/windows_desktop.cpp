@@ -1,4 +1,4 @@
-// WindowsDesktop1.cpp : Defines the entry point_i32 for the application.
+﻿// WindowsDesktop1.cpp : Defines the entry point_i32 for the application.
 //
 
 #include "framework.h"

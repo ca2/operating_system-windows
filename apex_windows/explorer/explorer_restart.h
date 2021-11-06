@@ -1,4 +1,4 @@
-// moved to windowing_win32 from desk on 2021-02-11 by Camilo <3TBS_!!
+﻿// moved to windowing_win32 from desk on 2021-02-11 by Camilo <3TBS_!!
 #pragma once
 
 bool restart_explorer();

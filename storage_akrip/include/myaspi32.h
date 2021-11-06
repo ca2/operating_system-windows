@@ -1,4 +1,4 @@
-/*
+﻿/*
  * myaspi32.h - Copyright (C) 1999 Jay A. Key
  *
  * API for WNASPI32.DLL

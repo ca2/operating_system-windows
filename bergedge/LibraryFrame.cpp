@@ -1,4 +1,4 @@
-// LibraryFrame.cpp : implementation file
+﻿// LibraryFrame.cpp : implementation file
 //
 
 #include "stdafx.h"

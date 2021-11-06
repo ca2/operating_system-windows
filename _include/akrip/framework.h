@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 
 #define _AKRIP32_
