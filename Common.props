@@ -5,6 +5,7 @@
     <BaseDir>$(SolutionDir)..\..\..\</BaseDir>
     <TimeDir>$(BaseDir)time-windows\</TimeDir>
     <__archive>$(BaseDir)archive\</__archive>
+    <__toolsbin>$(__archive)tool-windows\bin\</__toolsbin>
   </PropertyGroup>
   <PropertyGroup />
   <ItemDefinitionGroup>
@@ -21,6 +22,9 @@
     </BuildMacro>
     <BuildMacro Include="__archive">
       <Value>$(__archive)</Value>
+    </BuildMacro>
+    <BuildMacro Include="__toolsbin">
+      <Value>$(__toolsbin)</Value>
     </BuildMacro>
   </ItemGroup>
 </Project>

@@ -41,7 +41,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "hello", "..\..\..\source\co
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "acme_windows", "..\acme_windows\acme_windows.vcxproj", "{CC8E8200-00A9-414E-9829-7CA3F1091ADD}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "build_helper", "..\..\..\source\console\build_helper\build_helper.vcxproj", "{BA041232-56F1-44E7-B71F-7B88670AE1B1}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "application_build_helper", "..\..\..\source\console\application_build_helper\application_build_helper.vcxproj", "{BA041232-56F1-44E7-B71F-7B88670AE1B1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

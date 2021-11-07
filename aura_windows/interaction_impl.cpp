@@ -5096,7 +5096,7 @@ namespace windows
 
       bool bKeyMessage = false;
 
-      if (pre_message_handler(pkey, bKeyMessage,pmessage))
+      if (m_puserinteraction->pre_message_handler(pkey, bKeyMessage,pmessage))
       {
 
          return;
