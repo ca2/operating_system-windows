@@ -178,8 +178,6 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "imaging_wic", "..\..\platfo
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "veriwell", "..\..\..\source\app-veriwell\veriwell\veriwell.vcxproj", "{D2EAA013-C127-4D44-9C2D-C70B4E705196}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "tts_sapi", "..\..\platform-windows_common\tts_sapi\tts_sapi.vcxproj", "{1BC6E245-E520-4A72-A676-F763CAB89CA5}"
-EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "audio_resample_swresample", "..\..\..\source\app-core\audio_resample_swresample\audio_resample_swresample.vcxproj", "{AB2FD028-7E1B-4BDF-B317-DCC05194807F}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_app_veriwell_waven", "..\..\..\source\app-veriwell\waven\shared_app_veriwell_waven.vcxproj", "{ABDFF656-2F2C-4EE5-970A-75FFA444F767}"
@@ -1387,29 +1385,6 @@ Global
 		{D2EAA013-C127-4D44-9C2D-C70B4E705196}.stage|Win32.Build.0 = stage|Win32
 		{D2EAA013-C127-4D44-9C2D-C70B4E705196}.stage|x64.ActiveCfg = stage|x64
 		{D2EAA013-C127-4D44-9C2D-C70B4E705196}.stage|x64.Build.0 = stage|x64
-		{1BC6E245-E520-4A72-A676-F763CAB89CA5}.basis|Win32.ActiveCfg = basis|Win32
-		{1BC6E245-E520-4A72-A676-F763CAB89CA5}.basis|Win32.Build.0 = basis|Win32
-		{1BC6E245-E520-4A72-A676-F763CAB89CA5}.basis|x64.ActiveCfg = basis|x64
-		{1BC6E245-E520-4A72-A676-F763CAB89CA5}.basis|x64.Build.0 = basis|x64
-		{1BC6E245-E520-4A72-A676-F763CAB89CA5}.cover|Win32.ActiveCfg = cover|Win32
-		{1BC6E245-E520-4A72-A676-F763CAB89CA5}.cover|Win32.Build.0 = cover|Win32
-		{1BC6E245-E520-4A72-A676-F763CAB89CA5}.cover|x64.ActiveCfg = cover|x64
-		{1BC6E245-E520-4A72-A676-F763CAB89CA5}.cover|x64.Build.0 = cover|x64
-		{1BC6E245-E520-4A72-A676-F763CAB89CA5}.cube_basis|Win32.ActiveCfg = cube_basis|Win32
-		{1BC6E245-E520-4A72-A676-F763CAB89CA5}.cube_basis|Win32.Build.0 = cube_basis|Win32
-		{1BC6E245-E520-4A72-A676-F763CAB89CA5}.cube_basis|x64.ActiveCfg = cube_basis|x64
-		{1BC6E245-E520-4A72-A676-F763CAB89CA5}.cube_stage|Win32.ActiveCfg = cube_stage|Win32
-		{1BC6E245-E520-4A72-A676-F763CAB89CA5}.cube_stage|Win32.Build.0 = cube_stage|Win32
-		{1BC6E245-E520-4A72-A676-F763CAB89CA5}.cube_stage|x64.ActiveCfg = cube_stage|x64
-		{1BC6E245-E520-4A72-A676-F763CAB89CA5}.cube_stage|x64.Build.0 = cube_stage|x64
-		{1BC6E245-E520-4A72-A676-F763CAB89CA5}.small|Win32.ActiveCfg = stage|Win32
-		{1BC6E245-E520-4A72-A676-F763CAB89CA5}.small|Win32.Build.0 = stage|Win32
-		{1BC6E245-E520-4A72-A676-F763CAB89CA5}.small|x64.ActiveCfg = stage|x64
-		{1BC6E245-E520-4A72-A676-F763CAB89CA5}.small|x64.Build.0 = stage|x64
-		{1BC6E245-E520-4A72-A676-F763CAB89CA5}.stage|Win32.ActiveCfg = stage|Win32
-		{1BC6E245-E520-4A72-A676-F763CAB89CA5}.stage|Win32.Build.0 = stage|Win32
-		{1BC6E245-E520-4A72-A676-F763CAB89CA5}.stage|x64.ActiveCfg = stage|x64
-		{1BC6E245-E520-4A72-A676-F763CAB89CA5}.stage|x64.Build.0 = stage|x64
 		{AB2FD028-7E1B-4BDF-B317-DCC05194807F}.basis|Win32.ActiveCfg = basis|Win32
 		{AB2FD028-7E1B-4BDF-B317-DCC05194807F}.basis|Win32.Build.0 = basis|Win32
 		{AB2FD028-7E1B-4BDF-B317-DCC05194807F}.basis|x64.ActiveCfg = basis|x64
