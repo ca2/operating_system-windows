@@ -1806,6 +1806,17 @@ namespace acme
       }
 
 
+      ::e_status node::set_environment_variable(const ::string& pszEnvironmentVariable, const ::string& pszValue)
+      {
+
+
+         ::SetEnvironmentVariableW(wstring(pszEnvironmentVariable), wstring(pszValue));
+
+         return ::success;
+
+      }
+
+
       ::e_status node::create_process(const ::string & pszCommandLine, u32 * pprocessId)
       {
 

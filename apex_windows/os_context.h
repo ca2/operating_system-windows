@@ -109,6 +109,8 @@ namespace windows
 
       //virtual icon_transport load_icon(const ::payload & payloadFile) override;
 
+      ::e_status broadcast_environment_variable_change() override;
+
 
    };
 

@@ -109,6 +109,7 @@ namespace acme
 
          string expand_environment_variables(const string & str) override;
 
+         ::e_status set_environment_variable(const ::string& pszEnvironmentVariable, const ::string& pszValue) override;
 
          //virtual ::u32       get_file_attributes(const ::string & pFileName);
          virtual ::u32       get_current_directory(string& str);

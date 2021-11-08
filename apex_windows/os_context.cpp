@@ -3619,6 +3619,18 @@ repeat:
    }
 
 
+   ::e_status os_context::broadcast_environment_variable_change()
+   {
+
+      ::SendNotifyMessageA(HWND_BROADCAST, WM_SETTINGCHANGE, 0, (LPARAM)"Environment");
+
+      return ::success;
+
+   }
+
+
+
+
 } // namespace windows
 
 
@@ -3660,6 +3672,7 @@ namespace apex
          return hresult_to_estatus(win_create_link(wstrObj, wstrLnk, wstrDsc, wstrIco, iIcon));
 
       }
+
 
 
    } // namespace windows
