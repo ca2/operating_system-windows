@@ -799,7 +799,7 @@ namespace windows
 
       bool bIsDir;
 
-      if (::task_flag().is_set(e_task_flag_zip_is_dir) && iLast >= 3 && !ansi_count_compare_ci(&((const ::string &)str)[iLast - 3], ".zip", 4))
+      if (::task_flag().is_set(e_task_flag_compress_is_dir) && iLast >= 3 && !ansi_count_compare_ci(&((const ::string &)str)[iLast - 3], ".zip", 4))
       {
 
          //m_isdirmap.set(str.Left(iLast + 1), true, 0);

@@ -23,21 +23,18 @@ namespace windows
       __reference(file_system)      m_pfilesystem;
       __reference(dir_system)       m_pdirsystem;
       ::mutex                       m_mutexResource;
-      __pointer(zip::in_file)       m_pzipfileResource;
-      bool                          m_bZipFileResourceCalculated;
+      __pointer(::folder)           m_pfolderResource;
+      bool                          m_bFolderResourceCalculated;
 
 
       file_context();
       ~file_context() override;
 
 
-      
+      ::e_status initialize(::object * pobject) override;
 
 
-      virtual ::e_status initialize(::object * pobject) override;
-
-
-      virtual ::e_status init_system() override;
+      ::e_status init_system() override;
 
 
       virtual bool get_status(const ::file::path & path, ::file::file_status & status);
@@ -61,7 +58,7 @@ namespace windows
 
       virtual bool is_read_only(const ::file::path & psz) override;
 
-      zip::in_file * _defer_resource_file();
+      ::folder * _defer_resource_folder();
       ::file_transport create_resource_file(const char* path) override;
       bool resource_is_file_or_dir(const char* path) override;
 

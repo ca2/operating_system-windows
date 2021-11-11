@@ -11,7 +11,7 @@ namespace windows
    file_context::file_context()
    {
 
-      m_bZipFileResourceCalculated = false;
+      m_bFolderResourceCalculated = false;
 
    }
 
@@ -405,17 +405,27 @@ namespace windows
    }
 
 
-   zip::in_file* file_context::_defer_resource_file()
+   ::folder* file_context::_defer_resource_folder()
    {
 
-      if (m_bZipFileResourceCalculated)
+      auto estatus = m_psystem->defer_folder_library();
+
+      if (!estatus)
       {
 
-         return m_pzipfileResource;
+         return nullptr;
 
       }
 
-      m_bZipFileResourceCalculated = true;
+
+      if (m_bFolderResourceCalculated)
+      {
+
+         return m_pfolderResource;
+
+      }
+
+      m_bFolderResourceCalculated = true;
 
       memsize s;
 
@@ -432,9 +442,11 @@ namespace windows
 
       auto pfile = __new(::memory_file(pmemory));
 
-      m_pzipfileResource.create_new(this);
+      m_psystem->m_plibraryFolder->__construct(m_pfolderResource);
 
-      if (!m_pzipfileResource->unzip_open(pfile, {}, 0))
+      m_pfolderResource->initialize(this);
+
+      if (!m_pfolderResource->open_for_reading(pfile))
       {
 
 
@@ -442,7 +454,7 @@ namespace windows
 
       }
 
-      return m_pzipfileResource;
+      return m_pfolderResource;
 
    }
 
@@ -452,9 +464,9 @@ namespace windows
 
       synchronous_lock synchronouslock(&m_mutexResource);
 
-      auto pfile = _defer_resource_file();
+      auto pfolder = _defer_resource_folder();
 
-      if (is_null(pfile))
+      if (is_null(pfolder))
       {
 
          return nullptr;
@@ -465,7 +477,16 @@ namespace windows
 
       strPath.replace("\\", "/");
 
-      if (!pfile->locate(strPath))
+      if (!pfolder->locate(strPath))
+      {
+
+         return nullptr;
+
+      }
+
+      auto pfile = pfolder->get_file();
+
+      if (!pfile)
       {
 
          return nullptr;
@@ -497,9 +518,9 @@ namespace windows
 
       synchronous_lock synchronouslock(&m_mutexResource);
 
-      auto pfile = _defer_resource_file();
+      auto pfolder = _defer_resource_folder();
 
-      if (is_null(pfile))
+      if (is_null(pfolder))
       {
 
          return false;
@@ -510,7 +531,7 @@ namespace windows
 
       strPath.replace("\\", "/");
 
-      if (!pfile->locate(strPath))
+      if (!pfolder->locate(strPath))
       {
 
          return false;

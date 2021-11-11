@@ -50,7 +50,7 @@ void apex_windows_factory_exchange(::factory_map * pfactorymap)
    pfactorymap->create_factory < ::windows::process, ::operating_system::process >();
 
    //create_factory < ::windows::console, ::console::console >();
-   pfactorymap->create_factory < ::windows::crypto, ::crypto::crypto >();
+   //pfactorymap->create_factory < ::windows::crypto, ::crypto::crypto >();
    pfactorymap->create_factory < ::windows::ip_enum, ::net::ip_enum >();
 
 

@@ -4,7 +4,7 @@
 #undef User
 #undef Usr
 #include "shell.h"
-#include "apex/compress/zip/context.h"
+//#include "apex/compress/zip/context.h"
 #include "acme/filesystem/filesystem/acme_dir.h"
 #include "acme_windows/known_folder_struct.h"
 #include <thumbcache.h>
@@ -1241,15 +1241,15 @@ namespace windowing_win32
       else
       {
 
-         zip_context zipcontext(this);
+         //zip_context zipcontext(this);
 
-         if (zipcontext.is_unzippable(strPath))
-         {
+         //if (zipcontext.is_unzippable(strPath))
+         //{
 
-            return e_folder_zip;
+         //   return e_folder_zip;
 
-         }
-         else
+         //}
+         //else
          {
 
             return e_folder_none;
