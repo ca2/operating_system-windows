@@ -22,9 +22,6 @@ namespace windows
 
       __reference(file_system)      m_pfilesystem;
       __reference(dir_system)       m_pdirsystem;
-      ::mutex                       m_mutexResource;
-      __pointer(::folder)           m_pfolderResource;
-      bool                          m_bFolderResourceCalculated;
 
 
       file_context();
@@ -58,9 +55,12 @@ namespace windows
 
       virtual bool is_read_only(const ::file::path & psz) override;
 
-      ::folder * _defer_resource_folder();
-      ::file_transport create_resource_file(const char* path) override;
-      bool resource_is_file_or_dir(const char* path) override;
+
+      ::block get_main_resource_block() override;
+
+      //::folder * _defer_resource_folder();
+      //::file_transport create_resource_file(const char* path) override;
+      //bool resource_is_file_or_dir(const char* path) override;
 
       virtual ::extended::transport < ::file::file > resource_get_file(const ::file::path & path) override;
 
