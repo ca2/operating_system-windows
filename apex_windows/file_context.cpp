@@ -412,6 +412,10 @@ namespace windows
 
       const void* pdata = get_resource_pointer((HINSTANCE)m_psystem->m_papexsystem->m_hinstanceThis, 1024, "ZIP", s);
 
+      //m_memoryMainResource.assign(pdata, s);
+
+      //return m_memoryMainResource;
+
       return { pdata, s };
 
    }

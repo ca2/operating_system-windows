@@ -52,6 +52,9 @@
     <ClCompile Include="extract_icon.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="hicon_from_ico_file.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="..\version.rc">

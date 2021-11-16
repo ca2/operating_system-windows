@@ -50,7 +50,22 @@ namespace windowing_win32
          if (m_pathProcessed.has_char())
          {
 
-            hicon = (HICON) ::LoadImageW(nullptr, wstring(m_pathProcessed), IMAGE_ICON, size.cx, size.cy, LR_LOADFROMFILE);
+            string strPath = m_pathProcessed;
+
+            if (strPath.begins_eat_ci("zipresource://"))
+            {
+
+               auto block = m_pcontext->m_papexcontext->file().get_resource_memory(strPath);
+
+               hicon = (HICON) m_psystem->node()->m_pauranode->HICON_from_ico_file(block);
+
+            }
+            else 
+            {
+
+               hicon = (HICON) ::LoadImageW(nullptr, wstring(m_pathProcessed), IMAGE_ICON, size.cx, size.cy, LR_LOADFROMFILE);
+
+            }
 
          }
 

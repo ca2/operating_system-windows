@@ -97,11 +97,11 @@ namespace windows
 
       }
 
-      string strMutex;
+      //string strMutex;
 
-      strMutex = strPath + "-::mutex";
+      //strMutex = strPath + "-::mutex";
 
-      set_mutex(new class ::mutex(e_create_new, strMutex, nullptr, false));
+      //set_mutex(new class ::mutex(e_create_new, strMutex, nullptr, false));
 
       return true;
 

@@ -218,30 +218,6 @@ namespace windowing_win32
    }
 
 
-   ::extended::transport < ::windowing::icon > windowing::load_icon(const ::payload & payloadFile)
-   {
-
-      auto picon = __create_new < icon >();
-
-      if (!picon)
-      {
-
-         return nullptr;
-
-      }
-
-      auto estatus = picon->load_file(payloadFile);
-
-      if (!estatus)
-      {
-
-         return estatus;
-
-      }
-
-      return picon;
-
-   }
 
 
    ::windowing::window * windowing::window(oswindow oswindow)

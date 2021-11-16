@@ -58,6 +58,8 @@ namespace aura
 
          virtual HICON extract_resource_icon(const ::string & strPath, int & cx, int & cy, int iIcon);
 
+         void * HICON_from_ico_file(const ::block& block);
+
          
       };
 

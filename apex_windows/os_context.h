@@ -50,6 +50,7 @@ namespace windows
       bool file_association_set_shell_open_command(const ::string & pszExtension, const ::string & pszExtensionNamingClass, const ::string & pszCommand, const ::string & pszParam) override;
       bool file_association_get_shell_open_command(const ::string & pszExtension, string & strExtensionNamingClass, string & strCommand, string & strParam) override;
 
+      ::e_status link_open(const string& strUrl, const string& strProfile) override;
 
       bool open_in_ie(const ::string & pcsz);
 

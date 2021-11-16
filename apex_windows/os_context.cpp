@@ -7,6 +7,23 @@
 #include "acme/filesystem/filesystem/acme_dir.h"
 #include "acme/filesystem/filesystem/acme_path.h"
 
+void command_system(const char* psz)
+{
+   string str(psz);
+
+   wstring wstr;
+   wstr = str;
+
+
+   STARTUPINFO info = { sizeof(info) };
+   PROCESS_INFORMATION processInfo;
+   if (CreateProcessW(nullptr, wstr, NULL, NULL, TRUE, CREATE_NO_WINDOW, NULL, NULL, &info, &processInfo))
+   {
+      WaitForSingleObject(processInfo.hProcess, INFINITE);
+      CloseHandle(processInfo.hProcess);
+      CloseHandle(processInfo.hThread);
+   }
+}
 
 
 ::e_status hresult_to_estatus(HRESULT hresult)
@@ -747,6 +764,61 @@ namespace windows
       }
 
       return true;
+
+   }
+
+
+   ::e_status os_context::link_open(const string& strUrl, const string& strProfile)
+   {
+
+      string strBrowser = "chrome";
+
+      if (strProfile.contains("\\Chrome\\"))
+      {
+
+         strBrowser = "chrome";
+
+      }
+
+      string strMappedProfile;
+
+      if (strProfile.has_char())
+      {
+
+         auto path = m_psystem->m_papexsystem->dir().config() / "config/browser" / strBrowser / (strProfile + ".txt");
+
+         strMappedProfile = m_psystem->m_papexsystem->file().as_string(path);
+
+      }
+
+
+      if (strMappedProfile.has_char() && strBrowser == "chrome")
+      {
+
+         ::windows::registry::key key;
+
+         if (key._open(HKEY_CLASSES_ROOT, "ChromeHTML\\shell\\open\\command"))
+         {
+
+            string str = key.get("").get_string();
+
+            auto psz = str.c_str();
+
+            ::file::path path = ::str::consume_quoted_value(psz);
+
+            string strCommand = "\"" + path + "\" \"" + strUrl + "\" --profile-directory=\"" + strMappedProfile + "\"";
+
+            command_system(strCommand);
+
+         }
+
+      }
+      else
+      {
+
+         return ::os_context::link_open(strUrl, strProfile);
+
+      }
 
    }
 

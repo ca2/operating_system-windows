@@ -5337,52 +5337,44 @@ namespace windowing_win32
 
       }
 
-      return estatus;
-
-    /*  m_hiconSmall = nullptr;
-
-      m_hiconBig = nullptr;
-
-      if (::is_set(picon))
+      if (::is_null(picon))
       {
 
-         ::size_i32 sizeSmall;
-           
-         sizeSmall.cx = GetSystemMetrics(SM_CXSMICON);
-         sizeSmall.cy = GetSystemMetrics(SM_CYSMICON);
+         return error_failed;
 
-         m_hiconSmall = (HICON) picon->get_os_data(sizeSmall);
+      }
 
-         ::size_i32 sizeBig;
+      ::size_i32 sizeSmall;
 
-         sizeBig.cx = GetSystemMetrics(SM_CXICON);
-         sizeBig.cy = GetSystemMetrics(SM_CYICON);
+      sizeSmall.cx = GetSystemMetrics(SM_CXSMICON);
+      sizeSmall.cy = GetSystemMetrics(SM_CYSMICON);
 
-         m_hiconBig = (HICON) picon->get_os_data(sizeBig);
+      HICON hiconSmall = (HICON)picon->get_os_data(sizeSmall);
 
-      }*/
+      ::size_i32 sizeBig;
 
-      // HWND hwnd = get_hwnd();
+      sizeBig.cx = GetSystemMetrics(SM_CXICON);
+      sizeBig.cy = GetSystemMetrics(SM_CYICON);
 
-      //SendMessage(hwnd, WM_SETICON, ICON_SMALL, 0);
+      HICON hiconBig = (HICON)picon->get_os_data(sizeSmall);
 
-      //SendMessage(hwnd, WM_SETICON, ICON_BIG, 0);
+      HWND hwnd = get_hwnd();
 
-      //if (hiconSmall)
-      //{
+      if (hiconSmall)
+      {
 
-      //   ::SendMessage(hwnd, WM_SETICON, ICON_SMALL, (LPARAM)hiconSmall);
+         ::SendMessage(hwnd, WM_SETICON, ICON_SMALL, (LPARAM)hiconSmall);
 
-      //}
+      }
 
-      ////if (hiconBig)
-      //{
+      if (hiconBig)
+      {
 
-      //   ::SendMessage(hwnd, WM_SETICON, ICON_BIG, (LPARAM)hiconBig);
+         ::SendMessage(hwnd, WM_SETICON, ICON_BIG, (LPARAM)hiconBig);
 
-      //}
+      }
 
-      return true;
+      return ::success;
 
    }
 
