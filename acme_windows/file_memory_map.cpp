@@ -30,10 +30,10 @@ namespace windows
 
       string strPath = get_path();
 
-      wstring wstr(strPath);
-
       if (strPath.begins_ci("Local\\") || strPath.begins_ci("Global\\"))
       {
+
+         wstring wstr(strPath);
 
          m_hfile = INVALID_HANDLE_VALUE;
 
@@ -42,6 +42,10 @@ namespace windows
       }
       else
       {
+
+         m_psystem->m_pacmedir->create(file_path_folder(strPath));
+
+         wstring wstr(strPath);
 
          int iOpen;
 
