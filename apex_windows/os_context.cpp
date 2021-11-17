@@ -810,15 +810,13 @@ namespace windows
 
             command_system(strCommand);
 
+            return ::success;
+
          }
 
       }
-      else
-      {
 
-         return ::os_context::link_open(strUrl, strProfile);
-
-      }
+      return ::os_context::link_open(strUrl, strProfile);
 
    }
 
