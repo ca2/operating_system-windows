@@ -28,8 +28,7 @@
 //
 
 
-extern "C"
-void multimedia_mmsystem_factory_exchange(::object * pobject)
+__FACTORY_EXPORT void multimedia_mmsystem_factory(::object * pobject)
 {
 
    //::multimedia::mmsystem::factory_exchange factoryexchange(pobject);

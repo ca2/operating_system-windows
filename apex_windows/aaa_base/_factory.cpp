@@ -14,7 +14,7 @@
        factory_exchange::factory_exchange()
        {
 
-          create_factory < ::windows::print_job, ::user::print_task >();
+          add_factory_item < ::windows::print_job, ::user::print_task >();
 
        }
 
@@ -31,7 +31,7 @@
  } // namespace base
 
 
- void __node_base_factory_exchange(::factory_map * pfactorymap)
+ void __node_base_factory(::factory::factory * pfactory)
  {
 
     ::base::windows::factory_exchange factoryexchange;
