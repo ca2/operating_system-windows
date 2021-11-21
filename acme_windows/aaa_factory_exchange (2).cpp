@@ -38,31 +38,31 @@
 //} // namespace acme
 
 
-void __node_acme_factory_exchange(::factory_map * pfactorymap)
+void ([a-z0-9_]+)_factory(::factory::factory * pfactory)
 {
 
-   //pfactorymap->create_factory < ::windows::dir_system, ::dir_system >();
-   //pfactorymap->create_factory < ::windows::file_system, ::file_system >();
+   //pfactory->add_factory_item < ::windows::dir_system, ::dir_system >();
+   //pfactory->add_factory_item < ::windows::file_system, ::file_system >();
 
-   //pfactorymap->create_factory < ::windows::dir_context, ::dir_context >();
-   //pfactorymap->create_factory < ::windows::file_context, ::file_context >();
+   //pfactory->add_factory_item < ::windows::dir_context, ::dir_context >();
+   //pfactory->add_factory_item < ::windows::file_context, ::file_context >();
 
-   //pfactorymap->create_factory < ::windows::stdio_file, ::file::text_file >();
-   //pfactorymap->create_factory < ::windows::os_context, ::os_context >();
-   //pfactorymap->create_factory < ::windows::future, ::operating_system::process >();
+   //pfactory->add_factory_item < ::windows::stdio_file, ::file::text_file >();
+   //pfactory->add_factory_item < ::windows::os_context, ::os_context >();
+   //pfactory->add_factory_item < ::windows::future, ::operating_system::process >();
 
-   //pfactorymap->create_factory < ::windows::crypto, ::crypto::crypto >();
-   //pfactorymap->create_factory < ::windows::ip_enum, ::net::ip_enum >();
+   //pfactory->add_factory_item < ::windows::crypto, ::crypto::crypto >();
+   //pfactory->add_factory_item < ::windows::ip_enum, ::net::ip_enum >();
 
-   //pfactorymap->create_factory < ::windows::file_memory_map, ::file::memory_map >();
-   //pfactorymap->create_factory < ::windows::buffer, ::graphics::graphics >();
-   //pfactorymap->create_factory < ::windows::interaction_impl, ::user::interaction_impl >();
+   //pfactory->add_factory_item < ::windows::file_memory_map, ::file::memory_map >();
+   //pfactory->add_factory_item < ::windows::buffer, ::graphics::graphics >();
+   //pfactory->add_factory_item < ::windows::interaction_impl, ::user::interaction_impl >();
 
-   //pfactorymap->create_factory < ::file::os_watcher, ::file::watcher >();
-   //pfactorymap->create_factory < ::file::os_watch, ::file::watch >();
+   //pfactory->add_factory_item < ::file::os_watcher, ::file::watcher >();
+   //pfactory->add_factory_item < ::file::os_watch, ::file::watch >();
 
-   //pfactorymap->create_factory < ::windows::copydesk, ::user::copydesk >();
-   //pfactorymap->create_factory < ::windows::shell, ::user::shell >();
+   //pfactory->add_factory_item < ::windows::copydesk, ::user::copydesk >();
+   //pfactory->add_factory_item < ::windows::shell, ::user::shell >();
 
 
 }

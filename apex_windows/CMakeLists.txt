@@ -5,7 +5,7 @@ project(apex_windows CXX)
 list(APPEND library_source
    _.cpp
    _.h
-   factory_exchange.cpp
+   _factory.cpp
    framework.cpp
    framework.h)
 

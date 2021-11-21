@@ -17,4 +17,4 @@
 #include "multimedia_directsound_translation.h"
 
 
-#include "multimedia_directsound_factory_exchange.h"
+#include "([a-z0-9_]+)_factory.h"

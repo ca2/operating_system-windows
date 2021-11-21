@@ -6,7 +6,7 @@
 //
 //
 ////#include "windows_dir.h"
-////#include "windows_factory_exchange.h"
+////#include "([a-z0-9_]+)_factory.h"
 ////#include "windows_port_forward.h"
 ////#include "windows_dir.h"
 ////#include "windows_file_system.h"

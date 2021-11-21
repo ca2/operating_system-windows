@@ -4,7 +4,7 @@
 #include "draw2d_gdi_bitmap.cpp"
 #include "draw2d_gdi_brush.cpp"
 #include "draw2d_gdi_pimage->cpp"
-#include "draw2d_gdi_factory_exchange.cpp"
+#include "([a-z0-9_]+)_factory.cpp"
 #include "draw2d_gdi_font.cpp"
 #include "draw2d_gdi_graphics.cpp"
 #include "draw2d_gdi_object.cpp"

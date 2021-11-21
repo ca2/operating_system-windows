@@ -63,6 +63,9 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "write_text_win32", "..\write_text_win32\write_text_win32.vcxproj", "{D6B5B8F3-A524-4E73-8343-C3D5D558ADE3}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_app_app", "..\..\..\source\app\app\shared_app_app.vcxproj", "{ABDFF656-2F2C-4EE5-970A-75FFA444F767}"
+	ProjectSection(ProjectDependencies) = postProject
+		{9A5FBFB1-76E6-4F7E-933A-328C1EEC95AF} = {9A5FBFB1-76E6-4F7E-933A-328C1EEC95AF}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "static_app_app", "..\..\..\source\app\app\static_app_app.vcxproj", "{B3C2FC2F-00B5-4B57-BA6A-5BAE18CE8761}"
 EndProject

@@ -32,7 +32,7 @@ namespace multimedia
 
 
 extern "C"
-void ca2_factory_exchange(::object * pobject)
+void ca2_factory(::object * pobject)
 {
 
    ::multimedia::audio_xaudio7::factory_exchange factoryexchange(papp);

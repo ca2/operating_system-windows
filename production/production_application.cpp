@@ -38,10 +38,10 @@ namespace production
    ::e_status application::init_instance()
    {
 
-      create_factory <document >();
-      create_factory <frame >();
-      create_factory <impact >();
-      create_factory <pane_view >();
+      add_factory_item <document >();
+      add_factory_item <frame >();
+      add_factory_item <impact >();
+      add_factory_item <pane_view >();
 
 
       if(!::aura::application::init_instance())

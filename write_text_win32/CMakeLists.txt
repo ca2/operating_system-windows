@@ -6,7 +6,7 @@ project(write_text_win32 CXX)
 list(APPEND library_source
         _.cpp
         _.h
-        factory_exchange.cpp
+        _factory.cpp
         framework.cpp
         framework.h)
 

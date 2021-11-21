@@ -27,7 +27,7 @@ namespace multimedia
 } // namespace multimedia
 
 
-void ca2_factory_exchange(::object * pobject)
+void ca2_factory(::object * pobject)
 {
 
    ::multimedia::directsound::factory_exchange factoryexchange(pobject);

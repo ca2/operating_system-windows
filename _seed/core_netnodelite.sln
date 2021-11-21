@@ -94,6 +94,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "crypto_openssl", "..\..\..\
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "folder_zip", "..\..\..\source\app\folder_zip\folder_zip.vcxproj", "{A69CC125-E38A-4F77-9677-8860D43AB3B0}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "compress_zlib", "..\..\..\source\app\compress_zlib\compress_zlib.vcxproj", "{0B0A6C45-0AE3-4DC5-889A-7235BC9DB154}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		basis|ARM = basis|ARM
@@ -1245,6 +1247,46 @@ Global
 		{A69CC125-E38A-4F77-9677-8860D43AB3B0}.stage|Win32.Build.0 = stage|Win32
 		{A69CC125-E38A-4F77-9677-8860D43AB3B0}.stage|x64.ActiveCfg = stage|x64
 		{A69CC125-E38A-4F77-9677-8860D43AB3B0}.stage|x64.Build.0 = stage|x64
+		{0B0A6C45-0AE3-4DC5-889A-7235BC9DB154}.basis|ARM.ActiveCfg = basis|x64
+		{0B0A6C45-0AE3-4DC5-889A-7235BC9DB154}.basis|ARM.Build.0 = basis|x64
+		{0B0A6C45-0AE3-4DC5-889A-7235BC9DB154}.basis|ARM64.ActiveCfg = basis|x64
+		{0B0A6C45-0AE3-4DC5-889A-7235BC9DB154}.basis|ARM64.Build.0 = basis|x64
+		{0B0A6C45-0AE3-4DC5-889A-7235BC9DB154}.basis|Win32.ActiveCfg = basis|Win32
+		{0B0A6C45-0AE3-4DC5-889A-7235BC9DB154}.basis|Win32.Build.0 = basis|Win32
+		{0B0A6C45-0AE3-4DC5-889A-7235BC9DB154}.basis|x64.ActiveCfg = basis|x64
+		{0B0A6C45-0AE3-4DC5-889A-7235BC9DB154}.basis|x64.Build.0 = basis|x64
+		{0B0A6C45-0AE3-4DC5-889A-7235BC9DB154}.cover|ARM.ActiveCfg = cube_stage|Win32
+		{0B0A6C45-0AE3-4DC5-889A-7235BC9DB154}.cover|ARM.Build.0 = cube_stage|Win32
+		{0B0A6C45-0AE3-4DC5-889A-7235BC9DB154}.cover|ARM64.ActiveCfg = cube_stage|Win32
+		{0B0A6C45-0AE3-4DC5-889A-7235BC9DB154}.cover|ARM64.Build.0 = cube_stage|Win32
+		{0B0A6C45-0AE3-4DC5-889A-7235BC9DB154}.cover|Win32.ActiveCfg = cube_stage|Win32
+		{0B0A6C45-0AE3-4DC5-889A-7235BC9DB154}.cover|Win32.Build.0 = cube_stage|Win32
+		{0B0A6C45-0AE3-4DC5-889A-7235BC9DB154}.cover|x64.ActiveCfg = cube_stage|x64
+		{0B0A6C45-0AE3-4DC5-889A-7235BC9DB154}.cover|x64.Build.0 = cube_stage|x64
+		{0B0A6C45-0AE3-4DC5-889A-7235BC9DB154}.cube_basis|ARM.ActiveCfg = cube_basis|x64
+		{0B0A6C45-0AE3-4DC5-889A-7235BC9DB154}.cube_basis|ARM.Build.0 = cube_basis|x64
+		{0B0A6C45-0AE3-4DC5-889A-7235BC9DB154}.cube_basis|ARM64.ActiveCfg = cube_basis|x64
+		{0B0A6C45-0AE3-4DC5-889A-7235BC9DB154}.cube_basis|ARM64.Build.0 = cube_basis|x64
+		{0B0A6C45-0AE3-4DC5-889A-7235BC9DB154}.cube_basis|Win32.ActiveCfg = cube_basis|Win32
+		{0B0A6C45-0AE3-4DC5-889A-7235BC9DB154}.cube_basis|Win32.Build.0 = cube_basis|Win32
+		{0B0A6C45-0AE3-4DC5-889A-7235BC9DB154}.cube_basis|x64.ActiveCfg = cube_basis|x64
+		{0B0A6C45-0AE3-4DC5-889A-7235BC9DB154}.cube_basis|x64.Build.0 = cube_basis|x64
+		{0B0A6C45-0AE3-4DC5-889A-7235BC9DB154}.cube_stage|ARM.ActiveCfg = cube_stage|x64
+		{0B0A6C45-0AE3-4DC5-889A-7235BC9DB154}.cube_stage|ARM.Build.0 = cube_stage|x64
+		{0B0A6C45-0AE3-4DC5-889A-7235BC9DB154}.cube_stage|ARM64.ActiveCfg = cube_stage|x64
+		{0B0A6C45-0AE3-4DC5-889A-7235BC9DB154}.cube_stage|ARM64.Build.0 = cube_stage|x64
+		{0B0A6C45-0AE3-4DC5-889A-7235BC9DB154}.cube_stage|Win32.ActiveCfg = cube_stage|Win32
+		{0B0A6C45-0AE3-4DC5-889A-7235BC9DB154}.cube_stage|Win32.Build.0 = cube_stage|Win32
+		{0B0A6C45-0AE3-4DC5-889A-7235BC9DB154}.cube_stage|x64.ActiveCfg = cube_stage|x64
+		{0B0A6C45-0AE3-4DC5-889A-7235BC9DB154}.cube_stage|x64.Build.0 = cube_stage|x64
+		{0B0A6C45-0AE3-4DC5-889A-7235BC9DB154}.stage|ARM.ActiveCfg = stage|x64
+		{0B0A6C45-0AE3-4DC5-889A-7235BC9DB154}.stage|ARM.Build.0 = stage|x64
+		{0B0A6C45-0AE3-4DC5-889A-7235BC9DB154}.stage|ARM64.ActiveCfg = stage|x64
+		{0B0A6C45-0AE3-4DC5-889A-7235BC9DB154}.stage|ARM64.Build.0 = stage|x64
+		{0B0A6C45-0AE3-4DC5-889A-7235BC9DB154}.stage|Win32.ActiveCfg = stage|Win32
+		{0B0A6C45-0AE3-4DC5-889A-7235BC9DB154}.stage|Win32.Build.0 = stage|Win32
+		{0B0A6C45-0AE3-4DC5-889A-7235BC9DB154}.stage|x64.ActiveCfg = stage|x64
+		{0B0A6C45-0AE3-4DC5-889A-7235BC9DB154}.stage|x64.Build.0 = stage|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

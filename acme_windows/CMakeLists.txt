@@ -13,7 +13,7 @@ list(APPEND library_source
    callstack.cpp
    console.cpp
    console.h
-   factory_exchange.cpp
+   _factory.cpp
    file.cpp
    file.h
    file_find.cpp

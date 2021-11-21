@@ -19,4 +19,4 @@
 #include "multimedia_xaudio7_translation.h"
 
 
-#include "multimedia_xaudio7_factory_exchange.h"
+#include "([a-z0-9_]+)_factory.h"

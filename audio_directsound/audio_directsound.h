@@ -16,4 +16,4 @@
 #include "audio_directsound_in.h"
 
 
-#include "audio_directsound_factory_exchange.h"
+#include "([a-z0-9_]+)_factory.h"

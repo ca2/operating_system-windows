@@ -189,7 +189,7 @@
       <LinkTimeCodeGeneration>Default</LinkTimeCodeGeneration>
       <ForceSymbolReferences>
       </ForceSymbolReferences>
-      <ModuleDefinitionFile>./$(ProjectName).def</ModuleDefinitionFile>
+      
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='cover|Win32'">
@@ -243,7 +243,7 @@
       <LinkTimeCodeGeneration>Default</LinkTimeCodeGeneration>
       <ForceSymbolReferences>
       </ForceSymbolReferences>
-      <ModuleDefinitionFile>./$(ProjectName).def</ModuleDefinitionFile>
+      
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='basis|x64'">
@@ -296,7 +296,7 @@
       <LinkTimeCodeGeneration>Default</LinkTimeCodeGeneration>
       <ForceSymbolReferences>
       </ForceSymbolReferences>
-      <ModuleDefinitionFile>./$(ProjectName).def</ModuleDefinitionFile>
+      
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='cover|x64'">
@@ -349,7 +349,7 @@
       <LinkTimeCodeGeneration>Default</LinkTimeCodeGeneration>
       <ForceSymbolReferences>
       </ForceSymbolReferences>
-      <ModuleDefinitionFile>./$(ProjectName).def</ModuleDefinitionFile>
+      
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='stage|Win32'">
@@ -403,7 +403,7 @@
       <LinkTimeCodeGeneration>UseLinkTimeCodeGeneration</LinkTimeCodeGeneration>
       <ForceSymbolReferences>
       </ForceSymbolReferences>
-      <ModuleDefinitionFile>./$(ProjectName).def</ModuleDefinitionFile>
+      
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='stage|x64'">
@@ -456,7 +456,7 @@
       <LinkTimeCodeGeneration>UseLinkTimeCodeGeneration</LinkTimeCodeGeneration>
       <ForceSymbolReferences>
       </ForceSymbolReferences>
-      <ModuleDefinitionFile>./$(ProjectName).def</ModuleDefinitionFile>
+      
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -476,9 +476,7 @@
   <ItemGroup>
     <Image Include="app_app.ico" />
   </ItemGroup>
-  <ItemGroup>
-    <None Include="app_app_admin.def" />
-  </ItemGroup>
+  
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

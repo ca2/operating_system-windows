@@ -184,7 +184,7 @@
       <LinkTimeCodeGeneration>Default</LinkTimeCodeGeneration>
       <ForceSymbolReferences>
       </ForceSymbolReferences>
-      <ModuleDefinitionFile>./$(ProjectName).def</ModuleDefinitionFile>
+      
     </Link>
     <PostBuildEvent>
       <Command>
@@ -234,7 +234,7 @@
       <LinkTimeCodeGeneration>Default</LinkTimeCodeGeneration>
       <ForceSymbolReferences>
       </ForceSymbolReferences>
-      <ModuleDefinitionFile>./$(ProjectName).def</ModuleDefinitionFile>
+      
     </Link>
     <PostBuildEvent>
       <Command>
@@ -288,7 +288,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <ForceSymbolReferences>
       </ForceSymbolReferences>
-      <ModuleDefinitionFile>./$(ProjectName).def</ModuleDefinitionFile>
+      
     </Link>
     <PostBuildEvent>
       <Command>
@@ -329,7 +329,7 @@
       <LinkTimeCodeGeneration>Default</LinkTimeCodeGeneration>
       <ForceSymbolReferences>
       </ForceSymbolReferences>
-      <ModuleDefinitionFile>./$(ProjectName).def</ModuleDefinitionFile>
+      
     </Link>
     <PostBuildEvent>
       <Command>
@@ -371,7 +371,7 @@
       <LinkTimeCodeGeneration>Default</LinkTimeCodeGeneration>
       <ForceSymbolReferences>
       </ForceSymbolReferences>
-      <ModuleDefinitionFile>./$(ProjectName).def</ModuleDefinitionFile>
+      
     </Link>
     <PostBuildEvent>
       <Command>
@@ -418,7 +418,7 @@
       <LinkTimeCodeGeneration>UseLinkTimeCodeGeneration</LinkTimeCodeGeneration>
       <ForceSymbolReferences>
       </ForceSymbolReferences>
-      <ModuleDefinitionFile>./$(ProjectName).def</ModuleDefinitionFile>
+      
     </Link>
     <PostBuildEvent>
       <Command>
@@ -441,9 +441,7 @@
   <ItemGroup>
     <Image Include="app_app.ico" />
   </ItemGroup>
-  <ItemGroup>
-    <None Include="app_app.def" />
-  </ItemGroup>
+  
   <ItemGroup>
     <ProjectReference Include="..\..\..\source\app\aura\acid.vcxproj">
       <Project>{05e5b8e7-9e3b-44dd-9ede-e0a74d52c1c5}</Project>

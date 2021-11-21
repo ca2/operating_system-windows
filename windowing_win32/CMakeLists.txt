@@ -28,7 +28,7 @@ list(APPEND draw2d_gdiplus_source
         bitmap.h
         brush.cpp
         brush.h
-        factory_exchange.cpp
+        _factory.cpp
         font.cpp
         font.h
         framework.cpp

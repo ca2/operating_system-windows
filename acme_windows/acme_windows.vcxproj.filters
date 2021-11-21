@@ -172,7 +172,7 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="factory_exchange.cpp">
+    <ClCompile Include="_factory.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="_.cpp">

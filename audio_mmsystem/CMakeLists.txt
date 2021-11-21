@@ -25,7 +25,7 @@ list(APPEND audio_mmsystem_source
    _.cpp
    _.h
    command.h
-   factory_exchange.cpp
+   _factory.cpp
    factory_exchange.h
    framework.cpp
    framework.h

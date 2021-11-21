@@ -111,6 +111,21 @@
 #define _CRT_RAND_S
 #endif
 
+
+#ifdef WINDOWS
+#define __FACTORY_EXPORT extern "C" __declspec(dllexport)
+#else
+#define __FACTORY_EXPORT extern "C"
+#endif
+
+
+#ifdef WINDOWS
+#define __FACTORY_IMPORT extern "C" __declspec(dllimport)
+#else
+#define __FACTORY_IMPORT extern "C"
+#endif
+
+
 #ifdef CUBE
 #define CLASS_DECL_EXPORT
 #define CLASS_DECL_IMPORT

@@ -60,7 +60,5 @@
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
-  <ItemGroup>
-    <None Include="app_core_hellomultiverse.def" />
-  </ItemGroup>
+  
 </Project>

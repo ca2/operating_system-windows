@@ -109,6 +109,9 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_app_simple_drawing", "..\..\..\source\app-simple\drawing\shared_app_simple_drawing.vcxproj", "{DB0DB48E-D598-4534-AC03-7177603F0937}"
 	ProjectSection(ProjectDependencies) = postProject
 		{A69CC125-E38A-4F77-9677-8860D43AB3B0} = {A69CC125-E38A-4F77-9677-8860D43AB3B0}
+		{C1CCDF2E-9F27-45D3-B67A-B2EEB1754E72} = {C1CCDF2E-9F27-45D3-B67A-B2EEB1754E72}
+		{D08014E6-E329-41CF-81B5-957C290A4AA8} = {D08014E6-E329-41CF-81B5-957C290A4AA8}
+		{D6B5B8F3-A524-4E73-8343-C3D5D558ADE3} = {D6B5B8F3-A524-4E73-8343-C3D5D558ADE3}
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "static_app_simple_drawing", "..\..\..\source\app-simple\drawing\static_app_simple_drawing.vcxproj", "{8D5FFE5A-44A7-4477-9A32-5AAD6B9FB06C}"
