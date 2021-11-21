@@ -464,14 +464,14 @@ namespace apex
 
          }
 
-         estatus = m_psystem->inline_term();
+         //estatus = m_psystem->inline_term();
 
-         if (!estatus)
-         {
+         //if (!estatus)
+         //{
 
-            return estatus;
+         //   return estatus;
 
-         }
+         //}
 
          return estatus;
 

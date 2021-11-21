@@ -407,14 +407,14 @@ namespace aura
 
          }
 
-         estatus = m_psystem->inline_term();
+         /*estatus = m_psystem->inline_term();
 
          if (!estatus)
          {
 
             return estatus;
 
-         }
+         }*/
 
          return estatus;
 
