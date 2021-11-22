@@ -50,7 +50,7 @@ namespace windows
    }
 
 
-   bool interprocess_communication_tx::open(const ::string & pszKey, ::launcher * plauncher)
+   ::e_status interprocess_communication_tx::open(const ::string & strKey, ::launcher * plauncher)
    {
 
       if (get_hwnd() != nullptr)
@@ -61,6 +61,7 @@ namespace windows
       }
 
       int jCount = 23;
+
       int iCount;
 
       if (plauncher != nullptr)
@@ -80,60 +81,101 @@ namespace windows
 
       for (int i = 0; i < iCount; i++)
       {
+
          for (int j = 0; j < jCount; j++)
          {
-            set_hwnd(::FindWindowW(nullptr, wstring(pszKey)));
+
+            set_hwnd(::FindWindowW(nullptr, wstring(strKey)));
+
             if (get_hwnd() != nullptr)
+            {
+
                break;
-            //         get_hwnd() = FindDesktopWindow(pszKey);
+
+            }
+
+            //         get_hwnd() = FindDesktopWindow(strKey);
             //       if(get_hwnd() != nullptr)
             //        break;
             if (i <= 0)
             {
+
                break;
+
             }
+            
             int k = 40;
+
             while (k > 0)
             {
+               
                if (!task_get_run())
                {
-                  return false;
+                  
+                  return error_failed;
+
                }
-               sleep(25_ms);
+               
+               preempt(25_ms);
+               
                k--;
+
             }
+
          }
+
          if (get_hwnd() != nullptr)
+         {
+
             break;
+
+         }
+
          if (plauncher != nullptr)
          {
+
             if (plauncher->m_iStart <= 0)
-               return false;
+            {
+
+               return error_failed;
+
+            }
+
             plauncher->start();
+
             plauncher->m_iStart--;
+
          }
+
       }
-      m_strBaseChannel = pszKey;
-      return true;
+      
+      m_strBaseChannel = strKey;
+
+      return ::success;
 
    }
 
-   bool interprocess_communication_tx::close()
+
+   ::e_status interprocess_communication_tx::close()
    {
 
       if (get_hwnd() == nullptr)
-         return true;
+      {
+
+         return ::success;
+
+      }
 
       set_hwnd(nullptr);
 
       m_strBaseChannel = "";
 
-      return true;
+      return ::success;
 
    }
 
 
-   bool interprocess_communication_tx::send(const ::string & strMessage, duration durationTimeout)
+   ::e_status interprocess_communication_tx::send(const ::string & strMessage, const duration & durationTimeout)
    {
 
       if (!is_tx_ok())
@@ -183,14 +225,22 @@ namespace windows
    }
 
 
-   bool interprocess_communication_tx::send(int message, void * pdata, int len, duration durationTimeout)
+   ::e_status interprocess_communication_tx::send(int message, void * pdata, int len, const duration & durationTimeout)
    {
 
       if (message == 0x80000000)
-         return false;
+      {
+
+         return error_failed;
+
+      }
 
       if (!is_tx_ok())
-         return false;
+      {
+
+         return error_failed;
+
+      }
 
       COPYDATASTRUCT cds;
 
@@ -231,11 +281,15 @@ namespace windows
          unsigned int dwError = ::GetLastError();
 
          if (dwError == ERROR_TIMEOUT)
-            return false;
+         {
+
+            return error_failed;
+
+         }
 
       }
 
-      return true;
+      return ::success;
 
    }
 
@@ -247,8 +301,6 @@ namespace windows
       return ::IsWindow((HWND)get_hwnd()) != false;
 
    }
-
-
 
 
    interprocess_communication_rx::interprocess_communication_rx()
@@ -265,7 +317,7 @@ namespace windows
    }
 
 
-   bool interprocess_communication_rx::create(const ::string & pszKey)
+   ::e_status interprocess_communication_rx::create(const ::string & strKey)
    {
 
 
@@ -293,7 +345,7 @@ namespace windows
 
       ATOM atom = rx_register_class(hinstance);
 
-      wstring wstrKey(pszKey);
+      wstring wstrKey(strKey);
 
       set_hwnd(::CreateWindowExW(0, L"small_ipc_rx_::color::e_channel_message_queue_class", wstrKey, 0, 0, 0, 0, 0, HWND_MESSAGE, nullptr, hinstance, nullptr));
 
@@ -562,10 +614,10 @@ namespace windows
    //}
 
 
-   //bool interprocess_communication::open_ab(const ::string & pszKey, const ::string & pszModule, launcher * plauncher)
+   //bool interprocess_communication::open_ab(const ::string & strKey, const ::string & strModule, launcher * plauncher)
    //{
 
-   //   m_strChannel = pszKey;
+   //   m_strChannel = strKey;
 
    //   m_prx->m_preceiver = this;
 
@@ -596,10 +648,10 @@ namespace windows
    //}
 
 
-   //bool interprocess_communication::open_ba(const ::string & pszKey, const ::string & pszModule, launcher * plauncher)
+   //bool interprocess_communication::open_ba(const ::string & strKey, const ::string & strModule, launcher * plauncher)
    //{
 
-   //   m_strChannel = pszKey;
+   //   m_strChannel = strKey;
 
    //   m_prx->m_preceiver = this;
 
