@@ -2301,7 +2301,7 @@ repeat:
       ::application * papp = get_application();
 
       string strTargetProgId;
-      string strModule = solve_relative(m_psystem->m_pacmefile->executable());
+      string strModule = solve_relative(m_psystem->m_pacmefile->module());
 
       strTargetProgId = get_application()->m_strAppName;
 
@@ -2564,7 +2564,7 @@ repeat:
 
       string strTargetProgId;
 
-      string strModule = solve_relative(m_psystem->m_pacmefile->executable());
+      string strModule = solve_relative(m_psystem->m_pacmefile->module());
 
       string strApplicationRegistryPath = find_string("ApplicationRegistryPath");
 
