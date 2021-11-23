@@ -38,10 +38,10 @@
 //} // namespace music
 
 
-void music_midi_mmsystem_factory(::factory::factory * pfactory)
+__FACTORY_EXPORT void music_midi_mmsystem_factory(::factory::factory * pfactory)
 {
 
-   add_factory_item < ::music::midi::mmsystem::midi, ::music::midi::midi                   >();
+   pfactory->add_factory_item < ::music::midi::mmsystem::midi, ::music::midi::midi                   >();
 
 }
 

@@ -202,6 +202,9 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "static_app_veriwell_verisimplevideo", "..\..\..\source\app-veriwell\verisimplevideo\static_app_veriwell_verisimplevideo.vcxproj", "{06A2E5C8-FA22-42CA-8380-79B2BA374F66}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_app_veriwell_musical_player_lite", "..\..\..\source\app-veriwell\musical_player_lite\shared_app_veriwell_musical_player_lite.vcxproj", "{07DCA1DE-7F80-4384-86C1-039FDC1648D6}"
+	ProjectSection(ProjectDependencies) = postProject
+		{0B0A6C45-0AE3-4DC5-889A-7235BC9DB154} = {0B0A6C45-0AE3-4DC5-889A-7235BC9DB154}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "static_app_veriwell_musical_player_lite", "..\..\..\source\app-veriwell\musical_player_lite\static_app_veriwell_musical_player_lite.vcxproj", "{D2C8D67D-B9F7-416E-BC96-2F2E9B4F7226}"
 EndProject
@@ -216,6 +219,8 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "crypto_openssl", "..\..\..\source\app\crypto_openssl\crypto_openssl.vcxproj", "{D08014E6-E329-41CF-81B5-957C290A4AA8}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "folder_zip", "..\..\..\source\app\folder_zip\folder_zip.vcxproj", "{A69CC125-E38A-4F77-9677-8860D43AB3B0}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "compress_zlib", "..\..\..\source\app\compress_zlib\compress_zlib.vcxproj", "{0B0A6C45-0AE3-4DC5-889A-7235BC9DB154}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -1155,6 +1160,22 @@ Global
 		{A69CC125-E38A-4F77-9677-8860D43AB3B0}.stage|Win32.Build.0 = stage|Win32
 		{A69CC125-E38A-4F77-9677-8860D43AB3B0}.stage|x64.ActiveCfg = stage|x64
 		{A69CC125-E38A-4F77-9677-8860D43AB3B0}.stage|x64.Build.0 = stage|x64
+		{0B0A6C45-0AE3-4DC5-889A-7235BC9DB154}.basis|Win32.ActiveCfg = basis|Win32
+		{0B0A6C45-0AE3-4DC5-889A-7235BC9DB154}.basis|Win32.Build.0 = basis|Win32
+		{0B0A6C45-0AE3-4DC5-889A-7235BC9DB154}.basis|x64.ActiveCfg = basis|x64
+		{0B0A6C45-0AE3-4DC5-889A-7235BC9DB154}.basis|x64.Build.0 = basis|x64
+		{0B0A6C45-0AE3-4DC5-889A-7235BC9DB154}.cube_basis|Win32.ActiveCfg = cube_basis|Win32
+		{0B0A6C45-0AE3-4DC5-889A-7235BC9DB154}.cube_basis|Win32.Build.0 = cube_basis|Win32
+		{0B0A6C45-0AE3-4DC5-889A-7235BC9DB154}.cube_basis|x64.ActiveCfg = cube_basis|x64
+		{0B0A6C45-0AE3-4DC5-889A-7235BC9DB154}.cube_basis|x64.Build.0 = cube_basis|x64
+		{0B0A6C45-0AE3-4DC5-889A-7235BC9DB154}.cube_stage|Win32.ActiveCfg = cube_stage|Win32
+		{0B0A6C45-0AE3-4DC5-889A-7235BC9DB154}.cube_stage|Win32.Build.0 = cube_stage|Win32
+		{0B0A6C45-0AE3-4DC5-889A-7235BC9DB154}.cube_stage|x64.ActiveCfg = cube_stage|x64
+		{0B0A6C45-0AE3-4DC5-889A-7235BC9DB154}.cube_stage|x64.Build.0 = cube_stage|x64
+		{0B0A6C45-0AE3-4DC5-889A-7235BC9DB154}.stage|Win32.ActiveCfg = stage|Win32
+		{0B0A6C45-0AE3-4DC5-889A-7235BC9DB154}.stage|Win32.Build.0 = stage|Win32
+		{0B0A6C45-0AE3-4DC5-889A-7235BC9DB154}.stage|x64.ActiveCfg = stage|x64
+		{0B0A6C45-0AE3-4DC5-889A-7235BC9DB154}.stage|x64.Build.0 = stage|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

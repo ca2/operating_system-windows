@@ -1501,7 +1501,7 @@ namespace music
 
             mh.lpData = (LPSTR) block.get_data();
 
-            mh.dwBufferLength = block.get_size();
+            mh.dwBufferLength = (DWORD) block.get_size();
 
             mmr = midiOutPrepareHeader(m_hmidiout, &mh, sizeof(MIDIHDR));
 
