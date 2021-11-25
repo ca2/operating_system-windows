@@ -751,8 +751,8 @@ pacmedir->system() / "config/production/mirror_status.txt";
 
             }
 
-            //pcontext->m_papexcontext->file().put_contents_utf8(m_strBase / "app\\this_version_info.h", strBuildH);
-            pcontext->m_papexcontext->file().put_contents_utf8(m_strBase / "app\\this_version_info.txt", strBuildH);
+            //pcontext->m_papexcontext->file().put_text_utf8(m_strBase / "app\\this_version_info.h", strBuildH);
+            pcontext->m_papexcontext->file().put_text_utf8(m_strBase / "app\\this_version_info.txt", strBuildH);
 
             //update_rc_file_version(m_strBase / "app\\base\\base.rc");
             //update_rc_file_version(m_strBase / "app-core\\iexca2\\iexca2.rc");
