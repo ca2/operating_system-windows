@@ -111,9 +111,9 @@ namespace windows
 
       //bool create_directory(const char * path) override;
 
-      ::e_status _create_directory(const char * path) override;
+      //::e_status _create_directory(const char * path) override;
 
-      bool is(const char * path) override;
+      //bool is(const char * path) override;
 
       void rls(::file::patha & stra, const char * psz) override;
 
