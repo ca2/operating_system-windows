@@ -113,14 +113,22 @@
 
 
 #ifdef WINDOWS
+#ifdef CUBE
+#define __FACTORY_EXPORT extern "C"
+#else
 #define __FACTORY_EXPORT extern "C" __declspec(dllexport)
+#endif
 #else
 #define __FACTORY_EXPORT extern "C"
 #endif
 
 
 #ifdef WINDOWS
+#ifdef CUBE
+#define __FACTORY_IMPORT extern "C"
+#else
 #define __FACTORY_IMPORT extern "C" __declspec(dllimport)
+#endif
 #else
 #define __FACTORY_IMPORT extern "C"
 #endif
