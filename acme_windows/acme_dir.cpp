@@ -1280,19 +1280,19 @@ pacmedir->create CreateDirectoryW last error(%d)=%s", dwError, pszError);
       }
 
 
-      bool acme_dir::is(const char * path)
-      {
+      //bool acme_dir::is(const char * path)
+      //{
 
-         //if (::file::system_dir::g_pthis == nullptr)
-         //{
+      //   //if (::file::system_dir::g_pthis == nullptr)
+      //   //{
 
-         return _is(path);
+      //   return _is(path);
 
-         //}
+      //   //}
 
-         //return ::file::system_dir::g_pthis->is(path, ::get_context_system());
+      //   //return ::file::system_dir::g_pthis->is(path, ::get_context_system());
 
-      }
+      //}
 
 
 

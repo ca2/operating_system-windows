@@ -2572,10 +2572,10 @@ namespace acme
       }
 
 
-      ::e_status node::implement()
+      ::e_status node::implement(__transport(::acme::node) & pnode, __transport(class ::system) & psystem)
       {
 
-         return ::acme::node::implement();
+         return ::acme::node::implement(pnode, psystem);
 
       }
 
