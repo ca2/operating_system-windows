@@ -139,7 +139,7 @@ namespace acme
 
          virtual ::wstring expand_environment_variables(const ::wstring & wstr);
 
-         ::e_status implement() override;
+         ::e_status implement(__transport(::acme::node) & pnode, __transport(class ::system) & psystem) override;
 
 
          ::e_status on_start_system() override;
