@@ -1247,52 +1247,6 @@ pacmedir->create CreateDirectoryW last error(%d)=%s", dwError, pszError);
 #endif
 
 
-      ::e_status acme_dir::_create_directory(const char * path)
-      {
-
-#ifdef WINDOWS
-
-         wstring wstr;
-
-         if (file_path_is_absolute(path))
-         {
-
-            wstr = L"\\\\?\\" + wstring(path);
-
-         }
-         else
-         {
-
-            wstr = path;
-
-         }
-
-         if (!::CreateDirectoryW(wstr, nullptr))
-         {
-
-            return false;
-
-         }
-
-#else
-
-         if (::mkdir(path, S_IRWXU | S_IRWXG | S_IRWXO) != 0)
-         {
-
-            TranslateLastError();
-
-            return false;
-
-         }
-
-         set_last_status(success);
-
-#endif
-
-         return true;
-
-      }
-
 
 
       ::file::path acme_dir::module()
@@ -1326,19 +1280,19 @@ pacmedir->create CreateDirectoryW last error(%d)=%s", dwError, pszError);
       }
 
 
-      bool acme_dir::is(const char * path)
-      {
+      //bool acme_dir::is(const char * path)
+      //{
 
-         //if (::file::system_dir::g_pthis == nullptr)
-         //{
+      //   //if (::file::system_dir::g_pthis == nullptr)
+      //   //{
 
-         return _is(path);
+      //   return _is(path);
 
-         //}
+      //   //}
 
-         //return ::file::system_dir::g_pthis->is(path, ::get_context_system());
+      //   //return ::file::system_dir::g_pthis->is(path, ::get_context_system());
 
-      }
+      //}
 
 
 

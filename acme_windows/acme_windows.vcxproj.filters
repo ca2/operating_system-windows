@@ -316,9 +316,4 @@
       <Filter>Resource Files</Filter>
     </ResourceCompile>
   </ItemGroup>
-  <ItemGroup>
-    <None Include="acme_windows.def">
-      <Filter>Source Files</Filter>
-    </None>
-  </ItemGroup>
 </Project>
