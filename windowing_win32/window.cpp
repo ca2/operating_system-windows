@@ -228,7 +228,7 @@ namespace windowing_win32
       //MESSAGE_LINK(e_message_create, pchannel, pimpl, &::user::interaction_impl::_001OnPrioCreate);
       auto psystem = m_psystem;
 
-      auto pnode = psystem->m_pnode->m_pauranode->m_pWindowingUniversalWindowsNode;
+      auto pnode = psystem->m_pnode->m_pauranode->m_pWindowingWin32Node;
 
       auto emessageTaskbarCreated = pnode->m_emessageWindowsTaskbarCreatedMessage;
 
@@ -691,7 +691,7 @@ namespace windowing_win32
    void window::_001OnTaskbarCreated(::message::message* pmessage)
    {
 
-      ::subject subject(e_subject_taskbar_created);
+      ::subject subject(e_subject_task_bar_created);
 
       m_pimpl->m_puserinteraction->handle(&subject, nullptr);
 

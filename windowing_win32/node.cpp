@@ -12,7 +12,7 @@ namespace windowing_win32
    node::node()
    {
 
-      m_pWindowingWin32Node = nullptr;
+      m_pWindowingWin32Node = this;
 
       m_emessageWindowsTaskbarCreatedMessage = e_message_undefined;
 
