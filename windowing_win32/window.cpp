@@ -226,6 +226,18 @@ namespace windowing_win32
       MESSAGE_LINK(WM_GETICON, pchannel, this, &window::on_message_get_icon);
 
       //MESSAGE_LINK(e_message_create, pchannel, pimpl, &::user::interaction_impl::_001OnPrioCreate);
+      auto psystem = m_psystem;
+
+      auto pnode = psystem->m_pnode->m_pauranode->m_pWindowingUniversalWindowsNode;
+
+      auto emessageTaskbarCreated = pnode->m_emessageWindowsTaskbarCreatedMessage;
+
+      if (emessageTaskbarCreated != e_message_undefined)
+      {
+
+         MESSAGE_LINK(emessageTaskbarCreated, pchannel, this, & window::_001OnTaskbarCreated);
+
+      }
 
    }
 
@@ -672,6 +684,16 @@ namespace windowing_win32
          }
 
       }
+
+   }
+
+
+   void window::_001OnTaskbarCreated(::message::message* pmessage)
+   {
+
+      ::subject subject(e_subject_taskbar_created);
+
+      m_pimpl->m_puserinteraction->handle(&subject, nullptr);
 
    }
 

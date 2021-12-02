@@ -62,6 +62,7 @@ namespace windowing_win32
 
 
       DECLARE_MESSAGE_HANDLER(_001OnMessage);
+      DECLARE_MESSAGE_HANDLER(_001OnTaskbarCreated);
 
 
       //bool has_capture() const override;
