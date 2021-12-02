@@ -12,6 +12,10 @@ namespace windowing_win32
    node::node()
    {
 
+
+      m_emessageWindowsTaskbarCreatedMessage = e_message_undefined;
+
+
    }
 
    
@@ -112,6 +116,20 @@ namespace windowing_win32
 
    }
 
+
+   ::e_status node::register_windows_message()
+   {
+
+      if (m_emessageWindowsTaskbarCreatedMessage == e_message_undefined)
+      {
+
+         m_emessageWindowsTaskbarCreatedMessage = (enum_message) RegisterWindowMessageW(L"TaskbarCreated");
+
+      }
+
+      return ::success;
+
+   }
 
 
 } // namespace linux

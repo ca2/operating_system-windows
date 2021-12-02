@@ -12,6 +12,9 @@ namespace windowing_win32
    public:
 
 
+      enum_message                                       m_emessageWindowsTaskbarCreatedMessage;
+
+
       node();
       ~node() override;
 
@@ -21,6 +24,9 @@ namespace windowing_win32
 
       ::e_status install_mouse_hook(::matter * pmatterListener) override;
       ::e_status uninstall_mouse_hook(::matter * pmatterListener) override;
+
+
+      virtual ::e_status register_windows_message();
 
 
    };
