@@ -92,7 +92,12 @@ namespace windows
 
 
 
-      virtual bool initialize_wallpaper_fileset(::file::set* pset, bool bAddSearch) override;
+      bool initialize_wallpaper_fileset(::file::set* pset, bool bAddSearch) override;
+
+      ::e_status set_dark_mode(bool bDarkMode) override;
+
+      virtual ::e_status set_system_dark_mode1(bool bSet);
+      virtual ::e_status set_app_dark_mode1(bool bSet);
 
       virtual bool get_default_browser(string & strId, ::file::path & path, string & strParam) override;
 

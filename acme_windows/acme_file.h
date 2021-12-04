@@ -18,6 +18,8 @@ namespace windows
 
       ::file::path module() override;
 
+      ::duration modification_time(const char* psz) override;
+      ::e_status set_modification_time(const char* psz, const ::duration& duration) override;
 
    };
 

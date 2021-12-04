@@ -2067,6 +2067,68 @@ retry:
       return true;
 
    }
+
+
+   ::e_status os_context::set_dark_mode(bool bDarkMode)
+   {
+
+      set_system_dark_mode1(bDarkMode);
+
+      set_app_dark_mode1(bDarkMode);
+
+      //DWORD_PTR res;
+      //SendMessageTimeout(HWND_BROADCAST, WM_SETTINGCHANGE, 0, (LPARAM)TEXT("ImmersiveColorSet"), 0, 1000, &res);
+
+      return ::success;
+
+   }
+
+   ::e_status os_context::set_system_dark_mode1(bool bSet)
+   {
+
+      ::windows::registry::key key(HKEY_CURRENT_USER, "Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize", true);
+
+      ::u32 dwSystemUseLightTheme;
+      if (bSet)
+      {
+         dwSystemUseLightTheme = 0;
+      }
+      else
+      {
+         dwSystemUseLightTheme = 1;
+      }
+
+      key._set("SystemUsesLightTheme", dwSystemUseLightTheme);
+
+
+      return ::success;
+
+   }
+
+
+   ::e_status os_context::set_app_dark_mode1(bool bSet)
+   {
+
+      ::windows::registry::key key(HKEY_CURRENT_USER, "Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize", true);
+
+      ::u32 dwAppsUseLightTheme;
+      if (bSet)
+      {
+         dwAppsUseLightTheme = 0;
+      }
+      else
+      {
+         dwAppsUseLightTheme = 1;
+      }
+
+      key._set("AppsUseLightTheme", dwAppsUseLightTheme);
+
+      return ::success;
+
+   }
+
+
+
 //#elif defined(LINUX)
 //   //string strDir;
 //   //strDir = m_pcontext->m_papexcontext->dir().path(getenv("HOME"), "Pictures");

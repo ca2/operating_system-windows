@@ -160,49 +160,6 @@ namespace aura
 
 
 
-      ::e_status node::set_system_dark_mode1(bool bSet)
-      {
-
-         ::windows::registry::key key(HKEY_CURRENT_USER, "Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize", true);
-
-         ::u32 dwSystemUseLightTheme;
-         if (bSet)
-         {
-            dwSystemUseLightTheme = 0;
-         }
-         else
-         {
-            dwSystemUseLightTheme = 1;
-         }
-
-         key._set("SystemUsesLightTheme", dwSystemUseLightTheme);
-         return ::success;
-
-      }
-
-
-      ::e_status node::set_app_dark_mode1(bool bSet)
-      {
-
-         ::windows::registry::key key(HKEY_CURRENT_USER, "Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize", true);
-
-         ::u32 dwAppsUseLightTheme;
-         if (bSet)
-         {
-            dwAppsUseLightTheme = 0;
-         }
-         else
-         {
-            dwAppsUseLightTheme = 1;
-         }
-
-         key._set("AppsUseLightTheme", dwAppsUseLightTheme);
-
-         return ::success;
-
-      }
-
-
       double node::get_time_zone()
       {
 

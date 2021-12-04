@@ -1847,6 +1847,13 @@ pacmedir->create CreateDirectoryW last error(%d)=%s", dwError, pszError);
 
          ::file::path pathArchive = getenv("__archive");
 
+         if (pathArchive.is_empty())
+         {
+
+            return "C:\\archive";
+
+         }
+
          return pathArchive;
 
 #else

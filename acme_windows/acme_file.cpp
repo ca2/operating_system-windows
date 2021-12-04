@@ -46,6 +46,95 @@ namespace windows
 
    }
 
+
+   ::duration acme_file::modification_time(const char* psz)
+   {
+      auto hFile = CreateFileW(wstring(psz), GENERIC_READ, FILE_SHARE_READ, NULL,
+         OPEN_EXISTING, 0, NULL);
+
+      if (hFile == INVALID_HANDLE_VALUE)
+      {
+         
+         return {};
+      }
+      
+      FILETIME ftWrite;
+
+      // Retrieve the file times for the file.
+      if (!GetFileTime(hFile, nullptr, nullptr, &ftWrite))
+      {
+
+         ::CloseHandle(hFile);
+         return {};
+
+      }
+      ::CloseHandle(hFile);
+      // Convert the last-write time to local time.
+      //FileTimeToSystemTime(&ftWrite, &stUTC);
+
+      ::datetime::time time;
+
+      file_time_to_time(&time.m_i, (filetime_t *) & ftWrite);
+
+      return (INTEGRAL_SECOND) time.m_i;
+
+      //SystemTimeToTzSpecificLocalTime(NULL, &stUTC, &stLocal);
+
+      // Build a string showing the date and time.
+      //dwRet = StringCchPrintf(lpszString, dwSize,
+         //TEXT("%02d/%02d/%d  %02d:%02d"),
+         //stLocal.wMonth, stLocal.wDay, stLocal.wYear,
+         //stLocal.wHour, stLocal.wMinute);
+
+      //if (S_OK == dwRet)
+        // return TRUE;
+      //else return FALSE;
+      
+
+   }
+
+
+   ::e_status acme_file::set_modification_time(const char* psz, const ::duration& duration)
+   {
+
+
+      auto hFile = CreateFileW(wstring(psz), GENERIC_WRITE, 0, NULL,
+         OPEN_EXISTING, 0, NULL);
+
+      if (hFile == INVALID_HANDLE_VALUE)
+      {
+         auto lastError = GetLastError();
+         return last_error_to_status(lastError);
+      }
+
+      ::datetime::time time;
+
+      time.m_i = duration.m_iSecond;
+
+      ::filetime_t filetime;
+
+      time_to_file_time(&filetime, &time.m_i);
+
+      // Retrieve the file times for the file.
+      if (!SetFileTime(hFile, nullptr, nullptr, (FILETIME *) & filetime))
+      {
+
+         auto lastError = GetLastError();
+         ::CloseHandle(hFile);
+         return last_error_to_status(lastError);
+
+      }
+      ::CloseHandle(hFile);
+      // Convert the last-write time to local time.
+      //FileTimeToSystemTime(&ftWrite, &stUTC);
+
+
+      return ::success;
+
+
+   }
+
+
    //string acme_file::extension_dup(const char * path)
    //{
 

@@ -39,9 +39,9 @@ namespace aura
 
          virtual void set_console_colors(::u32 dwScreenColors, ::u32 dwPopupColors, ::u32 dwWindowAlpha) override;
 
-         virtual ::e_status set_system_dark_mode1(bool bSet = true);
+         //virtual ::e_status set_system_dark_mode1(bool bSet = true);
 
-         virtual ::e_status set_app_dark_mode1(bool bSet = true);
+         //virtual ::e_status set_app_dark_mode1(bool bSet = true);
 
          virtual double get_time_zone() override;
 
