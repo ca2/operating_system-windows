@@ -228,7 +228,7 @@ void imm_client::_001OnIme(::message::message * pmessage)
 
             on_text_composition(strComposition);
 
-            on_text_composition_done();
+            //on_text_composition_done();
 
          }
          else if ((pmessage->m_lparam & GCS_COMPSTR) != 0)
@@ -327,6 +327,15 @@ void imm_client::_001OnIme(::message::message * pmessage)
       m_bImeCancelling = false;
 
       set_text_composition_active();
+
+      if (m_strImeComposition.has_char())
+      {
+
+         imm_context imm(m_puserinteraction);
+
+         imm.set_string(m_strImeComposition);
+
+      }
 
       on_text_composition_message(TEXT_COMPOSITION_MESSAGE_UPDATE_CANDIDATE_WINDOW_POSITION);
 

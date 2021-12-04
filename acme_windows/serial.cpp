@@ -62,7 +62,7 @@ namespace windows
       m_estopbit = estopbit;
       m_eflowcontrol = eflowcontrol;
 
-      if (m_wstrPort.empty() == false)
+      if (m_wstrPort.has_char())
       {
 
          open();
@@ -83,10 +83,9 @@ namespace windows
       //CloseHandle(m_hMutexWrite);
    }
 
-   void
-      serial::open()
+   void serial::open()
    {
-      if (m_wstrPort.empty())
+      if (m_wstrPort.is_empty())
       {
          __throw(error_invalid_argument, "Empty port is invalid.");
       }

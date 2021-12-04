@@ -25,6 +25,7 @@ public:
    bool close_candidate(index iIndex = 0);
 
    string get_string(int iStr = GCS_COMPSTR);
+   ::e_status set_string(const char * psz, int iStr = GCS_COMPSTR);
 
    string _get_candidate(int iList);
 

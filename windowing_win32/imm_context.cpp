@@ -66,6 +66,17 @@ string imm_context::get_string(int iStr)
 }
 
 
+::e_status imm_context::set_string(const char* psz, int iStr)
+{
+
+   wstring wstr(psz);
+
+   int iLen = ImmSetCompositionStringW(m_himc, iStr, (LPVOID) wstr.c_str(), wstr.get_length(),nullptr, 0);
+
+   return ::success;
+
+}
+
 string imm_context::_get_candidate(int iList)
 {
 

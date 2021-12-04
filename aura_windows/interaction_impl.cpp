@@ -1871,11 +1871,7 @@ namespace windows
    bool interaction_impl::post_message(const ::id & id, wparam wparam, lparam lparam)
    {
 
-      auto pwindow = m_pwindow;
-
-      ::u32 message = id.umessage();
-
-      return m_pwindow->post_message(message, wparam, lparam);
+      return m_pwindow->post_message(id, wparam, lparam);
 
    }
 
