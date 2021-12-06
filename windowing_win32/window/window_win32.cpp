@@ -573,8 +573,17 @@ wstring windowing::_windows_register_window_class(::u32 nClassStyle, hcursor hCu
 
    wstring wstrClassName;
 
+#ifdef CUBE
+
+   HINSTANCE hinstance = ::GetModuleHandleW(nullptr);
+
+#else 
+
    HINSTANCE hinstance = ::GetModuleHandleW(L"windowing_win32.dll");
 
+#endif
+
+  
 
 
    {

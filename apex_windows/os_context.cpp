@@ -384,7 +384,7 @@ namespace windows
    }
 
 
-   bool os_context::local_machine_set_run(const ::string & pszKey, const ::string & pszCommand, bool bSet)
+   bool os_context::local_machine_set_run(const ::string & pszKey, const ::string & pszCommand, const ::string& pszArguments, bool bSet)
    {
 
       try
@@ -419,7 +419,7 @@ namespace windows
    }
 
 
-   bool os_context::local_machine_set_run_once(const ::string & pszKey, const ::string & pszCommand, bool bSet)
+   bool os_context::local_machine_set_run_once(const ::string & pszKey, const ::string & pszCommand, const ::string& pszArguments, bool bSet)
    {
 
       try
@@ -453,7 +453,7 @@ namespace windows
    }
 
 
-   bool os_context::current_user_set_run(const ::string & pszKey, const ::string & pszCommand, bool bSet)
+   bool os_context::current_user_set_run(const ::string & pszKey, const ::string & pszCommand, const ::string& strArguments, bool bSet)
    {
 
       try
@@ -465,7 +465,11 @@ namespace windows
             if (bSet)
             {
 
-               keyKar.set(pszKey, string(pszCommand));
+               string str;
+
+               str = "\"" + string(pszCommand) + "\"" + str::has_char(strArguments, " ");
+
+               keyKar.set(pszKey, str);
 
             }
             else
@@ -489,7 +493,7 @@ namespace windows
    }
 
 
-   bool os_context::current_user_set_run_once(const ::string & pszKey, const ::string & pszCommand, bool bSet)
+   bool os_context::current_user_set_run_once(const ::string & pszKey, const ::string & pszCommand, const ::string& pszArguments, bool bSet)
    {
 
       try
@@ -2276,10 +2280,10 @@ retry:
    }
 
 
-   bool os_context::register_user_auto_start(string strId, string strCommand, bool bRegister)
+   bool os_context::register_user_auto_start(const string& strId, const string& strCommand, const string & strArguments, bool bRegister)
    {
 
-      current_user_set_run(strId, strCommand, bRegister);
+      current_user_set_run(strId, strCommand, strArguments, bRegister);
 
       return true;
 

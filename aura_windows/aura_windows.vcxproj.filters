@@ -61,9 +61,4 @@
       <Filter>Resource Files</Filter>
     </ResourceCompile>
   </ItemGroup>
-  <ItemGroup>
-    <None Include="aura_windows.def">
-      <Filter>Source Files</Filter>
-    </None>
-  </ItemGroup>
 </Project>

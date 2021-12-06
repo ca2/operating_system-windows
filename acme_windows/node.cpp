@@ -2,6 +2,9 @@
 #include "acme/parallelization/install_mutex.h"
 
 
+CLASS_DECL_ACME ::e_status call_async(const char* pszPath, const char* pszParam, const char* pszDir, ::e_display edisplay, bool bPrivileged, unsigned int* puiPid);
+
+
 namespace acme
 {
 
@@ -44,6 +47,23 @@ namespace acme
          }
 
          windows_registry_initialize();
+
+         return estatus;
+
+      }
+
+
+      ::e_status node::call_async(const ::string& strPath, const ::string& strParam, const ::string& strDir, ::e_display edisplay, bool bPrivileged, unsigned int* puiPid)
+      {
+
+         auto estatus = ::call_async(strPath, strParam, strDir, edisplay, bPrivileged, puiPid);
+
+         if (!estatus)
+         {
+
+            return estatus;
+
+         }
 
          return estatus;
 

@@ -47,6 +47,9 @@ namespace acme
          //virtual ::file::path roaming() override;
 
 
+         virtual ::e_status call_async(const ::string& pszPath, const ::string& pszParam, const ::string& pszDir, ::e_display edisplay, bool bPrivileged, unsigned int* puiPid = nullptr);
+
+
          virtual bool win32_registry_windows_dark_mode_for_app();
          virtual bool win32_registry_windows_dark_mode_for_system();
          virtual bool win32_registry_windows_darkness();

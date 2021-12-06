@@ -37,10 +37,10 @@ namespace windows
       ::payload connection_settings_get_auto_config_url() override;
 
 
-      bool local_machine_set_run(const ::string & pszKey, const ::string & pszCommand, bool bSet) override;
-      bool local_machine_set_run_once(const ::string & pszKey, const ::string & pszCommand, bool bSet) override;
-      bool current_user_set_run(const ::string & pszKey, const ::string & pszCommand, bool bSet) override;
-      bool current_user_set_run_once(const ::string & pszKey, const ::string & pszCommand, bool bSet) override;
+      bool local_machine_set_run(const ::string & pszKey, const ::string & pszCommand, const ::string& strArguments, bool bSet) override;
+      bool local_machine_set_run_once(const ::string & pszKey, const ::string & pszCommand, const ::string& strArguments, bool bSet) override;
+      bool current_user_set_run(const ::string & pszKey, const ::string & pszCommand, const ::string & strArguments, bool bSet) override;
+      bool current_user_set_run_once(const ::string & pszKey, const ::string & pszCommand, const ::string& strArguments, bool bSet) override;
       bool defer_register_ca2_plugin_for_mozilla() override;
 
       bool file_extension_get_open_with_list_keys(string_array & straKey, const ::string & pszExtension) override;
@@ -101,7 +101,7 @@ namespace windows
 
       virtual bool get_default_browser(string & strId, ::file::path & path, string & strParam) override;
 
-      bool register_user_auto_start(string strId, string strCommand, bool bRegister) override;
+      bool register_user_auto_start(const string & strId, const string & strCommand, const string & strArguments, bool bRegister) override;
 
       bool is_user_auto_start(string strId) override;
 
