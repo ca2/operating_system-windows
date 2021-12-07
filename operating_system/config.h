@@ -245,6 +245,12 @@
 #endif
 
 
-
 #define hcursor_null ((hcursor) nullptr)
+
+
+#ifdef CUBE
+#define GLEW_STATIC
+#endif
+
+
 
