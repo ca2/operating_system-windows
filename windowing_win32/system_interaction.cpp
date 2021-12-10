@@ -87,7 +87,7 @@ namespace windowing_win32
 
             auto psystem = m_psystem->m_paurasystem;
 
-            psystem->signal(id_os_font_change);/*
+            psystem->signal(id_operating_system_font_list_change);/*
 
             psystem->handle_subject(psubject);*/
 
