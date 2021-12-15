@@ -863,14 +863,14 @@ namespace windows
    }
 
 
-   ::file::path dir_context::ca2module()
-   {
+   //::file::path dir_context::ca2module()
+   //{
 
-      __pointer(::apex::system) psystem = get_system();
+   //   __pointer(::apex::system) psystem = get_system();
 
-      return psystem->m_pdirsystem->m_pathCa2Module;
+   //   return psystem->m_pdirsystem->m_pathCa2Module;
 
-   }
+   //}
 
 
    ::file::path dir_context::time_square(const ::string & strPrefix, const ::string & strSuffix)
