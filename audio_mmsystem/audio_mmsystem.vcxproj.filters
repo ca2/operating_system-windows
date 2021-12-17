@@ -52,11 +52,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="audio_mmsystem.def">
-      <Filter>Source Files</Filter>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
     <ResourceCompile Include="..\version.rc">
       <Filter>Resource Files</Filter>
     </ResourceCompile>
