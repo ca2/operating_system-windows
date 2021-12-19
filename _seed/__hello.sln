@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31825.309
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "helloearth", "..\..\..\source\console\helloearth\helloearth.vcxproj", "{DD1BBBD3-15E0-4F4E-9B5A-AA78A6A37738}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "console_helloearth", "..\..\..\source\console\helloearth\helloearth.vcxproj", "{DD1BBBD3-15E0-4F4E-9B5A-AA78A6A37738}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "hellosolarsystem", "..\..\..\source\console\hellosolarsystem\hellosolarsystem.vcxproj", "{1E0627A7-4245-4978-BE24-87D2447B6971}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "console_hellosolarsystem", "..\..\..\source\console\hellosolarsystem\hellosolarsystem.vcxproj", "{1E0627A7-4245-4978-BE24-87D2447B6971}"
 	ProjectSection(ProjectDependencies) = postProject
 		{CC8E8200-00A9-414E-9829-7CA3F1091ADD} = {CC8E8200-00A9-414E-9829-7CA3F1091ADD}
 		{C598E718-55AE-4D6E-81E0-53450FC3A649} = {C598E718-55AE-4D6E-81E0-53450FC3A649}
@@ -14,7 +14,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "hellosolarsystem", "..\..\.
 		{D08014E6-E329-41CF-81B5-957C290A4AA8} = {D08014E6-E329-41CF-81B5-957C290A4AA8}
 	EndProjectSection
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "readlines", "..\..\..\source\console\readlines\readlines.vcxproj", "{6E5240D2-B8C9-4B61-B87A-A979B3C0EB4B}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "console_readlines", "..\..\..\source\console\readlines\readlines.vcxproj", "{6E5240D2-B8C9-4B61-B87A-A979B3C0EB4B}"
 	ProjectSection(ProjectDependencies) = postProject
 		{CC8E8200-00A9-414E-9829-7CA3F1091ADD} = {CC8E8200-00A9-414E-9829-7CA3F1091ADD}
 		{C598E718-55AE-4D6E-81E0-53450FC3A649} = {C598E718-55AE-4D6E-81E0-53450FC3A649}
@@ -34,7 +34,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "acme_windows_common", "..\.
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "apex_windows_common", "..\..\platform-windows_common\apex_windows_common\apex_windows_common.vcxproj", "{A094E038-D195-4400-82CE-44A7EDF91B78}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "hello", "..\..\..\source\console\hello\hello.vcxproj", "{21A3EC8F-2012-4D5C-8DBC-0BC11FD36940}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "console_hello", "..\..\..\source\console\hello\hello.vcxproj", "{21A3EC8F-2012-4D5C-8DBC-0BC11FD36940}"
 	ProjectSection(ProjectDependencies) = postProject
 		{CC8E8200-00A9-414E-9829-7CA3F1091ADD} = {CC8E8200-00A9-414E-9829-7CA3F1091ADD}
 		{EB9DC9C0-0573-4DA0-8700-4DBB371773F1} = {EB9DC9C0-0573-4DA0-8700-4DBB371773F1}
@@ -42,7 +42,10 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "hello", "..\..\..\source\co
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "acme_windows", "..\acme_windows\acme_windows.vcxproj", "{CC8E8200-00A9-414E-9829-7CA3F1091ADD}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "application_build_helper", "..\..\..\source\console\application_build_helper\application_build_helper.vcxproj", "{BA041232-56F1-44E7-B71F-7B88670AE1B1}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "console_application_build_helper", "..\..\..\source\console\application_build_helper\application_build_helper.vcxproj", "{BA041232-56F1-44E7-B71F-7B88670AE1B1}"
+	ProjectSection(ProjectDependencies) = postProject
+		{D08014E6-E329-41CF-81B5-957C290A4AA8} = {D08014E6-E329-41CF-81B5-957C290A4AA8}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "crypto_openssl", "..\..\..\source\app\crypto_openssl\crypto_openssl.vcxproj", "{D08014E6-E329-41CF-81B5-957C290A4AA8}"
 EndProject

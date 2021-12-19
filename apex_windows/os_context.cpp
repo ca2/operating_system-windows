@@ -7,24 +7,6 @@
 #include "acme/filesystem/filesystem/acme_dir.h"
 #include "acme/filesystem/filesystem/acme_path.h"
 
-void command_system(const char* psz)
-{
-   string str(psz);
-
-   wstring wstr;
-   wstr = str;
-
-
-   STARTUPINFO info = { sizeof(info) };
-   PROCESS_INFORMATION processInfo;
-   if (CreateProcessW(nullptr, wstr, NULL, NULL, TRUE, CREATE_NO_WINDOW, NULL, NULL, &info, &processInfo))
-   {
-      WaitForSingleObject(processInfo.hProcess, INFINITE);
-      CloseHandle(processInfo.hProcess);
-      CloseHandle(processInfo.hThread);
-   }
-}
-
 
 ::e_status hresult_to_estatus(HRESULT hresult)
 {
@@ -812,9 +794,11 @@ namespace windows
 
             string strCommand = "\"" + path + "\" \"" + strUrl + "\" --profile-directory=\"" + strMappedProfile + "\"";
 
-            command_system(strCommand);
+            int iExitCode = 0;
 
-            return ::success;
+            auto estatus = command_system(iExitCode, strCommand);
+
+            return estatus;
 
          }
 

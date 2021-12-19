@@ -1,0 +1,2 @@
+app/aura
+platform-windows/windowing_win32

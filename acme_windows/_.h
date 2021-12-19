@@ -12,3 +12,4 @@
 #endif
 
 
+//CLASS_DECL_ACME_WINDOWS ::e_status command_system(const char* psz);
