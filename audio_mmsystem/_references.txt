@@ -1,1 +1,1 @@
-app-core/multimedia_mmsystem
+platform-multimedia/multimedia_mmsystem

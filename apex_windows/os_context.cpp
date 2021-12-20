@@ -794,9 +794,13 @@ namespace windows
 
             string strCommand = "\"" + path + "\" \"" + strUrl + "\" --profile-directory=\"" + strMappedProfile + "\"";
 
+            string strOutput;
+
+            string strError;
+
             int iExitCode = 0;
 
-            auto estatus = command_system(iExitCode, strCommand);
+            auto estatus = command_system(strOutput, strError, iExitCode, strCommand);
 
             return estatus;
 

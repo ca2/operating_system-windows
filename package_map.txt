@@ -13,3 +13,4 @@ default_apex_platform2=platform-windows_common/apex_windows_common
 default_aura_platform1=platform-windows/aura_windows
 default_aura_platform2=platform-windows_common/aura_windows_common
 default_opengl1=third/glew32
+default_music_midi=platform-windows/music_midi_mmsystem
