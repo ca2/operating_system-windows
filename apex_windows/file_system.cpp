@@ -31,21 +31,23 @@ namespace windows
 
       }
 
+      //m_pathModule = (nullptr);
+
       return estatus;
 
    }
 
    
-   ::e_status file_system::update_module_path()
-   {
+   //::e_status file_system::update_module_path()
+   //{
 
-      m_pathModule = ::get_module_path(nullptr);
+   //   m_pathModule = ::get_module_path(nullptr);
 
-      m_pathCa2Module = ::get_module_path(::GetModuleHandleA("apex.dll"));
+   //   //m_pathCa2Module = ::get_module_path(::GetModuleHandleA("apex.dll"));
 
-      return true;
+   //   return true;
 
-   }
+   //}
 
 
 

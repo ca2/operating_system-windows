@@ -539,7 +539,7 @@ namespace windows
          key.open(key, "@ca2.cc/npca2", true);
 
          key.set("Description", "ca2 plugin for NPAPI");
-         key.set("Path", m_pcontext->m_papexcontext->dir().ca2module() /"npca2.dll");
+         key.set("Path", m_pcontext->m_papexcontext->dir().module() /"npca2.dll");
          key.set("ProductName", "ca2 plugin for NPAPI");
          key.set("Vendor", "ca2 Desenvolvimento de Software Ltda.");
          key.set("Version", m_pcontext->m_papexcontext->file().as_string(m_pcontext->m_papexcontext->dir().install()/"appdata/x86/ca2_build.txt"));

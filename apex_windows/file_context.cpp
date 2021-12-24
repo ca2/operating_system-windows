@@ -48,14 +48,14 @@ namespace windows
    ::e_status file_context::init_system()
    {
 
-      auto estatus = m_pfilesystem->update_module_path();
+      //auto estatus = m_pfilesystem->update_module_path();
 
-      if (!estatus)
-      {
+      //if (!estatus)
+      //{
 
-         return estatus;
+      //   return estatus;
 
-      }
+      //}
 
       return ::success;
 
@@ -794,21 +794,21 @@ namespace windows
    }
 
 
-   ::e_status file_context::update_module_path()
-   {
+   //::e_status file_context::update_module_path()
+   //{
 
-      auto estatus = ::file_context::update_module_path();
+   //   auto estatus = ::file_context::update_module_path();
 
-      if(!estatus)
-   {
-      
-      return estatus;
-      
-   }
+   //   if(!estatus)
+   //{
+   //   
+   //   return estatus;
+   //   
+   //}
 
-      return estatus;
+   //   return estatus;
 
-   }
+   //}
 
 
    file_transport file_context::get_file(const ::payload & payloadFile, const ::file::e_open & eopenFlags)

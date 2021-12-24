@@ -18,7 +18,7 @@ namespace windows
       virtual ::e_status init_system() override;
 
 
-      virtual ::e_status update_module_path() override;
+      //virtual ::e_status update_module_path() override;
 
 
    };
