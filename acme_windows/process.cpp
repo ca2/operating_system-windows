@@ -295,6 +295,7 @@ bool root_execute_sync(const char * pszFile, const char * pszParams, ::duration 
 
    }
 
+   info.fMask |= SEE_MASK_FLAG_NO_UI;
 
    int iOk = ::ShellExecuteExW(&info);
 
@@ -307,9 +308,20 @@ bool root_execute_sync(const char * pszFile, const char * pszParams, ::duration 
 
    }
 
-   DWORD dwError = ::GetLastError();
+   int iSeResult = (int)info.hInstApp;
 
-   return iOk;
+   if (iSeResult < 32)
+   {
+
+      DWORD dwError = ::GetLastError();
+
+      auto estatus = last_error_to_status(dwError);
+
+      return estatus;
+
+   }
+
+   return ::success;
 
 }
 

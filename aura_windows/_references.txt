@@ -1,0 +1,3 @@
+app/aura
+platform-windows/apex_windows
+platform-windows_common/aura_windows_common
