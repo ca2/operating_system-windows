@@ -2015,8 +2015,7 @@ pacmedir->create CreateDirectoryW last error(%d)=%s", dwError, pszError);
 //      }
 
 
-
-   string acme_dir::get_current_directory()
+   status < string > acme_dir::get_current()
    {
 
       auto size = GetCurrentDirectoryW(0, nullptr);
@@ -2029,10 +2028,32 @@ pacmedir->create CreateDirectoryW last error(%d)=%s", dwError, pszError);
 
       wstr.release_string_buffer(size);
 
-      return wstr;
+      string str(wstr);
+
+      return str;
 
    }
 
+
+   ::e_status acme_dir::change_current(const char * psz)
+   {
+
+      wstring wstr(psz);
+
+      if (!SetCurrentDirectoryW(wstr))
+      {
+
+         DWORD dwLastError = ::GetLastError();
+
+         auto estatus = last_error_to_status(dwLastError);
+
+         return estatus;
+
+      }
+
+      return ::success;
+
+   }
 
 
 } // namespace windows

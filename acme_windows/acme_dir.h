@@ -127,7 +127,8 @@ namespace windows
 
       //int make_path(const char * psz) override;
 
-      string get_current_directory() override;
+      status < string > get_current() override;
+      ::e_status change_current(const char* psz) override;
 
 
    };
