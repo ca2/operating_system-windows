@@ -16,6 +16,9 @@
 #endif
 
 
+#include "aura/graphics/draw2d/color_matrix.h"
+
+
 #ifdef WINDOWS_DESKTOP
 
 

@@ -1,6 +1,10 @@
 #include "framework.h"
 
 
+#include "acme/primitive/mathematics/mathematics.h"
+#include "aura/graphics/draw2d/context_image.h"
+
+
 #undef new
 
 
@@ -2248,31 +2252,31 @@ namespace draw2d_gdiplus
    //}
 
 
-   size_f64 graphics::GetOutputTabbedTextExtent(const ::string & pszString, strsize nCount, count nTabPositions, LPINT lpnTabStopPositions)
-   {
+   //size_f64 graphics::GetOutputTabbedTextExtent(const ::string & pszString, strsize nCount, count nTabPositions, LPINT lpnTabStopPositions)
+   //{
 
-      //ASSERT(get_handle1() != nullptr);
+   //   //ASSERT(get_handle1() != nullptr);
 
-      //return ::GetTabbedTextExtent(get_handle1(), pszString, (i32) nCount, (int) nTabPositions, lpnTabStopPositions);
+   //   //return ::GetTabbedTextExtent(get_handle1(), pszString, (i32) nCount, (int) nTabPositions, lpnTabStopPositions);
 
-      __throw(error_not_implemented);
+   //   __throw(error_not_implemented);
 
-      return nullptr;
+   //   return nullptr;
 
-   }
+   //}
 
 
-   size_f64 graphics::GetOutputTabbedTextExtent(const ::string & str, count nTabPositions, LPINT pnTabStopPositions)
-   {
+   //size_f64 graphics::GetOutputTabbedTextExtent(const ::string & str, count nTabPositions, LPINT pnTabStopPositions)
+   //{
 
-      //ASSERT(get_handle1() != nullptr);
+   //   //ASSERT(get_handle1() != nullptr);
 
-      //return ::GetTabbedTextExtent(get_handle1(), str, (i32) str.get_length(), (int) nTabPositions, pnTabStopPositions);
+   //   //return ::GetTabbedTextExtent(get_handle1(), str, (i32) str.get_length(), (int) nTabPositions, pnTabStopPositions);
 
-      __throw(error_not_implemented);
+   //   __throw(error_not_implemented);
 
-      return nullptr;
-   }
+   //   return nullptr;
+   //}
 
 
    //bool graphics::GrayString(::draw2d::brush* pBrush, bool (CALLBACK* pfnOutput)(HDC, LPARAM, i32), LPARAM lpData, i32 nCount,double x, double y, double nWidth, double nHeight)
@@ -5885,41 +5889,41 @@ namespace draw2d_gdiplus
    //}
 
 
-   ::size_f64 graphics::GetOutputTextExtent(const char * pszString, strsize nCount)
-   {
+   //::size_f64 graphics::GetOutputTextExtent(const char * pszString, strsize nCount)
+   //{
 
-      //ASSERT(get_handle1() != nullptr);
-      //::size_f64 ::size_f64;
-      //string str(pszString, nCount);
+   //   //ASSERT(get_handle1() != nullptr);
+   //   //::size_f64 ::size_f64;
+   //   //string str(pszString, nCount);
 
-      //wstring text.m_wstr = ::str::international::utf8_to_unicode(str);
-      //VERIFY(::GetTextExtentPoint32W(get_handle1(), text.m_wstr, (i32)text.m_wstr.get_length(), &::size_f64));
-      //return ::size_f64;
+   //   //wstring text.m_wstr = ::str::international::utf8_to_unicode(str);
+   //   //VERIFY(::GetTextExtentPoint32W(get_handle1(), text.m_wstr, (i32)text.m_wstr.get_length(), &::size_f64));
+   //   //return ::size_f64;
 
-      return nullptr;
-      
+   //   return nullptr;
+   //   
+   ////}
+
+
    //}
 
 
-   }
+   //::size_f64 graphics::GetOutputTextExtent(const ::string & str)
+   //{
 
+   //   //ASSERT(get_handle1() != nullptr);
 
-   ::size_f64 graphics::GetOutputTextExtent(const ::string & str)
-   {
+   //   //::size_f64 ::size_f64;
 
-      //ASSERT(get_handle1() != nullptr);
+   //   //wstring text.m_wstr = ::str::international::utf8_to_unicode(str);
 
-      //::size_f64 ::size_f64;
+   //   //VERIFY(::GetTextExtentPoint32W(get_handle1(), text.m_wstr, (i32)text.m_wstr.get_length(), &::size_f64));
 
-      //wstring text.m_wstr = ::str::international::utf8_to_unicode(str);
+   //   //return ::size_f64;
 
-      //VERIFY(::GetTextExtentPoint32W(get_handle1(), text.m_wstr, (i32)text.m_wstr.get_length(), &::size_f64));
+   //   return nullptr;
 
-      //return ::size_f64;
-
-      return nullptr;
-
-   }
+   //}
 
 
    bool graphics::get_text_extent(::size_f64 & size, const char * pszString, strsize nCount, strsize iIndex)

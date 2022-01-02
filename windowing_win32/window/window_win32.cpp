@@ -474,7 +474,7 @@ wstring windowing::_windows_calc_icon_window_class(::user::interaction * puserin
 
    string strPath = pcontext->m_papexcontext->dir().matter(pszMatter, "icon.ico");
 
-   hicon hIcon = (hicon) ::LoadImageW(nullptr, wstring(pcontext->m_papexcontext->get_matter_path(strPath)), IMAGE_ICON, 256, 256, LR_LOADFROMFILE);
+   HICON hIcon = (HICON) ::LoadImageW(nullptr, wstring(pcontext->m_papexcontext->get_matter_path(strPath)), IMAGE_ICON, 256, 256, LR_LOADFROMFILE);
 
    wstring strClass = _windows_get_user_interaction_window_class(puserinteraction);
 
@@ -564,7 +564,7 @@ bool windowing::_windows_register_with_icon(WNDCLASSEXW * puserinteractionclass,
 //CLASS_DECL_WINDOWING_WIN32 WNDPROC get_window_procedure();
 
 
-wstring windowing::_windows_register_window_class(::u32 nClassStyle, hcursor hCursor, HBRUSH hbrBackground, hicon hIcon)
+wstring windowing::_windows_register_window_class(::u32 nClassStyle, HCURSOR hCursor, HBRUSH hbrBackground, HICON hIcon)
 {
 
    //auto papp = pobject->get_application();

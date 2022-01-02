@@ -7,6 +7,7 @@
 #include "acme/constant/timer.h"
 #include "apex/platform/app_core.h"
 #include "interaction_impl.h"
+#include "aura/graphics/draw2d/graphics.h"
 
 
 //const GUID CLSID_TaskbarList = { 0x56FDF344, 0xFD6D, 0x11D0,{ 0x95, 0x8A, 0x00, 0x60, 0x97, 0xC9, 0xA0, 0x90 } };

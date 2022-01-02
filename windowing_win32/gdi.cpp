@@ -22,7 +22,7 @@ namespace windowing_win32
       HBITMAP hBitmap;
       void * pBits;
 
-      hcursor hAlphaCursor = nullptr;
+      HCURSOR hAlphaCursor = nullptr;
 
       dwWidth = pimage->width();  // width of the Bitmap V5 Dib bitmap
       dwHeight = pimage->height();  // height of the Bitmap V5 Dib bitmap

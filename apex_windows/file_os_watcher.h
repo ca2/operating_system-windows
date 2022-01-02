@@ -19,6 +19,9 @@
 #pragma once
 
 
+#include "apex/filesystem/filesystem/file_watcher.h"
+
+
 namespace file
 {
 
@@ -38,9 +41,9 @@ namespace file
 
 
       os_watch();
-      virtual ~os_watch();
+      ~os_watch() override;
 
-      virtual bool open(const ::file::path & pathFolder, bool bRecursive) override;
+      bool open(const ::file::path & pathFolder, bool bRecursive) override;
 
       static void CALLBACK callback(DWORD dwErrorCode, DWORD dwNumberOfBytesTransfered, LPOVERLAPPED pOverlapped);
 
@@ -57,12 +60,12 @@ namespace file
 
 
       os_watcher();
-      virtual ~os_watcher();
+      ~os_watcher() override;
 
 
       //virtual ::e_status     run() override;
 
-      virtual ::e_status step();
+      ::e_status step() override;
 
 
    };

@@ -3,6 +3,10 @@
 #pragma once
 
 
+#include "aura/graphics/graphics/_.h"
+#include "aura/graphics/graphics/_graphics.h"
+
+
 namespace windowing_win32
 {
 

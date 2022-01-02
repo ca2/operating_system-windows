@@ -1,6 +1,9 @@
 #pragma once
 
 
+#include "aura/graphics/draw2d/object.h"
+
+
 namespace draw2d_gdiplus
 {
 

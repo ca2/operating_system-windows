@@ -268,7 +268,7 @@ namespace windowing_win32
 
       ::u32 dwWidth, dwHeight;
       BITMAPINFOHEADER bi;
-      hcursor hAlphaCursor = nullptr;
+      HCURSOR hAlphaCursor = nullptr;
 
       dwWidth = pimage->width();
       dwHeight = pimage->height();

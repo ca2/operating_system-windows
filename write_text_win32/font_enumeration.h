@@ -1,6 +1,9 @@
 #pragma once
 
 
+#include "aura/graphics/write_text/font_enumeration.h"
+
+
 namespace write_text_win32
 {
 

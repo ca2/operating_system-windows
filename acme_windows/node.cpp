@@ -2,7 +2,7 @@
 #include "acme/parallelization/install_mutex.h"
 
 
-CLASS_DECL_ACME ::e_status call_async(const char* pszPath, const char* pszParam, const char* pszDir, ::e_display edisplay, bool bPrivileged, unsigned int* puiPid);
+CLASS_DECL_ACME_WINDOWS ::e_status call_async(const char* pszPath, const char* pszParam, const char* pszDir, ::e_display edisplay, bool bPrivileged, unsigned int* puiPid);
 
 
 namespace acme

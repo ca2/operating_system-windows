@@ -308,7 +308,7 @@ bool root_execute_sync(const char * pszFile, const char * pszParams, ::duration 
 
    }
 
-   int iSeResult = (int)info.hInstApp;
+   int iSeResult = (int)(iptr) info.hInstApp;
 
    if (iSeResult < 32)
    {

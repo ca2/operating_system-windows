@@ -147,7 +147,7 @@ namespace windowing_win32
 
       virtual ::e_status lock_set_foreground_window(bool bLock) override;
 
-      virtual wstring _windows_register_window_class(::u32 nClassStyle, hcursor hCursor = 0, HBRUSH hbrBackground = 0, hicon hIcon = 0);
+      virtual wstring _windows_register_window_class(::u32 nClassStyle, HCURSOR hCursor = 0, HBRUSH hbrBackground = 0, HICON hIcon = 0);
       //CLASS_DECL_WINDOWING_WIN32 wstring windows_register_window_class(::object * pobject, ::u32 nClassStyle, hcursor hCursor = 0, HBRUSH hbrBackground = 0, hicon hIcon = 0);
       virtual bool _windows_register_class(WNDCLASSEXW* puserinteractionclass);
       //

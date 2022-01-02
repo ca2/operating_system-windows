@@ -2,6 +2,9 @@
 #pragma once
 
 
+#include "aura/graphics/write_text/write_text.h"
+
+
 namespace write_text_win32
 {
 

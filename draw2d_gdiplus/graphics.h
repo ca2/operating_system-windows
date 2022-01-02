@@ -413,16 +413,16 @@ namespace draw2d_gdiplus
       virtual bool get_text_extent(size_f64 & size, const char * pszString, strsize nCount) override;
 
       virtual bool get_text_extent(size_f64 & size, const ::string & str) override;
-      virtual size_f64 GetOutputTextExtent(const char * pszString, strsize nCount) override;
+      //virtual size_f64 GetOutputTextExtent(const char * pszString, strsize nCount) override;
 
-      virtual size_f64 GetOutputTextExtent(const ::string & str) override;
-      //virtual size_f64 GetTabbedTextExtent(const ::string & pszString, strsize nCount,count nTabPositions, LPINT lpnTabStopPositions) override;
+      //virtual size_f64 GetOutputTextExtent(const ::string & str) override;
+      ////virtual size_f64 GetTabbedTextExtent(const ::string & pszString, strsize nCount,count nTabPositions, LPINT lpnTabStopPositions) override;
 
-      //virtual size_f64 GetTabbedTextExtent(const ::string & str,count nTabPositions, LPINT pnTabStopPositions) override;
+      ////virtual size_f64 GetTabbedTextExtent(const ::string & str,count nTabPositions, LPINT pnTabStopPositions) override;
 
-      virtual size_f64 GetOutputTabbedTextExtent(const ::string & pszString, strsize nCount,count nTabPositions, LPINT lpnTabStopPositions) override;
+      //virtual size_f64 GetOutputTabbedTextExtent(const ::string & pszString, strsize nCount,count nTabPositions, LPINT lpnTabStopPositions) override;
 
-      virtual size_f64 GetOutputTabbedTextExtent(const ::string & str,count nTabPositions, LPINT pnTabStopPositions) override;
+      //virtual size_f64 GetOutputTabbedTextExtent(const ::string & str,count nTabPositions, LPINT pnTabStopPositions) override;
 
       //virtual bool GrayString(::draw2d::brush* pBrush, bool (CALLBACK* pfnOutput)(HDC, LPARAM, i32), LPARAM lpData, i32 nCount, double x, double y, i32 nWidth, i32 nHeight) override;
 

@@ -1,6 +1,9 @@
 #pragma once
 
 
+#include "aura/graphics/write_text/font.h"
+
+
 namespace draw2d_gdiplus
 {
 
