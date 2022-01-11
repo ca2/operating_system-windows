@@ -37,12 +37,12 @@ namespace windows
       ~interprocess_communication_tx() override;
 
 
-      ::e_status open(const ::string & pszChannel, ::launcher * plauncher = nullptr) override;
-      ::e_status close() override;
+      void open(const ::string & pszChannel, ::launcher * plauncher = nullptr) override;
+      void close() override;
 
 
-      ::e_status send(const ::string & pszMessage, const duration & durationTimeout) override;
-      ::e_status send(int message, void * pdata, int len, const duration & durationTimeout) override;
+      void send(const ::string & pszMessage, const duration & durationTimeout) override;
+      void send(int message, void * pdata, int len, const duration & durationTimeout) override;
 
 
       bool is_tx_ok() override;
@@ -65,8 +65,8 @@ namespace windows
       ~interprocess_communication_rx() override;
 
 
-      ::e_status create(const ::string & pszChannel) override;
-      ::e_status destroy() override;
+      void create(const ::string & pszChannel) override;
+      void destroy() override;
 
 
       //void * on_interprocess_receive(const ::string & pszMessage) override;

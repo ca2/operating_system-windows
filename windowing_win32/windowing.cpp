@@ -25,7 +25,7 @@ namespace windowing_win32
    }
 
 
-   ::e_status windowing::initialize_windowing(::user::user * puser)
+   void windowing::initialize_windowing(::user::user * puser)
    {
 
       auto estatus = ::windowing::windowing::initialize_windowing(puser);
@@ -143,7 +143,7 @@ namespace windowing_win32
    }
 
    
-   ::e_status windowing::destroy()
+   void windowing::destroy()
    {
 
       if (m_psysteminteraction)
@@ -167,7 +167,7 @@ namespace windowing_win32
    }
 
 
-   //::e_status windowing::destroy()
+   //void windowing::destroy()
    //{
 
    //   auto estatus = ::windowing::windowing::destroy();
@@ -675,7 +675,7 @@ namespace windowing_win32
    }
 
    
-   ::e_status windowing::release_mouse_capture()
+   void windowing::release_mouse_capture()
    {
 
       if (!::ReleaseCapture())
@@ -717,7 +717,7 @@ namespace windowing_win32
    }
 
 
-   ::e_status windowing::set_cursor_position(const ::point_i32 & point)
+   void windowing::set_cursor_position(const ::point_i32 & point)
    {
 
       if (!::SetCursorPos(point.x, point.y))
@@ -732,7 +732,7 @@ namespace windowing_win32
    }
 
 
-   ::e_status windowing::erase_window(::windowing::window * pwindow)
+   void windowing::erase_window(::windowing::window * pwindow)
    {
 
       if (!m_windowmap.erase_key(__hwnd(pwindow->get_oswindow())))
@@ -924,7 +924,7 @@ namespace windowing_win32
    }
 
 
-   ::e_status windowing::windowing_post(const ::routine& routine)
+   void windowing::windowing_post(const ::routine& routine)
    {
 
       auto estatus = m_psystem->m_papexsystem->post_routine(routine);
@@ -1073,7 +1073,7 @@ namespace windowing_win32
    }
 
 
-   ::e_status windowing::lock_set_foreground_window(bool bLock)
+   void windowing::lock_set_foreground_window(bool bLock)
    {
 
       if (bLock)

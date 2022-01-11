@@ -42,7 +42,7 @@ namespace windows
 
       static void WINAPI ServiceHandler(DWORD control);
       
-      virtual ::e_status queue_user_work_item(ULONG flags = WT_EXECUTELONGFUNCTION);
+      virtual void queue_user_work_item(ULONG flags = WT_EXECUTELONGFUNCTION);
 
       static DWORD WINAPI thread_proc(void * pcontext);
       
@@ -50,13 +50,13 @@ namespace windows
 
       virtual void _main_server(::u32 argumentCount, PWSTR * arguments);
 
-      virtual ::e_status defer_service();
+      virtual void defer_service();
 
-      //virtual ::e_status enable_service();
-      //virtual ::e_status disable_service();
+      //virtual void enable_service();
+      //virtual void disable_service();
 
-      virtual ::e_status start_service();
-      virtual ::e_status stop_service();
+      virtual void start_service();
+      virtual void stop_service();
    };
 
 

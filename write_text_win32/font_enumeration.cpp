@@ -22,7 +22,7 @@ namespace write_text_win32
    }
 
 
-   ::e_status font_enumeration::on_enumerate_fonts()
+   void font_enumeration::on_enumerate_fonts()
    {
 
       if (m_hdc == nullptr)

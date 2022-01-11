@@ -1603,7 +1603,7 @@ namespace windowing_win32
    //}
 
 
-   ::e_status shell::initialize(::object * pobject)
+   void shell::initialize(::object * pobject)
    {
 
       if (m_bInitialized)
@@ -1639,7 +1639,7 @@ namespace windowing_win32
    }
 
 
-   ::e_status shell::run()
+   void shell::run()
    {
 
       defer_co_initialize_ex(false);
@@ -1904,7 +1904,7 @@ namespace windowing_win32
    }
 
 
-   ::e_status shell::destroy()
+   void shell::destroy()
    {
 
       return ::user::shell::destroy();

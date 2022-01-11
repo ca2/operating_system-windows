@@ -45,14 +45,14 @@ namespace draw2d_gdiplus
       virtual bool _map(bool) override;
       virtual bool _unmap() override;
 
-      virtual ::e_status create_ex(const ::size_i32 & size, ::color32_t * pcolorref, int iScan, ::enum_flag eflagCreate = DEFAULT_CREATE_IMAGE_FLAG, int iGoodStride = -1, bool bPreserve = false);
-      //::e_status create(const ::size_i32 & size, ::enum_flag eflagCreate = DEFAULT_CREATE_IMAGE_OBJECT_FLAG, int iGoodStride = -1, bool bPreserve = false) override;
-      //::e_status initialize(const ::size_i32 & size, ::color32_t * pcolorref, int iScan, ::enum_flag eflagCreate = DEFAULT_CREATE_IMAGE_OBJECT_FLAG) override;
+      virtual void create_ex(const ::size_i32 & size, ::color32_t * pcolorref, int iScan, ::enum_flag eflagCreate = DEFAULT_CREATE_IMAGE_FLAG, int iGoodStride = -1, bool bPreserve = false);
+      //void create(const ::size_i32 & size, ::enum_flag eflagCreate = DEFAULT_CREATE_IMAGE_OBJECT_FLAG, int iGoodStride = -1, bool bPreserve = false) override;
+      //void initialize(const ::size_i32 & size, ::color32_t * pcolorref, int iScan, ::enum_flag eflagCreate = DEFAULT_CREATE_IMAGE_OBJECT_FLAG) override;
       virtual bool host(const ::pixmap * pixmap) override;
       virtual bool on_host_read_pixels(const ::pixmap* pixmap) override;
       using ::image::create;
-      virtual ::e_status create(::draw2d::graphics * pgraphics) override;
-      ::e_status destroy() override;
+      virtual void create(::draw2d::graphics * pgraphics) override;
+      void destroy() override;
 
 
       //cvirtual bool stretch(::draw2d::graphics * pgraphics) override;
@@ -60,7 +60,7 @@ namespace draw2d_gdiplus
       virtual bool _draw_raw(const ::rectangle_i32 & rectangleTarget, ::image * pimageSrc, const ::point_i32 & pointSrc) override;
 
 
-      virtual ::e_status SetIconMask(::draw2d::icon * picon, i32 cx, i32 cy) override;
+      virtual void SetIconMask(::draw2d::icon * picon, i32 cx, i32 cy) override;
 
 
    };

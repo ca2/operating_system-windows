@@ -8,7 +8,7 @@
 //DWORD_PTR                        g_gdiplusHookToken = NULL;
 //
 //
-//CLASS_DECL_WINDOWING_WIN32 ::e_status initialize_gdiplus()
+//CLASS_DECL_WINDOWING_WIN32 void initialize_gdiplus()
 //{
 //
 //   g_pgdiplusStartupInput = new Gdiplus::GdiplusStartupInput();

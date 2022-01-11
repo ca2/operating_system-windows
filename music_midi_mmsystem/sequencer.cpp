@@ -107,7 +107,7 @@ namespace music
          }
 
 
-         ::e_status     sequencer::close_file()
+         void     sequencer::close_file()
          {
 
             synchronous_lock synchronouslock(mutex());
@@ -128,7 +128,7 @@ namespace music
          }
 
 
-         ::e_status     sequencer::start_mmsystem_sequencer()
+         void     sequencer::start_mmsystem_sequencer()
          {
 
             //m_pmessageout->reset_all_controllers();
@@ -139,7 +139,7 @@ namespace music
 
             u32 uDeviceID = (u32) m_iDevice;
 
-            ::e_status     estatus = ::success;
+            void     estatus = ::success;
 
             MIDIPROPTIMEDIV         mptd;
 
@@ -267,7 +267,7 @@ namespace music
 
                }
 
-               ::e_status     estatus = ::success;
+               void     estatus = ::success;
 
 
                mptd.cbStruct = sizeof(mptd);
@@ -529,12 +529,12 @@ namespace music
          }
 
 
-         ::e_status sequencer::get_position(musical_tick & tk)
+         void sequencer::get_position(musical_tick & tk)
          {
 
             synchronous_lock synchronouslock(mutex());
 
-            ::e_status mmr;
+            void mmr;
 
             MMTIME mmt;
 
@@ -619,12 +619,12 @@ namespace music
          }
 
 
-         ::e_status sequencer::get_time_position(::duration & duration)
+         void sequencer::get_time_position(::duration & duration)
          {
 
             synchronous_lock synchronouslock(mutex());
 
-            ::e_status estatus;
+            void estatus;
 
             MMTIME mmtime;
 
@@ -700,7 +700,7 @@ namespace music
 
 
          
-         ::e_status     sequencer::preroll_operation(LPMIDIHDR lpmh)
+         void     sequencer::preroll_operation(LPMIDIHDR lpmh)
          {
 
             LPDWORD                    lpdw;
@@ -806,12 +806,12 @@ namespace music
          }
 
 
-         ::e_status sequencer::fill_buffer(LPMIDIHDR lpmidihdr)
+         void sequencer::fill_buffer(LPMIDIHDR lpmidihdr)
          {
 
             lpmidihdr->dwBytesRecorded = 0;
 
-            ::e_status estatus = ::success;
+            void estatus = ::success;
 
             if (m_psequence->has_operation())
             {
@@ -950,7 +950,7 @@ namespace music
 
             __UNREFERENCED_PARAMETER(hmidistream);
 
-            ::e_status                   smfrc;
+            void                   smfrc;
 
             ASSERT(lpmidihdr != nullptr);
 
@@ -1006,7 +1006,7 @@ namespace music
 
                //LPMIDIHDR lpmidihdr = (LPMIDIHDR)pevent->m_puserdata;
 
-               ::e_status     estatus = fill_buffer(lpmidihdr);
+               void     estatus = fill_buffer(lpmidihdr);
 
                switch (estatus.m_estatus)
                {
@@ -1179,7 +1179,7 @@ namespace music
 
 
 
-         ::e_status     sequencer::close_stream()
+         void     sequencer::close_stream()
          {
 
             synchronous_lock synchronouslock(mutex());
@@ -1198,7 +1198,7 @@ namespace music
             return ::success;
          }
 
-         ::e_status     sequencer::close_device()
+         void     sequencer::close_device()
          {
 
             synchronous_lock synchronouslock(mutex());
@@ -1206,7 +1206,7 @@ namespace music
             if (m_hstream == nullptr)
                return ::success;
 
-            ::e_status     estatus;
+            void     estatus;
 
             m_psequence->set_state(sequence::e_state_reset);
 
@@ -1272,7 +1272,7 @@ namespace music
 
                //LPMIDIHDR lpmidihdr = (LPMIDIHDR)pevent->m_puserdata;
 
-               //::e_status     estatus = fill_buffer(lpmidihdr);
+               //void     estatus = fill_buffer(lpmidihdr);
 
                //switch (estatus.m_estatus)
                //{
@@ -1452,7 +1452,7 @@ namespace music
          //}
 
 
-         ::e_status sequencer::midi_out_open()
+         void sequencer::midi_out_open()
          {
 
             TRACE("::music::midi::mmsystem::player::SendReset : (0)");
@@ -1479,7 +1479,7 @@ namespace music
          }
 
 
-         ::e_status sequencer::midi_out_long_message(const block & block, const ::duration & duration)
+         void sequencer::midi_out_long_message(const block & block, const ::duration & duration)
          {
 
             if ((block.get_size() & 0x3) != 0)
@@ -1493,7 +1493,7 @@ namespace music
 
             TRACE("::music::midi::mmsystem::player::SendReset : (0)");
 
-            ::e_status estatus = ::success;
+            void estatus = ::success;
 
             MMRESULT mmr;
 
@@ -1549,7 +1549,7 @@ namespace music
          }
 
 
-         ::e_status sequencer::midi_out_xg_mode_on()
+         void sequencer::midi_out_xg_mode_on()
          {
 
             const uchar XGModeOn[] =
@@ -1569,7 +1569,7 @@ namespace music
          }
 
 
-         ::e_status sequencer::midi_out_xg_mode_reset()
+         void sequencer::midi_out_xg_mode_reset()
          {
 
             const uchar XGModeReset[] =
@@ -1589,7 +1589,7 @@ namespace music
          }
 
 
-         ::e_status sequencer::midi_out_xg_drum_setup1_reset()
+         void sequencer::midi_out_xg_drum_setup1_reset()
          {
 
             const uchar XGDrumSetup1Reset[] =
@@ -1609,7 +1609,7 @@ namespace music
          }
          
          
-         ::e_status sequencer::midi_out_xg_drum_setup2_reset()
+         void sequencer::midi_out_xg_drum_setup2_reset()
          {
 
             const uchar XGDrumSetup2Reset[] =
@@ -1629,7 +1629,7 @@ namespace music
          }
 
 
-         ::e_status sequencer::midi_out_master_volume_reset()
+         void sequencer::midi_out_master_volume_reset()
          {
 
             const uchar MasterVolume[] =
@@ -1648,10 +1648,10 @@ namespace music
          }
 
 
-         ::e_status sequencer::midi_out_close()
+         void sequencer::midi_out_close()
          {
 
-            ::e_status estatus = ::success;
+            void estatus = ::success;
 
             auto mmr = midiOutClose(m_hmidiout);
 
@@ -1667,7 +1667,7 @@ namespace music
          }
 
          
-         ::e_status sequencer::SendGMReset()
+         void sequencer::SendGMReset()
          {
 
             synchronous_lock synchronouslock(&get_midi_mutex());
@@ -1737,7 +1737,7 @@ namespace music
 
          End:
 
-            ::e_status     estatus = translate_os_result(mmr);
+            void     estatus = translate_os_result(mmr);
 
             mmr = midiOutClose(hmidiout);
 
@@ -1777,7 +1777,7 @@ namespace music
          }
 
 
-         ::e_status     sequencer::StreamEventF1(musical_tick tkDelta,
+         void     sequencer::StreamEventF1(musical_tick tkDelta,
             array < ::music::midi::event*, ::music::midi::event* >& eventptra,
             LPMIDIHDR lpmh,
             musical_tick tkMax,
@@ -1786,7 +1786,7 @@ namespace music
          {
             __UNREFERENCED_PARAMETER(tkMax);
             __UNREFERENCED_PARAMETER(cbPrerollNomimalMax);
-            ::e_status                   smfrc;
+            void                   smfrc;
 
             if (eventptra.get_size() <= 0)
             {
@@ -1843,7 +1843,7 @@ namespace music
          }
 
          
-         ::e_status     sequencer::StreamEvent(
+         void     sequencer::StreamEvent(
             musical_tick tkDelta,
             ::music::midi::event * pevent,
             LPMIDIHDR lpmh,
@@ -1862,7 +1862,7 @@ namespace music
 
             u32 dwTempo;
             LPDWORD lpdw;
-            ::e_status smfrc;
+            void smfrc;
             
             lpdw = (LPDWORD)(lpmh->lpData + lpmh->dwBytesRecorded);
 
@@ -2196,7 +2196,7 @@ namespace music
 
          }
 
-         ::e_status     sequencer::InsertPadEvent(musical_tick tkDelta, LPMIDIHDR lpmh)
+         void     sequencer::InsertPadEvent(musical_tick tkDelta, LPMIDIHDR lpmh)
          {
 
             LPDWORD     lpdw;
@@ -2283,7 +2283,7 @@ namespace music
          }
 
 
-         ::e_status     sequencer::InsertParmData(musical_tick tkDelta, LPMIDIHDR lpmh)
+         void     sequencer::InsertParmData(musical_tick tkDelta, LPMIDIHDR lpmh)
          {
 
             u32               dwLength;
@@ -2401,10 +2401,10 @@ namespace music
          }
 
 
-         ::e_status     sequencer::WorkStreamRender(LPMIDIHDR lpmh, musical_tick tkMax, i32 iBufferNominalMax)
+         void     sequencer::WorkStreamRender(LPMIDIHDR lpmh, musical_tick tkMax, i32 iBufferNominalMax)
          {
 
-            ::e_status                       smfrc;
+            void                       smfrc;
             musical_tick            tkDelta;
             musical_tick            tkLastPosition;
 

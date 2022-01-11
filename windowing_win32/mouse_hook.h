@@ -6,11 +6,11 @@ namespace mouse_hook
 {
    
    
-   ::e_status install(::matter * pmatter);
+   void install(::matter * pmatter);
 
-   ::e_status uninstall(::matter * pmatter);
+   void uninstall(::matter * pmatter);
 
-   ::e_status run();
+   void run();
 
 
 } // namespace mouse_hook

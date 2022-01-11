@@ -34,7 +34,7 @@ namespace acme
          ~node() override;
 
 
-         virtual ::e_status initialize_matter(::matter* pmatter) override;
+         virtual void initialize_matter(::matter* pmatter) override;
 
          //virtual ::string dir_root() override;
 
@@ -47,7 +47,7 @@ namespace acme
          //virtual ::file::path roaming() override;
 
 
-         virtual ::e_status call_async(const ::string& pszPath, const ::string& pszParam, const ::string& pszDir, ::e_display edisplay, bool bPrivileged, unsigned int* puiPid = nullptr);
+         virtual void call_async(const ::string& pszPath, const ::string& pszParam, const ::string& pszDir, ::e_display edisplay, bool bPrivileged, unsigned int* puiPid = nullptr);
 
 
          virtual bool win32_registry_windows_dark_mode_for_app();
@@ -65,27 +65,27 @@ namespace acme
 
 
 
-         ::e_status reboot() override;
+         void reboot() override;
 
          virtual platform_char** get_envp(wcsdup_array& a);
 
 
-         virtual ::e_status datetime_to_filetime(filetime_t* pFileTime, const ::datetime::time& time) override;
+         virtual void datetime_to_filetime(filetime_t* pFileTime, const ::datetime::time& time) override;
 
 
-         virtual ::e_status last_error_to_status(DWORD dwLastError);
+         virtual void last_error_to_status(DWORD dwLastError);
 
 
-         virtual ::e_status ExitCode_to_status(DWORD dwExitCode);
+         virtual void ExitCode_to_status(DWORD dwExitCode);
 
 
          virtual string audio_get_default_library_name() override;
 
 
-         ::e_status create_process(const ::string & pszCommandLine, u32 * pprocessId) override;
+         void create_process(const ::string & pszCommandLine, u32 * pprocessId) override;
 
 
-         ::e_status run_silent(const ::string & strFunct, const ::string & strstrParams) override;
+         void run_silent(const ::string & strFunct, const ::string & strstrParams) override;
 
 
          bool process_modules(string_array& stra, u32 processID) override;
@@ -112,14 +112,14 @@ namespace acme
 
          string expand_environment_variables(const string & str) override;
 
-         ::e_status set_environment_variable(const ::string& pszEnvironmentVariable, const ::string& pszValue) override;
+         void set_environment_variable(const ::string& pszEnvironmentVariable, const ::string& pszValue) override;
 
          //virtual ::u32       get_file_attributes(const ::string & pFileName);
          virtual ::u32       get_current_directory(string& str);
          virtual ::u32       get_temp_path(string& str);
          virtual ::i32        reg_query_value(HKEY hkey, const ::string & pszSubKey, string& str);
          virtual  HICON       extract_icon(HINSTANCE hInst, const ::string & pszExeFileName, ::u32 nIconIndex);
-         virtual  ::e_status        delete_file(const ::string & pFileName);
+         virtual  void        delete_file(const ::string & pFileName);
          //virtual  i32     get_menu_string(HMENU hMenu, ::u32 uDItem, string& str, ::u32 flags);
          //virtual  void        time_to_filetime(::matter* pobject, const ::datetime::time& time, LPFILETIME pFileTime);
 
@@ -128,24 +128,24 @@ namespace acme
 
          string get_user_language() override;
          bool get_application_exclusivity_security_attributes(memory & memory) override;
-         ::e_status register_spa_file_type(const ::string & strAppIdHandler) override;
-         ::e_status start_program_files_app_app_admin(string strPlatform, string strConfiguration) override;
+         void register_spa_file_type(const ::string & strAppIdHandler) override;
+         void start_program_files_app_app_admin(string strPlatform, string strConfiguration) override;
 
 
-         ::e_status get_folder_path_from_user(::file::path & pathFolder) override;
+         void get_folder_path_from_user(::file::path & pathFolder) override;
 
 
-         ::e_status register_dll(const ::file::path & pathDll);
+         void register_dll(const ::file::path & pathDll);
 
 
          //::string expand_environment_variables(const ::string & str) override;
 
          virtual ::wstring expand_environment_variables(const ::wstring & wstr);
 
-         ::e_status implement(__transport(::acme::node) & pnode, __transport(class ::system) & psystem)override;
+         void implement(__transport(::acme::node) & pnode, __transport(class ::system) & psystem)override;
 
 
-         ::e_status on_start_system() override;
+         void on_start_system() override;
 
 
       };

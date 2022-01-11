@@ -16,7 +16,7 @@ namespace backup
       backup(::object * pobject);
       virtual ~backup();
 
-      virtual ::e_status     run() override;
+      virtual void     run() override;
 
       bool hotcopy_repos(const ::string & psz);
       bool compress_repos(const ::string & psz);

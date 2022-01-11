@@ -74,7 +74,7 @@ namespace windowing_win32
    }
 
 
-   ::e_status copydesk::initialize_copydesk(::windowing::window * pwindow)
+   void copydesk::initialize_copydesk(::windowing::window * pwindow)
    {
 
       auto estatus = ::user::copydesk::initialize_copydesk(pwindow);
@@ -150,7 +150,7 @@ namespace windowing_win32
    }
 
 
-   ::e_status copydesk::destroy()
+   void copydesk::destroy()
    {
 
       auto estatus1 = ::user::copydesk::destroy();
@@ -384,7 +384,7 @@ namespace windowing_win32
    }
 
 
-   ::e_status copydesk::_get_filea(::file::patha & patha, e_op & eop)
+   void copydesk::_get_filea(::file::patha & patha, e_op & eop)
    {
 
       ::count c = _get_file_count();
@@ -431,7 +431,7 @@ namespace windowing_win32
    }
 
 
-   ::e_status copydesk::_set_filea(const ::file::patha & patha, e_op eop)
+   void copydesk::_set_filea(const ::file::patha & patha, e_op eop)
    {
 
       synchronous_lock synchronouslock(mutex());
@@ -475,7 +475,7 @@ namespace windowing_win32
    }
 
 
-   ::e_status copydesk::_set_plain_text(const ::string & str)
+   void copydesk::_set_plain_text(const ::string & str)
    {
 
       //ASSERT(::IsWindow(m_hwnd));
@@ -511,7 +511,7 @@ namespace windowing_win32
    }
 
 
-   ::e_status copydesk::_get_plain_text(string & str)
+   void copydesk::_get_plain_text(string & str)
    {
 
       int iFormat = _get_priority_text_format();
@@ -579,7 +579,7 @@ namespace windowing_win32
    }
 
 
-   ::e_status copydesk::_desk_to_image(::image * pimage)
+   void copydesk::_desk_to_image(::image * pimage)
    {
 
       if (!_has_image())
@@ -686,7 +686,7 @@ namespace windowing_win32
    }
 
 
-   ::e_status copydesk::_image_to_desk(const ::image * pimage)
+   void copydesk::_image_to_desk(const ::image * pimage)
    {
 
       //ASSERT(::IsWindow(m_hwnd));

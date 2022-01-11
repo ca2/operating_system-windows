@@ -152,7 +152,7 @@ namespace draw2d_gdiplus
    }
 
 
-   ::e_status image::create(const ::size_i32& size, ::eobject eobjectCreate, int iGoodStride, bool bPreserve)
+   void image::create(const ::size_i32& size, ::eobject eobjectCreate, int iGoodStride, bool bPreserve)
    {
 
       if (m_pbitmap.is_set()
@@ -268,7 +268,7 @@ namespace draw2d_gdiplus
    }
 
 
-   ::e_status image::create(::draw2d::graphics * pgraphics)
+   void image::create(::draw2d::graphics * pgraphics)
    {
 
       ::draw2d::bitmap * pbitmap = (dynamic_cast<::draw2d_gdiplus::graphics *>(pgraphics))->get_current_bitmap();
@@ -496,7 +496,7 @@ namespace draw2d_gdiplus
    }*/
 
 
-   ::e_status image::SetIconMask(::draw2d::icon * picon, i32 cx, i32 cy)
+   void image::SetIconMask(::draw2d::icon * picon, i32 cx, i32 cy)
    {
 
       if (cx <= 0 || cy <= 0)

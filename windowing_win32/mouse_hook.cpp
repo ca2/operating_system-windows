@@ -43,7 +43,7 @@ namespace mouse_hook
    }
 
 
-   ::e_status run()
+   void run()
    {
 
       auto ptask = get_task();
@@ -96,7 +96,7 @@ namespace mouse_hook
    }
 
 
-   ::e_status install(::matter * pmatter)
+   void install(::matter * pmatter)
    {
 
       if (g_hhook != nullptr)
@@ -115,7 +115,7 @@ namespace mouse_hook
    }
 
 
-   ::e_status uninstall(::matter * pmatter)
+   void uninstall(::matter * pmatter)
    {
 
       if (g_hhook == nullptr)

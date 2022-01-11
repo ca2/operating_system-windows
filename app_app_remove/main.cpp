@@ -44,7 +44,7 @@ public:
 
    bool is_user_using(UINT processid, const ::string & pszDll);
 
-   virtual ::e_status     run() override;
+   virtual void     run() override;
 
    virtual bool destroy();
 
@@ -201,7 +201,7 @@ void removal::g_n_rmdir_n_v(const KNOWNFOLDERID & rfid, const ::string & pszDir)
 
 
 
-::e_status     removal::run()
+void     removal::run()
 {
 
 

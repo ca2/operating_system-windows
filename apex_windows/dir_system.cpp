@@ -31,7 +31,7 @@ namespace windows
 
 
 
-   ::e_status dir_system::initialize(::object * pobject)
+   void dir_system::initialize(::object * pobject)
    {
 
       auto estatus = ::dir_system::initialize(pobject);
@@ -132,7 +132,7 @@ pacmedir->create(m_strTimeFolder / "time");
    }
 
 
-   ::e_status dir_system::init_system()
+   void dir_system::init_system()
    {
 
       auto estatus = ::dir_system::init_system();

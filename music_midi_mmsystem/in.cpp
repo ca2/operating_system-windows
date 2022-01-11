@@ -34,7 +34,7 @@ namespace music
          }
 
 
-         ::e_status in::open(int iDeviceId)
+         void in::open(int iDeviceId)
          {
 
             synchronous_lock synchronouslock(&get_midi_mutex());
@@ -64,7 +64,7 @@ namespace music
 
          }
 
-         ::e_status in::start()
+         void in::start()
          {
 
             if (m_hmidiin != nullptr)
@@ -80,7 +80,7 @@ namespace music
 
 
 
-         ::e_status in::stop()
+         void in::stop()
          {
 
             if (m_hmidiin != nullptr)
@@ -95,7 +95,7 @@ namespace music
          }
 
 
-         ::e_status in::close()
+         void in::close()
          {
 
             if(m_hmidiin != nullptr)
@@ -163,7 +163,7 @@ namespace music
          }
 
 
-         ::e_status in::send_short_message(::music::midi::e_message emessage, int iChannel, int iData1, int iData2)
+         void in::send_short_message(::music::midi::e_message emessage, int iChannel, int iData1, int iData2)
          {
 
 //            return ::multimedia::mmsystem::translate(midiOutShortMsg(m_hmidiout, MIDIMSG(((int)emessage) >> 4, iChannel, iData1, iData2)), "out::send_short_message");

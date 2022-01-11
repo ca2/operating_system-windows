@@ -26,19 +26,19 @@ namespace music
             virtual ~file();
 
 
-            ::e_status     WorkStreamRender(LPMIDIHDR lpmh, ::duration tkMax, u32 cbPrerollNomimalMax);
+            void     WorkStreamRender(LPMIDIHDR lpmh, ::duration tkMax, u32 cbPrerollNomimalMax);
 
             using ::music::midi::file::WorkSeek;
 
-            ::e_status     WorkSeek(::duration tkPosition, LPMIDIHDR lpmh);
+            void     WorkSeek(::duration tkPosition, LPMIDIHDR lpmh);
 
-            ::e_status     StreamEvent(::duration tkDelta, ::music::midi::event * Event, LPMIDIHDR lpmh, ::duration tkMax, u32 cbPrerollNomimalMax);
+            void     StreamEvent(::duration tkDelta, ::music::midi::event * Event, LPMIDIHDR lpmh, ::duration tkMax, u32 cbPrerollNomimalMax);
 
-            ::e_status     StreamEventF1(::duration tkDelta, array < ::music::midi::event *, ::music::midi::event * > & eventptra, LPMIDIHDR lpmh, ::duration tkMax, u32 cbPrerollNomimalMax);
+            void     StreamEventF1(::duration tkDelta, array < ::music::midi::event *, ::music::midi::event * > & eventptra, LPMIDIHDR lpmh, ::duration tkMax, u32 cbPrerollNomimalMax);
 
-            ::e_status     InsertParmData(::duration tkDelta, LPMIDIHDR lpmh);
+            void     InsertParmData(::duration tkDelta, LPMIDIHDR lpmh);
 
-            ::e_status     InsertPadEvent(::duration tkDelta, LPMIDIHDR lpmh);
+            void     InsertPadEvent(::duration tkDelta, LPMIDIHDR lpmh);
 
 
          };

@@ -387,7 +387,7 @@ namespace draw2d_gdiplus
    }
 
 
-   ::e_status path::destroy()
+   void path::destroy()
    {
 
       ::acme::del(m_ppath);

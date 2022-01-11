@@ -111,7 +111,7 @@ namespace windows
    }
 
 
-   ::e_status service::queue_user_work_item(WINULONG flags)
+   void service::queue_user_work_item(WINULONG flags)
    {
 
       if (::QueueUserWorkItem(thread_proc, this, flags))

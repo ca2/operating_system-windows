@@ -50,7 +50,7 @@ namespace windowing_win32
       virtual ~buffer();
 
 
-      virtual ::e_status initialize_graphics_graphics(::user::interaction_impl * pimpl) override;
+      virtual void initialize_graphics_graphics(::user::interaction_impl * pimpl) override;
 
 
       virtual bool update_buffer(const ::size_i32 & size, int iStride = -1) override;

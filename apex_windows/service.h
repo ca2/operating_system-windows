@@ -38,7 +38,7 @@ namespace windows
 
       static void WINAPI ServiceHandler(DWORD control);
       
-      virtual ::e_status queue_user_work_item(WINULONG flags = WT_EXECUTELONGFUNCTION);
+      virtual void queue_user_work_item(WINULONG flags = WT_EXECUTELONGFUNCTION);
 
       static DWORD WINAPI thread_proc(void * pcontext);
       

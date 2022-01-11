@@ -26,7 +26,7 @@ CLASS_DECL_ACME void TRACELASTERROR();
 CLASS_DECL_ACME string get_error_string(DWORD dwError);
 
 
-//CLASS_DECL_ACME::e_status init_gdi_plus();
+//CLASS_DECL_ACMEvoid init_gdi_plus();
 //CLASS_DECL_ACME void term_gdi_plus();
 
 CLASS_DECL_ACME string get_display_error(u32 NTStatusMessage);

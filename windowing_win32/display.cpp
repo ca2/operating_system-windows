@@ -1008,7 +1008,7 @@ namespace windowing_win32
    }
 
 
-   ::e_status display::initialize_display(::windowing::windowing * pwindowing)
+   void display::initialize_display(::windowing::windowing * pwindowing)
    {
 
       auto estatus = ::windowing::display::initialize_display(pwindowing);

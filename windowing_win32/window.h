@@ -37,7 +37,7 @@ namespace windowing_win32
 
 
       
-      ::e_status create_window(::user::interaction_impl * pimpl) override;
+      void create_window(::user::interaction_impl * pimpl) override;
 
 
       inline HWND get_hwnd() const { return (HWND) get_oswindow(); }
@@ -80,23 +80,23 @@ namespace windowing_win32
 
       //virtual void set_wm_class(const ::string & psz) override;
 
-      ::e_status exit_iconify() override;
+      void exit_iconify() override;
 
-      ::e_status full_screen(const::rectangle_i32 & rectangle = nullptr) override;
+      void full_screen(const::rectangle_i32 & rectangle = nullptr) override;
 
-      ::e_status exit_full_screen() override;
+      void exit_full_screen() override;
 
-      ::e_status exit_zoomed() override;
+      void exit_zoomed() override;
 
-      ::e_status set_keyboard_focus() override;
+      void set_keyboard_focus() override;
 
-      ::e_status set_active_window() override;
+      void set_active_window() override;
 
-      ::e_status bring_to_front() override;
+      void bring_to_front() override;
 
-      ::e_status set_foreground_window() override;
+      void set_foreground_window() override;
 
-      ::e_status set_mouse_capture() override;
+      void set_mouse_capture() override;
 
 
 
@@ -109,15 +109,15 @@ namespace windowing_win32
 
 
 
-      ::e_status destroy_window() override;
+      void destroy_window() override;
 
-      ::e_status show_window(const ::e_display & edisplay, const ::e_activation & eactivation) override;
+      void show_window(const ::e_display & edisplay, const ::e_activation & eactivation) override;
 
       //virtual void set_user_interaction(::layered * pinteraction) override;
 
       void post_non_client_destroy() override;
 
-      ::e_status set_mouse_cursor(::windowing::cursor * pcursor) override;
+      void set_mouse_cursor(::windowing::cursor * pcursor) override;
 
       ::point_i32 get_mouse_cursor_position() override;
 
@@ -133,7 +133,7 @@ namespace windowing_win32
 
       //bool :window_is_iconic()
 
-      //virtual ::e_status show_window(const::e_display & edisplay, const::e_activation & eactivation) override;
+      //virtual void show_window(const::e_display & edisplay, const::e_activation & eactivation) override;
       
       bool client_to_screen(POINT_I32 * ppoint) override;
 
@@ -184,7 +184,7 @@ namespace windowing_win32
 
       //virtual void defer_start_prodevian();
 
-      virtual ::e_status set_icon(::windowing::icon * pwindow) override;
+      virtual void set_icon(::windowing::icon * pwindow) override;
 
       virtual void on_visual_applied() override;
 
@@ -228,7 +228,7 @@ namespace windowing_win32
       //virtual void * get_os_data() const;
 
 
-      virtual ::e_status set_finish() override;
+      virtual void set_finish() override;
 
 
       //      virtual ::user::interaction * from_handle(HWND hwnd);
@@ -252,7 +252,7 @@ namespace windowing_win32
       // advanced creation (allows access to extended styles)
       //virtual bool create_window_ex(::user::interaction * pinteraction, __pointer(::user::system) pusersystem, ::user::interaction * puiParent, id id) override;
 
-      //virtual ::e_status native_create_host() override;
+      //virtual void native_create_host() override;
 
 
 
@@ -536,11 +536,11 @@ namespace windowing_win32
       
       virtual ::windowing::window * get_parent() const override;
       virtual oswindow get_parent_oswindow() const override;
-      virtual ::e_status set_parent(::windowing::window * pwindow) override;
+      virtual void set_parent(::windowing::window * pwindow) override;
 
       virtual ::windowing::window * get_owner() const override;
       virtual oswindow get_owner_oswindow() const override;
-      virtual ::e_status set_owner(::windowing::window * pwindow) override;
+      virtual void set_owner(::windowing::window * pwindow) override;
 
       //virtual ::user::interaction * set_owner(::user::interaction * pWndNewParent);
       //virtual oswindow get_owner() const;
@@ -805,7 +805,7 @@ namespace windowing_win32
       //void PrepareForHelp();
 
 
-      virtual ::e_status set_tool_window(bool bSet);
+      virtual void set_tool_window(bool bSet);
 
 
       friend class frame_window;

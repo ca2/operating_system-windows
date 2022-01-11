@@ -50,11 +50,11 @@ namespace music
 
             virtual ::duration RateToTicks(double dRate) override;
 
-            virtual ::e_status     SetTempoShift(double dTempoShift) override;
+            virtual void     SetTempoShift(double dTempoShift) override;
 
             //virtual bool set_midi_out_device(var varDevice) override;
 
-            virtual ::e_status     set_client(::music::midi::player_client * pclient) override;
+            virtual void     set_client(::music::midi::player_client * pclient) override;
 
             virtual bool IsPlaying() override;
 

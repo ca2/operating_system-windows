@@ -19,7 +19,7 @@ namespace windowing_win32
       virtual ~monitor();
 
 
-      virtual ::e_status update_cache() override;
+      virtual void update_cache() override;
 
 
       virtual ::u32 get_monitor_color_temperature();

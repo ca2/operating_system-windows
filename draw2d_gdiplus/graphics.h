@@ -54,7 +54,7 @@ namespace draw2d_gdiplus
       u32 SetLayout(u32 dwLayout) override;
 
 
-      virtual ::e_status set(::draw2d::bitmap* pbitmap) override;
+      virtual void set(::draw2d::bitmap* pbitmap) override;
 
       HDC get_hdc();
       void release_hdc(HDC hdc);
@@ -199,11 +199,11 @@ namespace draw2d_gdiplus
       virtual i32 get_clip_box(::rectangle_f64 * prectangle) override;
 
 
-      virtual ::e_status add_shapes(const shape_array& shapea);
-      virtual ::e_status reset_clip();
-      virtual ::e_status intersect_clip(const ::rectangle & rectangle);
-      virtual ::e_status intersect_clip(const ::ellipse & ellipse);
-      virtual ::e_status intersect_clip(const ::polygon & polygon);
+      virtual void add_shapes(const shape_array& shapea);
+      virtual void reset_clip();
+      virtual void intersect_clip(const ::rectangle & rectangle);
+      virtual void intersect_clip(const ::ellipse & ellipse);
+      virtual void intersect_clip(const ::polygon & polygon);
 
       //virtual bool PtVisible(double x, double y) override;
       //bool PtVisible(const ::point_i32 & point) override;
@@ -300,7 +300,7 @@ namespace draw2d_gdiplus
       //bool fill_ellipse(i32 x1, i32 y1, i32 x2, i32 y2) override;
       //bool fill_ellipse(const rectangle_i32 &  prectangle) override;
 
-      virtual ::e_status clear_current_point() override;
+      virtual void clear_current_point() override;
 
       //bool draw_ellipse(double x1,double y1,double x2,double y2) override;
       bool draw_ellipse(const ::rectangle_f64 & prectangle) override;
@@ -374,7 +374,7 @@ namespace draw2d_gdiplus
         BLENDFUNCTION blend) override;*/
 
       // Text Functions
-      virtual ::e_status TextOutRaw(double x, double y, const block & block);
+      virtual void TextOutRaw(double x, double y, const block & block);
       //virtual bool ExtTextOut(double x, double y, UINT nOptions, const rectangle_f64 &  prectangle, const ::string & pszString,strsize nCount, LPINT lpDxWidths) override;
 
       //virtual bool ExtTextOut(double x, double y, UINT nOptions, const rectangle_f64 &  prectangle, const ::string & str, LPINT lpDxWidths) override;
@@ -431,7 +431,7 @@ namespace draw2d_gdiplus
       //virtual i32 GetTextFace(count nCount, LPTSTR pszFacename) override;
 
       //virtual i32 GetTextFace(string & rString) override;
-      virtual ::e_status get_text_metrics(::write_text::text_metric * pMetrics) override;
+      virtual void get_text_metrics(::write_text::text_metric * pMetrics) override;
 
       virtual bool get_output_text_metrics(::write_text::text_metric * pMetrics) override;
 

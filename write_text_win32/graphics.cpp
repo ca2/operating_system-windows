@@ -340,7 +340,7 @@ namespace draw2d_gdiplus
    //}
 
 
-   ::e_status graphics::set(::draw2d::bitmap * pbitmap)
+   void graphics::set(::draw2d::bitmap * pbitmap)
    {
 
       if (::is_null(pbitmap))
@@ -891,7 +891,7 @@ namespace draw2d_gdiplus
    }
 
 
-   ::e_status graphics::clear_current_point()
+   void graphics::clear_current_point()
    {
 
       return ::success;
@@ -4535,7 +4535,7 @@ namespace draw2d_gdiplus
    }
 
 
-   ::e_status graphics::add_shapes(const shape_array& shapea)
+   void graphics::add_shapes(const shape_array& shapea)
    {
 
       for (int i = 0; i < shapea.get_count(); i++)
@@ -4583,7 +4583,7 @@ namespace draw2d_gdiplus
    }
 
 
-   ::e_status graphics::reset_clip()
+   void graphics::reset_clip()
    {
 
       m_pgraphics->ResetClip();
@@ -4593,7 +4593,7 @@ namespace draw2d_gdiplus
    }
 
 
-   ::e_status graphics::intersect_clip(const ::rectangle_i32& rectangle)
+   void graphics::intersect_clip(const ::rectangle_i32& rectangle)
    {
 
       Gdiplus::RectF r;
@@ -4611,7 +4611,7 @@ namespace draw2d_gdiplus
    }
 
 
-   ::e_status graphics::intersect_clip(const ::rectangle_f64& rectangle)
+   void graphics::intersect_clip(const ::rectangle_f64& rectangle)
    {
 
       Gdiplus::RectF r;
@@ -4629,7 +4629,7 @@ namespace draw2d_gdiplus
    }
 
 
-   ::e_status graphics::intersect_clip(const ::oval& oval)
+   void graphics::intersect_clip(const ::oval& oval)
    {
 
       auto ppath = __auto(new Gdiplus::GraphicsPath());
@@ -4651,7 +4651,7 @@ namespace draw2d_gdiplus
    }
 
 
-   ::e_status graphics::intersect_clip(const ::ovald& oval)
+   void graphics::intersect_clip(const ::ovald& oval)
    {
 
       auto ppath = __auto(new Gdiplus::GraphicsPath());
@@ -4673,7 +4673,7 @@ namespace draw2d_gdiplus
    }
 
 
-   ::e_status graphics::intersect_clip(const ::polygon_i32& polygon_i32)
+   void graphics::intersect_clip(const ::polygon_i32& polygon_i32)
    {
 
       auto ppath = __auto(new Gdiplus::GraphicsPath());
@@ -4698,7 +4698,7 @@ namespace draw2d_gdiplus
    }
 
 
-   ::e_status graphics::intersect_clip(const ::polygon_f64& polygon_i32)
+   void graphics::intersect_clip(const ::polygon_f64& polygon_i32)
    {
 
       auto ppath = __auto(new Gdiplus::GraphicsPath());

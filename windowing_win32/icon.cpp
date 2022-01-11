@@ -143,7 +143,7 @@ namespace windowing_win32
    }
 
 
-   ::e_status icon::load_file(const ::string & strPath)
+   void icon::load_file(const ::string & strPath)
    {
 
       m_pathProcessed = m_pcontext->m_papexcontext->defer_process_matter_path(strPath);
@@ -185,7 +185,7 @@ namespace windowing_win32
    }
 
 
-   ::e_status icon::load_app_tray_icon(const ::string & strApp)
+   void icon::load_app_tray_icon(const ::string & strApp)
    {
 
       string strMatter = "main/icon.ico";

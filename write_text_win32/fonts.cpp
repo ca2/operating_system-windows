@@ -19,7 +19,7 @@ namespace write_text_win32
 
    }
 
-   ::e_status fonts::initialize(::object * pobject)
+   void fonts::initialize(::object * pobject)
    {
 
       auto estatus = ::write_text::fonts::initialize(pobject);

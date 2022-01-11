@@ -150,7 +150,7 @@ namespace draw2d_gdiplus
    }
 
 
-   ::e_status brush::destroy_os_data()
+   void brush::destroy_os_data()
    {
 
       ::acme::del(m_pbrush);
@@ -160,7 +160,7 @@ namespace draw2d_gdiplus
    }
 
 
-   ::e_status brush::destroy()
+   void brush::destroy()
    {
 
       destroy_os_data();

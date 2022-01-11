@@ -227,7 +227,7 @@ namespace file
    }
 
 
-   ::e_status os_watch::step()
+   void os_watch::step()
    {
 
       return ReadDirectoryChangesW(
@@ -257,7 +257,7 @@ namespace file
    }
 
 
-   ::e_status os_watcher::step()
+   void os_watcher::step()
    {
 
       MsgWaitForMultipleObjectsEx(0,nullptr,500,QS_ALLINPUT,MWMO_ALERTABLE);

@@ -20,7 +20,7 @@ namespace audio_mmsystem
    }
 
 
-   ::e_status in::init_thread()
+   void in::init_thread()
    {
 
       TRACE("in::initialize_instance %X\n", get_ithread());
@@ -72,7 +72,7 @@ namespace audio_mmsystem
    }
 
 
-   ::e_status in::in_open(i32 iBufferCount, i32 iBufferSampleCount)
+   void in::in_open(i32 iBufferCount, i32 iBufferSampleCount)
    {
 
       if(m_hwavein != nullptr && m_estate != e_state_initial)
@@ -85,7 +85,7 @@ namespace audio_mmsystem
       }
 
       single_lock sLock(mutex(), true);
-      ::e_status     estatus;
+      void     estatus;
       int iStatus = MMSYSERR_NOERROR;
 
       ASSERT(m_hwavein == nullptr);
@@ -235,7 +235,7 @@ Opened:
 
          in_close();
 
-         return (::e_status    ) -1;
+         return (void    ) -1;
 
       }
 
@@ -246,12 +246,12 @@ Opened:
    }
 
 
-   ::e_status     in::in_close()
+   void     in::in_close()
    {
 
       single_lock sLock(mutex(), true);
 
-      ::e_status     estatus;
+      void     estatus;
 
       if(m_estate != e_state_opened && m_estate != state_stopped)
          return ::success;
@@ -285,7 +285,7 @@ Opened:
 
    }
 
-   ::e_status     in::in_start()
+   void     in::in_start()
    {
 
       single_lock sLock(mutex(), true);
@@ -298,7 +298,7 @@ Opened:
       if(m_estate != e_state_opened && m_estate != state_stopped)
          return ::success;
 
-      ::e_status     estatus;
+      void     estatus;
 
       if(::success != (estatus = ::multimedia::mmsystem::translate(waveInStart(m_hwavein))))
       {
@@ -312,7 +312,7 @@ Opened:
 
    }
 
-   ::e_status     in::in_stop()
+   void     in::in_stop()
    {
 
       single_lock sLock(mutex(), true);
@@ -320,7 +320,7 @@ Opened:
       if(m_estate != state_recording)
          return error_failed;
 
-      ::e_status     estatus;
+      void     estatus;
 
       m_estate = e_state_stopping;
 
@@ -382,7 +382,7 @@ Opened:
    }
 
 
-   ::e_status     in::in_reset()
+   void     in::in_reset()
    {
 
       single_lock sLock(mutex(), true);
@@ -396,7 +396,7 @@ Opened:
 
       }
 
-      ::e_status     estatus;
+      void     estatus;
 
       if(m_estate == state_recording)
       {
@@ -474,7 +474,7 @@ Opened:
    }
 
 
-   ::e_status     in::in_add_buffer(i32 iBuffer)
+   void     in::in_add_buffer(i32 iBuffer)
    {
 
       return in_add_buffer(wave_hdr(iBuffer));
@@ -482,10 +482,10 @@ Opened:
    }
 
 
-   ::e_status     in::in_add_buffer(LPWAVEHDR lpwavehdr)
+   void     in::in_add_buffer(LPWAVEHDR lpwavehdr)
    {
 
-      ::e_status     estatus;
+      void     estatus;
 
       if(::success != (estatus = ::multimedia::mmsystem::translate(waveInAddBuffer(m_hwavein, lpwavehdr, sizeof(WAVEHDR)))))
       {

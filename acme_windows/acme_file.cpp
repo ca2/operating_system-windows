@@ -94,7 +94,7 @@ namespace windows
    }
 
 
-   ::e_status acme_file::set_modification_time(const char* psz, const ::duration& duration)
+   void acme_file::set_modification_time(const char* psz, const ::duration& duration)
    {
 
 

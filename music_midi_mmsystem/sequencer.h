@@ -80,15 +80,15 @@ namespace music
 
             virtual i32 GetDefaultCodePage();
 
-            virtual ::e_status     fill_buffer(LPMIDIHDR lpmidihdr);
+            virtual void     fill_buffer(LPMIDIHDR lpmidihdr);
 
 
-            ::e_status     close_stream();
-            ::e_status     close_device();
+            void     close_stream();
+            void     close_device();
 
             void OnPositionCB(LPMIDIHDR lpmidihdr);
             void OnDone(HMIDISTRM hmidistream, LPMIDIHDR lpmidihdr);
-            ::e_status     preroll_operation(LPMIDIHDR lpmidihdr);
+            void     preroll_operation(LPMIDIHDR lpmidihdr);
 
             virtual bool IsOpened();
 
@@ -99,7 +99,7 @@ namespace music
             virtual void OnEvent(::music::midi::sequence::event* pevent);
 
 
-            ::e_status     close_file();
+            void     close_file();
 
             virtual void on_set_position() override;
 
@@ -107,11 +107,11 @@ namespace music
             //virtual void karaoke_get_time(::duration& time);
 
             
-            virtual ::e_status      get_position(musical_tick & tk);
+            virtual void      get_position(musical_tick & tk);
             virtual musical_tick    get_position();
 
 
-            virtual ::e_status      get_time_position(::duration & duration);
+            virtual void      get_time_position(::duration & duration);
             virtual ::duration      get_time_position() override;
 
 
@@ -123,36 +123,36 @@ namespace music
             musical_tick GetQuarterNote();
 
 
-            virtual ::e_status midi_out_open();
-            virtual ::e_status midi_out_long_message(const block & block, const ::duration & millisWait = 0_ms);
+            virtual void midi_out_open();
+            virtual void midi_out_long_message(const block & block, const ::duration & millisWait = 0_ms);
 
-            virtual ::e_status midi_out_xg_mode_on();
-            virtual ::e_status midi_out_xg_mode_reset();
-            virtual ::e_status midi_out_xg_drum_setup1_reset();
-            virtual ::e_status midi_out_xg_drum_setup2_reset();
-            virtual ::e_status midi_out_master_volume_reset();
+            virtual void midi_out_xg_mode_on();
+            virtual void midi_out_xg_mode_reset();
+            virtual void midi_out_xg_drum_setup1_reset();
+            virtual void midi_out_xg_drum_setup2_reset();
+            virtual void midi_out_master_volume_reset();
 
-            virtual ::e_status midi_out_close();
+            virtual void midi_out_close();
 
 
-            virtual ::e_status     SendGMReset();
+            virtual void     SendGMReset();
 
-            virtual ::e_status     start_mmsystem_sequencer();
+            virtual void     start_mmsystem_sequencer();
 
             virtual void music_midi_on_playback_end();
 
 
-            ::e_status     WorkStreamRender(LPMIDIHDR lpmh, musical_tick tkMax, i32 iBufferNominalMax);
+            void     WorkStreamRender(LPMIDIHDR lpmh, musical_tick tkMax, i32 iBufferNominalMax);
 
-            ::e_status     WorkSeek(musical_tick tkPosition, LPMIDIHDR lpmh);
+            void     WorkSeek(musical_tick tkPosition, LPMIDIHDR lpmh);
 
-            ::e_status     StreamEvent(musical_tick tkDelta, ::music::midi::event* Event, LPMIDIHDR lpmh, musical_tick tkMax, u32 cbPrerollNomimalMax);
+            void     StreamEvent(musical_tick tkDelta, ::music::midi::event* Event, LPMIDIHDR lpmh, musical_tick tkMax, u32 cbPrerollNomimalMax);
 
-            ::e_status     StreamEventF1(musical_tick tkDelta, array < ::music::midi::event*, ::music::midi::event* >& eventptra, LPMIDIHDR lpmh, musical_tick tkMax, u32 cbPrerollNomimalMax);
+            void     StreamEventF1(musical_tick tkDelta, array < ::music::midi::event*, ::music::midi::event* >& eventptra, LPMIDIHDR lpmh, musical_tick tkMax, u32 cbPrerollNomimalMax);
 
-            ::e_status     InsertParmData(musical_tick tkDelta, LPMIDIHDR lpmh);
+            void     InsertParmData(musical_tick tkDelta, LPMIDIHDR lpmh);
 
-            ::e_status     InsertPadEvent(musical_tick tkDelta, LPMIDIHDR lpmh);
+            void     InsertPadEvent(musical_tick tkDelta, LPMIDIHDR lpmh);
 
             //DECLARE_MESSAGE_HANDLER(_001OnMidiOutDone);
             //DECLARE_MESSAGE_HANDLER(_001OnMidiOutPositionCB);

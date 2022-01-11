@@ -49,7 +49,7 @@ namespace audio_mmsystem
    }
 
 
-   ::e_status out::init_thread()
+   void out::init_thread()
    {
 
       if (!::wave::out::init_thread())
@@ -74,7 +74,7 @@ namespace audio_mmsystem
    }
 
 
-   ::e_status out::out_open_ex(thread * pthreadCallback, u32 uiSamplesPerSec, u32 uiChannelCount, u32 uiBitsPerSample,::wave::e_purpose epurpose)
+   void out::out_open_ex(thread * pthreadCallback, u32 uiSamplesPerSec, u32 uiChannelCount, u32 uiBitsPerSample,::wave::e_purpose epurpose)
    {
 
       synchronous_lock synchronouslock(mutex());
@@ -92,7 +92,7 @@ namespace audio_mmsystem
 
       m_pthreadCallback = pthreadCallback;
 
-      ::e_status     estatus;
+      void     estatus;
 
       ASSERT(m_hwaveout == nullptr);
       ASSERT(m_estate == e_state_initial);
@@ -299,7 +299,7 @@ Opened:
 
 
 
-   ::e_status     out::out_close()
+   void     out::out_close()
    {
 
       synchronous_lock synchronouslock(mutex());
@@ -318,7 +318,7 @@ Opened:
 
       }
 
-      ::e_status     estatus;
+      void     estatus;
 
       index i;
 
@@ -372,7 +372,7 @@ Opened:
 
       m_iBufferedCount++;
 
-      ::e_status     estatus = ::multimedia::mmsystem::translate(waveOutWrite(m_hwaveout, lpwavehdr, sizeof(WAVEHDR)));
+      void     estatus = ::multimedia::mmsystem::translate(waveOutWrite(m_hwaveout, lpwavehdr, sizeof(WAVEHDR)));
 
       if(estatus != ::success)
       {
@@ -384,7 +384,7 @@ Opened:
    }
 
 
-   ::e_status     out::out_stop()
+   void     out::out_stop()
    {
 
       synchronous_lock synchronouslock(mutex());
@@ -419,7 +419,7 @@ Opened:
    }
 
 
-   ::e_status     out::out_pause()
+   void     out::out_pause()
    {
 
       single_lock sLock(mutex(), true);
@@ -448,7 +448,7 @@ Opened:
 
    }
 
-   ::e_status     out::out_restart()
+   void     out::out_restart()
    {
 
       synchronous_lock synchronouslock(mutex());
@@ -555,7 +555,7 @@ Opened:
 
    //   synchronous_lock synchronouslock(mutex());
 
-   //   ::e_status                    estatus;
+   //   void                    estatus;
 
    //   MMTIME                  mmt = {};
 

@@ -39,21 +39,21 @@ namespace aura
 
          virtual void set_console_colors(::u32 dwScreenColors, ::u32 dwPopupColors, ::u32 dwWindowAlpha) override;
 
-         //virtual ::e_status set_system_dark_mode1(bool bSet = true);
+         //virtual void set_system_dark_mode1(bool bSet = true);
 
-         //virtual ::e_status set_app_dark_mode1(bool bSet = true);
+         //virtual void set_app_dark_mode1(bool bSet = true);
 
          virtual double get_time_zone() override;
 
-         //virtual ::e_status get_system_time(system_time_t * psystemtime) override;
+         //virtual void get_system_time(system_time_t * psystemtime) override;
 
 
-         virtual ::e_status open_folder(::file::path& pathFolder) override;
+         virtual void open_folder(::file::path& pathFolder) override;
 
-         virtual ::e_status register_dll(const ::file::path& pathDll) override;
+         virtual void register_dll(const ::file::path& pathDll) override;
 
 
-         virtual ::e_status system_main() override;
+         virtual void system_main() override;
 
 
          virtual HICON extract_resource_icon(const ::string & strPath, int & cx, int & cy, int iIcon);

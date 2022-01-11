@@ -18,7 +18,7 @@ namespace draw2d_gdiplus
       virtual ~draw2d();
 
 
-      virtual ::e_status initialize(::object * pobject) override;
+      virtual void initialize(::object * pobject) override;
 
       virtual string write_text_get_default_library_name() override;
 

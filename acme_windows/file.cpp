@@ -213,7 +213,7 @@ namespace windows
 
          }
 
-         ::e_status estatus = last_error_to_status(dwLastError);
+         void estatus = last_error_to_status(dwLastError);
 
          if (::file::should_ignore_file_exception_callstack(estatus))
          {
@@ -1217,7 +1217,7 @@ void CLASS_DECL_ACME_WINDOWS vfxGetRoot(const unichar * pszPath, string& strRoot
 //namespace windows
 //{
 //
-//   //::e_status ::file::errno_to_status(i32 nErrno)
+//   //void ::file::errno_to_status(i32 nErrno)
 //   //{
 //   //   switch(nErrno)
 //   //   {

@@ -24,7 +24,7 @@ namespace multimedia
       }
 
 
-      ::e_status thread::init_thread()
+      void thread::init_thread()
       {
 
 //         set_auto_delete(false);

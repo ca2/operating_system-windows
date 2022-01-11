@@ -19,7 +19,7 @@ namespace windows
    }
 
 
-   ::e_status file_system::init_system()
+   void file_system::init_system()
    {
 
       auto estatus = ::file_system::init_system();
@@ -38,7 +38,7 @@ namespace windows
    }
 
    
-   //::e_status file_system::update_module_path()
+   //void file_system::update_module_path()
    //{
 
    //   m_pathModule = ::get_module_path(nullptr);

@@ -50,7 +50,7 @@ namespace windows
       bool file_association_set_shell_open_command(const ::string & pszExtension, const ::string & pszExtensionNamingClass, const ::string & pszCommand, const ::string & pszParam) override;
       bool file_association_get_shell_open_command(const ::string & pszExtension, string & strExtensionNamingClass, string & strCommand, string & strParam) override;
 
-      ::e_status link_open(const string& strUrl, const string& strProfile) override;
+      void link_open(const string& strUrl, const string& strProfile) override;
 
       bool open_in_ie(const ::string & pcsz);
 
@@ -62,11 +62,11 @@ namespace windows
       bool browse_folder(property_set & set) override;
       bool browse_file_or_folder(property_set & set) override;
 
-      virtual ::e_status enable_service() override;
-      ::e_status disable_service() override;
+      virtual void enable_service() override;
+      void disable_service() override;
 
-      ::e_status start_service() override;
-      ::e_status stop_service() override;
+      void start_service() override;
+      void stop_service() override;
 
       bool _getCredentialsForService(const string& strService, WCHAR* szUsername, WCHAR* szPassword);
 
@@ -94,10 +94,10 @@ namespace windows
 
       bool initialize_wallpaper_fileset(::file::set* pset, bool bAddSearch) override;
 
-      ::e_status set_dark_mode(bool bDarkMode) override;
+      void set_dark_mode(bool bDarkMode) override;
 
-      virtual ::e_status set_system_dark_mode1(bool bSet);
-      virtual ::e_status set_app_dark_mode1(bool bSet);
+      virtual void set_system_dark_mode1(bool bSet);
+      virtual void set_app_dark_mode1(bool bSet);
 
       virtual bool get_default_browser(string & strId, ::file::path & path, string & strParam) override;
 
@@ -115,7 +115,7 @@ namespace windows
 
       //virtual icon_transport load_icon(const ::payload & payloadFile) override;
 
-      ::e_status broadcast_environment_variable_change() override;
+      void broadcast_environment_variable_change() override;
 
 
    };

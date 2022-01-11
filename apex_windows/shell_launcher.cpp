@@ -21,7 +21,7 @@ namespace windows
    }
 
 
-   ::e_status shell_launcher::launch()
+   void shell_launcher::launch()
    {
 
       //if(m_iMode == 0)

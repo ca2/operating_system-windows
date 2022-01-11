@@ -98,7 +98,7 @@ namespace draw2d_gdiplus
    }
 
 
-   ::e_status region::destroy()
+   void region::destroy()
    {
 
       ::acme::del(m_pregion);

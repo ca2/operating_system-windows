@@ -126,7 +126,7 @@ namespace production
    }
 
 
-   ::e_status     production::run()
+   void     production::run()
    {
 
       //PlaySoundW(L"C:\\bergedge\\hi5\\audio\\production_ready.wav", nullptr, SND_FILENAME);
@@ -135,7 +135,7 @@ namespace production
 
       property_set set;
 
-      ::e_status     estatusProduce;
+      void     estatusProduce;
 
       string strBackPostColor = "background-color: #CCCCC2;";
 
@@ -301,7 +301,7 @@ pacmedir->system() / "config/production/mirror_status.txt";
    }
 
 
-   ::e_status     production::produce()
+   void     production::produce()
    {
 
       string str;
@@ -1575,7 +1575,7 @@ pacmedir->create(pathTarget.folder()))
    }
 
 
-   ::e_status     production::compress_thread::run()
+   void     production::compress_thread::run()
    {
 
       SetThreadAffinityMask(::GetCurrentThread(), m_dwThreadAffinityMask);
@@ -2964,7 +2964,7 @@ pacmedir->create(pathTarget.folder()))
    }
 
 
-   ::e_status     production::release::raw_run()
+   void     production::release::raw_run()
    {
 
       string str;
@@ -2987,7 +2987,7 @@ pacmedir->create(pathTarget.folder()))
 
 
 
-   ::e_status     production::release::run()
+   void     production::release::run()
    {
 
       auto iResult = raw_run();

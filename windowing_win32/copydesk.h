@@ -39,8 +39,8 @@ namespace windowing_win32
       void install_message_routing(::channel * pchannel) override;
 
 
-      ::e_status initialize_copydesk(::windowing::window * pwindow) override;
-      ::e_status destroy() override;
+      void initialize_copydesk(::windowing::window * pwindow) override;
+      void destroy() override;
 
 
       virtual void OnClipboardUpdate();
@@ -55,18 +55,18 @@ namespace windowing_win32
       virtual HGLOBAL hglobal_get_image(const ::image * pimage);
 
 
-      ::e_status _set_filea(const ::file::patha & stra, e_op eop) override;
-      ::e_status _get_filea(::file::patha & stra, e_op & eop) override;
+      void _set_filea(const ::file::patha & stra, e_op eop) override;
+      void _get_filea(::file::patha & stra, e_op & eop) override;
       bool _has_filea() override;
 
 
-      ::e_status _set_plain_text(const ::string & str) override;
-      ::e_status _get_plain_text(string & str) override;
+      void _set_plain_text(const ::string & str) override;
+      void _get_plain_text(string & str) override;
       bool _has_plain_text() override;
 
 
-      ::e_status _desk_to_image(::image * pimage) override;
-      ::e_status _image_to_desk(const ::image * pimage) override;
+      void _desk_to_image(::image * pimage) override;
+      void _image_to_desk(const ::image * pimage) override;
       bool _has_image() override;
 
 

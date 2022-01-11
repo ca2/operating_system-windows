@@ -43,10 +43,10 @@ namespace draw2d_gdiplus
       virtual bool _unmap() override;
 
 
-      virtual ::e_status create(const ::size_i32 & size, ::eobject eobjectCreate = DEFAULT_CREATE_IMAGE_OBJECT_FLAG, int iGoodStride = -1, bool bPreserve = false) override;
+      virtual void create(const ::size_i32 & size, ::eobject eobjectCreate = DEFAULT_CREATE_IMAGE_OBJECT_FLAG, int iGoodStride = -1, bool bPreserve = false) override;
       virtual bool host(const ::pixmap * pixmap) override;
       virtual bool on_host_read_pixels(const ::pixmap* pixmap) override;
-      virtual ::e_status create(::draw2d::graphics * pgraphics) override;
+      virtual void create(::draw2d::graphics * pgraphics) override;
       virtual bool destroy() override;
 
 
@@ -55,7 +55,7 @@ namespace draw2d_gdiplus
       virtual bool _draw_raw(const ::rectangle_i32 & rectangleTarget, ::image * pimageSrc, const ::point_i32 & pointSrc) override;
 
 
-      virtual ::e_status SetIconMask(::draw2d::icon * picon, i32 cx, i32 cy) override;
+      virtual void SetIconMask(::draw2d::icon * picon, i32 cx, i32 cy) override;
 
 
    };

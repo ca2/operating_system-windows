@@ -47,7 +47,7 @@ namespace draw2d_gdiplus
 
 
       virtual bool create(::draw2d::graphics * pgraphics, ::i8 iCreate) override;
-      ::e_status destroy() override;
+      void destroy() override;
 
       virtual bool _set(::draw2d::graphics* pgraphics, const enum_shape& eshape);
 

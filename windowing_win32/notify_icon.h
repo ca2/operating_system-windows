@@ -49,7 +49,7 @@ namespace windowing_win32
       ~notify_icon() override;
 
 
-      ::e_status add_hidden_window(::user::interaction * puserinteraction) override;
+      void add_hidden_window(::user::interaction * puserinteraction) override;
 
 #ifdef WINDOWS_DESKTOP
 
@@ -68,10 +68,10 @@ namespace windowing_win32
 #endif
 
 
-      ::e_status modify_icon(::windowing::icon * picon) override;
+      void modify_icon(::windowing::icon * picon) override;
 
       
-      ::e_status create_notify_icon(const ::id & id, ::user::interaction * puserinteractionNotify, ::windowing::icon * picon) override;
+      void create_notify_icon(const ::id & id, ::user::interaction * puserinteractionNotify, ::windowing::icon * picon) override;
 
 
       DECLARE_MESSAGE_HANDLER(on_message_notify_icon);
@@ -79,7 +79,7 @@ namespace windowing_win32
 
       void install_message_routing(::channel * pchannel) override;
 
-      ::e_status step() override;
+      void step() override;
 
 //#if defined(APPLE_IOS) || defined(WINDOWS_DESKTOP) || defined(ANDROID) || defined(_UWP)
 //      virtual void notify_icon_play(const ::string & action);

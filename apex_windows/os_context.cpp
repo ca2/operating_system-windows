@@ -8,7 +8,7 @@
 #include "acme/filesystem/filesystem/acme_path.h"
 
 
-::e_status hresult_to_estatus(HRESULT hresult)
+void hresult_to_estatus(HRESULT hresult)
 {
 
    if (SUCCEEDED(hresult))
@@ -329,7 +329,7 @@ namespace windows
          }
 
       }
-      catch (const ::e_status & estatus)
+      catch (const void & estatus)
       {
 
          return estatus;
@@ -354,7 +354,7 @@ namespace windows
          key.get("AutoConfigURL", strUrl);
 
       }
-      catch (const ::e_status & estatus)
+      catch (const void & estatus)
       {
 
          return estatus;
@@ -619,7 +619,7 @@ namespace windows
    bool os_context::file_association_set_shell_open_command(const ::string & pszExtension, const ::string & pszExtensionNamingClass,  const ::string & pszCommand, const ::string & pszParam)
    {
 
-      ::e_status estatus = ::success;
+      void estatus = ::success;
 
       try
       {
@@ -754,7 +754,7 @@ namespace windows
    }
 
 
-   ::e_status os_context::link_open(const string& strUrl, const string& strProfile)
+   void os_context::link_open(const string& strUrl, const string& strProfile)
    {
 
       string strBrowser = "chrome";
@@ -1292,7 +1292,7 @@ retry:
    }
 
 
-   ::e_status os_context::enable_service()
+   void os_context::enable_service()
    {
 
       string strServiceName = calc_service_name();
@@ -1366,7 +1366,7 @@ retry:
    }
 
 
-   ::e_status os_context::disable_service()
+   void os_context::disable_service()
    {
 
       string strServiceName = calc_service_name();
@@ -1383,7 +1383,7 @@ retry:
    }
 
 
-   ::e_status os_context::start_service()
+   void os_context::start_service()
    {
 
       string strServiceName = calc_service_name();
@@ -1514,7 +1514,7 @@ retry:
 
    }
 
-   ::e_status  os_context::stop_service()
+   void  os_context::stop_service()
    {
 
       string strServiceName = calc_service_name();
@@ -2061,7 +2061,7 @@ retry:
    }
 
 
-   ::e_status os_context::set_dark_mode(bool bDarkMode)
+   void os_context::set_dark_mode(bool bDarkMode)
    {
 
       set_system_dark_mode1(bDarkMode);
@@ -2075,7 +2075,7 @@ retry:
 
    }
 
-   ::e_status os_context::set_system_dark_mode1(bool bSet)
+   void os_context::set_system_dark_mode1(bool bSet)
    {
 
       ::windows::registry::key key(HKEY_CURRENT_USER, "Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize", true);
@@ -2098,7 +2098,7 @@ retry:
    }
 
 
-   ::e_status os_context::set_app_dark_mode1(bool bSet)
+   void os_context::set_app_dark_mode1(bool bSet)
    {
 
       ::windows::registry::key key(HKEY_CURRENT_USER, "Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize", true);
@@ -2636,7 +2636,7 @@ repeat:
       strTargetProgId.replace("\\", "_");
       strTargetProgId.replace("/", "_");
 
-      ::e_status estatus = ::success;
+      void estatus = ::success;
 
       {
 
@@ -3743,7 +3743,7 @@ repeat:
    }
 
 
-   ::e_status os_context::broadcast_environment_variable_change()
+   void os_context::broadcast_environment_variable_change()
    {
 
       ::SendNotifyMessageA(HWND_BROADCAST, WM_SETTINGCHANGE, 0, (LPARAM)"Environment");
@@ -3785,7 +3785,7 @@ namespace apex
    {
 
 
-      ::e_status node::shell_create_link(::file::path pathObj, ::file::path pathLnk, string strDesc, ::file::path pathIco, int iIcon)
+      void node::shell_create_link(::file::path pathObj, ::file::path pathLnk, string strDesc, ::file::path pathIco, int iIcon)
       {
 
          wstring wstrObj(pathObj);

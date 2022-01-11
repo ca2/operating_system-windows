@@ -25,8 +25,8 @@ namespace multimedia
 
          u32 get_component_type();
          void update_all_controls();
-         ::e_status     initialize_all_controls();
-         ::e_status     initialize_source_info();
+         void     initialize_all_controls();
+         void     initialize_source_info();
 
          ::multimedia::audio_mixer::source_array & get_source_info();
 

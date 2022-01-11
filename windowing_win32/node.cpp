@@ -26,7 +26,7 @@ namespace windowing_win32
    }
 
 
-   ::e_status node::install_keyboard_hook(::matter * pmatterListener)
+   void node::install_keyboard_hook(::matter * pmatterListener)
    {
 
       auto estatus = ::keyboard_hook::install(pmatterListener);
@@ -55,7 +55,7 @@ namespace windowing_win32
    }
 
 
-   ::e_status node::uninstall_keyboard_hook(::matter * pmatterListener)
+   void node::uninstall_keyboard_hook(::matter * pmatterListener)
    {
 
       auto estatus = ::keyboard_hook::uninstall(pmatterListener);
@@ -72,7 +72,7 @@ namespace windowing_win32
    }
 
 
-   ::e_status node::install_mouse_hook(::matter * pmatterListener)
+   void node::install_mouse_hook(::matter * pmatterListener)
    {
 
       auto estatus = ::mouse_hook::install(pmatterListener);
@@ -101,7 +101,7 @@ namespace windowing_win32
    }
 
 
-   ::e_status node::uninstall_mouse_hook(::matter * pmatterListener)
+   void node::uninstall_mouse_hook(::matter * pmatterListener)
    {
 
       auto estatus = ::mouse_hook::uninstall(pmatterListener);
@@ -118,7 +118,7 @@ namespace windowing_win32
    }
 
 
-   ::e_status node::register_windows_message()
+   void node::register_windows_message()
    {
 
       if (m_emessageWindowsTaskbarCreatedMessage == e_message_undefined)

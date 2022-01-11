@@ -72,7 +72,7 @@ namespace windows
 
       //virtual const MSG* GetCurrentMessage();
 
-      //virtual ::e_status update_graphics_resources();
+      //virtual void update_graphics_resources();
 
 
       //virtual bool __windows_message_bypass(HWND oswindow, ::u32 message, wparam wparam, lparam lparam, lresult & lresult);
@@ -140,7 +140,7 @@ namespace windows
       virtual void * get_os_data() const;
 
 
-      //virtual ::e_status finish(::object * pcontextobjectFinish) override;
+      //virtual void finish(::object * pcontextobjectFinish) override;
 
 
       //      virtual ::user::interaction * from_handle(::windowing::window * pwindow);
@@ -164,7 +164,7 @@ namespace windows
       // advanced creation (allows access to extended styles)
       //virtual bool create_window_ex(::user::interaction * pinteraction, __pointer(::user::system) pusersystem, ::user::interaction * puiParent, id id) override;
 
-      //virtual ::e_status native_create_host() override;
+      //virtual void native_create_host() override;
 
       virtual bool destroy_impl_only() override;
       virtual bool start_destroying_window() override;
@@ -467,7 +467,7 @@ namespace windows
       virtual void DragAcceptFiles(bool bAccept = true);
 
       // icon Functions
-      virtual ::e_status set_icon(::windowing::icon * picon);
+      virtual void set_icon(::windowing::icon * picon);
       virtual __pointer(::windowing::icon) get_icon() const;
 
       // Context Help Functions
@@ -704,7 +704,7 @@ namespace windows
       //void PrepareForHelp();
 
 
-      virtual ::e_status set_tool_window(bool bSet);
+      virtual void set_tool_window(bool bSet);
 
 
       friend class frame_window;
@@ -726,7 +726,7 @@ namespace windows
       //virtual ::i32 get_window_long(i32 nIndex) const;
       //virtual ::i32 set_window_long(i32 nIndex, ::i32 lValue);
       //virtual iptr get_window_long_ptr(i32 nIndex) const;
-      //virtual ::e_status set_window_long_ptr(i32 nIndex, iptr lValue);
+      //virtual void set_window_long_ptr(i32 nIndex, iptr lValue);
 
 
       void _001OnTriggerMouseInside();

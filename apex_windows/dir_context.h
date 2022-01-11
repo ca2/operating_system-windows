@@ -19,9 +19,9 @@ namespace windows
       virtual ~dir_context();
 
 
-      virtual ::e_status initialize(::object * pobject) override;
+      virtual void initialize(::object * pobject) override;
 
-      virtual ::e_status init_system() override;
+      virtual void init_system() override;
 
       using ::dir_context::ls;
       // rls fetchs should set a meaningful m_iRelative value at each returned path

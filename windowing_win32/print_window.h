@@ -36,7 +36,7 @@ namespace windowing_win32
       }
 
 
-      virtual ::e_status     run() override
+      virtual void     run() override
       {
 
          try

@@ -79,7 +79,7 @@ namespace windowing_win32
    }
 
 
-   ::e_status buffer::initialize_graphics_graphics(::user::interaction_impl * pimpl)
+   void buffer::initialize_graphics_graphics(::user::interaction_impl * pimpl)
    {
 
       auto estatus = ::graphics::bitmap_source_buffer::initialize_graphics_graphics(pimpl);

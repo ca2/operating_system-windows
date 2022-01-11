@@ -1786,7 +1786,7 @@ namespace windows
    //}
 
 
-   //::e_status interaction_impl::set_window_long_ptr(i32 nIndex, iptr lValue)
+   //void interaction_impl::set_window_long_ptr(i32 nIndex, iptr lValue)
    //{
 
    //   return m_pwindow->set_window_long_ptr(nIndex, lValue);
@@ -2752,7 +2752,7 @@ namespace windows
    //}
 
 
-   ::e_status interaction_impl::set_icon(::windowing::icon * picon)
+   void interaction_impl::set_icon(::windowing::icon * picon)
    {
 
       return m_pwindow->set_icon(picon);
@@ -3976,7 +3976,7 @@ namespace windows
 //   }
 
 
-::e_status interaction_impl::set_tool_window(bool bSet)
+void interaction_impl::set_tool_window(bool bSet)
 {
 
    return m_pwindow->set_tool_window(bSet);
@@ -5037,7 +5037,7 @@ namespace windows
 //   }
 //
 //
-//   ::e_status interaction_impl::finish(::object * pcontextobjectFinish)
+//   void interaction_impl::finish(::object * pcontextobjectFinish)
 //   {
 //
 //      auto estatus = set_finish(pcontextobjectFinish);

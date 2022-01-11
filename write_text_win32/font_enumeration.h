@@ -24,7 +24,7 @@ namespace write_text_win32
       ~font_enumeration() override;
 
 
-      ::e_status on_enumerate_fonts() override;
+      void on_enumerate_fonts() override;
 
 
       virtual void enumerate_character_set(::write_text::font_enumeration_item * pitem);

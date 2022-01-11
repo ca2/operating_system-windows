@@ -1,8 +1,8 @@
 #include "framework.h"
 
 
-CLASS_DECL_DRAW2D_GDIPLUS ::e_status initialize_gdiplus();
-CLASS_DECL_DRAW2D_GDIPLUS ::e_status terminate_gdiplus();
+CLASS_DECL_DRAW2D_GDIPLUS void initialize_gdiplus();
+CLASS_DECL_DRAW2D_GDIPLUS void terminate_gdiplus();
 
 
 namespace draw2d_gdiplus
@@ -26,7 +26,7 @@ namespace draw2d_gdiplus
    }
 
 
-   ::e_status draw2d::initialize(::object * pobject)
+   void draw2d::initialize(::object * pobject)
    {
 
       auto estatus = ::draw2d::draw2d::initialize(pobject);

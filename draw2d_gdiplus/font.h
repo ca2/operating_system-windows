@@ -24,7 +24,7 @@ namespace draw2d_gdiplus
 #endif
 
       virtual bool create(::draw2d::graphics * pgraphics, ::i8 iCreate) override;
-      ::e_status destroy() override;
+      void destroy() override;
 
 
       Gdiplus::Font * get_gdiplus_font() { return (Gdiplus::Font *) m_osdata[0]; }

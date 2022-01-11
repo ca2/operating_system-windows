@@ -2035,7 +2035,7 @@ pacmedir->create CreateDirectoryW last error(%d)=%s", dwError, pszError);
    }
 
 
-   ::e_status acme_dir::change_current(const char * psz)
+   void acme_dir::change_current(const char * psz)
    {
 
       wstring wstr(psz);

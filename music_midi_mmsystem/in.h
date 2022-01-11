@@ -32,14 +32,14 @@ namespace music
             virtual ~in();
 
 
-            virtual ::e_status     open(int iDeviceId) override;
-            virtual ::e_status     start() override;
-            virtual ::e_status     stop() override;
-            virtual ::e_status     close() override;
+            virtual void     open(int iDeviceId) override;
+            virtual void     start() override;
+            virtual void     stop() override;
+            virtual void     close() override;
 
             virtual void on_os_message(byte b, byte b1, byte b2) override;
 
-            ::e_status     send_short_message(::music::midi::e_message emessage, int iChannel, int iData1, int iData2);
+            void     send_short_message(::music::midi::e_message emessage, int iChannel, int iData1, int iData2);
 
             static void CALLBACK MidiInProc(
                HMIDIIN   hMidiIn,

@@ -20,7 +20,7 @@ namespace write_text_win32
       ~fonts() override;
 
 
-      ::e_status initialize(::object * pobject) override;
+      void initialize(::object * pobject) override;
 
 
    };

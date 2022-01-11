@@ -242,7 +242,7 @@ namespace windowing_win32
    }
 
 
-   ::e_status window::create_window(::user::interaction_impl * pimpl)
+   void window::create_window(::user::interaction_impl * pimpl)
    {
 
       auto psession = get_session();
@@ -1308,7 +1308,7 @@ namespace windowing_win32
    }
 
 
-   ::e_status window::set_parent(::windowing::window * pwindowParent)
+   void window::set_parent(::windowing::window * pwindowParent)
    {
 
       auto hwnd = get_hwnd();
@@ -1334,7 +1334,7 @@ namespace windowing_win32
    }
 
 
-   ::e_status window::show_window(const ::e_display & edisplay, const ::e_activation & eactivation)
+   void window::show_window(const ::e_display & edisplay, const ::e_activation & eactivation)
    {
 
       auto iShowWindow = windows_show_window(edisplay, eactivation);
@@ -1365,7 +1365,7 @@ namespace windowing_win32
    }
 
 
-   ::e_status window::full_screen(const ::rectangle_i32 & rectangle)
+   void window::full_screen(const ::rectangle_i32 & rectangle)
    {
 
       //::rectangle_i32 rBest;
@@ -1438,7 +1438,7 @@ namespace windowing_win32
    }
 
 
-   ::e_status window::exit_iconify()
+   void window::exit_iconify()
    {
 
       //xdisplay d(display());
@@ -1477,7 +1477,7 @@ namespace windowing_win32
    }
 
    
-   ::e_status window::exit_full_screen()
+   void window::exit_full_screen()
    {
 
       //xdisplay d(display());
@@ -1516,7 +1516,7 @@ namespace windowing_win32
    }
 
 
-   ::e_status window::exit_zoomed()
+   void window::exit_zoomed()
    {
 
       //synchronous_lock synchronouslock(x11_mutex());
@@ -1559,7 +1559,7 @@ namespace windowing_win32
    }
 
 
-   ::e_status window::set_keyboard_focus()
+   void window::set_keyboard_focus()
    {
 
       HWND hwnd = get_hwnd();
@@ -1586,7 +1586,7 @@ namespace windowing_win32
    //}
 
 
-   ::e_status window::set_active_window()
+   void window::set_active_window()
    {
 
       HWND hwnd = get_hwnd();
@@ -1603,7 +1603,7 @@ namespace windowing_win32
    }
 
 
-   ::e_status window::bring_to_front()
+   void window::bring_to_front()
    {
 
       HWND hwnd = get_hwnd();
@@ -1620,7 +1620,7 @@ namespace windowing_win32
    }
 
 
-   ::e_status window::set_mouse_capture()
+   void window::set_mouse_capture()
    {
 
       HWND hwnd = get_hwnd();
@@ -1795,7 +1795,7 @@ namespace windowing_win32
    }
 
 
-   ::e_status window::destroy_window()
+   void window::destroy_window()
    {
 
       HWND hwnd = get_hwnd();
@@ -1812,7 +1812,7 @@ namespace windowing_win32
    }
 
 
-   //::e_status window::show_window(const ::e_display & edisplay, const ::e_activation & eactivation)
+   //void window::show_window(const ::e_display & edisplay, const ::e_activation & eactivation)
    //{
 
    //   int nCmdShow = windows_show_window(edisplay, eactivation);
@@ -2274,7 +2274,7 @@ namespace windowing_win32
 //   }
 
 
-   ::e_status window::set_mouse_cursor(::windowing::cursor * pcursor)
+   void window::set_mouse_cursor(::windowing::cursor * pcursor)
    {
 
       HCURSOR hcursor = nullptr;
@@ -2479,7 +2479,7 @@ namespace windowing_win32
    }
 
 
-   ::e_status window::set_foreground_window()
+   void window::set_foreground_window()
    {
 
       HWND hwnd = get_hwnd();
@@ -2770,7 +2770,7 @@ namespace windowing_win32
    }
 
 
-   ::e_status window::set_owner(::windowing::window * pWndNewOwner)
+   void window::set_owner(::windowing::window * pWndNewOwner)
    {
 
       auto hwnd = get_hwnd();
@@ -3484,7 +3484,7 @@ namespace windowing_win32
    }
 
 
-   //::e_status window::set_focus()
+   //void window::set_focus()
    //{
 
    //   HWND hwnd = get_hwnd();
@@ -5347,7 +5347,7 @@ namespace windowing_win32
    //}
 
 
-   ::e_status window::set_icon(::windowing::icon * picon)
+   void window::set_icon(::windowing::icon * picon)
    {
 
       auto estatus = ::windowing::window::set_icon(picon);
@@ -6063,7 +6063,7 @@ namespace windowing_win32
    }
 
 
-   ::e_status window::set_finish()
+   void window::set_finish()
    {
 
       auto estatus = ::windowing::window::set_finish();
@@ -6075,7 +6075,7 @@ namespace windowing_win32
 
 
 
-   ::e_status window::set_tool_window(bool bSet)
+   void window::set_tool_window(bool bSet)
    {
 
       if (bSet)

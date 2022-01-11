@@ -12,7 +12,7 @@ DWORD_PTR                        g_gdiplusHookToken = NULL;
 //void xxxshow_error_message(const ::string & strMessage, const ::string & strTitle, const ::e_message_box & emessagebox = e_message_box_ok, const ::future & process = nullptr);
 
 
-CLASS_DECL_ACME::e_status init_gdi_plus()
+CLASS_DECL_ACMEvoid init_gdi_plus()
 {
 
    g_pgdiplusStartupInput = new Gdiplus::GdiplusStartupInput();

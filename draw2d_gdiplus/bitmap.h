@@ -27,7 +27,7 @@ namespace draw2d_gdiplus
 
 #endif
 
-      ::e_status destroy() override;
+      void destroy() override;
 
       bool LoadBitmap(const ::string & pszResourceName);
 

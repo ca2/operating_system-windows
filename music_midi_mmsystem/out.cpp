@@ -32,7 +32,7 @@ namespace music
          }
 
 
-         ::e_status out::open()
+         void out::open()
          {
 
             synchronous_lock synchronouslock(&get_midi_mutex());
@@ -65,7 +65,7 @@ namespace music
 
          }
 
-         ::e_status     out::close()
+         void     out::close()
          {
 
             if(m_hmidiout != nullptr)
@@ -80,7 +80,7 @@ namespace music
          }
 
 
-         ::e_status     out::send_short_message(::music::midi::e_message emessage, int iChannel, int iData1, int iData2)
+         void     out::send_short_message(::music::midi::e_message emessage, int iChannel, int iData1, int iData2)
          {
 
 //            return ::multimedia::mmsystem::translate(midiOutShortMsg(m_hmidiout, MIDIMSG(((int)emessage) >> 4, iChannel, iData1, iData2)), "out::send_short_message");
@@ -89,7 +89,7 @@ namespace music
          }
 
 
-         ::e_status     out::send_long_message(const block& block)
+         void     out::send_long_message(const block& block)
          {
 
             MIDIHDR midihdr;

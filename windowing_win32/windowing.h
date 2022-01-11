@@ -31,15 +31,15 @@ namespace windowing_win32
       virtual ~windowing();
 
 
-      virtual ::e_status initialize_windowing(::user::user * puser) override;
+      virtual void initialize_windowing(::user::user * puser) override;
 
       virtual void defer_term_ui() override;
 
       void finalize_windowing() override;
 
-      ::e_status destroy() override;
+      void destroy() override;
 
-      //::e_status destroy() override;
+      //void destroy() override;
 
       virtual void get_cursor_position(POINT_I32* ppoint) override;
 
@@ -94,12 +94,12 @@ namespace windowing_win32
       static HWND _get_mouse_capture(itask_t itask);
 
 
-      virtual ::e_status release_mouse_capture() override;
+      virtual void release_mouse_capture() override;
 
 
       
 
-      virtual ::e_status erase_window(::windowing::window * pwindow);
+      virtual void erase_window(::windowing::window * pwindow);
     
 
       using windowing::windowing::get_cursor;
@@ -114,7 +114,7 @@ namespace windowing_win32
 
       virtual void get_cursor_pos(POINT_I32 * ppoint);
 
-      virtual ::e_status set_cursor_position(const ::point_i32 & point);
+      virtual void set_cursor_position(const ::point_i32 & point);
 
 
 
@@ -133,7 +133,7 @@ namespace windowing_win32
       __pointer(::windowing::window) window_from_point(::aura::application * papp, const ::point_i32 & point);
 
       
-      virtual ::e_status windowing_post(const ::routine& routine) override;
+      virtual void windowing_post(const ::routine& routine) override;
 
 
       static BOOL CALLBACK GetAppsEnumWindowsProc(HWND hwnd, LPARAM lParam);
@@ -145,7 +145,7 @@ namespace windowing_win32
 
       virtual void initialize_keyboard(::windowing::keyboard * pkeyboard) override;
 
-      virtual ::e_status lock_set_foreground_window(bool bLock) override;
+      virtual void lock_set_foreground_window(bool bLock) override;
 
       virtual wstring _windows_register_window_class(::u32 nClassStyle, HCURSOR hCursor = 0, HBRUSH hbrBackground = 0, HICON hIcon = 0);
       //CLASS_DECL_WINDOWING_WIN32 wstring windows_register_window_class(::object * pobject, ::u32 nClassStyle, hcursor hCursor = 0, HBRUSH hbrBackground = 0, hicon hIcon = 0);

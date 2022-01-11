@@ -66,7 +66,7 @@ string imm_context::get_string(int iStr)
 }
 
 
-::e_status imm_context::set_string(const char* psz, int iStr)
+void imm_context::set_string(const char* psz, int iStr)
 {
 
    wstring wstr(psz);

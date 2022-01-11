@@ -29,7 +29,7 @@ namespace multimedia
       }
 
 
-      ::e_status department::destroy()
+      void department::destroy()
       {
 
          start_destroying_window();
@@ -43,9 +43,9 @@ namespace multimedia
 
 
 
-      /*::e_status     department::CreateNewDevice(u32 uiMixerID)
+      /*void     department::CreateNewDevice(u32 uiMixerID)
       {
-      ::e_status     mmrc;
+      void     mmrc;
       if(MMSYSERR_NOERROR != (mmrc = m_pmixer->set_new_device(
       uiMixerID,
       (u32) m_oswindow_,
@@ -60,9 +60,9 @@ namespace multimedia
       return mmrc;
       }
 
-      ::e_status     department::CreateNewDestination(u32 dwComponentType)
+      void     department::CreateNewDestination(u32 dwComponentType)
       {
-      ::e_status     mmrc;
+      void     mmrc;
       ::multimedia::audio_mixer::destination * pdestination = nullptr;
 
       if(MMSYSERR_NOERROR != (mmrc =  m_pmixer->m_pdevice->get_destination(

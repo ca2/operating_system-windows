@@ -340,7 +340,7 @@ namespace draw2d_gdiplus
    //}
 
 
-   ::e_status graphics::set(::draw2d::bitmap * pbitmap)
+   void graphics::set(::draw2d::bitmap * pbitmap)
    {
 
       if (::is_null(pbitmap))
@@ -895,7 +895,7 @@ namespace draw2d_gdiplus
    }
 
 
-   ::e_status graphics::clear_current_point()
+   void graphics::clear_current_point()
    {
 
       return ::success;
@@ -2334,7 +2334,7 @@ namespace draw2d_gdiplus
    //}
 
 
-   ::e_status graphics::get_text_metrics(::write_text::text_metric * pmetric)
+   void graphics::get_text_metrics(::write_text::text_metric * pmetric)
    {
 
       if (m_pgraphics == nullptr)
@@ -4500,7 +4500,7 @@ namespace draw2d_gdiplus
    }
 
 
-   ::e_status graphics::add_shapes(const shape_array& shapea)
+   void graphics::add_shapes(const shape_array& shapea)
    {
 
       for (int i = 0; i < shapea.get_count(); i++)
@@ -4548,7 +4548,7 @@ namespace draw2d_gdiplus
    }
 
 
-   ::e_status graphics::reset_clip()
+   void graphics::reset_clip()
    {
 
       m_pgraphics->ResetClip();
@@ -4558,7 +4558,7 @@ namespace draw2d_gdiplus
    }
 
 
-   ::e_status graphics::intersect_clip(const ::rectangle & rectangle)
+   void graphics::intersect_clip(const ::rectangle & rectangle)
    {
 
       Gdiplus::RectF r;
@@ -4576,7 +4576,7 @@ namespace draw2d_gdiplus
    }
 
 
-   //::e_status graphics::intersect_clip(const ::rectangle & rectangle)
+   //void graphics::intersect_clip(const ::rectangle & rectangle)
    //{
 
    //   Gdiplus::RectF r;
@@ -4594,7 +4594,7 @@ namespace draw2d_gdiplus
    //}
 
 
-   ::e_status graphics::intersect_clip(const ::ellipse & ellipse)
+   void graphics::intersect_clip(const ::ellipse & ellipse)
    {
 
       auto ppath = __auto(new Gdiplus::GraphicsPath());
@@ -4616,7 +4616,7 @@ namespace draw2d_gdiplus
    }
 
 
-   //::e_status graphics::intersect_clip(const ::ellipse & ellipse)
+   //void graphics::intersect_clip(const ::ellipse & ellipse)
    //{
 
    //   auto ppath = __auto(new Gdiplus::GraphicsPath());
@@ -4638,7 +4638,7 @@ namespace draw2d_gdiplus
    //}
 
 
-   ::e_status graphics::intersect_clip(const ::polygon & polygon)
+   void graphics::intersect_clip(const ::polygon & polygon)
    {
 
       auto ppath = __auto(new Gdiplus::GraphicsPath());
@@ -4663,7 +4663,7 @@ namespace draw2d_gdiplus
    }
 
 
-   //::e_status graphics::intersect_clip(const ::polygon_f64& polygon_i32)
+   //void graphics::intersect_clip(const ::polygon_f64& polygon_i32)
    //{
 
    //   auto ppath = __auto(new Gdiplus::GraphicsPath());
@@ -6217,7 +6217,7 @@ namespace draw2d_gdiplus
    //}
 
 
-   ::e_status graphics::TextOutRaw(double x, double y, const block & block)
+   void graphics::TextOutRaw(double x, double y, const block & block)
    {
 
       if (block.is_empty())

@@ -38,7 +38,7 @@ namespace draw2d_gdiplus
 #endif
 
    
-   ::e_status font::destroy()
+   void font::destroy()
    {
 
       auto pfont = get_gdiplus_font();

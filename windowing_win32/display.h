@@ -39,7 +39,7 @@ namespace windowing_win32
       virtual ~display();
 
 
-      virtual ::e_status initialize_display(::windowing::windowing * pwindowing) override;
+      virtual void initialize_display(::windowing::windowing * pwindowing) override;
 
 
       virtual void update_dpi();

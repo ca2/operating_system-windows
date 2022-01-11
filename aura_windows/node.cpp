@@ -218,7 +218,7 @@ namespace aura
       }
 
 
-      ::e_status node::open_folder(::file::path& pathFolder)
+      void node::open_folder(::file::path& pathFolder)
       {
 
          wstring wstrFolder(pathFolder);
@@ -275,7 +275,7 @@ namespace aura
 
       }
 
-      ::e_status node::register_dll(const ::file::path& pathDll)
+      void node::register_dll(const ::file::path& pathDll)
       {
 
 
@@ -348,7 +348,7 @@ namespace aura
       }
 
 
-      ::e_status node::system_main()
+      void node::system_main()
       {
 
          //__pointer(::node::system) psystem = m_psystem;

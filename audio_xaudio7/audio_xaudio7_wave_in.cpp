@@ -58,7 +58,7 @@ namespace multimedia
          return thread::pre_translate_message(pusermessage);
       }
 
-      ::e_status     in::in_open(i32 iBufferCount, i32 iBufferSampleCount)
+      void     in::in_open(i32 iBufferCount, i32 iBufferSampleCount)
       {
 
 //         if(m_hwavein != nullptr && m_estate != e_state_initial)
@@ -70,7 +70,7 @@ namespace multimedia
 //         }
 //
 //         single_lock sLock(&m_mutex, true);
-//         ::e_status     mmr;
+//         void     mmr;
 //         ASSERT(m_hwavein == nullptr);
 //         ASSERT(m_estate == e_state_initial);
 //
@@ -205,7 +205,7 @@ namespace multimedia
 //
 //            in_close();
 //
-//            return (::e_status    ) -1;
+//            return (void    ) -1;
 //
 //         }
 //
@@ -216,12 +216,12 @@ namespace multimedia
       }
 
 
-      ::e_status     in::in_close()
+      void     in::in_close()
       {
 
          single_lock sLock(&m_mutex, true);
 
-         //::e_status     mmr;
+         //void     mmr;
 
          //if(m_estate != e_state_opened && m_estate != state_stopped)
          //   return ::success;
@@ -255,7 +255,7 @@ namespace multimedia
 
       }
 
-      ::e_status     in::in_start()
+      void     in::in_start()
       {
 
          single_lock sLock(&m_mutex, true);
@@ -268,7 +268,7 @@ namespace multimedia
          if(m_estate != e_state_opened && m_estate != state_stopped)
             return ::success;
 
-         //::e_status     mmr;
+         //void     mmr;
 
          //if(::success != (mmr = xaudio7::translate(waveInStart(m_hwavein))))
          //{
@@ -282,7 +282,7 @@ namespace multimedia
 
       }
 
-      ::e_status     in::in_stop()
+      void     in::in_stop()
       {
 
          single_lock sLock(&m_mutex, true);
@@ -290,7 +290,7 @@ namespace multimedia
          if(m_estate != state_recording)
             return error_failed;
 
-         ::e_status     mmr;
+         void     mmr;
 
          m_estate = e_state_stopping;
 
@@ -352,7 +352,7 @@ namespace multimedia
       //}
 
 
-      ::e_status     in::in_reset()
+      void     in::in_reset()
       {
 
          single_lock sLock(&m_mutex, true);
@@ -366,7 +366,7 @@ namespace multimedia
 
          //}
 
-         //::e_status     mmr;
+         //void     mmr;
 
          //if(m_estate == state_recording)
          //{
@@ -446,7 +446,7 @@ namespace multimedia
       }
 
 
-      ::e_status     in::in_add_buffer(i32 iBuffer)
+      void     in::in_add_buffer(i32 iBuffer)
       {
 
          //return in_add_buffer(wave_hdr(iBuffer));
@@ -456,10 +456,10 @@ namespace multimedia
       }
 
 
-      //::e_status     in::in_add_buffer(LPWAVEHDR lpwavehdr)
+      //void     in::in_add_buffer(LPWAVEHDR lpwavehdr)
       //{
 
-      //   ::e_status     mmr;
+      //   void     mmr;
 
       //   if(::success != (mmr = xaudio7::translate(waveInAddBuffer(m_hwavein, lpwavehdr, sizeof(WAVEHDR)))))
       //   {

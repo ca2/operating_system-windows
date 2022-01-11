@@ -28,7 +28,7 @@ namespace windowing_win32
    }
 
 
-   ::e_status cursor::_create_os_cursor()
+   void cursor::_create_os_cursor()
    {
 
       if (get_hcursor())
@@ -66,7 +66,7 @@ namespace windowing_win32
    }
 
 
-   ::e_status cursor::_create_from_image(const ::image * pimage, ::i32 xHotspot, ::i32 yHotspot)
+   void cursor::_create_from_image(const ::image * pimage, ::i32 xHotspot, ::i32 yHotspot)
    {
 
       HCURSOR hcursor = (HCURSOR) create_alpha_cursor(pimage, xHotspot, yHotspot);
@@ -85,7 +85,7 @@ namespace windowing_win32
    }
 
 
-   ::e_status cursor::_load_default_cursor(enum_cursor ecursor)
+   void cursor::_load_default_cursor(enum_cursor ecursor)
    {
 
       auto pcursor = windows_get_system_cursor(ecursor);
@@ -113,7 +113,7 @@ namespace windowing_win32
    }
 
 
-   //::e_status cursor::initialize_system_default()
+   //void cursor::initialize_system_default()
    //{
 
    //   return load_default_cursor(m_ecursor);

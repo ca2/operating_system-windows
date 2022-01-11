@@ -9,7 +9,7 @@ namespace windows
 {
 
 
-   ::e_status launcher::start()
+   void launcher::start()
    {
 
       if (!ensure_executable())

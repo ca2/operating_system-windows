@@ -63,7 +63,7 @@ namespace multimedia
 
       }
 
-      ::e_status     translate(MMRESULT mmr)
+      void     translate(MMRESULT mmr)
       {
 
          switch(mmr)

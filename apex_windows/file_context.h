@@ -28,10 +28,10 @@ namespace windows
       ~file_context() override;
 
 
-      ::e_status initialize(::object * pobject) override;
+      void initialize(::object * pobject) override;
 
 
-      ::e_status init_system() override;
+      void init_system() override;
 
 
       virtual bool get_status(const ::file::path & path, ::file::file_status & status);
@@ -59,14 +59,14 @@ namespace windows
       ::block get_main_resource_block() override;
 
       //::folder * _defer_resource_folder();
-      //::file_transport create_resource_file(const char* path) override;
+      //::file_pointer create_resource_file(const char* path) override;
       //bool resource_is_file_or_dir(const char* path) override;
 
       virtual ::extended::transport < ::file::file > resource_get_file(const ::file::path & path) override;
 
       virtual bool get_last_write_time(FILETIME * pfiletime, const ::string & strFilename);
 
-      //::e_status update_module_path() override;
+      //void update_module_path() override;
 
       file_transport get_file(const ::payload & payloadFile, const ::file::e_open & nOpenFlags) override;
 

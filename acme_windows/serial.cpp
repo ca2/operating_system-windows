@@ -44,7 +44,7 @@ namespace windows
 
       }
 
-   ::e_status serial::initialize_serial(
+   void serial::initialize_serial(
       const string& port,
       ::u32 baudrate,
       ::serial::timeout timeout,

@@ -21,7 +21,7 @@ namespace windows
    }
 
 
-   ::e_status dir_context::initialize(::context_object * pcontextobject)
+   void dir_context::initialize(::context_object * pcontextobject)
    {
 
       auto estatus = ::object::initialize(pcontextobject);
@@ -46,7 +46,7 @@ namespace windows
    }
 
 
-   ::e_status dir_context::init_system()
+   void dir_context::init_system()
    {
 
       auto estatus = ::dir_context::init_system();

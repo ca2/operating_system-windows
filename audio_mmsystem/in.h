@@ -25,21 +25,21 @@ namespace audio_mmsystem
 
       virtual bool in_initialize_encoder();
 
-      virtual ::e_status     in_add_buffer(i32 iBuffer);
-      virtual ::e_status     in_add_buffer(LPWAVEHDR lpwavehdr);
+      virtual void     in_add_buffer(i32 iBuffer);
+      virtual void     in_add_buffer(LPWAVEHDR lpwavehdr);
 
       HWAVEIN in_get_safe_HWAVEIN();
       virtual void * get_os_data();
 
-      ::e_status     in_open(i32 iBufferCount, i32 iBufferSampleCount);
-      ::e_status     in_close();
-      ::e_status     in_stop();
-      ::e_status     in_start();
-      ::e_status     in_reset();
+      void     in_open(i32 iBufferCount, i32 iBufferSampleCount);
+      void     in_close();
+      void     in_stop();
+      void     in_start();
+      void     in_reset();
 
       virtual void translate_in_message(::message::message * pmessage);
 
-      virtual ::e_status init_thread() override;
+      virtual void init_thread() override;
       virtual void term_thread() override;
       virtual void pre_translate_message(::message::message * pmessage);
 

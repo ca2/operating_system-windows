@@ -2,7 +2,7 @@
 #include "acme/parallelization/install_mutex.h"
 
 
-CLASS_DECL_ACME_WINDOWS ::e_status call_async(const char* pszPath, const char* pszParam, const char* pszDir, ::e_display edisplay, bool bPrivileged, unsigned int* puiPid);
+CLASS_DECL_ACME_WINDOWS void call_async(const char* pszPath, const char* pszParam, const char* pszDir, ::e_display edisplay, bool bPrivileged, unsigned int* puiPid);
 
 
 namespace acme
@@ -34,7 +34,7 @@ namespace acme
       }
 
 
-      ::e_status node::initialize_matter(::matter* pmatter)
+      void node::initialize_matter(::matter* pmatter)
       {
 
          auto estatus = ::matter::initialize_matter(pmatter);
@@ -53,7 +53,7 @@ namespace acme
       }
 
 
-      ::e_status node::call_async(const ::string& strPath, const ::string& strParam, const ::string& strDir, ::e_display edisplay, bool bPrivileged, unsigned int* puiPid)
+      void node::call_async(const ::string& strPath, const ::string& strParam, const ::string& strDir, ::e_display edisplay, bool bPrivileged, unsigned int* puiPid)
       {
 
          auto estatus = ::call_async(strPath, strParam, strDir, edisplay, bPrivileged, puiPid);
@@ -331,7 +331,7 @@ namespace acme
       //
       //
       //
-      //   ::e_status node::set_system_dark_mode1(bool bSet)
+      //   void node::set_system_dark_mode1(bool bSet)
       //   {
       //
       //      ::windows::registry::key key(HKEY_CURRENT_USER, "Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize", true);
@@ -352,7 +352,7 @@ namespace acme
       //   }
       //
       //
-      //   ::e_status node::set_app_dark_mode1(bool bSet)
+      //   void node::set_app_dark_mode1(bool bSet)
       //   {
       //
       //      ::windows::registry::key key(HKEY_CURRENT_USER, "Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize", true);
@@ -432,7 +432,7 @@ namespace acme
       //   }
       //
       //
-      //   ::e_status node::open_folder(::file::path & pathFolder)
+      //   void node::open_folder(::file::path & pathFolder)
       //   {
       //
       //      wstring wstrFolder(pathFolder);
@@ -490,7 +490,7 @@ namespace acme
       //   }
       //
       //
-      //   ::e_status node::register_dll(const ::file::path & pathDll)
+      //   void node::register_dll(const ::file::path & pathDll)
       //   {
       //
       //
@@ -563,7 +563,7 @@ namespace acme
       //   }
       //
       //
-      //   ::e_status node::start()
+      //   void node::start()
       //   {
       //
       //      auto estatus = m_psystem->m_papexsystem->m_papex->thread_initialize(m_psystem->m_papexsystem);
@@ -608,7 +608,7 @@ namespace acme
       //   }
       //
       //
-      //   ::e_status node::get_firefox_installation_info(string& strPathToExe, string& strInstallDirectory)
+      //   void node::get_firefox_installation_info(string& strPathToExe, string& strInstallDirectory)
       //   {
       //
       //#ifdef WINDOWS_DESKTOP
@@ -629,7 +629,7 @@ namespace acme
       //         key.get("Install Directory", strInstallDirectory);
       //
       //      }
-      //      catch (const ::e_status& estatus)
+      //      catch (const void& estatus)
       //      {
       //
       //         return estatus;
@@ -647,7 +647,7 @@ namespace acme
       //   }
       //
       //
-      //   ::e_status node::_001InitializeShellOpen()
+      //   void node::_001InitializeShellOpen()
       //   {
       //
       //      //ASSERT(m_atomApp == nullptr && m_atomSystemTopic == nullptr); // do once
@@ -661,7 +661,7 @@ namespace acme
       //   }
       //
       //
-      //   ::e_status node::process_init()
+      //   void node::process_init()
       //   {
       //
       //      
@@ -804,7 +804,7 @@ namespace acme
       //
 
 
-      ::e_status node::datetime_to_filetime(::filetime_t* pfiletime, const ::datetime::time& time)
+      void node::datetime_to_filetime(::filetime_t* pfiletime, const ::datetime::time& time)
       {
 
          SYSTEMTIME sysTime;
@@ -846,7 +846,7 @@ namespace acme
       }
 
 
-      ::e_status node::last_error_to_status(DWORD dwLastError)
+      void node::last_error_to_status(DWORD dwLastError)
       {
 
          if (dwLastError == 0)
@@ -866,7 +866,7 @@ namespace acme
       }
 
 
-      ::e_status node::ExitCode_to_status(DWORD dwExitCode)
+      void node::ExitCode_to_status(DWORD dwExitCode)
       {
 
          if (dwExitCode == 0)
@@ -894,7 +894,7 @@ namespace acme
       }
 
 
-      //::e_status node::on_start_system()
+      //void node::on_start_system()
       //{
 
       //   auto psystem = m_psystem;
@@ -1826,7 +1826,7 @@ namespace acme
       }
 
 
-      ::e_status node::set_environment_variable(const ::string& pszEnvironmentVariable, const ::string& pszValue)
+      void node::set_environment_variable(const ::string& pszEnvironmentVariable, const ::string& pszValue)
       {
 
 
@@ -1837,7 +1837,7 @@ namespace acme
       }
 
 
-      ::e_status node::create_process(const ::string & pszCommandLine, u32 * pprocessId)
+      void node::create_process(const ::string & pszCommandLine, u32 * pprocessId)
       {
 
          STARTUPINFO StartupInfo;
@@ -1899,7 +1899,7 @@ namespace acme
       }
 
 
-      ::e_status node::run_silent(const ::string & strFunct, const ::string & strstrParams)
+      void node::run_silent(const ::string & strFunct, const ::string & strstrParams)
       {
 
 #if defined(_UWP)
@@ -2031,7 +2031,7 @@ namespace acme
       }
 
 
-      ::e_status node::reboot()
+      void node::reboot()
       {
 
          HANDLE htoken = nullptr;
@@ -2213,7 +2213,7 @@ namespace acme
       }
 
 
-      ::e_status node::register_spa_file_type(const ::string & strAppIdHandler)
+      void node::register_spa_file_type(const ::string & strAppIdHandler)
       {
 
 #ifdef WINDOWS_DESKTOP
@@ -2300,7 +2300,7 @@ namespace acme
       }
 
 
-      ::e_status node::start_program_files_app_app_admin(string strPlatform, string strConfiguration)
+      void node::start_program_files_app_app_admin(string strPlatform, string strConfiguration)
       {
 
 #ifdef WINDOWS_DESKTOP
@@ -2337,7 +2337,7 @@ namespace acme
       }
 
       
-      ::e_status node::get_folder_path_from_user(::file::path & pathFolder)
+      void node::get_folder_path_from_user(::file::path & pathFolder)
       {
 
          wstring wstrFolder(pathFolder);
@@ -2458,7 +2458,7 @@ namespace acme
       //}
 
 
-      ::e_status node::delete_file(const ::string & pFileName)
+      void node::delete_file(const ::string & pFileName)
       {
 
          if (!::DeleteFileW(::str::international::utf8_to_unicode(pFileName)))
@@ -2484,7 +2484,7 @@ namespace acme
 
 
 
-      ::e_status node::register_dll(const ::file::path & pathDll)
+      void node::register_dll(const ::file::path & pathDll)
       {
 
 
@@ -2592,7 +2592,7 @@ namespace acme
       }
 
 
-      ::e_status node::implement(__transport(::acme::node) & pnode, __transport(class ::system) & psystem)
+      void node::implement(__transport(::acme::node) & pnode, __transport(class ::system) & psystem)
       {
 
          return ::acme::node::implement(pnode, psystem);
@@ -2600,7 +2600,7 @@ namespace acme
       }
 
 
-      ::e_status node::on_start_system()
+      void node::on_start_system()
       {
 
          auto estatus = m_psystem->post_initial_request();

@@ -13,7 +13,7 @@ namespace music
       {
 
 
-         ::e_status     midi_in_get_error_text(MMRESULT mmr, string & strOsMessage, string & strMessage)
+         void     midi_in_get_error_text(MMRESULT mmr, string & strOsMessage, string & strMessage)
          {
 
             if(mmr == MMSYSERR_NOERROR)

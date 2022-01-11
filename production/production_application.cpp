@@ -35,7 +35,7 @@ namespace production
    }
 
 
-   ::e_status application::init_instance()
+   void application::init_instance()
    {
 
       add_factory_item <document >();

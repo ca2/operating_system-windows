@@ -83,7 +83,7 @@ namespace multimedia
 
       }
 
-      ::e_status     out::out_open(thread * pthreadCallback, i32 iBufferCount, i32 iBufferSampleCount)
+      void     out::out_open(thread * pthreadCallback, i32 iBufferCount, i32 iBufferSampleCount)
       {
 
          single_lock sLock(&m_mutex, true);
@@ -94,7 +94,7 @@ namespace multimedia
 
 
          m_pthreadCallback = pthreadCallback;
-         ::e_status     mmr;
+         void     mmr;
          ASSERT(m_pxaudio == nullptr);
          ASSERT(m_pvoice == nullptr);
          ASSERT(m_psourcevoice == nullptr);
@@ -229,7 +229,7 @@ Opened:
 
       }
 
-      ::e_status     out::out_open_ex(thread * pthreadCallback, i32 iBufferCount, i32 iBufferSampleCount, u32 uiSamplesPerSec, u32 uiChannelCount, u32 uiBitsPerSample)
+      void     out::out_open_ex(thread * pthreadCallback, i32 iBufferCount, i32 iBufferSampleCount, u32 uiSamplesPerSec, u32 uiChannelCount, u32 uiBitsPerSample)
       {
 
          single_lock sLock(&m_mutex, true);
@@ -240,7 +240,7 @@ Opened:
          m_iBuffer = 0;
 
          m_pthreadCallback = pthreadCallback;
-         ::e_status     mmr;
+         void     mmr;
          ASSERT(m_pxaudio == nullptr);
          ASSERT(m_pvoice == nullptr);
          ASSERT(m_psourcevoice == nullptr);
@@ -327,7 +327,7 @@ Opened:
 
 
 
-      ::e_status     out::out_close()
+      void     out::out_close()
       {
 
          single_lock sLock(&m_mutex, true);
@@ -340,7 +340,7 @@ Opened:
          if(m_estate != e_state_opened)
             return ::success;
 
-         ::e_status     mmr;
+         void     mmr;
 
          i32 i, iSize;
 
@@ -384,7 +384,7 @@ Opened:
          ::wave::buffer * pwbuffer = out_get_buffer();
          ::wave::buffer::item * pbuffer = pwbuffer->get_buffer(iBuffer);
 
-         ::e_status     mmr;
+         void     mmr;
          if(m_peffect != nullptr)
          {
             m_peffect->Process16bits((i16 *)pbuffer->m_pData,pwbuffer->m_uiBufferSize / 2);
@@ -416,7 +416,7 @@ Opened:
 
 
 
-      ::e_status     out::out_stop()
+      void     out::out_stop()
       {
 
          single_lock sLock(&m_mutex, true);
@@ -449,7 +449,7 @@ Opened:
       }
 
 
-      ::e_status     out::out_pause()
+      void     out::out_pause()
       {
 
          single_lock sLock(&m_mutex, true);
@@ -489,7 +489,7 @@ Opened:
 
       }
 
-      ::e_status     out::out_start(const ::duration & position)
+      void     out::out_start(const ::duration & position)
       {
 
          single_lock sLock(&m_mutex,true);
@@ -518,7 +518,7 @@ Opened:
       }
 
 
-      ::e_status     out::out_restart()
+      void     out::out_restart()
       {
 
          single_lock sLock(&m_mutex, true);
@@ -567,7 +567,7 @@ Opened:
 
          single_lock sLock(&m_mutex, true);
 
-         ::e_status                    mmr;
+         void                    mmr;
 
          return 0;
 
@@ -628,7 +628,7 @@ Opened:
 
          single_lock sLock(&m_mutex, true);
 
-         ::e_status                    mmr;
+         void                    mmr;
 
          //MMTIME                  mmt;
 

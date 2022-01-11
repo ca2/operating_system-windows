@@ -30,10 +30,10 @@ namespace windows
       virtual ~shell_launcher();
 
 
-      virtual ::e_status launch() override;
+      virtual void launch() override;
 
 
-      //virtual ::e_status status() const override;
+      //virtual void status() const override;
 
 
    };

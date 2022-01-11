@@ -15,7 +15,7 @@ namespace multimedia
       //  CLASS_DECL_MULTIMEDIA_XAUDIO7 LPWAVEHDR get_os_data(::wave::buffer * pwavebuffer, int iIndex);
 
 
-      CLASS_DECL_MULTIMEDIA_XAUDIO7 ::e_status     translate(HRESULT mmr);
+      CLASS_DECL_MULTIMEDIA_XAUDIO7 void     translate(HRESULT mmr);
 
 
    } // namespace xaudio7

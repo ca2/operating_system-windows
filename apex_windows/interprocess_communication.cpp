@@ -50,7 +50,7 @@ namespace windows
    }
 
 
-   ::e_status interprocess_communication_tx::open(const ::string & strKey, ::launcher * plauncher)
+   void interprocess_communication_tx::open(const ::string & strKey, ::launcher * plauncher)
    {
 
       if (get_hwnd() != nullptr)
@@ -156,7 +156,7 @@ namespace windows
    }
 
 
-   ::e_status interprocess_communication_tx::close()
+   void interprocess_communication_tx::close()
    {
 
       if (get_hwnd() == nullptr)
@@ -175,7 +175,7 @@ namespace windows
    }
 
 
-   ::e_status interprocess_communication_tx::send(const ::string & strMessage, const duration & durationTimeout)
+   void interprocess_communication_tx::send(const ::string & strMessage, const duration & durationTimeout)
    {
 
       if (!is_tx_ok())
@@ -225,7 +225,7 @@ namespace windows
    }
 
 
-   ::e_status interprocess_communication_tx::send(int message, void * pdata, int len, const duration & durationTimeout)
+   void interprocess_communication_tx::send(int message, void * pdata, int len, const duration & durationTimeout)
    {
 
       if (message == 0x80000000)
@@ -317,7 +317,7 @@ namespace windows
    }
 
 
-   ::e_status interprocess_communication_rx::create(const ::string & strKey)
+   void interprocess_communication_rx::create(const ::string & strKey)
    {
 
 
@@ -373,7 +373,7 @@ namespace windows
    }
 
 
-   ::e_status interprocess_communication_rx::destroy()
+   void interprocess_communication_rx::destroy()
    {
 
       if (get_hwnd() != nullptr)

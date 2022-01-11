@@ -115,7 +115,7 @@ namespace windows
    }
 
 
-   ::e_status service_handler::queue_user_work_item(ULONG flags)
+   void service_handler::queue_user_work_item(ULONG flags)
    {
 
       if (::QueueUserWorkItem(thread_proc, this, flags))
@@ -347,7 +347,7 @@ namespace windows
    }
 
 
-   ::e_status service_handler::defer_service()
+   void service_handler::defer_service()
    {
 
       return ::service_handler::defer_service();
@@ -355,7 +355,7 @@ namespace windows
    }
 
 
-   ::e_status service_handler::start_service()
+   void service_handler::start_service()
    {
 
       return ::error_failed;
@@ -363,7 +363,7 @@ namespace windows
    }
 
 
-   ::e_status service_handler::stop_service()
+   void service_handler::stop_service()
    {
 
       return ::error_failed;

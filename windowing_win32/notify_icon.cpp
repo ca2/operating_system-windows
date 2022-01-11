@@ -62,7 +62,7 @@ namespace windowing_win32
    }
 
 
-   ::e_status notify_icon::create_notify_icon(const ::id & id, ::user::interaction * puserinteractionNotify, ::windowing::icon * picon)
+   void notify_icon::create_notify_icon(const ::id & id, ::user::interaction * puserinteractionNotify, ::windowing::icon * picon)
    {
 
       if (m_bCreated)
@@ -111,7 +111,7 @@ namespace windowing_win32
    }
 
 
-   ::e_status notify_icon::modify_icon(::windowing::icon * picon)
+   void notify_icon::modify_icon(::windowing::icon * picon)
    {
 
       if (!m_bCreated)
@@ -139,7 +139,7 @@ namespace windowing_win32
    }
 
 
-   ::e_status notify_icon::add_hidden_window(::user::interaction * puserinteraction)
+   void notify_icon::add_hidden_window(::user::interaction * puserinteraction)
    {
 
       auto estatus = ::user::notify_icon::add_hidden_window(puserinteraction);
@@ -335,7 +335,7 @@ namespace windowing_win32
    //}
 
 
-   ::e_status notify_icon::step()
+   void notify_icon::step()
    {
 
 #if defined(LINUX)

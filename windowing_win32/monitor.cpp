@@ -28,7 +28,7 @@ namespace windowing_win32
    }
 
 
-   ::e_status monitor::update_cache()
+   void monitor::update_cache()
    {
 
       MONITORINFO mi;

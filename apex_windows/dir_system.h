@@ -24,10 +24,10 @@ namespace windows
       virtual ~dir_system();
       
       
-      virtual ::e_status initialize(::object * pobject) override;
+      virtual void initialize(::object * pobject) override;
 
 
-      virtual ::e_status init_system() override;
+      virtual void init_system() override;
 
       //virtual ::std::string dir_root() override;
 

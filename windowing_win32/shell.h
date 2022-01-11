@@ -51,10 +51,10 @@ namespace windowing_win32
       ::user::shell::_get_file_image_ * new_get_file_image() override;
 
 
-      ::e_status initialize(::object * pobject) override;
+      void initialize(::object * pobject) override;
 
 
-      ::e_status run() override;
+      void run() override;
 
 
       bool _get_file_image(::user::shell::_get_file_image_ & getfileimage) override;
@@ -102,7 +102,7 @@ namespace windowing_win32
       virtual void set_image_ico(string strIconLocation, _get_file_image_ & getfileimage);
       virtual void set_image_resource(string strIconLocation, _get_file_image_ & getfileimage);
 
-      ::e_status destroy() override;
+      void destroy() override;
 
       //int shell::add_hover_image(int iSize, int iImage, ::color::color crBk)
 

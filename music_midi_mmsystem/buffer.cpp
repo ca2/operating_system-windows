@@ -106,10 +106,10 @@ namespace music
          }
 
 
-         ::e_status     buffer::midiOutPrepareHeader(HMIDIOUT hmidiout)
+         void     buffer::midiOutPrepareHeader(HMIDIOUT hmidiout)
          {
 
-            ::e_status     mmr = ::success;
+            void     mmr = ::success;
 
             if (hmidiout == nullptr)
                return mmr;
@@ -164,10 +164,10 @@ namespace music
          }
 
 
-         ::e_status     buffer::midiOutUnprepareHeader(HMIDIOUT hmidiout)
+         void     buffer::midiOutUnprepareHeader(HMIDIOUT hmidiout)
          {
 
-            ::e_status     mmr = ::success;
+            void     mmr = ::success;
 
             if (hmidiout == nullptr)
                return mmr;
@@ -190,15 +190,15 @@ namespace music
          }
 
 
-         ::e_status     buffer_array::midiOutUnprepareHeader(HMIDIOUT hmidiout)
+         void     buffer_array::midiOutUnprepareHeader(HMIDIOUT hmidiout)
          {
 
-            ::e_status     mmr = ::success;
+            void     mmr = ::success;
 
             for (i32 i = 0; i < this->buffer_count(); i++)
             {
 
-               ::e_status     mmrBuffer = this->buffer_at(i)->midiOutUnprepareHeader(hmidiout);
+               void     mmrBuffer = this->buffer_at(i)->midiOutUnprepareHeader(hmidiout);
 
                if (mmrBuffer != ::success)
                {
@@ -214,10 +214,10 @@ namespace music
          }
 
 
-         ::e_status     buffer_array::midiOutPrepareHeader(HMIDIOUT hmidiout)
+         void     buffer_array::midiOutPrepareHeader(HMIDIOUT hmidiout)
          {
 
-            ::e_status     estatus = ::success;
+            void     estatus = ::success;
 
             for (i32 i = 0; i < this->buffer_count(); i++)
             {
@@ -245,7 +245,7 @@ namespace music
          }
 
 
-         ::e_status     buffer::midiStreamOut(HMIDISTRM hmidiout)
+         void     buffer::midiStreamOut(HMIDISTRM hmidiout)
          {
 
             ASSERT(hmidiout != nullptr);
@@ -262,10 +262,10 @@ namespace music
          }
 
 
-         ::e_status     buffer_array::midiStreamOut(HMIDISTRM hmidiout)
+         void     buffer_array::midiStreamOut(HMIDISTRM hmidiout)
          {
 
-            ::e_status     estatus = ::success;
+            void     estatus = ::success;
 
             for (i32 i = 0; i < this->buffer_count(); i++)
             {

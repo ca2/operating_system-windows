@@ -89,7 +89,7 @@ namespace keyboard_hook
    }
 
 
-   ::e_status run()
+   void run()
    {
 
       ::parallelization::set_priority(::e_priority_time_critical);
@@ -129,7 +129,7 @@ namespace keyboard_hook
    }
 
 
-   ::e_status install(::matter * pmatter)
+   void install(::matter * pmatter)
    {
 
       if (g_hhook != nullptr)
@@ -148,7 +148,7 @@ namespace keyboard_hook
    }
 
 
-   ::e_status uninstall(::matter * pmatter)
+   void uninstall(::matter * pmatter)
    {
 
       if (g_hhook == nullptr)

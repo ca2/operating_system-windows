@@ -159,7 +159,7 @@ namespace aura
 
 
 
-      ::e_status node::set_system_dark_mode1(bool bSet)
+      void node::set_system_dark_mode1(bool bSet)
       {
 
          ::windows::registry::key key(HKEY_CURRENT_USER, "Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize", true);
@@ -180,7 +180,7 @@ namespace aura
       }
 
 
-      ::e_status node::set_app_dark_mode1(bool bSet)
+      void node::set_app_dark_mode1(bool bSet)
       {
 
          ::windows::registry::key key(HKEY_CURRENT_USER, "Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize", true);
@@ -260,7 +260,7 @@ namespace aura
       }
 
 
-      ::e_status node::open_folder(::file::path& pathFolder)
+      void node::open_folder(::file::path& pathFolder)
       {
 
          wstring wstrFolder(pathFolder);
@@ -317,7 +317,7 @@ namespace aura
 
       }
 
-      ::e_status node::register_dll(const ::file::path& pathDll)
+      void node::register_dll(const ::file::path& pathDll)
       {
 
 
@@ -390,7 +390,7 @@ namespace aura
       }
 
 
-      ::e_status node::system_main()
+      void node::system_main()
       {
 
          //__pointer(::node::system) psystem = m_psystem;

@@ -51,7 +51,7 @@ namespace multimedia
       }
 
 
-      ::e_status     out::run()
+      void     out::run()
       {
 
          return ::thread::run();
@@ -66,7 +66,7 @@ namespace multimedia
       }
 
 
-      ::e_status     out::out_open(thread * pthreadCallback, i32 iBufferCount, i32 iBufferSampleCount)
+      void     out::out_open(thread * pthreadCallback, i32 iBufferCount, i32 iBufferSampleCount)
       {
 
          synchronous_lock synchronouslock(mutex());
@@ -80,7 +80,7 @@ namespace multimedia
 
 
          m_pthreadCallback = pthreadCallback;
-         //::e_status     mmr;
+         //void     mmr;
          ASSERT(m_pdirectsound == nullptr);
          ASSERT(m_psoundbuffer == nullptr);
          ASSERT(m_estate == e_state_initial);
@@ -262,7 +262,7 @@ namespace multimedia
 
       }
 
-      ::e_status     out::out_open_ex(thread * pthreadCallback, i32 iBufferCount, i32 iBufferSampleCount, u32 uiSamplesPerSec, u32 uiChannelCount, u32 uiBitsPerSample)
+      void     out::out_open_ex(thread * pthreadCallback, i32 iBufferCount, i32 iBufferSampleCount, u32 uiSamplesPerSec, u32 uiChannelCount, u32 uiBitsPerSample)
       {
 
          synchronous_lock synchronouslock(mutex());
@@ -273,7 +273,7 @@ namespace multimedia
          m_iBuffer = 0;
 
          m_pthreadCallback = pthreadCallback;
-         ::e_status     mmr;
+         void     mmr;
          ASSERT(m_pdirectsound == nullptr);
          ASSERT(m_psoundbuffer == nullptr);
          ASSERT(m_estate == e_state_initial);
@@ -410,7 +410,7 @@ namespace multimedia
 
 
 
-      ::e_status     out::out_close()
+      void     out::out_close()
       {
 
          synchronous_lock synchronouslock(mutex());
@@ -423,7 +423,7 @@ namespace multimedia
          if(m_estate != e_state_opened)
             return ::success;
 
-         //::e_status     mmr;
+         //void     mmr;
 
          ::count iSize;
 
@@ -518,7 +518,7 @@ namespace multimedia
       }
 
 
-      ::e_status     out::out_stop()
+      void     out::out_stop()
       {
 
          synchronous_lock synchronouslock(mutex());
@@ -547,7 +547,7 @@ namespace multimedia
       }
 
 
-      ::e_status     out::out_pause()
+      void     out::out_pause()
       {
 
          synchronous_lock synchronouslock(mutex());
@@ -576,7 +576,7 @@ namespace multimedia
 
       }
 
-      ::e_status     out::out_start(const ::duration & position)
+      void     out::out_start(const ::duration & position)
       {
 
          synchronous_lock synchronouslock(mutex());
@@ -605,7 +605,7 @@ namespace multimedia
       }
 
 
-      ::e_status     out::out_restart()
+      void     out::out_restart()
       {
 
          synchronous_lock synchronouslock(mutex());
@@ -654,7 +654,7 @@ namespace multimedia
 
          synchronous_lock synchronouslock(mutex());
 
-         //::e_status                    mmr;
+         //void                    mmr;
 
          return 0;
 
@@ -715,7 +715,7 @@ namespace multimedia
 
          synchronous_lock synchronouslock(mutex());
 
-         //::e_status                    mmr;
+         //void                    mmr;
 
          //MMTIME                  mmt;
 
