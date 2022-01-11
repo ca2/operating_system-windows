@@ -315,7 +315,19 @@ namespace windows
 
       // Win32s will not return an error all the time (usually DISK_FULL)
       if (nWritten != nCount)
+      {
+
+         if (nWritten < nCount)
+         {
+
+            ERROR("file::status nWritten < nCount is disk full?");
+
+         }
+
          ::file::throw_status(error_disk_full, -1, m_path);
+
+      }
+
    }
 
 
