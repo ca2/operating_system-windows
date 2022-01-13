@@ -107,7 +107,7 @@ namespace windows
       
       //bool create(const char * path) override;
 
-      //bool _create(const char * path) override;
+      //void __create(const char * path) override;
 
       //bool create_directory(const char * path) override;
 
@@ -127,7 +127,7 @@ namespace windows
 
       //int make_path(const char * psz) override;
 
-      status < string > get_current() override;
+      string get_current() override;
       void change_current(const char* psz) override;
 
 

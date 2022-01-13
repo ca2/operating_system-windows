@@ -34,14 +34,16 @@ namespace windows
    void dir_system::initialize(::object * pobject)
    {
 
-      auto estatus = ::dir_system::initialize(pobject);
+      //auto estatus = 
+      
+      ::dir_system::initialize(pobject);
 
-      if (!estatus)
-      {
+      //if (!estatus)
+      //{
 
-         return estatus;
+      //   return estatus;
 
-      }
+      //}
 
       m_pathInstall = m_psystem->m_pacmedir->install();
 
@@ -106,28 +108,28 @@ namespace windows
 
       }
 
-               auto psystem = m_psystem;
+      auto psystem = m_psystem;
 
-         auto pacmedir = psystem->m_pacmedir;
+      auto pacmedir = psystem->m_pacmedir;
 
-pacmedir->create(m_strTimeFolder);
+      pacmedir->create(m_strTimeFolder);
       //xxdebug_box("win_dir::initialize (m_strTimeFolder)", "win_dir::initialize", 0);
 
-if (!pacmedir->is(m_strTimeFolder))
-{
-   return false;
+      if (!pacmedir->is(m_strTimeFolder))
+      {
+         //return false;
 
-}
+      }
 
           /*     auto psystem = m_psystem;
 
          auto pacmedir = psystem->m_pacmedir;*/
 
-pacmedir->create(m_strTimeFolder / "time");
+      pacmedir->create(m_strTimeFolder / "time");
 
       //xxdebug_box("win_dir::initialize", "win_dir::initialize", 0);
 
-      return ::success;
+      //return ::success;
 
    }
 
@@ -135,17 +137,19 @@ pacmedir->create(m_strTimeFolder / "time");
    void dir_system::init_system()
    {
 
-      auto estatus = ::dir_system::init_system();
+      //auto estatus = 
+      
+      ::dir_system::init_system();
 
-      if (!estatus)
-      {
+      //if (!estatus)
+      //{
 
-         return estatus;
+      //   return estatus;
 
-      }
+      //}
 
 
-      return ::success;
+      //return ::success;
 
    }
 

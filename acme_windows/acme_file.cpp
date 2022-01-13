@@ -103,8 +103,13 @@ namespace windows
 
       if (hFile == INVALID_HANDLE_VALUE)
       {
+         
          auto lastError = GetLastError();
-         return last_error_to_status(lastError);
+         
+         auto estatus = last_error_to_status(lastError);
+
+         throw_status(estatus);
+
       }
 
       ::datetime::time time;
@@ -120,16 +125,22 @@ namespace windows
       {
 
          auto lastError = GetLastError();
+         
          ::CloseHandle(hFile);
-         return last_error_to_status(lastError);
+         
+         auto estatus = last_error_to_status(lastError);
+
+         throw_status(estatus);
 
       }
+
       ::CloseHandle(hFile);
+      
       // Convert the last-write time to local time.
       //FileTimeToSystemTime(&ftWrite, &stUTC);
 
 
-      return ::success;
+      //return ::success;
 
 
    }

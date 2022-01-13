@@ -25,14 +25,14 @@ namespace windows
 
       ::u32 cbValue;
 
-      auto estatus = _value_type_and_size(pcszValueName, dwType, cbValue);
+      /* auto estatus = */ _value_type_and_size(pcszValueName, dwType, cbValue);
 
-      if (::failed(estatus))
-      {
+      //if (::failed(estatus))
+      //{
 
-         return estatus;
+      //   return estatus;
 
-      }
+      //}
 
       if (dwType == REG_DWORD)
       {
@@ -118,15 +118,15 @@ namespace windows
    }
 
 
-   void registry::key::open(HKEY hkey, const ::string & pcszSubKey, bool bCreate)
+   bool registry::key::open(HKEY hkey, const ::string & pcszSubKey, bool bCreate)
    { 
       
-      __defer_throw_estatus(_open(hkey, pcszSubKey, bCreate));
+      return _open(hkey, pcszSubKey, bCreate);
    
    }
 
 
-   void registry::key::_open(HKEY hkey, const ::string & pcszSubKey, bool bCreate)
+   bool registry::key::_open(HKEY hkey, const ::string & pcszSubKey, bool bCreate)
    {
 
       LSTATUS lstatus;
@@ -139,7 +139,7 @@ namespace windows
          if (lstatus != ERROR_SUCCESS)
          {
 
-            return ::error_failed;
+            return false;
 
          }
 
@@ -152,31 +152,29 @@ namespace windows
          if (lstatus != ERROR_SUCCESS)
          {
 
-            return ::error_open_failed;
+            return false;
 
          }
 
       }
 
-      return ::success;
+      return true;
 
    }
 
 
-   void registry::key::value(void * pvalue, const ::string & pcszValueName, ::u32 & dwType, ::u32 & cbValue)
+   bool registry::key::value(void * pvalue, const ::string & pcszValueName, ::u32 & dwType, ::u32 & cbValue)
    { 
       
-      auto estatus = _value(pvalue, pcszValueName, dwType, cbValue); 
+      return _value(pvalue, pcszValueName, dwType, cbValue); 
 
-      __defer_throw_estatus(estatus);
-   
    }
 
 
-   void registry::key::defer_create(HKEY hkey, const ::string & pcszSubKey) 
+   bool registry::key::defer_create(HKEY hkey, const ::string & pcszSubKey) 
    { 
       
-      __defer_throw_estatus(_defer_create(hkey, pcszSubKey));
+      return _defer_create(hkey, pcszSubKey);
    
    }
 
@@ -199,81 +197,80 @@ namespace windows
    }
 
 
-
-   void registry::key::_value(void* pvalue, const ::string & pcszValueName, ::u32& dwType, ::u32& cbValue)
+   bool registry::key::_value(void* pvalue, const ::string & pcszValueName, ::u32& dwType, ::u32& cbValue)
    {
 
       if (ERROR_SUCCESS != ::RegQueryValueExW(m_hkey, wstring(pcszValueName), nullptr, (LPDWORD) &dwType, (byte*)pvalue, (LPDWORD) &cbValue))
       {
 
-         return error_failed;
+         return false;
 
       }
 
-      return ::success;
+      return true;
 
    }
 
 
-   void registry::key::_get(const ::string & pcszValueName, ::u32 & dwValue)
+   bool registry::key::_get(const ::string & pcszValueName, ::u32 & dwValue)
    {
       
       ::u32 dwType;
 
       ::u32 cbValue;
       
-      auto estatus = _value_type_and_size(pcszValueName, dwType, cbValue);
+      auto bOk = _value_type_and_size(pcszValueName, dwType, cbValue);
 
-      if (::failed(estatus))
+      if (!bOk)
       {
 
-         return estatus;
+         return false;
 
       }
 
       if (dwType != REG_DWORD)
       {
 
-         return error_wrong_type;
+         return false;
 
       }
 
       cbValue = sizeof(dwValue);
 
-      estatus = _value(&dwValue, pcszValueName, dwType, cbValue);
+      bOk = _value(&dwValue, pcszValueName, dwType, cbValue);
 
-      if (::failed(estatus))
+      if (!bOk)
       {
 
-         return estatus;
+         return false;
 
       }
 
-      return success;
+      return true;
 
    }
 
 
-   void registry::key::_get(const ::string & pcszValueName, string &str)
+   bool registry::key::_get(const ::string & pcszValueName, string &str)
    {
 
       ::u32 dwType;
 
       ::u32 cbValue;
 
-      auto estatus = _value_type_and_size(pcszValueName, dwType, cbValue);
+      bool bOk = _value_type_and_size(pcszValueName, dwType, cbValue);
 
-      if (::failed(estatus))
+      if (!bOk)
       {
 
-         return estatus;
+         return false;
 
       }
 
       if (dwType != REG_SZ)
       {
 
-         return error_wrong_type;
+         return false;
 
       }
 
@@ -281,61 +278,61 @@ namespace windows
 
       auto pwsz = wstr.get_string_buffer(cbValue);
 
-      estatus = _value(pwsz, pcszValueName, dwType, cbValue);
+      bOk = _value(pwsz, pcszValueName, dwType, cbValue);
 
       wstr.release_string_buffer();
 
       str = wstr;
 
-      if(!estatus)
+      if(!bOk)
       {
          
-         return estatus;
+         return false;
 
       }
 
-      return ::success;
+      return true;
 
    }
 
 
-   void registry::key::_get(const ::string & pcszValueName, memory & mem)
+   bool registry::key::_get(const ::string & pcszValueName, memory & mem)
    {
 
       ::u32 dwType;
 
       ::u32 cbValue;
 
-      auto estatus = _value_type_and_size(pcszValueName, dwType, cbValue);
+      auto bOk = _value_type_and_size(pcszValueName, dwType, cbValue);
 
-      if (::failed(estatus))
+      if (!bOk)
       {
 
-         return estatus;
+         return false;
 
       }
 
       if (dwType != REG_BINARY)
       {
 
-         return error_wrong_type;
+         return false;
 
       }
 
       mem.set_size(cbValue);
 
-      estatus = _value(mem.get_data(), pcszValueName, dwType, cbValue);
+      bOk = _value(mem.get_data(), pcszValueName, dwType, cbValue);
 
-      if (!estatus)
+      if (!bOk)
       {
 
          mem.truncate(0);
 
-         return estatus;
+         return false;
 
       }      
       
-      return ::success;
+      return true;
 
    }
 
@@ -348,21 +345,19 @@ namespace windows
       if (lstatus != ERROR_SUCCESS)
       {
 
-         return ::error_failed;
+         throw_status(error_failed);
 
       }
 
-      return ::success;
+      //return ::success;
 
    }
 
 
-   void registry::key::value_type_and_size(const ::string & pcszValueName, ::u32 & dwType, ::u32 & cbValue)
+   bool registry::key::value_type_and_size(const ::string & pcszValueName, ::u32 & dwType, ::u32 & cbValue)
    {
 
-      auto estatus = _value_type_and_size(pcszValueName, dwType, cbValue);
-
-      __defer_throw_estatus(estatus);
+      return _value_type_and_size(pcszValueName, dwType, cbValue);
 
    }
 
@@ -409,32 +404,32 @@ namespace windows
    }
 
 
-   void registry::key::get(const ::string & pcszValueName, ::u32 & dwValue)
+   bool registry::key::get(const ::string & pcszValueName, ::u32 & dwValue)
    { 
       
-      auto estatus = _get(pcszValueName, dwValue); 
+      return _get(pcszValueName, dwValue); 
 
-      __defer_throw_estatus(estatus);
+      //__defer_throw_estatus(estatus);
    
    }
 
 
-   void registry::key::get(const ::string & pcszValueName, string & strValue)
+   bool registry::key::get(const ::string & pcszValueName, string & strValue)
    { 
       
-      auto estatus = _get(pcszValueName, strValue); 
+      return _get(pcszValueName, strValue); 
 
-      __defer_throw_estatus(estatus);
+      //__defer_throw_estatus(estatus);
    
    }
 
 
-   void registry::key::get(const ::string & pcszValueName, memory & mem)
+   bool registry::key::get(const ::string & pcszValueName, memory & mem)
    { 
       
-      auto estatus = _get(pcszValueName, mem); 
-
-      __defer_throw_estatus(estatus);
+      return _get(pcszValueName, mem); 
+//
+  ///    __defer_throw_estatus(estatus);
    
    }
 
@@ -442,9 +437,9 @@ namespace windows
    void registry::key::set(const ::string & pcszValueName, ::u32 dwValue)
    {
       
-      auto estatus = _set(pcszValueName, dwValue); 
+       _set(pcszValueName, dwValue); 
 
-      __defer_throw_estatus(estatus);
+      //__defer_throw_estatus(estatus);
 
    
    }
@@ -459,9 +454,9 @@ namespace windows
    void registry::key::set(const ::string & pcszValueName, const ::string & strValue)
    { 
 
-      auto estatus = _set(pcszValueName, strValue);
+      /*auto estatus = */ _set(pcszValueName, strValue);
       
-      __defer_throw_estatus(estatus);
+      //__defer_throw_estatus(estatus);
    
    }
 
@@ -479,9 +474,9 @@ namespace windows
    void registry::key::set(const ::string & pcszValueName, const memory & mem)
    { 
 
-      auto estatus = _set(pcszValueName, mem);
+      /*auto estatus =*/ _set(pcszValueName, mem);
       
-      __defer_throw_estatus(estatus);
+      //__defer_throw_estatus(estatus);
    
    }
 
@@ -489,9 +484,9 @@ namespace windows
    void registry::key::delete_value(const ::string & pcszValueName)
    { 
       
-      auto estatus = _delete_value(pcszValueName); 
+      /*auto estatus = */ _delete_value(pcszValueName);
 
-      __defer_throw_estatus(estatus);
+      //__defer_throw_estatus(estatus);
    
    }
 
@@ -499,9 +494,9 @@ namespace windows
    void registry::key::delete_key()
    { 
 
-      auto estatus = _delete_key();
+      /*auto estatus = */ _delete_key();
       
-      __defer_throw_estatus(estatus);
+      // __defer_throw_estatus(estatus);
    
    }
 
@@ -509,9 +504,9 @@ namespace windows
    void registry::key::ls_key(string_array & stra)
    { 
 
-      auto estatus = _ls_key(stra);
+      /*auto estatus = */ _ls_key(stra);
       
-      __defer_throw_estatus(estatus);
+      //__defer_throw_estatus(estatus);
    
    }
 
@@ -519,9 +514,9 @@ namespace windows
    void registry::key::ls_value(string_array & stra)
    {
 
-      auto estatus = _ls_value(stra);
+      /*auto estatus = */ _ls_value(stra);
 
-      __defer_throw_estatus(estatus);
+      //__defer_throw_estatus(estatus);
 
    }
 
@@ -534,11 +529,11 @@ namespace windows
       if (ERROR_SUCCESS != ::RegDeleteValueW(m_hkey, (WCHAR *) wstr.c_str()))
       {
 
-         return error_failed;
+         throw_status(error_failed);
 
       }
 
-      return success;
+      //return success;
 
    }
 
@@ -553,11 +548,11 @@ namespace windows
       if (ERROR_SUCCESS != ::RegDeleteKey(m_hkey, nullptr))
       {
 
-         return error_failed;
+         throw_status(error_failed);
 
       }
 
-      return ::success;
+      //return ::success;
 
    }
 
@@ -589,7 +584,7 @@ namespace windows
          iKey++;
       }
       free(buf);
-      return iKey;
+      //return iKey;
    }
 
 
@@ -632,7 +627,7 @@ namespace windows
 
       }
       
-      return ::success;
+      //return ::success;
 
    }
 

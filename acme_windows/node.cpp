@@ -37,18 +37,18 @@ namespace acme
       void node::initialize_matter(::matter* pmatter)
       {
 
-         auto estatus = ::matter::initialize_matter(pmatter);
+         /*auto estatus = */ ::matter::initialize_matter(pmatter);
 
-         if (!estatus)
-         {
+         //if (!estatus)
+         //{
 
-            return estatus;
+         //   return estatus;
 
-         }
+         //}
 
          windows_registry_initialize();
 
-         return estatus;
+         //return estatus;
 
       }
 
@@ -56,16 +56,16 @@ namespace acme
       void node::call_async(const ::string& strPath, const ::string& strParam, const ::string& strDir, ::e_display edisplay, bool bPrivileged, unsigned int* puiPid)
       {
 
-         auto estatus = ::call_async(strPath, strParam, strDir, edisplay, bPrivileged, puiPid);
+         /*auto estatus =*/ ::call_async(strPath, strParam, strDir, edisplay, bPrivileged, puiPid);
 
-         if (!estatus)
-         {
+         //if (!estatus)
+         //{
 
-            return estatus;
+         //   return estatus;
 
-         }
+         //}
 
-         return estatus;
+         //return estatus;
 
       }
 
@@ -82,21 +82,21 @@ namespace acme
 
             ::u32 dw;
 
-            auto estatus = key._get("AppsUseLightTheme", dw);
+            /*auto estatus =*/ key._get("AppsUseLightTheme", dw);
 
-            if (::failed(estatus))
-            {
+            //if (::failed(estatus))
+            //{
 
-               estatus = key._get("SystemUseLightTheme", dw);
+               /*estatus =*/ key._get("SystemUseLightTheme", dw);
 
-               if (::failed(estatus))
-               {
+            //   if (::failed(estatus))
+            //   {
 
-                  return false;
+            //      return false;
 
-               }
+            //   }
 
-            }
+            //}
 
             return dw == 0;
 
@@ -629,7 +629,7 @@ namespace acme
       //         key.get("Install Directory", strInstallDirectory);
       //
       //      }
-      //      catch (const void& estatus)
+      //      catch (const ::e_status3 & estatus)
       //      {
       //
       //         return estatus;
@@ -827,7 +827,9 @@ namespace acme
 
             DWORD dwLastError = ::GetLastError();
 
-            return last_error_to_status(dwLastError);
+            auto estatus = last_error_to_status(dwLastError);
+
+            throw_status(estatus);
 
          }
 
@@ -837,22 +839,26 @@ namespace acme
 
             DWORD dwLastError = ::GetLastError();
 
-            return last_error_to_status(dwLastError);
+            auto estatus = last_error_to_status(dwLastError);
+
+            throw_status(estatus);
 
          }
 
-         return ::success;
+         //return ::success;
 
       }
 
 
-      void node::last_error_to_status(DWORD dwLastError)
+      ::e_status3 node::last_error_to_status(DWORD dwLastError)
       {
 
          if (dwLastError == 0)
          {
 
             return ::success;
+
+            //return;
 
          }
          else
@@ -862,11 +868,10 @@ namespace acme
 
          }
 
-
       }
 
 
-      void node::ExitCode_to_status(DWORD dwExitCode)
+      ::e_status3 node::ExitCode_to_status(DWORD dwExitCode)
       {
 
          if (dwExitCode == 0)
@@ -1832,7 +1837,7 @@ namespace acme
 
          ::SetEnvironmentVariableW(wstring(pszEnvironmentVariable), wstring(pszValue));
 
-         return ::success;
+         //return ::success;
 
       }
 
@@ -1867,7 +1872,7 @@ namespace acme
             
             auto estatus = last_error_to_status(lastError);
 
-            return estatus;
+            throw_status(estatus);
 
          }
 
@@ -1893,8 +1898,7 @@ namespace acme
 
          auto estatus = ExitCode_to_status(rc);
 
-         return estatus;
-
+         throw_status(estatus);
 
       }
 
@@ -1965,7 +1969,7 @@ namespace acme
             
             auto estatus = last_error_to_status(lastError);
 
-            return estatus;
+            throw_status(estatus);
 
          }
 
@@ -1984,7 +1988,7 @@ namespace acme
 
          auto estatus = ExitCode_to_status(rc);
 
-         return estatus;
+         throw_status(estatus);
 
 #else
 
@@ -2043,7 +2047,9 @@ namespace acme
 
             TRACELASTERROR();
 
-            return last_error_to_status(dwLastError);
+            auto estatus = last_error_to_status(dwLastError);
+
+            throw_status(estatus);
 
          }
 
@@ -2056,7 +2062,9 @@ namespace acme
 
             TRACELASTERROR();
 
-            return last_error_to_status(dwLastError);
+            auto estatus = last_error_to_status(dwLastError);
+
+            throw_status(estatus);
 
          }
          
@@ -2071,14 +2079,16 @@ namespace acme
 
             TRACELASTERROR();
 
-            return last_error_to_status(dwLastError);
+            auto estatus = last_error_to_status(dwLastError);
+
+            throw_status(estatus);
 
          }
          
          if (GetLastError() == ERROR_NOT_ALL_ASSIGNED)
          {
 
-            return false;
+            throw_status(error_failed);
 
          }
 
@@ -2113,7 +2123,9 @@ namespace acme
 
             TRACELASTERROR();
 
-            return last_error_to_status(dwLastError);
+            auto estatus = last_error_to_status(dwLastError);
+
+            throw_status(estatus);
 
          }
          
@@ -2123,7 +2135,7 @@ namespace acme
          
          AdjustTokenPrivileges(htoken, false, &tokenprivileges, 0, (PTOKEN_PRIVILEGES) nullptr, 0);
 
-         return ::success;
+         //return ::success;
 
       }
 
@@ -2242,7 +2254,7 @@ namespace acme
          if (RegCreateKeyExW(HKEY_CLASSES_ROOT, extension.c_str(), 0, 0, 0, KEY_ALL_ACCESS, 0, &hkey, 0) != ERROR_SUCCESS)
          {
             output_debug_string("Could not create or open a registrty key\n");
-            return 0;
+            throw_status(error_resource);
          }
          RegSetValueExW(hkey, L"", 0, REG_SZ, (byte *)desc.c_str(), ::u32(desc.length() * sizeof(wchar_t))); // default vlaue is description of file extension
          RegSetValueExW(hkey, L"ContentType", 0, REG_SZ, (byte *)content_type.c_str(), ::u32(content_type.length() * sizeof(wchar_t))); // default vlaue is description of file extension
@@ -2255,7 +2267,7 @@ namespace acme
          if (RegCreateKeyExW(HKEY_CLASSES_ROOT, path.c_str(), 0, 0, 0, KEY_ALL_ACCESS, 0, &hkey, 0) != ERROR_SUCCESS)
          {
             output_debug_string("Could not create or open a registrty key\n");
-            return 0;
+            throw_status(error_resource);
          }
          RegSetValueExW(hkey, L"", 0, REG_SZ, (byte *)app.c_str(), ::u32(app.length() * sizeof(wchar_t)));
          RegCloseKey(hkey);
@@ -2266,7 +2278,7 @@ namespace acme
          if (RegCreateKeyExW(HKEY_CLASSES_ROOT, path.c_str(), 0, 0, 0, KEY_ALL_ACCESS, 0, &hkey, 0) != ERROR_SUCCESS)
          {
             output_debug_string("Could not create or open a registrty key\n");
-            return 0;
+            throw_status(error_resource);
          }
          RegSetValueExW(hkey, L"", 0, REG_SZ, (byte *)icon.c_str(), ::u32(icon.length() * sizeof(wchar_t)));
          RegCloseKey(hkey);
@@ -2295,7 +2307,7 @@ namespace acme
 
 #endif
 
-         return true;
+         //return true;
 
       }
 
@@ -2312,7 +2324,7 @@ namespace acme
          if (!m_psystem->m_pacmefile->exists(str))
          {
 
-            return ::error_failed;
+            throw_status(error_failed);
 
          }
 
@@ -2332,7 +2344,7 @@ namespace acme
 
 #endif
 
-         return ::success;
+         //return ::success;
 
       }
 
@@ -2346,51 +2358,54 @@ namespace acme
 
          if (i < 32)
          {
+            auto estatus = last_error_to_status(i);
+            //switch (i)
+            //{
+            //case 0:
+            //   //The operating system is out of memory or resources.
+            //   return error_no_memory;
+            //case ERROR_FILE_NOT_FOUND:
+            //   return error_file_not_found;
+            //   //The specified file was not found.
+            //case ERROR_PATH_NOT_FOUND:
+            //   return error_path_not_found;
+            //   //            The specified path was not found.
+            //case          ERROR_BAD_FORMAT:
+            //   return error_bad_format;
+            //   //The.exe file is invalid(non - Win32.exe or error in.exe image).
+            //   //case SE_ERR_ACCESSDENIED:
+            //   //         return error_access_denied;
+            //   ////The operating system denied access to the specified file.
+            //   //SE_ERR_ASSOCINCOMPLETE
+            //   //The file name association is incomplete or invalid.
+            //   //SE_ERR_DDEBUSY
+            //   //The DDE transaction could not be completed because other DDE transactions were being processed.
+            //   //SE_ERR_DDEFAIL
+            //   //The DDE transaction failed.
+            //   //SE_ERR_DDETIMEOUT
+            //   //The DDE transaction could not be completed because the request timed out.
+            //   //SE_ERR_DLLNOTFOUND
+            //   //The specified DLL was not found.
+            //   //SE_ERR_FNF
+            //   //The specified file was not found.
+            //   //SE_ERR_NOASSOC
+            //   //There is no application associated with the given file name extension.This error will also be returned if you attempt to print a file that is not printable.
+            //   //SE_ERR_OOM
+            //   //There was not enough memory to complete the operation.
+            //   //SE_ERR_PNF
+            //   //The specified path was not found.
+            //   //SE_ERR_SHARE
+            //   //A sharing violation occurred.*/
+            //default:
+            //   return error_failed;
+            //}
 
-            switch (i)
-            {
-            case 0:
-               //The operating system is out of memory or resources.
-               return error_no_memory;
-            case ERROR_FILE_NOT_FOUND:
-               return error_file_not_found;
-               //The specified file was not found.
-            case ERROR_PATH_NOT_FOUND:
-               return error_path_not_found;
-               //            The specified path was not found.
-            case          ERROR_BAD_FORMAT:
-               return error_bad_format;
-               //The.exe file is invalid(non - Win32.exe or error in.exe image).
-               //case SE_ERR_ACCESSDENIED:
-               //         return error_access_denied;
-               ////The operating system denied access to the specified file.
-               //SE_ERR_ASSOCINCOMPLETE
-               //The file name association is incomplete or invalid.
-               //SE_ERR_DDEBUSY
-               //The DDE transaction could not be completed because other DDE transactions were being processed.
-               //SE_ERR_DDEFAIL
-               //The DDE transaction failed.
-               //SE_ERR_DDETIMEOUT
-               //The DDE transaction could not be completed because the request timed out.
-               //SE_ERR_DLLNOTFOUND
-               //The specified DLL was not found.
-               //SE_ERR_FNF
-               //The specified file was not found.
-               //SE_ERR_NOASSOC
-               //There is no application associated with the given file name extension.This error will also be returned if you attempt to print a file that is not printable.
-               //SE_ERR_OOM
-               //There was not enough memory to complete the operation.
-               //SE_ERR_PNF
-               //The specified path was not found.
-               //SE_ERR_SHARE
-               //A sharing violation occurred.*/
-            default:
-               return error_failed;
-            }
+            throw_status(estatus);
+
 
          }
 
-         return ::success;
+         //return ::success;
 
       }
 
@@ -2464,11 +2479,11 @@ namespace acme
          if (!::DeleteFileW(::str::international::utf8_to_unicode(pFileName)))
          {
 
-            return error_failed;
+            throw_status(error_failed);
 
          }
 
-         return ::success;
+         //return ::success;
 
       }
 
@@ -2528,12 +2543,13 @@ namespace acme
 
          set["privileged"] = true;
 
-         if (!call_sync(path, strParam, path.folder(), ::e_display_none, 3_minute, set))
-         {
+         //if (!call_sync(path, strParam, path.folder(), ::e_display_none, 3_minute, set))
+         call_sync(path, strParam, path.folder(), ::e_display_none, 3_minute, set);
+         //{
 
-            return false;
+         //   return false;
 
-         }
+         //}
 
          //if (CreateProcessW(wstrPath, wstrParam, nullptr, nullptr, false, 0, nullptr, wstrSystem, &si, &pi))
          //{
@@ -2552,7 +2568,7 @@ namespace acme
 
          //CloseHandle(pi.hthread);
 
-         return true;
+         //return true;
 
       }
 
@@ -2592,7 +2608,7 @@ namespace acme
       }
 
 
-      void node::implement(__transport(::acme::node) & pnode, __transport(class ::system) & psystem)
+      void node::implement(__pointer(::acme::node) & pnode, __pointer(class ::system) & psystem)
       {
 
          return ::acme::node::implement(pnode, psystem);
@@ -2603,16 +2619,17 @@ namespace acme
       void node::on_start_system()
       {
 
-         auto estatus = m_psystem->post_initial_request();
+         //auto estatus = m_psystem->post_initial_request();
+         m_psystem->post_initial_request();
 
-         if (!estatus)
-         {
+         //if (!estatus)
+         //{
 
-            return estatus;
+         //   return estatus;
 
-         }
+         //}
 
-         return estatus;
+         //return estatus;
 
       }
 

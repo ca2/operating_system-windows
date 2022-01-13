@@ -25,14 +25,16 @@ namespace windows
    void file_context::initialize(::object * pobject)
    {
 
-      auto estatus = ::object::initialize(pobject);
+      //auto estatus = 
+      
+      ::object::initialize(pobject);
 
-      if (!estatus)
-      {
+      //if (!estatus)
+      //{
 
-         return estatus;
+      //   return estatus;
 
-      }
+      //}
 
       __pointer(::apex::system) psystem = get_system();
 
@@ -40,7 +42,7 @@ namespace windows
 
       __refer(m_pdirsystem, psystem->m_pdirsystem);
 
-      return ::success;
+      //return ::success;
 
    }
 
@@ -57,7 +59,7 @@ namespace windows
 
       //}
 
-      return ::success;
+//      return ::success;
 
    }
 
@@ -197,7 +199,7 @@ namespace windows
    }
 
 
-   ::extended::status file_context::move(const ::file::path & pszNew, const ::file::path & psz)
+   void file_context::move(const ::file::path & pszNew, const ::file::path & psz)
    {
 
 
@@ -232,7 +234,7 @@ namespace windows
 
                }
 
-               return ::success;
+               return;
 
             }
 
@@ -301,12 +303,10 @@ namespace windows
       }
 #endif
 
-      return ::success;
-
    }
 
 
-   ::extended::status file_context::del(const ::file::path & psz)
+   void file_context::del(const ::file::path & psz)
    {
 
 
@@ -324,7 +324,7 @@ namespace windows
          if (dwError == 2) // the file does not exist, so delete "failed"
          {
 
-            return ::success;
+            return;
 
          }
 
@@ -332,7 +332,7 @@ namespace windows
 
          strError.format("Failed to delete file \"%s\" error=%d", psz, dwError);
 
-         return ::error_failed;
+         throw_status(error_failed);
 
       }
       else
@@ -365,8 +365,6 @@ namespace windows
          }
       }
 #endif
-
-      return ::success;
 
    }
 
@@ -421,7 +419,7 @@ namespace windows
    }
 
 
-   ::extended::transport < ::file::file > file_context::resource_get_file(const ::file::path & path)
+   file_pointer file_context::resource_get_file(const ::file::path & path)
    {
 
       auto pfile = create_memory_file();
@@ -475,9 +473,7 @@ namespace windows
    }
 
 
-
-
-   bool file_context::get_status(const ::file::path & path, ::file::file_status & rStatus)
+   void file_context::get_status(const ::file::path & path, ::file::file_status & rStatus)
    {
 
       // attempt to fully qualify path first
@@ -486,15 +482,23 @@ namespace windows
       wstrFileName = ::str::international::utf8_to_unicode(path);
       if (!vfxFullPath(wstrFullName, wstrFileName))
       {
+         
          rStatus.m_strFullName.Empty();
-         return false;
+         
+         throw_status(error_failed);
+
       }
+
       ::str::international::unicode_to_utf8(rStatus.m_strFullName, wstrFullName);
 
       WIN32_FIND_DATAW findFileData;
       HANDLE hFind = FindFirstFileW((LPWSTR)(const widechar *)wstrFullName, &findFileData);
       if (hFind == INVALID_HANDLE_VALUE)
-         return false;
+      {
+
+         throw_status(error_failed);
+
+      }
       VERIFY(FindClose(hFind));
 
       // strip attribute of NORMAL bit, our API doesn't have a "normal" bit.
@@ -519,7 +523,7 @@ namespace windows
       if (rStatus.m_atime.get_time() == 0)
          rStatus.m_atime = rStatus.m_mtime;
 
-      return true;
+      //return true;
 
    }
 
@@ -678,7 +682,8 @@ namespace windows
    //   }
    //}
 
-   ::extended::status file_context::set_status(const ::file::path & path, const ::file::file_status & status)
+
+   void file_context::set_status(const ::file::path & path, const ::file::file_status & status)
    {
 
       wstring pszFileName(path);
@@ -757,21 +762,29 @@ namespace windows
          if (hFile == INVALID_HANDLE_VALUE)
          {
 
-            return ::last_error_to_status(::GetLastError());
+            auto estatus = ::last_error_to_status(::GetLastError());
+
+            throw_status(estatus);
+
+            return;
 
          }
 
          if (!SetFileTime((HANDLE)hFile, pCreationTime, pLastAccessTime, pLastWriteTime))
          {
 
-            return ::last_error_to_status(::GetLastError());
+            auto estatus = ::last_error_to_status(::GetLastError());
+
+            throw_status(estatus);
 
          }
 
          if (!::CloseHandle(hFile))
          {
 
-            return ::last_error_to_status(::GetLastError());
+            auto estatus = ::last_error_to_status(::GetLastError());
+
+            throw_status(estatus);
 
          }
 
@@ -783,13 +796,13 @@ namespace windows
          if (!SetFileAttributesW((LPWSTR)(const widechar *)pszFileName, (::u32)status.m_attribute))
          {
 
-            return ::last_error_to_status(::GetLastError());
+            auto estatus = ::last_error_to_status(::GetLastError());
+
+            throw_status(estatus);
 
          }
 
       }
-
-      return ::success;
 
    }
 
@@ -811,7 +824,7 @@ namespace windows
    //}
 
 
-   file_transport file_context::get_file(const ::payload & payloadFile, const ::file::e_open & eopenFlags)
+   file_pointer file_context::get_file(const ::payload & payloadFile, const ::file::e_open & eopenFlags)
    {
 
       return ::file_context::get_file(payloadFile, eopenFlags);

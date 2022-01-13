@@ -43,23 +43,26 @@ namespace apex
       void node::initialize(::object* pobject)
       {
 
-         auto estatus = ::acme::windows::node::initialize(pobject);
+         //auto estatus = 
+         ::acme::windows::node::initialize(pobject);
 
-         if (!estatus)
-         {
+         //if (!estatus)
+         //{
 
-            return estatus;
+         //   return estatus;
 
-         }
+         //}
 
-         estatus = ::apex::windows_common::node::initialize(pobject);
+         //estatus = 
+         
+         ::apex::windows_common::node::initialize(pobject);
 
-         if (!estatus)
-         {
+         //if (!estatus)
+         //{
 
-            return estatus;
+         //   return estatus;
 
-         }
+         //}
 
 
          //if (!__node_apex_pre_init())
@@ -76,7 +79,7 @@ namespace apex
 
          //}
 
-         return estatus;
+//         return estatus;
 
       }
 
@@ -218,7 +221,7 @@ namespace apex
          }
 
          key._set("SystemUsesLightTheme", dwSystemUseLightTheme);
-         return ::success;
+//         return ::success;
 
       }
 
@@ -240,7 +243,7 @@ namespace apex
 
          key._set("AppsUseLightTheme", dwAppsUseLightTheme);
 
-         return ::success;
+         //return ::success;
 
       }
 
@@ -310,53 +313,57 @@ namespace apex
 
          int i = (int)(iptr) ::ShellExecuteW(nullptr, L"open", wstrFolder, nullptr, nullptr, SW_NORMAL);
 
-         if (i < 32)
-         {
+         //if (i < 32)
+         //{
 
-            switch (i)
-            {
-            case 0:
-               //The operating system is out of memory or resources.
-               return error_no_memory;
-            case ERROR_FILE_NOT_FOUND:
-               return error_file_not_found;
-               //The specified file was not found.
-            case ERROR_PATH_NOT_FOUND:
-               return error_path_not_found;
-               //            The specified path was not found.
-            case          ERROR_BAD_FORMAT:
-               return error_bad_format;
-               //The.exe file is invalid(non - Win32.exe or error in.exe image).
-               //case SE_ERR_ACCESSDENIED:
-               //         return error_access_denied;
-               ////The operating system denied access to the specified file.
-               //SE_ERR_ASSOCINCOMPLETE
-               //The file name association is incomplete or invalid.
-               //SE_ERR_DDEBUSY
-               //The DDE transaction could not be completed because other DDE transactions were being processed.
-               //SE_ERR_DDEFAIL
-               //The DDE transaction failed.
-               //SE_ERR_DDETIMEOUT
-               //The DDE transaction could not be completed because the request timed out.
-               //SE_ERR_DLLNOTFOUND
-               //The specified DLL was not found.
-               //SE_ERR_FNF
-               //The specified file was not found.
-               //SE_ERR_NOASSOC
-               //There is no application associated with the given file name extension.This error will also be returned if you attempt to print a file that is not printable.
-               //SE_ERR_OOM
-               //There was not enough memory to complete the operation.
-               //SE_ERR_PNF
-               //The specified path was not found.
-               //SE_ERR_SHARE
-               //A sharing violation occurred.*/
-            default:
-               return error_failed;
-            }
+            auto estatus = last_error_to_status(i);
 
-         }
+         //   switch (i)
+         //   {
+         //   case 0:
+         //      //The operating system is out of memory or resources.
+         //      return error_no_memory;
+         //   case ERROR_FILE_NOT_FOUND:
+         //      return error_file_not_found;
+         //      //The specified file was not found.
+         //   case ERROR_PATH_NOT_FOUND:
+         //      return error_path_not_found;
+         //      //            The specified path was not found.
+         //   case          ERROR_BAD_FORMAT:
+         //      return error_bad_format;
+         //      //The.exe file is invalid(non - Win32.exe or error in.exe image).
+         //      //case SE_ERR_ACCESSDENIED:
+         //      //         return error_access_denied;
+         //      ////The operating system denied access to the specified file.
+         //      //SE_ERR_ASSOCINCOMPLETE
+         //      //The file name association is incomplete or invalid.
+         //      //SE_ERR_DDEBUSY
+         //      //The DDE transaction could not be completed because other DDE transactions were being processed.
+         //      //SE_ERR_DDEFAIL
+         //      //The DDE transaction failed.
+         //      //SE_ERR_DDETIMEOUT
+         //      //The DDE transaction could not be completed because the request timed out.
+         //      //SE_ERR_DLLNOTFOUND
+         //      //The specified DLL was not found.
+         //      //SE_ERR_FNF
+         //      //The specified file was not found.
+         //      //SE_ERR_NOASSOC
+         //      //There is no application associated with the given file name extension.This error will also be returned if you attempt to print a file that is not printable.
+         //      //SE_ERR_OOM
+         //      //There was not enough memory to complete the operation.
+         //      //SE_ERR_PNF
+         //      //The specified path was not found.
+         //      //SE_ERR_SHARE
+         //      //A sharing violation occurred.*/
+         //   default:
+         //      return error_failed;
+         //   }
 
-         return ::success;
+         //}
+
+            throw_status(estatus);
+
+         //return ::success;
 
       }
 
@@ -405,12 +412,13 @@ namespace apex
 
          set["privileged"] = true;
 
-         if (!call_sync(path, strParam, path.folder(), ::e_display_none, 3_minute, set))
-         {
+         //if (!call_sync(path, strParam, path.folder(), ::e_display_none, 3_minute, set))
+         call_sync(path, strParam, path.folder(), ::e_display_none, 3_minute, set);
+         //{
 
-            return false;
+         //   return false;
 
-         }
+         //}
 
          //if (CreateProcessW(wstrPath, wstrParam, nullptr, nullptr, false, 0, nullptr, wstrSystem, &si, &pi))
          //{
@@ -429,7 +437,7 @@ namespace apex
 
          //CloseHandle(pi.hthread);
 
-         return true;
+//         return true;
 
       }
 
@@ -437,32 +445,36 @@ namespace apex
       void node::system_main()
       {
 
-         auto estatus = m_psystem->m_papexsystem->m_papexnode->thread_initialize(m_psystem->m_papexsystem);
+         //auto estatus = 
+         m_psystem->m_papexsystem->m_papexnode->thread_initialize(m_psystem->m_papexsystem);
 
-         if (!estatus)
-         {
+         //if (!estatus)
+         //{
 
-            return estatus;
+         //   return estatus;
 
-         }
+         //}
 
-         estatus = m_psystem->on_start_system();
+         //estatus = 
+         
+         m_psystem->on_start_system();
 
-         if (!estatus)
-         {
+         //if (!estatus)
+         //{
 
-            return estatus;
+         //   return estatus;
 
-         }
+         //}
 
-         estatus = m_psystem->main();
+         //estatus = 
+         m_psystem->main();
 
-         if (!estatus)
-         {
+         //if (!estatus)
+         //{
 
-            return estatus;
+         //   return estatus;
 
-         }
+         //}
 
          //estatus = m_psystem->inline_term();
 
@@ -473,7 +485,7 @@ namespace apex
 
          //}
 
-         return estatus;
+         //return estatus;
 
 
       }
@@ -483,9 +495,6 @@ namespace apex
       {
 
 #ifdef WINDOWS_DESKTOP
-
-         try
-         {
 
             ::windows::registry::key key(HKEY_LOCAL_MACHINE, "SOFTWARE\\Mozilla\\Mozilla Firefox");
 
@@ -499,15 +508,8 @@ namespace apex
 
             key.get("Install Directory", strInstallDirectory);
 
-         }
-         catch (const void& estatus)
-         {
 
-            return estatus;
-
-         }
-
-         return ::success;
+         //return ::success;
 
 #else
 
@@ -527,7 +529,7 @@ namespace apex
 
          //m_atomSystemTopic    = ::GlobalAddAtomW(L"system");
 
-         return ::success;
+//         return ::success;
 
       }
 
@@ -538,7 +540,7 @@ namespace apex
 
 
          //defer_initialize_winsock();
-         return success;
+//         return success;
 
       }
 
@@ -767,7 +769,12 @@ namespace apex
          ::i32 lResult = RegQueryValueExW(hkey, wstring(pszSubKey), nullptr, &dwType, nullptr, &dwSize);
 
          if (lResult != ERROR_SUCCESS)
+         {
+          
             return lResult;
+
+         }
+
          ASSERT(dwType == REG_SZ || dwType == REG_MULTI_SZ || dwType == REG_EXPAND_SZ);
          if (dwType == REG_SZ || dwType == REG_MULTI_SZ || dwType == REG_EXPAND_SZ)
          {
@@ -794,11 +801,9 @@ namespace apex
 
 
       HICON node::extract_icon(HINSTANCE hInst, const ::string & pszExeFileName, ::u32 nIconIndex)
-
       {
 
          return ::ExtractIconW(hInst, ::str::international::utf8_to_unicode(pszExeFileName), nIconIndex);
-
 
       }
 
@@ -809,13 +814,13 @@ namespace apex
          if (!::DeleteFileW(::str::international::utf8_to_unicode(pFileName)))
          {
 
-            DWORD dwLastError = ::GetLastError();
+            auto lastError = ::GetLastError();
 
-            return last_error_to_status(dwLastError);
+            auto estatus = last_error_to_status(lastError);
+
+            throw_status(estatus);
 
          }
-
-         return ::success;
 
       }
 
@@ -879,16 +884,18 @@ namespace apex
       void node::node_post(const ::routine& routine)
       {
 
-         auto estatus = m_psystem->m_papexsystem->post_routine(routine);
+         //auto estatus = 
+         
+         m_psystem->m_papexsystem->post_routine(routine);
 
-         if (!estatus)
-         {
+         //if (!estatus)
+         //{
 
-            return estatus;
+         //   return estatus;
 
-         }
+         //}
 
-         return estatus;
+         //return estatus;
 
       }
 

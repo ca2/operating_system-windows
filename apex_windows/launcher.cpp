@@ -15,7 +15,9 @@ namespace windows
       if (!ensure_executable())
       {
 
-         return false;
+         //return false;
+
+         return;
 
       }
 
@@ -31,7 +33,7 @@ namespace windows
 
       pnode->call_async(strPath, strParams, strDir, e_display_none, m_bPrivileged);
 
-      return true;
+//      return true;
 
    }
 

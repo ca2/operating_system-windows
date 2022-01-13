@@ -26,37 +26,37 @@ namespace windows
       
          operator HKEY();
 
-         void open(HKEY hkey, const ::string & pcszSubKey, bool bCreate = false);
-         void _open(HKEY hkey, const ::string & pcszSubKey, bool bCreate = false);
+         bool open(HKEY hkey, const ::string & pcszSubKey, bool bCreate = false);
+         bool _open(HKEY hkey, const ::string & pcszSubKey, bool bCreate = false);
 
          
-         void defer_create(HKEY hkey, const ::string & pcszSubKey);
-         inline void _defer_create(HKEY hkey, const ::string & pcszSubKey) { return _open(hkey, pcszSubKey, true); }
+         bool defer_create(HKEY hkey, const ::string & pcszSubKey);
+         inline bool _defer_create(HKEY hkey, const ::string & pcszSubKey) { return _open(hkey, pcszSubKey, true); }
 
 
          void close();
 
          
-         void value(void * pvalue, const ::string & pcszValueName, ::u32 & dwType, ::u32 & cbValue);
-         void _value(void * pvalue, const ::string & pcszValueName, ::u32& dwType, ::u32& cbValue);
+         bool value(void * pvalue, const ::string & pcszValueName, ::u32 & dwType, ::u32 & cbValue);
+         bool _value(void * pvalue, const ::string & pcszValueName, ::u32& dwType, ::u32& cbValue);
 
          void _set_value(const void* pvalue, const ::string & pcszValueName, ::u32 dwType, ::u32 cbValue);
 
 
-         void value_type_and_size(const ::string & pcszValueName, ::u32 & dwType, ::u32 & cbValue);
-         void _value_type_and_size(const ::string & pcszValueName, ::u32& dwType, ::u32& cbValue) { return _value(nullptr, pcszValueName, dwType, cbValue); }
+         bool value_type_and_size(const ::string & pcszValueName, ::u32 & dwType, ::u32 & cbValue);
+         bool _value_type_and_size(const ::string & pcszValueName, ::u32& dwType, ::u32& cbValue) { return _value(nullptr, pcszValueName, dwType, cbValue); }
 
 
-         void get(const ::string & pcszValueName, ::u32 & dwValue);
-         void _get(const ::string & pcszValueName, ::u32 & dwValue);
+         bool get(const ::string & pcszValueName, ::u32 & dwValue);
+         bool _get(const ::string & pcszValueName, ::u32 & dwValue);
 
          
-         void get(const ::string & pcszValueName, string & strValue);
-         void _get(const ::string & pcszValueName, string &strValue);
+         bool get(const ::string & pcszValueName, string & strValue);
+         bool _get(const ::string & pcszValueName, string &strValue);
 
 
-         void get(const ::string & pcszValueName, memory & mem);
-         void _get(const ::string & pcszValueName, memory & mem);
+         bool get(const ::string & pcszValueName, memory & mem);
+         bool _get(const ::string & pcszValueName, memory & mem);
 
 
          ::payload get(const ::string & pcszValueName);

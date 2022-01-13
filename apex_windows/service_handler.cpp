@@ -121,7 +121,7 @@ namespace windows
       if (::QueueUserWorkItem(thread_proc, this, flags))
       {
 
-         return error_failed;
+         throw_status(error_failed);
 
       }
 
@@ -132,7 +132,7 @@ namespace windows
 
          });
 
-      return ::success;
+      //return ::success;
 
    }
 
@@ -165,7 +165,18 @@ namespace windows
 
       service * pservice = (service *)pcontext;
       
-      auto estatus = pservice->run();
+      ::e_status3 estatus = ::success;
+
+      try
+      {
+
+         pservice->run();
+
+      }
+      catch (...)
+      {
+
+      }
 
       return (DWORD) estatus.m_estatus;
 
@@ -358,7 +369,7 @@ namespace windows
    void service_handler::start_service()
    {
 
-      return ::error_failed;
+      ///return ::error_failed;
 
    }
 
@@ -366,7 +377,7 @@ namespace windows
    void service_handler::stop_service()
    {
 
-      return ::error_failed;
+      //return ::error_failed;
 
    }
 

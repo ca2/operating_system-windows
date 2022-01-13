@@ -25,8 +25,8 @@ namespace windows
 
       using ::dir_context::ls;
       // rls fetchs should set a meaningful m_iRelative value at each returned path
-      virtual ::file::listing & ls(::file::listing & path);
-      virtual ::file::listing & ls_relative_name(::file::listing & path);
+      virtual bool ls(::file::listing & path);
+      virtual bool ls_relative_name(::file::listing & path);
 
 
       virtual bool  is_impl(const ::file::path & path) override;
@@ -36,8 +36,8 @@ namespace windows
       virtual bool  has_subdir(const ::file::path & path);
 
       virtual ::file::listing & root_ones(::file::listing & listing);
-      virtual bool mk(const ::file::path & path);
-      virtual bool rm(const ::file::path & path, bool bRecursive = true);
+      //virtual void mk(const ::file::path & path);
+      //virtual void rm(const ::file::path & path, bool bRecursive = true);
 
 
       virtual ::file::path name(const ::file::path & path);

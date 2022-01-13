@@ -72,7 +72,7 @@ namespace windows
       //m_hMutexRead = CreateMutex(nullptr, false, nullptr);
       //m_hMutexWrite = CreateMutex(nullptr, false, nullptr);
 
-      return ::success;
+      //return ::success;
 
    }
 

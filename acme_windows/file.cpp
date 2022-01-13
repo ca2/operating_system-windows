@@ -40,14 +40,14 @@ namespace windows
       ASSERT(__is_valid_string(pszFileName));
 
 
-      if (!open(pszFileName, eopen))
+      open(pszFileName, eopen);
 
-      {
+      //{
 
-         ::file::throw_status(error_file, -1, pszFileName);
+      //   ::file::throw_status(error_file, -1, pszFileName);
 
 
-      }
+      //}
 
    }
 
@@ -62,7 +62,7 @@ namespace windows
    }
 
 
-   ::extended::status file::open(const ::file::path& pszFileName, const ::file::e_open & eopenParam)
+   void file::open(const ::file::path& pszFileName, const ::file::e_open & eopenParam)
    {
 
       auto eopen = eopenParam;
@@ -72,7 +72,7 @@ namespace windows
 
          //TRACE("windows::file::open file with empty name!!");
 
-         return ::error_failed;
+         throw_status(error_failed);
 
       }
 
@@ -91,7 +91,7 @@ namespace windows
       if ((eopen & ::file::e_open_defer_create_directory) && (eopen & ::file::e_open_write))
       {
 
-                  auto psystem = m_psystem;
+         auto psystem = m_psystem;
 
          auto pacmedir = psystem->m_pacmedir;
 
@@ -100,10 +100,10 @@ namespace windows
       }
 
       m_handleFile = INVALID_HANDLE_VALUE;
+
       m_path.Empty();
 
       m_path = pszFileName;
-
 
       ASSERT(sizeof(HANDLE) == sizeof(uptr));
       ASSERT(::file::e_open_share_compat == 0);
@@ -213,16 +213,16 @@ namespace windows
 
          }
 
-         void estatus = last_error_to_status(dwLastError);
+         ::e_status3 estatus = last_error_to_status(dwLastError);
 
          if (::file::should_ignore_file_exception_callstack(estatus))
          {
 
-            return ::error_failed;
+            throw_status(error_failed);
 
          }
 
-         return estatus;
+         throw_status(estatus);
 
 
       }
@@ -233,7 +233,7 @@ namespace windows
 
       m_eopen = eopen;
 
-      return ::success;
+      //return ::success;
 
    }
 
@@ -286,6 +286,7 @@ namespace windows
       }
 
       return (::u32)dwRead;
+
    }
 
 
@@ -296,7 +297,11 @@ namespace windows
       ASSERT(m_handleFile != INVALID_HANDLE_VALUE);
 
       if (nCount == 0)
+      {
+
          return;     // avoid Win32 "null-write" option
+
+      }
 
       ASSERT(pdata != nullptr);
 

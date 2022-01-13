@@ -1882,13 +1882,13 @@ pacmedir->create CreateDirectoryW last error(%d)=%s", dwError, pszError);
       //}
 
 
-//      bool acme_dir::_create(const char * pathParam)
+//      void acme_dir::__create(const char * pathParam)
 //      {
 //
 //         if (is(pathParam))
 //         {
 //
-//            return true;
+//            return;
 //
 //         }
 //
@@ -1902,10 +1902,9 @@ pacmedir->create CreateDirectoryW last error(%d)=%s", dwError, pszError);
 //
 //         ::file::patha stra;
 //
-//
 //         path.ascendants_path(stra);
 //
-//         index i = stra.get_upper_bound();
+//         index i = stra.get_upper_bound() - 1;
 //
 //         for (; i >= 0; i--)
 //         {
@@ -1924,7 +1923,7 @@ pacmedir->create CreateDirectoryW last error(%d)=%s", dwError, pszError);
 //         if (i < 0)
 //         {
 //
-//            return true;
+//            return;
 //
 //         }
 //
@@ -1933,89 +1932,67 @@ pacmedir->create CreateDirectoryW last error(%d)=%s", dwError, pszError);
 //
 //            string strDir = stra[i];
 //
-//            if (create_directory(strDir))
+//            try
 //            {
+//
+//               create_directory(strDir);
 //
 //            }
-//            else
+//            catch(const ::exception & exception)
 //            {
 //
-//               DWORD dwError = ::GetLastError();
-//
-//               if (dwError == ERROR_ALREADY_EXISTS)
+//               if(exception.m_estatus == error_already_exists)
 //               {
 //
-//                  try
+//                  if (m_pacmefile->exists(strDir))
 //                  {
 //
 //                     m_pacmefile->delete_file(strDir);
 //
-//                  }
-//                  catch (...)
-//                  {
-//
-//                  }
-//
-//                  string str = stra[i];
-//
-//                  str.trim_right("\\/");
-//
-//                  try
-//                  {
-//
-//                     m_pacmefile->delete_file(str);
-//
-//                  }
-//                  catch (...)
-//                  {
-//
-//                  }
-//
-//                  if (create_directory(stra[i]))
-//                  {
-//
-//                     continue;
-//
-//                  }
-//                  else
-//                  {
-//
-//                     dwError = ::GetLastError();
+//                     create_directory(strDir);
 //
 //                  }
 //
 //               }
+//               else
+//               {
 //
-//#ifdef WINDOWS_DESKTOP
+//                  throw exception;
 //
-//               WCHAR * pwszError;
+//               }
 //
-//               FormatMessage(FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_SYSTEM, nullptr, dwError, 0, (WCHAR *)&pwszError, 8, nullptr);
-//
-//               //TRACE("         auto psystem = m_psystem;
-//
-////         auto pacmedir = psystem->m_pacmedir;
+////#ifdef WINDOWS_DESKTOP
 ////
-////pacmedir->create CreateDirectoryW last error(%d)=%s", dwError, pszError);
+////               WCHAR * pwszError;
 ////
-//               ::LocalFree(pwszError);
-//
-//               //m_isdirmap.set(stra[i], false);
-//
-//#endif
-//
-//               return false;
+////               FormatMessage(FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_SYSTEM, nullptr, dwError, 0, (WCHAR *)&pwszError, 8, nullptr);
+////
+////               //TRACE("         auto psystem = m_psystem;
+////
+//////         auto pacmedir = psystem->m_pacmedir;
+//////
+//////pacmedir->create CreateDirectoryW last error(%d)=%s", dwError, pszError);
+//////
+////               ::LocalFree(pwszError);
+////
+////               //m_isdirmap.set(stra[i], false);
+////
+////#endif
+////
+////               //return false;
 //
 //            }
 //
 //         }
 //
-//         return true;
+//         //return true;
 //
-//      }
+//      //}
+//
+//   }
 
 
-   status < string > acme_dir::get_current()
+   string acme_dir::get_current()
    {
 
       auto size = GetCurrentDirectoryW(0, nullptr);
@@ -2047,11 +2024,11 @@ pacmedir->create CreateDirectoryW last error(%d)=%s", dwError, pszError);
 
          auto estatus = last_error_to_status(dwLastError);
 
-         return estatus;
+         throw_status(estatus);
 
       }
 
-      return ::success;
+      //return ::success;
 
    }
 

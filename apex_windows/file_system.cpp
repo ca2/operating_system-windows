@@ -22,18 +22,20 @@ namespace windows
    void file_system::init_system()
    {
 
-      auto estatus = ::file_system::init_system();
+      //auto estatus = 
+      
+      ::file_system::init_system();
 
-      if (!estatus)
-      {
+      //if (!estatus)
+      //{
 
-         return estatus;
+      //   return estatus;
 
-      }
+      //}
 
       //m_pathModule = (nullptr);
 
-      return estatus;
+//      return estatus;
 
    }
 

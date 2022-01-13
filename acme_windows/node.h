@@ -73,10 +73,10 @@ namespace acme
          virtual void datetime_to_filetime(filetime_t* pFileTime, const ::datetime::time& time) override;
 
 
-         virtual void last_error_to_status(DWORD dwLastError);
+         virtual ::e_status3 last_error_to_status(DWORD dwLastError);
 
 
-         virtual void ExitCode_to_status(DWORD dwExitCode);
+         virtual ::e_status3 ExitCode_to_status(DWORD dwExitCode);
 
 
          virtual string audio_get_default_library_name() override;
@@ -142,7 +142,7 @@ namespace acme
 
          virtual ::wstring expand_environment_variables(const ::wstring & wstr);
 
-         void implement(__transport(::acme::node) & pnode, __transport(class ::system) & psystem)override;
+         void implement(__pointer(::acme::node) & pnode, __pointer(class ::system) & psystem)override;
 
 
          void on_start_system() override;

@@ -317,16 +317,16 @@ void call_async(const char * pszPath, const char * pszParam, const char * pszDir
 
       auto estatus = last_error_to_status(dwError);
 
-      return estatus;
+      throw_status(estatus);
 
    }
 
-   return ::success;
+   //return ::success;
 
 }
 
 
-void call_sync(const char * pszPath, const char * pszParam, const char * pszDir, ::e_display edisplay, const ::duration & durationTimeout, ::property_set & set)
+void call_sync(const char * pszPath, const char * pszParam, const char * pszDir, ::e_display edisplay, const ::duration & durationTimeout, ::property_set & set, int * piExitCode)
 {
 
    SHELLEXECUTEINFOW infoa;
@@ -358,9 +358,11 @@ void call_sync(const char * pszPath, const char * pszParam, const char * pszDir,
    if (!::ShellExecuteExW(&infoa))
    {
 
-      DWORD dwLastError = ::GetLastError();
+      auto lastError = ::GetLastError();
 
-      return -1;
+      auto estatus = last_error_to_status(lastError);
+
+      throw_status(estatus);
 
    }
 
@@ -416,24 +418,33 @@ void call_sync(const char * pszPath, const char * pszParam, const char * pszDir,
 
    int iExitCode = dwExitCode;
 
-   if (iExitCode == 0)
+   if (::is_set(piExitCode))
    {
 
-      return ::success;
+      *piExitCode = iExitCode;
 
    }
-   else if(iExitCode > 0)
-   {
-    
-      return e_status_process_result_positive_base + iExitCode;
 
-   }
-   else
-   {
+   //if (iExitCode == 0)
+   //{
 
-      return e_status_process_result_negative_base + iExitCode;
+   //   //return ::success;
 
-   }
+   //   return;
+
+   //}
+   //else if(iExitCode > 0)
+   //{
+   // 
+   //   return e_status_process_result_positive_base + iExitCode;
+
+   //}
+   //else
+   //{
+
+   //   return e_status_process_result_negative_base + iExitCode;
+
+   //}
 
 }
 

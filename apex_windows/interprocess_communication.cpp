@@ -112,7 +112,8 @@ namespace windows
                if (!task_get_run())
                {
                   
-                  return error_failed;
+                  ///return error_failed;
+                  throw_status(error_failed);
 
                }
                
@@ -137,7 +138,7 @@ namespace windows
             if (plauncher->m_iStart <= 0)
             {
 
-               return error_failed;
+               throw_status(error_failed);
 
             }
 
@@ -151,7 +152,7 @@ namespace windows
       
       m_strBaseChannel = strKey;
 
-      return ::success;
+      //return ::success;
 
    }
 
@@ -162,7 +163,8 @@ namespace windows
       if (get_hwnd() == nullptr)
       {
 
-         return ::success;
+         return;
+         //return ::success;
 
       }
 
@@ -170,7 +172,7 @@ namespace windows
 
       m_strBaseChannel = "";
 
-      return ::success;
+      //return ::success;
 
    }
 
@@ -181,7 +183,8 @@ namespace windows
       if (!is_tx_ok())
       {
 
-         return false;
+         //return false;
+         throw_status(error_failed);
 
       }
 
@@ -205,7 +208,7 @@ namespace windows
          if (!::SendMessageTimeout((HWND)get_hwnd(), WM_COPYDATA, (WPARAM)0, (LPARAM)&cds, SMTO_ABORTIFHUNG, (class ::wait)durationTimeout, &dwptr))
          {
 
-            return false;
+            throw_status(error_failed);
 
          }
 
@@ -214,13 +217,13 @@ namespace windows
          if (dwError == ERROR_TIMEOUT)
          {
 
-            return false;
+            throw_status(error_failed);
 
          }
 
       }
 
-      return true;
+      //return true;
 
    }
 
@@ -231,14 +234,14 @@ namespace windows
       if (message == 0x80000000)
       {
 
-         return error_failed;
+         throw_status(error_failed);
 
       }
 
       if (!is_tx_ok())
       {
 
-         return error_failed;
+         throw_status(error_failed);
 
       }
 
@@ -274,7 +277,7 @@ namespace windows
          if (!::SendMessageTimeout((HWND)get_hwnd(), WM_COPYDATA, (WPARAM)0, (LPARAM)&cds, SMTO_BLOCK, (class ::wait)durationTimeout, &dwptr))
          {
 
-            return false;
+            throw_status(error_failed);
 
          }
 
@@ -283,13 +286,13 @@ namespace windows
          if (dwError == ERROR_TIMEOUT)
          {
 
-            return error_failed;
+            throw_status(error_failed);
 
          }
 
       }
 
-      return ::success;
+      //return ::success;
 
    }
 
@@ -351,8 +354,11 @@ namespace windows
 
       if (get_hwnd() == nullptr)
       {
+         
          unsigned int dwLastError = ::GetLastError();
-         return false;
+         
+         throw_status(error_failed);
+
       }
 
       if (!ChangeWindowMessageFilterEx((HWND)get_hwnd(), WM_COPYDATA, MSGFLT_ADD, NULL))
@@ -368,7 +374,7 @@ namespace windows
 
       //m_strWindowProcModule = pszWindowProcModule;
 
-      return true;
+      //return true;
 
    }
 
@@ -385,7 +391,7 @@ namespace windows
 
       }
 
-      return ::success;
+      //return ::success;
 
    }
 

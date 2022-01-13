@@ -29,14 +29,16 @@ namespace windows
    void dir_context::initialize(::object * pobject)
    {
 
-      auto estatus = ::object::initialize(pobject);
+      //auto estatus = 
+      
+      ::object::initialize(pobject);
 
-      if (!estatus)
-      {
+      //if (!estatus)
+      //{
 
-         return estatus;
+      //   return estatus;
 
-      }
+      //}
 
       __pointer(::apex::system) psystem = get_system();
 
@@ -44,7 +46,7 @@ namespace windows
 
       __refer(m_pdirsystem, psystem->m_pdirsystem);
 
-      return ::success;
+      //return ::success;
 
 
 
@@ -54,14 +56,16 @@ namespace windows
    void dir_context::init_system()
    {
 
-      auto estatus = ::dir_context::init_system();
+      //auto estatus = 
+      
+      ::dir_context::init_system();
 
-      if (!estatus)
-      {
+      //if (!estatus)
+      //{
 
-         return estatus;
+      //   return estatus;
 
-      }
+      //}
 
       //auto pdocument = create_xml_document();
 
@@ -95,7 +99,7 @@ namespace windows
 
       //}
 
-      return ::success;
+      //return ::success;
 
    }
 
@@ -375,18 +379,20 @@ namespace windows
    }
 
 
-
-
-
-   ::file::listing & dir_context::ls(::file::listing & listing)
+   bool dir_context::ls(::file::listing & listing)
    {
+
+      if (::dir_context::ls(listing))
+      {
+
+         return true;
+
+      }
 
       if (listing.m_bRecursive)
       {
 
-
          index iStart = listing.get_size();
-
 
          {
 
@@ -395,17 +401,6 @@ namespace windows
             __scoped_restore(listing.m_pathFinal);
 
             __scoped_restore(listing.m_eextract);
-
-            if (::dir_context::ls(listing).succeeded())
-            {
-
-               listing.m_statusresult = ::error_failed;
-
-               return listing;
-
-            }
-
-            listing.m_statusresult.clear();
 
             ::file::listing dira;
 
@@ -417,7 +412,11 @@ namespace windows
                ::file::path dir_context = dira[i];
 
                if (dir_context == listing.m_pathUser)
+               {
+
                   continue;
+
+               }
 
                listing.m_pathUser = dir_context;
 
@@ -473,7 +472,7 @@ namespace windows
          else
          {
 
-            listing.m_statusresult = ::error_failed;
+            throw_status(error_failed);
 
          }
 
@@ -487,15 +486,6 @@ namespace windows
       }
       else
       {
-
-         if (::dir_context::ls(listing).succeeded())
-         {
-
-            return listing;
-
-         }
-
-         listing.m_statusresult.clear();
 
          if (listing.m_pathFinal.is_empty())
          {
@@ -558,14 +548,20 @@ namespace windows
 
       }
 
-      return listing;
+      return true;
 
    }
 
 
-   ::file::listing & dir_context::ls_relative_name(::file::listing & listing)
+   bool dir_context::ls_relative_name(::file::listing & listing)
    {
 
+      if (::dir_context::ls_relative_name(listing))
+      {
+
+         return true;
+
+      }
 
       if (listing.m_bRecursive)
       {
@@ -581,15 +577,6 @@ namespace windows
             __scoped_restore(listing.m_pathFinal);
 
             __scoped_restore(listing.m_eextract);
-
-            if (::dir_context::ls(listing).succeeded())
-            {
-
-               listing.m_statusresult = ::error_failed;
-
-               return listing;
-
-            }
 
 
             ::file::listing dira;
@@ -662,7 +649,7 @@ namespace windows
          else
          {
 
-            listing.m_statusresult = ::error_failed;
+            //listing.m_statusresult = ::error_failed;
 
          }
 
@@ -676,13 +663,6 @@ namespace windows
       }
       else
       {
-
-         if (::dir_context::ls(listing).succeeded())
-         {
-
-            return listing;
-
-         }
 
          file_find file_find;
 
@@ -735,13 +715,12 @@ namespace windows
 
       }
 
-      return listing;
+      return true;
 
    }
 
 
    bool dir_context::is_impl(const ::file::path & pcszPath)
-
    {
 
       if (::dir_context::is_impl(pcszPath))
@@ -890,163 +869,179 @@ namespace windows
 
    }
 
-   bool dir_context::mk(const ::file::path & path)
-   {
 
-      if (is(path))
-      {
+   //void dir_context::create(const ::file::path & path)
+   //{
 
-         return true;
+   //   m_psystem->m_pacmedir->create(path);
 
-      }
+   //   //}
+   //   //catch (...)
+   //   //{
 
-      ::file::patha stra;
 
-      path.ascendants_path(stra);
 
-      index i = stra.get_upper_bound();
+   //   //}
 
-      for (; i >= 0; i--)
-      {
+   //   //if (is(path))
+   //   //{
 
-         string strDir = stra[i];
+   //   //   return true;
 
-         if (is(strDir))
-         {
+   //   //}
 
-            break;
+   //   //::file::patha stra;
 
-         }
+   //   //path.ascendants_path(stra);
 
-      }
+   //   //index i = stra.get_upper_bound();
 
-      if (i < 0)
-      {
+   //   //for (; i >= 0; i--)
+   //   //{
 
-         return true;
+   //   //   string strDir = stra[i];
 
-      }
+   //   //   if (is(strDir))
+   //   //   {
 
-      for (; i < stra.get_count(); i++)
-      {
+   //   //      break;
 
-         string strDir = stra[i];
+   //   //   }
 
-         if (m_psystem->m_pacmedir->create_directory(strDir))
-         {
+   //   //}
 
-            //            m_isdirmap.set(strDir, true, 0);
+   //   //if (i < 0)
+   //   //{
 
-         }
-         else
-         {
+   //   //   return true;
 
-            DWORD dwError = ::GetLastError();
+   //   //}
 
-            if (dwError == ERROR_ALREADY_EXISTS)
-            {
+   //   //for (; i < stra.get_count(); i++)
+   //   //{
 
-               string str;
+   //   //   string strDir = stra[i];
 
-               str = "\\\\?\\" + strDir;
+   //   //   try
+   //   //   {
 
-               str.trim_right("\\/");
+   //   //      m_psystem->m_pacmedir->create_directory(strDir)
 
-               try
-               {
+   //   //   }
+   //   //   catch(...)
 
-                  m_pcontext->m_papexcontext->file().del(str);
+   //   //   //if (m_psystem->m_pacmedir->create_directory(strDir))
+   //   //   {
 
-               }
-               catch (...)
-               {
+   //   //      //            m_isdirmap.set(strDir, true, 0);
 
-               }
+  
+   //   //      DWORD dwError = ::GetLastError();
 
-               str = stra[i];
+   //   //      if (dwError == ERROR_ALREADY_EXISTS)
+   //   //      {
 
-               str.trim_right("\\/");
+   //   //         string str;
 
-               try
-               {
+   //   //         str = "\\\\?\\" + strDir;
 
-                  m_pcontext->m_papexcontext->file().del(str);
+   //   //         str.trim_right("\\/");
 
-               }
-               catch (...)
-               {
+   //   //         try
+   //   //         {
 
-               }
+   //   //            m_pcontext->m_papexcontext->file().del(str);
 
-               if (m_psystem->m_pacmedir->create_directory(strDir))
-               {
+   //   //         }
+   //   //         catch (...)
+   //   //         {
 
-                  //                  m_isdirmap.set(strDir, true, 0);
+   //   //         }
 
-                  continue;
+   //   //         str = stra[i];
 
-               }
+   //   //         str.trim_right("\\/");
 
-               //   m_isdirmap.set(strDir, false, 0);
+   //   //         try
+   //   //         {
 
-               dwError = ::GetLastError();
+   //   //            m_pcontext->m_papexcontext->file().del(str);
 
-               WCHAR * pwszError;
+   //   //         }
+   //   //         catch (...)
+   //   //         {
 
-               FormatMessageW(FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_SYSTEM, nullptr, dwError, 0, (WCHAR *) &pwszError, 8, nullptr);
+   //   //         }
 
-               //TRACE("dir_context::mk CreateDirectoryW last error(%d)=%s", dwError, pszError);
+   //   //         if (m_psystem->m_pacmedir->create_directory(strDir))
+   //   //         {
 
-               ::LocalFree(pwszError);
+   //   //            //                  m_isdirmap.set(strDir, true, 0);
 
-               //m_isdirmap.set(stra[i], false);
+   //   //            continue;
 
-               return false;
+   //   //         }
 
-            }
+   //   //         //   m_isdirmap.set(strDir, false, 0);
 
-         }
+   //   //         dwError = ::GetLastError();
 
-      }
+   //   //         WCHAR * pwszError;
 
-      return true;
+   //   //         FormatMessageW(FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_SYSTEM, nullptr, dwError, 0, (WCHAR *) &pwszError, 8, nullptr);
 
-   }
+   //   //         //TRACE("dir_context::mk CreateDirectoryW last error(%d)=%s", dwError, pszError);
 
+   //   //         ::LocalFree(pwszError);
 
-   bool dir_context::rm(const ::file::path & path, bool bRecursive)
-   {
+   //   //         //m_isdirmap.set(stra[i], false);
 
-      if (bRecursive)
-      {
-         
-         ::file::listing patha;
+   //   //         return false;
 
-         ls(patha, path);
+   //   //      }
 
-         for (auto & pathItem : patha)
-         {
+   //   //   }
 
-            if (is(pathItem))
-            {
+   //   //}
 
-               rm(pathItem, true);
+   //   //return true;
 
-            }
-            else
-            {
+   //}
 
-               ::DeleteFileW(wstring(pathItem));
 
-            }
+   //void dir_context::rm(const ::file::path & path, bool bRecursive)
+   //{
 
-         }
+   //   if (bRecursive)
+   //   {
+   //      
+   //      ::file::listing patha;
 
-      }
+   //      ls(patha, path);
 
-      return RemoveDirectoryW(wstring(path)) != false;
+   //      for (auto & pathItem : patha)
+   //      {
 
-   }
+   //         if (is(pathItem))
+   //         {
+
+   //            rm(pathItem, true);
+
+   //         }
+   //         else
+   //         {
+
+   //            ::DeleteFileW(wstring(pathItem));
+
+   //         }
+
+   //      }
+
+   //   }
+
+   //   return RemoveDirectoryW(wstring(path)) != false;
+
+   //}
 
 
    //::file::path dir_context::name(const ::file::path & path1)

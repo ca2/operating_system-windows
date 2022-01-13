@@ -8,7 +8,7 @@
 #include "acme/filesystem/filesystem/acme_path.h"
 
 
-void hresult_to_estatus(HRESULT hresult)
+::e_status3 hresult_to_estatus(HRESULT hresult)
 {
 
    if (SUCCEEDED(hresult))
@@ -69,14 +69,14 @@ namespace windows
    }
 
 
-   bool os_context::shutdown(bool bIfPowerOff)
+   void os_context::shutdown(bool bIfPowerOff)
    {
       bool retval = true;
       HANDLE hToken;
       TOKEN_PRIVILEGES tkp;
       if (!OpenProcessToken(GetCurrentProcess(),
                             TOKEN_ADJUST_PRIVILEGES | TOKEN_QUERY, &hToken))
-         return false;
+         throw_status(error_failed);
       LookupPrivilegeValue(nullptr, SE_SHUTDOWN_NAME, &tkp.Privileges[0].Luid);
       tkp.PrivilegeCount = 1;
       tkp.Privileges[0].Attributes = SE_PRIVILEGE_ENABLED;
@@ -89,31 +89,32 @@ namespace windows
       //reset the previlages
       tkp.Privileges[0].Attributes = 0;
       AdjustTokenPrivileges(hToken, false, &tkp, 0, (PTOKEN_PRIVILEGES) nullptr, 0);
-      return retval;
+      //return retval;
    }
 
-   bool os_context::reboot()
+   
+   void os_context::reboot()
    {
       HANDLE hToken;
       TOKEN_PRIVILEGES tkp;
       if (!OpenProcessToken(GetCurrentProcess(),
                             TOKEN_ADJUST_PRIVILEGES | TOKEN_QUERY, &hToken))
-         return false;
+         throw_status(error_failed);
       if(!LookupPrivilegeValue(nullptr, SE_SHUTDOWN_NAME, &tkp.Privileges[0].Luid))
       {
          TRACELASTERROR();
-         return false;
+         throw_status(error_failed);
       }
       tkp.PrivilegeCount = 1;
       tkp.Privileges[0].Attributes = SE_PRIVILEGE_ENABLED;
       if(!AdjustTokenPrivileges(hToken, false, &tkp, 0, (PTOKEN_PRIVILEGES) nullptr, 0))
       {
          TRACELASTERROR();
-         return false;
+         throw_status(error_failed);
       }
       if (GetLastError() == ERROR_NOT_ALL_ASSIGNED)
       {
-         return false;
+         throw_status(error_failed);
       }
       ////if(!LookupPrivilegeValue(nullptr, SE_REMOTE_SHUTDOWN_NAME, &tkp.Privileges[0].Luid))
       ////{
@@ -142,12 +143,12 @@ namespace windows
       SHTDN_REASON_MAJOR_SOFTWARE | SHTDN_REASON_MINOR_INSTALLATION))
       {
          TRACELASTERROR();
-      return false;
+         throw_status(error_failed);
       }
       //reset the previlages
 //      tkp.Privileges[0].Attributes = 0;
  //     AdjustTokenPrivileges(hToken, false, &tkp, 0, (PTOKEN_PRIVILEGES) nullptr, 0);
-      return true;
+      //return true;
    }
 
    void os_context::terminate_processes_by_title(const ::string & lpszName)
@@ -155,7 +156,7 @@ namespace windows
 
       u32 uPid;
 
-      while(get_pid_by_title(lpszName, uPid))
+      while(title_pid(uPid, lpszName))
       {
 
          HANDLE hProcess = ::OpenProcess( PROCESS_QUERY_INFORMATION |
@@ -179,36 +180,61 @@ namespace windows
          return bResult == true;*/
 
       }
+
    }
 
-   bool os_context::get_pid_by_path(const ::string & lpszName, u32 & dwPid)
+
+   bool os_context::path_pid(u32& dwPid, const ::string & lpszName)
    {
+      
       u32_array dwa;
+
       get_all_processes(dwa);
+
       for(i32 i = 0; i < dwa.get_count(); i++)
       {
+
          if(get_process_path(dwa[i]).compare_ci(lpszName) == 0)
          {
+            
             dwPid = dwa[i];
+            
             return true;
+
+            //return;
+
          }
+
       }
-      return false;
+
+      throw_status(error_failed);
+
    }
 
-   bool os_context::get_pid_by_title(const ::string & lpszName, u32 & dwPid)
+
+   bool os_context::title_pid(u32& dwPid, const ::string & lpszName)
    {
+
       u32_array dwa;
+
       get_all_processes(dwa);
+
       for(i32 i = 0; i < dwa.get_count(); i++)
       {
+
          if(get_process_path(dwa[i]).title().compare_ci(lpszName) == 0)
          {
+
             dwPid = dwa[i];
+
             return true;
+
          }
+
       }
+
       return false;
+
    }
 
 
@@ -218,8 +244,6 @@ namespace windows
       return (int) ::get_current_process_id();
 
    }
-
-
 
 
    ::file::path os_context::get_process_path(u32 dwPid)
@@ -329,7 +353,7 @@ namespace windows
          }
 
       }
-      catch (const void & estatus)
+      catch (const ::e_status3 & estatus)
       {
 
          return estatus;
@@ -354,7 +378,7 @@ namespace windows
          key.get("AutoConfigURL", strUrl);
 
       }
-      catch (const void & estatus)
+      catch (const ::e_status3 & estatus)
       {
 
          return estatus;
@@ -366,7 +390,7 @@ namespace windows
    }
 
 
-   bool os_context::local_machine_set_run(const ::string & pszKey, const ::string & pszCommand, const ::string& pszArguments, bool bSet)
+   void os_context::local_machine_set_run(const ::string & pszKey, const ::string & pszCommand, const ::string& pszArguments, bool bSet)
    {
 
       try
@@ -392,16 +416,16 @@ namespace windows
       catch (...)
       {
 
-         return false;
+         //return false;
 
       }
 
-      return true;
+      //return true;
 
    }
 
 
-   bool os_context::local_machine_set_run_once(const ::string & pszKey, const ::string & pszCommand, const ::string& pszArguments, bool bSet)
+   void os_context::local_machine_set_run_once(const ::string & pszKey, const ::string & pszCommand, const ::string& pszArguments, bool bSet)
    {
 
       try
@@ -426,16 +450,16 @@ namespace windows
       catch (...)
       {
 
-         return false;
-
+         //return false;
+         
       }
 
-      return true;
+      //return true;
 
    }
 
 
-   bool os_context::current_user_set_run(const ::string & pszKey, const ::string & pszCommand, const ::string& strArguments, bool bSet)
+   void   os_context::current_user_set_run(const ::string & pszKey, const ::string & pszCommand, const ::string& strArguments, bool bSet)
    {
 
       try
@@ -466,16 +490,16 @@ namespace windows
       catch (...)
       {
 
-         return false;
+//         return false;
 
       }
 
-      return true;
+      ///return true;
 
    }
 
 
-   bool os_context::current_user_set_run_once(const ::string & pszKey, const ::string & pszCommand, const ::string& pszArguments, bool bSet)
+   void os_context::current_user_set_run_once(const ::string & pszKey, const ::string & pszCommand, const ::string& pszArguments, bool bSet)
    {
 
       try
@@ -500,19 +524,19 @@ namespace windows
       catch (...)
       {
 
-         return false;
+         //return false;
 
       }
 
-      return true;
+      //return true;
    }
 
 
-   bool os_context::defer_register_ca2_plugin_for_mozilla()
+   void os_context::defer_register_ca2_plugin_for_mozilla()
    {
 
-      try
-      {
+      //try
+      //{
 
          registry::key key;
 
@@ -530,22 +554,24 @@ namespace windows
 
          key.set("Description", "apex Document");
 
-      }
-      catch (...)
-      {
+      //}
+      //catch (...)
+      //{
 
-         return false;
+      //   return false;
 
-      }
+      //}
 
-      return true;
+      //return true;
+
    }
 
-   bool os_context::file_extension_get_open_with_list_keys(string_array & straKey, const ::string & pszExtension)
+
+   void os_context::file_extension_get_open_with_list_keys(string_array & straKey, const ::string & pszExtension)
    {
 
-      try
-      {
+      //try
+      //{
 
          string strExt;
 
@@ -559,42 +585,41 @@ namespace windows
 
          key.ls_key(straKey);
 
-      }
-      catch (...)
-      {
+      //}
+      //catch (...)
+      //{
 
-         return false;
+      //   return false;
 
-      }
+      //}
 
-      return true;
+      //return true;
 
    }
 
 
-   bool os_context::file_extension_get_open_with_list_commands(string_array & straCommand, const ::string & pszExtension)
+   void os_context::file_extension_get_open_with_list_commands(string_array & straCommand, const ::string & pszExtension)
    {
 
       string_array straKey;
 
-      if (!file_extension_get_open_with_list_keys(straKey, pszExtension))
-      {
+      file_extension_get_open_with_list_keys(straKey, pszExtension);
+      /*{
 
-         return false;
+         __throw_failed(error_failed);
 
-      }
+      }*/
 
-
-      return true;
+      //return true;
 
    }
 
 
-   bool os_context::file_association_set_default_icon(const ::string & pszExtension, const ::string & pszExtensionNamingClass, const ::string & pszIconPath)
+   void os_context::file_association_set_default_icon(const ::string & pszExtension, const ::string & pszExtensionNamingClass, const ::string & pszIconPath)
    {
 
-      try
-      {
+      //try
+      //{
 
       string strExtensionNamingClass(pszExtensionNamingClass);
 
@@ -602,27 +627,27 @@ namespace windows
 
       keyLink3.set("DefaultIcon", pszIconPath);
 
-      }
-      catch (...)
-      {
+      //}
+      //catch (...)
+      //{
 
-         return false;
+      //   return false;
 
-      }
+      //}
 
-      return true;
+      //return true;
 
 
    }
 
 
-   bool os_context::file_association_set_shell_open_command(const ::string & pszExtension, const ::string & pszExtensionNamingClass,  const ::string & pszCommand, const ::string & pszParam)
+   void os_context::file_association_set_shell_open_command(const ::string & pszExtension, const ::string & pszExtensionNamingClass,  const ::string & pszCommand, const ::string & pszParam)
    {
 
-      void estatus = ::success;
+      //::e_status3 estatus = ::success;
 
-      try
-      {
+      //try
+      //{
 
          string strExt;
 
@@ -632,36 +657,16 @@ namespace windows
 
          registry::key key(HKEY_CLASSES_ROOT, strExt, true);
 
-         auto estatusRegistry = key._set(nullptr, strExtensionNamingClass);
-
-         if (!estatusRegistry)
-         {
-
-            estatus = estatusRegistry;
-
-         }
+         key._set(nullptr, strExtensionNamingClass);
 
          registry::key keyLink3(HKEY_CLASSES_ROOT, strExtensionNamingClass + "\\shell", true);
 
-         estatusRegistry = keyLink3._set("", "open");
+         keyLink3._set("", "open");
 
-         if (!estatusRegistry)
-         {
-
-            estatus = estatusRegistry;
-
-         }
 
          registry::key keyLink2(keyLink3, "open", true);
 
-         estatusRegistry = keyLink2._set("", "");
-
-         if (!estatusRegistry)
-         {
-
-            estatus = estatusRegistry;
-
-         }
+         keyLink2._set("", "");
 
          registry::key keyLink1(keyLink2, "command", true);
 
@@ -673,41 +678,34 @@ namespace windows
 
          strFormat.format("\"%s\" %s", strCommand.c_str(), pszParam);
 
-         estatusRegistry = keyLink1._set("", strFormat);
+         keyLink1._set("", strFormat);
 
-         if (!estatusRegistry)
-         {
+      //}
+      //catch (...)
+      //{
 
-            estatus = estatusRegistry;
+      //   return false;
 
-         }
+      //}
 
-      }
-      catch (...)
-      {
+      //if (!estatus)
+      //{
 
-         return false;
+      //   return false;
 
-      }
+      //}
 
-      if (!estatus)
-      {
-
-         return false;
-
-      }
-
-      return true;
+      //return true;
 
 
    }
 
 
-   bool os_context::file_association_get_shell_open_command(const ::string & pszExtension, string & strExtensionNamingClass, string & strCommand, string & strParam)
+   void os_context::file_association_get_shell_open_command(const ::string & pszExtension, string & strExtensionNamingClass, string & strCommand, string & strParam)
    {
 
-      try
-      {
+      //try
+      //{
       string strExt;
 
       strExt = ".";
@@ -741,15 +739,15 @@ namespace windows
       }
 
 
-      }
-      catch (...)
-      {
+      //}
+      //catch (...)
+      //{
 
-         return false;
+      //   return false;
 
-      }
+      //}
 
-      return true;
+      //return true;
 
    }
 
@@ -800,9 +798,10 @@ namespace windows
 
             int iExitCode = 0;
 
-            auto estatus = command_system(strOutput, strError, iExitCode, strCommand);
+            //auto estatus = 
+            command_system(strOutput, strError, iExitCode, strCommand);
 
-            return estatus;
+            //return estatus;
 
          }
 
@@ -1029,7 +1028,7 @@ namespace windows
    }
 
 
-   bool os_context::_getCredentialsForService(const ::string & strService,WCHAR * szUsername,WCHAR *szPassword)
+   void os_context::_getCredentialsForService(const ::string & strService,WCHAR * szUsername,WCHAR *szPassword)
    {
 
       HRESULT hr = S_OK;
@@ -1115,7 +1114,7 @@ namespace windows
       {
          dwResult = GetLastError();
          debug_print("\n getCredentialsForService CredPackAuthenticationBufferW (1) failed: win32 error = 0x%x\n",dwResult);
-         return false;
+         throw_status(error_failed);
       }
 
       // Allocate memory for the input buffer.
@@ -1126,7 +1125,7 @@ namespace windows
 
          debug_print("\n getCredentialsForService CoTaskMemAlloc() Out of memory.\n");
 
-         return false;
+         throw_status(error_failed);
 
       }
 
@@ -1266,7 +1265,12 @@ retry:
 
       }
 
-      return bOk;
+      if (!bOk)
+      {
+
+         throw_status(error_failed);
+
+      }
 
    }
 
@@ -1300,7 +1304,7 @@ retry:
       if (strServiceName.is_empty())
       {
 
-         return false;
+         throw_status(error_failed);
 
       }
 
@@ -1309,9 +1313,9 @@ retry:
       if(hdlSCM == 0)
       {
 
-         u32 dwLastError = ::GetLastError();
+         u32 lastError = ::GetLastError();
 
-         return false;
+         __throw_last_error(lastError);
 
       }
 
@@ -1345,23 +1349,23 @@ retry:
       if(get_application()->is_user_service())
       {
 
-         if(_getCredentialsForService(get_application()->m_strAppId,lpszName,pszPass))
-         {
+         _getCredentialsForService(get_application()->m_strAppId, lpszName, pszPass);
+//         {
 
             pname = lpszName;
             ppass = pszPass;
 
-         }
-         else
-         {
+         //}
+         //else
+         //{
 
-            return false;
+         //   throw_status(error_failed);
 
-         }
+         //}
 
       }
 
-      return enable_service(strServiceName,strDisplayName,strCalling,pname,ppass);
+      enable_service(strServiceName,strDisplayName,strCalling,pname,ppass);
 
    }
 
@@ -1374,11 +1378,11 @@ retry:
       if (strServiceName.is_empty())
       {
 
-         return false;
+         throw_status(error_failed);
 
       }
 
-      return disable_service(strServiceName);
+      disable_service(strServiceName);
 
    }
 
@@ -1391,22 +1395,22 @@ retry:
       if (strServiceName.is_empty())
       {
 
-         return false;
+         throw_status(error_failed);
 
       }
 
-      return start_service(strServiceName);
+      start_service(strServiceName);
 
    }
 
 
-   bool os_context::enable_service(const ::string & strServiceName, const ::string & strDisplayName, const ::string & strCommand, const ::string & strUser, const ::string & strPass)
+   void os_context::enable_service(const ::string & strServiceName, const ::string & strDisplayName, const ::string & strCommand, const ::string & strUser, const ::string & strPass)
    {
 
       if (strServiceName.is_empty())
       {
 
-         return false;
+         throw_status(error_invalid_argument);
 
       }
 
@@ -1415,7 +1419,7 @@ retry:
       if(hdlSCM == 0)
       {
          //::GetLastError()
-         return false;
+         throw_status(error_failed);
 
       }
 
@@ -1444,13 +1448,11 @@ retry:
       if(!hdlServ)
       {
 
-         u32 Ret = ::GetLastError();
-
-         TRACELASTERROR();
+         u32 lastError = ::GetLastError();
 
          CloseServiceHandle(hdlSCM);
 
-         return false;
+         __throw_last_error(lastError);
 
       }
 
@@ -1461,18 +1463,18 @@ retry:
       CloseServiceHandle(hdlServ);
       CloseServiceHandle(hdlSCM);
 
-      return true;
+      //return true;
 
    }
 
 
-   bool os_context::disable_service(const ::string & strServiceName)
+   void os_context::disable_service(const ::string & strServiceName)
    {
 
       if (strServiceName.is_empty())
       {
 
-         return false;
+         throw_status(error_invalid_argument);
 
       }
 
@@ -1481,7 +1483,7 @@ retry:
       if(hdlSCM == 0)
       {
          //::GetLastError();
-         return false;
+         throw_status(error_failed);
       }
 
       SC_HANDLE hdlServ = ::OpenServiceW(
@@ -1491,26 +1493,26 @@ retry:
 
       if(!hdlServ)
       {
-         u32 Ret = ::GetLastError();
+         u32 lastError = ::GetLastError();
          CloseServiceHandle(hdlSCM);
-         if(Ret == 1060) // O serviço já não existe. Service already doesn't exist.
-            return true; // do self-healing
-         return false;
+         if(lastError == 1060) // O serviço já não existe. Service already doesn't exist.
+            return; // do self-healing
+         __throw_last_error(lastError);
       }
 
       if(!::DeleteService(hdlServ))
       {
-         u32 Ret = ::GetLastError();
+         u32 lastError = ::GetLastError();
          CloseServiceHandle(hdlServ);
          CloseServiceHandle(hdlSCM);
-         return false;
+         __throw_last_error(lastError);
       }
 
       CloseServiceHandle(hdlServ);
 
       CloseServiceHandle(hdlSCM);
 
-      return true;
+      //return true;
 
    }
 
@@ -1519,26 +1521,35 @@ retry:
 
       string strServiceName = calc_service_name();
 
-      if(strServiceName.is_empty())
-         return false;
+      if (strServiceName.is_empty())
+      {
+       
+         throw_status(error_failed);
+
+      }
 
       return stop_service(strServiceName);
 
    }
 
 
-   bool os_context::start_service(const ::string & strServiceName)
+   void os_context::start_service(const ::string & strServiceName)
    {
 
-      if(strServiceName.is_empty())
-         return false;
+      if (strServiceName.is_empty())
+      {
+
+         throw_status(error_failed);
+
+      }
 
       SC_HANDLE hdlSCM = OpenSCManagerW(0,0,SC_MANAGER_ALL_ACCESS);
 
       if(hdlSCM == 0)
       {
          //::GetLastError();
-         return false;
+         throw_status(error_failed);
+
       }
 
       SC_HANDLE hdlServ = ::OpenServiceW(
@@ -1551,7 +1562,7 @@ retry:
       {
          CloseServiceHandle(hdlSCM);
          //Ret = ::GetLastError();
-         return false;
+         throw_status(error_failed);
       }
 
       bool bOk = StartService(hdlServ,0,nullptr) != false;
@@ -1559,21 +1570,25 @@ retry:
       CloseServiceHandle(hdlServ);
       CloseServiceHandle(hdlSCM);
 
-      return bOk != false;
+      //return bOk != false;
    }
 
-   bool os_context::stop_service(const ::string & strServiceName)
+
+   void os_context::stop_service(const ::string & strServiceName)
    {
 
-      if(strServiceName.is_empty())
-         return false;
+      if (strServiceName.is_empty())
+      {
+         throw_status(error_failed);
+
+      }
 
       SC_HANDLE hdlSCM = OpenSCManagerW(0,0,SC_MANAGER_ALL_ACCESS);
 
       if(hdlSCM == 0)
       {
          //::GetLastError();
-         return false;
+         throw_status(error_failed);
       }
 
       SC_HANDLE hdlServ = ::OpenServiceW(
@@ -1585,7 +1600,7 @@ retry:
       {
          // Ret = ::GetLastError();
          CloseServiceHandle(hdlSCM);
-         return false;
+         throw_status(error_failed);
       }
 
       SERVICE_STATUS ss;
@@ -1600,7 +1615,7 @@ retry:
 
       CloseServiceHandle(hdlSCM);
 
-      return bOk != false;
+      //return bOk != false;
    }
 
 
@@ -1921,11 +1936,11 @@ retry:
    }
 
 
-   bool os_context::get_default_browser(string & strId, ::file::path & path, string & strParam)
+   void os_context::get_default_browser(string & strId, ::file::path & path, string & strParam)
    {
 
-      try
-      {
+      //try
+      //{
 
          registry::key key;
 
@@ -1997,7 +2012,7 @@ retry:
          if (strDefault.is_empty())
          {
 
-            return false;
+            throw_status(error_failed);
 
          }
 
@@ -2008,7 +2023,7 @@ retry:
          if (iFind <= 0)
          {
 
-            return false;
+            throw_status(error_failed);
 
          }
 
@@ -2027,20 +2042,20 @@ retry:
 
          }
 
-         return true;
+      //   return true;
 
-      }
-      catch (...)
-      {
+      //}
+      //catch (...)
+      //{
 
-         return false;
+      //   return false;
 
-      }
+      //}
 
    }
 
 
-   bool os_context::initialize_wallpaper_fileset(::file::set* pfileset, bool bAddSearch)
+   void os_context::initialize_wallpaper_fileset(::file::set* pfileset, bool bAddSearch)
    {
 
       if (bAddSearch)
@@ -2056,7 +2071,7 @@ retry:
 
       }
 
-      return true;
+      //return true;
 
    }
 
@@ -2071,9 +2086,10 @@ retry:
       //DWORD_PTR res;
       //SendMessageTimeout(HWND_BROADCAST, WM_SETTINGCHANGE, 0, (LPARAM)TEXT("ImmersiveColorSet"), 0, 1000, &res);
 
-      return ::success;
+      //return ::success;
 
    }
+
 
    void os_context::set_system_dark_mode1(bool bSet)
    {
@@ -2093,7 +2109,7 @@ retry:
       key._set("SystemUsesLightTheme", dwSystemUseLightTheme);
 
 
-      return ::success;
+      //return ::success;
 
    }
 
@@ -2115,7 +2131,7 @@ retry:
 
       key._set("AppsUseLightTheme", dwAppsUseLightTheme);
 
-      return ::success;
+      //return ::success;
 
    }
 
@@ -2142,7 +2158,7 @@ retry:
 //#else
 
 
-   bool os_context::file_open(::file::path path, string strParams, string strFolder)
+   void os_context::file_open(::file::path path, string strParams, string strFolder)
    {
 
       path = m_pcontext->m_papexcontext->defer_process_path(path);
@@ -2263,17 +2279,17 @@ retry:
 
       });
 
-      return true;
+      //return true;
 
    }
 
 
-   bool os_context::register_user_auto_start(const string& strId, const string& strCommand, const string & strArguments, bool bRegister)
+   void os_context::register_user_auto_start(const string& strId, const string& strCommand, const string & strArguments, bool bRegister)
    {
 
       current_user_set_run(strId, strCommand, strArguments, bRegister);
 
-      return true;
+      //return true;
 
    }
 
@@ -2305,6 +2321,7 @@ retry:
       return false;
 
    }
+
 
    ::file::path os_context::get_app_path(const ::string & strApp)
    {
@@ -2348,7 +2365,7 @@ repeat:
    }
 
 
-   bool os_context::set_default_browser()
+   void os_context::set_default_browser()
    {
 
 
@@ -2608,12 +2625,12 @@ repeat:
 
       sleep(1_s);
 
-      return true;
+      //return true;
 
    }
 
 
-   bool os_context::add_default_program(string_array & straExtension, string_array & straMimeType)
+   void os_context::add_default_program(string_array & straExtension, string_array & straMimeType)
    {
 
       string strTargetProgId;
@@ -2636,7 +2653,7 @@ repeat:
       strTargetProgId.replace("\\", "_");
       strTargetProgId.replace("/", "_");
 
-      void estatus = ::success;
+      ::e_status3 estatus = ::success;
 
       {
 
@@ -2644,14 +2661,15 @@ repeat:
 
          string strValue;
 
-         auto estatusRegistry = regkey._set("", get_application()->find_string("ApplicationName"));
+         //auto estatusRegistry =
+         regkey._set("", get_application()->find_string("ApplicationName"));
 
-         if(!estatusRegistry)
-         {
+         //if(!estatusRegistry)
+         //{
 
-            estatus = estatusRegistry;
+         //   estatus = estatusRegistry;
 
-         }
+         //}
 
       }
 
@@ -2662,14 +2680,15 @@ repeat:
 
          string strValue;
 
-         auto estatusRegistry = regkey._set("", strModule + ",0");
+         //auto estatusRegistry = 
+         regkey._set("", strModule + ",0");
 
-         if (!estatusRegistry)
-         {
+         //if (!estatusRegistry)
+         //{
 
-            estatus = estatusRegistry;
+         //   estatus = estatusRegistry;
 
-         }
+         //}
 
 
       }
@@ -2681,35 +2700,36 @@ repeat:
 
          string strValue;
 
-         auto estatusRegistry = regkey._set("HideIconsCommand", "\"" + strModule + "\" : hide_icons");
+         ///auto estatusRegistry = 
+         
+         regkey._set("HideIconsCommand", "\"" + strModule + "\" : hide_icons");
 
-         if(estatusRegistry.succeeded())
-         {
+         //if(estatusRegistry.succeeded())
+         //{
 
-            estatusRegistry = regkey._set("IconsVisible", 1);
+             regkey._set("IconsVisible", 1);
 
-         }
+         //}
 
-         if(estatusRegistry.succeeded())
-         {
+         //if(estatusRegistry.succeeded())
+         //{
           
-            estatusRegistry = regkey._set("ReinstallCommand", "\"" + strModule + "\" : install");
+             regkey._set("ReinstallCommand", "\"" + strModule + "\" : install");
 
-         }
+         //}
 
-         if(estatusRegistry.succeeded())
-         {
+         //if(estatusRegistry.succeeded())
+         //{
+ regkey._set("ShowIconsCommand", "\"" + strModule + "\" : show_icons");
 
-            estatusRegistry = regkey._set("ShowIconsCommand", "\"" + strModule + "\" : show_icons");
+         //}
 
-         }
+         //if (!estatusRegistry)
+         //{
 
-         if (!estatusRegistry)
-         {
+         //   estatus = estatusRegistry;
 
-            estatus = estatusRegistry;
-
-         }
+         //}
 
       }
 
@@ -2719,14 +2739,14 @@ repeat:
 
          string strValue;
 
-         auto estatusRegistry = regkey._set("", "\"" + strModule + "\" \"%1\"");
+          regkey._set("", "\"" + strModule + "\" \"%1\"");
 
-         if (!estatusRegistry)
+   /*      if (!estatusRegistry)
          {
 
             estatus = estatusRegistry;
 
-         }
+         }*/
 
       }
 
@@ -2741,14 +2761,14 @@ repeat:
 
          string strValue;
 
-         auto estatusRegistry = regkey._set(strTargetProgId, pathApplicationCapabilities);
+         /*auto estatusRegistry =*/ regkey._set(strTargetProgId, pathApplicationCapabilities);
 
-         if (!estatusRegistry)
+ /*        if (!estatusRegistry)
          {
 
             estatus = estatusRegistry;
 
-         }
+         }*/
 
       }
 
@@ -2758,28 +2778,31 @@ repeat:
 
          string strValue;
 
-         auto estatusRegistry = regkey._set("ApplicationDescription", get_application()->find_string("ApplicationDescription"));
+         //auto estatusRegistry = 
+         regkey._set("ApplicationDescription", get_application()->find_string("ApplicationDescription"));
 
-         if(estatusRegistry.succeeded())
-         {
+         //if(estatusRegistry.succeeded())
+         //{
 
-            estatusRegistry = regkey._set("ApplicationIcon", get_application()->find_string("ApplicationIcon"));
+            //estatusRegistry =
+         regkey._set("ApplicationIcon", get_application()->find_string("ApplicationIcon"));
 
-         }
+         //}
 
-         if(estatusRegistry.succeeded())
-         {
+         //if(estatusRegistry.succeeded())
+         //{
 
-            estatusRegistry = regkey._set("ApplicationName", get_application()->find_string("ApplicationName"));
+            //estatusRegistry = 
+         regkey._set("ApplicationName", get_application()->find_string("ApplicationName"));
 
-         }
+         //}
 
-         if (!estatusRegistry)
-         {
+         //if (!estatusRegistry)
+         //{
 
-            estatus = estatusRegistry;
+         //   estatus = estatusRegistry;
 
-         }
+         //}
 
 
       }
@@ -2790,14 +2813,15 @@ repeat:
 
          string strValue;
 
-         auto estatusRegistry = regkey._set(".mp4", strTargetProgId);
+         //auto estatusRegistry = 
+         regkey._set(".mp4", strTargetProgId);
 
-         if (!estatusRegistry)
-         {
+         //if (!estatusRegistry)
+         //{
 
-            estatus = estatusRegistry;
+         //   estatus = estatusRegistry;
 
-         }
+         //}
 
       }
 
@@ -2820,14 +2844,7 @@ repeat:
 
             string strExtension = straExtension[i];
 
-            auto estatusRegistry = regkey._set("." + strExtension, strTargetProgId + "." + strExtension);
-
-            if (!estatusRegistry)
-            {
-
-               estatus = estatusRegistry;
-
-            }
+             regkey._set("." + strExtension, strTargetProgId + "." + strExtension);
 
          }
 
@@ -2844,14 +2861,7 @@ repeat:
 
             string strExtension = straExtension[i];
 
-            auto estatusRegistry = regkey._set(strMimeType, strTargetProgId + "." + strExtension);
-
-            if (!estatusRegistry)
-            {
-
-               estatus = estatusRegistry;
-
-            }
+            regkey._set(strMimeType, strTargetProgId + "." + strExtension);
 
          }
 
@@ -2869,56 +2879,39 @@ repeat:
 
          registry::key regkey(HKEY_CLASSES_ROOT, strTargetProgId + "\\papplication", true);
 
-         auto estatusRegistry = regkey._set("ApplicationCompany", get_application()->find_string("ApplicationCompany"));
+         regkey._set("ApplicationCompany", get_application()->find_string("ApplicationCompany"));
 
-         if(estatusRegistry.succeeded())
-         {
+            regkey._set("ApplicationDescription", get_application()->find_string("ApplicationDescription"));
 
-            estatusRegistry = regkey._set("ApplicationDescription", get_application()->find_string("ApplicationDescription"));
-
-         }
-
-         if(estatusRegistry.succeeded())
-         {
-
-            estatusRegistry = regkey._set("ApplicationIcon", get_application()->find_string("ApplicationIcon"));
-
-         }
          
-         if(estatusRegistry.succeeded())
-         {
+            regkey._set("ApplicationIcon", get_application()->find_string("ApplicationIcon"));
 
-            estatusRegistry = regkey._set("ApplicationName", get_application()->find_string("ApplicationName"));
+            regkey._set("ApplicationName", get_application()->find_string("ApplicationName"));
 
-         }
-         
-         if(estatusRegistry.succeeded())
-         {
+            regkey._set("AppUserModelId", get_application()->find_string("AppUserModelId"));
 
-            estatusRegistry = regkey._set("AppUserModelId", get_application()->find_string("AppUserModelId"));
+         //}
 
-         }
+         //if (!estatusRegistry)
+         //{
 
-         if (!estatusRegistry)
-         {
+         //   estatus = estatusRegistry;
 
-            estatus = estatusRegistry;
-
-         }
+         //}
 
       }
       {
 
          registry::key regkey(HKEY_CLASSES_ROOT, strTargetProgId + "\\DefaultIcon", true);
 
-         auto estatusRegistry = regkey._set("", get_application()->find_string("DefaultIcon"));
+         regkey._set("", get_application()->find_string("DefaultIcon"));
 
-         if (!estatusRegistry)
-         {
+         //if (!estatusRegistry)
+         //{
 
-            estatus = estatusRegistry;
+         //   estatus = estatusRegistry;
 
-         }
+         //}
 
       }
 
@@ -2927,29 +2920,20 @@ repeat:
 
          string strExtension = straExtension[i];
 
-         if (!file_association_set_shell_open_command(strExtension, strTargetProgId + "." + strExtension, strModule, "\"%1\""))
-         {
+         file_association_set_shell_open_command(strExtension, strTargetProgId + "." + strExtension, strModule, "\"%1\"");
+         //{
 
-            estatus = ::error_failed;
+         //   estatus = ::error_failed;
 
-         }
+         //}
 
-         {
+         //{
 
             registry::key regkey(HKEY_CLASSES_ROOT, "." + strExtension + "\\OpenWithProgids", true);
 
-            auto estatusRegistry = regkey._set(strTargetProgId, "");
+            regkey._set(strTargetProgId, "");;
 
-            if(!estatusRegistry)
-            {
-
-               INFORMATION("Failure to set ." + strExtension + "\\OpenWithProgids");
-
-               estatus = estatusRegistry;
-
-            }
-
-         }
+         //}
 
       }
 
@@ -3046,26 +3030,26 @@ repeat:
 
                SHChangeNotify(SHCNE_ASSOCCHANGED, SHCNF_DWORD | SHCNF_FLUSH, nullptr, nullptr);
 
-               sleep(3_s);
+               preempt(3_s);
 
             }
 
          });
 
 
-      if (!estatus)
-      {
+      //if (!estatus)
+      //{
 
-         return false;
+      //   return false;
 
-      }
+      //}
 
-      return true;
+      //return true;
 
    }
 
 
-   bool os_context::browse_file_open(property_set & set)
+   void os_context::browse_file_open(property_set & set)
    {
 
       //::user::interaction* pinteraction = nullptr;
@@ -3096,8 +3080,8 @@ repeat:
 
       //}
 
-      try
-      {
+      //try
+      //{
 
          bool bDisableOleDDE = true;
 
@@ -3281,11 +3265,11 @@ repeat:
 
          }
 
-      }
-      catch (...)
-      {
+      //}
+      //catch (...)
+      //{
 
-      }
+      //}
 
       //try
       //{
@@ -3311,12 +3295,12 @@ repeat:
 
       //}
 
-      return bOk;
+      //return bOk;
 
    }
 
 
-   bool os_context::browse_file_save(property_set & set)
+   void os_context::browse_file_save(property_set & set)
    {
 
       //::user::interaction* pinteraction = puiOwner->get_wnd();
@@ -3334,8 +3318,8 @@ repeat:
 
       //}
 
-      try
-      {
+      //try
+      //{
 
          defer_co_initialize_ex(false);
 
@@ -3458,11 +3442,11 @@ repeat:
 
          }
 
-      }
-      catch (...)
-      {
+      //}
+      //catch (...)
+      //{
 
-      }
+      //}
 
       //try
       //{
@@ -3483,13 +3467,13 @@ repeat:
 
       //}
 
-      return bOk;
+      //return bOk;
 
    }
 
 
 
-   bool os_context::browse_folder( property_set & set)
+   void os_context::browse_folder( property_set & set)
    {
 
       //::user::interaction* pinteraction = puiOwner->get_wnd();
@@ -3508,8 +3492,8 @@ repeat:
 
       //}
 
-      try
-      {
+      //try
+      //{
 
          defer_co_initialize_ex(false);
 
@@ -3575,11 +3559,11 @@ repeat:
 
          }
 
-      }
-      catch (...)
-      {
+      //}
+      //catch (...)
+      //{
 
-      }
+      //}
 
       //try
       //{
@@ -3602,11 +3586,12 @@ repeat:
 
       //}
 
-      return bOk;
+//      return bOk;
 
    }
 
-   bool os_context::browse_file_or_folder(property_set & set)
+  
+   void os_context::browse_file_or_folder(property_set & set)
    {
 
       //::user::interaction* pinteraction = puiOwner->get_wnd();
@@ -3625,8 +3610,8 @@ repeat:
 
       //}
 
-      try
-      {
+      //try
+      //{
 
          defer_co_initialize_ex(false);
 
@@ -3692,11 +3677,11 @@ repeat:
 
          }
 
-      }
-      catch (...)
-      {
+      //}
+      //catch (...)
+      //{
 
-      }
+      //}
 
       //try
       //{
@@ -3718,7 +3703,7 @@ repeat:
 
       //}
 
-      return bOk;
+      //return bOk;
 
 
    }
@@ -3748,7 +3733,7 @@ repeat:
 
       ::SendNotifyMessageA(HWND_BROADCAST, WM_SETTINGCHANGE, 0, (LPARAM)"Environment");
 
-      return ::success;
+      //return ::success;
 
    }
 
@@ -3793,7 +3778,16 @@ namespace apex
          wstring wstrDsc(strDesc);
          wstring wstrIco(pathIco);
 
-         return hresult_to_estatus(win_create_link(wstrObj, wstrLnk, wstrDsc, wstrIco, iIcon));
+         auto estatus = hresult_to_estatus(win_create_link(wstrObj, wstrLnk, wstrDsc, wstrIco, iIcon));
+
+
+
+         if (failed(estatus))
+         {
+
+            throw_status(estatus);
+
+         }
 
       }
 
