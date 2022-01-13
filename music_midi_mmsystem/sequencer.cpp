@@ -624,7 +624,7 @@ namespace music
 
             synchronous_lock synchronouslock(mutex());
 
-            ::e_status3 estatus;
+            ::e_status estatus;
 
             MMTIME mmtime;
 
@@ -811,7 +811,7 @@ namespace music
 
             lpmidihdr->dwBytesRecorded = 0;
 
-            ::e_status3 estatus = ::success;
+            ::e_status estatus = ::success;
 
             if (m_psequence->has_operation())
             {
@@ -1493,7 +1493,7 @@ namespace music
 
             TRACE("::music::midi::mmsystem::player::SendReset : (0)");
 
-            ::e_status3 estatus = ::success;
+            ::e_status estatus = ::success;
 
             MMRESULT mmr;
 
@@ -1651,7 +1651,7 @@ namespace music
          void sequencer::midi_out_close()
          {
 
-            ::e_status3 estatus = ::success;
+            ::e_status estatus = ::success;
 
             auto mmr = midiOutClose(m_hmidiout);
 

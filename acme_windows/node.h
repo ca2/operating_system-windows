@@ -73,10 +73,10 @@ namespace acme
          virtual void datetime_to_filetime(filetime_t* pFileTime, const ::datetime::time& time) override;
 
 
-         virtual ::e_status3 last_error_to_status(DWORD dwLastError);
+         virtual ::e_status last_error_to_status(DWORD dwLastError);
 
 
-         virtual ::e_status3 ExitCode_to_status(DWORD dwExitCode);
+         virtual ::e_status ExitCode_to_status(DWORD dwExitCode);
 
 
          virtual string audio_get_default_library_name() override;

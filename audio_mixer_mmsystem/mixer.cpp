@@ -44,7 +44,7 @@ namespace multimedia
       void     audio_mixer::set_new_device(u32 uiMixerId)
       {
 
-         ::e_status3 estatus;
+         ::e_status estatus;
 
          if(!(estatus = m_paudiomixerdevice->open(uiMixerId, (UINT_PTR) m_window.get_oswindow(), 0,  CALLBACK_WINDOW)))
          {

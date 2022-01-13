@@ -331,7 +331,7 @@ namespace windows
          }
 
       }
-      catch (const ::e_status3 & estatus)
+      catch (const ::e_status & estatus)
       {
 
          return estatus;
@@ -356,7 +356,7 @@ namespace windows
          key.get("AutoConfigURL", strUrl);
 
       }
-      catch (const ::e_status3 & estatus)
+      catch (const ::e_status & estatus)
       {
 
          return estatus;
@@ -617,7 +617,7 @@ namespace windows
    bool os_context::file_association_set_shell_open_command(const ::string & pszExtension, const ::string & pszExtensionNamingClass,  const char * pszCommand, const ::string & pszParam)
    {
 
-      ::e_status3 estatus = ::success;
+      ::e_status estatus = ::success;
 
       try
       {
@@ -2500,7 +2500,7 @@ repeat:
       strTargetProgId.replace("\\", "_");
       strTargetProgId.replace("/", "_");
 
-      ::e_status3 estatus = ::success;
+      ::e_status estatus = ::success;
 
       {
 

@@ -165,7 +165,7 @@ namespace windows
 
       service * pservice = (service *)pcontext;
       
-      ::e_status3 estatus = ::success;
+      ::e_status estatus = ::success;
 
       try
       {
