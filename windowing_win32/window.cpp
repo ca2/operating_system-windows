@@ -6093,12 +6093,14 @@ namespace windowing_win32
    }
 
 
-   ::e_status window::set_finish()
+   void window::set_finish()
    {
 
-      auto estatus = ::windowing::window::set_finish();
+      //auto estatus = 
+         
+         ::windowing::window::set_finish();
 
-      return estatus;
+      //return estatus;
 
    }
 
