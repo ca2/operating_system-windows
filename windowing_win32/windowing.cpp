@@ -28,32 +28,38 @@ namespace windowing_win32
    void windowing::initialize_windowing(::user::user * puser)
    {
 
-      auto estatus = ::windowing::windowing::initialize_windowing(puser);
+      //auto estatus = 
+      
+      ::windowing::windowing::initialize_windowing(puser);
 
-      if (!estatus)
-      {
+      //if (!estatus)
+      //{
 
-         return estatus;
+      //   return estatus;
 
-      }
+      //}
 
-      estatus = __construct(m_pdisplay);
+      //estatus = 
+      
+      __construct(m_pdisplay);
 
-      if (!estatus)
-      {
+      //if (!estatus)
+      //{
 
-         return estatus;
+      //   return estatus;
 
-      }
+      //}
 
-      estatus = m_pdisplay->initialize_display(this);
+      //estatus =
+      
+      m_pdisplay->initialize_display(this);
 
-      if (!estatus)
-      {
+      //if (!estatus)
+      //{
 
-         return estatus;
+      //   return estatus;
 
-      }
+      //}
 
       bool bCreateSessionWindow = defer_create_system_window();
 
@@ -64,8 +70,7 @@ namespace windowing_win32
 
       }
 
-
-      return estatus;
+      //return estatus;
 
    }
 
@@ -94,21 +99,23 @@ namespace windowing_win32
    }
 
 
-   ::extended::transport < system_interaction > windowing::create_system_window()
+   __pointer(system_interaction) windowing::create_system_window()
    {
 
       auto psysteminteraction = __create_new < system_interaction >();
 
       psysteminteraction->display(e_display_none);
 
-      auto estatus = psysteminteraction->create_host();
+      //auto estatus = 
+      
+      psysteminteraction->create_host();
 
-      if(!estatus)
-      {
+      //if(!estatus)
+      //{
 
-         return estatus;
+      //   return estatus;
 
-      }
+      //}
 
       //add_object(psysteminteraction);
 
@@ -153,16 +160,18 @@ namespace windowing_win32
 
       }
 
-      auto estatus = ::windowing::windowing::destroy();
+      //auto estatus = 
+      
+      ::windowing::windowing::destroy();
 
-      if (!estatus)
-      {
+      //if (!estatus)
+      //{
 
-         return estatus;
+      //   return estatus;
 
-      }
+      //}
 
-      return estatus;
+      //return estatus;
 
    }
 
@@ -681,11 +690,13 @@ namespace windowing_win32
       if (!::ReleaseCapture())
       {
 
-         return error_failed;
+         //return error_failed;
+
+         throw_status(error_null_pointer);
 
       }
 
-      return success;
+      //return success;
 
    }
 
@@ -723,11 +734,11 @@ namespace windowing_win32
       if (!::SetCursorPos(point.x, point.y))
       {
 
-         return error_failed;
+         //return false;
 
       }
 
-      return ::success;
+      //return tru;
 
    }
 
@@ -738,11 +749,11 @@ namespace windowing_win32
       if (!m_windowmap.erase_key(__hwnd(pwindow->get_oswindow())))
       {
 
-         return ::error_failed;
+         //return ::error_failed;
 
       }
 
-      return ::success;
+      //return ::success;
 
    }
 
@@ -927,16 +938,18 @@ namespace windowing_win32
    void windowing::windowing_post(const ::routine& routine)
    {
 
-      auto estatus = m_psystem->m_papexsystem->post_routine(routine);
+      //auto estatus = 
+      
+      m_psystem->m_papexsystem->post_routine(routine);
 
-      if (!estatus)
-      {
+      //if (!estatus)
+      //{
 
-         return estatus;
+      //   return estatus;
 
-      }
+      //}
 
-      return estatus;
+      //return estatus;
 
    }
 
@@ -1082,7 +1095,8 @@ namespace windowing_win32
          if (!LockSetForegroundWindow(LSFW_LOCK))
          {
 
-            return error_last_error;
+            //return error_last_error;
+            throw_status(error_null_pointer);
 
          }
 
@@ -1093,13 +1107,14 @@ namespace windowing_win32
          if (!LockSetForegroundWindow(LSFW_UNLOCK))
          {
 
-            return error_last_error;
+            //return error_last_error;
+            throw_status(error_null_pointer);
 
          }
 
       }
 
-      return ::success;
+      //return ::success;
 
    }
 

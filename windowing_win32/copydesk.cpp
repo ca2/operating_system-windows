@@ -77,14 +77,16 @@ namespace windowing_win32
    void copydesk::initialize_copydesk(::windowing::window * pwindow)
    {
 
-      auto estatus = ::user::copydesk::initialize_copydesk(pwindow);
+      //auto estatus = 
+      
+      ::user::copydesk::initialize_copydesk(pwindow);
 
-      if (!estatus)
-      {
+      //if (!estatus)
+      //{
 
-         return estatus;
+      //   return estatus;
 
-      }
+      //}
 
       synchronous_lock synchronouslock(mutex());
 
@@ -120,17 +122,19 @@ namespace windowing_win32
 
       //}
 
-      if(!create_message_queue("::windows::copydesk"))
-      {
+      create_message_queue("::windows::copydesk");
 
-      //m_hwnd = ::CreateWindowEx(0, strClass, 0, 0, 0, 0, 0, 0, HWND_MESSAGE, 0, 0, nullptr);
-
-      //if (m_hwnd == nullptr)
+      //if(!create_message_queue("::windows::copydesk"))
       //{
 
-         return false;
+      ////m_hwnd = ::CreateWindowEx(0, strClass, 0, 0, 0, 0, 0, 0, HWND_MESSAGE, 0, 0, nullptr);
 
-      }
+      ////if (m_hwnd == nullptr)
+      ////{
+
+      //   return false;
+
+      //}
 
       //::SetWindowLongPtr(m_hwnd, GWLP_USERDATA, (LONG_PTR) this);
 
@@ -139,13 +143,13 @@ namespace windowing_win32
 
          destroy();
 
-         return false;
+         throw_status(error_failed);
 
       }
 
       OnClipboardUpdate();
 
-      return true;
+      //return true;
 
    }
 
@@ -153,11 +157,11 @@ namespace windowing_win32
    void copydesk::destroy()
    {
 
-      auto estatus1 = ::user::copydesk::destroy();
+      ::user::copydesk::destroy();
 
-      auto estatus2 = ::user::message_window::destroy();
+      ::user::message_window::destroy();
 
-      return minimum(estatus1, estatus2);
+      //return minimum(estatus1, estatus2);
 
    }
 
@@ -384,7 +388,7 @@ namespace windowing_win32
    }
 
 
-   void copydesk::_get_filea(::file::patha & patha, e_op & eop)
+   bool copydesk::_get_filea(::file::patha & patha, enum_op & eop)
    {
 
       ::count c = _get_file_count();
@@ -392,7 +396,7 @@ namespace windowing_win32
       if (c <= 0)
       {
 
-         return error_failed;
+         return false;
 
       }
 
@@ -401,7 +405,7 @@ namespace windowing_win32
       if (!::OpenClipboard(__hwnd(get_oswindow())))
       {
 
-         return error_failed;
+         return false;
 
       }
 
@@ -426,12 +430,12 @@ namespace windowing_win32
 
       ::CloseClipboard();
 
-      return ::success;
+      return true;
 
    }
 
 
-   void copydesk::_set_filea(const ::file::patha & patha, e_op eop)
+   bool copydesk::_set_filea(const ::file::patha & patha, enum_op eop)
    {
 
       synchronous_lock synchronouslock(mutex());
@@ -439,7 +443,7 @@ namespace windowing_win32
       if (!::OpenClipboard(__hwnd(get_oswindow())))
       {
 
-         return error_failed;
+         return false;
 
       }
 
@@ -453,7 +457,7 @@ namespace windowing_win32
 
       VERIFY(::CloseClipboard());
 
-      return ::success;
+      return true;
 
    }
 
@@ -475,7 +479,7 @@ namespace windowing_win32
    }
 
 
-   void copydesk::_set_plain_text(const ::string & str)
+   bool copydesk::_set_plain_text(const ::string & str)
    {
 
       //ASSERT(::IsWindow(m_hwnd));
@@ -485,7 +489,7 @@ namespace windowing_win32
       if (!::OpenClipboard(__hwnd(get_oswindow())))
       {
 
-         return error_failed;
+         return false;
 
       }
 
@@ -506,12 +510,12 @@ namespace windowing_win32
 
       VERIFY(::CloseClipboard());
 
-      return ::success;
+      return true;
 
    }
 
 
-   void copydesk::_get_plain_text(string & str)
+   bool copydesk::_get_plain_text(string & str)
    {
 
       int iFormat = _get_priority_text_format();
@@ -528,7 +532,7 @@ namespace windowing_win32
       if (!::OpenClipboard(__hwnd(get_oswindow())))
       {
 
-         return error_failed;
+         return false;
 
       }
 
@@ -557,7 +561,7 @@ namespace windowing_win32
 
       VERIFY(::CloseClipboard());
 
-      return ::success;
+      return true;
 
    }
 
@@ -579,13 +583,13 @@ namespace windowing_win32
    }
 
 
-   void copydesk::_desk_to_image(::image * pimage)
+   bool copydesk::_desk_to_image(::image * pimage)
    {
 
       if (!_has_image())
       {
 
-         return error_failed;
+         return false;
 
       }
 
@@ -598,7 +602,7 @@ namespace windowing_win32
 
          TRACELASTERROR();
 
-         return error_failed;
+         return false;
 
       }
 
@@ -677,16 +681,16 @@ namespace windowing_win32
       if (!bOk)
       {
 
-         return error_failed;
+         return false;
 
       }
 
-      return ::success;
+      return true;
 
    }
 
 
-   void copydesk::_image_to_desk(const ::image * pimage)
+   bool copydesk::_image_to_desk(const ::image * pimage)
    {
 
       //ASSERT(::IsWindow(m_hwnd));
@@ -696,7 +700,7 @@ namespace windowing_win32
       if (!::OpenClipboard(__hwnd(get_oswindow())))
       {
 
-         return error_failed;
+         return false;
 
       }
 
@@ -706,7 +710,7 @@ namespace windowing_win32
 
       VERIFY(::CloseClipboard());
 
-      return ::success;
+      return true;
 
    }
 

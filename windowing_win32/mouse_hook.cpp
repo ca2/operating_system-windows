@@ -91,7 +91,7 @@ namespace mouse_hook
 
       g_hhook = nullptr;
 
-      return ::success;
+      //return ::success;
 
    }
 
@@ -102,7 +102,9 @@ namespace mouse_hook
       if (g_hhook != nullptr)
       {
 
-         return false;
+         //return false;
+
+         throw_status(error_null_pointer);
 
       }
 
@@ -110,7 +112,7 @@ namespace mouse_hook
 
       g_bRun = true;
       
-      return ::success;
+      //return ::success;
 
    }
 
@@ -121,7 +123,9 @@ namespace mouse_hook
       if (g_hhook == nullptr)
       {
 
-         return false;
+         //return false;
+
+         throw_status(error_null_pointer);
 
       }
 
@@ -131,7 +135,7 @@ namespace mouse_hook
 
       g_bRun = false;
 
-      return ::success;
+      //return ::success;
 
    }
 

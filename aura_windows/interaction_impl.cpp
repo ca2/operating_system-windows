@@ -461,19 +461,22 @@ namespace windows
    }
 
 
-   bool interaction_impl::destroy_impl_only()
+   void interaction_impl::destroy_impl_only()
    {
 
 
-      return ::user::interaction_impl::destroy_impl_only();
+      //return 
+      ::user::interaction_impl::destroy_impl_only();
 
    }
 
 
-   bool interaction_impl::start_destroying_window()
+   void interaction_impl::start_destroying_window()
    {
 
-      return ::user::interaction_impl::start_destroying_window();
+      //return 
+      
+      ::user::interaction_impl::start_destroying_window();
 
    }
 
@@ -897,8 +900,9 @@ namespace windows
 
          auto puserinteraction = m_puserinteraction;
 
-         if (puserinteraction && !puserinteraction->_001Maximize())
+         if (puserinteraction)
          {
+            puserinteraction->_001Maximize();
 
             pmessage->m_bRet = true;
 
@@ -914,8 +918,10 @@ namespace windows
 
          auto puserinteraction = m_puserinteraction;
 
-         if (puserinteraction && !puserinteraction->_001Restore())
+         if (puserinteraction )
          {
+            puserinteraction->_001Restore();
+         //{
 
             pmessage->m_bRet = true;
 
@@ -1857,7 +1863,7 @@ namespace windows
    //}
 
 
-   lresult interaction_impl::send_message(const ::id & id, wparam wparam, lparam lparam)
+   lresult interaction_impl::send_message(const ::id & id, wparam wparam, lparam lparam, const ::point_i32 & point)
    {
 
       auto pwindow = m_pwindow;
@@ -1869,10 +1875,12 @@ namespace windows
    }
 
 
-   bool interaction_impl::post_message(const ::id & id, wparam wparam, lparam lparam)
+   void interaction_impl::post_message(const ::id & id, wparam wparam, lparam lparam)
    {
 
-      return m_pwindow->post_message(id, wparam, lparam);
+      //return
+      
+      m_pwindow->post_message(id, wparam, lparam);
 
    }
 
@@ -2138,10 +2146,12 @@ namespace windows
    //}
 
 
-   bool interaction_impl::LockWindowUpdate()
+   void interaction_impl::LockWindowUpdate()
    {
 
-      return m_pwindow->LockWindowUpdate();
+      //return 
+      
+      m_pwindow->LockWindowUpdate();
 
    }
 
@@ -2154,20 +2164,22 @@ namespace windows
    }
 
 
-   bool interaction_impl::RedrawWindow(const ::rectangle_i32& rectangleUpdate, ::draw2d::region* prgnUpdate, ::u32 flags)
+   void interaction_impl::RedrawWindow(const ::rectangle_i32& rectangleUpdate, ::draw2d::region* prgnUpdate, ::u32 flags)
    {
 
       if (m_bDestroyImplOnly)
       {
 
-         return false;
+         //return false;
+
+         throw_status(error_null_pointer);
 
       }
 
       if (!m_puserinteraction->is_window_visible(::user::e_layout_sketch))
       {
 
-         return true;
+         return;
 
       }
 
@@ -2185,7 +2197,7 @@ namespace windows
 
             _001UpdateWindow();
 
-            return true;
+            return;
 
          }
          //else
@@ -2220,7 +2232,7 @@ namespace windows
 
       }
 
-      return true;
+      //return true;
 
    }
 
@@ -2270,10 +2282,12 @@ namespace windows
    }
 
 
-   bool interaction_impl::enable_window(bool bEnable)
+   void interaction_impl::enable_window(bool bEnable)
    {
 
-      return m_pwindow->enable_window(bEnable);
+      //return 
+      
+      m_pwindow->enable_window(bEnable);
 
    }
 
@@ -3692,11 +3706,11 @@ namespace windows
 
 
 
-   bool interaction_impl::get_rect_normal(RECTANGLE_I32 * prectangle)
+   void interaction_impl::get_rect_normal(RECTANGLE_I32 * prectangle)
 
    {
 
-      return false;
+      //return false;
       //WINDOWPLACEMENT wp;
 
       //__zero(wp);

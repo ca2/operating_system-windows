@@ -34,16 +34,16 @@ namespace draw2d_gdiplus
       //virtual bool stretch(::image * pimage) override;
 
 
-      bool dc_select(bool bSelect = true);
+      void dc_select(bool bSelect = true);
 
-      virtual bool on_exif_orientation();
+      virtual void on_exif_orientation();
 
 
       virtual bool _load_thumbnail(const ::string & psz);
 
 
-      virtual bool _map(bool) override;
-      virtual bool _unmap() override;
+      virtual void _map(bool) override;
+      virtual void _unmap() override;
 
       virtual void create_ex(const ::size_i32 & size, ::color32_t * pcolorref, int iScan, ::enum_flag eflagCreate = DEFAULT_CREATE_IMAGE_FLAG, int iGoodStride = -1, bool bPreserve = false);
       //void create(const ::size_i32 & size, ::enum_flag eflagCreate = DEFAULT_CREATE_IMAGE_OBJECT_FLAG, int iGoodStride = -1, bool bPreserve = false) override;
@@ -57,7 +57,7 @@ namespace draw2d_gdiplus
 
       //cvirtual bool stretch(::draw2d::graphics * pgraphics) override;
       //virtual bool draw(const ::image * pimage) override;
-      virtual bool _draw_raw(const ::rectangle_i32 & rectangleTarget, ::image * pimageSrc, const ::point_i32 & pointSrc) override;
+      virtual void _draw_raw(const ::rectangle_i32 & rectangleTarget, ::image * pimageSrc, const ::point_i32 & pointSrc) override;
 
 
       virtual void SetIconMask(::draw2d::icon * picon, i32 cx, i32 cy) override;

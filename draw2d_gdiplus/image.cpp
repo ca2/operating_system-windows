@@ -44,18 +44,18 @@ namespace draw2d_gdiplus
    }
 
 
-   bool image::_map(bool)
+   void image::_map(bool)
    {
 
-      return true;
+      //return true;
 
    }
 
 
-   bool image::_unmap()
+   void image::_unmap()
    {
 
-      return true;
+      //return true;
 
    }
 
@@ -76,6 +76,8 @@ namespace draw2d_gdiplus
 
          return false;
 
+         //throw_status(error_failed);
+
       }
 
       if (m_pbitmap.is_set()
@@ -87,6 +89,8 @@ namespace draw2d_gdiplus
 
          return true;
 
+         //return;
+
       }
 
       //destroy();
@@ -95,48 +99,50 @@ namespace draw2d_gdiplus
 
       m_pgraphics.defer_create(this);
 
-      if (m_pbitmap.is_null())
-      {
+      //if (m_pbitmap.is_null())
+      //{
 
-         m_sizeRaw.cx = 0;
+      //   m_sizeRaw.cx = 0;
 
-         m_sizeRaw.cy = 0;
+      //   m_sizeRaw.cy = 0;
 
-         m_sizeAlloc.cx = 0;
+      //   m_sizeAlloc.cx = 0;
 
-         m_sizeAlloc.cy = 0;
+      //   m_sizeAlloc.cy = 0;
 
-         m_iScan = 0;
+      //   m_iScan = 0;
 
-         return false;
+      //   return false;
 
-      }
+      //}
 
-      if (!m_pbitmap->host_bitmap(nullptr, ppixmap))
-      {
+      
+      m_pbitmap->host_bitmap(nullptr, ppixmap);
+      //if (!)
+      //{
 
-         m_sizeRaw.cx = 0;
+      //   m_sizeRaw.cx = 0;
 
-         m_sizeRaw.cy = 0;
+      //   m_sizeRaw.cy = 0;
 
-         m_sizeAlloc.cx = 0;
+      //   m_sizeAlloc.cx = 0;
 
-         m_sizeAlloc.cy = 0;
+      //   m_sizeAlloc.cy = 0;
 
-         m_iScan = 0;
+      //   m_iScan = 0;
 
-         return false;
+      //   return false;
 
-      }
+      //}
+         //throw_status(error_failed);
+      //if (m_pbitmap->get_os_data() == nullptr)
+      //{
 
-      if (m_pbitmap->get_os_data() == nullptr)
-      {
+      //   destroy();
 
-         destroy();
+      //   return false;
 
-         return false;
-
-      }
+      //}
 
       init(ppixmap->size(), ppixmap->colorref(), ppixmap->m_iScan);
 
@@ -163,7 +169,9 @@ namespace draw2d_gdiplus
             && size == m_sizeRaw)
       {
 
-         auto ppen = __create < ::draw2d::pen > ();         return true;
+         //auto ppen = __create < ::draw2d::pen > ();         return true;
+
+         return;
 
       }
 
@@ -211,7 +219,9 @@ namespace draw2d_gdiplus
 
          //destroy();
 
-         return false;
+         //return false;
+
+         throw_status(error_null_pointer);
 
       }
 
@@ -219,35 +229,43 @@ namespace draw2d_gdiplus
 
       //::color32_t * pcolorref = nullptr;
 
-      if (!pbitmap->create_bitmap(nullptr, size, (void**)&pcolorref, &iScan))
-      {
+      pbitmap->create_bitmap(nullptr, size, (void**)&pcolorref, &iScan);
 
-         //destroy();
+      //if (!pbitmap->create_bitmap(nullptr, size, (void**)&pcolorref, &iScan))
+      //{
 
-         return false;
+      //   //destroy();
 
-      }
+      //   return false;
+
+      //}
 
       if (pbitmap->get_os_data() == nullptr)
       {
 
          //destroy();
 
-         return false;
+         //return false;
+
+         throw_status(error_null_pointer);
 
       }
 
-      if (!pgraphics->set(pbitmap))
-      {
+      pgraphics->set(pbitmap);
 
-         return false;
+      //if (!pgraphics->set(pbitmap))
+      //{
 
-      }
+      //   return false;
+
+      //}
       
       if (!pgraphics->SetViewportOrg(origin()))
       {
 
-         return false;
+         //return false;
+
+         throw_status(error_null_pointer);
 
       }
 
@@ -292,7 +310,7 @@ namespace draw2d_gdiplus
 
       set(eflagCreate);
 
-      return true;
+      //return true;
 
    }
 
@@ -404,10 +422,10 @@ namespace draw2d_gdiplus
    //}
 
 
-   bool image::dc_select(bool bSelect)
+   void image::dc_select(bool bSelect)
    {
 
-      return true;
+      //return true;
 
    }
 
@@ -420,20 +438,23 @@ namespace draw2d_gdiplus
       if (pbitmap == nullptr)
       {
 
-         return false;
+         //return false;
+
+         throw_status(error_null_pointer);
 
       }
+      
+      create(pbitmap->get_size());
+      //if (!create(pbitmap->get_size()))
+      //{
 
-      if (!create(pbitmap->get_size()))
-      {
+      //   return false;
 
-         return false;
-
-      }
+      //}
 
       copy_from(pgraphics->m_pimage);
 
-      return true;
+      //return true;
 
    }
 
@@ -447,7 +468,7 @@ namespace draw2d_gdiplus
 
       m_pbitmap.release();
 
-      return ::success;
+      //return ::success;
 
    }
 
@@ -508,7 +529,7 @@ namespace draw2d_gdiplus
    //}
 
 
-   bool image::_draw_raw(const ::rectangle_i32 & rectangleDstParam, ::image * pimageSrc, const ::point_i32 & pointSrcParam)
+   void image::_draw_raw(const ::rectangle_i32 & rectangleDstParam, ::image * pimageSrc, const ::point_i32 & pointSrcParam)
    {
 
       ::rectangle_i32 rectangleTarget(rectangleDstParam);
@@ -556,7 +577,7 @@ namespace draw2d_gdiplus
          if (size.cx < 0)
          {
 
-            return true;
+            return;
 
          }
 
@@ -574,7 +595,7 @@ namespace draw2d_gdiplus
          if (size.cy < 0)
          {
 
-            return true;
+            return;
 
          }
 
@@ -585,14 +606,14 @@ namespace draw2d_gdiplus
          if (xEnd < 0)
          {
 
-            return false;
+            return;
 
          }
 
          if (yEnd < 0)
          {
 
-            return false;
+            return;
 
          }
 
@@ -633,7 +654,7 @@ namespace draw2d_gdiplus
 
       }
 
-      return true;
+      //return true;
 
    }
 
@@ -652,39 +673,47 @@ namespace draw2d_gdiplus
       if (cx <= 0 || cy <= 0)
       {
 
-         return error_invalid_parameter;
+         //return error_invalid_parameter;
+
+         throw_status(error_null_pointer);
 
       }
 
-      auto estatus = create({ cx, cy });
+      //auto estatus = 
+      
+      create({ cx, cy });
 
-      if (!estatus)
-      {
+      //if (!estatus)
+      //{
 
-         return estatus;
+      //   return estatus;
 
-      }
+      //}
 
       // White blend image
       ::image_pointer pimage1;
 
-      estatus = __construct(pimage1);
-
-      if (!estatus)
-      {
-
-         return estatus;
-
-      }
+      //estatus = 
       
-      estatus = pimage1->create({ cx, cy });
+      __construct(pimage1);
 
-      if (!estatus)
-      {
+      //if (!estatus)
+      //{
 
-         return estatus;
+      //   return estatus;
 
-      }
+      //}
+      
+      //estatus = 
+      
+      pimage1->create({ cx, cy });
+
+      //if (!estatus)
+      //{
+
+      //   return estatus;
+
+      //}
 
 
 
@@ -705,24 +734,28 @@ namespace draw2d_gdiplus
       // Black blend image
       ::image_pointer pimage2;
 
-      estatus = __construct(pimage2);
+      //estatus = 
       
-      if (!estatus)
-      {
+      __construct(pimage2);
+      
+      //if (!estatus)
+      //{
 
-         return estatus;
+      //   return estatus;
 
-      }
+      //}
 
-      estatus= pimage2->create( 
+      //estatus=
+      
+      pimage2->create( 
       { cx, cy } );
 
-      if (!estatus)
+ /*     if (!estatus)
       {
 
          return estatus;
 
-      }
+      }*/
 
       pimage2->fill(0, 0, 0, 0);
 
@@ -744,24 +777,28 @@ namespace draw2d_gdiplus
       // Mask image
       ::image_pointer pimageM;
 
-      estatus = __construct(pimageM);
+      //estatus = 
+      
+      __construct(pimageM);
 
-      if (!estatus)
-      {
+      //if (!estatus)
+      //{
 
-         return estatus;
+      //   return estatus;
 
-      }
+      //}
 
-      estatus = pimageM->create(
+      // estatus = 
+      
+      pimageM->create(
          { cx, cy });
 
-      if (!estatus)
-      {
+      //if (!estatus)
+      //{
 
-         return estatus;
+      //   return estatus;
 
-      }
+      //}
 
       {
 
@@ -809,7 +846,7 @@ namespace draw2d_gdiplus
          r2 += 4;
       }
 
-      return ::success;
+      //return ::success;
 
    }
 
@@ -854,10 +891,10 @@ namespace draw2d_gdiplus
    }
 
 
-   bool image::on_exif_orientation()
+   void image::on_exif_orientation()
    {
 
-      return ::image::on_exif_orientation();
+      ::image::on_exif_orientation();
 
    }
 

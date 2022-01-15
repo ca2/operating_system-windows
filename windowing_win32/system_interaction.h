@@ -22,7 +22,7 @@ namespace windowing_win32
       DECLARE_MESSAGE_HANDLER(on_message_destroy);
 
 
-      virtual bool start_destroying_window() override;
+      virtual void start_destroying_window() override;
 
       virtual bool is_system_message_window() override;
 

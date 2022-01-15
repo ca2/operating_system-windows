@@ -82,27 +82,31 @@ namespace windowing_win32
    void buffer::initialize_graphics_graphics(::user::interaction_impl * pimpl)
    {
 
-      auto estatus = ::graphics::bitmap_source_buffer::initialize_graphics_graphics(pimpl);
+      //auto estatus = 
+      
+      ::graphics::bitmap_source_buffer::initialize_graphics_graphics(pimpl);
 
-      if (!estatus)
-      {
+      //if (!estatus)
+      //{
 
-         return estatus;
+      //   return estatus;
 
-      }
+      //}
 
-      estatus = ::graphics::double_buffer::initialize_graphics_graphics(pimpl);
+      //estatus = 
+      
+      ::graphics::double_buffer::initialize_graphics_graphics(pimpl);
 
-      if (!estatus)
-      {
+      //if (!estatus)
+      //{
 
-         return estatus;
+      //   return estatus;
 
-      }
+      //}
 
       m_pwindow = pimpl->m_pwindow;
 
-      return estatus;
+      //return estatus;
 
    }
 
@@ -261,7 +265,7 @@ namespace windowing_win32
 
          destroy_buffer();
 
-         return false;
+         throw_status(error_null_pointer);
 
       }
 
@@ -282,16 +286,21 @@ namespace windowing_win32
          m_bDibIsHostingBuffer = true;
 
       }
-      else if (pimageBuffer->create(size))
-      {
-
-         m_bDibIsHostingBuffer = false;
-
-      }
       else
       {
+         try
+         {
 
-         return false;
+            pimageBuffer->create(size);
+
+         }
+         catch (...)
+         {
+            return false;
+         }
+        
+         m_bDibIsHostingBuffer = false;
+
 
       }
 

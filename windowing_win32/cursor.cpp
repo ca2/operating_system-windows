@@ -34,34 +34,39 @@ namespace windowing_win32
       if (get_hcursor())
       {
 
-         return success_none;
+         return;
+         
 
       }
 
       if (m_pimage)
       {
 
-         auto estatus = _create_from_image(m_pimage, m_szHotspotOffset.cx, m_szHotspotOffset.cy);
+         //auto estatus = 
+         
+         _create_from_image(m_pimage, m_szHotspotOffset.cx, m_szHotspotOffset.cy);
 
-         if(estatus.succeeded())
-         {
+         //if(estatus.succeeded())
+         //{
 
-            return estatus;
+         //   return estatus;
 
-         }
-
-      }
-
-      auto estatus = _load_default_cursor(m_ecursor);
-
-      if (!estatus)
-      {
-
-         return estatus;
+         //}
 
       }
 
-      return estatus;
+      //auto estatus = 
+      
+      _load_default_cursor(m_ecursor);
+
+      //if (!estatus)
+      //{
+
+      //   return estatus;
+
+      //}
+
+      //return estatus;
 
    }
 
@@ -74,13 +79,15 @@ namespace windowing_win32
       if (!hcursor)
       {
 
-         return ::error_failed;
+         //return ::error_failed;
+
+         throw_status(error_null_pointer);
 
       }
 
       set_hcursor(hcursor);
 
-      return ::success;
+      //return ::success;
 
    }
 
@@ -93,7 +100,9 @@ namespace windowing_win32
       if (pcursor == nullptr)
       {
 
-         return ::error_not_found;
+         //return ::error_not_found;
+
+         throw_status(error_null_pointer);
 
       }
 
@@ -102,13 +111,15 @@ namespace windowing_win32
       if (::is_null(hcursor))
       {
 
-         return error_failed;
+         //return error_failed;
+
+         throw_status(error_null_pointer);
 
       }
 
       set_hcursor(hcursor);
 
-      return ::success;
+      //return ::success;
 
    }
 

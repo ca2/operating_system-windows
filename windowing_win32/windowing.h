@@ -45,7 +45,7 @@ namespace windowing_win32
 
       virtual bool defer_create_system_window();
       //virtual __pointer(::user::interaction) create_system_window();
-      ::extended::transport < system_interaction > create_system_window();
+      __pointer(system_interaction) create_system_window();
 
 
       inline system_interaction * system_window() { return m_psysteminteraction; }

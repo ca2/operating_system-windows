@@ -166,8 +166,8 @@ namespace windows
 
       //virtual void native_create_host() override;
 
-      virtual bool destroy_impl_only() override;
-      virtual bool start_destroying_window() override;
+      virtual void destroy_impl_only() override;
+      virtual void start_destroying_window() override;
 
       virtual void destroy_window() override;
 
@@ -192,9 +192,9 @@ namespace windows
 //
 //#endif   // WINVER >= 0x0500
 
-      lresult send_message(const ::id & id, wparam wParam = 0, lparam lParam = nullptr);
+      lresult send_message(const ::id & id, wparam wParam = 0, lparam lParam = nullptr, const ::point_i32& point = nullptr) override;
 
-      bool post_message(const ::id & id, wparam wParam = 0, lparam lParam = nullptr);
+      void post_message(const ::id & id, wparam wParam = 0, lparam lParam = nullptr) override;
 
 
       //bool SendNotifyMessage(::u32 message, wparam wParam, lparam lParam);
@@ -290,10 +290,10 @@ namespace windows
 //      virtual void ShowOwnedPopups(bool bShow = true);
 
       //virtual __pointer(::draw2d::graphics) GetDCEx(::draw2d::region* prgnClip, u32 flags);
-      virtual bool LockWindowUpdate();
+      virtual void LockWindowUpdate();
       virtual void UnlockWindowUpdate();
 
-      virtual bool RedrawWindow(const ::rectangle_i32 & rectangleUpdate = nullptr, 
+      virtual void RedrawWindow(const ::rectangle_i32 & rectangleUpdate = nullptr, 
          ::draw2d::region* prgnUpdate = nullptr,
          ::u32 flags = RDW_INVALIDATE | RDW_ERASE);
 
@@ -339,7 +339,7 @@ namespace windows
 
       // Window State Functions
       virtual bool is_this_enabled();
-      virtual bool enable_window(bool bEnable = true);
+      virtual void enable_window(bool bEnable = true);
 
 
 //      virtual ::user::interaction * get_desktop_window();
@@ -737,7 +737,7 @@ namespace windows
       void on_set_parent(::user::interaction * pinteraction);
 
 
-      virtual bool get_rect_normal(RECTANGLE_I32 * prectangle);
+      virtual void get_rect_normal(RECTANGLE_I32 * prectangle);
       virtual void register_drop_target();
       virtual void show_task(bool bShow);
       virtual void window_show_change_visibility(::e_display edisplay, ::e_activation eactivation) override;

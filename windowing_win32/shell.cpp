@@ -1609,18 +1609,20 @@ namespace windowing_win32
       if (m_bInitialized)
       {
 
-         return ::success;
+         return;
 
       }
 
-      auto estatus = ::user::shell::initialize(pobject);
+      //auto estatus = 
+      
+      ::user::shell::initialize(pobject);
 
-      if (!estatus)
-      {
+      //if (!estatus)
+      //{
 
-         return estatus;
+      //   return estatus;
 
-      }
+      //}
 
       //estatus = __compose_new(m_pmessagequeue);
 
@@ -1634,7 +1636,7 @@ namespace windowing_win32
 
       //m_pmessagequeue->create_message_queue("user::shell", this);
 
-      return estatus;
+      //return estatus;
 
    }
 
@@ -1649,16 +1651,18 @@ namespace windowing_win32
 
       //m_thumbnailhandlerfactory.CoCreateInstance(CLSID_ThumbnailHandlerFactory);
 
-      auto estatus = ::user::shell::run();
+      //auto estatus = 
+      
+      ::user::shell::run();
 
-      if (!estatus)
-      {
+      //if (!estatus)
+      //{
 
-         return estatus;
+      //   return estatus;
 
-      }
+      //}
 
-      return estatus;
+      //return estatus;
 
    }
 

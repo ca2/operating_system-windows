@@ -124,7 +124,7 @@ namespace keyboard_hook
 
       g_hhook = nullptr;
 
-      return ::success;
+      //return ::success;
 
    }
 
@@ -135,7 +135,9 @@ namespace keyboard_hook
       if (g_hhook != nullptr)
       {
 
-         return true;
+         //return true;
+
+         return;
 
       }
 
@@ -143,7 +145,7 @@ namespace keyboard_hook
 
       g_bRun = true;
 
-      return true;
+      //return true;
 
    }
 
@@ -154,13 +156,15 @@ namespace keyboard_hook
       if (g_hhook == nullptr)
       {
 
-         return false;
+         //return false;
+
+         throw_status(error_null_pointer);
 
       }
 
       g_bRun = false;
 
-      return true;
+      //return true;
 
    }
 

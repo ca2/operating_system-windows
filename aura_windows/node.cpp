@@ -228,50 +228,52 @@ namespace aura
          if (i < 32)
          {
 
-            switch (i)
-            {
-            case 0:
-               //The operating system is out of memory or resources.
-               return error_no_memory;
-            case ERROR_FILE_NOT_FOUND:
-               return error_file_not_found;
-               //The specified file was not found.
-            case ERROR_PATH_NOT_FOUND:
-               return error_path_not_found;
-               //            The specified path was not found.
-            case          ERROR_BAD_FORMAT:
-               return error_bad_format;
-               //The.exe file is invalid(non - Win32.exe or error in.exe image).
-               //case SE_ERR_ACCESSDENIED:
-               //         return error_access_denied;
-               ////The operating system denied access to the specified file.
-               //SE_ERR_ASSOCINCOMPLETE
-               //The file name association is incomplete or invalid.
-               //SE_ERR_DDEBUSY
-               //The DDE transaction could not be completed because other DDE transactions were being processed.
-               //SE_ERR_DDEFAIL
-               //The DDE transaction failed.
-               //SE_ERR_DDETIMEOUT
-               //The DDE transaction could not be completed because the request timed out.
-               //SE_ERR_DLLNOTFOUND
-               //The specified DLL was not found.
-               //SE_ERR_FNF
-               //The specified file was not found.
-               //SE_ERR_NOASSOC
-               //There is no application associated with the given file name extension.This error will also be returned if you attempt to print a file that is not printable.
-               //SE_ERR_OOM
-               //There was not enough memory to complete the operation.
-               //SE_ERR_PNF
-               //The specified path was not found.
-               //SE_ERR_SHARE
-               //A sharing violation occurred.*/
-            default:
-               return error_failed;
-            }
+            auto estatus = last_error_to_status(i);
+
+            //switch (i)
+            //{
+            //case 0:
+            //   //The operating system is out of memory or resources.
+            //   return error_no_memory;
+            //case ERROR_FILE_NOT_FOUND:
+            //   return error_file_not_found;
+            //   //The specified file was not found.
+            //case ERROR_PATH_NOT_FOUND:
+            //   return error_path_not_found;
+            //   //            The specified path was not found.
+            //case          ERROR_BAD_FORMAT:
+            //   return error_bad_format;
+            //   //The.exe file is invalid(non - Win32.exe or error in.exe image).
+            //   //case SE_ERR_ACCESSDENIED:
+            //   //         return error_access_denied;
+            //   ////The operating system denied access to the specified file.
+            //   //SE_ERR_ASSOCINCOMPLETE
+            //   //The file name association is incomplete or invalid.
+            //   //SE_ERR_DDEBUSY
+            //   //The DDE transaction could not be completed because other DDE transactions were being processed.
+            //   //SE_ERR_DDEFAIL
+            //   //The DDE transaction failed.
+            //   //SE_ERR_DDETIMEOUT
+            //   //The DDE transaction could not be completed because the request timed out.
+            //   //SE_ERR_DLLNOTFOUND
+            //   //The specified DLL was not found.
+            //   //SE_ERR_FNF
+            //   //The specified file was not found.
+            //   //SE_ERR_NOASSOC
+            //   //There is no application associated with the given file name extension.This error will also be returned if you attempt to print a file that is not printable.
+            //   //SE_ERR_OOM
+            //   //There was not enough memory to complete the operation.
+            //   //SE_ERR_PNF
+            //   //The specified path was not found.
+            //   //SE_ERR_SHARE
+            //   //A sharing violation occurred.*/
+            //default:
+            //   return error_failed;
+            //}
 
          }
 
-         return ::success;
+         //return ::success;
 
       }
 
@@ -319,12 +321,16 @@ namespace aura
 
          set["privileged"] = true;
 
-         if (!call_sync(path, strParam, path.folder(), ::e_display_none, 3_min, set))
-         {
+         
 
-            return false;
+         call_sync(path, strParam, path.folder(), ::e_display_none, 3_min, set);
 
-         }
+         //if (!call_sync(path, strParam, path.folder(), ::e_display_none, 3_min, set))
+         //{
+
+         //   return false;
+
+         //}
 
          //if (CreateProcessW(wstrPath, wstrParam, nullptr, nullptr, false, 0, nullptr, wstrSystem, &si, &pi))
          //{
@@ -343,7 +349,7 @@ namespace aura
 
          //CloseHandle(pi.hthread);
 
-         return true;
+         //return true;
 
       }
 
@@ -355,14 +361,16 @@ namespace aura
 
          auto psystem = m_psystem;
 
-         auto estatus = psystem->main();
+         //auto estatus = 
+         
+         psystem->main();
 
-         if (!estatus)
-         {
+         //if (!estatus)
+         //{
 
-            return estatus;
+         //   return estatus;
 
-         }
+         //}
 
          /*estatus = m_psystem->inline_term();
 
@@ -373,7 +381,7 @@ namespace aura
 
          }*/
 
-         return estatus;
+         //return estatus;
 
 
       }

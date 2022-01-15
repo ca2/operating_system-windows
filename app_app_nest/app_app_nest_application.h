@@ -22,7 +22,7 @@ namespace ca2plugin_container
 
 
       application(::plugin::system * psystem, const ::string & pszChannel);
-      virtual ~application();
+      ~application() override;
 
 
       virtual void on_receive(::aura::ipc::rx * prx, const ::string & pszMessage);

@@ -207,7 +207,7 @@ namespace windows
 
       }
 
-      throw_status(error_failed);
+      return false;
 
    }
 

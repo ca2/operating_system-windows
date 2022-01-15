@@ -86,14 +86,14 @@ namespace draw2d_gdiplus
    }
 
 
-   bool region::create(::draw2d::graphics * pgraphics, ::i8 iCreate)
+   void region::create(::draw2d::graphics * pgraphics, ::i8 iCreate)
    {
 
       m_pregion = get(pgraphics);
 
       m_osdata[0] = m_pregion;
 
-      return m_pregion != nullptr;
+      //return m_pregion != nullptr;
 
    }
 
@@ -105,7 +105,7 @@ namespace draw2d_gdiplus
 
       ::draw2d::region::destroy();
 
-      return ::success;
+      //return ::success;
    
    }
 

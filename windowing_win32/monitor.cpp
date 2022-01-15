@@ -40,7 +40,9 @@ namespace windowing_win32
       if (!GetMonitorInfo(m_hmonitor, &mi))
       {
 
-         return ::error_failed;
+         //return ::error_failed;
+
+         throw_status(error_failed);
 
       }
 
@@ -48,7 +50,7 @@ namespace windowing_win32
 
       __copy(m_rectangleWorkspace, mi.rcWork);
 
-      return true;
+      //return true;
 
    }
 

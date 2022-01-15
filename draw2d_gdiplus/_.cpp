@@ -14,7 +14,7 @@ CLASS_DECL_DRAW2D_GDIPLUS void initialize_gdiplus()
    if (g_pgdiplusStartupInput != nullptr)
    {
 
-      return ::success;
+      return;
 
    }
 
@@ -35,7 +35,7 @@ CLASS_DECL_DRAW2D_GDIPLUS void initialize_gdiplus()
 
       output_debug_string("Gdiplus Failed to Startup. ca cannot continue.");
 
-      return ::error_failed;
+      return;
 
    }
 
@@ -46,11 +46,11 @@ CLASS_DECL_DRAW2D_GDIPLUS void initialize_gdiplus()
 
       output_debug_string("Gdiplus Failed to Hook. ca cannot continue.");
 
-      return ::error_failed;
+      throw_status(error_failed);
 
    }
 
-   return ::success;
+   //return ::success;
 
 }
 
@@ -71,7 +71,7 @@ CLASS_DECL_DRAW2D_GDIPLUS void terminate_gdiplus()
 
    }
 
-   return ::success;
+   //return ::success;
 
 }
 

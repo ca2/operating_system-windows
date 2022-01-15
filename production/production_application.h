@@ -21,7 +21,7 @@ namespace production
 
 
       application(::object * pobject);
-      virtual ~application();
+      ~application() override;
 
       virtual void construct();
 

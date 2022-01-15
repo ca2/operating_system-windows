@@ -54,12 +54,12 @@ namespace draw2d_gdiplus
 
       ::write_text::font::destroy();
       
-      return ::success;
+      //return ::success;
 
    }
 
 
-   bool font::create(::draw2d::graphics * pgraphics, ::i8 iCreate)
+   void font::create(::draw2d::graphics * pgraphics, ::i8 iCreate)
    {
 
       i32 iStyle = 0;
@@ -126,7 +126,7 @@ namespace draw2d_gdiplus
 
       m_mapText.erase_all();
 
-      return true;
+      //return true;
 
    }
 

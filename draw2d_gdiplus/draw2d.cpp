@@ -29,25 +29,29 @@ namespace draw2d_gdiplus
    void draw2d::initialize(::object * pobject)
    {
 
-      auto estatus = ::draw2d::draw2d::initialize(pobject);
+      //auto estatus = 
+      
+      ::draw2d::draw2d::initialize(pobject);
 
-      if (!estatus)
-      {
+      //if (!estatus)
+      //{
 
-         return estatus;
+      //   return estatus;
 
-      }
+      //}
    
-      estatus = initialize_gdiplus();
+      //estatus = 
+      
+      initialize_gdiplus();
 
-      if (!estatus)
-      {
+      //if (!estatus)
+      //{
 
-         return estatus;
+      //   return estatus;
 
-      }
+      //}
 
-      return estatus;
+      //return estatus;
    
    }
 

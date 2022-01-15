@@ -55,18 +55,18 @@ namespace windowing_win32
       virtual HGLOBAL hglobal_get_image(const ::image * pimage);
 
 
-      void _set_filea(const ::file::patha & stra, e_op eop) override;
-      void _get_filea(::file::patha & stra, e_op & eop) override;
+      bool _set_filea(const ::file::patha & stra, enum_op eop) override;
+      bool _get_filea(::file::patha & stra, enum_op & eop) override;
       bool _has_filea() override;
 
 
-      void _set_plain_text(const ::string & str) override;
-      void _get_plain_text(string & str) override;
+      bool _set_plain_text(const ::string & str) override;
+      bool _get_plain_text(string & str) override;
       bool _has_plain_text() override;
 
 
-      void _desk_to_image(::image * pimage) override;
-      void _image_to_desk(const ::image * pimage) override;
+      bool _desk_to_image(::image * pimage) override;
+      bool _image_to_desk(const ::image * pimage) override;
       bool _has_image() override;
 
 

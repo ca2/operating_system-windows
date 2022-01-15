@@ -228,7 +228,7 @@ namespace windowing_win32
       //virtual void * get_os_data() const;
 
 
-      virtual void set_finish() override;
+      virtual ::e_status set_finish() override;
 
 
       //      virtual ::user::interaction * from_handle(HWND hwnd);

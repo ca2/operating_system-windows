@@ -170,7 +170,7 @@ namespace windowing_win32
 
       //}
 
-      return m_pathProcessed.has_char();
+      //return m_pathProcessed.has_char();
 
 //      return !m_iconmap.is_empty();
 
@@ -190,14 +190,16 @@ namespace windowing_win32
 
       string strMatter = "main/icon.ico";
 
-      if (!load_matter(strMatter))
-      {
+      load_matter(strMatter);
 
-         return false;
+      //if (!load_matter(strMatter))
+      //{
 
-      }
+      //   return false;
 
-      return true;
+      //}
+
+      //return true;
 
    }
 

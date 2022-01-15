@@ -68,7 +68,7 @@ namespace windowing_win32
       if (m_bCreated)
       {
 
-         return ::success_none;
+         return;
 
       }
 
@@ -76,12 +76,16 @@ namespace windowing_win32
 
       m_strId = "ca2-" + picon->get_tray_icon_name() + "-" + strId;
 
-      if (!create_message_queue(m_strId))
-      {
+      
 
-         return false;
+      create_message_queue(m_strId);
 
-      }
+      //if (!create_message_queue(m_strId))
+      //{
+
+      //   return false;
+
+      //}
 
       m_id = id;
 
@@ -100,13 +104,15 @@ namespace windowing_win32
 
          start_destroying_window();
 
-         return false;
+         throw_status(error_null_pointer);
+
+         //return false;
 
       }
 
       m_bCreated = true;
 
-      return true;
+      //return true;
 
    }
 
@@ -117,7 +123,9 @@ namespace windowing_win32
       if (!m_bCreated)
       {
 
-         return error_failed;
+         //return error_failed;
+
+         throw_status(error_null_pointer);
 
       }
 
@@ -128,13 +136,13 @@ namespace windowing_win32
       if (!Shell_NotifyIcon(NIM_MODIFY, &m_nid))
       {
 
-         return false;
+         throw_status(error_null_pointer);
 
       }
 
       m_piconCurrent = picon;
 
-      return ::success;
+      //return ::success;
 
    }
 
@@ -142,16 +150,18 @@ namespace windowing_win32
    void notify_icon::add_hidden_window(::user::interaction * puserinteraction)
    {
 
-      auto estatus = ::user::notify_icon::add_hidden_window(puserinteraction);
+      //auto estatus = 
+      
+      ::user::notify_icon::add_hidden_window(puserinteraction);
 
-      if (!estatus)
-      {
+      //if (!estatus)
+      //{
 
-         return estatus;
+      //   return estatus;
 
-      }
+      //}
 
-      return estatus;
+      //return estatus;
 
    }
 
@@ -195,13 +205,13 @@ namespace windowing_win32
 #endif // defined(WINDOWS_DESKTOP)
 
 
-   bool notify_icon::start_destroying_window()
+   void notify_icon::start_destroying_window()
    {
 
       if (!m_bCreated)
       {
 
-         return false;
+         return;
 
       }
 
@@ -211,7 +221,7 @@ namespace windowing_win32
 
       ::user::interaction::start_destroying_window();
 
-      return true;
+      //return true;
 
 
 #elif defined(LINUX) && !defined(RASPBIAN)
@@ -335,7 +345,7 @@ namespace windowing_win32
    //}
 
 
-   void notify_icon::step()
+   bool notify_icon::step()
    {
 
 #if defined(LINUX)
@@ -349,7 +359,7 @@ namespace windowing_win32
 
 #endif
 
-      return ::success;
+      return true;
 
    }
 

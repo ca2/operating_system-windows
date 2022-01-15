@@ -29,9 +29,11 @@ namespace windowing_win32
    void node::install_keyboard_hook(::matter * pmatterListener)
    {
 
-      auto estatus = ::keyboard_hook::install(pmatterListener);
+      //auto estatus = 
+      
+      ::keyboard_hook::install(pmatterListener);
 
-      if (estatus.succeeded())
+      //if (estatus.succeeded())
       {
 
          fork(__routine([]()
@@ -43,14 +45,14 @@ namespace windowing_win32
 
       }
 
-      if (!estatus)
-      {
+      //if (!estatus)
+      //{
 
-         return estatus;
+      //   return estatus;
 
-      }
+      //}
 
-      return estatus;
+      //return estatus;
 
    }
 
@@ -58,16 +60,18 @@ namespace windowing_win32
    void node::uninstall_keyboard_hook(::matter * pmatterListener)
    {
 
-      auto estatus = ::keyboard_hook::uninstall(pmatterListener);
+      //auto estatus = 
+      
+      ::keyboard_hook::uninstall(pmatterListener);
 
-      if (!estatus)
-      {
+      //if (!estatus)
+      //{
 
-         return estatus;
+      //   return estatus;
 
-      }
+      //}
 
-      return estatus;
+      //return estatus;
 
    }
 
@@ -75,9 +79,11 @@ namespace windowing_win32
    void node::install_mouse_hook(::matter * pmatterListener)
    {
 
-      auto estatus = ::mouse_hook::install(pmatterListener);
+      //auto estatus =
+      
+      ::mouse_hook::install(pmatterListener);
 
-      if (estatus.succeeded())
+      //if (estatus.succeeded())
       {
 
          fork(__routine([]()
@@ -89,14 +95,14 @@ namespace windowing_win32
 
       }
 
-      if (!estatus)
-      {
+      //if (!estatus)
+      //{
 
-         return estatus;
+      //   return estatus;
 
-      }
+      //}
 
-      return estatus;
+      //return estatus;
 
    }
 
@@ -104,16 +110,18 @@ namespace windowing_win32
    void node::uninstall_mouse_hook(::matter * pmatterListener)
    {
 
-      auto estatus = ::mouse_hook::uninstall(pmatterListener);
+      //auto estatus = 
+      
+      ::mouse_hook::uninstall(pmatterListener);
 
-      if (!estatus)
-      {
+      //if (!estatus)
+      //{
 
-         return estatus;
+      //   return estatus;
 
-      }
+      //}
 
-      return estatus;
+      //return estatus;
 
    }
 
@@ -128,7 +136,7 @@ namespace windowing_win32
 
       }
 
-      return ::success;
+      //return ::success;
 
    }
 

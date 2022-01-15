@@ -293,7 +293,9 @@ namespace windowing_win32
       if (!puserinteraction->pre_create_window(puserinteraction->m_pusersystem))
       {
 
-         return false;
+         //return false;
+
+         throw_status(error_failed);
 
       }
 
@@ -524,7 +526,9 @@ namespace windowing_win32
       if (hwnd == nullptr)
       {
 
-         return false;
+         //return false;
+
+         throw_status(error_failed);
 
       }
 
@@ -583,7 +587,7 @@ namespace windowing_win32
 
       puserinteraction->m_ewindowflag |= e_window_flag_window_created;
 
-      return true;
+      //return true;
 
    }
 
@@ -1325,11 +1329,13 @@ namespace windowing_win32
       if (!::SetParent(hwnd, hwndParent))
       {
 
-         return ::error_failed;
+         //return ::error_failed;
+
+         throw_status(error_failed);
 
       }
 
-      return ::success;
+      //return ::success;
 
    }
 
@@ -1356,11 +1362,13 @@ namespace windowing_win32
       if (!::ShowWindow(hwnd, iShowWindow))
       {
 
-         return ::error_failed;
+         //return ::error_failed;
+
+         throw_status(error_failed);
 
       }
 
-      return ::success;
+      //return ::success;
 
    }
 
@@ -1433,7 +1441,7 @@ namespace windowing_win32
 
       //::fflush(stdout);
 
-      return ::success;
+      //return ::success;
 
    }
 
@@ -1472,7 +1480,7 @@ namespace windowing_win32
 
       //}
 
-      return ::success;
+      //return ::success;
 
    }
 
@@ -1511,7 +1519,7 @@ namespace windowing_win32
 
       //}
 
-      return ::success;
+      //return ::success;
 
    }
 
@@ -1554,7 +1562,7 @@ namespace windowing_win32
 
       //}
 
-      return ::success;
+      //return ::success;
 
    }
 
@@ -1567,11 +1575,13 @@ namespace windowing_win32
       if (!::SetFocus(hwnd))
       {
 
-         return ::error_failed;
+         //return ::error_failed;
+
+         throw_status(error_failed);
 
       }
 
-      return ::success;
+      //return ::success;
 
    }
 
@@ -1594,11 +1604,13 @@ namespace windowing_win32
       if (!::SetActiveWindow(hwnd))
       {
 
-         return ::error_failed;
+         //return ::error_failed;
+
+         throw_status(error_failed);
 
       }
 
-      return ::success;
+      //return ::success;
 
    }
 
@@ -1611,11 +1623,13 @@ namespace windowing_win32
       if (!::BringWindowToTop(hwnd))
       {
 
-         return ::error_failed;
+         //return ::error_failed;
+
+         throw_status(error_failed);
 
       }
 
-      return ::success;
+      //return ::success;
 
    }
 
@@ -1632,11 +1646,13 @@ namespace windowing_win32
       if (hwndGet != hwnd)
       {
 
-         return ::error_failed;
+         //return ::error_failed;
+
+         throw_status(error_failed);
 
       }
 
-      return ::success;
+      //return ::success;
 
    }
 
@@ -1803,11 +1819,13 @@ namespace windowing_win32
       if (!::DestroyWindow(hwnd))
       {
 
-         return ::error_failed;
+         //return ::error_failed;
+
+         throw_status(error_failed);
 
       }
 
-      return ::success;
+      //return ::success;
 
    }
 
@@ -2287,23 +2305,25 @@ namespace windowing_win32
          if (hcursor == nullptr)
          {
 
-            auto estatus = pcursor->_create_os_cursor();
+            //auto estatus = 
+            
+            pcursor->_create_os_cursor();
 
-            if (!estatus)
-            {
+            //if (!estatus)
+            //{
 
-               return estatus;
+            //   return estatus;
 
-            };
+            //};
 
             hcursor = (HCURSOR)pcursor->get_os_data();
 
-            if (!hcursor)
-            {
+            //if (!hcursor)
+            //{
 
-               return error_resource;
+            //   return error_resource;
 
-            }
+            //}
 
          }
 
@@ -2315,11 +2335,11 @@ namespace windowing_win32
       if (!::SetCursor(hcursor))
       {
 
-         return ::error_failed;
+         throw_status(error_failed);
 
       }
 
-      return ::success;
+      //return ::success;
 
    }
 
@@ -2487,11 +2507,13 @@ namespace windowing_win32
       if (!::SetForegroundWindow(hwnd))
       {
 
-         return ::error_failed;
+         //return ::error_failed;
+
+         throw_status(error_failed);
 
       }
 
-      return ::success;
+      //return ::success;
 
       //// special activate logic for floating toolbars and palettes
       //auto pActiveWnd = GetForegroundWindow();
@@ -2787,11 +2809,13 @@ namespace windowing_win32
       if (!::SetWindowLongPtr(hwnd, GWLP_HWNDPARENT, (LONG_PTR) hwndOwner))
       {
 
-         return ::error_failed;
+         //return ::error_failed;
+
+         throw_status(error_failed);
 
       }
 
-      return ::success;
+      //return ::success;
 
    }
 
@@ -5350,19 +5374,25 @@ namespace windowing_win32
    void window::set_icon(::windowing::icon * picon)
    {
 
-      auto estatus = ::windowing::window::set_icon(picon);
+      //auto estatus = 
+      
+      ::windowing::window::set_icon(picon);
 
-      if (!estatus)
-      {
+      //if (!estatus)
+      //{
 
-         return estatus;
+      //   //return estatus;
 
-      }
+      //   throw_status(error_failed);
+
+      //}
 
       if (::is_null(picon))
       {
 
-         return error_failed;
+         //return error_failed;
+
+         throw_status(error_failed);
 
       }
 
@@ -5396,7 +5426,7 @@ namespace windowing_win32
 
       }
 
-      return ::success;
+      //return ::success;
 
    }
 
@@ -6063,7 +6093,7 @@ namespace windowing_win32
    }
 
 
-   void window::set_finish()
+   ::e_status window::set_finish()
    {
 
       auto estatus = ::windowing::window::set_finish();
@@ -6091,7 +6121,7 @@ namespace windowing_win32
 
       }
 
-      return ::success;
+      //return ::success;
 
    }
 

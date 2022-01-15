@@ -35,18 +35,19 @@ namespace write_text_win32
       if (!m_hdc)
       {
 
-         return error_failed;
+         throw_status(error_wrong_state);
 
       }
 
-      auto estatus = __defer_construct_new(m_pfontenumerationitema);
+      //auto estatus = 
+      __defer_construct_new(m_pfontenumerationitema);
 
-      if (!estatus)
-      {
+      //if (!estatus)
+      //{
 
-         return estatus;
+      //   return estatus;
 
-      }
+      //}
 
       class font_enumeration* pfontenumeration = this;
 
@@ -63,7 +64,7 @@ namespace write_text_win32
 
       m_hdc = nullptr;
 
-      return estatus;
+      //return estatus;
 
    }
 

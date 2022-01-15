@@ -324,7 +324,7 @@ namespace draw2d_gdiplus
    //}
 
 
-   bool path::create(::draw2d::graphics * pgraphicsParam, ::i8 iCreate)
+   void path::create(::draw2d::graphics * pgraphicsParam, ::i8 iCreate)
    {
 
       //auto pgdiplusgraphics = __graphics(pgraphicsParam);
@@ -382,7 +382,7 @@ namespace draw2d_gdiplus
 
       m_osdata[0] = m_ppath;
 
-      return true;
+      //return true;
 
    }
 
@@ -392,7 +392,7 @@ namespace draw2d_gdiplus
 
       ::acme::del(m_ppath);
 
-      return ::success;
+      //return ::success;
 
    }
 
@@ -514,9 +514,13 @@ namespace draw2d_gdiplus
 
       ::rectangle_f64 rectangle(rectangleParam);
 
-      auto estatus = gdiplus_draw_text(pgraphics, this, strText, rectangle, ealign, edrawtext, pfont, 1.0);
+      //auto estatus = 
+      
+      gdiplus_draw_text(pgraphics, this, strText, rectangle, ealign, edrawtext, pfont, 1.0);
 
-      return !estatus;
+      ///return !estatus;
+
+      return true;
 
    }
 

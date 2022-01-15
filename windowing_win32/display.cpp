@@ -92,12 +92,14 @@ namespace windowing_win32
 
          }
 
-         if (!pmonitor->get_monitor_rectangle(prectangle))
-         {
+         pmonitor->get_monitor_rectangle(prectangle);
 
-            return -1;
+         //f (!)
+         //{
 
-         }
+         //   return -1;
+
+         //}
 
       }
 
@@ -513,10 +515,12 @@ namespace windowing_win32
 
          auto pmonitor = get_monitor(iMonitor);
 
-         if (pmonitor->get_monitor_rectangle(rectangleMonitor))
-         {
+         pmonitor->get_monitor_rectangle(rectangleMonitor);
 
-         }
+         //if (pmonitor->get_monitor_rectangle(rectangleMonitor))
+         //{
+
+         //}
 
          if (rectangleIntersect.top_left_null_intersect(&rectangleParam, rectangleMonitor))
          {
@@ -855,7 +859,9 @@ namespace windowing_win32
 
          auto pmonitor = get_monitor(iMonitor);
 
-         if (pmonitor->get_monitor_rectangle(rectangleMonitor))
+         pmonitor->get_monitor_rectangle(rectangleMonitor);
+
+         //if ()
          {
 
             if (rectangleIntersect.top_left_null_intersect(rectangle, rectangleMonitor))
@@ -936,7 +942,9 @@ namespace windowing_win32
 
          auto pmonitor = get_monitor(iWorkspace);
 
-         if (pmonitor->get_workspace_rectangle(rectangleMonitor))
+         pmonitor->get_workspace_rectangle(rectangleMonitor);
+
+         //if ()
          {
 
             if (rectangleIntersect.top_left_null_intersect(rectangle, rectangleMonitor))
@@ -1011,27 +1019,29 @@ namespace windowing_win32
    void display::initialize_display(::windowing::windowing * pwindowing)
    {
 
-      auto estatus = ::windowing::display::initialize_display(pwindowing);
+      //auto estatus = 
+      
+      ::windowing::display::initialize_display(pwindowing);
 
-      if (!estatus)
-      {
+      //if (!estatus)
+      //{
 
-         return estatus;
+      //   return estatus;
 
-      }
+      //}
 
       m_pwindowing = pwindowing;
 
-      if (!m_pwindowing)
-      {
-         
-         return error_no_interface;
+      //if (!m_pwindowing)
+      //{
+      //   
+      //   return error_no_interface;
 
-      }
+      //}
 
       enum_display_monitors();
 
-      return estatus;
+//      return estatus;
 
    }
 

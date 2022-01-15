@@ -35,7 +35,7 @@ namespace draw2d_gdiplus
 
 #endif
 
-   bool brush::create(::draw2d::graphics * pgraphics, ::i8 iCreate)
+   void brush::create(::draw2d::graphics * pgraphics, ::i8 iCreate)
    {
 
       if(m_etype == type_solid)
@@ -145,7 +145,7 @@ namespace draw2d_gdiplus
 
       m_osdata[0] = m_pbrush;
 
-      return m_pbrush != nullptr;
+      //return m_pbrush != nullptr;
 
    }
 
@@ -155,7 +155,7 @@ namespace draw2d_gdiplus
 
       ::acme::del(m_pbrush);
 
-      return ::success;
+      //return ::success;
 
    }
 
@@ -167,7 +167,7 @@ namespace draw2d_gdiplus
 
       ::draw2d::brush::destroy();
 
-      return ::success;
+      //return ::success;
 
    }
 

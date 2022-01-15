@@ -33,7 +33,7 @@ namespace draw2d_gdiplus
 
       ::draw2d::bitmap::destroy();
 
-      return ::success;
+      //return ::success;
 
    }
 
@@ -64,13 +64,15 @@ namespace draw2d_gdiplus
    }
 
 
-   bool bitmap::host_bitmap(::draw2d::graphics * pgraphics, const pixmap * ppixmap)
+   void bitmap::host_bitmap(::draw2d::graphics * pgraphics, const pixmap * ppixmap)
    {
 
       if (ppixmap->m_size == m_size)
       {
 
-         return true;
+         //return true;
+
+         return;
 
       }
 
@@ -83,7 +85,9 @@ namespace draw2d_gdiplus
       if (ppixmap->colorref() == nullptr)
       {
 
-         return false;
+         //return false;
+
+         throw_status(error_failed);
 
       }
 
@@ -92,7 +96,9 @@ namespace draw2d_gdiplus
       if (m_pbitmap == nullptr)
       {
 
-         return false;
+         //return false;
+
+         throw_status(error_failed);
 
       }
 
@@ -100,18 +106,20 @@ namespace draw2d_gdiplus
 
       m_size = ppixmap->m_size;
 
-      return true;
+      //return true;
 
    }
 
 
-   bool bitmap::create_bitmap(::draw2d::graphics* pgraphics, const ::size_i32& size, void** ppvBits, int* stride)
+   void bitmap::create_bitmap(::draw2d::graphics* pgraphics, const ::size_i32& size, void** ppvBits, int* stride)
    {
 
       if (size == m_size)
       {
 
-         return true;
+         //return true;
+
+         return;
 
       }
 
@@ -138,7 +146,9 @@ namespace draw2d_gdiplus
       if (m_mem.get_data() == nullptr)
       {
 
-         return false;
+         //return false;
+
+         return;
 
       }
 
@@ -147,7 +157,7 @@ namespace draw2d_gdiplus
       if(m_pbitmap == nullptr)
       {
 
-         return false;
+         throw_status(error_failed);
 
       }
 
@@ -169,14 +179,14 @@ namespace draw2d_gdiplus
 
       m_size = size;
 
-      return true;
+      //return true;
 
    }
 
 
-   bool bitmap::CreateDIBitmap(::draw2d::graphics * pgraphics, int cx, int cy, u32 flInit, const void *pjBits, UINT iUsage)
+   void bitmap::CreateDIBitmap(::draw2d::graphics * pgraphics, int cx, int cy, u32 flInit, const void *pjBits, UINT iUsage)
    {
-      return false;
+      //return false;
    }
 
 
@@ -248,7 +258,7 @@ namespace draw2d_gdiplus
    }
 
 
-   bool bitmap::CreateCompatibleBitmap(::draw2d::graphics * pgraphics, i32 nWidth, i32 nHeight)
+   void bitmap::CreateCompatibleBitmap(::draw2d::graphics * pgraphics, i32 nWidth, i32 nHeight)
    {
 
       {
@@ -261,10 +271,12 @@ namespace draw2d_gdiplus
 
       m_osdata[0] = m_pbitmap;
 
-      return true;
+      //return true;
 
    }
-   bool bitmap::CreateDiscardableBitmap(::draw2d::graphics * pgraphics, i32 nWidth, i32 nHeight)
+
+
+   void bitmap::CreateDiscardableBitmap(::draw2d::graphics * pgraphics, i32 nWidth, i32 nHeight)
    {
 
       ::acme::del(m_pbitmap);
@@ -273,7 +285,7 @@ namespace draw2d_gdiplus
 
       m_osdata[0] = m_pbitmap;
 
-      return true;
+      //return true;
 
    }
 
@@ -319,7 +331,8 @@ namespace draw2d_gdiplus
 
 #endif
 
-   bool bitmap::attach(void * posdata)
+
+   void bitmap::attach(void * posdata)
    {
 
       ::acme::del(m_pbitmap);
@@ -328,9 +341,10 @@ namespace draw2d_gdiplus
 
       m_osdata[0] = m_pbitmap;
 
-      return true;
+      //return true;
 
    }
+
 
    void * bitmap::detach()
    {

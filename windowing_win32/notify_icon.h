@@ -55,7 +55,7 @@ namespace windowing_win32
 
       virtual void erase_all_routes() override;
 
-      virtual bool start_destroying_window() override;
+      virtual void start_destroying_window() override;
 
       virtual void destroy_window() override;
 
@@ -79,7 +79,7 @@ namespace windowing_win32
 
       void install_message_routing(::channel * pchannel) override;
 
-      void step() override;
+      bool step() override;
 
 //#if defined(APPLE_IOS) || defined(WINDOWS_DESKTOP) || defined(ANDROID) || defined(_UWP)
 //      virtual void notify_icon_play(const ::string & action);

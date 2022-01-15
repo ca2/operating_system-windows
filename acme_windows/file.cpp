@@ -215,14 +215,14 @@ namespace windows
 
          ::e_status estatus = last_error_to_status(dwLastError);
 
-         if (::file::should_ignore_file_exception_callstack(estatus))
-         {
+         //if (::file::should_ignore_file_exception_callstack(estatus))
+         //{
 
-            throw_status(error_failed);
+         //   throw_status(error_failed);
 
-         }
+         //}
 
-         throw_status(estatus);
+         throw io_exception(estatus);
 
 
       }

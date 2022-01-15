@@ -319,7 +319,7 @@ namespace draw2d_gdiplus
    */
 
 
-   bool pen::create(::draw2d::graphics * pgraphics, ::i8 iCreate)
+   void pen::create(::draw2d::graphics * pgraphics, ::i8 iCreate)
    {
 
       if (m_epen == ::draw2d::e_pen_brush)
@@ -423,7 +423,7 @@ namespace draw2d_gdiplus
 
       m_osdata[0] = m_ppen;
 
-      return ::is_set(m_ppen);
+      //return ::is_set(m_ppen);
 
    }
 
@@ -435,7 +435,7 @@ namespace draw2d_gdiplus
 
       ::draw2d::pen::clear_os_data();
 
-      return ::success;
+      //return ::success;
 
    }
 

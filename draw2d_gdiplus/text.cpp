@@ -7,14 +7,16 @@ void gdiplus_draw_text(::draw2d::graphics* pgraphicsParam, ::draw2d::path* ppath
    if (str.is_empty())
    {
 
-      return ::success;
+      //return ::success;
+
+      return;
 
    }
 
    if (::is_null(pfontParam))
    {
 
-      return ::error_failed;
+      throw_status(error_failed);
 
    }
 
@@ -23,7 +25,9 @@ void gdiplus_draw_text(::draw2d::graphics* pgraphicsParam, ::draw2d::path* ppath
    if (::is_null(pfont))
    {
 
-      return ::error_failed;
+      //return ::error_failed;
+
+      throw_status(error_failed);
 
    }
 
@@ -55,7 +59,9 @@ void gdiplus_draw_text(::draw2d::graphics* pgraphicsParam, ::draw2d::path* ppath
       if (::is_null(pbrush))
       {
 
-         return ::error_failed;
+         //return ::error_failed;
+
+         throw_status(error_failed);
 
       }
 
@@ -138,8 +144,8 @@ void gdiplus_draw_text(::draw2d::graphics* pgraphicsParam, ::draw2d::path* ppath
 
    }
 
-   try
-   {
+   //try
+   //{
 
       Gdiplus::FontFamily f;
       int nStyle;
@@ -287,13 +293,13 @@ void gdiplus_draw_text(::draw2d::graphics* pgraphicsParam, ::draw2d::path* ppath
       }
 
 
-   }
-   catch (...)
-   {
+   //}
+   //catch (...)
+   //{
 
-   }
+   //}
 
-   return Gdiplus::Status::Ok;
+   //return Gdiplus::Status::Ok;
 
 }
 
