@@ -1359,16 +1359,16 @@ namespace windowing_win32
 
       }
 
-      if (!::ShowWindow(hwnd, iShowWindow))
-      {
+      ::ShowWindow(hwnd, iShowWindow);
+      //{
 
-         //return ::error_failed;
+      //   //return ::error_failed;
 
-         throw_status(error_failed);
+      //   throw_status(error_failed);
 
-      }
+      //}
 
-      //return ::success;
+      ////return ::success;
 
    }
 
@@ -1574,10 +1574,16 @@ namespace windowing_win32
 
       if (!::SetFocus(hwnd))
       {
-
+         
+         DWORD lastError = ::GetLastError();
          //return ::error_failed;
 
-         throw_status(error_failed);
+         if (lastError != NO_ERROR)
+         {
+
+            throw_status(error_failed);
+
+         }
 
       }
 

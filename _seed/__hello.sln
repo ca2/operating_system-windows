@@ -45,6 +45,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "acme_windows", "..\acme_win
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "console_application_build_helper", "..\..\..\source\console\application_build_helper\application_build_helper.vcxproj", "{BA041232-56F1-44E7-B71F-7B88670AE1B1}"
 	ProjectSection(ProjectDependencies) = postProject
+		{A69CC125-E38A-4F77-9677-8860D43AB3B0} = {A69CC125-E38A-4F77-9677-8860D43AB3B0}
 		{D08014E6-E329-41CF-81B5-957C290A4AA8} = {D08014E6-E329-41CF-81B5-957C290A4AA8}
 	EndProjectSection
 EndProject
