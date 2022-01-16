@@ -62,17 +62,28 @@ namespace windows
    }
 
 
-   void file::open(const ::file::path& pszFileName, const ::file::e_open & eopenParam)
+   void file::open(const ::file::path& path, const ::file::e_open & eopenParam)
    {
 
       auto eopen = eopenParam;
 
-      if (pszFileName.is_empty())
+      if (path.is_empty())
       {
 
-         //TRACE("windows::file::open file with empty name!!");
+         m_estatus = error_invalid_empty_argument;
 
-         throw_status(error_failed);
+         if (eopenParam & ::file::e_open_no_exception_on_open)
+         {
+
+            return;
+
+         }
+         else
+         {
+
+            throw file_open_exception(m_estatus, "file with empty name!!");
+
+         }
 
       }
 
@@ -84,7 +95,7 @@ namespace windows
       }
 
       ASSERT_VALID(this);
-      ASSERT(__is_valid_string(pszFileName));
+      ASSERT(__is_valid_string(path));
 
       eopen -= ::file::e_open_binary;
 
@@ -95,7 +106,7 @@ namespace windows
 
          auto pacmedir = psystem->m_pacmedir;
 
-         pacmedir->create(pszFileName.folder());
+         pacmedir->create(path.folder());
 
       }
 
@@ -103,7 +114,7 @@ namespace windows
 
       m_path.Empty();
 
-      m_path = pszFileName;
+      m_path = path;
 
       ASSERT(sizeof(HANDLE) == sizeof(uptr));
       ASSERT(::file::e_open_share_compat == 0);
@@ -222,8 +233,20 @@ namespace windows
 
          //}
 
-         throw io_exception(estatus);
+         m_estatus = estatus;
 
+         if (eopenParam & ::file::e_open_no_exception_on_open)
+         {
+
+            return;
+
+         }
+         else
+         {
+
+            throw file_open_exception(m_estatus, "Create File has failed.");
+
+         }
 
       }
 
@@ -232,6 +255,8 @@ namespace windows
       m_dwAccessMode = dwAccess;
 
       m_eopen = eopen;
+
+      m_estatus = ::success;
 
       //return ::success;
 
