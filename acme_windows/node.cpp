@@ -1988,7 +1988,12 @@ namespace acme
 
          auto estatus = ExitCode_to_status(rc);
 
-         throw_status(estatus);
+         if (::failed(estatus))
+         {
+
+            throw_status(estatus);
+
+         }
 
 #else
 
