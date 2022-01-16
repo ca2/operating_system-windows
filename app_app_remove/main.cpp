@@ -219,7 +219,7 @@ void     removal::run()
 
    ::file::path strTargetDir = get_known_folder_dir(FOLDERID_ProgramFilesX86,"ca2.app.removal");
 
-   pcontext->m_papexcontext->dir().mk(strTargetDir.c_str());
+   pcontext->m_papexcontext->dir().create(strTargetDir.c_str());
 
    wstring wstrTarget = strTargetDir / "app.removal.exe";
 

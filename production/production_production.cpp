@@ -742,7 +742,7 @@ pacmedir->system() / "config/production/mirror_status.txt";
                }
             }
 
-            //pcontext->m_papexcontext->dir().mk(m_strBase /  "time"));
+            //pcontext->m_papexcontext->dir().create(m_strBase /  "time"));
 
             for (auto & strRoot : m_straRoot)
             {
@@ -1005,10 +1005,10 @@ pacmedir->create(pathTarget.folder()))
          {
          return 1;
          }*/
-         pcontext->m_papexcontext->dir().mk("C:\\home\\ca2_spa\\" + m_strConfiguration + "\\app\\");
+         pcontext->m_papexcontext->dir().create("C:\\home\\ca2_spa\\" + m_strConfiguration + "\\app\\");
          pcontext->m_papexcontext->file().put_contents("C:\\home\\ca2_spa\\" + m_strConfiguration + "\\app\\build.txt", m_strBuild);
          pcontext->m_papexcontext->file().put_contents(m_strCCVrelNew + "\\app\\build.txt", m_strBuild);
-         pcontext->m_papexcontext->dir().mk(m_strTagPath.folder());
+         pcontext->m_papexcontext->dir().create(m_strTagPath.folder());
          pcontext->m_papexcontext->file().put_contents(m_strTagPath, m_strTag);
 
          //commit_source("C:\\netnodenet\\net");
@@ -2680,7 +2680,7 @@ pacmedir->create(pathTarget.folder()))
       string strPlatform(pszPlatform);
 
 
-      pcontext->m_papexcontext->dir().mk(m_strBase / "time\\iexca2" / strPlatform);
+      pcontext->m_papexcontext->dir().create(m_strBase / "time\\iexca2" / strPlatform);
 
       string strNpca2Version;
 
