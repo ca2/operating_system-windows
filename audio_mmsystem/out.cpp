@@ -52,14 +52,16 @@ namespace audio_mmsystem
    void out::init_thread()
    {
 
-      if (!::wave::out::init_thread())
-      {
+      ::wave::out::init_thread();
 
-         return ::error_failed;
+      ////if (!::wave::out::init_thread())
+      //{
 
-      }
+      //   return ::error_failed;
 
-      return ::success;
+      //}
+
+      //return ::success;
 
    }
 
@@ -82,7 +84,9 @@ namespace audio_mmsystem
       if (m_hwaveout != nullptr && m_estate != e_state_initial)
       {
 
-         return ::success;
+         //return ::success;
+
+         return;
 
       }
 
@@ -92,7 +96,7 @@ namespace audio_mmsystem
 
       m_pthreadCallback = pthreadCallback;
 
-      void     estatus;
+      ::e_status estatus;
 
       ASSERT(m_hwaveout == nullptr);
       ASSERT(m_estate == e_state_initial);
@@ -108,8 +112,8 @@ namespace audio_mmsystem
 
       auto paudiowave = paudio->audiowave();
 
-      try
-      {
+      //try
+      //{
 
          mmresult = waveOutOpen(&m_hwaveout, paudiowave->m_uiWaveOutDevice, wave_format(), (DWORD_PTR) &waveOutProc, (DWORD_PTR) this, CALLBACK_FUNCTION);
 
@@ -124,41 +128,43 @@ namespace audio_mmsystem
 
             TRACE("multimedia::audio_mmsystem::out::out_open_ex waveOutOpen: ERROR %d!!", mmresult);
 
+            estatus = mmresult_to_status(mmresult);
+
+            //if (estatus == ::success)
+            //{
+
+            //   goto Opened;
+
+            //}
+
+            throw_status(estatus);
+
+            //}
+            //catch(const ::exception &)
+            //{
+
+            //   return error_failed;
+
+            //}
+            //catch(...)
+            //{
+
+            //   return error_failed;
+
+            //}
+
+            //if(estatus != ::success)
+            //{
+
+            //   TRACE(status_message(estatus));
+
+            //   return estatus;
+
+            //}
+
+      //Opened:
+
          }
-
-         estatus = ::multimedia::mmsystem::translate(mmresult);
-
-         if (estatus == ::success)
-         {
-
-            goto Opened;
-
-         }
-
-      }
-      catch(const ::exception &)
-      {
-
-         return error_failed;
-
-      }
-      catch(...)
-      {
-
-         return error_failed;
-
-      }
-
-      if(estatus != ::success)
-      {
-
-         TRACE(status_message(estatus));
-
-         return estatus;
-
-      }
-
-Opened:
 
       int iBufferCount;
       int iBufferSampleCount;
@@ -227,7 +233,7 @@ Opened:
 
          }
 
-         estatus = ::multimedia::mmsystem::translate(mmresult);
+         estatus = mmresult_to_status(mmresult);
 
          if (estatus != ::success)
          {
@@ -280,10 +286,9 @@ Opened:
 
             }
 
-
             TRACE("ERROR !! Failed to prepare output device buffers");
 
-            return estatus;
+            throw_status(estatus);
 
          }
 
@@ -293,13 +298,12 @@ Opened:
 
       m_epurpose = epurpose;
 
-      return ::success;
+      //return ::success;
 
    }
 
 
-
-   void     out::out_close()
+   void out::out_close()
    {
 
       synchronous_lock synchronouslock(mutex());
@@ -314,38 +318,45 @@ Opened:
       if (m_estate != e_state_opened)
       {
 
-         return ::success;
+         return;
 
       }
 
-      void     estatus;
+      ::e_status estatus;
+
+      MMRESULT mmresult;
 
       index i;
 
-      auto iSize =  out_get_buffer()->GetBufferCount();
+      auto iSize = out_get_buffer()->GetBufferCount();
 
       for(i = 0; i < iSize; i++)
       {
 
-         if(::success != (estatus = ::multimedia::mmsystem::translate(waveOutUnprepareHeader(m_hwaveout, wave_hdr(i), sizeof(WAVEHDR)))))
+         mmresult = waveOutUnprepareHeader(m_hwaveout, wave_hdr(i), sizeof(WAVEHDR));
+
+         estatus = mmresult_to_status(mmresult);
+
+         if(::succeeded(estatus))
          {
-            TRACE("ERROR OPENING Unpreparing INPUT DEVICE buffer =%d", estatus);
+
+            ERROR("ERROR OPENING Unpreparing INPUT DEVICE buffer : " << estatus.m_estatus);
+
          }
 
          delete wave_hdr(i);
 
       }
 
-      estatus = ::multimedia::mmsystem::translate(waveOutClose(m_hwaveout));
+      mmresult = waveOutClose(m_hwaveout);
+
+      estatus = mmresult_to_status(mmresult);
 
       m_hwaveout = nullptr;
 
       ::wave::out::out_close();
 
-      return ::success;
-
    }
-
 
 
    void out::out_filled(index iBuffer)
@@ -372,9 +383,11 @@ Opened:
 
       m_iBufferedCount++;
 
-      void     estatus = ::multimedia::mmsystem::translate(waveOutWrite(m_hwaveout, lpwavehdr, sizeof(WAVEHDR)));
+      MMRESULT mmresult = waveOutWrite(m_hwaveout, lpwavehdr, sizeof(WAVEHDR));
 
-      if(estatus != ::success)
+      auto estatus = mmresult_to_status(mmresult);
+
+      if(::failed(estatus))
       {
 
          m_iBufferedCount--;
@@ -384,7 +397,7 @@ Opened:
    }
 
 
-   void     out::out_stop()
+   void out::out_stop()
    {
 
       synchronous_lock synchronouslock(mutex());
@@ -392,7 +405,9 @@ Opened:
       if (m_estate != e_state_playing && m_estate != e_state_paused)
       {
 
-         return error_failed;
+         //return error_failed;
+
+         throw_status(error_failed);
 
       }
 
@@ -405,7 +420,10 @@ Opened:
       // waveform-audio_mmsystem output device and resets the current position
       // to zero. All pending playback buffers are marked as done and
       // returned to the application.
-      m_estatusWave = ::multimedia::mmsystem::translate(waveOutReset(m_hwaveout));
+
+      MMRESULT mmresult = waveOutReset(m_hwaveout);
+
+      m_estatusWave = mmresult_to_status(mmresult);
 
       if(m_estatusWave == ::success)
       {
@@ -414,20 +432,24 @@ Opened:
 
       }
 
-      return m_estatusWave;
+      //return m_estatusWave;
 
    }
 
 
-   void     out::out_pause()
+   void out::out_pause()
    {
 
       single_lock sLock(mutex(), true);
 
       ASSERT(m_estate == e_state_playing);
 
-      if(m_estate != e_state_playing)
-         return error_failed;
+      if (m_estate != e_state_playing)
+      {
+
+         throw_status(error_wrong_state);
+
+      }
 
       // waveOutReset
       // The waveOutReset function stops playback on the given
@@ -435,35 +457,45 @@ Opened:
       // to zero. All pending playback buffers are marked as done and
       // returned to the application.
 
-      m_estatusWave = ::multimedia::mmsystem::translate(waveOutPause(m_hwaveout));
+      m_estatusWave = mmresult_to_status(waveOutPause(m_hwaveout));
 
       ASSERT(m_estatusWave == ::success);
 
       if(m_estatusWave == ::success)
       {
+
          m_estate = e_state_paused;
+
       }
 
-      return m_estatusWave;
+      //return m_estatusWave;
 
    }
 
-   void     out::out_restart()
+
+   void out::out_restart()
    {
 
       synchronous_lock synchronouslock(mutex());
 
       ASSERT(m_estate == e_state_paused);
 
-      if(m_estate != e_state_paused)
-         return error_failed;
+      if (m_estate != e_state_paused)
+      {
+
+         throw_status(error_failed);
+
+      }
 
       // waveOutReset
       // The waveOutReset function stops playback on the given
       // waveform-audio_mmsystem output device and resets the current position
       // to zero. All pending playback buffers are marked as done and
       // returned to the application.
-      m_estatusWave = ::multimedia::mmsystem::translate(waveOutRestart(m_hwaveout));
+
+      MMRESULT mmresult = waveOutRestart(m_hwaveout);
+
+      m_estatusWave = mmresult_to_status(mmresult);
 
       ASSERT(m_estatusWave == ::success);
 
@@ -474,7 +506,7 @@ Opened:
 
       }
 
-      return m_estatusWave;
+      //return m_estatusWave;
 
    }
 
@@ -511,7 +543,7 @@ Opened:
 
       mmt.wType = TIME_BYTES;
 
-      auto estatus = ::multimedia::mmsystem::translate(waveOutGetPosition(m_hwaveout, &mmt, sizeof(mmt)));
+      auto estatus = mmresult_to_status(waveOutGetPosition(m_hwaveout, &mmt, sizeof(mmt)));
 
       if (::success != estatus)
       {
@@ -564,7 +596,7 @@ Opened:
    //   if(m_hwaveout != nullptr)
    //   {
 
-   //      estatus = ::multimedia::mmsystem::translate(waveOutGetPosition(m_hwaveout, &mmt, sizeof(mmt)));
+   //      estatus = mmresult_to_status(waveOutGetPosition(m_hwaveout, &mmt, sizeof(mmt)));
 
    //      try
    //      {

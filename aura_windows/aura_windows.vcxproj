@@ -887,6 +887,7 @@
     <ClInclude Include="framework.h" />
     <ClInclude Include="interaction_impl.h" />
     <ClInclude Include="node.h" />
+    <ClInclude Include="shell_open.h" />
     <ClInclude Include="_.h" />
     <ClInclude Include="_aura_windows.h" />
   </ItemGroup>
@@ -895,6 +896,7 @@
     <ClCompile Include="hicon_from_ico_file.cpp" />
     <ClCompile Include="interaction_impl.cpp" />
     <ClCompile Include="node.cpp" />
+    <ClCompile Include="shell_open.cpp" />
     <ClCompile Include="_factory.cpp" />
     <ClCompile Include="framework.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='basis|x64'">Create</PrecompiledHeader>

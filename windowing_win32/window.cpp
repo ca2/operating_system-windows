@@ -2510,14 +2510,14 @@ namespace windowing_win32
 
       HWND hwnd = get_hwnd();
 
-      if (!::SetForegroundWindow(hwnd))
-      {
+      ::SetForegroundWindow(hwnd);
+      //{
 
-         //return ::error_failed;
+      //   //return ::error_failed;
 
-         throw_status(error_failed);
+      //   throw_status(error_failed);
 
-      }
+      //}
 
       //return ::success;
 

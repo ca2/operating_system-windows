@@ -29,7 +29,7 @@ namespace music
 
 
             in();
-            virtual ~in();
+            ~in() override;
 
 
             virtual void     open(int iDeviceId) override;

@@ -46,7 +46,7 @@ namespace music
             if (iDeviceId < 0)
             {
 
-               return error_not_found;
+               throw_status(error_not_found);
 
             }
 
@@ -57,11 +57,11 @@ namespace music
             if (estatus != MMSYSERR_NOERROR)
             {
 
-               return error_failed;
+               throw_status(error_failed);
 
             }
 
-            return ::success;
+            //return ::success;
 
          }
 
@@ -75,7 +75,7 @@ namespace music
 
             }
 
-            return ::success;
+            //return ::success;
 
          }
 
@@ -83,13 +83,22 @@ namespace music
          void     out::send_short_message(::music::midi::e_message emessage, int iChannel, int iData1, int iData2)
          {
 
-//            return ::multimedia::mmsystem::translate(midiOutShortMsg(m_hmidiout, MIDIMSG(((int)emessage) >> 4, iChannel, iData1, iData2)), "out::send_short_message");
-            return ::multimedia::mmsystem::translate(midiOutShortMsg(m_hmidiout, MIDIMSG(((int)emessage) >> 4, iChannel, iData1, iData2)));
+//            return mmresult_to_status(midiOutShortMsg(m_hmidiout, MIDIMSG(((int)emessage) >> 4, iChannel, iData1, iData2)), "out::send_short_message");
+            MMRESULT mmresult = midiOutShortMsg(m_hmidiout, MIDIMSG(((int)emessage) >> 4, iChannel, iData1, iData2));
+
+            auto estatus = mmresult_to_status(mmresult);
+
+            if (!estatus)
+            {
+
+               throw_status(estatus);
+
+            }
 
          }
 
 
-         void     out::send_long_message(const block& block)
+         void out::send_long_message(const block& block)
          {
 
             MIDIHDR midihdr;
@@ -138,7 +147,7 @@ namespace music
 
             }
 
-            return ::multimedia::mmsystem::translate(e);
+            //return mmresult_to_status(e);
 
          }
 

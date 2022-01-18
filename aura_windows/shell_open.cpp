@@ -24,16 +24,18 @@ namespace windows
    void shell_open::initialize(::object * pobject)
    {
 
-      auto estatus = ::shell_open::initialize(pobject);
+      //auto estatus = 
+      
+      ::shell_open::initialize(pobject);
 
-      if (!estatus)
-      {
+      //if (!estatus)
+      //{
 
-         return estatus;
+      //   return estatus;
 
-      }
+      //}
 
-      return estatus;
+      //return estatus;
 
    }
 
@@ -140,7 +142,7 @@ namespace windows
       }
 
 
-      return ::success;
+      //return ::success;
 
 
    }

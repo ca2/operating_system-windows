@@ -28,16 +28,18 @@ namespace multimedia
       void device::initialize_audio_mixer_device(::multimedia::audio_mixer::audio_mixer * pmixer)
       {
 
-         auto estatus = ::multimedia::audio_mixer::device::initialize_audio_mixer_device(pmixer);
+         //auto estatus = 
+         
+         ::multimedia::audio_mixer::device::initialize_audio_mixer_device(pmixer);
 
-         if (!estatus)
-         {
+         //if (!estatus)
+         //{
 
-            return estatus;
+         //   return estatus;
 
-         }
+         //}
 
-         return estatus;
+         //return estatus;
 
       }
 
@@ -45,7 +47,7 @@ namespace multimedia
       void device::open(u32 uiMixerId, UINT_PTR dwCallback, u32 dwInstance, u32 fdwOpen)
       {
 
-         void         mmrc;
+         MMRESULT          mmresult;
          HMIXER            hmx;
          MIXERCAPS         mxcaps;
 
@@ -53,52 +55,60 @@ namespace multimedia
          if (m_hMixer != nullptr)
          {
 
-            void mmrct = close();
+            //MMRESULT mmresult;
+            
+            close();
 
-            if(::success != mmrct)
-            {
+            //if(::success != mmrct)
+            //{
 
-               string strMessage;
+               //string strMessage;
 
-               strMessage.format("mixerClose() failed on hmx=%.04Xh, mmr=%u!", m_hMixer, mmrct);
+               //strMessage.format("mixerClose() failed on hmx=%.04Xh, mmr=%u!", m_hMixer, mmrct);
 
                //message_box(this, strMessage, nullptr, e_message_box_icon_exclamation);
 
-            }
+            //}
 
          }
 
-         mmrc = mmsystem::translate(mixerGetDevCaps(uiMixerId, &mxcaps, sizeof(mxcaps)));
+         mmresult = mixerGetDevCaps(uiMixerId, &mxcaps, sizeof(mxcaps));
 
-         if(::success != mmrc)
+         auto estatus = mmresult_to_status(mmresult);
+
+         if(::failed(estatus))
          {
 
-            string strMessage;
+            //string strMessage;
 
-            strMessage.format("mixerGetDevCaps() failed on uMxId=%u, mmr=%u!", uiMixerId, mmrc);
+            //strMessage.format("mixerGetDevCaps() failed on uMxId=%u, mmr=%u!", uiMixerId, mmrc);
+
+            ////message_box(strMessage, nullptr, e_message_box_icon_exclamation);
+
+            //return mmrc;
+
+            throw_status(estatus);
+
+         }
+
+         mmresult = mixerOpen(&hmx, uiMixerId, dwCallback, dwInstance, fdwOpen);
+
+         estatus = mmresult_to_status(mmresult);
+
+         if(::failed(estatus))
+         {
+
+            //string strMessage;
+
+            //strMessage.format("mixerOpen() failed on uMxId=%u, mmr=%u!", uiMixerId, mmrc);
 
             //message_box(strMessage, nullptr, e_message_box_icon_exclamation);
 
-            return mmrc;
+            //return mmrc;
+
+            throw_status(estatus);
 
          }
-
-         mmrc = mmsystem::translate(mixerOpen(&hmx, uiMixerId, dwCallback, dwInstance, fdwOpen));
-
-         if(::success != mmrc)
-         {
-
-            string strMessage;
-
-            strMessage.format("mixerOpen() failed on uMxId=%u, mmr=%u!", uiMixerId, mmrc);
-
-            //message_box(strMessage, nullptr, e_message_box_icon_exclamation);
-
-            return mmrc;
-
-         }
-
-
 
          m_hMixer = hmx;
 
@@ -106,40 +116,44 @@ namespace multimedia
 
          //    AppSetWindowText(oswindow, "::multimedia::audio_mixer::audio_mixer Device: %s", (char *)mxcaps.szPname);
 
-         return mmrc;
+         //return mmrc;
 
       }
 
 
-      void     device::initialize_capabilities()
+      void device::initialize_capabilities()
       {
 
-         void     mmrc;
+         MMRESULT mmresult;
 
-         mmrc = mmsystem::translate(mixerGetDevCaps((UINT_PTR) m_hMixer, &m_mixercaps, sizeof(MIXERCAPS)));
+         mmresult = mixerGetDevCaps((UINT_PTR) m_hMixer, &m_mixercaps, sizeof(MIXERCAPS));
 
-         if(::success != mmrc)
+         auto estatus = mmresult_to_status(mmresult);
+
+         if(::failed(estatus))
          {
 
-            string strMessage;
+            //string strMessage;
 
-            strMessage.format("mixerGetDevCaps() failed on uMxId=%u, mmr=%u!", m_uiMixerID, mmrc);
+            //strMessage.format("mixerGetDevCaps() failed on uMxId=%u, mmr=%u!", m_uiMixerID, mmrc);
 
-            //message_box(strMessage, nullptr, e_message_box_icon_exclamation);
+            ////message_box(strMessage, nullptr, e_message_box_icon_exclamation);
 
-            return mmrc;
+            //return mmrc;
+
+            throw_status(estatus);
 
          }
 
-         return mmrc;
+         //return mmrc;
 
       }
 
 
-      void     device::initialize_destinations()
+      void device::initialize_destinations()
       {
 
-         __pointer(::multimedia::audio_mixer_mmsystem::destination)    lpDestination;
+         __pointer(::multimedia::audio_mixer_mmsystem::destination)  lpDestination;
 
          m_mixerdestinationa.set_size_create(this, m_mixercaps.cDestinations);
 
@@ -147,7 +161,7 @@ namespace multimedia
          {
             lpDestination = m_mixerdestinationa[i];
             lpDestination->set_device(this);
-            lpDestination->mixerGetLineInfo(0, i, MIXER_GETLINEINFOF_DESTINATION);
+            lpDestination->get_line_info(0, i, MIXER_GETLINEINFOF_DESTINATION);
             //        ::multimedia::audio_mixer::audio_mixer::get_component_name(lpmxl, lpDestination->m_strComponent);
 
             //        //
@@ -179,9 +193,10 @@ namespace multimedia
          //
          //
          //    SetWindowRedraw(ptlb->hlb, true);
-         return ::success;
+         //return ::success;
 
       }
+
 
       void     device::get_destination(::multimedia::audio_mixer::e_destination edestination, ::multimedia::audio_mixer::destination **ppDestination)
       {
@@ -195,15 +210,15 @@ namespace multimedia
             break;
 
          default:
-            return error_failed;
+            throw_status(error_invalid_argument);
          };
 
 
          if(m_mixerdestinationa.get_size() <= 0)
             initialize_destinations();
 
-         if(m_mixerdestinationa.get_size() <= 0)
-            return error_failed;
+         if (m_mixerdestinationa.get_size() <= 0)
+            throw_status(error_wrong_state);
 
          for(i32 i = 0; i < m_mixerdestinationa.get_size(); i++)
          {
@@ -217,13 +232,13 @@ namespace multimedia
 
                *ppDestination = m_mixerdestinationa[i];
 
-               return ::success;
+               return;
 
             }
 
          }
 
-         return error_failed;
+         throw_status(error_not_found);
 
       }
 
@@ -349,15 +364,24 @@ namespace multimedia
       }
 
 
-      void     device::close()
+      void device::close()
       {
 
-         void     mmrc = ::success;
+         //void     mmrc = ::success;
 
          if(m_hMixer != nullptr)
          {
 
-            mmrc = mmsystem::translate(mixerClose(m_hMixer));
+            MMRESULT mmresult = mixerClose(m_hMixer);
+
+            auto estatus = mmresult_to_status(mmresult);
+
+            if (!estatus)
+            {
+
+               throw_status(estatus);
+
+            }
 
             m_mixerdestinationa.erase_all();
 
@@ -371,9 +395,10 @@ namespace multimedia
 
          }
 
-         return mmrc;
+         //return mmrc;
 
       }
+
 
       bool device::OnCommand(wparam wparam, lparam lparam)
       {

@@ -159,6 +159,9 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "static_app_core_clockverse_no_audio", "..\..\..\source\app-core\clockverse\static_app_core_clockverse_no_audio.vcxproj", "{D3298219-333A-47C6-A327-97CD1A367124}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_app_core_desk", "..\..\..\source\app-core\desk\shared_app_core_desk.vcxproj", "{02CC1ACA-4CDF-4724-858D-92F6AE643236}"
+	ProjectSection(ProjectDependencies) = postProject
+		{D79C7DDB-A727-4B91-803E-41C4431693D6} = {D79C7DDB-A727-4B91-803E-41C4431693D6}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "static_app_core_desk", "..\..\..\source\app-core\desk\static_app_core_desk.vcxproj", "{DE55918C-525C-4DF2-8B00-B1DB27B11BB8}"
 EndProject

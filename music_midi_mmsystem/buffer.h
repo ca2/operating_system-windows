@@ -47,9 +47,10 @@ namespace music
             void Reset();
             void Initialize(i32 iSize, buffer_array* pbuffera);
 
-            void     midiStreamOut(HMIDISTRM hmidiout);
-            void     midiOutPrepareHeader(HMIDIOUT hmidiout);
-            void     midiOutUnprepareHeader(HMIDIOUT hmidiout);
+
+            ::e_status midiStreamOut(HMIDISTRM hmidiout);
+            ::e_status midiOutPrepareHeader(HMIDIOUT hmidiout);
+            ::e_status midiOutUnprepareHeader(HMIDIOUT hmidiout);
 
 
             inline LPMIDIHDR GetMidiHdr()
@@ -88,9 +89,10 @@ namespace music
             void Initialize(i32 iCount, i32 iSize, midi_callback_data* pcallbackdata);
 
 
-            void     midiStreamOut(HMIDISTRM hmidiout);
-            void     midiOutPrepareHeader(HMIDIOUT hmidiout);
-            void     midiOutUnprepareHeader(HMIDIOUT hmidiout);
+            ::e_status midiStreamOut(HMIDISTRM hmidiout);
+            ::e_status midiOutPrepareHeader(HMIDIOUT hmidiout);
+            ::e_status midiOutUnprepareHeader(HMIDIOUT hmidiout);
+
 
          };
 

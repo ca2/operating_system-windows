@@ -63,26 +63,6 @@ namespace multimedia
 
       }
 
-      void     translate(MMRESULT mmr)
-      {
-
-         switch(mmr)
-         {
-         case MMSYSERR_NOERROR:
-
-            return ::success;
-
-         case MMSYSERR_ALLOCATED:
-
-            return error_already_allocated;
-
-         default:
-
-            return error_failed;
-
-         };
-
-      }
 
 
    } // namespace mmsystem
@@ -91,6 +71,26 @@ namespace multimedia
 } // namespace multimedia
 
 
+CLASS_DECL_MULTIMEDIA_MMSYSTEM ::e_status mmresult_to_status(MMRESULT mmr)
+{
+
+   switch (mmr)
+   {
+   case MMSYSERR_NOERROR:
+
+      return ::success;
+
+   case MMSYSERR_ALLOCATED:
+
+      return error_already_allocated;
+
+   default:
+
+      return error_failed;
+
+   };
+
+}
 
 
 

@@ -52,17 +52,19 @@ namespace music
                   CALLBACK_FUNCTION
                   );
 
-            if (mmresult != MMSYSERR_NOERROR)
+            auto estatus = mmresult_to_status(mmresult);
+
+            if (!estatus)
             {
 
-               return error_failed;
+               throw_status(estatus);
 
             }
 
-
-            return ::success;
+            //return ::success;
 
          }
+
 
          void in::start()
          {
@@ -74,7 +76,7 @@ namespace music
 
             }
 
-            return ::success;
+            //return ::success;
 
          }
 
@@ -90,7 +92,7 @@ namespace music
 
             }
 
-            return ::success;
+            //return ::success;
 
          }
 
@@ -105,7 +107,7 @@ namespace music
 
             }
 
-            return ::success;
+            //return ::success;
 
          }
 
@@ -166,10 +168,10 @@ namespace music
          void in::send_short_message(::music::midi::e_message emessage, int iChannel, int iData1, int iData2)
          {
 
-//            return ::multimedia::mmsystem::translate(midiOutShortMsg(m_hmidiout, MIDIMSG(((int)emessage) >> 4, iChannel, iData1, iData2)), "out::send_short_message");
-            //return ::multimedia::mmsystem::translate(midiOutShortMsg(m_hmidiout, MIDIMSG(((int)emessage) >> 4, iChannel, iData1, iData2)));
+//            return mmresult_to_status(midiOutShortMsg(m_hmidiout, MIDIMSG(((int)emessage) >> 4, iChannel, iData1, iData2)), "out::send_short_message");
+            //return mmresult_to_status(midiOutShortMsg(m_hmidiout, MIDIMSG(((int)emessage) >> 4, iChannel, iData1, iData2)));
 
-            return ::error_failed;
+            //return ::error_failed;
 
          }
 

@@ -20,9 +20,12 @@ namespace multimedia
 
       }
 
-      void     source::GetLineControls()
+
+      void source::GetLineControls()
       {
-         void     mmrc;
+
+         MMRESULT mmresult;
+
          m_bHasV001Controls = false;
          i32 iControlCount = m_mixerline.cControls;
          if (0 == iControlCount)
@@ -30,7 +33,10 @@ namespace multimedia
             //        message_box(nullptr, MB_OK | e_message_box_icon_exclamation,
             //"There are no controls associated with the selected line.");
             //        EndDialog(oswindow, false);
-            return ::success;
+            //return ::success;
+
+            return;
+
          }
 
          m_mixercontrola.set_size_create(this, iControlCount);
@@ -56,18 +62,22 @@ namespace multimedia
 
          __pointer(::multimedia::audio_mixer_mmsystem::device) device = get_device();
 
-         mmrc = mmsystem::translate(mixerGetLineControls((HMIXEROBJ) device->m_hMixer, &m_mixerlinecontrols, MIXER_GETLINECONTROLSF_ALL));
+         mmresult = mixerGetLineControls((HMIXEROBJ) device->m_hMixer, &m_mixerlinecontrols, MIXER_GETLINECONTROLSF_ALL);
 
-         if (::success != mmrc)
+         auto estatus = mmresult_to_status(mmresult);
+
+         if (::failed(estatus))
          {
 
-            string strMessage;
+            //string strMessage;
 
-            strMessage.format("mixerGetLineControls(ctrlid=%.08lXh) failed on hmx=%.04Xh, mmr=%u!",
-                              m_mixerline.dwLineID, device->m_hMixer, mmrc);
+            //strMessage.format("mixerGetLineControls(ctrlid=%.08lXh) failed on hmx=%.04Xh, mmr=%u!",
+            //                  m_mixerline.dwLineID, device->m_hMixer, mmrc);
 
 
-            //message_box(strMessage, nullptr, e_message_box_icon_exclamation);
+            ////message_box(strMessage, nullptr, e_message_box_icon_exclamation);
+
+            throw_status(estatus);
 
          }
          else
@@ -141,7 +151,7 @@ namespace multimedia
 
          //    SetWindowRedraw(ptlb->hlb, true);
          //  LocalFree((HLOCAL)pamxctrl);
-         return mmrc;
+         //return mmrc;
 
       }
 
@@ -219,48 +229,58 @@ namespace multimedia
       }
 
 
-      void     source::mixerGetLineInfo(u32 dwSource, u32 dwDestination, u32 fdwInfo)
+      void source::get_line_info(u32 dwSource, u32 dwDestination, u32 fdwInfo)
       {
 
          m_mixerline.cbStruct       = sizeof(MIXERLINE);
          m_mixerline.dwDestination  = dwDestination;
          m_mixerline.dwSource       = dwSource;
 
-
          __pointer(::multimedia::audio_mixer_mmsystem::device) device = get_device();
 
-         void     mmrc = mmsystem::translate(::mixerGetLineInfo((HMIXEROBJ)device->m_hMixer, &m_mixerline, fdwInfo));
+         MMRESULT mmresult = ::mixerGetLineInfo((HMIXEROBJ)device->m_hMixer, &m_mixerline, fdwInfo);
 
-         if (::success != mmrc)
+         auto estatus = mmresult_to_status(mmresult);
+
+         if (::failed(estatus))
          {
-            string strMessage;
 
-            strMessage.format("mixerGetLineInfo(src=%u) failed on hmx=%.04Xh, mmr=%u!",
-                              dwSource, device->m_hMixer, mmrc);
-            //message_box(strMessage, nullptr, e_message_box_icon_exclamation);
+            //string strMessage;
+
+            //strMessage.format("mixerGetLineInfo(src=%u) failed on hmx=%.04Xh, mmr=%u!",
+            //                  dwSource, device->m_hMixer, mmrc);
+            ////message_box(strMessage, nullptr, e_message_box_icon_exclamation);
+
+            throw_status(estatus);
 
          }
 
-         return mmrc;
-
+         //return mmrc;
 
       }
 
-      void     source::mixerGetLineInfo(u32 dwSource, ::multimedia::audio_mixer::destination * pdestination)
+
+      void source::get_line_info(u32 dwSource, ::multimedia::audio_mixer::destination * pdestination)
       {
 
          __pointer(::multimedia::audio_mixer_mmsystem::destination) destination = pdestination;
 
-         void     mmrc = mixerGetLineInfo(dwSource, destination->m_mixerline.dwDestination, MIXER_GETLINEINFOF_SOURCE);
+         get_line_info(dwSource, destination->m_mixerline.dwDestination, MIXER_GETLINEINFOF_SOURCE);
+
          SetDestination(pdestination);
-         return mmrc;
+
+         //return mmrc;
 
       }
+
 
       ::multimedia::audio_mixer::destination * source::get_destination()
       {
+
          return m_pdestination;
+
       }
+
 
       bool source::HasV001Controls()
       {

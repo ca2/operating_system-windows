@@ -6329,9 +6329,9 @@ namespace draw2d_gdiplus
       if (block.is_empty())
       {
 
-         //return false;
+         return;
 
-         throw_status(error_null_pointer);
+         //throw_status(error_null_pointer);
 
       }
 

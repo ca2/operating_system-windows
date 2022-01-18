@@ -29,11 +29,11 @@ namespace music
             ~out() override;
 
 
-            virtual void     open() override;
-            virtual void     close() override;
+            void open() override;
+            void close() override;
 
-            void     send_short_message(::music::midi::e_message emessage, int iChannel, int iData1, int iData2);
-            void     send_long_message(const block& block);
+            void send_short_message(::music::midi::e_message emessage, int iChannel, int iData1, int iData2);
+            void send_long_message(const block& block);
 
             virtual void sysex(const block& block);
 

@@ -15,7 +15,7 @@ namespace multimedia
       CLASS_DECL_MULTIMEDIA_MMSYSTEM LPWAVEHDR get_os_data(::wave::buffer * pwavebuffer, index iIndex);
 
 
-      CLASS_DECL_MULTIMEDIA_MMSYSTEM void     translate(MMRESULT mmr);
+      //CLASS_DECL_MULTIMEDIA_MMSYSTEM void     translate(MMRESULT mmr);
 
 
    } // namespace mmsystem
@@ -24,6 +24,7 @@ namespace multimedia
 } // namespace multimedia
 
 
+CLASS_DECL_MULTIMEDIA_MMSYSTEM ::e_status mmresult_to_status(MMRESULT mmr);
 
 
 
