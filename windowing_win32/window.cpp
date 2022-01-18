@@ -1572,20 +1572,21 @@ namespace windowing_win32
 
       HWND hwnd = get_hwnd();
 
-      if (!::SetFocus(hwnd))
-      {
-         
-         DWORD lastError = ::GetLastError();
-         //return ::error_failed;
+      HWND hwndThreadPreviousFocus = ::SetFocus(hwnd);
 
-         if (lastError != NO_ERROR)
-         {
+      //{
+      //   
+      //   DWORD lastError = ::GetLastError();
+      //   //return ::error_failed;
 
-            throw_status(error_failed);
+      //   if (lastError != NO_ERROR)
+      //   {
 
-         }
+      //      throw_status(error_failed);
 
-      }
+      //   }
+
+      //}
 
       //return ::success;
 

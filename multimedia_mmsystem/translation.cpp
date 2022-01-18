@@ -80,6 +80,10 @@ CLASS_DECL_MULTIMEDIA_MMSYSTEM ::e_status mmresult_to_status(MMRESULT mmr)
 
       return ::success;
 
+   case MMSYSERR_BADDEVICEID:
+
+      return error_bad_device_id;
+
    case MMSYSERR_ALLOCATED:
 
       return error_already_allocated;
