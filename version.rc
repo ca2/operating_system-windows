@@ -13,7 +13,7 @@
 #undef APSTUDIO_READONLY_SYMBOLS
 
 /////////////////////////////////////////////////////////////////////////////
-// Neutral (m_lDefault) resources
+// Neutral (Default) resources
 
 #if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_NEUD)
 LANGUAGE LANG_NEUTRAL, SUBLANG_DEFAULT
@@ -25,8 +25,8 @@ LANGUAGE LANG_NEUTRAL, SUBLANG_DEFAULT
 //
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION 2019,1013,813,52
- PRODUCTVERSION 2019,1013,813,52
+ FILEVERSION 2022,121,855,18
+ PRODUCTVERSION 2022,121,855,18
  FILEFLAGSMASK 0x3fL
 #ifdef _DEBUG
  FILEFLAGS 0x1L
@@ -43,9 +43,9 @@ BEGIN
         BEGIN
             VALUE "CompanyName", "ca2 Desenvolvimento de Software Ltda."
             VALUE "FileDescription", " Project"
-            VALUE "FileVersion", "2019.1013.0813.52"
-            VALUE "LegalCopyright", "Copyright (C) 2019-10-13-08-13-52"
-            VALUE "ProductVersion", "2019.1013.0813.52"
+            VALUE "FileVersion", "2022.121.855.18"
+            VALUE "LegalCopyright", "Copyright (C) 2022-01-21-08-55-18"
+            VALUE "ProductVersion", "2022.121.855.18"
         END
     END
     BLOCK "VarFileInfo"
@@ -54,7 +54,7 @@ BEGIN
     END
 END
 
-#endif    // Neutral (m_lDefault) resources
+#endif    // Neutral (Default) resources
 /////////////////////////////////////////////////////////////////////////////
 
 
@@ -89,13 +89,6 @@ BEGIN
 END
 
 #endif    // APSTUDIO_INVOKED
-
-
-/////////////////////////////////////////////////////////////////////////////
-//
-// LEVEL
-//
-
 
 #endif    // English (United States) resources
 /////////////////////////////////////////////////////////////////////////////

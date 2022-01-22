@@ -306,7 +306,7 @@ namespace windows
    }
 
 
-   void file_context::del(const ::file::path & psz)
+   void file_context::erase(const ::file::path & psz)
    {
 
 

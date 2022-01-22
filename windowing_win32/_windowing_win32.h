@@ -77,4 +77,7 @@ CLASS_DECL_WINDOWING_WIN32 enum_display windows_show_window_to_edisplay(int iSho
 #include "_impl.h"
 
 
+CLASS_DECL_WINDOWING_WIN32 HWND windows_get_mouse_capture(itask_t itask);
+
+
 

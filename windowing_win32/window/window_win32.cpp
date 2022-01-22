@@ -122,7 +122,7 @@ LRESULT CALLBACK __window_procedure(HWND hwnd, UINT message, WPARAM wparam, LPAR
 
    }
 
-   auto pimpl = pwindow->m_pimpl;
+   auto pimpl = pwindow->m_puserinteractionimpl;
 
    if (pimpl)
    {
@@ -298,6 +298,12 @@ LRESULT CALLBACK __window_procedure(HWND hwnd, UINT message, WPARAM wparam, LPAR
 
          //puserinteraction->message_handler(pmessage);
          pwindow->message_handler(pmessage);
+
+      }
+      catch (::exception & e)
+      {
+
+         get_task()->handle_exception(e);
 
       }
       catch (...)

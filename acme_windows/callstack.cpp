@@ -449,7 +449,7 @@ namespace windows
          bool r = StackWalk64(
             dwType,   // __in      u32 MachineType,
             hprocess,        // __in      HANDLE hProcess,
-            get_current_hthread(),         // __in      htask_t htask,
+            get_current_htask(),         // __in      htask_t htask,
             &m_stackframe,                       // __inout   LP STACKFRAME64 StackFrame,
             &m_context,                  // __inout   PVOID ContextRecord,
             My_ReadProcessMemory,                     // __in_opt  PREAD_PROCESS_MEMORY_ROUTINE64 ReadMemoryRoutine,
@@ -462,7 +462,7 @@ namespace windows
          bool r = StackWalk(
             dwType,   // __in      u32 MachineType,
             hprocess,        // __in      HANDLE hProcess,
-            get_current_hthread(),         // __in      htask_t htask,
+            get_current_htask(),         // __in      htask_t htask,
             &m_stackframe,                       // __inout   LP STACKFRAME64 StackFrame,
             &m_context,                  // __inout   PVOID ContextRecord,
             My_ReadProcessMemory32,                     // __in_opt  PREAD_PROCESS_MEMORY_ROUTINE64 ReadMemoryRoutine,
@@ -477,7 +477,7 @@ namespace windows
          bool r = StackWalk64 (
          ,
          hprocess,
-         get_current_hthread(),
+         get_current_htask(),
          &m_stackframe,
          m_pcontext,
          My_ReadProcessMemory,
@@ -1152,7 +1152,7 @@ namespace windows
       current_context context;
       __memset(&context, 0, sizeof(current_context));
 
-      bool bOk = DuplicateHandle(GetCurrentProcess(), get_current_hthread(), GetCurrentProcess(), &context.thread, 0, 0, DUPLICATE_SAME_ACCESS) != false;
+      bool bOk = DuplicateHandle(GetCurrentProcess(), get_current_htask(), GetCurrentProcess(), &context.thread, 0, 0, DUPLICATE_SAME_ACCESS) != false;
 
       _ASSERTE(bOk);
       _ASSERTE(context.thread);

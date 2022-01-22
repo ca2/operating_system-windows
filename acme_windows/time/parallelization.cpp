@@ -45,7 +45,7 @@ itask_t get_main_ithread()
 }
 
 
-htask_t get_current_hthread()
+htask_t get_current_htask()
 {
 
    return (htask_t) ::GetCurrentThread();
@@ -53,7 +53,7 @@ htask_t get_current_hthread()
 }
 
 
-itask_t get_current_ithread()
+itask_t get_current_itask()
 {
 
    return (itask_t) ::GetCurrentThreadId();

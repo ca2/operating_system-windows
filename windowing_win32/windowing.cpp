@@ -640,14 +640,7 @@ namespace windowing_win32
 
       }
 
-      auto hwndCapture = _get_mouse_capture(itask);
-
-      if(!hwndCapture)
-      {
-
-         hwndCapture = ::GetCapture();
-
-      }
+      auto hwndCapture = ::windows_get_mouse_capture(itask);
 
       if (::is_null(hwndCapture))
       {
@@ -663,25 +656,25 @@ namespace windowing_win32
    }
 
 
-   HWND windowing::_get_mouse_capture(itask_t itask)
-   {
+   //HWND windowing::_get_mouse_capture(itask_t itask)
+   //{
 
-      GUITHREADINFO info = {};
+   //   GUITHREADINFO info = {};
 
-      info.cbSize = sizeof(GUITHREADINFO);
+   //   info.cbSize = sizeof(GUITHREADINFO);
 
-      HWND hwndCapture = nullptr;
+   //   HWND hwndCapture = nullptr;
 
-      if (GetGUIThreadInfo((DWORD)itask, &info))
-      {
+   //   if (GetGUIThreadInfo((DWORD)itask, &info))
+   //   {
 
-         hwndCapture = info.hwndCapture;
+   //      hwndCapture = info.hwndCapture;
 
-      }
+   //   }
 
-      return hwndCapture;
+   //   return hwndCapture;
 
-   }
+   //}
 
    
    void windowing::release_mouse_capture()
