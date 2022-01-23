@@ -223,6 +223,20 @@ namespace windows
             }
 
          }
+         
+         if (dwLastError == ERROR_ACCESS_DENIED)
+         {
+
+            if (dwAccess == GENERIC_WRITE)
+            {
+
+               dwAccess = GENERIC_WRITE | GENERIC_READ;
+
+               goto retry;
+
+            }
+
+         }
 
          ::e_status estatus = last_error_to_status(dwLastError);
 
@@ -243,6 +257,18 @@ namespace windows
          }
          else
          {
+
+            if (m_estatus == error_file_access_denied)
+            {
+
+               if (dwAccess & GENERIC_WRITE)
+               {
+
+                  m_psystem->message_box("Couldn't write to file \"" + m_path + "\".\nAccess Denied!!\n(Is any anti-virus program blocking this program: \"" + m_psystem->m_pacmefile->module() + "\"?", m_psystem->m_pacmefile->module().title() + " - Access Denied!", e_message_box_ok);
+
+               }
+
+            }
 
             throw file_open_exception(m_estatus, "Create File has failed.");
 

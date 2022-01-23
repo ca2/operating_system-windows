@@ -134,6 +134,10 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "static_app_core_hellomultiverse", "..\..\..\source\app-core\hellomultiverse\static_app_core_hellomultiverse.vcxproj", "{B3C2FC2F-00B5-4B57-BA6A-5BAE18CE8761}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_app_core_flag", "..\..\..\source\app-core\flag\shared_app_core_flag.vcxproj", "{C6E48A19-59B8-481E-AF3A-C27B66D68A84}"
+	ProjectSection(ProjectDependencies) = postProject
+		{A69CC125-E38A-4F77-9677-8860D43AB3B0} = {A69CC125-E38A-4F77-9677-8860D43AB3B0}
+		{D08014E6-E329-41CF-81B5-957C290A4AA8} = {D08014E6-E329-41CF-81B5-957C290A4AA8}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "static_app_core_flag", "..\..\..\source\app-core\flag\static_app_core_flag.vcxproj", "{83FC68E6-AA09-47C4-A651-015A97579ED6}"
 EndProject
