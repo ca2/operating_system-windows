@@ -1,7 +1,7 @@
 #pragma once
 
 
-#include "platform-windows/multimedia_mmsystem/_.h"
+#include "operating-system-windows/multimedia_mmsystem/_.h"
 
 
 #if defined(_AUDIO_MMSYSTEM_LIBRARY)

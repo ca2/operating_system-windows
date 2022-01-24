@@ -1,2 +1,2 @@
 app/aura
-platform-windows/windowing_win32
+operating-system-windows/windowing_win32

@@ -103,27 +103,27 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "apex_windows", "..\apex_win
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "aura_windows", "..\aura_windows\aura_windows.vcxproj", "{94C3715A-7FBF-4455-917B-20CB7F40C58C}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "acme_windows_common", "..\..\platform-windows_common\acme_windows_common\acme_windows_common.vcxproj", "{EB9DC9C0-0573-4DA0-8700-4DBB371773F1}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "acme_windows_common", "..\..\operating-system-windows_common\acme_windows_common\acme_windows_common.vcxproj", "{EB9DC9C0-0573-4DA0-8700-4DBB371773F1}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "apex_windows_common", "..\..\platform-windows_common\apex_windows_common\apex_windows_common.vcxproj", "{A094E038-D195-4400-82CE-44A7EDF91B78}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "apex_windows_common", "..\..\operating-system-windows_common\apex_windows_common\apex_windows_common.vcxproj", "{A094E038-D195-4400-82CE-44A7EDF91B78}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "aura_windows_common", "..\..\platform-windows_common\aura_windows_common\aura_windows_common.vcxproj", "{99F5ABF0-7377-4CC7-B016-4CA7B365B9F1}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "aura_windows_common", "..\..\operating-system-windows_common\aura_windows_common\aura_windows_common.vcxproj", "{99F5ABF0-7377-4CC7-B016-4CA7B365B9F1}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "node_windows", "..\node_windows\node_windows.vcxproj", "{C1CCDF2E-9F27-45D3-B67A-B2EEB1754E72}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "draw2d_direct2d", "..\..\platform-windows_common\draw2d_direct2d\draw2d_direct2d.vcxproj", "{7A9BFF50-1888-4722-8DEE-73A3B5B32BCB}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "draw2d_direct2d", "..\..\operating-system-windows_common\draw2d_direct2d\draw2d_direct2d.vcxproj", "{7A9BFF50-1888-4722-8DEE-73A3B5B32BCB}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "imaging_wic", "..\..\platform-windows_common\imaging_wic\imaging_wic.vcxproj", "{D79C7DDB-A727-4B91-803E-41C4431693D6}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "imaging_wic", "..\..\operating-system-windows_common\imaging_wic\imaging_wic.vcxproj", "{D79C7DDB-A727-4B91-803E-41C4431693D6}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "direct2d", "..\..\platform-windows_common\direct2d\direct2d.vcxproj", "{2F21F158-1DD5-43F6-9FAD-01FB77A81EC5}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "direct2d", "..\..\operating-system-windows_common\direct2d\direct2d.vcxproj", "{2F21F158-1DD5-43F6-9FAD-01FB77A81EC5}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "write_text_direct2d", "..\..\platform-windows_common\write_text_direct2d\write_text_direct2d.vcxproj", "{CA93DD16-0489-4C02-B69D-21C1D3337515}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "write_text_direct2d", "..\..\operating-system-windows_common\write_text_direct2d\write_text_direct2d.vcxproj", "{CA93DD16-0489-4C02-B69D-21C1D3337515}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "regular_expression_pcre2", "..\..\..\source\app\regular_expression_pcre2\regular_expression_pcre2.vcxproj", "{DBA80336-2E72-4DCE-8AB3-C362F3B19106}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "database_sqlite3", "..\..\..\source\app\database_sqlite3\database_sqlite3.vcxproj", "{F85061D8-22DC-4A8B-85EA-76D330BE52CC}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "directx", "..\..\platform-windows_common\directx\directx.vcxproj", "{A149252D-1DE3-4CBA-B1CB-7E9868793E6E}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "directx", "..\..\operating-system-windows_common\directx\directx.vcxproj", "{A149252D-1DE3-4CBA-B1CB-7E9868793E6E}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_app_core_hellomultiverse", "..\..\..\source\app-core\hellomultiverse\shared_app_core_hellomultiverse.vcxproj", "{94A00A45-B9BF-4821-B81E-4114FFB9F0A9}"
 	ProjectSection(ProjectDependencies) = postProject

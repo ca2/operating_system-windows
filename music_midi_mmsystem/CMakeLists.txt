@@ -62,8 +62,8 @@ elseif(LINUX)
 endif()
 
 target_link_directories(music_midi_mmsystem PRIVATE ${LIBRARY_OUTPUT_PATH})
-target_link_directories(music_midi_mmsystem PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../../../archive/storage-${PLATFORM_NAME}/library/x64/basis)
-target_link_directories(music_midi_mmsystem PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../../../archive/storage-${PLATFORM_NAME}/third/library/x64/basis)
+target_link_directories(music_midi_mmsystem PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../../../operating-system/storage-${PLATFORM_NAME}/library/x64/basis)
+target_link_directories(music_midi_mmsystem PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../../../operating-system/storage-${PLATFORM_NAME}/third/library/x64/basis)
 
 
 target_include_directories(music_midi_mmsystem PRIVATE $ENV{HOME}/__config)
@@ -73,11 +73,11 @@ target_include_directories(music_midi_mmsystem PRIVATE ${CMAKE_CURRENT_SOURCE_DI
 target_include_directories(music_midi_mmsystem PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../../../source/app)
 target_include_directories(music_midi_mmsystem PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../../../source/app/_include)
 target_include_directories(music_midi_mmsystem PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../../../source/include)
-target_include_directories(music_midi_mmsystem PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../../../archive/platform-${PLATFORM_NAME})
-target_include_directories(music_midi_mmsystem PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../../../archive/platform-${PLATFORM_NAME}/_include)
-target_include_directories(music_midi_mmsystem PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../../../archive/third-${PLATFORM_NAME}/include)
-target_include_directories(music_midi_mmsystem PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../../../archive/third-${PLATFORM_NAME}/third/include)
-target_include_directories(music_midi_mmsystem PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../../../archive/third-${PLATFORM_NAME}/third/include/include)
+target_include_directories(music_midi_mmsystem PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../../../operating-system/operating-system-${PLATFORM_NAME})
+target_include_directories(music_midi_mmsystem PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../../../operating-system/operating-system-${PLATFORM_NAME}/_include)
+target_include_directories(music_midi_mmsystem PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../../../operating-system/third-${PLATFORM_NAME}/include)
+target_include_directories(music_midi_mmsystem PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../../../operating-system/third-${PLATFORM_NAME}/third/include)
+target_include_directories(music_midi_mmsystem PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../../../operating-system/third-${PLATFORM_NAME}/third/include/include)
 target_include_directories(music_midi_mmsystem PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
 
 
