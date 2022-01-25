@@ -10,15 +10,15 @@ message(STATUS "CMAKE_SYSTEM_NAME is ${CMAKE_SYSTEM_NAME}")
 
 if(${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
     set(LINUX TRUE)
-    set(PLATFORM_NAME "linux")
+    set(OPERATING_SYSTEM_NAME "linux")
     include(FindPkgConfig)
 elseif(WIN32)
-    set(PLATFORM_NAME "windows")
+    set(OPERATING_SYSTEM_NAME "windows")
 endif()
 
 
-set(LIBRARY_OUTPUT_PATH ${CMAKE_CURRENT_SOURCE_DIR}/../../../time-${PLATFORM_NAME}/cmake)
-set(EXECUTABLE_OUTPUT_PATH ${CMAKE_CURRENT_SOURCE_DIR}/../../../time-${PLATFORM_NAME}/cmake)
+set(LIBRARY_OUTPUT_PATH ${CMAKE_CURRENT_SOURCE_DIR}/../../../time-${OPERATING_SYSTEM_NAME}/cmake)
+set(EXECUTABLE_OUTPUT_PATH ${CMAKE_CURRENT_SOURCE_DIR}/../../../time-${OPERATING_SYSTEM_NAME}/cmake)
 
 
 list(APPEND draw2d_gdiplus_source
@@ -82,8 +82,8 @@ elseif(LINUX)
 endif()
 
 target_link_directories(draw2d_gdiplus PRIVATE ${LIBRARY_OUTPUT_PATH})
-target_link_directories(draw2d_gdiplus PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../../../operating-system/storage-${PLATFORM_NAME}/library/x64/basis)
-target_link_directories(draw2d_gdiplus PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../../../operating-system/storage-${PLATFORM_NAME}/third/library/x64/basis)
+target_link_directories(draw2d_gdiplus PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../../../operating-system/storage-${OPERATING_SYSTEM_NAME}/library/x64/basis)
+target_link_directories(draw2d_gdiplus PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../../../operating-system/storage-${OPERATING_SYSTEM_NAME}/third/library/x64/basis)
 
 
 target_include_directories(draw2d_gdiplus PRIVATE $ENV{HOME}/__config)
@@ -93,11 +93,11 @@ target_include_directories(draw2d_gdiplus PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/..
 target_include_directories(draw2d_gdiplus PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../../../source/app)
 target_include_directories(draw2d_gdiplus PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../../../source/app/_include)
 target_include_directories(draw2d_gdiplus PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../../../source/include)
-target_include_directories(draw2d_gdiplus PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../../../operating-system/operating-system-${PLATFORM_NAME})
-target_include_directories(draw2d_gdiplus PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../../../operating-system/operating-system-${PLATFORM_NAME}/_include)
-target_include_directories(draw2d_gdiplus PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../../../operating-system/third-${PLATFORM_NAME}/include)
-target_include_directories(draw2d_gdiplus PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../../../operating-system/third-${PLATFORM_NAME}/third/include)
-target_include_directories(draw2d_gdiplus PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../../../operating-system/third-${PLATFORM_NAME}/third/include/include)
+target_include_directories(draw2d_gdiplus PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../../../operating-system/operating-system-${OPERATING_SYSTEM_NAME})
+target_include_directories(draw2d_gdiplus PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../../../operating-system/operating-system-${OPERATING_SYSTEM_NAME}/_include)
+target_include_directories(draw2d_gdiplus PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../../../operating-system/third-${OPERATING_SYSTEM_NAME}/include)
+target_include_directories(draw2d_gdiplus PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../../../operating-system/third-${OPERATING_SYSTEM_NAME}/third/include)
+target_include_directories(draw2d_gdiplus PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../../../operating-system/third-${OPERATING_SYSTEM_NAME}/third/include/include)
 target_include_directories(draw2d_gdiplus PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
 
 
