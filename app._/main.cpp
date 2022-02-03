@@ -569,7 +569,7 @@ pacmedir->system() / "config/plugin/appfy_beg_debug_box.txt"))
 void init_exception_engine(class ::exception_engine * pexceptionengine)
 {
 
-   new(pexceptionengine) class ::PLATFORM_NAMESPACE::exception_engine;
+   new(pexceptionengine) class ::OPERATING_SYSTEM_NAMESPACE::exception_engine;
 
 }
 
