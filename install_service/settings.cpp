@@ -130,7 +130,7 @@ static int setting_set_exit_action(const TCHAR *service_name, void *param, const
   if (value && value->string) _sntprintf_s(action_string, _countof(action_string), _TRUNCATE, _T("%s"), value->string);
   else {
     if (code) {
-      /* Delete explicit psubject-> */
+      /* Delete explicit ptopic-> */
       error = RegDeleteValue(key, code);
       RegCloseKey(key);
       if (error == ERROR_SUCCESS || error == ERROR_FILE_NOT_FOUND) return 0;
@@ -138,7 +138,7 @@ static int setting_set_exit_action(const TCHAR *service_name, void *param, const
       return -1;
     }
     else {
-      /* Explicitly keep the default psubject-> */
+      /* Explicitly keep the default ptopic-> */
       if (default_value) _sntprintf_s(action_string, _countof(action_string), _TRUNCATE, _T("%s"), (TCHAR *) default_value);
       ret = 0;
     }

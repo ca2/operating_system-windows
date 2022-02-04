@@ -140,18 +140,18 @@ namespace draw2d_gdiplus
 
       // Mapping Functions
       //virtual i32 GetMapMode() override;
-      //virtual point_i32 GetViewportOrg() override;
+      //virtual point_i32 GetImpactportOrg() override;
       //virtual i32 SetMapMode(i32 nMapMode) override;
-      // Viewport Origin
-      //virtual point_i32 SetViewportOrg(double x, double y) override;
-      //virtual point_i32 SetViewportOrg(const ::point_i32 & point) override;
-      //virtual point_i32 OffsetViewportOrg(i32 nWidth, i32 nHeight) override;
+      // Impactport Origin
+      //virtual point_i32 SetImpactportOrg(double x, double y) override;
+      //virtual point_i32 SetImpactportOrg(const ::point_i32 & point) override;
+      //virtual point_i32 OffsetImpactportOrg(i32 nWidth, i32 nHeight) override;
 
-      // Viewport Extent
-      virtual size_f64 GetViewportExt() override;
-      virtual size_f64 SetViewportExt(double cx, double cy) override;
-      virtual size_f64 SetViewportExt(const ::size_f64 & size) override;
-      //virtual size_i32 ScaleViewportExt(i32 xNum, i32 xDenom, i32 yNum, i32 yDenom) override;
+      // Impactport Extent
+      virtual size_f64 GetImpactportExt() override;
+      virtual size_f64 SetImpactportExt(double cx, double cy) override;
+      virtual size_f64 SetImpactportExt(const ::size_f64 & size) override;
+      //virtual size_i32 ScaleImpactportExt(i32 xNum, i32 xDenom, i32 yNum, i32 yDenom) override;
 
       // Window Origin
       point_f64 GetWindowOrg() override;

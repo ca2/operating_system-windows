@@ -9,7 +9,7 @@
 extern CLASS_DECL_ACME_WINDOWS const unichar gen_Wnd[];           // simple child windows/controls
 extern CLASS_DECL_ACME_WINDOWS const unichar gen_WndControlBar[]; // controls with gray backgrounds
 extern CLASS_DECL_ACME_WINDOWS const unichar gen_WndMDIFrame[];
-extern CLASS_DECL_ACME_WINDOWS const unichar gen_WndFrameOrView[];
+extern CLASS_DECL_ACME_WINDOWS const unichar gen_WndFrameOrImpact[];
 extern CLASS_DECL_ACME_WINDOWS const unichar gen_WndOleControl[];
 //CLASS_DECL_ACME_WINDOWS bool __is_combo_box_control(::windowing::window * pwindow, ::u32 nStyle);
 CLASS_DECL_ACME_WINDOWS bool __check_center_dialog(const ::string & pszResource);

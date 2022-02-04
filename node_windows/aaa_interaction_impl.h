@@ -450,10 +450,10 @@ namespace windows
 //
       // Clipboard Functions
       //virtual bool ChangeClipboardChain(::windowing::window * pwindow_Next);
-      //virtual ::oswindow  SetClipboardViewer();
+      //virtual ::oswindow  SetClipboardImpacter();
       ////virtual bool OpenClipboard();
       //virtual ::user::interaction * GetClipboardOwner();
-      //virtual ::user::interaction * GetClipboardViewer();
+      //virtual ::user::interaction * GetClipboardImpacter();
       //virtual ::user::interaction * GetOpenClipboardWindow();
 
       virtual point_i32 GetCaretPos();

@@ -25,7 +25,7 @@
  * USB spec information
  *
  * This is all stuff grabbed from various USB specs and is pretty much
- * not subject to change
+ * not topic to change
  */
 
 /*

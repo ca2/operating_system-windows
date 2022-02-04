@@ -1374,9 +1374,9 @@ namespace music
 
          //   event * pevent = new event();
 
-         //   psubject->m_id = eevent;
-         //   psubject->m_psequence = this;
-         //   psubject->m_puserdata = lpmidihdr;
+         //   ptopic->m_id = eevent;
+         //   ptopic->m_psequence = this;
+         //   ptopic->m_puserdata = lpmidihdr;
 
          //   return pevent;
 

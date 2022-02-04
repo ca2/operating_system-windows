@@ -24,7 +24,7 @@ HRESULT SetTouchDisableProperty(HWND hwnd, BOOL fDisableTouch);
 extern CLASS_DECL_ACME const unichar gen_Wnd[];           // simple child windows/controls
 extern CLASS_DECL_ACME const unichar gen_WndControlBar[]; // controls with gray backgrounds
 extern CLASS_DECL_ACME const unichar gen_WndMDIFrame[];
-extern CLASS_DECL_ACME const unichar gen_WndFrameOrView[];
+extern CLASS_DECL_ACME const unichar gen_WndFrameOrImpact[];
 extern CLASS_DECL_ACME const unichar gen_WndOleControl[];
 
 
@@ -638,7 +638,7 @@ namespace windowing_win32
 
             psystem->signal(id_operating_system_font_list_change);
 
-            //auto psubject = psystem->subject(id_os_font_change);
+            //auto psubject = psystem->topic(id_os_font_change);
 
             //psystem->handle_subject(psubject);
 
@@ -698,9 +698,9 @@ namespace windowing_win32
    void window::_001OnTaskbarCreated(::message::message* pmessage)
    {
 
-      ::subject subject(e_subject_task_bar_created);
+      ::topic topic(id_task_bar_created);
 
-      m_puserinteractionimpl->m_puserinteraction->handle(&subject, nullptr);
+      m_puserinteractionimpl->m_puserinteraction->handle(&topic, nullptr);
 
    }
 
@@ -1425,7 +1425,7 @@ namespace windowing_win32
 
       //}
 
-      //if (attr.map_state == IsViewable)
+      //if (attr.map_state == IsImpactable)
       //{
 
       //   mapped_net_state_raw(true, d, window(), m_iScreen, intern_atom(net_wm_state_fullscreen, false), 0);
@@ -1476,7 +1476,7 @@ namespace windowing_win32
 
       //}
 
-      //if (attr.map_state == IsViewable)
+      //if (attr.map_state == IsImpactable)
       //{
 
       //   mapped_net_state_raw(false, d, window(), m_iScreen, intern_atom(net_wm_state_hidden, false), 0);
@@ -1515,7 +1515,7 @@ namespace windowing_win32
 
       //}
 
-      //if (attr.map_state == IsViewable)
+      //if (attr.map_state == IsImpactable)
       //{
 
       //   mapped_net_state_raw(false, d, window(), m_iScreen, intern_atom("_NET_WM_STATE_FULLSCREEN", false), 0);
@@ -1556,7 +1556,7 @@ namespace windowing_win32
 
       //}
 
-      //if (attr.map_state == IsViewable)
+      //if (attr.map_state == IsImpactable)
       //{
 
       //   mapped_net_state_raw(false, d, window(), m_iScreen,
@@ -2177,7 +2177,7 @@ namespace windowing_win32
 //      if (nFlags & SWP_HIDEWINDOW)
 //      {
 //
-//         if (attrs.map_state == IsViewable)
+//         if (attrs.map_state == IsImpactable)
 //         {
 //
 //            windowing_output_debug_string("\n::window::set_window_position Withdraw Window 1.4.3");
@@ -2197,7 +2197,7 @@ namespace windowing_win32
 //
 //      }
 //
-//      if (attrs.map_state == IsViewable || (nFlags & SWP_SHOWWINDOW))
+//      if (attrs.map_state == IsImpactable || (nFlags & SWP_SHOWWINDOW))
 //      {
 //
 //         if (!(nFlags & SWP_NOZORDER))
@@ -2624,7 +2624,7 @@ namespace windowing_win32
       //         if (pgraphics != nullptr && g->attach_hdc(hdc))
       //         {
 
-      //            pgraphics->SetViewportOrg(0, 0);
+      //            pgraphics->SetImpactportOrg(0, 0);
 
       //            g->BitBlt(rectanglePaint.left, rectanglePaint.top, rectanglePaint.width(), rectanglePaint.height(), pgraphics, rectangleUpdate.left, rectangleUpdate.top);
 
@@ -3836,12 +3836,12 @@ namespace windowing_win32
    //}
 
 
-   //hwnd window::SetClipboardViewer()
+   //hwnd window::SetClipboardImpacter()
    //{
 
    //   ASSERT(::IsWindow(get_hwnd()));
 
-   //   return ::SetClipboardViewer(get_hwnd());
+   //   return ::SetClipboardImpacter(get_hwnd());
 
    //}
 
@@ -3910,10 +3910,10 @@ namespace windowing_win32
    //}
 
    
-   //::user::interaction * window::GetClipboardViewer()
+   //::user::interaction * window::GetClipboardImpacter()
    //{
 
-   //   return psystem->ui_from_handle(::GetClipboardViewer());
+   //   return psystem->ui_from_handle(::GetClipboardImpacter());
 
    //}
 
@@ -4929,7 +4929,7 @@ namespace windowing_win32
 
       // graphics will be already set its impact port to the window for linux - cairo with xlib
 
-      pgraphics->SetViewportOrg(::point_i32());
+      pgraphics->SetImpactportOrg(::point_i32());
 
    }
 

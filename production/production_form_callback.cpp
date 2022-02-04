@@ -21,7 +21,7 @@ namespace production
    }
 
 
-   void form_callback::handle(::subject * psubject, ::context * pcontext)
+   void form_callback::handle(::topic * psubject, ::context * pcontext)
    {
 
       __UNREFERENCED_PARAMETER(pevent);

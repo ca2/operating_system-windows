@@ -20,12 +20,12 @@ namespace backup
    }
 
 
-   void form_callback::handle(::subject * psubject, ::context * pcontext)
+   void form_callback::handle(::topic * psubject, ::context * pcontext)
    {
 
       auto pview = psubject->get_form();
 
-      if(psubject->m_id == ::e_subject_click)
+      if(psubject->m_id == ::id_click)
       {
          if(psubject->user_element_id() == "lfs")
          {

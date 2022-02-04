@@ -1684,7 +1684,7 @@ pacmedir->create CreateDirectoryW last error(%d)=%s", dwError, pszError);
 
          ::winrt::Windows::Storage::StorageFolder ^ folder = wait(::winrt::Windows::Storage::StorageFolder::GetFolderFromPathAsync(string(psz)));
 
-         ::winrt::Windows::Foundation::Collections::IVectorView < ::winrt::Windows::Storage::StorageFolder ^ > ^ a = wait(folder->GetFoldersAsync());
+         ::winrt::Windows::Foundation::Collections::IVectorImpact < ::winrt::Windows::Storage::StorageFolder ^ > ^ a = wait(folder->GetFoldersAsync());
 
          for (u32 u = 0; u < a->Size; u++)
          {
@@ -1766,7 +1766,7 @@ pacmedir->create CreateDirectoryW last error(%d)=%s", dwError, pszError);
 
          ::winrt::Windows::Storage::StorageFolder ^ folder = wait(::winrt::Windows::Storage::StorageFolder::GetFolderFromPathAsync(string(psz)));
 
-         ::winrt::Windows::Foundation::Collections::IVectorView < ::winrt::Windows::Storage::StorageFolder ^ > ^ a = wait(folder->GetFoldersAsync());
+         ::winrt::Windows::Foundation::Collections::IVectorImpact < ::winrt::Windows::Storage::StorageFolder ^ > ^ a = wait(folder->GetFoldersAsync());
 
          for (u32 u = 0; u < a->Size; u++)
          {

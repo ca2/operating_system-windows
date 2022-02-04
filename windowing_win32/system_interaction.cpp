@@ -111,7 +111,7 @@ namespace windowing_win32
 
             psystem->m_pnode->fetch_user_color();
 
-            /*auto psubject = psystem->subject(id_os_dark_mode);
+            /*auto psubject = psystem->topic(id_os_dark_mode);
 
             psystem->handle_subject(psubject);*/
 

@@ -308,7 +308,7 @@ namespace windowing_win32
 
       //m_puserinteractionNotify->OnNotifyIconMessage(m_uiId, (::u32)pusermessage->m_lparam);
 
-      auto psubject = __create_new < ::subject >();
+      auto psubject = __create_new < ::topic >();
 
       psubject->m_puserelement = this;
 
@@ -317,19 +317,19 @@ namespace windowing_win32
       if (uMessage == e_message_right_button_down)
       {
 
-         psubject->m_id = ::e_subject_context_menu;
+         psubject->m_id = ::id_context_menu;
 
       }
       else if (uMessage == e_message_left_button_double_click)
       {
 
-         psubject->m_id = ::e_subject_left_button_double_click;
+         psubject->m_id = ::id_left_button_double_click;
 
       }
       else if (uMessage == e_message_left_button_down)
       {
 
-         psubject->m_id = ::e_subject_left_button_down;
+         psubject->m_id = ::id_left_button_down;
 
       }
 

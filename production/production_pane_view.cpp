@@ -53,7 +53,7 @@ namespace production
    }
 
 
-   void pane_view::handle(::subject * psubject, ::context * pcontext)
+   void pane_view::handle(::topic * psubject, ::context * pcontext)
    {
 
       ::user::tab_view::handle(psubject, pcontext);
@@ -191,7 +191,7 @@ namespace production
 
          m_pviewOptions->m_pcallback = this;
 
-         auto pupdate = subject(id_browse);
+         auto pupdate = topic(id_browse);
          pupdate->m_actioncontext = ::e_source_system;
          psubject->id() = ;
          psubject->payload(id_form) = "production\\options.xhtml";
@@ -251,15 +251,15 @@ namespace production
       get_parent_frame()->hide();
    }
 
-   void pane_view::handle(::subject * psubject, ::context * pcontext)
+   void pane_view::handle(::topic * psubject, ::context * pcontext)
    {
-      if(psubject->m_id == ::e_subject_set_check)
+      if(psubject->m_id == ::id_set_check)
       {
          if(psubject->user_element_id() == "clean")
          {
             __pointer(::user::interaction) pinteraction = m_pviewOptions->get_child_by_id("clean");
             __pointer(::user::check_box) pcheckbox =  (pinteraction);
-            auto psubject = subject(id_clean);
+            auto psubject = topic(id_clean);
             psubject->payload(id_clean) = pcheckbox->echeck() == ::check_checked;
             get_document()->update_all_views(psubject);
          }

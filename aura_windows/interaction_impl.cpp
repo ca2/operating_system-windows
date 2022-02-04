@@ -37,7 +37,7 @@ const char * gen_OldWndProc = "::aura::OldWndProc423";
 //#define __WND             __WNDCLASS("Wnd")
 //#define __WNDCONTROLBAR   __WNDCLASS("ControlBar")
 //#define __WNDMDIFRAME     __WNDCLASS("MDIFrame")
-//#define __WNDFRAMEORVIEW  __WNDCLASS("FrameOrView")
+//#define __WNDFRAMEORVIEW  __WNDCLASS("FrameOrImpact")
 //#define __WNDOLECONTROL   __WNDCLASS("OleControl")
 
 
@@ -2620,12 +2620,12 @@ namespace windows
 
    //}
 
-   //oswindow interaction_impl::SetClipboardViewer()
+   //oswindow interaction_impl::SetClipboardImpacter()
    //{
 
    //   ASSERT(_is_window());
 
-   //   return ::SetClipboardViewer(get_handle());
+   //   return ::SetClipboardImpacter(get_handle());
 
    //}
 
@@ -2693,10 +2693,10 @@ namespace windows
 
    //}
 
-   //::user::interaction * interaction_impl::GetClipboardViewer()
+   //::user::interaction * interaction_impl::GetClipboardImpacter()
    //{
 
-   //   return psystem->ui_from_handle(::GetClipboardViewer());
+   //   return psystem->ui_from_handle(::GetClipboardImpacter());
 
    //}
 
@@ -3689,7 +3689,7 @@ namespace windows
 
       // graphics will be already set its impact port to the interaction_impl for linux - cairo with xlib
 
-      pgraphics->SetViewportOrg(::point_i32());
+      pgraphics->SetImpactportOrg(::point_i32());
 
    }
 
