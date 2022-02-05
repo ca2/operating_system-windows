@@ -278,7 +278,7 @@ namespace windows
       if (1 != argumentCount || 0 == arguments || 0 == arguments[0])
       {
 
-         __throw(error_invalid_argument);
+         __throw(error_bad_argument);
 
       }
 

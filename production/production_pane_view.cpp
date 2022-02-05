@@ -25,9 +25,9 @@ namespace production
 
 
 #ifdef DEBUG
-   void pane_view::assert_valid() const
+   void pane_view::assert_ok() const
    {
-      ::user::impact::assert_valid();
+      ::user::impact::assert_ok();
    }
 
    void pane_view::dump(dump_context & dumpcontext) const
@@ -194,7 +194,7 @@ namespace production
          auto pupdate = topic(id_browse);
          pupdate->m_actioncontext = ::e_source_system;
          ptopic->m_id = ;
-         ptopic->payload(id_form) = "production\\options.xhtml";
+         ptopic->m_pextendedtopic->payload(id_form) = "production\\options.xhtml";
          pdocument->update_all_views(ptopic);
 
          ptopic->m_id = id_get_form_view;
@@ -260,7 +260,7 @@ namespace production
             __pointer(::user::interaction) pinteraction = m_pviewOptions->get_child_by_id("clean");
             __pointer(::user::check_box) pcheckbox =  (pinteraction);
             auto ptopic = topic(id_clean);
-            ptopic->payload(id_clean) = pcheckbox->echeck() == ::check_checked;
+            ptopic->m_pextendedtopic->payload(id_clean) = pcheckbox->echeck() == ::check_checked;
             get_document()->update_all_views(ptopic);
          }
          else if(ptopic->user_element_id() == "build")
@@ -268,7 +268,7 @@ namespace production
             __pointer(::user::interaction) pinteraction = m_pviewOptions->get_child_by_id("build");
             __pointer(::user::check_box) pcheckbox =  (pinteraction);
             auto ptopic = new_action(id_build);
-            ptopic->payload(id_build) = pcheckbox->echeck() == ::check_checked;
+            ptopic->m_pextendedtopic->payload(id_build) = pcheckbox->echeck() == ::check_checked;
             get_document()->update_all_views(ptopic);
 
          }

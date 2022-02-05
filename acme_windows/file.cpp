@@ -647,10 +647,10 @@ namespace windows
    }
 
 
-   void file::assert_valid() const
+   void file::assert_ok() const
    {
 
-      ::matter::assert_valid();
+      ::matter::assert_ok();
       
    }
 

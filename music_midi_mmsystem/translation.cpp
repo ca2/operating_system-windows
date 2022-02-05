@@ -44,7 +44,7 @@ namespace music
             }
             else if (mmr == MMSYSERR_BADDEVICEID)
             {
-               strMessage = "MMSYSERR_BADDEVICEID : bad device id";
+               strMessage = "MMSYSERR_BADDEVICEID : bad device atom";
             }
             else if (mmr == MMSYSERR_NOMEM)
             {

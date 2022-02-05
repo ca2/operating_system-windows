@@ -1416,7 +1416,7 @@ namespace music
 
                ASSERT(FALSE);
 
-               m_estatusMidiOut = error_invalid_argument;
+               m_estatusMidiOut = error_bad_argument;
 
                return;
 
@@ -2163,7 +2163,7 @@ namespace music
             ASSERT(tkDelta >= 0);
             ASSERT(lpmh != nullptr);
 
-            /* Can't fit 4 u32's? (tkDelta + stream-id + event + some data)
+            /* Can't fit 4 u32's? (tkDelta + stream-atom + event + some data)
             ** Can't do anything.
             */
             ASSERT(lpmh->dwBufferLength >= lpmh->dwBytesRecorded);
@@ -2251,7 +2251,7 @@ namespace music
             //    assert(pSmf != nullptr);
             ASSERT(lpmh != nullptr);
 
-            /* Can't fit 4 u32's? (tkDelta + stream-id + event + some data)
+            /* Can't fit 4 u32's? (tkDelta + stream-atom + event + some data)
             ** Can't do anything.
             */
             ASSERT(lpmh->dwBufferLength >= lpmh->dwBytesRecorded);

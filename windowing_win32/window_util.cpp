@@ -600,7 +600,7 @@ namespace windowing_win32
 
    }
 
-   /*void window_util::send_message_to_descendants(HWND hwnd, const ::id & id,
+   /*void window_util::send_message_to_descendants(HWND hwnd, const ::atom & atom,
    wparam wParam, lparam lParam, bool bDeep, bool bOnlyPerm)
    {
    // walk through HWNDs to avoid creating temporary interaction_impl objects

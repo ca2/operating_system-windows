@@ -33,7 +33,7 @@ CLASS_DECL_ACME i32 __cdecl _memory_type(const void * p);
 
 // typedef int
 // (WINAPI * LPFN_ChangeWindowMessageFilter)(
-// const ::id & id,
+// const ::atom & atom,
 // ::u32 dwFlag);
 
 
@@ -660,22 +660,22 @@ CLASS_DECL_ACME hinstance get_module_handle(const platform_char * psz)
 
 }
 
-// CLASS_DECL_ACME ::duration os_get_system_update_poll_time(const ::id & id)
+// CLASS_DECL_ACME ::duration os_get_system_update_poll_time(const ::atom & atom)
 // {
 
-//    if (id == id_os_dark_mode)
+//    if (atom == id_os_dark_mode)
 //    {
 
 //       return 0;
 
 //    }
-//    else if (id == id_os_font_change)
+//    else if (atom == id_os_font_change)
 //    {
 
 //       return 0;
 
 //    }
-//    else if (id == id_font_enumeration)
+//    else if (atom == id_font_enumeration)
 //    {
 
 //       return 0;

@@ -63,7 +63,7 @@ namespace windows
 
       //virtual void construct(::windowing::window * pwindow);
 
-      void assert_valid() const override;
+      void assert_ok() const override;
       void dump(dump_context & dumpcontext) const override;
 
 
@@ -156,11 +156,11 @@ namespace windows
 
 
       // for child windows, views, panes etc
-      //virtual bool create_interaction(::user::interaction * pinteraction, const ::string & pszClassName, const ::string & pszWindowName,u32 dwStyle,const ::rectangle_i32 & rectangle,::user::interaction * pParentWnd,id id, ::create * pcreate = nullptr) override;
+      //virtual bool create_interaction(::user::interaction * pinteraction, const ::string & pszClassName, const ::string & pszWindowName,u32 dwStyle,const ::rectangle_i32 & rectangle,::user::interaction * pParentWnd,atom atom, ::create * pcreate = nullptr) override;
 
 
       // advanced creation (allows access to extended styles)
-      //virtual bool create_window_ex(::user::interaction * pinteraction, __pointer(::user::system) pusersystem, ::user::interaction * puiParent, id id) override;
+      //virtual bool create_window_ex(::user::interaction * pinteraction, __pointer(::user::system) pusersystem, ::user::interaction * puiParent, atom atom) override;
 
       virtual void native_create_host() override;
 
@@ -180,7 +180,7 @@ namespace windows
 
       //// get immediate child with given ID
       //using ::user::interaction_impl::get_child_by_id;
-      //void get_child_by_id(id id, oswindow* poswindow_) const;
+      //void get_child_by_id(atom atom, oswindow* poswindow_) const;
 
       virtual bool _is_window() const override;
 
@@ -190,9 +190,9 @@ namespace windows
 //
 //#endif   // WINVER >= 0x0500
 
-      lresult send_message(const ::id & id, wparam wParam = 0, lparam lParam = nullptr);
+      lresult send_message(const ::atom & atom, wparam wParam = 0, lparam lParam = nullptr);
 
-      bool post_message(const ::id & id, wparam wParam = 0, lparam lParam = nullptr);
+      bool post_message(const ::atom & atom, wparam wParam = 0, lparam lParam = nullptr);
 
 
       //bool SendNotifyMessage(::u32 message, wparam wParam, lparam lParam);
@@ -489,10 +489,10 @@ namespace windows
       // dialog support
       //void UpdateDialogControls(channel* pTarget, bool bDisableIfNoHndler);
       //void CenterWindow(::user::interaction * pAlternateOwner = nullptr);
-      ////virtual id   RunModalLoop(u32 dwFlags = 0,::object * pliveobject = nullptr);
+      ////virtual atom   RunModalLoop(u32 dwFlags = 0,::object * pliveobject = nullptr);
       //virtual bool ContinueModal() override;
-      //virtual void EndModalLoop(id nResult) override;
-      //virtual void EndAllModalLoops(id nResult);
+      //virtual void EndModalLoop(atom nResult) override;
+      //virtual void EndAllModalLoops(atom nResult);
 
       // Window-Management message handler member functions
       //virtual bool OnCommand(::message::message * pmessage);
@@ -522,7 +522,7 @@ namespace windows
       //lresult OnMenuChar(::u32 nChar, ::u32 nFlags, ::user::menu* pMenu);
       //void OnMenuSelect(::u32 nItemID, ::u32 nFlags, HMENU hSysMenu);
       //void OnMove(i32 x, i32 y);
-      //void OnParentNotify(const ::id & id, lparam lParam);
+      //void OnParentNotify(const ::atom & atom, lparam lParam);
       //hcursor OnQueryDragIcon();
       //bool OnQueryEndSession();
       //bool OnQueryNewPalette();
@@ -588,7 +588,7 @@ namespace windows
       //void OnMButtonDblClk(::u32 nFlags, const ::point_i32 & point);
       //void OnMButtonDown(::u32 nFlags, const ::point_i32 & point);
       //void OnMButtonUp(::u32 nFlags, const ::point_i32 & point);
-      //i32 OnMouseActivate(::user::interaction_impl * pDesktopWnd, ::u32 nHitTest, const ::id & id);
+      //i32 OnMouseActivate(::user::interaction_impl * pDesktopWnd, ::u32 nHitTest, const ::atom & atom);
       //void OnMouseMove(::u32 nFlags, const ::point_i32 & point);
       //bool OnMouseWheel(::u32 nFlags, i16 zDelta, const ::point_i32 & point);
       //lresult OnRegisteredMouseWheel(wparam wParam, lparam lParam);
@@ -662,7 +662,7 @@ namespace windows
       //virtual void message_handler(::message::message * pmessage);
 
 
-      //virtual bool OnWndMsg(const ::id & id, wparam wParam, lparam lParam, lresult* pResult);
+      //virtual bool OnWndMsg(const ::atom & atom, wparam wParam, lparam lParam, lresult* pResult);
 
       // for handling default processing
       //lresult Default();

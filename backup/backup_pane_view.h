@@ -13,7 +13,7 @@ namespace backup
       pane_view(::object * pobject);
       virtual ~pane_view();
 #ifdef DEBUG
-      void assert_valid() const override;
+      void assert_ok() const override;
       void dump(dump_context & dumpcontext) const override;
 #endif
 

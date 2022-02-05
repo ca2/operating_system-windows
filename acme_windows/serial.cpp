@@ -87,7 +87,7 @@ namespace windows
    {
       if (m_wstrPort.is_empty())
       {
-         __throw(error_invalid_argument, "Empty port is invalid.");
+         __throw(error_bad_argument, "Empty port is invalid.");
       }
       if (m_bOpened == true)
       {
@@ -311,7 +311,7 @@ namespace windows
       else if (m_ebytesize == ::serial::e_byte_size_five)
          dcbSerialParams.ByteSize = 5;
       else
-         __throw(error_invalid_argument, "invalid char len");
+         __throw(error_bad_argument, "invalid char len");
 
          // setup estopbit
          if (m_estopbit == ::serial::e_stop_bit_one)
@@ -321,7 +321,7 @@ namespace windows
          else if (m_estopbit == ::serial::e_stop_bit_two)
             dcbSerialParams.StopBits = TWOSTOPBITS;
          else
-            __throw(error_invalid_argument, "invalid stop bit");
+            __throw(error_bad_argument, "invalid stop bit");
 
             // setup eparity
             if (m_eparity == ::serial::e_parity_none)
@@ -346,7 +346,7 @@ namespace windows
             }
             else
             {
-               __throw(error_invalid_argument, "invalid eparity");
+               __throw(error_bad_argument, "invalid eparity");
             }
 
             // setup eflowcontrol

@@ -98,7 +98,7 @@ namespace npca2
          XNode * lpnodeInstalled = node.GetChild("installed");
          if(lpnodeInstalled == nullptr)
             goto install;
-         XNode * pnode = lpnodeInstalled->GetChildByAttr("application", "id", pszInstall);
+         XNode * pnode = lpnodeInstalled->GetChildByAttr("application", "atom", pszInstall);
          if(pnode == nullptr)
             goto install;
          lpnodeInstalled->RemoveChild(pnode);

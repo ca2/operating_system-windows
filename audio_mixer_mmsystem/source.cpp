@@ -212,7 +212,7 @@ namespace multimedia
       }
 
 
-      ::id source::GetLineID()
+      ::atom source::GetLineID()
       {
          return (::i64) m_mixerline.dwLineID;
       }

@@ -259,7 +259,7 @@ namespace hi5
    /*++
    * @method: facebook::statusShowById
    *
-   * @description: method to get a status message by its id
+   * @description: method to get a status message by its atom
    *
    * @input: statusId - a number in string format
    *
@@ -287,7 +287,7 @@ namespace hi5
    /*++
    * @method: facebook::statusDestroyById
    *
-   * @description: method to delete a status message by its id
+   * @description: method to delete a status message by its atom
    *
    * @input: statusId - a number in string format
    *
@@ -405,8 +405,8 @@ namespace hi5
    *
    * @description: method to get mentions
    *
-   * @input: userInfo - screen name or user id in string format,
-   *         isUserId - true if userInfo contains an id
+   * @input: userInfo - screen name or user atom in string format,
+   *         isUserId - true if userInfo contains an atom
    *
    * @output: true if GET is success, otherwise false. This does not check http
    *          response by twitter. Use get_response() for that.
@@ -432,8 +432,8 @@ namespace hi5
    *
    * @description: method to get a user's profile
    *
-   * @input: userInfo - screen name or user id in string format,
-   *         isUserId - true if userInfo contains an id
+   * @input: userInfo - screen name or user atom in string format,
+   *         isUserId - true if userInfo contains an atom
    *
    * @output: true if GET is success, otherwise false. This does not check http
    *          response by twitter. Use get_response() for that.
@@ -459,8 +459,8 @@ namespace hi5
    *
    * @description: method to get a user's friends
    *
-   * @input: userInfo - screen name or user id in string format,
-   *         isUserId - true if userInfo contains an id
+   * @input: userInfo - screen name or user atom in string format,
+   *         isUserId - true if userInfo contains an atom
    *
    * @output: true if GET is success, otherwise false. This does not check http
    *          response by twitter. Use get_response() for that.
@@ -486,8 +486,8 @@ namespace hi5
    *
    * @description: method to get a user's followers
    *
-   * @input: userInfo - screen name or user id in string format,
-   *         isUserId - true if userInfo contains an id
+   * @input: userInfo - screen name or user atom in string format,
+   *         isUserId - true if userInfo contains an atom
    *
    * @output: true if GET is success, otherwise false. This does not check http
    *          response by twitter. Use get_response() for that.
@@ -535,9 +535,9 @@ namespace hi5
    *
    * @description: method to send direct message to a user
    *
-   * @input: userInfo - screen name or user id of a user to whom message needs to be sent,
+   * @input: userInfo - screen name or user atom of a user to whom message needs to be sent,
    *         dMsg - message
-   *         isUserId - true if userInfo contains target user's id
+   *         isUserId - true if userInfo contains target user's atom
    *
    * @output: true if POST is success, otherwise false. This does not check http
    *          response by twitter. Use get_response() for that.
@@ -587,9 +587,9 @@ namespace hi5
    /*++
    * @method: facebook::directMessageDestroyById
    *
-   * @description: method to delete direct messages by its id
+   * @description: method to delete direct messages by its atom
    *
-   * @input: dMsgId - id of direct message in string format
+   * @input: dMsgId - atom of direct message in string format
    *
    * @output: true if DELETE is success, otherwise false. This does not check http
    *          response by twitter. Use get_response() for that.
@@ -617,8 +617,8 @@ namespace hi5
    *
    * @description: method to add a twitter user as friend (follow a user)
    *
-   * @input: userInfo - user id or screen name of a user
-   *         isUserId - true if userInfo contains a user id instead of screen name
+   * @input: userInfo - user atom or screen name of a user
+   *         isUserId - true if userInfo contains a user atom instead of screen name
    *
    * @output: true if POST is success, otherwise false. This does not check http
    *          response by twitter. Use get_response() for that.
@@ -648,8 +648,8 @@ namespace hi5
    *
    * @description: method to delete a twitter user from friend list (unfollow a user)
    *
-   * @input: userInfo - user id or screen name of a user
-   *         isUserId - true if userInfo contains a user id instead of screen name
+   * @input: userInfo - user atom or screen name of a user
+   *         isUserId - true if userInfo contains a user atom instead of screen name
    *
    * @output: true if DELETE is success, otherwise false. This does not check http
    *          response by twitter. Use get_response() for that.
@@ -675,8 +675,8 @@ namespace hi5
    *
    * @description: method to show all friends
    *
-   * @input: userInfo - user id or screen name of a user of whom friends need to be shown
-   *         isUserId - true if userInfo contains a user id instead of screen name
+   * @input: userInfo - user atom or screen name of a user of whom friends need to be shown
+   *         isUserId - true if userInfo contains a user atom instead of screen name
    *
    * @output: true if GET is success, otherwise false. This does not check http
    *          response by twitter. Use get_response() for that.
@@ -715,8 +715,8 @@ namespace hi5
    *
    * @description: method to show IDs of all friends of a twitter user
    *
-   * @input: userInfo - user id or screen name of a user
-   *         isUserId - true if userInfo contains a user id instead of screen name
+   * @input: userInfo - user atom or screen name of a user
+   *         isUserId - true if userInfo contains a user atom instead of screen name
    *
    * @output: true if GET is success, otherwise false. This does not check http
    *          response by twitter. Use get_response() for that.
@@ -742,8 +742,8 @@ namespace hi5
    *
    * @description: method to show IDs of all followers of a twitter user
    *
-   * @input: userInfo - user id or screen name of a user
-   *         isUserId - true if userInfo contains a user id instead of screen name
+   * @input: userInfo - user atom or screen name of a user
+   *         isUserId - true if userInfo contains a user atom instead of screen name
    *
    * @output: true if GET is success, otherwise false. This does not check http
    *          response by twitter. Use get_response() for that.
@@ -813,7 +813,7 @@ namespace hi5
    *
    * @description: method to favorite a status message
    *
-   * @input: statusId - id in string format of the status to be favorited
+   * @input: statusId - atom in string format of the status to be favorited
    *
    * @output: true if POST is success, otherwise false. This does not check http
    *          response by twitter. Use get_response() for that.
@@ -845,7 +845,7 @@ namespace hi5
    *
    * @description: method to delete a favorited the status
    *
-   * @input: statusId - id in string format of the favorite status to be deleted
+   * @input: statusId - atom in string format of the favorite status to be deleted
    *
    * @output: true if DELETE is success, otherwise false. This does not check http
    *          response by twitter. Use get_response() for that.
@@ -873,7 +873,7 @@ namespace hi5
    *
    * @description: method to block a user
    *
-   * @input: userInfo - user id or screen name
+   * @input: userInfo - user atom or screen name
    *
    * @output: true if POST is success, otherwise false. This does not check http
    *          response by twitter. Use get_response() for that.
@@ -905,7 +905,7 @@ namespace hi5
    *
    * @description: method to unblock a user
    *
-   * @input: userInfo - user id or screen name
+   * @input: userInfo - user atom or screen name
    *
    * @output: true if DELETE is success, otherwise false. This does not check http
    *          response by twitter. Use get_response() for that.
@@ -954,9 +954,9 @@ namespace hi5
    * @method: facebook::savedSearchShow
    *
    * @description: method to retrieve the data for a saved search owned by the authenticating user
-   *               specified by the given id.
+   *               specified by the given atom.
    *
-   * @input: searchId - id in string format of the search to be displayed
+   * @input: searchId - atom in string format of the search to be displayed
    *
    * @output: true if GET is success, otherwise false. This does not check http
    *          response by twitter. Use get_response() for that.
@@ -1014,9 +1014,9 @@ namespace hi5
    * @method: facebook::savedSearchDestroy
    *
    * @description: method to destroy a saved search for the authenticated user. The search specified
-   *               by id must be owned by the authenticating user.
+   *               by atom must be owned by the authenticating user.
    *
-   * @input: searchId - search id of item to be deleted
+   * @input: searchId - search atom of item to be deleted
    *
    * @output: true if DELETE is success, otherwise false. This does not check http
    *          response by twitter. Use get_response() for that.
@@ -1419,7 +1419,7 @@ namespace hi5
    *
    * @input: baseUrl - base twitter url,
    *         userInfo - user name,
-   *         isUserId - indicates if userInfo contains a user id or scree name
+   *         isUserId - indicates if userInfo contains a user atom or scree name
    *
    * @output: outUrl - built url
    *

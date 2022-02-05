@@ -1410,7 +1410,7 @@ retry:
       if (strServiceName.is_empty())
       {
 
-         throw_status(error_invalid_argument);
+         throw_status(error_bad_argument);
 
       }
 
@@ -1474,7 +1474,7 @@ retry:
       if (strServiceName.is_empty())
       {
 
-         throw_status(error_invalid_argument);
+         throw_status(error_bad_argument);
 
       }
 

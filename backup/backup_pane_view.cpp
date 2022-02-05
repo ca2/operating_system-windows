@@ -23,9 +23,9 @@ namespace backup
 
 
 #ifdef DEBUG
-   void pane_view::assert_valid() const
+   void pane_view::assert_ok() const
    {
-      ::user::impact::assert_valid();
+      ::user::impact::assert_ok();
    }
 
    void pane_view::dump(dump_context & dumpcontext) const
@@ -84,7 +84,7 @@ namespace backup
          auto pupdate = new_update();
          pupdate->m_actioncontext = ::e_source_system;
          ptopic->m_id = id_browse;
-         ptopic->payload(id_form) = "filemanager\\replace_name_in_file_system.xhtml";
+         ptopic->m_pextendedtopic->payload(id_form) = "filemanager\\replace_name_in_file_system.xhtml";
          pdocument->update_all_views(ptopic);
 
          ptopic->m_id = id_get_form_view;
@@ -120,7 +120,7 @@ namespace backup
 
       ::userex::pane_tab_view::handle(ptopic, pcontext);
 
-      if (ptopic->m_bRet)
+      if (ptopic->m_pextendedtopic->m_bRet)
       {
 
          return;
@@ -129,7 +129,7 @@ namespace backup
 
       ::production::form_callback::handle(ptopic, pcontext);
 
-      if (ptopic->m_bRet)
+      if (ptopic->m_pextendedtopic->m_bRet)
       {
 
          return;

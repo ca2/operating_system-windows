@@ -112,7 +112,7 @@ namespace music
             if (hmidiout == nullptr)
             {
 
-               return error_invalid_argument;
+               return error_bad_argument;
 
             }
 

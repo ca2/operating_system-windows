@@ -80,7 +80,7 @@ namespace windowing_win32
       virtual ~window_util();
 
 
-      /*static void send_message_to_descendants(hwnd hwnd, const ::id & id,
+      /*static void send_message_to_descendants(hwnd hwnd, const ::atom & atom,
       wparam wParam, lparam lParam, bool bDeep, bool bOnlyPerm);*/
       static void send_message_to_descendants(HWND hwnd, ::u32 message, wparam wParam, lparam lParam, bool bDeep);
       static bool IsAscendant(HWND hwndAscendant, HWND hwndDescendant);

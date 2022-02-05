@@ -38,7 +38,7 @@ public:
 
    bool is_user_using(const ::string & pszDll);
 
-   INT cube_run(const ::string & id);
+   INT cube_run(const ::string & atom);
 
    bool are_there_user_files_in_use();
 

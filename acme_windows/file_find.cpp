@@ -448,7 +448,7 @@ namespace windows
    }
 
 
-   void file_find::assert_valid() const
+   void file_find::assert_ok() const
    {
 
       // if you trip the ASSERT in the else side, you've called

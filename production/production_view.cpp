@@ -77,9 +77,9 @@ namespace production
    }
 
 #ifdef DEBUG
-   void impact::assert_valid() const
+   void impact::assert_ok() const
    {
-      ::user::impact::assert_valid();
+      ::user::impact::assert_ok();
    }
 
    void impact::dump(dump_context & dumpcontext) const
@@ -108,13 +108,13 @@ namespace production
       else if(ptopic->m_id == id_clean)
       {
 
-         m_pproduction->m_bClean = ptopic->payload(id_clean);
+         m_pproduction->m_bClean = ptopic->m_pextendedtopic->payload(id_clean);
 
       }
       else if(ptopic->m_id == id_build)
       {
 
-         m_pproduction->m_bBuild = ptopic->payload(id_build);
+         m_pproduction->m_bBuild = ptopic->m_pextendedtopic->payload(id_build);
 
       }
 

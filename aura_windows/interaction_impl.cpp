@@ -425,10 +425,10 @@ namespace windows
    //}
 
 
-   void interaction_impl::assert_valid() const
+   void interaction_impl::assert_ok() const
    {
 
-      m_pwindow->assert_valid();
+      m_pwindow->assert_ok();
       
    }
 
@@ -1104,7 +1104,7 @@ namespace windows
    //   return false;   // let the parent handle it
    //}
 
-//   void interaction_impl::OnParentNotify(const ::id & id, lparam lParam)
+//   void interaction_impl::OnParentNotify(const ::atom & atom, lparam lParam)
 //   {
 //      if ((LOWORD(message) == e_message_create || LOWORD(message) == e_message_destroy))
 //      {
@@ -1863,24 +1863,24 @@ namespace windows
    //}
 
 
-   lresult interaction_impl::send_message(const ::id & id, wparam wparam, lparam lparam, const ::point_i32 & point)
+   lresult interaction_impl::send_message(const ::atom & atom, wparam wparam, lparam lparam, const ::point_i32 & point)
    {
 
       auto pwindow = m_pwindow;
 
-      ::u32 message = id.umessage();
+      ::u32 message = atom.umessage();
 
       return m_pwindow->send_message(message,  wparam, lparam);
 
    }
 
 
-   void interaction_impl::post_message(const ::id & id, wparam wparam, lparam lparam)
+   void interaction_impl::post_message(const ::atom & atom, wparam wparam, lparam lparam)
    {
 
       //return
       
-      m_pwindow->post_message(id, wparam, lparam);
+      m_pwindow->post_message(atom, wparam, lparam);
 
    }
 
@@ -2347,7 +2347,7 @@ namespace windows
    //   for (i32 nID = nIDFirstButton; nID <= nIDLastButton; nID++)
    //   {
    //      if (IsDlgButtonChecked(nID))
-   //         return nID; // id that matched
+   //         return nID; // atom that matched
    //   }
    //   return 0; // invalid ID
    //}
@@ -2421,14 +2421,14 @@ namespace windows
    //}
 
 
-   //void interaction_impl::get_child_by_id(id id, oswindow* poswindow_) const
+   //void interaction_impl::get_child_by_id(atom atom, oswindow* poswindow_) const
    //{
 
    //   ASSERT(::is_window(((interaction_impl *)this)->get_handle()));
 
    //   ASSERT(poswindow_ != nullptr);
 
-   //   *poswindow_ = ::GetDlgItem(((interaction_impl *)this)->get_handle(), (i32)id);
+   //   *poswindow_ = ::GetDlgItem(((interaction_impl *)this)->get_handle(), (i32)atom);
 
    //}
 

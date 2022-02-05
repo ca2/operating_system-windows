@@ -575,7 +575,7 @@ namespace draw2d_gdiplus
       virtual bool draw_rectangle(const rectangle_f64& rectangle_f64, const ::color::color& color, const ::e_border & eborder = e_border_all);
 
 #ifdef DEBUG
-      void assert_valid() const override;
+      void assert_ok() const override;
       void dump(dump_context & dumpcontext) const override;
 #endif
 

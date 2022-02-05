@@ -80,47 +80,47 @@ namespace win32
    }
 
 
-   iptr window::send_message(const ::id & id, wparam wparam, lparam lparam)
+   iptr window::send_message(const ::atom & atom, wparam wparam, lparam lparam)
    {
 
-      if (!id.is_message())
+      if (!atom.is_message())
       {
 
-         __throw(error_invalid_argument);
+         __throw(error_bad_argument);
 
       }
 
-      return ::SendMessage(m_hwnd, id.u32(), wparam, lparam);
+      return ::SendMessage(m_hwnd, atom.u32(), wparam, lparam);
 
    }
 
 
-   iptr window::send_message_w(const ::id & id, wparam wparam, lparam lparam)
+   iptr window::send_message_w(const ::atom & atom, wparam wparam, lparam lparam)
    {
 
-      if (!id.is_message())
+      if (!atom.is_message())
       {
 
-         __throw(error_invalid_argument);
+         __throw(error_bad_argument);
 
       }
 
-      return ::SendMessageW(m_hwnd, id.u32(), wparam, lparam);
+      return ::SendMessageW(m_hwnd, atom.u32(), wparam, lparam);
 
    }
 
 
-   void window::post_message(const ::id & id, wparam wparam, lparam lparam)
+   void window::post_message(const ::atom & atom, wparam wparam, lparam lparam)
    {
 
-      if (!id.is_message())
+      if (!atom.is_message())
       {
 
-         __throw(error_invalid_argument);
+         __throw(error_bad_argument);
 
       }
 
-      ::PostMessageW(m_hwnd, id.u32(), wparam, lparam);
+      ::PostMessageW(m_hwnd, atom.u32(), wparam, lparam);
 
    }
 

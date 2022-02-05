@@ -44,7 +44,7 @@ namespace production
 
       DECLARE_MESSAGE_HANDLER(_001OnMenuMessage);
 #ifdef DEBUG
-      void assert_valid() const override;
+      void assert_ok() const override;
       void dump(dump_context & dumpcontext) const override;
 #endif
 

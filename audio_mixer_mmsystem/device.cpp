@@ -210,7 +210,7 @@ namespace multimedia
             break;
 
          default:
-            throw_status(error_invalid_argument);
+            throw_status(error_bad_argument);
          };
 
 
@@ -403,7 +403,7 @@ namespace multimedia
       bool device::OnCommand(wparam wparam, lparam lparam)
       {
 
-         ::id uiID = LOWORD(wparam);
+         ::atom uiID = LOWORD(wparam);
 
          ::multimedia::audio_mixer::control * pinteraction;
 

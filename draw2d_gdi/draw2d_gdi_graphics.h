@@ -481,7 +481,7 @@ namespace draw2d_gdi
       using ::draw2d::graphics::draw_inset_3d_rectangle;
       void draw_inset_3d_rectangle(const ::rectangle_i32 & rectangle, ::color::color crTopLeft, ::color::color crBottomRight, const ::e_border & eborder = e_border_all) override;
 
-      void assert_valid() const override;
+      void assert_ok() const override;
       void dump(dump_context & dumpcontext) const override;
 
 

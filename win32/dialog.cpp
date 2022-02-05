@@ -114,17 +114,17 @@ namespace win32
    }
 
 
-   INT_PTR dialog::on_dialog_message(const ::id & id, wparam wparam, lparam lparam)
+   INT_PTR dialog::on_dialog_message(const ::atom & atom, wparam wparam, lparam lparam)
    {
 
-      if (!id.is_message())
+      if (!atom.is_message())
       {
 
-         __throw(error_invalid_argument);
+         __throw(error_bad_argument);
 
       }
 
-      if (id == WM_INITDIALOG)
+      if (atom == WM_INITDIALOG)
       {
 
          if (!on_init_dialog())
@@ -137,7 +137,7 @@ namespace win32
          return true;
 
       }
-      else if (id == e_message_command)
+      else if (atom == e_message_command)
       {
 
          if (m_bCreated)
@@ -156,13 +156,13 @@ namespace win32
          }
 
       }
-      else if (id == WM_NOTIFY)
+      else if (atom == WM_NOTIFY)
       {
 
          on_notify((NMHDR *)lparam.m_lparam);
 
       }
-      else if (id == e_message_close)
+      else if (atom == e_message_close)
       {
 
          on_close();

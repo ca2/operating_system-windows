@@ -9,7 +9,7 @@ void __cdecl string_base < TYPE_CHAR >::FormatMessage(const CHAR_TYPE * pszForma
    if (pszFormat == nullptr)
    {
 
-      __throw(error_invalid_argument);
+      __throw(error_bad_argument);
 
    }
 
