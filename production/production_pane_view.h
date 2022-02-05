@@ -27,14 +27,14 @@ namespace production
 
       __pointer(::production::document) get_document();
 
-      void handle(::topic * psubject, ::context * pcontext);
+      void handle(::topic * ptopic, ::context * pcontext);
 
       virtual void on_create_impact(::user::impact_data * pcreatordata) override;
       void on_change_cur_sel() override;
 
       void install_message_routing(::channel * pchannel) override;
 
-      virtual void handle(::topic * psubject, ::context * pcontext) override;
+      virtual void handle(::topic * ptopic, ::context * pcontext) override;
       virtual bool pre_create_window(::user::system * pusersystem);
 
 

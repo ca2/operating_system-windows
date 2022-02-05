@@ -53,10 +53,10 @@ namespace production
    }
 
 
-   void pane_view::handle(::topic * psubject, ::context * pcontext)
+   void pane_view::handle(::topic * ptopic, ::context * pcontext)
    {
 
-      ::user::tab_view::handle(psubject, pcontext);
+      ::user::tab_view::handle(ptopic, pcontext);
 
    }
 
@@ -193,15 +193,15 @@ namespace production
 
          auto pupdate = topic(id_browse);
          pupdate->m_actioncontext = ::e_source_system;
-         psubject->id() = ;
-         psubject->payload(id_form) = "production\\options.xhtml";
-         pdocument->update_all_views(psubject);
+         ptopic->m_id = ;
+         ptopic->payload(id_form) = "production\\options.xhtml";
+         pdocument->update_all_views(ptopic);
 
-         psubject->id() = id_get_form_view;
-         pdocument->update_all_views(psubject);
+         ptopic->m_id = id_get_form_view;
+         pdocument->update_all_views(ptopic);
 
-         psubject->id() = id_after_browse;
-         pdocument->update_all_views(psubject);
+         ptopic->m_id = id_after_browse;
+         pdocument->update_all_views(ptopic);
 
 
          pcreatordata->m_puserinteraction = (pview->get_parent_frame());
@@ -251,25 +251,25 @@ namespace production
       get_parent_frame()->hide();
    }
 
-   void pane_view::handle(::topic * psubject, ::context * pcontext)
+   void pane_view::handle(::topic * ptopic, ::context * pcontext)
    {
-      if(psubject->m_id == ::id_set_check)
+      if(ptopic->m_id == ::id_set_check)
       {
-         if(psubject->user_element_id() == "clean")
+         if(ptopic->user_element_id() == "clean")
          {
             __pointer(::user::interaction) pinteraction = m_pviewOptions->get_child_by_id("clean");
             __pointer(::user::check_box) pcheckbox =  (pinteraction);
-            auto psubject = topic(id_clean);
-            psubject->payload(id_clean) = pcheckbox->echeck() == ::check_checked;
-            get_document()->update_all_views(psubject);
+            auto ptopic = topic(id_clean);
+            ptopic->payload(id_clean) = pcheckbox->echeck() == ::check_checked;
+            get_document()->update_all_views(ptopic);
          }
-         else if(psubject->user_element_id() == "build")
+         else if(ptopic->user_element_id() == "build")
          {
             __pointer(::user::interaction) pinteraction = m_pviewOptions->get_child_by_id("build");
             __pointer(::user::check_box) pcheckbox =  (pinteraction);
-            auto psubject = new_action(id_build);
-            psubject->payload(id_build) = pcheckbox->echeck() == ::check_checked;
-            get_document()->update_all_views(psubject);
+            auto ptopic = new_action(id_build);
+            ptopic->payload(id_build) = pcheckbox->echeck() == ::check_checked;
+            get_document()->update_all_views(ptopic);
 
          }
 

@@ -97,7 +97,7 @@ namespace production
    
 
 
-   void impact::handle(::topic * psubject, ::context * pcontext)
+   void impact::handle(::topic * ptopic, ::context * pcontext)
    {
       if(update == ::id_update_current_area)
       {
@@ -105,16 +105,16 @@ namespace production
          SetTimer(::e_timer_update_current_area, 100, nullptr);
 
       }
-      else if(psubject->id() == id_clean)
+      else if(ptopic->m_id == id_clean)
       {
 
-         m_pproduction->m_bClean = psubject->payload(id_clean);
+         m_pproduction->m_bClean = ptopic->payload(id_clean);
 
       }
-      else if(psubject->id() == id_build)
+      else if(ptopic->m_id == id_build)
       {
 
-         m_pproduction->m_bBuild = psubject->payload(id_build);
+         m_pproduction->m_bBuild = ptopic->payload(id_build);
 
       }
 

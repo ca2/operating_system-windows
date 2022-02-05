@@ -308,32 +308,32 @@ namespace windowing_win32
 
       //m_puserinteractionNotify->OnNotifyIconMessage(m_uiId, (::u32)pusermessage->m_lparam);
 
-      auto psubject = __create_new < ::topic >();
+      auto ptopic = __create_new < ::topic >();
 
-      psubject->m_puserelement = this;
+      ptopic->m_puserelement = this;
 
-      psubject->m_actioncontext.m_pmessage = pmessage;
+      ptopic->m_actioncontext.m_pmessage = pmessage;
 
       if (uMessage == e_message_right_button_down)
       {
 
-         psubject->m_id = ::id_context_menu;
+         ptopic->m_id = ::id_context_menu;
 
       }
       else if (uMessage == e_message_left_button_double_click)
       {
 
-         psubject->m_id = ::id_left_button_double_click;
+         ptopic->m_id = ::id_left_button_double_click;
 
       }
       else if (uMessage == e_message_left_button_down)
       {
 
-         psubject->m_id = ::id_left_button_down;
+         ptopic->m_id = ::id_left_button_down;
 
       }
 
-      m_puserinteractionNotify->handle(psubject, nullptr);
+      m_puserinteractionNotify->handle(ptopic, nullptr);
 
    }
 

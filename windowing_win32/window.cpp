@@ -638,9 +638,9 @@ namespace windowing_win32
 
             psystem->signal(id_operating_system_font_list_change);
 
-            //auto psubject = psystem->topic(id_os_font_change);
+            //auto ptopic = psystem->topic(id_os_font_change);
 
-            //psystem->handle_subject(psubject);
+            //psystem->handle_subject(ptopic);
 
             //fork([this]()
               // {

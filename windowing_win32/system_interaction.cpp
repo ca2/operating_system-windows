@@ -91,7 +91,7 @@ namespace windowing_win32
 
             psystem->signal(id_operating_system_font_list_change);/*
 
-            psystem->handle_subject(psubject);*/
+            psystem->handle_subject(ptopic);*/
 
             //fork([this]()
               // {
@@ -111,9 +111,9 @@ namespace windowing_win32
 
             psystem->m_pnode->fetch_user_color();
 
-            /*auto psubject = psystem->topic(id_os_dark_mode);
+            /*auto ptopic = psystem->topic(id_os_dark_mode);
 
-            psystem->handle_subject(psubject);*/
+            psystem->handle_subject(ptopic);*/
 
          }
          else if (pmessage->m_id == e_message_display_change ||
