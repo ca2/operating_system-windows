@@ -64,7 +64,7 @@ namespace backup
    void pane_view::on_create_impact(::user::impact_data * pcreatordata)
    {
 
-      switch(pcreatordata->m_id)
+      switch(pcreatordata->m_atom)
       {
       case impact_backup:
       {
@@ -83,14 +83,14 @@ namespace backup
          __pointer(::user::impact) pview = pdocument->get_view();
          auto pupdate = new_update();
          pupdate->m_actioncontext = ::e_source_system;
-         ptopic->m_id = id_browse;
-         ptopic->m_pextendedtopic->payload(id_form) = "filemanager\\replace_name_in_file_system.xhtml";
+         ptopic->m_atom = id_browse;
+         ptopic->get_extended_topic()->payload(id_form) = "filemanager\\replace_name_in_file_system.xhtml";
          pdocument->update_all_views(ptopic);
 
-         ptopic->m_id = id_get_form_view;
+         ptopic->m_atom = id_get_form_view;
          pdocument->update_all_views(ptopic);
 
-         ptopic->m_id = id_after_browse;
+         ptopic->m_atom = id_after_browse;
          pdocument->update_all_views(ptopic);
 
 
@@ -120,7 +120,7 @@ namespace backup
 
       ::userex::pane_tab_view::handle(ptopic, pcontext);
 
-      if (ptopic->m_pextendedtopic->m_bRet)
+      if (ptopic->get_extended_topic()->m_bRet)
       {
 
          return;
@@ -129,7 +129,7 @@ namespace backup
 
       ::production::form_callback::handle(ptopic, pcontext);
 
-      if (ptopic->m_pextendedtopic->m_bRet)
+      if (ptopic->get_extended_topic()->m_bRet)
       {
 
          return;

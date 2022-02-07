@@ -87,11 +87,11 @@ namespace windows
    {
       if (m_wstrPort.is_empty())
       {
-         __throw(error_bad_argument, "Empty port is invalid.");
+         throw ::exception(error_bad_argument, "Empty port is invalid.");
       }
       if (m_bOpened == true)
       {
-         __throw(error_serial, "serial port already open.");
+         throw ::exception(error_serial, "serial port already open.");
       }
 
       // See: https://github.com/wjwwood/serial/issues/84
@@ -119,10 +119,10 @@ namespace windows
          case ERROR_FILE_NOT_FOUND:
             // Use this->getPort to convert to a std::string
             str.format("Specified port, %d, does not exist.", this->getPort());
-            __throw(error_serial, str);
+            throw ::exception(error_serial, str);
          default:
             str.format("Unknown error opening the serial port: %d", dwLastError);
-            __throw(error_serial, str);
+            throw ::exception(error_serial, str);
          }
       }
 
@@ -138,7 +138,7 @@ namespace windows
       if (m_hFile == INVALID_HANDLE_VALUE)
       {
          // Can only operate on a valid file descriptor
-         __throw(error_serial, "Invalid file descriptor, is the serial port open?");
+         throw ::exception(error_serial, "Invalid file descriptor, is the serial port open?");
       }
 
       DCB dcbSerialParams = { 0 };
@@ -150,7 +150,7 @@ namespace windows
       if (!GetCommState(m_hFile, &dcbSerialParams))
       {
          //error getting state
-         __throw(error_serial, "Error getting the serial port state.");
+         throw ::exception(error_serial, "Error getting the serial port state.");
       }
 
       // setup baud rate
@@ -311,7 +311,7 @@ namespace windows
       else if (m_ebytesize == ::serial::e_byte_size_five)
          dcbSerialParams.ByteSize = 5;
       else
-         __throw(error_bad_argument, "invalid char len");
+         throw ::exception(error_bad_argument, "invalid char len");
 
          // setup estopbit
          if (m_estopbit == ::serial::e_stop_bit_one)
@@ -321,7 +321,7 @@ namespace windows
          else if (m_estopbit == ::serial::e_stop_bit_two)
             dcbSerialParams.StopBits = TWOSTOPBITS;
          else
-            __throw(error_bad_argument, "invalid stop bit");
+            throw ::exception(error_bad_argument, "invalid stop bit");
 
             // setup eparity
             if (m_eparity == ::serial::e_parity_none)
@@ -346,7 +346,7 @@ namespace windows
             }
             else
             {
-               __throw(error_bad_argument, "invalid eparity");
+               throw ::exception(error_bad_argument, "invalid eparity");
             }
 
             // setup eflowcontrol
@@ -376,7 +376,7 @@ namespace windows
             if (!SetCommState(m_hFile, &dcbSerialParams))
             {
                CloseHandle(m_hFile);
-               __throw(error_serial, "Error setting serial port settings.");
+               throw ::exception(error_serial, "Error setting serial port settings.");
             }
 
             // Setup timeouts
@@ -388,7 +388,7 @@ namespace windows
             timeouts.WriteTotalTimeoutMultiplier = m_timeout.m_uWriteTimeoutMultiplier;
             if (!SetCommTimeouts(m_hFile, &timeouts))
             {
-               __throw(error_serial, "Error setting timeouts.");
+               throw ::exception(error_serial, "Error setting timeouts.");
             }
 
 
@@ -432,7 +432,7 @@ namespace windows
                DWORD dwLastError = ::GetLastError();
 
                str.format("Error while closing serial port: %d", dwLastError);
-               __throw(error_io, str);
+               throw ::exception(error_io, str);
             }
             else
             {
@@ -475,7 +475,7 @@ namespace windows
 
          str.format("Error while checking status of the serial port: %d", dwLastError);
 
-         __throw(error_io, str);
+         throw ::exception(error_io, str);
 
       }
 
@@ -487,7 +487,7 @@ namespace windows
    bool serial::waitReadable(::duration /*timeout*/)
    {
 
-      __throw(error_io, "waitReadable is not implemented on Windows.");
+      throw ::exception(error_io, "waitReadable is not implemented on Windows.");
 
       return false;
 
@@ -497,7 +497,7 @@ namespace windows
    void serial::waitByteTimes(size_t count)
    {
 
-      //__throw (io_exception, "waitByteTimes is not implemented on Windows.");
+      //throw ::exception (io_exception, "waitByteTimes is not implemented on Windows.");
 
       duration duration;
 
@@ -516,7 +516,7 @@ namespace windows
       if (!m_bOpened)
       {
 
-         __throw(error_port_not_opened, "serial::read");
+         throw ::exception(error_port_not_opened, "serial::read");
 
       }
 
@@ -531,7 +531,7 @@ namespace windows
 
          ss.format("Error while reading from the serial port: %d", dwLastError);
 
-         __throw(error_io, ss);
+         throw ::exception(error_io, ss);
 
       }
 
@@ -546,7 +546,7 @@ namespace windows
       if (m_bOpened == false)
       {
 
-         __throw(error_port_not_opened, "serial::write");
+         throw ::exception(error_port_not_opened, "serial::write");
 
       }
 
@@ -561,7 +561,7 @@ namespace windows
 
          str.format("Error while writing to the serial port: %d", dwLastError);
 
-         __throw(error_io, str);
+         throw ::exception(error_io, str);
 
       }
 
@@ -799,7 +799,7 @@ namespace windows
       if (m_bOpened == false)
       {
 
-         __throw(error_port_not_opened, "serial::flush");
+         throw ::exception(error_port_not_opened, "serial::flush");
 
       }
 
@@ -811,7 +811,7 @@ namespace windows
    void serial::_flushInput()
    {
 
-      __throw(error_io, "flushInput is not supported on Windows.");
+      throw ::exception(error_io, "flushInput is not supported on Windows.");
 
    }
 
@@ -819,7 +819,7 @@ namespace windows
    void serial::_flushOutput()
    {
 
-      __throw(error_io, "flushOutput is not supported on Windows.");
+      throw ::exception(error_io, "flushOutput is not supported on Windows.");
 
    }
 
@@ -827,7 +827,7 @@ namespace windows
    void serial::sendBreak(int /*duration*/)
    {
 
-      __throw(error_io, "sendBreak is not supported on Windows.");
+      throw ::exception(error_io, "sendBreak is not supported on Windows.");
 
    }
 
@@ -837,7 +837,7 @@ namespace windows
 
       if (m_bOpened == false)
       {
-         __throw(error_port_not_opened, "serial::setBreak");
+         throw ::exception(error_port_not_opened, "serial::setBreak");
       }
       if (level)
       {
@@ -855,7 +855,7 @@ namespace windows
 
       if (m_bOpened == false)
       {
-         __throw(error_port_not_opened, "serial::setRTS");
+         throw ::exception(error_port_not_opened, "serial::setRTS");
       }
       if (level)
       {
@@ -874,7 +874,7 @@ namespace windows
 
       if (m_bOpened == false)
       {
-         __throw(error_port_not_opened, "serial::setDTR");
+         throw ::exception(error_port_not_opened, "serial::setDTR");
       }
       if (level)
       {
@@ -892,7 +892,7 @@ namespace windows
    {
       if (m_bOpened == false)
       {
-         __throw(error_port_not_opened, "serial::waitForChange");
+         throw ::exception(error_port_not_opened, "serial::waitForChange");
       }
 
       DWORD dwCommEvent;
@@ -922,14 +922,14 @@ namespace windows
       if (m_bOpened == false)
       {
          
-         __throw(error_port_not_opened, "serial::getCTS");
+         throw ::exception(error_port_not_opened, "serial::getCTS");
 
       }
 
       DWORD dwModemStatus;
       if (!GetCommModemStatus(m_hFile, &dwModemStatus))
       {
-         __throw(error_io, "Error getting the status of the CTS line.");
+         throw ::exception(error_io, "Error getting the status of the CTS line.");
       }
 
       return (MS_CTS_ON & dwModemStatus) != 0;
@@ -942,7 +942,7 @@ namespace windows
       if (m_bOpened == false)
       {
 
-         __throw(error_port_not_opened, "serial::getDSR");
+         throw ::exception(error_port_not_opened, "serial::getDSR");
 
       }
 
@@ -950,7 +950,7 @@ namespace windows
 
       if (!GetCommModemStatus(m_hFile, &dwModemStatus))
       {
-         __throw(error_io, "Error getting the status of the DSR line.");
+         throw ::exception(error_io, "Error getting the status of the DSR line.");
       }
 
       return (MS_DSR_ON & dwModemStatus) != 0;
@@ -964,7 +964,7 @@ namespace windows
       if (m_bOpened == false)
       {
          
-         __throw(error_port_not_opened, "serial::getRI");
+         throw ::exception(error_port_not_opened, "serial::getRI");
 
       }
 
@@ -972,7 +972,7 @@ namespace windows
 
       if (!GetCommModemStatus(m_hFile, &dwModemStatus))
       {
-         __throw(error_io, "Error getting the status of the RI line.");
+         throw ::exception(error_io, "Error getting the status of the RI line.");
       }
 
       return (MS_RING_ON & dwModemStatus) != 0;
@@ -983,7 +983,7 @@ namespace windows
    {
       if (m_bOpened == false)
       {
-         __throw(error_port_not_opened, "serial::getCD");
+         throw ::exception(error_port_not_opened, "serial::getCD");
       }
 
       DWORD dwModemStatus;
@@ -991,7 +991,7 @@ namespace windows
       if (!GetCommModemStatus(m_hFile, &dwModemStatus))
       {
          // Error in GetCommModemStatus;
-         __throw(error_io, "Error getting the status of the CD line.");
+         throw ::exception(error_io, "Error getting the status of the CD line.");
       }
 
       return (MS_RLSD_ON & dwModemStatus) != 0;
@@ -1002,7 +1002,7 @@ namespace windows
       m_mutexRead.lock();
       //if (WaitForSingleObject(m_hMutexRead, U32_INFINITE_TIMEOUT) != WAIT_OBJECT_0)
       //{
-      //   __throw(error_io, "Error claiming read ::mutex.");
+      //   throw ::exception(error_io, "Error claiming read ::mutex.");
       //}
    }
 
@@ -1011,7 +1011,7 @@ namespace windows
       m_mutexRead.unlock();
     /*  if (!ReleaseMutex(m_hMutexRead))
       {
-         __throw(error_io, "Error releasing read ::mutex.");
+         throw ::exception(error_io, "Error releasing read ::mutex.");
       }*/
    }
 
@@ -1019,7 +1019,7 @@ namespace windows
    {
       //if (WaitForSingleObject(m_hMutexWrite, U32_INFINITE_TIMEOUT) != WAIT_OBJECT_0)
       //{
-        // __throw(error_io, "Error claiming write ::mutex.");
+        // throw ::exception(error_io, "Error claiming write ::mutex.");
       //}
 
       m_mutexWrite.lock();
@@ -1029,7 +1029,7 @@ namespace windows
    {
       //if (!ReleaseMutex(m_hMutexWrite))
       //{
-        // __throw(error_io, "Error releasing write ::mutex.");
+        // throw ::exception(error_io, "Error releasing write ::mutex.");
       //}
 
       m_mutexWrite.unlock();

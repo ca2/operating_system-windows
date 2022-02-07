@@ -105,16 +105,16 @@ namespace production
          SetTimer(::e_timer_update_current_area, 100, nullptr);
 
       }
-      else if(ptopic->m_id == id_clean)
+      else if(ptopic->m_atom == id_clean)
       {
 
-         m_pproduction->m_bClean = ptopic->m_pextendedtopic->payload(id_clean);
+         m_pproduction->m_bClean = ptopic->get_extended_topic()->payload(id_clean);
 
       }
-      else if(ptopic->m_id == id_build)
+      else if(ptopic->m_atom == id_build)
       {
 
-         m_pproduction->m_bBuild = ptopic->m_pextendedtopic->payload(id_build);
+         m_pproduction->m_bBuild = ptopic->get_extended_topic()->payload(id_build);
 
       }
 

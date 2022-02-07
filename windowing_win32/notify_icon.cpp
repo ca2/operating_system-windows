@@ -87,7 +87,7 @@ namespace windowing_win32
 
       //}
 
-      m_id = atom;
+      m_atom = atom;
 
       m_nid.hWnd = __hwnd(get_oswindow());
       m_nid.uID = __u32_hash(atom.to_string());
@@ -248,7 +248,7 @@ namespace windowing_win32
 #else
 
 
-      __throw(todo);
+      throw ::exception(todo);
 
       return true;
 

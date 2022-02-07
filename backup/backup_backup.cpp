@@ -173,7 +173,7 @@ namespace backup
 
          }
 
-         //throw not_implemented(get_application());
+         //throw ::not_implemented(get_application());
 
          //m_bFinished = true;
          //m_timeEnd = ::datetime::time::now();

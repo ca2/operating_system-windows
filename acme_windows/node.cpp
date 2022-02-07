@@ -1908,7 +1908,7 @@ namespace acme
 
 #if defined(_UWP)
 
-         throw ::interface_only_exception();
+         throw ::interface_only();
 
 #elif defined(WINDOWS_DESKTOP)
 

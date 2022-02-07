@@ -830,7 +830,7 @@ namespace multimedia
          if(pmutecontrol != nullptr)
          {
             __pointer(::multimedia::audio_mixer::control_data) pData;
-            __throw(todo, "find replacement/fix for GetWindowDataByDlgCtrlID");
+            throw ::exception(todo, "find replacement/fix for GetWindowDataByDlgCtrlID");
             //if(nullptr != (pData = GetWindowDataByDlgCtrlID((u32) wID)))
             {
                if(pData->get_type() == ::multimedia::audio_mixer::control_data::TypeUniformMute)

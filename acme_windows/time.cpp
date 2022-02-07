@@ -120,7 +120,7 @@
 //
 //      CloseHandle(timer);
 //
-//      __throw(::resource_exception());
+//      throw ::exception(::resource_exception());
 //
 //   }
 //

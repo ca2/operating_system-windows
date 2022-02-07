@@ -24,7 +24,7 @@ namespace windows
 
          INFORMATION("Failed in call to WSAStartup, return value was %d\n", err);
 
-         __throw(error_not_supported);
+         throw ::exception(error_not_supported);
 
       }
 
@@ -37,7 +37,7 @@ namespace windows
 
          INFORMATION("Failed to find a usable winsock stack which supports Winsock 1.1\n");
 
-         __throw(error_not_supported);
+         throw ::exception(error_not_supported);
 
       }
 

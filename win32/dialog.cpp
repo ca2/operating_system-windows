@@ -28,7 +28,7 @@ namespace win32
       if (!estatus)
       {
 
-         __throw(estatus);
+         throw ::exception(estatus);
 
       }
 
@@ -120,7 +120,7 @@ namespace win32
       if (!atom.is_message())
       {
 
-         __throw(error_bad_argument);
+         throw ::exception(error_bad_argument);
 
       }
 

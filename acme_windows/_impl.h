@@ -9,7 +9,7 @@ void __cdecl string_base < TYPE_CHAR >::FormatMessage(const CHAR_TYPE * pszForma
    if (pszFormat == nullptr)
    {
 
-      __throw(error_bad_argument);
+      throw ::exception(error_bad_argument);
 
    }
 
@@ -42,7 +42,7 @@ void string_base < TYPE_CHAR >::FormatMessageV(const CHAR_TYPE * pszFormat, va_l
    if (dwResult == 0)
    {
 
-      throw_memory_exception();
+      throw no_memory();
 
    }
 
@@ -71,7 +71,7 @@ BSTR string_base < TYPE_CHAR >::AllocSysString() const
    BSTR bstrResult = ::str::AllocSysString(data(), get_length());
    if (bstrResult == nullptr)
    {
-      throw_memory_exception();
+      throw no_memory();
    }
    return(bstrResult);
 }
@@ -86,7 +86,7 @@ BSTR string_base < TYPE_CHAR >::SetSysString(BSTR * pbstr) const
    if (!::str::ReAllocSysString(pbstr, data(), get_length()))
    {
 
-      throw_memory_exception();
+      throw no_memory();
 
    }
 

@@ -51,9 +51,9 @@ namespace audio_mmsystem
    {
 
       //ASSERT(GetMainWnd() == nullptr);
-      if(pmessage->m_id == MM_WIM_OPEN ||
-         pmessage->m_id == MM_WIM_CLOSE ||
-         pmessage->m_id == MM_WIM_DATA)
+      if(pmessage->m_atom == MM_WIM_OPEN ||
+         pmessage->m_atom == MM_WIM_CLOSE ||
+         pmessage->m_atom == MM_WIM_DATA)
       {
          
          translate_in_message(pmessage);
@@ -492,9 +492,9 @@ namespace audio_mmsystem
    void in::translate_in_message(::message::message * pmessage)
    {
 
-      ASSERT(pmessage->m_id == MM_WIM_OPEN || pmessage->m_id == MM_WIM_CLOSE || pmessage->m_id == MM_WIM_DATA);
+      ASSERT(pmessage->m_atom == MM_WIM_OPEN || pmessage->m_atom == MM_WIM_CLOSE || pmessage->m_atom == MM_WIM_DATA);
 
-      if(pmessage->m_id == MM_WIM_DATA)
+      if(pmessage->m_atom == MM_WIM_DATA)
       {
 
          m_iBuffer--;

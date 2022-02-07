@@ -150,7 +150,7 @@ namespace draw2d_gdiplus
 
       m_pgraphics->m_pimage = this;
 
-      m_pgraphics->SetImpactportOrg(0, 0);
+      m_pgraphics->SetViewportOrg(0, 0);
 
       m_sizeAlloc = ppixmap->size();
 
@@ -269,7 +269,7 @@ namespace draw2d_gdiplus
 
       //}
       
-      if (!pgraphics->SetImpactportOrg(origin()))
+      if (!pgraphics->SetViewportOrg(origin()))
       {
 
          //return false;
@@ -404,7 +404,7 @@ namespace draw2d_gdiplus
    //   //pixmap::init(size, pcolorref, iScan);
 
    //   //m_pgraphics->set(m_pbitmap);
-   //   //m_pgraphics->SetImpactportOrg(origin());
+   //   //m_pgraphics->SetViewportOrg(origin());
 
    //   //m_pgraphics->m_pimage = this;
    //   ////m_sizeRaw.cx = width;

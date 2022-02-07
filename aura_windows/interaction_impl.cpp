@@ -652,7 +652,7 @@ namespace windows
    //      ::draw2d::graphics * pDCSrc, POINT_I32 *pptSrc, ::color::color crKey, BLENDFUNCTION *pblend, u32 dwFlags)
    //{
    //   ASSERT(_is_window());
-   //   throw interface_only_exception();
+   //   throw ::interface_only();
    //   return false;
    //   /*      return ::UpdateLayeredWindow(get_handle(), WIN_HDC(pDCDst), pptDst, psize,
    //   WIN_HDC(pDCSrc), pptSrc, crKey, pblend, dwFlags) != false;*/
@@ -668,7 +668,7 @@ namespace windows
    //bool interaction_impl::PrintWindow(::draw2d::graphics_pointer & pgraphics, ::u32 nFlags) const
    //{
    //   ASSERT(::is_window(((interaction_impl *)this)->get_handle()));
-   //   throw interface_only_exception();
+   //   throw ::interface_only();
    //   //      return ::PrintWindow(get_handle(), (HDC)(dynamic_cast<::windows::graphics * >(pgraphics))->get_handle(), nFlags) != false;
    //   return false;
    //}
@@ -690,7 +690,7 @@ namespace windows
    //{
    //   __UNREFERENCED_PARAMETER(dwData);
    //   __UNREFERENCED_PARAMETER(nCmd);
-   //   throw interface_only_exception();
+   //   throw ::interface_only();
 
    //   /*      application* pApp = ::aura::get_system();
    //   ASSERT_VALID(pApp);
@@ -716,7 +716,7 @@ namespace windows
 
    ////void interaction_impl::HtmlHelp(uptr dwData, ::u32 nCmd)
    ////{
-   //// throw interface_only_exception();
+   //// throw ::interface_only();
    ///*
    //application* pApp = ::aura::get_system();
    //ASSERT_VALID(pApp);
@@ -776,7 +776,7 @@ namespace windows
    //{
    //   __UNREFERENCED_PARAMETER(dwData);
    //   __UNREFERENCED_PARAMETER(nCmd);
-   //   throw interface_only_exception();
+   //   throw ::interface_only();
    //   /*
    //   application* pApp = ::aura::get_system();
    //   ASSERT_VALID(pApp);
@@ -1036,7 +1036,7 @@ namespace windows
 
    //   ::u32 message;
 
-   //   message = ::message::translate_to_os_message(pusermessage->m_id);
+   //   message = ::message::translate_to_os_message(pusermessage->m_atom);
 
    //   switch (message)
    //   {
@@ -1141,7 +1141,7 @@ namespace windows
 //
 //   void interaction_impl::OnSysColorChange()
 //   {
-//      throw interface_only_exception();
+//      throw ::interface_only();
 //
 //      /*      application* pApp = ::aura::get_system();
 //      if (pApp != nullptr && pApp->m_puiMain == this)
@@ -1178,7 +1178,7 @@ namespace windows
 //   {
 //      __UNREFERENCED_PARAMETER(pDeviceName);
 //
-//      throw interface_only_exception();
+//      throw ::interface_only();
 //      /*application* pApp = ::aura::get_system();
 //      if (pApp != nullptr && pApp->m_puiMain == this)
 //      pApp->DevModeChange(pDeviceName);
@@ -1235,7 +1235,7 @@ namespace windows
    //void interaction_impl::_002OnDraw(::image * pimage)
    //{
 
-   //   throw interface_only_exception();
+   //   throw ::interface_only();
 
    //}
 
@@ -2136,7 +2136,7 @@ namespace windows
 
    //   auto pgraphics = __create < ::draw2d::graphics > ();
 
-   //   __throw(todo);
+   //   throw ::exception(todo);
 
    //   //pgraphics->attach(::GetDCEx(get_handle(), (HRGN)prgnClip->get_os_data(), flags));
 
@@ -2266,7 +2266,7 @@ namespace windows
 
    //   ASSERT(_is_window());
 
-   //   throw interface_only_exception();
+   //   throw ::interface_only();
    //   return false;
    //   //      return ::DrawCaption(get_handle(), (HDC)(dynamic_cast<::windows::graphics * >(pgraphics))->get_handle(), prc, uFlags) != false;
 
@@ -2789,7 +2789,7 @@ namespace windows
 
       ASSERT(_is_window());
 
-      throw interface_only_exception();
+      throw ::interface_only();
       //      const_cast < ::windows::interaction_impl * > (this)->send_message(WM_PRINT, (wparam)(dynamic_cast<::windows::graphics * >(pgraphics))->get_handle(), (lparam) dwFlags);
 
    }
@@ -2800,7 +2800,7 @@ namespace windows
 
       ASSERT(_is_window());
 
-      throw interface_only_exception();
+      throw ::interface_only();
       //const_cast < ::windows::interaction_impl * > (this)->send_message(WM_PRINTCLIENT, (wparam)(dynamic_cast<::windows::graphics * >(pgraphics))->get_handle(), (lparam) dwFlags);
 
    }
@@ -3689,7 +3689,7 @@ namespace windows
 
       // graphics will be already set its impact port to the interaction_impl for linux - cairo with xlib
 
-      pgraphics->SetImpactportOrg(::point_i32());
+      pgraphics->SetViewportOrg(::point_i32());
 
    }
 
@@ -4389,13 +4389,13 @@ void interaction_impl::set_tool_window(bool bSet)
 //      if (pfnWndProc == nullptr)
 //      {
 //
-//         lresult = ::DefWindowProcW(m_hwnd, (::u32) pmessage->m_id.i64(), pmessage->m_wparam, pmessage->m_lparam);
+//         lresult = ::DefWindowProcW(m_hwnd, (::u32) pmessage->m_atom.i64(), pmessage->m_wparam, pmessage->m_lparam);
 //
 //      }
 //      else
 //      {
 //
-//         lresult = ::CallWindowProc(pfnWndProc, m_hwnd, (::u32) pmessage->m_id.i64(), pmessage->m_wparam, pmessage->m_lparam);
+//         lresult = ::CallWindowProc(pfnWndProc, m_hwnd, (::u32) pmessage->m_atom.i64(), pmessage->m_wparam, pmessage->m_lparam);
 //
 //      }
 //
@@ -4460,7 +4460,7 @@ void interaction_impl::set_tool_window(bool bSet)
 //
 //      ::u32 message;
 //
-//      message = pusermessage->m_id.umessage();
+//      message = pusermessage->m_atom.umessage();
 //
 //      m_uiMessage = message;
 //
@@ -4995,7 +4995,7 @@ void interaction_impl::set_tool_window(bool bSet)
 //      //   else
 //      //   {
 //      //      
-//      //      pusermessage->set_lresult(::DefWindowProcW(m_hwnd, pusermessage->m_id, pusermessage->m_wparam, pusermessage->m_lparam));
+//      //      pusermessage->set_lresult(::DefWindowProcW(m_hwnd, pusermessage->m_atom, pusermessage->m_wparam, pusermessage->m_lparam));
 //
 //      //   }
 //
@@ -5074,8 +5074,8 @@ void interaction_impl::set_tool_window(bool bSet)
    bool interaction_impl::on_mouse_message(::message::mouse * pmouse)
    {
 
-      if (pmouse->m_id >= e_message_mouse_first
-         && pmouse->m_id <= e_message_mouse_last
+      if (pmouse->m_atom >= e_message_mouse_first
+         && pmouse->m_atom <= e_message_mouse_last
          && m_bTranslateMouseMessageCursor
          && !pmouse->m_bTranslated)
       {
@@ -5114,7 +5114,7 @@ void interaction_impl::set_tool_window(bool bSet)
 
       }
 
-      auto message = pmessage->m_id.u32();
+      auto message = pmessage->m_atom.u32();
 
       m_uiMessage = message;
 
@@ -5489,7 +5489,7 @@ void interaction_impl::set_tool_window(bool bSet)
       //   else
       //   {
       //      
-      //      pmessage->set_lresult(::DefWindowProcW(m_hwnd, pmessage->m_id, pmessage->m_wparam, pmessage->m_lparam));
+      //      pmessage->set_lresult(::DefWindowProcW(m_hwnd, pmessage->m_atom, pmessage->m_wparam, pmessage->m_lparam));
 
       //   }
 

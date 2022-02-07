@@ -646,7 +646,7 @@ wstring windowing::_windows_register_window_class(::u32 nClassStyle, HCURSOR hCu
    if (!_windows_register_class(&wndcls))
    {
 
-      __throw(error_resource);
+      throw ::exception(error_resource);
 
    }
 

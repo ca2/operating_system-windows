@@ -82,7 +82,7 @@ namespace str
 
 // #ifdef _UWP
 
-//          __throw(todo);
+//          throw ::exception(todo);
 
 // #elif defined(WINDOWS_DESKTOP)
 

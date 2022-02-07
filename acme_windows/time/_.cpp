@@ -311,7 +311,7 @@ int_bool is_windows_8_or_greater()
    if(!GetVersionEx(&osversioninfo))
       return 0;
 
-   __throw(todo);
+   throw ::exception(todo);
 
    return osversioninfo.dwPlatformId == VER_PLATFORM_WIN32_NT && osversioninfo.dwMajorVersion >= 6 && osversioninfo.dwMinorVersion >= 2;
 

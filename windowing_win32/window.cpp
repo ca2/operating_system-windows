@@ -624,14 +624,14 @@ namespace windowing_win32
 
          string strLparamString;
 
-         if (pmessage->m_id == WM_SETTINGCHANGE && wparam == 0)
+         if (pmessage->m_atom == WM_SETTINGCHANGE && wparam == 0)
          {
 
             strLparamString = (const WCHAR *) (LPARAM(lparam));
 
          }
 
-         if (pmessage->m_id == WM_FONTCHANGE)
+         if (pmessage->m_atom == WM_FONTCHANGE)
          {
 
             auto psystem = m_psystem->m_paurasystem;
@@ -651,7 +651,7 @@ namespace windowing_win32
 
          //}
          }
-         else if (pmessage->m_id == WM_SETTINGCHANGE && strLparamString == "ImmersiveColorSet")
+         else if (pmessage->m_atom == WM_SETTINGCHANGE && strLparamString == "ImmersiveColorSet")
          {
 
             auto pnode = m_psystem->m_pnode;
@@ -659,8 +659,8 @@ namespace windowing_win32
             pnode->fetch_user_color();
 
          }
-         else if (pmessage->m_id == e_message_display_change ||
-            (pmessage->m_id == WM_SETTINGCHANGE &&
+         else if (pmessage->m_atom == e_message_display_change ||
+            (pmessage->m_atom == WM_SETTINGCHANGE &&
                (pmessage->m_wparam == SPI_SETWORKAREA)))
          {
 
@@ -1599,7 +1599,7 @@ namespace windowing_win32
    //__pointer(window) window::get_active_window()
    //{
 
-   //   throw ::interface_only_exception();
+   //   throw ::interface_only();
 
    //   return nullptr;
 
@@ -2362,7 +2362,7 @@ namespace windowing_win32
    //void window::message_handler(::message::message * pmessage)
    //{
    //   
-   //   if (pmessage->m_id == (enum_message)WM_SYSCOMMAND)
+   //   if (pmessage->m_atom == (enum_message)WM_SYSCOMMAND)
    //   {
 
    //      if (pmessage->m_wparam == SC_SCREENSAVE)
@@ -2553,7 +2553,7 @@ namespace windowing_win32
       rectanglePaint = paint.rcPaint;
 
 
-      __throw(todo);
+      throw ::exception(todo);
 
       //if (rectanglePaint.is_null() || (GetExStyle() & WS_EX_LAYERED))
       //{
@@ -2624,7 +2624,7 @@ namespace windowing_win32
       //         if (pgraphics != nullptr && g->attach_hdc(hdc))
       //         {
 
-      //            pgraphics->SetImpactportOrg(0, 0);
+      //            pgraphics->SetViewportOrg(0, 0);
 
       //            g->BitBlt(rectanglePaint.left, rectanglePaint.top, rectanglePaint.width(), rectanglePaint.height(), pgraphics, rectangleUpdate.left, rectangleUpdate.top);
 
@@ -2860,7 +2860,7 @@ namespace windowing_win32
 
       HWND hwnd = __hwnd(pmessage->m_oswindow);
 
-      UINT message = pmessage->m_id.u32();
+      UINT message = pmessage->m_atom.u32();
 
       WPARAM wparam = pmessage->m_wparam;
 
@@ -3325,7 +3325,7 @@ namespace windowing_win32
 
       auto pgraphics = __create < ::draw2d::graphics >();
 
-      __throw(todo);
+      throw ::exception(todo);
 
       //pgraphics->attach(::GetDCEx(get_hwnd(), (HRGN)prgnClip->get_os_data(), flags));
 
@@ -3461,7 +3461,7 @@ namespace windowing_win32
 
       ASSERT(::IsWindow(get_hwnd()));
 
-      throw interface_only_exception();
+      throw ::interface_only();
       return false;
       //      return ::DrawCaption(get_hwnd(), (HDC)(dynamic_cast<::windows::graphics * >(pgraphics))->get_hwnd(), prc, uFlags) != false;
 
@@ -3975,7 +3975,7 @@ namespace windowing_win32
 
    //   ASSERT(::IsWindow(((window *)this)->get_hwnd()));
 
-   //   throw interface_only_exception();
+   //   throw ::interface_only();
    //   //      const_cast < ::windowing_win32::window * > (this)->send_message(WM_PRINT, (wparam)(dynamic_cast<::windows::graphics * >(pgraphics))->get_hwnd(), (lparam) dwFlags);
 
    //}
@@ -3985,7 +3985,7 @@ namespace windowing_win32
 
    //   ASSERT(::IsWindow(((window *)this)->get_hwnd()));
 
-   //   throw interface_only_exception();
+   //   throw ::interface_only();
    //   //const_cast < ::windowing_win32::window * > (this)->send_message(WM_PRINTCLIENT, (wparam)(dynamic_cast<::windows::graphics * >(pgraphics))->get_hwnd(), (lparam) dwFlags);
 
    //}
@@ -4929,19 +4929,19 @@ namespace windowing_win32
 
       // graphics will be already set its impact port to the window for linux - cairo with xlib
 
-      pgraphics->SetImpactportOrg(::point_i32());
+      pgraphics->SetViewportOrg(::point_i32());
 
    }
 
 
    void window::on_set_parent(::user::interaction * puserinteraction) {
 
-      throw ::interface_only_exception();
+      throw ::interface_only();
    }
 
     bool window::get_rect_normal(RECTANGLE_I32 * prectangle) {
 
-       throw ::interface_only_exception();
+       throw ::interface_only();
        return false;
     }
 
@@ -4949,7 +4949,7 @@ namespace windowing_win32
     //void window::show_task(bool bShow)
     //{
 
-    //   throw ::interface_only_exception();
+    //   throw ::interface_only();
 
     //}
     //
@@ -4957,7 +4957,7 @@ namespace windowing_win32
     void window::window_show_change_visibility(::e_display edisplay, ::e_activation eactivation)
     {
 
-       throw ::interface_only_exception();
+       throw ::interface_only();
 
     }
 
@@ -5333,13 +5333,13 @@ namespace windowing_win32
    //   if (pfnWndProc == nullptr)
    //   {
 
-   //      lresult = ::DefWindowProcW(m_oswindow, (::u32)pmessage->m_id.i64(), pmessage->m_wparam, pmessage->m_lparam);
+   //      lresult = ::DefWindowProcW(m_oswindow, (::u32)pmessage->m_atom.i64(), pmessage->m_wparam, pmessage->m_lparam);
 
    //   }
    //   else
    //   {
 
-   //      lresult = ::CallWindowProc(pfnWndProc, m_oswindow, (::u32)pmessage->m_id.i64(), pmessage->m_wparam, pmessage->m_lparam);
+   //      lresult = ::CallWindowProc(pfnWndProc, m_oswindow, (::u32)pmessage->m_atom.i64(), pmessage->m_wparam, pmessage->m_lparam);
 
    //   }
 
@@ -5427,7 +5427,7 @@ namespace windowing_win32
 //
 //      ::u32 message;
 //
-//      message = pmessage->m_id.umessage();
+//      message = pmessage->m_atom.umessage();
 //
 //      m_uiMessage = message;
 //
@@ -5962,7 +5962,7 @@ namespace windowing_win32
 //      //   else
 //      //   {
 //      //      
-//      //      pmessage->set_lresult(::DefWindowProcW(m_oswindow, pmessage->m_id, pmessage->m_wparam, pmessage->m_lparam));
+//      //      pmessage->set_lresult(::DefWindowProcW(m_oswindow, pmessage->m_atom, pmessage->m_wparam, pmessage->m_lparam));
 //
 //      //   }
 //

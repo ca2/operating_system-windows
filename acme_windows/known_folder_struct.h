@@ -1,4 +1,4 @@
-// Created by camilo on 2021-08-08 04:50 BRT <3ThomasBorregaardSørensen!!
+// Created by camilo on 2021-08-08 04:50 BRT <3ThomasBorregaardSï¿½rensen!!
 #pragma once
 
 
@@ -6,7 +6,7 @@ struct known_folder_struct
 {
 
    string               m_strKnownFolder;
-   KNOWNFOLDERID        m_idKnownFolder;
+   KNOWNFOLDERID        m_atomKnownFolder;
 
 };
 

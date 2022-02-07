@@ -252,7 +252,7 @@ namespace windowing_win32
 
 #else
 
-      __throw(todo);
+      throw ::exception(todo);
 
 #endif
 
@@ -520,7 +520,7 @@ namespace windowing_win32
       //
       //#else
       //
-      //         __throw(todo);
+      //         throw ::exception(todo);
       //
       //#endif
       //
@@ -550,7 +550,7 @@ namespace windowing_win32
       //
       //#else
       //
-      //      __throw(todo);
+      //      throw ::exception(todo);
       //
       //#endif
       //
@@ -593,7 +593,7 @@ namespace windowing_win32
       //
       //#else
       //
-      //      __throw(todo);
+      //      throw ::exception(todo);
       //
       //#endif
       //#endif
@@ -676,7 +676,7 @@ namespace windowing_win32
 
 #else
 
-      __throw(todo);
+      throw ::exception(todo);
 
 #endif
 
@@ -871,7 +871,7 @@ namespace windowing_win32
    //
    //#else
    //
-   //      __throw(todo);
+   //      throw ::exception(todo);
    //
    //#endif
    //
@@ -902,7 +902,7 @@ namespace windowing_win32
    //
    //#else
    //
-   //      __throw(todo);
+   //      throw ::exception(todo);
    //
    //#endif
    //
@@ -971,7 +971,7 @@ namespace windowing_win32
 //
 //#else
 //
-//      throw interface_only_exception();
+//      throw ::interface_only();
 //
 //#endif
 

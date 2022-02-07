@@ -925,7 +925,7 @@ bool windows_file_find_is_dots(WIN32_FIND_DATAW & data)
 //
 //         auto wstrModuleFolder = strModuleFolder.get_string_buffer(MAX_PATH * 8);
 //
-//         __throw(todo);
+//         throw ::exception(todo);
 //
 //         return wstrModuleFolder;
 //

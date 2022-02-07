@@ -124,7 +124,7 @@ void shared_memory::SetHandle(HGLOBAL hGlobalMemory, bool bAllowGrow)
    if (hGlobalMemory == nullptr)
    {
 
-      __throw(error_bad_argument);
+      throw ::exception(error_bad_argument);
 
    }
 
@@ -195,7 +195,7 @@ void shared_memory::impl_free(byte *)
 //byte * * shared_memory::detach()
 //{
 
-//   __throw(not_supported_exception("not valid for Global Memory(\"HGLOBAL\")"));
+//   throw ::exception(not_supported_exception("not valid for Global Memory(\"HGLOBAL\")"));
 
 //}
 

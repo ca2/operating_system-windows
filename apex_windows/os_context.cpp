@@ -4,6 +4,7 @@
 #include <shobjidl.h>
 #include <ShellApi.h>
 #include <Security.h>
+#include "acme/operating_system/time.h"
 #include "acme/filesystem/filesystem/acme_dir.h"
 #include "acme/filesystem/filesystem/acme_path.h"
 

@@ -259,8 +259,8 @@ namespace windows
 
 
 #include "acme_windows_common/_acme_windows_common.h"
-#include "acme/node/operating_system/_const_console.h"
-#include "acme/node/operating_system/console.h"
+#include "acme/operating_system/_const_console.h"
+#include "acme/operating_system/console.h"
 
 
 #include "acme/filesystem/filesystem/acme_dir.h"

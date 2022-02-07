@@ -25,14 +25,14 @@ namespace backup
 
       auto pview = ptopic->get_form();
 
-      if(ptopic->m_id == ::id_click)
+      if(ptopic->m_atom == ::id_click)
       {
          if(ptopic->user_element_id() == "lfs")
          {
             auto pupdate = new_update();
             pupdate->m_actioncontext = ::e_source_system;
-            ptopic->m_id = id_browse;
-            ptopic->m_pextendedtopic->payload(id_form) = "filemanager_add_location_lfs.xhtml";
+            ptopic->m_atom = id_browse;
+            ptopic->get_extended_topic()->payload(id_form) = "filemanager_add_location_lfs.xhtml";
             dynamic_cast < ::user::form_view * > (pview)->get_document()->update_all_views(ptopic);
             auto pinteraction = pview->get_child_by_name("lfs");
             
@@ -49,8 +49,8 @@ namespace backup
          {
             auto pupdate = new_update();
             pupdate->m_actioncontext = ::e_source_system;
-            ptopic->m_id = id_browse;
-            ptopic->m_pextendedtopic->payload(id_form) = "filemanager_add_location_ftp.xhtml";
+            ptopic->m_atom = id_browse;
+            ptopic->get_extended_topic()->payload(id_form) = "filemanager_add_location_ftp.xhtml";
             dynamic_cast < ::user::form_view * > (pview)->get_document()->update_all_views(ptopic);
             ptopic->Ret();
 

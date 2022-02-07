@@ -3,7 +3,7 @@
 
 #include "_node_windows.h"
 #if !BROAD_PRECOMPILED_HEADER
-#include "acme/user/_user.h"
+#include "acme/user/user/_user.h"
 #endif
 
 

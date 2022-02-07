@@ -80,7 +80,7 @@ namespace production
 
    void pane_view::on_create_impact(::user::impact_data * pcreatordata)
    {
-      switch(pcreatordata->m_id)
+      switch(pcreatordata->m_atom)
       {
       case CONTEXT_MENU_IMPACT:
       {
@@ -193,14 +193,14 @@ namespace production
 
          auto pupdate = topic(id_browse);
          pupdate->m_actioncontext = ::e_source_system;
-         ptopic->m_id = ;
-         ptopic->m_pextendedtopic->payload(id_form) = "production\\options.xhtml";
+         ptopic->m_atom = ;
+         ptopic->get_extended_topic()->payload(id_form) = "production\\options.xhtml";
          pdocument->update_all_views(ptopic);
 
-         ptopic->m_id = id_get_form_view;
+         ptopic->m_atom = id_get_form_view;
          pdocument->update_all_views(ptopic);
 
-         ptopic->m_id = id_after_browse;
+         ptopic->m_atom = id_after_browse;
          pdocument->update_all_views(ptopic);
 
 
@@ -223,7 +223,7 @@ namespace production
    void pane_view::_001OnMenuMessage(::message::message * pmessage)
    {
       __UNREFERENCED_PARAMETER(pmessage);
-      set_current_tab_by_id(m_pimpactdataOld->m_id);
+      set_current_tab_by_id(m_pimpactdataOld->m_atom);
    }
 
    void pane_view::install_message_routing(::channel * pchannel)
@@ -253,14 +253,14 @@ namespace production
 
    void pane_view::handle(::topic * ptopic, ::context * pcontext)
    {
-      if(ptopic->m_id == ::id_set_check)
+      if(ptopic->m_atom == ::id_set_check)
       {
          if(ptopic->user_element_id() == "clean")
          {
             __pointer(::user::interaction) pinteraction = m_pviewOptions->get_child_by_id("clean");
             __pointer(::user::check_box) pcheckbox =  (pinteraction);
             auto ptopic = topic(id_clean);
-            ptopic->m_pextendedtopic->payload(id_clean) = pcheckbox->echeck() == ::check_checked;
+            ptopic->get_extended_topic()->payload(id_clean) = pcheckbox->echeck() == ::check_checked;
             get_document()->update_all_views(ptopic);
          }
          else if(ptopic->user_element_id() == "build")
@@ -268,7 +268,7 @@ namespace production
             __pointer(::user::interaction) pinteraction = m_pviewOptions->get_child_by_id("build");
             __pointer(::user::check_box) pcheckbox =  (pinteraction);
             auto ptopic = new_action(id_build);
-            ptopic->m_pextendedtopic->payload(id_build) = pcheckbox->echeck() == ::check_checked;
+            ptopic->get_extended_topic()->payload(id_build) = pcheckbox->echeck() == ::check_checked;
             get_document()->update_all_views(ptopic);
 
          }
