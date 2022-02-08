@@ -258,6 +258,8 @@ namespace windows
 
       m_estatus = ::success;
 
+      set_ok();
+
       //return ::success;
 
    }
