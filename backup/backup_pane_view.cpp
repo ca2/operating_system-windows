@@ -23,9 +23,9 @@ namespace backup
 
 
 #ifdef DEBUG
-   void pane_view::assert_valid() const
+   void pane_view::assert_ok() const
    {
-      ::user::impact::assert_valid();
+      ::user::impact::assert_ok();
    }
 
    void pane_view::dump(dump_context & dumpcontext) const
@@ -53,10 +53,10 @@ namespace backup
    }
 
 
-   void pane_view::handle(::subject * psubject, ::context * pcontext)
+   void pane_view::handle(::topic * ptopic, ::context * pcontext)
    {
 
-      ::user::tab_view::handle(psubject, pcontext);
+      ::user::tab_view::handle(ptopic, pcontext);
 
    }
 
@@ -64,7 +64,7 @@ namespace backup
    void pane_view::on_create_impact(::user::impact_data * pcreatordata)
    {
 
-      switch(pcreatordata->m_id)
+      switch(pcreatordata->m_atom)
       {
       case impact_backup:
       {
@@ -83,15 +83,15 @@ namespace backup
          __pointer(::user::impact) pview = pdocument->get_view();
          auto pupdate = new_update();
          pupdate->m_actioncontext = ::e_source_system;
-         psubject->id() = id_browse;
-         psubject->payload(id_form) = "filemanager\\replace_name_in_file_system.xhtml";
-         pdocument->update_all_views(psubject);
+         ptopic->m_atom = id_browse;
+         ptopic->get_extended_topic()->payload(id_form) = "filemanager\\replace_name_in_file_system.xhtml";
+         pdocument->update_all_views(ptopic);
 
-         psubject->id() = id_get_form_view;
-         pdocument->update_all_views(psubject);
+         ptopic->m_atom = id_get_form_view;
+         pdocument->update_all_views(ptopic);
 
-         psubject->id() = id_after_browse;
-         pdocument->update_all_views(psubject);
+         ptopic->m_atom = id_after_browse;
+         pdocument->update_all_views(ptopic);
 
 
          pcreatordata->m_puserinteraction = (pview->get_parent_frame());
@@ -115,21 +115,21 @@ namespace backup
    }
 
 
-   void pane_view::handle(::subject * psubject, ::context * pcontext)
+   void pane_view::handle(::topic * ptopic, ::context * pcontext)
    {
 
-      ::userex::pane_tab_view::handle(psubject, pcontext);
+      ::userex::pane_tab_view::handle(ptopic, pcontext);
 
-      if (psubject->m_bRet)
+      if (ptopic->get_extended_topic()->m_bRet)
       {
 
          return;
 
       }
 
-      ::production::form_callback::handle(psubject, pcontext);
+      ::production::form_callback::handle(ptopic, pcontext);
 
-      if (psubject->m_bRet)
+      if (ptopic->get_extended_topic()->m_bRet)
       {
 
          return;

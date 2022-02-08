@@ -90,7 +90,7 @@ namespace windows
          return false;
       }
 
-      m_pdata = MapViewOfFile(m_hfilemap, (m_bRead ? FILE_MAP_READ : 0) | (m_bWrite ? FILE_MAP_WRITE : 0), 0, 0, 0);
+      m_pdata = ::MapViewOfFile(m_hfilemap, (m_bRead ? FILE_MAP_READ : 0) | (m_bWrite ? FILE_MAP_WRITE : 0), 0, 0, 0);
 
       if (m_pdata == nullptr)
       {
@@ -140,7 +140,7 @@ namespace windows
       if (m_pdata != nullptr)
       {
 
-         UnmapViewOfFile(m_pdata);
+         ::UnmapViewOfFile(m_pdata);
 
          m_pdata = nullptr;
 

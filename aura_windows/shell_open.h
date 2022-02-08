@@ -8,7 +8,7 @@ namespace windows
 {
 
 
-   class CLASS_DECL_AURA shell_open :
+   class CLASS_DECL_AURA_WINDOWS shell_open :
       virtual public ::shell_open
    {
    public:

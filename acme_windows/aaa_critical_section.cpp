@@ -12,7 +12,7 @@ namespace windows
       if (!::InitializeCriticalSectionEx(&m_criticalsection, 4000, 0))
       {
 
-         __throw(resource_exception);
+         throw ::exception(resource_exception);
 
       }
 

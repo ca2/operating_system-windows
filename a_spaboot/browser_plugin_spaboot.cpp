@@ -134,7 +134,7 @@ int APIENTRY ca2_cube_install(const ::string & pszId)
 
    /*std::string strUrl;
    std::string strApp;
-   strUrl = "http://spaignition.ca2api.net/query?node=install_application&id=";
+   strUrl = "http://spaignition.ca2api.net/query?node=install_application&atom=";
    strUrl += g_strId;
    strUrl += "&key=application";
    int iRetry = 0;

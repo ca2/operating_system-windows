@@ -388,7 +388,7 @@ pacmedir->system() / "config/production/mirror_status.txt";
 
          }
          //m_strBase = papplication->command_value("base_dir");
-         m_strBase = pcontext->m_papexcontext->file().as_string("C:\\ca2\\config\\platform-windows\\production\\base_dir.txt").trimmed();
+         m_strBase = pcontext->m_papexcontext->file().as_string("C:\\ca2\\config\\operating-system-windows\\production\\base_dir.txt").trimmed();
 
 
          /*
@@ -3339,7 +3339,7 @@ retry1:
 
    /* Destroy a status message */
    /*__memset( statusMsg, 0, 1024 );
-   printf( "\nEnter status message id to delete: " );
+   printf( "\nEnter status message atom to delete: " );
    gets( statusMsg );
    tmpStr = statusMsg;
    replyMsg = "";

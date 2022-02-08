@@ -105,7 +105,7 @@ u32 format_message(u32 dwFlags, const void * pSource, u32 dwMessageID, u32 dwLan
 
 // #ifdef _UWP
 
-//    __throw(todo);
+//    throw ::exception(todo);
 
 // #elif defined(WINDOWS_DESKTOP)
 

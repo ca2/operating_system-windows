@@ -62,7 +62,7 @@ namespace windowing_win32
    }
 
 
-   void notify_icon::create_notify_icon(const ::id & id, ::user::interaction * puserinteractionNotify, ::windowing::icon * picon)
+   void notify_icon::create_notify_icon(const ::atom & atom, ::user::interaction * puserinteractionNotify, ::windowing::icon * picon)
    {
 
       if (m_bCreated)
@@ -72,7 +72,7 @@ namespace windowing_win32
 
       }
 
-      string strId = "notify_icon_" + id.to_string();
+      string strId = "notify_icon_" + atom.to_string();
 
       m_strId = "ca2-" + picon->get_tray_icon_name() + "-" + strId;
 
@@ -87,10 +87,10 @@ namespace windowing_win32
 
       //}
 
-      m_id = id;
+      m_atom = atom;
 
       m_nid.hWnd = __hwnd(get_oswindow());
-      m_nid.uID = __u32_hash(id.to_string());
+      m_nid.uID = __u32_hash(atom.to_string());
       m_nid.hIcon = (HICON) picon->get_os_data(::size_i32(16, 16));
       m_nid.uFlags = NIF_ICON | NIF_MESSAGE;
       m_nid.uCallbackMessage = ::e_message_notify_icon;
@@ -248,7 +248,7 @@ namespace windowing_win32
 #else
 
 
-      __throw(todo);
+      throw ::exception(todo);
 
       return true;
 
@@ -268,9 +268,9 @@ namespace windowing_win32
    void notify_icon::on_message_notify_icon(::message::message * pmessage)
    {
 
-      uptr uMessage = pmessage->m_lparam;
+      enum_message emessage = (enum_message) pmessage->m_lparam.m_lparam;
 
-      if (uMessage == e_message_left_button_down)
+      if (emessage == e_message_left_button_down)
       {
 
          while (m_userinteractionaHidden.get_size() > 0)
@@ -306,34 +306,38 @@ namespace windowing_win32
 
       }
 
-      //m_puserinteractionNotify->OnNotifyIconMessage(m_uiId, (::u32)pusermessage->m_lparam);
+      ::extended_topic_pointer pextendedtopic;
 
-      auto psubject = __create_new < ::subject >();
-
-      psubject->m_puserelement = this;
-
-      psubject->m_actioncontext.m_pmessage = pmessage;
-
-      if (uMessage == e_message_right_button_down)
+      if (emessage == e_message_right_button_down)
       {
 
-         psubject->m_id = ::e_subject_context_menu;
+         pextendedtopic = create_extended_topic(::id_context_menu);
 
       }
-      else if (uMessage == e_message_left_button_double_click)
+      else if (emessage == e_message_left_button_double_click)
       {
 
-         psubject->m_id = ::e_subject_left_button_double_click;
+         pextendedtopic = create_extended_topic(::id_left_button_double_click);
 
       }
-      else if (uMessage == e_message_left_button_down)
+      else if (emessage == e_message_left_button_down)
       {
 
-         psubject->m_id = ::e_subject_left_button_down;
+         pextendedtopic = create_extended_topic(::id_left_button_down);
+
+      }
+      else
+      {
+
+         pextendedtopic = create_extended_topic(emessage);
 
       }
 
-      m_puserinteractionNotify->handle(psubject, nullptr);
+      pextendedtopic->m_puserelement = this;
+
+      pextendedtopic->m_actioncontext.m_pmessage = pmessage;
+
+      m_puserinteractionNotify->handle(pextendedtopic, nullptr);
 
    }
 

@@ -175,6 +175,15 @@ namespace draw2d_gdiplus
 
       }
 
+      if (size.is_empty())
+      {
+
+         destroy();
+
+         return;
+
+      }
+
       //::draw2d::bitmap_pointer pbitmapPrevious;
 
       //::draw2d::graphics_pointer pgraphicsPrevious;

@@ -24,16 +24,18 @@ namespace windows
    void shell_open::initialize(::object * pobject)
    {
 
-      auto estatus = ::shell_open::initialize(pobject);
+      //auto estatus = 
+      
+      ::shell_open::initialize(pobject);
 
-      if (!estatus)
-      {
+      //if (!estatus)
+      //{
 
-         return estatus;
+      //   return estatus;
 
-      }
+      //}
 
-      return estatus;
+      //return estatus;
 
    }
 
@@ -102,7 +104,7 @@ namespace windows
 
          str.release_string_buffer();
 
-         //__throw(error_not_implemented);
+         //throw ::not_implemented();
          /*
          // execute the command
          if (!psystem->OnDDECommand( (char *)(const wchar_t *)str))
@@ -140,7 +142,7 @@ namespace windows
       }
 
 
-      return ::success;
+      //return ::success;
 
 
    }

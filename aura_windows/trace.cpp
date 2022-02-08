@@ -222,7 +222,7 @@ void TraceDDE(const ::string & pszPrefix, const MSG* pMsg)
 
       const char * pszCommands = (const ::string &)::GlobalLock(hCommands);
 
-      ENSURE_THROW(pszCommands != nullptr, __throw(error_no_memory));
+      ENSURE_THROW(pszCommands != nullptr, throw ::exception(error_no_memory));
 
 //      ::output_debug_string(trace_category_appmsg, 0, "%s: Execute '%s'.\n", pszPrefix, pszCommands);
 
@@ -246,7 +246,7 @@ void TraceDDE(const ::string & pszPrefix, const MSG* pMsg)
 
       DDEADVISE* pAdvise = (DDEADVISE*)::GlobalLock(hAdvise);
 
-      ENSURE_THROW(pAdvise != nullptr, __throw(error_no_memory));
+      ENSURE_THROW(pAdvise != nullptr, throw ::exception(error_no_memory));
 
       wchar_t szItem[80];
       szItem[0] = '\0';

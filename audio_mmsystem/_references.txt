@@ -1,1 +1,1 @@
-platform-multimedia/multimedia_mmsystem
+operating-system-multimedia/multimedia_mmsystem

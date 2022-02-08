@@ -32,6 +32,9 @@
     <ClInclude Include="extract_icon.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="shell_open.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="framework.cpp">
@@ -53,6 +56,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="hicon_from_ico_file.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="shell_open.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

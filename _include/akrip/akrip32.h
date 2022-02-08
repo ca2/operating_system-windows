@@ -93,7 +93,7 @@ typedef struct
   BYTE      tgt;
   BYTE      lun;
   BYTE      pad;
-  char      id[MAXIDLEN + 1];
+  char      atom[MAXIDLEN + 1];
   CDINFO    info;
 } CDREC, *PCDREC, FAR *LPCDREC;
 
@@ -263,7 +263,7 @@ typedef struct _GETCDHAND {
   BYTE size;             /* set to sizeof(GETCDHAND)            */
   BYTE ver;              /* set to AKRIPVER                     */
   BYTE ha;               /* host adapter                        */
-  BYTE tgt;              /* target id                           */
+  BYTE tgt;              /* target atom                           */
   BYTE lun;              /* LUN                                 */
   BYTE readType;         /* read function to use                */
   int jitterCorr;       /* use built-in jitter correction?     */

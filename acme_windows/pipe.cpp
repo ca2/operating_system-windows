@@ -198,7 +198,7 @@ namespace windows
          m_pchBuf = (char *)malloc(1025);
 
          if(m_pchBuf == nullptr)
-            __throw(error_no_memory);
+            throw ::exception(error_no_memory);
 
       }
 

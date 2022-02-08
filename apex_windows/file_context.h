@@ -46,14 +46,14 @@ namespace windows
 
       virtual void GetModuleShortFileName(HINSTANCE hInst, string & strShortName);
       
-      virtual ::payload length(const ::file::path & path) override;
-      virtual ::payload length(const ::file::path & path, ::payload * pvarQuery) override;
+      ::payload length(const ::file::path & path) override;
+      ::payload length(const ::file::path & path, ::payload * pvarQuery) override;
 
-      virtual void move(const ::file::path & pszNew, const ::file::path & psz) override;
+      void move(const ::file::path & pszNew, const ::file::path & psz) override;
 
-      virtual void del(const ::file::path & psz) override;
+      void erase(const ::file::path & psz) override;
 
-      virtual bool is_read_only(const ::file::path & psz) override;
+      bool is_read_only(const ::file::path & psz) override;
 
 
       ::block get_main_resource_block() override;
@@ -62,7 +62,7 @@ namespace windows
       //::file_pointer create_resource_file(const char* path) override;
       //bool resource_is_file_or_dir(const char* path) override;
 
-      virtual file_pointer resource_get_file(const ::file::path & path) override;
+      file_pointer resource_get_file(const ::file::path & path) override;
 
       virtual bool get_last_write_time(FILETIME * pfiletime, const ::string & strFilename);
 
@@ -72,7 +72,7 @@ namespace windows
 
 
 
-      virtual ::file::path dropbox_info_network_payload() override;
+      ::file::path dropbox_info_network_payload() override;
 
       //virtual ::file::path onedrive_global_ini(::object * pobject) override;
       //virtual ::file::path onedrive_cid_ini(::object * pobject) override;

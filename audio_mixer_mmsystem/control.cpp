@@ -314,9 +314,15 @@ namespace multimedia
 
       void control::OnMixerControlChange()
       {
-         if(this->get_size() <= 0)
+         
+         if (this->get_size() <= 0)
+         {
+
             return;
-         void                            mmrc;
+
+         }
+
+         //void                            mmrc;
          //    oswindow                            htxt;
          //    PMACONTROLINSTANCE_FADER        pmaci_fader;
          //    LPMACONTROLINSTANCE             pmaci;
@@ -376,16 +382,19 @@ namespace multimedia
          //    m_mixercontroldetails.cChannels      = cChannels;
          m_mixercontroldetails.cMultipleItems = m_mixercontrol.cMultipleItems;
 
+         MMRESULT mmresult = mixerGetControlDetails((HMIXEROBJ) device->m_hMixer, &m_mixercontroldetails, MIXER_GETCONTROLDETAILSF_VALUE);
 
+         auto estatus = mmresult_to_status(mmresult);
 
-         mmrc = mmsystem::translate(mixerGetControlDetails((HMIXEROBJ) device->m_hMixer, &m_mixercontroldetails, MIXER_GETCONTROLDETAILSF_VALUE));
-
-         if (::success != mmrc)
+         if (!estatus)
          {
             //        message_box(nullptr, MB_OK | e_message_box_icon_exclamation,
             //                "mixerGetControlDetails(ctrlid=%.08lXh) failed on hmx=%.04Xh, mmr=%u!",
             //              m_mixercontrol.dwControlID, m_pmixersource->get_device()->m_hMixer, mmrc);
-            return;
+            //return;
+
+            throw_status(estatus);
+
          }
 
          cMultipleItems = 1;
@@ -737,20 +746,29 @@ namespace multimedia
                                                 m_mixercontrol.Bounds.dwMaximum - m_mixercontrol.Bounds.dwMinimum,
                                                 nRange) +  m_mixercontrol.Bounds.dwMinimum;
 
-                           void     mmrc = mmsystem::translate(mixerSetControlDetails((HMIXEROBJ) device->m_hMixer, &m_mixercontroldetails, MIXER_GETCONTROLDETAILSF_VALUE));
+                           MMRESULT mmresult = mixerSetControlDetails((HMIXEROBJ) device->m_hMixer, &m_mixercontroldetails, MIXER_GETCONTROLDETAILSF_VALUE);
 
-                           if (::success == mmrc)
+                           auto estatus = mmresult_to_status(mmresult);
+
+                           if (!estatus)
                            {
+
+                              throw_status(estatus);
+
+                           }
+
+                           //if (::success == mmrc)
+                           //{
 
                               OnMixerControlChange();
 
-                           }
-                           else
-                           {
-                              //                                message_box(nullptr, MB_OK | e_message_box_icon_exclamation,
-                              //                                        "mixerGetControlDetails(ctrlid=%.08lXh) failed on hmx=%.04Xh, mmr=%u!",
-                              //                                      m_mixercontrol.dwControlID, m_pmixersource->get_device()->m_hMixer, mmrc);
-                           }
+                           //}
+                           //else
+                           //{
+                           //   //                                message_box(nullptr, MB_OK | e_message_box_icon_exclamation,
+                           //   //                                        "mixerGetControlDetails(ctrlid=%.08lXh) failed on hmx=%.04Xh, mmr=%u!",
+                           //   //                                      m_mixercontrol.dwControlID, m_pmixersource->get_device()->m_hMixer, mmrc);
+                           //}
 
                         }
                         else if(m_mixercontroldetails.cChannels == 1)
@@ -762,29 +780,42 @@ namespace multimedia
                            PMIXERCONTROLDETAILS_UNSIGNED pmxcd_u = (PMIXERCONTROLDETAILS_UNSIGNED) m_mixercontroldetails.paDetails;
                            pmxcd_u[0].dwValue = (i32)MulDiv(nValue, m_mixercontrol.Bounds.dwMaximum - m_mixercontrol.Bounds.dwMinimum, nRange) + m_mixercontrol.Bounds.dwMinimum;
 
-                           void     mmrc = mmsystem::translate(mixerSetControlDetails((HMIXEROBJ) device->m_hMixer, &m_mixercontroldetails, MIXER_GETCONTROLDETAILSF_VALUE));
+                           MMRESULT mmresult = mixerSetControlDetails((HMIXEROBJ) device->m_hMixer, &m_mixercontroldetails, MIXER_GETCONTROLDETAILSF_VALUE);
 
-                           if(::success == mmrc)
+                           auto estatus = mmresult_to_status(mmresult);
+
+                           if (::failed(estatus))
                            {
-                              OnMixerControlChange();
+
+                              throw_status(estatus);
+
                            }
-                           else
-                           {
-                              string strMessage;
-                              strMessage.format("mixerGetControlDetails(ctrlid=%.08lXh) failed on hmx=%.04Xh, mmr=%u!",
-                                                m_mixercontrol.dwControlID, device->m_hMixer, mmrc);
-                              //pScrollBar->message_box(strMessage, nullptr, e_message_box_icon_exclamation);
-                           }
+                            
+                           OnMixerControlChange();
+                           //}
+                           //else
+                           //{
+                           //   string strMessage;
+                           //   strMessage.format("mixerGetControlDetails(ctrlid=%.08lXh) failed on hmx=%.04Xh, mmr=%u!",
+                           //                     m_mixercontrol.dwControlID, device->m_hMixer, mmrc);
+                           //   //pScrollBar->message_box(strMessage, nullptr, e_message_box_icon_exclamation);
+                           //}
                         }
-                        return ;
+
+                        return;
+
                      }
+
                   }
 
                }
+
             }
 
          }
+
       }
+
 
       bool control::OnCommand(WPARAM wParam, LPARAM lParam)
       {
@@ -799,7 +830,7 @@ namespace multimedia
          if(pmutecontrol != nullptr)
          {
             __pointer(::multimedia::audio_mixer::control_data) pData;
-            __throw(todo, "find replacement/fix for GetWindowDataByDlgCtrlID");
+            throw ::exception(todo, "find replacement/fix for GetWindowDataByDlgCtrlID");
             //if(nullptr != (pData = GetWindowDataByDlgCtrlID((u32) wID)))
             {
                if(pData->get_type() == ::multimedia::audio_mixer::control_data::TypeUniformMute)
@@ -827,31 +858,44 @@ namespace multimedia
                         pmxcd_f[cMultipleItems - i - 1].fValue = fValue;
                      }
 
-                     void     mmrc = mmsystem::translate(mixerSetControlDetails((HMIXEROBJ) device->m_hMixer, &m_mixercontroldetails, MIXER_GETCONTROLDETAILSF_VALUE));
+                     MMRESULT mmresult = mixerSetControlDetails((HMIXEROBJ) device->m_hMixer, &m_mixercontroldetails, MIXER_GETCONTROLDETAILSF_VALUE);
 
-                     if(::success == mmrc)
+                     auto estatus = mmresult_to_status(mmresult);
+
+                     if (!estatus)
                      {
 
-                        OnMixerControlChange();
+                        throw_status(estatus);
 
                      }
-                     else
-                     {
 
-                        string strMessage;
+                     OnMixerControlChange();
 
-                        strMessage.format("mixerGetControlDetails(ctrlid=%.08lXh) failed on hmx=%.04Xh, mmr=%u!",
-                                          m_mixercontrol.dwControlID, device->m_hMixer, mmrc);
-                        //pmutecontrol->message_box(this, strMessage, nullptr, e_message_box_icon_exclamation);
-                     }
+                     //}
+                     //else
+                     //{
+
+                     //   string strMessage;
+
+                     //   strMessage.format("mixerGetControlDetails(ctrlid=%.08lXh) failed on hmx=%.04Xh, mmr=%u!",
+                     //                     m_mixercontrol.dwControlID, device->m_hMixer, mmrc);
+                     //   //pmutecontrol->message_box(this, strMessage, nullptr, e_message_box_icon_exclamation);
+                     //}
+                     // 
+
                      return true;
-                  }
-               }
-            }
-         }
-         return false;
-      }
 
+                  }
+
+               }
+
+            }
+
+         }
+
+         return false;
+
+      }
 
 
       bool control::control_type(::multimedia::audio_mixer::e_control econtrol) const

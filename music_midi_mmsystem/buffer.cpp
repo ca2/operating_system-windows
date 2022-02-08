@@ -106,33 +106,37 @@ namespace music
          }
 
 
-         void     buffer::midiOutPrepareHeader(HMIDIOUT hmidiout)
+         ::e_status buffer::midiOutPrepareHeader(HMIDIOUT hmidiout)
          {
 
-            void     mmr = ::success;
-
             if (hmidiout == nullptr)
-               return mmr;
+            {
+
+               return error_bad_argument;
+
+            }
 
             if (m_bPrepared)
-               return mmr;
-
-            mmr = m_pbuffera->translate_os_result(::midiOutPrepareHeader(hmidiout, &m_midihdr, sizeof(m_midihdr)));
-
-            if (mmr == ::success)
             {
 
-               m_bPrepared = true;
-
-            }
-            else
-            {
-
-               throw "failed to prepare midi Out Header";
+               return error_wrong_state;
 
             }
 
-            return mmr;
+            MMRESULT mmresult = ::midiOutPrepareHeader(hmidiout, &m_midihdr, sizeof(m_midihdr));
+
+            auto estatus = mmresult_to_status(mmresult);
+
+            if (!estatus)
+            {
+
+               return estatus;
+
+            }
+
+            m_bPrepared = true;
+
+            return estatus;
 
          }
 
@@ -164,75 +168,51 @@ namespace music
          }
 
 
-         void     buffer::midiOutUnprepareHeader(HMIDIOUT hmidiout)
+         ::e_status buffer::midiOutUnprepareHeader(HMIDIOUT hmidiout)
          {
-
-            void     mmr = ::success;
 
             if (hmidiout == nullptr)
-               return mmr;
+            {
+
+               return error_invalid_empty_argument;
+
+            }
 
             if (!m_bPrepared)
-               return mmr;
-
-            mmr = m_pbuffera->translate_os_result(::midiOutUnprepareHeader(hmidiout, &m_midihdr, sizeof(m_midihdr)));
-
-            if (mmr == ::success)
             {
-
-               m_bPrepared = false;
-
+               
+               return error_wrong_state;
 
             }
 
-            return mmr;
+            MMRESULT mmresult = ::midiOutUnprepareHeader(hmidiout, &m_midihdr, sizeof(m_midihdr));
+
+            auto estatus = mmresult_to_status(mmresult);
+
+            if (!estatus)
+            {
+
+               return estatus;
+
+            }
+
+            m_bPrepared = false;
+
+            return estatus;
 
          }
 
 
-         void     buffer_array::midiOutUnprepareHeader(HMIDIOUT hmidiout)
+         ::e_status buffer_array::midiOutUnprepareHeader(HMIDIOUT hmidiout)
          {
-
-            void     mmr = ::success;
 
             for (i32 i = 0; i < this->buffer_count(); i++)
             {
 
-               void     mmrBuffer = this->buffer_at(i)->midiOutUnprepareHeader(hmidiout);
+               auto estatus = this->buffer_at(i)->midiOutUnprepareHeader(hmidiout);
 
-               if (mmrBuffer != ::success)
+               if (!estatus)
                {
-
-                  mmr = mmrBuffer;
-
-               }
-
-            }
-
-            return mmr;
-
-         }
-
-
-         void     buffer_array::midiOutPrepareHeader(HMIDIOUT hmidiout)
-         {
-
-            void     estatus = ::success;
-
-            for (i32 i = 0; i < this->buffer_count(); i++)
-            {
-
-               estatus = this->buffer_at(i)->midiOutPrepareHeader(hmidiout);
-
-               if (estatus != ::success)
-               {
-
-                  for (; i >= 0; i--)
-                  {
-
-                     this->buffer_at(i)->midiOutUnprepareHeader(hmidiout);
-
-                  }
 
                   return estatus;
 
@@ -240,12 +220,34 @@ namespace music
 
             }
 
-            return estatus;
+            return ::success;
 
          }
 
 
-         void     buffer::midiStreamOut(HMIDISTRM hmidiout)
+         ::e_status buffer_array::midiOutPrepareHeader(HMIDIOUT hmidiout)
+         {
+
+            for (i32 i = 0; i < this->buffer_count(); i++)
+            {
+
+               auto estatus = this->buffer_at(i)->midiOutPrepareHeader(hmidiout);
+
+               if (!estatus)
+               {
+
+                  return estatus;
+
+               }
+
+            }
+
+            return ::success;
+
+         }
+
+
+         ::e_status buffer::midiStreamOut(HMIDISTRM hmidiout)
          {
 
             ASSERT(hmidiout != nullptr);
@@ -253,49 +255,18 @@ namespace music
             if (m_midihdr.dwBytesRecorded == 0)
             {
 
-               return error_failed;
+               return ::success_none;
 
             }
 
-            return m_pbuffera->translate_os_result(::midiStreamOut(hmidiout, &m_midihdr, sizeof(m_midihdr)));
+            MMRESULT mmresult = ::midiStreamOut(hmidiout, &m_midihdr, sizeof(m_midihdr));
 
-         }
+            auto estatus = mmresult_to_status(mmresult);
 
-
-         void     buffer_array::midiStreamOut(HMIDISTRM hmidiout)
-         {
-
-            void     estatus = ::success;
-
-            for (i32 i = 0; i < this->buffer_count(); i++)
+            if (!estatus)
             {
 
-               {
-
-                  synchronous_lock synchronouslock(m_pcallbackdata->m_psequence->mutex());
-
-                  estatus = this->buffer_at(i)->midiStreamOut(hmidiout);
-
-                  if (estatus == ::success)
-                  {
-
-                     m_psequencer->m_iBuffersInMMSYSTEM++;
-
-                  }
-                  else
-                  {
-
-                     if (i <= 0)
-                     {
-                        return estatus;
-
-                     }
-
-                     return ::success;
-
-                  }
-
-               }
+               return estatus;
 
             }
 
@@ -303,6 +274,31 @@ namespace music
 
          }
 
+
+         ::e_status buffer_array::midiStreamOut(HMIDISTRM hmidiout)
+         {
+
+            for (i32 i = 0; i < this->buffer_count(); i++)
+            {
+
+               synchronous_lock synchronouslock(m_pcallbackdata->m_psequence->mutex());
+
+               auto estatus = this->buffer_at(i)->midiStreamOut(hmidiout);
+
+               if (!estatus)
+               {
+
+                  return estatus;
+
+               }
+
+               m_psequencer->m_iBuffersInMMSYSTEM++;
+
+            }
+
+            return ::success;
+
+         }
 
 
       } // namespace mmsystem

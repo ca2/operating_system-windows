@@ -20,10 +20,10 @@ namespace music
          public:
 
 
-            bool     m_bHadNoteOn;
+            bool                       m_bHadNoteOn;
 
             KEYFRAME                   m_keyframe;
-            __pointer(midi)                   m_pmidi;
+            __pointer(midi)            m_pmidi;
 
             i32                        m_iBufferSize;
             
@@ -42,12 +42,13 @@ namespace music
 
             i32                        m_iBuffersInMMSYSTEM;
 
-            musical_tick                m_tkLastOp;
+            musical_tick               m_tkLastOp;
             bool                       m_bSendXGModeOn;
             bool                       m_bSendXGReset;
             bool                       m_bSendMasterVolumeReset;
             bool                       m_bSendXGDrumSetup1Reset;
             bool                       m_bSendXGDrumSetup2Reset;
+            ::e_status                 m_estatusMidiOut;
 
 
             sequencer( sequence * psequence, const ::string & strDevice);
@@ -80,7 +81,7 @@ namespace music
 
             virtual i32 GetDefaultCodePage();
 
-            virtual void     fill_buffer(LPMIDIHDR lpmidihdr);
+            virtual ::e_status fill_buffer(LPMIDIHDR lpmidihdr);
 
 
             void     close_stream();
@@ -88,7 +89,7 @@ namespace music
 
             void OnPositionCB(LPMIDIHDR lpmidihdr);
             void OnDone(HMIDISTRM hmidistream, LPMIDIHDR lpmidihdr);
-            void     preroll_operation(LPMIDIHDR lpmidihdr);
+            ::e_status preroll_operation(LPMIDIHDR lpmidihdr);
 
             virtual bool IsOpened();
 
@@ -107,11 +108,11 @@ namespace music
             //virtual void karaoke_get_time(::duration& time);
 
             
-            virtual void      get_position(musical_tick & tk);
+            virtual ::e_status      get_position(musical_tick & tk);
             virtual musical_tick    get_position();
 
 
-            virtual void      get_time_position(::duration & duration);
+            virtual ::e_status get_time_position(::duration & duration);
             virtual ::duration      get_time_position() override;
 
 
@@ -142,17 +143,17 @@ namespace music
             virtual void music_midi_on_playback_end();
 
 
-            void     WorkStreamRender(LPMIDIHDR lpmh, musical_tick tkMax, i32 iBufferNominalMax);
+            ::e_status WorkStreamRender(LPMIDIHDR lpmh, musical_tick tkMax, i32 iBufferNominalMax);
 
-            void     WorkSeek(musical_tick tkPosition, LPMIDIHDR lpmh);
+            ::e_status WorkSeek(musical_tick tkPosition, LPMIDIHDR lpmh);
 
-            void     StreamEvent(musical_tick tkDelta, ::music::midi::event* Event, LPMIDIHDR lpmh, musical_tick tkMax, u32 cbPrerollNomimalMax);
+            ::e_status StreamEvent(musical_tick tkDelta, ::music::midi::event* Event, LPMIDIHDR lpmh, musical_tick tkMax, u32 cbPrerollNomimalMax);
 
-            void     StreamEventF1(musical_tick tkDelta, array < ::music::midi::event*, ::music::midi::event* >& eventptra, LPMIDIHDR lpmh, musical_tick tkMax, u32 cbPrerollNomimalMax);
+            ::e_status StreamEventF1(musical_tick tkDelta, array < ::music::midi::event*, ::music::midi::event* >& eventptra, LPMIDIHDR lpmh, musical_tick tkMax, u32 cbPrerollNomimalMax);
 
-            void     InsertParmData(musical_tick tkDelta, LPMIDIHDR lpmh);
+            ::e_status InsertParmData(musical_tick tkDelta, LPMIDIHDR lpmh);
 
-            void     InsertPadEvent(musical_tick tkDelta, LPMIDIHDR lpmh);
+            ::e_status InsertPadEvent(musical_tick tkDelta, LPMIDIHDR lpmh);
 
             //DECLARE_MESSAGE_HANDLER(_001OnMidiOutDone);
             //DECLARE_MESSAGE_HANDLER(_001OnMidiOutPositionCB);

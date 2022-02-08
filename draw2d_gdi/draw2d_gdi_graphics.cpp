@@ -3694,10 +3694,10 @@ namespace draw2d_gdi
    }
 
 
-   void graphics::assert_valid() const
+   void graphics::assert_ok() const
    {
 
-      object::assert_valid();
+      object::assert_ok();
 
    }
 
@@ -3941,7 +3941,7 @@ namespace draw2d_gdi
 
       // return dynamic_cast < ::draw2d::palette * > (::draw2d_gdi::object::from_handle(get_application(), ::SelectPalette(get_handle1(), (HPALETTE)pPalette->get_os_data(), bForceBackground))) != false;
 
-      throw interface_only_exception();
+      throw ::interface_only();
 
       return nullptr;
 

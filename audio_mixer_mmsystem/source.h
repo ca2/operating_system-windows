@@ -23,13 +23,13 @@ namespace multimedia
 
 
          source();
-         virtual ~source();
+         ~source() override;
 
 
-         void     mixerGetLineInfo(u32 dwSource, u32 dwDestination, u32 fdwInfo);
-         void     mixerGetLineInfo(u32 dwSource, ::multimedia::audio_mixer::destination * pdestination);
+         void     get_line_info(u32 dwSource, u32 dwDestination, u32 fdwInfo);
+         void     get_line_info(u32 dwSource, ::multimedia::audio_mixer::destination * pdestination);
 
-         virtual ::id GetLineID() override;
+         virtual ::atom GetLineID() override;
 
          virtual string get_source_name() override;
          virtual string get_source_short_name() override;

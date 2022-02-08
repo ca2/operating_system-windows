@@ -41,19 +41,21 @@ namespace multimedia
       }
 
 
-      void     audio_mixer::set_new_device(u32 uiMixerId)
+      void audio_mixer::set_new_device(u32 uiMixerId)
       {
 
-         ::e_status estatus;
+         //::e_status estatus;
 
-         if(!(estatus = m_paudiomixerdevice->open(uiMixerId, (UINT_PTR) m_window.get_oswindow(), 0,  CALLBACK_WINDOW)))
-         {
+         m_paudiomixerdevice->open(uiMixerId, (UINT_PTR)m_window.get_oswindow(), 0, CALLBACK_WINDOW);
 
-            return estatus;
+         //if(!(estatus = )
+         //{
 
-         }
+         //   return estatus;
 
-         return estatus;
+         //}
+
+         //return estatus;
 
       }
 

@@ -43,11 +43,11 @@ namespace multimedia
 
             lpSource->SetDestination(this);
 
-            lpSource->mixerGetLineInfo(i, this);
+            lpSource->get_line_info(i, this);
 
          }
 
-         return ::success;
+         //return ::success;
 
       }
 
@@ -66,9 +66,10 @@ namespace multimedia
 
          }
 
-         return ::success;
+         //return ::success;
 
       }
+
 
       void destination::update_all_controls()
       {

@@ -1,7 +1,5 @@
 #include "framework.h"
-//#include "acme/operating_system.h"
-//#include "acme/os/windows_common/_file_c.h"
-//#include "acme/os/windows_common/file.h"
+#include "acme/operating_system/time.h"
 #include "file.h"
 
 
@@ -223,6 +221,20 @@ namespace windows
             }
 
          }
+         
+         if (dwLastError == ERROR_ACCESS_DENIED)
+         {
+
+            if (dwAccess == GENERIC_WRITE)
+            {
+
+               dwAccess = GENERIC_WRITE | GENERIC_READ;
+
+               goto retry;
+
+            }
+
+         }
 
          ::e_status estatus = last_error_to_status(dwLastError);
 
@@ -243,6 +255,18 @@ namespace windows
          }
          else
          {
+
+            if (m_estatus == error_file_access_denied)
+            {
+
+               if (dwAccess & GENERIC_WRITE)
+               {
+
+                  m_psystem->message_box("Couldn't write to file \"" + m_path + "\".\nAccess Denied!!\n(Is any anti-virus program blocking this program: \"" + m_psystem->m_pacmefile->module() + "\"?", m_psystem->m_pacmefile->module().title() + " - Access Denied!", e_message_box_ok);
+
+               }
+
+            }
 
             throw file_open_exception(m_estatus, "Create File has failed.");
 
@@ -308,7 +332,9 @@ namespace windows
       if (!::ReadFile((HANDLE)m_handleFile, pdata, (::u32)nCount, &dwRead, nullptr))
       {
 
-         throw ::windows_file_exception(::error_io, ::GetLastError(), m_path);
+         auto lastError = ::GetLastError();
+
+         throw ::windows_file_exception(::error_io, lastError, m_path);
 
       }
 
@@ -614,17 +640,17 @@ namespace windows
       //dwCur = pFile->seek(0L, ::e_seek_current);
       //dwLen = pFile->seek_to_end();
       //if (dwCur != (u64)pFile->seek((filesize)dwCur, ::e_seek_set))
-      //   __throw(::exception("file cursor not in same place after getting length"));
+      //   throw ::exception(::exception("file cursor not in same place after getting length"));
 
       return (filesize)((((::u64) dwHi) << 32) | ((::u64) dwLo));
 
    }
 
 
-   void file::assert_valid() const
+   void file::assert_ok() const
    {
 
-      ::matter::assert_valid();
+      ::matter::assert_ok();
       
    }
 

@@ -3,7 +3,7 @@ Copyright(C) Nishant Sivakumar.
 URLs - http://blog.voidnish.com and http://www.voidnish.com
 Contact : nish@voidnish.com
 */
-// ShellTrayInfoView.cpp : implementation of the notification_area class
+// ShellTrayInfoImpact.cpp : implementation of the notification_area class
 //
 #include "framework.h"
 #include "aura/user/_user.h"
@@ -36,7 +36,7 @@ namespace windowing_win32
       //::DeleteObject(m_hfontHidden);
       //::DeleteObject(m_hfontRegular);
 #else
-      //      __throw(todo);
+      //      throw ::exception(todo);
 #endif
    }
 
@@ -199,7 +199,7 @@ namespace windowing_win32
       //      LVIS_FOCUSED|LVIS_SELECTED,
       //      LVIS_FOCUSED|LVIS_SELECTED);
 #else
-      __throw(todo);
+      throw ::exception(todo);
 #endif
    }
 
@@ -255,7 +255,7 @@ namespace windowing_win32
          ListTrayIcons(iItem - 1);
       }
 #else
-      __throw(todo);
+      throw ::exception(todo);
 #endif
    }
 
@@ -268,7 +268,7 @@ namespace windowing_win32
          ListTrayIcons(iItem + 1);
       }
 #else
-      __throw(todo);
+      throw ::exception(todo);
 #endif
    }
 

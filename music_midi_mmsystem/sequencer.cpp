@@ -123,7 +123,7 @@ namespace music
 
             m_psequence->set_state(sequence::e_state_no_file);
 
-            return ::success;
+            //return ::success;
 
          }
 
@@ -139,11 +139,9 @@ namespace music
 
             u32 uDeviceID = (u32) m_iDevice;
 
-            void     estatus = ::success;
+            ::e_status estatus = ::success;
 
-            MIDIPROPTIMEDIV         mptd;
-
-            
+            MIDIPROPTIMEDIV mptd;
 
             //
             // We've successfully opened the file and all of the tracks; now
@@ -245,30 +243,22 @@ namespace music
             if (m_hstream == nullptr)
             {
 
-               MMRESULT mmr = midiStreamOpen(&m_hstream, &uDeviceID, 1, (DWORD_PTR)&sequencer::MidiOutProc, (DWORD_PTR)(sequencer*)this, CALLBACK_FUNCTION);
+               MMRESULT mmresult = midiStreamOpen(&m_hstream, &uDeviceID, 1, (DWORD_PTR)&sequencer::MidiOutProc, (DWORD_PTR)(sequencer*)this, CALLBACK_FUNCTION);
 
-               estatus = translate_os_result(mmr, "sequencer::mm_start", "midiStreamOpen error");
+               //estatus = translate_os_result(mmr, "sequencer::mm_start", "midiStreamOpen error");
 
-               if (estatus != ::success)
+               auto estatus = mmresult_to_status(mmresult);
+
+               if (!estatus)
                {
 
                   m_hstream = nullptr;
 
-                  if (bThrow)
-                  {
-                     
-                     m_psequence->set_state(sequence::e_state_opened);
+                  m_psequence->set_state(sequence::e_state_opened);
 
-                     throw multimedia::exception(multimedia::exception_midi, estatus);
-
-                  }
-
-                  goto mm_start_Cleanup;
+                  throw multimedia::exception(multimedia::exception_midi, estatus); 
 
                }
-
-               void     estatus = ::success;
-
 
                mptd.cbStruct = sizeof(mptd);
 
@@ -283,16 +273,9 @@ namespace music
 
                   close_device();
 
-                  if (bThrow)
-                  {
+                  m_psequence->set_state(sequence::e_state_opened);
 
-                     m_psequence->set_state(sequence::e_state_opened);
-
-                     throw multimedia::exception(multimedia::exception_midi, estatus);
-
-                  }
-
-                  goto mm_start_Cleanup;
+                  throw multimedia::exception(multimedia::exception_midi, estatus);
 
                }
 
@@ -300,69 +283,16 @@ namespace music
 
             estatus = ::success;
 
-            estatus = m_pbuffera->midiOutPrepareHeader((HMIDIOUT)m_hstream);
-
-            if (estatus != ::success)
-            {
-
-               TRACE("sequencer::mm_start midiOutPrepareHeader Error!! -> %lu", (u32)estatus.m_estatus);
-
-               if (bThrow)
-               {
-
-                  m_psequence->set_state(sequence::e_state_opened);
-
-                  throw multimedia::exception(multimedia::exception_midi, estatus);
-
-               }
-               else
-               {
-                  
-                  goto mm_start_Cleanup;
-
-               }
-
-            }
+            m_pbuffera->midiOutPrepareHeader((HMIDIOUT)m_hstream);
 
             for (auto & pbuffer : m_pbuffera->m_buffera)
             {
 
-               if (fill_buffer(&pbuffer->m_midihdr) != success)
-               {
-
-                  break;
-
-               }
+               fill_buffer(&pbuffer->m_midihdr);
 
             }
 
-            estatus = m_pbuffera->midiStreamOut(m_hstream);
-
-            if (estatus != ::success)
-            {
-
-               TRACE("midiStreamOut(preroll) -> %lu!", (u32)estatus.m_estatus);
-
-               estatus = error_not_ready;
-
-               if (bThrow)
-               {
-
-                  m_psequence->set_state(sequence::e_state_opened);
-
-                  throw multimedia::exception(multimedia::exception_midi, estatus);
-
-               }
-               else
-               {
-
-                  goto mm_start_Cleanup;
-
-               }
-
-            }
-
-         mm_start_Cleanup:
+            m_pbuffera->midiStreamOut(m_hstream);
 
             if (estatus != ::success)
             {
@@ -396,7 +326,7 @@ namespace music
 
             }
 
-            return estatus;
+            //return estatus;
 
          }
 
@@ -529,12 +459,12 @@ namespace music
          }
 
 
-         void sequencer::get_position(musical_tick & tk)
+         ::e_status sequencer::get_position(musical_tick & tk)
          {
 
             synchronous_lock synchronouslock(mutex());
 
-            void mmr;
+            //void mmr;
 
             MMTIME mmt;
 
@@ -575,14 +505,16 @@ namespace music
                      try
                      {
 
-                        mmr = translate_os_result(midiStreamPosition(m_hstream, &mmt, sizeof(mmt)), "get_ticks", "midiStreamPosition");
+                        MMRESULT mmresult = midiStreamPosition(m_hstream, &mmt, sizeof(mmt));
 
-                        if (::success != mmr)
+                        auto estatus = mmresult_to_status(mmresult);
+
+                        if (!estatus)
                         {
 
-                           TRACE("midiStreamPosition() returned %lu", (u32)mmr.m_estatus);
+                           WARNING("midiStreamPosition() returned :" << estatus.m_estatus);
 
-                           return error_not_ready;
+                           return estatus;
 
                         }
 
@@ -619,7 +551,7 @@ namespace music
          }
 
 
-         void sequencer::get_time_position(::duration & duration)
+         ::e_status sequencer::get_time_position(::duration & duration)
          {
 
             synchronous_lock synchronouslock(mutex());
@@ -698,12 +630,10 @@ namespace music
          }
 
 
-
-         
-         void     sequencer::preroll_operation(LPMIDIHDR lpmh)
+         ::e_status sequencer::preroll_operation(LPMIDIHDR lpmh)
          {
 
-            LPDWORD                    lpdw;
+            LPDWORD lpdw;
 
             /* Build lpmh from keyframe
             */
@@ -806,7 +736,7 @@ namespace music
          }
 
 
-         void sequencer::fill_buffer(LPMIDIHDR lpmidihdr)
+         ::e_status sequencer::fill_buffer(LPMIDIHDR lpmidihdr)
          {
 
             lpmidihdr->dwBytesRecorded = 0;
@@ -950,8 +880,6 @@ namespace music
 
             __UNREFERENCED_PARAMETER(hmidistream);
 
-            void                   smfrc;
-
             ASSERT(lpmidihdr != nullptr);
 
             midi_callback_data * pcallbackdata = buffer::get(lpmidihdr)->get_midi_callback_data();
@@ -1006,7 +934,7 @@ namespace music
 
                //LPMIDIHDR lpmidihdr = (LPMIDIHDR)pevent->m_puserdata;
 
-               void     estatus = fill_buffer(lpmidihdr);
+               auto estatus = fill_buffer(lpmidihdr);
 
                switch (estatus.m_estatus)
                {
@@ -1195,18 +1123,22 @@ namespace music
 
             m_psequence->set_state(sequence::e_state_opened);
 
-            return ::success;
+            //return ::success;
+
          }
 
-         void     sequencer::close_device()
+
+         void sequencer::close_device()
          {
 
             synchronous_lock synchronouslock(mutex());
 
             if (m_hstream == nullptr)
-               return ::success;
+            {
 
-            void     estatus;
+               return;
+
+            }
 
             m_psequence->set_state(sequence::e_state_reset);
 
@@ -1215,23 +1147,22 @@ namespace music
             //while (m_iBuffersInMMSYSTEM > 0)
             // Sleep(100);
 
-            if ((estatus = m_pbuffera->midiOutUnprepareHeader((HMIDIOUT)m_hstream)) != ::success)
+            auto estatus = m_pbuffera->midiOutUnprepareHeader((HMIDIOUT)m_hstream);
+
+            if(!estatus)
             {
+
                TRACE("midiOutUnprepareHeader failed in seqBufferDone! (%lu)", (u32)estatus.m_estatus);
+
             }
 
             midiStreamClose(m_hstream);
 
             m_hstream = nullptr;
 
-
-
             m_psequence->set_state(sequence::e_state_opened);
 
-            return ::success;
-
          }
-
 
 
          //void sequencer::on_midi_playback_end(sequence::event * pevent)
@@ -1443,9 +1374,9 @@ namespace music
 
          //   event * pevent = new event();
 
-         //   psubject->m_id = eevent;
-         //   psubject->m_psequence = this;
-         //   psubject->m_puserdata = lpmidihdr;
+         //   ptopic->m_atom = eevent;
+         //   ptopic->m_psequence = this;
+         //   ptopic->m_puserdata = lpmidihdr;
 
          //   return pevent;
 
@@ -1459,22 +1390,20 @@ namespace music
 
             m_hmidiout = nullptr;
 
-            MMRESULT mmr;
-
             u32 uDeviceID = (u32)m_iDevice;
 
             m_eventLongMessage.ResetEvent();
 
-            mmr = midiOutOpen(&m_hmidiout, uDeviceID, (DWORD_PTR)m_eventLongMessage.hsync(), 0, CALLBACK_EVENT);
+            MMRESULT mmresult = midiOutOpen(&m_hmidiout, uDeviceID, (DWORD_PTR)m_eventLongMessage.hsync(), 0, CALLBACK_EVENT);
 
-            if (mmr != MMSYSERR_NOERROR)
+            auto estatus = mmresult_to_status(mmresult);
+
+            if (!estatus)
             {
 
-               return translate_os_result(mmr);
+               throw_status(estatus);
 
             }
-
-            return ::success;
 
          }
 
@@ -1487,7 +1416,9 @@ namespace music
 
                ASSERT(FALSE);
 
-               return error_failed;
+               m_estatusMidiOut = error_bad_argument;
+
+               return;
 
             }
 
@@ -1495,7 +1426,7 @@ namespace music
 
             ::e_status estatus = ::success;
 
-            MMRESULT mmr;
+            MMRESULT mmresult;
 
             MIDIHDR mh{};
 
@@ -1503,21 +1434,29 @@ namespace music
 
             mh.dwBufferLength = (DWORD) block.get_size();
 
-            mmr = midiOutPrepareHeader(m_hmidiout, &mh, sizeof(MIDIHDR));
+            mmresult = midiOutPrepareHeader(m_hmidiout, &mh, sizeof(MIDIHDR));
 
-            if (mmr != MMSYSERR_NOERROR)
+            estatus = mmresult_to_status(mmresult);
+
+            if (!estatus)
             {
 
-               goto End;
+               m_estatusMidiOut = estatus;
+
+               return;
 
             }
 
-            mmr = midiOutLongMsg(m_hmidiout, &mh, sizeof(MIDIHDR));
+            mmresult = midiOutLongMsg(m_hmidiout, &mh, sizeof(MIDIHDR));
 
-            if (mmr != MMSYSERR_NOERROR)
+            estatus = mmresult_to_status(mmresult);
+
+            if (!estatus)
             {
 
-               goto End;
+               m_estatusMidiOut = estatus;
+
+               return;
 
             }
 
@@ -1530,21 +1469,22 @@ namespace music
 
             }
 
-            mmr = midiOutUnprepareHeader(m_hmidiout, &mh, sizeof(MIDIHDR));
+            mmresult = midiOutUnprepareHeader(m_hmidiout, &mh, sizeof(MIDIHDR));
 
-            if (mmr != MMSYSERR_NOERROR)
+            estatus = mmresult_to_status(mmresult);
+
+            if (!estatus)
             {
-             
-               goto End;
+
+               m_estatusMidiOut = estatus;
+
+               return;
 
             }
 
-         End:
-
+            m_estatusMidiOut = ::success;
 
             m_eventLongMessage.ResetEvent();
-
-            return estatus;
 
          }
 
@@ -1562,9 +1502,7 @@ namespace music
                0xF7, 0x00, 0x00, 0x00
             };
 
-            auto estatus = midi_out_long_message(memory_block(XGModeOn), 800_ms);
-
-            return estatus;
+            midi_out_long_message(memory_block(XGModeOn), 800_ms);
 
          }
 
@@ -1582,10 +1520,8 @@ namespace music
                0xF7, 0x00, 0x00, 0x00
             };
 
-            auto estatus = midi_out_long_message(memory_block(XGModeReset), 800_ms);
+            midi_out_long_message(memory_block(XGModeReset), 800_ms);
    
-            return estatus;
-
          }
 
 
@@ -1602,9 +1538,7 @@ namespace music
                0xF7, 0x00, 0x00, 0x00
             };
 
-            auto estatus = midi_out_long_message(memory_block(XGDrumSetup1Reset), 800_ms);
-
-            return estatus;
+            midi_out_long_message(memory_block(XGDrumSetup1Reset), 800_ms);
 
          }
          
@@ -1622,9 +1556,7 @@ namespace music
                0xF7, 0x00, 0x00, 0x00
             };
 
-            auto estatus = midi_out_long_message(memory_block(XGDrumSetup2Reset), 800_ms);
-
-            return estatus;
+            midi_out_long_message(memory_block(XGDrumSetup2Reset), 800_ms);
 
          }
 
@@ -1641,9 +1573,7 @@ namespace music
                0x01, 0x00, 0x64, 0xF7
             };
 
-            auto estatus = midi_out_long_message(memory_block(MasterVolume), 200_ms);
-
-            return estatus;
+            midi_out_long_message(memory_block(MasterVolume), 200_ms);
 
          }
 
@@ -1655,14 +1585,16 @@ namespace music
 
             auto mmr = midiOutClose(m_hmidiout);
 
-            if (mmr != MMSYSERR_NOERROR)
+            estatus = translate_os_result(mmr);
+
+            if (!estatus)
             {
 
-               estatus = translate_os_result(mmr);
+               ERROR("midiOutClose error");
 
             }
 
-            return estatus;
+            //return estatus;
 
          }
 
@@ -1676,7 +1608,7 @@ namespace music
 
             HMIDIOUT hmidiout = nullptr;
 
-            MMRESULT mmr;
+            MMRESULT mmresult;
 
             u32 uDeviceID = (u32)m_iDevice;
 
@@ -1684,12 +1616,14 @@ namespace music
 
             event.ResetEvent();
 
-            mmr = midiOutOpen(&hmidiout, uDeviceID, (DWORD_PTR)event.hsync(), 0, CALLBACK_THREAD);
+            mmresult = midiOutOpen(&hmidiout, uDeviceID, (DWORD_PTR)event.hsync(), 0, CALLBACK_THREAD);
 
-            if (mmr != MMSYSERR_NOERROR)
+            auto estatus = mmresult_to_status(mmresult);
+
+            if (!estatus)
             {
 
-               return translate_os_result(mmr);
+               throw_status(estatus);
 
             }
 
@@ -1711,17 +1645,29 @@ namespace music
             lpmh->lpData = (char *)gmModeOn;
             lpmh->dwBufferLength = sizeof(gmModeOn);
 
-            mmr = midiOutPrepareHeader(hmidiout, lpmh, sizeof(MIDIHDR));
+            mmresult = midiOutPrepareHeader(hmidiout, lpmh, sizeof(MIDIHDR));
 
-            if (mmr != MMSYSERR_NOERROR)
-               goto End;
+            estatus = mmresult_to_status(mmresult);
+            
+            if (!estatus)
+            {
+             
+               throw_status(estatus);
+
+            }
 
             lpmh->dwBytesRecorded = sizeof(gmModeOn);
 
-            mmr = midiOutLongMsg(hmidiout, lpmh, sizeof(MIDIHDR));
+            mmresult = midiOutLongMsg(hmidiout, lpmh, sizeof(MIDIHDR));
 
-            if (mmr != MMSYSERR_NOERROR)
-               goto End;
+            estatus = mmresult_to_status(mmresult);
+
+            if (!estatus)
+            {
+             
+               throw_status(estatus);
+
+            }
 
             while (!(mh.dwFlags & MHDR_DONE))
             {
@@ -1730,25 +1676,27 @@ namespace music
 
             }
 
-            mmr = midiOutUnprepareHeader(hmidiout, lpmh, sizeof(MIDIHDR));
+            mmresult = midiOutUnprepareHeader(hmidiout, lpmh, sizeof(MIDIHDR));
 
-            if (mmr != MMSYSERR_NOERROR)
-               goto End;
+            estatus = mmresult_to_status(mmresult);
 
-         End:
-
-            void     estatus = translate_os_result(mmr);
-
-            mmr = midiOutClose(hmidiout);
-
-            if (mmr != MMSYSERR_NOERROR)
+            if (!estatus)
             {
-
-               translate_os_result(mmr);
+             
+               throw_status(estatus);
 
             }
 
-            return estatus;
+            mmresult = midiOutClose(hmidiout);
+
+            estatus = mmresult_to_status(mmresult);
+
+            if (!estatus)
+            {
+
+               throw_status(estatus);
+
+            }
 
          }
 
@@ -1777,16 +1725,18 @@ namespace music
          }
 
 
-         void     sequencer::StreamEventF1(musical_tick tkDelta,
+         ::e_status sequencer::StreamEventF1(musical_tick tkDelta,
             array < ::music::midi::event*, ::music::midi::event* >& eventptra,
             LPMIDIHDR lpmh,
             musical_tick tkMax,
             u32 cbPrerollNomimalMax
          )
          {
+            
             __UNREFERENCED_PARAMETER(tkMax);
             __UNREFERENCED_PARAMETER(cbPrerollNomimalMax);
-            void                   smfrc;
+
+            ::e_status estatus;
 
             if (eventptra.get_size() <= 0)
             {
@@ -1833,17 +1783,21 @@ namespace music
             m_psequence->m_pfile->m_flags &= ~InsertSysEx;
             m_psequence->m_pfile->m_dwPendingUserEvent = ((MEVT_F_CALLBACK | MEVT_F_LONG | (((u32)MEVT_COMMENT) << 24)) & 0xFF000000L);
 
-            smfrc = InsertParmData(tkDelta, lpmh);
-            if (::success != smfrc)
+            estatus = InsertParmData(tkDelta, lpmh);
+            
+            if (!estatus)
             {
-               TRACE("smfInsertParmData[2] %u", (u32)smfrc.m_estatus);
-               return smfrc;
+
+               WARNING("smfInsertParmData[2] : " << estatus.m_estatus);
+               
             }
-            return smfrc;
+
+            return estatus;
+
          }
 
          
-         void     sequencer::StreamEvent(
+         ::e_status sequencer::StreamEvent(
             musical_tick tkDelta,
             ::music::midi::event * pevent,
             LPMIDIHDR lpmh,
@@ -1862,7 +1816,7 @@ namespace music
 
             u32 dwTempo;
             LPDWORD lpdw;
-            void smfrc;
+            ::e_status estatus;
             
             lpdw = (LPDWORD)(lpmh->lpData + lpmh->dwBytesRecorded);
 
@@ -2147,18 +2101,19 @@ namespace music
 
                //}
 
-               smfrc = InsertParmData(tkDelta, lpmh);
+               estatus = InsertParmData(tkDelta, lpmh);
 
-               if (::success != smfrc)
+               if (!estatus)
                {
 
-                  TRACE("smfInsertParmData[2] %u", (u32)smfrc.m_estatus);
+                  WARNING("smfInsertParmData[2] : " << estatus.m_estatus);
 
-                  return smfrc;
+                  return estatus;
 
                }
 
                lpdw = (LPDWORD)(lpmh->lpData + lpmh->dwBytesRecorded);
+
             }
             else
             {
@@ -2196,7 +2151,8 @@ namespace music
 
          }
 
-         void     sequencer::InsertPadEvent(musical_tick tkDelta, LPMIDIHDR lpmh)
+
+         ::e_status sequencer::InsertPadEvent(musical_tick tkDelta, LPMIDIHDR lpmh)
          {
 
             LPDWORD     lpdw;
@@ -2207,7 +2163,7 @@ namespace music
             ASSERT(tkDelta >= 0);
             ASSERT(lpmh != nullptr);
 
-            /* Can't fit 4 u32's? (tkDelta + stream-id + event + some data)
+            /* Can't fit 4 u32's? (tkDelta + stream-atom + event + some data)
             ** Can't do anything.
             */
             ASSERT(lpmh->dwBufferLength >= lpmh->dwBytesRecorded);
@@ -2279,11 +2235,13 @@ namespace music
             //   }
 
             lpmh->dwBytesRecorded += 3 * sizeof(u32) + dwRounded;
+
             return ::success;
+
          }
 
 
-         void     sequencer::InsertParmData(musical_tick tkDelta, LPMIDIHDR lpmh)
+         ::e_status sequencer::InsertParmData(musical_tick tkDelta, LPMIDIHDR lpmh)
          {
 
             u32               dwLength;
@@ -2293,7 +2251,7 @@ namespace music
             //    assert(pSmf != nullptr);
             ASSERT(lpmh != nullptr);
 
-            /* Can't fit 4 u32's? (tkDelta + stream-id + event + some data)
+            /* Can't fit 4 u32's? (tkDelta + stream-atom + event + some data)
             ** Can't do anything.
             */
             ASSERT(lpmh->dwBufferLength >= lpmh->dwBytesRecorded);
@@ -2401,10 +2359,10 @@ namespace music
          }
 
 
-         void     sequencer::WorkStreamRender(LPMIDIHDR lpmh, musical_tick tkMax, i32 iBufferNominalMax)
+         ::e_status sequencer::WorkStreamRender(LPMIDIHDR lpmh, musical_tick tkMax, i32 iBufferNominalMax)
          {
 
-            void                       smfrc;
+            ::e_status              estatus;
             musical_tick            tkDelta;
             musical_tick            tkLastPosition;
 
@@ -2415,14 +2373,14 @@ namespace music
             if (m_psequence->m_pfile->m_dwPendingUserEvent)
             {
 
-               smfrc = InsertParmData((musical_tick)0, lpmh);
+               estatus = InsertParmData((musical_tick)0, lpmh);
 
-               if (::success != smfrc)
+               if (!estatus)
                {
 
-                  TRACE("smfInsertParmData() -> %u", (u32)smfrc.m_estatus);
+                  WARNING("smfInsertParmData() -> : " << estatus.m_estatus);
 
-                  return smfrc;
+                  return estatus;
 
                }
 
@@ -2477,18 +2435,18 @@ namespace music
 
                int iLeft = iBufferNominalMax - lpmh->dwBytesRecorded;
 
-               smfrc = m_psequence->m_pfile->WorkGetNextEvent(pevent, tkMax, true, &iLeft);
+               estatus = m_psequence->m_pfile->WorkGetNextEvent(pevent, tkMax, true, &iLeft);
 
-               if (::error_would_reach_buffer_limit == smfrc)
+               if (estatus == ::error_would_reach_buffer_limit)
                {
 
                   break;
 
                }
-               else if (::success != smfrc)
+               else if (!estatus)
                {
 
-                  return smfrc;
+                  return estatus;
 
                }
 
@@ -2621,8 +2579,9 @@ namespace music
 
                iLeft = lpmh->dwBufferLength - lpmh->dwBytesRecorded;
 
-               smfrc = StreamEvent(tkDelta, pevent, lpmh, tkMax, minimum(iBufferNominalMax, iLeft));
-               if (::error_would_reach_buffer_limit == smfrc)
+               estatus = StreamEvent(tkDelta, pevent, lpmh, tkMax, minimum(iBufferNominalMax, iLeft));
+
+               if (estatus == ::error_would_reach_buffer_limit)
                {
 
                   break;

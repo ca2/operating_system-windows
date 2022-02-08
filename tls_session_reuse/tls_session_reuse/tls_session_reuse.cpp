@@ -36,7 +36,7 @@ int main(int argc, char **argv)
       goto cleanup;
    }
 
-   /* Set some options and the session id.
+   /* Set some options and the session atom.
    * SSL_OP_NO_SSLv2: SSLv2 is insecure, disable it.
    */
    //SSL_CTX_set_options(ctx, SSL_OP_NO_SSLv2);

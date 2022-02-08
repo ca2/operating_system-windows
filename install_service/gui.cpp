@@ -765,7 +765,7 @@ static TCHAR *browse_filter(int message) {
   }
 }
 
-UINT_PTR CALLBACK browse_hook(HWND dlg, const ::id & id, WPARAM w, LPARAM l) {
+UINT_PTR CALLBACK browse_hook(HWND dlg, const ::atom & atom, WPARAM w, LPARAM l) {
   switch (message) {
     case WM_INITDIALOG:
       return 1;
@@ -829,7 +829,7 @@ void browse(HWND window, TCHAR *current, unsigned long flags, ...) {
   if (ofn.lpstrFile) HeapFree(GetProcessHeap(), 0, ofn.lpstrFile);
 }
 
-INT_PTR CALLBACK tab_dlg(HWND tab, const ::id & id, WPARAM w, LPARAM l) {
+INT_PTR CALLBACK tab_dlg(HWND tab, const ::atom & atom, WPARAM w, LPARAM l) {
   switch (message) {
     case WM_INITDIALOG:
       return 1;
@@ -932,7 +932,7 @@ INT_PTR CALLBACK tab_dlg(HWND tab, const ::id & id, WPARAM w, LPARAM l) {
 }
 
 /* Install/erase dialogue callback */
-INT_PTR CALLBACK nssm_dlg(HWND window, const ::id & id, WPARAM w, LPARAM l) {
+INT_PTR CALLBACK nssm_dlg(HWND window, const ::atom & atom, WPARAM w, LPARAM l) {
   nssm_service_t *service;
 
   switch (message) {

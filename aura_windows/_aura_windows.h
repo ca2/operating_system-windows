@@ -11,6 +11,9 @@
 #include "interaction_impl.h"
 
 
+#include "shell_open.h"
+
+
 #include "node.h"
 
 

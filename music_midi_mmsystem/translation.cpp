@@ -13,7 +13,7 @@ namespace music
       {
 
 
-         void     midi_in_get_error_text(MMRESULT mmr, string & strOsMessage, string & strMessage)
+         ::e_status midi_in_get_error_text(MMRESULT mmr, string & strOsMessage, string & strMessage)
          {
 
             if(mmr == MMSYSERR_NOERROR)
@@ -44,7 +44,7 @@ namespace music
             }
             else if (mmr == MMSYSERR_BADDEVICEID)
             {
-               strMessage = "MMSYSERR_BADDEVICEID : bad device id";
+               strMessage = "MMSYSERR_BADDEVICEID : bad device atom";
             }
             else if (mmr == MMSYSERR_NOMEM)
             {

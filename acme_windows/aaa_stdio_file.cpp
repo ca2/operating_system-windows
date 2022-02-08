@@ -376,7 +376,7 @@ pacmedir->create(::file_path_folder(pszFileName));
 
       ASSERT(m_pStream != nullptr);
 
-      __throw(error_not_supported);
+      throw ::exception(error_not_supported);
 
       return nullptr;
 
@@ -388,7 +388,7 @@ pacmedir->create(::file_path_folder(pszFileName));
       ASSERT_VALID(this);
       ASSERT(m_pStream != nullptr);
 
-      __throw(error_not_supported);
+      throw ::exception(error_not_supported);
    }
 
    void stdio_file::UnlockRange(filesize /* dwPos */, filesize /* dwCount */)
@@ -396,7 +396,7 @@ pacmedir->create(::file_path_folder(pszFileName));
       ASSERT_VALID(this);
       ASSERT(m_pStream != nullptr);
 
-      __throw(error_not_supported);
+      throw ::exception(error_not_supported);
    }
 
 

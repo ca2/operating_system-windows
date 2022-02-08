@@ -37,7 +37,7 @@ namespace multimedia
 
          //return true;
 
-         return ::success;
+         //return ::success;
 
       }
 

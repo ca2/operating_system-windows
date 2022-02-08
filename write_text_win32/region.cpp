@@ -126,7 +126,7 @@ namespace draw2d_gdiplus
       case ::draw2d::e_region_combine:
          return get_combine(pgraphics);
       default:
-         throw interface_only_exception();
+         throw ::interface_only();
       }
 
       return nullptr;

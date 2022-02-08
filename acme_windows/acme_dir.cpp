@@ -160,7 +160,7 @@ namespace windows
    ::file::path acme_dir::relative(::file::path path)
    {
 
-      path.replace(":", "");
+      path.replace_with("", ":");
 
       ::str::ends_eat_ci(path, ".exe");
 
@@ -925,7 +925,7 @@ bool windows_file_find_is_dots(WIN32_FIND_DATAW & data)
 //
 //         auto wstrModuleFolder = strModuleFolder.get_string_buffer(MAX_PATH * 8);
 //
-//         __throw(todo);
+//         throw ::exception(todo);
 //
 //         return wstrModuleFolder;
 //
@@ -1684,7 +1684,7 @@ pacmedir->create CreateDirectoryW last error(%d)=%s", dwError, pszError);
 
          ::winrt::Windows::Storage::StorageFolder ^ folder = wait(::winrt::Windows::Storage::StorageFolder::GetFolderFromPathAsync(string(psz)));
 
-         ::winrt::Windows::Foundation::Collections::IVectorView < ::winrt::Windows::Storage::StorageFolder ^ > ^ a = wait(folder->GetFoldersAsync());
+         ::winrt::Windows::Foundation::Collections::IVectorImpact < ::winrt::Windows::Storage::StorageFolder ^ > ^ a = wait(folder->GetFoldersAsync());
 
          for (u32 u = 0; u < a->Size; u++)
          {
@@ -1766,7 +1766,7 @@ pacmedir->create CreateDirectoryW last error(%d)=%s", dwError, pszError);
 
          ::winrt::Windows::Storage::StorageFolder ^ folder = wait(::winrt::Windows::Storage::StorageFolder::GetFolderFromPathAsync(string(psz)));
 
-         ::winrt::Windows::Foundation::Collections::IVectorView < ::winrt::Windows::Storage::StorageFolder ^ > ^ a = wait(folder->GetFoldersAsync());
+         ::winrt::Windows::Foundation::Collections::IVectorImpact < ::winrt::Windows::Storage::StorageFolder ^ > ^ a = wait(folder->GetFoldersAsync());
 
          for (u32 u = 0; u < a->Size; u++)
          {

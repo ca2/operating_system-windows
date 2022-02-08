@@ -30,10 +30,10 @@ namespace draw2d_gdiplus
    }
 
 
-   void object::assert_valid() const
+   void object::assert_ok() const
    {
       
-      ::matter::assert_valid();
+      ::matter::assert_ok();
 
    }
 

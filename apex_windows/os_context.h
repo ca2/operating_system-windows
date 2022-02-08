@@ -78,10 +78,18 @@ namespace windows
 
       string calc_service_name();
 
+      comptr < IShellLinkW > _get_IShellLinkW(const ::file::path & pathLink);
+
+      void edit_link_target(const ::file::path & path, const ::file::path & pathLink) override;
+      void edit_link_folder(const ::file::path & path, const ::file::path & pathLink) override;
 
       bool resolve_link(::file::path & path, const ::string & strSource, string * pstrDirectory = nullptr, string * pstrParams = nullptr) override;
 
       bool resolve_lnk_link(::file::path & path, const ::string & strSource, string * pstrDirectory = nullptr, string * pstrParams = nullptr);
+
+      bool has_alias_in_path(const char * psz, bool bNoUI = false, bool bNoMount = false) override;
+
+      bool is_alias(const char * psz) override;
 
 
       DECLSPEC_NO_RETURN void raise_exception(u32 dwExceptionCode, u32 dwExceptionFlags);

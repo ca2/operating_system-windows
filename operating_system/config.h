@@ -26,7 +26,7 @@
 #pragma warning(default:4263)
 #pragma warning(default:4266)
 
-#define PLATFORM_NAMESPACE windows
+#define OPERATING_SYSTEM_NAMESPACE windows
 
 #define PLATFORM_COMMON_NAMESPACE windows_common
 
@@ -69,7 +69,7 @@
 #define HAVE_OPENSSL
 
 
-#define PLATFORM_NAME   "windows"
+#define OPERATING_SYSTEM_NAME   "windows"
 
 
 

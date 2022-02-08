@@ -4,13 +4,13 @@
   <PropertyGroup Label="UserMacros">
     <BaseDir>$(SolutionDir)..\..\..\</BaseDir>
     <TimeDir>$(BaseDir)time-windows\</TimeDir>
-    <__archive>$(BaseDir)archive\</__archive>
-    <__toolsbin>$(__archive)tool-windows\bin\</__toolsbin>
+    <__operating_system>$(BaseDir)operating-system\</__operating_system>
+    <__toolsbin>$(__operating_system)tool-windows\bin\</__toolsbin>
   </PropertyGroup>
   <PropertyGroup />
   <ItemDefinitionGroup>
     <ClCompile>
-      <AdditionalIncludeDirectories>$(SolutionDir)../../inc;$(__sensitive)/sensitive/include;$(SolutionDir)../../../source/include;$(__archive)/local/include;$(__archive)/third-windows/$(PlatformName)/$(Configuration)/include;$(__archive)/third-windows/include;$(__archive)/third-windows/third/include;$(__archive)/third-windows/third/include/include;$(SolutionDir)../../../archive/platform-windows/_include;$(SolutionDir)../../../archive/platform-windows;$(SolutionDir)../../../archive/platform-windows_common;$(SolutionDir)../../../source/app/_include;$(SolutionDir)../../../source/third/include;.;$(IntDir);$(SolutionDir)../../../;$(SolutionDir)../../../source/app;$(ProjectDir)../..;$(ProjectDir)../../;$(ProjectDir)../;$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)../../inc;$(__sensitive)/sensitive/include;$(SolutionDir)../../../source/include;$(__operating_system)/local/include;$(__operating_system)/third-windows/$(PlatformName)/$(Configuration)/include;$(__operating_system)/third-windows/include;$(__operating_system)/third-windows/third/include;$(__operating_system)/third-windows/third/include/include;$(SolutionDir)../../../operating-system/operating-system-windows/_include;$(SolutionDir)../../../operating-system/operating-system-windows;$(SolutionDir)../../../operating-system/operating-system-windows_common;$(SolutionDir)../../../source/app/_include;$(SolutionDir)../../../source/third/include;.;$(IntDir);$(SolutionDir)../../../;$(SolutionDir)../../../source/app;$(ProjectDir)../..;$(ProjectDir)../../;$(ProjectDir)../;$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_output_type_$(OutputType);%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
   </ItemDefinitionGroup>
@@ -21,8 +21,8 @@
     <BuildMacro Include="TimeDir">
       <Value>$(TimeDir)</Value>
     </BuildMacro>
-    <BuildMacro Include="__archive">
-      <Value>$(__archive)</Value>
+    <BuildMacro Include="__operating_system">
+      <Value>$(__operating_system)</Value>
     </BuildMacro>
     <BuildMacro Include="__toolsbin">
       <Value>$(__toolsbin)</Value>

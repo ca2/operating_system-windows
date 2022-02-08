@@ -122,7 +122,7 @@ LRESULT CALLBACK __window_procedure(HWND hwnd, UINT message, WPARAM wparam, LPAR
 
    }
 
-   auto pimpl = pwindow->m_pimpl;
+   auto pimpl = pwindow->m_puserinteractionimpl;
 
    if (pimpl)
    {
@@ -298,6 +298,12 @@ LRESULT CALLBACK __window_procedure(HWND hwnd, UINT message, WPARAM wparam, LPAR
 
          //puserinteraction->message_handler(pmessage);
          pwindow->message_handler(pmessage);
+
+      }
+      catch (::exception & e)
+      {
+
+         get_task()->handle_exception(e);
 
       }
       catch (...)
@@ -640,7 +646,7 @@ wstring windowing::_windows_register_window_class(::u32 nClassStyle, HCURSOR hCu
    if (!_windows_register_class(&wndcls))
    {
 
-      __throw(error_resource);
+      throw ::exception(error_resource);
 
    }
 
@@ -654,7 +660,7 @@ wstring windowing::_windows_register_window_class(::u32 nClassStyle, HCURSOR hCu
 }//namespace windowing_win32
 
 
-lresult CALLBACK WndProc(HWND hWnd, const ::id & id, wparam wParam, lparam lParam);
+lresult CALLBACK WndProc(HWND hWnd, const ::atom & atom, wparam wParam, lparam lParam);
 
 //bool windows_register_class(HINSTANCE hinstance)
 //{

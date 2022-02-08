@@ -29,7 +29,7 @@ namespace multimedia
 
 //         set_auto_delete(false);
 
-         return true;
+         //return true;
 
       }
 

@@ -36,7 +36,7 @@ TCHAR *message_string(unsigned long error) {
 }
 
 /* Log a message to the Event Log */
-void log_event(unsigned short type, unsigned long id, ...) {
+void log_event(unsigned short type, unsigned long atom, ...) {
   va_list arg;
   int count;
   TCHAR *s;
@@ -48,24 +48,24 @@ void log_event(unsigned short type, unsigned long id, ...) {
 
   /* Log it */
   count = 0;
-  va_start(arg, id);
+  va_start(arg, atom);
   while ((s = va_arg(arg, TCHAR *)) && count < NSSM_NUM_EVENT_STRINGS - 1) strings[count++] = s;
   strings[count] = 0;
   va_end(arg);
-  ReportEvent(handle, type, 0, id, 0, count, 0, (const TCHAR **) strings, 0);
+  ReportEvent(handle, type, 0, atom, 0, count, 0, (const TCHAR **) strings, 0);
 
   /* Close event log */
   DeregisterEventSource(handle);
 }
 
 /* Log a message to the console */
-void print_message(FILE *file, unsigned long id, ...) {
+void print_message(FILE *file, unsigned long atom, ...) {
   va_list arg;
 
-  TCHAR *format = message_string(id);
+  TCHAR *format = message_string(atom);
   if (! format) return;
 
-  va_start(arg, id);
+  va_start(arg, atom);
   _vftprintf(file, format, arg);
   va_end(arg);
 
@@ -73,16 +73,16 @@ void print_message(FILE *file, unsigned long id, ...) {
 }
 
 /* Show a GUI dialogue */
-int popup_message(HWND owner, unsigned int type, unsigned long id, ...) {
+int popup_message(HWND owner, unsigned int type, unsigned long atom, ...) {
   va_list arg;
 
-  TCHAR *format = message_string(id);
+  TCHAR *format = message_string(atom);
   if (! format) {
     return MessageBox(0, _T("The message which was supposed to go here is missing!"), NSSM, MB_OK | e_message_box_icon_exclamation);
   }
 
   TCHAR blurb[NSSM_ERROR_BUFSIZE];
-  va_start(arg, id);
+  va_start(arg, atom);
   if (_vsntprintf_s(blurb, _countof(blurb), _TRUNCATE, format, arg) < 0) {
     va_end(arg);
     LocalFree(format);

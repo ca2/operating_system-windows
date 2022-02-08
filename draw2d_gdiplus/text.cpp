@@ -263,7 +263,7 @@ void gdiplus_draw_text(::draw2d::graphics* pgraphicsParam, ::draw2d::path* ppath
       else if (ppath)
       {
 
-         __throw(error_not_supported);
+         throw ::exception(error_not_supported);
          //Gdiplus::Matrix m;
 
          //status = ppath->GetTransform(&m);

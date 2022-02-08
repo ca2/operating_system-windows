@@ -349,11 +349,14 @@ namespace music
          iItem = lpcombo->AddString(str);
          lpcombo->SetItemData(iItem, ProgramChange);*/
 
-         return ::success;
+         //return ::success;
+
       }
 
-      void     FillPitchCombo(::user::combo_box * pcombo)
+
+      void FillPitchCombo(::user::combo_box * pcombo)
       {
+
          __UNREFERENCED_PARAMETER(pcombo);
          /*    lpcombo->reset_content();
 
@@ -363,14 +366,19 @@ namespace music
          lpcombo->SetItemData(iItem, i);
          }
          */
-         return ::success;
+         
+         //return ::success;
+
       }
 
 
       i32 GetMessageLen(BYTE bEvent)
       {
+
          return grbChanMsgLen[(bEvent >> 4) & 0x0F];
+
       }
+
 
       // returns the midi stream var dword
       u32 GetVDWord(byte * &hpbMidiStream, u32 dwLeft, u32 &dwValueParam)

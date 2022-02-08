@@ -162,10 +162,10 @@ namespace draw2d_gdiplus
 #ifdef DEBUG
 
 
-   void graphics::assert_valid() const
+   void graphics::assert_ok() const
    {
 
-      object::assert_valid();
+      object::assert_ok();
 
    }
 
@@ -280,7 +280,7 @@ namespace draw2d_gdiplus
    i32 graphics::GetDeviceCaps(i32 nIndex)
    {
 
-      __throw(error_not_implemented);
+      throw ::not_implemented();
 
       return -1;
 
@@ -290,7 +290,7 @@ namespace draw2d_gdiplus
    point_f64 graphics::GetBrushOrg()
    {
       
-      __throw(error_not_implemented);
+      throw ::not_implemented();
 
       return nullptr;
 
@@ -308,7 +308,7 @@ namespace draw2d_gdiplus
 
       //return point;
 
-      __throw(error_not_implemented);
+      throw ::not_implemented();
 
       return nullptr;
    }
@@ -321,7 +321,7 @@ namespace draw2d_gdiplus
       //VERIFY(::SetBrushOrgEx(get_handle1(), point.x, point.y, &point));
       //return point;
 
-      throw ::interface_only_exception();
+      throw ::interface_only();
 
       return nullptr;
 
@@ -333,7 +333,7 @@ namespace draw2d_gdiplus
    //   //ASSERT(get_handle2() != nullptr);
    //   //return ::EnumObjects(get_handle2(), nObjectType, (GOBJENUMPROC)pfn, lpData);
 
-   //   throw ::interface_only_exception();
+   //   throw ::interface_only();
 
    //   return -1;
 
@@ -395,7 +395,7 @@ namespace draw2d_gdiplus
    //{
 
    //   //return ::GetNearestColor(get_handle2(), color);
-   //   __throw(error_not_implemented);
+   //   throw ::not_implemented();
 
    //   return -1;
 
@@ -407,7 +407,7 @@ namespace draw2d_gdiplus
 
    //   return 0;
 
-   //   //throw ::interface_only_exception();
+   //   //throw ::interface_only();
 
    //   //return ::RealizePalette(get_handle1());
    //}
@@ -421,7 +421,7 @@ namespace draw2d_gdiplus
    //i32 graphics::GetPolyFillMode()
    //{
    //   //return ::GetPolyFillMode(get_handle2());
-   //   __throw(error_not_implemented);
+   //   throw ::not_implemented();
 
    //   return -1;
 
@@ -430,7 +430,7 @@ namespace draw2d_gdiplus
    //i32 graphics::GetROP2()
    //{
    //   //return ::GetROP2(get_handle2());
-   //   __throw(error_not_implemented);
+   //   throw ::not_implemented();
 
    //   return -1;
 
@@ -439,7 +439,7 @@ namespace draw2d_gdiplus
    //i32 graphics::GetStretchBltMode()
    //{
    //   //return ::GetStretchBltMode(get_handle2());
-   //   __throw(error_not_implemented);
+   //   throw ::not_implemented();
 
    //   return -1;
 
@@ -448,7 +448,7 @@ namespace draw2d_gdiplus
    //i32 graphics::GetMapMode()
    //{
    //   //return ::GetMapMode(get_handle2());
-   //   __throw(error_not_implemented);
+   //   throw ::not_implemented();
 
    //   return -1;
 
@@ -459,7 +459,7 @@ namespace draw2d_gdiplus
    //{
 
    //   //return ::GetGraphicsMode(get_handle2());
-   //   __throw(error_not_implemented);
+   //   throw ::not_implemented();
 
    //   return -1;
 
@@ -500,7 +500,7 @@ namespace draw2d_gdiplus
       //::GetViewportExtEx(get_handle2(), &::size_f64);
 
       //return ::size_f64;
-      __throw(error_not_implemented);
+      throw ::not_implemented();
 
       return nullptr;
 
@@ -516,7 +516,7 @@ namespace draw2d_gdiplus
       //::GetWindowOrgEx(get_handle2(), &point);
 
       //return point;
-      throw ::interface_only_exception();
+      throw ::interface_only();
 
       return nullptr;
 
@@ -529,7 +529,7 @@ namespace draw2d_gdiplus
       //::GetWindowExtEx(get_handle2(), &::size_f64);
       //return ::size_f64;
 
-      throw ::interface_only_exception();
+      throw ::interface_only();
 
       return nullptr;
 
@@ -594,7 +594,7 @@ namespace draw2d_gdiplus
    {
 
       //return ::FillRgn(get_handle1(), (HRGN)pRgn->get_os_data(), (HBRUSH)pBrush->get_os_data()) != false;
-      throw ::interface_only_exception();
+      throw ::interface_only();
 
       //return false;
 
@@ -605,7 +605,7 @@ namespace draw2d_gdiplus
    {
 
       //return ::FrameRgn(get_handle1(), (HRGN)pRgn->get_os_data(), (HBRUSH)pBrush->get_os_data(), nWidth, nHeight) != false;
-      throw ::interface_only_exception();
+      throw ::interface_only();
 
       //return false;
 
@@ -619,7 +619,7 @@ namespace draw2d_gdiplus
 
       //return ::InvertRgn(get_handle1(), (HRGN)pRgn->get_os_data()) != false;
 
-      throw ::interface_only_exception();
+      throw ::interface_only();
 
       //return false;
 
@@ -633,7 +633,7 @@ namespace draw2d_gdiplus
 
       //return ::PaintRgn(get_handle1(), (HRGN)pRgn->get_os_data())  != false;
 
-      throw ::interface_only_exception();
+      throw ::interface_only();
 
       //return false;
 
@@ -647,7 +647,7 @@ namespace draw2d_gdiplus
 
    //   //return ::PtVisible(get_handle1(), x, y) != false;
 
-   //   throw ::interface_only_exception();
+   //   throw ::interface_only();
 
    //   return false;
 
@@ -665,7 +665,7 @@ namespace draw2d_gdiplus
    //{
 
    //   //return ::rectVisible(get_handle1(), &prectangle) != false;
-   //   __throw(error_not_implemented);
+   //   throw ::not_implemented();
 
    //   return false;
 
@@ -679,7 +679,7 @@ namespace draw2d_gdiplus
       //VERIFY(::GetCurrentPositionEx(get_handle2(), &point));
       //return point;
 
-      throw ::interface_only_exception();
+      throw ::interface_only();
 
       return nullptr;
 
@@ -885,7 +885,7 @@ namespace draw2d_gdiplus
       //return ::Chord(get_handle1(),rectangleParam.left,rectangleParam.top,
       //               rectangleParam.right,rectangleParam.bottom,pointStart.x,pointStart.y,
       //               pointEnd.x, pointEnd.y) != false;
-      __throw(error_not_implemented);
+      throw ::not_implemented();
 
       //return false;
 
@@ -897,7 +897,7 @@ namespace draw2d_gdiplus
 
       //ASSERT(get_handle1() != nullptr);
       //::DrawFocusRect(get_handle1(),&rectangleParam);
-      __throw(error_not_implemented);
+      throw ::not_implemented();
 
 
    }
@@ -1132,7 +1132,7 @@ namespace draw2d_gdiplus
 
    //   //ASSERT(get_handle1() != nullptr);
    //   //return ::Pie(get_handle1(), x1, y1, x2, y2, x3, y3, x4, y4) != false;
-   //   __throw(error_not_implemented);
+   //   throw ::not_implemented();
 
    //   return false;
 
@@ -1146,7 +1146,7 @@ namespace draw2d_gdiplus
       //return ::Pie(get_handle1(), rectangleParam.left, rectangleParam.top,
       //             rectangleParam.right, rectangleParam.bottom, pointStart.x, pointStart.y,
       //             pointEnd.x, pointEnd.y) != false;
-      __throw(error_not_implemented);
+      throw ::not_implemented();
 
       //return false;
 
@@ -1356,7 +1356,7 @@ namespace draw2d_gdiplus
    void graphics::round_rectangle(const ::rectangle_f64 & rectangle, double dRadius)
    {
 
-      __throw(todo);
+      throw ::exception(todo);
 
       //return false;
 
@@ -1366,7 +1366,7 @@ namespace draw2d_gdiplus
    //void graphics::round_rectangle(const ::rectangle_f64 & rectangle, const ::point_f64 & point)
    //{
 
-   //   __throw(todo);
+   //   throw ::exception(todo);
 
    //}
 
@@ -1376,7 +1376,7 @@ namespace draw2d_gdiplus
 
    //   //ASSERT(get_handle1() != nullptr);
    //   //return ::PatBlt(get_handle1(), x, y, nWidth, nHeight, dwRop) != false;
-   //   __throw(error_not_implemented);
+   //   throw ::not_implemented();
 
    //   return false;
 
@@ -2106,7 +2106,7 @@ namespace draw2d_gdiplus
    {
       //ASSERT(get_handle1() != nullptr);
       //return ::GetPixel(get_handle1(), x, y);
-      __throw(error_not_implemented);
+      throw ::not_implemented();
 
       return false;
 
@@ -2117,7 +2117,7 @@ namespace draw2d_gdiplus
    {
       //ASSERT(get_handle1() != nullptr);
       //return ::GetPixel(get_handle1(), point.x, point.y);
-      __throw(error_not_implemented);
+      throw ::not_implemented();
 
       return false;
 
@@ -2191,7 +2191,7 @@ namespace draw2d_gdiplus
    //   //ASSERT(get_handle1() != nullptr);
 
    //   //return ::FloodFill(get_handle1(), x, y, color) != false;
-   //   __throw(error_not_implemented);
+   //   throw ::not_implemented();
 
    //   return false;
 
@@ -2202,7 +2202,7 @@ namespace draw2d_gdiplus
    //{
    //   //ASSERT(get_handle1() != nullptr);
    //   //return ::ExtFloodFill(get_handle1(), x, y, color, nFillType) != false;
-   //   __throw(error_not_implemented);
+   //   throw ::not_implemented();
 
    //   return false;
 
@@ -2222,7 +2222,7 @@ namespace draw2d_gdiplus
    //   //ASSERT(get_handle1() != nullptr);
 
    //   //return ::ExtTextOut(get_handle1(),x,y,nOptions,&rectangleParam,pszString,(UINT) nCount,lpDxWidths) != false;
-   //   __throw(error_not_implemented);
+   //   throw ::not_implemented();
 
    //   return false;
 
@@ -2236,7 +2236,7 @@ namespace draw2d_gdiplus
    //   //ASSERT(get_handle1() != nullptr);
 
    //   //return ::ExtTextOut(get_handle1(),x,y,nOptions,&rectangleParam, str, (UINT)str.get_length(), pDxWidths) != false;
-   //   __throw(error_not_implemented);
+   //   throw ::not_implemented();
 
    //   return false;
 
@@ -2251,7 +2251,7 @@ namespace draw2d_gdiplus
 
    //   //return ::TabbedTextOut(get_handle1(), x, y, pszString, (int) nCount, (int) nTabPositions, lpnTabStopPositions, nTabOrigin);
 
-   //   __throw(error_not_implemented);
+   //   throw ::not_implemented();
 
    //   return nullptr;
 
@@ -2265,7 +2265,7 @@ namespace draw2d_gdiplus
 
    //   //return ::TabbedTextOut(get_handle1(), x, y, str, (i32)str.get_length(), (int) nTabPositions, pnTabStopPositions, nTabOrigin);
 
-   //   __throw(error_not_implemented);
+   //   throw ::not_implemented();
 
    //   return nullptr;
 
@@ -2278,7 +2278,7 @@ namespace draw2d_gdiplus
    //   //ASSERT(get_handle2() != nullptr);
 
    //   //return ::GetTabbedTextExtent(get_handle2(), pszString, (i32) nCount, (int) nTabPositions, lpnTabStopPositions);
-   //   __throw(error_not_implemented);
+   //   throw ::not_implemented();
 
    //   return nullptr;
 
@@ -2293,7 +2293,7 @@ namespace draw2d_gdiplus
 
    //   //return ::GetTabbedTextExtent(get_handle2(), str, (i32) str.get_length(), (int) nTabPositions, pnTabStopPositions);
 
-   //   __throw(error_not_implemented);
+   //   throw ::not_implemented();
 
    //   return nullptr;
 
@@ -2307,7 +2307,7 @@ namespace draw2d_gdiplus
 
    //   //return ::GetTabbedTextExtent(get_handle1(), pszString, (i32) nCount, (int) nTabPositions, lpnTabStopPositions);
 
-   //   __throw(error_not_implemented);
+   //   throw ::not_implemented();
 
    //   return nullptr;
 
@@ -2321,7 +2321,7 @@ namespace draw2d_gdiplus
 
    //   //return ::GetTabbedTextExtent(get_handle1(), str, (i32) str.get_length(), (int) nTabPositions, pnTabStopPositions);
 
-   //   __throw(error_not_implemented);
+   //   throw ::not_implemented();
 
    //   return nullptr;
    //}
@@ -2334,7 +2334,7 @@ namespace draw2d_gdiplus
    //   //ASSERT(get_handle1() != nullptr);
 
    //   //return ::GrayString(get_handle1(), (HBRUSH)pBrush->get_os_data(),(GRAYSTRINGPROC)pfnOutput, lpData, nCount, x, y, nWidth, nHeight) != false;
-   //   __throw(error_not_implemented);
+   //   throw ::not_implemented();
 
    //   return false;
 
@@ -2347,7 +2347,7 @@ namespace draw2d_gdiplus
       //ASSERT(get_handle2() != nullptr);
 
       //return ::GetTextAlign(get_handle2());
-      __throw(error_not_implemented);
+      throw ::not_implemented();
 
       return -1;
    }
@@ -2360,7 +2360,7 @@ namespace draw2d_gdiplus
    //   //ASSERT(get_handle2() != nullptr);
 
    //   //return ::GetTextFace(get_handle2(), (int) nCount, pszFacename);
-   //   __throw(error_not_implemented);
+   //   throw ::not_implemented();
 
    //   return -1;
 
@@ -2376,7 +2376,7 @@ namespace draw2d_gdiplus
    //   //rString.ReleaseBuffer();
 
    //   //return nResult;
-   //   __throw(error_not_implemented);
+   //   throw ::not_implemented();
 
    //   return -1;
    //}
@@ -2454,7 +2454,7 @@ namespace draw2d_gdiplus
       //return ::GetTextMetricsW(get_handle1(), pmetric) != false;
 
 
-      throw interface_only_exception();
+      throw ::interface_only();
 
       //return false;
 
@@ -2465,7 +2465,7 @@ namespace draw2d_gdiplus
    //{
    //   //ASSERT(get_handle2() != nullptr);
    //   //return ::GetTextCharacterExtra(get_handle2());
-   //   __throw(error_not_implemented);
+   //   throw ::not_implemented();
 
    //   return -1;
    //}
@@ -2474,7 +2474,7 @@ namespace draw2d_gdiplus
    //{
    //   //ASSERT(get_handle2() != nullptr);
    //   //return ::GetCharWidth(get_handle2(), nFirstChar, nLastChar, pBuffer) != false;
-   //   __throw(error_not_implemented);
+   //   throw ::not_implemented();
 
    //   return false;
    //}
@@ -2483,7 +2483,7 @@ namespace draw2d_gdiplus
    //{
    //   //ASSERT(get_handle1() != nullptr);
    //   //return ::GetCharWidth(get_handle1(), nFirstChar, nLastChar, pBuffer) != false;
-   //   __throw(error_not_implemented);
+   //   throw ::not_implemented();
 
    //   return false;
    //}
@@ -2491,7 +2491,7 @@ namespace draw2d_gdiplus
    //{
    //   //ASSERT(get_handle1() != nullptr);
    //   //return ::GetFontLanguageInfo(get_handle1());
-   //   __throw(error_not_implemented);
+   //   throw ::not_implemented();
 
    //   return -1;
    //}
@@ -2504,7 +2504,7 @@ namespace draw2d_gdiplus
    //   //ASSERT(get_handle1() != nullptr);
 
    //   //return ::GetCharacterPlacement(get_handle1(), pString, (int) nCount, (int) nMaxExtent, lpResults, dwFlags);
-   //   __throw(error_not_implemented);
+   //   throw ::not_implemented();
 
    //   return -1;
 
@@ -2518,7 +2518,7 @@ namespace draw2d_gdiplus
    //   //ASSERT(get_handle1() != nullptr);
 
    //   //return ::GetCharacterPlacement(get_handle1(), (const ::string &)str, (i32) str.get_length(), (int) nMaxExtent, pResults, dwFlags);
-   //   __throw(error_not_implemented);
+   //   throw ::not_implemented();
 
    //   return -1;
 
@@ -2531,7 +2531,7 @@ namespace draw2d_gdiplus
    //   //::size_f64 ::size_f64;
    //   //VERIFY(::GetAspectRatioFilterEx(get_handle2(), &::size_f64));
    //   //return ::size_f64;
-   //   __throw(error_not_implemented);
+   //   throw ::not_implemented();
 
    //   return nullptr;
    //}
@@ -2545,7 +2545,7 @@ namespace draw2d_gdiplus
    //   //return ::ScrollDC(get_handle1(),dx,dy,&rectangleClip,
    //   //                  &rectangleClip, (HRGN)pRgnUpdate->get_os_data(), pRectUpdate) != false;
 
-   //   __throw(error_not_implemented);
+   //   throw ::not_implemented();
 
    //   return false;
    //}
@@ -2556,7 +2556,7 @@ namespace draw2d_gdiplus
    //{
    //   //ASSERT(get_handle1() != nullptr);
    //   //return ::Escape(get_handle1(), nEscape, nCount, pszInData, lpOutData);
-   //   __throw(error_not_implemented);
+   //   throw ::not_implemented();
 
    //   return -1;
    //}
@@ -2566,7 +2566,7 @@ namespace draw2d_gdiplus
    {
       //ASSERT(get_handle1() != nullptr);
       //return ::SetBoundsRect(get_handle1(), &rectangleBounds, flags);
-      __throw(error_not_implemented);
+      throw ::not_implemented();
 
       return -1;
    }
@@ -2577,7 +2577,7 @@ namespace draw2d_gdiplus
 
       //ASSERT(get_handle2() != nullptr);
       //return ::GetBoundsRect(get_handle2(), pRectBounds, flags);
-      __throw(error_not_implemented);
+      throw ::not_implemented();
 
       return -1;
    }
@@ -2588,7 +2588,7 @@ namespace draw2d_gdiplus
 
    //   //ASSERT(get_handle2() != nullptr);
    //   //return ::ResetDC(get_handle2(), pDevMode) != nullptr;
-   //   __throw(error_not_implemented);
+   //   throw ::not_implemented();
 
    //   return false;
    //}
@@ -2599,7 +2599,7 @@ namespace draw2d_gdiplus
 
    //   //ASSERT(get_handle2() != nullptr);
    //   //return ::GetOutlineTextMetricsW(get_handle2(), cbData, potm);
-   //   __throw(error_not_implemented);
+   //   throw ::not_implemented();
 
    //   return -1;
    //}
@@ -2610,7 +2610,7 @@ namespace draw2d_gdiplus
    //{
    //   //ASSERT(get_handle2() != nullptr);
    //   //return ::GetCharABCWidths(get_handle2(), nFirstChar, nLastChar, pabc) != false;
-   //   __throw(error_not_implemented);
+   //   throw ::not_implemented();
 
    //   return false;
    //}
@@ -2620,7 +2620,7 @@ namespace draw2d_gdiplus
    //{
    //   //ASSERT(get_handle2() != nullptr);
    //   //return ::GetFontData(get_handle2(), dwTable, dwOffset, pData, cbData);
-   //   __throw(error_not_implemented);
+   //   throw ::not_implemented();
 
    //   return -1;
    //}
@@ -2629,7 +2629,7 @@ namespace draw2d_gdiplus
    //{
    //   //ASSERT(get_handle2() != nullptr);
    //   //return ::GetKerningPairs(get_handle2(), nPairs, pkrnpair);
-   //   __throw(error_not_implemented);
+   //   throw ::not_implemented();
 
    //   return -1;
    //}
@@ -2641,7 +2641,7 @@ namespace draw2d_gdiplus
    //   //ASSERT(get_handle2() != nullptr);
    //   //return ::GetGlyphOutline(get_handle2(), nChar, nFormat,
    //   //                         pgm, cbBuffer, lpBuffer, lpmat2);
-   //   __throw(error_not_implemented);
+   //   throw ::not_implemented();
 
    //   return -1;
    //}
@@ -2655,7 +2655,7 @@ namespace draw2d_gdiplus
 
    //   //return ::StartDoc(m_hdc, pDocInfo);
 
-   //   __throw(error_not_implemented);
+   //   throw ::not_implemented();
 
    //   return -1;
    //}
@@ -2731,7 +2731,7 @@ namespace draw2d_gdiplus
    //   //ASSERT(get_handle1() != nullptr);
    //   //return ::MaskBlt(get_handle1(), x, y, nWidth, nHeight, GDIPLUS_HDC(pgraphicsSrc),
    //   //                 xSrc, ySrc,  (HBITMAP)maskBitmap.get_os_data(), xMask, yMask, dwRop) != false;
-   //   __throw(error_not_implemented);
+   //   throw ::not_implemented();
 
    //   return false;
 
@@ -2799,7 +2799,7 @@ namespace draw2d_gdiplus
    //{
    //   //ASSERT(get_handle1() != nullptr);
    //   //return ::SetPixelV(get_handle1(), x, y, color) != false;
-   //   __throw(error_not_implemented);
+   //   throw ::not_implemented();
 
    //   return false;
 
@@ -2810,7 +2810,7 @@ namespace draw2d_gdiplus
    //{
    //   //ASSERT(get_handle1() != nullptr);
    //   //return ::SetPixelV(get_handle1(), point.x, point.y, color) != false;
-   //   __throw(error_not_implemented);
+   //   throw ::not_implemented();
 
    //   return false;
 
@@ -2820,7 +2820,7 @@ namespace draw2d_gdiplus
    {
    //   //ASSERT(get_handle1() != nullptr);
    //   //return ::AngleArc(get_handle1(), x, y, nRadius, fStartAngle, fSweepAngle) != false;
-   //   __throw(error_not_implemented);
+   //   throw ::not_implemented();
 
       //return false;
 
@@ -2848,7 +2848,7 @@ namespace draw2d_gdiplus
    //   //   VERIFY(::MoveToEx(get_handle2(), point.x, point.y, nullptr));
    //   //}
    //   //return bResult;
-   //   __throw(error_not_implemented);
+   //   throw ::not_implemented();
 
       //return false;
    }
@@ -2856,7 +2856,7 @@ namespace draw2d_gdiplus
    //{
    //   //ASSERT(get_handle2() != nullptr);
    //   //return ::GetArcDirection(get_handle2());
-   //   __throw(error_not_implemented);
+   //   throw ::not_implemented();
 
    //   return -1;
 
@@ -2870,7 +2870,7 @@ namespace draw2d_gdiplus
 
       //return ::poly_polyline(get_handle1(), pPoints, (LPDWORD) lpPolyPoints, (DWORD) nCount) != false;
 
-      __throw(error_not_implemented);
+      throw ::not_implemented();
 
       //return false;
 
@@ -2882,7 +2882,7 @@ namespace draw2d_gdiplus
    //{
    //   //ASSERT(get_handle2() != nullptr);
    //   //return ::GetColorAdjustment(get_handle2(), pColorAdjust) != false;
-   //   __throw(error_not_implemented);
+   //   throw ::not_implemented();
 
    //   return false;
 
@@ -2895,7 +2895,7 @@ namespace draw2d_gdiplus
       //ASSERT(get_handle1() != nullptr);
 
       //return ::poly_bezier(get_handle1(), pPoints, (DWORD) nCount) != false;
-      __throw(error_not_implemented);
+      throw ::not_implemented();
 
       //return false;
 
@@ -2910,7 +2910,7 @@ namespace draw2d_gdiplus
    //   //ASSERT(get_handle1() != nullptr);
 
    //   //return ::DrawEscape(get_handle1(), nEscape, nInputSize, pszInputData);
-   //   __throw(error_not_implemented);
+   //   throw ::not_implemented();
 
    //   return false;
 
@@ -2925,7 +2925,7 @@ namespace draw2d_gdiplus
    //   //ASSERT(get_handle1() != nullptr);
 
    //   //return ::ExtEscape(get_handle1(), nEscape, nInputSize, pszInputData, nOutputSize, pszOutputData);
-   //   __throw(error_not_implemented);
+   //   throw ::not_implemented();
 
    //   return false;
 
@@ -2939,7 +2939,7 @@ namespace draw2d_gdiplus
    //{
    //   //ASSERT(get_handle2() != nullptr);
    //   //return ::GetCharABCWidthsFloat(get_handle2(), nFirstChar, nLastChar, pABCF) != false;
-   //   __throw(error_not_implemented);
+   //   throw ::not_implemented();
 
    //   return false;
 
@@ -2949,7 +2949,7 @@ namespace draw2d_gdiplus
    //{
    //   //ASSERT(get_handle2() != nullptr);
    //   //return ::GetCharWidthFloat(get_handle2(), nFirstChar, nLastChar, pFloatBuffer) != false;
-   //   __throw(error_not_implemented);
+   //   throw ::not_implemented();
 
    //   return false;
 
@@ -3059,7 +3059,7 @@ namespace draw2d_gdiplus
       //float fMiterLimit;
       //VERIFY(::GetMiterLimit(get_handle1(), &fMiterLimit));
       //return fMiterLimit;
-      __throw(error_not_implemented);
+      throw ::not_implemented();
 
       return 0.f;
 
@@ -3074,7 +3074,7 @@ namespace draw2d_gdiplus
 
    //   //return ::GetPath(get_handle1(), pPoints, lpTypes, (int) nCount);
 
-   //   __throw(error_not_implemented);
+   //   throw ::not_implemented();
 
    //   return false;
 
@@ -3084,7 +3084,7 @@ namespace draw2d_gdiplus
    {
       //ASSERT(get_handle1() != nullptr);
       //return ::SetMiterLimit(get_handle1(), fMiterLimit, nullptr) != false;
-      __throw(error_not_implemented);
+      throw ::not_implemented();
 
       //return false;
 
@@ -3204,7 +3204,7 @@ namespace draw2d_gdiplus
       //ASSERT(get_handle1() != nullptr);
 
       //return ::GdiComment(get_handle1(), nDataSize, pCommentData) != false;
-      __throw(error_not_implemented);
+      throw ::not_implemented();
 
       //return false;
 
@@ -3535,7 +3535,7 @@ namespace draw2d_gdiplus
    //void graphics::DrawDragRect(const rectangle_i32 &  prectangle, const ::size_f64 & size, const rectangle_i32 &  lpRectLast, const ::size_f64 & sizeLast, ::draw2d::brush* pBrush, ::draw2d::brush* pBrushLast)
    //{
 
-   //   throw interface_only_exception();
+   //   throw ::interface_only();
 
    //   /*
 
@@ -4352,7 +4352,7 @@ namespace draw2d_gdiplus
    //   //if(get_handle2() != nullptr)
    //   //   nRetVal = ::SetPolyFillMode(get_handle2(), nPolyFillMode);
    //   //return nRetVal;
-   //   __throw(error_not_implemented);
+   //   throw ::not_implemented();
 
    //   return -1;
 
@@ -4366,7 +4366,7 @@ namespace draw2d_gdiplus
    //   //if(get_handle2() != nullptr)
    //   //   nRetVal = ::SetROP2(get_handle2(), nDrawMode);
    //   //return nRetVal;
-   //   __throw(error_not_implemented);
+   //   throw ::not_implemented();
 
    //   return -1;
 
@@ -4426,7 +4426,7 @@ namespace draw2d_gdiplus
    //   //   nRetVal = ::SetGraphicsMode(get_handle2(), iMode);
    //   //}
    //   //return nRetVal;
-   //   __throw(error_not_implemented);
+   //   throw ::not_implemented();
 
    //   return -1;
    //}
@@ -4481,7 +4481,7 @@ namespace draw2d_gdiplus
    //   //   nRetVal = ::ModifyWorldTransform(get_handle2(), pXform, iMode) != false;
    //   //}
    //   //return nRetVal;
-   //   __throw(error_not_implemented);
+   //   throw ::not_implemented();
 
    //   return false;
    //}
@@ -4494,7 +4494,7 @@ namespace draw2d_gdiplus
    //   //if(get_handle2() != nullptr)
    //   //   nRetVal = ::SetMapMode(get_handle2(), nMapMode);
    //   //return nRetVal;
-   //   ///__throw(error_not_implemented);
+   //   ///throw ::not_implemented();
 
    //   return -1;
    //}
@@ -4987,7 +4987,7 @@ namespace draw2d_gdiplus
    //   //   VERIFY(::MoveToEx(get_handle2(), point.x, point.y, nullptr));
    //   //}
    //   //return bResult;
-   //   __throw(error_not_implemented);
+   //   throw ::not_implemented();
 
    //   return false;
    //}
@@ -5001,7 +5001,7 @@ namespace draw2d_gdiplus
    //   //if (get_handle2() != nullptr)
    //   //   nResult = ::SetArcDirection(get_handle2(), nArcDirection);
    //   //return nResult;
-   //   __throw(error_not_implemented);
+   //   throw ::not_implemented();
 
    //   return -1;
    //}
@@ -5031,7 +5031,7 @@ namespace draw2d_gdiplus
       //   VERIFY(::MoveToEx(get_handle2(), point.x, point.y, nullptr));
       //}
       //return bResult;
-      __throw(error_not_implemented);
+      throw ::not_implemented();
 
       //return false;
    }
@@ -5058,7 +5058,7 @@ namespace draw2d_gdiplus
       //   VERIFY(::MoveToEx(get_handle2(), point.x, point.y, nullptr));
       //}
       //return bResult;
-      __throw(error_not_implemented);
+      throw ::not_implemented();
 
       //return false;
    }
@@ -5083,7 +5083,7 @@ namespace draw2d_gdiplus
    //   //   bResult = ::SetColorAdjustment(get_handle2(), pColorAdjust) != false;
 
    //   //return bResult;
-   //   __throw(error_not_implemented);
+   //   throw ::not_implemented();
 
    //   return false;
 
@@ -5112,7 +5112,7 @@ namespace draw2d_gdiplus
       //   VERIFY(::MoveToEx(get_handle2(), point.x, point.y, nullptr));
       //}
       //return bResult;
-      __throw(error_not_implemented);
+      throw ::not_implemented();
 
       //return false;
 
@@ -5293,7 +5293,7 @@ namespace draw2d_gdiplus
 //            if (hObjOld == hStockFont)
 //            {
 //               // got the stock object back, so must be selecting a font
-//               __throw(error_not_implemented);
+//               throw ::not_implemented();
 ////                  set(::draw2d_gdiplus::font::from_handle(pgraphics->get_application(), (HFONT)hObject));
 //               break;  // don't play the default record
 //            }
@@ -5309,7 +5309,7 @@ namespace draw2d_gdiplus
 //         {
 //            // play back as graphics::set(::write_text::font*)
 ////               set(::draw2d_gdiplus::font::from_handle(pgraphics->get_application(), (HFONT)hObject));
-//            __throw(error_not_implemented);
+//            throw ::not_implemented();
 //            break;  // don't play the default record
 //         }
 //      }
@@ -5452,7 +5452,7 @@ namespace draw2d_gdiplus
 
    //   //return ::DrawTextExW(get_handle1(),const_cast<wchar_t *>((const wchar_t *)text.m_wstr),(i32)wcslen(text.m_wstr),(RECT *) &rectangleParam,nFormat,pDTParams);
 
-   //   __throw(error_not_implemented);
+   //   throw ::not_implemented();
 
    //   return false;
 
@@ -5477,7 +5477,7 @@ namespace draw2d_gdiplus
       //ASSERT((nFormat & (DT_PATH_ELLIPSIS | DT_MODIFYSTRING)) != (DT_PATH_ELLIPSIS | DT_MODIFYSTRING));
       //wstring text.m_wstr = ::str::international::utf8_to_unicode(str);
       //return ::DrawTextExW(get_handle1(),const_cast<wchar_t *>((const wchar_t *)text.m_wstr),(i32)wcslen(text.m_wstr),(RECT *) &rectangleParam,nFormat,pDTParams);
-      __throw(error_not_implemented);
+      throw ::not_implemented();
 
       //return false;
 
@@ -6329,9 +6329,9 @@ namespace draw2d_gdiplus
       if (block.is_empty())
       {
 
-         //return false;
+         return;
 
-         throw_status(error_null_pointer);
+         //throw_status(error_null_pointer);
 
       }
 

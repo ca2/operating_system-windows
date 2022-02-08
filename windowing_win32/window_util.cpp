@@ -252,7 +252,7 @@ namespace windowing_win32
 
 #else
 
-      __throw(todo);
+      throw ::exception(todo);
 
 #endif
 
@@ -520,7 +520,7 @@ namespace windowing_win32
       //
       //#else
       //
-      //         __throw(todo);
+      //         throw ::exception(todo);
       //
       //#endif
       //
@@ -550,7 +550,7 @@ namespace windowing_win32
       //
       //#else
       //
-      //      __throw(todo);
+      //      throw ::exception(todo);
       //
       //#endif
       //
@@ -593,14 +593,14 @@ namespace windowing_win32
       //
       //#else
       //
-      //      __throw(todo);
+      //      throw ::exception(todo);
       //
       //#endif
       //#endif
 
    }
 
-   /*void window_util::send_message_to_descendants(HWND hwnd, const ::id & id,
+   /*void window_util::send_message_to_descendants(HWND hwnd, const ::atom & atom,
    wparam wParam, lparam lParam, bool bDeep, bool bOnlyPerm)
    {
    // walk through HWNDs to avoid creating temporary interaction_impl objects
@@ -676,7 +676,7 @@ namespace windowing_win32
 
 #else
 
-      __throw(todo);
+      throw ::exception(todo);
 
 #endif
 
@@ -871,7 +871,7 @@ namespace windowing_win32
    //
    //#else
    //
-   //      __throw(todo);
+   //      throw ::exception(todo);
    //
    //#endif
    //
@@ -902,7 +902,7 @@ namespace windowing_win32
    //
    //#else
    //
-   //      __throw(todo);
+   //      throw ::exception(todo);
    //
    //#endif
    //
@@ -971,7 +971,7 @@ namespace windowing_win32
 //
 //#else
 //
-//      throw interface_only_exception();
+//      throw ::interface_only();
 //
 //#endif
 

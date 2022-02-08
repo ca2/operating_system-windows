@@ -19,7 +19,7 @@ namespace aura
 //
 //      pmessagebox->show(pszMessage, pszTitle, emessagebox);
 //
-//      ///__throw(todo);
+//      ///throw ::exception(todo);
 //
 ////      auto pwindowing = puser->m_pwindowing;
 //

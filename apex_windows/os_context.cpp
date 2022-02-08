@@ -4,6 +4,7 @@
 #include <shobjidl.h>
 #include <ShellApi.h>
 #include <Security.h>
+#include "acme/operating_system/time.h"
 #include "acme/filesystem/filesystem/acme_dir.h"
 #include "acme/filesystem/filesystem/acme_path.h"
 
@@ -836,7 +837,7 @@ namespace windows
                
                string strCommand(str2);
 
-               strCommand.replace("%1", pcsz);
+               strCommand.replace_with(pcsz, "%1");
 
                WinExec(strCommand,e_display_normal);
 
@@ -853,7 +854,7 @@ namespace windows
                      
                string strCommand(str2);
                      
-               strCommand.replace("%1", pcsz);
+               strCommand.replace_with(pcsz, "%1");
 
                WinExec(strCommand,e_display_normal);
 
@@ -1287,9 +1288,9 @@ retry:
 
       string strServiceName = get_application()->m_strAppId;
 
-      strServiceName.replace("/","-");
+      strServiceName.replace_with("-", "/");
 
-      strServiceName.replace("\\","-");
+      strServiceName.replace_with("-", "\\");
 
       return strServiceName;
 
@@ -1321,11 +1322,11 @@ retry:
 
       string strDisplayName(strServiceName);
 
-      strDisplayName.replace("-"," ");
+      strDisplayName.replace_with(" ", "-");
 
       string strExe(strServiceName);
 
-      strExe.replace("-","_");
+      strExe.replace_with("_", "-");
 
       strExe += ".exe";
 
@@ -1410,7 +1411,7 @@ retry:
       if (strServiceName.is_empty())
       {
 
-         throw_status(error_invalid_argument);
+         throw_status(error_bad_argument);
 
       }
 
@@ -1474,7 +1475,7 @@ retry:
       if (strServiceName.is_empty())
       {
 
-         throw_status(error_invalid_argument);
+         throw_status(error_bad_argument);
 
       }
 
@@ -1635,7 +1636,6 @@ retry:
 
 
    void os_context::set_file_status(const ::string & pszFileName, const ::file::file_status& status)
-
    {
 
       u32 wAttr;
@@ -1756,6 +1756,183 @@ retry:
       }
 
    }
+
+   
+   comptr < IShellLinkW > os_context::_get_IShellLinkW(const ::file::path & pathLink)
+   {
+
+      HRESULT hr;
+
+      comptr < IShellLinkW > pshelllink;
+
+      if (FAILED(hr = pshelllink.CoCreateInstance(CLSID_ShellLink, nullptr, CLSCTX_INPROC_SERVER)))
+      {
+
+         return nullptr;
+
+      }
+
+      bool bOk = false;
+
+      comptr < IPersistFile > ppersistfile;
+
+      if (SUCCEEDED(hr = pshelllink.as(ppersistfile)))
+      {
+
+         if (SUCCEEDED(hr = ppersistfile->Load(wstring(pathLink), STGM_WRITE)))
+         {
+
+            //HWND hwnd = pinteraction == nullptr ? nullptr : pinteraction->get_handle();
+
+            HWND hwnd = nullptr;
+
+            u32 fFlags = 0;
+
+            //fFlags |= pinteraction == nullptr ? (SLR_NO_UI | (10 << 16)) : 0;
+            fFlags |= SLR_NO_UI;
+
+            fFlags |= SLR_NOUPDATE;
+
+            fFlags |= SLR_NOSEARCH;
+
+            fFlags |= SLR_NOTRACK;
+
+            return pshelllink;
+
+         }
+         //   wstring wstr;
+
+         //   auto pwsz = wstr.get_string_buffer(MAX_PATH * 8);
+
+         //   if (SUCCEEDED(pshelllink->GetPath(pwsz, MAX_PATH * 8, nullptr, 0)))
+         //   {
+
+         //      bOk = true;
+
+         //      wstr.release_string_buffer();
+
+         //      string strLink = ::str::international::unicode_to_utf8((const widechar *)wstr);
+
+         //      if (strLink.is_empty() && pitemidlist)
+         //      {
+
+         //         pshelllink->GetIDList(&pitemidlist->m_pidl);
+
+         //      }
+         //      else
+         //      {
+
+         //         path = strLink;
+
+         //      }
+
+         //   }
+
+         //   if (::is_set(pstrDirectory))
+         //   {
+
+         //      auto pwsz = wstr.get_string_buffer(MAX_PATH * 8);
+
+         //      if (SUCCEEDED(pshelllink->GetWorkingDirectory(pwsz, MAX_PATH * 8)))
+         //      {
+
+         //         wstr.release_string_buffer();
+
+         //         *pstrDirectory = ::str::international::unicode_to_utf8((const widechar *)wstr);
+
+         //      }
+
+         //   }
+
+         //   if (::is_set(pstrParams))
+         //   {
+
+         //      auto pwsz = wstr.get_string_buffer(MAX_PATH * 8);
+
+         //      if (SUCCEEDED(pshelllink->GetArguments(pwsz, MAX_PATH * 8)))
+         //      {
+
+         //         wstr.release_string_buffer();
+
+         //         *pstrParams = ::str::international::unicode_to_utf8((const widechar *)wstr);
+
+         //      }
+
+         //   }
+
+         //}
+
+      }
+
+      return nullptr;
+
+   }
+
+
+
+   void os_context::edit_link_target(const ::file::path & path, const ::file::path & pathLink)
+   {
+
+      auto pshelllink = _get_IShellLinkW(pathLink);
+
+      HRESULT hresult = pshelllink->SetPath(wstring(path));
+
+      auto estatus = hresult_to_status(hresult);
+
+      if (!estatus)
+      {
+
+         throw_status(estatus);
+
+      }
+
+      comptr < IPersistFile > ppersistfile;
+
+      pshelllink.as(ppersistfile);
+
+      if (!ppersistfile)
+      {
+
+         throw_status(error_no_interface);
+
+      }
+
+      ppersistfile->Save(wstring(pathLink), TRUE);
+
+   }
+
+
+   void os_context::edit_link_folder(const ::file::path & path, const ::file::path & pathLink)
+   {
+
+      auto pshelllink = _get_IShellLinkW(pathLink);
+
+      HRESULT hresult = pshelllink->SetWorkingDirectory(wstring(path));
+
+      auto estatus = hresult_to_status(hresult);
+
+      if (!estatus)
+      {
+
+         throw_status(estatus);
+
+      }
+
+      comptr < IPersistFile > ppersistfile;
+
+      pshelllink.as(ppersistfile);
+
+      if (!ppersistfile)
+      {
+
+         throw_status(error_no_interface);
+
+      }
+
+      ppersistfile->Save(wstring(pathLink), TRUE);
+
+   }
+
 
 
    bool os_context::resolve_link(::file::path & path, const ::string & strSource, string * pstrDirectory, string * pstrParams)
@@ -1932,6 +2109,22 @@ retry:
       }
 
       return bOk;
+
+   }
+
+
+   bool os_context::has_alias_in_path(const char * psz, bool bNoUI, bool bNoMount)
+   {
+
+      return false;
+
+   }
+
+
+   bool os_context::is_alias(const char * psz)
+   {
+
+      return ::str::ends_ci(psz, ".lnk");
 
    }
 
@@ -2376,9 +2569,9 @@ repeat:
 
       strTargetProgId = get_application()->m_strAppName;
 
-      strTargetProgId.replace("-", "_");
-      strTargetProgId.replace("\\", "_");
-      strTargetProgId.replace("/", "_");
+      strTargetProgId.replace_with("_", "-");
+      strTargetProgId.replace_with("_", "\\");
+      strTargetProgId.replace_with("_", "/");
 
       __prevent_bad_status_exception;
       
@@ -2649,9 +2842,9 @@ repeat:
 
       strTargetProgId = get_application()->m_strAppName;
 
-      strTargetProgId.replace("-", "_");
-      strTargetProgId.replace("\\", "_");
-      strTargetProgId.replace("/", "_");
+      strTargetProgId.replace_with("_", "-");
+      strTargetProgId.replace_with("_", "\\");
+      strTargetProgId.replace_with("_", "/");
 
       ::e_status estatus = ::success;
 
