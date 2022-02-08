@@ -3,7 +3,7 @@
 #include "system_interaction.h"
 #include "aura/message.h"
 #include "aura/user/interaction_thread.h"
-#include "aura/node/operating_system/windows/windowing.h"
+//#include "aura/node/operating_system/windows/windowing.h"
 #include "acme/constant/timer.h"
 #include "apex/platform/app_core.h"
 #include "interaction_impl.h"

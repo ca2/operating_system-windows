@@ -332,7 +332,9 @@ namespace windows
       if (!::ReadFile((HANDLE)m_handleFile, pdata, (::u32)nCount, &dwRead, nullptr))
       {
 
-         throw ::windows_file_exception(::error_io, ::GetLastError(), m_path);
+         auto lastError = ::GetLastError();
+
+         throw ::windows_file_exception(::error_io, lastError, m_path);
 
       }
 

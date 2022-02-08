@@ -87,6 +87,10 @@ namespace windows
 
       bool resolve_lnk_link(::file::path & path, const ::string & strSource, string * pstrDirectory = nullptr, string * pstrParams = nullptr);
 
+      bool has_alias_in_path(const char * psz, bool bNoUI = false, bool bNoMount = false) override;
+
+      bool is_alias(const char * psz) override;
+
 
       DECLSPEC_NO_RETURN void raise_exception(u32 dwExceptionCode, u32 dwExceptionFlags);
 

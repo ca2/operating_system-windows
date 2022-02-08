@@ -2113,6 +2113,22 @@ retry:
    }
 
 
+   bool os_context::has_alias_in_path(const char * psz, bool bNoUI, bool bNoMount)
+   {
+
+      return false;
+
+   }
+
+
+   bool os_context::is_alias(const char * psz)
+   {
+
+      return ::str::ends_ci(psz, ".lnk");
+
+   }
+
+
    void os_context::get_default_browser(string & strId, ::file::path & path, string & strParam)
    {
 
