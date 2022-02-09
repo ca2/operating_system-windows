@@ -646,7 +646,7 @@ wstring windowing::_windows_register_window_class(::u32 nClassStyle, HCURSOR hCu
    if (!_windows_register_class(&wndcls))
    {
 
-      __throw(error_resource);
+      throw ::exception(error_resource);
 
    }
 
@@ -660,7 +660,7 @@ wstring windowing::_windows_register_window_class(::u32 nClassStyle, HCURSOR hCu
 }//namespace windowing_win32
 
 
-lresult CALLBACK WndProc(HWND hWnd, const ::id & id, wparam wParam, lparam lParam);
+lresult CALLBACK WndProc(HWND hWnd, const ::atom & atom, wparam wParam, lparam lParam);
 
 //bool windows_register_class(HINSTANCE hinstance)
 //{

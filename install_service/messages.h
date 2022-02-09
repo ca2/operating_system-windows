@@ -1277,7 +1277,7 @@
 // MessageText:
 //
 // Service %1 application %2 exited with exit code 0 but the default exit action is %3.
-// Honouring the %4 action would result in the service being flagged as failed and subject to recovery actions.
+// Honouring the %4 action would result in the service being flagged as failed and topic to recovery actions.
 // The service will instead be stopped gracefully.  To suppress this message, explicitly configure the exit action for exit code 0 to either %5 or %6.
 //
 #define NSSM_EVENT_GRACEFUL_SUICIDE      0x400003FDL
@@ -1490,7 +1490,7 @@
 //
 // MessageText:
 //
-// Error configuring service failure actions for service %1.  The service will not be subject to recovery actions if it exits gracefully with a non-zero exit code.
+// Error configuring service failure actions for service %1.  The service will not be topic to recovery actions if it exits gracefully with a non-zero exit code.
 // ChangeServiceConfig2() failed:
 // %2
 //

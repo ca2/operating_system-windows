@@ -69,7 +69,7 @@ namespace windows
       if (!::StartServiceCtrlDispatcherW(serviceTable))
       {
 
-         __throw(error_failed);
+         throw ::exception(error_failed);
 
       }
 
@@ -106,7 +106,7 @@ namespace windows
 
          DWORD dwLastError = ::GetLastError();
 
-         __throw(error_failed);
+         throw ::exception(error_failed);
 
       }
 
@@ -278,7 +278,7 @@ namespace windows
       if (1 != argumentCount || 0 == arguments || 0 == arguments[0])
       {
 
-         __throw(error_invalid_argument);
+         throw ::exception(error_bad_argument);
 
       }
 
@@ -291,7 +291,7 @@ namespace windows
 
          DWORD dwLastError = ::GetLastError();
          
-         __throw(error_failed);
+         throw ::exception(error_failed);
 
       }
 
@@ -309,7 +309,7 @@ namespace windows
       {
 
          //
-         // If the service can't start it should __throw( an exception from the
+         // If the service can't start it should throw ::exception( an exception from the
          // Start method. If this happens, we catch it here and notify the
          // SCM so that it can log the error code.
          //

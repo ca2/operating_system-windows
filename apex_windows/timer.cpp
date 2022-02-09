@@ -49,7 +49,7 @@ VOID CALLBACK apex_timer_TimerRoutine(PVOID pParam, BOOLEAN TimerOrWaitFired);
 //   if(nullptr == m_hTimerQueue)
 //   {
 //
-//      __throw(::exception("integer_exception -1"));
+//      throw ::exception(::exception("integer_exception -1"));
 //
 //   }
 //

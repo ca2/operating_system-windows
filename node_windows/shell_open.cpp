@@ -102,7 +102,7 @@ namespace windows
 
          str.release_string_buffer();
 
-         //__throw(error_not_implemented);
+         //throw ::not_implemented();
          /*
          // execute the command
          if (!psystem->OnDDECommand( (char *)(const wchar_t *)str))

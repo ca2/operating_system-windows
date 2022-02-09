@@ -4,6 +4,7 @@
 #include <shobjidl.h>
 #include <ShellApi.h>
 #include <Security.h>
+#include "acme/operating_system/time.h"
 #include "acme/filesystem/filesystem/acme_dir.h"
 #include "acme/filesystem/filesystem/acme_path.h"
 
@@ -1410,7 +1411,7 @@ retry:
       if (strServiceName.is_empty())
       {
 
-         throw_status(error_invalid_argument);
+         throw_status(error_bad_argument);
 
       }
 
@@ -1474,7 +1475,7 @@ retry:
       if (strServiceName.is_empty())
       {
 
-         throw_status(error_invalid_argument);
+         throw_status(error_bad_argument);
 
       }
 
@@ -2108,6 +2109,22 @@ retry:
       }
 
       return bOk;
+
+   }
+
+
+   bool os_context::has_alias_in_path(const char * psz, bool bNoUI, bool bNoMount)
+   {
+
+      return false;
+
+   }
+
+
+   bool os_context::is_alias(const char * psz)
+   {
+
+      return ::str::ends_ci(psz, ".lnk");
 
    }
 

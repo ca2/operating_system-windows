@@ -71,7 +71,7 @@ namespace windowing_win32
       void modify_icon(::windowing::icon * picon) override;
 
       
-      void create_notify_icon(const ::id & id, ::user::interaction * puserinteractionNotify, ::windowing::icon * picon) override;
+      void create_notify_icon(const ::atom & atom, ::user::interaction * puserinteractionNotify, ::windowing::icon * picon) override;
 
 
       DECLARE_MESSAGE_HANDLER(on_message_notify_icon);

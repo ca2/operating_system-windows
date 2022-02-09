@@ -5,7 +5,7 @@
 
 #include "acme/printer.h"
 
-#include "acme/user/print_job.h"
+#include "acme/user/user/print_job.h"
 
 #include "print_job.h"
 

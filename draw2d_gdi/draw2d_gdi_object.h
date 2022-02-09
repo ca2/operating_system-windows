@@ -43,7 +43,7 @@ namespace draw2d_gdi
       bool UnrealizeObject();
 
       void dump(dump_context & dumpcontext) const override;
-      void assert_valid() const override;
+      void assert_ok() const override;
 
       void * detach_os_data();
 

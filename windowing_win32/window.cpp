@@ -24,7 +24,7 @@ HRESULT SetTouchDisableProperty(HWND hwnd, BOOL fDisableTouch);
 extern CLASS_DECL_ACME const unichar gen_Wnd[];           // simple child windows/controls
 extern CLASS_DECL_ACME const unichar gen_WndControlBar[]; // controls with gray backgrounds
 extern CLASS_DECL_ACME const unichar gen_WndMDIFrame[];
-extern CLASS_DECL_ACME const unichar gen_WndFrameOrView[];
+extern CLASS_DECL_ACME const unichar gen_WndFrameOrImpact[];
 extern CLASS_DECL_ACME const unichar gen_WndOleControl[];
 
 
@@ -104,10 +104,10 @@ namespace windowing_win32
    }
 
 
-   void window::assert_valid() const
+   void window::assert_ok() const
    {
 
-      //::windowing_win32::window::assert_valid();
+      //::windowing_win32::window::assert_ok();
 
       //if (((::windowing_win32::window *)this)->get_hwnd() == nullptr)
       //   return;     // null (unattached) windows are valid
@@ -624,23 +624,23 @@ namespace windowing_win32
 
          string strLparamString;
 
-         if (pmessage->m_id == WM_SETTINGCHANGE && wparam == 0)
+         if (pmessage->m_atom == WM_SETTINGCHANGE && wparam == 0)
          {
 
             strLparamString = (const WCHAR *) (LPARAM(lparam));
 
          }
 
-         if (pmessage->m_id == WM_FONTCHANGE)
+         if (pmessage->m_atom == WM_FONTCHANGE)
          {
 
             auto psystem = m_psystem->m_paurasystem;
 
             psystem->signal(id_operating_system_font_list_change);
 
-            //auto psubject = psystem->subject(id_os_font_change);
+            //auto ptopic = psystem->topic(id_os_font_change);
 
-            //psystem->handle_subject(psubject);
+            //psystem->handle_subject(ptopic);
 
             //fork([this]()
               // {
@@ -651,7 +651,7 @@ namespace windowing_win32
 
          //}
          }
-         else if (pmessage->m_id == WM_SETTINGCHANGE && strLparamString == "ImmersiveColorSet")
+         else if (pmessage->m_atom == WM_SETTINGCHANGE && strLparamString == "ImmersiveColorSet")
          {
 
             auto pnode = m_psystem->m_pnode;
@@ -659,8 +659,8 @@ namespace windowing_win32
             pnode->fetch_user_color();
 
          }
-         else if (pmessage->m_id == e_message_display_change ||
-            (pmessage->m_id == WM_SETTINGCHANGE &&
+         else if (pmessage->m_atom == e_message_display_change ||
+            (pmessage->m_atom == WM_SETTINGCHANGE &&
                (pmessage->m_wparam == SPI_SETWORKAREA)))
          {
 
@@ -698,9 +698,9 @@ namespace windowing_win32
    void window::_001OnTaskbarCreated(::message::message* pmessage)
    {
 
-      ::subject subject(e_subject_task_bar_created);
+      ::topic topic(id_task_bar_created);
 
-      m_puserinteractionimpl->m_puserinteraction->handle(&subject, nullptr);
+      m_puserinteractionimpl->m_puserinteraction->handle(&topic, nullptr);
 
    }
 
@@ -1425,7 +1425,7 @@ namespace windowing_win32
 
       //}
 
-      //if (attr.map_state == IsViewable)
+      //if (attr.map_state == IsImpactable)
       //{
 
       //   mapped_net_state_raw(true, d, window(), m_iScreen, intern_atom(net_wm_state_fullscreen, false), 0);
@@ -1476,7 +1476,7 @@ namespace windowing_win32
 
       //}
 
-      //if (attr.map_state == IsViewable)
+      //if (attr.map_state == IsImpactable)
       //{
 
       //   mapped_net_state_raw(false, d, window(), m_iScreen, intern_atom(net_wm_state_hidden, false), 0);
@@ -1515,7 +1515,7 @@ namespace windowing_win32
 
       //}
 
-      //if (attr.map_state == IsViewable)
+      //if (attr.map_state == IsImpactable)
       //{
 
       //   mapped_net_state_raw(false, d, window(), m_iScreen, intern_atom("_NET_WM_STATE_FULLSCREEN", false), 0);
@@ -1556,7 +1556,7 @@ namespace windowing_win32
 
       //}
 
-      //if (attr.map_state == IsViewable)
+      //if (attr.map_state == IsImpactable)
       //{
 
       //   mapped_net_state_raw(false, d, window(), m_iScreen,
@@ -1599,7 +1599,7 @@ namespace windowing_win32
    //__pointer(window) window::get_active_window()
    //{
 
-   //   throw ::interface_only_exception();
+   //   throw ::interface_only();
 
    //   return nullptr;
 
@@ -2177,7 +2177,7 @@ namespace windowing_win32
 //      if (nFlags & SWP_HIDEWINDOW)
 //      {
 //
-//         if (attrs.map_state == IsViewable)
+//         if (attrs.map_state == IsImpactable)
 //         {
 //
 //            windowing_output_debug_string("\n::window::set_window_position Withdraw Window 1.4.3");
@@ -2197,7 +2197,7 @@ namespace windowing_win32
 //
 //      }
 //
-//      if (attrs.map_state == IsViewable || (nFlags & SWP_SHOWWINDOW))
+//      if (attrs.map_state == IsImpactable || (nFlags & SWP_SHOWWINDOW))
 //      {
 //
 //         if (!(nFlags & SWP_NOZORDER))
@@ -2362,7 +2362,7 @@ namespace windowing_win32
    //void window::message_handler(::message::message * pmessage)
    //{
    //   
-   //   if (pmessage->m_id == (enum_message)WM_SYSCOMMAND)
+   //   if (pmessage->m_atom == (enum_message)WM_SYSCOMMAND)
    //   {
 
    //      if (pmessage->m_wparam == SC_SCREENSAVE)
@@ -2553,7 +2553,7 @@ namespace windowing_win32
       rectanglePaint = paint.rcPaint;
 
 
-      __throw(todo);
+      throw ::exception(todo);
 
       //if (rectanglePaint.is_null() || (GetExStyle() & WS_EX_LAYERED))
       //{
@@ -2860,7 +2860,7 @@ namespace windowing_win32
 
       HWND hwnd = __hwnd(pmessage->m_oswindow);
 
-      UINT message = pmessage->m_id.u32();
+      UINT message = pmessage->m_atom.u32();
 
       WPARAM wparam = pmessage->m_wparam;
 
@@ -2961,20 +2961,20 @@ namespace windowing_win32
    //}
 
 
-   lresult window::send_message(const ::id & id, wparam wParam, lparam lParam)
+   lresult window::send_message(const ::atom & atom, wparam wParam, lparam lParam)
    {
 
-      return ::SendMessage(get_hwnd(), id.umessage(), wParam, lParam);
+      return ::SendMessage(get_hwnd(), atom.umessage(), wParam, lParam);
 
    }
 
 
-   bool window::post_message(const ::id & id, wparam wParam, lparam lParam)
+   bool window::post_message(const ::atom & atom, wparam wParam, lparam lParam)
    {
 
       HWND hwnd = get_hwnd();
 
-      ::u32 message = id.umessage();
+      ::u32 message = atom.umessage();
 
       wparam wparam = wParam;
 
@@ -3325,7 +3325,7 @@ namespace windowing_win32
 
       auto pgraphics = __create < ::draw2d::graphics >();
 
-      __throw(todo);
+      throw ::exception(todo);
 
       //pgraphics->attach(::GetDCEx(get_hwnd(), (HRGN)prgnClip->get_os_data(), flags));
 
@@ -3461,7 +3461,7 @@ namespace windowing_win32
 
       ASSERT(::IsWindow(get_hwnd()));
 
-      throw interface_only_exception();
+      throw ::interface_only();
       return false;
       //      return ::DrawCaption(get_hwnd(), (HDC)(dynamic_cast<::windows::graphics * >(pgraphics))->get_hwnd(), prc, uFlags) != false;
 
@@ -3551,7 +3551,7 @@ namespace windowing_win32
    //   for (i32 nID = nIDFirstButton; nID <= nIDLastButton; nID++)
    //   {
    //      if (IsDlgButtonChecked(nID))
-   //         return nID; // id that matched
+   //         return nID; // atom that matched
    //   }
    //   return 0; // invalid ID
    //}
@@ -3625,14 +3625,14 @@ namespace windowing_win32
    //}
 
 
-   //void window::get_child_by_id(id id, hwnd * poswindow_) const
+   //void window::get_child_by_id(atom atom, hwnd * poswindow_) const
    //{
 
    //   ASSERT(::IsWindow(((window *)this)->get_hwnd()));
 
    //   ASSERT(poswindow_ != nullptr);
 
-   //   *poswindow_ = ::GetDlgItem(((window *)this)->get_hwnd(), (i32)id);
+   //   *poswindow_ = ::GetDlgItem(((window *)this)->get_hwnd(), (i32)atom);
 
    //}
 
@@ -3836,12 +3836,12 @@ namespace windowing_win32
    //}
 
 
-   //hwnd window::SetClipboardViewer()
+   //hwnd window::SetClipboardImpacter()
    //{
 
    //   ASSERT(::IsWindow(get_hwnd()));
 
-   //   return ::SetClipboardViewer(get_hwnd());
+   //   return ::SetClipboardImpacter(get_hwnd());
 
    //}
 
@@ -3910,10 +3910,10 @@ namespace windowing_win32
    //}
 
    
-   //::user::interaction * window::GetClipboardViewer()
+   //::user::interaction * window::GetClipboardImpacter()
    //{
 
-   //   return psystem->ui_from_handle(::GetClipboardViewer());
+   //   return psystem->ui_from_handle(::GetClipboardImpacter());
 
    //}
 
@@ -3975,7 +3975,7 @@ namespace windowing_win32
 
    //   ASSERT(::IsWindow(((window *)this)->get_hwnd()));
 
-   //   throw interface_only_exception();
+   //   throw ::interface_only();
    //   //      const_cast < ::windowing_win32::window * > (this)->send_message(WM_PRINT, (wparam)(dynamic_cast<::windows::graphics * >(pgraphics))->get_hwnd(), (lparam) dwFlags);
 
    //}
@@ -3985,7 +3985,7 @@ namespace windowing_win32
 
    //   ASSERT(::IsWindow(((window *)this)->get_hwnd()));
 
-   //   throw interface_only_exception();
+   //   throw ::interface_only();
    //   //const_cast < ::windowing_win32::window * > (this)->send_message(WM_PRINTCLIENT, (wparam)(dynamic_cast<::windows::graphics * >(pgraphics))->get_hwnd(), (lparam) dwFlags);
 
    //}
@@ -4936,12 +4936,12 @@ namespace windowing_win32
 
    void window::on_set_parent(::user::interaction * puserinteraction) {
 
-      throw ::interface_only_exception();
+      throw ::interface_only();
    }
 
     bool window::get_rect_normal(RECTANGLE_I32 * prectangle) {
 
-       throw ::interface_only_exception();
+       throw ::interface_only();
        return false;
     }
 
@@ -4949,7 +4949,7 @@ namespace windowing_win32
     //void window::show_task(bool bShow)
     //{
 
-    //   throw ::interface_only_exception();
+    //   throw ::interface_only();
 
     //}
     //
@@ -4957,7 +4957,7 @@ namespace windowing_win32
     void window::window_show_change_visibility(::e_display edisplay, ::e_activation eactivation)
     {
 
-       throw ::interface_only_exception();
+       throw ::interface_only();
 
     }
 
@@ -5333,13 +5333,13 @@ namespace windowing_win32
    //   if (pfnWndProc == nullptr)
    //   {
 
-   //      lresult = ::DefWindowProcW(m_oswindow, (::u32)pmessage->m_id.i64(), pmessage->m_wparam, pmessage->m_lparam);
+   //      lresult = ::DefWindowProcW(m_oswindow, (::u32)pmessage->m_atom.i64(), pmessage->m_wparam, pmessage->m_lparam);
 
    //   }
    //   else
    //   {
 
-   //      lresult = ::CallWindowProc(pfnWndProc, m_oswindow, (::u32)pmessage->m_id.i64(), pmessage->m_wparam, pmessage->m_lparam);
+   //      lresult = ::CallWindowProc(pfnWndProc, m_oswindow, (::u32)pmessage->m_atom.i64(), pmessage->m_wparam, pmessage->m_lparam);
 
    //   }
 
@@ -5427,7 +5427,7 @@ namespace windowing_win32
 //
 //      ::u32 message;
 //
-//      message = pmessage->m_id.umessage();
+//      message = pmessage->m_atom.umessage();
 //
 //      m_uiMessage = message;
 //
@@ -5962,7 +5962,7 @@ namespace windowing_win32
 //      //   else
 //      //   {
 //      //      
-//      //      pmessage->set_lresult(::DefWindowProcW(m_oswindow, pmessage->m_id, pmessage->m_wparam, pmessage->m_lparam));
+//      //      pmessage->set_lresult(::DefWindowProcW(m_oswindow, pmessage->m_atom, pmessage->m_wparam, pmessage->m_lparam));
 //
 //      //   }
 //

@@ -69,7 +69,7 @@ void imm_client::_011OnChar(::message::message * pmessage)
 
    __pointer(::user::message) pusermessage(pmessage);
 
-   if (pmessage->m_id == e_message_char)
+   if (pmessage->m_atom == e_message_char)
    {
 
       auto psession = m_puserinteraction->get_session();
@@ -133,7 +133,7 @@ void imm_client::_001OnIme(::message::message * pmessage)
 
    __pointer(::user::message) pusermessage(pmessage);
 
-   if (pmessage->m_id == WM_INPUTLANGCHANGE)
+   if (pmessage->m_atom == WM_INPUTLANGCHANGE)
    {
 
       ::output_debug_string("WM_INPUTLANGCHANGE");
@@ -162,14 +162,14 @@ void imm_client::_001OnIme(::message::message * pmessage)
       //   });
 
    }
-   else if (pmessage->m_id == WM_IME_SELECT)
+   else if (pmessage->m_atom == WM_IME_SELECT)
    {
 
       //SetInputLanguage();
       ::output_debug_string("\nWM_IME_SELECT");
 
    }
-   else if (pmessage->m_id == WM_IME_SETCONTEXT)
+   else if (pmessage->m_atom == WM_IME_SETCONTEXT)
    {
 
       //EnableIME();
@@ -177,7 +177,7 @@ void imm_client::_001OnIme(::message::message * pmessage)
       ::output_debug_string("\nWM_IME_SETCONTEXT");
 
    }
-   else if (pmessage->m_id == WM_IME_COMPOSITION)
+   else if (pmessage->m_atom == WM_IME_COMPOSITION)
    {
 
       if (pmessage->m_lparam == 0)
@@ -270,13 +270,13 @@ void imm_client::_001OnIme(::message::message * pmessage)
       pusermessage->m_bRet = true;
 
    }
-   else if (pmessage->m_id == WM_IME_KEYDOWN)
+   else if (pmessage->m_atom == WM_IME_KEYDOWN)
    {
 
       ::output_debug_string("\nWM_IME_KEYDOWN");
 
    }
-   else if (pmessage->m_id == WM_IME_ENDCOMPOSITION)
+   else if (pmessage->m_atom == WM_IME_ENDCOMPOSITION)
    {
 
       //::output_debug_string("WM_IME_ENDCOMPOSITION");
@@ -319,7 +319,7 @@ void imm_client::_001OnIme(::message::message * pmessage)
       }
 
    }
-   else if (pmessage->m_id == WM_IME_STARTCOMPOSITION)
+   else if (pmessage->m_atom == WM_IME_STARTCOMPOSITION)
    {
 
       ::output_debug_string("\nWM_IME_STARTCOMPOSITION");
@@ -342,7 +342,7 @@ void imm_client::_001OnIme(::message::message * pmessage)
       pusermessage->m_bRet = true;
 
    }
-   else if (pmessage->m_id == WM_IME_NOTIFY)
+   else if (pmessage->m_atom == WM_IME_NOTIFY)
    {
 
       if (pusermessage->m_wparam == IMN_CHANGECANDIDATE)

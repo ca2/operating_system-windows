@@ -25,9 +25,9 @@ namespace production
 
 
 #ifdef DEBUG
-   void pane_view::assert_valid() const
+   void pane_view::assert_ok() const
    {
-      ::user::impact::assert_valid();
+      ::user::impact::assert_ok();
    }
 
    void pane_view::dump(dump_context & dumpcontext) const
@@ -53,10 +53,10 @@ namespace production
    }
 
 
-   void pane_view::handle(::subject * psubject, ::context * pcontext)
+   void pane_view::handle(::topic * ptopic, ::context * pcontext)
    {
 
-      ::user::tab_view::handle(psubject, pcontext);
+      ::user::tab_view::handle(ptopic, pcontext);
 
    }
 
@@ -80,7 +80,7 @@ namespace production
 
    void pane_view::on_create_impact(::user::impact_data * pcreatordata)
    {
-      switch(pcreatordata->m_id)
+      switch(pcreatordata->m_atom)
       {
       case CONTEXT_MENU_IMPACT:
       {
@@ -191,17 +191,17 @@ namespace production
 
          m_pviewOptions->m_pcallback = this;
 
-         auto pupdate = subject(id_browse);
+         auto pupdate = topic(id_browse);
          pupdate->m_actioncontext = ::e_source_system;
-         psubject->id() = ;
-         psubject->payload(id_form) = "production\\options.xhtml";
-         pdocument->update_all_views(psubject);
+         ptopic->m_atom = ;
+         ptopic->get_extended_topic()->payload(id_form) = "production\\options.xhtml";
+         pdocument->update_all_views(ptopic);
 
-         psubject->id() = id_get_form_view;
-         pdocument->update_all_views(psubject);
+         ptopic->m_atom = id_get_form_view;
+         pdocument->update_all_views(ptopic);
 
-         psubject->id() = id_after_browse;
-         pdocument->update_all_views(psubject);
+         ptopic->m_atom = id_after_browse;
+         pdocument->update_all_views(ptopic);
 
 
          pcreatordata->m_puserinteraction = (pview->get_parent_frame());
@@ -223,7 +223,7 @@ namespace production
    void pane_view::_001OnMenuMessage(::message::message * pmessage)
    {
       __UNREFERENCED_PARAMETER(pmessage);
-      set_current_tab_by_id(m_pimpactdataOld->m_id);
+      set_current_tab_by_id(m_pimpactdataOld->m_atom);
    }
 
    void pane_view::install_message_routing(::channel * pchannel)
@@ -251,25 +251,25 @@ namespace production
       get_parent_frame()->hide();
    }
 
-   void pane_view::handle(::subject * psubject, ::context * pcontext)
+   void pane_view::handle(::topic * ptopic, ::context * pcontext)
    {
-      if(psubject->m_id == ::e_subject_set_check)
+      if(ptopic->m_atom == ::id_set_check)
       {
-         if(psubject->user_element_id() == "clean")
+         if(ptopic->user_element_id() == "clean")
          {
             __pointer(::user::interaction) pinteraction = m_pviewOptions->get_child_by_id("clean");
             __pointer(::user::check_box) pcheckbox =  (pinteraction);
-            auto psubject = subject(id_clean);
-            psubject->payload(id_clean) = pcheckbox->echeck() == ::check_checked;
-            get_document()->update_all_views(psubject);
+            auto ptopic = topic(id_clean);
+            ptopic->get_extended_topic()->payload(id_clean) = pcheckbox->echeck() == ::check_checked;
+            get_document()->update_all_views(ptopic);
          }
-         else if(psubject->user_element_id() == "build")
+         else if(ptopic->user_element_id() == "build")
          {
             __pointer(::user::interaction) pinteraction = m_pviewOptions->get_child_by_id("build");
             __pointer(::user::check_box) pcheckbox =  (pinteraction);
-            auto psubject = new_action(id_build);
-            psubject->payload(id_build) = pcheckbox->echeck() == ::check_checked;
-            get_document()->update_all_views(psubject);
+            auto ptopic = new_action(id_build);
+            ptopic->get_extended_topic()->payload(id_build) = pcheckbox->echeck() == ::check_checked;
+            get_document()->update_all_views(ptopic);
 
          }
 

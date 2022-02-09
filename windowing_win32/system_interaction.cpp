@@ -77,21 +77,21 @@ namespace windowing_win32
 
          string strLparamString;
 
-         if (pmessage->m_id == WM_SETTINGCHANGE && wparam == 0)
+         if (pmessage->m_atom == WM_SETTINGCHANGE && wparam == 0)
          {
 
             strLparamString = (const WCHAR *)(LPARAM(lparam));
 
          }
 
-         if (pmessage->m_id == WM_FONTCHANGE)
+         if (pmessage->m_atom == WM_FONTCHANGE)
          {
 
             auto psystem = m_psystem->m_paurasystem;
 
             psystem->signal(id_operating_system_font_list_change);/*
 
-            psystem->handle_subject(psubject);*/
+            psystem->handle_subject(ptopic);*/
 
             //fork([this]()
               // {
@@ -103,7 +103,7 @@ namespace windowing_win32
          //}
          }
          else if (
-            pmessage->m_id == WM_SETTINGCHANGE &&
+            pmessage->m_atom == WM_SETTINGCHANGE &&
             strLparamString == "ImmersiveColorSet")
          {
 
@@ -111,13 +111,13 @@ namespace windowing_win32
 
             psystem->m_pnode->fetch_user_color();
 
-            /*auto psubject = psystem->subject(id_os_dark_mode);
+            /*auto ptopic = psystem->topic(id_os_dark_mode);
 
-            psystem->handle_subject(psubject);*/
+            psystem->handle_subject(ptopic);*/
 
          }
-         else if (pmessage->m_id == e_message_display_change ||
-            (pmessage->m_id == WM_SETTINGCHANGE &&
+         else if (pmessage->m_atom == e_message_display_change ||
+            (pmessage->m_atom == WM_SETTINGCHANGE &&
                (pmessage->m_wparam == SPI_SETWORKAREA)))
          {
 

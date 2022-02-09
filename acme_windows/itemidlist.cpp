@@ -332,7 +332,7 @@ itemidlist & itemidlist::operator=(const ::string & pszPath)
    if (!parse(pszPath))
    {
 
-      __throw(error_resource, "Failed to parse the path " + string (pszPath));
+      throw ::exception(error_resource, "Failed to parse the path " + string (pszPath));
 
    }
 
@@ -370,7 +370,7 @@ LPITEMIDLIST itemidlist::_cat(LPCITEMIDLIST pidl1, LPCITEMIDLIST pidl2)
 //   if (FAILED(SHGetMalloc(&pmalloc)))
 //   {
 //
-//      __throw(error_no_memory);
+//      throw ::exception(error_no_memory);
 //
 //      return nullptr;
 //
@@ -381,7 +381,7 @@ LPITEMIDLIST itemidlist::_cat(LPCITEMIDLIST pidl1, LPCITEMIDLIST pidl2)
 //   if (pidl == nullptr)
 //   {
 //
-//      __throw(error_no_memory);
+//      throw ::exception(error_no_memory);
 //
 //      return nullptr;
 //
@@ -1011,7 +1011,7 @@ bool itemidlist::get_refid_for_known_folder(KNOWNFOLDERID & refid, const ::strin
    if(::is_set(pknownfolderstruct))
    {
 
-      refid = pknownfolderstruct->m_idKnownFolder;
+      refid = pknownfolderstruct->m_atomKnownFolder;
 
       return true;
 
@@ -1049,7 +1049,7 @@ HRESULT itemidlist::get_item_in_known_folder(itemidlist & idl, const string & st
             ITEMIDLIST * pidl = nullptr;
 
             hr = SHGetKnownFolderIDList(
-               pknownfolder->m_idKnownFolder,
+               pknownfolder->m_atomKnownFolder,
                0,
                hToken,
                &pidl);

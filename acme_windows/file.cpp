@@ -1,7 +1,5 @@
 #include "framework.h"
-//#include "acme/operating_system.h"
-//#include "acme/os/windows_common/_file_c.h"
-//#include "acme/os/windows_common/file.h"
+#include "acme/operating_system/time.h"
 #include "file.h"
 
 
@@ -334,7 +332,9 @@ namespace windows
       if (!::ReadFile((HANDLE)m_handleFile, pdata, (::u32)nCount, &dwRead, nullptr))
       {
 
-         throw ::windows_file_exception(::error_io, ::GetLastError(), m_path);
+         auto lastError = ::GetLastError();
+
+         throw ::windows_file_exception(::error_io, lastError, m_path);
 
       }
 
@@ -640,17 +640,17 @@ namespace windows
       //dwCur = pFile->seek(0L, ::e_seek_current);
       //dwLen = pFile->seek_to_end();
       //if (dwCur != (u64)pFile->seek((filesize)dwCur, ::e_seek_set))
-      //   __throw(::exception("file cursor not in same place after getting length"));
+      //   throw ::exception(::exception("file cursor not in same place after getting length"));
 
       return (filesize)((((::u64) dwHi) << 32) | ((::u64) dwLo));
 
    }
 
 
-   void file::assert_valid() const
+   void file::assert_ok() const
    {
 
-      ::matter::assert_valid();
+      ::matter::assert_ok();
       
    }
 

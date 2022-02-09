@@ -199,7 +199,7 @@ pacmedir->system() / "config/plugin/appfy_beg_debug_box.txt"))
 
          os_output_error_message("Incorrect Number of Arguments passed to appfy. Expected 3 or 4; passed " + __string(__argc - 1), "", e_message_box_ok);
 
-         papplication->m_result.add(error_invalid_argument);
+         papplication->m_result.add(error_bad_argument);
 
          return;
 
@@ -569,7 +569,7 @@ pacmedir->system() / "config/plugin/appfy_beg_debug_box.txt"))
 void init_exception_engine(class ::exception_engine * pexceptionengine)
 {
 
-   new(pexceptionengine) class ::PLATFORM_NAMESPACE::exception_engine;
+   new(pexceptionengine) class ::OPERATING_SYSTEM_NAMESPACE::exception_engine;
 
 }
 

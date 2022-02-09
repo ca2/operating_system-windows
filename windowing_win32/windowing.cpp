@@ -498,8 +498,8 @@ namespace windowing_win32
    __pointer(::user::message) windowing::get_user_message(MESSAGE * pmsg)
    {
 
-      //__throw(todo("message"));
-      //__throw(todo("interaction"));
+      //throw ::exception(todo("message"));
+      //throw ::exception(todo("interaction"));
       ::windowing::window * pwindow = nullptr;
 
       //if (pinteraction == nullptr && pmsg->hwnd != nullptr)
@@ -557,14 +557,14 @@ namespace windowing_win32
 
       }
 
-      pusermessage->set(pmsg->oswindow, pwindow, pmsg->m_id, pmsg->wParam, pmsg->lParam);
+      pusermessage->set(pmsg->oswindow, pwindow, pmsg->m_atom, pmsg->wParam, pmsg->lParam);
 
       return pusermessage;
 
    }
 
 
-   void windowing::set(message::key * pkey, oswindow oswindow, ::windowing::window * pwindow, const ::id & id, wparam wparam, ::lparam lparam)
+   void windowing::set(message::key * pkey, oswindow oswindow, ::windowing::window * pwindow, const ::atom & atom, wparam wparam, ::lparam lparam)
    {
 
       pkey->m_nChar = static_cast<::u32>(wparam);
@@ -579,12 +579,12 @@ namespace windowing_win32
 
       pkey->m_iVirtualKey = (int)MapLeftRightKeys(wparam, lparam);
 
-      ::windowing::windowing::set(pkey, oswindow, pwindow, id, wparam, lparam);
+      ::windowing::windowing::set(pkey, oswindow, pwindow, atom, wparam, lparam);
 
    }
 
 
-   void windowing::set(::message::mouse * pmouse, oswindow oswindow, ::windowing::window * pwindow, const ::id & id, wparam wparam, ::lparam lparam)
+   void windowing::set(::message::mouse * pmouse, oswindow oswindow, ::windowing::window * pwindow, const ::atom & atom, wparam wparam, ::lparam lparam)
    {
 
       pmouse->m_nFlags = wparam;
@@ -993,14 +993,14 @@ namespace windowing_win32
    }
 
 
-   //void windowing::set(::message::key * pkey, oswindow oswindow, ::windowing::window * pwindow, const ::id & id, wparam wparam, ::lparam lparam)
+   //void windowing::set(::message::key * pkey, oswindow oswindow, ::windowing::window * pwindow, const ::atom & atom, wparam wparam, ::lparam lparam)
    //{
 
 
    //}
 
 
-   //void windowing::set(::message::mouse * pmouse, oswindow oswindow, ::windowing::window * pwindow, const ::id & id, wparam wparam, ::lparam lparam)
+   //void windowing::set(::message::mouse * pmouse, oswindow oswindow, ::windowing::window * pwindow, const ::atom & atom, wparam wparam, ::lparam lparam)
    //{
 
 
@@ -1198,7 +1198,7 @@ namespace windowing_win32
 //
 //      auto pdocument = m_mapimpactsystem[COLORSEL_IMPACT]->open_document_file(puiOwner->get_application(), ::e_type_null, __visible(true));
 //
-//      __pointer(::userex::color_view) pview = pdocument->get_typed_view < ::userex::color_view >();
+//      __pointer(::userex::color_view) pview = pdocument->get_type_impact < ::userex::color_view >();
 //
 //      __pointer(::user::frame_window) pframe = pview->top_level_frame();
 //

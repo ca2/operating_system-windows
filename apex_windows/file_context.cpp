@@ -1,5 +1,6 @@
 #include "framework.h"
 #include "apex/operating_system.h"
+#include "acme/operating_system/time.h"
 #include "acme/filesystem/filesystem/acme_dir.h"
 #include "file_context.h"
 
@@ -246,7 +247,7 @@ namespace windows
 
          strError.format("Failed to move file \"%s\" to \"%s\" error=%d", psz, pszNew, dwError);
 
-         __throw(::error_io, strError);
+         throw ::exception(::error_io, strError);
 
       }
 
@@ -259,7 +260,7 @@ namespace windows
 
          //output_debug_string("test");
 
-         __throw(::exception("file::file_context::move Could not move file, could not open source file"));
+         throw ::exception(::exception("file::file_context::move Could not move file, could not open source file"));
 
       }
 
@@ -299,7 +300,7 @@ namespace windows
          i32 err = errno;
          string strError;
          strError.Format("Failed to delete file error=%d", err);
-         __throw(::exception(strError));
+         throw ::exception(::exception(strError));
       }
 #endif
 
@@ -348,7 +349,7 @@ namespace windows
       return;
       string strError;
       strError.Format("Failed to delete file \"%s\" error=%d", psz, dwError);
-      __throw(io_exception(strError));
+      throw ::exception(io_exception(strError));
       }*/
 
 
@@ -361,7 +362,7 @@ namespace windows
          {
             string strError;
             strError.Format("Failed to delete file error=%d", err);
-            __throw(::exception(strError));
+            throw ::exception(::exception(strError));
          }
       }
 #endif
@@ -387,7 +388,7 @@ namespace windows
 
 #elif defined(_UWP)
 
-      __throw(todo);
+      throw ::exception(todo);
 
 #else
 

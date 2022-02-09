@@ -16,49 +16,49 @@ namespace backup
    void form_callback::update(::user::form * pform, ::update & update)
    {
       __UNREFERENCED_PARAMETER(pform);
-      __UNREFERENCED_PARAMETER(psubject);
+      __UNREFERENCED_PARAMETER(ptopic);
    }
 
 
-   void form_callback::handle(::subject * psubject, ::context * pcontext)
+   void form_callback::handle(::topic * ptopic, ::context * pcontext)
    {
 
-      auto pview = psubject->get_form();
+      auto pview = ptopic->get_form();
 
-      if(psubject->m_id == ::e_subject_click)
+      if(ptopic->m_atom == ::id_click)
       {
-         if(psubject->user_element_id() == "lfs")
+         if(ptopic->user_element_id() == "lfs")
          {
             auto pupdate = new_update();
             pupdate->m_actioncontext = ::e_source_system;
-            psubject->id() = id_browse;
-            psubject->payload(id_form) = "filemanager_add_location_lfs.xhtml";
-            dynamic_cast < ::user::form_view * > (pview)->get_document()->update_all_views(psubject);
+            ptopic->m_atom = id_browse;
+            ptopic->get_extended_topic()->payload(id_form) = "filemanager_add_location_lfs.xhtml";
+            dynamic_cast < ::user::form_view * > (pview)->get_document()->update_all_views(ptopic);
             auto pinteraction = pview->get_child_by_name("lfs");
             
             string strPath;
             pinteraction->_001SetText(strPath, pupdate->m_actioncontext);
 
-            psubject->Ret();
+            ptopic->Ret();
 
             return;
 
 
          }
-         else if(psubject->user_element_id() == "ftp")
+         else if(ptopic->user_element_id() == "ftp")
          {
             auto pupdate = new_update();
             pupdate->m_actioncontext = ::e_source_system;
-            psubject->id() = id_browse;
-            psubject->payload(id_form) = "filemanager_add_location_ftp.xhtml";
-            dynamic_cast < ::user::form_view * > (pview)->get_document()->update_all_views(psubject);
-            psubject->Ret();
+            ptopic->m_atom = id_browse;
+            ptopic->get_extended_topic()->payload(id_form) = "filemanager_add_location_ftp.xhtml";
+            dynamic_cast < ::user::form_view * > (pview)->get_document()->update_all_views(ptopic);
+            ptopic->Ret();
 
             return;
 
 
          }
-         else if(psubject->user_element_id() == "submit")
+         else if(ptopic->user_element_id() == "submit")
          {
             /*         if(pview->m_strPathName == "filemanager_add_location_lfs.xhtml")
                      {
@@ -84,9 +84,9 @@ namespace backup
                         pinteraction = pview->get_child_by_name("substituir");
                         ptext =pinteraction;
                         //ptext->_001GetText(update.m_strReplace);
-                        pview->get_document()->update_all_views(psubject);
+                        pview->get_document()->update_all_views(ptopic);
                      }*/
-            psubject->Ret();
+            ptopic->Ret();
 
             return;
 

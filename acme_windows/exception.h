@@ -24,7 +24,7 @@ namespace acme
    NOINLINE inline void WINAPI gen_ThrowLastWin32(::matter * pobject)
    {
       ::u32 dwError = ::GetLastError();
-      __throw(hresult_exception(HRESULT_FROM_WIN32( dwError ) ));
+      throw ::exception(hresult_exception(HRESULT_FROM_WIN32( dwError ) ));
    }
 
 #endif  // no exception handling

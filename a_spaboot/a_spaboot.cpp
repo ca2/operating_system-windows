@@ -16,7 +16,7 @@ int start();
 
 ATOM installer_RegisterClass(HINSTANCE hInstance);
 
-LRESULT CALLBACK installer_WndProc(HWND hWnd,const ::id & id,WPARAM wParam,LPARAM lParam);
+LRESULT CALLBACK installer_WndProc(HWND hWnd,const ::atom & atom,WPARAM wParam,LPARAM lParam);
 
 int APIENTRY _tWinMain(HINSTANCE hInstance,
                      HINSTANCE hPrevInstance,
@@ -183,7 +183,7 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
 
    /*std::string strUrl;
    std::string strApp;
-   strUrl = "http://spaignition.api.veriterse.net/query?node=install_application&id=";
+   strUrl = "http://spaignition.api.veriterse.net/query?node=install_application&atom=";
    strUrl += g_strId;
    strUrl += "&key=application";
    int iRetry = 0;
@@ -466,7 +466,7 @@ ATOM installer_RegisterClass(HINSTANCE hInstance)
 //  e_message_destroy	- post a quit message and return
 //
 //
-LRESULT CALLBACK installer_WndProc(HWND hWnd, const ::id & id, WPARAM wParam, LPARAM lParam)
+LRESULT CALLBACK installer_WndProc(HWND hWnd, const ::atom & atom, WPARAM wParam, LPARAM lParam)
 {
 	switch (message)
 	{

@@ -3339,7 +3339,7 @@ retry1:
 
    /* Destroy a status message */
    /*__memset( statusMsg, 0, 1024 );
-   printf( "\nEnter status message id to delete: " );
+   printf( "\nEnter status message atom to delete: " );
    gets( statusMsg );
    tmpStr = statusMsg;
    replyMsg = "";

@@ -1908,7 +1908,7 @@ namespace acme
 
 #if defined(_UWP)
 
-         throw ::interface_only_exception();
+         throw ::interface_only();
 
 #elif defined(WINDOWS_DESKTOP)
 
@@ -2654,7 +2654,7 @@ int windows_desktop1_main(HINSTANCE hInstance, int nCmdShow);
 
 
 
-#include "apex/node/operating_system/windows/_.h"
+#include "apex/operating_system/windows/_.h"
 
 #endif
 

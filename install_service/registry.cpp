@@ -649,7 +649,7 @@ int get_parameters(nssm_service_t *service, STARTUPINFO *si) {
   override_::durations(service->name, key, NSSM_REG_KILL_WINDOW_GRACE_PERIOD, &service->kill_window_delay, NSSM_KILL_WINDOW_GRACE_PERIOD, NSSM_EVENT_BOGUS_KILL_WINDOW_GRACE_PERIOD);
   override_::durations(service->name, key, NSSM_REG_KILL_THREADS_GRACE_PERIOD, &service->kill_threads_delay, NSSM_KILL_THREADS_GRACE_PERIOD, NSSM_EVENT_BOGUS_KILL_THREADS_GRACE_PERIOD);
 
-  /* Try to get default exit psubject-> */
+  /* Try to get default exit ptopic-> */
   bool default_action;
   service->default_exit_action = NSSM_EXIT_RESTART;
   TCHAR action_string[ACTION_LEN];
@@ -678,7 +678,7 @@ int get_parameters(nssm_service_t *service, STARTUPINFO *si) {
 
   default_action is a pointer to a bool which is set to false if there
   was an explicit string for the given exit code, or true if we are
-  returning the default psubject->
+  returning the default ptopic->
 
   Returns: 0 on success.
            1 on error.

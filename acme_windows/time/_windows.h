@@ -7,7 +7,7 @@
 // {
 
 //    pmessage->oswindow = (oswindow)(pmsg->hwnd);
-//    pmessage->m_id = (enum_message) pmsg->message;
+//    pmessage->m_atom = (enum_message) pmsg->message;
 //    pmessage->wParam = pmsg->wParam;
 //    pmessage->lParam = pmsg->lParam;
 //    pmessage->pt = pmsg->pt;
@@ -20,7 +20,7 @@
 // {
 
 //    pmsg->hwnd = (HWND)(pmessage->oswindow);
-//    pmsg->message = (UINT) pmessage->m_id.i64();
+//    pmsg->message = (UINT) pmessage->m_atom.i64();
 //    pmsg->wParam = pmessage->wParam;
 //    pmsg->lParam = pmessage->lParam;
 //    pmsg->pt.x = pmessage->pt.x;

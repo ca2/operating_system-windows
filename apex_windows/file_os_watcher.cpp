@@ -13,7 +13,7 @@
 //	   in the Software without restriction, including without limitation the rights
 //	   to uxse, cxopy, mxodify, mxerge, pxublish, dxistribute, sxublicense, and/or sxell
 //	   copies of the Software, and to permit persons to whom the Software is
-//	   furnished to do so, subject to the following conditions:
+//	   furnished to do so, topic to the following conditions:
 //
 //
 #include "framework.h"
@@ -185,7 +185,7 @@ namespace file
 
             action.m_pwatch = pwatch;
 
-            action.m_id = pwatch->m_id;
+            action.m_atom = pwatch->m_atom;
 
             action.m_pathFolder = pwatch->m_pathFolder;
 
