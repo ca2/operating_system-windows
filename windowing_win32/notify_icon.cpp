@@ -306,38 +306,38 @@ namespace windowing_win32
 
       }
 
-      ::extended_topic_pointer pextendedtopic;
+      ::topic_pointer ptopic;
 
       if (emessage == e_message_right_button_down)
       {
 
-         pextendedtopic = create_topic(::id_context_menu);
+         ptopic = create_topic(::id_context_menu);
 
       }
       else if (emessage == e_message_left_button_double_click)
       {
 
-         pextendedtopic = create_topic(::id_left_button_double_click);
+         ptopic = create_topic(::id_left_button_double_click);
 
       }
       else if (emessage == e_message_left_button_down)
       {
 
-         pextendedtopic = create_topic(::id_left_button_down);
+         ptopic = create_topic(::id_left_button_down);
 
       }
       else
       {
 
-         pextendedtopic = create_topic(emessage);
+         ptopic = create_topic(emessage);
 
       }
 
-      pextendedtopic->m_puserelement = this;
+      ptopic->m_puserelement = this;
 
-      pextendedtopic->m_actioncontext.m_pmessage = pmessage;
+      ptopic->m_actioncontext.m_pmessage = pmessage;
 
-      m_puserinteractionNotify->handle(pextendedtopic, nullptr);
+      m_puserinteractionNotify->handle(ptopic, nullptr);
 
    }
 
