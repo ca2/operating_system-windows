@@ -311,25 +311,25 @@ namespace windowing_win32
       if (emessage == e_message_right_button_down)
       {
 
-         pextendedtopic = create_extended_topic(::id_context_menu);
+         pextendedtopic = create_topic(::id_context_menu);
 
       }
       else if (emessage == e_message_left_button_double_click)
       {
 
-         pextendedtopic = create_extended_topic(::id_left_button_double_click);
+         pextendedtopic = create_topic(::id_left_button_double_click);
 
       }
       else if (emessage == e_message_left_button_down)
       {
 
-         pextendedtopic = create_extended_topic(::id_left_button_down);
+         pextendedtopic = create_topic(::id_left_button_down);
 
       }
       else
       {
 
-         pextendedtopic = create_extended_topic(emessage);
+         pextendedtopic = create_topic(emessage);
 
       }
 

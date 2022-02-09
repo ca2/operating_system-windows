@@ -55,8 +55,7 @@ namespace windows
       file();
       file(HANDLE hFile);
       file(const ::string & pszFileName, const ::file::e_open & eopen);
-
-      virtual ~file();
+      ~file() override;
 
 
       void assert_ok() const override;

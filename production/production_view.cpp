@@ -108,13 +108,13 @@ namespace production
       else if(ptopic->m_atom == id_clean)
       {
 
-         m_pproduction->m_bClean = ptopic->get_extended_topic()->payload(id_clean);
+         m_pproduction->m_bClean = ptopic->_extended_topic()->payload(id_clean);
 
       }
       else if(ptopic->m_atom == id_build)
       {
 
-         m_pproduction->m_bBuild = ptopic->get_extended_topic()->payload(id_build);
+         m_pproduction->m_bBuild = ptopic->_extended_topic()->payload(id_build);
 
       }
 
