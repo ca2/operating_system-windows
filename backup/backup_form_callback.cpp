@@ -23,7 +23,7 @@ namespace backup
    void form_callback::handle(::topic * ptopic, ::context * pcontext)
    {
 
-      auto pview = ptopic->get_form();
+      //auto pview = ptopic->get_form();
 
       if(ptopic->m_atom == ::id_click)
       {
