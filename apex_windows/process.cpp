@@ -152,7 +152,7 @@ namespace windows
 
          string strMessage = last_error_message(dwLastError);
 
-         output_debug_string(pwszCommandLine);
+         output_debug_string("command line: \"" + string(pwszCommandLine) + "\"");
          output_debug_string("\r\n");
          output_debug_string("CreateProcessW Error!!");
          output_debug_string("\r\n");
