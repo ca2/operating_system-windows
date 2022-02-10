@@ -89,7 +89,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_game_arch001", "..\.
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "static_game_arch001", "..\..\..\source\game\arch001\static_game_arch001.vcxproj", "{F34181D1-8500-49B1-9F0F-569FECD158CF}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "game_matchmaking", "..\..\..\source\game\csgomatchmaking\game_csgomatchmaking.vcxproj", "{0B9D6395-5BCC-4D20-A318-9C4B1B3C6CB1}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "game_csgomatchmaking", "..\..\..\source\game\csgomatchmaking\game_csgomatchmaking.vcxproj", "{0B9D6395-5BCC-4D20-A318-9C4B1B3C6CB1}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_game_csgomatchmaking", "..\..\..\source\game\csgomatchmaking\shared_game_csgomatchmaking.vcxproj", "{DCB3F7AF-B01A-4665-86EA-28B95C5C3F60}"
 EndProject
@@ -686,7 +686,6 @@ Global
 		{5ADC4D84-DE92-4E44-9011-3821CBB86B9C}.basis|Win32.ActiveCfg = cube_basis|Win32
 		{5ADC4D84-DE92-4E44-9011-3821CBB86B9C}.basis|Win32.Build.0 = cube_basis|Win32
 		{5ADC4D84-DE92-4E44-9011-3821CBB86B9C}.basis|x64.ActiveCfg = cube_basis|x64
-		{5ADC4D84-DE92-4E44-9011-3821CBB86B9C}.basis|x64.Build.0 = cube_basis|x64
 		{5ADC4D84-DE92-4E44-9011-3821CBB86B9C}.cube_basis|Win32.ActiveCfg = cube_basis|Win32
 		{5ADC4D84-DE92-4E44-9011-3821CBB86B9C}.cube_basis|Win32.Build.0 = cube_basis|Win32
 		{5ADC4D84-DE92-4E44-9011-3821CBB86B9C}.cube_basis|x64.ActiveCfg = cube_basis|x64
