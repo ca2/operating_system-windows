@@ -298,7 +298,7 @@ namespace windowing_win32
 
          //return false;
 
-         throw_status(error_failed);
+         throw ::exception(error_failed);
 
       }
 
@@ -531,7 +531,7 @@ namespace windowing_win32
 
          //return false;
 
-         throw_status(error_failed);
+         throw ::exception(error_failed);
 
       }
 
@@ -1334,7 +1334,7 @@ namespace windowing_win32
 
          //return ::error_failed;
 
-         throw_status(error_failed);
+         throw ::exception(error_failed);
 
       }
 
@@ -1367,7 +1367,7 @@ namespace windowing_win32
 
       //   //return ::error_failed;
 
-      //   throw_status(error_failed);
+      //   throw ::exception(error_failed);
 
       //}
 
@@ -1585,7 +1585,7 @@ namespace windowing_win32
       //   if (lastError != NO_ERROR)
       //   {
 
-      //      throw_status(error_failed);
+      //      throw ::exception(error_failed);
 
       //   }
 
@@ -1616,7 +1616,7 @@ namespace windowing_win32
 
          //return ::error_failed;
 
-         throw_status(error_failed);
+         throw ::exception(error_failed);
 
       }
 
@@ -1635,7 +1635,7 @@ namespace windowing_win32
 
          //return ::error_failed;
 
-         throw_status(error_failed);
+         throw ::exception(error_failed);
 
       }
 
@@ -1658,7 +1658,7 @@ namespace windowing_win32
 
          //return ::error_failed;
 
-         throw_status(error_failed);
+         throw ::exception(error_failed);
 
       }
 
@@ -1798,7 +1798,7 @@ namespace windowing_win32
 
          //return ::error_failed;
 
-         throw_status(error_failed);
+         throw ::exception(error_failed);
 
       }
 
@@ -2312,7 +2312,7 @@ namespace windowing_win32
       if (!::SetCursor(hcursor))
       {
 
-         throw_status(error_failed);
+         throw ::exception(error_failed);
 
       }
 
@@ -2486,7 +2486,7 @@ namespace windowing_win32
 
       //   //return ::error_failed;
 
-      //   throw_status(error_failed);
+      //   throw ::exception(error_failed);
 
       //}
 
@@ -2788,7 +2788,7 @@ namespace windowing_win32
 
          //return ::error_failed;
 
-         throw_status(error_failed);
+         throw ::exception(error_failed);
 
       }
 
@@ -5360,7 +5360,7 @@ namespace windowing_win32
 
       //   //return estatus;
 
-      //   throw_status(error_failed);
+      //   throw ::exception(error_failed);
 
       //}
 
@@ -5369,7 +5369,7 @@ namespace windowing_win32
 
          //return error_failed;
 
-         throw_status(error_failed);
+         throw ::exception(error_failed);
 
       }
 

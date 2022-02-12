@@ -256,7 +256,7 @@ namespace draw2d_gdiplus
       if (hdc == nullptr)
       {
 
-         throw_status(error_failed);
+         throw ::exception(error_failed);
 
       }
 
@@ -348,7 +348,7 @@ namespace draw2d_gdiplus
        
          //return ::error_failed;
 
-         throw_status(error_failed);
+         throw ::exception(error_failed);
 
       }
 
@@ -992,7 +992,7 @@ namespace draw2d_gdiplus
 
          //return false;
 
-         throw_status(error_null_pointer);
+         throw ::exception(error_null_pointer);
 
       }
 
@@ -1003,7 +1003,7 @@ namespace draw2d_gdiplus
 
          //return false;
 
-         throw_status(error_null_pointer);
+         throw ::exception(error_null_pointer);
 
       }
 
@@ -1012,7 +1012,7 @@ namespace draw2d_gdiplus
          (Gdiplus::REAL)(rectangleParam.bottom - rectangleParam.top))) != Gdiplus::Status::Ok)
       {
 
-         throw_status(error_failed);
+         throw ::exception(error_failed);
 
       }
 
@@ -1100,7 +1100,7 @@ namespace draw2d_gdiplus
 
          //return false;
 
-         throw_status(error_null_pointer);
+         throw ::exception(error_null_pointer);
 
       }
 
@@ -1111,7 +1111,7 @@ namespace draw2d_gdiplus
 
          //return false;
 
-         throw_status(error_null_pointer);
+         throw ::exception(error_null_pointer);
 
       }
 
@@ -1120,7 +1120,7 @@ namespace draw2d_gdiplus
          (Gdiplus::REAL)(rectangleParam.bottom - rectangleParam.top))) != Gdiplus::Status::Ok)
       {
 
-         throw_status(error_null_pointer);
+         throw ::exception(error_null_pointer);
 
       }
 
@@ -1317,7 +1317,7 @@ namespace draw2d_gdiplus
 
          //return false;
 
-         throw_status(error_null_pointer);
+         throw ::exception(error_null_pointer);
 
       }
 
@@ -1332,7 +1332,7 @@ namespace draw2d_gdiplus
       if (!bOk)
       {
 
-         throw_status(error_null_pointer);
+         throw ::exception(error_null_pointer);
 
       }
 
@@ -1593,7 +1593,7 @@ namespace draw2d_gdiplus
 
          //return false;
 
-         throw_status(error_null_pointer);
+         throw ::exception(error_null_pointer);
 
       }
 
@@ -1604,7 +1604,7 @@ namespace draw2d_gdiplus
 
          //return false;
 
-         throw_status(error_null_pointer);
+         throw ::exception(error_null_pointer);
 
       }
 
@@ -1806,7 +1806,7 @@ namespace draw2d_gdiplus
 
             //return false;
 
-            throw_status(error_null_pointer);
+            throw ::exception(error_null_pointer);
 
          }
 
@@ -1816,7 +1816,7 @@ namespace draw2d_gdiplus
 
          //return false;
 
-         throw_status(error_exception);
+         throw ::exception(error_exception);
 
       }
 
@@ -2390,7 +2390,7 @@ namespace draw2d_gdiplus
 
          //return false;
 
-         throw_status(error_null_pointer);
+         throw ::exception(error_null_pointer);
 
       }
 
@@ -2399,7 +2399,7 @@ namespace draw2d_gdiplus
 
          //return false;
 
-         throw_status(error_null_pointer);
+         throw ::exception(error_null_pointer);
 
       }
 
@@ -2412,7 +2412,7 @@ namespace draw2d_gdiplus
 
          //return false;
 
-         throw_status(error_null_pointer);
+         throw ::exception(error_null_pointer);
 
       }
 
@@ -2998,7 +2998,7 @@ namespace draw2d_gdiplus
       if (m_ppath->CloseFigure() != Gdiplus::Status::Ok)
       {
 
-         throw_status(error_null_pointer);
+         throw ::exception(error_null_pointer);
 
       }
 
@@ -3013,7 +3013,7 @@ namespace draw2d_gdiplus
 
          //return false;
 
-         throw_status(error_null_pointer);
+         throw ::exception(error_null_pointer);
 
       }
 
@@ -3033,7 +3033,7 @@ namespace draw2d_gdiplus
       {
 
 
-         throw_status(error_null_pointer);
+         throw ::exception(error_null_pointer);
 
       }
 
@@ -3046,7 +3046,7 @@ namespace draw2d_gdiplus
       if (m_ppath->Flatten() != Gdiplus::Status::Ok)
       {
 
-         throw_status(error_null_pointer);
+         throw ::exception(error_null_pointer);
 
       }
 
@@ -3157,21 +3157,21 @@ namespace draw2d_gdiplus
       if (ppath == nullptr)
       {
 
-         throw_status(error_null_pointer);
+         throw ::exception(error_null_pointer);
 
       }
 
       if (pbrush == nullptr)
       {
 
-         throw_status(error_null_pointer);
+         throw ::exception(error_null_pointer);
 
       }
 
       if (m_pgraphics == nullptr)
       {
 
-         throw_status(error_null_pointer);
+         throw ::exception(error_null_pointer);
 
       }
 
@@ -3180,7 +3180,7 @@ namespace draw2d_gdiplus
       if (pbr == nullptr)
       {
 
-         throw_status(error_null_pointer);
+         throw ::exception(error_null_pointer);
 
       }
 
@@ -3189,7 +3189,7 @@ namespace draw2d_gdiplus
       if (ppathOs == nullptr)
       {
 
-         throw_status(error_null_pointer);
+         throw ::exception(error_null_pointer);
 
       }
 
@@ -3640,7 +3640,7 @@ namespace draw2d_gdiplus
          if (m_pgraphics == nullptr)
          {
 
-            throw_status(error_null_pointer);
+            throw ::exception(error_null_pointer);
 
          }
 
@@ -3655,7 +3655,7 @@ namespace draw2d_gdiplus
          if (status != Gdiplus::Status::Ok)
          {
 
-            throw_status(error_null_pointer);
+            throw ::exception(error_null_pointer);
 
          }
 
@@ -4325,7 +4325,7 @@ namespace draw2d_gdiplus
       if (::is_null(m_pgraphics))
       {
 
-         throw_status(error_null_pointer);
+         throw ::exception(error_null_pointer);
 
       }
 
@@ -4379,7 +4379,7 @@ namespace draw2d_gdiplus
       if(m_pgraphics == nullptr)
       {
 
-         throw_status(error_null_pointer);
+         throw ::exception(error_null_pointer);
 
       }
 
@@ -5015,7 +5015,7 @@ namespace draw2d_gdiplus
 
          //return false;
 
-         throw_status(error_null_pointer);
+         throw ::exception(error_null_pointer);
 
       }
 
@@ -5044,7 +5044,7 @@ namespace draw2d_gdiplus
       {
 
          //return false;
-         throw_status(error_null_pointer);
+         throw ::exception(error_null_pointer);
 
       }
 
@@ -5098,7 +5098,7 @@ namespace draw2d_gdiplus
 
          //return false;
 
-         throw_status(error_null_pointer);
+         throw ::exception(error_null_pointer);
 
       }
 
@@ -5127,7 +5127,7 @@ namespace draw2d_gdiplus
 
          //return false;
 
-         throw_status(error_null_pointer);
+         throw ::exception(error_null_pointer);
 
       }
 
@@ -5390,7 +5390,7 @@ namespace draw2d_gdiplus
 
          //return false;
 
-         throw_status(error_null_pointer);
+         throw ::exception(error_null_pointer);
 
       }
 
@@ -5401,7 +5401,7 @@ namespace draw2d_gdiplus
 
          //return false;
 
-         throw_status(error_null_pointer);
+         throw ::exception(error_null_pointer);
 
       }
 
@@ -5410,7 +5410,7 @@ namespace draw2d_gdiplus
 
          //return false;
 
-         throw_status(error_null_pointer);
+         throw ::exception(error_null_pointer);
 
       }
 
@@ -5467,7 +5467,7 @@ namespace draw2d_gdiplus
 
          //return false;
 
-         throw_status(error_null_pointer);
+         throw ::exception(error_null_pointer);
 
       }
 
@@ -6025,16 +6025,16 @@ namespace draw2d_gdiplus
 
          //return false;
 
-         throw_status(error_null_pointer);
+         throw ::exception(error_null_pointer);
 
       }
 
       if (m_pfont.is_null())
-         throw_status(error_null_pointer);
+         throw ::exception(error_null_pointer);
          //return false;
 
       if(pszString == nullptr || *pszString == '\0')
-         throw_status(error_null_pointer);
+         throw ::exception(error_null_pointer);
          //return false;
 
       if(nCount < 0)
@@ -6042,11 +6042,11 @@ namespace draw2d_gdiplus
 
 
       if(iIndex > nCount)
-         throw_status(error_null_pointer);
+         throw ::exception(error_null_pointer);
          //return false;
 
       if(iIndex < 0)
-         throw_status(error_null_pointer);
+         throw ::exception(error_null_pointer);
          //return false;
 
       m_pfont->defer_update(this, 0);
@@ -6149,7 +6149,7 @@ namespace draw2d_gdiplus
 
          //return false;
 
-         throw_status(error_null_pointer);
+         throw ::exception(error_null_pointer);
 
       }
 
@@ -6180,7 +6180,7 @@ namespace draw2d_gdiplus
 
          //return false;
 
-         throw_status(error_null_pointer);
+         throw ::exception(error_null_pointer);
 
       }
 
@@ -6215,7 +6215,7 @@ namespace draw2d_gdiplus
       }
 
       if(!bOk)
-         throw_status(error_null_pointer);
+         throw ::exception(error_null_pointer);
          //return false;
 
       size.cx = box.Width * m_pfont->m_dFontWidth;
@@ -6235,7 +6235,7 @@ namespace draw2d_gdiplus
 
          //return false;
 
-         throw_status(error_null_pointer);
+         throw ::exception(error_null_pointer);
 
       }
 
@@ -6272,7 +6272,7 @@ namespace draw2d_gdiplus
 
          //return false;
 
-         throw_status(error_null_pointer);
+         throw ::exception(error_null_pointer);
 
       }
 
@@ -6331,7 +6331,7 @@ namespace draw2d_gdiplus
 
          return;
 
-         //throw_status(error_null_pointer);
+         //throw ::exception(error_null_pointer);
 
       }
 
@@ -6340,7 +6340,7 @@ namespace draw2d_gdiplus
 
          //return false;
 
-         throw_status(error_null_pointer);
+         throw ::exception(error_null_pointer);
 
       }
 
@@ -6349,7 +6349,7 @@ namespace draw2d_gdiplus
 
          //return false;
 
-         throw_status(error_null_pointer);
+         throw ::exception(error_null_pointer);
 
       }
 
@@ -6369,7 +6369,7 @@ namespace draw2d_gdiplus
 
          //return false;
 
-         throw_status(error_null_pointer);
+         throw ::exception(error_null_pointer);
 
       }
 
@@ -6386,7 +6386,7 @@ namespace draw2d_gdiplus
 
             //return false;
 
-            throw_status(error_null_pointer);
+            throw ::exception(error_null_pointer);
 
          }
 
@@ -6397,7 +6397,7 @@ namespace draw2d_gdiplus
 
             //return false;
 
-            throw_status(error_null_pointer);
+            throw ::exception(error_null_pointer);
 
          }
 
@@ -6553,7 +6553,7 @@ namespace draw2d_gdiplus
 
          //return false;
 
-         throw_status(error_null_pointer);
+         throw ::exception(error_null_pointer);
 
 
       }
@@ -6633,7 +6633,7 @@ namespace draw2d_gdiplus
 
          //return false;
 
-         throw_status(error_null_pointer);
+         throw ::exception(error_null_pointer);
 
 
       }
@@ -6692,7 +6692,7 @@ namespace draw2d_gdiplus
          {
 
             //return false;
-            throw_status(error_null_pointer);
+            throw ::exception(error_null_pointer);
 
 
          }
@@ -6796,7 +6796,7 @@ namespace draw2d_gdiplus
 
             //return false;
 
-            throw_status(error_null_pointer);
+            throw ::exception(error_null_pointer);
 
 
          }
@@ -6846,7 +6846,7 @@ namespace draw2d_gdiplus
 
             //return false;
 
-            throw_status(error_null_pointer);
+            throw ::exception(error_null_pointer);
 
 
          }
@@ -6890,7 +6890,7 @@ namespace draw2d_gdiplus
 
             //return false;
 
-            throw_status(error_null_pointer);
+            throw ::exception(error_null_pointer);
 
 
          }
@@ -7283,7 +7283,7 @@ namespace draw2d_gdiplus
 
             //return false;
 
-            throw_status(error_null_pointer);
+            throw ::exception(error_null_pointer);
 
 
          }
@@ -7456,7 +7456,7 @@ namespace draw2d_gdiplus
 
          //return false;
 
-         throw_status(error_null_pointer);
+         throw ::exception(error_null_pointer);
 
 
       }

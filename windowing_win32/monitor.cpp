@@ -42,7 +42,7 @@ namespace windowing_win32
 
          //return ::error_failed;
 
-         throw_status(error_failed);
+         throw ::exception(error_failed);
 
       }
 

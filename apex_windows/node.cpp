@@ -361,7 +361,7 @@ namespace apex
 
          //}
 
-            throw_status(estatus);
+            throw ::exception(estatus);
 
          //return ::success;
 
@@ -818,7 +818,7 @@ namespace apex
 
             auto estatus = last_error_to_status(lastError);
 
-            throw_status(estatus);
+            throw ::exception(estatus);
 
          }
 
@@ -898,6 +898,8 @@ namespace apex
          //return estatus;
 
       }
+
+
 
 
    } // namespace windows

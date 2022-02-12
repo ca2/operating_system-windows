@@ -35,7 +35,7 @@ namespace write_text_win32
       if (!m_hdc)
       {
 
-         throw_status(error_wrong_state);
+         throw ::exception(error_wrong_state);
 
       }
 

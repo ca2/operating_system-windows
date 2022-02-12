@@ -2172,7 +2172,7 @@ namespace windows
 
          //return false;
 
-         throw_status(error_null_pointer);
+         throw ::exception(error_null_pointer);
 
       }
 

@@ -317,7 +317,7 @@ void call_async(const char * pszPath, const char * pszParam, const char * pszDir
 
       auto estatus = last_error_to_status(dwError);
 
-      throw_status(estatus);
+      throw ::exception(estatus);
 
    }
 
@@ -362,7 +362,7 @@ void call_sync(const char * pszPath, const char * pszParam, const char * pszDir,
 
       auto estatus = last_error_to_status(lastError);
 
-      throw_status(estatus);
+      throw ::exception(estatus);
 
    }
 

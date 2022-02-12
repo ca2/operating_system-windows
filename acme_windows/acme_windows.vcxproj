@@ -876,7 +876,6 @@
   <ItemGroup>
     <ClInclude Include="acme_file.h" />
     <ClInclude Include="api.h" />
-    <ClInclude Include="callstack.h" />
     <ClInclude Include="d2d1_1.h" />
     <ClInclude Include="dir.h" />
     <ClInclude Include="environment_variable.h" />
@@ -933,7 +932,6 @@
     <ClCompile Include="ansi_file.cpp" />
     <ClCompile Include="application.cpp" />
     <ClCompile Include="argcargv.cpp" />
-    <ClCompile Include="callstack.cpp" />
     <ClCompile Include="debug.cpp" />
     <ClCompile Include="dir.cpp" />
     <ClCompile Include="environment_variable.cpp" />

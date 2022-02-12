@@ -42,7 +42,7 @@ namespace windows
 
       //{
 
-      //   ::file::throw_status(error_file, -1, pszFileName);
+      //   throw ::file::exception(error_file, -1, pszFileName);
 
 
       //}
@@ -241,7 +241,7 @@ namespace windows
          //if (::file::should_ignore_file_exception_callstack(estatus))
          //{
 
-         //   throw_status(error_failed);
+         //   throw ::exception(error_failed);
 
          //}
 
@@ -382,7 +382,7 @@ namespace windows
 
          }
 
-         ::file::throw_status(error_disk_full, -1, m_path);
+         throw ::file::exception(error_disk_full, -1, m_path);
 
       }
 

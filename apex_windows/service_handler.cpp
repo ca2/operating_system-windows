@@ -121,7 +121,7 @@ namespace windows
       if (::QueueUserWorkItem(thread_proc, this, flags))
       {
 
-         throw_status(error_failed);
+         throw ::exception(error_failed);
 
       }
 

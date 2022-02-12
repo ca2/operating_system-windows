@@ -109,7 +109,7 @@ namespace windows
          
          auto estatus = last_error_to_status(lastError);
 
-         throw_status(estatus);
+         throw ::exception(estatus, "windows::acme_file::set_modification_time (1)");
 
       }
 
@@ -131,7 +131,7 @@ namespace windows
          
          auto estatus = last_error_to_status(lastError);
 
-         throw_status(estatus);
+         throw ::exception(estatus, "windows::acme_file::set_modification_time (2)");
 
       }
 
@@ -558,7 +558,41 @@ namespace windows
 
    //}
 
+   
+   ::file::path acme_file::time_put_contents(const ::file::path& pathFolder, const ::string& strPrefix, const ::string& strExtension, const ::string& str)
+   {
 
+      ::file::path path;
+
+      int i = 0;
+
+      while (true)
+      {
+
+         string strHexadecimal;
+
+         strHexadecimal.format("%08x", i);
+
+         path = pathFolder / (strPrefix + "-" + strHexadecimal + "." + strExtension);
+
+         if (exists(path))
+         {
+
+            i++;
+
+            continue;
+
+         }
+
+         put_contents(path, str);
+
+         break;
+
+      }
+
+      return path;
+
+   }
 
 
 } // namespace windows

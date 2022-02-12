@@ -472,7 +472,7 @@ namespace windows
          else
          {
 
-            throw_status(error_failed);
+            throw ::exception(error_failed);
 
          }
 

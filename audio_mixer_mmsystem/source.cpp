@@ -77,7 +77,7 @@ namespace multimedia
 
             ////message_box(strMessage, nullptr, e_message_box_icon_exclamation);
 
-            throw_status(estatus);
+            throw ::exception(estatus);
 
          }
          else
@@ -251,7 +251,7 @@ namespace multimedia
             //                  dwSource, device->m_hMixer, mmrc);
             ////message_box(strMessage, nullptr, e_message_box_icon_exclamation);
 
-            throw_status(estatus);
+            throw ::exception(estatus);
 
          }
 

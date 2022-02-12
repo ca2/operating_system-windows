@@ -21,6 +21,10 @@ namespace windows
       ::duration modification_time(const char* psz) override;
       void set_modification_time(const char* psz, const ::duration& duration) override;
 
+
+      ::file::path time_put_contents(const ::file::path & pathFolder, const ::string & strPrefix, const ::string & strExtension, const ::string& str) override;
+
+
    };
 
 

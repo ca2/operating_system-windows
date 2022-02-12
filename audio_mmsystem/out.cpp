@@ -137,7 +137,7 @@ namespace audio_mmsystem
 
             //}
 
-            throw_status(estatus);
+            throw ::exception(estatus);
 
             //}
             //catch(const ::exception &)
@@ -156,7 +156,7 @@ namespace audio_mmsystem
             //if(estatus != ::success)
             //{
 
-            //   TRACE(status_message(estatus));
+            //   TRACE(status_short_description(estatus));
 
             //   return estatus;
 
@@ -288,7 +288,7 @@ namespace audio_mmsystem
 
             TRACE("ERROR !! Failed to prepare output device buffers");
 
-            throw_status(estatus);
+            throw ::exception(estatus);
 
          }
 
@@ -407,7 +407,7 @@ namespace audio_mmsystem
 
          //return error_failed;
 
-         throw_status(error_failed);
+         throw ::exception(error_failed);
 
       }
 
@@ -447,7 +447,7 @@ namespace audio_mmsystem
       if (m_estate != e_state_playing)
       {
 
-         throw_status(error_wrong_state);
+         throw ::exception(error_wrong_state);
 
       }
 
@@ -483,7 +483,7 @@ namespace audio_mmsystem
       if (m_estate != e_state_paused)
       {
 
-         throw_status(error_failed);
+         throw ::exception(error_failed);
 
       }
 

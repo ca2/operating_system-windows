@@ -76,7 +76,7 @@ namespace draw2d_gdiplus
 
          return false;
 
-         //throw_status(error_failed);
+         //throw ::exception(error_failed);
 
       }
 
@@ -134,7 +134,7 @@ namespace draw2d_gdiplus
       //   return false;
 
       //}
-         //throw_status(error_failed);
+         //throw ::exception(error_failed);
       //if (m_pbitmap->get_os_data() == nullptr)
       //{
 
@@ -230,7 +230,7 @@ namespace draw2d_gdiplus
 
          //return false;
 
-         throw_status(error_null_pointer);
+         throw ::exception(error_null_pointer);
 
       }
 
@@ -256,7 +256,7 @@ namespace draw2d_gdiplus
 
          //return false;
 
-         throw_status(error_null_pointer);
+         throw ::exception(error_null_pointer);
 
       }
 
@@ -274,7 +274,7 @@ namespace draw2d_gdiplus
 
          //return false;
 
-         throw_status(error_null_pointer);
+         throw ::exception(error_null_pointer);
 
       }
 
@@ -449,7 +449,7 @@ namespace draw2d_gdiplus
 
          //return false;
 
-         throw_status(error_null_pointer);
+         throw ::exception(error_null_pointer);
 
       }
       
@@ -684,7 +684,7 @@ namespace draw2d_gdiplus
 
          //return error_invalid_parameter;
 
-         throw_status(error_null_pointer);
+         throw ::exception(error_null_pointer);
 
       }
 

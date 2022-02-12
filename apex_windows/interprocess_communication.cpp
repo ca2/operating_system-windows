@@ -113,7 +113,7 @@ namespace windows
                {
                   
                   ///return error_failed;
-                  throw_status(error_failed);
+                  throw ::exception(error_failed);
 
                }
                
@@ -138,7 +138,7 @@ namespace windows
             if (plauncher->m_iStart <= 0)
             {
 
-               throw_status(error_failed);
+               throw ::exception(error_failed);
 
             }
 
@@ -184,7 +184,7 @@ namespace windows
       {
 
          //return false;
-         throw_status(error_failed);
+         throw ::exception(error_failed);
 
       }
 
@@ -208,7 +208,7 @@ namespace windows
          if (!::SendMessageTimeout((HWND)get_hwnd(), WM_COPYDATA, (WPARAM)0, (LPARAM)&cds, SMTO_ABORTIFHUNG, (class ::wait)durationTimeout, &dwptr))
          {
 
-            throw_status(error_failed);
+            throw ::exception(error_failed);
 
          }
 
@@ -217,7 +217,7 @@ namespace windows
          if (dwError == ERROR_TIMEOUT)
          {
 
-            throw_status(error_failed);
+            throw ::exception(error_failed);
 
          }
 
@@ -234,14 +234,14 @@ namespace windows
       if (message == 0x80000000)
       {
 
-         throw_status(error_failed);
+         throw ::exception(error_failed);
 
       }
 
       if (!is_tx_ok())
       {
 
-         throw_status(error_failed);
+         throw ::exception(error_failed);
 
       }
 
@@ -277,7 +277,7 @@ namespace windows
          if (!::SendMessageTimeout((HWND)get_hwnd(), WM_COPYDATA, (WPARAM)0, (LPARAM)&cds, SMTO_BLOCK, (class ::wait)durationTimeout, &dwptr))
          {
 
-            throw_status(error_failed);
+            throw ::exception(error_failed);
 
          }
 
@@ -286,7 +286,7 @@ namespace windows
          if (dwError == ERROR_TIMEOUT)
          {
 
-            throw_status(error_failed);
+            throw ::exception(error_failed);
 
          }
 
@@ -357,7 +357,7 @@ namespace windows
          
          unsigned int dwLastError = ::GetLastError();
          
-         throw_status(error_failed);
+         throw ::exception(error_failed);
 
       }
 

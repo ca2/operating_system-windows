@@ -283,7 +283,7 @@ namespace windows
 #include "pipe.h"
 
 
-#include "callstack.h"
+//#include "callstack.h"
 //#include "exception_engine.h"
 
 

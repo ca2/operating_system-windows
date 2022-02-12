@@ -77,7 +77,7 @@ namespace windows
       TOKEN_PRIVILEGES tkp;
       if (!OpenProcessToken(GetCurrentProcess(),
                             TOKEN_ADJUST_PRIVILEGES | TOKEN_QUERY, &hToken))
-         throw_status(error_failed);
+         throw ::exception(error_failed);
       LookupPrivilegeValue(nullptr, SE_SHUTDOWN_NAME, &tkp.Privileges[0].Luid);
       tkp.PrivilegeCount = 1;
       tkp.Privileges[0].Attributes = SE_PRIVILEGE_ENABLED;
@@ -100,22 +100,22 @@ namespace windows
       TOKEN_PRIVILEGES tkp;
       if (!OpenProcessToken(GetCurrentProcess(),
                             TOKEN_ADJUST_PRIVILEGES | TOKEN_QUERY, &hToken))
-         throw_status(error_failed);
+         throw ::exception(error_failed);
       if(!LookupPrivilegeValue(nullptr, SE_SHUTDOWN_NAME, &tkp.Privileges[0].Luid))
       {
          TRACELASTERROR();
-         throw_status(error_failed);
+         throw ::exception(error_failed);
       }
       tkp.PrivilegeCount = 1;
       tkp.Privileges[0].Attributes = SE_PRIVILEGE_ENABLED;
       if(!AdjustTokenPrivileges(hToken, false, &tkp, 0, (PTOKEN_PRIVILEGES) nullptr, 0))
       {
          TRACELASTERROR();
-         throw_status(error_failed);
+         throw ::exception(error_failed);
       }
       if (GetLastError() == ERROR_NOT_ALL_ASSIGNED)
       {
-         throw_status(error_failed);
+         throw ::exception(error_failed);
       }
       ////if(!LookupPrivilegeValue(nullptr, SE_REMOTE_SHUTDOWN_NAME, &tkp.Privileges[0].Luid))
       ////{
@@ -144,7 +144,7 @@ namespace windows
       SHTDN_REASON_MAJOR_SOFTWARE | SHTDN_REASON_MINOR_INSTALLATION))
       {
          TRACELASTERROR();
-         throw_status(error_failed);
+         throw ::exception(error_failed);
       }
       //reset the previlages
 //      tkp.Privileges[0].Attributes = 0;
@@ -904,9 +904,13 @@ namespace windows
             TOKEN_READ,                     // Read access only
             &tokenHandle))                  // Access token handle
       {
+         
          u32 win32Status = GetLastError();
-         debug_print("Cannot open token handle: %d\n",win32Status);
+         
+         //debug_print("Cannot open token handle: %d\n",win32Status);
+
          bOk = false;
+
       }
 
       // Zero the tokenInfoBuffer structure.
@@ -921,18 +925,27 @@ namespace windows
             sizeof(tokenInfo),        // Size of the buffer
             &bytesReturned))                // Size needed
       {
+         
          u32 win32Status = GetLastError();
-         debug_print("Cannot query token information: %d\n",win32Status);
+         
+         //debug_print("Cannot query token information: %d\n",win32Status);
+
          bOk = false;
+
       }
 
       if(tokenHandle != nullptr)
       {
+
          CloseHandle(tokenHandle);
+
       }
 
       return bOk;
+
    }
+
+
    BOOL
    GetAccountSid(
    TCHAR * SystemName,
@@ -940,6 +953,7 @@ namespace windows
    PSID *Sid
    )
    {
+
       LPTSTR ReferencedDomain=nullptr;
       DWORD cbSid=128;    // initial allocation attempt
       DWORD cchReferencedDomain=16; // initial allocation size_i32
@@ -1113,9 +1127,13 @@ namespace windows
             &pvInAuthBlob.m_size)    // Size, in bytes, of credentials
             && GetLastError() != ERROR_INSUFFICIENT_BUFFER)
       {
+
          dwResult = GetLastError();
-         debug_print("\n getCredentialsForService CredPackAuthenticationBufferW (1) failed: win32 error = 0x%x\n",dwResult);
-         throw_status(error_failed);
+
+         //debug_print("\n getCredentialsForService CredPackAuthenticationBufferW (1) failed: win32 error = 0x%x\n",dwResult);
+
+         throw ::exception(error_failed);
+
       }
 
       // Allocate memory for the input buffer.
@@ -1124,9 +1142,9 @@ namespace windows
       if(pvInAuthBlob.is_null())
       {
 
-         debug_print("\n getCredentialsForService CoTaskMemAlloc() Out of memory.\n");
+         //debug_print("\n getCredentialsForService CoTaskMemAlloc() Out of memory.\n");
 
-         throw_status(error_failed);
+         throw ::exception(error_failed);
 
       }
 
@@ -1140,7 +1158,7 @@ namespace windows
             &pvInAuthBlob.m_size))
       {
          dwResult = GetLastError();
-         debug_print("\n CredPackAuthenticationBufferW (2) failed: win32 error = 0x%x\n",dwResult);
+         //debug_print("\n CredPackAuthenticationBufferW (2) failed: win32 error = 0x%x\n",dwResult);
       }
 
 
@@ -1269,7 +1287,7 @@ retry:
       if (!bOk)
       {
 
-         throw_status(error_failed);
+         throw ::exception(error_failed);
 
       }
 
@@ -1305,7 +1323,7 @@ retry:
       if (strServiceName.is_empty())
       {
 
-         throw_status(error_failed);
+         throw ::exception(error_failed);
 
       }
 
@@ -1360,7 +1378,7 @@ retry:
          //else
          //{
 
-         //   throw_status(error_failed);
+         //   throw ::exception(error_failed);
 
          //}
 
@@ -1379,7 +1397,7 @@ retry:
       if (strServiceName.is_empty())
       {
 
-         throw_status(error_failed);
+         throw ::exception(error_failed);
 
       }
 
@@ -1396,7 +1414,7 @@ retry:
       if (strServiceName.is_empty())
       {
 
-         throw_status(error_failed);
+         throw ::exception(error_failed);
 
       }
 
@@ -1411,7 +1429,7 @@ retry:
       if (strServiceName.is_empty())
       {
 
-         throw_status(error_bad_argument);
+         throw ::exception(error_bad_argument);
 
       }
 
@@ -1420,7 +1438,7 @@ retry:
       if(hdlSCM == 0)
       {
          //::GetLastError()
-         throw_status(error_failed);
+         throw ::exception(error_failed);
 
       }
 
@@ -1475,7 +1493,7 @@ retry:
       if (strServiceName.is_empty())
       {
 
-         throw_status(error_bad_argument);
+         throw ::exception(error_bad_argument);
 
       }
 
@@ -1484,7 +1502,7 @@ retry:
       if(hdlSCM == 0)
       {
          //::GetLastError();
-         throw_status(error_failed);
+         throw ::exception(error_failed);
       }
 
       SC_HANDLE hdlServ = ::OpenServiceW(
@@ -1525,7 +1543,7 @@ retry:
       if (strServiceName.is_empty())
       {
        
-         throw_status(error_failed);
+         throw ::exception(error_failed);
 
       }
 
@@ -1540,7 +1558,7 @@ retry:
       if (strServiceName.is_empty())
       {
 
-         throw_status(error_failed);
+         throw ::exception(error_failed);
 
       }
 
@@ -1549,7 +1567,7 @@ retry:
       if(hdlSCM == 0)
       {
          //::GetLastError();
-         throw_status(error_failed);
+         throw ::exception(error_failed);
 
       }
 
@@ -1563,7 +1581,7 @@ retry:
       {
          CloseServiceHandle(hdlSCM);
          //Ret = ::GetLastError();
-         throw_status(error_failed);
+         throw ::exception(error_failed);
       }
 
       bool bOk = StartService(hdlServ,0,nullptr) != false;
@@ -1580,7 +1598,7 @@ retry:
 
       if (strServiceName.is_empty())
       {
-         throw_status(error_failed);
+         throw ::exception(error_failed);
 
       }
 
@@ -1589,7 +1607,7 @@ retry:
       if(hdlSCM == 0)
       {
          //::GetLastError();
-         throw_status(error_failed);
+         throw ::exception(error_failed);
       }
 
       SC_HANDLE hdlServ = ::OpenServiceW(
@@ -1601,7 +1619,7 @@ retry:
       {
          // Ret = ::GetLastError();
          CloseServiceHandle(hdlSCM);
-         throw_status(error_failed);
+         throw ::exception(error_failed);
       }
 
       SERVICE_STATUS ss;
@@ -1882,7 +1900,7 @@ retry:
       if (!estatus)
       {
 
-         throw_status(estatus);
+         throw ::exception(estatus);
 
       }
 
@@ -1893,7 +1911,7 @@ retry:
       if (!ppersistfile)
       {
 
-         throw_status(error_no_interface);
+         throw ::exception(error_no_interface);
 
       }
 
@@ -1914,7 +1932,7 @@ retry:
       if (!estatus)
       {
 
-         throw_status(estatus);
+         throw ::exception(estatus);
 
       }
 
@@ -1925,7 +1943,7 @@ retry:
       if (!ppersistfile)
       {
 
-         throw_status(error_no_interface);
+         throw ::exception(error_no_interface);
 
       }
 
@@ -2205,7 +2223,7 @@ retry:
          if (strDefault.is_empty())
          {
 
-            throw_status(error_failed);
+            throw ::exception(error_failed);
 
          }
 
@@ -2216,7 +2234,7 @@ retry:
          if (iFind <= 0)
          {
 
-            throw_status(error_failed);
+            throw ::exception(error_failed);
 
          }
 
@@ -3978,7 +3996,7 @@ namespace apex
          if (failed(estatus))
          {
 
-            throw_status(estatus);
+            throw ::exception(estatus);
 
          }
 

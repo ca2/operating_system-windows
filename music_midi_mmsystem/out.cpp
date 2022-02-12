@@ -46,7 +46,7 @@ namespace music
             if (iDeviceId < 0)
             {
 
-               throw_status(error_not_found);
+               throw ::exception(error_not_found);
 
             }
 
@@ -57,7 +57,7 @@ namespace music
             if (estatus != MMSYSERR_NOERROR)
             {
 
-               throw_status(error_failed);
+               throw ::exception(error_failed);
 
             }
 
@@ -91,7 +91,7 @@ namespace music
             if (!estatus)
             {
 
-               throw_status(estatus);
+               throw ::exception(estatus);
 
             }
 

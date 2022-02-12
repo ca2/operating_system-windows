@@ -139,7 +139,7 @@ pacmedir->create(::file_path_folder(pszFileName));
       if ((nRead = fread(pdata, sizeof(byte), (size_t) nCount, m_pStream)) == 0 && !feof(m_pStream))
       {
 
-         ::file::throw_status(error_file, _doserrno, m_path);
+         throw ::file::exception(error_file, _doserrno, m_path);
 
       }
 
@@ -148,7 +148,7 @@ pacmedir->create(::file_path_folder(pszFileName));
 
          clearerr(m_pStream);
 
-         ::file::throw_status(error_file, _doserrno, m_path);
+         throw ::file::exception(error_file, _doserrno, m_path);
 
       }
       return nRead;
@@ -164,7 +164,7 @@ pacmedir->create(::file_path_folder(pszFileName));
 
       if (fwrite(pdata, sizeof(byte), (size_t)nCount, m_pStream) != nCount)
 
-         ::file::throw_status(error_file, _doserrno, m_path);
+         throw ::file::exception(error_file, _doserrno, m_path);
    }
 
    void stdio_file::write_string(const ::string & psz)
@@ -176,7 +176,7 @@ pacmedir->create(::file_path_folder(pszFileName));
 
       if (fputs(psz, m_pStream) == _TEOF)
 
-         ::file::throw_status(error_disk_full, _doserrno, m_path);
+         throw ::file::exception(error_disk_full, _doserrno, m_path);
    }
 
    char * stdio_file::read_string(char * psz, ::u32 nMax)
@@ -194,7 +194,7 @@ pacmedir->create(::file_path_folder(pszFileName));
 
       {
          clearerr(m_pStream);
-         ::file::throw_status(error_file, _doserrno, m_path);
+         throw ::file::exception(error_file, _doserrno, m_path);
       }
       return pszResult;
 
@@ -229,7 +229,7 @@ pacmedir->create(::file_path_folder(pszFileName));
 
             clearerr(m_pStream);
 
-            ::file::throw_status(error_file, _doserrno,
+            throw ::file::exception(error_file, _doserrno,
                                  m_path);
          }
 
@@ -269,7 +269,7 @@ pacmedir->create(::file_path_folder(pszFileName));
 
    if (fputws(psz, m_pStream) == _TEOF)
 
-   ::file::throw_status(error_disk_full, _doserrno, m_path);
+   throw ::file::exception(error_disk_full, _doserrno, m_path);
    }*/
 
    /*unichar * stdio_file::read_string(unichar * psz, ::u32 nMax)
@@ -287,7 +287,7 @@ pacmedir->create(::file_path_folder(pszFileName));
 
    {
    clearerr(m_pStream);
-   ::file::throw_status(error_generic, _doserrno, m_path);
+   throw ::file::exception(error_generic, _doserrno, m_path);
    }
    return pszResult;
 
@@ -300,7 +300,7 @@ pacmedir->create(::file_path_folder(pszFileName));
       ASSERT(m_pStream != nullptr);
 
       if (fseek(m_pStream, (long) lOff, nFrom) != 0)
-         ::file::throw_status(error_bad_seek, _doserrno, m_path);
+         throw ::file::exception(error_bad_seek, _doserrno, m_path);
 
       long pos = ftell(m_pStream);
       return pos;
@@ -313,7 +313,7 @@ pacmedir->create(::file_path_folder(pszFileName));
 
       long pos = ftell(m_pStream);
       if (pos == -1)
-         ::file::throw_status(error_invalid_file, _doserrno, m_path);
+         throw ::file::exception(error_invalid_file, _doserrno, m_path);
       return pos;
    }
 
@@ -322,7 +322,7 @@ pacmedir->create(::file_path_folder(pszFileName));
       ASSERT_VALID(this);
 
       if (m_pStream != nullptr && fflush(m_pStream) != 0)
-         ::file::throw_status(error_disk_full, _doserrno,
+         throw ::file::exception(error_disk_full, _doserrno,
                               m_path);
    }
 
@@ -346,7 +346,7 @@ pacmedir->create(::file_path_folder(pszFileName));
       m_pStream = nullptr;
 
       if (nErr != 0)
-         ::file::throw_status(error_disk_full, _doserrno,
+         throw ::file::exception(error_disk_full, _doserrno,
                               m_path);
    }
 
@@ -422,21 +422,21 @@ pacmedir->create(::file_path_folder(pszFileName));
 
       nCurrent = ftell(m_pStream);
       if (nCurrent == -1)
-         ::file::throw_status(error_invalid_file, _doserrno,
+         throw ::file::exception(error_invalid_file, _doserrno,
                               m_path);
 
       nResult = fseek(m_pStream, 0, SEEK_END);
       if (nResult != 0)
-         ::file::throw_status(error_bad_seek, _doserrno,
+         throw ::file::exception(error_bad_seek, _doserrno,
                               m_path);
 
       nLength = ftell(m_pStream);
       if (nLength == -1)
-         ::file::throw_status(error_invalid_file, _doserrno,
+         throw ::file::exception(error_invalid_file, _doserrno,
                               m_path);
       nResult = fseek(m_pStream, nCurrent, SEEK_SET);
       if (nResult != 0)
-         ::file::throw_status(error_bad_seek, _doserrno,
+         throw ::file::exception(error_bad_seek, _doserrno,
                               m_path);
 
       return nLength;

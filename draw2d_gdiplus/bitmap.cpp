@@ -87,7 +87,7 @@ namespace draw2d_gdiplus
 
          //return false;
 
-         throw_status(error_failed);
+         throw ::exception(error_failed);
 
       }
 
@@ -98,7 +98,7 @@ namespace draw2d_gdiplus
 
          //return false;
 
-         throw_status(error_failed);
+         throw ::exception(error_failed);
 
       }
 
@@ -157,7 +157,7 @@ namespace draw2d_gdiplus
       if(m_pbitmap == nullptr)
       {
 
-         throw_status(error_failed);
+         throw ::exception(error_failed);
 
       }
 

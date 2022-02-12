@@ -185,7 +185,7 @@ namespace audio_mmsystem
       if (::failed(estatus))
       {
 
-         throw_status(estatus);
+         throw ::exception(estatus);
 
       }
 
@@ -254,7 +254,7 @@ namespace audio_mmsystem
             
             TRACE("ERROR OPENING Preparing INPUT DEVICE buffer");
             
-            throw_status(estatus);
+            throw ::exception(estatus);
 
          }
 
@@ -325,7 +325,7 @@ namespace audio_mmsystem
       if (::failed(estatus))
       {
 
-         throw_status(estatus);
+         throw ::exception(estatus);
 
       }
 
@@ -389,7 +389,7 @@ namespace audio_mmsystem
       if (m_estate != state_recording)
       {
        
-         throw_status(error_wrong_state);
+         throw ::exception(error_wrong_state);
 
       }
 
@@ -476,7 +476,7 @@ namespace audio_mmsystem
 
          ERROR("in::Reset error resetting input device");
 
-         throw_status(estatus);
+         throw ::exception(estatus);
 
       }
 

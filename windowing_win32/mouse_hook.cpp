@@ -104,7 +104,7 @@ namespace mouse_hook
 
          //return false;
 
-         throw_status(error_null_pointer);
+         throw ::exception(error_null_pointer);
 
       }
 
@@ -125,7 +125,7 @@ namespace mouse_hook
 
          //return false;
 
-         throw_status(error_null_pointer);
+         throw ::exception(error_null_pointer);
 
       }
 

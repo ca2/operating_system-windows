@@ -685,7 +685,7 @@ namespace windowing_win32
 
          //return error_failed;
 
-         throw_status(error_null_pointer);
+         throw ::exception(error_null_pointer);
 
       }
 
@@ -1089,7 +1089,7 @@ namespace windowing_win32
          {
 
             //return error_last_error;
-            throw_status(error_null_pointer);
+            throw ::exception(error_null_pointer);
 
          }
 
@@ -1101,7 +1101,7 @@ namespace windowing_win32
          {
 
             //return error_last_error;
-            throw_status(error_null_pointer);
+            throw ::exception(error_null_pointer);
 
          }
 

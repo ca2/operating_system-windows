@@ -333,7 +333,7 @@ namespace windows
 
          strError.format("Failed to delete file \"%s\" error=%d", psz, dwError);
 
-         throw_status(error_failed);
+         throw ::exception(error_failed);
 
       }
       else
@@ -486,7 +486,7 @@ namespace windows
          
          rStatus.m_strFullName.Empty();
          
-         throw_status(error_failed);
+         throw ::exception(error_failed);
 
       }
 
@@ -497,7 +497,7 @@ namespace windows
       if (hFind == INVALID_HANDLE_VALUE)
       {
 
-         throw_status(error_failed);
+         throw ::exception(error_failed);
 
       }
       VERIFY(FindClose(hFind));
@@ -765,7 +765,7 @@ namespace windows
 
             auto estatus = ::last_error_to_status(::GetLastError());
 
-            throw_status(estatus);
+            throw ::exception(estatus);
 
             return;
 
@@ -776,7 +776,7 @@ namespace windows
 
             auto estatus = ::last_error_to_status(::GetLastError());
 
-            throw_status(estatus);
+            throw ::exception(estatus);
 
          }
 
@@ -785,7 +785,7 @@ namespace windows
 
             auto estatus = ::last_error_to_status(::GetLastError());
 
-            throw_status(estatus);
+            throw ::exception(estatus);
 
          }
 
@@ -799,7 +799,7 @@ namespace windows
 
             auto estatus = ::last_error_to_status(::GetLastError());
 
-            throw_status(estatus);
+            throw ::exception(estatus);
 
          }
 

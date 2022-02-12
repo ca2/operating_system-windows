@@ -393,7 +393,7 @@ namespace multimedia
             //              m_mixercontrol.dwControlID, m_pmixersource->get_device()->m_hMixer, mmrc);
             //return;
 
-            throw_status(estatus);
+            throw ::exception(estatus);
 
          }
 
@@ -753,7 +753,7 @@ namespace multimedia
                            if (!estatus)
                            {
 
-                              throw_status(estatus);
+                              throw ::exception(estatus);
 
                            }
 
@@ -787,7 +787,7 @@ namespace multimedia
                            if (::failed(estatus))
                            {
 
-                              throw_status(estatus);
+                              throw ::exception(estatus);
 
                            }
                             
@@ -865,7 +865,7 @@ namespace multimedia
                      if (!estatus)
                      {
 
-                        throw_status(estatus);
+                        throw ::exception(estatus);
 
                      }
 

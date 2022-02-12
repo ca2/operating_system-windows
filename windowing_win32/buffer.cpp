@@ -265,7 +265,7 @@ namespace windowing_win32
 
          destroy_buffer();
 
-         throw_status(error_null_pointer);
+         throw ::exception(error_null_pointer);
 
       }
 

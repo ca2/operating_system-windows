@@ -787,25 +787,23 @@ pacmedir->roaming();
 #endif
 
 
+void TranslateLastError()
+{
 
-
-   void TranslateLastError()
+   if (errno == EEXIST)
    {
 
-      if (errno == EEXIST)
-      {
-
-         set_last_status(error_already_exists);
-
-      }
-      else
-      {
-
-         set_last_status(::success);
-
-      }
+      set_last_status(error_already_exists);
 
    }
+   else
+   {
+
+      set_last_status(::success);
+
+   }
+
+}
 
 
 bool windows_file_find_is_dots(WIN32_FIND_DATAW & data)
@@ -1957,7 +1955,7 @@ pacmedir->create CreateDirectoryW last error(%d)=%s", dwError, pszError);
 //               else
 //               {
 //
-//                  throw exception;
+//                  throw ::exception;
 //
 //               }
 //
@@ -2024,7 +2022,7 @@ pacmedir->create CreateDirectoryW last error(%d)=%s", dwError, pszError);
 
          auto estatus = last_error_to_status(dwLastError);
 
-         throw_status(estatus);
+         throw ::exception(estatus, "windows::acme_dir::change_current");
 
       }
 

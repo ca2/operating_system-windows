@@ -13,9 +13,6 @@
 #include <ImageHlp.h>
 
 
-
-
-
 // The following is defined for x86 (XP and higher), x64 and IA64:
 #define GET_CURRENT_CONTEXT(pc, contextFlags) \
    do { \
@@ -25,18 +22,12 @@
    } while(0);
 
 
-
-
-
-
-
 HANDLE SymGetProcessHandle()
 {
 
    return GetCurrentProcess();
 
 }
-
 
 
 bool engine_get_line_from_address(HANDLE hprocess, OS_DWORD uiAddress, ::u32* puiDisplacement, OS_IMAGEHLP_LINE* pline)
@@ -1017,26 +1008,26 @@ namespace windows
    }
 
 
-   bool callstack::stack_trace(CONTEXT* pcontext, iptr iSkip, const ::string & pszFormat, int iCount)
-   {
+   //bool callstack::stack_trace(CONTEXT* pcontext, iptr iSkip, const ::string & pszFormat, int iCount)
+   //{
 
-      if (!pszFormat)
-      {
+   //   if (!pszFormat)
+   //   {
 
-         return false;
+   //      return false;
 
-      }
+   //   }
 
-      if (iSkip >= 0)
-      {
+   //   if (iSkip >= 0)
+   //   {
 
-         iSkip++;
+   //      iSkip++;
 
-      }
+   //   }
 
-      return stack_trace(pcontext, iSkip, false, pszFormat);
+   //   return stack_trace(pcontext, iSkip, false, pszFormat);
 
-   }
+   //}
 
 
    /////////////////////////////////////////////
@@ -1049,223 +1040,223 @@ namespace windows
    };
 
 
-   u32 WINAPI callstack::stack_trace_ThreadProc(void* pvoidParam)
-   {
+//   u32 WINAPI callstack::stack_trace_ThreadProc(void* pvoidParam)
+//   {
+//
+//      current_context* pcontext = reinterpret_cast<current_context*>(pvoidParam);
+//
+//      try
+//      {
+//
+//         // Konstantin, 14.01.2002 17:21:32
+//
+//         // must wait in spin lock until Main thread will leave a ResumeThread (must return back to ::account::user context)
+//
+//         i32 iInverseAgility = 26 + 24; // former iPatienceQuota
+//
+//         i32 iPatience = iInverseAgility;
+//
+//         while (pcontext->signal && iPatience > 0)
+//         {
+//
+//            if (!SwitchToThread())
+//            {
+//
+//               preempt(10_ms); // forces switch to another thread
+//
+//            }
+//
+//            iPatience--;
+//
+//         }
+//
+//         //         char sz[200];
+//         //         sprintf(sz, "callstack::stack_trace patience near down %u%%\n", iPatience * 100 / iInverseAgility);
+//         //         ::output_debug_string(sz);
+//
+//         if (-1 == SuspendThread(pcontext->thread))
+//         {
+//
+//            pcontext->signal = -1;
+//
+//            return 0;
+//
+//         }
+//
+//         try
+//         {
+//
+//#ifdef AMD64
+//
+//            GET_CURRENT_CONTEXT(pcontext, USED_CONTEXT_FLAGS);
+//
+//#else
+//
+//            pcontext->signal = GetThreadContext(pcontext->thread, pcontext) ? 1 : -1;
+//
+//#endif
+//
+//         }
+//         catch (...)
+//         {
+//
+//            VERIFY(-1 != ResumeThread(pcontext->thread));
+//
+//         }
+//
+//      }
+//      catch (...)
+//      {
+//
+//         pcontext->signal = -1;
+//
+//      }
+//
+//      return 0;
+//
+//   }
+
+
+//   bool callstack::stack_trace(iptr iSkip, const ::string & pszFormat, int iCount)
+//   {
+//
+//      if (iSkip >= 0)
+//      {
+//
+//         iSkip++;
+//
+//      }
+//
+//      critical_section_lock csl(s_pcriticalsection);
+//
+//      *_strS = '\0';
+//
+//      if (!pszFormat) return false;
+//
+//      // attempts to get current thread's context
+//
+//#if FAST_STACK_TRACE
+//      stack_trace(nullptr, iSkip, false, pszFormat, iCount);
+//
+//#else
+//
+//      current_context context;
+//      __memset(&context, 0, sizeof(current_context));
+//
+//      bool bOk = DuplicateHandle(GetCurrentProcess(), get_current_htask(), GetCurrentProcess(), &context.thread, 0, 0, DUPLICATE_SAME_ACCESS) != false;
+//
+//      _ASSERTE(bOk);
+//      _ASSERTE(context.thread);
+//
+//      if (!bOk || !context.thread)
+//         return false;
+//
+//      context.ContextFlags = CONTEXT_CONTROL; // CONTEXT_FULL;
+//      context.signal = -1;
+//
+//
+//      GET_CURRENT_CONTEXT((&context), USED_CONTEXT_FLAGS);
+//
+//      stack_trace(&context, uiSkip, false, pszFormat);
+//
+//
+//#endif
+//
+//
+//      return true;
+//
+//
+//   }
 
-      current_context* pcontext = reinterpret_cast<current_context*>(pvoidParam);
 
-      try
-      {
+   //bool callstack::stack_trace(CONTEXT* pcontext, iptr iSkip, bool bSkip, const ::string & pszFormat, int iCount)
+   //{
 
-         // Konstantin, 14.01.2002 17:21:32
+   //   if (iSkip >= 0)
+   //   {
 
-         // must wait in spin lock until Main thread will leave a ResumeThread (must return back to ::account::user context)
+   //      iSkip += 3;
 
-         i32 iInverseAgility = 26 + 24; // former iPatienceQuota
+   //   }
 
-         i32 iPatience = iInverseAgility;
+   //   *_strS = '\0';
 
-         while (pcontext->signal && iPatience > 0)
-         {
+   //   if (!stack_first(pcontext, (int)(iSkip >= 0 && iCount >= 0 ? iSkip + iCount + 1 : -1)))
+   //   {
 
-            if (!SwitchToThread())
-            {
+   //      return false;
 
-               preempt(10_ms); // forces switch to another thread
+   //   }
 
-            }
+   //   uptr uiSkipStart = iSkip;
 
-            iPatience--;
+   //   int iLine;
 
-         }
+   //   do
+   //   {
 
-         //         char sz[200];
-         //         sprintf(sz, "callstack::stack_trace patience near down %u%%\n", iPatience * 100 / iInverseAgility);
-         //         ::output_debug_string(sz);
 
-         if (-1 == SuspendThread(pcontext->thread))
-         {
+   //      if (!iSkip && !bSkip || iSkip == DEFAULT_SE_EXCEPTION_CALLSTACK_SKIP)
+   //      {
 
-            pcontext->signal = -1;
+   //         iLine = 0;
 
-            return 0;
+   //         char* psz = get_frame(pszFormat, iLine);
 
-         }
+   //         if (iCount > 0)
+   //         {
 
-         try
-         {
+   //            iCount--;
 
-#ifdef AMD64
+   //         }
 
-            GET_CURRENT_CONTEXT(pcontext, USED_CONTEXT_FLAGS);
+   //         if (iSkip == DEFAULT_SE_EXCEPTION_CALLSTACK_SKIP)
+   //         {
 
-#else
+   //            if (::str::find_ci("KiUserExceptionDispatcher", psz) >= 0)
+   //            {
 
-            pcontext->signal = GetThreadContext(pcontext->thread, pcontext) ? 1 : -1;
+   //               iSkip = 0;
 
-#endif
+   //            }
 
-         }
-         catch (...)
-         {
+   //            continue;
 
-            VERIFY(-1 != ResumeThread(pcontext->thread));
+   //         }
+   //         else if (uiSkipStart == DEFAULT_SE_EXCEPTION_CALLSTACK_SKIP)
+   //         {
 
-         }
+   //            if (iLine == 0)
+   //            {
 
-      }
-      catch (...)
-      {
+   //               break;
 
-         pcontext->signal = -1;
+   //            }
 
-      }
+   //         }
 
-      return 0;
+   //         ansi_concatenate(_strS, psz);
 
-   }
+   //      }
+   //      else
+   //      {
 
+   //         --iSkip;
 
-   bool callstack::stack_trace(iptr iSkip, const ::string & pszFormat, int iCount)
-   {
+   //      }
 
-      if (iSkip >= 0)
-      {
+   //      if (iCount == 0)
+   //      {
 
-         iSkip++;
+   //         break;
 
-      }
+   //      }
 
-      critical_section_lock csl(s_pcriticalsection);
+   //   } while (stack_next());
 
-      *_strS = '\0';
+   //   return true;
 
-      if (!pszFormat) return false;
-
-      // attempts to get current thread's context
-
-#if FAST_STACK_TRACE
-      stack_trace(nullptr, iSkip, false, pszFormat, iCount);
-
-#else
-
-      current_context context;
-      __memset(&context, 0, sizeof(current_context));
-
-      bool bOk = DuplicateHandle(GetCurrentProcess(), get_current_htask(), GetCurrentProcess(), &context.thread, 0, 0, DUPLICATE_SAME_ACCESS) != false;
-
-      _ASSERTE(bOk);
-      _ASSERTE(context.thread);
-
-      if (!bOk || !context.thread)
-         return false;
-
-      context.ContextFlags = CONTEXT_CONTROL; // CONTEXT_FULL;
-      context.signal = -1;
-
-
-      GET_CURRENT_CONTEXT((&context), USED_CONTEXT_FLAGS);
-
-      stack_trace(&context, uiSkip, false, pszFormat);
-
-
-#endif
-
-
-      return true;
-
-
-   }
-
-
-   bool callstack::stack_trace(CONTEXT* pcontext, iptr iSkip, bool bSkip, const ::string & pszFormat, int iCount)
-   {
-
-      if (iSkip >= 0)
-      {
-
-         iSkip += 3;
-
-      }
-
-      *_strS = '\0';
-
-      if (!stack_first(pcontext, (int)(iSkip >= 0 && iCount >= 0 ? iSkip + iCount + 1 : -1)))
-      {
-
-         return false;
-
-      }
-
-      uptr uiSkipStart = iSkip;
-
-      int iLine;
-
-      do
-      {
-
-
-         if (!iSkip && !bSkip || iSkip == DEFAULT_SE_EXCEPTION_CALLSTACK_SKIP)
-         {
-
-            iLine = 0;
-
-            char* psz = get_frame(pszFormat, iLine);
-
-            if (iCount > 0)
-            {
-
-               iCount--;
-
-            }
-
-            if (iSkip == DEFAULT_SE_EXCEPTION_CALLSTACK_SKIP)
-            {
-
-               if (::str::find_ci("KiUserExceptionDispatcher", psz) >= 0)
-               {
-
-                  iSkip = 0;
-
-               }
-
-               continue;
-
-            }
-            else if (uiSkipStart == DEFAULT_SE_EXCEPTION_CALLSTACK_SKIP)
-            {
-
-               if (iLine == 0)
-               {
-
-                  break;
-
-               }
-
-            }
-
-            ansi_concatenate(_strS, psz);
-
-         }
-         else
-         {
-
-            --iSkip;
-
-         }
-
-         if (iCount == 0)
-         {
-
-            break;
-
-         }
-
-      } while (stack_next());
-
-      return true;
-
-   }
+   //}
 
 
    //char * callstack::stack_trace(OS_DWORD * pinteraction, int c, const ::string & pszFormat, int iCount)
@@ -1424,11 +1415,9 @@ namespace windows
 } // namespace windows
 
 
-
-
-
 namespace  windows
 {
+
 
    typedef int_bool(__stdcall* PReadProcessMemoryRoutine)(
       HANDLE      hProcess,
@@ -1457,157 +1446,158 @@ namespace  windows
 
    //}
 
-   char* callstack::stack_trace(OS_DWORD* pinteraction, int c, const ::string & pszFormat, int iCount)
-   {
+   //char* callstack::stack_trace(OS_DWORD* pinteraction, int c, const ::string & pszFormat, int iCount)
+   //{
 
-      critical_section_lock csl(s_pcriticalsection);
+   //   critical_section_lock csl(s_pcriticalsection);
 
-      *_strS = '\0';
+   //   *_strS = '\0';
 
-      ::memcpy_dup(m_uia, pinteraction, minimum(c * sizeof(*pinteraction), sizeof(m_uia)));
+   //   ::memcpy_dup(m_uia, pinteraction, minimum(c * sizeof(*pinteraction), sizeof(m_uia)));
 
-      m_iAddressWrite = c;
-      m_iAddressRead = 0;
-      char* psz;
+   //   m_iAddressWrite = c;
+   //   m_iAddressRead = 0;
+   //   char* psz;
 
-      int iLine;
+   //   int iLine;
 
-      do
-      {
+   //   do
+   //   {
 
-         iLine = 0;
+   //      iLine = 0;
 
-         psz = get_frame(pszFormat, iLine);
+   //      psz = get_frame(pszFormat, iLine);
 
-         if (psz == nullptr)
-         {
+   //      if (psz == nullptr)
+   //      {
 
-            break;
+   //         break;
 
-         }
+   //      }
 
-         ansi_concatenate(_strS, psz);
+   //      ansi_concatenate(_strS, psz);
 
-      } while (stack_next());
+   //   } while (stack_next());
 
-      return _strS;
-   }
-
-
-
-   char* callstack::get_frame(const char * pszFormat, int& iLine)
-   {
+   //   return _strS;
+   //}
 
 
-      *_str = '\0';
-      *_strBuf = '\0';
-      *_strFile = '\0';
-      *_strSymbol = '\0';
 
-      u32 uiLineDisplacement = 0;
-      u32 uiLineNumber = 0;
-      OS_DWORD uiSymbolDisplacement = 0;
+   //char* callstack::get_frame(const char * pszFormat, int& iLine)
+   //{
 
 
-      char sz[2];
-      sz[1] = '\0';
-      for (char* p = (char*)pszFormat; *p; ++p)
-      {
-         if (*p == '%')
-         {
-            ++p; // skips '%'
-            char ca = *p;
-            switch (ca)
-            {
-            case 'm':
-               if (module(_strBuf, sizeof(_strBuf)))
-               {
-                  ansi_concatenate(_str, _strBuf);
-               }
-               else
-               {
-                  ansi_concatenate(_str, "?.?");
-               }
-               break;
-            case 'f':
-               if (*_strFile == '\0')
-               {
-                  if (!fileline(_strFile, sizeof(_strFile), &uiLineNumber, &uiLineDisplacement))
-                  {
-                     strcpy(_strFile, " ");
-                  }
-               }
-               ansi_concatenate(_str, _strFile);
-               break;
-            case 'l':
-               if (*_strFile == '\0')
-               {
-                  if (!fileline(_strFile, sizeof(_strFile), &uiLineNumber, &uiLineDisplacement))
-                  {
-                     strcpy(_strFile, " ");
-                  }
-               }
-               if (*(p + 1) == 'd')
-               {
-                  ansi_from_u64(_strBuf, uiLineDisplacement, 10);
-                  ansi_concatenate(_str, _strBuf);
-                  ++p;
-               }
-               else
-               {
-                  ansi_from_u64(_strBuf, uiLineNumber, 10);
-                  ansi_concatenate(_str, _strBuf);
-               }
-               break;
-            case 's':
-               if (*_strSymbol == '\0')
-               {
-                  if (!symbol(_strSymbol, sizeof(_strSymbol), &uiSymbolDisplacement))
-                  {
-                     strcpy(_strSymbol, "?()");
-                  }
-               }
-               if (*(p + 1) == 'd')
-               {
-                  ansi_concatenate_i64(_str, uiSymbolDisplacement);
-                  ++p;
-               }
-               else
-               {
-                  if (ansi_count_compare(_strSymbol, "dispatch::AddMessageHandler", strlen("dispatch::AddMessageHandler")) == 0)
-                  {
-                     //                     strcpy(_strS, "\n");
-                     //                   ansi_concatenate(_strS, _strSymbol);
-                     //                 ansi_concatenate(_strS, "\n");
-                     //               return nullptr;
-                     ansi_concatenate(_strS, " * * * ");
-                  }
-                  ansi_concatenate(_str, _strSymbol);
-               }
-               break;
-            case '%':
-               ansi_concatenate(_str, "%");
-               break;
-            default:
-               ansi_concatenate(_str, "%");
-               sz[0] = ca;
-               ansi_concatenate(_str, sz);
-               break;
-            }
-         }
-         else
-         {
-            sz[0] = *p;
-            ansi_concatenate(_str, sz);
-         }
+   //   *_str = '\0';
+   //   *_strBuf = '\0';
+   //   *_strFile = '\0';
+   //   *_strSymbol = '\0';
 
-      }
+   //   u32 uiLineDisplacement = 0;
+   //   u32 uiLineNumber = 0;
+   //   OS_DWORD uiSymbolDisplacement = 0;
 
-      iLine = uiLineNumber;
 
-      return _str;
+   //   char sz[2];
+   //   sz[1] = '\0';
+   //   for (char* p = (char*)pszFormat; *p; ++p)
+   //   {
+   //      if (*p == '%')
+   //      {
+   //         ++p; // skips '%'
+   //         char ca = *p;
+   //         switch (ca)
+   //         {
+   //         case 'm':
+   //            if (module(_strBuf, sizeof(_strBuf)))
+   //            {
+   //               ansi_concatenate(_str, _strBuf);
+   //            }
+   //            else
+   //            {
+   //               ansi_concatenate(_str, "?.?");
+   //            }
+   //            break;
+   //         case 'f':
+   //            if (*_strFile == '\0')
+   //            {
+   //               if (!fileline(_strFile, sizeof(_strFile), &uiLineNumber, &uiLineDisplacement))
+   //               {
+   //                  strcpy(_strFile, " ");
+   //               }
+   //            }
+   //            ansi_concatenate(_str, _strFile);
+   //            break;
+   //         case 'l':
+   //            if (*_strFile == '\0')
+   //            {
+   //               if (!fileline(_strFile, sizeof(_strFile), &uiLineNumber, &uiLineDisplacement))
+   //               {
+   //                  strcpy(_strFile, " ");
+   //               }
+   //            }
+   //            if (*(p + 1) == 'd')
+   //            {
+   //               ansi_from_u64(_strBuf, uiLineDisplacement, 10);
+   //               ansi_concatenate(_str, _strBuf);
+   //               ++p;
+   //            }
+   //            else
+   //            {
+   //               ansi_from_u64(_strBuf, uiLineNumber, 10);
+   //               ansi_concatenate(_str, _strBuf);
+   //            }
+   //            break;
+   //         case 's':
+   //            if (*_strSymbol == '\0')
+   //            {
+   //               if (!symbol(_strSymbol, sizeof(_strSymbol), &uiSymbolDisplacement))
+   //               {
+   //                  strcpy(_strSymbol, "?()");
+   //               }
+   //            }
+   //            if (*(p + 1) == 'd')
+   //            {
+   //               ansi_concatenate_i64(_str, uiSymbolDisplacement);
+   //               ++p;
+   //            }
+   //            else
+   //            {
+   //               if (ansi_count_compare(_strSymbol, "dispatch::AddMessageHandler", strlen("dispatch::AddMessageHandler")) == 0)
+   //               {
+   //                  //                     strcpy(_strS, "\n");
+   //                  //                   ansi_concatenate(_strS, _strSymbol);
+   //                  //                 ansi_concatenate(_strS, "\n");
+   //                  //               return nullptr;
+   //                  ansi_concatenate(_strS, " * * * ");
+   //               }
+   //               ansi_concatenate(_str, _strSymbol);
+   //            }
+   //            break;
+   //         case '%':
+   //            ansi_concatenate(_str, "%");
+   //            break;
+   //         default:
+   //            ansi_concatenate(_str, "%");
+   //            sz[0] = ca;
+   //            ansi_concatenate(_str, sz);
+   //            break;
+   //         }
+   //      }
+   //      else
+   //      {
+   //         sz[0] = *p;
+   //         ansi_concatenate(_str, sz);
+   //      }
 
-   }
+   //   }
+
+   //   iLine = uiLineNumber;
+
+   //   return _str;
+
+   //}
+
 
    const char* callstack::get_dup(const ::string & pszFormat, i32 iSkip, int iCount)
    {

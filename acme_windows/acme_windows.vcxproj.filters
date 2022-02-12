@@ -86,9 +86,6 @@
     <ClInclude Include="user.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="callstack.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="file_exception.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -227,9 +224,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="framework.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="callstack.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="mutex.cpp">

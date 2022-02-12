@@ -57,7 +57,7 @@ namespace music
             if (!estatus)
             {
 
-               throw_status(estatus);
+               throw ::exception(estatus);
 
             }
 

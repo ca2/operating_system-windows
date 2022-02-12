@@ -46,7 +46,7 @@ CLASS_DECL_DRAW2D_GDIPLUS void initialize_gdiplus()
 
       output_debug_string("Gdiplus Failed to Hook. ca cannot continue.");
 
-      throw_status(error_failed);
+      throw ::exception(error_failed);
 
    }
 

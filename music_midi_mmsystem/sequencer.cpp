@@ -1401,7 +1401,7 @@ namespace music
             if (!estatus)
             {
 
-               throw_status(estatus);
+               throw ::exception(estatus);
 
             }
 
@@ -1623,7 +1623,7 @@ namespace music
             if (!estatus)
             {
 
-               throw_status(estatus);
+               throw ::exception(estatus);
 
             }
 
@@ -1652,7 +1652,7 @@ namespace music
             if (!estatus)
             {
              
-               throw_status(estatus);
+               throw ::exception(estatus);
 
             }
 
@@ -1665,7 +1665,7 @@ namespace music
             if (!estatus)
             {
              
-               throw_status(estatus);
+               throw ::exception(estatus);
 
             }
 
@@ -1683,7 +1683,7 @@ namespace music
             if (!estatus)
             {
              
-               throw_status(estatus);
+               throw ::exception(estatus);
 
             }
 
@@ -1694,7 +1694,7 @@ namespace music
             if (!estatus)
             {
 
-               throw_status(estatus);
+               throw ::exception(estatus);
 
             }
 

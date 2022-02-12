@@ -16,7 +16,7 @@ void gdiplus_draw_text(::draw2d::graphics* pgraphicsParam, ::draw2d::path* ppath
    if (::is_null(pfontParam))
    {
 
-      throw_status(error_failed);
+      throw ::exception(error_failed);
 
    }
 
@@ -27,7 +27,7 @@ void gdiplus_draw_text(::draw2d::graphics* pgraphicsParam, ::draw2d::path* ppath
 
       //return ::error_failed;
 
-      throw_status(error_failed);
+      throw ::exception(error_failed);
 
    }
 
@@ -61,7 +61,7 @@ void gdiplus_draw_text(::draw2d::graphics* pgraphicsParam, ::draw2d::path* ppath
 
          //return ::error_failed;
 
-         throw_status(error_failed);
+         throw ::exception(error_failed);
 
       }
 

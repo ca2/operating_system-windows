@@ -16,8 +16,7 @@ namespace acme
       node::node()
       {
 
-
-         ::windows::callstack::s_pcriticalsection = new critical_section();
+         //::windows::callstack::s_pcriticalsection = new critical_section();
 
       }
 
@@ -25,11 +24,11 @@ namespace acme
       node::~node()
       {
 
-#ifdef WINDOWS
-
-         ::acme::del(::windows::callstack::s_pcriticalsection);
-
-#endif
+//#ifdef WINDOWS
+//
+//         ::acme::del(::windows::callstack::s_pcriticalsection);
+//
+//#endif
 
       }
 
@@ -68,6 +67,16 @@ namespace acme
          //return estatus;
 
       }
+
+
+
+      void node::shell_execute_async(const char* pszFile, const char* pszParams)
+      {
+
+         int iRet = (int)(iptr) ::ShellExecuteW(nullptr, L"open", wstring(pszFile), wstring(pszParams), L"", SW_RESTORE);
+
+      }
+
 
 
       bool node::win32_registry_windows_dark_mode_for_app()
@@ -829,7 +838,7 @@ namespace acme
 
             auto estatus = last_error_to_status(dwLastError);
 
-            throw_status(estatus);
+            throw ::exception(estatus, "::windows::node::datetime_to_filetime (1)");
 
          }
 
@@ -841,7 +850,7 @@ namespace acme
 
             auto estatus = last_error_to_status(dwLastError);
 
-            throw_status(estatus);
+            throw ::exception(estatus, "::windows::node::datetime_to_filetime (2)");
 
          }
 
@@ -1859,7 +1868,6 @@ namespace acme
 
          StartupInfo.wShowWindow = SW_HIDE;
 
-
          if (!CreateProcessW(nullptr, wstring(pszCommandLine), nullptr, nullptr, false,
             CREATE_NEW_CONSOLE,
             nullptr,
@@ -1872,7 +1880,7 @@ namespace acme
             
             auto estatus = last_error_to_status(lastError);
 
-            throw_status(estatus);
+            throw ::exception(estatus, "::windows::node::create_process (1)");
 
          }
 
@@ -1898,7 +1906,12 @@ namespace acme
 
          auto estatus = ExitCode_to_status(rc);
 
-         throw_status(estatus);
+         if(!estatus)
+         {
+
+            throw ::exception(estatus, "::windows::node::create_process (2)");
+
+         }
 
       }
 
@@ -1969,7 +1982,7 @@ namespace acme
             
             auto estatus = last_error_to_status(lastError);
 
-            throw_status(estatus);
+            throw ::exception(estatus, "::windows::node::run_silent (1)");
 
          }
 
@@ -1988,10 +2001,10 @@ namespace acme
 
          auto estatus = ExitCode_to_status(rc);
 
-         if (::failed(estatus))
+         if (!estatus)
          {
 
-            throw_status(estatus);
+            throw ::exception(estatus, "::windows::node::run_silent (2)");
 
          }
 
@@ -2015,7 +2028,7 @@ namespace acme
          if (!create_process(strCmdLine, &processId))
          {
 
-            return -1;
+            throw ::exception(estatus, "::windows::node::run_silent (1)");
 
          }
 
@@ -2033,7 +2046,7 @@ namespace acme
 
          }
 
-         return 0;
+         //return 0;
 
 #endif
 
@@ -2054,7 +2067,7 @@ namespace acme
 
             auto estatus = last_error_to_status(dwLastError);
 
-            throw_status(estatus);
+            throw ::exception(estatus, "::windows::node::reboot (1)");
 
          }
 
@@ -2069,7 +2082,7 @@ namespace acme
 
             auto estatus = last_error_to_status(dwLastError);
 
-            throw_status(estatus);
+            throw ::exception(estatus, "::windows::node::reboot (2)");
 
          }
          
@@ -2086,14 +2099,14 @@ namespace acme
 
             auto estatus = last_error_to_status(dwLastError);
 
-            throw_status(estatus);
+            throw ::exception(estatus, "::windows::node::reboot (3)");
 
          }
          
          if (GetLastError() == ERROR_NOT_ALL_ASSIGNED)
          {
 
-            throw_status(error_failed);
+            throw ::exception(error_failed, "::windows::node::reboot (3.1)");
 
          }
 
@@ -2130,7 +2143,7 @@ namespace acme
 
             auto estatus = last_error_to_status(dwLastError);
 
-            throw_status(estatus);
+            throw ::exception(estatus, "::windows::node::reboot (4)");
 
          }
          
@@ -2259,7 +2272,7 @@ namespace acme
          if (RegCreateKeyExW(HKEY_CLASSES_ROOT, extension.c_str(), 0, 0, 0, KEY_ALL_ACCESS, 0, &hkey, 0) != ERROR_SUCCESS)
          {
             output_debug_string("Could not create or open a registrty key\n");
-            throw_status(error_resource);
+            throw ::exception(error_resource);
          }
          RegSetValueExW(hkey, L"", 0, REG_SZ, (byte *)desc.c_str(), ::u32(desc.length() * sizeof(wchar_t))); // default vlaue is description of file extension
          RegSetValueExW(hkey, L"ContentType", 0, REG_SZ, (byte *)content_type.c_str(), ::u32(content_type.length() * sizeof(wchar_t))); // default vlaue is description of file extension
@@ -2272,7 +2285,7 @@ namespace acme
          if (RegCreateKeyExW(HKEY_CLASSES_ROOT, path.c_str(), 0, 0, 0, KEY_ALL_ACCESS, 0, &hkey, 0) != ERROR_SUCCESS)
          {
             output_debug_string("Could not create or open a registrty key\n");
-            throw_status(error_resource);
+            throw ::exception(error_resource);
          }
          RegSetValueExW(hkey, L"", 0, REG_SZ, (byte *)app.c_str(), ::u32(app.length() * sizeof(wchar_t)));
          RegCloseKey(hkey);
@@ -2283,7 +2296,7 @@ namespace acme
          if (RegCreateKeyExW(HKEY_CLASSES_ROOT, path.c_str(), 0, 0, 0, KEY_ALL_ACCESS, 0, &hkey, 0) != ERROR_SUCCESS)
          {
             output_debug_string("Could not create or open a registrty key\n");
-            throw_status(error_resource);
+            throw ::exception(error_resource);
          }
          RegSetValueExW(hkey, L"", 0, REG_SZ, (byte *)icon.c_str(), ::u32(icon.length() * sizeof(wchar_t)));
          RegCloseKey(hkey);
@@ -2329,7 +2342,7 @@ namespace acme
          if (!m_psystem->m_pacmefile->exists(str))
          {
 
-            throw_status(error_failed);
+            throw ::exception(error_failed);
 
          }
 
@@ -2405,7 +2418,7 @@ namespace acme
             //   return error_failed;
             //}
 
-            throw_status(estatus);
+            throw ::exception(estatus);
 
 
          }
@@ -2484,7 +2497,7 @@ namespace acme
          if (!::DeleteFileW(::str::international::utf8_to_unicode(pFileName)))
          {
 
-            throw_status(error_failed);
+            throw ::exception(error_failed);
 
          }
 
@@ -2637,6 +2650,7 @@ namespace acme
          //return estatus;
 
       }
+
 
 
    } // namespace windows

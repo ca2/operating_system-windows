@@ -345,7 +345,7 @@ namespace windows
       if (lstatus != ERROR_SUCCESS)
       {
 
-         throw_status(error_failed);
+         throw ::exception(error_failed);
 
       }
 
@@ -529,7 +529,7 @@ namespace windows
       if (ERROR_SUCCESS != ::RegDeleteValueW(m_hkey, (WCHAR *) wstr.c_str()))
       {
 
-         throw_status(error_failed);
+         throw ::exception(error_failed);
 
       }
 
@@ -548,7 +548,7 @@ namespace windows
       if (ERROR_SUCCESS != ::RegDeleteKey(m_hkey, nullptr))
       {
 
-         throw_status(error_failed);
+         throw ::exception(error_failed);
 
       }
 

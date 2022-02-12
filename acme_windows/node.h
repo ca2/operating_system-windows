@@ -49,6 +49,8 @@ namespace acme
 
          virtual void call_async(const ::string& pszPath, const ::string& pszParam, const ::string& pszDir, ::e_display edisplay, bool bPrivileged, unsigned int* puiPid = nullptr);
 
+         void shell_execute_async(const char* pszFile, const char* pszParams) override;
+
 
          virtual bool win32_registry_windows_dark_mode_for_app();
          virtual bool win32_registry_windows_dark_mode_for_system();

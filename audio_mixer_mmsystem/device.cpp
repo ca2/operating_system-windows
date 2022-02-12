@@ -87,7 +87,7 @@ namespace multimedia
 
             //return mmrc;
 
-            throw_status(estatus);
+            throw ::exception(estatus);
 
          }
 
@@ -106,7 +106,7 @@ namespace multimedia
 
             //return mmrc;
 
-            throw_status(estatus);
+            throw ::exception(estatus);
 
          }
 
@@ -141,7 +141,7 @@ namespace multimedia
 
             //return mmrc;
 
-            throw_status(estatus);
+            throw ::exception(estatus);
 
          }
 
@@ -210,7 +210,7 @@ namespace multimedia
             break;
 
          default:
-            throw_status(error_bad_argument);
+            throw ::exception(error_bad_argument);
          };
 
 
@@ -218,7 +218,7 @@ namespace multimedia
             initialize_destinations();
 
          if (m_mixerdestinationa.get_size() <= 0)
-            throw_status(error_wrong_state);
+            throw ::exception(error_wrong_state);
 
          for(i32 i = 0; i < m_mixerdestinationa.get_size(); i++)
          {
@@ -238,7 +238,7 @@ namespace multimedia
 
          }
 
-         throw_status(error_not_found);
+         throw ::exception(error_not_found);
 
       }
 
@@ -379,7 +379,7 @@ namespace multimedia
             if (!estatus)
             {
 
-               throw_status(estatus);
+               throw ::exception(estatus);
 
             }
 

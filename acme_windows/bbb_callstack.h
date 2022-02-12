@@ -78,28 +78,28 @@ namespace windows
       //static void global_enable_stack_trace(bool bEnable = true);
       static const char* default_format() { return "%f(%l) %s\n"; }
 
-      const char* get_dup(const ::string & pszFormat = default_format(), i32 uiSkip = CALLSTACK_DEFAULT_SKIP_TRIGGER, int iCount = -1);
+      //const char* get_dup(const ::string & pszFormat = default_format(), i32 uiSkip = CALLSTACK_DEFAULT_SKIP_TRIGGER, int iCount = -1);
 
-      const char* stack_trace() const;
+      //const char* stack_trace() const;
 
 
-      bool stack_trace(CONTEXT*, iptr iSkip = 0, const ::string & pszFormat = default_format(), int iCount = -1);
-      bool stack_trace(iptr iSkip = 1, const ::string & pszFormat = default_format(), int iCount = -1);
-      bool stack_trace(CONTEXT*, iptr iSkip = 1, bool bSkip = false, const ::string & pszFormat = default_format(), int iCount = -1);
-      char* stack_trace(OS_DWORD* pinteraction, int c, const ::string & pszFormat = default_format(), int iCount = -1);
+      //bool stack_trace(CONTEXT*, iptr iSkip = 0, const ::string & pszFormat = default_format(), int iCount = -1);
+      //bool stack_trace(iptr iSkip = 1, const ::string & pszFormat = default_format(), int iCount = -1);
+      //bool stack_trace(CONTEXT*, iptr iSkip = 1, bool bSkip = false, const ::string & pszFormat = default_format(), int iCount = -1);
+      //char* stack_trace(OS_DWORD* pinteraction, int c, const ::string & pszFormat = default_format(), int iCount = -1);
 
       void reset();
 
 #ifdef WINDOWS_DESKTOP
 
-      u32 WINAPI stack_trace_ThreadProc(void* pvoidParam);
+      ///u32 WINAPI stack_trace_ThreadProc(void* pvoidParam);
 
 
       bool get_line_from_address(HANDLE hProc, OS_DWORD uiAddress, ::u32* puiDisplacement, OS_IMAGEHLP_LINE* pline);
       //size_t get_module_basename(HMODULE hmodule, string & strName);
       size_t get_module_name(HMODULE hmodule, char* psz, int nCount);
 
-      char* get_frame(const char * pszFormat, int& iLine);
+      //char* get_frame(const char * pszFormat, int& iLine);
 
       bool check();
 
