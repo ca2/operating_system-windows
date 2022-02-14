@@ -11,6 +11,10 @@ namespace windows
    public:
 
 
+
+      __creatable_from_library(file_context, ::file_context, "apex_windows");
+
+
       //__pointer(::service)       m_pservice;
 
       SERVICE_STATUS             m_status;

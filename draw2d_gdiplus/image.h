@@ -14,6 +14,9 @@ namespace draw2d_gdiplus
    public:
 
 
+      __creatable_from_library(image, ::image, "draw2d_gdiplus");
+
+
       HBITMAP                    m_hbitmap;
       ::size_i64                 m_sizeWnd;
       BITMAPINFO                 m_bitmapinfo;

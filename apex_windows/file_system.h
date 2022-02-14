@@ -11,8 +11,11 @@ namespace windows
    public:
 
 
+      __creatable_from_library(file_system, ::file_system, "apex_windows");
+
+
       file_system();
-      virtual ~file_system();
+      ~file_system() override;
 
 
       virtual void init_system() override;

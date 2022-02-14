@@ -32,6 +32,9 @@ namespace file
    public:
 
 
+      __creatable_from_library(file_context, ::file_context, "apex_windows");
+
+
       OVERLAPPED           m_overlapped;
       HANDLE               m_hDirectory;
       byte                 m_buffer[32 * 1024];
@@ -57,6 +60,9 @@ namespace file
       virtual public watcher
    {
    public:
+
+
+      __creatable_from_library(os_watcher, ::file::watcher, "apex_windows");
 
 
       os_watcher();

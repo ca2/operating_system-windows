@@ -16,6 +16,9 @@ namespace write_text_win32
    public:
 
 
+      __creatable_from_library(font_enumeration, ::write_text::font_enumeration, "write_text_win32");
+
+
       HDC                                    m_hdc;
       wstring                                m_wstrTopicFaceName;
 

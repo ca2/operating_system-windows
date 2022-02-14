@@ -14,6 +14,9 @@ namespace draw2d_gdiplus
    public:
 
 
+      __creatable_from_library(aaaaa_aaaaaa, ::aaaaa_aaaaaa, "draw2d_gdiplus");
+
+
       Gdiplus::GraphicsPath *    m_ppath;
       Gdiplus::PointF            m_pointInternal;
       bool                       m_bHasPointInternal;

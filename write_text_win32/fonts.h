@@ -15,6 +15,8 @@ namespace write_text_win32
    public:
 
 
+      __creatable_from_library(fonts, ::write_text::fonts, "write_text_win32");
+
 
       fonts();
       ~fonts() override;

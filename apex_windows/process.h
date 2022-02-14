@@ -11,6 +11,9 @@ namespace windows
    public:
 
 
+      __creatable_from_library(process, ::process, "apex_windows");
+
+
       PROCESS_INFORMATION        m_pi;
       STARTUPINFOW               m_si;
 

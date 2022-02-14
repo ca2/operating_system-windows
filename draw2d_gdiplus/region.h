@@ -14,6 +14,9 @@ namespace draw2d_gdiplus
    public:
 
 
+      __creatable_from_library(aaaaa_aaaaaa, ::aaaaa_aaaaaa, "draw2d_gdiplus");
+
+
       Gdiplus::Region *       m_pregion;
 
 

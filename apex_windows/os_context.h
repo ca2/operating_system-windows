@@ -13,6 +13,9 @@ namespace windows
    public:
 
 
+      __creatable_from_library(os_context, ::os_context, "apex_windows");
+
+
       os_context();
       ~os_context() override;
 

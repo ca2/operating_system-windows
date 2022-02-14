@@ -14,12 +14,15 @@ namespace draw2d_gdiplus
    public:
 
 
+      __creatable_from_library(bitmap, ::draw2d::bitmap, "draw2d_gdiplus");
+
+
       ::Gdiplus::Bitmap *  m_pbitmap;
       memory               m_mem;
 
 
       bitmap();
-      virtual ~bitmap();
+      ~bitmap() override;
 
 #ifdef DEBUG
 

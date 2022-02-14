@@ -22,6 +22,9 @@ namespace windows
    public:
 
 
+      __creatable_from_library(ip_enum, ::net::ip_enum, "apex_windows");
+
+
       bool     m_bWinsockInitialized;
 
 

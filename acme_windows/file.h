@@ -25,7 +25,10 @@ namespace windows
    public:
 
 
-      enum Attribute
+      __creatable_from_library(file, ::file::file, "acme_windows");
+
+
+     /* enum Attribute
       {
          normal =    0x00,
          readOnly =  0x01,
@@ -45,7 +48,7 @@ namespace windows
          bufferCommit,
          bufferCheck
 
-      };
+      };*/
 
       HANDLE            m_handleFile;
       ::u32             m_dwAccessMode;

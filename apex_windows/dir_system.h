@@ -11,6 +11,9 @@ namespace windows
    public:
 
 
+      __creatable_from_library(dir_system, ::dir_system, "apex_windows");
+
+
       ::file::path            m_strTimeFolder;
       ::file::path            m_strNetSeedFolder;
 

@@ -12,6 +12,9 @@ namespace windows
    public:
 
 
+      __creatable_from_library(acme_path, ::acme_path, "acme_windows");
+
+
       acme_path();
       ~acme_path() override;
 

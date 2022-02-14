@@ -14,11 +14,14 @@ namespace draw2d_gdiplus
    public:
 
 
+      __creatable_from_library(aaaaa_aaaaaa, ::aaaaa_aaaaaa, "draw2d_gdiplus");
+
+
       draw2d();
-      virtual ~draw2d();
+      ~draw2d() override;
 
 
-      virtual void initialize(::object * pobject) override;
+      void initialize(::object * pobject) override;
 
       virtual string write_text_get_default_library_name() override;
 

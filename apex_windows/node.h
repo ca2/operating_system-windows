@@ -23,8 +23,11 @@ namespace apex
       public:
 
 
+         __creatable_from_library(file_context, ::file_context, "apex_windows");
+
+
          node();
-         virtual ~node();
+         ~node() override;
 
 
          virtual void initialize(::object* pobject) override;

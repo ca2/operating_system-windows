@@ -16,6 +16,9 @@ namespace windows
    public:
 
 
+      __creatable_from_library(pipe, ::operating_system::pipe, "apex_windows");
+
+
       class overlapped
       {
       public:

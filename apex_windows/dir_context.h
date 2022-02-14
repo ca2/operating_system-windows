@@ -11,12 +11,15 @@ namespace windows
    public:
 
 
+      __creatable_from_library(dir_context, ::dir_context, "draw2d_gdiplus");
+
+
       __reference(file_system)      m_pfilesystem;
       __reference(dir_system)       m_pdirsystem;
 
 
       dir_context();
-      virtual ~dir_context();
+      ~dir_context() override;
 
 
       virtual void initialize(::object * pobject) override;

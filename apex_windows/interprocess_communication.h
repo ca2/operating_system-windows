@@ -12,6 +12,10 @@ namespace windows
    public:
 
 
+
+      __creatable_from_library(interprocess_communication_base, ::interprocess_communication::base, "apex_windows");
+
+
       HWND              m_hwnd;
       string            m_strBaseChannel;
 
@@ -31,6 +35,9 @@ namespace windows
       virtual public interprocess_communication::tx
    {
    public:
+
+
+      __creatable_from_library(interprocess_communication_tx, ::interprocess_communication::tx, "apex_windows");
 
 
       interprocess_communication_tx();
@@ -59,6 +66,9 @@ namespace windows
       virtual public interprocess_communication::rx
    {
    public:
+
+
+      __creatable_from_library(interprocess_communication_rx, ::interprocess_communication::rx, "apex_windows");
 
 
       interprocess_communication_rx();

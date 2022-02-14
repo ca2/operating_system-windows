@@ -11,6 +11,9 @@ namespace draw2d_gdiplus
    public:
 
 
+      __creatable_from_library(aaaaa_aaaaaa, ::aaaaa_aaaaaa, "draw2d_gdiplus");
+
+
       //::Gdiplus::Matrix             m_matrix;
       ::Gdiplus::Graphics *         m_pgraphics;
       ::Gdiplus::GraphicsPath *     m_ppath;
