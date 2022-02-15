@@ -61,12 +61,12 @@ __FACTORY_EXPORT void apex_windows_factory(::factory::factory * pfactory)
    //add_factory_item < ::windows::interaction_impl, ::user::interaction_impl >();
 
    //pfactory->add_factory_item < ::file::os_watcher, ::file::watcher >();
-   pfactory->add_factory_item < ::file::os_watch, ::file::watch >();
+   //pfactory->add_factory_item < ::file::os_watch, ::file::watch >();
 
-   pfactory->add_factory_item < ::windows::file_context, ::file_context >();
-   pfactory->add_factory_item < ::windows::service_handler, ::service_handler >();
+   //pfactory->add_factory_item < ::windows::file_context, ::file_context >();
+   //pfactory->add_factory_item < ::windows::service_handler, ::service_handler >();
 
-   pfactory->add_factory_item < ::apex::windows::node, ::acme::node >();
+   //pfactory->add_factory_item < ::apex::windows::node, ::acme::node >();
 
    //add_factory_item < ::windows::copydesk, ::user::cop
    // 

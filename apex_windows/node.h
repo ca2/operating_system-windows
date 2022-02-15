@@ -23,7 +23,7 @@ namespace apex
       public:
 
 
-         __creatable_from_library(file_context, ::file_context, "apex_windows");
+         __creatable_from_library(node, ::acme::node, "apex_windows");
 
 
          node();

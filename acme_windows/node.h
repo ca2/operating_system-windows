@@ -21,6 +21,9 @@ namespace acme
       public:
 
 
+         __creatable_from_library(node, ::acme::node, "acme_windows");
+
+
          ::file::path            m_strTimeFolder;
          ::file::path            m_strNetSeedFolder;
 

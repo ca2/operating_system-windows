@@ -32,7 +32,7 @@ namespace file
    public:
 
 
-      __creatable_from_library(file_context, ::file_context, "apex_windows");
+      __creatable_from_library(os_watch, ::file::watch, "apex_windows");
 
 
       OVERLAPPED           m_overlapped;

@@ -11,11 +11,8 @@ namespace windows
    public:
 
 
+      __creatable_from_library(service_handler, ::service_handler, "apex_windows");
 
-      __creatable_from_library(file_context, ::file_context, "apex_windows");
-
-
-      //__pointer(::service)       m_pservice;
 
       SERVICE_STATUS             m_status;
 
@@ -27,7 +24,7 @@ namespace windows
       
 
       service_handler(u32 controlsAccepted = SERVICE_ACCEPT_PAUSE_CONTINUE | SERVICE_ACCEPT_STOP | SERVICE_ACCEPT_SHUTDOWN);
-      virtual ~service_handler();
+      ~service_handler() override;
 
 
       virtual void control_start(u32 uControl);

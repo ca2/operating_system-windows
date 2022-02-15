@@ -11,7 +11,7 @@ namespace windows
    public:
 
 
-      __creatable_from_library(process, ::process, "apex_windows");
+      __creatable_from_library(process, ::operating_system::process, "apex_windows");
 
 
       PROCESS_INFORMATION        m_pi;
