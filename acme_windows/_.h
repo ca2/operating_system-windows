@@ -12,4 +12,3 @@
 #endif
 
 
-//CLASS_DECL_ACME_WINDOWS void command_system(const char* psz);

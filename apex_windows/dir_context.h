@@ -11,7 +11,7 @@ namespace windows
    public:
 
 
-      __creatable_from_library(dir_context, ::dir_context, "draw2d_gdiplus");
+      //__creatable_from_base(dir_context, ::dir_context);
 
 
       __reference(file_system)      m_pfilesystem;

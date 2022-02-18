@@ -12,8 +12,11 @@ namespace windowing_win32
    public:
 
 
+      //__creatable_from_base(keyboard, ::windowing::keyboard);
+
+
       keyboard();
-      virtual ~keyboard();
+      ~keyboard() override;
 
 
    };

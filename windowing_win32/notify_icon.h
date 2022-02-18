@@ -24,6 +24,9 @@ namespace windowing_win32
    public:
 
 
+      //__creatable_from_base(notify_icon, ::user::notify_icon);
+
+
       enum e_message
       {
 

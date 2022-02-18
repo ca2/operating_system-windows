@@ -52,7 +52,7 @@ namespace windows
    public:
 
 
-      __creatable_from_library(serial, ::serial::serial, "acme_windows");
+      //__creatable_from_base(serial, ::serial::serial);
 
 
       bool        m_bReadTimeout;

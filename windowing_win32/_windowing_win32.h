@@ -35,6 +35,8 @@ CLASS_DECL_WINDOWING_WIN32 int windows_show_window(enum_display edisplay, enum_a
 CLASS_DECL_WINDOWING_WIN32 enum_display windows_show_window_to_edisplay(int iShowWindow, enum_activation& eactivation);
 
 
+
+
 #include "window_util.h"
 #include "win32.h"
 
@@ -80,4 +82,9 @@ CLASS_DECL_WINDOWING_WIN32 enum_display windows_show_window_to_edisplay(int iSho
 CLASS_DECL_WINDOWING_WIN32 HWND windows_get_mouse_capture(itask_t itask);
 
 
+//DECLARE_FACTORY(CLASS_DECL_WINDOWING_WIN32, windowing_win32);
 
+
+//BEGIN_FACTORY(windowing_win32)
+//FACTORY_ITEM(node)
+//END_FACTORY()

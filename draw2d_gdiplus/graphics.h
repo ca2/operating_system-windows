@@ -11,7 +11,7 @@ namespace draw2d_gdiplus
    public:
 
 
-      __creatable_from_library(aaaaa_aaaaaa, ::aaaaa_aaaaaa, "draw2d_gdiplus");
+      //__creatable_from_base(graphics, ::draw2d::graphics);
 
 
       //::Gdiplus::Matrix             m_matrix;
@@ -24,7 +24,7 @@ namespace draw2d_gdiplus
 
 
       graphics();
-      virtual ~graphics();
+      ~graphics() override;
 
 
       virtual void close_graphics();

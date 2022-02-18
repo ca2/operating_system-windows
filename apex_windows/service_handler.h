@@ -11,7 +11,7 @@ namespace windows
    public:
 
 
-      __creatable_from_library(service_handler, ::service_handler, "apex_windows");
+      //__creatable_from_base(service_handler, ::service_handler);
 
 
       SERVICE_STATUS             m_status;

@@ -1,6 +1,24 @@
 #include "framework.h"
 
 
+//BEGIN_FACTORY(windowing_win32)
+//FACTORY_DEPENDENCY(aura_windows)
+//FACTORY_ITEM(::windowing_win32::windowing)
+//FACTORY_ITEM(::windowing_win32::window)
+//FACTORY_ITEM(::windowing_win32::display)
+//FACTORY_ITEM(::windowing_win32::buffer)
+//FACTORY_ITEM(::windowing_win32::notify_icon)
+//FACTORY_ITEM(::windowing_win32::cursor)
+//FACTORY_ITEM(::windowing_win32::icon)
+//FACTORY_ITEM(::windowing_win32::shell)
+//FACTORY_ITEM(::windowing_win32::copydesk)
+//FACTORY_ITEM(imm_client)
+//FACTORY_ITEM(::windowing_win32::keyboard)
+//FACTORY_ITEM(::windowing_win32::node)
+//END_FACTORY()
+
+
+
 __FACTORY_EXPORT void aura_windows_factory(::factory::factory * pfactory);
 
 

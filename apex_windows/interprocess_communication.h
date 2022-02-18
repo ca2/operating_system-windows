@@ -13,7 +13,7 @@ namespace windows
 
 
 
-      __creatable_from_library(interprocess_communication_base, ::interprocess_communication::base, "apex_windows");
+      //__creatable_from_base(interprocess_communication_base, ::interprocess_communication::base);
 
 
       HWND              m_hwnd;
@@ -37,7 +37,7 @@ namespace windows
    public:
 
 
-      __creatable_from_library(interprocess_communication_tx, ::interprocess_communication::tx, "apex_windows");
+      //__creatable_from_base(interprocess_communication_tx, ::interprocess_communication::tx);
 
 
       interprocess_communication_tx();
@@ -68,7 +68,7 @@ namespace windows
    public:
 
 
-      __creatable_from_library(interprocess_communication_rx, ::interprocess_communication::rx, "apex_windows");
+      //__creatable_from_base(interprocess_communication_rx, ::interprocess_communication::rx);
 
 
       interprocess_communication_rx();

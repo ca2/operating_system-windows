@@ -1,6 +1,13 @@
 #include "framework.h"
 
 
+//BEGIN_FACTORY(aura_windows)
+//FACTORY_DEPENDENCY(apex_windows)
+//FACTORY_DEPENDENCY(aura_windows_common)
+//FACTORY_ITEM(::aura::windows_common::node)
+//FACTORY_ITEM(::windows::interaction_impl)
+//END_FACTORY()
+
 __FACTORY_EXPORT void apex_windows_factory(::factory::factory * pfactory);
 
 

@@ -16,7 +16,7 @@ namespace write_text_win32
    public:
 
 
-      __creatable_from_library(font_enumeration, ::write_text::font_enumeration, "write_text_win32");
+      //__creatable_from_base(font_enumeration, ::write_text::font_enumeration);
 
 
       HDC                                    m_hdc;

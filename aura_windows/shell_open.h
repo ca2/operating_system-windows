@@ -14,6 +14,9 @@ namespace windows
    public:
 
 
+      //__creatable_from_base(shell_open, ::shell_open);
+
+
       HSZ               m_hszAppName;
       HSZ               m_hszSystemTopic;
       DWORD             m_dwDde;

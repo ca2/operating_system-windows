@@ -13,7 +13,7 @@ namespace windows
    public:
 
 
-      __creatable_from_library(os_context, ::os_context, "apex_windows");
+      //__creatable_from_base(os_context, ::os_context);
 
 
       os_context();

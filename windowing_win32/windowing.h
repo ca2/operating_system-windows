@@ -6,10 +6,13 @@ namespace windowing_win32
 {
 
 
-   class windowing :
+   class CLASS_DECL_WINDOWING_WIN32 windowing :
       virtual public ::windowing::windowing
    {
    public:
+
+
+      //__creatable_from_base(windowing, ::windowing::windowing);
 
 
       //i64_map < ::user::enum_key >     m_mapKey;
@@ -28,12 +31,12 @@ namespace windowing_win32
 
 
       windowing();
-      virtual ~windowing();
+      ~windowing() override;
 
 
-      virtual void initialize_windowing(::user::user * puser) override;
+      void initialize_windowing(::user::user * puser) override;
 
-      virtual void defer_term_ui() override;
+      void defer_term_ui() override;
 
       void finalize_windowing() override;
 
@@ -41,7 +44,7 @@ namespace windowing_win32
 
       //void destroy() override;
 
-      virtual void get_cursor_position(POINT_I32* ppoint) override;
+      void get_cursor_position(POINT_I32* ppoint) override;
 
       virtual bool defer_create_system_window();
       //virtual __pointer(::user::interaction) create_system_window();

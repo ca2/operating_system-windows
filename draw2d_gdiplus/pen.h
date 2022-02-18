@@ -15,7 +15,7 @@ namespace draw2d_gdiplus
    public:
 
 
-      __creatable_from_library(pen, ::draw2d::pen, "draw2d_gdiplus");
+      //__creatable_from_base(pen, ::draw2d::pen);
 
 
       Gdiplus::PenAlignment m_egdiplusalign;

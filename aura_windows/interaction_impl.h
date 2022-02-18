@@ -23,6 +23,9 @@ namespace windows
    public:
 
 
+      //__creatable_from_base(interaction_impl, ::user::interaction_impl);
+
+
       HWND                                      m_hwnd;
       bool                                      m_bClipboardOpened : 1;
       bool                                      m_bFocusImpl : 1;

@@ -13,6 +13,10 @@ namespace windowing_win32
    public:
 
 
+
+      //__creatable_from_base(icon, ::windowing::icon);
+
+
       map < ::size_i32, HICON >              m_iconmap;
 
       ::file::path                           m_pathProcessed;

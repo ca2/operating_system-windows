@@ -25,7 +25,7 @@ namespace windows
    public:
 
 
-      __creatable_from_library(file, ::file::file, "acme_windows");
+      //__creatable_from_base(file, ::file::file);
 
 
      /* enum Attribute

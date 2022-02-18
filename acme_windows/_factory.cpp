@@ -14,9 +14,19 @@
 #include "file.h"
 
 
-//void CLASS_DECL_ACME_WINDOWS __cdecl _ca2_purecall();
+//BEGIN_FACTORY(acme_windows)
+//FACTORY_DEPENDENCY(acme_windows_common)
+//FACTORY_ITEM(::windows::acme_dir)
+//FACTORY_ITEM(::windows::acme_file)
+//FACTORY_ITEM(::windows::acme_path)
+//FACTORY_ITEM(::acme::windows::node)
+//FACTORY_ITEM(::windows::file)
+//END_FACTORY()
 
 
+////void CLASS_DECL_ACME_WINDOWS __cdecl _ca2_purecall();
+//
+//
 __FACTORY_IMPORT void acme_windows_common_factory(::factory::factory* pfactory);
 
 
@@ -34,7 +44,7 @@ __FACTORY_EXPORT void acme_windows_factory(::factory::factory * pfactory)
    //pfactory->add_factory_item < ::windows::file_context, ::file_context >();
 
    //add_factory_item < ::windows::stdio_file, ::file::text_file >();
-   //add_factory_item < ::windows::file, ::file::file >();
+   pfactory->add_factory_item < ::windows::file, ::file::file >();
    //pfactory->add_factory_item < ::windows::os_context, ::os_context >();
    //pfactory->add_factory_item < ::windows::pipe, ::operating_system::pipe >();
    //pfactory->add_factory_item < ::windows::process, ::operating_system::process >();
@@ -43,10 +53,10 @@ __FACTORY_EXPORT void acme_windows_factory(::factory::factory * pfactory)
    //pfactory->add_factory_item < ::windows::crypto, ::crypto::crypto >();
    //pfactory->add_factory_item < ::windows::ip_enum, ::net::ip_enum >();
 
-   //pfactory->add_factory_item < ::acme::windows::node, ::acme::node >();
-   //pfactory->add_factory_item < ::windows::acme_dir, ::acme_dir >();
-   //pfactory->add_factory_item < ::windows::acme_file, ::acme_file >();
-   //pfactory->add_factory_item < ::windows::acme_path, ::acme_path >();
+   pfactory->add_factory_item < ::acme::windows::node, ::acme::node >();
+   pfactory->add_factory_item < ::windows::acme_dir, ::acme_dir >();
+   pfactory->add_factory_item < ::windows::acme_file, ::acme_file >();
+   pfactory->add_factory_item < ::windows::acme_path, ::acme_path >();
 
    //pfactory->add_factory_item < ::windows::interprocess_communication_base, ::interprocess_communication::base >();
    //pfactory->add_factory_item < ::windows::interprocess_communication_rx, ::interprocess_communication::rx >();

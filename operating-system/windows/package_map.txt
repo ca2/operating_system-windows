@@ -2,6 +2,7 @@ default_draw2d=operating-system-windows/draw2d_gdiplus
 default_node=operating-system-windows/node_windows
 default_windowing=operating-system-windows/windowing_win32
 default_audio=operating-system-windows/audio_mmsystem
+default_video_input=app-core/video_input_media_foundation
 third/libcrypto=third/libcrypto-3-x64
 third/libssl=third/libssl-3-x64
 default_imaging=operating-system-windows_common/imaging_wic

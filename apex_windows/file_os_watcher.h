@@ -32,7 +32,7 @@ namespace file
    public:
 
 
-      __creatable_from_library(os_watch, ::file::watch, "apex_windows");
+      //__creatable_from_base(os_watch, ::file::watch);
 
 
       OVERLAPPED           m_overlapped;
@@ -62,7 +62,7 @@ namespace file
    public:
 
 
-      __creatable_from_library(os_watcher, ::file::watcher, "apex_windows");
+      //__creatable_from_base(os_watcher, ::file::watcher);
 
 
       os_watcher();

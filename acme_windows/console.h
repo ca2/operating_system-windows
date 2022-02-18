@@ -11,7 +11,7 @@ namespace windows
    public:
 
 
-      __creatable_from_library(console, ::console::console, "acme_windows");
+      //__creatable_from_base(console, ::console::console);
 
 
       int m_iW;

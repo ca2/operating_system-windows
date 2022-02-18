@@ -14,7 +14,7 @@ namespace draw2d_gdiplus
    public:
 
 
-      __creatable_from_library(image, ::image, "draw2d_gdiplus");
+      //__creatable_from_base(image, ::image);
 
 
       HBITMAP                    m_hbitmap;

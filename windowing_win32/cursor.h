@@ -13,8 +13,11 @@ namespace windowing_win32
    public:
 
 
+      //__creatable_from_base(cursor, ::windowing::cursor);
+
+
       cursor(HCURSOR hcursor = nullptr);
-      virtual ~cursor();
+      ~cursor() override;
 
 
       void _create_os_cursor() override;

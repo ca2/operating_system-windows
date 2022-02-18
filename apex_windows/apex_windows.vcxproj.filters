@@ -74,9 +74,6 @@
     <ClInclude Include="file_system.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="folder_watch.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="interprocess_communication.h">
       <Filter>Header Files</Filter>
     </ClInclude>

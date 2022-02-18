@@ -14,7 +14,7 @@ namespace draw2d_gdiplus
    public:
 
 
-      __creatable_from_library(aaaaa_aaaaaa, ::aaaaa_aaaaaa, "draw2d_gdiplus");
+      //__creatable_from_base(brush, ::draw2d::brush);
 
 
       Gdiplus::Brush * m_pbrush;

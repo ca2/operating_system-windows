@@ -14,17 +14,21 @@ namespace draw2d_gdiplus
    public:
 
 
-      __creatable_from_library(aaaaa_aaaaaa, ::aaaaa_aaaaaa, "draw2d_gdiplus");
+      //__creatable_from_base(font, ::write_text::font);
 
 
       font();
-      virtual ~font();
+      ~font() override;
+
 
 #ifdef DEBUG
 
+      
       void dump(dump_context & dumpcontext) const override;
 
+
 #endif
+
 
       virtual void create(::draw2d::graphics * pgraphics, ::i8 iCreate) override;
       void destroy() override;

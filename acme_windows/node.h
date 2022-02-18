@@ -21,7 +21,7 @@ namespace acme
       public:
 
 
-         __creatable_from_library(node, ::acme::node, "acme_windows");
+         //__creatable_from_base(node, ::acme::node);
 
 
          ::file::path            m_strTimeFolder;

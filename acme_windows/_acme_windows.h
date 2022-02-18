@@ -1,12 +1,15 @@
 #pragma once
 
 
+#include "_.h"
 #include "acme_windows_common/_acme_windows_common.h"
 #include "acme/operating_system.h"
 #include <Shlobj.h>
 #include <shellapi.h>
 #include "acme_windows_common/comptr.h"
 
+
+//DECLARE_FACTORY(CLASS_DECL_ACME_WINDOWS, acme_windows);
 
 
 CLASS_DECL_ACME_WINDOWS HANDLE hfile_create(

@@ -8,6 +8,9 @@
 #include "aura/user/_user.h"
 
 
+//DECLARE_FACTORY(CLASS_DECL_AURA_WINDOWS, aura_windows);
+
+
 #include "interaction_impl.h"
 
 

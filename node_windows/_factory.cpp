@@ -1,6 +1,12 @@
 #include "framework.h"
 
 
+//BEGIN_FACTORY(node_windows)
+//   FACTORY_DEPENDENCY(windowing_win32)
+//END_FACTORY()
+
+
+
 __FACTORY_EXPORT void windowing_win32_factory(::factory::factory * pfactory);
 
 

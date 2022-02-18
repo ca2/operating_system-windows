@@ -12,6 +12,9 @@ namespace windowing_win32
    public:
 
 
+      //__creatable_from_base(node, ::acme::node);
+
+
       enum_message                                       m_emessageWindowsTaskbarCreatedMessage;
 
 

@@ -18,6 +18,9 @@ namespace windowing_win32
    public:
 
 
+      //__creatable_from_base(buffer, ::graphics::graphics);
+
+
       class os_buffer
       {
       public:
@@ -47,7 +50,7 @@ namespace windowing_win32
 
 
       buffer();
-      virtual ~buffer();
+      ~buffer() override;
 
 
       virtual void initialize_graphics_graphics(::user::interaction_impl * pimpl) override;

@@ -12,6 +12,10 @@ namespace windowing_win32
    public:
 
 
+
+      //__creatable_from_base(copydesk, ::user::copydesk);
+
+
       //HWND m_hwnd;
 
       //__pointer(::user::interaction)      m_puserinteraction;

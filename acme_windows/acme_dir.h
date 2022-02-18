@@ -12,7 +12,7 @@ namespace windows
    public:
 
 
-      __creatable_from_library(acme_dir, ::acme_dir, "acme_windows_common");
+      //__creatable_from_base(acme_dir, ::acme_dir);
 
 
       acme_dir();

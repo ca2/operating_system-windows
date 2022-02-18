@@ -14,7 +14,7 @@ namespace draw2d_gdiplus
    public:
 
 
-      __creatable_from_library(bitmap, ::draw2d::bitmap, "draw2d_gdiplus");
+      //__creatable_from_base(bitmap, ::draw2d::bitmap);
 
 
       ::Gdiplus::Bitmap *  m_pbitmap;

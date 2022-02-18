@@ -14,6 +14,8 @@ namespace windowing_win32
    public:
 
 
+      //__creatable_and_from_base(display, ::windowing::display);
+
 
 #ifdef WINDOWS_DESKTOP
 
@@ -32,35 +34,32 @@ namespace windowing_win32
       raw_array < MONITORINFO >                          m_monitorinfoaDesk;
 
 
-
-
-
       display();
-      virtual ~display();
+      ~display() override;
 
 
-      virtual void initialize_display(::windowing::windowing * pwindowing) override;
+      void initialize_display(::windowing::windowing * pwindowing) override;
 
 
       virtual void update_dpi();
 
-      virtual void enum_display_monitors() override;
+      void enum_display_monitors() override;
 
-      virtual ::index get_main_monitor(RECTANGLE_I32 * prectangle = nullptr) override;
+      ::index get_main_monitor(RECTANGLE_I32 * prectangle = nullptr) override;
 
-      virtual ::count get_monitor_count() override;
+      ::count get_monitor_count() override;
       //virtual bool  get_monitor_rect(index iMonitor, RECTANGLE_I32 * prectangle) override;
 
-      virtual ::count get_desk_monitor_count() override;
+      ::count get_desk_monitor_count() override;
       //virtual bool  get_desk_monitor_rect(index iMonitor, RECTANGLE_I32 * prectangle) override;
 
 
-      virtual index get_main_workspace(RECTANGLE_I32 * prectangle = nullptr) override;
+      index get_main_workspace(RECTANGLE_I32 * prectangle = nullptr) override;
 
-      virtual ::count get_workspace_count() override;
+      ::count get_workspace_count() override;
       //virtual bool  get_wkspace_rect(index iWkspace, RECTANGLE_I32 * prectangle) override;
 
-      virtual ::count get_desk_workspace_count() override;
+      ::count get_desk_workspace_count() override;
       //virtual bool  get_desk_wkspace_rect(index iWkspace, RECTANGLE_I32 * prectangle) override;
 
       //virtual index get_ui_wkspace(::user::interaction * pinteraction) override;

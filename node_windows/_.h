@@ -5,6 +5,7 @@
 #include "aura/_.h"
 #include "apex_windows/_.h"
 #include "aura_windows_common/_.h"
+#include "windowing_win32/_.h"
 
 
 #if defined(_AURA_WINDOWS_LIBRARY)

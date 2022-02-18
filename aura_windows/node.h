@@ -23,6 +23,9 @@ namespace aura
       public:
 
 
+         //__creatable_from_base(node, ::acme::node);
+
+
          node();
          ~node() override;
 

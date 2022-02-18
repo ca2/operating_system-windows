@@ -13,6 +13,9 @@ namespace windowing_win32
    public:
 
 
+      //__creatable_from_base(window, ::windowing::window);
+
+
       //HICON                                     m_hiconSmall;
       //HICON                                     m_hiconBig;
       bool                                      m_bTrackMouseLeave : 1;

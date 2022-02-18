@@ -8,6 +8,9 @@ class CLASS_DECL_WINDOWING_WIN32 imm_client :
 public:
 
 
+   //__creatable_from_base(imm_client, ::user::text_composition_client);
+
+
    bool                             m_bTextCompositionActive2; // replaced by m_bTextCompositionActive in base class.
    bool                             m_bImeCancelling;
    __pointer(::user::interaction)   m_puserinteraction;

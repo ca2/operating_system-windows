@@ -11,7 +11,7 @@ namespace windows
    public:
 
 
-      __creatable_from_library(file_memory_map, ::file::memory_map, "acme_windows");
+      //__creatable_from_base(file_memory_map, ::file::memory_map);
 
 
       HANDLE                     m_hfile;

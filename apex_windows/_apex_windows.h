@@ -2,9 +2,13 @@
 #pragma once
 
 
+#include "_.h"
 #include "apex/operating_system.h"
 #include "acme_windows/_acme_windows.h"
 #include "apex_windows_common/_apex_windows_common.h"
+
+
+//DECLARE_FACTORY(CLASS_DECL_APEX_WINDOWS, apex_windows);
 
 
 #include "apex/platform/launcher.h"
