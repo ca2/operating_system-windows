@@ -252,5 +252,17 @@
 #define GLEW_STATIC
 #endif
 
+#define FONT_SANS "Arial"
+#define FONT_SERIF "Times New Roman"
+ 
+#define FONT_SANS_EX "Geneva"
+#define FONT_SERIF_EX "Palatino Linotype"
+
+#define FONT_SANS_FX "Tahoma"
+#define FONT_SERIF_FX "Georgia"
+
+#define FONT_SANS_UI "Segoe UI"
+#define FONT_SERIF_UI "Constantia"
 
 
+#define FONT_MONO "Courier New"

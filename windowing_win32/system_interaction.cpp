@@ -2,10 +2,12 @@
 #include "aura/message.h"
 #include "aura/procedure.h"
 #include "system_interaction.h"
+#include "_windows.h"
 
 
 namespace windowing_win32
 {
+
 
 
    system_interaction::system_interaction()
@@ -14,12 +16,12 @@ namespace windowing_win32
       m_ewindowflag -= e_window_flag_graphical;
       //m_bMessageWindow = true;
 
+
    }
 
 
    system_interaction::~system_interaction()
    {
-
 
    }
 
@@ -29,12 +31,15 @@ namespace windowing_win32
 
       ::user::interaction::install_message_routing(pchannel);
 
+      //MESSAGE_LINK(e_message_create, pchannel, this, &system_interaction::on_message_create);
       MESSAGE_LINK(e_message_destroy, pchannel, this, &system_interaction::on_message_destroy);
       MESSAGE_LINK(e_message_display_change, pchannel, this, &system_interaction::_001OnMessage);
       MESSAGE_LINK(e_message_setting_change, pchannel, this, &system_interaction::_001OnMessage);
       MESSAGE_LINK(e_message_font_change, pchannel, this, &system_interaction::_001OnMessage);
+      
 
    }
+
 
 
    bool system_interaction::is_system_message_window()
@@ -57,6 +62,8 @@ namespace windowing_win32
 
    void system_interaction::on_message_destroy(::message::message * pmessage)
    {
+
+      ::finalize_windows_devices();
 
       __pointer(::user::message) pusermessage(pmessage);
 
@@ -149,6 +156,16 @@ namespace windowing_win32
 
       }
 
+
+   }
+
+
+
+
+   void system_interaction::initialize_windows_devices()
+   {
+
+      ::initialize_windows_devices(this);
 
    }
 

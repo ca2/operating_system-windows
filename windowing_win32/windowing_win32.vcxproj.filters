@@ -103,6 +103,12 @@
     <ClCompile Include="keyboard_hook.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="device_listener.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="devices.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -184,6 +190,15 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="keyboard_hook.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="device_listener.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="_windows.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="devices.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

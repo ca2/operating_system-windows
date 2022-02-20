@@ -882,6 +882,8 @@
     <ClInclude Include="buffer.h" />
     <ClInclude Include="copydesk.h" />
     <ClInclude Include="cursor.h" />
+    <ClInclude Include="devices.h" />
+    <ClInclude Include="device_listener.h" />
     <ClInclude Include="display.h" />
     <ClInclude Include="icon.h" />
     <ClInclude Include="imm_client.h" />
@@ -906,12 +908,15 @@
     <ClInclude Include="framework.h" />
     <ClInclude Include="_impl.h" />
     <ClInclude Include="_windowing_win32.h" />
+    <ClInclude Include="_windows.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="appbar.cpp" />
     <ClCompile Include="buffer.cpp" />
     <ClCompile Include="copydesk.cpp" />
     <ClCompile Include="cursor.cpp" />
+    <ClCompile Include="devices.cpp" />
+    <ClCompile Include="device_listener.cpp" />
     <ClCompile Include="display.cpp" />
     <ClCompile Include="_factory.cpp" />
     <ClCompile Include="gdi.cpp" />

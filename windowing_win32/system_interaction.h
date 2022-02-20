@@ -12,19 +12,26 @@ namespace windowing_win32
    public:
 
 
+
+
       system_interaction();
-      virtual ~system_interaction();
+      ~system_interaction() override;
 
 
       void install_message_routing(::channel * pchannel) override;
 
-      DECLARE_MESSAGE_HANDLER(_001OnMessage);
-      DECLARE_MESSAGE_HANDLER(on_message_destroy);
 
+      //DECLARE_MESSAGE_HANDLER(on_message_create);
+      DECLARE_MESSAGE_HANDLER(on_message_destroy);
+      DECLARE_MESSAGE_HANDLER(_001OnMessage);
+      DECLARE_MESSAGE_HANDLER(_001OnDeviceChange);
+      
 
       virtual void start_destroying_window() override;
 
       virtual bool is_system_message_window() override;
+
+      void initialize_windows_devices();
 
 
    };

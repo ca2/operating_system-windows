@@ -14,15 +14,30 @@
 #endif
 
 
+namespace windows
+{
+
+   
+   class devices;
+
+
+} // namespace windows
+
+
 namespace windowing_win32
 {
 
    
    class windowing;
    class hwnd_array;
+   class system_interaction;
 
 
 } // namespace windowing_win32
+
+
+CLASS_DECL_WINDOWING_WIN32 void initialize_windows_devices(::windowing_win32::system_interaction * psysteminteraction);
+CLASS_DECL_WINDOWING_WIN32 void finalize_windows_devices();
 
 
 
