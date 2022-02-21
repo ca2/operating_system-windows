@@ -77,12 +77,12 @@ __FACTORY_EXPORT void acme_windows_factory(::factory::factory * pfactory)
    // ydesk >();
    ////add_factory_item < ::windows::shell, ::user::shell >();
 
-   //pfactory->add_factory_item < ::windows::serial, ::serial::serial >();
-   //pfactory->add_factory_item < ::windows::file_memory_map, ::file::memory_map >();
+   pfactory->add_factory_item < ::windows::serial, ::serial::serial >();
+   pfactory->add_factory_item < ::windows::file_memory_map, ::file::memory_map >();
 
-   //pfactory->add_factory_item < ::windows::pipe, ::operating_system::pipe >();
-   //pfactory->add_factory_item < ::windows::file, ::file::file >();
-   //pfactory->add_factory_item < ::windows::console, ::console::console >();
+   pfactory->add_factory_item < ::windows::pipe, ::operating_system::pipe >();
+   pfactory->add_factory_item < ::windows::file, ::file::file >();
+   pfactory->add_factory_item < ::windows::console, ::console::console >();
 
    //pfactory->add_factory_item < ::windows::dir_system, ::dir_system >();
    //pfactory->add_factory_item < ::windows::file_system, ::file_system >();

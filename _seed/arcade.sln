@@ -108,7 +108,13 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "directx", "..\..\operating-
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "audio_resample_swresample", "..\..\..\source\app-core\audio_resample_swresample\audio_resample_swresample.vcxproj", "{AB2FD028-7E1B-4BDF-B317-DCC05194807F}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_game_game_of_life", "..\..\..\source\game\game_of_life\shared_game_game_of_life.vcxproj", "{ABDFF656-2F2C-4EE5-970A-75FFA444F767}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_game_game_of_life", "..\..\..\source\game\game_of_life\shared_game_game_of_life.vcxproj", "{637C6CF6-A527-4F7D-BB98-42323B3BF44C}"
+	ProjectSection(ProjectDependencies) = postProject
+		{C1CCDF2E-9F27-45D3-B67A-B2EEB1754E72} = {C1CCDF2E-9F27-45D3-B67A-B2EEB1754E72}
+		{E2D7833B-9B59-4826-BBDF-C270A2115E86} = {E2D7833B-9B59-4826-BBDF-C270A2115E86}
+		{D79C7DDB-A727-4B91-803E-41C4431693D6} = {D79C7DDB-A727-4B91-803E-41C4431693D6}
+		{D6B5B8F3-A524-4E73-8343-C3D5D558ADE3} = {D6B5B8F3-A524-4E73-8343-C3D5D558ADE3}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "static_game_game_of_life", "..\..\..\source\game\game_of_life\static_game_game_of_life.vcxproj", "{B3C2FC2F-00B5-4B57-BA6A-5BAE18CE8761}"
 EndProject
@@ -741,18 +747,18 @@ Global
 		{AB2FD028-7E1B-4BDF-B317-DCC05194807F}.stage|Win32.Build.0 = stage|Win32
 		{AB2FD028-7E1B-4BDF-B317-DCC05194807F}.stage|x64.ActiveCfg = stage|x64
 		{AB2FD028-7E1B-4BDF-B317-DCC05194807F}.stage|x64.Build.0 = stage|x64
-		{ABDFF656-2F2C-4EE5-970A-75FFA444F767}.basis|Win32.ActiveCfg = basis|Win32
-		{ABDFF656-2F2C-4EE5-970A-75FFA444F767}.basis|Win32.Build.0 = basis|Win32
-		{ABDFF656-2F2C-4EE5-970A-75FFA444F767}.basis|x64.ActiveCfg = basis|x64
-		{ABDFF656-2F2C-4EE5-970A-75FFA444F767}.basis|x64.Build.0 = basis|x64
-		{ABDFF656-2F2C-4EE5-970A-75FFA444F767}.cube_basis|Win32.ActiveCfg = stage|Win32
-		{ABDFF656-2F2C-4EE5-970A-75FFA444F767}.cube_basis|x64.ActiveCfg = basis|x64
-		{ABDFF656-2F2C-4EE5-970A-75FFA444F767}.cube_stage|Win32.ActiveCfg = stage|Win32
-		{ABDFF656-2F2C-4EE5-970A-75FFA444F767}.cube_stage|x64.ActiveCfg = stage|x64
-		{ABDFF656-2F2C-4EE5-970A-75FFA444F767}.stage|Win32.ActiveCfg = stage|Win32
-		{ABDFF656-2F2C-4EE5-970A-75FFA444F767}.stage|Win32.Build.0 = stage|Win32
-		{ABDFF656-2F2C-4EE5-970A-75FFA444F767}.stage|x64.ActiveCfg = stage|x64
-		{ABDFF656-2F2C-4EE5-970A-75FFA444F767}.stage|x64.Build.0 = stage|x64
+		{637C6CF6-A527-4F7D-BB98-42323B3BF44C}.basis|Win32.ActiveCfg = basis|Win32
+		{637C6CF6-A527-4F7D-BB98-42323B3BF44C}.basis|Win32.Build.0 = basis|Win32
+		{637C6CF6-A527-4F7D-BB98-42323B3BF44C}.basis|x64.ActiveCfg = basis|x64
+		{637C6CF6-A527-4F7D-BB98-42323B3BF44C}.basis|x64.Build.0 = basis|x64
+		{637C6CF6-A527-4F7D-BB98-42323B3BF44C}.cube_basis|Win32.ActiveCfg = stage|Win32
+		{637C6CF6-A527-4F7D-BB98-42323B3BF44C}.cube_basis|x64.ActiveCfg = basis|x64
+		{637C6CF6-A527-4F7D-BB98-42323B3BF44C}.cube_stage|Win32.ActiveCfg = stage|Win32
+		{637C6CF6-A527-4F7D-BB98-42323B3BF44C}.cube_stage|x64.ActiveCfg = stage|x64
+		{637C6CF6-A527-4F7D-BB98-42323B3BF44C}.stage|Win32.ActiveCfg = stage|Win32
+		{637C6CF6-A527-4F7D-BB98-42323B3BF44C}.stage|Win32.Build.0 = stage|Win32
+		{637C6CF6-A527-4F7D-BB98-42323B3BF44C}.stage|x64.ActiveCfg = stage|x64
+		{637C6CF6-A527-4F7D-BB98-42323B3BF44C}.stage|x64.Build.0 = stage|x64
 		{B3C2FC2F-00B5-4B57-BA6A-5BAE18CE8761}.basis|Win32.ActiveCfg = cube_basis|Win32
 		{B3C2FC2F-00B5-4B57-BA6A-5BAE18CE8761}.basis|x64.ActiveCfg = cube_basis|x64
 		{B3C2FC2F-00B5-4B57-BA6A-5BAE18CE8761}.cube_basis|Win32.ActiveCfg = cube_basis|Win32

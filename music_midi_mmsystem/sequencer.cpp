@@ -2443,6 +2443,12 @@ namespace music
                   break;
 
                }
+               else if (estatus == ::success_end_of_file)
+               {
+
+                  break;
+
+               }
                else if (!estatus)
                {
 
