@@ -1,7 +1,7 @@
 // created by Camilo 2021-01-31 05:36 BRT <3CamiloSasukeThomasBorregaardSoerensen
 #include "framework.h"
 #include "apex/operating_system.h"
-#include "apex/platform/app_core.h"
+//#include "apex/platform/app_core.h"
 #include "interprocess_communication.h"
 #include "apex/platform/launcher.h"
 #include "launcher.h"

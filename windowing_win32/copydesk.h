@@ -53,14 +53,14 @@ namespace windowing_win32
       virtual int _get_priority_text_format();
 
 
-      virtual HGLOBAL hglobal_get_filea(const ::file::patha & stra);
+      virtual HGLOBAL hglobal_get_filea(const ::file::path_array & stra);
       virtual HGLOBAL hglobal_get_wide_text(const ::string & str);
       virtual HGLOBAL hglobal_get_utf8_text(const ::string & str);
       virtual HGLOBAL hglobal_get_image(const ::image * pimage);
 
 
-      bool _set_filea(const ::file::patha & stra, enum_op eop) override;
-      bool _get_filea(::file::patha & stra, enum_op & eop) override;
+      bool _set_filea(const ::file::path_array & stra, enum_op eop) override;
+      bool _get_filea(::file::path_array & stra, enum_op & eop) override;
       bool _has_filea() override;
 
 

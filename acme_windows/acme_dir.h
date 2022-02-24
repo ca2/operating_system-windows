@@ -115,15 +115,15 @@ namespace windows
 
       //bool is(const char * path) override;
 
-      void rls(::file::patha & stra, const char * psz) override;
+      void rls(::file::path_array & stra, const char * psz) override;
 
-      void rls_dir(::file::patha & stra, const char * psz) override;
+      void rls_dir(::file::path_array & stra, const char * psz) override;
 
-      void ls(::file::patha & stra, const char * psz) override;
+      void ls(::file::path_array & stra, const char * psz) override;
 
-      void ls_dir(::file::patha & stra, const char * psz) override;
+      void ls_dir(::file::path_array & stra, const char * psz) override;
 
-      void ls_file(::file::patha & stra, const char * psz) override;
+      void ls_file(::file::path_array & stra, const char * psz) override;
 
       //int make_path(const char * psz) override;
 

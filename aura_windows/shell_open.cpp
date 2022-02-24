@@ -70,16 +70,22 @@ namespace windows
       case XTYP_CONNECT:
       {
          
-         __pointer(::windows::shell_open) pshellopen = ::get_task()->get_application();
+         __pointer(::windows::shell_open) pshellopen = ::get_task()->get_app()->m_papplication;
 
          if (!DdeCmpStringHandles((HSZ)hsz1, pshellopen->m_hszSystemTopic))
          {
+
             if (!DdeCmpStringHandles((HSZ)hsz2, pshellopen->m_hszAppName))
             {
+
                return (HDDEDATA)true;
+
             }
+
          }
+
          return (HDDEDATA)false;
+
       }
 
       case XTYP_DISCONNECT:

@@ -1,6 +1,6 @@
 #include "framework.h"
 #include "apex/operating_system.h"
-#include "apex/platform/app_core.h"
+//#include "apex/platform/app_core.h"
 #include "copydesk.h"
 
 
@@ -186,7 +186,7 @@ namespace windowing_win32
    }
 
 
-   HGLOBAL copydesk::hglobal_get_filea(const ::file::patha & patha)
+   HGLOBAL copydesk::hglobal_get_filea(const ::file::path_array & patha)
    {
 
       strsize iLen = 0;
@@ -388,7 +388,7 @@ namespace windowing_win32
    }
 
 
-   bool copydesk::_get_filea(::file::patha & patha, enum_op & eop)
+   bool copydesk::_get_filea(::file::path_array & patha, enum_op & eop)
    {
 
       ::count c = _get_file_count();
@@ -435,7 +435,7 @@ namespace windowing_win32
    }
 
 
-   bool copydesk::_set_filea(const ::file::patha & patha, enum_op eop)
+   bool copydesk::_set_filea(const ::file::path_array & patha, enum_op eop)
    {
 
       synchronous_lock synchronouslock(mutex());
@@ -499,7 +499,7 @@ namespace windowing_win32
 
       SetClipboardData(CF_TEXT, hglobal_get_utf8_text(str));
 
-      ::file::patha patha;
+      ::file::path_array patha;
 
       if (string_to_filea(&patha, str))
       {

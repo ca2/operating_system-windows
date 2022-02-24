@@ -30,7 +30,7 @@
 //
 //      strsize iLastPo = -1;
 //
-//      ::file::patha stra;
+//      ::file::path_array stra;
 //
 //      path.ascendants_path(stra);
 //

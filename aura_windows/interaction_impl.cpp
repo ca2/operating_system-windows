@@ -5,7 +5,7 @@
 #include "aura/user/interaction_thread.h"
 //#include "aura/node/operating_system/windows/windowing.h"
 #include "acme/constant/timer.h"
-#include "apex/platform/app_core.h"
+//#include "apex/platform/app_core.h"
 #include "interaction_impl.h"
 #include "aura/graphics/draw2d/graphics.h"
 

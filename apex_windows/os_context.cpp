@@ -1297,14 +1297,14 @@ retry:
    string os_context::calc_service_name()
    {
 
-      ::application * papp = get_application();
+      ::app * papp = get_app();
 
-      if(get_application()->m_strAppName.is_empty()
-            || get_application()->m_strAppName.compare_ci("bergedge") == 0
-            || !get_application()->is_service())
+      if(get_app()->m_papplication->m_strAppName.is_empty()
+            || get_app()->m_papplication->m_strAppName.compare_ci("bergedge") == 0
+            || !get_app()->is_service())
          return "";
 
-      string strServiceName = get_application()->m_strAppId;
+      string strServiceName = get_app()->m_strAppId;
 
       strServiceName.replace_with("-", "/");
 
@@ -1363,12 +1363,12 @@ retry:
       WCHAR lpszName[CREDUI_MAX_USERNAME_LENGTH + CREDUI_MAX_DOMAIN_TARGET_LENGTH + 1];
       WCHAR pszPass[CREDUI_MAX_PASSWORD_LENGTH + 1];
 
-      ::application * papp = get_application();
+      ::application * papp = get_app()->m_papplication;
 
-      if(get_application()->is_user_service())
+      if(get_app()->is_user_service())
       {
 
-         _getCredentialsForService(get_application()->m_strAppId, lpszName, pszPass);
+         _getCredentialsForService(get_app()->m_strAppId, lpszName, pszPass);
 //         {
 
             pname = lpszName;
@@ -2580,12 +2580,12 @@ repeat:
    {
 
 
-      ::application * papp = get_application();
+      ::application * papp = get_app()->m_papplication;
 
       string strTargetProgId;
       string strModule = solve_relative(m_psystem->m_pacmefile->module());
 
-      strTargetProgId = get_application()->m_strAppName;
+      strTargetProgId = get_app()->m_papplication->m_strAppName;
 
       strTargetProgId.replace_with("_", "-");
       strTargetProgId.replace_with("_", "\\");
@@ -2609,7 +2609,7 @@ repeat:
 
          string strValue;
 
-         regkey.set("", get_application()->find_string("ApplicationName"));
+         regkey.set("", get_app()->find_string("ApplicationName"));
 
       }
 
@@ -2619,9 +2619,9 @@ repeat:
 
          string strValue;
 
-         regkey.set("ApplicationDescription", get_application()->find_string("ApplicationDescription"));
-         regkey.set("ApplicationIcon", get_application()->find_string("ApplicationIcon"));
-         regkey.set("ApplicationName", get_application()->find_string("ApplicationName"));
+         regkey.set("ApplicationDescription", get_app()->find_string("ApplicationDescription"));
+         regkey.set("ApplicationIcon", get_app()->find_string("ApplicationIcon"));
+         regkey.set("ApplicationName", get_app()->find_string("ApplicationName"));
 
       }
 
@@ -2715,25 +2715,25 @@ repeat:
          registry::key regkey(HKEY_CLASSES_ROOT, strTargetProgId, true);
 
          regkey.set("", strTargetProgId + " HTML Document");
-         regkey.set("AppUserModelId", get_application()->find_string("AppUserModelId"));
+         regkey.set("AppUserModelId", get_app()->find_string("AppUserModelId"));
 
       }
       {
 
          registry::key regkey(HKEY_CLASSES_ROOT, strTargetProgId + "\\papplication", true);
 
-         regkey.set("ApplicationCompany", get_application()->find_string("ApplicationCompany"));
-         regkey.set("ApplicationDescription", get_application()->find_string("ApplicationDescription"));
-         regkey.set("ApplicationIcon", get_application()->find_string("ApplicationIcon"));
-         regkey.set("ApplicationName", get_application()->find_string("ApplicationName"));
-         regkey.set("AppUserModelId", get_application()->find_string("AppUserModelId"));
+         regkey.set("ApplicationCompany", get_app()->find_string("ApplicationCompany"));
+         regkey.set("ApplicationDescription", get_app()->find_string("ApplicationDescription"));
+         regkey.set("ApplicationIcon", get_app()->find_string("ApplicationIcon"));
+         regkey.set("ApplicationName", get_app()->find_string("ApplicationName"));
+         regkey.set("AppUserModelId", get_app()->find_string("AppUserModelId"));
 
       }
       {
 
          registry::key regkey(HKEY_CLASSES_ROOT, strTargetProgId + "\\DefaultIcon", true);
 
-         regkey.set("", get_application()->find_string("DefaultIcon"));
+         regkey.set("", get_app()->find_string("DefaultIcon"));
 
       }
 
@@ -2858,7 +2858,7 @@ repeat:
 
       pathApplication /= strTargetProgId;
 
-      strTargetProgId = get_application()->m_strAppName;
+      strTargetProgId = get_app()->m_papplication->m_strAppName;
 
       strTargetProgId.replace_with("_", "-");
       strTargetProgId.replace_with("_", "\\");
@@ -2873,7 +2873,7 @@ repeat:
          string strValue;
 
          //auto estatusRegistry =
-         regkey._set("", get_application()->find_string("ApplicationName"));
+         regkey._set("", get_app()->find_string("ApplicationName"));
 
          //if(!estatusRegistry)
          //{
@@ -2990,13 +2990,13 @@ repeat:
          string strValue;
 
          //auto estatusRegistry = 
-         regkey._set("ApplicationDescription", get_application()->find_string("ApplicationDescription"));
+         regkey._set("ApplicationDescription", get_app()->find_string("ApplicationDescription"));
 
          //if(estatusRegistry.succeeded())
          //{
 
             //estatusRegistry =
-         regkey._set("ApplicationIcon", get_application()->find_string("ApplicationIcon"));
+         regkey._set("ApplicationIcon", get_app()->find_string("ApplicationIcon"));
 
          //}
 
@@ -3004,7 +3004,7 @@ repeat:
          //{
 
             //estatusRegistry = 
-         regkey._set("ApplicationName", get_application()->find_string("ApplicationName"));
+         regkey._set("ApplicationName", get_app()->find_string("ApplicationName"));
 
          //}
 
@@ -3083,23 +3083,23 @@ repeat:
       //   registry::key regkey(HKEY_CLASSES_ROOT, strTargetProgId, true);
 
       //   regkey.set("", strTargetProgId + " HTML Document");
-      //   regkey.set("AppUserModelId", get_application()->prop("AppUserModelId"));
+      //   regkey.set("AppUserModelId", get_app()->prop("AppUserModelId"));
 
       //}
       {
 
          registry::key regkey(HKEY_CLASSES_ROOT, strTargetProgId + "\\papplication", true);
 
-         regkey._set("ApplicationCompany", get_application()->find_string("ApplicationCompany"));
+         regkey._set("ApplicationCompany", get_app()->find_string("ApplicationCompany"));
 
-            regkey._set("ApplicationDescription", get_application()->find_string("ApplicationDescription"));
+            regkey._set("ApplicationDescription", get_app()->find_string("ApplicationDescription"));
 
          
-            regkey._set("ApplicationIcon", get_application()->find_string("ApplicationIcon"));
+            regkey._set("ApplicationIcon", get_app()->find_string("ApplicationIcon"));
 
-            regkey._set("ApplicationName", get_application()->find_string("ApplicationName"));
+            regkey._set("ApplicationName", get_app()->find_string("ApplicationName"));
 
-            regkey._set("AppUserModelId", get_application()->find_string("AppUserModelId"));
+            regkey._set("AppUserModelId", get_app()->find_string("AppUserModelId"));
 
          //}
 
@@ -3115,7 +3115,7 @@ repeat:
 
          registry::key regkey(HKEY_CLASSES_ROOT, strTargetProgId + "\\DefaultIcon", true);
 
-         regkey._set("", get_application()->find_string("DefaultIcon"));
+         regkey._set("", get_app()->find_string("DefaultIcon"));
 
          //if (!estatusRegistry)
          //{
@@ -3920,7 +3920,7 @@ repeat:
    }
 
 
-   void os_context::list_process(::file::patha & patha, u32_array & uaPid)
+   void os_context::list_process(::file::path_array & patha, u32_array & uaPid)
    {
 
       ASSERT(sizeof(::u32) == sizeof(u32));
