@@ -96,7 +96,7 @@ namespace production
    void application::on_request(::create * pcreate)
    {
 
-      string strVersion = pcreate->m_pcommandline->m_varQuery["version"];
+      string strVersion = pcreate->m_pcommandline->payload("version");
 
       if (strVersion == "basis")
       {
@@ -118,11 +118,11 @@ namespace production
       if(pdocument.is_null())
          return;
 
-      //if (pcreate->m_pcommandline->m_varQuery.has_property("start"))
+      //if (pcreate->m_pcommandline->has_property("start"))
       //{
       // m_pimpact->make_production();
       //}
-      //else if (pcreate->m_pcommandline->m_varQuery.has_property("start_deferred"))
+      //else if (pcreate->m_pcommandline->has_property("start_deferred"))
       //{
       // m_pimpact->production_loop(papplication->handler()->m_varTopicQuery["start_deferred"]);
       //}
