@@ -3981,8 +3981,19 @@ namespace apex
    {
 
 
-      void node::shell_create_link(::file::path pathObj, ::file::path pathLnk, string strDesc, ::file::path pathIco, int iIcon)
+      void node::shell_create_link(::file::path pathObj, ::file::path pathLnkParam, string strDesc, ::file::path pathIco, int iIcon)
       {
+
+         auto pathLnk = pathLnkParam;
+
+         if (!pathLnk.ends_ci(".lnk"))
+         {
+          
+            pathLnk += ".lnk";
+
+         }
+
+         m_psystem->m_pacmedir->create(pathLnk.folder());
 
          wstring wstrObj(pathObj);
          wstring wstrLnk(pathLnk);
