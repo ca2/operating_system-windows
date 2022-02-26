@@ -6,3 +6,4 @@ CLASS_DECL_APEX_WINDOWS HRESULT win_create_link(const widechar* pszPathObj, cons
 
 
 
+

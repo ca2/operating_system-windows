@@ -49,10 +49,10 @@ namespace audio_mmsystem
    }
 
 
-   void out::init_thread()
+   void out::init_task()
    {
 
-      ::wave::out::init_thread();
+      ::wave::out::init_task();
 
       ////if (!::wave::out::init_thread())
       //{
@@ -66,12 +66,12 @@ namespace audio_mmsystem
    }
 
 
-   void out::term_thread()
+   void out::term_task()
    {
 
-      ::wave::out::term_thread();
+      ::wave::out::term_task();
 
-      ::thread::term_thread();
+      ::thread::term_task();
 
    }
 

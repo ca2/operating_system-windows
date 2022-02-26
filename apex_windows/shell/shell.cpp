@@ -62,3 +62,6 @@ HRESULT win_create_link(const widechar* pszPathObj, const widechar* pszPathLink,
    return hres;
 
 }
+
+
+

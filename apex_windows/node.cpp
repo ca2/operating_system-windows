@@ -534,6 +534,88 @@ namespace apex
       }
 
 
+      void node::shell_create_link(::file::path pathObj, ::file::path pathLnkParam, string strDesc, ::file::path pathIco, int iIcon)
+      {
+
+         auto pathLnk = pathLnkParam;
+
+         if (!pathLnk.ends_ci(".lnk"))
+         {
+
+            pathLnk += ".lnk";
+
+         }
+
+         m_psystem->m_pacmedir->create(pathLnk.folder());
+
+         wstring wstrObj(pathObj);
+         wstring wstrLnk(pathLnk);
+         wstring wstrDsc(strDesc);
+         wstring wstrIco(pathIco);
+
+         HRESULT hresult = win_create_link(wstrObj, wstrLnk, wstrDsc, wstrIco, iIcon);
+
+         auto estatus = hresult_to_status(hresult);
+
+         if (failed(estatus))
+         {
+
+            throw ::exception(estatus);
+
+         }
+
+      }
+
+      
+      bool node::shell_link_target(::file::path & pathTarget, const ::file::path & pathLnkParam)
+      {
+
+         auto pathLnk = pathLnkParam;
+
+         if (!pathLnk.ends_ci(".lnk"))
+         {
+
+            pathLnk += ".lnk";
+
+         }
+
+         wstring wstrLnk(pathLnk);
+
+         auto poscontext = m_psystem->m_papexsystem->os_context()->cast < ::windows::os_context >();
+
+         comptr < IShellLinkW > pshelllink = poscontext->_get_IShellLinkW(pathLnk);
+
+         if (!pshelllink)
+         {
+
+            return false;
+
+         }
+
+         wstring wstrTarget;
+
+         auto pwsz = wstrTarget.get_string_buffer(MAX_PATH * 8);
+
+         HRESULT hresult = pshelllink->GetPath(pwsz, MAX_PATH * 8, nullptr, 0);
+
+         wstrTarget.release_string_buffer();
+
+         if(FAILED(hresult))
+         {
+
+            auto estatus = hresult_to_status(hresult);
+
+            return false;
+
+         }
+
+         pathTarget = wstrTarget;
+
+         return true;
+
+      }
+
+
       void node::process_init()
       {
 

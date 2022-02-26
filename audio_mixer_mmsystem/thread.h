@@ -29,7 +29,7 @@ namespace multimedia
 
 
          thread();
-         virtual ~thread();
+         ~thread() override;
 
 
          static LRESULT CALLBACK MessageProc(
@@ -41,10 +41,10 @@ namespace multimedia
 
          void install_message_routing(::channel * pchannel);
 
-         virtual void init_thread() override;
-         virtual void term_thread() override;
+         void init_task() override;
+         void term_task() override;
          // virtual bool on_idle(LONG lCount);
-         virtual void pre_translate_message(::message::message * pmessage);
+         void pre_translate_message(::message::message * pmessage) override;
 
 
          DECLARE_MESSAGE_HANDLER(OnMixerMessage);

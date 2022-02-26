@@ -40,8 +40,9 @@ namespace apex
 
          virtual void _001InitializeShellOpen() override;
 
-         virtual void shell_create_link(::file::path pathObj, ::file::path pathLnk, string strDesc, ::file::path pathIco, int iIcon);
+         void shell_create_link(::file::path pathObj, ::file::path pathLnk, string strDesc, ::file::path pathIco, int iIcon = -1) override;
 
+         bool shell_link_target(::file::path & pathTarget, const ::file::path & pathLnk) override;
 
          //virtual bool _os_calc_app_dark_mode();
 

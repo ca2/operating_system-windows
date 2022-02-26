@@ -39,8 +39,8 @@ namespace audio_mmsystem
 
       virtual void translate_in_message(::message::message * pmessage);
 
-      virtual void init_thread() override;
-      virtual void term_thread() override;
+      virtual void init_task() override;
+      virtual void term_task() override;
       virtual void pre_translate_message(::message::message * pmessage);
 
       static void CALLBACK in_proc(HWAVEIN hwi, UINT uMsg, DWORD dwInstance, DWORD dwParam1, DWORD dwParam2);

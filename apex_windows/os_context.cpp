@@ -1779,6 +1779,8 @@ retry:
    comptr < IShellLinkW > os_context::_get_IShellLinkW(const ::file::path & pathLink)
    {
 
+      defer_co_initialize_ex(false);
+
       HRESULT hr;
 
       comptr < IShellLinkW > pshelllink;
@@ -3972,53 +3974,6 @@ repeat:
 //                properties.
 
 
-
-namespace apex
-{
-
-
-   namespace windows
-   {
-
-
-      void node::shell_create_link(::file::path pathObj, ::file::path pathLnkParam, string strDesc, ::file::path pathIco, int iIcon)
-      {
-
-         auto pathLnk = pathLnkParam;
-
-         if (!pathLnk.ends_ci(".lnk"))
-         {
-          
-            pathLnk += ".lnk";
-
-         }
-
-         m_psystem->m_pacmedir->create(pathLnk.folder());
-
-         wstring wstrObj(pathObj);
-         wstring wstrLnk(pathLnk);
-         wstring wstrDsc(strDesc);
-         wstring wstrIco(pathIco);
-
-         auto estatus = hresult_to_estatus(win_create_link(wstrObj, wstrLnk, wstrDsc, wstrIco, iIcon));
-
-
-
-         if (failed(estatus))
-         {
-
-            throw ::exception(estatus);
-
-         }
-
-      }
-
-
-
-   } // namespace windows
-
-
-} // namespace apex
 
 
 

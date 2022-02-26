@@ -24,7 +24,7 @@ namespace multimedia
       }
 
 
-      void thread::init_thread()
+      void thread::init_task()
       {
 
 //         set_auto_delete(false);
@@ -34,8 +34,9 @@ namespace multimedia
       }
 
 
-      void thread::term_thread()
+      void thread::term_task()
       {
+
          // TODO:  perform any per-thread cleanup here
          //    CVMSApp * pApp = (CVMSApp *) System;
          //MessageFilterHookManager * pmfmh;
@@ -44,7 +45,7 @@ namespace multimedia
 
          CoUninitialize();
 
-         ::thread::term_thread();
+         ::thread::term_task();
 
       }
 
