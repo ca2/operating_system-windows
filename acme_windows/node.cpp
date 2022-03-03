@@ -2652,6 +2652,11 @@ namespace acme
       }
 
 
+      void node::create_app_shortcut(::app * papp)
+      {
+
+      }
+
 
    } // namespace windows
 

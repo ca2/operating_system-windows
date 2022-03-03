@@ -153,6 +153,9 @@ namespace acme
          void on_start_system() override;
 
 
+         void create_app_shortcut(::app * papp) override;
+
+
       };
 
 

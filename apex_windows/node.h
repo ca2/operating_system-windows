@@ -103,7 +103,7 @@ namespace apex
 
          void node_post(const ::routine& routine) override;
 
-
+         void create_app_shortcut(::app * papp) override;
 
 
       };
