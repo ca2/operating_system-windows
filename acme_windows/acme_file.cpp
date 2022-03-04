@@ -48,10 +48,12 @@ namespace windows
    }
 
 
-   ::earth::time acme_file::modification_time(const char* psz)
+   ::earth::time acme_file::modification_time(const char* pathParam)
    {
 
-      auto hFile = CreateFileW(wstring(psz), GENERIC_READ, FILE_SHARE_READ, NULL,
+      auto path = m_psystem->m_pacmepath->defer_process_relative_path(pathParam);
+
+      auto hFile = CreateFileW(wstring(path), GENERIC_READ, FILE_SHARE_READ, NULL,
          OPEN_EXISTING, 0, NULL);
 
       if (hFile == INVALID_HANDLE_VALUE)
@@ -96,10 +98,12 @@ namespace windows
    }
 
 
-   void acme_file::set_modification_time(const char* psz, const ::earth::time & time)
+   void acme_file::set_modification_time(const char* pathParam, const ::earth::time & time)
    {
 
-      auto hFile = CreateFileW(wstring(psz), GENERIC_WRITE, 0, NULL, OPEN_EXISTING, 0, NULL);
+      auto path = m_psystem->m_pacmepath->defer_process_relative_path(pathParam);
+
+      auto hFile = CreateFileW(wstring(path), GENERIC_WRITE, 0, NULL, OPEN_EXISTING, 0, NULL);
 
       if (hFile == INVALID_HANDLE_VALUE)
       {
