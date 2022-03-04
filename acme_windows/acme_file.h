@@ -22,8 +22,8 @@ namespace windows
       ::file::path module() override;
 
 
-      ::datetime::time modification_time(const char* psz) override;
-      void set_modification_time(const char* psz, const ::datetime::time & time) override;
+      ::earth::time modification_time(const char* psz) override;
+      void set_modification_time(const char* psz, const ::earth::time & time) override;
 
 
       ::file::path time_put_contents(const ::file::path & pathFolder, const ::string & strPrefix, const ::string & strExtension, const ::string& str) override;

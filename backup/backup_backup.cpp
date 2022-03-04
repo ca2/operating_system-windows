@@ -176,7 +176,7 @@ namespace backup
          //throw ::not_implemented(get_application());
 
          //m_bFinished = true;
-         //m_timeEnd = ::datetime::time::now();
+         //m_timeEnd = ::earth::time::now();
          //m_tickEnd = ::GetTickCount();
          //auto dwMin = (m_tickEnd - m_tickStart) / 1000 / 60;
          //auto dwSeg = ((m_tickEnd - m_tickStart) / 1000) % 60;

@@ -131,7 +131,7 @@ namespace windows
 
    //CLASS_DECL_ACME ::file::path user_appdata_local();
 
-   //CLASS_DECL_APEX_WINDOWS void time_to_filetime(::matter* pobject, const ::datetime::time& time, LPFILETIME pFileTime)
+   //CLASS_DECL_APEX_WINDOWS void time_to_filetime(::matter* pobject, const ::earth::time& time, LPFILETIME pFileTime)
    //{
 
    //   SYSTEMTIME sysTime;

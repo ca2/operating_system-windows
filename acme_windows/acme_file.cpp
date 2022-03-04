@@ -48,7 +48,7 @@ namespace windows
    }
 
 
-   ::datetime::time acme_file::modification_time(const char* psz)
+   ::earth::time acme_file::modification_time(const char* psz)
    {
 
       auto hFile = CreateFileW(wstring(psz), GENERIC_READ, FILE_SHARE_READ, NULL,
@@ -74,9 +74,9 @@ namespace windows
       // Convert the last-write time to local time.
       //FileTimeToSystemTime(&ftWrite, &stUTC);
 
-      ::datetime::time time;
+      ::earth::time time;
 
-      file_time_to_time(&time.m_i, (filetime_t *) & ftWrite);
+      file_time_to_time(&time.m_i, (file_time_t *) & ftWrite);
 
       return (INTEGRAL_SECOND) time.m_i;
 
@@ -96,7 +96,7 @@ namespace windows
    }
 
 
-   void acme_file::set_modification_time(const char* psz, const ::datetime::time & time)
+   void acme_file::set_modification_time(const char* psz, const ::earth::time & time)
    {
 
       auto hFile = CreateFileW(wstring(psz), GENERIC_WRITE, 0, NULL, OPEN_EXISTING, 0, NULL);
@@ -112,7 +112,7 @@ namespace windows
 
       }
 
-      ::filetime_t filetime;
+      ::file_time_t filetime;
 
       time_to_file_time(&filetime, &time.m_i);
 

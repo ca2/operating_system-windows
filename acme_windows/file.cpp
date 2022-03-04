@@ -782,9 +782,9 @@ namespace windows
          }
 
          // convert times as appropriate
-         file_time_to_time(&rStatus.m_ctime.m_i, (filetime_t *) &information.ftCreationTime);
-         file_time_to_time(&rStatus.m_atime.m_i, (filetime_t *) &information.ftLastAccessTime);
-         file_time_to_time(&rStatus.m_mtime.m_i, (filetime_t *) &information.ftLastWriteTime);
+         file_time_to_time(&rStatus.m_ctime.m_i, (file_time_t *) &information.ftCreationTime);
+         file_time_to_time(&rStatus.m_atime.m_i, (file_time_t *) &information.ftLastAccessTime);
+         file_time_to_time(&rStatus.m_mtime.m_i, (file_time_t *) &information.ftLastWriteTime);
 
          if (rStatus.m_ctime.get_time() == 0)
          {

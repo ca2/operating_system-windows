@@ -88,8 +88,8 @@ namespace production
 
       e_version               m_eversion;
 
-      ::datetime::time        m_timeStart;
-      ::datetime::time        m_timeEnd;
+      ::earth::time        m_timeStart;
+      ::earth::time        m_timeEnd;
 
       string_array                 m_straStageDirAcceptedFileExtensions;
 

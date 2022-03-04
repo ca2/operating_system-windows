@@ -210,7 +210,7 @@ namespace windows
    }
 
 
-   bool file_find::GetLastAccessTime(::datetime::time& refTime) const
+   bool file_find::GetLastAccessTime(::earth::time& refTime) const
    {
 
       ASSERT(m_hContext != nullptr);
@@ -219,7 +219,7 @@ namespace windows
       if (m_pFoundInfo != nullptr)
       {
 
-         file_time_to_time(&refTime.m_i,(filetime_t*)&m_pFoundInfo->ftLastAccessTime);
+         file_time_to_time(&refTime.m_i,(file_time_t*)&m_pFoundInfo->ftLastAccessTime);
 
          return true;
 
@@ -230,7 +230,7 @@ namespace windows
    }
 
 
-   bool file_find::GetLastWriteTime(::datetime::time& refTime) const
+   bool file_find::GetLastWriteTime(::earth::time& refTime) const
    {
 
       ASSERT(m_hContext != nullptr);
@@ -243,14 +243,14 @@ namespace windows
 
       }
        
-      file_time_to_time(&refTime.m_i, (filetime_t *)&m_pFoundInfo->ftLastWriteTime);
+      file_time_to_time(&refTime.m_i, (file_time_t *)&m_pFoundInfo->ftLastWriteTime);
 
       return true;
 
    }
 
 
-   bool file_find::GetCreationTime(::datetime::time& refTime) const
+   bool file_find::GetCreationTime(::earth::time& refTime) const
    {
 
       ASSERT(m_hContext != nullptr);
@@ -264,7 +264,7 @@ namespace windows
 
       }
          
-      file_time_to_time(&refTime.m_i, (filetime_t *)&((LPWIN32_FIND_DATAW)m_pFoundInfo)->ftCreationTime);
+      file_time_to_time(&refTime.m_i, (file_time_t *)&((LPWIN32_FIND_DATAW)m_pFoundInfo)->ftCreationTime);
       
       return true;
       

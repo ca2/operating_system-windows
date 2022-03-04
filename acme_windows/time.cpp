@@ -148,7 +148,7 @@
 //{
 //
 //
-//   CLASS_DECL_ACME void time_to_filetime(::object* pobject, const ::datetime::time& time, LPFILETIME pFileTime)
+//   CLASS_DECL_ACME void time_to_filetime(::object* pobject, const ::earth::time& time, LPFILETIME pFileTime)
 //   {
 //
 //      SYSTEMTIME sysTime;

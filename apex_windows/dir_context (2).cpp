@@ -1129,8 +1129,8 @@ namespace windows
          str = strDir.Left(2);
          str += "\\trash_that_is_not_trash\\";
          string strFormat;
-         ::datetime::time time;
-         time = ::datetime::time::now();
+         ::earth::time time;
+         time = ::earth::time::now();
          strFormat.Format("%04d-%02d-%02d %02d-%02d-%02d\\", time.GetYear(), time.GetMonth(), time.GetDay(), time.GetHour(), time.GetMinute(), time.GetSecond());
          str += strFormat;
          if (strDir.m_pdata[2] == '\\')
@@ -1260,9 +1260,9 @@ namespace windows
    //   rStatus.m_size = (::i32)findFileData.nFileSizeLow;
 
    //   // convert times as appropriate
-   //   rStatus.m_ctime = ::datetime::time(findFileData.ftCreationTime);
-   //   rStatus.m_atime = ::datetime::time(findFileData.ftLastAccessTime);
-   //   rStatus.m_mtime = ::datetime::time(findFileData.ftLastWriteTime);
+   //   rStatus.m_ctime = ::earth::time(findFileData.ftCreationTime);
+   //   rStatus.m_atime = ::earth::time(findFileData.ftLastAccessTime);
+   //   rStatus.m_mtime = ::earth::time(findFileData.ftLastWriteTime);
 
    //   if(rStatus.m_ctime.get_time() == 0)
    //      rStatus.m_ctime = rStatus.m_mtime;

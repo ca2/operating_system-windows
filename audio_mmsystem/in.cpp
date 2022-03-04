@@ -262,14 +262,16 @@ namespace audio_mmsystem
 
       }
 
-      if(m_pencoder != nullptr && !in_initialize_encoder())
+      if(m_pencoder != nullptr)
       {
 
-         m_estate = e_state_opened;
+         in_initialize_encoder();
 
-         in_close();
+         //m_estate = e_state_opened;
 
-         return (void    ) -1;
+         //in_close();
+
+         //return (void    ) -1;
 
       }
 
@@ -555,24 +557,27 @@ namespace audio_mmsystem
    }
 
 
-   bool in::in_initialize_encoder()
+   void in::in_initialize_encoder()
    {
 
       if (m_pencoder == nullptr)
       {
 
-         return false;
+         //return false;
+         return;
 
       }
 
-      if (!::wave::in::in_initialize_encoder())
-      {
+      ::wave::in::in_initialize_encoder();
 
-         return false;
+      //if (!::wave::in::in_initialize_encoder())
+      //{
 
-      }
+      //   //return false;
 
-      return true;
+      //}
+
+      //return true;
 
    }
 

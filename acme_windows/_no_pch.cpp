@@ -3,7 +3,7 @@
 #include <stdint.h>
 
 
-LPITEMIDLIST GetItemIdListFromPath(const wchar_t * pwsz)
+__declspec(dllexport) LPITEMIDLIST GetItemIdListFromPath(const wchar_t * pwsz)
 {
 
    LPITEMIDLIST p = nullptr;
@@ -62,7 +62,7 @@ LPITEMIDLIST GetItemIdListFromPath(const wchar_t * pwsz)
 }
 
 
-void shell_notify_folder_change(const wchar_t * pwsz)
+__declspec(dllexport) void shell_notify_folder_change(const wchar_t * pwsz)
 {
 
    auto p = GetItemIdListFromPath(pwsz);
@@ -81,7 +81,7 @@ void shell_notify_folder_change(const wchar_t * pwsz)
 }
 
 
-void shell_notify_item_change(const wchar_t * pwsz)
+__declspec(dllexport) void shell_notify_item_change(const wchar_t * pwsz)
 {
 
    auto p = GetItemIdListFromPath(pwsz);
@@ -100,7 +100,7 @@ void shell_notify_item_change(const wchar_t * pwsz)
 }
 
 
-void shell_notify_assoc_change()
+__declspec(dllexport) void shell_notify_assoc_change()
 {
 
    ::SHChangeNotify(SHCNE_ASSOCCHANGED, SHCNF_IDLIST, nullptr, nullptr);

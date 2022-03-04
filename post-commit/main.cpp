@@ -52,7 +52,7 @@ public:
 void app_t::win_sync_out(string strLocal,string strRepos)
 {
 
-   //::datetime::time timeNow = ::datetime::time::now();
+   //::earth::time timeNow = ::earth::time::now();
 
    //string strTimeNow;
 

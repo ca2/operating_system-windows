@@ -20,10 +20,10 @@ namespace audio_mmsystem
 
 
       in();
-      virtual ~in();
+      ~in() override;
 
 
-      virtual bool in_initialize_encoder();
+      virtual void in_initialize_encoder();
 
       virtual void     in_add_buffer(i32 iBuffer);
       virtual void     in_add_buffer(LPWAVEHDR lpwavehdr);

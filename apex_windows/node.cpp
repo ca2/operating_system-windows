@@ -1,9 +1,9 @@
 #include "framework.h"
 
 
-void shell_notify_folder_change(const wchar_t * pwsz);
-void shell_notify_item_change(const wchar_t * pwsz);
-void shell_notify_assoc_change();
+CLASS_DECL_ACME_WINDOWS void shell_notify_folder_change(const wchar_t * pwsz);
+CLASS_DECL_ACME_WINDOWS void shell_notify_item_change(const wchar_t * pwsz);
+CLASS_DECL_ACME_WINDOWS void shell_notify_assoc_change();
 
 
 namespace apex
@@ -913,7 +913,7 @@ namespace apex
 
       //CLASS_DECL_ACME::file::path user_appdata_local();
 
-      //void node::time_to_filetime(::matter* pobject, const ::datetime::time& time, LPFILETIME pFileTime)
+      //void node::time_to_filetime(::matter* pobject, const ::earth::time& time, LPFILETIME pFileTime)
       //{
 
       //   SYSTEMTIME sysTime;
@@ -1002,16 +1002,16 @@ namespace apex
 
                   string strAppName;
 
-                  string strAppIdUnderscore = m_strAppId;
+                  string strAppIdUnderscore = papp->m_strAppId;
 
                   strAppIdUnderscore.find_replace("/", "_");
 
                   strAppIdUnderscore.find_replace("-", "_");
 
-                  if (m_strAppName.has_char())
+                  if (papp->m_strAppName.has_char())
                   {
 
-                     strAppName = m_strAppName;
+                     strAppName = papp->m_strAppName;
 
                   }
                   else
@@ -1023,12 +1023,12 @@ namespace apex
 
                   string strRoot;
 
-                  auto findRootEnd = m_strAppId.find('/');
+                  auto findRootEnd = papp->m_strAppId.find('/');
 
                   if (findRootEnd > 0)
                   {
 
-                     strRoot = m_strAppId.Left(findRootEnd);
+                     strRoot = papp->m_strAppId.Left(findRootEnd);
 
                   }
 
@@ -1043,7 +1043,7 @@ namespace apex
                   if (!m_psystem->m_pacmefile->exists(pathIcon))
                   {
 
-                     papp->m_papexapplication->file().copy(pathIcon, "matter://main/icon.ico", false);
+                     papp->m_papplication->file().copy(pathIcon, "matter://main/icon.ico", false);
 
                   }
 
@@ -1093,7 +1093,7 @@ namespace apex
 
 #endif
 
-                  auto pathCreatedShortcut = m_psystem->m_pacmedir->roaming() / m_strAppId / "created_shortcut.txt";
+                  auto pathCreatedShortcut = m_psystem->m_pacmedir->roaming() / papp->m_strAppId / "created_shortcut.txt";
 
                   m_psystem->m_pacmefile->touch(pathCreatedShortcut);
 

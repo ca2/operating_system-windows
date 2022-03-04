@@ -813,50 +813,50 @@ namespace acme
       //
 
 
-      void node::datetime_to_filetime(::filetime_t* pfiletime, const ::datetime::time& time)
-      {
+      //void node::datetime_to_filetime(::file_time_t* pfiletime, const ::earth::time& time)
+      //{
 
-         SYSTEMTIME sysTime;
+      //   SYSTEMTIME sysTime;
 
-         sysTime.wYear = (::u16)time.year();
-         sysTime.wMonth = (::u16)time.month();
-         sysTime.wDay = (::u16)time.day();
-         sysTime.wHour = (::u16)time.hour();
-         sysTime.wMinute = (::u16)time.minute();
-         sysTime.wSecond = (::u16)time.second();
-         sysTime.wMilliseconds = 0;
+      //   sysTime.wYear = (::u16)time.year();
+      //   sysTime.wMonth = (::u16)time.month();
+      //   sysTime.wDay = (::u16)time.day();
+      //   sysTime.wHour = (::u16)time.hour();
+      //   sysTime.wMinute = (::u16)time.minute();
+      //   sysTime.wSecond = (::u16)time.second();
+      //   sysTime.wMilliseconds = 0;
 
-         // convert system time to local file time
-         FILETIME localTime;
+      //   // convert system time to local file time
+      //   FILETIME localTime;
 
-         DWORD dwLastError = ::GetLastError();
+      //   DWORD dwLastError = ::GetLastError();
 
-         if (!SystemTimeToFileTime((LPSYSTEMTIME)&sysTime, &localTime))
-         {
+      //   if (!SystemTimeToFileTime((LPSYSTEMTIME)&sysTime, &localTime))
+      //   {
 
-            DWORD dwLastError = ::GetLastError();
+      //      DWORD dwLastError = ::GetLastError();
 
-            auto estatus = last_error_to_status(dwLastError);
+      //      auto estatus = last_error_to_status(dwLastError);
 
-            throw ::exception(estatus, "::windows::node::datetime_to_filetime (1)");
+      //      throw ::exception(estatus, "::windows::node::datetime_to_filetime (1)");
 
-         }
+      //   }
 
-         // convert local file time to UTC file time
-         if (!LocalFileTimeToFileTime(&localTime, (FILETIME*)pfiletime))
-         {
+      //   // convert local file time to UTC file time
+      //   if (!LocalFileTimeToFileTime(&localTime, (FILETIME*)pfiletime))
+      //   {
 
-            DWORD dwLastError = ::GetLastError();
+      //      DWORD dwLastError = ::GetLastError();
 
-            auto estatus = last_error_to_status(dwLastError);
+      //      auto estatus = last_error_to_status(dwLastError);
 
-            throw ::exception(estatus, "::windows::node::datetime_to_filetime (2)");
+      //      throw ::exception(estatus, "::windows::node::datetime_to_filetime (2)");
 
-         }
+      //   }
 
-         //return ::success;
+      //   //return ::success;
 
-      }
+      //}
 
 
       ::e_status node::last_error_to_status(DWORD dwLastError)

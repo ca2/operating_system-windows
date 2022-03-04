@@ -130,7 +130,7 @@
 // #ifdef WINDOWS
 
 
-// CLASS_DECL_ACME FILETIME __FILETIME(const ::datetime::time & time);
+// CLASS_DECL_ACME FILETIME __FILETIME(const ::earth::time & time);
 
 
 // #endif

@@ -44,9 +44,9 @@ namespace windows
       virtual bool GetLastWriteTime(FILETIME* pTimeStamp) const;
       virtual bool GetLastAccessTime(FILETIME* pTimeStamp) const;
       virtual bool GetCreationTime(FILETIME* pTimeStamp) const;
-      virtual bool GetLastWriteTime(::datetime::time& refTime) const;
-      virtual bool GetLastAccessTime(::datetime::time& refTime) const;
-      virtual bool GetCreationTime(::datetime::time& refTime) const;
+      virtual bool GetLastWriteTime(::earth::time& refTime) const;
+      virtual bool GetLastAccessTime(::earth::time& refTime) const;
+      virtual bool GetCreationTime(::earth::time& refTime) const;
 
       bool MatchesMask(::u32 dwMask) const;
 
