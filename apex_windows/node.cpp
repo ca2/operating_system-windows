@@ -990,6 +990,13 @@ namespace apex
       void node::create_app_shortcut(::app * papp)
       {
 
+         if (papp->is_service())
+         {
+
+            return;
+
+         }
+
          fork([this, papp]()
             {
 
