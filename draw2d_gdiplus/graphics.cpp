@@ -6895,37 +6895,30 @@ namespace draw2d_gdiplus
 
          }
 
-         if (m_pgraphics->GetCompositingMode() == Gdiplus::CompositingModeSourceCopy)
-         {
-
-            m_pgraphics->SetTextRenderingHint(Gdiplus::TextRenderingHintSingleBitPerPixel);
-
-            //return true;
-
-            return;
-
-         }
-
-
          switch (etextrenderinghint)
          {
          case ::write_text::e_rendering_anti_alias:
             m_pgraphics->SetTextRenderingHint(Gdiplus::TextRenderingHintAntiAlias);
+            m_pgraphics->SetCompositingMode(Gdiplus::CompositingModeSourceOver);
             break;
          case ::write_text::e_rendering_anti_alias_grid_fit:
             m_pgraphics->SetTextRenderingHint(Gdiplus::TextRenderingHintAntiAliasGridFit);
+            m_pgraphics->SetCompositingMode(Gdiplus::CompositingModeSourceOver);
             break;
          case ::write_text::e_rendering_single_bit_per_pixel:
             m_pgraphics->SetTextRenderingHint(Gdiplus::TextRenderingHintSingleBitPerPixel);
             break;
          case ::write_text::e_rendering_single_bit_per_pixel_grid_fit:
             m_pgraphics->SetTextRenderingHint(Gdiplus::TextRenderingHintSingleBitPerPixelGridFit);
+            m_pgraphics->SetCompositingMode(Gdiplus::CompositingModeSourceOver);
             break;
          case ::write_text::e_rendering_clear_type_grid_fit:
             m_pgraphics->SetTextRenderingHint(Gdiplus::TextRenderingHintClearTypeGridFit);
+            m_pgraphics->SetCompositingMode(Gdiplus::CompositingModeSourceOver);
             break;
          case ::write_text::e_rendering_none:
             m_pgraphics->SetTextRenderingHint(Gdiplus::TextRenderingHintSystemDefault);
+            m_pgraphics->SetCompositingMode(Gdiplus::CompositingModeSourceOver);
             break;
          }
 

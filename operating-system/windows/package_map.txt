@@ -20,3 +20,4 @@ third/avformat=third/avformat-59
 third/swscale=third/swscale-6
 third/swresample=third/swresample-4
 third/avutil=third/avutil-57
+third/libmpg123=third/mpg123
