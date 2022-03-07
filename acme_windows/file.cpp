@@ -293,7 +293,13 @@ namespace windows
    {
 
       ASSERT_VALID(this);
-      ASSERT(m_handleFile != INVALID_HANDLE_VALUE);
+
+      if (m_handleFile == INVALID_HANDLE_VALUE)
+      {
+
+         throw ::exception(error_wrong_state);
+
+      }
 
       if (nCount == 0)
       {
