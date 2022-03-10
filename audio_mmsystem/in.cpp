@@ -23,7 +23,7 @@ namespace audio_mmsystem
    void in::init_task()
    {
 
-      TRACE("in::initialize_instance %X\n", get_ithread());
+      TRACE("in::initialize_instance %X\n", get_itask());
 
       //SetMainWnd(nullptr);
       //ASSERT(GetMainWnd() == nullptr);
@@ -142,7 +142,7 @@ namespace audio_mmsystem
             &m_hwavein,
             audiowave->m_uiWaveInDevice,
             wave_format(),
-            get_ithread(),
+            get_itask(),
             (u32)0,
             CALLBACK_THREAD);
 

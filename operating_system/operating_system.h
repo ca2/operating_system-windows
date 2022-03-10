@@ -58,6 +58,12 @@
 //
 
 
+#undef MAKEWORD
+#undef LOWORD
+#undef HIWORD
+#undef HIBYTE
+
+
 #ifndef WIN32
 #define WIN32
 #endif

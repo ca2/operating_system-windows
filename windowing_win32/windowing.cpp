@@ -405,7 +405,7 @@ namespace windowing_win32
       if (pthread)
       {
 
-         itask = pthread->get_ithread();
+         itask = pthread->get_itask();
 
       }
 
@@ -450,7 +450,7 @@ namespace windowing_win32
       if (pthread)
       {
 
-         itask = pthread->get_ithread();
+         itask = pthread->get_itask();
 
       }
 
@@ -636,7 +636,7 @@ namespace windowing_win32
       if (pthread)
       {
 
-         itask = pthread->get_ithread();
+         itask = pthread->get_itask();
 
       }
 

@@ -16,7 +16,7 @@ namespace audio_mmsystem
 
          auto pwaveout = (::audio_mmsystem::out *) dwInstance;
 
-         pwaveout->m_psynththread->on_free(lpwavehdr->dwUser);
+         pwaveout->m_psynthtask->on_free(lpwavehdr->dwUser);
 
       }
 
