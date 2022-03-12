@@ -660,31 +660,7 @@ CLASS_DECL_ACME hinstance get_module_handle(const platform_char * psz)
 
 }
 
-// CLASS_DECL_ACME ::duration os_get_system_update_poll_time(const ::atom & atom)
-// {
 
-//    if (atom == id_os_dark_mode)
-//    {
-
-//       return 0;
-
-//    }
-//    else if (atom == id_os_font_change)
-//    {
-
-//       return 0;
-
-//    }
-//    else if (atom == id_font_enumeration)
-//    {
-
-//       return 0;
-
-//    }
-
-//    return 0;
-
-//}
 
 namespace windows
 {

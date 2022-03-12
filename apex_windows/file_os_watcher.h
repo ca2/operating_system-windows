@@ -26,7 +26,7 @@ namespace file
 {
 
 
-   class CLASS_DECL_APEX_WINDOWS  os_watch :
+   class CLASS_DECL_APEX_WINDOWS os_watch :
       virtual public watch
    {
    public:
