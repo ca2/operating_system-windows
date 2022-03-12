@@ -506,8 +506,8 @@ namespace windows
       rStatus.m_attribute = (byte)(findFileData.dwFileAttributes & ~FILE_ATTRIBUTE_NORMAL);
 
       // get just the low ::u32 of the file size_i32
-      ASSERT(findFileData.nFileSizeHigh == 0);
-      rStatus.m_size = (::i32)findFileData.nFileSizeLow;
+      //ASSERT(findFileData.nFileSizeHigh == 0);
+      rStatus.m_filesize = (::filesize)make64_from32(findFileData.nFileSizeLow, findFileData.nFileSizeHigh);
 
 
 

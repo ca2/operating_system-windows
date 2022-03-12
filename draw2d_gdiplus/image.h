@@ -1,7 +1,7 @@
 #pragma once
 
 
-#include "aura/graphics/draw2d/image.h"
+#include "aura/graphics/image/image.h"
 
 
 namespace draw2d_gdiplus

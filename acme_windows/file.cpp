@@ -772,7 +772,7 @@ namespace windows
          integer.HighPart = information.nFileSizeHigh;
          integer.LowPart = information.nFileSizeLow;
 
-         rStatus.m_size = integer.QuadPart;
+         rStatus.m_filesize = integer.QuadPart;
 
          // don't return an error for this because previous versions of acme API didn't
          if (information.dwFileAttributes == 0xFFFFFFFF)

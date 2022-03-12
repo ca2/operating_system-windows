@@ -10,8 +10,8 @@ Contact : nish@voidnish.com
 #include "apex_windows/process_data.h"
 
 
-#include "aura/graphics/draw2d/image_list.h"
-#include "aura/graphics/draw2d/icon.h"
+#include "aura/graphics/image/list.h"
+#include "aura/graphics/image/icon.h"
 
 
 namespace windowing_win32
