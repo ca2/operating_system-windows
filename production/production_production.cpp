@@ -143,13 +143,13 @@ namespace production
 
          ::file::path pathMirror =          auto psystem = m_psystem;
 
-         auto pacmedir = psystem->m_pacmedir;
+         auto pacmedir = psystem->m_pacmedirectory;
 
 pacmedir->system() / "config/production/mirror.txt";
 
          ::file::path pathMirrorStatus =          auto psystem = m_psystem;
 
-         auto pacmedir = psystem->m_pacmedir;
+         auto pacmedir = psystem->m_pacmedirectory;
 
 pacmedir->system() / "config/production/mirror_status.txt";
 
@@ -873,14 +873,14 @@ pacmedir->system() / "config/production/mirror_status.txt";
 
                if (!         auto psystem = m_psystem;
 
-         auto pacmedir = psystem->m_pacmedir;
+         auto pacmedir = psystem->m_pacmedirectory;
 
 pacmedir->is(pathTarget.folder()))
                {
 
                   if (!         auto psystem = m_psystem;
 
-         auto pacmedir = psystem->m_pacmedir;
+         auto pacmedir = psystem->m_pacmedirectory;
 
 pacmedir->create(pathTarget.folder()))
                   {

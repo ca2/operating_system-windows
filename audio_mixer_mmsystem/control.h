@@ -29,10 +29,11 @@ namespace multimedia
 
 
          control();
-         virtual ~control();
+         ~control() override;
 
-         using ::multimedia::audio_mixer::user::control_ptr_array::add;
+
          virtual iptr add(::multimedia::audio_mixer::user::control * pinteraction);
+
 
          bool control_type(::multimedia::audio_mixer::e_control econtrol) const;
          bool OnCommand(WPARAM wParam, LPARAM lParam);

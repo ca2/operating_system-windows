@@ -5,7 +5,7 @@
 #include <ShellApi.h>
 #include <Security.h>
 #include "acme/operating_system/time.h"
-#include "acme/filesystem/filesystem/acme_dir.h"
+#include "acme/filesystem/filesystem/acme_directory.h"
 #include "acme/filesystem/filesystem/acme_path.h"
 
 
@@ -2278,7 +2278,7 @@ retry:
 
          ::file::path pathFolder;
 
-         m_psystem->m_pacmedir->m_pplatformdir->_shell_get_special_folder_path(nullptr, pathFolder, CSIDL_WINDOWS, false);
+         m_psystem->m_pacmedirectory->m_pplatformdir->_shell_get_special_folder_path(nullptr, pathFolder, CSIDL_WINDOWS, false);
 
          pathFolder /= "Web/Wallpaper";
 

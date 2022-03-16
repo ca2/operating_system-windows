@@ -12,22 +12,18 @@ namespace multimedia
       destination::destination()
       {
 
-         m_pdevice = nullptr;
          m_pdestination = this;
 
       }
 
 
-
       destination::~destination()
       {
-         //    Carray<::multimedia::audio_mixer::source, ::multimedia::audio_mixer::source &>::~Carray<::multimedia::audio_mixer::source, ::multimedia::audio_mixer::source &>();
-         //CMixerLine::~CMixerLine();
+
       }
 
 
-
-      void     destination::initialize_source_info()
+      void destination::initialize_source_info()
       {
 
          __pointer(::multimedia::audio_mixer_mmsystem::source)     lpSource;
@@ -99,7 +95,7 @@ namespace multimedia
       ::multimedia::audio_mixer::device * destination::get_device()
       {
 
-         return m_pdevice;
+         return m_pmixerdevice;
 
       }
 
@@ -107,7 +103,7 @@ namespace multimedia
       void destination::set_device(::multimedia::audio_mixer::device * pdevice)
       {
 
-         m_pdevice = pdevice;
+         m_pmixerdevice = pdevice;
 
       }
 
@@ -119,10 +115,14 @@ namespace multimedia
 
       }
 
+
       u32 destination::get_mixer_line_id()
       {
+
          return m_mixerline.dwLineID;
+
       }
+
 
    } // namespace audio_mixer_mmsystem
 

@@ -787,7 +787,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="_.h" />
-    <ClInclude Include="callback.h" />
     <ClInclude Include="control.h" />
     <ClInclude Include="destination.h" />
     <ClInclude Include="device.h" />
@@ -795,14 +794,13 @@
     <ClInclude Include="framework.h" />
     <ClInclude Include="interaction.h" />
     <ClInclude Include="line_info.h" />
-    <ClInclude Include="mixer.h" />
+    <ClInclude Include="audio_mixer.h" />
     <ClInclude Include="section.h" />
     <ClInclude Include="source.h" />
     <ClInclude Include="thread.h" />
     <ClInclude Include="_audio_mixer_mmsystem.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="callback.cpp" />
     <ClCompile Include="control.cpp" />
     <ClCompile Include="destination.cpp" />
     <ClCompile Include="device.cpp" />
@@ -819,7 +817,7 @@
     </ClCompile>
     <ClCompile Include="interaction.cpp" />
     <ClCompile Include="line_info.cpp" />
-    <ClCompile Include="mixer.cpp" />
+    <ClCompile Include="audio_mixer.cpp" />
     <ClCompile Include="section.cpp" />
     <ClCompile Include="source.cpp" />
     <ClCompile Include="thread.cpp" />

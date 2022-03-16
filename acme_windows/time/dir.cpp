@@ -123,7 +123,7 @@ namespace dir
 
             //TRACE("         auto psystem = m_psystem;
 
-         auto pacmedir = psystem->m_pacmedir;
+         auto pacmedir = psystem->m_pacmedirectory;
 
 pacmedir->create CreateDirectoryW last error(%d)=%s", dwError, pszError);
 

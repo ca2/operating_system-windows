@@ -6,17 +6,17 @@ namespace windows
 {
 
 
-   class CLASS_DECL_ACME_WINDOWS acme_dir :
-      virtual public ::windows_common::acme_dir
+   class CLASS_DECL_ACME_WINDOWS acme_directory :
+      virtual public ::windows_common::acme_directory
    {
    public:
 
 
-      //__creatable_from_base(acme_dir, ::acme_dir);
+      //__creatable_from_base(acme_directory, ::acme_directory);
 
 
-      acme_dir();
-      ~acme_dir() override;
+      acme_directory();
+      ~acme_directory() override;
 
 
       //::file::path module() override;
@@ -82,7 +82,7 @@ namespace windows
 
 
 // From acme/filesystem/file/dir.cpp by camilo 
-// From acme_posix/acme_dir.h
+// From acme_posix/acme_directory.h
 // on 2021-08-09 03:20 BRT
 // <3ThomasBorregaardSørensen!!
 
@@ -91,14 +91,14 @@ namespace windows
 // {
 
 
-// class CLASS_DECL_ACME_POSIX acme_dir :
-// virtual public ::acme_dir
+// class CLASS_DECL_ACME_POSIX acme_directory :
+// virtual public ::acme_directory
 // {
 
 // public:
 
-// acme_dir();
-// ~acme_dir() override;
+// acme_directory();
+// ~acme_directory() override;
 
       //virtual string name(const char * path1) override;
 
@@ -115,15 +115,16 @@ namespace windows
 
       //bool is(const char * path) override;
 
-      void rls(::file::path_array & stra, const char * psz) override;
+      //bool _enumerates(::file::listing & listing) override;
+      bool enumerate(::file::listing & listing) override;
 
-      void rls_dir(::file::path_array & stra, const char * psz) override;
+      //void rls_dir(::file::path_array & stra, const char * psz) override;
 
-      void ls(::file::path_array & stra, const char * psz) override;
+      //void ls(::file::path_array & stra, const char * psz) override;
 
-      void ls_dir(::file::path_array & stra, const char * psz) override;
+      //void ls_dir(::file::path_array & stra, const char * psz) override;
 
-      void ls_file(::file::path_array & stra, const char * psz) override;
+      //void ls_file(::file::path_array & stra, const char * psz) override;
 
       //int make_path(const char * psz) override;
 

@@ -1,7 +1,7 @@
 #include "framework.h"
 #include "apex/operating_system.h"
 #include "acme/operating_system/time.h"
-#include "acme/filesystem/filesystem/acme_dir.h"
+#include "acme/filesystem/filesystem/acme_directory.h"
 #include "file_context.h"
 
 
@@ -838,7 +838,7 @@ namespace windows
 
       ::file::path pathNetworkPayload;
 
-      pathNetworkPayload = m_psystem->m_pacmedir->user_appdata_local() / "Dropbox/info" NETWORK_PAYLOAD_DEFAULT_EXTENSION;
+      pathNetworkPayload = m_psystem->m_pacmedirectory->user_appdata_local() / "Dropbox/info" NETWORK_PAYLOAD_DEFAULT_EXTENSION;
 
       return pathNetworkPayload;
 

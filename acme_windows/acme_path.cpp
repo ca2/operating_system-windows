@@ -262,7 +262,7 @@ namespace windows
             try
             {
 
-               if (m_psystem->m_pacmedir->is(path))
+               if (m_psystem->m_pacmedirectory->is(path))
                {
 
                   hfile = hfile_create(path,

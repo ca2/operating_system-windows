@@ -219,7 +219,7 @@ install:
          }
          if(papp->m_puserinteractionMain != nullptr)
          {
-   //            papp->m_puserinteractionMain->SetParent(pview);
+   //            papp->m_puserinteractionMain->SetParent(pimpact);
             papp->m_puserinteractionMain->ModifyStyle(0, WS_CHILD);
             papp->m_puserinteractionMain->set_window_position(nullptr, 0, 0, 400, 400, SWP_SHOWWINDOW);
          }

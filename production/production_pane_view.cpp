@@ -6,17 +6,17 @@ namespace production
 {
 
 
-   pane_view::pane_view(::object * pobject) :
+   pane_impact::pane_impact(::object * pobject) :
       ::object(pobject),
       ::user::tab_view(pobject),
-      ::userex::pane_tab_view(pobject),
+      ::userex::pane_tab_impact(pobject),
       place_holder_container(pobject)
    {
 
    }
 
 
-   pane_view::~pane_view()
+   pane_impact::~pane_impact()
    {
 
    }
@@ -25,21 +25,21 @@ namespace production
 
 
 #ifdef DEBUG
-   void pane_view::assert_ok() const
+   void pane_impact::assert_ok() const
    {
       ::user::impact::assert_ok();
    }
 
-   void pane_view::dump(dump_context & dumpcontext) const
+   void pane_impact::dump(dump_context & dumpcontext) const
    {
       ::user::impact::dump(dumpcontext);
    }
 #endif //DEBUG
 
    /////////////////////////////////////////////////////////////////////////////
-   // pane_view message handlers
+   // pane_impact message handlers
 
-   void pane_view::_001OnCreate(::message::message * pmessage)
+   void pane_impact::_001OnCreate(::message::message * pmessage)
    {
 //      __pointer(::message::create) pcreate(pmessage);
       if(pmessage->previous())
@@ -53,7 +53,7 @@ namespace production
    }
 
 
-   void pane_view::handle(::topic * ptopic, ::context * pcontext)
+   void pane_impact::handle(::topic * ptopic, ::context * pcontext)
    {
 
       ::user::tab_view::handle(ptopic, pcontext);
@@ -61,16 +61,16 @@ namespace production
    }
 
 
-   void pane_view::on_change_cur_sel()
+   void pane_impact::on_change_cur_sel()
    {
 
-      ::userex::pane_tab_view::on_change_cur_sel();
+      ::userex::pane_tab_impact::on_change_cur_sel();
 
    }
 
 
 
-   bool pane_view::pre_create_window(::user::system * pusersystem)
+   bool pane_impact::pre_create_window(::user::system * pusersystem)
    {
       pusersystem->m_createstruct.dwExStyle &= ~WS_EX_CLIENTEDGE;
 
@@ -78,7 +78,7 @@ namespace production
    }
 
 
-   void pane_view::on_create_impact(::user::impact_data * pcreatordata)
+   void pane_impact::on_create_impact(::user::impact_data * pcreatordata)
    {
       switch(pcreatordata->m_atom)
       {
@@ -96,11 +96,11 @@ namespace production
             pdocument->Initialize(true);
             pdocument->update_all_views(nullptr, 1234);
             pdocument->update_all_views(nullptr, 123458);
-            __pointer(::user::impact) pview = pdocument->get_view();
+            __pointer(::user::impact) pimpact = pdocument->get_view();
             pdocument->FileManagerBrowse(pcontext->m_papexcontext->dir().appdata()/ "production/menu", ::e_source_system);
-            if(pview != nullptr)
+            if(pimpact != nullptr)
             {
-               __pointer(::user::frame_window) pframe =  (pview->get_parent_frame());
+               __pointer(::user::frame_window) pframe =  (pimpact->get_parent_frame());
                if(pframe != nullptr)
                {
                   pframe->ModifyStyle(WS_CAPTION, WS_CHILD, 0);
@@ -137,10 +137,10 @@ namespace production
                      pdocument->Initialize(true);
                      pdocument->update_all_views(nullptr, 1234);
                      pdocument->update_all_views(nullptr, 123458);
-                     __pointer(::user::impact) pview = pdocument->get_view();
-                     if(pview != nullptr)
+                     __pointer(::user::impact) pimpact = pdocument->get_view();
+                     if(pimpact != nullptr)
                      {
-                        __pointer(::user::frame_window) pframe =  (pview->get_parent_frame());
+                        __pointer(::user::frame_window) pframe =  (pimpact->get_parent_frame());
                         if(pframe != nullptr)
                         {
                            //pframe->ModifyStyle(WS_CAPTION, WS_CHILD, 0);
@@ -165,11 +165,11 @@ namespace production
       //      pdocument->Initialize(true);
       //      pdocument->update_all_views(nullptr, 1234);
       //      pdocument->update_all_views(nullptr, 123458);
-      //      __pointer(::user::impact) pview = pdocument->get_view();
+      //      __pointer(::user::impact) pimpact = pdocument->get_view();
       //      pdocument->FileManagerBrowse(pcontext->m_papexcontext->dir().appdata()/ "production\\3-action-launch", ::e_source_system);
-      //      if(pview != nullptr)
+      //      if(pimpact != nullptr)
       //      {
-      //         __pointer(::user::frame_window) pframe =  (pview->get_parent_frame());
+      //         __pointer(::user::frame_window) pframe =  (pimpact->get_parent_frame());
       //         if(pframe != nullptr)
       //         {
       //            pframe->ModifyStyle(WS_CAPTION, WS_CHILD, 0);
@@ -186,8 +186,8 @@ namespace production
          __pointer(::user::document) pdocument = papplication->create_form(this, pcreatordata->m_pholder);
          if(pdocument == nullptr)
             return;
-         __pointer(::user::impact) pview = pdocument->get_view();
-         m_pviewOptions =  (pview);
+         __pointer(::user::impact) pimpact = pdocument->get_view();
+         m_pviewOptions =  (pimpact);
 
          m_pviewOptions->m_pcallback = this;
 
@@ -204,7 +204,7 @@ namespace production
          pdocument->update_all_views(ptopic);
 
 
-         pcreatordata->m_puserinteraction = (pview->get_parent_frame());
+         pcreatordata->m_puserinteraction = (pimpact->get_parent_frame());
          __pointer(form_child_frame) pframe = (pcreatordata->m_puserinteraction);
          pcreatordata->m_pdocument = pdocument;
          //pcreatordata->m_puserinteraction = pframe;
@@ -214,32 +214,32 @@ namespace production
       default:
          break;
       }
-      ::userex::pane_tab_view::on_create_impact(pcreatordata);
+      ::userex::pane_tab_impact::on_create_impact(pcreatordata);
    }
 
 
 
 
-   void pane_view::_001OnMenuMessage(::message::message * pmessage)
+   void pane_impact::_001OnMenuMessage(::message::message * pmessage)
    {
       __UNREFERENCED_PARAMETER(pmessage);
       set_current_tab_by_id(m_pimpactdataOld->m_atom);
    }
 
-   void pane_view::install_message_routing(::channel * pchannel)
+   void pane_impact::install_message_routing(::channel * pchannel)
    {
       ::user::tab_view::install_message_routing(pchannel);
 
-      MESSAGE_LINK(WM_USER, pchannel, this, &pane_view::_001OnUserMessage);
-      MESSAGE_LINK(e_message_create, pchannel, this, &pane_view::_001OnCreate);
-      //	MESSAGE_LINK(e_message_size, pchannel, this, &pane_view::on_message_size);
-      MESSAGE_LINK(WM_USER + 1122, pchannel, this, &pane_view::_001OnMenuMessage);
+      MESSAGE_LINK(WM_USER, pchannel, this, &pane_impact::_001OnUserMessage);
+      MESSAGE_LINK(e_message_create, pchannel, this, &pane_impact::_001OnCreate);
+      //	MESSAGE_LINK(e_message_size, pchannel, this, &pane_impact::on_message_size);
+      MESSAGE_LINK(WM_USER + 1122, pchannel, this, &pane_impact::_001OnMenuMessage);
 
 
    }
 
 
-   void pane_view::OnFileManagerOpenFile(
+   void pane_impact::OnFileManagerOpenFile(
    ::filemanager::data * pdata,
    ::file::item_array & itema)
    {
@@ -251,7 +251,7 @@ namespace production
       get_parent_frame()->hide();
    }
 
-   void pane_view::handle(::topic * ptopic, ::context * pcontext)
+   void pane_impact::handle(::topic * ptopic, ::context * pcontext)
    {
       if(ptopic->m_atom == ::id_set_check)
       {
@@ -278,12 +278,12 @@ namespace production
    }
 
 
-   __pointer(::production::document) pane_view::get_document()
+   __pointer(::production::document) pane_impact::get_document()
    {
       return  (::user::impact::get_document());
    }
 
-   void pane_view::_001OnUserMessage(::message::message * pmessage)
+   void pane_impact::_001OnUserMessage(::message::message * pmessage)
    {
       __pointer(::user::message) pusermessage(pmessage);
       if(pusermessage->m_wparam == 1)

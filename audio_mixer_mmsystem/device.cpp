@@ -198,13 +198,17 @@ namespace multimedia
       }
 
 
-      void     device::get_destination(::multimedia::audio_mixer::e_destination edestination, ::multimedia::audio_mixer::destination **ppDestination)
+      __pointer(::multimedia::audio_mixer::destination) device::get_destination(::multimedia::audio_mixer::e_destination edestination)
       {
 
          u32 dwComponentType;
 
          switch(edestination)
          {
+         case ::multimedia::audio_mixer::destination_digital:
+            dwComponentType = MIXERLINE_COMPONENTTYPE_DST_DIGITAL;
+            break;
+
          case ::multimedia::audio_mixer::destination_speakers:
             dwComponentType = MIXERLINE_COMPONENTTYPE_DST_SPEAKERS;
             break;
@@ -230,17 +234,16 @@ namespace multimedia
             if(dw == dwComponentType)
             {
 
-               *ppDestination = m_mixerdestinationa[i];
-
-               return;
+               return m_mixerdestinationa[i];
 
             }
 
          }
 
-         throw ::exception(error_not_found);
+         return nullptr;
 
       }
+
 
       void device::map_controls()
       {
@@ -297,77 +300,111 @@ namespace multimedia
 
       }
 
+
       void device::OnMixerLineChange(u32 dwLineID)
       {
-         ::multimedia::audio_mixer::source * pSource;
-         if(m_mapIDToLine.lookup(dwLineID, pSource))
+         
+         auto psource = m_mapIDToLine[dwLineID];
+
+         if(psource)
          {
-            pSource->OnMixerLineChange();
+      
+            psource->OnMixerLineChange();
+
          }
+
       }
+
 
       void device::OnMixerControlChange(u32 dwControlID)
       {
-         ::multimedia::audio_mixer::control * pControl;
-         if(m_mapIDToControl.lookup(dwControlID, pControl))
+
+         auto pcontrol = m_mapIDToControl[dwControlID];
+         
+         if(pcontrol)
          {
-            pControl->OnMixerControlChange();
+
+            pcontrol->OnMixerControlChange();
+
          }
+
       }
+
 
       void device::MapLineControls(::multimedia::audio_mixer::source * psource)
       {
+
          ::multimedia::audio_mixer::control_array & controla = psource->get_control_array();
-         for(i32 k = 0; k < controla.get_size(); k++)
+
+         for(auto & pcontrol : controla)
          {
-            __pointer(::multimedia::audio_mixer_mmsystem::control) control = controla[k];
-            m_mapIDToControl.set_at(control->GetMixerControl().dwControlID, control);
-            for(i32 l = 0; l < control->get_size(); l++)
+
+            __pointer(control) pcontrolMMSystem = pcontrol;
+
+            auto dwControlId = pcontrolMMSystem->GetMixerControl().dwControlID;
+
+            m_mapIDToControl[dwControlId] = pcontrol;
+
+            for(auto & pusercontrol : pcontrol->m_usercontrola)
             {
-               __pointer(::multimedia::audio_mixer::user::control) pinteraction = control->operator [](l);
-               m_mapDlgItemIDToControl.set_at(pinteraction->GetDlgCtrlId(), control);
+
+               m_mapDlgItemIDToControl.set_at(pusercontrol->GetDlgCtrlId(), pcontrol);
+
             }
+
          }
+
       }
+
 
       void device::MapDlgCtrlIDToControls()
       {
+
          m_mapDlgItemIDToControl.erase_all();
 
-         ::multimedia::audio_mixer::destination_array & destinationa = m_mixerdestinationa;
-         for(i32 i = 0; i < destinationa.get_size(); i++)
+         auto & destinationa = m_mixerdestinationa;
+
+         for(auto & pdestination : destinationa)
          {
-            __pointer(::multimedia::audio_mixer_mmsystem::destination) destination = destinationa[i];
-            MapDlgCtrlIDToLineControls(destination);
-            ::multimedia::audio_mixer::source_array & sourcea = destination->get_source_info();
-            for(i32 j = 0; j < sourcea.get_size(); j++)
+
+            MapDlgCtrlIDToLineControls(pdestination);
+
+            auto & sourcea = pdestination->get_source_info();
+
+            for(auto & psource : sourcea)
             {
-               ::multimedia::audio_mixer::source & source = sourcea(j);
-               MapDlgCtrlIDToLineControls(&source);
+               
+               MapDlgCtrlIDToLineControls(psource);
+
             }
+
          }
 
       }
 
+
       void device::MapDlgCtrlIDToLineControls(::multimedia::audio_mixer::source * psource)
       {
-         ::multimedia::audio_mixer::control_array & controla = psource->get_control_array();
-         for(i32 k = 0; k < controla.get_size(); k++)
+
+         auto & controla = psource->get_control_array();
+
+         for(auto & pcontrol : controla)
          {
-            __pointer(::multimedia::audio_mixer::control) control = controla[k];
-            for(i32 l = 0; l < control->get_size(); l++)
+
+            for(auto & pusercontrol : pcontrol->m_usercontrola)
             {
-               __pointer(::multimedia::audio_mixer::user::control) pinteraction = control->operator[](l);
-               m_mapDlgItemIDToControl.set_at(pinteraction->GetDlgCtrlId(), control);
+               
+               m_mapDlgItemIDToControl[pusercontrol->GetDlgCtrlId()] = pcontrol;
+
             }
+
          }
+
       }
 
 
       void device::close()
       {
-
-         //void     mmrc = ::success;
 
          if(m_hMixer != nullptr)
          {
@@ -395,8 +432,6 @@ namespace multimedia
 
          }
 
-         //return mmrc;
-
       }
 
 
@@ -405,11 +440,19 @@ namespace multimedia
 
          ::atom uiID = LOWORD(wparam);
 
-         ::multimedia::audio_mixer::control * pinteraction;
+         auto pcontrol = m_mapDlgItemIDToControl[uiID];
 
-         if(m_mapDlgItemIDToControl.lookup(uiID, pinteraction)
-               && pinteraction->OnCommand(wparam, lparam))
-            return true;
+         if (pcontrol)
+         {
+
+            if (pcontrol->OnCommand(wparam, lparam))
+            {
+
+               return true;
+
+            }
+
+         }
 
          return false;
 
@@ -426,7 +469,9 @@ namespace multimedia
 
       ::multimedia::audio_mixer::audio_mixer * device::get_mixer()
       {
-         return m_pmixer;
+         
+         return m_paudiomixer;
+
       }
 
 
@@ -434,5 +479,6 @@ namespace multimedia
 
 
 } // namespace multimedia
+
 
 

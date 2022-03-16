@@ -15,19 +15,17 @@ namespace multimedia
       public:
 
 
-         ::multimedia::audio_mixer_mmsystem::interaction            m_window;
+         __pointer(::multimedia::audio_mixer_mmsystem::interaction)  m_pwindow;
 
 
          audio_mixer();
-         virtual ~audio_mixer();
+         ~audio_mixer() override;
 
 
-
-         //::multimedia::audio_mixer::callback * get_callback();
-         //void set_callback(::multimedia::audio_mixer::callback * pcallback);
-
-
-         void     set_new_device(u32 uiMixerId);
+         void initialize(::object * pobject) override;
+            
+            
+         void set_new_device(u32 uiMixerId);
 
 
          bool OnCommand(wparam wparam, lparam lparam);

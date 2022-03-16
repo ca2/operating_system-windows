@@ -6,7 +6,7 @@ namespace windows
 {
 
    
-   acme_dir::acme_dir()
+   acme_directory::acme_directory()
    {
 
       m_pplatformdir = this;
@@ -14,14 +14,14 @@ namespace windows
    }
 
 
-   acme_dir::~acme_dir()
+   acme_directory::~acme_directory()
    {
 
 
    }
 
 
-   string acme_dir::dir_root()
+   string acme_directory::dir_root()
    {
 
       ::string path;
@@ -42,7 +42,7 @@ namespace windows
    }
 
 
-   ::file::path acme_dir::get_memory_map_base_folder_path() 
+   ::file::path acme_directory::get_memory_map_base_folder_path() 
    {
 
       auto path = _get_known_folder(FOLDERID_RoamingAppData);
@@ -54,7 +54,7 @@ namespace windows
    }
 
 
-   ::file::path acme_dir::home()
+   ::file::path acme_directory::home()
    {
 
       return _get_known_folder(FOLDERID_Profile);
@@ -62,7 +62,7 @@ namespace windows
    }
 
 
-   ::file::path acme_dir::program_data()
+   ::file::path acme_directory::program_data()
    {
 
       return _get_known_folder(FOLDERID_ProgramData);
@@ -70,7 +70,7 @@ namespace windows
    }
 
 
-   ::file::path acme_dir::roaming()
+   ::file::path acme_directory::roaming()
    {
 
       return _get_known_folder(FOLDERID_RoamingAppData);
@@ -78,7 +78,7 @@ namespace windows
    }
 
 
-   ::file::path acme_dir::appdata()
+   ::file::path acme_directory::appdata()
    {
 
       return ca2roaming() / "appdata" / app_relative();
@@ -86,7 +86,7 @@ namespace windows
    }
 
 
-   ::file::path acme_dir::public_system()
+   ::file::path acme_directory::public_system()
    {
 
       return public_root() / "system";
@@ -94,7 +94,7 @@ namespace windows
    }
 
 
-   ::file::path acme_dir::system()
+   ::file::path acme_directory::system()
    {
 
       return ca2roaming() / "system";
@@ -102,7 +102,7 @@ namespace windows
    }
 
 
-   ::file::path acme_dir::config()
+   ::file::path acme_directory::config()
    {
 
       return ca2roaming() / "config";
@@ -110,7 +110,7 @@ namespace windows
    }
 
 
-   ::file::path acme_dir::local()
+   ::file::path acme_directory::local()
    {
 
       return ca2roaming() / "local";
@@ -118,7 +118,7 @@ namespace windows
    }
 
 
-   ::file::path acme_dir::sensitive()
+   ::file::path acme_directory::sensitive()
    {
 
    #ifdef WINDOWS
@@ -139,7 +139,7 @@ namespace windows
 
 
 
-   string acme_dir::system_short_name()
+   string acme_directory::system_short_name()
    {
 
    #ifdef _UWP
@@ -157,7 +157,7 @@ namespace windows
    }
 
 
-   ::file::path acme_dir::relative(::file::path path)
+   ::file::path acme_directory::relative(::file::path path)
    {
 
       path.replace_with("", ":");
@@ -171,7 +171,7 @@ namespace windows
    #ifdef _UWP
 
 
-   ::file::path acme_dir::app_relative()
+   ::file::path acme_directory::app_relative()
    {
 
       return "";
@@ -182,7 +182,7 @@ namespace windows
    #else
 
 
-   ::file::path acme_dir::app_relative()
+   ::file::path acme_directory::app_relative()
    {
 
       ::file::path path = m_psystem->m_pacmefile->module();
@@ -198,7 +198,7 @@ namespace windows
 
 
 
-   ::file::path acme_dir::inplace_install(string strAppId, string strPlatform, string strConfiguration)
+   ::file::path acme_directory::inplace_install(string strAppId, string strPlatform, string strConfiguration)
    {
 
    #ifdef WINDOWS_DESKTOP
@@ -245,12 +245,12 @@ namespace windows
 
          auto psystem = m_psystem;
 
-         auto pacmedir = psystem->m_pacmedir;
+         auto pacmedir = psystem->m_pacmedirectory;
 
 
       return          auto psystem = m_psystem;
 
-         auto pacmedir = psystem->m_pacmedir;
+         auto pacmedir = psystem->m_pacmedirectory;
 
 pacmedir->roaming();
 
@@ -264,7 +264,7 @@ pacmedir->roaming();
    }
 
 
-   ::file::path acme_dir::inplace_matter_install(string strAppId, string strPlatform, string strConfiguration)
+   ::file::path acme_directory::inplace_matter_install(string strAppId, string strPlatform, string strConfiguration)
    {
 
    #ifdef WINDOWS_DESKTOP
@@ -285,12 +285,12 @@ pacmedir->roaming();
 
          auto psystem = m_psystem;
 
-         auto pacmedir = psystem->m_pacmedir;
+         auto pacmedir = psystem->m_pacmedirectory;
 
 
       return          auto psystem = m_psystem;
 
-         auto pacmedir = psystem->m_pacmedir;
+         auto pacmedir = psystem->m_pacmedirectory;
 
 pacmedir->roaming();
 
@@ -304,7 +304,7 @@ pacmedir->roaming();
    }
 
 
-   ::file::path acme_dir::install()
+   ::file::path acme_directory::install()
    {
 
       if (m_pathInstallFolder == nullptr || m_pathInstallFolder.is_empty())
@@ -319,19 +319,19 @@ pacmedir->roaming();
    }
 
 
-   ::file::path acme_dir::default_install()
+   ::file::path acme_directory::default_install()
    {
 
    #ifdef ANDROID
             auto psystem = m_psystem;
 
-         auto pacmedir = psystem->m_pacmedir;
+         auto pacmedir = psystem->m_pacmedirectory;
 
 
 
       return          auto psystem = m_psystem;
 
-         auto pacmedir = psystem->m_pacmedir;
+         auto pacmedir = psystem->m_pacmedirectory;
 
 pacmedir->roaming();
 
@@ -348,7 +348,7 @@ pacmedir->roaming();
    }
 
 
-   ::file::path acme_dir::beforeca2()
+   ::file::path acme_directory::beforeca2()
    {
 
       return ::file_path_folder(install());
@@ -366,7 +366,7 @@ pacmedir->roaming();
    #include <Shlobj.h>
 
 
-   ::file::path acme_dir::program_files_x86()
+   ::file::path acme_directory::program_files_x86()
    {
 
       wstring wstrModuleFolder(get_buffer, sizeof(unichar) * 8);
@@ -391,7 +391,7 @@ pacmedir->roaming();
    }
 
 
-   ::file::path acme_dir::program_files()
+   ::file::path acme_directory::program_files()
    {
 
       wstring wstrModuleFolder(get_buffer, sizeof(unichar) * 8);
@@ -421,7 +421,7 @@ pacmedir->roaming();
    #else
 
 
-   ::file::path acme_dir::program_files_x86()
+   ::file::path acme_directory::program_files_x86()
    {
 
       ::file::path path("/opt/ca2");
@@ -431,7 +431,7 @@ pacmedir->roaming();
    }
 
 
-   ::file::path acme_dir::program_files()
+   ::file::path acme_directory::program_files()
    {
 
       ::file::path path("/opt/ca2");
@@ -444,7 +444,7 @@ pacmedir->roaming();
    #endif
 
 
-   ::file::path acme_dir::stage(string strAppId, string strPlatform, string strConfiguration)
+   ::file::path acme_directory::stage(string strAppId, string strPlatform, string strConfiguration)
    {
 
       return inplace_install(strAppId, strPlatform, strConfiguration) / "time" / time_binary_platform(strPlatform) / strConfiguration;
@@ -455,7 +455,7 @@ pacmedir->roaming();
    #ifdef LINUX
 
 
-   ::file::path acme_dir::home()
+   ::file::path acme_directory::home()
    {
 
       return getenv("HOME");
@@ -468,12 +468,12 @@ pacmedir->roaming();
 
 #if defined(_UWP) || defined(__APPLE__) || defined(LINUX) || defined(ANDROID)
 
-   ::file::path acme_dir::bookmark()
+   ::file::path acme_directory::bookmark()
    {
 
       auto psystem = m_psystem;
 
-      auto pacmedir = psystem->m_pacmedir;
+      auto pacmedir = psystem->m_pacmedirectory;
 
       return pacmedir->localconfig() / "bookmark";
 
@@ -486,7 +486,7 @@ pacmedir->roaming();
    #ifdef _UWP
 
 
-   ::file::path acme_dir::home()
+   ::file::path acme_directory::home()
    {
 
       return "";
@@ -497,7 +497,7 @@ pacmedir->roaming();
    #endif
 
 
-   void acme_dir::set_path_install_folder(const ::string & pszPath)
+   void acme_directory::set_path_install_folder(const ::string & pszPath)
    {
 
       m_pathInstallFolder = pszPath;
@@ -505,7 +505,7 @@ pacmedir->roaming();
    }
 
 
-   ::file::path acme_dir::bookmark()
+   ::file::path acme_directory::bookmark()
    {
 
       return localconfig() / "bookmark";
@@ -513,7 +513,7 @@ pacmedir->roaming();
    }
 
 
-   ::file::path acme_dir::sys_temp()
+   ::file::path acme_directory::sys_temp()
    {
 
       return appdata() / "time";
@@ -521,7 +521,7 @@ pacmedir->roaming();
    }
 
 
-   ::file::path acme_dir::ca2appdata()
+   ::file::path acme_directory::ca2appdata()
    {
 
       return ca2roaming() / "appdata";
@@ -529,14 +529,14 @@ pacmedir->roaming();
    }
 
 
-   ::file::path acme_dir::public_root()
+   ::file::path acme_directory::public_root()
    {
 
       return program_data() / "ca2";
 
    }
 
-   ::file::path acme_dir::ca2roaming()
+   ::file::path acme_directory::ca2roaming()
    {
 
       return roaming() / "ca2";
@@ -544,7 +544,7 @@ pacmedir->roaming();
    }
 
 
-   ::file::path acme_dir::localconfig()
+   ::file::path acme_directory::localconfig()
    {
 
       return ca2roaming() / "localconfig";
@@ -554,7 +554,7 @@ pacmedir->roaming();
 
    //
 
-   //::file::path acme_dir::pathfind(const string& pszEnv, const string& pszTopic, const string& pszMode)
+   //::file::path acme_directory::pathfind(const string& pszEnv, const string& pszTopic, const string& pszMode)
    //{
 
    //   ::file::path_array stra;
@@ -584,7 +584,7 @@ pacmedir->roaming();
 
 
 
-   //::file::path acme_dir::get_memory_map_base_folder_path()
+   //::file::path acme_directory::get_memory_map_base_folder_path()
    //{
 
    //   return "";
@@ -592,7 +592,7 @@ pacmedir->roaming();
    //}
 
 
-   ::file::path acme_dir::user_appdata_local()
+   ::file::path acme_directory::user_appdata_local()
    {
 
       return _shell_get_special_folder_path(CSIDL_LOCAL_APPDATA);
@@ -600,7 +600,7 @@ pacmedir->roaming();
    }
 
 
-   bool acme_dir::_shell_get_special_folder_path(HWND hwnd, ::file::path& str, i32 csidl, bool fCreate)
+   bool acme_directory::_shell_get_special_folder_path(HWND hwnd, ::file::path& str, i32 csidl, bool fCreate)
    {
 
       return ::SHGetSpecialFolderPathW(hwnd, wtostring(str, MAX_PATH * 8), csidl, fCreate) != false;
@@ -608,7 +608,7 @@ pacmedir->roaming();
    }
 
 
-   ::file::path acme_dir::_shell_get_special_folder_path(i32 csidl, bool fCreate, ::windowing::window* pwindow)
+   ::file::path acme_directory::_shell_get_special_folder_path(i32 csidl, bool fCreate, ::windowing::window* pwindow)
    {
 
       ::file::path path;
@@ -625,7 +625,7 @@ pacmedir->roaming();
    }
 
 
-   ::file::path acme_dir::_get_known_folder(REFKNOWNFOLDERID kfid)
+   ::file::path acme_directory::_get_known_folder(REFKNOWNFOLDERID kfid)
    {
 
       ::file::path str;
@@ -643,7 +643,7 @@ pacmedir->roaming();
    }
 
    
-//   bool acme_dir::_is(const char * path1)
+//   bool acme_directory::_is(const char * path1)
 //   {
 //
 //#ifdef _UWP
@@ -806,7 +806,7 @@ void TranslateLastError()
 }
 
 
-bool windows_file_find_is_dots(WIN32_FIND_DATAW & data)
+bool windows_file_find_is_dots(const WIN32_FIND_DATAW & data)
 {
 
    if (data.cFileName[0] == L'.')
@@ -841,7 +841,7 @@ bool windows_file_find_is_dots(WIN32_FIND_DATAW & data)
 #endif
 
 
-//      ::file::path acme_dir::module()
+//      ::file::path acme_directory::module()
 //      {
 //
 //#if defined(_UWP)
@@ -1079,7 +1079,7 @@ bool windows_file_find_is_dots(WIN32_FIND_DATAW & data)
       //   }
 
 
-      //bool acme_dir::create(const char * path)
+      //bool acme_directory::create(const char * path)
       //{
 
       //   return _create(path);
@@ -1090,7 +1090,7 @@ bool windows_file_find_is_dots(WIN32_FIND_DATAW & data)
 #ifndef WINDOWS_DESKTOP
 
 
-      bool acme_dir::_mk(const char * path)
+      bool acme_directory::_mk(const char * path)
       {
 
          if (is(path))
@@ -1221,7 +1221,7 @@ bool windows_file_find_is_dots(WIN32_FIND_DATAW & data)
 
                //TRACE("         auto psystem = m_psystem;
 
-         auto pacmedir = psystem->m_pacmedir;
+         auto pacmedir = psystem->m_pacmedirectory;
 
 pacmedir->create CreateDirectoryW last error(%d)=%s", dwError, pszError);
 
@@ -1247,7 +1247,7 @@ pacmedir->create CreateDirectoryW last error(%d)=%s", dwError, pszError);
 
 
 
-      ::file::path acme_dir::module()
+      ::file::path acme_directory::module()
       {
 
 #ifdef WINDOWS
@@ -1278,7 +1278,7 @@ pacmedir->create CreateDirectoryW last error(%d)=%s", dwError, pszError);
       }
 
 
-      //bool acme_dir::is(const char * path)
+      //bool acme_directory::is(const char * path)
       //{
 
       //   //if (::file::system_dir::g_pthis == nullptr)
@@ -1293,523 +1293,654 @@ pacmedir->create CreateDirectoryW last error(%d)=%s", dwError, pszError);
       //}
 
 
-
-      void acme_dir::rls(::file::path_array & stra, const char * psz)
+      void defer_add(::file::listing & listing, const WIN32_FIND_DATAW & finddata)
       {
-         ::count start = stra.get_count();
-         ls(stra, psz);
-         ::count end = stra.get_count();
-         for (::index i = start; i < end; i++)
+
+
+         if (windows_file_find_is_dots(finddata))
          {
-            if (is(stra[i]))
-            {
-               rls(stra, stra[i]);
-            }
+
+            return;
+
          }
+            
+         if (finddata.dwFileAttributes == INVALID_FILE_ATTRIBUTES)
+         {
+
+            return;
+
+         }
+
+         ::file::path path(finddata.cFileName);
+
+         bool bDirectory = (finddata.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY);
+
+         path.m_iDir = bDirectory ? 1 : 0;
+
+         path.m_iSize = make64_from32(finddata.nFileSizeLow, finddata.nFileSizeHigh);
+
+         listing.defer_add(path);
 
       }
 
 
-      void acme_dir::rls_dir(::file::path_array & stra, const char * psz)
+      bool acme_directory::enumerate(::file::listing & listing)
       {
 
-         ::count start = stra.get_count();
+         listing.m_pathFinal = listing.m_pathUser;
 
-         ls_dir(stra, psz);
-
-         ::count end = stra.get_count();
-
-         for (::index i = start; i < end; i++)
+         if (!is(listing.m_pathFinal))
          {
 
-            ::file::path path = stra[i];
-
-            rls_dir(stra, path);
+            return false;
 
          }
 
-      }
-
-
-      void acme_dir::ls(::file::path_array & stra, const char * psz)
-      {
-
-#if defined(LINUX) || defined(__APPLE__) || defined(ANDROID)
-
-         DIR * dirp = opendir(psz);
-
-         if (dirp == nullptr)
-            return;
-
-         dirent * dp;
-         ::file::path path;
-         while ((dp = readdir(dirp)) != nullptr)
+         if (!listing.on_start_enumerating(this))
          {
 
-            if (strcmp(dp->d_name, "..") == 0)
-               continue;
-            else if (strcmp(dp->d_name, ".") == 0)
-               continue;
-            path = psz / dp->d_name;
-            path.m_iDir = dp->d_type & DT_DIR ? 1 : 0;
-            path.m_iSize = -1;
-            stra.add(path);
-
-            //output_debug_string("flood for you: dir::ls ----> " + path);
+            return true;
 
          }
-
-         closedir(dirp);
-
-#elif defined(_UWP)
-
-         ::winrt::Windows::Storage::StorageFolder ^ folder = nullptr;
-
-         string strPrefix;
-
-         string str = psz;
-
-         try
-         {
-
-            if (string(psz).compare_ci("image://") == 0)
-            {
-
-               strPrefix = "image://";
-
-               try
-               {
-
-                  folder = ::winrt::Windows::Storage::KnownFolders::PicturesLibrary;
-
-               }
-               catch (...)
-               {
-
-                  folder = nullptr;
-
-               }
-
-            }
-            else if (string(psz).compare_ci("music://") == 0)
-            {
-
-               strPrefix = "music://";
-
-               try
-               {
-
-                  folder = ::winrt::Windows::Storage::KnownFolders::MusicLibrary;
-
-               }
-               catch (...)
-               {
-
-                  folder = nullptr;
-
-               }
-
-            }
-            else if (string(psz).compare_ci("video://") == 0)
-            {
-
-               strPrefix = "video://";
-
-               try
-               {
-
-                  folder = ::winrt::Windows::Storage::KnownFolders::VideosLibrary;
-
-               }
-               catch (...)
-               {
-
-                  folder = nullptr;
-
-               }
-
-            }
-            else if (string(psz).compare_ci("document://") == 0)
-            {
-
-               strPrefix = "document://";
-
-               try
-               {
-
-                  folder = ::winrt::Windows::Storage::KnownFolders::DocumentsLibrary;
-
-               }
-               catch (...)
-               {
-
-                  folder = nullptr;
-
-               }
-
-            }
-            else
-            {
-
-               if (::str::begins_eat_ci(str, "image://"))
-               {
-
-                  strPrefix = "image://";
-
-                  try
-                  {
-
-                     folder = ::winrt::Windows::Storage::KnownFolders::PicturesLibrary;
-
-                  }
-                  catch (...)
-                  {
-
-                     folder = nullptr;
-
-                  }
-
-               }
-
-               if (::str::begins_eat_ci(str, "music://"))
-               {
-
-                  strPrefix = "music://";
-
-                  try
-                  {
-
-                     folder = ::winrt::Windows::Storage::KnownFolders::MusicLibrary;
-
-                  }
-                  catch (...)
-                  {
-
-                     folder = nullptr;
-
-                  }
-
-               }
-
-               if (::str::begins_eat_ci(str, "video://"))
-               {
-
-                  strPrefix = "video://";
-
-                  try
-                  {
-
-                     folder = ::winrt::Windows::Storage::KnownFolders::VideosLibrary;
-
-                  }
-                  catch (...)
-                  {
-
-                     folder = nullptr;
-
-                  }
-
-               }
-
-               if (::str::begins_eat_ci(str, "document://"))
-               {
-
-                  strPrefix = "document://";
-
-                  try
-                  {
-
-                     folder = ::winrt::Windows::Storage::KnownFolders::DocumentsLibrary;
-
-                  }
-                  catch (...)
-                  {
-
-                     folder = nullptr;
-
-                  }
-
-               }
-
-               if (strPrefix.has_char())
-               {
-
-                  string_array stra;
-
-                  stra.explode("/", str);
-
-                  string str;
-
-                  while (stra.get_count() > 0)
-                  {
-
-                     str = stra[0];
-
-                     if (str.has_char())
-                     {
-
-                        folder = wait(folder->GetFolderAsync(str));
-
-                        strPrefix += str + "/";
-
-                     }
-
-                     stra.erase_at(0);
-
-                  }
-
-               }
-               else
-               {
-
-                  folder = ::winrt::Windows::Storage::StorageFolder::GetFolderFromPathAsync(str).get();
-
-                  strPrefix = str + "/";
-
-               }
-
-            }
-
-         }
-         catch (...)
-         {
-
-            return;
-
-         }
-
-         if (folder == nullptr)
-         {
-
-            return;
-
-         }
-
-         string strPath = string(begin(folder->Path));
-
-         auto a = folder->GetItemsAsync().get();
-
-         for (u32 u = 0; u < a->Size; u++)
-         {
-
-            string strPath = string(begin(a->GetAt(u)->Path));
-
-            ::file::path path(strPath);
-
-            string str = path;
-
-            path.m_iDir = a->GetAt(u)->IsOfType(::winrt::Windows::Storage::StorageItemTypes::Folder) ? 1 : 0;
-
-            stra.add(path);
-
-         }
-
-
-#else
 
          WIN32_FIND_DATAW FindFileData;
 
          HANDLE hFind;
 
-         hFind = FindFirstFileW(wstring(psz) + "\\*", &FindFileData);
+         hFind = FindFirstFileW(wstring(listing.m_pathFinal) + "\\*", &FindFileData);
 
          if (hFind == INVALID_HANDLE_VALUE)
          {
 
-            return;
+            return true;
 
          }
 
          while (true)
          {
 
-            if (!windows_file_find_is_dots(FindFileData) && (FindFileData.dwFileAttributes != INVALID_FILE_ATTRIBUTES))
-               stra.add(::file::path(FindFileData.cFileName));
-
-            //if (stra.has_elements() && stra.last() == "teste")
-            //{
-            //   output_debug_string("teste");
-            //}
+            defer_add(listing, FindFileData);
 
             if (!FindNextFileW(hFind, &FindFileData))
+            {
+
                break;
+
+            }
 
          }
 
          FindClose(hFind);
 
-#endif
-
-
       }
 
 
-      void acme_dir::ls_dir(::file::path_array & stra, const char * psz)
-      {
+      //bool acme_directory::enumerate(::file::listing & listing)
+      //{
 
-#if defined(LINUX) || defined(__APPLE__) || defined(ANDROID)
+      //   listing.m_pathFinal = listing.m_pathUser;
 
-         DIR * dirp = opendir(psz);
+      //   if (!is(listing.m_pathFinal))
+      //   {
 
-         if (dirp == nullptr)
-            return;
+      //      return false;
 
-         dirent * dp;
+      //   }
 
-         while ((dp = readdir(dirp)) != nullptr)
-         {
-            if (dp->d_name[0] == '.')
-            {
-               if (dp->d_name[1] == '\0')
-                  continue;
-               if (dp->d_name[1] == '.')
-               {
-                  if (dp->d_name[2] == '\0')
-                     continue;
-               }
-            }
-            ::file::path strPath = psz / dp->d_name;
-            if (is(strPath))
-            {
-               stra.add(strPath);
-            }
+      //   if (!listing.on_start_enumerating(this))
+      //   {
 
-         }
+      //      return true;
 
-         closedir(dirp);
+      //   }
 
-#elif defined(_UWP)
+      //   WIN32_FIND_DATAW FindFileData;
 
-         ::winrt::Windows::Storage::StorageFolder ^ folder = wait(::winrt::Windows::Storage::StorageFolder::GetFolderFromPathAsync(string(psz)));
+      //   HANDLE hFind;
 
-         ::winrt::Windows::Foundation::Collections::IVectorImpact < ::winrt::Windows::Storage::StorageFolder ^ > ^ a = wait(folder->GetFoldersAsync());
+      //   hFind = FindFirstFileW(wstring(listing.m_pathFinal) + "\\*", &FindFileData);
 
-         for (u32 u = 0; u < a->Size; u++)
-         {
-            stra.add(begin(a->GetAt(u)->Path));
-         }
+      //   if (hFind == INVALID_HANDLE_VALUE)
+      //   {
 
+      //      return true;
 
-#else
+      //   }
 
-         WIN32_FIND_DATAW FindFileData;
+      //   while (true)
+      //   {
 
-         HANDLE hFind;
+      //      if (windows_file_find_is_dots(FindFileData)
+      //         || FindFileData.dwFileAttributes != INVALID_FILE_ATTRIBUTES)
+      //      {
 
-         hFind = FindFirstFileW(wstring(psz), &FindFileData);
+      //         continue;
 
-         if (hFind == INVALID_HANDLE_VALUE)
-            return;
+      //      }
 
-         while (true)
-         {
+      //      ::file::path path(FindFileData.cFileName);
 
-            if (!windows_file_find_is_dots(FindFileData) && (FindFileData.dwFileAttributes != INVALID_FILE_ATTRIBUTES) && (FindFileData.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY) != 0)
-            {
+      //      bool bDirectory = (FindFileData.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY);
 
-               stra.add(::file::path(FindFileData.cFileName));
+      //      path.m_iDir = bDirectory ? 1 : 0;
 
-            }
+      //      path.m_iSize = make64_from32(FindFileData.nFileSizeLow, FindFileData.nFileSizeHigh);
 
-            stra.add(::file::path(FindFileData.cFileName));
+      //      listing.defer_add(path);
 
-            if (!FindNextFileW(hFind, &FindFileData))
-               break;
+      //      if (!FindNextFileW(hFind, &FindFileData))
+      //      {
 
-         }
+      //         break;
 
-         FindClose(hFind);
+      //      }
 
-#endif
+      //   }
 
+      //   FindClose(hFind);
 
-      }
+      //}
 
+      //void acme_directory::rls_dir(::file::path_array & stra, const char * psz)
+      //{
 
-      void acme_dir::ls_file(::file::path_array & stra, const char * psz)
-      {
+      //   ::count start = stra.get_count();
 
-#if defined(LINUX) || defined(__APPLE__) || defined(ANDROID)
+      //   ls_dir(stra, psz);
 
-         DIR * dirp = opendir(psz);
+      //   ::count end = stra.get_count();
 
-         if (dirp == nullptr)
-            return;
+      //   for (::index i = start; i < end; i++)
+      //   {
 
-         dirent * dp;
+      //      ::file::path path = stra[i];
 
-         while ((dp = readdir(dirp)) != nullptr)
-         {
-            if (dp->d_name[0] == '.')
-            {
-               if (dp->d_name[1] == '\0')
-                  continue;
-               if (dp->d_name[1] == '.')
-               {
-                  if (dp->d_name[2] == '\0')
-                     continue;
-               }
-            }
-            ::file::path strPath = psz / dp->d_name;
-            if (!is(strPath))
-            {
-               stra.add(strPath);
-            }
+      //      rls_dir(stra, path);
 
-         }
+      //   }
 
-         closedir(dirp);
-
-#elif defined(_UWP)
-
-         ::winrt::Windows::Storage::StorageFolder ^ folder = wait(::winrt::Windows::Storage::StorageFolder::GetFolderFromPathAsync(string(psz)));
-
-         ::winrt::Windows::Foundation::Collections::IVectorImpact < ::winrt::Windows::Storage::StorageFolder ^ > ^ a = wait(folder->GetFoldersAsync());
-
-         for (u32 u = 0; u < a->Size; u++)
-         {
-            stra.add(begin(a->GetAt(u)->Path));
-         }
+      //}
 
 
-#else
+//      void acme_directory::ls(::file::path_array & stra, const char * psz)
+//      {
+//
+//#if defined(LINUX) || defined(__APPLE__) || defined(ANDROID)
+//
+//         DIR * dirp = opendir(psz);
+//
+//         if (dirp == nullptr)
+//            return;
+//
+//         dirent * dp;
+//         ::file::path path;
+//         while ((dp = readdir(dirp)) != nullptr)
+//         {
+//
+//            if (strcmp(dp->d_name, "..") == 0)
+//               continue;
+//            else if (strcmp(dp->d_name, ".") == 0)
+//               continue;
+//            path = psz / dp->d_name;
+//            path.m_iDir = dp->d_type & DT_DIR ? 1 : 0;
+//            path.m_iSize = -1;
+//            stra.add(path);
+//
+//            //output_debug_string("flood for you: dir::ls ----> " + path);
+//
+//         }
+//
+//         closedir(dirp);
+//
+//#elif defined(_UWP)
+//
+//         ::winrt::Windows::Storage::StorageFolder ^ folder = nullptr;
+//
+//         string strPrefix;
+//
+//         string str = psz;
+//
+//         try
+//         {
+//
+//            if (string(psz).compare_ci("image://") == 0)
+//            {
+//
+//               strPrefix = "image://";
+//
+//               try
+//               {
+//
+//                  folder = ::winrt::Windows::Storage::KnownFolders::PicturesLibrary;
+//
+//               }
+//               catch (...)
+//               {
+//
+//                  folder = nullptr;
+//
+//               }
+//
+//            }
+//            else if (string(psz).compare_ci("music://") == 0)
+//            {
+//
+//               strPrefix = "music://";
+//
+//               try
+//               {
+//
+//                  folder = ::winrt::Windows::Storage::KnownFolders::MusicLibrary;
+//
+//               }
+//               catch (...)
+//               {
+//
+//                  folder = nullptr;
+//
+//               }
+//
+//            }
+//            else if (string(psz).compare_ci("video://") == 0)
+//            {
+//
+//               strPrefix = "video://";
+//
+//               try
+//               {
+//
+//                  folder = ::winrt::Windows::Storage::KnownFolders::VideosLibrary;
+//
+//               }
+//               catch (...)
+//               {
+//
+//                  folder = nullptr;
+//
+//               }
+//
+//            }
+//            else if (string(psz).compare_ci("document://") == 0)
+//            {
+//
+//               strPrefix = "document://";
+//
+//               try
+//               {
+//
+//                  folder = ::winrt::Windows::Storage::KnownFolders::DocumentsLibrary;
+//
+//               }
+//               catch (...)
+//               {
+//
+//                  folder = nullptr;
+//
+//               }
+//
+//            }
+//            else
+//            {
+//
+//               if (::str::begins_eat_ci(str, "image://"))
+//               {
+//
+//                  strPrefix = "image://";
+//
+//                  try
+//                  {
+//
+//                     folder = ::winrt::Windows::Storage::KnownFolders::PicturesLibrary;
+//
+//                  }
+//                  catch (...)
+//                  {
+//
+//                     folder = nullptr;
+//
+//                  }
+//
+//               }
+//
+//               if (::str::begins_eat_ci(str, "music://"))
+//               {
+//
+//                  strPrefix = "music://";
+//
+//                  try
+//                  {
+//
+//                     folder = ::winrt::Windows::Storage::KnownFolders::MusicLibrary;
+//
+//                  }
+//                  catch (...)
+//                  {
+//
+//                     folder = nullptr;
+//
+//                  }
+//
+//               }
+//
+//               if (::str::begins_eat_ci(str, "video://"))
+//               {
+//
+//                  strPrefix = "video://";
+//
+//                  try
+//                  {
+//
+//                     folder = ::winrt::Windows::Storage::KnownFolders::VideosLibrary;
+//
+//                  }
+//                  catch (...)
+//                  {
+//
+//                     folder = nullptr;
+//
+//                  }
+//
+//               }
+//
+//               if (::str::begins_eat_ci(str, "document://"))
+//               {
+//
+//                  strPrefix = "document://";
+//
+//                  try
+//                  {
+//
+//                     folder = ::winrt::Windows::Storage::KnownFolders::DocumentsLibrary;
+//
+//                  }
+//                  catch (...)
+//                  {
+//
+//                     folder = nullptr;
+//
+//                  }
+//
+//               }
+//
+//               if (strPrefix.has_char())
+//               {
+//
+//                  string_array stra;
+//
+//                  stra.explode("/", str);
+//
+//                  string str;
+//
+//                  while (stra.get_count() > 0)
+//                  {
+//
+//                     str = stra[0];
+//
+//                     if (str.has_char())
+//                     {
+//
+//                        folder = wait(folder->GetFolderAsync(str));
+//
+//                        strPrefix += str + "/";
+//
+//                     }
+//
+//                     stra.erase_at(0);
+//
+//                  }
+//
+//               }
+//               else
+//               {
+//
+//                  folder = ::winrt::Windows::Storage::StorageFolder::GetFolderFromPathAsync(str).get();
+//
+//                  strPrefix = str + "/";
+//
+//               }
+//
+//            }
+//
+//         }
+//         catch (...)
+//         {
+//
+//            return;
+//
+//         }
+//
+//         if (folder == nullptr)
+//         {
+//
+//            return;
+//
+//         }
+//
+//         string strPath = string(begin(folder->Path));
+//
+//         auto a = folder->GetItemsAsync().get();
+//
+//         for (u32 u = 0; u < a->Size; u++)
+//         {
+//
+//            string strPath = string(begin(a->GetAt(u)->Path));
+//
+//            ::file::path path(strPath);
+//
+//            string str = path;
+//
+//            path.m_iDir = a->GetAt(u)->IsOfType(::winrt::Windows::Storage::StorageItemTypes::Folder) ? 1 : 0;
+//
+//            stra.add(path);
+//
+//         }
+//
+//
+//#else
+//
+//         WIN32_FIND_DATAW FindFileData;
+//
+//         HANDLE hFind;
+//
+//         hFind = FindFirstFileW(wstring(psz) + "\\*", &FindFileData);
+//
+//         if (hFind == INVALID_HANDLE_VALUE)
+//         {
+//
+//            return;
+//
+//         }
+//
+//         while (true)
+//         {
+//
+//            if (!windows_file_find_is_dots(FindFileData) && (FindFileData.dwFileAttributes != INVALID_FILE_ATTRIBUTES))
+//               stra.add(::file::path(FindFileData.cFileName));
+//
+//            //if (stra.has_elements() && stra.last() == "teste")
+//            //{
+//            //   output_debug_string("teste");
+//            //}
+//
+//            if (!FindNextFileW(hFind, &FindFileData))
+//               break;
+//
+//         }
+//
+//         FindClose(hFind);
+//
+//#endif
+//
+//
+//      }
+//
 
-         WIN32_FIND_DATAW FindFileData;
-
-         HANDLE hFind;
-
-         hFind = FindFirstFileW(wstring(psz), &FindFileData);
-
-         if (hFind == INVALID_HANDLE_VALUE)
-            return;
-
-         while (true)
-         {
-
-            if (!windows_file_find_is_dots(FindFileData) && (FindFileData.dwFileAttributes != INVALID_FILE_ATTRIBUTES) && (FindFileData.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY) != 0)
-            {
-            }
-            else
-            {
-               stra.add(::file::path(FindFileData.cFileName));
-            }
-
-
-            stra.add(::file::path(FindFileData.cFileName));
-
-            if (!FindNextFileW(hFind, &FindFileData))
-               break;
-
-         }
-
-         FindClose(hFind);
-
-#endif
-
-      }
-
-
-      ::file::path acme_dir::pathfind(const string & pszEnv, const string & pszTopic, const string & pszMode)
+//      void acme_directory::ls_dir(::file::path_array & stra, const char * psz)
+//      {
+//
+//#if defined(LINUX) || defined(__APPLE__) || defined(ANDROID)
+//
+//         DIR * dirp = opendir(psz);
+//
+//         if (dirp == nullptr)
+//            return;
+//
+//         dirent * dp;
+//
+//         while ((dp = readdir(dirp)) != nullptr)
+//         {
+//            if (dp->d_name[0] == '.')
+//            {
+//               if (dp->d_name[1] == '\0')
+//                  continue;
+//               if (dp->d_name[1] == '.')
+//               {
+//                  if (dp->d_name[2] == '\0')
+//                     continue;
+//               }
+//            }
+//            ::file::path strPath = psz / dp->d_name;
+//            if (is(strPath))
+//            {
+//               stra.add(strPath);
+//            }
+//
+//         }
+//
+//         closedir(dirp);
+//
+//#elif defined(_UWP)
+//
+//         ::winrt::Windows::Storage::StorageFolder ^ folder = wait(::winrt::Windows::Storage::StorageFolder::GetFolderFromPathAsync(string(psz)));
+//
+//         ::winrt::Windows::Foundation::Collections::IVectorImpact < ::winrt::Windows::Storage::StorageFolder ^ > ^ a = wait(folder->GetFoldersAsync());
+//
+//         for (u32 u = 0; u < a->Size; u++)
+//         {
+//            stra.add(begin(a->GetAt(u)->Path));
+//         }
+//
+//
+//#else
+//
+//         WIN32_FIND_DATAW FindFileData;
+//
+//         HANDLE hFind;
+//
+//         hFind = FindFirstFileW(wstring(psz), &FindFileData);
+//
+//         if (hFind == INVALID_HANDLE_VALUE)
+//            return;
+//
+//         while (true)
+//         {
+//
+//            if (!windows_file_find_is_dots(FindFileData) && (FindFileData.dwFileAttributes != INVALID_FILE_ATTRIBUTES) && (FindFileData.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY) != 0)
+//            {
+//
+//               stra.add(::file::path(FindFileData.cFileName));
+//
+//            }
+//
+//            stra.add(::file::path(FindFileData.cFileName));
+//
+//            if (!FindNextFileW(hFind, &FindFileData))
+//               break;
+//
+//         }
+//
+//         FindClose(hFind);
+//
+//#endif
+//
+//
+//      }
+//
+//
+//      void acme_directory::ls_file(::file::path_array & stra, const char * psz)
+//      {
+//
+//#if defined(LINUX) || defined(__APPLE__) || defined(ANDROID)
+//
+//         DIR * dirp = opendir(psz);
+//
+//         if (dirp == nullptr)
+//            return;
+//
+//         dirent * dp;
+//
+//         while ((dp = readdir(dirp)) != nullptr)
+//         {
+//            if (dp->d_name[0] == '.')
+//            {
+//               if (dp->d_name[1] == '\0')
+//                  continue;
+//               if (dp->d_name[1] == '.')
+//               {
+//                  if (dp->d_name[2] == '\0')
+//                     continue;
+//               }
+//            }
+//            ::file::path strPath = psz / dp->d_name;
+//            if (!is(strPath))
+//            {
+//               stra.add(strPath);
+//            }
+//
+//         }
+//
+//         closedir(dirp);
+//
+//#elif defined(_UWP)
+//
+//         ::winrt::Windows::Storage::StorageFolder ^ folder = wait(::winrt::Windows::Storage::StorageFolder::GetFolderFromPathAsync(string(psz)));
+//
+//         ::winrt::Windows::Foundation::Collections::IVectorImpact < ::winrt::Windows::Storage::StorageFolder ^ > ^ a = wait(folder->GetFoldersAsync());
+//
+//         for (u32 u = 0; u < a->Size; u++)
+//         {
+//            stra.add(begin(a->GetAt(u)->Path));
+//         }
+//
+//
+//#else
+//
+//         WIN32_FIND_DATAW FindFileData;
+//
+//         HANDLE hFind;
+//
+//         hFind = FindFirstFileW(wstring(psz), &FindFileData);
+//
+//         if (hFind == INVALID_HANDLE_VALUE)
+//            return;
+//
+//         while (true)
+//         {
+//
+//            if (!windows_file_find_is_dots(FindFileData) && (FindFileData.dwFileAttributes != INVALID_FILE_ATTRIBUTES) && (FindFileData.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY) != 0)
+//            {
+//            }
+//            else
+//            {
+//               stra.add(::file::path(FindFileData.cFileName));
+//            }
+//
+//
+//            stra.add(::file::path(FindFileData.cFileName));
+//
+//            if (!FindNextFileW(hFind, &FindFileData))
+//               break;
+//
+//         }
+//
+//         FindClose(hFind);
+//
+//#endif
+//
+//      }
+//
+//
+      ::file::path acme_directory::pathfind(const string & pszEnv, const string & pszTopic, const string & pszMode)
       {
 
          string_array stra;
@@ -1838,7 +1969,7 @@ pacmedir->create CreateDirectoryW last error(%d)=%s", dwError, pszError);
       }
 
 
-      ::file::path acme_dir::archive()
+      ::file::path acme_directory::archive()
       {
 
 #ifdef WINDOWS
@@ -1863,7 +1994,7 @@ pacmedir->create CreateDirectoryW last error(%d)=%s", dwError, pszError);
       }
 
 
-      ::file::path acme_dir::tool()
+      ::file::path acme_directory::tool()
       {
 
          return archive() / "tool-windows";
@@ -1871,7 +2002,7 @@ pacmedir->create CreateDirectoryW last error(%d)=%s", dwError, pszError);
       }
 
 
-      //int acme_dir::make_path(const char * psz)
+      //int acme_directory::make_path(const char * psz)
       //{
 
 
@@ -1880,7 +2011,7 @@ pacmedir->create CreateDirectoryW last error(%d)=%s", dwError, pszError);
       //}
 
 
-//      void acme_dir::__create(const char * pathParam)
+//      void acme_directory::__create(const char * pathParam)
 //      {
 //
 //         if (is(pathParam))
@@ -1967,7 +2098,7 @@ pacmedir->create CreateDirectoryW last error(%d)=%s", dwError, pszError);
 ////
 ////               //TRACE("         auto psystem = m_psystem;
 ////
-//////         auto pacmedir = psystem->m_pacmedir;
+//////         auto pacmedir = psystem->m_pacmedirectory;
 //////
 //////pacmedir->create CreateDirectoryW last error(%d)=%s", dwError, pszError);
 //////
@@ -1990,7 +2121,7 @@ pacmedir->create CreateDirectoryW last error(%d)=%s", dwError, pszError);
 //   }
 
 
-   string acme_dir::get_current()
+   string acme_directory::get_current()
    {
 
       auto size = GetCurrentDirectoryW(0, nullptr);
@@ -2010,7 +2141,7 @@ pacmedir->create CreateDirectoryW last error(%d)=%s", dwError, pszError);
    }
 
 
-   void acme_dir::change_current(const char * psz)
+   void acme_directory::change_current(const char * psz)
    {
 
       wstring wstr(psz);
@@ -2022,7 +2153,7 @@ pacmedir->create CreateDirectoryW last error(%d)=%s", dwError, pszError);
 
          auto estatus = last_error_to_status(dwLastError);
 
-         throw ::exception(estatus, "windows::acme_dir::change_current");
+         throw ::exception(estatus, "windows::acme_directory::change_current");
 
       }
 

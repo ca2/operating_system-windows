@@ -1,9 +1,9 @@
 #include "framework.h"
 #include "acme/operating_system.h"
 #include "acme/platform/node.h"
-#include "acme/filesystem/filesystem/acme_dir.h"
+#include "acme/filesystem/filesystem/acme_directory.h"
 #include "node.h"
-#include "acme_dir.h"
+#include "acme_directory.h"
 #include "acme/filesystem/filesystem/acme_path.h"
 #include "acme_path.h"
 #include "acme/platform/serial.h"
@@ -16,7 +16,7 @@
 
 //BEGIN_FACTORY(acme_windows)
 //FACTORY_DEPENDENCY(acme_windows_common)
-//FACTORY_ITEM(::windows::acme_dir)
+//FACTORY_ITEM(::windows::acme_directory)
 //FACTORY_ITEM(::windows::acme_file)
 //FACTORY_ITEM(::windows::acme_path)
 //FACTORY_ITEM(::acme::windows::node)
@@ -54,7 +54,7 @@ __FACTORY_EXPORT void acme_windows_factory(::factory::factory * pfactory)
    //pfactory->add_factory_item < ::windows::ip_enum, ::net::ip_enum >();
 
    pfactory->add_factory_item < ::acme::windows::node, ::acme::node >();
-   pfactory->add_factory_item < ::windows::acme_dir, ::acme_dir >();
+   pfactory->add_factory_item < ::windows::acme_directory, ::acme_directory >();
    pfactory->add_factory_item < ::windows::acme_file, ::acme_file >();
    pfactory->add_factory_item < ::windows::acme_path, ::acme_path >();
 

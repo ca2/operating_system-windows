@@ -312,7 +312,7 @@
 				>
 			</File>
 			<File
-				RelativePath=".\pane_view.cpp"
+				RelativePath=".\pane_impact.cpp"
 				>
 			</File>
 			<File
@@ -366,7 +366,7 @@
 				>
 			</File>
 			<File
-				RelativePath=".\pane_view.h"
+				RelativePath=".\pane_impact.h"
 				>
 			</File>
 			<File

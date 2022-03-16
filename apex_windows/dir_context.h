@@ -26,10 +26,10 @@ namespace windows
 
       virtual void init_system() override;
 
-      using ::dir_context::ls;
+      using ::dir_context::enumerate;
       // rls fetchs should set a meaningful m_iRelative value at each returned path
-      virtual bool ls(::file::listing & path);
-      virtual bool ls_relative_name(::file::listing & path);
+      virtual bool enumerate(::file::listing & path);
+      //virtual bool ls_relative_name(::file::listing & path);
 
 
       virtual bool  is_impl(const ::file::path & path) override;

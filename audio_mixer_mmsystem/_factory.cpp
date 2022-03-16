@@ -14,7 +14,6 @@
 //         ::multimedia::mmsystem::factory_exchange(pobject)
 //      {
 //
-//         //add_factory_item < callback, ::multimedia::audio_mixer::callback >();
 //         add_factory_item <control, ::multimedia::audio_mixer::control>();
 //         //add_factory_item <control_data                >  (__type(::multimedia::audio_mixer::control_data));
 //         add_factory_item <destination,::multimedia::audio_mixer::destination>();
@@ -46,7 +45,6 @@
 __FACTORY_EXPORT void audio_mixer_mmsystem_factory(::factory::factory * pfactory)
 {
 
-            //add_factory_item < callback, ::multimedia::audio_mixer::callback >();
    pfactory->add_factory_item <::multimedia::audio_mixer_mmsystem::control, ::multimedia::audio_mixer::control>();
             //add_factory_item <control_data                >  (__type(::multimedia::audio_mixer::control_data));
    pfactory->add_factory_item <::multimedia::audio_mixer_mmsystem::destination,::multimedia::audio_mixer::destination>();
@@ -55,7 +53,7 @@ __FACTORY_EXPORT void audio_mixer_mmsystem_factory(::factory::factory * pfactory
    pfactory->add_factory_item <::multimedia::audio_mixer_mmsystem::audio_mixer, ::multimedia::audio_mixer::audio_mixer >();
             //add_factory_item < department, ::multimedia::audio_mixer::font >();
    pfactory->add_factory_item <::multimedia::audio_mixer_mmsystem::source,::multimedia::audio_mixer::source>();
-   pfactory->add_factory_item <::multimedia::audio_mixer_mmsystem::thread,::multimedia::audio_mixer::thread>();
+   //pfactory->add_factory_item <::multimedia::audio_mixer_mmsystem::thread,::multimedia::audio_mixer::thread>();
             /*add_factory_item <user::label                 >  (__type(::multimedia::audio_mixer::user::label));
             add_factory_item <user::interaction               >  (__type(::multimedia::audio_mixer::user::control));
             add_factory_item <user::level_control         >  (__type(::multimedia::audio_mixer::user::level_control));

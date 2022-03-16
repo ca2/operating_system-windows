@@ -8,8 +8,8 @@ namespace production
    class document;
 
 
-   class CLASS_DECL_CA2_PRODUCTION pane_view :
-      public ::userex::pane_tab_view,
+   class CLASS_DECL_CA2_PRODUCTION pane_impact :
+      public ::userex::pane_tab_impact,
       public ::filemanager::callback,
       public ::production::form_callback
    {
@@ -19,8 +19,8 @@ namespace production
       __pointer(::user::form_view)      m_pviewOptions;
 
 
-      pane_view(::object * pobject);
-      virtual ~pane_view();
+      pane_impact(::object * pobject);
+      virtual ~pane_impact();
 
 
       DECLARE_MESSAGE_HANDLER(_001OnUserMessage);

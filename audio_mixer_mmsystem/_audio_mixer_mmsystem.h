@@ -9,7 +9,7 @@
 
 
 #include "interaction.h"
-#include "mixer.h"
+#include "audio_mixer.h"
 #include "control.h"
 #include "source.h"
 #include "destination.h"
@@ -17,7 +17,7 @@
 #include "line_info.h"
 
 
-#include "callback.h"
+//#include "callback.h"
 
 
 #include "thread.h"          

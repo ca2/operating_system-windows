@@ -21,24 +21,16 @@ namespace multimedia
 
       control::~control()
       {
-         if(m_mixercontroldetails.paDetails != nullptr)
-            free(m_mixercontroldetails.paDetails);
-
-         ::multimedia::audio_mixer::user::control * pinteraction;
-
-         for(i32 i = 0; i < this->get_size(); i++)
+         
+         if (m_mixercontroldetails.paDetails != nullptr)
          {
 
-            if((pinteraction = this->element_at(i)) != nullptr)
-            {
-
-               delete pinteraction;
-
-            }
+            free(m_mixercontroldetails.paDetails);
 
          }
 
       }
+
 
       bool control::CreateWindows(__pointer(::user::interaction) pParent, i32 iStyle)
       {
@@ -54,6 +46,7 @@ namespace multimedia
       u32 nStartID,
       u32 * nNextID)
       {
+
          ASSERT(m_mixercontrol.dwControlType == MIXERCONTROL_CONTROLTYPE_VOLUME);
 
          static wchar_t        szScrollBar[] = L"scrollbar";
@@ -144,7 +137,7 @@ namespace multimedia
          plevelcontrol->SetRange(0,mcdvVolume->nRange);
          plevelcontrol->SetLineSize(1);
          plevelcontrol->SetPageSize(mcdvVolume->nPageInc);
-         plevelcontrol->__compose(plevelcontrol->m_pdata, mcdvVolume);
+         plevelcontrol->m_pcontroldata = mcdvVolume;
          add(plevelcontrol.m_p);
 
 
@@ -154,7 +147,7 @@ namespace multimedia
             return false;
          plabelVolume->create_control(pParent, nVolumeLabelID);
          //xxx   str.load_string(IDS_MIXER_VOLUME);
-         plabelVolume->set_window_text(str);
+         plabelVolume->set_window_text("Volume");
          __pointer(::multimedia::audio_mixer::control_data) mcdVolumeLabel = plabelVolume->get_data();
          mcdVolumeLabel->m_iType = ::multimedia::audio_mixer::control_data::TypeStereoVolumeLabel;
          mcdVolumeLabel->m_uiMixerID = m_pmixersource->get_device()->m_uiMixerID;
@@ -261,17 +254,24 @@ namespace multimedia
 
          }
 
+         auto pdevice = m_pmixersource->get_device();
+
+         auto pmixer = pdevice->get_mixer();
+
+         auto pcallback = pmixer->get_audio_mixer_callback();
+
          for(i32 iItem = 0; iItem < iItemCount; iItem++)
          {
             nMuteID = nID++;
-            __pointer(::multimedia::audio_mixer::user::toggle_control) pbtMute = m_pmixersource->get_device()->get_mixer()->get_audio_mixer_callback()->allocate_toggle_control();
+            __pointer(::multimedia::audio_mixer::user::toggle_control) pbtMute = pcallback->allocate_toggle_control();
             pbtMute->create_control(pParent, nMuteID);
             pbtMute->set_window_text(text.get_text());
             __pointer(::multimedia::audio_mixer::control_data_switch) mcdmMute = pbtMute->get_data();
             mcdmMute->m_iType = ::multimedia::audio_mixer::control_data::TypeUniformMute;
             mcdmMute->m_uiMixerID = source->get_device()->m_uiMixerID;
             mcdmMute->m_uiControlID = m_mixercontrol.dwControlID;
-            mcdmMute->m_uiLineID = ((MIXERLINE *)m_pmixersource)->dwLineID;
+            __pointer(class source) psource = m_pmixersource;
+            mcdmMute->m_uiLineID = psource->m_mixerline.dwLineID;
             add(pbtMute.m_p);
          }
 
@@ -315,7 +315,7 @@ namespace multimedia
       void control::OnMixerControlChange()
       {
          
-         if (this->get_size() <= 0)
+         if (m_usercontrola.is_empty())
          {
 
             return;
@@ -445,24 +445,38 @@ namespace multimedia
                nRange = lpmcdVolume->nRange;
                pmxcd_u = (PMIXERCONTROLDETAILS_UNSIGNED) m_mixercontroldetails.paDetails;
                i32 nValue = (i32)MulDiv(pmxcd_u[0].dwValue - m_mixercontrol.Bounds.dwMinimum, nRange, m_mixercontrol.Bounds.dwMaximum - m_mixercontrol.Bounds.dwMinimum);
+               int iGetPos = pslVolume->GetPos();
+               if (iGetPos != (nRange - nValue))
+               {
+                  pslVolume->SetPos(nRange - nValue);
 
-               pslVolume->SetPos(nRange - nValue);
+               }
             }
          }
          else if((m_mixercontrol.dwControlType & MIXERCONTROL_CT_UNITS_MASK) == MIXERCONTROL_CT_UNITS_BOOLEAN)
          {
-            for(i32 i = 0; i < this->get_size(); i++)
-            {
-               __pointer(::multimedia::audio_mixer::user::toggle_control) pmutecontrol =  GetControlByIndex(i);
 
+            ::index i = 0;
+
+            for(auto & pusercontrol : m_usercontrola)
+            {
+
+               __pointer(::multimedia::audio_mixer::user::toggle_control) pmutecontrol =  pusercontrol;
 
                PMIXERCONTROLDETAILS_BOOLEAN pmxcd_f = (PMIXERCONTROLDETAILS_BOOLEAN) m_mixercontroldetails.paDetails;
+
                bool fValue = pmxcd_f[cMultipleItems - i - 1].fValue != false;
 
                pmutecontrol->_001SetCheck(fValue ? check_checked : check_unchecked, ::e_source_user);
+
+               i++;
+
             }
+
          }
+
       }
+
 
       /*
       ::multimedia::audio_mixer::control_data * control::GetWindowData(i32 iType)
@@ -852,7 +866,7 @@ namespace multimedia
                      m_mixercontroldetails.cMultipleItems = m_mixercontrol.cMultipleItems;
                      i32 cMultipleItems = m_mixercontrol.cMultipleItems;
                      PMIXERCONTROLDETAILS_BOOLEAN   pmxcd_f = (PMIXERCONTROLDETAILS_BOOLEAN) m_mixercontroldetails.paDetails;
-                     for(i32 i = 0; i < this->get_size(); i++)
+                     for(i32 i = 0; i < m_usercontrola.get_size(); i++)
                      {
                         bool fValue = i == iSel ? 1 : 0;
                         pmxcd_f[cMultipleItems - i - 1].fValue = fValue;
@@ -916,11 +930,12 @@ namespace multimedia
       }
 
 
-      iptr control::add(::multimedia::audio_mixer::user::control * pinteraction)
+      iptr control::add(::multimedia::audio_mixer::user::control * pusercontrol)
       {
-         pinteraction->get_data()->m_iIndex = this->get_size();
-         control_ptr_array::add(pinteraction);
-         return control_ptr_array::get_upper_bound();
+         return ::multimedia::audio_mixer::control::add(pusercontrol);
+         //pinteraction->get_data()->m_iIndex = m_usercontrola.get_size();
+         //auto im_usercontrola.add(pinteraction);
+         //return control_ptr_array::get_upper_bound();
       }
 
 
@@ -928,6 +943,15 @@ namespace multimedia
       {
          return m_mixercontrol;
       }
+
+      
+      //::u32 control::GetMixerControlId()
+      //{
+
+      //   return m_mixercontrol.dwControlID;
+
+      //}
+
 
       MIXERCONTROLDETAILS & control::GetMixerControlDetails()
       {

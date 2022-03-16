@@ -892,7 +892,7 @@
     <ClInclude Include="mutex.h" />
     <ClInclude Include="nano_timer.h" />
     <ClInclude Include="node.h" />
-    <ClInclude Include="acme_dir.h" />
+    <ClInclude Include="acme_directory.h" />
     <ClInclude Include="acme_path.h" />
     <ClInclude Include="console.h" />
     <ClInclude Include="file.h" />
@@ -927,7 +927,7 @@
     <ClInclude Include="_windows_impl.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="acme_dir.cpp" />
+    <ClCompile Include="acme_directory.cpp" />
     <ClCompile Include="acme_file.cpp" />
     <ClCompile Include="ansi_file.cpp" />
     <ClCompile Include="application.cpp" />

@@ -43,7 +43,7 @@ namespace windows
       else
       {
 
-         m_psystem->m_pacmedir->create(file_path_folder(strPath));
+         m_psystem->m_pacmedirectory->create(file_path_folder(strPath));
 
          wstring wstr(strPath);
 

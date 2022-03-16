@@ -5,7 +5,7 @@
 #undef Usr
 #include "shell.h"
 //#include "apex/compress/zip/context.h"
-#include "acme/filesystem/filesystem/acme_dir.h"
+#include "acme/filesystem/filesystem/acme_directory.h"
 #include "acme_windows/known_folder_struct.h"
 #include <thumbcache.h>
 
@@ -920,7 +920,7 @@ namespace windowing_win32
 
             string strIcon;
 
-            strIcon = m_psystem->m_pacmedir->config() / "shell/app_theme" / getfileimage.m_imagekey.m_strShellThemePrefix + strExtension + ".ico";
+            strIcon = m_psystem->m_pacmedirectory->config() / "shell/app_theme" / getfileimage.m_imagekey.m_strShellThemePrefix + strExtension + ".ico";
 
             if (m_pcontext->m_papexcontext->file().exists(strIcon))
             {
@@ -1236,7 +1236,7 @@ namespace windowing_win32
 
       auto psystem = m_psystem;
 
-      auto pacmedir = psystem->m_pacmedir;
+      auto pacmedir = psystem->m_pacmedirectory;
 
       if (pacmedir->is(strPath))
       {

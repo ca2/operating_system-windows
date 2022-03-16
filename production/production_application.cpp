@@ -41,7 +41,7 @@ namespace production
       add_factory_item <document >();
       add_factory_item <frame >();
       add_factory_item <impact >();
-      add_factory_item <pane_view >();
+      add_factory_item <pane_impact >();
 
 
       if(!::aura::application::init_instance())
@@ -55,7 +55,7 @@ namespace production
       "production/frame",
       __type(document),
       __type(frame),
-      __type(pane_view));
+      __type(pane_impact));
 
       add_document_template(m_pdocumenttemplateMain);
 

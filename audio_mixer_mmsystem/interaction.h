@@ -18,11 +18,11 @@ namespace multimedia
       public:
 
 
-         __reference(::multimedia::audio_mixer::audio_mixer)   m_pmixer;
+         __pointer(audio_mixer)   m_paudiomixer;
 
 
          interaction();
-         virtual ~interaction();
+         ~interaction() override;
 
 
          void install_message_routing(::channel * pchannel);

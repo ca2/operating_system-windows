@@ -15,19 +15,19 @@ namespace multimedia
       public:
 
 
-         
-
-
          HMIXER                        m_hMixer;
          MIXERCAPS                     m_mixercaps;
 
 
          device();
-         virtual ~device();
+         ~device() override;
 
-         virtual void initialize_audio_mixer_device(::multimedia::audio_mixer::audio_mixer * pmixer) override;
+         
+         void initialize_audio_mixer_device(::multimedia::audio_mixer::audio_mixer * pmixer) override;
+
 
          ::multimedia::audio_mixer::audio_mixer * get_mixer();
+
          virtual string get_product_name() override;
          bool OnCommand(wparam wparam, lparam lparam);
          void     close();
@@ -38,7 +38,9 @@ namespace multimedia
          void OnMixerLineChange(u32 dwLineID);
          void map_lines();
          void map_controls();
-         void     get_destination(::multimedia::audio_mixer::e_destination edestination, ::multimedia::audio_mixer::destination ** ppDestination);
+         
+         __pointer(::multimedia::audio_mixer::destination) get_destination(::multimedia::audio_mixer::e_destination edestination) override;
+
          void     initialize_destinations();
          void     initialize_capabilities();
          void     open(u32 uiMixerId, UINT_PTR dwCallback, u32 dwInstance, u32 fdwOpen);

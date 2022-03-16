@@ -391,11 +391,11 @@ namespace windows
 
          {
 
-            __restore(listing.m_pathUser);
+            __scoped_restore(listing.m_pathUser);
 
-            __restore(listing.m_pathFinal);
+            __scoped_restore(listing.m_pathFinal);
 
-            __restore(listing.m_eextract);
+            __scoped_restore(listing.m_eextract);
 
             if (::dir_context::ls(listing).succeeded())
             {
@@ -577,11 +577,11 @@ namespace windows
 
          {
 
-            __restore(listing.m_pathUser);
+            __scoped_restore(listing.m_pathUser);
 
-            __restore(listing.m_pathFinal);
+            __scoped_restore(listing.m_pathFinal);
 
-            __restore(listing.m_eextract);
+            __scoped_restore(listing.m_eextract);
 
             if (::dir_context::ls(listing).succeeded())
             {

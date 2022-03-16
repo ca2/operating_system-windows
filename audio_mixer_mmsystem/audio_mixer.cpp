@@ -22,10 +22,10 @@ namespace multimedia
       audio_mixer::~audio_mixer()
       {
 
-         if(m_window.is_window())
+         if(m_pwindow->is_window())
          {
 
-            m_window.start_destroying_window();
+            m_pwindow->start_destroying_window();
 
          }
 
@@ -41,21 +41,24 @@ namespace multimedia
       }
 
 
+      void audio_mixer::initialize(::object * pobject)
+      {
+
+         ::multimedia::audio_mixer::audio_mixer::initialize(pobject);
+
+         __construct_new(m_pwindow);
+
+         m_pwindow->m_paudiomixer = this;
+
+         m_pwindow->create_message_queue("audio_mixer");
+
+      }
+
+
       void audio_mixer::set_new_device(u32 uiMixerId)
       {
 
-         //::e_status estatus;
-
-         m_paudiomixerdevice->open(uiMixerId, (UINT_PTR)m_window.get_oswindow(), 0, CALLBACK_WINDOW);
-
-         //if(!(estatus = )
-         //{
-
-         //   return estatus;
-
-         //}
-
-         //return estatus;
+         m_paudiomixerdevice->open(uiMixerId, (UINT_PTR)m_pwindow->get_oswindow(), 0, CALLBACK_WINDOW);
 
       }
 
@@ -344,33 +347,22 @@ namespace multimedia
 
       }
 
+
       bool audio_mixer::OnCommand(wparam wparam, lparam lparam)
       {
 
          __pointer(::multimedia::audio_mixer_mmsystem::device) device = m_paudiomixerdevice;
 
-         if(device != nullptr && device->OnCommand(wparam, lparam))
+         if (device != nullptr && device->OnCommand(wparam, lparam))
+         {
+
             return true;
+
+         }
 
          return false;
 
       }
-
-
-      //::multimedia::audio_mixer::callback * audio_mixer::get_callback()
-      //{
-
-      //   return m_pcallback;
-
-      //}
-
-
-      //void audio_mixer::set_callback(::multimedia::audio_mixer::callback * pcallback)
-      //{
-
-      //   m_pcallback = pcallback;
-
-      //}
 
 
    } // namespace audio_mixer_mmsystem

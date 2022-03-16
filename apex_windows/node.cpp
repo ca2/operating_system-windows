@@ -385,7 +385,7 @@ namespace apex
 
          //#else
          //
-         //   strPathDll = m_psystem->m_pacmedir->matter() / "time" / process_platform_dir_name() /"stage/_desk_tb.dll";
+         //   strPathDll = m_psystem->m_pacmedirectory->matter() / "time" / process_platform_dir_name() /"stage/_desk_tb.dll";
          //
          //#endif
 
@@ -551,7 +551,7 @@ namespace apex
 
          }
 
-         m_psystem->m_pacmedir->create(pathLnk.folder());
+         m_psystem->m_pacmedirectory->create(pathLnk.folder());
 
          wstring wstrObj(pathObj);
          wstring wstrLnk(pathLnk);
@@ -653,10 +653,10 @@ namespace apex
 
          string str;
 
-         if (m_psystem->m_pacmefile->exists(m_psystem->m_pacmedir->system() / "config\\system\\audio.txt"))
+         if (m_psystem->m_pacmefile->exists(m_psystem->m_pacmedirectory->system() / "config\\system\\audio.txt"))
          {
 
-            str = m_psystem->m_pacmefile->as_string(m_psystem->m_pacmedir->system() / "config\\system\\audio.txt");
+            str = m_psystem->m_pacmefile->as_string(m_psystem->m_pacmedirectory->system() / "config\\system\\audio.txt");
 
          }
          else
@@ -664,7 +664,7 @@ namespace apex
 
             ::file::path strPath;
 
-            strPath = m_psystem->m_pacmedir->appdata() / "audio.txt";
+            strPath = m_psystem->m_pacmedirectory->appdata() / "audio.txt";
 
             str = m_psystem->m_pacmefile->as_string(strPath);
 
@@ -1041,7 +1041,7 @@ namespace apex
 
                   auto path = m_psystem->m_pacmefile->module();
 
-                  auto pathShortcut = m_psystem->m_pacmedir->roaming() / "Microsoft/Windows/Start Menu/Programs" / strRoot / (strAppName + ".lnk");
+                  auto pathShortcut = m_psystem->m_pacmedirectory->roaming() / "Microsoft/Windows/Start Menu/Programs" / strRoot / (strAppName + ".lnk");
 
 #ifdef WINDOWS
 
@@ -1074,7 +1074,7 @@ namespace apex
                   if (payload("pin_app_to_taskbar").is_true())
                   {
 
-                     ::file::path pathUserPinned = m_psystem->m_pacmedir->roaming() / "Microsoft/Internet Explorer/Quick Launch/User Pinned/TaskBar" / pathShortcut.name();
+                     ::file::path pathUserPinned = m_psystem->m_pacmedirectory->roaming() / "Microsoft/Internet Explorer/Quick Launch/User Pinned/TaskBar" / pathShortcut.name();
 
                      wstring wstrShortcut;
 
@@ -1100,7 +1100,7 @@ namespace apex
 
 #endif
 
-                  auto pathCreatedShortcut = m_psystem->m_pacmedir->roaming() / papp->m_strAppId / "created_shortcut.txt";
+                  auto pathCreatedShortcut = m_psystem->m_pacmedirectory->roaming() / papp->m_strAppId / "created_shortcut.txt";
 
                   m_psystem->m_pacmefile->touch(pathCreatedShortcut);
 

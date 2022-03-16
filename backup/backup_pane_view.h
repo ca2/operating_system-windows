@@ -5,13 +5,13 @@ namespace backup
 {
 
 
-   class CLASS_DECL_CA2_BACKUP pane_view :
-      public ::userex::pane_tab_view,
+   class CLASS_DECL_CA2_BACKUP pane_impact :
+      public ::userex::pane_tab_impact,
       public production::form_callback
    {
    public:
-      pane_view(::object * pobject);
-      virtual ~pane_view();
+      pane_impact(::object * pobject);
+      virtual ~pane_impact();
 #ifdef DEBUG
       void assert_ok() const override;
       void dump(dump_context & dumpcontext) const override;

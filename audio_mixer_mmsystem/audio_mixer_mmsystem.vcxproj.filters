@@ -4,9 +4,6 @@
     <ClInclude Include="framework.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="callback.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="control.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -25,7 +22,7 @@
     <ClInclude Include="line_info.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="mixer.h">
+    <ClInclude Include="audio_mixer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="section.h">
@@ -59,9 +56,6 @@
     <ClCompile Include="framework.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="callback.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="control.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -80,7 +74,7 @@
     <ClCompile Include="line_info.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="mixer.cpp">
+    <ClCompile Include="audio_mixer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="section.cpp">

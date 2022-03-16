@@ -5,8 +5,8 @@
 //#include "dir_system.h"
 //#include "dir_context.h"
 //#include "acme/node/windows/file_find.h"
-#include "acme/filesystem/filesystem/acme_dir.h"
-#include "acme_windows/acme_dir.h"
+#include "acme/filesystem/filesystem/acme_directory.h"
+#include "acme_windows/acme_directory.h"
 
 
 namespace windows
@@ -337,9 +337,14 @@ namespace windows
    //   }
    //}
 
+
    ::file::listing & dir_context::root_ones(::file::listing & listing)
    {
+
+      listing.fix_flag();
+
       ::u32 dwSize = ::GetLogicalDriveStringsW(0, nullptr);
+
       ::acme::malloc < LPWSTR > pszAlloc;
 
       pszAlloc.alloc((dwSize + 1) * sizeof(WCHAR));
@@ -347,7 +352,6 @@ namespace windows
       LPWSTR psz = pszAlloc;
 
       dwSize = ::GetLogicalDriveStringsW(dwSize + 1, psz);
-
 
       string str;
 
@@ -364,11 +368,19 @@ namespace windows
             psz++;
 
          }
-         listing.add(::file::path(str));
-         ::file::path & path = listing.last();
+
+         ::file::path path;
+
+         path = str;
+
          path.m_iDir = 1;
+
+         listing.defer_add(path);
+         
          str.trim(":/\\");
+
          listing.m_straTitle.add("Drive " + str);
+
          psz++;
 
       }
@@ -379,345 +391,344 @@ namespace windows
    }
 
 
-   bool dir_context::ls(::file::listing & listing)
+   bool dir_context::enumerate(::file::listing & listing)
    {
 
-      if (::dir_context::ls(listing))
+      if (::dir_context::enumerate(listing))
       {
 
          return true;
 
       }
 
-      if (listing.m_bRecursive)
-      {
+      return m_psystem->m_pacmedirectory->enumerate(listing);
 
-         index iStart = listing.get_size();
+      //   index iStart = listing.get_size();
 
-         {
+      //   {
 
-            __scoped_restore(listing.m_pathUser);
+      //      __scoped_restore(listing.m_pathUser);
 
-            __scoped_restore(listing.m_pathFinal);
+      //      __scoped_restore(listing.m_pathFinal);
 
-            __scoped_restore(listing.m_eextract);
+      //      __scoped_restore(listing.m_eextract);
 
-            ::file::listing dira;
+      //      ::file::listing dira;
 
-            ls_dir(dira, listing.m_pathUser);
+      //      enumerate(dira, listing.m_pathUser);
 
-            for (i32 i = 0; i < dira.get_count(); i++)
-            {
+      //      for (i32 i = 0; i < dira.get_count(); i++)
+      //      {
 
-               ::file::path dir_context = dira[i];
+      //         ::file::path dir_context = dira[i];
 
-               if (dir_context == listing.m_pathUser)
-               {
+      //         if (dir_context == listing.m_pathUser)
+      //         {
 
-                  continue;
+      //            continue;
 
-               }
+      //         }
 
-               listing.m_pathUser = dir_context;
+      //         listing.m_pathUser = dir_context;
 
-               if (listing.m_eextract != extract_all)
-               {
+      //         if (listing.m_eextract != extract_all)
+      //         {
 
-                  listing.m_eextract = extract_none;
+      //            listing.m_eextract = extract_none;
 
-               }
+      //         }
 
-               m_pcontext->m_papexcontext->dir().ls(listing);
+      //         m_pcontext->m_papexcontext->dir().ls(listing);
 
-            }
+      //      }
 
-         }
+      //   }
 
-         file_find file_find;
+      //   file_find file_find;
 
-         bool bWorking = file_find.find_file(listing.m_pathUser / "*") != false;
+      //   bool bWorking = file_find.find_file(listing.m_pathUser / "*") != false;
 
-         if (bWorking)
-         {
+      //   if (bWorking)
+      //   {
 
-            while (bWorking)
-            {
+      //      while (bWorking)
+      //      {
 
-               bWorking = file_find.find_next_file() != false;
+      //         bWorking = file_find.find_next_file() != false;
 
-               if (!file_find.IsDots() && file_find.GetFilePath() != listing.m_pathUser)
-               {
+      //         if (!file_find.IsDots() && file_find.GetFilePath() != listing.m_pathUser)
+      //         {
 
-                  if ((listing.m_bDir && file_find.IsDirectory()) || (listing.m_bFile && !file_find.IsDirectory()))
-                  {
+      //            if ((listing.m_bDir && file_find.IsDirectory()) || (listing.m_bFile && !file_find.IsDirectory()))
+      //            {
 
-                     if (matches_wildcard_criteria_ci(listing.m_straPattern, file_find.GetFileName()))
-                     {
+      //               if (matches_wildcard_criteria_ci(listing.m_straPattern, file_find.GetFileName()))
+      //               {
 
-                        listing.add(file_find.GetFilePath());
+      //                  listing.add(file_find.GetFilePath());
 
-                        listing.last().m_iSize = file_find.get_length();
+      //                  listing.last().m_iSize = file_find.get_length();
 
-                        listing.last().m_iDir = file_find.IsDirectory() != false;
+      //                  listing.last().m_iDir = file_find.IsDirectory() != false;
 
-                     }
+      //               }
 
-                  }
+      //            }
 
-               }
+      //         }
 
-            }
+      //      }
 
-         }
-         else
-         {
+      //   }
+      //   else
+      //   {
 
-            throw ::exception(error_failed);
+      //      throw ::exception(error_failed);
 
-         }
+      //   }
 
-         for (index i = iStart; i < listing.get_size(); i++)
-         {
+      //   for (index i = iStart; i < listing.get_size(); i++)
+      //   {
 
-            listing[i].m_iRelative = listing.m_pathUser.get_length() + 1;
+      //      listing[i].m_iRelative = listing.m_pathUser.get_length() + 1;
 
-         }
+      //   }
 
-      }
-      else
-      {
+      //}
+      //else
+      //{
 
-         if (listing.m_pathFinal.is_empty())
-         {
+      //   if (listing.m_pathFinal.is_empty())
+      //   {
 
-            listing.m_pathFinal = m_pcontext->m_papexcontext->defer_process_path(listing.m_pathUser);
+      //      listing.m_pathFinal = m_pcontext->m_papexcontext->defer_process_path(listing.m_pathUser);
 
-         }
+      //   }
 
-         ::file::path path = listing.m_pathFinal;
+      //   ::file::path path = listing.m_pathFinal;
 
-         file_find file_find;
+      //   file_find file_find;
 
-         bool bWorking;
+      //   bool bWorking;
 
-         bWorking = file_find.find_file(path / "*");
+      //   bWorking = file_find.find_file(path / "*");
 
-         if (!bWorking)
-         {
+      //   if (!bWorking)
+      //   {
 
-            return listing;
+      //      return listing;
 
-         }
+      //   }
 
-         while (bWorking)
-         {
+      //   while (bWorking)
+      //   {
 
-            bWorking = file_find.find_next_file();
+      //      bWorking = file_find.find_next_file();
 
-            if (!file_find.IsDots())
-            {
+      //      if (!file_find.IsDots())
+      //      {
 
-               if ((listing.m_bDir && file_find.IsDirectory()) || (listing.m_bFile && !file_find.IsDirectory()))
-               {
+      //         if ((listing.m_bDir && file_find.IsDirectory()) || (listing.m_bFile && !file_find.IsDirectory()))
+      //         {
 
-                  string strFile = file_find.GetFileName();
+      //            string strFile = file_find.GetFileName();
 
-                  if (strFile.begins_ci("resident_"))
-                  {
+      //            if (strFile.begins_ci("resident_"))
+      //            {
 
-                     INFORMATION("resident_*");
+      //               INFORMATION("resident_*");
 
-                  }
+      //            }
 
-                  if (matches_wildcard_criteria_ci(listing.m_straPattern, strFile))
-                  {
+      //            if (matches_wildcard_criteria_ci(listing.m_straPattern, strFile))
+      //            {
 
-                     listing.add(file_find.GetFilePath());
+      //               listing.add(file_find.GetFilePath());
 
-                     listing.last().m_iSize = file_find.get_length();
+      //               listing.last().m_iSize = file_find.get_length();
 
-                     listing.last().m_iDir = file_find.IsDirectory() ? 1 : 0;
+      //               listing.last().m_iDir = file_find.IsDirectory() ? 1 : 0;
 
-                  }
+      //            }
 
-               }
+      //         }
 
-            }
+      //      }
 
-         }
+      //   }
 
-      }
+      //}
 
-      return true;
+      //return true;
 
    }
 
 
-   bool dir_context::ls_relative_name(::file::listing & listing)
-   {
+   //bool dir_context::ls_relative_name(::file::listing & listing)
+   //{
 
-      if (::dir_context::ls_relative_name(listing))
-      {
+   //   if (::dir_context::ls_relative_name(listing))
+   //   {
 
-         return true;
+   //      return true;
 
-      }
+   //   }
 
-      if (listing.m_bRecursive)
-      {
+   //   if (listing.m_bRecursive)
+   //   {
 
-         // to finish;
+   //      // to finish;
 
-         index iStart = listing.get_size();
+   //      index iStart = listing.get_size();
 
-         {
+   //      {
 
-            __scoped_restore(listing.m_pathUser);
+   //         __scoped_restore(listing.m_pathUser);
 
-            __scoped_restore(listing.m_pathFinal);
+   //         __scoped_restore(listing.m_pathFinal);
 
-            __scoped_restore(listing.m_eextract);
+   //         __scoped_restore(listing.m_eextract);
 
 
-            ::file::listing dira;
+   //         ::file::listing dira;
 
-            ls_dir(dira, listing.m_pathUser);
+   //         ls_dir(dira, listing.m_pathUser);
 
-            for (i32 i = 0; i < dira.get_count(); i++)
-            {
+   //         for (i32 i = 0; i < dira.get_count(); i++)
+   //         {
 
-               ::file::path dir_context = dira[i];
+   //            ::file::path dir_context = dira[i];
 
-               if (dir_context == listing.m_pathUser)
-               {
+   //            if (dir_context == listing.m_pathUser)
+   //            {
 
-                  continue;
+   //               continue;
 
-               }
+   //            }
 
-               listing.m_pathUser = dir_context;
+   //            listing.m_pathUser = dir_context;
 
-               if (listing.m_eextract != extract_all)
-               {
+   //            if (listing.m_eextract != extract_all)
+   //            {
 
-                  listing.m_eextract = extract_none;
+   //               listing.m_eextract = extract_none;
 
-               }
+   //            }
 
-               m_pcontext->m_papexcontext->dir().ls(listing);
+   //            m_pcontext->m_papexcontext->dir().ls(listing);
 
-            }
+   //         }
 
-         }
+   //      }
 
-         file_find file_find;
+   //      file_find file_find;
 
-         bool bWorking = file_find.find_file(listing.m_pathFinal / "*") != false;
+   //      bool bWorking = file_find.find_file(listing.m_pathFinal / "*") != false;
 
-         if (bWorking)
-         {
+   //      if (bWorking)
+   //      {
 
-            while (bWorking)
-            {
+   //         while (bWorking)
+   //         {
 
-               bWorking = file_find.find_next_file() != false;
+   //            bWorking = file_find.find_next_file() != false;
 
-               if (!file_find.IsDots() && file_find.GetFilePath() != listing.m_pathFinal)
-               {
+   //            if (!file_find.IsDots() && file_find.GetFilePath() != listing.m_pathFinal)
+   //            {
 
-                  if ((listing.m_bDir && file_find.IsDirectory()) || (listing.m_bFile && !file_find.IsDirectory()))
-                  {
+   //               if ((listing.m_bDir && file_find.IsDirectory()) || (listing.m_bFile && !file_find.IsDirectory()))
+   //               {
 
-                     if (matches_wildcard_criteria_ci(listing.m_straPattern, file_find.GetFileName()))
-                     {
+   //                  if (matches_wildcard_criteria_ci(listing.m_straPattern, file_find.GetFileName()))
+   //                  {
 
-                        listing.add(file_find.GetFilePath());
+   //                     listing.add(file_find.GetFilePath());
 
-                        listing.last().m_iSize = file_find.get_length();
+   //                     listing.last().m_iSize = file_find.get_length();
 
-                        listing.last().m_iDir = file_find.IsDirectory() != false;
+   //                     listing.last().m_iDir = file_find.IsDirectory() != false;
 
-                     }
+   //                  }
 
-                  }
+   //               }
 
-               }
+   //            }
 
-            }
+   //         }
 
-         }
-         else
-         {
+   //      }
+   //      else
+   //      {
 
-            //listing.m_statusresult = ::error_failed;
+   //         //listing.m_statusresult = ::error_failed;
 
-         }
+   //      }
 
-         for (index i = iStart; i < listing.get_size(); i++)
-         {
+   //      for (index i = iStart; i < listing.get_size(); i++)
+   //      {
 
-            listing[i].m_iRelative = listing.m_pathUser.get_length() + 1;
+   //         listing[i].m_iRelative = listing.m_pathUser.get_length() + 1;
 
-         }
+   //      }
 
-      }
-      else
-      {
+   //   }
+   //   else
+   //   {
 
-         file_find file_find;
+   //      file_find file_find;
 
-         bool bWorking;
+   //      bool bWorking;
 
-         bWorking = file_find.find_file(listing.m_pathFinal / "*");
+   //      bWorking = file_find.find_file(listing.m_pathFinal / "*");
 
-         if (!bWorking)
-         {
+   //      if (!bWorking)
+   //      {
 
-            return listing;
+   //         return listing;
 
-         }
+   //      }
 
-         while (bWorking)
-         {
+   //      while (bWorking)
+   //      {
 
-            bWorking = file_find.find_next_file();
+   //         bWorking = file_find.find_next_file();
 
-            if (!file_find.IsDots())
-            {
+   //         if (!file_find.IsDots())
+   //         {
 
-               if ((listing.m_bDir && file_find.IsDirectory()) || (listing.m_bFile && !file_find.IsDirectory()))
-               {
+   //            if ((listing.m_bDir && file_find.IsDirectory()) || (listing.m_bFile && !file_find.IsDirectory()))
+   //            {
 
-                  ::file::path pathName = file_find.GetFileName();
+   //               ::file::path pathName = file_find.GetFileName();
 
-                  //if (strFile.begins_ci("resident_"))
-                  //{
+   //               //if (strFile.begins_ci("resident_"))
+   //               //{
 
-                  //   TRACE("resident_*");
-                  //}
+   //               //   TRACE("resident_*");
+   //               //}
 
-                  if (matches_wildcard_criteria_ci(listing.m_straPattern, pathName))
-                  {
+   //               if (matches_wildcard_criteria_ci(listing.m_straPattern, pathName))
+   //               {
 
-                     listing.add(pathName);
+   //                  listing.add(pathName);
 
-                     //listing.last().m_iSize = file_find.get_length();
+   //                  //listing.last().m_iSize = file_find.get_length();
 
-                     //listing.last().m_iDir = file_find.IsDirectory() != false;
+   //                  //listing.last().m_iDir = file_find.IsDirectory() != false;
 
-                  }
+   //               }
 
-               }
+   //            }
 
-            }
+   //         }
 
-         }
+   //      }
 
-      }
+   //   }
 
-      return true;
+   //   return true;
 
-   }
+   //}
 
 
    bool dir_context::is_impl(const ::file::path & pcszPath)
@@ -873,7 +884,7 @@ namespace windows
    //void dir_context::create(const ::file::path & path)
    //{
 
-   //   m_psystem->m_pacmedir->create(path);
+   //   m_psystem->m_pacmedirectory->create(path);
 
    //   //}
    //   //catch (...)
@@ -925,12 +936,12 @@ namespace windows
    //   //   try
    //   //   {
 
-   //   //      m_psystem->m_pacmedir->create_directory(strDir)
+   //   //      m_psystem->m_pacmedirectory->create_directory(strDir)
 
    //   //   }
    //   //   catch(...)
 
-   //   //   //if (m_psystem->m_pacmedir->create_directory(strDir))
+   //   //   //if (m_psystem->m_pacmedirectory->create_directory(strDir))
    //   //   {
 
    //   //      //            m_isdirmap.set(strDir, true, 0);
@@ -973,7 +984,7 @@ namespace windows
 
    //   //         }
 
-   //   //         if (m_psystem->m_pacmedir->create_directory(strDir))
+   //   //         if (m_psystem->m_pacmedirectory->create_directory(strDir))
    //   //         {
 
    //   //            //                  m_isdirmap.set(strDir, true, 0);
@@ -1272,7 +1283,7 @@ namespace windows
 
       ::file::path path;
 
-      m_psystem->m_pacmedir->m_pplatformdir->_shell_get_special_folder_path(
+      m_psystem->m_pacmedirectory->m_pplatformdir->_shell_get_special_folder_path(
          nullptr,
          path,
          CSIDL_MYDOCUMENTS,
@@ -1287,7 +1298,7 @@ namespace windows
 
       ::file::path path;
 
-      m_psystem->m_pacmedir->m_pplatformdir->_shell_get_special_folder_path(
+      m_psystem->m_pacmedirectory->m_pplatformdir->_shell_get_special_folder_path(
          nullptr,
          path,
          CSIDL_DESKTOP,
@@ -1302,7 +1313,7 @@ namespace windows
 
       ::file::path path;
 
-      path = m_psystem->m_pacmedir->m_pplatformdir->_get_known_folder(FOLDERID_Downloads);
+      path = m_psystem->m_pacmedirectory->m_pplatformdir->_get_known_folder(FOLDERID_Downloads);
 
       return path;
 
@@ -1313,7 +1324,7 @@ namespace windows
 
       ::file::path path;
 
-      m_psystem->m_pacmedir->m_pplatformdir->_shell_get_special_folder_path(
+      m_psystem->m_pacmedirectory->m_pplatformdir->_shell_get_special_folder_path(
          nullptr,
          path,
          CSIDL_MYMUSIC,
@@ -1329,7 +1340,7 @@ namespace windows
 
       ::file::path path;
 
-      m_psystem->m_pacmedir->m_pplatformdir->_shell_get_special_folder_path(
+      m_psystem->m_pacmedirectory->m_pplatformdir->_shell_get_special_folder_path(
          nullptr,
          path,
          CSIDL_MYVIDEO,
@@ -1345,7 +1356,7 @@ namespace windows
 
       ::file::path path;
 
-      m_psystem->m_pacmedir->m_pplatformdir->_shell_get_special_folder_path(
+      m_psystem->m_pacmedirectory->m_pplatformdir->_shell_get_special_folder_path(
          nullptr,
          path,
          CSIDL_MYPICTURES,

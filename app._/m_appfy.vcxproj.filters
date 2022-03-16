@@ -24,7 +24,7 @@
     <ClInclude Include="hellomultiverse.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="pane_view.h">
+    <ClInclude Include="pane_impact.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="::impact_update.h">

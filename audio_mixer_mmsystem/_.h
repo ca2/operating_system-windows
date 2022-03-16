@@ -29,7 +29,7 @@ namespace multimedia
       class device;
       class source;
       class destination;
-      class thread;
+      //class thread;
       class audio_mixer;
       class department;
 

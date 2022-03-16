@@ -6,9 +6,9 @@ namespace backup
 {
 
 
-   pane_view::pane_view(::object * pobject) :
+   pane_impact::pane_impact(::object * pobject) :
       ::object(pobject),
-      ::userex::pane_tab_view(pobject),
+      ::userex::pane_tab_impact(pobject),
       ::user::tab_view(pobject),
       place_holder_container(pobject)
    {
@@ -17,25 +17,25 @@ namespace backup
    }
 
 
-   pane_view::~pane_view()
+   pane_impact::~pane_impact()
    {
    }
 
 
 #ifdef DEBUG
-   void pane_view::assert_ok() const
+   void pane_impact::assert_ok() const
    {
       ::user::impact::assert_ok();
    }
 
-   void pane_view::dump(dump_context & dumpcontext) const
+   void pane_impact::dump(dump_context & dumpcontext) const
    {
       ::user::impact::dump(dumpcontext);
    }
 #endif //DEBUG
 
 
-   void pane_view::_001OnCreate(::message::message * pmessage)
+   void pane_impact::_001OnCreate(::message::message * pmessage)
    {
 
       if (pmessage->previous())
@@ -53,7 +53,7 @@ namespace backup
    }
 
 
-   void pane_view::handle(::topic * ptopic, ::context * pcontext)
+   void pane_impact::handle(::topic * ptopic, ::context * pcontext)
    {
 
       ::user::tab_view::handle(ptopic, pcontext);
@@ -61,7 +61,7 @@ namespace backup
    }
 
 
-   void pane_view::on_create_impact(::user::impact_data * pcreatordata)
+   void pane_impact::on_create_impact(::user::impact_data * pcreatordata)
    {
 
       switch(pcreatordata->m_atom)
@@ -80,7 +80,7 @@ namespace backup
          __pointer(::user::document) pdocument = papplication->create_form(this, this);
          if(pdocument == nullptr)
             return;
-         __pointer(::user::impact) pview = pdocument->get_view();
+         __pointer(::user::impact) pimpact = pdocument->get_view();
          auto pupdate = new_update();
          pupdate->m_actioncontext = ::e_source_system;
          ptopic->m_atom = id_browse;
@@ -94,7 +94,7 @@ namespace backup
          pdocument->update_all_views(ptopic);
 
 
-         pcreatordata->m_puserinteraction = (pview->get_parent_frame());
+         pcreatordata->m_puserinteraction = (pimpact->get_parent_frame());
 //         __pointer(form_child_frame) pframe = (pcreatordata->m_puserinteraction);
          pcreatordata->m_pdocument = pdocument;
 
@@ -108,17 +108,17 @@ namespace backup
    }
 
 
-   void pane_view::install_message_routing(::channel * pchannel)
+   void pane_impact::install_message_routing(::channel * pchannel)
    {
-      ::userex::pane_tab_view::install_message_routing(pchannel);
-      MESSAGE_LINK(e_message_create, pchannel, this, &pane_view::_001OnCreate);
+      ::userex::pane_tab_impact::install_message_routing(pchannel);
+      MESSAGE_LINK(e_message_create, pchannel, this, &pane_impact::_001OnCreate);
    }
 
 
-   void pane_view::handle(::topic * ptopic, ::context * pcontext)
+   void pane_impact::handle(::topic * ptopic, ::context * pcontext)
    {
 
-      ::userex::pane_tab_view::handle(ptopic, pcontext);
+      ::userex::pane_tab_impact::handle(ptopic, pcontext);
 
       if (ptopic->m_bRet)
       {

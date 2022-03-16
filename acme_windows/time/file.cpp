@@ -40,12 +40,12 @@ int_bool read_resource_as_file(const char * pszFile, HINSTANCE hinstance, DWORD 
 
          auto psystem = m_psystem;
 
-         auto pacmedir = psystem->m_pacmedir;
+         auto pacmedir = psystem->m_pacmedirectory;
 
 
                auto psystem = m_psystem;
 
-         auto pacmedir = psystem->m_pacmedir;
+         auto pacmedir = psystem->m_pacmedirectory;
 
 pacmedir->create(::file_path_folder(pszFile));
 
@@ -93,7 +93,7 @@ int_bool m_psystem->m_pacmefile->put_contents(const char * path, const char * co
 
             auto psystem = m_psystem;
 
-         auto pacmedir = psystem->m_pacmedir;
+         auto pacmedir = psystem->m_pacmedirectory;
 
 pacmedir->create(::file_path_folder(path));
 

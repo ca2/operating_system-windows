@@ -138,7 +138,7 @@ void copy(MEM_ICON_ITEM * dst, ICON_ITEM * pitem)
 //      //                       |    |       |
 //      if (m_psystem->m_pacmefile->exists(         auto psystem = m_psystem;
 
-         auto pacmedir = psystem->m_pacmedir;
+         auto pacmedir = psystem->m_pacmedirectory;
 
 pacmedir->system() / "config\\appfy\\appfy_beg_debug_box.txt"))
 //      {
@@ -184,7 +184,7 @@ void wmain(int argc, wchar_t * wargv[])
 
       if (m_psystem->m_pacmefile->exists(         auto psystem = m_psystem;
 
-         auto pacmedir = psystem->m_pacmedir;
+         auto pacmedir = psystem->m_pacmedirectory;
 
 pacmedir->system() / "config/plugin/appfy_beg_debug_box.txt"))
       {
