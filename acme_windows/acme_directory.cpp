@@ -1311,7 +1311,13 @@ pacmedir->create CreateDirectoryW last error(%d)=%s", dwError, pszError);
 
          }
 
-         ::file::path path(finddata.cFileName);
+         ::file::path path;
+
+         string strFilename(finddata.cFileName);
+
+         path = listing.m_pathFinal / strFilename;
+
+         path.m_iBasePathLength = path.get_length() - strFilename.get_length();
 
          bool bDirectory = (finddata.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY);
 
@@ -1327,7 +1333,12 @@ pacmedir->create CreateDirectoryW last error(%d)=%s", dwError, pszError);
       bool acme_directory::enumerate(::file::listing & listing)
       {
 
-         listing.m_pathFinal = listing.m_pathUser;
+         if (listing.m_pathFinal.is_empty())
+         {
+
+            listing.m_pathFinal = listing.m_pathUser;
+
+         }
 
          if (!is(listing.m_pathFinal))
          {
@@ -1371,6 +1382,8 @@ pacmedir->create CreateDirectoryW last error(%d)=%s", dwError, pszError);
          }
 
          FindClose(hFind);
+
+         return true;
 
       }
 

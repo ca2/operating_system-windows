@@ -776,7 +776,6 @@ Global
 		{451DB026-F52E-414E-8DCA-CD36E9E87616}.stage|x64.Build.0 = stage|x64
 		{09FF459C-5822-40DC-B5B8-DB37DD5A47D5}.basis|Win32.ActiveCfg = cube_basis|Win32
 		{09FF459C-5822-40DC-B5B8-DB37DD5A47D5}.basis|x64.ActiveCfg = cube_basis|x64
-		{09FF459C-5822-40DC-B5B8-DB37DD5A47D5}.basis|x64.Build.0 = cube_basis|x64
 		{09FF459C-5822-40DC-B5B8-DB37DD5A47D5}.cover|Win32.ActiveCfg = cube_basis|Win32
 		{09FF459C-5822-40DC-B5B8-DB37DD5A47D5}.cover|x64.ActiveCfg = cube_stage|x64
 		{09FF459C-5822-40DC-B5B8-DB37DD5A47D5}.cover|x64.Build.0 = cube_stage|x64

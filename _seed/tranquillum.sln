@@ -34,7 +34,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_core_addressbook", "..\
 		{54850FD8-653A-43B6-AA90-E59AC030559C} = {54850FD8-653A-43B6-AA90-E59AC030559C}
 	EndProjectSection
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_core_hash_base", "..\..\..\source\app-core\hash_base\hash_base.vcxproj", "{D71B13E6-0935-4D8F-B31E-E3DBB14036BB}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "hash_base", "..\..\..\source\app-core\hash_base\hash_base.vcxproj", "{D71B13E6-0935-4D8F-B31E-E3DBB14036BB}"
 	ProjectSection(ProjectDependencies) = postProject
 		{19841115-1984-0411-1977-021977151984} = {19841115-1984-0411-1977-021977151984}
 		{E2D7833B-9B59-4826-BBDF-C270A2115E86} = {E2D7833B-9B59-4826-BBDF-C270A2115E86}
@@ -162,6 +162,14 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "tranquillum_composite", "..\..\..\source\tranquillum\composite\composite.vcxproj", "{C7AFCEFA-3079-4B23-8F97-4543BB980265}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_tranquillum_composite", "..\..\..\source\tranquillum\composite\shared_tranquillum_composite.vcxproj", "{DB0DB48E-D598-4534-AC03-7177603F0937}"
+	ProjectSection(ProjectDependencies) = postProject
+		{C1CCDF2E-9F27-45D3-B67A-B2EEB1754E72} = {C1CCDF2E-9F27-45D3-B67A-B2EEB1754E72}
+		{77D5757E-2923-40F8-9CC0-A07FA5BCC236} = {77D5757E-2923-40F8-9CC0-A07FA5BCC236}
+		{9A5FBFB1-76E6-4F7E-933A-328C1EEC95AF} = {9A5FBFB1-76E6-4F7E-933A-328C1EEC95AF}
+		{F85061D8-22DC-4A8B-85EA-76D330BE52CC} = {F85061D8-22DC-4A8B-85EA-76D330BE52CC}
+		{D79C7DDB-A727-4B91-803E-41C4431693D6} = {D79C7DDB-A727-4B91-803E-41C4431693D6}
+		{188CF8F3-FC6C-4DC6-9902-4E41FA7A7127} = {188CF8F3-FC6C-4DC6-9902-4E41FA7A7127}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "static_tranquillum_composite", "..\..\..\source\tranquillum\composite\static_tranquillum_composite.vcxproj", "{10FF0663-F1F8-47A2-94ED-63E319508848}"
 EndProject
@@ -948,7 +956,6 @@ Global
 		{10FF0663-F1F8-47A2-94ED-63E319508848}.basis|Win32.ActiveCfg = cube_basis|Win32
 		{10FF0663-F1F8-47A2-94ED-63E319508848}.basis|Win32.Build.0 = cube_basis|Win32
 		{10FF0663-F1F8-47A2-94ED-63E319508848}.basis|x64.ActiveCfg = cube_basis|x64
-		{10FF0663-F1F8-47A2-94ED-63E319508848}.basis|x64.Build.0 = cube_basis|x64
 		{10FF0663-F1F8-47A2-94ED-63E319508848}.cube_basis|Win32.ActiveCfg = cube_basis|Win32
 		{10FF0663-F1F8-47A2-94ED-63E319508848}.cube_basis|Win32.Build.0 = cube_basis|Win32
 		{10FF0663-F1F8-47A2-94ED-63E319508848}.cube_basis|x64.ActiveCfg = cube_basis|x64
