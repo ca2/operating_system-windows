@@ -260,7 +260,7 @@ namespace production
             __pointer(::user::interaction) pinteraction = m_pviewOptions->get_child_by_id("clean");
             __pointer(::user::check_box) pcheckbox =  (pinteraction);
             auto ptopic = topic(id_clean);
-            ptopic->payload(id_clean) = pcheckbox->echeck() == ::check_checked;
+            ptopic->payload(id_clean) = pcheckbox->echeck() == ::e_check_checked;
             get_document()->update_all_views(ptopic);
          }
          else if(ptopic->user_element_id() == "build")
@@ -268,7 +268,7 @@ namespace production
             __pointer(::user::interaction) pinteraction = m_pviewOptions->get_child_by_id("build");
             __pointer(::user::check_box) pcheckbox =  (pinteraction);
             auto ptopic = new_action(id_build);
-            ptopic->payload(id_build) = pcheckbox->echeck() == ::check_checked;
+            ptopic->payload(id_build) = pcheckbox->echeck() == ::e_check_checked;
             get_document()->update_all_views(ptopic);
 
          }

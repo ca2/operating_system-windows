@@ -588,11 +588,11 @@ namespace draw2d_gdiplus
 
       void set_alpha_mode(::draw2d::enum_alpha_mode ealphamode) override;
 
-      void set_smooth_mode(::draw2d::e_smooth_mode esmoothmode) override;
+      void set_smooth_mode(::draw2d::enum_smooth_mode esmoothmode) override;
 
       void set_interpolation_mode(::draw2d::enum_interpolation_mode einterpolationmode) override;
 
-      void set_compositing_quality(::draw2d::e_compositing_quality ecompositingquality) override;
+      void set_compositing_quality(::draw2d::enum_compositing_quality ecompositingquality) override;
 
       void set_text_rendering_hint(::write_text::enum_rendering etextrendering) override;
 

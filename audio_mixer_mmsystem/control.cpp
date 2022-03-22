@@ -467,7 +467,7 @@ namespace multimedia
 
                bool fValue = pmxcd_f[cMultipleItems - i - 1].fValue != false;
 
-               pmutecontrol->_001SetCheck(fValue ? check_checked : check_unchecked, ::e_source_user);
+               pmutecontrol->_001SetCheck(fValue ? e_check_checked : e_check_unchecked, ::e_source_user);
 
                i++;
 

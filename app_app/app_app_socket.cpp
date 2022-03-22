@@ -364,7 +364,7 @@ auto tickExecuteEnd = ::tick::now();
 
 /*         ::save_image saveimage;
 
-/*         savepimage->m_eformat = pimage::format_jpeg;
+/*         savepimage->m_eformat = pimage::e_format_jpeg;
 /*         savepimage->m_iQuality = 50;
 
          outheader(__id(content_type)) = "image/jpeg";

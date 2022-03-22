@@ -268,7 +268,7 @@ namespace draw2d_gdiplus
 
       set_text_rendering_hint(::write_text::e_rendering_anti_alias);
 
-      set_smooth_mode(::draw2d::smooth_mode_anti_alias_8x8);
+      set_smooth_mode(::draw2d::e_smooth_mode_anti_alias_8x8);
 
       m_osdata[0] = m_pgraphics;
 
@@ -380,7 +380,7 @@ namespace draw2d_gdiplus
 
       set_text_rendering_hint(::write_text::e_rendering_anti_alias);
 
-      set_smooth_mode(::draw2d::smooth_mode_anti_alias_8x8);
+      set_smooth_mode(::draw2d::e_smooth_mode_anti_alias_8x8);
 
       m_pbitmap = pbitmap;
 
@@ -1702,7 +1702,7 @@ namespace draw2d_gdiplus
                }
 
 
-               if (pgraphicsSrc->m_pimage->m_emipmap == ::draw2d::mipmap_anisotropic)
+               if (pgraphicsSrc->m_pimage->m_emipmap == ::draw2d::e_mipmap_anisotropic)
                {
 
                   try
@@ -1914,7 +1914,7 @@ namespace draw2d_gdiplus
    //   if (pgraphicsSrc->m_pimage->is_ok())
    //   {
 
-   //      if (pgraphicsSrc->m_pimage->m_emipmap == ::draw2d::mipmap_anisotropic
+   //      if (pgraphicsSrc->m_pimage->m_emipmap == ::draw2d::e_mipmap_anisotropic
    //            && (pgraphicsSrc->m_pimage->width() == nSrcWidth
    //                && pgraphicsSrc->m_pimage->height() == nSrcHeight
    //                && xSrc == 0 && ySrc == 0 && nDstWidth > 0 && nDstHeight > 0))
@@ -2739,7 +2739,7 @@ namespace draw2d_gdiplus
 
       set_text_rendering_hint(::write_text::e_rendering_anti_alias);
 
-      set_smooth_mode(::draw2d::smooth_mode_anti_alias_8x8);
+      set_smooth_mode(::draw2d::e_smooth_mode_anti_alias_8x8);
 
       return 1;
 
@@ -6809,7 +6809,7 @@ namespace draw2d_gdiplus
    //}
 
 
-   void graphics::set_smooth_mode(::draw2d::e_smooth_mode esmoothmode)
+   void graphics::set_smooth_mode(::draw2d::enum_smooth_mode esmoothmode)
    {
 
       try
@@ -6824,25 +6824,25 @@ namespace draw2d_gdiplus
 
          }
 
-         if(esmoothmode == ::draw2d::smooth_mode_none)
+         if(esmoothmode == ::draw2d::e_smooth_mode_none)
          {
 
             m_pgraphics->SetSmoothingMode(Gdiplus::SmoothingModeNone);
 
          }
-         else if(esmoothmode == ::draw2d::smooth_mode_high)
+         else if(esmoothmode == ::draw2d::e_smooth_mode_high)
          {
 
             m_pgraphics->SetSmoothingMode(Gdiplus::SmoothingModeHighQuality);
 
          }
-         else if (esmoothmode == ::draw2d::smooth_mode_anti_alias_8x4)
+         else if (esmoothmode == ::draw2d::e_smooth_mode_anti_alias_8x4)
          {
 
             m_pgraphics->SetSmoothingMode(Gdiplus::SmoothingModeAntiAlias8x4);
 
          }
-         else if (esmoothmode == ::draw2d::smooth_mode_anti_alias_8x8)
+         else if (esmoothmode == ::draw2d::e_smooth_mode_anti_alias_8x8)
          {
 
             m_pgraphics->SetSmoothingMode(Gdiplus::SmoothingModeAntiAlias8x8);
@@ -6912,7 +6912,7 @@ namespace draw2d_gdiplus
 
 
 
-   void graphics::set_compositing_quality(::draw2d::e_compositing_quality ecompositingquality)
+   void graphics::set_compositing_quality(::draw2d::enum_compositing_quality ecompositingquality)
    {
 
       try
@@ -6928,19 +6928,19 @@ namespace draw2d_gdiplus
 
          }
 
-         if (ecompositingquality == ::draw2d::compositing_quality_none)
+         if (ecompositingquality == ::draw2d::e_compositing_quality_none)
          {
 
             m_pgraphics->SetCompositingQuality(Gdiplus::CompositingQualityDefault);
 
          }
-         else if (ecompositingquality == ::draw2d::compositing_quality_high_speed)
+         else if (ecompositingquality == ::draw2d::e_compositing_quality_high_speed)
          {
 
             m_pgraphics->SetCompositingQuality(Gdiplus::CompositingQualityHighSpeed);
 
          }
-         else if (ecompositingquality == ::draw2d::compositing_quality_high_quality)
+         else if (ecompositingquality == ::draw2d::e_compositing_quality_high_quality)
          {
 
             m_pgraphics->SetCompositingQuality(Gdiplus::CompositingQualityHighQuality);

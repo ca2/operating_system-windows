@@ -345,7 +345,7 @@ namespace draw2d_gdiplus
 
       }
 
-      if(m_efillmode == ::draw2d::fill_mode_winding)
+      if(m_efillmode == ::draw2d::e_fill_mode_winding)
       {
 
          m_ppath = new Gdiplus::GraphicsPath(Gdiplus::FillModeWinding);

@@ -10,10 +10,10 @@ namespace draw2d_gdi
       int nMode;
       switch(efillmode)
       {
-      case ::draw2d::fill_mode_winding:
+      case ::draw2d::e_fill_mode_winding:
          nMode = WINDING;
          break;
-      case ::draw2d::fill_mode_alternate:
+      case ::draw2d::e_fill_mode_alternate:
          nMode = ALTERNATE;
          break;
       default:

@@ -176,7 +176,7 @@ namespace draw2d_gdiplus
          pa.add(Gdiplus::PointF((Gdiplus::REAL) m_lppoints[i].x, (Gdiplus::REAL) m_lppoints[i].y));
       }
 
-      if(m_efillmode == ::draw2d::fill_mode_alternate)
+      if(m_efillmode == ::draw2d::e_fill_mode_alternate)
       {
          path.SetFillMode(Gdiplus::FillModeAlternate);
       }
@@ -199,7 +199,7 @@ namespace draw2d_gdiplus
 
       array < Gdiplus::PointF > pa;
 
-      if(m_efillmode == ::draw2d::fill_mode_alternate)
+      if(m_efillmode == ::draw2d::e_fill_mode_alternate)
       {
          path.SetFillMode(Gdiplus::FillModeAlternate);
       }

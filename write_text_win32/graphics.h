@@ -583,11 +583,11 @@ namespace draw2d_gdiplus
 
       virtual bool set_alpha_mode(::draw2d::enum_alpha_mode ealphamode) override;
 
-      virtual bool set_smooth_mode(::draw2d::e_smooth_mode esmoothmode) override;
+      virtual bool set_smooth_mode(::draw2d::enum_smooth_mode esmoothmode) override;
 
       virtual bool set_interpolation_mode(::draw2d::enum_interpolation_mode einterpolationmode) override;
 
-      virtual bool set_compositing_quality(::draw2d::e_compositing_quality ecompositingquality) override;
+      virtual bool set_compositing_quality(::draw2d::enum_compositing_quality ecompositingquality) override;
 
       virtual bool set_text_rendering_hint(::write_text::enum_rendering etextrendering) override;
 

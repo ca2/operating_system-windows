@@ -4,7 +4,7 @@
 namespace backup
 {
 
-   enum e_impact
+   enum enum_impact
    {
       impact_none,
       impact_backup,
@@ -30,7 +30,7 @@ namespace backup
       ::update();
       virtual ~::update();
 
-      e_impact m_eview;
+      enum_impact m_eview;
    protected:
       enum_type m_etype;
 
