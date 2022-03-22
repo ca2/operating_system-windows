@@ -1,5 +1,5 @@
 #include "framework.h"
-#include "aura/user/_user.h"
+//#include "aura/user/_user.h"
 
 
 static ::user::notify_icon * g_pnotifyiconLast = nullptr;

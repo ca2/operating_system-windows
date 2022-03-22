@@ -14,6 +14,9 @@ namespace draw2d_gdiplus
    public:
 
 
+      auto_pointer < Gdiplus::PrivateFontCollection >    m_pprivateFontCollection;
+      auto_pointer < Gdiplus::FontFamily >               m_pfontfamily;
+
       //__creatable_from_base(font, ::write_text::font);
 
 

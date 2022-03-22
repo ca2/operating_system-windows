@@ -38,7 +38,7 @@ namespace draw2d_gdiplus
    void brush::create(::draw2d::graphics * pgraphics, ::i8 iCreate)
    {
 
-      if(m_etype == type_solid)
+      if(m_ebrush == ::draw2d::e_brush_solid)
       {
 
          try
@@ -53,7 +53,7 @@ namespace draw2d_gdiplus
          }
 
       }
-      else if(m_etype == type_linear_gradient_point_color)
+      else if(m_ebrush == ::draw2d::e_brush_linear_gradient_point_color)
       {
 
          try
@@ -70,7 +70,7 @@ namespace draw2d_gdiplus
          {
          }
       }
-      else if(m_etype == type_radial_gradient_color)
+      else if(m_ebrush == ::draw2d::e_brush_radial_gradient_color)
       {
 
          try
@@ -98,7 +98,7 @@ namespace draw2d_gdiplus
          {
          }
       }
-      else if (m_etype == type_pattern)
+      else if (m_ebrush == ::draw2d::e_brush_pattern)
       {
 
          try
@@ -107,12 +107,21 @@ namespace draw2d_gdiplus
             if (::is_ok(m_pimage))
             {
 
-               Gdiplus::Image * pimage = m_pimage->get_bitmap()->get_os_data < Gdiplus::Bitmap * >();
+               auto pimage = m_pimage;
 
-               if (::is_set(pimage))
+               if (m_size.area() > 0)
                {
 
-                  Gdiplus::TextureBrush* ptexturebrush = new Gdiplus::TextureBrush(pimage);
+                  pimage = pimage->get_resized_image(m_size);
+
+               }
+
+               Gdiplus::Image * pgdiplusimage = pimage->get_bitmap()->get_os_data < Gdiplus::Bitmap * >();
+
+               if (::is_set(pgdiplusimage))
+               {
+
+                  Gdiplus::TextureBrush* ptexturebrush = new Gdiplus::TextureBrush(pgdiplusimage);
 
                   m_pbrush = ptexturebrush;
 
@@ -126,6 +135,47 @@ namespace draw2d_gdiplus
 
          }
 
+      }
+      else if (m_ebrush == ::draw2d::e_brush_box_gradient)
+      {
+
+         try
+         {
+
+            __pointer(::draw2d::path) ppath;
+
+            pgraphics->__construct(ppath);
+
+            ::rectangle_f64 rectangleRoundRect(m_point, m_size);
+
+            ppath->add_round_rect(rectangleRoundRect, m_dRadius);
+
+            auto pgdipath = (Gdiplus::GraphicsPath*) ppath->get_os_data(0);
+
+            Gdiplus::PathGradientBrush * pgradientbrush = new Gdiplus::PathGradientBrush(pgdipath);
+
+            auto c1 = gdiplus_color(m_color1);
+
+            Gdiplus::Color colora[4];
+            colora[0] = gdiplus_color(m_color2);
+            colora[1] = gdiplus_color(m_color2);
+            colora[2] = gdiplus_color(m_color2);
+            colora[3] = gdiplus_color(m_color2);
+
+            INT c = 4;
+
+            Gdiplus::PointF pointCenter((Gdiplus::REAL)rectangleRoundRect.center_x(), (Gdiplus::REAL)rectangleRoundRect.center_y());
+
+            pgradientbrush->SetCenterPoint(pointCenter);
+            pgradientbrush->SetCenterColor(c1);
+            pgradientbrush->SetSurroundColors(colora, &c);
+
+            m_pbrush = pgradientbrush;
+
+         }
+         catch (...)
+         {
+         }
       }
       else
       {

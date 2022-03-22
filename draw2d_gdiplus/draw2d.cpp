@@ -21,6 +21,8 @@ namespace draw2d_gdiplus
    draw2d::~draw2d()
    {
 
+      m_mapPrivateFont.clear();
+
       terminate_gdiplus();
 
    }
@@ -62,6 +64,48 @@ namespace draw2d_gdiplus
       return "win32";
 
    }
+
+
+   draw2d::private_font * draw2d::get_file_private_font(::acme::context * pcontext, const ::file::path & path)
+   {
+
+      auto & pfont = m_mapPrivateFont[path];
+
+      if (::is_set(pfont))
+      {
+
+         return pfont;
+
+      }
+
+      __construct_new(pfont);
+
+      pfont->m_pcollection = new Gdiplus::PrivateFontCollection();
+
+      auto pmemory = m_psystem->m_paurasystem->draw2d()->write_text()->get_file_memory(pcontext, path);
+
+      if (pmemory->has_data())
+      {
+
+         pfont->m_pcollection->AddMemoryFont(pmemory->get_data(), pmemory->get_size());
+
+         auto & fontCollection = *pfont->m_pcollection;
+
+         auto iFamilyCount = fontCollection.GetFamilyCount();
+
+         pfont->m_pfamily.create_array(iFamilyCount);
+
+         pfont->m_iFamilyCount = 0;
+
+         fontCollection.GetFamilies(iFamilyCount, pfont->m_pfamily, &pfont->m_iFamilyCount);
+
+      }
+
+      return pfont;
+
+   }
+
+
 
 } // namespace draw2d_gdiplus
 

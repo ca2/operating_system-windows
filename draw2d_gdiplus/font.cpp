@@ -116,13 +116,94 @@ namespace draw2d_gdiplus
 
       };
 
-      auto pfont = new Gdiplus::Font(
-      ::str::international::utf8_to_unicode(m_strFontFamilyName),
-      (Gdiplus::REAL) m_dFontSize,
-      iStyle,
-      unit);
+      bool bFont = false;
 
-      set_gdiplus_font(pfont);
+      if (m_path.has_char())
+      {
+
+         __pointer(::draw2d_gdiplus::draw2d) pdraw2d = m_psystem->m_paurasystem->draw2d();
+
+         auto pprivatefont = pdraw2d->get_file_private_font(pgraphics->m_pcontext, m_path);
+
+         if (pprivatefont)
+         {
+
+            if (pprivatefont->m_iFamilyCount <= 0)
+            {
+
+               throw exception(error_resource);
+
+            }
+
+            int iFound = 0;
+
+            WCHAR wszGetFamilyName[LF_FACESIZE];
+
+            if (m_strFontFamilyName.has_char())
+            {
+
+               for (int i = 0; i < pprivatefont->m_iFamilyCount; i++)
+               {
+
+                  auto & fontfamily = pprivatefont->m_pfamily.m_p[i];
+
+                  if (fontfamily.GetFamilyName(wszGetFamilyName) == Gdiplus::Ok)
+                  {
+
+                     string strFontFamily = wszGetFamilyName;
+
+                     if (strFontFamily.compare_ci(m_strFontFamilyName) == 0)
+                     {
+
+                        iFound = i;
+
+                        break;
+
+
+                     }
+
+                  }
+
+               }
+
+            }
+
+            auto & fontfamily = pprivatefont->m_pfamily.m_p[iFound];
+
+            if (fontfamily.GetFamilyName(wszGetFamilyName) != Gdiplus::Ok)
+            {
+
+               throw exception(error_resource);
+
+            }
+
+            auto pfont = new Gdiplus::Font(
+               wszGetFamilyName,
+               (Gdiplus::REAL)m_dFontSize,
+               iStyle,
+               unit,
+               pprivatefont->m_pcollection);
+
+            set_gdiplus_font(pfont);
+
+            bFont = true;
+
+         }
+
+      }
+      
+      if(!bFont)
+      {
+
+         auto pfont = new Gdiplus::Font(
+            ::str::international::utf8_to_unicode(m_strFontFamilyName),
+            (Gdiplus::REAL)m_dFontSize,
+            iStyle,
+            unit);
+
+         set_gdiplus_font(pfont);
+
+      }
 
       m_mapText.erase_all();
 

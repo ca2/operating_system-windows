@@ -237,16 +237,16 @@ namespace draw2d_gdiplus
       virtual void polyline(const ::point_f64 * ppoint,count nCount) override;
 
 
-      using ::draw2d::graphics::Arc;
-      //bool Arc(i32 x1,i32 y1,i32 x2,i32 y2,i32 x3,i32 y3,i32 x4,i32 y4) override;
-      void Arc(double x1,double y1,double x2,double y2,double x3,double y3,double x4,double y4) override;
+      using ::draw2d::graphics::arc;
+      //bool arc(i32 x1,i32 y1,i32 x2,i32 y2,i32 x3,i32 y3,i32 x4,i32 y4) override;
+      void arc(double x1,double y1,double x2,double y2,double x3,double y3,double x4,double y4) override;
 
-      //bool Arc(i32 x1,i32 y1,i32 x2,i32 y2, angle start, angle extends) override;
-      void Arc(double x1,double y1,double x2,double y2,angle start, angle extends) override;
+      //bool arc(i32 x1,i32 y1,i32 x2,i32 y2, angle start, angle extends) override;
+      void arc(double x1,double y1,double x2,double y2,angle start, angle extends) override;
 
-      void AngleArc(double x,double y, double nRadius, angle fStartAngle, angle fSweepAngle) override;
-      //bool ArcTo(i32 x1, i32 y1, i32 x2, i32 y2, i32 x3, i32 y3, i32 x4, i32 y4) override;
-      void ArcTo(const rectangle_f64 &  prectangle, const point_f64 & pointStart, const point_f64 & pointEnd) override;
+      void angle_arc(double x,double y, double nRadius, angle fStartAngle, angle fSweepAngle) override;
+      //bool arc_to(i32 x1, i32 y1, i32 x2, i32 y2, i32 x3, i32 y3, i32 x4, i32 y4) override;
+      void arc_to(const rectangle_f64 &  prectangle, const point_f64 & pointStart, const point_f64 & pointEnd) override;
 
       //i32 GetArcDirection() override;
       //i32 SetArcDirection(i32 nArcDirection) override;
@@ -545,10 +545,14 @@ namespace draw2d_gdiplus
       void stroke_path() override;
       void widen_path() override;
 
-      void draw_path(::draw2d::path * ppath) override;
-      void draw_path(::draw2d::path * ppath, ::draw2d::pen * ppen) override;
-      void fill_path(::draw2d::path * ppath) override;
-      void fill_path(::draw2d::path * ppath, ::draw2d::brush * pbrush) override;
+      void draw(::draw2d::path * ppath) override;
+      void draw(::draw2d::path * ppath, ::draw2d::pen * ppen) override;
+      void fill(::draw2d::path * ppath) override;
+      void fill(::draw2d::path * ppath, ::draw2d::brush * pbrush) override;
+
+
+      void intersect_clip(::draw2d::path * ppath) override;
+      void set_clip(::draw2d::path * ppath) override;
 
 
       float GetMiterLimit() override;
@@ -605,6 +609,10 @@ namespace draw2d_gdiplus
       virtual Gdiplus::FillMode gdiplus_get_fill_mode();
 
       void blur(bool bExpand, double dRadius, const ::rectangle_f64 & rectangle) override;
+
+
+      //void set_fill_mode(::draw2d::enum_fill_mode efillmode) overrid;
+      //::draw2d::enum_fill_mode get_fill_mode() override;
 
 
       void flush() override;

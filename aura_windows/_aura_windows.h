@@ -5,7 +5,7 @@
 #include "aura/operating_system.h"
 #include "apex_windows/_apex_windows.h"
 #include "aura_windows_common/_aura_windows_common.h"
-#include "aura/user/_user.h"
+#include "aura/user/user/_user.h"
 
 
 //DECLARE_FACTORY(CLASS_DECL_AURA_WINDOWS, aura_windows);

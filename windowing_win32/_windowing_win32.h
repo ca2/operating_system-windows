@@ -2,7 +2,7 @@
 
 
 #include "aura_windows/_aura_windows.h"
-#include "aura/user/_user.h"
+#include "aura/user/user/_user.h"
 
 
 namespace windowing_win32

@@ -259,6 +259,68 @@ namespace draw2d_gdiplus
    }
 
 
+   bool path::internal_add_ellipse(double x, double y, double cx, double cy)
+   {
+
+      if (m_ppath == nullptr)
+      {
+
+         return false;
+
+      }
+
+      bool bOk2 = false;
+
+      if (almost_integer(x) && almost_integer(cx) && almost_integer(y) && almost_integer(cy))
+      {
+
+         Gdiplus::Rect rectangle(
+            (INT)(x),
+            (INT)(y),
+            (INT)(cx),
+            (INT)(cy)
+         );
+
+         try
+         {
+
+            bOk2 = m_ppath->AddEllipse(rectangle) == Gdiplus::Status::Ok;
+
+         }
+         catch (...)
+         {
+
+
+         }
+
+      }
+      else
+      {
+
+         Gdiplus::RectF rectangle(
+            (float)(x),
+            (float)(y),
+            (float)(cx),
+            (float)(cy)
+         );
+
+         try
+         {
+
+            bOk2 = m_ppath->AddEllipse(rectangle) == Gdiplus::Status::Ok;
+
+         }
+         catch (...)
+         {
+
+
+         }
+      }
+
+      return bOk2;
+
+   }
+
    //bool path::internal_add_line(double x, double y)
    //{
 
@@ -581,6 +643,14 @@ namespace draw2d_gdiplus
    {
 
       return internal_add_rect(rectangle.left, rectangle.top,  rectangle.width(), rectangle.height());
+
+   }
+
+
+   bool path::_set(::draw2d::graphics * pgraphics, const ::ellipse & ellipse)
+   {
+
+      return internal_add_ellipse(ellipse.left, ellipse.top, ellipse.width(), ellipse.height());
 
    }
 

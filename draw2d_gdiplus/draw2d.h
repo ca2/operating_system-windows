@@ -14,8 +14,19 @@ namespace draw2d_gdiplus
    public:
 
 
-      //__creatable_from_base(draw2d, ::draw2d::draw2d);
+      class private_font :
+         virtual public ::matter
+      {
+      public:
 
+         auto_pointer < Gdiplus::PrivateFontCollection >    m_pcollection;
+         auto_pointer < Gdiplus::FontFamily >               m_pfamily;
+         int                                                m_iFamilyCount;
+
+      };
+
+      //__creatable_from_base(draw2d, ::draw2d::draw2d);
+      string_map < __pointer(private_font) > m_mapPrivateFont;
 
       draw2d();
       ~draw2d() override;
@@ -24,6 +35,10 @@ namespace draw2d_gdiplus
       void initialize(::object * pobject) override;
 
       virtual string write_text_get_default_library_name() override;
+
+
+      virtual private_font * get_file_private_font(::acme::context * pcontext, const ::file::path & path);
+
 
    };
 

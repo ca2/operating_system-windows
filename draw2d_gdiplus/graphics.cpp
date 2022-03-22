@@ -746,7 +746,7 @@ namespace draw2d_gdiplus
    //}
 
 
-   void graphics::Arc(double x1,double y1,double x2,double y2,double x3,double y3,double x4,double y4)
+   void graphics::arc(double x1,double y1,double x2,double y2,double x3,double y3,double x4,double y4)
    {
 
       double centerx    = (x2 + x1) / 2.0;
@@ -766,7 +766,7 @@ namespace draw2d_gdiplus
       }
       */
 
-      return Arc(x1,y1, x2-x1, y2-y1, start, sweep);
+      return arc(x1,y1, x2-x1, y2-y1, start, sweep);
 
    }
 
@@ -781,7 +781,7 @@ namespace draw2d_gdiplus
    //}
 
 
-   void graphics::Arc(double x1,double y1,double w,double h, angle start, angle extends)
+   void graphics::arc(double x1,double y1,double w,double h, angle start, angle extends)
    {
 
       ::Gdiplus::RectF rectangle_f32((Gdiplus::REAL) x1,(Gdiplus::REAL) y1,(Gdiplus::REAL) w,(Gdiplus::REAL) h);
@@ -1632,135 +1632,200 @@ namespace draw2d_gdiplus
 
       Gdiplus::Status ret = Gdiplus::Status::GenericError;
 
-      if (pgraphicsSrc->m_pimage->is_ok())
+      if (m_bUseImageMipMapsOrResizedImages)
       {
 
-         if (pgraphicsSrc->m_pimage->m_emipmap == ::draw2d::mipmap_anisotropic
-               && (pgraphicsSrc->m_pimage->width() == nDstWidth
-                   && pgraphicsSrc->m_pimage->height() == nDstHeight
-                   && xSrc == 0 && ySrc == 0
-                  && nDstWidth > 0 && nDstHeight > 0))
+         __scoped_restore(m_bUseImageMipMapsOrResizedImages);
+
+         m_bUseImageMipMapsOrResizedImages = false;
+
+         if (pgraphicsSrc->m_pimage->is_ok())
          {
 
-            try
+            int iW = nDstWidth;
+            int iH = nDstHeight;
+
+            if (pgraphicsSrc->m_pimage->width() != iW
+               && pgraphicsSrc->m_pimage->height() != iH
+               && xSrc == 0 && ySrc == 0
+               && iW > 0 && iH > 0)
             {
 
-               index iFind = -1;
+               auto pextension = pgraphicsSrc->m_pimage->get_extension();
 
-               double dRateFound = 1024.0;
-
-               int xFound;
-               int yFound;
-               int cxFound;
-               int cyFound;
-
-               for (index i = 0; i < pgraphicsSrc->m_pimage->get_image_count(); i++)
+               if (pextension)
                {
 
-                  int x1 = 0;
-                  int y1 = 0;
-                  int x2 = 0;
-                  int y2 = 0;
-                  int dx = (int) nSrcWidth;
-                  int dy = (int)nSrcHeight;
-                  int cx1 = (int)nSrcWidth;
-                  int cy1 = (int)nSrcHeight;
-                  int cx2 = (int)nSrcWidth;
-                  int cy2 = (int)nSrcHeight;
+                  auto & psizeimage = pextension->m_psizeimage;
 
-                  while (dx >= nDstWidth)
-                  {
-                     x1 = x2;
-                     x2 += dx;
-                     cx1 = dx;
-                     dx /= 2;
-                     cx2 = dx;
-                  }
+                  __defer_construct_new(psizeimage);
 
-                  while (dy >= nSrcHeight)
-                  {
-                     y1 = y2;
-                     y2 += dy;
-                     cy1 = dy;
-                     dy /= 2;
-                     cy2 = dy;
-                  }
+                  concrete < size_i32 > size(imagedrawing.m_rectangleTarget.size());
 
-                  if (y1 == nSrcHeight)
-                  {
-                     y1 = 0;
-                  }
-                  if (y2 == nSrcHeight)
-                  {
-                     y2 = 0;
-                  }
+                  bool bExists = false;
 
-                  double dRateX = (double)nDstWidth / (double)cx1;
+                  auto & pimage = psizeimage->get(size, bExists);
 
-                  double dRateY = (double)nDstHeight / (double)cy1;
-
-                  double dRateArea = dRateX * dRateY;
-
-                  if (dRateArea < dRateFound)
+                  if (!bExists)
                   {
 
-                     iFind = i;
+                     image_source imagesource3(imagedrawing);
 
-                     dRateFound = dRateArea;
+                     ::rectangle_f64 r3(0, 0, iW, iH);
 
-                     xFound = x1;
+                     image_drawing_options imagedrawingoptions3(r3);
 
-                     yFound = y1;
+                     image_drawing imagedrawing3(imagedrawingoptions3, imagesource3);
 
-                     cxFound = cx1;
+                     __scoped_restore(pimage->g()->m_bUseImageMipMapsOrResizedImages);
 
-                     cyFound = cy1;
+                     pimage->g()->m_bUseImageMipMapsOrResizedImages = false;
+
+                     pimage->draw(imagedrawing3);
 
                   }
+
+                  image_source imagesource2(pimage);
+
+                  image_drawing_options imagedrawingoptions2((const ::image_drawing_options &)imagedrawing);
+
+                  imagedrawingoptions2.m_rectangleTarget.right = imagedrawingoptions2.m_rectangleTarget.left + (double)iW;
+
+                  imagedrawingoptions2.m_rectangleTarget.bottom = imagedrawingoptions2.m_rectangleTarget.top + (double)iH;
+
+                  image_drawing imagedrawing2(imagedrawingoptions2, imagesource2);
+
+                  _draw_raw(imagedrawing2);
+
+                  return;
 
                }
 
-               if (iFind >= 0)
+
+               if (pgraphicsSrc->m_pimage->m_emipmap == ::draw2d::mipmap_anisotropic)
                {
 
-                  ::image_pointer pimage = pgraphicsSrc->m_pimage->get_image(iFind);
-
-                  auto emode = m_pgraphics->GetInterpolationMode();
-
-                  m_pgraphics->SetPixelOffsetMode(Gdiplus::PixelOffsetModeHighSpeed);
-
-                  //m_pgraphics->SetInterpolationMode(Gdiplus::InterpolationModeNearestNeighbor);
-
-                  //m_pgraphics->SetInterpolationMode(Gdiplus::InterpolationModeBilinear);
-
-                  ret = m_pgraphics->DrawImage(
-                        (Gdiplus::Bitmap *) pimage->get_bitmap()->get_os_data(),
-                     rectfTarget,
-                     (Gdiplus::REAL) xFound, (Gdiplus::REAL) yFound, 
-                     (Gdiplus::REAL) cxFound, (Gdiplus::REAL) cyFound,
-                        Gdiplus::UnitPixel);
-
-                  //m_pgraphics->SetInterpolationMode(emode);
-
-                  if (ret == Gdiplus::Status::Ok)
+                  try
                   {
 
-                     //return true;
+                     index iFind = -1;
 
-                     return;
+                     double dRateFound = 1024.0;
+
+                     int xFound;
+                     int yFound;
+                     int cxFound;
+                     int cyFound;
+
+                     for (index i = 0; i < pgraphicsSrc->m_pimage->get_image_count(); i++)
+                     {
+
+                        int x1 = 0;
+                        int y1 = 0;
+                        int x2 = 0;
+                        int y2 = 0;
+                        int dx = (int)nSrcWidth;
+                        int dy = (int)nSrcHeight;
+                        int cx1 = (int)nSrcWidth;
+                        int cy1 = (int)nSrcHeight;
+                        int cx2 = (int)nSrcWidth;
+                        int cy2 = (int)nSrcHeight;
+
+                        while (dx >= nDstWidth)
+                        {
+                           x1 = x2;
+                           x2 += dx;
+                           cx1 = dx;
+                           dx /= 2;
+                           cx2 = dx;
+                        }
+
+                        while (dy >= nSrcHeight)
+                        {
+                           y1 = y2;
+                           y2 += dy;
+                           cy1 = dy;
+                           dy /= 2;
+                           cy2 = dy;
+                        }
+
+                        if (y1 == nSrcHeight)
+                        {
+                           y1 = 0;
+                        }
+                        if (y2 == nSrcHeight)
+                        {
+                           y2 = 0;
+                        }
+
+                        double dRateX = (double)nDstWidth / (double)cx1;
+
+                        double dRateY = (double)nDstHeight / (double)cy1;
+
+                        double dRateArea = dRateX * dRateY;
+
+                        if (dRateArea < dRateFound)
+                        {
+
+                           iFind = i;
+
+                           dRateFound = dRateArea;
+
+                           xFound = x1;
+
+                           yFound = y1;
+
+                           cxFound = cx1;
+
+                           cyFound = cy1;
+
+                        }
+
+                     }
+
+                     if (iFind >= 0)
+                     {
+
+                        ::image_pointer pimage = pgraphicsSrc->m_pimage->get_image(iFind);
+
+                        auto emode = m_pgraphics->GetInterpolationMode();
+
+                        m_pgraphics->SetPixelOffsetMode(Gdiplus::PixelOffsetModeHighSpeed);
+
+                        //m_pgraphics->SetInterpolationMode(Gdiplus::InterpolationModeNearestNeighbor);
+
+                        //m_pgraphics->SetInterpolationMode(Gdiplus::InterpolationModeBilinear);
+
+                        ret = m_pgraphics->DrawImage(
+                           (Gdiplus::Bitmap *)pimage->get_bitmap()->get_os_data(),
+                           rectfTarget,
+                           (Gdiplus::REAL)xFound, (Gdiplus::REAL)yFound,
+                           (Gdiplus::REAL)cxFound, (Gdiplus::REAL)cyFound,
+                           Gdiplus::UnitPixel);
+
+                        //m_pgraphics->SetInterpolationMode(emode);
+
+                        if (ret == Gdiplus::Status::Ok)
+                        {
+
+                           //return true;
+
+                           return;
+
+                        }
+
+                     }
+
+                  }
+                  catch (...)
+                  {
+
 
                   }
 
                }
 
             }
-            catch (...)
-            {
-
-
-            }
-
-
 
          }
 
@@ -2816,7 +2881,7 @@ namespace draw2d_gdiplus
 
    //}
 
-   void graphics::AngleArc(double x, double y, double nRadius, angle fStartAngle, angle fSweepAngle)
+   void graphics::angle_arc(double x, double y, double nRadius, angle fStartAngle, angle fSweepAngle)
    {
    //   //ASSERT(get_handle1() != nullptr);
    //   //return ::AngleArc(get_handle1(), x, y, nRadius, fStartAngle, fSweepAngle) != false;
@@ -2827,7 +2892,7 @@ namespace draw2d_gdiplus
    }
 
 
-   void graphics::ArcTo(const rectangle_f64 & rectangleParam,const point_f64 & pointStart,const point_f64 & pointEnd)
+   void graphics::arc_to(const rectangle_f64 & rectangleParam,const point_f64 & pointStart,const point_f64 & pointEnd)
    {
 ////      ASSERT(get_handle1() != nullptr);
       //return ArcTo(rectangleParam.left, rectangleParam.top, rectangleParam.right,
@@ -3119,7 +3184,7 @@ namespace draw2d_gdiplus
    }
 
 
-   void graphics::draw_path(::draw2d::path * ppath)
+   void graphics::draw(::draw2d::path * ppath)
    {
 
       //m_pgraphics->SetSmoothingMode(Gdiplus::SmoothingModeAntiAlias8x8);
@@ -3131,7 +3196,7 @@ namespace draw2d_gdiplus
    }
 
    
-   void graphics::draw_path(::draw2d::path * ppath, ::draw2d::pen * ppen)
+   void graphics::draw(::draw2d::path * ppath, ::draw2d::pen * ppen)
    {
 
       bool bOk = m_pgraphics->DrawPath(ppen->get_os_data<Gdiplus::Pen *>(this), ppath->get_os_data <Gdiplus::GraphicsPath *>(this)) == Gdiplus::Status::Ok;
@@ -3139,7 +3204,7 @@ namespace draw2d_gdiplus
    }
 
 
-   void graphics::fill_path(::draw2d::path * ppath)
+   void graphics::fill(::draw2d::path * ppath)
    {
 
       Gdiplus::Brush* pbrush = m_pbrush->get_os_data < Gdiplus::Brush* >(this);
@@ -3151,7 +3216,7 @@ namespace draw2d_gdiplus
    }
 
 
-   void graphics::fill_path(::draw2d::path * ppath, ::draw2d::brush * pbrush)
+   void graphics::fill(::draw2d::path * ppath, ::draw2d::brush * pbrush)
    {
 
       if (ppath == nullptr)
@@ -3194,6 +3259,68 @@ namespace draw2d_gdiplus
       }
 
       bool bOk = m_pgraphics->FillPath(pbr, ppathOs) == Gdiplus::Status::Ok;
+
+   }
+
+   
+   void graphics::intersect_clip(::draw2d::path * ppath)
+   {
+
+      if (ppath == nullptr)
+      {
+
+         throw ::exception(error_null_pointer);
+
+      }
+
+      if (m_pgraphics == nullptr)
+      {
+
+         throw ::exception(error_null_pointer);
+
+      }
+
+      auto ppathOs = ppath->get_os_data < Gdiplus::GraphicsPath * >(this);
+
+      if (ppathOs == nullptr)
+      {
+
+         throw ::exception(error_null_pointer);
+
+      }
+
+      bool bOk = m_pgraphics->SetClip(ppathOs, Gdiplus::CombineModeIntersect) == Gdiplus::Status::Ok;
+
+   }
+
+
+   void graphics::set_clip(::draw2d::path * ppath)
+   {
+
+      if (ppath == nullptr)
+      {
+
+         throw ::exception(error_null_pointer);
+
+      }
+
+      if (m_pgraphics == nullptr)
+      {
+
+         throw ::exception(error_null_pointer);
+
+      }
+
+      auto ppathOs = ppath->get_os_data < Gdiplus::GraphicsPath * >(this);
+
+      if (ppathOs == nullptr)
+      {
+
+         throw ::exception(error_null_pointer);
+
+      }
+
+      bool bOk = m_pgraphics->SetClip(ppathOs) == Gdiplus::Status::Ok;
 
    }
 
@@ -7198,6 +7325,17 @@ namespace draw2d_gdiplus
       return m_pgraphics->GetDpiY();
 
    }
+
+
+   //void graphics::set_fill_mode(::draw2d::enum_fill_mode efillmode) overrid;
+   //::draw2d::enum_fill_mode graphics::get_fill_mode()
+   //{
+
+
+   //   auto fillMode = m_pgraphics->GetFi
+
+   //}
+
 
 
    void graphics::flush()
