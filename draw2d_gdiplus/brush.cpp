@@ -148,7 +148,7 @@ namespace draw2d_gdiplus
 
             ::rectangle_f64 rectangleRoundRect(m_point, m_size);
 
-            ppath->add_round_rect(rectangleRoundRect, m_dRadius);
+            ppath->add_round_rectangle(rectangleRoundRect, m_dRadius);
 
             auto pgdipath = (Gdiplus::GraphicsPath*) ppath->get_os_data(0);
 
