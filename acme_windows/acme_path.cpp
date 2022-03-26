@@ -265,25 +265,21 @@ namespace windows
                if (m_psystem->m_pacmedirectory->is(path))
                {
 
-                  hfile = hfile_create(path,
+                  hfile = ::CreateFile2(wstr,
                      GENERIC_READ,          // open for reading
                      FILE_SHARE_READ,       // share for reading
-                     nullptr,                  // default security
                      OPEN_EXISTING,         // existing file only
-                     FILE_ATTRIBUTE_NORMAL, // normal file
-                     nullptr);                 // no attr. template
+                     nullptr);              // no ext. properties
 
                }
                else
                {
 
-                  hfile = hfile_create(path,
-                     FILE_LIST_DIRECTORY,          // open for reading
+                  hfile = ::CreateFile2(wstr,
+                     FILE_LIST_DIRECTORY,   // open for reading
                      FILE_SHARE_READ,       // share for reading
-                     nullptr,                  // default security
                      OPEN_EXISTING,         // existing file only
-                     FILE_ATTRIBUTE_NORMAL, // normal file
-                     nullptr);                 // no attr. template
+                     nullptr);              // no ext. properties
 
                }
 
