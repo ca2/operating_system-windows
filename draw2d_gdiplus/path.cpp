@@ -73,7 +73,16 @@ namespace draw2d_gdiplus
       try
       {
 
-         return m_ppath->StartFigure() == Gdiplus::Status::Ok;
+         auto status = m_ppath->StartFigure();
+         
+         if (status == Gdiplus::Status::Ok)
+         {
+
+            m_bHasPointInternal = false;
+
+            return true;
+
+         }
 
       }
       catch (...)
@@ -593,6 +602,8 @@ namespace draw2d_gdiplus
       if (eshape == e_shape_begin_figure)
       {
 
+         internal_begin_figure();
+
          return true;
 
       }
@@ -600,6 +611,14 @@ namespace draw2d_gdiplus
       {
 
          internal_close_figure();
+
+         return true;
+
+      }
+      else if (eshape == e_shape_end_figure)
+      {
+
+         
 
          return true;
 
