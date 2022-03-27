@@ -148,29 +148,37 @@ namespace draw2d_gdiplus
 
             ::rectangle_f64 rectangleRoundRect(m_point, m_size);
 
-            ppath->add_round_rectangle(rectangleRoundRect, m_dRadius);
+            double dDiameter = m_dRadius * 2.0;
 
-            auto pgdipath = (Gdiplus::GraphicsPath*) ppath->get_os_data(0);
+            if (dDiameter <= rectangleRoundRect.minimum_dimension())
+            {
 
-            Gdiplus::PathGradientBrush * pgradientbrush = new Gdiplus::PathGradientBrush(pgdipath);
 
-            auto c1 = gdiplus_color(m_color1);
+               ppath->add_round_rectangle(rectangleRoundRect, m_dRadius);
 
-            Gdiplus::Color colora[4];
-            colora[0] = gdiplus_color(m_color2);
-            colora[1] = gdiplus_color(m_color2);
-            colora[2] = gdiplus_color(m_color2);
-            colora[3] = gdiplus_color(m_color2);
+               auto pgdipath = (Gdiplus::GraphicsPath *)ppath->get_os_data(0);
 
-            INT c = 4;
+               Gdiplus::PathGradientBrush * pgradientbrush = new Gdiplus::PathGradientBrush(pgdipath);
 
-            Gdiplus::PointF pointCenter((Gdiplus::REAL)rectangleRoundRect.center_x(), (Gdiplus::REAL)rectangleRoundRect.center_y());
+               auto c1 = gdiplus_color(m_color1);
 
-            pgradientbrush->SetCenterPoint(pointCenter);
-            pgradientbrush->SetCenterColor(c1);
-            pgradientbrush->SetSurroundColors(colora, &c);
+               Gdiplus::Color colora[4];
+               colora[0] = gdiplus_color(m_color2);
+               colora[1] = gdiplus_color(m_color2);
+               colora[2] = gdiplus_color(m_color2);
+               colora[3] = gdiplus_color(m_color2);
 
-            m_pbrush = pgradientbrush;
+               INT c = 4;
+
+               Gdiplus::PointF pointCenter((Gdiplus::REAL)rectangleRoundRect.center_x(), (Gdiplus::REAL)rectangleRoundRect.center_y());
+
+               pgradientbrush->SetCenterPoint(pointCenter);
+               pgradientbrush->SetCenterColor(c1);
+               pgradientbrush->SetSurroundColors(colora, &c);
+
+               m_pbrush = pgradientbrush;
+
+            }
 
          }
          catch (...)

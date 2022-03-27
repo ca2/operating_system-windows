@@ -3208,6 +3208,13 @@ namespace draw2d_gdiplus
    {
 
       Gdiplus::Brush* pbrush = m_pbrush->get_os_data < Gdiplus::Brush* >(this);
+      
+      if (::is_null(pbrush))
+      {
+
+         return;
+
+      }
 
       Gdiplus::GraphicsPath * pgraphicspath = ppath->get_os_data < Gdiplus::GraphicsPath* >(this);
 
