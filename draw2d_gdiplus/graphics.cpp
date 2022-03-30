@@ -7408,7 +7408,7 @@ namespace draw2d_gdiplus
    }
 
 
-   void graphics::TextOutAlphaBlend(double x, double y, const block & block)
+   bool graphics::TextOutAlphaBlend(double x, double y, const block & block)
    {
 
       if (m_pimageAlphaBlend->is_set())
@@ -7428,7 +7428,9 @@ namespace draw2d_gdiplus
 
          // "Reference" implementation for TextOutAlphaBlend
 
-         ::rectangle_i32 rectangleIntersect(m_pointAlphaBlend, m_pimageAlphaBlend->size());
+         ::rectangle_i32 rectangleAlphaBlend(m_pointAlphaBlend, m_pimageAlphaBlend->size());
+
+         ::rectangle_i32 rectangleIntersect;
 
          const ::size_f64 & size = ::size_f64(get_text_extent(block));
 
@@ -7438,38 +7440,48 @@ namespace draw2d_gdiplus
 
          ::rectangle_i32 rectangleText(point_i32((LONG)x, (LONG)y), size);
 
-         if (rectangleIntersect.intersect(rectangleIntersect, rectangleText))
+         if (rectangleIntersect.intersect(rectangleAlphaBlend, rectangleText))
          {
 
             ::image_pointer pimage1;
 
             pimage1 = m_pcontext->context_image()->create_image(rectangleText.size());
 
+            pimage1->fill(0);
+
             pimage1->get_graphics()->set(get_current_font());
 
             pimage1->get_graphics()->set(get_current_brush());
 
-            pimage1->get_graphics()->set_alpha_mode(::draw2d::e_alpha_mode_set);
+            pimage1->get_graphics()->set_alpha_mode(::draw2d::e_alpha_mode_blend);
 
             pimage1->get_graphics()->text_out(0, 0, block);
 
-            pimage1->blend2(nullptr, m_pimageAlphaBlend, point_i32((int)maximum(0, x - m_pointAlphaBlend.x), (int)maximum(0, y - m_pointAlphaBlend.y)), rectangleText.size(), 255);
+            point_i32 pointDst;
 
-            auto rectangleTarget = ::rectangle_f64(::point_f64(x, y), rectangleText.size());
+            pointDst.y = maximum(0, rectangleIntersect.top - y);
 
-            auto rectangleSource = ::rectangle_f64(rectangleText.size());
+            pointDst.x = maximum(0, rectangleIntersect.left - x);
+
+            point_i32 pointSrc;
+
+            pointSrc.y = maximum(0, y - rectangleAlphaBlend.top);
+
+            pointSrc.x = maximum(0, x - rectangleAlphaBlend.left);
+
+            pimage1->blend2(pointDst, m_pimageAlphaBlend, pointSrc, rectangleIntersect.size(), 255);
 
             image_drawing_options imagedrawingoptions;
 
-            _draw_raw(rectangleTarget, pimage1, imagedrawingoptions, ::point_f64());
+            _draw_raw(rectangleText, pimage1, imagedrawingoptions, ::point_f64());
 
-            //return true;
+            return true;
 
          }
 
       }
 
-      //return false;
+      return false;
 
    }
 
