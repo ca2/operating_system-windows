@@ -921,6 +921,13 @@ namespace windows
          if (puserinteraction)
          {
 
+            if (puserinteraction->layout().m_statea[::user::e_layout_normal].m_bProdevian)
+            {
+
+               puserinteraction->set_prodevian();
+
+            }
+
             if (puserinteraction->layout().m_statea[::user::e_layout_normal].display() == e_display_zoomed)
             {
 
