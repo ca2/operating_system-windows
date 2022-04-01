@@ -3191,7 +3191,25 @@ namespace draw2d_gdiplus
       //m_pgraphics->SetCompositingQuality(Gdiplus::CompositingQualityGammaCorrected);
       //m_pgraphics->SetInterpolationMode(Gdiplus::InterpolationModeHighQualityBicubic);
 
-      bool bOk = m_pgraphics->DrawPath(m_ppen->get_os_data < Gdiplus::Pen * >(this),ppath->get_os_data<Gdiplus::GraphicsPath *>(this)) == Gdiplus::Status::Ok;
+      auto pgdipen = m_ppen->get_os_data < Gdiplus::Pen * >(this);
+
+      if (::is_null(pgdipen))
+      {
+
+         throw exception(error_null_pointer);
+
+      }
+
+      auto pgdipath = ppath->get_os_data<Gdiplus::GraphicsPath *>(this);
+
+      if (::is_null(pgdipath))
+      {
+
+         throw exception(error_null_pointer);
+
+      }
+
+      bool bOk = m_pgraphics->DrawPath(pgdipen, pgdipath) == Gdiplus::Status::Ok;
 
    }
 

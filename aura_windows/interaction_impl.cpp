@@ -918,10 +918,21 @@ namespace windows
 
          auto puserinteraction = m_puserinteraction;
 
-         if (puserinteraction )
+         if (puserinteraction)
          {
-            puserinteraction->_001Restore();
-         //{
+
+            if (puserinteraction->layout().m_statea[::user::e_layout_normal].display() == e_display_zoomed)
+            {
+
+               puserinteraction->_001Maximize();
+
+            }
+            else
+            {
+
+               puserinteraction->_001Restore();
+
+            }
 
             pmessage->m_bRet = true;
 
