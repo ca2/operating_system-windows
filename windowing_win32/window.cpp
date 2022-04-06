@@ -584,6 +584,8 @@ namespace windowing_win32
 
       }
 
+      //set_os_data(hwnd);
+
       /// this Windows native window "holds" object to the
       /// wrapping object.
       puserinteraction->increment_reference_count(OBJECT_REFERENCE_COUNT_DEBUG_THIS);

@@ -340,7 +340,11 @@ namespace windowing_win32
 
       }
 
-      bool bLayered = (::GetWindowLong(get_hwnd(), GWL_EXSTYLE) & WS_EX_LAYERED) != 0;
+      HWND hwnd = get_hwnd();
+
+      auto uExStyle = ::GetWindowLong(hwnd, GWL_EXSTYLE);
+
+      bool bLayered = (uExStyle & WS_EX_LAYERED) != 0;
 
       bool bAsync = false;
 
