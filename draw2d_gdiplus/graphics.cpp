@@ -1642,8 +1642,8 @@ namespace draw2d_gdiplus
          if (pgraphicsSrc->m_pimage->is_ok())
          {
 
-            int iW = nDstWidth;
-            int iH = nDstHeight;
+            int iW = (::i32) nDstWidth;
+            int iH = (::i32) nDstHeight;
 
             if (pgraphicsSrc->m_pimage->width() != iW
                && pgraphicsSrc->m_pimage->height() != iH
@@ -7477,15 +7477,15 @@ namespace draw2d_gdiplus
 
             point_i32 pointDst;
 
-            pointDst.y = maximum(0, rectangleIntersect.top - y);
+            pointDst.y = (::i32) maximum(0, rectangleIntersect.top - y);
 
-            pointDst.x = maximum(0, rectangleIntersect.left - x);
+            pointDst.x = (::i32) maximum(0, rectangleIntersect.left - x);
 
             point_i32 pointSrc;
 
-            pointSrc.y = maximum(0, y - rectangleAlphaBlend.top);
+            pointSrc.y = (::i32) maximum(0, y - rectangleAlphaBlend.top);
 
-            pointSrc.x = maximum(0, x - rectangleAlphaBlend.left);
+            pointSrc.x = (::i32) maximum(0, x - rectangleAlphaBlend.left);
 
             pimage1->blend2(pointDst, m_pimageAlphaBlend, pointSrc, rectangleIntersect.size(), 255);
 
