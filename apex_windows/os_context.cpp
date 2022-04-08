@@ -3416,6 +3416,8 @@ repeat:
 
                      hr = pitema->GetCount(&dwNumItems);  // get number of selected items
 
+                     string_array & straDest = payload_reference(set["file_name"]);
+
                      // Loop through IShellItemArray and construct string for display
                      for (u32 i = 0; i < dwNumItems; i++)
                      {
@@ -3434,7 +3436,9 @@ repeat:
                            if (SUCCEEDED(hr))
                            {
 
-                              set["file_name"].stra().add(string((PWSTR)pwszFilePath));
+                              string strPath((PWSTR)pwszFilePath);
+
+                              straDest.add(strPath);
 
                               bOk = true;
 
