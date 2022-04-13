@@ -70,13 +70,18 @@ namespace acme
 
 
 
-      void node::shell_execute_async(const char* pszFile, const char* pszParams)
+      void node::shell_open(const ::file::path & pathFile, const ::string & strParams, const ::file::path & pathFolder)
       {
 
-         int iRet = (int)(iptr) ::ShellExecuteW(nullptr, L"open", wstring(pszFile), wstring(pszParams), L"", SW_RESTORE);
+         wstring wstrFile(pathFile);
+
+         wstring wstrParams(strParams);
+
+         wstring wstrFolder(pathFolder);
+
+         int iRet = (int)(iptr) ::ShellExecuteW(nullptr, L"open", wstrFile, wstrParams, wstrFolder, SW_RESTORE);
 
       }
-
 
 
       bool node::win32_registry_windows_dark_mode_for_app()

@@ -2373,10 +2373,10 @@ retry:
 //#else
 
 
-   void os_context::file_open(::file::path path, string strParams, string strFolder)
+   void os_context::file_open(const ::file::path & pathParam, const string & strParams, const ::file::path & pathFolder)
    {
 
-      path = m_pcontext->m_papexcontext->defer_process_path(path);
+      auto path = m_pcontext->m_papexcontext->defer_process_path(pathParam);
 
       fork([=]()
       {
@@ -2391,7 +2391,7 @@ retry:
 
          wstring wstrTarget(path);
 
-         wstring wstrFolder(strFolder);
+         wstring wstrFolder(pathFolder);
 
          wstring wstrParams(strParams);
 

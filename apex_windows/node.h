@@ -97,7 +97,6 @@ namespace apex
          // virtual  i32     get_menu_string(HMENU hMenu, ::u32 uDItem, string& str, ::u32 flags);
          //virtual  void        time_to_filetime(::matter* pobject, const ::earth::time& time, LPFILETIME pFileTime);
 
-
          virtual string get_version();
          virtual void show_wait_cursor(bool bShow);
 
