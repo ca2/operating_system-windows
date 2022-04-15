@@ -7003,6 +7003,13 @@ namespace draw2d_gdiplus
 
          }
 
+         if (ealphamode == m_ealphamode)
+         {
+
+            return;
+
+         }
+
          if(ealphamode == ::draw2d::e_alpha_mode_blend)
          {
 
