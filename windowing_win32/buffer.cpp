@@ -211,7 +211,7 @@ namespace windowing_win32
 
       auto size = sizeParam;
 
-      if (buffer.m_pixmap.size() == size)
+      if (size == buffer.m_pixmap.size())
       {
 
          return false;
@@ -222,72 +222,98 @@ namespace windowing_win32
 
       int iScan = -1;
 
-      auto sizeMonitor = ::size_i32(1920, 1080);
+      auto psession = m_pcontext->get_session();
 
-      if (buffer.m_pixmap.size() == sizeMonitor)
+      auto puser = psession->m_paurasession->user();
+
+      auto pwindowing = puser->windowing();
+
+      auto pdisplay = pwindowing->display();
+
+      auto sizeMonitor = pdisplay->get_monitor_union_size();
+
+      if (size.cx > sizeMonitor.cx)
       {
 
-         return false;
+         sizeMonitor.cx = size.cx;
 
       }
 
-      size = sizeMonitor;
-
-      HBITMAP hbitmap = create_windows_dib(size, &iScan, &pcolorref);
-
-      if (hbitmap == nullptr 
-         || pcolorref == nullptr
-         || iScan == 0)
+      if (size.cy > sizeMonitor.cy)
       {
 
-         if (hbitmap != nullptr)
+         sizeMonitor.cy = size.cy;
+
+      }
+
+      if (buffer.m_pixmap.size().cx < sizeMonitor.cx
+         || buffer.m_pixmap.size().cy < sizeMonitor.cy)
+      {
+
+
+         HBITMAP hbitmap = create_windows_dib(sizeMonitor, &iScan, &pcolorref);
+
+         if (hbitmap == nullptr
+            || pcolorref == nullptr
+            || iScan == 0)
          {
 
-            ::DeleteObject(hbitmap);
+            if (hbitmap != nullptr)
+            {
+
+               ::DeleteObject(hbitmap);
+
+            }
+
+            return false;
 
          }
 
-         return false;
+         buffer.m_pixmap.init(size, pcolorref, iScan);
+
+         if (buffer.m_hbitmap != nullptr)
+         {
+
+            ::DeleteObject(buffer.m_hbitmap);
+
+         }
+
+         buffer.m_hbitmap = hbitmap;
+
+         bool bCreatedCompatibleDC = false;
+
+         if (buffer.m_hdc == nullptr)
+         {
+
+            buffer.m_hdc = ::CreateCompatibleDC(nullptr);
+
+            bCreatedCompatibleDC = true;
+
+         }
+
+         if (buffer.m_hdc == nullptr)
+         {
+
+            destroy_buffer();
+
+            throw ::exception(error_null_pointer);
+
+         }
+
+         HBITMAP hbitmapPrevious = (HBITMAP) ::SelectObject(buffer.m_hdc, buffer.m_hbitmap);
+
+         if (bCreatedCompatibleDC)
+         {
+
+            buffer.m_hbitmapOld = hbitmapPrevious;
+
+         }
 
       }
-
-      buffer.m_pixmap.init(size, pcolorref, iScan);
-
-      if (buffer.m_hbitmap != nullptr)
+      else
       {
 
-         ::DeleteObject(buffer.m_hbitmap);
-
-      }
-
-      buffer.m_hbitmap = hbitmap;
-
-      bool bCreatedCompatibleDC = false;
-
-      if (buffer.m_hdc == nullptr)
-      {
-
-         buffer.m_hdc = ::CreateCompatibleDC(nullptr);
-
-         bCreatedCompatibleDC = true;
-
-      }
-
-      if (buffer.m_hdc == nullptr)
-      {
-
-         destroy_buffer();
-
-         throw ::exception(error_null_pointer);
-
-      }
-
-      HBITMAP hbitmapPrevious = (HBITMAP) ::SelectObject(buffer.m_hdc, buffer.m_hbitmap);;
-
-      if (bCreatedCompatibleDC)
-      {
-
-         buffer.m_hbitmapOld = hbitmapPrevious;
+         buffer.m_pixmap.m_size = size;
 
       }
 
@@ -301,6 +327,7 @@ namespace windowing_win32
       }
       else
       {
+
          try
          {
 
@@ -309,11 +336,12 @@ namespace windowing_win32
          }
          catch (...)
          {
+
             return false;
+
          }
         
          m_bDibIsHostingBuffer = false;
-
 
       }
 
@@ -332,16 +360,18 @@ namespace windowing_win32
    }
 
 
-   bool buffer::update_window()
+   bool buffer::update_screen()
    {
 
-      return double_buffer::update_window();
+      return double_buffer::update_screen();
 
    }
 
+
    ::point_i32 g_pointLastBottomRight;
 
-   bool buffer::update_window(::image * pimage)
+
+   bool buffer::update_screen(::image * pimage)
    {
 
       ::user::interaction * pinteraction = m_pimpl->m_puserinteraction;
