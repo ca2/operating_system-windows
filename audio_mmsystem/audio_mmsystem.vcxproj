@@ -245,6 +245,7 @@
       <LinkTimeCodeGeneration>
       </LinkTimeCodeGeneration>
       <FixedBaseAddress>false</FixedBaseAddress>
+      <Profile>false</Profile>
     </Link>
     <Manifest>
       <AdditionalManifestFiles>
@@ -553,6 +554,7 @@
       <LinkTimeCodeGeneration>
       </LinkTimeCodeGeneration>
       <FixedBaseAddress>false</FixedBaseAddress>
+      <Profile>false</Profile>
     </Link>
     <Manifest>
       <AdditionalManifestFiles>

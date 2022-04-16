@@ -289,6 +289,9 @@
       <ModuleDefinitionFile>
       </ModuleDefinitionFile>
       <ShowProgress>NotSet</ShowProgress>
+      <OptimizeReferences>false</OptimizeReferences>
+      <FixedBaseAddress>false</FixedBaseAddress>
+      <Profile>false</Profile>
     </Link>
     <Manifest>
       <AdditionalManifestFiles>
@@ -700,6 +703,9 @@
       </ModuleDefinitionFile>
       <MapFileName>
       </MapFileName>
+      <OptimizeReferences>false</OptimizeReferences>
+      <FixedBaseAddress>false</FixedBaseAddress>
+      <Profile>false</Profile>
     </Link>
     <Manifest>
       <AdditionalManifestFiles>
