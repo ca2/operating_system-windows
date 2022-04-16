@@ -261,6 +261,7 @@
       <LinkTimeCodeGeneration>
       </LinkTimeCodeGeneration>
       <FixedBaseAddress>false</FixedBaseAddress>
+      <Profile>false</Profile>
     </Link>
     <Manifest>
       <AdditionalManifestFiles>
@@ -630,6 +631,7 @@
       <LinkTimeCodeGeneration>
       </LinkTimeCodeGeneration>
       <FixedBaseAddress>false</FixedBaseAddress>
+      <Profile>false</Profile>
     </Link>
     <Manifest>
       <AdditionalManifestFiles>$(SolutionDir)../..core/include/manifest.dll.embed.manifest;%(AdditionalManifestFiles)</AdditionalManifestFiles>
