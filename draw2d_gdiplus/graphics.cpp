@@ -5568,14 +5568,14 @@ namespace draw2d_gdiplus
 
       Gdiplus::Status status = Gdiplus::Status::GenericError;
 
-      if (m_pfont.is_set() 
-         && m_ewritetextrendering != m_pfont->m_erendering
-         && m_pfont->m_erendering != ::write_text::e_rendering_undefined)
-      {
+      //if (m_pfont.is_set() 
+      //   && m_ewritetextrendering != m_pfont->m_erendering
+      //   && m_pfont->m_erendering != ::write_text::e_rendering_undefined)
+      //{
 
-         set_text_rendering_hint(m_pfont->m_erendering);
+      //   set_text_rendering_hint(m_pfont->m_erendering);
 
-      }
+      //}
 
       //return 
       
@@ -6564,17 +6564,17 @@ namespace draw2d_gdiplus
 
          // set_alpha_mode(::draw2d::e_alpha_mode_blend);
 
-      if (m_pfont->m_erendering != ::write_text::e_rendering_anti_alias)
-      {
+      //if (m_pfont->m_erendering != ::write_text::e_rendering_anti_alias)
+      //{
 
-         if (m_ewritetextrendering != m_pfont->m_erendering)
-         {
+      //   if (m_ewritetextrendering != m_pfont->m_erendering)
+      //   {
 
-            set_text_rendering_hint(m_pfont->m_erendering);
+      //      set_text_rendering_hint(m_pfont->m_erendering);
 
-         }
+      //   }
 
-      }
+      //}
 
 
       Gdiplus::StringFormat format(Gdiplus::StringFormat::GenericTypographic());
