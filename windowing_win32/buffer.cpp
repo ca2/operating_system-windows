@@ -246,8 +246,8 @@ namespace windowing_win32
 
       }
 
-      if (buffer.m_pixmap.size().cx < sizeMonitor.cx
-         || buffer.m_pixmap.size().cy < sizeMonitor.cy)
+      if (buffer.m_pixmap.m_sizeRaw.cx < sizeMonitor.cx
+         || buffer.m_pixmap.m_sizeRaw.cy < sizeMonitor.cy)
       {
 
 
@@ -269,7 +269,7 @@ namespace windowing_win32
 
          }
 
-         buffer.m_pixmap.init(size, pcolorref, iScan);
+         buffer.m_pixmap.init(sizeMonitor, pcolorref, iScan);
 
          if (buffer.m_hbitmap != nullptr)
          {
@@ -310,12 +310,8 @@ namespace windowing_win32
          }
 
       }
-      else
-      {
 
-         buffer.m_pixmap.m_size = size;
-
-      }
+      buffer.m_pixmap.m_size = size;
 
       auto pimageBuffer = get_buffer_image();
 
