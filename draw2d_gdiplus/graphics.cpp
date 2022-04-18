@@ -6564,11 +6564,8 @@ namespace draw2d_gdiplus
 
          // set_alpha_mode(::draw2d::e_alpha_mode_blend);
 
-<<<<<<< HEAD
       //if (m_pfont->m_erendering != ::write_text::e_rendering_anti_alias)
-=======
       //if (m_pfont->m_erendering != ::write_text::e_rendering_undefined)
->>>>>>> origin/basis
       //{
 
       //   if (m_ewritetextrendering != m_pfont->m_erendering)
