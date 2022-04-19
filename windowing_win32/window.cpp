@@ -3523,7 +3523,7 @@ namespace windowing_win32
 
    //   }
 
-   //   puserinteraction->post_routine(__routine([this]()
+   //   puserinteraction->post_procedure(__routine([this]()
    //      {
 
    //         HWND hwnd = ::SetFocus(get_hwnd());
@@ -6330,7 +6330,7 @@ namespace windowing_win32
 
       auto pprodevian = m_puserinteractionimpl->m_pprodevian;
 
-      puserinteraction->post_routine(pprodevian->m_routineWindowShow);
+      puserinteraction->post_procedure(pprodevian->m_procedureWindowShow);
 
    }
 
@@ -6356,7 +6356,7 @@ namespace windowing_win32
 
       }
 
-      puserinteraction->post_routine(pprodevian->m_routineUpdateScreen);
+      puserinteraction->post_procedure(pprodevian->m_procedureUpdateScreen);
 
    }
 
