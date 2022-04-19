@@ -7086,12 +7086,12 @@ namespace draw2d_gdiplus
 
          }
 
-         if (m_ewritetextrendering == etextrenderinghint)
-         {
+         //if (m_ewritetextrendering == etextrenderinghint)
+         //{
 
-            return;
+         //   return;
 
-         }
+         //}
 
          switch (etextrenderinghint)
          {
