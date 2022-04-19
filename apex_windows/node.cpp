@@ -930,21 +930,10 @@ namespace apex
 
       //}
 
-      void node::node_post(const ::routine& routine)
+      void node::node_post(const ::procedure & procedure)
       {
 
-         //auto estatus = 
-         
-         m_psystem->m_papexsystem->post_routine(routine);
-
-         //if (!estatus)
-         //{
-
-         //   return estatus;
-
-         //}
-
-         //return estatus;
+         m_psystem->m_papexsystem->post_routine(procedure);
 
       }
 
