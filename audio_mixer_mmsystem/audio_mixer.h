@@ -28,7 +28,7 @@ namespace multimedia
          void set_new_device(u32 uiMixerId);
 
 
-         bool OnCommand(wparam wparam, lparam lparam);
+         virtual void on_message(::message::message * pmessage);
          void OnMixerControlChange(HMIXER hMixer, u32 dwControlID);
          void OnMixerLineChange(HMIXER hMixer, u32 dwLineID);
 

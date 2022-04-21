@@ -1,13 +1,17 @@
 #pragma once
 
 
-CLASS_DECL_APEX_WINDOWS bool vfxFullPath(unichar * pszPathOut, const unichar * pszFileIn);
+//CLASS_DECL_APEX_WINDOWS bool windows_full_path(unichar * pszPathOut, const unichar * pszFileIn);
 
-CLASS_DECL_APEX_WINDOWS bool vfxFullPath(wstring & wstrFullPath, const wstring & wstrPath);
-CLASS_DECL_APEX_WINDOWS ::u32 vfxGetFileName(const unichar * pszPathName, unichar * pszTitle, ::u32 nMax);
+//CLASS_DECL_APEX_WINDOWS bool windows_full_path(wstring & wstrFullPath, const wstring & wstrPath);
+///CLASS_DECL_APEX_WINDOWS ::u32 vfxGetFileName(const unichar * pszPathName, unichar * pszTitle, ::u32 nMax);
 
-CLASS_DECL_APEX_WINDOWS void vfxGetModuleShortFileName(HINSTANCE hInst, string & strShortName);
-CLASS_DECL_APEX_WINDOWS void vfxGetModuleShortFileName(HINSTANCE hInst, string & strShortName);
+//CLASS_DECL_APEX_WINDOWS string windows_get_module_short_file_name(HINSTANCE hInst);
+
+//CLASS_DECL_APEX_WINDOWS string windows_get_module_path(HINSTANCE hInst);
+
+CLASS_DECL_APEX_WINDOWS string windows_get_short_file_name(const ::string & str);
+///CLASS_DECL_APEX_WINDOWS void vfxGetModuleShortFileName(HINSTANCE hInst, string & strShortName);
 
 
 namespace windows
@@ -43,12 +47,14 @@ namespace windows
 
 
 
-      virtual bool FullPath(string & str, const ::string & pszFileIn);
+      //virtual bool FullPath(string & str, const ::string & pszFileIn);
 
-      virtual bool FullPath(wstring & wstrFullPath, const wstring & wstrPath);
-      virtual ::u32 GetFileName(const ::string & pszPathName, string & str);
+      //virtual bool FullPath(wstring & wstrFullPath, const wstring & wstrPath);
+      //virtual ::u32 GetFileName(const ::string & pszPathName, string & str);
 
-      virtual void GetModuleShortFileName(HINSTANCE hInst, string & strShortName);
+      virtual string get_short_file_name(const ::string & str);
+      virtual string get_module_short_file_name(HINSTANCE hinstance);
+
       
       ::payload length(const ::file::path & path) override;
       ::payload length(const ::file::path & path, ::payload * pvarQuery) override;

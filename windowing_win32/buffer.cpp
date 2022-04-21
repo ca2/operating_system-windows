@@ -197,7 +197,7 @@ namespace windowing_win32
    }
 
 
-   bool buffer::update_buffer(const ::size_i32 & size, int iStrideParam)
+   bool buffer::update_buffer(const ::size_i32 & sizeParam, int iStrideParam)
    {
 
       if (get_hwnd() == nullptr || ::is_null(m_pimpl))
@@ -209,7 +209,9 @@ namespace windowing_win32
 
       os_buffer & buffer = m_osbuffera[m_iCurrentBuffer];
 
-      if (buffer.m_pixmap.size() == size)
+      auto size = sizeParam;
+
+      if (size == buffer.m_pixmap.size())
       {
 
          return false;
@@ -220,63 +222,96 @@ namespace windowing_win32
 
       int iScan = -1;
 
-      HBITMAP hbitmap = create_windows_dib(size, &iScan, &pcolorref);
+      auto psession = m_pcontext->get_session();
 
-      if (hbitmap == nullptr 
-         || pcolorref == nullptr
-         || iScan == 0)
+      auto puser = psession->m_paurasession->user();
+
+      auto pwindowing = puser->windowing();
+
+      auto pdisplay = pwindowing->display();
+
+      auto sizeMonitor = pdisplay->get_monitor_union_size();
+
+      if (size.cx > sizeMonitor.cx)
       {
 
-         if (hbitmap != nullptr)
+         sizeMonitor.cx = size.cx;
+
+      }
+
+      if (size.cy > sizeMonitor.cy)
+      {
+
+         sizeMonitor.cy = size.cy;
+
+      }
+
+      if (buffer.m_pixmap.m_sizeRaw.cx < sizeMonitor.cx
+         || buffer.m_pixmap.m_sizeRaw.cy < sizeMonitor.cy)
+      {
+
+
+         HBITMAP hbitmap = create_windows_dib(sizeMonitor, &iScan, &pcolorref);
+
+         if (hbitmap == nullptr
+            || pcolorref == nullptr
+            || iScan == 0)
          {
 
-            ::DeleteObject(hbitmap);
+            if (hbitmap != nullptr)
+            {
+
+               ::DeleteObject(hbitmap);
+
+            }
+
+            return false;
 
          }
 
-         return false;
+         buffer.m_pixmap.init(sizeMonitor, pcolorref, iScan);
+
+         if (buffer.m_hbitmap != nullptr)
+         {
+
+            ::DeleteObject(buffer.m_hbitmap);
+
+         }
+
+         buffer.m_hbitmap = hbitmap;
+
+         bool bCreatedCompatibleDC = false;
+
+         if (buffer.m_hdc == nullptr)
+         {
+
+            buffer.m_hdc = ::CreateCompatibleDC(nullptr);
+
+            bCreatedCompatibleDC = true;
+
+         }
+
+         if (buffer.m_hdc == nullptr)
+         {
+
+            destroy_buffer();
+
+            throw ::exception(error_null_pointer);
+
+         }
+
+         HBITMAP hbitmapPrevious = (HBITMAP) ::SelectObject(buffer.m_hdc, buffer.m_hbitmap);
+
+         if (bCreatedCompatibleDC)
+         {
+
+            buffer.m_hbitmapOld = hbitmapPrevious;
+
+         }
 
       }
 
-      buffer.m_pixmap.init(size, pcolorref, iScan);
-
-      if (buffer.m_hbitmap != nullptr)
-      {
-
-         ::DeleteObject(buffer.m_hbitmap);
-
-      }
-
-      buffer.m_hbitmap = hbitmap;
-
-      bool bCreatedCompatibleDC = false;
-
-      if (buffer.m_hdc == nullptr)
-      {
-
-         buffer.m_hdc = ::CreateCompatibleDC(nullptr);
-
-         bCreatedCompatibleDC = true;
-
-      }
-
-      if (buffer.m_hdc == nullptr)
-      {
-
-         destroy_buffer();
-
-         throw ::exception(error_null_pointer);
-
-      }
-
-      HBITMAP hbitmapPrevious = (HBITMAP) ::SelectObject(buffer.m_hdc, buffer.m_hbitmap);;
-
-      if (bCreatedCompatibleDC)
-      {
-
-         buffer.m_hbitmapOld = hbitmapPrevious;
-
-      }
+      buffer.m_pixmap.m_size = size;
 
       auto pimageBuffer = get_buffer_image();
 
@@ -288,6 +323,7 @@ namespace windowing_win32
       }
       else
       {
+
          try
          {
 
@@ -296,11 +332,12 @@ namespace windowing_win32
          }
          catch (...)
          {
+
             return false;
+
          }
         
          m_bDibIsHostingBuffer = false;
-
 
       }
 
@@ -319,16 +356,18 @@ namespace windowing_win32
    }
 
 
-   bool buffer::update_window()
+   bool buffer::update_screen()
    {
 
-      return double_buffer::update_window();
+      return double_buffer::update_screen();
 
    }
 
+
    ::point_i32 g_pointLastBottomRight;
 
-   bool buffer::update_window(::image * pimage)
+
+   bool buffer::update_screen(::image * pimage)
    {
 
       ::user::interaction * pinteraction = m_pimpl->m_puserinteraction;
@@ -340,7 +379,11 @@ namespace windowing_win32
 
       }
 
-      bool bLayered = (::GetWindowLong(get_hwnd(), GWL_EXSTYLE) & WS_EX_LAYERED) != 0;
+      HWND hwnd = get_hwnd();
+
+      auto uExStyle = ::GetWindowLong(hwnd, GWL_EXSTYLE);
+
+      bool bLayered = (uExStyle & WS_EX_LAYERED) != 0;
 
       bool bAsync = false;
 
@@ -649,7 +692,7 @@ namespace windowing_win32
 
                GetWindowRect(hwnd, (RECT *) &rectangleWindowCurrent);
 
-               if (rectangleDrawing.size() == pimage->m_rectangleTag.size())
+               //if (rectangleDrawing.size() == pimage->m_rectangleTag.size())
                {
 
 
@@ -681,22 +724,22 @@ namespace windowing_win32
                   //   | SWP_NOACTIVATE);
 
                }
-               else
-               {
-                  TRACE("Update discarded");
+               //else
+               //{
+               //   TRACE("Update discarded");
 
-               }
+               //}
 
                ::point_i32 pointBottomRight = point + size;
 
-               if (g_pointLastBottomRight != pointBottomRight)
-               {
+               //if (g_pointLastBottomRight != pointBottomRight)
+               //{
 
-                  TRACE("UpdateLayeredWindow Changed");
+               //   TRACE("UpdateLayeredWindow Changed");
 
-                  g_pointLastBottomRight = pointBottomRight;
+               //   g_pointLastBottomRight = pointBottomRight;
 
-               }
+               //}
 
                //TRACE("UpdateLayeredWindow Bottom Right (%d, %d)", pointBottomRight.x, pointBottomRight.y);
 
@@ -738,69 +781,69 @@ namespace windowing_win32
 
             HBITMAP b1 = (HBITMAP) ::GetCurrentObject(buffer.m_hdc, OBJ_BITMAP);
 
-            if (b1 != buffer.m_hbitmap)
-            {
+            //if (b1 != buffer.m_hbitmap)
+            //{
 
-               output_debug_string("damn0");
+            //   output_debug_string("damn0");
 
-            }
+            //}
 
-            BITMAP bmp1;
+            //BITMAP bmp1;
 
-            ::GetObject(b1, sizeof(BITMAP), &bmp1);
+            //::GetObject(b1, sizeof(BITMAP), &bmp1);
 
-            if (bmp1.bmHeight != size.cy)
-            {
+            //if (bmp1.bmHeight != size.cy)
+            //{
 
-               output_debug_string("damn1");
-            }
+            //   output_debug_string("damn1");
+            //}
 
-            {
+            //{
 
-               RECT rClipScreen;
+            //   RECT rClipScreen;
 
-               int iResult = ::GetClipBox(m_hdcScreen, &rClipScreen);
+            //   int iResult = ::GetClipBox(m_hdcScreen, &rClipScreen);
 
-               if (iResult == ERROR_REGION || iResult == NULLREGION)
-               {
+            //   if (iResult == ERROR_REGION || iResult == NULLREGION)
+            //   {
 
-               }
-               else
-               {
+            //   }
+            //   else
+            //   {
 
-                  if (::height(rClipScreen) != size.cy)
-                  {
+            //      if (::height(rClipScreen) != size.cy)
+            //      {
 
-                     output_debug_string("damn2");
+            //         output_debug_string("damn2");
 
-                  }
+            //      }
 
-               }
+            //   }
 
-            }
+            //}
 
-            {
+            //{
 
-               RECT rClip;
+            //   RECT rClip;
 
-               int iResult = ::GetClipBox(buffer.m_hdc, &rClip);
+            //   int iResult = ::GetClipBox(buffer.m_hdc, &rClip);
 
-               if (iResult == ERROR_REGION || iResult == NULLREGION)
-               {
-               }
-               else
-               {
+            //   if (iResult == ERROR_REGION || iResult == NULLREGION)
+            //   {
+            //   }
+            //   else
+            //   {
 
-                  if (::height(rClip) != size.cy)
-                  {
+            //      if (::height(rClip) != size.cy)
+            //      {
 
-                     output_debug_string("damn3");
+            //         output_debug_string("damn3");
 
-                  }
+            //      }
 
-               }
+            //   }
 
-            }
+            //}
 
             if (!bOk)
             {

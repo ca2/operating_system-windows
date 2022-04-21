@@ -58,10 +58,10 @@ namespace windowing_win32
 
       virtual bool update_buffer(const ::size_i32 & size, int iStride = -1) override;
       virtual void destroy_buffer() override;
-      virtual bool update_window() override;
+      virtual bool update_screen() override;
 
 
-      virtual bool update_window(::image * pimage) override;
+      virtual bool update_screen(::image * pimage) override;
 
 
       virtual ::draw2d::graphics * on_begin_draw() override;

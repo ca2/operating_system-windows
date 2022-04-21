@@ -928,21 +928,10 @@ namespace windowing_win32
    }
 
 
-   void windowing::windowing_post(const ::routine& routine)
+   void windowing::windowing_post(const ::procedure & procedure)
    {
 
-      //auto estatus = 
-      
-      m_psystem->m_papexsystem->post_routine(routine);
-
-      //if (!estatus)
-      //{
-
-      //   return estatus;
-
-      //}
-
-      //return estatus;
+      m_psystem->m_papexsystem->post_procedure(procedure);
 
    }
 

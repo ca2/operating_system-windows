@@ -80,6 +80,8 @@ LRESULT CALLBACK __window_procedure(HWND hwnd, UINT message, WPARAM wparam, LPAR
 
          pwindow->set_oswindow(__oswindow(hwnd));
 
+         pwindow->set_os_data(hwnd);
+
          auto pwindowing = (::windowing_win32::windowing *) pwindow->m_pwindowing->m_pWindowing;
 
          critical_section_lock synchronouslock(&pwindowing->m_criticalsection);

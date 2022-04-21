@@ -24,7 +24,7 @@ CLASS_DECL_ACME_WINDOWS HANDLE hfile_create(
 );
 
 
-CLASS_DECL_ACME_WINDOWS bool ensure_file_size_handle(HANDLE h, u64 iSize);
+CLASS_DECL_ACME bool ensure_file_size_handle(HANDLE h, u64 iSize);
 
 
 // namespace str

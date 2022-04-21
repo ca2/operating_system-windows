@@ -678,44 +678,6 @@ namespace apex
       }
 
       
-      //bool node::is_application_installed(const ::file::path& pathExe, string strAppId, string& strBuild, const ::string & pszPlatform, const ::string & pszConfiguration, const ::string & pszLocale, const ::string & pszSchema)
-      //{
-
-      //   ::file::path path;
-
-      //   path = application_installer_folder(pathExe, strAppId, pszPlatform, pszConfiguration, pszLocale, pszSchema) / "installed.txt";
-
-      //   strBuild = m_psystem->m_pacmefile->as_string(path);
-
-      //   return strBuild.has_char();
-
-      //}
-
-
-      //bool node::set_application_installed(const ::file::path& pathExe, string strAppId, const ::string & pszBuild, const ::string & pszPlatform, const ::string & pszConfiguration, const ::string & pszLocale, const ::string & pszSchema)
-      //{
-
-      //   ::file::path path;
-
-      //   path = application_installer_folder(pathExe, strAppId, pszPlatform, pszConfiguration, pszLocale, pszSchema) / "installed.txt";
-
-      //   return m_psystem->m_pacmefile->put_contents(path, pszBuild);
-
-      //}
-
-
-      //bool node::set_last_run_application_path(string strAppId)
-      //{
-
-      //   ::file::path path = m_psystem->m_pacmepath->app_module();
-
-      //   ::file::path pathFile = get_last_run_application_path_file(strAppId);
-
-      //   return m_psystem->m_pacmefile->put_contents(pathFile, path);
-
-      //}
-
-
       string node::get_version()
       {
 
@@ -911,78 +873,11 @@ namespace apex
 
       }
 
-      //CLASS_DECL_ACME::file::path user_appdata_local();
 
-      //void node::time_to_filetime(::matter* pobject, const ::earth::time& time, LPFILETIME pFileTime)
-      //{
-
-      //   SYSTEMTIME sysTime;
-
-      //   sysTime.wYear = (::u16)time.GetYear();
-      //   sysTime.wMonth = (::u16)time.GetMonth();
-      //   sysTime.wDay = (::u16)time.GetDay();
-      //   sysTime.wHour = (::u16)time.GetHour();
-      //   sysTime.wMinute = (::u16)time.GetMinute();
-      //   sysTime.wSecond = (::u16)time.GetSecond();
-      //   sysTime.wMilliseconds = 0;
-
-      //   // convert system time to local file time
-      //   FILETIME localTime;
-
-      //   DWORD dwLastError = ::GetLastError();
-
-      //   if (!SystemTimeToFileTime((LPSYSTEMTIME)&sysTime, &localTime))
-      //      ::file::throw_os_error(dwLastError);
-
-      //   // convert local file time to UTC file time
-      //   if (!LocalFileTimeToFileTime(&localTime, pFileTime))
-      //      ::file::throw_os_error(dwLastError);
-
-      //}
-
-
-
-      //::file::path node::user_appdata_local()
-      //{
-
-      //   return shell_get_special_folder_path(CSIDL_LOCAL_APPDATA);
-
-      //}
-
-
-
-      //::file::path get_known_folder(REFKNOWNFOLDERID kfid)
-      //{
-
-      //   ::file::path str;
-
-      //   ::cotaskptr < PWSTR > pwszPath;
-
-      //   HANDLE hToken = nullptr;
-
-      //   ::OpenProcessToken(::GetCurrentProcess(), TOKEN_QUERY | TOKEN_IMPERSONATE | TOKEN_DUPLICATE, &hToken);
-
-      //   HRESULT hr = SHGetKnownFolderPath(kfid, 0, hToken, &pwszPath);
-
-      //   return pwszPath;
-
-      //}
-
-      void node::node_post(const ::routine& routine)
+      void node::node_post(const ::procedure & procedure)
       {
 
-         //auto estatus = 
-         
-         m_psystem->m_papexsystem->post_routine(routine);
-
-         //if (!estatus)
-         //{
-
-         //   return estatus;
-
-         //}
-
-         //return estatus;
+         m_psystem->m_papexsystem->post_procedure(procedure);
 
       }
 

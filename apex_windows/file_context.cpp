@@ -65,85 +65,95 @@ namespace windows
    }
 
 
-   bool file_context::FullPath(string & str, const ::string & pszFileIn)
+   //bool file_context::FullPath(string & str, const ::string & pszFileIn)
+   //{
 
+
+   //   if (::str::begins_ci(pszFileIn, "http://"))
+   //   {
+
+   //      str = pszFileIn;
+
+   //      return true;
+
+   //   }
+   //   else if (::str::begins_ci(pszFileIn, "https://"))
+   //   {
+
+   //      str = pszFileIn;
+
+   //      return true;
+
+   //   }
+
+   //   wstring wstrFileIn;
+
+   //   wstrFileIn = ::str::international::utf8_to_unicode(pszFileIn);
+
+   //   wstring wstrFileOut;
+   //   bool b = windows_full_path(wstrFileOut.get_string_buffer(MAX_PATH * 8), wstrFileIn) != false;
+   //   if (b)
+   //   {
+   //      ::str::international::unicode_to_utf8(str, wstrFileOut);
+   //   }
+   //   return b;
+   //}
+
+   //bool file_context::FullPath(wstring & wstrFullPath, const wstring & wstrPath)
+   //{
+
+   //   /*      if(::apex::file_context::FullPath(wstrFullPath, wstrPath))
+   //   return true;*/
+
+   //   if (::str::begins_ci(wstrPath, L"http://"))
+   //   {
+   //      wstrFullPath = wstrPath;
+   //      return true;
+   //   }
+   //   else if (::str::begins_ci(wstrPath, L"https://"))
+   //   {
+   //      wstrFullPath = wstrPath;
+   //      return true;
+   //   }
+
+   //   return windows_full_path(wstrFullPath, wstrPath) != false;
+
+   //}
+
+
+   //::u32 file_context::GetFileName(const ::string & pszPathName, string & str)
+
+   //{
+   //   i32 nMax = MAX_PATH * 8;
+   //   wstring wstrPathName;
+   //   wstrPathName = ::str::international::utf8_to_unicode(pszPathName);
+
+   //   wstring wstrTitle;
+   //   ::u32 user = vfxGetFileName(wstrPathName, wstrTitle.get_string_buffer(nMax), nMax);
+   //   str = ::str::international::unicode_to_utf8(wstrTitle);
+   //   return user;
+   //}
+
+
+   string file_context::get_short_file_name(const ::string & str)
    {
 
-      //if(::apex::file_context::FullPath(str, pszFileIn))
+      return windows_get_short_file_name(str);
 
-      // return true;
-
-      if (::str::begins_ci(pszFileIn, "http://"))
-
-      {
-
-         str = pszFileIn;
-
-
-         return true;
-
-      }
-      else if (::str::begins_ci(pszFileIn, "https://"))
-
-      {
-
-         str = pszFileIn;
-
-
-         return true;
-
-      }
-      wstring wstrFileIn;
-      wstrFileIn = ::str::international::utf8_to_unicode(pszFileIn);
-
-      wstring wstrFileOut;
-      bool b = vfxFullPath(wstrFileOut.get_string_buffer(MAX_PATH * 8), wstrFileIn) != false;
-      if (b)
-      {
-         ::str::international::unicode_to_utf8(str, wstrFileOut);
-      }
-      return b;
    }
 
-   bool file_context::FullPath(wstring & wstrFullPath, const wstring & wstrPath)
+
+   string file_context::get_module_short_file_name(HINSTANCE hinstance)
    {
 
-      /*      if(::apex::file_context::FullPath(wstrFullPath, wstrPath))
-      return true;*/
+      auto path = get_module_path(hinstance);
 
-      if (::str::begins_ci(wstrPath, L"http://"))
-      {
-         wstrFullPath = wstrPath;
-         return true;
-      }
-      else if (::str::begins_ci(wstrPath, L"https://"))
-      {
-         wstrFullPath = wstrPath;
-         return true;
-      }
-
-      return vfxFullPath(wstrFullPath, wstrPath) != false;
+      auto strShortFileName = get_short_file_name(path);
+      
+      return strShortFileName;
 
    }
 
-
-   ::u32 file_context::GetFileName(const ::string & pszPathName, string & str)
-
-   {
-      i32 nMax = MAX_PATH * 8;
-      wstring wstrPathName;
-      wstrPathName = ::str::international::utf8_to_unicode(pszPathName);
-
-      wstring wstrTitle;
-      ::u32 user = vfxGetFileName(wstrPathName, wstrTitle.get_string_buffer(nMax), nMax);
-      str = ::str::international::unicode_to_utf8(wstrTitle);
-      return user;
-   }
-
-   void file_context::GetModuleShortFileName(HINSTANCE hInst, string & strShortName)
-   {
-      vfxGetModuleShortFileName(hInst, strShortName);
-   }
 
    ::payload file_context::length(const ::file::path & path)
    {
@@ -202,7 +212,6 @@ namespace windows
 
    void file_context::move(const ::file::path & pszNew, const ::file::path & psz)
    {
-
 
 #ifdef WINDOWS_DESKTOP
 
@@ -477,29 +486,19 @@ namespace windows
    void file_context::get_status(const ::file::path & path, ::file::file_status & rStatus)
    {
 
-      // attempt to fully qualify path first
-      wstring wstrFullName;
-      wstring wstrFileName;
-      wstrFileName = ::str::international::utf8_to_unicode(path);
-      if (!vfxFullPath(wstrFullName, wstrFileName))
-      {
-         
-         rStatus.m_strFullName.Empty();
-         
-         throw ::exception(error_failed);
-
-      }
-
-      ::str::international::unicode_to_utf8(rStatus.m_strFullName, wstrFullName);
+      wstring wstrFullName(path);
 
       WIN32_FIND_DATAW findFileData;
+
       HANDLE hFind = FindFirstFileW((LPWSTR)(const widechar *)wstrFullName, &findFileData);
+
       if (hFind == INVALID_HANDLE_VALUE)
       {
 
          throw ::exception(error_failed);
 
       }
+
       VERIFY(FindClose(hFind));
 
       // strip attribute of NORMAL bit, our API doesn't have a "normal" bit.
@@ -508,8 +507,6 @@ namespace windows
       // get just the low ::u32 of the file size_i32
       //ASSERT(findFileData.nFileSizeHigh == 0);
       rStatus.m_filesize = (::filesize)make64_from32(findFileData.nFileSizeLow, findFileData.nFileSizeHigh);
-
-
 
       //auto pnode = psystem->node();
 

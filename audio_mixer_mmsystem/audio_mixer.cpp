@@ -348,19 +348,17 @@ namespace multimedia
       }
 
 
-      bool audio_mixer::OnCommand(wparam wparam, lparam lparam)
+      void audio_mixer::on_message(::message::message * pmessage)
       {
 
-         __pointer(::multimedia::audio_mixer_mmsystem::device) device = m_paudiomixerdevice;
+         __pointer(::multimedia::audio_mixer_mmsystem::device) pdevice = m_paudiomixerdevice;
 
-         if (device != nullptr && device->OnCommand(wparam, lparam))
+         if (::is_set(pdevice))
          {
 
-            return true;
+            pdevice->on_message(pmessage);
 
          }
-
-         return false;
 
       }
 

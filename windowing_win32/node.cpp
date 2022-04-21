@@ -33,26 +33,12 @@ namespace windowing_win32
       
       ::keyboard_hook::install(pmatterListener);
 
-      //if (estatus.succeeded())
-      {
+      fork([]()
+         {
 
-         fork(__routine([]()
-            {
+            ::keyboard_hook::run();
 
-               ::keyboard_hook::run();
-
-            }));
-
-      }
-
-      //if (!estatus)
-      //{
-
-      //   return estatus;
-
-      //}
-
-      //return estatus;
+         });
 
    }
 
@@ -60,18 +46,7 @@ namespace windowing_win32
    void node::uninstall_keyboard_hook(::matter * pmatterListener)
    {
 
-      //auto estatus = 
-      
       ::keyboard_hook::uninstall(pmatterListener);
-
-      //if (!estatus)
-      //{
-
-      //   return estatus;
-
-      //}
-
-      //return estatus;
 
    }
 
@@ -79,30 +54,14 @@ namespace windowing_win32
    void node::install_mouse_hook(::matter * pmatterListener)
    {
 
-      //auto estatus =
-      
       ::mouse_hook::install(pmatterListener);
 
-      //if (estatus.succeeded())
-      {
+      fork([]()
+         {
 
-         fork(__routine([]()
-            {
+            ::mouse_hook::run();
 
-               ::mouse_hook::run();
-
-            }));
-
-      }
-
-      //if (!estatus)
-      //{
-
-      //   return estatus;
-
-      //}
-
-      //return estatus;
+         });
 
    }
 
@@ -110,18 +69,7 @@ namespace windowing_win32
    void node::uninstall_mouse_hook(::matter * pmatterListener)
    {
 
-      //auto estatus = 
-      
       ::mouse_hook::uninstall(pmatterListener);
-
-      //if (!estatus)
-      //{
-
-      //   return estatus;
-
-      //}
-
-      //return estatus;
 
    }
 
@@ -135,8 +83,6 @@ namespace windowing_win32
          m_emessageWindowsTaskbarCreatedMessage = (enum_message) RegisterWindowMessageW(L"TaskbarCreated");
 
       }
-
-      //return ::success;
 
    }
 

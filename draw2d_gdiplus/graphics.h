@@ -628,7 +628,7 @@ namespace draw2d_gdiplus
 
       void prefer_mapped_image_on_mix() override;
 
-      void TextOutAlphaBlend(double x, double y, const block & block) override;
+      bool TextOutAlphaBlend(double x, double y, const block & block) override;
 
       //void BitBltAlphaBlend(double x, double y, i32 nWidth, i32 nHeight, ::draw2d::graphics * pgraphicsSrc, i32 xSrc, i32 ySrc, u32 dwRop) override;
 

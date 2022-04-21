@@ -87,7 +87,7 @@ namespace draw2d_gdiplus
       if (pmemory->has_data())
       {
 
-         pfont->m_pcollection->AddMemoryFont(pmemory->get_data(), pmemory->get_size());
+         pfont->m_pcollection->AddMemoryFont(pmemory->get_data(), (INT)pmemory->get_size());
 
          auto & fontCollection = *pfont->m_pcollection;
 

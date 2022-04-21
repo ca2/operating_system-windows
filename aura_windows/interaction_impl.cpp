@@ -918,10 +918,28 @@ namespace windows
 
          auto puserinteraction = m_puserinteraction;
 
-         if (puserinteraction )
+         if (puserinteraction)
          {
-            puserinteraction->_001Restore();
-         //{
+
+            if (puserinteraction->layout().m_statea[::user::e_layout_normal].m_bProdevian)
+            {
+
+               puserinteraction->set_prodevian();
+
+            }
+
+            if (puserinteraction->layout().m_statea[::user::e_layout_normal].display() == e_display_zoomed)
+            {
+
+               puserinteraction->_001Maximize();
+
+            }
+            else
+            {
+
+               puserinteraction->_001Restore();
+
+            }
 
             pmessage->m_bRet = true;
 
@@ -1661,34 +1679,34 @@ namespace windows
    }
 
 
-   void interaction_impl::sketch_prepare_window_minimize(::e_activation eactivation)
+   void interaction_impl::design_window_minimize(::e_activation eactivation)
    {
 
-      primitive_impl::sketch_prepare_window_minimize(eactivation);
+      primitive_impl::design_window_minimize(eactivation);
 
    }
 
 
-   void interaction_impl::sketch_prepare_window_maximize()
+   void interaction_impl::design_window_maximize()
    {
 
-      primitive_impl::sketch_prepare_window_maximize();
+      primitive_impl::design_window_maximize();
 
    }
 
 
-   void interaction_impl::sketch_prepare_window_full_screen(const ::rectangle_i32 & rectangleHint)
+   void interaction_impl::design_window_full_screen(const ::rectangle_i32 & rectangleHint)
    {
 
-      primitive_impl::sketch_prepare_window_full_screen(rectangleHint);
+      primitive_impl::design_window_full_screen(rectangleHint);
 
    }
 
 
-   void interaction_impl::sketch_prepare_window_restore(edisplay edisplay)
+   void interaction_impl::design_window_restore(edisplay edisplay)
    {
 
-      primitive_impl::sketch_prepare_window_restore(edisplay);
+      primitive_impl::design_window_restore(edisplay);
 
    }
 

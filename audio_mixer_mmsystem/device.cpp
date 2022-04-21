@@ -435,26 +435,19 @@ namespace multimedia
       }
 
 
-      bool device::OnCommand(wparam wparam, lparam lparam)
+      void device::on_message(::message::message * pmessage)
       {
 
-         ::atom uiID = LOWORD(wparam);
+         ::atom uiID = LOWORD(pmessage->m_wparam);
 
          auto pcontrol = m_mapDlgItemIDToControl[uiID];
 
-         if (pcontrol)
+         if (::is_set(pcontrol))
          {
 
-            if (pcontrol->OnCommand(wparam, lparam))
-            {
-
-               return true;
-
-            }
+            pcontrol->on_message(pmessage);
 
          }
-
-         return false;
 
       }
 

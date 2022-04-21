@@ -835,4 +835,40 @@ ret1:
 }
 
 
+bool CLASS_DECL_ACME_WINDOWS windows_get_in_proc_server(const ::string & pszCLSID, string & str)
+{
+
+   HKEY hKey = nullptr;
+   bool b = false;
+   if (RegOpenKeyW(HKEY_CLASSES_ROOT, L"CLSID", &hKey) == ERROR_SUCCESS)
+   {
+      HKEY hKeyCLSID = nullptr;
+      if (RegOpenKeyW(hKey, wstring(pszCLSID), &hKeyCLSID) == ERROR_SUCCESS)
+
+      {
+         HKEY hKeyInProc = nullptr;
+         if (RegOpenKeyW(hKeyCLSID, L"InProcServer32", &hKeyInProc) ==
+            ERROR_SUCCESS)
+         {
+            wstring wstr;
+            LPWSTR psz = wstr.get_string_buffer(_MAX_PATH);
+
+            DWORD dwSize = _MAX_PATH * sizeof(WCHAR);
+            DWORD dwType;
+            ::i32 lRes = ::RegQueryValueExW(hKeyInProc, L"",
+               nullptr, &dwType, (byte *)psz, &dwSize);
+
+            str.release_string_buffer();
+            str = wstr;
+            b = (lRes == ERROR_SUCCESS);
+            RegCloseKey(hKeyInProc);
+         }
+         RegCloseKey(hKeyCLSID);
+      }
+      RegCloseKey(hKey);
+   }
+   return b;
+}
+
+
 

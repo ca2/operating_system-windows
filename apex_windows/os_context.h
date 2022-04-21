@@ -58,7 +58,7 @@ namespace windows
       bool open_in_ie(const ::string & pcsz);
 
 
-      void file_open(::file::path path, string strParams = "", string strFolder = "") override;
+      void file_open(const ::file::path & path, const string & strParams = "", const ::file::path & pathFolder = "") override;
 
       void browse_file_open(property_set & set) override;
       void browse_file_save(property_set & set) override;
