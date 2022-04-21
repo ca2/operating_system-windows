@@ -7515,6 +7515,8 @@ namespace draw2d_gdiplus
 
             pimage1->get_graphics()->set_alpha_mode(::draw2d::e_alpha_mode_blend);
 
+            pimage1->get_graphics()->set_text_rendering_hint(::write_text::e_rendering_anti_alias);
+
             pimage1->get_graphics()->text_out(0, 0, block);
 
             point_i32 pointDst;
@@ -7532,6 +7534,8 @@ namespace draw2d_gdiplus
             pimage1->blend2(pointDst, m_pimageAlphaBlend, pointSrc, rectangleIntersect.size(), 255);
 
             image_drawing_options imagedrawingoptions;
+
+            set_alpha_mode(::draw2d::e_alpha_mode_blend);
 
             _draw_raw(rectangleText, pimage1, imagedrawingoptions, ::point_f64());
 
