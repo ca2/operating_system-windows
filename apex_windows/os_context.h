@@ -112,11 +112,11 @@ namespace windows
 
       virtual void get_default_browser(string & strId, ::file::path & path, string & strParam) override;
 
-      void register_user_auto_start(const string & strId, const string & strCommand, const string & strArguments, bool bRegister) override;
+      void register_user_auto_start(const string & strAppId, const string & strCommand, const string & strArguments, bool bRegister) override;
 
-      bool is_user_auto_start(string strId) override;
+      bool is_user_auto_start(const ::string & strAppId) override;
 
-      ::file::path get_app_path(const ::string & strApp) override;
+      ::file::path get_app_path(const ::string & strAppId) override;
 
       void set_default_browser() override;
 

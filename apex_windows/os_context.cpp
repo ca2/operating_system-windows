@@ -2509,7 +2509,7 @@ retry:
    }
 
 
-   bool os_context::is_user_auto_start(string strId)
+   bool os_context::is_user_auto_start(const string & strAppId)
    {
 
       registry::key keyKar;
@@ -2519,7 +2519,7 @@ retry:
 
          string strValue;
 
-         if (keyKar._get(strId, strValue))
+         if (keyKar._get(strAppId, strValue))
          {
 
             if (strValue.has_char())
