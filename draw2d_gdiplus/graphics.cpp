@@ -1635,7 +1635,7 @@ namespace draw2d_gdiplus
       if (m_bUseImageMipMapsOrResizedImages)
       {
 
-         __scoped_restore(m_bUseImageMipMapsOrResizedImages);
+         ___scoped_restore(m_bUseImageMipMapsOrResizedImages);
 
          m_bUseImageMipMapsOrResizedImages = false;
 
@@ -1677,7 +1677,7 @@ namespace draw2d_gdiplus
 
                      image_drawing imagedrawing3(imagedrawingoptions3, imagesource3);
 
-                     __scoped_restore(pimage->g()->m_bUseImageMipMapsOrResizedImages);
+                     ___scoped_restore(pimage->g()->m_bUseImageMipMapsOrResizedImages);
 
                      pimage->g()->m_bUseImageMipMapsOrResizedImages = false;
 
