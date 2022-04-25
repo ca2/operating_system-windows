@@ -239,8 +239,6 @@ namespace windowing_win32
 
       m_iThread = 0;
 
-      defer_co_initialize_ex(false);
-
 
 
 
@@ -1373,9 +1371,15 @@ namespace windowing_win32
                if (SUCCEEDED(hrFolderDefinition))
                {
 
-                  getfileimage.m_iImage = _reserve_image(getfileimage.m_imagekey);
+                  int & iImage = m_imagemap[getfileimage.m_imagekey];
 
-                  if(getfileimage.m_iImage >= 0)
+                  if (iImage >= 0)
+                  {
+
+                     getfileimage.m_iImage = iImage;
+
+                  }
+                  else
                   {
 
                      string strResource = definition.pszIcon;
@@ -1393,7 +1397,7 @@ namespace windowing_win32
 
                         set_image_resource(stra[0], getfileimage);
 
-                        //return getfileimage.m_iImage;
+                        iImage = getfileimage.m_iImage;
 
                         return true;
 
@@ -1421,17 +1425,40 @@ namespace windowing_win32
          if (SHGetFileInfoW(wstrPath, 0, &shfi, sizeof(shfi), SHGFI_ICONLOCATION))
          {
 
-            string strPath = shfi.szDisplayName;
+            string strIconLocation = shfi.szDisplayName;
 
-            if (strPath.has_char())
+            if (strIconLocation.has_char())
             {
 
-               getfileimage.m_imagekey.m_iIcon = shfi.iIcon;
+               //getfileimage.m_imagekey.m_strPath = strPath;
 
-               set_image_resource(strPath, getfileimage);
+               //if (!strPath.ends_ci(".ico"))
+               //{
 
-               //return getfileimage.m_iImage;
-               return true;
+               //}
+
+               //if (reserve_image(getfileimage))
+               //{
+
+                  if (strIconLocation.ends_ci(".ico"))
+                  {
+
+                     set_image_ico(strIconLocation, getfileimage);
+
+                  }
+                  else
+                  {
+
+                     getfileimage.m_imagekey.m_iIcon = shfi.iIcon;
+
+                     set_image_resource(strIconLocation, getfileimage);
+
+                  }
+
+                  //return getfileimage.m_iImage;
+                  return true;
+
+               //}
 
             }
 
@@ -1641,6 +1668,16 @@ namespace windowing_win32
    }
 
 
+   void shell::init_task()
+   {
+
+      defer_co_initialize_ex(false);
+
+      ::user::shell::init_task();
+
+   }
+
+
    void shell::run()
    {
 
@@ -1843,11 +1880,9 @@ namespace windowing_win32
 
       ASSERT(strIconLocation.ends_ci(".ico"));
 
-      image_key imagekeyIco;
+      getfileimage.m_imagekey.set_path(strIconLocation, false);
 
-      imagekeyIco.set_path(strIconLocation, false);
-
-      imagekeyIco.m_iIcon = 0;
+      getfileimage.m_imagekey.m_iIcon = 0;
 
       if (reserve_image(getfileimage))
       {

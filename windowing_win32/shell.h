@@ -56,6 +56,7 @@ namespace windowing_win32
 
       void initialize(::object * pobject) override;
 
+      void init_task() override;
 
       void run() override;
 
