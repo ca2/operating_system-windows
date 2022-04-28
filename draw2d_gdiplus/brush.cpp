@@ -172,9 +172,23 @@ namespace draw2d_gdiplus
 
                Gdiplus::PointF pointCenter((Gdiplus::REAL)rectangleRoundRect.center_x(), (Gdiplus::REAL)rectangleRoundRect.center_y());
 
+               auto innerRectangle = rectangleRoundRect;
+
+               innerRectangle.deflate(m_dRadius, m_dRadius);
+
+               double dCenterToOuterVertice = rectangleRoundRect.top_left().distance(rectangleRoundRect.center());
+               double dCenterToInnerVertice = innerRectangle.top_left().distance(innerRectangle.center());
+
+               //auto d = (Gdiplus::REAL)(dCenterToInnerVertice / dCenterToOuterVertice);
+
+               auto d = (Gdiplus::REAL)(rectangleRoundRect.height() - m_dRadius * 2.0) / (Gdiplus::REAL)rectangleRoundRect.height();
+
                pgradientbrush->SetCenterPoint(pointCenter);
                pgradientbrush->SetCenterColor(c1);
                pgradientbrush->SetSurroundColors(colora, &c);
+               pgradientbrush->SetInterpolationColors(&c1, &d, 1);
+               //pgradientbrush->SetInterpolationColors(&c1, &d, 1);
+
 
                m_pbrush = pgradientbrush;
 
