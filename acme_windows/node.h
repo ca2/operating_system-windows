@@ -7,14 +7,10 @@
 #pragma once
 
 
-namespace acme
+namespace acme_windows
 {
 
    
-   namespace windows
-   {
-
-
       class CLASS_DECL_ACME_WINDOWS node :
          virtual public ::acme::windows_common::node
       {
@@ -159,8 +155,6 @@ namespace acme
 
       };
 
-
-   } // namespace windows
 
 
 } // namespace acme
