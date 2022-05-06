@@ -13,19 +13,16 @@ namespace windowing_win32
    public:
 
 
-      //__creatable_from_base(window, ::windowing::window);
-
-
-      //HICON                                     m_hiconSmall;
-      //HICON                                     m_hiconBig;
-      bool                                      m_bTrackMouseLeave : 1;
-      WNDPROC                                   m_pfnSuper;
-      //UINT                                    m_uiMessage;
-      //WPARAM                                  m_wparam;
-      //LPARAM                                  m_lparam;
-      __pointer(::windows::interaction_impl)    m_pimpl2;
-      ::duration                                  m_durationLastMouseMove;
-      ::point_i32                               m_pointMouseMove;
+      //HICON                                         m_hiconSmall;
+      //HICON                                         m_hiconBig;
+      bool                                            m_bTrackMouseLeave : 1;
+      WNDPROC                                         m_pfnSuper;
+      //UINT                                          m_uiMessage;
+      //WPARAM                                        m_wparam;
+      //LPARAM                                        m_lparam;
+      __pointer(::aura_windows::interaction_impl)     m_pimpl2;
+      ::duration                                      m_durationLastMouseMove;
+      ::point_i32                                     m_pointMouseMove;
 
 
       window();

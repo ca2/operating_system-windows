@@ -2,14 +2,11 @@
 #include "apex/operating_system.h"
 #include "acme/id.h"
 #include <Shlobj.h>
-//#include "dir_system.h"
-//#include "dir_context.h"
-//#include "acme/node/windows/file_find.h"
 #include "acme/filesystem/filesystem/acme_directory.h"
 #include "acme_windows/acme_directory.h"
 
 
-namespace windows
+namespace apex_windows
 {
 
 
@@ -1211,7 +1208,7 @@ namespace windows
    bool dir_context::has_subdir(const ::file::path & pszDir)
    {
 
-      file_find file_find;
+      ::acme_windows::file_find file_find;
 
       bool bWorking;
 
@@ -1370,7 +1367,7 @@ namespace windows
    ::file::path dir_context::onedrive()
    {
 
-      registry::key key;
+      ::acme_windows::registry::key key;
 
       if (key._open(HKEY_CURRENT_USER, "SOFTWARE\\Microsoft\\Onedrive", false))
       {
@@ -1397,13 +1394,6 @@ namespace windows
    }
 
 
-
-
-} // namespace windows
-
-
-
-
-
+} // namespace apex_windows
 
 

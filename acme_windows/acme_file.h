@@ -2,17 +2,14 @@
 #pragma once
 
 
-namespace windows
+namespace acme_windows
 {
 
 
    class CLASS_DECL_ACME_WINDOWS acme_file :
-      virtual public ::windows_common::acme_file
+      virtual public ::acme_windows_common::acme_file
    {
    public:
-
-
-      //__creatable_from_base(acme_file, ::acme_file);
 
 
       acme_file();
@@ -32,7 +29,7 @@ namespace windows
    };
 
 
-} // namespace windows
+} // namespace acme_windows
 
 
 

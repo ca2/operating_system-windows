@@ -9,12 +9,8 @@
 
 
 
-namespace windows
+namespace aura_windows
 {
-
-
-   //CLASS_DECL_AURA lresult CALLBACK __send_message_hook(i32, wparam, lparam);
-   //CLASS_DECL_AURA lresult CALLBACK __cbt_filter_hook(i32, wparam, lparam);
 
 
    class CLASS_DECL_AURA_WINDOWS interaction_impl :
@@ -755,7 +751,7 @@ namespace windows
    };
 
 
-} // namespace windows
+} // namespace aura_windows
 
 
 CLASS_DECL_AURA::user::interaction * __user_interaction(::windowing::window * pwindow);

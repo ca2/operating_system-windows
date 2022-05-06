@@ -1,11 +1,7 @@
 #include "framework.h"
-//#include "apex/operating_system.h"
-//#include "process.h"
-//#include "acme_windows/pipe.h"
-//#include "acme/node/windows/uac_tools.h"
 
 
-namespace windows
+namespace apex_windows
 {
 
 
@@ -58,13 +54,13 @@ namespace windows
       if(bPiped)
       {
 
-         auto ppipeOut        = m_pipe.m_ppipeOut.cast < pipe >();
+         auto ppipeOut        = m_pipe.m_ppipeOut.cast < ::acme_windows::pipe >();
 
          m_si.hStdError       = ppipeOut->m_hWrite;
 
          m_si.hStdOutput      = ppipeOut->m_hWrite;
 
-         pipe * ppipeIn       = m_pipe.m_ppipeIn.cast < pipe >();
+         ::acme_windows::pipe * ppipeIn       = m_pipe.m_ppipeIn.cast < ::acme_windows::pipe >();
 
          m_si.hStdInput       = ppipeIn->m_hRead;
 
@@ -314,17 +310,7 @@ namespace windows
    }
 
 
-
-
-} // namespace windows
-
-
-
-
-
-
-
-
+} // namespace apex_windows
 
 
 

@@ -3,7 +3,7 @@
 //#include "acme/node/windows/_windows.h"
 
 
-namespace windows
+namespace acme_windows
 {
 
 
@@ -470,7 +470,8 @@ namespace windows
 
    }
 
-} // namespace windows
+
+} // namespace acme_windows
 
 
 

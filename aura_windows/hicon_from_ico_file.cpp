@@ -4,54 +4,47 @@
 #include <gdiplus.h>
 
 
-namespace aura
+namespace aura_windows
 {
 
 
-   namespace windows
+   // If you can use GDI + , you can wrap the raw ICO data
+   // in an IStream using CreateStreamOnHGlobal() or SHCreateMemStream(),
+   // and then pass that stream to the Bitmap class constructor 
+   // or Bitmap::FromStream() method, and then finally call the 
+   // Bitmap::ToHICON() method.
+   // – Remy Lebeau,  Feb 11 '17 at 3:34
+   void* node::HICON_from_ico_file(const ::block& block)
    {
 
+      comptr < IStream > pistream = SHCreateMemStream((const BYTE*)block.get_data(), (UINT)block.get_size());
 
-      // If you can use GDI + , you can wrap the raw ICO data
-      // in an IStream using CreateStreamOnHGlobal() or SHCreateMemStream(),
-      // and then pass that stream to the Bitmap class constructor 
-      // or Bitmap::FromStream() method, and then finally call the 
-      // Bitmap::ToHICON() method.
-      // – Remy Lebeau,  Feb 11 '17 at 3:34
-      void* node::HICON_from_ico_file(const ::block& block)
+      if (!pistream)
       {
 
-         comptr < IStream > pistream = SHCreateMemStream((const BYTE*)block.get_data(), (UINT)block.get_size());
-
-         if (!pistream)
-         {
-
-            return nullptr;
-
-         }
-
-         Gdiplus::Bitmap bitmap(pistream.m_p);
-
-         HICON hicon = nullptr;
-
-         auto status = bitmap.GetHICON(&hicon);
-
-         if (status != Gdiplus::Ok)
-         {
-
-            return nullptr;
-
-         }
-
-         return hicon;
+         return nullptr;
 
       }
 
+      Gdiplus::Bitmap bitmap(pistream.m_p);
 
-   } // namespace windows
+      HICON hicon = nullptr;
+
+      auto status = bitmap.GetHICON(&hicon);
+
+      if (status != Gdiplus::Ok)
+      {
+
+         return nullptr;
+
+      }
+
+      return hicon;
+
+   }
 
 
-} // namespace aura
+} // namespace aura_windows
 
 
 

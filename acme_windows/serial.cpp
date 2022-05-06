@@ -21,7 +21,7 @@ CLASS_DECL_ACME bool windows_get_alternate_path(wstring& wstr);
 //using serial::io_exception;
 //
 
-namespace windows
+namespace acme_windows
 {
 
 
@@ -1037,6 +1037,7 @@ namespace windows
    }
 
 
+} // namespace acme_windows
 
-} // namespace windows
+
 

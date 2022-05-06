@@ -48,7 +48,7 @@ _Inout_ u32*                                  pcbPackedCredentials
 CLASS_DECL_APEX_WINDOWS HBITMAP get_icon_hbitmap(HICON hICON);
 
 
-namespace windows
+namespace apex_windows
 {
 
 
@@ -338,7 +338,7 @@ namespace windows
       try
       {
 
-         registry::key key1(HKEY_CURRENT_USER, "Software\\Microsoft\\Windows\\CurrentVersion\\Internet Settings\\Connections", false);
+         ::acme_windows::registry::key key1(HKEY_CURRENT_USER, "Software\\Microsoft\\Windows\\CurrentVersion\\Internet Settings\\Connections", false);
 
          memory mem;
 
@@ -374,7 +374,7 @@ namespace windows
       try
       {
 
-         registry::key key(HKEY_CURRENT_USER, "Software\\Microsoft\\Windows\\CurrentVersion\\Internet Settings", false);
+         ::acme_windows::registry::key key(HKEY_CURRENT_USER, "Software\\Microsoft\\Windows\\CurrentVersion\\Internet Settings", false);
 
          key.get("AutoConfigURL", strUrl);
 
@@ -397,7 +397,7 @@ namespace windows
       try
       {
 
-         registry::key keyKar(HKEY_LOCAL_MACHINE, "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
+         ::acme_windows::registry::key keyKar(HKEY_LOCAL_MACHINE, "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
 
          
          if (bSet)
@@ -432,7 +432,7 @@ namespace windows
       try
       {
 
-      registry::key keyKar(HKEY_LOCAL_MACHINE, "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\RunOnce", true);
+         ::acme_windows::registry::key keyKar(HKEY_LOCAL_MACHINE, "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\RunOnce", true);
 
       if (bSet)
       {
@@ -466,7 +466,7 @@ namespace windows
       try
       {
 
-            registry::key keyKar(HKEY_CURRENT_USER, "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
+         ::acme_windows::registry::key keyKar(HKEY_CURRENT_USER, "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
 
  
             if (bSet)
@@ -506,7 +506,7 @@ namespace windows
       try
       {
 
-      registry::key keyKar(HKEY_CURRENT_USER, "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\RunOnce", true);
+         ::acme_windows::registry::key keyKar(HKEY_CURRENT_USER, "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\RunOnce", true);
 
       if (bSet)
       {
@@ -539,7 +539,7 @@ namespace windows
       //try
       //{
 
-         registry::key key;
+      ::acme_windows::registry::key key;
 
          key.open(HKEY_LOCAL_MACHINE, "SOFTWARE\\MozillaPlugins", true);
 
@@ -582,7 +582,7 @@ namespace windows
          string strOpenWithKey;
          strOpenWithKey = strExt + "\\OpenWithList";
 
-         registry::key key(HKEY_CLASSES_ROOT, strOpenWithKey, false);
+         ::acme_windows::registry::key key(HKEY_CLASSES_ROOT, strOpenWithKey, false);
 
          key.ls_key(straKey);
 
@@ -624,7 +624,7 @@ namespace windows
 
       string strExtensionNamingClass(pszExtensionNamingClass);
 
-      registry::key keyLink3(HKEY_CLASSES_ROOT, strExtensionNamingClass, true);
+      ::acme_windows::registry::key keyLink3(HKEY_CLASSES_ROOT, strExtensionNamingClass, true);
 
       keyLink3.set("DefaultIcon", pszIconPath);
 
@@ -656,20 +656,20 @@ namespace windows
 
          string strExtensionNamingClass(pszExtensionNamingClass);
 
-         registry::key key(HKEY_CLASSES_ROOT, strExt, true);
+         ::acme_windows::registry::key key(HKEY_CLASSES_ROOT, strExt, true);
 
          key._set(nullptr, strExtensionNamingClass);
 
-         registry::key keyLink3(HKEY_CLASSES_ROOT, strExtensionNamingClass + "\\shell", true);
+         ::acme_windows::registry::key keyLink3(HKEY_CLASSES_ROOT, strExtensionNamingClass + "\\shell", true);
 
          keyLink3._set("", "open");
 
 
-         registry::key keyLink2(keyLink3, "open", true);
+         ::acme_windows::registry::key keyLink2(keyLink3, "open", true);
 
          keyLink2._set("", "");
 
-         registry::key keyLink1(keyLink2, "command", true);
+         ::acme_windows::registry::key keyLink1(keyLink2, "command", true);
 
          string strCommand(pszCommand);
 
@@ -712,10 +712,10 @@ namespace windows
       strExt = ".";
       strExt += pszExtension;
 
-      registry::key key(HKEY_CLASSES_ROOT, strExt, false);
+      ::acme_windows::registry::key key(HKEY_CLASSES_ROOT, strExt, false);
       key.get(nullptr, strExtensionNamingClass);
 
-      registry::key keyLink(HKEY_CLASSES_ROOT, strExtensionNamingClass + "\\shell\\open\\command", false);
+      ::acme_windows::registry::key keyLink(HKEY_CLASSES_ROOT, strExtensionNamingClass + "\\shell\\open\\command", false);
 
       string strFormat;
       keyLink.get(nullptr, strFormat);
@@ -780,7 +780,7 @@ namespace windows
       if (strMappedProfile.has_char() && strBrowser == "chrome")
       {
 
-         ::windows::registry::key key;
+         ::acme_windows::registry::key key;
 
          if (key._open(HKEY_CLASSES_ROOT, "ChromeHTML\\shell\\open\\command"))
          {
@@ -819,7 +819,7 @@ namespace windows
       try
       {
 
-         registry reg;
+         ::acme_windows::registry reg;
 
          string str;
 
@@ -827,7 +827,7 @@ namespace windows
 
          string strCommand;
 
-         registry::key key(HKEY_CLASSES_ROOT, ".html", false);
+         ::acme_windows::registry::key key(HKEY_CLASSES_ROOT, ".html", false);
          
          if(key._open(HKEY_CLASSES_ROOT, ".html\\shell\\opennew\\command", false))
          {
@@ -1761,7 +1761,7 @@ retry:
 
       }
 
-      //if ((u32)status.m_attribute != wAttr && !(wAttr & ::windows::file::readOnly))
+      //if ((u32)status.m_attribute != wAttr && !(wAttr & ::acme_windows::file::readOnly))
       {
 
          if (!::SetFileAttributesW(wstr, (u32)status.m_attribute))
@@ -2157,7 +2157,7 @@ retry:
       //try
       //{
 
-         registry::key key;
+      ::acme_windows::registry::key key;
 
          key.open(HKEY_CURRENT_USER, "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\FileExts\\.html\\UserChoice", false);
 
@@ -2309,7 +2309,7 @@ retry:
    void os_context::set_system_dark_mode1(bool bSet)
    {
 
-      ::windows::registry::key key(HKEY_CURRENT_USER, "Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize", true);
+      ::acme_windows::registry::key key(HKEY_CURRENT_USER, "Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize", true);
 
       ::u32 dwSystemUseLightTheme;
       if (bSet)
@@ -2332,7 +2332,7 @@ retry:
    void os_context::set_app_dark_mode1(bool bSet)
    {
 
-      ::windows::registry::key key(HKEY_CURRENT_USER, "Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize", true);
+      ::acme_windows::registry::key key(HKEY_CURRENT_USER, "Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize", true);
 
       ::u32 dwAppsUseLightTheme;
       if (bSet)
@@ -2512,7 +2512,7 @@ retry:
    bool os_context::is_user_auto_start(const string & strAppId)
    {
 
-      registry::key keyKar;
+      ::acme_windows::registry::key keyKar;
 
       if (keyKar._open(HKEY_CURRENT_USER, "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", false))
       {
@@ -2543,7 +2543,7 @@ retry:
 
       string str(strApp);
 
-      registry::key key;
+      ::acme_windows::registry::key key;
 
       string strDefault;
 
@@ -2599,7 +2599,7 @@ repeat:
       
       {
 
-         ::windows::registry::key regkey(HKEY_LOCAL_MACHINE, "SOFTWARE\\RegisteredApplications", true);
+         ::acme_windows::registry::key regkey(HKEY_LOCAL_MACHINE, "SOFTWARE\\RegisteredApplications", true);
 
          string strValue;
 
@@ -2609,7 +2609,7 @@ repeat:
 
       {
 
-         ::windows::registry::key regkey(HKEY_LOCAL_MACHINE, "Software\\Clients\\StartMen::u32ernet\\" + strTargetProgId, true);
+         ::acme_windows::registry::key regkey(HKEY_LOCAL_MACHINE, "Software\\Clients\\StartMen::u32ernet\\" + strTargetProgId, true);
 
          string strValue;
 
@@ -2619,7 +2619,7 @@ repeat:
 
       {
 
-         ::windows::registry::key regkey(HKEY_LOCAL_MACHINE, "Software\\Clients\\StartMen::u32ernet\\" + strTargetProgId + "\\Capabilities", true);
+         ::acme_windows::registry::key regkey(HKEY_LOCAL_MACHINE, "Software\\Clients\\StartMen::u32ernet\\" + strTargetProgId + "\\Capabilities", true);
 
          string strValue;
 
@@ -2631,7 +2631,7 @@ repeat:
 
       {
 
-         ::windows::registry::key regkey(HKEY_LOCAL_MACHINE, "Software\\Clients\\StartMen::u32ernet\\" + strTargetProgId + "\\Capabilities\\FileAssociations", true);
+         ::acme_windows::registry::key regkey(HKEY_LOCAL_MACHINE, "Software\\Clients\\StartMen::u32ernet\\" + strTargetProgId + "\\Capabilities\\FileAssociations", true);
 
          string strValue;
 
@@ -2648,7 +2648,7 @@ repeat:
 
       {
 
-         ::windows::registry::key regkey(HKEY_LOCAL_MACHINE, "Software\\Clients\\StartMen::u32ernet\\" + strTargetProgId + "\\Capabilities\\Startmenu", true);
+         ::acme_windows::registry::key regkey(HKEY_LOCAL_MACHINE, "Software\\Clients\\StartMen::u32ernet\\" + strTargetProgId + "\\Capabilities\\Startmenu", true);
 
          string strValue;
 
@@ -2658,7 +2658,7 @@ repeat:
 
       {
 
-         ::windows::registry::key regkey(HKEY_LOCAL_MACHINE, "Software\\Clients\\StartMen::u32ernet\\" + strTargetProgId + "\\Capabilities\\URLAssociations", true);
+         ::acme_windows::registry::key regkey(HKEY_LOCAL_MACHINE, "Software\\Clients\\StartMen::u32ernet\\" + strTargetProgId + "\\Capabilities\\URLAssociations", true);
 
          string strValue;
 
@@ -2680,7 +2680,7 @@ repeat:
 
       {
 
-         ::windows::registry::key regkey(HKEY_LOCAL_MACHINE, "Software\\Clients\\StartMen::u32ernet\\" + strTargetProgId + "\\DefaultIcon", true);
+         ::acme_windows::registry::key regkey(HKEY_LOCAL_MACHINE, "Software\\Clients\\StartMen::u32ernet\\" + strTargetProgId + "\\DefaultIcon", true);
 
          string strValue;
 
@@ -2691,7 +2691,7 @@ repeat:
 
       {
 
-         ::windows::registry::key regkey(HKEY_LOCAL_MACHINE, "Software\\Clients\\StartMen::u32ernet\\" + strTargetProgId + "\\InstallInfo", true);
+         ::acme_windows::registry::key regkey(HKEY_LOCAL_MACHINE, "Software\\Clients\\StartMen::u32ernet\\" + strTargetProgId + "\\InstallInfo", true);
 
          string strValue;
 
@@ -2705,7 +2705,7 @@ repeat:
 
       {
 
-         ::windows::registry::key regkey(HKEY_LOCAL_MACHINE, "Software\\Clients\\StartMen::u32ernet\\" + strTargetProgId + "\\shell\\open\\command", true);
+         ::acme_windows::registry::key regkey(HKEY_LOCAL_MACHINE, "Software\\Clients\\StartMen::u32ernet\\" + strTargetProgId + "\\shell\\open\\command", true);
 
          string strValue;
 
@@ -2716,7 +2716,7 @@ repeat:
 
       {
 
-         registry::key regkey(HKEY_CLASSES_ROOT, strTargetProgId, true);
+         ::acme_windows::registry::key regkey(HKEY_CLASSES_ROOT, strTargetProgId, true);
 
          regkey.set("", strTargetProgId + " HTML Document");
          regkey.set("AppUserModelId", get_app()->find_string("AppUserModelId"));
@@ -2724,7 +2724,7 @@ repeat:
       }
       {
 
-         registry::key regkey(HKEY_CLASSES_ROOT, strTargetProgId + "\\papplication", true);
+         ::acme_windows::registry::key regkey(HKEY_CLASSES_ROOT, strTargetProgId + "\\papplication", true);
 
          regkey.set("ApplicationCompany", get_app()->find_string("ApplicationCompany"));
          regkey.set("ApplicationDescription", get_app()->find_string("ApplicationDescription"));
@@ -2735,7 +2735,7 @@ repeat:
       }
       {
 
-         registry::key regkey(HKEY_CLASSES_ROOT, strTargetProgId + "\\DefaultIcon", true);
+         ::acme_windows::registry::key regkey(HKEY_CLASSES_ROOT, strTargetProgId + "\\DefaultIcon", true);
 
          regkey.set("", get_app()->find_string("DefaultIcon"));
 
@@ -2744,7 +2744,7 @@ repeat:
       file_association_set_shell_open_command(strTargetProgId, strTargetProgId, strModule, "\"%1\"");
       {
 
-         ::windows::registry::key regkey(HKEY_CURRENT_USER, "SOFTWARE\\Microsoft\\Windows\\shell\\Associations\\UrlAssociations\\http\\UserChoice", true);
+         ::acme_windows::registry::key regkey(HKEY_CURRENT_USER, "SOFTWARE\\Microsoft\\Windows\\shell\\Associations\\UrlAssociations\\http\\UserChoice", true);
 
          string strProgId;
 
@@ -2763,7 +2763,7 @@ repeat:
 
       {
 
-         ::windows::registry::key key(HKEY_CURRENT_USER, "SOFTWARE\\Microsoft\\Windows\\shell\\Associations\\UrlAssociations\\https\\UserChoice", true);
+         ::acme_windows::registry::key key(HKEY_CURRENT_USER, "SOFTWARE\\Microsoft\\Windows\\shell\\Associations\\UrlAssociations\\https\\UserChoice", true);
 
          string strProgId;
 
@@ -2784,7 +2784,7 @@ repeat:
 
       {
 
-         registry::key key(HKEY_CURRENT_USER, "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Explorer\\FileExts\\.html\\UserChoice", true);
+         ::acme_windows::registry::key key(HKEY_CURRENT_USER, "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Explorer\\FileExts\\.html\\UserChoice", true);
 
          string strProgId;
 
@@ -2803,7 +2803,7 @@ repeat:
 
       {
 
-         registry::key key(HKEY_CURRENT_USER, "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\FileExts\\.htm\\UserChoice", true);
+         ::acme_windows::registry::key key(HKEY_CURRENT_USER, "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\FileExts\\.htm\\UserChoice", true);
 
          string strProgId;
 
@@ -2822,7 +2822,7 @@ repeat:
 
       {
 
-         registry::key key(HKEY_CLASSES_ROOT, ".html\\OpenWithProgids", true);
+         ::acme_windows::registry::key key(HKEY_CLASSES_ROOT, ".html\\OpenWithProgids", true);
 
          key._set(strTargetProgId, "");
 
@@ -2830,7 +2830,7 @@ repeat:
 
       {
 
-         registry::key key(HKEY_CLASSES_ROOT, ".htm\\OpenWithProgids", true);
+         ::acme_windows::registry::key key(HKEY_CLASSES_ROOT, ".htm\\OpenWithProgids", true);
 
          key._set(strTargetProgId, "");
 
@@ -2872,7 +2872,7 @@ repeat:
 
       {
 
-         ::windows::registry::key regkey(HKEY_LOCAL_MACHINE, pathApplication, true);
+         ::acme_windows::registry::key regkey(HKEY_LOCAL_MACHINE, pathApplication, true);
 
          string strValue;
 
@@ -2891,7 +2891,7 @@ repeat:
       
       {
 
-         ::windows::registry::key regkey(HKEY_LOCAL_MACHINE, pathApplication / "DefaultIcon", true);
+         ::acme_windows::registry::key regkey(HKEY_LOCAL_MACHINE, pathApplication / "DefaultIcon", true);
 
          string strValue;
 
@@ -2911,7 +2911,7 @@ repeat:
 
       {
 
-         ::windows::registry::key regkey(HKEY_LOCAL_MACHINE, pathApplication / "InstallInfo", true);
+         ::acme_windows::registry::key regkey(HKEY_LOCAL_MACHINE, pathApplication / "InstallInfo", true);
 
          string strValue;
 
@@ -2950,7 +2950,7 @@ repeat:
 
       {
 
-         ::windows::registry::key regkey(HKEY_LOCAL_MACHINE, pathApplication / "shell/open/command", true);
+         ::acme_windows::registry::key regkey(HKEY_LOCAL_MACHINE, pathApplication / "shell/open/command", true);
 
          string strValue;
 
@@ -2972,7 +2972,7 @@ repeat:
 
       {
 
-         ::windows::registry::key regkey(HKEY_LOCAL_MACHINE, "SOFTWARE\\RegisteredApplications", true);
+         ::acme_windows::registry::key regkey(HKEY_LOCAL_MACHINE, "SOFTWARE\\RegisteredApplications", true);
 
          string strValue;
 
@@ -2989,7 +2989,7 @@ repeat:
 
       {
 
-         ::windows::registry::key regkey(HKEY_LOCAL_MACHINE, pathApplicationCapabilities, true);
+         ::acme_windows::registry::key regkey(HKEY_LOCAL_MACHINE, pathApplicationCapabilities, true);
 
          string strValue;
 
@@ -3024,7 +3024,7 @@ repeat:
 
       {
 
-         ::windows::registry::key regkey(HKEY_LOCAL_MACHINE, pathApplicationCapabilities / "FileAssociations", true);
+         ::acme_windows::registry::key regkey(HKEY_LOCAL_MACHINE, pathApplicationCapabilities / "FileAssociations", true);
 
          string strValue;
 
@@ -3042,7 +3042,7 @@ repeat:
 
       //{
 
-      //   ::windows::registry::key regkey(HKEY_LOCAL_MACHINE, "Software\\Clients\\StartMen::u32ernet\\" + strTargetProgId + "\\Capabilities\\Startmenu", true);
+      //   ::acme_windows::registry::key regkey(HKEY_LOCAL_MACHINE, "Software\\Clients\\StartMen::u32ernet\\" + strTargetProgId + "\\Capabilities\\Startmenu", true);
 
       //   string strValue;
 
@@ -3052,7 +3052,7 @@ repeat:
 
       {
 
-         ::windows::registry::key regkey(HKEY_LOCAL_MACHINE, pathApplicationCapabilities / "FileAssociations", true);
+         ::acme_windows::registry::key regkey(HKEY_LOCAL_MACHINE, pathApplicationCapabilities / "FileAssociations", true);
 
          for (index i = 0; i < straMimeType.get_count(); i++)
          {
@@ -3067,7 +3067,7 @@ repeat:
 
       {
 
-         ::windows::registry::key regkey(HKEY_LOCAL_MACHINE, pathApplicationCapabilities / "MimeAssociations", true);
+         ::acme_windows::registry::key regkey(HKEY_LOCAL_MACHINE, pathApplicationCapabilities / "MimeAssociations", true);
 
          for (index i = 0; i < straMimeType.get_count(); i++)
          {
@@ -3084,7 +3084,7 @@ repeat:
 
       //{
 
-      //   registry::key regkey(HKEY_CLASSES_ROOT, strTargetProgId, true);
+      //   ::acme_windows::registry::key regkey(HKEY_CLASSES_ROOT, strTargetProgId, true);
 
       //   regkey.set("", strTargetProgId + " HTML Document");
       //   regkey.set("AppUserModelId", get_app()->prop("AppUserModelId"));
@@ -3092,7 +3092,7 @@ repeat:
       //}
       {
 
-         registry::key regkey(HKEY_CLASSES_ROOT, strTargetProgId + "\\papplication", true);
+         ::acme_windows::registry::key regkey(HKEY_CLASSES_ROOT, strTargetProgId + "\\papplication", true);
 
          regkey._set("ApplicationCompany", get_app()->find_string("ApplicationCompany"));
 
@@ -3117,7 +3117,7 @@ repeat:
       }
       {
 
-         registry::key regkey(HKEY_CLASSES_ROOT, strTargetProgId + "\\DefaultIcon", true);
+         ::acme_windows::registry::key regkey(HKEY_CLASSES_ROOT, strTargetProgId + "\\DefaultIcon", true);
 
          regkey._set("", get_app()->find_string("DefaultIcon"));
 
@@ -3144,7 +3144,7 @@ repeat:
 
          //{
 
-            registry::key regkey(HKEY_CLASSES_ROOT, "." + strExtension + "\\OpenWithProgids", true);
+            ::acme_windows::registry::key regkey(HKEY_CLASSES_ROOT, "." + strExtension + "\\OpenWithProgids", true);
 
             regkey._set(strTargetProgId, "");;
 
@@ -3154,7 +3154,7 @@ repeat:
 
       //{
 
-      //   ::windows::registry::key regkey(HKEY_CURRENT_USER, "SOFTWARE\\Microsoft\\Windows\\shell\\Associations\\UrlAssociations\\http\\UserChoice", true);
+      //   ::acme_windows::registry::key regkey(HKEY_CURRENT_USER, "SOFTWARE\\Microsoft\\Windows\\shell\\Associations\\UrlAssociations\\http\\UserChoice", true);
 
       //   string strProgId;
 
@@ -3172,7 +3172,7 @@ repeat:
 
       //{
 
-      //   ::windows::registry::key regkey(HKEY_CURRENT_USER, "SOFTWARE\\Microsoft\\Windows\\shell\\Associations\\UrlAssociations\\https\\UserChoice", true);
+      //   ::acme_windows::registry::key regkey(HKEY_CURRENT_USER, "SOFTWARE\\Microsoft\\Windows\\shell\\Associations\\UrlAssociations\\https\\UserChoice", true);
 
       //   string strProgId;
 
@@ -3190,7 +3190,7 @@ repeat:
 
       //{
 
-      //   registry::key regkey(HKEY_CURRENT_USER, "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Explorer\\FileExts\\.html\\UserChoice", true);
+      //   ::acme_windows::registry::key regkey(HKEY_CURRENT_USER, "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Explorer\\FileExts\\.html\\UserChoice", true);
       //   string strProgId;
 
       //   regkey.QueryValue("ProgId", strProgId);
@@ -3206,7 +3206,7 @@ repeat:
       //}
       //{
 
-      //   registry::key regkey(HKEY_CURRENT_USER, "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\FileExts\\.htm\\UserChoice", true);
+      //   ::acme_windows::registry::key regkey(HKEY_CURRENT_USER, "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\FileExts\\.htm\\UserChoice", true);
       //   string strProgId;
 
       //   regkey.QueryValue("ProgId", strProgId);
@@ -3222,7 +3222,7 @@ repeat:
       //}
       //{
 
-      //   registry::key regkey(HKEY_CLASSES_ROOT, ".htm\\OpenWithProgids", true);
+      //   ::acme_windows::registry::key regkey(HKEY_CLASSES_ROOT, ".htm\\OpenWithProgids", true);
 
       //   if(!regkey.set(strTargetProgId, ""))
       //   {
@@ -3957,29 +3957,7 @@ repeat:
    }
 
 
-
-
-} // namespace windows
-
-
-// CreateLink - Uses the Shell's IShellLink and IPersistFile interfaces
-//              to create and store a shortcut to the specified object.
-//
-// Returns the result of calling the member functions of the interfaces.
-//
-// Parameters:
-// pszPathObj  - Address of a buffer that contains the path of the object,
-
-//                including the file name.
-// pszPathLink - Address of a buffer that contains the path where the
-
-//                Shell link is to be stored, including the file name.
-// pszDesc     - Address of a buffer that contains a description of the
-
-//                Shell link, stored in the Comment field of the link
-//                properties.
-
-
+} // namespace apex_windows
 
 
 

@@ -2,9 +2,9 @@
 #pragma once
 
 
-
-namespace windows
+namespace apex_windows
 {
+
 
    class CLASS_DECL_APEX_WINDOWS launcher :
       virtual public ::launcher
@@ -18,4 +18,7 @@ namespace windows
 
 
 
-}//namespace windows
+}//namespace apex_windows
+
+
+

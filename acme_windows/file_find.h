@@ -1,7 +1,7 @@
 #pragma once
 
 
-namespace windows
+namespace acme_windows
 {
 
 
@@ -26,7 +26,7 @@ namespace windows
 
 
       file_find();
-      virtual ~file_find();
+      ~file_find() override;
 
 
       void assert_ok() const override;
@@ -150,10 +150,7 @@ namespace windows
    }
 
 
-
-} // namespace windows
-
-
+} // namespace acme_windows
 
 
 

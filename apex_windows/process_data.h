@@ -11,8 +11,6 @@
 
 #pragma once
 
-#ifdef WINDOWS
-
 template<typename T> class process_data
 {
 public:
@@ -82,5 +80,3 @@ private:
    LPVOID m_lpData;
 };
 
-
-#endif

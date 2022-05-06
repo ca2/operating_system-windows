@@ -6,7 +6,7 @@
 #include <stdio.h>
 
 
-namespace windows
+namespace acme_windows
 {
 
 
@@ -175,7 +175,7 @@ namespace windows
    }
 
 
-} // namespace windows
+} // namespace acme_windows
 
 
 

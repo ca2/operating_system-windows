@@ -8,7 +8,7 @@
 #include <Gdiplus.h>
 
 
-namespace windows
+namespace acme_windows
 {
 
 

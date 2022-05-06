@@ -7,12 +7,9 @@ namespace windowing_win32
 
 
    class CLASS_DECL_WINDOWING_WIN32 node :
-      virtual public ::aura::windows::node
+      virtual public ::aura_windows::node
    {
    public:
-
-
-      //__creatable_from_base(node, ::acme::node);
 
 
       enum_message                                       m_emessageWindowsTaskbarCreatedMessage;

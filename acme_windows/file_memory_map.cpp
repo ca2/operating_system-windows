@@ -1,9 +1,8 @@
 #include "framework.h"
-//#include "acme/operating_system.h"
 #include "file_memory_map.h"
 
 
-namespace windows
+namespace acme_windows
 {
 
 
@@ -188,7 +187,7 @@ namespace windows
    }
 
 
-} // namespace windows
+} // namespace acme_windows
 
 
 

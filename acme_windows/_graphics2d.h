@@ -10,6 +10,7 @@
 #include <D2d1.h>
 #endif
 
+
 rectangle_type(const Gdiplus::Rect & t) noexcept { __copy(this, &t); }
 rectangle_type(const Gdiplus::RectF & t) noexcept { __copy(this, &t); }
 rectangle_type(const Gdiplus::Rect * p) noexcept { __copy(this, p); }
@@ -79,3 +80,6 @@ template < primitive_point POINT >
 void __copy(POINT & p, const Gdiplus::PointF & t) noexcept { ::copy_point(&p, &t); }
 template < primitive_point POINT >
 void __copy(POINT * p1, const Gdiplus::PointF * p2) noexcept { ::copy_point(p1, p2); }
+
+
+

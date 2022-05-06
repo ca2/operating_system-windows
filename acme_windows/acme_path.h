@@ -2,12 +2,12 @@
 #pragma once
 
 
-namespace windows
+namespace acme_windows
 {
 
 
    class CLASS_DECL_ACME_WINDOWS acme_path :
-      virtual public ::windows_common::acme_path
+      virtual public ::acme_windows_common::acme_path
    {
    public:
 
@@ -30,7 +30,7 @@ namespace windows
    };
 
 
-} // namespace windows
+} // namespace acme_windows
 
 
 

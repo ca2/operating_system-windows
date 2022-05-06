@@ -1,9 +1,7 @@
 #pragma once
 
 
-//CLASS_DECL_APEX_WINDOWS HRESULT os_create_link(::file::path pathObj, ::file::path pathLink, string strDesc, ::file::path pathIcon = nullptr, int iIcon = 0);
-
-namespace windows
+namespace apex_windows
 {
 
 
@@ -132,7 +130,7 @@ namespace windows
    };
 
 
-} // namespace windows
+} // namespace apex_windows
 
 
 

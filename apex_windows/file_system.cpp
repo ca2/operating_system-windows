@@ -3,7 +3,7 @@
 #include "file_system.h"
 
 
-namespace windows
+namespace apex_windows
 {
 
 
@@ -39,21 +39,8 @@ namespace windows
 
    }
 
-   
-   //void file_system::update_module_path()
-   //{
 
-   //   m_pathModule = ::get_module_path(nullptr);
-
-   //   //m_pathCa2Module = ::get_module_path(::GetModuleHandleA("apex.dll"));
-
-   //   return true;
-
-   //}
-
-
-
-} // namespace windows
+} // namespace apex_windows
 
 
 
