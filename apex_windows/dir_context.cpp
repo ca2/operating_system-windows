@@ -728,26 +728,26 @@ namespace apex_windows
    //}
 
 
-   bool dir_context::is_impl(const ::file::path & pcszPath)
-   {
+   //bool dir_context::is_impl(const ::file::path & pcszPath)
+   //{
 
-      if (::dir_context::is_impl(pcszPath))
+   //   if (::dir_context::is_impl(pcszPath))
 
-      {
+   //   {
 
-         return true;
+   //      return true;
 
-      }
+   //   }
 
-      ::u32 dwAttrib;
+   //   ::u32 dwAttrib;
 
-      dwAttrib = windows_get_file_attributes(pcszPath);
+   //   dwAttrib = windows_get_file_attributes(pcszPath);
 
-      bool bIsDir = (dwAttrib != INVALID_FILE_ATTRIBUTES) && (dwAttrib & FILE_ATTRIBUTE_DIRECTORY);
+   //   bool bIsDir = (dwAttrib != INVALID_FILE_ATTRIBUTES) && (dwAttrib & FILE_ATTRIBUTE_DIRECTORY);
 
-      return bIsDir;
+   //   return bIsDir;
 
-   }
+   //}
 
 
    bool dir_context::name_is(const ::file::path & str)
