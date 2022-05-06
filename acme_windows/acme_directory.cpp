@@ -2,7 +2,7 @@
 #include "framework.h"
 
 
-namespace windows
+namespace acme_windows
 {
 
    
@@ -2175,7 +2175,7 @@ pacmedir->create CreateDirectoryW last error(%d)=%s", dwError, pszError);
    }
 
 
-} // namespace windows
+} // namespace acme_windows
 
 
 

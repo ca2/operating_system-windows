@@ -1,7 +1,6 @@
 #pragma once
 
 
-
 // Format a message using format string_base < TYPE_CHAR > 'pszFormat'
 template < typename TYPE_CHAR >
 void __cdecl string_base < TYPE_CHAR >::FormatMessage(const CHAR_TYPE * pszFormat, ...)
@@ -97,4 +96,6 @@ BSTR string_base < TYPE_CHAR >::SetSysString(BSTR * pbstr) const
 }
 
 #endif
+
+
 

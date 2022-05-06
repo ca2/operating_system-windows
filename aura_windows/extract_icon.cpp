@@ -4,10 +4,10 @@
 //http://borland.public.cppbuilder.nativeapi.narkive.com/7OPcjHO5/loading-x48-icons-with-extracticonex
 
 
-BOOL ExtractResourceIcon_EnumNamesFunc(HMODULE hModule, const widechar * pType, LPWSTR lpName, LONG_PTR lParam);
+BOOL ExtractResourceIcon_EnumNamesFunc(HMODULE hModule, const widechar* pType, LPWSTR lpName, LONG_PTR lParam);
 
 
-CLASS_DECL_ACME HICON ExtractResourceIcon(const ::string & strPath, int& cx, int& cy, int iIcon);
+CLASS_DECL_ACME HICON ExtractResourceIcon(const ::string& strPath, int& cx, int& cy, int iIcon);
 
 
 struct extract_resource_icon
@@ -77,105 +77,98 @@ typedef struct
 #pragma pack( pop )
 
 
-BOOL ExtractResourceIcon_EnumNamesFunc(HMODULE hModule, const widechar * pType, LPWSTR lpName, LONG_PTR lParam);
+BOOL ExtractResourceIcon_EnumNamesFunc(HMODULE hModule, const widechar* pType, LPWSTR lpName, LONG_PTR lParam);
 
 
-namespace aura
+namespace aura_windows
 {
 
-
-   namespace windows
+   HICON node::extract_resource_icon(const ::string& strPath, int& cx, int& cy, int iIcon)
    {
 
-      HICON node::extract_resource_icon(const ::string & strPath, int & cx, int & cy, int iIcon)
+      HMODULE hLib = nullptr;
+
+      wstring wstrPath(strPath);
+
+      wstrPath = expand_environment_variables(wstrPath);
+
+      try
       {
 
-         HMODULE hLib = nullptr;
+         hLib = LoadLibraryExW(wstrPath, nullptr, LOAD_LIBRARY_AS_DATAFILE);
 
-         wstring wstrPath(strPath);
+      }
+      catch (...)
+      {
 
-         wstrPath = expand_environment_variables(wstrPath);
-
-         try
-         {
-
-            hLib = LoadLibraryExW(wstrPath, nullptr, LOAD_LIBRARY_AS_DATAFILE);
-
-         }
-         catch (...)
-         {
-
-            return nullptr;
-
-         }
-
-         if (hLib == nullptr)
-         {
-
-            return nullptr;
-
-         }
-
-         ::extract_resource_icon i;
-
-         __zero(i);
-
-         i.cx = cx;
-
-         i.cy = cy;
-
-         i.iIcon = iIcon;
-
-         i.iCounter = -1;
-
-         try
-         {
-
-            EnumResourceNamesW(hLib, MAKEINTRESOURCEW((ULONG_PTR)(RT_ICON)+11), (ENUMRESNAMEPROCW)ExtractResourceIcon_EnumNamesFunc, (LONG_PTR)&i);
-
-         }
-         catch (...)
-         {
-
-
-         }
-
-         //try
-         //{
-
-         //   EnumResourceNamesW(hLib, MAKEINTRESOURCEW((ULONG_PTR)(RT_ICON)), (ENUMRESNAMEPROCW)ExtractResourceIcon_EnumNamesFunc, (LONG_PTR)& i);
-
-         //}
-         //catch (...)
-         //{
-
-
-         //}
-
-         try
-         {
-
-            FreeLibrary(hLib);
-
-         }
-         catch (...)
-         {
-
-
-         }
-
-         return i.hicon;
+         return nullptr;
 
       }
 
-   
-   } // namespace windows
+      if (hLib == nullptr)
+      {
+
+         return nullptr;
+
+      }
+
+      ::extract_resource_icon i;
+
+      __zero(i);
+
+      i.cx = cx;
+
+      i.cy = cy;
+
+      i.iIcon = iIcon;
+
+      i.iCounter = -1;
+
+      try
+      {
+
+         EnumResourceNamesW(hLib, MAKEINTRESOURCEW((ULONG_PTR)(RT_ICON)+11), (ENUMRESNAMEPROCW)ExtractResourceIcon_EnumNamesFunc, (LONG_PTR)&i);
+
+      }
+      catch (...)
+      {
 
 
-} // namespace aura
+      }
+
+      //try
+      //{
+
+      //   EnumResourceNamesW(hLib, MAKEINTRESOURCEW((ULONG_PTR)(RT_ICON)), (ENUMRESNAMEPROCW)ExtractResourceIcon_EnumNamesFunc, (LONG_PTR)& i);
+
+      //}
+      //catch (...)
+      //{
 
 
-BOOL ExtractResourceIcon_EnumNamesFunc(HMODULE hModule, const widechar * pType, LPWSTR pName, LONG_PTR lParam)
+      //}
+
+      try
+      {
+
+         FreeLibrary(hLib);
+
+      }
+      catch (...)
+      {
+
+
+      }
+
+      return i.hicon;
+
+   }
+
+
+} // namespace aura_windows
+
+
+BOOL ExtractResourceIcon_EnumNamesFunc(HMODULE hModule, const widechar* pType, LPWSTR pName, LONG_PTR lParam)
 
 {
 
@@ -328,7 +321,7 @@ retry:
 
 
 
-      if (e->bWidth > pi->cx&& e->bHeight > pi->cy&& e->wBitCount == 32)
+      if (e->bWidth > pi->cx && e->bHeight > pi->cy && e->wBitCount == 32)
       {
 
          hRsrc = FindResource(hModule, MAKEINTRESOURCE(e->nID), RT_ICON);
@@ -398,7 +391,7 @@ retry:
 
 
 
-      if (e->bWidth > pi->cx&& e->bHeight > pi->cy&& e->wBitCount == 24)
+      if (e->bWidth > pi->cx && e->bHeight > pi->cy && e->wBitCount == 24)
       {
 
          hRsrc = FindResource(hModule, MAKEINTRESOURCE(e->nID), RT_ICON);
@@ -468,7 +461,7 @@ retry:
 
 
 
-      if (e->bWidth > pi->cx&& e->bHeight > pi->cy&& e->wBitCount == 16)
+      if (e->bWidth > pi->cx && e->bHeight > pi->cy && e->wBitCount == 16)
       {
 
          hRsrc = FindResource(hModule, MAKEINTRESOURCE(e->nID), RT_ICON);
@@ -538,7 +531,7 @@ retry:
 
 
 
-      if (e->bWidth > pi->cx&& e->bHeight > pi->cy&& e->wBitCount == 8)
+      if (e->bWidth > pi->cx && e->bHeight > pi->cy && e->wBitCount == 8)
       {
 
          hRsrc = FindResource(hModule, MAKEINTRESOURCE(e->nID), RT_ICON);
@@ -608,7 +601,7 @@ retry:
 
 
 
-      if (e->bWidth > pi->cx&& e->bHeight > pi->cy)
+      if (e->bWidth > pi->cx && e->bHeight > pi->cy)
       {
 
          hRsrc = FindResource(hModule, MAKEINTRESOURCE(e->nID), RT_ICON);

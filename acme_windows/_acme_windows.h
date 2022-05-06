@@ -9,9 +9,6 @@
 #include "acme_windows_common/comptr.h"
 
 
-//DECLARE_FACTORY(CLASS_DECL_ACME_WINDOWS, acme_windows);
-
-
 CLASS_DECL_ACME_WINDOWS HANDLE hfile_create(
    const char * pFileName,
 
@@ -172,21 +169,13 @@ inline void __copy(DWORD * pdw, const payload * ppayload)
 
 
 CLASS_DECL_ACME_WINDOWS ::file::path get_module_path(HMODULE hmodule = nullptr);
-//CLASS_DECL_ACME_WINDOWS ::file::path module(HMODULE pmoduleosdata = nullptr);
 CLASS_DECL_ACME_WINDOWS string read_resource_as_string(hinstance hinst, ::u32 nID, const char * pcszType, strsize iReadAtMostByteCount = -1);
 CLASS_DECL_ACME_WINDOWS const void * get_resource_pointer(HINSTANCE hinst, DWORD nID, const char* pcszType, memsize & memsize);
 CLASS_DECL_ACME_WINDOWS bool read_resource_as_memory(memory & m, HINSTANCE hinst, DWORD nID, const char * pcszType, strsize iReadAtMostByteCount = -1);
 
 
-
-#include "file.h"
-
-
 #include "simple_hold_handle.h"
 #include "process.h"
-//#include "acme/os/windows/registry.h"
-
-
 
 
 inline comptr < IStream > create_istream(const memory_base & memory)
@@ -197,68 +186,20 @@ inline comptr < IStream > create_istream(const memory_base & memory)
 }
 
 
-
-
-
-
 CLASS_DECL_ACME bool is_valid_FILETIME(const FILETIME & ft) noexcept;
-
-
-//CLASS_DECL_ACME BSTR AllocSysString(const ::string & str);
-
-
-
 
 
 CLASS_DECL_ACME int_bool read_resource_as_file(const char * pszFile, HINSTANCE hinst, ::u32 nID, LPCTSTR pcszType);
 
 
-//#include "exception/engine.h"
-
-
-#include "dir.h"
-
-
-//#include "acme/os/windows/itemidlist.h"
-
-
-//#include "top_level_enum.h"
-
-
-//#include "acme/os/windows/extract_icon.h"
-
-
-//#include "file_memory_map.h"
-
-
-//#include "process_env_reader.h"
-
-
-
-
-
-//#include "api.h"
-
-
-
-namespace windows
+namespace acme_windows
 {
 
 
    CLASS_DECL_ACME_WINDOWS string langid_to_iso(LANGID langid);
 
 
-} // namespace windows
-
-
-// namespace path
-// {
-
-
-//    CLASS_DECL_ACME::file::path module(HMODULE hmodule);
-
-
-// } // namespace path
+} // namespace acme_windows
 
 
 #include "acme_windows_common/_acme_windows_common.h"
@@ -284,10 +225,6 @@ namespace windows
 
 #include "console.h"
 #include "pipe.h"
-
-
-//#include "callstack.h"
-//#include "exception_engine.h"
 
 
 #include "shared_memory.h"

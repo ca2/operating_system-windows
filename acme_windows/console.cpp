@@ -8,7 +8,7 @@
 #include <fcntl.h>
 
 
-namespace windows
+namespace acme_windows
 {
 
 
@@ -199,10 +199,7 @@ namespace windows
    }
 
 
-} // namespace windows
-
-
-
+} // namespace acme_windows
 
 
 void std_out_buffer::write(const void* pdata, memsize nCount)

@@ -26,138 +26,132 @@ string utf8_encode(const wstring &wstr)
 	return wstr;
 }
 
-namespace acme
+
+namespace acme_windows
 {
 
 
-	namespace windows
+	array <::serial::port_info> node::list_serial_ports()
 	{
-
-
-		array <::serial::port_info> node::list_serial_ports()
-		{
 			
-			array<::serial::port_info> devices_found;
+		array<::serial::port_info> devices_found;
 
-			HDEVINFO device_info_set = SetupDiGetClassDevs(
-				(const GUID*)&GUID_DEVCLASS_PORTS,
+		HDEVINFO device_info_set = SetupDiGetClassDevs(
+			(const GUID*)&GUID_DEVCLASS_PORTS,
+			nullptr,
+			nullptr,
+			DIGCF_PRESENT);
+
+		unsigned int device_info_set_index = 0;
+		SP_DEVINFO_DATA device_info_data = {};
+
+		device_info_data.cbSize = sizeof(SP_DEVINFO_DATA);
+
+		while (SetupDiEnumDeviceInfo(device_info_set, device_info_set_index, &device_info_data))
+		{
+			device_info_set_index++;
+
+			// Get port name
+
+			HKEY hkey = SetupDiOpenDevRegKey(
+				device_info_set,
+				&device_info_data,
+				DICS_FLAG_GLOBAL,
+				0,
+				DIREG_DEV,
+				KEY_READ);
+
+			TCHAR port_name[port_name_max_length];
+			DWORD port_name_length = port_name_max_length;
+
+			::i32 return_code = RegQueryValueEx(
+				hkey,
+				_T("PortName"),
 				nullptr,
 				nullptr,
-				DIGCF_PRESENT);
+				(byte*)port_name,
+				&port_name_length);
 
-			unsigned int device_info_set_index = 0;
-			SP_DEVINFO_DATA device_info_data = {};
+			RegCloseKey(hkey);
 
-			device_info_data.cbSize = sizeof(SP_DEVINFO_DATA);
+			if (return_code != EXIT_SUCCESS)
+				continue;
 
-			while (SetupDiEnumDeviceInfo(device_info_set, device_info_set_index, &device_info_data))
-			{
-				device_info_set_index++;
+			if (port_name_length > 0 && port_name_length <= port_name_max_length)
+				port_name[port_name_length - 1] = '\0';
+			else
+				port_name[0] = '\0';
 
-				// Get port name
+			// Ignore parallel ports
 
-				HKEY hkey = SetupDiOpenDevRegKey(
-					device_info_set,
-					&device_info_data,
-					DICS_FLAG_GLOBAL,
-					0,
-					DIREG_DEV,
-					KEY_READ);
+			if (_tcsstr(port_name, _T("LPT")) != nullptr)
+				continue;
 
-				TCHAR port_name[port_name_max_length];
-				DWORD port_name_length = port_name_max_length;
+			// Get port friendly name
 
-				::i32 return_code = RegQueryValueEx(
-					hkey,
-					_T("PortName"),
-					nullptr,
-					nullptr,
-					(byte*)port_name,
-					&port_name_length);
+			TCHAR friendly_name[friendly_name_max_length];
+			DWORD friendly_name_actual_length = 0;
 
-				RegCloseKey(hkey);
+			BOOL got_friendly_name = SetupDiGetDeviceRegistryProperty(
+				device_info_set,
+				&device_info_data,
+				SPDRP_FRIENDLYNAME,
+				nullptr,
+				(PBYTE)friendly_name,
+				friendly_name_max_length,
+				&friendly_name_actual_length);
 
-				if (return_code != EXIT_SUCCESS)
-					continue;
+			if (got_friendly_name && friendly_name_actual_length > 0)
+				friendly_name[friendly_name_actual_length - 1] = '\0';
+			else
+				friendly_name[0] = '\0';
 
-				if (port_name_length > 0 && port_name_length <= port_name_max_length)
-					port_name[port_name_length - 1] = '\0';
-				else
-					port_name[0] = '\0';
+			// Get hardware ID
 
-				// Ignore parallel ports
+			TCHAR hardware_id[hardware_id_max_length];
+			DWORD hardware_id_actual_length = 0;
 
-				if (_tcsstr(port_name, _T("LPT")) != nullptr)
-					continue;
+			BOOL got_hardware_id = SetupDiGetDeviceRegistryProperty(
+				device_info_set,
+				&device_info_data,
+				SPDRP_HARDWAREID,
+				nullptr,
+				(PBYTE)hardware_id,
+				hardware_id_max_length,
+				&hardware_id_actual_length);
 
-				// Get port friendly name
-
-				TCHAR friendly_name[friendly_name_max_length];
-				DWORD friendly_name_actual_length = 0;
-
-				BOOL got_friendly_name = SetupDiGetDeviceRegistryProperty(
-					device_info_set,
-					&device_info_data,
-					SPDRP_FRIENDLYNAME,
-					nullptr,
-					(PBYTE)friendly_name,
-					friendly_name_max_length,
-					&friendly_name_actual_length);
-
-				if (got_friendly_name && friendly_name_actual_length > 0)
-					friendly_name[friendly_name_actual_length - 1] = '\0';
-				else
-					friendly_name[0] = '\0';
-
-				// Get hardware ID
-
-				TCHAR hardware_id[hardware_id_max_length];
-				DWORD hardware_id_actual_length = 0;
-
-				BOOL got_hardware_id = SetupDiGetDeviceRegistryProperty(
-					device_info_set,
-					&device_info_data,
-					SPDRP_HARDWAREID,
-					nullptr,
-					(PBYTE)hardware_id,
-					hardware_id_max_length,
-					&hardware_id_actual_length);
-
-				if (got_hardware_id && hardware_id_actual_length > 0)
-					hardware_id[hardware_id_actual_length - 1] = '\0';
-				else
-					hardware_id[0] = '\0';
+			if (got_hardware_id && hardware_id_actual_length > 0)
+				hardware_id[hardware_id_actual_length - 1] = '\0';
+			else
+				hardware_id[0] = '\0';
 
 #ifdef UNICODE
-				string portName = utf8_encode(port_name);
-				string friendlyName = utf8_encode(friendly_name);
-				string hardwareId = utf8_encode(hardware_id);
+			string portName = utf8_encode(port_name);
+			string friendlyName = utf8_encode(friendly_name);
+			string hardwareId = utf8_encode(hardware_id);
 #else
-				string portName = port_name;
-				string friendlyName = friendly_name;
-				string hardwareId = hardware_id;
+			string portName = port_name;
+			string friendlyName = friendly_name;
+			string hardwareId = hardware_id;
 #endif
 
-				::serial::port_info portinfo;
-				portinfo.port = portName;
-				portinfo.description = friendlyName;
-				portinfo.hardware_id = hardwareId;
+			::serial::port_info portinfo;
+			portinfo.port = portName;
+			portinfo.description = friendlyName;
+			portinfo.hardware_id = hardwareId;
 
-				devices_found.push_back(portinfo);
-
-			}
-
-			SetupDiDestroyDeviceInfoList(device_info_set);
-
-			return devices_found;
+			devices_found.push_back(portinfo);
 
 		}
 
+		SetupDiDestroyDeviceInfoList(device_info_set);
 
-	} //  namespace windows
+		return devices_found;
+
+	}
 
 
-} // namespace acme
+} // namespace acme_windows
 
 
 

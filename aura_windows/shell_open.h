@@ -4,7 +4,7 @@
 #include <ddeml.h>
 
 
-namespace windows
+namespace aura_windows
 {
 
 
@@ -43,7 +43,8 @@ namespace windows
 
    };
 
-} // namespace windows
+
+} // namespace aura_windows
 
 
 

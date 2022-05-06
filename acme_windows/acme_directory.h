@@ -2,24 +2,18 @@
 #pragma once
 
 
-namespace windows
+namespace acme_windows
 {
 
 
    class CLASS_DECL_ACME_WINDOWS acme_directory :
-      virtual public ::windows_common::acme_directory
+      virtual public ::acme_windows_common::acme_directory
    {
    public:
 
 
-      //__creatable_from_base(acme_directory, ::acme_directory);
-
-
       acme_directory();
       ~acme_directory() override;
-
-
-      //::file::path module() override;
 
 
       ::file::path install() override;
@@ -135,7 +129,7 @@ namespace windows
    };
 
 
-} // namespace windows
+} // namespace acme_windows
 
 
 

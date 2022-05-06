@@ -21,7 +21,7 @@
 #include "file_os_watcher.h"
 
 
-namespace file
+namespace apex_windows
 {
 
 
@@ -181,7 +181,7 @@ namespace file
 
             ULONG ulAction = pNotify->Action;
 
-            action action;
+            ::file::action action;
 
             action.m_pwatch = pwatch;
 
@@ -191,20 +191,20 @@ namespace file
 
             action.m_pathFile = strFile;
 
-            enum_action eaction = e_action_none;
+            ::file::enum_action eaction = ::file::e_action_none;
 
             switch (ulAction)
             {
             case FILE_ACTION_RENAMED_NEW_NAME:
             case FILE_ACTION_ADDED:
-               eaction = e_action_add;
+               eaction = ::file::e_action_add;
                break;
             case FILE_ACTION_RENAMED_OLD_NAME:
             case FILE_ACTION_REMOVED:
-               eaction = e_action_delete;
+               eaction = ::file::e_action_delete;
                break;
             case FILE_ACTION_MODIFIED:
-               eaction = e_action_modify;
+               eaction = ::file::e_action_modify;
                break;
             };
 
@@ -281,7 +281,7 @@ namespace file
    }
 
 
-} // namespace file
+} // namespace apex_windows
 
 
 

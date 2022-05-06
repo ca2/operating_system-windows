@@ -36,7 +36,7 @@
 #pragma once
 
 
-namespace windows
+namespace acme_windows
 {
 
    //using std::string;
@@ -185,7 +185,7 @@ namespace windows
    };
 
 
-} // namespace serial
+} // namespace acme_windows
 
 
 

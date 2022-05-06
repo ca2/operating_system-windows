@@ -1,7 +1,7 @@
 #pragma once
 
 
-namespace windows
+namespace acme_windows
 {
 
 
@@ -31,7 +31,7 @@ namespace windows
    };
 
 
-} // namespace file
+} // namespace acme_windows
 
 
 

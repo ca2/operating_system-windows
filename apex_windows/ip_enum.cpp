@@ -3,7 +3,7 @@
 #include "ip_enum.h"
 
 
-namespace windows
+namespace apex_windows
 {
 
 
@@ -277,7 +277,7 @@ namespace windows
    }
 
 
-} // namespace windows
+} // namespace apex_windows
 
 
 

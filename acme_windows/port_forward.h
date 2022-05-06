@@ -1,12 +1,11 @@
 #pragma once
 
 
-
 #include <Natupnp.h>
 #include <UPnP.h>
 
 
-namespace windows
+namespace acme_windows
 {
 
 
@@ -162,5 +161,7 @@ namespace windows
    };
 
 
-} // namespace acme
+} // namespace acme_windows
+
+
 

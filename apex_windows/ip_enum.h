@@ -12,7 +12,7 @@ Copyright (ca) 1998 by PJ Naughter.
 */
 
 
-namespace windows
+namespace apex_windows
 {
 
 
@@ -38,7 +38,7 @@ namespace windows
    };
 
 
-} // namespace windows
+} // namespace apex_windows
 
 
 

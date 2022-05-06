@@ -38,7 +38,7 @@
     <ClCompile Include="console.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="file.cpp">
+    <ClCompile Include="_file.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="pipe.cpp">
@@ -56,9 +56,6 @@
     <ClCompile Include="strdup_array.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="timer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="trace.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -71,13 +68,7 @@
     <ClCompile Include="framework.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="mutex.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="list_serial_ports.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="argcargv.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="itemidlist.cpp">
@@ -95,22 +86,10 @@
     <ClCompile Include="_wd32.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ansi_file.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="application.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="debug.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="dir.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="environment_variable.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="internal.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="language.cpp">
@@ -122,28 +101,13 @@
     <ClCompile Include="message_loop.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="parallelization.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="printer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="process.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="simple_app.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="time.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="user.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="util.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="windowing.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="acme_file.cpp">
@@ -183,46 +147,10 @@
     <ClInclude Include="_windows.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="_windows_impl.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="aaa_callstack.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="aaa_critical_section.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="aaa_registry.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="aaa_stdio_file.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="aaa_tts_speaker (2).h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="aaa_want_to_remove_process_env_reader.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="acme_directory.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="acme_file.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="acme_path.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="bbb_callstack.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="console.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="d2d1_1.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="file.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="file_change_event.h">
@@ -246,12 +174,6 @@
     <ClInclude Include="handle.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="implementation.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="internal.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="itemidlist.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -265,9 +187,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="node.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="parallelization.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="path.h">
@@ -310,6 +229,18 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="utils.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="acme_directory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="acme_file.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="acme_path.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="file.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
