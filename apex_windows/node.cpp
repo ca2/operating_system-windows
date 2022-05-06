@@ -95,7 +95,7 @@ namespace apex
       //   try
       //   {
 
-      //      ::windows::registry::key key;
+      //      ::acme_windows::registry::key key;
 
       //      key.open(HKEY_CURRENT_USER, "Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize");
 
@@ -136,7 +136,7 @@ namespace apex
       //   try
       //   {
 
-      //      ::windows::registry::key key;
+      //      ::acme_windows::registry::key key;
 
       //      key.open(HKEY_CURRENT_USER, "Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize");
 
@@ -200,7 +200,7 @@ namespace apex
       void node::set_console_colors(::u32 dwScreenColors, ::u32 dwPopupColors, ::u32 dwWindowAlpha)
       {
 
-         ::windows::registry::key key(HKEY_CURRENT_USER, "Console", true);
+         ::acme_windows::registry::key key(HKEY_CURRENT_USER, "Console", true);
 
          key._set("ScreenColors", dwScreenColors);
          key._set("PopupColors", dwPopupColors);
@@ -213,7 +213,7 @@ namespace apex
       void node::set_system_dark_mode1(bool bSet)
       {
 
-         ::windows::registry::key key(HKEY_CURRENT_USER, "Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize", true);
+         ::acme_windows::registry::key key(HKEY_CURRENT_USER, "Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize", true);
 
          ::u32 dwSystemUseLightTheme;
          if (bSet)
@@ -234,7 +234,7 @@ namespace apex
       void node::set_app_dark_mode1(bool bSet)
       {
 
-         ::windows::registry::key key(HKEY_CURRENT_USER, "Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize", true);
+         ::acme_windows::registry::key key(HKEY_CURRENT_USER, "Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize", true);
 
          ::u32 dwAppsUseLightTheme;
          if (bSet)
@@ -501,7 +501,7 @@ namespace apex
 
 #ifdef WINDOWS_DESKTOP
 
-            ::windows::registry::key key(HKEY_LOCAL_MACHINE, "SOFTWARE\\Mozilla\\Mozilla Firefox");
+            ::acme_windows::registry::key key(HKEY_LOCAL_MACHINE, "SOFTWARE\\Mozilla\\Mozilla Firefox");
 
             string strCurrentVersion;
 
