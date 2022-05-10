@@ -501,7 +501,7 @@ namespace acme_windows
 
       duration duration;
 
-      duration.m_iSecond = muldiv64(count, m_uiByteTimeNs, 1'000'000'000);
+      duration.m_iSecond = uint64_muldiv(count, m_uiByteTimeNs, 1'000'000'000);
 
       duration.m_iNanosecond = (count * m_uiByteTimeNs) % 1'000'000'000;
 
