@@ -9,8 +9,6 @@ namespace acme_windows
    acme_path::acme_path()
    {
 
-      m_pplatformpath = this;
-
    }
 
 

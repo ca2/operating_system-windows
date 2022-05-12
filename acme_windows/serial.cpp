@@ -3,6 +3,7 @@
 #include "acme/platform/serial.h"
 //#include "acme/os/windows_common/file.h"
 #include "serial.h"
+#include "acme/platform/uint64_muldiv.h"
 
 
 CLASS_DECL_ACME bool windows_get_alternate_path(wstring& wstr);
