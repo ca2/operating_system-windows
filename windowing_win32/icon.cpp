@@ -646,6 +646,13 @@ namespace windowing_win32
 
       auto memory = m_pcontext->m_papexcontext->file().as_memory(m_pathProcessed);
 
+      if (memory.is_empty())
+      {
+
+         throw exception(error_failed);
+
+      }
+
       auto sizes = ico_file_sizes(memory);
 
       for (auto & size : sizes)
