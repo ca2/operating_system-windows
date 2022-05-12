@@ -484,7 +484,7 @@ namespace draw2d_gdi
 
    //      //x64
    //#else
-   //      _asm
+   //      _asmxxx
    //      {
    //         emms
    //         mov      eax, isize

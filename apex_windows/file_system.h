@@ -1,7 +1,7 @@
 #pragma once
 
 
-namespace windows
+namespace apex_windows
 {
 
 
@@ -27,7 +27,7 @@ namespace windows
    };
 
 
-} // namespace windows
+} // namespace apex_windows
 
 
 

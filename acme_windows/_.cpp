@@ -2,31 +2,14 @@
 #include "acme/library.h"
 
 
-//void CLASS_DECL_ACME_WINDOWS __cdecl _ca2_purecall()
-//{
-//
-//   throw ::exception(::exception());
-//
-//}
-//
-
-
-
-
-
-
-namespace windows
+namespace acme_windows
 {
 
 
-
-
    HINSTANCE load_library(const ::string & psz)
-
    {
 
       return ::LoadLibraryW(::str::international::utf8_to_unicode(psz));
-
 
    }
 
@@ -128,23 +111,5 @@ namespace windows
    }
 
 
-
-
-
 } // namespace windows
-
-
-
-//LRESULT CALLBACK __window_procedure(HWND oswindow, const ::atom & atom, wparam wparam, lparam lparam);
-//
-//WNDPROC get_window_procedure()
-//{
-//
-//   return &::__window_procedure;
-//
-//}
-
-
-
-
 

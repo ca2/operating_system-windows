@@ -21,7 +21,7 @@ CLASS_DECL_ACME bool windows_get_alternate_path(wstring& wstr);
 //using serial::io_exception;
 //
 
-namespace windows
+namespace acme_windows
 {
 
 
@@ -501,7 +501,7 @@ namespace windows
 
       duration duration;
 
-      duration.m_iSecond = muldiv64(count, m_uiByteTimeNs, 1'000'000'000);
+      duration.m_iSecond = uint64_muldiv(count, m_uiByteTimeNs, 1'000'000'000);
 
       duration.m_iNanosecond = (count * m_uiByteTimeNs) % 1'000'000'000;
 
@@ -1037,6 +1037,7 @@ namespace windows
    }
 
 
+} // namespace acme_windows
 
-} // namespace windows
+
 

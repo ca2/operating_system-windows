@@ -2,7 +2,7 @@
 #include "shell_open.h"
 
 
-namespace windows
+namespace aura_windows
 {
 
 
@@ -70,7 +70,7 @@ namespace windows
       case XTYP_CONNECT:
       {
          
-         __pointer(::windows::shell_open) pshellopen = ::get_task()->get_app()->m_papplication;
+         __pointer(::aura_windows::shell_open) pshellopen = ::get_task()->get_app()->m_papplication;
 
          if (!DdeCmpStringHandles((HSZ)hsz1, pshellopen->m_hszSystemTopic))
          {
@@ -154,4 +154,7 @@ namespace windows
    }
 
 
-} // namespace windows
+} // namespace aura_windows
+
+
+

@@ -1,7 +1,7 @@
 #pragma once
 
 
-namespace windows
+namespace apex_windows
 {
 
 
@@ -10,8 +10,6 @@ namespace windows
    {
    public:
 
-
-      //__creatable_from_base(service_handler, ::service_handler);
 
 
       SERVICE_STATUS             m_status;
@@ -58,10 +56,12 @@ namespace windows
 
       virtual void start_service();
       virtual void stop_service();
+
+
    };
 
 
-} // namespace windows
+} // namespace apex_windows
 
 
 

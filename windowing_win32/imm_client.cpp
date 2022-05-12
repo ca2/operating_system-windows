@@ -107,6 +107,8 @@ void imm_client::_011OnChar(::message::message * pmessage)
       //if (!::str::begins_eat_ci(m_strImeComposition, strChar))
       //{
 
+      pmessage->m_bRet = true;
+
       m_puserinteraction->insert_text(strChar, false, e_source_user);
 
       //}

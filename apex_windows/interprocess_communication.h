@@ -2,7 +2,7 @@
 #pragma once
 
 
-namespace windows
+namespace apex_windows
 {
 
 
@@ -96,48 +96,10 @@ namespace windows
    };
 
 
-//   class CLASS_DECL_APEX_WINDOWS interprocess_communication :
-//      virtual public interprocess_communication_base,
-//      virtual public ::interprocess_communication::interprocess_communication
-//   {
-//   public:
-//
-//
-//      interprocess_communication();
-//      virtual ~interprocess_communication();
-//
-//
-//#if defined(_UWP)
-//      bool open_ab(const ::string & pszChannel, const ::string & pszModule);
-//      bool open_ba(const ::string & pszChannel, const ::string & pszModule);
-//#elif defined(WINDOWS)
-//      bool open_ab(const ::string & pszChannel, const ::string & pszModule, launcher * plauncher = nullptr);
-//      bool open_ba(const ::string & pszChannel, const ::string & pszModule, launcher * plauncher = nullptr);
-//#else
-//      bool open_ab(const ::string & pszChannel, launcher * plauncher = nullptr);
-//      bool open_ba(const ::string & pszChannel, launcher * plauncher = nullptr);
-//#endif
-//
-//
-//      bool close();
-//
-//
-//      virtual void restart_apex_ipc();
-//
-//      //bool ensure_tx(const ::string & pszMessage, duration durationTimeout = one_hour());
-//      //bool ensure_tx(int message, void * pdata, int len, duration durationTimeout = one_hour());
-//
-//
-//      bool is_rx_tx_ok();
-//
-//
-//   };
-
-
    CLASS_DECL_APEX_WINDOWS string app_install(string strPlatform = "");
 
 
-} // namespace windows
+} // namespace apex_windows
 
 
 

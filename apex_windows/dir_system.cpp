@@ -4,15 +4,9 @@
 #include "dir_system.h"
 #include "acme/filesystem/filesystem/acme_directory.h"
 #include "acme_windows/acme_directory.h"
-//#include "_windows.h"
-//#include "acme/os/windows_common/cotaskptr.h"
-
-//#include "apex/xml/_.h"
 
 
-
-
-namespace windows
+namespace apex_windows
 {
 
 
@@ -154,69 +148,7 @@ namespace windows
    }
 
 
-
-
-
-
-
-   //::file::path dir_system::application_installer_folder(const ::file::path& pathExe, string strAppId, const ::string & pszPlatform, const ::string & pszConfiguration, const ::string & pszLocale, const ::string & pszSchema)
-   //{
-
-   //   string strFolder = pathExe.folder();
-
-   //   strFolder.replace(":", "");
-
-   //   return m_psystem->m_pacmedirectory->ca2roaming() / "appdata" / strFolder / strAppId / pszPlatform / pszConfiguration / pszLocale / pszSchema;
-
-   //}
-
-
-
-
-   //::file::path dir_system::get_application_path(string strAppId, const ::string & pszPlatform, const ::string & pszConfiguration)
-   //{
-
-   //   ::file::path pathFolder;
-
-   //   pathFolder = m_psystem->m_pacmedirectory->stage(strAppId, pszPlatform, pszConfiguration);
-
-   //   string strName;
-
-   //   strName = ::process::app_id_to_app_name(strAppId);
-
-   //   ::file::path path;
-
-   //   path = pathFolder / (strName + ".exe");
-
-   //   return path;
-
-   //}
-
-
-   // ::file::path dir_system::get_last_run_application_path_file(string strAppId)
-   // {
-
-   //    ::file::path pathFile = m_psystem->m_pacmedirectory->local() / "appdata" / strAppId / "last_run_path.txt";
-
-   //    return pathFile;
-
-   // }
-
-
-   // ::file::path dir_system::get_last_run_application_path(string strAppId)
-   // {
-
-   //    ::file::path pathFile = get_last_run_application_path_file(strAppId);
-
-   //    ::file::path path = ::m_psystem->m_pacmefile->as_string(pathFile);
-
-   //    return path;
-
-   // }
-
-
-
-} // namespace windows
+} // namespace apex_windows
 
 
 

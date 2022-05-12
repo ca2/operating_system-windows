@@ -1,6 +1,8 @@
 #pragma once
 
+
 #ifdef IMPLEMENT_VISTA_TOOLS
+
 
 namespace VistaTools
 {
@@ -214,3 +216,5 @@ namespace VistaTools
 
 
 #endif
+
+

@@ -12,12 +12,7 @@ void CLASS_DECL_APEX_WINDOWS __cdecl _ca2_purecall()
 }
 
 
-
-
-
-
-
-namespace windows
+namespace apex_windows
 {
 
 
@@ -187,19 +182,7 @@ namespace windows
    //}
 
 
-} // namespace windows
-
-
-
-//LRESULT CALLBACK __window_procedure(HWND oswindow, const ::atom & atom, wparam wparam, lparam lparam);
-//
-//WNDPROC get_window_procedure()
-//{
-//
-//   return &::__window_procedure;
-//
-//}
-
+} // namespace apex_windows
 
 
 

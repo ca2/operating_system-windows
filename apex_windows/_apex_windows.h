@@ -17,7 +17,7 @@
 #include "shell/shell.h"
 
 
-#include "crypto.h"
+//#include "crypto.h"
 
 
 #include "dir_system.h"

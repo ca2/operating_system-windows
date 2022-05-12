@@ -2,7 +2,7 @@
 #include "acme/operating_system.h"
 
 
-namespace windows
+namespace acme_windows
 {
 
    //struct langid_iso
@@ -73,7 +73,7 @@ namespace windows
    }
 
 
-} // namespace windows
+} // namespace acme_windows
 
 
 

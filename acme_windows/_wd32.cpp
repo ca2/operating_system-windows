@@ -6,8 +6,6 @@ namespace str
 {
 
 
-
-
 BSTR AllocSysString(const wd32char * pchData, strsize nDataLength) noexcept
 {
 
@@ -154,7 +152,7 @@ u32 format_message(u32 dwFlags, const void * pSource, u32 dwMessageID, u32 dwLan
 // }
 
 
-} // namespace str
+} // namespace acme_windows
 
 
 

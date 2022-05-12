@@ -1,7 +1,7 @@
 #pragma once
 
 
-namespace windows
+namespace acme_windows
 {
 
 
@@ -110,7 +110,7 @@ namespace windows
    };
 
 
-} // namespace windows
+} // namespace acme_windows
 
 
 CLASS_DECL_ACME_WINDOWS void windows_registry_initialize();

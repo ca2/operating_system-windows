@@ -9,7 +9,7 @@ u32 Win32FromHResult(HRESULT value);
 #endif
 
 
-namespace windows
+namespace apex_windows
 {
 
 
@@ -382,10 +382,7 @@ namespace windows
    }
 
 
-} // namespace windows
-
-
-
+} // namespace apex_windows
 
 
 #ifdef WINDOWS

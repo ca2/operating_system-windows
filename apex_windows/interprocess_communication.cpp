@@ -7,7 +7,7 @@
 #include "launcher.h"
 
 
-namespace windows
+namespace apex_windows
 {
 
 
@@ -605,112 +605,7 @@ namespace windows
    }
 
 
-   //interprocess_communication::interprocess_communication()
-   //{
-
-   //   m_durationTimeout = (5000) * 11;
-
-   //}
-
-
-   //interprocess_communication::~interprocess_communication()
-   //{
-
-
-   //}
-
-
-   //bool interprocess_communication::open_ab(const ::string & strKey, const ::string & strModule, launcher * plauncher)
-   //{
-
-   //   m_strChannel = strKey;
-
-   //   m_prx->m_preceiver = this;
-
-   //   string strChannelRx = m_strChannel + "-a";
-   //   string strChannelTx = m_strChannel + "-b";
-
-   //   if (!::IsWindow((HWND) m_prx->get_os_data()))
-   //   {
-
-   //      if (!m_prx->create(strChannelRx.c_str()))
-   //      {
-
-   //         return false;
-
-   //      }
-
-   //   }
-
-   //   if (!m_ptx->open(strChannelTx.c_str(), plauncher))
-   //   {
-
-   //      return false;
-
-   //   }
-
-   //   return true;
-
-   //}
-
-
-   //bool interprocess_communication::open_ba(const ::string & strKey, const ::string & strModule, launcher * plauncher)
-   //{
-
-   //   m_strChannel = strKey;
-
-   //   m_prx->m_preceiver = this;
-
-   //   string strChannelRx = m_strChannel + "-b";
-   //   string strChannelTx = m_strChannel + "-a";
-
-
-   //   if (!::IsWindow((HWND) m_prx->get_os_data()))
-   //   {
-
-   //      if (!m_prx->create(strChannelRx.c_str()))
-   //      {
-
-   //         return false;
-
-   //      }
-
-   //   }
-
-   //   if (!m_ptx->open(strChannelTx.c_str(), plauncher))
-   //   {
-
-   //      return false;
-
-   //   }
-
-   //   return true;
-
-   //}
-
-
-   //bool interprocess_communication::is_rx_tx_ok()
-   //{
-
-   //   return m_prx->is_rx_ok() && m_ptx->is_tx_ok();
-
-   //}
-
-
-   //void interprocess_communication::restart_apex_ipc()
-   //{
-
-   //}
-
-
-   //bool interprocess_communication::close()
-   //{
-
-   //   return false;
-
-   //}
-
-} // namespace windows
+} // namespace apex_windows
 
 
 

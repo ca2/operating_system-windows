@@ -229,7 +229,7 @@ bool position_desk_toolbar1()
          //while (iCount > 0)
          {
 
-            ::windows::registry::key k(HKEY_CURRENT_USER, "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Streams\\Desktop", false);
+            ::acme_windows::registry::key k(HKEY_CURRENT_USER, "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Streams\\Desktop", false);
 
             k.get("TaskbarWinXP", m2);
 
@@ -396,7 +396,7 @@ bool position_desk_toolbar2()
    //sleep(1_s);
    //if (SUCCEEDED(hr))
    {
-      ::windows::registry::key k;
+      ::acme_windows::registry::key k;
 
       if (k._open(HKEY_CURRENT_USER, "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Discardable\\PostSetup\\Component Categories64\\{00021492-0000-0000-C000-000000000046}\\Enum", false))
       {
@@ -437,7 +437,7 @@ bool position_desk_toolbar2()
 
          memory m;
 
-         ::windows::registry::key k;
+         ::acme_windows::registry::key k;
 
          if (k._open(HKEY_CURRENT_USER, "Software\\Microsoft\\Windows\\CurrentVersion\\Shell Extensions\\Cached", false))
          {
@@ -483,7 +483,7 @@ bool position_desk_toolbar2()
 
          memory m2;
 
-         ::windows::registry::key k(HKEY_CURRENT_USER, "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Streams\\Desktop", false);
+         ::acme_windows::registry::key k(HKEY_CURRENT_USER, "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Streams\\Desktop", false);
 
          k._get("TaskbarWinXP", m2);
 

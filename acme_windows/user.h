@@ -1,9 +1,6 @@
 #pragma once
 
 
-
-
-
 //CLASS_DECL_ACME_WINDOWS WNDPROC __get_window_procedure();
 //#define __window_procedure (*__get_window_procedure())
 extern CLASS_DECL_ACME_WINDOWS const unichar gen_Wnd[];           // simple child windows/controls

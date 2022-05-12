@@ -209,9 +209,9 @@ namespace windowing_win32
 //
 //      prectangle->top = 0;
 //
-//      prectangle->right = oslocal().m_iScreenWidth;
+//      prectangle->right = operating_system_driver::get().m_iScreenWidth;
 //
-//      prectangle->bottom = oslocal().m_iScreenHeight;
+//      prectangle->bottom = operating_system_driver::get().m_iScreenHeight;
 //
 //
 //#endif

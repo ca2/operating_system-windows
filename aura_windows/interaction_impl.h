@@ -9,12 +9,8 @@
 
 
 
-namespace windows
+namespace aura_windows
 {
-
-
-   //CLASS_DECL_AURA lresult CALLBACK __send_message_hook(i32, wparam, lparam);
-   //CLASS_DECL_AURA lresult CALLBACK __cbt_filter_hook(i32, wparam, lparam);
 
 
    class CLASS_DECL_AURA_WINDOWS interaction_impl :
@@ -76,6 +72,8 @@ namespace windows
       //virtual const MSG* GetCurrentMessage();
 
       //virtual void update_graphics_resources();
+
+      void native_create_host() override;
 
 
       //virtual bool __windows_message_bypass(HWND oswindow, ::u32 message, wparam wparam, lparam lparam, lresult & lresult);
@@ -755,7 +753,7 @@ namespace windows
    };
 
 
-} // namespace windows
+} // namespace aura_windows
 
 
 CLASS_DECL_AURA::user::interaction * __user_interaction(::windowing::window * pwindow);

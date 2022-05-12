@@ -40,9 +40,9 @@ __FACTORY_EXPORT void aura_windows_factory(::factory::factory * pfactory)
    //add_factory_item < ::windows::interprocess_communication, ::interprocess_communication::interprocess_communication >();
 
 
-   pfactory->add_factory_item < ::windows::interaction_impl, ::user::interaction_impl >();
+   pfactory->add_factory_item < ::aura_windows::interaction_impl, ::user::interaction_impl >();
 
-   pfactory->add_factory_item < ::aura::windows::node, ::acme::node >();
+   pfactory->add_factory_item < ::aura_windows::node, ::acme::node >();
 
    //add_factory_item < ::windows::console, ::console::console >();
 //add_factory_item < ::windows::crypto, ::crypto::crypto >();
@@ -56,7 +56,7 @@ __FACTORY_EXPORT void aura_windows_factory(::factory::factory * pfactory)
    //add_factory_item < ::file::os_watch, ::file::watch >();
 
    //add_factory_item < ::windows::copydesk, ::user::copydesk >();
-   pfactory->add_factory_item < ::windows::shell_open, ::shell_open >();
+   pfactory->add_factory_item < ::aura_windows::shell_open, ::shell_open >();
    //add_factory_item < ::windows::interprocess_communication_base, ::interprocess_communication::base >();
    //add_factory_item < ::windows::interprocess_communication_tx, ::interprocess_communication::tx >();
    //add_factory_item < ::windows::interprocess_communication_rx, ::interprocess_communication::rx >();
