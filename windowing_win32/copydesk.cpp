@@ -138,7 +138,9 @@ namespace windowing_win32
 
       //::SetWindowLongPtr(m_hwnd, GWLP_USERDATA, (LONG_PTR) this);
 
-      if(!::AddClipboardFormatListener((HWND)get_oswindow()))
+      HWND hwnd = (HWND)get_oswindow();
+
+      if(!::AddClipboardFormatListener(hwnd))
       {
 
          destroy();
