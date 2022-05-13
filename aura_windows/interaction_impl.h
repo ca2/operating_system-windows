@@ -73,7 +73,7 @@ namespace aura_windows
 
       //virtual void update_graphics_resources();
 
-      void native_create_host() override;
+      //void native_create_host() override;
 
 
       //virtual bool __windows_message_bypass(HWND oswindow, ::u32 message, wparam wparam, lparam lparam, lresult & lresult);

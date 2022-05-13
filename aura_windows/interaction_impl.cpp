@@ -4067,58 +4067,58 @@ void interaction_impl::set_tool_window(bool bSet)
 
 
 
-void interaction_impl::native_create_host()
-{
-
-   auto pwindowMain = m_psystem->m_paurasystem->m_pwindowMain;
-
-   if (pwindowMain && !pwindowMain->m_puserinteractionimpl)
-   {
-
-      m_pwindow = m_psystem->m_paurasystem->m_pwindowMain;
-
-      m_pwindow->m_puserinteractionimpl = this;
-
-      m_puserinteraction->m_pinteractionimpl = this;
-
-   }
-   else
-   {
-
-      //auto estatus = 
-
-      __construct(m_pwindow);
-
-      //if (!estatus)
-      //{
-
-      //   return estatus;
-
-      //}
-
-      if (!m_psystem->m_paurasystem->m_pwindowMain)
-      {
-
-         m_psystem->m_paurasystem->m_pwindowMain = m_pwindow;
-
-      }
-
-   }
-
-   //auto estatus =
-
-   m_pwindow->create_window(this);
-
-   //if (!estatus)
-   //{
-
-   //   return estatus;
-
-   //}
-
-   //return true;
-
-}
+//void interaction_impl::native_create_host()
+//{
+//
+//   auto pwindowMain = m_psystem->m_paurasystem->m_pwindowMain;
+//
+//   if (pwindowMain && !pwindowMain->m_puserinteractionimpl)
+//   {
+//
+//      m_pwindow = m_psystem->m_paurasystem->m_pwindowMain;
+//
+//      m_pwindow->m_puserinteractionimpl = this;
+//
+//      m_puserinteraction->m_pinteractionimpl = this;
+//
+//   }
+//   else
+//   {
+//
+//      //auto estatus = 
+//
+//      __construct(m_pwindow);
+//
+//      //if (!estatus)
+//      //{
+//
+//      //   return estatus;
+//
+//      //}
+//
+//      if (!m_psystem->m_paurasystem->m_pwindowMain)
+//      {
+//
+//         m_psystem->m_paurasystem->m_pwindowMain = m_pwindow;
+//
+//      }
+//
+//   }
+//
+//   //auto estatus =
+//
+//   m_pwindow->create_window(this);
+//
+//   //if (!estatus)
+//   //{
+//
+//   //   return estatus;
+//
+//   //}
+//
+//   //return true;
+//
+//}
 
 
 

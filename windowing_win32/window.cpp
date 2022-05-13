@@ -304,6 +304,8 @@ namespace windowing_win32
 
       m_puserinteractionimpl = pimpl;
 
+      m_puserinteractionimpl->m_pwindow = this;
+
 
       //pimpl->install_message_routing(puserinteraction);
 
