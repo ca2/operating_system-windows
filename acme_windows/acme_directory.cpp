@@ -9,8 +9,6 @@ namespace acme_windows
    acme_directory::acme_directory()
    {
 
-      m_pplatformdir = this;
-
    }
 
 

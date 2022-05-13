@@ -3,39 +3,37 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.1.31903.286
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "strophe", "..\..\..\source\third\strophe\strophe.vcxproj", "{3F8D41B1-CA9D-4171-B17E-D5A1265C8447}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "strophe", "..\..\..\source\port\strophe\strophe.vcxproj", "{3F8D41B1-CA9D-4171-B17E-D5A1265C8447}"
 	ProjectSection(ProjectDependencies) = postProject
 		{2F3AE856-C0BB-413E-A451-0F867A07EBEC} = {2F3AE856-C0BB-413E-A451-0F867A07EBEC}
 	EndProjectSection
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "mpg123", "..\..\..\source\third\libmpg123\libmpg123.vcxproj", "{67CAA87B-7CF1-4F93-BB67-21C513F40803}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "mpg123", "..\..\..\source\port\libmpg123\libmpg123.vcxproj", "{67CAA87B-7CF1-4F93-BB67-21C513F40803}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "png", "..\..\..\source\third\png\png.vcxproj", "{7DB10B50-CE00-4D7A-B322-6824F05D2FCB}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "png", "..\..\..\source\port\png\png.vcxproj", "{7DB10B50-CE00-4D7A-B322-6824F05D2FCB}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "sqlite", "..\..\..\source\third\sqlite\sqlite.vcxproj", "{424F72D6-053A-41C5-BE03-3B0BD535F1EB}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "sqlite", "..\..\..\source\port\sqlite\sqlite.vcxproj", "{424F72D6-053A-41C5-BE03-3B0BD535F1EB}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "pixman", "..\..\..\source\third\pixman\pixman.vcxproj", "{0A298E22-839B-4D11-B5A7-456EAD013C11}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "pixman", "..\..\..\source\port\pixman\pixman.vcxproj", "{0A298E22-839B-4D11-B5A7-456EAD013C11}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "zlib", "..\..\..\source\third\zlib\zlib.vcxproj", "{34FCFBF1-E922-4FDC-BC83-B3C04623E8C2}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "zlib", "..\..\..\source\port\zlib\zlib.vcxproj", "{34FCFBF1-E922-4FDC-BC83-B3C04623E8C2}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "pcre", "..\..\..\source\third\pcre\pcre.vcxproj", "{19AA8BB5-51FA-46E7-B346-2A89828F3000}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "pcre", "..\..\..\source\port\pcre\pcre.vcxproj", "{19AA8BB5-51FA-46E7-B346-2A89828F3000}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "freetype", "..\..\..\source\third\freetype\freetype.vcxproj", "{78B079BD-9FC7-4B9E-B4A6-96DA0F00248B}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "freetype", "..\..\..\source\port\freetype\freetype.vcxproj", "{78B079BD-9FC7-4B9E-B4A6-96DA0F00248B}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "expat", "..\..\..\source\third\expat\expat.vcxproj", "{2F3AE856-C0BB-413E-A451-0F867A07EBEC}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "expat", "..\..\..\source\port\expat\expat.vcxproj", "{2F3AE856-C0BB-413E-A451-0F867A07EBEC}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "cairo", "..\..\..\source\third\cairo\cairo.vcxproj", "{E6C58C82-71E5-48E6-98ED-1B505D6F10C2}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "cairo", "..\..\..\source\port\cairo\cairo.vcxproj", "{E6C58C82-71E5-48E6-98ED-1B505D6F10C2}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "bzip2", "..\..\..\source\third\bzip2\bzip2.vcxproj", "{A5A649E1-D516-4F29-A627-DA6884DD421C}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "bzip2", "..\..\..\source\port\bzip2\bzip2.vcxproj", "{A5A649E1-D516-4F29-A627-DA6884DD421C}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "id3lib", "..\..\..\source\third\id3lib\id3lib.vcxproj", "{E2D7833B-9B59-4826-BBDF-C27019771984}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "id3lib", "..\..\..\source\port\id3lib\id3lib.vcxproj", "{E2D7833B-9B59-4826-BBDF-C27019771984}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "acme", "..\..\..\source\app\acme\acme.vcxproj", "{638B242F-0F21-41C3-9F66-724660046133}"
 	ProjectSection(ProjectDependencies) = postProject
 		{34FCFBF1-E922-4FDC-BC83-B3C04623E8C2} = {34FCFBF1-E922-4FDC-BC83-B3C04623E8C2}
 	EndProjectSection
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "tridimension_object_importer", "..\..\..\source\third\tridimensional_object_importer\tridimensional_object_importer.vcxproj", "{D6B264BA-64EF-3681-9E0F-24C4B9B0A02A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -473,38 +471,6 @@ Global
 		{638B242F-0F21-41C3-9F66-724660046133}.stage|Win32.Build.0 = stage|Win32
 		{638B242F-0F21-41C3-9F66-724660046133}.stage|x64.ActiveCfg = stage|x64
 		{638B242F-0F21-41C3-9F66-724660046133}.stage|x64.Build.0 = stage|x64
-		{D6B264BA-64EF-3681-9E0F-24C4B9B0A02A}.basis|Win32.ActiveCfg = RelWithDebInfo|x64
-		{D6B264BA-64EF-3681-9E0F-24C4B9B0A02A}.basis|Win32.Build.0 = RelWithDebInfo|x64
-		{D6B264BA-64EF-3681-9E0F-24C4B9B0A02A}.basis|x64.ActiveCfg = RelWithDebInfo|x64
-		{D6B264BA-64EF-3681-9E0F-24C4B9B0A02A}.basis|x64.Build.0 = RelWithDebInfo|x64
-		{D6B264BA-64EF-3681-9E0F-24C4B9B0A02A}.cube_basis|Win32.ActiveCfg = RelWithDebInfo|x64
-		{D6B264BA-64EF-3681-9E0F-24C4B9B0A02A}.cube_basis|Win32.Build.0 = RelWithDebInfo|x64
-		{D6B264BA-64EF-3681-9E0F-24C4B9B0A02A}.cube_basis|x64.ActiveCfg = RelWithDebInfo|x64
-		{D6B264BA-64EF-3681-9E0F-24C4B9B0A02A}.cube_basis|x64.Build.0 = RelWithDebInfo|x64
-		{D6B264BA-64EF-3681-9E0F-24C4B9B0A02A}.cube_stage|Win32.ActiveCfg = RelWithDebInfo|x64
-		{D6B264BA-64EF-3681-9E0F-24C4B9B0A02A}.cube_stage|Win32.Build.0 = RelWithDebInfo|x64
-		{D6B264BA-64EF-3681-9E0F-24C4B9B0A02A}.cube_stage|x64.ActiveCfg = RelWithDebInfo|x64
-		{D6B264BA-64EF-3681-9E0F-24C4B9B0A02A}.cube_stage|x64.Build.0 = RelWithDebInfo|x64
-		{D6B264BA-64EF-3681-9E0F-24C4B9B0A02A}.Debug|Win32.ActiveCfg = Debug|x64
-		{D6B264BA-64EF-3681-9E0F-24C4B9B0A02A}.Debug|Win32.Build.0 = Debug|x64
-		{D6B264BA-64EF-3681-9E0F-24C4B9B0A02A}.Debug|x64.ActiveCfg = Debug|x64
-		{D6B264BA-64EF-3681-9E0F-24C4B9B0A02A}.Debug|x64.Build.0 = Debug|x64
-		{D6B264BA-64EF-3681-9E0F-24C4B9B0A02A}.MinSizeRel|Win32.ActiveCfg = MinSizeRel|x64
-		{D6B264BA-64EF-3681-9E0F-24C4B9B0A02A}.MinSizeRel|Win32.Build.0 = MinSizeRel|x64
-		{D6B264BA-64EF-3681-9E0F-24C4B9B0A02A}.MinSizeRel|x64.ActiveCfg = MinSizeRel|x64
-		{D6B264BA-64EF-3681-9E0F-24C4B9B0A02A}.MinSizeRel|x64.Build.0 = MinSizeRel|x64
-		{D6B264BA-64EF-3681-9E0F-24C4B9B0A02A}.Release|Win32.ActiveCfg = Release|x64
-		{D6B264BA-64EF-3681-9E0F-24C4B9B0A02A}.Release|Win32.Build.0 = Release|x64
-		{D6B264BA-64EF-3681-9E0F-24C4B9B0A02A}.Release|x64.ActiveCfg = Release|x64
-		{D6B264BA-64EF-3681-9E0F-24C4B9B0A02A}.Release|x64.Build.0 = Release|x64
-		{D6B264BA-64EF-3681-9E0F-24C4B9B0A02A}.RelWithDebInfo|Win32.ActiveCfg = RelWithDebInfo|x64
-		{D6B264BA-64EF-3681-9E0F-24C4B9B0A02A}.RelWithDebInfo|Win32.Build.0 = RelWithDebInfo|x64
-		{D6B264BA-64EF-3681-9E0F-24C4B9B0A02A}.RelWithDebInfo|x64.ActiveCfg = RelWithDebInfo|x64
-		{D6B264BA-64EF-3681-9E0F-24C4B9B0A02A}.RelWithDebInfo|x64.Build.0 = RelWithDebInfo|x64
-		{D6B264BA-64EF-3681-9E0F-24C4B9B0A02A}.stage|Win32.ActiveCfg = RelWithDebInfo|x64
-		{D6B264BA-64EF-3681-9E0F-24C4B9B0A02A}.stage|Win32.Build.0 = RelWithDebInfo|x64
-		{D6B264BA-64EF-3681-9E0F-24C4B9B0A02A}.stage|x64.ActiveCfg = RelWithDebInfo|x64
-		{D6B264BA-64EF-3681-9E0F-24C4B9B0A02A}.stage|x64.Build.0 = RelWithDebInfo|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

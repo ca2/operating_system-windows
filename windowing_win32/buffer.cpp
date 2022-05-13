@@ -2,6 +2,10 @@
 // recreated by Camilo 2021-02-01 23:29
 #include "framework.h"
 
+//#define REDRAW_HINTING
+#ifdef REDRAW_HINTING
+#include <gdiplus.h>
+#endif
 
 namespace windowing_win32
 {
@@ -192,7 +196,9 @@ namespace windowing_win32
 
       update_buffer(sizeWindow);
 
-      return double_buffer::on_begin_draw();
+      return pimageBuffer->get_graphics();
+
+      //return double_buffer::on_begin_draw();
 
    }
 
@@ -210,6 +216,8 @@ namespace windowing_win32
       os_buffer & buffer = m_osbuffera[m_iCurrentBuffer];
 
       auto size = sizeParam;
+
+      FORMATTED_INFORMATION("windowing_win32::buffer::update_buffer size(%d, %d)", size.cx, size.cy);
 
       if (size == buffer.m_pixmap.size())
       {
@@ -396,13 +404,19 @@ namespace windowing_win32
 
       }
 
-      index iScreenBuffer = (::index)pimage->m_atom;
+      index iScreenBuffer = get_screen_index();
 
       auto & buffer = m_osbuffera[iScreenBuffer];
 
       auto size = buffer.m_pixmap.size();
 
-      if (m_bDibIsHostingBuffer && buffer.m_pixmap.colorref() == pimage->colorref())
+      FORMATTED_INFORMATION("windowing_win32::buffer::update_screen size(%d, %d)", size.cx, size.cy);
+
+      auto pixmapData = buffer.m_pixmap.colorref();
+
+      auto pimageData= pimage->colorref();
+
+      if (m_bDibIsHostingBuffer && pimageData == pixmapData)
       {
 
       }
@@ -513,7 +527,7 @@ namespace windowing_win32
 
                //::DeleteObject(h);
 
-               Gdiplus::Graphics g(m_hdc);
+               Gdiplus::Graphics g(m_hdcScreen);
 
                Gdiplus::Rect rectangle;
 
@@ -554,16 +568,16 @@ namespace windowing_win32
                //::FillRect(m_hdc, rectangle, h);
 
                //::DeleteObject(h);
-               Gdiplus::Graphics g(m_hdc);
+               Gdiplus::Graphics g(buffer.m_hdc);
 
                Gdiplus::Rect rectangle;
 
-               rectangle.X = 20;
-               rectangle.Width = 10;
+               rectangle.X = 0;
                rectangle.Y = 0;
+               rectangle.Width = size.cx;
                rectangle.Height = size.cy;
 
-               Gdiplus::SolidBrush b(Gdiplus::Color(argb(255, 255, 210, 170)));
+               Gdiplus::SolidBrush b(Gdiplus::Color(argb(127, 255, 210, 170)));
 
                g.FillRectangle(&b, rectangle);
             }
