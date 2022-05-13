@@ -3,7 +3,7 @@
 #include "acme/platform/serial.h"
 //#include "acme/os/windows_common/file.h"
 #include "serial.h"
-
+#include "acme/platform/uint64_muldiv.h"
 
 CLASS_DECL_ACME bool windows_get_alternate_path(wstring& wstr);
 
@@ -501,7 +501,7 @@ namespace acme_windows
 
       duration duration;
 
-      duration.m_iSecond = muldiv64(count, m_uiByteTimeNs, 1'000'000'000);
+      duration.m_iSecond = uint64_muldiv(count, m_uiByteTimeNs, 1'000'000'000);
 
       duration.m_iNanosecond = (count * m_uiByteTimeNs) % 1'000'000'000;
 
