@@ -19,7 +19,7 @@
 
 
 
-#define _WIDEN(x) L#x
+#define __L(x) L#x
 
 
 
