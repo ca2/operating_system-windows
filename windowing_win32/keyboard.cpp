@@ -33,10 +33,10 @@ namespace windowing_win32
 
       }
 
-      if (ch >= 'a' && ch <= 'z')
+      if (ch >= 'A' && ch <= 'Z')
       {
 
-         return (::user::enum_key) (::user::e_key_a + (ch - 'a'));
+         return (::user::enum_key) (::user::e_key_a + (ch - 'A'));
 
       }
 
