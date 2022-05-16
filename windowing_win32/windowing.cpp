@@ -70,6 +70,12 @@ namespace windowing_win32
 
       }
 
+      auto pdisplay = dynamic_cast <class display*>(display());
+
+      pdisplay->register_device_listener(::hardware::e_device_monitor);
+
+
+
       //return estatus;
 
    }

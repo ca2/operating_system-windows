@@ -36,8 +36,8 @@ namespace windowing_win32
 } // namespace windowing_win32
 
 
-CLASS_DECL_WINDOWING_WIN32 void initialize_windows_devices(::windowing_win32::system_interaction * psysteminteraction);
-CLASS_DECL_WINDOWING_WIN32 void finalize_windows_devices();
+//CLASS_DECL_WINDOWING_WIN32 void initialize_windows_devices(::windowing_win32::system_interaction * psysteminteraction);
+//CLASS_DECL_WINDOWING_WIN32 void finalize_windows_devices();
 
 
 

@@ -884,6 +884,7 @@
     <Lib />
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="aaa_util.cpp" />
     <ClCompile Include="acme_directory.cpp" />
     <ClCompile Include="acme_file.cpp" />
     <ClCompile Include="application.cpp" />

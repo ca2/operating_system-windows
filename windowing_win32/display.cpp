@@ -1041,6 +1041,9 @@ namespace windowing_win32
 
       enum_display_monitors();
 
+
+      
+
 //      return estatus;
 
    }
@@ -1179,6 +1182,27 @@ namespace windowing_win32
    //   return true;
 
    //}
+   
+   
+   void display::on_device_plugged(::hardware::enum_device edevice)
+   {
+
+      ASSERT(edevice == ::hardware::e_device_monitor);
+
+      enum_display_monitors();
+
+   }
+
+
+   void display::on_device_unplugged(::hardware::enum_device edevice)
+   {
+
+      ASSERT(edevice == ::hardware::e_device_monitor);
+
+      enum_display_monitors();
+
+
+   }
 
 
 
