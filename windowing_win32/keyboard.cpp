@@ -72,6 +72,16 @@ namespace windowing_win32
          return ::user::e_key_right_command;
       case VK_BACK:
          return ::user::e_key_back;
+      case VK_DELETE:
+         return ::user::e_key_delete;
+      case VK_HOME:
+         return ::user::e_key_home;
+      case VK_END:
+         return ::user::e_key_end;
+      case VK_PRIOR:
+         return ::user::e_key_prior;
+      case VK_NEXT:
+         return ::user::e_key_next;
       }
 
       return ::user::e_key_none;
