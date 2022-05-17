@@ -4350,115 +4350,12 @@ namespace draw2d_gdiplus
    }
 
 
-
-
-   //HDC graphics::detach_hdc()
-   //{
-
-   //   if (m_hdcAttach == nullptr)
-   //   {
-
-   //      return nullptr;
-
-   //   }
-
-   //   if (m_pgraphics == nullptr)
-   //   {
-
-   //      return nullptr;
-
-   //   }
-
-   //   try
-   //   {
-
-   //      delete m_pgraphics;
-
-   //   }
-   //   catch(...)
-   //   {
-
-   //      TRACE("graphics::Detach : Failed to delete Gdiplus::Graphics");
-
-   //   }
-
-   //   m_pgraphics = nullptr;
-
-   //   HDC hdc = m_hdcAttach;
-
-   //   m_hdcAttach = nullptr;
-
-   //   return hdc;
-
-   //}
-
-
-   //void graphics::AttachPrinter(HDC hdc)
-   //{
-
-   //   if (hdc == nullptr)
-   //      return false;
-
-   //   if (m_hdc == hdc)
-   //   {
-
-   //      return true;
-
-   //   }
-
-   //   if (hdc != nullptr)
-   //   {
-
-   //      m_hdc = (HDC)hdc;
-
-   //   }
-
-   //   return m_hdc != nullptr;
-
-   //}
-
-
-   //HDC graphics::DetachPrinter()
-   //{
-
-   //   if (m_hdc == nullptr)
-   //      return nullptr;
-
-   //   HDC hdc = m_hdc;
-
-   //   m_hdc = nullptr;
-
-   //   return hdc;
-
-   //}
-
-
    void graphics::DeleteDC()
    {
 
       close_graphics();
 
-      //return true;
-
    }
-
-
-   //i32 graphics::StartDoc(const ::string & pszDocName)
-
-   //{
-
-   //   DOCINFOW di;
-
-   //   __memset(&di, 0, sizeof(DOCINFOW));
-
-   //   di.cbSize = sizeof(DOCINFOW);
-
-   //   di.lpszDocName = wstring(pszDocName);
-
-
-   //   return StartDoc(&di);
-
-   //}
 
 
    i32 graphics::SaveDC()

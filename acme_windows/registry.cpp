@@ -340,12 +340,14 @@ namespace acme_windows
    void registry::key::_set_value(const void* pvalue, const ::string & pcszValueName, ::u32 dwType, ::u32 cbValue)
    {
 
-      auto lstatus = RegSetValueExW(m_hkey, wstring(pcszValueName), 0, dwType, (const byte *) pvalue, cbValue);
+      auto lstatus = RegSetValueExW(m_hkey, ::is_empty(pcszValueName) ? nullptr : wstring(pcszValueName), 0, dwType, (const byte *) pvalue, cbValue);
 
       if (lstatus != ERROR_SUCCESS)
       {
 
-         throw ::exception(error_failed);
+         auto estatus = last_error_to_status(lstatus);
+
+         throw ::exception(estatus);
 
       }
 

@@ -650,6 +650,65 @@ namespace apex_windows
       //try
       //{
 
+      bool bForUser = true;
+
+      if (bForUser)
+      {
+
+         string strExt;
+
+         strExt += pszExtension;
+
+         string strExtensionNamingClass(pszExtensionNamingClass);
+
+         ::acme_windows::registry::key key(HKEY_CURRENT_USER, "Software\\Classes\\" + strExt, true);
+
+         key._set(nullptr, strExtensionNamingClass);
+
+         ::acme_windows::registry::key keyLink3(HKEY_CURRENT_USER, "Software\\Classes\\" + strExtensionNamingClass + "\\shell", true);
+
+         keyLink3._set("", "open");
+
+
+         ::acme_windows::registry::key keyLink2(keyLink3, "open", true);
+
+         keyLink2._set("", "");
+
+         ::acme_windows::registry::key keyLink1(keyLink2, "command", true);
+
+         string strCommand(pszCommand);
+
+         strCommand = solve_relative(strCommand);
+
+         string strFormat;
+
+         strFormat = "\"" + strCommand + "\"";
+
+         strFormat += pszParam;
+         
+         keyLink1._set("", strFormat);
+
+         //}
+         //catch (...)
+         //{
+
+         //   return false;
+
+         //}
+
+         //if (!estatus)
+         //{
+
+         //   return false;
+
+         //}
+
+         //return true;
+
+      }
+      else
+      {
+
          string strExt;
 
          strExt += pszExtension;
@@ -680,23 +739,7 @@ namespace apex_windows
          strFormat.format("\"%s\" %s", strCommand.c_str(), pszParam);
 
          keyLink1._set("", strFormat);
-
-      //}
-      //catch (...)
-      //{
-
-      //   return false;
-
-      //}
-
-      //if (!estatus)
-      //{
-
-      //   return false;
-
-      //}
-
-      //return true;
+      }
 
 
    }
