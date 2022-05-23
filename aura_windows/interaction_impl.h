@@ -281,10 +281,10 @@ namespace aura_windows
       virtual bool display(::e_display edisplay);
 
 
-      virtual void design_window_minimize(::e_activation eactivation) override;
-      virtual void design_window_maximize() override;
-      virtual void design_window_full_screen(const ::rectangle_i32 & rectangleHint = nullptr) override;
-      virtual void design_window_restore(edisplay edisplay) override;
+      //virtual void design_window_minimize(::e_activation eactivation) override;
+      //virtual void design_window_maximize() override;
+      //virtual void design_window_full_screen(const ::rectangle_i32 & rectangleHint = nullptr) override;
+      //virtual void design_window_restore(edisplay edisplay) override;
 
 
       //virtual bool _is_window_visible() override;
