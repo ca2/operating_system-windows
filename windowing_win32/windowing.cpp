@@ -448,6 +448,14 @@ namespace windowing_win32
    }
 
 
+   void windowing::clear_keyboard_focus(::windowing::window * pwindowGainingFocusIfAny)
+   {
+
+
+
+   }
+
+
    ::windowing::window * windowing::get_keyboard_focus(::thread * pthread)
    {
 

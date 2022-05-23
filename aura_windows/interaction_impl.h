@@ -294,6 +294,10 @@ namespace aura_windows
       virtual void LockWindowUpdate();
       virtual void UnlockWindowUpdate();
 
+      void show_software_keyboard(::user::element * pelement) override;
+      void hide_software_keyboard(::user::element * pelement) override;
+
+
       virtual void RedrawWindow(const ::rectangle_i32 & rectangleUpdate = nullptr, 
          ::draw2d::region* prgnUpdate = nullptr,
          ::u32 flags = RDW_INVALIDATE | RDW_ERASE);

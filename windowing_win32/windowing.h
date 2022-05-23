@@ -87,11 +87,14 @@ namespace windowing_win32
       virtual zorder zorder_from_hwnd(HWND hwnd);
       virtual HWND zorder_to_hwnd(const zorder & zorder);
 
+
+      void clear_keyboard_focus(::windowing::window * pwindowGainingFocusIfAny) override;
+
       
-      virtual ::windowing::window * get_keyboard_focus(::thread * pthread) override;
+      ::windowing::window * get_keyboard_focus(::thread * pthread) override;
 
 
-      virtual ::windowing::window * get_mouse_capture(::thread * pthread) override;
+      ::windowing::window * get_mouse_capture(::thread * pthread) override;
 
       
       //HWND _get_mouse_capture(itask_t itask);
@@ -175,6 +178,9 @@ namespace windowing_win32
       bool _visible_top_level_contains_name(string str) override;
       virtual bool _top_level_contains_name(string str);
       virtual string _get_window_text_timeout(oswindow oswindow, const ::duration & duration = 1_s);
+
+
+      
 
 
    };

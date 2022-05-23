@@ -175,6 +175,25 @@ namespace acme_windows
    }
 
 
+   void acme_file::_erase(const char* path)
+   {
+
+      ::wstring wstrPath(path);
+
+      if (!::DeleteFileW(wstrPath))
+      {
+
+         auto lastError = ::GetLastError();
+
+         auto estatus = last_error_to_status(lastError);
+
+         throw ::exception(estatus, "Failed to delete file \"" + ::string(path) + "\"");
+
+      }
+
+   }
+
+
 } // namespace acme_windows
 
 
