@@ -105,10 +105,10 @@ namespace windows
 
       //DECLARE_MESSAGE_HANDLER(on_message_destroy);
       //DECLARE_MESSAGE_HANDLER(on_message_create);
-      //DECLARE_MESSAGE_HANDLER(_001OnKillFocus);
+      //DECLARE_MESSAGE_HANDLER(on_message_kill_focus);
       //DECLARE_MESSAGE_HANDLER(_001OnPaint);
       //DECLARE_MESSAGE_HANDLER(_001OnPrint);
-      //DECLARE_MESSAGE_HANDLER(_001OnSetFocus);
+      //DECLARE_MESSAGE_HANDLER(on_message_set_focus);
       //DECLARE_MESSAGE_HANDLER(on_message_non_client_calculate_size);
       ////DECLARE_MESSAGE_HANDLER(on_message_set_cursor);
       //DECLARE_MESSAGE_HANDLER(_001OnEraseBkgnd);

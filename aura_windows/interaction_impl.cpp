@@ -817,7 +817,7 @@ namespace aura_windows
 //      //Default();
 //   }
 //
-////void interaction_impl::_001OnSetFocus(::message::message * pdetails)
+////void interaction_impl::on_message_set_focus(::message::message * pdetails)
 ////{
 ////
 ////   //bool bHandled;
@@ -2598,7 +2598,7 @@ namespace aura_windows
    //}
 
 
-   //void interaction_impl::_001OnSetFocus(::message::message * pusermessage)
+   //void interaction_impl::on_message_set_focus(::message::message * pusermessage)
    //{
 
    //   m_bFocusImpl = true;
@@ -2615,7 +2615,7 @@ namespace aura_windows
    //}
 
 
-   //void interaction_impl::_001OnKillFocus(::message::message * pmessage)
+   //void interaction_impl::on_message_kill_focus(::message::message * pmessage)
    //{
 
    //   m_bFocusImpl = false;

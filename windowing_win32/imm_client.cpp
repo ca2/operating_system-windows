@@ -26,8 +26,8 @@ void imm_client::initialize_text_composition_client(::channel * pchannel, ::user
 
    m_puserinteraction = puserinteraction;
 
-   MESSAGE_LINK(e_message_set_focus, pchannel, this, &::imm_client::_001OnSetFocus);
-   MESSAGE_LINK(e_message_kill_focus, pchannel, this, &::imm_client::_001OnKillFocus);
+   MESSAGE_LINK(e_message_set_focus, pchannel, this, &::imm_client::on_message_set_focus);
+   MESSAGE_LINK(e_message_kill_focus, pchannel, this, &::imm_client::on_message_kill_focus);
    MESSAGE_LINK(WM_IME_SETCONTEXT, pchannel, this, &::imm_client::_001OnIme);
    MESSAGE_LINK(WM_IME_STARTCOMPOSITION, pchannel, this, &::imm_client::_001OnIme);
    MESSAGE_LINK(WM_IME_COMPOSITION, pchannel, this, &::imm_client::_001OnIme);
@@ -50,13 +50,13 @@ void imm_client::initialize_text_composition_client(::channel * pchannel, ::user
 
 
 
-void imm_client::_001OnSetFocus(::message::message * pmessage)
+void imm_client::on_message_set_focus(::message::message * pmessage)
 {
 
 }
 
 
-void imm_client::_001OnKillFocus(::message::message * pmessage)
+void imm_client::on_message_kill_focus(::message::message * pmessage)
 {
 
    set_text_composition_active(false);

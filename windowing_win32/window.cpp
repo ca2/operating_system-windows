@@ -213,8 +213,8 @@ namespace windowing_win32
 
 
          //MESSAGE_LINK(e_message_show_window, pchannel, this, &window::on_message_show_window);
-         //MESSAGE_LINK(e_message_kill_focus, pchannel, this, &window::_001OnKillFocus);
-         //MESSAGE_LINK(e_message_set_focus, pchannel, this, &window::_001OnSetFocus);
+         //MESSAGE_LINK(e_message_kill_focus, pchannel, this, &window::on_message_kill_focus);
+         //MESSAGE_LINK(e_message_set_focus, pchannel, this, &window::on_message_set_focus);
          //MESSAGE_LINK(e_message_set_cursor, pchannel, this, &window::on_message_set_cursor);
 
       }
@@ -4072,7 +4072,7 @@ namespace windowing_win32
       //}
 
 
-   //void window::_001OnSetFocus(::message::message * pmessage)
+   //void window::on_message_set_focus(::message::message * pmessage)
    //{
 
    //   //m_bFocusImpl = true;
@@ -4087,7 +4087,7 @@ namespace windowing_win32
    //}
 
 
-   //void window::_001OnKillFocus(::message::message * pmessage)
+   //void window::on_message_kill_focus(::message::message * pmessage)
    //{
 
    //   //m_bFocusImpl = false;
