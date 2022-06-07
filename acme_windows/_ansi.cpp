@@ -2,8 +2,8 @@
 #include "acme/operating_system.h"
 
 
-namespace str
-{
+//namespace str
+//{
 
 
    u32 format_message(u32 dwFlags, const void * pSource, u32 dwMessageID, u32 dwLanguageID, ansichar * pszBuffer, u32 nSize, va_list * pArguments) noexcept
@@ -13,9 +13,9 @@ namespace str
 
    }
 
-   
-
-} // namespace str
+//   
+//
+//} // namespace str
 
 
 

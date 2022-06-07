@@ -80,7 +80,7 @@ namespace acme_windows
 
       }
 
-      ::str().international::multibyte_to_unicode(CP_UTF8, m_pNextInfo->cFileName, MAX_PATH, strName);
+      multibyte_to_unicode(CP_UTF8, m_pNextInfo->cFileName, MAX_PATH, strName);
 
       wstring wstrName = utf8_to_unicode(strName);
 

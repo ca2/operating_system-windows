@@ -66,10 +66,10 @@ CLASS_DECL_ACME TCHAR ** process_get_argv();
 #include <Winsvc.h>
 
 
-
-
-namespace str
-{
+//
+//
+//namespace str
+//{
 
 #ifdef WINDOWS
 
@@ -98,8 +98,8 @@ namespace str
 
 // #endif
 
-
-} //namespace str
+//
+//} //namespace str
 
 CLASS_DECL_ACME string get_command_line(HANDLE handleProcess);
 
