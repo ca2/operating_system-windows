@@ -399,7 +399,7 @@ namespace apex_windows
    //void * interprocess_communication_rx::on_interprocess_receive(::interprocess_communication::rx * prx, const ::string & strMessage)
    //{
 
-   //   if (::str::begins_ci(strMessage, "synch_"))
+   //   if (::str().begins_ci(strMessage, "synch_"))
    //   {
 
    //      if (m_preceiver != nullptr)

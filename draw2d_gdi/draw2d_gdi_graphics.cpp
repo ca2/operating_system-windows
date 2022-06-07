@@ -1579,7 +1579,7 @@ namespace draw2d_gdi
 
       string str(lpszString, nCount);
 
-      wstring wstr = ::str::international::utf8_to_unicode(str);
+      wstring wstr = utf8_to_unicode(str);
 
       ::draw2d::brush & brush = *get_current_brush();
       ::write_text::font & font = *get_current_font();
@@ -4694,7 +4694,7 @@ namespace draw2d_gdi
 
       string str(lpszString, nCount);
 
-      wstring wstr = ::str::international::utf8_to_unicode(str);
+      wstring wstr = utf8_to_unicode(str);
 
       if(!::GetTextExtentPoint32W(get_handle2(), wstr, (int)wstr.get_length(), &size))
       {
@@ -4722,7 +4722,7 @@ namespace draw2d_gdi
 
       ::size_i32 size;
 
-      wstring wstr = ::str::international::utf8_to_unicode(str);
+      wstring wstr = utf8_to_unicode(str);
 
       if(!::GetTextExtentPoint32W(get_handle2(), wstr, (int)wstr.get_length(), &size))
       {
@@ -4741,7 +4741,7 @@ namespace draw2d_gdi
       ASSERT(get_handle1() != nullptr);
       ::size_i32 size;
       string str(lpszString, nCount);
-      wstring wstr = ::str::international::utf8_to_unicode(str);
+      wstring wstr = utf8_to_unicode(str);
       VERIFY(::GetTextExtentPoint32W(get_handle1(), wstr, (int)wstr.get_length(), &size));
       return size;
    }
@@ -4749,7 +4749,7 @@ namespace draw2d_gdi
    {
       ASSERT(get_handle1() != nullptr);
       ::size_i32 size;
-      wstring wstr = ::str::international::utf8_to_unicode(str);
+      wstring wstr = utf8_to_unicode(str);
       VERIFY(::GetTextExtentPoint32W(get_handle1(), wstr, (int)wstr.get_length(), &size));
       return size;
    }

@@ -160,7 +160,7 @@ namespace acme_windows
 
       path.replace_with("", ":");
 
-      ::str::ends_eat_ci(path, ".exe");
+      ::str().ends_eat_ci(path, ".exe");
 
       return path;
 
@@ -686,7 +686,7 @@ pacmedir->roaming();
 //
 //               strPrefix.replace("/", "\\");
 //
-//               ::str::begins_eat_ci(strRelative, strPrefix);
+//               ::str().begins_eat_ci(strRelative, strPrefix);
 //
 //               strRelative.trim("/\\");
 //
@@ -1593,7 +1593,7 @@ pacmedir->create CreateDirectoryW last error(%d)=%s", dwError, pszError);
 //            else
 //            {
 //
-//               if (::str::begins_eat_ci(str, "image://"))
+//               if (::str().begins_eat_ci(str, "image://"))
 //               {
 //
 //                  strPrefix = "image://";
@@ -1613,7 +1613,7 @@ pacmedir->create CreateDirectoryW last error(%d)=%s", dwError, pszError);
 //
 //               }
 //
-//               if (::str::begins_eat_ci(str, "music://"))
+//               if (::str().begins_eat_ci(str, "music://"))
 //               {
 //
 //                  strPrefix = "music://";
@@ -1633,7 +1633,7 @@ pacmedir->create CreateDirectoryW last error(%d)=%s", dwError, pszError);
 //
 //               }
 //
-//               if (::str::begins_eat_ci(str, "video://"))
+//               if (::str().begins_eat_ci(str, "video://"))
 //               {
 //
 //                  strPrefix = "video://";
@@ -1653,7 +1653,7 @@ pacmedir->create CreateDirectoryW last error(%d)=%s", dwError, pszError);
 //
 //               }
 //
-//               if (::str::begins_eat_ci(str, "document://"))
+//               if (::str().begins_eat_ci(str, "document://"))
 //               {
 //
 //                  strPrefix = "document://";

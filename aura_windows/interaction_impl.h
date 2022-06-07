@@ -705,7 +705,7 @@ namespace aura_windows
       //virtual bool ModifyStyleEx(u32 dwRemove, u32 dwAdd, ::u32 nFlags);
       //virtual void _FilterToolTipMessage(MSG* pMsg,::user::interaction_impl * pwindow);
       //bool _EnableToolTips(bool bEnable, ::u32 nFlag);
-      //virtual oswindow get_safe_owner(::::windowing::window * pwindow, ::oswindow * pWndTop);
+      //virtual oswindow get_safe_owner(::windowing::window * pwindow, ::oswindow * pWndTop);
       //void PrepareForHelp();
 
 
