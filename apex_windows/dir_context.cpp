@@ -258,13 +258,13 @@ namespace apex_windows
    //   if(::url::is_url(pcszSource,&pszRequest))
 
    //   {
-   //      if(::str::begins(pcszRelative,astr.Slash))
+   //      if(::str().begins(pcszRelative,astr.Slash))
 
    //      {
    //         return path((const ::string &)string(pcszSource,pszRequest - lpcszSource),lpcszRelative);
 
    //      }
-   //      else if(*pszRequest == '\0' || ::str::ends(pcszSource,"/"))
+   //      else if(*pszRequest == '\0' || ::str().ends(pcszSource,"/"))
 
    //      {
    //         return path(pcszSource,lpcszRelative);
@@ -278,7 +278,7 @@ namespace apex_windows
    //   }
    //   else
    //   {
-   //      if(::str::ends(pcszSource,"\\") || ::str::ends(lpcszSource,"/"))
+   //      if(::str().ends(pcszSource,"\\") || ::str().ends(lpcszSource,"/"))
 
    //      {
    //         return path(pcszSource,lpcszRelative);
@@ -300,13 +300,13 @@ namespace apex_windows
    //   if(::url::is_url(pcszSource, &pszRequest))
 
    //   {
-   //      if(::str::begins(pcszRelative,astr.Slash))
+   //      if(::str().begins(pcszRelative,astr.Slash))
 
    //      {
    //         return path((const ::string &) string(pcszSource, pszRequest - lpcszSource), lpcszRelative, psz2);
 
    //      }
-   //      else if(*pszRequest == '\0' || ::str::ends(pcszSource, "/"))
+   //      else if(*pszRequest == '\0' || ::str().ends(pcszSource, "/"))
 
    //      {
    //         return path(pcszSource, lpcszRelative, psz2);
@@ -320,7 +320,7 @@ namespace apex_windows
    //   }
    //   else
    //   {
-   //      if(::str::ends(pcszSource, "\\") || ::str::ends(lpcszSource, "/"))
+   //      if(::str().ends(pcszSource, "\\") || ::str().ends(lpcszSource, "/"))
 
    //      {
    //         return path(pcszSource, lpcszRelative, psz2);
@@ -1200,7 +1200,7 @@ namespace apex_windows
    bool dir_context::is_inside(const ::file::path & pszDir, const ::file::path & pszPath)
    {
 
-      return ::str::begins_ci(pszDir, pszPath);
+      return ::str().begins_ci(pszDir, pszPath);
 
    }
 
@@ -1238,14 +1238,14 @@ namespace apex_windows
    //   // attempt to fully qualify path first
    //   wstring wstrFullName;
    //   wstring wstrFileName;
-   //   wstrFileName = ::str::international::utf8_to_unicode(pszFileName);
+   //   wstrFileName = utf8_to_unicode(pszFileName);
 
    //   if(!windows_full_path(wstrFullName,wstrFileName))
    //   {
    //      rStatus.m_strFullName.Empty();
    //      return false;
    //   }
-   //   ::str::international::unicode_to_utf8(rStatus.m_strFullName,wstrFullName);
+   //   unicode_to_utf8(rStatus.m_strFullName,wstrFullName);
 
    //   WIN32_FIND_DATA findFileData;
    //   HANDLE hFind = FindFirstFile((char *)pszFileName,&findFileData);

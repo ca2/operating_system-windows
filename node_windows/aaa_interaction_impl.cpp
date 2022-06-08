@@ -3455,8 +3455,8 @@ namespace windows
    //   }
 
    //   // determine toplevel interaction_impl to disable as well
-   //   ::::windowing::window * pwindow_Top = oswindow;
-   //   ::::windowing::window * pwindow_Temp = oswindow;
+   //   ::windowing::window * pwindow_Top = oswindow;
+   //   ::windowing::window * pwindow_Temp = oswindow;
    //   for (;;)
    //   {
    //      if (oswindow_Temp == nullptr)
@@ -3551,7 +3551,7 @@ namespace windows
 
    //      ASSERT(wParam != 0);
 
-   //      ::::windowing::window * pwindow = (::oswindow) wParam;
+   //      ::windowing::window * pwindow = (::oswindow) wParam;
 
    //      if (puserinteraction != nullptr)
    //      {
@@ -4650,7 +4650,7 @@ void interaction_impl::set_tool_window(bool bSet)
 //
 //            TRACE("e_message_left_button_down");
 //
-//            string strType = ::str::demangle(m_puserinteraction->type_name());
+//            string strType = ::str().demangle(m_puserinteraction->type_name());
 //
 //            if (strType.contains_ci("list_box"))
 //            {
@@ -4722,7 +4722,7 @@ void interaction_impl::set_tool_window(bool bSet)
 //            if (m_puserinteraction)
 //            {
 //
-//               strType = ::str::demangle(m_puserinteraction->type_name());
+//               strType = ::str().demangle(m_puserinteraction->type_name());
 //
 //               if (strType.contains_ci("list_box"))
 //               {

@@ -96,7 +96,7 @@ u32 format_message(u32 dwFlags, const void * pSource, u32 dwMessageID, u32 dwLan
 //strsize  char_traits::GetCharLen(const wd32char* pch) noexcept
 //{
 //   // returns wd32char length
-//   return  ::str::get_utf8_char(pch).get_length();
+//   return  ::str().get_utf8_char(pch).get_length();
 //}
 
 

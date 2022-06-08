@@ -2,8 +2,8 @@
 #include "acme/operating_system.h"
 
 
-namespace str
-{
+//namespace str
+//{
 
 
 BSTR AllocSysString(const wd32char * pchData, strsize nDataLength) noexcept
@@ -11,14 +11,14 @@ BSTR AllocSysString(const wd32char * pchData, strsize nDataLength) noexcept
 
    BSTR bstr = nullptr;
 
-   strsize nLen = utf_to_utf_length(bstr, pchData, nDataLength);
+   strsize nLen = ::str().utf_to_utf_length(bstr, pchData, nDataLength);
 
    bstr = ::SysAllocStringLen(nullptr, (::u32)nLen);
 
    if (bstr != nullptr)
    {
 
-      utf_to_utf(bstr, pchData, nDataLength);
+      ::str().utf_to_utf(bstr, pchData, nDataLength);
 
    }
 
@@ -31,14 +31,14 @@ BSTR AllocSysString(const wd32char * pchData, strsize nDataLength) noexcept
 bool ReAllocSysString(BSTR * pbstr, const wd32char * pchData, strsize nDataLength) noexcept
 {
 
-   strsize nLen = utf_to_utf_length(pbstr, pchData, nDataLength);
+   strsize nLen = ::str().utf_to_utf_length(pbstr, pchData, nDataLength);
 
    bool bSuccess = ::SysReAllocStringLen(pbstr, nullptr, (::u32)nLen) != 0;
 
    if (bSuccess)
    {
 
-      utf_to_utf(*pbstr, pchData, nDataLength);
+      ::str().utf_to_utf(*pbstr, pchData, nDataLength);
 
    }
 
@@ -94,7 +94,7 @@ u32 format_message(u32 dwFlags, const void * pSource, u32 dwMessageID, u32 dwLan
 //strsize  char_traits::GetCharLen(const wd32char* pch) noexcept
 //{
 //   // returns wd32char length
-//   return  ::str::get_utf8_char(pch).get_length();
+//   return  ::str().get_utf8_char(pch).get_length();
 //}
 
 
@@ -151,8 +151,8 @@ u32 format_message(u32 dwFlags, const void * pSource, u32 dwMessageID, u32 dwLan
 
 // }
 
-
-} // namespace acme_windows
-
+//
+//} // namespace acme_windows
+//
 
 

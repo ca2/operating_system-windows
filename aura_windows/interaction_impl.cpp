@@ -3239,8 +3239,8 @@ namespace aura_windows
    //   }
 
    //   // determine toplevel interaction_impl to disable as well
-   //   ::::windowing::window * pwindow_Top = oswindow;
-   //   ::::windowing::window * pwindow_Temp = oswindow;
+   //   ::windowing::window * pwindow_Top = oswindow;
+   //   ::windowing::window * pwindow_Temp = oswindow;
    //   for (;;)
    //   {
    //      if (oswindow_Temp == nullptr)
@@ -3335,7 +3335,7 @@ namespace aura_windows
 
    //      ASSERT(wParam != 0);
 
-   //      ::::windowing::window * pwindow = (::oswindow) wParam;
+   //      ::windowing::window * pwindow = (::oswindow) wParam;
 
    //      if (puserinteraction != nullptr)
    //      {

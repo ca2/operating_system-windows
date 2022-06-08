@@ -339,7 +339,7 @@ void shared_memory::FromAsc(const ::string & psz)
 
 /*void shared_memory::from_string(const unichar * pwsz)
 {
-   from_string(::str::international::unicode_to_utf8(pwsz));
+   from_string(unicode_to_utf8(pwsz));
 }
 
 void shared_memory::from_string(const ::string & psz)

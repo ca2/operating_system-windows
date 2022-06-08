@@ -152,9 +152,9 @@ int_bool file_is_equal_path_dup(const char * psz1, const char * psz2)
 
    const i32 iBufSize = MAX_PATH * 8;
 
-   wstring pwsz1 = ::str::international::utf8_to_unicode(psz1);
+   wstring pwsz1 = utf8_to_unicode(psz1);
 
-   wstring pwsz2 = ::str::international::utf8_to_unicode(psz2);
+   wstring pwsz2 = utf8_to_unicode(psz2);
 
    unichar * pwszFile1;
 
@@ -172,9 +172,9 @@ int_bool file_is_equal_path_dup(const char * psz1, const char * psz2)
       if(GetFullPathNameW(pwsz2, iBufSize, pwszPath2, &pwszFile2))
       {
          
-         string path1 = ::str::international::unicode_to_utf8(pwszPath1);
+         string path1 = unicode_to_utf8(pwszPath1);
          
-         string path2 = ::str::international::unicode_to_utf8(pwszPath2);
+         string path2 = unicode_to_utf8(pwszPath2);
          
          iCmp = ansi_compare_ci(path1, path2);
 
@@ -518,7 +518,7 @@ struct PROCESS_INFO_t
 ////            continue;
 ////         }
 ////         i32 nCmpStart = 4;
-////         string csFileName( ::str::international::unicode_to_utf8(&ThreadParams.pPath[nCmpStart]));
+////         string csFileName( unicode_to_utf8(&ThreadParams.pPath[nCmpStart]));
 ////
 ////         csFileName.make_lower();
 ////         if(csFileName.find("vs11_dp_ctp") >= 0)
@@ -533,7 +533,7 @@ struct PROCESS_INFO_t
 ////         OF_INFO_t stOFInfo;
 ////         stOFInfo.dwPID = pSysHandleInformation->Handles[g_CurrentIndex - 1].dwProcessId;
 ////         wstring wstrCallback;
-////         wstrCallback = ::str::international::utf8_to_unicode(csFileName);
+////         wstrCallback = utf8_to_unicode(csFileName);
 ////         stOFInfo.pFile = wstrCallback;
 ////
 ////         stOFInfo.hFile  = (HANDLE)pSysHandleInformation->Handles[g_CurrentIndex - 1].wValue;
@@ -641,7 +641,7 @@ struct PROCESS_INFO_t
 ////      OF_INFO_t stOFInfo;
 ////      stOFInfo.dwPID = sh.dwProcessId;
 ////      wstring wstrCallback;
-////      wstrCallback = ::str::international::utf8_to_unicode(csFileName);
+////      wstrCallback = utf8_to_unicode(csFileName);
 ////      stOFInfo.pFile = wstrCallback;
 ////
 ////      stOFInfo.hFile  = (HANDLE)sh.wValue;
@@ -749,7 +749,7 @@ struct PROCESS_INFO_t
 ////            stOFInfo.dwPID = pDwId[nIdx];
 ////            wstring wstrCallback;
 ////
-////            wstrCallback = ::str::international::utf8_to_unicode(csModule);
+////            wstrCallback = utf8_to_unicode(csModule);
 ////
 ////            stOFInfo.pFile = wstrCallback;
 ////
@@ -1190,7 +1190,7 @@ bool GetDrive(const char * pszDosName, string& csDrive, bool bDriveLetterOnly)
 string get_volume_path(const char * psz)
 {
    WCHAR wsz[4096];
-   if (!GetVolumePathNameW(::str::international::utf8_to_unicode(psz), wsz, sizeof(wsz) / sizeof(wsz[0])))
+   if (!GetVolumePathNameW(utf8_to_unicode(psz), wsz, sizeof(wsz) / sizeof(wsz[0])))
    {
       return "";
    }
@@ -1227,7 +1227,7 @@ namespace file
 
    //      wstring wstr;
 
-   //      wstr = ::str::international::utf8_to_unicode(m_path.name());
+   //      wstr = utf8_to_unicode(m_path.name());
 
    //      // #ifdef WINDOWS_DESKTOP
    //      //          GetOpenedFiles(wstr, ALL_TYPES, &exception::CallBackFunc, (uptr)this);
