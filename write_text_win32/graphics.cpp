@@ -5467,7 +5467,7 @@ namespace draw2d_gdiplus
    //   const char * psz = pszStart;
    //   while (*psz)
    //   {
-   //      const char * pszNext = ::str().utf8_inc(psz);
+   //      const char * pszNext = ::str().next(psz);
    //      if (pszNext == nullptr)
    //         break;
    //      iLen = pszNext - psz;
