@@ -126,7 +126,7 @@ string key_to_char(wparam wparam, lparam lparam)
 
       string str;
 
-      str = ::str::international::unicode_to_utf8(wsz);
+      str = unicode_to_utf8(wsz);
 
       if((GetAsyncKeyState(VK_CAPITAL) & 0x0001) != 0)
       {

@@ -80,9 +80,9 @@ namespace acme_windows
 
       }
 
-      ::str::international::MultiByteToUnicode(CP_UTF8, m_pNextInfo->cFileName, MAX_PATH, strName);
+      multibyte_to_unicode(CP_UTF8, m_pNextInfo->cFileName, MAX_PATH, strName);
 
-      wstring wstrName = ::str::international::utf8_to_unicode(strName);
+      wstring wstrName = utf8_to_unicode(strName);
 
       m_hContext = ::FindFirstFileW(wstrName, m_pNextInfo);
 
@@ -151,7 +151,7 @@ namespace acme_windows
 
       }
 
-      m_strRoot = ::str::international::unicode_to_utf8(wstrRoot);
+      m_strRoot = unicode_to_utf8(wstrRoot);
 
       return true;
 

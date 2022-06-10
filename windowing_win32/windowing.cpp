@@ -448,7 +448,7 @@ namespace windowing_win32
    }
 
 
-   void windowing::clear_keyboard_focus(::windowing::window * pwindowGainingFocusIfAny)
+   void windowing::clear_keyboard_focus(::user::element * pelementGainingFocusIfAny)
    {
 
 

@@ -103,7 +103,7 @@ namespace apex_windows
 
       wstring wstrCommandLine;
 
-      if(::str::ends_ci(szCmdline,".bat"))
+      if(::str().ends_ci(szCmdline,".bat"))
       {
 
          string strCmd;
@@ -224,7 +224,7 @@ namespace apex_windows
 
       HANDLE h = nullptr;
 
-      ::str::parse parse(pszCmdLine,strlen(pszCmdLine), "= ");
+      ::parse parse(pszCmdLine,strlen(pszCmdLine), "= ");
 
       parse.EnableQuote(true);
 

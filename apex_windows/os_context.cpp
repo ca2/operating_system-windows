@@ -327,7 +327,7 @@ namespace apex_windows
 
    //   }
 
-   //   return ::str::international::unicode_to_utf8(wstrPath);
+   //   return unicode_to_utf8(wstrPath);
 
    //}
 
@@ -474,7 +474,7 @@ namespace apex_windows
 
                string str;
 
-               str = "\"" + string(pszCommand) + "\"" + str::has_char(strArguments, " ");
+               str = "\"" + string(pszCommand) + "\"" + ::str().has_char(strArguments, " ");
 
                keyKar.set(pszKey, str);
 
@@ -769,9 +769,9 @@ namespace apex_windows
          try
          {
 
-            strCommand = ::str::consume_quoted_value(psz);
-            ::str::consume_spaces(psz);
-            ::str::consume(psz, "\"%L\"");
+            strCommand = ::str().consume_quoted_value(psz);
+            ::str().consume_spaces(psz);
+            ::str().consume(psz, "\"%L\"");
             strParam = psz;
 
          }
@@ -832,7 +832,7 @@ namespace apex_windows
 
             auto psz = str.c_str();
 
-            ::file::path path = ::str::consume_quoted_value(psz);
+            ::file::path path = ::str().consume_quoted_value(psz);
 
             string strCommand = "\"" + path + "\" \"" + strUrl + "\" --profile-directory=\"" + strMappedProfile + "\"";
 
@@ -1876,7 +1876,7 @@ retry:
 
          //      wstr.release_string_buffer();
 
-         //      string strLink = ::str::international::unicode_to_utf8((const widechar *)wstr);
+         //      string strLink = unicode_to_utf8((const widechar *)wstr);
 
          //      if (strLink.is_empty() && pitemidlist)
          //      {
@@ -1903,7 +1903,7 @@ retry:
 
          //         wstr.release_string_buffer();
 
-         //         *pstrDirectory = ::str::international::unicode_to_utf8((const widechar *)wstr);
+         //         *pstrDirectory = unicode_to_utf8((const widechar *)wstr);
 
          //      }
 
@@ -1919,7 +1919,7 @@ retry:
 
          //         wstr.release_string_buffer();
 
-         //         *pstrParams = ::str::international::unicode_to_utf8((const widechar *)wstr);
+         //         *pstrParams = unicode_to_utf8((const widechar *)wstr);
 
          //      }
 
@@ -2039,7 +2039,7 @@ retry:
 
       }
 
-      wstring wstrFileIn = ::str::international::utf8_to_unicode(strSource);
+      wstring wstrFileIn = utf8_to_unicode(strSource);
 
       //bool bNativeUnicode = is_windows_native_unicode() != false;
 
@@ -2120,7 +2120,7 @@ retry:
 
                wstr.release_string_buffer();
 
-               string strLink = ::str::international::unicode_to_utf8((const widechar *)wstr);
+               string strLink = unicode_to_utf8((const widechar *)wstr);
 
                if (strLink.is_empty() && pitemidlist)
                {
@@ -2147,7 +2147,7 @@ retry:
 
                   wstr.release_string_buffer();
 
-                  *pstrDirectory = ::str::international::unicode_to_utf8((const widechar *)wstr);
+                  *pstrDirectory = unicode_to_utf8((const widechar *)wstr);
 
                }
 
@@ -2163,7 +2163,7 @@ retry:
 
                   wstr.release_string_buffer();
 
-                  *pstrParams = ::str::international::unicode_to_utf8((const widechar *)wstr);
+                  *pstrParams = unicode_to_utf8((const widechar *)wstr);
 
                }
 
@@ -2189,7 +2189,7 @@ retry:
    bool os_context::is_alias(const char * psz)
    {
 
-      return ::str::ends_ci(psz, ".lnk");
+      return ::str().ends_ci(psz, ".lnk");
 
    }
 
@@ -2212,43 +2212,43 @@ retry:
 
          key._get("ProgId", strProgId);
 
-         if (::str::begins(strProgId, "App") && strHash.has_char())
+         if (::str().begins(strProgId, "App") && strHash.has_char())
          {
 
             strId = "edge";
 
          }
-         if (::str::begins_ci(strProgId, "IE."))
+         if (::str().begins_ci(strProgId, "IE."))
          {
 
             strId = "ie";
 
          }
-         else if (::str::begins_ci(strProgId, "ChromeHTML"))
+         else if (::str().begins_ci(strProgId, "ChromeHTML"))
          {
 
             strId = "chrome";
 
          }
-         else if (::str::begins_ci(strProgId, "FirefoxHTML"))
+         else if (::str().begins_ci(strProgId, "FirefoxHTML"))
          {
 
             strId = "firefox";
 
          }
-         else if (::str::begins_ci(strProgId, "Opera"))
+         else if (::str().begins_ci(strProgId, "Opera"))
          {
 
             strId = "opera";
 
          }
-         else if (::str::begins_ci(strProgId, "VivaldiHTM."))
+         else if (::str().begins_ci(strProgId, "VivaldiHTM."))
          {
 
             strId = "vivaldi";
 
          }
-         else if (::str::ends_ci(strProgId, "app_core_commander"))
+         else if (::str().ends_ci(strProgId, "app_core_commander"))
          {
 
             strId = "commander";
@@ -2274,7 +2274,7 @@ retry:
 
          }
 
-         bool bQuote = ::str::begins_eat_ci(strDefault, "\"");
+         bool bQuote = ::str().begins_eat_ci(strDefault, "\"");
 
          strsize iFind = strDefault.find_ci(".exe");
 
@@ -2296,7 +2296,7 @@ retry:
          if (bQuote)
          {
 
-            ::str::begins_eat_ci(strParam, "\"");
+            ::str().begins_eat_ci(strParam, "\"");
 
          }
 
@@ -2609,7 +2609,7 @@ repeat:
 
       }
 
-      if (!::str::ends_ci(str, ".exe"))
+      if (!::str().ends_ci(str, ".exe"))
       {
 
          str += ".exe";

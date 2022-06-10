@@ -825,7 +825,7 @@ string file_get_mozilla_firefox_plugin_container_path()
 
       ::file::path strDir;
 
-      strDir = ::str::international::unicode_to_utf8(wstrDir);
+      strDir = unicode_to_utf8(wstrDir);
 
       strPath = strDir / "plugin-container.exe";
    }

@@ -865,11 +865,11 @@ bool is_good_active_w(HWND w)
 //   while (psz != nullptr && *psz != '\0')
 //   {
 //
-//      int iIndex = ::str::ch::uni_index(psz);
+//      int iIndex = ::str::ch().uni_index(psz);
 //
 //      send_input_unicode(iIndex, iSleep);
 //
-//      psz = ::str::utf8_inc(psz);
+//      psz = ::str().utf8_inc(psz);
 //
 //   }
 //

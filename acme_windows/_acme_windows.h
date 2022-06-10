@@ -11,7 +11,6 @@
 
 CLASS_DECL_ACME_WINDOWS HANDLE hfile_create(
    const char * pFileName,
-
    ::u32                   dwDesiredAccess,
    ::u32                   dwShareMode,
    void * pSecurityAttributes,
@@ -62,44 +61,17 @@ CLASS_DECL_ACME TCHAR ** process_get_argv();
 #include <ddeml.h>
 #include <share.h>
 #include <io.h>
-//#include <process.h>
 #include <Winsvc.h>
 
 
+inline ansistring & assign(ansistring & ansistrDst, const cotaskptr < PWSTR > & pwidesz);
 
+inline widestring & assign(widestring & widestrDst, const cotaskptr < PSTR > & pansisz);
 
-namespace str
-{
+inline ansistring & assign(ansistring & ansistrDst, const cotaskptr < PWSTR > & pwidesz);
 
-#ifdef WINDOWS
+inline widestring & assign(widestring & widestrDst, const cotaskptr < PSTR > & pansisz);
 
-   inline ansistring & assign(ansistring & ansistrDst, const cotaskptr < PWSTR > & pwidesz);
-
-   inline widestring & assign(widestring & widestrDst, const cotaskptr < PSTR > & pansisz);
-
-   inline ansistring & assign(ansistring & ansistrDst, const cotaskptr < PWSTR > & pwidesz);
-
-   inline widestring & assign(widestring & widestrDst, const cotaskptr < PSTR > & pansisz);
-
-#endif
-
-
-// #ifdef WINDOWS
-//    // wd16
-//    CLASS_DECL_ACME  BSTR               AllocSysString(const ansichar * pchData, strsize nDataLength) noexcept;
-//    CLASS_DECL_ACME  bool               ReAllocSysString(BSTR * pbstr, const ansichar * pchData, strsize nDataLength) noexcept;
-
-// #endif
-
-// #ifdef WINDOWS
-//    // wd32
-//    inline  BSTR               AllocSysString(const wd32char * pchData, strsize nDataLength) noexcept;
-//    inline  bool               ReAllocSysString(BSTR * pbstr, const wd32char * pchData, strsize nDataLength) noexcept;
-
-// #endif
-
-
-} //namespace str
 
 CLASS_DECL_ACME string get_command_line(HANDLE handleProcess);
 
