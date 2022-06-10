@@ -511,7 +511,7 @@ pacmedir->system() / "config/production/mirror_status.txt";
             //   add_status(strStatus);
 
             //}
-            //if (str::from(atoi(strRevision)) != strRevision)
+            //if (::str().from(atoi(strRevision)) != strRevision)
             //{
             //   // good pratice to initialize authentication of ca2status.com with account.ca2.cc auth information
             //   //string str;
@@ -763,7 +763,7 @@ pacmedir->system() / "config/production/mirror_status.txt";
             // return 2;
 
 
-            m_strSubversionRevision = "SVN" + str::from(atoi(strRevision) + 1);
+            m_strSubversionRevision = "SVN" + ::str().from(atoi(strRevision) + 1);
 
             //if (m_bBuild)
             {

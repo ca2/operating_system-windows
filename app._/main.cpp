@@ -547,10 +547,10 @@ pacmedir->system() / "config/plugin/appfy_beg_debug_box.txt"))
    {
       string strDir(pszPath);
 
-      if (str::ends(strDir, PATH_SEP1))
+      if (::str().ends(strDir, PATH_SEP1))
          return strDir;
 
-      if (str::ends(strDir, PATH_SEP2))
+      if (::str().ends(strDir, PATH_SEP2))
          return strDir;
 
       strsize iFind1 = strDir.reverse_find(PATH_SEP1);
