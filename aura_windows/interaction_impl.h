@@ -73,7 +73,7 @@ namespace aura_windows
 
       //virtual void update_graphics_resources();
 
-      void native_create_host() override;
+      //void native_create_host() override;
 
 
       //virtual bool __windows_message_bypass(HWND oswindow, ::u32 message, wparam wparam, lparam lparam, lresult & lresult);
@@ -108,10 +108,10 @@ namespace aura_windows
       DECLARE_MESSAGE_HANDLER(_001OnSysCommand);
       //DECLARE_MESSAGE_HANDLER(on_message_destroy);
       //DECLARE_MESSAGE_HANDLER(on_message_create);
-      //DECLARE_MESSAGE_HANDLER(_001OnKillFocus);
+      //DECLARE_MESSAGE_HANDLER(on_message_kill_focus);
       //DECLARE_MESSAGE_HANDLER(_001OnPaint);
       //DECLARE_MESSAGE_HANDLER(_001OnPrint);
-      //DECLARE_MESSAGE_HANDLER(_001OnSetFocus);
+      //DECLARE_MESSAGE_HANDLER(on_message_set_focus);
       //DECLARE_MESSAGE_HANDLER(on_message_non_client_calculate_size);
       ////DECLARE_MESSAGE_HANDLER(on_message_set_cursor);
       //DECLARE_MESSAGE_HANDLER(_001OnEraseBkgnd);
@@ -281,10 +281,10 @@ namespace aura_windows
       virtual bool display(::e_display edisplay);
 
 
-      virtual void design_window_minimize(::e_activation eactivation) override;
-      virtual void design_window_maximize() override;
-      virtual void design_window_full_screen(const ::rectangle_i32 & rectangleHint = nullptr) override;
-      virtual void design_window_restore(edisplay edisplay) override;
+      //virtual void design_window_minimize(::e_activation eactivation) override;
+      //virtual void design_window_maximize() override;
+      //virtual void design_window_full_screen(const ::rectangle_i32 & rectangleHint = nullptr) override;
+      //virtual void design_window_restore(edisplay edisplay) override;
 
 
       //virtual bool _is_window_visible() override;
@@ -293,6 +293,10 @@ namespace aura_windows
       //virtual __pointer(::draw2d::graphics) GetDCEx(::draw2d::region* prgnClip, u32 flags);
       virtual void LockWindowUpdate();
       virtual void UnlockWindowUpdate();
+
+      void show_software_keyboard(::user::element * pelement) override;
+      void hide_software_keyboard(::user::element * pelement) override;
+
 
       virtual void RedrawWindow(const ::rectangle_i32 & rectangleUpdate = nullptr, 
          ::draw2d::region* prgnUpdate = nullptr,
@@ -701,7 +705,7 @@ namespace aura_windows
       //virtual bool ModifyStyleEx(u32 dwRemove, u32 dwAdd, ::u32 nFlags);
       //virtual void _FilterToolTipMessage(MSG* pMsg,::user::interaction_impl * pwindow);
       //bool _EnableToolTips(bool bEnable, ::u32 nFlag);
-      //virtual oswindow get_safe_owner(::::windowing::window * pwindow, ::oswindow * pWndTop);
+      //virtual oswindow get_safe_owner(::windowing::window * pwindow, ::oswindow * pWndTop);
       //void PrepareForHelp();
 
 

@@ -95,7 +95,7 @@ namespace str
    //strsize  char_traits::GetCharLen(const wd16char* pch) noexcept
    //{
    //   // returns wd16char length
-   //   return  ::str::get_utf8_char(pch).get_length();
+   //   return  ::str().get_utf8_char(pch).get_length();
    //}
 
 

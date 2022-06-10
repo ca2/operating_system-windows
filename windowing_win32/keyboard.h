@@ -12,11 +12,12 @@ namespace windowing_win32
    public:
 
 
-      //__creatable_from_base(keyboard, ::windowing::keyboard);
-
 
       keyboard();
       ~keyboard() override;
+
+
+      void translate_os_key_message(::user::key* pkey) override;
 
 
    };

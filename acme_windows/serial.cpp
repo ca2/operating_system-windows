@@ -5,7 +5,6 @@
 #include "serial.h"
 #include "acme/platform/uint64_muldiv.h"
 
-
 CLASS_DECL_ACME bool windows_get_alternate_path(wstring& wstr);
 
 /* Copyright 2012 William Woodall and John Harrison */

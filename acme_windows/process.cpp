@@ -61,7 +61,7 @@
 //      return "";
 //   }
 //   commandLineContents[ustrCommandLine.Length / sizeof(WCHAR)] = L'\0';
-//   string str = ::str::international::unicode_to_utf8(commandLineContents);
+//   string str = unicode_to_utf8(commandLineContents);
 //   memory_free_debug(commandLineContents, 0);
 //   return str;
 //}

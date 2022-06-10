@@ -662,7 +662,7 @@ namespace acme_windows
    //
    //      //ASSERT(m_atomApp == nullptr && m_atomSystemTopic == nullptr); // do once
    //
-   //      //m_atomApp            = ::GlobalAddAtomW(::str::international::utf8_to_unicode(m_strAppName));
+   //      //m_atomApp            = ::GlobalAddAtomW(utf8_to_unicode(m_strAppName));
    //
    //      //m_atomSystemTopic    = ::GlobalAddAtomW(L"system");
    //
@@ -2376,7 +2376,7 @@ namespace acme_windows
 
    {
 
-      return ::ExtractIconW(hInst, ::str::international::utf8_to_unicode(pszExeFileName), nIconIndex);
+      return ::ExtractIconW(hInst, utf8_to_unicode(pszExeFileName), nIconIndex);
 
 
    }
@@ -2428,7 +2428,7 @@ namespace acme_windows
 
    //{
 
-   //   return ::ExtractIconW(hInst, ::str::international::utf8_to_unicode(pszExeFileName), nIconIndex);
+   //   return ::ExtractIconW(hInst, utf8_to_unicode(pszExeFileName), nIconIndex);
 
 
    //}
@@ -2437,7 +2437,7 @@ namespace acme_windows
    void node::delete_file(const ::string & pFileName)
    {
 
-      if (!::DeleteFileW(::str::international::utf8_to_unicode(pFileName)))
+      if (!::DeleteFileW(utf8_to_unicode(pFileName)))
       {
 
          throw ::exception(error_failed);

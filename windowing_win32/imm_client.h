@@ -26,8 +26,8 @@ public:
    DECLARE_MESSAGE_HANDLER(on_message_key_down);
    DECLARE_MESSAGE_HANDLER(_011OnChar);
    DECLARE_MESSAGE_HANDLER(_001OnIme);
-   DECLARE_MESSAGE_HANDLER(_001OnSetFocus);
-   DECLARE_MESSAGE_HANDLER(_001OnKillFocus);
+   DECLARE_MESSAGE_HANDLER(on_message_set_focus);
+   DECLARE_MESSAGE_HANDLER(on_message_kill_focus);
 
    virtual int on_text_composition_message(int iMessage);
 
@@ -39,7 +39,7 @@ public:
 
    virtual bool is_text_composition_active() const;
 
-   virtual void set_text_composition_active(bool bActive = true);
+   void set_text_composition_active(bool bActive = true) override;
 
    virtual string get_ime_composition() const;
 
@@ -74,8 +74,8 @@ public:
 //   DECLARE_MESSAGE_HANDLER(on_message_key_down);
 //   DECLARE_MESSAGE_HANDLER(_011OnChar);
 //   DECLARE_MESSAGE_HANDLER(_001OnIme);
-//   DECLARE_MESSAGE_HANDLER(_001OnSetFocus);
-//   DECLARE_MESSAGE_HANDLER(_001OnKillFocus);
+//   DECLARE_MESSAGE_HANDLER(on_message_set_focus);
+//   DECLARE_MESSAGE_HANDLER(on_message_kill_focus);
 //
 //   virtual int on_text_composition_message(int iMessage);
 //

@@ -9,7 +9,7 @@ namespace acme_windows
    HINSTANCE load_library(const ::string & psz)
    {
 
-      return ::LoadLibraryW(::str::international::utf8_to_unicode(psz));
+      return ::LoadLibraryW(utf8_to_unicode(psz));
 
    }
 
@@ -95,7 +95,7 @@ namespace acme_windows
 
    {
 
-      return ::ExtractIconW(hInst, ::str::international::utf8_to_unicode(pszExeFileName), nIconIndex);
+      return ::ExtractIconW(hInst, utf8_to_unicode(pszExeFileName), nIconIndex);
 
 
    }
@@ -105,7 +105,7 @@ namespace acme_windows
 
    {
 
-      return ::DeleteFileW(::str::international::utf8_to_unicode(pFileName)) != false;
+      return ::DeleteFileW(utf8_to_unicode(pFileName)) != false;
 
 
    }

@@ -340,12 +340,14 @@ namespace acme_windows
    void registry::key::_set_value(const void* pvalue, const ::string & pcszValueName, ::u32 dwType, ::u32 cbValue)
    {
 
-      auto lstatus = RegSetValueExW(m_hkey, wstring(pcszValueName), 0, dwType, (const byte *) pvalue, cbValue);
+      auto lstatus = RegSetValueExW(m_hkey, ::is_empty(pcszValueName) ? nullptr : wstring(pcszValueName), 0, dwType, (const byte *) pvalue, cbValue);
 
       if (lstatus != ERROR_SUCCESS)
       {
 
-         throw ::exception(error_failed);
+         auto estatus = last_error_to_status(lstatus);
+
+         throw ::exception(estatus);
 
       }
 
@@ -823,7 +825,7 @@ string file_get_mozilla_firefox_plugin_container_path()
 
       ::file::path strDir;
 
-      strDir = ::str::international::unicode_to_utf8(wstrDir);
+      strDir = unicode_to_utf8(wstrDir);
 
       strPath = strDir / "plugin-container.exe";
    }

@@ -1,4 +1,5 @@
 #include "framework.h"
+#include "_windows.h"
 
 
 //BEGIN_FACTORY(windowing_win32)
@@ -42,5 +43,7 @@ __FACTORY_EXPORT void windowing_win32_factory(::factory::factory * pfactory)
    pfactory->add_factory_item < ::windowing_win32::keyboard, ::windowing::keyboard >();
 
    pfactory->add_factory_item < ::windowing_win32::node, ::acme::node >();
+
+   pfactory->add_factory_item < ::windowing_win32::devices, ::hardware::devices >();
 
 }

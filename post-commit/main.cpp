@@ -159,7 +159,7 @@ void app_t::win_sync_out(string strLocal,string strRepos)
    //	}
 
 
-   //if(strReposParam == "net" || ::str::begins(strReposParam,"net"))
+   //if(strReposParam == "net" || ::str().begins(strReposParam,"net"))
    //{
 
    //	strLog += call("svn cleanup C:\\netnodenet\\" + strReposParam);

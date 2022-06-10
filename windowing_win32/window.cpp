@@ -213,8 +213,8 @@ namespace windowing_win32
 
 
          //MESSAGE_LINK(e_message_show_window, pchannel, this, &window::on_message_show_window);
-         //MESSAGE_LINK(e_message_kill_focus, pchannel, this, &window::_001OnKillFocus);
-         //MESSAGE_LINK(e_message_set_focus, pchannel, this, &window::_001OnSetFocus);
+         //MESSAGE_LINK(e_message_kill_focus, pchannel, this, &window::on_message_kill_focus);
+         //MESSAGE_LINK(e_message_set_focus, pchannel, this, &window::on_message_set_focus);
          //MESSAGE_LINK(e_message_set_cursor, pchannel, this, &window::on_message_set_cursor);
 
       }
@@ -264,7 +264,7 @@ namespace windowing_win32
 
       //__refer(m_pthreadUserImpl, puserinteraction->m_pthreadUserInteraction OBJECT_REFERENCE_COUNT_DEBUG_COMMA_THIS_FUNCTION_LINE);
 
-      //m_strDebug += ::str::demangle(puserinteraction->type_name()) + ";";
+      //m_strDebug += ::str().demangle(puserinteraction->type_name()) + ";";
 
       //ASSERT(pusersystem->m_createstruct.lpszClass == nullptr || __is_valid_string(pusersystem->m_createstruct.lpszClass) || __is_valid_atom(pusersystem->m_createstruct.lpszClass));
 
@@ -303,6 +303,8 @@ namespace windowing_win32
       }
 
       m_puserinteractionimpl = pimpl;
+
+      m_puserinteractionimpl->m_pwindow = this;
 
 
       //pimpl->install_message_routing(puserinteraction);
@@ -4070,7 +4072,7 @@ namespace windowing_win32
       //}
 
 
-   //void window::_001OnSetFocus(::message::message * pmessage)
+   //void window::on_message_set_focus(::message::message * pmessage)
    //{
 
    //   //m_bFocusImpl = true;
@@ -4085,7 +4087,7 @@ namespace windowing_win32
    //}
 
 
-   //void window::_001OnKillFocus(::message::message * pmessage)
+   //void window::on_message_kill_focus(::message::message * pmessage)
    //{
 
    //   //m_bFocusImpl = false;
@@ -5687,7 +5689,7 @@ namespace windowing_win32
 //
 //            TRACE("e_message_left_button_down");
 //
-//            string strType = ::str::demangle(puserinteraction->type_name());
+//            string strType = ::str().demangle(puserinteraction->type_name());
 //
 //            if (strType.contains_ci("list_box"))
 //            {
@@ -5759,7 +5761,7 @@ namespace windowing_win32
 //            if (puserinteraction)
 //            {
 //
-//               strType = ::str::demangle(puserinteraction->type_name());
+//               strType = ::str().demangle(puserinteraction->type_name());
 //
 //               if (strType.contains_ci("list_box"))
 //               {

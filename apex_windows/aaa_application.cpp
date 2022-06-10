@@ -55,7 +55,7 @@ namespace apex
 
       //ASSERT(m_atomApp == nullptr && m_atomSystemTopic == nullptr); // do once
 
-      //m_atomApp            = ::GlobalAddAtomW(::str::international::utf8_to_unicode(m_strAppName));
+      //m_atomApp            = ::GlobalAddAtomW(utf8_to_unicode(m_strAppName));
 
       //m_atomSystemTopic    = ::GlobalAddAtomW(L"system");
 
@@ -251,7 +251,7 @@ namespace apex
 //
 //   pmaininitdata->m_hInstance = hInstance;
 //   pmaininitdata->m_hPrevInstance = hPrevInstance;
-//   pmaininitdata->m_strCommandLine = ::str::international::unicode_to_utf8(::GetCommandLineW());
+//   pmaininitdata->m_strCommandLine = unicode_to_utf8(::GetCommandLineW());
 //   pmaininitdata->m_nCmdShow = nCmdShow;
 //
 //   papp->startup_command(pmaininitdata);

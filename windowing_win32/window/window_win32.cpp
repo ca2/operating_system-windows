@@ -480,11 +480,13 @@ wstring windowing::_windows_calc_icon_window_class(::user::interaction * puserin
 
    auto pcontext = puserinteraction->get_context();
 
-   ::file::path pathMatter(pszMatter);
+   ::file::path pathFolder(pszMatter);
 
-   pathMatter /= "icon.ico";
+   ::file::path pathIcon;
 
-   string strPath = pcontext->m_papexcontext->dir().matter(pathMatter);
+   pathIcon = pathFolder / "icon.ico";
+
+   string strPath = pcontext->m_papexcontext->dir().matter(pathIcon);
 
    HICON hIcon = (HICON) ::LoadImageW(nullptr, wstring(pcontext->m_papexcontext->get_matter_path(strPath)), IMAGE_ICON, 256, 256, LR_LOADFROMFILE);
 
