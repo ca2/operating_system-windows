@@ -7402,7 +7402,7 @@ namespace draw2d_gdiplus
 
    //         ::image_pointer pimage1;
 
-   //         pimage1 = m_pcontext->context_image()->create_image(rectangleText.size());
+   //         pimage1 = pcontext->m_pauracontext->create_image(rectangleText.size());
 
    //         pimage1->fill(0);
 

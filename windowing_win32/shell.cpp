@@ -157,7 +157,7 @@ __pointer(::image) create_image_from_hbitmap(::object * pobject, HBITMAP hbitmap
          int h = ds.dsBmih.biHeight;
 
          auto pBits = ds.dsBm.bmBits;
-         auto pimage = pobject->m_pcontext->context_image()->create_image({ w, h });
+         auto pimage = pobject->pcontext->m_pauracontext->create_image({ w, h });
          int iStride = ds.dsBmih.biSizeImage / abs(h );
 
          if (h < 0)
@@ -183,7 +183,7 @@ __pointer(::image) create_image_from_hbitmap(::object * pobject, HBITMAP hbitmap
 
    ::GetObject(hbitmap, sizeof(bitmap), &bitmap);
 
-   auto pimage = pobject->m_pcontext->context_image()->create_image({ bitmap.bmWidth, bitmap.bmHeight });
+   auto pimage = pobject->pcontext->m_pauracontext->create_image({ bitmap.bmWidth, bitmap.bmHeight });
 
    BITMAPINFO bitmapinfo = {};
 
