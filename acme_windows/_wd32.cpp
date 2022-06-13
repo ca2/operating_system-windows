@@ -27,7 +27,7 @@ BSTR AllocSysString(const wd32char * pchData, strsize nDataLength) noexcept
 bool ReAllocSysString(BSTR * pbstr, const wd32char * pchData, strsize nDataLength) noexcept
 {
 
-   strsize nLen = ::str().utf_to_utf_length(pbstr, pchData, nDataLength);
+   strsize nLen = ::str().utf_to_utf_length((wchar_t *) pbstr, pchData, nDataLength);
 
    bool bSuccess = ::SysReAllocStringLen(pbstr, nullptr, (::u32)nLen) != 0;
 
