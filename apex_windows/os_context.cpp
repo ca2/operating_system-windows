@@ -2000,10 +2000,43 @@ retry:
 
 
 
-   bool os_context::resolve_link(::file::path & path, const ::string & strSource, string * pstrDirectory, string * pstrParams)
+   void os_context::edit_link_icon(const ::file::path& path, int iIcon, const ::file::path& pathLink)
    {
 
-      if (::os_context::resolve_link(path, strSource, pstrDirectory, pstrParams))
+      auto pshelllink = _get_IShellLinkW(pathLink);
+
+      HRESULT hresult = pshelllink->SetIconLocation(wstring(path), iIcon);
+
+      auto estatus = hresult_to_status(hresult);
+
+      if (!estatus)
+      {
+
+         throw ::exception(estatus);
+
+      }
+
+      comptr < IPersistFile > ppersistfile;
+
+      pshelllink.as(ppersistfile);
+
+      if (!ppersistfile)
+      {
+
+         throw ::exception(error_no_interface);
+
+      }
+
+      ppersistfile->Save(wstring(pathLink), TRUE);
+
+   }
+
+
+
+   bool os_context::resolve_link(::file::path & path, const ::string & strSource, string * pstrDirectory, string * pstrParams, string * pstrIcon, int * piIcon)
+   {
+
+      if (::os_context::resolve_link(path, strSource, pstrDirectory, pstrParams, pstrIcon, piIcon))
       {
 
          return true;
@@ -2013,8 +2046,7 @@ retry:
       if (strSource.ends_ci(".lnk"))
       {
 
-         if (resolve_lnk_link(path, strSource, pstrDirectory, pstrParams))
-         {
+         if (resolve_lnk_link(path, strSource, pstrDirectory, pstrParams, pstrIcon, piIcon))         {
 
             return true;
 
@@ -2027,7 +2059,7 @@ retry:
    }
 
 
-   bool os_context::resolve_lnk_link(::file::path & path, const ::string & strSource, string * pstrDirectory, string * pstrParams)
+   bool os_context::resolve_lnk_link(::file::path & path, const ::string & strSource, string * pstrDirectory, string * pstrParams, string * pstrIcon, int * piIcon)
    {
 
       ASSERT(strSource.ends_ci(".lnk"));
@@ -2164,6 +2196,31 @@ retry:
                   wstr.release_string_buffer();
 
                   *pstrParams = unicode_to_utf8((const widechar *)wstr);
+
+               }
+
+            }
+
+            if (::is_set(pstrIcon))
+            {
+
+               auto pwsz = wstr.get_string_buffer(MAX_PATH * 8);
+
+               int iIcon = 0;
+
+               if (SUCCEEDED(pshelllink->GetIconLocation(pwsz, MAX_PATH * 8, &iIcon)))
+               {
+
+                  wstr.release_string_buffer();
+
+                  *pstrIcon = unicode_to_utf8((const widechar*)wstr);
+
+                  if (*piIcon)
+                  {
+
+                     *piIcon = iIcon;
+
+                  }
 
                }
 

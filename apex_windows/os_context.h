@@ -83,10 +83,11 @@ namespace apex_windows
 
       void edit_link_target(const ::file::path & path, const ::file::path & pathLink) override;
       void edit_link_folder(const ::file::path & path, const ::file::path & pathLink) override;
+      void edit_link_icon(const ::file::path& path, int iIcon, const ::file::path& pathLink) override;
 
-      bool resolve_link(::file::path & path, const ::string & strSource, string * pstrDirectory = nullptr, string * pstrParams = nullptr) override;
+      bool resolve_link(::file::path & path, const ::string & strSource, string * pstrDirectory = nullptr, string * pstrParams = nullptr, string * pstrIcon = nullptr, int * piIcon = nullptr) override;
 
-      bool resolve_lnk_link(::file::path & path, const ::string & strSource, string * pstrDirectory = nullptr, string * pstrParams = nullptr);
+      bool resolve_lnk_link(::file::path & path, const ::string & strSource, string * pstrDirectory = nullptr, string * pstrParams = nullptr, string * pstrIcon = nullptr, int * piIcon = nullptr);
 
       bool has_alias_in_path(const char * psz, bool bNoUI = false, bool bNoMount = false) override;
 
