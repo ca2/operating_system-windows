@@ -4,6 +4,7 @@
 //
 #define IDR_HTML1                       101
 #define IDR_LEVEL1                      108
+#define IDR_MAIN                        128  
 
 // Next default values for new objects
 // 

@@ -1,4 +1,5 @@
 #include "framework.h"
+#include "operating-system/operating-system-windows/resource1.h"
 
 
 CLASS_DECL_ACME_WINDOWS void shell_notify_folder_change(const wchar_t* pwsz);
@@ -937,14 +938,14 @@ namespace apex_windows
 
 #ifdef WINDOWS
 
-               auto pathIcon = path.folder() / "icon.ico";
+               //auto pathIcon = path.folder() / "icon.ico";
 
-               if (!m_psystem->m_pacmefile->exists(pathIcon))
-               {
+               //if (!m_psystem->m_pacmefile->exists(pathIcon))
+               //{
 
-                  papp->m_papplication->file().copy(pathIcon, "matter://main/icon.ico", false);
+               //   papp->m_papplication->file().copy(pathIcon, "matter://main/icon.ico", false);
 
-               }
+               //}
 
 #else
 
@@ -961,7 +962,7 @@ namespace apex_windows
 
 #ifdef WINDOWS
 
-               pnode->shell_create_link(path, pathShortcut, "Link for " + strAppName, pathIcon);
+               pnode->shell_create_link(path, pathShortcut, "Link for " + strAppName, path, -IDR_MAIN);
 
                if (payload("pin_app_to_taskbar").is_true())
                {
