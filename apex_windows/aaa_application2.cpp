@@ -198,7 +198,7 @@
 //
 //   pmaininitdata->m_hInstance = hInstance;
 //   pmaininitdata->m_hPrevInstance = hPrevInstance;
-//   pmaininitdata->m_strCommandLine = ::str::international::unicode_to_utf8(::GetCommandLineW());
+//   pmaininitdata->m_strCommandLine = unicode_to_utf8(::GetCommandLineW());
 //   pmaininitdata->m_nCmdShow = nCmdShow;
 //
 //   papp->startup_command(pmaininitdata);

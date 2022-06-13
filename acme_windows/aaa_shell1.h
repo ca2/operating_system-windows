@@ -360,7 +360,7 @@
 //         free(pwszPath);
 //         return false;
 //      }
-//      ::str::international::unicode_to_utf8(str, pwszPath);
+//      unicode_to_utf8(str, pwszPath);
 //      free(pwszPath);
 //      return true;
 //   }
@@ -580,7 +580,7 @@
 //   {
 //      unichar * pwsz = (unichar *) malloc(sizeof(unichar) * MAX_PATH * 4);
 //      ::u32 dwResult = (*theWindowsShell.m_pfnGetTempPath)(sizeof(unichar) * MAX_PATH * 4, pwsz);
-//      ::str::international::unicode_to_utf8(str, pwsz);
+//      unicode_to_utf8(str, pwsz);
 //      free(pwsz);
 //      return dwResult;
 //   }
@@ -588,21 +588,21 @@
 //   inline ::u32 shell::GetTempFileName(const char * pszPath, const char * pszPrefix, ::u32 uUnique, string & str)
 //
 //   {
-//      wstring wstrPathName = ::str::international::utf8_to_unicode(pszPath);
+//      wstring wstrPathName = utf8_to_unicode(pszPath);
 //
-//      wstring wstrPrefixString = ::str::international::utf8_to_unicode(pszPrefix);
+//      wstring wstrPrefixString = utf8_to_unicode(pszPrefix);
 //
 //      wstring wstr;
 //      wstr.get_buffer(MAX_PATH * 4);
 //      ::u32 uResult = (*theWindowsShell.m_pfnGetTempFileName)(wstrPathName, wstrPrefixString, uUnique, wstr);
-//      ::str::international::unicode_to_utf8(str, wstr);
+//      unicode_to_utf8(str, wstr);
 //      return uiResult;
 //   }
 //
 //   inline bool shell::MoveFile(const char * pExistingFileName, const char * lpNewFileName)
 //
 //   {
-//      return MoveFile(::str::international::utf8_to_unicode(pExistingFileName), ::str::international::utf8_to_unicode(lpNewFileName));
+//      return MoveFile(utf8_to_unicode(pExistingFileName), utf8_to_unicode(lpNewFileName));
 //
 //   }
 //

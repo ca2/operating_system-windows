@@ -31,7 +31,7 @@ namespace windowing_win32
 
       virtual bool is_system_message_window() override;
 
-      void initialize_windows_devices();
+      //void initialize_windows_devices();
 
 
    };

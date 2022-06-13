@@ -262,8 +262,8 @@ namespace windows
 
    //   MESSAGE_LINK(e_message_destroy, pchannel, this, &interaction_impl::on_message_destroy);
    //   MESSAGE_LINK(e_message_enable, pchannel, this, &interaction_impl::_001OnEnable);
-   //   MESSAGE_LINK(e_message_set_focus, pchannel, this, &interaction_impl::_001OnSetFocus);
-   //   MESSAGE_LINK(e_message_kill_focus, pchannel, this, &interaction_impl::_001OnKillFocus);
+   //   MESSAGE_LINK(e_message_set_focus, pchannel, this, &interaction_impl::on_message_set_focus);
+   //   MESSAGE_LINK(e_message_kill_focus, pchannel, this, &interaction_impl::on_message_kill_focus);
 
 
 
@@ -1050,7 +1050,7 @@ namespace windows
 //      //Default();
 //   }
 //
-////void interaction_impl::_001OnSetFocus(::message::message * pdetails)
+////void interaction_impl::on_message_set_focus(::message::message * pdetails)
 ////{
 ////
 ////   //bool bHandled;
@@ -2814,7 +2814,7 @@ namespace windows
    //}
 
 
-   //void interaction_impl::_001OnSetFocus(::message::message * pusermessage)
+   //void interaction_impl::on_message_set_focus(::message::message * pusermessage)
    //{
 
    //   m_bFocusImpl = true;
@@ -2831,7 +2831,7 @@ namespace windows
    //}
 
 
-   //void interaction_impl::_001OnKillFocus(::message::message * pmessage)
+   //void interaction_impl::on_message_kill_focus(::message::message * pmessage)
    //{
 
    //   m_bFocusImpl = false;
@@ -3455,8 +3455,8 @@ namespace windows
    //   }
 
    //   // determine toplevel interaction_impl to disable as well
-   //   ::::windowing::window * pwindow_Top = oswindow;
-   //   ::::windowing::window * pwindow_Temp = oswindow;
+   //   ::windowing::window * pwindow_Top = oswindow;
+   //   ::windowing::window * pwindow_Temp = oswindow;
    //   for (;;)
    //   {
    //      if (oswindow_Temp == nullptr)
@@ -3551,7 +3551,7 @@ namespace windows
 
    //      ASSERT(wParam != 0);
 
-   //      ::::windowing::window * pwindow = (::oswindow) wParam;
+   //      ::windowing::window * pwindow = (::oswindow) wParam;
 
    //      if (puserinteraction != nullptr)
    //      {
@@ -4650,7 +4650,7 @@ void interaction_impl::set_tool_window(bool bSet)
 //
 //            TRACE("e_message_left_button_down");
 //
-//            string strType = ::str::demangle(m_puserinteraction->type_name());
+//            string strType = ::str().demangle(m_puserinteraction->type_name());
 //
 //            if (strType.contains_ci("list_box"))
 //            {
@@ -4722,7 +4722,7 @@ void interaction_impl::set_tool_window(bool bSet)
 //            if (m_puserinteraction)
 //            {
 //
-//               strType = ::str::demangle(m_puserinteraction->type_name());
+//               strType = ::str().demangle(m_puserinteraction->type_name());
 //
 //               if (strType.contains_ci("list_box"))
 //               {

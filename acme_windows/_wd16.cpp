@@ -7,14 +7,14 @@ BSTR AllocSysString(const wd16char * pchData, strsize nDataLength) noexcept
 
    BSTR bstr = nullptr;
 
-   strsize nLen = ::str::utf_to_utf_length(bstr, pchData, nDataLength);
+   strsize nLen = ::str().utf_to_utf_length(bstr, pchData, nDataLength);
 
    bstr = ::SysAllocStringLen(nullptr, (::u32)nLen);
 
    if (bstr != nullptr)
    {
 
-      ::str::utf_to_utf(bstr, pchData, nDataLength);
+      ::str().utf_to_utf(bstr, pchData, nDataLength);
 
    }
 
@@ -27,14 +27,14 @@ BSTR AllocSysString(const wd16char * pchData, strsize nDataLength) noexcept
 bool ReAllocSysString(BSTR * pbstr, const wd16char * pchData, strsize nDataLength) noexcept
 {
 
-   strsize nLen = ::str::utf_to_utf_length(pbstr, pchData, nDataLength);
+   strsize nLen = ::str().utf_to_utf_length(pbstr, pchData, nDataLength);
 
    bool bSuccess = ::SysReAllocStringLen(pbstr, nullptr, (::u32)nLen) != 0;
 
    if (bSuccess)
    {
 
-      ::str::utf_to_utf(*pbstr, pchData, nDataLength);
+      ::str().utf_to_utf(*pbstr, pchData, nDataLength);
 
    }
 

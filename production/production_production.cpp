@@ -447,7 +447,7 @@ pacmedir->system() / "config/production/mirror_status.txt";
 
          }
 
-         //         m_straRoot.filter([](const ::file::path & p) {return ::str::begins_ci(p.name(),"app-"); });
+         //         m_straRoot.filter([](const ::file::path & p) {return ::str().begins_ci(p.name(),"app-"); });
 
          m_straRoot.insert_at(0, "app");
 
@@ -511,7 +511,7 @@ pacmedir->system() / "config/production/mirror_status.txt";
             //   add_status(strStatus);
 
             //}
-            //if (str::from(atoi(strRevision)) != strRevision)
+            //if (::str().from(atoi(strRevision)) != strRevision)
             //{
             //   // good pratice to initialize authentication of ca2status.com with account.ca2.cc auth information
             //   //string str;
@@ -763,7 +763,7 @@ pacmedir->system() / "config/production/mirror_status.txt";
             // return 2;
 
 
-            m_strSubversionRevision = "SVN" + str::from(atoi(strRevision) + 1);
+            m_strSubversionRevision = "SVN" + ::str().from(atoi(strRevision) + 1);
 
             //if (m_bBuild)
             {
@@ -1150,7 +1150,7 @@ pacmedir->create(pathTarget.folder()))
 
                string strRoot = straRoot[i];
 
-               string strSpa = "ca2_spa_" + ::str::replace("-", "_", strRoot);
+               string strSpa = "ca2_spa_" + ::str().replace("-", "_", strRoot);
 
                add_status(__string(i + 1) + ". dtf - fileset - file from directory " + strRoot);
 
@@ -1169,7 +1169,7 @@ pacmedir->create(pathTarget.folder()))
 
                string strRoot = straRoot[i];
 
-               string strSpa = "ca2_spa_" + ::str::replace("-", "_", strRoot);
+               string strSpa = "ca2_spa_" + ::str().replace("-", "_", strRoot);
 
                add_status(__string(i + 1) + ". bz - bzip - compressing " + strRoot);
 
@@ -1394,10 +1394,10 @@ pacmedir->create(pathTarget.folder()))
       auto pathSource = m_pathVrel / lpcszRelative;
 
 
-      //if (::str::ends_ci(lpcszRelative, ".dll")
-      //      || ::str::ends_ci(lpcszRelative, ".exe")
-      //      || ::str::ends_ci(lpcszRelative, ".ocx")
-      //      || ::str::ends_ci(lpcszRelative, ".cab"))
+      //if (::str().ends_ci(lpcszRelative, ".dll")
+      //      || ::str().ends_ci(lpcszRelative, ".exe")
+      //      || ::str().ends_ci(lpcszRelative, ".ocx")
+      //      || ::str().ends_ci(lpcszRelative, ".cab"))
       //{
 
       //   string strStatus;
@@ -1410,7 +1410,7 @@ pacmedir->create(pathTarget.folder()))
       //   add_status("Signing code ...");
 
       //}
-      //else if (::str::ends_ci(lpcszRelative, ".sys"))
+      //else if (::str().ends_ci(lpcszRelative, ".sys"))
       //{
 
       //   string strStatus;
@@ -1830,10 +1830,10 @@ pacmedir->create(pathTarget.folder()))
          ::file::path strFile;
          string strTitle;
          string strRelative;
-         ::str::ends_eat(strRelease, "\\");
-         ::str::ends_eat(strRelease, "/");
-         ::str::ends_eat(strLocal, "\\");
-         ::str::ends_eat(strLocal, "/");
+         ::str().ends_eat(strRelease, "\\");
+         ::str().ends_eat(strRelease, "/");
+         ::str().ends_eat(strLocal, "\\");
+         ::str().ends_eat(strLocal, "/");
          strFile = strRelease + ".expand_fileset";
          strTitle = strRelease.name() + ".expand_fileset";
          strRelative = strLocal + ".expand_fileset";
@@ -1900,7 +1900,7 @@ pacmedir->create(pathTarget.folder()))
       for (; i < m_straFiles.get_size(); i++)
       {
          ::file::path & strFile = m_straFiles[i];
-         if (::str::ends_ci(strFile, ".zip"))
+         if (::str().ends_ci(strFile, ".zip"))
          {
          }
          else if (pcontext->m_papexcontext->dir().is(strFile))
@@ -1980,7 +1980,7 @@ pacmedir->create(pathTarget.folder()))
       m_strIndexMd5 = pcontext->m_papexcontext->file().md5(strIndex);
 
       strBz = m_strCCAuth / strRelative + ".bz";
-      ::DeleteFileW(::str::international::utf8_to_unicode(strBz));
+      ::DeleteFileW(utf8_to_unicode(strBz));
       compress(strRelative);
 
       string strRelativeMd5 = "app\\stage\\metastage\\index-" + m_strFormatBuild + ".md5";
@@ -1988,17 +1988,17 @@ pacmedir->create(pathTarget.folder()))
       pcontext->m_papexcontext->file().put_contents(strMd5, m_strIndexMd5);
 
       //string strStage = pcontext->m_papexcontext->dir().path("C:\\home\\ca2_spa\\" + m_strVersionShift, strRelative) + ".bz";
-      //::DeleteFileW(::str::international::utf8_to_unicode(
+      //::DeleteFileW(utf8_to_unicode(
       // strStage));
       //pcontext->m_papexcontext->file().copy(strStage, strBz);
       strRelease = m_strCCVrel / strRelative + ".bz";
-      //::DeleteFileW(::str::international::utf8_to_unicode(
+      //::DeleteFileW(utf8_to_unicode(
       // strRelease));
       pcontext->m_papexcontext->file().copy(strRelease, strBz);
       strRelease = m_strCCVrel / strRelativeMd5;
       pcontext->m_papexcontext->file().copy(strRelease, strMd5);
       strReleaseNew = m_strCCVrelNew / strRelative + ".bz";
-      //::DeleteFileW(::str::international::utf8_to_unicode(
+      //::DeleteFileW(utf8_to_unicode(
       // strRelease));
       pcontext->m_papexcontext->file().copy(strReleaseNew, strBz);
       strReleaseNew = m_strCCVrelNew / strRelativeMd5;
@@ -2026,7 +2026,7 @@ pacmedir->create(pathTarget.folder()))
 
       for (i32 i = 0; i < listing.get_count(); i++)
       {
-         if (::str::begins(listing[i].name(), "_"))
+         if (::str().begins(listing[i].name(), "_"))
          {
             generate_appmatter_spa_folder(pszRoot, listing[i].name());
          }
@@ -2051,7 +2051,7 @@ pacmedir->create(pathTarget.folder()))
 
       for (i32 i = 0; i < listing.get_count(); i++)
       {
-         if (::str::begins(listing[i].relative(), "_") && listing[i].relative() != "_std")
+         if (::str().begins(listing[i].relative(), "_") && listing[i].relative() != "_std")
          {
             generate_appmatter_spa_folder(pszRoot, pszRelative / listing[i].relative());
          }
@@ -2386,7 +2386,7 @@ pacmedir->create(pathTarget.folder()))
       for (i32 i = 0; i < m_straPath.get_count(); i++)
       {
          ::file::path strRelative = m_straPath[i].relative();
-         if (::str::begins_ci(strRelative, "META-INF\\"))
+         if (::str().begins_ci(strRelative, "META-INF\\"))
             continue;
          strRelative.replace("\\", "/");
          mem.set_size(0);
@@ -3257,8 +3257,8 @@ Retry2:
       twitterObj.get_oauth().setConsumerKey(m_strTwitterConsumerKey);
       twitterObj.get_oauth().setConsumerSecret(m_strTwitterConsumerSecret);
 
-      string strPathKey = pcontext->m_papexcontext->dir().appdata() / "facebookClient_token_key" + ::str::from_int(m_eversion) + ".txt";
-      string strPathSecret = pcontext->m_papexcontext->dir().appdata() / "facebookClient_token_secret" + ::str::from_int(m_eversion) + ".txt";
+      string strPathKey = pcontext->m_papexcontext->dir().appdata() / "facebookClient_token_key" + ::str().from_int(m_eversion) + ".txt";
+      string strPathSecret = pcontext->m_papexcontext->dir().appdata() / "facebookClient_token_secret" + ::str().from_int(m_eversion) + ".txt";
       /* Step 1: Check if we alredy have OAuth access token from a previous run */
       //    char szKey[1024];
       string myOAuthAccessTokenKey = pcontext->m_papexcontext->file().as_string(strPathKey);

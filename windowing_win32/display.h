@@ -9,7 +9,8 @@ namespace windowing_win32
    // X11 contribution : a display may contain more than one monitor
 
    class CLASS_DECL_WINDOWING_WIN32 display :
-      virtual public ::windowing::display
+      virtual public ::windowing::display,
+      virtual public ::hardware::device_listener
    {
    public:
 
@@ -104,6 +105,8 @@ namespace windowing_win32
       virtual bool impl_set_wallpaper(index iScreen, string strLocalImagePath) override;
       virtual string impl_get_wallpaper(index iScreen) override;
 
+      void on_device_plugged(::hardware::enum_device edevice) override;
+      void on_device_unplugged(::hardware::enum_device edevice) override;
 
    };
 

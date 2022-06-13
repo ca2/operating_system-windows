@@ -10,7 +10,7 @@
 //
 //i32 ansi_open(const char * psz,i32 i)
 //{
-//   return _wopen(::str::international::utf8_to_unicode(psz),i);
+//   return _wopen(utf8_to_unicode(psz),i);
 //}
 //
 //void ansi_get_errno(i32 * perrno)
@@ -21,7 +21,7 @@
 //
 //FILE * ansi_fopen(const char * psz,const char * pszMode)
 //{
-//   return _wfopen(::str::international::utf8_to_unicode(psz),::str::international::utf8_to_unicode(pszMode));
+//   return _wfopen(utf8_to_unicode(psz),utf8_to_unicode(pszMode));
 //}
 //
 //

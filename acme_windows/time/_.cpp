@@ -23,80 +23,11 @@ void __term_windowing();
 CLASS_DECL_ACME bool is_verbose();
 
 
-//class ::system * app_common_prelude(int & iError, ::create * & pmaininitdata, app_core & appcore,  HINSTANCE hinstance = nullptr, HINSTANCE hinstancePrev = nullptr, const char * pszCmdLine = nullptr, int nShowCmd = e_display_normal);
-//int app_common_term(int iError, class ::system * psystem, app_core & appcore);
-
-
 
 CLASS_DECL_ACME i32 __cdecl _memory_type(const void * p);
 
 
-// typedef int
-// (WINAPI * LPFN_ChangeWindowMessageFilter)(
-// const ::atom & atom,
-// ::u32 dwFlag);
-
-
-//LPFN_ChangeWindowMessageFilter g_pfnChangeWindowMessageFilter = nullptr;
-
-
-// bool defer_co_initialize_ex(bool bMultiThread, bool bDisableOleDDE)
-// {
-
-//    auto pthread = ::get_task();
-
-//    if(!pthread)
-//    {
-
-//       return false;
-
-//    }
-
-//    HRESULT hr = pthread->m_hresultCoInitialize;
-
-//    if(!pthread->m_bCoInitialize)
-//    {
-
-//       pthread->m_bCoInitialize = true;
-   
-//       if (bMultiThread)
-//       {
-
-//          hr = ::CoInitializeEx(nullptr, COINIT_MULTITHREADED);
-
-//       }
-//       else
-//       {
-
-//          hr = ::CoInitializeEx(nullptr, COINIT_APARTMENTTHREADED | (bDisableOleDDE ? COINIT_DISABLE_OLE1DDE : 0));
-
-//       }
-
-//       pthread->m_hresultCoInitialize = hr;
-
-//    }
-
-//    if(FAILED(hr))
-//    {
-
-//       ::output_debug_string("Failed to ::CoInitializeEx(nullptr, COINIT_MULTITHREADED) at __node_pre_init");
-
-//       return false;
-
-//    }
-
-//    return true;
-
-// }
-
-
-
-
-
-
-
 string key_to_char(wparam wparam, lparam lparam)
-
 {
 
 
@@ -126,7 +57,7 @@ string key_to_char(wparam wparam, lparam lparam)
 
       string str;
 
-      str = ::str::international::unicode_to_utf8(wsz);
+      str = unicode_to_utf8(wsz);
 
       if((GetAsyncKeyState(VK_CAPITAL) & 0x0001) != 0)
       {

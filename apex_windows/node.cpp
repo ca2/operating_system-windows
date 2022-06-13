@@ -528,7 +528,7 @@ namespace apex_windows
 
       //ASSERT(m_atomApp == nullptr && m_atomSystemTopic == nullptr); // do once
 
-      //m_atomApp            = ::GlobalAddAtomW(::str::international::utf8_to_unicode(m_strAppName));
+      //m_atomApp            = ::GlobalAddAtomW(utf8_to_unicode(m_strAppName));
 
       //m_atomSystemTopic    = ::GlobalAddAtomW(L"system");
 
@@ -850,7 +850,7 @@ namespace apex_windows
    HICON node::extract_icon(HINSTANCE hInst, const ::string& pszExeFileName, ::u32 nIconIndex)
    {
 
-      return ::ExtractIconW(hInst, ::str::international::utf8_to_unicode(pszExeFileName), nIconIndex);
+      return ::ExtractIconW(hInst, utf8_to_unicode(pszExeFileName), nIconIndex);
 
    }
 
@@ -858,7 +858,7 @@ namespace apex_windows
    void node::delete_file(const ::string& pFileName)
    {
 
-      if (!::DeleteFileW(::str::international::utf8_to_unicode(pFileName)))
+      if (!::DeleteFileW(utf8_to_unicode(pFileName)))
       {
 
          auto lastError = ::GetLastError();

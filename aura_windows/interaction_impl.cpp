@@ -817,7 +817,7 @@ namespace aura_windows
 //      //Default();
 //   }
 //
-////void interaction_impl::_001OnSetFocus(::message::message * pdetails)
+////void interaction_impl::on_message_set_focus(::message::message * pdetails)
 ////{
 ////
 ////   //bool bHandled;
@@ -1145,7 +1145,7 @@ namespace aura_windows
    bool interaction_impl::_is_window() const
    {
 
-      if (!m_bUserElementOk)
+      if (!m_bUserImplCreated)
       {
 
          return false;
@@ -1363,36 +1363,36 @@ namespace aura_windows
    }
 
 
-   void interaction_impl::design_window_minimize(::e_activation eactivation)
-   {
+   //void interaction_impl::design_window_minimize(::e_activation eactivation)
+   //{
 
-      primitive_impl::design_window_minimize(eactivation);
+   //   primitive_impl::design_window_minimize(eactivation);
 
-   }
-
-
-   void interaction_impl::design_window_maximize()
-   {
-
-      primitive_impl::design_window_maximize();
-
-   }
+   //}
 
 
-   void interaction_impl::design_window_full_screen(const ::rectangle_i32 & rectangleHint)
-   {
+   //void interaction_impl::design_window_maximize()
+   //{
 
-      primitive_impl::design_window_full_screen(rectangleHint);
+   //   primitive_impl::design_window_maximize();
 
-   }
+   //}
 
 
-   void interaction_impl::design_window_restore(edisplay edisplay)
-   {
+   //void interaction_impl::design_window_full_screen(const ::rectangle_i32 & rectangleHint)
+   //{
 
-      primitive_impl::design_window_restore(edisplay);
+   //   primitive_impl::design_window_full_screen(rectangleHint);
 
-   }
+   //}
+
+
+   //void interaction_impl::design_window_restore(edisplay edisplay)
+   //{
+
+   //   primitive_impl::design_window_restore(edisplay);
+
+   //}
 
 
    bool interaction_impl::display(::e_display edisplay)
@@ -1994,6 +1994,19 @@ namespace aura_windows
    }
 
 
+   void interaction_impl::show_software_keyboard(::user::element * pelement)
+   {
+
+
+   }
+
+
+   void interaction_impl::hide_software_keyboard(::user::element * pelement)
+   {
+
+
+   }
+
 
    //::user::interaction * interaction_impl::get_keyboard_focus() const
    //{
@@ -2585,7 +2598,7 @@ namespace aura_windows
    //}
 
 
-   //void interaction_impl::_001OnSetFocus(::message::message * pusermessage)
+   //void interaction_impl::on_message_set_focus(::message::message * pusermessage)
    //{
 
    //   m_bFocusImpl = true;
@@ -2602,7 +2615,7 @@ namespace aura_windows
    //}
 
 
-   //void interaction_impl::_001OnKillFocus(::message::message * pmessage)
+   //void interaction_impl::on_message_kill_focus(::message::message * pmessage)
    //{
 
    //   m_bFocusImpl = false;
@@ -4474,7 +4487,7 @@ void interaction_impl::set_tool_window(bool bSet)
 //
 //            TRACE("e_message_left_button_down");
 //
-//            string strType = ::str::demangle(m_puserinteraction->type_name());
+//            string strType = ::str().demangle(m_puserinteraction->type_name());
 //
 //            if (strType.contains_ci("list_box"))
 //            {
@@ -4546,7 +4559,7 @@ void interaction_impl::set_tool_window(bool bSet)
 //            if (m_puserinteraction)
 //            {
 //
-//               strType = ::str::demangle(m_puserinteraction->type_name());
+//               strType = ::str().demangle(m_puserinteraction->type_name());
 //
 //               if (strType.contains_ci("list_box"))
 //               {
@@ -5076,10 +5089,10 @@ void interaction_impl::set_tool_window(bool bSet)
       if (message == e_message_mouse_leave)
       {
 
-         if (m_puserinteractionCapture)
+         if (m_puserinteractionMouseCapture)
          {
 
-            m_puserinteractionCapture->_000OnMouseLeave(pmessage);
+            m_puserinteractionMouseCapture->_000OnMouseLeave(pmessage);
 
          }
          else if (m_puserinteraction)
@@ -5159,7 +5172,7 @@ void interaction_impl::set_tool_window(bool bSet)
 
          __pointer(::user::interaction) puiFocus;
          
-         puiFocus = m_puserinteractionFocus1;
+         puiFocus = m_puserinteractionKeyboardFocus;
 
          ///auto pkey = pmessage->m_pkey;
 

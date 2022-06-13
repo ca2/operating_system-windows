@@ -147,7 +147,7 @@ namespace windowing_win32
          else
             wcscpy(sTip, L"[Hidden icon]");
 
-         info.m_strTip = ::str::international::unicode_to_utf8(sTip);
+         info.m_strTip = unicode_to_utf8(sTip);
 
          info.m_hwnd = tray.hwnd;
          info.m_uCallbackMessage = tray.uCallbackMessage;

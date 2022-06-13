@@ -3,13 +3,11 @@
 #include "_windows.h"
 
 
-namespace windows
+namespace windowing_win32
 {
 
-   extern devices * g_pdevices;
 
-
-   device_listener::device_listener()
+   master_device_listener::master_device_listener()
    {
 
       m_hdevnotify = nullptr;
@@ -17,7 +15,7 @@ namespace windows
    }
 
 
-   device_listener::~device_listener()
+   master_device_listener::~master_device_listener()
    {
 
       if (m_hdevnotify != nullptr)
@@ -32,26 +30,15 @@ namespace windows
 
    }
 
-
-   void device_listener::register_device_listener(GUID guid)
+   void master_device_listener::on_message_device_change(::message::message* pmessage)
    {
 
-      auto psession = m_psystem->m_paurasession;
-
-      auto puser = psession->user();
-
-      auto pwindowing = (::windowing_win32::windowing *)puser->windowing()->m_pWindowing;
-
-      auto psysteminteraction = pwindowing->m_psysteminteraction;
-
-      initialize_windows_devices(psysteminteraction);
-
-      ::windows::g_pdevices->register_device_listener(this, guid);
+      on_device_change(pmessage->m_wparam, pmessage->m_lparam);
 
    }
+   
 
-
-   void device_listener::on_device_change(wparam wparam, lparam lparam)
+   void master_device_listener::on_device_change(wparam wparam, lparam lparam)
    {
 
       //
@@ -116,7 +103,7 @@ namespace windows
    }
    //OutputMessage(hEditWnd, wParam, (LPARAM)strBuff);
 
-   void device_listener::on_device_arrival(DEV_BROADCAST_HDR * phdr)
+   void master_device_listener::on_device_arrival(DEV_BROADCAST_HDR * phdr)
    {
       
       if (phdr->dbch_devicetype == DBT_DEVTYP_DEVICEINTERFACE)
@@ -124,12 +111,14 @@ namespace windows
       
          DEV_BROADCAST_DEVICEINTERFACE * pdeviceinterface = (DEV_BROADCAST_DEVICEINTERFACE *) phdr;
 
-         string str(pdeviceinterface->dbcc_name);
+         auto guid = pdeviceinterface->dbcc_classguid;
 
-         if (str.begins_ci("\\\\?\\USB#VID"))
+         if (m_guid == guid)
          {
 
-            on_video_input_plugged();
+            //on_device_plugged(::hardware::e_device_video_input);
+
+            on_device_plugged(m_edevice);
 
          }
 
@@ -137,7 +126,7 @@ namespace windows
 
    }
 
-   void device_listener::on_device_remove_complete(DEV_BROADCAST_HDR * phdr)
+   void master_device_listener::on_device_remove_complete(DEV_BROADCAST_HDR * phdr)
    {
 
       if (phdr->dbch_devicetype == DBT_DEVTYP_DEVICEINTERFACE)
@@ -147,10 +136,12 @@ namespace windows
 
          string str(pdeviceinterface->dbcc_name);
 
-         if (str.begins_ci("\\\\?\\USB#VID"))
+         auto guid = pdeviceinterface->dbcc_classguid;
+
+         if(guid == m_guid)
          {
 
-            on_video_input_unplugged();
+            on_device_unplugged(m_edevice);
 
          }
 
@@ -158,14 +149,47 @@ namespace windows
 
    }
 
-   void device_listener::on_video_input_plugged()
+   void master_device_listener::on_device_plugged(::hardware::enum_device edevice)
    {
+
+      auto& pdevicelistenera = m_pdevices->m_mapdevicelistenera[m_edevice];
+
+      if (pdevicelistenera)
+      {
+
+         for (auto& pdevice : *pdevicelistenera)
+         {
+
+            pdevice->on_device_plugged(edevice);
+
+         }
+
+      }
 
    }
 
-   void device_listener::on_video_input_unplugged()
+
+   void master_device_listener::on_device_unplugged(::hardware::enum_device edevice)
    {
+
+      auto& pdevicelistenera = m_pdevices->m_mapdevicelistenera[m_edevice];
+
+      if (pdevicelistenera)
+      {
+
+         for (auto& pdevice : *pdevicelistenera)
+         {
+
+            pdevice->on_device_unplugged(edevice);
+
+         }
+
+      }
 
    }
 
-} // namespace windows
+
+} // namespace windowing_win32
+
+
+

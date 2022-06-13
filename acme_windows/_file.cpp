@@ -5,7 +5,7 @@
 HICON extract_icon(HINSTANCE hInst, const ::string& pszExeFileName, ::u32 nIconIndex)
 {
 
-   return ::ExtractIconW(hInst, ::str::international::utf8_to_unicode(pszExeFileName), nIconIndex);
+   return ::ExtractIconW(hInst, utf8_to_unicode(pszExeFileName), nIconIndex);
 
 }
 

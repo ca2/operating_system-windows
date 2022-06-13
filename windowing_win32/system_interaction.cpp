@@ -63,7 +63,9 @@ namespace windowing_win32
    void system_interaction::on_message_destroy(::message::message * pmessage)
    {
 
-      ::finalize_windows_devices();
+      //::finalize_windows_devices();
+
+      m_psystem->m_paurasystem->m_phardwaredevices.release();
 
       __pointer(::user::message) pusermessage(pmessage);
 
@@ -162,12 +164,12 @@ namespace windowing_win32
 
 
 
-   void system_interaction::initialize_windows_devices()
-   {
+   //void system_interaction::initialize_windows_devices()
+   //{
 
-      ::initialize_windows_devices(this);
+   //   ::initialize_windows_devices(this);
 
-   }
+   //}
 
 
 } // namespace windowing_win32

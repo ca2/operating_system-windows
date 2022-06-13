@@ -60,25 +60,25 @@ namespace user_service
       if (strPrefix.has_char())
       {
 
-         ::str::ends_eat_ci(strPrefix, "/");
+         ::str().ends_eat_ci(strPrefix, "/");
 
          outheader("Access-Control-Allow-Origin") = strPrefix;
 
          string strStart;
 
-         if (::str::begins(m_request.m_strRequestUri, "/passthrough/"))
+         if (::str().begins(m_request.m_strRequestUri, "/passthrough/"))
          {
          }
-         else if (::str::begins_get_prefix(strStart, m_request.m_strRequestUri, "/start/")
-                  || ::str::begins_get_prefix(strStart, m_request.m_strRequestUri, "/start_x86/")
-                  || ::str::begins_get_prefix(strStart, m_request.m_strRequestUri, "/start_x64/"))
+         else if (::str().begins_get_prefix(strStart, m_request.m_strRequestUri, "/start/")
+                  || ::str().begins_get_prefix(strStart, m_request.m_strRequestUri, "/start_x86/")
+                  || ::str().begins_get_prefix(strStart, m_request.m_strRequestUri, "/start_x64/"))
          {
 
             string strUserAgent = inheader("user-agent");
 
             string strRequest = m_request.m_strRequestUri;
 
-            ::str::begins_eat_ci(strRequest, strStart);
+            ::str().begins_eat_ci(strRequest, strStart);
 
             strsize iFind = strRequest.find_ci('?');
 
@@ -122,7 +122,7 @@ namespace user_service
             response().file().write(str);
 
          }
-         else if (::str::begins(m_request.m_strRequestUri, "/matter/"))
+         else if (::str().begins(m_request.m_strRequestUri, "/matter/"))
          {
             //         outheader("Cache-control") = "public";
             //         outheader("Pragma") = "public";
@@ -134,7 +134,7 @@ namespace user_service
             //         simple_file_server(m_request.m_strRequestUri);
             //#endif
          }
-         else if (::str::begins(m_request.m_strRequestUri, "/is_user_service_installed/"))
+         else if (::str().begins(m_request.m_strRequestUri, "/is_user_service_installed/"))
          {
 
             string strKey = inheader("sec-websocket-key");//
@@ -215,7 +215,7 @@ namespace user_service
 
       outattr(__id(http_version)) = "HTTP/1.1";
 
-      if (::str::begins(outheader(__id(content_type)), "image/"))
+      if (::str().begins(outheader(__id(content_type)), "image/"))
       {
 
          m_bSetCookie = false;

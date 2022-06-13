@@ -25,7 +25,7 @@ namespace windows
 
    //{
 
-   //   return ::LoadLibraryW(::str::international::utf8_to_unicode(psz));
+   //   return ::LoadLibraryW(utf8_to_unicode(psz));
 
 
    //}
@@ -112,7 +112,7 @@ namespace windows
 
    //{
 
-   //   return ::ExtractIconW(hInst, ::str::international::utf8_to_unicode(pszExeFileName), nIconIndex);
+   //   return ::ExtractIconW(hInst, utf8_to_unicode(pszExeFileName), nIconIndex);
 
 
    //}
@@ -122,7 +122,7 @@ namespace windows
 
    //{
 
-   //   return ::DeleteFileW(::str::international::utf8_to_unicode(pFileName)) != false;
+   //   return ::DeleteFileW(utf8_to_unicode(pFileName)) != false;
 
 
    //}

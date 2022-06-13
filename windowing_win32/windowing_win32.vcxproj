@@ -38,7 +38,7 @@
     <ProjectGuid>{77D5757E-2923-40F8-9CC0-A07FA5BCC236}</ProjectGuid>
     <RootNamespace>platform</RootNamespace>
     <Keyword>Win32Proj</Keyword>
-    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.19041.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='basis|Win32'" Label="Configuration">
@@ -892,7 +892,7 @@
     <ClInclude Include="copydesk.h" />
     <ClInclude Include="cursor.h" />
     <ClInclude Include="devices.h" />
-    <ClInclude Include="device_listener.h" />
+    <ClInclude Include="master_device_listener.h" />
     <ClInclude Include="display.h" />
     <ClInclude Include="icon.h" />
     <ClInclude Include="imm_client.h" />
@@ -925,7 +925,7 @@
     <ClCompile Include="copydesk.cpp" />
     <ClCompile Include="cursor.cpp" />
     <ClCompile Include="devices.cpp" />
-    <ClCompile Include="device_listener.cpp" />
+    <ClCompile Include="master_device_listener.cpp" />
     <ClCompile Include="display.cpp" />
     <ClCompile Include="_factory.cpp" />
     <ClCompile Include="gdi.cpp" />

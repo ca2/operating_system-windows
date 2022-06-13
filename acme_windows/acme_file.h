@@ -26,6 +26,9 @@ namespace acme_windows
       ::file::path time_put_contents(const ::file::path & pathFolder, const ::string & strPrefix, const ::string & strExtension, const ::string& str) override;
 
 
+      void _erase(const char * path) override;
+
+
    };
 
 

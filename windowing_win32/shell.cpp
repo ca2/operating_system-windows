@@ -157,7 +157,7 @@ __pointer(::image) create_image_from_hbitmap(::object * pobject, HBITMAP hbitmap
          int h = ds.dsBmih.biHeight;
 
          auto pBits = ds.dsBm.bmBits;
-         auto pimage = pobject->m_pcontext->context_image()->create_image({ w, h });
+         auto pimage = pobject->m_pcontext->m_pauracontext->create_image({ w, h });
          int iStride = ds.dsBmih.biSizeImage / abs(h );
 
          if (h < 0)
@@ -183,7 +183,7 @@ __pointer(::image) create_image_from_hbitmap(::object * pobject, HBITMAP hbitmap
 
    ::GetObject(hbitmap, sizeof(bitmap), &bitmap);
 
-   auto pimage = pobject->m_pcontext->context_image()->create_image({ bitmap.bmWidth, bitmap.bmHeight });
+   auto pimage = pobject->m_pcontext->m_pauracontext->create_image({ bitmap.bmWidth, bitmap.bmHeight });
 
    BITMAPINFO bitmapinfo = {};
 
@@ -523,7 +523,7 @@ namespace windowing_win32
 
       strPathEx = strFileParam;
 
-      ::str::international::unicode_to_utf8(strExtra, getfileimage.m_wstrExtra);
+      unicode_to_utf8(strExtra, getfileimage.m_wstrExtra);
 
       if (strExtra.get_length() > 0)
       {
@@ -841,7 +841,7 @@ namespace windowing_win32
       if (((FAILED(hrIconLocation) && FAILED(hrGetLocation))
          || getfileimage.m_imagekey.m_iIcon == 0x80000000
          || !m_pcontext->m_papexcontext->file().exists(strIconLocation))
-         && ::str::ends_ci(strFileParam, ".lnk"))
+         && ::str().ends_ci(strFileParam, ".lnk"))
       {
 
          m_pcontext->m_papexcontext->file().resolve_link(pathTarget, strFileParam);
@@ -1220,7 +1220,7 @@ namespace windowing_win32
    shell::enum_folder shell::get_folder_type(::object * pobject, const ::string & pcsz)
    {
 
-      return get_folder_type(pobject, ::str::international::utf8_to_unicode(pcsz));
+      return get_folder_type(pobject, utf8_to_unicode(pcsz));
 
    }
 
@@ -1230,7 +1230,7 @@ namespace windowing_win32
 
       string strPath;
 
-      ::str::international::unicode_to_utf8(strPath, wstrPath);
+      unicode_to_utf8(strPath, wstrPath);
 
       auto psystem = m_psystem;
 
@@ -1279,7 +1279,7 @@ namespace windowing_win32
 
       getfileimage.m_iImage = 0x80000000;
 
-      if (::str::begins_ci(getfileimage.m_imagekey.m_strPath, "uifs:"))
+      if (::str().begins_ci(getfileimage.m_imagekey.m_strPath, "uifs:"))
       {
 
          if (reserve_image(getfileimage))
@@ -1295,7 +1295,7 @@ namespace windowing_win32
          return true;
 
       }
-      else if (::str::begins_ci(getfileimage.m_imagekey.m_strPath, "fs:"))
+      else if (::str().begins_ci(getfileimage.m_imagekey.m_strPath, "fs:"))
       {
 
          if (reserve_image(getfileimage))
@@ -1312,7 +1312,7 @@ namespace windowing_win32
          return true;
 
       }
-      else if (::str::begins_ci(getfileimage.m_imagekey.m_strPath, "ftp:"))
+      else if (::str().begins_ci(getfileimage.m_imagekey.m_strPath, "ftp:"))
       {
 
          if (reserve_image(getfileimage))
@@ -1330,12 +1330,12 @@ namespace windowing_win32
 
       }
 
-      if (::str::ends_ci(getfileimage.m_imagekey.m_strPath, ".aura"))
+      if (::str().ends_ci(getfileimage.m_imagekey.m_strPath, ".aura"))
       {
 
          string str = m_pcontext->m_papexcontext->file().as_string(getfileimage.m_imagekey.m_strPath);
 
-         if (::str::begins_eat_ci(str, "ca2prompt\r\n"))
+         if (::str().begins_eat_ci(str, "ca2prompt\r\n"))
          {
 
             str.trim();
@@ -1510,7 +1510,7 @@ namespace windowing_win32
 
       string strExtension;
 
-      if (::str::ends_ci(getfileimage.m_imagekey.m_strPath, ".sln"))
+      if (::str().ends_ci(getfileimage.m_imagekey.m_strPath, ".sln"))
       {
 
          //output_debug_string("test .sln");
@@ -1528,7 +1528,7 @@ namespace windowing_win32
 
       }
 
-      if (::str::begins_eat(str, "foo."))
+      if (::str().begins_eat(str, "foo."))
       {
 
          get_image_by_file_extension(getfileimage);

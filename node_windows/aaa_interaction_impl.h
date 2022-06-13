@@ -105,10 +105,10 @@ namespace windows
 
       //DECLARE_MESSAGE_HANDLER(on_message_destroy);
       //DECLARE_MESSAGE_HANDLER(on_message_create);
-      //DECLARE_MESSAGE_HANDLER(_001OnKillFocus);
+      //DECLARE_MESSAGE_HANDLER(on_message_kill_focus);
       //DECLARE_MESSAGE_HANDLER(_001OnPaint);
       //DECLARE_MESSAGE_HANDLER(_001OnPrint);
-      //DECLARE_MESSAGE_HANDLER(_001OnSetFocus);
+      //DECLARE_MESSAGE_HANDLER(on_message_set_focus);
       //DECLARE_MESSAGE_HANDLER(on_message_non_client_calculate_size);
       ////DECLARE_MESSAGE_HANDLER(on_message_set_cursor);
       //DECLARE_MESSAGE_HANDLER(_001OnEraseBkgnd);
@@ -692,7 +692,7 @@ namespace windows
       //virtual bool ModifyStyleEx(u32 dwRemove, u32 dwAdd, ::u32 nFlags);
       //virtual void _FilterToolTipMessage(MSG* pMsg,::user::interaction_impl * pwindow);
       //bool _EnableToolTips(bool bEnable, ::u32 nFlag);
-      //virtual oswindow get_safe_owner(::::windowing::window * pwindow, ::oswindow * pWndTop);
+      //virtual oswindow get_safe_owner(::windowing::window * pwindow, ::oswindow * pWndTop);
       //void PrepareForHelp();
 
 
