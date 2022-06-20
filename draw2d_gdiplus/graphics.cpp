@@ -1597,6 +1597,8 @@ namespace draw2d_gdiplus
 
       }
 
+      pimage->defer_update_image();
+
       auto pgraphicsSrc = pimage->g();
 
       if (pgraphicsSrc == nullptr || pgraphicsSrc->get_current_bitmap() == nullptr)
