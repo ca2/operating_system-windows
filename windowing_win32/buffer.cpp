@@ -217,7 +217,7 @@ namespace windowing_win32
 
       auto size = sizeParam;
 
-      FORMATTED_INFORMATION("windowing_win32::buffer::update_buffer size(%d, %d)", size.cx, size.cy);
+      //FORMATTED_INFORMATION("windowing_win32::buffer::update_buffer size(%d, %d)", size.cx, size.cy);
 
       if (size == buffer.m_pixmap.size())
       {
@@ -410,7 +410,7 @@ namespace windowing_win32
 
       auto size = buffer.m_pixmap.size();
 
-      FORMATTED_INFORMATION("windowing_win32::buffer::update_screen size(%d, %d)", size.cx, size.cy);
+      //FORMATTED_INFORMATION("windowing_win32::buffer::update_screen size(%d, %d)", size.cx, size.cy);
 
       auto pixmapData = buffer.m_pixmap.colorref();
 
