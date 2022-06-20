@@ -374,7 +374,7 @@ namespace windowing_win32
 
       }
 
-      if (pinteraction->layout().sketch().is_visible())
+      if (pinteraction->const_layout().sketch().is_visible())
       {
 
          nStyle |= WS_VISIBLE;

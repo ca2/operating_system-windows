@@ -462,7 +462,7 @@ namespace windowing_win32
 
          }
 
-         auto & layout = m_pimpl->m_puserinteraction->layout();
+         auto & layout = m_pimpl->m_puserinteraction->const_layout();
 
          //auto point = layout.output().origin();
 

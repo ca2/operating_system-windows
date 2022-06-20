@@ -414,10 +414,10 @@ namespace windowing_win32
 
       //puserinteraction->layout().sketch().set_modified();
 
-      int x = puserinteraction->layout().sketch().origin().x;
-      int y = puserinteraction->layout().sketch().origin().y;
-      int cx = puserinteraction->layout().sketch().size().cx;
-      int cy = puserinteraction->layout().sketch().size().cy;
+      int x = puserinteraction->const_layout().sketch().origin().x;
+      int y = puserinteraction->const_layout().sketch().origin().y;
+      int cx = puserinteraction->const_layout().sketch().size().cx;
+      int cy = puserinteraction->const_layout().sketch().size().cy;
 
       HWND hwndParent = nullptr;
 
@@ -2708,7 +2708,7 @@ namespace windowing_win32
          
          auto puserinteraction = m_puserinteractionimpl->m_puserinteraction;
 
-         return puserinteraction->layout().sketch().display() == ::e_display_iconic;
+         return puserinteraction->const_layout().sketch().display() == ::e_display_iconic;
 
       }
       else
@@ -4218,7 +4218,7 @@ namespace windowing_win32
 
          auto puserinteraction = m_puserinteractionimpl->m_puserinteraction;
 
-         if (puserinteraction->layout().sketch().display() != ::e_display_iconic)
+         if (puserinteraction->const_layout().sketch().display() != ::e_display_iconic)
          {
 
             output_debug_string(" IsIconic or not IsIconic, thats the question window::_001OnWindowPosChanged");
@@ -4231,7 +4231,7 @@ namespace windowing_win32
 
          auto puserinteraction = m_puserinteractionimpl->m_puserinteraction;
 
-         if (puserinteraction->layout().window().display() != ::e_display_zoomed)
+         if (puserinteraction->const_layout().window().display() != ::e_display_zoomed)
          {
 
             output_debug_string(" IsZoomed or not IsZoomed, thats the question window::_001OnWindowPosChanged");
@@ -4261,17 +4261,17 @@ namespace windowing_win32
 
       bool bMove = false;
 
-      if (puserinteraction->layout().sketch().origin() != point)
+      if (puserinteraction->const_layout().sketch().origin() != point)
       {
 
-         if (puserinteraction->layout().is_moving())
+         if (puserinteraction->const_layout().is_moving())
          {
 
             INFORMATION("Window is Moving :: on_message_move");
 
          }
 
-         puserinteraction->layout().sketch().origin() = point;
+         puserinteraction->const_layout().sketch().origin() = point;
 
          bMove = true;
 
@@ -4281,10 +4281,10 @@ namespace windowing_win32
 
       bool bSize = false;
 
-      if (puserinteraction->layout().sketch().size() != size)
+      if (puserinteraction->const_layout().sketch().size() != size)
       {
 
-         puserinteraction->layout().sketch().size() = size;
+         puserinteraction->const_layout().sketch().size() = size;
 
          bSize = true;
 
