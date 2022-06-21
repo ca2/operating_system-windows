@@ -350,10 +350,38 @@ namespace windowing_win32
 
                   HRESULT hrThumbnail = pthumbnailprovider->GetThumbnail(iSize, &hbitmap, &alphatype);
 
+
                   if (SUCCEEDED(hrThumbnail) && hbitmap != nullptr)
                   {
 
                      pimage = create_image_from_hbitmap(this, hbitmap);
+
+                  }
+                  else
+                  {
+
+                     comptr< IShellItemImageFactory> pfactory;
+
+                     HRESULT hr = SHCreateItemFromIDList(getfileimage.m_itemidlist, IID_IShellItemImageFactory, (void **) &pfactory);
+
+                     if(SUCCEEDED(hr))
+                     {
+
+                        int iSuccessCount = 0;
+
+                        HBITMAP hbitmap = nullptr;
+
+                        SIZE size = { iSize, iSize };
+
+                        if (SUCCEEDED(pfactory->GetImage(size, 0, &hbitmap)))
+                        {
+
+                           pimage = create_image_from_hbitmap(this, hbitmap);
+
+
+                        }
+                           
+                     }
 
                   }
 
