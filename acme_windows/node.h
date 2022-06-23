@@ -150,10 +150,10 @@ namespace acme_windows
       void create_app_shortcut(::app* papp) override;
 
 
-      string get_local_mutex_name(const ::string& strAppId) override;
-      string get_local_id_mutex_name(const ::string& strAppId, const ::string& strId) override;
-      string get_global_mutex_name(const ::string& strAppId) override;
-      string get_global_id_mutex_name(const ::string& strAppId, const ::string& strId) override;
+      //string get_local_mutex_name(const ::string& strAppId) override;
+      //string get_local_id_mutex_name(const ::string& strAppId, const ::string& strId) override;
+      //string get_global_mutex_name(const ::string& strAppId) override;
+      //string get_global_id_mutex_name(const ::string& strAppId, const ::string& strId) override;
 
 
    };
