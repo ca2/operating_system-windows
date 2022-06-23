@@ -194,10 +194,12 @@ namespace apex_windows
       cds.cbData = (unsigned int) strMessage.get_length();
       cds.lpData = (void *) strMessage.c_str();
 
+      HWND hwnd = get_hwnd();
+
       if (durationTimeout.is_pos_infinity())
       {
 
-         SendMessage((HWND)get_hwnd(), WM_COPYDATA, (WPARAM)0, (LPARAM)&cds);
+         SendMessage(hwnd, WM_COPYDATA, (WPARAM)0, (LPARAM)&cds);
 
       }
       else
@@ -205,7 +207,7 @@ namespace apex_windows
 
          DWORD_PTR dwptr;
 
-         if (!::SendMessageTimeout((HWND)get_hwnd(), WM_COPYDATA, (WPARAM)0, (LPARAM)&cds, SMTO_ABORTIFHUNG, (class ::wait)durationTimeout, &dwptr))
+         if (!::SendMessageTimeout(hwnd, WM_COPYDATA, (WPARAM)0, (LPARAM)&cds, SMTO_ABORTIFHUNG, (class ::wait)durationTimeout, &dwptr))
          {
 
             throw ::exception(error_failed);
