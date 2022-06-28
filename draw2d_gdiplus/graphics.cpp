@@ -1798,12 +1798,35 @@ namespace draw2d_gdiplus
 
                         //m_pgraphics->SetInterpolationMode(Gdiplus::InterpolationModeBilinear);
 
-                        ret = m_pgraphics->DrawImage(
-                           (Gdiplus::Bitmap *)pimage->get_bitmap()->get_os_data(),
-                           rectfTarget,
-                           (Gdiplus::REAL)xFound, (Gdiplus::REAL)yFound,
-                           (Gdiplus::REAL)cxFound, (Gdiplus::REAL)cyFound,
-                           Gdiplus::UnitPixel);
+                        if (imagedrawing.m_bIntegerPlacement)
+                        {
+
+                           Gdiplus::Rect r;
+
+                           r.X = (INT)rectfTarget.X;
+                           r.Y = (INT)rectfTarget.Y;
+                           r.Width = (INT)rectfTarget.Width;
+                           r.Height = (INT)rectfTarget.Height;
+
+
+                           ret = m_pgraphics->DrawImage(
+                              (Gdiplus::Bitmap *)pimage->get_bitmap()->get_os_data(),
+                              r,
+                              (INT)xFound, (INT)yFound,
+                              (INT)cxFound, (INT)cyFound,
+                              Gdiplus::UnitPixel);
+
+                        }
+                        else
+                        {
+                           ret = m_pgraphics->DrawImage(
+                              (Gdiplus::Bitmap *)pimage->get_bitmap()->get_os_data(),
+                              rectfTarget,
+                              (Gdiplus::REAL)xFound, (Gdiplus::REAL)yFound,
+                              (Gdiplus::REAL)cxFound, (Gdiplus::REAL)cyFound,
+                              Gdiplus::UnitPixel);
+
+                        }
 
                         //m_pgraphics->SetInterpolationMode(emode);
 
@@ -1854,9 +1877,29 @@ namespace draw2d_gdiplus
                Gdiplus::ColorMatrixFlagsDefault,
                Gdiplus::ColorAdjustTypeBitmap);
 
-            ret = m_pgraphics->DrawImage(pbitmap, rectfTarget,
-               (Gdiplus::REAL)xSrc, (Gdiplus::REAL)ySrc,
-               (Gdiplus::REAL)nSrcWidth, (Gdiplus::REAL)nSrcHeight, Gdiplus::UnitPixel, &imageattributes);
+            if (imagedrawing.m_bIntegerPlacement)
+            {
+
+               Gdiplus::Rect r;
+
+               r.X = (INT)rectfTarget.X;
+               r.Y = (INT)rectfTarget.Y;
+               r.Width = (INT)rectfTarget.Width;
+               r.Height = (INT)rectfTarget.Height;
+
+               ret = m_pgraphics->DrawImage(pbitmap, r,
+                  (INT)xSrc, (INT)ySrc,
+                  (INT)nSrcWidth, (INT)nSrcHeight, Gdiplus::UnitPixel, &imageattributes);
+
+            }
+            else
+            {
+
+               ret = m_pgraphics->DrawImage(pbitmap, rectfTarget,
+                  (Gdiplus::REAL)xSrc, (Gdiplus::REAL)ySrc,
+                  (Gdiplus::REAL)nSrcWidth, (Gdiplus::REAL)nSrcHeight, Gdiplus::UnitPixel, &imageattributes);
+
+            }
 
          }
          else
@@ -4624,52 +4667,52 @@ namespace draw2d_gdiplus
    }
 
 
-   void graphics::add_shapes(const shape_array & shapea)
-   {
+   //void graphics::add_clipping_shapes(const shape_array<::draw2d::region> & shapea)
+   //{
 
-      for (int i = 0; i < shapea.get_count(); i++)
-      {
+   //   for (int i = 0; i < shapea.get_count(); i++)
+   //   {
 
-         if (i + 1 < shapea.get_count())
-         {
+   //      if (i + 1 < shapea.get_count())
+   //      {
 
-            if (shapea[i + 1]->eshape() == e_shape_intersect_clip)
-            {
+   //         if (shapea[i + 1]->eshape() == e_shape_intersect_clip)
+   //         {
 
-               switch (shapea[i]->eshape())
-               {
-                  //case e_shape_rect:
-                  //   intersect_clip(shapea[i]->shape < ::rectangle_i32>());
-                  //   break;
-               case e_shape_rectangle:
-                  intersect_clip(shapea[i]->shape < ::rectangle>());
-                  break;
-                  //case e_shape_oval:
-                  //   intersect_clip(shapea[i]->shape < ::oval>());
-                  //   break;
-               case e_shape_ellipse:
-                  intersect_clip(shapea[i]->shape < ::ellipse>());
-                  break;
-                  //case e_shape_polygon:
-                  //   intersect_clip(shapea[i]->shape < ::polygon_i32>());
-                  //   break;
-               case e_shape_polygon:
-                  intersect_clip(shapea[i]->shape < ::polygon>());
-                  break;
+   //            switch (shapea[i]->eshape())
+   //            {
+   //               //case e_shape_rect:
+   //               //   intersect_clip(shapea[i]->shape < ::rectangle_i32>());
+   //               //   break;
+   //            case e_shape_rectangle:
+   //               intersect_clip(shapea[i]->shape < ::rectangle>());
+   //               break;
+   //               //case e_shape_oval:
+   //               //   intersect_clip(shapea[i]->shape < ::oval>());
+   //               //   break;
+   //            case e_shape_ellipse:
+   //               intersect_clip(shapea[i]->shape < ::ellipse>());
+   //               break;
+   //               //case e_shape_polygon:
+   //               //   intersect_clip(shapea[i]->shape < ::polygon_i32>());
+   //               //   break;
+   //            case e_shape_polygon:
+   //               intersect_clip(shapea[i]->shape < ::polygon>());
+   //               break;
 
-               }
+   //            }
 
-               i++;
+   //            i++;
 
-            }
+   //         }
 
-         }
+   //      }
 
-      }
+   //   }
 
-      //return ::success;
+   //   //return ::success;
 
-   }
+   //}
 
 
    void graphics::reset_clip()
@@ -4682,7 +4725,14 @@ namespace draw2d_gdiplus
    }
 
 
-   void graphics::intersect_clip(const ::rectangle & rectangle)
+   void graphics::_intersect_clip() 
+   {
+
+
+   }
+
+
+   void graphics::_add_clipping_shape(const ::rectangle & rectangle, __pointer(::draw2d::region) & pregion)
    {
 
       Gdiplus::RectF r;
@@ -4718,7 +4768,7 @@ namespace draw2d_gdiplus
    //}
 
 
-   void graphics::intersect_clip(const ::ellipse & ellipse)
+   void graphics::_add_clipping_shape(const ::ellipse & ellipse, __pointer(::draw2d::region) & pregion)
    {
 
       auto ppath = __auto(new Gdiplus::GraphicsPath());
@@ -4762,7 +4812,7 @@ namespace draw2d_gdiplus
    //}
 
 
-   void graphics::intersect_clip(const ::polygon & polygon)
+   void graphics::_add_clipping_shape(const ::polygon & polygon, __pointer(::draw2d::region) & pregion)
    {
 
       auto ppath = __auto(new Gdiplus::GraphicsPath());

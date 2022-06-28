@@ -205,6 +205,39 @@ namespace draw2d_gdiplus
 
       }
 
+      auto pfont = get_gdiplus_font();
+
+      if (pfont)
+      {
+
+         Gdiplus::FontFamily fontfamily;
+
+         if(pfont->GetFamily(&fontfamily) == Gdiplus::Ok)
+         {
+
+            INT iStyle = pfont->GetStyle();
+
+            double dHeight = fontfamily.GetEmHeight(iStyle);
+
+            double dSize = pfont->GetSize();
+
+            double dFontHeight = pfont->GetHeight((Gdiplus::REAL)pgraphics->get_dpiy());
+
+            auto & textmetric = m_textmetric2;
+
+            textmetric.m_dAscent = dSize*fontfamily.GetCellAscent(iStyle) / dHeight;
+            textmetric.m_dDescent = dSize * fontfamily.GetCellDescent(iStyle) / dHeight;
+            textmetric.m_dInternalLeading = 0.;
+            textmetric.m_dExternalLeading = dSize * fontfamily.GetLineSpacing(iStyle) / dHeight -
+               (textmetric.m_dAscent + textmetric.m_dDescent);
+
+         }
+
+      }
+
+
+
+
       m_mapText.erase_all();
 
       //return true;

@@ -202,11 +202,12 @@ namespace draw2d_gdiplus
       virtual i32 get_clip_box(::rectangle_f64 * prectangle) override;
 
 
-      virtual void add_shapes(const shape_array& shapea);
-      virtual void reset_clip();
-      virtual void intersect_clip(const ::rectangle & rectangle);
-      virtual void intersect_clip(const ::ellipse & ellipse);
-      virtual void intersect_clip(const ::polygon & polygon);
+      //void add_clipping_shapes(const shape_array<::draw2d::region>& shapea) override;
+      void reset_clip() override;
+      void _intersect_clip() override;
+      void _add_clipping_shape(const ::rectangle & rectangle, __pointer(::draw2d::region) & pregion);
+      void _add_clipping_shape(const ::ellipse & ellipse, __pointer(::draw2d::region) & pregion);
+      void _add_clipping_shape(const ::polygon & polygon, __pointer(::draw2d::region) & pregion);
 
       //void PtVisible(double x, double y) override;
       //bool PtVisible(const ::point_i32 & point) override;

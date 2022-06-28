@@ -147,10 +147,9 @@ namespace draw2d_gdiplus
 
       Gdiplus::RectF rectangle;
 
-      rectangle.X      = (Gdiplus::REAL) m_x1;
-      rectangle.Y      = (Gdiplus::REAL) m_y1;
-      rectangle.Width  = (Gdiplus::REAL) (m_x2 - m_x1);
-      rectangle.Height = (Gdiplus::REAL) (m_y2 - m_y1);
+      __pointer(rectangle_item) pitem = m_pitem;
+
+      __copy(rectangle, pitem->m_rectangle);
 
       path.AddRectangle(rectangle);
 
@@ -164,7 +163,13 @@ namespace draw2d_gdiplus
 
       Gdiplus::GraphicsPath path;
 
-      path.AddEllipse((INT) m_x1, (INT) m_y1, (INT) (m_x2 - m_x1), (INT) (m_y2 - m_y1));
+
+      __pointer(ellipse_item) pitem = m_pitem;
+
+      path.AddEllipse((INT) pitem->m_rectangle.left,
+         (INT) pitem->m_rectangle.top,
+         (INT) pitem->m_rectangle.width(),
+         (INT) pitem->m_rectangle.height());
 
       return new Gdiplus::Region(&path);
 
@@ -178,12 +183,14 @@ namespace draw2d_gdiplus
 
       array < Gdiplus::PointF > pa;
 
-      for(i32 i = 0; i < m_nCount; i++)
+      __pointer(polygon_item) pitem = m_pitem;
+
+      for(i32 i = 0; i < pitem->m_polygon.get_size(); i++)
       {
-         pa.add(Gdiplus::PointF((Gdiplus::REAL) m_lppoints[i].x, (Gdiplus::REAL) m_lppoints[i].y));
+         pa.add(Gdiplus::PointF((Gdiplus::REAL) pitem->m_polygon[i].x, (Gdiplus::REAL) pitem->m_polygon[i].y));
       }
 
-      if(m_efillmode == ::draw2d::e_fill_mode_alternate)
+      if(pitem->m_efillmode == ::draw2d::e_fill_mode_alternate)
       {
          path.SetFillMode(Gdiplus::FillModeAlternate);
       }
@@ -206,7 +213,9 @@ namespace draw2d_gdiplus
 
       array < Gdiplus::PointF > pa;
 
-      if(m_efillmode == ::draw2d::e_fill_mode_alternate)
+      __pointer(poly_polygon_item) pitem = m_pitem;
+
+      if(pitem->m_efillmode == ::draw2d::e_fill_mode_alternate)
       {
          path.SetFillMode(Gdiplus::FillModeAlternate);
       }
@@ -217,13 +226,15 @@ namespace draw2d_gdiplus
 
       i32 n = 0;
 
-      for(i32 i = 0; i < m_nCount; i++)
+      for(i32 i = 0; i < pitem->m_polygona.get_size(); i++)
       {
-         i32 jCount = m_lppolycounts[i];
+         auto & polygon = *pitem->m_polygona[i];
+            
+         i32 jCount = polygon.get_size();
          pa.erase_all();
          for(i32 j = 0; j < jCount; j++)
          {
-            pa.add(Gdiplus::PointF((Gdiplus::REAL) m_lppoints[n].x, (Gdiplus::REAL) m_lppoints[n].y));
+            pa.add(Gdiplus::PointF((Gdiplus::REAL) polygon[n].x, (Gdiplus::REAL) polygon[n].y));
             n++;
          }
          path.AddPolygon(pa.get_data(), (i32) pa.get_count());
@@ -238,26 +249,28 @@ namespace draw2d_gdiplus
    Gdiplus::Region * region::get_combine(::draw2d::graphics * pgraphics)
    {
 
-      if (!m_pregion1 || !m_pregion2)
+      __pointer(combine_item) pitem = m_pitem;
+
+      if (!pitem->m_pregion1 || !pitem->m_pregion2)
       {
 
          return nullptr;
 
       }
 
-      Gdiplus::Region * pregion = m_pregion1->get_os_data < Gdiplus::Region *>(pgraphics)->Clone();
+      Gdiplus::Region * pregion = pitem->m_pregion1->get_os_data < Gdiplus::Region *>(pgraphics)->Clone();
 
-      Gdiplus::Region * pregionOp = m_pregion2->get_os_data < Gdiplus::Region *>(pgraphics);
+      Gdiplus::Region * pregionOp = pitem->m_pregion2->get_os_data < Gdiplus::Region *>(pgraphics);
 
-      if(m_ecombine == ::draw2d::e_combine_add)
+      if(pitem->m_ecombine == ::draw2d::e_combine_add)
       {
          pregion->Union(pregionOp);
       }
-      else if(m_ecombine == ::draw2d::e_combine_exclude)
+      else if(pitem->m_ecombine == ::draw2d::e_combine_exclude)
       {
          pregion->Exclude(pregionOp);
       }
-      else if(m_ecombine == ::draw2d::e_combine_intersect)
+      else if(pitem->m_ecombine == ::draw2d::e_combine_intersect)
       {
          pregion->Intersect(pregionOp);
       }
