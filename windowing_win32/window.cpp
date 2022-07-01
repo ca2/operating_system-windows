@@ -248,11 +248,7 @@ namespace windowing_win32
    void window::create_window(::user::interaction_impl * pimpl)
    {
 
-      auto psession = get_session();
-
-      auto puser = psession->user();
-
-      auto pwindowing = puser->windowing();
+auto pwindowing = windowing();
 
       m_pwindowing = pwindowing;
 
