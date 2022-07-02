@@ -40,13 +40,13 @@ namespace windowing_win32
       void create_window(::user::interaction_impl * pimpl) override;
 
 
-      inline HWND get_hwnd() const { return (HWND) get_oswindow(); }
+      inline HWND get_hwnd() const { return (HWND) oswindow(); }
       inline void set_hwnd(HWND hwnd) { set_oswindow(__oswindow(hwnd)); }
 
 
       bool operator== (const window & window) const
       {
-         return get_oswindow() == window.get_oswindow();
+         return oswindow() == window.oswindow();
       }
 
       bool operator!= (const window & window) const
@@ -266,7 +266,7 @@ namespace windowing_win32
       //virtual void CalcWindowRect(RECTANGLE_I32 * pClientRect, ::u32 nAdjustType = adjustBorder);
 
 
-      void get_child_by_id(atom atom, oswindow * poswindow_) const;
+      void get_child_by_id(atom atom, ::oswindow * poswindow_) const;
 
       //virtual bool _is_window() const override;
 
@@ -535,11 +535,11 @@ namespace windowing_win32
 
       
       virtual ::windowing::window * get_parent() const override;
-      virtual oswindow get_parent_oswindow() const override;
+      virtual ::oswindow get_parent_oswindow() const override;
       virtual void set_parent(::windowing::window * pwindow) override;
 
       virtual ::windowing::window * get_owner() const override;
-      virtual oswindow get_owner_oswindow() const override;
+      virtual ::oswindow get_owner_oswindow() const override;
       virtual void set_owner(::windowing::window * pwindow) override;
 
       //virtual ::user::interaction * set_owner(::user::interaction * pWndNewParent);
@@ -883,7 +883,9 @@ namespace windowing_win32
       virtual void window_show() override;
       virtual void update_screen() override;
 
- 
+      void get_cursor_position(POINT_I32 * ppointCursor) override;
+      void set_cursor_position(const ::point_i32 & pointCursor) override;
+
       
 
       // IUnknown

@@ -44,7 +44,7 @@ namespace windowing_win32
 
       //void destroy() override;
 
-      void get_cursor_position(POINT_I32* ppoint) override;
+      //void get_cursor_position(POINT_I32* ppoint) override;
 
       virtual bool defer_create_system_window();
       //virtual __pointer(::user::interaction) create_system_window();

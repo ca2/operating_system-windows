@@ -559,7 +559,7 @@ namespace windowing_win32
 
       ::rectangle_i32 rectangleWkspace;
 
-      index iBestWkspace = get_best_wkspace(&rectangleWkspace, rectangle);
+      index iBestWkspace = get_best_workspace(&rectangleWkspace, rectangle);
 
       edisplay edisplay;
 
@@ -830,7 +830,7 @@ namespace windowing_win32
    }
 
 
-   index display::get_best_monitor(RECTANGLE_I32 * prectangle, const rectangle_i32 & rectangleParam, ::e_activation eactivation)
+   index display::get_best_monitor(RECTANGLE_I32 * prectangle, const rectangle_i32 & rectangleParam, ::e_activation eactivation, ::windowing::window * pwindowCursorPosition)
    {
 
       index iMatchingMonitor = -1;
@@ -844,7 +844,7 @@ namespace windowing_win32
       if (eactivation & e_activation_under_mouse_cursor || rectangle.is_null())
       {
 
-         ::point_i32 pointCursor = m_pwindowing->get_cursor_position();
+         ::point_i32 pointCursor = pwindowCursorPosition->get_cursor_position();
 
          rectangle.set(pointCursor - ::size_i32(5, 5), ::size_i32(10, 10));
 
@@ -913,7 +913,7 @@ namespace windowing_win32
    }
 
 
-   index display::get_best_wkspace(::rectangle_i32 * prectangle, const rectangle_i32 & rectangleParam, ::e_activation eactivation)
+   index display::get_best_workspace(::rectangle_i32 * prectangle, const rectangle_i32 & rectangleParam, ::e_activation eactivation, ::windowing::window * pwindowCursorPosition)
    {
 
       index iMatchingWkspace = -1;
@@ -924,10 +924,10 @@ namespace windowing_win32
 
       ::rectangle_i32 rectangle(rectangleParam);
 
-      if (eactivation & e_activation_under_mouse_cursor || rectangle.is_null())
+      if (eactivation & e_activation_under_mouse_cursor)
       {
 
-         ::point_i32 pointCursor = m_pwindowing->get_cursor_position();
+         ::point_i32 pointCursor = pwindowCursorPosition->get_cursor_position();
 
          rectangle.set(pointCursor - ::size_i32(5, 5), ::size_i32(10, 10));
 

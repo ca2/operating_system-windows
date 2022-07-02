@@ -12,7 +12,7 @@ namespace windowing_win32
    windowing::windowing()
    {
 
-      m_pWindowing = this;
+      m_pWindowing4 = this;
 
 //      set_layer(LAYERED_IMPL, this);
 
@@ -753,7 +753,7 @@ namespace windowing_win32
    void windowing::erase_window(::windowing::window * pwindow)
    {
 
-      if (!m_windowmap.erase_key(__hwnd(pwindow->get_oswindow())))
+      if (!m_windowmap.erase_key(__hwnd(pwindow->oswindow())))
       {
 
          //return ::error_failed;
@@ -883,7 +883,7 @@ namespace windowing_win32
       for (i32 i = 0; i < ptra.get_size(); i++)
       {
 
-         hwnda.add(__hwnd(ptra.element_at(i)->get_oswindow()));
+         hwnda.add(__hwnd(ptra.element_at(i)->oswindow()));
 
       }
 
@@ -902,7 +902,7 @@ namespace windowing_win32
 
          __pointer(::user::interaction) puserinteraction = primitivepointera.primitive_at(i);
 
-         hwnda.add((HWND) puserinteraction->get_oswindow());
+         hwnda.add((HWND) puserinteraction->oswindow());
 
       }
 
@@ -1115,12 +1115,12 @@ namespace windowing_win32
    }
 
 
-   void windowing::get_cursor_position(POINT_I32* ppoint)
-   {
+   //void windowing::get_cursor_position(POINT_I32* ppoint)
+   //{
 
-      ::GetCursorPos((POINT *) ppoint);
+   //   ::GetCursorPos((POINT *) ppoint);
 
-   }
+   //}
 
 
    //#ifdef WINDOWS_DESKTOP

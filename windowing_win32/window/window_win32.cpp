@@ -67,7 +67,7 @@ LRESULT CALLBACK __window_procedure(HWND hwnd, UINT message, WPARAM wparam, LPAR
 
          ::user::system * psystem = (::user::system *)pcreatestructw->lpCreateParams;
 
-         pwindow = (::windowing_win32::window *) psystem->m_pwindow->m_pWindow;
+         pwindow = (::windowing_win32::window *) psystem->m_pwindow->m_pWindow4;
 
          if (!pwindow)
          {
@@ -76,13 +76,29 @@ LRESULT CALLBACK __window_procedure(HWND hwnd, UINT message, WPARAM wparam, LPAR
 
          }
 
-         ::SetWindowLongPtr(hwnd, 0, (LONG_PTR)pwindow);
+         ::SetLastError(0);
+
+         auto lResult = ::SetWindowLongPtr(hwnd, 0, (LONG_PTR)pwindow);
+
+         if (lResult == 0)
+         {
+
+            auto dwResult = ::GetLastError();
+
+            if (dwResult)
+            {
+
+               ::output_debug_string("SetWindowLongPtr Failed");
+
+            }
+
+         }
 
          pwindow->set_oswindow(__oswindow(hwnd));
 
          pwindow->set_os_data(hwnd);
 
-         auto pwindowing = (::windowing_win32::windowing *) pwindow->m_pwindowing->m_pWindowing;
+         auto pwindowing = (::windowing_win32::windowing *) pwindow->m_pwindowing->m_pWindowing4;
 
          critical_section_lock synchronouslock(&pwindowing->m_criticalsection);
 
@@ -533,21 +549,15 @@ wstring windowing::_windows_get_user_interaction_window_class(::user::interactio
 
    wndcls.hInstance = GetModuleHandleW(L"windowing_win32.dll");
 
-   //INITCOMMONCONTROLSEX init;
-   //init.dwSize = sizeof(init);
+   wndcls.cbWndExtra = wndcls.cbClsExtra = 40;
 
-   if (etype == ::user::interaction::type_frame || etype == ::user::interaction::type_view)
+   if (etype == ::user::interaction::type_frame
+      || etype == ::user::interaction::type_view)
    {
-
-      // SDI Frame or MDI Child windows or views - normal colors
 
       wndcls.style = CS_DBLCLKS | CS_HREDRAW | CS_VREDRAW | CS_OWNDC;
 
-      //wndcls.style = CS_HREDRAW | CS_VREDRAW;
-
       wndcls.hbrBackground = (HBRUSH)(COLOR_WINDOW + 1);
-
-      wndcls.cbWndExtra = wndcls.cbClsExtra = 40;
 
       if (_windows_register_with_icon(&wndcls, L"ca2_frame", 0))
       {
@@ -704,13 +714,29 @@ namespace windowing_win32
    bool windowing::_windows_register_class(WNDCLASSEXW* puserinteractionclass)
    {
 
-      WNDCLASSEXW wndcls;
+      WNDCLASSEXW wndcls{};
+
+      ::SetLastError(0);
 
       if (GetClassInfoExW(puserinteractionclass->hInstance, puserinteractionclass->lpszClassName, &wndcls))
-
       {
 
          return true;
+
+      }
+
+      auto dwLastError = ::GetLastError();
+
+      if (dwLastError == ERROR_CLASS_DOES_NOT_EXIST)
+      {
+
+         ::SetLastError(0);
+
+      }
+      else
+      {
+
+         output_debug_string("GetClassInfoExW failed with error number '"+__string(dwLastError) + "'");
 
       }
 
@@ -724,6 +750,8 @@ namespace windowing_win32
          return false;
 
       }
+
+      ::u32 dw = GetLastError();
 
       bool bRet = true;
 

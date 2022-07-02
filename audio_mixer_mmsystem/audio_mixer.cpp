@@ -58,7 +58,7 @@ namespace multimedia
       void audio_mixer::set_new_device(u32 uiMixerId)
       {
 
-         m_paudiomixerdevice->open(uiMixerId, (UINT_PTR)m_pwindow->get_oswindow(), 0, CALLBACK_WINDOW);
+         m_paudiomixerdevice->open(uiMixerId, (UINT_PTR)m_pwindow->oswindow(), 0, CALLBACK_WINDOW);
 
       }
 

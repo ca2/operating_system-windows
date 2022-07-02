@@ -45,11 +45,11 @@ namespace windowing_win32
 
       auto puser = psession->user();
 
-      auto pwindowing = (::windowing_win32::windowing*)puser->m_pwindowing->m_pWindowing;
+      auto pwindowing = (::windowing_win32::windowing*)puser->m_pwindowing->m_pWindowing4;
 
       auto psysteminteraction = pwindowing->m_psysteminteraction;
 
-      m_hwnd = (HWND) psysteminteraction->get_oswindow();
+      m_hwnd = (HWND) psysteminteraction->oswindow();
 
    }
 
@@ -126,7 +126,7 @@ namespace windowing_win32
 
       auto puser = psession->user();
 
-      auto pwindowing = (::windowing_win32::windowing*)puser->m_pwindowing->m_pWindowing;
+      auto pwindowing = (::windowing_win32::windowing*)puser->m_pwindowing->m_pWindowing4;
 
       auto psysteminteraction = pwindowing->m_psysteminteraction;
       

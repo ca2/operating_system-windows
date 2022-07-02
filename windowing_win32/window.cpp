@@ -53,7 +53,7 @@ namespace windowing_win32
    {
 
       
-      m_pWindow = this;
+      m_pWindow4 = this;
 
       //set_layer(LAYERED_IMPL, this);
       //m_plongmap  = new iptr_to_iptr;
@@ -248,39 +248,21 @@ namespace windowing_win32
    void window::create_window(::user::interaction_impl * pimpl)
    {
 
-auto pwindowing = windowing();
+      auto psession = get_session();
+
+      auto puser = psession->user();
+
+      auto pwindowing = puser->windowing1();
 
       m_pwindowing = pwindowing;
 
       m_pimpl2 = pimpl->m_pImpl2;
 
-      //__refer(puserinteraction->m_pthreadUserInteraction, ::get_task() OBJECT_REFERENCE_COUNT_DEBUG_COMMA_THIS_FUNCTION_LINE);
-
-      //puserinteraction->m_pthreadUserInteraction->uiptra().add(puserinteraction);
-
-      //__refer(m_pthreadUserImpl, puserinteraction->m_pthreadUserInteraction OBJECT_REFERENCE_COUNT_DEBUG_COMMA_THIS_FUNCTION_LINE);
-
-      //m_strDebug += ::str().demangle(puserinteraction->type_name()) + ";";
-
-      //ASSERT(pusersystem->m_createstruct.lpszClass == nullptr || __is_valid_string(pusersystem->m_createstruct.lpszClass) || __is_valid_atom(pusersystem->m_createstruct.lpszClass));
-
-      //ENSURE_ARG(pusersystem->m_createstruct.lpszName == nullptr || __is_valid_string(pusersystem->m_createstruct.lpszName));
-
-      //wstring wstrClassName(pusersystem->m_createstruct.lpszClass);
       wstring wstrClassName;
-
-      //if (wstrClassName.is_empty())
-      //{
 
       auto puserinteraction = pimpl->m_puserinteraction;
 
-      //auto pwindowing = windowing();
-
       wstrClassName = pwindowing->_windows_get_user_interaction_window_class(puserinteraction);
-
-      //}
-
-      //pusersystem->m_createstruct.lpszClass = wstrClassName;
 
       if (!puserinteraction->m_pusersystem)
       {
@@ -302,39 +284,18 @@ auto pwindowing = windowing();
 
       m_puserinteractionimpl->m_pwindow = this;
 
+      puserinteraction->m_pwindow = this;
 
-      //pimpl->install_message_routing(puserinteraction);
+      if (puserinteraction->m_bMessageWindow)
+      {
+
+         puserinteraction->m_ewindowflag -= e_window_flag_graphical;
+
+      }
 
       install_message_routing(puserinteraction);
 
-      //if (!hook_window_create(this))
-      //{
-
-      //   post_non_client_destroy();
-
-      //   return false;
-
-      //}
-
-      // if window is not created, it may destroy this object, so keep the app as local ::payload
-
-      //thread_property("wnd_init") = this;
-
-      //::aura::application * papp = &papplication;
-
-      //wstring wstrWindowName(pusersystem->m_createstruct.lpszName);
       wstring wstrWindowName;
-
-      //string char
-
-      //wstring wchar_t
-
-      //if (wstrWindowName.is_empty())
-      //{
-
-      //   wstrWindowName = L"window";
-
-      //}
 
 #if 0
 
@@ -380,35 +341,17 @@ auto pwindowing = windowing();
 
 #else
 
-      //::u32 dwExStyle = puserinteraction->GetExStyle();
-      //::u32 dwStyle = puserinteraction->GetStyle();
-
       ::u32 dwExStyle = 0;
+
       ::u32 dwStyle = 0;
 
-      auto pusersystem = puserinteraction->m_pusersystem;
-
-      //CREATESTRUCTW createstruct{};
-
-      //auto & createstruct = pusersystem->m_createstruct;
+      auto pusersystem = puserinteraction->m_pusersystem.get();
 
       wstrWindowName = puserinteraction->m_strWindowText;
-
-      //if (pusersystem->m_createstruct.lpszName)
-      //{
-
-      //   wstrWindowName = pusersystem->m_createstruct.lpszName;
-
-      //}
-
-      //dwExStyle = createstruct.dwExStyle;
-      //dwStyle = createstruct.style;
 
       windowing()->__synthesizes_creates_styles(puserinteraction, dwExStyle, dwStyle);
 
       pusersystem->m_pwindow = this;
-
-      //puserinteraction->layout().sketch().set_modified();
 
       int x = puserinteraction->const_layout().sketch().origin().x;
       int y = puserinteraction->const_layout().sketch().origin().y;
@@ -421,7 +364,7 @@ auto pwindowing = windowing();
 
       HINSTANCE hinstance = (HINSTANCE)GetModuleHandleW(L"windowing_win32.dll");
 
-      void * lpCreateParams = nullptr;
+      void * lpCreateParams = pusersystem;
 
       if (puserinteraction->m_bMessageWindow)
       {
@@ -433,12 +376,16 @@ auto pwindowing = windowing();
 
       }
 
-      //if (puserinteraction->m_pusersystem)
-      //{
+      bool bWsChildStyle = dwStyle & WS_CHILD;
 
-      //   lpCreateParams = puserinteraction->m_pusersystem->m_createstruct.lpCreateParams;
+      DWORD dwLastErrorPreCreateWindow = ::GetLastError();
 
-      //}
+      if (hwndParent == nullptr || hwndParent == HWND_MESSAGE)
+      {
+
+         puserinteraction->m_puserinteractionTopLevel = puserinteraction;
+
+      }
 
       HWND hwnd = ::CreateWindowExW(
          dwExStyle,
@@ -452,43 +399,14 @@ auto pwindowing = windowing();
          hwndParent,
          hmenu,
          hinstance,
-         pusersystem);
+         lpCreateParams);
 
 #endif
-
-      //HWND hwnd = CreateWindowW(wstrClassName, wstrWindowName, WS_OVERLAPPED,
-      //   CW_USEDEFAULT, 0, CW_USEDEFAULT, 0, nullptr, nullptr, pusersystem->m_createstruct.hInstance, nullptr);
-
-      //::ShowWindow(hwnd,SW_SHOWNORMAL);
-      //::UpdateWindow(hwnd);
-
-      //bool bUnicode = IsWindowUnicode(hwnd);
-
-      u32 dwLastError = ::GetLastError();
-
-      //if (!unhook_window_create())
-      //{
-
-      //   post_non_client_destroy();        // cleanup if CreateWindowEx fails too soon
-
-      //}
-
-      if (puserinteraction->m_bMessageWindow)
-      {
-
-         puserinteraction->m_ewindowflag -= e_window_flag_graphical;
-
-      }
 
       if (hwnd == nullptr)
       {
 
-         //if (papp == nullptr)
-         //{
-
-         //   return false;
-
-         //}
+         u32 dwLastError = ::GetLastError();
 
          string strLastError = last_error_message(dwLastError);
 
@@ -500,34 +418,18 @@ auto pwindowing = windowing();
 
          CATEGORY_WARNING(appmsg, strMessage);
 
-         try
+         if (dwLastError == 0x0000057e)
          {
 
-            if (dwLastError == 0x0000057e)
-            {
-
-               TRACE("Cannot create a top-level child window.");
-
-            }
-            else
-            {
-
-               TRACE("%s", strMessage);
-
-            }
+            TRACE("Cannot create a top-level child window.");
 
          }
-         catch (...)
+         else
          {
 
+            TRACE("%s", strMessage);
+
          }
-
-      }
-
-      if (hwnd == nullptr)
-      {
-
-         //return false;
 
          throw ::exception(error_failed);
 
@@ -541,12 +443,6 @@ auto pwindowing = windowing();
       }
 
       puserinteraction->m_ewindowflag += ::e_window_flag_is_window;
-
-      //puserinteraction->layout().sketch() = ::point_i32(pusersystem->m_createstruct.x, pusersystem->m_createstruct.y);
-      //puserinteraction->layout().sketch() = ::size_i32(pusersystem->m_createstruct.cx, pusersystem->m_createstruct.cy);
-
-      //puserinteraction->layout().window() = ::point_i32(pusersystem->m_createstruct.x, pusersystem->m_createstruct.y);
-      //puserinteraction->layout().window() = ::size_i32(pusersystem->m_createstruct.cx, pusersystem->m_createstruct.cy);
 
       bool bUnicode = ::IsWindowUnicode(hwnd) != false;
 
@@ -563,34 +459,16 @@ auto pwindowing = windowing();
 
       }
 
-      //WNDCLASSEXW wndcls;
-
-      //if (wstrClassName.get_length() > 0 && GetClassInfoExW(psystem->m_hinstance, wstrClassName, &wndcls) && wndcls.hIcon != nullptr)
-      {
-
-         //papplication->set_icon(puserinteraction, __new(::draw2d::icon(get_application(), wndcls.hIcon)), false);
-
-         //papplication->set_icon(puserinteraction, __new(::draw2d::icon(get_application(), wndcls.hIcon)), true);
-
-      }
-
       if (hwnd != get_hwnd())
       {
 
          set_hwnd(hwnd);
-         //ASSERT(false); // should have been set in send msg hook
 
       }
 
-      //set_os_data(hwnd);
-
-      /// this Windows native window "holds" object to the
-      /// wrapping object.
       puserinteraction->increment_reference_count(OBJECT_REFERENCE_COUNT_DEBUG_THIS);
 
       puserinteraction->m_ewindowflag |= e_window_flag_window_created;
-
-      //return true;
 
    }
 
@@ -1325,7 +1203,7 @@ auto pwindowing = windowing();
       if (::is_set(pwindowParent))
       {
 
-         hwndParent = __hwnd(pwindowParent->get_oswindow());
+         hwndParent = __hwnd(pwindowParent->oswindow());
 
       }
 
@@ -2731,7 +2609,7 @@ auto pwindowing = windowing();
    ::windowing::window * window::get_owner() const
    {
 
-      oswindow oswindow = get_owner_oswindow();
+      ::oswindow oswindow = get_owner_oswindow();
 
       auto pwindow = m_pwindowing->window(oswindow);
 
@@ -2781,7 +2659,7 @@ auto pwindowing = windowing();
       if (::is_set(pWndNewOwner))
       {
 
-         hwndOwner = __hwnd(pWndNewOwner->get_oswindow());
+         hwndOwner = __hwnd(pWndNewOwner->oswindow());
 
       }
 
@@ -6266,7 +6144,7 @@ auto pwindowing = windowing();
    float window::get_dpi_for_window()
    {
 
-      oswindow oswindow = get_oswindow();
+      ::oswindow oswindow = this->oswindow();
 
       return (float) ::get_dpi_for_window(oswindow);
 
@@ -6402,6 +6280,24 @@ auto pwindowing = windowing();
    //   }
 
    //}
+
+   
+   void window::get_cursor_position(POINT_I32 * ppointCursor)
+   {
+
+      ::GetCursorPos((POINT *)&m_pointCursor);
+
+      *ppointCursor = m_pointCursor;
+
+   }
+
+
+   void window::set_cursor_position(const ::point_i32 & pointCursor)
+   {
+
+      ::SetCursorPos(pointCursor.x, pointCursor.y);
+
+   }
 
 
 

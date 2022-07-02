@@ -230,11 +230,7 @@ namespace windowing_win32
 
       int iScan = -1;
 
-      auto psession = m_pcontext->get_session();
-
-      auto puser = psession->m_paurasession->user();
-
-      auto pwindowing = puser->windowing();
+      auto pwindowing = m_pimpl->m_puserinteraction->windowing();
 
       auto pdisplay = pwindowing->display();
 

@@ -92,7 +92,7 @@ namespace aura_windows
    void * interaction_impl::get_os_data() const
    {
 
-      return (void *)((::aura_windows::interaction_impl *) this)->get_oswindow();
+      return (void *)((::aura_windows::interaction_impl *) this)->oswindow();
 
    }
 
@@ -1508,7 +1508,7 @@ namespace aura_windows
    bool interaction_impl::operator==(const interaction_impl& wnd) const
    {
 
-      return (((interaction_impl *)&wnd)->get_oswindow()) == ((interaction_impl *)this)->get_oswindow();
+      return (((interaction_impl *)&wnd)->oswindow()) == ((interaction_impl *)this)->oswindow();
 
    }
 
@@ -1516,7 +1516,7 @@ namespace aura_windows
    bool interaction_impl::operator!=(const interaction_impl& wnd) const
    {
 
-      return (((interaction_impl *)&wnd)->get_oswindow()) != ((interaction_impl *)this)->get_oswindow();
+      return (((interaction_impl *)&wnd)->oswindow()) != ((interaction_impl *)this)->oswindow();
 
    }
 

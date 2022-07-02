@@ -138,7 +138,7 @@ namespace windowing_win32
 
       //::SetWindowLongPtr(m_hwnd, GWLP_USERDATA, (LONG_PTR) this);
 
-      HWND hwnd = (HWND)get_oswindow();
+      HWND hwnd = (HWND)oswindow();
 
       if(!::AddClipboardFormatListener(hwnd))
       {
@@ -171,7 +171,7 @@ namespace windowing_win32
    void copydesk::on_message_destroy(::message::message * pmessage)
    {
 
-      bool bOk1 = ::RemoveClipboardFormatListener((HWND)get_oswindow());
+      bool bOk1 = ::RemoveClipboardFormatListener((HWND)oswindow());
 
       //bool bOk2 = ::DestroyWindow(m_hwnd);
 
@@ -354,7 +354,7 @@ namespace windowing_win32
 
             synchronous_lock synchronouslock(mutex());
 
-            if (!::OpenClipboard(__hwnd(get_oswindow())))
+            if (!::OpenClipboard(__hwnd(oswindow())))
             //if(!OpenClipboard())
             {
 
@@ -404,7 +404,7 @@ namespace windowing_win32
 
       synchronous_lock synchronouslock(mutex());
 
-      if (!::OpenClipboard(__hwnd(get_oswindow())))
+      if (!::OpenClipboard(__hwnd(oswindow())))
       {
 
          return false;
@@ -442,7 +442,7 @@ namespace windowing_win32
 
       synchronous_lock synchronouslock(mutex());
 
-      if (!::OpenClipboard(__hwnd(get_oswindow())))
+      if (!::OpenClipboard(__hwnd(oswindow())))
       {
 
          return false;
@@ -488,7 +488,7 @@ namespace windowing_win32
 
       synchronous_lock synchronouslock(mutex());
 
-      if (!::OpenClipboard(__hwnd(get_oswindow())))
+      if (!::OpenClipboard(__hwnd(oswindow())))
       {
 
          return false;
@@ -531,7 +531,7 @@ namespace windowing_win32
 
       synchronous_lock synchronouslock(mutex());
 
-      if (!::OpenClipboard(__hwnd(get_oswindow())))
+      if (!::OpenClipboard(__hwnd(oswindow())))
       {
 
          return false;
@@ -597,7 +597,7 @@ namespace windowing_win32
 
       synchronous_lock synchronouslock(mutex());
 
-      if (!::OpenClipboard(__hwnd(get_oswindow())))
+      if (!::OpenClipboard(__hwnd(oswindow())))
       {
 
          DWORD dwLastError = ::GetLastError();
@@ -699,7 +699,7 @@ namespace windowing_win32
 
       synchronous_lock synchronouslock(mutex());
 
-      if (!::OpenClipboard(__hwnd(get_oswindow())))
+      if (!::OpenClipboard(__hwnd(oswindow())))
       {
 
          return false;

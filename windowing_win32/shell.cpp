@@ -568,9 +568,9 @@ namespace windowing_win32
 
       auto pnode = m_psystem->node();
 
-      auto pwindowing = puser->windowing()->cast < windowing >();
+      auto pwindowing = puser->windowing1()->cast < windowing >();
 
-      HWND hwnd = __hwnd(pwindowing->system_window()->get_oswindow());
+      HWND hwnd = __hwnd(pwindowing->system_window()->oswindow());
 
       comptr < IExtractIconW > piextracticon;
 

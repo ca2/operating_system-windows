@@ -6,7 +6,7 @@ imm_context::imm_context(::user::interaction * pinteraction) :
    m_pinteraction(pinteraction)
 {
 
-   HWND hwnd = __hwnd(m_pinteraction->get_oswindow());
+   HWND hwnd = __hwnd(m_pinteraction->oswindow());
 
    m_himc = ImmGetContext(hwnd);
 
@@ -16,7 +16,7 @@ imm_context::imm_context(::user::interaction * pinteraction) :
 imm_context::~imm_context()
 {
 
-   HWND hwnd = __hwnd(m_pinteraction->get_oswindow());
+   HWND hwnd = __hwnd(m_pinteraction->oswindow());
 
    ImmReleaseContext(hwnd, m_himc);
 
