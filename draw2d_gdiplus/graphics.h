@@ -209,6 +209,10 @@ namespace draw2d_gdiplus
       void _add_clipping_shape(const ::ellipse & ellipse, __pointer(::draw2d::region) & pregion);
       void _add_clipping_shape(const ::polygon & polygon, __pointer(::draw2d::region) & pregion);
 
+
+      void intersect_clip(const ::rectangle& rectangle);
+
+
       //void PtVisible(double x, double y) override;
       //bool PtVisible(const ::point_i32 & point) override;
       //void RectVisible(const rectangle_i32 & prectangle) override;

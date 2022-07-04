@@ -4837,6 +4837,18 @@ namespace draw2d_gdiplus
    }
 
 
+   void graphics::intersect_clip(const ::rectangle& rectangle)
+   {
+
+      Gdiplus::RectF r;
+
+      __copy(r, rectangle);
+
+      m_pgraphics->SetClip(r, Gdiplus::CombineModeIntersect);
+
+   }
+
+
    //void graphics::intersect_clip(const ::polygon_f64& polygon_i32)
    //{
 
