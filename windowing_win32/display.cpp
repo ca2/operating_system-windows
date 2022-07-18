@@ -743,7 +743,7 @@ namespace windowing_win32
       if (edisplay == e_display_none)
       {
 
-         edisplay = e_display_normal;
+         edisplay = e_display_restored;
 
       }
 

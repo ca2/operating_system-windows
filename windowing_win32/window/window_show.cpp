@@ -11,7 +11,7 @@ CLASS_DECL_WINDOWING_WIN32 int windows_show_window(enum_display edisplay, enum_a
    {
    case e_display_default:
       return SW_SHOWDEFAULT;
-   case e_display_normal:
+   case e_display_restored:
       if (bNoActivate)
          return SW_SHOWNA;
       else
@@ -53,21 +53,21 @@ CLASS_DECL_WINDOWING_WIN32 enum_display windows_show_window_to_edisplay(int iSho
    case SW_SHOWDEFAULT:
       return e_display_default;
    case SW_SHOW:
-      return e_display_normal;
+      return e_display_restored;
    case SW_RESTORE:
-      return e_display_normal;
+      return e_display_restored;
    case SW_MINIMIZE:
       return e_display_iconic;
    case SW_MAXIMIZE:
       return e_display_zoomed;
    case SW_SHOWNA:
       eactivation = e_activation_no_activate;
-      return e_display_normal;
+      return e_display_restored;
    case SW_SHOWMINNOACTIVE:
       eactivation = e_activation_no_activate;
       return e_display_iconic;
    default:
-      return e_display_normal;
+      return e_display_restored;
    }
 
 }

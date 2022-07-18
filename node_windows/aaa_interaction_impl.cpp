@@ -325,10 +325,10 @@ namespace windows
 
    //      m_puserinteraction->layout().sketch().origin()= pmove->m_point;
 
-   //      if (m_puserinteraction->layout().sketch().display() != e_display_normal)
+   //      if (m_puserinteraction->layout().sketch().display() != e_display_restored)
    //      {
 
-   //         m_puserinteraction->display(e_display_normal);
+   //         m_puserinteraction->display(e_display_restored);
 
    //      }
 
@@ -365,10 +365,10 @@ namespace windows
 
    //      m_puserinteraction->layout().sketch().size() = psize->m_size;
 
-   //      if (m_puserinteraction->layout().sketch().display() != e_display_normal)
+   //      if (m_puserinteraction->layout().sketch().display() != e_display_restored)
    //      {
 
-   //         m_puserinteraction->display(e_display_normal);
+   //         m_puserinteraction->display(e_display_restored);
 
    //      }
 
@@ -2145,7 +2145,7 @@ namespace windows
          //      if (m_iShowFlags & SWP_SHOWWINDOW)
          //      {
 
-         //         display(e_display_normal);
+         //         display(e_display_restored);
 
          //      }
 
