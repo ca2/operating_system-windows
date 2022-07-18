@@ -1914,7 +1914,7 @@ namespace aura_windows
          //      if (m_iShowFlags & SWP_SHOWWINDOW)
          //      {
 
-         //         display(e_display_normal);
+         //         display(e_display_restored);
 
          //      }
 
