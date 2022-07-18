@@ -2601,6 +2601,16 @@ namespace acme_windows
    }
 
 
+   void node::open_url(const ::string & strUrl)
+   {
+
+      wstring wstrUrl(strUrl);
+
+      ::ShellExecuteW(nullptr, L"open", wstrUrl, nullptr, nullptr, SW_SHOWNORMAL);
+
+   }
+
+
 } // namespace acme_windows
 
 
