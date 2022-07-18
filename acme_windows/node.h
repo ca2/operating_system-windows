@@ -156,6 +156,9 @@ namespace acme_windows
       //string get_global_id_mutex_name(const ::string& strAppId, const ::string& strId) override;
 
 
+      void open_url(const ::string& strUrl) override;
+
+
    };
 
 
