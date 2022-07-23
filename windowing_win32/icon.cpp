@@ -414,7 +414,7 @@ array< ::size_i32 > ico_file_sizes(const ::block & block)
 //#define LOAD_IGNORE_CODE_AUTHZ_LEVEL 0x00000010
 //
 //   //prevents a negative indexing error 
-//   // (the boolean res_index handles whether it's icon index VS resource ID)
+//   // (the tristate res_index handles whether it's icon index VS resource ID)
 //   index = abs(index);
 //
 //   vector< BITMAP * > results; //array of results to return (pointers to 32bpp images)
