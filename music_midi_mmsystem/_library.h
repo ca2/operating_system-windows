@@ -2,8 +2,8 @@
 #pragma once
 
 
-#include "app-veriwell/multimedia/multimedia/_multimedia.h"
-#include "multimedia_mmsystem/_multimedia_mmsystem.h"
+#include "app-veriwell/multimedia/_library.h"
+#include "multimedia_mmsystem/_library.h"
 
 
 inline HMIDISTRM __hmidistream(const wparam& wparam) { return wparam.scast < HMIDISTRM >(); }

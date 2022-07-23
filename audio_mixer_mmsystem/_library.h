@@ -2,10 +2,10 @@
 #pragma 
 
 
-#include "app-core/multimedia/multimedia/_multimedia.h"
+#include "app-core/multimedia/_library.h"
 #include "aura/user/user/_user.h"
-#include "app-core/multimedia/audio_mixer/_audio_mixer.h"
-#include "multimedia_mmsystem/_multimedia_mmsystem.h"
+#include "app-core/multimedia/audio_mixer/_component.h"
+#include "multimedia_mmsystem/_library.h"
 
 
 #include "interaction.h"
