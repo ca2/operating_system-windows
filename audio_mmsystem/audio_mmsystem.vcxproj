@@ -766,7 +766,7 @@
     <ClInclude Include="in.h" />
     <ClInclude Include="out.h" />
     <ClInclude Include="framework.h" />
-    <ClInclude Include="_audio_mmsystem.h" />
+    <ClInclude Include="_library.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="_factory.cpp" />

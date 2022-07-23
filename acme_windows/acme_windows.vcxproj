@@ -901,7 +901,7 @@
     <ClInclude Include="user.h" />
     <ClInclude Include="utils.h" />
     <ClInclude Include="_.h" />
-    <ClInclude Include="_acme_windows.h" />
+    <ClInclude Include="_library.h" />
     <ClInclude Include="_c.h" />
     <ClInclude Include="_graphics2d.h" />
     <ClInclude Include="_impl.h" />

@@ -819,6 +819,7 @@
     <ClInclude Include="path.h" />
     <ClInclude Include="pen.h" />
     <ClInclude Include="region.h" />
+    <ClInclude Include="_library.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="bitmap.cpp" />

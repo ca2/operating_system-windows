@@ -812,7 +812,7 @@
     <ClInclude Include="node.h" />
     <ClInclude Include="shell_open.h" />
     <ClInclude Include="_.h" />
-    <ClInclude Include="_aura_windows.h" />
+    <ClInclude Include="_library.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="extract_icon.cpp" />

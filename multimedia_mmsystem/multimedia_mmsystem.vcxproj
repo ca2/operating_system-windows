@@ -764,7 +764,7 @@
     <ClInclude Include="factory_exchange.h" />
     <ClInclude Include="translation.h" />
     <ClInclude Include="framework.h" />
-    <ClInclude Include="_multimedia_mmsystem.h" />
+    <ClInclude Include="_library.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="_factory.cpp" />

@@ -39,7 +39,7 @@
     <ClInclude Include="font_enumeration.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="_write_text_win32.h">
+    <ClInclude Include="_library.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="write_text_win32_gdi.h">

@@ -1,7 +1,7 @@
 #pragma once
 
 
-#include "operating-system-windows/multimedia_mmsystem/_multimedia_mmsystem.h"
+#include "operating-system-windows/multimedia_mmsystem/_library.h"
 
 
 #include "out.h"

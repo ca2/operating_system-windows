@@ -4,10 +4,16 @@
 #include "acme/_start.h"
 
 
-#include "multimedia_mmsystem/_.h"
+#include "_.h"
 
 
-#include "multimedia_mmsystem/_multimedia_mmsystem.h"
+#if BROAD_PRECOMPILED_HEADER
+
+
+#include "_library.h"
+
+
+#endif
 
 
 #include "aura/_defer.h"

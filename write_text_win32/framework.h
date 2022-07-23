@@ -7,7 +7,13 @@
 #include "_.h"
 
 
-#include "_write_text_win32.h"
+#if BROAD_PRECOMPILED_HEADER
+
+
+#include "_library.h"
+
+
+#endif
 
 
 #include "aura/_defer.h"

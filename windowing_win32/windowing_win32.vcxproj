@@ -834,7 +834,7 @@
     <ClInclude Include="_.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="_impl.h" />
-    <ClInclude Include="_windowing_win32.h" />
+    <ClInclude Include="_library.h" />
     <ClInclude Include="_windows.h" />
   </ItemGroup>
   <ItemGroup>

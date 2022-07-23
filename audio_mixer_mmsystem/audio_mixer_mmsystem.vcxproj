@@ -772,7 +772,7 @@
     <ClInclude Include="section.h" />
     <ClInclude Include="source.h" />
     <ClInclude Include="thread.h" />
-    <ClInclude Include="_audio_mixer_mmsystem.h" />
+    <ClInclude Include="_library.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="control.cpp" />

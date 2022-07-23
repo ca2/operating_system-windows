@@ -821,7 +821,7 @@
     <ClInclude Include="shell\shell.h" />
     <ClInclude Include="shell_launcher.h" />
     <ClInclude Include="_.h" />
-    <ClInclude Include="_apex_windows.h" />
+    <ClInclude Include="_library.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dir_context.cpp" />
