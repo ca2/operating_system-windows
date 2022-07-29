@@ -3,9 +3,9 @@
 
 
 #include "aura/operating_system.h"
-#include "apex_windows/_apex_windows.h"
-#include "aura_windows_common/_aura_windows_common.h"
-#include "windowing_win32/_windowing_win32.h"
+#include "apex_windows/_library.h"
+#include "aura_windows_common/_library.h"
+#include "windowing_win32/_library.h"
 //#include "aura/user/user/_user.h"
 
 

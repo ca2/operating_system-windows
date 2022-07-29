@@ -2,11 +2,25 @@
 
 
 #include "_.h"
-#include "acme_windows_common/_acme_windows_common.h"
+#include "acme_windows_common/_library.h"
 #include "acme/operating_system.h"
+#include "acme_windows_common/_library.h"
+#include "acme/operating_system/_const_console.h"
+#include "acme/operating_system/console.h"
+#include "acme/filesystem/filesystem/acme_directory.h"
+#include "acme/filesystem/filesystem/acme_path.h"
 #include <Shlobj.h>
 #include <shellapi.h>
 #include "acme_windows_common/comptr.h"
+#include "simple_hold_handle.h"
+#include "process.h"
+#include <fcntl.h>
+#include <VersionHelpers.h>
+#include <ddeml.h>
+#include <share.h>
+#include <io.h>
+#include <Winsvc.h>
+
 
 
 CLASS_DECL_ACME_WINDOWS HANDLE hfile_create(
@@ -56,12 +70,6 @@ CLASS_DECL_ACME int_bool read_resource_as_file(const char * pszFile, HINSTANCE h
 
 CLASS_DECL_ACME TCHAR *** process_get_pargv();
 CLASS_DECL_ACME TCHAR ** process_get_argv();
-#include <fcntl.h>
-#include <VersionHelpers.h>
-#include <ddeml.h>
-#include <share.h>
-#include <io.h>
-#include <Winsvc.h>
 
 
 inline ansistring & assign(ansistring & ansistrDst, const cotaskptr < PWSTR > & pwidesz);
@@ -146,8 +154,6 @@ CLASS_DECL_ACME_WINDOWS const void * get_resource_pointer(HINSTANCE hinst, DWORD
 CLASS_DECL_ACME_WINDOWS bool read_resource_as_memory(memory & m, HINSTANCE hinst, DWORD nID, const char * pcszType, strsize iReadAtMostByteCount = -1);
 
 
-#include "simple_hold_handle.h"
-#include "process.h"
 
 
 inline comptr < IStream > create_istream(const memory_base & memory)
@@ -174,13 +180,6 @@ namespace acme_windows
 } // namespace acme_windows
 
 
-#include "acme_windows_common/_acme_windows_common.h"
-#include "acme/operating_system/_const_console.h"
-#include "acme/operating_system/console.h"
-
-
-#include "acme/filesystem/filesystem/acme_directory.h"
-#include "acme/filesystem/filesystem/acme_path.h"
 
 
 #include "acme_directory.h"

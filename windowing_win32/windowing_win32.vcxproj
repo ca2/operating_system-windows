@@ -38,7 +38,7 @@
     <ProjectGuid>{77D5757E-2923-40F8-9CC0-A07FA5BCC236}</ProjectGuid>
     <RootNamespace>platform</RootNamespace>
     <Keyword>Win32Proj</Keyword>
-    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.19041.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='basis|Win32'" Label="Configuration">
@@ -834,7 +834,7 @@
     <ClInclude Include="_.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="_impl.h" />
-    <ClInclude Include="_windowing_win32.h" />
+    <ClInclude Include="_library.h" />
     <ClInclude Include="_windows.h" />
   </ItemGroup>
   <ItemGroup>

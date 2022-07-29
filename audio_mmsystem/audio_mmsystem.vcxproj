@@ -39,7 +39,7 @@
     <RootNamespace>platform</RootNamespace>
     <Keyword>Win32Proj</Keyword>
     <ProjectName>audio_mmsystem</ProjectName>
-    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.19041.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='basis|Win32'" Label="Configuration">
@@ -766,7 +766,7 @@
     <ClInclude Include="in.h" />
     <ClInclude Include="out.h" />
     <ClInclude Include="framework.h" />
-    <ClInclude Include="_audio_mmsystem.h" />
+    <ClInclude Include="_library.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="_factory.cpp" />

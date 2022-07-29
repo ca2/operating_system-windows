@@ -38,7 +38,7 @@
     <ProjectGuid>{94C3715A-7FBF-4455-917B-20CB7F40C58C}</ProjectGuid>
     <RootNamespace>platform</RootNamespace>
     <Keyword>Win32Proj</Keyword>
-    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.19041.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='basis|Win32'" Label="Configuration">
@@ -812,7 +812,7 @@
     <ClInclude Include="node.h" />
     <ClInclude Include="shell_open.h" />
     <ClInclude Include="_.h" />
-    <ClInclude Include="_aura_windows.h" />
+    <ClInclude Include="_library.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="extract_icon.cpp" />
