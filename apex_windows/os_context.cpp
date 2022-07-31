@@ -2538,63 +2538,198 @@ retry:
 
          ShellExecuteExW(&si);
 
-         //u32 dwLastError = ::GetLastError();
-
-         //int iResult = (int) si.hInstApp;
-
-         //string str;
-
-         //str.format("ShellExecuteExW %d GetLastError = %d", iResult, dwLastError);
-
-         //output_debug_string(str);
-
-
-         //thread_pump_sleep(60 * 1000);
-
-
-         //int iRet = (int) (iptr) ::ShellExecuteW(nullptr, L"open", wstring(path), pwszParams, pwszFolder, SW_RESTORE);
-
-         //if (iRet < 32)
-         //{
-
-         //   /*0
-         //      The operating system is out of memory or resources.
-         //      ERROR_FILE_NOT_FOUND
-         //      The specified file was not found.
-         //      ERROR_PATH_NOT_FOUND
-         //      The specified path was not found.
-         //      ERROR_BAD_FORMAT
-         //      The.exe file is invalid(non - Win32.exe or error in.exe image).
-         //      SE_ERR_ACCESSDENIED
-         //      The operating system denied access to the specified file.
-         //      SE_ERR_ASSOCINCOMPLETE
-         //      The file name association is incomplete or invalid.
-         //      SE_ERR_DDEBUSY
-         //      The DDE transaction could not be completed because other DDE transactions were being processed.
-         //      SE_ERR_DDEFAIL
-         //      The DDE transaction failed.
-         //      SE_ERR_DDETIMEOUT
-         //      The DDE transaction could not be completed because the request timed out.
-         //      SE_ERR_DLLNOTFOUND
-         //      The specified DLL was not found.
-         //      SE_ERR_FNF
-         //      The specified file was not found.
-         //      SE_ERR_NOASSOC
-         //      There is no application associated with the given file name extension.This error will also be returned if you attempt to print a file that is not printable.
-         //      SE_ERR_OOM
-         //      There was not enough memory to complete the operation.
-         //      SE_ERR_PNF
-         //      The specified path was not found.
-         //      SE_ERR_SHARE
-         //      A sharing violation occurred.*/
-
-         //   message_box(nullptr, "Error opening file \"" + path + "\"", "Could not open file", e_message_box_icon_exclamation);
-
-         //}
+         ::CoUninitialize();
 
       });
 
       //return true;
+
+   }
+
+
+   void os_context::hidden_start(const ::file::path& pathParam, const string& strParams, const ::file::path& pathFolder)
+   {
+
+      auto path = m_pcontext->m_papexcontext->defer_process_path(pathParam);
+
+      fork([=]()
+         {
+
+            ::CoInitializeEx(nullptr, COINIT_APARTMENTTHREADED | COINIT_DISABLE_OLE1DDE);
+
+            SHELLEXECUTEINFOW si;
+
+            __zero(si);
+
+            PeekMessage(nullptr, nullptr, 0, 0, 0);
+
+            wstring wstrTarget(path);
+
+            wstring wstrFolder(pathFolder);
+
+            wstring wstrParams(strParams);
+
+            const wchar_t* pwszParams = wstrParams.c_str();
+
+            const wchar_t* pwszFolder = wstrFolder.c_str();
+
+            si.cbSize = sizeof(si);
+
+            si.fMask = SEE_MASK_ASYNCOK;
+
+            si.hwnd = nullptr;
+
+            si.lpVerb = L"open";
+
+            auto pitemidlist = path.m_pmatterOsPath.cast < ::itemidlist >();
+
+            if (wstrTarget.is_empty() && pitemidlist)
+            {
+
+               si.fMask |= SEE_MASK_IDLIST;
+
+               si.lpIDList = pitemidlist->m_pidl;
+
+
+            }
+            else
+            {
+
+               si.lpFile = wstrTarget;
+
+
+            }
+
+            si.lpParameters = pwszParams;
+
+
+            si.lpDirectory = pwszFolder;
+
+
+            si.nShow = SW_HIDE;
+
+            si.hInstApp = nullptr;
+
+            ShellExecuteExW(&si);
+
+            ::CoUninitialize();
+
+         });
+
+      //return true;
+
+   }
+
+
+   void os_context::hidden_run(const class ::wait & wait, const ::file::path& pathParam, const string& strParams, const ::file::path& pathFolder)
+   {
+
+      auto pevent = __new(manual_reset_event);
+
+      auto path = m_pcontext->m_papexcontext->defer_process_path(pathParam);
+
+      ::duration durationStart;
+
+      durationStart.Now();
+
+      bool bSuccess = true;
+
+      fork([pevent, &bSuccess, durationStart, wait, path, pathFolder, strParams]()
+         {
+
+            ::CoInitializeEx(nullptr, COINIT_APARTMENTTHREADED | COINIT_DISABLE_OLE1DDE);
+
+            SHELLEXECUTEINFOW si;
+
+            __zero(si);
+
+            PeekMessage(nullptr, nullptr, 0, 0, 0);
+
+            wstring wstrTarget(path);
+
+            wstring wstrFolder(pathFolder);
+
+            wstring wstrParams(strParams);
+
+            const wchar_t* pwszParams = wstrParams.c_str();
+
+            const wchar_t* pwszFolder = wstrFolder.c_str();
+
+            si.cbSize = sizeof(si);
+
+            //si.fMask = SEE_MASK_ASYNCOK;
+            si.fMask = SEE_MASK_NOCLOSEPROCESS;
+
+            si.hwnd = nullptr;
+
+            si.lpVerb = L"open";
+
+            auto pitemidlist = path.m_pmatterOsPath.cast < ::itemidlist >();
+
+            if (wstrTarget.is_empty() && pitemidlist)
+            {
+
+               si.fMask |= SEE_MASK_IDLIST;
+
+               si.lpIDList = pitemidlist->m_pidl;
+
+            }
+            else
+            {
+
+               si.lpFile = wstrTarget;
+
+            }
+
+            si.lpParameters = pwszParams;
+
+            si.lpDirectory = pwszFolder;
+
+            si.nShow = SW_HIDE;
+
+            si.hInstApp = nullptr;
+
+            ShellExecuteExW(&si);
+
+            ::duration durationWait(wait);
+
+            auto iMillisecondWait = durationWait.integral_millisecond().m_i;
+
+            ::duration durationElapsed(durationStart.elapsed());
+
+            auto iMillisecondElapsed = durationElapsed.integral_millisecond().m_i;
+
+            auto i = iMillisecondWait - iMillisecondElapsed;
+
+            if (i < 0)
+            {
+
+               bSuccess = false;
+
+            }
+            else
+            {
+
+               bSuccess = WaitForSingleObject(si.hProcess, i);
+
+            }
+
+            pevent->SetEvent();
+
+            ::CloseHandle(si.hProcess);
+
+            ::CoUninitialize();
+
+         });
+
+      pevent->wait(wait);
+
+      if (bSuccess)
+      {
+
+         throw exception(error_wait_timeout);
+
+      }
 
    }
 
