@@ -1,6 +1,7 @@
 // Created by camilo on 2021-11-16 12:53 BRT <3ThomasBorregaardSørensen!!
 #include "framework.h"
 #include "acme/operating_system.h"
+#include "aura/graphics/image/image.h"
 #include <gdiplus.h>
 
 
@@ -14,19 +15,24 @@ namespace aura_windows
    // or Bitmap::FromStream() method, and then finally call the 
    // Bitmap::ToHICON() method.
    // – Remy Lebeau,  Feb 11 '17 at 3:34
-   void* node::HICON_from_ico_file(const ::block& block)
+   void* node::HICON_from_image(::image *pimage)
    {
 
-      comptr < IStream > pistream = SHCreateMemStream((const BYTE*)block.get_data(), (UINT)block.get_size());
+      //comptr < IStream > pistream = SHCreateMemStream((const BYTE*)block.get_data(), (UINT)block.get_size());
 
-      if (!pistream)
-      {
+      //if (!pistream)
+      //{
 
-         return nullptr;
+      //   return nullptr;
 
-      }
+      //}
 
-      Gdiplus::Bitmap bitmap(pistream.m_p);
+      Gdiplus::Bitmap bitmap(pimage->width(),
+         pimage->height(),
+         pimage->m_iScan,
+         PixelFormat32bppARGB,
+         (BYTE *) pimage->get_data()
+         );
 
       HICON hicon = nullptr;
 

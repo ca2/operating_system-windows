@@ -203,7 +203,10 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="..\version.rc" />
+        <ResourceCompile Include="..\deployment\deployment.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Header Files">

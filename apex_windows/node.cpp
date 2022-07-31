@@ -1,5 +1,5 @@
 #include "framework.h"
-#include "operating-system/operating-system-windows/resource1.h"
+#include "operating-system/operating-system-windows/deployment/resource1.h"
 
 
 CLASS_DECL_ACME_WINDOWS void shell_notify_folder_change(const wchar_t* pwsz);
@@ -613,6 +613,55 @@ namespace apex_windows
       }
 
       pathTarget = wstrTarget;
+
+      return true;
+
+   }
+
+
+   bool node::shell_link_icon(::file::path& pathIcon, int & iIcon, const ::file::path& pathLnkParam)
+   {
+
+      auto pathLnk = pathLnkParam;
+
+      if (!pathLnk.ends_ci(".lnk"))
+      {
+
+         pathLnk += ".lnk";
+
+      }
+
+      wstring wstrLnk(pathLnk);
+
+      auto poscontext = m_psystem->m_papexsystem->os_context()->cast < ::apex_windows::os_context >();
+
+      comptr < IShellLinkW > pshelllink = poscontext->_get_IShellLinkW(pathLnk);
+
+      if (!pshelllink)
+      {
+
+         return false;
+
+      }
+
+      wstring wstrIcon;
+
+      auto pwsz = wstrIcon.get_string_buffer(MAX_PATH * 8);
+
+      HRESULT hresult = pshelllink->GetIconLocation(pwsz, MAX_PATH * 8, &iIcon);
+
+      wstrIcon.release_string_buffer();
+
+      if (FAILED(hresult))
+      {
+
+         auto estatus = hresult_to_status(hresult);
+
+         return false;
+
+      }
+
+      pathIcon = wstrIcon;
 
       return true;
 
