@@ -960,38 +960,38 @@ namespace apex_windows
 
 #endif
 
-//#ifdef WINDOWS
-//
-//               pnode->shell_create_link(path, pathShortcut, "Link for " + strAppName, path, -IDR_MAIN);
-//
-//               if (payload("pin_app_to_taskbar").is_true())
-//               {
-//
-//                  ::file::path pathUserPinned = m_psystem->m_pacmedirectory->roaming() / "Microsoft/Internet Explorer/Quick Launch/User Pinned/TaskBar" / pathShortcut.name();
-//
-//                  wstring wstrShortcut;
-//
-//                  wstrShortcut = pathShortcut;
-//
-//                  m_psystem->m_pacmefile->copy(pathUserPinned, pathShortcut, true);
-//
-//                  wstring wstr;
-//
-//                  wstr = pathUserPinned.folder();
-//
-//                  shell_notify_folder_change(wstr);
-//
-//                  shell_notify_item_change(wstr);
-//
-//                  shell_notify_assoc_change();
-//
-//               }
-//
-//#else
-//
-//               //pnode->shell_create_link(path, pathShortcut, "Link for " + strAppName, pathIcon);
-//
-//#endif
+#ifdef WINDOWS
+
+               pnode->shell_create_link(path, pathShortcut, "Link for " + strAppName, path, -IDR_MAIN);
+
+               if (payload("pin_app_to_taskbar").is_true())
+               {
+
+                  ::file::path pathUserPinned = m_psystem->m_pacmedirectory->roaming() / "Microsoft/Internet Explorer/Quick Launch/User Pinned/TaskBar" / pathShortcut.name();
+
+                  wstring wstrShortcut;
+
+                  wstrShortcut = pathShortcut;
+
+                  m_psystem->m_pacmefile->copy(pathUserPinned, pathShortcut, true);
+
+                  wstring wstr;
+
+                  wstr = pathUserPinned.folder();
+
+                  shell_notify_folder_change(wstr);
+
+                  shell_notify_item_change(wstr);
+
+                  shell_notify_assoc_change();
+
+               }
+
+#else
+
+               //pnode->shell_create_link(path, pathShortcut, "Link for " + strAppName, pathIcon);
+
+#endif
 
                auto pathCreatedShortcut = m_psystem->m_pacmedirectory->roaming() / papp->m_strAppId / "created_shortcut.txt";
 
