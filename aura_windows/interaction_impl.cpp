@@ -634,6 +634,43 @@ namespace aura_windows
          return;
 
       }
+      else if (wparam == SC_MINIMIZE)
+      {
+
+         auto puserinteraction = m_puserinteraction;
+
+         if (puserinteraction)
+         {
+
+            if (puserinteraction->layout().m_statea[::user::e_layout_normal].m_bProdevian)
+            {
+
+               puserinteraction->clear_prodevian();
+
+            }
+
+            //if (puserinteraction->layout().m_statea[::user::e_layout_normal].display() == e_display_zoomed)
+            //{
+
+            //   puserinteraction->_001Maximize();
+
+            //}
+            //else
+            //{
+
+               puserinteraction->_001Minimize();
+
+//            }
+
+            pmessage->m_bRet = true;
+
+            pmessage->m_lresult = 0;
+
+         }
+
+         return;
+
+      }
 
    }
 

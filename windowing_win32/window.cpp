@@ -583,63 +583,64 @@ namespace windowing_win32
    }
 
 
-   bool window::defer_set_icon()
-   {
+   //bool window::defer_set_icon()
+   //{
 
-      //int iSmallIconCx = ::GetSystemMetrics(SM_CXSMICON);
-      //int iSmallIconCy = ::GetSystemMetrics(SM_CYSMICON);
-      //int iIconCx = ::GetSystemMetrics(SM_CXICON);
-      //int iIconCy = ::GetSystemMetrics(SM_CXICON);
-      int iSmallIconCx = 256;
-      int iSmallIconCy = 256;
-      int iIconCx = 256;
-      int iIconCy = 256;
+   //   //int iSmallIconCx = ::GetSystemMetrics(SM_CXSMICON);
+   //   //int iSmallIconCy = ::GetSystemMetrics(SM_CYSMICON);
+   //   //int iIconCx = ::GetSystemMetrics(SM_CXICON);
+   //   //int iIconCy = ::GetSystemMetrics(SM_CXICON);
+   //   int iSmallIconCx = 256;
+   //   int iSmallIconCy = 256;
+   //   int iIconCx = 256;
+   //   int iIconCy = 256;
 
-      //HICON hiconSmall = (HICON) ::LoadIcon((HINSTANCE)m_psystem->m_hinstanceThis, MAKEINTRESOURCE(128));
+   //   //HICON hiconSmall = (HICON) ::LoadIcon((HINSTANCE)m_psystem->m_hinstanceThis, MAKEINTRESOURCE(128));
 
-      HICON hiconSmall =(HICON) ::LoadImage((HINSTANCE)m_psystem->m_hinstanceThis, MAKEINTRESOURCE(128), IMAGE_ICON, 0, 0, LR_DEFAULTCOLOR | LR_DEFAULTSIZE);
-      //HICON hicon = (HICON)::LoadImage((HINSTANCE)m_psystem->m_hinstanceThis, MAKEINTRESOURCE(128), IMAGE_ICON, iIconCx, iIconCy, LR_DEFAULTCOLOR);
-      HICON hicon = nullptr;
+   //   HICON hiconSmall =(HICON) ::LoadImage((HINSTANCE)m_psystem->m_hinstanceThis, MAKEINTRESOURCE(128), IMAGE_ICON, 0, 0, LR_DEFAULTCOLOR | LR_DEFAULTSIZE);
+   //   //HICON hicon = (HICON)::LoadImage((HINSTANCE)m_psystem->m_hinstanceThis, MAKEINTRESOURCE(128), IMAGE_ICON, iIconCx, iIconCy, LR_DEFAULTCOLOR);
+   //   HICON hicon = nullptr;
 
-      if (!hicon)
-      {
+   //   if (!hicon)
+   //   {
 
-         hicon = hiconSmall;
+   //      hicon = hiconSmall;
 
-      }
-      if (!hiconSmall)
-      {
+   //   }
+   //   if (!hiconSmall)
+   //   {
 
-         hiconSmall = hicon;
+   //      hiconSmall = hicon;
 
-      }
-      if (!hicon || !hiconSmall)
-      {
+   //   }
+   //   if (!hicon || !hiconSmall)
+   //   {
 
-         return false;
+   //      return false;
 
-      }
+   //   }
 
-      SetLastError(0);
-      {
-         HWND hwnd = get_hwnd();
-         ::SendMessage(hwnd, WM_SETICON, ICON_SMALL, (LPARAM)hiconSmall);
-         DWORD dwLastError = ::GetLastError();
-         INFORMATION("ICON_BIT_SMALLER" << dwLastError);
-      }
-      SetLastError(0);
-      {
-         HWND hwnd = get_hwnd();
-         ::SendMessage(hwnd, WM_SETICON, ICON_BIG, (LPARAM)hicon);
-         DWORD dwLastError = ::GetLastError();
+   //   //SetLastError(0);
+   //   {
+   //      //HWND hwnd = get_hwnd();
+   //      m_puserinteractionimpl->m_puserinteraction->post_message(WM_SETICON, ICON_SMALL, (LPARAM)hiconSmall);
+   //      //DWORD dwLastError = ::GetLastError();
+   //      //INFORMATION("ICON_BIT_SMALLER" << dwLastError);
+   //   }
+   //   //SetLastError(0);
+   //   {
+   //     // HWND hwnd = get_hwnd();
+   //      m_puserinteractionimpl->m_puserinteraction->post_message(WM_SETICON, ICON_BIG, (LPARAM)hicon);
+   //      //::SendMessage(hwnd, WM_SETICON, ICON_BIG, (LPARAM)hicon);
+   //      //DWORD dwLastError = ::GetLastError();
 
-         INFORMATION("ICON_LARGER" << dwLastError);
-      }
-      SetLastError(0);
+   //      //INFORMATION("ICON_LARGER" << dwLastError);
+   //   }
+   //   SetLastError(0);
 
-      return true;
+   //   return true;
 
-   }
+   //}
 
 
    //void window::set_wm_class(const ::string & psz)
@@ -5334,6 +5335,13 @@ namespace windowing_win32
       if (hiconSmall)
       {
 
+         {
+            //HWND hwnd = get_hwnd();
+            m_puserinteractionimpl->m_puserinteraction->post_message(WM_SETICON, ICON_SMALL, (LPARAM)hiconSmall);
+            //DWORD dwLastError = ::GetLastError();
+            //INFORMATION("ICON_BIT_SMALLER" << dwLastError);
+         }
+
          ::SendMessage(hwnd, WM_SETICON, ICON_SMALL, (LPARAM)hiconSmall);
 
       }
@@ -5341,6 +5349,15 @@ namespace windowing_win32
       if (hiconBig)
       {
 
+         //SetLastError(0);
+         {
+            // HWND hwnd = get_hwnd();
+            //m_puserinteractionimpl->m_puserinteraction->post_message(WM_SETICON, ICON_BIG, (LPARAM)hiconBig);
+            //::SendMessage(hwnd, WM_SETICON, ICON_BIG, (LPARAM)hicon);
+            //DWORD dwLastError = ::GetLastError();
+
+            //INFORMATION("ICON_LARGER" << dwLastError);
+         }
          ::SendMessage(hwnd, WM_SETICON, ICON_BIG, (LPARAM)hiconBig);
 
       }

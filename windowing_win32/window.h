@@ -65,7 +65,7 @@ namespace windowing_win32
       DECLARE_MESSAGE_HANDLER(_001OnTaskbarCreated);
 
 
-      bool defer_set_icon() override;
+      //bool defer_set_icon() override;
 
 
       //bool has_capture() const override;
