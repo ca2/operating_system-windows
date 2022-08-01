@@ -827,7 +827,7 @@
     <ClCompile Include="_.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="..\version.rc" />
+    <ResourceCompile Include="..\deployment\deployment.rc" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\source\app\aqua\aqua.vcxproj">
