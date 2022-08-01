@@ -603,7 +603,7 @@
     <None Include="removall.ico" />
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="..\deployment\deployment.rc" />
+    <ResourceCompile Include="deployment.rc" />
     <ResourceCompile Include="appremoval.rc" />
   </ItemGroup>
   <ItemGroup>
