@@ -1130,7 +1130,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="..\version.rc" />
+    <ResourceCompile Include="..\deployment\deployment.rc" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\app\level.txt" />

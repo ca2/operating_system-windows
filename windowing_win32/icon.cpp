@@ -551,9 +551,29 @@ namespace windowing_win32
             if (strPath.begins_eat_ci("zipresource://"))
             {
 
-               auto block = m_pcontext->m_papexcontext->file().get_resource_memory(strPath);
+               auto pfile = m_pcontext->m_papexcontext->file().create_resource_file(strPath);
 
-               hicon = (HICON) m_psystem->node()->m_pauranode->HICON_from_ico_file(block);
+               auto pimage = m_pcontext->context_image()->get_image(pfile);
+
+               auto pimageResized = m_pcontext->m_pauracontext->create_image(size);
+
+               
+               {
+
+                  image_source imagesource(pimage);
+
+                  image_drawing_options imagedrawingoptions(size);
+
+                  image_drawing imagedrawing(imagedrawingoptions, imagesource);
+
+                  pimageResized->g()->set_compositing_quality(::draw2d::e_compositing_quality_high_quality);
+
+                  pimageResized->draw(imagedrawing);
+
+               }
+
+
+               hicon = (HICON) m_psystem->node()->m_pauranode->HICON_from_image(pimageResized);
 
             }
             else 
@@ -702,7 +722,7 @@ namespace windowing_win32
    void icon::load_app_tray_icon(const ::string & strApp)
    {
 
-      string strMatter = "main/icon.ico";
+      string strMatter = "main/icon.png";
 
       load_matter(strMatter);
 

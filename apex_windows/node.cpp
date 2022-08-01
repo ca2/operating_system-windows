@@ -1,5 +1,5 @@
 #include "framework.h"
-#include "operating-system/operating-system-windows/resource1.h"
+#include "operating-system/operating-system-windows/deployment/resource1.h"
 
 
 CLASS_DECL_ACME_WINDOWS void shell_notify_folder_change(const wchar_t* pwsz);
@@ -619,6 +619,55 @@ namespace apex_windows
    }
 
 
+   bool node::shell_link_icon(::file::path& pathIcon, int & iIcon, const ::file::path& pathLnkParam)
+   {
+
+      auto pathLnk = pathLnkParam;
+
+      if (!pathLnk.ends_ci(".lnk"))
+      {
+
+         pathLnk += ".lnk";
+
+      }
+
+      wstring wstrLnk(pathLnk);
+
+      auto poscontext = m_psystem->m_papexsystem->os_context()->cast < ::apex_windows::os_context >();
+
+      comptr < IShellLinkW > pshelllink = poscontext->_get_IShellLinkW(pathLnk);
+
+      if (!pshelllink)
+      {
+
+         return false;
+
+      }
+
+      wstring wstrIcon;
+
+      auto pwsz = wstrIcon.get_string_buffer(MAX_PATH * 8);
+
+      HRESULT hresult = pshelllink->GetIconLocation(pwsz, MAX_PATH * 8, &iIcon);
+
+      wstrIcon.release_string_buffer();
+
+      if (FAILED(hresult))
+      {
+
+         auto estatus = hresult_to_status(hresult);
+
+         return false;
+
+      }
+
+      pathIcon = wstrIcon;
+
+      return true;
+
+   }
+
+
    void node::process_init()
    {
 
@@ -960,38 +1009,38 @@ namespace apex_windows
 
 #endif
 
-//#ifdef WINDOWS
-//
-//               pnode->shell_create_link(path, pathShortcut, "Link for " + strAppName, path, -IDR_MAIN);
-//
-//               if (payload("pin_app_to_taskbar").is_true())
-//               {
-//
-//                  ::file::path pathUserPinned = m_psystem->m_pacmedirectory->roaming() / "Microsoft/Internet Explorer/Quick Launch/User Pinned/TaskBar" / pathShortcut.name();
-//
-//                  wstring wstrShortcut;
-//
-//                  wstrShortcut = pathShortcut;
-//
-//                  m_psystem->m_pacmefile->copy(pathUserPinned, pathShortcut, true);
-//
-//                  wstring wstr;
-//
-//                  wstr = pathUserPinned.folder();
-//
-//                  shell_notify_folder_change(wstr);
-//
-//                  shell_notify_item_change(wstr);
-//
-//                  shell_notify_assoc_change();
-//
-//               }
-//
-//#else
-//
-//               //pnode->shell_create_link(path, pathShortcut, "Link for " + strAppName, pathIcon);
-//
-//#endif
+#ifdef WINDOWS
+
+               pnode->shell_create_link(path, pathShortcut, "Link for " + strAppName, path, -IDR_MAIN);
+
+               if (payload("pin_app_to_taskbar").is_true())
+               {
+
+                  ::file::path pathUserPinned = m_psystem->m_pacmedirectory->roaming() / "Microsoft/Internet Explorer/Quick Launch/User Pinned/TaskBar" / pathShortcut.name();
+
+                  wstring wstrShortcut;
+
+                  wstrShortcut = pathShortcut;
+
+                  m_psystem->m_pacmefile->copy(pathUserPinned, pathShortcut, true);
+
+                  wstring wstr;
+
+                  wstr = pathUserPinned.folder();
+
+                  shell_notify_folder_change(wstr);
+
+                  shell_notify_item_change(wstr);
+
+                  shell_notify_assoc_change();
+
+               }
+
+#else
+
+               //pnode->shell_create_link(path, pathShortcut, "Link for " + strAppName, pathIcon);
+
+#endif
 
                auto pathCreatedShortcut = m_psystem->m_pacmedirectory->roaming() / papp->m_strAppId / "created_shortcut.txt";
 

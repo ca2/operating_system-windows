@@ -15,9 +15,10 @@
     <ResourceCompile Include="app.rc">
       <Filter>Resource Files</Filter>
     </ResourceCompile>
-    <ResourceCompile Include="..\version.rc">
+    <ResourceCompile Include="..\deployment\deployment.rc">
       <Filter>Resource Files</Filter>
     </ResourceCompile>
+
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="framework.cpp">
