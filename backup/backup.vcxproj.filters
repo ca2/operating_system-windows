@@ -31,10 +31,10 @@
     <ClCompile Include=".\backup_frame.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include=".\backup_pane_view.cpp">
+    <ClCompile Include=".\backup_pane_impact.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include=".\backup_view.cpp">
+    <ClCompile Include=".\backup_impact.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="backup_backup.cpp">
@@ -60,10 +60,10 @@
     <ClInclude Include="backup_frame.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="backup_pane_view.h">
+    <ClInclude Include="backup_pane_impact.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="backup_view.h">
+    <ClInclude Include="backup_impact.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="backup_backup.h">

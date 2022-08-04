@@ -33,7 +33,7 @@ namespace backup
             pupdate->m_actioncontext = ::e_source_system;
             ptopic->m_atom = id_browse;
             ptopic->payload(id_form) = "filemanager_add_location_lfs.xhtml";
-            dynamic_cast < ::user::form_view * > (pimpact)->get_document()->update_all_views(ptopic);
+            dynamic_cast < ::user::form_impact * > (pimpact)->get_document()->update_all_impacts(ptopic);
             auto pinteraction = pimpact->get_child_by_name("lfs");
             
             string strPath;
@@ -51,7 +51,7 @@ namespace backup
             pupdate->m_actioncontext = ::e_source_system;
             ptopic->m_atom = id_browse;
             ptopic->payload(id_form) = "filemanager_add_location_ftp.xhtml";
-            dynamic_cast < ::user::form_view * > (pimpact)->get_document()->update_all_views(ptopic);
+            dynamic_cast < ::user::form_impact * > (pimpact)->get_document()->update_all_impacts(ptopic);
             ptopic->Ret();
 
             return;
@@ -84,7 +84,7 @@ namespace backup
                         pinteraction = pimpact->get_child_by_name("substituir");
                         ptext =pinteraction;
                         //ptext->_001GetText(update.m_strReplace);
-                        pimpact->get_document()->update_all_views(ptopic);
+                        pimpact->get_document()->update_all_impacts(ptopic);
                      }*/
             ptopic->Ret();
 

@@ -87,12 +87,12 @@
 		<Unit filename="hellomultiverse_document.h" />
 		<Unit filename="hellomultiverse_frame.cpp" />
 		<Unit filename="hellomultiverse_frame.h" />
-		<Unit filename="hellomultiverse_pane_view.cpp" />
-		<Unit filename="hellomultiverse_pane_view.h" />
-		<Unit filename="aaa_want_to_remove_hellomultiverse_view_update_hint.cpp" />
-		<Unit filename="aaa_want_to_remove_hellomultiverse_view_update_hint.h" />
-		<Unit filename="hellomultiverse_view.cpp" />
-		<Unit filename="hellomultiverse_view.h" />
+		<Unit filename="hellomultiverse_pane_impact.cpp" />
+		<Unit filename="hellomultiverse_pane_impact.h" />
+		<Unit filename="aaa_want_to_remove_hellomultiverse_impact_update_hint.cpp" />
+		<Unit filename="aaa_want_to_remove_hellomultiverse_impact_update_hint.h" />
+		<Unit filename="hellomultiverse_impact.cpp" />
+		<Unit filename="hellomultiverse_impact.h" />
 		<Extensions>
 			<code_completion />
 			<debugger />

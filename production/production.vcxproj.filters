@@ -25,13 +25,13 @@
     <ClCompile Include=".\production_frame.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include=".\production_pane_view.cpp">
+    <ClCompile Include=".\production_pane_impact.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include=".\framework.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include=".\production_view.cpp">
+    <ClCompile Include=".\production_impact.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="production_production.cpp">
@@ -60,10 +60,10 @@
     <ClInclude Include="production_frame.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="production_pane_view.h">
+    <ClInclude Include="production_pane_impact.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="production_view.h">
+    <ClInclude Include="production_impact.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

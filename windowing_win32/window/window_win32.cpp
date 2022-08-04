@@ -552,7 +552,7 @@ wstring windowing::_windows_get_user_interaction_window_class(::user::interactio
    wndcls.cbWndExtra = wndcls.cbClsExtra = 40;
 
    if (etype == ::user::interaction::type_frame
-      || etype == ::user::interaction::type_view)
+      || etype == ::user::interaction::type_impact)
    {
 
       wndcls.style = CS_DBLCLKS | CS_HREDRAW | CS_VREDRAW | CS_OWNDC;

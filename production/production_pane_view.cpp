@@ -8,7 +8,7 @@ namespace production
 
    pane_impact::pane_impact(::object * pobject) :
       ::object(pobject),
-      ::user::tab_view(pobject),
+      ::user::tab_impact(pobject),
       ::userex::pane_tab_impact(pobject),
       place_holder_container(pobject)
    {
@@ -56,7 +56,7 @@ namespace production
    void pane_impact::handle(::topic * ptopic, ::context * pcontext)
    {
 
-      ::user::tab_view::handle(ptopic, pcontext);
+      ::user::tab_impact::handle(ptopic, pcontext);
 
    }
 
@@ -94,9 +94,9 @@ namespace production
             pdocument->get_filemanager_data()->m_datakey = "production_menu";
             pdocument->get_filemanager_data()->m_pcallback = this;
             pdocument->Initialize(true);
-            pdocument->update_all_views(nullptr, 1234);
-            pdocument->update_all_views(nullptr, 123458);
-            __pointer(::user::impact) pimpact = pdocument->get_view();
+            pdocument->update_all_impacts(nullptr, 1234);
+            pdocument->update_all_impacts(nullptr, 123458);
+            __pointer(::user::impact) pimpact = pdocument->get_impact();
             pdocument->FileManagerBrowse(pcontext->m_papexcontext->dir().appdata()/ "production/menu", ::e_source_system);
             if(pimpact != nullptr)
             {
@@ -114,7 +114,7 @@ namespace production
       break;
       case MAIN_IMPACT:
       {
-         __pointer(::user::interaction) puie = ::user::impact::create_view < ::production::impact > (pcreatordata);
+         __pointer(::user::interaction) puie = ::user::impact::create_impact < ::production::impact > (pcreatordata);
          if(puie != nullptr)
          {
             pcreatordata->m_pdocument = get_document();
@@ -135,9 +135,9 @@ namespace production
                   {
                      pdocument->get_filemanager_data()->m_strDataKeyModifier = "production_filemanager";
                      pdocument->Initialize(true);
-                     pdocument->update_all_views(nullptr, 1234);
-                     pdocument->update_all_views(nullptr, 123458);
-                     __pointer(::user::impact) pimpact = pdocument->get_view();
+                     pdocument->update_all_impacts(nullptr, 1234);
+                     pdocument->update_all_impacts(nullptr, 123458);
+                     __pointer(::user::impact) pimpact = pdocument->get_impact();
                      if(pimpact != nullptr)
                      {
                         __pointer(::user::frame_window) pframe =  (pimpact->get_parent_frame());
@@ -163,9 +163,9 @@ namespace production
       //      pdocument->get_filemanager_data()->m_pcallback = this;
       //      pdocument->get_filemanager_data()->m_datakey = "production_3-action-launch";
       //      pdocument->Initialize(true);
-      //      pdocument->update_all_views(nullptr, 1234);
-      //      pdocument->update_all_views(nullptr, 123458);
-      //      __pointer(::user::impact) pimpact = pdocument->get_view();
+      //      pdocument->update_all_impacts(nullptr, 1234);
+      //      pdocument->update_all_impacts(nullptr, 123458);
+      //      __pointer(::user::impact) pimpact = pdocument->get_impact();
       //      pdocument->FileManagerBrowse(pcontext->m_papexcontext->dir().appdata()/ "production\\3-action-launch", ::e_source_system);
       //      if(pimpact != nullptr)
       //      {
@@ -186,7 +186,7 @@ namespace production
          __pointer(::user::document) pdocument = papplication->create_form(this, pcreatordata->m_pholder);
          if(pdocument == nullptr)
             return;
-         __pointer(::user::impact) pimpact = pdocument->get_view();
+         __pointer(::user::impact) pimpact = pdocument->get_impact();
          m_pviewOptions =  (pimpact);
 
          m_pviewOptions->m_pcallback = this;
@@ -195,13 +195,13 @@ namespace production
          pupdate->m_actioncontext = ::e_source_system;
          ptopic->m_atom = ;
          ptopic->payload(id_form) = "production\\options.xhtml";
-         pdocument->update_all_views(ptopic);
+         pdocument->update_all_impacts(ptopic);
 
-         ptopic->m_atom = id_get_form_view;
-         pdocument->update_all_views(ptopic);
+         ptopic->m_atom = id_get_form_impact;
+         pdocument->update_all_impacts(ptopic);
 
          ptopic->m_atom = id_after_browse;
-         pdocument->update_all_views(ptopic);
+         pdocument->update_all_impacts(ptopic);
 
 
          pcreatordata->m_puserinteraction = (pimpact->get_parent_frame());
@@ -228,7 +228,7 @@ namespace production
 
    void pane_impact::install_message_routing(::channel * pchannel)
    {
-      ::user::tab_view::install_message_routing(pchannel);
+      ::user::tab_impact::install_message_routing(pchannel);
 
       MESSAGE_LINK(WM_USER, pchannel, this, &pane_impact::_001OnUserMessage);
       MESSAGE_LINK(e_message_create, pchannel, this, &pane_impact::_001OnCreate);
@@ -261,7 +261,7 @@ namespace production
             __pointer(::user::check_box) pcheckbox =  (pinteraction);
             auto ptopic = topic(id_clean);
             ptopic->payload(id_clean) = pcheckbox->echeck() == ::e_check_checked;
-            get_document()->update_all_views(ptopic);
+            get_document()->update_all_impacts(ptopic);
          }
          else if(ptopic->user_element_id() == "build")
          {
@@ -269,7 +269,7 @@ namespace production
             __pointer(::user::check_box) pcheckbox =  (pinteraction);
             auto ptopic = new_action(id_build);
             ptopic->payload(id_build) = pcheckbox->echeck() == ::e_check_checked;
-            get_document()->update_all_views(ptopic);
+            get_document()->update_all_impacts(ptopic);
 
          }
 

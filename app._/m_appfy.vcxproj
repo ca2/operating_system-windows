@@ -110,9 +110,9 @@
     <ClCompile Include="hellomultiverse_application.cpp" />
     <ClCompile Include="hellomultiverse_document.cpp" />
     <ClCompile Include="hellomultiverse_frame.cpp" />
-    <ClCompile Include="hellomultiverse_pane_view.cpp" />
+    <ClCompile Include="hellomultiverse_pane_impact.cpp" />
 
-    <ClCompile Include="hellomultiverse_view.cpp" />
+    <ClCompile Include="hellomultiverse_impact.cpp" />
   </ItemGroup>
   
   <ItemGroup>

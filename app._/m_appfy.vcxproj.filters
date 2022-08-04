@@ -50,13 +50,13 @@
     <ClCompile Include="hellomultiverse_frame.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="hellomultiverse_pane_view.cpp">
+    <ClCompile Include="hellomultiverse_pane_impact.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="aaa_want_to_remove_hellomultiverse_view_update_hint.cpp">
+    <ClCompile Include="aaa_want_to_remove_hellomultiverse_impact_update_hint.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="hellomultiverse_view.cpp">
+    <ClCompile Include="hellomultiverse_impact.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

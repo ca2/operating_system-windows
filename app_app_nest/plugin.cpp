@@ -194,7 +194,7 @@ install:
   //       return 0;
 
 
-    //  papp->m_puiInitialPlaceHolderContainer = papp->get_edge(0, true)->get_bergedge_view();
+    //  papp->m_puiInitialPlaceHolderContainer = papp->get_edge(0, true)->get_bergedge_impact();
 
 
 
@@ -226,7 +226,7 @@ install:
       }*/
 
 
-   //   pplugin->m_pframe = dynamic_cast < bergedge::frame * > (pplugin->get_application()->get_edge(0, true)->get_bergedge_view()->get_parent_frame());
+   //   pplugin->m_pframe = dynamic_cast < bergedge::frame * > (pplugin->get_application()->get_edge(0, true)->get_bergedge_impact()->get_parent_frame());
 
 
    /*   papp->m_puiInitialPlaceHolderContainer = pplugin->m_pframe;

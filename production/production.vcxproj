@@ -669,7 +669,7 @@
     <ClCompile Include=".\production_document.cpp" />
     <ClCompile Include=".\production_form_callback.cpp" />
     <ClCompile Include=".\production_frame.cpp" />
-    <ClCompile Include=".\production_pane_view.cpp" />
+    <ClCompile Include=".\production_pane_impact.cpp" />
     <ClCompile Include=".\framework.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='basis|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='cover|Win32'">Create</PrecompiledHeader>
@@ -678,7 +678,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='cover|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='stage|x64'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include=".\production_view.cpp" />
+    <ClCompile Include=".\production_impact.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".\platform_production.def" />
@@ -689,10 +689,10 @@
     <ClInclude Include="production_document.h" />
     <ClInclude Include="production_form_callback.h" />
     <ClInclude Include="production_frame.h" />
-    <ClInclude Include="production_pane_view.h" />
+    <ClInclude Include="production_pane_impact.h" />
     <ClInclude Include="production.h" />
     <ClInclude Include="framework.h" />
-    <ClInclude Include="production_view.h" />
+    <ClInclude Include="production_impact.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\source\app\ace\ace.vcxproj">

@@ -658,7 +658,7 @@
     <ClCompile Include=".\backup_document.cpp" />
     <ClCompile Include=".\backup_form_callback.cpp" />
     <ClCompile Include=".\backup_frame.cpp" />
-    <ClCompile Include=".\backup_pane_view.cpp" />
+    <ClCompile Include=".\backup_pane_impact.cpp" />
     <ClCompile Include="framework.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='basis|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='cover|Win32'">Create</PrecompiledHeader>
@@ -667,7 +667,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='cover|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='stage|x64'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include=".\backup_view.cpp" />
+    <ClCompile Include=".\backup_impact.cpp" />
   </ItemGroup>
   
   <ItemGroup>
@@ -677,9 +677,9 @@
     <ClInclude Include="backup_document.h" />
     <ClInclude Include="backup_form_callback.h" />
     <ClInclude Include="backup_frame.h" />
-    <ClInclude Include="backup_pane_view.h" />
+    <ClInclude Include="backup_pane_impact.h" />
     <ClInclude Include="framework.h" />
-    <ClInclude Include="backup_view.h" />
+    <ClInclude Include="backup_impact.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\source\app\ace\ace.vcxproj">

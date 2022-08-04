@@ -16,11 +16,11 @@
 
 #include "backup_frame.h"
 #include "backup_document.h"
-#include "backup_view.h"
+#include "backup_impact.h"
 #include "backup_form_callback.h"
 
 
-#include "backup_pane_view.h"
+#include "backup_pane_impact.h"
 
 
 #include "backup_application.h"
