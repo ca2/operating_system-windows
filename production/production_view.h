@@ -9,7 +9,7 @@ namespace production
 
 
    class CLASS_DECL_CA2_PRODUCTION impact :
-      virtual public ::user::scroll_view
+      virtual public ::user::scroll_impact
    {
    public:
 
@@ -105,7 +105,7 @@ namespace production
       virtual ::size_i32 get_total_size();
 
 
-      virtual void on_viewport_offset(::draw2d::graphics_pointer & pgraphics);
+      virtual void on_impactport_offset(::draw2d::graphics_pointer & pgraphics);
 
 
    };

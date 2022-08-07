@@ -48,7 +48,7 @@ namespace production
 
    void impact::install_message_routing(::channel * pchannel)
    {
-      ::user::scroll_view::install_message_routing(pchannel);
+      ::user::scroll_impact::install_message_routing(pchannel);
 
       MESSAGE_LINK(e_message_destroy, pchannel, this, &impact::on_message_destroy);
       MESSAGE_LINK(e_message_size, pchannel, this, &impact::on_message_size);
@@ -156,7 +156,7 @@ namespace production
    }
 
 
-   void impact::on_viewport_offset(::draw2d::graphics_pointer & pgraphics)
+   void impact::on_impactport_offset(::draw2d::graphics_pointer & pgraphics)
    {
 
    }
@@ -185,7 +185,7 @@ namespace production
 
       ::rectangle_i32 rcItem;
 
-      ::point_i32 pointOffset = get_viewport_offset();
+      ::point_i32 pointOffset = get_impactport_offset();
 
       i32 iStart = pointOffset.y / m_iLineHeight;
       i32 y = m_iLineHeight - pointOffset.y % m_iLineHeight;
@@ -453,7 +453,7 @@ namespace production
 
    void impact::_001OnTimer(::timer * ptimer)
    {
-      ::user::scroll_view::_001OnTimer(ptimer);
+      ::user::scroll_impact::_001OnTimer(ptimer);
       if(ptimer->m_uEvent == e_timer_update_current_area)
       {
          if(is_window_visible())
@@ -530,8 +530,8 @@ namespace production
                m_sizeTotal.cx = 80;
                m_sizeTotal.cy = (LONG)(m_pproduction.m_straStatus.get_size() * iLineHeight + 84);
                synchronouslock.unlock();
-               set_viewport_offset_y(maximum(0,m_sizeTotal.cy - sizePage.cy + iLineHeight));
-               on_change_view_size();
+               set_impactport_offset_y(maximum(0,m_sizeTotal.cy - sizePage.cy + iLineHeight));
+               on_change_impact_size();
             }
             else
             {

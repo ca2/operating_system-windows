@@ -634,6 +634,43 @@ namespace aura_windows
          return;
 
       }
+      else if (wparam == SC_MINIMIZE)
+      {
+
+         auto puserinteraction = m_puserinteraction;
+
+         if (puserinteraction)
+         {
+
+            if (puserinteraction->layout().m_statea[::user::e_layout_normal].m_bProdevian)
+            {
+
+               puserinteraction->clear_prodevian();
+
+            }
+
+            //if (puserinteraction->layout().m_statea[::user::e_layout_normal].display() == e_display_zoomed)
+            //{
+
+            //   puserinteraction->_001Maximize();
+
+            //}
+            //else
+            //{
+
+               puserinteraction->_001Minimize();
+
+//            }
+
+            pmessage->m_bRet = true;
+
+            pmessage->m_lresult = 0;
+
+         }
+
+         return;
+
+      }
 
    }
 
@@ -3399,7 +3436,7 @@ namespace aura_windows
 
 
 
-   void interaction_impl::set_viewport_org(::draw2d::graphics_pointer & pgraphics)
+   void interaction_impl::set_impactport_org(::draw2d::graphics_pointer & pgraphics)
    {
 
       // graphics will be already set its impact port to the interaction_impl for linux - cairo with xlib

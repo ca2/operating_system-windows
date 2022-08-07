@@ -9,7 +9,7 @@ namespace backup
    pane_impact::pane_impact(::object * pobject) :
       ::object(pobject),
       ::userex::pane_tab_impact(pobject),
-      ::user::tab_view(pobject),
+      ::user::tab_impact(pobject),
       place_holder_container(pobject)
    {
 
@@ -56,7 +56,7 @@ namespace backup
    void pane_impact::handle(::topic * ptopic, ::context * pcontext)
    {
 
-      ::user::tab_view::handle(ptopic, pcontext);
+      ::user::tab_impact::handle(ptopic, pcontext);
 
    }
 
@@ -68,7 +68,7 @@ namespace backup
       {
       case impact_backup:
       {
-         pcreatordata->m_puserinteraction = create_view < impact > ();
+         pcreatordata->m_puserinteraction = create_impact < impact > ();
          if(pcreatordata->m_puserinteraction != nullptr)
          {
             pcreatordata->m_pdocument = get_document();
@@ -80,18 +80,18 @@ namespace backup
          __pointer(::user::document) pdocument = papplication->create_form(this, this);
          if(pdocument == nullptr)
             return;
-         __pointer(::user::impact) pimpact = pdocument->get_view();
+         __pointer(::user::impact) pimpact = pdocument->get_impact();
          auto pupdate = new_update();
          pupdate->m_actioncontext = ::e_source_system;
          ptopic->m_atom = id_browse;
          ptopic->payload(id_form) = "filemanager\\replace_name_in_file_system.xhtml";
-         pdocument->update_all_views(ptopic);
+         pdocument->update_all_impacts(ptopic);
 
-         ptopic->m_atom = id_get_form_view;
-         pdocument->update_all_views(ptopic);
+         ptopic->m_atom = id_get_form_impact;
+         pdocument->update_all_impacts(ptopic);
 
          ptopic->m_atom = id_after_browse;
-         pdocument->update_all_views(ptopic);
+         pdocument->update_all_impacts(ptopic);
 
 
          pcreatordata->m_puserinteraction = (pimpact->get_parent_frame());

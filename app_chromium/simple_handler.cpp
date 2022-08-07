@@ -9,7 +9,7 @@
 
 #include "include/base/cef_bind.h"
 #include "include/cef_app.h"
-#include "include/views/cef_browser_view.h"
+#include "include/views/cef_browser_impact.h"
 #include "include/views/cef_window.h"
 #include "include/wrapper/cef_closure_task.h"
 #include "include/wrapper/cef_helpers.h"
@@ -20,8 +20,8 @@ SimpleHandler* g_instance = nullptr;
 
 }  // namespace
 
-SimpleHandler::SimpleHandler(bool use_views)
-    : use_views_(use_views), is_closing_(false) {
+SimpleHandler::SimpleHandler(bool use_impacts)
+    : use_impacts_(use_impacts), is_closing_(false) {
   DCHECK(!g_instance);
   g_instance = this;
 }
@@ -39,12 +39,12 @@ void SimpleHandler::OnTitleChange(CefRefPtr<CefBrowser> browser,
                                   const CefString& title) {
   CEF_REQUIRE_UI_THREAD();
 
-  if (use_views_) {
+  if (use_impacts_) {
     // Set the title of the window using the Views framework.
-    CefRefPtr<CefBrowserView> browser_view =
+    CefRefPtr<CefBrowserView> browser_impact =
         CefBrowserView::GetForBrowser(browser);
-    if (browser_view) {
-      CefRefPtr<CefWindow> window = browser_view->GetWindow();
+    if (browser_impact) {
+      CefRefPtr<CefWindow> window = browser_impact->GetWindow();
       if (window)
         window->SetTitle(title);
     }

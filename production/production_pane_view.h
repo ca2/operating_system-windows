@@ -16,7 +16,7 @@ namespace production
    public:
 
 
-      __pointer(::user::form_view)      m_pviewOptions;
+      __pointer(::user::form_impact)      m_pviewOptions;
 
 
       pane_impact(::object * pobject);

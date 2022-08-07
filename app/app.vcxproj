@@ -1040,7 +1040,7 @@
     <ClCompile Include="application.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="..\version.rc" />
+    <ResourceCompile Include="deployment.rc" />
     <ResourceCompile Include="app.rc" />
   </ItemGroup>
   <ItemGroup>

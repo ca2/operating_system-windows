@@ -8,7 +8,7 @@
 #include "aura/message/user.h"
 #include <dwmapi.h>
 
-
+#define IDI_ICON_WINDOW 256
 HRESULT SetTouchDisableProperty(HWND hwnd, BOOL fDisableTouch);
 
 ::u32 get_dpi_for_window(oswindow hwnd);
@@ -582,6 +582,65 @@ namespace windowing_win32
 
    }
 
+
+   //bool window::defer_set_icon()
+   //{
+
+   //   //int iSmallIconCx = ::GetSystemMetrics(SM_CXSMICON);
+   //   //int iSmallIconCy = ::GetSystemMetrics(SM_CYSMICON);
+   //   //int iIconCx = ::GetSystemMetrics(SM_CXICON);
+   //   //int iIconCy = ::GetSystemMetrics(SM_CXICON);
+   //   int iSmallIconCx = 256;
+   //   int iSmallIconCy = 256;
+   //   int iIconCx = 256;
+   //   int iIconCy = 256;
+
+   //   //HICON hiconSmall = (HICON) ::LoadIcon((HINSTANCE)m_psystem->m_hinstanceThis, MAKEINTRESOURCE(128));
+
+   //   HICON hiconSmall =(HICON) ::LoadImage((HINSTANCE)m_psystem->m_hinstanceThis, MAKEINTRESOURCE(128), IMAGE_ICON, 0, 0, LR_DEFAULTCOLOR | LR_DEFAULTSIZE);
+   //   //HICON hicon = (HICON)::LoadImage((HINSTANCE)m_psystem->m_hinstanceThis, MAKEINTRESOURCE(128), IMAGE_ICON, iIconCx, iIconCy, LR_DEFAULTCOLOR);
+   //   HICON hicon = nullptr;
+
+   //   if (!hicon)
+   //   {
+
+   //      hicon = hiconSmall;
+
+   //   }
+   //   if (!hiconSmall)
+   //   {
+
+   //      hiconSmall = hicon;
+
+   //   }
+   //   if (!hicon || !hiconSmall)
+   //   {
+
+   //      return false;
+
+   //   }
+
+   //   //SetLastError(0);
+   //   {
+   //      //HWND hwnd = get_hwnd();
+   //      m_puserinteractionimpl->m_puserinteraction->post_message(WM_SETICON, ICON_SMALL, (LPARAM)hiconSmall);
+   //      //DWORD dwLastError = ::GetLastError();
+   //      //INFORMATION("ICON_BIT_SMALLER" << dwLastError);
+   //   }
+   //   //SetLastError(0);
+   //   {
+   //     // HWND hwnd = get_hwnd();
+   //      m_puserinteractionimpl->m_puserinteraction->post_message(WM_SETICON, ICON_BIG, (LPARAM)hicon);
+   //      //::SendMessage(hwnd, WM_SETICON, ICON_BIG, (LPARAM)hicon);
+   //      //DWORD dwLastError = ::GetLastError();
+
+   //      //INFORMATION("ICON_LARGER" << dwLastError);
+   //   }
+   //   SetLastError(0);
+
+   //   return true;
+
+   //}
 
 
    //void window::set_wm_class(const ::string & psz)
@@ -4804,7 +4863,7 @@ namespace windowing_win32
    }
 
 
-   void window::set_viewport_org(::draw2d::graphics_pointer & pgraphics)
+   void window::set_impactport_org(::draw2d::graphics_pointer & pgraphics)
    {
 
       // graphics will be already set its impact port to the window for linux - cairo with xlib
@@ -5255,22 +5314,33 @@ namespace windowing_win32
 
       ::size_i32 sizeSmall;
 
-      sizeSmall.cx = GetSystemMetrics(SM_CXSMICON);
-      sizeSmall.cy = GetSystemMetrics(SM_CYSMICON);
+      //sizeSmall.cx = GetSystemMetrics(SM_CXSMICON);
+      //sizeSmall.cy = GetSystemMetrics(SM_CYSMICON);
+      sizeSmall.cx = 24;
+      sizeSmall.cy = 24;
 
       HICON hiconSmall = (HICON)picon->get_os_data(sizeSmall);
 
       ::size_i32 sizeBig;
 
-      sizeBig.cx = GetSystemMetrics(SM_CXICON);
-      sizeBig.cy = GetSystemMetrics(SM_CYICON);
+      //sizeBig.cx = GetSystemMetrics(SM_CXICON);
+      //sizeBig.cy = GetSystemMetrics(SM_CYICON);
+      sizeBig.cx = 32;
+      sizeBig.cy = 32;
 
-      HICON hiconBig = (HICON)picon->get_os_data(sizeSmall);
+      HICON hiconBig = (HICON)picon->get_os_data(sizeBig);
 
       HWND hwnd = get_hwnd();
 
       if (hiconSmall)
       {
+
+         {
+            //HWND hwnd = get_hwnd();
+            m_puserinteractionimpl->m_puserinteraction->post_message(WM_SETICON, ICON_SMALL, (LPARAM)hiconSmall);
+            //DWORD dwLastError = ::GetLastError();
+            //INFORMATION("ICON_BIT_SMALLER" << dwLastError);
+         }
 
          ::SendMessage(hwnd, WM_SETICON, ICON_SMALL, (LPARAM)hiconSmall);
 
@@ -5279,6 +5349,15 @@ namespace windowing_win32
       if (hiconBig)
       {
 
+         //SetLastError(0);
+         {
+            // HWND hwnd = get_hwnd();
+            //m_puserinteractionimpl->m_puserinteraction->post_message(WM_SETICON, ICON_BIG, (LPARAM)hiconBig);
+            //::SendMessage(hwnd, WM_SETICON, ICON_BIG, (LPARAM)hicon);
+            //DWORD dwLastError = ::GetLastError();
+
+            //INFORMATION("ICON_LARGER" << dwLastError);
+         }
          ::SendMessage(hwnd, WM_SETICON, ICON_BIG, (LPARAM)hiconBig);
 
       }

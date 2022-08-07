@@ -836,14 +836,16 @@ namespace apex_windows
 
             string strCommand = "\"" + path + "\" \"" + strUrl + "\" --profile-directory=\"" + strMappedProfile + "\"";
 
-            string strOutput;
+            //string strOutput;
 
-            string strError;
+            //string strError;
+
+            string_array straOutput;
 
             int iExitCode = 0;
 
             //auto estatus = 
-            command_system(strOutput, strError, iExitCode, strCommand);
+            command_system(straOutput, iExitCode, strCommand);
 
             //return estatus;
 
@@ -2710,7 +2712,9 @@ retry:
             else
             {
 
-               bSuccess = WaitForSingleObject(si.hProcess, i);
+               DWORD dwWait = (DWORD)minimum(DWORD_MAX, i);
+
+               bSuccess = WaitForSingleObject(si.hProcess, dwWait);
 
             }
 

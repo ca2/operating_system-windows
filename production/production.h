@@ -30,11 +30,11 @@ namespace production
 
 #include "production_frame.h"
 #include "production_form_callback.h"
-#include "production_pane_view.h"
+#include "production_pane_impact.h"
 
 #include "production_document.h"
 
-#include "production_view.h"
+#include "production_impact.h"
 
 
 #include "production_application.h"

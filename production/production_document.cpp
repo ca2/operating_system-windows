@@ -21,7 +21,7 @@ namespace production
          return false;
 
 
-      update_all_views(nullptr, 0);
+      update_all_impacts(nullptr, 0);
 
 
       return true;
@@ -61,7 +61,7 @@ namespace production
 
       //  m_document.load(str);
 
-      update_all_views(id_open_document);
+      update_all_impacts(id_open_document);
 
       return true;
 

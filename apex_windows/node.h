@@ -38,6 +38,8 @@ namespace apex_windows
 
       bool shell_link_target(::file::path& pathTarget, const ::file::path& pathLnk) override;
 
+      bool shell_link_icon(::file::path& pathIcon, int & iIcon, const ::file::path& pathLnk) override;
+
       //virtual bool _os_calc_app_dark_mode();
 
       //virtual bool _os_calc_system_dark_mode();

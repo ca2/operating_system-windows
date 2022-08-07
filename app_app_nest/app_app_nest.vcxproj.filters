@@ -46,8 +46,9 @@
     <ResourceCompile Include="app_app_nest.rc">
       <Filter>Source</Filter>
     </ResourceCompile>
-    <ResourceCompile Include="..\version.rc">
+    <ResourceCompile Include="deployment.rc">
       <Filter>Resource Files</Filter>
     </ResourceCompile>
+
   </ItemGroup>
 </Project>

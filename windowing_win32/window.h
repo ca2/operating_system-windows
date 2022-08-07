@@ -65,6 +65,9 @@ namespace windowing_win32
       DECLARE_MESSAGE_HANDLER(_001OnTaskbarCreated);
 
 
+      //bool defer_set_icon() override;
+
+
       //bool has_capture() const override;
       //bool has_focus() const override;
 
@@ -837,7 +840,7 @@ namespace windowing_win32
 
       virtual void track_mouse_hover() override;
 
-      void set_viewport_org(::draw2d::graphics_pointer & pgraphics);
+      void set_impactport_org(::draw2d::graphics_pointer & pgraphics);
 
 
       void on_set_parent(::user::interaction * pinteraction);

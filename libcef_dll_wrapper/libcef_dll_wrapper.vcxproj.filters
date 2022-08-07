@@ -205,7 +205,7 @@
     <ClCompile Include="C:\archive\platform\libcef_dll\cpptoc\test\translator_test_scoped_client_cpptoc.cc">
       <Filter>libcef_dll\cpptoc\test</Filter>
     </ClCompile>
-    <ClCompile Include="C:\archive\platform\libcef_dll\cpptoc\views\browser_view_delegate_cpptoc.cc">
+    <ClCompile Include="C:\archive\platform\libcef_dll\cpptoc\views\browser_impact_delegate_cpptoc.cc">
       <Filter>libcef_dll\cpptoc\views</Filter>
     </ClCompile>
     <ClCompile Include="C:\archive\platform\libcef_dll\cpptoc\views\button_delegate_cpptoc.cc">
@@ -421,7 +421,7 @@
     <ClCompile Include="C:\archive\platform\libcef_dll\ctocpp\views\box_layout_ctocpp.cc">
       <Filter>libcef_dll\ctocpp\views</Filter>
     </ClCompile>
-    <ClCompile Include="C:\archive\platform\libcef_dll\ctocpp\views\browser_view_ctocpp.cc">
+    <ClCompile Include="C:\archive\platform\libcef_dll\ctocpp\views\browser_impact_ctocpp.cc">
       <Filter>libcef_dll\ctocpp\views</Filter>
     </ClCompile>
     <ClCompile Include="C:\archive\platform\libcef_dll\ctocpp\views\button_ctocpp.cc">
@@ -448,7 +448,7 @@
     <ClCompile Include="C:\archive\platform\libcef_dll\ctocpp\views\panel_ctocpp.cc">
       <Filter>libcef_dll\ctocpp\views</Filter>
     </ClCompile>
-    <ClCompile Include="C:\archive\platform\libcef_dll\ctocpp\views\scroll_view_ctocpp.cc">
+    <ClCompile Include="C:\archive\platform\libcef_dll\ctocpp\views\scroll_impact_ctocpp.cc">
       <Filter>libcef_dll\ctocpp\views</Filter>
     </ClCompile>
     <ClCompile Include="C:\archive\platform\libcef_dll\ctocpp\views\textfield_ctocpp.cc">
@@ -678,7 +678,7 @@
     <ClInclude Include="C:\archive\platform\libcef_dll\cpptoc\test\translator_test_scoped_client_cpptoc.h">
       <Filter>libcef_dll\cpptoc\test</Filter>
     </ClInclude>
-    <ClInclude Include="C:\archive\platform\libcef_dll\cpptoc\views\browser_view_delegate_cpptoc.h">
+    <ClInclude Include="C:\archive\platform\libcef_dll\cpptoc\views\browser_impact_delegate_cpptoc.h">
       <Filter>libcef_dll\cpptoc\views</Filter>
     </ClInclude>
     <ClInclude Include="C:\archive\platform\libcef_dll\cpptoc\views\button_delegate_cpptoc.h">
@@ -900,7 +900,7 @@
     <ClInclude Include="C:\archive\platform\libcef_dll\ctocpp\views\box_layout_ctocpp.h">
       <Filter>libcef_dll\ctocpp\views</Filter>
     </ClInclude>
-    <ClInclude Include="C:\archive\platform\libcef_dll\ctocpp\views\browser_view_ctocpp.h">
+    <ClInclude Include="C:\archive\platform\libcef_dll\ctocpp\views\browser_impact_ctocpp.h">
       <Filter>libcef_dll\ctocpp\views</Filter>
     </ClInclude>
     <ClInclude Include="C:\archive\platform\libcef_dll\ctocpp\views\button_ctocpp.h">
@@ -927,7 +927,7 @@
     <ClInclude Include="C:\archive\platform\libcef_dll\ctocpp\views\panel_ctocpp.h">
       <Filter>libcef_dll\ctocpp\views</Filter>
     </ClInclude>
-    <ClInclude Include="C:\archive\platform\libcef_dll\ctocpp\views\scroll_view_ctocpp.h">
+    <ClInclude Include="C:\archive\platform\libcef_dll\ctocpp\views\scroll_impact_ctocpp.h">
       <Filter>libcef_dll\ctocpp\views</Filter>
     </ClInclude>
     <ClInclude Include="C:\archive\platform\libcef_dll\ctocpp\views\textfield_ctocpp.h">
@@ -1452,10 +1452,10 @@
     <ClInclude Include="C:\operating-system\operating-system-windows\third\include\capi\views\cef_box_layout_capi.h">
       <Filter>include\capi\views</Filter>
     </ClInclude>
-    <ClInclude Include="C:\operating-system\operating-system-windows\third\include\capi\views\cef_browser_view_capi.h">
+    <ClInclude Include="C:\operating-system\operating-system-windows\third\include\capi\views\cef_browser_impact_capi.h">
       <Filter>include\capi\views</Filter>
     </ClInclude>
-    <ClInclude Include="C:\operating-system\operating-system-windows\third\include\capi\views\cef_browser_view_delegate_capi.h">
+    <ClInclude Include="C:\operating-system\operating-system-windows\third\include\capi\views\cef_browser_impact_delegate_capi.h">
       <Filter>include\capi\views</Filter>
     </ClInclude>
     <ClInclude Include="C:\operating-system\operating-system-windows\third\include\capi\views\cef_button_capi.h">
@@ -1488,7 +1488,7 @@
     <ClInclude Include="C:\operating-system\operating-system-windows\third\include\capi\views\cef_panel_delegate_capi.h">
       <Filter>include\capi\views</Filter>
     </ClInclude>
-    <ClInclude Include="C:\operating-system\operating-system-windows\third\include\capi\views\cef_scroll_view_capi.h">
+    <ClInclude Include="C:\operating-system\operating-system-windows\third\include\capi\views\cef_scroll_impact_capi.h">
       <Filter>include\capi\views</Filter>
     </ClInclude>
     <ClInclude Include="C:\operating-system\operating-system-windows\third\include\capi\views\cef_textfield_capi.h">
@@ -1497,10 +1497,10 @@
     <ClInclude Include="C:\operating-system\operating-system-windows\third\include\capi\views\cef_textfield_delegate_capi.h">
       <Filter>include\capi\views</Filter>
     </ClInclude>
-    <ClInclude Include="C:\operating-system\operating-system-windows\third\include\capi\views\cef_view_capi.h">
+    <ClInclude Include="C:\operating-system\operating-system-windows\third\include\capi\views\cef_impact_capi.h">
       <Filter>include\capi\views</Filter>
     </ClInclude>
-    <ClInclude Include="C:\operating-system\operating-system-windows\third\include\capi\views\cef_view_delegate_capi.h">
+    <ClInclude Include="C:\operating-system\operating-system-windows\third\include\capi\views\cef_impact_delegate_capi.h">
       <Filter>include\capi\views</Filter>
     </ClInclude>
     <ClInclude Include="C:\operating-system\operating-system-windows\third\include\capi\views\cef_window_capi.h">
@@ -1566,10 +1566,10 @@
     <ClInclude Include="C:\operating-system\operating-system-windows\third\include\views\cef_box_layout.h">
       <Filter>include\views</Filter>
     </ClInclude>
-    <ClInclude Include="C:\operating-system\operating-system-windows\third\include\views\cef_browser_view.h">
+    <ClInclude Include="C:\operating-system\operating-system-windows\third\include\views\cef_browser_impact.h">
       <Filter>include\views</Filter>
     </ClInclude>
-    <ClInclude Include="C:\operating-system\operating-system-windows\third\include\views\cef_browser_view_delegate.h">
+    <ClInclude Include="C:\operating-system\operating-system-windows\third\include\views\cef_browser_impact_delegate.h">
       <Filter>include\views</Filter>
     </ClInclude>
     <ClInclude Include="C:\operating-system\operating-system-windows\third\include\views\cef_button.h">
@@ -1602,7 +1602,7 @@
     <ClInclude Include="C:\operating-system\operating-system-windows\third\include\views\cef_panel_delegate.h">
       <Filter>include\views</Filter>
     </ClInclude>
-    <ClInclude Include="C:\operating-system\operating-system-windows\third\include\views\cef_scroll_view.h">
+    <ClInclude Include="C:\operating-system\operating-system-windows\third\include\views\cef_scroll_impact.h">
       <Filter>include\views</Filter>
     </ClInclude>
     <ClInclude Include="C:\operating-system\operating-system-windows\third\include\views\cef_textfield.h">
@@ -1611,10 +1611,10 @@
     <ClInclude Include="C:\operating-system\operating-system-windows\third\include\views\cef_textfield_delegate.h">
       <Filter>include\views</Filter>
     </ClInclude>
-    <ClInclude Include="C:\operating-system\operating-system-windows\third\include\views\cef_view.h">
+    <ClInclude Include="C:\operating-system\operating-system-windows\third\include\views\cef_impact.h">
       <Filter>include\views</Filter>
     </ClInclude>
-    <ClInclude Include="C:\operating-system\operating-system-windows\third\include\views\cef_view_delegate.h">
+    <ClInclude Include="C:\operating-system\operating-system-windows\third\include\views\cef_impact_delegate.h">
       <Filter>include\views</Filter>
     </ClInclude>
     <ClInclude Include="C:\operating-system\operating-system-windows\third\include\views\cef_window.h">

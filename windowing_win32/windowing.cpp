@@ -1197,11 +1197,11 @@ namespace windowing_win32
 //
 //      auto puser = user();
 //
-//      puser->will_use_view_hint(COLORSEL_IMPACT);
+//      puser->will_use_impact_hint(COLORSEL_IMPACT);
 //
 //      auto pdocument = m_mapimpactsystem[COLORSEL_IMPACT]->open_document_file(puiOwner->get_application(), ::e_type_null, __visible(true));
 //
-//      __pointer(::userex::color_view) pimpact = pdocument->get_type_impact < ::userex::color_view >();
+//      __pointer(::userex::color_impact) pimpact = pdocument->get_type_impact < ::userex::color_impact >();
 //
 //      __pointer(::user::frame_window) pframe = pimpact->top_level_frame();
 //
