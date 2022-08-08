@@ -492,7 +492,7 @@ namespace draw2d_gdiplus
    //}
 
 
-   size_f64 graphics::GetViewportExt()
+   size_f64 graphics::get_extents()
    {
 
       //::size_f64 ::size_f64;
@@ -536,10 +536,10 @@ namespace draw2d_gdiplus
    }
 
 
-   size_f64 graphics::SetViewportExt(const ::size_f64 & size)
+   size_f64 graphics::set_extents(const ::size_f64 & size)
    {
 
-      return SetViewportExt(size.cx, size.cy);
+      return set_extents(size.cx, size.cy);
 
    }
 
@@ -4594,7 +4594,7 @@ namespace draw2d_gdiplus
    //}
 
 
-   size_f64 graphics::SetViewportExt(double x, double y)
+   size_f64 graphics::set_extents(double x, double y)
    {
 
       ::size_f64 size(0, 0);
@@ -4849,9 +4849,9 @@ namespace draw2d_gdiplus
 
       __copy(r, rectangle);
 
-      r.X += m_pointAddShapeTranslate.x;
+      r.X = (Gdiplus::REAL) (r.X + m_pointAddShapeTranslate.x);
 
-      r.Y += m_pointAddShapeTranslate.y;
+      r.Y = (Gdiplus::REAL) (r.Y + m_pointAddShapeTranslate.y);
 
       m_pgraphics->SetClip(r, Gdiplus::CombineModeIntersect);
 
@@ -5358,7 +5358,7 @@ namespace draw2d_gdiplus
       //         (i32)(i16)pMetaRec->rdParm[1], (i32)(i16)pMetaRec->rdParm[0]);
       //         break;
       //      case META_SETVIEWPORTEXT:
-      //         SetViewportExt(
+      //         set_extents(
       //         (i32)(i16)pMetaRec->rdParm[1], (i32)(i16)pMetaRec->rdParm[0]);
       //         break;
       //      case META_SETVIEWPORTORG:
@@ -5480,7 +5480,7 @@ namespace draw2d_gdiplus
 
 
    //   size_f64 sizeWinExt = GetWindowExt();
-   //   size_f64 sizeVpExt = GetViewportExt();
+   //   size_f64 sizeVpExt = get_extents();
    //   psize->cx = psize->cx * abs(sizeVpExt.cx) / abs(sizeWinExt.cx);
 
    //   psize->cy = psize->cy * abs(sizeVpExt.cy) / abs(sizeWinExt.cy);
@@ -5495,7 +5495,7 @@ namespace draw2d_gdiplus
 
    //   size_f64 sizeWinExt = GetWindowExt();
 
-   //   size_f64 sizeVpExt = GetViewportExt();
+   //   size_f64 sizeVpExt = get_extents();
 
    //   psize->cx = psize->cx * abs(sizeWinExt.cx) / abs(sizeVpExt.cx);
 

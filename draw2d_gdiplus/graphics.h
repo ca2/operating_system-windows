@@ -151,9 +151,9 @@ namespace draw2d_gdiplus
       //virtual point_i32 OffsetViewportOrg(i32 nWidth, i32 nHeight) override;
 
       // Viewport Extent
-      virtual size_f64 GetViewportExt() override;
-      virtual size_f64 SetViewportExt(double cx, double cy) override;
-      virtual size_f64 SetViewportExt(const ::size_f64 & size) override;
+      size_f64 get_extents() override;
+      size_f64 set_extents(double cx, double cy) override;
+      size_f64 set_extents(const ::size_f64 & size) override;
       //virtual size_i32 ScaleViewportExt(i32 xNum, i32 xDenom, i32 yNum, i32 yDenom) override;
 
       // Window Origin

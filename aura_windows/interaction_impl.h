@@ -736,7 +736,7 @@ namespace aura_windows
 
       void _001OnTriggerMouseInside();
 
-      void set_impactport_org(::draw2d::graphics_pointer & pgraphics);
+      void set_origin(::draw2d::graphics_pointer & pgraphics);
 
 
       void on_set_parent(::user::interaction * pinteraction);

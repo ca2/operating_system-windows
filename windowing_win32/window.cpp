@@ -4863,12 +4863,12 @@ namespace windowing_win32
    }
 
 
-   void window::set_impactport_org(::draw2d::graphics_pointer & pgraphics)
+   void window::set_origin(::draw2d::graphics_pointer & pgraphics)
    {
 
       // graphics will be already set its impact port to the window for linux - cairo with xlib
 
-      pgraphics->SetViewportOrg(::point_i32());
+      pgraphics->set_origin(::point_i32());
 
    }
 
