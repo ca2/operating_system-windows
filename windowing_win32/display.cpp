@@ -24,8 +24,6 @@ namespace windowing_win32
    void display::enum_display_monitors()
    {
 
-#ifdef WINDOWS_DESKTOP
-
       m_monitorinfoa.erase_all();
 
       ::EnumDisplayMonitors(nullptr, nullptr, &display::monitor_enum_proc, (LPARAM)this);
@@ -37,7 +35,11 @@ namespace windowing_win32
       for (index iMonitor = 0; iMonitor < m_monitorinfoa.get_count(); iMonitor++)
       {
 
-         auto pmonitor = __new(monitor(m_hmonitora[iMonitor]));
+         auto pmonitor = __new(::windowing_win32::monitor());
+
+         pmonitor->initialize(this);
+
+         pmonitor->m_hmonitor = m_hmonitora[iMonitor];
 
          pmonitor->m_iIndex = iMonitor;
 
@@ -48,12 +50,6 @@ namespace windowing_win32
          __copy(pmonitor->m_rectangleWorkspace, m_monitorinfoa[iMonitor].rcWork);
 
       }
-
-#elif defined(LINUX)
-
-      ::enum_display_monitors(this);
-
-#endif
 
    }
 

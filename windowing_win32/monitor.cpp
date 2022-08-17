@@ -14,10 +14,10 @@ namespace windowing_win32
 {
 
 
-   monitor::monitor(HMONITOR hmonitor) :
-      m_hmonitor(hmonitor)
+   monitor::monitor()
    {
 
+      m_hmonitor = nullptr;
 
    }
 

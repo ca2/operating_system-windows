@@ -15,8 +15,8 @@ namespace windowing_win32
       HMONITOR          m_hmonitor;
 
 
-      monitor(HMONITOR hmonitor);
-      virtual ~monitor();
+      monitor();
+      ~monitor() override;
 
 
       virtual void update_cache() override;

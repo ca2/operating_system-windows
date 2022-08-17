@@ -809,6 +809,7 @@
     <ClInclude Include="buffer.h" />
     <ClInclude Include="copydesk.h" />
     <ClInclude Include="cursor.h" />
+    <ClInclude Include="desktop_environment.h" />
     <ClInclude Include="devices.h" />
     <ClInclude Include="master_device_listener.h" />
     <ClInclude Include="display.h" />
@@ -842,6 +843,7 @@
     <ClCompile Include="buffer.cpp" />
     <ClCompile Include="copydesk.cpp" />
     <ClCompile Include="cursor.cpp" />
+    <ClCompile Include="desktop_environment.cpp" />
     <ClCompile Include="devices.cpp" />
     <ClCompile Include="master_device_listener.cpp" />
     <ClCompile Include="display.cpp" />

@@ -73,8 +73,9 @@ CLASS_DECL_WINDOWING_WIN32 enum_display windows_show_window_to_edisplay(int iSho
 #include "top_level_enum.h"
 
 
-#include "node.h"
+//#include "node.h"
 
+#include "desktop_environment.h"
 
 #include "_impl.h"
 

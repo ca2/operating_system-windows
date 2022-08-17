@@ -109,6 +109,9 @@
     <ClCompile Include="devices.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="desktop_environment.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -201,12 +204,9 @@
     <ClInclude Include="devices.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-        <ResourceCompile Include="deployment.rc">
-      <Filter>Resource Files</Filter>
-    </ResourceCompile>
-
+    <ClInclude Include="desktop_environment.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Header Files">
@@ -223,5 +223,8 @@
     <None Include="windowing_win32.def">
       <Filter>Source Files</Filter>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="deployment.rc" />
   </ItemGroup>
 </Project>
