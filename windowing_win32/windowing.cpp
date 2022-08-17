@@ -1,5 +1,7 @@
 // Created by camilo on 2021-01-30 <3ThomasBS_!!
 #include "framework.h"
+#include "mouse_hook.h"
+#include "keyboard_hook.h"
 
 
 wparam MapLeftRightKeys(wparam vk, lparam lParam);
@@ -15,6 +17,7 @@ namespace windowing_win32
       m_pWindowing4 = this;
 
 //      set_layer(LAYERED_IMPL, this);
+      m_emessageWindowsTaskbarCreatedMessage = e_message_undefined;
 
    }
 
@@ -1333,6 +1336,66 @@ namespace windowing_win32
 
    }
 
+
+   void windowing::install_keyboard_hook(::matter* pmatterListener)
+   {
+
+      //auto estatus = 
+
+      ::keyboard_hook::install(pmatterListener);
+
+      fork([]()
+         {
+
+            ::keyboard_hook::run();
+
+         });
+
+   }
+
+
+   void windowing::uninstall_keyboard_hook(::matter* pmatterListener)
+   {
+
+      ::keyboard_hook::uninstall(pmatterListener);
+
+   }
+
+
+   void windowing::install_mouse_hook(::matter* pmatterListener)
+   {
+
+      ::mouse_hook::install(pmatterListener);
+
+      fork([]()
+         {
+
+            ::mouse_hook::run();
+
+         });
+
+   }
+
+
+   void windowing::uninstall_mouse_hook(::matter* pmatterListener)
+   {
+
+      ::mouse_hook::uninstall(pmatterListener);
+
+   }
+
+
+   void windowing::register_windows_message()
+   {
+
+      if (m_emessageWindowsTaskbarCreatedMessage == e_message_undefined)
+      {
+
+         m_emessageWindowsTaskbarCreatedMessage = (enum_message)RegisterWindowMessageW(L"TaskbarCreated");
+
+      }
+
+   }
 
 
 } // namespace windowing_win32

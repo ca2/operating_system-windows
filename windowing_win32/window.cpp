@@ -231,9 +231,13 @@ namespace windowing_win32
       //MESSAGE_LINK(e_message_create, pchannel, pimpl, &::user::interaction_impl::_001OnPrioCreate);
       auto psystem = m_psystem;
 
-      auto pnode = psystem->m_pnode->m_pauranode->m_pWindowingWin32Node;
+      //auto pnode = psystem->m_pnode->m_pauranode->m_pWindowingWin32Node;
 
-      auto emessageTaskbarCreated = pnode->m_emessageWindowsTaskbarCreatedMessage;
+      //auto emessageTaskbarCreated = pnode->m_emessageWindowsTaskbarCreatedMessage;
+
+      auto pwindowing = (::windowing_win32::windowing*)windowing()->m_pWindowing4;
+
+      auto emessageTaskbarCreated = pwindowing->m_emessageWindowsTaskbarCreatedMessage;
 
       if (emessageTaskbarCreated != e_message_undefined)
       {

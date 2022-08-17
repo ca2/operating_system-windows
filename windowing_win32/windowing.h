@@ -12,6 +12,7 @@ namespace windowing_win32
    public:
 
 
+      enum_message                                       m_emessageWindowsTaskbarCreatedMessage;
       //__creatable_from_base(windowing, ::windowing::windowing);
 
 
@@ -180,7 +181,17 @@ namespace windowing_win32
       virtual string _get_window_text_timeout(oswindow oswindow, const ::duration & duration = 1_s);
 
 
-      
+      void install_keyboard_hook(::matter* pmatterListener) override;
+      void uninstall_keyboard_hook(::matter* pmatterListener) override;
+
+      void install_mouse_hook(::matter* pmatterListener) override;
+      void uninstall_mouse_hook(::matter* pmatterListener) override;
+
+
+
+
+      virtual void register_windows_message();
+
 
 
    };
