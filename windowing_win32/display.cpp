@@ -840,7 +840,22 @@ namespace windowing_win32
       if (eactivation & e_activation_under_mouse_cursor || rectangle.is_null())
       {
 
-         ::point_i32 pointCursor = pwindowCursorPosition->get_cursor_position();
+         ::point_i32 pointCursor;
+
+         if (::is_null(pwindowCursorPosition))
+         {
+
+            auto pwindowing = m_pwindowing;
+
+            pointCursor = pwindowing->get_cursor_position();
+
+         }
+         else
+         {
+
+            pointCursor = pwindowCursorPosition->get_cursor_position();
+
+         }
 
          rectangle.set(pointCursor - ::size_i32(5, 5), ::size_i32(10, 10));
 
