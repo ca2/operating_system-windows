@@ -32,7 +32,7 @@ namespace acme_windows
             try
             {
 
-               if (m_psystem->m_pacmedirectory->is(path))
+               if (::is_directory(path))
                {
 
                   hfile = ::CreateFile2(wstr,
