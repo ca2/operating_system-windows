@@ -2,7 +2,7 @@
 
 
 #include "aura_windows/_library.h"
-#include "aura/user/user/_user.h"
+#include "aura/user/user/_component.h"
 #include "aura/operating_system/windows/message_window.h"
 
 
