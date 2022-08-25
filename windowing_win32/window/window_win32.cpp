@@ -1,5 +1,7 @@
 #include "framework.h"
 #include "acme/constant/timer.h"
+#include "windowing_win32/window.h"
+#include "windowing_win32/windowing.h"
 
 CLASS_DECL_WINDOWING_WIN32 WNDPROC windows_user_interaction_impl_get_window_procedure();
 

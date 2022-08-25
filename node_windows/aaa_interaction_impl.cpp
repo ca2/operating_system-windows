@@ -3615,7 +3615,7 @@ namespace windows
 
 
 
-   void interaction_impl::set_impactport_org(::draw2d::graphics_pointer & pgraphics)
+   void interaction_impl::set_context_org(::draw2d::graphics_pointer & pgraphics)
    {
 
       // graphics will be already set its impact port to the interaction_impl for linux - cairo with xlib

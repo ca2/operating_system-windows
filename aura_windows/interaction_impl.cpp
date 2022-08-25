@@ -8,6 +8,7 @@
 //#include "apex/platform/app_core.h"
 #include "interaction_impl.h"
 #include "aura/graphics/draw2d/graphics.h"
+#include "aura/windowing/window.h"
 
 
 CLASS_DECL_AURA_WINDOWS int g_iMouseDown = 0;
@@ -102,7 +103,6 @@ namespace aura_windows
    {
 
       m_pwindow->post_non_client_destroy();
-
 
       ::user::interaction_impl::post_non_client_destroy();
 

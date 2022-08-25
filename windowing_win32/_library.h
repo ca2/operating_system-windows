@@ -29,58 +29,68 @@ namespace windowing_win32
    CLASS_DECL_WINDOWING_WIN32 HICON load_icon(::object* pobject, string_array& straMatter, string strIcon, int cx, int cy);
 
 
+   class window;
+
+
+   using window_map = map < HWND, __pointer(window) >;
+
+
+
+
+
 } // namespace windowing_win32
 
 
 CLASS_DECL_WINDOWING_WIN32 int windows_show_window(enum_display edisplay, enum_activation eactivation);
 CLASS_DECL_WINDOWING_WIN32 enum_display windows_show_window_to_edisplay(int iShowWindow, enum_activation& eactivation);
 
+CLASS_DECL_WINDOWING_WIN32 HWND windows_get_mouse_capture(itask_t itask);
 
 
 #include "window_util.h"
 #include "win32.h"
 
 
-#include "buffer.h"
-#include "display.h"
-#include "cursor.h"
-#include "icon.h"
-#include "imm_client.h"
-#include "imm_context.h"
-#include "monitor.h"
-#include "keyboard.h"
+
+//#include "buffer.h"
+//#include "display.h"
+//#include "cursor.h"
+//#include "icon.h"
+//#include "imm_client.h"
+//#include "imm_context.h"
+//#include "monitor.h"
+//#include "keyboard.h"
+//
+//
+//#include "notification_area.h"
+//#include "notify_icon.h"
+//
+//
+//#include "copydesk.h"
+//
+//
+//#include "shell.h"
+//
+//
+//#include "system_interaction.h"
+//
+//
+//#include "window.h"
+//
+//
+//#include "windowing.h"
+//
+//
+//#include "top_level_enum.h"
+//
+//
+////#include "node.h"
+//
+//#include "desktop_environment.h"
+//
+//#include "_impl.h"
 
 
-#include "notification_area.h"
-#include "notify_icon.h"
-
-
-#include "copydesk.h"
-
-
-#include "shell.h"
-
-
-#include "system_interaction.h"
-
-
-#include "window.h"
-
-
-#include "windowing.h"
-
-
-#include "top_level_enum.h"
-
-
-//#include "node.h"
-
-#include "desktop_environment.h"
-
-#include "_impl.h"
-
-
-CLASS_DECL_WINDOWING_WIN32 HWND windows_get_mouse_capture(itask_t itask);
 
 
 //DECLARE_FACTORY(CLASS_DECL_WINDOWING_WIN32, windowing_win32);

@@ -2,10 +2,16 @@
 #include "framework.h"
 #include "acme/constant/timer.h"
 #include "window.h"
+#include "windowing.h"
+#include "icon.h"
+#include "cursor.h"
 #include "aura_windows/interaction_impl.h"
+#include "aura/graphics/draw2d/graphics.h"
 #include "aura/user/user/interaction_prodevian.h"
 #include "acme/constant/activate.h"
 #include "aura/message/user.h"
+#include "top_level_enum.h"
+#include "system_interaction.h"
 #include <dwmapi.h>
 
 #define IDI_ICON_WINDOW 256

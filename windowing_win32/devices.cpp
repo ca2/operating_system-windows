@@ -1,6 +1,8 @@
 // Created by camilo on 2022-02-20 12:22 <3ThomasBorregaardSørensen!!
 #include "framework.h"
 #include "_windows.h"
+#include "windowing.h"
+#include "system_interaction.h"
 #include <initguid.h>
 #include <ks.h>
 #include <ksmedia.h>

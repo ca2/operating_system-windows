@@ -1,7 +1,7 @@
 #include "framework.h"
 #include "apex/operating_system.h"
-//#include "apex/platform/app_core.h"
 #include "copydesk.h"
+#include "aura/graphics/image/image.h"
 
 
 namespace windowing_win32

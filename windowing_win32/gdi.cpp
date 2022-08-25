@@ -1,4 +1,6 @@
 #include "framework.h"
+#include "aura/graphics/image/_image.h"
+#include "windowing.h"
 
 
 namespace windowing_win32

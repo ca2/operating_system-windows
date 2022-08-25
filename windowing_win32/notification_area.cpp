@@ -6,7 +6,8 @@ Contact : nish@voidnish.com
 // ShellTrayInfoImpact.cpp : implementation of the notification_area class
 //
 #include "framework.h"
-//#include "aura/user/user/_user.h"
+#include "notification_area.h"
+#include "icon.h"
 #include "apex_windows/process_data.h"
 
 
@@ -163,7 +164,7 @@ namespace windowing_win32
          {
 
             auto pwindowingicon = __new(::windowing_win32::icon());
-
+            
             pwindowingicon->add_icon(tray.hIcon);
 
             __pointer(::draw2d::icon) picon;

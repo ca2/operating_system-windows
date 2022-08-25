@@ -3,6 +3,9 @@
 #pragma once
 
 
+#include "aura/windowing/cursor.h"
+
+
 namespace windowing_win32
 {
 

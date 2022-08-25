@@ -156,7 +156,7 @@ namespace production
    }
 
 
-   void impact::on_impactport_offset(::draw2d::graphics_pointer & pgraphics)
+   void impact::on_context_offset(::draw2d::graphics_pointer & pgraphics)
    {
 
    }
@@ -185,7 +185,7 @@ namespace production
 
       ::rectangle_i32 rcItem;
 
-      ::point_i32 pointOffset = get_impactport_offset();
+      ::point_i32 pointOffset = get_context_offset();
 
       i32 iStart = pointOffset.y / m_iLineHeight;
       i32 y = m_iLineHeight - pointOffset.y % m_iLineHeight;
@@ -530,7 +530,7 @@ namespace production
                m_sizeTotal.cx = 80;
                m_sizeTotal.cy = (LONG)(m_pproduction.m_straStatus.get_size() * iLineHeight + 84);
                synchronouslock.unlock();
-               set_impactport_offset_y(maximum(0,m_sizeTotal.cy - sizePage.cy + iLineHeight));
+               set_context_offset_y(maximum(0,m_sizeTotal.cy - sizePage.cy + iLineHeight));
                on_change_impact_size();
             }
             else

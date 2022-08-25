@@ -1,5 +1,7 @@
 #include "framework.h"
 #include "aura/message.h"
+#include "window.h"
+#include "windowing.h"
 
 
 ::u32 g_puiaMessageTrace[] =

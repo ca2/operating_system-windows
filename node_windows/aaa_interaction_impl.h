@@ -723,7 +723,7 @@ namespace windows
 
       void _001OnTriggerMouseInside();
 
-      void set_impactport_org(::draw2d::graphics_pointer & pgraphics);
+      void set_context_org(::draw2d::graphics_pointer & pgraphics);
 
 
       void on_set_parent(::user::interaction * pinteraction);

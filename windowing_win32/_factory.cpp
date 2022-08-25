@@ -1,5 +1,18 @@
 #include "framework.h"
 #include "_windows.h"
+#include "display.h"
+#include "notify_icon.h"
+#include "cursor.h"
+#include "icon.h"
+#include "window.h"
+#include "windowing.h"
+#include "monitor.h"
+#include "copydesk.h"
+#include "desktop_environment.h"
+#include "keyboard.h"
+#include "shell.h"
+#include "imm_client.h"
+#include "buffer.h"
 
 
 //BEGIN_FACTORY(windowing_win32)

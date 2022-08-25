@@ -3,6 +3,9 @@
 #pragma once
 
 
+#include "aura/windowing/icon.h"
+
+
 namespace windowing_win32
 {
 
@@ -11,10 +14,7 @@ namespace windowing_win32
       virtual public ::windowing::icon
    {
    public:
-
-
-
-      //__creatable_from_base(icon, ::windowing::icon);
+      
 
 
       map < ::size_i32, HICON >              m_iconmap;

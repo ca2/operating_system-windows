@@ -2,6 +2,14 @@
 #include "framework.h"
 #include "mouse_hook.h"
 #include "keyboard_hook.h"
+#include "windowing.h"
+#include "window.h"
+#include "keyboard.h"
+#include "display.h"
+#include "system_interaction.h"
+//#include "buffer.h"
+#include "top_level_enum.h"
+#include "_impl.h"
 
 
 wparam MapLeftRightKeys(wparam vk, lparam lParam);

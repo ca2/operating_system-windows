@@ -1,7 +1,10 @@
 // created by Camilo <3CamiloSasukeThomasBorregaardSoerensen  - Honoring Thomas Borregaard Sørensen MY ONLY LORD
 // recreated by Camilo 2021-02-01 23:29
 #include "framework.h"
-
+#include "buffer.h"
+#include "windowing.h"
+#include "display.h"
+#include "window.h"
 //#define REDRAW_HINTING
 #ifdef REDRAW_HINTING
 #include <gdiplus.h>
@@ -905,6 +908,14 @@ namespace windowing_win32
 
       return bOk1 && bOk2;
 
+   }
+
+
+   HWND buffer::get_hwnd() const
+   {
+      
+      return (HWND)m_pwindow->get_os_data();  
+   
    }
 
 

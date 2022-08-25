@@ -1,6 +1,9 @@
 // created by Camilo <3CamiloSasukeThomasBorregaardSoerensen  - Honoring Thomas Borregaard Sørensen MY ONLY LORD
 // recreated by Camilo 2021-01-28 16:44
 #include "framework.h"
+#include "icon.h"
+#include "aura/graphics/image/context_image.h"
+#include "aura/graphics/image/drawing.h"
 
 
 // http ://stackoverflow.com/questions/1913468/how-to-determine-the-size_i32-of-an-icon-from-a-hicon

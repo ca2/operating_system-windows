@@ -2,6 +2,9 @@
 #pragma once
 
 
+#include "aura/windowing/window.h"
+
+
 namespace windowing_win32
 {
 
@@ -919,9 +922,6 @@ namespace windowing_win32
          /* [out][in] */ __RPC__inout DWORD * pdwEffect);
 
    };
-
-
-   using window_map = map < HWND, __pointer(window) >;
 
 
 } // namespace windowing_win32

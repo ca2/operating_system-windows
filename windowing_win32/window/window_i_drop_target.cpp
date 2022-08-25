@@ -1,4 +1,6 @@
 #include "framework.h"
+#include "windowing_win32/window.h"
+#include "windowing_win32/windowing.h"
 
 
 namespace windowing_win32

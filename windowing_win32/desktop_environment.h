@@ -2,6 +2,9 @@
 #pragma once
 
 
+#include "aura/windowing/desktop_environment.h"
+
+
 namespace windowing_win32
 {
 

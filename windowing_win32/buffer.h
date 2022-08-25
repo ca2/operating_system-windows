@@ -73,7 +73,8 @@ namespace windowing_win32
 
       virtual bool buffer_lock_round_swap_key_buffers() override;
 
-      inline HWND get_hwnd() const { return (HWND) m_pwindow->get_os_data();  }
+      virtual HWND get_hwnd() const;
+
 
    };
 

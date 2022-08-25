@@ -1,6 +1,8 @@
 // created by Camilo 2021-01-31 06:25 BRT <3CamiloSasukeThomasBorregaardSoerensen
 #include "framework.h"
 #include "window.h"
+#include "windowing.h"
+#include "monitor.h"
 
 
 #include <HighLevelMonitorConfigurationAPI.h>
@@ -9,6 +11,7 @@
 ::u32 mc_color_kelvin(MC_COLOR_TEMPERATURE e);
 CLASS_DECL_AURA void black_body(float * r, float * g, float * b, ::u32 dwTemp);
 MC_COLOR_TEMPERATURE kelvin_mc_color(::u32 kelvin);
+
 
 namespace windowing_win32
 {

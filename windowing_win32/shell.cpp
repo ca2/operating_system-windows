@@ -6,6 +6,9 @@
 #undef User
 #undef Usr
 #include "shell.h"
+#include "icon.h"
+#include "windowing.h"
+#include "system_interaction.h"
 //#include "apex/compress/zip/context.h"
 #include "acme/filesystem/filesystem/acme_directory.h"
 #include "acme_windows/known_folder_struct.h"

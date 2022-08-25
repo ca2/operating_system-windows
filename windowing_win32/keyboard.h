@@ -2,6 +2,9 @@
 #pragma once
 
 
+#include "aura/windowing/keyboard.h"
+
+
 namespace windowing_win32
 {
 
