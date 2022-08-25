@@ -228,17 +228,26 @@ namespace draw2d_gdiplus
 
       for(i32 i = 0; i < pitem->m_polygona.get_size(); i++)
       {
+
          auto & polygon = *pitem->m_polygona[i];
             
-         i32 jCount = polygon.get_size();
+         auto jCount = polygon.get_size();
+
          pa.erase_all();
+
          for(i32 j = 0; j < jCount; j++)
          {
+
             pa.add(Gdiplus::PointF((Gdiplus::REAL) polygon[n].x, (Gdiplus::REAL) polygon[n].y));
+
             n++;
+
          }
+
          path.AddPolygon(pa.get_data(), (i32) pa.get_count());
+
          path.CloseFigure();
+
       }
 
       return new Gdiplus::Region(&path);
