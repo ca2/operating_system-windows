@@ -1,6 +1,9 @@
 #pragma once
 
 
+#include "app-core/multimedia/audio_mixer/control.h"
+
+
 namespace multimedia
 {
 
@@ -13,9 +16,6 @@ namespace multimedia
          virtual public ::multimedia::audio_mixer::control
       {
       public:
-
-
-         
 
 
          enum Styles

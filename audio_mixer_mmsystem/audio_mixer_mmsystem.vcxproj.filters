@@ -25,7 +25,7 @@
     <ClInclude Include="audio_mixer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="section.h">
+    <ClInclude Include="department.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="source.h">
@@ -77,7 +77,7 @@
     <ClCompile Include="audio_mixer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="section.cpp">
+    <ClCompile Include="department.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="source.cpp">
@@ -94,6 +94,5 @@
     <ResourceCompile Include="deployment.rc">
       <Filter>Resource Files</Filter>
     </ResourceCompile>
-
   </ItemGroup>
 </Project>

@@ -36,10 +36,10 @@ namespace windowing_win32
 
          comptr < IMalloc >                m_pmalloc;
          comptr < IShellFolder >           m_pfolderDesktop;
-         comptr < IImageList >             m_pilSmall;
-         comptr < IImageList >             m_pilLarge;
-         comptr < IImageList >             m_pilExtraLarge;
-         comptr < IImageList >             m_pilJumbo;
+         comptr < IImageList >             m_pimagelistSmall;
+         comptr < IImageList >             m_pimagelistLarge;
+         comptr < IImageList >             m_pimagelistExtraLarge;
+         comptr < IImageList >             m_pimagelistJumbo;
          comptr<IKnownFolderManager>       m_knownfoldermanager;
          comptr < IShellFolder >           m_pshellfolder;
          itemidlist                        m_itemidlist;

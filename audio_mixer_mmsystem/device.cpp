@@ -1,4 +1,8 @@
 #include "framework.h"
+#include "app-core/multimedia/audio_mixer/user/control.h"
+#include "device.h"
+#include "destination.h"
+#include "control.h"
 
 
 namespace multimedia

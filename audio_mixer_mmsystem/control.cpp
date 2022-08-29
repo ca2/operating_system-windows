@@ -1,4 +1,15 @@
 #include "framework.h"
+#include "control.h"
+#include "source.h"
+#include "device.h"
+#include "audio_mixer.h"
+#include "destination.h"
+#include "app-core/multimedia/audio_mixer/callback.h"
+#include "app-core/multimedia/audio_mixer/user/level_control.h"
+#include "app-core/multimedia/audio_mixer/control_data_volume.h"
+#include "app-core/multimedia/audio_mixer/user/label.h"
+#include "app-core/multimedia/audio_mixer/user/toggle_control.h"
+#include "app-core/multimedia/audio_mixer/control_data_switch.h"
 
 
 namespace multimedia

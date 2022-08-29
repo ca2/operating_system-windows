@@ -1,4 +1,6 @@
 #include "framework.h"
+#include "interaction.h"
+#include "audio_mixer.h"
 
 
 namespace multimedia

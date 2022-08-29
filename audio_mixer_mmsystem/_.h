@@ -32,6 +32,7 @@ namespace multimedia
       //class thread;
       class audio_mixer;
       class department;
+      class interaction;
 
 
    } // namespace audio_mixer_mmsystem

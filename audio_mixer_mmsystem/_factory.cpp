@@ -1,4 +1,10 @@
 #include "framework.h"
+#include "control.h"
+#include "line_info.h"
+#include "source.h"
+#include "audio_mixer.h"
+#include "device.h"
+#include "destination.h"
 
 
 //namespace multimedia

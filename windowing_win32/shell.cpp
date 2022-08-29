@@ -269,13 +269,13 @@ namespace windowing_win32
 
       SHGetMalloc(&pgetfileimage->m_pmalloc);
 
-      SHGetImageList(SHIL_SMALL, IID_IImageList, (void **)&pgetfileimage->m_pilSmall);
+      SHGetImageList(SHIL_SMALL, IID_IImageList, (void **)&pgetfileimage->m_pimagelistSmall);
 
-      SHGetImageList(SHIL_LARGE, IID_IImageList, (void **)&pgetfileimage->m_pilLarge);
+      SHGetImageList(SHIL_LARGE, IID_IImageList, (void **)&pgetfileimage->m_pimagelistLarge);
 
-      SHGetImageList(SHIL_EXTRALARGE, IID_IImageList, (void **)&pgetfileimage->m_pilExtraLarge);
+      SHGetImageList(SHIL_EXTRALARGE, IID_IImageList, (void **)&pgetfileimage->m_pimagelistExtraLarge);
 
-      SHGetImageList(SHIL_JUMBO, IID_IImageList, (void **)&pgetfileimage->m_pilJumbo);
+      SHGetImageList(SHIL_JUMBO, IID_IImageList, (void **)&pgetfileimage->m_pimagelistJumbo);
 
       return pgetfileimage;
 
@@ -1813,9 +1813,9 @@ namespace windowing_win32
    void shell::add_icon(int iSize, HICON hicon, _get_file_image_ & getfileimage)
    {
 
-      synchronous_lock synchronouslock(m_pil[iSize]->mutex());
+      synchronous_lock synchronouslock(m_pimagelist[iSize]->mutex());
 
-      synchronous_lock slHover(m_pilHover[iSize]->mutex());
+      synchronous_lock slHover(m_pimagelistHover[iSize]->mutex());
 
       auto pwindowingicon = __create_new < ::windowing_win32::icon >();
 
@@ -1829,14 +1829,14 @@ namespace windowing_win32
 
          image_source imagesource(pdrawicon);
 
-         //   m_pil[iSize]->set(getfileimage.m_iImage, imagesource);
+         //   m_pimagelist[iSize]->set(getfileimage.m_iImage, imagesource);
 
          //}
 
          //if (getfileimage.m_iImage == 14)
          //{
 
-         //   //iImage = m_pil[iSize]->add(picon);
+         //   //iImage = m_pimagelist[iSize]->add(picon);
 
          //}
 
@@ -1859,25 +1859,25 @@ namespace windowing_win32
       if (iSize <= 16)
       {
 
-         add_system_icon(iSize, getfileimage.m_pilSmall, iIcon, getfileimage);
+         add_system_icon(iSize, getfileimage.m_pimagelistSmall, iIcon, getfileimage);
 
       }
       else if (iSize <= 32)
       {
 
-         add_system_icon(iSize, getfileimage.m_pilLarge, iIcon, getfileimage);
+         add_system_icon(iSize, getfileimage.m_pimagelistLarge, iIcon, getfileimage);
 
       }
       else if (iSize <= 48)
       {
 
-         add_system_icon(iSize, getfileimage.m_pilExtraLarge, iIcon, getfileimage);
+         add_system_icon(iSize, getfileimage.m_pimagelistExtraLarge, iIcon, getfileimage);
 
       }
       else
       {
 
-         add_system_icon(iSize, getfileimage.m_pilJumbo, iIcon, getfileimage);
+         add_system_icon(iSize, getfileimage.m_pimagelistJumbo, iIcon, getfileimage);
 
       }
 

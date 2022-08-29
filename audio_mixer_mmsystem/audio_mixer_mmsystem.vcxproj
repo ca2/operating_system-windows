@@ -769,7 +769,7 @@
     <ClInclude Include="interaction.h" />
     <ClInclude Include="line_info.h" />
     <ClInclude Include="audio_mixer.h" />
-    <ClInclude Include="section.h" />
+    <ClInclude Include="department.h" />
     <ClInclude Include="source.h" />
     <ClInclude Include="thread.h" />
     <ClInclude Include="_library.h" />
@@ -792,7 +792,7 @@
     <ClCompile Include="interaction.cpp" />
     <ClCompile Include="line_info.cpp" />
     <ClCompile Include="audio_mixer.cpp" />
-    <ClCompile Include="section.cpp" />
+    <ClCompile Include="department.cpp" />
     <ClCompile Include="source.cpp" />
     <ClCompile Include="thread.cpp" />
     <ClCompile Include="_.cpp" />

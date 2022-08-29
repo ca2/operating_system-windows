@@ -1,4 +1,5 @@
 #include "framework.h"
+#include "line_info.h"
 
 
 namespace multimedia

@@ -1,4 +1,8 @@
 #include "framework.h"
+#include "source.h"
+#include "device.h"
+#include "control.h"
+#include "destination.h"
 
 
 namespace multimedia
@@ -11,8 +15,10 @@ namespace multimedia
 
       source::source()
       {
+
          m_pdestination = nullptr;
          m_mixerlinecontrols.pamxctrl = nullptr;
+
       }
 
       source::~source()

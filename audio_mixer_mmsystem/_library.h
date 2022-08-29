@@ -8,25 +8,25 @@
 #include "multimedia_mmsystem/_library.h"
 
 
-#include "interaction.h"
-#include "audio_mixer.h"
-#include "control.h"
-#include "source.h"
-#include "destination.h"
-#include "device.h"
-#include "line_info.h"
-
-
-//#include "callback.h"
-
-
-#include "thread.h"          
-
-
-#include "section.h"
-
-
-#include "factory_exchange.h"
-
-
-
+//#include "interaction.h"
+//#include "audio_mixer.h"
+//#include "control.h"
+//#include "source.h"
+//#include "destination.h"
+//#include "device.h"
+//#include "line_info.h"
+//
+//
+////#include "callback.h"
+//
+//
+//#include "thread.h"          
+//
+//
+//#include "section.h"
+//
+//
+//#include "factory_exchange.h"
+//
+//
+//

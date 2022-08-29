@@ -1,4 +1,6 @@
 #include "framework.h"
+#include "destination.h"
+#include "device.h"
 
 
 namespace multimedia
