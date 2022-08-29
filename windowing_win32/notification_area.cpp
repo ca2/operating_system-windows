@@ -13,6 +13,7 @@ Contact : nish@voidnish.com
 
 #include "aura/graphics/image/list.h"
 #include "aura/graphics/image/icon.h"
+#include "aura/graphics/image/drawing.h"
 
 
 namespace windowing_win32
