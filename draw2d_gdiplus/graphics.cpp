@@ -3,6 +3,9 @@
 
 #include "acme/primitive/mathematics/mathematics.h"
 #include "aura/graphics/image/context_image.h"
+#include "acme/primitive/geometry2d/_geometry2d.h"
+#include "acme/primitive/geometry2d/_collection.h"
+#include "acme/primitive/geometry2d/_defer_shape.h"
 
 
 #undef new

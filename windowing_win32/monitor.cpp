@@ -3,9 +3,12 @@
 #include "window.h"
 #include "windowing.h"
 #include "monitor.h"
-
+#include "aura/operating_system.h"
 
 #include <HighLevelMonitorConfigurationAPI.h>
+
+
+CLASS_DECL_ACME void TRACELASTERROR();
 
 
 ::u32 mc_color_kelvin(MC_COLOR_TEMPERATURE e);
@@ -185,7 +188,6 @@ namespace windowing_win32
       preempt(500_ms);
 
       //MC_COLOR_TEMPERATURE e = kelvin_mc_color(dwTemperature);
-
 
 
       //if (!SetMonitorColorTemperature(monitor.hPhysicalMonitor, e))
@@ -481,15 +483,6 @@ namespace windowing_win32
 //   }
 
 
-   CLASS_DECL_WINDOWING_WIN32 HMONITOR get_primary_monitor_handle()
-   {
-
-      const POINT pointZero = { 0,0 };
-
-      return MonitorFromPoint(pointZero, MONITOR_DEFAULTTOPRIMARY);
-
-   }
-
 
 
 } // namespace windowing_win32
@@ -589,6 +582,22 @@ MC_COLOR_TEMPERATURE kelvin_mc_color(::u32 kelvin)
 
 
 
+namespace windows
+{
+
+
+   CLASS_DECL_WINDOWING_WIN32 HMONITOR get_primary_monitor_handle()
+   {
+
+      const POINT pointZero = { 0,0 };
+
+      return MonitorFromPoint(pointZero, MONITOR_DEFAULTTOPRIMARY);
+
+   }
+
+
+
+} // namespace windows
 
 
 

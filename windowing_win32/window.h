@@ -3,6 +3,7 @@
 
 
 #include "aura/windowing/window.h"
+#include "aura/operating_system.h"
 
 
 namespace windowing_win32

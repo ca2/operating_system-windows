@@ -45,8 +45,6 @@ CLASS_DECL_ACME bool ensure_file_size_handle(HANDLE h, u64 iSize);
 // } // namespace str
 
 
-CLASS_DECL_ACME void TRACELASTERROR();
-
 
 
 //#include "acme_windows_common/comptr.h"

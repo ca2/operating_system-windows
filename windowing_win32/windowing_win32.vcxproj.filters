@@ -112,6 +112,9 @@
     <ClCompile Include="desktop_environment.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="top_level_enum.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -218,6 +221,9 @@
     <Filter Include="Source Files\window">
       <UniqueIdentifier>{6a662171-925d-48c6-9811-c391e2bf3604}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{12ebc0c7-2d84-4f0c-98e0-00e8f1ce0863}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="windowing_win32.def">
@@ -225,6 +231,8 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="deployment.rc" />
+    <ResourceCompile Include="deployment.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
   </ItemGroup>
 </Project>

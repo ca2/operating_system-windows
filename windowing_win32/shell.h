@@ -1,6 +1,8 @@
 #pragma once
 
 
+#include "acme_windows_common/comptr.h"
+#include "acme_windows/itemidlist.h"
 #include <shlobj.h>
 #include <Shellapi.h>
 #include <CommonControls.h>
@@ -31,18 +33,19 @@ namespace windowing_win32
          public ::user::shell::_get_file_image_
       {
 
-         comptr < IMalloc >               m_pmalloc;
-         comptr < IShellFolder >          m_pfolderDesktop;
-         comptr < IImageList >            m_pilSmall;
-         comptr < IImageList >            m_pilLarge;
-         comptr < IImageList >            m_pilExtraLarge;
-         comptr < IImageList >            m_pilJumbo;
-         comptr<IKnownFolderManager>      m_knownfoldermanager;
-         comptr < IShellFolder >          m_pshellfolder;
-         itemidlist                       m_itemidlist;
-         itemidlist                       m_itemidlistFolder;
-         itemidlist                       m_itemidlistChild;
-         wstring                          m_wstrExtra;
+
+         comptr < IMalloc >                m_pmalloc;
+         comptr < IShellFolder >           m_pfolderDesktop;
+         comptr < IImageList >             m_pilSmall;
+         comptr < IImageList >             m_pilLarge;
+         comptr < IImageList >             m_pilExtraLarge;
+         comptr < IImageList >             m_pilJumbo;
+         comptr<IKnownFolderManager>       m_knownfoldermanager;
+         comptr < IShellFolder >           m_pshellfolder;
+         itemidlist                        m_itemidlist;
+         itemidlist                        m_itemidlistFolder;
+         itemidlist                        m_itemidlistChild;
+         wstring                                      m_wstrExtra;
 
       };
 

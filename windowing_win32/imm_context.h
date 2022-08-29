@@ -1,6 +1,9 @@
 #pragma once
 
 
+#include "aura/operating_system.h"
+
+
 class CLASS_DECL_WINDOWING_WIN32 imm_context
 {
 public:

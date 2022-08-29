@@ -12,7 +12,12 @@
 #include "aura/message/user.h"
 #include "top_level_enum.h"
 #include "system_interaction.h"
+#include "aura/user/user/user.h"
+#include "aura/user/user/system.h"
+#include "acme_windows_common/comptr.h"
+#include "window_util.h"
 #include <dwmapi.h>
+
 
 #define IDI_ICON_WINDOW 256
 HRESULT SetTouchDisableProperty(HWND hwnd, BOOL fDisableTouch);
@@ -1293,7 +1298,7 @@ namespace windowing_win32
    void window::show_window(const ::e_display & edisplay, const ::e_activation & eactivation)
    {
 
-      auto iShowWindow = windows_show_window(edisplay, eactivation);
+      auto iShowWindow = windows::show_window(edisplay, eactivation);
 
       HWND hwnd = get_hwnd();
 
@@ -1621,7 +1626,7 @@ namespace windowing_win32
 
       itask_t itask = get_itask();
 
-      HWND hwndCapture = ::windows_get_mouse_capture(itask);
+      HWND hwndCapture = ::windows::get_mouse_capture(itask);
 
       HWND hwnd = get_hwnd();
 
@@ -6109,7 +6114,7 @@ namespace windowing_win32
 
          }
 
-         auto hwndCapture = windows_get_mouse_capture(itask);
+         auto hwndCapture = windows::get_mouse_capture(itask);
 
          if (hwndCapture != nullptr)
          {
@@ -6393,31 +6398,38 @@ namespace windowing_win32
 } // namespace windowing_win32
 
 
-HWND windows_get_mouse_capture(itask_t itask)
+namespace windows
 {
 
-   GUITHREADINFO info = {};
 
-   info.cbSize = sizeof(GUITHREADINFO);
-
-   HWND hwndCapture;
-
-   if (GetGUIThreadInfo((DWORD)itask, &info))
+   HWND get_mouse_capture(itask_t itask)
    {
 
-      hwndCapture = info.hwndCapture;
+      GUITHREADINFO info = {};
+
+      info.cbSize = sizeof(GUITHREADINFO);
+
+      HWND hwndCapture;
+
+      if (GetGUIThreadInfo((DWORD)itask, &info))
+      {
+
+         hwndCapture = info.hwndCapture;
+
+      }
+      else
+      {
+
+         hwndCapture = ::GetCapture();
+
+      }
+
+      return hwndCapture;
 
    }
-   else
-   {
 
-      hwndCapture = ::GetCapture();
 
-   }
-
-   return hwndCapture;
-
-}
+} // namespace windowss
 
 
 

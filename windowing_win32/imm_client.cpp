@@ -1,6 +1,7 @@
 #include "framework.h"
 #include "imm_client.h"
 #include "imm_context.h"
+#include "aura/message/user.h"
 
 
 #ifdef WINDOWS_DESKTOP

@@ -1,6 +1,9 @@
 #pragma once
 
 
+#include "aura/operating_system.h"
+
+
 namespace windowing_win32
 {
 
@@ -60,8 +63,8 @@ namespace windowing_win32
    public:
 
 
-      __pointer(hwnd_array)         m_phwnda;
-      bool                          m_bVisible;
+      __pointer(::windows::hwnd_array)    m_phwnda;
+      bool                                m_bVisible;
 
 
       top_level_enum(bool bDestkop = true, bool bVisible = true);

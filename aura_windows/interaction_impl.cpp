@@ -2,13 +2,12 @@
 #include "aura/operating_system.h"
 #include "system_interaction.h"
 #include "aura/message.h"
-//#include "aura/user/interaction_thread.h"
-//#include "aura/node/operating_system/windows/windowing.h"
 #include "acme/constant/timer.h"
-//#include "apex/platform/app_core.h"
 #include "interaction_impl.h"
 #include "aura/graphics/draw2d/graphics.h"
 #include "aura/windowing/window.h"
+#include "aura/message/user.h"
+#include "aura/user/user/interaction.h"
 
 
 CLASS_DECL_AURA_WINDOWS int g_iMouseDown = 0;

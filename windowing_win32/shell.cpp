@@ -12,6 +12,8 @@
 //#include "apex/compress/zip/context.h"
 #include "acme/filesystem/filesystem/acme_directory.h"
 #include "acme_windows/known_folder_struct.h"
+#include "aura/user/user/user.h"
+#include "aura_windows/node.h"
 #include <thumbcache.h>
 
 

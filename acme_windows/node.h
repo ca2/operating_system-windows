@@ -7,6 +7,10 @@
 #pragma once
 
 
+#include "acme_windows_common/node.h"
+#include "acme/operating_system.h"
+
+
 namespace acme_windows
 {
 

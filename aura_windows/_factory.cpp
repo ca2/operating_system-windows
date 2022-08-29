@@ -1,4 +1,8 @@
 #include "framework.h"
+#include "shell_open.h"
+#include "node.h"
+#include "interaction_impl.h"
+
 
 
 //BEGIN_FACTORY(aura_windows)

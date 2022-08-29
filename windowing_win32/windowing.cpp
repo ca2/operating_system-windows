@@ -7,9 +7,12 @@
 #include "keyboard.h"
 #include "display.h"
 #include "system_interaction.h"
-//#include "buffer.h"
 #include "top_level_enum.h"
+#include "aura/message/user.h"
+#include "win32.h"
+#include "window_util.h"
 #include "_impl.h"
+
 
 
 wparam MapLeftRightKeys(wparam vk, lparam lParam);
@@ -512,7 +515,7 @@ namespace windowing_win32
    }
 
 
-   void windowing::get_app_wnda(hwnd_array & wnda)
+   void windowing::get_app_wnda(::windows::hwnd_array & wnda)
    {
 
       EnumWindows(&windowing::GetAppsEnumWindowsProc, (lparam)&wnda);
@@ -665,7 +668,7 @@ namespace windowing_win32
 
       }
 
-      auto hwndCapture = ::windows_get_mouse_capture(itask);
+      auto hwndCapture = ::windows::get_mouse_capture(itask);
 
       if (::is_null(hwndCapture))
       {
@@ -833,7 +836,7 @@ namespace windowing_win32
 
       HWND hwndExclude = __hwnd(oswindowExclude);
 
-      auto phwnda = get_top_level_windows();
+      auto phwnda = ::windows::get_top_level_windows();
 
       if (phwnda->is_empty())
       {
@@ -886,27 +889,10 @@ namespace windowing_win32
    }
 
 
-   hwnd_array get_hwnda(const ::user::interaction_ptra & ptra)
+   ::windows::hwnd_array windowing::_get_hwnda(const ::user::primitive_pointer_array & primitivepointera)
    {
 
-      hwnd_array hwnda;
-
-      for (i32 i = 0; i < ptra.get_size(); i++)
-      {
-
-         hwnda.add(__hwnd(ptra.element_at(i)->oswindow()));
-
-      }
-
-      return hwnda;
-
-   }
-
-
-   hwnd_array windowing::_get_hwnda(const ::user::primitive_pointer_array & primitivepointera)
-   {
-
-      hwnd_array hwnda;
+      ::windows::hwnd_array hwnda;
 
       for (i32 i = 0; i < primitivepointera.primitive_count(); i++)
       {
@@ -921,16 +907,17 @@ namespace windowing_win32
 
    }
 
+
    __pointer(::windowing::window) windowing::window_from_point(::aura::application * papp, const ::point_i32 & point)
    {
 
       auto uia = *papp->m_puserinteractiona;
 
-      hwnd_array hwnda;
+      ::windows::hwnd_array hwnda;
 
-      hwnda = get_hwnda(uia);
+      hwnda = ::windows::get_hwnda(uia);
 
-      window_util::SortByZOrder(hwnda);
+      ::windows::window_util::SortByZOrder(hwnda);
 
       for (i32 i = 0; i < hwnda.get_count(); i++)
       {
@@ -998,7 +985,7 @@ namespace windowing_win32
    BOOL CALLBACK windowing::GetAppsEnumWindowsProc(HWND hwnd, LPARAM lParam)
    {
 
-      hwnd_array * phwnda = (hwnd_array *) lParam;
+      ::windows::hwnd_array * phwnda = (::windows::hwnd_array *) lParam;
 
       phwnda->add(hwnd);
 

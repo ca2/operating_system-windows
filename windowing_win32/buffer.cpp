@@ -5,7 +5,7 @@
 #include "windowing.h"
 #include "display.h"
 #include "window.h"
-//#define REDRAW_HINTING
+#include "aura/user/user/interaction_impl.h"
 #ifdef REDRAW_HINTING
 #include <gdiplus.h>
 #endif
@@ -258,7 +258,7 @@ namespace windowing_win32
       {
 
 
-         HBITMAP hbitmap = create_windows_dib(sizeMonitor, &iScan, &pcolorref);
+         HBITMAP hbitmap = ::windows::create_windows_dib(sizeMonitor, &iScan, &pcolorref);
 
          if (hbitmap == nullptr
             || pcolorref == nullptr

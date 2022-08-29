@@ -3,7 +3,7 @@
 #include "windowing.h"
 
 
-namespace windowing_win32
+namespace windows
 {
 
 
@@ -200,39 +200,6 @@ namespace windowing_win32
    }
 
 
-   HICON windowing::_load_icon(string_array & straMatter, string strIcon, int cx, int cy)
-   {
-
-      HICON hicon = nullptr;
-
-      ::file::path path;
-
-      auto pcontext = get_context();
-
-      for (auto & strMatter : straMatter)
-      {
-
-         path = strMatter;
-
-         path = pcontext->m_papexcontext->dir().matter(path / strIcon);
-
-         path = pcontext->m_papexcontext->get_matter_cache_path(path);
-
-         hicon = (HICON) ::LoadImageW(nullptr, wstring(path), IMAGE_ICON, cx, cy, LR_LOADFROMFILE);
-
-         if (hicon != nullptr)
-         {
-
-            break;
-
-         }
-
-      }
-
-      return hicon;
-
-   }
-
 
 
 
@@ -283,5 +250,49 @@ namespace windowing_win32
    }
 
 
+} // namespace windows
+
+
+namespace windowing_win32
+{
+
+
+   HICON windowing::_load_icon(string_array & straMatter, string strIcon, int cx, int cy)
+   {
+
+      HICON hicon = nullptr;
+
+      ::file::path path;
+
+      auto pcontext = get_context();
+
+      for (auto & strMatter : straMatter)
+      {
+
+         path = strMatter;
+
+         path = pcontext->m_papexcontext->dir().matter(path / strIcon);
+
+         path = pcontext->m_papexcontext->get_matter_cache_path(path);
+
+         hicon = (HICON) ::LoadImageW(nullptr, wstring(path), IMAGE_ICON, cx, cy, LR_LOADFROMFILE);
+
+         if (hicon != nullptr)
+         {
+
+            break;
+
+         }
+
+      }
+
+      return hicon;
+
+   }
+
+
 } // namespace windowing_win32
+
+
+
 

@@ -7,6 +7,7 @@
 #include <Shobjidl.h>
 #include <Shellapi.h>
 
+#include "aura/user/user/interaction_impl.h"
 
 
 namespace aura_windows

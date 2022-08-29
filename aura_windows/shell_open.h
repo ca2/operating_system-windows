@@ -2,6 +2,7 @@
 
 #include "aura/operating_system.h"
 #include <ddeml.h>
+#include "aura/platform/shell_open.h"
 
 
 namespace aura_windows

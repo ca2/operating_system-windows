@@ -2,6 +2,7 @@
 // recreated by Camilo 2021-02-02 02:43
 #include "framework.h"
 #include "cursor.h"
+#include "win32.h"
 
 
 TCHAR * windows_get_system_cursor(enum_cursor ecursor);
@@ -75,7 +76,7 @@ namespace windowing_win32
    void cursor::_create_from_image(const ::image * pimage, ::i32 xHotspot, ::i32 yHotspot)
    {
 
-      HCURSOR hcursor = (HCURSOR) create_alpha_cursor(pimage, xHotspot, yHotspot);
+      HCURSOR hcursor = (HCURSOR)::windows::create_alpha_cursor(pimage, xHotspot, yHotspot);
 
       if (!hcursor)
       {

@@ -2,6 +2,7 @@
 #if !BROAD_PRECOMPILED_HEADER
 #include "aura/user/user/_user.h"
 #endif
+#include "window_util.h"
 
 
 #ifdef APPLEIOS
@@ -18,7 +19,7 @@ HWND GetWindow(HWND window, int iParentHood);
 #endif
 
 
-namespace windowing_win32
+namespace windows
 {
 
 
@@ -989,6 +990,25 @@ namespace windowing_win32
       {
 
          hwnda.add(__hwnd(a.interaction_at(i)->oswindow()));
+
+      }
+
+      return hwnda;
+
+   }
+
+
+
+
+   ::windows::hwnd_array get_hwnda(const ::user::interaction_ptra & ptra)
+   {
+
+      ::windows::hwnd_array hwnda;
+
+      for (i32 i = 0; i < ptra.get_size(); i++)
+      {
+
+         hwnda.add(__hwnd(ptra.element_at(i)->oswindow()));
 
       }
 

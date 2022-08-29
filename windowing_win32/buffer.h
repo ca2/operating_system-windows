@@ -5,6 +5,7 @@
 
 #include "aura/graphics/graphics/_.h"
 #include "aura/graphics/graphics/_graphics.h"
+#include "aura/operating_system.h"
 
 
 namespace windowing_win32

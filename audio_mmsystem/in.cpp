@@ -10,7 +10,7 @@ namespace audio_mmsystem
 
       m_pencoder = nullptr;
       m_hwavein = nullptr;
-      m_estate = e_state_initial;
+      m_einstate = ::wave::e_in_state_initial;
       m_bResetting = false;
 
    }
@@ -75,7 +75,7 @@ namespace audio_mmsystem
    void in::in_open(i32 iBufferCount, i32 iBufferSampleCount)
    {
 
-      if(m_hwavein != nullptr && m_estate != e_state_initial)
+      if(m_hwavein != nullptr && m_einstate != ::wave::e_in_state_initial)
       {
 
          in_initialize_encoder();
@@ -94,7 +94,7 @@ namespace audio_mmsystem
 
       ASSERT(m_hwavein == nullptr);
 
-      ASSERT(m_estate == e_state_initial);
+      ASSERT(m_einstate == ::wave::e_in_state_initial);
 
       array < ::wave::WAVE_FORMAT > waveformata;
 
@@ -267,7 +267,7 @@ namespace audio_mmsystem
 
          in_initialize_encoder();
 
-         //m_estate = e_state_opened;
+         //m_einstate = ::wave::e_in_state_opened;
 
          //in_close();
 
@@ -275,7 +275,7 @@ namespace audio_mmsystem
 
       }
 
-      m_estate = e_state_opened;
+      m_einstate = ::wave::e_in_state_opened;
 
       //return ::success;
 
@@ -289,7 +289,7 @@ namespace audio_mmsystem
 
       ::e_status estatus;
 
-      if (m_estate != e_state_opened && m_estate != state_stopped)
+      if (m_einstate != ::wave::e_in_state_opened && m_einstate != ::wave::e_in_state_stopped)
       {
 
          return;
@@ -333,7 +333,7 @@ namespace audio_mmsystem
 
       m_hwavein = nullptr;
 
-      m_estate = e_state_initial;
+      m_einstate = ::wave::e_in_state_initial;
 
       //return ::success;
 
@@ -345,16 +345,16 @@ namespace audio_mmsystem
 
       single_lock sLock(mutex(), true);
 
-      if (m_estate == state_recording)
+      if (m_einstate == ::wave::e_in_state_recording)
       {
 
          return;
 
       }
 
-      //ASSERT(m_estate == e_state_opened || m_estate == state_stopped);
+      //ASSERT(m_einstate == ::wave::e_in_state_opened || m_einstate == state_stopped);
 
-      if (m_estate != e_state_opened && m_estate != state_stopped)
+      if (m_einstate != ::wave::e_in_state_opened && m_einstate != ::wave::e_in_state_stopped)
       {
 
          //return ::success;
@@ -376,7 +376,7 @@ namespace audio_mmsystem
 
       }
 
-      m_estate = state_recording;
+      m_einstate = ::wave::e_in_state_recording;
 
       //return ::success;
 
@@ -388,14 +388,14 @@ namespace audio_mmsystem
 
       single_lock sLock(mutex(), true);
 
-      if (m_estate != state_recording)
+      if (m_einstate != ::wave::e_in_state_recording)
       {
        
          throw ::exception(error_wrong_state);
 
       }
 
-      m_estate = e_state_stopping;
+      m_einstate = ::wave::e_in_state_stopping;
 
       MMRESULT mmresult = waveInStop(m_hwavein);
 
@@ -408,7 +408,7 @@ namespace audio_mmsystem
 
       }
 
-      m_estate = state_stopped;
+      m_einstate = ::wave::e_in_state_stopped;
 
       m_eventStopped.SetEvent();
 
@@ -462,7 +462,7 @@ namespace audio_mmsystem
 
       }
 
-      if(m_estate == state_recording)
+      if(m_einstate == ::wave::e_in_state_recording)
       {
 
          in_stop();
@@ -482,7 +482,7 @@ namespace audio_mmsystem
 
       }
 
-      m_estate = e_state_opened;
+      m_einstate = ::wave::e_in_state_opened;
 
       m_bResetting = false;
 

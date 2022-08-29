@@ -1,7 +1,10 @@
 #pragma once
 
 
-namespace windowing_win32
+#include "aura/operating_system.h"
+
+
+namespace windows
 {
 
 
@@ -108,7 +111,7 @@ namespace windowing_win32
    CLASS_DECL_WINDOWING_WIN32 hwnd_array get_hwnda(const ::user::interaction_array & a);
 
 
-} // namespace windowing_win32
+} // namespace windows
 
 
 

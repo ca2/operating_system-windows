@@ -3,7 +3,7 @@
 
 
 #include "app-core/multimedia/_library.h"
-#include "aura/user/user/_user.h"
+#include "aura/user/user/_component.h"
 #include "app-core/multimedia/audio_mixer/_component.h"
 #include "multimedia_mmsystem/_library.h"
 

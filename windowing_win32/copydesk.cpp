@@ -2,6 +2,9 @@
 #include "apex/operating_system.h"
 #include "copydesk.h"
 #include "aura/graphics/image/image.h"
+#include "aura/operating_system.h"
+#include <ShlObj.h>
+#include <Shellapi.h>
 
 
 namespace windowing_win32

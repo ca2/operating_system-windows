@@ -2,6 +2,7 @@
 #include "framework.h"
 #include "acme/operating_system.h"
 #include "aura/graphics/image/image.h"
+#include "node.h"
 #include <gdiplus.h>
 
 

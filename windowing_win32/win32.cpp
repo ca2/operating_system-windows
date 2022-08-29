@@ -4,6 +4,8 @@
 #endif
 #include "windowing.h"
 #include "top_level_enum.h"
+#include "win32.h"
+#include "window_util.h"
 
 
 #define ___TEMP_CLASS_NAME_SIZE 4096
@@ -25,65 +27,6 @@
 
 namespace windowing_win32
 {
-
-   /// from top to bottom
-   CLASS_DECL_WINDOWING_WIN32 __pointer(hwnd_array) get_top_level_windows(bool bDesktop, bool bVisible)
-   {
-
-      /// from top to bottom
-      top_level_enum toplevelenum(bDesktop, bVisible);
-
-      return toplevelenum.m_phwnda;
-
-   }
-
-
-   top_level_enum::top_level_enum(bool bDesktop, bool bVisible) :
-      m_bVisible(bVisible)
-   {
-
-      m_phwnda = __new(hwnd_array);
-
-      if (bDesktop)
-      {
-
-         ::EnumDesktopWindows(nullptr, &top_level_enum::EnumWindowsProc, (lparam)this);
-
-      }
-      else
-      {
-
-         ::EnumWindows(&top_level_enum::EnumWindowsProc, (lparam)this);
-
-      }
-
-   }
-
-
-   top_level_enum::~top_level_enum()
-   {
-
-
-   }
-
-
-   BOOL CALLBACK top_level_enum::EnumWindowsProc(HWND hwnd, LPARAM lParam)
-   {
-
-      top_level_enum * ptoplevelenum = (top_level_enum *)lParam;
-
-      if (ptoplevelenum->m_bVisible && !IsWindowVisible(hwnd))
-      {
-
-         return true;
-
-      }
-
-      ptoplevelenum->m_phwnda->add(hwnd);
-
-      return true;
-
-   }
 
 
    void windowing::_window_create_caret(HWND hwnd, HBITMAP hbitmap)
@@ -126,6 +69,7 @@ namespace windowing_win32
    }
 
 
+
    CLASS_DECL_WINDOWING_WIN32 int erelative_get_window(enum_relative erelative)
    {
 
@@ -165,13 +109,7 @@ namespace windowing_win32
 
 
 
-#ifdef WINDOWS_DESKTOP
-
-   int windows_desktop1_main(HINSTANCE hInstance, int nCmdShow);
-
-#endif
-
-
+   int desktop1_main(HINSTANCE hInstance, int nCmdShow);
 
 
    ::color::color get_default_sys_color(u64 u)
@@ -202,6 +140,25 @@ namespace windowing_win32
 
 
 } // namespace windowing_win32
+
+
+namespace windows
+{
+
+
+   /// from top to bottom
+   CLASS_DECL_WINDOWING_WIN32 __pointer(::windows::hwnd_array) get_top_level_windows(bool bDesktop, bool bVisible)
+   {
+
+      /// from top to bottom
+      ::windowing_win32::top_level_enum toplevelenum(bDesktop, bVisible);
+
+      return toplevelenum.m_phwnda;
+
+   }
+
+
+} // namespace windows
 
 
 

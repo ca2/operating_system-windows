@@ -1,6 +1,8 @@
 // created by Camilo 2021-02-04 00:58 BRT CamiloSasuke<3ThomasBorregaardSoerensen
 #include "framework.h"
 #include "keyboard.h"
+#include "aura/message/user.h"
+#include "aura/operating_system.h"
 
 
 namespace windowing_win32

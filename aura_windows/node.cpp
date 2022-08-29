@@ -1,4 +1,8 @@
 #include "framework.h"
+#include "node.h"
+#include "acme_windows/registry.h"
+#include "aura/operating_system.h"
+#include <shellapi.h>
 
 
 namespace aura_windows

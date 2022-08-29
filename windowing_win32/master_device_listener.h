@@ -1,7 +1,12 @@
 // Created by camilo on 2022-02-20 12:05 <3ThomasBorregaardSørensen!! (Thomas Likes number 5)!
 #pragma once
 
+
+#include "aura/hardware/device_listener.h"
+#include "aura/operating_system.h"
+
 #include <dbt.h>
+
 
 namespace windowing_win32
 {

@@ -1,6 +1,9 @@
 #pragma once
 
 
+#include "aura/operating_system.h"
+
+
 namespace windowing_win32
 {
 

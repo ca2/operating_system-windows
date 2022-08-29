@@ -64,7 +64,7 @@ namespace windowing_win32
 
       index iMainMonitor = 0;
 
-      HMONITOR hmonitorPrimary = get_primary_monitor_handle();
+      HMONITOR hmonitorPrimary = ::windows::get_primary_monitor_handle();
 
       for (index iMonitor = 0; iMonitor < get_monitor_count(); iMonitor++)
       {
@@ -240,12 +240,11 @@ namespace windowing_win32
 
 
    index display::get_main_workspace(RECTANGLE_I32 * prectangle)
-
    {
 
       index iMainWkspace = 0;
 
-      HMONITOR hwkspacePrimary = get_primary_monitor_handle();
+      HMONITOR hwkspacePrimary = ::windows::get_primary_monitor_handle();
 
       for (index iWkspace = 0; iWkspace < get_workspace_count(); iWkspace++)
       {

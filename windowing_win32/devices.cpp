@@ -3,6 +3,7 @@
 #include "_windows.h"
 #include "windowing.h"
 #include "system_interaction.h"
+#include "aura/user/user/user.h"
 #include <initguid.h>
 #include <ks.h>
 #include <ksmedia.h>

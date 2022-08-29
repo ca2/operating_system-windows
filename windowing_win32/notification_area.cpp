@@ -9,7 +9,7 @@ Contact : nish@voidnish.com
 #include "notification_area.h"
 #include "icon.h"
 #include "apex_windows/process_data.h"
-
+#include <CommCtrl.h>
 
 #include "aura/graphics/image/list.h"
 #include "aura/graphics/image/icon.h"

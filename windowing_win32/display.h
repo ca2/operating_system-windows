@@ -4,6 +4,8 @@
 
 
 #include "aura/windowing/display.h"
+#include "aura/hardware/device_listener.h"
+#include "aura/operating_system.h"
 
 
 namespace windowing_win32

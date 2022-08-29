@@ -3,6 +3,7 @@
 
 
 #include "aura/windowing/windowing.h"
+#include "win32.h"
 
 
 namespace windowing_win32
@@ -23,7 +24,7 @@ namespace windowing_win32
 
 
       critical_section                 m_criticalsection;
-      window_map                       m_windowmap;
+      ::windows::window_map            m_windowmap;
       __pointer(class display)         m_pdisplay;
 
 //#ifdef WINDOWS_DESKTOP
@@ -59,7 +60,7 @@ namespace windowing_win32
 
       virtual HICON _load_icon(string_array& straMatter, string strIcon, int cx, int cy);
 
-      virtual hwnd_array _get_hwnda(const ::user::primitive_pointer_array& primitivepointera);
+      virtual ::windows::hwnd_array _get_hwnda(const ::user::primitive_pointer_array& primitivepointera);
 
       virtual ::windowing::window * window(oswindow oswindow) override;
 
@@ -138,7 +139,7 @@ namespace windowing_win32
       bool _is_window(HWND hwnd);
 
 
-      virtual void get_app_wnda(hwnd_array & wnda);
+      virtual void get_app_wnda(::windows::hwnd_array & wnda);
 
       __pointer(::windowing::window) window_from_point(::aura::application * papp, const ::point_i32 & point);
 

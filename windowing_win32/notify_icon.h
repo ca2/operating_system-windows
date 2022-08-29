@@ -1,18 +1,27 @@
 #pragma once
 
 
-#if defined (__APPLE__)
-#include "notify_icon_mm_bridge.h"
-#endif
+#include "aura/user/user/notify_icon.h"
 
 
+#include "aura/operating_system.h"
 
 
-#ifdef LINUX
-#include "apex/user/notify_icon_bridge.h"
-namespace linux { class appindicator; }
-#endif
+#include <shellapi.h>
 
+
+//#if defined (__APPLE__)
+//#include "notify_icon_mm_bridge.h"
+//#endif
+//
+//
+//
+//
+//#ifdef LINUX
+//#include "apex/user/notify_icon_bridge.h"
+//namespace linux { class appindicator; }
+//#endif
+//
 
 namespace windowing_win32
 {

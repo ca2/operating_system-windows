@@ -847,6 +847,7 @@
     <ClCompile Include="devices.cpp" />
     <ClCompile Include="master_device_listener.cpp" />
     <ClCompile Include="display.cpp" />
+    <ClCompile Include="top_level_enum.cpp" />
     <ClCompile Include="_factory.cpp" />
     <ClCompile Include="gdi.cpp" />
     <ClCompile Include="keyboard_hook.cpp" />

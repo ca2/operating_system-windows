@@ -3,6 +3,7 @@
 #include "aura/procedure.h"
 #include "system_interaction.h"
 #include "_windows.h"
+#include "aura/message/user.h"
 
 
 namespace windowing_win32

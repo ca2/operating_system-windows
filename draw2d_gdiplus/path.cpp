@@ -1,4 +1,6 @@
 #include "framework.h"
+#include "aura/graphics/write_text/text_out.h"
+#include "aura/graphics/write_text/draw_text.h"
 
 
 #undef new
