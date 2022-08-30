@@ -1,5 +1,5 @@
 #include "framework.h"
-
+#include "midi.h"
 //
 //namespace music
 //{

@@ -1,6 +1,7 @@
 #pragma once
 
 
+#include "app-veriwell/multimedia/music/midi/object.h"
 
 
 namespace music

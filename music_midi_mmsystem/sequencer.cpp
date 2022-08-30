@@ -1,4 +1,11 @@
 #include "framework.h"
+#include "sequencer.h"
+#include "midi.h"
+#include "app-veriwell/multimedia/multimedia.h"
+#include "app-veriwell/multimedia/ikaraoke/lyric_event_v1.h"
+#include "app-veriwell/multimedia/music/midi/file.h"
+#include "app-veriwell/multimedia/music/midi/player_command.h"
+#include "app-veriwell/multimedia/music/midi/event.h"
 
 
 template < typename TYPE, std::size_t N >
@@ -746,7 +753,7 @@ namespace music
             if (m_psequence->has_operation())
             {
 
-               if (m_psequence->has_operation(operation_general_midi_reset))
+               if (m_psequence->has_operation(e_operation_general_midi_reset))
                {
 
                   const uchar gmModeOn[] =
@@ -762,12 +769,12 @@ namespace music
 
                   memcpy_dup(lpmidihdr->lpData, gmModeOn, sizeof(gmModeOn));
 
-                  m_psequence->clear_operation(operation_general_midi_reset);
+                  m_psequence->clear_operation(e_operation_general_midi_reset);
 
                   return ::success;
 
                }
-               else if (m_psequence->has_operation(operation_preroll))
+               else if (m_psequence->has_operation(e_operation_preroll))
                {
 
                   while (lpmidihdr->dwBufferLength - lpmidihdr->dwBytesRecorded > 16)
@@ -781,7 +788,7 @@ namespace music
                         if (estatus != success)
                         {
 
-                           m_psequence->clear_operation(operation_preroll);
+                           m_psequence->clear_operation(e_operation_preroll);
 
                            break;
 
@@ -806,7 +813,7 @@ namespace music
                      else if (estatus == ::success)
                      {
 
-                        m_psequence->clear_operation(operation_preroll);
+                        m_psequence->clear_operation(e_operation_preroll);
 
                         m_psequence->set_state(::music::midi::sequence::e_state_pre_rolled);
 
@@ -819,7 +826,7 @@ namespace music
                   }
 
                }
-               else if (m_psequence->has_operation(operation_tempo_change))
+               else if (m_psequence->has_operation(e_operation_tempo_change))
                {
 
                   ::music::midi::event event;
@@ -828,7 +835,7 @@ namespace music
 
                   StreamEvent(event.GetDelta(), &event, lpmidihdr, 0x7fffffff, 256);
 
-                  m_psequence->clear_operation(operation_tempo_change);
+                  m_psequence->clear_operation(e_operation_tempo_change);
 
                   return ::success;
 
@@ -1942,13 +1949,13 @@ namespace music
 
             }
             else if (pevent->GetFullType() == ::music::midi::meta &&
-               pevent->GetMetaType() == meta_end_of_track)
+               pevent->GetMetaType() == e_meta_end_of_track)
             {
                /* These are ignoreable since smfReadNextEvent()
                ** takes care of track merging
                */
             }
-            else if (::music::midi::meta == pevent->GetFullType() && meta_tempo == pevent->GetMetaType())
+            else if (::music::midi::meta == pevent->GetFullType() && e_meta_tempo == pevent->GetMetaType())
             {
 
                if (pevent->GetDataSize() != 3)
@@ -2494,7 +2501,7 @@ namespace music
 
                   int iBytesRecorded = 0;
 
-                  if (m_psequence->m_eeffect == effect_fade_in || m_psequence->m_eeffect == effect_fade_out)
+                  if (m_psequence->m_eeffect == e_effect_fade_in || m_psequence->m_eeffect == e_effect_fade_out)
                   {
 
                      double dVolume = m_psequence->get_fade_volume(m_psequence->tick_to_time(tkOp));
@@ -2506,7 +2513,7 @@ namespace music
 
                         byte bVolume = (byte)(m_psequence->m_iaRefVolume[iTrack] * maximum(0.0, minimum(1.0, dVolume)));
 
-                        if (abs((int)m_keyframe.rbControl[iTrack][control_change_volume] - (int)bVolume) < 3)
+                        if (abs((int)m_keyframe.rbControl[iTrack][e_control_change_volume] - (int)bVolume) < 3)
                         {
 
                            TRACE("too few difference!! opt-ed out");
@@ -2517,7 +2524,7 @@ namespace music
 
                            u32 uiFullType = control_change;
                            uiFullType |= iTrack & 0xf;
-                           u32 uiChB1 = control_change_volume;
+                           u32 uiChB1 = e_control_change_volume;
                            u32 uiChB2 = bVolume;
 
                            *lpdw++ = (u32)tkDelta;
@@ -2547,16 +2554,16 @@ namespace music
                      for (int iTrack = 0; iTrack < 16; iTrack++)
                      {
 
-                        if (m_keyframe.rbControl[iTrack][control_change_volume] == KF_EMPTY)
+                        if (m_keyframe.rbControl[iTrack][e_control_change_volume] == KF_EMPTY)
                         {
 
-                           m_keyframe.rbControl[iTrack][control_change_volume] = 100;
+                           m_keyframe.rbControl[iTrack][e_control_change_volume] = 100;
 
                         }
 
-                        clip(0, 127, m_keyframe.rbControl[iTrack][control_change_volume]);
+                        clip(0, 127, m_keyframe.rbControl[iTrack][e_control_change_volume]);
 
-                        int iVolume = m_keyframe.rbControl[iTrack][control_change_volume];
+                        int iVolume = m_keyframe.rbControl[iTrack][e_control_change_volume];
 
                         m_psequence->m_iaRefVolume.set_at_grow(iTrack, iVolume);
 

@@ -1,5 +1,8 @@
 #include "framework.h"
 #include "aura/message.h"
+#include "app-core/audio/audio/audio.h"
+#include "app-core/audio/wave/wave.h"
+#include "app-core/audio/wave/player.h"
 
 
 namespace audio_mmsystem

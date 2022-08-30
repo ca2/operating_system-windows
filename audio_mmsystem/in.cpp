@@ -1,4 +1,7 @@
 #include "framework.h"
+#include "app-core/audio/audio/audio.h"
+#include "app-core/audio/wave/wave.h"
+#include "app-core/audio/decode/encoder.h"
 
 
 namespace audio_mmsystem
@@ -511,7 +514,9 @@ namespace audio_mmsystem
 
          if(m_pencoder != nullptr)
          {
+            
             m_pencoder->EncoderWriteBuffer(lpwavehdr->lpData, lpwavehdr->dwBytesRecorded);
+
          }
 
          if(!in_is_resetting() && in_is_recording())

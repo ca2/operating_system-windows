@@ -3,6 +3,8 @@
 
 #include "app-veriwell/multimedia/_.h"
 #include "multimedia_mmsystem/_.h"
+#include "aura/operating_system.h"
+//#include <mmeapi.h>
 
 
 #if defined(_MUSIC_MIDI_MMSYSTEM_LIBRARY)
@@ -26,6 +28,9 @@ namespace music
 
          class midi;
          class sequencer;
+         class buffer_array;
+
+         ::e_status midi_in_get_error_text(MMRESULT mmr, string & strOsMessage, string & strMessage);
 
 
       } // namespace mmsystem
@@ -36,6 +41,11 @@ namespace music
 
 } // namespace music
 
+#define MIDIMSG(status,channel,data1,data2) ( (u32)((status<<4) | channel | (data1<<8) | (data2<<16)) )
+
+inline HMIDISTRM __hmidistream(const wparam & wparam) { return wparam.scast < HMIDISTRM >(); }
+inline LPMIDIHDR __lpmidihdr(const wparam & wparam) { return wparam.scast < LPMIDIHDR >(); }
+inline LPMIDIHDR __lpmidihdr(const lparam & lparam) { return lparam.raw_cast <LPMIDIHDR>(); }
 
 
 

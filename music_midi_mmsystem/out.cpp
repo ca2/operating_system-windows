@@ -1,6 +1,9 @@
 #include "framework.h"
-
+#include "out.h"
+#include "midi.h"
 #include "multimedia_mmsystem/translation.h"
+#include "app-veriwell/multimedia/music/midi/midi.h"
+
 
 
 namespace music
@@ -80,7 +83,7 @@ namespace music
          }
 
 
-         void     out::send_short_message(::music::midi::e_message emessage, int iChannel, int iData1, int iData2)
+         void     out::send_short_message(::music::midi::enum_message emessage, int iChannel, int iData1, int iData2)
          {
 
 //            return mmresult_to_status(midiOutShortMsg(m_hmidiout, MIDIMSG(((int)emessage) >> 4, iChannel, iData1, iData2)), "out::send_short_message");

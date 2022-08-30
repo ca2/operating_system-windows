@@ -1,7 +1,7 @@
 #pragma once
 
 
-#define MIDIMSG(status,channel,data1,data2) ( (u32)((status<<4) | channel | (data1<<8) | (data2<<16)) )
+
 
 
 namespace music

@@ -1,6 +1,9 @@
 #pragma once
 
 
+#include "app-core/audio/wave/in.h"
+
+
 namespace audio_mmsystem
 {
 

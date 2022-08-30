@@ -1,4 +1,7 @@
 #include "framework.h"
+#include "app-veriwell/multimedia/music/midi/sequence.h"
+#include "buffer.h"
+#include "sequencer.h"
 
 
 namespace music

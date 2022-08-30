@@ -1,6 +1,9 @@
 #pragma once
 
 
+#include "app-veriwell/multimedia/music/midi/sequencer.h"
+#include "buffer.h"
+
 
 namespace music
 {

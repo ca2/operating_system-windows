@@ -2,35 +2,32 @@
 #pragma once
 
 
-#include "app-veriwell/multimedia/_library.h"
-#include "multimedia_mmsystem/_library.h"
+//#include "app-veriwell/multimedia/_library.h"
+//#include "multimedia_mmsystem/_library.h"
 
 
-inline HMIDISTRM __hmidistream(const wparam& wparam) { return wparam.scast < HMIDISTRM >(); }
-inline LPMIDIHDR __lpmidihdr(const wparam& wparam) { return wparam.scast < LPMIDIHDR >(); }
-inline LPMIDIHDR __lpmidihdr(const lparam& lparam) { return lparam.raw_cast < LPMIDIHDR >(); }
-
-#include "translation.h"
-
-#include "buffer.h"
-
-//#include "file.h"
-
-//#include "sequence.h"
-
-#include "sequencer.h"
-
-//#include "player.h"
-
-#include "in.h"
-
-#include "out.h"
-
-//#include "sequence_thread.h"
-
-#include "midi.h"
-
-#include "factory_exchange.h"
-
-
-
+//
+//#include "translation.h"
+//
+//#include "buffer.h"
+//
+////#include "file.h"
+//
+////#include "sequence.h"
+//
+//#include "sequencer.h"
+//
+////#include "player.h"
+//
+//#include "in.h"
+//
+//#include "out.h"
+//
+////#include "sequence_thread.h"
+//
+//#include "midi.h"
+//
+//#include "factory_exchange.h"
+//
+//
+//
