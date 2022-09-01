@@ -1,5 +1,11 @@
 #include "framework.h"
+#include "node.h"
+#include "os_context.h"
+#include "acme_windows/acme_directory.h"
+#include "acme_windows/acme_file.h"
+#include "acme_windows/registry.h"
 #include "operating-system/operating-system-windows/deployment/resource1.h"
+#include <shellapi.h>
 
 
 CLASS_DECL_ACME_WINDOWS void shell_notify_folder_change(const wchar_t* pwsz);
@@ -9,7 +15,6 @@ CLASS_DECL_ACME_WINDOWS void shell_notify_assoc_change();
 
 namespace apex_windows
 {
-
 
 
    node::node()

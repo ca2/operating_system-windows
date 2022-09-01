@@ -97,7 +97,7 @@ namespace apex_windows
    return true;
    }
    */
-   ::count ip_enum::enumerate(array < ::net::address > & ipa)
+   ::count ip_enum::enumerate(__pointer_array(::networking::address) & ipa)
    {
 
       //get this machines host name
@@ -150,9 +150,10 @@ namespace apex_windows
                
                printf("AF_INET (IPv4)\n");
 
-               ipa.add(*ptr->ai_addr);
+               throw ::exception(todo);
+               //ipa.add(*ptr->ai_addr);
 
-               ::to_string(str, ipa.last().u.m_sa);
+               //::to_string(str, ipa.last().u.m_sa);
                
                // sockaddr_ipv4 = (struct sockaddr_in *) ptr->ai_addr;
                //printf("\tIPv4 address %s\n",
@@ -160,7 +161,8 @@ namespace apex_windows
                break;
             case AF_INET6:
                printf("AF_INET6 (IPv6)\n");
-               ipa.add(*ptr->ai_addr);
+               throw ::exception(todo);
+               //ipa.add(*ptr->ai_addr);
 
 
                // the InetNtop function is available on Windows Vista and later
@@ -225,8 +227,10 @@ namespace apex_windows
                printf("Unspecified\n");
                break;
             case AF_INET:
-               printf("AF_INET (IPv4)\n");
-               ipa.add(*ptr->ai_addr);
+
+               throw ::exception(todo);
+               //printf("AF_INET (IPv4)\n");
+               //ipa.add(*ptr->ai_addr);
 
 
                // sockaddr_ipv4 = (struct sockaddr_in *) ptr->ai_addr;
@@ -234,12 +238,13 @@ namespace apex_windows
                //inet_ntoa(sockaddr_ipv4->sin_addr));
                break;
             case AF_INET6:
-               printf("AF_INET6 (IPv6)\n");
+               throw ::exception(todo);
+               //printf("AF_INET6 (IPv6)\n");
 
-               {
-                  auto ipv6 = (struct sockaddr_in6 *) ptr->ai_addr;
-                  ipa.add(::net::address(*ipv6, (int)ptr->ai_addrlen));
-               }
+               //{
+               //   auto ipv6 = (struct sockaddr_in6 *) ptr->ai_addr;
+               //   ipa.add(::networking::address(*ipv6, (int)ptr->ai_addrlen));
+               //}
 
 
 

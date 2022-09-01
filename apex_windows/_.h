@@ -13,4 +13,18 @@
 #endif
 
 
+namespace apex_windows
+{
+
+
+   class dir_context;
+   class dir_system;
+
+
+} // namespace apex_windows
+
+
+HRESULT win_create_link(const widechar * pszPathObj, const widechar * pszPathLink, const widechar * pszDesc, const widechar * pszIconPath, ::i32 iIcon);
+
+
 

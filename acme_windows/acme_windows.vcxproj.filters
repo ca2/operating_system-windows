@@ -119,12 +119,14 @@
     <ClCompile Include="aaa_util.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="file_exception.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="deployment.rc">
       <Filter>Resource Files</Filter>
     </ResourceCompile>
-
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="_.h">

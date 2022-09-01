@@ -1,5 +1,6 @@
 #include "framework.h"
-#include "acme/operating_system/time.h"
+#include <shellapi.h>
+#include <shlobj.h>
 
 
 HICON extract_icon(HINSTANCE hInst, const ::string& pszExeFileName, ::u32 nIconIndex)

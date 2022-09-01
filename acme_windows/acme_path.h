@@ -2,6 +2,9 @@
 #pragma once
 
 
+#include "acme_windows_common/acme_path.h"
+
+
 namespace acme_windows
 {
 

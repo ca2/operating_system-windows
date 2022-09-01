@@ -1,5 +1,6 @@
 #include "framework.h"
-
+#include "bitmap.h"
+#include "aura/graphics/image/pixmap.h"
 
 #undef new
 

@@ -1,5 +1,7 @@
 #include "framework.h"
-
+#include "fonts.h"
+#include "write_text.h"
+#include "font_enumeration.h"
 
 //BEGIN_FACTORY(write_text_win32)
 //FACTORY_ITEM(::write_text_win32::fonts)

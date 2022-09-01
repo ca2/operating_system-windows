@@ -1,4 +1,7 @@
 #include "framework.h"
+#include "process.h"
+#include "acme_windows/pipe.h"
+#include "acme_windows/uac_tools.h"
 
 
 namespace apex_windows

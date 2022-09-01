@@ -1,8 +1,15 @@
 #include "framework.h"
+#include "node.h"
 #include "acme/parallelization/install_mutex.h"
+#include "acme_directory.h"
+#include "acme_file.h"
+#include "registry.h"
+#include "process.h"
+#include <shellapi.h>
+#include <TlHelp32.h>
 
 
-CLASS_DECL_ACME_WINDOWS void call_async(const char* pszPath, const char* pszParam, const char* pszDir, ::e_display edisplay, bool bPrivileged, unsigned int* puiPid);
+CLASS_DECL_ACME_WINDOWS void call_async(const char * pszPath, const char * pszParam, const char * pszDir, ::e_display edisplay, bool bPrivileged, unsigned int * puiPid);
 
 
 namespace acme_windows
@@ -20,16 +27,16 @@ namespace acme_windows
    node::~node()
    {
 
-//#ifdef WINDOWS
-//
-//         ::acme::del(::windows::callstack::s_pcriticalsection);
-//
-//#endif
+      //#ifdef WINDOWS
+      //
+      //         ::acme::del(::windows::callstack::s_pcriticalsection);
+      //
+      //#endif
 
    }
 
 
-   void node::initialize_matter(::matter* pmatter)
+   void node::initialize_matter(::matter * pmatter)
    {
 
       /*auto estatus = */ ::matter::initialize_matter(pmatter);
@@ -48,7 +55,7 @@ namespace acme_windows
    }
 
 
-   void node::call_async(const ::string& strPath, const ::string& strParam, const ::string& strDir, ::e_display edisplay, bool bPrivileged, unsigned int* puiPid)
+   void node::call_async(const ::string & strPath, const ::string & strParam, const ::string & strDir, ::e_display edisplay, bool bPrivileged, unsigned int * puiPid)
    {
 
       /*auto estatus =*/ ::call_async(strPath, strParam, strDir, edisplay, bPrivileged, puiPid);
@@ -97,7 +104,7 @@ namespace acme_windows
          //if (::failed(estatus))
          //{
 
-            /*estatus =*/ key._get("SystemUseLightTheme", dw);
+         /*estatus =*/ key._get("SystemUseLightTheme", dw);
 
          //   if (::failed(estatus))
          //   {
@@ -183,8 +190,8 @@ namespace acme_windows
       return ::color::white;
 
    }
-         
-         
+
+
    void node::fetch_user_color()
    {
 
@@ -732,7 +739,7 @@ namespace acme_windows
    // enzymes: Liveedu.tv, Twitch.tv and Mixer.com streamers and viewers
    // Mummi and bilbo!!
    // create call to :
-   void node::install_crash_dump_reporting(const string& strModuleNameWithTheExeExtension)
+   void node::install_crash_dump_reporting(const string & strModuleNameWithTheExeExtension)
    {
 
       ::acme_windows::registry::key k;
@@ -743,11 +750,11 @@ namespace acme_windows
       {
          ::file::path str = m_psystem->m_pacmedirectory->system() / "CrashDumps" / strModuleNameWithTheExeExtension;
          wstring wstr = str;
-         RegSetValueExW(k.m_hkey, L"DumpFolder", 0, REG_EXPAND_SZ, (byte*)wstr.c_str(), ::u32((wcslen(wstr) + 1) * sizeof(wchar_t)));
+         RegSetValueExW(k.m_hkey, L"DumpFolder", 0, REG_EXPAND_SZ, (byte *)wstr.c_str(), ::u32((wcslen(wstr) + 1) * sizeof(wchar_t)));
          ::u32 dw = 10;
-         RegSetValueExW(k.m_hkey, L"DumpCount", 0, REG_DWORD, (byte*)&dw, sizeof(dw));
+         RegSetValueExW(k.m_hkey, L"DumpCount", 0, REG_DWORD, (byte *)&dw, sizeof(dw));
          dw = 2;
-         RegSetValueExW(k.m_hkey, L"DumpType", 0, REG_DWORD, (byte*)&dw, sizeof(dw));
+         RegSetValueExW(k.m_hkey, L"DumpType", 0, REG_DWORD, (byte *)&dw, sizeof(dw));
 
       }
 
@@ -928,7 +935,7 @@ namespace acme_windows
    //}
 
 
-   bool node::process_modules(string_array& stra, u32 processID)
+   bool node::process_modules(string_array & stra, u32 processID)
    {
 
       HANDLE hProcess;
@@ -944,11 +951,11 @@ namespace acme_windows
 
       const i32 iMaxModuleCount = 1024 * 8;
 
-      HMODULE* hMods = new HMODULE[iMaxModuleCount];
+      HMODULE * hMods = new HMODULE[iMaxModuleCount];
 
       const i32 iImageSize = MAX_PATH * 8;
 
-      wchar_t* szImage = (wchar_t*)::memory_allocate(iImageSize * 2);
+      wchar_t * szImage = (wchar_t *)::memory_allocate(iImageSize * 2);
 
       if (EnumProcessModules(hProcess, hMods, sizeof(HMODULE) * iMaxModuleCount, &cbNeeded))
       {
@@ -978,7 +985,7 @@ namespace acme_windows
    }
 
 
-   bool node::load_modules_diff(string_array& straOld, string_array& straNew, const ::string & pszExceptDir)
+   bool node::load_modules_diff(string_array & straOld, string_array & straNew, const ::string & pszExceptDir)
    {
 
       bool bFound;
@@ -1220,14 +1227,14 @@ namespace acme_windows
    //end;
 
 
-   bool node::is_shared_library_busy(u32 processid, const string_array& stra)
+   bool node::is_shared_library_busy(u32 processid, const string_array & stra)
    {
 
       string_array straSuffix(stra);
 
       straSuffix.surround("\\");
 
-      return ::acme_windows::predicate_process_module(processid, [&](auto& me32)
+      return ::acme_windows::predicate_process_module(processid, [&](auto & me32)
          {
 
             return !straSuffix.suffixes_ci(string(me32.szModule)) && !stra.contains_ci(string(me32.szModule));
@@ -1237,7 +1244,7 @@ namespace acme_windows
    }
 
 
-   bool node::is_shared_library_busy(const string_array& stra)
+   bool node::is_shared_library_busy(const string_array & stra)
    {
 
       return ::acme_windows::predicate_process([&](auto pid)
@@ -1250,7 +1257,7 @@ namespace acme_windows
    }
 
 
-   bool node::process_contains_module(string& strImage, ::u32 processID, const ::string & pszLibrary)
+   bool node::process_contains_module(string & strImage, ::u32 processID, const ::string & pszLibrary)
    {
 
       HANDLE hProcess;
@@ -1276,9 +1283,9 @@ namespace acme_windows
 
       mem.set_size(iImageSize);
 
-      GetModuleFileNameExW(hProcess, nullptr, (WCHAR*)mem.get_data(), (DWORD)(mem.get_size() / sizeof(WCHAR)));
+      GetModuleFileNameExW(hProcess, nullptr, (WCHAR *)mem.get_data(), (DWORD)(mem.get_size() / sizeof(WCHAR)));
 
-      strImage = (const wchar_t*)mem.get_data();
+      strImage = (const wchar_t *)mem.get_data();
 
       wstring wstrLibrary(pszLibrary);
 
@@ -1292,10 +1299,10 @@ namespace acme_windows
 
             // Get the full path to the module's file.
 
-            if (GetModuleFileNameExW(hProcess, hmods[i], (WCHAR*)mem.get_data(), (DWORD)(mem.get_size() / sizeof(WCHAR))))
+            if (GetModuleFileNameExW(hProcess, hmods[i], (WCHAR *)mem.get_data(), (DWORD)(mem.get_size() / sizeof(WCHAR))))
             {
 
-               if (!wide_compare_case_insensitive((const wchar_t*)mem.get_data(), wstrLibrary))
+               if (!wide_compare_case_insensitive((const wchar_t *)mem.get_data(), wstrLibrary))
                {
 
                   bFound = true;
@@ -1317,7 +1324,7 @@ namespace acme_windows
    }
 
 
-   void node::shared_library_process(dword_array& dwa, string_array& straProcesses, const ::string & pszLibrary)
+   void node::shared_library_process(dword_array & dwa, string_array & straProcesses, const ::string & pszLibrary)
    {
 
       // Get the list of process identifiers.
@@ -1330,7 +1337,7 @@ namespace acme_windows
 
       index i;
 
-      if (!EnumProcesses((DWORD*)aProcesses.get_data(), (DWORD)(aProcesses.get_size_in_bytes()), &cbNeeded))
+      if (!EnumProcesses((DWORD *)aProcesses.get_data(), (DWORD)(aProcesses.get_size_in_bytes()), &cbNeeded))
       {
 
          return;
@@ -1756,7 +1763,7 @@ namespace acme_windows
 
       dwSize = GetEnvironmentVariableW(wstrEnvironmentVariable, lpwsz, dwSize);
 
-      str = (const WCHAR *) lpwsz;
+      str = (const WCHAR *)lpwsz;
 
       return str;
 
@@ -1783,7 +1790,7 @@ namespace acme_windows
    }
 
 
-   void node::set_environment_variable(const ::string& pszEnvironmentVariable, const ::string& pszValue)
+   void node::set_environment_variable(const ::string & pszEnvironmentVariable, const ::string & pszValue)
    {
 
 
@@ -1820,7 +1827,7 @@ namespace acme_windows
       {
 
          auto lastError = ::GetLastError();
-            
+
          auto estatus = last_error_to_status(lastError);
 
          throw ::exception(estatus, "::windows::node::create_process (1)");
@@ -1849,7 +1856,7 @@ namespace acme_windows
 
       auto estatus = ExitCode_to_status(rc);
 
-      if(!estatus)
+      if (!estatus)
       {
 
          throw ::exception(estatus, "::windows::node::create_process (2)");
@@ -1874,9 +1881,9 @@ namespace acme_windows
 
       char Args[4096];
 
-      char* pEnvCMD = nullptr;
+      char * pEnvCMD = nullptr;
 
-      const char* pDefaultCMD = "CMD.EXE";
+      const char * pDefaultCMD = "CMD.EXE";
 
       ULONG rc;
 
@@ -1922,7 +1929,7 @@ namespace acme_windows
       {
 
          auto lastError = ::GetLastError();
-            
+
          auto estatus = last_error_to_status(lastError);
 
          throw ::exception(estatus, "::windows::node::run_silent (1)");
@@ -2028,9 +2035,9 @@ namespace acme_windows
          throw ::exception(estatus, "::windows::node::reboot (2)");
 
       }
-         
+
       tokenprivileges.PrivilegeCount = 1;
-         
+
       tokenprivileges.Privileges[0].Attributes = SE_PRIVILEGE_ENABLED;
 
       if (!AdjustTokenPrivileges(htoken, false, &tokenprivileges, 0, (PTOKEN_PRIVILEGES) nullptr, 0))
@@ -2045,7 +2052,7 @@ namespace acme_windows
          throw ::exception(estatus, "::windows::node::reboot (3)");
 
       }
-         
+
       if (GetLastError() == ERROR_NOT_ALL_ASSIGNED)
       {
 
@@ -2079,7 +2086,7 @@ namespace acme_windows
       //if (!ExitWindowsEx(EWX_REBOOT | EWX_FORCE,
       if (!ExitWindowsEx(EWX_REBOOT, SHTDN_REASON_MAJOR_SOFTWARE | SHTDN_REASON_MINOR_INSTALLATION))
       {
-            
+
          DWORD dwLastError = ::GetLastError();
 
          TRACELASTERROR();
@@ -2089,11 +2096,11 @@ namespace acme_windows
          throw ::exception(estatus, "::windows::node::reboot (4)");
 
       }
-         
+
       //reset the previlages
-         
+
       tokenprivileges.Privileges[0].Attributes = 0;
-         
+
       AdjustTokenPrivileges(htoken, false, &tokenprivileges, 0, (PTOKEN_PRIVILEGES) nullptr, 0);
 
       //return ::success;
@@ -2104,39 +2111,39 @@ namespace acme_windows
    string node::get_user_language()
    {
 
-//#ifdef _UWP
-//
-//      string_array stra;
-//
-//      try
-//      {
-//
-//         stra.explode("-", ::winrt::Windows::Globalization::ApplicationLanguages::PrimaryLanguageOverride);
-//
-//      }
-//      catch (long)
-//      {
-//
-//      }
-//
-//      strLocale = stra[0];
-//
-//      strSchema = stra[0];
-//
-//#elif defined(WINDOWS)
+      //#ifdef _UWP
+      //
+      //      string_array stra;
+      //
+      //      try
+      //      {
+      //
+      //         stra.explode("-", ::winrt::Windows::Globalization::ApplicationLanguages::PrimaryLanguageOverride);
+      //
+      //      }
+      //      catch (long)
+      //      {
+      //
+      //      }
+      //
+      //      strLocale = stra[0];
+      //
+      //      strSchema = stra[0];
+      //
+      //#elif defined(WINDOWS)
 
       LANGID langid = ::GetUserDefaultLangID();
 
       string strIso = ::acme_windows::langid_to_iso(langid);
 
-//#endif
+      //#endif
       string strUserlanguage = strIso;
 
       return strUserlanguage;
 
    }
 
-      
+
    bool node::get_application_exclusivity_security_attributes(memory & memory)
    {
 
@@ -2153,7 +2160,7 @@ namespace acme_windows
       pMutexAttributes->bInheritHandle = false; // object uninheritable
 
       // declare and initialize a security descriptor
-      auto pSD = (SECURITY_DESCRIPTOR *) (pMutexAttributes + 1);
+      auto pSD = (SECURITY_DESCRIPTOR *)(pMutexAttributes + 1);
 
       bool bInitOk = InitializeSecurityDescriptor(pSD, SECURITY_DESCRIPTOR_REVISION) != false;
 
@@ -2251,12 +2258,11 @@ namespace acme_windows
       while (!m_psystem->m_pacmefile->exists(utf8(wstr.c_str())) && iRetry > 0)
       {
 
+         auto psystem = m_psystem;
 
-      auto psystem = m_psystem;
+         auto pacmedir = psystem->m_pacmedirectory;
 
-      auto pacmedir = psystem->m_pacmedirectory;
-
-      pacmedir->create(::file_path_folder(utf8(wstr.c_str())).c_str());
+         pacmedir->create(::file_path_folder(utf8(wstr.c_str())).c_str());
 
          m_psystem->m_pacmefile->put_contents(utf8(wstr.c_str()).c_str(), "");
 
@@ -2309,7 +2315,7 @@ namespace acme_windows
 
    }
 
-      
+
    void node::get_folder_path_from_user(::file::path & pathFolder)
    {
 

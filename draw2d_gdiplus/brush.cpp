@@ -1,4 +1,7 @@
 #include "framework.h"
+#include "brush.h"
+#include "image.h"
+#include "path.h"
 
 
 #undef new

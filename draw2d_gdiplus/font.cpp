@@ -1,4 +1,6 @@
 #include "framework.h"
+#include "font.h"
+#include "draw2d.h"
 
 
 #undef new

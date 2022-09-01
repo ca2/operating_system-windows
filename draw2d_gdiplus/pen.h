@@ -2,6 +2,7 @@
 
 
 #include "aura/graphics/draw2d/pen.h"
+#include "object.h"
 
 
 namespace draw2d_gdiplus

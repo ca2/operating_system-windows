@@ -549,7 +549,7 @@ namespace production
          string_array straTitle;
          string strRemote;
 
-         __pointer(pane_impact) pimpact = GetTypedParent < pane_impact > ();
+         __pointer(pane_impact) pimpact = get_typed_parent < pane_impact > ();
 
          pimpact->set_current_tab_by_id("filemanager::tabbed");
 
@@ -574,7 +574,7 @@ namespace production
       {
          if(m_iStep == 2)
          {
-            __pointer(pane_impact) pimpact = GetTypedParent < pane_impact > ();
+            __pointer(pane_impact) pimpact = get_typed_parent < pane_impact > ();
             pimpact->set_current_tab_by_id(MAIN_IMPACT);
             m_pproduction->step();
          }

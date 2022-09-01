@@ -1,9 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="framework.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="_.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -14,9 +11,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="monitor.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="icon.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="cursor.cpp">
@@ -46,9 +40,6 @@
     <ClCompile Include="window\window_i_unknown.cpp">
       <Filter>Source Files\window</Filter>
     </ClCompile>
-    <ClCompile Include="gdi.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="imm_context.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -56,9 +47,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="win32.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="display.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="window_util.cpp">
@@ -113,6 +101,18 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="top_level_enum.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="icon.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="display.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="framework.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="gdi.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

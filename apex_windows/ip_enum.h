@@ -17,7 +17,7 @@ namespace apex_windows
 
 
    class CLASS_DECL_APEX_WINDOWS ip_enum :
-      virtual public ::net::ip_enum
+      virtual public ::networking::ip_enum
    {
    public:
 
@@ -33,7 +33,7 @@ namespace apex_windows
 
 
       //      virtual ::count enumerate(ip_array & ipa);
-      virtual ::count enumerate(array < ::net::address > & ipa) override;
+      virtual ::count enumerate(__pointer_array(::networking::address) & ipa) override;
 
    };
 

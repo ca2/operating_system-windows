@@ -1,5 +1,6 @@
 #include "framework.h"
-#include "acme/operating_system.h"
+#include "node.h"
+
 
 /*
  * Copyright (c) 2014 Craig Lilley <cralilley@gmail.com>

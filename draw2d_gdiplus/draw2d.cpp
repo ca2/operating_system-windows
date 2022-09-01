@@ -1,5 +1,5 @@
 #include "framework.h"
-
+#include "draw2d.h"
 
 CLASS_DECL_DRAW2D_GDIPLUS void initialize_gdiplus();
 CLASS_DECL_DRAW2D_GDIPLUS void terminate_gdiplus();

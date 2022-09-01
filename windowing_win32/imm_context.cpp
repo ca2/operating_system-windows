@@ -1,5 +1,6 @@
 #include "framework.h"
 #include "imm_context.h"
+#include "aura/user/user/interaction.h"
 
 
 imm_context::imm_context(::user::interaction * pinteraction) :

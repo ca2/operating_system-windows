@@ -1,5 +1,6 @@
 #include "framework.h"
 #include "file_memory_map.h"
+#include "acme_directory.h"
 
 
 namespace acme_windows

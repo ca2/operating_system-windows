@@ -1,8 +1,13 @@
 #include "framework.h"
-
-
-#include "acme/primitive/mathematics/mathematics.h"
+#include "graphics.h"
+#include "pen.h"
+#include "brush.h"
+#include "font.h"
+#include "path.h"
 #include "aura/graphics/image/context_image.h"
+#include "aura/graphics/image/drawing.h"
+#include "aura/graphics/image/map.h"
+#include "acme/primitive/mathematics/mathematics.h"
 #include "acme/primitive/geometry2d/_geometry2d.h"
 #include "acme/primitive/geometry2d/_collection.h"
 #include "acme/primitive/geometry2d/_defer_shape.h"

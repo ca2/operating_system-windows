@@ -3,6 +3,7 @@
 
 
 #include "aura/_.h"
+#include "aura/operating_system.h"
 
 
 #ifdef _WINDOWING_WIN32_STATIC

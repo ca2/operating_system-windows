@@ -30,6 +30,7 @@ namespace windowing_win32
    
    class windowing;
    class system_interaction;
+   class window;
 
 
 } // namespace windowing_win32

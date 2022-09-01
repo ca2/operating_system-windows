@@ -807,6 +807,7 @@
     <ClCompile Include="acme_file.cpp" />
     <ClCompile Include="application.cpp" />
     <ClCompile Include="debug.cpp" />
+    <ClCompile Include="file_exception.cpp" />
     <ClCompile Include="file_find.cpp" />
     <ClCompile Include="itemidlist.cpp" />
     <ClCompile Include="known_folder_struct.cpp" />

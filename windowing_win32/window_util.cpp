@@ -1,8 +1,7 @@
 #include "framework.h"
-#if !BROAD_PRECOMPILED_HEADER
-#include "aura/user/user/_user.h"
-#endif
 #include "window_util.h"
+#include "aura/user/user/window_util.h"
+#include "aura/user/user/interaction.h"
 
 
 #ifdef APPLEIOS

@@ -1,7 +1,9 @@
 #include "framework.h"
-
-
+#include "image.h"
+#include "graphics.h"
+#include "bitmap.h"
 #include "aura/graphics/image/icon.h"
+#include "aura/graphics/image/drawing.h"
 
 
 namespace draw2d_gdiplus

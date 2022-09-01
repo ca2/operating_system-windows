@@ -1,4 +1,10 @@
 #include "framework.h"
+#include "os_context.h"
+#include "acme_windows/registry.h"
+#include "acme_windows/file_exception.h"
+#include "acme_windows/itemidlist.h"
+#include "acme_windows/acme_directory.h"
+#include "acme_windows/acme_file.h"
 #include <wincred.h>
 #include <wtsapi32.h>
 #include <shobjidl.h>

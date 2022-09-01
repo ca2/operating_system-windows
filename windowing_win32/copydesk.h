@@ -2,6 +2,7 @@
 
 
 #include "aura/user/user/copydesk.h"
+#include "aura/operating_system/windows/message_window.h"
 
 
 namespace windowing_win32

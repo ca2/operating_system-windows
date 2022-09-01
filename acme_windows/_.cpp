@@ -1,5 +1,7 @@
 #include "framework.h"
 #include "acme/library.h"
+#include <shellapi.h>
+#include <shlobj.h>
 
 
 namespace acme_windows

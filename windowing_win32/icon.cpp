@@ -556,6 +556,13 @@ namespace windowing_win32
 
                auto pfile = m_pcontext->m_papexcontext->file().create_resource_file(strPath);
 
+               if (!m_pcontext->context_image())
+               {
+
+                  return nullptr;
+
+               }
+
                auto pimage = m_pcontext->context_image()->get_image(pfile);
 
                auto pimageResized = m_pcontext->m_pauracontext->create_image(size);

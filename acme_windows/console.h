@@ -1,6 +1,9 @@
 #pragma once
 
 
+#include "acme/operating_system/console.h"
+
+
 namespace acme_windows
 {
 

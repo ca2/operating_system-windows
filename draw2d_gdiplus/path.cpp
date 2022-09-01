@@ -1,4 +1,7 @@
 #include "framework.h"
+#include "path.h"
+#include "graphics.h"
+#include "font.h"
 #include "aura/graphics/write_text/text_out.h"
 #include "aura/graphics/write_text/draw_text.h"
 

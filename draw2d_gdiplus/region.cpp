@@ -1,4 +1,6 @@
 #include "framework.h"
+#include "region.h"
+#include "graphics.h"
 
 
 #undef new

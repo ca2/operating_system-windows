@@ -1,5 +1,13 @@
 #include "framework.h"
-
+#include "image.h"
+#include "graphics.h"
+#include "bitmap.h"
+#include "pen.h"
+#include "brush.h"
+#include "region.h"
+#include "font.h"
+#include "path.h"
+#include "draw2d.h" 
 
 //BEGIN_FACTORY(draw2d_gdiplus)
 //FACTORY_ITEM(::draw2d_gdiplus::image)

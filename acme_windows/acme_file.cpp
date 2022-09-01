@@ -1,6 +1,8 @@
 // From acme/filesystem/file/_.cpp by camilo on 2021-08-09 
 // 03:09 BRT <3ThomasBorregaardSørensen
 #include "framework.h"
+#include "acme_file.h"
+#include "acme_path.h"
 #include "acme/operating_system.h"
 #include "acme/operating_system/time.h"
 #include <stdio.h>
