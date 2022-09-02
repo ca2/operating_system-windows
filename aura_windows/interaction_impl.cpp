@@ -5170,10 +5170,10 @@ void interaction_impl::set_tool_window(bool bSet)
 
       }
 
-      if (message == MESSAGE_OLE_DRAGENTER ||
-         message == MESSAGE_OLE_DRAGOVER ||
-         message == MESSAGE_OLE_DRAGLEAVE ||
-         message == MESSAGE_OLE_DRAGDROP)
+      if (message == e_message_ole_dragenter ||
+         message == e_message_ole_dragover ||
+         message == e_message_ole_dragleave ||
+         message == e_message_ole_dragdrop)
       {
 
          auto pdrag = __cast < ::message::drag_and_drop>(pmessage);
