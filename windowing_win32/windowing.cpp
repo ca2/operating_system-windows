@@ -1199,7 +1199,7 @@ namespace windowing_win32
 //
 //      auto pdocument = m_mapimpactsystem[COLORSEL_IMPACT]->open_document_file(puiOwner->get_application(), ::e_type_null, __visible(true));
 //
-//      __pointer(::userex::color_impact) pimpact = pdocument->get_type_impact < ::userex::color_impact >();
+//      __pointer(::userex::color_impact) pimpact = pdocument->get_typed_impact < ::userex::color_impact >();
 //
 //      __pointer(::user::frame_window) pframe = pimpact->top_level_frame();
 //
