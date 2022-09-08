@@ -80,7 +80,7 @@ namespace audio_mmsystem
    }
 
 
-   void out::out_open_ex(thread * pthreadCallback, u32 uiSamplesPerSec, u32 uiChannelCount, u32 uiBitsPerSample,::wave::e_purpose epurpose)
+   void out::out_open_ex(thread * pthreadCallback, u32 uiSamplesPerSec, u32 uiChannelCount, u32 uiBitsPerSample,::wave::enum_purpose epurpose)
    {
 
       synchronous_lock synchronouslock(mutex());
@@ -173,7 +173,7 @@ namespace audio_mmsystem
       int iBufferCount;
       int iBufferSampleCount;
 
-      if(epurpose == ::wave::purpose_playback)
+      if(epurpose == ::wave::e_purpose_playback)
       {
 
          iBufferSampleCount = uiSamplesPerSec / 8;
@@ -181,7 +181,7 @@ namespace audio_mmsystem
          iBufferCount = 4;
 
       }
-      else if(epurpose == ::wave::purpose_playground)
+      else if(epurpose == ::wave::e_purpose_playground)
       {
 
          iBufferSampleCount = uiSamplesPerSec / 30;

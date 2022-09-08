@@ -5,6 +5,7 @@
 #include "monitor.h"
 #include "windowing.h"
 #include "window.h"
+#include "aura/platform/system.h"
 
 
 namespace windowing_win32

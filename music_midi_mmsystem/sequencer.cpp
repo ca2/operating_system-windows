@@ -1,6 +1,7 @@
 #include "framework.h"
 #include "sequencer.h"
 #include "midi.h"
+#include "aqua/multimedia/exception.h"
 #include "app-veriwell/multimedia/multimedia.h"
 #include "app-veriwell/multimedia/ikaraoke/lyric_event_v1.h"
 #include "app-veriwell/multimedia/music/midi/file.h"
@@ -263,7 +264,7 @@ namespace music
 
                   m_psequence->set_state(sequence::e_state_opened);
 
-                  throw multimedia::exception(multimedia::exception_midi, estatus); 
+                  throw multimedia::exception(multimedia::e_exception_midi, estatus); 
 
                }
 
@@ -282,7 +283,7 @@ namespace music
 
                   m_psequence->set_state(sequence::e_state_opened);
 
-                  throw multimedia::exception(multimedia::exception_midi, estatus);
+                  throw multimedia::exception(multimedia::e_exception_midi, estatus);
 
                }
 

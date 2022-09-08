@@ -171,12 +171,12 @@ namespace windowing_win32
       virtual void _window_create_gray_caret(HWND hwnd, i32 nWidth, i32 nHeight);
 
 
-      template < typename PRED >
-      bool _top_level_contains_predicate(PRED pred);
+      //template < typename PRED >
+      //bool _top_level_contains_predicate(PRED pred);
 
 
-      template < typename PREDICATE >
-      bool _top_level_contains_bool_member(PREDICATE predicate);
+      //template < typename PREDICATE >
+      //bool _top_level_contains_bool_member(PREDICATE predicate);
 
 
       bool _visible_top_level_contains_all_names(const string_array& stra) override;

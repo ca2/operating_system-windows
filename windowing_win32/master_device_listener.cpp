@@ -1,6 +1,7 @@
 // Created by camilo on 2022-02-20 12:08 <3ThomasBorregaardSørensen!! (Thomas Likes number 5)! I like also this Infinity up!!
 #include "framework.h"
-#include "_windows.h"
+#include "master_device_listener.h"
+#include "devices.h"
 
 
 namespace windowing_win32
@@ -148,6 +149,7 @@ namespace windowing_win32
       }
 
    }
+
 
    void master_device_listener::on_device_plugged(::hardware::enum_device edevice)
    {

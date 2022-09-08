@@ -11,7 +11,9 @@
 #include "aura/message/user.h"
 #include "win32.h"
 #include "window_util.h"
-#include "_impl.h"
+#include "aura/user/user/window_util.h"
+#include "aura/platform/session.h"
+#include "aura/platform/application.h"
 
 
 

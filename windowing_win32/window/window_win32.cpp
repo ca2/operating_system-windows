@@ -4,6 +4,7 @@
 #include "windowing_win32/windowing.h"
 #include "aura/user/user/system.h"
 #include "aura_windows/interaction_impl.h"
+#include "aura/platform/system.h"
 
 
 CLASS_DECL_WINDOWING_WIN32 WNDPROC windows_user_interaction_impl_get_window_procedure();
