@@ -1,4 +1,5 @@
 #include "framework.h"
+#include "in.h"
 #include "app-core/audio/audio/audio.h"
 #include "app-core/audio/wave/wave.h"
 #include "app-core/audio/decode/encoder.h"

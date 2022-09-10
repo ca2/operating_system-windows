@@ -15,6 +15,8 @@
 #include "aura/user/user/user.h"
 #include "aura/user/user/system.h"
 #include "acme_windows_common/comptr.h"
+#include "aura/platform/session.h"
+#include "aura/platform/system.h"
 #include "window_util.h"
 #include <dwmapi.h>
 
