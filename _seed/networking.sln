@@ -50,7 +50,15 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_simple_networking_appli
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_app_simple_networking_application", "..\..\..\source\app-simple\networking_application\shared_app_simple_networking_application.vcxproj", "{440D076C-B354-4DF8-BEC7-5F93508F1F1C}"
 	ProjectSection(ProjectDependencies) = postProject
+		{0B0A6C45-0AE3-4DC5-889A-7235BC9DB154} = {0B0A6C45-0AE3-4DC5-889A-7235BC9DB154}
 		{46D7D9C9-7B52-4DC6-AF84-46A5E3CDC43D} = {46D7D9C9-7B52-4DC6-AF84-46A5E3CDC43D}
+		{9A5FBFB1-76E6-4F7E-933A-328C1EEC95AF} = {9A5FBFB1-76E6-4F7E-933A-328C1EEC95AF}
+		{A69CC125-E38A-4F77-9677-8860D43AB3B0} = {A69CC125-E38A-4F77-9677-8860D43AB3B0}
+		{C1CCDF2E-9F27-45D3-B67A-B2EEB1754E72} = {C1CCDF2E-9F27-45D3-B67A-B2EEB1754E72}
+		{D08014E6-E329-41CF-81B5-957C290A4AA8} = {D08014E6-E329-41CF-81B5-957C290A4AA8}
+		{D6B5B8F3-A524-4E73-8343-C3D5D558ADE3} = {D6B5B8F3-A524-4E73-8343-C3D5D558ADE3}
+		{D79C7DDB-A727-4B91-803E-41C4431693D6} = {D79C7DDB-A727-4B91-803E-41C4431693D6}
+		{E2D7833B-9B59-4826-BBDF-C270A2115E86} = {E2D7833B-9B59-4826-BBDF-C270A2115E86}
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "static_app_simple_networking_application", "..\..\..\source\app-simple\networking_application\static_app_simple_networking_application.vcxproj", "{3C7A00E5-3956-492F-9921-C646DF0C2AA0}"
@@ -58,6 +66,8 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "base", "..\..\..\source\app\base\base.vcxproj", "{A216ABD4-26C4-4746-96B3-9D30ED28CF92}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "axis", "..\..\..\source\app\axis\axis.vcxproj", "{A2CBD4ED-ED0F-482B-9B16-F48F21C32835}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "experience_core", "..\..\..\source\app\experience_core\experience_core.vcxproj", "{E2D7833B-9B59-4826-BBDF-C270A2115E86}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -470,6 +480,22 @@ Global
 		{A2CBD4ED-ED0F-482B-9B16-F48F21C32835}.stage|Win32.Build.0 = stage|Win32
 		{A2CBD4ED-ED0F-482B-9B16-F48F21C32835}.stage|x64.ActiveCfg = stage|x64
 		{A2CBD4ED-ED0F-482B-9B16-F48F21C32835}.stage|x64.Build.0 = stage|x64
+		{E2D7833B-9B59-4826-BBDF-C270A2115E86}.basis|Win32.ActiveCfg = basis|Win32
+		{E2D7833B-9B59-4826-BBDF-C270A2115E86}.basis|Win32.Build.0 = basis|Win32
+		{E2D7833B-9B59-4826-BBDF-C270A2115E86}.basis|x64.ActiveCfg = basis|x64
+		{E2D7833B-9B59-4826-BBDF-C270A2115E86}.basis|x64.Build.0 = basis|x64
+		{E2D7833B-9B59-4826-BBDF-C270A2115E86}.cube_basis|Win32.ActiveCfg = cube_basis|Win32
+		{E2D7833B-9B59-4826-BBDF-C270A2115E86}.cube_basis|Win32.Build.0 = cube_basis|Win32
+		{E2D7833B-9B59-4826-BBDF-C270A2115E86}.cube_basis|x64.ActiveCfg = cube_basis|x64
+		{E2D7833B-9B59-4826-BBDF-C270A2115E86}.cube_basis|x64.Build.0 = cube_basis|x64
+		{E2D7833B-9B59-4826-BBDF-C270A2115E86}.cube_stage|Win32.ActiveCfg = cube_stage|Win32
+		{E2D7833B-9B59-4826-BBDF-C270A2115E86}.cube_stage|Win32.Build.0 = cube_stage|Win32
+		{E2D7833B-9B59-4826-BBDF-C270A2115E86}.cube_stage|x64.ActiveCfg = cube_stage|x64
+		{E2D7833B-9B59-4826-BBDF-C270A2115E86}.cube_stage|x64.Build.0 = cube_stage|x64
+		{E2D7833B-9B59-4826-BBDF-C270A2115E86}.stage|Win32.ActiveCfg = stage|Win32
+		{E2D7833B-9B59-4826-BBDF-C270A2115E86}.stage|Win32.Build.0 = stage|Win32
+		{E2D7833B-9B59-4826-BBDF-C270A2115E86}.stage|x64.ActiveCfg = stage|x64
+		{E2D7833B-9B59-4826-BBDF-C270A2115E86}.stage|x64.Build.0 = stage|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

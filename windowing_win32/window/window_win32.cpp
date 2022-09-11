@@ -178,7 +178,13 @@ LRESULT CALLBACK __window_procedure(HWND hwnd, UINT message, WPARAM wparam, LPAR
 
    }
 
-   if (message == e_message_left_button_up)
+   if (message == e_message_left_button_down)
+   {
+
+      ::output_debug_string("e_message_left_button_down");
+
+   }
+   else if (message == e_message_left_button_up)
    {
 
       ::output_debug_string("e_message_left_button_up");
