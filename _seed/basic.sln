@@ -111,6 +111,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "directx", "..\..\operating-
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_app_core_flag", "..\..\..\source\app-core\flag\shared_app_core_flag.vcxproj", "{C6E48A19-59B8-481E-AF3A-C27B66D68A84}"
 	ProjectSection(ProjectDependencies) = postProject
+		{46D7D9C9-7B52-4DC6-AF84-46A5E3CDC43D} = {46D7D9C9-7B52-4DC6-AF84-46A5E3CDC43D}
 		{A69CC125-E38A-4F77-9677-8860D43AB3B0} = {A69CC125-E38A-4F77-9677-8860D43AB3B0}
 		{D08014E6-E329-41CF-81B5-957C290A4AA8} = {D08014E6-E329-41CF-81B5-957C290A4AA8}
 	EndProjectSection
@@ -118,11 +119,19 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "static_app_core_flag", "..\..\..\source\app-core\flag\static_app_core_flag.vcxproj", "{83FC68E6-AA09-47C4-A651-015A97579ED6}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_app_cidadedecuritiba_alphaclock", "..\..\..\source\app-cidadedecuritiba\alphaclock\shared_app_cidadedecuritiba_alphaclock.vcxproj", "{CF33DBD7-DD9B-4C80-B4ED-0C1CD4E87EDD}"
+	ProjectSection(ProjectDependencies) = postProject
+		{46D7D9C9-7B52-4DC6-AF84-46A5E3CDC43D} = {46D7D9C9-7B52-4DC6-AF84-46A5E3CDC43D}
+		{9A5FBFB1-76E6-4F7E-933A-328C1EEC95AF} = {9A5FBFB1-76E6-4F7E-933A-328C1EEC95AF}
+		{C1CCDF2E-9F27-45D3-B67A-B2EEB1754E72} = {C1CCDF2E-9F27-45D3-B67A-B2EEB1754E72}
+		{D79C7DDB-A727-4B91-803E-41C4431693D6} = {D79C7DDB-A727-4B91-803E-41C4431693D6}
+		{E2D7833B-9B59-4826-BBDF-C270A2115E86} = {E2D7833B-9B59-4826-BBDF-C270A2115E86}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "static_app_cidadedecuritiba_alphaclock", "..\..\..\source\app-cidadedecuritiba\alphaclock\static_app_cidadedecuritiba_alphaclock.vcxproj", "{E1858166-9073-4F65-A2BA-60635D55B3F9}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_app_core_projection", "..\..\..\source\app-core\projection\shared_app_core_projection.vcxproj", "{3E8A35DF-2448-4A2C-9C38-FFE1ED6EDF3C}"
 	ProjectSection(ProjectDependencies) = postProject
+		{46D7D9C9-7B52-4DC6-AF84-46A5E3CDC43D} = {46D7D9C9-7B52-4DC6-AF84-46A5E3CDC43D}
 		{77D5757E-2923-40F8-9CC0-A07FA5BCC236} = {77D5757E-2923-40F8-9CC0-A07FA5BCC236}
 		{9A5FBFB1-76E6-4F7E-933A-328C1EEC95AF} = {9A5FBFB1-76E6-4F7E-933A-328C1EEC95AF}
 		{C1CCDF2E-9F27-45D3-B67A-B2EEB1754E72} = {C1CCDF2E-9F27-45D3-B67A-B2EEB1754E72}
@@ -135,11 +144,19 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "static_app_core_projection", "..\..\..\source\app-core\projection\static_app_core_projection.vcxproj", "{7DD9F152-691B-439F-82BC-332AB8EE04B2}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_app_core_clockverse_no_audio", "..\..\..\source\app-core\clockverse\shared_app_core_clockverse_no_audio.vcxproj", "{9A170000-552B-482F-81D5-91EA51AE2845}"
+	ProjectSection(ProjectDependencies) = postProject
+		{46D7D9C9-7B52-4DC6-AF84-46A5E3CDC43D} = {46D7D9C9-7B52-4DC6-AF84-46A5E3CDC43D}
+		{9A5FBFB1-76E6-4F7E-933A-328C1EEC95AF} = {9A5FBFB1-76E6-4F7E-933A-328C1EEC95AF}
+		{A69CC125-E38A-4F77-9677-8860D43AB3B0} = {A69CC125-E38A-4F77-9677-8860D43AB3B0}
+		{C1CCDF2E-9F27-45D3-B67A-B2EEB1754E72} = {C1CCDF2E-9F27-45D3-B67A-B2EEB1754E72}
+		{E2D7833B-9B59-4826-BBDF-C270A2115E86} = {E2D7833B-9B59-4826-BBDF-C270A2115E86}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "static_app_core_clockverse_no_audio", "..\..\..\source\app-core\clockverse\static_app_core_clockverse_no_audio.vcxproj", "{D3298219-333A-47C6-A327-97CD1A367124}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_app_core_desk", "..\..\..\source\app-core\desk\shared_app_core_desk.vcxproj", "{02CC1ACA-4CDF-4724-858D-92F6AE643236}"
 	ProjectSection(ProjectDependencies) = postProject
+		{46D7D9C9-7B52-4DC6-AF84-46A5E3CDC43D} = {46D7D9C9-7B52-4DC6-AF84-46A5E3CDC43D}
 		{D79C7DDB-A727-4B91-803E-41C4431693D6} = {D79C7DDB-A727-4B91-803E-41C4431693D6}
 	EndProjectSection
 EndProject
@@ -147,6 +164,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "static_app_core_desk", "..\
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_app_core_weather", "..\..\..\source\app-core\weather\shared_app_core_weather.vcxproj", "{7461102D-C92D-48B8-BDDB-4A1BEA11B87E}"
 	ProjectSection(ProjectDependencies) = postProject
+		{46D7D9C9-7B52-4DC6-AF84-46A5E3CDC43D} = {46D7D9C9-7B52-4DC6-AF84-46A5E3CDC43D}
 		{D79C7DDB-A727-4B91-803E-41C4431693D6} = {D79C7DDB-A727-4B91-803E-41C4431693D6}
 	EndProjectSection
 EndProject
@@ -169,14 +187,22 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_core_hello_multiverse", "..\..\..\source\app-core\hello_multiverse\app_core_hello_multiverse.vcxproj", "{9E07C6C6-D678-4D97-B08D-37EA8CDE3EA3}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_app_core_hello_multiverse", "..\..\..\source\app-core\hello_multiverse\shared_app_core_hello_multiverse.vcxproj", "{94A00A45-B9BF-4821-B81E-4114FFB9F0A9}"
+	ProjectSection(ProjectDependencies) = postProject
+		{46D7D9C9-7B52-4DC6-AF84-46A5E3CDC43D} = {46D7D9C9-7B52-4DC6-AF84-46A5E3CDC43D}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "static_app_core_hello_multiverse", "..\..\..\source\app-core\hello_multiverse\static_app_core_hello_multiverse.vcxproj", "{B3C2FC2F-00B5-4B57-BA6A-5BAE18CE8761}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_core_hello_animation", "..\..\..\source\app-core\hello_animation\app_core_hello_animation.vcxproj", "{C7AFCEFA-3079-4B23-8F97-4543BB980265}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_app_core_hello_animation", "..\..\..\source\app-core\hello_animation\shared_app_core_hello_animation.vcxproj", "{F62E673C-B4EB-4D45-8D9D-AEE4616630F2}"
+	ProjectSection(ProjectDependencies) = postProject
+		{46D7D9C9-7B52-4DC6-AF84-46A5E3CDC43D} = {46D7D9C9-7B52-4DC6-AF84-46A5E3CDC43D}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "static_app_core_hello_animation", "..\..\..\source\app-core\hello_animation\static_app_core_hello_animation.vcxproj", "{1DE48C0B-BB4E-4B91-B720-05E16F8984E9}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "networking_bsd", "..\..\..\source\app\networking_bsd\networking_bsd.vcxproj", "{46D7D9C9-7B52-4DC6-AF84-46A5E3CDC43D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -2553,6 +2579,46 @@ Global
 		{1DE48C0B-BB4E-4B91-B720-05E16F8984E9}.stage|Win32.Build.0 = cube_stage|Win32
 		{1DE48C0B-BB4E-4B91-B720-05E16F8984E9}.stage|x64.ActiveCfg = cube_stage|x64
 		{1DE48C0B-BB4E-4B91-B720-05E16F8984E9}.stage|x64.Build.0 = cube_stage|x64
+		{46D7D9C9-7B52-4DC6-AF84-46A5E3CDC43D}.basis|ARM.ActiveCfg = basis|x64
+		{46D7D9C9-7B52-4DC6-AF84-46A5E3CDC43D}.basis|ARM.Build.0 = basis|x64
+		{46D7D9C9-7B52-4DC6-AF84-46A5E3CDC43D}.basis|ARM64.ActiveCfg = basis|x64
+		{46D7D9C9-7B52-4DC6-AF84-46A5E3CDC43D}.basis|ARM64.Build.0 = basis|x64
+		{46D7D9C9-7B52-4DC6-AF84-46A5E3CDC43D}.basis|Win32.ActiveCfg = basis|Win32
+		{46D7D9C9-7B52-4DC6-AF84-46A5E3CDC43D}.basis|Win32.Build.0 = basis|Win32
+		{46D7D9C9-7B52-4DC6-AF84-46A5E3CDC43D}.basis|x64.ActiveCfg = basis|x64
+		{46D7D9C9-7B52-4DC6-AF84-46A5E3CDC43D}.basis|x64.Build.0 = basis|x64
+		{46D7D9C9-7B52-4DC6-AF84-46A5E3CDC43D}.cover|ARM.ActiveCfg = cube_stage|x64
+		{46D7D9C9-7B52-4DC6-AF84-46A5E3CDC43D}.cover|ARM.Build.0 = cube_stage|x64
+		{46D7D9C9-7B52-4DC6-AF84-46A5E3CDC43D}.cover|ARM64.ActiveCfg = cube_stage|x64
+		{46D7D9C9-7B52-4DC6-AF84-46A5E3CDC43D}.cover|ARM64.Build.0 = cube_stage|x64
+		{46D7D9C9-7B52-4DC6-AF84-46A5E3CDC43D}.cover|Win32.ActiveCfg = cube_stage|Win32
+		{46D7D9C9-7B52-4DC6-AF84-46A5E3CDC43D}.cover|Win32.Build.0 = cube_stage|Win32
+		{46D7D9C9-7B52-4DC6-AF84-46A5E3CDC43D}.cover|x64.ActiveCfg = cube_stage|x64
+		{46D7D9C9-7B52-4DC6-AF84-46A5E3CDC43D}.cover|x64.Build.0 = cube_stage|x64
+		{46D7D9C9-7B52-4DC6-AF84-46A5E3CDC43D}.cube_basis|ARM.ActiveCfg = cube_basis|x64
+		{46D7D9C9-7B52-4DC6-AF84-46A5E3CDC43D}.cube_basis|ARM.Build.0 = cube_basis|x64
+		{46D7D9C9-7B52-4DC6-AF84-46A5E3CDC43D}.cube_basis|ARM64.ActiveCfg = cube_basis|x64
+		{46D7D9C9-7B52-4DC6-AF84-46A5E3CDC43D}.cube_basis|ARM64.Build.0 = cube_basis|x64
+		{46D7D9C9-7B52-4DC6-AF84-46A5E3CDC43D}.cube_basis|Win32.ActiveCfg = cube_basis|Win32
+		{46D7D9C9-7B52-4DC6-AF84-46A5E3CDC43D}.cube_basis|Win32.Build.0 = cube_basis|Win32
+		{46D7D9C9-7B52-4DC6-AF84-46A5E3CDC43D}.cube_basis|x64.ActiveCfg = cube_basis|x64
+		{46D7D9C9-7B52-4DC6-AF84-46A5E3CDC43D}.cube_basis|x64.Build.0 = cube_basis|x64
+		{46D7D9C9-7B52-4DC6-AF84-46A5E3CDC43D}.cube_stage|ARM.ActiveCfg = cube_stage|x64
+		{46D7D9C9-7B52-4DC6-AF84-46A5E3CDC43D}.cube_stage|ARM.Build.0 = cube_stage|x64
+		{46D7D9C9-7B52-4DC6-AF84-46A5E3CDC43D}.cube_stage|ARM64.ActiveCfg = cube_stage|x64
+		{46D7D9C9-7B52-4DC6-AF84-46A5E3CDC43D}.cube_stage|ARM64.Build.0 = cube_stage|x64
+		{46D7D9C9-7B52-4DC6-AF84-46A5E3CDC43D}.cube_stage|Win32.ActiveCfg = cube_stage|Win32
+		{46D7D9C9-7B52-4DC6-AF84-46A5E3CDC43D}.cube_stage|Win32.Build.0 = cube_stage|Win32
+		{46D7D9C9-7B52-4DC6-AF84-46A5E3CDC43D}.cube_stage|x64.ActiveCfg = cube_stage|x64
+		{46D7D9C9-7B52-4DC6-AF84-46A5E3CDC43D}.cube_stage|x64.Build.0 = cube_stage|x64
+		{46D7D9C9-7B52-4DC6-AF84-46A5E3CDC43D}.stage|ARM.ActiveCfg = stage|x64
+		{46D7D9C9-7B52-4DC6-AF84-46A5E3CDC43D}.stage|ARM.Build.0 = stage|x64
+		{46D7D9C9-7B52-4DC6-AF84-46A5E3CDC43D}.stage|ARM64.ActiveCfg = stage|x64
+		{46D7D9C9-7B52-4DC6-AF84-46A5E3CDC43D}.stage|ARM64.Build.0 = stage|x64
+		{46D7D9C9-7B52-4DC6-AF84-46A5E3CDC43D}.stage|Win32.ActiveCfg = stage|Win32
+		{46D7D9C9-7B52-4DC6-AF84-46A5E3CDC43D}.stage|Win32.Build.0 = stage|Win32
+		{46D7D9C9-7B52-4DC6-AF84-46A5E3CDC43D}.stage|x64.ActiveCfg = stage|x64
+		{46D7D9C9-7B52-4DC6-AF84-46A5E3CDC43D}.stage|x64.Build.0 = stage|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
