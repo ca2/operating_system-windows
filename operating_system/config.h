@@ -62,9 +62,9 @@
 #define VARIADIC_TEMPLATE_FORMAT2
 
 
-#define BSD_STYLE_SOCKETS
-#define HAVE_MYSQL
-#define HAVE_OPENSSL
+//#define BSD_STYLE_SOCKETS
+//#define HAVE_MYSQL
+//#define HAVE_OPENSSL
 
 
 #define OPERATING_SYSTEM_NAME   "windows"

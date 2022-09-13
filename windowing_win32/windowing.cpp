@@ -11,7 +11,9 @@
 #include "aura/message/user.h"
 #include "win32.h"
 #include "window_util.h"
-#include "_impl.h"
+#include "aura/user/user/window_util.h"
+#include "aura/platform/session.h"
+#include "aura/platform/application.h"
 
 
 
@@ -1199,7 +1201,7 @@ namespace windowing_win32
 //
 //      auto pdocument = m_mapimpactsystem[COLORSEL_IMPACT]->open_document_file(puiOwner->get_application(), ::e_type_null, __visible(true));
 //
-//      __pointer(::userex::color_impact) pimpact = pdocument->get_type_impact < ::userex::color_impact >();
+//      __pointer(::userex::color_impact) pimpact = pdocument->get_typed_impact < ::userex::color_impact >();
 //
 //      __pointer(::user::frame_window) pframe = pimpact->top_level_frame();
 //

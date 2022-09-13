@@ -4,7 +4,8 @@
 #include "icon.h"
 #include "aura/graphics/image/context_image.h"
 #include "aura/graphics/image/drawing.h"
-
+#include "aura/platform/context.h"
+#include "aura/platform/node.h"
 
 // http ://stackoverflow.com/questions/1913468/how-to-determine-the-size_i32-of-an-icon-from-a-hicon
 // http://stackoverflow.com/users/739731/sergey

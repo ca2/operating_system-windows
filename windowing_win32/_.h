@@ -14,16 +14,6 @@
 #endif
 
 
-namespace windows
-{
-
-   
-   class devices;
-
-
-} // namespace windows
-
-
 namespace windowing_win32
 {
 
@@ -31,6 +21,12 @@ namespace windowing_win32
    class windowing;
    class system_interaction;
    class window;
+
+
+   class master_device_listener;
+
+
+   class devices;
 
 
 } // namespace windowing_win32

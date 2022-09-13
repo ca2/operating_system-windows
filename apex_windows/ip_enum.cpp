@@ -46,9 +46,6 @@ namespace apex_windows
 
    ip_enum::~ip_enum()
    {
-      //release our use of winsock stack if we successfully initialised it
-      if (m_bWinsockInitialized)
-         WSACleanup();
    }
 
 

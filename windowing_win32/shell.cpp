@@ -9,18 +9,18 @@
 #include "icon.h"
 #include "windowing.h"
 #include "system_interaction.h"
-//#include "apex/compress/zip/context.h"
 #include "acme/filesystem/filesystem/acme_directory.h"
 #include "acme_windows/known_folder_struct.h"
 #include "aura/user/user/user.h"
 #include "aura_windows/node.h"
+#include "aura/platform/context.h"
+#include "aura/platform/session.h"
 #include <thumbcache.h>
-
-
 #include "aura/graphics/image/context_image.h"
 #include "aura/graphics/image/drawing.h"
 #include "aura/graphics/image/list.h"
 #include "aura/graphics/image/icon.h"
+#include "aura/platform/system.h"
 
 
 bool IsDibSection(HBITMAP bmp)

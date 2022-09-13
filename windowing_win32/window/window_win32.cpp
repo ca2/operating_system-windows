@@ -4,6 +4,7 @@
 #include "windowing_win32/windowing.h"
 #include "aura/user/user/system.h"
 #include "aura_windows/interaction_impl.h"
+#include "aura/platform/system.h"
 
 
 CLASS_DECL_WINDOWING_WIN32 WNDPROC windows_user_interaction_impl_get_window_procedure();
@@ -177,7 +178,13 @@ LRESULT CALLBACK __window_procedure(HWND hwnd, UINT message, WPARAM wparam, LPAR
 
    }
 
-   if (message == e_message_left_button_up)
+   if (message == e_message_left_button_down)
+   {
+
+      ::output_debug_string("e_message_left_button_down");
+
+   }
+   else if (message == e_message_left_button_up)
    {
 
       ::output_debug_string("e_message_left_button_up");
