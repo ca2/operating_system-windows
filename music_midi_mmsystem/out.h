@@ -32,7 +32,7 @@ namespace music
             void open() override;
             void close() override;
 
-            void send_short_message(::music::midi::enum_message emessage, int iChannel, int iData1, int iData2);
+            void send_short_message(::music::midi::enum_midi_message emessage, int iChannel, int iData1, int iData2);
             void send_long_message(const block& block);
 
             virtual void sysex(const block& block);

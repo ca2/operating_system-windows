@@ -1,5 +1,5 @@
 #include "framework.h"
-#include "aura/graphics/image/_image.h"
+#include "aura/graphics/image/image.h"
 #include "windowing.h"
 
 
