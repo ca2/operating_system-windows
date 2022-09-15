@@ -5,6 +5,7 @@
 #include "windowing.h"
 #include "display.h"
 #include "window.h"
+#include "aura/graphics/image/image.h"
 #include "aura/user/user/interaction_impl.h"
 #ifdef REDRAW_HINTING
 #include <gdiplus.h>
