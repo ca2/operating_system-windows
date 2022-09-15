@@ -215,6 +215,17 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_app_veriwell_musical_player_lite", "..\..\..\source\app-veriwell\musical_player_lite\shared_app_veriwell_musical_player_lite.vcxproj", "{07DCA1DE-7F80-4384-86C1-039FDC1648D6}"
 	ProjectSection(ProjectDependencies) = postProject
 		{0B0A6C45-0AE3-4DC5-889A-7235BC9DB154} = {0B0A6C45-0AE3-4DC5-889A-7235BC9DB154}
+		{0BB1A1D1-7B7D-4484-9DF5-060481390526} = {0BB1A1D1-7B7D-4484-9DF5-060481390526}
+		{46D7D9C9-7B52-4DC6-AF84-46A5E3CDC43D} = {46D7D9C9-7B52-4DC6-AF84-46A5E3CDC43D}
+		{9A5FBFB1-76E6-4F7E-933A-328C1EEC95AF} = {9A5FBFB1-76E6-4F7E-933A-328C1EEC95AF}
+		{A69CC125-E38A-4F77-9677-8860D43AB3B0} = {A69CC125-E38A-4F77-9677-8860D43AB3B0}
+		{B2E38F2D-2D8C-4C63-8865-02DC220DC360} = {B2E38F2D-2D8C-4C63-8865-02DC220DC360}
+		{C1CCDF2E-9F27-45D3-B67A-B2EEB1754E72} = {C1CCDF2E-9F27-45D3-B67A-B2EEB1754E72}
+		{D08014E6-E329-41CF-81B5-957C290A4AA8} = {D08014E6-E329-41CF-81B5-957C290A4AA8}
+		{D6B5B8F3-A524-4E73-8343-C3D5D558ADE3} = {D6B5B8F3-A524-4E73-8343-C3D5D558ADE3}
+		{D79C7DDB-A727-4B91-803E-41C4431693D6} = {D79C7DDB-A727-4B91-803E-41C4431693D6}
+		{F5B3A373-7B56-408E-8F5A-F7C193B959DB} = {F5B3A373-7B56-408E-8F5A-F7C193B959DB}
+		{F85061D8-22DC-4A8B-85EA-76D330BE52CC} = {F85061D8-22DC-4A8B-85EA-76D330BE52CC}
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_app_veriwell_musical_player", "..\..\..\source\app-veriwell\musical_player\shared_app_veriwell_musical_player.vcxproj", "{E8806260-D0AB-44C3-8225-61DEF6B9A1F2}"
@@ -230,6 +241,8 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "audio_decode_youtube_player_api_for_iframe", "..\..\..\source\app-core\audio_decode_youtube_player_api_for_iframe\audio_decode_youtube_player_api_for_iframe.vcxproj", "{19CC0015-A667-40EF-A04C-D02D15FDD64C}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "api_youtube", "..\..\..\source\app-core\api_youtube\api_youtube.vcxproj", "{A7AB2C1C-0A17-4BC8-B091-75044F64C063}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "networking_bsd", "..\..\..\source\app\networking_bsd\networking_bsd.vcxproj", "{46D7D9C9-7B52-4DC6-AF84-46A5E3CDC43D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -1162,6 +1175,22 @@ Global
 		{A7AB2C1C-0A17-4BC8-B091-75044F64C063}.stage|Win32.Build.0 = stage|Win32
 		{A7AB2C1C-0A17-4BC8-B091-75044F64C063}.stage|x64.ActiveCfg = stage|x64
 		{A7AB2C1C-0A17-4BC8-B091-75044F64C063}.stage|x64.Build.0 = stage|x64
+		{46D7D9C9-7B52-4DC6-AF84-46A5E3CDC43D}.basis|Win32.ActiveCfg = basis|Win32
+		{46D7D9C9-7B52-4DC6-AF84-46A5E3CDC43D}.basis|Win32.Build.0 = basis|Win32
+		{46D7D9C9-7B52-4DC6-AF84-46A5E3CDC43D}.basis|x64.ActiveCfg = basis|x64
+		{46D7D9C9-7B52-4DC6-AF84-46A5E3CDC43D}.basis|x64.Build.0 = basis|x64
+		{46D7D9C9-7B52-4DC6-AF84-46A5E3CDC43D}.cube_basis|Win32.ActiveCfg = cube_basis|Win32
+		{46D7D9C9-7B52-4DC6-AF84-46A5E3CDC43D}.cube_basis|Win32.Build.0 = cube_basis|Win32
+		{46D7D9C9-7B52-4DC6-AF84-46A5E3CDC43D}.cube_basis|x64.ActiveCfg = cube_basis|x64
+		{46D7D9C9-7B52-4DC6-AF84-46A5E3CDC43D}.cube_basis|x64.Build.0 = cube_basis|x64
+		{46D7D9C9-7B52-4DC6-AF84-46A5E3CDC43D}.cube_stage|Win32.ActiveCfg = cube_stage|Win32
+		{46D7D9C9-7B52-4DC6-AF84-46A5E3CDC43D}.cube_stage|Win32.Build.0 = cube_stage|Win32
+		{46D7D9C9-7B52-4DC6-AF84-46A5E3CDC43D}.cube_stage|x64.ActiveCfg = cube_stage|x64
+		{46D7D9C9-7B52-4DC6-AF84-46A5E3CDC43D}.cube_stage|x64.Build.0 = cube_stage|x64
+		{46D7D9C9-7B52-4DC6-AF84-46A5E3CDC43D}.stage|Win32.ActiveCfg = stage|Win32
+		{46D7D9C9-7B52-4DC6-AF84-46A5E3CDC43D}.stage|Win32.Build.0 = stage|Win32
+		{46D7D9C9-7B52-4DC6-AF84-46A5E3CDC43D}.stage|x64.ActiveCfg = stage|x64
+		{46D7D9C9-7B52-4DC6-AF84-46A5E3CDC43D}.stage|x64.Build.0 = stage|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

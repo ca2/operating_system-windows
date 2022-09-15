@@ -10,7 +10,7 @@
 
 
 template < typename TYPE, std::size_t N >
-inline ::block memory_block(TYPE ( & type) [N])
+inline ::block memory_block(TYPE(&type)[N])
 {
 
    return { (void *)__memory_address_of(type), N };
@@ -26,14 +26,14 @@ namespace music
    {
 
 
-      namespace mmsystem 
+      namespace mmsystem
       {
 
 
-         ::mutex& get_midi_mutex();
+         ::mutex & get_midi_mutex();
 
 
-         sequencer::sequencer(sequence* psequence, const string& strDevice) :
+         sequencer::sequencer(sequence * psequence, const string & strDevice) :
             ::music::midi::sequencer(psequence, strDevice)
          {
 
@@ -101,7 +101,7 @@ namespace music
             if (wMsg == MM_MOM_DONE)
             {
 
-               OnDone((HMIDISTRM) hmo, (LPMIDIHDR) dwParam1);
+               OnDone((HMIDISTRM)hmo, (LPMIDIHDR)dwParam1);
 
 
             }
@@ -145,7 +145,7 @@ namespace music
 
             m_tkLastOp = m_psequence->m_tkBase;
 
-            u32 uDeviceID = (u32) m_iDevice;
+            u32 uDeviceID = (u32)m_iDevice;
 
             ::e_status estatus = ::success;
 
@@ -248,10 +248,27 @@ namespace music
 
             //}
 
+            //midi_out_open();
+
+            //midi_out_xg_mode_on();
+
+            //midi_out_xg_mode_reset();
+
+            //midi_out_xg_drum_setup1_reset();
+
+            //midi_out_xg_drum_setup2_reset();
+
+            //midi_out_master_volume_reset();
+
+            //midi_out_close();
+
+
+
+
             if (m_hstream == nullptr)
             {
 
-               MMRESULT mmresult = midiStreamOpen(&m_hstream, &uDeviceID, 1, (DWORD_PTR)&sequencer::MidiOutProc, (DWORD_PTR)(sequencer*)this, CALLBACK_FUNCTION);
+               MMRESULT mmresult = midiStreamOpen(&m_hstream, &uDeviceID, 1, (DWORD_PTR)&sequencer::MidiOutProc, (DWORD_PTR)(sequencer *)this, CALLBACK_FUNCTION);
 
                //estatus = translate_os_result(mmr, "sequencer::mm_start", "midiStreamOpen error");
 
@@ -264,7 +281,7 @@ namespace music
 
                   m_psequence->set_state(sequence::e_state_opened);
 
-                  throw multimedia::exception(multimedia::e_exception_midi, estatus); 
+                  throw multimedia::exception(multimedia::e_exception_midi, estatus);
 
                }
 
@@ -272,7 +289,7 @@ namespace music
 
                mptd.dwTimeDiv = m_psequence->m_pfile->m_dwTempoDivision;
 
-               estatus = translate_os_result(midiStreamProperty(m_hstream, (LPBYTE)& mptd, MIDIPROP_SET | MIDIPROP_TIMEDIV), "mm_start", "midiStreamProperty(timeDiv)");
+               estatus = translate_os_result(midiStreamProperty(m_hstream, (LPBYTE)&mptd, MIDIPROP_SET | MIDIPROP_TIMEDIV), "mm_start", "midiStreamProperty(timeDiv)");
 
                if (estatus != ::success)
                {
@@ -288,6 +305,13 @@ namespace music
                }
 
             }
+
+
+            //pplayer->m_psequencer->m_pmessageout->xg_system_on();
+
+            //preempt(100_ms);
+
+
 
             estatus = ::success;
 
@@ -345,7 +369,7 @@ namespace music
          }
 
 
-         void sequencer::install_message_routing(::channel* pchannel)
+         void sequencer::install_message_routing(::channel * pchannel)
          {
 
             ::music::midi::sequencer::install_message_routing(pchannel);
@@ -396,7 +420,7 @@ namespace music
          }
 
 
-         void sequencer::restart(player_command* pcommand)
+         void sequencer::restart(player_command * pcommand)
          {
 
             synchronous_lock synchronouslock(mutex());
@@ -454,7 +478,7 @@ namespace music
 
                   m_psequence->m_flags.erase(sequence::e_flag_waiting);
 
-                  pcommand->m_estatus= error_not_ready;
+                  pcommand->m_estatus = error_not_ready;
 
                   return;
 
@@ -549,9 +573,9 @@ namespace music
 
          ::duration sequencer::get_time_position()
          {
-            
+
             ::duration duration;
-         
+
             get_time_position(duration);
 
             return duration;
@@ -575,9 +599,9 @@ namespace music
                sequence::e_state_opened != m_psequence->get_state() &&
                sequence::e_state_stopping != m_psequence->get_state())
             {
-               
+
                TRACE("seqTime(): State wrong! [is %u]", m_psequence->get_state());
-               
+
                return error_unsupported_function;
 
             }
@@ -589,7 +613,7 @@ namespace music
 
                if (sequence::e_state_pre_rolled != m_psequence->get_state())
                {
-                  
+
                   mmtime.wType = TIME_MS;
 
                   if (m_hstream == nullptr)
@@ -649,7 +673,7 @@ namespace music
             //lpmh->dwBytesRecorded = 0;
             lpdw = (LPDWORD)(lpmh->lpData + lpmh->dwBytesRecorded);
 
-            while(lpmh->dwBufferLength - lpmh->dwBytesRecorded >= 3 * sizeof(u32))
+            while (lpmh->dwBufferLength - lpmh->dwBytesRecorded >= 3 * sizeof(u32))
             {
 
                if (m_iPrerollPhase == 0)
@@ -658,7 +682,7 @@ namespace music
                   // Tempo change event
                   if (KF_EMPTY != m_keyframe.rbTempo[0] || KF_EMPTY != m_keyframe.rbTempo[1] || KF_EMPTY != m_keyframe.rbTempo[2])
                   {
-                  
+
                      *lpdw++ = 0;
                      *lpdw++ = 0;
 
@@ -678,7 +702,7 @@ namespace music
                   }
 
                }
-               else if(m_iPrerollPhase < 17)
+               else if (m_iPrerollPhase < 17)
                {
 
                   int idx = m_iPrerollPhase - 1;
@@ -699,7 +723,7 @@ namespace music
                   }
 
                }
-               else if(m_iPrerollPhase < 1 + 16 + 120 * 16)
+               else if (m_iPrerollPhase < 1 + 16 + 120 * 16)
                {
 
                   // Controller events
@@ -775,6 +799,28 @@ namespace music
                   return ::success;
 
                }
+               else if (m_psequence->has_operation(e_operation_xg_system_on))
+               {
+
+                  const uchar xgSystemOn[] =
+                  {
+                     0x00, 0x00, 0x00, 0x00,
+                     0x00, 0x00, 0x00, 0x00,
+                     0x09, 0x00, 0x00, MEVT_LONGMSG,
+                     0xf0, 0x43, 0x10, 0x4c,
+                     0x00, 0x00, 0x7e, 0x00,
+                     0xf7, 0x00, 0x00, 0x00
+                  };
+
+                  lpmidihdr->dwBytesRecorded = sizeof(xgSystemOn);
+
+                  memcpy_dup(lpmidihdr->lpData, xgSystemOn, sizeof(xgSystemOn));
+
+                  m_psequence->clear_operation(e_operation_xg_system_on);
+
+                  return ::success;
+
+               }
                else if (m_psequence->has_operation(e_operation_preroll))
                {
 
@@ -843,10 +889,10 @@ namespace music
                }
 
             }
-               
+
             estatus = ::success;
 
-            if(lpmidihdr->dwBufferLength - lpmidihdr->dwBytesRecorded > 16)
+            if (lpmidihdr->dwBufferLength - lpmidihdr->dwBytesRecorded > 16)
             {
 
                estatus = WorkStreamRender(lpmidihdr, m_psequence->m_tkEnd, m_iBufferNominalMax);
@@ -900,7 +946,7 @@ namespace music
 
             if (sequence::e_state_reset == m_psequence->get_state())
             {
-               
+
                return;
 
             }
@@ -936,7 +982,7 @@ namespace music
             }
             else
             {
-               
+
                //post_midi_sequence_event(sequence::e_event_midi_stream_out, lpmidihdr);
                synchronous_lock synchronouslock(mutex());
 
@@ -1003,8 +1049,8 @@ namespace music
 
             ASSERT(lpmidihdr != nullptr);
             LPBYTE lpbData = (LPBYTE)(lpmidihdr->lpData + lpmidihdr->dwOffset);
-            MIDIEVENT * lpme = (MIDIEVENT*)lpbData;
-            file::midi_stream_event_header * pheader = (file::midi_stream_event_header*) & lpme->dwParms[0];
+            MIDIEVENT * lpme = (MIDIEVENT *)lpbData;
+            file::midi_stream_event_header * pheader = (file::midi_stream_event_header *)&lpme->dwParms[0];
             lpbData = (LPBYTE)pheader;
             LPDWORD lpdwParam;
 
@@ -1013,12 +1059,12 @@ namespace music
             {
             case 0:
             {
-               array < ::ikaraoke::lyric_event_v1, ::ikaraoke::lyric_event_v1&>* plyriceventa = nullptr;
-               array < ::ikaraoke::lyric_event_v1, ::ikaraoke::lyric_event_v1&> lyriceventa;
+               array < ::ikaraoke::lyric_event_v1, ::ikaraoke::lyric_event_v1 &> * plyriceventa = nullptr;
+               array < ::ikaraoke::lyric_event_v1, ::ikaraoke::lyric_event_v1 &> lyriceventa;
                for (i32 i = sizeof(file::midi_stream_event_header); i < iSize;)
                {
-                  pheader = (file::midi_stream_event_header*) & lpbData[i];
-                  lpdwParam = (LPDWORD)& lpbData[i + sizeof(file::midi_stream_event_header)];
+                  pheader = (file::midi_stream_event_header *)&lpbData[i];
+                  lpdwParam = (LPDWORD)&lpbData[i + sizeof(file::midi_stream_event_header)];
                   ASSERT(*lpdwParam == pheader->m_dwType);
                   switch (pheader->m_dwType)
                   {
@@ -1026,9 +1072,9 @@ namespace music
                   {
                      if (plyriceventa == nullptr)
                      {
-                        plyriceventa = new array <::ikaraoke::lyric_event_v1, ::ikaraoke::lyric_event_v1&>;
+                        plyriceventa = new array <::ikaraoke::lyric_event_v1, ::ikaraoke::lyric_event_v1 &>;
                      }
-                     ::memory_file memFile((LPBYTE)& lpdwParam[1], pheader->m_dwLength - sizeof(u32));
+                     ::memory_file memFile((LPBYTE)&lpdwParam[1], pheader->m_dwLength - sizeof(u32));
                      /* x2x                  CArchive ar(&memFile, CArchive::load);
                      lyriceventa.Serialize(ar);
                      plyriceventa->append(lyriceventa); */
@@ -1042,9 +1088,9 @@ namespace music
                   {
 
                      auto pfile = create_memory_file();
-                     
-                     pfile->memory().assign((LPBYTE)& lpdwParam[1], pheader->m_dwLength - sizeof(u32));
-                     
+
+                     pfile->memory().assign((LPBYTE)&lpdwParam[1], pheader->m_dwLength - sizeof(u32));
+
                      binary_stream stream(pfile);
 
                      for (i32 i = 0; i < m_psequence->m_iaLevel.get_size(); i++)
@@ -1157,7 +1203,7 @@ namespace music
 
             auto estatus = m_pbuffera->midiOutUnprepareHeader((HMIDIOUT)m_hstream);
 
-            if(!estatus)
+            if (!estatus)
             {
 
                TRACE("midiOutUnprepareHeader failed in seqBufferDone! (%lu)", (u32)estatus.m_estatus);
@@ -1190,16 +1236,16 @@ namespace music
             {
             case sequence::e_event_operation:
             {
-               
-//               m_psequence->set_operation_on(false);
-               
+
+               //               m_psequence->set_operation_on(false);
+
                m_psequence->set_state(m_psequence->m_estatePreOperation);
 
             }
             break;
             case sequence::e_event_midi_playback_end:
             {
-               
+
                m_psequence->set_state(sequence::e_state_opened);
 
             }
@@ -1295,8 +1341,8 @@ namespace music
             return m_psequence->m_flags.has(sequence::e_flag_tempo_change);
 
          }
-         
-         
+
+
          void sequencer::SetTempoChangeFlag(bool bSet)
          {
 
@@ -1369,7 +1415,7 @@ namespace music
 
          void sequencer::SetSettingPositionFlag(bool bSet)
          {
-             
+
             m_psequence->m_flags.set(sequence::e_flag_setting_position, bSet);
 
          }
@@ -1436,13 +1482,23 @@ namespace music
 
             MMRESULT mmresult;
 
-            MIDIHDR mh{};
+            memory m1;
 
-            mh.lpData = (LPSTR) block.get_data();
+            m1.set_size(sizeof(MIDIHDR));
 
-            mh.dwBufferLength = (DWORD) block.get_size();
+            MIDIHDR * pmidihdr = (MIDIHDR *)m1.get_data();
 
-            mmresult = midiOutPrepareHeader(m_hmidiout, &mh, sizeof(MIDIHDR));
+            memory m;
+
+            m.assign(block.get_data(), block.get_size());
+
+            pmidihdr->lpData = (LPSTR)m.get_data();
+
+            pmidihdr->dwBufferLength = (DWORD)m.get_size();
+
+            auto hmidiout = m_hmidiout;
+
+            mmresult = midiOutPrepareHeader(hmidiout, pmidihdr, sizeof(MIDIHDR));
 
             estatus = mmresult_to_status(mmresult);
 
@@ -1455,7 +1511,7 @@ namespace music
 
             }
 
-            mmresult = midiOutLongMsg(m_hmidiout, &mh, sizeof(MIDIHDR));
+            mmresult = midiOutLongMsg(hmidiout, pmidihdr, sizeof(MIDIHDR));
 
             estatus = mmresult_to_status(mmresult);
 
@@ -1470,14 +1526,14 @@ namespace music
 
             ::preempt(duration);
 
-            while (!(mh.dwFlags & MHDR_DONE))
+            while (!(pmidihdr->dwFlags & MHDR_DONE))
             {
 
                m_eventLongMessage.wait();
 
             }
 
-            mmresult = midiOutUnprepareHeader(m_hmidiout, &mh, sizeof(MIDIHDR));
+            mmresult = midiOutUnprepareHeader(hmidiout, pmidihdr, sizeof(MIDIHDR));
 
             estatus = mmresult_to_status(mmresult);
 
@@ -1529,7 +1585,7 @@ namespace music
             };
 
             midi_out_long_message(memory_block(XGModeReset), 800_ms);
-   
+
          }
 
 
@@ -1549,8 +1605,8 @@ namespace music
             midi_out_long_message(memory_block(XGDrumSetup1Reset), 800_ms);
 
          }
-         
-         
+
+
          void sequencer::midi_out_xg_drum_setup2_reset()
          {
 
@@ -1606,7 +1662,7 @@ namespace music
 
          }
 
-         
+
          void sequencer::SendGMReset()
          {
 
@@ -1656,10 +1712,10 @@ namespace music
             mmresult = midiOutPrepareHeader(hmidiout, lpmh, sizeof(MIDIHDR));
 
             estatus = mmresult_to_status(mmresult);
-            
+
             if (!estatus)
             {
-             
+
                throw ::exception(estatus);
 
             }
@@ -1672,7 +1728,7 @@ namespace music
 
             if (!estatus)
             {
-             
+
                throw ::exception(estatus);
 
             }
@@ -1690,7 +1746,7 @@ namespace music
 
             if (!estatus)
             {
-             
+
                throw ::exception(estatus);
 
             }
@@ -1734,13 +1790,13 @@ namespace music
 
 
          ::e_status sequencer::StreamEventF1(musical_tick tkDelta,
-            array < ::music::midi::event*, ::music::midi::event* >& eventptra,
+            array < ::music::midi::event *, ::music::midi::event * > & eventptra,
             LPMIDIHDR lpmh,
             musical_tick tkMax,
             u32 cbPrerollNomimalMax
          )
          {
-            
+
             __UNREFERENCED_PARAMETER(tkMax);
             __UNREFERENCED_PARAMETER(cbPrerollNomimalMax);
 
@@ -1751,7 +1807,7 @@ namespace music
                return ::success;
             }
 
-            ::music::midi::event* pevent;
+            ::music::midi::event * pevent;
             i32 iSize = sizeof(file::midi_stream_event_header);
             i32 i;
             for (i = 0; i < eventptra.get_size(); i++)
@@ -1763,10 +1819,10 @@ namespace music
             }
 
             m_psequence->m_pfile->m_memstorageF1.set_size(iSize);
-            byte* lpbParam;
+            byte * lpbParam;
             LPDWORD lpdwType;
-            file::midi_stream_event_header* pheader;
-            pheader = (file::midi_stream_event_header*)& m_psequence->m_pfile->m_memstorageF1.get_data()[0];
+            file::midi_stream_event_header * pheader;
+            pheader = (file::midi_stream_event_header *)&m_psequence->m_pfile->m_memstorageF1.get_data()[0];
             pheader->m_dwLength = iSize - sizeof(file::midi_stream_event_header);
             pheader->m_dwType = 0;
             iSize = sizeof(file::midi_stream_event_header);
@@ -1775,7 +1831,7 @@ namespace music
                pevent = eventptra[i];
                lpbParam = pevent->GetData();
                lpdwType = (LPDWORD)lpbParam;
-               pheader = (file::midi_stream_event_header*)& m_psequence->m_pfile->m_memstorageF1.get_data()[iSize];
+               pheader = (file::midi_stream_event_header *)&m_psequence->m_pfile->m_memstorageF1.get_data()[iSize];
                pheader->m_dwLength = (u32)pevent->GetDataSize();
                pheader->m_dwType = *lpdwType;
                memcpy_dup(
@@ -1792,19 +1848,19 @@ namespace music
             m_psequence->m_pfile->m_dwPendingUserEvent = ((MEVT_F_CALLBACK | MEVT_F_LONG | (((u32)MEVT_COMMENT) << 24)) & 0xFF000000L);
 
             estatus = InsertParmData(tkDelta, lpmh);
-            
+
             if (!estatus)
             {
 
                WARNING("smfInsertParmData[2] : " << estatus.m_estatus);
-               
+
             }
 
             return estatus;
 
          }
 
-         
+
          ::e_status sequencer::StreamEvent(
             musical_tick tkDelta,
             ::music::midi::event * pevent,
@@ -1814,7 +1870,7 @@ namespace music
          {
 
             __UNREFERENCED_PARAMETER(tkMax);
-            
+
             if (pevent->GetFlags() & 1)
             {
 
@@ -1825,7 +1881,7 @@ namespace music
             u32 dwTempo;
             LPDWORD lpdw;
             ::e_status estatus;
-            
+
             lpdw = (LPDWORD)(lpmh->lpData + lpmh->dwBytesRecorded);
 
             if (pevent->GetFlags() & 1)
@@ -1864,7 +1920,7 @@ namespace music
 
                   if (iController >= 0 && iController < 120)
                   {
-                   
+
                      m_keyframe.rbControl[iTrack][iController] = (byte)iControllerValue;
 
                   }
@@ -2037,98 +2093,100 @@ namespace music
 
             //    }
             else if (pevent->GetFullType() != ::music::midi::meta)
-               //   else
-            {
-            int iFullType = pevent->GetFullType();
-            if (iFullType == sys_ex || iFullType == sys_ex_end)
             {
 
-               //            if(pEvent->GetFullType() == SysEx)
-               //         {
-               //                break;
-               //            }
-               ///* Must be F0 (ended with F7) system exclusive or FF meta
-               //** that we didn't recognize
-               //*/
-
-               if (3 * sizeof(u32) + pevent->GetDataSize() > cbPrerollNominalMax)
+               int iFullType = pevent->GetFullType();
+            
+               //if (iFullType == sys_ex || iFullType == sys_ex_end)
+               if (iFullType == sys_ex)
                {
 
-                  return error_would_reach_buffer_limit;
+                  //            if(pEvent->GetFullType() == SysEx)
+                  //         {
+                  //                break;
+                  //            }
+                  ///* Must be F0 (ended with F7) system exclusive or FF meta
+                  //** that we didn't recognize
+                  //*/
 
-               }
-
-               int iSize = (u32)pevent->GetDataSize();
-               auto pdata = pevent->GetData();
-
-               m_psequence->m_pfile->m_cbPendingUserEvent = iSize;
-               m_psequence->m_pfile->m_hpbPendingUserEvent = pdata;
-
-
-               if (iSize == 9)
-               {
-                  if (pdata[0] == 0xf0 && pdata[1] == 0x43
-                     && pdata[2] == 0x10 && pdata[3] == 0x4c
-                     && pdata[4] == 0x08)
+                  if (3 * sizeof(u32) + pevent->GetDataSize() > cbPrerollNominalMax)
                   {
 
-                     int NNMultiPartChannel = pdata[5];
-
-                     if (pdata[6] == 0x14)
-                     {
-
-                        int iVariationSend = pdata[7];
-
-                        output_debug_string("MULTIPART VARIATION SEND");
-
-                           
-
-                     }
-
-                     
+                     return error_would_reach_buffer_limit;
 
                   }
 
+                  int iSize = (u32)pevent->GetDataSize();
+                  auto pdata = pevent->GetData();
+
+                  m_psequence->m_pfile->m_cbPendingUserEvent = iSize;
+                  m_psequence->m_pfile->m_hpbPendingUserEvent = pdata;
+
+
+                  if (iSize == 9)
+                  {
+                     if (pdata[0] == 0xf0 && pdata[1] == 0x43
+                        && pdata[2] == 0x10 && pdata[3] == 0x4c
+                        && pdata[4] == 0x08)
+                     {
+
+                        int NNMultiPartChannel = pdata[5];
+
+                        if (pdata[6] == 0x14)
+                        {
+
+                           int iVariationSend = pdata[7];
+
+                           output_debug_string("MULTIPART VARIATION SEND");
+
+
+
+                        }
+
+
+
+                     }
+
+                  }
+                  m_psequence->m_pfile->m_dwPendingUserEvent = ((u32)MEVT_LONGMSG) << 24;
+                  //m_psequence->m_pfile->m_flags &= ~InsertSysEx;
+
+                  //if (pEvent->GetFullType() == sys_ex_end)
+                  //{
+                  //   m_psequence->m_pfile->m_dwPendingUserEvent = ((u32)MEVT_LONGMSG) << 24;
+                  //}
+                  //else if (pEvent->GetFullType() == sys_ex)
+                  //{
+                  //   //m_psequence->m_pfile->m_flags |= InsertSysEx;
+                  //   //m_psequence->m_pfile->m_cbPendingUserEvent;
+
+                  //   /* Falling through...
+                  //   */
+
+                  //   m_psequence->m_pfile->m_dwPendingUserEvent = ((u32)MEVT_LONGMSG) << 24;
+
+                  //}
+
+                  estatus = InsertParmData(tkDelta, lpmh);
+
+                  if (!estatus)
+                  {
+
+                     WARNING("smfInsertParmData[2] : " << estatus.m_estatus);
+
+                     return estatus;
+
+                  }
+
+                  lpdw = (LPDWORD)(lpmh->lpData + lpmh->dwBytesRecorded);
+
                }
-               m_psequence->m_pfile->m_dwPendingUserEvent = ((u32)MEVT_LONGMSG) << 24;
-               //m_psequence->m_pfile->m_flags &= ~InsertSysEx;
-
-               //if (pEvent->GetFullType() == sys_ex_end)
-               //{
-               //   m_psequence->m_pfile->m_dwPendingUserEvent = ((u32)MEVT_LONGMSG) << 24;
-               //}
-               //else if (pEvent->GetFullType() == sys_ex)
-               //{
-               //   //m_psequence->m_pfile->m_flags |= InsertSysEx;
-               //   //m_psequence->m_pfile->m_cbPendingUserEvent;
-
-               //   /* Falling through...
-               //   */
-
-               //   m_psequence->m_pfile->m_dwPendingUserEvent = ((u32)MEVT_LONGMSG) << 24;
-
-               //}
-
-               estatus = InsertParmData(tkDelta, lpmh);
-
-               if (!estatus)
+               else
                {
 
-                  WARNING("smfInsertParmData[2] : " << estatus.m_estatus);
-
-                  return estatus;
+                  output_debug_string("WHAT MIDI FULL TYPE ?!?!?!");
 
                }
-
-               lpdw = (LPDWORD)(lpmh->lpData + lpmh->dwBytesRecorded);
-
-            }
-            else
-            {
-
-               output_debug_string("WHAT MIDI FULL TYPE ?!?!?!");
-
-            }
 
             }
             else // Meta
@@ -2291,10 +2349,10 @@ namespace music
             {
 
                ::output_debug_string("didn't fit");
-            
+
             }
 
-            
+
 
             //if (!m_bHadNoteOn)
             //{
@@ -2315,7 +2373,7 @@ namespace music
             //}
             //else
             //{
-            *lpdw++ = (u32)tkDelta;
+            * lpdw++ = (u32)tkDelta;
             //}
             *lpdw++ = 0L;
             *lpdw++ = (m_psequence->m_pfile->m_dwPendingUserEvent & 0xFF000000L) | (dwLength & 0x00FFFFFFL);
@@ -2341,6 +2399,18 @@ namespace music
             }
 
             memcpy_dup(lpdw, m_psequence->m_pfile->m_hpbPendingUserEvent, dwLength);
+
+            byte * pb = (byte *)lpdw;
+
+            string strMessageText;
+
+            for (int i = 0; i < dwLength; i++)
+            {
+               strMessageText += ::hex::upper_from(pb[i]);
+               strMessageText += " ";
+            }
+
+            FORMATTED_INFORMATION("sysex:%s", strMessageText.c_str());
 
             auto remainingBytes = dwRounded - dwLength;
 
@@ -2376,7 +2446,7 @@ namespace music
 
             ASSERT(lpmh != nullptr);
 
-//            lpmh->dwBytesRecorded = 0;
+            //            lpmh->dwBytesRecorded = 0;
 
             if (m_psequence->m_pfile->m_dwPendingUserEvent)
             {
@@ -2439,7 +2509,7 @@ namespace music
 
                }
 
-               ::music::midi::event* pevent = nullptr;
+               ::music::midi::event * pevent = nullptr;
 
                int iLeft = iBufferNominalMax - lpmh->dwBytesRecorded;
 
@@ -2468,124 +2538,129 @@ namespace music
 
                musical_tick tkPosition = m_psequence->m_pfile->GetPosition();
 
-               musical_tick tkDiv = m_psequence->GetQuarterNote();
-
-               while ((m_psequence->tick_to_time(tkLastPosition + tkDiv) - m_psequence->tick_to_time(tkLastPosition)) > 100_ms)
+               if (m_psequence->m_eeffect == e_effect_fade_in || m_psequence->m_eeffect == e_effect_fade_out)
                {
 
-                  tkDiv /= 2;
+                  musical_tick tkDiv = m_psequence->GetQuarterNote();
 
-               }
-
-               while (true)
-               {
-
-                  musical_tick tkOp = ((m_tkLastOp + tkDiv) / tkDiv) * tkDiv;
-
-                  if (tkOp > tkPosition)
+                  while ((m_psequence->tick_to_time(tkLastPosition + tkDiv) - m_psequence->tick_to_time(tkLastPosition)) > 100_ms)
                   {
 
-                     break;
+                     tkDiv /= 2;
 
                   }
 
-                  if (tkOp < tkLastPosition)
+                  while (true)
                   {
 
-                     tkOp = tkPosition;
+                     musical_tick tkOp = ((m_tkLastOp + tkDiv) / tkDiv) * tkDiv;
 
-                  }
-
-                  tkDelta = tkOp - tkLastPosition;
-
-                  LPDWORD lpdw = (LPDWORD)(lpmh->lpData + lpmh->dwBytesRecorded);
-
-                  int iBytesRecorded = 0;
-
-                  if (m_psequence->m_eeffect == e_effect_fade_in || m_psequence->m_eeffect == e_effect_fade_out)
-                  {
-
-                     double dVolume = m_psequence->get_fade_volume(m_psequence->tick_to_time(tkOp));
-
-                     for (int iTrack = 0; iTrack < 16; iTrack++)
+                     if (tkOp > tkPosition)
                      {
 
-                        clip(0, 127, m_psequence->m_iaRefVolume[iTrack]);
+                        break;
 
-                        byte bVolume = (byte)(m_psequence->m_iaRefVolume[iTrack] * maximum(0.0, minimum(1.0, dVolume)));
+                     }
 
-                        if (abs((int)m_keyframe.rbControl[iTrack][e_control_change_volume] - (int)bVolume) < 3)
+                     if (tkOp < tkLastPosition)
+                     {
+
+                        tkOp = tkPosition;
+
+                     }
+
+                     tkDelta = tkOp - tkLastPosition;
+
+                     LPDWORD lpdw = (LPDWORD)(lpmh->lpData + lpmh->dwBytesRecorded);
+
+                     int iBytesRecorded = 0;
+
+                     if (m_psequence->m_eeffect == e_effect_fade_in || m_psequence->m_eeffect == e_effect_fade_out)
+                     {
+
+                        double dVolume = m_psequence->get_fade_volume(m_psequence->tick_to_time(tkOp));
+
+                        for (int iTrack = 0; iTrack < 16; iTrack++)
                         {
 
-                           TRACE("too few difference!! opt-ed out");
+                           clip(0, 127, m_psequence->m_iaRefVolume[iTrack]);
 
-                        }
-                        else
-                        {
+                           byte bVolume = (byte)(m_psequence->m_iaRefVolume[iTrack] * maximum(0.0, minimum(1.0, dVolume)));
 
-                           u32 uiFullType = control_change;
-                           uiFullType |= iTrack & 0xf;
-                           u32 uiChB1 = e_control_change_volume;
-                           u32 uiChB2 = bVolume;
+                           if (abs((int)m_keyframe.rbControl[iTrack][e_control_change_volume] - (int)bVolume) < 3)
+                           {
 
-                           *lpdw++ = (u32)tkDelta;
-                           *lpdw++ = 0;
-                           *lpdw++ = (((u32)MEVT_SHORTMSG) << 24) |
-                              (uiFullType) |
-                              (uiChB1 << 8) |
-                              (uiChB2 << 16);
+                              TRACE("too few difference!! opt-ed out");
+
+                           }
+                           else
+                           {
+
+                              u32 uiFullType = control_change;
+                              uiFullType |= iTrack & 0xf;
+                              u32 uiChB1 = e_control_change_volume;
+                              u32 uiChB2 = bVolume;
+
+                              *lpdw++ = (u32)tkDelta;
+                              *lpdw++ = 0;
+                              *lpdw++ = (((u32)MEVT_SHORTMSG) << 24) |
+                                 (uiFullType) |
+                                 (uiChB1 << 8) |
+                                 (uiChB2 << 16);
 
 
-                           tkLastPosition += tkDelta;
+                              tkLastPosition += tkDelta;
 
-                           tkDelta = 0;
+                              tkDelta = 0;
 
-                           lpmh->dwBytesRecorded += 3 * sizeof(u32);
+                              lpmh->dwBytesRecorded += 3 * sizeof(u32);
 
-                           iBytesRecorded += 3 * sizeof(u32);
+                              iBytesRecorded += 3 * sizeof(u32);
+
+                           }
 
                         }
 
                      }
-
-                  }
-                  else
-                  {
-
-                     for (int iTrack = 0; iTrack < 16; iTrack++)
+                     else
                      {
 
-                        if (m_keyframe.rbControl[iTrack][e_control_change_volume] == KF_EMPTY)
+                        for (int iTrack = 0; iTrack < 16; iTrack++)
                         {
 
-                           m_keyframe.rbControl[iTrack][e_control_change_volume] = 100;
+                           if (m_keyframe.rbControl[iTrack][e_control_change_volume] == KF_EMPTY)
+                           {
+
+                              m_keyframe.rbControl[iTrack][e_control_change_volume] = 100;
+
+                           }
+
+                           clip(0, 127, m_keyframe.rbControl[iTrack][e_control_change_volume]);
+
+                           int iVolume = m_keyframe.rbControl[iTrack][e_control_change_volume];
+
+                           m_psequence->m_iaRefVolume.set_at_grow(iTrack, iVolume);
 
                         }
 
-                        clip(0, 127, m_keyframe.rbControl[iTrack][e_control_change_volume]);
+                        *lpdw++ = (u32)tkDelta;
+                        *lpdw++ = 0;
+                        *lpdw++ = (MEVT_NOP << 24);
 
-                        int iVolume = m_keyframe.rbControl[iTrack][e_control_change_volume];
+                        tkLastPosition += tkDelta;
 
-                        m_psequence->m_iaRefVolume.set_at_grow(iTrack, iVolume);
+                        tkDelta = 0;
+
+                        lpmh->dwBytesRecorded += 3 * sizeof(u32);
+
+                        iBytesRecorded += 3 * sizeof(u32);
+
 
                      }
 
-                     *lpdw++ = (u32)tkDelta;
-                     *lpdw++ = 0;
-                     *lpdw++ = (MEVT_NOP << 24);
-
-                     tkLastPosition += tkDelta;
-
-                     tkDelta = 0;
-
-                     lpmh->dwBytesRecorded += 3 * sizeof(u32);
-
-                     iBytesRecorded += 3 * sizeof(u32);
-
+                     m_tkLastOp = tkOp;
 
                   }
-
-                  m_tkLastOp = tkOp;
 
                }
 

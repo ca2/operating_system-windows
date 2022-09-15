@@ -39,7 +39,7 @@ namespace music
 
             virtual void on_os_message(byte b, byte b1, byte b2) override;
 
-            void     send_short_message(::music::midi::enum_message emessage, int iChannel, int iData1, int iData2);
+            void     send_short_message(::music::midi::enum_midi_message emessage, int iChannel, int iData1, int iData2);
 
             static void CALLBACK MidiInProc(
                HMIDIIN   hMidiIn,

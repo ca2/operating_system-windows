@@ -814,19 +814,19 @@ namespace apex_windows
 
       }
 
-      string strMappedProfile;
+      //string strMappedProfile;
 
-      if (strProfile.has_char())
-      {
+      //if (strProfile.has_char())
+      //{
 
-         auto path = m_psystem->m_papexsystem->dir().config() / "config/browser" / strBrowser / (strProfile + ".txt");
+      //   auto path = m_psystem->m_papexsystem->dir().config() / "config/browser" / strBrowser / (strProfile + ".txt");
 
-         strMappedProfile = m_psystem->m_papexsystem->file().as_string(path);
+      //   strMappedProfile = m_psystem->m_papexsystem->file().as_string(path);
 
-      }
+      //}
 
 
-      if (strMappedProfile.has_char() && strBrowser == "chrome")
+      if (strProfile.has_char() && strBrowser == "chrome")
       {
 
          ::acme_windows::registry::key key;
@@ -840,7 +840,7 @@ namespace apex_windows
 
             ::file::path path = ::str().consume_quoted_value(psz);
 
-            string strCommand = "\"" + path + "\" \"" + strUrl + "\" --profile-directory=\"" + strMappedProfile + "\"";
+            string strCommand = "\"" + path + "\" \"" + strUrl + "\" --profile-directory=\"" + strProfile + "\"";
 
             //string strOutput;
 
