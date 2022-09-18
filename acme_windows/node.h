@@ -145,13 +145,13 @@ namespace acme_windows
 
       virtual ::wstring expand_environment_variables(const ::wstring& wstr);
 
-      void implement(__pointer(::acme::node)& pnode, __pointer(class ::system)& psystem)override;
+      void implement(__pointer(::acme::node)& pnode, __pointer(::acme::system)& psystem)override;
 
 
       void on_start_system() override;
 
 
-      void create_app_shortcut(::app* papp) override;
+      void create_app_shortcut(::acme::application* papp) override;
 
 
       //string get_local_mutex_name(const ::string& strAppId) override;

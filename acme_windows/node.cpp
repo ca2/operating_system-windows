@@ -2575,7 +2575,7 @@ namespace acme_windows
    }
 
 
-   void node::implement(__pointer(::acme::node) & pnode, __pointer(class ::system) & psystem)
+   void node::implement(__pointer(::acme::node) & pnode, __pointer(::acme::system) & psystem)
    {
 
       return ::acme::node::implement(pnode, psystem);
@@ -2601,7 +2601,7 @@ namespace acme_windows
    }
 
 
-   void node::create_app_shortcut(::app * papp)
+   void node::create_app_shortcut(::acme::application * papp)
    {
 
    }

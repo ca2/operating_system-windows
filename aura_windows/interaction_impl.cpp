@@ -4908,397 +4908,399 @@ void interaction_impl::set_tool_window(bool bSet)
    void interaction_impl::message_handler(::message::message * pmessage)
    {
 
-      ::message::key* pkey = nullptr;
-
-      bool bKeyMessage = false;
-
-      if (m_puserinteraction->pre_message_handler(pkey, bKeyMessage,pmessage))
-      {
-
-         return;
-
-      }
-
-      auto message = pmessage->m_atom.u32();
-
-      m_uiMessage = message;
-
-      m_wparam = pmessage->m_wparam;
-
-      m_lparam = pmessage->m_lparam;
-
-      if (message == WM_IME_SETCONTEXT)
-      {
-
-         if (m_wparam == 1)
-         {
-
-            m_lparam &= ~ISC_SHOWUICOMPOSITIONWINDOW;
-
-         }
-
-         pmessage->m_lresult = ::DefWindowProcW(m_hwnd, m_uiMessage, m_wparam, m_lparam);
-
-         pmessage->m_bRet = true;
-
-         return;
-
-      }
-
-      bool bUserElementalOk = !m_bDestroyImplOnly && m_puserinteraction && m_puserinteraction->m_bUserElementOk;
-
-      if (m_uiMessage == WM_IME_CHAR)
-      {
-
-         output_debug_string("WM_IME_CHAR");
-
-      }
-
-      //if (message == e_message_key_down ||
-      //   message == e_message_key_up ||
-      //   message == e_message_char ||
-      //   message == e_message_sys_key_down ||
-      //   message == e_message_sys_key_up ||
-      //   message == e_message_sys_char ||
-      //   message == WM_IME_KEYDOWN ||
-      //   message == WM_IME_SETCONTEXT ||
-      //   message == WM_IME_SELECT ||
-      //   message == WM_IME_KEYUP ||
-      //   message == WM_IME_CHAR ||
-      //   message == WM_IME_STARTCOMPOSITION ||
-      //   message == WM_IME_COMPOSITION ||
-      //   message == WM_IME_COMPOSITIONFULL ||
-      //   message == WM_IME_NOTIFY ||
-      //   message == WM_IME_ENDCOMPOSITION)
-      //{
-
-      //   auto pkey = pmessage->m_pkey;
-
-      //   if (message == e_message_key_down)
-      //   {
-
-      //      output_debug_string("\n Key Down Event ");
-
-      //   }
-
-      //   auto psession = get_session();
-
-      //   if (message == e_message_key_down || message == e_message_sys_key_down)
-      //   {
-      //      try
-      //      {
-      //         psession->set_key_pressed(pkey->m_ekey, true);
-      //      }
-      //      catch (...)
-      //      {
-      //      }
-      //   }
-      //   else if (message == e_message_key_up || message == e_message_sys_key_up)
-      //   {
-
-      //      try
-      //      {
-
-      //         psession->set_key_pressed(pkey->m_ekey, false);
-
-      //      }
-      //      catch (...)
-      //      {
-
-      //      }
-
-      //   }
-
-      //}
-
-      if (message == e_message_timer)
-      {
-         //         m_puserinteraction->get_application()->step_timer();
-      }
-      else if (message == e_message_left_button_down)
-      {
-         ::RECT rectClient;
-         ::GetClientRect(m_hwnd, &rectClient);
-         ::RECT rectWindow;
-         ::GetWindowRect(m_hwnd, &rectWindow);
-         ::RECT rectRegion;
-         HRGN hrgn = CreateRectRgn(0, 0, 0, 0);
-         int regionType = ::GetWindowRgn(m_hwnd, hrgn);
-         if (regionType != 0)
-         {
-            ::GetRgnBox(hrgn, &rectRegion);
-         }
-         ::DeleteObject(hrgn); /* finished with region */
-         WINDOWPLACEMENT wp;
-         __zero(wp);
-         wp.length = sizeof(WINDOWPLACEMENT);
-         ::GetWindowPlacement(m_hwnd, &wp);
-         bool bZoomed = ::IsZoomed(m_hwnd) != false;
-         bool bIconic = ::IsIconic(m_hwnd) != false;
-      }
-      else if (message == e_message_set_cursor
-         || message == e_message_non_client_mouse_move)
-      {
-         //output_debug_string(".");
-      }
-      else
-      {
-
-#ifdef __DEBUG
-
-         if (0)
-         {
-            switch (message)
-            {
-            case e_message_create:
-               TRACE("e_message_create wparam=%08x lparam=%08x", pmessage->m_wparam, pmessage->m_lparam);
-
-               break;
-            case e_message_window_position_changing:
-               TRACE("e_message_window_position_changing wparam=%08x lparam=%08x", pmessage->m_wparam, pmessage->m_lparam);
-
-               break;
-            case e_message_window_position_changed:
-               TRACE("e_message_window_position_changed wparam=%08x lparam=%08x", pmessage->m_wparam, pmessage->m_lparam);
-
-               break;
-            case e_message_activate:
-               TRACE("e_message_activate wparam=%08x lparam=%08x", pmessage->m_wparam, pmessage->m_lparam);
-
-               break;
-            case e_message_activate_app:
-               TRACE("WM_ACTIVATEAPP wparam=%08x lparam=%08x", pmessage->m_wparam, pmessage->m_lparam);
-
-               break;
-            case e_message_mouse_activate:
-               TRACE("e_message_mouse_activate wparam=%08x lparam=%08x", pmessage->m_wparam, pmessage->m_lparam);
-
-               break;
-            case e_message_non_client_activate:
-               TRACE("e_message_non_client_activate wparam=%08x lparam=%08x", pmessage->m_wparam, pmessage->m_lparam);
-
-               break;
-            case e_message_set_focus:
-               TRACE("e_message_set_focus wparam=%08x lparam=%08x", pmessage->m_wparam, pmessage->m_lparam);
-
-               break;
-            case e_message_kill_focus:
-               TRACE("e_message_kill_focus wparam=%08x lparam=%08x", pmessage->m_wparam, pmessage->m_lparam);
-
-               break;
-            case e_message_move:
-               TRACE("e_message_move wparam=%08x lparam=%08x", pmessage->m_wparam, pmessage->m_lparam);
-
-               break;
-            case e_message_size:
-               TRACE("e_message_size wparam=%08x lparam=%08x", pmessage->m_wparam, pmessage->m_lparam);
-
-               break;
-            default:
-               TRACE("MESSAGE %08x wparam=%08x lparam=%08x", message, pmessage->m_wparam, pmessage->m_lparam);
-
-               break;
-            }
-
-         }
-
-#endif //__DEBUG
-
-      }
-      
-      //auto psession = get_session();
-
-
-
-      /*      else if(message == CA2M_BERGEDGE)
-      {
-      if(pmessage->m_wparam == BERGEDGE_GETAPP)
-      {
-      __pointer(::aura::application)* ppapp= (__pointer(::aura::application)*) pmessage->m_lparam;
-      *ppapp = get_application();
-      pmessage->m_bRet = true;
-      return;
-      }
-      }*/
-      //pmessage->set_lresult(0);
-
-      if (message == e_message_mouse_leave)
-      {
-
-         if (m_puserinteractionMouseCapture)
-         {
-
-            m_puserinteractionMouseCapture->_000OnMouseLeave(pmessage);
-
-         }
-         else if (m_puserinteraction)
-         {
-
-            m_puserinteraction->_000OnMouseLeave(pmessage);
-
-         }
-
-         _on_mouse_move_step(pmessage->m_pointMessage, true);
-
-         return;
-
-      }
-
-      if (
-         //message == e_message_set_cursor ||
-         message == e_message_mouse_move ||
-         message == e_message_non_client_mouse_move ||
-         message == e_message_mouse_wheel ||
-         message == e_message_left_button_down ||
-         message == e_message_left_button_up ||
-         message == e_message_middle_button_down ||
-         message == e_message_middle_button_up ||
-         message == e_message_right_button_down ||
-         message == e_message_right_button_up ||
-         message == e_message_left_button_double_click
-         )
-      {
-
-         auto pmouse = pmessage->m_union.m_pmouse;
-
-         if (on_mouse_message(pmouse))
-         {
-
-            return;
-
-         }
-
-      }
-
-      if (message == e_message_ole_dragenter ||
-         message == e_message_ole_dragover ||
-         message == e_message_ole_dragleave ||
-         message == e_message_ole_dragdrop)
-      {
-
-         auto pdrag = __cast < ::message::drag_and_drop>(pmessage);
-
-         auto pinteraction = pdrag->userinteraction();
-
-         //user::oswindow_array oswindowa;
-         //user::interaction_pointer_array wnda;
-         //wnda = *psystem->m_puiptraFrame;
-         //oswindowa = wnda.get_hwnda();
-         //user::window_util::SortByZOrder(oswindowa);
-         //for (i32 i = 0; i < oswindowa.get_size(); i++)
-         //{
-         //   __pointer(::user::interaction) pinteraction = wnda.find_first(oswindowa[i]);
-         //   if (pinteraction != nullptr)
-         //   {
-
-         if (pinteraction)
-         {
-            pinteraction->_000OnDrag(pdrag);
-            if (pdrag->m_bRet)
-               return;
-
-         }
-    /*        }
-         }*/
-         return;
-      }
-        
-      if (bKeyMessage)
-      {
-
-         __pointer(::user::interaction) puiFocus;
-         
-         puiFocus = m_puserinteractionKeyboardFocus;
-
-         ///auto pkey = pmessage->m_pkey;
-
-         if (message == e_message_key_down)
-         {
-
-            output_debug_string("\n Key Down Event ");
-
-         }
-
-         if (puiFocus)
-         {
-
-            puiFocus->route_message(pmessage);
-
-         }
-         else
-         {
-
-            m_puserinteraction->route_message(pmessage);
-
-         }
-
-         if (pmessage->m_bRet)
-         {
-
-            return;
-
-         }
-
-         //m_wparam-
-
-         //m_lparam = pmessage->m_lparam;
-
-         //pmessage->set_lresult(::default_window_procedure(message, pmessage->m_wparam, pmessage->m_lparam));
-
-         //return;
-
-      }
-
-      //if (message == e_message_subject)
-      //{
-
-      //   m_puserinteraction->handle(pmessage);
-
-      //   return;
-
-      //}
-
-      ::user::interaction_impl::message_handler(pmessage);
-
-      //if(pmessage->m_bRet && !pmessage->m_bDoSystemDefault)
-
-      if (pmessage->m_bRet)
-      {
-
-         return;
-
-      }
-
-      if(message == WM_IME_STARTCOMPOSITION ||
-         message == WM_IME_COMPOSITION ||
-         message == WM_IME_COMPOSITIONFULL ||
-         message == WM_IME_NOTIFY ||
-         message == WM_IME_ENDCOMPOSITION ||
-         message == WM_IME_SELECT ||
-         message == WM_IME_SETCONTEXT)
-      {
-
-         //return;
-
-      }
-
-      //if (bUserElementalOk && pmessage->m_bWindowProc)
-      //{
-      //   
-      //   if (m_puserinteraction != nullptr)
-      //   {
-      //      
-      //      m_puserinteraction->default_window_procedure(pmessage);
-
-      //   }
-      //   else
-      //   {
-      //      
-      //      pmessage->set_lresult(::DefWindowProcW(m_hwnd, pmessage->m_atom, pmessage->m_wparam, pmessage->m_lparam));
-
-      //   }
-
-      //}
+      return ::user::interaction_impl::message_handler(pmessage);
+
+//      ::message::key* pkey = nullptr;
+//
+//      bool bKeyMessage = false;
+//
+//      if (m_puserinteraction->pre_message_handler(pkey, bKeyMessage,pmessage))
+//      {
+//
+//         return;
+//
+//      }
+//
+//      auto message = pmessage->m_atom.u32();
+//
+//      m_uiMessage = message;
+//
+//      m_wparam = pmessage->m_wparam;
+//
+//      m_lparam = pmessage->m_lparam;
+//
+//      if (message == WM_IME_SETCONTEXT)
+//      {
+//
+//         if (m_wparam == 1)
+//         {
+//
+//            m_lparam &= ~ISC_SHOWUICOMPOSITIONWINDOW;
+//
+//         }
+//
+//         pmessage->m_lresult = ::DefWindowProcW(m_hwnd, m_uiMessage, m_wparam, m_lparam);
+//
+//         pmessage->m_bRet = true;
+//
+//         return;
+//
+//      }
+//
+//      bool bUserElementalOk = !m_bDestroyImplOnly && m_puserinteraction && m_puserinteraction->m_bUserElementOk;
+//
+//      if (m_uiMessage == WM_IME_CHAR)
+//      {
+//
+//         output_debug_string("WM_IME_CHAR");
+//
+//      }
+//
+//      //if (message == e_message_key_down ||
+//      //   message == e_message_key_up ||
+//      //   message == e_message_char ||
+//      //   message == e_message_sys_key_down ||
+//      //   message == e_message_sys_key_up ||
+//      //   message == e_message_sys_char ||
+//      //   message == WM_IME_KEYDOWN ||
+//      //   message == WM_IME_SETCONTEXT ||
+//      //   message == WM_IME_SELECT ||
+//      //   message == WM_IME_KEYUP ||
+//      //   message == WM_IME_CHAR ||
+//      //   message == WM_IME_STARTCOMPOSITION ||
+//      //   message == WM_IME_COMPOSITION ||
+//      //   message == WM_IME_COMPOSITIONFULL ||
+//      //   message == WM_IME_NOTIFY ||
+//      //   message == WM_IME_ENDCOMPOSITION)
+//      //{
+//
+//      //   auto pkey = pmessage->m_pkey;
+//
+//      //   if (message == e_message_key_down)
+//      //   {
+//
+//      //      output_debug_string("\n Key Down Event ");
+//
+//      //   }
+//
+//      //   auto psession = get_session();
+//
+//      //   if (message == e_message_key_down || message == e_message_sys_key_down)
+//      //   {
+//      //      try
+//      //      {
+//      //         psession->set_key_pressed(pkey->m_ekey, true);
+//      //      }
+//      //      catch (...)
+//      //      {
+//      //      }
+//      //   }
+//      //   else if (message == e_message_key_up || message == e_message_sys_key_up)
+//      //   {
+//
+//      //      try
+//      //      {
+//
+//      //         psession->set_key_pressed(pkey->m_ekey, false);
+//
+//      //      }
+//      //      catch (...)
+//      //      {
+//
+//      //      }
+//
+//      //   }
+//
+//      //}
+//
+//      if (message == e_message_timer)
+//      {
+//         //         m_puserinteraction->get_application()->step_timer();
+//      }
+//      else if (message == e_message_left_button_down)
+//      {
+//         ::RECT rectClient;
+//         ::GetClientRect(m_hwnd, &rectClient);
+//         ::RECT rectWindow;
+//         ::GetWindowRect(m_hwnd, &rectWindow);
+//         ::RECT rectRegion;
+//         HRGN hrgn = CreateRectRgn(0, 0, 0, 0);
+//         int regionType = ::GetWindowRgn(m_hwnd, hrgn);
+//         if (regionType != 0)
+//         {
+//            ::GetRgnBox(hrgn, &rectRegion);
+//         }
+//         ::DeleteObject(hrgn); /* finished with region */
+//         WINDOWPLACEMENT wp;
+//         __zero(wp);
+//         wp.length = sizeof(WINDOWPLACEMENT);
+//         ::GetWindowPlacement(m_hwnd, &wp);
+//         bool bZoomed = ::IsZoomed(m_hwnd) != false;
+//         bool bIconic = ::IsIconic(m_hwnd) != false;
+//      }
+//      else if (message == e_message_set_cursor
+//         || message == e_message_non_client_mouse_move)
+//      {
+//         //output_debug_string(".");
+//      }
+//      else
+//      {
+//
+//#ifdef __DEBUG
+//
+//         if (0)
+//         {
+//            switch (message)
+//            {
+//            case e_message_create:
+//               TRACE("e_message_create wparam=%08x lparam=%08x", pmessage->m_wparam, pmessage->m_lparam);
+//
+//               break;
+//            case e_message_window_position_changing:
+//               TRACE("e_message_window_position_changing wparam=%08x lparam=%08x", pmessage->m_wparam, pmessage->m_lparam);
+//
+//               break;
+//            case e_message_window_position_changed:
+//               TRACE("e_message_window_position_changed wparam=%08x lparam=%08x", pmessage->m_wparam, pmessage->m_lparam);
+//
+//               break;
+//            case e_message_activate:
+//               TRACE("e_message_activate wparam=%08x lparam=%08x", pmessage->m_wparam, pmessage->m_lparam);
+//
+//               break;
+//            case e_message_activate_app:
+//               TRACE("WM_ACTIVATEAPP wparam=%08x lparam=%08x", pmessage->m_wparam, pmessage->m_lparam);
+//
+//               break;
+//            case e_message_mouse_activate:
+//               TRACE("e_message_mouse_activate wparam=%08x lparam=%08x", pmessage->m_wparam, pmessage->m_lparam);
+//
+//               break;
+//            case e_message_non_client_activate:
+//               TRACE("e_message_non_client_activate wparam=%08x lparam=%08x", pmessage->m_wparam, pmessage->m_lparam);
+//
+//               break;
+//            case e_message_set_focus:
+//               TRACE("e_message_set_focus wparam=%08x lparam=%08x", pmessage->m_wparam, pmessage->m_lparam);
+//
+//               break;
+//            case e_message_kill_focus:
+//               TRACE("e_message_kill_focus wparam=%08x lparam=%08x", pmessage->m_wparam, pmessage->m_lparam);
+//
+//               break;
+//            case e_message_move:
+//               TRACE("e_message_move wparam=%08x lparam=%08x", pmessage->m_wparam, pmessage->m_lparam);
+//
+//               break;
+//            case e_message_size:
+//               TRACE("e_message_size wparam=%08x lparam=%08x", pmessage->m_wparam, pmessage->m_lparam);
+//
+//               break;
+//            default:
+//               TRACE("MESSAGE %08x wparam=%08x lparam=%08x", message, pmessage->m_wparam, pmessage->m_lparam);
+//
+//               break;
+//            }
+//
+//         }
+//
+//#endif //__DEBUG
+//
+//      }
+//      
+//      //auto psession = get_session();
+//
+//
+//
+//      /*      else if(message == CA2M_BERGEDGE)
+//      {
+//      if(pmessage->m_wparam == BERGEDGE_GETAPP)
+//      {
+//      __pointer(::aura::application)* ppapp= (__pointer(::aura::application)*) pmessage->m_lparam;
+//      *ppapp = get_application();
+//      pmessage->m_bRet = true;
+//      return;
+//      }
+//      }*/
+//      //pmessage->set_lresult(0);
+//
+//      if (message == e_message_mouse_leave)
+//      {
+//
+//         if (m_puserinteractionMouseCapture)
+//         {
+//
+//            m_puserinteractionMouseCapture->_000OnMouseLeave(pmessage);
+//
+//         }
+//         else if (m_puserinteraction)
+//         {
+//
+//            m_puserinteraction->_000OnMouseLeave(pmessage);
+//
+//         }
+//
+//         _on_mouse_move_step(pmessage->m_pointMessage, true);
+//
+//         return;
+//
+//      }
+//
+//      if (
+//         //message == e_message_set_cursor ||
+//         message == e_message_mouse_move ||
+//         message == e_message_non_client_mouse_move ||
+//         message == e_message_mouse_wheel ||
+//         message == e_message_left_button_down ||
+//         message == e_message_left_button_up ||
+//         message == e_message_middle_button_down ||
+//         message == e_message_middle_button_up ||
+//         message == e_message_right_button_down ||
+//         message == e_message_right_button_up ||
+//         message == e_message_left_button_double_click
+//         )
+//      {
+//
+//         auto pmouse = pmessage->m_union.m_pmouse;
+//
+//         if (on_mouse_message(pmouse))
+//         {
+//
+//            return;
+//
+//         }
+//
+//      }
+//
+//      if (message == e_message_ole_dragenter ||
+//         message == e_message_ole_dragover ||
+//         message == e_message_ole_dragleave ||
+//         message == e_message_ole_dragdrop)
+//      {
+//
+//         auto pdrag = __cast < ::message::drag_and_drop>(pmessage);
+//
+//         auto pinteraction = pdrag->userinteraction();
+//
+//         //user::oswindow_array oswindowa;
+//         //user::interaction_pointer_array wnda;
+//         //wnda = *psystem->m_puiptraFrame;
+//         //oswindowa = wnda.get_hwnda();
+//         //user::window_util::SortByZOrder(oswindowa);
+//         //for (i32 i = 0; i < oswindowa.get_size(); i++)
+//         //{
+//         //   __pointer(::user::interaction) pinteraction = wnda.find_first(oswindowa[i]);
+//         //   if (pinteraction != nullptr)
+//         //   {
+//
+//         if (pinteraction)
+//         {
+//            pinteraction->_000OnDrag(pdrag);
+//            if (pdrag->m_bRet)
+//               return;
+//
+//         }
+//    /*        }
+//         }*/
+//         return;
+//      }
+//        
+//      if (bKeyMessage)
+//      {
+//
+//         __pointer(::user::interaction) puiFocus;
+//         
+//         puiFocus = m_puserinteractionKeyboardFocus;
+//
+//         ///auto pkey = pmessage->m_pkey;
+//
+//         if (message == e_message_key_down)
+//         {
+//
+//            output_debug_string("\n Key Down Event ");
+//
+//         }
+//
+//         if (puiFocus)
+//         {
+//
+//            puiFocus->route_message(pmessage);
+//
+//         }
+//         else
+//         {
+//
+//            m_puserinteraction->route_message(pmessage);
+//
+//         }
+//
+//         if (pmessage->m_bRet)
+//         {
+//
+//            return;
+//
+//         }
+//
+//         //m_wparam-
+//
+//         //m_lparam = pmessage->m_lparam;
+//
+//         //pmessage->set_lresult(::default_window_procedure(message, pmessage->m_wparam, pmessage->m_lparam));
+//
+//         //return;
+//
+//      }
+//
+//      //if (message == e_message_subject)
+//      //{
+//
+//      //   m_puserinteraction->handle(pmessage);
+//
+//      //   return;
+//
+//      //}
+//
+//      ::user::interaction_impl::message_handler(pmessage);
+//
+//      //if(pmessage->m_bRet && !pmessage->m_bDoSystemDefault)
+//
+//      if (pmessage->m_bRet)
+//      {
+//
+//         return;
+//
+//      }
+//
+//      if(message == WM_IME_STARTCOMPOSITION ||
+//         message == WM_IME_COMPOSITION ||
+//         message == WM_IME_COMPOSITIONFULL ||
+//         message == WM_IME_NOTIFY ||
+//         message == WM_IME_ENDCOMPOSITION ||
+//         message == WM_IME_SELECT ||
+//         message == WM_IME_SETCONTEXT)
+//      {
+//
+//         //return;
+//
+//      }
+//
+//      //if (bUserElementalOk && pmessage->m_bWindowProc)
+//      //{
+//      //   
+//      //   if (m_puserinteraction != nullptr)
+//      //   {
+//      //      
+//      //      m_puserinteraction->default_window_procedure(pmessage);
+//
+//      //   }
+//      //   else
+//      //   {
+//      //      
+//      //      pmessage->set_lresult(::DefWindowProcW(m_hwnd, pmessage->m_atom, pmessage->m_wparam, pmessage->m_lparam));
+//
+//      //   }
+//
+//      //}
 
    }
 

@@ -177,6 +177,12 @@ LRESULT CALLBACK __window_procedure(HWND hwnd, UINT message, WPARAM wparam, LPAR
       output_debug_string("test");
 
    }
+   else if (message == e_message_create)
+   {
+
+      output_debug_string("e_message_create");
+
+   }
 
    if (message == e_message_left_button_down)
    {

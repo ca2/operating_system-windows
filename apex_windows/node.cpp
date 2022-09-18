@@ -934,7 +934,7 @@ namespace apex_windows
    }
 
 
-   void node::create_app_shortcut(::app* papp)
+   void node::create_app_shortcut(::acme::application* papp)
    {
 
       if (papp->is_service())
@@ -997,7 +997,7 @@ namespace apex_windows
                //if (!m_psystem->m_pacmefile->exists(pathIcon))
                //{
 
-               //   papp->m_papplication->file().copy(pathIcon, "matter://main/icon.ico", false);
+               //   papp->m_papexapplication->file().copy(pathIcon, "matter://main/icon.ico", false);
 
                //}
 

@@ -20,7 +20,7 @@ namespace draw2d_gdiplus
 
    font::~font()
    {
-      
+
       destroy();
 
    }
@@ -39,7 +39,7 @@ namespace draw2d_gdiplus
 
 #endif
 
-   
+
    void font::destroy()
    {
 
@@ -55,7 +55,7 @@ namespace draw2d_gdiplus
       }
 
       ::write_text::font::destroy();
-      
+
       //return ::success;
 
    }
@@ -66,37 +66,37 @@ namespace draw2d_gdiplus
 
       i32 iStyle = 0;
 
-      if(m_iFontWeight >= 600)
+      if (m_iFontWeight >= 600)
       {
 
-         iStyle |= (i32) Gdiplus::FontStyleBold;
+         iStyle |= (i32)Gdiplus::FontStyleBold;
 
       }
 
-      if(m_bItalic)
+      if (m_bItalic)
       {
 
-         iStyle |= (i32) Gdiplus::FontStyleItalic;
+         iStyle |= (i32)Gdiplus::FontStyleItalic;
 
       }
 
-      if(m_bUnderline)
+      if (m_bUnderline)
       {
 
-         iStyle |= (i32) Gdiplus::FontStyleUnderline;
+         iStyle |= (i32)Gdiplus::FontStyleUnderline;
 
       }
 
-      if(m_bStrikeout)
+      if (m_bStrikeout)
       {
 
-         iStyle |= (i32) Gdiplus::FontStyleStrikeout;
+         iStyle |= (i32)Gdiplus::FontStyleStrikeout;
 
       }
 
       Gdiplus::Unit unit;
 
-      switch(m_eunitFontSize)
+      switch (m_eunitFontSize)
       {
       case ::draw2d::e_unit_pixel:
 
@@ -136,31 +136,48 @@ namespace draw2d_gdiplus
                throw exception(error_resource);
 
             }
-
-            int iFound = 0;
-
-            WCHAR wszGetFamilyName[LF_FACESIZE];
-
-            if (m_strFontFamilyName.has_char())
+            else if (pprivatefont->m_iFamilyCount == 1)
             {
 
-               for (int i = 0; i < pprivatefont->m_iFamilyCount; i++)
+               auto pfont = new Gdiplus::Font(
+                  &pprivatefont->m_familya.first(),
+                  (Gdiplus::REAL)m_dFontSize,
+                  iStyle,
+                  unit);
+
+               set_gdiplus_font(pfont);
+
+               bFont = true;
+
+            }
+            else
+            {
+
+               int iFoundFamily = -1;
+
+               WCHAR wszGetFamilyName[LF_FACESIZE];
+
+               if (m_strFontFamilyName.has_char())
                {
 
-                  auto & fontfamily = pprivatefont->m_pfamily.m_p[i];
-
-                  if (fontfamily.GetFamilyName(wszGetFamilyName) == Gdiplus::Ok)
+                  for (int iFamily = 0; iFamily < pprivatefont->m_iFamilyCount; iFamily++)
                   {
 
-                     string strFontFamily = wszGetFamilyName;
+                     auto & fontfamily = pprivatefont->m_familya[iFamily];
 
-                     if (strFontFamily.compare_ci(m_strFontFamilyName) == 0)
+                     if (fontfamily.GetFamilyName(wszGetFamilyName) == Gdiplus::Ok)
                      {
 
-                        iFound = i;
+                        string strFontFamily = wszGetFamilyName;
 
-                        break;
+                        if (strFontFamily.compare_ci(m_strFontFamilyName) == 0)
+                        {
 
+                           iFoundFamily = iFamily;
+
+                           break;
+
+                        }
 
                      }
 
@@ -168,33 +185,52 @@ namespace draw2d_gdiplus
 
                }
 
+               if (iFoundFamily >= 0)
+               {
+
+                  auto & fontfamily = pprivatefont->m_familya[iFoundFamily];
+
+                  if (fontfamily.GetFamilyName(wszGetFamilyName) != Gdiplus::Ok)
+                  {
+
+                     throw exception(error_resource);
+
+                  }
+
+                  auto pfont = new Gdiplus::Font(
+                     wszGetFamilyName,
+                     (Gdiplus::REAL)m_dFontSize,
+                     iStyle,
+                     unit,
+                     pprivatefont->m_pcollection);
+
+                  set_gdiplus_font(pfont);
+
+                  bFont = true;
+
+               }
+               else
+               {
+
+                  auto pfont = new Gdiplus::Font(
+                     &pprivatefont->m_familya.first(),
+                     (Gdiplus::REAL)m_dFontSize,
+                     iStyle,
+                     unit);
+
+                  set_gdiplus_font(pfont);
+
+                  bFont = true;
+
+               }
+
             }
-
-            auto & fontfamily = pprivatefont->m_pfamily.m_p[iFound];
-
-            if (fontfamily.GetFamilyName(wszGetFamilyName) != Gdiplus::Ok)
-            {
-
-               throw exception(error_resource);
-
-            }
-
-            auto pfont = new Gdiplus::Font(
-               wszGetFamilyName,
-               (Gdiplus::REAL)m_dFontSize,
-               iStyle,
-               unit,
-               pprivatefont->m_pcollection);
-
-            set_gdiplus_font(pfont);
-
-            bFont = true;
 
          }
 
       }
-      
-      if(!bFont)
+
+      if (!bFont)
       {
 
          auto pfont = new Gdiplus::Font(
@@ -214,7 +250,7 @@ namespace draw2d_gdiplus
 
          Gdiplus::FontFamily fontfamily;
 
-         if(pfont->GetFamily(&fontfamily) == Gdiplus::Ok)
+         if (pfont->GetFamily(&fontfamily) == Gdiplus::Ok)
          {
 
             INT iStyle = pfont->GetStyle();
@@ -227,7 +263,7 @@ namespace draw2d_gdiplus
 
             auto & textmetric = m_textmetric2;
 
-            textmetric.m_dAscent = dSize*fontfamily.GetCellAscent(iStyle) / dHeight;
+            textmetric.m_dAscent = dSize * fontfamily.GetCellAscent(iStyle) / dHeight;
             textmetric.m_dDescent = dSize * fontfamily.GetCellDescent(iStyle) / dHeight;
             textmetric.m_dInternalLeading = 0.;
             textmetric.m_dExternalLeading = dSize * fontfamily.GetLineSpacing(iStyle) / dHeight -

@@ -8,7 +8,7 @@
 //SPALIB_API string spa_title(string strTitle= "");
 
 class app_t:
-   public ::aura::app
+   public ::aura::acme::application
 {
 public:
 

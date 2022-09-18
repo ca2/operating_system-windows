@@ -1348,10 +1348,10 @@ retry:
    string os_context::calc_service_name()
    {
 
-      ::app * papp = get_app();
+      ::acme::application * papp = get_app();
 
-      if(get_app()->m_papplication->m_strAppName.is_empty()
-            || get_app()->m_papplication->m_strAppName.compare_ci("bergedge") == 0
+      if(get_app()->m_papexapplication->m_strAppName.is_empty()
+            || get_app()->m_papexapplication->m_strAppName.compare_ci("bergedge") == 0
             || !get_app()->is_service())
          return "";
 
@@ -1414,7 +1414,7 @@ retry:
       WCHAR lpszName[CREDUI_MAX_USERNAME_LENGTH + CREDUI_MAX_DOMAIN_TARGET_LENGTH + 1];
       WCHAR pszPass[CREDUI_MAX_PASSWORD_LENGTH + 1];
 
-      ::application * papp = get_app()->m_papplication;
+      auto papp = get_app()->m_papexapplication;
 
       if(get_app()->is_user_service())
       {
@@ -2828,13 +2828,12 @@ repeat:
    void os_context::set_default_browser()
    {
 
-
-      ::application * papp = get_app()->m_papplication;
+      auto papp = get_app()->m_papexapplication;
 
       string strTargetProgId;
       string strModule = solve_relative(m_psystem->m_pacmefile->module());
 
-      strTargetProgId = get_app()->m_papplication->m_strAppName;
+      strTargetProgId = get_app()->m_papexapplication->m_strAppName;
 
       strTargetProgId.replace_with("_", "-");
       strTargetProgId.replace_with("_", "\\");
@@ -3107,7 +3106,7 @@ repeat:
 
       pathApplication /= strTargetProgId;
 
-      strTargetProgId = get_app()->m_papplication->m_strAppName;
+      strTargetProgId = get_app()->m_papexapplication->m_strAppName;
 
       strTargetProgId.replace_with("_", "-");
       strTargetProgId.replace_with("_", "\\");

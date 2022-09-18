@@ -707,7 +707,9 @@ namespace draw2d_gdiplus
 
       bool bOk1 = false;
 
-      ap(Gdiplus::PointF) ppoints(new_array, nCount);
+      array < Gdiplus::PointF  > pointa;
+
+      pointa.set_size(nCount);
 
       try
       {
@@ -715,12 +717,12 @@ namespace draw2d_gdiplus
          for (i32 i = 0; i < nCount; i++)
          {
 
-            ppoints[i].X = (Gdiplus::REAL)ppointsParam[i].x;
-            ppoints[i].Y = (Gdiplus::REAL)ppointsParam[i].y;
+            pointa[i].X = (Gdiplus::REAL)ppointsParam[i].x;
+            pointa[i].Y = (Gdiplus::REAL)ppointsParam[i].y;
 
          }
 
-         bOk1 = m_pgraphics->DrawLines(m_ppen->get_os_data < Gdiplus::Pen * >(this), ppoints, (INT)nCount) == Gdiplus::Status::Ok;
+         bOk1 = m_pgraphics->DrawLines(m_ppen->get_os_data < Gdiplus::Pen * >(this), pointa.get_data(), (INT)nCount) == Gdiplus::Status::Ok;
 
       }
       catch (...)
@@ -3860,7 +3862,7 @@ namespace draw2d_gdiplus
          if (status != Gdiplus::Status::Ok)
          {
 
-            throw ::exception(error_null_pointer);
+            //throw ::exception(error_null_pointer);
 
          }
 
@@ -5731,7 +5733,9 @@ namespace draw2d_gdiplus
 
       int cMaxMeasureCharacterRanges = 32;
 
-      ap(Gdiplus::CharacterRange) charRanges(new_array, 32);
+      array < Gdiplus::CharacterRange > characterrangea;
+
+      characterrangea.set_size(32);
 
       Gdiplus::StringFormat strFormat(Gdiplus::StringFormat::GenericTypographic());
 
@@ -5762,19 +5766,21 @@ namespace draw2d_gdiplus
          for (index j = 0; j < iCount; j++)
          {
 
-            charRanges[j].First = (int)(iStart + j);
+            characterrangea[j].First = (int)(iStart + j);
 
-            charRanges[j].Length = 1;
+            characterrangea[j].Length = 1;
 
          }
 
-         Gdiplus::Status status = strFormat.SetMeasurableCharacterRanges(iCount, charRanges);
+         Gdiplus::Status status = strFormat.SetMeasurableCharacterRanges(iCount, characterrangea);
 
          i32 count = strFormat.GetMeasurableCharacterRangeCount();
 
          //#undef new
 
-         ap(Gdiplus::Region) regiona(new_array, new Gdiplus::Region[count]);
+         raw_array < Gdiplus::Region > regiona;
+
+         regiona.set_size(count);
 
          //#define new ACME_NEW
 

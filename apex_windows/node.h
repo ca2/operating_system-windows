@@ -102,7 +102,7 @@ namespace apex_windows
 
       void node_post(const ::procedure& procedure) override;
 
-      void create_app_shortcut(::app* papp) override;
+      void create_app_shortcut(::acme::application* papp) override;
 
 
    };

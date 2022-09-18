@@ -93,11 +93,23 @@ namespace draw2d_gdiplus
 
          auto iFamilyCount = fontCollection.GetFamilyCount();
 
-         pfont->m_pfamily.create_array(iFamilyCount);
+         pfont->m_familya.set_size(iFamilyCount);
 
-         pfont->m_iFamilyCount = 0;
+         fontCollection.GetFamilies(iFamilyCount, pfont->m_familya.get_data(), &pfont->m_iFamilyCount);
 
-         fontCollection.GetFamilies(iFamilyCount, pfont->m_pfamily, &pfont->m_iFamilyCount);
+         pfont->m_familya.set_size(iFamilyCount);
+
+         for (int iFamily = 0; iFamily < iFamilyCount; iFamily++)
+         {
+
+            if (pfont->m_familya[iFamily].GetLastStatus() != Gdiplus::Ok)
+            {
+
+               FORMATTED_WARNING("font family nok");
+
+            }
+
+         }
 
       }
 
