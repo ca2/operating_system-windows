@@ -36,20 +36,24 @@ namespace acme_windows
                if (::is_directory(path))
                {
 
-                  hfile = ::CreateFile2(wstr,
+                  hfile = ::CreateFileW(wstr,
                      GENERIC_READ,          // open for reading
                      FILE_SHARE_READ,       // share for reading
+                     nullptr,                     
                      OPEN_EXISTING,         // existing file only
+                     0,
                      nullptr);              // no ext. properties
 
                }
                else
                {
 
-                  hfile = ::CreateFile2(wstr,
+                  hfile = ::CreateFileW(wstr,
                      FILE_LIST_DIRECTORY,   // open for reading
                      FILE_SHARE_READ,       // share for reading
+                     nullptr,
                      OPEN_EXISTING,         // existing file only
+                     0,
                      nullptr);              // no ext. properties
 
                }
