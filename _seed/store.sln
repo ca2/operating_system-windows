@@ -59,6 +59,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "folder_zip", "..\..\..\sour
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "compress_zlib", "..\..\..\source\app\compress_zlib\compress_zlib.vcxproj", "{0B0A6C45-0AE3-4DC5-889A-7235BC9DB154}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "networking_bsd", "..\..\..\..\netnode\source\app\networking_bsd\networking_bsd.vcxproj", "{46D7D9C9-7B52-4DC6-AF84-46A5E3CDC43D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		basis|Win32 = basis|Win32
@@ -625,6 +627,26 @@ Global
 		{0B0A6C45-0AE3-4DC5-889A-7235BC9DB154}.stage|Win32.Build.0 = stage|Win32
 		{0B0A6C45-0AE3-4DC5-889A-7235BC9DB154}.stage|x64.ActiveCfg = stage|x64
 		{0B0A6C45-0AE3-4DC5-889A-7235BC9DB154}.stage|x64.Build.0 = stage|x64
+		{46D7D9C9-7B52-4DC6-AF84-46A5E3CDC43D}.basis|Win32.ActiveCfg = basis|Win32
+		{46D7D9C9-7B52-4DC6-AF84-46A5E3CDC43D}.basis|Win32.Build.0 = basis|Win32
+		{46D7D9C9-7B52-4DC6-AF84-46A5E3CDC43D}.basis|x64.ActiveCfg = basis|x64
+		{46D7D9C9-7B52-4DC6-AF84-46A5E3CDC43D}.basis|x64.Build.0 = basis|x64
+		{46D7D9C9-7B52-4DC6-AF84-46A5E3CDC43D}.cover|Win32.ActiveCfg = cube_stage|Win32
+		{46D7D9C9-7B52-4DC6-AF84-46A5E3CDC43D}.cover|Win32.Build.0 = cube_stage|Win32
+		{46D7D9C9-7B52-4DC6-AF84-46A5E3CDC43D}.cover|x64.ActiveCfg = cube_stage|x64
+		{46D7D9C9-7B52-4DC6-AF84-46A5E3CDC43D}.cover|x64.Build.0 = cube_stage|x64
+		{46D7D9C9-7B52-4DC6-AF84-46A5E3CDC43D}.cube_basis|Win32.ActiveCfg = cube_basis|Win32
+		{46D7D9C9-7B52-4DC6-AF84-46A5E3CDC43D}.cube_basis|Win32.Build.0 = cube_basis|Win32
+		{46D7D9C9-7B52-4DC6-AF84-46A5E3CDC43D}.cube_basis|x64.ActiveCfg = cube_basis|x64
+		{46D7D9C9-7B52-4DC6-AF84-46A5E3CDC43D}.cube_basis|x64.Build.0 = cube_basis|x64
+		{46D7D9C9-7B52-4DC6-AF84-46A5E3CDC43D}.cube_stage|Win32.ActiveCfg = cube_stage|Win32
+		{46D7D9C9-7B52-4DC6-AF84-46A5E3CDC43D}.cube_stage|Win32.Build.0 = cube_stage|Win32
+		{46D7D9C9-7B52-4DC6-AF84-46A5E3CDC43D}.cube_stage|x64.ActiveCfg = cube_stage|x64
+		{46D7D9C9-7B52-4DC6-AF84-46A5E3CDC43D}.cube_stage|x64.Build.0 = cube_stage|x64
+		{46D7D9C9-7B52-4DC6-AF84-46A5E3CDC43D}.stage|Win32.ActiveCfg = stage|Win32
+		{46D7D9C9-7B52-4DC6-AF84-46A5E3CDC43D}.stage|Win32.Build.0 = stage|Win32
+		{46D7D9C9-7B52-4DC6-AF84-46A5E3CDC43D}.stage|x64.ActiveCfg = stage|x64
+		{46D7D9C9-7B52-4DC6-AF84-46A5E3CDC43D}.stage|x64.Build.0 = stage|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
