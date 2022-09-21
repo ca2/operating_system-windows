@@ -136,7 +136,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "imaging_wic", "..\..\operat
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "veriwell", "..\..\..\source\app-veriwell\veriwell\veriwell.vcxproj", "{D2EAA013-C127-4D44-9C2D-C70B4E705196}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_app_core_resident_desktop", "..\..\..\source\app-core\resident_desktop\shared_app_core_resident_desktop.vcxproj", "{ABDFF656-2F2C-4EE5-970A-75FFA444F767}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_app_core_resident_desktop", "..\..\..\source\app-core\resident_desktop\__implement\shared_app_core_resident_desktop.vcxproj", "{ABDFF656-2F2C-4EE5-970A-75FFA444F767}"
 	ProjectSection(ProjectDependencies) = postProject
 		{77D5757E-2923-40F8-9CC0-A07FA5BCC236} = {77D5757E-2923-40F8-9CC0-A07FA5BCC236}
 		{9A5FBFB1-76E6-4F7E-933A-328C1EEC95AF} = {9A5FBFB1-76E6-4F7E-933A-328C1EEC95AF}
@@ -168,99 +168,99 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "resident_twitch", "..\..\..
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_app", "..\..\..\source\app\app\app_app.vcxproj", "{40F49B85-A888-4A1D-A7F5-7631F14A3D4A}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_app_app", "..\..\..\source\app\app\shared_app_app.vcxproj", "{BE0222AE-71CA-41DB-8F40-265DEE5F7020}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_app_app", "..\..\..\source\app\app\__implement\shared_app_app.vcxproj", "{BE0222AE-71CA-41DB-8F40-265DEE5F7020}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_message_box", "..\..\..\source\app\message_box\app_message_box.vcxproj", "{411803C3-293C-411D-8058-93280FA90EAB}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_app_message_box", "..\..\..\source\app\message_box\shared_app_message_box.vcxproj", "{B2F5275E-0F5C-4EB8-8DF2-02B001853E31}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_app_message_box", "..\..\..\source\app\message_box\__implement\shared_app_message_box.vcxproj", "{B2F5275E-0F5C-4EB8-8DF2-02B001853E31}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_shader", "..\..\..\source\app\shader\app_shader.vcxproj", "{A18176C9-0892-4FF4-9BE4-2A7FE6EA3005}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_app_shader", "..\..\..\source\app\shader\shared_app_shader.vcxproj", "{11C1FEFC-BBF3-45A4-8799-68F5D50B8FEB}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_app_shader", "..\..\..\source\app\shader\__implement\shared_app_shader.vcxproj", "{11C1FEFC-BBF3-45A4-8799-68F5D50B8FEB}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_cidadedecuritiba_alphaclock", "..\..\..\source\app-cidadedecuritiba\alphaclock\alphaclock.vcxproj", "{E1CAB3A5-A22A-4E50-A12C-C2701740C60C}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_app_cidadedecuritiba_alphaclock", "..\..\..\source\app-cidadedecuritiba\alphaclock\shared_app_cidadedecuritiba_alphaclock.vcxproj", "{CF33DBD7-DD9B-4C80-B4ED-0C1CD4E87EDD}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_app_cidadedecuritiba_alphaclock", "..\..\..\source\app-cidadedecuritiba\alphaclock\__implement\shared_app_cidadedecuritiba_alphaclock.vcxproj", "{CF33DBD7-DD9B-4C80-B4ED-0C1CD4E87EDD}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "gpu_opengl", "..\..\..\source\app\gpu_opengl\gpu_opengl.vcxproj", "{B7225CB5-B394-444B-8FFF-02ACD10175CE}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_complex_drawing", "..\..\..\source\app-complex\drawing\complex_drawing.vcxproj", "{5B6AE0CB-C46E-40DE-9B94-78E160D068A4}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_app_complex_drawing", "..\..\..\source\app-complex\drawing\shared_app_complex_drawing.vcxproj", "{9737CA6C-C54C-42F3-8531-54BC38D69FE5}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_app_complex_drawing", "..\..\..\source\app-complex\drawing\__implement\shared_app_complex_drawing.vcxproj", "{9737CA6C-C54C-42F3-8531-54BC38D69FE5}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_complex_form", "..\..\..\source\app-complex\form\complex_form.vcxproj", "{9A40D3D5-9296-45D8-9842-DE7F6EB46842}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_app_complex_form", "..\..\..\source\app-complex\form\shared_app_complex_form.vcxproj", "{DB0DB48E-D598-4534-AC03-7177603F0937}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_app_complex_form", "..\..\..\source\app-complex\form\__implement\shared_app_complex_form.vcxproj", "{DB0DB48E-D598-4534-AC03-7177603F0937}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "game_light", "..\..\..\source\game\light\light.vcxproj", "{97FBB197-270B-4FC3-88B6-89D6982BB3E9}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_game_light", "..\..\..\source\game\light\shared_game_light.vcxproj", "{1311F5EB-FD17-4D46-ABA9-D82259E36EEA}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_game_light", "..\..\..\source\game\light\__implement\shared_game_light.vcxproj", "{1311F5EB-FD17-4D46-ABA9-D82259E36EEA}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "game_arkanoid", "..\..\..\source\game\arkanoid\arkanoid.vcxproj", "{7DCCE620-4E26-4EE3-B6EA-FFB2A92A2FA7}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_game_arkanoid", "..\..\..\source\game\arkanoid\shared_game_arkanoid.vcxproj", "{5D5B8FE1-6EB0-4013-B095-94ED6740C59E}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_game_arkanoid", "..\..\..\source\game\arkanoid\__implement\shared_game_arkanoid.vcxproj", "{5D5B8FE1-6EB0-4013-B095-94ED6740C59E}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "game_coincube", "..\..\..\source\game\coincube\coincube.vcxproj", "{F83D4F1E-9A44-4F0E-ABB5-EBC882CD5BB4}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_game_game_of_life", "..\..\..\source\game\game_of_life\shared_game_game_of_life.vcxproj", "{637C6CF6-A527-4F7D-BB98-42323B3BF44C}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_game_game_of_life", "..\..\..\source\game\game_of_life\__implement\shared_game_game_of_life.vcxproj", "{637C6CF6-A527-4F7D-BB98-42323B3BF44C}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "game_game_of_life", "..\..\..\source\game\game_of_life\game_of_life.vcxproj", "{1EB434D5-CB36-4760-AAFF-EA6E69907EFE}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_game_coincube", "..\..\..\source\game\coincube\shared_game_coincube.vcxproj", "{419B11B1-B266-4711-9CEA-9EF99BC2A540}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_game_coincube", "..\..\..\source\game\coincube\__implement\shared_game_coincube.vcxproj", "{419B11B1-B266-4711-9CEA-9EF99BC2A540}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "game_pacman", "..\..\..\source\game\pacman\pacman.vcxproj", "{00C3D7E9-A87D-4B6C-95A0-1202C4703642}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_game_pacman", "..\..\..\source\game\pacman\shared_game_pacman.vcxproj", "{A10CED21-13AB-4863-9347-91133F5CA98C}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_game_pacman", "..\..\..\source\game\pacman\__implement\shared_game_pacman.vcxproj", "{A10CED21-13AB-4863-9347-91133F5CA98C}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "game_tictactoe", "..\..\..\source\game\tictactoe\tictactoe.vcxproj", "{876F5728-775F-4D55-8C9B-0F421F3C9919}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_game_tictactoe", "..\..\..\source\game\tictactoe\shared_game_tictactoe.vcxproj", "{B5E28C6E-3AA7-4C90-83F9-29E31BC5E699}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_game_tictactoe", "..\..\..\source\game\tictactoe\__implement\shared_game_tictactoe.vcxproj", "{B5E28C6E-3AA7-4C90-83F9-29E31BC5E699}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "game_tetris", "..\..\..\source\game\tetris\tetris.vcxproj", "{84775115-0204-2204-2411-201411249919}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_game_tetris", "..\..\..\source\game\tetris\shared_game_tetris.vcxproj", "{EDC555DC-2B10-4873-B228-79D590F2180F}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_game_tetris", "..\..\..\source\game\tetris\__implement\shared_game_tetris.vcxproj", "{EDC555DC-2B10-4873-B228-79D590F2180F}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "game_sokoban", "..\..\..\source\game\sokoban\sokoban.vcxproj", "{84517784-1511-2204-0204-1511A92A2FA7}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_game_sokoban", "..\..\..\source\game\sokoban\shared_game_sokoban.vcxproj", "{DCCE9968-8235-4D80-A0EF-B09CBD0910CE}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_game_sokoban", "..\..\..\source\game\sokoban\__implement\shared_game_sokoban.vcxproj", "{DCCE9968-8235-4D80-A0EF-B09CBD0910CE}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_app_veriwell_waven", "..\..\..\source\app-veriwell\waven\shared_app_veriwell_waven.vcxproj", "{07060F51-1691-419E-BD5E-CF8630A4C9F5}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_app_veriwell_waven", "..\..\..\source\app-veriwell\waven\__implement\shared_app_veriwell_waven.vcxproj", "{07060F51-1691-419E-BD5E-CF8630A4C9F5}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_veriwell_verisimplevideo", "..\..\..\source\app-veriwell\verisimplevideo\verisimplevideo.vcxproj", "{7F00B13B-B55A-446A-8F6E-3D8A212004D0}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_app_veriwell_verisimplevideo", "..\..\..\source\app-veriwell\verisimplevideo\shared_app_veriwell_verisimplevideo.vcxproj", "{04A83DC5-49F6-4FE8-BB39-EC435DDB6F08}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_app_veriwell_verisimplevideo", "..\..\..\source\app-veriwell\verisimplevideo\__implement\shared_app_veriwell_verisimplevideo.vcxproj", "{04A83DC5-49F6-4FE8-BB39-EC435DDB6F08}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_veriwell_musical_player_lite", "..\..\..\source\app-veriwell\musical_player_lite\musical_player_lite.vcxproj", "{9E956594-D3DC-47D7-A3D5-E4FE7D2B11BB}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_app_veriwell_musical_player_lite", "..\..\..\source\app-veriwell\musical_player_lite\shared_app_veriwell_musical_player_lite.vcxproj", "{07DCA1DE-7F80-4384-86C1-039FDC1648D6}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_app_veriwell_musical_player_lite", "..\..\..\source\app-veriwell\musical_player_lite\__implement\shared_app_veriwell_musical_player_lite.vcxproj", "{07DCA1DE-7F80-4384-86C1-039FDC1648D6}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_veriwell_musical_player", "..\..\..\source\app-veriwell\musical_player\musical_player.vcxproj", "{0EBB4EDE-16AF-480F-B8C8-6494D168A8D7}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_app_veriwell_musical_player", "..\..\..\source\app-veriwell\musical_player\shared_app_veriwell_musical_player.vcxproj", "{E8806260-D0AB-44C3-8225-61DEF6B9A1F2}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_app_veriwell_musical_player", "..\..\..\source\app-veriwell\musical_player\__implement\shared_app_veriwell_musical_player.vcxproj", "{E8806260-D0AB-44C3-8225-61DEF6B9A1F2}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_veriwell_keyboard", "..\..\..\source\app-veriwell\keyboard\keyboard.vcxproj", "{3F1119CF-6041-4AE9-970E-4DDAB57C5E48}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_app_veriwell_keyboard", "..\..\..\source\app-veriwell\keyboard\shared_app_veriwell_keyboard.vcxproj", "{06DE2781-3484-4475-972A-3464FAEF7A91}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_app_veriwell_keyboard", "..\..\..\source\app-veriwell\keyboard\__implement\shared_app_veriwell_keyboard.vcxproj", "{06DE2781-3484-4475-972A-3464FAEF7A91}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_core_todo", "..\..\..\source\app-core\todo\todo.vcxproj", "{D977B1FA-A448-4187-AD30-BD7585912F00}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_app_core_todo", "..\..\..\source\app-core\todo\shared_app_core_todo.vcxproj", "{5A20AB2D-1E93-4099-BB32-1371A0D6F172}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_app_core_todo", "..\..\..\source\app-core\todo\__implement\shared_app_core_todo.vcxproj", "{5A20AB2D-1E93-4099-BB32-1371A0D6F172}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_core_weather", "..\..\..\source\app-core\weather\weather.vcxproj", "{464FD8D1-D08B-4600-A4FD-6B65BC1D0ED1}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_app_core_weather", "..\..\..\source\app-core\weather\shared_app_core_weather.vcxproj", "{7461102D-C92D-48B8-BDDB-4A1BEA11B87E}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_app_core_weather", "..\..\..\source\app-core\weather\__implement\shared_app_core_weather.vcxproj", "{7461102D-C92D-48B8-BDDB-4A1BEA11B87E}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_simple_application", "..\..\..\source\app-simple\application\simple_application.vcxproj", "{4EEB9763-3CAF-4436-8654-A583351353E2}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_app_simple_application", "..\..\..\source\app-simple\application\shared_app_simple_application.vcxproj", "{17A1FD59-DA1D-42FE-AC6B-8F42031E27DB}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_app_simple_application", "..\..\..\source\app-simple\application\__implement\shared_app_simple_application.vcxproj", "{17A1FD59-DA1D-42FE-AC6B-8F42031E27DB}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_simple_drawing", "..\..\..\source\app-simple\drawing\simple_drawing.vcxproj", "{BFE8A4C4-1614-4AB7-B311-721C8DAF1F6C}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_app_simple_drawing", "..\..\..\source\app-simple\drawing\shared_app_simple_drawing.vcxproj", "{4BEB9809-25C1-41EB-8DC1-E90A566821DF}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_app_simple_drawing", "..\..\..\source\app-simple\drawing\__implement\shared_app_simple_drawing.vcxproj", "{4BEB9809-25C1-41EB-8DC1-E90A566821DF}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_simple_form", "..\..\..\source\app-simple\form\simple_form.vcxproj", "{B5C52981-89BE-4FAF-937B-764CB2C4CDB7}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_app_simple_form", "..\..\..\source\app-simple\form\shared_app_simple_form.vcxproj", "{A8DB550C-0CAF-42E8-8D1C-3EF9DFDF80E8}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_app_simple_form", "..\..\..\source\app-simple\form\__implement\shared_app_simple_form.vcxproj", "{A8DB550C-0CAF-42E8-8D1C-3EF9DFDF80E8}"
 	ProjectSection(ProjectDependencies) = postProject
 		{77D5757E-2923-40F8-9CC0-A07FA5BCC236} = {77D5757E-2923-40F8-9CC0-A07FA5BCC236}
 		{C1CCDF2E-9F27-45D3-B67A-B2EEB1754E72} = {C1CCDF2E-9F27-45D3-B67A-B2EEB1754E72}
@@ -268,39 +268,39 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_app_simple_form", ".
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_simple_shader", "..\..\..\source\app-simple\shader\simple_shader.vcxproj", "{929E61A5-1A0B-4D43-A1FF-082783D4C71D}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_app_simple_shader", "..\..\..\source\app-simple\shader\shared_app_simple_shader.vcxproj", "{9736CBA2-3A1F-4205-A0B6-583CBD6EA7A6}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_app_simple_shader", "..\..\..\source\app-simple\shader\__implement\shared_app_simple_shader.vcxproj", "{9736CBA2-3A1F-4205-A0B6-583CBD6EA7A6}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_simple_networking_application", "..\..\..\source\app-simple\networking_application\simple_networking_application.vcxproj", "{E3C29BDA-577B-4A64-B659-D31DB0F41503}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_app_simple_networking_application", "..\..\..\source\app-simple\networking_application\shared_app_simple_networking_application.vcxproj", "{440D076C-B354-4DF8-BEC7-5F93508F1F1C}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_app_simple_networking_application", "..\..\..\source\app-simple\networking_application\__implement\shared_app_simple_networking_application.vcxproj", "{440D076C-B354-4DF8-BEC7-5F93508F1F1C}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_simple_notify_drawing", "..\..\..\source\app-simple\notify_drawing\notify_drawing.vcxproj", "{FB53E729-33D8-4C20-A4A0-B61D225E8ECD}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_app_simple_notify_drawing", "..\..\..\source\app-simple\notify_drawing\shared_app_simple_notify_drawing.vcxproj", "{876E1DB0-ADF2-4320-9D97-970725113871}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_app_simple_notify_drawing", "..\..\..\source\app-simple\notify_drawing\__implement\shared_app_simple_notify_drawing.vcxproj", "{876E1DB0-ADF2-4320-9D97-970725113871}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_core_addressbook", "..\..\..\source\app-core\addressbook\addressbook.vcxproj", "{3B1C19D2-2CDD-4A4A-966E-48E07ED2567A}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_app_core_addressbook", "..\..\..\source\app-core\addressbook\shared_app_core_addressbook.vcxproj", "{A05FB765-A517-48B2-BAF2-382B64942931}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_app_core_addressbook", "..\..\..\source\app-core\addressbook\__implement\shared_app_core_addressbook.vcxproj", "{A05FB765-A517-48B2-BAF2-382B64942931}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_core_auraclick", "..\..\..\source\app-core\auraclick\auraclick.vcxproj", "{EB9E5D88-6553-4B08-B7FD-198419511977}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_app_core_auraclick", "..\..\..\source\app-core\auraclick\shared_app_core_auraclick.vcxproj", "{C9D13886-74B4-4F47-97A3-3E09508D938F}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_app_core_auraclick", "..\..\..\source\app-core\auraclick\__implement\shared_app_core_auraclick.vcxproj", "{C9D13886-74B4-4F47-97A3-3E09508D938F}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_core_audioaura", "..\..\..\source\app-core\audioaura\audioaura.vcxproj", "{C1CB9B61-AB05-43DF-8564-BA9BF4FE0E7A}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_app_core_audioaura", "..\..\..\source\app-core\audioaura\shared_app_core_audioaura.vcxproj", "{C31504BD-D493-40B4-9C80-DCB9C7544676}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_app_core_audioaura", "..\..\..\source\app-core\audioaura\__implement\shared_app_core_audioaura.vcxproj", "{C31504BD-D493-40B4-9C80-DCB9C7544676}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_core_auratype", "..\..\..\source\app-core\auratype\auratype.vcxproj", "{EB9E5D88-6553-4B08-B7FD-9360371F3F93}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_app_core_auratype", "..\..\..\source\app-core\auratype\shared_app_core_auratype.vcxproj", "{B76A7048-8A0D-4F9D-9733-99CCE96856AF}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_app_core_auratype", "..\..\..\source\app-core\auratype\__implement\shared_app_core_auratype.vcxproj", "{B76A7048-8A0D-4F9D-9733-99CCE96856AF}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_core_chronometer", "..\..\..\source\app-core\chronometer\chronometer.vcxproj", "{19845177-C614-4A5D-BB61-197784151104}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_app_core_chronometer", "..\..\..\source\app-core\chronometer\shared_app_core_chronometer.vcxproj", "{2B398103-834D-4597-BCA3-C1C3D2D36B3A}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_app_core_chronometer", "..\..\..\source\app-core\chronometer\__implement\shared_app_core_chronometer.vcxproj", "{2B398103-834D-4597-BCA3-C1C3D2D36B3A}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_core_clockverse", "..\..\..\source\app-core\clockverse\clockverse.vcxproj", "{8477055E-C614-4A5D-BB61-197784151104}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_app_core_clockverse", "..\..\..\source\app-core\clockverse\shared_app_core_clockverse.vcxproj", "{924D0356-4B8B-406F-B6CC-862FBE7EFBEF}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_app_core_clockverse", "..\..\..\source\app-core\clockverse\__implement\shared_app_core_clockverse.vcxproj", "{924D0356-4B8B-406F-B6CC-862FBE7EFBEF}"
 	ProjectSection(ProjectDependencies) = postProject
 		{C8426F23-FE00-4E76-BE91-0E08929FA7F4} = {C8426F23-FE00-4E76-BE91-0E08929FA7F4}
 		{DF0B85E2-ED6B-407E-BA65-EBA1813CE73A} = {DF0B85E2-ED6B-407E-BA65-EBA1813CE73A}
@@ -309,35 +309,35 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_app_core_clockverse"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_core_desk", "..\..\..\source\app-core\desk\desk.vcxproj", "{2F713E16-07D5-40C4-A85B-41E97286FA6C}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_app_core_desk", "..\..\..\source\app-core\desk\shared_app_core_desk.vcxproj", "{02CC1ACA-4CDF-4724-858D-92F6AE643236}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_app_core_desk", "..\..\..\source\app-core\desk\__implement\shared_app_core_desk.vcxproj", "{02CC1ACA-4CDF-4724-858D-92F6AE643236}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_core_flag", "..\..\..\source\app-core\flag\flag.vcxproj", "{4467CF99-AD0F-403B-8E30-3CBA23756713}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_app_core_flag", "..\..\..\source\app-core\flag\shared_app_core_flag.vcxproj", "{C6E48A19-59B8-481E-AF3A-C27B66D68A84}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_app_core_flag", "..\..\..\source\app-core\flag\__implement\shared_app_core_flag.vcxproj", "{C6E48A19-59B8-481E-AF3A-C27B66D68A84}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_core_projection", "..\..\..\source\app-core\projection\projection.vcxproj", "{5C028FB6-5812-4CFE-B5A6-5B714BEAAD2D}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_app_core_projection", "..\..\..\source\app-core\projection\shared_app_core_projection.vcxproj", "{3E8A35DF-2448-4A2C-9C38-FFE1ED6EDF3C}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_app_core_projection", "..\..\..\source\app-core\projection\__implement\shared_app_core_projection.vcxproj", "{3E8A35DF-2448-4A2C-9C38-FFE1ED6EDF3C}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_core_photo", "..\..\..\source\app-core\photo\photo.vcxproj", "{32AFCA36-804D-4FC9-9D86-6EB6655B8EC0}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_core_note", "..\..\..\source\app-core\note\note.vcxproj", "{60D2F4B2-3041-4EDC-A54D-6BECEFB515E8}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_app_core_note", "..\..\..\source\app-core\note\shared_app_core_note.vcxproj", "{DAD741CA-CC25-40DF-9847-BCF971F208BE}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_app_core_note", "..\..\..\source\app-core\note\__implement\shared_app_core_note.vcxproj", "{DAD741CA-CC25-40DF-9847-BCF971F208BE}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_app_core_photo", "..\..\..\source\app-core\photo\shared_app_core_photo.vcxproj", "{8E30EB14-B4F4-40CE-ACC8-6DE4F04D97B2}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_app_core_photo", "..\..\..\source\app-core\photo\__implement\shared_app_core_photo.vcxproj", "{8E30EB14-B4F4-40CE-ACC8-6DE4F04D97B2}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_core_picture", "..\..\..\source\app-core\picture\picture.vcxproj", "{D7D8298D-3E23-4C53-8520-42891E665165}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_app_core_picture", "..\..\..\source\app-core\picture\shared_app_core_picture.vcxproj", "{579FB161-11B6-41E5-BDDD-0A160997D0BB}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_app_core_picture", "..\..\..\source\app-core\picture\__implement\shared_app_core_picture.vcxproj", "{579FB161-11B6-41E5-BDDD-0A160997D0BB}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_core_hash_hub", "..\..\..\source\app-core\hash_hub\hash_hub.vcxproj", "{86B98FCE-D80E-4D04-9ED6-25BC1195E91E}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_app_core_hash_hub", "..\..\..\source\app-core\hash_hub\shared_app_core_hash_hub.vcxproj", "{666CE709-A63C-4FED-ADDF-BB50F2EACC33}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_app_core_hash_hub", "..\..\..\source\app-core\hash_hub\__implement\shared_app_core_hash_hub.vcxproj", "{666CE709-A63C-4FED-ADDF-BB50F2EACC33}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_core_file_manager", "..\..\..\source\app-core\file_manager\file_manager.vcxproj", "{736FAF53-E163-4D5F-94FA-E3DCF2EC43AB}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_app_core_file_manager", "..\..\..\source\app-core\file_manager\shared_app_core_file_manager.vcxproj", "{AA697E28-79BF-4889-97F4-579AD23FEEF8}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_app_core_file_manager", "..\..\..\source\app-core\file_manager\__implement\shared_app_core_file_manager.vcxproj", "{AA697E28-79BF-4889-97F4-579AD23FEEF8}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "hash_base", "..\..\..\source\app-core\hash_base\hash_base.vcxproj", "{D71B13E6-0935-4D8F-B31E-E3DBB14036BB}"
 EndProject
@@ -345,7 +345,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "estamira", "..\..\..\source
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_core_timer", "..\..\..\source\app-core\timer\timer.vcxproj", "{19845177-C614-4A5D-BB61-197885151104}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_app_core_timer", "..\..\..\source\app-core\timer\shared_app_core_timer.vcxproj", "{0567D25A-7A48-4681-AA02-167FF9FFA761}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_app_core_timer", "..\..\..\source\app-core\timer\__implement\shared_app_core_timer.vcxproj", "{0567D25A-7A48-4681-AA02-167FF9FFA761}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "music_midi_rtmidi", "..\..\..\source\app-veriwell\music_midi_rtmidi\music_midi_rtmidi.vcxproj", "{F5B3A373-7B56-408E-8F5A-F7C193B959DB}"
 EndProject
@@ -359,34 +359,32 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "compress_zlib", "..\..\..\s
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "game_arch001", "..\..\..\source\game\arch001\arch001.vcxproj", "{BFC21575-1F22-4EDF-96A9-F70EFA1E11A3}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_game_arch001", "..\..\..\source\game\arch001\shared_game_arch001.vcxproj", "{AA6D8B2F-89D3-45B3-AF07-2C38BBC61964}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_game_arch001", "..\..\..\source\game\arch001\__implement\shared_game_arch001.vcxproj", "{AA6D8B2F-89D3-45B3-AF07-2C38BBC61964}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_simple_change_grub_default_entry", "..\..\..\source\app-simple\change_grub_default_entry\change_grub_default_entry.vcxproj", "{6D3C8026-2626-4D4A-9C5C-E1DE3BE8F6AA}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_app_simple_change_grub_default_entry", "..\..\..\source\app-simple\change_grub_default_entry\shared_app_simple_change_grub_default_entry.vcxproj", "{24AF1CE4-53C2-479D-803B-FCAD71694F85}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_app_simple_change_grub_default_entry", "..\..\..\source\app-simple\change_grub_default_entry\__implement\shared_app_simple_change_grub_default_entry.vcxproj", "{24AF1CE4-53C2-479D-803B-FCAD71694F85}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "experience_tranquillum", "..\..\..\source\app\experience_tranquillum\experience_tranquillum.vcxproj", "{3C892817-9F8B-493C-A3E1-AAC25943A7F9}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_simple_shortcut", "..\..\..\source\app-simple\shortcut\app_simple_shortcut.vcxproj", "{C7201A26-86DC-4726-9456-AEDCBE98206B}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_app_simple_shortcut", "..\..\..\source\app-simple\shortcut\shared_app_simple_shortcut.vcxproj", "{D2A05B15-376F-4805-BE80-91207600A24F}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_app_simple_shortcut", "..\..\..\source\app-simple\shortcut\__implement\shared_app_simple_shortcut.vcxproj", "{D2A05B15-376F-4805-BE80-91207600A24F}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "game_csgomatchmaking", "..\..\..\source\game\csgomatchmaking\game_csgomatchmaking.vcxproj", "{0B9D6395-5BCC-4D20-A318-9C4B1B3C6CB1}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_game_csgomatchmaking", "..\..\..\source\game\csgomatchmaking\shared_game_csgomatchmaking.vcxproj", "{DCB3F7AF-B01A-4665-86EA-28B95C5C3F60}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_game_csgomatchmaking", "..\..\..\source\game\csgomatchmaking\__implement\shared_game_csgomatchmaking.vcxproj", "{DCB3F7AF-B01A-4665-86EA-28B95C5C3F60}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_complex_video_capture", "..\..\..\source\app-complex\video_capture\app_complex_video_capture.vcxproj", "{DFECDA74-728A-4C86-9F91-DC4272E8A116}"
 	ProjectSection(ProjectDependencies) = postProject
 		{BEB48980-1D02-491B-B6AA-33475849BF25} = {BEB48980-1D02-491B-B6AA-33475849BF25}
 	EndProjectSection
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_app_complex_video_capture", "..\..\..\source\app-complex\video_capture\shared_app_complex_video_capture.vcxproj", "{E64AD1B5-1FE0-4236-9F93-30F6CBA088A2}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_app_complex_video_capture", "..\..\..\source\app-complex\video_capture\__implement\shared_app_complex_video_capture.vcxproj", "{E64AD1B5-1FE0-4236-9F93-30F6CBA088A2}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "video_input_media_foundation", "..\..\..\source\app-core\video_input_media_foundation\video_input_media_foundation.vcxproj", "{FE0FA8A0-D198-40F5-AC4E-4A2B843B496D}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "video_input", "..\..\..\source\app-core\video_input\video_input.vcxproj", "{BEB48980-1D02-491B-B6AA-33475849BF25}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_app_core_clockverse_no_audio", "..\..\..\source\app-core\clockverse\shared_app_core_clockverse_no_audio.vcxproj", "{9A170000-552B-482F-81D5-91EA51AE2845}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "design_text_format", "..\..\..\source\design\text_format\design_text_format.vcxproj", "{32BD35EA-BABA-412D-A9B5-3E75AD31E3CA}"
 EndProject
@@ -396,11 +394,13 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_core_hello_multiverse",
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_core_hello_animation", "..\..\..\source\app-core\hello_animation\app_core_hello_animation.vcxproj", "{C7AFCEFA-3079-4B23-8F97-4543BB980265}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_app_core_hello_multiverse", "..\..\..\source\app-core\hello_multiverse\shared_app_core_hello_multiverse.vcxproj", "{94A00A45-B9BF-4821-B81E-4114FFB9F0A9}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_app_core_hello_multiverse", "..\..\..\source\app-core\hello_multiverse\__implement\shared_app_core_hello_multiverse.vcxproj", "{94A00A45-B9BF-4821-B81E-4114FFB9F0A9}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_app_core_hello_animation", "..\..\..\source\app-core\hello_animation\shared_app_core_hello_animation.vcxproj", "{F62E673C-B4EB-4D45-8D9D-AEE4616630F2}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_app_core_hello_animation", "..\..\..\source\app-core\hello_animation\__implement\shared_app_core_hello_animation.vcxproj", "{F62E673C-B4EB-4D45-8D9D-AEE4616630F2}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "composite", "..\..\..\source\design\composite\design_composite.vcxproj", "{53D31AEB-B7E1-4C61-8B97-3B5582009FC0}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "design_composite", "..\..\..\source\design\composite\design_composite.vcxproj", "{53D31AEB-B7E1-4C61-8B97-3B5582009FC0}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_app_core_clockverse_no_audio", "..\..\..\source\app-core\clockverse\__implement_no_audio\shared_app_core_clockverse_no_audio.vcxproj", "{9A170000-552B-482F-81D5-91EA51AE2845}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -5339,36 +5339,6 @@ Global
 		{BEB48980-1D02-491B-B6AA-33475849BF25}.stage|Win32.Build.0 = stage|Win32
 		{BEB48980-1D02-491B-B6AA-33475849BF25}.stage|x64.ActiveCfg = stage|x64
 		{BEB48980-1D02-491B-B6AA-33475849BF25}.stage|x64.Build.0 = stage|x64
-		{9A170000-552B-482F-81D5-91EA51AE2845}.basis|ARM.ActiveCfg = basis|x64
-		{9A170000-552B-482F-81D5-91EA51AE2845}.basis|ARM.Build.0 = basis|x64
-		{9A170000-552B-482F-81D5-91EA51AE2845}.basis|Win32.ActiveCfg = basis|Win32
-		{9A170000-552B-482F-81D5-91EA51AE2845}.basis|Win32.Build.0 = basis|Win32
-		{9A170000-552B-482F-81D5-91EA51AE2845}.basis|x64.ActiveCfg = basis|x64
-		{9A170000-552B-482F-81D5-91EA51AE2845}.basis|x64.Build.0 = basis|x64
-		{9A170000-552B-482F-81D5-91EA51AE2845}.cover|ARM.ActiveCfg = stage|x64
-		{9A170000-552B-482F-81D5-91EA51AE2845}.cover|ARM.Build.0 = stage|x64
-		{9A170000-552B-482F-81D5-91EA51AE2845}.cover|Win32.ActiveCfg = stage|Win32
-		{9A170000-552B-482F-81D5-91EA51AE2845}.cover|Win32.Build.0 = stage|Win32
-		{9A170000-552B-482F-81D5-91EA51AE2845}.cover|x64.ActiveCfg = stage|x64
-		{9A170000-552B-482F-81D5-91EA51AE2845}.cover|x64.Build.0 = stage|x64
-		{9A170000-552B-482F-81D5-91EA51AE2845}.cube_basis|ARM.ActiveCfg = stage|x64
-		{9A170000-552B-482F-81D5-91EA51AE2845}.cube_basis|ARM.Build.0 = stage|x64
-		{9A170000-552B-482F-81D5-91EA51AE2845}.cube_basis|Win32.ActiveCfg = basis|Win32
-		{9A170000-552B-482F-81D5-91EA51AE2845}.cube_basis|Win32.Build.0 = basis|Win32
-		{9A170000-552B-482F-81D5-91EA51AE2845}.cube_basis|x64.ActiveCfg = basis|x64
-		{9A170000-552B-482F-81D5-91EA51AE2845}.cube_basis|x64.Build.0 = basis|x64
-		{9A170000-552B-482F-81D5-91EA51AE2845}.cube_stage|ARM.ActiveCfg = stage|x64
-		{9A170000-552B-482F-81D5-91EA51AE2845}.cube_stage|ARM.Build.0 = stage|x64
-		{9A170000-552B-482F-81D5-91EA51AE2845}.cube_stage|Win32.ActiveCfg = stage|Win32
-		{9A170000-552B-482F-81D5-91EA51AE2845}.cube_stage|Win32.Build.0 = stage|Win32
-		{9A170000-552B-482F-81D5-91EA51AE2845}.cube_stage|x64.ActiveCfg = stage|x64
-		{9A170000-552B-482F-81D5-91EA51AE2845}.cube_stage|x64.Build.0 = stage|x64
-		{9A170000-552B-482F-81D5-91EA51AE2845}.stage|ARM.ActiveCfg = stage|x64
-		{9A170000-552B-482F-81D5-91EA51AE2845}.stage|ARM.Build.0 = stage|x64
-		{9A170000-552B-482F-81D5-91EA51AE2845}.stage|Win32.ActiveCfg = stage|Win32
-		{9A170000-552B-482F-81D5-91EA51AE2845}.stage|Win32.Build.0 = stage|Win32
-		{9A170000-552B-482F-81D5-91EA51AE2845}.stage|x64.ActiveCfg = stage|x64
-		{9A170000-552B-482F-81D5-91EA51AE2845}.stage|x64.Build.0 = stage|x64
 		{32BD35EA-BABA-412D-A9B5-3E75AD31E3CA}.basis|ARM.ActiveCfg = basis|x64
 		{32BD35EA-BABA-412D-A9B5-3E75AD31E3CA}.basis|ARM.Build.0 = basis|x64
 		{32BD35EA-BABA-412D-A9B5-3E75AD31E3CA}.basis|Win32.ActiveCfg = basis|Win32
@@ -5579,6 +5549,36 @@ Global
 		{53D31AEB-B7E1-4C61-8B97-3B5582009FC0}.stage|Win32.Build.0 = stage|Win32
 		{53D31AEB-B7E1-4C61-8B97-3B5582009FC0}.stage|x64.ActiveCfg = stage|x64
 		{53D31AEB-B7E1-4C61-8B97-3B5582009FC0}.stage|x64.Build.0 = stage|x64
+		{9A170000-552B-482F-81D5-91EA51AE2845}.basis|ARM.ActiveCfg = basis|x64
+		{9A170000-552B-482F-81D5-91EA51AE2845}.basis|ARM.Build.0 = basis|x64
+		{9A170000-552B-482F-81D5-91EA51AE2845}.basis|Win32.ActiveCfg = basis|Win32
+		{9A170000-552B-482F-81D5-91EA51AE2845}.basis|Win32.Build.0 = basis|Win32
+		{9A170000-552B-482F-81D5-91EA51AE2845}.basis|x64.ActiveCfg = basis|x64
+		{9A170000-552B-482F-81D5-91EA51AE2845}.basis|x64.Build.0 = basis|x64
+		{9A170000-552B-482F-81D5-91EA51AE2845}.cover|ARM.ActiveCfg = stage|x64
+		{9A170000-552B-482F-81D5-91EA51AE2845}.cover|ARM.Build.0 = stage|x64
+		{9A170000-552B-482F-81D5-91EA51AE2845}.cover|Win32.ActiveCfg = stage|Win32
+		{9A170000-552B-482F-81D5-91EA51AE2845}.cover|Win32.Build.0 = stage|Win32
+		{9A170000-552B-482F-81D5-91EA51AE2845}.cover|x64.ActiveCfg = stage|x64
+		{9A170000-552B-482F-81D5-91EA51AE2845}.cover|x64.Build.0 = stage|x64
+		{9A170000-552B-482F-81D5-91EA51AE2845}.cube_basis|ARM.ActiveCfg = basis|x64
+		{9A170000-552B-482F-81D5-91EA51AE2845}.cube_basis|ARM.Build.0 = basis|x64
+		{9A170000-552B-482F-81D5-91EA51AE2845}.cube_basis|Win32.ActiveCfg = basis|Win32
+		{9A170000-552B-482F-81D5-91EA51AE2845}.cube_basis|Win32.Build.0 = basis|Win32
+		{9A170000-552B-482F-81D5-91EA51AE2845}.cube_basis|x64.ActiveCfg = basis|x64
+		{9A170000-552B-482F-81D5-91EA51AE2845}.cube_basis|x64.Build.0 = basis|x64
+		{9A170000-552B-482F-81D5-91EA51AE2845}.cube_stage|ARM.ActiveCfg = stage|x64
+		{9A170000-552B-482F-81D5-91EA51AE2845}.cube_stage|ARM.Build.0 = stage|x64
+		{9A170000-552B-482F-81D5-91EA51AE2845}.cube_stage|Win32.ActiveCfg = stage|Win32
+		{9A170000-552B-482F-81D5-91EA51AE2845}.cube_stage|Win32.Build.0 = stage|Win32
+		{9A170000-552B-482F-81D5-91EA51AE2845}.cube_stage|x64.ActiveCfg = stage|x64
+		{9A170000-552B-482F-81D5-91EA51AE2845}.cube_stage|x64.Build.0 = stage|x64
+		{9A170000-552B-482F-81D5-91EA51AE2845}.stage|ARM.ActiveCfg = stage|x64
+		{9A170000-552B-482F-81D5-91EA51AE2845}.stage|ARM.Build.0 = stage|x64
+		{9A170000-552B-482F-81D5-91EA51AE2845}.stage|Win32.ActiveCfg = stage|Win32
+		{9A170000-552B-482F-81D5-91EA51AE2845}.stage|Win32.Build.0 = stage|Win32
+		{9A170000-552B-482F-81D5-91EA51AE2845}.stage|x64.ActiveCfg = stage|x64
+		{9A170000-552B-482F-81D5-91EA51AE2845}.stage|x64.Build.0 = stage|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
