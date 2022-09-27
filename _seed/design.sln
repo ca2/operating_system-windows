@@ -89,6 +89,14 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_design_design", "..\..\..\source\design\design\__implement\shared_design_design.vcxproj", "{451DB026-F52E-414E-8DCA-CD36E9E87616}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_design_text_format", "..\..\..\source\design\text_format\__implement\shared_design_text_format.vcxproj", "{ABDFF656-2F2C-4EE5-970A-75FFA444F767}"
+	ProjectSection(ProjectDependencies) = postProject
+		{188CF8F3-FC6C-4DC6-9902-4E41FA7A7127} = {188CF8F3-FC6C-4DC6-9902-4E41FA7A7127}
+		{9A5FBFB1-76E6-4F7E-933A-328C1EEC95AF} = {9A5FBFB1-76E6-4F7E-933A-328C1EEC95AF}
+		{C1CCDF2E-9F27-45D3-B67A-B2EEB1754E72} = {C1CCDF2E-9F27-45D3-B67A-B2EEB1754E72}
+		{D6B5B8F3-A524-4E73-8343-C3D5D558ADE3} = {D6B5B8F3-A524-4E73-8343-C3D5D558ADE3}
+		{D79C7DDB-A727-4B91-803E-41C4431693D6} = {D79C7DDB-A727-4B91-803E-41C4431693D6}
+		{E2D7833B-9B59-4826-BBDF-C270A2115E86} = {E2D7833B-9B59-4826-BBDF-C270A2115E86}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
