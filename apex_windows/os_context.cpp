@@ -1724,7 +1724,7 @@ retry:
 
          DWORD dwLastError = ::GetLastError();
 
-         throw windows_file_exception(::error_io, dwLastError, pszFileName);
+         throw windows_file_exception(::error_io, dwLastError, pszFileName, "!windows_get_file_attributes");
 
       }
 
@@ -1740,7 +1740,7 @@ retry:
 
             DWORD dwLastError = ::GetLastError();
 
-            throw windows_file_exception(::error_io, dwLastError, wstr);
+            throw windows_file_exception(::error_io, dwLastError, wstr, "!SetFileAttributesW");
 
          }
 
@@ -1790,7 +1790,7 @@ retry:
 
          DWORD dwLastError = ::GetLastError();
 
-         throw windows_file_exception(::error_io, dwLastError, wstr);
+         throw windows_file_exception(::error_io, dwLastError, wstr, "!CreateFileW");
 
       }
 
@@ -1799,7 +1799,7 @@ retry:
 
          DWORD dwLastError = ::GetLastError();
 
-         throw windows_file_exception(::error_io, dwLastError, wstr);
+         throw windows_file_exception(::error_io, dwLastError, wstr, "!SetFileTime");
 
       }
 
@@ -1808,7 +1808,7 @@ retry:
 
          DWORD dwLastError = ::GetLastError();
 
-         throw windows_file_exception(::error_io, dwLastError, wstr);
+         throw windows_file_exception(::error_io, dwLastError, wstr, "!CloseHandle");
 
       }
 
@@ -1820,7 +1820,7 @@ retry:
 
             DWORD dwLastError = ::GetLastError();
 
-            throw windows_file_exception(::error_io, dwLastError, wstr);
+            throw windows_file_exception(::error_io, dwLastError, wstr, "!SetFileAttributesW");
 
          }
 

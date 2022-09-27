@@ -79,9 +79,9 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='cube_basis|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseOfAtl>false</UseOfAtl>
-    <PlatformToolset>v143</PlatformToolset>
     <WholeProgramOptimization>false</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='stage|x64'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
@@ -175,9 +175,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='basis|x64'" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='stage|x64'" />
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='basis|Win32'">
-    <PreBuildEvent>
-      <Command>$(SolutionDir)..\..\..\operating-system\tool-windows\bin\application_build_helper $(ProjectDir) $(ProjectName)</Command>
-    </PreBuildEvent>
+    <PreBuildEvent />
     <Midl>
       <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
@@ -336,9 +334,7 @@
     </Xdcmake>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='stage|Win32'">
-    <PreBuildEvent>
-      <Command>$(SolutionDir)..\..\..\operating-system\tool-windows\bin\application_build_helper $(ProjectDir) $(ProjectName)</Command>
-    </PreBuildEvent>
+    <PreBuildEvent />
     <Midl>
       <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
@@ -506,9 +502,7 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='basis|x64'">
-    <PreBuildEvent>
-      <Command>$(SolutionDir)..\..\..\operating-system\tool-windows\bin\application_build_helper $(ProjectDir) $(ProjectName)</Command>
-    </PreBuildEvent>
+    <PreBuildEvent />
     <Midl>
       <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>
@@ -663,9 +657,7 @@
     <Lib />
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='stage|x64'">
-    <PreBuildEvent>
-      <Command>$(SolutionDir)..\..\..\operating-system\tool-windows\bin\application_build_helper $(ProjectDir) $(ProjectName)</Command>
-    </PreBuildEvent>
+    <PreBuildEvent />
     <Midl>
       <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MkTypLibCompatible>true</MkTypLibCompatible>

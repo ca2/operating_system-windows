@@ -705,7 +705,7 @@ namespace apex_windows
 
          DWORD dwLastError = ::GetLastError();
 
-         throw windows_file_exception(::error_io, dwLastError, path);
+         throw windows_file_exception(::error_io, dwLastError, path, "!windows_get_file_attributes");
 
       }
 
@@ -720,7 +720,7 @@ namespace apex_windows
 
             DWORD dwLastError = ::GetLastError();
 
-            throw windows_file_exception(::error_io, dwLastError, pszFileName);
+            throw windows_file_exception(::error_io, dwLastError, pszFileName, "!SetFileAttributesW");
 
          }
 
