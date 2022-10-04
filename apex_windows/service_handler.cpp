@@ -265,7 +265,16 @@ namespace apex_windows
       catch (const ::exception & e)
       {
 
-         s_pservicehandler->update_state(SERVICE_STOPPED, e.m_hresult);
+         HRESULT hresult = S_OK;
+
+         if (e.m_errorcodea.has_element() && e.m_errorcodea.first().m_etype == e_error_code_type_hresult)
+         {
+
+            hresult = e.m_errorcodea.first().m_iOsError;
+
+         }
+
+         s_pservicehandler->update_state(SERVICE_STOPPED, hresult);
 
       }
 
@@ -313,8 +322,16 @@ namespace apex_windows
          // Start method. If this happens, we catch it here and notify the
          // SCM so that it can log the error code.
          //
+         HRESULT hresult = S_OK;
 
-         s_pservicehandler->update_state(SERVICE_STOPPED, e.m_hresult);
+         if (e.m_errorcodea.has_element() && e.m_errorcodea.first().m_etype == e_error_code_type_hresult)
+         {
+
+            hresult = e.m_errorcodea.first().m_iOsError;
+
+         }
+
+         s_pservicehandler->update_state(SERVICE_STOPPED, hresult);
 
       }
 
