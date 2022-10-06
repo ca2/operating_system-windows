@@ -1,4 +1,4 @@
-#include "framework.h"
+﻿#include "framework.h"
 #include "apex/parallelization/service.h"
 #include "apex/parallelization/service_handler.h"
 #include "service_handler.h"
@@ -270,7 +270,7 @@ namespace apex_windows
          if (e.m_errorcodea.has_element() && e.m_errorcodea.first().m_etype == e_error_code_type_hresult)
          {
 
-            hresult = e.m_errorcodea.first().m_iOsError;
+            hresult = (HRESULT) e.m_errorcodea.first().m_iOsError;
 
          }
 
@@ -327,7 +327,7 @@ namespace apex_windows
          if (e.m_errorcodea.has_element() && e.m_errorcodea.first().m_etype == e_error_code_type_hresult)
          {
 
-            hresult = e.m_errorcodea.first().m_iOsError;
+            hresult = (HRESULT) e.m_errorcodea.first().m_iOsError;
 
          }
 
