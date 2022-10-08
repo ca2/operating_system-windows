@@ -1,4 +1,4 @@
-#include "framework.h"
+﻿#include "framework.h"
 #include "os_context.h"
 #include "acme_windows/registry.h"
 #include "acme_windows/file_exception.h"
@@ -3660,7 +3660,7 @@ repeat:
 
                      hr = pitema->GetCount(&dwNumItems);  // get number of selected items
 
-                     string_array & straDest = payload_reference(set["file_name"]);
+                     string_array & straDest = set["file_name"];
 
                      // Loop through IShellItemArray and construct string for display
                      for (u32 i = 0; i < dwNumItems; i++)

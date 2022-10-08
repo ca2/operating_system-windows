@@ -1,4 +1,4 @@
-#include "framework.h"
+﻿#include "framework.h"
 #if !BROAD_PRECOMPILED_HEADER
 #include "aura/user/user/_user.h"
 #endif
@@ -76,7 +76,7 @@ namespace windowing_win32
 
       }
 
-      string strId = "notify_icon_" + atom.to_string();
+      string strId = "notify_icon_" + atom;
 
       m_strId = "ca2-" + picon->get_tray_icon_name() + "-" + strId;
 
@@ -94,7 +94,7 @@ namespace windowing_win32
       m_atom = atom;
 
       m_nid.hWnd = __hwnd(oswindow());
-      m_nid.uID = __u32_hash(atom.to_string());
+      m_nid.uID = __u32_hash((const ::string &) atom);
       m_nid.hIcon = (HICON) picon->get_os_data(::size_i32(16, 16));
       m_nid.uFlags = NIF_ICON | NIF_MESSAGE;
       m_nid.uCallbackMessage = ::e_message_notify_icon;

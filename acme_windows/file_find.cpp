@@ -1,4 +1,4 @@
-#include "framework.h"
+﻿#include "framework.h"
 #include "acme/operating_system/time.h"
 #include "file_find.h"
 
@@ -443,7 +443,7 @@ namespace acme_windows
 
       matter::dump(dumpcontext);
 
-      dumpcontext << "\nm_hContext = " << m_hContext;
+      //dumpcontext << "\nm_hContext = " << m_hContext;
 
    }
 
