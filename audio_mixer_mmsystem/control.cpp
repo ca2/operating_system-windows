@@ -1,4 +1,4 @@
-#include "framework.h"
+﻿#include "framework.h"
 #include "control.h"
 #include "source.h"
 #include "device.h"
@@ -53,7 +53,7 @@ namespace multimedia
 
 
       bool control::CreateWindowsVolumeV001(
-      ::pointer<::user::interaction>Parent,
+      ::pointer<::user::interaction>pParent,
       u32 nStartID,
       u32 * nNextID)
       {
@@ -209,7 +209,7 @@ namespace multimedia
       }
 
       bool control::_001CreateMuteControl(
-      ::pointer<::user::interaction>Parent,
+      ::pointer<::user::interaction>pParent,
       u32 nStartID,
       u32 * nNextID)
       {

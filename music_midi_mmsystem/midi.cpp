@@ -1,4 +1,4 @@
-#include "framework.h"
+﻿#include "framework.h"
 #include "midi.h"
 #include "sequencer.h"
 #include "out.h"
@@ -443,6 +443,13 @@ namespace music
 
          ::pointer<::music::midi::message_in>midi::get_message_in(const string& strDevice)
          {
+
+            if (strDevice.is_empty())
+            {
+
+               return nullptr;
+
+            }
 
             string strMMSystemDevice = strDevice;
 

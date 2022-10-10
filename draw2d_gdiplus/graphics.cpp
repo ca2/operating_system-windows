@@ -1,4 +1,4 @@
-#include "framework.h"
+﻿#include "framework.h"
 #include "graphics.h"
 #include "pen.h"
 #include "brush.h"
@@ -1017,15 +1017,19 @@ namespace draw2d_gdiplus
 
       }
 
-      if ((m_pgraphics->DrawEllipse(ppen, (Gdiplus::REAL)rectangleParam.left, (Gdiplus::REAL)rectangleParam.top,
-         (Gdiplus::REAL)(rectangleParam.right - rectangleParam.left),
-         (Gdiplus::REAL)(rectangleParam.bottom - rectangleParam.top))) != Gdiplus::Status::Ok)
+      Gdiplus::REAL x = rectangleParam.left;
+      Gdiplus::REAL y = rectangleParam.top;
+      Gdiplus::REAL Δx = rectangleParam.width();
+      Gdiplus::REAL Δy = rectangleParam.width();
+
+      auto status = m_pgraphics->DrawEllipse(ppen, x, y, Δx, Δy);
+
+      if (status != Gdiplus::Status::Ok)
       {
 
-         throw ::exception(error_failed);
+         FORMATTED_WARNING("Gdiplus Failed to DrawEllipse (%f, %f, %f, %f)", x, y, Δx, Δy);
 
       }
-
 
    }
 
@@ -1125,12 +1129,17 @@ namespace draw2d_gdiplus
 
       }
 
-      if ((m_pgraphics->FillEllipse(pbrush, (Gdiplus::REAL)rectangleParam.left, (Gdiplus::REAL)rectangleParam.top,
-         (Gdiplus::REAL)(rectangleParam.right - rectangleParam.left),
-         (Gdiplus::REAL)(rectangleParam.bottom - rectangleParam.top))) != Gdiplus::Status::Ok)
+      Gdiplus::REAL x = rectangleParam.left;
+      Gdiplus::REAL y = rectangleParam.top;
+      Gdiplus::REAL Δx = rectangleParam.width();
+      Gdiplus::REAL Δy = rectangleParam.width();
+
+      auto status = m_pgraphics->FillEllipse(pbrush, x, y, Δx, Δy);
+      
+      if(status != Gdiplus::Status::Ok)
       {
 
-         throw ::exception(error_null_pointer);
+         FORMATTED_WARNING("Gdiplus Failed to FillEllipse (%f, %f, %f, %f)", x, y, Δx, Δy);
 
       }
 
@@ -1342,7 +1351,8 @@ namespace draw2d_gdiplus
       if (!bOk)
       {
 
-         throw ::exception(error_null_pointer);
+         FORMATTED_WARNING("Gdiplus Failed to FillRectangle (%d, %d, %d, %d)",
+            rectangle.X, rectangle.Y, rectangle.Width, rectangle.Height);
 
       }
 
@@ -1924,9 +1934,9 @@ namespace draw2d_gdiplus
          if (ret != Gdiplus::Status::Ok)
          {
 
-            //return false;
-
-            throw ::exception(error_null_pointer);
+            FORMATTED_WARNING("Gdiplus Failed to DrawImage (%f, %f, %f, %f) - (%f, %f, %f, %f)",
+               rectfTarget.X, rectfTarget.Y, rectfTarget.Width, rectfTarget.Height,
+               xSrc, ySrc, nSrcWidth, nSrcHeight);
 
          }
 
