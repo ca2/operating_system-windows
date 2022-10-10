@@ -71,7 +71,7 @@ void imm_client::on_message_kill_focus(::message::message * pmessage)
 void imm_client::_011OnChar(::message::message * pmessage)
 {
 
-   __pointer(::user::message) pusermessage(pmessage);
+   ::pointer<::user::message>pusermessage(pmessage);
 
    if (pmessage->m_atom == e_message_char)
    {
@@ -137,7 +137,7 @@ void imm_client::_001OnIme(::message::message * pmessage)
 
 #ifdef WINDOWS_DESKTOP
 
-   __pointer(::user::message) pusermessage(pmessage);
+   ::pointer<::user::message>pusermessage(pmessage);
 
    if (pmessage->m_atom == WM_INPUTLANGCHANGE)
    {

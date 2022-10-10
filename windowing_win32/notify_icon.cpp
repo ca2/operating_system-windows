@@ -1,4 +1,4 @@
-﻿#include "framework.h"
+#include "framework.h"
 #if !BROAD_PRECOMPILED_HEADER
 #include "aura/user/user/_user.h"
 #endif
@@ -283,7 +283,7 @@ namespace windowing_win32
             try
             {
 
-               __pointer(::user::interaction) pframe = (m_userinteractionaHidden.element_at(0));
+               ::pointer<::user::interaction>pframe = (m_userinteractionaHidden.element_at(0));
 
                if (pframe != nullptr)
                {

@@ -20,7 +20,7 @@ namespace music
          public:
 
 
-            __pointer(sequence)      m_psequence;
+            ::pointer<sequence>     m_psequence;
 
 
             sequence_thread(::music::midi::sequence * psequence);

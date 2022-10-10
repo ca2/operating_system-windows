@@ -199,7 +199,7 @@ install:
 
 
       papp->m_bShouldInitializeGTwf = false;
-/*      win::thread * pthread = dynamic_cast < win::thread *> (papp->pointer < ::ca::thread > ::m_p);
+/*      win::thread * pthread = dynamic_cast < win::thread *> (papp->::pointer<::ca::thread>::m_p);
       win::thread * pthreadCur = dynamic_cast < win::thread *> (papp->GetThread()->m_p);
       pthread->m_hThread = pthreadCur->m_hThread;
       pthread->m_nThreadID = pthreadCur->m_nThreadID;
@@ -258,7 +258,7 @@ install:
       pthread->m_hThread = nullptr;
       pthread->m_nThreadID = nullptr;
    
-      WIN_THREAD(papp->pointer < ::ca::thread >::m_p)->m_bRun = false;
+      WIN_THREAD(papp->::pointer<::ca::thread>:m_p)->m_bRun = false;
       ::SetEvent(m_hEventReady);
       //papp->m_bRun = false;
 

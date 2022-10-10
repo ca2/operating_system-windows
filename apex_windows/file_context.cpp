@@ -1,4 +1,4 @@
-#include "framework.h"
+﻿#include "framework.h"
 #include "file_context.h"
 #include "dir_system.h"
 #include "apex/operating_system.h"
@@ -39,11 +39,11 @@ namespace apex_windows
 
       //}
 
-      __pointer(::apex::system) psystem = get_system();
+      ::pointer<::apex::system>psystem = get_system();
 
-      __refer(m_pfilesystem, psystem->m_pfilesystem);
+      m_pfilesystem = psystem->m_pfilesystem;
 
-      __refer(m_pdirsystem, psystem->m_pdirsystem);
+      m_pdirsystem = psystem->m_pdirsystem;
 
       //return ::success;
 
@@ -449,7 +449,7 @@ namespace apex_windows
 
       }
 
-      __pointer(::apex::system) psystem = get_system();
+      ::pointer<::apex::system>psystem = get_system();
 
       if (read_resource_as_memory(*pfile->get_primitive_memory(), (HINSTANCE) psystem->m_hinstanceThis, iId, psz))
       {

@@ -98,7 +98,7 @@ namespace hi5
       /* OAuth data */
       oauth m_oauth;
 
-      facebook(__pointer(base_application) papp);
+      facebook(::pointer<base_application>papp);
       virtual ~facebook();
 
       /* Twitter OAuth authorization methods */

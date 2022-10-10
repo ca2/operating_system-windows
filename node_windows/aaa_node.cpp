@@ -393,7 +393,7 @@ namespace aura
       void node::system_main()
       {
 
-         //__pointer(::node::system) psystem = m_psystem;
+         //::pointer<::node::system>psystem = m_psystem;
 
          auto psystem = m_psystem;
 

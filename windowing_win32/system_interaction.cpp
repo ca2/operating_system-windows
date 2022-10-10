@@ -69,7 +69,7 @@ namespace windowing_win32
 
       m_psystem->m_paurasystem->m_phardwaredevices.release();
 
-      __pointer(::user::message) pusermessage(pmessage);
+      ::pointer<::user::message>pusermessage(pmessage);
 
       ::output_debug_string("system_interaction::on_message_destroy");
 
@@ -138,7 +138,7 @@ namespace windowing_win32
 
             //psystem->enum_display_monitors();
 
-            //__pointer(::user::interaction) puserinteraction;
+            //::pointer<::user::interaction>puserinteraction;
 
             //while(psystem->get_frame(puserinteraction))
             //{

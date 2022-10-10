@@ -13,7 +13,7 @@ namespace ca2plugin_container
    ATOM register_class(HINSTANCE hInstance);
 
 
-   host::host(__pointer(::ca2plugin_container::application) papp) :
+   host::host(::pointer<::ca2plugin_container::application>papp) :
       ::object(papp),
       ::aura::application(papp),
       ::axis::application(papp),

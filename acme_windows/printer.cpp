@@ -12,7 +12,7 @@ namespace acme_windows
 {
 
 
-   printer::printer(__pointer(base_application) papp) :
+   printer::printer(::pointer<base_application>papp) :
       ::matter(pobject),
       ::user::printer(pobject),
       m_documentproperties(pobject)
@@ -66,7 +66,7 @@ namespace acme_windows
    }
 
 
-   printer::document_properties::document_properties(__pointer(base_application) papp) :
+   printer::document_properties::document_properties(::pointer<base_application>papp) :
       ::matter(pobject)
    {
       m_hdc = nullptr;

@@ -2587,7 +2587,7 @@ namespace draw2d_gdi
    //bool image::print_window(::aura::draw_interface * puserinteraction, ::message::message * pmessage)
    //{
 
-   //   __pointer(::user::message) pusermessage(pmessage);
+   //   ::pointer<::user::message>pusermessage(pmessage);
 
    //   if (pusermessage->m_wparam == 0)
    //   {

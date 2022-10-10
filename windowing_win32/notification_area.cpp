@@ -168,7 +168,7 @@ namespace windowing_win32
             
             pwindowingicon->add_icon(tray.hIcon);
 
-            __pointer(::draw2d::icon) picon;
+            ::pointer<::draw2d::icon>picon;
 
             picon.create(this);
 

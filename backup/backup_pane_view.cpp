@@ -77,10 +77,10 @@ namespace backup
       break;
       case OPTIONS_IMPACT:
       {
-         __pointer(::user::document) pdocument = papplication->create_form(this, this);
+         ::pointer<::user::document>pdocument = papplication->create_form(this, this);
          if(pdocument == nullptr)
             return;
-         __pointer(::user::impact) pimpact = pdocument->get_impact();
+         ::pointer<::user::impact>pimpact = pdocument->get_impact();
          auto pupdate = new_update();
          pupdate->m_actioncontext = ::e_source_system;
          ptopic->m_atom = id_browse;
@@ -95,7 +95,7 @@ namespace backup
 
 
          pcreatordata->m_puserinteraction = (pimpact->get_parent_frame());
-//         __pointer(form_child_frame) pframe = (pcreatordata->m_puserinteraction);
+//         ::pointer<form_child_frame>pframe = (pcreatordata->m_puserinteraction);
          pcreatordata->m_pdocument = pdocument;
 
       }

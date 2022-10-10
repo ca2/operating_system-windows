@@ -25,7 +25,7 @@ namespace windowing_win32
       //__creatable_from_base(shell, ::user::shell);
 
 
-      //__composite(::user::message_queue)              m_pmessagequeue;
+      //::pointer<::user::message_queue>             m_pmessagequeue;
 
       //comptr<IThumbnailHandlerFactory> m_thumbnailhandlerfactory;
 

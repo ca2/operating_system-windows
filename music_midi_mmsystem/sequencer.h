@@ -26,7 +26,7 @@ namespace music
             bool                       m_bHadNoteOn;
 
             KEYFRAME                   m_keyframe;
-            __pointer(midi)            m_pmidi;
+            ::pointer<midi>           m_pmidi;
 
             i32                        m_iBufferSize;
             
@@ -37,7 +37,7 @@ namespace music
 
             i32                        m_iBufferNominalMax;
 
-            __pointer(buffer_array)    m_pbuffera;
+            ::pointer<buffer_array>   m_pbuffera;
 
             HMIDISTRM                  m_hstream;
 

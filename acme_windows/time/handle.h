@@ -172,7 +172,7 @@ public:
 
 // Operations
 public:
-   CT * from_handle(HANDLE h, CT * (* pfnAllocator) (__pointer(::acme::application), HANDLE) = nullptr, __pointer(::acme::application) papp = nullptr);
+   CT * from_handle(HANDLE h, CT * (* pfnAllocator) (::pointer<::acme::application> HANDLE) = nullptr, ::pointer<::acme::application>app = nullptr);
    void delete_temp();
 
    void set_permanent(HANDLE h, CT * permOb);
@@ -232,7 +232,7 @@ handle_map < HT, CT > ::handle_map(::matter * pobject) :
 }
 
 template < class HT, class CT >
-CT* handle_map < HT, CT >::from_handle(HANDLE h, CT * (*pfnAllocator) (__pointer(::acme::application), HANDLE), __pointer(::acme::application) papp)
+CT* handle_map < HT, CT >::from_handle(HANDLE h, CT * (*pfnAllocator) (::pointer<::acme::application> HANDLE), ::pointer<::acme::application>app)
 {
 
    single_lock synchronouslock(&m_mutex, true);

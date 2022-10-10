@@ -71,7 +71,7 @@ namespace aura_windows
       case XTYP_CONNECT:
       {
          
-         __pointer(::aura_windows::shell_open) pshellopen = ::get_task()->get_app()->m_papexapplication;
+         ::pointer<::aura_windows::shell_open>pshellopen = ::get_task()->get_app()->m_papexapplication;
 
          if (!DdeCmpStringHandles((HSZ)hsz1, pshellopen->m_hszSystemTopic))
          {

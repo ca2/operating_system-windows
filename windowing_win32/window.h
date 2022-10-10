@@ -24,7 +24,7 @@ namespace windowing_win32
       //UINT                                          m_uiMessage;
       //WPARAM                                        m_wparam;
       //LPARAM                                        m_lparam;
-      __pointer(::aura_windows::interaction_impl)     m_pimpl2;
+      ::pointer<::aura_windows::interaction_impl>    m_pimpl2;
       ::duration                                      m_durationLastMouseMove;
       ::point_i32                                     m_pointMouseMove;
 
@@ -257,7 +257,7 @@ namespace windowing_win32
 
 
       // advanced creation (allows access to extended styles)
-      //virtual bool create_window_ex(::user::interaction * pinteraction, __pointer(::user::system) pusersystem, ::user::interaction * puiParent, atom atom) override;
+      //virtual bool create_window_ex(::user::interaction * pinteraction, ::pointer<::user::system>pusersystem, ::user::interaction * puiParent, atom atom) override;
 
       //virtual void native_create_host() override;
 
@@ -384,7 +384,7 @@ namespace windowing_win32
       //virtual bool _is_window_visible() override;
       virtual void ShowOwnedPopups(bool bShow = true);
 
-      virtual __pointer(::draw2d::graphics) GetDCEx(::draw2d::region * prgnClip, u32 flags);
+      virtual ::pointer<::draw2d::graphics>GetDCEx(::draw2d::region * prgnClip, u32 flags);
       virtual bool LockWindowUpdate();
       virtual void UnlockWindowUpdate();
 

@@ -16,7 +16,7 @@ namespace production
    public:
 
 
-      __pointer(::user::form_impact)      m_pviewOptions;
+      ::pointer<::user::form_impact>     m_pviewOptions;
 
 
       pane_impact(::object * pobject);
@@ -25,7 +25,7 @@ namespace production
 
       DECLARE_MESSAGE_HANDLER(_001OnUserMessage);
 
-      __pointer(::production::document) get_document();
+      ::pointer<::production::document>get_document();
 
       void handle(::topic * ptopic, ::context * pcontext);
 

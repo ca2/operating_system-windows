@@ -2,7 +2,7 @@
 #include "aura/node/windows/windows.h"
 
 
-CLASS_DECL_AURA i32 __win_main(__pointer(::aura::system) psystem,::windows::command * pmaininitdata);
+CLASS_DECL_AURA i32 __win_main(::pointer<::aura::system>psystem,::windows::command * pmaininitdata);
 
 typedef bool DEFER_INIT();
 typedef DEFER_INIT * PFN_DEFER_INIT;

@@ -108,7 +108,7 @@ namespace multimedia
          m_pwaveformat->nBlockAlign = m_pwaveformat->wBitsPerSample * m_pwaveformat->nChannels / 8;
          m_pwaveformat->nAvgBytesPerSec = m_pwaveformat->nSamplesPerSec * m_pwaveformat->nBlockAlign;
          m_pwaveformat->cbSize = 0;
-         __pointer(::audio::wave) audiowave = papplication->audiowave();
+         ::pointer<::audio::wave>audiowave = papplication->audiowave();
 
          {
 
@@ -302,7 +302,7 @@ namespace multimedia
          m_pwaveformat->nBlockAlign = m_pwaveformat->wBitsPerSample * m_pwaveformat->nChannels / 8;
          m_pwaveformat->nAvgBytesPerSec = m_pwaveformat->nSamplesPerSec * m_pwaveformat->nBlockAlign;
          m_pwaveformat->cbSize = 0;
-         __pointer(::audio::wave) audiowave = papplication->audiowave();
+         ::pointer<::audio::wave>audiowave = papplication->audiowave();
 
          {
 

@@ -94,7 +94,7 @@ namespace apex_windows
    return true;
    }
    */
-   ::count ip_enum::enumerate(__pointer_array(::networking::address) & ipa)
+   ::count ip_enum::enumerate(pointer_array < ::networking::address > & ipa)
    {
 
       //get this machines host name

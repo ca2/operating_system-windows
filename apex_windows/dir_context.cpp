@@ -1,4 +1,4 @@
-#include "framework.h"
+﻿#include "framework.h"
 #include "dir_context.h"
 #include "dir_system.h"
 #include "acme_windows/file_find.h"
@@ -40,11 +40,12 @@ namespace apex_windows
 
       //}
 
-      __pointer(::apex::system) psystem = get_system();
+      ::pointer<::apex::system>psystem = get_system();
 
-      __refer(m_pfilesystem, psystem->m_pfilesystem);
+      //__refer(
+      m_pfilesystem = psystem->m_pfilesystem;
 
-      __refer(m_pdirsystem, psystem->m_pdirsystem);
+      m_pdirsystem = psystem->m_pdirsystem;
 
       //return ::success;
 
@@ -846,7 +847,7 @@ namespace apex_windows
    ::file::path dir_context::module()
    {
 
-      __pointer(::apex::system) psystem = get_system();
+      ::pointer<::apex::system>psystem = get_system();
 
       return psystem->m_pdirsystem->m_pathModule;
 
@@ -856,7 +857,7 @@ namespace apex_windows
    //::file::path dir_context::ca2module()
    //{
 
-   //   __pointer(::apex::system) psystem = get_system();
+   //   ::pointer<::apex::system>psystem = get_system();
 
    //   return psystem->m_pdirsystem->m_pathCa2Module;
 

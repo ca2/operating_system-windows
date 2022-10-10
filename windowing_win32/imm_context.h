@@ -10,7 +10,7 @@ public:
 
 
    HIMC                                m_himc;
-   __pointer(::user::interaction)      m_pinteraction;
+   ::pointer<::user::interaction>     m_pinteraction;
 
 
    imm_context(::user::interaction * pinteraction);

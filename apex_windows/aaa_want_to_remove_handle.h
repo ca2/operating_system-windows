@@ -172,7 +172,7 @@ public:
 
 // Operations
 public:
-   CT * from_handle(HANDLE h, CT * (* pfnAllocator) (__pointer(::apex::application), HANDLE) = nullptr, __pointer(::apex::application) papp = nullptr);
+   CT * from_handle(HANDLE h, CT * (* pfnAllocator) (::pointer<::apex::application> HANDLE) = nullptr, ::pointer<::apex::application>app = nullptr);
    void delete_temp();
 
    void set_permanent(HANDLE h, CT * permOb);
@@ -232,7 +232,7 @@ handle_map < HT, CT > ::handle_map(::object * pobject) :
 }
 
 template < class HT, class CT >
-CT* handle_map < HT, CT >::from_handle(HANDLE h, CT * (*pfnAllocator) (__pointer(::apex::application), HANDLE), __pointer(::apex::application) papp)
+CT* handle_map < HT, CT >::from_handle(HANDLE h, CT * (*pfnAllocator) (::pointer<::apex::application> HANDLE), ::pointer<::apex::application>app)
 {
 
    single_lock synchronouslock(&m_mutex, true);

@@ -66,7 +66,7 @@ namespace multimedia
             m_mixerlinecontrols.pamxctrl[i].cbStruct = sizeof(MIXERCONTROL);
          }
 
-         __pointer(::multimedia::audio_mixer_mmsystem::device) device = get_device();
+         ::pointer<::multimedia::audio_mixer_mmsystem::device>device = get_device();
 
          mmresult = mixerGetLineControls((HMIXEROBJ) device->m_hMixer, &m_mixerlinecontrols, MIXER_GETLINECONTROLSF_ALL);
 
@@ -94,7 +94,7 @@ namespace multimedia
             //    i32         nIndex;
             PMIXERCONTROL       pamxctrl;
             //        LPMIXERCONTROLDETAILS lpmcd;
-            __pointer(::multimedia::audio_mixer_mmsystem::control)     lpMixerControl;
+            ::pointer<::multimedia::audio_mixer_mmsystem::control>    lpMixerControl;
 
             //        if (0 != (APP_OPTF_DEBUGLOG & gfuAppOptions))
             //          MixAppDebugLog(nullptr);
@@ -242,7 +242,7 @@ namespace multimedia
          m_mixerline.dwDestination  = dwDestination;
          m_mixerline.dwSource       = dwSource;
 
-         __pointer(::multimedia::audio_mixer_mmsystem::device) device = get_device();
+         ::pointer<::multimedia::audio_mixer_mmsystem::device>device = get_device();
 
          MMRESULT mmresult = ::mixerGetLineInfo((HMIXEROBJ)device->m_hMixer, &m_mixerline, fdwInfo);
 
@@ -269,7 +269,7 @@ namespace multimedia
       void source::get_line_info(u32 dwSource, ::multimedia::audio_mixer::destination * pdestination)
       {
 
-         __pointer(::multimedia::audio_mixer_mmsystem::destination) destination = pdestination;
+         ::pointer<::multimedia::audio_mixer_mmsystem::destination>destination = pdestination;
 
          get_line_info(dwSource, destination->m_mixerline.dwDestination, MIXER_GETLINEINFOF_SOURCE);
 

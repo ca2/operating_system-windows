@@ -20,7 +20,7 @@ namespace multimedia
          WAVEFORMATEX         m_waveformatex;
 
 
-         in(__pointer(::axis::application) papp);
+         in(::pointer<::axis::application>papp);
          virtual ~in();
 
 

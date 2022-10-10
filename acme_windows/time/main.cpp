@@ -131,7 +131,7 @@ void os_post_quit()
 //CLASS_DECL_ACME void main_async_runnable(::matter * pobjectTaskParam)
 //{
 //
-//   __pointer(::matter) pobjectTask = pobjectTaskParam;
+//   ::pointer<::matter>pobjectTask = pobjectTaskParam;
 //   
 //   get_system()->post_predicate([pobjectTask]()
 //   {
@@ -146,7 +146,7 @@ void os_post_quit()
 //CLASS_DECL_ACME void main_sync_runnable(::matter * pobjectTaskParam, ::duration durationTimeout)
 //{
 //   
-//   __pointer(::matter) pobjectTask = pobjectTaskParam;
+//   ::pointer<::matter>pobjectTask = pobjectTaskParam;
 //   
 //   get_system()->send_predicate([pobjectTask]()
 //   {

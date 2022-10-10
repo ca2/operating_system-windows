@@ -55,7 +55,7 @@ bool IsDibSection(HBITMAP bmp)
    }
    return Result;
 }
-//__pointer(::image) create_image_from_hbitmap1(HBITMAP hbitmap)
+//::pointer<::image>create_image_from_hbitmap1(HBITMAP hbitmap)
 //{
 //   //comptr < IKnownFolder > get_known_folder(const ::string & strPath);
 //
@@ -144,7 +144,7 @@ bool IsDibSection(HBITMAP bmp)
 //
 //}
 
-__pointer(::image) create_image_from_hbitmap(::object * pobject, HBITMAP hbitmap)
+::pointer<::image>create_image_from_hbitmap(::object * pobject, HBITMAP hbitmap)
 {
 
 
@@ -1686,7 +1686,7 @@ namespace windowing_win32
 
       //}
 
-      //estatus = __compose_new(m_pmessagequeue);
+      //estatus = __construct_new(m_pmessagequeue);
 
 
       //if (!estatus)

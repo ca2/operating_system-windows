@@ -5,7 +5,7 @@ namespace hi5
 {
 
 
-   string prepare_basic_authentication(__pointer(base_application) papp, const ::string & inParam1, const ::string & inParam2);
+   string prepare_basic_authentication(::pointer<base_application>papp, const ::string & inParam1, const ::string & inParam2);
 
 
    namespace oAuthTwitterApiUrls
@@ -37,7 +37,7 @@ namespace hi5
    * @output: none
    *
    *--*/
-   facebook::facebook(__pointer(base_application) papp) :
+   facebook::facebook(::pointer<base_application>papp) :
       matter(papp),
 
       /* Constants */

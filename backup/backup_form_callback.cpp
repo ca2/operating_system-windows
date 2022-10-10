@@ -65,7 +65,7 @@ namespace backup
                         string_array wstra;
                         //VmsDataGet(m_pmanager->get_filemanager_template()->m_datakeyStatic, 0, 0, wstra);
                         Ex1VirtualGuie * pinteraction = pimpact->get_child_by_name("lfs");
-                        __pointer(::user::edit_text) ptext =pinteraction;
+                        ::pointer<::user::edit_text>ptext =pinteraction;
                         string str;
                         ptext->_001GetText(str);
                         wstra.AddUnique(str);
@@ -79,7 +79,7 @@ namespace backup
                      {
                         auto pupdate = new_update();
                         Ex1VirtualGuieInterface * pinteraction = pimpact->get_child_by_name("encontrar");
-                        __pointer(::user::edit_text) ptext =pinteraction;
+                        ::pointer<::user::edit_text>ptext =pinteraction;
                         //ptext->_001GetText(update.m_strFind);
                         pinteraction = pimpact->get_child_by_name("substituir");
                         ptext =pinteraction;

@@ -34,9 +34,9 @@ namespace music
          public:
 
 
-            __pointer(midi)                   m_pmidi;
-            __pointer(file)                   m_pfile;
-            __pointer(sequence_thread)        m_psequencethread;
+            ::pointer<midi>                  m_pmidi;
+            ::pointer<file>                  m_pfile;
+            ::pointer<sequence_thread>       m_psequencethread;
 
             u32                        m_cbPreroll;         
 

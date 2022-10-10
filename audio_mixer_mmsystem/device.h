@@ -42,7 +42,7 @@ namespace multimedia
          void map_lines();
          void map_controls();
          
-         __pointer(::multimedia::audio_mixer::destination) get_destination(::multimedia::audio_mixer::e_destination edestination) override;
+         ::pointer<::multimedia::audio_mixer::destination>get_destination(::multimedia::audio_mixer::e_destination edestination) override;
 
          void     initialize_destinations();
          void     initialize_capabilities();

@@ -3660,7 +3660,7 @@ repeat:
 
                      hr = pitema->GetCount(&dwNumItems);  // get number of selected items
 
-                     string_array & straDest = set["file_name"];
+                     auto & straDest = set["file_name"].string_array_reference();
 
                      // Loop through IShellItemArray and construct string for display
                      for (u32 i = 0; i < dwNumItems; i++)

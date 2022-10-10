@@ -157,7 +157,7 @@ namespace multimedia
       void device::initialize_destinations()
       {
 
-         __pointer(::multimedia::audio_mixer_mmsystem::destination)  lpDestination;
+         ::pointer<::multimedia::audio_mixer_mmsystem::destination> lpDestination;
 
          m_mixerdestinationa.set_size_create(this, m_mixercaps.cDestinations);
 
@@ -202,7 +202,7 @@ namespace multimedia
       }
 
 
-      __pointer(::multimedia::audio_mixer::destination) device::get_destination(::multimedia::audio_mixer::e_destination edestination)
+      ::pointer<::multimedia::audio_mixer::destination>device::get_destination(::multimedia::audio_mixer::e_destination edestination)
       {
 
          u32 dwComponentType;
@@ -231,7 +231,7 @@ namespace multimedia
          for(i32 i = 0; i < m_mixerdestinationa.get_size(); i++)
          {
 
-            __pointer(::multimedia::audio_mixer_mmsystem::destination) destination = m_mixerdestinationa[i];
+            ::pointer<::multimedia::audio_mixer_mmsystem::destination>destination = m_mixerdestinationa[i];
 
             u32 dw = destination->m_mixerline.dwComponentType;
 
@@ -257,7 +257,7 @@ namespace multimedia
          for(i32 i = 0; i < m_mixerdestinationa.get_size(); i++)
          {
 
-            __pointer(::multimedia::audio_mixer_mmsystem::destination) destination = m_mixerdestinationa[i];
+            ::pointer<::multimedia::audio_mixer_mmsystem::destination>destination = m_mixerdestinationa[i];
 
             MapLineControls(destination);
 
@@ -266,7 +266,7 @@ namespace multimedia
             for(i32 j = 0; j < sourcea.get_size(); j++)
             {
 
-               __pointer(::multimedia::audio_mixer::source) source = sourcea[j];
+               ::pointer<::multimedia::audio_mixer::source>source = sourcea[j];
 
                MapLineControls(source);
 
@@ -285,7 +285,7 @@ namespace multimedia
          for(i32 i = 0; i < m_mixerdestinationa.get_size(); i++)
          {
 
-            __pointer(::multimedia::audio_mixer_mmsystem::destination) destination = m_mixerdestinationa[i];
+            ::pointer<::multimedia::audio_mixer_mmsystem::destination>destination = m_mixerdestinationa[i];
 
             m_mapIDToLine.set_at(destination->get_mixer_line().dwLineID, destination);
 
@@ -294,7 +294,7 @@ namespace multimedia
             for(i32 j = 0; j < sourcea.get_size(); j++)
             {
 
-               __pointer(::multimedia::audio_mixer_mmsystem::source) source = sourcea[j];
+               ::pointer<::multimedia::audio_mixer_mmsystem::source>source = sourcea[j];
 
                m_mapIDToLine.set_at(source->m_mixerline.dwLineID, source);
 
@@ -343,7 +343,7 @@ namespace multimedia
          for(auto & pcontrol : controla)
          {
 
-            __pointer(control) pcontrolMMSystem = pcontrol;
+            ::pointer<control>pcontrolMMSystem = pcontrol;
 
             auto dwControlId = pcontrolMMSystem->GetMixerControl().dwControlID;
 

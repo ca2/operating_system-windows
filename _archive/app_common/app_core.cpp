@@ -2,7 +2,7 @@
 #include "aura/node/windows/windows.h"
 
 
-CLASS_DECL_AURA i32 __win_main(__pointer(::aura::system) psystem,::windows::command * pmaininitdata);
+CLASS_DECL_AURA i32 __win_main(::pointer<::aura::system>psystem,::windows::command * pmaininitdata);
 
 
 extern "C" i32 app_core_main(HINSTANCE hinstance, HINSTANCE hPrevInstance, LPTSTR lpCmdLine, i32 nCmdShow, app_core & appcore)

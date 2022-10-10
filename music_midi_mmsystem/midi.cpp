@@ -47,7 +47,7 @@ namespace music
          }
 
 
-         //__pointer(::music::midi::sequence) midi::create_midi_sequence(const string& strDevice)
+         //::pointer<::music::midi::sequence>midi::create_midi_sequence(const string& strDevice)
          //{
 
          //   string strEngine = device_engine(strDevice);
@@ -65,7 +65,7 @@ namespace music
 
 
 
-         __pointer(::music::midi::sequencer) midi::create_midi_sequencer(sequence* psequence, const string& strDevice)
+         ::pointer<::music::midi::sequencer>midi::create_midi_sequencer(sequence* psequence, const string& strDevice)
          {
 
             string strEngine = device_engine(strDevice);
@@ -400,7 +400,7 @@ namespace music
 
 
 
-         //__pointer(play_thread) midi::on_midi_sequence_start(::music::midi::sequence* psequence, const string& strDevice)
+         //::pointer<play_thread>midi::on_midi_sequence_start(::music::midi::sequence* psequence, const string& strDevice)
          //{
 
          //   string strEngine = device_engine(strDevice);
@@ -418,7 +418,7 @@ namespace music
          //}
 
 
-         __pointer(::music::midi::message_out) midi::get_message_out(const string& strDeviceId)
+         ::pointer<::music::midi::message_out>midi::get_message_out(const string& strDeviceId)
          {
 
             auto & pmessageout = m_mapMessageOut[strDeviceId];
@@ -441,7 +441,7 @@ namespace music
          }
 
 
-         __pointer(::music::midi::message_in) midi::get_message_in(const string& strDevice)
+         ::pointer<::music::midi::message_in>midi::get_message_in(const string& strDevice)
          {
 
             string strMMSystemDevice = strDevice;

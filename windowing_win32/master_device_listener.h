@@ -1,4 +1,4 @@
-// Created by camilo on 2022-02-20 12:05 <3ThomasBorregaardSørensen!! (Thomas Likes number 5)!
+// Created by camilo on 2022-02-20 12:05 <3ThomasBorregaardSï¿½rensen!! (Thomas Likes number 5)!
 #pragma once
 
 
@@ -24,7 +24,7 @@ namespace windowing_win32
 
       HDEVNOTIFY                 m_hdevnotify;
 
-      __pointer(devices)         m_pdevices;
+      ::pointer<devices>        m_pdevices;
 
       ::hardware::enum_device    m_edevice;
 

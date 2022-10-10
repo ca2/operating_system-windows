@@ -147,7 +147,7 @@ namespace windows
 
 
    /// from top to bottom
-   CLASS_DECL_WINDOWING_WIN32 __pointer(::windows::hwnd_array) get_top_level_windows(bool bDesktop, bool bVisible)
+   CLASS_DECL_WINDOWING_WIN32 ::pointer<::windows::hwnd_array>get_top_level_windows(bool bDesktop, bool bVisible)
    {
 
       /// from top to bottom

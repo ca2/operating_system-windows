@@ -72,7 +72,7 @@
 //
 //      void thread::OnMixerMessage(::message::message * pmessage)
 //      {
-//         __pointer(::user::message) pusermessage(pmessage);
+//         ::pointer<::user::message>pusermessage(pmessage);
 //
 //         if(pusermessage->m_wparam ==  23)
 //         {
@@ -143,14 +143,14 @@
 //      void thread::OnVmsmException(::message::message * pmessage)
 //      {
 //         __UNREFERENCED_PARAMETER(pmessage);
-//         //__pointer(::axis::application) pApp = (__pointer(::axis::application)) System;
+//         //::pointer<::axis::application>pApp = (::pointer<::axis::application>System;
 //         //pApp->post_thread_message(VMSM_EXCEPTION, wParam, lParam);
 //      }
 //
 //
 //      void thread::OnUserMessage(::message::message * pmessage)
 //      {
-//         __pointer(::user::message) pusermessage(pmessage);
+//         ::pointer<::user::message>pusermessage(pmessage);
 //
 //         switch(pusermessage->m_wparam)
 //         {
@@ -202,7 +202,7 @@
 //         {
 //            /*CDBBuildAlbumThreadData * lpdata =
 //            (CDBBuildAlbumThreadData *)lParam;
-//            __pointer(single_document_template) pAlbumDocTemplate = nullptr;
+//            ::pointer<single_document_template>pAlbumDocTemplate = nullptr;
 //            if(GetAlbumThread())
 //            {
 //            pAlbumDocTemplate = GetAlbumThread()->GetMixerDocTemplate();

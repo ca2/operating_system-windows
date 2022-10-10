@@ -219,6 +219,19 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "crypto_openssl", "..\..\..\source\app\crypto_openssl\crypto_openssl.vcxproj", "{D08014E6-E329-41CF-81B5-957C290A4AA8}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_app_core_clockverse", "..\..\..\source\app-core\clockverse\__implement\shared_app_core_clockverse.vcxproj", "{924D0356-4B8B-406F-B6CC-862FBE7EFBEF}"
+	ProjectSection(ProjectDependencies) = postProject
+		{1BC6E245-E520-4A72-A676-F763CAB89CA5} = {1BC6E245-E520-4A72-A676-F763CAB89CA5}
+		{38C64C42-60D1-431F-B651-80489121AA79} = {38C64C42-60D1-431F-B651-80489121AA79}
+		{9A5FBFB1-76E6-4F7E-933A-328C1EEC95AF} = {9A5FBFB1-76E6-4F7E-933A-328C1EEC95AF}
+		{A156A707-E332-4F7F-807B-335566C43BEC} = {A156A707-E332-4F7F-807B-335566C43BEC}
+		{A69CC125-E38A-4F77-9677-8860D43AB3B0} = {A69CC125-E38A-4F77-9677-8860D43AB3B0}
+		{AB6EFD41-811D-4311-A283-8AA50A3E5C02} = {AB6EFD41-811D-4311-A283-8AA50A3E5C02}
+		{C1CCDF2E-9F27-45D3-B67A-B2EEB1754E72} = {C1CCDF2E-9F27-45D3-B67A-B2EEB1754E72}
+		{D08014E6-E329-41CF-81B5-957C290A4AA8} = {D08014E6-E329-41CF-81B5-957C290A4AA8}
+		{D79C7DDB-A727-4B91-803E-41C4431693D6} = {D79C7DDB-A727-4B91-803E-41C4431693D6}
+		{E2D7833B-9B59-4826-BBDF-C270A2115E86} = {E2D7833B-9B59-4826-BBDF-C270A2115E86}
+		{F85061D8-22DC-4A8B-85EA-76D330BE52CC} = {F85061D8-22DC-4A8B-85EA-76D330BE52CC}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_app_core_timer", "..\..\..\source\app-core\timer\__implement\shared_app_core_timer.vcxproj", "{0567D25A-7A48-4681-AA02-167FF9FFA761}"
 EndProject
@@ -231,6 +244,8 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_app_core_auratype", "..\..\..\source\app-core\auratype\__implement\shared_app_core_auratype.vcxproj", "{B76A7048-8A0D-4F9D-9733-99CCE96856AF}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_app_core_audioaura", "..\..\..\source\app-core\audioaura\__implement\shared_app_core_audioaura.vcxproj", "{C31504BD-D493-40B4-9C80-DCB9C7544676}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "user_text_to_speech", "..\..\..\source\app-core\user_text_to_speech\user_text_to_speech.vcxproj", "{A156A707-E332-4F7F-807B-335566C43BEC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -1196,6 +1211,22 @@ Global
 		{C31504BD-D493-40B4-9C80-DCB9C7544676}.stage|Win32.Build.0 = stage|Win32
 		{C31504BD-D493-40B4-9C80-DCB9C7544676}.stage|x64.ActiveCfg = stage|x64
 		{C31504BD-D493-40B4-9C80-DCB9C7544676}.stage|x64.Build.0 = stage|x64
+		{A156A707-E332-4F7F-807B-335566C43BEC}.basis|Win32.ActiveCfg = basis|Win32
+		{A156A707-E332-4F7F-807B-335566C43BEC}.basis|Win32.Build.0 = basis|Win32
+		{A156A707-E332-4F7F-807B-335566C43BEC}.basis|x64.ActiveCfg = basis|x64
+		{A156A707-E332-4F7F-807B-335566C43BEC}.basis|x64.Build.0 = basis|x64
+		{A156A707-E332-4F7F-807B-335566C43BEC}.cube_basis|Win32.ActiveCfg = cube_basis|Win32
+		{A156A707-E332-4F7F-807B-335566C43BEC}.cube_basis|Win32.Build.0 = cube_basis|Win32
+		{A156A707-E332-4F7F-807B-335566C43BEC}.cube_basis|x64.ActiveCfg = cube_basis|x64
+		{A156A707-E332-4F7F-807B-335566C43BEC}.cube_basis|x64.Build.0 = cube_basis|x64
+		{A156A707-E332-4F7F-807B-335566C43BEC}.cube_stage|Win32.ActiveCfg = cube_stage|Win32
+		{A156A707-E332-4F7F-807B-335566C43BEC}.cube_stage|Win32.Build.0 = cube_stage|Win32
+		{A156A707-E332-4F7F-807B-335566C43BEC}.cube_stage|x64.ActiveCfg = cube_stage|x64
+		{A156A707-E332-4F7F-807B-335566C43BEC}.cube_stage|x64.Build.0 = cube_stage|x64
+		{A156A707-E332-4F7F-807B-335566C43BEC}.stage|Win32.ActiveCfg = stage|Win32
+		{A156A707-E332-4F7F-807B-335566C43BEC}.stage|Win32.Build.0 = stage|Win32
+		{A156A707-E332-4F7F-807B-335566C43BEC}.stage|x64.ActiveCfg = stage|x64
+		{A156A707-E332-4F7F-807B-335566C43BEC}.stage|x64.Build.0 = stage|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -794,7 +794,7 @@ namespace windowing_win32
 
       }
 
-      __pointer(::image) pimage;
+      ::pointer<::image>pimage;
 
       __construct(pimage);
 

@@ -25,12 +25,12 @@ namespace windowing_win32
 
       critical_section                 m_criticalsection;
       ::windows::window_map            m_windowmap;
-      __pointer(class display)         m_pdisplay;
+      ::pointer<class display>         m_pdisplay;
 
 //#ifdef WINDOWS_DESKTOP
 
       //#pragma message("at macos??")
-      __pointer(system_interaction)    m_psysteminteraction;
+      ::pointer<system_interaction>   m_psysteminteraction;
 
 //#endif
 
@@ -52,8 +52,8 @@ namespace windowing_win32
       //void get_cursor_position(POINT_I32* ppoint) override;
 
       virtual bool defer_create_system_window();
-      //virtual __pointer(::user::interaction) create_system_window();
-      __pointer(system_interaction) create_system_window();
+      //virtual ::pointer<::user::interaction>create_system_window();
+      ::pointer<system_interaction>create_system_window();
 
 
       inline system_interaction * system_window() { return m_psysteminteraction; }
@@ -68,13 +68,13 @@ namespace windowing_win32
 
       virtual ::windowing::display * display() override;
 
-      //__pointer(::windowing::monitor) get_main_monitor();
+      //::pointer<::windowing::monitor>get_main_monitor();
 
 
       //virtual ::extended::transport < ::windowing::icon > load_icon(const ::payload & payloadFile) override;
 
 
-      virtual __pointer(::user::message) get_user_message(MESSAGE * pmsg);
+      virtual ::pointer<::user::message>get_user_message(MESSAGE * pmsg);
 
 
       //virtual void enum_draw2d_fonts(::write_text::font_enumeration_item_array & itema) override;
@@ -141,7 +141,7 @@ namespace windowing_win32
 
       virtual void get_app_wnda(::windows::hwnd_array & wnda);
 
-      __pointer(::windowing::window) window_from_point(::aura::application * papp, const ::point_i32 & point);
+      ::pointer<::windowing::window>window_from_point(::aura::application * papp, const ::point_i32 & point);
 
       
       virtual void windowing_post(const ::procedure & procedure) override;

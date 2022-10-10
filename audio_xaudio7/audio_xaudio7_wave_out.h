@@ -154,7 +154,7 @@ namespace multimedia
 
 
 
-         out(__pointer(::axis::application) papp);
+         out(::pointer<::axis::application>papp);
          virtual ~out();
 
 

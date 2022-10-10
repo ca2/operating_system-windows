@@ -95,7 +95,7 @@ namespace production
 
       i32                     m_iStep;
                               
-      __pointer(::user::impact)                m_pimpact;
+      ::pointer<::user::impact>               m_pimpact;
       bool                    m_bFinished;
       tick m_tickStart;
       tick m_tickEnd;

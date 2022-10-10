@@ -1,4 +1,4 @@
-// Create on 2021-03-21 20:00 <3ThomasBS_
+﻿// Create on 2021-03-21 20:00 <3ThomasBS_
 #include "framework.h"
 #include "acme_directory.h"
 #include "acme_file.h"
@@ -638,7 +638,7 @@ pacmedir->roaming();
 
       HRESULT hr = SHGetKnownFolderPath(kfid, 0, hToken, &pwszPath);
 
-      return pwszPath;
+      return pwszPath.m_p;
 
    }
 

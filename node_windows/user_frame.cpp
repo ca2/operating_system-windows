@@ -9,7 +9,7 @@ namespace user
    void frame::_001OnSysCommand(::message::message * pmessage)
    {
 
-      __pointer(::user::message) pusermessage(pmessage);
+      ::pointer<::user::message>pusermessage(pmessage);
 
       //if (pusermessage->m_wparam == SC_SCREENSAVE)
       //{

@@ -1,4 +1,4 @@
-// First insertions by camilo on 2022-08-27 19:56 <3ThomasBorregaardSorensen!!
+﻿// First insertions by camilo on 2022-08-27 19:56 <3ThomasBorregaardSorensen!!
 #pragma once
 
 
@@ -30,7 +30,7 @@ namespace windows
    CLASS_DECL_WINDOWING_WIN32 HWND get_mouse_capture(itask_t itask);
 
 
-   using window_map = map < HWND, __pointer(::windowing_win32::window) >;
+   using window_map = map < HWND, ::pointer<::windowing_win32::window >>;
 
 
 

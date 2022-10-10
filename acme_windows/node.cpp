@@ -1,4 +1,4 @@
-#include "framework.h"
+﻿#include "framework.h"
 #include "node.h"
 #include "acme/parallelization/install_mutex.h"
 #include "acme_directory.h"
@@ -2575,7 +2575,7 @@ namespace acme_windows
    }
 
 
-   void node::implement(__pointer(::acme::node) & pnode, __pointer(::acme::system) & psystem)
+   void node::implement(::pointer<::acme::node>& pnode, ::pointer<::acme::system> & psystem)
    {
 
       return ::acme::node::implement(pnode, psystem);

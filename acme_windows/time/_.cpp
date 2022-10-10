@@ -642,7 +642,7 @@ namespace windows
 
 
 
-// __pointer(::extended::future < ::conversation >) xxxshow_error_message(const ::string & strMessage, const ::string & strTitle, const ::e_message_box & emessagebox)
+// pointer< ::extended::future < ::conversation > > xxxshow_error_message(const ::string & strMessage, const ::string & strTitle, const ::e_message_box & emessagebox)
 // {
 
 //    wstring wstrMessage(strMessage);

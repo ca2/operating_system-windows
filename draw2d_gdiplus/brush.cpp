@@ -145,7 +145,7 @@ namespace draw2d_gdiplus
          try
          {
 
-            __pointer(::draw2d::path) ppath;
+            ::pointer<::draw2d::path>ppath;
 
             pgraphics->__construct(ppath);
 

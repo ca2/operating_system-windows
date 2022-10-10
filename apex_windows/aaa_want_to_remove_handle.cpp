@@ -16,7 +16,7 @@ namespace windows
       //single_lock synchronouslock(&pMap->m_mutex, true);
 
       array < oswindow > oswindowaRemove;
-      array < __pointer(::windows::window) > wndptraRemove;
+      array < ::pointer<::windows::window >>wndptraRemove;
 
       //POSITION pos = pMap->m_temporaryMap.get_start_position();
       //while (pos != nullptr)

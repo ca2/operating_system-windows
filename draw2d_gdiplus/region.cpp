@@ -149,7 +149,7 @@ namespace draw2d_gdiplus
 
       Gdiplus::RectF rectangle;
 
-      __pointer(rectangle_item) pitem = m_pitem;
+      ::pointer<rectangle_item>pitem = m_pitem;
 
       __copy(rectangle, pitem->m_rectangle);
 
@@ -166,7 +166,7 @@ namespace draw2d_gdiplus
       Gdiplus::GraphicsPath path;
 
 
-      __pointer(ellipse_item) pitem = m_pitem;
+      ::pointer<ellipse_item>pitem = m_pitem;
 
       path.AddEllipse((INT) pitem->m_rectangle.left,
          (INT) pitem->m_rectangle.top,
@@ -185,7 +185,7 @@ namespace draw2d_gdiplus
 
       array < Gdiplus::PointF > pa;
 
-      __pointer(polygon_item) pitem = m_pitem;
+      ::pointer<polygon_item>pitem = m_pitem;
 
       for(i32 i = 0; i < pitem->m_polygon.get_size(); i++)
       {
@@ -215,7 +215,7 @@ namespace draw2d_gdiplus
 
       array < Gdiplus::PointF > pa;
 
-      __pointer(poly_polygon_item) pitem = m_pitem;
+      ::pointer<poly_polygon_item>pitem = m_pitem;
 
       if(pitem->m_efillmode == ::draw2d::e_fill_mode_alternate)
       {
@@ -260,7 +260,7 @@ namespace draw2d_gdiplus
    Gdiplus::Region * region::get_combine(::draw2d::graphics * pgraphics)
    {
 
-      __pointer(combine_item) pitem = m_pitem;
+      ::pointer<combine_item>pitem = m_pitem;
 
       if (!pitem->m_pregion1 || !pitem->m_pregion2)
       {

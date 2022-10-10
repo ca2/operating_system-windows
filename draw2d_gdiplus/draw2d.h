@@ -26,7 +26,7 @@ namespace draw2d_gdiplus
       };
 
       //__creatable_from_base(draw2d, ::draw2d::draw2d);
-      string_map < __pointer(private_font) > m_mapPrivateFont;
+      string_map < ::pointer<private_font >>m_mapPrivateFont;
 
       draw2d();
       ~draw2d() override;

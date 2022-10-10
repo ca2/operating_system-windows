@@ -1,4 +1,4 @@
-#include "framework.h"
+﻿#include "framework.h"
 #include "node.h"
 #include "acme_windows/registry.h"
 #include "aura/operating_system.h"
@@ -354,7 +354,7 @@ namespace aura_windows
    }
 
 
-   void node::implement(__pointer(::acme::node) & pnode, __pointer(::acme::system) & psystem)
+   void node::implement(::pointer<::acme::node>& pnode, ::pointer<::acme::system> & psystem)
    {
 
 
@@ -366,7 +366,7 @@ namespace aura_windows
    void node::system_main()
    {
 
-      //__pointer(::node::system) psystem = m_psystem;
+      //::pointer<::node::system>psystem = m_psystem;
 
       auto psystem = m_psystem;
 

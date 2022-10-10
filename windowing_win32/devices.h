@@ -1,4 +1,4 @@
-// Created by camilo on 2022-02-20 12:21 <3ThomasBorregaardSørensen!!
+// Created by camilo on 2022-02-20 12:21 <3ThomasBorregaardSï¿½rensen!!
 #pragma once
 
 
@@ -16,7 +16,7 @@ namespace windowing_win32
 
 
       HWND                                                                       m_hwnd;
-      map < ::hardware::enum_device, __pointer(master_device_listener) >         m_mapmasterdevicelistener;
+      map < ::hardware::enum_device, ::pointer<master_device_listener >>        m_mapmasterdevicelistener;
 
 
       devices();

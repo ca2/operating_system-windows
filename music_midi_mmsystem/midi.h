@@ -35,10 +35,10 @@ namespace music
             ::index get_os_in_device_id(const ::string & strDevice);
 
 
-            virtual __pointer(::music::midi::sequencer) create_midi_sequencer(sequence * psequence, const string& strDevice) override;
-            //virtual __pointer(::music::midi::sequence_thread) create_midi_sequence_thread(::music::midi::sequence* psequence, const string& strDevice) override;
+            virtual ::pointer<::music::midi::sequencer>create_midi_sequencer(sequence * psequence, const string& strDevice) override;
+            //virtual ::pointer<::music::midi::sequence_thread>create_midi_sequence_thread(::music::midi::sequence* psequence, const string& strDevice) override;
 
-            //virtual __pointer(play_thread) on_midi_sequence_start(::music::midi::sequence* psequence, const string& strDevice) override;
+            //virtual ::pointer<play_thread>on_midi_sequence_start(::music::midi::sequence* psequence, const string& strDevice) override;
 
 
             void mmsystem_LogMidiInCaps(UINT_PTR i, MIDIINCAPSW caps);
@@ -54,9 +54,9 @@ namespace music
             virtual void enumerate_midi_in_devices() override;
 
 
-            virtual __pointer(::music::midi::message_out) get_message_out(const string& strDevice) override;
+            virtual ::pointer<::music::midi::message_out>get_message_out(const string& strDevice) override;
 
-            virtual __pointer(::music::midi::message_in) get_message_in(const string& strDevice) override;
+            virtual ::pointer<::music::midi::message_in>get_message_in(const string& strDevice) override;
 
          };
 

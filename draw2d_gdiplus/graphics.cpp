@@ -762,7 +762,7 @@ namespace draw2d_gdiplus
       double centerx = (x2 + x1) / 2.0;
       double centery = (y2 + y1) / 2.0;
 
-      //__pointer(::aura::system) psystem = m_psystem;
+      //::pointer<::aura::system>psystem = m_psystem;
 
       auto pmathematics = ::mathematics::mathematics();
 

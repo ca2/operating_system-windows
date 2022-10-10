@@ -22,7 +22,7 @@ namespace windowing_win32
 
       //HWND m_hwnd;
 
-      //__pointer(::user::interaction)      m_puserinteraction;
+      //::pointer<::user::interaction>     m_puserinteraction;
 
       /// negative value undefined
       ::count  m_cFileCount;

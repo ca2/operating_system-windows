@@ -1,4 +1,4 @@
-﻿#include "framework.h"
+#include "framework.h"
 #include "apex/parallelization/service.h"
 #include "apex/parallelization/service_handler.h"
 #include "service_handler.h"
@@ -250,7 +250,7 @@ namespace apex_windows
             s_pservicehandler->control_stop(control);
             s_pservicehandler->update_state(SERVICE_STOPPED);
 
-            __pointer(::apex::system) psystem = s_pservicehandler->get_system();
+            ::pointer<::apex::system>psystem = s_pservicehandler->get_system();
 
             psystem->destroy();
 

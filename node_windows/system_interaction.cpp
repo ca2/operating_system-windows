@@ -57,7 +57,7 @@
 //   void system_interaction::on_message_destroy(::message::message * pmessage)
 //   {
 //
-//      __pointer(::user::message) pusermessage(pmessage);
+//      ::pointer<::user::message>pusermessage(pmessage);
 //
 //      ::output_debug_string("system_interaction::on_message_destroy");
 //

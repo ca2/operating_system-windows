@@ -10,7 +10,7 @@ namespace multimedia
 
 
 
-      out::out(__pointer(::axis::application) papp) :
+      out::out(::pointer<::axis::application>papp) :
          object(papp),
          ::thread(papp),
          wave_base(papp),
@@ -125,7 +125,7 @@ namespace multimedia
          m_pwaveformat->nBlockAlign = m_pwaveformat->wBitsPerSample * m_pwaveformat->nChannels / 8;
          m_pwaveformat->nAvgBytesPerSec = m_pwaveformat->nSamplesPerSec * m_pwaveformat->nBlockAlign;
          m_pwaveformat->cbSize = 0;
-         __pointer(::audio::wave) audiowave = papplication->audiowave();
+         ::pointer<::audio::wave>audiowave = papplication->audiowave();
 
          if(FAILED(hr = m_pxaudio->CreateSourceVoice(&m_psourcevoice,wave_format(), 0,XAUDIO2_DEFAULT_FREQ_RATIO,this,nullptr,nullptr)))
          {
@@ -284,7 +284,7 @@ Opened:
          m_pwaveformat->nBlockAlign = m_pwaveformat->wBitsPerSample * m_pwaveformat->nChannels / 8;
          m_pwaveformat->nAvgBytesPerSec = m_pwaveformat->nSamplesPerSec * m_pwaveformat->nBlockAlign;
          m_pwaveformat->cbSize = 0;
-         __pointer(::audio::wave) audiowave = papplication->audiowave();
+         ::pointer<::audio::wave>audiowave = papplication->audiowave();
 
          if(FAILED(hr = m_pxaudio->CreateSourceVoice(&m_psourcevoice,wave_format(),XAUDIO2_VOICE_NOSRC | XAUDIO2_VOICE_NOPITCH,1.0f,this)))
          {

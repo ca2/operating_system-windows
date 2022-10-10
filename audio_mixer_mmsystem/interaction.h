@@ -21,7 +21,7 @@ namespace multimedia
       public:
 
 
-         __pointer(audio_mixer)   m_paudiomixer;
+         ::pointer<audio_mixer>  m_paudiomixer;
 
 
          interaction();

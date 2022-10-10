@@ -1,4 +1,4 @@
-//
+﻿//
 // Created by camilo on 21/01/2021. <33TBS!!
 //
 //
@@ -145,7 +145,7 @@ namespace acme_windows
 
       virtual ::wstring expand_environment_variables(const ::wstring& wstr);
 
-      void implement(__pointer(::acme::node)& pnode, __pointer(::acme::system)& psystem)override;
+      void implement(::pointer<::acme::node> & pnode, ::pointer<::acme::system> & psystem)override;
 
 
       void on_start_system() override;

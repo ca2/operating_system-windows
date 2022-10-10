@@ -128,7 +128,7 @@ namespace production
    void impact::on_message_size(::message::message * pmessage)
    {
       __UNREFERENCED_PARAMETER(pmessage);
-//      __pointer(::message::size) psize(pmessage);
+//      ::pointer<::message::size>psize(pmessage);
 
       ::rectangle_i32 rectangleDesktop;
       best_monitor(rectangleDesktop);
@@ -327,7 +327,7 @@ namespace production
 
    void impact::on_message_context_menu(::message::message * pmessage)
    {
-      __pointer(::message::context_menu) pcontextmenu(pmessage);
+      ::pointer<::message::context_menu>pcontextmenu(pmessage);
       ::point_i32 point = pcontextmenu->GetPoint();
    }
 
@@ -490,13 +490,13 @@ namespace production
    void impact::on_message_show_window(::message::message * pmessage)
    {
       __UNREFERENCED_PARAMETER(pmessage);
-//      __pointer(::message::show_window) pshowwindow(pmessage);
+//      ::pointer<::message::show_window>pshowwindow(pmessage);
    }
 
    void impact::make_production()
    {
       m_iStep = 1;
-      __pointer(application) papp =  (get_application());
+      ::pointer<application>papp =  (get_application());
       m_pproduction->start_production(papp->m_eversion);
    }
 
@@ -504,7 +504,7 @@ namespace production
    void impact::production_loop(i32 iLoopCount)
    {
       m_iStep = 1;
-      __pointer(application) papp =  (get_application());
+      ::pointer<application>papp =  (get_application());
       m_pproduction->start_loop(papp->m_eversion, iLoopCount);
    }
 
@@ -518,7 +518,7 @@ namespace production
 
    void impact::_001OnUser(::message::message * pmessage)
    {
-      __pointer(::user::message) pusermessage(pmessage);
+      ::pointer<::user::message>pusermessage(pmessage);
       if(pusermessage->m_wparam == 1)
       {
          i32 iLineHeight = m_iLineHeight;
@@ -549,11 +549,11 @@ namespace production
          string_array straTitle;
          string strRemote;
 
-         __pointer(pane_impact) pimpact = get_typed_parent < pane_impact > ();
+         ::pointer<pane_impact>pimpact = get_typed_parent < pane_impact > ();
 
          pimpact->set_current_tab_by_id("filemanager::tabbed");
 
-         __pointer(::filemanager::document) pdocument = pimpact->m_pfilemanagerTabbed;
+         ::pointer<::filemanager::document>pdocument = pimpact->m_pfilemanagerTabbed;
 
          string strBase = m_pproduction->m_strBase;
 
@@ -574,7 +574,7 @@ namespace production
       {
          if(m_iStep == 2)
          {
-            __pointer(pane_impact) pimpact = get_typed_parent < pane_impact > ();
+            ::pointer<pane_impact>pimpact = get_typed_parent < pane_impact > ();
             pimpact->set_current_tab_by_id(MAIN_IMPACT);
             m_pproduction->step();
          }

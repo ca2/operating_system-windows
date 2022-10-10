@@ -41,7 +41,7 @@ namespace production
 
    void pane_impact::_001OnCreate(::message::message * pmessage)
    {
-//      __pointer(::message::create) pcreate(pmessage);
+//      ::pointer<::message::create>pcreate(pmessage);
       if(pmessage->previous())
          return;
 
@@ -84,7 +84,7 @@ namespace production
       {
       case CONTEXT_MENU_IMPACT:
       {
-         /*__pointer(::filemanager::manager) pdocument = puser->filemanager()->open_child_list(false, true);
+         /*::pointer<::filemanager::manager>pdocument = puser->filemanager()->open_child_list(false, true);
          if(pdocument != nullptr)
          {
             pdocument->get_filemanager_data()->m_iIconSize = 16;
@@ -96,11 +96,11 @@ namespace production
             pdocument->Initialize(true);
             pdocument->update_all_impacts(nullptr, 1234);
             pdocument->update_all_impacts(nullptr, 123458);
-            __pointer(::user::impact) pimpact = pdocument->get_impact();
+            ::pointer<::user::impact>pimpact = pdocument->get_impact();
             pdocument->FileManagerBrowse(pcontext->m_papexcontext->dir().appdata()/ "production/menu", ::e_source_system);
             if(pimpact != nullptr)
             {
-               __pointer(::user::frame_window) pframe =  (pimpact->get_parent_frame());
+               ::pointer<::user::frame_window>pframe =  (pimpact->get_parent_frame());
                if(pframe != nullptr)
                {
                   pframe->ModifyStyle(WS_CAPTION, WS_CHILD, 0);
@@ -114,7 +114,7 @@ namespace production
       break;
       case MAIN_IMPACT:
       {
-         __pointer(::user::interaction) puie = ::user::impact::create_impact < ::production::impact > (pcreatordata);
+         ::pointer<::user::interaction>puie = ::user::impact::create_impact < ::production::impact > (pcreatordata);
          if(puie != nullptr)
          {
             pcreatordata->m_pdocument = get_document();
@@ -124,23 +124,23 @@ namespace production
       break;
       /*      case PaneViewFileManager:
                {
-                  __pointer(::create) cc(get_application());
+                  ::pointer<::create>cc(get_application());
                   cc->m_bMakeVisible = false;
                   cc->m_bTransparentBackground = true;
                   cc->m_puserinteractionParent = this;
 
                   get_document()->m_pfilemanagerdoc = Sess(papp).filemanager()->open(papp, cc);
-                  __pointer(::filemanager::manager) pdocument = get_document()->m_pfilemanagerdoc;
+                  ::pointer<::filemanager::manager>pdocument = get_document()->m_pfilemanagerdoc;
                   if(pdocument != nullptr)
                   {
                      pdocument->get_filemanager_data()->m_strDataKeyModifier = "production_filemanager";
                      pdocument->Initialize(true);
                      pdocument->update_all_impacts(nullptr, 1234);
                      pdocument->update_all_impacts(nullptr, 123458);
-                     __pointer(::user::impact) pimpact = pdocument->get_impact();
+                     ::pointer<::user::impact>pimpact = pdocument->get_impact();
                      if(pimpact != nullptr)
                      {
-                        __pointer(::user::frame_window) pframe =  (pimpact->get_parent_frame());
+                        ::pointer<::user::frame_window>pframe =  (pimpact->get_parent_frame());
                         if(pframe != nullptr)
                         {
                            //pframe->ModifyStyle(WS_CAPTION, WS_CHILD, 0);
@@ -154,7 +154,7 @@ namespace production
                break;*/
       //case impact_three_action_launch:
       //{
-      //   __pointer(::filemanager::manager) pdocument = puser->filemanager()->open_child_list(false, true);
+      //   ::pointer<::filemanager::manager>pdocument = puser->filemanager()->open_child_list(false, true);
       //   if(pdocument != nullptr)
       //   {
       //      pdocument->get_filemanager_data()->m_iIconSize = 48;
@@ -165,11 +165,11 @@ namespace production
       //      pdocument->Initialize(true);
       //      pdocument->update_all_impacts(nullptr, 1234);
       //      pdocument->update_all_impacts(nullptr, 123458);
-      //      __pointer(::user::impact) pimpact = pdocument->get_impact();
+      //      ::pointer<::user::impact>pimpact = pdocument->get_impact();
       //      pdocument->FileManagerBrowse(pcontext->m_papexcontext->dir().appdata()/ "production\\3-action-launch", ::e_source_system);
       //      if(pimpact != nullptr)
       //      {
-      //         __pointer(::user::frame_window) pframe =  (pimpact->get_parent_frame());
+      //         ::pointer<::user::frame_window>pframe =  (pimpact->get_parent_frame());
       //         if(pframe != nullptr)
       //         {
       //            pframe->ModifyStyle(WS_CAPTION, WS_CHILD, 0);
@@ -183,10 +183,10 @@ namespace production
       //break;
       case impact_configuration:
       {
-         __pointer(::user::document) pdocument = papplication->create_form(this, pcreatordata->m_pholder);
+         ::pointer<::user::document>pdocument = papplication->create_form(this, pcreatordata->m_pholder);
          if(pdocument == nullptr)
             return;
-         __pointer(::user::impact) pimpact = pdocument->get_impact();
+         ::pointer<::user::impact>pimpact = pdocument->get_impact();
          m_pviewOptions =  (pimpact);
 
          m_pviewOptions->m_pcallback = this;
@@ -205,7 +205,7 @@ namespace production
 
 
          pcreatordata->m_puserinteraction = (pimpact->get_parent_frame());
-         __pointer(form_child_frame) pframe = (pcreatordata->m_puserinteraction);
+         ::pointer<form_child_frame>pframe = (pcreatordata->m_puserinteraction);
          pcreatordata->m_pdocument = pdocument;
          //pcreatordata->m_puserinteraction = pframe;
 
@@ -257,16 +257,16 @@ namespace production
       {
          if(ptopic->user_element_id() == "clean")
          {
-            __pointer(::user::interaction) pinteraction = m_pviewOptions->get_child_by_id("clean");
-            __pointer(::user::check_box) pcheckbox =  (pinteraction);
+            ::pointer<::user::interaction>pinteraction = m_pviewOptions->get_child_by_id("clean");
+            ::pointer<::user::check_box>pcheckbox =  (pinteraction);
             auto ptopic = topic(id_clean);
             ptopic->payload(id_clean) = pcheckbox->echeck() == ::e_check_checked;
             get_document()->update_all_impacts(ptopic);
          }
          else if(ptopic->user_element_id() == "build")
          {
-            __pointer(::user::interaction) pinteraction = m_pviewOptions->get_child_by_id("build");
-            __pointer(::user::check_box) pcheckbox =  (pinteraction);
+            ::pointer<::user::interaction>pinteraction = m_pviewOptions->get_child_by_id("build");
+            ::pointer<::user::check_box>pcheckbox =  (pinteraction);
             auto ptopic = new_action(id_build);
             ptopic->payload(id_build) = pcheckbox->echeck() == ::e_check_checked;
             get_document()->update_all_impacts(ptopic);
@@ -278,14 +278,14 @@ namespace production
    }
 
 
-   __pointer(::production::document) pane_impact::get_document()
+   ::pointer<::production::document>pane_impact::get_document()
    {
       return  (::user::impact::get_document());
    }
 
    void pane_impact::_001OnUserMessage(::message::message * pmessage)
    {
-      __pointer(::user::message) pusermessage(pmessage);
+      ::pointer<::user::message>pusermessage(pmessage);
       if(pusermessage->m_wparam == 1)
       {
          set_current_tab_by_id("tabbed_file_manager");

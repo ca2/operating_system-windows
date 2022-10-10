@@ -11,7 +11,7 @@ namespace backup
    public:
 
 
-      __pointer(::user::single_document_template) m_ptemplate_html;
+      ::pointer<::user::single_document_template>m_ptemplate_html;
 
 
       application(::object * pobject);

@@ -28,8 +28,8 @@ namespace apex_windows
       //__creatable_from_base(file_context, ::file_context);
 
 
-      __reference(file_system)      m_pfilesystem;
-      __reference(dir_system)       m_pdirsystem;
+      ::pointer<file_system>     m_pfilesystem;
+      ::pointer<dir_system>      m_pdirsystem;
 
 
       file_context();

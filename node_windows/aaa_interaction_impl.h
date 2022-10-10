@@ -160,7 +160,7 @@ namespace windows
 
 
       // advanced creation (allows access to extended styles)
-      //virtual bool create_window_ex(::user::interaction * pinteraction, __pointer(::user::system) pusersystem, ::user::interaction * puiParent, atom atom) override;
+      //virtual bool create_window_ex(::user::interaction * pinteraction, ::pointer<::user::system>pusersystem, ::user::interaction * puiParent, atom atom) override;
 
       virtual void native_create_host() override;
 
@@ -287,7 +287,7 @@ namespace windows
       //virtual bool _is_window_visible() override;
 //      virtual void ShowOwnedPopups(bool bShow = true);
 
-      //virtual __pointer(::draw2d::graphics) GetDCEx(::draw2d::region* prgnClip, u32 flags);
+      //virtual ::pointer<::draw2d::graphics>GetDCEx(::draw2d::region* prgnClip, u32 flags);
       virtual bool LockWindowUpdate();
       virtual void UnlockWindowUpdate();
 
@@ -466,7 +466,7 @@ namespace windows
 
       // icon Functions
       virtual void set_icon(::windowing::icon * picon);
-      virtual __pointer(::windowing::icon) get_icon() const;
+      virtual ::pointer<::windowing::icon>get_icon() const;
 
       // Context Help Functions
       //virtual bool SetWindowContextHelpId(u32 dwContextHelpId);

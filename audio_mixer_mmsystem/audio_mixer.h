@@ -18,7 +18,7 @@ namespace multimedia
       public:
 
 
-         __pointer(::multimedia::audio_mixer_mmsystem::interaction)  m_pwindow;
+         ::pointer<::multimedia::audio_mixer_mmsystem::interaction> m_pwindow;
 
 
          audio_mixer();

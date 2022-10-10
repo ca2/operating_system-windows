@@ -113,7 +113,7 @@ namespace production
 
       m_pdocumenttemplateMain->do_request(pcreate);
 
-      __pointer(::user::document) pdocument = ::user::__document(pcreate);
+      ::pointer<::user::document>pdocument = ::user::__document(pcreate);
 
       if(pdocument.is_null())
          return;

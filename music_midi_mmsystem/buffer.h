@@ -21,7 +21,7 @@ namespace music
          public:
 
 
-            __pointer(sequence)     m_psequence;
+            ::pointer<sequence>    m_psequence;
 
 
          };
@@ -76,7 +76,7 @@ namespace music
          public:
 
 
-            __pointer(sequencer)     m_psequencer;
+            ::pointer<sequencer>    m_psequencer;
 
             midi_callback_data * m_pcallbackdata;
 

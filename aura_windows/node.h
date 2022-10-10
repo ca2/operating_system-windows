@@ -1,4 +1,4 @@
-//
+﻿//
 // Created by camilo on 21/01/2021. <33TBS!!
 //
 
@@ -56,7 +56,7 @@ namespace aura_windows
       virtual void register_dll(const ::file::path& pathDll) override;
 
 
-      void implement(__pointer(::acme::node) & pnode, __pointer(::acme::system) & psystem) override;
+      void implement(::pointer<::acme::node>& pnode, ::pointer<::acme::system> & psystem) override;
 
       virtual void system_main() override;
 

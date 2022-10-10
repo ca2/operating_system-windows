@@ -85,7 +85,7 @@ byte * shared_memory::detach_shared_memory(HGLOBAL & hglobal)
    if (m_memory.m_iOffset > 0)
    {
 
-      __pointer(shared_memory) pusermessage = clone();
+      ::pointer<shared_memory>pusermessage = clone();
 
       impl_free(m_memory.m_pbStorage);
 

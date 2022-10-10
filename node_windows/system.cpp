@@ -6,7 +6,7 @@ namespace aura
 {
 
 //
-//   __pointer(::extended::future < ::conversation >) system::message_box(const ::string & pszMessage, const ::string & pszTitle, const ::e_message_box & emessagebox)
+//   pointer< ::extended::future < ::conversation > > system::message_box(const ::string & pszMessage, const ::string & pszTitle, const ::e_message_box & emessagebox)
 //   {
 //
 //      auto psession = get_session();
