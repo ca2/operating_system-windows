@@ -58,10 +58,10 @@ void ([a-z0-9_]+)_factory(::factory::factory * pfactory)
    add_factory_item < ::windows::ip_enum, ::net::ip_enum >();
 
 
-   add_factory_item < ::windows::interprocess_communication_base, ::interprocess_communication::base >();
-   add_factory_item < ::windows::interprocess_communication_rx, ::interprocess_communication::rx >();
-   add_factory_item < ::windows::interprocess_communication_tx, ::interprocess_communication::tx >();
-   //add_factory_item < ::windows::interprocess_communication, ::interprocess_communication::interprocess_communication >();
+   add_factory_item < ::windows::interprocess_communication_base, ::inteprocess_channel::base >();
+   add_factory_item < ::windows::interprocess_handler, ::inteprocess::handler >();
+   add_factory_item < ::windows::interprocess_caller, ::inteprocess::caller >();
+   //add_factory_item < ::windows::inteprocess_channel, ::inteprocess_channel::inteprocess_channel >();
 
 
    //add_factory_item < ::windows::buffer, ::graphics::graphics >();

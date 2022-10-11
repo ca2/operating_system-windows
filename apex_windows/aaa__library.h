@@ -31,7 +31,7 @@
 #include "launcher.h"
 
 
-#include "interprocess_communication.h"
+#include "inteprocess_channel.h"
 
 
 #include "process.h"

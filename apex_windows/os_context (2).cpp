@@ -6,7 +6,7 @@
 #include <wincred.h>
 #include <wtsapi32.h>
 #include <shobjidl.h>
-#include "acme/id.h"
+#include "acme/constant/id.h"
 #include "_node_windows_private.h"
 #include "acme/os/windows/_windows.h"
 #include <ShellApi.h>

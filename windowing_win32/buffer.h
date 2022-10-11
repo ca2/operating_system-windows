@@ -6,7 +6,7 @@
 #include "aura/graphics/graphics/double_buffer.h"
 #include "aura/graphics/graphics/bitmap_source_buffer.h"
 #include "aura/graphics/image/pixmap.h"
-#include "aura/operating_system.h"
+#include "acme/operating_system.h"
 
 
 namespace windowing_win32

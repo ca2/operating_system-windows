@@ -7,7 +7,7 @@
 #include "_node_windows.h"
 
 
-#include "interprocess_communication.h"
+#include "inteprocess_channel.h"
 
 
 //#include "buffer.h"

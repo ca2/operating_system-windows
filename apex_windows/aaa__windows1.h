@@ -7,7 +7,7 @@
 #include "_node_windows.h"
 
 
-#include "interprocess_communication.h"
+#include "inteprocess_channel.h"
 
 
 //CLASS_DECL_APEX_WINDOWS::file::path get_known_folder(REFKNOWNFOLDERID kfid);

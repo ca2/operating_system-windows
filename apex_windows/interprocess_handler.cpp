@@ -2,7 +2,7 @@
 #include "framework.h"
 #include "apex/operating_system.h"
 //#include "apex/platform/app_core.h"
-#include "interprocess_communication.h"
+#include "interprocess_handler.h"
 #include "apex/platform/launcher.h"
 #include "launcher.h"
 
@@ -38,19 +38,19 @@ namespace apex_windows
    }
 
 
-   interprocess_communication_tx::interprocess_communication_tx()
+   interprocess_caller::interprocess_caller()
    {
 
    }
 
 
-   interprocess_communication_tx::~interprocess_communication_tx()
+   interprocess_caller::~interprocess_caller()
    {
 
    }
 
 
-   void interprocess_communication_tx::open(const ::string & strKey, ::launcher * plauncher)
+   void interprocess_caller::open(const ::string & strKey, ::launcher * plauncher)
    {
 
       if (get_hwnd() != nullptr)
@@ -157,7 +157,7 @@ namespace apex_windows
    }
 
 
-   void interprocess_communication_tx::close()
+   void interprocess_caller::close()
    {
 
       if (get_hwnd() == nullptr)
@@ -177,7 +177,7 @@ namespace apex_windows
    }
 
 
-   void interprocess_communication_tx::send(const ::string & strMessage, const duration & durationTimeout)
+   void interprocess_caller::send(const ::string & strMessage, const duration & durationTimeout)
    {
 
       if (!is_tx_ok())
@@ -230,7 +230,7 @@ namespace apex_windows
    }
 
 
-   void interprocess_communication_tx::send(int message, void * pdata, int len, const duration & durationTimeout)
+   void interprocess_caller::send(int message, void * pdata, int len, const duration & durationTimeout)
    {
 
       if (message == 0x80000000)
@@ -300,7 +300,7 @@ namespace apex_windows
 
 
 
-   bool interprocess_communication_tx::is_tx_ok()
+   bool interprocess_caller::is_tx_ok()
    {
 
       return ::IsWindow((HWND)get_hwnd()) != false;
@@ -308,7 +308,7 @@ namespace apex_windows
    }
 
 
-   interprocess_communication_rx::interprocess_communication_rx()
+   interprocess_handler::interprocess_handler()
    {
 
       m_preceiver = nullptr;
@@ -316,13 +316,13 @@ namespace apex_windows
    }
 
 
-   interprocess_communication_rx::~interprocess_communication_rx()
+   interprocess_handler::~interprocess_handler()
    {
 
    }
 
 
-   void interprocess_communication_rx::create(const ::string & strKey)
+   void interprocess_handler::create(const ::string & strKey)
    {
 
 
@@ -381,7 +381,7 @@ namespace apex_windows
    }
 
 
-   void interprocess_communication_rx::destroy()
+   void interprocess_handler::destroy()
    {
 
       if (get_hwnd() != nullptr)
@@ -398,7 +398,7 @@ namespace apex_windows
    }
 
 
-   //void * interprocess_communication_rx::on_interprocess_receive(::interprocess_communication::rx * prx, const ::string & strMessage)
+   //void * interprocess_handler::on_interprocess_receive(::inteprocess::handler * prx, const ::string & strMessage)
    //{
 
    //   if (::str().begins_ci(strMessage, "synch_"))
@@ -436,7 +436,7 @@ namespace apex_windows
    //}
 
 
-   //void * interprocess_communication_rx::on_interprocess_receive(::interprocess_communication::rx * prx, int message, void * pdata, memsize len)
+   //void * interprocess_handler::on_interprocess_receive(::inteprocess::handler * prx, int message, void * pdata, memsize len)
    //{
 
    //   if (m_preceiver != nullptr)
@@ -453,7 +453,7 @@ namespace apex_windows
    //}
 
 
-   //void * interprocess_communication_rx::on_interprocess_post(::interprocess_communication::rx * prx, long long int a, long long int b)
+   //void * interprocess_handler::on_interprocess_post(::inteprocess::handler * prx, long long int a, long long int b)
    //{
 
    //   if (m_preceiver != nullptr)
@@ -475,7 +475,7 @@ namespace apex_windows
 
       int iRet = 0;
 
-      interprocess_communication_rx * pchannel = (interprocess_communication_rx *)GetWindowLongPtr((HWND)hwnd, GWLP_USERDATA);
+      interprocess_handler * pchannel = (interprocess_handler *)GetWindowLongPtr((HWND)hwnd, GWLP_USERDATA);
 
       if (pchannel == nullptr)
       {
@@ -521,7 +521,7 @@ namespace apex_windows
    }
 
 
-   LRESULT interprocess_communication_rx::message_queue_proc(UINT message, WPARAM wparam, LPARAM lparam)
+   LRESULT interprocess_handler::message_queue_proc(UINT message, WPARAM wparam, LPARAM lparam)
    {
 
       if (message == WM_USER + 100)
@@ -591,7 +591,7 @@ namespace apex_windows
    }
 
 
-   bool interprocess_communication_rx::on_idle()
+   bool interprocess_handler::on_idle()
    {
 
       return false;
@@ -599,7 +599,7 @@ namespace apex_windows
    }
 
 
-   bool interprocess_communication_rx::is_rx_ok()
+   bool interprocess_handler::is_rx_ok()
    {
 
       return ::IsWindow((HWND) get_hwnd()) != false;

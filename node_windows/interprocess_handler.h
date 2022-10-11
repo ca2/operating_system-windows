@@ -6,14 +6,14 @@ namespace windows
 {
 
 
-   class CLASS_DECL_APEX interprocess_communication_rx :
-      virtual public ::interprocess_communication::rx
+   class CLASS_DECL_APEX interprocess_handler :
+      virtual public ::inteprocess::handler
    {
    public:
 
 
-      interprocess_communication_rx();
-      virtual ~interprocess_communication_rx();
+      interprocess_handler();
+      virtual ~interprocess_handler();
 
 
       bool create(const ::string & pszChannel);

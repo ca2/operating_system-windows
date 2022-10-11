@@ -7,13 +7,13 @@ namespace apex_windows
 
 
    class CLASS_DECL_APEX_WINDOWS interprocess_communication_base :
-      virtual public interprocess_communication::base
+      virtual public interprocess_handler::base
    {
    public:
 
 
 
-      //__creatable_from_base(interprocess_communication_base, ::interprocess_communication::base);
+      //__creatable_from_base(interprocess_communication_base, ::interprocess_handler::base);
 
 
       HWND              m_hwnd;
@@ -30,18 +30,18 @@ namespace apex_windows
    };
 
 
-   class CLASS_DECL_APEX_WINDOWS interprocess_communication_tx :
+   class CLASS_DECL_APEX_WINDOWS interprocess_caller :
       virtual public interprocess_communication_base,
-      virtual public interprocess_communication::tx
+      virtual public interprocess_handler::caller
    {
    public:
 
 
-      //__creatable_from_base(interprocess_communication_tx, ::interprocess_communication::tx);
+      //__creatable_from_base(interprocess_caller, ::inteprocess::caller);
 
 
-      interprocess_communication_tx();
-      ~interprocess_communication_tx() override;
+      interprocess_caller();
+      ~interprocess_caller() override;
 
 
       void open(const ::string & pszChannel, ::launcher * plauncher = nullptr) override;
@@ -61,18 +61,18 @@ namespace apex_windows
    class rx_private;
 
 
-   class CLASS_DECL_APEX_WINDOWS interprocess_communication_rx :
+   class CLASS_DECL_APEX_WINDOWS interprocess_handler :
       virtual public interprocess_communication_base,
-      virtual public interprocess_communication::rx
+      virtual public interprocess_handler::handler
    {
    public:
 
 
-      //__creatable_from_base(interprocess_communication_rx, ::interprocess_communication::rx);
+      //__creatable_from_base(interprocess_handler, ::inteprocess::handler);
 
 
-      interprocess_communication_rx();
-      ~interprocess_communication_rx() override;
+      interprocess_handler();
+      ~interprocess_handler() override;
 
 
       void create(const ::string & pszChannel) override;
