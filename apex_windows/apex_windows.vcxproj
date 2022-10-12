@@ -795,7 +795,9 @@
     <ClInclude Include="file_os_watcher.h" />
     <ClInclude Include="file_system.h" />
     <ClInclude Include="framework.h" />
-    <ClInclude Include="interprocess_communication.h" />
+    <ClInclude Include="interprocess_base.h" />
+    <ClInclude Include="interprocess_caller.h" />
+    <ClInclude Include="interprocess_target.h" />
     <ClInclude Include="ip_enum.h" />
     <ClInclude Include="launcher.h" />
     <ClInclude Include="node.h" />
@@ -812,11 +814,13 @@
   <ItemGroup>
     <ClCompile Include="dir_context.cpp" />
     <ClCompile Include="dir_system.cpp" />
+    <ClCompile Include="interprocess_base.cpp" />
+    <ClCompile Include="interprocess_caller.cpp" />
+    <ClCompile Include="interprocess_target.cpp" />
     <ClCompile Include="_factory.cpp" />
     <ClCompile Include="file_context.cpp" />
     <ClCompile Include="file_os_watcher.cpp" />
     <ClCompile Include="file_system.cpp" />
-    <ClCompile Include="interprocess_communication.cpp" />
     <ClCompile Include="ip_enum.cpp" />
     <ClCompile Include="launcher.cpp" />
     <ClCompile Include="node.cpp" />

@@ -421,7 +421,7 @@ namespace windowing_win32
 
          ::u32 uLen = ::DragQueryFileW(hdrop, (::u32) i, nullptr, 0);
 
-         wstring wstr(get_buffer, uLen);
+         wstring wstr(e_get_buffer, uLen);
 
          auto x = wstr.length();
 

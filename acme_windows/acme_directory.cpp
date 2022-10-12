@@ -369,9 +369,9 @@ pacmedir->roaming();
    ::file::path acme_directory::program_files_x86()
    {
 
-      wstring wstrModuleFolder(get_buffer, sizeof(unichar) * 8);
+      wstring wstrModuleFolder(e_get_buffer, sizeof(unichar) * 8);
 
-      wstring wstrModuleFilePath(get_buffer, sizeof(unichar) * 8);
+      wstring wstrModuleFilePath(e_get_buffer, sizeof(unichar) * 8);
 
       wcscpy(wstrModuleFilePath, _wgetenv(L"PROGRAMFILES(X86)"));
 
@@ -394,9 +394,9 @@ pacmedir->roaming();
    ::file::path acme_directory::program_files()
    {
 
-      wstring wstrModuleFolder(get_buffer, sizeof(unichar) * 8);
+      wstring wstrModuleFolder(e_get_buffer, sizeof(unichar) * 8);
 
-      wstring wstrModuleFilePath(get_buffer, sizeof(unichar) * 8);
+      wstring wstrModuleFilePath(e_get_buffer, sizeof(unichar) * 8);
 
       wcscpy(wstrModuleFilePath, _wgetenv(L"PROGRAMW6432"));
 
@@ -1252,7 +1252,7 @@ pacmedir->create CreateDirectoryW last error(%d)=%s", dwError, pszError);
 
 #ifdef WINDOWS
 
-         wstring path(get_buffer, MAX_PATH * 8);
+         wstring path(e_get_buffer, MAX_PATH * 8);
 
          if (!GetModuleFileNameW(nullptr, path, (::u32)path.size()))
          {

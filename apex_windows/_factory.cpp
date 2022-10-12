@@ -15,7 +15,8 @@
 #include "acme_windows/pipe.h"
 //#include "crypto.h"
 #include "ip_enum.h"
-#include "inteprocess_channel.h"
+#include "interprocess_caller.h"
+#include "interprocess_target.h"
 #include "apex/platform/node.h"
 #include "acme_windows/node.h"
 #include "node.h"
@@ -51,9 +52,9 @@ __FACTORY_EXPORT void apex_windows_factory(::factory::factory * pfactory)
    //pfactory->add_factory_item < ::windows::ip_enum, ::net::ip_enum >();
 
 
-   pfactory->add_factory_item < ::apex_windows::interprocess_communication_base, ::inteprocess_channel::base >();
-   pfactory->add_factory_item < ::apex_windows::interprocess_handler, ::inteprocess::handler >();
-   pfactory->add_factory_item < ::apex_windows::interprocess_caller, ::inteprocess::caller >();
+   //pfactory->add_factory_item < ::apex_windows::interprocess_communication_base, ::inteprocess_channel::base >();
+   pfactory->add_factory_item < ::apex_windows::interprocess_caller, ::interprocess::caller >();
+   pfactory->add_factory_item < ::apex_windows::interprocess_target, ::interprocess::target >();
    //add_factory_item < ::windows::inteprocess_channel, ::inteprocess_channel::inteprocess_channel >();
 
 

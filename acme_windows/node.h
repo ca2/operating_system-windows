@@ -34,7 +34,7 @@ namespace acme_windows
       ~node() override;
 
 
-      virtual void initialize_matter(::matter* pmatter) override;
+      void initialize(::object * pobject) override;
 
       //virtual ::string dir_root() override;
 

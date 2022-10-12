@@ -56,9 +56,6 @@
     <ClInclude Include="file_system.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="interprocess_communication.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="ip_enum.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -81,6 +78,15 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="service_handler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="interprocess_base.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="interprocess_caller.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="interprocess_target.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -118,9 +124,6 @@
     <ClCompile Include="file_system.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="interprocess_communication.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="ip_enum.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -136,11 +139,19 @@
     <ClCompile Include="service_handler.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="interprocess_base.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="interprocess_caller.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="interprocess_target.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="deployment.rc">
       <Filter>Resource Files</Filter>
     </ResourceCompile>
-
   </ItemGroup>
 </Project>

@@ -36,10 +36,10 @@ namespace acme_windows
    }
 
 
-   void node::initialize_matter(::matter * pmatter)
+   void node::initialize(::object * pobject)
    {
 
-      /*auto estatus = */ ::matter::initialize_matter(pmatter);
+      ///*auto estatus = */ ::matter::initialize_matter(pmatter);
 
       //if (!estatus)
       //{

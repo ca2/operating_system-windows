@@ -1017,10 +1017,10 @@ namespace draw2d_gdiplus
 
       }
 
-      Gdiplus::REAL x = rectangleParam.left;
-      Gdiplus::REAL y = rectangleParam.top;
-      Gdiplus::REAL Δx = rectangleParam.width();
-      Gdiplus::REAL Δy = rectangleParam.width();
+      auto x = (Gdiplus::REAL) rectangleParam.left;
+      auto y = (Gdiplus::REAL) rectangleParam.top;
+      auto Δx = (Gdiplus::REAL) rectangleParam.width();
+      auto Δy = (Gdiplus::REAL) rectangleParam.height();
 
       auto status = m_pgraphics->DrawEllipse(ppen, x, y, Δx, Δy);
 
@@ -1129,10 +1129,10 @@ namespace draw2d_gdiplus
 
       }
 
-      Gdiplus::REAL x = rectangleParam.left;
-      Gdiplus::REAL y = rectangleParam.top;
-      Gdiplus::REAL Δx = rectangleParam.width();
-      Gdiplus::REAL Δy = rectangleParam.width();
+      auto x = (Gdiplus::REAL)rectangleParam.left;
+      auto y = (Gdiplus::REAL)rectangleParam.top;
+      auto Δx = (Gdiplus::REAL)rectangleParam.width();
+      auto Δy = (Gdiplus::REAL)rectangleParam.height();
 
       auto status = m_pgraphics->FillEllipse(pbrush, x, y, Δx, Δy);
       
