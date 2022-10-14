@@ -39,7 +39,7 @@ namespace acme_windows
    void node::initialize(::object * pobject)
    {
 
-      ///*auto estatus = */ ::matter::initialize_matter(pmatter);
+      ::acme::node::initialize(pobject);
 
       //if (!estatus)
       //{

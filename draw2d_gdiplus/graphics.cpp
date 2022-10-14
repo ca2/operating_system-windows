@@ -5788,10 +5788,11 @@ namespace draw2d_gdiplus
 
          //#undef new
 
-         raw_array < Gdiplus::Region > regiona;
+         array < Gdiplus::Region, const Gdiplus::Region &, ::allocator::rawcopy < Gdiplus::Region> > regiona;
 
          regiona.set_size(count);
 
+         //regiona.insert_at(5, region)
          //#define new ACME_NEW
 
          Gdiplus::RectF box(0.0f, 0.0f, 0.0f, 0.0f);

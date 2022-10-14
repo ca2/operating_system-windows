@@ -1,4 +1,4 @@
-// created by Camilo <3CamiloSasukeThomasBorregaardSoerensen  - Honoring Thomas Borregaard Sørensen MY ONLY LORD
+﻿// created by Camilo <3CamiloSasukeThomasBorregaardSoerensen  - Honoring Thomas Borregaard Sørensen MY ONLY LORD
 // recreated by Camilo 2021-02-01 23:29
 #include "framework.h"
 #include "buffer.h"
@@ -473,6 +473,21 @@ namespace windowing_win32
 
          auto size = layout.design().size();
 
+         if (size != m_pimpl->m_sizeDrawn)
+         {
+
+            ERROR("Resized size is different of drawn buffer size.");
+
+            m_pimpl->m_puserinteraction->set_need_redraw();
+
+            m_pimpl->m_puserinteraction->post_redraw();
+
+         }
+         else
+         {
+
+
+
          //if (!m_bDibIsHostingBuffer)
          //{
          //   try
@@ -705,173 +720,175 @@ namespace windowing_win32
 
                rectangle_i32 rectangleWindowCurrent;
 
-               GetWindowRect(hwnd, (RECT *) &rectangleWindowCurrent);
+               GetWindowRect(hwnd, (RECT *)&rectangleWindowCurrent);
 
-               //if (rectangleDrawing.size() == pimage->m_rectangleTag.size())
-               {
-
-
-//               }
-               //else
-               //{
-
-               //   TRACE("Update discarded");
-
-               //}
+                  //if (rectangleDrawing.size() == pimage->m_rectangleTag.size())
+                  {
 
 
-               //if (rectangleDrawing.size() == pimage->m_rectangleTag.size())
-               //{
+                     //               }
+                                    //else
+                                    //{
+
+                                    //   TRACE("Update discarded");
+
+                                    //}
 
 
-                  ::UpdateLayeredWindow(hwnd, m_hdcScreen, (POINT*)&point, (SIZE*)&size, buffer.m_hdc, (POINT*)&pointSrc, rgb(0, 0, 0), &blendPixelFunction, ULW_ALPHA);
-                  //::SetWindowPos(hwnd, nullptr,
-                  //   rectangleDrawing.left,
-                  //   rectangleDrawing.top,
-                  //   rectangleDrawing.width(),
-                  //   rectangleDrawing.height(),
-                  //   SWP_NOZORDER
-                  //   | SWP_ASYNCWINDOWPOS
-                  //   | SWP_FRAMECHANGED
-                  //   | SWP_NOREDRAW
-                  //   | SWP_NOCOPYBITS
-                  //   | SWP_DEFERERASE
-                  //   | SWP_NOACTIVATE);
+                                    //if (rectangleDrawing.size() == pimage->m_rectangleTag.size())
+                                    //{
+
+
+                     ::UpdateLayeredWindow(hwnd, m_hdcScreen, (POINT *)&point, (SIZE *)&size, buffer.m_hdc, (POINT *)&pointSrc, rgb(0, 0, 0), &blendPixelFunction, ULW_ALPHA);
+                     //::SetWindowPos(hwnd, nullptr,
+                     //   rectangleDrawing.left,
+                     //   rectangleDrawing.top,
+                     //   rectangleDrawing.width(),
+                     //   rectangleDrawing.height(),
+                     //   SWP_NOZORDER
+                     //   | SWP_ASYNCWINDOWPOS
+                     //   | SWP_FRAMECHANGED
+                     //   | SWP_NOREDRAW
+                     //   | SWP_NOCOPYBITS
+                     //   | SWP_DEFERERASE
+                     //   | SWP_NOACTIVATE);
+
+                  }
+                  //else
+                  //{
+                  //   TRACE("Update discarded");
+
+                  //}
+
+                  ::point_i32 pointBottomRight = point + size;
+
+                  //if (g_pointLastBottomRight != pointBottomRight)
+                  //{
+
+                  //   TRACE("UpdateLayeredWindow Changed");
+
+                  //   g_pointLastBottomRight = pointBottomRight;
+
+                  //}
+
+                  //TRACE("UpdateLayeredWindow Bottom Right (%d, %d)", pointBottomRight.x, pointBottomRight.y);
+
 
                }
-               //else
-               //{
-               //   TRACE("Update discarded");
 
-               //}
+               //m_pimpl->m_puserinteraction->post_message(message_do_show_window);
 
-               ::point_i32 pointBottomRight = point + size;
+               m_pimpl->m_puserinteraction->window_show_change_visibility();
 
-               //if (g_pointLastBottomRight != pointBottomRight)
-               //{
+               //#ifdef WINDOWS_DESKTOP
+               //               if ((m_pimpl->m_puserinteraction->GetExStyle() & WS_EX_LAYERED))
+               //#endif
+               //               {
+               //
+               //                  u32 uFlags = SWP_NOREDRAW
+               //                     | SWP_NOCOPYBITS
+               //                     | SWP_NOACTIVATE
+               //                     | SWP_NOOWNERZORDER
+               //                     | SWP_DEFERERASE
+               //                  | SWP_NOZORDER;
+               //                  ::SetWindowPos(get_hwnd(), NULL, point.x, point.y, size.cx, size.cy, 
+               //                     uFlags);
+               //                  m_pimpl->on_visual_applied();
+               //
+               //               }
 
-               //   TRACE("UpdateLayeredWindow Changed");
+                              //RECTANGLE_I32 r3;
 
-               //   g_pointLastBottomRight = pointBottomRight;
+                              //GetWindowRect(m_oswindow, &r3);
 
-               //}
+                              //RECTANGLE_I32 r4;
 
-               //TRACE("UpdateLayeredWindow Bottom Right (%d, %d)", pointBottomRight.x, pointBottomRight.y);
+                              //GetClientRect(m_oswindow, &r4);
 
-
-            }
-
-            //m_pimpl->m_puserinteraction->post_message(message_do_show_window);
-
-            m_pimpl->m_puserinteraction->window_show_change_visibility();
-
-            //#ifdef WINDOWS_DESKTOP
-            //               if ((m_pimpl->m_puserinteraction->GetExStyle() & WS_EX_LAYERED))
-            //#endif
-            //               {
-            //
-            //                  u32 uFlags = SWP_NOREDRAW
-            //                     | SWP_NOCOPYBITS
-            //                     | SWP_NOACTIVATE
-            //                     | SWP_NOOWNERZORDER
-            //                     | SWP_DEFERERASE
-            //                  | SWP_NOZORDER;
-            //                  ::SetWindowPos(get_hwnd(), NULL, point.x, point.y, size.cx, size.cy, 
-            //                     uFlags);
-            //                  m_pimpl->on_visual_applied();
-            //
-            //               }
-
-                           //RECTANGLE_I32 r3;
-
-                           //GetWindowRect(m_oswindow, &r3);
-
-                           //RECTANGLE_I32 r4;
-
-                           //GetClientRect(m_oswindow, &r4);
-
-                           //::SendMessage(get_hwnd(), WM_PRINT, (wparam)m_hdcScreen, PRF_OWNED | PRF_CHILDREN);
+                              //::SendMessage(get_hwnd(), WM_PRINT, (wparam)m_hdcScreen, PRF_OWNED | PRF_CHILDREN);
 
 #ifdef __DEBUG
 
-            HBITMAP b1 = (HBITMAP) ::GetCurrentObject(buffer.m_hdc, OBJ_BITMAP);
+               HBITMAP b1 = (HBITMAP) ::GetCurrentObject(buffer.m_hdc, OBJ_BITMAP);
 
-            //if (b1 != buffer.m_hbitmap)
-            //{
+               //if (b1 != buffer.m_hbitmap)
+               //{
 
-            //   output_debug_string("damn0");
+               //   output_debug_string("damn0");
 
-            //}
+               //}
 
-            //BITMAP bmp1;
+               //BITMAP bmp1;
 
-            //::GetObject(b1, sizeof(BITMAP), &bmp1);
+               //::GetObject(b1, sizeof(BITMAP), &bmp1);
 
-            //if (bmp1.bmHeight != size.cy)
-            //{
+               //if (bmp1.bmHeight != size.cy)
+               //{
 
-            //   output_debug_string("damn1");
-            //}
+               //   output_debug_string("damn1");
+               //}
 
-            //{
+               //{
 
-            //   RECT rClipScreen;
+               //   RECT rClipScreen;
 
-            //   int iResult = ::GetClipBox(m_hdcScreen, &rClipScreen);
+               //   int iResult = ::GetClipBox(m_hdcScreen, &rClipScreen);
 
-            //   if (iResult == ERROR_REGION || iResult == NULLREGION)
-            //   {
+               //   if (iResult == ERROR_REGION || iResult == NULLREGION)
+               //   {
 
-            //   }
-            //   else
-            //   {
+               //   }
+               //   else
+               //   {
 
-            //      if (::height(rClipScreen) != size.cy)
-            //      {
+               //      if (::height(rClipScreen) != size.cy)
+               //      {
 
-            //         output_debug_string("damn2");
+               //         output_debug_string("damn2");
 
-            //      }
+               //      }
 
-            //   }
+               //   }
 
-            //}
+               //}
 
-            //{
+               //{
 
-            //   RECT rClip;
+               //   RECT rClip;
 
-            //   int iResult = ::GetClipBox(buffer.m_hdc, &rClip);
+               //   int iResult = ::GetClipBox(buffer.m_hdc, &rClip);
 
-            //   if (iResult == ERROR_REGION || iResult == NULLREGION)
-            //   {
-            //   }
-            //   else
-            //   {
+               //   if (iResult == ERROR_REGION || iResult == NULLREGION)
+               //   {
+               //   }
+               //   else
+               //   {
 
-            //      if (::height(rClip) != size.cy)
-            //      {
+               //      if (::height(rClip) != size.cy)
+               //      {
 
-            //         output_debug_string("damn3");
+               //         output_debug_string("damn3");
 
-            //      }
+               //      }
 
-            //   }
+               //   }
 
-            //}
+               //}
 
-            if (!bOk)
-            {
+               if (!bOk)
+               {
 
-               output_debug_string("UpdateLayeredWindow failed");
+                  output_debug_string("UpdateLayeredWindow failed");
 
-            }
+               }
 
 #endif // __DEBUG
 
-         }
-         else
-         {
+            }
+            else
+            {
+
+            }
 
          }
 
