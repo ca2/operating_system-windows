@@ -1,9 +1,10 @@
 ﻿#include "framework.h"
 #include "file_context.h"
 #include "dir_system.h"
+#include "acme/filesystem/file/memory_file.h"
+#include "acme/filesystem/filesystem/acme_directory.h"
 #include "apex/operating_system.h"
 #include "acme/operating_system/time.h"
-#include "acme/filesystem/filesystem/acme_directory.h"
 #include "acme_windows/file_exception.h"
 
 
@@ -331,20 +332,24 @@ namespace apex_windows
       if (h == INVALID_HANDLE_VALUE)
       {
 
-         DWORD dwError = ::GetLastError();
+         DWORD dwLastError = ::GetLastError();
 
-         if (dwError == 2) // the file does not exist, so delete "failed"
+         if (dwLastError == 2) // the file does not exist, so delete "failed"
          {
 
             return;
 
          }
 
-         string strError;
+         auto estatus = last_error_to_status(dwLastError);
 
-         strError.format("Failed to delete file \"%s\" error=%d", psz, dwError);
+         auto errorcode = __last_error(dwLastError);
 
-         throw ::exception(error_failed);
+         //string strError;
+
+         //strError.format("Failed to delete file \"%s\" error=%d", psz, dwError);
+
+         throw ::file::exception(estatus, errorcode, psz, "Failed to open file to be deleted.");
 
       }
       else

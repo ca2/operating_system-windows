@@ -154,6 +154,9 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_app_core_desk", "..\..\..\source\app-core\desk\__implement\shared_app_core_desk.vcxproj", "{02CC1ACA-4CDF-4724-858D-92F6AE643236}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_app_core_hello_multiverse", "..\..\..\source\app-core\hello_multiverse\__implement\shared_app_core_hello_multiverse.vcxproj", "{94A00A45-B9BF-4821-B81E-4114FFB9F0A9}"
+	ProjectSection(ProjectDependencies) = postProject
+		{DBA80336-2E72-4DCE-8AB3-C362F3B19106} = {DBA80336-2E72-4DCE-8AB3-C362F3B19106}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_app_core_weather", "..\..\..\source\app-core\weather\__implement\shared_app_core_weather.vcxproj", "{7461102D-C92D-48B8-BDDB-4A1BEA11B87E}"
 EndProject
@@ -2160,7 +2163,6 @@ Global
 		{B3C2FC2F-00B5-4B57-BA6A-5BAE18CE8761}.stage|Win32.ActiveCfg = cube_stage|Win32
 		{B3C2FC2F-00B5-4B57-BA6A-5BAE18CE8761}.stage|Win32.Build.0 = cube_stage|Win32
 		{B3C2FC2F-00B5-4B57-BA6A-5BAE18CE8761}.stage|x64.ActiveCfg = cube_stage|x64
-		{B3C2FC2F-00B5-4B57-BA6A-5BAE18CE8761}.stage|x64.Build.0 = cube_stage|x64
 		{C7AFCEFA-3079-4B23-8F97-4543BB980265}.basis|ARM.ActiveCfg = basis|x64
 		{C7AFCEFA-3079-4B23-8F97-4543BB980265}.basis|ARM.Build.0 = basis|x64
 		{C7AFCEFA-3079-4B23-8F97-4543BB980265}.basis|ARM64.ActiveCfg = basis|x64
@@ -2239,7 +2241,6 @@ Global
 		{1DE48C0B-BB4E-4B91-B720-05E16F8984E9}.stage|Win32.ActiveCfg = cube_stage|Win32
 		{1DE48C0B-BB4E-4B91-B720-05E16F8984E9}.stage|Win32.Build.0 = cube_stage|Win32
 		{1DE48C0B-BB4E-4B91-B720-05E16F8984E9}.stage|x64.ActiveCfg = cube_stage|x64
-		{1DE48C0B-BB4E-4B91-B720-05E16F8984E9}.stage|x64.Build.0 = cube_stage|x64
 		{46D7D9C9-7B52-4DC6-AF84-46A5E3CDC43D}.basis|ARM.ActiveCfg = basis|x64
 		{46D7D9C9-7B52-4DC6-AF84-46A5E3CDC43D}.basis|ARM.Build.0 = basis|x64
 		{46D7D9C9-7B52-4DC6-AF84-46A5E3CDC43D}.basis|ARM64.ActiveCfg = basis|x64

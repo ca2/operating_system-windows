@@ -1091,7 +1091,7 @@ namespace music
 
                      pfile->memory().assign((LPBYTE)&lpdwParam[1], pheader->m_dwLength - sizeof(DWORD));
 
-                     binary_stream stream(pfile);
+                     binary_stream < FILE > stream(pfile);
 
                      for (i32 i = 0; i < m_psequence->m_iaLevel.get_size(); i++)
                      {

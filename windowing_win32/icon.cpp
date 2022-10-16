@@ -1,11 +1,13 @@
-// created by Camilo <3CamiloSasukeThomasBorregaardSoerensen  - Honoring Thomas Borregaard Sørensen MY ONLY LORD
+﻿// created by Camilo <3CamiloSasukeThomasBorregaardSoerensen  - Honoring Thomas Borregaard Sørensen MY ONLY LORD
 // recreated by Camilo 2021-01-28 16:44
 #include "framework.h"
 #include "icon.h"
+#include "acme/filesystem/file/memory_file.h"
 #include "aura/graphics/image/context_image.h"
 #include "aura/graphics/image/drawing.h"
 #include "aura/platform/context.h"
 #include "aura/platform/node.h"
+
 
 // http ://stackoverflow.com/questions/1913468/how-to-determine-the-size_i32-of-an-icon-from-a-hicon
 // http://stackoverflow.com/users/739731/sergey
@@ -681,6 +683,19 @@ namespace windowing_win32
       {
 
          throw exception(error_failed);
+
+      }
+
+      auto pmemoryfile = create_memory_file(memory);
+
+      auto pimage = m_pcontext->m_papexcontext->context_image()->load_image(pmemoryfile);
+
+      if (::is_ok(pimage))
+      {
+
+         m_imagemap[pimage->size()] = pimage;
+
+         return;
 
       }
 
