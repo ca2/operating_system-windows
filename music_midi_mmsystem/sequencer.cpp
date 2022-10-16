@@ -1,6 +1,8 @@
-#include "framework.h"
+﻿#include "framework.h"
 #include "sequencer.h"
 #include "midi.h"
+#include "acme/filesystem/file/binary_stream.h"
+#include "acme/filesystem/file/memory_file.h"
 #include "aqua/multimedia/exception.h"
 #include "app-veriwell/multimedia/multimedia.h"
 #include "app-veriwell/multimedia/ikaraoke/lyric_event_v1.h"
@@ -1091,7 +1093,7 @@ namespace music
 
                      pfile->memory().assign((LPBYTE)&lpdwParam[1], pheader->m_dwLength - sizeof(DWORD));
 
-                     binary_stream < FILE > stream(pfile);
+                     auto stream = __binary_stream(pfile);
 
                      for (i32 i = 0; i < m_psequence->m_iaLevel.get_size(); i++)
                      {
