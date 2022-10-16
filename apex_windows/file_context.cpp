@@ -1,6 +1,7 @@
 ﻿#include "framework.h"
 #include "file_context.h"
 #include "dir_system.h"
+#include "acme/filesystem/file/memory_file.h"
 #include "apex/operating_system.h"
 #include "acme/operating_system/time.h"
 #include "acme/filesystem/filesystem/acme_directory.h"
