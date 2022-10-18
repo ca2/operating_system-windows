@@ -201,7 +201,7 @@ void gdiplus_draw_text(::draw2d::graphics* pgraphicsParam, ::draw2d::path* ppath
 
                status = pgraphics->MeasureString(text.m_wstr, (INT)iSize, pfont, rectangle_f32, &format, &box);
 
-               __copy(rectangleParam, box);
+               copy(&rectangleParam, &box);
 
             }
 
@@ -220,7 +220,7 @@ void gdiplus_draw_text(::draw2d::graphics* pgraphicsParam, ::draw2d::path* ppath
 
                status = pgraphics->MeasureString(text.m_wstr, (INT)iSize, pfont, rectangle_f32, &format, &box);
 
-               __copy(rectangleParam, box);
+               copy(&rectangleParam, &box);
 
             }
 
@@ -259,7 +259,7 @@ void gdiplus_draw_text(::draw2d::graphics* pgraphicsParam, ::draw2d::path* ppath
 
             status = pgraphics->MeasureString(text.m_wstr, (INT)iSize, pfont, rectangle_f32, &format, &box);
 
-            __copy(rectangleParam, box);
+            copy(&rectangleParam, &box);
 
          }
 

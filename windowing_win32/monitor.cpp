@@ -52,9 +52,9 @@ namespace windowing_win32
 
       }
 
-      __copy(m_rectangle, mi.rcMonitor);
+      copy(&m_rectangle, &mi.rcMonitor);
 
-      __copy(m_rectangleWorkspace, mi.rcWork);
+      copy(&m_rectangleWorkspace, &mi.rcWork);
 
       //return true;
 

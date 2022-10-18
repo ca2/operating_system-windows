@@ -62,7 +62,7 @@ namespace draw2d_gdiplus
 
       ::rectangle_i32 rectangle;
       ((region*)this)->get_bounding_box(rectangle);
-      __copy(prectangle, rectangle);
+      copy(prectangle, rectangle);
 
    }
 

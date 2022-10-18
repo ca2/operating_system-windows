@@ -867,7 +867,7 @@ namespace windowing_win32
 
                ::rectangle_i32 rectangleHitTest;
 
-               __copy(rectangleHitTest, rectWindow);
+               copy(&rectangleHitTest, &rectWindow);
 
                rectangleHitTest.inflate(iMargin + 1);
 

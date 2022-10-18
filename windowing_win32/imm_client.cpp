@@ -740,7 +740,7 @@ int imm_client::on_text_composition_message(int iMessage)
 
       com.dwStyle = CFS_FORCE_POSITION;
 
-      __copy(com.ptCurrentPos, rectangle.top_left());
+      copy(&com.ptCurrentPos, &rectangle.top_left());
 
       com.ptCurrentPos.y -= 100;
 
@@ -750,7 +750,7 @@ int imm_client::on_text_composition_message(int iMessage)
 
       com.dwStyle = CFS_RECT;
 
-      __copy(com.rcArea, rect2);
+      copy(&com.rcArea, &rect2);
 
       //ShowCaret(get_handle());
 
@@ -790,7 +790,7 @@ int imm_client::on_text_composition_message(int iMessage)
 
       can.dwStyle = CFS_CANDIDATEPOS;
 
-      __copy(can.ptCurrentPos, rectangle.bottom_left());
+      copy(&can.ptCurrentPos, &rectangle.bottom_left());
 
       if (::ImmSetCandidateWindow(imm, &can))
       {

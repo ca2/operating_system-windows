@@ -50,9 +50,9 @@ namespace windowing_win32
 
          m_monitora.add(pmonitor);
 
-         __copy(pmonitor->m_rectangle, m_monitorinfoa[iMonitor].rcMonitor);
+         copy(&pmonitor->m_rectangle, &m_monitorinfoa[iMonitor].rcMonitor);
 
-         __copy(pmonitor->m_rectangleWorkspace, m_monitorinfoa[iMonitor].rcWork);
+         copy(&pmonitor->m_rectangleWorkspace, &m_monitorinfoa[iMonitor].rcWork);
 
       }
 

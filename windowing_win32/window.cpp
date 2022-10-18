@@ -5254,7 +5254,7 @@ namespace windowing_win32
          /* For the non-maximized case, set the output const rectangle_i32 & to what it was
          before e_message_non_client_calcsize modified it. This will make the client size_i32 the
          same as the non-client size. */
-         __copy(pncsp->rgrc[0],nonclient);
+         copy(&pncsp->rgrc[0], &nonclient);
 
 
       }
@@ -5959,7 +5959,7 @@ namespace windowing_win32
 
       }
 
-      __copy(prectangle, rectangle);
+      copy(prectangle, &rectangle);
 
       return true;
 
@@ -5991,7 +5991,7 @@ namespace windowing_win32
 
       }
 
-      __copy(prectangle, rectangle);
+      copy(prectangle, &rectangle);
 
       return true;
 

@@ -613,7 +613,7 @@ namespace draw2d_gdiplus
       for (::index i = 0; i < pointa.get_size(); i++)
       {
 
-         __copy(pointa[i], lines[i]);
+         copy(&pointa[i], &lines[i]);
 
       }
 
@@ -634,7 +634,7 @@ namespace draw2d_gdiplus
       for (::index i = 0; i < pointa.get_size(); i++)
       {
 
-         __copy(pointa[i], lines[i]);
+         copy(&pointa[i], &lines[i]);
 
       }
 
@@ -655,7 +655,7 @@ namespace draw2d_gdiplus
       for (::index i = 0; i < pointa.get_size(); i++)
       {
 
-         __copy(pointa[i], polygon_i32[i]);
+         copy(&pointa[i], &polygon_i32[i]);
 
       }
 
@@ -676,7 +676,7 @@ namespace draw2d_gdiplus
       for (::index i = 0; i < pointa.get_size(); i++)
       {
 
-         __copy(pointa[i], polygon_i32[i]);
+         copy(pointa[i], polygon_i32[i]);
 
       }
 

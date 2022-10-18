@@ -64,7 +64,7 @@ namespace draw2d_gdiplus
 
       ::rectangle_i32 rectangle;
       ((region*)this)->get_bounding_box(rectangle);
-      __copy(prectangle, rectangle);
+      copy(prectangle, &rectangle);
 
    }
 
@@ -151,7 +151,7 @@ namespace draw2d_gdiplus
 
       ::pointer<rectangle_item>pitem = m_pitem;
 
-      __copy(rectangle, pitem->m_rectangle);
+      copy(&rectangle, &pitem->m_rectangle);
 
       path.AddRectangle(rectangle);
 

@@ -11,10 +11,10 @@
 #endif
 
 
-rectangle_type(const Gdiplus::Rect & t) noexcept { __copy(this, &t); }
-rectangle_type(const Gdiplus::RectF & t) noexcept { __copy(this, &t); }
-rectangle_type(const Gdiplus::Rect * p) noexcept { __copy(this, p); }
-rectangle_type(const Gdiplus::RectF * p) noexcept { __copy(this, p); }
+rectangle_type(const Gdiplus::Rect & t) noexcept { copy(this, &t); }
+rectangle_type(const Gdiplus::RectF & t) noexcept { copy(this, &t); }
+rectangle_type(const Gdiplus::Rect * p) noexcept {  copy(this, p); }
+rectangle_type(const Gdiplus::RectF * p) noexcept { copy(this, p); }
 
 
 inline auto left(const Gdiplus::Rect * prectangle) { return prectangle->X; }
@@ -71,15 +71,15 @@ inline void copy(Gdiplus::PointF * ppoint1, const POINT_F64 * ppoint2)
 
 
 
-template < primitive_point POINT >
-void __copy(POINT & p, const Gdiplus::Point & t) noexcept { ::copy_point(&p, &t); }
-template < primitive_point POINT >
-void __copy(POINT * p1, const Gdiplus::Point * p2) noexcept { ::copy_point(p1, p2); }
+// template < primitive_point POINT >
+// void __copy(POINT & p, const Gdiplus::Point & t) noexcept { ::copy_point(&p, &t); }
+// template < primitive_point POINT >
+// void __copy(POINT * p1, const Gdiplus::Point * p2) noexcept { ::copy_point(p1, p2); }
 
+// template < primitive_point POINT >
+// void __copy(POINT & p, const Gdiplus::PointF & t) noexcept { ::copy_point(&p, &t); }
 template < primitive_point POINT >
-void __copy(POINT & p, const Gdiplus::PointF & t) noexcept { ::copy_point(&p, &t); }
-template < primitive_point POINT >
-void __copy(POINT * p1, const Gdiplus::PointF * p2) noexcept { ::copy_point(p1, p2); }
+void copy(POINT * p1, const Gdiplus::PointF * p2) noexcept { ::copy_point(p1, p2); }
 
 
 

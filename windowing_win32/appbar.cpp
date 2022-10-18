@@ -34,7 +34,7 @@ bool has_autohide_appbar(::u32 edge, const rectangle_i32 & mon)
 
       data.uEdge = edge;
 
-      __copy(data.rc, mon);
+      copy(&data.rc, &mon);
 
       return SHAppBarMessage(0x0000000b, &data);
 

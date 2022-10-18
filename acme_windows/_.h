@@ -114,21 +114,21 @@ CLASS_DECL_ACME FILETIME __FILETIME(const ::earth::time & time);
 
 
 
-void __copy(payload * ppayload, const FILETIME * ptime);
-void __copy(payload * ppayload, const SYSTEMTIME * ptime);
+void copy(payload * ppayload, const FILETIME * ptime);
+void copy(payload * ppayload, const SYSTEMTIME * ptime);
 
 
 
 
 
-inline void __copy(payload * ppayload, const LPDWORD * lppdw)
+inline void copy(payload * ppayload, const LPDWORD * lppdw)
 {
 
    ppayload->operator = ((::u32 *)*lppdw);
 
 }
 
-inline void __copy(payload * ppayload, const long * plong)
+inline void copy(payload * ppayload, const long * plong)
 {
 
    ppayload->operator = ((::i32)*plong);
@@ -136,7 +136,7 @@ inline void __copy(payload * ppayload, const long * plong)
 }
 
 
-inline void __copy(payload * ppayload, const DWORD * pdw)
+inline void copy(payload * ppayload, const DWORD * pdw)
 {
 
    ppayload->operator = ((::u32)*pdw);
@@ -151,7 +151,7 @@ inline void __copy(payload * ppayload, const DWORD * pdw)
 //
 //}
 
-inline void __copy(long * plong, const payload * ppayload)
+inline void copy(long * plong, const payload * ppayload)
 {
 
    *plong = (long)ppayload->i64();
@@ -159,7 +159,7 @@ inline void __copy(long * plong, const payload * ppayload)
 }
 
 
-inline void __copy(DWORD * pdw, const payload * ppayload)
+inline void copy(DWORD * pdw, const payload * ppayload)
 {
 
    *pdw = ppayload->u32();
