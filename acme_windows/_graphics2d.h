@@ -11,33 +11,31 @@
 #endif
 
 
-rectangle_type(const Gdiplus::Rect & t) noexcept { copy(this, &t); }
-rectangle_type(const Gdiplus::RectF & t) noexcept { copy(this, &t); }
-rectangle_type(const Gdiplus::Rect * p) noexcept {  copy(this, p); }
-rectangle_type(const Gdiplus::RectF * p) noexcept { copy(this, p); }
+rectangle_type(const Gdiplus::Rect & t) noexcept { copy(*this, t); }
+rectangle_type(const Gdiplus::RectF & t) noexcept { copy(*this, t); }
 
 
-inline auto left(const Gdiplus::Rect * prectangle) { return prectangle->X; }
-inline auto top(const Gdiplus::Rect * prectangle) { return prectangle->Y; }
-inline auto left(const Gdiplus::RectF * prectangle) { return prectangle->X; }
-inline auto top(const Gdiplus::RectF * prectangle) { return prectangle->Y; }
+// inline auto left(const Gdiplus::Rect & rectangle) { return rectangle.X; }
+// inline auto top(const Gdiplus::Rect & prectangle) { return rectangle.Y; }
+// inline auto left(const Gdiplus::RectF & prectangle) { return rectangle.X; }
+// inline auto top(const Gdiplus::RectF & prectangle) { return rectangle.Y; }
 
-inline auto width(const Gdiplus::Rect * prectangle) { return prectangle->Width; }
-inline auto height(const Gdiplus::Rect * prectangle) { return prectangle->Height; }
-inline auto width(const Gdiplus::RectF * prectangle) { return prectangle->Width; }
-inline auto height(const Gdiplus::RectF * prectangle) { return prectangle->Height; }
-
-
-template <  typename L, typename T, typename W, typename H >
-inline auto _001SetRectDim(Gdiplus::Rect * p, L l, T t, W w, H h) { return set_XYWH_dim(p, l, t, w, h); }
-template <  typename L, typename T, typename W, typename H >
-inline auto _001SetRectDim(Gdiplus::RectF * p, L l, T t, W w, H h) { return set_XYWH_dim(p, l, t, w, h); }
+// inline auto width(const Gdiplus::Rect & prectangle) { return prectangle->Width; }
+// inline auto height(const Gdiplus::Rect & prectangle) { return prectangle->Height; }
+// inline auto width(const Gdiplus::RectF & prectangle) { return prectangle->Width; }
+// inline auto height(const Gdiplus::RectF & prectangle) { return prectangle->Height; }
 
 
-inline auto copy(Gdiplus::Rect * prectTarget, const RECTANGLE_I32 * prectSource) { return ::_001CopyRect(prectTarget, prectSource); }
-inline auto copy(Gdiplus::Rect * prectTarget, const RECTANGLE_F64 * prectSource) { return _001CopyRect(prectTarget, prectSource); }
-inline auto copy(Gdiplus::RectF * prectTarget, const RECTANGLE_I32 * prectSource) { return ::_001CopyRect(prectTarget, prectSource); }
-inline auto copy(Gdiplus::RectF * prectTarget, const RECTANGLE_F64 * prectSource) { return ::_001CopyRect(prectTarget, prectSource); }
+// template <  typename L, typename T, typename W, typename H >
+// inline auto _001SetRectDim(Gdiplus::Rect & p, L l, T t, W w, H h) { return set_XYWH_dim(p, l, t, w, h); }
+// template <  typename L, typename T, typename W, typename H >
+// inline auto _001SetRectDim(Gdiplus::RectF  p, L l, T t, W w, H h) { return set_XYWH_dim(p, l, t, w, h); }
+
+
+// inline auto copy(Gdiplus::Rect * prectTarget, const RECTANGLE_I32 * prectSource) { return ::_001CopyRect(prectTarget, prectSource); }
+// inline auto copy(Gdiplus::Rect * prectTarget, const RECTANGLE_F64 * prectSource) { return _001CopyRect(prectTarget, prectSource); }
+// inline auto copy(Gdiplus::RectF * prectTarget, const RECTANGLE_I32 * prectSource) { return ::_001CopyRect(prectTarget, prectSource); }
+// inline auto copy(Gdiplus::RectF * prectTarget, const RECTANGLE_F64 * prectSource) { return ::_001CopyRect(prectTarget, prectSource); }
 
 
 inline void copy(Gdiplus::Point * ppoint1, const POINT_F64 * ppoint2)
