@@ -59,11 +59,10 @@ namespace windowing_win32
    }
 
 
-
-   index display::get_main_monitor(RECTANGLE_I32 & rectangle)
+   index display::get_main_monitor_index()
    {
 
-      index iMainMonitor = 0;
+      index iMainMonitor = get_main_monitor_index();
 
       HMONITOR hmonitorPrimary = ::windows::get_primary_monitor_handle();
 
@@ -81,23 +80,19 @@ namespace windowing_win32
 
       }
 
+      return iMainMonitor;
+
+   }
+
+
+   index display::get_main_monitor(RECTANGLE_I32 & rectangle)
+   {
+
+      auto iMainMonitor = get_main_monitor_index();
+
       auto pmonitor = get_monitor(iMainMonitor);
 
-      if (::is_null(pmonitor))
-      {
-
-         return -1;
-
-      }
-
       pmonitor->get_monitor_rectangle(rectangle);
-
-      //f (!)
-      //{
-
-      //   return -1;
-
-      //}
 
       return iMainMonitor;
 
