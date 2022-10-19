@@ -522,7 +522,7 @@ namespace windowing_win32
 
          //}
 
-         if (rectangleIntersect.top_left_null_intersect(&rectangleParam, rectangleMonitor))
+         if (rectangleIntersect.top_left_null_intersect(rectangleParam, rectangleMonitor))
          {
 
             if (rectangleIntersect.area() >= 0)
