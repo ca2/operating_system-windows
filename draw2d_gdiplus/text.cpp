@@ -1,4 +1,4 @@
-#include "framework.h"
+﻿#include "framework.h"
 #include "font.h"
 #include "graphics.h"
 #include "path.h"
@@ -201,7 +201,7 @@ void gdiplus_draw_text(::draw2d::graphics* pgraphicsParam, ::draw2d::path* ppath
 
                status = pgraphics->MeasureString(text.m_wstr, (INT)iSize, pfont, rectangle_f32, &format, &box);
 
-               copy(&rectangleParam, &box);
+               copy(rectangleParam, box);
 
             }
 
@@ -220,12 +220,11 @@ void gdiplus_draw_text(::draw2d::graphics* pgraphicsParam, ::draw2d::path* ppath
 
                status = pgraphics->MeasureString(text.m_wstr, (INT)iSize, pfont, rectangle_f32, &format, &box);
 
-               copy(&rectangleParam, &box);
+               copy(rectangleParam, box);
 
             }
 
          }
-
 
       }
       else if (pgraphics)
@@ -237,8 +236,7 @@ void gdiplus_draw_text(::draw2d::graphics* pgraphicsParam, ::draw2d::path* ppath
 
          status = pgraphics->GetTransform(&m);
 
-
-         ap(Gdiplus::Matrix) pmNew = m.Clone();
+         auto pmNew = __auto(m.Clone());
 
          status = pmNew->Translate((Gdiplus::REAL) rectangleParam.left, (Gdiplus::REAL) rectangleParam.top);
 
@@ -259,7 +257,7 @@ void gdiplus_draw_text(::draw2d::graphics* pgraphicsParam, ::draw2d::path* ppath
 
             status = pgraphics->MeasureString(text.m_wstr, (INT)iSize, pfont, rectangle_f32, &format, &box);
 
-            copy(&rectangleParam, &box);
+            copy(rectangleParam, box);
 
          }
 

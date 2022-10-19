@@ -1,4 +1,4 @@
-// created by Camilo <3ThomasBorregaardSoerensen_!!
+﻿// created by Camilo <3ThomasBorregaardSoerensen_!!
 // recreated by Camilo 2021-02-02 16:49
 #pragma once
 
@@ -51,7 +51,7 @@ namespace windowing_win32
 
       void enum_display_monitors() override;
 
-      ::index get_main_monitor(RECTANGLE_I32 * prectangle = nullptr) override;
+      ::index get_main_monitor(RECTANGLE_I32 & rectangle) override;
 
       ::count get_monitor_count() override;
       //virtual bool  get_monitor_rect(index iMonitor, RECTANGLE_I32 * prectangle) override;
@@ -60,7 +60,7 @@ namespace windowing_win32
       //virtual bool  get_desk_monitor_rect(index iMonitor, RECTANGLE_I32 * prectangle) override;
 
 
-      index get_main_workspace(RECTANGLE_I32 * prectangle = nullptr) override;
+      index get_main_workspace(RECTANGLE_I32 & rectangle) override;
 
       ::count get_workspace_count() override;
       //virtual bool  get_wkspace_rect(index iWkspace, RECTANGLE_I32 * prectangle) override;

@@ -1,4 +1,4 @@
-#include "framework.h"
+﻿#include "framework.h"
 #include "region.h"
 #include "graphics.h"
 
@@ -35,23 +35,16 @@ namespace draw2d_gdiplus
    }
 
 
-   bool region::get_bounding_box(RECTANGLE_I32 * prectangle, ::draw2d::graphics * pgraphics)
+   bool region::get_bounding_box(RECTANGLE_I32 & rectangle, ::draw2d::graphics * pgraphics)
    {
 
       defer_update(pgraphics, 0);
 
-      Gdiplus::Rect rectangle;
+      Gdiplus::Rect gdiplusrectangle;
 
-      m_pregion->GetBounds(&rectangle, __graphics(pgraphics)->m_pgraphics);
+      m_pregion->GetBounds(&gdiplusrectangle, __graphics(pgraphics)->m_pgraphics);
 
-      prectangle->left = rectangle.X;
-
-      prectangle->top = rectangle.Y;
-
-      prectangle->right = rectangle.X + rectangle.Width;
-
-      prectangle->bottom = rectangle.Y + rectangle.Height;
-
+      copy(rectangle, gdiplusrectangle);
 
       return true;
 
@@ -59,12 +52,14 @@ namespace draw2d_gdiplus
 
 
 
-   void region::max_bounding_box(RECTANGLE_F64 * prectangle, ::draw2d::graphics * pgraphics)
+   void region::max_bounding_box(RECTANGLE_F64 & rectangle, ::draw2d::graphics * pgraphics)
    {
 
-      ::rectangle_i32 rectangle;
-      ((region*)this)->get_bounding_box(rectangle);
-      copy(prectangle, &rectangle);
+      ::rectangle_i32 rectanglei32;
+      
+      ((region*)this)->get_bounding_box(rectanglei32);
+
+      copy(rectangle, rectanglei32);
 
    }
 
@@ -151,7 +146,7 @@ namespace draw2d_gdiplus
 
       ::pointer<rectangle_item>pitem = m_pitem;
 
-      copy(&rectangle, &pitem->m_rectangle);
+      copy(rectangle, pitem->m_rectangle);
 
       path.AddRectangle(rectangle);
 

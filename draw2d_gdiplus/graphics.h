@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 
 #include "aura/graphics/draw2d/graphics.h"
@@ -202,15 +202,15 @@ namespace draw2d_gdiplus
       void paint_region(::draw2d::region* pregion) override;
 
       // Clipping Functions
-      virtual i32 get_clip_box(::rectangle_f64 * prectangle) override;
+      i32 get_clip_box(::rectangle_f64 & rectangle) override;
 
 
       //void add_clipping_shapes(const shape_array<::draw2d::region>& shapea) override;
       void reset_clip() override;
       void _intersect_clip() override;
-      void _add_clipping_shape(const ::rectangle & rectangle, ___shape < ::draw2d::region > * pshaperegion) override;
-      void _add_clipping_shape(const ::ellipse & ellipse, ___shape < ::draw2d::region >* pshaperegion) override;
-      void _add_clipping_shape(const ::polygon & polygon, ___shape < ::draw2d::region >* pshaperegion) override;
+      void _add_clipping_shape(const ::rectangle & rectangle, ___shape < ::draw2d::region > & shaperegion) override;
+      void _add_clipping_shape(const ::ellipse & ellipse, ___shape < ::draw2d::region > & shaperegion) override;
+      void _add_clipping_shape(const ::polygon & polygon, ___shape < ::draw2d::region > & shaperegion) override;
 
 
       void intersect_clip(const ::rectangle& rectangle) override;

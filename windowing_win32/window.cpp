@@ -1,4 +1,4 @@
-// created by Camilo 2021-01-31 04:56 BRT <3CamiloSasukeThomasBorregaardSoerensen
+﻿// created by Camilo 2021-01-31 04:56 BRT <3CamiloSasukeThomasBorregaardSoerensen
 #include "framework.h"
 #include "acme/constant/timer.h"
 #include "window.h"
@@ -5251,25 +5251,19 @@ namespace windowing_win32
       }
       else
       {
+
          /* For the non-maximized case, set the output const rectangle_i32 & to what it was
          before e_message_non_client_calcsize modified it. This will make the client size_i32 the
          same as the non-client size. */
-         copy(&pncsp->rgrc[0], &nonclient);
-
+         copy(pncsp->rgrc[0], nonclient);
 
       }
-
-
-      //::pointer<::message::message>pmessage(pmessage);
 
       pcalcsize->m_lresult = 0;
 
       pcalcsize->m_bRet = true;
 
-      //#endif
-
    }
-
 
 
    //void window::default_message_handler(::message::message * pmessage)
@@ -5959,7 +5953,7 @@ namespace windowing_win32
 
       }
 
-      copy(prectangle, &rectangle);
+      copy(*prectangle, rectangle);
 
       return true;
 
@@ -5991,12 +5985,11 @@ namespace windowing_win32
 
       }
 
-      copy(prectangle, &rectangle);
+      copy(*prectangle, rectangle);
 
       return true;
 
    }
-
 
 
    void window::non_top_most_upper_window_rects(::rectangle_i32_array & recta)

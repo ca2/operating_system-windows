@@ -1,4 +1,4 @@
-// created by Camilo 2021-01-31 06:25 BRT <3CamiloSasukeThomasBorregaardSoerensen
+﻿// created by Camilo 2021-01-31 06:25 BRT <3CamiloSasukeThomasBorregaardSoerensen
 #include "framework.h"
 #include "window.h"
 #include "windowing.h"
@@ -52,11 +52,9 @@ namespace windowing_win32
 
       }
 
-      copy(&m_rectangle, &mi.rcMonitor);
+      copy(m_rectangle, mi.rcMonitor);
 
-      copy(&m_rectangleWorkspace, &mi.rcWork);
-
-      //return true;
+      copy(m_rectangleWorkspace, mi.rcWork);
 
    }
 

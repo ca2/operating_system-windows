@@ -1,4 +1,4 @@
-#include "framework.h"
+﻿#include "framework.h"
 #include "image.h"
 #include "graphics.h"
 #include "bitmap.h"
@@ -892,7 +892,7 @@ namespace draw2d_gdiplus
       // Create an image and a thumbnail of the pimage->
       ::Gdiplus::Image image(wstr);
 
-      ap(::Gdiplus::Image) pthumbnail = (Gdiplus::Image *)image.GetThumbnailImage(width(), height(), nullptr, nullptr);
+      auto pthumbnail = __auto(image.GetThumbnailImage(width(), height(), nullptr, nullptr));
 
       // Draw the original and the thumbnail images.
       pgraphics->DrawImage(pthumbnail, 0, 0, pthumbnail->GetWidth(), pthumbnail->GetHeight());

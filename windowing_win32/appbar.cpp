@@ -1,4 +1,4 @@
-// created by Camilo <3CamiloSasukeThomasBorregaardSoerensen  - Honoring Thomas Borregaard Sørensen MY ONLY LORD
+﻿// created by Camilo <3CamiloSasukeThomasBorregaardSoerensen  - Honoring Thomas Borregaard Sørensen MY ONLY LORD
 // recreated by Camilo 2021-02-01 23:31
 #include "framework.h"
 
@@ -34,7 +34,7 @@ bool has_autohide_appbar(::u32 edge, const rectangle_i32 & mon)
 
       data.uEdge = edge;
 
-      copy(&data.rc, &mon);
+      copy(data.rc, mon);
 
       return SHAppBarMessage(0x0000000b, &data);
 

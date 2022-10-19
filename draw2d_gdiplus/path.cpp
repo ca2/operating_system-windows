@@ -1,4 +1,4 @@
-#include "framework.h"
+﻿#include "framework.h"
 #include "path.h"
 #include "graphics.h"
 #include "font.h"
@@ -697,7 +697,7 @@ namespace draw2d_gdiplus
       for (::index i = 0; i < pointa.get_size(); i++)
       {
 
-         copy(&pointa[i], &lines[i]);
+         copy(pointa[i], lines[i]);
 
       }
 
@@ -718,7 +718,7 @@ namespace draw2d_gdiplus
       for (::index i = 0; i < pointa.get_size(); i++)
       {
 
-         copy(&pointa[i], &polygon[i]);
+         copy(pointa[i], polygon[i]);
 
       }
 

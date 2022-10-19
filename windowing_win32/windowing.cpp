@@ -1,4 +1,4 @@
-// Created by camilo on 2021-01-30 <3ThomasBS_!!
+﻿// Created by camilo on 2021-01-30 <3ThomasBS_!!
 #include "framework.h"
 #include "mouse_hook.h"
 #include "keyboard_hook.h"
@@ -867,7 +867,7 @@ namespace windowing_win32
 
                ::rectangle_i32 rectangleHitTest;
 
-               copy(&rectangleHitTest, &rectWindow);
+               copy(rectangleHitTest, rectWindow);
 
                rectangleHitTest.inflate(iMargin + 1);
 

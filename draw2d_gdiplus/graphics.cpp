@@ -830,9 +830,7 @@ namespace draw2d_gdiplus
 
       Gdiplus::Rect rectangle;
 
-      copy(&rectangle, &rectangleParam);
-
-      //return 
+      copy(rectangle, rectangleParam);
 
       m_pgraphics->DrawRectangle(ppen->get_os_data < ::Gdiplus::Pen *>(this), rectangle);
 
@@ -1342,7 +1340,7 @@ namespace draw2d_gdiplus
 
       Gdiplus::Rect rectangle;
 
-      copy(&rectangle, &rectangleParam);
+      copy(rectangle, rectangleParam);
 
       Gdiplus::Brush * posbrush = pbrush->get_os_data < Gdiplus::Brush * >(this);
 
@@ -3863,7 +3861,7 @@ namespace draw2d_gdiplus
 
          Gdiplus::RectF rectangle;
 
-         copy(&rectangle, &rectangleParam);
+         copy(rectangle, rectangleParam);
 
          Gdiplus::SolidBrush b(Gdiplus::Color(color.alpha, color.red, color.green, color.blue));
 
@@ -4673,14 +4671,14 @@ namespace draw2d_gdiplus
    }
 
 
-   i32 graphics::get_clip_box(::rectangle_f64 * prectangle)
+   i32 graphics::get_clip_box(::rectangle_f64 & rectangle)
    {
 
-      Gdiplus::Rect rectangle;
+      Gdiplus::Rect gdiplusrectangle;
 
-      m_pgraphics->GetClipBounds(&rectangle);
+      m_pgraphics->GetClipBounds(&gdiplusrectangle);
 
-      copy(prectangle, &rectangle);
+      copy(rectangle, gdiplusrectangle);
 
       return 1;
 
@@ -4752,10 +4750,10 @@ namespace draw2d_gdiplus
    }
 
 
-   void graphics::_add_clipping_shape(const ::rectangle & rectangle, ___shape < ::draw2d::region >* pshaperegion)
+   void graphics::_add_clipping_shape(const ::rectangle & rectangle, ___shape < ::draw2d::region > & shaperegion)
    {
 
-      if (!pshaperegion->holdee() || pshaperegion->holdee()->m_pointOffset != m_pointAddShapeTranslate)
+      if (!shaperegion.holdee() || shaperegion.holdee()->m_pointOffset != m_pointAddShapeTranslate)
       {
 
          auto pregion = __create < ::draw2d::region >();
@@ -4764,11 +4762,11 @@ namespace draw2d_gdiplus
 
          pregion->create_rectangle(rectangle);
 
-         pshaperegion->holdee(pregion);
+         shaperegion.holdee(pregion);
 
       }
 
-      Gdiplus::Region* pregion = (Gdiplus::Region*)pshaperegion->holdee()->get_os_data(this, 0);
+      Gdiplus::Region* pregion = (Gdiplus::Region*)shaperegion.holdee()->get_os_data(this, 0);
 
       m_pgraphics->SetClip(pregion, Gdiplus::CombineModeIntersect);
       //return ::success;
@@ -4794,10 +4792,10 @@ namespace draw2d_gdiplus
    //}
 
 
-   void graphics::_add_clipping_shape(const ::ellipse & ellipse, ___shape < ::draw2d::region >* pshaperegion)
+   void graphics::_add_clipping_shape(const ::ellipse & ellipse, ___shape < ::draw2d::region > & shaperegion)
    {
 
-      if (!pshaperegion->holdee() || pshaperegion->holdee()->m_pointOffset != m_pointAddShapeTranslate)
+      if (!shaperegion.holdee() || shaperegion.holdee()->m_pointOffset != m_pointAddShapeTranslate)
       {
 
          auto pregion= __create < ::draw2d::region >();
@@ -4806,11 +4804,11 @@ namespace draw2d_gdiplus
 
          pregion->create_ellipse(ellipse);
 
-         pshaperegion->holdee(pregion);
+         shaperegion.holdee(pregion);
 
       }
 
-      Gdiplus::Region * pregion = (Gdiplus::Region * ) pshaperegion->holdee()->get_os_data(this, 0);
+      Gdiplus::Region * pregion = (Gdiplus::Region * ) shaperegion.holdee()->get_os_data(this, 0);
 
       m_pgraphics->SetClip(pregion, Gdiplus::CombineModeIntersect);
 
@@ -4839,10 +4837,10 @@ namespace draw2d_gdiplus
    //}
 
 
-   void graphics::_add_clipping_shape(const ::polygon & polygon, ___shape < ::draw2d::region >* pshaperegion)
+   void graphics::_add_clipping_shape(const ::polygon & polygon, ___shape < ::draw2d::region > & shaperegion)
    {
 
-      if (!pshaperegion->holdee() || pshaperegion->holdee()->m_pointOffset != m_pointAddShapeTranslate)
+      if (!shaperegion.holdee() || shaperegion.holdee()->m_pointOffset != m_pointAddShapeTranslate)
       {
 
          auto pregion = __create < ::draw2d::region >();
@@ -4851,11 +4849,11 @@ namespace draw2d_gdiplus
 
          pregion->create_polygon(polygon);
 
-         pshaperegion->holdee(pregion);
+         shaperegion.holdee(pregion);
 
       }
 
-      Gdiplus::Region* pregion = (Gdiplus::Region*)pshaperegion->holdee()->get_os_data(this, 0);
+      Gdiplus::Region* pregion = (Gdiplus::Region*)shaperegion.holdee()->get_os_data(this, 0);
 
       m_pgraphics->SetClip(pregion, Gdiplus::CombineModeIntersect);
 
@@ -4867,7 +4865,7 @@ namespace draw2d_gdiplus
 
       Gdiplus::RectF r;
 
-      copy(&r, &rectangle);
+      copy(r, rectangle);
 
       r.X = (Gdiplus::REAL) (r.X + m_pointAddShapeTranslate.x);
 
@@ -4901,9 +4899,6 @@ namespace draw2d_gdiplus
    //   return ::success;
 
    //}
-
-
-
 
 
    //i32 graphics::SelectClipRgn(::draw2d::region * pregion)
@@ -6659,7 +6654,7 @@ namespace draw2d_gdiplus
 
          m_pgraphics->GetTransform(&m);
 
-         ap(Gdiplus::Matrix) pmNew;
+         ::auto_pointer < Gdiplus::Matrix > pmNew;
 
          if (m_ppath != nullptr)
          {
