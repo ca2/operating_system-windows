@@ -51,6 +51,8 @@ namespace windowing_win32
 
       void enum_display_monitors() override;
 
+      ::index get_main_monitor_index() override;
+
       ::index get_main_monitor(RECTANGLE_I32 & rectangle) override;
 
       ::count get_monitor_count() override;
@@ -60,7 +62,7 @@ namespace windowing_win32
       //virtual bool  get_desk_monitor_rect(index iMonitor, RECTANGLE_I32 * prectangle) override;
 
 
-      index get_main_workspace(RECTANGLE_I32 & rectangle) override;
+      index get_main_workspace(RECTANGLE_I32 * prectangle = nullptr) override;
 
       ::count get_workspace_count() override;
       //virtual bool  get_wkspace_rect(index iWkspace, RECTANGLE_I32 * prectangle) override;

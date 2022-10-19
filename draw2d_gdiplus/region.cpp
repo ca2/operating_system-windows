@@ -51,12 +51,11 @@ namespace draw2d_gdiplus
    }
 
 
-
    void region::max_bounding_box(RECTANGLE_F64 & rectangle, ::draw2d::graphics * pgraphics)
    {
 
       ::rectangle_i32 rectanglei32;
-      
+
       ((region*)this)->get_bounding_box(rectanglei32);
 
       copy(rectangle, rectanglei32);
