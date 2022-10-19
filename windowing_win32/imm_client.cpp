@@ -790,7 +790,7 @@ int imm_client::on_text_composition_message(int iMessage)
 
       can.dwStyle = CFS_CANDIDATEPOS;
 
-      copy(&can.ptCurrentPos, &rectangle.bottom_left());
+      copy(can.ptCurrentPos, rectangle.bottom_left());
 
       if (::ImmSetCandidateWindow(imm, &can))
       {
