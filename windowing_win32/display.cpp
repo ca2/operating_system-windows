@@ -5,6 +5,7 @@
 #include "monitor.h"
 #include "windowing.h"
 #include "window.h"
+#include "acme/primitive/geometry2d/rectangle_array.h"
 #include "aura/platform/system.h"
 
 
@@ -62,7 +63,7 @@ namespace windowing_win32
    index display::get_main_monitor_index()
    {
 
-      index iMainMonitor = get_main_monitor_index();
+      index iMainMonitor = 0;
 
       HMONITOR hmonitorPrimary = ::windows::get_primary_monitor_handle();
 
