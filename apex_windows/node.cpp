@@ -5,6 +5,7 @@
 #include "acme_windows/acme_file.h"
 #include "acme_windows/registry.h"
 #include "operating-system/operating-system-windows/deployment/resource1.h"
+#include "apex/platform/system.h"
 #include <shellapi.h>
 
 

@@ -1,16 +1,13 @@
 #include "framework.h"
 #include "acme/operating_system.h"
-#if !BROAD_PRECOMPILED_HEADER
-#include "aura/user/user/_user.h"
-#endif
-#undef User
-#undef Usr
 #include "shell.h"
 #include "icon.h"
 #include "windowing.h"
 #include "system_interaction.h"
 #include "acme/filesystem/filesystem/acme_directory.h"
 #include "acme_windows/known_folder_struct.h"
+#include "apex/filesystem/filesystem/dir_context.h"
+#include "apex/filesystem/filesystem/file_context.h"
 #include "aura/user/user/user.h"
 #include "aura_windows/node.h"
 #include "aura/platform/context.h"
@@ -21,6 +18,7 @@
 #include "aura/graphics/image/list.h"
 #include "aura/graphics/image/icon.h"
 #include "aura/platform/system.h"
+#include "acme/primitive/geometry2d/_collection_basic.h"
 
 
 bool IsDibSection(HBITMAP bmp)

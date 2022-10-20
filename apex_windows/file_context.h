@@ -14,6 +14,9 @@ CLASS_DECL_APEX_WINDOWS string windows_get_short_file_name(const ::string & str)
 ///CLASS_DECL_APEX_WINDOWS void vfxGetModuleShortFileName(HINSTANCE hInst, string & strShortName);
 
 
+#include "apex/filesystem/filesystem/file_context.h"
+
+
 namespace apex_windows
 {
 

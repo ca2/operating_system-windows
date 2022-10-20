@@ -63,7 +63,7 @@ namespace windowing_win32
    index display::get_main_monitor_index()
    {
 
-      index iMainMonitor = get_main_monitor_index();
+      index iMainMonitor = 0;
 
       HMONITOR hmonitorPrimary = ::windows::get_primary_monitor_handle();
 

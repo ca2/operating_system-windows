@@ -13,6 +13,11 @@
 #include "acme/operating_system/time.h"
 #include "acme/filesystem/filesystem/acme_directory.h"
 #include "acme/filesystem/filesystem/acme_path.h"
+#include "apex/filesystem/file/set.h"
+#include "apex/filesystem/filesystem/dir_context.h"
+#include "apex/filesystem/filesystem/file_context.h"
+#include "apex/platform/application.h"
+#include "apex/platform/context.h"
 
 
 ::e_status hresult_to_estatus(HRESULT hresult)

@@ -1,6 +1,9 @@
 #pragma once
 
 
+#include "apex/parallelization/service_handler.h"
+
+
 namespace apex_windows
 {
 

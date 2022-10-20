@@ -6,6 +6,7 @@
 #include "apex/operating_system.h"
 #include "acme/operating_system/time.h"
 #include "acme_windows/file_exception.h"
+#include "apex/platform/system.h"
 
 
 namespace apex_windows

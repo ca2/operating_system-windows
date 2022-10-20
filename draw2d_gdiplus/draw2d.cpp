@@ -1,5 +1,7 @@
 #include "framework.h"
 #include "draw2d.h"
+#include "acme/primitive/primitive/memory.h"
+
 
 CLASS_DECL_DRAW2D_GDIPLUS void initialize_gdiplus();
 CLASS_DECL_DRAW2D_GDIPLUS void terminate_gdiplus();

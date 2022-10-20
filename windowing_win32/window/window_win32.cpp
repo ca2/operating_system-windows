@@ -1,5 +1,6 @@
 #include "framework.h"
 #include "acme/constant/timer.h"
+#include "apex/filesystem/filesystem/dir_context.h"
 #include "windowing_win32/window.h"
 #include "windowing_win32/windowing.h"
 #include "aura/user/user/system.h"

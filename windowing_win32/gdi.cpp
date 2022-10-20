@@ -1,6 +1,8 @@
 #include "framework.h"
 #include "aura/graphics/image/image.h"
 #include "windowing.h"
+#include "apex/filesystem/filesystem/dir_context.h"
+
 
 
 namespace windows

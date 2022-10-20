@@ -3,6 +3,7 @@
 
 #include "acme/_.h"
 #include "acme_windows_common/_.h"
+#include "acme/primitive/primitive/memory.h"
 #include <Shlobj.h>
 #include <shellapi.h>
 #include <fcntl.h>

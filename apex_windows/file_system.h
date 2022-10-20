@@ -1,6 +1,9 @@
 #pragma once
 
 
+#include "apex/filesystem/filesystem/file_system.h"
+
+
 namespace apex_windows
 {
 

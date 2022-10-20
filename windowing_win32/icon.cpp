@@ -3,6 +3,7 @@
 #include "framework.h"
 #include "icon.h"
 #include "acme/filesystem/file/memory_file.h"
+#include "apex/filesystem/filesystem/file_context.h"
 #include "aura/graphics/image/context_image.h"
 #include "aura/graphics/image/drawing.h"
 #include "aura/platform/context.h"
