@@ -20,7 +20,7 @@ namespace win32
       virtual ~dialog();
 
 
-      virtual void initialize_dialog(::object * pobject, const widechar * pszResource);
+      virtual void initialize_dialog(::particle * pparticle, const widechar * pszResource);
 
       bool create_dialog(window * pwindow = nullptr);
 

@@ -43,7 +43,7 @@ void * __node_library_open(const char * pszPath, string & strMessage)
 
    }
 
-   if (strPath.find('.') < 0 || !m_psystem->m_pacmefile->exists(strPath))
+   if (strPath.find('.') < 0 || !acmefile()->exists(strPath))
    {
 
       strPath += ".dll";

@@ -125,13 +125,13 @@ namespace ca2plugin_container
 
       m_pplugin->::aura::application::m_psession              = ::aura::application::m_psession;
 
-      m_pplugin->m_psystem               = m_psystem;
+      m_pplugin->acmesystem()               = acmesystem();
 
       m_pplugin->get_application()                  = get_application();
 
       m_pplugin->m_phost                     = this;
 
-      m_pcontainerapp->m_psystem->m_pplugin  = pplugin;
+      m_pcontainerapp->acmesystem()->m_pplugin  = pplugin;
 
       m_pplugin->m_strBitmapChannel          = m_strBitmapChannel;
 
@@ -305,7 +305,7 @@ namespace ca2plugin_container
    void * host::get_context_system()
    {
 
-      return get_application()->m_psystem;
+      return get_application()->acmesystem();
 
    }
 
@@ -572,16 +572,16 @@ namespace ca2plugin_container
          if(m_pcontainerapp != nullptr)
          {
 
-            if(m_pcontainerapp->m_psystem != nullptr)
+            if(m_pcontainerapp->acmesystem() != nullptr)
             {
 
-               if(m_pcontainerapp->m_psystem->m_pplugin != nullptr)
+               if(m_pcontainerapp->acmesystem()->m_pplugin != nullptr)
                {
 
-                  if(m_pcontainerapp->m_psystem->m_pplugin->m_puserinteractionHost != nullptr)
+                  if(m_pcontainerapp->acmesystem()->m_pplugin->m_puserinteractionHost != nullptr)
                   {
 
-                     m_pcontainerapp->m_psystem->m_pplugin->m_puserinteractionHost->set_window_position(z,x,y,cx,cy,nFlags);
+                     m_pcontainerapp->acmesystem()->m_pplugin->m_puserinteractionHost->set_window_position(z,x,y,cx,cy,nFlags);
 
                   }
 
@@ -607,16 +607,16 @@ namespace ca2plugin_container
       if(m_pcontainerapp != nullptr)
       {
 
-         if(m_pcontainerapp->m_psystem != nullptr)
+         if(m_pcontainerapp->acmesystem() != nullptr)
          {
 
-            if(m_pcontainerapp->m_psystem->m_pplugin != nullptr)
+            if(m_pcontainerapp->acmesystem()->m_pplugin != nullptr)
             {
 
-               if(m_pcontainerapp->m_psystem->m_pplugin->m_puserinteractionHost != nullptr)
+               if(m_pcontainerapp->acmesystem()->m_pplugin->m_puserinteractionHost != nullptr)
                {
 
-                  m_pcontainerapp->m_psystem->m_pplugin->m_puserinteractionHost->_001Print(pgraphics);
+                  m_pcontainerapp->acmesystem()->m_pplugin->m_puserinteractionHost->_001Print(pgraphics);
 
                   {
 

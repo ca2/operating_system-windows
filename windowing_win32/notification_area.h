@@ -58,7 +58,7 @@ namespace windowing_win32
       notification_area();
       virtual ~notification_area();
 
-      virtual void Initialize(::object * pobject);
+      virtual void Initialize(::particle * pparticle);
 
       void ListTrayIcons(i32 defindex = 0);
       void EditCopy(i32 iItem);

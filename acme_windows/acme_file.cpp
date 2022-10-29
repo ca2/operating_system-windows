@@ -5,6 +5,7 @@
 #include "acme_path.h"
 #include "acme/operating_system.h"
 #include "acme/operating_system/time.h"
+#include "acme/primitive/datetime/earth_time.h"
 #include <stdio.h>
 
 
@@ -53,7 +54,7 @@ namespace acme_windows
    ::earth::time acme_file::modification_time(const char* pathParam)
    {
 
-      auto path = m_psystem->m_pacmepath->defer_process_relative_path(pathParam);
+      auto path = acmepath()->defer_process_relative_path(pathParam);
 
       auto hFile = CreateFileW(wstring(path), GENERIC_READ, FILE_SHARE_READ, NULL,
          OPEN_EXISTING, 0, NULL);
@@ -103,7 +104,7 @@ namespace acme_windows
    void acme_file::set_modification_time(const char* pathParam, const ::earth::time & time)
    {
 
-      auto path = m_psystem->m_pacmepath->defer_process_relative_path(pathParam);
+      auto path = acmepath()->defer_process_relative_path(pathParam);
 
       auto hFile = CreateFileW(wstring(path), GENERIC_WRITE, 0, NULL, OPEN_EXISTING, 0, NULL);
 

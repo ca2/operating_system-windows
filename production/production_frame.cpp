@@ -5,7 +5,7 @@ namespace production
 {
 
 
-   frame::frame(::object * pobject) :
+   frame::frame(::particle * pparticle) :
       ::object(pobject),
       simple_frame_window(pobject)
    {

@@ -136,7 +136,7 @@ void copy(MEM_ICON_ITEM * dst, ICON_ITEM * pitem)
 //      // |                         |               |
 //      // -----------------------   --       --------
 //      //                       |    |       |
-//      if (m_psystem->m_pacmefile->exists(         auto psystem = m_psystem;
+//      if (acmefile()->exists(         auto psystem = acmesystem();
 
          auto pacmedir = psystem->m_pacmedirectory;
 
@@ -182,7 +182,7 @@ void wmain(int argc, wchar_t * wargv[])
 
    {
 
-      if (m_psystem->m_pacmefile->exists(         auto psystem = m_psystem;
+      if (acmefile()->exists(         auto psystem = acmesystem();
 
          auto pacmedir = psystem->m_pacmedirectory;
 
@@ -380,7 +380,7 @@ pacmedir->system() / "config/plugin/appfy_beg_debug_box.txt"))
 
       dprint("a bit of parsing!!");
 
-      if (!m_psystem->m_pacmefile->exists(strSrc))
+      if (!acmefile()->exists(strSrc))
       {
 
          printf("%s", 

@@ -7,7 +7,7 @@ namespace production
       public simple_frame_window
    {
    public:
-	   frame(::object * pobject);
+	   frame(::particle * pparticle);
    public:
 	   virtual ~frame();
    #ifdef DEBUG

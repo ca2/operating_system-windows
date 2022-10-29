@@ -4119,12 +4119,12 @@ void interaction_impl::set_tool_window(bool bSet)
 //void interaction_impl::native_create_host()
 //{
 //
-//   auto pwindowMain = m_psystem->m_paurasystem->m_pwindowMain;
+//   auto pwindowMain = acmesystem()->m_paurasystem->m_pwindowMain;
 //
 //   if (pwindowMain && !pwindowMain->m_puserinteractionimpl)
 //   {
 //
-//      m_pwindow = m_psystem->m_paurasystem->m_pwindowMain;
+//      m_pwindow = acmesystem()->m_paurasystem->m_pwindowMain;
 //
 //      m_pwindow->m_puserinteractionimpl = this;
 //
@@ -4145,10 +4145,10 @@ void interaction_impl::set_tool_window(bool bSet)
 //
 //      //}
 //
-//      if (!m_psystem->m_paurasystem->m_pwindowMain)
+//      if (!acmesystem()->m_paurasystem->m_pwindowMain)
 //      {
 //
-//         m_psystem->m_paurasystem->m_pwindowMain = m_pwindow;
+//         acmesystem()->m_paurasystem->m_pwindowMain = m_pwindow;
 //
 //      }
 //

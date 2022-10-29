@@ -13,7 +13,7 @@ namespace backup
 
 
 
-      backup(::object * pobject);
+      backup(::particle * pparticle);
       virtual ~backup();
 
       virtual void     run() override;

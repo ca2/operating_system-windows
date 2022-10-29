@@ -19,7 +19,7 @@ namespace draw2d_gdi
 
 
 
-      image_impl(::object * pobject);
+      image_impl(::particle * pparticle);
       virtual ~image_impl();
 
 

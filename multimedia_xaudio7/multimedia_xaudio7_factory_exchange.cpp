@@ -9,7 +9,7 @@ namespace multimedia
    {
 
 
-      factory_exchange::factory_exchange(::object * pobject) :
+      factory_exchange::factory_exchange(::particle * pparticle) :
          object(papp)
       {
 
@@ -27,7 +27,7 @@ namespace multimedia
 } // namespace multimedia
 
 
-void ca2_factory(::object * pobject)
+void ca2_factory(::particle * pparticle)
 {
 
    ::multimedia::xaudio7::factory_exchange factoryexchange(papp);

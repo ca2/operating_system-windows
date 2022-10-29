@@ -16,7 +16,7 @@ namespace win32
    }
 
 
-   dialog::dialog(::object * pobject, const widechar * pszResource)
+   dialog::dialog(::particle * pparticle, const widechar * pszResource)
    {
 
       m_bCreated = false;
@@ -34,7 +34,7 @@ namespace win32
 
    }
 
-   void dialog::initialize_dialog(::object * pobject, const widechar * pszResource)
+   void dialog::initialize_dialog(::particle * pparticle, const widechar * pszResource)
    {
 
       auto estatus = ::object::initialize(pobject);

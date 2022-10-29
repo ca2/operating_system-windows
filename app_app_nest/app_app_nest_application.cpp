@@ -14,7 +14,7 @@ namespace ca2plugin_container
       ::aura::application(psystem)
    {
 
-      m_psystem = psystem;
+      acmesystem() = psystem;
 
       m_strChannel = pszChannel;
 

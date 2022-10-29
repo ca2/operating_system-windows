@@ -57,7 +57,7 @@ namespace windowing_win32
       ::user::shell::_get_file_image_ * new_get_file_image() override;
 
 
-      void initialize(::object * pobject) override;
+      void initialize(::particle * pparticle) override;
 
       void init_task() override;
 
@@ -100,9 +100,9 @@ namespace windowing_win32
 
 
 
-      ::user::shell::enum_folder get_folder_type(::object * pobject, const ::wstring & wstrPath) override;
+      ::user::shell::enum_folder get_folder_type(::particle * pparticle, const ::wstring & wstrPath) override;
 
-      ::user::shell::enum_folder get_folder_type(::object * pobject, const ::string & strPath) override;
+      ::user::shell::enum_folder get_folder_type(::particle * pparticle, const ::string & strPath) override;
 
 
 

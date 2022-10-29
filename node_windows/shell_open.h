@@ -22,7 +22,7 @@ namespace windows
       virtual ~shell_open();
 
 
-      virtual void initialize(::object * pobject) override;
+      virtual void initialize(::particle * pparticle) override;
 
       static HDDEDATA CALLBACK DdeCallback(
          u32 uType,

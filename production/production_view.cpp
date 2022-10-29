@@ -7,7 +7,7 @@ namespace production
 {
 
 
-   impact::impact(::object * pobject) :
+   impact::impact(::particle * pparticle) :
       ::object(pobject),
       ::user::interaction(pobject),
       m_pbrushBkActive(e_create),

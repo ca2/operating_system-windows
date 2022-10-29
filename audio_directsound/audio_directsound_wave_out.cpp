@@ -9,7 +9,7 @@ namespace multimedia
    {
 
 
-      out::out(::object * pobject) :
+      out::out(::particle * pparticle) :
          ::object(pobject),
          ::thread(pobject),
          wave_base(pobject),

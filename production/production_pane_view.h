@@ -19,7 +19,7 @@ namespace production
       ::pointer<::user::form_impact>     m_pviewOptions;
 
 
-      pane_impact(::object * pobject);
+      pane_impact(::particle * pparticle);
       virtual ~pane_impact();
 
 

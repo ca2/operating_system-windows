@@ -100,16 +100,16 @@ namespace windowing_win32
    bool windowing::defer_create_system_window()
    {
 
-      if (m_psysteminteraction)
+      if (acmesystem()interaction)
       {
 
          return true;
 
       }
 
-      m_psysteminteraction = create_system_window();
+      acmesystem()interaction = create_system_window();
 
-      if (!m_psysteminteraction)
+      if (!acmesystem()interaction)
       {
 
          return false;
@@ -151,10 +151,10 @@ namespace windowing_win32
    void windowing::defer_term_ui()
    {
 
-      if (m_psysteminteraction)
+      if (acmesystem()interaction)
       {
 
-         m_psysteminteraction->start_destroying_window();
+         acmesystem()interaction->start_destroying_window();
 
       }
 
@@ -167,7 +167,7 @@ namespace windowing_win32
 
       ::windowing::windowing::finalize_windowing();
 
-      m_psysteminteraction.release();
+      acmesystem()interaction.release();
 
    }
 
@@ -175,10 +175,10 @@ namespace windowing_win32
    void windowing::destroy()
    {
 
-      if (m_psysteminteraction)
+      if (acmesystem()interaction)
       {
 
-         m_psysteminteraction->start_destroying_window();
+         acmesystem()interaction->start_destroying_window();
 
       }
 
@@ -550,7 +550,7 @@ namespace windowing_win32
       //      try
       //      {
 
-      //         pinteraction = pimpl->m_psysteminteraction;
+      //         pinteraction = pimpl->acmesystem()interaction;
 
       //      }
       //      catch (...)
@@ -945,7 +945,7 @@ namespace windowing_win32
    void windowing::windowing_post(const ::procedure & procedure)
    {
 
-      m_psystem->m_papexsystem->post_procedure(procedure);
+      acmesystem()->m_papexsystem->post_procedure(procedure);
 
    }
 

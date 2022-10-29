@@ -5,7 +5,7 @@ namespace draw2d_gdi
 {
 
 
-   path::path(::object * pobject):
+   path::path(::particle * pparticle):
       ::draw2d::path(pobject)
    {
 

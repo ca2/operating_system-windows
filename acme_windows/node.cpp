@@ -36,7 +36,7 @@ namespace acme_windows
    }
 
 
-   void node::initialize(::object * pobject)
+   void node::initialize(::particle * pparticle)
    {
 
       ::acme::node::initialize(pobject);
@@ -519,7 +519,7 @@ namespace acme_windows
    //         
    //      //#else
    //      //
-   //      //   strPathDll = m_psystem->m_pacmedirectory->matter() / "time" / process_platform_dir_name() /"stage/_desk_tb.dll";
+   //      //   strPathDll = acmedirectory()->matter() / "time" / process_platform_name() /"stage/_desk_tb.dll";
    //      //
    //      //#endif
    //         
@@ -583,7 +583,7 @@ namespace acme_windows
    //   void node::start()
    //   {
    //
-   //      auto estatus = m_psystem->m_papexsystem->m_papex->thread_initialize(m_psystem->m_papexsystem);
+   //      auto estatus = acmesystem()->m_papexsystem->m_papex->thread_initialize(acmesystem()->m_papexsystem);
    //
    //      if (!estatus)
    //      {
@@ -592,7 +592,7 @@ namespace acme_windows
    //
    //      }
    //
-   //      estatus = m_psystem->on_start();
+   //      estatus = acmesystem()->on_start();
    //
    //      if (!estatus)
    //      {
@@ -601,7 +601,7 @@ namespace acme_windows
    //
    //      }
    //
-   //      estatus = m_psystem->main();
+   //      estatus = acmesystem()->main();
    //
    //      if (!estatus)
    //      {
@@ -610,7 +610,7 @@ namespace acme_windows
    //
    //      }
    //
-   //      estatus = m_psystem->inline_term();
+   //      estatus = acmesystem()->inline_term();
    //
    //      if (!estatus)
    //      {
@@ -710,10 +710,10 @@ namespace acme_windows
    //
    //      string str;
    //
-   //      if (m_psystem->m_pacmefile->exists(m_psystem->m_pacmedirectory->system() / "config\\system\\audio.txt"))
+   //      if (acmefile()->exists(acmedirectory()->system() / "config\\system\\audio.txt"))
    //      {
    //
-   //         str = m_psystem->m_pacmefile->as_string(m_psystem->m_pacmedirectory->system() / "config\\system\\audio.txt");
+   //         str = acmefile()->as_string(acmedirectory()->system() / "config\\system\\audio.txt");
    //
    //      }
    //      else
@@ -721,9 +721,9 @@ namespace acme_windows
    //
    //         ::file::path strPath;
    //
-   //         strPath = m_psystem->m_pacmedirectory->appdata() / "audio.txt";
+   //         strPath = acmedirectory()->appdata() / "audio.txt";
    //
-   //         str = m_psystem->m_pacmefile->as_string(strPath);
+   //         str = acmefile()->as_string(strPath);
    //
    //      }
    //
@@ -748,7 +748,7 @@ namespace acme_windows
 
       if (k._open(HKEY_LOCAL_MACHINE, strKey, true))
       {
-         ::file::path str = m_psystem->m_pacmedirectory->system() / "CrashDumps" / strModuleNameWithTheExeExtension;
+         ::file::path str = acmedirectory()->system() / "CrashDumps" / strModuleNameWithTheExeExtension;
          wstring wstr = str;
          RegSetValueExW(k.m_hkey, L"DumpFolder", 0, REG_EXPAND_SZ, (byte *)wstr.c_str(), ::u32((wcslen(wstr) + 1) * sizeof(wchar_t)));
          ::u32 dw = 10;
@@ -771,7 +771,7 @@ namespace acme_windows
    //      if (g_iMemoryCountersStartable && g_iMemoryCounters < 0)
    //      {
    //
-   //         g_iMemoryCounters = xxxxfile_exists(m_psystem->m_pacmedirectory->config() / "system/memory_counters.txt") ? 1 : 0;
+   //         g_iMemoryCounters = xxxxfile_exists(acmedirectory()->config() / "system/memory_counters.txt") ? 1 : 0;
    //
    //         if (g_iMemoryCounters)
    //         {
@@ -800,13 +800,13 @@ namespace acme_windows
    //
    //#if defined(_UWP)
    //
-   //         string strBasePath = m_psystem->m_pacmedirectory->system() / "memory_counters";
+   //         string strBasePath = acmedirectory()->system() / "memory_counters";
    //
    //#else
    //
    //         ::file::path strModule = module_path_from_pid(getpid());
    //
-   //         string strBasePath = m_psystem->m_pacmedirectory->system() / "memory_counters" / strModule.title() / __string(getpid());
+   //         string strBasePath = acmedirectory()->system() / "memory_counters" / strModule.title() / __string(getpid());
    //
    //#endif
    //
@@ -919,7 +919,7 @@ namespace acme_windows
    //void node::on_start_system()
    //{
 
-   //   auto psystem = m_psystem;
+   //   auto psystem = acmesystem();
 
    //   auto estatus = psystem->post_initial_request();
 
@@ -2204,7 +2204,7 @@ namespace acme_windows
       wstring desc = L"spafile";          // file type description
       wstring content_type = L"application/x-spa";
 
-      wstring app(m_psystem->m_pacmedirectory->stage(strAppIdHandler, process_platform_dir_name(), process_configuration_dir_name()));
+      wstring app(acmedirectory()->stage(strAppIdHandler, process_platform_name(), process_configuration_name()));
 
       wstring icon(app);
 
@@ -2251,20 +2251,16 @@ namespace acme_windows
       RegSetValueExW(hkey, L"", 0, REG_SZ, (byte *)icon.c_str(), ::u32(icon.length() * sizeof(wchar_t)));
       RegCloseKey(hkey);
 
-      wstring wstr(m_psystem->m_pacmedirectory->stage(strAppIdHandler, process_platform_dir_name(), process_configuration_dir_name()) / "spa_register.txt");
+      wstring wstr(acmedirectory()->stage(strAppIdHandler, process_platform_name(), process_configuration_name()) / "spa_register.txt");
 
       int iRetry = 9;
 
-      while (!m_psystem->m_pacmefile->exists(utf8(wstr.c_str())) && iRetry > 0)
+      while (!acmefile()->exists(utf8(wstr.c_str())) && iRetry > 0)
       {
 
-         auto psystem = m_psystem;
+acmedirectory()create(::file_path_folder(utf8(wstr.c_str())).c_str());
 
-         auto pacmedir = psystem->m_pacmedirectory;
-
-         pacmedir->create(::file_path_folder(utf8(wstr.c_str())).c_str());
-
-         m_psystem->m_pacmefile->put_contents(utf8(wstr.c_str()).c_str(), "");
+         acmefile()->put_contents(utf8(wstr.c_str()).c_str(), "");
 
          iRetry--;
 
@@ -2286,9 +2282,9 @@ namespace acme_windows
 
       SHELLEXECUTEINFOW sei = {};
 
-      string str = m_psystem->m_pacmedirectory->app_app_admin(strPlatform, strConfiguration);
+      string str = acmedirectory()->app_app_admin(strPlatform, strConfiguration);
 
-      if (!m_psystem->m_pacmefile->exists(str))
+      if (!acmefile()->exists(str))
       {
 
          throw ::exception(error_failed);
@@ -2478,7 +2474,7 @@ namespace acme_windows
 
       //#else
       //
-      //   strPathDll = ::dir::matter() / "time" / process_platform_dir_name() /"stage/_desk_tb.dll";
+      //   strPathDll = ::dir::matter() / "time" / process_platform_name() /"stage/_desk_tb.dll";
       //
       //#endif
 
@@ -2586,8 +2582,8 @@ namespace acme_windows
    void node::on_start_system()
    {
 
-      //auto estatus = m_psystem->post_initial_request();
-      m_psystem->post_initial_request();
+      //auto estatus = acmesystem()->post_initial_request();
+      acmesystem()->post_initial_request();
 
       //if (!estatus)
       //{

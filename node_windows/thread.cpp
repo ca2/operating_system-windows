@@ -25,7 +25,7 @@
 //{
 //
 
-//thread::thread(::object * pobject):
+//thread::thread(::particle * pparticle):
 //   ::object(pobject),
 //   ::thread_impl(pobject)
 //{

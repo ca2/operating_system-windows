@@ -5,6 +5,6 @@
 
 
 ::mutex & draw2d_gdi_mutex();
-void init_draw2d_gdi_mutex(::object * pobject);
+void init_draw2d_gdi_mutex(::particle * pparticle);
 
 

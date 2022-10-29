@@ -5,7 +5,7 @@ namespace draw2d_gdi
 {
 
 
-   font::font(::object * pobject) :
+   font::font(::particle * pparticle) :
       ::write_text::font(pobject)
    {
 

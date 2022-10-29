@@ -5,7 +5,7 @@ namespace backup
 {
 
 
-   impact::impact(::object * pobject) :
+   impact::impact(::particle * pparticle) :
       ::object(pobject),
       ::production::impact(pobject)
    {

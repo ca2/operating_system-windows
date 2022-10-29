@@ -198,7 +198,7 @@ namespace windowing_win32
    }
 
 
-   HICON load_icon(::object * pobject, string_array & straMatter, string strIcon, int cx, int cy)
+   HICON load_icon(::particle * pparticle, string_array & straMatter, string strIcon, int cx, int cy)
    {
 
       HICON hicon = nullptr;

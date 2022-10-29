@@ -12,7 +12,7 @@ namespace draw2d_gdi
    public:
 
 
-      palette(::object * pobject);
+      palette(::particle * pparticle);
       virtual ~palette();
 
 

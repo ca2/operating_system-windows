@@ -242,7 +242,7 @@ namespace windowing_win32
       MESSAGE_LINK(WM_GETICON, pchannel, this, &window::on_message_get_icon);
 
       //MESSAGE_LINK(e_message_create, pchannel, pimpl, &::user::interaction_impl::_001OnPrioCreate);
-      auto psystem = m_psystem;
+      auto psystem = acmesystem();
 
       //auto pnode = psystem->m_pnode->m_pauranode->m_pWindowingWin32Node;
 
@@ -529,7 +529,7 @@ namespace windowing_win32
          if (pmessage->m_atom == WM_FONTCHANGE)
          {
 
-            auto psystem = m_psystem->m_paurasystem;
+            auto psystem = acmesystem()->m_paurasystem;
 
             psystem->signal(id_operating_system_font_list_change);
 
@@ -549,7 +549,7 @@ namespace windowing_win32
          else if (pmessage->m_atom == WM_SETTINGCHANGE && strLparamString == "ImmersiveColorSet")
          {
 
-            auto pnode = m_psystem->m_pnode;
+            auto pnode = acmesystem()->m_pnode;
 
             pnode->fetch_user_color();
 
@@ -612,10 +612,10 @@ namespace windowing_win32
    //   int iIconCx = 256;
    //   int iIconCy = 256;
 
-   //   //HICON hiconSmall = (HICON) ::LoadIcon((HINSTANCE)m_psystem->m_hinstanceThis, MAKEINTRESOURCE(128));
+   //   //HICON hiconSmall = (HICON) ::LoadIcon((HINSTANCE)acmesystem()->m_hinstanceThis, MAKEINTRESOURCE(128));
 
-   //   HICON hiconSmall =(HICON) ::LoadImage((HINSTANCE)m_psystem->m_hinstanceThis, MAKEINTRESOURCE(128), IMAGE_ICON, 0, 0, LR_DEFAULTCOLOR | LR_DEFAULTSIZE);
-   //   //HICON hicon = (HICON)::LoadImage((HINSTANCE)m_psystem->m_hinstanceThis, MAKEINTRESOURCE(128), IMAGE_ICON, iIconCx, iIconCy, LR_DEFAULTCOLOR);
+   //   HICON hiconSmall =(HICON) ::LoadImage((HINSTANCE)acmesystem()->m_hinstanceThis, MAKEINTRESOURCE(128), IMAGE_ICON, 0, 0, LR_DEFAULTCOLOR | LR_DEFAULTSIZE);
+   //   //HICON hicon = (HICON)::LoadImage((HINSTANCE)acmesystem()->m_hinstanceThis, MAKEINTRESOURCE(128), IMAGE_ICON, iIconCx, iIconCy, LR_DEFAULTCOLOR);
    //   HICON hicon = nullptr;
 
    //   if (!hicon)
@@ -1151,7 +1151,7 @@ namespace windowing_win32
 //      if (status != 0)
 //      {
 //
-//         //m_psystem->m_pacmefile->put_contents("/home/camilo/window.txt", __string((int)w->window()));
+//         //acmefile()->put_contents("/home/camilo/window.txt", __string((int)w->window()));
 //         return false;
 //
 //      }

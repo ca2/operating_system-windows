@@ -43,7 +43,7 @@ namespace acme_windows
       else
       {
 
-         m_psystem->m_pacmedirectory->create(file_path_folder(strPath));
+         acmedirectory()->create(file_path_folder(strPath));
 
          wstring wstr(strPath);
 

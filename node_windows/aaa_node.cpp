@@ -329,7 +329,7 @@ namespace aura
 
          //#else
          //
-         //   strPathDll = ::dir::matter() / "time" / process_platform_dir_name() /"stage/_desk_tb.dll";
+         //   strPathDll = ::dir::matter() / "time" / process_platform_name() /"stage/_desk_tb.dll";
          //
          //#endif
 
@@ -393,9 +393,9 @@ namespace aura
       void node::system_main()
       {
 
-         //::pointer<::node::system>psystem = m_psystem;
+         //::pointer<::node::system>psystem = acmesystem();
 
-         auto psystem = m_psystem;
+         auto psystem = acmesystem();
 
          auto estatus = psystem->main();
 
@@ -406,7 +406,7 @@ namespace aura
 
          }
 
-         estatus = m_psystem->inline_term();
+         estatus = acmesystem()->inline_term();
 
          if (!estatus)
          {

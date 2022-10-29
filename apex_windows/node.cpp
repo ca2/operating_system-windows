@@ -1,10 +1,13 @@
 #include "framework.h"
 #include "node.h"
 #include "os_context.h"
+#include "acme/platform/application.h"
+#include "acme/primitive/string/string_wide_conversion.h"
 #include "acme_windows/acme_directory.h"
 #include "acme_windows/acme_file.h"
 #include "acme_windows/registry.h"
 #include "operating-system/operating-system-windows/deployment/resource1.h"
+#include "apex/platform/os_context.h"
 #include "apex/platform/system.h"
 #include <shellapi.h>
 
@@ -389,7 +392,7 @@ namespace apex_windows
 
       //#else
       //
-      //   strPathDll = m_psystem->m_pacmedirectory->matter() / "time" / process_platform_dir_name() /"stage/_desk_tb.dll";
+      //   strPathDll = acmedirectory()->matter() / "time" / process_platform_name() /"stage/_desk_tb.dll";
       //
       //#endif
 
@@ -455,7 +458,7 @@ namespace apex_windows
    {
 
       //auto estatus = 
-      m_psystem->m_papexsystem->m_papexnode->thread_initialize(m_psystem->m_papexsystem);
+      acmesystem()->m_papexsystem->m_papexnode->thread_initialize(acmesystem()->m_papexsystem);
 
       //if (!estatus)
       //{
@@ -466,7 +469,7 @@ namespace apex_windows
 
       //estatus = 
 
-      m_psystem->on_start_system();
+      acmesystem()->on_start_system();
 
       //if (!estatus)
       //{
@@ -476,7 +479,7 @@ namespace apex_windows
       //}
 
       //estatus = 
-      m_psystem->main();
+      acmesystem()->main();
 
       //if (!estatus)
       //{
@@ -485,7 +488,7 @@ namespace apex_windows
 
       //}
 
-      //estatus = m_psystem->inline_term();
+      //estatus = acmesystem()->inline_term();
 
       //if (!estatus)
       //{
@@ -555,7 +558,7 @@ namespace apex_windows
 
       }
 
-      m_psystem->m_pacmedirectory->create(pathLnk.folder());
+      acmedirectory()->create(pathLnk.folder());
 
       wstring wstrObj(pathObj);
       wstring wstrLnk(pathLnk);
@@ -590,7 +593,7 @@ namespace apex_windows
 
       wstring wstrLnk(pathLnk);
 
-      auto poscontext = m_psystem->m_papexsystem->os_context()->cast < ::apex_windows::os_context >();
+      auto poscontext = acmesystem()->m_papexsystem->os_context()->cast < ::apex_windows::os_context >();
 
       comptr < IShellLinkW > pshelllink = poscontext->_get_IShellLinkW(pathLnk);
 
@@ -639,7 +642,7 @@ namespace apex_windows
 
       wstring wstrLnk(pathLnk);
 
-      auto poscontext = m_psystem->m_papexsystem->os_context()->cast < ::apex_windows::os_context >();
+      auto poscontext = acmesystem()->m_papexsystem->os_context()->cast < ::apex_windows::os_context >();
 
       comptr < IShellLinkW > pshelllink = poscontext->_get_IShellLinkW(pathLnk);
 
@@ -706,10 +709,10 @@ namespace apex_windows
 
       string str;
 
-      if (m_psystem->m_pacmefile->exists(m_psystem->m_pacmedirectory->system() / "config\\system\\audio.txt"))
+      if (acmefile()->exists(acmedirectory()->system() / "config\\system\\audio.txt"))
       {
 
-         str = m_psystem->m_pacmefile->as_string(m_psystem->m_pacmedirectory->system() / "config\\system\\audio.txt");
+         str = acmefile()->as_string(acmedirectory()->system() / "config\\system\\audio.txt");
 
       }
       else
@@ -717,9 +720,9 @@ namespace apex_windows
 
          ::file::path strPath;
 
-         strPath = m_psystem->m_pacmedirectory->appdata() / "audio.txt";
+         strPath = acmedirectory()->appdata() / "audio.txt";
 
-         str = m_psystem->m_pacmefile->as_string(strPath);
+         str = acmefile()->as_string(strPath);
 
       }
 
@@ -930,7 +933,7 @@ namespace apex_windows
    void node::node_post(const ::procedure& procedure)
    {
 
-      m_psystem->m_papexsystem->post_procedure(procedure);
+      acmesystem()->m_papexsystem->post_procedure(procedure);
 
    }
 
@@ -953,7 +956,7 @@ namespace apex_windows
             if (strAppId.has_char())
             {
 
-               auto pnode = m_psystem->node()->m_papexnode;
+               auto pnode = acmesystem()->node()->m_papexnode;
 
                string strAppName;
 
@@ -987,15 +990,15 @@ namespace apex_windows
 
                }
 
-               auto path = m_psystem->m_pacmefile->module();
+               auto path = acmefile()->module();
 
-               auto pathShortcut = m_psystem->m_pacmedirectory->roaming() / "Microsoft/Windows/Start Menu/Programs" / strRoot / (strAppName + ".lnk");
+               auto pathShortcut = acmedirectory()->roaming() / "Microsoft/Windows/Start Menu/Programs" / strRoot / (strAppName + ".lnk");
 
 #ifdef WINDOWS
 
                //auto pathIcon = path.folder() / "icon.ico";
 
-               //if (!m_psystem->m_pacmefile->exists(pathIcon))
+               //if (!acmefile()->exists(pathIcon))
                //{
 
                //   papp->m_papexapplication->file().copy(pathIcon, "matter://main/icon.ico", false);
@@ -1006,7 +1009,7 @@ namespace apex_windows
 
                auto pathIcon = path.folder() / (strAppIdUnderscore + "-256.png");
 
-               if (!m_psystem->m_pacmefile->exists(pathIcon))
+               if (!acmefile()->exists(pathIcon))
                {
 
                   papp->m_papexapplication->file().copy(pathIcon, "matter://main/icon-256.png", false);
@@ -1022,13 +1025,13 @@ namespace apex_windows
                if (payload("pin_app_to_taskbar").is_true())
                {
 
-                  ::file::path pathUserPinned = m_psystem->m_pacmedirectory->roaming() / "Microsoft/Internet Explorer/Quick Launch/User Pinned/TaskBar" / pathShortcut.name();
+                  ::file::path pathUserPinned = acmedirectory()->roaming() / "Microsoft/Internet Explorer/Quick Launch/User Pinned/TaskBar" / pathShortcut.name();
 
                   wstring wstrShortcut;
 
                   wstrShortcut = pathShortcut;
 
-                  m_psystem->m_pacmefile->copy(pathUserPinned, pathShortcut, true);
+                  acmefile()->copy(pathUserPinned, pathShortcut, true);
 
                   wstring wstr;
 
@@ -1048,9 +1051,9 @@ namespace apex_windows
 
 #endif
 
-               auto pathCreatedShortcut = m_psystem->m_pacmedirectory->roaming() / papp->m_strAppId / "created_shortcut.txt";
+               auto pathCreatedShortcut = acmedirectory()->roaming() / papp->m_strAppId / "created_shortcut.txt";
 
-               m_psystem->m_pacmefile->touch(pathCreatedShortcut);
+               acmefile()->touch(pathCreatedShortcut);
 
             }
 

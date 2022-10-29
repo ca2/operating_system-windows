@@ -11,7 +11,7 @@ namespace user_service
    public:
 
 
-      socket_handler(::object * pobject);
+      socket_handler(::particle * pparticle);
 
 
    };

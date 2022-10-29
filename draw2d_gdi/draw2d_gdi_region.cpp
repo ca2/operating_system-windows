@@ -26,7 +26,7 @@ namespace draw2d_gdi
    }
 
 
-   region::region(::object * pobject) :
+   region::region(::particle * pparticle) :
       ::draw2d::region(pobject)
    {
       m_bUpdated = true;

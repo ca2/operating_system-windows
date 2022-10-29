@@ -50,7 +50,7 @@ namespace draw2d_gdi
       address_array < ::draw2d_gdi::object * >           m_ptraObject;
 
 
-      graphics(::object * pobject);
+      graphics(::particle * pparticle);
       virtual ~graphics();
 
 
@@ -124,7 +124,7 @@ namespace draw2d_gdi
       virtual ::draw2d::bitmap* SelectObject(::draw2d::bitmap* pBitmap) override;
       virtual int SelectObject(::draw2d::region* pRgn) override;       // special return for regions
 
-      virtual void on_select_object(::draw2d::object * pobjectParam);
+      virtual void on_select_object(::draw2d::particle * pparticleParam);
 
       bool SelectFont(::write_text::font * pfont) override;
 
@@ -471,7 +471,7 @@ namespace draw2d_gdi
       bool SelectClipPath(int nMode) override;
 
       // Misc Helper Functions
-      static ::draw2d::brush* GetHalftoneBrush(::object * pobject);
+      static ::draw2d::brush* GetHalftoneBrush(::particle * pparticle);
       //void DrawDragRect(const ::rectangle_i32 & rectangle, const ::size_i32 & size,
       //                  const ::rectangle_i32 & rectangleLast, const ::size_i32 & sizeLast, ::draw2d::brush* pBrush = nullptr, ::draw2d::brush* pBrushLast = nullptr) override;
 

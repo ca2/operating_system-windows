@@ -17,7 +17,7 @@ namespace draw2d_gdi
 {
 
 
-   graphics::graphics(::object * pobject) :
+   graphics::graphics(::particle * pparticle) :
       ::object(pobject),
       ::draw2d::graphics(pobject)
    {
@@ -38,7 +38,7 @@ namespace draw2d_gdi
 
          try
          {
-            ::draw2d_gdi::object * pobject = m_ptraObject[i];
+            ::draw2d_gdi::particle * pparticle = m_ptraObject[i];
 
             pobject->m_ptraGraphics.erase(this);
 
@@ -266,12 +266,12 @@ namespace draw2d_gdi
 
    }
 
-   void graphics::on_select_object(::draw2d::object * pobjectParam)
+   void graphics::on_select_object(::draw2d::particle * pparticleParam)
    {
 
       synchronous_lock ml(mutex());
 
-      ::draw2d_gdi::object * pobject = dynamic_cast <::draw2d_gdi::object *> (pobjectParam);
+      ::draw2d_gdi::particle * pparticle = dynamic_cast <::draw2d_gdi::object *> (pobjectParam);
 
       pobject->m_ptraGraphics.add_unique(this);
 
@@ -3432,7 +3432,7 @@ namespace draw2d_gdi
    /////////////////////////////////////////////////////////////////////////////
    // special graphics drawing primitives/helpers
 
-   ::draw2d::brush* graphics::GetHalftoneBrush(::object * pobject)
+   ::draw2d::brush* graphics::GetHalftoneBrush(::particle * pparticle)
    {
       /*      AfxLockGlobals(CRIT_HALFTONEBRUSH);
       if (_afxHalftoneBrush == nullptr)

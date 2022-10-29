@@ -11,7 +11,7 @@ namespace production
    public:
 
 
-      document(::object * pobject);
+      document(::particle * pparticle);
 
       DECLARE_MESSAGE_HANDLER(data_on_after_change);
 

@@ -43,7 +43,7 @@ namespace production
       ::draw2d::brush_pointer          m_pbrushBkInactive;
 
 
-      impact(::object * pobject);
+      impact(::particle * pparticle);
       virtual ~impact();
 #ifdef DEBUG
       void assert_ok() const override;

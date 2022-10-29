@@ -94,13 +94,13 @@ string ca2_command_line(hinstance hinstance)
 //         strLinkTitle.replace("\\", "_");
 //         strLinkTitle.replace("-", "_");
 //
-//         pathLnk =          auto psystem = m_psystem;
+//         pathLnk =          auto psystem = acmesystem();
 
          auto pacmedir = psystem->m_pacmedirectory;
 
 pacmedir->localconfig() / "desk/monitor-0/2desk" / strLinkTitle + ".lnk";
 //
-//                  auto psystem = m_psystem;
+//                  auto psystem = acmesystem();
 
          auto pacmedir = psystem->m_pacmedirectory;
 

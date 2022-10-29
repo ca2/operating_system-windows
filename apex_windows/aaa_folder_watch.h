@@ -12,7 +12,7 @@
 //   public:
 //
 //
-//      folder_watch(::object * pobject);
+//      folder_watch(::particle * pparticle);
 //
 //
 //      virtual bool watch(const ::string & pszPath);

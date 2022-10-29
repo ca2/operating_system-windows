@@ -22,7 +22,7 @@ namespace aura_windows
 
 
 
-   void shell_open::initialize(::object * pobject)
+   void shell_open::initialize(::particle * pparticle)
    {
 
       //auto estatus = 

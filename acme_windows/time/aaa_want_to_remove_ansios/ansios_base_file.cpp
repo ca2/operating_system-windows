@@ -68,7 +68,7 @@ int_bool file_set_length(const char * pszName, size_t iSize)
 
 
 
-int_bool m_psystem->m_pacmefile->exists(const char * path1)
+int_bool acmefile()->exists(const char * path1)
 {
 
    // dedicaverse stat -> Sir And Arthur - Cesar Serenato
@@ -87,12 +87,12 @@ int_bool m_psystem->m_pacmefile->exists(const char * path1)
 
 
 
-int_bool m_psystem->m_pacmefile->put_contents(const char * path, const char * contents, ::count len)
+int_bool acmefile()->put_contents(const char * path, const char * contents, ::count len)
 {
 
    bool bOk = false;
 
-            auto psystem = m_psystem;
+            auto psystem = acmesystem();
 
          auto pacmedir = psystem->m_pacmedirectory;
 
@@ -147,7 +147,7 @@ pacmedir->create(::file_path_folder(path));
 
 
 
-string m_psystem->m_pacmefile->as_string(const char * path)
+string acmefile()->as_string(const char * path)
 {
 
    string str;

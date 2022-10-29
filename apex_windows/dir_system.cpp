@@ -25,7 +25,7 @@ namespace apex_windows
 
 
 
-   void dir_system::initialize(::object * pobject)
+   void dir_system::initialize(::particle * pparticle)
    {
 
       //auto estatus = 
@@ -39,9 +39,9 @@ namespace apex_windows
 
       //}
 
-      m_pathInstall = m_psystem->m_pacmedirectory->install();
+      m_pathInstall = acmedirectory()->install();
 
-      m_psystem->m_pacmedirectory->m_pplatformdir->_shell_get_special_folder_path(
+      acmedirectory()->m_pplatformdir->_shell_get_special_folder_path(
          nullptr,
          m_strCommonAppData,
          CSIDL_COMMON_APPDATA,
@@ -52,20 +52,20 @@ namespace apex_windows
       //CSIDL_PROFILE,
       //false);
 
-      m_pathHome = m_psystem->m_pacmedirectory->m_pplatformdir->_get_known_folder(FOLDERID_Profile);
+      m_pathHome = acmedirectory()->m_pplatformdir->_get_known_folder(FOLDERID_Profile);
 
-      m_pathCa2Config = m_psystem->m_pacmedirectory->ca2roaming();
+      m_pathCa2Config = acmedirectory()->ca2roaming();
 
       m_strCommonAppData /= "ca2";
 
-      m_strAppData = m_psystem->m_pacmedirectory->m_pplatformdir->_get_known_folder(FOLDERID_RoamingAppData);
+      m_strAppData = acmedirectory()->m_pplatformdir->_get_known_folder(FOLDERID_RoamingAppData);
 
-      m_psystem->m_pacmedirectory->m_pplatformdir->_shell_get_special_folder_path(
+      acmedirectory()->m_pplatformdir->_shell_get_special_folder_path(
          nullptr,
          m_strPrograms,
          CSIDL_PROGRAMS,
          false);
-      m_psystem->m_pacmedirectory->m_pplatformdir->_shell_get_special_folder_path(
+      acmedirectory()->m_pplatformdir->_shell_get_special_folder_path(
          nullptr,
          m_strCommonPrograms,
          CSIDL_COMMON_PROGRAMS,
@@ -91,18 +91,18 @@ namespace apex_windows
       if (m_strTimeFolder.is_empty())
       {
 
-         m_strTimeFolder = m_psystem->m_pacmedirectory->appdata() / "time";
+         m_strTimeFolder = acmedirectory()->appdata() / "time";
 
       }
 
       if (m_strNetSeedFolder.is_empty())
       {
 
-         m_strNetSeedFolder = m_psystem->m_pacmedirectory->install() / "net";
+         m_strNetSeedFolder = acmedirectory()->install() / "net";
 
       }
 
-      auto psystem = m_psystem;
+      auto psystem = acmesystem();
 
       auto pacmedir = psystem->m_pacmedirectory;
 
@@ -115,7 +115,7 @@ namespace apex_windows
 
       }
 
-          /*     auto psystem = m_psystem;
+          /*     auto psystem = acmesystem();
 
          auto pacmedir = psystem->m_pacmedirectory;*/
 

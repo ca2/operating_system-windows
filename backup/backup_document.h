@@ -11,7 +11,7 @@ namespace backup
    public:
    
       
-      document(::object * pobject);
+      document(::particle * pparticle);
       virtual ~document();
 
 

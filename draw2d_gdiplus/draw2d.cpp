@@ -30,7 +30,7 @@ namespace draw2d_gdiplus
    }
 
 
-   void draw2d::initialize(::object * pobject)
+   void draw2d::initialize(::particle * pparticle)
    {
 
       //auto estatus = 
@@ -84,7 +84,7 @@ namespace draw2d_gdiplus
 
       pfont->m_pcollection = new Gdiplus::PrivateFontCollection();
 
-      auto pmemory = m_psystem->m_paurasystem->draw2d()->write_text()->get_file_memory(pcontext, path);
+      auto pmemory = acmesystem()->m_paurasystem->draw2d()->write_text()->get_file_memory(pcontext, path);
 
       if (pmemory->has_data())
       {

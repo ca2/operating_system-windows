@@ -94,12 +94,12 @@ void __cdecl _null_se_translator(u32 uiCode, EXCEPTION_POINTERS * ppointers)
 //         strLinkTitle.replace("\\", "_");
 //         strLinkTitle.replace("-", "_");
 //
-//         pathLnk =          auto psystem = m_psystem;
+//         pathLnk =          auto psystem = acmesystem();
 
 
          //pacmedir->localconfig() / "desk/monitor-0/2desk" / strLinkTitle + ".lnk";
 //
-//                  auto psystem = m_psystem;
+//                  auto psystem = acmesystem();
 
 
 //pacmedir->create(pathLnk.folder());

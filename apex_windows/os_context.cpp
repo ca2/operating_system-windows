@@ -1,16 +1,13 @@
 ﻿#include "framework.h"
 #include "os_context.h"
+#include "acme/operating_system/process.h"
 #include "acme_windows/registry.h"
 #include "acme_windows/file_exception.h"
 #include "acme_windows/itemidlist.h"
 #include "acme_windows/acme_directory.h"
 #include "acme_windows/acme_file.h"
-#include <wincred.h>
-#include <wtsapi32.h>
-#include <shobjidl.h>
-#include <ShellApi.h>
-#include <Security.h>
 #include "acme/operating_system/time.h"
+#include "acme/filesystem/file/status.h"
 #include "acme/filesystem/filesystem/acme_directory.h"
 #include "acme/filesystem/filesystem/acme_path.h"
 #include "apex/filesystem/file/set.h"
@@ -18,6 +15,12 @@
 #include "apex/filesystem/filesystem/file_context.h"
 #include "apex/platform/application.h"
 #include "apex/platform/context.h"
+#include "apex/operating_system.h"
+#include <wincred.h>
+#include <wtsapi32.h>
+#include <shobjidl.h>
+#include <ShellApi.h>
+#include <Security.h>
 
 
 ::e_status hresult_to_estatus(HRESULT hresult)
@@ -824,9 +827,9 @@ namespace apex_windows
       //if (strProfile.has_char())
       //{
 
-      //   auto path = m_psystem->m_papexsystem->dir().config() / "config/browser" / strBrowser / (strProfile + ".txt");
+      //   auto path = acmesystem()->m_papexsystem->dir().config() / "config/browser" / strBrowser / (strProfile + ".txt");
 
-      //   strMappedProfile = m_psystem->m_papexsystem->file().as_string(path);
+      //   strMappedProfile = acmesystem()->m_papexsystem->file().as_string(path);
 
       //}
 
@@ -1740,7 +1743,7 @@ retry:
          // This way we will be able to modify the time assuming the
          // caller changed the file from readonly.
 
-         if (!SetFileAttributesW(wstr, (u32)status.m_attribute))
+         if (!::SetFileAttributesW(wstr, (u32)status.m_attribute))
          {
 
             DWORD dwLastError = ::GetLastError();
@@ -1755,7 +1758,7 @@ retry:
       if (status.m_mtime.get_time() != 0)
       {
 
-         //m_psystem->m_pnode->datetime_to_filetime((file_time_t *) &lastWriteTime, status.m_mtime);
+         //acmesystem()->m_pnode->datetime_to_filetime((file_time_t *) &lastWriteTime, status.m_mtime);
 
          datetime_to_filetime((file_time_t *)&lastWriteTime, status.m_mtime);
 
@@ -1768,7 +1771,7 @@ retry:
       if (status.m_atime.get_time() != 0)
       {
 
-         //auto pnode = m_psystem->m_papexsystem->node();
+         //auto pnode = acmesystem()->m_papexsystem->node();
 
          ::time_to_file_time((file_time_t*)&lastAccessTime, &status.m_atime.m_i);
 
@@ -2391,7 +2394,7 @@ retry:
 
          ::file::path pathFolder;
 
-         m_psystem->m_pacmedirectory->m_pplatformdir->_shell_get_special_folder_path(nullptr, pathFolder, CSIDL_WINDOWS, false);
+         acmedirectory()->m_pplatformdir->_shell_get_special_folder_path(nullptr, pathFolder, CSIDL_WINDOWS, false);
 
          pathFolder /= "Web/Wallpaper";
 
@@ -2836,7 +2839,7 @@ repeat:
       auto papp = get_app()->m_papexapplication;
 
       string strTargetProgId;
-      string strModule = solve_relative(m_psystem->m_pacmefile->module());
+      string strModule = solve_relative(acmefile()->module());
 
       strTargetProgId = get_app()->m_papexapplication->m_strAppName;
 
@@ -3099,7 +3102,7 @@ repeat:
 
       string strTargetProgId;
 
-      string strModule = solve_relative(m_psystem->m_pacmefile->module());
+      string strModule = solve_relative(acmefile()->module());
 
       string strApplicationRegistryPath = find_string("ApplicationRegistryPath");
 

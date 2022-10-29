@@ -762,7 +762,7 @@ namespace draw2d_gdiplus
       double centerx = (x2 + x1) / 2.0;
       double centery = (y2 + y1) / 2.0;
 
-      //::pointer<::aura::system>psystem = m_psystem;
+      //::pointer<::aura::system>psystem = acmesystem();
 
       auto pmathematics = ::mathematics::mathematics();
 
@@ -3723,7 +3723,7 @@ namespace draw2d_gdiplus
    /////////////////////////////////////////////////////////////////////////////
    // special graphics drawing primitives/helpers
 
-   ::draw2d::brush * graphics::GetHalftoneBrush(::object * pobject)
+   ::draw2d::brush * graphics::GetHalftoneBrush(::particle * pparticle)
    {
       /*      ::aura::LockGlobals(CRIT_HALFTONEBRUSH);
             if (gen_HalftoneBrush == nullptr)

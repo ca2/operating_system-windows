@@ -3424,7 +3424,7 @@ namespace draw2d_gdiplus
    /////////////////////////////////////////////////////////////////////////////
    // special graphics drawing primitives/helpers
 
-   ::draw2d::brush* graphics::GetHalftoneBrush(::object * pobject)
+   ::draw2d::brush* graphics::GetHalftoneBrush(::particle * pparticle)
    {
       /*      ::aura::LockGlobals(CRIT_HALFTONEBRUSH);
             if (gen_HalftoneBrush == nullptr)

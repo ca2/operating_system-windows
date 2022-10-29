@@ -5,7 +5,7 @@ namespace draw2d_gdi
 {
 
 
-   brush::brush(::object * pobject) :
+   brush::brush(::particle * pparticle) :
       ::draw2d::brush(pobject)
    {
 

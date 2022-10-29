@@ -7,7 +7,7 @@ namespace production
 {
 
 
-   production::production(::object * pobject) :
+   production::production(::particle * pparticle) :
       ::object(pobject),
       thread(pobject)
    {
@@ -141,20 +141,20 @@ namespace production
 
       {
 
-         ::file::path pathMirror =          auto psystem = m_psystem;
+         ::file::path pathMirror =          auto psystem = acmesystem();
 
          auto pacmedir = psystem->m_pacmedirectory;
 
 pacmedir->system() / "config/production/mirror.txt";
 
-         ::file::path pathMirrorStatus =          auto psystem = m_psystem;
+         ::file::path pathMirrorStatus =          auto psystem = acmesystem();
 
          auto pacmedir = psystem->m_pacmedirectory;
 
 pacmedir->system() / "config/production/mirror_status.txt";
 
-         if (!m_psystem->m_pacmefile->exists(pathMirror)
-               || !m_psystem->m_pacmefile->exists(pathMirrorStatus))
+         if (!acmefile()->exists(pathMirror)
+               || !acmefile()->exists(pathMirrorStatus))
          {
 
             os_message_box(nullptr, "both " + pathMirror + " and " + pathMirrorStatus + " files must exist and maybe empty...", "The h***!!", e_message_box_icon_exclamation);
@@ -163,8 +163,8 @@ pacmedir->system() / "config/production/mirror_status.txt";
 
          }
 
-         m_straMirror.add_lines(::m_psystem->m_pacmefile->as_string(pathMirror));
-         m_straMirrorStatus.add_lines(::m_psystem->m_pacmefile->as_string(pathMirrorStatus));
+         m_straMirror.add_lines(::acmefile()->as_string(pathMirror));
+         m_straMirrorStatus.add_lines(::acmefile()->as_string(pathMirrorStatus));
 
          m_straMirror.erase_empty();
          m_straMirrorStatus.erase_empty();
@@ -871,14 +871,14 @@ pacmedir->system() / "config/production/mirror_status.txt";
             if (pathFolder != pathLastFolder)
             {
 
-               if (!         auto psystem = m_psystem;
+               if (!         auto psystem = acmesystem();
 
          auto pacmedir = psystem->m_pacmedirectory;
 
 pacmedir->is(pathTarget.folder()))
                {
 
-                  if (!         auto psystem = m_psystem;
+                  if (!         auto psystem = acmesystem();
 
          auto pacmedir = psystem->m_pacmedirectory;
 

@@ -123,7 +123,7 @@ namespace draw2d_gdiplus
       if (m_path.has_char())
       {
 
-         ::pointer<::draw2d_gdiplus::draw2d>pdraw2d = m_psystem->m_paurasystem->draw2d();
+         ::pointer<::draw2d_gdiplus::draw2d>pdraw2d = acmesystem()->m_paurasystem->draw2d();
 
          auto pprivatefont = pdraw2d->get_file_private_font(pgraphics->m_pcontext, m_path);
 

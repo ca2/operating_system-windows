@@ -121,19 +121,20 @@ void copy(payload & payload, const SYSTEMTIME & time);
 
 
 
-
-inline void copy(payload & payload, const DWORD & dw)
+template < primitive_payload PAYLOAD >
+inline void copy(PAYLOAD * ppayload, const DWORD * pdw)
 {
 
-   payload.operator = ((const ::u32 &)dw);
+   ppayload->operator = ((const ::u32 &)*pdw);
 
 }
 
 
-inline void copy(payload & payload, const long & l)
+template < primitive_payload PAYLOAD >
+inline void copy(PAYLOAD * ppayload, const long * pl)
 {
 
-   payload.operator = ((const::i32 &) l);
+   ppayload->operator = ((const::i32 &) *pl);
 
 }
 
@@ -154,18 +155,20 @@ inline void copy(payload & payload, const long & l)
 //}
 
 
-inline void copy(long & l, const payload & payload)
+template < primitive_payload PAYLOAD >
+inline void copy(long * pl, const PAYLOAD * ppayload)
 {
 
-   l = (long)payload.i64();
+   *pl = (long)ppayload->i64();
 
 }
 
 
-inline void copy(DWORD & dw, const payload & payload)
+template < primitive_payload PAYLOAD >
+inline void copy(DWORD * pdw, const PAYLOAD * ppayload)
 {
 
-   dw = payload.u32();
+   *pdw = ppayload->u32();
 
 }
 

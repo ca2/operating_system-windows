@@ -38,12 +38,12 @@ int_bool read_resource_as_file(const char * pszFile, HINSTANCE hinstance, DWORD 
 
       pResource = (DWORD *) LockResource(hglobalResource);
 
-         auto psystem = m_psystem;
+         auto psystem = acmesystem();
 
          auto pacmedir = psystem->m_pacmedirectory;
 
 
-               auto psystem = m_psystem;
+               auto psystem = acmesystem();
 
          auto pacmedir = psystem->m_pacmedirectory;
 
@@ -71,7 +71,7 @@ pacmedir->create(::file_path_folder(pszFile));
 }
 
 
-int_bool m_psystem->m_pacmefile->exists(const char * path1)
+int_bool acmefile()->exists(const char * path1)
 {
 
    u32 dwFileAttributes = windows_get_file_attributes(path1);
@@ -88,10 +88,10 @@ int_bool m_psystem->m_pacmefile->exists(const char * path1)
 }
 
 
-int_bool m_psystem->m_pacmefile->put_contents(const char * path, const char * contents, memsize len)
+int_bool acmefile()->put_contents(const char * path, const char * contents, memsize len)
 {
 
-            auto psystem = m_psystem;
+            auto psystem = acmesystem();
 
          auto pacmedir = psystem->m_pacmedirectory;
 

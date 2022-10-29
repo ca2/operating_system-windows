@@ -25,7 +25,7 @@ namespace multimedia
          ~audio_mixer() override;
 
 
-         void initialize(::object * pobject) override;
+         void initialize(::particle * pparticle) override;
             
             
          void set_new_device(u32 uiMixerId);

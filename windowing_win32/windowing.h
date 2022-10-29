@@ -30,7 +30,7 @@ namespace windowing_win32
 //#ifdef WINDOWS_DESKTOP
 
       //#pragma message("at macos??")
-      ::pointer<system_interaction>   m_psysteminteraction;
+      ::pointer<system_interaction>   acmesystem()interaction;
 
 //#endif
 
@@ -56,7 +56,7 @@ namespace windowing_win32
       ::pointer<system_interaction>create_system_window();
 
 
-      inline system_interaction * system_window() { return m_psysteminteraction; }
+      inline system_interaction * system_window() { return acmesystem()interaction; }
 
       virtual HICON _load_icon(string_array& straMatter, string strIcon, int cx, int cy);
 
@@ -159,7 +159,7 @@ namespace windowing_win32
       virtual void lock_set_foreground_window(bool bLock) override;
 
       virtual wstring _windows_register_window_class(::u32 nClassStyle, HCURSOR hCursor = 0, HBRUSH hbrBackground = 0, HICON hIcon = 0);
-      //CLASS_DECL_WINDOWING_WIN32 wstring windows_register_window_class(::object * pobject, ::u32 nClassStyle, hcursor hCursor = 0, HBRUSH hbrBackground = 0, hicon hIcon = 0);
+      //CLASS_DECL_WINDOWING_WIN32 wstring windows_register_window_class(::particle * pparticle, ::u32 nClassStyle, hcursor hCursor = 0, HBRUSH hbrBackground = 0, hicon hIcon = 0);
       virtual bool _windows_register_class(WNDCLASSEXW* puserinteractionclass);
       //
       virtual wstring _windows_calc_icon_window_class(::user::interaction* pinteraction, u32 dwDefaultStyle, const ::string & pszMatter) override;

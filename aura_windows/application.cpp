@@ -197,14 +197,14 @@ namespace aura
 
    //   string str;
 
-   //   if (m_psystem->m_pacmefile->exists(         auto psystem = m_psystem;
+   //   if (acmefile()->exists(         auto psystem = acmesystem();
 
          auto pacmedir = psystem->m_pacmedirectory;
 
 pacmedir->system() / "config\\system\\audio.txt"))
    //   {
 
-   //      str = m_psystem->m_pacmefile->as_string(         auto psystem = m_psystem;
+   //      str = acmefile()->as_string(         auto psystem = acmesystem();
 
          auto pacmedir = psystem->m_pacmedirectory;
 
@@ -218,7 +218,7 @@ pacmedir->system() / "config\\system\\audio.txt");
 
    //      strPath = ::dir::appdata() / "audio.txt";
 
-   //      str = m_psystem->m_pacmefile->as_string(strPath);
+   //      str = acmefile()->as_string(strPath);
 
    //   }
 
@@ -253,7 +253,7 @@ pacmedir->system() / "config\\system\\audio.txt");
 
 
 //
-//void __node_init_main_data(::object * pobject, HINSTANCE hInstance, HINSTANCE hPrevInstance, char * pCmdLine, ::display edisplay)
+//void __node_init_main_data(::particle * pparticle, HINSTANCE hInstance, HINSTANCE hPrevInstance, char * pCmdLine, ::display edisplay)
 
 //{
 //

@@ -557,7 +557,7 @@ namespace draw2d_gdiplus
       virtual bool SelectClipPath(i32 nMode) override;
 
       // Misc helper Functions
-      static ::draw2d::brush* GetHalftoneBrush(::object * pobject);
+      static ::draw2d::brush* GetHalftoneBrush(::particle * pparticle);
       //void DrawDragRect(const rectangle_i32 &  prectangle, const ::size_i32 & size,
 
       //                  const rectangle_i32 &  pRectLast, const ::size_i32 & sizeLast,

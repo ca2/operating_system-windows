@@ -6,7 +6,7 @@ namespace backup
 {
 
 
-   pane_impact::pane_impact(::object * pobject) :
+   pane_impact::pane_impact(::particle * pparticle) :
       ::object(pobject),
       ::userex::pane_tab_impact(pobject),
       ::user::tab_impact(pobject),

@@ -9,7 +9,7 @@
 //   {
 //
 //
-//      factory_exchange::factory_exchange(::object * pobject) :
+//      factory_exchange::factory_exchange(::particle * pparticle) :
 //         ::object(pobject)
 //      {
 //
@@ -28,7 +28,7 @@
 //
 
 
-__FACTORY_EXPORT void multimedia_mmsystem_factory(::object * pobject)
+__FACTORY_EXPORT void multimedia_mmsystem_factory(::particle * pparticle)
 {
 
    //::multimedia::mmsystem::factory_exchange factoryexchange(pobject);

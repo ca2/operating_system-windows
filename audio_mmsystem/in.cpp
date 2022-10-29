@@ -133,7 +133,7 @@ namespace audio_mmsystem
 
          m_pwaveformat->m_waveformat = waveformat;
 
-         auto paudio = m_psystem->m_paquasystem->audio()->m_paudio;
+         auto paudio = acmesystem()->m_paquasystem->audio()->m_paudio;
 
          auto audiowave = paudio->audiowave();
 

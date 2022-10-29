@@ -5,7 +5,7 @@ namespace draw2d_gdi
 {
 
 
-   factory_exchange::factory_exchange(::object * pobject) :
+   factory_exchange::factory_exchange(::particle * pparticle) :
       object(pobject)
    {
 
@@ -33,7 +33,7 @@ namespace draw2d_gdi
 } // namespace draw2d_gdi
 
 
-void factory_exchange(::object * pobject)
+void factory_exchange(::particle * pparticle)
 {
 
    draw2d_gdi::factory_exchange factoryexchange(pobject);

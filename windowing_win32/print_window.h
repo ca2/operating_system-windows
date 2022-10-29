@@ -16,7 +16,7 @@ namespace windowing_win32
       HDC m_hdc;
 
 
-      print_window(::object * pobject, HWND hwnd, HDC hdc, ::duration tickTimeout) :
+      print_window(::particle * pparticle, HWND hwnd, HDC hdc, ::duration tickTimeout) :
          ::object(pobject)
       {
 

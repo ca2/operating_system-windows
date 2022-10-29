@@ -20,7 +20,7 @@ namespace production
       ::pointer<::user::single_document_template>m_pdocumenttemplateMain;
 
 
-      application(::object * pobject);
+      application(::particle * pparticle);
       ~application() override;
 
       virtual void construct();

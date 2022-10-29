@@ -209,10 +209,10 @@ namespace apex
 
       string str;
 
-      if (m_psystem->m_pacmefile->exists(::dir::system() / "config\\system\\audio.txt"))
+      if (acmefile()->exists(::dir::system() / "config\\system\\audio.txt"))
       {
 
-         str = m_psystem->m_pacmefile->as_string(::dir::system() / "config\\system\\audio.txt");
+         str = acmefile()->as_string(::dir::system() / "config\\system\\audio.txt");
 
       }
       else
@@ -222,7 +222,7 @@ namespace apex
 
          strPath = ::dir::appdata() / "audio.txt";
 
-         str = m_psystem->m_pacmefile->as_string(strPath);
+         str = acmefile()->as_string(strPath);
 
       }
 
@@ -241,7 +241,7 @@ namespace apex
 
 
 //
-//void __node_init_main_data(::object * pobject, HINSTANCE hInstance, HINSTANCE hPrevInstance, char * pCmdLine, ::display edisplay)
+//void __node_init_main_data(::particle * pparticle, HINSTANCE hInstance, HINSTANCE hPrevInstance, char * pCmdLine, ::display edisplay)
 
 //{
 //

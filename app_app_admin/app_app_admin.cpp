@@ -1,7 +1,7 @@
 #include "aura/app/acid.inl"
 
 
-::aura::application * get_acid_app(::object * pobject)
+::aura::application * get_acid_app(::particle * pparticle)
 {
 
    ::install::application * pinstallapp = new ::install::application();

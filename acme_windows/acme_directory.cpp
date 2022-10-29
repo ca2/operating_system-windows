@@ -150,7 +150,7 @@ namespace acme_windows
 
       ::file::path pathSystemShortName = localconfig() / "system_short_name.txt";
 
-      return m_psystem->m_pacmefile->as_string(pathSystemShortName).trimmed();
+      return acmefile()->as_string(pathSystemShortName).trimmed();
 
    #endif
 
@@ -185,7 +185,7 @@ namespace acme_windows
    ::file::path acme_directory::app_relative()
    {
 
-      ::file::path path = m_psystem->m_pacmefile->module();
+      ::file::path path = acmefile()->module();
 
       path = relative(path);
 
@@ -243,12 +243,12 @@ namespace acme_windows
 
    #elif defined(ANDROID)
 
-         auto psystem = m_psystem;
+         auto psystem = acmesystem();
 
          auto pacmedir = psystem->m_pacmedirectory;
 
 
-      return          auto psystem = m_psystem;
+      return          auto psystem = acmesystem();
 
          auto pacmedir = psystem->m_pacmedirectory;
 
@@ -256,7 +256,7 @@ pacmedir->roaming();
 
    #else
 
-      return m_psystem->m_pacmepath->app_module().folder(4);
+      return acmepath()->app_module().folder(4);
 
    #endif
 
@@ -283,12 +283,12 @@ pacmedir->roaming();
 
    #elif defined(ANDROID)
 
-         auto psystem = m_psystem;
+         auto psystem = acmesystem();
 
          auto pacmedir = psystem->m_pacmedirectory;
 
 
-      return          auto psystem = m_psystem;
+      return          auto psystem = acmesystem();
 
          auto pacmedir = psystem->m_pacmedirectory;
 
@@ -296,7 +296,7 @@ pacmedir->roaming();
 
    #else
 
-      return m_psystem->m_pacmepath->app_module().folder(4);
+      return acmepath()->app_module().folder(4);
 
    #endif
 
@@ -323,13 +323,13 @@ pacmedir->roaming();
    {
 
    #ifdef ANDROID
-            auto psystem = m_psystem;
+            auto psystem = acmesystem();
 
          auto pacmedir = psystem->m_pacmedirectory;
 
 
 
-      return          auto psystem = m_psystem;
+      return          auto psystem = acmesystem();
 
          auto pacmedir = psystem->m_pacmedirectory;
 
@@ -337,11 +337,11 @@ pacmedir->roaming();
 
    #elif defined(__APPLE__)
 
-      return m_psystem->m_pacmefile->module()-3;
+      return acmefile()->module()-3;
 
    #else
 
-      return m_psystem->m_pacmefile->module()-4;
+      return acmefile()->module()-4;
 
    #endif
 
@@ -471,7 +471,7 @@ pacmedir->roaming();
    ::file::path acme_directory::bookmark()
    {
 
-      auto psystem = m_psystem;
+      auto psystem = acmesystem();
 
       auto pacmedir = psystem->m_pacmedirectory;
 
@@ -1219,7 +1219,7 @@ bool windows_file_find_is_dots(const WIN32_FIND_DATAW & data)
 
                FormatMessage(FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_SYSTEM, nullptr, dwError, 0, (char *)&pszError, 8, nullptr);
 
-               //TRACE("         auto psystem = m_psystem;
+               //TRACE("         auto psystem = acmesystem();
 
          auto pacmedir = psystem->m_pacmedirectory;
 
@@ -2109,7 +2109,7 @@ pacmedir->create CreateDirectoryW last error(%d)=%s", dwError, pszError);
 ////
 ////               FormatMessage(FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_SYSTEM, nullptr, dwError, 0, (WCHAR *)&pwszError, 8, nullptr);
 ////
-////               //TRACE("         auto psystem = m_psystem;
+////               //TRACE("         auto psystem = acmesystem();
 ////
 //////         auto pacmedir = psystem->m_pacmedirectory;
 //////

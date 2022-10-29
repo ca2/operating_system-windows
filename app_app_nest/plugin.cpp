@@ -102,7 +102,7 @@ namespace npca2
          if(pnode == nullptr)
             goto install;
          lpnodeInstalled->RemoveChild(pnode);
-         m_psystem->m_pacmefile->put_contents(dir::appdata("spa_install.xml"), node.GetXML(nullptr));
+         acmefile()->put_contents(dir::appdata("spa_install.xml"), node.GetXML(nullptr));
       }
 install:
 
@@ -185,7 +185,7 @@ install:
 /*   UINT plugin::start_bergedge_cube()
    {
    
-      ::cube8::system * papp = m_psystem;
+      ::cube8::system * papp = acmesystem();
       
       if(!papp->initialize_instance())
          return 0;

@@ -192,7 +192,7 @@ namespace acme_windows
    void console::write(const ::string & psz)
    {
 
-      m_psystem->m_pacmefile->write(stdout,psz,strlen(psz),nullptr);
+      acmefile()->write(stdout,psz,strlen(psz),nullptr);
 
    }
 

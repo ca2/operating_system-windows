@@ -36,7 +36,7 @@ bool register_desk_toolbar(::apex::system* psystem)
    //}
 
    //sleep(1_s);
-   //auto psystem = m_psystem->m_paurasystem;
+   //auto psystem = acmesystem()->m_paurasystem;
 
    auto pnode = psystem->node()->m_papexnode;
 
@@ -78,7 +78,7 @@ bool register_desk_toolbar(::apex::system* psystem)
 //
 //   //#else
 //   //
-//   //   strPathDll = ::dir::matter() / "time" / process_platform_dir_name() /"stage/_desk_tb.dll";
+//   //   strPathDll = ::dir::matter() / "time" / process_platform_name() /"stage/_desk_tb.dll";
 //   //
 //   //#endif
 //
@@ -455,7 +455,7 @@ bool position_desk_toolbar2()
 
          }
 
-         //::m_psystem->m_pacmefile->put_contents("C:\\archive\\hell_cached.txt", ::hex::upper_from(m.get_data(), m.get_size()));
+         //::acmefile()->put_contents("C:\\archive\\hell_cached.txt", ::hex::upper_from(m.get_data(), m.get_size()));
 
       }
 
@@ -502,7 +502,7 @@ bool position_desk_toolbar2()
 
          }
 
-         //::m_psystem->m_pacmefile->put_contents("C:\\archive\\hells.txt", ::hex::upper_from(&m[16], 56));
+         //::acmefile()->put_contents("C:\\archive\\hells.txt", ::hex::upper_from(&m[16], 56));
 
       }
 

@@ -10,7 +10,7 @@ namespace backup
       public production::form_callback
    {
    public:
-      pane_impact(::object * pobject);
+      pane_impact(::particle * pparticle);
       virtual ~pane_impact();
 #ifdef DEBUG
       void assert_ok() const override;

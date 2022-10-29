@@ -11,7 +11,7 @@ namespace backup
    public:
 	   
       
-      impact(::object * pobject);
+      impact(::particle * pparticle);
       virtual ~impact();
 
 

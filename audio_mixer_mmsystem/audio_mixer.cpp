@@ -44,7 +44,7 @@ namespace multimedia
       }
 
 
-      void audio_mixer::initialize(::object * pobject)
+      void audio_mixer::initialize(::particle * pparticle)
       {
 
          ::multimedia::audio_mixer::audio_mixer::initialize(pobject);

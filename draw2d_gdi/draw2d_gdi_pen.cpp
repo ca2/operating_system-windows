@@ -5,7 +5,7 @@ namespace draw2d_gdi
 {
 
 
-   pen::pen(::object * pobject) :
+   pen::pen(::particle * pparticle) :
       ::draw2d::pen(pobject)
    {
 

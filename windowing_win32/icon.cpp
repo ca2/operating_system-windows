@@ -587,7 +587,7 @@ namespace windowing_win32
                }
 
 
-               hicon = (HICON) m_psystem->node()->m_pauranode->HICON_from_image(pimageResized);
+               hicon = (HICON) acmesystem()->node()->m_pauranode->HICON_from_image(pimageResized);
 
             }
             else 

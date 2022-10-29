@@ -2,6 +2,7 @@
 #include "file_context.h"
 #include "dir_system.h"
 #include "acme/filesystem/file/memory_file.h"
+#include "acme/filesystem/file/status.h"
 #include "acme/filesystem/filesystem/acme_directory.h"
 #include "apex/operating_system.h"
 #include "acme/operating_system/time.h"
@@ -27,7 +28,7 @@ namespace apex_windows
    }
 
 
-   void file_context::initialize(::object * pobject)
+   void file_context::initialize(::particle * pparticle)
    {
 
       //auto estatus = 
@@ -426,7 +427,7 @@ namespace apex_windows
 
       memsize s = 0;
 
-      const void* pdata = get_resource_pointer((HINSTANCE)m_psystem->m_papexsystem->m_hinstanceThis, 1024, "ZIP", s);
+      const void* pdata = get_resource_pointer((HINSTANCE)acmesystem()->m_papexsystem->m_hinstanceThis, 1024, "ZIP", s);
 
       //m_memoryMainResource.assign(pdata, s);
 
@@ -843,7 +844,7 @@ namespace apex_windows
 
       ::file::path pathNetworkPayload;
 
-      pathNetworkPayload = m_psystem->m_pacmedirectory->user_appdata_local() / "Dropbox/info" NETWORK_PAYLOAD_DEFAULT_EXTENSION;
+      pathNetworkPayload = acmedirectory()->user_appdata_local() / "Dropbox/info" NETWORK_PAYLOAD_DEFAULT_EXTENSION;
 
       return pathNetworkPayload;
 

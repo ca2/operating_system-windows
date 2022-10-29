@@ -142,7 +142,7 @@ bool IsDibSection(HBITMAP bmp)
 //
 //}
 
-::pointer<::image>create_image_from_hbitmap(::object * pobject, HBITMAP hbitmap)
+::pointer<::image>create_image_from_hbitmap(::particle * pparticle, HBITMAP hbitmap)
 {
 
 
@@ -569,7 +569,7 @@ namespace windowing_win32
 
       auto puser = psession->user();
 
-      auto pnode = m_psystem->node();
+      auto pnode = acmesystem()->node();
 
       auto pwindowing = puser->windowing1()->cast < windowing >();
 
@@ -590,7 +590,7 @@ namespace windowing_win32
 
       }
 
-      //auto psystem = m_psystem->m_paurasystem;
+      //auto psystem = acmesystem()->m_paurasystem;
 
 
       comptr < IShellIcon > pshellicon;
@@ -720,7 +720,7 @@ namespace windowing_win32
          //      else
          //      {
 
-         //         auto psystem = m_psystem;
+         //         auto psystem = acmesystem();
 
          //         auto pnode = psystem->node();
 
@@ -784,7 +784,7 @@ namespace windowing_win32
                   else
                   {
 
-                     auto psystem = m_psystem;
+                     auto psystem = acmesystem();
 
                      auto pnode = psystem->node();
 
@@ -951,7 +951,7 @@ namespace windowing_win32
 
             string strIcon;
 
-            strIcon = m_psystem->m_pacmedirectory->config() / "shell/app_theme" / getfileimage.m_imagekey.m_strShellThemePrefix + strExtension + ".ico";
+            strIcon = acmedirectory()->config() / "shell/app_theme" / getfileimage.m_imagekey.m_strShellThemePrefix + strExtension + ".ico";
 
             if (m_pcontext->m_papexcontext->file().exists(strIcon))
             {
@@ -1250,7 +1250,7 @@ namespace windowing_win32
    //}
 
 
-   shell::enum_folder shell::get_folder_type(::object * pobject, const ::string & pcsz)
+   shell::enum_folder shell::get_folder_type(::particle * pparticle, const ::string & pcsz)
    {
 
       return get_folder_type(pobject, utf8_to_unicode(pcsz));
@@ -1258,14 +1258,14 @@ namespace windowing_win32
    }
 
 
-   shell::enum_folder shell::get_folder_type(::object * pobject, const ::wstring & wstrPath)
+   shell::enum_folder shell::get_folder_type(::particle * pparticle, const ::wstring & wstrPath)
    {
 
       string strPath;
 
       unicode_to_utf8(strPath, wstrPath);
 
-      auto psystem = m_psystem;
+      auto psystem = acmesystem();
 
       auto pacmedir = psystem->m_pacmedirectory;
 
@@ -1663,7 +1663,7 @@ namespace windowing_win32
    //}
 
 
-   void shell::initialize(::object * pobject)
+   void shell::initialize(::particle * pparticle)
    {
 
       if (m_bInitialized)
@@ -1941,7 +1941,7 @@ namespace windowing_win32
       if (reserve_image(getfileimage))
       {
 
-         auto psystem = m_psystem->m_paurasystem;
+         auto psystem = acmesystem()->m_paurasystem;
 
          auto pnode = psystem->node()->m_pAuraPlatform;
 

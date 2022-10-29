@@ -22,7 +22,7 @@ namespace music
             ::duration m_tkLastOp;
 
 
-            file(::object * pobject);
+            file(::particle * pparticle);
             virtual ~file();
 
 

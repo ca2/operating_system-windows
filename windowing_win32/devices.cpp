@@ -1,4 +1,4 @@
-// Created by camilo on 2022-02-20 12:22 <3ThomasBorregaardSørensen!!
+// Created by camilo on 2022-02-20 12:22 <3ThomasBorregaardSï¿½rensen!!
 #include "framework.h"
 #include "devices.h"
 #include "master_device_listener.h"
@@ -46,13 +46,13 @@ namespace windowing_win32
    void devices::on_initialize_object()
    {
 
-      auto psession = m_psystem->m_paurasession;
+      auto psession = acmesystem()->m_paurasession;
 
       auto puser = psession->user();
 
       auto pwindowing = (::windowing_win32::windowing*)puser->m_pwindowing->m_pWindowing4;
 
-      auto psysteminteraction = pwindowing->m_psysteminteraction;
+      auto psysteminteraction = pwindowing->acmesystem()interaction;
 
       m_hwnd = (HWND) psysteminteraction->oswindow();
 
@@ -127,13 +127,13 @@ namespace windowing_win32
 
       plistener->m_hdevnotify = hdevnotify;
 
-      auto psession = m_psystem->m_paurasession;
+      auto psession = acmesystem()->m_paurasession;
 
       auto puser = psession->user();
 
       auto pwindowing = (::windowing_win32::windowing*)puser->m_pwindowing->m_pWindowing4;
 
-      auto psysteminteraction = pwindowing->m_psysteminteraction;
+      auto psysteminteraction = pwindowing->acmesystem()interaction;
       
       psysteminteraction->add_message_handler(e_message_device_change, { plistener, &master_device_listener::on_message_device_change });
 

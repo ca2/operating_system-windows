@@ -49,7 +49,7 @@ namespace music
 
             defer_create_mutex();
 
-            auto psystem = m_psystem->m_paquasystem;
+            auto psystem = acmesystem()->m_paquasystem;
 
             auto pmultimedia = psystem->multimedia()->m_pveriwellmultimediaThis;
 

@@ -32,7 +32,7 @@ public:
    bool                       m_bInstallerInstalling;
    HINSTANCE                  m_hinstance;
 
-   removal(::object * pobject);
+   removal(::particle * pparticle);
 
    virtual ~removal();
 
@@ -89,7 +89,7 @@ public:
 //}
 
 
-::aura::application * get_acid_app(::object * pobject)
+::aura::application * get_acid_app(::particle * pparticle)
 {
 
    return new removal(pobject);
@@ -97,7 +97,7 @@ public:
 }
 
 
-removal::removal(::object * pobject) :
+removal::removal(::particle * pparticle) :
    ::object(pobject),
    ::thread(pobject),
    ::aura::application(pobject)
@@ -247,28 +247,28 @@ void     removal::run()
    system("taskkill /F /IM app_app_admin.exe");
    system("taskkill /F /IM app_app_nest.exe");
 
-   if(m_psystem->m_pacmefile->exists("C:\\ca2\\config\\app-removal\\kill_browsers.txt") || m_psystem->m_pacmefile->exists("C:\\ca2\\config\\app-removal\\kill_plugin_container.txt"))
+   if(acmefile()->exists("C:\\ca2\\config\\app-removal\\kill_browsers.txt") || acmefile()->exists("C:\\ca2\\config\\app-removal\\kill_plugin_container.txt"))
    {
 
       system("taskkill /F /IM plugin-container.exe");
 
    }
 
-   if(m_psystem->m_pacmefile->exists("C:\\ca2\\config\\app-removal\\kill_browsers.txt") || m_psystem->m_pacmefile->exists("C:\\ca2\\config\\app-removal\\kill_ie.txt"))
+   if(acmefile()->exists("C:\\ca2\\config\\app-removal\\kill_browsers.txt") || acmefile()->exists("C:\\ca2\\config\\app-removal\\kill_ie.txt"))
    {
 
       system("taskkill /F /IM iexplore.exe");
 
    }
 
-   if(m_psystem->m_pacmefile->exists("C:\\ca2\\config\\app-removal\\kill_browsers.txt") || m_psystem->m_pacmefile->exists("C:\\ca2\\config\\app-removal\\kill_firefox.txt"))
+   if(acmefile()->exists("C:\\ca2\\config\\app-removal\\kill_browsers.txt") || acmefile()->exists("C:\\ca2\\config\\app-removal\\kill_firefox.txt"))
    {
 
       system("taskkill /F /IM firefox.exe");
 
    }
 
-   string strOnlyDrives = m_psystem->m_pacmefile->as_string("C:\\ca2\\config\\app-removal\\only_drives.txt");
+   string strOnlyDrives = acmefile()->as_string("C:\\ca2\\config\\app-removal\\only_drives.txt");
    string_array straDrives;
    if(strOnlyDrives.has_char())
    {

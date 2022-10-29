@@ -845,7 +845,7 @@ namespace windows
    bool callstack::init()
    {
 
-      //if(!::m_psystem->m_pacmefile->exists("C:\\acme\\callstack.txt"))
+      //if(!::acmefile()->exists("C:\\acme\\callstack.txt"))
       //{
       //   return false;
       //}

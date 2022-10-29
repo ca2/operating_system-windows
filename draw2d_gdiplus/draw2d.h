@@ -32,7 +32,7 @@ namespace draw2d_gdiplus
       ~draw2d() override;
 
 
-      void initialize(::object * pobject) override;
+      void initialize(::particle * pparticle) override;
 
       virtual string write_text_get_default_library_name() override;
 

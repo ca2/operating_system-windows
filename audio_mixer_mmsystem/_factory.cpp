@@ -15,7 +15,7 @@
 //   {
 //
 //
-//      factory_exchange::factory_exchange(::object * pobject) :
+//      factory_exchange::factory_exchange(::particle * pparticle) :
 //         ::object(pobject),
 //         ::multimedia::mmsystem::factory_exchange(pobject)
 //      {

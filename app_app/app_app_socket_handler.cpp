@@ -5,7 +5,7 @@ namespace app_app
 {
 
 
-   socket_handler::socket_handler(::object * pobject) :
+   socket_handler::socket_handler(::particle * pparticle) :
       ::object(papp),
       ::sockets::socket_handler(papp)
    {

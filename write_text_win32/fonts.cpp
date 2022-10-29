@@ -20,7 +20,7 @@ namespace write_text_win32
 
    }
 
-   void fonts::initialize(::object * pobject)
+   void fonts::initialize(::particle * pparticle)
    {
 
       //auto estatus = 

@@ -10,7 +10,7 @@ namespace draw2d_gdi
    public:
 
 
-      region(::object * pobject);
+      region(::particle * pparticle);
       virtual ~region();
 
 

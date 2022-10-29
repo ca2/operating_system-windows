@@ -50,9 +50,9 @@ u32 plugin_container_app(const ::string & strChannel)
 
    papp->get_application() = psystem;
 
-   papp->m_psystem = psystem;
+   papp->acmesystem() = psystem;
 
-   papp->m_psystem = psystem;
+   papp->acmesystem() = psystem;
 
    papp->m_hinstance = psystem->m_hinstance;
 
@@ -102,7 +102,7 @@ i32 __win_main(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmdLine, i
    }
 
 
-   //if(m_psystem->m_pacmefile->exists("C:\\ca2\\config\\plugin\\npca2_beg_debug_box.txt"))
+   //if(acmefile()->exists("C:\\ca2\\config\\plugin\\npca2_beg_debug_box.txt"))
    //{
 
    //   debug_box("app_app_nest boxmain NP_Initialize","app_app_nest box",MB_OK);
@@ -111,7 +111,7 @@ i32 __win_main(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmdLine, i
 
    i32 nReturnCode = 0;
 
-   string strChannel(get_command_line_param(string(::GetCommandLineW()), "channel"));
+   string strChannel(get_command_line_parameter(string(::GetCommandLineW()), "channel"));
 
    g_hmutex = ::CreateMutexW(nullptr, false, wstring("Global\\::ca2::fontopus::app_app_nest::" + strChannel));
 
@@ -122,7 +122,7 @@ i32 __win_main(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmdLine, i
 
    }
 
-   if (m_psystem->m_pacmefile->exists("C:\\ca2\\config\\system\\beg_debug_box.txt"))
+   if (acmefile()->exists("C:\\ca2\\config\\system\\beg_debug_box.txt"))
    {
 
       debug_box("app_app_nest", "app_app_nest", MB_OK);
