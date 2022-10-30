@@ -186,9 +186,6 @@
     <ClInclude Include="known_folder_struct.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="mutex.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="nano_timer.h">
       <Filter>Header Files</Filter>
     </ClInclude>

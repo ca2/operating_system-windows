@@ -2523,7 +2523,7 @@ retry:
 
          si.lpVerb = L"open";
 
-         auto pitemidlist = path.m_pmatterOsPath.cast < ::itemidlist >();
+         ::pointer < ::itemidlist > pitemidlist = path.m_pmatterOsPath;
 
          if (wstrTarget.is_empty() && pitemidlist)
          {

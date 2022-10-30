@@ -870,7 +870,6 @@
     <ClInclude Include="handle.h" />
     <ClInclude Include="itemidlist.h" />
     <ClInclude Include="known_folder_struct.h" />
-    <ClInclude Include="mutex.h" />
     <ClInclude Include="nano_timer.h" />
     <ClInclude Include="node.h" />
     <ClInclude Include="path.h" />
