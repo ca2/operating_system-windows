@@ -2613,6 +2613,48 @@ acmedirectory()create(::file_path_folder(utf8(wstr.c_str())).c_str());
    }
 
 
+   bool node::stdin_has_input_events()
+   {
+
+      HANDLE handleStdin = ::GetStdHandle(STD_INPUT_HANDLE);
+
+      DWORD dwNumberOfEvents = 0;
+
+      if (!GetNumberOfConsoleInputEvents(handleStdin, &dwNumberOfEvents))
+      {
+
+         return false;
+
+      }
+
+      return dwNumberOfEvents > 0;
+
+   }
+
+
+   void node::flush_stdin_input_events()
+   {
+
+      HANDLE handleStdin = ::GetStdHandle(STD_INPUT_HANDLE);
+
+      ::FlushConsoleInputBuffer(handleStdin);
+
+   }
+
+
+   void node::flush_stdin()
+   {
+
+      while (stdin_has_input_events())
+      {
+
+         flush_stdin_input_events();
+
+      }
+
+   }
+
+
 } // namespace acme_windows
 
 

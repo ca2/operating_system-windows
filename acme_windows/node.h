@@ -163,6 +163,11 @@ namespace acme_windows
       void open_url(const ::string& strUrl) override;
 
 
+      bool stdin_has_input_events() override;
+      void flush_stdin_input_events() override;
+      void flush_stdin() override;
+
+
    };
 
 
