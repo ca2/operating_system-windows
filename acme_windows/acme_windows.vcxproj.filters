@@ -119,9 +119,6 @@
     <ClCompile Include="aaa_util.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="file_exception.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="deployment.rc">
@@ -162,7 +159,7 @@
     <ClInclude Include="file_change_event.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="file_exception.h">
+    <ClInclude Include="aaa_file_exception.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="file_find.h">

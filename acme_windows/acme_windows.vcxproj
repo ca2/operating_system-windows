@@ -793,7 +793,6 @@
     <ClCompile Include="acme_file.cpp" />
     <ClCompile Include="application.cpp" />
     <ClCompile Include="debug.cpp" />
-    <ClCompile Include="file_exception.cpp" />
     <ClCompile Include="file_find.cpp" />
     <ClCompile Include="itemidlist.cpp" />
     <ClCompile Include="known_folder_struct.cpp" />
@@ -862,7 +861,7 @@
     <ClInclude Include="d2d1_1.h" />
     <ClInclude Include="file.h" />
     <ClInclude Include="file_change_event.h" />
-    <ClInclude Include="file_exception.h" />
+    <ClInclude Include="aaa_file_exception.h" />
     <ClInclude Include="file_find.h" />
     <ClInclude Include="file_memory_map.h" />
     <ClInclude Include="file_memory_map2.h" />

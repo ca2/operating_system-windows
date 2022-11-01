@@ -1,4 +1,5 @@
 #include "framework.h"
+#include "acme/primitive/string/string_wide_conversion.h"
 #include <shellapi.h>
 #include <shlobj.h>
 
