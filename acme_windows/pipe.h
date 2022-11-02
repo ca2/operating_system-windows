@@ -1,9 +1,8 @@
 #pragma once
 
 
-#ifndef WINDOWS_DESKTOP
-#error "This file is designed to be used only as Windows Desktop Source"
-#endif
+#include "acme/operating_system/pipe.h"
+#include "acme/_operating_system.h"
 
 
 namespace acme_windows

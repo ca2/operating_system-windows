@@ -1,4 +1,5 @@
 #include "framework.h"
+#include "acme/primitive/primitive/memory.h"
 #include "registry.h"
 
 
@@ -75,11 +76,11 @@ namespace acme_windows
       else if (dwType == REG_BINARY)
       {
 
-         memory mem;
+         ::memory memory;
 
-         mem.set_size(cbValue);
+         memory.set_size(cbValue);
 
-         auto estatus = _value(mem.get_data(), pcszValueName, dwType, cbValue);
+         auto estatus = _value(memory.get_data(), pcszValueName, dwType, cbValue);
          
          if (!estatus)
          {
@@ -88,7 +89,7 @@ namespace acme_windows
 
          }
 
-         return mem;
+         return memory;
 
       }
 

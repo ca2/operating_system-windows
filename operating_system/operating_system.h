@@ -116,8 +116,11 @@ typedef struct HKEY__ *HKEY;
 #undef minimum
 #undef maximum
 #undef boolean
+
+#undef RGN_ERROR
+#define RGN_ERROR 0
+
 #undef ERROR
-#define ERROR_REGION 0
 #define ERROR(...) TRACE_LOG_ERROR(__VA_ARGS__)
 
 

@@ -80,7 +80,7 @@ namespace acme_windows
       //virtual ::e_status ::windows::last_error_status(DWORD dwLastError);
 
 
-      //virtual ::e_status ExitCode_to_status(DWORD dwExitCode);
+      virtual ::e_status ExitCode_to_status(DWORD dwExitCode);
 
 
       virtual string audio_get_default_library_name() override;

@@ -1,20 +1,13 @@
 #include "framework.h"
-#include "acme/operating_system.h"
-#include <ShellApi.h>
-
-
 #include "process.h"
+#include "acme/exception/exception.h"
+#include "acme/primitive/primitive/payload.h"
 
 
-#undef User
-#undef Node
-
-
+#include <ShellApi.h>
 #include <Wtsapi32.h>
 #include <Userenv.h>
 #include <PSapi.h>
-
-
 
 
 //typedef struct _PROCESS_BASIC_INFORMATION64

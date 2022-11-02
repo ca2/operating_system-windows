@@ -1,5 +1,7 @@
 #include "framework.h"
 #include "serial.h"
+#include "acme/parallelization/mutex.h"
+#include "acme/parallelization/synchronous_lock.h"
 #include "acme/platform/uint64_muldiv.h"
 
 
@@ -579,7 +581,7 @@ namespace acme_windows
    size_t serial::readline(string& buffer, size_t size, string eol)
    {
 
-      ::serial::scoped_read_lock lock(this);
+      ::synchronous_lock readlock(read_synchronization());
 
       size_t eol_len = (size_t)eol.length();
 
@@ -1003,44 +1005,56 @@ namespace acme_windows
       return (MS_RLSD_ON & dwModemStatus) != 0;
    }
 
-   void serial::readLock()
+
+   ::particle * serial::read_synchronization()
    {
-      m_pmutexRead->lock();
+      // m_pmutexRead->lock();
+      // 
+      // 
+      
+      return m_pmutexRead;
+
       //if (WaitForSingleObject(m_hMutexRead, U32_INFINITE_TIMEOUT) != WAIT_OBJECT_0)
       //{
       //   throw ::exception(error_io, "Error claiming read ::mutex.");
       //}
+
    }
 
-   void serial::readUnlock()
+
+   ::particle * serial::write_synchronization()
    {
-      m_pmutexRead->unlock();
+
+      //m_pmutexRead->unlock();
+
+      return m_pmutexWrite;
+
     /*  if (!ReleaseMutex(m_hMutexRead))
       {
          throw ::exception(error_io, "Error releasing read ::mutex.");
       }*/
    }
 
-   void serial::writeLock()
-   {
-      //if (WaitForSingleObject(m_hMutexWrite, U32_INFINITE_TIMEOUT) != WAIT_OBJECT_0)
-      //{
-        // throw ::exception(error_io, "Error claiming write ::mutex.");
-      //}
+   //void serial::writeLock()
+   //{
+   //   //if (WaitForSingleObject(m_hMutexWrite, U32_INFINITE_TIMEOUT) != WAIT_OBJECT_0)
+   //   //{
+   //     // throw ::exception(error_io, "Error claiming write ::mutex.");
+   //   //}
 
-      m_mutexWrite->lock();
-   }
+   //   m_mutexWrite->lock();
+   //}
 
-   void serial::writeUnlock()
-   {
-      //if (!ReleaseMutex(m_hMutexWrite))
-      //{
-        // throw ::exception(error_io, "Error releasing write ::mutex.");
-      //}
+   //void serial::writeUnlock()
+   //{
+   //   //if (!ReleaseMutex(m_hMutexWrite))
+   //   //{
+   //     // throw ::exception(error_io, "Error releasing write ::mutex.");
+   //   //}
 
-      m_pmutexWrite->unlock();
+   //   m_pmutexWrite->unlock();
 
-   }
+   //}
 
 
 } // namespace acme_windows

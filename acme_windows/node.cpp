@@ -1,15 +1,29 @@
 ﻿#include "framework.h"
 #include "node.h"
-#include "acme/parallelization/install_mutex.h"
 #include "acme_directory.h"
 #include "acme_file.h"
 #include "registry.h"
 #include "process.h"
+#include "acme/parallelization/synchronous_lock.h"
+#include "acme/parallelization/install_mutex.h"
+#include "acme/primitive/primitive/memory.h"
+
+
 #include <shellapi.h>
 #include <TlHelp32.h>
 
 
 CLASS_DECL_ACME_WINDOWS void call_async(const char * pszPath, const char * pszParam, const char * pszDir, ::e_display edisplay, bool bPrivileged, unsigned int * puiPid);
+
+
+namespace windows
+{
+
+
+   CLASS_DECL_ACME_WINDOWS string langid_to_iso(LANGID langid);
+
+
+} // namespace windows
 
 
 namespace acme_windows
@@ -39,7 +53,7 @@ namespace acme_windows
    void node::initialize(::particle * pparticle)
    {
 
-      ::acme::node::initialize(pobject);
+      ::acme::node::initialize(pparticle);
 
       //if (!estatus)
       //{
@@ -867,25 +881,25 @@ namespace acme_windows
    //}
 
 
-   ::e_status node::::windows::last_error_status(DWORD dwLastError)
-   {
+   //::e_status node::::windows::last_error_status(DWORD dwLastError)
+   //{
 
-      if (dwLastError == 0)
-      {
+   //   if (dwLastError == 0)
+   //   {
 
-         return ::success;
+   //      return ::success;
 
-         //return;
+   //      //return;
 
-      }
-      else
-      {
+   //   }
+   //   else
+   //   {
 
-         return error_failed;
+   //      return error_failed;
 
-      }
+   //   }
 
-   }
+   //}
 
 
    ::e_status node::ExitCode_to_status(DWORD dwExitCode)
@@ -1090,9 +1104,9 @@ namespace acme_windows
 
       }
 
-      ::mutex veri_global_ca2(this, NULL, "Global\\the_veri_global_ca2");
+      auto pmutex = create_global_named_mutex(this, NULL, "the_veri_global_ca2");
 
-      synchronous_lock lock_the_veri_global_ca2(&veri_global_ca2);
+      synchronous_lock lock_the_veri_global_ca2(pmutex);
 
       HANDLE process_snap = CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS, 0);
 
@@ -1109,20 +1123,20 @@ namespace acme_windows
 
          strPath = module_path_from_pid(entry.th32ProcessID);
 
-         //::output_debug_string(strPath + "\n");
-
-
          if (bModuleNameIsPropertyFormatted)
          {
+
             if (entry.th32ProcessID != 0 && strPath.compare_ci(pathModule) == 0)
             {
 
                iaPid.add((::i64)entry.th32ProcessID);
 
             }
+
          }
          else
          {
+
             if (entry.th32ProcessID != 0 && ::file::path(strPath) == pathModule)
             {
 
@@ -1279,13 +1293,13 @@ namespace acme_windows
 
       const i32 iImageSize = MAX_PATH * 8;
 
-      memory mem;
+      ::memory memory;
 
-      mem.set_size(iImageSize);
+      memory.set_size(iImageSize);
 
-      GetModuleFileNameExW(hProcess, nullptr, (WCHAR *)mem.get_data(), (DWORD)(mem.get_size() / sizeof(WCHAR)));
+      GetModuleFileNameExW(hProcess, nullptr, (WCHAR *)memory.get_data(), (DWORD)(memory.get_size() / sizeof(WCHAR)));
 
-      strImage = (const wchar_t *)mem.get_data();
+      strImage = (const wchar_t *)memory.get_data();
 
       wstring wstrLibrary(pszLibrary);
 
@@ -1299,10 +1313,10 @@ namespace acme_windows
 
             // Get the full path to the module's file.
 
-            if (GetModuleFileNameExW(hProcess, hmods[i], (WCHAR *)mem.get_data(), (DWORD)(mem.get_size() / sizeof(WCHAR))))
+            if (GetModuleFileNameExW(hProcess, hmods[i], (WCHAR *)memory.get_data(), (DWORD)(memory.get_size() / sizeof(WCHAR))))
             {
 
-               if (!wide_compare_case_insensitive((const wchar_t *)mem.get_data(), wstrLibrary))
+               if (!wide_compare_case_insensitive((const wchar_t *)memory.get_data(), wstrLibrary))
                {
 
                   bFound = true;
@@ -1317,7 +1331,7 @@ namespace acme_windows
 
       }
 
-      CloseHandle(hProcess);
+      ::CloseHandle(hProcess);
 
       return bFound;
 
