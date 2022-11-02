@@ -844,7 +844,7 @@ namespace acme_windows
 
    //      DWORD dwLastError = ::GetLastError();
 
-   //      auto estatus = last_error_to_status(dwLastError);
+   //      auto estatus = ::windows::last_error_status(dwLastError);
 
    //      throw ::exception(estatus, "::windows::node::datetime_to_filetime (1)");
 
@@ -856,7 +856,7 @@ namespace acme_windows
 
    //      DWORD dwLastError = ::GetLastError();
 
-   //      auto estatus = last_error_to_status(dwLastError);
+   //      auto estatus = ::windows::last_error_status(dwLastError);
 
    //      throw ::exception(estatus, "::windows::node::datetime_to_filetime (2)");
 
@@ -867,7 +867,7 @@ namespace acme_windows
    //}
 
 
-   ::e_status node::last_error_to_status(DWORD dwLastError)
+   ::e_status node::::windows::last_error_status(DWORD dwLastError)
    {
 
       if (dwLastError == 0)
@@ -1076,12 +1076,12 @@ namespace acme_windows
    }
 
 
-   id_array node::module_path_get_pid(const ::string & pszModulePath, bool bModuleNameIsPropertyFormatted)
+   atom_array node::module_path_get_pid(const ::string & pszModulePath, bool bModuleNameIsPropertyFormatted)
    {
 
       ::file::path pathModule(pszModulePath);
 
-      id_array iaPid;
+      atom_array iaPid;
 
       if (pathModule.is_empty())
       {
@@ -1828,7 +1828,7 @@ namespace acme_windows
 
          auto lastError = ::GetLastError();
 
-         auto estatus = last_error_to_status(lastError);
+         auto estatus = ::windows::last_error_status(lastError);
 
          throw ::exception(estatus, "::windows::node::create_process (1)");
 
@@ -1930,7 +1930,7 @@ namespace acme_windows
 
          auto lastError = ::GetLastError();
 
-         auto estatus = last_error_to_status(lastError);
+         auto estatus = ::windows::last_error_status(lastError);
 
          throw ::exception(estatus, "::windows::node::run_silent (1)");
 
@@ -2015,7 +2015,7 @@ namespace acme_windows
 
          TRACELASTERROR();
 
-         auto estatus = last_error_to_status(dwLastError);
+         auto estatus = ::windows::last_error_status(dwLastError);
 
          throw ::exception(estatus, "::windows::node::reboot (1)");
 
@@ -2030,7 +2030,7 @@ namespace acme_windows
 
          TRACELASTERROR();
 
-         auto estatus = last_error_to_status(dwLastError);
+         auto estatus = ::windows::last_error_status(dwLastError);
 
          throw ::exception(estatus, "::windows::node::reboot (2)");
 
@@ -2047,7 +2047,7 @@ namespace acme_windows
 
          TRACELASTERROR();
 
-         auto estatus = last_error_to_status(dwLastError);
+         auto estatus = ::windows::last_error_status(dwLastError);
 
          throw ::exception(estatus, "::windows::node::reboot (3)");
 
@@ -2091,7 +2091,7 @@ namespace acme_windows
 
          TRACELASTERROR();
 
-         auto estatus = last_error_to_status(dwLastError);
+         auto estatus = ::windows::last_error_status(dwLastError);
 
          throw ::exception(estatus, "::windows::node::reboot (4)");
 
@@ -2321,7 +2321,7 @@ acmedirectory()create(::file_path_folder(utf8(wstr.c_str())).c_str());
 
       if (i < 32)
       {
-         auto estatus = last_error_to_status(i);
+         auto estatus = ::windows::last_error_status(i);
          //switch (i)
          //{
          //case 0:
@@ -2613,6 +2613,15 @@ acmedirectory()create(::file_path_folder(utf8(wstr.c_str())).c_str());
    }
 
 
+   ::i64 node::get_current_process_id()
+   {
+
+      return ::GetCurrentProcessId();
+
+   }
+
+
+
    bool node::stdin_has_input_events()
    {
 
@@ -2653,6 +2662,87 @@ acmedirectory()create(::file_path_folder(utf8(wstr.c_str())).c_str());
       }
 
    }
+
+
+   void node::defer_initialize_callstack()
+   {
+
+      critical_section_lock synchronouslock(sym_dbg_help_critical_section());
+
+      auto process = GetCurrentProcess();
+
+      if (!g_bInitializeCallstack)
+      {
+
+         g_bInitializeCallstack = true;
+
+         SymSetOptions(SymGetOptions() | SYMOPT_LOAD_LINES);
+
+         SymInitialize(process, NULL, TRUE);
+
+      }
+      else
+      {
+
+         SymRefreshModuleList(process);
+
+      }
+
+   }
+
+
+   string node::get_callstack(const char * pszFormat, i32 iSkip, void * caller_address, int iCount)
+   {
+
+      critical_section_lock synchronouslock(sym_dbg_help_critical_section());
+
+      string strCallstack;
+
+      const size_t iMaximumFramesToCapture = 62; // does not support more then 62 frames of stackbacktrace
+
+      void * stack[iMaximumFramesToCapture];
+
+      defer_initialize_callstack();
+
+      auto frames = CaptureStackBackTrace(0, iMaximumFramesToCapture, stack, NULL);
+
+      int iMaximumNameLength = 1024;
+
+      memory memory(sizeof(SYMBOL_INFO) + iMaximumNameLength * sizeof(char));
+
+      SYMBOL_INFO * psymbolinfo = (SYMBOL_INFO *)memory.get_data();
+
+      psymbolinfo->MaxNameLen = iMaximumNameLength;
+
+      psymbolinfo->SizeOfStruct = sizeof(SYMBOL_INFO);
+
+      auto process = GetCurrentProcess();
+
+      for (auto i = 0; i < frames; ++i)
+      {
+
+         SymFromAddr(process, (DWORD64)(stack[i]), 0, psymbolinfo);
+
+         string strLine;
+
+         strLine.format("%02d : %" PRIdPTR " : %s\n", frames - i - 1, psymbolinfo->Address, psymbolinfo->Name);
+
+         strCallstack += strLine;
+
+      }
+
+      return ::move(strCallstack);
+
+   }
+
+
+   ::string node::get_command_line()
+   {
+
+      return ::GetCommandLineW();
+
+   }
+
 
 
 } // namespace acme_windows

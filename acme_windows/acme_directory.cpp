@@ -2,7 +2,8 @@
 #include "framework.h"
 #include "acme_directory.h"
 #include "acme_file.h"
-#include <shlobj.h>
+#include <Shlobj.h>
+
 
 namespace acme_windows
 {
@@ -2164,7 +2165,7 @@ pacmedir->create CreateDirectoryW last error(%d)=%s", dwError, pszError);
 
          DWORD dwLastError = ::GetLastError();
 
-         auto estatus = last_error_to_status(dwLastError);
+         auto estatus = ::windows::last_error_status(dwLastError);
 
          throw ::exception(estatus, "windows::acme_directory::change_current");
 
@@ -2173,6 +2174,62 @@ pacmedir->create CreateDirectoryW last error(%d)=%s", dwError, pszError);
       //return ::success;
 
    }
+
+
+
+
+   ::file::path acme_directory::program_files_x86()
+   {
+
+      wstring wstrModuleFolder(e_get_buffer, sizeof(unichar) * 8);
+
+      wstring wstrModuleFilePath(e_get_buffer, sizeof(unichar) * 8);
+
+      wcscpy(wstrModuleFilePath, _wgetenv(L"PROGRAMFILES(X86)"));
+
+      if (wcslen(wstrModuleFilePath) == 0)
+      {
+
+         SHGetSpecialFolderPathW(nullptr, wstrModuleFilePath, CSIDL_PROGRAM_FILES, false);
+
+      }
+
+      wstrModuleFilePath.trim_right(L"\\/");
+
+      wcscpy(wstrModuleFolder, wstrModuleFilePath);
+
+      return string(wstrModuleFolder);
+
+   }
+
+
+   ::file::path acme_directory::program_files()
+   {
+
+      wstring wstrModuleFolder(e_get_buffer, sizeof(unichar) * 8);
+
+      wstring wstrModuleFilePath(e_get_buffer, sizeof(unichar) * 8);
+
+      wcscpy(wstrModuleFilePath, _wgetenv(L"PROGRAMW6432"));
+
+      if (wcslen(wstrModuleFilePath) == 0)
+      {
+
+         SHGetSpecialFolderPathW(nullptr, wstrModuleFilePath, CSIDL_PROGRAM_FILES, false);
+
+      }
+
+      wstrModuleFilePath.trim_right(L"\\/");
+
+      wstrModuleFolder = wstrModuleFilePath;
+
+      return string(wstrModuleFolder);
+
+
+
+   }
+
+
 
 
 } // namespace acme_windows

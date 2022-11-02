@@ -228,7 +228,7 @@ namespace aura_windows
       if (i < 32)
       {
 
-         auto estatus = last_error_to_status(i);
+         auto estatus = ::windows::last_error_status(i);
 
          //switch (i)
          //{

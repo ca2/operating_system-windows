@@ -32,6 +32,11 @@ namespace acme_windows
       void _erase(const char * path) override;
 
 
+      string get_temporary_file_name(const char * lpszName, const char * pszExtension) override;
+      
+      void write_memory_to_file(FILE * file, const void * pdata, memsize nCount, memsize * puiWritten) override;
+
+   
    };
 
 

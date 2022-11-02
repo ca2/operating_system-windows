@@ -4,6 +4,9 @@
 #ifdef IMPLEMENT_VISTA_TOOLS
 
 
+#include "acme/_operating_system.h"
+
+
 namespace VistaTools
 {
 

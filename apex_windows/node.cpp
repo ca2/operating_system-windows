@@ -328,7 +328,7 @@ namespace apex_windows
       //if (i < 32)
       //{
 
-      auto estatus = last_error_to_status(i);
+      auto estatus = ::windows::last_error_status(i);
 
       //   switch (i)
       //   {
@@ -921,7 +921,7 @@ namespace apex_windows
 
          auto lastError = ::GetLastError();
 
-         auto estatus = last_error_to_status(lastError);
+         auto estatus = ::windows::last_error_status(lastError);
 
          throw ::exception(estatus);
 

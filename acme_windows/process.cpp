@@ -315,7 +315,7 @@ void call_async(const char * pszPath, const char * pszParam, const char * pszDir
 
       DWORD dwError = ::GetLastError();
 
-      auto estatus = last_error_to_status(dwError);
+      auto estatus = ::windows::last_error_status(dwError);
 
       throw ::exception(estatus);
 
@@ -360,7 +360,7 @@ void call_sync(const char * pszPath, const char * pszParam, const char * pszDir,
 
       auto lastError = ::GetLastError();
 
-      auto estatus = last_error_to_status(lastError);
+      auto estatus = ::windows::last_error_status(lastError);
 
       throw ::exception(estatus);
 

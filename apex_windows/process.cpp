@@ -2,6 +2,7 @@
 #include "process.h"
 #include "acme_windows/pipe.h"
 #include "acme_windows/uac_tools.h"
+#include "acme/_operating_system.h"
 
 
 namespace apex_windows

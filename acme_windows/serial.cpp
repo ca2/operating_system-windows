@@ -1,11 +1,17 @@
 #include "framework.h"
-//#include "acme/operating_system.h"
-#include "acme/platform/serial.h"
-//#include "acme/os/windows_common/file.h"
 #include "serial.h"
 #include "acme/platform/uint64_muldiv.h"
 
-CLASS_DECL_ACME bool windows_get_alternate_path(wstring& wstr);
+
+namespace windows
+{
+
+   
+   CLASS_DECL_ACME bool get_alternate_path(wstring & wstr);
+
+
+} // namespace windows
+
 
 /* Copyright 2012 William Woodall and John Harrison */
 
@@ -30,7 +36,7 @@ namespace acme_windows
 
       wstring wstr(wstrInput);
 
-      windows_get_alternate_path(wstr);
+      ::windows::get_alternate_path(wstr);
 
       return wstr;
 
@@ -999,7 +1005,7 @@ namespace acme_windows
 
    void serial::readLock()
    {
-      m_mutexRead.lock();
+      m_pmutexRead->lock();
       //if (WaitForSingleObject(m_hMutexRead, U32_INFINITE_TIMEOUT) != WAIT_OBJECT_0)
       //{
       //   throw ::exception(error_io, "Error claiming read ::mutex.");
@@ -1008,7 +1014,7 @@ namespace acme_windows
 
    void serial::readUnlock()
    {
-      m_mutexRead.unlock();
+      m_pmutexRead->unlock();
     /*  if (!ReleaseMutex(m_hMutexRead))
       {
          throw ::exception(error_io, "Error releasing read ::mutex.");
@@ -1022,7 +1028,7 @@ namespace acme_windows
         // throw ::exception(error_io, "Error claiming write ::mutex.");
       //}
 
-      m_mutexWrite.lock();
+      m_mutexWrite->lock();
    }
 
    void serial::writeUnlock()
@@ -1032,7 +1038,7 @@ namespace acme_windows
         // throw ::exception(error_io, "Error releasing write ::mutex.");
       //}
 
-      m_mutexWrite.unlock();
+      m_pmutexWrite->unlock();
 
    }
 

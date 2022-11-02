@@ -118,7 +118,7 @@ namespace windowing_win32
          
          ERROR("RegisterDeviceNotification");
          
-         throw exception(last_error_to_status(lastError));
+         throw exception(::windows::last_error_status(lastError));
 
       }
 

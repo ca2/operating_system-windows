@@ -788,7 +788,6 @@
     <Lib />
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="aaa_util.cpp" />
     <ClCompile Include="acme_directory.cpp" />
     <ClCompile Include="acme_file.cpp" />
     <ClCompile Include="application.cpp" />
@@ -798,7 +797,6 @@
     <ClCompile Include="known_folder_struct.cpp" />
     <ClCompile Include="language.cpp" />
     <ClCompile Include="list_serial_ports.cpp" />
-    <ClCompile Include="main.cpp" />
     <ClCompile Include="message_loop.cpp" />
     <ClCompile Include="node.cpp" />
     <ClCompile Include="acme_path.cpp" />
@@ -824,7 +822,6 @@
     <ClCompile Include="strdup_array.cpp" />
     <ClCompile Include="trace.cpp" />
     <ClCompile Include="uac_tools.cpp" />
-    <ClCompile Include="user.cpp" />
     <ClCompile Include="windows_desktop.cpp" />
     <ClCompile Include="_.cpp" />
     <ClCompile Include="_factory.cpp" />
@@ -883,7 +880,6 @@
     <ClInclude Include="simple_hold_handle.h" />
     <ClInclude Include="sync_options.h" />
     <ClInclude Include="uac_tools.h" />
-    <ClInclude Include="user.h" />
     <ClInclude Include="utils.h" />
     <ClInclude Include="_.h" />
     <ClInclude Include="_library.h" />

@@ -3,6 +3,7 @@
 
 
 #include "acme_windows_common/acme_directory.h"
+#include "acme/_operating_system.h"
 
 
 namespace acme_windows
@@ -66,7 +67,7 @@ namespace acme_windows
 
       void set_path_install_folder(const ::string & pszPath) override;
 
-      bool         _shell_get_special_folder_path(HWND hwnd, ::file::path& str, i32 csidl, bool fCreate);
+      bool _shell_get_special_folder_path(HWND hwnd, ::file::path& str, i32 csidl, bool fCreate);
       ::file::path _shell_get_special_folder_path(i32 csidl, bool fCreate = true, ::windowing::window* pwindow = nullptr);
       ::file::path _get_known_folder(REFKNOWNFOLDERID kfid);
 

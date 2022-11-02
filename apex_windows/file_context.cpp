@@ -343,7 +343,7 @@ namespace apex_windows
 
          }
 
-         auto estatus = last_error_to_status(dwLastError);
+         auto estatus = ::windows::last_error_status(dwLastError);
 
          auto errorcode = __last_error(dwLastError);
 
@@ -769,7 +769,7 @@ namespace apex_windows
          if (hFile == INVALID_HANDLE_VALUE)
          {
 
-            auto estatus = ::last_error_to_status(::GetLastError());
+            auto estatus = ::::windows::last_error_status(::GetLastError());
 
             throw ::exception(estatus);
 
@@ -780,7 +780,7 @@ namespace apex_windows
          if (!SetFileTime((HANDLE)hFile, pCreationTime, pLastAccessTime, pLastWriteTime))
          {
 
-            auto estatus = ::last_error_to_status(::GetLastError());
+            auto estatus = ::::windows::last_error_status(::GetLastError());
 
             throw ::exception(estatus);
 
@@ -789,7 +789,7 @@ namespace apex_windows
          if (!::CloseHandle(hFile))
          {
 
-            auto estatus = ::last_error_to_status(::GetLastError());
+            auto estatus = ::::windows::last_error_status(::GetLastError());
 
             throw ::exception(estatus);
 
@@ -803,7 +803,7 @@ namespace apex_windows
          if (!SetFileAttributesW((LPWSTR)(const widechar *)pszFileName, (::u32)status.m_attribute))
          {
 
-            auto estatus = ::last_error_to_status(::GetLastError());
+            auto estatus = ::::windows::last_error_status(::GetLastError());
 
             throw ::exception(estatus);
 

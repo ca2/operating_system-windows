@@ -94,13 +94,11 @@ v.1.0 (2006-Dec-16, by Andrei Belogortseff)
 
 The first release.
 */
-
 #include "framework.h"
-//#include "acme/operating_system.h"
+#include "acme/primitive/string/string.h"
 #include "uac_tools.h"
 #include <VersionHelpers.h>
 #include <ShellApi.h>
-
 
 
 #ifdef IMPLEMENT_VISTA_TOOLS

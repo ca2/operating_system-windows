@@ -345,7 +345,7 @@ namespace acme_windows
       if (lstatus != ERROR_SUCCESS)
       {
 
-         auto estatus = last_error_to_status(lstatus);
+         auto estatus = ::windows::last_error_status(lstatus);
 
          throw ::exception(estatus);
 

@@ -1,6 +1,10 @@
 #pragma once
 
 
+#include "acme/primitive/primitive/memory_base.h"
+#include "acme/_operating_system.h"
+
+
 class CLASS_DECL_ACME_WINDOWS shared_memory :
    public memory_base
 {

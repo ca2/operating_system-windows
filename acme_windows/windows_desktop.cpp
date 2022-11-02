@@ -1,5 +1,6 @@
 #include "framework.h"
-//#include "acme/operating_system.h"
+#include "acme/constant/message.h"
+#include "acme/_operating_system.h"
 //#include "WindowsDesktop1.h"
 
 #define MAX_LOADSTRING 100

@@ -2,11 +2,15 @@
 #pragma once
 
 
+#include "acme/primitive/string/string.h"
+#include "acme/_operating_system.h"
+
+
 struct known_folder_struct
 {
 
    string               m_strKnownFolder;
-   KNOWNFOLDERID        m_atomKnownFolder;
+   KNOWNFOLDERID        m_knownfolderid;
 
 };
 

@@ -36,6 +36,10 @@
 #pragma once
 
 
+#include "acme/platform/serial.h"
+#include "acme/_operating_system.h"
+
+
 namespace acme_windows
 {
 
@@ -147,13 +151,18 @@ namespace acme_windows
 
       virtual ::serial::enum_flow_control getFlowcontrol () const override;
 
-      virtual void readLock () override;
+      //virtual void readLock () override;
 
-      virtual void readUnlock () override;
+      //virtual void readUnlock () override;
 
-      virtual void writeLock () override;
+      //virtual void writeLock () override;
 
-      virtual void writeUnlock () override;
+      //virtual void writeUnlock () override;
+
+
+      ::particle * read_synchronization() override;
+      ::particle * write_synchronization() override;
+
 
       virtual size_t readline(string &buffer, size_t size = 65536, string eol = "\n") override;
 
@@ -178,9 +187,9 @@ namespace acme_windows
       ::serial::enum_flow_control     m_eflowcontrol; // Flow Control
 
       // Mutex used to lock the read functions
-      ::mutex              m_mutexRead;
+      ::pointer <::mutex >              m_pmutexRead;
       // Mutex used to lock the write functions
-      ::mutex              m_mutexWrite;
+      ::pointer < ::mutex>              m_pmutexWrite;
       //HANDLE            m_hMutexWrite;
    };
 

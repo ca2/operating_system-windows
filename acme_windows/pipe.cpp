@@ -99,7 +99,7 @@ namespace acme_windows
 
       DWORD dwWritten;
 
-      bSuccess = WriteFile(m_hWrite,(const ::string &)psz,dwLen,&dwWritten,nullptr) != false;
+      bSuccess = WriteFile(m_hWrite, (const ::string &)psz,dwLen,&dwWritten,nullptr) != false;
 
       return bSuccess != false && dwWritten == dwLen;
 

@@ -1,8 +1,6 @@
 #include "framework.h"
 #include "shared_memory.h"
-
-
-#ifdef WINDOWS_DESKTOP
+#include "acme/exception/exception.h"
 
 
 shared_memory::shared_memory(const memory_base & s)
@@ -359,9 +357,6 @@ void shared_memory::to_string(string & str)
    str.ReleaseBuffer();
 }
 */
-
-
-#endif
 
 
 

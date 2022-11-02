@@ -8,7 +8,8 @@
 
 
 #include "acme_windows_common/node.h"
-#include "acme/operating_system.h"
+#include "acme/primitive/collection/numeric_array.h"
+#include "acme/_operating_system.h"
 
 
 namespace acme_windows
@@ -76,10 +77,10 @@ namespace acme_windows
       //virtual void datetime_to_filetime(file_time_t* pFileTime, const ::earth::time& time) override;
 
 
-      virtual ::e_status last_error_to_status(DWORD dwLastError);
+      //virtual ::e_status ::windows::last_error_status(DWORD dwLastError);
 
 
-      virtual ::e_status ExitCode_to_status(DWORD dwExitCode);
+      //virtual ::e_status ExitCode_to_status(DWORD dwExitCode);
 
 
       virtual string audio_get_default_library_name() override;
@@ -97,7 +98,7 @@ namespace acme_windows
       bool load_modules_diff(string_array& straOld, string_array& straNew, const ::string& pszExceptDir) override;
 
 
-      id_array module_path_get_pid(const ::string& pszModulePath, bool bModuleNameIsPropertyFormatted) override;
+      atom_array module_path_get_pid(const ::string& pszModulePath, bool bModuleNameIsPropertyFormatted) override;
 
       string module_path_from_pid(u32 pid) override;
 
@@ -166,6 +167,9 @@ namespace acme_windows
       bool stdin_has_input_events() override;
       void flush_stdin_input_events() override;
       void flush_stdin() override;
+
+      void defer_initialize_callstack() override;
+      string get_callstack(const char * pszFormat, i32 iSkip, void * caller_address, int iCount) override;
 
 
    };
