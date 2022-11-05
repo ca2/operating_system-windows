@@ -1,4 +1,8 @@
 #include "framework.h"
+#include "acme/filesystem/filesystem/path.h"
+#include "acme/primitive/string/adaptor.h"
+#include "acme/primitive/string/international.h"
+#include "acme/primitive/string/string.h"
 #include "acme/_library.h"
 #include <shellapi.h>
 #include <shlobj.h>
@@ -19,7 +23,7 @@ namespace acme_windows
    bool CLASS_DECL_ACME_WINDOWS shell_get_special_folder_path(HWND hwnd, ::file::path& str, i32 csidl, bool fCreate)
    {
 
-      return ::SHGetSpecialFolderPathW(hwnd, wtostring(str, MAX_PATH * 8), csidl, fCreate) != false;
+      return ::SHGetSpecialFolderPathW(hwnd, wstring_adaptor(str, MAX_PATH * 8), csidl, fCreate) != false;
 
    }
 
@@ -32,7 +36,7 @@ namespace acme_windows
       if (!shell_get_special_folder_path(nullptr, path, csidl, fCreate))
       {
 
-         return "";
+         return {};
 
       }
 
@@ -46,7 +50,7 @@ namespace acme_windows
    ::u32 get_current_directory(string& str)
    {
 
-      return ::GetCurrentDirectoryW(MAX_PATH * 8, wtostring(str, MAX_PATH * 8));
+      return ::GetCurrentDirectoryW(MAX_PATH * 8, wstring_adaptor(str, MAX_PATH * 8));
 
    }
 
@@ -54,7 +58,7 @@ namespace acme_windows
    ::u32 get_temp_path(string& str)
    {
 
-      return ::GetTempPathW(MAX_PATH * 8, wtostring(str, MAX_PATH * 8));
+      return ::GetTempPathW(MAX_PATH * 8, wstring_adaptor(str, MAX_PATH * 8));
 
    }
 

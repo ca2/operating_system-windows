@@ -1,5 +1,7 @@
 #include "framework.h"
-#include "acme/primitive/primitive/matter.h"
+#include "node.h"
+#include "acme/constant/message.h"
+#include "acme/parallelization/mutex.h"
 #include "acme/_operating_system.h"
 
 
@@ -7,6 +9,7 @@
 #define TGA_SUCCESS_CLEAN 1
 #define TGA_SUCCESS_KILL 2
 #define TGA_SUCCESS_16 3
+
 
 ::u32 TerminateGuiApp(::u32 dwPID, ::u32 tickTimeout);
 //::u32 WINAPI Terminate16App(::u32 dwPID, ::u32 dwThread,
@@ -19,21 +22,28 @@ class block_input :
    virtual public matter
 {
 protected:
-   ::mutex        m_mutex;
-   bool           m_bBlocked;
+   
+   
+   ::pointer < ::mutex >         m_pmutexCa2Input;
+   bool                          m_bBlocked;
+
+
 public:  
+
+
    block_input(int iSleep = 200);
-
-
    virtual ~block_input();
+
 
 };
 
 
-block_input::block_input( int iSleep) :
-   m_mutex(e_create_new, "Global\\ca2_input")
+block_input::block_input( int iSleep)
 {
-   m_mutex.lock();
+
+   m_pmutexCa2Input = acmenode()->create_global_named_mutex(this, false, "ca2_Input");
+   
+   m_pmutexCa2Input->lock();
    //   repeat:
    m_bBlocked = ::BlockInput(true) != false;
    //{
@@ -58,17 +68,14 @@ block_input::~block_input()
 
    if (m_bBlocked)
    {
+
       ::BlockInput(false);
+
    }
-   m_mutex.unlock();
+
+   m_pmutexCa2Input->unlock();
 
 }
-
-
-
-
-
-
 
 
 bool is_good_active_w(HWND w)
@@ -866,7 +873,7 @@ bool is_good_active_w(HWND w)
 //   while (psz != nullptr && *psz != '\0')
 //   {
 //
-//      int iIndex = ::str::ch().uni_index(psz);
+//      int iIndex = unicode_uni_index(psz);
 //
 //      send_input_unicode(iIndex, iSleep);
 //

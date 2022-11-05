@@ -3,6 +3,9 @@
 #include "ip_enum.h"
 
 
+#include "acme/_operating_system.h"
+
+
 namespace apex_windows
 {
 

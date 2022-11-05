@@ -307,7 +307,7 @@ CLASS_DECL_ACME bool solve_relative_inline(string & str, bool & bUrl, bool & bOn
                else
                {
 
-                  iPos += ch_uni_len(psz[iPos]);
+                  iPos += ch_unicode_len(psz[iPos]);
 
                   if (iPos >= iLen)
                   {
@@ -362,7 +362,7 @@ CLASS_DECL_ACME bool solve_relative_inline(string & str, bool & bUrl, bool & bOn
             else
             {
 
-               iPos += ch_uni_len(psz[iPos]);
+               iPos += ch_unicode_len(psz[iPos]);
 
                if (iPos >= iLen)
                {
@@ -408,7 +408,7 @@ CLASS_DECL_ACME bool solve_relative_inline(string & str, bool & bUrl, bool & bOn
          else
          {
 
-            iPos += ch_uni_len(psz[iPos]);
+            iPos += ch_unicode_len(psz[iPos]);
 
             if (iPos >= iLen)
             {
@@ -423,7 +423,7 @@ CLASS_DECL_ACME bool solve_relative_inline(string & str, bool & bUrl, bool & bOn
       else
       {
 
-         iPos += ch_uni_len(psz[iPos]);
+         iPos += ch_unicode_len(psz[iPos]);
 
          if (iPos >= iLen)
          {
@@ -484,7 +484,7 @@ CLASS_DECL_ACME string defer_solve_relative(const char * pszRelative, const char
       index i = 0;
       for (; i < iFind; i++)
       {
-         if (!ansi_char_is_alphabetic(strRelative[i]) && !ansi_char_is_digit(strRelative[i]))
+         if (!ansi_char_isalpha(strRelative[i]) && !ansi_char_isdigit(strRelative[i]))
             break;
       }
 

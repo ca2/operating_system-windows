@@ -80,7 +80,7 @@ static int elevate(int argc, TCHAR **argv, unsigned long message) {
   _sntprintf_s(args, EXE_LENGTH, _TRUNCATE, _T("%s"), GetCommandLine());
   size_t s = _tcslen(argv[0]) + 1;
   if (args[0] == _T('"')) s += 2;
-  while (isspace(args[s])) s++;
+  while (character_isspace(args[s])) s++;
 
   sei.lpParameters = args + s;
   sei.nShow = SW_SHOW;

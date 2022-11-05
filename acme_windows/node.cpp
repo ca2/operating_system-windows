@@ -4,13 +4,21 @@
 #include "acme_file.h"
 #include "registry.h"
 #include "process.h"
+#include "exclusive.h"
+#include "acme/operating_system/process.h"
 #include "acme/parallelization/synchronous_lock.h"
 #include "acme/parallelization/install_mutex.h"
+#include "acme/platform/system.h"
 #include "acme/primitive/primitive/memory.h"
+#include "acme/primitive/string/adaptor.h"
+#include "acme/primitive/string/international.h"
+#include "acme/primitive/string/str.h"
+#include "acme_windows_common/security_attributes.h"
 
 
 #include <shellapi.h>
 #include <TlHelp32.h>
+#include <DbgHelp.h>
 
 
 CLASS_DECL_ACME_WINDOWS void call_async(const char * pszPath, const char * pszParam, const char * pszDir, ::e_display edisplay, bool bPrivileged, unsigned int * puiPid);
@@ -29,9 +37,121 @@ namespace windows
 namespace acme_windows
 {
 
+   struct shell_execute :
+      public SHELLEXECUTEINFOW
+   {
+
+      wstring        m_wstrFile;
+
+      wstring        m_wstrParams;
+
+      shell_execute(const char * pszFile, const char * pszParams)
+      {
+
+         ::zero(this, sizeof(SHELLEXECUTEINFOW));
+
+         cbSize = sizeof(SHELLEXECUTEINFOW);
+
+         m_wstrFile = pszFile;
+
+         lpFile = m_wstrFile;
+
+
+         if (pszParams)
+         {
+
+            m_wstrParams = pszParams;
+
+            lpParameters = m_wstrParams;
+
+
+         }
+
+      }
+
+
+      bool async()
+      {
+
+         if (::ShellExecuteExW(this))
+         {
+
+            return false;
+
+         }
+
+         return true;
+
+      }
+
+
+      bool synchronization_object(const class ::wait & wait)
+      {
+
+         fMask = SEE_MASK_NOASYNC | SEE_MASK_NOCLOSEPROCESS;
+
+         if (!async())
+         {
+
+            return false;
+
+         }
+
+         auto start = ::wait::now();
+
+         DWORD dwError = ::GetLastError();
+
+         DWORD dwExitCode = 0;
+
+         while (true)
+         {
+
+            if (::GetExitCodeProcess(hProcess, &dwExitCode))
+            {
+
+               if (dwExitCode != STILL_ACTIVE)
+               {
+
+                  break;
+
+               }
+
+            }
+            else
+            {
+
+               break;
+
+            }
+
+            auto waitNow = minimum(wait - start.elapsed(), 1000_ms);
+
+            if (!waitNow)
+            {
+
+               break;
+
+            }
+
+            preempt(waitNow);
+
+         }
+
+         ::CloseHandle(hProcess);
+
+         return true;
+
+
+      }
+
+
+   };
+
 
    node::node()
    {
+
+      m_bInitializeCallstack = true;
 
       //::windows::callstack::s_pcriticalsection = new critical_section();
 
@@ -69,21 +189,21 @@ namespace acme_windows
    }
 
 
-   void node::call_async(const ::string & strPath, const ::string & strParam, const ::string & strDir, ::e_display edisplay, bool bPrivileged, unsigned int * puiPid)
-   {
+   //void node::call_async(const ::string & strPath, const ::string & strParam, const ::string & strDir, ::e_display edisplay, bool bPrivileged, unsigned int * puiPid)
+   //{
 
-      /*auto estatus =*/ ::call_async(strPath, strParam, strDir, edisplay, bPrivileged, puiPid);
+   //   /*auto estatus =*/ ::call_async(strPath, strParam, strDir, edisplay, bPrivileged, puiPid);
 
-      //if (!estatus)
-      //{
+   //   //if (!estatus)
+   //   //{
 
-      //   return estatus;
+   //   //   return estatus;
 
-      //}
+   //   //}
 
-      //return estatus;
+   //   //return estatus;
 
-   }
+   //}
 
 
 
@@ -881,7 +1001,7 @@ namespace acme_windows
    //}
 
 
-   //::e_status node::::windows::last_error_status(DWORD dwLastError)
+   //::e_status node::windows::last_error_status(DWORD dwLastError)
    //{
 
    //   if (dwLastError == 0)
@@ -1316,7 +1436,7 @@ namespace acme_windows
             if (GetModuleFileNameExW(hProcess, hmods[i], (WCHAR *)memory.get_data(), (DWORD)(memory.get_size() / sizeof(WCHAR))))
             {
 
-               if (!wide_compare_case_insensitive((const wchar_t *)memory.get_data(), wstrLibrary))
+               if (!string_compare_ci((const wchar_t *)memory.get_data(), wstrLibrary))
                {
 
                   bFound = true;
@@ -1389,30 +1509,7 @@ namespace acme_windows
 
 
 
-   //CLASS_DECL_ACME ::file::path core_app_path(string strAppId)
-   //{
-   //
-   //   ::file::path path = get_last_run_application_path(strAppId);
-   //
-   //   if (path.has_char())
-   //   {
-   //
-   //      return path;
-   //
-   //   }
-   //
-   //   strAppId.replace("-", "_");
-   //
-   //   strAppId.replace("/", "_");
-   //
-   //   path = "C:\\acme\\time\\x64\\basis\\" + strAppId + ".exe";
-   //
-   //   return path;
-   //
-   //}
-   //
-   //
-   //
+   
    //CLASS_DECL_ACME ::u32 get_current_process_id()
    //{
    //
@@ -2148,7 +2245,7 @@ namespace acme_windows
 
       LANGID langid = ::GetUserDefaultLangID();
 
-      string strIso = ::acme_windows::langid_to_iso(langid);
+      string strIso = ::windows::langid_to_iso(langid);
 
       //#endif
       string strUserlanguage = strIso;
@@ -2158,31 +2255,33 @@ namespace acme_windows
    }
 
 
-   bool node::get_application_exclusivity_security_attributes(memory & memory)
+   ::pointer < security_attributes > node::get_application_exclusivity_security_attributes()
    {
 
       bool bSetOk = false;
 
-      memory.set_size(sizeof(SECURITY_ATTRIBUTES) + sizeof(SECURITY_DESCRIPTOR));
+      auto psecurityattributes = __create_new<::acme_windows_common::security_attributes>();
 
-      auto pMutexAttributes = (SECURITY_ATTRIBUTES *)memory.get_data();
+      psecurityattributes->m_memory.set_size(sizeof(SECURITY_ATTRIBUTES) + sizeof(SECURITY_DESCRIPTOR));
 
-      ZeroMemory(pMutexAttributes, sizeof(*pMutexAttributes));
+      auto pSecurityAttributes = (LPSECURITY_ATTRIBUTES)psecurityattributes->get_os_security_attributes();
 
-      pMutexAttributes->nLength = sizeof(*pMutexAttributes);
+      ZeroMemory(pSecurityAttributes, sizeof(*pSecurityAttributes));
 
-      pMutexAttributes->bInheritHandle = false; // object uninheritable
+      pSecurityAttributes->nLength = sizeof(*pSecurityAttributes);
+
+      pSecurityAttributes->bInheritHandle = false; // object uninheritable
 
       // declare and initialize a security descriptor
-      auto pSD = (SECURITY_DESCRIPTOR *)(pMutexAttributes + 1);
+      auto pSecurityDescriptor = (SECURITY_DESCRIPTOR *)(pSecurityAttributes + 1);
 
-      bool bInitOk = InitializeSecurityDescriptor(pSD, SECURITY_DESCRIPTOR_REVISION) != false;
+      bool bInitializeOk = InitializeSecurityDescriptor(pSecurityDescriptor, SECURITY_DESCRIPTOR_REVISION) != false;
 
-      if (bInitOk)
+      if (bInitializeOk)
       {
          // give the security descriptor a Null Dacl
          // done using the  "true, (PACL)nullptr" here
-         bSetOk = SetSecurityDescriptorDacl(pSD,
+         bSetOk = SetSecurityDescriptorDacl(pSecurityDescriptor,
             true,
             (PACL)nullptr,
             false) != false;
@@ -2192,17 +2291,17 @@ namespace acme_windows
       if (bSetOk)
       {
 
-         pMutexAttributes->lpSecurityDescriptor = pSD;
+         pSecurityAttributes->lpSecurityDescriptor = pSecurityDescriptor;
 
       }
       else
       {
 
-         memory.set_size(0);
+         psecurityattributes->m_memory.set_size(0);
 
       }
 
-      return bSetOk;
+      return psecurityattributes;
 
    }
 
@@ -2265,16 +2364,16 @@ namespace acme_windows
       RegSetValueExW(hkey, L"", 0, REG_SZ, (byte *)icon.c_str(), ::u32(icon.length() * sizeof(wchar_t)));
       RegCloseKey(hkey);
 
-      wstring wstr(acmedirectory()->stage(strAppIdHandler, process_platform_name(), process_configuration_name()) / "spa_register.txt");
+      ::file::path pathFile(acmedirectory()->stage(strAppIdHandler, process_platform_name(), process_configuration_name()) / "spa_register.txt");
 
       int iRetry = 9;
 
-      while (!acmefile()->exists(utf8(wstr.c_str())) && iRetry > 0)
+      while (!acmefile()->exists(pathFile) && iRetry > 0)
       {
 
-acmedirectory()create(::file_path_folder(utf8(wstr.c_str())).c_str());
+         acmedirectory()->create(pathFile.folder());
 
-         acmefile()->put_contents(utf8(wstr.c_str()).c_str(), "");
+         acmefile()->put_contents(pathFile, "");
 
          iRetry--;
 
@@ -2305,19 +2404,21 @@ acmedirectory()create(::file_path_folder(utf8(wstr.c_str())).c_str());
 
       }
 
-      ::install::admin_mutex mutexStartup(this, "-startup");
+      throw ::exception(error_failed);
 
-      wstring wstr(str);
+      //::install::admin_mutex mutexStartup(this, "-startup");
 
-      sei.cbSize = sizeof(SHELLEXECUTEINFOW);
-      sei.fMask = SEE_MASK_NOASYNC | SEE_MASK_NOCLOSEPROCESS;
-      sei.lpVerb = L"RunAs";
+      //wstring wstr(str);
 
-      sei.lpFile = wstr.c_str();
+      //sei.cbSize = sizeof(SHELLEXECUTEINFOW);
+      //sei.fMask = SEE_MASK_NOASYNC | SEE_MASK_NOCLOSEPROCESS;
+      //sei.lpVerb = L"RunAs";
 
-      ::ShellExecuteExW(&sei);
+      //sei.lpFile = wstr.c_str();
 
-      DWORD dwGetLastError = GetLastError();
+      //::ShellExecuteExW(&sei);
+
+      //DWORD dwGetLastError = GetLastError();
 
 #endif
 
@@ -2401,7 +2502,7 @@ acmedirectory()create(::file_path_folder(utf8(wstr.c_str())).c_str());
    ::u32 node::get_temp_path(string & str)
    {
 
-      return ::GetTempPathW(MAX_PATH * 8, wtostring(str, MAX_PATH * 8));
+      return ::GetTempPathW(MAX_PATH * 8, ::wstring_adaptor(str, MAX_PATH * 8));
 
    }
 
@@ -2465,15 +2566,12 @@ acmedirectory()create(::file_path_folder(utf8(wstr.c_str())).c_str());
    }
 
 
-
-
    ::u32 node::get_current_directory(string & str)
    {
 
-      return ::GetCurrentDirectoryW(MAX_PATH * 8, wtostring(str, MAX_PATH * 8));
+      return ::GetCurrentDirectoryW(MAX_PATH * 8, wstring_adaptor(str, MAX_PATH * 8));
 
    }
-
 
 
    void node::register_dll(const ::file::path & pathDll)
@@ -2521,7 +2619,8 @@ acmedirectory()create(::file_path_folder(utf8(wstr.c_str())).c_str());
       set["privileged"] = true;
 
       //if (!call_sync(path, strParam, path.folder(), ::e_display_none, 3_minute, set))
-      call_sync(path, strParam, path.folder(), ::e_display_none, 3_minute, set);
+      i32 iExitCode = -1;
+      call_sync(path, strParam, path.folder(), ::e_display_none, 3_minute, set, &iExitCode);
       //{
 
       //   return false;
@@ -2685,10 +2784,10 @@ acmedirectory()create(::file_path_folder(utf8(wstr.c_str())).c_str());
 
       auto process = GetCurrentProcess();
 
-      if (!g_bInitializeCallstack)
+      if (!m_bInitializeCallstack)
       {
 
-         g_bInitializeCallstack = true;
+         m_bInitializeCallstack = true;
 
          SymSetOptions(SymGetOptions() | SYMOPT_LOAD_LINES);
 
@@ -2758,6 +2857,615 @@ acmedirectory()create(::file_path_folder(utf8(wstr.c_str())).c_str());
    }
 
 
+   ::pointer < ::acme::exclusive > node::_get_exclusive(::particle * pparticleContext, const ::string & strName, ::security_attributes * psecurityattributes)
+   {
+
+      return __new(exclusive(pparticleContext, strName, psecurityattributes));
+
+   }
+
+
+
+   void node::command_system(string_array & straOutput, int & iExitCode, const char * psz, enum_command_system ecommandsystem, const ::duration & durationTimeout, ::particle * pparticleSynchronization, ::file::file * pfileLines)
+   {
+
+      straOutput.clear();
+
+      string str(psz);
+
+      wstring wstr;
+
+      wstr = str;
+
+      STARTUPINFO si = { sizeof(si) };
+      PROCESS_INFORMATION pi = {};
+      SECURITY_ATTRIBUTES saAttr;
+
+      ZeroMemory(&saAttr, sizeof(saAttr));
+
+      saAttr.nLength = sizeof(SECURITY_ATTRIBUTES);
+      saAttr.bInheritHandle = TRUE;
+      saAttr.lpSecurityDescriptor = NULL;
+
+      HANDLE hOutRd;
+      HANDLE hOutWr;
+
+      // Create a pipe for the child process's STDOUT. 
+
+      if (!CreatePipe(&hOutRd, &hOutWr, &saAttr, 0))
+      {
+
+         // log error
+         DWORD dwLastError = GetLastError();
+
+         auto estatus = ::windows::last_error_status(dwLastError);
+
+         throw ::exception(estatus);
+
+      }
+
+      // Ensure the read handle to the pipe for STDOUT is not inherited.
+      if (!SetHandleInformation(hOutRd, HANDLE_FLAG_INHERIT, 0))
+      {
+
+         ::CloseHandle(hOutRd);
+         ::CloseHandle(hOutWr);
+
+         // log error
+         DWORD dwLastError = GetLastError();
+
+         auto estatus = ::windows::last_error_status(dwLastError);
+
+         throw ::exception(estatus);
+
+      }
+
+      HANDLE hErrRd;
+      HANDLE hErrWr;
+
+      // Create a pipe for the child process's STDOUT. 
+
+      if (!CreatePipe(&hErrRd, &hErrWr, &saAttr, 0))
+      {
+
+         ::CloseHandle(hOutRd);
+         ::CloseHandle(hOutWr);
+
+         // log error
+         DWORD dwLastError = GetLastError();
+
+         auto estatus = ::windows::last_error_status(dwLastError);
+
+         throw ::exception(estatus);
+
+      }
+
+
+      // Ensure the read handle to the pipe for STDOUT is not inherited.
+      if (!SetHandleInformation(hErrRd, HANDLE_FLAG_INHERIT, 0))
+      {
+
+         ::CloseHandle(hOutRd);
+         ::CloseHandle(hOutWr);
+         ::CloseHandle(hErrRd);
+         ::CloseHandle(hErrWr);
+
+         // log error
+         DWORD dwLastError = GetLastError();
+
+         auto estatus = ::windows::last_error_status(dwLastError);
+
+         throw ::exception(estatus);
+
+      }
+
+      {
+
+         DWORD dwState = PIPE_NOWAIT;
+
+         SetNamedPipeHandleState(hOutRd, &dwState, nullptr, nullptr);
+
+      }
+
+      {
+
+         DWORD dwState = PIPE_NOWAIT;
+
+         SetNamedPipeHandleState(hErrRd, &dwState, nullptr, nullptr);
+
+      }
+
+      ZeroMemory(&si, sizeof(si));
+      si.cb = sizeof(si);
+      si.hStdError = hErrWr;
+      si.hStdOutput = hOutWr;
+      si.dwFlags |= STARTF_USESTDHANDLES;
+
+      ZeroMemory(&pi, sizeof(pi));
+
+      if (!CreateProcessW(nullptr, wstr, NULL, NULL, TRUE, CREATE_NO_WINDOW, NULL, NULL, &si, &pi))
+      {
+
+         ::CloseHandle(hOutRd);
+         ::CloseHandle(hOutWr);
+         ::CloseHandle(hErrRd);
+         ::CloseHandle(hErrWr);
+
+         DWORD dwLastError = ::GetLastError();
+
+         auto estatus = ::windows::last_error_status(dwLastError);
+
+         throw ::exception(estatus);
+
+      }
+
+      ::duration durationStart;
+
+      durationStart.Now();
+
+      string strError;
+
+      string strOutput;
+
+      single_lock sl(pparticleSynchronization);
+
+      while (true)
+      {
+
+         auto result = WaitForSingleObject(pi.hProcess, 100);
+
+         char sz[256];
+
+         while (true)
+         {
+
+            DWORD dwRead = 0;
+
+            if (!ReadFile(hOutRd, sz, 256, &dwRead, nullptr))
+            {
+
+               break;
+
+            }
+
+            if (dwRead == 0)
+            {
+
+               break;
+
+            }
+
+            string str(sz, dwRead);
+
+            if (ecommandsystem & e_command_system_inline_log)
+            {
+
+               printf("%s", str.c_str());
+
+            }
+
+            strOutput += str;
+
+            ::str().get_lines(straOutput, strOutput, "I: ", false, &sl, pfileLines);
+
+         };
+
+         while (true)
+         {
+
+            DWORD dwRead = 0;
+
+            if (!ReadFile(hErrRd, sz, 256, &dwRead, nullptr))
+            {
+
+               break;
+
+            }
+
+            if (dwRead == 0)
+            {
+
+               break;
+
+            }
+
+            string str(sz, dwRead);
+
+            if (ecommandsystem & e_command_system_inline_log)
+            {
+
+               fprintf(stderr, "%s", str.c_str());
+
+            }
+
+            strError += str;
+
+            ::str().get_lines(straOutput, strError, "E: ", false, &sl, pfileLines);
+
+         };
+
+         if (result == WAIT_OBJECT_0)
+         {
+
+            break;
+
+         }
+
+         if (!durationTimeout.is_infinite() && durationStart.elapsed() > durationTimeout)
+         {
+
+            break;
+
+         }
+
+      }
+
+      DWORD dwExitCode = 0;
+
+      if (GetExitCodeProcess(pi.hProcess, &dwExitCode))
+      {
+
+         iExitCode = dwExitCode;
+
+      }
+
+      ::CloseHandle(hOutRd);
+      ::CloseHandle(hOutWr);
+      ::CloseHandle(hErrRd);
+      ::CloseHandle(hErrWr);
+
+      CloseHandle(pi.hProcess);
+      CloseHandle(pi.hThread);
+
+      ::str().get_lines(straOutput, strOutput, "I: ", true, &sl, pfileLines);
+      ::str().get_lines(straOutput, strError, "E: ", true, &sl, pfileLines);
+
+   }
+
+
+
+   ::u64 node::translate_processor_affinity(int iOrder)
+   {
+
+      DWORD_PTR dwProcessAffinityMask;
+      DWORD_PTR dwSystemAffinityMask;
+      if (!GetProcessAffinityMask(::GetCurrentProcess(), &dwProcessAffinityMask, &dwSystemAffinityMask))
+      {
+         return 0;
+      }
+      i32 j = 0;
+      uptr dwMask = 1;
+      for (i32 i = 0; i < sizeof(dwProcessAffinityMask) * 8; i++)
+      {
+         if ((dwMask & dwProcessAffinityMask) != 0)
+         {
+            if (iOrder == j)
+            {
+               return dwMask;
+            }
+            j++;
+         }
+         dwMask = dwMask << 1;
+      }
+
+      return 0;
+
+   }
+
+
+   i32 node::get_current_process_affinity_order()
+   {
+
+
+      DWORD_PTR dwProcessAffinityMask;
+      DWORD_PTR dwSystemAffinityMask;
+
+      if (!GetProcessAffinityMask(::GetCurrentProcess(), &dwProcessAffinityMask, &dwSystemAffinityMask))
+      {
+
+         return 0;
+
+      }
+
+      i32 iCount = 0;
+      uptr dwMask = 1;
+      for (i32 i = 0; i < sizeof(dwProcessAffinityMask) * 8; i++)
+      {
+         if ((dwMask & dwProcessAffinityMask) != 0)
+         {
+            iCount++;
+         }
+         dwMask = dwMask << 1;
+      }
+
+      return iCount;
+
+   }
+
+
+   i32 node::get_current_process_maximum_affinity()
+   {
+
+      DWORD_PTR dwProcessAffinityMask;
+      DWORD_PTR dwSystemAffinityMask;
+      if (!GetProcessAffinityMask(::GetCurrentProcess(), &dwProcessAffinityMask, &dwSystemAffinityMask))
+      {
+         return 0;
+      }
+      i32 iMax = -1;
+      uptr dwMask = 1;
+      for (i32 i = 0; i < sizeof(dwProcessAffinityMask) * 8; i++)
+      {
+         if ((dwMask & dwProcessAffinityMask) != 0)
+         {
+            iMax = i;
+         }
+         dwMask = dwMask << 1;
+      }
+
+      return iMax;
+
+   }
+
+
+   i32 node::get_current_processor_index()
+   {
+
+
+      return ::GetCurrentProcessorNumber();
+
+
+   }
+
+
+   bool node::set_process_priority(::enum_priority epriority)
+   {
+
+      return (::SetPriorityClass(::GetCurrentProcess(), get_os_priority_class(epriority)) != 0);
+
+
+   }
+
+
+   void node::shell_execute_async(const char * pszFile, const char * pszParams)
+   {
+
+      shell_execute execute(pszFile, pszParams);
+
+      execute.async();
+
+   }
+
+
+   void node::shell_execute_sync(const char * pszFile, const char * pszParams, ::duration durationTimeout)
+   {
+
+      shell_execute execute(pszFile, pszParams);
+
+      execute.synchronization_object(durationTimeout);
+
+   }
+
+
+   void node::root_execute_async(const char * pszFile, const char * pszParams)
+   {
+
+      shell_execute execute(pszFile, pszParams);
+
+      execute.lpVerb = L"RunAs";
+
+
+       execute.async();
+
+   }
+
+
+   void node::root_execute_sync(const char * pszFile, const char * pszParams, ::duration durationTimeout)
+   {
+
+      shell_execute execute(pszFile, pszParams);
+
+      execute.lpVerb = L"RunAs";
+
+
+      execute.synchronization_object(durationTimeout);
+
+   }
+
+
+   void node::call_async(const ::string & strPath, const ::string & strParam, const ::string & strDir, ::e_display edisplay, bool bPrivileged, unsigned int * puiPid)
+   {
+
+      SHELLEXECUTEINFOW info = {};
+
+      wstring wstrFile = strPath;
+      wstring wstrParam = strParam;
+      wstring wstrDir = strDir;
+
+      info.cbSize = sizeof(SHELLEXECUTEINFOW);
+
+      if (edisplay == e_display_default)
+      {
+         info.nShow = SW_SHOWDEFAULT;
+      }
+      else
+      {
+         info.nShow = is_visible(edisplay) ? SW_NORMAL : SW_HIDE;
+
+      }
+      info.lpFile = wstrFile;
+      info.lpParameters = wstrParam;
+      info.lpDirectory = wstrDir;
+
+
+      if (bPrivileged)
+      {
+
+         info.lpVerb = L"RunAs";
+
+
+      }
+
+      if (puiPid != nullptr)
+      {
+
+         info.fMask |= SEE_MASK_NOCLOSEPROCESS;
+
+      }
+
+      info.fMask |= SEE_MASK_FLAG_NO_UI;
+
+      int iOk = ::ShellExecuteExW(&info);
+
+      if (puiPid != nullptr)
+      {
+
+         *puiPid = ::GetProcessId(info.hProcess);
+
+         ::CloseHandle(info.hProcess);
+
+      }
+
+      int iSeResult = (int)(iptr)info.hInstApp;
+
+      if (iSeResult < 32)
+      {
+
+         DWORD dwError = ::GetLastError();
+
+         auto estatus = ::windows::last_error_status(dwError);
+
+         throw ::exception(estatus);
+
+      }
+
+      //return ::success;
+
+   }
+
+
+   void node::call_sync(const ::string & strPath, const ::string & strParam, const ::string & strDir, ::e_display edisplay, const ::duration & durationTimeout, ::property_set & set, int * piExitCode)
+   {
+
+      SHELLEXECUTEINFOW infoa;
+
+      __memset(&infoa, 0, sizeof(infoa));
+
+      wstring wstrFile(strPath);
+      wstring wstrParam(strParam);
+      wstring wstrDir(strDir);
+
+      infoa.cbSize = sizeof(infoa);
+      infoa.lpFile = wstrFile;
+
+      infoa.lpParameters = wstrParam;
+
+      infoa.lpDirectory = wstrDir;
+
+      infoa.nShow = is_visible(edisplay) ? e_display_restored : SW_HIDE;
+
+      infoa.fMask |= SEE_MASK_NOCLOSEPROCESS | SEE_MASK_NOASYNC | SEE_MASK_FLAG_NO_UI;
+
+      if (set.is_true("privileged"))
+      {
+
+         infoa.lpVerb = L"RunAs";
+
+      }
+
+      if (!::ShellExecuteExW(&infoa))
+      {
+
+         auto lastError = ::GetLastError();
+
+         auto estatus = ::windows::last_error_status(lastError);
+
+         throw ::exception(estatus);
+
+      }
+
+      set["pid"] = (::u32) ::GetProcessId(infoa.hProcess);
+
+      DWORD dwExitCode = (DWORD)-1;
+
+      ::duration durationStart;
+
+      durationStart.Now();
+
+      while (::task_get_run())
+      {
+         // Thanks from Blehman@Twitch from Slovakia through Googling...
+         // 2020-02-19
+         if (WaitForSingleObject(infoa.hProcess, 200) == WAIT_OBJECT_0)
+         {
+
+            break;
+
+         }
+
+         if (durationStart.elapsed() > durationTimeout)
+         {
+
+            set["timed_out"] = true;
+
+            break;
+
+         }
+
+      }
+
+      GetExitCodeProcess(infoa.hProcess, &dwExitCode);
+
+      if (set.is_true("timed_out"))
+      {
+
+         if (set.is_true("terminate_on_timeout"))
+         {
+
+            auto TerminateProcess_return = ::TerminateProcess(infoa.hProcess, -1);
+            auto TerminateProcess_GetLastError = ::GetLastError();
+
+            set["TerminateProcess_return"] = TerminateProcess_return;
+            set["TerminateProcess_GetLastError"] = (::u32)TerminateProcess_GetLastError;
+
+         }
+
+      }
+
+      ::CloseHandle(infoa.hProcess);
+
+      int iExitCode = dwExitCode;
+
+      if (::is_set(piExitCode))
+      {
+
+         *piExitCode = iExitCode;
+
+      }
+
+      //if (iExitCode == 0)
+      //{
+
+      //   //return ::success;
+
+      //   return;
+
+      //}
+      //else if(iExitCode > 0)
+      //{
+      // 
+      //   return e_status_process_result_positive_base + iExitCode;
+
+      //}
+      //else
+      //{
+
+      //   return e_status_process_result_negative_base + iExitCode;
+
+      //}
+
+   }
+
 
 } // namespace acme_windows
 
@@ -2771,7 +3479,7 @@ int windows_desktop1_main(HINSTANCE hInstance, int nCmdShow);
 
 
 
-#include "apex/operating_system/windows/_.h"
+//#include "apex/operating_system/windows/_.h"
 
 #endif
 

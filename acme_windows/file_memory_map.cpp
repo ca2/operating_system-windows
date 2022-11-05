@@ -1,6 +1,10 @@
 #include "framework.h"
 #include "file_memory_map.h"
 #include "acme_directory.h"
+#include "acme/parallelization/synchronous_lock.h"
+
+
+CLASS_DECL_ACME bool ensure_file_size_handle(HANDLE h, u64 iSize);
 
 
 namespace acme_windows
@@ -135,7 +139,7 @@ namespace acme_windows
    bool file_memory_map::close()
    {
 
-      synchronous_lock synchronouslock(mutex());
+      synchronous_lock synchronouslock(synchronization());
 
       if (m_pdata != nullptr)
       {

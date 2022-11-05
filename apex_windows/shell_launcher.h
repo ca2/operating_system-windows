@@ -1,4 +1,9 @@
+// enhancing by camilo on 2022-11-02 14:29 <3ThomasBorregaardSorensen!!
 #pragma once
+
+
+#include "apex/platform/shell_launcher.h"
+#include "acme/_operating_system.h"
 
 
 namespace apex_windows
@@ -9,6 +14,7 @@ namespace apex_windows
       virtual public ::apex::shell_launcher
    {
    public:
+
 
       HWND              m_hwnd;
       HINSTANCE         m_hinstance;
@@ -27,10 +33,10 @@ namespace apex_windows
 
 
       shell_launcher();
-      virtual ~shell_launcher();
+      ~shell_launcher() override;
 
 
-      virtual void launch() override;
+      void launch() override;
 
 
       //virtual void status() const override;

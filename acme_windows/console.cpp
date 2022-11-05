@@ -1,6 +1,9 @@
 #include "framework.h"
 #include "console.h"
 #include "acme_file.h"
+
+#include "acme/_operating_system.h"
+
 #include <io.h>
 #include <stdio.h>
 #include <fcntl.h>

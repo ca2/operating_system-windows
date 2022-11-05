@@ -1,45 +1,62 @@
 ﻿#include "framework.h"
 #include "os_context.h"
+#include "acme/filesystem/file/exception.h"
 #include "acme/operating_system/process.h"
 #include "acme_windows/registry.h"
-#include "acme_windows/file_exception.h"
 #include "acme_windows/itemidlist.h"
 #include "acme_windows/acme_directory.h"
 #include "acme_windows/acme_file.h"
-#include "acme/operating_system/time.h"
 #include "acme/filesystem/file/status.h"
 #include "acme/filesystem/filesystem/acme_directory.h"
 #include "acme/filesystem/filesystem/acme_path.h"
+#include "acme/operating_system/time.h"
+#include "acme/parallelization/manual_reset_event.h"
+#include "acme/platform/node.h"
+#include "acme/primitive/string/string.h"
+#include "acme/primitive/string/str.h"
 #include "apex/filesystem/file/set.h"
 #include "apex/filesystem/filesystem/dir_context.h"
 #include "apex/filesystem/filesystem/file_context.h"
 #include "apex/platform/application.h"
 #include "apex/platform/context.h"
-#include "apex/operating_system.h"
+#include "acme_windows_common/cotaskptr.h"
+
+
+#include "acme/_operating_system.h"
+
+
 #include <wincred.h>
 #include <wtsapi32.h>
 #include <shobjidl.h>
 #include <ShellApi.h>
 #include <Security.h>
+#include <wincred.h>
+#include <shobjidl_core.h>
 
 
-::e_status hresult_to_estatus(HRESULT hresult)
-{
+CLASS_DECL_ACME_WINDOWS_COMMON HRESULT defer_co_initialize_ex(bool bMultiThread, bool bDisableOleDDE = false);
 
-   if (SUCCEEDED(hresult))
-   {
 
-      return ::success;
+CLASS_DECL_ACME::file::path get_module_path(HMODULE hmodule);
 
-   }
-   else
-   {
 
-      return ::error_failed;
-
-   }
-
-}
+//::e_status hresult_to_estatus(HRESULT hresult)
+//{
+//
+//   if (SUCCEEDED(hresult))
+//   {
+//
+//      return ::success;
+//
+//   }
+//   else
+//   {
+//
+//      return ::error_failed;
+//
+//   }
+//
+//}
 
 
 
@@ -256,7 +273,7 @@ namespace apex_windows
    int os_context::get_pid()
    {
 
-      return (int) ::get_current_process_id();
+      return (int) acmenode()->get_current_process_id();
 
    }
 
@@ -560,10 +577,10 @@ namespace apex_windows
          key.open(key, "@ca2.cc/npca2", true);
 
          key.set("Description", "ca2 plugin for NPAPI");
-         key.set("Path", m_pcontext->m_papexcontext->dir().module() /"npca2.dll");
+         key.set("Path", dir()->module() /"npca2.dll");
          key.set("ProductName", "ca2 plugin for NPAPI");
          key.set("Vendor", "ca2 Desenvolvimento de Software Ltda.");
-         key.set("Version", m_pcontext->m_papexcontext->file().as_string(m_pcontext->m_papexcontext->dir().install()/"appdata/x86/ca2_build.txt"));
+         key.set("Version", file()->as_string(dir()->install()/"appdata/x86/ca2_build.txt"));
 
          key.open(key, "application/apex", true);
 
@@ -859,7 +876,7 @@ namespace apex_windows
             int iExitCode = 0;
 
             //auto estatus = 
-            command_system(straOutput, iExitCode, strCommand);
+            acmenode()->command_system(straOutput, iExitCode, strCommand);
 
             //return estatus;
 
@@ -1393,7 +1410,7 @@ retry:
 
          u32 lastError = ::GetLastError();
 
-         __throw_last_error(lastError);
+         ::windows::throw_last_error(lastError);
 
       }
 
@@ -1407,7 +1424,7 @@ retry:
 
       strExe += ".exe";
 
-      string strCalling = m_pcontext->m_papexcontext->dir().module() / strExe + " : service";
+      string strCalling = m_pcontext->m_papexcontext->dir()->module() / strExe + " : service";
 
       if(is_true("no_remote_simpledb"))
       {
@@ -1530,7 +1547,7 @@ retry:
 
          CloseServiceHandle(hdlSCM);
 
-         __throw_last_error(lastError);
+         ::windows::throw_last_error(lastError);
 
       }
 
@@ -1575,7 +1592,7 @@ retry:
          CloseServiceHandle(hdlSCM);
          if(lastError == 1060) // O serviço já não existe. Service already doesn't exist.
             return; // do self-healing
-         __throw_last_error(lastError);
+         ::windows::throw_last_error(lastError);
       }
 
       if(!::DeleteService(hdlServ))
@@ -1583,7 +1600,7 @@ retry:
          u32 lastError = ::GetLastError();
          CloseServiceHandle(hdlServ);
          CloseServiceHandle(hdlSCM);
-         __throw_last_error(lastError);
+         ::windows::throw_last_error(lastError);
       }
 
       CloseServiceHandle(hdlServ);
@@ -1727,12 +1744,16 @@ retry:
 
       wstring wstr(pszFileName);
 
-      if((wAttr = windows_get_file_attributes(pszFileName)) == (u32)-1L)
+      if((wAttr = ::windows::get_file_attributes(pszFileName)) == (u32)-1L)
       {
 
          DWORD dwLastError = ::GetLastError();
 
-         throw windows_file_exception(::error_io, dwLastError, pszFileName, "!windows_get_file_attributes");
+         auto estatus = ::windows::last_error_status(dwLastError);
+
+         auto errorcode = ::windows::last_error_error_code(dwLastError);
+
+         throw ::file::exception(estatus, errorcode, pszFileName, "!windows_get_file_attributes");
 
       }
 
@@ -1748,7 +1769,11 @@ retry:
 
             DWORD dwLastError = ::GetLastError();
 
-            throw windows_file_exception(::error_io, dwLastError, wstr, "!SetFileAttributesW");
+            auto estatus = ::windows::last_error_status(dwLastError);
+
+            auto errorcode = ::windows::last_error_error_code(dwLastError);
+
+            throw ::file::exception(estatus, errorcode, wstr, "!SetFileAttributesW");
 
          }
 
@@ -1798,7 +1823,11 @@ retry:
 
          DWORD dwLastError = ::GetLastError();
 
-         throw windows_file_exception(::error_io, dwLastError, wstr, "!CreateFileW");
+         auto estatus = ::windows::last_error_status(dwLastError);
+
+         auto errorcode = ::windows::last_error_error_code(dwLastError);
+
+         throw ::file::exception(estatus, errorcode, wstr, "!CreateFileW");
 
       }
 
@@ -1807,7 +1836,11 @@ retry:
 
          DWORD dwLastError = ::GetLastError();
 
-         throw windows_file_exception(::error_io, dwLastError, wstr, "!SetFileTime");
+         auto estatus = ::windows::last_error_status(dwLastError);
+
+         auto errorcode = ::windows::last_error_error_code(dwLastError);
+
+         throw ::file::exception(estatus, errorcode, wstr, "!SetFileTime");
 
       }
 
@@ -1816,7 +1849,11 @@ retry:
 
          DWORD dwLastError = ::GetLastError();
 
-         throw windows_file_exception(::error_io, dwLastError, wstr, "!CloseHandle");
+         auto estatus = ::windows::last_error_status(dwLastError);
+
+         auto errorcode = ::windows::last_error_error_code(dwLastError);
+
+         throw ::file::exception(estatus, errorcode, wstr, "!CloseHandle");
 
       }
 
@@ -1828,7 +1865,11 @@ retry:
 
             DWORD dwLastError = ::GetLastError();
 
-            throw windows_file_exception(::error_io, dwLastError, wstr, "!SetFileAttributesW");
+            auto estatus = ::windows::last_error_status(dwLastError);
+
+            auto errorcode = ::windows::last_error_error_code(dwLastError);
+
+            throw ::file::exception(estatus, errorcode, wstr, "!SetFileAttributesW");
 
          }
 
@@ -1958,7 +1999,7 @@ retry:
 
       HRESULT hresult = pshelllink->SetPath(wstring(path));
 
-      auto estatus = hresult_to_status(hresult);
+      auto estatus = ::windows::hresult_status(hresult);
 
       if (!estatus)
       {
@@ -1990,7 +2031,7 @@ retry:
 
       HRESULT hresult = pshelllink->SetWorkingDirectory(wstring(path));
 
-      auto estatus = hresult_to_status(hresult);
+      auto estatus = ::windows::hresult_status(hresult);
 
       if (!estatus)
       {
@@ -2023,7 +2064,7 @@ retry:
 
       HRESULT hresult = pshelllink->SetIconLocation(wstring(path), iIcon);
 
-      auto estatus = hresult_to_status(hresult);
+      auto estatus = ::windows::hresult_status(hresult);
 
       if (!estatus)
       {
@@ -3569,11 +3610,11 @@ repeat:
 
             array < wstring > wstraSpecs;
 
-            ::papaya::array::copy(wstraSpecs, set["file_filter_specs"].stra());
+            wstraSpecs.copy_container(set["file_filter_specs"].stra());
 
             array < wstring > wstraNames;
 
-            ::papaya::array::copy(wstraNames, set["file_filter_names"].stra());
+            wstraNames.copy_container(set["file_filter_names"].stra());
 
             rgSpec.set_size(minimum(wstraSpecs.get_size(), wstraNames.get_size()));
 
@@ -3680,7 +3721,7 @@ repeat:
                         if (SUCCEEDED(hr))
                         {
 
-                           cotaskp(PWSTR) pwszFilePath;
+                           ::cotaskptr < PWSTR > pwszFilePath;
 
                            hr = pitem->GetDisplayName(SIGDN_FILESYSPATH, &pwszFilePath);
 
@@ -3714,7 +3755,7 @@ repeat:
                   if (SUCCEEDED(hr))
                   {
 
-                     cotaskp(PWSTR) pwszFilePath;
+                     ::cotaskptr < PWSTR > pwszFilePath;
 
                      hr = pitem->GetDisplayName(SIGDN_FILESYSPATH, &pwszFilePath);
 
@@ -3819,11 +3860,11 @@ repeat:
 
             array < wstring > wstraSpecs;
 
-            ::papaya::array::copy(wstraSpecs, set["file_filter_specs"].stra());
+            wstraSpecs.copy_container(set["file_filter_specs"].stra());
 
             array < wstring > wstraNames;
 
-            ::papaya::array::copy(wstraNames, set["file_filter_names"].stra());
+            wstraNames.copy_container(set["file_filter_names"].stra());
 
             rgSpec.set_size(minimum(wstraSpecs.get_size(), wstraNames.get_size()));
 
@@ -3893,7 +3934,7 @@ repeat:
                if (SUCCEEDED(hr))
                {
 
-                  cotaskp(PWSTR) pwszFilePath;
+                  ::cotaskptr < PWSTR > pwszFilePath;
 
                   hr = pitem->GetDisplayName(SIGDN_FILESYSPATH, &pwszFilePath);
 
@@ -4010,7 +4051,7 @@ repeat:
                if (SUCCEEDED(hr))
                {
 
-                  cotaskp(PWSTR) pwszFilePath;
+                  ::cotaskptr < PWSTR > pwszFilePath;
 
                   hr = pitem->GetDisplayName(SIGDN_FILESYSPATH, &pwszFilePath);
 
@@ -4128,7 +4169,7 @@ repeat:
                if (SUCCEEDED(hr))
                {
 
-                  cotaskp(PWSTR) pwszFilePath;
+                  ::cotaskptr < PWSTR > pwszFilePath;
 
                   hr = pitem->GetDisplayName(SIGDN_FILESYSPATH, &pwszFilePath);
 

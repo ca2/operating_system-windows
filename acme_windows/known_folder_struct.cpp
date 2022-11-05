@@ -3,6 +3,7 @@
 #include "known_folder_struct.h"
 #include <KnownFolders.h>
 
+
 struct known_folder_struct g_knownfolderstructa[] =
 {
 

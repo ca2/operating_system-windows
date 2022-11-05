@@ -12,6 +12,9 @@ Copyright (ca) 1998 by PJ Naughter.
 */
 
 
+#include "apex/networking/ip_enum.h"
+
+
 namespace apex_windows
 {
 

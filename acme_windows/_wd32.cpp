@@ -1,5 +1,6 @@
 #include "framework.h"
-#include "acme/operating_system.h"
+#include "acme/primitive/string/string.h"
+#include "acme/_operating_system.h"
 
 
 BSTR AllocSysString(const wd32char * pchData, strsize nDataLength) noexcept
@@ -7,14 +8,14 @@ BSTR AllocSysString(const wd32char * pchData, strsize nDataLength) noexcept
 
    BSTR bstr = nullptr;
 
-   strsize nLen = ::str().utf_to_utf_length(bstr, pchData, nDataLength);
+   strsize nLen = utf_to_utf_length(bstr, pchData, nDataLength);
 
    bstr = ::SysAllocStringLen(nullptr, (::u32)nLen);
 
    if (bstr != nullptr)
    {
 
-      ::str().utf_to_utf(bstr, pchData, nDataLength);
+      ::utf_to_utf(bstr, pchData, nDataLength);
 
    }
 
@@ -27,14 +28,14 @@ BSTR AllocSysString(const wd32char * pchData, strsize nDataLength) noexcept
 bool ReAllocSysString(BSTR * pbstr, const wd32char * pchData, strsize nDataLength) noexcept
 {
 
-   strsize nLen = ::str().utf_to_utf_length((wchar_t *) pbstr, pchData, nDataLength);
+   strsize nLen = utf_to_utf_length((wchar_t *) pbstr, pchData, nDataLength);
 
    bool bSuccess = ::SysReAllocStringLen(pbstr, nullptr, (::u32)nLen) != 0;
 
    if (bSuccess)
    {
 
-      ::str().utf_to_utf(*pbstr, pchData, nDataLength);
+      ::utf_to_utf(*pbstr, pchData, nDataLength);
 
    }
 

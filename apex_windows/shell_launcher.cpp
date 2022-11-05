@@ -1,6 +1,6 @@
 #include "framework.h"
-#include "apex/operating_system.h"
 #include "shell_launcher.h"
+#include "acme/exception/interface_only.h"
 
 
 namespace apex_windows
@@ -36,8 +36,6 @@ namespace apex_windows
       //      windows_show_window(m_edisplay, m_eactivation));
 
       //}
-
-      throw ::interface_only();
 
       throw ::interface_only();
 

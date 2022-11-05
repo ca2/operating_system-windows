@@ -3,11 +3,18 @@
 #include "dir_system.h"
 #include "acme_windows/file_find.h"
 #include "acme_windows/registry.h"
-#include "apex/operating_system.h"
 #include "acme/constant/id.h"
+#include "acme/primitive/string/str.h"
 #include "apex/platform/system.h"
 #include "acme/filesystem/filesystem/acme_directory.h"
+#include "acme/filesystem/filesystem/listing.h"
 #include "acme_windows/acme_directory.h"
+
+
+#include "acme/_operating_system.h"
+
+
+#include <Shlobj.h>
 
 
 namespace apex_windows
@@ -32,7 +39,7 @@ namespace apex_windows
 
       //auto estatus = 
       
-      ::object::initialize(pobject);
+      ::object::initialize(pparticle);
 
       //if (!estatus)
       //{
@@ -802,7 +809,7 @@ namespace apex_windows
 
       ::u32 dwAttrib;
 
-      dwAttrib = windows_get_file_attributes(str);
+      dwAttrib = ::windows::get_file_attributes(str);
 
       bIsDir = (dwAttrib != INVALID_FILE_ATTRIBUTES) && (dwAttrib & FILE_ATTRIBUTE_DIRECTORY);
 

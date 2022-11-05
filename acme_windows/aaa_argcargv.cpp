@@ -43,7 +43,7 @@
 //	{
 //		_argv[0] = cmd;						// argv[0] = exe name
 //
-//		while (*cmd && !ansi_char_is_space(*cmd))
+//		while (*cmd && !ansi_char_isspace(*cmd))
 //			cmd++;
 //
 //		if (*cmd)
@@ -53,7 +53,7 @@
 //	i32 argc = 1;
 //	for (;;)
 //	{
-//		while (*cmd && ansi_char_is_space(*cmd))		// Skip over any whitespace
+//		while (*cmd && ansi_char_isspace(*cmd))		// Skip over any whitespace
 //			cmd++;
 //
 //		if (*cmd == 0)						// End of command line?
@@ -80,7 +80,7 @@
 //			_argv[argc++] = cmd;
 //			_argv[argc] = 0;
 //
-//			while (*cmd && !ansi_char_is_space(*cmd))
+//			while (*cmd && !ansi_char_isspace(*cmd))
 //				cmd++;
 //
 //			if (*cmd == 0)

@@ -1,9 +1,9 @@
 #include "framework.h"
-#include "apex/operating_system.h"
-#include <Shlobj.h>
 #include "dir_system.h"
 #include "acme/filesystem/filesystem/acme_directory.h"
+#include "acme/platform/system.h"
 #include "acme_windows/acme_directory.h"
+#include <Shlobj.h>
 
 
 namespace apex_windows
@@ -30,7 +30,7 @@ namespace apex_windows
 
       //auto estatus = 
       
-      ::dir_system::initialize(pobject);
+      ::dir_system::initialize(pparticle);
 
       //if (!estatus)
       //{

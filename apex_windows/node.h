@@ -15,6 +15,7 @@
 namespace apex_windows
 {
 
+
    class CLASS_DECL_APEX_WINDOWS node :
       virtual public ::acme_windows::node,
       virtual public ::apex_windows_common::node
@@ -29,7 +30,7 @@ namespace apex_windows
       ~node() override;
 
 
-      virtual void initialize(::object* pobject) override;
+      void initialize(::particle * pparticle) override;
 
       string get_user_name();
 

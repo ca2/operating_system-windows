@@ -2,14 +2,22 @@
 #include "node.h"
 #include "os_context.h"
 #include "acme/platform/application.h"
-#include "acme/primitive/string/string_wide_conversion.h"
+#include "acme/primitive/primitive/memory.h"
+#include "acme/primitive/string/adaptor.h"
+#include "acme/primitive/string/international.h"
 #include "acme_windows/acme_directory.h"
 #include "acme_windows/acme_file.h"
 #include "acme_windows/registry.h"
 #include "operating-system/operating-system-windows/deployment/resource1.h"
 #include "apex/platform/os_context.h"
 #include "apex/platform/system.h"
+
+
+#include "acme/_operating_system.h"
+
+
 #include <shellapi.h>
+#include <shobjidl_core.h>
 
 
 CLASS_DECL_ACME_WINDOWS void shell_notify_folder_change(const wchar_t* pwsz);
@@ -52,11 +60,11 @@ namespace apex_windows
    }
 
 
-   void node::initialize(::object* pobject)
+   void node::initialize(::particle * pparticle)
    {
 
       //auto estatus = 
-      ::acme_windows::node::initialize(pobject);
+      ::acme_windows::node::initialize(pparticle);
 
       //if (!estatus)
       //{
@@ -67,7 +75,7 @@ namespace apex_windows
 
       //estatus = 
 
-      ::apex_windows_common::node::initialize(pobject);
+      ::apex_windows_common::node::initialize(pparticle);
 
       //if (!estatus)
       //{
@@ -424,8 +432,11 @@ namespace apex_windows
 
       set["privileged"] = true;
 
+
+      ::i32 iExitCode = -1;
+
       //if (!call_sync(path, strParam, path.folder(), ::e_display_none, 3_minute, set))
-      call_sync(path, strParam, path.folder(), ::e_display_none, 3_minute, set);
+      call_sync(path, strParam, path.folder(), ::e_display_none, 3_minute, set, &iExitCode);
       //{
 
       //   return false;
@@ -567,7 +578,7 @@ namespace apex_windows
 
       HRESULT hresult = win_create_link(wstrObj, wstrLnk, wstrDsc, wstrIco, iIcon);
 
-      auto estatus = hresult_to_status(hresult);
+      auto estatus = ::windows::hresult_status(hresult);
 
       if (failed(estatus))
       {
@@ -593,7 +604,7 @@ namespace apex_windows
 
       wstring wstrLnk(pathLnk);
 
-      auto poscontext = acmesystem()->m_papexsystem->os_context()->cast < ::apex_windows::os_context >();
+      ::pointer < ::apex_windows::os_context > poscontext = acmesystem()->m_papexsystem->os_context();
 
       comptr < IShellLinkW > pshelllink = poscontext->_get_IShellLinkW(pathLnk);
 
@@ -615,7 +626,7 @@ namespace apex_windows
       if (FAILED(hresult))
       {
 
-         auto estatus = hresult_to_status(hresult);
+         auto estatus = ::windows::hresult_status(hresult);
 
          return false;
 
@@ -642,7 +653,7 @@ namespace apex_windows
 
       wstring wstrLnk(pathLnk);
 
-      auto poscontext = acmesystem()->m_papexsystem->os_context()->cast < ::apex_windows::os_context >();
+      ::pointer < ::apex_windows::os_context > poscontext = acmesystem()->m_papexsystem->os_context();
 
       comptr < IShellLinkW > pshelllink = poscontext->_get_IShellLinkW(pathLnk);
 
@@ -664,7 +675,7 @@ namespace apex_windows
       if (FAILED(hresult))
       {
 
-         auto estatus = hresult_to_status(hresult);
+         auto estatus = ::windows::hresult_status(hresult);
 
          return false;
 
@@ -853,7 +864,7 @@ namespace apex_windows
    ::u32 node::get_current_directory(string& str)
    {
 
-      return ::GetCurrentDirectoryW(MAX_PATH * 8, wtostring(str, MAX_PATH * 8));
+      return ::GetCurrentDirectoryW(MAX_PATH * 8, wstring_adaptor(str, MAX_PATH * 8));
 
    }
 
@@ -861,7 +872,7 @@ namespace apex_windows
    ::u32 node::get_temp_path(string& str)
    {
 
-      return ::GetTempPathW(MAX_PATH * 8, wtostring(str, MAX_PATH * 8));
+      return ::GetTempPathW(MAX_PATH * 8, wstring_adaptor(str, MAX_PATH * 8));
 
    }
 

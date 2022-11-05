@@ -1,7 +1,9 @@
 ﻿#include "framework.h"
 #include "file_find.h"
+#include "acme/filesystem/filesystem/path.h"
 #include "acme/operating_system/time.h"
 #include "acme/primitive/datetime/earth_time.h"
+#include "acme/primitive/string/international.h"
 
 
 namespace acme_windows
@@ -437,39 +439,37 @@ namespace acme_windows
    }
 
 
+   //void file_find::dump(dump_context & dumpcontext) const
+   //{
+
+   //   matter::dump(dumpcontext);
+
+   //   //dumpcontext << "\nm_hContext = " << m_hContext;
+
+   //}
 
 
-   void file_find::dump(dump_context & dumpcontext) const
-   {
+   //void file_find::assert_ok() const
+   //{
 
-      matter::dump(dumpcontext);
+   //   // if you trip the ASSERT in the else side, you've called
+   //   // a get() function without having done at least one
+   //   // FindNext() call
 
-      //dumpcontext << "\nm_hContext = " << m_hContext;
+   //   if (m_hContext == nullptr)
+   //   {
 
-   }
+   //      ASSERT(m_pFoundInfo == nullptr && m_pNextInfo == nullptr);
 
+   //   }
+   //   else
+   //   {
 
-   void file_find::assert_ok() const
-   {
+   //      ASSERT(m_pFoundInfo != nullptr && m_pNextInfo != nullptr);
 
-      // if you trip the ASSERT in the else side, you've called
-      // a get() function without having done at least one
-      // FindNext() call
+   //   }
 
-      if (m_hContext == nullptr)
-      {
-
-         ASSERT(m_pFoundInfo == nullptr && m_pNextInfo == nullptr);
-
-      }
-      else
-      {
-
-         ASSERT(m_pFoundInfo != nullptr && m_pNextInfo != nullptr);
-
-      }
-
-   }
+   //}
 
 
 } // namespace acme_windows

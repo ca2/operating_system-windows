@@ -222,7 +222,7 @@ static inline av_const int av_isgraph(int c)
 }
 
 /**
- * Locale-independent conversion of ASCII isspace.
+ * Locale-independent conversion of ASCII character_isspace.
  */
 static inline av_const int av_isspace(int c)
 {

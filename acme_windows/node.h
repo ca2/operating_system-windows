@@ -29,7 +29,7 @@ namespace acme_windows
       ::file::path            m_strAppData;
       ::file::path            m_strPrograms;
       ::file::path            m_strCommonPrograms;
-
+      bool m_bInitializeCallstack;
 
       node();
       ~node() override;
@@ -48,7 +48,7 @@ namespace acme_windows
       //virtual ::file::path roaming() override;
 
 
-      virtual void call_async(const ::string& pszPath, const ::string& pszParam, const ::string& pszDir, ::e_display edisplay, bool bPrivileged, unsigned int* puiPid = nullptr);
+      //void call_async(const ::string& pszPath, const ::string& pszParam, const ::string& pszDir, ::e_display edisplay, bool bPrivileged, unsigned int* puiPid = nullptr) override;
 
 
       void shell_open(const ::file::path& path, const ::string& strParams = "", const ::file::path& pathFolder = "") override;
@@ -131,7 +131,11 @@ namespace acme_windows
       array <::serial::port_info> list_serial_ports() override;
 
       string get_user_language() override;
-      bool get_application_exclusivity_security_attributes(memory& memory) override;
+      
+      
+      ::pointer < security_attributes > get_application_exclusivity_security_attributes() override;
+
+
       void register_spa_file_type(const ::string& strAppIdHandler) override;
       void start_program_files_app_app_admin(string strPlatform, string strConfiguration) override;
 
@@ -147,6 +151,9 @@ namespace acme_windows
       virtual ::wstring expand_environment_variables(const ::wstring& wstr);
 
       void implement(::pointer<::acme::node> & pnode, ::pointer<::acme::system> & psystem)override;
+
+
+      ::i64 get_current_process_id() override;
 
 
       void on_start_system() override;
@@ -172,10 +179,43 @@ namespace acme_windows
       string get_callstack(const char * pszFormat, i32 iSkip, void * caller_address, int iCount) override;
 
 
+      ::pointer < ::acme::exclusive > _get_exclusive(::particle * pparticleContext, const ::string & strName, ::security_attributes * psecurityattributes = nullptr) override;
+      i32 get_current_process_affinity_order() override;
+
+
+      void call_async(const ::string & pszPath, const ::string & pszParam, const ::string & pszDir, ::e_display edisplay, bool bPrivileged, unsigned int * puiPid = nullptr) override;
+      void call_sync(const ::string & pszPath, const ::string & pszParam, const ::string & pszDir, ::e_display edisplay, const ::duration & durationTimeout, ::property_set & set, int * piExitCode) override;
+
+
+      void launch_application(::particle * pparticle, const ::string & strAppId, const ::string & strParams, int iBitCount) override;
+ 
+
+      //void shell_open(const ::file::path & path, const string & strParams = "", const ::file::path & pathFolder = {}) override;
+      //void open_url(const ::string & strUrl) override; //
+      void command_system(string_array & straOutput, int & iExitCode, const char * psz, enum_command_system ecommandsystem = e_command_system_none, const ::duration & durationTimeout = ::duration::infinite(), ::particle * pparticleSynchronization = nullptr, ::file::file * pfileLog = nullptr) override;
+
+      void shell_execute_async(const char * pszFile, const char * pszParams) override;
+      void shell_execute_sync(const char * pszFile, const char * pszParams, ::duration durationTimeout = minute()) override; 
+
+      void root_execute_async(const char * pszFile, const char * pszParams) override;
+      void root_execute_sync(const char * pszFile, const char * pszParams, ::duration durationTimeout = minute()) override;
+
+               bool set_process_priority(::enum_priority epriority) override;
+                ::string get_command_line() override;
+             
+            i32 get_current_processor_index() override;
+             i32 get_current_process_maximum_affinity() override;
+             
+              //i32 get_current_process_affinity_order() override;
+               ::u64 translate_processor_affinity(::i32 i) override;
+
    };
 
 
 } // namespace acme
+
+
+
 
 
 

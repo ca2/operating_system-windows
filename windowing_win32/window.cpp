@@ -425,7 +425,7 @@ namespace windowing_win32
 
          u32 dwLastError = ::GetLastError();
 
-         string strLastError = last_error_message(dwLastError);
+         string strLastError = ::windows::last_error_message(dwLastError);
 
          string strMessage;
 

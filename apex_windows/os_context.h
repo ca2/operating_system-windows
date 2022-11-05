@@ -1,6 +1,13 @@
 #pragma once
 
 
+#include "apex/platform/os_context.h"
+#include "acme_windows_common/comptr.h"
+
+
+#include <shobjidl_core.h>
+
+
 namespace apex_windows
 {
 

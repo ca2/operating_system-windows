@@ -5605,7 +5605,7 @@ namespace draw2d_gdiplus
 
             wchar_t wch = text.m_wstr.c_str()[i + iStart];
 
-            int iUtf8Length = ::str::ch().ansichar_uni_len(wch);
+            int iUtf8Length = unicode_ansichar_uni_len(wch);
 
             for (index iAnsiChar = 0; iAnsiChar < iUtf8Length; iAnsiChar++)
             {

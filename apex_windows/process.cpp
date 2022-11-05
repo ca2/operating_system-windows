@@ -1,7 +1,11 @@
 #include "framework.h"
 #include "process.h"
+#include "acme/primitive/string/parse.h"
+#include "acme/primitive/string/str.h"
 #include "acme_windows/pipe.h"
 #include "acme_windows/uac_tools.h"
+
+
 #include "acme/_operating_system.h"
 
 
@@ -150,7 +154,7 @@ namespace apex_windows
 
          DWORD dwLastError = ::GetLastError();
 
-         string strMessage = last_error_message(dwLastError);
+         string strMessage = ::windows::last_error_message(dwLastError);
 
          output_debug_string("command line: \"" + string(pwszCommandLine) + "\"");
          output_debug_string("\r\n");

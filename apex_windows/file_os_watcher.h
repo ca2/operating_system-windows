@@ -19,7 +19,9 @@
 #pragma once
 
 
-#include "apex/filesystem/filesystem/file_watcher.h"
+#include "apex/filesystem/file/watch.h"
+#include "apex/filesystem/file/watcher.h"
+#include "acme/_operating_system.h"
 
 
 namespace apex_windows

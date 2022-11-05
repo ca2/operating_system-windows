@@ -1,13 +1,22 @@
 ﻿#include "framework.h"
 #include "file_context.h"
 #include "dir_system.h"
+#include "node.h"
+#include "acme/exception/exception.h"
+#include "acme/filesystem/file/exception.h"
 #include "acme/filesystem/file/memory_file.h"
 #include "acme/filesystem/file/status.h"
 #include "acme/filesystem/filesystem/acme_directory.h"
-#include "apex/operating_system.h"
 #include "acme/operating_system/time.h"
-#include "acme_windows/file_exception.h"
+#include "acme/primitive/primitive/payload.h"
+#include "acme/primitive/string/international.h"
 #include "apex/platform/system.h"
+
+
+CLASS_DECL_ACME_WINDOWS const void * get_resource_pointer(HINSTANCE hinst, DWORD nID, const char * pcszType, memsize & memsize);
+CLASS_DECL_ACME_WINDOWS bool read_resource_as_memory(memory & m, HINSTANCE hinst, DWORD nID, const char * pcszType, strsize iReadAtMostByteCount = -1);
+CLASS_DECL_ACME::file::path get_module_path(HMODULE hmodule);
+CLASS_DECL_ACME FILETIME & copy(FILETIME & filetime, const ::earth::time & time);
 
 
 namespace apex_windows
@@ -33,7 +42,7 @@ namespace apex_windows
 
       //auto estatus = 
       
-      ::object::initialize(pobject);
+      ::object::initialize(pparticle);
 
       //if (!estatus)
       //{
@@ -345,7 +354,7 @@ namespace apex_windows
 
          auto estatus = ::windows::last_error_status(dwLastError);
 
-         auto errorcode = __last_error(dwLastError);
+         auto errorcode = ::windows::last_error_error_code(dwLastError);
 
          //string strError;
 
@@ -393,7 +402,7 @@ namespace apex_windows
 
 #ifdef WINDOWS_DESKTOP
 
-      u32 dwAttrib = windows_get_file_attributes(psz);
+      u32 dwAttrib = ::windows::get_file_attributes(psz);
 
       if (dwAttrib & FILE_ATTRIBUTE_READONLY)
       {
@@ -427,7 +436,7 @@ namespace apex_windows
 
       memsize s = 0;
 
-      const void* pdata = get_resource_pointer((HINSTANCE)acmesystem()->m_papexsystem->m_hinstanceThis, 1024, "ZIP", s);
+      const void* pdata = get_resource_pointer((HINSTANCE)acmesystem()->m_papexsystem->m_psubsystem->m_hinstanceThis, 1024, "ZIP", s);
 
       //m_memoryMainResource.assign(pdata, s);
 
@@ -458,7 +467,7 @@ namespace apex_windows
 
       ::pointer<::apex::system>psystem = get_system();
 
-      if (read_resource_as_memory(*pfile->get_primitive_memory(), (HINSTANCE) psystem->m_hinstanceThis, iId, psz))
+      if (read_resource_as_memory(*pfile->get_primitive_memory(), (HINSTANCE) psystem->m_psubsystem->m_hinstanceThis, iId, psz))
       {
 
          return pfile;
@@ -706,13 +715,16 @@ namespace apex_windows
 
       LPFILETIME pLastWriteTime = nullptr;
 
-
-      if ((wAttr = windows_get_file_attributes(path)) == (::u32)INVALID_FILE_ATTRIBUTES)
+      if ((wAttr = ::windows::get_file_attributes(path)) == (::u32)INVALID_FILE_ATTRIBUTES)
       {
 
          DWORD dwLastError = ::GetLastError();
 
-         throw windows_file_exception(::error_io, dwLastError, path, "!windows_get_file_attributes");
+         auto estatus = ::windows::last_error_status(dwLastError);
+
+         auto errorcode = ::windows::last_error_error_code(dwLastError);
+
+         throw ::file::exception(estatus, errorcode, path, "!windows_get_file_attributes");
 
       }
 
@@ -727,7 +739,11 @@ namespace apex_windows
 
             DWORD dwLastError = ::GetLastError();
 
-            throw windows_file_exception(::error_io, dwLastError, pszFileName, "!SetFileAttributesW");
+            auto estatus = ::windows::last_error_status(dwLastError);
+
+            auto errorcode = ::windows::last_error_error_code(dwLastError);
+
+            throw ::file::exception(estatus, errorcode, pszFileName, "!SetFileAttributesW");
 
          }
 
@@ -737,7 +753,7 @@ namespace apex_windows
       if (status.m_mtime.get_time() != 0)
       {
          
-         lastWriteTime = __FILETIME(status.m_mtime);
+         copy(lastWriteTime, status.m_mtime);
 
          pLastWriteTime = &lastWriteTime;
 
@@ -745,7 +761,7 @@ namespace apex_windows
          if (status.m_atime.get_time() != 0)
          {
 
-            lastAccessTime = __FILETIME(status.m_atime);
+            copy(lastAccessTime, status.m_atime);
 
             pLastAccessTime = &lastAccessTime;
 
@@ -755,7 +771,7 @@ namespace apex_windows
          if (status.m_ctime.get_time() != 0)
          {
 
-            creationTime = __FILETIME(status.m_ctime);
+            copy(creationTime, status.m_ctime);
 
             pCreationTime = &creationTime;
 
@@ -769,7 +785,7 @@ namespace apex_windows
          if (hFile == INVALID_HANDLE_VALUE)
          {
 
-            auto estatus = ::::windows::last_error_status(::GetLastError());
+            auto estatus = ::windows::last_error_status(::GetLastError());
 
             throw ::exception(estatus);
 
@@ -780,7 +796,7 @@ namespace apex_windows
          if (!SetFileTime((HANDLE)hFile, pCreationTime, pLastAccessTime, pLastWriteTime))
          {
 
-            auto estatus = ::::windows::last_error_status(::GetLastError());
+            auto estatus = ::windows::last_error_status(::GetLastError());
 
             throw ::exception(estatus);
 
@@ -789,7 +805,7 @@ namespace apex_windows
          if (!::CloseHandle(hFile))
          {
 
-            auto estatus = ::::windows::last_error_status(::GetLastError());
+            auto estatus = ::windows::last_error_status(::GetLastError());
 
             throw ::exception(estatus);
 
@@ -803,7 +819,7 @@ namespace apex_windows
          if (!SetFileAttributesW((LPWSTR)(const widechar *)pszFileName, (::u32)status.m_attribute))
          {
 
-            auto estatus = ::::windows::last_error_status(::GetLastError());
+            auto estatus = ::windows::last_error_status(::GetLastError());
 
             throw ::exception(estatus);
 

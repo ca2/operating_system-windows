@@ -1,7 +1,15 @@
 #include "framework.h"
+#include "acme/filesystem/filesystem/path.h"
+#include "acme/primitive/primitive/memory.h"
 #include "acme/primitive/string/adaptor.h"
+#include "acme/primitive/string/international.h"
+#include "acme/_operating_system.h"
 #include <shellapi.h>
 #include <shlobj.h>
+
+
+
+CLASS_DECL_ACME_WINDOWS const void * get_resource_pointer(HINSTANCE hinst, DWORD nID, const char * pcszType, memsize & memsize);
 
 
 HICON extract_icon(HINSTANCE hInst, const ::string& pszExeFileName, ::u32 nIconIndex)
@@ -113,11 +121,10 @@ CLASS_DECL_ACME_WINDOWS bool read_resource_as_memory(memory& memory, HINSTANCE h
 }
 
 
-
 bool CLASS_DECL_ACME_WINDOWS shell_get_special_folder_path(HWND hwnd, ::file::path& str, i32 csidl, bool fCreate)
 {
 
-   return ::SHGetSpecialFolderPathW(hwnd, wtostring(str, MAX_PATH * 8), csidl, fCreate) != false;
+   return ::SHGetSpecialFolderPathW(hwnd, wstring_adaptor(str, MAX_PATH * 8), csidl, fCreate) != false;
 
 }
 
@@ -130,7 +137,7 @@ bool CLASS_DECL_ACME_WINDOWS shell_get_special_folder_path(HWND hwnd, ::file::pa
    if (!shell_get_special_folder_path(nullptr, path, csidl, fCreate))
    {
 
-      return "";
+      return {};
 
    }
 

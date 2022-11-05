@@ -1,6 +1,7 @@
 #pragma once
 
 
+#include "acme/filesystem/file/text_stream.h"
 #include "acme/operating_system/console.h"
 
 
@@ -17,13 +18,14 @@ namespace acme_windows
       //__creatable_from_base(console, ::console::console);
 
 
-      int m_iW;
-      int m_iH;
-      string_stream m_cout;
+      int               m_iW;
+      int               m_iH;
+      string_stream     m_cout;
 
 
       console();
       ~console() override;
+
 
       ::string_stream& cout() override;
 

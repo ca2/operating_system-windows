@@ -77,9 +77,6 @@
     <ClCompile Include="known_folder_struct.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="_ansi.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="_wd16.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -108,6 +105,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="_no_pch.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="exclusive.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -229,6 +229,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="file.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="exclusive.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

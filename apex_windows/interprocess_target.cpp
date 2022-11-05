@@ -2,7 +2,7 @@
 // From interprocess_communcation by camilo on 2022-10-11 15:32 <3ThomasBorregaardSorensen!!
 #include "framework.h"
 #include "launcher.h"
-#include "apex/operating_system.h"
+//#include "apex/operating_system.h"
 #include "interprocess_target.h"
 #include "apex/platform/launcher.h"
 #include "apex/platform/system.h"
@@ -347,7 +347,7 @@ namespace apex_windows
 
       ::pointer<::apex::system>psystem = get_system();
 
-      HINSTANCE hinstance = (HINSTANCE)psystem->m_hinstanceThis;
+      HINSTANCE hinstance = (HINSTANCE)psystem->m_psubsystem->m_hinstanceThis;
 
       ATOM atom = rx_register_class(hinstance);
 

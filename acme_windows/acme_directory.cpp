@@ -2,7 +2,19 @@
 #include "framework.h"
 #include "acme_directory.h"
 #include "acme_file.h"
+#include "acme/filesystem/filesystem/listing.h"
+#include "acme/operating_system/process.h"
+#include "acme/platform/node.h"
+#include "acme/primitive/string/adaptor.h"
+#include "acme/primitive/string/str.h"
+#include "acme_windows_common/cotaskptr.h"
 #include <Shlobj.h>
+
+
+//#ifdef WINDOWS_DESKTOP
+//
+//
+//#include <Shlobj.h>
 
 
 namespace acme_windows
@@ -361,12 +373,6 @@ pacmedir->roaming();
 
 
 
-   #ifdef WINDOWS_DESKTOP
-
-
-   #include <Shlobj.h>
-
-
    ::file::path acme_directory::program_files_x86()
    {
 
@@ -419,83 +425,13 @@ pacmedir->roaming();
    }
 
 
-   #else
-
-
-   ::file::path acme_directory::program_files_x86()
-   {
-
-      ::file::path path("/opt/ca2");
-
-      return path;
-
-   }
-
-
-   ::file::path acme_directory::program_files()
-   {
-
-      ::file::path path("/opt/ca2");
-
-      return path;
-
-   }
-
-
-   #endif
-
-
    ::file::path acme_directory::stage(string strAppId, string strPlatform, string strConfiguration)
    {
 
-      return inplace_install(strAppId, strPlatform, strConfiguration) / "time" / time_binary_platform(strPlatform) / strConfiguration;
+      return inplace_install(strAppId, strPlatform, strConfiguration) / "time" / acmenode()->time_binary_platform(strPlatform) / strConfiguration;
 
    }
 
-
-   #ifdef LINUX
-
-
-   ::file::path acme_directory::home()
-   {
-
-      return getenv("HOME");
-
-   }
-
-
-   #endif
-
-
-#if defined(_UWP) || defined(__APPLE__) || defined(LINUX) || defined(ANDROID)
-
-   ::file::path acme_directory::bookmark()
-   {
-
-      auto psystem = acmesystem();
-
-      auto pacmedir = psystem->m_pacmedirectory;
-
-      return pacmedir->localconfig() / "bookmark";
-
-   }
-
-
-   #endif
-
-
-   #ifdef _UWP
-
-
-   ::file::path acme_directory::home()
-   {
-
-      return "";
-
-   }
-
-
-   #endif
 
 
    void acme_directory::set_path_install_folder(const ::string & pszPath)
@@ -604,7 +540,7 @@ pacmedir->roaming();
    bool acme_directory::_shell_get_special_folder_path(HWND hwnd, ::file::path& str, i32 csidl, bool fCreate)
    {
 
-      return ::SHGetSpecialFolderPathW(hwnd, wtostring(str, MAX_PATH * 8), csidl, fCreate) != false;
+      return ::SHGetSpecialFolderPathW(hwnd, wstring_adaptor(str, MAX_PATH * 8), csidl, fCreate) != false;
 
    }
 
@@ -766,7 +702,7 @@ pacmedir->roaming();
 //   }
 
 #include "framework.h"
-#include "acme/operating_system.h"
+//#include "acme/operating_system.h"
 
 
 #if defined(WINDOWS_DESKTOP)
@@ -2178,56 +2114,56 @@ pacmedir->create CreateDirectoryW last error(%d)=%s", dwError, pszError);
 
 
 
-   ::file::path acme_directory::program_files_x86()
-   {
+   //::file::path acme_directory::program_files_x86()
+   //{
 
-      wstring wstrModuleFolder(e_get_buffer, sizeof(unichar) * 8);
+   //   wstring wstrModuleFolder(e_get_buffer, sizeof(unichar) * 8);
 
-      wstring wstrModuleFilePath(e_get_buffer, sizeof(unichar) * 8);
+   //   wstring wstrModuleFilePath(e_get_buffer, sizeof(unichar) * 8);
 
-      wcscpy(wstrModuleFilePath, _wgetenv(L"PROGRAMFILES(X86)"));
+   //   wcscpy(wstrModuleFilePath, _wgetenv(L"PROGRAMFILES(X86)"));
 
-      if (wcslen(wstrModuleFilePath) == 0)
-      {
+   //   if (wcslen(wstrModuleFilePath) == 0)
+   //   {
 
-         SHGetSpecialFolderPathW(nullptr, wstrModuleFilePath, CSIDL_PROGRAM_FILES, false);
+   //      SHGetSpecialFolderPathW(nullptr, wstrModuleFilePath, CSIDL_PROGRAM_FILES, false);
 
-      }
+   //   }
 
-      wstrModuleFilePath.trim_right(L"\\/");
+   //   wstrModuleFilePath.trim_right(L"\\/");
 
-      wcscpy(wstrModuleFolder, wstrModuleFilePath);
+   //   wcscpy(wstrModuleFolder, wstrModuleFilePath);
 
-      return string(wstrModuleFolder);
+   //   return string(wstrModuleFolder);
 
-   }
-
-
-   ::file::path acme_directory::program_files()
-   {
-
-      wstring wstrModuleFolder(e_get_buffer, sizeof(unichar) * 8);
-
-      wstring wstrModuleFilePath(e_get_buffer, sizeof(unichar) * 8);
-
-      wcscpy(wstrModuleFilePath, _wgetenv(L"PROGRAMW6432"));
-
-      if (wcslen(wstrModuleFilePath) == 0)
-      {
-
-         SHGetSpecialFolderPathW(nullptr, wstrModuleFilePath, CSIDL_PROGRAM_FILES, false);
-
-      }
-
-      wstrModuleFilePath.trim_right(L"\\/");
-
-      wstrModuleFolder = wstrModuleFilePath;
-
-      return string(wstrModuleFolder);
+   //}
 
 
+   //::file::path acme_directory::program_files()
+   //{
 
-   }
+   //   wstring wstrModuleFolder(e_get_buffer, sizeof(unichar) * 8);
+
+   //   wstring wstrModuleFilePath(e_get_buffer, sizeof(unichar) * 8);
+
+   //   wcscpy(wstrModuleFilePath, _wgetenv(L"PROGRAMW6432"));
+
+   //   if (wcslen(wstrModuleFilePath) == 0)
+   //   {
+
+   //      SHGetSpecialFolderPathW(nullptr, wstrModuleFilePath, CSIDL_PROGRAM_FILES, false);
+
+   //   }
+
+   //   wstrModuleFilePath.trim_right(L"\\/");
+
+   //   wstrModuleFolder = wstrModuleFilePath;
+
+   //   return string(wstrModuleFolder);
+
+
+
+   //}
 
 
 

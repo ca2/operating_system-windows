@@ -1,6 +1,9 @@
 #pragma once
 
 
+
+#include "acme/_operating_system.h"
+
 //CLASS_DECL_APEX_WINDOWS bool windows_full_path(unichar * pszPathOut, const unichar * pszFileIn);
 
 //CLASS_DECL_APEX_WINDOWS bool windows_full_path(wstring & wstrFullPath, const wstring & wstrPath);

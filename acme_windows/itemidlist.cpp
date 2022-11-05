@@ -1,7 +1,7 @@
 #include "framework.h"
 #include "itemidlist.h"
 #include "known_folder_struct.h"
-#include "acme/_operating_system.h"
+#include "acme_windows_common/cotaskptr.h"
 
 
 itemidlist::itemidlist() :
@@ -770,7 +770,7 @@ string itemidlist::_tooltip_info(IShellFolder * psf, LPCITEMIDLIST pidl)
    pinfo->GetInfoTip(0, &pwsz);
 
 
-   return utf8(pwsz);
+   return pwsz.m_p;
 
 
 }
@@ -1010,7 +1010,7 @@ bool itemidlist::get_refid_for_known_folder(KNOWNFOLDERID & refid, const ::strin
    if(::is_set(pknownfolderstruct))
    {
 
-      refid = pknownfolderstruct->m_atomKnownFolder;
+      refid = pknownfolderstruct->m_knownfolderid;
 
       return true;
 
@@ -1043,14 +1043,14 @@ HRESULT itemidlist::get_item_in_known_folder(itemidlist & idl, const string & st
 
             wstring wstrPath(strPath);
 
-            HANDLE hToken = NULL;
+            HANDLE handleToken = NULL;
 
             ITEMIDLIST * pidl = nullptr;
 
             hr = SHGetKnownFolderIDList(
-               pknownfolder->m_atomKnownFolder,
+               pknownfolder->m_knownfolderid,
                0,
-               hToken,
+               handleToken,
                &pidl);
 
             if (SUCCEEDED(hr))

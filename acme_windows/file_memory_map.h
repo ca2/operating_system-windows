@@ -2,6 +2,7 @@
 
 
 #include "acme/filesystem/file/memory_map.h"
+#include "acme/_operating_system.h"
 
 
 namespace acme_windows
