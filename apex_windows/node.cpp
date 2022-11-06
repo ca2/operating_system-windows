@@ -1073,6 +1073,37 @@ namespace apex_windows
    }
 
 
+   void node::on_start_application(::apex::application * papplication)
+   {
+
+      //if (!::is_debugger_attached())
+      {
+
+         ::file::path pathObj;
+
+         ::file::path pathLnk;
+
+         pathObj = file()->module();
+
+         string strLinkTitle;
+
+         strLinkTitle = m_strAppName;
+
+         strLinkTitle.replace_with("_", "/");
+         strLinkTitle.replace_with("_", "\\");
+         strLinkTitle.replace_with("_", "-");
+
+         pathLnk = acmedirectory()->localconfig() / "desk/monitor-0/2desk" / strLinkTitle + ".lnk";
+
+         acmedirectory()->create(pathLnk.folder());
+
+         acmesystem()->m_papexsystem->m_papexnode->shell_create_link(pathObj, pathLnk, "app=" + m_strAppName);
+
+      }
+
+   }
+
+
 } // namespace apex_windows
 
 

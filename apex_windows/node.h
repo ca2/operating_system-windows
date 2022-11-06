@@ -106,6 +106,9 @@ namespace apex_windows
       void create_app_shortcut(::acme::application* papp) override;
 
 
+      void on_start_application(::apex::application * papplication) override;
+
+
    };
 
 
