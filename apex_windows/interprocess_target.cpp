@@ -402,7 +402,7 @@ namespace apex_windows
    //void * interprocess_target::on_interprocess_receive(::inteprocess::handler * prx, const ::string & strMessage)
    //{
 
-   //   if (::str().begins_ci(strMessage, "synch_"))
+   //   if (strMessage.begins_ci("synch_"))
    //   {
 
    //      if (m_preceiver != nullptr)

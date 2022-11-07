@@ -1394,10 +1394,10 @@ pacmedir->create(pathTarget.folder()))
       auto pathSource = m_pathVrel / lpcszRelative;
 
 
-      //if (::str().ends_ci(lpcszRelative, ".dll")
-      //      || ::str().ends_ci(lpcszRelative, ".exe")
-      //      || ::str().ends_ci(lpcszRelative, ".ocx")
-      //      || ::str().ends_ci(lpcszRelative, ".cab"))
+      //if (lpcszRelative.ends_ci(".dll")
+      //      || lpcszRelative.ends_ci(".exe")
+      //      || lpcszRelative.ends_ci(".ocx")
+      //      || lpcszRelative.ends_ci(".cab"))
       //{
 
       //   string strStatus;
@@ -1410,7 +1410,7 @@ pacmedir->create(pathTarget.folder()))
       //   add_status("Signing code ...");
 
       //}
-      //else if (::str().ends_ci(lpcszRelative, ".sys"))
+      //else if (lpcszRelative.ends_ci(".sys"))
       //{
 
       //   string strStatus;
@@ -1830,10 +1830,10 @@ pacmedir->create(pathTarget.folder()))
          ::file::path strFile;
          string strTitle;
          string strRelative;
-         ::str().ends_eat(strRelease, "\\");
-         ::str().ends_eat(strRelease, "/");
-         ::str().ends_eat(strLocal, "\\");
-         ::str().ends_eat(strLocal, "/");
+         strRelease.ends_eat("\\");
+         strRelease.ends_eat("/");
+         strLocal.ends_eat("\\");
+         strLocal.ends_eat("/");
          strFile = strRelease + ".expand_fileset";
          strTitle = strRelease.name() + ".expand_fileset";
          strRelative = strLocal + ".expand_fileset";
@@ -1900,7 +1900,7 @@ pacmedir->create(pathTarget.folder()))
       for (; i < m_straFiles.get_size(); i++)
       {
          ::file::path & strFile = m_straFiles[i];
-         if (::str().ends_ci(strFile, ".zip"))
+         if (strFile.ends_ci(".zip"))
          {
          }
          else if (pcontext->m_papexcontext->dir().is(strFile))
@@ -2386,7 +2386,7 @@ pacmedir->create(pathTarget.folder()))
       for (i32 i = 0; i < m_straPath.get_count(); i++)
       {
          ::file::path strRelative = m_straPath[i].relative();
-         if (::str().begins_ci(strRelative, "META-INF\\"))
+         if (strRelative.begins_ci("META-INF\\"))
             continue;
          strRelative.replace("\\", "/");
          mem.set_size(0);

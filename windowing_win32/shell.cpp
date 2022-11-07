@@ -874,7 +874,7 @@ namespace windowing_win32
       if (((FAILED(hrIconLocation) && FAILED(hrGetLocation))
          || getfileimage.m_imagekey.m_iIcon == 0x80000000
          || !m_pcontext->m_papexcontext->file().exists(strIconLocation))
-         && ::str().ends_ci(strFileParam, ".lnk"))
+         && strFileParam.ends_ci(".lnk"))
       {
 
          m_pcontext->m_papexcontext->file().resolve_link(pathTarget, strFileParam);
@@ -1368,7 +1368,7 @@ namespace windowing_win32
 
          string str = m_pcontext->m_papexcontext->file().as_string(getfileimage.m_imagekey.m_strPath);
 
-         if (::str().begins_eat_ci(str, "ca2prompt\r\n"))
+         if (str.begins_eat_ci("ca2prompt\r\n"))
          {
 
             str.trim();
@@ -1561,7 +1561,7 @@ namespace windowing_win32
 
       }
 
-      if (::str().begins_eat(str, "foo."))
+      if (str.begins_eat("foo."))
       {
 
          get_image_by_file_extension(getfileimage);

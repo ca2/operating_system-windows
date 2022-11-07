@@ -53,10 +53,10 @@ string url_dir_name_for_relative(const char * pszPath)
 
    string strDir(pszPath);
 
-   if (::str().ends(strDir, "/"))
+   if (strDir.ends("/"))
       return strDir;
 
-   ::str().ends_eat(strDir, "/");
+   strDir.ends_eat("/");
 
    strsize iFind = strDir.reverse_find("/");
 
@@ -464,17 +464,17 @@ CLASS_DECL_ACME string defer_solve_relative(const char * pszRelative, const char
       return "";
    if (strAbsolute.is_empty())
       return solve_relative(strRelative);
-   if (::str().begins_ci(strRelative, "http://"))
+   if (strRelative.begins_ci("http://"))
       return solve_relative(strRelative);
-   if (::str().begins_ci(strRelative, "https://"))
+   if (strRelative.begins_ci("https://"))
       return solve_relative(strRelative);
-   if (::str().begins_ci(strRelative, "ftp://"))
+   if (strRelative.begins_ci("ftp://"))
       return solve_relative(strRelative);
-   if (::str().begins_ci(strRelative, "ext://"))
+   if (strRelative.begins_ci("ext://"))
       return solve_relative(strRelative);
-   if (::str().begins(strRelative, "/"))
+   if (strRelative.begins("/"))
       return solve_relative(strRelative);
-   if (::str().begins(strRelative, "\\\\"))
+   if (strRelative.begins("\\\\"))
       return solve_relative(strRelative);
 
    index iFind = strRelative.find(":\\");
@@ -495,7 +495,7 @@ CLASS_DECL_ACME string defer_solve_relative(const char * pszRelative, const char
 
    strAbsolute = ::url_dir_name_for_relative(strAbsolute);
 
-   if (!::str().ends(strAbsolute, "/"))
+   if (!strAbsolute.ends("/"))
       strAbsolute += "/";
    strRelative = strAbsolute + strRelative;
 

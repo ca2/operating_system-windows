@@ -83,7 +83,7 @@ namespace apex_windows
    //{
 
 
-   //   if (::str().begins_ci(pszFileIn, "http://"))
+   //   if (pszFileIn.begins_ci("http://"))
    //   {
 
    //      str = pszFileIn;
@@ -91,7 +91,7 @@ namespace apex_windows
    //      return true;
 
    //   }
-   //   else if (::str().begins_ci(pszFileIn, "https://"))
+   //   else if (pszFileIn.begins_ci("https://"))
    //   {
 
    //      str = pszFileIn;
@@ -119,12 +119,12 @@ namespace apex_windows
    //   /*      if(::apex::file_context::FullPath(wstrFullPath, wstrPath))
    //   return true;*/
 
-   //   if (::str().begins_ci(wstrPath, L"http://"))
+   //   if (wstrPath.begins_ci(L"http://"))
    //   {
    //      wstrFullPath = wstrPath;
    //      return true;
    //   }
-   //   else if (::str().begins_ci(wstrPath, L"https://"))
+   //   else if (wstrPath.begins_ci(L"https://"))
    //   {
    //      wstrFullPath = wstrPath;
    //      return true;
@@ -753,7 +753,7 @@ namespace apex_windows
       if (status.m_mtime.get_time() != 0)
       {
          
-         copy(lastWriteTime, status.m_mtime);
+         ::copy(lastWriteTime, status.m_mtime);
 
          pLastWriteTime = &lastWriteTime;
 
@@ -761,7 +761,7 @@ namespace apex_windows
          if (status.m_atime.get_time() != 0)
          {
 
-            copy(lastAccessTime, status.m_atime);
+            ::copy(lastAccessTime, status.m_atime);
 
             pLastAccessTime = &lastAccessTime;
 
@@ -771,7 +771,7 @@ namespace apex_windows
          if (status.m_ctime.get_time() != 0)
          {
 
-            copy(creationTime, status.m_ctime);
+            ::copy(creationTime, status.m_ctime);
 
             pCreationTime = &creationTime;
 

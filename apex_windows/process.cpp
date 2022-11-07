@@ -111,7 +111,7 @@ namespace apex_windows
 
       wstring wstrCommandLine;
 
-      if(::str().ends_ci(szCmdline,".bat"))
+      if(szCmdline.ends_ci(".bat"))
       {
 
          string strCmd;

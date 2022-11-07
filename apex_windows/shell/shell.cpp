@@ -1,7 +1,11 @@
 // Created on 2021-04-28 21:56 BRT <3TBS_!! Second celebration of Mummis Birthday 70!!
 // party with Carols Family!!
 #include "framework.h"
+#include "acme/_operating_system.h"
 
+#include <ShlObj_core.h>
+
+CLASS_DECL_ACME_WINDOWS_COMMON HRESULT defer_co_initialize_ex(bool bMultiThread, bool bDisableOleDDE = false);
 
 HRESULT win_create_link(const widechar* pszPathObj, const widechar* pszPathLink, const widechar* pszDesc, const widechar* pszIconPath, ::i32 iIcon)
 {

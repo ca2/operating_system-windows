@@ -781,6 +781,7 @@
     <Lib />
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="app_launcher.h" />
     <ClInclude Include="dir_context.h" />
     <ClInclude Include="dir_system.h" />
     <ClInclude Include="explorer\explorer_restart.h" />
@@ -805,6 +806,7 @@
     <ClInclude Include="_library.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="app_launcher.cpp" />
     <ClCompile Include="dir_context.cpp" />
     <ClCompile Include="dir_system.cpp" />
     <ClCompile Include="interprocess_base.cpp" />

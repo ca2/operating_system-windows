@@ -60,7 +60,7 @@ namespace user_service
       if (strPrefix.has_char())
       {
 
-         ::str().ends_eat_ci(strPrefix, "/");
+         strPrefix.ends_eat_ci("/");
 
          outheader("Access-Control-Allow-Origin") = strPrefix;
 
@@ -78,7 +78,7 @@ namespace user_service
 
             string strRequest = m_request.m_strRequestUri;
 
-            ::str().begins_eat_ci(strRequest, strStart);
+            strRequest.begins_eat_ci(strStart);
 
             strsize iFind = strRequest.find_ci('?');
 

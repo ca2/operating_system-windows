@@ -8,9 +8,11 @@
 #include "acme_windows/acme_directory.h"
 #include "acme_windows/acme_file.h"
 #include "acme_windows/registry.h"
-#include "operating-system/operating-system-windows/deployment/resource1.h"
+#include "apex/filesystem/filesystem/file_context.h"
+#include "apex/platform/application.h"
 #include "apex/platform/os_context.h"
 #include "apex/platform/system.h"
+#include "operating-system/operating-system-windows/deployment/resource1.h"
 
 
 #include "acme/_operating_system.h"
@@ -1087,7 +1089,7 @@ namespace apex_windows
 
          string strLinkTitle;
 
-         strLinkTitle = m_strAppName;
+         strLinkTitle = papplication->m_strAppName;
 
          strLinkTitle.replace_with("_", "/");
          strLinkTitle.replace_with("_", "\\");
@@ -1097,7 +1099,7 @@ namespace apex_windows
 
          acmedirectory()->create(pathLnk.folder());
 
-         acmesystem()->m_papexsystem->m_papexnode->shell_create_link(pathObj, pathLnk, "app=" + m_strAppName);
+         acmesystem()->m_papexsystem->m_papexnode->shell_create_link(pathObj, pathLnk, "app=" + papplication->m_strAppName);
 
       }
 
