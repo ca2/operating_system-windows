@@ -8,12 +8,21 @@ Contact : nish@voidnish.com
 #include "framework.h"
 #include "notification_area.h"
 #include "icon.h"
+#include "acme/constant/message.h"
+#include "acme/platform/node.h"
+#include "acme/platform/system.h"
+#include "acme/primitive/string/international.h"
 #include "apex_windows/process_data.h"
-#include <CommCtrl.h>
-
 #include "aura/graphics/image/list.h"
 #include "aura/graphics/image/icon.h"
 #include "aura/graphics/image/drawing.h"
+
+
+#include "acme/_operating_system.h"
+
+
+#include <CommCtrl.h>
+
 
 
 namespace windowing_win32

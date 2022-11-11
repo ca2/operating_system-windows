@@ -988,7 +988,7 @@ namespace windows
       for (i32 i = 0; i < a.interaction_count(); i++)
       {
 
-         hwnda.add(__hwnd(a.interaction_at(i)->oswindow()));
+         hwnda.add(__hwnd(((::user::interaction *)a.interaction_at(i))->oswindow()));
 
       }
 

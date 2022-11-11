@@ -1,8 +1,11 @@
 // created by Camilo 2021-02-04 00:58 BRT CamiloSasuke<3ThomasBorregaardSoerensen
 #include "framework.h"
 #include "keyboard.h"
+#include "acme/parallelization/synchronous_lock.h"
 #include "aura/message/user.h"
-#include "acme/operating_system.h"
+
+
+#include "acme/_operating_system.h"
 
 
 namespace windowing_win32
@@ -95,7 +98,7 @@ namespace windowing_win32
    void keyboard::translate_os_key_message(::user::key* pkey)
    {
 
-      synchronous_lock synchronouslock(mutex());
+      synchronous_lock synchronouslock(synchronization());
 
       if (pkey->m_ekey == ::user::e_key_refer_to_text_member
          && pkey->m_strText.has_char())

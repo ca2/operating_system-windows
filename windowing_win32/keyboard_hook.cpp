@@ -2,6 +2,7 @@
 #include "framework.h"
 #include "keyboard_hook.h"
 #include "acme/constant/message.h"
+#include "acme/exception/exception.h"
 #include "acme/primitive/primitive/particle.h"
 
 
@@ -73,7 +74,7 @@ namespace keyboard_hook
 
             auto emessage = (enum_message)wParam;
 
-            g_pmatter->call(emessage, pk->vkCode, pk->scanCode, g_pmatter);
+            g_pparticle->call(emessage, pk->vkCode, pk->scanCode, g_pparticle);
 
             output_debug_string("Y");
 
@@ -133,7 +134,7 @@ namespace keyboard_hook
    }
 
 
-   void install(::matter * pmatter)
+   void install(::particle * pparticle)
    {
 
       if (g_hhook != nullptr)
@@ -145,7 +146,7 @@ namespace keyboard_hook
 
       }
 
-      g_pmatter = pmatter;
+      g_pparticle = pparticle;
 
       g_bRun = true;
 
@@ -154,7 +155,7 @@ namespace keyboard_hook
    }
 
 
-   void uninstall(::matter * pmatter)
+   void uninstall(::particle * pparticle)
    {
 
       if (g_hhook == nullptr)

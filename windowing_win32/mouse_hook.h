@@ -6,9 +6,9 @@ namespace mouse_hook
 {
    
    
-   void install(::matter * pmatter);
+   void install(::particle * pparticle);
 
-   void uninstall(::matter * pmatter);
+   void uninstall(::particle * pparticle);
 
    void run();
 

@@ -1,6 +1,8 @@
 ﻿#include "framework.h"
 #include "imm_client.h"
 #include "imm_context.h"
+#include "acme/constant/message.h"
+#include "acme/parallelization/synchronous_lock.h"
 #include "aura/message/user.h"
 #include "aura/user/user/interaction.h"
 #include "aura/platform/session.h"

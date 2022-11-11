@@ -30,7 +30,7 @@ namespace windowing_win32
 //#ifdef WINDOWS_DESKTOP
 
       //#pragma message("at macos??")
-      ::pointer<system_interaction>   acmesystem()interaction;
+      ::pointer<system_interaction>    m_psysteminteraction;
 
 //#endif
 
@@ -56,7 +56,7 @@ namespace windowing_win32
       ::pointer<system_interaction>create_system_window();
 
 
-      inline system_interaction * system_window() { return acmesystem()interaction; }
+      inline system_interaction * system_window() { return m_psysteminteraction; }
 
       virtual HICON _load_icon(string_array& straMatter, string strIcon, int cx, int cy);
 

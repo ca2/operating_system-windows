@@ -1,7 +1,12 @@
 #pragma once
 
 
-#include "acme/operating_system.h"
+#include "acme/primitive/collection/pointer_array.h"
+#include "acme/primitive/primitive/particle.h"
+#include "acme/primitive/primitive/pointer.h"
+
+
+#include "acme/_operating_system.h"
 
 
 namespace windowing_win32
@@ -22,7 +27,7 @@ namespace windowing_win32
 
 
    struct CLASS_DECL_WINDOWING_WIN32 TrayItemInfo :
-      virtual public object
+      virtual public ::particle
    {
 
       HWND           m_hwnd;
@@ -42,7 +47,7 @@ namespace windowing_win32
 
 
    class CLASS_DECL_WINDOWING_WIN32 notification_area :
-      virtual public ::object
+      virtual public ::particle
    {
    public:
 

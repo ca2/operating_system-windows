@@ -1,15 +1,15 @@
 #include "framework.h"
-#include "aura/graphics/image/image.h"
 #include "windowing.h"
 #include "apex/filesystem/filesystem/dir_context.h"
-
+#include "apex/platform/context.h"
+#include "aura/graphics/image/image.h"
 
 
 namespace windows
 {
 
 
-   CLASS_DECL_WINDOWING_WIN32 HBITMAP create_alpha_bitmap_v5(const ::image * pimage)
+   CLASS_DECL_WINDOWING_WIN32 HBITMAP create_alpha_bitmap_v5(::image * pimage)
    {
 
       if (!pimage->is_ok())
@@ -76,7 +76,7 @@ namespace windows
    }
 
 
-   HCURSOR create_alpha_icon(const ::image * pimage, bool bIcon, int xHotSpot, int yHotSpot)
+   HCURSOR create_alpha_icon(::image * pimage, bool bIcon, int xHotSpot, int yHotSpot)
    {
 
       if (!pimage->is_ok())
@@ -117,10 +117,10 @@ namespace windows
    }
 
 
-   HCURSOR create_alpha_cursor(const ::image * pimage, int xHotSpot, int yHotSpot)
+   HCURSOR create_alpha_cursor(::image * pimage, int xHotSpot, int yHotSpot)
    {
 
-      if (::not_ok(pimage))
+      if (pimage)
       {
 
          return nullptr;
@@ -208,9 +208,7 @@ namespace windows
    CLASS_DECL_WINDOWING_WIN32 HBITMAP create_windows_dib(const ::size_i32 & size, i32 * piScan, ::color32_t ** ppdata)
    {
 
-      BITMAPINFO bitmapinfo;
-
-      __zero(bitmapinfo);
+      BITMAPINFO bitmapinfo{};
 
       auto iScan = size.cx * 4;
 
@@ -273,7 +271,7 @@ namespace windowing_win32
 
          path = strMatter;
 
-         path = pcontext->m_papexcontext->dir().matter(path / strIcon);
+         path = pcontext->m_papexcontext->dir()->matter(path / strIcon);
 
          path = pcontext->m_papexcontext->get_matter_cache_path(path);
 

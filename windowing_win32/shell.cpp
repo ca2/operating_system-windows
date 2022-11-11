@@ -1,24 +1,28 @@
 #include "framework.h"
-#include "acme/operating_system.h"
 #include "shell.h"
 #include "icon.h"
 #include "windowing.h"
 #include "system_interaction.h"
 #include "acme/filesystem/filesystem/acme_directory.h"
-#include "acme_windows/known_folder_struct.h"
+#include "acme/primitive/geometry2d/_collection.h"
 #include "apex/filesystem/filesystem/dir_context.h"
 #include "apex/filesystem/filesystem/file_context.h"
-#include "aura/user/user/user.h"
-#include "aura_windows/node.h"
-#include "aura/platform/context.h"
-#include "aura/platform/session.h"
-#include <thumbcache.h>
 #include "aura/graphics/image/context_image.h"
 #include "aura/graphics/image/drawing.h"
 #include "aura/graphics/image/list.h"
 #include "aura/graphics/image/icon.h"
+#include "aura/platform/context.h"
+#include "aura/platform/session.h"
 #include "aura/platform/system.h"
-#include "acme/primitive/geometry2d/_collection_basic.h"
+#include "aura/user/user/user.h"
+#include "acme_windows/known_folder_struct.h"
+#include "aura_windows/node.h"
+
+
+#include "acme/_operating_system.h"
+
+
+#include <thumbcache.h>
 
 
 bool IsDibSection(HBITMAP bmp)

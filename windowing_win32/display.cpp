@@ -5,6 +5,7 @@
 #include "monitor.h"
 #include "windowing.h"
 #include "window.h"
+#include "acme/parallelization/synchronous_lock.h"
 #include "acme/primitive/geometry2d/rectangle_array.h"
 #include "aura/platform/system.h"
 
@@ -34,7 +35,7 @@ namespace windowing_win32
 
       ::EnumDisplayMonitors(nullptr, nullptr, &display::monitor_enum_proc, (LPARAM)this);
 
-      synchronous_lock synchronouslock(mutex());
+      synchronous_lock synchronouslock(synchronization());
 
       m_monitora.erase_all();
 
@@ -527,8 +528,6 @@ namespace windowing_win32
 
 
 
-
-   ::mutex g_monitor_adjust;
 
 
 
@@ -1076,7 +1075,7 @@ namespace windowing_win32
 
       m_monitorinfoa.allocate(m_monitorinfoa.get_size() + 1);
 
-      __zero(m_monitorinfoa.last());
+      memset(&m_monitorinfoa.last(), 0, sizeof(MONITORINFO));
 
       m_hmonitora.add(hmonitor);
 

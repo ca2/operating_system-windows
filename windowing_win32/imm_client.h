@@ -1,6 +1,7 @@
 #pragma once
 
 
+#include "apex/message/channel.h"
 #include "aura/user/user/text_composition_client.h"
 
 

@@ -1,7 +1,9 @@
 #include "framework.h"
-
 #include "notify_icon.h"
 #include "icon.h"
+#include "acme/constant/id.h"
+#include "acme/constant/message.h"
+#include "acme/exception/exception.h"
 
 
 static ::user::notify_icon * g_pnotifyiconLast = nullptr;

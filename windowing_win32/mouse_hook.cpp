@@ -1,13 +1,18 @@
 // Moved from app_core_auraclick by camilo 2021-09-12 15:52 BRT <3ThomasBS_!!
 #include "framework.h"
-#include "acme/operating_system.h"
 #include "mouse_hook.h"
+#include "acme/constant/message.h"
+#include "acme/exception/exception.h"
+#include "acme/primitive/primitive/particle.h"
+
+
+#include "acme/_operating_system.h"
 
 
 namespace mouse_hook
 {
 
-   static ::matter * g_pmatter;
+   static ::particle * g_pparticle;
 
    static bool g_bRun = false;
 
@@ -32,7 +37,7 @@ namespace mouse_hook
 
             enum_message emessage = (enum_message)wParam;
 
-            g_pmatter->call(emessage);
+            g_pparticle->call(emessage);
 
          }
 
@@ -96,7 +101,7 @@ namespace mouse_hook
    }
 
 
-   void install(::matter * pmatter)
+   void install(::particle * pparticle)
    {
 
       if (g_hhook != nullptr)
@@ -108,7 +113,7 @@ namespace mouse_hook
 
       }
 
-      g_pmatter = pmatter;
+      g_pparticle = pparticle;
 
       g_bRun = true;
       
@@ -117,7 +122,7 @@ namespace mouse_hook
    }
 
 
-   void uninstall(::matter * pmatter)
+   void uninstall(::particle * pparticle)
    {
 
       if (g_hhook == nullptr)
@@ -129,7 +134,7 @@ namespace mouse_hook
 
       }
 
-      g_pmatter = nullptr;
+      g_pparticle = nullptr;
 
       PostThreadMessage((DWORD) g_itask, WM_QUIT, 0, 0);
 

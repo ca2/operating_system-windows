@@ -3,7 +3,10 @@
 #include "window.h"
 #include "windowing.h"
 #include "monitor.h"
-#include "acme/operating_system.h"
+#include "acme/exception/exception.h"
+
+
+#include "acme/_operating_system.h"
 
 #include <HighLevelMonitorConfigurationAPI.h>
 
@@ -37,9 +40,7 @@ namespace windowing_win32
    void monitor::update_cache()
    {
 
-      MONITORINFO mi;
-
-      __zero(mi);
+      MONITORINFO mi{};
 
       mi.cbSize = sizeof(MONITORINFO);
 

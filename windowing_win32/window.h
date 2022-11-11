@@ -3,7 +3,9 @@
 
 
 #include "aura/windowing/window.h"
-#include "acme/operating_system.h"
+
+
+#include "acme/_operating_system.h"
 
 
 namespace windowing_win32
@@ -33,8 +35,8 @@ namespace windowing_win32
       ~window() override;
 
 
-      void assert_ok() const override;
-      void dump(dump_context & dumpcontext) const override;
+      //void assert_ok() const override;
+      //void dump(dump_context & dumpcontext) const override;
 
 
       void install_message_routing(channel * pchannel) override;
@@ -146,9 +148,9 @@ namespace windowing_win32
 
       bool screen_to_client(POINT_I32 * ppoint) override;
 
-      bool on_set_window_position(const class ::zorder& zorder, i32 x, i32 y, i32 cx, i32 cy, ::u32 nFlags) override;
+      bool on_set_window_position(const class ::zorder& zorder, i32 x, i32 y, i32 cx, i32 cy, const ::e_activation& eactivation, bool bNoZorder, bool bNoMove, bool bNoSize, bool bShow, bool bHide) override;
 
-      bool set_window_position(const class ::zorder & zorder, i32 x, i32 y, i32 cx, i32 cy, ::u32 nFlags) override;
+      bool set_window_position(const class ::zorder& zorder, i32 x, i32 y, i32 cx, i32 cy, const ::e_activation& eactivation, bool bNoZorder, bool bNoMove, bool bNoSize, bool bShow, bool bHide) override;
 
       //virtual bool _set_window_pos(class::zorder zorder, i32 x, i32 y, i32 cx, i32 cy, ::u32 nFlags) override;
 

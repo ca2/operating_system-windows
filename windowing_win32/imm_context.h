@@ -1,7 +1,10 @@
 #pragma once
 
 
-#include "acme/operating_system.h"
+#include "acme/primitive/primitive/pointer.h"
+
+
+#include "acme/_operating_system.h"
 
 
 class CLASS_DECL_WINDOWING_WIN32 imm_context
@@ -9,8 +12,8 @@ class CLASS_DECL_WINDOWING_WIN32 imm_context
 public:
 
 
-   HIMC                                m_himc;
-   ::pointer<::user::interaction>     m_pinteraction;
+   HIMC                                   m_himc;
+   ::pointer<::user::interaction>         m_pinteraction;
 
 
    imm_context(::user::interaction * pinteraction);

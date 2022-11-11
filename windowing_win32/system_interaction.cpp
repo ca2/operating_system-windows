@@ -1,9 +1,13 @@
 #include "framework.h"
-//#include "aura/message.h"
-//#include "aura/procedure.h"
 #include "system_interaction.h"
+#include "acme/constant/id.h"
+#include "acme/constant/message.h"
+#include "acme/platform/node.h"
 #include "aura/message/user.h"
 #include "aura/platform/system.h"
+
+
+#include "acme/_operating_system.h"
 
 
 namespace windowing_win32

@@ -3,8 +3,12 @@
 #pragma once
 
 
+#include "acme/filesystem/filesystem/path.h"
+#include "acme/primitive/collection/map.h"
 #include "aura/windowing/icon.h"
-#include "acme/operating_system.h"
+
+
+#include "acme/_operating_system.h"
 
 
 namespace windowing_win32

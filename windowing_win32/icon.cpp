@@ -2,7 +2,9 @@
 // recreated by Camilo 2021-01-28 16:44
 #include "framework.h"
 #include "icon.h"
+#include "acme/exception/exception.h"
 #include "acme/filesystem/file/memory_file.h"
+#include "acme/platform/system.h"
 #include "apex/filesystem/filesystem/file_context.h"
 #include "aura/graphics/image/context_image.h"
 #include "aura/graphics/image/drawing.h"
@@ -558,7 +560,7 @@ namespace windowing_win32
             if (strPath.begins_eat_ci("zipresource://"))
             {
 
-               auto pfile = m_pcontext->m_papexcontext->file().create_resource_file(strPath);
+               auto pfile = m_pcontext->file()->create_resource_file(strPath);
 
                if (!m_pcontext->context_image())
                {
@@ -587,7 +589,7 @@ namespace windowing_win32
                }
 
 
-               hicon = (HICON) acmesystem()->node()->m_pauranode->HICON_from_image(pimageResized);
+               hicon = (HICON) ((icon*)this)->acmesystem()->node()->m_pauranode->HICON_from_image(pimageResized);
 
             }
             else 
@@ -678,7 +680,7 @@ namespace windowing_win32
 
       m_pathProcessed = m_pcontext->m_papexcontext->defer_process_matter_path(strPath);
 
-      auto memory = m_pcontext->m_papexcontext->file().as_memory(m_pathProcessed);
+      auto memory = m_pcontext->m_papexcontext->file()->as_memory(m_pathProcessed);
 
       if (memory.is_empty())
       {
@@ -691,7 +693,7 @@ namespace windowing_win32
 
       auto pimage = m_pcontext->m_papexcontext->context_image()->load_image(pmemoryfile);
 
-      if (::is_ok(pimage))
+      if (pimage.ok())
       {
 
          m_imagemap[pimage->size()] = pimage;
@@ -812,7 +814,7 @@ namespace windowing_win32
 
       ::pointer<::image>pimage;
 
-      __construct(pimage);
+      ::__construct(this, pimage);
 
       bool bOk = false;
 
@@ -972,11 +974,9 @@ namespace windowing_win32
 
 MYICON_INFO MyGetIconInfo(HICON hIcon)
 {
-   MYICON_INFO myinfo;
-   __zero(myinfo);
+   MYICON_INFO myinfo{};
 
-   ICONINFO info;
-   __zero(info);
+   ICONINFO info{};
 
    BOOL bRes = false;
 
