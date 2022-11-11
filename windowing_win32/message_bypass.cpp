@@ -14,7 +14,7 @@
    (::u32)-1
 };
 
-CLASS_DECL_APEX string get_message_text(::u32 uMessage, bool bWithNumbers);
+//CLASS_DECL_APEX string get_message_text(::u32 uMessage, bool bWithNumbers);
 
 
 extern ::u32 g_puiaMessageMouseMove[];
@@ -240,7 +240,9 @@ namespace windowing_win32
 
       string str;
 
-      str.format("%s", get_message_text(message, true).c_str(), wparam, lparam);
+      string strMessageText = ::operating_system::get_message_text((::enum_message)message);
+
+      str.format("%s %d", strMessageText.c_str(), message, wparam, lparam);
 
       if (message == e_message_activate)
       {

@@ -1,6 +1,7 @@
 #include "framework.h"
 #include "acme/constant/message.h"
 #include "acme/constant/timer.h"
+#include "acme/exception/exception.h"
 #include "apex/filesystem/filesystem/dir_context.h"
 #include "windowing_win32/window.h"
 #include "windowing_win32/windowing.h"
@@ -521,7 +522,7 @@ wstring windowing::_windows_calc_icon_window_class(::user::interaction * puserin
 
    pathIcon = pathFolder / "icon.ico";
 
-   string strPath = pcontext->m_papexcontext->dir().matter(pathIcon);
+   string strPath = pcontext->m_papexcontext->dir()->matter(pathIcon);
 
    HICON hIcon = (HICON) ::LoadImageW(nullptr, wstring(pcontext->m_papexcontext->get_matter_path(strPath)), IMAGE_ICON, 256, 256, LR_LOADFROMFILE);
 
@@ -537,7 +538,7 @@ wstring windowing::_windows_calc_icon_window_class(::user::interaction * puserin
 
       WNDCLASSEXW wndcls;
 
-      if (strClass.get_length() > 0 && GetClassInfoExW((HINSTANCE)psystem->m_hinstanceThis, strClass, &wndcls) && wndcls.hIcon != hIcon)
+      if (strClass.get_length() > 0 && GetClassInfoExW((HINSTANCE)psystem->m_psubsystem->m_hinstanceThis, strClass, &wndcls) && wndcls.hIcon != hIcon)
       {
 
          // register a very similar WNDCLASS
