@@ -2,6 +2,7 @@
 #include "framework.h"
 #include "exclusive.h"
 #include "acme_windows_common/mutex.h"
+#include "acme/exception/exception.h"
 #include "acme/filesystem/filesystem/acme_directory.h"
 #include "acme/platform/node.h"
 #include "acme/platform/system.h"
@@ -32,8 +33,6 @@ namespace acme_windows
       }
       catch (const ::exception &)
       {
-
-         //m_bResourceException = true;
 
          try
          {
@@ -103,7 +102,7 @@ namespace acme_windows
    bool exclusive::exclusive_fails() const
    {
 
-      return m_bResourceException || m_pmutex->already_exists();
+      return m_bResourceException || m_pmutex->has_already_exists_flag();
 
       //#ifdef WINDOWS
       //

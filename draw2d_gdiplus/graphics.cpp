@@ -4,6 +4,8 @@
 #include "brush.h"
 #include "font.h"
 #include "path.h"
+#include "acme/parallelization/synchronous_lock.h"
+#include "acme/primitive/string/international.h"
 #include "aura/graphics/image/context_image.h"
 #include "aura/graphics/image/drawing.h"
 #include "aura/graphics/image/map.h"
@@ -5531,7 +5533,7 @@ namespace draw2d_gdiplus
 
       }
 
-      synchronous_lock synchronouslock(mutex());
+      synchronous_lock synchronouslock(synchronization());
 
       if (m_pfont.is_null())
       {
@@ -5805,7 +5807,7 @@ namespace draw2d_gdiplus
 
             wchar_t wch = text.m_wstr.c_str()[i + iStart];
 
-            int iUtf8Length = unicode_ansichar_uni_len(wch);
+            auto iUtf8Length = unicode_to_utf8_length(wch);
 
             for (index iAnsiChar = 0; iAnsiChar < iUtf8Length; iAnsiChar++)
             {
@@ -6204,7 +6206,7 @@ namespace draw2d_gdiplus
       {
          try
          {
-            iLen = ::str().get_utf8_char_length(psz);
+            iLen = get_utf8_char_length(psz);
          }
          catch (...)
          {
@@ -6372,7 +6374,7 @@ namespace draw2d_gdiplus
    void graphics::get_text_extent(::size_f64 & size, const ::string & str)
    {
 
-      if (::is_null(m_pgraphics) && is_null(m_pfont))
+      if (::is_null(m_pgraphics) && ::is_null(m_pfont))
       {
 
          //return false;
@@ -6729,7 +6731,7 @@ namespace draw2d_gdiplus
 
       }
 
-      synchronous_lock synchronouslock(mutex());
+      synchronous_lock synchronouslock(synchronization());
 
       if (m_ppen.cast < ::draw2d_gdiplus::pen >()->m_egdiplusalign != Gdiplus::PenAlignment::PenAlignmentCenter)
       {
@@ -6809,7 +6811,7 @@ namespace draw2d_gdiplus
 
       }
 
-      synchronous_lock synchronouslock(mutex());
+      synchronous_lock synchronouslock(synchronization());
 
       auto ppen = ppenParam->get_os_data < Gdiplus::Pen * >(this);
 
@@ -7398,7 +7400,7 @@ namespace draw2d_gdiplus
    void graphics::flush()
    {
 
-      synchronous_lock synchronouslock(mutex());
+      synchronous_lock synchronouslock(synchronization());
 
       m_pgraphics->Flush();
 
@@ -7410,7 +7412,7 @@ namespace draw2d_gdiplus
    void graphics::sync_flush()
    {
 
-      synchronous_lock synchronouslock(mutex());
+      synchronous_lock synchronouslock(synchronization());
 
       m_pgraphics->Flush(Gdiplus::FlushIntentionSync);
 

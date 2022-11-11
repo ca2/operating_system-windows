@@ -1,4 +1,5 @@
 #include "framework.h"
+#include "acme/exception/exception.h"
 #include "acme/primitive/primitive/memory.h"
 #include "acme/primitive/string/international.h"
 #include "registry.h"
@@ -649,7 +650,7 @@ namespace acme_windows
       if (dwType == REG_SZ || dwType == REG_MULTI_SZ || dwType == REG_EXPAND_SZ)
       {
 
-         natural_wstring pwsz(byte_count, dwSize);
+         simple_wstring pwsz(byte_count, dwSize);
 
          lResult = RegQueryValueExW(hkey, wstring(pszSubKey), nullptr, &dwType, (byte *)(unichar *)pwsz, &dwSize);
 

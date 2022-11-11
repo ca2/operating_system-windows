@@ -1,7 +1,7 @@
 #pragma once
 
 
-#include "acme/primitive/primitive/matter.h"
+#include "acme/primitive/primitive/particle.h"
 #include "acme/_operating_system.h"
 
 
@@ -10,7 +10,7 @@ namespace acme_windows
 
 
    class CLASS_DECL_ACME_WINDOWS file_find :
-      public ::matter
+      public ::particle
    {
       // ementation
    protected:

@@ -1,6 +1,7 @@
 #include "framework.h"
 #include "node.h"
 #include "os_context.h"
+#include "acme/exception/exception.h"
 #include "acme/platform/application.h"
 #include "acme/primitive/primitive/memory.h"
 #include "acme/primitive/string/adaptor.h"
@@ -21,7 +22,7 @@
 #include <shellapi.h>
 #include <shobjidl_core.h>
 
-
+//CLASS_DECL_APEX_WINDOWS HRESULT win_create_link(const widechar * pszPathObj, const widechar * pszPathLink, const widechar * pszDesc, const widechar * pszIconPath, ::i32 iIcon);
 CLASS_DECL_ACME_WINDOWS void shell_notify_folder_change(const wchar_t* pwsz);
 CLASS_DECL_ACME_WINDOWS void shell_notify_item_change(const wchar_t* pwsz);
 CLASS_DECL_ACME_WINDOWS void shell_notify_assoc_change();
@@ -578,11 +579,20 @@ namespace apex_windows
       wstring wstrDsc(strDesc);
       wstring wstrIco(pathIco);
 
-      HRESULT hresult = win_create_link(wstrObj, wstrLnk, wstrDsc, wstrIco, iIcon);
+      auto errorcode = _windows_create_link(wstrObj, wstrLnk, wstrDsc, wstrIco, iIcon);
+
+      HRESULT hresult = E_FAIL;
+
+      if (errorcode.m_etype == e_error_code_type_hresult)
+      {
+
+         hresult = (HRESULT) errorcode.m_iOsError;
+
+      }
 
       auto estatus = ::windows::hresult_status(hresult);
 
-      if (failed(estatus))
+      if (::failed(estatus))
       {
 
          throw ::exception(estatus);
@@ -897,7 +907,7 @@ namespace apex_windows
       if (dwType == REG_SZ || dwType == REG_MULTI_SZ || dwType == REG_EXPAND_SZ)
       {
 
-         natural_wstring pwsz(byte_count, dwSize);
+         simple_wstring pwsz(byte_count, dwSize);
 
          lResult = RegQueryValueExW(hkey, wstring(pszSubKey), nullptr, &dwType, (byte*)(unichar*)pwsz, &dwSize);
 

@@ -117,7 +117,7 @@ namespace user_service
 
             string str = "OK... soon patch applier (SPA) is working...";
 
-            outheader(__id(content_type)) = "text/html; charset=UTF-8";
+            outheader("content_type") = "text/html; charset=UTF-8";
 
             response().file().write(str);
 
@@ -149,9 +149,9 @@ namespace user_service
             outheader("Sec-WebSocket-Accept") = strKey;
             outheader("Connection") = "Upgrade";
             outheader("Upgrade") = "websocket";
-            outattr(__id(http_status_code)) = 101;
-            outattr(__id(http_version)) = "HTTP/1.1";
-            outattr(__id(http_status)) = "Switching Protocols";
+            outattr("http_status_code") = 101;
+            outattr("http_version") = "HTTP/1.1";
+            outattr("http_status") = "Switching Protocols";
             Respond();
             memory m;
             string strMessage = "yes_fontopus_com";
@@ -167,10 +167,10 @@ namespace user_service
 
          }
 
-         if (!outheaders().has_property(__id(content_type)) && response().file().get_length() > 0)
+         if (!outheaders().has_property("content_type") && response().file().get_length() > 0)
          {
 
-            outheader(__id(content_type)) = "text/html; charset=UTF-8";
+            outheader("content_type") = "text/html; charset=UTF-8";
 
          }
          if (IsSSLServer())
@@ -187,10 +187,10 @@ namespace user_service
 
       string strStatus;
 
-      if (outattr(__id(http_status_code)).is_new() || outattr(__id(http_status)).is_new())
+      if (outattr("http_status_code").is_new() || outattr("http_status").is_new())
       {
 
-         if (outheaders().has_property(__id(location)))
+         if (outheaders().has_property("location"))
          {
 
             iStatusCode = 303; // 303 (See Other Location)
@@ -207,27 +207,27 @@ namespace user_service
 
          }
 
-         outattr(__id(http_status_code)) = iStatusCode;
+         outattr("http_status_code") = iStatusCode;
 
-         outattr(__id(http_status)) = strStatus;
+         outattr("http_status") = strStatus;
 
       }
 
-      outattr(__id(http_version)) = "HTTP/1.1";
+      outattr("http_version") = "HTTP/1.1";
 
-      if (::str().begins(outheader(__id(content_type)), "image/"))
+      if (::str().begins(outheader("content_type"), "image/"))
       {
 
          m_bSetCookie = false;
 
       }
-      else if (outheader(__id(content_type)) == "application/javascript")
+      else if (outheader("content_type") == "application/javascript")
       {
 
          m_bSetCookie = false;
 
       }
-      else if (outheader(__id(content_type)) == "text/css")
+      else if (outheader("content_type") == "text/css")
       {
 
          m_bSetCookie = false;
@@ -260,7 +260,7 @@ auto tickExecuteEnd = ::tick::now();
 
    bool socket::http_filter_response_header(atom key, string_array & straValue)
    {
-      if (key == __id(location) && straValue.get_count() >= 1)
+      if (key == "location" && straValue.get_count() >= 1)
       {
          for (int i = 0; i < straValue.get_size(); i++)
          {
@@ -272,7 +272,7 @@ auto tickExecuteEnd = ::tick::now();
             }
          }
       }
-      else if (!m_bSetCookie && key == __id(set_cookie))
+      else if (!m_bSetCookie && key == "set_cookie")
       {
          return false;
       }
@@ -367,7 +367,7 @@ auto tickExecuteEnd = ::tick::now();
 /*         savepimage->m_eformat = pimage::e_format_jpeg;
 /*         savepimage->m_iQuality = 50;
 
-         outheader(__id(content_type)) = "image/jpeg";
+         outheader("content_type") = "image/jpeg";
 
 
 /*         pimage->save_to_file(&response().file(), &saveimage);

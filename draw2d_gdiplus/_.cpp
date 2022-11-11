@@ -1,4 +1,5 @@
 #include "framework.h"
+#include "acme/exception/error_number.h"
 #include "acme/_library.h"
 
 

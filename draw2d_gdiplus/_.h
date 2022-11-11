@@ -2,8 +2,9 @@
 
 
 #include "aura/_.h"
-#include "acme/operating_system.h"
+#include "acme/_operating_system.h"
 #include <gdiplus.h>
+
 
 
 #ifdef _DRAW2D_GDIPLUS_STATIC
@@ -16,6 +17,8 @@
 
 
 #include "aura/graphics/draw2d/color_matrix.h"
+
+#include "acme/primitive/geometry2d/_collection.h"
 
 
 inline void copy(Gdiplus::ColorMatrix & a, const color_matrix & b)

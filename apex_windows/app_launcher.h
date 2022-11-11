@@ -9,7 +9,7 @@ namespace apex_windows
 {
 
 
-   class CLASS_DECL_APEX app_launcher :
+   class CLASS_DECL_APEX_WINDOWS app_launcher :
       virtual public ::apex::app_launcher
    {
    public:

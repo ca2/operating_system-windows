@@ -305,11 +305,6 @@
 
 
 
-#define __EVALUATE(xxx) xxx
-#define __CONCAT(xxx, yyy) xxx ## yyy
-#define __STRING(xxx) # xxx
-
-#define __CONCAT3(xxx, yyy, zzz) xxx ## yyy ## zzz
 
 
 

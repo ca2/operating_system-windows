@@ -2,9 +2,7 @@
 #include "path.h"
 #include "graphics.h"
 #include "font.h"
-#include "acme/primitive/geometry2d/arc.h"
-#include "acme/primitive/geometry2d/line.h"
-#include "acme/primitive/geometry2d/lines.h"
+#include "acme/exception/exception.h"
 #include "aura/graphics/write_text/text_out.h"
 #include "aura/graphics/write_text/draw_text.h"
 
@@ -770,7 +768,7 @@ namespace draw2d_gdiplus
 
       auto pospath = get_os_data < Gdiplus::GraphicsPath *>(pgraphics);
 
-      if (is_null(pospath))
+      if (::is_null(pospath))
       {
 
          return false;

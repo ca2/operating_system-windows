@@ -1,6 +1,7 @@
 #include "framework.h"
 #include "shell_open.h"
-
+#include "acme/parallelization/task.h"
+#include "apex/platform/application.h"
 
 
 namespace aura_windows
@@ -27,7 +28,7 @@ namespace aura_windows
 
       //auto estatus = 
       
-      ::shell_open::initialize(pobject);
+      ::shell_open::initialize(pparticle);
 
       //if (!estatus)
       //{

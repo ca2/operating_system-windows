@@ -483,9 +483,7 @@ namespace apex_windows
    bool file_context::get_last_write_time(FILETIME * pfiletime, const ::string & strFilename)
    {
 
-      WIN32_FILE_ATTRIBUTE_DATA data;
-
-      __zero(data);
+      WIN32_FILE_ATTRIBUTE_DATA data{};
 
       if (!GetFileAttributesExW(wstring(strFilename), GetFileExInfoStandard, &data))
       {

@@ -4,6 +4,9 @@
 #include "aura/graphics/write_text/font_enumeration.h"
 
 
+#include "acme/_operating_system.h"
+
+
 namespace write_text_win32
 {
 

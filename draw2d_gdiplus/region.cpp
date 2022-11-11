@@ -1,6 +1,7 @@
 ﻿#include "framework.h"
 #include "region.h"
 #include "graphics.h"
+#include "acme/exception/interface_only.h"
 
 
 #undef new

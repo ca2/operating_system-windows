@@ -1,7 +1,10 @@
 ﻿#include "framework.h"
 #include "node.h"
+#include "acme/platform/system.h"
 #include "acme_windows/registry.h"
-#include "acme/operating_system.h"
+
+
+#include "acme/_operating_system.h"
 #include <shellapi.h>
 
 
@@ -322,8 +325,9 @@ namespace aura_windows
       set["privileged"] = true;
 
 
+      ::i32 iExitCode = 0;
 
-      call_sync(path, strParam, path.folder(), ::e_display_none, 3_min, set);
+      call_sync(path, strParam, path.folder(), ::e_display_none, 3_min, set, &iExitCode);
 
       //if (!call_sync(path, strParam, path.folder(), ::e_display_none, 3_min, set))
       //{

@@ -1,5 +1,6 @@
 #include "framework.h"
 #include "pipe.h"
+#include "acme/exception/exception.h"
 
 
 namespace acme_windows
@@ -43,7 +44,8 @@ namespace acme_windows
 
       }
 
-      __zero(m_sa);
+      memset(&m_sa, 0, sizeof(m_sa));
+
       m_sa.nLength = sizeof(SECURITY_ATTRIBUTES);
       m_sa.bInheritHandle = bInherit ? true : false;
       m_sa.lpSecurityDescriptor = nullptr;
@@ -195,8 +197,12 @@ namespace acme_windows
 
          m_pchBuf = (char *)malloc(1025);
 
-         if(m_pchBuf == nullptr)
+         if (m_pchBuf == nullptr)
+         {
+
             throw ::exception(error_no_memory);
+
+         }
 
       }
 

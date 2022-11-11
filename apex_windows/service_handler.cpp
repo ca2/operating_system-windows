@@ -1,5 +1,6 @@
 #include "framework.h"
 #include "service_handler.h"
+#include "acme/exception/exception.h"
 #include "apex/parallelization/service.h"
 #include "apex/parallelization/service_handler.h"
 #include "apex/platform/system.h"

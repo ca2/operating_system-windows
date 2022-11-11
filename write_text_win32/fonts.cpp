@@ -25,7 +25,7 @@ namespace write_text_win32
 
       //auto estatus = 
       
-      ::write_text::fonts::initialize(pobject);
+      ::write_text::fonts::initialize(pparticle);
 
       //if (!estatus)
       //{

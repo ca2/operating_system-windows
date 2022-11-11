@@ -18,16 +18,17 @@ namespace acme_windows
       //__creatable_from_base(console, ::console::console);
 
 
-      int               m_iW;
-      int               m_iH;
-      string_stream     m_cout;
+      int                                    m_iW;
+      int                                    m_iH;
+      write_text_stream < ::file::file >     m_cout;
+      ::file_pointer                         m_pfileOut;
 
 
       console();
       ~console() override;
 
 
-      ::string_stream& cout() override;
+      ::write_text_stream < ::file::file >& cout() override;
 
 
       void redirect_io();

@@ -3,6 +3,7 @@
 
 
 #include "acme/platform/exclusive.h"
+#include "acme/primitive/primitive/pointer.h"
 
 
 namespace acme_windows
@@ -15,21 +16,9 @@ namespace acme_windows
    public:
 
 
-      //string                  m_strId;
-
-      // #ifdef WINDOWS
-
-             ::u32                   m_dwLastError;
-             bool                    m_bResourceException;
-
-      // #else
-
-      //       int                     m_iFile;
-      //       int                     m_iLock;
-
-      // #endif
-
-      ::pointer < ::mutex >     m_pmutex;
+      ::u32                         m_dwLastError;
+      bool                          m_bResourceException;
+      ::pointer < ::mutex >         m_pmutex;
 
 
       exclusive(::particle * pparticle, const string & strName, security_attributes * psecurityattributes);

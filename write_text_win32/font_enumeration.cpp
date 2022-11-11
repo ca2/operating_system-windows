@@ -3,6 +3,7 @@
 #include "framework.h"
 #include "font_enumeration.h"
 #include "write_text_win32_gdi.h"
+#include "acme/exception/exception.h"
 #include "aura/graphics/write_text/font_enumeration_item.h"
 
 

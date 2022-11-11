@@ -1,7 +1,13 @@
 #pragma once
 
 
-#include "acme/operating_system.h"
+#include "acme/primitive/collection/array.h"
+#include "acme/primitive/collection/comparable_eq_array.h"
+#include "acme/primitive/collection/comparable_array.h"
+#include "acme/primitive/collection/pointer_array.h"
+
+
+#include "acme/_operating_system.h"
 
 
 namespace windows
@@ -23,7 +29,7 @@ namespace windows
 
 
    class CLASS_DECL_WINDOWING_WIN32 hwnd_tree :
-      virtual public object
+      virtual public particle
    {
    public:
 

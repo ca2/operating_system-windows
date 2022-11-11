@@ -13,13 +13,14 @@ namespace acme_windows
 {
 
 
-   console::console()
+   console::console() :
+      m_cout(nullptr)
    {
 
 
       AllocConsole();
 
-      m_cout.m_p = __new(std_out_buffer());
+      m_cout.m_pfile = __new(std_out_buffer());
 
       CONSOLE_FONT_INFOEX info = {};
       info.cbSize = sizeof(info);
@@ -49,7 +50,7 @@ namespace acme_windows
    }
 
 
-   ::string_stream& console::cout()
+   ::write_text_stream < ::file::file > & console::cout()
    {
 
       return m_cout;

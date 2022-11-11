@@ -5,6 +5,7 @@
 #include "registry.h"
 #include "process.h"
 #include "exclusive.h"
+#include "acme/exception/exception.h"
 #include "acme/operating_system/process.h"
 #include "acme/parallelization/synchronous_lock.h"
 #include "acme/parallelization/install_mutex.h"
@@ -2520,7 +2521,7 @@ namespace acme_windows
       if (dwType == REG_SZ || dwType == REG_MULTI_SZ || dwType == REG_EXPAND_SZ)
       {
 
-         natural_wstring pwsz(byte_count, dwSize);
+         simple_wstring pwsz(byte_count, dwSize);
 
          lResult = RegQueryValueExW(hkey, wstring(pszSubKey), nullptr, &dwType, (byte *)(unichar *)pwsz, &dwSize);
 
@@ -3463,6 +3464,13 @@ namespace acme_windows
       //   return e_status_process_result_negative_base + iExitCode;
 
       //}
+
+   }
+
+
+   void node::launch_application(::particle * pparticle, const ::string & strAppId, const ::string & strParams, int iBitCount)
+   {
+
 
    }
 

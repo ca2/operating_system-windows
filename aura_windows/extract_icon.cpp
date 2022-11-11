@@ -1,6 +1,9 @@
 #include "framework.h"
-#include "acme/operating_system.h"
 #include "node.h"
+
+
+#include "acme/_operating_system.h"
+
 
 //http://borland.public.cppbuilder.nativeapi.narkive.com/7OPcjHO5/loading-x48-icons-with-extracticonex
 
@@ -113,9 +116,7 @@ namespace aura_windows
 
       }
 
-      ::extract_resource_icon i;
-
-      __zero(i);
+      ::extract_resource_icon i{};
 
       i.cx = cx;
 

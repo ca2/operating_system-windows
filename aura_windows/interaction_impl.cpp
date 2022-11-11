@@ -1,13 +1,19 @@
 #include "framework.h"
-#include "acme/operating_system.h"
 #include "system_interaction.h"
-//#include "aura/message.h"
-#include "acme/constant/timer.h"
 #include "interaction_impl.h"
+#include "acme/constant/message.h"
+#include "acme/constant/timer.h"
+#include "acme/exception/exception.h"
+#include "acme/exception/interface_only.h"
+#include "acme/parallelization/synchronous_lock.h"
 #include "aura/graphics/draw2d/graphics.h"
 #include "aura/windowing/window.h"
 #include "aura/message/user.h"
 #include "aura/user/user/interaction.h"
+
+
+#include "acme/_operating_system.h"
+
 
 
 CLASS_DECL_AURA_WINDOWS int g_iMouseDown = 0;
@@ -70,8 +76,8 @@ namespace aura_windows
 
       //set_handle(nullptr);
 
-      __zero(m_size);
-      __zero(m_point);
+      memset(&m_size,0, sizeof(m_size));
+      memset(&m_point, 0, sizeof(m_point));
 
    }
 
@@ -108,12 +114,12 @@ namespace aura_windows
    }
 
 
-   void interaction_impl::assert_ok() const
-   {
+   //void interaction_impl::assert_ok() const
+   //{
 
-      m_pwindow->assert_ok();
-      
-   }
+   //   m_pwindow->assert_ok();
+   //   
+   //}
 
 
    void interaction_impl::install_message_routing(::channel * pchannel)
@@ -127,15 +133,15 @@ namespace aura_windows
    }
 
 
-   void interaction_impl::dump(dump_context & dumpcontext) const
-   {
-      
-      object::dump(dumpcontext);
+   //void interaction_impl::dump(dump_context & dumpcontext) const
+   //{
+   //   
+   //   object::dump(dumpcontext);
 
 
-      m_pwindow->dump(dumpcontext);
+   //   m_pwindow->dump(dumpcontext);
 
-   }
+   //}
 
 
    void interaction_impl::on_set_parent(::user::interaction * pinteraction)
@@ -1178,7 +1184,7 @@ namespace aura_windows
    */
 
 
-   bool interaction_impl::_is_window() const
+   bool interaction_impl::_is_window()
    {
 
       if (!m_bUserImplCreated)
@@ -2535,7 +2541,7 @@ namespace aura_windows
 
 
 
-   void interaction_impl::Print(::draw2d::graphics_pointer & pgraphics, u32 dwFlags) const
+   void interaction_impl::Print(::draw2d::graphics_pointer & pgraphics, u32 dwFlags)
    {
 
       ASSERT(_is_window());
@@ -2546,7 +2552,7 @@ namespace aura_windows
    }
 
 
-   void interaction_impl::PrintClient(::draw2d::graphics_pointer & pgraphics, u32 dwFlags) const
+   void interaction_impl::PrintClient(::draw2d::graphics_pointer & pgraphics, u32 dwFlags)
    {
 
       ASSERT(_is_window());
@@ -3493,7 +3499,7 @@ namespace aura_windows
    void interaction_impl::show_task(bool bShow)
    {
 
-      synchronous_lock synchronouslock(mutex());
+      synchronous_lock synchronouslock(synchronization());
 
       // https://www.daniweb.com/programming/software-development/threads/457564/mfc-application-disablehide-taskbar-icon
 
@@ -5303,6 +5309,10 @@ void interaction_impl::set_tool_window(bool bSet)
 //      //}
 
    }
+
+
+
+
 
 
 } // namespace aura_windows

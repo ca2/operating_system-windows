@@ -1,8 +1,12 @@
-// Created by camilo on 2021-11-16 12:53 BRT <3ThomasBorregaardSørensen!!
+// Created by camilo on 2021-11-16 12:53 BRT <3ThomasBorregaardSï¿½rensen!!
 #include "framework.h"
-#include "acme/operating_system.h"
 #include "aura/graphics/image/image.h"
 #include "node.h"
+
+
+#include "acme/_operating_system.h"
+
+
 #include <gdiplus.h>
 
 
@@ -15,7 +19,7 @@ namespace aura_windows
    // and then pass that stream to the Bitmap class constructor 
    // or Bitmap::FromStream() method, and then finally call the 
    // Bitmap::ToHICON() method.
-   // – Remy Lebeau,  Feb 11 '17 at 3:34
+   // ï¿½ Remy Lebeau,  Feb 11 '17 at 3:34
    void* node::HICON_from_image(::image *pimage)
    {
 

@@ -1,5 +1,5 @@
 #include "framework.h"
-#include "_windows.h"
+//#include "_windows.h"
 #include "display.h"
 #include "notify_icon.h"
 #include "cursor.h"

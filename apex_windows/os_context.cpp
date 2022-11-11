@@ -12,6 +12,7 @@
 #include "acme/operating_system/time.h"
 #include "acme/parallelization/manual_reset_event.h"
 #include "acme/platform/node.h"
+#include "acme/primitive/collection/_container.h"
 #include "acme/primitive/string/international.h"
 #include "acme/primitive/string/string.h"
 #include "acme/primitive/string/str.h"
@@ -33,9 +34,6 @@
 #include <Security.h>
 #include <wincred.h>
 #include <shobjidl_core.h>
-
-
-CLASS_DECL_ACME_WINDOWS_COMMON HRESULT defer_co_initialize_ex(bool bMultiThread, bool bDisableOleDDE = false);
 
 
 CLASS_DECL_ACME::file::path get_module_path(HMODULE hmodule);
@@ -1127,7 +1125,7 @@ namespace apex_windows
       u32   dwResult;
       sec_cotaskptr < PVOID > pvInAuthBlob;
       sec_cotaskptr < PVOID > pvAuthBlob;
-      CREDUI_INFOW u;
+      CREDUI_INFOW u{};
       ULONG   ulAuthPackage = 0;
       BOOL    fSave = false;
       WCHAR szDomainAndUser[CREDUI_MAX_USERNAME_LENGTH + CREDUI_MAX_DOMAIN_TARGET_LENGTH + 1];
@@ -1141,7 +1139,7 @@ namespace apex_windows
       HICON hicon = nullptr;
 
       // Display a dialog box to request credentials.
-      __zero(u);
+      //__zero(u);
       u.cbSize = sizeof(u);
       u.hwndParent = nullptr;
 
@@ -1882,7 +1880,7 @@ retry:
    comptr < IShellLinkW > os_context::_get_IShellLinkW(const ::file::path & pathLink)
    {
 
-      defer_co_initialize_ex(false);
+      acmenode()->defer_co_initialize_ex(false);
 
       HRESULT hr;
 
@@ -2133,15 +2131,13 @@ retry:
 
       //bool bNativeUnicode = is_windows_native_unicode() != false;
 
-      SHFILEINFOW info;
+      SHFILEINFOW info{};
 
-      __zero(info);
-
-      defer_co_initialize_ex(false);
+      acmenode()->defer_co_initialize_ex(false);
 
       DWORD_PTR dw = 0;
 
-      auto pitemidlist = path.m_pmatterOsPath.cast < ::itemidlist>();
+      auto pitemidlist = path.m_pparticleOsPath.cast < ::itemidlist>();
 
       if (pitemidlist)
       {
@@ -2541,9 +2537,7 @@ retry:
 
          ::CoInitializeEx(nullptr, COINIT_APARTMENTTHREADED | COINIT_DISABLE_OLE1DDE);
 
-         SHELLEXECUTEINFOW si;
-
-         __zero(si);
+         SHELLEXECUTEINFOW si{};
 
          PeekMessage(nullptr, nullptr, 0, 0, 0);
 
@@ -2565,7 +2559,7 @@ retry:
 
          si.lpVerb = L"open";
 
-         ::pointer < ::itemidlist > pitemidlist = path.m_pmatterOsPath;
+         ::pointer < ::itemidlist > pitemidlist = path.m_pparticleOsPath;
 
          if (wstrTarget.is_empty() && pitemidlist)
          {
@@ -2615,9 +2609,7 @@ retry:
 
             ::CoInitializeEx(nullptr, COINIT_APARTMENTTHREADED | COINIT_DISABLE_OLE1DDE);
 
-            SHELLEXECUTEINFOW si;
-
-            __zero(si);
+            SHELLEXECUTEINFOW si{};
 
             PeekMessage(nullptr, nullptr, 0, 0, 0);
 
@@ -2639,7 +2631,7 @@ retry:
 
             si.lpVerb = L"open";
 
-            auto pitemidlist = path.m_pmatterOsPath.cast < ::itemidlist >();
+            auto pitemidlist = path.m_pparticleOsPath.cast < ::itemidlist >();
 
             if (wstrTarget.is_empty() && pitemidlist)
             {
@@ -2697,9 +2689,7 @@ retry:
 
             ::CoInitializeEx(nullptr, COINIT_APARTMENTTHREADED | COINIT_DISABLE_OLE1DDE);
 
-            SHELLEXECUTEINFOW si;
-
-            __zero(si);
+            SHELLEXECUTEINFOW si{};
 
             PeekMessage(nullptr, nullptr, 0, 0, 0);
 
@@ -2722,7 +2712,7 @@ retry:
 
             si.lpVerb = L"open";
 
-            auto pitemidlist = path.m_pmatterOsPath.cast < ::itemidlist >();
+            auto pitemidlist = path.m_pparticleOsPath.cast < ::itemidlist >();
 
             if (wstrTarget.is_empty() && pitemidlist)
             {
@@ -2768,7 +2758,7 @@ retry:
             else
             {
 
-               DWORD dwWait = (DWORD)minimum(DWORD_MAX, i);
+               DWORD dwWait = (DWORD)minimum(INFINITE, i);
 
                bSuccess = WaitForSingleObject(si.hProcess, dwWait);
 
@@ -3534,14 +3524,14 @@ repeat:
       fork([this]()
          {
 
-            if (defer_co_initialize_ex(false))
-            {
+            acmenode()->defer_co_initialize_ex(false);
+            
 
                SHChangeNotify(SHCNE_ASSOCCHANGED, SHCNF_DWORD | SHCNF_FLUSH, nullptr, nullptr);
 
                preempt(3_s);
 
-            }
+            //}
 
          });
 
@@ -3594,7 +3584,7 @@ repeat:
 
          bool bDisableOleDDE = true;
 
-         defer_co_initialize_ex(false, bDisableOleDDE);
+         acmenode()->defer_co_initialize_ex(false, bDisableOleDDE);
 
          comptr < IFileOpenDialog > pfileopen;
 
@@ -3611,11 +3601,11 @@ repeat:
 
             array < wstring > wstraSpecs;
 
-            wstraSpecs.copy_container(set["file_filter_specs"].stra());
+            ::acme::container::copy(wstraSpecs, set["file_filter_specs"].stra());
 
             array < wstring > wstraNames;
 
-            wstraNames.copy_container(set["file_filter_names"].stra());
+            ::acme::container::copy(wstraNames, set["file_filter_names"].stra());
 
             rgSpec.set_size(minimum(wstraSpecs.get_size(), wstraNames.get_size()));
 
@@ -3834,7 +3824,7 @@ repeat:
       //try
       //{
 
-         defer_co_initialize_ex(false);
+      acmenode()->defer_co_initialize_ex(false);
 
          comptr < IFileSaveDialog > pfilesave;
 
@@ -3861,11 +3851,11 @@ repeat:
 
             array < wstring > wstraSpecs;
 
-            wstraSpecs.copy_container(set["file_filter_specs"].stra());
+            ::acme::container::copy(wstraSpecs, set["file_filter_specs"].stra());
 
             array < wstring > wstraNames;
 
-            wstraNames.copy_container(set["file_filter_names"].stra());
+            ::acme::container::copy(wstraNames, set["file_filter_names"].stra());
 
             rgSpec.set_size(minimum(wstraSpecs.get_size(), wstraNames.get_size()));
 
@@ -4008,7 +3998,7 @@ repeat:
       //try
       //{
 
-         defer_co_initialize_ex(false);
+      acmenode()->defer_co_initialize_ex(false);
 
          comptr < IFileOpenDialog > pfileopen;
 
@@ -4126,7 +4116,7 @@ repeat:
       //try
       //{
 
-         defer_co_initialize_ex(false);
+      acmenode()->defer_co_initialize_ex(false);
 
          comptr < IFileOpenDialog > pfileopen;
 

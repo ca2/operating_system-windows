@@ -3,6 +3,7 @@
 #include "framework.h"
 #include "cursor.h"
 #include "win32.h"
+#include "acme/exception/exception.h"
 
 
 TCHAR * windows_get_system_cursor(enum_cursor ecursor);

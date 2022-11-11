@@ -1,71 +1,79 @@
 // Created on 2021-04-28 21:56 BRT <3TBS_!! Second celebration of Mummis Birthday 70!!
 // party with Carols Family!!
 #include "framework.h"
+#include "node.h"
 #include "acme/_operating_system.h"
 
 #include <ShlObj_core.h>
 
-CLASS_DECL_ACME_WINDOWS_COMMON HRESULT defer_co_initialize_ex(bool bMultiThread, bool bDisableOleDDE = false);
 
-HRESULT win_create_link(const widechar* pszPathObj, const widechar* pszPathLink, const widechar* pszDesc, const widechar* pszIconPath, ::i32 iIcon)
+namespace apex_windows
 {
 
-   HRESULT hres;
 
-   IShellLinkW* psl;
-
-   defer_co_initialize_ex(false);
-
-   // Get a pointer to the IShellLink interface. It is assumed that CoInitialize
-   // has already been called.
-   hres = CoCreateInstance(CLSID_ShellLink, nullptr, CLSCTX_INPROC_SERVER, IID_IShellLinkW, (LPVOID*)&psl);
-
-   if (SUCCEEDED(hres))
+   error_code node::_windows_create_link(const widechar* pszPathObj, const widechar* pszPathLink, const widechar* pszDesc, const widechar* pszIconPath, ::i32 iIcon)
    {
 
-      IPersistFile* ppf;
+      HRESULT hresult;
 
-      // set the path to the shortcut target and add the description.
-      psl->SetPath(pszPathObj);
+      IShellLinkW* psl;
 
-      psl->SetDescription(pszDesc);
+      acmenode()->defer_co_initialize_ex(false);
 
-      if (pszIconPath != nullptr && *pszIconPath != L'\0')
+      // Get a pointer to the IShellLink interface. It is assumed that CoInitialize
+      // has already been called.
+      hresult = CoCreateInstance(CLSID_ShellLink, nullptr, CLSCTX_INPROC_SERVER, IID_IShellLinkW, (LPVOID*)&psl);
+
+      if (SUCCEEDED(hresult))
       {
 
-         psl->SetIconLocation(pszIconPath, iIcon);
+         IPersistFile* ppf;
+
+         // set the path to the shortcut target and add the description.
+         psl->SetPath(pszPathObj);
+
+         psl->SetDescription(pszDesc);
+
+         if (pszIconPath != nullptr && *pszIconPath != L'\0')
+         {
+
+            psl->SetIconLocation(pszIconPath, iIcon);
+
+         }
+
+         // Query IShellLink for the IPersistFile interface, used for saving the
+         // shortcut in persistent storage.
+         hresult = psl->QueryInterface(IID_IPersistFile, (LPVOID*)&ppf);
+
+         if (SUCCEEDED(hresult))
+         {
+            //WCHAR wsz[MAX_PATH];
+
+            // Ensure that the string is Unicode.
+            //            MultiByteToWideChar(CP_ACP, 0, pszPathLink, -1, wsz, MAX_PATH);
+
+
+            // Add code here to check return value from MultiByteWideChar
+            // for success.
+
+            // Save the link by calling IPersistFile::Save.
+            hresult = ppf->Save(pszPathLink, true);
+
+            ppf->Release();
+
+         }
+
+         psl->Release();
 
       }
 
-      // Query IShellLink for the IPersistFile interface, used for saving the
-      // shortcut in persistent storage.
-      hres = psl->QueryInterface(IID_IPersistFile, (LPVOID*)&ppf);
-
-      if (SUCCEEDED(hres))
-      {
-         //WCHAR wsz[MAX_PATH];
-
-         // Ensure that the string is Unicode.
-         //            MultiByteToWideChar(CP_ACP, 0, pszPathLink, -1, wsz, MAX_PATH);
-
-
-         // Add code here to check return value from MultiByteWideChar
-         // for success.
-
-         // Save the link by calling IPersistFile::Save.
-         hres = ppf->Save(pszPathLink, true);
-
-         ppf->Release();
-
-      }
-
-      psl->Release();
+      return { e_error_code_type_hresult, (::i64)hresult };
 
    }
 
-   return hres;
 
-}
+} // namespace apex_windows
+
 
 
 

@@ -619,7 +619,7 @@ namespace windowing_win32
 
       pmouse->m_nFlags = wparam;
 
-      pmouse->m_point = __point(lparam);
+      pmouse->m_point = ::point_i32(lparam);
 
       pmouse->m_bTranslated = true; // not in root coordinates
 

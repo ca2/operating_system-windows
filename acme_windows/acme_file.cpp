@@ -3,6 +3,7 @@
 #include "framework.h"
 #include "acme_file.h"
 #include "acme_path.h"
+#include "acme/exception/exception.h"
 #include "acme/operating_system/time.h"
 #include "acme/primitive/datetime/earth_time.h"
 #include "acme/_operating_system.h"

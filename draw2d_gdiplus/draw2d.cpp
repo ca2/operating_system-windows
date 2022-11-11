@@ -35,7 +35,7 @@ namespace draw2d_gdiplus
 
       //auto estatus = 
       
-      ::draw2d::draw2d::initialize(pobject);
+      ::draw2d::draw2d::initialize(pparticle);
 
       //if (!estatus)
       //{

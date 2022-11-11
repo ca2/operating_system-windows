@@ -109,6 +109,9 @@ namespace apex_windows
       void on_start_application(::apex::application * papplication) override;
 
 
+      virtual error_code _windows_create_link(const widechar* pszPathObj, const widechar* pszPathLink, const widechar* pszDesc, const widechar* pszIconPath, ::i32 iIcon);
+
+
    };
 
 

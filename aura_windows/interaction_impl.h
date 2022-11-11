@@ -1,13 +1,14 @@
 #pragma once
 
-//#error ""
 
-#include "acme/operating_system.h"
+#include "aura/user/user/interaction_impl.h"
+
+
+#include "acme/_operating_system.h"
 
 #include <Shobjidl.h>
 #include <Shellapi.h>
 
-#include "aura/user/user/interaction_impl.h"
 
 
 namespace aura_windows
@@ -64,8 +65,8 @@ namespace aura_windows
 
       //virtual void construct(::windowing::window * pwindow);
 
-      void assert_ok() const override;
-      void dump(dump_context & dumpcontext) const override;
+      //void assert_ok() const override;
+      //void dump(dump_context & dumpcontext) const override;
 
 
       //bool create_message_queue(::user::interaction * pinteraction, const ::string & lpszName);
@@ -186,7 +187,7 @@ namespace aura_windows
       //using ::user::interaction_impl::get_child_by_id;
       //void get_child_by_id(atom atom, oswindow* poswindow_) const;
 
-      virtual bool _is_window() const override;
+      virtual bool _is_window() override;
 
 //#if(WINVER >= 0x0500)
 //
@@ -264,8 +265,8 @@ namespace aura_windows
       //virtual void MapWindowPoints(::user::interaction_impl * puserinteractionTo, RECTANGLE_I32 * prectangle);
 
 
-      virtual void Print(::draw2d::graphics_pointer & pgraphics, u32 dwFlags) const;
-      virtual void PrintClient(::draw2d::graphics_pointer & pgraphics, u32 dwFlags) const;
+      virtual void Print(::draw2d::graphics_pointer & pgraphics, u32 dwFlags);
+      virtual void PrintClient(::draw2d::graphics_pointer & pgraphics, u32 dwFlags);
 
       virtual void UpdateWindow();
       virtual void SetRedraw(bool bRedraw = true);

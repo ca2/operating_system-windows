@@ -5,6 +5,9 @@
 #include "aura/hardware/devices.h"
 
 
+#include "acme/_operating_system.h"
+
+
 namespace windowing_win32
 {
 

@@ -87,7 +87,7 @@ namespace apex_windows
 
       wstring wstrFolder(pathFolder);
 
-      __zero(m_overlapped);
+      memset(&m_overlapped, 0, sizeof(m_overlapped));
 
       m_bRefresh = true;
 

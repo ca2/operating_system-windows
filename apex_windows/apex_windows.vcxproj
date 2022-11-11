@@ -809,6 +809,7 @@
     <ClCompile Include="app_launcher.cpp" />
     <ClCompile Include="dir_context.cpp" />
     <ClCompile Include="dir_system.cpp" />
+    <ClCompile Include="gdi.cpp" />
     <ClCompile Include="interprocess_base.cpp" />
     <ClCompile Include="interprocess_caller.cpp" />
     <ClCompile Include="interprocess_target.cpp" />

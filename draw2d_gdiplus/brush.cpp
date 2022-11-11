@@ -107,7 +107,7 @@ namespace draw2d_gdiplus
          try
          {
 
-            if (::is_ok(m_pimage))
+            if (m_pimage.ok())
             {
 
                auto pimage = m_pimage;

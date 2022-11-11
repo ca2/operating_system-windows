@@ -2,6 +2,7 @@
 #include "image.h"
 #include "graphics.h"
 #include "bitmap.h"
+#include "acme/exception/exception.h"
 #include "aura/graphics/image/icon.h"
 #include "aura/graphics/image/drawing.h"
 
@@ -17,7 +18,7 @@ namespace draw2d_gdiplus
       m_sizeWnd.cy = 0;
       m_hbitmap = nullptr;
 
-      __zero(m_bitmapinfo);
+      memset(&m_bitmapinfo, 0, sizeof(m_bitmapinfo));
 
    }
 
@@ -156,7 +157,7 @@ namespace draw2d_gdiplus
 
       m_sizeAlloc = ppixmap->size();
 
-      set_ok();
+      set_ok_flag();
 
       return true;
 
@@ -319,7 +320,7 @@ namespace draw2d_gdiplus
       
       m_bMapped = false;
 
-      set(eflagCreate);
+      set_flag(eflagCreate);
 
       //return true;
 
@@ -877,7 +878,7 @@ namespace draw2d_gdiplus
       m_pgraphics.release();
       m_hbitmap               = nullptr;
       m_sizeWnd               = ::size_i64(0, 0);
-      __zero(m_bitmapinfo);
+      memset(&m_bitmapinfo, 0, sizeof(m_bitmapinfo));
 
    }
 

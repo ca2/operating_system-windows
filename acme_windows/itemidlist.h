@@ -13,7 +13,7 @@
 |Thanks                               |
 --------------------------------------*/
 
-#include "acme/primitive/primitive/matter.h"
+#include "acme/primitive/primitive/particle.h"
 #include "acme_windows_common/comptr.h"
 #include "acme/_operating_system.h"
 #include <Shlobj.h>
@@ -21,7 +21,7 @@
 
 
 class CLASS_DECL_ACME_WINDOWS itemidlist :
-   virtual public ::matter
+   virtual public ::particle
 {
 public:
 

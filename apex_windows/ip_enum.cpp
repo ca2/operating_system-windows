@@ -1,6 +1,7 @@
 #include "framework.h"
-#include "apex/networking/sockets/_sockets.h"
 #include "ip_enum.h"
+#include "acme/exception/exception.h"
+#include "apex/networking/sockets/_sockets.h"
 
 
 #include "acme/_operating_system.h"
@@ -115,8 +116,8 @@ namespace apex_windows
       {
          struct addrinfo *result = nullptr;
          struct addrinfo *ptr = nullptr;
-         struct addrinfo hints;
-         __zero(hints);
+         struct addrinfo hints {};
+
          hints.ai_family = AF_INET;
          hints.ai_socktype = SOCK_STREAM;
          hints.ai_protocol = IPPROTO_TCP;
@@ -196,8 +197,8 @@ namespace apex_windows
       {
          struct addrinfo *result = nullptr;
          struct addrinfo *ptr = nullptr;
-         struct addrinfo hints;
-         __zero(hints);
+         struct addrinfo hints {};
+
          hints.ai_family = AF_INET6;
          hints.ai_socktype = SOCK_STREAM;
          hints.ai_protocol = IPPROTO_TCP;

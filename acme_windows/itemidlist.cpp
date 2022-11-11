@@ -1,6 +1,7 @@
 #include "framework.h"
 #include "itemidlist.h"
 #include "known_folder_struct.h"
+#include "acme/exception/exception.h"
 #include "acme_windows_common/cotaskptr.h"
 
 

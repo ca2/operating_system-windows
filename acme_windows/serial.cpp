@@ -149,9 +149,7 @@ namespace acme_windows
          throw ::exception(error_serial, "Invalid file descriptor, is the serial port open?");
       }
 
-      DCB dcbSerialParams = { 0 };
-
-      __zero(dcbSerialParams);
+      DCB dcbSerialParams = { };
 
       dcbSerialParams.DCBlength = sizeof(dcbSerialParams);
 

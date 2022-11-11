@@ -4,7 +4,7 @@
 #include "aura/user/user/notify_icon.h"
 
 
-#include "acme/operating_system.h"
+#include "acme/_operating_system.h"
 
 
 #include <shellapi.h>
