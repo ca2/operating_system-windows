@@ -4,7 +4,9 @@
 #include "windowing.h"
 #include "system_interaction.h"
 #include "acme/filesystem/filesystem/acme_directory.h"
+#include "acme/parallelization/synchronous_lock.h"
 #include "acme/primitive/geometry2d/_collection.h"
+#include "acme/primitive/string/international.h"
 #include "apex/filesystem/filesystem/dir_context.h"
 #include "apex/filesystem/filesystem/file_context.h"
 #include "aura/graphics/image/context_image.h"
@@ -166,7 +168,7 @@ bool IsDibSection(HBITMAP bmp)
          int h = ds.dsBmih.biHeight;
 
          auto pBits = ds.dsBm.bmBits;
-         auto pimage = pobject->m_pcontext->m_pauracontext->create_image({ w, h });
+         auto pimage = pparticle->m_pcontext->m_pauracontext->create_image({ w, h });
          int iStride = ds.dsBmih.biSizeImage / abs(h );
 
          if (h < 0)
@@ -192,7 +194,7 @@ bool IsDibSection(HBITMAP bmp)
 
    ::GetObject(hbitmap, sizeof(bitmap), &bitmap);
 
-   auto pimage = pobject->m_pcontext->m_pauracontext->create_image({ bitmap.bmWidth, bitmap.bmHeight });
+   auto pimage = pparticle->m_pcontext->m_pauracontext->create_image({ bitmap.bmWidth, bitmap.bmHeight });
 
    BITMAPINFO bitmapinfo = {};
 
@@ -244,7 +246,7 @@ namespace windowing_win32
 
       m_iMaxThreadCount = 1;
 
-      defer_create_mutex();
+      defer_create_synchronization();
 
       m_iThread = 0;
 
@@ -575,9 +577,9 @@ namespace windowing_win32
 
       auto pnode = acmesystem()->node();
 
-      auto pwindowing = puser->windowing1()->cast < windowing >();
+      ::pointer < windowing > pwindowing = puser->windowing1();
 
-      HWND hwnd = __hwnd(pwindowing->system_window()->oswindow());
+      HWND hwnd = __hwnd(pwindowing->system_interaction()->oswindow());
 
       comptr < IExtractIconW > piextracticon;
 
@@ -877,13 +879,13 @@ namespace windowing_win32
 
       if (((FAILED(hrIconLocation) && FAILED(hrGetLocation))
          || getfileimage.m_imagekey.m_iIcon == 0x80000000
-         || !m_pcontext->m_papexcontext->file().exists(strIconLocation))
+         || !m_pcontext->m_papexcontext->file()->exists(strIconLocation))
          && strFileParam.ends_ci(".lnk"))
       {
 
-         m_pcontext->m_papexcontext->file().resolve_link(pathTarget, strFileParam);
+         m_pcontext->m_papexcontext->file()->resolve_link(pathTarget, strFileParam);
 
-         if (!m_pcontext->m_papexcontext->file().exists(pathTarget) && !m_pcontext->m_papexcontext->dir().is(pathTarget))
+         if (!m_pcontext->m_papexcontext->file()->exists(pathTarget) && !m_pcontext->m_papexcontext->dir()->is(pathTarget))
          {
 
             if (pathTarget.ends_ci(".exe"))
@@ -957,7 +959,7 @@ namespace windowing_win32
 
             strIcon = acmedirectory()->config() / "shell/app_theme" / getfileimage.m_imagekey.m_strShellThemePrefix + strExtension + ".ico";
 
-            if (m_pcontext->m_papexcontext->file().exists(strIcon))
+            if (m_pcontext->m_papexcontext->file()->exists(strIcon))
             {
 
                if (reserve_image(getfileimage))
@@ -995,7 +997,7 @@ namespace windowing_win32
 
             HRESULT hrExtract = E_FAIL;
 
-            synchronous_lock synchronouslock(mutex());
+            synchronous_lock synchronouslock(synchronization());
 
             auto iaSize = m_iaSize;
 
@@ -1257,7 +1259,7 @@ namespace windowing_win32
    shell::enum_folder shell::get_folder_type(::particle * pparticle, const ::string & pcsz)
    {
 
-      return get_folder_type(pobject, utf8_to_unicode(pcsz));
+      return get_folder_type(pparticle, utf8_to_unicode(pcsz));
 
    }
 
@@ -1316,13 +1318,13 @@ namespace windowing_win32
 
       getfileimage.m_iImage = 0x80000000;
 
-      if (::str().begins_ci(getfileimage.m_imagekey.m_strPath, "uifs:"))
+      if (getfileimage.m_imagekey.m_strPath.begins_ci("uifs:"))
       {
 
          if (reserve_image(getfileimage))
          {
 
-            ::file::path path = m_pcontext->m_papexcontext->dir().matter("cloud.ico");
+            ::file::path path = m_pcontext->m_papexcontext->dir()->matter("cloud.ico");
 
             set_icon(path, getfileimage);
 
@@ -1332,30 +1334,13 @@ namespace windowing_win32
          return true;
 
       }
-      else if (::str().begins_ci(getfileimage.m_imagekey.m_strPath, "fs:"))
+      else if (getfileimage.m_imagekey.m_strPath.begins_ci("fs:"))
       {
 
          if (reserve_image(getfileimage))
          {
 
-            ::file::path path = m_pcontext->m_papexcontext->dir().matter("remote.ico");
-
-            set_icon(path, getfileimage);
-
-         }
-
-         //return iImage;
-
-         return true;
-
-      }
-      else if (::str().begins_ci(getfileimage.m_imagekey.m_strPath, "ftp:"))
-      {
-
-         if (reserve_image(getfileimage))
-         {
-
-            ::file::path path = m_pcontext->m_papexcontext->dir().matter("ftp.ico");
+            ::file::path path = m_pcontext->m_papexcontext->dir()->matter("remote.ico");
 
             set_icon(path, getfileimage);
 
@@ -1366,11 +1351,28 @@ namespace windowing_win32
          return true;
 
       }
-
-      if (::str().ends_ci(getfileimage.m_imagekey.m_strPath, ".aura"))
+      else if (getfileimage.m_imagekey.m_strPath.begins_ci("ftp:"))
       {
 
-         string str = m_pcontext->m_papexcontext->file().as_string(getfileimage.m_imagekey.m_strPath);
+         if (reserve_image(getfileimage))
+         {
+
+            ::file::path path = m_pcontext->m_papexcontext->dir()->matter("ftp.ico");
+
+            set_icon(path, getfileimage);
+
+         }
+
+         //return iImage;
+
+         return true;
+
+      }
+
+      if (getfileimage.m_imagekey.m_strPath.ends_ci(".aura"))
+      {
+
+         string str = m_pcontext->m_papexcontext->file()->as_string(getfileimage.m_imagekey.m_strPath);
 
          if (str.begins_eat_ci("ca2prompt\r\n"))
          {
@@ -1396,7 +1398,7 @@ namespace windowing_win32
 
             comptr < IKnownFolder > pknownfolder;
 
-            HRESULT hrGetFolder = getfileimage.m_knownfoldermanager->GetFolder(pknownfolderstruct->m_atomKnownFolder, &pknownfolder);
+            HRESULT hrGetFolder = getfileimage.m_knownfoldermanager->GetFolder(pknownfolderstruct->m_knownfolderid, &pknownfolder);
 
             if (SUCCEEDED(hrGetFolder) && pknownfolder)
             {
@@ -1547,7 +1549,7 @@ namespace windowing_win32
 
       string strExtension;
 
-      if (::str().ends_ci(getfileimage.m_imagekey.m_strPath, ".sln"))
+      if (getfileimage.m_imagekey.m_strPath.ends_ci(".sln"))
       {
 
          //output_debug_string("test .sln");
@@ -1679,7 +1681,7 @@ namespace windowing_win32
 
       //auto estatus = 
       
-      ::user::shell::initialize(pobject);
+      ::user::shell::initialize(pparticle);
 
       //if (!estatus)
       //{
@@ -1708,7 +1710,7 @@ namespace windowing_win32
    void shell::init_task()
    {
 
-      defer_co_initialize_ex(false);
+      acmenode()->defer_co_initialize_ex(false);
 
       ::user::shell::init_task();
 
@@ -1718,7 +1720,7 @@ namespace windowing_win32
    void shell::run()
    {
 
-      defer_co_initialize_ex(false);
+      acmenode()->defer_co_initialize_ex(false);
 
 
 
@@ -1744,7 +1746,7 @@ namespace windowing_win32
    void shell::add_system_icon(int iIcon, _get_file_image_ & getfileimage)
    {
 
-      synchronous_lock synchronouslock(mutex());
+      synchronous_lock synchronouslock(synchronization());
 
       auto iaSize = m_iaSize;
 
@@ -1771,7 +1773,7 @@ namespace windowing_win32
       if (pathIconParam.ends_ci(".ico"))
       {
 
-         synchronous_lock synchronouslock(mutex());
+         synchronous_lock synchronouslock(synchronization());
 
          auto iaSize = m_iaSize;
 
@@ -1815,9 +1817,9 @@ namespace windowing_win32
    void shell::add_icon(int iSize, HICON hicon, _get_file_image_ & getfileimage)
    {
 
-      synchronous_lock synchronouslock(m_pimagelist[iSize]->mutex());
+      synchronous_lock synchronouslock(m_pimagelist[iSize]->synchronization());
 
-      synchronous_lock slHover(m_pimagelistHover[iSize]->mutex());
+      synchronous_lock slHover(m_pimagelistHover[iSize]->synchronization());
 
       auto pwindowingicon = __create_new < ::windowing_win32::icon >();
 
@@ -1949,7 +1951,7 @@ namespace windowing_win32
 
          auto pnode = psystem->node()->m_pAuraPlatform;
 
-         synchronous_lock synchronouslock(mutex());
+         synchronous_lock synchronouslock(synchronization());
 
          auto iaSize = m_iaSize;
 

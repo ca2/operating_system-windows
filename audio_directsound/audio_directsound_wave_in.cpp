@@ -225,7 +225,7 @@ namespace multimedia
       void     in::in_close()
       {
 
-         synchronous_lock synchronouslock(mutex());
+         synchronous_lock synchronouslock(synchronization());
 
          //void     mmr;
 
@@ -264,7 +264,7 @@ namespace multimedia
       void     in::in_start()
       {
 
-         synchronous_lock synchronouslock(mutex());
+         synchronous_lock synchronouslock(synchronization());
 
          if(m_estate == state_recording)
             return ::success;
@@ -291,7 +291,7 @@ namespace multimedia
       void     in::in_stop()
       {
 
-         synchronous_lock synchronouslock(mutex());
+         synchronous_lock synchronouslock(synchronization());
 
          if(m_estate != state_recording)
             return error_failed;
@@ -361,7 +361,7 @@ namespace multimedia
       void     in::in_reset()
       {
 
-         synchronous_lock synchronouslock(mutex());
+         synchronous_lock synchronouslock(synchronization());
 
          m_bResetting = true;
 

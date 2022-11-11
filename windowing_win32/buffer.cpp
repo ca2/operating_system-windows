@@ -5,6 +5,9 @@
 #include "windowing.h"
 #include "display.h"
 #include "window.h"
+#include "monitor.h"
+#include "acme/exception/exception.h"
+#include "acme/parallelization/mutex.h"
 #include "aura/graphics/image/image.h"
 #include "aura/user/user/interaction_impl.h"
 #include "aura/graphics/image/image.h"
@@ -75,7 +78,7 @@ namespace windowing_win32
    buffer::buffer()
    {
 
-      defer_create_mutex();
+      defer_create_synchronization();
 
       m_rectangleLast.Null();
 

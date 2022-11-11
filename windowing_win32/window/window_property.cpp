@@ -1,6 +1,9 @@
 #include "framework.h"
-#undef ERROR
-#include "acme/operating_system.h"
+
+
+#include "acme/_operating_system.h"
+
+
 #include <shellapi.h>
 #include <propsys.h>
 #include <propkey.h>

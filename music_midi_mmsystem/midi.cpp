@@ -34,7 +34,7 @@ namespace music
 
             m_pMidi = this;
 
-            defer_create_mutex();
+            defer_create_synchronization();
 
             m_strName = "mmsystem";
 
@@ -492,7 +492,7 @@ namespace music
          void midi::enumerate_midi_out_devices()
          {
 
-            synchronous_lock synchronouslock(mutex());
+            synchronous_lock synchronouslock(synchronization());
 
             u32 uDeviceCount = midiOutGetNumDevs();
 
@@ -526,7 +526,7 @@ namespace music
          void midi::enumerate_midi_in_devices()
          {
 
-            synchronous_lock synchronouslock(mutex());
+            synchronous_lock synchronouslock(synchronization());
 
             u32 uDeviceCount = midiInGetNumDevs();
 

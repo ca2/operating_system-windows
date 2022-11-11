@@ -4,21 +4,33 @@
 #include "windowing.h"
 #include "icon.h"
 #include "cursor.h"
+#include "top_level_enum.h"
+#include "system_interaction.h"
+#include "window_util.h"
+#include "acme/constant/activate.h"
+#include "acme/constant/id.h"
 #include "acme/constant/message.h"
 #include "acme/constant/timer.h"
+#include "acme/exception/exception.h"
+#include "acme/exception/interface_only.h"
+#include "acme/parallelization/synchronous_lock.h"
+#include "acme/platform/node.h"
 #include "aura_windows/interaction_impl.h"
 #include "aura/graphics/draw2d/graphics.h"
 #include "aura/user/user/interaction_prodevian.h"
-#include "acme/constant/activate.h"
 #include "aura/message/user.h"
-#include "top_level_enum.h"
-#include "system_interaction.h"
 #include "aura/user/user/user.h"
 #include "aura/user/user/system.h"
-#include "acme_windows_common/comptr.h"
 #include "aura/platform/session.h"
 #include "aura/platform/system.h"
-#include "window_util.h"
+#include "acme_windows_common/comptr.h"
+
+
+
+#include "acme/_operating_system.h"
+#include "acme/operating_system/windows_common/__string.h"
+
+
 #include <dwmapi.h>
 
 
@@ -118,77 +130,77 @@ namespace windowing_win32
    }
 
 
-   void window::assert_ok() const
-   {
+   //void window::assert_ok() const
+   //{
 
-      //::windowing_win32::window::assert_ok();
+   //   //::windowing_win32::window::assert_ok();
 
-      //if (((::windowing_win32::window *)this)->get_hwnd() == nullptr)
-      //   return;     // null (unattached) windows are valid
+   //   //if (((::windowing_win32::window *)this)->get_hwnd() == nullptr)
+   //   //   return;     // null (unattached) windows are valid
 
-      //// check for special wnd??? values
-      //ASSERT(HWND_TOP == nullptr);       // same as desktop
-      //if (((::windowing_win32::window *)this)->get_hwnd() == HWND_BOTTOM)
-      //{
-      //}
-      //else if (((::windowing_win32::window *)this)->get_hwnd() == HWND_TOPMOST)
-      //{
-      //}
-      //else if (((::windowing_win32::window *)this)->get_hwnd() == HWND_NOTOPMOST)
-      //{
-      //}
-      //else
-      //{
-      //   // should be a normal window
-      //   ASSERT(::IsWindow(((::windowing_win32::window *)this)->get_hwnd()));
+   //   //// check for special wnd??? values
+   //   //ASSERT(HWND_TOP == nullptr);       // same as desktop
+   //   //if (((::windowing_win32::window *)this)->get_hwnd() == HWND_BOTTOM)
+   //   //{
+   //   //}
+   //   //else if (((::windowing_win32::window *)this)->get_hwnd() == HWND_TOPMOST)
+   //   //{
+   //   //}
+   //   //else if (((::windowing_win32::window *)this)->get_hwnd() == HWND_NOTOPMOST)
+   //   //{
+   //   //}
+   //   //else
+   //   //{
+   //   //   // should be a normal window
+   //   //   ASSERT(::IsWindow(((::windowing_win32::window *)this)->get_hwnd()));
 
-      //}
-   }
+   //   //}
+   //}
 
-   
-   void window::dump(dump_context & dumpcontext) const
-   {
+   //
+   //void window::dump(dump_context & dumpcontext) const
+   //{
 
-      //::windowing_win32::window::dump(dumpcontext);
+   //   //::windowing_win32::window::dump(dumpcontext);
 
-      //dumpcontext << "\nm_oswindow_ = " << ((::windowing_win32::window *)this)->get_hwnd();
+   //   //dumpcontext << "\nm_oswindow_ = " << ((::windowing_win32::window *)this)->get_hwnd();
 
-      //if (((::windowing_win32::window *)this)->get_hwnd() == nullptr || ((::windowing_win32::window *)this)->get_hwnd() == HWND_BOTTOM ||
-      //   ((::windowing_win32::window *)this)->get_hwnd() == HWND_TOPMOST || ((::windowing_win32::window *)this)->get_hwnd() == HWND_NOTOPMOST)
-      //{
-      //   // not a normal window - nothing more to dump
-      //   return;
-      //}
+   //   //if (((::windowing_win32::window *)this)->get_hwnd() == nullptr || ((::windowing_win32::window *)this)->get_hwnd() == HWND_BOTTOM ||
+   //   //   ((::windowing_win32::window *)this)->get_hwnd() == HWND_TOPMOST || ((::windowing_win32::window *)this)->get_hwnd() == HWND_NOTOPMOST)
+   //   //{
+   //   //   // not a normal window - nothing more to dump
+   //   //   return;
+   //   //}
 
-      //if (!::IsWindow(((::windowing_win32::window *)this)->get_hwnd()))
-      //{
-      //   // not a valid window
-      //   dumpcontext << " (illegal hwnd)";
-      //   return; // don't do anything more
-      //}
+   //   //if (!::IsWindow(((::windowing_win32::window *)this)->get_hwnd()))
+   //   //{
+   //   //   // not a valid window
+   //   //   dumpcontext << " (illegal hwnd)";
+   //   //   return; // don't do anything more
+   //   //}
 
-      ////auto puserinteraction = psystem->ui_from_handle(((::windowing_win32::window *)this)->get_hwnd());
-      ////if (puserinteraction->m_puserinteractionimpl != (::user::window *)this)
-      ////   dumpcontext << " (Detached or temporary window)";
-      ////else
-      ////   dumpcontext << " (permanent window)";
+   //   ////auto puserinteraction = psystem->ui_from_handle(((::windowing_win32::window *)this)->get_hwnd());
+   //   ////if (puserinteraction->m_puserinteractionimpl != (::user::window *)this)
+   //   ////   dumpcontext << " (Detached or temporary window)";
+   //   ////else
+   //   ////   dumpcontext << " (permanent window)";
 
-      ////wchar_t szBuf[64];
-      ////::GetClassNameW(((::windowing_win32::window *)this)->get_hwnd(), szBuf, _countof(szBuf));
-      ////dumpcontext << "\nclass name = \"" << szBuf << "\"";
+   //   ////wchar_t szBuf[64];
+   //   ////::GetClassNameW(((::windowing_win32::window *)this)->get_hwnd(), szBuf, _countof(szBuf));
+   //   ////dumpcontext << "\nclass name = \"" << szBuf << "\"";
 
-      ////::rectangle_i32 rectangle;
-      ////((::windowing_win32::window *)this)->puserinteraction->layout().window().screen_rect(&rectangle);
-      ////dumpcontext << "\nrect = " << rectangle_i32;
-      ////dumpcontext << "\nparent ::user::window * = " << ::hex::lower_from((::iptr)((::windowing_win32::window *)this)->get_parent());
+   //   ////::rectangle_i32 rectangle;
+   //   ////((::windowing_win32::window *)this)->puserinteraction->layout().window().screen_rect(&rectangle);
+   //   ////dumpcontext << "\nrect = " << rectangle_i32;
+   //   ////dumpcontext << "\nparent ::user::window * = " << ::hex::lower_from((::iptr)((::windowing_win32::window *)this)->get_parent());
 
-      ////dumpcontext << "\nstyle = " << (uptr)::GetWindowLong(((::windowing_win32::window *)this)->get_hwnd(), GWL_STYLE);
-      ////if (::GetWindowLong(((::windowing_win32::window *)this)->get_hwnd(), GWL_STYLE) & WS_CHILD)
-      ////   dumpcontext << "\nid = " << __get_dialog_control_id(((::windowing_win32::window *)this)->get_hwnd());
+   //   ////dumpcontext << "\nstyle = " << (uptr)::GetWindowLong(((::windowing_win32::window *)this)->get_hwnd(), GWL_STYLE);
+   //   ////if (::GetWindowLong(((::windowing_win32::window *)this)->get_hwnd(), GWL_STYLE) & WS_CHILD)
+   //   ////   dumpcontext << "\nid = " << __get_dialog_control_id(((::windowing_win32::window *)this)->get_hwnd());
 
-      ////dumpcontext << "\n";
+   //   ////dumpcontext << "\n";
 
-   }
+   //}
 
 
    //void window::install_system_interaction_message_handling(::user::interaction * puserinteraction)
@@ -1958,13 +1970,14 @@ namespace windowing_win32
    }
 
 
-   bool window::on_set_window_position(const class ::zorder& zorder, i32 x, i32 y, i32 cx, i32 cy, ::u32 nFlags)
+   bool window::on_set_window_position(const class ::zorder& zorder, i32 x, i32 y, i32 cx, i32 cy, const ::e_activation& eactivation, bool bNoZorder, bool bNoMove, bool bNoSize, bool bShow, bool bHide)
    {
 
       //if (!(_get_ex_style() & WS_EX_LAYERED))
       {
 
-         ::windowing::window::on_set_window_position(zorder, x, y, cx, cy, nFlags);
+         ::windowing::window::on_set_window_position(zorder, x, y, cx, cy, eactivation, 
+            bNoZorder, bNoMove, bNoSize, bShow, bHide);
 
       }
 
@@ -1975,7 +1988,7 @@ namespace windowing_win32
 
 #undef SET_WINDOW_POS_LOG
 
-   bool window::set_window_position(const class ::zorder & zorder, i32 x, i32 y, i32 cx, i32 cy, ::u32 nFlags)
+   bool window::set_window_position(const class ::zorder& zorder, i32 x, i32 y, i32 cx, i32 cy, const ::e_activation& eactivation, bool bNoZorder, bool bNoMove, bool bNoSize, bool bShow, bool bHide)
    {
 
       HWND hwnd = get_hwnd();
@@ -1984,8 +1997,49 @@ namespace windowing_win32
 
       HWND hwndInsertAfter = pwindowing->zorder_to_hwnd(zorder);
 
-      bool bNoZorder = nFlags & SWP_NOZORDER;
+      UINT nFlags = 0;
 
+      if (eactivation & e_activation_no_activate)
+      {
+
+         nFlags |= SWP_NOACTIVATE;
+
+      }
+
+      if (bNoZorder)
+      {
+
+         nFlags |= SWP_NOZORDER;
+
+      }
+
+      if (bNoMove)
+      {
+
+         nFlags |= SWP_NOMOVE;
+
+      }
+
+      if (bNoSize)
+      {
+
+         nFlags |= SWP_NOSIZE;
+
+      }
+
+      if (bShow)
+      {
+
+         nFlags |= SWP_SHOWWINDOW;
+
+      }
+      else if (bHide)
+      {
+
+         nFlags |= SWP_HIDEWINDOW;
+
+      }
+         
       if (::GetWindowLong(hwnd, GWL_EXSTYLE) & WS_EX_LAYERED)
       {
 
@@ -2422,7 +2476,7 @@ namespace windowing_win32
 
       auto puserinteraction = m_puserinteractionimpl->m_puserinteraction;
 
-      synchronous_lock synchronouslock(puserinteraction->mutex());
+      synchronous_lock synchronouslock(puserinteraction->synchronization());
 
       ASSERT(::IsWindow(get_hwnd()));
 
@@ -4997,13 +5051,13 @@ namespace windowing_win32
    void window::show_task(bool bShowTaskBar)
    {
 
-      synchronous_lock synchronouslock(mutex());
+      synchronous_lock synchronouslock(synchronization());
 
       // https://www.daniweb.com/programming/software-development/threads/457564/mfc-application-disablehide-taskbar-icon
 
       set_tool_window(!bShowTaskBar);
 
-      defer_co_initialize_ex(false);
+      acmenode()->defer_co_initialize_ex(false);
 
       comptr < ITaskbarList>                     tasklist;
 
@@ -6298,7 +6352,7 @@ namespace windowing_win32
 
       auto pprodevian = m_puserinteractionimpl->m_pprodevian;
 
-      puserinteraction->post_procedure(pprodevian->m_procedureWindowShow);
+      puserinteraction->interaction_post(pprodevian->m_procedureWindowShow);
 
    }
 
@@ -6324,7 +6378,7 @@ namespace windowing_win32
 
       }
 
-      puserinteraction->post_procedure(pprodevian->m_procedureUpdateScreen);
+      puserinteraction->interaction_post(pprodevian->m_procedureUpdateScreen);
 
    }
 

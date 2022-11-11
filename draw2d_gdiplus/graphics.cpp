@@ -6757,7 +6757,7 @@ namespace draw2d_gdiplus
 
    //{
 
-   //   synchronous_lock synchronouslock(mutex());
+   //   synchronous_lock synchronouslock(synchronization());
 
    //   if(m_ppen.cast < ::draw2d_gdiplus::pen >()->m_egdiplusalign != Gdiplus::PenAlignment::PenAlignmentCenter)
    //   {
@@ -6831,7 +6831,7 @@ namespace draw2d_gdiplus
    //void graphics::draw_line(double x1, double y1, double x2, double y2, ::draw2d::pen * ppenParam)
    //{
 
-   //   synchronous_lock synchronouslock(mutex());
+   //   synchronous_lock synchronouslock(synchronization());
 
    //   auto ppen = (Gdiplus::Pen *) ppenParam->get_os_data(this);
 
@@ -7280,7 +7280,7 @@ namespace draw2d_gdiplus
    Gdiplus::Pen * graphics::m_ppen->get_os_data < Pen * >(this)
    {
 
-      synchronous_lock synchronouslock(mutex());
+      synchronous_lock synchronouslock(synchronization());
 
       if(m_ppen.is_null())
       {

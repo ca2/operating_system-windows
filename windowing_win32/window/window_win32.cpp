@@ -1,4 +1,5 @@
 #include "framework.h"
+#include "acme/constant/message.h"
 #include "acme/constant/timer.h"
 #include "apex/filesystem/filesystem/dir_context.h"
 #include "windowing_win32/window.h"

@@ -47,7 +47,7 @@ namespace music
 
             m_bMessageThread = true;
 
-            defer_create_mutex();
+            defer_create_synchronization();
 
             auto psystem = acmesystem()->m_paquasystem;
 
@@ -120,7 +120,7 @@ namespace music
          void     sequencer::close_file()
          {
 
-            synchronous_lock synchronouslock(mutex());
+            synchronous_lock synchronouslock(synchronization());
 
             m_psequence->m_pfile->close_file();
 
@@ -385,7 +385,7 @@ namespace music
          void sequencer::play(player_command * pcommand)
          {
 
-            synchronous_lock synchronouslock(mutex());
+            synchronous_lock synchronouslock(synchronization());
 
             start_mmsystem_sequencer();
 
@@ -395,7 +395,7 @@ namespace music
          void sequencer::pause(player_command * pcommand)
          {
 
-            synchronous_lock synchronouslock(mutex());
+            synchronous_lock synchronouslock(synchronization());
 
             if (sequence::e_state_playing != m_psequence->get_state())
             {
@@ -425,7 +425,7 @@ namespace music
          void sequencer::restart(player_command * pcommand)
          {
 
-            synchronous_lock synchronouslock(mutex());
+            synchronous_lock synchronouslock(synchronization());
 
             if (sequence::e_state_paused != m_psequence->get_state())
             {
@@ -451,7 +451,7 @@ namespace music
          void sequencer::stop(player_command * pcommand)
          {
 
-            synchronous_lock synchronouslock(mutex());
+            synchronous_lock synchronouslock(synchronization());
 
             if (m_psequence->get_state() == sequence::e_state_stopping)
             {
@@ -496,7 +496,7 @@ namespace music
          ::e_status sequencer::get_position(musical_tick & tk)
          {
 
-            synchronous_lock synchronouslock(mutex());
+            synchronous_lock synchronouslock(synchronization());
 
             //void mmr;
 
@@ -588,7 +588,7 @@ namespace music
          ::e_status sequencer::get_time_position(::duration & duration)
          {
 
-            synchronous_lock synchronouslock(mutex());
+            synchronous_lock synchronouslock(synchronization());
 
             ::e_status estatus;
 
@@ -986,7 +986,7 @@ namespace music
             {
 
                //post_midi_sequence_event(sequence::e_event_midi_stream_out, lpmidihdr);
-               synchronous_lock synchronouslock(mutex());
+               synchronous_lock synchronouslock(synchronization());
 
                //LPMIDIHDR lpmidihdr = (LPMIDIHDR)pevent->m_puserdata;
 
@@ -1166,7 +1166,7 @@ namespace music
          void     sequencer::close_stream()
          {
 
-            synchronous_lock synchronouslock(mutex());
+            synchronous_lock synchronouslock(synchronization());
 
             m_pbuffera->midiOutUnprepareHeader((HMIDIOUT)m_hstream);
 
@@ -1187,7 +1187,7 @@ namespace music
          void sequencer::close_device()
          {
 
-            synchronous_lock synchronouslock(mutex());
+            synchronous_lock synchronouslock(synchronization());
 
             if (m_hstream == nullptr)
             {
@@ -1255,7 +1255,7 @@ namespace music
             case sequence::e_event_midi_stream_out:
             {
 
-               //synchronous_lock synchronouslock(mutex());
+               //synchronous_lock synchronouslock(synchronization());
 
                //LPMIDIHDR lpmidihdr = (LPMIDIHDR)pevent->m_puserdata;
 
@@ -1772,7 +1772,7 @@ namespace music
 
             {
 
-               synchronous_lock synchronouslock(mutex());
+               synchronous_lock synchronouslock(synchronization());
 
                ASSERT(m_iBuffersInMMSYSTEM <= 0);
 

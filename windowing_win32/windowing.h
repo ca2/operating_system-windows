@@ -56,7 +56,7 @@ namespace windowing_win32
       ::pointer<system_interaction>create_system_window();
 
 
-      inline system_interaction * system_window() { return m_psysteminteraction; }
+      inline system_interaction * system_interaction() { return m_psysteminteraction; }
 
       virtual HICON _load_icon(string_array& straMatter, string strIcon, int cx, int cy);
 

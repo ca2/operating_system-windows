@@ -1,9 +1,9 @@
 #include "framework.h"
-//#include "_windows.h"
 #include "display.h"
 #include "notify_icon.h"
 #include "cursor.h"
 #include "icon.h"
+#include "devices.h"
 #include "window.h"
 #include "windowing.h"
 #include "monitor.h"
@@ -13,6 +13,7 @@
 #include "shell.h"
 #include "imm_client.h"
 #include "buffer.h"
+#include "acme/parallelization/mutex.h"
 
 
 //BEGIN_FACTORY(windowing_win32)

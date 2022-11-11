@@ -69,7 +69,7 @@ namespace multimedia
       void     out::out_open(thread * pthreadCallback, i32 iBufferCount, i32 iBufferSampleCount)
       {
 
-         synchronous_lock synchronouslock(mutex());
+         synchronous_lock synchronouslock(synchronization());
 
          if (m_pdirectsound != nullptr && m_psoundbuffer != nullptr && m_estate != e_state_initial)
          {
@@ -265,7 +265,7 @@ namespace multimedia
       void     out::out_open_ex(thread * pthreadCallback, i32 iBufferCount, i32 iBufferSampleCount, u32 uiSamplesPerSec, u32 uiChannelCount, u32 uiBitsPerSample)
       {
 
-         synchronous_lock synchronouslock(mutex());
+         synchronous_lock synchronouslock(synchronization());
 
          if(m_pdirectsound != nullptr && m_psoundbuffer != nullptr && m_estate != e_state_initial)
             return ::success;
@@ -413,7 +413,7 @@ namespace multimedia
       void     out::out_close()
       {
 
-         synchronous_lock synchronouslock(mutex());
+         synchronous_lock synchronouslock(synchronization());
 
          if(m_estate == e_state_playing)
          {
@@ -457,7 +457,7 @@ namespace multimedia
       void out::out_filled(index i)
       {
 
-         synchronous_lock synchronouslock(mutex());
+         synchronous_lock synchronouslock(synchronization());
 
          LPVOID lpvAudio1 = nullptr,lpvAudio2 = nullptr;
 
@@ -521,7 +521,7 @@ namespace multimedia
       void     out::out_stop()
       {
 
-         synchronous_lock synchronouslock(mutex());
+         synchronous_lock synchronouslock(synchronization());
 
          if(m_estate != e_state_playing && m_estate != e_state_paused)
             return error_failed;
@@ -550,7 +550,7 @@ namespace multimedia
       void     out::out_pause()
       {
 
-         synchronous_lock synchronouslock(mutex());
+         synchronous_lock synchronouslock(synchronization());
 
          ASSERT(m_estate == e_state_playing);
 
@@ -579,7 +579,7 @@ namespace multimedia
       void     out::out_start(const ::duration & position)
       {
 
-         synchronous_lock synchronouslock(mutex());
+         synchronous_lock synchronouslock(synchronization());
 
          if(m_estate == e_state_playing)
             return ::success;
@@ -608,7 +608,7 @@ namespace multimedia
       void     out::out_restart()
       {
 
-         synchronous_lock synchronouslock(mutex());
+         synchronous_lock synchronouslock(synchronization());
 
          ASSERT(m_estate == e_state_paused);
 
@@ -652,7 +652,7 @@ namespace multimedia
       ::duration out::out_get_time()
       {
 
-         synchronous_lock synchronouslock(mutex());
+         synchronous_lock synchronouslock(synchronization());
 
          //void                    mmr;
 
@@ -713,7 +713,7 @@ namespace multimedia
       ::duration out::out_get_time()
       {
 
-         synchronous_lock synchronouslock(mutex());
+         synchronous_lock synchronouslock(synchronization());
 
          //void                    mmr;
 

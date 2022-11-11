@@ -1,5 +1,8 @@
 #include "framework.h"
 #include "copydesk.h"
+#include "acme/exception/exception.h"
+#include "acme/parallelization/synchronous_lock.h"
+#include "acme/primitive/string/international.h"
 #include "aura/graphics/image/image.h"
 
 
@@ -17,7 +20,7 @@ namespace windowing_win32
 
       //m_hwnd = nullptr;
 
-      defer_create_mutex();
+      defer_create_synchronization();
 
    }
 
@@ -32,7 +35,7 @@ namespace windowing_win32
    void copydesk::OnClipboardUpdate()
    {
 
-      synchronous_lock synchronouslock(mutex());
+      synchronous_lock synchronouslock(synchronization());
 
       m_cFileCount = -1;
       m_iPriorityTextFormat = -2;
@@ -92,7 +95,7 @@ namespace windowing_win32
 
       //}
 
-      synchronous_lock synchronouslock(mutex());
+      synchronous_lock synchronouslock(synchronization());
 
       //WNDCLASS wndcls = {};
 
@@ -356,7 +359,7 @@ namespace windowing_win32
          else
          {
 
-            synchronous_lock synchronouslock(mutex());
+            synchronous_lock synchronouslock(synchronization());
 
             if (!::OpenClipboard(__hwnd(oswindow())))
             //if(!OpenClipboard())
@@ -406,7 +409,7 @@ namespace windowing_win32
 
       }
 
-      synchronous_lock synchronouslock(mutex());
+      synchronous_lock synchronouslock(synchronization());
 
       if (!::OpenClipboard(__hwnd(oswindow())))
       {
@@ -444,7 +447,7 @@ namespace windowing_win32
    bool copydesk::_set_filea(const ::file::path_array & patha, enum_op eop)
    {
 
-      synchronous_lock synchronouslock(mutex());
+      synchronous_lock synchronouslock(synchronization());
 
       if (!::OpenClipboard(__hwnd(oswindow())))
       {
@@ -490,7 +493,7 @@ namespace windowing_win32
 
       //ASSERT(::IsWindow(m_hwnd));
 
-      synchronous_lock synchronouslock(mutex());
+      synchronous_lock synchronouslock(synchronization());
 
       if (!::OpenClipboard(__hwnd(oswindow())))
       {
@@ -533,7 +536,7 @@ namespace windowing_win32
 
       }
 
-      synchronous_lock synchronouslock(mutex());
+      synchronous_lock synchronouslock(synchronization());
 
       if (!::OpenClipboard(__hwnd(oswindow())))
       {
@@ -599,7 +602,7 @@ namespace windowing_win32
 
       }
 
-      synchronous_lock synchronouslock(mutex());
+      synchronous_lock synchronouslock(synchronization());
 
       if (!::OpenClipboard(__hwnd(oswindow())))
       {
@@ -626,9 +629,7 @@ namespace windowing_win32
          try
          {
 
-            BITMAP bm;
-
-            __zero(bm);
+            BITMAP bm{};
 
             ::GetObject(hbitmap, sizeof(bm), &bm);
 
@@ -701,7 +702,7 @@ namespace windowing_win32
 
       //ASSERT(::IsWindow(m_hwnd));
 
-      synchronous_lock synchronouslock(mutex());
+      synchronous_lock synchronouslock(synchronization());
 
       if (!::OpenClipboard(__hwnd(oswindow())))
       {

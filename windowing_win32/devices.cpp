@@ -4,12 +4,14 @@
 #include "master_device_listener.h"
 #include "windowing.h"
 #include "system_interaction.h"
+#include "acme/constant/message.h"
+#include "acme/exception/exception.h"
 #include "acme/platform/system.h"
 #include "aura/user/user/user.h"
 #include "aura/platform/session.h"
 
 
-#include "acme/_operating_system.h"s
+#include "acme/_operating_system.h"
 
 
 #include <initguid.h>
@@ -58,7 +60,7 @@ namespace windowing_win32
 
       auto pwindowing = (::windowing_win32::windowing*)puser->m_pwindowing->m_pWindowing4;
 
-      auto psysteminteraction = pwindowing->acmesystem()interaction;
+      auto psysteminteraction = pwindowing->system_interaction();
 
       m_hwnd = (HWND) psysteminteraction->oswindow();
 
@@ -139,7 +141,7 @@ namespace windowing_win32
 
       auto pwindowing = (::windowing_win32::windowing*)puser->m_pwindowing->m_pWindowing4;
 
-      auto psysteminteraction = pwindowing->acmesystem()interaction;
+      auto psysteminteraction = pwindowing->system_interaction();
       
       psysteminteraction->add_message_handler(e_message_device_change, { plistener, &master_device_listener::on_message_device_change });
 

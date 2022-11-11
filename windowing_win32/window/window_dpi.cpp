@@ -1,5 +1,7 @@
 #include "framework.h"
-#include "acme/operating_system.h"
+
+
+#include "acme/_operating_system.h"
 
 
 typedef ::u32 FN_GetDpiForWindow(HWND hwnd);
@@ -49,7 +51,7 @@ void dpi_os_initialize()
 ::u32 get_dpi_for_window(oswindow oswindow)
 {
 
-   static auto pfn_get_dpi_for_window = ::windows::api < FN_GetDpiForWindow * >::get_address("User32.dll", "GetDPiForWindow");
+   static auto pfn_get_dpi_for_window = ::windows::function < FN_GetDpiForWindow * >::get_address("User32.dll", "GetDPiForWindow");
 
    if (pfn_get_dpi_for_window)
    {

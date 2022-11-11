@@ -83,7 +83,7 @@ namespace audio_mmsystem
    void out::out_open_ex(thread * pthreadCallback, u32 uiSamplesPerSec, u32 uiChannelCount, u32 uiBitsPerSample,::wave::enum_purpose epurpose)
    {
 
-      synchronous_lock synchronouslock(mutex());
+      synchronous_lock synchronouslock(synchronization());
 
       if (m_hwaveout != nullptr && m_eoutstate != ::wave::e_out_state_initial)
       {
@@ -310,7 +310,7 @@ namespace audio_mmsystem
    void out::out_close()
    {
 
-      synchronous_lock synchronouslock(mutex());
+      synchronous_lock synchronouslock(synchronization());
 
       if(m_eoutstate == ::wave::e_out_state_playing)
       {
@@ -374,7 +374,7 @@ namespace audio_mmsystem
    void out::out_filled(LPWAVEHDR lpwavehdr)
    {
 
-      synchronous_lock synchronouslock(mutex());
+      synchronous_lock synchronouslock(synchronization());
 
       if(out_get_state() != ::wave::e_out_state_playing)
       {
@@ -404,7 +404,7 @@ namespace audio_mmsystem
    void out::out_stop()
    {
 
-      synchronous_lock synchronouslock(mutex());
+      synchronous_lock synchronouslock(synchronization());
 
       if (m_eoutstate != ::wave::e_out_state_playing && m_eoutstate != ::wave::e_out_state_paused)
       {
@@ -480,7 +480,7 @@ namespace audio_mmsystem
    void out::out_restart()
    {
 
-      synchronous_lock synchronouslock(mutex());
+      synchronous_lock synchronouslock(synchronization());
 
       ASSERT(m_eoutstate == ::wave::e_out_state_paused);
 
@@ -534,7 +534,7 @@ namespace audio_mmsystem
    ::duration out::device_out_get_time()
    {
 
-      synchronous_lock synchronouslock(mutex());
+      synchronous_lock synchronouslock(synchronization());
 
       if (m_hwaveout == nullptr)
       {
@@ -589,7 +589,7 @@ namespace audio_mmsystem
    //::duration out::device_out_get_time()
    //{
 
-   //   synchronous_lock synchronouslock(mutex());
+   //   synchronous_lock synchronouslock(synchronization());
 
    //   void                    estatus;
 

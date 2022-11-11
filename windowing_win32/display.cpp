@@ -114,7 +114,7 @@ namespace windowing_win32
 
 #elif defined(LINUX)
 
-      synchronous_lock synchronouslock(mutex());
+      synchronous_lock synchronouslock(synchronization());
 
       return m_rectangleaMonitor.get_count();
 
@@ -172,7 +172,7 @@ namespace windowing_win32
    //
    //#elif defined(LINUX)
    //
-   //      synchronous_lock synchronouslock(mutex());
+   //      synchronous_lock synchronouslock(synchronization());
    //
    //      if (iMonitor < 0 || iMonitor >= get_monitor_count())
    //      {
@@ -323,7 +323,7 @@ namespace windowing_win32
    //
    //#elif defined(LINUX)
    //
-   //      synchronous_lock synchronouslock(mutex());
+   //      synchronous_lock synchronouslock(synchronization());
    //
    //      if (iWkspace < 0 || iWkspace >= get_wkspace_count())
    //      {

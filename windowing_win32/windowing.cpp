@@ -6,14 +6,18 @@
 #include "window.h"
 #include "keyboard.h"
 #include "display.h"
+#include "monitor.h"
 #include "system_interaction.h"
 #include "top_level_enum.h"
-#include "aura/message/user.h"
 #include "win32.h"
 #include "window_util.h"
-#include "aura/user/user/window_util.h"
+#include "acme/constant/message.h"
+#include "acme/exception/exception.h"
+#include "apex/platform/system.h"
+#include "aura/message/user.h"
 #include "aura/platform/session.h"
 #include "aura/platform/application.h"
+#include "aura/user/user/window_util.h"
 
 
 
@@ -100,16 +104,16 @@ namespace windowing_win32
    bool windowing::defer_create_system_window()
    {
 
-      if (acmesystem()interaction)
+      if (m_psysteminteraction)
       {
 
          return true;
 
       }
 
-      acmesystem()interaction = create_system_window();
+      m_psysteminteraction = create_system_window();
 
-      if (!acmesystem()interaction)
+      if (!m_psysteminteraction)
       {
 
          return false;
@@ -124,7 +128,7 @@ namespace windowing_win32
    ::pointer<system_interaction>windowing::create_system_window()
    {
 
-      auto psysteminteraction = __create_new < system_interaction >();
+      auto psysteminteraction = __create_new < ::windowing_win32::system_interaction >();
 
       psysteminteraction->display(e_display_none);
 
@@ -151,13 +155,12 @@ namespace windowing_win32
    void windowing::defer_term_ui()
    {
 
-      if (acmesystem()interaction)
+      if (m_psysteminteraction)
       {
 
-         acmesystem()interaction->start_destroying_window();
+         m_psysteminteraction->start_destroying_window();
 
       }
-
 
    }
 
@@ -167,7 +170,7 @@ namespace windowing_win32
 
       ::windowing::windowing::finalize_windowing();
 
-      acmesystem()interaction.release();
+      m_psysteminteraction.release();
 
    }
 
@@ -175,10 +178,10 @@ namespace windowing_win32
    void windowing::destroy()
    {
 
-      if (acmesystem()interaction)
+      if (m_psysteminteraction)
       {
 
-         acmesystem()interaction->start_destroying_window();
+         m_psysteminteraction->start_destroying_window();
 
       }
 
