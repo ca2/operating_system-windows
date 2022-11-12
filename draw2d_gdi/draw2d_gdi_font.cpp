@@ -112,7 +112,7 @@ namespace draw2d_gdi
 
       LOGFONTW logFont;
 
-      __zero(logFont);
+      zero(logFont);
 
       logFont.lfCharSet = DEFAULT_CHARSET;
 

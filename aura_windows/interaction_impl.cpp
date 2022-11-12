@@ -3470,7 +3470,7 @@ namespace aura_windows
       //return false;
       //WINDOWPLACEMENT wp;
 
-      //__zero(wp);
+      //zero(wp);
 
       //if (!GetWindowPlacement(&wp))
       //{
@@ -4375,7 +4375,7 @@ void interaction_impl::set_tool_window(bool bSet)
 //         }
 //         ::DeleteObject(hrgn); /* finished with region */
 //         WINDOWPLACEMENT wp;
-//         __zero(wp);
+//         zero(wp);
 //         wp.length = sizeof(WINDOWPLACEMENT);
 //         ::GetWindowPlacement(get_handle(), &wp);
 //         bool bZoomed = ::IsZoomed(get_handle()) != false;
@@ -5038,7 +5038,7 @@ void interaction_impl::set_tool_window(bool bSet)
 //         }
 //         ::DeleteObject(hrgn); /* finished with region */
 //         WINDOWPLACEMENT wp;
-//         __zero(wp);
+//         zero(wp);
 //         wp.length = sizeof(WINDOWPLACEMENT);
 //         ::GetWindowPlacement(m_hwnd, &wp);
 //         bool bZoomed = ::IsZoomed(m_hwnd) != false;

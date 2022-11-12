@@ -1023,7 +1023,7 @@ namespace draw2d_gdi
 
       draw_item item;
 
-      __zero(item);
+      zero(item);
 
       item.lpPoints = lppoints;
 
@@ -1048,7 +1048,7 @@ namespace draw2d_gdi
 
       draw_item item;
 
-      __zero(item);
+      zero(item);
 
       item.lpPoints = lppoints;
 
@@ -1073,7 +1073,7 @@ namespace draw2d_gdi
 
       draw_item item;
 
-      __zero(item);
+      zero(item);
 
       item.lpPoints = lppoints;
 
@@ -1102,7 +1102,7 @@ namespace draw2d_gdi
 
       draw_item item;
 
-      __zero(item);
+      zero(item);
 
       item.lpPoints = lppoints;
 
@@ -1129,7 +1129,7 @@ namespace draw2d_gdi
 
       draw_item item;
 
-      __zero(item);
+      zero(item);
 
       item.lpPoints = lppoints;
 
@@ -1156,7 +1156,7 @@ namespace draw2d_gdi
 
       draw_item item;
 
-      __zero(item);
+      zero(item);
 
       item.lpPoints = lppoints;
 

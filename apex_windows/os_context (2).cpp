@@ -989,7 +989,7 @@ namespace windows
       HICON hicon = nullptr;
 
       // Display a dialog box to request credentials.
-      __zero(u);
+      zero(u);
       u.cbSize = sizeof(u);
       u.hwndParent = nullptr;
 
@@ -1714,7 +1714,7 @@ retry:
 
       SHFILEINFOW info;
 
-      __zero(info);
+      zero(info);
 
       defer_co_initialize_ex(false);
 
@@ -2018,7 +2018,7 @@ retry:
 
          SHELLEXECUTEINFOW si;
 
-         __zero(si);
+         zero(si);
 
          PeekMessage(nullptr, nullptr, 0, 0, 0);
 
