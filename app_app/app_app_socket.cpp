@@ -117,7 +117,7 @@ namespace user_service
 
             string str = "OK... soon patch applier (SPA) is working...";
 
-            outheader("content_type") = "text/html; charset=UTF-8";
+            outheader("content-type") = "text/html; charset=UTF-8";
 
             response().file().write(str);
 
@@ -167,10 +167,10 @@ namespace user_service
 
          }
 
-         if (!outheaders().has_property("content_type") && response().file().get_length() > 0)
+         if (!outheaders().has_property("content-type") && response().file().get_length() > 0)
          {
 
-            outheader("content_type") = "text/html; charset=UTF-8";
+            outheader("content-type") = "text/html; charset=UTF-8";
 
          }
          if (IsSSLServer())
@@ -215,19 +215,19 @@ namespace user_service
 
       outattr("http_version") = "HTTP/1.1";
 
-      if (::str().begins(outheader("content_type"), "image/"))
+      if (::str().begins(outheader("content-type"), "image/"))
       {
 
          m_bSetCookie = false;
 
       }
-      else if (outheader("content_type") == "application/javascript")
+      else if (outheader("content-type") == "application/javascript")
       {
 
          m_bSetCookie = false;
 
       }
-      else if (outheader("content_type") == "text/css")
+      else if (outheader("content-type") == "text/css")
       {
 
          m_bSetCookie = false;
@@ -272,7 +272,7 @@ auto tickExecuteEnd = ::tick::now();
             }
          }
       }
-      else if (!m_bSetCookie && key == "set_cookie")
+      else if (!m_bSetCookie && key == "set-cookie")
       {
          return false;
       }
@@ -367,7 +367,7 @@ auto tickExecuteEnd = ::tick::now();
 /*         savepimage->m_eformat = pimage::e_format_jpeg;
 /*         savepimage->m_iQuality = 50;
 
-         outheader("content_type") = "image/jpeg";
+         outheader("content-type") = "image/jpeg";
 
 
 /*         pimage->save_to_file(&response().file(), &saveimage);
