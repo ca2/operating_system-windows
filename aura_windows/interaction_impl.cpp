@@ -1429,7 +1429,7 @@ namespace aura_windows
    //}
 
 
-   //void interaction_impl::design_window_restore(edisplay edisplay)
+   //void interaction_impl::design_window_restore(::e_display edisplay)
    //{
 
    //   primitive_impl::design_window_restore(edisplay);
