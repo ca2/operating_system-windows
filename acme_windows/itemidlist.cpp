@@ -1029,60 +1029,46 @@ HRESULT itemidlist::get_item_in_known_folder(itemidlist & idl, const string & st
 
    HRESULT hr = E_FAIL;
 
-   auto pknownfolder = get_known_folder_struct(strPathParam);
+   auto pknownfolder = path_begins_eat_known_folder_struct_ci(strPath);
 
    if (pknownfolder)
    {
 
-      while (pknownfolder->m_strKnownFolder.has_char())
+      wstring wstrPath(strPath);
+
+      HANDLE handleToken = NULL;
+
+      ITEMIDLIST * pidl = nullptr;
+
+      hr = SHGetKnownFolderIDList(
+         pknownfolder->m_knownfolderid,
+         0,
+         handleToken,
+         &pidl);
+
+      if (SUCCEEDED(hr))
       {
 
-         const string & strKnownFolder = pknownfolder->m_strKnownFolder;
-
-         if (strPath.begins_eat_ci(strKnownFolder))
+         if (strPath.has_char())
          {
 
-            wstring wstrPath(strPath);
+            itemidlist itemidlistRelative(strPath);
 
-            HANDLE handleToken = NULL;
+            itemidlist itemidlist(pidl);
 
-            ITEMIDLIST * pidl = nullptr;
+            idl = itemidlist / itemidlistRelative;
 
-            hr = SHGetKnownFolderIDList(
-               pknownfolder->m_knownfolderid,
-               0,
-               handleToken,
-               &pidl);
+         }
+         else
+         {
 
-            if (SUCCEEDED(hr))
-            {
-
-               if (strPath.has_char())
-               {
-
-                  itemidlist itemidlistRelative(strPath);
-
-                  itemidlist itemidlist(pidl);
-
-                  idl = itemidlist / itemidlistRelative;
-
-               }
-               else
-               {
-
-                  idl.m_pidl = pidl;
-
-               }
-
-            }
-
-            return hr;
+            idl.m_pidl = pidl;
 
          }
 
-         pknownfolder++;
-
       }
+
+      return hr;
 
    }
 

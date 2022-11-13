@@ -47,9 +47,9 @@ namespace aura_windows
 
       WNDPROC                                   m_pfnSuper; // for subclassing of controls
 
-      edisplay                                  m_edisplayLayout;
+      ::e_display                               m_edisplayLayout;
       rectangle_i64                             m_rectangleLastPos;
-      ::duration                                    m_durationLastPos;
+      ::duration                                m_durationLastPos;
       string                                    m_strDebug;
 
       ::point_i32                               m_pointCursor;

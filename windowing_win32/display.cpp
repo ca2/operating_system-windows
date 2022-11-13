@@ -536,7 +536,7 @@ namespace windowing_win32
    i64 g_i_get_best_zoneing = 0;
 
 
-   index display::_get_best_zoneing(edisplay * pedisplay, ::rectangle_i32 * prectangle, const ::rectangle_i32 & rectangleRequest, bool bPreserveSize)
+   index display::_get_best_zoneing(::e_display * pedisplay, ::rectangle_i32 * prectangle, const ::rectangle_i32 & rectangleRequest, bool bPreserveSize)
    {
 
       ::rectangle_i32 rectangle(rectangleRequest);
@@ -545,7 +545,7 @@ namespace windowing_win32
 
       index iBestWkspace = get_best_workspace(&rectangleWkspace, rectangle);
 
-      edisplay edisplay;
+      ::e_display edisplay;
 
       ::e_display edisplayPrevious = *pedisplay;
 

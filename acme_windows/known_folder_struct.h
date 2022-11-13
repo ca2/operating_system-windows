@@ -6,18 +6,18 @@
 #include "acme/_operating_system.h"
 
 
-struct known_folder_struct
+struct sz_known_folder_struct
 {
 
-   string               m_strKnownFolder;
+   const char *         m_pszKnownFolder;
    KNOWNFOLDERID        m_knownfolderid;
 
 };
 
 
-CLASS_DECL_ACME_WINDOWS known_folder_struct * get_known_folder_struct(const ::string & strKnownFolder);
+CLASS_DECL_ACME_WINDOWS sz_known_folder_struct * get_known_folder_struct(const ::string & strKnownFolder);
 
-CLASS_DECL_ACME_WINDOWS known_folder_struct * path_known_folder_struct_ci(::string & strPath);
+CLASS_DECL_ACME_WINDOWS sz_known_folder_struct * path_begins_eat_known_folder_struct_ci(::string & strPath);
 
 //comptr < IKnownFolder > get_IKnownFolder(const ::string & strPath);
 

@@ -369,7 +369,7 @@ namespace windows
    hwnd_tree & hwnd_tree::operator = (const hwnd_tree & tree)
    {
       m_hwnd = tree.m_hwnd;
-      m_hwndtreea.copy(&tree.m_hwndtreea);
+      m_hwndtreea.copy(tree.m_hwndtreea);
       return *this;
    }
 

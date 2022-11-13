@@ -93,8 +93,8 @@ namespace windows
 
       //set_handle(nullptr);
 
-      __zero(m_size);
-      __zero(m_point);
+      zero(m_size);
+      zero(m_point);
 
    }
 
@@ -3644,7 +3644,7 @@ namespace windows
       return false;
       //WINDOWPLACEMENT wp;
 
-      //__zero(wp);
+      //zero(wp);
 
       //if (!GetWindowPlacement(&wp))
       //{
@@ -4496,7 +4496,7 @@ void interaction_impl::set_tool_window(bool bSet)
 //         }
 //         ::DeleteObject(hrgn); /* finished with region */
 //         WINDOWPLACEMENT wp;
-//         __zero(wp);
+//         zero(wp);
 //         wp.length = sizeof(WINDOWPLACEMENT);
 //         ::GetWindowPlacement(get_handle(), &wp);
 //         bool bZoomed = ::IsZoomed(get_handle()) != false;

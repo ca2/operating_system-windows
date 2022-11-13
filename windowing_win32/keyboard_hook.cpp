@@ -52,7 +52,7 @@ namespace keyboard_hook
 
                   INPUT inputa[2];
 
-                  xxf_zeroa(inputa);
+                  zero(inputa);
 
                   inputa[0].type = INPUT_KEYBOARD;
                   inputa[0].ki.dwFlags = KEYEVENTF_UNICODE;

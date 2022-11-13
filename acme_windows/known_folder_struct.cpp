@@ -4,7 +4,7 @@
 #include <KnownFolders.h>
 
 
-struct known_folder_struct g_knownfolderstructa[] =
+struct sz_known_folder_struct g_knownfolderstructa[] =
 {
 
    {"desktop://",FOLDERID_Desktop},
@@ -13,20 +13,20 @@ struct known_folder_struct g_knownfolderstructa[] =
    {"image://",FOLDERID_Pictures},
    {"video://",FOLDERID_Videos},
    {"download://",FOLDERID_Downloads},
-   {"", NULL},
+   {nullptr, NULL},
 
 };
 
 
-known_folder_struct * get_known_folder_struct(const ::string & strKnownFolder)
+sz_known_folder_struct * get_known_folder_struct(const ::string & strKnownFolder)
 {
 
    auto pknownfolderstruct = g_knownfolderstructa;
 
-   while (pknownfolderstruct->m_strKnownFolder.has_char())
+   while (pknownfolderstruct->m_pszKnownFolder)
    {
 
-      if (strKnownFolder.compare_ci(pknownfolderstruct->m_strKnownFolder) == 0)
+      if (strKnownFolder.compare_ci(pknownfolderstruct->m_pszKnownFolder) == 0)
       {
 
          return pknownfolderstruct;
@@ -42,15 +42,15 @@ known_folder_struct * get_known_folder_struct(const ::string & strKnownFolder)
 }
 
 
-known_folder_struct * path_known_folder_struct_ci(::string & strPath)
+sz_known_folder_struct * path_begins_eat_known_folder_struct_ci(::string & strPath)
 {
 
    auto pknownfolderstruct = g_knownfolderstructa;
 
-   while (pknownfolderstruct->m_strKnownFolder.has_char())
+   while (pknownfolderstruct->m_pszKnownFolder)
    {
 
-      if (strPath.begins_eat_ci(pknownfolderstruct->m_strKnownFolder))
+      if (strPath.begins_eat_ci(pknownfolderstruct->m_pszKnownFolder))
       {
 
          return pknownfolderstruct;
