@@ -106,7 +106,7 @@ namespace music
 
             MIDIHDR midihdr;
 
-            __zero(midihdr);
+            zero(midihdr);
 
             memory m;
 

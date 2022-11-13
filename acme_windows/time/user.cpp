@@ -62,7 +62,7 @@ namespace user
 //
 //   MONITORINFO mi;
 //
-//   __zero(mi);
+//   zero(mi);
 //
 //   mi.cbSize = sizeof(MONITORINFO);
 //

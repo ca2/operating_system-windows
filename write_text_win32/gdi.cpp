@@ -237,7 +237,7 @@ namespace windowing_win32
 
       BITMAPINFO bitmapinfo;
 
-      __zero(bitmapinfo);
+      zero(bitmapinfo);
 
       auto iScan = size.cx * 4;
 

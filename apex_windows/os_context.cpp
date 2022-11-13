@@ -1139,7 +1139,7 @@ namespace apex_windows
       HICON hicon = nullptr;
 
       // Display a dialog box to request credentials.
-      //__zero(u);
+      //zero(u);
       u.cbSize = sizeof(u);
       u.hwndParent = nullptr;
 

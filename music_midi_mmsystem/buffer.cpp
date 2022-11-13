@@ -64,7 +64,7 @@ namespace music
          void buffer::Reset()
          {
 
-            __zero(m_midihdr);
+            zero(m_midihdr);
 
             m_midihdr.lpData = (char*)m_storage.get_data();
             m_midihdr.dwBufferLength = (u32)m_storage.get_size();

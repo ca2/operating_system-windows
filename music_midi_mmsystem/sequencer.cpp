@@ -1706,7 +1706,7 @@ namespace music
 
             LPMIDIHDR lpmh = &mh;
 
-            __zero(mh);
+            zero(mh);
 
             lpmh->lpData = (char *)gmModeOn;
             lpmh->dwBufferLength = sizeof(gmModeOn);
