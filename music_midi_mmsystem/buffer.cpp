@@ -284,7 +284,7 @@ namespace music
             for (i32 i = 0; i < this->buffer_count(); i++)
             {
 
-               synchronous_lock synchronouslock(m_pcallbackdata->m_psequence->mutex());
+               synchronous_lock synchronouslock(m_pcallbackdata->m_psequence->synchronization());
 
                auto estatus = this->buffer_at(i)->midiStreamOut(hmidiout);
 

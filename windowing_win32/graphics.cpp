@@ -3173,7 +3173,7 @@ namespace draw2d_gdiplus
 
    //   }
 
-   //   synchronous_lock slSource(pgraphicsSrc->mutex());
+   //   synchronous_lock slSource(pgraphicsSrc->synchronization());
 
    //   //bool bThreadToolsForIncreasedFps = ::get_task()->m_bThreadToolsForIncreasedFps;
 

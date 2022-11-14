@@ -37,7 +37,7 @@ namespace production
    void frame::install_message_routing(::channel * pchannel)
    {
       simple_frame_window::install_message_routing(pchannel);
-      MESSAGE_LINK(e_message_create, pchannel, this, &frame::_001OnCreate);
+      MESSAGE_LINK(MESSAGE_CREATE, pchannel, this, &frame::_001OnCreate);
    }
 
    void frame::_001OnCreate(::message::message * pmessage)

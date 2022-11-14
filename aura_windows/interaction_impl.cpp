@@ -3685,7 +3685,7 @@ namespace aura_windows
 //         ::GetWindowInfo(m_hwnd, &wi);
 //
 //         /* Maximized windows always have a non-client border that hangs over
-//         the edge of the screen, so the size_i32 proposed by e_message_non_client_calcsize is
+//         the edge of the screen, so the size_i32 proposed by e_message_non_client_calc_size is
 //         fine. Just adjust the top border to erase the u title. */
 //         pncsp->rgrc[0].left = client.left;
 //
@@ -3728,7 +3728,7 @@ namespace aura_windows
 //      else
 //      {
 //         /* For the non-maximized case, set the output const rectangle_i32 & to what it was
-//         before e_message_non_client_calcsize modified it. This will make the client size_i32 the
+//         before e_message_non_client_calc_size modified it. This will make the client size_i32 the
 //         same as the non-client size. */
 //         pncsp->rgrc[0] = nonclient;
 //

@@ -83,8 +83,8 @@ namespace backup
          ::pointer<::user::impact>pimpact = pdocument->get_impact();
          auto pupdate = new_update();
          pupdate->m_actioncontext = ::e_source_system;
-         ptopic->m_atom = id_browse;
-         ptopic->payload(id_form) = "filemanager\\replace_name_in_file_system.xhtml";
+         ptopic->m_atom = ID_BROWSE;
+         ptopic->payload(ID_FORM) = "filemanager\\replace_name_in_file_system.xhtml";
          pdocument->update_all_impacts(ptopic);
 
          ptopic->m_atom = id_get_form_impact;
@@ -111,7 +111,7 @@ namespace backup
    void pane_impact::install_message_routing(::channel * pchannel)
    {
       ::userex::pane_tab_impact::install_message_routing(pchannel);
-      MESSAGE_LINK(e_message_create, pchannel, this, &pane_impact::_001OnCreate);
+      MESSAGE_LINK(MESSAGE_CREATE, pchannel, this, &pane_impact::_001OnCreate);
    }
 
 
