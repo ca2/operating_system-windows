@@ -1,4 +1,4 @@
-// From apex/platform/app_launcher.h by camilo on 2022-11-07 01:12 <3ThomasBorregaardSorensen!!
+﻿// From apex/platform/app_launcher.h by camilo on 2022-11-07 01:12 <3ThomasBorregaardSorensen!!
 #pragma once
 
 
@@ -15,10 +15,10 @@ namespace apex_windows
    public:
 
 
-      string   m_strApp;
-      string   m_strPlatform;
+      //string   m_strApp;
+      //string   m_strPlatform;
 
-      ::pointer<::launcher>m_plauncher;
+      //::pointer<::launcher>m_plauncher;
 
 
 

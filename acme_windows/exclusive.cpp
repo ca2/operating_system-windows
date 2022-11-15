@@ -1,7 +1,8 @@
-// From acme/platform/exclusive.h by camilo on 2022-10-28 15:25 <3ThomasBorregaardSorensen!!
+﻿// From acme/platform/exclusive.h by camilo on 2022-10-28 15:25 <3ThomasBorregaardSorensen!!
 #include "framework.h"
 #include "exclusive.h"
 #include "acme_windows_common/mutex.h"
+#include "acme_windows_common/node.h"
 #include "acme/exception/exception.h"
 #include "acme/filesystem/filesystem/acme_directory.h"
 #include "acme/platform/node.h"
@@ -24,7 +25,9 @@ namespace acme_windows
       try
       {
 
-         m_pmutex = pparticle->acmenode()->create_global_named_mutex(pparticle, false, strId);
+         ::pointer <::acme_windows_common::node>pnode = pparticle->acmenode();
+
+         m_pmutex = pnode->create_named_mutex(pparticle, false, strId);
 
          //m_pmutex = //__new(::pointer < ::mutex >(pparticle, false, strId ADD_PARAM_SEC_ATTRS));
 

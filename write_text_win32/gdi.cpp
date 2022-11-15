@@ -116,7 +116,7 @@ namespace windowing_win32
    HCURSOR create_alpha_cursor(const ::image * pimage, int xHotSpot, int yHotSpot)
    {
 
-      if (::not_ok(pimage))
+      if (pimage.nok())
       {
 
          return nullptr;
