@@ -1,4 +1,4 @@
-#include "framework.h"
+﻿#include "framework.h"
 #include "node.h"
 #include "os_context.h"
 #include "acme/exception/exception.h"
@@ -35,9 +35,6 @@ namespace apex_windows
    node::node()
    {
 
-      m_papexnode = this;
-
-      //defer_initialize_winsock();
 
    }
 

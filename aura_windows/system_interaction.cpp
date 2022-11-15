@@ -32,7 +32,7 @@
 //
 //      ::user::interaction::install_message_routing(pchannel);
 //
-//      MESSAGE_LINK(e_message_destroy, pchannel, this, System_interaction::on_message_destroy);
+//      MESSAGE_LINK(MESSAGE_DESTROY, pchannel, this, System_interaction::on_message_destroy);
 //      MESSAGE_LINK(e_message_display_change, pchannel,this,System_interaction::_001OnMessage);
 //
 //   }

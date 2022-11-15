@@ -191,10 +191,10 @@ namespace production
 
          m_pviewOptions->m_pcallback = this;
 
-         auto pupdate = topic(id_browse);
+         auto pupdate = topic(ID_BROWSE);
          pupdate->m_actioncontext = ::e_source_system;
          ptopic->m_atom = ;
-         ptopic->payload(id_form) = "production\\options.xhtml";
+         ptopic->payload(ID_FORM) = "production\\options.xhtml";
          pdocument->update_all_impacts(ptopic);
 
          ptopic->m_atom = id_get_form_impact;
@@ -231,7 +231,7 @@ namespace production
       ::user::tab_impact::install_message_routing(pchannel);
 
       MESSAGE_LINK(WM_USER, pchannel, this, &pane_impact::_001OnUserMessage);
-      MESSAGE_LINK(e_message_create, pchannel, this, &pane_impact::_001OnCreate);
+      MESSAGE_LINK(MESSAGE_CREATE, pchannel, this, &pane_impact::_001OnCreate);
       //	MESSAGE_LINK(e_message_size, pchannel, this, &pane_impact::on_message_size);
       MESSAGE_LINK(WM_USER + 1122, pchannel, this, &pane_impact::_001OnMenuMessage);
 

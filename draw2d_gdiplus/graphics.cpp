@@ -169,30 +169,30 @@ namespace draw2d_gdiplus
    }
 
 
-#ifdef DEBUG
-
-
-   void graphics::assert_ok() const
-   {
-
-      object::assert_ok();
-
-   }
-
-
-   void graphics::dump(dump_context & dumpcontext) const
-   {
-
-      object::dump(dumpcontext);
-
-      dumpcontext << "m_pgraphics = " << (iptr)m_pgraphics;
-      dumpcontext << "\nm_bPrinting = " << m_bPrinting;
-
-      dumpcontext << "\n";
-   }
-
-
-#endif
+//#ifdef DEBUG
+//
+//
+//   void graphics::assert_ok() const
+//   {
+//
+//      object::assert_ok();
+//
+//   }
+//
+//
+//   void graphics::dump(dump_context & dumpcontext) const
+//   {
+//
+//      object::dump(dumpcontext);
+//
+//      dumpcontext << "m_pgraphics = " << (iptr)m_pgraphics;
+//      dumpcontext << "\nm_bPrinting = " << m_bPrinting;
+//
+//      dumpcontext << "\n";
+//   }
+//
+//
+//#endif
 
 
    graphics::~graphics()
@@ -3474,7 +3474,7 @@ namespace draw2d_gdiplus
 
    //   }
 
-   //   synchronous_lock slSource(pgraphicsSrc->mutex());
+   //   synchronous_lock slSource(pgraphicsSrc->synchronization());
 
    //   //bool bThreadToolsForIncreasedFps = ::get_task()->m_bThreadToolsForIncreasedFps;
 

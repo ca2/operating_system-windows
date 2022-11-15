@@ -87,7 +87,7 @@
 //      //   return true;
 //
 //      //}
-//      //else if (message == e_message_non_client_hittest)
+//      //else if (message == e_message_non_client_hit_test)
 //      //{
 //
 //      //   //output_debug_string("ht.");

@@ -50,10 +50,10 @@ namespace production
    {
       ::user::scroll_impact::install_message_routing(pchannel);
 
-      MESSAGE_LINK(e_message_destroy, pchannel, this, &impact::on_message_destroy);
+      MESSAGE_LINK(MESSAGE_DESTROY, pchannel, this, &impact::on_message_destroy);
       MESSAGE_LINK(e_message_size, pchannel, this, &impact::on_message_size);
       //MESSAGE_LINK(WM_PAINT, pchannel, this, &impact::_001OnPaint);
-      MESSAGE_LINK(e_message_create, pchannel, this, &impact::_001OnCreate);
+      MESSAGE_LINK(MESSAGE_CREATE, pchannel, this, &impact::_001OnCreate);
       MESSAGE_LINK(WM_CONTEXTMENU, pchannel, this, &impact::on_message_context_menu);
       //MESSAGE_LINK(WM_SETCURSOR, pchannel, this, &impact::on_message_set_cursor);
 
@@ -68,7 +68,7 @@ namespace production
 
 
       MESSAGE_LINK(e_message_show_window, pchannel, this, &impact::on_message_show_window);
-      MESSAGE_LINK(e_message_destroy, pchannel, this, &impact::on_message_destroy);
+      MESSAGE_LINK(MESSAGE_DESTROY, pchannel, this, &impact::on_message_destroy);
 
       MESSAGE_LINK(WM_USER, pchannel, this, &impact::_001OnUser);
 

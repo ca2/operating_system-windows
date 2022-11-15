@@ -2982,11 +2982,11 @@ repeat:
 
             array < wstring > wstraSpecs;
 
-            ::papaya::array::copy(wstraSpecs, set["file_filter_specs"].stra());
+            ::acme::container::copy(wstraSpecs, set["file_filter_specs"].stra());
 
             array < wstring > wstraNames;
 
-            ::papaya::array::copy(wstraNames, set["file_filter_names"].stra());
+            ::acme::container::copy(wstraNames, set["file_filter_names"].stra());
 
             rgSpec.set_size(minimum(wstraSpecs.get_size(), wstraNames.get_size()));
 
@@ -3228,11 +3228,11 @@ repeat:
 
             array < wstring > wstraSpecs;
 
-            ::papaya::array::copy(wstraSpecs, set["file_filter_specs"].stra());
+            ::acme::container::copy(wstraSpecs, set["file_filter_specs"].stra());
 
             array < wstring > wstraNames;
 
-            ::papaya::array::copy(wstraNames, set["file_filter_names"].stra());
+            ::acme::container::copy(wstraNames, set["file_filter_names"].stra());
 
             rgSpec.set_size(minimum(wstraSpecs.get_size(), wstraNames.get_size()));
 

@@ -219,7 +219,7 @@ namespace windowing_win32
 
       ::windowing::window::install_message_routing(pchannel);
 
-      MESSAGE_LINK(e_message_create, pchannel, this, &window::_001OnCreate);
+      MESSAGE_LINK(MESSAGE_CREATE, pchannel, this, &window::_001OnCreate);
 
       auto puserinteraction = m_puserinteractionimpl->m_puserinteraction;
 
@@ -251,10 +251,10 @@ namespace windowing_win32
       pimpl->install_message_routing(pchannel);
 
 
-      MESSAGE_LINK(e_message_destroy, pchannel, this, &window::on_message_destroy);
+      MESSAGE_LINK(MESSAGE_DESTROY, pchannel, this, &window::on_message_destroy);
       MESSAGE_LINK(WM_GETICON, pchannel, this, &window::on_message_get_icon);
 
-      //MESSAGE_LINK(e_message_create, pchannel, pimpl, &::user::interaction_impl::_001OnPrioCreate);
+      //MESSAGE_LINK(MESSAGE_CREATE, pchannel, pimpl, &::user::interaction_impl::_001OnPrioCreate);
       auto psystem = acmesystem();
 
       //auto pnode = psystem->m_pnode->m_pauranode->m_pWindowingWin32Node;
@@ -2354,7 +2354,7 @@ namespace windowing_win32
    //bool window::reset(::windowing::cursor * pcursor, ::aura::session * psession)
    //{
 
-   //   synchronous_lock synchronouslock(psession->mutex());
+   //   synchronous_lock synchronouslock(psession->synchronization());
 
    //   if (::is_null(puserinteraction))
    //   {
@@ -5264,7 +5264,7 @@ namespace windowing_win32
          ::GetWindowInfo(hwnd, &wi);
 
          /* Maximized windows always have a non-client border that hangs over
-         the edge of the screen, so the size_i32 proposed by e_message_non_client_calcsize is
+         the edge of the screen, so the size_i32 proposed by e_message_non_client_calc_size is
          fine. Just adjust the top border to erase the u title. */
          pncsp->rgrc[0].left = client.left;
 
@@ -5308,7 +5308,7 @@ namespace windowing_win32
       {
 
          /* For the non-maximized case, set the output const rectangle_i32 & to what it was
-         before e_message_non_client_calcsize modified it. This will make the client size_i32 the
+         before e_message_non_client_calc_size modified it. This will make the client size_i32 the
          same as the non-client size. */
          copy(pncsp->rgrc[0], nonclient);
 

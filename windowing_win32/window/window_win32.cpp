@@ -1,4 +1,4 @@
-#include "framework.h"
+﻿#include "framework.h"
 #include "acme/constant/message.h"
 #include "acme/constant/timer.h"
 #include "acme/exception/exception.h"
@@ -637,13 +637,13 @@ wstring windowing::_windows_register_window_class(::u32 nClassStyle, HCURSOR hCu
       if (hCursor == nullptr && hbrBackground == nullptr && hIcon == nullptr)
       {
 
-         C_RUNTIME_ERRORCHECK_SPRINTF(_snwprintf_s(lpwsz, iLen, iLen - 1, L"windows_interaction_impl:%p,%x", hinstance, nClassStyle));
+         _snwprintf_s(lpwsz, iLen, iLen - 1, L"windows_interaction_impl:%p,%x", hinstance, nClassStyle);
 
       }
       else
       {
 
-         C_RUNTIME_ERRORCHECK_SPRINTF(_snwprintf_s(lpwsz, iLen, iLen - 1, L"windows_interaction_impl:%p,%x,%p,%p,%p", hinstance, nClassStyle, hCursor, hbrBackground, hIcon));
+         _snwprintf_s(lpwsz, iLen, iLen - 1, L"windows_interaction_impl:%p,%x,%p,%p,%p", hinstance, nClassStyle, hCursor, hbrBackground, hIcon);
 
       }
 
