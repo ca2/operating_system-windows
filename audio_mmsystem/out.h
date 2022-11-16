@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 
 #include "app-core/audio/wave/out.h"
@@ -20,7 +20,7 @@ namespace audio_mmsystem
       ::duration                       m_durationPosition;
       manual_reset_event               m_evFree;
       int_array                        m_iaFree;
-      ::mutex                          m_mutexFree;
+      ::particle                       m_pparticleMutexFree;
 
 
       out();

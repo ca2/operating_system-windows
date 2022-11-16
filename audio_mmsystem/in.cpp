@@ -1,5 +1,9 @@
-#include "framework.h"
+﻿#include "framework.h"
 #include "in.h"
+#include "acme/exception/exception.h"
+#include "acme/parallelization/synchronous_lock.h"
+#include "apex/message/message.h"
+#include "aqua/platform/system.h"
 #include "app-core/audio/audio.h"
 #include "app-core/audio/wave/wave.h"
 #include "app-core/audio/decode/encoder.h"
@@ -90,7 +94,7 @@ namespace audio_mmsystem
 
       }
 
-      single_lock sLock(mutex(), true);
+      single_lock sLock(synchronization(), true);
 
       ::e_status estatus = ::success;
 
@@ -289,7 +293,7 @@ namespace audio_mmsystem
    void in::in_close()
    {
 
-      single_lock sLock(mutex(), true);
+      single_lock sLock(synchronization(), true);
 
       ::e_status estatus;
 
@@ -347,7 +351,7 @@ namespace audio_mmsystem
    void in::in_start()
    {
 
-      single_lock sLock(mutex(), true);
+      single_lock sLock(synchronization(), true);
 
       if (m_einstate == ::wave::e_in_state_recording)
       {
@@ -390,7 +394,7 @@ namespace audio_mmsystem
    void in::in_stop()
    {
 
-      single_lock sLock(mutex(), true);
+      single_lock sLock(synchronization(), true);
 
       if (m_einstate != ::wave::e_in_state_recording)
       {
@@ -452,10 +456,10 @@ namespace audio_mmsystem
    }
 
 
-   void     in::in_reset()
+   void in::in_reset()
    {
 
-      single_lock sLock(mutex(), true);
+      single_lock sLock(synchronization(), true);
 
       m_bResetting = true;
 

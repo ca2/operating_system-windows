@@ -1,6 +1,8 @@
-#include "framework.h"
+﻿#include "framework.h"
 #include "out.h"
-//#include "aura/message.h"
+#include "acme/exception/exception.h"
+#include "acme/parallelization/synchronous_lock.h"
+#include "aqua/platform/system.h"
 #include "app-core/audio/audio.h"
 #include "app-core/audio/wave/wave.h"
 #include "app-core/audio/wave/player.h"
@@ -444,7 +446,7 @@ namespace audio_mmsystem
    void out::out_pause()
    {
 
-      single_lock sLock(mutex(), true);
+      single_lock sLock(synchronization(), true);
 
       ASSERT(m_eoutstate == ::wave::e_out_state_playing);
 

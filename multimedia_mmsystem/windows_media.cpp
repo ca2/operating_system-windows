@@ -1,4 +1,8 @@
-#include "framework.h"
+﻿#include "framework.h"
+#include "acme/primitive/primitive/memory.h"
+#include "acme_windows_common/comptr.h"
+
+
 #include <wmsdk.h>
 
 
