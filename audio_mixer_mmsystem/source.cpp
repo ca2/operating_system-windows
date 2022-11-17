@@ -1,8 +1,10 @@
-#include "framework.h"
+﻿#include "framework.h"
 #include "source.h"
 #include "device.h"
 #include "control.h"
 #include "destination.h"
+#include "acme/exception/exception.h"
+#include "app-core/multimedia/audio_mixer/user/control.h"
 
 
 namespace multimedia

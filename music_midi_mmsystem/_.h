@@ -1,9 +1,9 @@
-#pragma once
+﻿#pragma once
 
 
 #include "app-veriwell/multimedia/_.h"
 #include "multimedia_mmsystem/_.h"
-#include "acme/operating_system.h"
+//#include "acme/operating_system.h"
 //#include <mmeapi.h>
 
 

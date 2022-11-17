@@ -1,6 +1,7 @@
-#pragma once
+﻿#pragma once
 
 
+#include "acme/platform/department.h"
 #include "aura/user/user/interaction.h"
 
 

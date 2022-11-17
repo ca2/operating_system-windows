@@ -1,7 +1,8 @@
-#include "framework.h"
+﻿#include "framework.h"
 #include "audio_mixer.h"
 #include "interaction.h"
 #include "device.h"
+#include "destination.h"
 
 
 namespace multimedia
@@ -47,7 +48,7 @@ namespace multimedia
       void audio_mixer::initialize(::particle * pparticle)
       {
 
-         ::multimedia::audio_mixer::audio_mixer::initialize(pobject);
+         ::multimedia::audio_mixer::audio_mixer::initialize(pparticle);
 
          __construct_new(m_pwindow);
 

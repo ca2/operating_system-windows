@@ -1,11 +1,11 @@
-#include "framework.h"
+﻿#include "framework.h"
 #include "control.h"
 #include "line_info.h"
 #include "source.h"
 #include "audio_mixer.h"
 #include "device.h"
 #include "destination.h"
-
+#include "app-core/multimedia/audio_mixer/user/control.h"
 
 //namespace multimedia
 //{
