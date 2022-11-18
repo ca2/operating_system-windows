@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 
 #include "app-veriwell/multimedia/music/midi/midi.h"
@@ -25,9 +25,20 @@ namespace music
             string_array         m_straDeviceOut;
             string_array         m_straDeviceIn;
 
+            ::pointer < ::particle >      m_pparticleMidiMutex;
+
 
             midi();
             ~midi() override;
+
+
+            void initialize(::particle* pparticle) override;
+
+
+            ::particle* get_midi_mutex() { return m_pparticleMidiMutex; }
+
+
+
 
 
             ::index get_os_out_device_id(const ::string & strDevice);
@@ -47,7 +58,7 @@ namespace music
             void mmsystem_GetMidiOutDeviceInterface(UINT_PTR i);
 
             using ::music::midi::midi::translate_os_result;
-            virtual ::e_status midi_in_translate_os_result(string & strMessage, string & strOsMessage, ::music::midi::particle * pparticle, i64 iOsResult, const ::string & strContext, const ::string & strText);
+            virtual ::e_status midi_in_translate_os_result(string & strMessage, string & strOsMessage, ::music::midi::object * pmidiobject, i64 iOsResult, const ::string & strContext, const ::string & strText);
 
 
             virtual void enumerate_midi_out_devices() override;

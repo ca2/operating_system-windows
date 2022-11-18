@@ -3,7 +3,10 @@
 #include "midi.h"
 #include "acme/filesystem/file/binary_stream.h"
 #include "acme/filesystem/file/memory_file.h"
+#include "acme/parallelization/synchronous_lock.h"
+#include "acme/primitive/string/hex.h"
 #include "aqua/multimedia/exception.h"
+#include "aqua/platform/system.h"
 #include "app-veriwell/multimedia/multimedia.h"
 #include "app-veriwell/multimedia/ikaraoke/lyric_event_v1.h"
 #include "app-veriwell/multimedia/music/midi/file.h"
@@ -30,9 +33,6 @@ namespace music
 
       namespace mmsystem
       {
-
-
-         ::mutex & get_midi_mutex();
 
 
          sequencer::sequencer(sequence * psequence, const string & strDevice) :
@@ -1318,7 +1318,7 @@ namespace music
          musical_tick sequencer::get_position()
          {
 
-            single_lock synchronouslock(mutex());
+            single_lock synchronouslock(synchronization());
 
             MMTIME mmt;
 
@@ -1450,7 +1450,7 @@ namespace music
 
             m_eventLongMessage.ResetEvent();
 
-            MMRESULT mmresult = midiOutOpen(&m_hmidiout, uDeviceID, (DWORD_PTR)m_eventLongMessage.hsync(), 0, CALLBACK_EVENT);
+            MMRESULT mmresult = midiOutOpen(&m_hmidiout, uDeviceID, (DWORD_PTR)m_eventLongMessage.m_hsynchronization, 0, CALLBACK_EVENT);
 
             auto estatus = mmresult_to_status(mmresult);
 
@@ -1668,7 +1668,7 @@ namespace music
          void sequencer::SendGMReset()
          {
 
-            synchronous_lock synchronouslock(&get_midi_mutex());
+            synchronous_lock synchronouslock(((midi *) m_pmidi->m_pMidi)->get_midi_mutex());
 
             TRACE("::music::midi::mmsystem::player::SendReset : (0)");
 
@@ -1682,7 +1682,7 @@ namespace music
 
             event.ResetEvent();
 
-            mmresult = midiOutOpen(&hmidiout, uDeviceID, (DWORD_PTR)event.hsync(), 0, CALLBACK_THREAD);
+            mmresult = midiOutOpen(&hmidiout, uDeviceID, (DWORD_PTR)event.m_hsynchronization, 0, CALLBACK_THREAD);
 
             auto estatus = mmresult_to_status(mmresult);
 

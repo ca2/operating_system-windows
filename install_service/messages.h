@@ -1635,7 +1635,7 @@
 //
 // MessageText:
 //
-// The registry value %2, used to specify the maximum number of ::durations to wait for service %1 to stop after posting a e_message_close message to windows managed by the application, was not of type REG_DWORD.  The default time of %3 ::durations will be used.
+// The registry value %2, used to specify the maximum number of ::durations to wait for service %1 to stop after posting a MESSAGE_CLOSE message to windows managed by the application, was not of type REG_DWORD.  The default time of %3 ::durations will be used.
 //
 #define NSSM_EVENT_BOGUS_KILL_WINDOW_GRACE_PERIOD 0x80000421L
 

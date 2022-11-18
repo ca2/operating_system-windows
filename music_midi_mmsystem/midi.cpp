@@ -3,6 +3,10 @@
 #include "sequencer.h"
 #include "out.h"
 #include "in.h"
+#include "acme/parallelization/synchronous_lock.h"
+#include "acme/platform/node.h"
+
+
 #include <mmddk.h>
 
 // http://blogs.msdn.com/b/matthew_van_eerde/archive/2012/09/21/enumerating-midi-devices.aspx
@@ -34,8 +38,6 @@ namespace music
 
             m_pMidi = this;
 
-            defer_create_synchronization();
-
             m_strName = "mmsystem";
 
          }
@@ -43,6 +45,18 @@ namespace music
 
          midi::~midi()
          {
+
+         }
+
+
+         void midi::initialize(::particle* pparticle)
+         {
+
+            ::music::midi::midi::initialize(pparticle);
+
+            defer_create_synchronization();
+
+            m_pparticleMidiMutex = acmenode()->create_mutex();
 
          }
 
@@ -367,7 +381,7 @@ namespace music
          }
 
 
-         ::e_status midi::midi_in_translate_os_result(string & strMessage, string & strOsMessage, ::music::midi::particle * pparticle, i64 iOsResult, const ::string & strContext, const ::string & strText)
+         ::e_status midi::midi_in_translate_os_result(string & strMessage, string & strOsMessage, ::music::midi::object * pmidiobject, i64 iOsResult, const ::string & strContext, const ::string & strText)
          {
 
             auto estatus = midi_in_get_error_text((MMRESULT) iOsResult, strOsMessage, strMessage);
@@ -380,23 +394,23 @@ namespace music
          static ::mutex * s_pmutex = nullptr;
 
 
-         ::mutex & get_midi_mutex()
-         {
+         //::mutex & get_midi_mutex()
+         //{
 
-            if(s_pmutex == nullptr)
-            {
+         //   if(s_pmutex == nullptr)
+         //   {
 
-               s_pmutex = new ::mutex();
+         //      s_pmutex = new ::mutex();
 
-               // TODO :
-               // register s_pmutex in Sys(::get_thread_app()).register_static_system_object
-               // for example, for deletion before alloc system is deleted.
+         //      // TODO :
+         //      // register s_pmutex in Sys(::get_thread_app()).register_static_system_object
+         //      // for example, for deletion before alloc system is deleted.
 
-            }
+         //   }
 
-            return *s_pmutex;
+         //   return *s_pmutex;
 
-         }
+         //}
 
 
 

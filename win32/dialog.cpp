@@ -162,7 +162,7 @@ namespace win32
          on_notify((NMHDR *)lparam.m_lparam);
 
       }
-      else if (atom == e_message_close)
+      else if (atom == MESSAGE_CLOSE)
       {
 
          on_close();

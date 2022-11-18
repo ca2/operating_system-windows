@@ -1,7 +1,8 @@
-#include "framework.h"
-#include "app-veriwell/multimedia/music/midi/sequence.h"
+﻿#include "framework.h"
 #include "buffer.h"
 #include "sequencer.h"
+#include "acme/parallelization/synchronous_lock.h"
+#include "app-veriwell/multimedia/music/midi/sequence.h"
 
 
 namespace music

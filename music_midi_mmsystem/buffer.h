@@ -1,6 +1,7 @@
-#pragma once
+﻿#pragma once
 
 
+#include "acme/primitive/primitive/memory.h"
 #include "app-veriwell/multimedia/music/midi/object.h"
 
 
@@ -42,7 +43,7 @@ namespace music
 
 
             buffer();
-            virtual ~buffer();
+            ~buffer() override;
 
             bool IsPrepared();
             void Reset();

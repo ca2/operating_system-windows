@@ -1,6 +1,9 @@
-#include "framework.h"
-#include "multimedia_mmsystem/translation.h"
+﻿#include "framework.h"
 #include "in.h"
+#include "midi.h"
+#include "multimedia_mmsystem/translation.h"
+#include "acme/exception/exception.h"
+#include "acme/parallelization/synchronous_lock.h"
 
 
 namespace music
@@ -13,9 +16,6 @@ namespace music
 
       namespace mmsystem
       {
-
-
-         ::mutex & get_midi_mutex();
 
 
          in::in()
@@ -37,7 +37,7 @@ namespace music
          void in::open(int iDeviceId)
          {
 
-            synchronous_lock synchronouslock(&get_midi_mutex());
+            synchronous_lock synchronouslock(m_pmidi->get_midi_mutex());
 
             //MMRESULT estatus;
 

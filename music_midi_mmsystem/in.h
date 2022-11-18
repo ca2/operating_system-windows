@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 
 #include "app-veriwell/multimedia/music/midi/in.h"
@@ -25,7 +25,7 @@ namespace music
             
             HMIDIIN        m_hmidiin;
 
-            
+            ::pointer < midi > m_pmidi;
 
 
             in();

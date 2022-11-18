@@ -54,7 +54,7 @@ namespace multimedia
       CALLBACK_WINDOW)))
       {
       output_error_message("Could not open audio_mixer device!");
-      PostMessage(e_message_close);
+      PostMessage(MESSAGE_CLOSE);
       return mmrc;
       }
       m_pmixer->m_pdevice->initialize_capabilities();
@@ -71,7 +71,7 @@ namespace multimedia
       &pdestination)))
       {
       output_error_message("Could not open default audio_mixer destination!");
-      PostMessage(e_message_close);
+      PostMessage(MESSAGE_CLOSE);
       return mmrc;
       }
 

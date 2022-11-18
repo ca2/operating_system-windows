@@ -1,9 +1,11 @@
-#include "framework.h"
+﻿#include "framework.h"
 #include "out.h"
 #include "midi.h"
 #include "multimedia_mmsystem/translation.h"
+#include "acme/exception/exception.h"
+#include "acme/parallelization/synchronous_lock.h"
+#include "acme/primitive/primitive/memory.h"
 #include "app-veriwell/multimedia/music/midi/midi.h"
-
 
 
 namespace music
@@ -16,8 +18,6 @@ namespace music
 
       namespace mmsystem
       {
-
-         ::mutex & get_midi_mutex();
 
          out::out()
          {
@@ -38,7 +38,7 @@ namespace music
          void out::open()
          {
 
-            synchronous_lock synchronouslock(&get_midi_mutex());
+            synchronous_lock synchronouslock(((midi*)m_pmidi->m_pMidi)->get_midi_mutex());
 
             MMRESULT estatus;
 
