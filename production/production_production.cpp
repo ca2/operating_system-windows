@@ -723,7 +723,7 @@ pacmedir->system() / "config/production/mirror_status.txt";
                //}
                ::process::process_pointer process(e_create);
                string strPath;
-               strPath = pcontext->m_papexcontext->dir().install() / "platform\\stage\\script\\stage_clean.bat";
+               strPath = dir().install() / "platform\\stage\\script\\stage_clean.bat";
                if (!process->create_child_process(strPath, false))
                {
                   u32 dw = GetLastError();
@@ -742,7 +742,7 @@ pacmedir->system() / "config/production/mirror_status.txt";
                }
             }
 
-            //pcontext->m_papexcontext->dir().create(m_strBase /  "time"));
+            //dir().create(m_strBase /  "time"));
 
             for (auto & strRoot : m_straRoot)
             {
@@ -784,11 +784,11 @@ pacmedir->system() / "config/production/mirror_status.txt";
             //}
 
             add_status("Cleaning site...");
-            ::file::path strPath = pcontext->m_papexcontext->dir().install() / "time\\stage\\app\\matter\\job.bat";
+            ::file::path strPath = dir().install() / "time\\stage\\app\\matter\\job.bat";
 
 
             //pcontext->m_papexcontext->http().ms_download("http://api.ca2.cc/spaignition/clean",
-            //   pcontext->m_papexcontext->dir().install() / "time\\spaignition_update.txt"), nullptr, post, headers, ::ca2::acme::application(get_application()).user()->get_user());
+            //   dir().install() / "time\\spaignition_update.txt"), nullptr, post, headers, ::ca2::acme::application(get_application()).user()->get_user());
             /*add_status("Cleaning folder...");
             ::process::process_pointer process(e_create);
             pcontext->m_papexcontext->file().put_contents(strPath, "rmdir /s /q C:\\ca2\\vrel\\" + m_strConfiguration);
@@ -1005,10 +1005,10 @@ pacmedir->create(pathTarget.folder()))
          {
          return 1;
          }*/
-         pcontext->m_papexcontext->dir().create("C:\\home\\ca2_spa\\" + m_strConfiguration + "\\app\\");
+         dir().create("C:\\home\\ca2_spa\\" + m_strConfiguration + "\\app\\");
          pcontext->m_papexcontext->file().put_contents("C:\\home\\ca2_spa\\" + m_strConfiguration + "\\app\\build.txt", m_strBuild);
          pcontext->m_papexcontext->file().put_contents(m_strCCVrelNew + "\\app\\build.txt", m_strBuild);
-         pcontext->m_papexcontext->dir().create(m_strTagPath.folder());
+         dir().create(m_strTagPath.folder());
          pcontext->m_papexcontext->file().put_contents(m_strTagPath, m_strTag);
 
          //commit_source("C:\\netnodenet\\net");
@@ -1038,7 +1038,7 @@ pacmedir->create(pathTarget.folder()))
 
             add_status("Storing Symbols x86...");
 
-            ::file::path strPath = pcontext->m_papexcontext->dir().install() / "time\\stage\\app\\matter\\store_symbols_job_x86.bat";
+            ::file::path strPath = dir().install() / "time\\stage\\app\\matter\\store_symbols_job_x86.bat";
 
 
 
@@ -1076,7 +1076,7 @@ pacmedir->create(pathTarget.folder()))
 
             add_status("Storing Symbols x64...");
 
-            ::file::path strPath = pcontext->m_papexcontext->dir().install() / "time\\stage\\app\\matter\\store_symbols_job_x64.bat";
+            ::file::path strPath = dir().install() / "time\\stage\\app\\matter\\store_symbols_job_x64.bat";
 
             ::process::process_pointer process(e_create);
             string strCommand = "\"C:\\Program Files (x86)\\Windows Kits\\10\\Debuggers\\x64\\symstore.exe\"  add /r /f " + strStageUnc + "\\stage\\" + m_strFormatBuild + "\\time\\x64\\stage\\*.pdb /s " + strStageUnc + "\\symbol_server\\ /t \"ca2\" /v \"" + m_strFormatBuild + "\"";
@@ -1490,7 +1490,7 @@ pacmedir->create(pathTarget.folder()))
          if (strFile.extension() == "zip")
          {
          }
-         else if (pcontext->m_papexcontext->dir().is(strFile))
+         else if (dir().is(strFile))
          {
             continue;
          }
@@ -1615,7 +1615,7 @@ pacmedir->create(pathTarget.folder()))
 
 
    pcontext->m_papexcontext->http().ms_download(strUrl,
-   pcontext->m_papexcontext->dir().install() / "time\\spaignition_update.txt"), nullptr, post, headers, psession->user()->get_user());
+   dir().install() / "time\\spaignition_update.txt"), nullptr, post, headers, psession->user()->get_user());
    i += 8;
    }
    }*/
@@ -1903,7 +1903,7 @@ pacmedir->create(pathTarget.folder()))
          if (strFile.ends_ci(".zip"))
          {
          }
-         else if (pcontext->m_papexcontext->dir().is(strFile))
+         else if (dir().is(strFile))
          {
             continue;
          }
@@ -1987,7 +1987,7 @@ pacmedir->create(pathTarget.folder()))
       strMd5 = m_pathVrel / strRelativeMd5;
       pcontext->m_papexcontext->file().put_contents(strMd5, m_strIndexMd5);
 
-      //string strStage = pcontext->m_papexcontext->dir().path("C:\\home\\ca2_spa\\" + m_strVersionShift, strRelative) + ".bz";
+      //string strStage = dir().path("C:\\home\\ca2_spa\\" + m_strVersionShift, strRelative) + ".bz";
       //::DeleteFileW(utf8_to_unicode(
       // strStage));
       //pcontext->m_papexcontext->file().copy(strStage, strBz);
@@ -2139,7 +2139,7 @@ pacmedir->create(pathTarget.folder()))
          if (strFile.ext().compare_ci("zip") == 0)
          {
          }
-         else if (pcontext->m_papexcontext->dir().is(strFile))
+         else if (dir().is(strFile))
          {
             continue;
          }
@@ -2454,14 +2454,14 @@ pacmedir->create(pathTarget.folder()))
       string strIconName;
       if (m_eversion == version_basis)
       {
-         strIcon = pcontext->m_papexcontext->dir().matter("fluidbasis-5c-32.png");
+         strIcon = dir().matter("fluidbasis-5c-32.png");
          strIconName = "fluidbasis-5c-32.png";
 
 
       }
       else
       {
-         strIcon = pcontext->m_papexcontext->dir().matter("ca2-5c-32.png");
+         strIcon = dir().matter("ca2-5c-32.png");
          strIconName = "ca2-5c-32.png";
       }
       pcontext->m_papexcontext->file().copy(strDir / "npca2/skin/classic" / strIconName, strIcon);
@@ -2580,7 +2580,7 @@ pacmedir->create(pathTarget.folder()))
 
       strDir = m_strBase / "time/npca2/" + strPlatform;
 
-      pcontext->m_papexcontext->dir().rm(strDir / "npca2/META-INF");
+      dir().rm(strDir / "npca2/META-INF");
 
 
       if (bSigned)
@@ -2680,7 +2680,7 @@ pacmedir->create(pathTarget.folder()))
       string strPlatform(pszPlatform);
 
 
-      pcontext->m_papexcontext->dir().create(m_strBase / "time\\iexca2" / strPlatform);
+      dir().create(m_strBase / "time\\iexca2" / strPlatform);
 
       string strNpca2Version;
 
@@ -2783,14 +2783,14 @@ pacmedir->create(pathTarget.folder()))
       string strIconName;
       if (m_eversion == version_basis)
       {
-         strIcon = pcontext->m_papexcontext->dir().matter("fluidbasis-5c-32.png");
+         strIcon = dir().matter("fluidbasis-5c-32.png");
          strIconName = "fluidbasis-5c-32.png";
 
 
       }
       else
       {
-         strIcon = pcontext->m_papexcontext->dir().matter("ca2-5c-32.png");
+         strIcon = dir().matter("ca2-5c-32.png");
          strIconName = "ca2-5c-32.png";
       }
       pcontext->m_papexcontext->file().copy(strDir / strIconName, strIcon);
@@ -3101,8 +3101,8 @@ pacmedir->create(pathTarget.folder()))
       twitterObj.get_oauth().setConsumerKey(m_strTwitterConsumerKey);
       twitterObj.get_oauth().setConsumerSecret(m_strTwitterConsumerSecret);
 
-      string strPathKey = pcontext->m_papexcontext->dir().appdata() / "twitterClient_token_key" + __string((int)m_eversion) + ".txt";
-      string strPathSecret = pcontext->m_papexcontext->dir().appdata() / "twitterClient_token_secret" + __string((int)m_eversion) + ".txt";
+      string strPathKey = dir().appdata() / "twitterClient_token_key" + __string((int)m_eversion) + ".txt";
+      string strPathSecret = dir().appdata() / "twitterClient_token_secret" + __string((int)m_eversion) + ".txt";
       /* Step 1: Check if we alredy have OAuth access token from a previous run */
       //    char szKey[1024];
       string myOAuthAccessTokenKey = pcontext->m_papexcontext->file().as_string(strPathKey);
@@ -3166,8 +3166,8 @@ Retry2:
       twitterObj.get_oauth().setConsumerKey(m_strTwitterConsumerKey);
       twitterObj.get_oauth().setConsumerSecret(m_strTwitterConsumerSecret);
 
-      string strPathKey = pcontext->m_papexcontext->dir().appdata() / "twitterClient_token_key" + __string((int)m_eversion) + ".txt";
-      string strPathSecret = pcontext->m_papexcontext->dir().appdata() / "twitterClient_token_secret" + __string((int)m_eversion) + ".txt";
+      string strPathKey = dir().appdata() / "twitterClient_token_key" + __string((int)m_eversion) + ".txt";
+      string strPathSecret = dir().appdata() / "twitterClient_token_secret" + __string((int)m_eversion) + ".txt";
       /* Step 1: Check if we alredy have OAuth access token from a previous run */
       //    char szKey[1024];
       string myOAuthAccessTokenKey = pcontext->m_papexcontext->file().as_string(strPathKey);
@@ -3257,8 +3257,8 @@ Retry2:
       twitterObj.get_oauth().setConsumerKey(m_strTwitterConsumerKey);
       twitterObj.get_oauth().setConsumerSecret(m_strTwitterConsumerSecret);
 
-      string strPathKey = pcontext->m_papexcontext->dir().appdata() / "facebookClient_token_key" + ::str().from_int(m_eversion) + ".txt";
-      string strPathSecret = pcontext->m_papexcontext->dir().appdata() / "facebookClient_token_secret" + ::str().from_int(m_eversion) + ".txt";
+      string strPathKey = dir().appdata() / "facebookClient_token_key" + ::str().from_int(m_eversion) + ".txt";
+      string strPathSecret = dir().appdata() / "facebookClient_token_secret" + ::str().from_int(m_eversion) + ".txt";
       /* Step 1: Check if we alredy have OAuth access token from a previous run */
       //    char szKey[1024];
       string myOAuthAccessTokenKey = pcontext->m_papexcontext->file().as_string(strPathKey);

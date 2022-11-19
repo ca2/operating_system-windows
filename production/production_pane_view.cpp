@@ -97,7 +97,7 @@ namespace production
             pdocument->update_all_impacts(nullptr, 1234);
             pdocument->update_all_impacts(nullptr, 123458);
             ::pointer<::user::impact>pimpact = pdocument->get_impact();
-            pdocument->FileManagerBrowse(pcontext->m_papexcontext->dir().appdata()/ "production/menu", ::e_source_system);
+            pdocument->FileManagerBrowse(dir().appdata()/ "production/menu", ::e_source_system);
             if(pimpact != nullptr)
             {
                ::pointer<::user::frame_window>pframe =  (pimpact->get_parent_frame());
@@ -166,7 +166,7 @@ namespace production
       //      pdocument->update_all_impacts(nullptr, 1234);
       //      pdocument->update_all_impacts(nullptr, 123458);
       //      ::pointer<::user::impact>pimpact = pdocument->get_impact();
-      //      pdocument->FileManagerBrowse(pcontext->m_papexcontext->dir().appdata()/ "production\\3-action-launch", ::e_source_system);
+      //      pdocument->FileManagerBrowse(dir().appdata()/ "production\\3-action-launch", ::e_source_system);
       //      if(pimpact != nullptr)
       //      {
       //         ::pointer<::user::frame_window>pframe =  (pimpact->get_parent_frame());

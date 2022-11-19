@@ -320,7 +320,7 @@ pacmedir->system() / "config/plugin/appfy_beg_debug_box.txt"))
 
             pathListing = pathListing.folder(4);
 
-            auto& dir = pcontext->m_papexcontext->dir();
+            auto& dir = dir();
 
             dir.ls_dir(listing, pathListing);
 
@@ -396,7 +396,7 @@ pacmedir->system() / "config/plugin/appfy_beg_debug_box.txt"))
 
       ::file::path pathIcon;
 
-      ::file::path pathMatter = pcontext->m_papexcontext->dir().matter("main/icon.ico", false, strRoot, strDomain);
+      ::file::path pathMatter = dir().matter("main/icon.ico", false, strRoot, strDomain);
 
       pathMatter |= ::file::e_flag_get_local_path;
 
@@ -414,7 +414,7 @@ pacmedir->system() / "config/plugin/appfy_beg_debug_box.txt"))
       if (pathIcon.is_empty())
       {
 
-         pathMatter = pcontext->m_papexcontext->dir().matter("main/icon.ico", false);
+         pathMatter = dir().matter("main/icon.ico", false);
 
          pathMatter |= ::file::e_flag_get_local_path;
 

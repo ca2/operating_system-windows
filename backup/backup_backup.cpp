@@ -50,7 +50,7 @@ namespace backup
          __keep(&m_bFinished, false, true, true);
          string str;
 
-         string strFile = pcontext->m_papexcontext->dir().install() / "basis/ca2/app/dbbk.bat";
+         string strFile = dir().install() / "basis/ca2/app/dbbk.bat";
          if(!pcontext->m_papexcontext->file().exists(strFile))
          {
             string str;
@@ -217,7 +217,7 @@ namespace backup
       si.dwFlags = STARTF_USESHOWWINDOW;
       si.wShowWindow = SW_HIDE;
       ::file::path strNewRepos = get_new_repos_local_path(psz);
-      pcontext->m_papexcontext->dir().create(strNewRepos.folder());
+      dir().create(strNewRepos.folder());
       str.format("svnadmin hotcopy C:\\repos\\%s %s", psz, strNewRepos);
 
       if(!::CreateProcess(nullptr, (LPTSTR) (const ::string &) str, nullptr, nullptr, false, CREATE_NEW_CONSOLE, nullptr, nullptr, &si, &pi))
@@ -259,9 +259,9 @@ namespace backup
       si.dwFlags = STARTF_USESHOWWINDOW;
       si.wShowWindow = SW_HIDE;
       ::file::path strdump = get_new_db_local_path("all.sql");
-      pcontext->m_papexcontext->dir().create(strdump.folder());
+      dir().create(strdump.folder());
 
-      str.format("%s \"%s\"", pcontext->m_papexcontext->dir().install() / "basis/ca2/app/dbbk.bat", strdump);
+      str.format("%s \"%s\"", dir().install() / "basis/ca2/app/dbbk.bat", strdump);
 
       wstring wstr(str);
 
@@ -308,7 +308,7 @@ namespace backup
       string strNewRepos = get_new_repos_local_path(psz);
       ::file::path strTar;
       strTar = ::file::path("C:\\ca2\\bk") / m_strTag  / "repos" / psz + ".tar";
-      pcontext->m_papexcontext->dir().create(strTar.folder());
+      dir().create(strTar.folder());
       str.format("7za.exe a -r -ttar \"%s\" \"%s\"", strTar, strNewRepos);
 
       if(!::CreateProcess(nullptr, (LPTSTR) (const ::string &) str, nullptr, nullptr, false, CREATE_NEW_CONSOLE, nullptr, nullptr, &si, &pi))
