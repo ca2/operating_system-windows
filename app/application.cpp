@@ -1,4 +1,4 @@
-#include "framework.h"
+﻿#include "framework.h"
 
 
 struct main_hold
@@ -6,7 +6,7 @@ struct main_hold
 
 };
 
-#include "apex/application.h"
+//#include "apex/application.h"
 
 #ifdef _WIN32
 

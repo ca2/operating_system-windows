@@ -858,7 +858,7 @@ namespace apex_windows
          if (key._open(HKEY_CLASSES_ROOT, "ChromeHTML\\shell\\open\\command"))
          {
 
-            string str = key.get("").get_string();
+            string str = key.get("").as_string();
 
             auto psz = str.c_str();
 
@@ -3641,21 +3641,21 @@ repeat:
             if (set["default_file_extension"].length() > 0)
             {
 
-               pfileopen->SetDefaultExtension(wstring(set["default_file_extension"].get_string()));
+               pfileopen->SetDefaultExtension(wstring(set["default_file_extension"].as_string()));
 
             }
 
             if (set["file_name"].length() > 0)
             {
 
-               pfileopen->SetFileName(wstring(set["file_name"].get_string()));
+               pfileopen->SetFileName(wstring(set["file_name"].as_string()));
 
             }
 
             if (set["folder"].length() > 0)
             {
 
-               wstring wstr(set["folder"].get_string());
+               wstring wstr(set["folder"].as_string());
 
                comptr < IShellItem > psi;
 
@@ -3882,21 +3882,21 @@ repeat:
             if (set["default_file_extension"].length() > 0)
             {
 
-               pfilesave->SetDefaultExtension(wstring(set["default_file_extension"].get_string()));
+               pfilesave->SetDefaultExtension(wstring(set["default_file_extension"].as_string()));
 
             }
 
             if (set["file_name"].length() > 0)
             {
 
-               pfilesave->SetFileName(wstring(set["file_name"].get_string()));
+               pfilesave->SetFileName(wstring(set["file_name"].as_string()));
 
             }
 
             if (set["folder"].length() > 0)
             {
 
-               wstring wstr(set["folder"].get_string());
+               wstring wstr(set["folder"].as_string());
 
                comptr < IShellItem > psi;
 
@@ -4011,7 +4011,7 @@ repeat:
             if (set["folder"].length() > 0)
             {
 
-               wstring wstr(set["folder"].get_string());
+               wstring wstr(set["folder"].as_string());
 
                comptr < IShellItem > psi;
 
@@ -4129,7 +4129,7 @@ repeat:
             if (set["folder"].length() > 0)
             {
 
-               wstring wstr(set["folder"].get_string());
+               wstring wstr(set["folder"].as_string());
 
                comptr < IShellItem > psi;
 
