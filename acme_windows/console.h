@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 
 #include "acme/filesystem/file/text_stream.h"
@@ -28,7 +28,7 @@ namespace acme_windows
       ~console() override;
 
 
-      ::write_text_stream < ::file::file >& cout() override;
+      //::write_text_stream < ::file::file >& cout() override;
 
 
       void redirect_io();
