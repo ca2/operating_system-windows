@@ -1,4 +1,4 @@
-#include "framework.h"
+﻿#include "framework.h"
 #include "imm_context.h"
 #include "acme/primitive/primitive/memory.h"
 #include "aura/user/user/interaction.h"
@@ -95,7 +95,7 @@ string imm_context::_get_candidate(int iList)
 
       ::u32 dw = GetLastError();
 
-      output_debug_string("error " + __string(dw));
+      output_debug_string("error " + ::as_string(dw));
 
    }
 

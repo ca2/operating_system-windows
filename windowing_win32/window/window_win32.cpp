@@ -756,7 +756,7 @@ namespace windowing_win32
       else
       {
 
-         output_debug_string("GetClassInfoExW failed with error number '"+__string(dwLastError) + "'");
+         output_debug_string("GetClassInfoExW failed with error number '"+ ::as_string(dwLastError) + "'");
 
       }
 

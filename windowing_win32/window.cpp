@@ -28,7 +28,7 @@
 
 
 #include "acme/_operating_system.h"
-#include "acme/operating_system/windows_common/__string.h"
+#include "acme/operating_system/windows_common/_string.h"
 
 
 #include <dwmapi.h>
