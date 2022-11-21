@@ -5779,7 +5779,7 @@ namespace draw2d_gdiplus
 
          }
 
-         Gdiplus::Status status = strFormat.SetMeasurableCharacterRanges(iCount, characterrangea);
+         Gdiplus::Status status = strFormat.SetMeasurableCharacterRanges(iCount, characterrangea.get_data());
 
          i32 count = strFormat.GetMeasurableCharacterRangeCount();
 
@@ -5796,7 +5796,7 @@ namespace draw2d_gdiplus
 
          Gdiplus::PointF origin(0.f, 0.f);
 
-         m_pgraphics->MeasureCharacterRanges(text.m_wstr, (INT)cLength, m_pfont->get_os_data < Gdiplus::Font * >(this), box, &strFormat, count, regiona);
+         m_pgraphics->MeasureCharacterRanges(text.m_wstr, (INT)cLength, m_pfont->get_os_data < Gdiplus::Font * >(this), box, &strFormat, count, regiona.get_data());
 
          Gdiplus::RectF rectangleBound;
 

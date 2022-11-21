@@ -1,11 +1,11 @@
-#include "framework.h"
+﻿#include "framework.h"
 #include "process.h"
 #include "acme/exception/exception.h"
 #include "acme/primitive/string/parse.h"
 #include "acme/primitive/string/str.h"
 #include "acme_windows/pipe.h"
 #include "acme_windows/uac_tools.h"
-#include "acme/operating_system/windows_common/__string.h"
+#include "acme/operating_system/windows_common/_string.h"
 
 
 #include "acme/_operating_system.h"
