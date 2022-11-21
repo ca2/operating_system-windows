@@ -1,4 +1,4 @@
-// From acme/filesystem/file/_.cpp by camilo on 2021-08-09 
+﻿// From acme/filesystem/file/_.cpp by camilo on 2021-08-09 
 // 03:09 BRT <3ThomasBorregaardSørensen
 #include "framework.h"
 #include "acme_file.h"
@@ -238,7 +238,7 @@ namespace acme_windows
 
          path /= lpszName;
 
-         path /= __string(i);
+         path /= ::as_string(i);
 
          path /= (string(lpszName) + "." + string(pszExtension));
 

@@ -1,4 +1,4 @@
-#include "framework.h"
+﻿#include "framework.h"
 #include "console.h"
 #include "acme_file.h"
 
@@ -50,12 +50,12 @@ namespace acme_windows
    }
 
 
-   ::write_text_stream < ::file::file > & console::cout()
-   {
+   //::write_text_stream < ::file::file > & console::cout()
+   //{
 
-      return m_cout;
+   //   return m_cout;
 
-   }
+   //}
 
    // maximum mumber of lines the output console should have
 
