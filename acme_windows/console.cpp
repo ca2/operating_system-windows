@@ -13,31 +13,42 @@ namespace acme_windows
 {
 
 
-   console::console() :
-      m_cout(nullptr)
+   console::console()
+      //:      m_cout(nullptr)
    {
+
+
+      //SetThreadLocale(437);
+      //SetThreadUILanguage(437);
+      
 
 
       AllocConsole();
 
-      m_cout.m_pfile = __new(std_out_buffer());
+      SetConsoleOutputCP(437);
 
-      CONSOLE_FONT_INFOEX info = {};
-      info.cbSize = sizeof(info);
-      GetCurrentConsoleFontEx(GetStdHandle(STD_OUTPUT_HANDLE),false,&info);
+      m_pfileOut = __new(std_out_buffer());
+
+      m_cout.m_pfile = m_pfileOut;
 
 
-      info.dwFontSize.X = 14;
-      info.dwFontSize.Y = 24;
-      wcscpy(info.FaceName,L"Consolas");
-      info.FontFamily = 54;
-      info.FontWeight = 800;
-      info.nFont = 0;
+      //CONSOLE_FONT_INFOEX info = {};
+      //info.cbSize = sizeof(info);
+      //GetCurrentConsoleFontEx(GetStdHandle(STD_OUTPUT_HANDLE),false,&info);
 
-      if(!SetCurrentConsoleFontEx(GetStdHandle(STD_OUTPUT_HANDLE),false,&info))
-      {
-         //TRACELASTERROR();
-      }
+
+      //info.dwFontSize.X = 14;
+      //info.dwFontSize.Y = 24;
+      ////wcscpy(info.FaceName,L"Consolas");
+      //wcscpy(info.FaceName, L"Comic Code");
+      //info.FontFamily = 54;
+      //info.FontWeight = 800;
+      //info.nFont = 0;
+
+      //if(!SetCurrentConsoleFontEx(GetStdHandle(STD_OUTPUT_HANDLE),false,&info))
+      //{
+      //   //TRACELASTERROR();
+      //}
 
    }
 
@@ -193,10 +204,10 @@ namespace acme_windows
    }
 
 
-   void console::write(const ::string & psz)
+   void console::write(const ::string & str)
    {
 
-      acmefile()->write(stdout,psz,strlen(psz),nullptr);
+      m_pfileOut->write(str,str.get_length());
 
    }
 

@@ -210,9 +210,23 @@ void gdiplus_draw_text(::draw2d::graphics* pgraphicsParam, ::draw2d::path* ppath
          else if (pgraphics)
          {
 
-            auto e = pgraphics->GetTextRenderingHint();
+            auto eTextRenderingMode = pgraphics->GetTextRenderingHint();
 
-            status = pgraphics->DrawString(text.m_wstr, (INT)iSize, pfont, rectangle_f32, &format, pbrush);
+            auto eCompositingMode = pgraphics->GetCompositingMode();
+
+            if (eCompositingMode == ::Gdiplus::CompositingModeSourceCopy)
+            {
+
+               if (eTextRenderingMode != ::Gdiplus::TextRenderingHintAntiAlias)
+               {
+
+                  pgraphics->SetTextRenderingHint(::Gdiplus::TextRenderingHintAntiAlias);
+
+               }
+
+            }
+
+            status = pgraphics->DrawString(text.m_wstr, (INT)text.m_wstr.get_length(), pfont, rectangle_f32, &format, pbrush);
 
             if (bMeasure)
             {
@@ -225,7 +239,26 @@ void gdiplus_draw_text(::draw2d::graphics* pgraphicsParam, ::draw2d::path* ppath
 
             }
 
+
+            if (eCompositingMode == Gdiplus::CompositingModeSourceCopy)
+            {
+
+               if (eTextRenderingMode != ::Gdiplus::TextRenderingHintAntiAlias)
+               {
+
+                  pgraphics->SetTextRenderingHint(eTextRenderingMode);
+
+               }
+
+            }
+
          }
+
+            //auto e = pgraphics->GetTextRenderingHint();
+
+            //status = pgraphics->DrawString(text.m_wstr, (INT)iSize, pfont, rectangle_f32, &format, pbrush);
+
+         //}
 
       }
       else if (pgraphics)

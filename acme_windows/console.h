@@ -20,7 +20,7 @@ namespace acme_windows
 
       int                                    m_iW;
       int                                    m_iH;
-      write_text_stream < ::file::file >     m_cout;
+      //write_text_stream < ::file::file >     m_cout;
       ::file_pointer                         m_pfileOut;
 
 
