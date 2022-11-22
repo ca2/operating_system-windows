@@ -1613,6 +1613,16 @@ namespace windowing_win32
    }
 
 
+   void window::switch_to_this_window(bool b)
+   {
+
+      HWND hwnd = get_hwnd();
+
+      ::SwitchToThisWindow(hwnd, b ? TRUE : FALSE);
+
+   }
+
+
    void window::set_mouse_capture()
    {
 

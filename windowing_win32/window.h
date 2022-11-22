@@ -1,4 +1,4 @@
-// created by Camilo 2021-01-31 04:56 BRT <3CamiloSasukeThomasBorregaardSoerensen
+﻿// created by Camilo 2021-01-31 04:56 BRT <3CamiloSasukeThomasBorregaardSoerensen
 #pragma once
 
 
@@ -102,6 +102,8 @@ namespace windowing_win32
       void set_active_window() override;
 
       void bring_to_front() override;
+
+      void switch_to_this_window(bool b) override;
 
       void set_foreground_window() override;
 
