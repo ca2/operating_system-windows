@@ -196,11 +196,11 @@ int av_compare_ts(int64_t ts_a, AVRational tb_a, int64_t ts_b, AVRational tb_b);
 int64_t av_compare_mod(uint64_t a, uint64_t b, uint64_t mod);
 
 /**
- * Rescale a timestamp while preserving known times.
+ * Rescale a timestamp while preserving known durations.
  *
  * This function is designed to be called per audio packet to scale the input
  * timestamp to a different time base. Compared to a simple av_rescale_q()
- * call, this function is robust against possible inconsistent frame times.
+ * call, this function is robust against possible inconsistent frame durations.
  *
  * The `last` parameter is a state variable that must be preserved for all
  * subsequent calls for the same stream. For the first call, `*last` should be
@@ -210,17 +210,17 @@ int64_t av_compare_mod(uint64_t a, uint64_t b, uint64_t mod);
  * @param[in]     in_ts    Input timestamp
  * @param[in]     fs_tb    Duration time base; typically this is finer-grained
  *                         (greater) than `in_tb` and `out_tb`
- * @param[in]     time Duration till the next call to this function (i.e.
- *                         time of the current packet/frame)
+ * @param[in]     duration Duration till the next call to this function (i.e.
+ *                         duration of the current packet/frame)
  * @param[in,out] last     Pointer to a timestamp expressed in terms of
  *                         `fs_tb`, acting as a state variable
  * @param[in]     out_tb   Output timebase
  * @return        Timestamp expressed in terms of `out_tb`
  *
- * @note In the context of this function, "time" is in term of samples, not
+ * @note In the context of this function, "duration" is in term of samples, not
  *       seconds.
  */
-int64_t av_rescale_delta(AVRational in_tb, int64_t in_ts,  AVRational fs_tb, int time, int64_t *last, AVRational out_tb);
+int64_t av_rescale_delta(AVRational in_tb, int64_t in_ts,  AVRational fs_tb, int duration, int64_t *last, AVRational out_tb);
 
 /**
  * Add a value to a timestamp.

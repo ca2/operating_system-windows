@@ -20,7 +20,7 @@
  * @file
  * A public API for Vorbis parsing
  *
- * Determines the time for each packet.
+ * Determines the duration for each packet.
  */
 
 #ifndef AVCODEC_VORBIS_PARSER_H
@@ -46,7 +46,7 @@ void av_vorbis_parse_free(AVVorbisParseContext **s);
 #define VORBIS_FLAG_SETUP   0x00000004
 
 /**
- * Get the time for a Vorbis packet.
+ * Get the duration for a Vorbis packet.
  *
  * If @p flags is @c NULL,
  * special frames are considered invalid.
@@ -60,7 +60,7 @@ int av_vorbis_parse_frame_flags(AVVorbisParseContext *s, const uint8_t *buf,
                                 int buf_size, int *flags);
 
 /**
- * Get the time for a Vorbis packet.
+ * Get the duration for a Vorbis packet.
  *
  * @param s        Vorbis parser context
  * @param buf      buffer containing a Vorbis frame

@@ -164,9 +164,9 @@
  * decoding functions avcodec_send_packet() or avcodec_decode_subtitle2() if the
  * caller wishes to decode the data.
  *
- * AVPacket.pts, AVPacket.dts and AVPacket.time timing information will be
+ * AVPacket.pts, AVPacket.dts and AVPacket.duration timing information will be
  * set if known. They may also be unset (i.e. AV_NOPTS_VALUE for
- * pts/dts, 0 for time) if the stream does not provide them. The timing
+ * pts/dts, 0 for duration) if the stream does not provide them. The timing
  * information will be in AVStream.time_base units, i.e. it has to be
  * multiplied by the timebase to convert them to seconds.
  *
@@ -892,14 +892,14 @@ typedef struct AVStream {
     int64_t start_time;
 
     /**
-     * Decoding: time of the stream, in stream time base.
-     * If a source file does not specify a time, but does specify
+     * Decoding: duration of the stream, in stream time base.
+     * If a source file does not specify a duration, but does specify
      * a bitrate, this value will be estimated from bitrate and file size.
      *
      * Encoding: May be set by the caller before avformat_write_header() to
-     * provide a hint to the muxer about the estimated time.
+     * provide a hint to the muxer about the estimated duration.
      */
-    int64_t time;
+    int64_t duration;
 
     int64_t nb_frames;                 ///< number of frames in this stream if known or 0
 
@@ -1018,7 +1018,7 @@ typedef struct AVStream {
 struct AVCodecParserContext *av_stream_get_parser(const AVStream *s);
 
 /**
- * Returns the pts of the last muxed packet + its time
+ * Returns the pts of the last muxed packet + its duration
  *
  * the retuned value is undefined when used with a demuxer.
  */
@@ -1085,12 +1085,12 @@ typedef int (*AVOpenCallback)(struct AVFormatContext *s, AVIOContext **pb, const
                               const AVIOInterruptCB *int_cb, AVDictionary **options);
 
 /**
- * The time of a video can be estimated through various ways, and this enum can be used
- * to know how the time was estimated.
+ * The duration of a video can be estimated through various ways, and this enum can be used
+ * to know how the duration was estimated.
  */
 enum AVDurationEstimationMethod {
     AVFMT_DURATION_FROM_PTS,    ///< Duration accurately estimated from PTSes
-    AVFMT_DURATION_FROM_STREAM, ///< Duration estimated from a stream with a known time
+    AVFMT_DURATION_FROM_STREAM, ///< Duration estimated from a stream with a known duration
     AVFMT_DURATION_FROM_BITRATE ///< Duration estimated from bitrate (less accurate)
 };
 
@@ -1205,17 +1205,17 @@ typedef struct AVFormatContext {
     /**
      * Duration of the stream, in AV_TIME_BASE fractional
      * seconds. Only set this value if you know none of the individual stream
-     * times and also do not set any of them. This is deduced from the
+     * durations and also do not set any of them. This is deduced from the
      * AVStream values if not set.
      *
      * Demuxing only, set by libavformat.
      */
-    int64_t time;
+    int64_t duration;
 
     /**
      * Total stream bitrate in bit/s, 0 if not
      * available. Never set it directly if the file_size and the
-     * time are known as FFmpeg can compute it automatically.
+     * duration are known as FFmpeg can compute it automatically.
      */
     int64_t bit_rate;
 
@@ -1266,12 +1266,12 @@ typedef struct AVFormatContext {
     int64_t probesize;
 
     /**
-     * Maximum time (in AV_TIME_BASE units) of the data read
+     * Maximum duration (in AV_TIME_BASE units) of the data read
      * from input in avformat_find_stream_info().
      * Demuxing only, set by the caller before avformat_find_stream_info().
      * Can be set to 0 to let avformat choose using a heuristic.
      */
-    int64_t max_analyze_time;
+    int64_t max_analyze_duration;
 
     const uint8_t *key;
     int keylen;
@@ -1384,7 +1384,7 @@ typedef struct AVFormatContext {
 #define FF_FDEBUG_TS        0x0001
 
     /**
-     * Maximum buffering time for interleaving.
+     * Maximum buffering duration for interleaving.
      *
      * To ensure all the streams are interleaved correctly,
      * av_interleaved_write_frame() will wait until it has at least one packet
@@ -1465,7 +1465,7 @@ typedef struct AVFormatContext {
      * - encoding: Set by user
      * - decoding: unused
      */
-    int max_chunk_time;
+    int max_chunk_duration;
 
     /**
      * Max chunk size in bytes
@@ -1491,12 +1491,12 @@ typedef struct AVFormatContext {
     int avio_flags;
 
     /**
-     * The time field can be estimated through various ways, and this field can be used
-     * to know how the time was estimated.
+     * The duration field can be estimated through various ways, and this field can be used
+     * to know how the duration was estimated.
      * - encoding: unused
      * - decoding: Read by user
      */
-    enum AVDurationEstimationMethod time_estimation_method;
+    enum AVDurationEstimationMethod duration_estimation_method;
 
     /**
      * Skip initial bytes when opening stream
@@ -1690,11 +1690,11 @@ typedef struct AVFormatContext {
     int max_streams;
 
     /**
-     * Skip time calcuation in estimate_timings_from_pts.
+     * Skip duration calcuation in estimate_timings_from_pts.
      * - encoding: unused
      * - decoding: set by user
      */
-    int skip_estimate_time_from_pts;
+    int skip_estimate_duration_from_pts;
 
     /**
      * Maximum number of packets that can be probed
@@ -1711,11 +1711,11 @@ typedef struct AVFormatContext {
 void av_format_inject_global_side_data(AVFormatContext *s);
 
 /**
- * Returns the method used to set ctx->time.
+ * Returns the method used to set ctx->duration.
  *
  * @return AVFMT_DURATION_FROM_PTS, AVFMT_DURATION_FROM_STREAM, or AVFMT_DURATION_FROM_BITRATE.
  */
-enum AVDurationEstimationMethod av_fmt_ctx_get_time_estimation_method(const AVFormatContext* ctx);
+enum AVDurationEstimationMethod av_fmt_ctx_get_duration_estimation_method(const AVFormatContext* ctx);
 
 /**
  * @defgroup lavf_core Core functions
@@ -2064,7 +2064,7 @@ int av_find_best_stream(AVFormatContext *ic,
  * a known fixed size (e.g. PCM or ADPCM data). If the audio frames have
  * a variable size (e.g. MPEG audio), then it contains one frame.
  *
- * pkt->pts, pkt->dts and pkt->time are always set to correct
+ * pkt->pts, pkt->dts and pkt->duration are always set to correct
  * values in AVStream.time_base units (and guessed if the format cannot
  * provide them). pkt->pts can be AV_NOPTS_VALUE if the video format
  * has B-frames, so it is better to rely on pkt->dts if you do not
@@ -2128,7 +2128,7 @@ int avformat_seek_file(AVFormatContext *s, int stream_index, int64_t min_ts, int
  * can resync. This includes headerless formats like MPEG-TS/TS but should also
  * work with NUT, Ogg and in a limited way AVI for example.
  *
- * The set of streams, the detected time, stream parameters and codecs do
+ * The set of streams, the detected duration, stream parameters and codecs do
  * not change when calling this function. If you want a complete reset, it's
  * better to open a new AVFormatContext.
  *
@@ -2248,8 +2248,8 @@ int avformat_init_output(AVFormatContext *s, AVDictionary **options);
  *            The dts for subsequent packets passed to this function must be strictly
  *            increasing when compared in their respective timebases (unless the
  *            output format is flagged with the AVFMT_TS_NONSTRICT, then they
- *            merely have to be nondecreasing).  @ref AVPacket.time
- *            "time") should also be set if known.
+ *            merely have to be nondecreasing).  @ref AVPacket.duration
+ *            "duration") should also be set if known.
  * @return < 0 on error, = 0 if OK, 1 if flushed and there is no more data to flush
  *
  * @see av_interleaved_write_frame()
@@ -2292,7 +2292,7 @@ int av_write_frame(AVFormatContext *s, AVPacket *pkt);
  *            The dts for subsequent packets in one stream must be strictly
  *            increasing (unless the output format is flagged with the
  *            AVFMT_TS_NONSTRICT, then they merely have to be nondecreasing).
- *            @ref AVPacket.time "time" should also be set if known.
+ *            @ref AVPacket.duration "duration" should also be set if known.
  *
  * @return 0 on success, a negative AVERROR on error.
  *
@@ -2580,7 +2580,7 @@ void av_url_split(char *proto,         int proto_size,
 
 /**
  * Print detailed information about the input or output format, such as
- * time, bitrate, streams, container, programs, metadata, side data,
+ * duration, bitrate, streams, container, programs, metadata, side data,
  * codec and time base.
  *
  * @param ic        the context to analyze

@@ -75,8 +75,8 @@
  * encoder no longer returns data.
  *
  * NOTE: For encoders implementing the AVCodec.encode2() function, setting this
- *       flag also means that the encoder must set the pts and time for
- *       each output packet. If this flag is not set, the pts and time will
+ *       flag also means that the encoder must set the pts and duration for
+ *       each output packet. If this flag is not set, the pts and duration will
  *       be determined by libavcodec from the input frame.
  */
 #define AV_CODEC_CAP_DELAY               (1 <<  5)

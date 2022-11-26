@@ -566,12 +566,12 @@ typedef struct AVFrame {
     int64_t pkt_pos;
 
     /**
-     * time of the corresponding packet, expressed in
+     * duration of the corresponding packet, expressed in
      * AVStream->time_base units, 0 if unknown.
      * - encoding: unused
      * - decoding: Read by user.
      */
-    int64_t pkt_time;
+    int64_t pkt_duration;
 
     /**
      * metadata.
@@ -684,9 +684,9 @@ int64_t av_frame_get_best_effort_timestamp(const AVFrame *frame);
 attribute_deprecated
 void    av_frame_set_best_effort_timestamp(AVFrame *frame, int64_t val);
 attribute_deprecated
-int64_t av_frame_get_pkt_time         (const AVFrame *frame);
+int64_t av_frame_get_pkt_duration         (const AVFrame *frame);
 attribute_deprecated
-void    av_frame_set_pkt_time         (AVFrame *frame, int64_t val);
+void    av_frame_set_pkt_duration         (AVFrame *frame, int64_t val);
 attribute_deprecated
 int64_t av_frame_get_pkt_pos              (const AVFrame *frame);
 attribute_deprecated
