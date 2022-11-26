@@ -179,7 +179,8 @@ AVRational av_d2q(double d, int max) av_const;
  * Find which of the two rationals is closer to another rational.
  *
  * @param q     Rational to be compared against
- * @param q1,q2 Rationals to be tested
+ * @param q1    Rational to be tested
+ * @param q2    Rational to be tested
  * @return One of the following values:
  *         - 1 if `q1` is nearer to `q` than `q2`
  *         - -1 if `q2` is nearer to `q` than `q1`
@@ -203,7 +204,7 @@ int av_find_nearest_q_idx(AVRational q, const AVRational* q_list);
  * @param q Rational to be converted
  * @return Equivalent floating-point value, expressed as an unsigned 32-bit
  *         integer.
- * @note The returned value is operating-system-indepedant.
+ * @note The returned value is platform-indepedant.
  */
 uint32_t av_q2intfloat(AVRational q);
 

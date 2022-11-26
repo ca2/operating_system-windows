@@ -135,6 +135,7 @@ size_t av_strlcatf(char *dst, size_t size, const char *fmt, ...) av_printf_forma
 /**
  * Get the count of continuous non zero chars starting from the beginning.
  *
+ * @param s   the string whose length to count
  * @param len maximum number of characters to check in the string, that
  *            is the maximum value which is returned by the function
  */
@@ -222,7 +223,7 @@ static inline av_const int av_isgraph(int c)
 }
 
 /**
- * Locale-independent conversion of ASCII character_isspace.
+ * Locale-independent conversion of ASCII isspace.
  */
 static inline av_const int av_isspace(int c)
 {
