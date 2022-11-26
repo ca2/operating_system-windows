@@ -1228,7 +1228,7 @@ namespace windowing_win32
       DWORD_PTR dw = 0;
 
       //if (!SendMessageTimeoutW(hwnd, WM_GETTEXTLENGTH, 0, 0, SMTO_ABORTIFHUNG | SMTO_NOTIMEOUTIFNOTHUNG, 100, &dw))
-      if (!SendMessageTimeoutW((HWND)oswindow, WM_GETTEXTLENGTH, 0, 0, SMTO_ABORTIFHUNG, (class ::wait) timeSendMessageMax, &dw))
+      if (!SendMessageTimeoutW((HWND)oswindow, WM_GETTEXTLENGTH, 0, 0, SMTO_ABORTIFHUNG, ::windows::wait(timeSendMessageMax), &dw))
       {
 
          return "";
@@ -1246,7 +1246,7 @@ namespace windowing_win32
 
       auto pwsz = wstr.get_string_buffer(dw);
 
-      if (!SendMessageTimeoutW((HWND)oswindow, WM_GETTEXT, dw + 1, (LPARAM)pwsz, SMTO_ABORTIFHUNG, (class ::wait) timeSendMessageMax, &dw))
+      if (!SendMessageTimeoutW((HWND)oswindow, WM_GETTEXT, dw + 1, (LPARAM)pwsz, SMTO_ABORTIFHUNG, ::windows::wait(timeSendMessageMax), &dw))
       {
 
          return "";
