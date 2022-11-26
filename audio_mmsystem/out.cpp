@@ -517,7 +517,7 @@ namespace audio_mmsystem
    }
 
 
-   ::time out::out_get_position()
+   class ::time out::out_get_position()
    {
 
       return device_out_get_time();
@@ -525,7 +525,7 @@ namespace audio_mmsystem
    }
 
 
-   ::time out::out_get_time()
+   class ::time out::out_get_time()
    {
 
       return m_timeStart + device_out_get_time();
@@ -533,7 +533,7 @@ namespace audio_mmsystem
    }
 
 
-   ::time out::device_out_get_time()
+   class ::time out::device_out_get_time()
    {
 
       synchronous_lock synchronouslock(synchronization());

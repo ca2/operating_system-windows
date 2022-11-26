@@ -573,10 +573,10 @@ namespace music
          }
 
 
-         ::time sequencer::get_time_position()
+         class ::time sequencer::get_time_position()
          {
 
-            ::time time;
+            class ::time time;
 
             get_time_position(time);
 
@@ -585,7 +585,7 @@ namespace music
          }
 
 
-         ::e_status sequencer::get_time_position(::time & time)
+         ::e_status sequencer::get_time_position(class ::time & time)
          {
 
             synchronous_lock synchronouslock(synchronization());
