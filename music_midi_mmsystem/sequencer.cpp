@@ -573,19 +573,19 @@ namespace music
          }
 
 
-         ::duration sequencer::get_time_position()
+         ::time sequencer::get_time_position()
          {
 
-            ::duration duration;
+            ::time time;
 
-            get_time_position(duration);
+            get_time_position(time);
 
-            return duration;
+            return time;
 
          }
 
 
-         ::e_status sequencer::get_time_position(::duration & duration)
+         ::e_status sequencer::get_time_position(::time & time)
          {
 
             synchronous_lock synchronouslock(synchronization());
@@ -611,7 +611,7 @@ namespace music
             if (sequence::e_state_opened != m_psequence->get_state())
             {
 
-               duration = m_psequence->m_durationBase;
+               time = m_psequence->m_timeBase;
 
                if (sequence::e_state_pre_rolled != m_psequence->get_state())
                {
@@ -651,7 +651,7 @@ namespace music
 
                      }
 
-                     duration += INTEGRAL_MILLISECOND(mmtime.u.ms);
+                     time += INTEGRAL_MILLISECOND(mmtime.u.ms);
 
                   }
 
@@ -1368,18 +1368,18 @@ namespace music
          }
 
 
-         //musical_tick sequencer::TimeToPosition(::duration ::duration)
+         //musical_tick sequencer::TimeToPosition(::time ::time)
          //{
-         //   return musical_tick(MillisecsToTicks((iptr)::duration));
+         //   return musical_tick(MillisecsToTicks((iptr)::time));
          //}
 
-         //::duration sequencer::PositionToTime(musical_tick tk)
+         //::time sequencer::PositionToTime(musical_tick tk)
          //{
-         //   return ::duration(TicksToMillisecs((musical_tick)(iptr)tk));
+         //   return ::time(TicksToMillisecs((musical_tick)(iptr)tk));
          //}
 
 
-         //void sequencer::get_time(::duration & time)
+         //void sequencer::get_time(::time & time)
          //{
 
          //   get_time_position(time);
@@ -1464,7 +1464,7 @@ namespace music
          }
 
 
-         void sequencer::midi_out_long_message(const block & block, const ::duration & duration)
+         void sequencer::midi_out_long_message(const block & block, const class time & time)
          {
 
             if ((block.get_size() & 0x3) != 0)
@@ -1526,7 +1526,7 @@ namespace music
 
             }
 
-            ::preempt(duration);
+            ::preempt(time);
 
             while (!(pmidihdr->dwFlags & MHDR_DONE))
             {

@@ -18,7 +18,7 @@ namespace ca2plugin_container
 
       m_strChannel = pszChannel;
 
-//      m_durationRunLock = ::duration(884);
+//      m_timeRunLock = ::time(884);
 
    }
 

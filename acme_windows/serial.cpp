@@ -1,4 +1,4 @@
-#include "framework.h"
+﻿#include "framework.h"
 #include "serial.h"
 #include "acme/parallelization/mutex.h"
 #include "acme/parallelization/synchronous_lock.h"
@@ -387,10 +387,10 @@ namespace acme_windows
 
             // Setup timeouts
             COMMTIMEOUTS timeouts = { 0 };
-            timeouts.ReadIntervalTimeout = (class ::wait)m_timeout.m_durationInterByteTimeout;
-            timeouts.ReadTotalTimeoutConstant = (class ::wait)m_timeout.m_durationReadTimeoutConstant;
+            timeouts.ReadIntervalTimeout = ::windows::wait(m_timeout.m_timeInterByteTimeout);
+            timeouts.ReadTotalTimeoutConstant = ::windows::wait(m_timeout.m_timeReadTimeoutConstant);
             timeouts.ReadTotalTimeoutMultiplier = m_timeout.m_uReadTimeoutMultiplier;
-            timeouts.WriteTotalTimeoutConstant = (class ::wait)m_timeout.m_durationWriteTimeoutConstant;
+            timeouts.WriteTotalTimeoutConstant = ::windows::wait(m_timeout.m_timeWriteTimeoutConstant);
             timeouts.WriteTotalTimeoutMultiplier = m_timeout.m_uWriteTimeoutMultiplier;
             if (!SetCommTimeouts(m_hFile, &timeouts))
             {
@@ -490,7 +490,7 @@ namespace acme_windows
    }
 
 
-   bool serial::waitReadable(::duration /*timeout*/)
+   bool serial::waitReadable(class ::time /*timeout*/)
    {
 
       throw ::exception(error_io, "waitReadable is not implemented on Windows.");
@@ -505,13 +505,13 @@ namespace acme_windows
 
       //throw ::exception (io_exception, "waitByteTimes is not implemented on Windows.");
 
-      duration duration;
+      class time time;
 
-      duration.m_iSecond = uint64_muldiv(count, m_uiByteTimeNs, 1'000'000'000);
+      time.m_iSecond = uint64_muldiv(count, m_uiByteTimeNs, 1'000'000'000);
 
-      duration.m_iNanosecond = (count * m_uiByteTimeNs) % 1'000'000'000;
+      time.m_iNanosecond = (count * m_uiByteTimeNs) % 1'000'000'000;
 
-      preempt(duration);
+      preempt(time);
 
    }
 
@@ -585,7 +585,7 @@ namespace acme_windows
 
       u8* buffer_ = static_cast <u8*> (alloca(size * sizeof(u8)));
 
-      auto durationStart = ::duration::now();
+      auto timeStart = ::time::now();
 
       size_t read_so_far = 0;
 
@@ -599,7 +599,7 @@ namespace acme_windows
          if (bytes_read == 0)
          {
 
-            if (durationStart.elapsed() > m_timeout.m_durationReadTimeoutConstant)
+            if (timeStart.elapsed() > m_timeout.m_timeReadTimeoutConstant)
             {
 
                break;
@@ -607,7 +607,7 @@ namespace acme_windows
             }
 
             // time_out occured on reading 1 byte
-            preempt(maximum(100_ns, m_timeout.m_durationReadTimeoutConstant.integral_nanosecond() / 10));
+            preempt(maximum(100_ns, m_timeout.m_timeReadTimeoutConstant.integral_nanosecond() / 10));
 
             if (!::task_get_run())
             {
@@ -620,7 +620,7 @@ namespace acme_windows
 
          }
 
-         auto tickStart = ::duration::now();
+         auto tickStart = ::time::now();
 
          if (string(reinterpret_cast<const char*> (buffer_ + read_so_far - eol_len), eol_len) == eol)
          {
@@ -830,7 +830,7 @@ namespace acme_windows
    }
 
 
-   void serial::sendBreak(int /*duration*/)
+   void serial::sendBreak(int /*time*/)
    {
 
       throw ::exception(error_io, "sendBreak is not supported on Windows.");

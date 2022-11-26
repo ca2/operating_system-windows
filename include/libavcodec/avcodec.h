@@ -507,7 +507,7 @@ typedef struct AVCodecContext {
 
     /**
      * For some codecs, the time base is closer to the field rate than the frame rate.
-     * Most notably, H.264 and MPEG-2 specify time_base as half of frame duration
+     * Most notably, H.264 and MPEG-2 specify time_base as half of frame time
      * if no telecine is used ...
      *
      * Set to time_base ticks per frame. Default 1, e.g., H.264/MPEG-2 set it to 2.
@@ -2782,11 +2782,11 @@ typedef struct AVCodecParserContext {
     /* video info */
     int pict_type; /* XXX: Put it back in AVCodecContext. */
     /**
-     * This field is used for proper frame duration computation in lavf.
-     * It signals, how much longer the frame duration of the current frame
-     * is compared to normal frame duration.
+     * This field is used for proper frame time computation in lavf.
+     * It signals, how much longer the frame time of the current frame
+     * is compared to normal frame time.
      *
-     * frame_duration = (1 + repeat_pict) * time_base
+     * frame_time = (1 + repeat_pict) * time_base
      *
      * It is used by codecs like H.264 to display telecined material.
      */
@@ -2886,7 +2886,7 @@ typedef struct AVCodecParserContext {
      * For audio, this is in units of 1 / AVCodecContext.sample_rate.
      * For all other types, this is in units of AVCodecContext.time_base.
      */
-    int duration;
+    int time;
 
     enum AVFieldOrder field_order;
 
@@ -3116,14 +3116,14 @@ int avcodec_fill_audio_frame(AVFrame *frame, int nb_channels,
 void avcodec_flush_buffers(AVCodecContext *avctx);
 
 /**
- * Return audio frame duration.
+ * Return audio frame time.
  *
  * @param avctx        codec context
  * @param frame_bytes  size of the frame, or 0 if unknown
- * @return             frame duration, in samples, if known. 0 if not able to
+ * @return             frame time, in samples, if known. 0 if not able to
  *                     determine.
  */
-int av_get_audio_frame_duration(AVCodecContext *avctx, int frame_bytes);
+int av_get_audio_frame_time(AVCodecContext *avctx, int frame_bytes);
 
 /* memory */
 

@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 
 #include "aura/graphics/draw2d/object.h"
@@ -15,12 +15,13 @@ namespace draw2d_gdiplus
 
 
          object();
-         virtual ~object();
+         ~object() override;
 
-#ifdef DEBUG
-         void assert_ok() const override;
-         void dump(dump_context & dumpcontext) const override;
-#endif
+//#ifdef DEBUG
+//         void assert_ok() const override;
+//         void dump(dump_context & dumpcontext) const override;
+//#endif
+
 
    };
 

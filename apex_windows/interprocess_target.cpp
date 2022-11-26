@@ -178,7 +178,7 @@ namespace apex_windows
    //}
 
 
-   //void interprocess_caller::send(const ::string & strMessage, const duration & durationTimeout)
+   //void interprocess_caller::send(const ::string & strMessage, const class time & timeTimeout)
    //{
 
    //   if (!is_tx_ok())
@@ -197,7 +197,7 @@ namespace apex_windows
 
    //   HWND hwnd = get_hwnd();
 
-   //   if (durationTimeout.is_pos_infinity())
+   //   if (timeTimeout.is_pos_infinity())
    //   {
 
    //      SendMessage(hwnd, WM_COPYDATA, (WPARAM)0, (LPARAM)&cds);
@@ -208,7 +208,7 @@ namespace apex_windows
 
    //      DWORD_PTR dwptr;
 
-   //      if (!::SendMessageTimeout(hwnd, WM_COPYDATA, (WPARAM)0, (LPARAM)&cds, SMTO_ABORTIFHUNG, (class ::wait)durationTimeout, &dwptr))
+   //      if (!::SendMessageTimeout(hwnd, WM_COPYDATA, (WPARAM)0, (LPARAM)&cds, SMTO_ABORTIFHUNG, (class ::wait)timeTimeout, &dwptr))
    //      {
 
    //         throw ::exception(error_failed);
@@ -231,7 +231,7 @@ namespace apex_windows
    //}
 
 
-   //void interprocess_caller::send(int message, void * pdata, int len, const duration & durationTimeout)
+   //void interprocess_caller::send(int message, void * pdata, int len, const class time & timeTimeout)
    //{
 
    //   if (message == 0x80000000)
@@ -255,7 +255,7 @@ namespace apex_windows
    //   cds.lpData = (void *)pdata;
 
 
-   //   if (durationTimeout.is_pos_infinity())
+   //   if (timeTimeout.is_pos_infinity())
    //   {
 
    //      if (message >= WM_APP)
@@ -277,7 +277,7 @@ namespace apex_windows
 
    //      DWORD_PTR dwptr;
 
-   //      if (!::SendMessageTimeout((HWND)get_hwnd(), WM_COPYDATA, (WPARAM)0, (LPARAM)&cds, SMTO_BLOCK, (class ::wait)durationTimeout, &dwptr))
+   //      if (!::SendMessageTimeout((HWND)get_hwnd(), WM_COPYDATA, (WPARAM)0, (LPARAM)&cds, SMTO_BLOCK, (class ::wait)timeTimeout, &dwptr))
    //      {
 
    //         throw ::exception(error_failed);

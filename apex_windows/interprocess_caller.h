@@ -29,8 +29,8 @@ namespace apex_windows
       void close() override;
 
 
-      void call(const ::string & strUri, const duration & durationTimeout) override;
-      //void send(int message, void * pdata, int len, const duration & durationTimeout) override;
+      void call(const ::string & strUri, const class time & timeTimeout) override;
+      //void send(int message, void * pdata, int len, const class time & timeTimeout) override;
 
 
       bool is_caller_ok() override;

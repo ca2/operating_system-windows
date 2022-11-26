@@ -1,4 +1,4 @@
-#include "framework.h"
+﻿#include "framework.h"
 #include "bitmap.h"
 #include "acme/exception/exception.h"
 #include "acme/exception/interface_only.h"
@@ -301,38 +301,38 @@ namespace draw2d_gdiplus
    }
 
 
-#ifdef DEBUG
-   /////////////////////////////////////////////////////////////////////////////
-
-
-   void bitmap::dump(dump_context & dumpcontext) const
-   {
-      ::draw2d::object::dump(dumpcontext);
-
-      /*         if (get_handle() == nullptr)
-                  return;
-
-               if (!afxData.bWin95 && ::GetObjectType(get_handle()) != OBJ_BITMAP)
-               {
-                  // not a valid object
-                  dumpcontext << "has ILLEGAL HBITMAP!";
-                  return;
-               }*/
-
-      /*BITMAP bm;
-      VERIFY(GetObject(sizeof(bm), &bm));
-      dumpcontext << "bm.bmType = " << bm.bmType;
-      dumpcontext << "\nbm.bmHeight = " << bm.bmHeight;
-      dumpcontext << "\nbm.bmWidth = " << bm.bmWidth;
-      dumpcontext << "\nbm.bmWidthBytes = " << bm.bmWidthBytes;
-      dumpcontext << "\nbm.bmPlanes = " << bm.bmPlanes;
-      dumpcontext << "\nbm.bmBitsPixel = " << bm.bmBitsPixel;
-      */
-      dumpcontext << "\n";
-   }
-
-
-#endif
+//#ifdef DEBUG
+//   /////////////////////////////////////////////////////////////////////////////
+//
+//
+//   void bitmap::dump(dump_context & dumpcontext) const
+//   {
+//      ::draw2d::object::dump(dumpcontext);
+//
+//      /*         if (get_handle() == nullptr)
+//                  return;
+//
+//               if (!afxData.bWin95 && ::GetObjectType(get_handle()) != OBJ_BITMAP)
+//               {
+//                  // not a valid object
+//                  dumpcontext << "has ILLEGAL HBITMAP!";
+//                  return;
+//               }*/
+//
+//      /*BITMAP bm;
+//      VERIFY(GetObject(sizeof(bm), &bm));
+//      dumpcontext << "bm.bmType = " << bm.bmType;
+//      dumpcontext << "\nbm.bmHeight = " << bm.bmHeight;
+//      dumpcontext << "\nbm.bmWidth = " << bm.bmWidth;
+//      dumpcontext << "\nbm.bmWidthBytes = " << bm.bmWidthBytes;
+//      dumpcontext << "\nbm.bmPlanes = " << bm.bmPlanes;
+//      dumpcontext << "\nbm.bmBitsPixel = " << bm.bmBitsPixel;
+//      */
+//      dumpcontext << "\n";
+//   }
+//
+//
+//#endif
 
 
    void bitmap::attach(void * posdata)

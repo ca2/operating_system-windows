@@ -388,7 +388,7 @@ typedef struct AVPacket {
      * Duration of this packet in AVStream->time_base units, 0 if unknown.
      * Equals next_pts - this_pts in presentation order.
      */
-    int64_t duration;
+    int64_t time;
 
     int64_t pos;                            ///< byte position in stream, -1 if unknown
 
@@ -703,7 +703,7 @@ int av_packet_make_refcounted(AVPacket *pkt);
 int av_packet_make_writable(AVPacket *pkt);
 
 /**
- * Convert valid timing fields (timestamps / durations) in a packet from one
+ * Convert valid timing fields (timestamps / times) in a packet from one
  * timebase to another. Timestamps with unknown values (AV_NOPTS_VALUE) will be
  * ignored.
  *

@@ -94,7 +94,7 @@ namespace acme_windows
 
       virtual size_t available () override;
 
-      virtual bool waitReadable (::duration timeout);
+      virtual bool waitReadable (class ::time timeout);
 
       virtual void waitByteTimes (size_t count) override;
 
@@ -108,7 +108,7 @@ namespace acme_windows
 
       virtual void _flushOutput () override;
 
-      virtual void sendBreak (int duration) override;
+      virtual void sendBreak (int time) override;
 
       virtual void setBreak (bool level) override;
 

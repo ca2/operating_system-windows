@@ -9,7 +9,7 @@
 #include "acme/filesystem/file/status.h"
 #include "acme/filesystem/filesystem/acme_directory.h"
 #include "acme/filesystem/filesystem/acme_path.h"
-#include "acme/operating_system/time.h"
+//#include "acme/operating_system/time.h"
 #include "acme/parallelization/manual_reset_event.h"
 #include "acme/platform/node.h"
 #include "acme/primitive/collection/_container.h"
@@ -2671,20 +2671,20 @@ retry:
    }
 
 
-   void os_context::hidden_run(const class ::wait & wait, const ::file::path& pathParam, const string& strParams, const ::file::path& pathFolder)
+   void os_context::hidden_run(const class time & timeWait, const ::file::path& pathParam, const string& strParams, const ::file::path& pathFolder)
    {
 
       auto pevent = __new(manual_reset_event);
 
       auto path = m_pcontext->m_papexcontext->defer_process_path(pathParam);
 
-      ::duration durationStart;
+      class ::time timeStart;
 
-      durationStart.Now();
+      timeStart.Now();
 
       bool bSuccess = true;
 
-      fork([pevent, &bSuccess, durationStart, wait, path, pathFolder, strParams]()
+      fork([pevent, &bSuccess, timeStart, timeWait, path, pathFolder, strParams]()
          {
 
             ::CoInitializeEx(nullptr, COINIT_APARTMENTTHREADED | COINIT_DISABLE_OLE1DDE);
@@ -2739,15 +2739,13 @@ retry:
 
             ShellExecuteExW(&si);
 
-            ::duration durationWait(wait);
+            auto dwWait = ::windows::wait(timeWait);
 
-            auto iMillisecondWait = durationWait.integral_millisecond().m_i;
+            auto timeElapsed(timeStart.elapsed());
 
-            ::duration durationElapsed(durationStart.elapsed());
+            auto dwElapsed = ::windows::wait(timeElapsed);
 
-            auto iMillisecondElapsed = durationElapsed.integral_millisecond().m_i;
-
-            auto i = iMillisecondWait - iMillisecondElapsed;
+            auto i = dwWait - dwElapsed;
 
             if (i < 0)
             {
@@ -2772,7 +2770,7 @@ retry:
 
          });
 
-      pevent->wait(wait);
+      pevent->wait(timeWait);
 
       if (bSuccess)
       {

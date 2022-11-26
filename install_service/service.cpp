@@ -238,7 +238,7 @@ unsigned long priority_index_to_constant(int index) {
   return NORMAL_PRIORITY_CLASS;
 }
 
-static inline unsigned long throttle_::durations(unsigned long throttle) {
+static inline unsigned long throttle_::times(unsigned long throttle) {
   /* pow() operates on doubles. */
   unsigned long ret = 1; for (unsigned long i = 1; i < throttle; i++) ret *= 2;
   return ret * 1000;
@@ -1549,7 +1549,7 @@ unsigned long WINAPI service_control_handler(unsigned long control, unsigned lon
       }
       /* We can't continue if the application is running! */
       if (! service->process_handle) service->status.dwCurrentState = SERVICE_CONTINUE_PENDING;
-      service->status.dwWaitHint = throttle_::durations(service->throttle) + NSSM_WAITHINT_MARGIN;
+      service->status.dwWaitHint = throttle_::times(service->throttle) + NSSM_WAITHINT_MARGIN;
       log_event(EVENTLOG_INFORMATION_TYPE, NSSM_EVENT_RESET_THROTTLE, service->name, 0);
       SetServiceStatus(service->status_handle, &service->status);
       return NO_ERROR;
@@ -1678,11 +1678,11 @@ int start_service(nssm_service_t *service) {
   */
   unsigned long delay = service->throttle_delay;
   if (delay > NSSM_SERVICE_STATUS_DEADLINE) {
-    TCHAR delay_::durations[16];
-    _sntprintf_s(delay_::durations, _countof(delay_::durations), _TRUNCATE, _T("%lu"), delay);
-    TCHAR deadline_::durations[16];
-    _sntprintf_s(deadline_::durations, _countof(deadline_::durations), _TRUNCATE, _T("%lu"), NSSM_SERVICE_STATUS_DEADLINE);
-    log_event(EVENTLOG_WARNING_TYPE, NSSM_EVENT_STARTUP_DELAY_TOO_LONG, service->name, delay_::durations, NSSM, deadline_::durations, 0);
+    TCHAR delay_::times[16];
+    _sntprintf_s(delay_::times, _countof(delay_::times), _TRUNCATE, _T("%lu"), delay);
+    TCHAR deadline_::times[16];
+    _sntprintf_s(deadline_::times, _countof(deadline_::times), _TRUNCATE, _T("%lu"), NSSM_SERVICE_STATUS_DEADLINE);
+    log_event(EVENTLOG_WARNING_TYPE, NSSM_EVENT_STARTUP_DELAY_TOO_LONG, service->name, delay_::times, NSSM, deadline_::times, 0);
     delay = NSSM_SERVICE_STATUS_DEADLINE;
   }
   unsigned long deadline = WaitForSingleObject(service->process_handle, delay);
@@ -1852,20 +1852,20 @@ void throttle_restart(nssm_service_t *service) {
   if (! service->throttle++) return;
 
   unsigned long ms;
-  unsigned long throttle_ms = throttle_::durations(service->throttle);
-  TCHAR threshold[8], ::durations[8];
+  unsigned long throttle_ms = throttle_::times(service->throttle);
+  TCHAR threshold[8], ::times[8];
 
   if (service->restart_delay > throttle_ms) ms = service->restart_delay;
   else ms = throttle_ms;
 
   if (service->throttle > 7) service->throttle = 8;
 
-  _sntprintf_s(::durations, _countof(::durations), _TRUNCATE, _T("%lu"), ms);
+  _sntprintf_s(::times, _countof(::times), _TRUNCATE, _T("%lu"), ms);
 
-  if (service->throttle == 1 && service->restart_delay > throttle_ms) log_event(EVENTLOG_INFORMATION_TYPE, NSSM_EVENT_RESTART_DELAY, service->name, ::durations, 0);
+  if (service->throttle == 1 && service->restart_delay > throttle_ms) log_event(EVENTLOG_INFORMATION_TYPE, NSSM_EVENT_RESTART_DELAY, service->name, ::times, 0);
   else {
     _sntprintf_s(threshold, _countof(threshold), _TRUNCATE, _T("%lu"), service->throttle_delay);
-    log_event(EVENTLOG_WARNING_TYPE, NSSM_EVENT_THROTTLED, service->name, threshold, ::durations, 0);
+    log_event(EVENTLOG_WARNING_TYPE, NSSM_EVENT_THROTTLED, service->name, threshold, ::times, 0);
   }
 
   if (use_critical_section) EnterCriticalSection(&service->throttle_section);
@@ -1890,22 +1890,22 @@ void throttle_restart(nssm_service_t *service) {
 
 /*
   When responding to a stop (or any other) request we need to set dwWaitHint to
-  the number of ::durations we expect the operation to take, and optionally
-  increase dwCheckPoint.  If dwWaitHint ::durations elapses without the
+  the number of ::times we expect the operation to take, and optionally
+  increase dwCheckPoint.  If dwWaitHint ::times elapses without the
   operation completing or dwCheckPoint increasing, the system will consider the
   service to be hung.
 
   However the system will consider the service to be hung after 30000
-  ::durations regardless of the value of dwWaitHint if dwCheckPoint has not
+  ::times regardless of the value of dwWaitHint if dwCheckPoint has not
   changed.  Therefore if we want to wait longer than that we must periodically
   increase dwCheckPoint.
 
-  Furthermore, it will consider the service to be hung after 60000 ::durations
+  Furthermore, it will consider the service to be hung after 60000 ::times
   regardless of the value of dwCheckPoint unless dwWaitHint is increased every
   time dwCheckPoint is also increased.
 
   Our strategy then is to retrieve the initial dwWaitHint and wait for
-  NSSM_SERVICE_STATUS_DEADLINE ::durations.  If the process is still running
+  NSSM_SERVICE_STATUS_DEADLINE ::times.  If the process is still running
   and we haven't finished waiting we increment dwCheckPoint and add whichever is
   smaller of NSSM_SERVICE_STATUS_DEADLINE or the remaining timeout to
   dwWaitHint.
@@ -1921,9 +1921,9 @@ int await_shutdown(nssm_service_t *service, TCHAR *function_name, unsigned long 
   unsigned long waithint;
   unsigned long ret;
   unsigned long waited;
-  TCHAR interval_::durations[16];
-  TCHAR timeout_::durations[16];
-  TCHAR waited_::durations[16];
+  TCHAR interval_::times[16];
+  TCHAR timeout_::times[16];
+  TCHAR waited_::times[16];
   TCHAR *function = function_name;
 
   /* Add brackets to function name. */
@@ -1933,7 +1933,7 @@ int await_shutdown(nssm_service_t *service, TCHAR *function_name, unsigned long 
     if (_sntprintf_s(func, funclen, _TRUNCATE, _T("%s()"), function_name) > -1) function = func;
   }
 
-  _sntprintf_s(timeout_::durations, _countof(timeout_::durations), _TRUNCATE, _T("%lu"), timeout);
+  _sntprintf_s(timeout_::times, _countof(timeout_::times), _TRUNCATE, _T("%lu"), timeout);
 
   waithint = service->status.dwWaitHint;
   waited = 0;
@@ -1947,9 +1947,9 @@ int await_shutdown(nssm_service_t *service, TCHAR *function_name, unsigned long 
     SetServiceStatus(service->status_handle, &service->status);
 
     if (waited) {
-      _sntprintf_s(waited_::durations, _countof(waited_::durations), _TRUNCATE, _T("%lu"), waited);
-      _sntprintf_s(interval_::durations, _countof(interval_::durations), _TRUNCATE, _T("%lu"), interval);
-      log_event(EVENTLOG_INFORMATION_TYPE, NSSM_EVENT_AWAITING_SHUTDOWN, function, service->name, waited_::durations, interval_::durations, timeout_::durations, 0);
+      _sntprintf_s(waited_::times, _countof(waited_::times), _TRUNCATE, _T("%lu"), waited);
+      _sntprintf_s(interval_::times, _countof(interval_::times), _TRUNCATE, _T("%lu"), interval);
+      log_event(EVENTLOG_INFORMATION_TYPE, NSSM_EVENT_AWAITING_SHUTDOWN, function, service->name, waited_::times, interval_::times, timeout_::times, 0);
     }
 
     switch (WaitForSingleObject(service->process_handle, interval)) {

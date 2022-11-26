@@ -47,7 +47,7 @@ public:
       ptimer->on_millis_timer_step();
    }
 
-   bool wait(int ::duration)
+   bool wait(int class ::time)
    {
 
       ::ResetEvent(gDoneEvent);
@@ -55,7 +55,7 @@ public:
       HANDLE hTimer = nullptr;
 
       // Set a timer to call the timer routine in 10 seconds.
-      if(!CreateTimerQueueTimer(&hTimer,hTimerQueue,(WAITORTIMERCALLBACK)TimerRoutine,this,::duration,0,0))
+      if(!CreateTimerQueueTimer(&hTimer,hTimerQueue,(WAITORTIMERCALLBACK)TimerRoutine,this,class ::time,0,0))
       {
          return false;
       }
@@ -67,7 +67,7 @@ public:
 
       return true;
    }
-   bool timer(int ::duration)
+   bool timer(int class ::time)
    {
 
       ::ResetEvent(gDoneEvent);
@@ -75,7 +75,7 @@ public:
       HANDLE hTimer = nullptr;
 
       // Set a timer to call the timer routine in 10 seconds.
-      if(!CreateTimerQueueTimer(&hTimer,hTimerQueue,(WAITORTIMERCALLBACK)TimerRoutine,this,::duration,::duration,0))
+      if(!CreateTimerQueueTimer(&hTimer,hTimerQueue,(WAITORTIMERCALLBACK)TimerRoutine,this,class ::time,class ::time,0))
       {
          return false;
       }
@@ -158,12 +158,12 @@ namespace multimedia
          virtual ~out();
 
 
-         void     out_start(const ::duration & position);
+         void     out_start(const class ::time & position);
          virtual bool  on_run_step();
          void install_message_routing(::channel * pchannel);
 
-         virtual ::duration out_get_time();
-         ::duration out_get_time();
+         virtual class ::time out_get_time();
+         class ::time out_get_time();
          virtual void out_buffer_ready(int iBuffer);
          //virtual void out_buffer_ready(LPWAVEHDR lpwavehdr);
 

@@ -1,4 +1,4 @@
-#include "framework.h"
+﻿#include "framework.h"
 #include "brush.h"
 #include "image.h"
 #include "path.h"
@@ -27,16 +27,16 @@ namespace draw2d_gdiplus
    }
 
 
-#ifdef DEBUG
-
-   void brush::dump(dump_context & dumpcontext) const
-   {
-
-      ::draw2d::object::dump(dumpcontext);
-
-   }
-
-#endif
+//#ifdef DEBUG
+//
+//   void brush::dump(dump_context & dumpcontext) const
+//   {
+//
+//      ::draw2d::object::dump(dumpcontext);
+//
+//   }
+//
+//#endif
 
    void brush::create(::draw2d::graphics * pgraphics, ::i8 iCreate)
    {

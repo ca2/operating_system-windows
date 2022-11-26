@@ -103,7 +103,7 @@
 //   if (!(timer = CreateWaitableTimer(nullptr, true, nullptr)))
 //   {
 //
-//      sleep((const ::duration &) nanosecond);
+//      sleep((const ::time &) nanosecond);
 //
 //      return;
 //
@@ -133,7 +133,7 @@
 //}
 
 
-//void sleep(const ::duration & dur)
+//void sleep(const class time & time)
 //{
 //
 //   nanosleep(dur.total_nanoseconds());

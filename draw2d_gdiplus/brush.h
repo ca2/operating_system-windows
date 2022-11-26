@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 
 #include "aura/graphics/draw2d/brush.h"
@@ -21,13 +21,13 @@ namespace draw2d_gdiplus
 
 
       brush();
-      virtual ~brush();
+      ~brush() override;
 
-#ifdef DEBUG
-
-      void dump(dump_context & dumpcontext) const override;
-
-#endif
+//#ifdef DEBUG
+//
+//      void dump(dump_context & dumpcontext) const override;
+//
+//#endif
 
       //virtual void * get_os_data() const;
 

@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 
 #include "aura/graphics/write_text/font.h"
@@ -24,13 +24,13 @@ namespace draw2d_gdiplus
       ~font() override;
 
 
-#ifdef DEBUG
-
-      
-      void dump(dump_context & dumpcontext) const override;
-
-
-#endif
+//#ifdef DEBUG
+//
+//      
+//      void dump(dump_context & dumpcontext) const override;
+//
+//
+//#endif
 
 
       virtual void create(::draw2d::graphics * pgraphics, ::i8 iCreate) override;

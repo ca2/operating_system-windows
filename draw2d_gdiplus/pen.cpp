@@ -1,4 +1,4 @@
-#include "framework.h"
+﻿#include "framework.h"
 #include "pen.h"
 #include "brush.h"
 
@@ -29,37 +29,37 @@ namespace draw2d_gdiplus
 
 
 
-#ifdef DEBUG
-
-   void pen::dump(dump_context & dumpcontext) const
-   {
-      ::draw2d::object::dump(dumpcontext);
-
-      /*      if (get_handle() == nullptr)
-               return;
-
-            if (!afxData.bWin95 && ::GetObjectType(get_handle()) != OBJ_PEN)
-            {
-               // not a valid object
-               dumpcontext << "has ILLEGAL HPEN!";
-               return;
-            }
-
-            LOGPEN point_i32;
-
-            VERIFY(GetObject(sizeof(point), &lp));
-
-            dumpcontext << "lgpn.lopnStyle = " << point.lopnStyle;
-
-            dumpcontext << "\nlgpn.lopnWidth.x (width) = " << point.lopnWidth.x;
-
-            dumpcontext << "\nlgpn.lopnColor = " << (void *)(uptr)point.lopnColor;
-
-
-            dumpcontext << "\n";*/
-   }
-
-#endif
+//#ifdef DEBUG
+//
+//   void pen::dump(dump_context & dumpcontext) const
+//   {
+//      ::draw2d::object::dump(dumpcontext);
+//
+//      /*      if (get_handle() == nullptr)
+//               return;
+//
+//            if (!afxData.bWin95 && ::GetObjectType(get_handle()) != OBJ_PEN)
+//            {
+//               // not a valid object
+//               dumpcontext << "has ILLEGAL HPEN!";
+//               return;
+//            }
+//
+//            LOGPEN point_i32;
+//
+//            VERIFY(GetObject(sizeof(point), &lp));
+//
+//            dumpcontext << "lgpn.lopnStyle = " << point.lopnStyle;
+//
+//            dumpcontext << "\nlgpn.lopnWidth.x (width) = " << point.lopnWidth.x;
+//
+//            dumpcontext << "\nlgpn.lopnColor = " << (void *)(uptr)point.lopnColor;
+//
+//
+//            dumpcontext << "\n";*/
+//   }
+//
+//#endif
 
 
 

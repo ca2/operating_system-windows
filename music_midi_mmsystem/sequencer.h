@@ -108,15 +108,15 @@ namespace music
             virtual void on_set_position() override;
 
             
-            //virtual void karaoke_get_time(::duration& time);
+            //virtual void karaoke_get_time(class ::time& time);
 
             
             virtual ::e_status      get_position(musical_tick & tk);
             virtual musical_tick    get_position();
 
 
-            virtual ::e_status get_time_position(::duration & duration);
-            virtual ::duration      get_time_position() override;
+            virtual ::e_status get_time_position(class ::time & time);
+            virtual class ::time      get_time_position() override;
 
 
             bool IsPlaying();
@@ -128,7 +128,7 @@ namespace music
 
 
             virtual void midi_out_open();
-            virtual void midi_out_long_message(const block & block, const ::duration & millisWait = 0_ms);
+            virtual void midi_out_long_message(const block & block, const class ::time & millisWait = 0_ms);
 
             virtual void midi_out_xg_mode_on();
             virtual void midi_out_xg_mode_reset();

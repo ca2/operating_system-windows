@@ -56,7 +56,7 @@ namespace multimedia
 
       i32 out::run()
       {
-         m_durationRunLock = ::duration(1);
+         m_timeRunLock = ::time(1);
          while(m_bRun)
          {
             ::thread::run();
@@ -489,7 +489,7 @@ Opened:
 
       }
 
-      void     out::out_start(const ::duration & position)
+      void     out::out_start(const ::time & position)
       {
 
          single_lock sLock(&m_mutex,true);
@@ -549,7 +549,7 @@ Opened:
       }
 
 
-      /*::duration out::GetPositionMillisForSynch()
+      /*::time out::GetPositionMillisForSynch()
       {
          i64 dwMillis = GetPositionMillis();
          i64 dwPosition = m_pprebuffer->m_position * 8;
@@ -562,7 +562,7 @@ Opened:
             return dwMillis + dwPosition - ((m_dwLostSampleCount) * 1000 / m_pwaveformat->nSamplesPerSec);
       }*/
 
-      ::duration out::out_get_time()
+      ::time out::out_get_time()
       {
 
          single_lock sLock(&m_mutex, true);
@@ -614,16 +614,16 @@ Opened:
 
       }
 
-      /*::duration out::get_position_for_synch()
+      /*::time out::get_position_for_synch()
       {
-         ::duration position = get_position();
+         ::time position = get_position();
          if(m_pprebuffer != nullptr && m_pprebuffer->m_pdecoder != nullptr)
             return m_pprebuffer->m_position + position - m_pprebuffer->m_pdecoder->audio_plugin_get_lost_position_offset(position) - m_dwLostSampleCount * m_pwaveformat->wBitsPerSample * m_pwaveformat->nChannels / 8;
          else
             return m_pprebuffer->m_position + position - m_dwLostSampleCount * m_pwaveformat->wBitsPerSample * m_pwaveformat->nChannels / 8;
       }*/
 
-      ::duration out::out_get_time()
+      ::time out::out_get_time()
       {
 
          single_lock sLock(&m_mutex, true);
@@ -658,7 +658,7 @@ Opened:
          //   }
          //   if(mmt.wType == TIME_MS)
          //   {
-         //      ::duration position = (u32) mmt.u.ms;
+         //      ::time position = (u32) mmt.u.ms;
          //      position *= m_pwaveformat->wBitsPerSample * m_pwaveformat->nChannels * m_pwaveformat->nSamplesPerSec;
          //      position /= 8 * 1000;
          //      return position;

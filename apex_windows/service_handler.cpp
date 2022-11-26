@@ -157,7 +157,7 @@ namespace apex_windows
       s_pservicehandler->stop_service();
       //s_pservicehandler->m_ = e_service_status_stopping;
 
-      //s_pservicehandler->m_stopped.wait(::duration((u32)m_dwStopTimeout));
+      //s_pservicehandler->m_stopped.wait(::time((u32)m_dwStopTimeout));
 
    }
 

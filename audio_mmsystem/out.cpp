@@ -96,7 +96,7 @@ namespace audio_mmsystem
 
       }
 
-      m_duration = 0_s;
+      m_time = 0_s;
 
       MMRESULT mmresult = MMSYSERR_NOERROR;
 
@@ -517,7 +517,7 @@ namespace audio_mmsystem
    }
 
 
-   ::duration out::out_get_position()
+   ::time out::out_get_position()
    {
 
       return device_out_get_time();
@@ -525,15 +525,15 @@ namespace audio_mmsystem
    }
 
 
-   ::duration out::out_get_time()
+   ::time out::out_get_time()
    {
 
-      return m_durationStart + device_out_get_time();
+      return m_timeStart + device_out_get_time();
 
    }
 
 
-   ::duration out::device_out_get_time()
+   ::time out::device_out_get_time()
    {
 
       synchronous_lock synchronouslock(synchronization());
@@ -580,7 +580,7 @@ namespace audio_mmsystem
    }
 
 
-   //::duration out::out_get_time()
+   //::time out::out_get_time()
    //{
 
    //   return m_positionStart + device_out_get_time();
@@ -588,7 +588,7 @@ namespace audio_mmsystem
    //}
 
 
-   //::duration out::device_out_get_time()
+   //::time out::device_out_get_time()
    //{
 
    //   synchronous_lock synchronouslock(synchronization());
@@ -627,7 +627,7 @@ namespace audio_mmsystem
    //      if(mmt.wType == TIME_MS)
    //      {
 
-   //         ::duration position = (u32) mmt.u.ms;
+   //         ::time position = (u32) mmt.u.ms;
 
    //         position *= m_pwaveformat->nSamplesPerSec;
 

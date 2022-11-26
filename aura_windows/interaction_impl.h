@@ -49,7 +49,7 @@ namespace aura_windows
 
       ::e_display                               m_edisplayLayout;
       rectangle_i64                             m_rectangleLastPos;
-      ::duration                                m_durationLastPos;
+      class ::time                                m_timeLastPos;
       string                                    m_strDebug;
 
       ::point_i32                               m_pointCursor;
@@ -313,7 +313,7 @@ namespace aura_windows
 
 //#if(WINVER >= 0x0500)
 //
-//      virtual bool AnimateWindow(const ::duration & duration, u32 dwFlags);
+//      virtual bool AnimateWindow(const class time & time, u32 dwFlags);
 //
 //#endif   // WINVER >= 0x0500
 //
@@ -453,7 +453,7 @@ namespace aura_windows
 //
 //#if(WINVER >= 0x0500)
 //
-//      virtual bool FlashWindowEx(u32 dwFlags, ::u32  uCount, ::duration tickTimeout);
+//      virtual bool FlashWindowEx(u32 dwFlags, ::u32  uCount, class ::time tickTimeout);
 //
 //#endif   // WINVER >= 0x0500
 //

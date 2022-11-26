@@ -184,7 +184,7 @@ namespace acme_windows
 
 
       void call_async(const ::string & pszPath, const ::string & pszParam, const ::string & pszDir, ::e_display edisplay, bool bPrivileged, unsigned int * puiPid = nullptr) override;
-      void call_sync(const ::string & pszPath, const ::string & pszParam, const ::string & pszDir, ::e_display edisplay, const ::duration & durationTimeout, ::property_set & set, int * piExitCode) override;
+      void call_sync(const ::string & pszPath, const ::string & pszParam, const ::string & pszDir, ::e_display edisplay, const class time & timeTimeout, ::property_set & set, int * piExitCode) override;
 
 
       void launch_application(::particle * pparticle, const ::string & strAppId, const ::string & strParams, int iBitCount) override;
@@ -192,13 +192,13 @@ namespace acme_windows
 
       //void shell_open(const ::file::path & path, const string & strParams = "", const ::file::path & pathFolder = {}) override;
       //void open_url(const ::string & strUrl) override; //
-      void command_system(string_array & straOutput, int & iExitCode, const char * psz, enum_command_system ecommandsystem = e_command_system_none, const ::duration & durationTimeout = ::duration::infinite(), ::particle * pparticleSynchronization = nullptr, ::file::file * pfileLog = nullptr) override;
+      void command_system(string_array & straOutput, int & iExitCode, const char * psz, enum_command_system ecommandsystem = e_command_system_none, const class time & timeTimeout = ::time::infinite(), ::particle * pparticleSynchronization = nullptr, ::file::file * pfileLog = nullptr) override;
 
       void shell_execute_async(const char * pszFile, const char * pszParams) override;
-      void shell_execute_sync(const char * pszFile, const char * pszParams, ::duration durationTimeout = minute()) override; 
+      void shell_execute_sync(const char * pszFile, const char * pszParams, const class time & timeTimeout = 1_minute) override; 
 
       void root_execute_async(const char * pszFile, const char * pszParams) override;
-      void root_execute_sync(const char * pszFile, const char * pszParams, ::duration durationTimeout = minute()) override;
+      void root_execute_sync(const char * pszFile, const char * pszParams, const class time & timeTimeout = 1_minute) override;
 
                bool set_process_priority(::enum_priority epriority) override;
                 ::string get_command_line() override;

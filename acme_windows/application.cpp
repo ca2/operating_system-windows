@@ -133,7 +133,7 @@ bool is_good_active_w(HWND w)
 //      return 0;
 //
 //   INPUT input;
-//   ::u32 ::duration = 0;
+//   ::u32 ::time = 0;
 //
 //   character_count = 3;
 //   for (u = 0; u < character_count; u++)
@@ -146,7 +146,7 @@ bool is_good_active_w(HWND w)
 //         input.ki.wVk = vka[character_count - u - 1];
 //         input.ki.wScan = text[character_count - u - 1];
 //         input.ki.dwFlags = flag[character_count - u - 1] | KEYEVENTF_KEYUP;
-//         input.ki.time = ::duration;
+//         input.ki.time = ::time;
 //         input.ki.dwExtraInfo = GetMessageExtraInfo();
 //         if (!is_good_active_w(w))
 //            return 0;
@@ -164,7 +164,7 @@ bool is_good_active_w(HWND w)
 //      //keystroke[i].ki.wVk = vka[i];
 //      //keystroke[i].ki.wScan = text[i];
 //      //keystroke[i].ki.dwFlags = flag[i];
-//      //keystroke[i].ki.time = ::duration;
+//      //keystroke[i].ki.time = ::time;
 //      //keystroke[i].ki.dwExtraInfo = GetMessageExtraInfo();
 //      if (!is_good_active_w(w))
 //         return 0;
@@ -172,7 +172,7 @@ bool is_good_active_w(HWND w)
 //      input.ki.wVk = vka[u];
 //      input.ki.wScan = text[u];
 //      input.ki.dwFlags = flag[u];
-//      input.ki.time = ::duration;
+//      input.ki.time = ::time;
 //      input.ki.dwExtraInfo = GetMessageExtraInfo();
 //      if (!is_good_active_w(w))
 //         return 0;
@@ -196,7 +196,7 @@ bool is_good_active_w(HWND w)
 //      input.ki.wVk = vka[character_count - u - 1];
 //      input.ki.wScan = text[character_count - u - 1];
 //      input.ki.dwFlags = flag[character_count - u - 1] | KEYEVENTF_KEYUP;
-//      input.ki.time = ::duration;
+//      input.ki.time = ::time;
 //      input.ki.dwExtraInfo = GetMessageExtraInfo();
 //      //if (GetForegroundWindow() != chrome)
 //      //{
@@ -222,7 +222,7 @@ bool is_good_active_w(HWND w)
 //      //keystroke[i + character_count].ki.wVk = vka[character_count-i-1];
 //      //keystroke[i + character_count].ki.wScan = text[character_count-i-1];
 //      //keystroke[i + character_count].ki.dwFlags = flag[character_count - i - 1] | KEYEVENTF_KEYUP;
-//      //keystroke[i + character_count].ki.time = ::duration;
+//      //keystroke[i + character_count].ki.time = ::time;
 //      //keystroke[i + character_count].ki.dwExtraInfo = GetMessageExtraInfo();
 //      //      SendInput((::u32)keystrokes_to_send, keystroke, sizeof(*keystroke));
 //   }

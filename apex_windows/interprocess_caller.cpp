@@ -1,4 +1,4 @@
-// created by Camilo 2021-01-31 05:36 BRT <3CamiloSasukeThomasBorregaardSoerensen
+﻿// created by Camilo 2021-01-31 05:36 BRT <3CamiloSasukeThomasBorregaardSoerensen
 // From interprocess_communcation by camilo on 2022-10-11 15:33 <3ThomasBorregaardSorensen!!
 #include "framework.h"
 #include "interprocess_caller.h"
@@ -158,7 +158,7 @@ namespace apex_windows
    }
 
 
-   void interprocess_caller::call(const ::string & strUri, const duration & durationTimeout)
+   void interprocess_caller::call(const ::string & strUri, const class time & timeTimeout)
    {
 
       if (!is_caller_ok())
@@ -177,7 +177,7 @@ namespace apex_windows
 
       HWND hwnd = get_hwnd();
 
-      if (durationTimeout.is_pos_infinity())
+      if (timeTimeout.is_infinite())
       {
 
          SendMessage(hwnd, WM_COPYDATA, (WPARAM)0, (LPARAM)&cds);
@@ -188,7 +188,7 @@ namespace apex_windows
 
          DWORD_PTR dwptr;
 
-         if (!::SendMessageTimeout(hwnd, WM_COPYDATA, (WPARAM)0, (LPARAM)&cds, SMTO_ABORTIFHUNG, (class ::wait)durationTimeout, &dwptr))
+         if (!::SendMessageTimeout(hwnd, WM_COPYDATA, (WPARAM)0, (LPARAM)&cds, SMTO_ABORTIFHUNG, ::windows::wait(timeTimeout), &dwptr))
          {
 
             throw ::exception(error_failed);
@@ -211,7 +211,7 @@ namespace apex_windows
    }
 
 
-   //void interprocess_caller::send(int message, void * pdata, int len, const duration & durationTimeout)
+   //void interprocess_caller::send(int message, void * pdata, int len, const class time & timeTimeout)
    //{
 
    //   if (message == 0x80000000)
@@ -235,7 +235,7 @@ namespace apex_windows
    //   cds.lpData = (void *)pdata;
 
 
-   //   if (durationTimeout.is_pos_infinity())
+   //   if (timeTimeout.is_pos_infinity())
    //   {
 
    //      if (message >= WM_APP)
@@ -257,7 +257,7 @@ namespace apex_windows
 
    //      DWORD_PTR dwptr;
 
-   //      if (!::SendMessageTimeout((HWND)get_hwnd(), WM_COPYDATA, (WPARAM)0, (LPARAM)&cds, SMTO_BLOCK, (class ::wait)durationTimeout, &dwptr))
+   //      if (!::SendMessageTimeout((HWND)get_hwnd(), WM_COPYDATA, (WPARAM)0, (LPARAM)&cds, SMTO_BLOCK, (class ::wait)timeTimeout, &dwptr))
    //      {
 
    //         throw ::exception(error_failed);

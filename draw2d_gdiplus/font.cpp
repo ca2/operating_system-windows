@@ -1,4 +1,4 @@
-#include "framework.h"
+﻿#include "framework.h"
 #include "font.h"
 #include "draw2d.h"
 #include "acme/exception/exception.h"
@@ -28,18 +28,18 @@ namespace draw2d_gdiplus
    }
 
 
-#ifdef DEBUG
-
-
-   void font::dump(dump_context & dumpcontext) const
-   {
-
-      ::draw2d::object::dump(dumpcontext);
-
-   }
-
-
-#endif
+//#ifdef DEBUG
+//
+//
+//   void font::dump(dump_context & dumpcontext) const
+//   {
+//
+//      ::draw2d::object::dump(dumpcontext);
+//
+//   }
+//
+//
+//#endif
 
 
    void font::destroy()

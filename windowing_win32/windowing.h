@@ -182,7 +182,7 @@ namespace windowing_win32
       bool _visible_top_level_contains_all_names(const string_array& stra) override;
       bool _visible_top_level_contains_name(string str) override;
       virtual bool _top_level_contains_name(string str);
-      virtual string _get_window_text_timeout(oswindow oswindow, const ::duration & duration = 1_s);
+      virtual string _get_window_text_timeout(oswindow oswindow, const class time & time = 1_s);
 
 
       void install_keyboard_hook(::matter* pmatterListener) override;

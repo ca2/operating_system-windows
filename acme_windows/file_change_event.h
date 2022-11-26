@@ -35,7 +35,7 @@ namespace acme_windows
       ~file_change_event();
 
 
-      virtual bool lock(const duration & durationTimeout = duration::infinite());
+      virtual bool lock(const class time & timeTimeout = time::infinite());
 
       using synchronization_object::unlock;
       virtual bool unlock();
@@ -45,9 +45,9 @@ namespace acme_windows
       virtual synchronization_result wait();
 
       ///  \brief		waits for an file notification for a specified time
-      ///  \lparam		duration time period to wait for an file notification
+      ///  \lparam		time time period to wait for an file notification
       ///  \return	waiting action result as synchronization_result
-      virtual synchronization_result wait(const duration & duration);
+      virtual synchronization_result wait(const class time & time);
 
       ///  \brief		requests that the operating system signal a machine
       ///				notification handle the next time it detects an appropriate

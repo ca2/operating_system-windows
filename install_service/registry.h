@@ -50,7 +50,7 @@ int get_number(HKEY, TCHAR *, unsigned long *, bool);
 int get_number(HKEY, TCHAR *, unsigned long *);
 int format_double_null(TCHAR *, unsigned long, TCHAR **, unsigned long *);
 int unformat_double_null(TCHAR *, unsigned long, TCHAR **, unsigned long *);
-void override_::durations(TCHAR *, HKEY, TCHAR *, unsigned long *, unsigned long, unsigned long);
+void override_::times(TCHAR *, HKEY, TCHAR *, unsigned long *, unsigned long, unsigned long);
 int get_io_parameters(nssm_service_t *, HKEY);
 int get_parameters(nssm_service_t *, STARTUPINFO *);
 int get_exit_action(const TCHAR *, unsigned long *, TCHAR *, bool *);

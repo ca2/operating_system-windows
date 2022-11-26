@@ -6165,7 +6165,7 @@ namespace windowing_win32
       while (ptask->task_get_run())
       {
 
-         if (m_durationLastMouseMove.elapsed() < 20_ms)
+         if (m_timeLastMouseMove.elapsed() < 20_ms)
          {
 
             ::preempt(30_ms);
@@ -6227,7 +6227,7 @@ namespace windowing_win32
 
          lparam = MAKELPARAM(pointMouseMove.x, pointMouseMove.y);
 
-         m_durationLastMouseMove.Now();
+         m_timeLastMouseMove.Now();
 
          //pimpl->m_puserinteraction->post_message(e_message_mouse_move, 0, lparam);
          

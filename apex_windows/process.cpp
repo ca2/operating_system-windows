@@ -227,7 +227,7 @@ namespace apex_windows
    }
 
 
-   bool process::synch_elevated(const ::string & pszCmdLine,int iShow,const ::duration & durationTimeOut,bool * pbTimeOut)
+   bool process::synch_elevated(const ::string & pszCmdLine,int iShow,const class time & timeTimeOut,bool * pbTimeOut)
    {
 
       DWORD dwExitCode = 0;
@@ -266,9 +266,9 @@ namespace apex_windows
 
       bool bTimedOut = true;
 
-      auto tickStart = ::duration::now();
+      auto tickStart = ::time::now();
 
-      auto tickTimeout = durationTimeOut;
+      auto tickTimeout = timeTimeOut;
 
       while(tickStart.elapsed() < tickTimeout)
       {

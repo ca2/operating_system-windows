@@ -44,7 +44,7 @@ int64_t av_gettime_relative(void);
 int av_gettime_relative_is_monotonic(void);
 
 /**
- * Sleep for a period of time.  Although the duration is expressed in
+ * Sleep for a period of time.  Although the time is expressed in
  * microseconds, the actual delay may be rounded to the precision of the
  * system timer.
  *

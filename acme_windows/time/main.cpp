@@ -143,7 +143,7 @@ void os_post_quit()
 //}
 
 //
-//CLASS_DECL_ACME void main_sync_runnable(::matter * pobjectTaskParam, ::duration durationTimeout)
+//CLASS_DECL_ACME void main_sync_runnable(::matter * pobjectTaskParam, ::time timeTimeout)
 //{
 //   
 //   ::pointer<::matter>pobjectTask = pobjectTaskParam;

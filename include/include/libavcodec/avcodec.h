@@ -999,8 +999,8 @@ typedef struct RcOverride{
  * encoder no longer returns data.
  *
  * NOTE: For encoders implementing the AVCodec.encode2() function, setting this
- *       flag also means that the encoder must set the pts and duration for
- *       each output packet. If this flag is not set, the pts and duration will
+ *       flag also means that the encoder must set the pts and time for
+ *       each output packet. If this flag is not set, the pts and time will
  *       be determined by libavcodec from the input frame.
  */
 #define AV_CODEC_CAP_DELAY               (1 <<  5)
@@ -1492,18 +1492,18 @@ typedef struct AVPacket {
      * Duration of this packet in AVStream->time_base units, 0 if unknown.
      * Equals next_pts - this_pts in presentation order.
      */
-    int64_t duration;
+    int64_t time;
 
     int64_t pos;                            ///< byte position in stream, -1 if unknown
 
 #if FF_API_CONVERGENCE_DURATION
     /**
-     * @deprecated Same as the duration field, but as int64_t. This was required
-     * for Matroska subtitles, whose duration values could overflow when the
-     * duration field was still an int.
+     * @deprecated Same as the time field, but as int64_t. This was required
+     * for Matroska subtitles, whose time values could overflow when the
+     * time field was still an int.
      */
     attribute_deprecated
-    int64_t convergence_duration;
+    int64_t convergence_time;
 #endif
 } AVPacket;
 #define AV_PKT_FLAG_KEY     0x0001 ///< The packet contains a keyframe
@@ -1689,7 +1689,7 @@ typedef struct AVCodecContext {
 
     /**
      * For some codecs, the time base is closer to the field rate than the frame rate.
-     * Most notably, H.264 and MPEG-2 specify time_base as half of frame duration
+     * Most notably, H.264 and MPEG-2 specify time_base as half of frame time
      * if no telecine is used ...
      *
      * Set to time_base ticks per frame. Default 1, e.g., H.264/MPEG-2 set it to 2.
@@ -4637,7 +4637,7 @@ int av_packet_make_refcounted(AVPacket *pkt);
 int av_packet_make_writable(AVPacket *pkt);
 
 /**
- * Convert valid timing fields (timestamps / durations) in a packet from one
+ * Convert valid timing fields (timestamps / times) in a packet from one
  * timebase to another. Timestamps with unknown values (AV_NOPTS_VALUE) will be
  * ignored.
  *
@@ -5115,11 +5115,11 @@ typedef struct AVCodecParserContext {
     /* video info */
     int pict_type; /* XXX: Put it back in AVCodecContext. */
     /**
-     * This field is used for proper frame duration computation in lavf.
-     * It signals, how much longer the frame duration of the current frame
-     * is compared to normal frame duration.
+     * This field is used for proper frame time computation in lavf.
+     * It signals, how much longer the frame time of the current frame
+     * is compared to normal frame time.
      *
-     * frame_duration = (1 + repeat_pict) * time_base
+     * frame_time = (1 + repeat_pict) * time_base
      *
      * It is used by codecs like H.264 to display telecined material.
      */
@@ -5161,7 +5161,7 @@ typedef struct AVCodecParserContext {
      * @deprecated unused
      */
     attribute_deprecated
-    int64_t convergence_duration;
+    int64_t convergence_time;
 #endif
 
     // Timestamp generation support:
@@ -5227,7 +5227,7 @@ typedef struct AVCodecParserContext {
      * For audio, this is in units of 1 / AVCodecContext.sample_rate.
      * For all other types, this is in units of AVCodecContext.time_base.
      */
-    int duration;
+    int time;
 
     enum AVFieldOrder field_order;
 
@@ -5719,20 +5719,20 @@ enum AVCodecID av_get_pcm_codec(enum AVSampleFormat fmt, int be);
 int av_get_exact_bits_per_sample(enum AVCodecID codec_id);
 
 /**
- * Return audio frame duration.
+ * Return audio frame time.
  *
  * @param avctx        codec context
  * @param frame_bytes  size of the frame, or 0 if unknown
- * @return             frame duration, in samples, if known. 0 if not able to
+ * @return             frame time, in samples, if known. 0 if not able to
  *                     determine.
  */
-int av_get_audio_frame_duration(AVCodecContext *avctx, int frame_bytes);
+int av_get_audio_frame_time(AVCodecContext *avctx, int frame_bytes);
 
 /**
- * This function is the same as av_get_audio_frame_duration(), except it works
+ * This function is the same as av_get_audio_frame_time(), except it works
  * with AVCodecParameters instead of an AVCodecContext.
  */
-int av_get_audio_frame_duration2(AVCodecParameters *par, int frame_bytes);
+int av_get_audio_frame_time2(AVCodecParameters *par, int frame_bytes);
 
 #if FF_API_OLD_BSF
 typedef struct AVBitStreamFilterContext {

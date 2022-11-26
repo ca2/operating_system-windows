@@ -65,7 +65,7 @@ namespace apex_windows
 
       void file_open(const ::file::path & path, const string & strParams = "", const ::file::path & pathFolder = "") override;
       void hidden_start(const ::file::path& path, const string& strParams = "", const ::file::path& pathFolder = "") override;
-      void hidden_run(const class ::wait & wait, const ::file::path& path, const string& strParams = "", const ::file::path& pathFolder = "") override;
+      void hidden_run(const class time & timeWait, const ::file::path& path, const string& strParams = "", const ::file::path& pathFolder = "") override;
 
       void browse_file_open(property_set & set) override;
       void browse_file_save(property_set & set) override;

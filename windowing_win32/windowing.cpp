@@ -1222,13 +1222,13 @@ namespace windowing_win32
 //   }
 
    
-   string windowing::_get_window_text_timeout(oswindow oswindow, const ::duration& durationSendMessageMax)
+   string windowing::_get_window_text_timeout(oswindow oswindow, const class time & timeSendMessageMax)
    {
 
       DWORD_PTR dw = 0;
 
       //if (!SendMessageTimeoutW(hwnd, WM_GETTEXTLENGTH, 0, 0, SMTO_ABORTIFHUNG | SMTO_NOTIMEOUTIFNOTHUNG, 100, &dw))
-      if (!SendMessageTimeoutW((HWND)oswindow, WM_GETTEXTLENGTH, 0, 0, SMTO_ABORTIFHUNG, (class ::wait) durationSendMessageMax, &dw))
+      if (!SendMessageTimeoutW((HWND)oswindow, WM_GETTEXTLENGTH, 0, 0, SMTO_ABORTIFHUNG, (class ::wait) timeSendMessageMax, &dw))
       {
 
          return "";
@@ -1246,7 +1246,7 @@ namespace windowing_win32
 
       auto pwsz = wstr.get_string_buffer(dw);
 
-      if (!SendMessageTimeoutW((HWND)oswindow, WM_GETTEXT, dw + 1, (LPARAM)pwsz, SMTO_ABORTIFHUNG, (class ::wait) durationSendMessageMax, &dw))
+      if (!SendMessageTimeoutW((HWND)oswindow, WM_GETTEXT, dw + 1, (LPARAM)pwsz, SMTO_ABORTIFHUNG, (class ::wait) timeSendMessageMax, &dw))
       {
 
          return "";

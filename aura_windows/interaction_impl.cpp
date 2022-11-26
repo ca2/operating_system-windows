@@ -310,13 +310,13 @@ namespace aura_windows
    //   return ::GetTitleBarInfo(((interaction_impl *)this)->get_handle(), pti) != false;
    //}
 
-   //bool interaction_impl::AnimateWindow(::duration ::duration, u32 dwFlags)
+   //bool interaction_impl::AnimateWindow(::time ::time, u32 dwFlags)
    //{
    //   ASSERT(_is_window());
-   //   return ::AnimateWindow(get_handle(), __os(::duration), dwFlags) != false;
+   //   return ::AnimateWindow(get_handle(), __os(::time), dwFlags) != false;
    //}
 
-   //bool interaction_impl::FlashWindowEx(u32 dwFlags, ::u32  uCount, ::duration tickTimeout)
+   //bool interaction_impl::FlashWindowEx(u32 dwFlags, ::u32  uCount, ::time tickTimeout)
    //{
    //   ASSERT(_is_window());
    //   FLASHWINFO fwi;

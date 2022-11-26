@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 
 #include "aura/graphics/draw2d/bitmap.h"
@@ -25,11 +25,11 @@ namespace draw2d_gdiplus
       bitmap();
       ~bitmap() override;
 
-#ifdef DEBUG
-
-      void dump(dump_context & dumpcontext) const override;
-
-#endif
+//#ifdef DEBUG
+//
+//      void dump(dump_context & dumpcontext) const override;
+//
+//#endif
 
       void destroy() override;
 

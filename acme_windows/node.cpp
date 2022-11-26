@@ -112,7 +112,7 @@ namespace acme_windows
       }
 
 
-      bool synchronization_object(const class ::wait & wait)
+      bool synchronization_object(const class time & timeWait)
       {
 
          fMask = SEE_MASK_NOASYNC | SEE_MASK_NOCLOSEPROCESS;
@@ -124,7 +124,7 @@ namespace acme_windows
 
          }
 
-         auto start = ::wait::now();
+         auto start = ::time::now();
 
          DWORD dwError = ::GetLastError();
 
@@ -151,7 +151,7 @@ namespace acme_windows
 
             }
 
-            auto waitNow = minimum(wait - start.elapsed(), 1000_ms);
+            auto waitNow = minimum(timeWait - start.elapsed(), 1000_ms);
 
             if (!waitNow)
             {
@@ -2130,7 +2130,7 @@ namespace acme_windows
 
          }
 
-         sleep(::duration(23));
+         sleep(::time(23));
 
       }
 
@@ -2893,7 +2893,7 @@ namespace acme_windows
 
 
 
-   void node::command_system(string_array & straOutput, int & iExitCode, const char * psz, enum_command_system ecommandsystem, const ::duration & durationTimeout, ::particle * pparticleSynchronization, ::file::file * pfileLines)
+   void node::command_system(string_array & straOutput, int & iExitCode, const char * psz, enum_command_system ecommandsystem, const class time & timeTimeout, ::particle * pparticleSynchronization, ::file::file * pfileLines)
    {
 
       straOutput.clear();
@@ -3026,9 +3026,9 @@ namespace acme_windows
 
       }
 
-      ::duration durationStart;
+      class ::time timeStart;
 
-      durationStart.Now();
+      timeStart.Now();
 
       string strError;
 
@@ -3118,7 +3118,7 @@ namespace acme_windows
 
          }
 
-         if (!durationTimeout.is_infinite() && durationStart.elapsed() > durationTimeout)
+         if (!timeTimeout.is_infinite() && timeStart.elapsed() > timeTimeout)
          {
 
             break;
@@ -3264,12 +3264,12 @@ namespace acme_windows
    }
 
 
-   void node::shell_execute_sync(const char * pszFile, const char * pszParams, ::duration durationTimeout)
+   void node::shell_execute_sync(const char * pszFile, const char * pszParams, const class time & timeTimeout)
    {
 
       shell_execute execute(pszFile, pszParams);
 
-      execute.synchronization_object(durationTimeout);
+      execute.synchronization_object(timeTimeout);
 
    }
 
@@ -3287,15 +3287,14 @@ namespace acme_windows
    }
 
 
-   void node::root_execute_sync(const char * pszFile, const char * pszParams, ::duration durationTimeout)
+   void node::root_execute_sync(const char * pszFile, const char * pszParams, const class time & timeTimeout)
    {
 
       shell_execute execute(pszFile, pszParams);
 
       execute.lpVerb = L"RunAs";
 
-
-      execute.synchronization_object(durationTimeout);
+      execute.synchronization_object(timeTimeout);
 
    }
 
@@ -3371,7 +3370,7 @@ namespace acme_windows
    }
 
 
-   void node::call_sync(const ::string & strPath, const ::string & strParam, const ::string & strDir, ::e_display edisplay, const ::duration & durationTimeout, ::property_set & set, int * piExitCode)
+   void node::call_sync(const ::string & strPath, const ::string & strParam, const ::string & strDir, ::e_display edisplay, const class time & timeTimeout, ::property_set & set, int * piExitCode)
    {
 
       SHELLEXECUTEINFOW infoa;
@@ -3415,9 +3414,9 @@ namespace acme_windows
 
       DWORD dwExitCode = (DWORD)-1;
 
-      ::duration durationStart;
+      class ::time timeStart;
 
-      durationStart.Now();
+      timeStart.Now();
 
       while (::task_get_run())
       {
@@ -3430,7 +3429,7 @@ namespace acme_windows
 
          }
 
-         if (durationStart.elapsed() > durationTimeout)
+         if (timeStart.elapsed() > timeTimeout)
          {
 
             set["timed_out"] = true;
