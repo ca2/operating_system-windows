@@ -29,6 +29,9 @@
     <PreBuildEvent>
       <Command>$(SolutionDir)..\..\..\operating-system\tool-windows\bin\application_build_helper.exe $(ProjectDir) $(ProjectName) $(PlatformName) $(Configuration)</Command>
     </PreBuildEvent>
+    <Link>
+      <AdditionalLibraryDirectories>$(SolutionDir)..\..\..\..\operating-system\storage-windows\$(PlatformName)\$(Configuration)\library\;$(SolutionDir)..\..\..\..\operating-system\storage-windows\$(PlatformName)\$(Configuration)\third\library\;$(OutDir)</AdditionalLibraryDirectories>
+    </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
     <BuildMacro Include="BaseDir">
