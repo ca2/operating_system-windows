@@ -1613,6 +1613,8 @@ namespace draw2d_gdiplus
 
          //return false;
 
+         auto pimage2 = imagedrawing.image();
+
          throw ::exception(error_null_pointer);
 
       }
