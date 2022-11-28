@@ -29,7 +29,7 @@ namespace acme_windows
       ::file::path            m_strAppData;
       ::file::path            m_strPrograms;
       ::file::path            m_strCommonPrograms;
-      bool m_bInitializeCallstack;
+
 
       node();
       ~node() override;
@@ -175,8 +175,8 @@ namespace acme_windows
       void flush_stdin_input_events() override;
       void flush_stdin() override;
 
-      void defer_initialize_callstack() override;
-      string get_callstack(const char * pszFormat, i32 iSkip, void * caller_address, int iCount) override;
+      //void defer_initialize_callstack() override;
+      //string get_callstack(const char * pszFormat, i32 iSkip, void * caller_address, int iCount) override;
 
 
       ::pointer < ::acme::exclusive > _get_exclusive(::particle * pparticleContext, const ::string & strName, ::security_attributes * psecurityattributes = nullptr) override;

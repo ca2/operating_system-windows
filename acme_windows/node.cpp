@@ -18,8 +18,6 @@
 
 
 #include <shellapi.h>
-#include <TlHelp32.h>
-#include <DbgHelp.h>
 
 
 
@@ -177,8 +175,6 @@ namespace acme_windows
 
    node::node()
    {
-
-      m_bInitializeCallstack = true;
 
       //::windows::callstack::s_pcriticalsection = new critical_section();
 
@@ -2804,76 +2800,31 @@ namespace acme_windows
    }
 
 
-   void node::defer_initialize_callstack()
-   {
+   //void node::defer_initialize_callstack()
+   //{
 
-      critical_section_lock synchronouslock(sym_dbg_help_critical_section());
+   //   critical_section_lock synchronouslock(sym_dbg_help_critical_section());
 
-      auto process = GetCurrentProcess();
+   //   auto process = GetCurrentProcess();
 
-      if (!m_bInitializeCallstack)
-      {
+   //   if (!m_bInitializeCallstack)
+   //   {
 
-         m_bInitializeCallstack = true;
+   //      m_bInitializeCallstack = true;
 
-         SymSetOptions(SymGetOptions() | SYMOPT_LOAD_LINES);
+   //      SymSetOptions(SymGetOptions() | SYMOPT_LOAD_LINES);
 
-         SymInitialize(process, NULL, TRUE);
+   //      SymInitialize(process, NULL, TRUE);
 
-      }
-      else
-      {
+   //   }
+   //   else
+   //   {
 
-         SymRefreshModuleList(process);
+   //      SymRefreshModuleList(process);
 
-      }
+   //   }
 
-   }
-
-
-   string node::get_callstack(const char * pszFormat, i32 iSkip, void * caller_address, int iCount)
-   {
-
-      critical_section_lock synchronouslock(sym_dbg_help_critical_section());
-
-      string strCallstack;
-
-      const size_t iMaximumFramesToCapture = 62; // does not support more then 62 frames of stackbacktrace
-
-      void * stack[iMaximumFramesToCapture];
-
-      defer_initialize_callstack();
-
-      auto frames = CaptureStackBackTrace(0, iMaximumFramesToCapture, stack, NULL);
-
-      int iMaximumNameLength = 1024;
-
-      memory memory(sizeof(SYMBOL_INFO) + iMaximumNameLength * sizeof(char));
-
-      SYMBOL_INFO * psymbolinfo = (SYMBOL_INFO *)memory.get_data();
-
-      psymbolinfo->MaxNameLen = iMaximumNameLength;
-
-      psymbolinfo->SizeOfStruct = sizeof(SYMBOL_INFO);
-
-      auto process = GetCurrentProcess();
-
-      for (auto i = 0; i < frames; ++i)
-      {
-
-         SymFromAddr(process, (DWORD64)(stack[i]), 0, psymbolinfo);
-
-         string strLine;
-
-         strLine.format("%02d : %" PRIdPTR " : %s\n", frames - i - 1, psymbolinfo->Address, psymbolinfo->Name);
-
-         strCallstack += strLine;
-
-      }
-
-      return ::move(strCallstack);
-
-   }
+   //}
 
 
    ::string node::get_command_line()
