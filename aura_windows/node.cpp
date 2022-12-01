@@ -15,7 +15,7 @@ namespace aura_windows
    node::node()
    {
 
-      m_pauranode = this;
+      //m_pauranode = this;
       m_pAuraPlatform = this;
 
    }

@@ -2719,7 +2719,7 @@ namespace acme_windows
    {
 
       //auto estatus = acmesystem()->post_initial_request();
-      acmesystem()->post_initial_request();
+      acmesystem()->defer_post_initial_request();
 
       //if (!estatus)
       //{

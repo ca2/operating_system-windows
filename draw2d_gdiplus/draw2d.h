@@ -1,6 +1,7 @@
-#pragma once
+﻿#pragma once
 
 
+#include "acme/platform/auto_pointer.h"
 #include "aura/graphics/draw2d/draw2d.h"
 
 

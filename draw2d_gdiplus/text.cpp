@@ -270,7 +270,7 @@ void gdiplus_draw_text(::draw2d::graphics* pgraphicsParam, ::draw2d::path* ppath
 
          status = pgraphics->GetTransform(&m);
 
-         auto pmNew = __auto(m.Clone());
+         auto pmNew = as_auto_pointer(m.Clone());
 
          status = pmNew->Translate((Gdiplus::REAL) rectangleParam.left, (Gdiplus::REAL) rectangleParam.top);
 

@@ -131,7 +131,7 @@ void os_post_quit()
 //
 //   ::pointer<::matter>pobjectTask = pobjectTaskParam;
 //   
-//   get_system()->post_predicate([pobjectTask]()
+//   acmesystem()->post_predicate([pobjectTask]()
 //   {
 //
 //      pobjectTask->call();
@@ -146,7 +146,7 @@ void os_post_quit()
 //   
 //   ::pointer<::matter>pobjectTask = pobjectTaskParam;
 //   
-//   get_system()->send_predicate([pobjectTask]()
+//   acmesystem()->send_predicate([pobjectTask]()
 //   {
 //
 //      pobjectTask->call();

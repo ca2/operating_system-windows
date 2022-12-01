@@ -267,7 +267,7 @@ void TraceDDE(const ::string & pszPrefix, const MSG* pMsg)
                                   szFormat, _countof(szFormat));
 
          // User defined clipboard formats have a range of 0xC000->0xFFFF
-         // get_system() clipboard formats have other ranges, but no printable
+         // acmesystem() clipboard formats have other ranges, but no printable
          // format names.
       }
 

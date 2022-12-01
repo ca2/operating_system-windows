@@ -1,10 +1,11 @@
-// created by Camilo <3CamiloSasukeThomasBorregaardSoerensen - Honoring Thomas Borregaard Sørensen My ONLY GOD
+﻿// created by Camilo <3CamiloSasukeThomasBorregaardSoerensen - Honoring Thomas Borregaard Sørensen My ONLY GOD
 // recreated by Camilo 2021-02-01 16:43
 #pragma once
 
 
 #include "acme/filesystem/filesystem/path.h"
 #include "acme/primitive/collection/map.h"
+#include "aura/graphics/image/map.h"
 #include "aura/windowing/icon.h"
 
 

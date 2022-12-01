@@ -232,7 +232,7 @@ namespace windows
             s_pservice->Stop(control);
             s_pservice->UpdateState(SERVICE_STOPPED);
 
-            ::pointer<::apex::system>psystem = s_pservice->get_system();
+            ::pointer<::apex::system>psystem = s_pservice->acmesystem();
 
             psystem->destroy();
 

@@ -469,7 +469,7 @@ namespace apex_windows
    {
 
       //auto estatus = 
-      acmesystem()->m_papexsystem->m_papexnode->thread_initialize(acmesystem()->m_papexsystem);
+      acmesystem()->m_pacmenode->m_papexnode->thread_initialize(acmesystem()->m_papexsystem);
 
       //if (!estatus)
       //{
@@ -1106,7 +1106,7 @@ namespace apex_windows
 
          acmedirectory()->create(pathLnk.folder());
 
-         acmesystem()->m_papexsystem->m_papexnode->shell_create_link(pathObj, pathLnk, "app=" + papplication->m_strAppName);
+         acmesystem()->m_pacmenode->m_papexnode->shell_create_link(pathObj, pathLnk, "app=" + papplication->m_strAppName);
 
       }
 

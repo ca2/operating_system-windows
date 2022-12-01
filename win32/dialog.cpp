@@ -66,7 +66,7 @@ namespace win32
       SetThreadLocale(65001);
       int i2 = GetThreadLocale();
 
-      ::pointer<::apex::system>psystem = get_system();
+      ::pointer<::apex::system>psystem = acmesystem();
 
       CreateDialogParamW((HINSTANCE) psystem->m_hinstance, m_pszResource,
                          puserinteraction == nullptr ? nullptr : puserinteraction->m_hwnd, &DialogProc, (LPARAM)this);

@@ -1,4 +1,4 @@
-#include "framework.h"
+﻿#include "framework.h"
 #include "system_interaction.h"
 #include "interaction_impl.h"
 #include "acme/constant/message.h"
@@ -381,7 +381,7 @@ namespace aura_windows
    //   __UNREFERENCED_PARAMETER(nCmd);
    //   throw ::interface_only();
 
-   //   /*      application* pApp = ::aura::get_system();
+   //   /*      application* pApp = ::auraacmesystem();
    //   ASSERT_VALID(pApp);
    //   ASSERT(pApp->m_pszHelpFilePath != nullptr);
    //   ASSERT(pApp->m_eHelpType == afxWinHelp);
@@ -407,7 +407,7 @@ namespace aura_windows
    ////{
    //// throw ::interface_only();
    ///*
-   //application* pApp = ::aura::get_system();
+   //application* pApp = ::auraacmesystem();
    //ASSERT_VALID(pApp);
    //ASSERT(pApp->m_pszHelpFilePath != nullptr);
    //// to call HtmlHelp the m_fUseHtmlHelp must be set in
@@ -467,7 +467,7 @@ namespace aura_windows
    //   __UNREFERENCED_PARAMETER(nCmd);
    //   throw ::interface_only();
    //   /*
-   //   application* pApp = ::aura::get_system();
+   //   application* pApp = ::auraacmesystem();
    //   ASSERT_VALID(pApp);
    //   if (pApp->m_eHelpType == afxHTMLHelp)
    //   {
@@ -613,7 +613,7 @@ namespace aura_windows
             if (puserinteraction->layout().m_statea[::user::e_layout_normal].m_bProdevian)
             {
 
-               puserinteraction->set_prodevian();
+               //puserinteraction->set_prodevian();
 
             }
 
@@ -629,6 +629,10 @@ namespace aura_windows
                puserinteraction->_001Restore();
 
             }
+
+            puserinteraction->set_need_redraw();
+
+            puserinteraction->post_redraw();
 
             pmessage->m_bRet = true;
 
@@ -650,7 +654,7 @@ namespace aura_windows
             if (puserinteraction->layout().m_statea[::user::e_layout_normal].m_bProdevian)
             {
 
-               puserinteraction->clear_prodevian();
+               // puserinteraction->clear_prodevian();
 
             }
 
@@ -887,7 +891,7 @@ namespace aura_windows
 //   {
 //      throw ::interface_only();
 //
-//      /*      application* pApp = ::aura::get_system();
+//      /*      application* pApp = ::auraacmesystem();
 //      if (pApp != nullptr && pApp->m_puiMain == this)
 //      {
 //      // recolor global brushes used by control bars
@@ -923,7 +927,7 @@ namespace aura_windows
 //      __UNREFERENCED_PARAMETER(pDeviceName);
 //
 //      throw ::interface_only();
-//      /*application* pApp = ::aura::get_system();
+//      /*application* pApp = ::auraacmesystem();
 //      if (pApp != nullptr && pApp->m_puiMain == this)
 //      pApp->DevModeChange(pDeviceName);
 //
@@ -3807,7 +3811,7 @@ void interaction_impl::set_tool_window(bool bSet)
 //
 //   }
 //
-//   if (::aura::get_system() == nullptr)
+//   if (::auraacmesystem() == nullptr)
 //   {
 //
 //      return 0;

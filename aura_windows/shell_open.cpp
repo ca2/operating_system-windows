@@ -1,6 +1,7 @@
-#include "framework.h"
+﻿#include "framework.h"
 #include "shell_open.h"
 #include "acme/parallelization/task.h"
+#include "acme/platform/definition.h"
 #include "apex/platform/application.h"
 
 
@@ -143,7 +144,7 @@ namespace aura_windows
 
          m_hszAppName = DdeCreateStringHandleW(m_dwDde, L"vmpLight", 0);
 
-         m_hszSystemTopic = DdeCreateStringHandleW(m_dwDde, L"::aura::get_system()", 0);
+         m_hszSystemTopic = DdeCreateStringHandleW(m_dwDde, L"::auraacmesystem()", 0);
 
          DdeNameService(m_dwDde, m_hszAppName, 0, DNS_REGISTER);
 

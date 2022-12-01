@@ -133,7 +133,7 @@ namespace windows
 
          m_hszAppName = DdeCreateStringHandleW(m_dwDde, L"vmpLight", 0);
 
-         m_hszSystemTopic = DdeCreateStringHandleW(m_dwDde, L"::aura::get_system()", 0);
+         m_hszSystemTopic = DdeCreateStringHandleW(m_dwDde, L"::auraacmesystem()", 0);
 
          DdeNameService(m_dwDde, m_hszAppName, 0, DNS_REGISTER);
 

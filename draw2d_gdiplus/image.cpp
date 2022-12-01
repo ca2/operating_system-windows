@@ -3,6 +3,7 @@
 #include "graphics.h"
 #include "bitmap.h"
 #include "acme/exception/exception.h"
+#include "acme/platform/auto_pointer.h"
 #include "aura/graphics/image/icon.h"
 #include "aura/graphics/image/drawing.h"
 
@@ -893,7 +894,7 @@ namespace draw2d_gdiplus
       // Create an image and a thumbnail of the pimage->
       ::Gdiplus::Image image(wstr);
 
-      auto pthumbnail = __auto(image.GetThumbnailImage(width(), height(), nullptr, nullptr));
+      auto pthumbnail = as_auto_pointer(image.GetThumbnailImage(width(), height(), nullptr, nullptr));
 
       // Draw the original and the thumbnail images.
       pgraphics->DrawImage(pthumbnail, 0, 0, pthumbnail->GetWidth(), pthumbnail->GetHeight());

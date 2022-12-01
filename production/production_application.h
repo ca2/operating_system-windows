@@ -30,7 +30,7 @@ namespace production
 
       virtual bool bergedge_start();
 
-      virtual void on_request(::create * pcreate);
+      virtual void on_request(::request * prequest) override;
 
 	   virtual void route_command(::message::command * pcommand, bool bRouteToKeyDescendant);
    		

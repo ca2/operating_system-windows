@@ -11,6 +11,7 @@
 #include "acme/filesystem/filesystem/acme_path.h"
 //#include "acme/operating_system/time.h"
 #include "acme/parallelization/manual_reset_event.h"
+#include "acme/parallelization/task_flag.h"
 #include "acme/platform/node.h"
 #include "acme/primitive/collection/_container.h"
 #include "acme/primitive/string/international.h"

@@ -4,6 +4,7 @@
 #include "acme_windows/file_find.h"
 #include "acme_windows/registry.h"
 #include "acme/constant/id.h"
+#include "acme/parallelization/task_flag.h"
 #include "acme/primitive/string/str.h"
 #include "apex/platform/system.h"
 #include "acme/filesystem/filesystem/acme_directory.h"
@@ -48,7 +49,7 @@ namespace apex_windows
 
       //}
 
-      ::pointer<::apex::system>psystem = get_system();
+      ::pointer<::apex::system>psystem = acmesystem();
 
       //__refer(
       m_pfilesystem = psystem->m_pfilesystem;
@@ -855,7 +856,7 @@ namespace apex_windows
    ::file::path dir_context::module()
    {
 
-      ::pointer<::apex::system>psystem = get_system();
+      ::pointer<::apex::system>psystem = acmesystem();
 
       return psystem->m_pdirsystem->m_pathModule;
 
@@ -865,7 +866,7 @@ namespace apex_windows
    //::file::path dir_context::ca2module()
    //{
 
-   //   ::pointer<::apex::system>psystem = get_system();
+   //   ::pointer<::apex::system>psystem = acmesystem();
 
    //   return psystem->m_pdirsystem->m_pathCa2Module;
 

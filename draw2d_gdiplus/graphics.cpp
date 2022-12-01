@@ -5,6 +5,7 @@
 #include "font.h"
 #include "path.h"
 #include "acme/parallelization/synchronous_lock.h"
+#include "acme/platform/scoped_restore.h"
 #include "acme/primitive/string/international.h"
 #include "aura/graphics/image/context_image.h"
 #include "aura/graphics/image/drawing.h"

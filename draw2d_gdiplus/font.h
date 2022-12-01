@@ -2,6 +2,7 @@
 
 
 #include "aura/graphics/write_text/font.h"
+#include "acme/platform/auto_pointer.h"
 
 
 namespace draw2d_gdiplus

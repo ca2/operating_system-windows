@@ -1,4 +1,4 @@
-#include "framework.h"
+﻿#include "framework.h"
 #include "service_handler.h"
 #include "ip_enum.h"
 #include "node.h"
@@ -71,7 +71,7 @@ __FACTORY_EXPORT void apex_windows_factory(::factory::factory * pfactory)
    //pfactory->add_factory_item < ::windows::file_context, ::file_context >();
    pfactory->add_factory_item < ::apex_windows::service_handler, ::service_handler >();
 
-   //pfactory->add_factory_item < ::apex::windows::node, ::acme::node >();
+   pfactory->add_factory_item < ::apex_windows::node, ::acme::node >();
 
    //add_factory_item < ::windows::copydesk, ::user::cop
    // 

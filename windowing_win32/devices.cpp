@@ -1,4 +1,4 @@
-// Created by camilo on 2022-02-20 12:22 <3ThomasBorregaardS�rensen!!
+﻿// Created by camilo on 2022-02-20 12:22 <3ThomasBorregaardS�rensen!!
 #include "framework.h"
 #include "devices.h"
 #include "master_device_listener.h"
@@ -54,7 +54,7 @@ namespace windowing_win32
    void devices::on_initialize_object()
    {
 
-      auto psession = acmesystem()->m_paurasession;
+      auto psession = acmesession()->m_paurasession;
 
       auto puser = psession->user();
 
@@ -135,7 +135,7 @@ namespace windowing_win32
 
       plistener->m_hdevnotify = hdevnotify;
 
-      auto psession = acmesystem()->m_paurasession;
+      auto psession = acmesession()->m_paurasession;
 
       auto puser = psession->user();
 

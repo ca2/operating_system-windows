@@ -8,6 +8,7 @@
 #include "acme/filesystem/file/status.h"
 #include "acme/filesystem/filesystem/acme_directory.h"
 //#include "acme/operating_system/time.h"
+#include "acme/platform/definition.h"
 #include "acme/primitive/primitive/payload.h"
 #include "acme/primitive/string/international.h"
 #include "apex/platform/system.h"
@@ -51,7 +52,7 @@ namespace apex_windows
 
       //}
 
-      ::pointer<::apex::system>psystem = get_system();
+      ::pointer<::apex::system>psystem = acmesystem();
 
       m_pfilesystem = psystem->m_pfilesystem;
 
@@ -465,7 +466,7 @@ namespace apex_windows
 
       }
 
-      ::pointer<::apex::system>psystem = get_system();
+      ::pointer<::apex::system>psystem = acmesystem();
 
       if (read_resource_as_memory(*pfile->get_primitive_memory(), (HINSTANCE) psystem->m_psubsystem->m_hinstanceThis, iId, psz))
       {

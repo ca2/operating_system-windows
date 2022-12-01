@@ -1,7 +1,8 @@
-#include "framework.h"
+﻿#include "framework.h"
 #include "copydesk.h"
 #include "acme/exception/exception.h"
 #include "acme/parallelization/synchronous_lock.h"
+#include "acme/platform/definition.h"
 #include "acme/primitive/string/international.h"
 #include "aura/graphics/image/image.h"
 
