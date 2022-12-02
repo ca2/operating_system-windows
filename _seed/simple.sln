@@ -119,6 +119,9 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_app_simple_notify_drawing", "..\..\..\source\app-simple\notify_drawing\__implement\shared_app_simple_notify_drawing.vcxproj", "{876E1DB0-ADF2-4320-9D97-970725113871}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_app_simple_application", "..\..\..\source\app-simple\application\__implement\shared_app_simple_application.vcxproj", "{66CA2FC3-CC12-4D4F-B66C-C6A4FB0B74EB}"
+	ProjectSection(ProjectDependencies) = postProject
+		{E2D7833B-9B59-4826-BBDF-C270A2115E86} = {E2D7833B-9B59-4826-BBDF-C270A2115E86}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "console_hellocalculator", "..\..\..\source\console\hellocalculator\hellocalculator.vcxproj", "{DD1BBBD3-15E0-4F4E-9B5A-AA78A6A37738}"
 EndProject
