@@ -856,9 +856,13 @@ namespace apex_windows
    ::file::path dir_context::module()
    {
 
-      ::pointer<::apex::system>psystem = acmesystem();
+      //::pointer<::apex::system>psystem = acmesystem();
 
-      return psystem->m_pdirsystem->m_pathModule;
+      //return psystem->m_pdirsystem->m_pathModule;
+
+      auto pacmeapplication = acmeapplication();
+
+      return pacmeapplication->get_module_folder();
 
    }
 
