@@ -29,7 +29,7 @@ __FACTORY_EXPORT void acme_windows_factory(::factory::factory * pfactory);
 __FACTORY_EXPORT void apex_windows_common_factory(::factory::factory * pfactory);
 
 
-__FACTORY_EXPORT void apex_windows_factory(::factory::factory * pfactory)
+IMPLEMENT_FACTORY(apex_windows)
 {
 
    apex_windows_common_factory(pfactory);

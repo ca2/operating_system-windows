@@ -1,10 +1,11 @@
-#include "framework.h"
+﻿#include "framework.h"
 #include "acme/platform/node.h"
 #include "acme/filesystem/filesystem/acme_directory.h"
 #include "node.h"
 #include "acme_directory.h"
 #include "acme_path.h"
 #include "acme_file.h"
+#include "acme/platform/acme.h"
 #include "acme/filesystem/filesystem/acme_path.h"
 #include "acme/platform/serial.h"
 #include "serial.h"
@@ -31,7 +32,9 @@
 __FACTORY_IMPORT void acme_windows_common_factory(::factory::factory* pfactory);
 
 
-__FACTORY_EXPORT void acme_windows_factory(::factory::factory * pfactory)
+
+
+IMPLEMENT_FACTORY(acme_windows)
 {
 
    acme_windows_common_factory(pfactory);
