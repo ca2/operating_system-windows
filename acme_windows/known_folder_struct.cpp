@@ -1,4 +1,4 @@
-// Created by camilo on 2021-08-08 04:50 BRT <3ThomasBorregaardS�rensen!!
+﻿// Created by camilo on 2021-08-08 04:50 BRT <3ThomasBorregaardS�rensen!!
 #include "framework.h"
 #include "known_folder_struct.h"
 #include <KnownFolders.h>
@@ -26,7 +26,7 @@ sz_known_folder_struct * get_known_folder_struct(const ::string & strKnownFolder
    while (pknownfolderstruct->m_pszKnownFolder)
    {
 
-      if (strKnownFolder.compare_ci(pknownfolderstruct->m_pszKnownFolder) == 0)
+      if (strKnownFolder.case_insensitive_order(pknownfolderstruct->m_pszKnownFolder) == 0)
       {
 
          return pknownfolderstruct;
@@ -42,7 +42,7 @@ sz_known_folder_struct * get_known_folder_struct(const ::string & strKnownFolder
 }
 
 
-sz_known_folder_struct * path_begins_eat_known_folder_struct_ci(::string & strPath)
+sz_known_folder_struct * case_insensitive_path_begins_eat_known_folder_struct(::string & strPath)
 {
 
    auto pknownfolderstruct = g_knownfolderstructa;
@@ -50,7 +50,7 @@ sz_known_folder_struct * path_begins_eat_known_folder_struct_ci(::string & strPa
    while (pknownfolderstruct->m_pszKnownFolder)
    {
 
-      if (strPath.begins_eat_ci(pknownfolderstruct->m_pszKnownFolder))
+      if (strPath.case_insensitive_begins_eat(pknownfolderstruct->m_pszKnownFolder))
       {
 
          return pknownfolderstruct;

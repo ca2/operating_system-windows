@@ -12,15 +12,15 @@ namespace win32
 
       bool m_bCreated;
       bool  m_bNew;
-      const widechar * m_pszResource;
+      const ::wide_character * m_pszResource;
 
 
       dialog();
-      dialog(::object* pobject, const widechar * pszResource);
+      dialog(::object* pobject, const ::wide_character * pszResource);
       virtual ~dialog();
 
 
-      virtual void initialize_dialog(::particle * pparticle, const widechar * pszResource);
+      virtual void initialize_dialog(::particle * pparticle, const ::wide_character * pszResource);
 
       bool create_dialog(window * pwindow = nullptr);
 

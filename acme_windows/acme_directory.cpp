@@ -176,7 +176,7 @@ namespace acme_windows
 
       path.replace_with("", ":");
 
-      path.ends_eat_ci(".exe");
+      path.case_insensitive_ends_eat(".exe");
 
       return path;
 
@@ -223,7 +223,7 @@ namespace acme_windows
 
       strsize iFind = strAppId.find('/');
 
-      if (strPlatform.compare_ci("win32") == 0 || strPlatform.compare_ci("x86") == 0)
+      if (strPlatform.case_insensitive_order("win32") == 0 || strPlatform.case_insensitive_order("x86") == 0)
       {
 
          path = program_files_x86();
@@ -593,10 +593,10 @@ pacmedir->roaming();
 //
 //      //str = path1;
 //
-//      //str.ends_eat_ci("\\");
-//      //str.ends_eat_ci("/");
-//      //str.ends_eat_ci("\\");
-//      //str.ends_eat_ci("/");
+//      //str.case_insensitive_ends_eat("\\");
+//      //str.case_insensitive_ends_eat("/");
+//      //str.case_insensitive_ends_eat("\\");
+//      //str.case_insensitive_ends_eat("/");
 //
 //      u32 dwFileAttributes = ::windows_get_file_attributes(path1);
 //
@@ -626,7 +626,7 @@ pacmedir->roaming();
 //
 //               strPrefix.replace("/", "\\");
 //
-//               strRelative.begins_eat_ci(strPrefix);
+//               strRelative.case_insensitive_begins_eat(strPrefix);
 //
 //               strRelative.trim("/\\");
 //
@@ -884,9 +884,9 @@ bool windows_file_find_is_dots(const WIN32_FIND_DATAW & data)
       //    for(i32 i = 0; i < iLevelCount; i++)
       //    {
 
-      //       strsize iFind1 = str.reverse_find('/', iLast);
+      //       strsize iFind1 = str.rear_find('/', iLast);
 
-      //       strsize iFind2 = str.reverse_find('\\', iLast);
+      //       strsize iFind2 = str.rear_find('\\', iLast);
 
       //       strsize iFind = maximum(iFind1, iFind2);
 
@@ -1296,7 +1296,7 @@ pacmedir->create CreateDirectoryW last error(%d)=%s", dwError, pszError);
 
          HANDLE hFind;
 
-         hFind = FindFirstFileW(wstring(listing.m_pathFinal) + "\\*", &FindFileData);
+         hFind = FindFirstFileW(wstring(listing.m_pathFinal) + L"\\*", &FindFileData);
 
          if (hFind == INVALID_HANDLE_VALUE)
          {
@@ -1454,7 +1454,7 @@ pacmedir->create CreateDirectoryW last error(%d)=%s", dwError, pszError);
 //         try
 //         {
 //
-//            if (string(psz).compare_ci("image://") == 0)
+//            if (string(psz).case_insensitive_order("image://") == 0)
 //            {
 //
 //               strPrefix = "image://";
@@ -1473,7 +1473,7 @@ pacmedir->create CreateDirectoryW last error(%d)=%s", dwError, pszError);
 //               }
 //
 //            }
-//            else if (string(psz).compare_ci("music://") == 0)
+//            else if (string(psz).case_insensitive_order("music://") == 0)
 //            {
 //
 //               strPrefix = "music://";
@@ -1492,7 +1492,7 @@ pacmedir->create CreateDirectoryW last error(%d)=%s", dwError, pszError);
 //               }
 //
 //            }
-//            else if (string(psz).compare_ci("video://") == 0)
+//            else if (string(psz).case_insensitive_order("video://") == 0)
 //            {
 //
 //               strPrefix = "video://";
@@ -1511,7 +1511,7 @@ pacmedir->create CreateDirectoryW last error(%d)=%s", dwError, pszError);
 //               }
 //
 //            }
-//            else if (string(psz).compare_ci("document://") == 0)
+//            else if (string(psz).case_insensitive_order("document://") == 0)
 //            {
 //
 //               strPrefix = "document://";
@@ -1533,7 +1533,7 @@ pacmedir->create CreateDirectoryW last error(%d)=%s", dwError, pszError);
 //            else
 //            {
 //
-//               if (str.begins_eat_ci("image://"))
+//               if (str.case_insensitive_begins_eat("image://"))
 //               {
 //
 //                  strPrefix = "image://";
@@ -1553,7 +1553,7 @@ pacmedir->create CreateDirectoryW last error(%d)=%s", dwError, pszError);
 //
 //               }
 //
-//               if (str.begins_eat_ci("music://"))
+//               if (str.case_insensitive_begins_eat("music://"))
 //               {
 //
 //                  strPrefix = "music://";
@@ -1573,7 +1573,7 @@ pacmedir->create CreateDirectoryW last error(%d)=%s", dwError, pszError);
 //
 //               }
 //
-//               if (str.begins_eat_ci("video://"))
+//               if (str.case_insensitive_begins_eat("video://"))
 //               {
 //
 //                  strPrefix = "video://";
@@ -1593,7 +1593,7 @@ pacmedir->create CreateDirectoryW last error(%d)=%s", dwError, pszError);
 //
 //               }
 //
-//               if (str.begins_eat_ci("document://"))
+//               if (str.case_insensitive_begins_eat("document://"))
 //               {
 //
 //                  strPrefix = "document://";

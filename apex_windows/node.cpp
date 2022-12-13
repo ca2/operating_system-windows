@@ -22,7 +22,7 @@
 #include <shellapi.h>
 #include <shobjidl_core.h>
 
-//CLASS_DECL_APEX_WINDOWS HRESULT win_create_link(const widechar * pszPathObj, const widechar * pszPathLink, const widechar * pszDesc, const widechar * pszIconPath, ::i32 iIcon);
+//CLASS_DECL_APEX_WINDOWS HRESULT win_create_link(const ::wide_character * pszPathObj, const ::wide_character * pszPathLink, const ::wide_character * pszDesc, const ::wide_character * pszIconPath, ::i32 iIcon);
 CLASS_DECL_ACME_WINDOWS void shell_notify_folder_change(const wchar_t* pwsz);
 CLASS_DECL_ACME_WINDOWS void shell_notify_item_change(const wchar_t* pwsz);
 CLASS_DECL_ACME_WINDOWS void shell_notify_assoc_change();
@@ -562,7 +562,7 @@ namespace apex_windows
 
       auto pathLnk = pathLnkParam;
 
-      if (!pathLnk.ends_ci(".lnk"))
+      if (!pathLnk.case_insensitive_ends(".lnk"))
       {
 
          pathLnk += ".lnk";
@@ -604,7 +604,7 @@ namespace apex_windows
 
       auto pathLnk = pathLnkParam;
 
-      if (!pathLnk.ends_ci(".lnk"))
+      if (!pathLnk.case_insensitive_ends(".lnk"))
       {
 
          pathLnk += ".lnk";
@@ -653,7 +653,7 @@ namespace apex_windows
 
       auto pathLnk = pathLnkParam;
 
-      if (!pathLnk.ends_ci(".lnk"))
+      if (!pathLnk.case_insensitive_ends(".lnk"))
       {
 
          pathLnk += ".lnk";

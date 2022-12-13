@@ -8,7 +8,7 @@ namespace str
 
 
 
-BSTR AllocSysString(const wd32char * pchData, strsize nDataLength) noexcept
+BSTR AllocSysString(const ::wd32_character * pchData, strsize nDataLength) noexcept
 {
 
    BSTR bstr = nullptr;
@@ -30,7 +30,7 @@ BSTR AllocSysString(const wd32char * pchData, strsize nDataLength) noexcept
 
 
 // pbstr is [in,out] BSTR string
-bool ReAllocSysString(BSTR * pbstr, const wd32char * pchData, strsize nDataLength) noexcept
+bool ReAllocSysString(BSTR * pbstr, const ::wd32_character * pchData, strsize nDataLength) noexcept
 {
 
    strsize nLen = utf_to_utf_length(pbstr, pchData, nDataLength);
@@ -50,7 +50,7 @@ bool ReAllocSysString(BSTR * pbstr, const wd32char * pchData, strsize nDataLengt
 
 
 
-u32 format_message(u32 dwFlags, const void * pSource, u32 dwMessageID, u32 dwLanguageID, wd32char * pszBuffer, u32 nSize, va_list * pArguments) noexcept
+u32 format_message(u32 dwFlags, const void * pSource, u32 dwMessageID, u32 dwLanguageID, ::wd32_character * pszBuffer, u32 nSize, va_list * pArguments) noexcept
 {
 
 #ifdef WINDOWS
@@ -70,13 +70,13 @@ u32 format_message(u32 dwFlags, const void * pSource, u32 dwMessageID, u32 dwLan
 }
 
 
-//strsize  char_traits::SafeStringLen(const wd32char * psz) noexcept
+//strsize  char_traits::SafeStringLen(const ::wd32_character * psz) noexcept
 //{
 //   // returns length in bytes
 //   return (psz != nullptr) ? strsize(strlen(psz)) : 0;
 //}
 //
-//strsize  char_traits::SafeStringLen(const wd32char * psz) noexcept
+//strsize  char_traits::SafeStringLen(const ::wd32_character * psz) noexcept
 //{
 //   // returns length in wchar_ts
 //#ifdef WINDOWS
@@ -86,21 +86,21 @@ u32 format_message(u32 dwFlags, const void * pSource, u32 dwMessageID, u32 dwLan
 //#endif
 //}
 //
-//strsize  char_traits::GetCharLen(const wd32char* pch) noexcept
+//strsize  char_traits::GetCharLen(const ::wd32_character* pch) noexcept
 //{
 //   (void)pch;
-//   // returns wd32char length
+//   // returns ::wd32_character length
 //   return 1;
 //}
 //
-//strsize  char_traits::GetCharLen(const wd32char* pch) noexcept
+//strsize  char_traits::GetCharLen(const ::wd32_character* pch) noexcept
 //{
-//   // returns wd32char length
+//   // returns ::wd32_character length
 //   return  ::str().get_utf8_char(pch).get_length();
 //}
 
 
-// u32 xxxget_environment_variable(const wd32char * pszVar, wd32char * pszBuffer, u32 dwSize)
+// u32 xxxget_environment_variable(const ::wd32_character * pszVar, ::wd32_character * pszBuffer, u32 dwSize)
 // {
 
 // #ifdef _UWP
@@ -127,7 +127,7 @@ u32 format_message(u32 dwFlags, const void * pSource, u32 dwMessageID, u32 dwLan
 
 //    auto pszEnv = getenv(strVar);
 
-//    wd32string wstrEnv(pszEnv);
+//    wd32_string wstrEnv(pszEnv);
 
 //    if (pszBuffer == nullptr)
 //    {
@@ -160,7 +160,7 @@ u32 format_message(u32 dwFlags, const void * pSource, u32 dwMessageID, u32 dwLan
 
 
 
-void output_debug_string(const wd32char * psz)
+void output_debug_string(const ::wd32_character * psz)
 {
 
    string str(psz);

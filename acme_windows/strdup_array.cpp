@@ -1,4 +1,4 @@
-#include "framework.h"
+﻿#include "framework.h"
 #include "node.h"
 #include "acme/primitive/collection/strdup_array.h"
 
@@ -46,7 +46,7 @@ namespace acme_windows
 
       }
 
-      return wcsdupa.m_wszptra.get_data();
+      return wcsdupa.m_wszptra.data();
 
    }
 

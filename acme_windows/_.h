@@ -93,13 +93,13 @@
 //CLASS_DECL_ACME TCHAR ** process_get_argv();
 //
 //
-//inline ansistring & assign(ansistring & ansistrDst, const cotaskptr < PWSTR > & pwidesz);
+//inline ansi_string & assign(ansi_string & ansistrDst, const cotaskptr < PWSTR > & pwidesz);
 //
-//inline widestring & assign(widestring & widestrDst, const cotaskptr < PSTR > & pansisz);
+//inline wide_string & assign(wide_string & widestrDst, const cotaskptr < PSTR > & pansisz);
 //
-//inline ansistring & assign(ansistring & ansistrDst, const cotaskptr < PWSTR > & pwidesz);
+//inline ansi_string & assign(ansi_string & ansistrDst, const cotaskptr < PWSTR > & pwidesz);
 //
-//inline widestring & assign(widestring & widestrDst, const cotaskptr < PSTR > & pansisz);
+//inline wide_string & assign(wide_string & widestrDst, const cotaskptr < PSTR > & pansisz);
 //
 //
 //CLASS_DECL_ACME string get_command_line(HANDLE handleProcess);

@@ -557,7 +557,7 @@ namespace windowing_win32
 
             string strPath = m_pathProcessed;
 
-            if (strPath.begins_eat_ci("zipresource://"))
+            if (strPath.case_insensitive_begins_eat("zipresource://"))
             {
 
                auto pfile = m_pcontext->file()->create_resource_file(strPath);

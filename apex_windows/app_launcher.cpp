@@ -172,7 +172,7 @@ namespace apex_windows
 
       auto pnode = psystem->node();
 
-      if (path.find_ci(".app//") >= 0)
+      if (path.case_insensitive_find(".app//") >= 0)
       {
 
          path -= 3;

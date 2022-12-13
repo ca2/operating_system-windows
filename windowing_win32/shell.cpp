@@ -589,7 +589,7 @@ namespace windowing_win32
 
       wstring wstrPath(strPath);
 
-      if (getfileimage.m_imagekey.m_strPath.ends_ci(".sln"))
+      if (getfileimage.m_imagekey.m_strPath.case_insensitive_ends(".sln"))
       {
 
          output_debug_string(".sln");
@@ -880,7 +880,7 @@ namespace windowing_win32
       if (((FAILED(hrIconLocation) && FAILED(hrGetLocation))
          || getfileimage.m_imagekey.m_iIcon == 0x80000000
          || !m_pcontext->m_papexcontext->file()->exists(strIconLocation))
-         && strFileParam.ends_ci(".lnk"))
+         && strFileParam.case_insensitive_ends(".lnk"))
       {
 
          m_pcontext->m_papexcontext->file()->resolve_link(pathTarget, strFileParam);
@@ -888,7 +888,7 @@ namespace windowing_win32
          if (!m_pcontext->m_papexcontext->file()->exists(pathTarget) && !m_pcontext->m_papexcontext->dir()->is(pathTarget))
          {
 
-            if (pathTarget.ends_ci(".exe"))
+            if (pathTarget.case_insensitive_ends(".exe"))
             {
 
                getfileimage.m_imagekey.set_path(pathTarget);
@@ -1057,7 +1057,7 @@ namespace windowing_win32
       else if (strIconLocation.has_char())
       {
 
-         if (strIconLocation.ends_ci(".ico"))
+         if (strIconLocation.case_insensitive_ends(".ico"))
          {
 
             set_image_ico(strIconLocation, getfileimage);
@@ -1318,7 +1318,7 @@ namespace windowing_win32
 
       getfileimage.m_iImage = 0x80000000;
 
-      if (getfileimage.m_imagekey.m_strPath.begins_ci("uifs:"))
+      if (getfileimage.m_imagekey.m_strPath.case_insensitive_begins("uifs:"))
       {
 
          if (reserve_image(getfileimage))
@@ -1334,7 +1334,7 @@ namespace windowing_win32
          return true;
 
       }
-      else if (getfileimage.m_imagekey.m_strPath.begins_ci("fs:"))
+      else if (getfileimage.m_imagekey.m_strPath.case_insensitive_begins("fs:"))
       {
 
          if (reserve_image(getfileimage))
@@ -1351,7 +1351,7 @@ namespace windowing_win32
          return true;
 
       }
-      else if (getfileimage.m_imagekey.m_strPath.begins_ci("ftp:"))
+      else if (getfileimage.m_imagekey.m_strPath.case_insensitive_begins("ftp:"))
       {
 
          if (reserve_image(getfileimage))
@@ -1369,12 +1369,12 @@ namespace windowing_win32
 
       }
 
-      if (getfileimage.m_imagekey.m_strPath.ends_ci(".aura"))
+      if (getfileimage.m_imagekey.m_strPath.case_insensitive_ends(".aura"))
       {
 
          string str = m_pcontext->m_papexcontext->file()->as_string(getfileimage.m_imagekey.m_strPath);
 
-         if (str.begins_eat_ci("ca2prompt\r\n"))
+         if (str.case_insensitive_begins_eat("ca2prompt\r\n"))
          {
 
             str.trim();
@@ -1471,7 +1471,7 @@ namespace windowing_win32
 
                //getfileimage.m_imagekey.m_strPath = strPath;
 
-               //if (!strPath.ends_ci(".ico"))
+               //if (!strPath.case_insensitive_ends(".ico"))
                //{
 
                //}
@@ -1479,7 +1479,7 @@ namespace windowing_win32
                //if (reserve_image(getfileimage))
                //{
 
-                  if (strIconLocation.ends_ci(".ico"))
+                  if (strIconLocation.case_insensitive_ends(".ico"))
                   {
 
                      set_image_ico(strIconLocation, getfileimage);
@@ -1512,9 +1512,9 @@ namespace windowing_win32
       //// And then should find icon by extension if
       //// it is a file or as folder otherwise.
 
-      //strsize iFind = imagekey.m_strPath.find_ci("://");
+      //strsize iFind = imagekey.m_strPath.case_insensitive_find("://");
 
-      //strsize iFind2 = imagekey.m_strPath.find_ci(":");
+      //strsize iFind2 = imagekey.m_strPath.case_insensitive_find(":");
 
       //if (iFind >= 0 || iFind2 >= 2)
       //{
@@ -1549,7 +1549,7 @@ namespace windowing_win32
 
       string strExtension;
 
-      if (getfileimage.m_imagekey.m_strPath.ends_ci(".sln"))
+      if (getfileimage.m_imagekey.m_strPath.case_insensitive_ends(".sln"))
       {
 
          //output_debug_string("test .sln");
@@ -1770,7 +1770,7 @@ namespace windowing_win32
 
       auto & getfileimage = (_get_file_image_ &)getfileimageParam;
 
-      if (pathIconParam.ends_ci(".ico"))
+      if (pathIconParam.case_insensitive_ends(".ico"))
       {
 
          synchronous_lock synchronouslock(synchronization());
@@ -1917,7 +1917,7 @@ namespace windowing_win32
    void shell::set_image_ico(string strIconLocation, _get_file_image_ & getfileimage)
    {
 
-      ASSERT(strIconLocation.ends_ci(".ico"));
+      ASSERT(strIconLocation.case_insensitive_ends(".ico"));
 
       getfileimage.m_imagekey.set_path(strIconLocation, false);
 
@@ -1936,7 +1936,7 @@ namespace windowing_win32
    void shell::set_image_resource(string strIconLocation, _get_file_image_ & getfileimage)
    {
 
-      ASSERT(!strIconLocation.ends_ci(".ico"));
+      ASSERT(!strIconLocation.case_insensitive_ends(".ico"));
 
       //image_key imagekeyIco;
 

@@ -80,7 +80,7 @@ namespace user_service
 
             strRequest.begins_eat_ci(strStart);
 
-            strsize iFind = strRequest.find_ci('?');
+            strsize iFind = strRequest.case_insensitive_find('?');
 
             string strApp = strRequest;
 

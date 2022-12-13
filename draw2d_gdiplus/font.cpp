@@ -172,7 +172,7 @@ namespace draw2d_gdiplus
 
                         string strFontFamily = wszGetFamilyName;
 
-                        if (strFontFamily.compare_ci(m_strFontFamilyName) == 0)
+                        if (strFontFamily.case_insensitive_order(m_strFontFamilyName) == 0)
                         {
 
                            iFoundFamily = iFamily;

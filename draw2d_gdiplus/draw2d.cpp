@@ -1,4 +1,4 @@
-#include "framework.h"
+﻿#include "framework.h"
 #include "draw2d.h"
 #include "acme/primitive/primitive/memory.h"
 
@@ -89,7 +89,7 @@ namespace draw2d_gdiplus
       if (pmemory->has_data())
       {
 
-         pfont->m_pcollection->AddMemoryFont(pmemory->get_data(), (INT)pmemory->get_size());
+         pfont->m_pcollection->AddMemoryFont(pmemory->data(), (INT)pmemory->size());
 
          auto & fontCollection = *pfont->m_pcollection;
 
@@ -97,7 +97,7 @@ namespace draw2d_gdiplus
 
          pfont->m_familya.set_size(iFamilyCount);
 
-         fontCollection.GetFamilies(iFamilyCount, pfont->m_familya.get_data(), &pfont->m_iFamilyCount);
+         fontCollection.GetFamilies(iFamilyCount, pfont->m_familya.data(), &pfont->m_iFamilyCount);
 
          pfont->m_familya.set_size(iFamilyCount);
 

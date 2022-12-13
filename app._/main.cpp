@@ -553,8 +553,8 @@ pacmedir->system() / "config/plugin/appfy_beg_debug_box.txt"))
       if (strDir.ends(PATH_SEP2))
          return strDir;
 
-      strsize iFind1 = strDir.reverse_find(PATH_SEP1);
-      strsize iFind2 = strDir.reverse_find(PATH_SEP2);
+      strsize iFind1 = strDir.rear_find(PATH_SEP1);
+      strsize iFind2 = strDir.rear_find(PATH_SEP2);
       strsize iFind = maximum(iFind1, iFind2);
 
       if (iFind < 0)

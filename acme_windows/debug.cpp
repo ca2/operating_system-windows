@@ -191,7 +191,7 @@
 
 
 
-void acme_windows_output_debug_string(const wd32char * psz)
+void acme_windows_output_debug_string(const ::wd32_character * psz)
 {
 
    string str(psz);

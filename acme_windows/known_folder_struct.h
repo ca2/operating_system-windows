@@ -1,4 +1,4 @@
-// Created by camilo on 2021-08-08 04:50 BRT <3ThomasBorregaardSørensen!!
+﻿// Created by camilo on 2021-08-08 04:50 BRT <3ThomasBorregaardSørensen!!
 #pragma once
 
 
@@ -17,7 +17,7 @@ struct sz_known_folder_struct
 
 CLASS_DECL_ACME_WINDOWS sz_known_folder_struct * get_known_folder_struct(const ::string & strKnownFolder);
 
-CLASS_DECL_ACME_WINDOWS sz_known_folder_struct * path_begins_eat_known_folder_struct_ci(::string & strPath);
+CLASS_DECL_ACME_WINDOWS sz_known_folder_struct * case_insensitive_path_begins_eat_known_folder_struct(::string & strPath);
 
 //comptr < IKnownFolder > get_IKnownFolder(const ::string & strPath);
 

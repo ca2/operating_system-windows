@@ -9,7 +9,7 @@ namespace str
 #ifdef WINDOWS
 
 
-   BSTR AllocSysString(const wd16char * pchData, strsize nDataLength) noexcept
+   BSTR AllocSysString(const ::wd16_character * pchData, strsize nDataLength) noexcept
    {
 
       BSTR bstr = nullptr;
@@ -31,7 +31,7 @@ namespace str
 
 
    // pbstr is [in,out] BSTR string
-   bool ReAllocSysString(BSTR * pbstr, const wd16char * pchData, strsize nDataLength) noexcept
+   bool ReAllocSysString(BSTR * pbstr, const ::wd16_character * pchData, strsize nDataLength) noexcept
    {
 
       strsize nLen = utf_to_utf_length(pbstr, pchData, nDataLength);
@@ -53,7 +53,7 @@ namespace str
 #endif
 
 
-   u32 format_message(u32 dwFlags, const void * pSource, u32 dwMessageID, u32 dwLanguageID, wd16char * pszBuffer, u32 nSize, va_list * pArguments) noexcept
+   u32 format_message(u32 dwFlags, const void * pSource, u32 dwMessageID, u32 dwLanguageID, ::wd16_character * pszBuffer, u32 nSize, va_list * pArguments) noexcept
    {
 
 #ifdef WINDOWS
@@ -69,13 +69,13 @@ namespace str
    }
 
 
-   //strsize  char_traits::SafeStringLen(const wd16char * psz) noexcept
+   //strsize  char_traits::SafeStringLen(const ::wd16_character * psz) noexcept
    //{
    //   // returns length in bytes
    //   return (psz != nullptr) ? strsize(strlen(psz)) : 0;
    //}
    //
-   //strsize  char_traits::SafeStringLen(const wd16char * psz) noexcept
+   //strsize  char_traits::SafeStringLen(const ::wd16_character * psz) noexcept
    //{
    //   // returns length in wchar_ts
    //#ifdef WINDOWS
@@ -85,21 +85,21 @@ namespace str
    //#endif
    //}
    //
-   //strsize  char_traits::GetCharLen(const wd16char* pch) noexcept
+   //strsize  char_traits::GetCharLen(const ::wd16_character* pch) noexcept
    //{
    //   (void)pch;
-   //   // returns wd16char length
+   //   // returns ::wd16_character length
    //   return 1;
    //}
    //
-   //strsize  char_traits::GetCharLen(const wd16char* pch) noexcept
+   //strsize  char_traits::GetCharLen(const ::wd16_character* pch) noexcept
    //{
-   //   // returns wd16char length
+   //   // returns ::wd16_character length
    //   return  ::str().get_utf8_char(pch).get_length();
    //}
 
 
-//    u32 xxxget_environment_variable(const wd16char * pszVar, wd16char * pszBuffer, u32 dwSize)
+//    u32 xxxget_environment_variable(const ::wd16_character * pszVar, ::wd16_character * pszBuffer, u32 dwSize)
 //    {
 
 // #ifdef _UWP
@@ -116,7 +116,7 @@ namespace str
 
 //       auto pszEnv = getenv(strVar);
 
-//       wd16string wstrEnv(pszEnv);
+//       wd16_string wstrEnv(pszEnv);
 
 //       if (pszBuffer == nullptr)
 //       {

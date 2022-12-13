@@ -54,7 +54,7 @@ namespace write_text_win32
 
       class font_enumeration* pfontenumeration = this;
 
-      ::EnumFontFamiliesW(m_hdc, (const widechar *)nullptr, &font_enumeration::OLDFONTENUMPROCW, (LPARAM)pfontenumeration);
+      ::EnumFontFamiliesW(m_hdc, (const ::wide_character *)nullptr, &font_enumeration::OLDFONTENUMPROCW, (LPARAM)pfontenumeration);
 
       for (auto & pitem : m_pfontenumerationitema->ptra())
       {

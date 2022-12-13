@@ -263,7 +263,7 @@ i32 app_t::run()
 
       string strRepos = path.name();
 
-      if (strRepos.find_ci("repos2") >= 0)
+      if (strRepos.case_insensitive_find("repos2") >= 0)
       {
          m_bMainRepos = false;
       }

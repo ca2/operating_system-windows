@@ -1,4 +1,4 @@
-#include "framework.h"
+﻿#include "framework.h"
 #include "file_memory_map.h"
 #include "acme_directory.h"
 #include "acme/parallelization/synchronous_lock.h"
@@ -34,7 +34,7 @@ namespace acme_windows
 
       string strPath = get_path();
 
-      if (strPath.begins_ci("Local\\") || strPath.begins_ci("Global\\"))
+      if (strPath.case_insensitive_begins("Local\\") || strPath.case_insensitive_begins("Global\\"))
       {
 
          wstring wstr(strPath);

@@ -1,4 +1,4 @@
-#include "framework.h"
+﻿#include "framework.h"
 #include "acme/exception/exception.h"
 #include "acme/primitive/primitive/memory.h"
 #include "acme/primitive/string/international.h"
@@ -82,7 +82,7 @@ namespace acme_windows
 
          memory.set_size(cbValue);
 
-         auto estatus = _value(memory.get_data(), pcszValueName, dwType, cbValue);
+         auto estatus = _value(memory.data(), pcszValueName, dwType, cbValue);
          
          if (!estatus)
          {
@@ -324,7 +324,7 @@ namespace acme_windows
 
       mem.set_size(cbValue);
 
-      bOk = _value(mem.get_data(), pcszValueName, dwType, cbValue);
+      bOk = _value(mem.data(), pcszValueName, dwType, cbValue);
 
       if (!bOk)
       {
@@ -380,7 +380,7 @@ namespace acme_windows
 
       wstring wstr(strValue);
 
-      return _set_value(wstr.c_str(), pcszValueName, REG_SZ, (::u32) wstr.get_length_in_bytes_with_null_terminator());
+      return _set_value(wstr.c_str(), pcszValueName, REG_SZ, (::u32) wstr.length_in_bytes_with_null_terminator());
 
    }
 
@@ -396,7 +396,7 @@ namespace acme_windows
    void registry::key::_set(const ::string & pcszValueName, const memory & memValue)
    {
 
-      return _set_value(memValue.get_data(), pcszValueName, REG_BINARY, (::u32) memValue.get_size());
+      return _set_value(memValue.data(), pcszValueName, REG_BINARY, (::u32) memValue.size());
 
    }
 
@@ -650,11 +650,15 @@ namespace acme_windows
       if (dwType == REG_SZ || dwType == REG_MULTI_SZ || dwType == REG_EXPAND_SZ)
       {
 
-         simple_wstring pwsz(byte_count, dwSize);
+         wstring wstr;
+         
+         auto pwsz = wstr.get_string_buffer(dwSize/sizeof(::wide_character));
 
          lResult = RegQueryValueExW(hkey, wstring(pszSubKey), nullptr, &dwType, (byte *)(unichar *)pwsz, &dwSize);
 
-         str = pwsz;
+         wstr.release_string_buffer(dwSize / sizeof(::wide_character));
+
+         str = wstr;
 
          //str.release_string_buffer(dwSize);
 
@@ -683,9 +687,9 @@ typedef
 LSTATUS
 (APIENTRY * LPFN_RegGetValueW) (
    HKEY hkey,
-   const widechar * pSubKey,
+   const ::wide_character * pSubKey,
 
-   const widechar * pValue,
+   const ::wide_character * pValue,
 
    u32 dwFlags,
    LPDWORD pdwType,
@@ -697,7 +701,7 @@ LSTATUS
 LPFN_RegGetValueW g_pfnRegGetValueW = nullptr;
 
 
-int WinRegGetValueW(HKEY hkey, const widechar * pSubKey, const widechar * lpValue, ::u32 dwFlags, LPDWORD pdwType, PVOID pvData, LPDWORD pcbData)
+int WinRegGetValueW(HKEY hkey, const ::wide_character * pSubKey, const ::wide_character * lpValue, ::u32 dwFlags, LPDWORD pdwType, PVOID pvData, LPDWORD pcbData)
 {
 
    if (g_pfnRegGetValueW != nullptr)

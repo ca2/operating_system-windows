@@ -1,4 +1,4 @@
-// created by Camilo 2021-01-31 05:36 BRT <3CamiloSasukeThomasBorregaardSoerensen
+﻿// created by Camilo 2021-01-31 05:36 BRT <3CamiloSasukeThomasBorregaardSoerensen
 // From interprocess_communcation by camilo on 2022-10-11 15:32 <3ThomasBorregaardSorensen!!
 #include "framework.h"
 #include "launcher.h"
@@ -402,7 +402,7 @@ namespace apex_windows
    //void * interprocess_target::on_interprocess_receive(::inteprocess::handler * prx, const ::string & strMessage)
    //{
 
-   //   if (strMessage.begins_ci("synch_"))
+   //   if (strMessage.case_insensitive_begins("synch_"))
    //   {
 
    //      if (m_preceiver != nullptr)

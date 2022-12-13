@@ -1269,7 +1269,7 @@ namespace acme_windows
          if (bModuleNameIsPropertyFormatted)
          {
 
-            if (entry.th32ProcessID != 0 && strPath.compare_ci(pathModule) == 0)
+            if (entry.th32ProcessID != 0 && strPath.case_insensitive_order(pathModule) == 0)
             {
 
                iaPid.add((::i64)entry.th32ProcessID);
@@ -1394,7 +1394,7 @@ namespace acme_windows
       return ::acme_windows::predicate_process_module(processid, [&](auto & me32)
          {
 
-            return !straSuffix.suffixes_ci(string(me32.szModule)) && !stra.contains_ci(string(me32.szModule));
+            return !straSuffix.case_insensitive_suffixes(string(me32.szModule)) && !stra.contains_ci(string(me32.szModule));
 
          });
 
@@ -1440,15 +1440,15 @@ namespace acme_windows
 
       memory.set_size(iImageSize);
 
-      GetModuleFileNameExW(hProcess, nullptr, (WCHAR *)memory.get_data(), (DWORD)(memory.get_size() / sizeof(WCHAR)));
+      GetModuleFileNameExW(hProcess, nullptr, (WCHAR *)memory.data(), (DWORD)(memory.size() / sizeof(WCHAR)));
 
-      strImage = (const wchar_t *)memory.get_data();
+      strImage = (const wchar_t *)memory.data();
 
       wstring wstrLibrary(pszLibrary);
 
       bool bFound = false;
 
-      if (EnumProcessModules(hProcess, hmods.get_data(), (DWORD)(hmods.get_size_in_bytes()), &cbNeeded))
+      if (EnumProcessModules(hProcess, hmods.data(), (DWORD)(hmods.get_size_in_bytes()), &cbNeeded))
       {
 
          for (i = 0; i < ::index(cbNeeded / sizeof(HMODULE)); i++)
@@ -1456,10 +1456,10 @@ namespace acme_windows
 
             // Get the full path to the module's file.
 
-            if (GetModuleFileNameExW(hProcess, hmods[i], (WCHAR *)memory.get_data(), (DWORD)(memory.get_size() / sizeof(WCHAR))))
+            if (GetModuleFileNameExW(hProcess, hmods[i], (WCHAR *)memory.data(), (DWORD)(memory.size() / sizeof(WCHAR))))
             {
 
-               if (!string_compare_ci((const wchar_t *)memory.get_data(), wstrLibrary))
+               if (case_insensitive_string_order((const wchar_t *)memory.data(), wstrLibrary) == 0)
                {
 
                   bFound = true;
@@ -1494,7 +1494,7 @@ namespace acme_windows
 
       index i;
 
-      if (!EnumProcesses((DWORD *)aProcesses.get_data(), (DWORD)(aProcesses.get_size_in_bytes()), &cbNeeded))
+      if (!EnumProcesses((DWORD *)aProcesses.data(), (DWORD)(aProcesses.get_size_in_bytes()), &cbNeeded))
       {
 
          return;
@@ -1891,13 +1891,15 @@ namespace acme_windows
 
       DWORD dwSize = GetEnvironmentVariableW(wstrEnvironmentVariable, nullptr, 0);
 
-      acme::memory_allocate < LPWSTR > lpwsz(dwSize + 1);
+      wstring wstr;
 
-      dwSize = (DWORD)lpwsz.get_size();
+      auto pwsz = wstr.get_string_buffer(dwSize);
 
-      dwSize = GetEnvironmentVariableW(wstrEnvironmentVariable, lpwsz, dwSize);
+      dwSize = GetEnvironmentVariableW(wstrEnvironmentVariable, pwsz, dwSize);
 
-      str = (const WCHAR *)lpwsz;
+      wstr.release_string_buffer(dwSize);
+
+      str = wstr;
 
       return str;
 
@@ -2543,11 +2545,15 @@ namespace acme_windows
       if (dwType == REG_SZ || dwType == REG_MULTI_SZ || dwType == REG_EXPAND_SZ)
       {
 
-         simple_wstring pwsz(byte_count, dwSize);
+         wstring wstr;
+         
+         auto pwsz = wstr.get_string_buffer(dwSize);
 
          lResult = RegQueryValueExW(hkey, wstring(pszSubKey), nullptr, &dwType, (byte *)(unichar *)pwsz, &dwSize);
 
-         str = pwsz;
+         wstr.release_string_buffer(dwSize);
+
+         str = wstr;
 
          //str.release_string_buffer(dwSize);
 
@@ -3494,10 +3500,10 @@ namespace acme_windows
       static const int FILE_DIALOG_MAX_BUFFER = 16384;
       tmp1.set_size(FILE_DIALOG_MAX_BUFFER);
       tmp1.zero();
-      wchar_t* tmp = (wchar_t*)tmp1.get_data();
+      wchar_t* tmp = (wchar_t*)tmp1.data();
       ofn.lpstrFile = tmp;
       //;; ZeroMemory(tmp, FILE_DIALOG_MAX_BUFFER);
-      ofn.nMaxFile = (DWORD)tmp1.get_size();
+      ofn.nMaxFile = (DWORD)tmp1.size();
       ofn.nFilterIndex = 1;
 
       memory filter;
@@ -3531,7 +3537,7 @@ namespace acme_windows
          __wide_append_null(filter);
       }
       __wide_append_null(filter);
-      ofn.lpstrFilter = (LPWSTR)filter.get_data();
+      ofn.lpstrFilter = (LPWSTR)filter.data();
 
       if (save) {
          ofn.Flags = OFN_EXPLORER | OFN_PATHMUSTEXIST | OFN_OVERWRITEPROMPT;

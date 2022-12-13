@@ -95,28 +95,28 @@
 
 // #ifdef WINDOWS
 
-//    inline ansistring & assign(ansistring & ansistrDst, const cotaskptr < PWSTR > & pwidesz);
+//    inline ansi_string & assign(ansi_string & ansistrDst, const cotaskptr < PWSTR > & pwidesz);
 
-//    inline widestring & assign(widestring & widestrDst, const cotaskptr < PSTR > & pansisz);
+//    inline wide_string & assign(wide_string & widestrDst, const cotaskptr < PSTR > & pansisz);
 
-//    inline ansistring & assign(ansistring & ansistrDst, const cotaskptr < PWSTR > & pwidesz);
+//    inline ansi_string & assign(ansi_string & ansistrDst, const cotaskptr < PWSTR > & pwidesz);
 
-//    inline widestring & assign(widestring & widestrDst, const cotaskptr < PSTR > & pansisz);
+//    inline wide_string & assign(wide_string & widestrDst, const cotaskptr < PSTR > & pansisz);
 
 // #endif
 
 
 // #ifdef WINDOWS
 //    // wd16
-//    CLASS_DECL_ACME  BSTR               AllocSysString(const ansichar * pchData, strsize nDataLength) noexcept;
-//    CLASS_DECL_ACME  bool               ReAllocSysString(BSTR * pbstr, const ansichar * pchData, strsize nDataLength) noexcept;
+//    CLASS_DECL_ACME  BSTR               AllocSysString(const ::ansi_character * pchData, strsize nDataLength) noexcept;
+//    CLASS_DECL_ACME  bool               ReAllocSysString(BSTR * pbstr, const ::ansi_character * pchData, strsize nDataLength) noexcept;
 
 // #endif
 
 // #ifdef WINDOWS
 //    // wd32
-//    inline  BSTR               AllocSysString(const wd32char * pchData, strsize nDataLength) noexcept;
-//    inline  bool               ReAllocSysString(BSTR * pbstr, const wd32char * pchData, strsize nDataLength) noexcept;
+//    inline  BSTR               AllocSysString(const ::wd32_character * pchData, strsize nDataLength) noexcept;
+//    inline  bool               ReAllocSysString(BSTR * pbstr, const ::wd32_character * pchData, strsize nDataLength) noexcept;
 
 // #endif
 

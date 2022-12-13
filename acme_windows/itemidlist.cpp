@@ -1,4 +1,4 @@
-#include "framework.h"
+﻿#include "framework.h"
 #include "itemidlist.h"
 #include "known_folder_struct.h"
 #include "acme/exception/exception.h"
@@ -970,7 +970,7 @@ LPITEMIDLIST itemidlist::_copy(LPCITEMIDLIST pidlOrg, int nCount)
 }
 
 
-int itemidlist::_compare(LPCITEMIDLIST pidlf1, LPCITEMIDLIST pidlf2,
+int itemidlist::_order(LPCITEMIDLIST pidlf1, LPCITEMIDLIST pidlf2,
                          IShellFolder * psfFolder, LPARAM lParam)
 {
 
@@ -1029,7 +1029,7 @@ HRESULT itemidlist::get_item_in_known_folder(itemidlist & idl, const string & st
 
    HRESULT hr = E_FAIL;
 
-   auto pknownfolder = path_begins_eat_known_folder_struct_ci(strPath);
+   auto pknownfolder = case_insensitive_path_begins_eat_known_folder_struct(strPath);
 
    if (pknownfolder)
    {

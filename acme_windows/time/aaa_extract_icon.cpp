@@ -5,7 +5,7 @@
 //http://borland.public.cppbuilder.nativeapi.narkive.com/7OPcjHO5/loading-x48-icons-with-extracticonex
 
 
-BOOL ExtractResourceIcon_EnumNamesFunc(HMODULE hModule, const widechar * pType, LPWSTR lpName, LONG_PTR lParam);
+BOOL ExtractResourceIcon_EnumNamesFunc(HMODULE hModule, const ::wide_character * pType, LPWSTR lpName, LONG_PTR lParam);
 
 
 CLASS_DECL_ACME HICON ExtractResourceIcon(const ::string & strPath, int& cx, int& cy, int iIcon);
@@ -78,7 +78,7 @@ typedef struct
 #pragma pack( pop )
 
 
-BOOL ExtractResourceIcon_EnumNamesFunc(HMODULE hModule, const widechar * pType, LPWSTR lpName, LONG_PTR lParam);
+BOOL ExtractResourceIcon_EnumNamesFunc(HMODULE hModule, const ::wide_character * pType, LPWSTR lpName, LONG_PTR lParam);
 
 
 CLASS_DECL_ACME HICON ExtractResourceIcon(const ::string & strPath, int& cx, int& cy, int iIcon)
@@ -171,7 +171,7 @@ CLASS_DECL_ACME HICON ExtractResourceIcon(const ::string & strPath, int& cx, int
 }
 
 
-BOOL ExtractResourceIcon_EnumNamesFunc(HMODULE hModule, const widechar * pType, LPWSTR pName, LONG_PTR lParam)
+BOOL ExtractResourceIcon_EnumNamesFunc(HMODULE hModule, const ::wide_character * pType, LPWSTR pName, LONG_PTR lParam)
 
 {
 

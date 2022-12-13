@@ -226,7 +226,7 @@ namespace apex_windows
       for(i32 i = 0; i < dwa.get_count(); i++)
       {
 
-         if(get_process_path(dwa[i]).compare_ci(lpszName) == 0)
+         if(get_process_path(dwa[i]).case_insensitive_order(lpszName) == 0)
          {
             
             dwPid = dwa[i];
@@ -254,7 +254,7 @@ namespace apex_windows
       for(i32 i = 0; i < dwa.get_count(); i++)
       {
 
-         if(get_process_path(dwa[i]).title().compare_ci(lpszName) == 0)
+         if(get_process_path(dwa[i]).title().case_insensitive_order(lpszName) == 0)
          {
 
             dwPid = dwa[i];
@@ -1376,7 +1376,7 @@ retry:
       ::acme::application * papp = get_app();
 
       if(get_app()->m_papexapplication->m_strAppName.is_empty()
-            || get_app()->m_papexapplication->m_strAppName.compare_ci("bergedge") == 0
+            || get_app()->m_papexapplication->m_strAppName.case_insensitive_order("bergedge") == 0
             || !get_app()->is_service())
          return "";
 
@@ -1933,7 +1933,7 @@ retry:
 
          //      wstr.release_string_buffer();
 
-         //      string strLink = unicode_to_utf8((const widechar *)wstr);
+         //      string strLink = unicode_to_utf8((const ::wide_character *)wstr);
 
          //      if (strLink.is_empty() && pitemidlist)
          //      {
@@ -1960,7 +1960,7 @@ retry:
 
          //         wstr.release_string_buffer();
 
-         //         *pstrDirectory = unicode_to_utf8((const widechar *)wstr);
+         //         *pstrDirectory = unicode_to_utf8((const ::wide_character *)wstr);
 
          //      }
 
@@ -1976,7 +1976,7 @@ retry:
 
          //         wstr.release_string_buffer();
 
-         //         *pstrParams = unicode_to_utf8((const widechar *)wstr);
+         //         *pstrParams = unicode_to_utf8((const ::wide_character *)wstr);
 
          //      }
 
@@ -2100,7 +2100,7 @@ retry:
 
       }
 
-      if (strSource.ends_ci(".lnk"))
+      if (strSource.case_insensitive_ends(".lnk"))
       {
 
          if (resolve_lnk_link(path, strSource, pstrDirectory, pstrParams, pstrIcon, piIcon))         {
@@ -2119,7 +2119,7 @@ retry:
    bool os_context::resolve_lnk_link(::file::path & path, const ::string & strSource, string * pstrDirectory, string * pstrParams, string * pstrIcon, int * piIcon)
    {
 
-      ASSERT(strSource.ends_ci(".lnk"));
+      ASSERT(strSource.case_insensitive_ends(".lnk"));
 
       if (strSource.contains("0318") && strSource.contains("removal"))
       {
@@ -2207,7 +2207,7 @@ retry:
 
                wstr.release_string_buffer();
 
-               string strLink = unicode_to_utf8((const widechar *)wstr);
+               string strLink = unicode_to_utf8((const ::wide_character *)wstr);
 
                if (strLink.is_empty() && pitemidlist)
                {
@@ -2234,7 +2234,7 @@ retry:
 
                   wstr.release_string_buffer();
 
-                  *pstrDirectory = unicode_to_utf8((const widechar *)wstr);
+                  *pstrDirectory = unicode_to_utf8((const ::wide_character *)wstr);
 
                }
 
@@ -2250,7 +2250,7 @@ retry:
 
                   wstr.release_string_buffer();
 
-                  *pstrParams = unicode_to_utf8((const widechar *)wstr);
+                  *pstrParams = unicode_to_utf8((const ::wide_character *)wstr);
 
                }
 
@@ -2268,7 +2268,7 @@ retry:
 
                   wstr.release_string_buffer();
 
-                  *pstrIcon = unicode_to_utf8((const widechar*)wstr);
+                  *pstrIcon = unicode_to_utf8((const ::wide_character*)wstr);
 
                   if (*piIcon)
                   {
@@ -2330,37 +2330,37 @@ retry:
             strId = "edge";
 
          }
-         if (strProgId.begins_ci("IE."))
+         if (strProgId.case_insensitive_begins("IE."))
          {
 
             strId = "ie";
 
          }
-         else if (strProgId.begins_ci("ChromeHTML"))
+         else if (strProgId.case_insensitive_begins("ChromeHTML"))
          {
 
             strId = "chrome";
 
          }
-         else if (strProgId.begins_ci("FirefoxHTML"))
+         else if (strProgId.case_insensitive_begins("FirefoxHTML"))
          {
 
             strId = "firefox";
 
          }
-         else if (strProgId.begins_ci("Opera"))
+         else if (strProgId.case_insensitive_begins("Opera"))
          {
 
             strId = "opera";
 
          }
-         else if (strProgId.begins_ci("VivaldiHTM."))
+         else if (strProgId.case_insensitive_begins("VivaldiHTM."))
          {
 
             strId = "vivaldi";
 
          }
-         else if (strProgId.ends_ci("app_core_commander"))
+         else if (strProgId.case_insensitive_ends("app_core_commander"))
          {
 
             strId = "commander";
@@ -2386,9 +2386,9 @@ retry:
 
          }
 
-         bool bQuote = strDefault.begins_eat_ci("\"");
+         bool bQuote = strDefault.case_insensitive_begins_eat("\"");
 
-         strsize iFind = strDefault.find_ci(".exe");
+         strsize iFind = strDefault.case_insensitive_find(".exe");
 
          if (iFind <= 0)
          {
@@ -2408,7 +2408,7 @@ retry:
          if (bQuote)
          {
 
-            strParam.begins_eat_ci("\"");
+            strParam.case_insensitive_begins_eat("\"");
 
          }
 
@@ -2850,7 +2850,7 @@ repeat:
 
       }
 
-      if (!str.ends_ci(".exe"))
+      if (!str.case_insensitive_ends(".exe"))
       {
 
          str += ".exe";

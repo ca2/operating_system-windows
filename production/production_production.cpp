@@ -3508,7 +3508,7 @@ retry1:
 
       string str = pcontext->m_papexcontext->file().as_string(pszUrl);
 
-      index iFind1 = str.find_tail("FILEVERSION ");
+      index iFind1 = str.rear_find("FILEVERSION ");
       if (iFind1 > 0)
       {
 
@@ -3530,7 +3530,7 @@ retry1:
 
       }
 
-      iFind1 = str.find_tail("VALUE \"FileVersion\", \"");
+      iFind1 = str.rear_find("VALUE \"FileVersion\", \"");
       if (iFind1 > 0)
       {
 

@@ -72,7 +72,7 @@ namespace windowing_win32
 
          }
 
-         ::EnumFontFamiliesW(m_hdc, (const widechar *)nullptr, (FONTENUMPROCW)&wingdi_font_enum::callback, (lparam)this);
+         ::EnumFontFamiliesW(m_hdc, (const ::wide_character *)nullptr, (FONTENUMPROCW)&wingdi_font_enum::callback, (lparam)this);
 
          for (auto & pitem : m_itema.ptra())
          {

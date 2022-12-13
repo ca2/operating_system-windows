@@ -1213,7 +1213,7 @@ namespace windows
    //         if (iSkip == DEFAULT_SE_EXCEPTION_CALLSTACK_SKIP)
    //         {
 
-   //            if (::str().find_ci("KiUserExceptionDispatcher", psz) >= 0)
+   //            if (::str().case_insensitive_find("KiUserExceptionDispatcher", psz) >= 0)
    //            {
 
    //               iSkip = 0;

@@ -6,7 +6,7 @@ namespace str
 {
 
 
-   BSTR AllocSysString(const ansichar * pchData, strsize nDataLength) noexcept
+   BSTR AllocSysString(const ::ansi_character * pchData, strsize nDataLength) noexcept
    {
 
       BSTR bstr = nullptr;
@@ -28,7 +28,7 @@ namespace str
 
 
    // pbstr is [in,out] BSTR string
-   bool ReAllocSysString(BSTR * pbstr, const ansichar * pchData, strsize nDataLength) noexcept
+   bool ReAllocSysString(BSTR * pbstr, const ::ansi_character * pchData, strsize nDataLength) noexcept
    {
 
       strsize nLen = utf_to_utf_length(pbstr, pchData, nDataLength);
@@ -69,7 +69,7 @@ namespace str
    }
 
 
-   u32 format_message(u32 dwFlags, const void * pSource, u32 dwMessageID, u32 dwLanguageID, ansichar * pszBuffer, u32 nSize, va_list * pArguments) noexcept
+   u32 format_message(u32 dwFlags, const void * pSource, u32 dwMessageID, u32 dwLanguageID, ::ansi_character * pszBuffer, u32 nSize, va_list * pArguments) noexcept
    {
 
        return ::FormatMessageA(dwFlags, pSource, dwMessageID, dwLanguageID, pszBuffer, nSize, pArguments);
@@ -77,7 +77,7 @@ namespace str
    }
 
    
-//    ::u32 xxxget_environment_variable(const ansichar * pszVar, ansichar * pszBuffer, ::u32 dwSize)
+//    ::u32 xxxget_environment_variable(const ::ansi_character * pszVar, ::ansi_character * pszBuffer, ::u32 dwSize)
 //    {
 
 // #ifdef _UWP
@@ -90,7 +90,7 @@ namespace str
 
 // #else
 
-//          const ansichar * pszEnv = getenv(pszVar);
+//          const ::ansi_character * pszEnv = getenv(pszVar);
 
 //          if (pszBuffer == nullptr)
 //          {

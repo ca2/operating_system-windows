@@ -104,7 +104,7 @@ namespace acme_windows
 
       // See: https://github.com/wjwwood/serial/issues/84
       wstring port_with_prefix = _prefix_port_if_needed(m_wstrPort);
-      const widechar* p_port = port_with_prefix.c_str();
+      const ::wide_character* p_port = port_with_prefix.c_str();
 
       m_hFile = CreateFileW(p_port,
 

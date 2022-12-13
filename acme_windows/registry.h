@@ -123,7 +123,7 @@ namespace acme_windows
 
 CLASS_DECL_ACME_WINDOWS void windows_registry_initialize();
 
-CLASS_DECL_ACME_WINDOWS int WinRegGetValueW(HKEY hkey, const widechar * pSubKey, const widechar * lpValue, ::u32 dwFlags, LPDWORD pdwType, PVOID pvData, LPDWORD pcbData);
+CLASS_DECL_ACME_WINDOWS int WinRegGetValueW(HKEY hkey, const ::wide_character * pSubKey, const ::wide_character * lpValue, ::u32 dwFlags, LPDWORD pdwType, PVOID pvData, LPDWORD pcbData);
 
 CLASS_DECL_ACME_WINDOWS string file_get_mozilla_firefox_plugin_container_path();
 

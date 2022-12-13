@@ -3,7 +3,7 @@
 #include "acme/_operating_system.h"
 
 
-BSTR AllocSysString(const wd32char * pchData, strsize nDataLength) noexcept
+BSTR AllocSysString(const ::wd32_character * pchData, strsize nDataLength) noexcept
 {
 
    BSTR bstr = nullptr;
@@ -25,7 +25,7 @@ BSTR AllocSysString(const wd32char * pchData, strsize nDataLength) noexcept
 
 
 // pbstr is [in,out] BSTR string
-bool ReAllocSysString(BSTR * pbstr, const wd32char * pchData, strsize nDataLength) noexcept
+bool ReAllocSysString(BSTR * pbstr, const ::wd32_character * pchData, strsize nDataLength) noexcept
 {
 
    strsize nLen = utf_to_utf_length((wchar_t *) pbstr, pchData, nDataLength);
@@ -44,7 +44,7 @@ bool ReAllocSysString(BSTR * pbstr, const wd32char * pchData, strsize nDataLengt
 }
 
 
-u32 format_message(u32 dwFlags, const void * pSource, u32 dwMessageID, u32 dwLanguageID, wd32char * pszBuffer, u32 nSize, va_list * pArguments) noexcept
+u32 format_message(u32 dwFlags, const void * pSource, u32 dwMessageID, u32 dwLanguageID, ::wd32_character * pszBuffer, u32 nSize, va_list * pArguments) noexcept
 {
 
 #ifdef WINDOWS

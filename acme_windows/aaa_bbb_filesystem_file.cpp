@@ -30,7 +30,7 @@ string file_final_extension_dup(const char * path)
 
    string str = file_path_name(path);
 
-   strsize iPos = str.rfind('.');
+   strsize iPos = str.rear_find('.');
 
    if (iPos >= 0)
    {
@@ -58,7 +58,7 @@ string url_dir_name_for_relative(const char * pszPath)
 
    strDir.ends_eat("/");
 
-   strsize iFind = strDir.reverse_find("/");
+   strsize iFind = strDir.rear_find("/");
 
    if (iFind < 0)
       return "/";

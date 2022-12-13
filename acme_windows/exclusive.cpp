@@ -69,7 +69,7 @@ namespace acme_windows
    //
    //      ::file::path path;
    //
-   //      if(strId.begins_ci("Local\\"))
+   //      if(strId.case_insensitive_begins("Local\\"))
    //      {
    //
    //         path = pparticle->acmedirectory()->home() / ".config/acme";
