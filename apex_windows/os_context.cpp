@@ -325,7 +325,7 @@ namespace apex_windows
 
          ua.allocate(ua.get_count() + 1024);
 
-         if(!EnumProcesses((DWORD *) ua.get_data(), (DWORD) (ua.get_count() * sizeof(::u32)), &cbNeeded))
+         if(!EnumProcesses((DWORD *) ua.m_begin, (DWORD) (ua.get_count() * sizeof(::u32)), &cbNeeded))
          {
 
             return;
@@ -375,7 +375,7 @@ namespace apex_windows
 
          key1.get("DefaultConnectionSettings", mem);
 
-         bool bAutoDetect = (((byte*)mem.get_data())[8] & 0x08) != 0;
+         bool bAutoDetect = (((byte*)mem.data())[8] & 0x08) != 0;
 
          if (!bAutoDetect)
          {
@@ -859,7 +859,7 @@ namespace apex_windows
          if (key._open(HKEY_CLASSES_ROOT, "ChromeHTML\\shell\\open\\command"))
          {
 
-            string str = key.get("").as_string();
+            string str = key.get("");
 
             auto psz = str.c_str();
 
@@ -3624,7 +3624,7 @@ repeat:
             if (rgSpec.get_size() > 0)
             {
 
-               pfileopen->SetFileTypes(::u32(rgSpec.get_size()), rgSpec.get_data());
+               pfileopen->SetFileTypes(::u32(rgSpec.get_size()), rgSpec.m_begin());
 
             }
 
@@ -3874,7 +3874,7 @@ repeat:
             if (rgSpec.get_size() > 0)
             {
 
-               pfilesave->SetFileTypes(::u32 (rgSpec.get_size()), rgSpec.get_data());
+               pfilesave->SetFileTypes(::u32 (rgSpec.get_size()), rgSpec.m_begin());
 
             }
 

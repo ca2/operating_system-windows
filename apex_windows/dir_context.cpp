@@ -770,13 +770,13 @@ namespace apex_windows
 
       while (iLast >= 0)
       {
-         if (str.m_pdata[iLast] != '\\' && str.m_pdata[iLast] != '/' && str.m_pdata[iLast] != ':')
+         if (str.m_begin[iLast] != '\\' && str.m_begin[iLast] != '/' && str.m_begin[iLast] != ':')
             break;
          iLast--;
       }
       while (iLast >= 0)
       {
-         if (str.m_pdata[iLast] == '\\' || str.m_pdata[iLast] == '/' || str.m_pdata[iLast] == ':')
+         if (str.m_begin[iLast] == '\\' || str.m_begin[iLast] == '/' || str.m_begin[iLast] == ':')
             break;
          iLast--;
       }
@@ -784,7 +784,7 @@ namespace apex_windows
       {
          while (iLast >= 0)
          {
-            if (str.m_pdata[iLast] != '\\' && str.m_pdata[iLast] != '/' && str.m_pdata[iLast] != ':')
+            if (str.m_begin[iLast] != '\\' && str.m_begin[iLast] != '/' && str.m_begin[iLast] != ':')
             {
                iLast++;
                break;
@@ -1108,13 +1108,13 @@ namespace apex_windows
 
       while (iLast >= 0)
       {
-         if (str.m_pdata[iLast] != '\\' && str.m_pdata[iLast] != '/' && str.m_pdata[iLast] != ':')
+         if (str.m_begin[iLast] != '\\' && str.m_begin[iLast] != '/' && str.m_begin[iLast] != ':')
             break;
          iLast--;
       }
       while (iLast >= 0)
       {
-         if (str.m_pdata[iLast] == '\\' || str.m_pdata[iLast] == '/' || str.m_pdata[iLast] == ':')
+         if (str.m_begin[iLast] == '\\' || str.m_begin[iLast] == '/' || str.m_begin[iLast] == ':')
             break;
          iLast--;
       }
@@ -1122,7 +1122,7 @@ namespace apex_windows
       {
          while (iLast >= 0)
          {
-            if (str.m_pdata[iLast] != '\\' && str.m_pdata[iLast] != '/' && str.m_pdata[iLast] != ':')
+            if (str.m_begin[iLast] != '\\' && str.m_begin[iLast] != '/' && str.m_begin[iLast] != ':')
                break;
             iLast--;
          }
@@ -1152,7 +1152,7 @@ namespace apex_windows
          time = ::earth::time::now();
          strFormat.format("%04d-%02d-%02d %02d-%02d-%02d\\", time.year(), time.month(), time.day(), time.hour(), time.minute(), time.second());
          str += strFormat;
-         if (strDir.m_pdata[2] == '\\')
+         if (strDir.m_begin[2] == '\\')
          {
             str += strDir.Mid(3);
          }
@@ -1217,7 +1217,7 @@ namespace apex_windows
    bool dir_context::is_inside(const ::file::path & pszDir, const ::file::path & pszPath)
    {
 
-      return pszDir.begins_ci(pszPath);
+      return pszDir.case_insensitive_begins(pszPath);
 
    }
 
