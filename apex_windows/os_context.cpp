@@ -3624,7 +3624,7 @@ repeat:
             if (rgSpec.get_size() > 0)
             {
 
-               pfileopen->SetFileTypes(::u32(rgSpec.get_size()), rgSpec.m_begin());
+               pfileopen->SetFileTypes(::u32(rgSpec.get_size()), rgSpec.m_begin);
 
             }
 
@@ -4010,7 +4010,7 @@ repeat:
             if (set["folder"].length() > 0)
             {
 
-               wstring wstr(set["folder"].as_string());
+               wstring wstr(set["folder"]);
 
                comptr < IShellItem > psi;
 
@@ -4128,7 +4128,7 @@ repeat:
             if (set["folder"].length() > 0)
             {
 
-               wstring wstr(set["folder"].as_string());
+               wstring wstr(set["folder"]);
 
                comptr < IShellItem > psi;
 
