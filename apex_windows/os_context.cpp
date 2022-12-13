@@ -3640,21 +3640,21 @@ repeat:
             if (set["default_file_extension"].length() > 0)
             {
 
-               pfileopen->SetDefaultExtension(wstring(set["default_file_extension"].as_string()));
+               pfileopen->SetDefaultExtension(wstring(set["default_file_extension"]));
 
             }
 
             if (set["file_name"].length() > 0)
             {
 
-               pfileopen->SetFileName(wstring(set["file_name"].as_string()));
+               pfileopen->SetFileName(wstring(set["file_name"]));
 
             }
 
             if (set["folder"].length() > 0)
             {
 
-               wstring wstr(set["folder"].as_string());
+               wstring wstr(set["folder"]);
 
                comptr < IShellItem > psi;
 
@@ -3874,28 +3874,28 @@ repeat:
             if (rgSpec.get_size() > 0)
             {
 
-               pfilesave->SetFileTypes(::u32 (rgSpec.get_size()), rgSpec.m_begin());
+               pfilesave->SetFileTypes(::u32 (rgSpec.get_size()), rgSpec.m_begin);
 
             }
 
             if (set["default_file_extension"].length() > 0)
             {
 
-               pfilesave->SetDefaultExtension(wstring(set["default_file_extension"].as_string()));
+               pfilesave->SetDefaultExtension(wstring(set["default_file_extension"]));
 
             }
 
             if (set["file_name"].length() > 0)
             {
 
-               pfilesave->SetFileName(wstring(set["file_name"].as_string()));
+               pfilesave->SetFileName(wstring(set["file_name"]));
 
             }
 
             if (set["folder"].length() > 0)
             {
 
-               wstring wstr(set["folder"].as_string());
+               wstring wstr(set["folder"]);
 
                comptr < IShellItem > psi;
 

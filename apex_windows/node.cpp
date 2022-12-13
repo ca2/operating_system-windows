@@ -779,7 +779,7 @@ namespace apex_windows
 
             0,
             dwResSize,
-            memory.get_data()))
+            memory.data()))
 
          {
             ::u32 cbTranslate;
@@ -792,7 +792,7 @@ namespace apex_windows
 
             // read the list of languages and code pages.
 
-            VerQueryValue(memory.get_data(),
+            VerQueryValue(memory.data(),
                TEXT("\\VarFileInfo\\Translation"),
                (LPVOID*)&pTranslate,
                &cbTranslate);
@@ -819,7 +819,7 @@ namespace apex_windows
                wstring wstrKey(strKey);
 
                // Retrieve file description for language and code page "i".
-               if (VerQueryValueW(memory.get_data(),
+               if (VerQueryValueW(memory.data(),
                   (WCHAR*)(const WCHAR*)wstrKey,
                   (LPVOID*)&psz,
                   &uSize))
@@ -904,13 +904,15 @@ namespace apex_windows
       if (dwType == REG_SZ || dwType == REG_MULTI_SZ || dwType == REG_EXPAND_SZ)
       {
 
-         simple_wstring pwsz(byte_count, dwSize);
+         wstring wstr;
+         
+         auto pwsz = wstr.get_string_buffer(dwSize);
 
          lResult = RegQueryValueExW(hkey, wstring(pszSubKey), nullptr, &dwType, (byte*)(unichar*)pwsz, &dwSize);
 
-         str = pwsz;
+         wstr.release_string_buffer(dwSize);
 
-         //str.release_string_buffer(dwSize);
+         str = wstr;
 
          return lResult;
 
