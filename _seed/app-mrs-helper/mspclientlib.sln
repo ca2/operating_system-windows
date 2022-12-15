@@ -5,17 +5,17 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "mspclientlib", "..\..\..\so
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
-		debug|Win32 = debug|Win32
-		debug|x64 = debug|x64
+		Debug|Win32 = Debug|Win32
+		Debug|x64 = Debug|x64
 		codeanalysis|Win32 = codeanalysis|Win32
 		codeanalysis|x64 = codeanalysis|x64
 		profiler|Win32 = profiler|Win32
 		profiler|x64 = profiler|x64
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{551FF06B-6134-4393-BEF0-BDA6AD6A4B30}.debug|Win32.ActiveCfg = debug|Win32
-		{551FF06B-6134-4393-BEF0-BDA6AD6A4B30}.debug|Win32.Build.0 = debug|Win32
-		{551FF06B-6134-4393-BEF0-BDA6AD6A4B30}.debug|x64.ActiveCfg = debug|Win32
+		{551FF06B-6134-4393-BEF0-BDA6AD6A4B30}.Debug|Win32.ActiveCfg = Debug|Win32
+		{551FF06B-6134-4393-BEF0-BDA6AD6A4B30}.Debug|Win32.Build.0 = Debug|Win32
+		{551FF06B-6134-4393-BEF0-BDA6AD6A4B30}.Debug|x64.ActiveCfg = Debug|Win32
 		{551FF06B-6134-4393-BEF0-BDA6AD6A4B30}.codeanalysis|Win32.ActiveCfg = codeanalysis|Win32
 		{551FF06B-6134-4393-BEF0-BDA6AD6A4B30}.codeanalysis|Win32.Build.0 = codeanalysis|Win32
 		{551FF06B-6134-4393-BEF0-BDA6AD6A4B30}.codeanalysis|x64.ActiveCfg = codeanalysis|Win32

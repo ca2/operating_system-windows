@@ -42,7 +42,9 @@ namespace acme_windows
 
          }
 
-         path = wstrPath.release_string_buffer();
+         wstrPath.release_string_buffer();
+
+         path = ::string(wstrPath);
 
       }
 

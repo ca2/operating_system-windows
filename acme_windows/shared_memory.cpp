@@ -10,8 +10,8 @@ shared_memory::shared_memory(const memory_base & s)
    m_nAllocFlags = 0;
    m_hGlobalMemory = nullptr;
    m_bAllowGrow = true;
-   m_memory.m_beginStorage = nullptr;
-   m_memory.m_begin = nullptr;
+   m_beginStorage = nullptr;
+   m_begin = nullptr;
 
    memory_base::operator             = (s);
 
@@ -22,10 +22,10 @@ shared_memory::shared_memory(memory_container * pcontainer, double dAllocationRa
 
    m_nAllocFlags = nAllocFlags;
    m_bAllowGrow = true;
-   m_memory.m_pcontainer = pcontainer;
-   m_memory.m_dAllocationRateUp = dAllocationRateUp;
-   m_memory.m_beginStorage = nullptr;
-   m_memory.m_begin = nullptr;
+   m_pcontainer = pcontainer;
+   m_dAllocationRateUp = dAllocationRateUp;
+   m_beginStorage = nullptr;
+   m_begin = nullptr;
 
 }
 
@@ -33,16 +33,16 @@ shared_memory::shared_memory(memory_container * pcontainer, void * pMemory, mems
 {
 
    m_nAllocFlags = 0;
-   m_memory.m_pcontainer = pcontainer;
+   m_pcontainer = pcontainer;
    m_bAllowGrow = true;
-   m_memory.m_beginStorage = nullptr;
-   m_memory.m_begin = nullptr;
+   m_beginStorage = nullptr;
+   m_begin = nullptr;
 
    set_size(dwSize);
 
    ASSERT(__is_valid_address(pMemory, (uptr)dwSize, false));
 
-   ::memcpy_dup(m_memory.m_beginStorage, pMemory, (size_t)dwSize);
+   ::memcpy_dup(m_beginStorage, pMemory, (size_t)dwSize);
 
 }
 
@@ -51,16 +51,16 @@ shared_memory::shared_memory(const void * pMemory, memsize dwSize)
 {
 
    m_nAllocFlags = 0;
-   m_memory.m_pcontainer = nullptr;
+   m_pcontainer = nullptr;
    m_bAllowGrow = true;
-   m_memory.m_beginStorage = nullptr;
-   m_memory.m_begin = nullptr;
+   m_beginStorage = nullptr;
+   m_begin = nullptr;
 
    set_size(dwSize);
 
    ASSERT(__is_valid_address(pMemory, (uptr)dwSize, false));
 
-   ::memcpy_dup(m_memory.m_beginStorage, pMemory, (size_t)dwSize);
+   ::memcpy_dup(m_beginStorage, pMemory, (size_t)dwSize);
 
 }
 
@@ -68,10 +68,10 @@ shared_memory::shared_memory(const void * pMemory, memsize dwSize)
 shared_memory::~shared_memory()
 {
 
-   if (m_memory.m_beginStorage != nullptr)
+   if (m_beginStorage != nullptr)
    {
 
-      impl_free(m_memory.m_beginStorage);
+      impl_free(m_beginStorage);
 
    }
 
@@ -81,12 +81,12 @@ shared_memory::~shared_memory()
 byte * shared_memory::detach_shared_memory(HGLOBAL & hglobal)
 {
 
-   if (m_memory.m_iOffset > 0)
+   if (m_iOffset > 0)
    {
 
       ::pointer<shared_memory>pusermessage = clone();
 
-      impl_free(m_memory.m_beginStorage);
+      impl_free(m_beginStorage);
 
       pusermessage->detach_shared_memory(hglobal);
 
@@ -98,13 +98,13 @@ byte * shared_memory::detach_shared_memory(HGLOBAL & hglobal)
 
    }
 
-   byte * pbStorage = m_memory.m_beginStorage;
+   byte * pbStorage = m_beginStorage;
 
    m_hGlobalMemory = nullptr;
-   m_memory.m_beginStorage = nullptr;
-   m_memory.m_begin = nullptr;
-   m_memory.m_sizeStorage = 0;
-   m_memory.m_end = 0;
+   m_beginStorage = nullptr;
+   m_begin = nullptr;
+   m_sizeStorage = 0;
+   m_end = 0;
 
    return pbStorage;
 
@@ -118,7 +118,7 @@ void shared_memory::SetHandle(HGLOBAL hGlobalMemory, bool bAllowGrow)
 
    ASSERT(m_hGlobalMemory == nullptr);        // do once only
 
-   ASSERT(m_memory.m_beginStorage == nullptr);     // do once only
+   ASSERT(m_beginStorage == nullptr);     // do once only
 
    if (hGlobalMemory == nullptr)
    {
@@ -129,11 +129,11 @@ void shared_memory::SetHandle(HGLOBAL hGlobalMemory, bool bAllowGrow)
 
    m_hGlobalMemory = hGlobalMemory;
 
-   m_memory.m_beginStorage = (byte *)::GlobalLock(m_hGlobalMemory);
+   m_beginStorage = (byte *)::GlobalLock(m_hGlobalMemory);
 
-   m_memory.m_begin = m_memory.m_beginStorage;
+   m_begin = m_beginStorage;
 
-   m_memory.m_end = m_memory.m_begin + (m_memory.m_sizeStorage = ::GlobalSize(m_hGlobalMemory));
+   m_end = m_begin + (m_sizeStorage = ::GlobalSize(m_hGlobalMemory));
 
    // xxx m_bAllowGrow = bAllowGrow;
 

@@ -1,4 +1,4 @@
-// Create on 2021-03-22 09:12 <3ThomasBS_
+﻿// Create on 2021-03-22 09:12 <3ThomasBS_
 #include "framework.h"
 #include "acme_path.h"
 #include "acme/filesystem/filesystem/path.h"
@@ -60,7 +60,7 @@ namespace acme_windows
          if (hfile == INVALID_HANDLE_VALUE)
          {
 
-            return wstr;
+            return ::string(wstr);
 
          }
 
@@ -94,7 +94,7 @@ namespace acme_windows
 
       ::CloseHandle(hfile);
 
-      return wstr;
+      return ::string(wstr);
 
    }
 

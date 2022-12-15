@@ -91,7 +91,7 @@ namespace acme_windows
 
          }
 
-         return memory;
+         return memory.as_string();
 
       }
 

@@ -7,18 +7,18 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app._", "app._.vcxproj", "{
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
-		debug|x64 = debug|x64
-		debug|x86 = debug|x86
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
 		cover|x64 = cover|x64
 		cover|x86 = cover|x86
 		stage|x64 = stage|x64
 		stage|x86 = stage|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{11AFE887-61B7-4217-913C-36736B359F39}.debug|x64.ActiveCfg = debug|x64
-		{11AFE887-61B7-4217-913C-36736B359F39}.debug|x64.Build.0 = debug|x64
-		{11AFE887-61B7-4217-913C-36736B359F39}.debug|x86.ActiveCfg = debug|Win32
-		{11AFE887-61B7-4217-913C-36736B359F39}.debug|x86.Build.0 = debug|Win32
+		{11AFE887-61B7-4217-913C-36736B359F39}.Debug|x64.ActiveCfg = Debug|x64
+		{11AFE887-61B7-4217-913C-36736B359F39}.Debug|x64.Build.0 = Debug|x64
+		{11AFE887-61B7-4217-913C-36736B359F39}.Debug|x86.ActiveCfg = Debug|Win32
+		{11AFE887-61B7-4217-913C-36736B359F39}.Debug|x86.Build.0 = Debug|Win32
 		{11AFE887-61B7-4217-913C-36736B359F39}.cover|x64.ActiveCfg = cover|x64
 		{11AFE887-61B7-4217-913C-36736B359F39}.cover|x64.Build.0 = cover|x64
 		{11AFE887-61B7-4217-913C-36736B359F39}.cover|x86.ActiveCfg = cover|Win32

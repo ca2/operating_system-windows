@@ -1,16 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
-    <ProjectConfiguration Include="debug|ARM">
-      <Configuration>debug</Configuration>
+    <ProjectConfiguration Include="Debug|ARM">
+      <Configuration>Debug</Configuration>
       <Platform>ARM</Platform>
     </ProjectConfiguration>
-    <ProjectConfiguration Include="debug|Win32">
-      <Configuration>debug</Configuration>
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
       <Platform>Win32</Platform>
     </ProjectConfiguration>
-    <ProjectConfiguration Include="debug|x64">
-      <Configuration>debug</Configuration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
@@ -25,17 +25,17 @@
     <ApplicationTypeRevision>8.1</ApplicationTypeRevision>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='debug|Win32'" Label="Configuration">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v120</PlatformToolset>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='debug|ARM'" Label="Configuration">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v120</PlatformToolset>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='debug|x64'" Label="Configuration">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v120</PlatformToolset>
@@ -43,15 +43,15 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
-  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='debug|Win32'" Label="PropertySheets">
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="..\..\..\operating-system\operating-system-universal_windows\Common.props" />
   </ImportGroup>
-  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='debug|ARM'" Label="PropertySheets">
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="..\..\..\operating-system\operating-system-universal_windows\Common.props" />
   </ImportGroup>
-  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='debug|x64'" Label="PropertySheets">
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="..\..\..\operating-system\operating-system-universal_windows\Common.props" />
   </ImportGroup>
@@ -62,7 +62,7 @@
   <PropertyGroup>
     <PackageCertificateKeyFile>Direct3DApp2_TemporaryKey.pfx</PackageCertificateKeyFile>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='debug|Win32'">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <OutDir>$(SolutionDir)..\..\..\stage\x86\</OutDir>
     <IntDir>$(TimeDir)intermediate\x86\$(ProjectName)\</IntDir>
     <ReferencePath>$(VCInstallDir)lib</ReferencePath>
@@ -75,21 +75,21 @@
     <Link>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <GenerateWindowsMetadata>false</GenerateWindowsMetadata>
-      <SubSystem Condition="'$(Configuration)|$(Platform)'=='debug|Win32'">Windows</SubSystem>
-      <AdditionalLibraryDirectories Condition="'$(Configuration)|$(Platform)'=='debug|Win32'">$(SolutionDir)../../time/library/x86/$(ConfigurationName);$(__operating_system)third-windows/thirdparty/library;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <SubSystem Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Windows</SubSystem>
+      <AdditionalLibraryDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)../../time/library/x86/$(ConfigurationName);$(__operating_system)third-windows/thirdparty/library;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       
-      <ImportLibrary Condition="'$(Configuration)|$(Platform)'=='debug|Win32'">$(OutDir)$(TargetName).lib</ImportLibrary>
+      <ImportLibrary Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(OutDir)$(TargetName).lib</ImportLibrary>
     </Link>
     <ClCompile>
       <PrecompiledHeaderFile>framework.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile>$(IntDir)pch.pch</PrecompiledHeaderOutputFile>
       <AdditionalIncludeDirectories>$(__sensitive)/sensitive/include;$(SolutionDir)../../../source/include;$(SolutionDir)../../../source/app/_include;$(SolutionDir)../../third/include;.;$(SolutionDir)../../../source;$(SolutionDir)../../../source/app;$(SolutionDir)../../../source/app/thirdparty/include;$(SolutionDir)../../../source/app/thirdparty;$(SolutionDir)../../../source;$(SolutionDir)../../../source/app;;$(SolutionDir)../../../source;$(ProjectDir)../..;$(ProjectDir)../../;$(ProjectDir)../;$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='debug|Win32'">_APP_CORE_HELLOMULTIVERSE_LIBRARY;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='debug|Win32'">/bigobj %(AdditionalOptions)</AdditionalOptions>
-      <ExceptionHandling Condition="'$(Configuration)|$(Platform)'=='debug|Win32'">Async</ExceptionHandling>
-      <DebugInformationFormat Condition="'$(Configuration)|$(Platform)'=='debug|Win32'">ProgramDatabase</DebugInformationFormat>
-      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='debug|Win32'">false</CompileAsManaged>
-      <RuntimeTypeInfo Condition="'$(Configuration)|$(Platform)'=='debug|Win32'">true</RuntimeTypeInfo>
+      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">_APP_CORE_HELLOMULTIVERSE_LIBRARY;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">/bigobj %(AdditionalOptions)</AdditionalOptions>
+      <ExceptionHandling Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Async</ExceptionHandling>
+      <DebugInformationFormat Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">ProgramDatabase</DebugInformationFormat>
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+      <RuntimeTypeInfo Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</RuntimeTypeInfo>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -104,7 +104,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="framework.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='debug|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="hellomultiverse.cpp" />
     <ClCompile Include="hellomultiverse_application.cpp" />
