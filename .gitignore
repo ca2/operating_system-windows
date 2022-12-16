@@ -20,3 +20,5 @@ solution.vc.db*
 *.expand_fileset
 *.expand_fileset.spa
 Thumbs.db
+/_seed/core_fuel2.VC.db
+/_seed/core_fuel.VC.db
