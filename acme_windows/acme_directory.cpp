@@ -201,6 +201,8 @@ namespace acme_windows
 
       ::file::path path = acmefile()->module();
 
+      path.find_replace(":", "");
+
       path = relative(path);
 
       return path;

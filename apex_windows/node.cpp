@@ -641,7 +641,7 @@ namespace apex_windows
 
       }
 
-      pathTarget = wstrTarget;
+      pathTarget = ::string(wstrTarget);
 
       return true;
 

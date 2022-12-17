@@ -8,7 +8,7 @@
 #include "acme/filesystem/file/status.h"
 #include "acme/filesystem/filesystem/acme_directory.h"
 //#include "acme/operating_system/time.h"
-#include "acme/platform/definition.h"
+#include "acme/platform/debug.h"
 #include "acme/primitive/primitive/payload.h"
 #include "acme/primitive/string/international.h"
 #include "apex/platform/system.h"
@@ -742,7 +742,7 @@ namespace apex_windows
 
             auto errorcode = ::windows::last_error_error_code(dwLastError);
 
-            throw ::file::exception(estatus, errorcode, pszFileName, "!SetFileAttributesW");
+            throw ::file::exception(estatus, errorcode, ::string(pszFileName), "!SetFileAttributesW");
 
          }
 

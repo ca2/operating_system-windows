@@ -1773,7 +1773,7 @@ retry:
 
             auto errorcode = ::windows::last_error_error_code(dwLastError);
 
-            throw ::file::exception(estatus, errorcode, wstr, "!SetFileAttributesW");
+            throw ::file::exception(estatus, errorcode, ::string(wstr), "!SetFileAttributesW");
 
          }
 
