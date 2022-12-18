@@ -146,7 +146,7 @@ namespace draw2d_gdiplus
 
       m_mem.set_size(abs(m_iStride * pbmi->bmiHeader.biHeight));
 
-      if (m_mem.get_data() == nullptr)
+      if (m_mem.data() == nullptr)
       {
 
          //return false;
@@ -155,7 +155,7 @@ namespace draw2d_gdiplus
 
       }
 
-      m_pbitmap = new Gdiplus::Bitmap(abs(pbmi->bmiHeader.biWidth), abs(pbmi->bmiHeader.biHeight),m_iStride, PixelFormat32bppPARGB, (BYTE *)m_mem.get_data());
+      m_pbitmap = new Gdiplus::Bitmap(abs(pbmi->bmiHeader.biWidth), abs(pbmi->bmiHeader.biHeight),m_iStride, PixelFormat32bppPARGB, (BYTE *)m_mem.data());
 
       if(m_pbitmap == nullptr)
       {
@@ -167,7 +167,7 @@ namespace draw2d_gdiplus
       if(ppvBits != nullptr)
       {
 
-         *ppvBits = m_mem.get_data();
+         *ppvBits = m_mem.data();
 
       }
 

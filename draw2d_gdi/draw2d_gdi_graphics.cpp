@@ -3780,7 +3780,7 @@ namespace draw2d_gdi
 
       DOCINFOW di;
 
-      __memset(&di, 0, sizeof(DOCINFOW));
+      memory_set(&di, 0, sizeof(DOCINFOW));
 
       di.cbSize = sizeof(DOCINFOW);
 

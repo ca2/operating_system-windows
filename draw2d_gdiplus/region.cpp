@@ -196,7 +196,7 @@ namespace draw2d_gdiplus
          path.SetFillMode(Gdiplus::FillModeWinding);
       }
 
-      path.AddPolygon(pa.get_data(), (i32) pa.get_count());
+      path.AddPolygon(pa.data(), (i32) pa.get_count());
 
       return new Gdiplus::Region(&path);
 
@@ -241,7 +241,7 @@ namespace draw2d_gdiplus
 
          }
 
-         path.AddPolygon(pa.get_data(), (i32) pa.get_count());
+         path.AddPolygon(pa.data(), (i32) pa.get_count());
 
          path.CloseFigure();
 

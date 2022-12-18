@@ -7,15 +7,15 @@ int __memcmp(const void * m1, const void * m2, size_t s)
 {
    return __memcmp((void *) m1, (void *) m2, s);
 }
-#pragma function(__memset)
-void * __memset( void *_dst, int _val, size_t _sz )
+#pragma function(memory_set)
+void * memory_set( void *_dst, int _val, size_t _sz )
 {
-   return __memset(_dst, _val, _sz);
+   return memory_set(_dst, _val, _sz);
 }
 #else
-/*void * __memset(void * p, int uch, size_t iSize)
+/*void * memory_set(void * p, int uch, size_t iSize)
 {
-   return __memset(dst, src, iSize);
+   return memory_set(dst, src, iSize);
 }
 */
 #pragma function(__memcmp)
@@ -23,8 +23,8 @@ int __memcmp(const void * m1, const void * m2, size_t s)
 {
    return __memcmp((void *) m1, (void *) m2, s);
 }
-#pragma function(__memset)
-void * __memset( void *_dst, int _val, size_t _sz )
+#pragma function(memory_set)
+void * memory_set( void *_dst, int _val, size_t _sz )
 {
     unsigned char * puch = (unsigned char * ) _dst;
    while(_sz > 0)

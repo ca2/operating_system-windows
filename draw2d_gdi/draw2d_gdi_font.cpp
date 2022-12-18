@@ -61,7 +61,7 @@ namespace draw2d_gdi
       if(font.get_handle() != nullptr)
       {
          LOGFONTW lf;
-         __memset(&lf, 0, sizeof(lf));
+         memory_set(&lf, 0, sizeof(lf));
          font.GetLogFont(&lf);
          CreateFontIndirect(&lf);
       }

@@ -51,7 +51,7 @@ CString get_utf8(LPCWSTR lpcwsz)
    if(count > 0)
    {
       char * lpDst = str.get_buffer_set_length(count + 1);
-      __memset(lpDst,0,count + 1);
+      memory_set(lpDst,0,count + 1);
 
       ::WideCharToMultiByte(CP_UTF8,0,lpcwsz,-1,lpDst,count,nullptr,0);
       str.ReleaseBuffer();

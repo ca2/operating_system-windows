@@ -15,7 +15,7 @@
 int main(int argc, char **argv)
 {
    WSADATA wsadata;
-   __memset(&wsadata, 0, sizeof(wsadata));
+   memory_set(&wsadata, 0, sizeof(wsadata));
    WSAStartup(0x101, &wsadata);
    SSL                *ssl = nullptr;
    SSL_CTX            *ctx = nullptr;
@@ -44,7 +44,7 @@ int main(int argc, char **argv)
    /* We're going to connect and disconnect multiple times. */
    for (i = 0; i<5; i++) {
       /* Setup the socket to connect to localhost. */
-      __memset(&clnt, 0, sizeof(clnt));
+      memory_set(&clnt, 0, sizeof(clnt));
       clnt.sin_family = AF_INET;
       //clnt.sin_addr.s_addr = htonl(0xa7721101);
       //clnt.sin_addr.s_addr = htonl(0xa7721101);

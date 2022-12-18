@@ -155,7 +155,7 @@ namespace VistaTools
    {
       SHELLEXECUTEINFOW shex;
 
-      __memset(&shex,0,sizeof(shex));
+      memory_set(&shex,0,sizeof(shex));
 
       wstring wstrVerb(pszVerb);
       wstring wstrPath(pszPath);

@@ -23,7 +23,7 @@ CLASS_DECL_APEX_WINDOWS HBITMAP get_icon_hbitmap(HICON hICON)
 
    // 1. From HICON to HBITMAP for color and mask separately
    //.cbSize required
-   //__memset((void*)&IconInfo, 0, sizeof(ICONINFOEX));
+   //memory_set((void*)&IconInfo, 0, sizeof(ICONINFOEX));
    IconInfo.cbSize = sizeof(ICONINFOEX);
    GetIconInfoEx(hICON, &IconInfo);
 

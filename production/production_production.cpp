@@ -1631,8 +1631,8 @@ pacmedir->create(pathTarget.folder()))
       ::file::path strBase = m_strBase;
       STARTUPINFO si;
       PROCESS_INFORMATION pi;
-      __memset(&si, 0, sizeof(si));
-      __memset(&pi, 0, sizeof(pi));
+      memory_set(&si, 0, sizeof(si));
+      memory_set(&pi, 0, sizeof(pi));
       si.cb = sizeof(si);
       si.dwFlags = STARTF_USESHOWWINDOW;
       si.wShowWindow = SW_HIDE;
@@ -1696,8 +1696,8 @@ pacmedir->create(pathTarget.folder()))
       string strBase = m_strBase;
       STARTUPINFOW si;
       PROCESS_INFORMATION pi;
-      __memset(&si, 0, sizeof(si));
-      __memset(&pi, 0, sizeof(pi));
+      memory_set(&si, 0, sizeof(si));
+      memory_set(&pi, 0, sizeof(pi));
       si.cb = sizeof(si);
       si.dwFlags = STARTF_USESHOWWINDOW;
       si.wShowWindow = SW_HIDE;
@@ -3338,7 +3338,7 @@ retry1:
    }
 
    /* Destroy a status message */
-   /*__memset( statusMsg, 0, 1024 );
+   /*memory_set( statusMsg, 0, 1024 );
    printf( "\nEnter status message atom to delete: " );
    gets( statusMsg );
    tmpStr = statusMsg;

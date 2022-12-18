@@ -124,7 +124,7 @@ namespace acme_windows
       for(;;)
       {
 
-         __memset(chBuf,0,BUFSIZE);
+         memory_set(chBuf,0,BUFSIZE);
 
          try
          {
@@ -166,7 +166,7 @@ namespace acme_windows
 
       char chBuf[BUFSIZE];
 
-      __memset(chBuf,0,BUFSIZE);
+      memory_set(chBuf,0,BUFSIZE);
 
       try
       {
@@ -208,7 +208,7 @@ namespace acme_windows
 
       }
 
-      __memset(&m_overlapped,0,sizeof(m_overlapped));
+      memory_set(&m_overlapped,0,sizeof(m_overlapped));
 
       m_overlapped.m_ppipe = this;
 

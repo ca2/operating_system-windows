@@ -70,7 +70,7 @@
 //{
 //   _NtQueryInformationProcess NtQueryInformationProcess = (_NtQueryInformationProcess)GetProcAddress(GetModuleHandleA("ntdll.dll"), "NtQueryInformationProcess");
 //   PROCESS_BASIC_INFORMATION pbi;
-//   __memset(&pbi, 0, sizeof(pbi));
+//   memory_set(&pbi, 0, sizeof(pbi));
 //   DWORD dwInLen = sizeof(pbi);
 //   DWORD dwOutLen = 0xffffffff;
 //   u32 dwStatus = NtQueryInformationProcess(handleProcess, ProcessBasicInformation, &pbi, dwInLen, &dwOutLen);

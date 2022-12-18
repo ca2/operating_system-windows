@@ -563,7 +563,7 @@ wstring windowing::_windows_get_user_interaction_window_class(::user::interactio
 
    WNDCLASSEXW wndcls;
 
-   __memset(&wndcls, 0, sizeof(WNDCLASSEXW));   // start with nullptr defaults
+   memory_set(&wndcls, 0, sizeof(WNDCLASSEXW));   // start with nullptr defaults
 
    wndcls.lpfnWndProc = windows_user_interaction_impl_get_window_procedure();
 

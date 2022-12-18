@@ -18,9 +18,9 @@ namespace apex_windows
    process::process()
    {
 
-      __memset(&m_pi,0,sizeof(PROCESS_INFORMATION));
+      memory_set(&m_pi,0,sizeof(PROCESS_INFORMATION));
 
-      __memset(&m_si,0,sizeof(STARTUPINFO));
+      memory_set(&m_si,0,sizeof(STARTUPINFO));
 
    }
 
@@ -80,8 +80,8 @@ namespace apex_windows
 
       /* STARTUPINFO si;
       PROCESS_INFORMATION pi;
-      __memset(&si, 0, sizeof(si));
-      __memset(&pi, 0, sizeof(pi));
+      memory_set(&si, 0, sizeof(si));
+      memory_set(&pi, 0, sizeof(pi));
       si.cb = sizeof(si);
       si.dwFlags = STARTF_USESHOWWINDOW;
       si.wShowWindow = e_display_none; */

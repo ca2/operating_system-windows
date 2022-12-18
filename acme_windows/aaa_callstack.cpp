@@ -20,7 +20,7 @@
 // The following is defined for x86 (XP and higher), x64 and IA64:
 #define GET_CURRENT_CONTEXT(pc, contextFlags) \
    do { \
-   __memset(pc, 0, sizeof(CONTEXT)); \
+   memory_set(pc, 0, sizeof(CONTEXT)); \
    pc->ContextFlags = contextFlags; \
    RtlCaptureContext(pc); \
    } while(0);
@@ -135,7 +135,7 @@ size_t engine_symbol(char * sz, int n, OS_DWORD * pdisplacement, OS_DWORD dwAddr
 
    byte symbol[4096];
    OS_PIMAGEHLP_SYMBOL pSym = (OS_PIMAGEHLP_SYMBOL)&symbol;
-   __memset(pSym, 0, sizeof(symbol));
+   memory_set(pSym, 0, sizeof(symbol));
    pSym->SizeOfStruct = sizeof(OS_IMAGEHLP_SYMBOL);
    pSym->MaxNameLength = sizeof(symbol) - sizeof(OS_IMAGEHLP_SYMBOL);
 
@@ -359,7 +359,7 @@ namespace windows
       if (!check())
          return false;
 
-      __memset(&m_stackframe, 0, sizeof(m_stackframe));
+      memory_set(&m_stackframe, 0, sizeof(m_stackframe));
 
       //  s_readMemoryFunction = readMemoryFunction;
       //s_readMemoryFunction_UserData = pUserData;
@@ -1151,7 +1151,7 @@ namespace windows
 #else
 
       current_context context;
-      __memset(&context, 0, sizeof(current_context));
+      memory_set(&context, 0, sizeof(current_context));
 
       bool bOk = DuplicateHandle(GetCurrentProcess(), get_current_htask(), GetCurrentProcess(), &context.thread, 0, 0, DUPLICATE_SAME_ACCESS) != false;
 

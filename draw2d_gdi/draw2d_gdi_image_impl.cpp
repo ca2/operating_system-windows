@@ -242,7 +242,7 @@ namespace draw2d_gdi
 
       BITMAP bm;
 
-      __memset(&bm, 0, sizeof(bm));
+      memory_set(&bm, 0, sizeof(bm));
 
       if(!pbitmap->GetBitmap(&bm))
       {

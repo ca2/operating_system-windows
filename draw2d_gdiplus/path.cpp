@@ -702,7 +702,7 @@ namespace draw2d_gdiplus
 
       }
 
-      m_ppath->AddLines(pointa.get_data(), (INT) pointa.get_count());
+      m_ppath->AddLines(pointa.data(), (INT) pointa.get_count());
 
       return true;
 
@@ -723,7 +723,7 @@ namespace draw2d_gdiplus
 
       }
 
-      m_ppath->AddPolygon(pointa.get_data(), (INT) pointa.get_count());
+      m_ppath->AddPolygon(pointa.data(), (INT) pointa.get_count());
 
       return true;
 

@@ -1,4 +1,4 @@
-// Created by camilo 2021-01
+﻿// Created by camilo 2021-01
 // Recreated by camilo 2021-02-10 <3TBS_!!
 #include "framework.h"
 #include "font_enumeration.h"
@@ -56,7 +56,7 @@ namespace write_text_win32
 
       ::EnumFontFamiliesW(m_hdc, (const ::wide_character *)nullptr, &font_enumeration::OLDFONTENUMPROCW, (LPARAM)pfontenumeration);
 
-      for (auto & pitem : m_pfontenumerationitema->ptra())
+      for (auto & pitem : *m_pfontenumerationitema)
       {
 
          enumerate_character_set(pitem);

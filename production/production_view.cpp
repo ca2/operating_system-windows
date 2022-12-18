@@ -24,7 +24,7 @@ namespace production
       m_pbrushBkActive->create_solid(rgb(150, 255, 130));
       m_pbrushBkInactive->create_solid(rgb(128, 208, 120));
       LOGFONT lf;
-      __memset(&lf, 0, sizeof(lf));
+      memory_set(&lf, 0, sizeof(lf));
 
       wcscpy(lf.lfFaceName, L"Verdana");
       lf.lfHeight = 13;

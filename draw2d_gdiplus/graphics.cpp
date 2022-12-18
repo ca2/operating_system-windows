@@ -725,7 +725,7 @@ namespace draw2d_gdiplus
 
          }
 
-         bOk1 = m_pgraphics->DrawLines(m_ppen->get_os_data < Gdiplus::Pen * >(this), pointa.get_data(), (INT)nCount) == Gdiplus::Status::Ok;
+         bOk1 = m_pgraphics->DrawLines(m_ppen->get_os_data < Gdiplus::Pen * >(this), pointa.data(), (INT)nCount) == Gdiplus::Status::Ok;
 
       }
       catch (...)
@@ -1205,7 +1205,7 @@ namespace draw2d_gdiplus
       //try
       //{
 
-      bOk1 = m_pgraphics->FillPolygon(m_pbrush->get_os_data < Gdiplus::Brush * >(this), pa.get_data(), (INT)nCount, gdiplus_get_fill_mode()) == Gdiplus::Status::Ok;
+      bOk1 = m_pgraphics->FillPolygon(m_pbrush->get_os_data < Gdiplus::Brush * >(this), pa.data(), (INT)nCount, gdiplus_get_fill_mode()) == Gdiplus::Status::Ok;
 
       //}
       //catch(...)
@@ -1285,7 +1285,7 @@ namespace draw2d_gdiplus
 
          //m_pgraphics->SetInterpolationMode(Gdiplus::InterpolationModeHighQualityBicubic);
 
-         bOk1 = m_pgraphics->DrawPolygon(m_ppen->get_os_data < Gdiplus::Pen * >(this), pointa.get_data(), (INT)nCount) == Gdiplus::Status::Ok;
+         bOk1 = m_pgraphics->DrawPolygon(m_ppen->get_os_data < Gdiplus::Pen * >(this), pointa.data(), (INT)nCount) == Gdiplus::Status::Ok;
 
       }
       catch (...)
@@ -5782,7 +5782,7 @@ namespace draw2d_gdiplus
 
          }
 
-         Gdiplus::Status status = strFormat.SetMeasurableCharacterRanges(iCount, characterrangea.get_data());
+         Gdiplus::Status status = strFormat.SetMeasurableCharacterRanges(iCount, characterrangea.data());
 
          i32 count = strFormat.GetMeasurableCharacterRangeCount();
 
@@ -5799,7 +5799,7 @@ namespace draw2d_gdiplus
 
          Gdiplus::PointF origin(0.f, 0.f);
 
-         m_pgraphics->MeasureCharacterRanges(text.m_wstr, (INT)cLength, m_pfont->get_os_data < Gdiplus::Font * >(this), box, &strFormat, count, regiona.get_data());
+         m_pgraphics->MeasureCharacterRanges(text.m_wstr, (INT)cLength, m_pfont->get_os_data < Gdiplus::Font * >(this), box, &strFormat, count, regiona.data());
 
          Gdiplus::RectF rectangleBound;
 

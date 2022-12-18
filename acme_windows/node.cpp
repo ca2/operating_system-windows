@@ -1946,7 +1946,7 @@ namespace acme_windows
 
       ULONG rc;
 
-      __memset(&StartupInfo, 0, sizeof(StartupInfo));
+      memory_set(&StartupInfo, 0, sizeof(StartupInfo));
 
       StartupInfo.cb = sizeof(STARTUPINFO);
 
@@ -2023,7 +2023,7 @@ namespace acme_windows
 
       ULONG rc;
 
-      __memset(&StartupInfo, 0, sizeof(StartupInfo));
+      memory_set(&StartupInfo, 0, sizeof(StartupInfo));
 
       StartupInfo.cb = sizeof(STARTUPINFO);
 
@@ -3332,7 +3332,7 @@ namespace acme_windows
 
       SHELLEXECUTEINFOW infoa;
 
-      __memset(&infoa, 0, sizeof(infoa));
+      memory_set(&infoa, 0, sizeof(infoa));
 
       wstring wstrFile(strPath);
       wstring wstrParam(strParam);

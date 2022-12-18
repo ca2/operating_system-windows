@@ -114,7 +114,7 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
 //   STARTUPINFO si;
 //   PROCESS_INFORMATION pi;
    SHELLEXECUTEINFO sei;
-   __memset(&sei, 0, sizeof(sei));
+   memory_set(&sei, 0, sizeof(sei));
    sei.cbSize = sizeof(sei);
    sei.fMask = SEE_MASK_NOCLOSEPROCESS;
    sei.nShow = SW_HIDE;
@@ -360,8 +360,8 @@ bool acmefile()->exists(const ::string & path1)
 //            strInstall = strCommand.substr(iStart);
 //         else
 //            strInstall = strCommand.substr(iStart, iFind - iStart);
-//         __memset(&si, 0, sizeof(si));
-//         __memset(&pi, 0, sizeof(pi));
+//         memory_set(&si, 0, sizeof(si));
+//         memory_set(&pi, 0, sizeof(pi));
 //         if(!::CreateProcess(nullptr, (LPSTR)  strInstall.c_str(),
 //            nullptr, nullptr, false, 0, nullptr, nullptr,
 //            &si, &pi))
@@ -376,8 +376,8 @@ bool acmefile()->exists(const ::string & path1)
 //   {
 //      strInstall = "C:\\ca2\\" + g_strVersion + "\\stage\\basis\\";
 //      strInstall += "winservice_1app.exe";
-//      __memset(&si, 0, sizeof(si));
-//      __memset(&pi, 0, sizeof(pi));
+//      memory_set(&si, 0, sizeof(si));
+//      memory_set(&pi, 0, sizeof(pi));
 //      if(!::CreateProcess(nullptr, (LPSTR)  strInstall.c_str(),
 //         nullptr, nullptr, false, 0, nullptr, nullptr,
 //         &si, &pi))
@@ -392,8 +392,8 @@ bool acmefile()->exists(const ::string & path1)
 //      strInstall += " : ";
 //      strInstall += "app=";
 //      strInstall += g_strId;
-//      __memset(&si, 0, sizeof(si));
-//      __memset(&pi, 0, sizeof(pi));
+//      memory_set(&si, 0, sizeof(si));
+//      memory_set(&pi, 0, sizeof(pi));
 //      if(!::CreateProcess(nullptr, (LPSTR)  strInstall.c_str(),
 //         nullptr, nullptr, false, 0, nullptr, nullptr,
 //         &si, &pi))
@@ -404,8 +404,8 @@ bool acmefile()->exists(const ::string & path1)
 //   for(unsigned int u = 0; u < g_straRestartCommandLine.size(); u++)
 //   {
 //      std::string & str = g_straRestartCommandLine.at(u);
-//      __memset(&si, 0, sizeof(si));
-//      __memset(&pi, 0, sizeof(pi));
+//      memory_set(&si, 0, sizeof(si));
+//      memory_set(&pi, 0, sizeof(pi));
 //      if(!::CreateProcess(nullptr,(LPSTR)str.c_str(),nullptr,nullptr,false,0,nullptr,nullptr,&si,&pi))
 //      {
 //         trace(("failed to create process " + str).c_str());

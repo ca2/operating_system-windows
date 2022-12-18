@@ -100,7 +100,7 @@ int APIENTRY ca2_cube_install(const ::string & pszId)
    std::string strSp = get_ca2_folder_dup() + "\\ca2\\stage\\"+strPlatform+"\\installer.exe";
 
    SHELLEXECUTEINFO sei;
-   __memset(&sei, 0, sizeof(sei));
+   memory_set(&sei, 0, sizeof(sei));
    sei.cbSize = sizeof(sei);
    sei.fMask = SEE_MASK_NOCLOSEPROCESS;
    sei.lpFile = strSp.c_str();
@@ -288,8 +288,8 @@ int installer_start(const ::string & pszVersion, const ::string & pszId)
    if(strId == "_set_windesk")
    {
       strInstall = get_ca2_folder_dup() + "\\ca2\\stage\\" + strPlatform + "\\cubeapp.exe : app=winservice_1";
-      __memset(&si, 0, sizeof(si));
-      __memset(&pi, 0, sizeof(pi));
+      memory_set(&si, 0, sizeof(si));
+      memory_set(&pi, 0, sizeof(pi));
       if(!::CreateProcess(nullptr, (LPSTR)  strInstall.c_str(),
          nullptr, nullptr, false, 0, nullptr, nullptr,
          &si, &pi))
@@ -303,8 +303,8 @@ int installer_start(const ::string & pszVersion, const ::string & pszId)
       strInstall += " : ";
       strInstall += "app=bergedge bergedge_start=";
       strInstall += strId;
-      __memset(&si, 0, sizeof(si));
-      __memset(&pi, 0, sizeof(pi));
+      memory_set(&si, 0, sizeof(si));
+      memory_set(&pi, 0, sizeof(pi));
       if(!::CreateProcess(nullptr, (LPSTR)  strInstall.c_str(),
          nullptr, nullptr, false, 0, nullptr, nullptr,
          &si, &pi))
