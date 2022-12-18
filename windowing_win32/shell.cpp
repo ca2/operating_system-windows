@@ -174,13 +174,13 @@ bool IsDibSection(HBITMAP bmp)
          if (h < 0)
          {
          
-            ::vertical_swap_copy_colorref(pimage->get_data(), pimage->width(), pimage->height(), pimage->scan_size(), (const color32_t *)pBits, iStride);
+            ::vertical_swap_copy_colorref(pimage->data(), pimage->width(), pimage->height(), pimage->scan_size(), (const color32_t *)pBits, iStride);
 
          }
          else
          {
 
-            ::copy_colorref(pimage->get_data(), pimage->width(), pimage->height(), pimage->scan_size(), (const color32_t *)pBits, iStride);
+            ::copy_colorref(pimage->data(), pimage->width(), pimage->height(), pimage->scan_size(), (const color32_t *)pBits, iStride);
 
          }
 

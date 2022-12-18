@@ -369,7 +369,7 @@ uint32_t GetColorMonochrome(uint8_t * xordata, uint8_t * anddata, int x, int y, 
 array< ::size_i32 > ico_file_sizes(const ::block & block)
 {
    array< ::size_i32 > sizea;
-   ICONDIR * gd = (ICONDIR *)block.get_data();
+   ICONDIR * gd = (ICONDIR *)block.data();
    if (gd->idType == 1)
    {
       for (int i = 0; i < gd->idCount; ++i)
@@ -377,7 +377,7 @@ array< ::size_i32 > ico_file_sizes(const ::block & block)
          //WARNING: The ICONDIRENTRY's data might be wrong!
          DWORD offset = gd->idEntries[i].dwImageOffset;
          DWORD size = gd->idEntries[i].dwBytesInRes;
-         if (offset > block.get_size())
+         if (offset > block.size())
          {
 
             throw exception(::error_bad_data_format, "Could not get ico_file_sizes");
@@ -385,7 +385,7 @@ array< ::size_i32 > ico_file_sizes(const ::block & block)
          }
 
 
-         auto buf = (byte *)(((uint8_t *)block.get_data()) + ((uint32_t)offset));
+         auto buf = (byte *)(((uint8_t *)block.data()) + ((uint32_t)offset));
 
          int w;
          int h;
@@ -611,8 +611,10 @@ namespace windowing_win32
 
             ::size_i32 size1 = size;
 
-            for (auto& hicon1 : m_iconmap.values())
+            for (auto& pair : m_iconmap)
             {
+
+               auto hicon1 = pair.element2();
 
                auto info = MyGetIconInfo(hicon1);
 
@@ -634,8 +636,10 @@ namespace windowing_win32
                size1.cx = 0;
                size1.cy = 0;
 
-               for (auto& hicon1 : m_iconmap.values())
+               for (auto& pair : m_iconmap)
                {
+
+                  auto & hicon1 = pair.m_element2;
 
                   auto info = MyGetIconInfo(hicon1);
 

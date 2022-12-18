@@ -1,7 +1,7 @@
 ﻿#include "framework.h"
 #include "shell_open.h"
 #include "acme/parallelization/task.h"
-#include "acme/platform/definition.h"
+#include "acme/platform/debug.h"
 #include "apex/platform/application.h"
 
 

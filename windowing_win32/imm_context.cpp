@@ -101,7 +101,7 @@ string imm_context::_get_candidate(int iList)
 
    mem.set_size(dwSize);
 
-   LPCANDIDATELIST pc = (LPCANDIDATELIST)mem.get_data();
+   LPCANDIDATELIST pc = (LPCANDIDATELIST)mem.data();
 
    if (::is_null(pc))
    {
@@ -110,13 +110,13 @@ string imm_context::_get_candidate(int iList)
 
    }
 
-   ImmGetCandidateListW(m_himc, iList, pc, (::u32)mem.get_size());
+   ImmGetCandidateListW(m_himc, iList, pc, (::u32)mem.size());
 
    int iTest = pc->dwOffset[0];
 
    auto iTest2 = (byte *)&pc->dwOffset[pc->dwCount] - (u8 *)pc;
 
-   unichar * pwsz = (unichar *)(mem.get_data() + pc->dwOffset[pc->dwSelection]);
+   unichar * pwsz = (unichar *)(mem.data() + pc->dwOffset[pc->dwSelection]);
 
    return pwsz;
 

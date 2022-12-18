@@ -2,7 +2,7 @@
 #include "copydesk.h"
 #include "acme/exception/exception.h"
 #include "acme/parallelization/synchronous_lock.h"
-#include "acme/platform/definition.h"
+#include "acme/platform/debug.h"
 #include "acme/primitive/string/international.h"
 #include "aura/graphics/image/image.h"
 
@@ -661,7 +661,7 @@ namespace windowing_win32
 
                pimage->map();
 
-               bOk = GetDIBits(hdcMem, hbitmap, 0, bm.bmHeight, pimage->get_data(), &bi, DIB_RGB_COLORS) != false;
+               bOk = GetDIBits(hdcMem, hbitmap, 0, bm.bmHeight, pimage->data(), &bi, DIB_RGB_COLORS) != false;
 
             }
 
