@@ -5722,7 +5722,7 @@ namespace windowing_win32
 //
 //            string strType = ::str().demangle(puserinteraction->type_name());
 //
-//            if (strType.contains_ci("list_box"))
+//            if (strType.case_insensitive_contains("list_box"))
 //            {
 //
 //               ::output_debug_string("list_box e_message_left_button_down");
@@ -5749,7 +5749,7 @@ namespace windowing_win32
 //
 //            string strType;
 //
-//            if (strType.contains_ci("list_box"))
+//            if (strType.case_insensitive_contains("list_box"))
 //            {
 //
 //               ::output_debug_string("list_box e_message_non_client_left_button_down");
@@ -5794,7 +5794,7 @@ namespace windowing_win32
 //
 //               strType = ::str().demangle(puserinteraction->type_name());
 //
-//               if (strType.contains_ci("list_box"))
+//               if (strType.case_insensitive_contains("list_box"))
 //               {
 //
 //                  //::output_debug_string("list_box e_message_mouse_move");

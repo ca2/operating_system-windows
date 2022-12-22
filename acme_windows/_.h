@@ -84,7 +84,7 @@
 //CLASS_DECL_ACME int_bool HFILE_set_size(HANDLE h, u64 iSize);
 //
 //#ifdef WINDOWS
-//CLASS_DECL_ACME int_bool read_resource_as_file(const char * pszFile, HINSTANCE hinst, ::u32 nID, LPCTSTR pcszType);
+//CLASS_DECL_ACME int_bool read_resource_as_file(const scoped_string & strFile, HINSTANCE hinst, ::u32 nID, LPCTSTR pcszType);
 //
 //#endif
 //
@@ -133,7 +133,7 @@
 //CLASS_DECL_ACME bool is_valid_FILETIME(const FILETIME & ft) noexcept;
 //
 //
-//CLASS_DECL_ACME int_bool read_resource_as_file(const char * pszFile, HINSTANCE hinst, ::u32 nID, LPCTSTR pcszType);
+//CLASS_DECL_ACME int_bool read_resource_as_file(const scoped_string & strFile, HINSTANCE hinst, ::u32 nID, LPCTSTR pcszType);
 //
 //
 //namespace acme_windows

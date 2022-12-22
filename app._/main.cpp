@@ -231,8 +231,8 @@ pacmedir->system() / "config/plugin/appfy_beg_debug_box.txt"))
 
       if (iFind >= 0)
       {
-         strRoot = strApp.Left(iFind);
-         strDomain = strApp.Mid(iFind + 1);
+         strRoot = strApp.left(iFind);
+         strDomain = strApp.substr(iFind + 1);
       }
       else
       {
@@ -296,8 +296,8 @@ pacmedir->system() / "config/plugin/appfy_beg_debug_box.txt"))
             }
             else
             {
-               strRoot = "app-" + strParse.Left(iFind);
-               strDomain = strParse.Mid(iFind + 1);
+               strRoot = "app-" + strParse.left(iFind);
+               strDomain = strParse.substr(iFind + 1);
             }
          }
          else if (strParse.begins_eat_ci("platform_"))
@@ -363,8 +363,8 @@ pacmedir->system() / "config/plugin/appfy_beg_debug_box.txt"))
 
                if (iFind > 0)
                {
-                  strRoot = strParse.Left(iFind);
-                  strDomain = strParse.Mid(iFind + 1);
+                  strRoot = strParse.left(iFind);
+                  strDomain = strParse.substr(iFind + 1);
                }
                else
                {

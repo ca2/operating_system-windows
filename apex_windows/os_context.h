@@ -98,9 +98,9 @@ namespace apex_windows
 
       bool resolve_lnk_link(::file::path & path, const ::string & strSource, string * pstrDirectory = nullptr, string * pstrParams = nullptr, string * pstrIcon = nullptr, int * piIcon = nullptr);
 
-      bool has_alias_in_path(const char * psz, bool bNoUI = false, bool bNoMount = false) override;
+      bool has_alias_in_path(const scoped_string & str, bool bNoUI = false, bool bNoMount = false) override;
 
-      bool is_alias(const char * psz) override;
+      bool is_alias(const scoped_string & str) override;
 
 
       DECLSPEC_NO_RETURN void raise_exception(u32 dwExceptionCode, u32 dwExceptionFlags);

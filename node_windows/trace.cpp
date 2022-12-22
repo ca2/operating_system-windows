@@ -220,7 +220,7 @@ void TraceDDE(const ::string & pszPrefix, const MSG* pMsg)
       }
       ASSERT(hCommands != nullptr);
 
-      const char * pszCommands = (const ::string &)::GlobalLock(hCommands);
+      const scoped_string & strCommands = (const ::string &)::GlobalLock(hCommands);
 
       ENSURE_THROW(pszCommands != nullptr, throw ::exception(error_no_memory));
 

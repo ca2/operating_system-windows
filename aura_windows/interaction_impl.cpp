@@ -85,7 +85,7 @@ namespace aura_windows
    interaction_impl::~interaction_impl()
    {
 
-      if (m_strDebug.contains_ci("main_frame"))
+      if (m_strDebug.case_insensitive_contains("main_frame"))
       {
 
          output_debug_string("main_frame");
@@ -4535,7 +4535,7 @@ void interaction_impl::set_tool_window(bool bSet)
 //
 //            string strType = ::str().demangle(m_puserinteraction->type_name());
 //
-//            if (strType.contains_ci("list_box"))
+//            if (strType.case_insensitive_contains("list_box"))
 //            {
 //
 //               ::output_debug_string("list_box e_message_left_button_down");
@@ -4562,7 +4562,7 @@ void interaction_impl::set_tool_window(bool bSet)
 //
 //            string strType;
 //
-//            if (strType.contains_ci("list_box"))
+//            if (strType.case_insensitive_contains("list_box"))
 //            {
 //
 //               ::output_debug_string("list_box e_message_non_client_left_button_down");
@@ -4607,7 +4607,7 @@ void interaction_impl::set_tool_window(bool bSet)
 //
 //               strType = ::str().demangle(m_puserinteraction->type_name());
 //
-//               if (strType.contains_ci("list_box"))
+//               if (strType.case_insensitive_contains("list_box"))
 //               {
 //
 //                  //::output_debug_string("list_box e_message_mouse_move");

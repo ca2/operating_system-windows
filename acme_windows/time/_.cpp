@@ -442,7 +442,7 @@ bool __is_valid_atom(ATOM nAtom)
 // __is_valid_address() returns true if the passed parameter is
 // a valid representation of a local or a global atom within a const char *.
 
-bool __is_valid_atom(const char * psz)
+bool __is_valid_atom(const scoped_string & str)
 {
 
    return HIWORD(psz) == 0L && __is_valid_atom(ATOM(LOWORD(psz)));
@@ -609,7 +609,7 @@ namespace windows
       
       message_box() { m_hwnd = nullptr; m_emessagebox = e_message_box_ok; }
 
-      ::enum_dialog_result show(HWND hwnd, const char* pszMessage, const char* pszTitle, const ::e_message_box& emessagebox)
+      ::enum_dialog_result show(HWND hwnd, const scoped_string & strMessage, const scoped_string & strTitle, const ::e_message_box& emessagebox)
       {
 
          m_hwnd = hwnd;

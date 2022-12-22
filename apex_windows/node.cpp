@@ -1008,7 +1008,7 @@ namespace apex_windows
                if (findRootEnd > 0)
                {
 
-                  strRoot = papp->m_strAppId.Left(findRootEnd);
+                  strRoot = papp->m_strAppId.left(findRootEnd);
 
                }
 

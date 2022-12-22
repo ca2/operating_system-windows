@@ -458,7 +458,7 @@ namespace apex_windows
       string strExtension = path.final_extension();
 
       strExtension.make_upper();
-      const char * psz = strExtension;
+      const scoped_string & str = strExtension;
       if (strExtension == "HTML")
       {
 

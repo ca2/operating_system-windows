@@ -68,7 +68,7 @@ string imm_context::get_string(int iStr)
 }
 
 
-void imm_context::set_string(const char* psz, int iStr)
+void imm_context::set_string(const scoped_string & str, int iStr)
 {
 
    wstring wstr(psz);

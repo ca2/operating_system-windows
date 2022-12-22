@@ -5463,11 +5463,11 @@ namespace draw2d_gdiplus
    //   strsize iRange = 0;
    //   strsize i = 0;
    //   strsize iLen;
-   //   const char * pszStart = str;
-   //   const char * psz = pszStart;
+   //   const scoped_string & strStart = str;
+   //   const scoped_string & str = pszStart;
    //   while (*psz)
    //   {
-   //      const char * pszNext = ::str().utf8_inc(psz);
+   //      const scoped_string & strNext = ::str().utf8_inc(psz);
    //      if (pszNext == nullptr)
    //         break;
    //      iLen = pszNext - psz;
@@ -5516,9 +5516,9 @@ namespace draw2d_gdiplus
 
       daRight.erase_all();
 
-      wstring wstrBefore(str.Left(iStartParam));
+      wstring wstrBefore(str.left(iStartParam));
 
-      wstring wstrMiddle(str.Mid(iStartParam, iCountParam));
+      wstring wstrMiddle(str.substr(iStartParam, iCountParam));
 
       m_pfont->defer_update(this, 0);
 
@@ -5982,7 +5982,7 @@ namespace draw2d_gdiplus
       strsize iRange = 0;
       strsize i = 0;
       strsize iLen;
-      const char * psz = pszString;
+      const scoped_string & str = pszString;
 
       while(i < iIndex)
       {

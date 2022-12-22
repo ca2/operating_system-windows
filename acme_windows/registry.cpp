@@ -367,10 +367,10 @@ namespace acme_windows
    }
 
 
-   void registry::key::_set(const ::string & strValueName, const char * pszValue)
+   void registry::key::_set(const ::string & strValueName, const scoped_string & scopedstrValue)
    {
 
-      return this->_set(strValueName, (const ::string &) pszValue);
+      return this->_set(strValueName, (const ::string &)scopedstrValue);
 
    }
 
@@ -449,10 +449,10 @@ namespace acme_windows
    
    }
 
-   void registry::key::set(const ::string & strValueName, const char * pszValue)
+   void registry::key::set(const ::string & strValueName, const scoped_string & strValue)
    {
 
-      this->set(strValueName, (const string &)pszValue);
+      this->set(strValueName, (const string &)strValue);
 
    }
 

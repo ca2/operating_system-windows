@@ -614,7 +614,7 @@ namespace windows
    }
 
 
-   bool os_context::file_association_set_shell_open_command(const ::string & pszExtension, const ::string & pszExtensionNamingClass,  const char * pszCommand, const ::string & pszParam)
+   bool os_context::file_association_set_shell_open_command(const ::string & pszExtension, const ::string & pszExtensionNamingClass,  const scoped_string & strCommand, const ::string & pszParam)
    {
 
       ::e_status estatus = ::success;
@@ -720,7 +720,7 @@ namespace windows
       keyLink.get(nullptr, strFormat);
       {
 
-         const char * psz = strFormat;
+         const scoped_string & str = strFormat;
 
          try
          {
@@ -1938,13 +1938,13 @@ retry:
 
          }
 
-         path = strDefault.Left(iFind);
+         path = strDefault.left(iFind);
 
          path += ".exe";
 
          //MessageBox(nullptr, path, "pathProgram", e_message_box_ok);
 
-         strParam = strDefault.Mid(iFind + 5);
+         strParam = strDefault.substr(iFind + 5);
 
          if (bQuote)
          {

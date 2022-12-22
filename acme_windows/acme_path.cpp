@@ -22,17 +22,17 @@ namespace acme_windows
    }
 
 
-   ::file::path acme_path::_final(const char * path)
+   ::file::path acme_path::_final(const ::file::path & pathParam)
    {
 
-      wstring wstr(path);
+      wstring wstr(pathParam);
 
       HANDLE hfile = INVALID_HANDLE_VALUE;
 
       try
       {
 
-         if (::is_directory(path))
+         if (::is_directory(pathParam))
          {
 
             hfile = ::CreateFileW(wstr,

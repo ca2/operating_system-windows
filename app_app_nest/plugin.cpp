@@ -148,7 +148,7 @@ install:
          rectangle.right     = cy;
          ::FillSolidRect_dup(hdc, &rectangle, rgb(255, 255, 255));
          ::SetTextColor(hdc, rgb(255, 0, 255));
-         const char * psz = "ca2 is not installed! You may try to install using low level installer_install.exe.";
+         const scoped_string & str = "ca2 is not installed! You may try to install using low level installer_install.exe.";
          ::TextOutU_dup(hdc, 10, 10, psz, ansi_length(psz));
       }
       else

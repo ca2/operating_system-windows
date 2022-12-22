@@ -23,7 +23,7 @@ namespace acme_windows
    {
    }
 
-   bool printer::open(const char * pszDeviceName)
+   bool printer::open(const scoped_string & strDeviceName)
    {
 
       if(is_opened())

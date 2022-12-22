@@ -5663,11 +5663,11 @@ namespace draw2d_gdiplus
    //   strsize iRange = 0;
    //   strsize i = 0;
    //   strsize iLen;
-   //   const char * pszStart = str;
-   //   const char * psz = pszStart;
+   //   const scoped_string & strStart = str;
+   //   const scoped_string & str = pszStart;
    //   while (*psz)
    //   {
-   //      const char * pszNext = ::str().utf8_inc(psz);
+   //      const scoped_string & strNext = ::str().utf8_inc(psz);
    //      if (pszNext == nullptr)
    //         break;
    //      iLen = pszNext - psz;
@@ -5716,9 +5716,9 @@ namespace draw2d_gdiplus
 
       daRight.erase_all();
 
-      wstring wstrBefore(str.Left(iStartParam));
+      wstring wstrBefore(str.left(iStartParam));
 
-      wstring wstrMiddle(str.Mid(iStartParam, iCountParam));
+      wstring wstrMiddle(str.substr(iStartParam, iCountParam));
 
       m_pfont->defer_update(this, 0);
 
@@ -5831,7 +5831,7 @@ namespace draw2d_gdiplus
 
 
 
-   size_f64 graphics::get_text_extent(const char * pszString, strsize nCount, strsize iIndex)
+   size_f64 graphics::get_text_extent(const scoped_string & strString, strsize nCount, strsize iIndex)
    {
 
       if (::is_null(m_pgraphics))
@@ -5922,7 +5922,7 @@ namespace draw2d_gdiplus
    }
 
 
-   size_f64 graphics::GetTextBegin(const char * pszString, strsize nCount, strsize iIndex)
+   size_f64 graphics::GetTextBegin(const scoped_string & strString, strsize nCount, strsize iIndex)
    {
 
       if (pszString == nullptr || *pszString == '\0')
@@ -6127,7 +6127,7 @@ namespace draw2d_gdiplus
    //}
 
 
-   //::size_f64 graphics::GetOutputTextExtent(const char * pszString, strsize nCount)
+   //::size_f64 graphics::GetOutputTextExtent(const scoped_string & strString, strsize nCount)
    //{
 
    //   //ASSERT(get_handle1() != nullptr);
@@ -6164,7 +6164,7 @@ namespace draw2d_gdiplus
    //}
 
 
-   void graphics::get_text_extent(::size_f64 & size, const char * pszString, strsize nCount, strsize iIndex)
+   void graphics::get_text_extent(::size_f64 & size, const scoped_string & strString, strsize nCount, strsize iIndex)
    {
 
       if (::is_null(m_pgraphics))
@@ -6203,7 +6203,7 @@ namespace draw2d_gdiplus
       strsize iRange = 0;
       strsize i = 0;
       strsize iLen;
-      const char * psz = pszString;
+      const scoped_string & str = pszString;
 
       while (i < iIndex)
       {
@@ -6319,7 +6319,7 @@ namespace draw2d_gdiplus
    }
 
 
-   void graphics::get_text_extent(::size_f64 & size, const char * pszString, strsize nCount)
+   void graphics::get_text_extent(::size_f64 & size, const scoped_string & strString, strsize nCount)
    {
 
       if (::is_null(m_pgraphics))

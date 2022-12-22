@@ -678,7 +678,7 @@ pacmedir->system() / "config/production/mirror_status.txt";
             __keep(&m_bFinished, false, true, true);
             string str;
             m_iBaseLen = m_strBase.get_length();
-            if (m_strBase.Right(1) != "/" && m_strBase.Right(1) != "\\")
+            if (m_strBase.right(1) != "/" && m_strBase.right(1) != "\\")
                m_iBaseLen++;
 
 
@@ -828,7 +828,7 @@ pacmedir->system() / "config/production/mirror_status.txt";
          ::count iCount = m_straFiles.get_size();
          for (i32 i = 0; i < iCount;)
          {
-            if (m_straFiles[i].find("\\.svn\\") >= 0 || (m_straFiles[i].get_length() < 5 || m_straFiles[i].Right(5) == "\\.svn"))
+            if (m_straFiles[i].find("\\.svn\\") >= 0 || (m_straFiles[i].get_length() < 5 || m_straFiles[i].right(5) == "\\.svn"))
             {
                m_straFiles.erase_at(i);
             }
@@ -862,9 +862,9 @@ pacmedir->system() / "config/production/mirror_status.txt";
          {
             //const char * lpcsz = m_straFiles[i];
 
-            strStatus.Empty();
+            strStatus.empty();
 
-            pathTarget = m_pathVrel / m_straFiles[i].Mid(iBaseLen);
+            pathTarget = m_pathVrel / m_straFiles[i].substr(iBaseLen);
 
             pathFolder = pathTarget.folder();
 
@@ -1504,7 +1504,7 @@ pacmedir->create(pathTarget.folder()))
          }
          //strStatus.Format("compressing %s", strFile);
          //add_status(strStatus);
-         m_straCompress.add(strFile.Mid(m_iBaseLen));
+         m_straCompress.add(strFile.substr(m_iBaseLen));
       }
       synchronouslock.unlock();
 
@@ -1603,7 +1603,7 @@ pacmedir->create(pathTarget.folder()))
    {
    string strUrl;
    string strVar;
-   strVar.Empty();
+   strVar.empty();
    m_straCC.implode(strVar, ",", i, minimum(8, m_straCC.get_size() - i));
    strUrl = "http://api.ca2.cc/spaignition/compress?file=";
    strUrl += strVar;
@@ -1823,7 +1823,7 @@ pacmedir->create(pathTarget.folder()))
       string strDirParam(pszDir);
       string strLocal(strDirParam);
       strLocal.replace("/", "\\");
-      if (strLocal.Right(1) != "\\") strLocal += "\\";
+      if (strLocal.right(1) != "\\") strLocal += "\\";
       strRelease = strBase / strLocal;
       if (bFileSet)
       {
@@ -1845,7 +1845,7 @@ pacmedir->create(pathTarget.folder()))
 
          for (i32 i = 0; i < stra1.get_size();)
          {
-            if (stra1[i].find("\\.svn\\") >= 0 || (stra1[i].get_length() < 5 || stra1[i].Right(5) == "\\.svn"))
+            if (stra1[i].find("\\.svn\\") >= 0 || (stra1[i].get_length() < 5 || stra1[i].right(5) == "\\.svn"))
             {
                stra1.erase_at(i);
             }
@@ -1877,7 +1877,7 @@ pacmedir->create(pathTarget.folder()))
 
 
       strsize iBaseLen = m_strBase.get_length();
-      if (m_strBase.Right(1) != "/" && m_strBase.Right(1) != "\\")
+      if (m_strBase.right(1) != "/" && m_strBase.right(1) != "\\")
          iBaseLen++;
 
       string_array straStageDir;
@@ -1915,7 +1915,7 @@ pacmedir->create(pathTarget.folder()))
          }
          //strStatus.Format("compressing %s", strFile);
          //add_status(strStatus);
-         strRelative = strFile.Mid(iBaseLen);
+         strRelative = strFile.substr(iBaseLen);
 
          strBz = m_strCCAuth / strRelative + ".bz";
          strUn = m_pathVrel / strRelative;
@@ -1941,7 +1941,7 @@ pacmedir->create(pathTarget.folder()))
          strContents += varBzSize.get_string();
          strContents += "\n";
 
-         strStatus.Empty();
+         strStatus.empty();
 
          if (!pcontext->m_papexcontext->file().exists(strRelease))
          {
@@ -2121,7 +2121,7 @@ pacmedir->create(pathTarget.folder()))
 
       strsize iBaseLen = m_strBase.get_length();
 
-      if (m_strBase.Right(1) != "/" && m_strBase.Right(1) != "\\")
+      if (m_strBase.right(1) != "/" && m_strBase.right(1) != "\\")
          iBaseLen++;
 
       string strRelative;
@@ -2161,7 +2161,7 @@ pacmedir->create(pathTarget.folder()))
          }
          //strStatus.Format("compressing %s", strFile);
          //add_status(strStatus);
-         strRelative = strFile.Mid(iBaseLen);
+         strRelative = strFile.substr(iBaseLen);
          strContents += strRelative;
          strContents += "\n";
 
@@ -2420,12 +2420,12 @@ pacmedir->create(pathTarget.folder()))
 
       strNpca2Version.Format(
       "%d.%d%02d.%d%02d.%d",
-      atoi(m_strFormatBuild.Mid(0, 4)),
-      atoi(m_strFormatBuild.Mid(5, 2)),
-      atoi(m_strFormatBuild.Mid(8, 2)),
-      atoi(m_strFormatBuild.Mid(11, 2)),
-      atoi(m_strFormatBuild.Mid(14, 2)),
-      atoi(m_strFormatBuild.Mid(17, 2))
+      atoi(m_strFormatBuild.substr(0, 4)),
+      atoi(m_strFormatBuild.substr(5, 2)),
+      atoi(m_strFormatBuild.substr(8, 2)),
+      atoi(m_strFormatBuild.substr(11, 2)),
+      atoi(m_strFormatBuild.substr(14, 2)),
+      atoi(m_strFormatBuild.substr(17, 2))
       );
 
       string strVersionUrl;
@@ -2686,12 +2686,12 @@ pacmedir->create(pathTarget.folder()))
 
       strNpca2Version.Format(
       "%d,%d%02d,%d%02d,%d",
-      atoi(m_strFormatBuild.Mid(0, 4)),
-      atoi(m_strFormatBuild.Mid(5, 2)),
-      atoi(m_strFormatBuild.Mid(8, 2)),
-      atoi(m_strFormatBuild.Mid(11, 2)),
-      atoi(m_strFormatBuild.Mid(14, 2)),
-      atoi(m_strFormatBuild.Mid(17, 2))
+      atoi(m_strFormatBuild.substr(0, 4)),
+      atoi(m_strFormatBuild.substr(5, 2)),
+      atoi(m_strFormatBuild.substr(8, 2)),
+      atoi(m_strFormatBuild.substr(11, 2)),
+      atoi(m_strFormatBuild.substr(14, 2)),
+      atoi(m_strFormatBuild.substr(17, 2))
       );
 
       string strChromeManifest = pcontext->m_papexcontext->file().as_string(m_strBase / "platform/stage/script/iexca2.inf");
@@ -2741,24 +2741,24 @@ pacmedir->create(pathTarget.folder()))
 
       string strCrxca2Version;
 
-      int iHour = atoi(m_strFormatBuild.Mid(11, 2));
+      int iHour = atoi(m_strFormatBuild.substr(11, 2));
 
       if (iHour == 0)
          iHour = 24;
 
-      int iSecond = atoi(m_strFormatBuild.Mid(17, 2));
+      int iSecond = atoi(m_strFormatBuild.substr(17, 2));
 
       if (iSecond == 0)
          iSecond = 60;
 
       strCrxca2Version.Format(
       "%d.%d%02d.%d%02d.%d",
-      atoi(m_strFormatBuild.Mid(0, 4)),
-      atoi(m_strFormatBuild.Mid(5, 2)),
-      atoi(m_strFormatBuild.Mid(8, 2)),
+      atoi(m_strFormatBuild.substr(0, 4)),
+      atoi(m_strFormatBuild.substr(5, 2)),
+      atoi(m_strFormatBuild.substr(8, 2)),
       iHour,
-      atoi(m_strFormatBuild.Mid(14, 2)),
-      atoi(m_strFormatBuild.Mid(17, 2)),
+      atoi(m_strFormatBuild.substr(14, 2)),
+      atoi(m_strFormatBuild.substr(17, 2)),
       iSecond);
 
       string strIconUrl;
@@ -3472,8 +3472,8 @@ retry1:
          index iFind;
          while ((iFind = strAccumul.find("\r\n")) >= 0)
          {
-            add_status(strAccumul.Left(iFind));
-            strAccumul = strAccumul.Mid(iFind + 2);
+            add_status(strAccumul.left(iFind));
+            strAccumul = strAccumul.substr(iFind + 2);
          }
 
          i++;
@@ -3488,8 +3488,8 @@ retry1:
       index iFind;
       while ((iFind = strAccumul.find("\r\n")) >= 0)
       {
-         add_status(strAccumul.Left(iFind));
-         strAccumul = strAccumul.Mid(iFind + 2);
+         add_status(strAccumul.left(iFind));
+         strAccumul = strAccumul.substr(iFind + 2);
       }
       add_status(strAccumul);
 
@@ -3518,15 +3518,15 @@ retry1:
 
          strVersion1.Format(
          "%d,%d%02d,%d%02d,%d",
-         atoi(m_strFormatBuild.Mid(0, 4)),
-         atoi(m_strFormatBuild.Mid(5, 2)),
-         atoi(m_strFormatBuild.Mid(8, 2)),
-         atoi(m_strFormatBuild.Mid(11, 2)),
-         atoi(m_strFormatBuild.Mid(14, 2)),
-         atoi(m_strFormatBuild.Mid(17, 2))
+         atoi(m_strFormatBuild.substr(0, 4)),
+         atoi(m_strFormatBuild.substr(5, 2)),
+         atoi(m_strFormatBuild.substr(8, 2)),
+         atoi(m_strFormatBuild.substr(11, 2)),
+         atoi(m_strFormatBuild.substr(14, 2)),
+         atoi(m_strFormatBuild.substr(17, 2))
          );
 
-         str = str.Left(iFind1) + strVersion1 + str.Mid(iFind2);
+         str = str.left(iFind1) + strVersion1 + str.substr(iFind2);
 
       }
 
@@ -3540,15 +3540,15 @@ retry1:
 
          strVersion2.Format(
          "%d.%d%02d.%d%02d.%d",
-         atoi(m_strFormatBuild.Mid(0, 4)),
-         atoi(m_strFormatBuild.Mid(5, 2)),
-         atoi(m_strFormatBuild.Mid(8, 2)),
-         atoi(m_strFormatBuild.Mid(11, 2)),
-         atoi(m_strFormatBuild.Mid(14, 2)),
-         atoi(m_strFormatBuild.Mid(17, 2))
+         atoi(m_strFormatBuild.substr(0, 4)),
+         atoi(m_strFormatBuild.substr(5, 2)),
+         atoi(m_strFormatBuild.substr(8, 2)),
+         atoi(m_strFormatBuild.substr(11, 2)),
+         atoi(m_strFormatBuild.substr(14, 2)),
+         atoi(m_strFormatBuild.substr(17, 2))
          );
 
-         str = str.Left(iFind1) + strVersion2 + str.Mid(iFind2);
+         str = str.left(iFind1) + strVersion2 + str.substr(iFind2);
 
       }
 

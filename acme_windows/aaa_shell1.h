@@ -331,7 +331,7 @@
 //
 //
 //      static WH_SHSTDAPI(::u32) SHGetFileInfo(
-//         const char * pszPath,
+//         const scoped_string & strPath,
 //         ::u32 dwFileAttributes,
 //         SHFILEINFO *psfi,
 //         ::u32 cbFileInfo,
@@ -340,9 +340,9 @@
 //      static ::u32 GetTempPath(string & str);
 //
 //      static ::u32 GetTempFileName(
-//         const char * pszPath,
+//         const scoped_string & strPath,
 //
-//         const char * pszPrefix,
+//         const scoped_string & strPrefix,
 //
 //         ::u32 uUnique,
 //         string & str);
@@ -585,7 +585,7 @@
 //      return dwResult;
 //   }
 //
-//   inline ::u32 shell::GetTempFileName(const char * pszPath, const char * pszPrefix, ::u32 uUnique, string & str)
+//   inline ::u32 shell::GetTempFileName(const scoped_string & strPath, const scoped_string & strPrefix, ::u32 uUnique, string & str)
 //
 //   {
 //      wstring wstrPathName = utf8_to_unicode(pszPath);

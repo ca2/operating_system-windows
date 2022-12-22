@@ -1137,7 +1137,7 @@ namespace windowing_win32
 
       getfileimage.m_imagekey.set_extension(pathTarget);
 
-      getfileimage.m_imagekey.m_strPath.Empty();
+      getfileimage.m_imagekey.m_strPath.empty();
 
       getfileimage.m_imagekey.m_iIcon = 0;
 
@@ -1519,7 +1519,7 @@ namespace windowing_win32
       //if (iFind >= 0 || iFind2 >= 2)
       //{
 
-      //   string strProtocol = imagekey.m_strPath.Left(maximum(iFind, iFind2));
+      //   string strProtocol = imagekey.m_strPath.left(maximum(iFind, iFind2));
 
       //   i32 i = 0;
 

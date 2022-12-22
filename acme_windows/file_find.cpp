@@ -113,7 +113,7 @@ namespace acme_windows
       if (pstr == nullptr)
       {
 
-         m_strRoot.Empty();
+         m_strRoot.empty();
 
          close();
 
@@ -372,8 +372,8 @@ namespace acme_windows
 
       string strResult = GetRoot();
 
-      if (strResult[strResult.get_length()-1] != '\\' &&
-            strResult[strResult.get_length()-1] != '/')
+      if (strResult[strResult.length()-1] != '\\' &&
+            strResult[strResult.length()-1] != '/')
          strResult += m_chDirSeparator;
 
       strResult += GetFileName();

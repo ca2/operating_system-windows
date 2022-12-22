@@ -647,7 +647,7 @@ namespace windows
    //   WNDCLASS wndclass;
 
    //   string strClassName;
-   //   const char * pszClassName;
+   //   const scoped_string & strClassName;
 
    //   if(((::u32) pClassName) >> 16 == 0)
 
@@ -768,7 +768,7 @@ namespace windows
 
    //{
    //   string strClassName;
-   //   const char * pszClassName;
+   //   const scoped_string & strClassName;
 
    //   if(((::u32) pClassName) >> 16 == 0)
 

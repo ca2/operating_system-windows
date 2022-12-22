@@ -206,7 +206,7 @@ pacmedir->create(::file_path_folder(pszFileName));
 
       ASSERT_VALID(this);
 
-      rString.Empty();
+      rString.empty();
 
       const i32 nMaxSize = 128;
 

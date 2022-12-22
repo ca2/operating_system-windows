@@ -593,7 +593,7 @@ bool CLibraryFrame::ValidateNewName(const ::string & pszNewName,CString & strCan
 
    strNewPath += "\\" + CString(pszNewName);
    CString strExt = ".spotlibrary";
-   if(strNewPath.Right(strExt.GetLength()).CompareNoCase(strExt) != 0)
+   if(strNewPath.right(strExt.GetLength()).CompareNoCase(strExt) != 0)
    {
 
       strNewPath += ".spotlibrary";
@@ -680,7 +680,7 @@ HRESULT CLibraryFrame::ShouldShow(IShellFolder * psf,PCIDLIST_ABSOLUTE pidlFolde
 
          strLo.MakeLower();
 
-         const char * pszFind = ".spotlibrary";
+         const scoped_string & strFind = ".spotlibrary";
 
          int iLenFind = strlen(pszFind);
 

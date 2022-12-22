@@ -1,4 +1,4 @@
-// Create on 2021-03-22 09:12 <3ThomasBS_
+﻿// Create on 2021-03-22 09:12 <3ThomasBS_
 #pragma once
 
 
@@ -27,7 +27,7 @@ namespace acme_windows
       //virtual bool __win_find_is_dots(WIN32_FIND_DATAW & data);
 
 
-      ::file::path _final(const char * path) override;
+      ::file::path _final(const ::file::path & path) override;
 
 
    };

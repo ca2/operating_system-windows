@@ -795,7 +795,7 @@ namespace apex_windows
       keyLink.get(nullptr, strFormat);
       {
 
-         const char * psz = strFormat;
+         const scoped_string & str = strFormat;
 
          try
          {
@@ -2290,7 +2290,7 @@ retry:
    }
 
 
-   bool os_context::has_alias_in_path(const char * psz, bool bNoUI, bool bNoMount)
+   bool os_context::has_alias_in_path(const scoped_string & str, bool bNoUI, bool bNoMount)
    {
 
       return false;
@@ -2298,7 +2298,7 @@ retry:
    }
 
 
-   bool os_context::is_alias(const char * psz)
+   bool os_context::is_alias(const scoped_string & str)
    {
 
       return string_ends_ci(psz, ".lnk") != 0;
@@ -2397,13 +2397,13 @@ retry:
 
          }
 
-         path = strDefault.Left(iFind);
+         path = strDefault.left(iFind);
 
          path += ".exe";
 
          //MessageBox(nullptr, path, "pathProgram", e_message_box_ok);
 
-         strParam = strDefault.Mid(iFind + 5);
+         strParam = strDefault.substr(iFind + 5);
 
          if (bQuote)
          {

@@ -10,7 +10,7 @@ namespace windows
    public:
 
 
-      static FARPROC get_address(const char* pszModule, const char* lpszName);
+      static FARPROC get_address(const scoped_string & strModule, const char* lpszName);
 
    };
 
@@ -23,7 +23,7 @@ namespace windows
    public:
 
 
-      inline static PFN get_address(const char* pszModule, const char* lpszName)
+      inline static PFN get_address(const scoped_string & strModule, const char* lpszName)
       {
 
          return (PFN) api_base::get_address(pszModule, lpszName);

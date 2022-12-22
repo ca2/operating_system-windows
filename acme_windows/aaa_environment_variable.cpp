@@ -23,9 +23,9 @@
 //      environment_variable_value variablevalue;
 //
 //      // get the left hand side (LHS) of "=" in the string
-//      variablevalue.m_element1 = strEnvironment.Left(find);
+//      variablevalue.m_element1 = strEnvironment.left(find);
 //
-//      variablevalue.m_element2 = strEnvironment.Mid(find + 1);
+//      variablevalue.m_element2 = strEnvironment.substr(find + 1);
 //
 //      array.add(variablevalue);
 //

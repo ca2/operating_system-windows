@@ -1484,7 +1484,7 @@ namespace  windows
 
 
 
-   //char* callstack::get_frame(const char * pszFormat, int& iLine)
+   //char* callstack::get_frame(const scoped_string & strFormat, int& iLine)
    //{
 
 
@@ -1609,7 +1609,7 @@ namespace  windows
 
       }
 
-      const char* psz;
+      const scoped_string & str;
 
       //synchronous_lock synchronouslock(::callstack().mutex());
 

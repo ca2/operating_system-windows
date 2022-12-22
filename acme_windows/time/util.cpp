@@ -17,7 +17,7 @@
 //}
 
 //
-//bool CLASS_DECL_ACME __compare_class_name(HWND hwnd, const char * pszClassName)
+//bool CLASS_DECL_ACME __compare_class_name(HWND hwnd, const scoped_string & strClassName)
 //{
 //
 //   ASSERT(::IsWindow(hwnd));

@@ -359,7 +359,7 @@ int bzuncompress_dup(LPCTSTR lpcszUncompressed, LPCTSTR lpcszGzFileCompressed)
 
 
 bool read_resource_as_file(
-   const char * pszFile,
+   const scoped_string & strFile,
    HINSTANCE hinst,
    UINT nID, 
    LPCTSTR lpcszType)

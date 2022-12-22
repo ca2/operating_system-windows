@@ -30,10 +30,10 @@
 #endif
 
 
-void __wide_append(memory& memory, const char* psz)
+void __wide_append(memory& memory, const scoped_string & scopedstr)
 {
-   wstring wstr(psz);
-   memory.append(wstr.c_str(), wstr.get_length() * sizeof(wchar_t));
+   wstring wstr(scopedstr);
+   memory.append(wstr.c_str(), wstr.length() * sizeof(wchar_t));
 
 }
 
@@ -46,7 +46,7 @@ void __wide_append_null(memory& memory)
 
 }
 
-CLASS_DECL_ACME_WINDOWS void call_async(const char * pszPath, const char * pszParam, const char * pszDir, ::e_display edisplay, bool bPrivileged, unsigned int * puiPid);
+CLASS_DECL_ACME_WINDOWS void call_async(const scoped_string & strPath, const scoped_string & strParam, const scoped_string & strDir, ::e_display edisplay, bool bPrivileged, unsigned int * puiPid);
 
 
 namespace windows
@@ -70,22 +70,22 @@ namespace acme_windows
 
       wstring        m_wstrParams;
 
-      shell_execute(const char * pszFile, const char * pszParams)
+      shell_execute(const scoped_string & strFile, const scoped_string & strParams)
       {
 
          ::zero(this, sizeof(SHELLEXECUTEINFOW));
 
          cbSize = sizeof(SHELLEXECUTEINFOW);
 
-         m_wstrFile = pszFile;
+         m_wstrFile = strFile;
 
          lpFile = m_wstrFile;
 
 
-         if (pszParams)
+         if (strParams.has_char())
          {
 
-            m_wstrParams = pszParams;
+            m_wstrParams = strParams;
 
             lpParameters = m_wstrParams;
 
@@ -1142,7 +1142,7 @@ namespace acme_windows
    }
 
 
-   bool node::load_modules_diff(string_array & straOld, string_array & straNew, const ::string & pszExceptDir)
+   bool node::load_modules_diff(string_array & straOld, string_array & straNew, const ::string & strExceptDir)
    {
 
       bool bFound;
@@ -1151,10 +1151,10 @@ namespace acme_windows
 
       ::count iLenExcept;
 
-      if (pszExceptDir != nullptr)
+      if (strExceptDir.has_char())
       {
 
-         iLenExcept = ansi_length(pszExceptDir);
+         iLenExcept = strExceptDir.length();
 
       }
       else
@@ -1175,7 +1175,7 @@ namespace acme_windows
             if (ansi_length(straOld[i]) > iLenExcept)
             {
 
-               if (_strnicmp(straOld[i], pszExceptDir, (size_t)iLenExcept) == 0)
+               if (_strnicmp(straOld[i], strExceptDir.begin(), (size_t)iLenExcept) == 0)
                {
 
                   continue;
@@ -1394,7 +1394,7 @@ namespace acme_windows
       return ::acme_windows::predicate_process_module(processid, [&](auto & me32)
          {
 
-            return !straSuffix.case_insensitive_suffixes(string(me32.szModule)) && !stra.contains_ci(string(me32.szModule));
+            return !straSuffix.case_insensitive_suffixes(string(me32.szModule)) && !stra.case_insensitive_contains(string(me32.szModule));
 
          });
 
@@ -2850,12 +2850,12 @@ namespace acme_windows
 
 
 
-   void node::command_system(string_array & straOutput, int & iExitCode, const char * psz, enum_command_system ecommandsystem, const class time & timeTimeout, ::particle * pparticleSynchronization, ::file::file * pfileLines)
+   void node::command_system(string_array & straOutput, int & iExitCode, const scoped_string & scopedstr, enum_command_system ecommandsystem, const class time & timeTimeout, ::particle * pparticleSynchronization, ::file::file * pfileLines)
    {
 
       straOutput.clear();
 
-      string str(psz);
+      string str(scopedstr);
 
       wstring wstr;
 
@@ -3211,30 +3211,30 @@ namespace acme_windows
    }
 
 
-   void node::shell_execute_async(const char * pszFile, const char * pszParams)
+   void node::shell_execute_async(const scoped_string & scopedstrFile, const scoped_string & scopedstrParams)
    {
 
-      shell_execute execute(pszFile, pszParams);
+      shell_execute execute(scopedstrFile, scopedstrParams);
 
       execute.async();
 
    }
 
 
-   void node::shell_execute_sync(const char * pszFile, const char * pszParams, const class time & timeTimeout)
+   void node::shell_execute_sync(const scoped_string & scopedstrFile, const scoped_string & scopedstrParams, const class time & timeTimeout)
    {
 
-      shell_execute execute(pszFile, pszParams);
+      shell_execute execute(scopedstrFile, scopedstrParams);
 
       execute.synchronization_object(timeTimeout);
 
    }
 
 
-   void node::root_execute_async(const char * pszFile, const char * pszParams)
+   void node::root_execute_async(const scoped_string & scopedstrFile, const scoped_string & scopedstrParams)
    {
 
-      shell_execute execute(pszFile, pszParams);
+      shell_execute execute(scopedstrFile, scopedstrParams);
 
       execute.lpVerb = L"RunAs";
 
@@ -3244,10 +3244,10 @@ namespace acme_windows
    }
 
 
-   void node::root_execute_sync(const char * pszFile, const char * pszParams, const class time & timeTimeout)
+   void node::root_execute_sync(const scoped_string & scopedstrFile, const scoped_string & scopedstrParams, const class time & timeTimeout)
    {
 
-      shell_execute execute(pszFile, pszParams);
+      shell_execute execute(scopedstrFile, scopedstrParams);
 
       execute.lpVerb = L"RunAs";
 

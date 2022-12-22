@@ -1270,7 +1270,7 @@ namespace windowing_win32
 
             string strWindowText = _get_window_text_timeout(oswindow, 50_ms);
 
-            return strWindowText.contains_ci(str);
+            return strWindowText.case_insensitive_contains(str);
 
          });
 
@@ -1294,7 +1294,7 @@ namespace windowing_win32
 
             string strWindowText = _get_window_text_timeout(oswindow, 50_ms);
 
-            return strWindowText.contains_ci(str);
+            return strWindowText.case_insensitive_contains(str);
 
          });
 
@@ -1321,7 +1321,7 @@ namespace windowing_win32
             for (auto& str : stra)
             {
 
-               if (!strWindowText.contains_ci(str))
+               if (!strWindowText.case_insensitive_contains(str))
                {
 
                   return false;

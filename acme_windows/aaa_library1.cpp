@@ -2,10 +2,10 @@
 #include "apex/operating_system.h"
 
 
-void * __node_library_open(const char * pszPath, string & strMessage)
+void * __node_library_open(const scoped_string & strPath, string & strMessage)
 {
 
-   strMessage.Empty();
+   strMessage.empty();
 
    string strError;
 
@@ -226,10 +226,10 @@ finished:
 }
 
 
-void * __node_library_touch(const char * pszPath, string & strMessage)
+void * __node_library_touch(const scoped_string & strPath, string & strMessage)
 {
 
-   strMessage.Empty();
+   strMessage.empty();
 
    string strError;
 
@@ -474,7 +474,7 @@ bool __node_library_close(void * plibrary)
 }
 
 
-void * __node_library_open_ca2(const char * psz, string & strMessage)
+void * __node_library_open_ca2(const scoped_string & str, string & strMessage)
 {
 
    void * p = LoadLibraryW(wstring(psz));
@@ -501,7 +501,7 @@ void * __node_library_open_ca2(const char * psz, string & strMessage)
 
 }
 
-void * __node_library_raw_get(void * plibrary,const char * pszEntryName)
+void * __node_library_raw_get(void * plibrary,const scoped_string & strEntryName)
 {
 
    return ::GetProcAddress((HINSTANCE)plibrary,pszEntryName);

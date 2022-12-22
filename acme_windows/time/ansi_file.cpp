@@ -8,7 +8,7 @@
 
 
 
-i32 ansi_open(const char * psz,i32 i)
+i32 ansi_open(const scoped_string & str,i32 i)
 {
    return _wopen(utf8_to_unicode(psz),i);
 }
@@ -19,7 +19,7 @@ void ansi_get_errno(i32 * perrno)
 }
 
 
-FILE * ansi_fopen(const char * psz,const char * pszMode)
+FILE * ansi_fopen(const scoped_string & str,const scoped_string & strMode)
 {
    return _wfopen(utf8_to_unicode(psz),utf8_to_unicode(pszMode));
 }
@@ -66,7 +66,7 @@ int ansi_file_flag(int iFlag)
 
 }
 
-void ansi_unlink(const char * psz)
+void ansi_unlink(const scoped_string & str)
 {
 
    _unlink(psz);

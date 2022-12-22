@@ -9,7 +9,7 @@
 
 
 
-int_bool read_resource_as_file(const char * pszFile, HINSTANCE hinstance, DWORD nID, LPCTSTR pcszType)
+int_bool read_resource_as_file(const scoped_string & strFile, HINSTANCE hinstance, DWORD nID, LPCTSTR pcszType)
 
 {
 
@@ -147,7 +147,7 @@ filesize file_length_dup(const char * path)
 }
 
 
-int_bool file_is_equal_path_dup(const char * psz1, const char * psz2)
+int_bool file_is_equal_path_dup(const scoped_string & str1, const scoped_string & str2)
 {
 
    const i32 iBufSize = MAX_PATH * 8;
@@ -856,7 +856,7 @@ int_bool file_set_length(const char * lpszName, size_t iSize)
 }
 
 
-int_bool file_move(const char * pszNewName, const char * pszOldName)
+int_bool file_move(const scoped_string & strNewName, const scoped_string & strOldName)
 {
 
    wstring wstrOldName(pszOldName);
@@ -875,7 +875,7 @@ int_bool file_move(const char * pszNewName, const char * pszOldName)
 }
 
 
-int_bool file_delete(const char * pszFileName)
+int_bool file_delete(const scoped_string & strFileName)
 {
 
    wstring wstrFileName(pszFileName);
@@ -892,7 +892,7 @@ int_bool file_delete(const char * pszFileName)
 }
 
 
-int_bool file_path_is_equal(const char * psz1,const char * psz2)
+int_bool file_path_is_equal(const scoped_string & str1,const scoped_string & str2)
 {
 
    wstring wstr1(psz1);
@@ -999,7 +999,7 @@ memory file_as_memory(const char * path, memsize iReadAtMostByteCount)
 //const LPCTSTR DRV_FILE_NAME = _T("ListOpenedFileDrv.sys");
 
 // Function resolves the fosedevice name to drive name
-bool GetDrive(const char * pszDosName, string& csDrive, bool bDriveLetterOnly)
+bool GetDrive(const scoped_string & strDosName, string& csDrive, bool bDriveLetterOnly)
 {
    WCHAR tcDeviceName[50];
    WCHAR tcDrive[3] = L"A:";
@@ -1187,7 +1187,7 @@ bool GetDrive(const char * pszDosName, string& csDrive, bool bDriveLetterOnly)
 
 
 
-string get_volume_path(const char * psz)
+string get_volume_path(const scoped_string & str)
 {
    WCHAR wsz[4096];
    if (!GetVolumePathNameW(utf8_to_unicode(psz), wsz, sizeof(wsz) / sizeof(wsz[0])))

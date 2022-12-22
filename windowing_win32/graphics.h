@@ -66,11 +66,11 @@ namespace draw2d_gdiplus
       // Constructors
       bool CreateDC(const ::string & pszDriverName, const ::string & pszDeviceName,
 
-                    const char * pszOutput, const void * lpInitData) override;
+                    const scoped_string & strOutput, const void * lpInitData) override;
 
       bool CreateIC(const ::string & pszDriverName, const ::string & pszDeviceName,
 
-                    const char * pszOutput, const void * lpInitData) override;
+                    const scoped_string & strOutput, const void * lpInitData) override;
 
       bool CreateCompatibleDC(::draw2d::graphics * pgraphics) override;
 
@@ -510,7 +510,7 @@ namespace draw2d_gdiplus
 //
 //      virtual i32 Escape(i32 nEscape, i32 nCount, const ::string & pszInData, LPVOID lpOutData) override;
 //
-//      i32 Escape(i32 nEscape, i32 nInputSize,  const char * pszInputData,i32 nOutputSize, char * pszOutputData) override;
+//      i32 Escape(i32 nEscape, i32 nInputSize,  const scoped_string & strInputData,i32 nOutputSize, char * pszOutputData) override;
 //
 //      i32 DrawEscape(i32 nEscape, i32 nInputSize, const ::string & pszInputData) override;
 

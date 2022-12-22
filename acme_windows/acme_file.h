@@ -1,4 +1,4 @@
-// Created by camilo on 2021-08-09 14:19 <3ThomasBS_
+﻿// Created by camilo on 2021-08-09 14:19 <3ThomasBS_
 #pragma once
 
 
@@ -22,17 +22,17 @@ namespace acme_windows
       ::file::path module() override;
 
 
-      ::earth::time modification_time(const char* psz) override;
-      void set_modification_time(const char* psz, const ::earth::time & time) override;
+      ::earth::time modification_time(const ::file::path & path) override;
+      void set_modification_time(const ::file::path & path, const ::earth::time & time) override;
 
 
       ::file::path time_put_contents(const ::file::path & pathFolder, const ::string & strPrefix, const ::string & strExtension, const ::string& str) override;
 
 
-      void _erase(const char * path) override;
+      void _erase(const ::file::path & path) override;
 
 
-      string get_temporary_file_name(const char * lpszName, const char * pszExtension) override;
+      string get_temporary_file_name(const ::scoped_string & scopedstrName, const ::scoped_string & scopedstrExtension) override;
       
       void write_memory_to_file(FILE * file, const void * pdata, memsize nCount, memsize * puiWritten) override;
 

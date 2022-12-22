@@ -13,7 +13,7 @@ string file_extension_dup(const char * path)
    if (iPos >= 0)
    {
 
-      return str.Mid(iPos + 1);
+      return str.substr(iPos + 1);
 
    }
    else
@@ -35,7 +35,7 @@ string file_final_extension_dup(const char * path)
    if (iPos >= 0)
    {
 
-      return str.Mid(iPos + 1);
+      return str.substr(iPos + 1);
 
    }
    else
@@ -48,7 +48,7 @@ string file_final_extension_dup(const char * path)
 }
 
 
-string url_dir_name_for_relative(const char * pszPath)
+string url_dir_name_for_relative(const scoped_string & strPath)
 {
 
    string strDir(pszPath);
@@ -456,7 +456,7 @@ ret:
 }
 
 
-CLASS_DECL_ACME string defer_solve_relative(const char * pszRelative, const char * pszAbsolute)
+CLASS_DECL_ACME string defer_solve_relative(const scoped_string & strRelative, const scoped_string & strAbsolute)
 {
    string strRelative(pszRelative);
    string strAbsolute(pszAbsolute);
@@ -507,7 +507,7 @@ CLASS_DECL_ACME string defer_solve_relative(const char * pszRelative, const char
 
 
 
-//CLASS_DECL_ACME bool read_resource_as_file(const char * pszFile,HINSTANCE hinst,::u32 nID,LPCTSTR pcszType);
+//CLASS_DECL_ACME bool read_resource_as_file(const scoped_string & strFile,HINSTANCE hinst,::u32 nID,LPCTSTR pcszType);
 
 
 

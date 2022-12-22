@@ -221,7 +221,7 @@ namespace acme_windows
 
       string strFolder;
 
-      strsize iFind = strAppId.find('/');
+      strsize iFind = strAppId.find_index('/');
 
       if (strPlatform.case_insensitive_order("win32") == 0 || strPlatform.case_insensitive_order("x86") == 0)
       {
@@ -247,9 +247,9 @@ namespace acme_windows
       else
       {
 
-         path /= strAppId.Left(iFind);
+         path /= strAppId.left(iFind);
 
-         path /= strAppId.Mid(iFind + 1);
+         path /= strAppId.substr(iFind + 1);
 
       }
 
@@ -287,7 +287,7 @@ pacmedir->roaming();
 
       string strFolder;
 
-      strsize iFind = strAppId.find('/');
+      strsize iFind = strAppId.find_index('/');
 
       path = ca2roaming();
 
@@ -321,7 +321,7 @@ pacmedir->roaming();
    ::file::path acme_directory::install()
    {
 
-      if (m_pathInstallFolder == nullptr || m_pathInstallFolder.is_empty())
+      if (m_pathInstallFolder.is_empty())
       {
 
          return default_install();
@@ -1255,7 +1255,7 @@ pacmedir->create CreateDirectoryW last error(%d)=%s", dwError, pszError);
 
          path = listing.m_pathFinal / strFilename;
 
-         path.m_iBasePathLength = path.get_length() - strFilename.get_length();
+         path.m_iBasePathLength = path.length() - strFilename.length();
 
          bool bDirectory = (finddata.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY);
 
@@ -1392,7 +1392,7 @@ pacmedir->create CreateDirectoryW last error(%d)=%s", dwError, pszError);
 
       //}
 
-      //void acme_directory::rls_dir(::file::path_array & stra, const char * psz)
+      //void acme_directory::rls_dir(::file::path_array & stra, const scoped_string & str)
       //{
 
       //   ::count start = stra.get_count();
@@ -1413,7 +1413,7 @@ pacmedir->create CreateDirectoryW last error(%d)=%s", dwError, pszError);
       //}
 
 
-//      void acme_directory::ls(::file::path_array & stra, const char * psz)
+//      void acme_directory::ls(::file::path_array & stra, const scoped_string & str)
 //      {
 //
 //#if defined(LINUX) || defined(__APPLE__) || defined(ANDROID)
@@ -1726,7 +1726,7 @@ pacmedir->create CreateDirectoryW last error(%d)=%s", dwError, pszError);
 //      }
 //
 
-//      void acme_directory::ls_dir(::file::path_array & stra, const char * psz)
+//      void acme_directory::ls_dir(::file::path_array & stra, const scoped_string & str)
 //      {
 //
 //#if defined(LINUX) || defined(__APPLE__) || defined(ANDROID)
@@ -1808,7 +1808,7 @@ pacmedir->create CreateDirectoryW last error(%d)=%s", dwError, pszError);
 //      }
 //
 //
-//      void acme_directory::ls_file(::file::path_array & stra, const char * psz)
+//      void acme_directory::ls_file(::file::path_array & stra, const scoped_string & str)
 //      {
 //
 //#if defined(LINUX) || defined(__APPLE__) || defined(ANDROID)
@@ -1953,7 +1953,7 @@ pacmedir->create CreateDirectoryW last error(%d)=%s", dwError, pszError);
       }
 
 
-      //int acme_directory::make_path(const char * psz)
+      //int acme_directory::make_path(const scoped_string & str)
       //{
 
 
@@ -2092,10 +2092,10 @@ pacmedir->create CreateDirectoryW last error(%d)=%s", dwError, pszError);
    }
 
 
-   void acme_directory::change_current(const char * psz)
+   void acme_directory::change_current(const scoped_string & str)
    {
 
-      wstring wstr(psz);
+      wstring wstr(str);
 
       if (!SetCurrentDirectoryW(wstr))
       {

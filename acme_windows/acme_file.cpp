@@ -35,7 +35,7 @@ namespace acme_windows
 
          wstring wstrPath(e_get_buffer, MAX_PATH * 16);
 
-         if (!GetModuleFileNameW(nullptr, wstrPath, (DWORD)wstrPath.get_length()))
+         if (!GetModuleFileNameW(nullptr, wstrPath, (DWORD)wstrPath.length()))
          {
 
             return "";
@@ -53,7 +53,7 @@ namespace acme_windows
    }
 
 
-   ::earth::time acme_file::modification_time(const char* pathParam)
+   ::earth::time acme_file::modification_time(const ::file::path & pathParam)
    {
 
       auto path = acmepath()->defer_process_relative_path(pathParam);
@@ -103,7 +103,7 @@ namespace acme_windows
    }
 
 
-   void acme_file::set_modification_time(const char* pathParam, const ::earth::time & time)
+   void acme_file::set_modification_time(const ::file::path & pathParam, const ::earth::time & time)
    {
 
       auto path = acmepath()->defer_process_relative_path(pathParam);
@@ -180,10 +180,10 @@ namespace acme_windows
    }
 
 
-   void acme_file::_erase(const char* path)
+   void acme_file::_erase(const ::file::path & pathParam)
    {
 
-      ::wstring wstrPath(path);
+      ::wstring wstrPath(pathParam);
 
       if (!::DeleteFileW(wstrPath))
       {
@@ -192,14 +192,14 @@ namespace acme_windows
 
          auto estatus = ::windows::last_error_status(lastError);
 
-         throw ::exception(estatus, "Failed to delete file \"" + ::string(path) + "\"");
+         throw ::exception(estatus, "Failed to delete file \"" + ::string(pathParam) + "\"");
 
       }
 
    }
 
 
-   string acme_file::get_temporary_file_name(const char * lpszName, const char * pszExtension)
+   string acme_file::get_temporary_file_name(const scoped_string & scopedstrName, const scoped_string & scopedstrExtension)
    {
 
 #ifdef WINDOWS
@@ -238,11 +238,11 @@ namespace acme_windows
 
          path = pathFolder;
 
-         path /= lpszName;
+         path /= scopedstrName;
 
          path /= ::as_string(i);
 
-         path /= (string(lpszName) + "." + string(pszExtension));
+         path /= (string(scopedstrName) + "." + string(scopedstrExtension));
 
          if (!this->exists(path))
          {

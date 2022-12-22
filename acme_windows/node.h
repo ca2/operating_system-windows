@@ -176,7 +176,7 @@ namespace acme_windows
       void flush_stdin() override;
 
       //void defer_initialize_callstack() override;
-      //string get_callstack(const char * pszFormat, i32 iSkip, void * caller_address, int iCount) override;
+      //string get_callstack(const scoped_string & strFormat, i32 iSkip, void * caller_address, int iCount) override;
 
 
       ::pointer < ::acme::exclusive > _get_exclusive(::particle * pparticleContext, const ::string & strName, ::security_attributes * psecurityattributes = nullptr) override;
@@ -192,13 +192,13 @@ namespace acme_windows
 
       //void shell_open(const ::file::path & path, const string & strParams = "", const ::file::path & pathFolder = {}) override;
       //void open_url(const ::string & strUrl) override; //
-      void command_system(string_array & straOutput, int & iExitCode, const char * psz, enum_command_system ecommandsystem = e_command_system_none, const class time & timeTimeout = ::time::infinite(), ::particle * pparticleSynchronization = nullptr, ::file::file * pfileLog = nullptr) override;
+      void command_system(string_array & straOutput, int & iExitCode, const scoped_string & str, enum_command_system ecommandsystem = e_command_system_none, const class time & timeTimeout = ::time::infinite(), ::particle * pparticleSynchronization = nullptr, ::file::file * pfileLog = nullptr) override;
 
-      void shell_execute_async(const char * pszFile, const char * pszParams) override;
-      void shell_execute_sync(const char * pszFile, const char * pszParams, const class time & timeTimeout = 1_minute) override; 
+      void shell_execute_async(const scoped_string & strFile, const scoped_string & strParams) override;
+      void shell_execute_sync(const scoped_string & strFile, const scoped_string & strParams, const class time & timeTimeout = 1_minute) override; 
 
-      void root_execute_async(const char * pszFile, const char * pszParams) override;
-      void root_execute_sync(const char * pszFile, const char * pszParams, const class time & timeTimeout = 1_minute) override;
+      void root_execute_async(const scoped_string & strFile, const scoped_string & strParams) override;
+      void root_execute_sync(const scoped_string & strFile, const scoped_string & strParams, const class time & timeTimeout = 1_minute) override;
 
                bool set_process_priority(::enum_priority epriority) override;
                 ::string get_command_line() override;

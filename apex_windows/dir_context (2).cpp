@@ -248,7 +248,7 @@ namespace windows
    //string dir_context::relpath(const string & pcszSource,const string & lpcszRelative)
 
    //{
-   //   const char * pszRequest;
+   //   const scoped_string & strRequest;
    //   if(::url::is_url(pcszSource,&pszRequest))
 
    //   {
@@ -290,7 +290,7 @@ namespace windows
    //string dir_context::relpath(const string & pcszSource, const string & lpcszRelative, const string & psz2)
 
    //{
-   //   const char * pszRequest;
+   //   const scoped_string & strRequest;
    //   if(::url::is_url(pcszSource, &pszRequest))
 
    //   {
@@ -346,7 +346,7 @@ namespace windows
       while (*psz)
       {
 
-         str.Empty();
+         str.empty();
 
          while (*psz)
          {
@@ -803,7 +803,7 @@ namespace windows
       if (::task_flag().is_set(e_task_flag_compress_is_dir) && iLast >= 3 && !ansi_count_compare_ci(&((const ::string &)str)[iLast - 3], ".zip", 4))
       {
 
-         //m_isdirmap.set(str.Left(iLast + 1), true, 0);
+         //m_isdirmap.set(str.left(iLast + 1), true, 0);
 
          return true;
 
@@ -815,7 +815,7 @@ namespace windows
 
       bIsDir = (dwAttrib != INVALID_FILE_ATTRIBUTES) && (dwAttrib & FILE_ATTRIBUTE_DIRECTORY);
 
-      //      m_isdirmap.set(str.Left(iLast + 1), bIsDir, bIsDir ? 0 : ::GetLastError());
+      //      m_isdirmap.set(str.left(iLast + 1), bIsDir, bIsDir ? 0 : ::GetLastError());
 
       return bIsDir;
 
@@ -1052,7 +1052,7 @@ namespace windows
 
    //::file::path dir_context::name(const ::file::path & path1)
    //{
-   //   const char * psz = path1 + strlen(path1) - 1;
+   //   const scoped_string & str = path1 + strlen(path1) - 1;
    //   while(psz >= path1)
    //   {
    //      if(*psz != '\\' && *psz != '/' && *psz != ':')
@@ -1067,7 +1067,7 @@ namespace windows
    //   }
    //   if(psz >= path1) // strChar == "\\" || strChar == "/"
    //   {
-   //      const char * pszEnd = psz;
+   //      const scoped_string & strEnd = psz;
    //      /*while(psz >= path1)
    //      {
    //         if(*psz != '\\' && *psz != '/' && *psz != ':')
@@ -1107,7 +1107,7 @@ namespace windows
                break;
             iLast--;
          }
-         return str.Left(iLast + 1);
+         return str.left(iLast + 1);
       }
       else
       {
@@ -1126,7 +1126,7 @@ namespace windows
       {
          string strDir = name(psz);
          string str;
-         str = strDir.Left(2);
+         str = strDir.left(2);
          str += "\\trash_that_is_not_trash\\";
          string strFormat;
          ::earth::time time;
@@ -1135,11 +1135,11 @@ namespace windows
          str += strFormat;
          if (strDir.m_pdata[2] == '\\')
          {
-            str += strDir.Mid(3);
+            str += strDir.substr(3);
          }
          else
          {
-            str += strDir.Mid(2);
+            str += strDir.substr(2);
          }
          return str;
       }
@@ -1240,7 +1240,7 @@ namespace windows
 
    //   if(!windows_full_path(wstrFullName,wstrFileName))
    //   {
-   //      rStatus.m_strFullName.Empty();
+   //      rStatus.m_strFullName.empty();
    //      return false;
    //   }
    //   unicode_to_utf8(rStatus.m_strFullName,wstrFullName);

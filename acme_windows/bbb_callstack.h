@@ -99,7 +99,7 @@ namespace windows
       //size_t get_module_basename(HMODULE hmodule, string & strName);
       size_t get_module_name(HMODULE hmodule, char* psz, int nCount);
 
-      //char* get_frame(const char * pszFormat, int& iLine);
+      //char* get_frame(const scoped_string & strFormat, int& iLine);
 
       bool check();
 

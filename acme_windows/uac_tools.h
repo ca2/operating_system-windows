@@ -109,9 +109,9 @@ namespace VistaTools
    bool CLASS_DECL_ACME_WINDOWS
    RunElevated(
    __in      HWND hwnd,
-   __in      const char * pszPath,
-   __in_opt   const char * pszParameters   = nullptr,
-   __in_opt   const char * pszDirectory   = nullptr,
+   __in      const scoped_string & strPath,
+   __in_opt   const scoped_string & strParameters   = nullptr,
+   __in_opt   const scoped_string & strDirectory   = nullptr,
    __out_opt   HANDLE *phProcess      = nullptr);
 
    /*
@@ -160,9 +160,9 @@ namespace VistaTools
    bool CLASS_DECL_ACME_WINDOWS
    RunNonElevated(
    __in      HWND hwnd,
-   __in      const char * pszPath,
-   __in_opt   const char * pszParameters   = nullptr,
-   __in_opt   const char * pszDirectory   = nullptr,
+   __in      const scoped_string & strPath,
+   __in_opt   const scoped_string & strParameters   = nullptr,
+   __in_opt   const scoped_string & strDirectory   = nullptr,
    __out_opt   HANDLE *phProcess      = nullptr);
 
    /*
@@ -209,10 +209,10 @@ namespace VistaTools
 
    bool CLASS_DECL_ACME_WINDOWS
    MyShellExec(::windowing::window * pwindow,
-               const char * pszVerb,
-               const char * pszPath,
-               const char * pszParameters   = nullptr,
-               const char * pszDirectory   = nullptr,
+               const scoped_string & strVerb,
+               const scoped_string & strPath,
+               const scoped_string & strParameters   = nullptr,
+               const scoped_string & strDirectory   = nullptr,
                HANDLE * phProcess      = nullptr);
 
 } // namespace VistaTools

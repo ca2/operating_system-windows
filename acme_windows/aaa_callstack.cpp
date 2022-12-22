@@ -266,7 +266,7 @@ namespace windows
    critical_section * callstack::s_pcriticalsection = nullptr;
 
 
-   callstack::callstack(const char * pszFormat, i32 iSkip, void * caller_address, int iCount):
+   callstack::callstack(const scoped_string & strFormat, i32 iSkip, void * caller_address, int iCount):
       m_iSkip(iSkip),
       m_iCount(iCount),
       m_bOk(false),
@@ -1018,7 +1018,7 @@ namespace windows
    }
 
 
-   bool callstack::stack_trace(CONTEXT * pcontext, iptr iSkip, const char * pszFormat, int iCount)
+   bool callstack::stack_trace(CONTEXT * pcontext, iptr iSkip, const scoped_string & strFormat, int iCount)
    {
 
       if (!pszFormat)
@@ -1127,7 +1127,7 @@ namespace windows
    }
 
 
-   bool callstack::stack_trace(iptr iSkip, const char * pszFormat, int iCount)
+   bool callstack::stack_trace(iptr iSkip, const scoped_string & strFormat, int iCount)
    {
 
       if (iSkip >= 0)
@@ -1179,7 +1179,7 @@ namespace windows
    }
 
 
-   bool callstack::stack_trace(CONTEXT * pcontext, iptr iSkip, bool bSkip, const char * pszFormat, int iCount)
+   bool callstack::stack_trace(CONTEXT * pcontext, iptr iSkip, bool bSkip, const scoped_string & strFormat, int iCount)
    {
 
       if (iSkip >= 0)
@@ -1269,7 +1269,7 @@ namespace windows
    }
 
 
-   //char * callstack::stack_trace(OS_DWORD * pinteraction, int c, const char * pszFormat, int iCount)
+   //char * callstack::stack_trace(OS_DWORD * pinteraction, int c, const scoped_string & strFormat, int iCount)
    //{
 
    //   critical_section_lock csl(s_pcriticalsection);
@@ -1307,7 +1307,7 @@ namespace windows
 
 
 
-   //char * callstack::get_frame(const char * pszFormat, int & iLine)
+   //char * callstack::get_frame(const scoped_string & strFormat, int & iLine)
    //{
 
 
@@ -1451,14 +1451,14 @@ namespace  windows
    static LPVOID s_readMemoryFunction_UserData = nullptr;
 
 
-   //bool callstack::stack_trace(iptr iSkip, const char * pszFormat, int iCount)
+   //bool callstack::stack_trace(iptr iSkip, const scoped_string & strFormat, int iCount)
    //{
 
    //   return false;
 
    //}
 
-   char * callstack::stack_trace(OS_DWORD * pinteraction, int c, const char * pszFormat, int iCount)
+   char * callstack::stack_trace(OS_DWORD * pinteraction, int c, const scoped_string & strFormat, int iCount)
    {
 
       critical_section_lock csl(s_pcriticalsection);
@@ -1496,7 +1496,7 @@ namespace  windows
 
 
 
-   char * callstack::get_frame(const char * pszFormat, int & iLine)
+   char * callstack::get_frame(const scoped_string & strFormat, int & iLine)
    {
 
 
@@ -1610,7 +1610,7 @@ namespace  windows
 
    }
 
-   const char * callstack::get_dup(const char * pszFormat, i32 iSkip, int iCount)
+   const char * callstack::get_dup(const scoped_string & strFormat, i32 iSkip, int iCount)
    {
 
       if (iSkip >= 0)
@@ -1620,7 +1620,7 @@ namespace  windows
 
       }
 
-      const char * psz;
+      const scoped_string & str;
 
       //synchronous_lock synchronouslock(::callstack().mutex());
 

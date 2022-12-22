@@ -679,7 +679,7 @@ namespace windowing_win32
 
             string strType = __type_name(m_pimpl->m_puserinteraction);
 
-            if (strType.contains_ci("font_format"))
+            if (strType.case_insensitive_contains("font_format"))
             {
 
                INFORMATION("font_format going to UpdateLayeredWindow");

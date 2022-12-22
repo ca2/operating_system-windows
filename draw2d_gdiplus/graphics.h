@@ -72,11 +72,11 @@ namespace draw2d_gdiplus
       // Constructors
       //bool CreateDC(const ::string & pszDriverName, const ::string & pszDeviceName,
 
-      //              const char * pszOutput, const void * lpInitData) override;
+      //              const scoped_string & strOutput, const void * lpInitData) override;
 
       //bool CreateIC(const ::string & pszDriverName, const ::string & pszDeviceName,
 
-      //              const char * pszOutput, const void * lpInitData) override;
+      //              const scoped_string & strOutput, const void * lpInitData) override;
 
       void CreateCompatibleDC(::draw2d::graphics * pgraphics) override;
 
@@ -411,20 +411,20 @@ namespace draw2d_gdiplus
 
       virtual ::count get_character_extent(double_array & daLeft, double_array& daRight, const ::string & str, strsize iStart = 0, strsize iEnd = -1) override;
 
-      virtual size_f64 get_text_extent(const char * pszString, strsize nCount, strsize iIndex) override;
+      virtual size_f64 get_text_extent(const scoped_string & strString, strsize nCount, strsize iIndex) override;
 
-      virtual size_f64 GetTextBegin(const char * pszString, strsize nCount, strsize iIndex) override;
+      virtual size_f64 GetTextBegin(const scoped_string & strString, strsize nCount, strsize iIndex) override;
 
       //virtual size_f64 get_text_extent(const ::string & pszString, strsize nCount) override;
 
       size_f64 get_text_extent(const block & block) override;
 
-      void get_text_extent(size_f64 & size, const char * pszString, strsize nCount, strsize iIndex) override;
+      void get_text_extent(size_f64 & size, const scoped_string & strString, strsize nCount, strsize iIndex) override;
 
-      void get_text_extent(size_f64 & size, const char * pszString, strsize nCount) override;
+      void get_text_extent(size_f64 & size, const scoped_string & strString, strsize nCount) override;
 
       void get_text_extent(size_f64 & size, const ::string & str) override;
-      //virtual size_f64 GetOutputTextExtent(const char * pszString, strsize nCount) override;
+      //virtual size_f64 GetOutputTextExtent(const scoped_string & strString, strsize nCount) override;
 
       //virtual size_f64 GetOutputTextExtent(const ::string & str) override;
       ////virtual size_f64 GetTabbedTextExtent(const ::string & pszString, strsize nCount,count nTabPositions, LPINT lpnTabStopPositions) override;
@@ -519,7 +519,7 @@ namespace draw2d_gdiplus
 //
 //      virtual i32 Escape(i32 nEscape, i32 nCount, const ::string & pszInData, LPVOID lpOutData) override;
 //
-//      i32 Escape(i32 nEscape, i32 nInputSize,  const char * pszInputData,i32 nOutputSize, char * pszOutputData) override;
+//      i32 Escape(i32 nEscape, i32 nInputSize,  const scoped_string & strInputData,i32 nOutputSize, char * pszOutputData) override;
 //
 //      i32 DrawEscape(i32 nEscape, i32 nInputSize, const ::string & pszInputData) override;
 
