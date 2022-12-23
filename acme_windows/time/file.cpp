@@ -892,43 +892,6 @@ int_bool file_delete(const scoped_string & strFileName)
 }
 
 
-int_bool file_path_is_equal(const scoped_string & str1,const scoped_string & str2)
-{
-
-   wstring wstr1(psz1);
-
-   wstring wstr2(psz2);
-
-   unichar * pwszFile1;
-
-   unichar * pwszFile2;
-
-   ::acme::malloc < unichar * > pwszPath1;
-
-   ::acme::malloc < unichar * > pwszPath2;
-
-   pwszPath1.alloc((size_t)(wstr1.get_length() * 2 * sizeof(unichar)));
-
-   pwszPath2.alloc((size_t)(wstr2.get_length() * 2 * sizeof(unichar)));
-
-   i32 iCmp = -1;
-
-   if(GetFullPathNameW(wstr1, (DWORD)( pwszPath1.m_iSize / sizeof(unichar)), pwszPath1, &pwszFile1))
-   {
-
-      if(GetFullPathNameW(wstr2, (DWORD) (pwszPath2.m_iSize / sizeof(unichar)), pwszPath2, &pwszFile2))
-      {
-
-         iCmp = _wcsicmp(pwszPath1, pwszPath2);
-
-      }
-
-   }
-
-   return iCmp == 0;
-
-}
-
 
 char get_drive_letter(const char * pDevicePath)
 {

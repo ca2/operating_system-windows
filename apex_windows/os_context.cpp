@@ -422,7 +422,7 @@ namespace apex_windows
    }
 
 
-   void os_context::local_machine_set_run(const ::string & pszKey, const ::string & pszCommand, const ::string& pszArguments, bool bSet)
+   void os_context::local_machine_set_run(const ::string & strKey, const ::string & strCommand, const ::string& strArguments, bool bSet)
    {
 
       try
@@ -434,13 +434,13 @@ namespace apex_windows
          if (bSet)
          {
 
-            keyKar.set(pszKey, string(pszCommand));
+            keyKar.set(strKey, strCommand);
 
          }
          else
          {
 
-            keyKar.delete_value(pszKey);
+            keyKar.delete_value(strKey);
 
          }
 
@@ -795,7 +795,7 @@ namespace apex_windows
       keyLink.get(nullptr, strFormat);
       {
 
-         const scoped_string & str = strFormat;
+         const ::ansi_character * psz = strFormat;
 
          try
          {
@@ -2301,7 +2301,7 @@ retry:
    bool os_context::is_alias(const scoped_string & str)
    {
 
-      return string_ends_ci(psz, ".lnk") != 0;
+      return str.case_insensitive_ends(".lnk");
 
    }
 
@@ -2388,7 +2388,7 @@ retry:
 
          bool bQuote = strDefault.case_insensitive_begins_eat("\"");
 
-         strsize iFind = strDefault.case_insensitive_find(".exe");
+         strsize iFind = strDefault.case_insensitive_find_index(".exe");
 
          if (iFind <= 0)
          {

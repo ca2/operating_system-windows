@@ -21,14 +21,14 @@ namespace acme_windows
    }
 
    
-   ::payload registry::key::get(const ::string & pcszValueName)
+   ::payload registry::key::get(const ::scoped_string & scopedstrValueName)
    {
 
       ::u32 dwType;
 
       ::u32 cbValue;
 
-      /* auto estatus = */ _value_type_and_size(pcszValueName, dwType, cbValue);
+      /* auto estatus = */ _value_type_and_size(scopedstrValueName, dwType, cbValue);
 
       //if (::failed(estatus))
       //{
@@ -42,7 +42,7 @@ namespace acme_windows
 
          ::u32 uValue;
 
-         auto estatus = _value(&uValue, pcszValueName, dwType, cbValue);
+         auto estatus = _value(&uValue, scopedstrValueName, dwType, cbValue);
 
          if(!estatus)
          {
@@ -61,7 +61,7 @@ namespace acme_windows
        
          auto pwszValue = wstrValue.get_string_buffer(cbValue);
 
-         auto estatus = _value(pwszValue, pcszValueName, dwType, cbValue);
+         auto estatus = _value(pwszValue, scopedstrValueName, dwType, cbValue);
 
          if(!estatus)
          {
@@ -82,7 +82,7 @@ namespace acme_windows
 
          memory.set_size(cbValue);
 
-         auto estatus = _value(memory.data(), pcszValueName, dwType, cbValue);
+         auto estatus = _value(memory.data(), scopedstrValueName, dwType, cbValue);
          
          if (!estatus)
          {
@@ -121,15 +121,15 @@ namespace acme_windows
    }
 
 
-   bool registry::key::open(HKEY hkey, const ::string & pcszSubKey, bool bCreate)
+   bool registry::key::open(HKEY hkey, const ::scoped_string & scopedstrSubKey, bool bCreate)
    { 
       
-      return _open(hkey, pcszSubKey, bCreate);
+      return _open(hkey, scopedstrSubKey, bCreate);
    
    }
 
 
-   bool registry::key::_open(HKEY hkey, const ::string & pcszSubKey, bool bCreate)
+   bool registry::key::_open(HKEY hkey, const ::scoped_string & scopedstrSubKey, bool bCreate)
    {
 
       LSTATUS lstatus;
@@ -137,7 +137,7 @@ namespace acme_windows
       if(bCreate)
       {
 
-         lstatus = ::RegCreateKeyW(hkey, wstring(pcszSubKey), &m_hkey);
+         lstatus = ::RegCreateKeyW(hkey, wstring(scopedstrSubKey), &m_hkey);
 
          if (lstatus != ERROR_SUCCESS)
          {
@@ -150,7 +150,7 @@ namespace acme_windows
       else
       {
 
-         lstatus = ::RegOpenKeyW(hkey, wstring(pcszSubKey), &m_hkey);
+         lstatus = ::RegOpenKeyW(hkey, wstring(scopedstrSubKey), &m_hkey);
          
          if (lstatus != ERROR_SUCCESS)
          {
@@ -166,18 +166,18 @@ namespace acme_windows
    }
 
 
-   bool registry::key::value(void * pvalue, const ::string & pcszValueName, ::u32 & dwType, ::u32 & cbValue)
+   bool registry::key::value(void * pvalue, const ::scoped_string & scopedstrValueName, ::u32 & dwType, ::u32 & cbValue)
    { 
       
-      return _value(pvalue, pcszValueName, dwType, cbValue); 
+      return _value(pvalue, scopedstrValueName, dwType, cbValue);
 
    }
 
 
-   bool registry::key::defer_create(HKEY hkey, const ::string & pcszSubKey) 
+   bool registry::key::defer_create(HKEY hkey, const ::scoped_string & scopedstrSubKey) 
    { 
       
-      return _defer_create(hkey, pcszSubKey);
+      return _defer_create(hkey, scopedstrSubKey);
    
    }
 
@@ -200,10 +200,10 @@ namespace acme_windows
    }
 
 
-   bool registry::key::_value(void* pvalue, const ::string & pcszValueName, ::u32& dwType, ::u32& cbValue)
+   bool registry::key::_value(void* pvalue, const ::scoped_string & scopedstrValueName, ::u32& dwType, ::u32& cbValue)
    {
 
-      if (ERROR_SUCCESS != ::RegQueryValueExW(m_hkey, wstring(pcszValueName), nullptr, (LPDWORD) &dwType, (byte*)pvalue, (LPDWORD) &cbValue))
+      if (ERROR_SUCCESS != ::RegQueryValueExW(m_hkey, wstring(scopedstrValueName), nullptr, (LPDWORD) &dwType, (byte*)pvalue, (LPDWORD) &cbValue))
       {
 
          return false;
@@ -215,14 +215,14 @@ namespace acme_windows
    }
 
 
-   bool registry::key::_get(const ::string & pcszValueName, ::u32 & dwValue)
+   bool registry::key::_get(const ::scoped_string & scopedstrValueName, ::u32 & dwValue)
    {
       
       ::u32 dwType;
 
       ::u32 cbValue;
       
-      auto bOk = _value_type_and_size(pcszValueName, dwType, cbValue);
+      auto bOk = _value_type_and_size(scopedstrValueName, dwType, cbValue);
 
       if (!bOk)
       {
@@ -240,7 +240,7 @@ namespace acme_windows
 
       cbValue = sizeof(dwValue);
 
-      bOk = _value(&dwValue, pcszValueName, dwType, cbValue);
+      bOk = _value(&dwValue, scopedstrValueName, dwType, cbValue);
 
       if (!bOk)
       {
@@ -254,14 +254,14 @@ namespace acme_windows
    }
 
 
-   bool registry::key::_get(const ::string & pcszValueName, string &str)
+   bool registry::key::_get(const ::scoped_string & scopedstrValueName, string &str)
    {
 
       ::u32 dwType;
 
       ::u32 cbValue;
 
-      bool bOk = _value_type_and_size(pcszValueName, dwType, cbValue);
+      bool bOk = _value_type_and_size(scopedstrValueName, dwType, cbValue);
 
       if (!bOk)
       {
@@ -281,7 +281,7 @@ namespace acme_windows
 
       auto pwsz = wstr.get_string_buffer(cbValue);
 
-      bOk = _value(pwsz, pcszValueName, dwType, cbValue);
+      bOk = _value(pwsz, scopedstrValueName, dwType, cbValue);
 
       wstr.release_string_buffer();
 
@@ -299,14 +299,14 @@ namespace acme_windows
    }
 
 
-   bool registry::key::_get(const ::string & pcszValueName, memory & mem)
+   bool registry::key::_get(const ::scoped_string & scopedstrValueName, memory & mem)
    {
 
       ::u32 dwType;
 
       ::u32 cbValue;
 
-      auto bOk = _value_type_and_size(pcszValueName, dwType, cbValue);
+      auto bOk = _value_type_and_size(scopedstrValueName, dwType, cbValue);
 
       if (!bOk)
       {
@@ -324,7 +324,7 @@ namespace acme_windows
 
       mem.set_size(cbValue);
 
-      bOk = _value(mem.data(), pcszValueName, dwType, cbValue);
+      bOk = _value(mem.data(), scopedstrValueName, dwType, cbValue);
 
       if (!bOk)
       {
@@ -340,10 +340,10 @@ namespace acme_windows
    }
 
    
-   void registry::key::_set_value(const void* pvalue, const ::string & pcszValueName, ::u32 dwType, ::u32 cbValue)
+   void registry::key::_set_value(const void* pvalue, const ::scoped_string & scopedstrValueName, ::u32 dwType, ::u32 cbValue)
    {
 
-      auto lstatus = RegSetValueExW(m_hkey, ::is_empty(pcszValueName) ? nullptr : wstring(pcszValueName), 0, dwType, (const byte *) pvalue, cbValue);
+      auto lstatus = RegSetValueExW(m_hkey, scopedstrValueName.is_empty() ? nullptr : wstring(scopedstrValueName), 0, dwType, (const byte *) pvalue, cbValue);
 
       if (lstatus != ERROR_SUCCESS)
       {
@@ -359,33 +359,33 @@ namespace acme_windows
    }
 
 
-   bool registry::key::value_type_and_size(const ::string & pcszValueName, ::u32 & dwType, ::u32 & cbValue)
+   bool registry::key::value_type_and_size(const ::scoped_string & scopedstrValueName, ::u32 & dwType, ::u32 & cbValue)
    {
 
-      return _value_type_and_size(pcszValueName, dwType, cbValue);
+      return _value_type_and_size(scopedstrValueName, dwType, cbValue);
 
    }
 
 
-   void registry::key::_set(const ::string & strValueName, const scoped_string & scopedstrValue)
+   //void registry::key::_set(const ::string & strValueName, const scoped_string & scopedstrValue)
+   //{
+
+   //   return this->_set(strValueName, (const ::string &)scopedstrValue);
+
+   //}
+
+
+   void registry::key::_set(const ::scoped_string & scopedstrValueName, const ::scoped_string & scopedstrValue)
    {
 
-      return this->_set(strValueName, (const ::string &)scopedstrValue);
+      wstring wstr(scopedstrValue);
+
+      return _set_value(wstr.c_str(), scopedstrValueName, REG_SZ, (::u32) wstr.length_in_bytes_with_null_terminator());
 
    }
 
 
-   void registry::key::_set(const ::string & pcszValueName, const ::string & strValue)
-   {
-
-      wstring wstr(strValue);
-
-      return _set_value(wstr.c_str(), pcszValueName, REG_SZ, (::u32) wstr.length_in_bytes_with_null_terminator());
-
-   }
-
-
-   //void registry::key::_set(const ::string & pcszValueName, const ::string & pszValue)
+   //void registry::key::_set(const ::scoped_string & scopedstrValueName, const ::string & pszValue)
    //{
 
    //   return _set(pcszValueName, string(pszValue));
@@ -393,73 +393,73 @@ namespace acme_windows
    //}
 
 
-   void registry::key::_set(const ::string & pcszValueName, const memory & memValue)
+   void registry::key::_set_binary(const ::scoped_string & scopedstrValueName, const memory & memValue)
    {
 
-      return _set_value(memValue.data(), pcszValueName, REG_BINARY, (::u32) memValue.size());
+      return _set_value(memValue.data(), scopedstrValueName, REG_BINARY, (::u32) memValue.size());
 
    }
 
 
-   void registry::key::_set(const ::string & pcszValueName, ::u32 dwValue)
+   void registry::key::_set(const ::scoped_string & scopedstrValueName, ::u32 dwValue)
    {
 
-      return _set_value(&dwValue, pcszValueName, REG_DWORD, sizeof(dwValue));
+      return _set_value(&dwValue, scopedstrValueName, REG_DWORD, sizeof(dwValue));
 
    }
 
 
-   bool registry::key::get(const ::string & pcszValueName, ::u32 & dwValue)
+   bool registry::key::get(const ::scoped_string & scopedstrValueName, ::u32 & dwValue)
    { 
       
-      return _get(pcszValueName, dwValue); 
+      return _get(scopedstrValueName, dwValue);
 
       //__defer_throw_estatus(estatus);
    
    }
 
 
-   bool registry::key::get(const ::string & pcszValueName, string & strValue)
+   bool registry::key::get(const ::scoped_string & scopedstrValueName, string & strValue)
    { 
       
-      return _get(pcszValueName, strValue); 
+      return _get(scopedstrValueName, strValue);
 
       //__defer_throw_estatus(estatus);
    
    }
 
 
-   bool registry::key::get(const ::string & pcszValueName, memory & mem)
+   bool registry::key::get(const ::scoped_string & scopedstrValueName, memory & mem)
    { 
       
-      return _get(pcszValueName, mem); 
+      return _get(scopedstrValueName, mem);
 //
   ///    __defer_throw_estatus(estatus);
    
    }
 
 
-   void registry::key::set(const ::string & pcszValueName, ::u32 dwValue)
+   void registry::key::set(const ::scoped_string & scopedstrValueName, ::u32 dwValue)
    {
       
-       _set(pcszValueName, dwValue); 
+       _set(scopedstrValueName, dwValue);
 
       //__defer_throw_estatus(estatus);
 
    
    }
 
-   void registry::key::set(const ::string & strValueName, const scoped_string & strValue)
-   {
+   //void registry::key::set(const ::string & strValueName, const scoped_string & strValue)
+   //{
 
-      this->set(strValueName, (const string &)strValue);
+   //   this->set(strValueName, (const string &)strValue);
 
-   }
+   //}
 
-   void registry::key::set(const ::string & pcszValueName, const ::string & strValue)
+   void registry::key::set(const ::scoped_string & scopedstrValueName, const scoped_string & scopedstrValue)
    { 
 
-      /*auto estatus = */ _set(pcszValueName, strValue);
+      /*auto estatus = */ _set(scopedstrValueName, scopedstrValue);
       
       //__defer_throw_estatus(estatus);
    
@@ -476,20 +476,20 @@ namespace acme_windows
    //}
 
 
-   void registry::key::set(const ::string & pcszValueName, const memory & mem)
+   void registry::key::set_binary(const ::scoped_string & scopedstrValueName, const memory & mem)
    { 
 
-      /*auto estatus =*/ _set(pcszValueName, mem);
+      /*auto estatus =*/ _set(scopedstrValueName, mem);
       
       //__defer_throw_estatus(estatus);
    
    }
 
 
-   void registry::key::delete_value(const ::string & pcszValueName)
+   void registry::key::delete_value(const ::scoped_string & scopedstrValueName)
    { 
       
-      /*auto estatus = */ _delete_value(pcszValueName);
+      /*auto estatus = */ _delete_value(scopedstrValueName);
 
       //__defer_throw_estatus(estatus);
    
@@ -526,10 +526,10 @@ namespace acme_windows
    }
 
 
-   void registry::key::_delete_value(const ::string & pcszValueName)
+   void registry::key::_delete_value(const ::scoped_string & scopedstrValueName)
    {
 
-      wstring wstr(pcszValueName);
+      wstring wstr(scopedstrValueName);
 
       if (ERROR_SUCCESS != ::RegDeleteValueW(m_hkey, (WCHAR *) wstr.c_str()))
       {

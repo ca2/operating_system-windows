@@ -1003,7 +1003,7 @@ namespace apex_windows
 
                string strRoot;
 
-               auto findRootEnd = papp->m_strAppId.find('/');
+               auto findRootEnd = papp->m_strAppId.find_index('/');
 
                if (findRootEnd > 0)
                {

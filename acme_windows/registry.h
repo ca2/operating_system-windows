@@ -28,68 +28,68 @@ namespace acme_windows
 
 
          key();
-         key(HKEY hkey, const ::string & pcszSubKey, bool bCreate = false) { _open(hkey, pcszSubKey, bCreate); }
+         key(HKEY hkey, const ::scoped_string & scopedstrSubKey, bool bCreate = false) { _open(hkey, scopedstrSubKey, bCreate); }
          virtual ~key();
 
       
          operator HKEY();
 
-         bool open(HKEY hkey, const ::string & pcszSubKey, bool bCreate = false);
-         bool _open(HKEY hkey, const ::string & pcszSubKey, bool bCreate = false);
+         bool open(HKEY hkey, const ::scoped_string & scopedstrSubKey, bool bCreate = false);
+         bool _open(HKEY hkey, const ::scoped_string & scopedstrSubKey, bool bCreate = false);
 
          
-         bool defer_create(HKEY hkey, const ::string & pcszSubKey);
-         inline bool _defer_create(HKEY hkey, const ::string & pcszSubKey) { return _open(hkey, pcszSubKey, true); }
+         bool defer_create(HKEY hkey, const ::scoped_string & scopedstrSubKey);
+         inline bool _defer_create(HKEY hkey, const ::scoped_string & scopedstrSubKey) { return _open(hkey, scopedstrSubKey, true); }
 
 
          void close();
 
          
-         bool value(void * pvalue, const ::string & pcszValueName, ::u32 & dwType, ::u32 & cbValue);
-         bool _value(void * pvalue, const ::string & pcszValueName, ::u32& dwType, ::u32& cbValue);
+         bool value(void * pvalue, const ::scoped_string & scopedstrValueName, ::u32 & dwType, ::u32 & cbValue);
+         bool _value(void * pvalue, const ::scoped_string & scopedstrValueName, ::u32& dwType, ::u32& cbValue);
 
-         void _set_value(const void* pvalue, const ::string & pcszValueName, ::u32 dwType, ::u32 cbValue);
-
-
-         bool value_type_and_size(const ::string & pcszValueName, ::u32 & dwType, ::u32 & cbValue);
-         bool _value_type_and_size(const ::string & pcszValueName, ::u32& dwType, ::u32& cbValue) { return _value(nullptr, pcszValueName, dwType, cbValue); }
+         void _set_value(const void* pvalue, const ::scoped_string & scopedstrValueName, ::u32 dwType, ::u32 cbValue);
 
 
-         bool get(const ::string & pcszValueName, ::u32 & dwValue);
-         bool _get(const ::string & pcszValueName, ::u32 & dwValue);
+         bool value_type_and_size(const ::scoped_string & scopedstrValueName, ::u32 & dwType, ::u32 & cbValue);
+         bool _value_type_and_size(const ::scoped_string & scopedstrValueName, ::u32& dwType, ::u32& cbValue) { return _value(nullptr, scopedstrValueName, dwType, cbValue); }
+
+
+         bool get(const ::scoped_string & scopedstrValueName, ::u32 & dwValue);
+         bool _get(const ::scoped_string & scopedstrValueName, ::u32 & dwValue);
 
          
-         bool get(const ::string & pcszValueName, string & strValue);
-         bool _get(const ::string & pcszValueName, string &strValue);
+         bool get(const ::scoped_string & scopedstrValueName, string & strValue);
+         bool _get(const ::scoped_string & scopedstrValueName, string &strValue);
 
 
-         bool get(const ::string & pcszValueName, memory & mem);
-         bool _get(const ::string & pcszValueName, memory & mem);
+         bool get(const ::scoped_string & scopedstrValueName, memory & mem);
+         bool _get(const ::scoped_string & scopedstrValueName, memory & mem);
 
 
-         ::payload get(const ::string & pcszValueName);
+         ::payload get(const ::scoped_string & scopedstrValueName);
 
 
-         void set(const ::string & pcszValueName, ::u32 dwValue);
-         void _set(const ::string & pcszValueName, ::u32 dwValue);
+         void set(const ::scoped_string & scopedstrValueName, ::u32 dwValue);
+         void _set(const ::scoped_string & scopedstrValueName, ::u32 dwValue);
 
 
-         void set(const ::string & strValueName, const scoped_string & strValue);
-         void set(const ::string & strValueName, const ::string & strValue);
-         void _set(const ::string & strValueName, const scoped_string & strValue);
-         void _set(const ::string & strValueName, const ::string & strValue);
+         void set(const ::scoped_string & scopedstrValueName, const scoped_string & strValue);
+         //void set(const ::scoped_string & scopedstrValueName, const ::scoped_string & scopedstrValue);
+         void _set(const ::scoped_string & scopedstrValueName, const scoped_string & strValue);
+         //void _set(const ::scoped_string & scopedstrValueName, const ::scoped_string & scopedstrValue);
 
 
-         //void set(const ::string & pcszValueName, const ::string & pszValue);
-         //void _set(const ::string & pcszValueName, const ::string & pszValue);
+         //void set(const ::scoped_string & scopedstrValueName, const ::string & pszValue);
+         //void _set(const ::scoped_string & scopedstrValueName, const ::string & pszValue);
 
 
-         void set(const ::string & pcszValueName, const memory & mem);
-         void _set(const ::string & pcszValueName, const memory & mem);
+         void set_binary(const ::scoped_string & scopedstrValueName, const memory & mem);
+         void _set_binary(const ::scoped_string & scopedstrValueName, const memory & mem);
 
 
-         void delete_value(const ::string & pcszValueName);
-         void _delete_value(const ::string & pcszValueName);
+         void delete_value(const ::scoped_string & scopedstrValueName);
+         void _delete_value(const ::scoped_string & scopedstrValueName);
 
 
          void delete_key();

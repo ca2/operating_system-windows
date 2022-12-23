@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 
 #ifdef IMPLEMENT_VISTA_TOOLS
@@ -7,13 +7,13 @@
 #include "acme/_operating_system.h"
 
 
-namespace VistaTools
+namespace uac_tools
 {
 
-   bool CLASS_DECL_ACME_WINDOWS IsVista();
+   bool CLASS_DECL_ACME_WINDOWS has_uac();
 
    /*
-   Use IsVista() to determine whether the current process is running under Windows Vista or
+   Use has_uac() to determine whether the current process is running under Windows Vista or
    (or a later version of Windows, whatever it will be)
 
    Return Values:
@@ -78,10 +78,10 @@ namespace VistaTools
    */
 
    HRESULT CLASS_DECL_ACME_WINDOWS
-   IsElevated(__out_opt bool * pbElevated = nullptr);
+   is_elevated(__out_opt bool * pbElevated = nullptr);
 
    /*
-   Use IsElevated() to determine whether the current process is elevated or not.
+   Use is_elevated() to determine whether the current process is elevated or not.
 
    Parameters:
 
@@ -107,15 +107,15 @@ namespace VistaTools
    */
 
    bool CLASS_DECL_ACME_WINDOWS
-   RunElevated(
+   run_elevated(
    __in      HWND hwnd,
-   __in      const scoped_string & strPath,
-   __in_opt   const scoped_string & strParameters   = nullptr,
-   __in_opt   const scoped_string & strDirectory   = nullptr,
+   __in      const char * pszPath,
+   __in_opt   const char * pszParameters   = nullptr,
+   __in_opt   const char * pszDirectory   = nullptr,
    __out_opt   HANDLE *phProcess      = nullptr);
 
    /*
-   Use RunElevated() to start an elevated process. This function calls ShellExecEx() with the verb "runas"
+   Use run_elevated() to start an elevated process. This function calls ShellExecEx() with the verb "runas"
    to start the elevated process.
 
    Parameters:
@@ -204,18 +204,18 @@ namespace VistaTools
 #endif //DONTWANT_RunNonElevated
 
    //////////////////////////////////////////////////////////
-   // MyShellExec is just a wrapper around a call to ShellExecuteEx,
+   // shell_execute is just a wrapper around a call to ShellExecuteEx,
    // to be able to specify the verb easily.
 
    bool CLASS_DECL_ACME_WINDOWS
-   MyShellExec(::windowing::window * pwindow,
+   shell_execute(::windowing::window * pwindow,
                const scoped_string & strVerb,
                const scoped_string & strPath,
                const scoped_string & strParameters   = nullptr,
                const scoped_string & strDirectory   = nullptr,
                HANDLE * phProcess      = nullptr);
 
-} // namespace VistaTools
+} // namespace uac_tools
 
 
 #endif

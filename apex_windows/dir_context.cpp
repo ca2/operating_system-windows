@@ -766,7 +766,7 @@ namespace apex_windows
    bool dir_context::name_is(const ::file::path & str)
    {
 
-      strsize iLast = str.get_length() - 1;
+      strsize iLast = str.length() - 1;
 
       while (iLast >= 0)
       {
@@ -1104,7 +1104,7 @@ namespace apex_windows
    ::file::path dir_context::name(const ::file::path & str)
    {
 
-      strsize iLast = str.get_length() - 1;
+      strsize iLast = str.length() - 1;
 
       while (iLast >= 0)
       {

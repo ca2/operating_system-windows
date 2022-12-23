@@ -1,5 +1,5 @@
 ﻿///////////////////////////////
-/* VistaTools.cxx - version 2.1
+/* uac_tools.cxx - version 2.1
 
 THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF
 ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED
@@ -41,12 +41,12 @@ as well as the definitions (usually placed in the .cpp files) of the functions.
 
 To get the declarations only, include it as you would any .h file, for example:
 
-//#include "VistaTools.cxx"
+//#include "uac_tools.cxx"
 
 To get both the declarations and definitions, define IMPLEMENT_VISTA_TOOLS before including the file:
 
 #define IMPLEMENT_VISTA_TOOLS
-//#include "VistaTools.cxx"
+//#include "uac_tools.cxx"
 
 (The above should be done once and only once per project).
 
@@ -58,7 +58,7 @@ If you don't need to use RunNonElevated, then this file may be a part of an EXE
 project. In such a case, define DONTWANT_RunNonElevated and NO_DLL_IMPORTS to make
 this file compile properly.
 
-NOTE: The file VistaTools.cxx can be included in the VisualStudio projects, but it should be
+NOTE: The file uac_tools.cxx can be included in the VisualStudio projects, but it should be
 excluded from the build process (because its contents is compiled when it is included
 in another .cpp file with IMPLEMENT_VISTA_TOOLS defined, as shown above.)
 
@@ -68,13 +68,13 @@ v.2.1 (2007-May-20, by Andrei Belogortseff)
 
 Removed the deprecated function RunAsStdUser.
 
-Updated RunElevated and RunNonElevated so that if they are called under
+Updated run_elevated and RunNonElevated so that if they are called under
 a pre-Vista version of Windows, they would run the application as usual,
 without raising an assertion.
 
-Enclosed the VistaTools APIs inside of the namespace VistaTools.
+Enclosed the uac_tools APIs inside of the namespace uac_tools.
 
-Updated MyShellExec, RunElevated and RunNonElevated: added
+Updated shell_execute, run_elevated and RunNonElevated: added
 optional phProcess argument.
 
 Changed the call to GetModuleHandleEx to dynamic linking,
@@ -134,7 +134,7 @@ The first release.
 
 
 
-namespace VistaTools
+namespace uac_tools
 {
 
    ///////////////////////////////////////////////////////////////
@@ -142,11 +142,11 @@ namespace VistaTools
    // macros to handle the functions implemented in a DLL properly
 
    //////////////////////////////////////////////////////////
-   // MyShellExec is just a wrapper around a call to ShellExecuteEx,
+   // shell_execute is just a wrapper around a call to ShellExecuteEx,
    // to be able to specify the verb easily.
 
    bool
-   MyShellExec(HWND hwnd,
+   shell_execute(HWND hwnd,
                const char * pszVerb,
                const char * pszPath,
                const char * pszParameters,   // = nullptr
@@ -183,7 +183,7 @@ namespace VistaTools
       return bRet;
    }
 
-   bool IsVista()
+   bool has_uac()
    {
 
       return IsWindowsVistaOrGreater() != false;
@@ -231,7 +231,7 @@ namespace VistaTools
    HRESULT
    GetElevationType(__out TOKEN_ELEVATION_TYPE * ptet)
    {
-      if(!IsVista())
+      if(!has_uac())
          return E_FAIL;
 
       ASSERT(ptet);
@@ -271,9 +271,9 @@ namespace VistaTools
    }
 
    HRESULT
-   IsElevated(__out_opt bool * pbElevated) //= nullptr )
+   is_elevated(__out_opt bool * pbElevated) //= nullptr )
    {
-      if(!IsVista())
+      if(!has_uac())
          return E_FAIL;
 
       HRESULT hResult = E_FAIL; // assume an error occurred
@@ -316,20 +316,20 @@ namespace VistaTools
    }
 
    ////////////////////////////////
-   // RunElevated simply calls ShellExecuteEx with the verb "runas" to start the elevated process.
+   // run_elevated simply calls ShellExecuteEx with the verb "runas" to start the elevated process.
    // I wish there was a just as easy way to start a non-elevated process, as well.
 
    bool
-   RunElevated(
+   run_elevated(
    __in      HWND hwnd,
    __in      const char * pszPath,
    __in_opt   const char * pszParameters,   //   = nullptr,
    __in_opt   const char * pszDirectory,   //   = nullptr,
    __out_opt   HANDLE *phProcess)      //   = nullptr );
    {
-      return MyShellExec(
+      return shell_execute(
              hwnd,
-             IsVista() ? "runas" : nullptr,
+             has_uac() ? "runas" : nullptr,
              pszPath,
              pszParameters,
              pszDirectory,
@@ -382,7 +382,7 @@ namespace VistaTools
 
          if(pwrs->message == uVEMsg)
          {
-            bVESuccess = VistaTools::MyShellExec(
+            bVESuccess = uac_tools::shell_execute(
                          pwrs->hwnd,
                          nullptr,
                          szVE_Path,
@@ -433,13 +433,13 @@ namespace VistaTools
 
       TOKEN_ELEVATION_TYPE tet;
 
-      if(!IsVista() ||
+      if(!has_uac() ||
             FAILED(GetElevationType(&tet)) ||
             tet != TokenElevationTypeFull)
       {
          // if the current process is not elevated, we can use ShellExecuteEx directly!
 
-         return MyShellExec(hwnd,
+         return shell_execute(hwnd,
                             nullptr,
                             pszPath,
                             pszParameters,
@@ -597,6 +597,6 @@ namespace VistaTools
    }
 #endif //DONTWANT_RunNonElevated
 
-} // namespace VistaTools
+} // namespace uac_tools
 
 #endif// IMPLEMENT_VISTA_TOOLS

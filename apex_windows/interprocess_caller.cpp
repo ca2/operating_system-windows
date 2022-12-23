@@ -172,7 +172,7 @@ namespace apex_windows
       COPYDATASTRUCT cds;
 
       cds.dwData = 0x80000000;
-      cds.cbData = (unsigned int) strUri.get_length();
+      cds.cbData = (unsigned int) strUri.length();
       cds.lpData = (void *) strUri.c_str();
 
       HWND hwnd = get_hwnd();

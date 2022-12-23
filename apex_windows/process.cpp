@@ -45,10 +45,10 @@ namespace apex_windows
    }
 
 
-   bool process::create_child_process(const ::string & pszCmdLine, bool bPiped, const ::string & pszDir, ::enum_priority epriority)
+   bool process::create_child_process(const ::string & pszCmdLine, bool bPiped, const ::string & strDir, ::enum_priority epriority)
    {
 
-      if (!::operating_system::process::create_child_process(pszCmdLine, bPiped, pszDir, epriority))
+      if (!::operating_system::process::create_child_process(pszCmdLine, bPiped, strDir, epriority))
       {
 
          return false;
@@ -92,11 +92,11 @@ namespace apex_windows
 
       ::u32 dwPriorityClass = ::get_os_priority_class(epriority);
 
-      wstring wstrDir(pszDir);
+      wstring wstrDir(strDir);
 
       const unichar * pwszDir;
 
-      if (pszDir == nullptr || *pszDir == '\0')
+      if (strDir.is_empty())
       {
 
          pwszDir = nullptr;
@@ -251,7 +251,7 @@ namespace apex_windows
 
       parse.getrest(strParam);
 
-      if(VistaTools::RunElevated(nullptr,strPath,strParam,nullptr,&h))
+      if(uac_tools::run_elevated(nullptr,strPath,strParam,nullptr,&h))
       {
 
          dwExitCode = 0;

@@ -379,7 +379,7 @@ int_bool file_delete(const char * lpszFileName)
 
 
 
-int_bool file_path_is_equal(const scoped_string & str1,const scoped_string & str2)
+int_bool file_path_is_equal(const ::file::path & pathParam1,const ::file::path & pathParam2)
 {
 
    const int32_t iBufSize = MAX_PATH * 8;
