@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 
 #include "apex/platform/os_context.h"
@@ -100,7 +100,7 @@ namespace apex_windows
 
       bool has_alias_in_path(const scoped_string & str, bool bNoUI = false, bool bNoMount = false) override;
 
-      bool is_alias(const scoped_string & str) override;
+      bool is_alias(const ::file::path & path) override;
 
 
       DECLSPEC_NO_RETURN void raise_exception(u32 dwExceptionCode, u32 dwExceptionFlags);

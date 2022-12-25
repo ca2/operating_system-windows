@@ -2298,10 +2298,10 @@ retry:
    }
 
 
-   bool os_context::is_alias(const scoped_string & str)
+   bool os_context::is_alias(const ::file::path & path)
    {
 
-      return str.case_insensitive_ends(".lnk");
+      return path.case_insensitive_ends(".lnk");
 
    }
 

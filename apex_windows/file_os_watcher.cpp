@@ -1,4 +1,4 @@
-//
+﻿//
 //
 //	   Main header for the file_watcher class. Declares all implementation
 //	   classes to reduce compilation overhead.
@@ -188,7 +188,7 @@ namespace apex_windows
 
             action.m_pwatch = pwatch;
 
-            action.m_atom = pwatch->m_atom;
+            action.m_watchid = pwatch->m_watchid;
 
             action.m_pathFolder = pwatch->m_pathFolder;
 
