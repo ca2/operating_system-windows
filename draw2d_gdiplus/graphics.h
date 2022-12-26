@@ -413,7 +413,7 @@ namespace draw2d_gdiplus
 
       virtual size_f64 get_text_extent(const scoped_string & strString, strsize nCount, strsize iIndex) override;
 
-      virtual size_f64 GetTextBegin(const scoped_string & strString, strsize nCount, strsize iIndex) override;
+      virtual size_f64 GetTextBegin(const scoped_string & scopedstr) override;
 
       //virtual size_f64 get_text_extent(const ::string & pszString, strsize nCount) override;
 
