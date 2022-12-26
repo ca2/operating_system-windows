@@ -71,11 +71,11 @@ string imm_context::get_string(int iStr)
 void imm_context::set_string(const scoped_string & str, int iStr)
 {
 
-   wstring wstr(psz);
+   wstring wstr(str);
 
    //int iLen = 
    
-   ImmSetCompositionStringW(m_himc, iStr, (LPVOID) wstr.c_str(), (DWORD) wstr.get_length(),nullptr, 0);
+   ImmSetCompositionStringW(m_himc, iStr, (LPVOID) wstr.c_str(), (DWORD) wstr.length(),nullptr, 0);
 
    //return ::success;
 

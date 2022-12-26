@@ -1616,9 +1616,9 @@ namespace aura_windows
 
       auto pwindow = m_pwindow;
 
-      ::u32 message = atom.umessage();
+      auto emessage = atom.as_emessage();
 
-      return m_pwindow->send_message(message,  wparam, lparam);
+      return m_pwindow->send_message(emessage,  wparam, lparam);
 
    }
 
@@ -1681,10 +1681,10 @@ namespace aura_windows
 
       get_window_text(str);
 
-      ansi_count_copy(pszString, str, (size_t) minimum(nMaxCount, str.get_length()));
+      ansi_count_copy(pszString, str, (size_t) minimum(nMaxCount, str.length()));
 
 
-      return str.get_length();
+      return str.length();
 
    }
 

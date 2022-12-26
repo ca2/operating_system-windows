@@ -188,7 +188,7 @@ void gdiplus_draw_text(::draw2d::graphics* pgraphicsParam, ::draw2d::path* ppath
 
          Gdiplus::RectF rectangle_f32((Gdiplus::REAL) rectangleParam.left, (Gdiplus::REAL) rectangleParam.top, (Gdiplus::REAL) (width(rectangleParam) * dFontWidth), (Gdiplus::REAL) (height(rectangleParam)));
 
-         strsize iSize = text.m_wstr.get_length();
+         strsize iSize = text.m_wstr.length();
 
          if (ppath)
          {
@@ -226,7 +226,7 @@ void gdiplus_draw_text(::draw2d::graphics* pgraphicsParam, ::draw2d::path* ppath
 
             }
 
-            status = pgraphics->DrawString(text.m_wstr, (INT)text.m_wstr.get_length(), pfont, rectangle_f32, &format, pbrush);
+            status = pgraphics->DrawString(text.m_wstr, (INT)text.m_wstr.length(), pfont, rectangle_f32, &format, pbrush);
 
             if (bMeasure)
             {
@@ -280,7 +280,7 @@ void gdiplus_draw_text(::draw2d::graphics* pgraphicsParam, ::draw2d::path* ppath
 
          status = pgraphics->SetTransform(pmNew);
 
-         strsize iSize = text.m_wstr.get_length();
+         strsize iSize = text.m_wstr.length();
 
          status = pgraphics->DrawString(text.m_wstr, (INT)iSize, pfont, rectangle_f32, &format, pbrush);
 

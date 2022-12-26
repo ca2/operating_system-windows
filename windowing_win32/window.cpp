@@ -2881,7 +2881,7 @@ namespace windowing_win32
 
       HWND hwnd = __hwnd(pmessage->m_oswindow);
 
-      UINT message = pmessage->m_atom.u32();
+      UINT message = pmessage->m_atom.as_emessage();
 
       WPARAM wparam = pmessage->m_wparam;
 
@@ -2985,7 +2985,7 @@ namespace windowing_win32
    lresult window::send_message(const ::atom & atom, wparam wParam, lparam lParam)
    {
 
-      return ::SendMessage(get_hwnd(), atom.umessage(), wParam, lParam);
+      return ::SendMessage(get_hwnd(), atom.as_emessage(), wParam, lParam);
 
    }
 
@@ -2995,7 +2995,7 @@ namespace windowing_win32
 
       HWND hwnd = get_hwnd();
 
-      ::u32 message = atom.umessage();
+      ::u32 message = atom.as_emessage();
 
       wparam wparam = wParam;
 
@@ -3048,9 +3048,9 @@ namespace windowing_win32
 
       get_window_text(str);
 
-      ansi_count_copy(pszString, str, (size_t)minimum(nMaxCount, str.get_length()));
+      ansi_count_copy(pszString, str, (size_t)minimum(nMaxCount, str.length()));
 
-      return str.get_length();
+      return str.length();
 
    }
 

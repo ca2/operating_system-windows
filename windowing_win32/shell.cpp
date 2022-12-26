@@ -564,7 +564,7 @@ namespace windowing_win32
 
       unicode_to_utf8(strExtra, getfileimage.m_wstrExtra);
 
-      if (strExtra.get_length() > 0)
+      if (strExtra.length() > 0)
       {
 
          strPathEx += ":" + strExtra;
@@ -1454,7 +1454,7 @@ namespace windowing_win32
 
       SHFILEINFOW shfi = {};
 
-      if (getfileimage.m_imagekey.m_strPath.get_length() == 2
+      if (getfileimage.m_imagekey.m_strPath.length() == 2
          && ansi_char_isalpha(getfileimage.m_imagekey.m_strPath[0])
          && getfileimage.m_imagekey.m_strPath[1] == ':')
       {

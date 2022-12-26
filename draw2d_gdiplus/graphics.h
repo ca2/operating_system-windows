@@ -385,7 +385,7 @@ namespace draw2d_gdiplus
         BLENDFUNCTION blend) override;*/
 
       // Text Functions
-      virtual void TextOutRaw(double x, double y, const block & block);
+      virtual void TextOutRaw(double x, double y, const ::scoped_string & scopedstr);
       //void ExtTextOut(double x, double y, UINT nOptions, const rectangle_f64 &  prectangle, const ::string & pszString,strsize nCount, LPINT lpDxWidths) override;
 
       //void ExtTextOut(double x, double y, UINT nOptions, const rectangle_f64 &  prectangle, const ::string & str, LPINT lpDxWidths) override;
@@ -411,19 +411,19 @@ namespace draw2d_gdiplus
 
       virtual ::count get_character_extent(double_array & daLeft, double_array& daRight, const ::string & str, strsize iStart = 0, strsize iEnd = -1) override;
 
-      virtual size_f64 get_text_extent(const scoped_string & strString, strsize nCount, strsize iIndex) override;
+      //virtual size_f64 get_text_extent(const scoped_string & strString, strsize iIndex) override;
 
-      virtual size_f64 GetTextBegin(const scoped_string & scopedstr) override;
+      virtual size_f64 GetTextBegin(const scoped_string & scopedstr, strsize iIndex) override;
 
       //virtual size_f64 get_text_extent(const ::string & pszString, strsize nCount) override;
 
-      size_f64 get_text_extent(const block & block) override;
+      //size_f64 get_text_extent(const block & block) override;
 
-      void get_text_extent(size_f64 & size, const scoped_string & strString, strsize nCount, strsize iIndex) override;
+      //void get_text_extent(size_f64 & size, const scoped_string & strString, strsize nCount, strsize iIndex) override;
 
-      void get_text_extent(size_f64 & size, const scoped_string & strString, strsize nCount) override;
+      size_f64 get_text_extent(const scoped_string & strString, strsize iIndex) override;
 
-      void get_text_extent(size_f64 & size, const ::string & str) override;
+      size_f64 get_text_extent(const scoped_string & strString) override;
       //virtual size_f64 GetOutputTextExtent(const scoped_string & strString, strsize nCount) override;
 
       //virtual size_f64 GetOutputTextExtent(const ::string & str) override;

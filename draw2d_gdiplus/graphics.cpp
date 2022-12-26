@@ -5708,7 +5708,7 @@ namespace draw2d_gdiplus
       if (iCountParam < 0)
       {
 
-         iCountParam += str.get_length() - iStartParam + 1;
+         iCountParam += str.length() - iStartParam + 1;
 
       }
 
@@ -5731,11 +5731,11 @@ namespace draw2d_gdiplus
 
       }
 
-      ::count cLength = text.m_wstr.get_length();
+      ::count cLength = text.m_wstr.length();
 
-      ::count cBeg = wstrBefore.get_length();
+      ::count cBeg = wstrBefore.length();
 
-      ::index cEnd = cBeg + wstrMiddle.get_length();
+      ::index cEnd = cBeg + wstrMiddle.length();
 
       int iCount = 0;
 
@@ -5830,8 +5830,7 @@ namespace draw2d_gdiplus
    }
 
 
-
-   size_f64 graphics::get_text_extent(const scoped_string & strString, strsize nCount, strsize iIndex)
+   size_f64 graphics::get_text_extent(const scoped_string & strString, strsize iIndex)
    {
 
       if (::is_null(m_pgraphics))
@@ -5841,29 +5840,27 @@ namespace draw2d_gdiplus
 
       }
 
-      if (pszString == nullptr || *pszString == '\0')
+      if (strString.is_empty())
+      {
 
          return size_f64(0, 0);
 
+      }
 
 
-      if (nCount < 0)
-         nCount = strlen(pszString);
-
-
-      if (iIndex > nCount)
+      if (iIndex > strString.size())
          return size_f64(0, 0);
 
       if (iIndex < 0)
          return size_f64(0, 0);
 
-      string str(pszString, nCount);
+      string str(strString);
 
       wstring wstr(str);
 
-      wstring wstrRange = utf8_to_unicode(pszString, iIndex);
+      wstring wstrRange = utf8_to_unicode({ strString.c_str(), iIndex });
 
-      Gdiplus::CharacterRange charRanges[1] = { Gdiplus::CharacterRange(0, (INT)wstrRange.get_length()) };
+      Gdiplus::CharacterRange charRanges[1] = { Gdiplus::CharacterRange(0, (INT)wstrRange.length()) };
 
       Gdiplus::StringFormat strFormat(Gdiplus::StringFormat::GenericTypographic());
 
@@ -5882,9 +5879,9 @@ namespace draw2d_gdiplus
 
          Gdiplus::RectF box(0.0f, 0.0f, 0.0f, 0.0f);
 
-         wstring wstrRange = utf8_to_unicode(pszString, iIndex);
+         wstring wstrRange = utf8_to_unicode({ strString.c_str(), iIndex });
 
-         m_pgraphics->MeasureString(wstrRange, (i32)wstrRange.get_length(), m_pfont->get_os_data < Gdiplus::Font * >(this), origin, Gdiplus::StringFormat::GenericTypographic(), &box);
+         m_pgraphics->MeasureString(wstrRange, (i32)wstrRange.length(), m_pfont->get_os_data < Gdiplus::Font * >(this), origin, Gdiplus::StringFormat::GenericTypographic(), &box);
 
          return ::size_f64((LONG)(box.Width * m_pfont->m_dFontWidth), (LONG)(box.Height));
 
@@ -5898,7 +5895,7 @@ namespace draw2d_gdiplus
 
       //#define new ACME_NEW
 
-      m_pgraphics->MeasureCharacterRanges(wstr, (INT)wstr.get_length(), m_pfont->get_os_data < Gdiplus::Font * >(this), box, &strFormat, (INT)count, pCharRangeRegions);
+      m_pgraphics->MeasureCharacterRanges(wstr, (INT)wstr.length(), m_pfont->get_os_data < Gdiplus::Font * >(this), box, &strFormat, (INT)count, pCharRangeRegions);
 
       for (index i = 1; i < count; i++)
       {
@@ -5922,31 +5919,27 @@ namespace draw2d_gdiplus
    }
 
 
-   size_f64 graphics::GetTextBegin(const scoped_string & strString, strsize nCount, strsize iIndex)
+   size_f64 graphics::GetTextBegin(const scoped_string & strString, ::index iIndex)
    {
 
-      if (pszString == nullptr || *pszString == '\0')
+      if (strString.is_empty())
       {
 
          return ::size_f64(0, 0);
 
       }
 
-      if (nCount < 0)
-         nCount = strlen(pszString);
-
-
-      if (iIndex > nCount)
+      if (iIndex > strString.size())
          return ::size_f64(0, 0);
 
       if (iIndex < 0)
          return ::size_f64(0, 0);
 
-      wstring wstr = utf8_to_unicode(pszString, nCount);
+      wstring wstr(strString);
 
-      wstring wstrRange = utf8_to_unicode(pszString, iIndex);
+      wstring wstrRange(::string(strString.begin(), iIndex));
 
-      Gdiplus::CharacterRange charRanges[1] = { Gdiplus::CharacterRange(INT(wstrRange.get_length()), INT(wstr.get_length() - wstrRange.get_length())) };
+      Gdiplus::CharacterRange charRanges[1] = { Gdiplus::CharacterRange(INT(wstrRange.length()), INT(wstr.length() - wstrRange.length())) };
 
       Gdiplus::StringFormat strFormat(Gdiplus::StringFormat::GenericTypographic());
 
@@ -5965,9 +5958,9 @@ namespace draw2d_gdiplus
 
          Gdiplus::RectF box(0.0f, 0.0f, 0.0f, 0.0f);
 
-         wstrRange = utf8_to_unicode(pszString, iIndex);
+         wstrRange = ::string(strString.begin(), iIndex);
 
-         m_pgraphics->MeasureString(wstrRange, (i32)wstrRange.get_length(), m_pfont->get_os_data < Gdiplus::Font *  >(this), origin, Gdiplus::StringFormat::GenericTypographic(), &box);
+         m_pgraphics->MeasureString(wstrRange, (i32)wstrRange.length(), m_pfont->get_os_data < Gdiplus::Font *  >(this), origin, Gdiplus::StringFormat::GenericTypographic(), &box);
 
          return ::size_f64((LONG)(box.Width * m_pfont->m_dFontWidth), (LONG)(box.Height));
 
@@ -5981,7 +5974,7 @@ namespace draw2d_gdiplus
 
       //#define new ACME_NEW
 
-      m_pgraphics->MeasureCharacterRanges(wstr, (INT)wstr.get_length(), m_pfont->get_os_data < Gdiplus::Font * >(this), box, &strFormat, (INT)count, pCharRangeRegions);
+      m_pgraphics->MeasureCharacterRanges(wstr, (INT)wstr.length(), m_pfont->get_os_data < Gdiplus::Font * >(this), box, &strFormat, (INT)count, pCharRangeRegions);
 
       for (index i = 1; i < count; i++)
       {
@@ -6001,10 +5994,10 @@ namespace draw2d_gdiplus
    }
 
 
-   size_f64 graphics::get_text_extent(const block & block)
+   size_f64 graphics::get_text_extent(const ::scoped_string & scopedstr)
    {
 
-      if (!m_pfont || block.is_empty())
+      if (!m_pfont || scopedstr.is_empty())
       {
 
          return ::size_f64(0, 0);
@@ -6013,9 +6006,7 @@ namespace draw2d_gdiplus
 
       m_pfont->defer_update(this, 0);
 
-      string str(block);
-
-      auto & text = m_pfont->m_mapText[str];
+      auto & text = m_pfont->m_mapText[scopedstr];
 
       if (text.m_bSize)
       {
@@ -6027,7 +6018,7 @@ namespace draw2d_gdiplus
       if (text.m_wstr.is_empty())
       {
 
-         text.m_wstr = str;
+         text.m_wstr = scopedstr;
 
       }
 
@@ -6052,7 +6043,7 @@ namespace draw2d_gdiplus
 
       const WCHAR * psz = text.m_wstr;
 
-      int iLen = (i32)text.m_wstr.get_length();
+      int iLen = (i32)text.m_wstr.length();
 
 #undef new
 
@@ -6164,272 +6155,272 @@ namespace draw2d_gdiplus
    //}
 
 
-   void graphics::get_text_extent(::size_f64 & size, const scoped_string & strString, strsize nCount, strsize iIndex)
-   {
+   //::size_f64 graphics::get_text_extent(const scoped_string & strString, strsize iIndex)
+   //{
 
-      if (::is_null(m_pgraphics))
-      {
+   //   if (::is_null(m_pgraphics))
+   //   {
 
-         //return false;
+   //      //return false;
 
-         throw ::exception(error_null_pointer);
+   //      throw ::exception(error_null_pointer);
 
-      }
+   //   }
 
-      if (m_pfont.is_null())
-         throw ::exception(error_null_pointer);
-      //return false;
+   //   if (m_pfont.is_null())
+   //      throw ::exception(error_null_pointer);
+   //   //return false;
 
-      if (pszString == nullptr || *pszString == '\0')
-         throw ::exception(error_null_pointer);
-      //return false;
+   //   if (strString.is_empty())
+   //      throw ::exception(error_null_pointer);
+   //   //return false;
 
-      if (nCount < 0)
-         nCount = strlen(pszString);
+   //   //if (nCount < 0)
+   //     // nCount = strlen(pszString);
 
 
-      if (iIndex > nCount)
-         throw ::exception(error_null_pointer);
-      //return false;
+   //   if (iIndex > strString.size())
+   //      throw ::exception(error_null_pointer);
+   //   //return false;
 
-      if (iIndex < 0)
-         throw ::exception(error_null_pointer);
-      //return false;
+   //   if (iIndex < 0)
+   //      throw ::exception(error_null_pointer);
+   //   //return false;
 
-      m_pfont->defer_update(this, 0);
+   //   m_pfont->defer_update(this, 0);
 
-      wstring wstr = utf8_to_unicode(pszString, nCount);
+   //   wstring wstr = strString;
 
-      strsize iRange = 0;
-      strsize i = 0;
-      strsize iLen;
-      const scoped_string & str = pszString;
+   //   strsize iRange = 0;
+   //   strsize i = 0;
+   //   strsize iLen;
+   //   const char * psz = strString.begin();
 
-      while (i < iIndex)
-      {
-         try
-         {
-            iLen = get_utf8_char_length(psz);
-         }
-         catch (...)
-         {
-            break;
-         }
-         if (iLen < 0)
-            break;
-         iRange++;
-         i += iLen;
-         if (i >= iIndex)
-            break;
-         try
-         {
-            psz += iLen;
-         }
-         catch (...)
-         {
-            break;
-         }
-         if (psz == nullptr)
-            break;
-         if (*psz == '\0')
-            break;
-      }
+   //   while (i < iIndex)
+   //   {
+   //      try
+   //      {
+   //         iLen = get_utf8_char_length(psz);
+   //      }
+   //      catch (...)
+   //      {
+   //         break;
+   //      }
+   //      if (iLen < 0)
+   //         break;
+   //      iRange++;
+   //      i += iLen;
+   //      if (i >= iIndex)
+   //         break;
+   //      try
+   //      {
+   //         psz += iLen;
+   //      }
+   //      catch (...)
+   //      {
+   //         break;
+   //      }
+   //      if (psz == nullptr)
+   //         break;
+   //      if (*psz == '\0')
+   //         break;
+   //   }
 
-      Gdiplus::CharacterRange charRanges[1] = { Gdiplus::CharacterRange(0, (INT)iRange) };
+   //   Gdiplus::CharacterRange charRanges[1] = { Gdiplus::CharacterRange(0, (INT)iRange) };
 
-      Gdiplus::StringFormat strFormat(Gdiplus::StringFormat::GenericTypographic());
-      //Gdiplus::StringFormat strFormat;
+   //   Gdiplus::StringFormat strFormat(Gdiplus::StringFormat::GenericTypographic());
+   //   //Gdiplus::StringFormat strFormat;
 
-      strFormat.SetMeasurableCharacterRanges(1, charRanges);
+   //   strFormat.SetMeasurableCharacterRanges(1, charRanges);
 
-      strFormat.SetFormatFlags(strFormat.GetFormatFlags()
-         | Gdiplus::StringFormatFlagsNoClip | Gdiplus::StringFormatFlagsMeasureTrailingSpaces
-      );
+   //   strFormat.SetFormatFlags(strFormat.GetFormatFlags()
+   //      | Gdiplus::StringFormatFlagsNoClip | Gdiplus::StringFormatFlagsMeasureTrailingSpaces
+   //   );
 
-      i32 count = strFormat.GetMeasurableCharacterRangeCount();
+   //   i32 count = strFormat.GetMeasurableCharacterRangeCount();
 
-      //#undef new
+   //   //#undef new
 
-      Gdiplus::Region * pCharRangeRegions = new Gdiplus::Region[count];
+   //   Gdiplus::Region * pCharRangeRegions = new Gdiplus::Region[count];
 
 
-      //#define new ACME_NEW
+   //   //#define new ACME_NEW
 
-            //Gdiplus::RectF box(0.0f, 0.0f, 128.0f * 1024.0f, 128.0f * 1024.0f);
+   //         //Gdiplus::RectF box(0.0f, 0.0f, 128.0f * 1024.0f, 128.0f * 1024.0f);
 
-      Gdiplus::PointF origin(0, 0);
+   //   Gdiplus::PointF origin(0, 0);
 
-      // Generate a on_layout rectangle_i32 for the text
+   //   // Generate a on_layout rectangle_i32 for the text
 
-      Gdiplus::RectF layoutRect(0, 0, 10000, 10000);
+   //   Gdiplus::RectF layoutRect(0, 0, 10000, 10000);
 
-      Gdiplus::Status status = m_pgraphics->MeasureString(wstr, (INT)nCount, m_pfont->get_os_data < Gdiplus::Font * >(this), origin, &layoutRect);
+   //   Gdiplus::Status status = m_pgraphics->MeasureString(wstr, (INT)nCount, m_pfont->get_os_data < Gdiplus::Font * >(this), origin, &layoutRect);
 
-      // Prevent clipping
+   //   // Prevent clipping
 
-      //StringFormat strFormat( StringFormat::GenericTypographic() );
-      //status = ((graphics *)this)->m_pgraphics->SetFormatFlags( StringFormatFlagsNoWrap | StringFormatFlagsNoClip );
+   //   //StringFormat strFormat( StringFormat::GenericTypographic() );
+   //   //status = ((graphics *)this)->m_pgraphics->SetFormatFlags( StringFormatFlagsNoWrap | StringFormatFlagsNoClip );
 
-      //m_pgraphics->MeasureString(text.m_wstr, (i32) text.m_wstr.get_length(), m_pfont->get_os_data < Font * >(this), origin, Gdiplus::StringFormat::GenericTypographic(), &box);
+   //   //m_pgraphics->MeasureString(text.m_wstr, (i32) text.m_wstr.get_length(), m_pfont->get_os_data < Font * >(this), origin, Gdiplus::StringFormat::GenericTypographic(), &box);
 
-      m_pgraphics->MeasureCharacterRanges(wstr, (INT)nCount, m_pfont->get_os_data < Gdiplus::Font * >(this), layoutRect, &strFormat, (INT)count, pCharRangeRegions);
+   //   m_pgraphics->MeasureCharacterRanges(wstr, (INT)nCount, m_pfont->get_os_data < Gdiplus::Font * >(this), layoutRect, &strFormat, (INT)count, pCharRangeRegions);
 
-      Gdiplus::Region * pregion = nullptr;
+   //   Gdiplus::Region * pregion = nullptr;
 
 
-      if (count > 0)
-      {
+   //   if (count > 0)
+   //   {
 
-         pregion = pCharRangeRegions[0].Clone();
+   //      pregion = pCharRangeRegions[0].Clone();
 
-      }
+   //   }
 
-      for (i = 1; i < count; i++)
-      {
-         pregion->Union(&pCharRangeRegions[i]);
-      }
+   //   for (i = 1; i < count; i++)
+   //   {
+   //      pregion->Union(&pCharRangeRegions[i]);
+   //   }
 
-      delete[] pCharRangeRegions;
+   //   delete[] pCharRangeRegions;
 
-      if (pregion == nullptr)
-      {
+   //   if (pregion == nullptr)
+   //   {
 
-         //return false;
+   //      //return false;
 
-         throw ::exception(error_null_pointer);
+   //      throw ::exception(error_null_pointer);
 
-      }
+   //   }
 
-      Gdiplus::RectF rectangleBound;
+   //   Gdiplus::RectF rectangleBound;
 
-      pregion->GetBounds(&rectangleBound, m_pgraphics);
+   //   pregion->GetBounds(&rectangleBound, m_pgraphics);
 
-      delete pregion;
+   //   delete pregion;
 
-      Gdiplus::SizeF size_f32;
+   //   Gdiplus::SizeF size_f32;
 
-      rectangleBound.GetSize(&size_f32);
+   //   rectangleBound.GetSize(&size_f32);
 
-      size.cx = size_f32.Width * m_pfont->m_dFontWidth;
+   //   size.cx = size_f32.Width * m_pfont->m_dFontWidth;
 
-      size.cy = size_f32.Height;
+   //   size.cy = size_f32.Height;
 
-      //return true;
+   //   //return true;
 
-   }
+   //}
 
 
-   void graphics::get_text_extent(::size_f64 & size, const scoped_string & strString, strsize nCount)
-   {
+   //::size_f64 graphics::get_text_extent(const scoped_string & strString, strsize iIndex)
+   //{
 
-      if (::is_null(m_pgraphics))
-      {
+   //   if (::is_null(m_pgraphics))
+   //   {
 
-         //return false;
+   //      //return false;
 
-         throw ::exception(error_null_pointer);
+   //      throw ::exception(error_null_pointer);
 
-      }
+   //   }
 
-      wstring wstr = utf8_to_unicode(pszString, nCount);
+   //   wstring wstr = strString;
 
 
-      Gdiplus::RectF box;
+   //   Gdiplus::RectF box;
 
-      Gdiplus::PointF origin(0, 0);
+   //   Gdiplus::PointF origin(0, 0);
 
-      Gdiplus::StringFormat strFormat(Gdiplus::StringFormat::GenericTypographic());
+   //   Gdiplus::StringFormat strFormat(Gdiplus::StringFormat::GenericTypographic());
 
-      strFormat.SetFormatFlags(strFormat.GetFormatFlags()
-         | Gdiplus::StringFormatFlagsNoClip | Gdiplus::StringFormatFlagsMeasureTrailingSpaces
-      );
-      bool bOk = true;
+   //   strFormat.SetFormatFlags(strFormat.GetFormatFlags()
+   //      | Gdiplus::StringFormatFlagsNoClip | Gdiplus::StringFormatFlagsMeasureTrailingSpaces
+   //   );
+   //   bool bOk = true;
 
-      try
-      {
+   //   try
+   //   {
 
-         if (m_pgraphics->MeasureString(wstr, (i32)wstr.get_length(), m_pfont->get_os_data < Gdiplus::Font * >(this), origin, &strFormat, &box) != Gdiplus::Status::Ok)
-         {
+   //      if (m_pgraphics->MeasureString(wstr, (i32)wstr.get_length(), m_pfont->get_os_data < Gdiplus::Font * >(this), origin, &strFormat, &box) != Gdiplus::Status::Ok)
+   //      {
 
-            bOk = false;
+   //         bOk = false;
 
-         }
+   //      }
 
-      }
-      catch (...)
-      {
-         bOk = false;
-      }
+   //   }
+   //   catch (...)
+   //   {
+   //      bOk = false;
+   //   }
 
-      if (!bOk)
-         throw ::exception(error_null_pointer);
-      //return false;
+   //   if (!bOk)
+   //      throw ::exception(error_null_pointer);
+   //   //return false;
 
-      size.cx = box.Width * m_pfont->m_dFontWidth;
+   //   size.cx = box.Width * m_pfont->m_dFontWidth;
 
-      size.cy = box.Height;
+   //   size.cy = box.Height;
 
-      //return true;
+   //   //return true;
 
-   }
+   //}
 
 
-   void graphics::get_text_extent(::size_f64 & size, const ::string & str)
-   {
-
-      if (::is_null(m_pgraphics) && ::is_null(m_pfont))
-      {
-
-         //return false;
-
-         throw ::exception(error_null_pointer);
-
-      }
-
-      wstring wstr = utf8_to_unicode(str);
-
-      Gdiplus::RectF box;
-
-      Gdiplus::PointF origin(0, 0);
-
-      m_pfont->defer_update(this, 0);
-
-      bool bOk = true;
-
-      try
-      {
-
-         if (m_pgraphics->MeasureString(wstr, (i32)wstr.get_length(), m_pfont->get_os_data < Gdiplus::Font * >(this), origin, &box) != Gdiplus::Status::Ok)
-         {
-
-            bOk = false;
-
-         }
-
-      }
-      catch (...)
-      {
-
-         bOk = false;
-
-      }
-
-      if (!bOk)
-      {
-
-         //return false;
-
-         throw ::exception(error_null_pointer);
-
-      }
-
-      size.cx = box.Width * m_pfont->m_dFontWidth;
-
-      size.cy = box.Height;
-
-      //return true;
-
-   }
+//::size_f64 graphics::get_text_extent(const ::scoped_string & scopedstr)
+//   {
+//
+//      if (::is_null(m_pgraphics) && ::is_null(m_pfont))
+//      {
+//
+//         //return false;
+//
+//         throw ::exception(error_null_pointer);
+//
+//      }
+//
+//      wstring wstr = scopedstr;
+//
+//      Gdiplus::RectF box;
+//
+//      Gdiplus::PointF origin(0, 0);
+//
+//      m_pfont->defer_update(this, 0);
+//
+//      bool bOk = true;
+//
+//      try
+//      {
+//
+//         if (m_pgraphics->MeasureString(wstr, (i32)wstr.get_length(), m_pfont->get_os_data < Gdiplus::Font * >(this), origin, &box) != Gdiplus::Status::Ok)
+//         {
+//
+//            bOk = false;
+//
+//         }
+//
+//      }
+//      catch (...)
+//      {
+//
+//         bOk = false;
+//
+//      }
+//
+//      if (!bOk)
+//      {
+//
+//         //return false;
+//
+//         throw ::exception(error_null_pointer);
+//
+//      }
+//
+//      size.cx = box.Width * m_pfont->m_dFontWidth;
+//
+//      size.cy = box.Height;
+//
+//      //return true;
+//
+//   }
 
 
    //void graphics::fill_rectangle(const ::rectangle_f64 & rectangle, const ::color::color & color)
@@ -6470,10 +6461,10 @@ namespace draw2d_gdiplus
    //}
 
 
-   void graphics::TextOutRaw(double x, double y, const block & block)
+   void graphics::TextOutRaw(double x, double y, const ::scoped_string & scopedstr)
    {
 
-      if (block.is_empty())
+      if (scopedstr.is_empty())
       {
 
          return;
@@ -6502,12 +6493,12 @@ namespace draw2d_gdiplus
 
       Gdiplus::Font * pfont = m_pfont->get_os_data < Gdiplus::Font * >(this);
 
-      auto & text = m_pfont->m_mapText[block];
+      auto & text = m_pfont->m_mapText[scopedstr];
 
       if (text.m_wstr.is_empty())
       {
 
-         text.m_wstr = block;
+         text.m_wstr = scopedstr;
 
       }
 
@@ -6605,7 +6596,7 @@ namespace draw2d_gdiplus
 
             double d3 = d1 * d2;
 
-            status = path.AddString(text.m_wstr, (INT)text.m_wstr.get_length(), &fontfamily, pfont->GetStyle(), (Gdiplus::REAL)d1, origin, &format);
+            status = path.AddString(text.m_wstr, (INT)text.m_wstr.length(), &fontfamily, pfont->GetStyle(), (Gdiplus::REAL)d1, origin, &format);
 
             m_ppath->AddPath(&path, false);
 
@@ -6629,7 +6620,7 @@ namespace draw2d_gdiplus
 
             }
 
-            status = m_pgraphics->DrawString(text.m_wstr, (INT)text.m_wstr.get_length(), pfont, origin, &format, pbrush);
+            status = m_pgraphics->DrawString(text.m_wstr, (INT)text.m_wstr.length(), pfont, origin, &format, pbrush);
 
             if (eCompositingMode == Gdiplus::CompositingModeSourceCopy)
             {
@@ -6697,7 +6688,7 @@ namespace draw2d_gdiplus
 
             double d3 = d1 * d2;
 
-            status = path.AddString(text.m_wstr, (INT)text.m_wstr.get_length(), &fontfamily, pfont->GetStyle(), (Gdiplus::REAL)d1, origin, &format);
+            status = path.AddString(text.m_wstr, (INT)text.m_wstr.length(), &fontfamily, pfont->GetStyle(), (Gdiplus::REAL)d1, origin, &format);
 
             path.Transform(pmNew);
 
@@ -6709,7 +6700,7 @@ namespace draw2d_gdiplus
 
             m_pgraphics->SetTransform(pmNew);
 
-            status = m_pgraphics->DrawString(text.m_wstr, (INT)text.m_wstr.get_length(), pfont, origin, &format, pbrush);
+            status = m_pgraphics->DrawString(text.m_wstr, (INT)text.m_wstr.length(), pfont, origin, &format, pbrush);
 
             m_pgraphics->SetTransform(&m);
 
