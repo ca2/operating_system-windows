@@ -505,7 +505,7 @@ namespace apex_windows
 
                string str;
 
-               str = "\"" + string(pszCommand) + "\"" + ::str().has_char(strArguments, " ");
+               str = "\"" + string(pszCommand) + "\"" + ::str::has_char(strArguments, " ");
 
                keyKar.set(pszKey, str);
 
@@ -792,18 +792,23 @@ namespace apex_windows
       ::acme_windows::registry::key keyLink(HKEY_CLASSES_ROOT, strExtensionNamingClass + "\\shell\\open\\command", false);
 
       string strFormat;
+
       keyLink.get(nullptr, strFormat);
+
       {
 
-         const ::ansi_character * psz = strFormat;
+         auto range = strFormat();
 
          try
          {
 
-            strCommand = ::str().consume_quoted_value(psz);
-            ::str().consume_spaces(psz);
-            ::str().consume(psz, "\"%L\"");
-            strParam = psz;
+            strCommand = ::str::consume_quoted_value(range);
+
+            ::str::consume_spaces(range);
+
+            ::str::consume(range, "\"%L\"");
+
+            strParam = range;
 
          }
          catch(...)
@@ -861,9 +866,9 @@ namespace apex_windows
 
             string str = key.get("");
 
-            auto psz = str.c_str();
+            auto range = str();
 
-            ::file::path path = ::str().consume_quoted_value(psz);
+            ::file::path path = ::str::consume_quoted_value(range);
 
             string strCommand = "\"" + path + "\" \"" + strUrl + "\" --profile-directory=\"" + strProfile + "\"";
 
