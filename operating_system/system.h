@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 
 #undef INLINE
@@ -10,12 +10,6 @@
 
 #define PARALLELIZATION_WIN32
 
-
-
-
-//#ifdef _DEBUG
-//#define DEBUG
-//#endif
 
 
 
@@ -49,23 +43,10 @@
 #include <stdarg.h>
 
 
-
-#ifdef _CUSTOM
-// Put any custom configuration items in ::windows_definition::v_cfg.h
-#include <::windows_definition::v_cfg.h>
-#endif
-
-
 #include <concepts>
 
 
 
-#include "platform_dll.h"
-
-// Define this virtual key for use by status bar
-#ifndef VK_KANA
-#define VK_KANA             0x15
-#endif
 
 
 
@@ -73,16 +54,6 @@
 
 
 #define DEBUG_BREAK __debugbreak()
-
-
-
-
-
-
-#include "platform_cpu.h"
-
-
-
 
 
 
@@ -99,43 +70,12 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//#if WINVER >= 0x600
-//#include <D2d1_1.h>
-//#endif
-//
-//#include <winreg.h>
-//#include <winnls.h>
 #include <stddef.h>
 #include <limits.h>
-//#include <malloc.h>
-#ifdef VC6
-#include <mbstring.h>
-#endif
 #include <new.h>
 #include <eh.h>
 
 #undef __window_procedure
-
-//#define MAX_DWORD_PTR ((uptr)(-1))
-
-
-
 
 
 #define IMPLEMENT_VISTA_TOOLS
