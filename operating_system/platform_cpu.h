@@ -8,7 +8,7 @@
 // See these sources for detailed information regarding the
 // Microsoft Foundation Classes product.
 
-// afxv_cpu.h - target version/configuration control for various CPUs
+// ::windows_definition::v_cpu.h - target version/configuration control for various CPUs
 
 /////////////////////////////////////////////////////////////////////////////
 

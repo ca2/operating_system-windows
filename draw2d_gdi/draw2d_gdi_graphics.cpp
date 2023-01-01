@@ -3350,8 +3350,7 @@ namespace draw2d_gdi
 
          else
          {
-            //cxPerInch = afxData.cxPixelsPerInch;
-            //cyPerInch = afxData.cyPixelsPerInch;
+
             cxPerInch = 96;
             cyPerInch = 96;
          }
@@ -3395,8 +3394,7 @@ namespace draw2d_gdi
 
          else
          {
-            //cxPerInch = afxData.cxPixelsPerInch;
-            //cyPerInch = afxData.cyPixelsPerInch;
+
             cxPerInch = 96;
             cyPerInch = 96;
          }
@@ -3434,8 +3432,8 @@ namespace draw2d_gdi
 
    ::draw2d::brush* graphics::GetHalftoneBrush(::particle * pparticle)
    {
-      /*      AfxLockGlobals(CRIT_HALFTONEBRUSH);
-      if (_afxHalftoneBrush == nullptr)
+      /*      ::windows_definition::LockGlobals(CRIT_HALFTONEBRUSH);
+      if (::windows_definition::HalftoneBrush == nullptr)
       {
       WORD grayPattern[8];
       for (int i = 0; i < 8; i++)
@@ -3443,18 +3441,18 @@ namespace draw2d_gdi
       HBITMAP grayBitmap = CreateBitmap(8, 8, 1, 1, grayPattern);
       if (grayBitmap != nullptr)
       {
-      _afxHalftoneBrush = ::CreatePatternBrush(grayBitmap);
+      ::windows_definition::HalftoneBrush = ::CreatePatternBrush(grayBitmap);
       ::DeleteObject(grayBitmap);
 
       }
 
 
       }
-      if (!_afxWingdixTerm)
-      _afxWingdixTerm = (char)!atexit(&AfxWingdixTerm);
-      AfxUnlockGlobals(CRIT_HALFTONEBRUSH);
+      if (!::windows_definition::WingdixTerm)
+      ::windows_definition::WingdixTerm = (char)!atexit(&::windows_definition::WingdixTerm);
+      ::windows_definition::UnlockGlobals(CRIT_HALFTONEBRUSH);
 
-      return ::draw2d_gdi::brush::from_handle(papp, _afxHalftoneBrush);
+      return ::draw2d_gdi::brush::from_handle(papp, ::windows_definition::HalftoneBrush);
       */
       return nullptr;
    }
@@ -4333,8 +4331,8 @@ namespace draw2d_gdi
       return dwRetVal;
    }
 
-   typedef u32 (CALLBACK* AFX_GDIGETLAYOUTPROC)(HDC);
-   typedef u32 (CALLBACK* AFX_GDISETLAYOUTPROC)(HDC, u32);
+   typedef u32 (CALLBACK* WINDOWS_DEFINITION_GDIGETLAYOUTPROC)(HDC);
+   typedef u32 (CALLBACK* WINDOWS_DEFINITION_GDISETLAYOUTPROC)(HDC, u32);
 
    
    u32 graphics::GetLayout()
@@ -4534,7 +4532,7 @@ namespace draw2d_gdi
    /////////////////////////////////////////////////////////////////////////////
    // Special handling for metafile playback
 
-   int CALLBACK AfxEnumMetaFileProc(HDC hDC,
+   int CALLBACK ::windows_definition::EnumMetaFileProc(HDC hDC,
                                     HANDLETABLE* pHandleTable, METARECORD* pMetaRec, int nHandles, LPARAM lParam)
    {
       ::draw2d::graphics_pointer & pgraphics = (::draw2d::graphics *)lParam;
@@ -4646,7 +4644,7 @@ namespace draw2d_gdi
 
 
       // for special playback, lParam == pgraphics
-      return ::EnumMetaFile(get_handle1(), hMF, AfxEnumMetaFileProc, (LPARAM)this) != false;
+      return ::EnumMetaFile(get_handle1(), hMF, ::windows_definition::EnumMetaFileProc, (LPARAM)this) != false;
 
    }
 

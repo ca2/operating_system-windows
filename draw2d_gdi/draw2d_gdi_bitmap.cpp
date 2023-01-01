@@ -89,7 +89,7 @@ namespace draw2d_gdi
    bool bitmap::LoadBitmap(const ::string & lpszResourceName)
    {
 
-      //      return Attach(::LoadBitmap(AfxFindResourceHandle(lpszResourceName, RT_BITMAP), lpszResourceName));
+      //      return Attach(::LoadBitmap(::windows_definition::FindResourceHandle(lpszResourceName, RT_BITMAP), lpszResourceName));
       return false;
 
    }
@@ -122,7 +122,7 @@ namespace draw2d_gdi
    bool bitmap::LoadBitmap(UINT nIDResource)
    {
 
-      //      return Attach(::LoadBitmap(AfxFindResourceHandle(MAKEINTRESOURCE(nIDResource), RT_BITMAP), MAKEINTRESOURCE(nIDResource)));
+      //      return Attach(::LoadBitmap(::windows_definition::FindResourceHandle(MAKEINTRESOURCE(nIDResource), RT_BITMAP), MAKEINTRESOURCE(nIDResource)));
       return false;
 
    }
@@ -167,7 +167,7 @@ namespace draw2d_gdi
       if(get_handle() == nullptr)
          return;
 
-      /*if (!afxData.bWin95 && ::GetObjectType(get_handle()) != OBJ_BITMAP)
+      /*if (!::windows_definition::Data.bWin95 && ::GetObjectType(get_handle()) != OBJ_BITMAP)
       {
       // not a valid object
       dumpcontext << "has ILLEGAL HBITMAP!";

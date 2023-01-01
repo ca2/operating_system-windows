@@ -13,8 +13,8 @@ public:
    bool        m_bOpenLibrary;
    CString        m_strNewPath;
    CString        m_strSelPath;
-   DECLARE_DYNCREATE(CLibraryFrame)
-	CLibraryFrame();           // protected constructor used by dynamic creation
+   
+	CLibraryFrame();           
 	virtual ~CLibraryFrame();
    CToolBar    m_toolbar;
    CFrameWnd *    m_pMainFrame;
@@ -23,19 +23,19 @@ public:
    virtual BOOL LoadFrame(UINT nIDResource,DWORD dwDefaultStyle, CWnd* pParentWnd,CCreateContext* pContext);
    BOOL Create(CWnd* pParent,DWORD dwBarStyle, PVOID p);
 protected:
-	DECLARE_MESSAGE_MAP()
+	()
    virtual BOOL PreCreateWindow(CREATESTRUCT& cs);
 public:
-   afx_msg BOOL OnNcCreate(LPCREATESTRUCT lpcs);
-   afx_msg int OnCreate(LPCREATESTRUCT lpCreateStruct);
-   afx_msg void OnActivate(UINT nState,CWnd* pWndOther,BOOL bMinimized);
-   afx_msg BOOL OnNcActivate(BOOL bActive);
-   afx_msg void OnNcLButtonDblClk(UINT nHitTest,CPoint point_i32);
-   afx_msg void OnNcLButtonDown(UINT nHitTest,CPoint point_i32);
-   afx_msg void OnNcLButtonUp(UINT nHitTest,CPoint point_i32);
-   afx_msg void OnGetMinMaxInfo(MINMAXINFO* lpMMI);
-   afx_msg void OnFileNewlibrary();
-   afx_msg void OnFileOpenlibrary();
+   BOOL OnNcCreate(LPCREATESTRUCT lpcs);
+   DECLARE_MESSAGE_HANDLER(on_message_create);
+   void OnActivate(UINT nState,CWnd* pWndOther,BOOL bMinimized);
+   BOOL OnNcActivate(BOOL bActive);
+   void OnNcLButtonDblClk(UINT nHitTest,CPoint point_i32);
+   void OnNcLButtonDown(UINT nHitTest,CPoint point_i32);
+   void OnNcLButtonUp(UINT nHitTest,CPoint point_i32);
+   void OnGetMinMaxInfo(MINMAXINFO* lpMMI);
+   void OnFileNewlibrary();
+   void OnFileOpenlibrary();
    bool ValidateNewName(const ::string & psz, CString & strCandidateNewPath);
    virtual HRESULT STDMETHODCALLTYPE QueryInterface(const IID &,void **);
    virtual ULONG STDMETHODCALLTYPE AddRef();

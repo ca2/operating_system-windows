@@ -170,7 +170,7 @@ public:
       delete_temp();
    }
 
-// Operations
+
 public:
    CT * from_handle(HANDLE h, CT * (* pfnAllocator) (::pointer<::acme::application> HANDLE) = nullptr, ::pointer<::acme::application>app = nullptr);
    void delete_temp();
@@ -444,7 +444,7 @@ inline CT* handle_map <HT, CT>::lookup_temporary(HANDLE h)
 
 
 CLASS_DECL_ACME oswindow_map * get_oswindow_map(bool bCreate = false);
-CLASS_DECL_ACME himagelist_map * afxMapHIMAGELIST(bool bCreate = false);
-//CLASS_DECL_ACME hdc_map * afxMapHDC(bool bCreate = false);
-//CLASS_DECL_ACME hgdiobj_map * afxMapHGDIOBJ(bool bCreate = false);
-//CLASS_DECL_ACME hmenu_map * afx_map_HMENU(bool bCreate = false);
+CLASS_DECL_ACME himagelist_map * ::windows_definition::MapHIMAGELIST(bool bCreate = false);
+//CLASS_DECL_ACME hdc_map * ::windows_definition::MapHDC(bool bCreate = false);
+//CLASS_DECL_ACME hgdiobj_map * ::windows_definition::MapHGDIOBJ(bool bCreate = false);
+//CLASS_DECL_ACME hmenu_map * ::windows_definition::_map_HMENU(bool bCreate = false);

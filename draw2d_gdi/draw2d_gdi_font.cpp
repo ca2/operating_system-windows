@@ -76,7 +76,7 @@ namespace draw2d_gdi
       if (get_handle() == nullptr)
          return;
 
-      /*         if (!afxData.bWin95 && ::GetObjectType(get_handle()) != OBJ_FONT)
+      /*         if (!::windows_definition::Data.bWin95 && ::GetObjectType(get_handle()) != OBJ_FONT)
       {
       // not a valid GDI object
       dumpcontext << "has ILLEGAL HFONT!";

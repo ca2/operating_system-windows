@@ -1,11 +1,5 @@
-// LibraryFrame.cpp : implementation file
-//
 
-#include "stdafx.h"
-#include "PCDraft.h"
-#include "LibraryFrame.h"
-BOOL AFXAPI AfxIsDescendant(HWND hWndParent,HWND hWndChild);
-HWND AFXAPI AfxGetParentOwner(HWND hWnd);
+#include "framework.h"
 
 bool has_subdir(CString str)
 {
@@ -76,7 +70,7 @@ CLibraryFrame::~CLibraryFrame()
 }
 
 
-BEGIN_MESSAGE_MAP(CLibraryFrame,CMiniFrameWnd)
+
    ON_WM_CREATE()
    ON_WM_NCCREATE()
    ON_WM_ACTIVATE()
@@ -87,7 +81,7 @@ BEGIN_MESSAGE_MAP(CLibraryFrame,CMiniFrameWnd)
    ON_WM_GETMINMAXINFO()
    ON_COMMAND(ID_FILE_NEWLIBRARY,&CLibraryFrame::OnFileNewlibrary)
    ON_COMMAND(ID_FILE_OPENLIBRARY,&CLibraryFrame::OnFileOpenlibrary)
-END_MESSAGE_MAP()
+
 
 //void CLibraryFrame::RecalcLayout(BOOL bNotify)
 //{
@@ -103,72 +97,11 @@ BOOL CLibraryFrame::PreCreateWindow(CREATESTRUCT& cs)
       return false;
    pusersystem->m_createstruct.dwExStyle &= ~WS_EX_TOOLWINDOW;
    pusersystem->m_createstruct.style |= MFS_SYNCACTIVE;
-   pusersystem->m_createstruct.hwndParent = AfxGetApp()->m_pMainWnd->GetSafeHwnd();
+   pusersystem->m_createstruct.hwndParent = acmeapplication()->m_pMainWnd->GetSafeHwnd();
    return true;
 
 }
 Gdiplus::Bitmap * LoadPNG(LPCTSTR pName,LPCTSTR pType,HMODULE hInst);
-//BOOL CLibraryFrame::CreateEx(DWORD dwExStyle,LPCTSTR lpClassName,
-//   LPCTSTR lpszWindowName,DWORD dwStyle,const RECT& rectangle,
-//   CWnd* pParentWnd,UINT nID)
-//{
-//   // set m_bInRecalcLayout to avoid flashing during creation
-//   // RecalcLayout will be called once something is docked
-//   m_bInRecalcLayout = true;
-//
-//   dwStyle = WS_POPUP | WS_CAPTION | WS_SYSMENU | MFS_MOVEFRAME |
-//      MFS_4THICKFRAME | MFS_SYNCACTIVE | MFS_BLOCKSYSMENU |
-//
-//      FWS_SNAPTOBARS;
-//
-//   DWORD dwBarStyle = 0;
-//
-//   if(dwBarStyle & CBRS_SIZE_DYNAMIC)
-//      dwStyle &= ~MFS_MOVEFRAME;
-//
-////   DWORD dwExStyle = 0;
-//   if(!CMiniFrameWnd::CreateEx(dwExStyle,lpClassName ? lpClassName :
-//      AfxRegisterWndClass(CS_DBLCLKS,::LoadCursor(nullptr,IDC_ARROW)),
-//      lpszWindowName,dwStyle,rectangle,pParentWnd,(UINT_PTR)nID))
-//   {
-//      return false;
-//   }
-//   dwStyle = dwBarStyle & (CBRS_ALIGN_LEFT | CBRS_ALIGN_RIGHT) ?
-//   CBRS_ALIGN_LEFT : CBRS_ALIGN_TOP;
-//   dwStyle |= dwBarStyle & CBRS_FLOAT_MULTI;
-//
-//   CMenu* pSysMenu = GetSystemMenu(false);
-//   if(pSysMenu)
-//   {
-//      pSysMenu->DeleteMenu(SC_SIZE,MF_BYCOMMAND);
-//      pSysMenu->DeleteMenu(SC_MINIMIZE,MF_BYCOMMAND);
-//      pSysMenu->DeleteMenu(SC_MAXIMIZE,MF_BYCOMMAND);
-//      pSysMenu->DeleteMenu(SC_RESTORE,MF_BYCOMMAND);
-//
-//      CString strHide;
-//      if(strHide.LoadString(AFX_IDS_HIDE))
-//      {
-//         pSysMenu->DeleteMenu(SC_CLOSE,MF_BYCOMMAND);
-//         pSysMenu->AppendMenu(MF_STRING | MF_ENABLED,SC_CLOSE,strHide);
-//      }
-//   }
-//
-//   // must initially create with parent frame as parent
-//   //if(!m_wndDockBar.Create(pParent,WS_CHILD | WS_VISIBLE | dwStyle,
-//   if(!m_wndDockBar.Create(pParentWnd,WS_CHILD  | dwStyle,
-//      AFX_IDW_DOCKBAR_FLOAT))
-//   {
-//      m_bInRecalcLayout = false;
-//      return false;
-//   }
-//
-//   // set parent to CMiniDockFrameWnd
-//   m_wndDockBar.SetParent(this);
-//   m_bInRecalcLayout = false;
-//
-//   return true;
-//
-//}
 
 int CLibraryFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 {
@@ -224,9 +157,9 @@ void CLibraryFrame::OnActivate(UINT nState,CWnd* pWndOther,BOOL bMinimized)
    CWnd::OnActivate(nState,pWndOther,bMinimized);
 
    // hide the menu bar
-   if(nState == WA_INACTIVE && (m_dwMenuBarVisibility & AFX_MBV_KEEPVISIBLE) == 0)
+   if(nState == WA_INACTIVE && (m_dwMenuBarVisibility & WINDOWS_DEFINITION_MBV_KEEPVISIBLE) == 0)
    {
-      SetMenuBarState(AFX_MBS_HIDDEN);
+      SetMenuBarState(WINDOWS_DEFINITION_MBS_HIDDEN);
    }
 
    // get top level frame unless this is a child window
@@ -286,7 +219,7 @@ BOOL CLibraryFrame::OnNcCreate(LPCREATESTRUCT lpcs)
    if(GetStyle() & MFS_SYNCACTIVE)
    {
       // syncronize activation state with top level parent
-      CWnd* pParentWnd = AfxGetApp()->m_pMainWnd;
+      CWnd* pParentWnd = acmeapplication()->m_pMainWnd;
       CWnd* pActiveWnd = GetForegroundWindow();
       BOOL bActive = (pParentWnd == pActiveWnd) ||
          (pParentWnd->GetLastActivePopup() == pActiveWnd &&
@@ -332,7 +265,7 @@ void CLibraryFrame::NotifyFloatingWindows(DWORD dwFlags)
    HWND hWnd = ::GetWindow(::GetDesktopWindow(),GW_CHILD);
    while(hWnd != nullptr)
    {
-      if(AfxIsDescendant(pParent->m_hWnd,hWnd))
+      if(::windows_definition::IsDescendant(pParent->m_hWnd,hWnd))
          ::SendMessage(hWnd,WM_FLOATSTATUS,dwFlags,0);
       hWnd = ::GetWindow(hWnd,GW_HWNDNEXT);
    }
@@ -430,7 +363,7 @@ BOOL CLibraryFrame::Create(CWnd* pParent,DWORD dwBarStyle, PVOID p)
    m_strCaption = "Library";
 
    CRect rectangle = rectangleDefault;
-   if(!CWnd::CreateEx(dwExStyle,AfxRegisterWndClass(CS_DBLCLKS,::LoadCursor(nullptr,IDC_ARROW)),
+   if(!CWnd::CreateEx(dwExStyle,::windows_definition::RegisterWndClass(CS_DBLCLKS,::LoadCursor(nullptr,IDC_ARROW)),
       m_strCaption,dwStyle,rectangle.left,rectangle.top,rectangle.right - rectangle.left,
       rectangle.bottom - rectangle.top,pParent->GetSafeHwnd(),(HMENU)(UINT_PTR)0,p))
    {
@@ -450,7 +383,7 @@ BOOL CLibraryFrame::Create(CWnd* pParent,DWORD dwBarStyle, PVOID p)
    //   pSysMenu->DeleteMenu(SC_RESTORE,MF_BYCOMMAND);
 
    //   CString strHide;
-   //   if(strHide.LoadString(AFX_IDS_HIDE))
+   //   if(strHide.LoadString(WINDOWS_DEFINITION_IDS_HIDE))
    //   {
    //      pSysMenu->DeleteMenu(SC_CLOSE,MF_BYCOMMAND);
    //      pSysMenu->AppendMenu(MF_STRING | MF_ENABLED,SC_CLOSE,strHide);
@@ -459,7 +392,7 @@ BOOL CLibraryFrame::Create(CWnd* pParent,DWORD dwBarStyle, PVOID p)
 
    //// must initially create with parent frame as parent
    //if(!m_wndDockBar.Create(pParent,WS_CHILD | WS_VISIBLE | dwStyle,
-   //   AFX_IDW_DOCKBAR_FLOAT))
+   //   WINDOWS_DEFINITION_IDW_DOCKBAR_FLOAT))
    //{
    //   m_bInRecalcLayout = false;
    //   return false;
@@ -483,21 +416,21 @@ BOOL CLibraryFrame::LoadFrame(UINT nIDResource,DWORD dwDefaultStyle,
 
    CString strFullString;
    if(strFullString.LoadString(nIDResource))
-      AfxExtractSubString(m_strTitle,strFullString,0);    // first sub-string
+      ::windows_definition::ExtractSubString(m_strTitle,strFullString,0);    // first sub-string
 
-//   VERIFY(AfxDeferRegisterClass(AFX_WNDFRAMEORVIEW_REG));
+//   VERIFY(::windows_definition::DeferRegisterClass(WINDOWS_DEFINITION_WNDFRAMEORVIEW_REG));
 
    // attempt to create the window
    LPCTSTR lpszClass = GetIconWndClass(dwDefaultStyle,nIDResource);
    CString strTitle = m_strTitle;
-   if(!Create(AfxGetApp()->m_pMainWnd, 0, pContext))
+   if(!Create(acmeapplication()->m_pMainWnd, 0, pContext))
    {
       return false;   // will self destruct on failure normally
    }
 
    // save the default menu handle
    ASSERT(m_hWnd != nullptr);
-   m_hMenuDefault = m_dwMenuBarState == AFX_MBS_VISIBLE ? ::GetMenu(m_hWnd) : m_hMenu;
+   m_hMenuDefault = m_dwMenuBarState == WINDOWS_DEFINITION_MBS_VISIBLE ? ::GetMenu(m_hWnd) : m_hMenu;
 
    // load accelerator resource
    LoadAccelTable(ATL_MAKEINTRESOURCE(nIDResource));
@@ -572,7 +505,7 @@ int CALLBACK LibraryFrameBrowseCallbackProc(HWND hwnd, UINT uMsg, LPARAM lParam,
 
       if(!pframe->ValidateNewName(str, strCandidateNewPath))
       {
-         AfxMessageBox("A library with this name already exists at the specified location (" + strCandidateNewPath + "). Please choose another location or another name.",e_message_box_icon_information);
+         show_a_message_box("A library with this name already exists at the specified location (" + strCandidateNewPath + "). Please choose another location or another name.",e_message_box_icon_information);
          return 1;
       }
 

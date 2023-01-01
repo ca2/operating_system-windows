@@ -372,64 +372,6 @@ namespace aura_windows
    //   return 0;
    //}
 
-   ///////////////////////////////////////////////////////////////////////////////
-   //// interaction_impl extensions for help support
-
-   //void interaction_impl::WinHelp(uptr dwData, ::u32 nCmd)
-   //{
-   //   __UNREFERENCED_PARAMETER(dwData);
-   //   __UNREFERENCED_PARAMETER(nCmd);
-   //   throw ::interface_only();
-
-   //   /*      application* pApp = ::auraacmesystem();
-   //   ASSERT_VALID(pApp);
-   //   ASSERT(pApp->m_pszHelpFilePath != nullptr);
-   //   ASSERT(pApp->m_eHelpType == afxWinHelp);
-
-   //   wait_cursor wait(this);
-
-   //   PrepareForHelp();
-
-   //   // need to use top level parent (for the case where get_handle() is in DLL)
-   //   ::pointer<::user::interaction>pwindow = EnsureTopLevelParent();
-
-   //   TRACE(trace_category_appmsg, e_trace_level_warning, "WinHelp: pszHelpFile = '%s', dwData: $%lx, fuCommand: %d.\n", pApp->m_pszHelpFilePath, dwData, nCmd);
-
-   //   // finally, run the Windows Help engine
-   //   /* trans   if (!::WinHelp((pwindow)->get_handle(), pApp->m_pszHelpFilePath, nCmd, dwData))
-   //   {
-   //   // linux message_box(__IDP_FAILED_TO_LAUNCH_HELP);
-   //   output_error_message("Failed to launch help");
-   //   }*/
-   //}
-
-   ////void interaction_impl::HtmlHelp(uptr dwData, ::u32 nCmd)
-   ////{
-   //// throw ::interface_only();
-   ///*
-   //application* pApp = ::auraacmesystem();
-   //ASSERT_VALID(pApp);
-   //ASSERT(pApp->m_pszHelpFilePath != nullptr);
-   //// to call HtmlHelp the m_fUseHtmlHelp must be set in
-   //// the application's constructor
-   //ASSERT(pApp->m_eHelpType == afxHTMLHelp);
-
-   //wait_cursor wait(this);
-
-   //PrepareForHelp();
-
-   //// need to use top level parent (for the case where get_handle() is in DLL)
-   //::pointer<::user::interaction>pwindow = EnsureTopLevelParent();
-
-   //TRACE(trace_category_appmsg, e_trace_level_warning, "HtmlHelp: pszHelpFile = '%s', dwData: $%lx, fuCommand: %d.\n", pApp->m_pszHelpFilePath, dwData, nCmd);
-
-   //// run the HTML Help engine
-   ///* trans   if (!::aura::HtmlHelp((pwindow)->get_handle(), pApp->m_pszHelpFilePath, nCmd, dwData))
-   //{
-   //// linux message_box(__IDP_FAILED_TO_LAUNCH_HELP);
-   //output_error_message("Failed to launch help");
-   //}*/
-   ////}
 
    //void interaction_impl::PrepareForHelp()
    //{
@@ -460,30 +402,6 @@ namespace aura_windows
    //      ::SendMessage(oswindow_Capture, WM_CANCELMODE, 0, 0);
    //}
 
-
-   //void interaction_impl::WinHelpInternal(uptr dwData, ::u32 nCmd)
-   //{
-   //   __UNREFERENCED_PARAMETER(dwData);
-   //   __UNREFERENCED_PARAMETER(nCmd);
-   //   throw ::interface_only();
-   //   /*
-   //   application* pApp = ::auraacmesystem();
-   //   ASSERT_VALID(pApp);
-   //   if (pApp->m_eHelpType == afxHTMLHelp)
-   //   {
-   //   // translate from WinHelp commands and data to to HtmlHelp
-   //   ASSERT((nCmd == HELP_CONTEXT) || (nCmd == HELP_CONTENTS) || (nCmd == HELP_FINDER));
-   //   if (nCmd == HELP_CONTEXT)
-   //   nCmd = HH_HELP_CONTEXT;
-   //   else if (nCmd == HELP_CONTENTS)
-   //   nCmd = HH_DISPLAY_TOC;
-   //   else if (nCmd == HELP_FINDER)
-   //   nCmd = HH_HELP_FINDER;
-   //   HtmlHelp(dwData, nCmd);
-   //   }
-   //   else
-   //   WinHelp(dwData, nCmd);*/
-   //}
 
 
 
@@ -895,7 +813,7 @@ namespace aura_windows
 //      if (pApp != nullptr && pApp->m_puiMain == this)
 //      {
 //      // recolor global brushes used by control bars
-//      afxData.UpdateSysColors();
+//      ::windows_definition::Data.UpdateSysColors();
 //      }
 //
 //      // forward this message to all other child windows

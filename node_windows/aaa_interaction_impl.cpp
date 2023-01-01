@@ -713,7 +713,7 @@ namespace windows
    //   /*      application* pApp = ::auraacmesystem();
    //   ASSERT_VALID(pApp);
    //   ASSERT(pApp->m_pszHelpFilePath != nullptr);
-   //   ASSERT(pApp->m_eHelpType == afxWinHelp);
+   //   ASSERT(pApp->m_eHelpType == ::windows_definition::WinHelp);
 
    //   wait_cursor wait(this);
 
@@ -741,7 +741,7 @@ namespace windows
    //ASSERT(pApp->m_pszHelpFilePath != nullptr);
    //// to call HtmlHelp the m_fUseHtmlHelp must be set in
    //// the application's constructor
-   //ASSERT(pApp->m_eHelpType == afxHTMLHelp);
+   //ASSERT(pApp->m_eHelpType == ::windows_definition::HTMLHelp);
 
    //wait_cursor wait(this);
 
@@ -798,7 +798,7 @@ namespace windows
    //   /*
    //   application* pApp = ::auraacmesystem();
    //   ASSERT_VALID(pApp);
-   //   if (pApp->m_eHelpType == afxHTMLHelp)
+   //   if (pApp->m_eHelpType == ::windows_definition::HTMLHelp)
    //   {
    //   // translate from WinHelp commands and data to to HtmlHelp
    //   ASSERT((nCmd == HELP_CONTEXT) || (nCmd == HELP_CONTENTS) || (nCmd == HELP_FINDER));
@@ -1082,7 +1082,7 @@ namespace windows
 //      if (pApp != nullptr && pApp->m_puiMain == this)
 //      {
 //      // recolor global brushes used by control bars
-//      afxData.UpdateSysColors();
+//      ::windows_definition::Data.UpdateSysColors();
 //      }
 //
 //      // forward this message to all other child windows

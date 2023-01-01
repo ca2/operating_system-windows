@@ -144,7 +144,7 @@ namespace glm
 			return angleAxis(pi<T>(), rotationAxis);
 		}
 
-		// Implementation from Stan Melax's Game Programming Gems 1 article
+		 from Stan Melax's Game Programming Gems 1 article
 		rotationAxis = cross(orig, dest);
 
 		T s = sqrt((T(1) + cosTheta) * static_cast<T>(2));

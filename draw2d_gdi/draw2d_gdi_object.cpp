@@ -230,7 +230,7 @@ namespace draw2d_gdi
    {
       ::object::assert_ok();
       /*      ASSERT(get_handle() == nullptr ||
-               (afxData.bWin95 || ::GetObjectType(get_handle()) != 0));*/
+               (::windows_definition::Data.bWin95 || ::GetObjectType(get_handle()) != 0));*/
    }
 
    void * object::detach_os_data()

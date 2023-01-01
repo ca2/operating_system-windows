@@ -6,11 +6,11 @@
 /////////////////////////////////////////////////////////////////////////////
 // Helper functions
 
-AFX_STATIC long CLASS_DECL_DRAW2D_GDI _AfxMultMultDivDiv(
+static long CLASS_DECL_DRAW2D_GDI _::windows_definition::MultMultDivDiv(
    int factor, int num1, int num2,
    int den1, int den2)
 {
-#ifdef _AFX_PORTABLE
+#ifdef _WINDOWS_DEFINITION_PORTABLE
    // make sure that (num1 * num2) does not overflow 31-bits.
    long temp = num1 < 0 ? -num1 : num1;
    for (int nBitsResult = 0; temp != 0; nBitsResult++)
@@ -141,7 +141,7 @@ void preview_dc::SetAttribDC(HDC hDC)
 preview_dc::~preview_dc()
 {
    ASSERT(get_os_data() == nullptr);      // Should not have a screen DC at this time
-   AfxDeleteObject((HGDIOBJ*)&m_hFont);
+   ::windows_definition::DeleteObject((HGDIOBJ*)&m_hFont);
 }
 
 void preview_dc::SetScaleRatio(int nNumerator, int nDenominator)
@@ -155,7 +155,7 @@ void preview_dc::SetScaleRatio(int nNumerator, int nDenominator)
    }
 }
 
-// Implementation support
+ support
 #ifdef _DEBUG
 void preview_dc::assert_ok() const
 {
@@ -363,7 +363,7 @@ void preview_dc::MirrorFont()
       hNewFont = hTempFont;
    }
 
-   AfxDeleteObject((HGDIOBJ*)&m_hFont);  // delete the old logical font
+   ::windows_definition::DeleteObject((HGDIOBJ*)&m_hFont);  // delete the old logical font
    m_hFont = hNewFont;         // save the new one
 }
 
@@ -476,7 +476,7 @@ size_i32 preview_dc::scale_window_ext(int xNum, int xDenom, int yNum, int yDenom
 
 // private helpers for text_out functions
 
-AFX_STATIC int CLASS_DECL_DRAW2D_GDI _AfxComputeNextTab(int x, UINT nTabStops, LPINT lpnTabStops, int nTabOrigin, int nTabWidth)
+static int CLASS_DECL_DRAW2D_GDI _::windows_definition::ComputeNextTab(int x, UINT nTabStops, LPINT lpnTabStops, int nTabOrigin, int nTabWidth)
 {
    ENSURE(nTabWidth!=0);
    x -= nTabOrigin;        // normalize position to tab origin
@@ -556,7 +556,7 @@ size_i32 preview_dc::ComputeDeltas(int& x, const ::string & lpszString, UINT &nC
          // now, if this is a Tab (!bSpace), compute the next tab stop
          if (!bSpace)
          {
-            nNewPos = _AfxComputeNextTab(nNewPos, nTabStops, lpnTabStops,
+            nNewPos = _::windows_definition::ComputeNextTab(nNewPos, nTabStops, lpnTabStops,
                         nTabOrigin, nTabWidth);
          }
 
@@ -755,7 +755,7 @@ int preview_dc::draw_text(const ::string & lpszString, int nCount, RECT * precta
    ASSERT(rectangle != nullptr);
    ASSERT(fx_is_valid_address(rectangle, sizeof(RECT)));
    ASSERT(nCount == -1 ?
-      AfxIsValidString(lpszString) :
+      ::windows_definition::IsValidString(lpszString) :
       fx_is_valid_address(lpszString, nCount, false));
 
    int retVal = ::draw_text(get_os_data(), lpszString, nCount, rectangle, nFormat);
@@ -775,7 +775,7 @@ int preview_dc::draw_text_ex(__in_ecount(nCount) LPTSTR lpszString, int nCount, 
    ASSERT(rectangle != nullptr);
    ASSERT(fx_is_valid_address(rectangle, sizeof(RECT)));
    ASSERT(nCount == -1 ?
-      AfxIsValidString(lpszString) :
+      ::windows_definition::IsValidString(lpszString) :
       fx_is_valid_address(lpszString, nCount, false));
 
    int retVal = ::draw_text_ex(get_os_data(), lpszString, nCount, rectangle, nFormat, lpDTParams);
@@ -887,15 +887,15 @@ void preview_dc::MirrorMappingMode(bool bCompute)
          m_sizeVpExt.cy  <<= 1;
       }
 
-      long lTempExt = _AfxMultMultDivDiv(m_sizeVpExt.cx,
-         m_nScaleNum, afxData.cxPixelsPerInch,
+      long lTempExt = _::windows_definition::MultMultDivDiv(m_sizeVpExt.cx,
+         m_nScaleNum, ::windows_definition::Data.cxPixelsPerInch,
          m_nScaleDen, ::GetDeviceCaps(get_handle2(), LOGPIXELSX));
 
       ASSERT(m_sizeWinExt.cx != 0);
       m_sizeVpExt.cx = (int)lTempExt;
 
-      lTempExt = _AfxMultMultDivDiv(m_sizeVpExt.cy,
-         m_nScaleNum, afxData.cyPixelsPerInch,
+      lTempExt = _::windows_definition::MultMultDivDiv(m_sizeVpExt.cy,
+         m_nScaleNum, ::windows_definition::Data.cyPixelsPerInch,
          m_nScaleDen, ::GetDeviceCaps(get_handle2(), LOGPIXELSY));
 
       ASSERT(m_sizeWinExt.cy != 0);
@@ -971,13 +971,13 @@ void preview_dc::PrinterDPtoScreenDP(LPPOINT lpPoint) const
    size_i32 sizePrinterWinExt;
    VERIFY(::GetWindowExtEx(get_handle2(), &sizePrinterWinExt));
 
-   long xScreen = _AfxMultMultDivDiv(lpPoint->x,
+   long xScreen = _::windows_definition::MultMultDivDiv(lpPoint->x,
       sizePrinterWinExt.cx, m_sizeVpExt.cx,
       sizePrinterVpExt.cx, m_sizeWinExt.cx);
 
    lpPoint->x = (int)xScreen;
 
-   long yScreen = _AfxMultMultDivDiv(lpPoint->y,
+   long yScreen = _::windows_definition::MultMultDivDiv(lpPoint->y,
       sizePrinterWinExt.cy, m_sizeVpExt.cy,
       sizePrinterVpExt.cy, m_sizeWinExt.cy);
 
@@ -985,9 +985,9 @@ void preview_dc::PrinterDPtoScreenDP(LPPOINT lpPoint) const
 }
 
 ////////////////////////////////////////////////////////////////////////////
-// AfxCreateDC
+// ::windows_definition::CreateDC
 
-HDC CLASS_DECL_DRAW2D_GDI AfxCreateDC(HGLOBAL hDevNames, HGLOBAL hDevMode)
+HDC CLASS_DECL_DRAW2D_GDI ::windows_definition::CreateDC(HGLOBAL hDevNames, HGLOBAL hDevMode)
 {
    if (hDevNames == nullptr)
       return nullptr;

@@ -170,7 +170,7 @@ public:
       delete_temp();
    }
 
-// Operations
+
 public:
    CT * from_handle(HANDLE h, CT * (* pfnAllocator) (::pointer<::apex::application> HANDLE) = nullptr, ::pointer<::apex::application>app = nullptr);
    void delete_temp();

@@ -312,7 +312,7 @@ namespace draw2d_gdiplus
 //      /*         if (get_handle() == nullptr)
 //                  return;
 //
-//               if (!afxData.bWin95 && ::GetObjectType(get_handle()) != OBJ_BITMAP)
+//               if (!::windows_definition::Data.bWin95 && ::GetObjectType(get_handle()) != OBJ_BITMAP)
 //               {
 //                  // not a valid object
 //                  dumpcontext << "has ILLEGAL HBITMAP!";

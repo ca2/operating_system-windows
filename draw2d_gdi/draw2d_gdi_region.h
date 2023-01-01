@@ -28,7 +28,7 @@ namespace draw2d_gdi
       bool CreateFromData(const XFORM* lpXForm, int nCount,
                           const RGNDATA* pRgnData);
 
-      // Operations
+      
       void SetRectRgn(int x1, int y1, int x2, int y2);
       void SetRectRgn(const ::rectangle_i32 & rectangle);
       int CombineRgn(const ::draw2d::region* pRgn1, const ::draw2d::region* pRgn2, int nCombineMode);

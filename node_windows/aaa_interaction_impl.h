@@ -472,7 +472,7 @@ namespace windows
       //virtual bool SetWindowContextHelpId(u32 dwContextHelpId);
       //virtual u32 GetWindowContextHelpId() const;
 
-      // Dialog Data support
+       support
       //virtual bool update_data(bool bSaveAndValidate = true);
       // data wnd must be same type as this
 
@@ -677,7 +677,7 @@ namespace windows
       //virtual bool ReflectChildNotify(::message::message * pmessage);
       //virtual bool ReflectMessage(::windowing::window * pwindow_Child, ::message::message * pmessage);
 
-      // Implementation
+      
       //virtual bool CheckAutoCenter();
       //virtual bool GrayCtlColor(HDC hDC, ::windowing::window * pwindow, ::u32 nCtlColor,
       //                          HBRUSH hbrGray, ::color::color clrText);

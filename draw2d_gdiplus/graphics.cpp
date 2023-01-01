@@ -3639,19 +3639,18 @@ namespace draw2d_gdiplus
 //      }
 //      else
 //      {
-//         // map against logical inch for non-constrained mapping modes
+//         
 //         i32 cxPerInch, cyPerInch;
 //         if (this != nullptr)
 //         {
 //            ASSERT_VALID(this);
-//            //ASSERT(get_handle1() != nullptr);  // no HDC attached or created?
+//            
 //            cxPerInch = GetDeviceCaps(LOGPIXELSX);
 //            cyPerInch = GetDeviceCaps(LOGPIXELSY);
 //         }
 //         else
 //         {
-////            cxPerInch = afxData.cxPixelsPerInch;
-//            //          cyPerInch = afxData.cyPixelsPerInch;
+
 //         }
 //         ASSERT(cxPerInch != 0 && cyPerInch != 0);
 //         psize->cx = psize->cx * HIMETRIC_INCH / cxPerInch;
@@ -3679,19 +3678,18 @@ namespace draw2d_gdiplus
 //      }
 //      else
 //      {
-//         // map against logical inch for non-constrained mapping modes
+//         
 //         i32 cxPerInch, cyPerInch;
 //         if (this != nullptr)
 //         {
 //            ASSERT_VALID(this);
-//            //ASSERT(get_handle1() != nullptr);  // no HDC attached or created?
+//            
 //            cxPerInch = GetDeviceCaps(LOGPIXELSX);
 //            cyPerInch = GetDeviceCaps(LOGPIXELSY);
 //         }
 //         else
 //         {
-////            cxPerInch = afxData.cxPixelsPerInch;
-//            //          cyPerInch = afxData.cyPixelsPerInch;
+
 //         }
 //         ASSERT(cxPerInch != 0 && cyPerInch != 0);
 //         psize->cx = psize->cx* cxPerInch/ HIMETRIC_INCH;
