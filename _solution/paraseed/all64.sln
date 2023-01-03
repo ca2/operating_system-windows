@@ -519,7 +519,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_core_optionverse", "..\
 		{20001115-2000-0411-1977-021977152000} = {20001115-2000-0411-1977-021977152000}
 	EndProjectSection
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_core_votagus_gateway", "..\..\..\source\app-core\votagus_gateway\votagus_gateway.vcxproj", "{C78451FA-2012-9999-8F97-4543BB980265}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_core_store_gateway", "..\..\..\source\app-core\store_gateway\store_gateway.vcxproj", "{C78451FA-2012-9999-8F97-4543BB980265}"
 	ProjectSection(ProjectDependencies) = postProject
 		{20001115-2000-0411-1977-021977152000} = {20001115-2000-0411-1977-021977152000}
 		{C7AFCEFA-3079-4B23-8F97-4543BB980265} = {C7AFCEFA-3079-4B23-8F97-4543BB980265}

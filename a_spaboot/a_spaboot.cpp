@@ -445,10 +445,10 @@ ATOM installer_RegisterClass(HINSTANCE hInstance)
 	wcex.cbClsExtra	   = 0;
 	wcex.cbWndExtra	   = 0;
 	wcex.hInstance		   = hInstance;
-	wcex.hIcon			   = LoadIcon(hInstance, MAKEINTRESOURCE(IDI_CCVOTAGUS_CA2_SPA));
+	wcex.hIcon			   = LoadIcon(hInstance, MAKEINTRESOURCE(IDI_STORE_CA2_SPA));
 	wcex.hCursor		   = LoadCursor(nullptr, IDC_ARROW);
 	wcex.hbrBackground	= (HBRUSH)(COLOR_WINDOW+1);
-	//wcex.lpszMenuName	= MAKEINTRESOURCE(IDC_CCVOTAGUS_CA2_SPA);
+	//wcex.lpszMenuName	= MAKEINTRESOURCE(IDC_STORE_CA2_SPA);
    wcex.lpszMenuName	   = nullptr;
 	wcex.lpszClassName	= "TeDigoS";
 	wcex.hIconSm		   = LoadIcon(wcex.hInstance, MAKEINTRESOURCE(IDI_SMALL));
