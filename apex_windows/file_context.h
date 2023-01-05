@@ -65,7 +65,7 @@ namespace apex_windows
       ::payload length(const ::file::path & path) override;
       ::payload length(const ::file::path & path, ::payload * pvarQuery) override;
 
-      void move(const ::file::path & pszNew, const ::file::path & psz) override;
+      void transfer(const ::file::path & pszNew, const ::file::path & psz) override;
 
       void erase(const ::file::path & psz) override;
 
