@@ -6,7 +6,7 @@
 
 ::u32 g_puiaMessageTrace[] =
 {
-   e_message_move,
+   e_message_reposition,
    e_message_size,
    e_message_activate,
    e_message_set_focus,

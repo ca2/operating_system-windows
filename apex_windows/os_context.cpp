@@ -1719,10 +1719,13 @@ retry:
    }
 
 
-   DECLSPEC_NO_RETURN void os_context::raise_exception( u32 dwExceptionCode, u32 dwExceptionFlags)
+   void os_context::raise_exception( u32 dwExceptionCode, u32 dwExceptionFlags)
    {
+
       RaiseException( dwExceptionCode, dwExceptionFlags, 0, nullptr );
+
    }
+
 
    bool os_context::is_remote_session()
    {

@@ -225,7 +225,7 @@ namespace apex_windows
    }
 
 
-   void file_context::move(const ::file::path & pszNew, const ::file::path & psz)
+   void file_context::transfer(const ::file::path & pszNew, const ::file::path & psz)
    {
 
 #ifdef WINDOWS_DESKTOP

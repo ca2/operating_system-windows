@@ -414,9 +414,13 @@ array< ::size_i32 > ico_file_sizes(const ::block & block)
          sizea.add({w, h });
 
       }
+
    }
-   return ::move(sizea);
+   
+   return ::transfer(sizea);
+
 }
+
 
 //vector< BITMAP * > UnearthIconResource(string & file, bool self_refrence, bool res_index, int index)
 //{
@@ -616,10 +620,9 @@ namespace windowing_win32
 
                auto hicon1 = pair.element2();
 
-               auto info = MyGetIconInfo(hicon1);
+               auto info = MyGetIconInfo((HICON) hicon1);
 
-               if (info.nWidth > size1.cx
-                  && info.nHeight > size1.cy)
+               if (info.nWidth > size1.cx && info.nHeight > size1.cy)
                {
 
                   size1.cx = info.nWidth;
