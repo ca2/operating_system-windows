@@ -772,7 +772,7 @@ namespace windowing_win32
    void windowing::erase_window(::windowing::window * pwindow)
    {
 
-      if (!m_windowmap.erase_key(__hwnd(pwindow->oswindow())))
+      if (!m_windowmap.erase_item(__hwnd(pwindow->oswindow())))
       {
 
          //return ::error_failed;

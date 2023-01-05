@@ -63,13 +63,13 @@ namespace backup
             /*         if(pimpact->m_strPathName == "filemanager_add_location_lfs.xhtml")
                      {
                         string_array wstra;
-                        //VmsDataGet(m_pmanager->get_filemanager_template()->m_datakeyStatic, 0, 0, wstra);
+                        //VmsDataGet(m_pmanager->get_filemanager_template()->m_strDataKeyStatic, 0, 0, wstra);
                         Ex1VirtualGuie * pinteraction = pimpact->get_child_by_name("lfs");
                         ::pointer<::user::edit_text>ptext =pinteraction;
                         string str;
                         ptext->_001GetText(str);
                         wstra.AddUnique(str);
-                        //VmsDataSet(m_pmanager->get_filemanager_template()->m_datakeyStatic, 0, 0, wstra);
+                        //VmsDataSet(m_pmanager->get_filemanager_template()->m_strDataKeyStatic, 0, 0, wstra);
 
                      }
                      else if(pimpact->m_strPathName == "filemanager_add_location_ftp.xhtml")

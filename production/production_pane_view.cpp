@@ -91,7 +91,7 @@ namespace production
             pdocument->get_filemanager_data()->m_bListText = true;
             pdocument->get_filemanager_data()->m_bListSelection = false;
             pdocument->get_filemanager_template()->m_strFilePopup = "filemanager\\file_popup.xml";
-            pdocument->get_filemanager_data()->m_datakey = "production_menu";
+            pdocument->get_filemanager_data()->m_strDataKey = "production_menu";
             pdocument->get_filemanager_data()->m_pcallback = this;
             pdocument->Initialize(true);
             pdocument->update_all_impacts(nullptr, 1234);
@@ -161,7 +161,7 @@ namespace production
       //      pdocument->get_filemanager_data()->m_bListText = false;
       //      pdocument->get_filemanager_data()->m_bListSelection = false;
       //      pdocument->get_filemanager_data()->m_pcallback = this;
-      //      pdocument->get_filemanager_data()->m_datakey = "production_3-action-launch";
+      //      pdocument->get_filemanager_data()->m_strDataKey = "production_3-action-launch";
       //      pdocument->Initialize(true);
       //      pdocument->update_all_impacts(nullptr, 1234);
       //      pdocument->update_all_impacts(nullptr, 123458);

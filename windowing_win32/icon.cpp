@@ -627,7 +627,7 @@ namespace windowing_win32
 
                   size1.cx = info.nWidth;
                   size1.cy = info.nHeight;
-                  hicon = hicon1;
+                  hicon = (HICON) hicon1;
 
                }
 
