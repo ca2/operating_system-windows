@@ -479,7 +479,7 @@ namespace acme_windows
    void registry::key::set_binary(const ::scoped_string & scopedstrValueName, const memory & mem)
    { 
 
-      /*auto estatus =*/ _set(scopedstrValueName, mem);
+      /*auto estatus =*/ _set_binary(scopedstrValueName, mem);
       
       //__defer_throw_estatus(estatus);
    
