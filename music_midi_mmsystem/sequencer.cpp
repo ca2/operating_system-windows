@@ -651,7 +651,7 @@ namespace music
 
                      }
 
-                     time += INTEGRAL_MILLISECOND(mmtime.u.ms);
+                     time += integral_millisecond(mmtime.u.ms);
 
                   }
 

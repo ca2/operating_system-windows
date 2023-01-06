@@ -85,7 +85,7 @@ namespace acme_windows
 
       file_time_to_time(&time.m_i, (file_time_t *) & ftWrite);
 
-      return (INTEGRAL_SECOND) time.m_i;
+      return (integral_second) time.m_i;
 
       //SystemTimeToTzSpecificLocalTime(NULL, &stUTC, &stLocal);
 

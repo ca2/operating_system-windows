@@ -565,15 +565,15 @@ namespace audio_mmsystem
 
          double d = (mmt.u.cb* 8.0)/ (m_pwaveformat->m_waveformat.wBitsPerSample * m_pwaveformat->m_waveformat.nChannels * m_pwaveformat->m_waveformat.nSamplesPerSec);
 
-         //return FLOATING_SECOND((double) d / (double) wave_base_get_byte_count_per_second());
+         //return floating_second((double) d / (double) wave_base_get_byte_count_per_second());
 
-         return FLOATING_SECOND((double)d);
+         return floating_second((double)d);
 
       }
       else
       {
 
-         return FLOATING_SECOND((double) mmt.u.ms / 1'000.0);
+         return floating_second((double) mmt.u.ms / 1'000.0);
 
       }
 
