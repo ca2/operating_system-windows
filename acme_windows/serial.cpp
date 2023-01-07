@@ -3,6 +3,7 @@
 #include "acme/parallelization/mutex.h"
 #include "acme/parallelization/synchronous_lock.h"
 #include "acme/platform/uint64_muldiv.h"
+#include "acme/primitive/time/integral/operators.h"
 
 
 namespace windows
