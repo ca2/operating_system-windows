@@ -1620,7 +1620,23 @@ namespace draw2d_gdiplus
 
       }
 
-      pimage->defer_update_image();
+      //if (imagedrawing.m_bDoForAllFrames)
+      //{
+
+      //   if (pimage->defer_update_all_frames(imagedrawing))
+      //   {
+
+      //      return;
+
+      //   }
+
+      //}
+      //else
+      //{
+
+         pimage->defer_update_image();
+
+      //}
 
       auto pgraphicsSrc = pimage->g();
 
