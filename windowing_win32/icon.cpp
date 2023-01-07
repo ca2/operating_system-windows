@@ -779,7 +779,7 @@ namespace windowing_win32
 
       a.erase_all();
 
-      for (auto & size : m_iconmap.keys())
+      for (auto & size : m_iconmap.items())
       {
 
          a.add(size);
@@ -958,7 +958,7 @@ namespace windowing_win32
    void icon::_erase_all()
    {
 
-      for (auto hicon : m_iconmap.values())
+      for (auto hicon : m_iconmap.payloads())
       {
 
          ::DestroyIcon(hicon);
