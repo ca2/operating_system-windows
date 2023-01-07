@@ -1,7 +1,9 @@
 **/.vs
+**/Generated Files
 **/.DS_Store
 **/.git
 **/.svn
+**/packages
 **/CVS
 .DS_Store
 ._.DS_Store
