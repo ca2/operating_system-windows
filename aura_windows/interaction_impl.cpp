@@ -937,7 +937,7 @@ namespace aura_windows
    //      if (EnumDisplaySettings(nullptr, ENUM_CURRENT_SETTINGS, &dm))
    //      {
 
-   //         set_config_fps(dm.dmDisplayFrequency);
+   //         set_config_per_second(dm.dmDisplayFrequency);
 
    //      }
 
