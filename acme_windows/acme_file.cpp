@@ -83,9 +83,9 @@ namespace acme_windows
 
       ::earth::time time;
 
-      file_time_to_time(&time.m_i, (file_time_t *) & ftWrite);
+      file_time_to_time(&time.m_time, (file_time_t *) & ftWrite);
 
-      return (integral_second) time.m_i;
+      return time;
 
       //SystemTimeToTzSpecificLocalTime(NULL, &stUTC, &stLocal);
 
@@ -123,7 +123,7 @@ namespace acme_windows
 
       ::file_time_t filetime;
 
-      time_to_file_time(&filetime, &time.m_i);
+      time_to_file_time(&filetime, &time.m_time);
 
       // Retrieve the file times for the file.
       if (!SetFileTime(hFile, nullptr, nullptr, (FILETIME *) & filetime))

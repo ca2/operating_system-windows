@@ -1806,7 +1806,7 @@ retry:
 
          //auto pnode = acmesystem()->m_papexsystem->node();
 
-         ::time_to_file_time((file_time_t*)&lastAccessTime, &status.m_atime.m_i);
+         ::time_to_file_time((file_time_t*)&lastAccessTime, &status.m_atime.m_time);
 
          pLastAccessTime = &lastAccessTime;
 
@@ -1817,10 +1817,9 @@ retry:
       if (status.m_ctime.get_time() != 0)
       {
 
-         time_to_file_time((file_time_t *)&creationTime, &status.m_ctime.m_i);
+         time_to_file_time((file_time_t *)&creationTime, &status.m_ctime.m_time);
 
          pCreationTime = &creationTime;
-
 
       }
 
