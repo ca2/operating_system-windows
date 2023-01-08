@@ -214,6 +214,8 @@ namespace acme_windows
                   const ::function < void(const ::file::path_array&) >& function,
                   bool save, bool multiple) override;
 
+               //::file::path library_file_name(const ::scoped_string & scopedstr) override;
+    
    };
 
 

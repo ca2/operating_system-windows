@@ -48,12 +48,14 @@ string extract_mccdi(string str)
       mem.set_size(wLength);
 
       if (FAILED(pIWMHeaderInfo3->GetAttributeByName(
-         &wStreamNum, g_wszWMMCDI, &wmtDataType, (byte *)mem.get_data(), &wLength))) break;
+         &wStreamNum, g_wszWMMCDI, &wmtDataType, (byte *)mem.data(), &wLength))) break;
 
       bOK = true;
 
    } while (false);
-   wstring wstr((wchar_t *)mem.get_data(), mem.get_size() / 2);
+
+   wstring wstr((wchar_t *)mem.data(), mem.size() / 2);
+
    return wstr;
 
 }
