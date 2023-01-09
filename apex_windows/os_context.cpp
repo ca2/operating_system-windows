@@ -802,7 +802,7 @@ namespace apex_windows
          try
          {
 
-            strCommand = ::str::consume_quoted_value(range);
+            strCommand = range.consume_quoted_value();
 
             ::str::consume_spaces(range);
 
@@ -868,7 +868,7 @@ namespace apex_windows
 
             auto range = str();
 
-            ::file::path path = ::str::consume_quoted_value(range);
+            ::file::path path = range.consume_quoted_value();
 
             string strCommand = "\"" + path + "\" \"" + strUrl + "\" --profile-directory=\"" + strProfile + "\"";
 
