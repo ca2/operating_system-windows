@@ -81,7 +81,7 @@ shared_memory::~shared_memory()
 byte * shared_memory::detach_shared_memory(HGLOBAL & hglobal)
 {
 
-   if (m_iOffset > 0)
+   if (this->offset() > 0)
    {
 
       ::pointer<shared_memory>pusermessage = clone();

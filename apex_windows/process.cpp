@@ -310,7 +310,7 @@ namespace apex_windows
    bool process::kill()
    {
 
-      throw ::exception("serious?! I don't believe... LOL...");
+      throw ::exception(::error_failed, "serious?! I don't believe... LOL...");
       
       //::system(string("taskkill /F /T /PID " ) + __string((i32) m_pi.dwProcessId));
 

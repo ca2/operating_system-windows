@@ -701,7 +701,7 @@ namespace multimedia
                nSBCode == SB_PAGEDOWN ||
                nSBCode == SB_TOP )
          {
-            ::multimedia::audio_mixer::user::control * pinteraction = GetControlByDlgCtrlID((u32) pParamWnd->GetDlgCtrlId());
+            ::multimedia::audio_mixer::user::control * pinteraction = GetControlByDlgCtrlID(pParamWnd->GetDlgCtrlId().as_u32());
             if(pinteraction != nullptr)
             {
                ::multimedia::audio_mixer::user::level_control * pSlider = dynamic_cast<::multimedia::audio_mixer::user::level_control*>(pinteraction);
@@ -709,7 +709,7 @@ namespace multimedia
                {
                   //mix::SliderInterface * pSlider = dynamic_cast < ::multimedia::audio_mixer::user::level_control * > ( pusercontrol);
                   ::multimedia::audio_mixer::control_data * pData;
-                  if(nullptr != (pData = GetWindowDataByDlgCtrlID((u32) pParamWnd->GetDlgCtrlId())))
+                  if(nullptr != (pData = GetWindowDataByDlgCtrlID(pParamWnd->GetDlgCtrlId().as_u32())))
                   {
 
                      if(pData->get_type() == ::multimedia::audio_mixer::control_data::TypeStereoBalance ||
