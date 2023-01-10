@@ -1209,7 +1209,7 @@ namespace music
             if (!estatus)
             {
 
-               TRACE("midiOutUnprepareHeader failed in seqBufferDone! (%lu)", (u32)estatus.as_i32());
+               TRACE("midiOutUnprepareHeader failed in seqBufferDone! (%lu)", (u32)estatus.as_i64());
 
             }
 
@@ -1468,7 +1468,7 @@ namespace music
          void sequencer::midi_out_long_message(const block & block, const class time & time)
          {
 
-            if ((block.get_size() & 0x3) != 0)
+            if ((block.size() & 0x3) != 0)
             {
 
                ASSERT(FALSE);
@@ -1489,7 +1489,7 @@ namespace music
 
             m1.set_size(sizeof(MIDIHDR));
 
-            MIDIHDR * pmidihdr = (MIDIHDR *)m1.get_data();
+            MIDIHDR * pmidihdr = (MIDIHDR *)m1.data();
 
             memory m;
 
@@ -2175,7 +2175,7 @@ namespace music
                   if (!estatus)
                   {
 
-                     WARNING("smfInsertParmData[2] : " << estatus.m_estatus);
+                     WARNING("smfInsertParmData[2] : " << estatus.as_i64());
 
                      return estatus;
 
@@ -2410,7 +2410,7 @@ namespace music
             for (DWORD dw = 0; dw < dwLength; dw++)
             {
 
-               strMessageText += ::hex::upper_from(pb[dw]);
+               strMessageText += ::hex::upper_case_from(pb[dw]);
 
                strMessageText += " ";
 
@@ -2462,7 +2462,7 @@ namespace music
                if (!estatus)
                {
 
-                  WARNING("smfInsertParmData() -> : " << estatus.m_estatus);
+                  WARNING("smfInsertParmData() -> : " << estatus.as_i64());
 
                   return estatus;
 

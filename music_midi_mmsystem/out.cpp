@@ -122,7 +122,7 @@ namespace music
 
             //midihdr.dwBufferLength = block.get_size();
 
-            auto lpdw = (LPDWORD)m.get_data();
+            auto lpdw = (LPDWORD)m.data();
 
             m.zero();
 
