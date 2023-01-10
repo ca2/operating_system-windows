@@ -84,7 +84,7 @@ namespace music
 
             string strEngine = device_engine(strDevice);
 
-            if (strEngine.compare_ci(m_strName) == 0)
+            if (strEngine.case_insensitive_equals(m_strName))
             {
 
                return __new(sequencer(psequence, strDevice));

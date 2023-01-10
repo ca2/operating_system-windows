@@ -110,13 +110,13 @@ namespace music
 
             memory m;
 
-            DWORD dwRounded = (block.get_size() + 3) & ~3;
+            DWORD dwRounded = (block.size() + 3) & ~3;
 
             m.set_size(3 * sizeof(u32) + dwRounded);
 
-            midihdr.lpData = (LPSTR) m.get_data();
+            midihdr.lpData = (LPSTR) m.data();
 
-            midihdr.dwBufferLength = (DWORD) m.get_size();
+            midihdr.dwBufferLength = (DWORD) m.size();
 
             //midihdr.lpData = (LPSTR) block.get_data();
 
@@ -128,8 +128,8 @@ namespace music
 
             *lpdw++ = 0;
             *lpdw++ = 0;
-            *lpdw++ = ((MEVT_LONGMSG << 24) & 0xff000000) | (block.get_size() & 0xffffff);
-            memcpy(lpdw, block.get_data(), block.get_size());
+            *lpdw++ = ((MEVT_LONGMSG << 24) & 0xff000000) | (block.size() & 0xffffff);
+            memcpy(lpdw, block.data(), block.size());
 
             auto e = midiOutPrepareHeader(
                m_hmidiout,

@@ -1,6 +1,7 @@
-#pragma once
+﻿#pragma once
 
 
+#include "acme/parallelization/manual_reset_event.h"
 #include "app-veriwell/multimedia/music/midi/sequencer.h"
 #include "buffer.h"
 

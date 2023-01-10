@@ -3,6 +3,7 @@
 #include "midi.h"
 #include "acme/filesystem/file/binary_stream.h"
 #include "acme/filesystem/file/memory_file.h"
+#include "acme/parallelization/manual_reset_event.h"
 #include "acme/parallelization/synchronous_lock.h"
 #include "acme/primitive/string/hex.h"
 #include "aqua/multimedia/exception.h"
@@ -476,7 +477,7 @@ namespace music
                if (::success != m_psequence->m_estatusLastError)
                {
 
-                  WARNING("::music::midi::sequencer::stop -> midiStreamStop returned %lu", (u32)m_psequence->m_estatusLastError.m_estatus);
+                  WARNING("::music::midi::sequencer::stop -> midiStreamStop returned %lu", (u32)m_psequence->m_estatusLastError.as_i64());
 
                   m_psequence->m_flags.erase(sequence::e_flag_waiting);
 
@@ -546,7 +547,7 @@ namespace music
                         if (!estatus)
                         {
 
-                           WARNING("midiStreamPosition() returned :" << estatus.m_estatus);
+                           WARNING("midiStreamPosition() returned :" << estatus.as_i64());
 
                            return estatus;
 
@@ -637,7 +638,7 @@ namespace music
                         if (::success != estatus)
                         {
 
-                           TRACE("midiStreamPosition() returned %lu", (u32)estatus.m_estatus);
+                           TRACE("midiStreamPosition() returned %lu", (u32)estatus.as_i64());
 
                            return error_not_ready;
 
@@ -899,7 +900,7 @@ namespace music
 
                estatus = WorkStreamRender(lpmidihdr, m_psequence->m_tkEnd, m_iBufferNominalMax);
 
-               switch (estatus.m_estatus)
+               switch (estatus.as_i64())
                {
                case ::success:
 
@@ -916,7 +917,7 @@ namespace music
                default:
 
 
-                  TRACE("smfReadEvents returned %lu in callback!", (u32)estatus.m_estatus);
+                  TRACE("smfReadEvents returned %lu in callback!", (u32)estatus.as_i64());
 
                   m_psequence->set_state(sequence::e_state_stopping);
 
@@ -992,7 +993,7 @@ namespace music
 
                auto estatus = fill_buffer(lpmidihdr);
 
-               switch (estatus.m_estatus)
+               switch (estatus.as_i64())
                {
                case ::success:
 
@@ -1008,7 +1009,7 @@ namespace music
 
                default:
 
-                  INFORMATION("sequencer::fill_buffer returned %lu", (u32)estatus.m_estatus);
+                  INFORMATION("sequencer::fill_buffer returned %lu", (u32)estatus.as_i64());
 
                   m_psequence->set_state(sequence::e_state_stopping);
 
@@ -1030,7 +1031,7 @@ namespace music
                   else
                   {
 
-                     INFORMATION("e_event_midi_stream_out : midiStreamOut returned %lu", (u32)estatus.m_estatus);
+                     INFORMATION("e_event_midi_stream_out : midiStreamOut returned %lu", (u32)estatus.as_i64());
 
                      m_psequence->set_state(sequence::e_state_stopping);
 
@@ -1208,7 +1209,7 @@ namespace music
             if (!estatus)
             {
 
-               TRACE("midiOutUnprepareHeader failed in seqBufferDone! (%lu)", (u32)estatus.m_estatus);
+               TRACE("midiOutUnprepareHeader failed in seqBufferDone! (%lu)", (u32)estatus.as_i32());
 
             }
 
@@ -1492,11 +1493,11 @@ namespace music
 
             memory m;
 
-            m.assign(block.get_data(), block.get_size());
+            m.assign(block.data(), block.size());
 
-            pmidihdr->lpData = (LPSTR)m.get_data();
+            pmidihdr->lpData = (LPSTR)m.data();
 
-            pmidihdr->dwBufferLength = (DWORD)m.get_size();
+            pmidihdr->dwBufferLength = (DWORD)m.size();
 
             auto hmidiout = m_hmidiout;
 
@@ -1824,7 +1825,7 @@ namespace music
             byte * lpbParam;
             LPDWORD lpdwType;
             file::midi_stream_event_header * pheader;
-            pheader = (file::midi_stream_event_header *)&m_psequence->m_pfile->m_memstorageF1.get_data()[0];
+            pheader = (file::midi_stream_event_header *)&m_psequence->m_pfile->m_memstorageF1.data()[0];
             pheader->m_dwLength = iSize - sizeof(file::midi_stream_event_header);
             pheader->m_dwType = 0;
             iSize = sizeof(file::midi_stream_event_header);
@@ -1833,18 +1834,18 @@ namespace music
                pevent = eventptra[i];
                lpbParam = pevent->GetData();
                lpdwType = (LPDWORD)lpbParam;
-               pheader = (file::midi_stream_event_header *)&m_psequence->m_pfile->m_memstorageF1.get_data()[iSize];
+               pheader = (file::midi_stream_event_header *)&m_psequence->m_pfile->m_memstorageF1.data()[iSize];
                pheader->m_dwLength = (DWORD)pevent->GetDataSize();
                pheader->m_dwType = *lpdwType;
                memcpy_dup(
-                  &m_psequence->m_pfile->m_memstorageF1.get_data()[iSize + sizeof(file::midi_stream_event_header)],
+                  &m_psequence->m_pfile->m_memstorageF1.data()[iSize + sizeof(file::midi_stream_event_header)],
                   lpbParam,
                   pheader->m_dwLength);
                iSize += pheader->m_dwLength + sizeof(file::midi_stream_event_header);
             }
 
-            m_psequence->m_pfile->m_cbPendingUserEvent = (u32)m_psequence->m_pfile->m_memstorageF1.get_size();
-            m_psequence->m_pfile->m_hpbPendingUserEvent = m_psequence->m_pfile->m_memstorageF1.get_data();
+            m_psequence->m_pfile->m_cbPendingUserEvent = (u32)m_psequence->m_pfile->m_memstorageF1.size();
+            m_psequence->m_pfile->m_hpbPendingUserEvent = m_psequence->m_pfile->m_memstorageF1.data();
             ASSERT(m_psequence->m_pfile->m_hpbPendingUserEvent);
             m_psequence->m_pfile->m_flags &= ~InsertSysEx;
             m_psequence->m_pfile->m_dwPendingUserEvent = ((MEVT_F_CALLBACK | MEVT_F_LONG | (((DWORD)MEVT_COMMENT) << 24)) & 0xFF000000L);
@@ -1854,7 +1855,7 @@ namespace music
             if (!estatus)
             {
 
-               WARNING("smfInsertParmData[2] : " << estatus.m_estatus);
+               WARNING("smfInsertParmData[2] : " << estatus.as_i64());
 
             }
 

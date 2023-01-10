@@ -67,8 +67,8 @@ namespace music
 
             zero(m_midihdr);
 
-            m_midihdr.lpData = (char*)m_storage.get_data();
-            m_midihdr.dwBufferLength = (u32)m_storage.get_size();
+            m_midihdr.lpData = (char*)m_storage.data();
+            m_midihdr.dwBufferLength = (u32)m_storage.size();
             m_midihdr.dwUser = (DWORD_PTR)this;
 
             zero(m_midihdr.lpData, m_midihdr.dwBufferLength);
