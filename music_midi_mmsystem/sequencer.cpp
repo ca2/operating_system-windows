@@ -297,7 +297,7 @@ namespace music
                if (estatus != ::success)
                {
 
-                  TRACE("midiStreamProperty() -> %04X", (WORD)estatus.m_estatus);
+                  TRACE("midiStreamProperty() -> %04X", (WORD)estatus.as_i64());
 
                   close_device();
 
@@ -1817,7 +1817,7 @@ namespace music
             {
                pevent = eventptra[i];
                ASSERT(pevent->GetFlags() & 1);
-               iSize += (i32)pevent->GetDataSize();
+               iSize += (i32)pevent->size();
                iSize += sizeof(file::midi_stream_event_header);
             }
 
@@ -1832,10 +1832,10 @@ namespace music
             for (i = 0; i < eventptra.get_size(); i++)
             {
                pevent = eventptra[i];
-               lpbParam = pevent->GetData();
+               lpbParam = pevent->data();
                lpdwType = (LPDWORD)lpbParam;
                pheader = (file::midi_stream_event_header *)&m_psequence->m_pfile->m_memstorageF1.data()[iSize];
-               pheader->m_dwLength = (DWORD)pevent->GetDataSize();
+               pheader->m_dwLength = (DWORD)pevent->size();
                pheader->m_dwType = *lpdwType;
                memcpy_dup(
                   &m_psequence->m_pfile->m_memstorageF1.data()[iSize + sizeof(file::midi_stream_event_header)],
@@ -2018,7 +2018,7 @@ namespace music
             else if (::music::midi::meta == pevent->GetFullType() && e_meta_tempo == pevent->GetMetaType())
             {
 
-               if (pevent->GetDataSize() != 3)
+               if (pevent->size() != 3)
                {
 
                   TRACE("smfReadEvents: Corrupt tempo event");
@@ -2034,9 +2034,9 @@ namespace music
 
                }
 
-               dwTempo = (((DWORD)pevent->GetData()[0]) << 16) |
-                  (((DWORD)pevent->GetData()[1]) << 8) |
-                  ((DWORD)pevent->GetData()[2]);
+               dwTempo = (((DWORD)pevent->data()[0]) << 16) |
+                  (((DWORD)pevent->data()[1]) << 8) |
+                  ((DWORD)pevent->data()[2]);
 
                dwTempo = (DWORD)((double)dwTempo / m_psequence->m_pfile->GetTempoShiftRate());
 
@@ -2112,15 +2112,15 @@ namespace music
                   //** that we didn't recognize
                   //*/
 
-                  if (3 * sizeof(DWORD) + pevent->GetDataSize() > cbPrerollNominalMax)
+                  if (3 * sizeof(DWORD) + pevent->size() > cbPrerollNominalMax)
                   {
 
                      return error_would_reach_buffer_limit;
 
                   }
 
-                  int iSize = (DWORD)pevent->GetDataSize();
-                  auto pdata = pevent->GetData();
+                  int iSize = (DWORD)pevent->size();
+                  auto pdata = pevent->data();
 
                   m_psequence->m_pfile->m_cbPendingUserEvent = iSize;
                   m_psequence->m_pfile->m_hpbPendingUserEvent = pdata;
