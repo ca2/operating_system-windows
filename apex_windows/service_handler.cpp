@@ -1,4 +1,4 @@
-#include "framework.h"
+﻿#include "framework.h"
 #include "service_handler.h"
 #include "acme/exception/exception.h"
 #include "apex/parallelization/service.h"
@@ -180,7 +180,7 @@ namespace apex_windows
 
       }
 
-      return (DWORD) estatus.m_estatus;
+      return (DWORD) estatus.as_i64();
 
    }
 

@@ -346,7 +346,7 @@ namespace audio_mmsystem
          if(::succeeded(estatus))
          {
 
-            ERROR("ERROR OPENING Unpreparing INPUT DEVICE buffer : " << estatus.m_estatus);
+            ERROR("ERROR OPENING Unpreparing INPUT DEVICE buffer : " << estatus.as_i64());
 
          }
 
@@ -554,7 +554,7 @@ namespace audio_mmsystem
       if (::success != estatus)
       {
 
-         TRACE( "waveOutGetPosition() returned %lu", (u32)estatus.m_estatus);
+         TRACE( "waveOutGetPosition() returned %llu", estatus.as_i64());
 
          return 0_s;
 
