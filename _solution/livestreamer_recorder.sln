@@ -123,9 +123,14 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_app_simple_applicati
 		{E2D7833B-9B59-4826-BBDF-C270A2115E86} = {E2D7833B-9B59-4826-BBDF-C270A2115E86}
 	EndProjectSection
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_simple_drawing", "..\..\..\source\livestreamer\recorder\livestreamer-recorder.vcxproj", "{569D6BFD-64F4-4BDC-BD91-92E67F83D6F4}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "livestreamer_recorder", "..\..\..\source\livestreamer\recorder\livestreamer-recorder.vcxproj", "{569D6BFD-64F4-4BDC-BD91-92E67F83D6F4}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_livestreamer-recorder", "..\..\..\source\livestreamer\recorder\__implement\shared_livestreamer-recorder.vcxproj", "{F56DB659-EDAF-43FC-9BA2-C6496CA6B570}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_livestreamer_recorder", "..\..\..\source\livestreamer\recorder\__implement\shared_livestreamer-recorder.vcxproj", "{F56DB659-EDAF-43FC-9BA2-C6496CA6B570}"
+	ProjectSection(ProjectDependencies) = postProject
+		{46D7D9C9-7B52-4DC6-AF84-46A5E3CDC43D} = {46D7D9C9-7B52-4DC6-AF84-46A5E3CDC43D}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "networking_bsd", "..\..\..\..\main\source\app\networking_bsd\networking_bsd.vcxproj", "{46D7D9C9-7B52-4DC6-AF84-46A5E3CDC43D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -725,6 +730,22 @@ Global
 		{F56DB659-EDAF-43FC-9BA2-C6496CA6B570}.StaticRelease|Win32.Build.0 = Release|Win32
 		{F56DB659-EDAF-43FC-9BA2-C6496CA6B570}.StaticRelease|x64.ActiveCfg = Release|x64
 		{F56DB659-EDAF-43FC-9BA2-C6496CA6B570}.StaticRelease|x64.Build.0 = Release|x64
+		{46D7D9C9-7B52-4DC6-AF84-46A5E3CDC43D}.Debug|Win32.ActiveCfg = Debug|Win32
+		{46D7D9C9-7B52-4DC6-AF84-46A5E3CDC43D}.Debug|Win32.Build.0 = Debug|Win32
+		{46D7D9C9-7B52-4DC6-AF84-46A5E3CDC43D}.Debug|x64.ActiveCfg = Debug|x64
+		{46D7D9C9-7B52-4DC6-AF84-46A5E3CDC43D}.Debug|x64.Build.0 = Debug|x64
+		{46D7D9C9-7B52-4DC6-AF84-46A5E3CDC43D}.Release|Win32.ActiveCfg = Release|Win32
+		{46D7D9C9-7B52-4DC6-AF84-46A5E3CDC43D}.Release|Win32.Build.0 = Release|Win32
+		{46D7D9C9-7B52-4DC6-AF84-46A5E3CDC43D}.Release|x64.ActiveCfg = Release|x64
+		{46D7D9C9-7B52-4DC6-AF84-46A5E3CDC43D}.Release|x64.Build.0 = Release|x64
+		{46D7D9C9-7B52-4DC6-AF84-46A5E3CDC43D}.StaticDebug|Win32.ActiveCfg = StaticDebug|Win32
+		{46D7D9C9-7B52-4DC6-AF84-46A5E3CDC43D}.StaticDebug|Win32.Build.0 = StaticDebug|Win32
+		{46D7D9C9-7B52-4DC6-AF84-46A5E3CDC43D}.StaticDebug|x64.ActiveCfg = StaticDebug|x64
+		{46D7D9C9-7B52-4DC6-AF84-46A5E3CDC43D}.StaticDebug|x64.Build.0 = StaticDebug|x64
+		{46D7D9C9-7B52-4DC6-AF84-46A5E3CDC43D}.StaticRelease|Win32.ActiveCfg = StaticRelease|Win32
+		{46D7D9C9-7B52-4DC6-AF84-46A5E3CDC43D}.StaticRelease|Win32.Build.0 = StaticRelease|Win32
+		{46D7D9C9-7B52-4DC6-AF84-46A5E3CDC43D}.StaticRelease|x64.ActiveCfg = StaticRelease|x64
+		{46D7D9C9-7B52-4DC6-AF84-46A5E3CDC43D}.StaticRelease|x64.Build.0 = StaticRelease|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
