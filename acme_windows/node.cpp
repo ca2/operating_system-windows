@@ -297,14 +297,14 @@ namespace acme_windows
 
          ::u32 dw;
 
-         auto estatus = key._get("SystemUseLightTheme", dw);
+         auto ok = key._get("SystemUseLightTheme", dw);
 
-         if (::failed(estatus))
+         if (!ok)
          {
 
-            estatus = key._get("AppsUseLightTheme", dw);
+            ok = key._get("AppsUseLightTheme", dw);
 
-            if (::failed(estatus))
+            if (!ok)
             {
 
                return false;
