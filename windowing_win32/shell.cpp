@@ -1077,7 +1077,7 @@ namespace windowing_win32
       }
 
 
-      //if (imagekey.m_iIcon >= 0 && strFileParam.get_length() > 0)
+      //if (imagekey.m_iIcon >= 0 && strFileParam.length() > 0)
       //{
 
       //   SHFILEINFOW shfi16;
@@ -1523,14 +1523,14 @@ namespace windowing_win32
 
       //   i32 i = 0;
 
-      //   while (i < strProtocol.get_length() && character_isalnum(strProtocol[i]))
+      //   while (i < strProtocol.length() && character_isalnum(strProtocol[i]))
       //   {
 
       //      i++;
 
       //   }
 
-      //   if (i > 0 && i == strProtocol.get_length())
+      //   if (i > 0 && i == strProtocol.length())
       //   {
 
       //      // heuristically valid protocol

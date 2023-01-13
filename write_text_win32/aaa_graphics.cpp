@@ -2175,7 +2175,7 @@ namespace draw2d_gdiplus
 
       //ASSERT(get_handle1() != nullptr);
 
-      //return ::ExtTextOut(get_handle1(),x,y,nOptions,&rectangleParam, str, (UINT)str.get_length(), pDxWidths) != false;
+      //return ::ExtTextOut(get_handle1(),x,y,nOptions,&rectangleParam, str, (UINT)str.length(), pDxWidths) != false;
       throw ::not_implemented();
 
       return false;
@@ -2203,7 +2203,7 @@ namespace draw2d_gdiplus
 
       //ASSERT(get_handle1() != nullptr);
 
-      //return ::TabbedTextOut(get_handle1(), x, y, str, (i32)str.get_length(), (int) nTabPositions, pnTabStopPositions, nTabOrigin);
+      //return ::TabbedTextOut(get_handle1(), x, y, str, (i32)str.length(), (int) nTabPositions, pnTabStopPositions, nTabOrigin);
 
       throw ::not_implemented();
 
@@ -2231,7 +2231,7 @@ namespace draw2d_gdiplus
 
       //ASSERT(get_handle2() != nullptr);
 
-      //return ::GetTabbedTextExtent(get_handle2(), str, (i32) str.get_length(), (int) nTabPositions, pnTabStopPositions);
+      //return ::GetTabbedTextExtent(get_handle2(), str, (i32) str.length(), (int) nTabPositions, pnTabStopPositions);
 
       throw ::not_implemented();
 
@@ -2259,7 +2259,7 @@ namespace draw2d_gdiplus
 
       //ASSERT(get_handle1() != nullptr);
 
-      //return ::GetTabbedTextExtent(get_handle1(), str, (i32) str.get_length(), (int) nTabPositions, pnTabStopPositions);
+      //return ::GetTabbedTextExtent(get_handle1(), str, (i32) str.length(), (int) nTabPositions, pnTabStopPositions);
 
       throw ::not_implemented();
 
@@ -2451,7 +2451,7 @@ namespace draw2d_gdiplus
 
    //   //ASSERT(get_handle1() != nullptr);
 
-   //   //return ::GetCharacterPlacement(get_handle1(), (const ::string &)str, (i32) str.get_length(), (int) nMaxExtent, pResults, dwFlags);
+   //   //return ::GetCharacterPlacement(get_handle1(), (const ::string &)str, (i32) str.length(), (int) nMaxExtent, pResults, dwFlags);
    //   throw ::not_implemented();
 
    //   return -1;
@@ -5506,7 +5506,7 @@ namespace draw2d_gdiplus
       if (iCountParam < 0)
       {
 
-         iCountParam += str.get_length() - iStartParam + 1;
+         iCountParam += str.length() - iStartParam + 1;
 
       }
       
@@ -5873,7 +5873,7 @@ namespace draw2d_gdiplus
 
    //   //class size_f64 ::size_f64;
 
-   //   //if(!get_text_extent(::size_f64, str, (i32) str.get_length(), (i32) str.get_length()))
+   //   //if(!get_text_extent(::size_f64, str, (i32) str.length(), (i32) str.length()))
    //   //   return const ::size_f64 & size(0, 0);
 
    //   return get_text_extent(str);

@@ -173,7 +173,7 @@ namespace ca2plugin_container
    bool host::open_link(const ::string & strLink, const ::string & strTarget)
    {
 
-      ensure_tx(::hotplugin::message_open_url,(void *)strLink.c_str(),(i32)strLink.get_length(), 2000);
+      ensure_tx(::hotplugin::message_open_url,(void *)strLink.c_str(),(i32)strLink.length(), 2000);
 
       return true;
 

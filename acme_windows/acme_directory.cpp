@@ -1056,7 +1056,7 @@ bool windows_file_find_is_dots(const WIN32_FIND_DATAW & data)
 
             pathDir = strPrefix;
 
-            iLastPos = strPrefix.get_length();
+            iLastPos = strPrefix.length();
 
          }
 

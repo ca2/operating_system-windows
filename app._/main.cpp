@@ -501,7 +501,7 @@ pacmedir->system() / "config/plugin/appfy_beg_debug_box.txt"))
 
       }
 
-//      UpdateResourceW(hupdate, L"LEVEL", MAKEINTRESOURCE(IDI_CC_CA2_LEVEL), MAKELANGID(LANG_NEUTRAL, SUBLANG_NEUTRAL), (LPVOID) strLevel.c_str(), strLevel.get_length());
+//      UpdateResourceW(hupdate, L"LEVEL", MAKEINTRESOURCE(IDI_CC_CA2_LEVEL), MAKELANGID(LANG_NEUTRAL, SUBLANG_NEUTRAL), (LPVOID) strLevel.c_str(), strLevel.length());
 
       string strCoreApp;
 
@@ -525,7 +525,7 @@ pacmedir->system() / "config/plugin/appfy_beg_debug_box.txt"))
       }
       if (strCoreApp.has_char())
       {
-         UpdateResourceW(hupdate, L"APPID", MAKEINTRESOURCE(1), MAKELANGID(LANG_NEUTRAL, SUBLANG_NEUTRAL), (LPVOID)(LPCSTR)strCoreApp, (DWORD)(strCoreApp.get_length()));
+         UpdateResourceW(hupdate, L"APPID", MAKEINTRESOURCE(1), MAKELANGID(LANG_NEUTRAL, SUBLANG_NEUTRAL), (LPVOID)(LPCSTR)strCoreApp, (DWORD)(strCoreApp.length()));
          dprint("APPID should be updated");
       }
 

@@ -130,7 +130,7 @@ CLASS_DECL_ACME bool solve_relative_inline(string & str, bool & bUrl, bool & bOn
 
    bool bDup = false;
 
-   strsize iLen = str.get_length();
+   strsize iLen = str.length();
 
    char * psz = str.get_string_buffer(iLen);
 

@@ -155,10 +155,10 @@ namespace user_service
             Respond();
             memory m;
             string strMessage = "yes_fontopus_com";
-            m.set_size(strMessage.get_length() + 2);
+            m.set_size(strMessage.length() + 2);
             m.get_data()[0] = 0x81;
-            m.get_data()[1] = strMessage.get_length();
-            memcpy_dup(&m.get_data()[2], strMessage.c_str(), strMessage.get_length());
+            m.get_data()[1] = strMessage.length();
+            memcpy_dup(&m.get_data()[2], strMessage.c_str(), strMessage.length());
             write(m.get_data(), m.get_size());
             return;
          }

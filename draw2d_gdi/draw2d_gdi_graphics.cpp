@@ -1671,7 +1671,7 @@ namespace draw2d_gdi
    bool graphics::text_out(int x, int y, const ::string & str)
    {
 
-      return text_out(x, y, str, (int) str.get_length());
+      return text_out(x, y, str, (int) str.length());
 
    }
 
@@ -1734,7 +1734,7 @@ namespace draw2d_gdi
    bool graphics::draw_text(const ::string & str,const ::rectangle_i32 & rectangle, const ::e_align & ealign, const ::e_draw_text & edrawtext)
    {
 
-      return draw_text(str, (int) str.get_length(), rectangle, nFormat);
+      return draw_text(str, (int) str.length(), rectangle, nFormat);
 
    }
 
@@ -1752,7 +1752,7 @@ namespace draw2d_gdi
    bool graphics::draw_text_ex(const ::string & str,const ::rectangle_i32 & rectangle, const ::e_align & ealign, const ::e_draw_text & edrawtext,LPDRAWTEXTPARAMS lpDTParams)
    {
 
-      return draw_text_ex((char *) (const ::string &) str, (int) str.get_length(), rectangle, nFormat, lpDTParams);
+      return draw_text_ex((char *) (const ::string &) str, (int) str.length(), rectangle, nFormat, lpDTParams);
 
    }
 

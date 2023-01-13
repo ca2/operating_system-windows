@@ -298,7 +298,7 @@ void shared_memory::ToAsc(string & str)
    string strTo;
    To(strTo);
    char ch;
-   i32 iLen = strTo.get_length() - 1;
+   i32 iLen = strTo.length() - 1;
    for(i32 i = 0; i < iLen; i+=2)
    {
       if(strTo[i] <= '9')
