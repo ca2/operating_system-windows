@@ -1,4 +1,4 @@
-// Implemented on 2022-08-19 18:24 <3ThomasBorregaardSorensen!!
+// Implemented on 2022-08-19 18:24 <3ThomasBorregaardSørensen!!
 #pragma once
 
 

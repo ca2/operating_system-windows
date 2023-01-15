@@ -1,4 +1,4 @@
-// from win32.cpp by camilo on 2022-08-27 21:14 <3ThomasBorregaardSorensen!!
+// from win32.cpp by camilo on 2022-08-27 21:14 <3ThomasBorregaardSørensen!!
 #include "framework.h"
 #include "window_util.h"
 #include "top_level_enum.h"

@@ -1,4 +1,4 @@
-﻿// From acme/platform/exclusive.h by camilo on 2022-10-28 15:25 <3ThomasBorregaardSorensen!!
+﻿// From acme/platform/exclusive.h by camilo on 2022-10-28 15:25 <3ThomasBorregaardSørensen!!
 #include "framework.h"
 #include "exclusive.h"
 #include "acme_windows_common/mutex.h"

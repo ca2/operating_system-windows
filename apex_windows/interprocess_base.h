@@ -1,5 +1,5 @@
 // created by Camilo 2021-01-31 05:26 BRT <3CamiloSasukeThomasBorregaardSoerensen
-// From interprocess_communcation by camilo on 2022-10-11 15:33 <3ThomasBorregaardSorensen!!
+// From interprocess_communcation by camilo on 2022-10-11 15:33 <3ThomasBorregaardSørensen!!
 #pragma once
 
 

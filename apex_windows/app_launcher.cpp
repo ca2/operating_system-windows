@@ -1,4 +1,4 @@
-// From apex/platform/app_launcher.cpp by camilo on 2022-11-07 01:15 <3ThomasBorregaardSorensen!!
+// From apex/platform/app_launcher.cpp by camilo on 2022-11-07 01:15 <3ThomasBorregaardSørensen!!
 #include "framework.h"
 #include "launcher.h"
 #include "app_launcher.h"

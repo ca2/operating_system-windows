@@ -1,4 +1,4 @@
-// From apex/operating_system/windows/gdi.cpp by camilo on 2022-11-07 04:22 <3ThomasBorregaardSorensen!!
+// From apex/operating_system/windows/gdi.cpp by camilo on 2022-11-07 04:22 <3ThomasBorregaardSørensen!!
 #include "framework.h"
 
 

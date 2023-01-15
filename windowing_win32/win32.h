@@ -1,4 +1,4 @@
-﻿// First insertions by camilo on 2022-08-27 19:56 <3ThomasBorregaardSorensen!!
+﻿// First insertions by camilo on 2022-08-27 19:56 <3ThomasBorregaardSørensen!!
 #pragma once
 
 
