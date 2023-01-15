@@ -41,7 +41,7 @@ namespace backup
       puser->filemanager()->m_strLevelUp = "levelup";
 
 
-      m_pdocumenttemplateMain = new ::user::single_document_template(
+      m_pimpactsystemMain = new ::user::single_document_template(
       this,
       "production/frame",
       __type(document),
@@ -72,7 +72,7 @@ namespace backup
 
    bool application::bergedge_start()
    {
-      return m_pdocumenttemplateMain->open_document_file(this, nullptr, true) != nullptr;
+      return m_pimpactsystemMain->open_document_file(this, nullptr, true) != nullptr;
    }
 
 

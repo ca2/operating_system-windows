@@ -17,7 +17,7 @@ namespace production
       impact * m_pimpact;
       
       
-      ::pointer<::user::single_document_template>m_pdocumenttemplateMain;
+      ::pointer<::user::single_document_template>m_pimpactsystemMain;
 
 
       application(::particle * pparticle);

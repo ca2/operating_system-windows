@@ -50,14 +50,14 @@ namespace production
 //      puser->filemanager()->m_strLevelUp = "levelup";
 
 
-      m_pdocumenttemplateMain = new ::user::single_document_template(
+      m_pimpactsystemMain = new ::user::single_document_template(
       this,
       "production/frame",
       __type(document),
       __type(frame),
       __type(pane_impact));
 
-      add_document_template(m_pdocumenttemplateMain);
+      add_document_template(m_pimpactsystemMain);
 
       return true;
 
@@ -111,7 +111,7 @@ namespace production
 
       }
 
-      m_pdocumenttemplateMain->do_request(pcreate);
+      m_pimpactsystemMain->do_request(pcreate);
 
       ::pointer<::user::document>pdocument = ::user::__document(pcreate);
 
