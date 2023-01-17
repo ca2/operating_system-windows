@@ -22,6 +22,7 @@ namespace apex_windows
       context::context()
       {
 
+         
 
       }
 
@@ -37,20 +38,19 @@ namespace apex_windows
       {
 
 
-         m_pathSourceFolder = "C:/operating-system-new/operating-system-windows";
+         m_pathSourceFolder = "C:\\operating-system-new\\operating-system-windows";
 
-         m_pathStorageFolder = "C:/operating-system-new/storage-windows";
+         m_pathStorageFolder = "C:\\operating-system-new\\storage-windows";
 
          auto pathSourceFolder = m_pathSourceFolder;
 
          auto pathStorageFolder = m_pathStorageFolder / m_strPlatform / m_strConfiguration;
 
          acmedirectory()->create(pathSourceFolder / "include");
+         
          acmedirectory()->create(pathStorageFolder / "binary");
+
          acmedirectory()->create(pathStorageFolder / "library");
-
-
-
 
          m_pathFolder = "C:\\port\\";
 
@@ -85,11 +85,15 @@ namespace apex_windows
 
             m_strVsTools = "140";
 
+            m_strSdk1 = "vc140";
+
          }
          else if (m_strVs == "2017")
          {
 
             m_strVsTools = "141";
+
+            m_strSdk1 = "vc141";
 
          }
          else if (m_strVs == "2019")
@@ -97,11 +101,15 @@ namespace apex_windows
 
             m_strVsTools = "142";
 
+            m_strSdk1 = "vc142";
+
          }
          else if (m_strVs == "2022")
          {
 
             m_strVsTools = "143";
+
+            m_strSdk1 = "vc143";
 
          }
          else
@@ -182,63 +190,43 @@ namespace apex_windows
 
          //m_strTime = amcdir()->install() / ("time-" OPERATING_SYSTEM_NAME);
 
-#ifdef WINDOWS_DESKTOP
 
-         if (m_strVs == "2015")
+         if (m_strPlatform == "x64")
          {
-
-            m_strSdk1 = "vc140";
-
-         }
-         else if (m_strVs == "2017")
-         {
-
-            m_strSdk1 = "vc141";
-
-         }
-         else if (m_strVs == "2019")
-         {
-
-            m_strSdk1 = "vc142";
-
-         }
-         else if (m_strVs == "2022")
-         {
-
-            m_strSdk1 = "vc143";
-
-         }
-
-#endif
-
-#ifdef OS64BIT
 
 #ifdef LINUX
 
-         m_strPlat1 = "64";
-         m_strPlatform = "x86";
-         m_strStagePlatform = "x86";
-         m_strLibPlatform = "x86/";
+            m_strPlat1 = "64";
+            m_strStagePlatform = "x86";
+            m_strLibPlatform = "x86/";
 
 #else
 
-         m_strPlat1 = "64";
-         m_strPlat2 = "x86_amd64";
-         //m_strPlat2 = "amd64";
-         m_strPlatform = "x64";
-         m_strStagePlatform = "x64";
-         m_strLibPlatform = "x64/";
+            m_strPlat1 = "64";
+            m_strPlat2 = "x86_amd64";
+            //m_strPlat2 = "amd64";
+            m_strStagePlatform = "x64";
+            m_strLibPlatform = "x64/";
 
 #endif
-#else
 
-         m_strPlat1 = "32";
-         m_strPlat2 = " x86";
-         m_strPlatform = "Win32";
-         m_strStagePlatform = "x86";
-         m_strLibPlatform = "x86/";
+         }
+         else if (m_strPlatform == "Win32")
+         {
 
-#endif
+            m_strPlat1 = "32";
+            m_strPlat2 = " x86";
+            m_strStagePlatform = "x86";
+            m_strLibPlatform = "x86/";
+
+         }
+         else
+         {
+
+            throw ::exception(error_wrong_state);
+
+         }
+
 
 #if defined(LINUX) || defined(MACOS)
 
@@ -299,7 +287,7 @@ namespace apex_windows
 
             //strBuildCmd = "\"" + strBuildCmd + "\" " + m_strPlat2 + " " + papp->get_visual_studio_build();
 
-            strBuildCmd = "\"C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Auxiliary/Build/vcvars64.bat\"";
+            strBuildCmd = "\""+m_strContext+"\" " + m_strStagePlatform;
 
          }
 
@@ -309,19 +297,21 @@ namespace apex_windows
 
          auto pacmedirectory = acmedirectory();
 
-         pathEnvTxt = pacmedirectory->system() / "env.txt";
+         string strRel = prepare_path(m_pathFolder / m_path);
 
-         acmefile()->put_contents(pacmedirectory->system() / "env1.bat", pacmedirectory->system() / "env.bat > \"" + pathEnvTxt + "\"");
+         pathEnvTxt = pacmedirectory->system() / strRel / "env.txt";
 
-         acmefile()->put_contents(pacmedirectory->system() / "env.bat", "@call " + strBuildCmd + "\r\n@set");
+         acmefile()->put_contents(pacmedirectory->system() / strRel / "env1.bat", pacmedirectory->system() / strRel / "env.bat > \"" + pathEnvTxt + "\"");
+
+         acmefile()->put_contents(pacmedirectory->system() / strRel / "env.bat", "@call " + strBuildCmd + "\r\n@set");
 
          auto psystem = acmesystem();
 
          auto pnode = psystem->node();
 
-         pnode->run_silent(pacmedirectory->system() / "env1.bat", "");
+         pnode->run_silent(pacmedirectory->system() / strRel / "env1.bat", "");
 
-         strLog = acmefile()->as_string(pacmedirectory->system() / "env.txt");
+         strLog = acmefile()->as_string(pacmedirectory->system() / strRel / "env.txt");
 
          stra.add_lines(strLog);
 
@@ -341,7 +331,7 @@ namespace apex_windows
 
                ::string strPath = pproperty->get_string();
 
-               strPath += ";C:\\msys64\\usr\\bin\\";
+               strPath = "C:\\msys64\\usr\\bin;" + strPath;
 
                SetEnvironmentVariableW(wstring(pproperty->m_atom), wstring(strPath));
             
