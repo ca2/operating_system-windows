@@ -51,6 +51,8 @@ namespace acme_windows
       //void call_async(const ::string& pszPath, const ::string& pszParam, const ::string& pszDir, ::e_display edisplay, bool bPrivileged, unsigned int* puiPid = nullptr) override;
 
 
+      //void initialize_integration();
+
       void shell_open(const ::file::path& path, const ::string& strParams = "", const ::file::path& pathFolder = "") override;
 
 

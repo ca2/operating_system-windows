@@ -697,6 +697,14 @@ namespace apex_windows
    }
 
 
+   //void node::integration_factory()
+   //{
+
+
+
+   //}
+
+
    void node::process_init()
    {
 

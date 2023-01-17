@@ -1,4 +1,4 @@
-//
+﻿//
 // Created by camilo on 21/01/2021. <33TBS!!
 //
 
@@ -48,6 +48,8 @@ namespace apex_windows
       //virtual bool _os_calc_app_dark_mode();
 
       //virtual bool _os_calc_system_dark_mode();
+
+      void integration_factory() override;
 
 
       virtual ::color::color get_default_color(::u64 u);
