@@ -38,28 +38,34 @@ namespace apex_windows
       {
 
 
-         m_pathSourceFolder = "C:\\operating-system-new\\operating-system-windows";
+         if(acmedirectory()->is("C:\\operating-system-new"))
+         {
 
-         m_pathStorageFolder = "C:\\operating-system-new\\storage-windows";
 
-         auto pathSourceFolder = m_pathSourceFolder;
+            m_pathSourceFolder = "C:\\operating-system-new\\operating-system-windows";
 
-         auto pathStorageFolder = m_pathStorageFolder / m_strPlatform / m_strConfiguration;
+            m_pathStorageFolder = "C:\\operating-system-new\\storage-windows";
 
-         acmedirectory()->create(pathSourceFolder / "include");
-         
-         acmedirectory()->create(pathStorageFolder / "binary");
+            auto pathSourceFolder = m_pathSourceFolder;
 
-         acmedirectory()->create(pathStorageFolder / "library");
+            auto pathStorageFolder = m_pathStorageFolder / m_strPlatform / m_strConfiguration;
 
-         m_pathFolder = "C:\\port\\";
+            acmedirectory()->create(pathSourceFolder / "include");
 
-         m_path = m_strName / m_strRelease / m_strPlatform / m_strConfiguration;
+            acmedirectory()->create(pathStorageFolder / "binary");
 
-         acmedirectory()->create(m_pathFolder / m_path);
+            acmedirectory()->create(pathStorageFolder / "library");
 
-         acmedirectory()->change_current(m_pathFolder / m_path);
+            m_pathFolder = "C:\\port\\";
 
+            m_path = m_strName / m_strRelease / m_strPlatform / m_strConfiguration;
+
+            acmedirectory()->create(m_pathFolder / m_path);
+
+            acmedirectory()->change_current(m_pathFolder / m_path);
+
+
+         }
          //auto pacmedirectory = acmedirectory();
 
          //acmedirectory()->create(pacmedirectory->system() / "netnodelite/symbols");
@@ -329,7 +335,7 @@ namespace apex_windows
             if (!::stricmp(pproperty->m_atom.as_string(), "PATH"))
             {
 
-               ::string strPath = pproperty->get_string();
+               ::string strPath = pproperty->as_string();
 
                strPath = "C:\\msys64\\usr\\bin;" + strPath;
 
@@ -338,7 +344,7 @@ namespace apex_windows
             }
             else
             {
-               SetEnvironmentVariableW(wstring(pproperty->m_atom), wstring(pproperty->get_string()));
+               SetEnvironmentVariableW(wstring(pproperty->m_atom), wstring(pproperty->as_string()));
 
             }
 

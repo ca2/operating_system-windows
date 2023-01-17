@@ -13,7 +13,7 @@ namespace apex_windows
    {
 
 
-      class context :
+      class CLASS_DECL_APEX_WINDOWS context :
          virtual public ::integration::context
       {
       public:
