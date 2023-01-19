@@ -802,6 +802,7 @@
     <ClInclude Include="file_os_watcher.h" />
     <ClInclude Include="file_system.h" />
     <ClInclude Include="framework.h" />
+    <ClInclude Include="integration_context.h" />
     <ClInclude Include="interprocess_base.h" />
     <ClInclude Include="interprocess_caller.h" />
     <ClInclude Include="interprocess_target.h" />
@@ -823,6 +824,7 @@
     <ClCompile Include="dir_context.cpp" />
     <ClCompile Include="dir_system.cpp" />
     <ClCompile Include="gdi.cpp" />
+    <ClCompile Include="integration_context.cpp" />
     <ClCompile Include="interprocess_base.cpp" />
     <ClCompile Include="interprocess_caller.cpp" />
     <ClCompile Include="interprocess_target.cpp" />

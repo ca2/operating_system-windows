@@ -2755,6 +2755,16 @@ namespace acme_windows
    }
 
 
+   void node::shell_launch(const ::string & strUrl)
+   {
+
+      wstring wstrUrl(strUrl);
+
+      ::ShellExecuteW(nullptr, L"open", wstrUrl, nullptr, nullptr, SW_SHOWNORMAL);
+
+   }
+
+
    ::i64 node::get_current_process_id()
    {
 

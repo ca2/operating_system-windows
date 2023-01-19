@@ -30,6 +30,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "bzip2", "..\..\..\source\po
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "id3lib", "..\..\..\source\port\id3lib\id3lib.vcxproj", "{E2D7833B-9B59-4826-BBDF-C27019771984}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libarchive", "..\..\..\source\port\libarchive\libarchive.vcxproj", "{B3660BBE-E160-4BA7-8727-78F964C84291}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -234,6 +236,22 @@ Global
 		{E2D7833B-9B59-4826-BBDF-C27019771984}.StaticRelease|Win32.Build.0 = StaticRelease|Win32
 		{E2D7833B-9B59-4826-BBDF-C27019771984}.StaticRelease|x64.ActiveCfg = StaticRelease|x64
 		{E2D7833B-9B59-4826-BBDF-C27019771984}.StaticRelease|x64.Build.0 = StaticRelease|x64
+		{B3660BBE-E160-4BA7-8727-78F964C84291}.Debug|Win32.ActiveCfg = Debug|Win32
+		{B3660BBE-E160-4BA7-8727-78F964C84291}.Debug|Win32.Build.0 = Debug|Win32
+		{B3660BBE-E160-4BA7-8727-78F964C84291}.Debug|x64.ActiveCfg = Debug|x64
+		{B3660BBE-E160-4BA7-8727-78F964C84291}.Debug|x64.Build.0 = Debug|x64
+		{B3660BBE-E160-4BA7-8727-78F964C84291}.Release|Win32.ActiveCfg = Release|Win32
+		{B3660BBE-E160-4BA7-8727-78F964C84291}.Release|Win32.Build.0 = Release|Win32
+		{B3660BBE-E160-4BA7-8727-78F964C84291}.Release|x64.ActiveCfg = Release|x64
+		{B3660BBE-E160-4BA7-8727-78F964C84291}.Release|x64.Build.0 = Release|x64
+		{B3660BBE-E160-4BA7-8727-78F964C84291}.StaticDebug|Win32.ActiveCfg = StaticDebug|Win32
+		{B3660BBE-E160-4BA7-8727-78F964C84291}.StaticDebug|Win32.Build.0 = StaticDebug|Win32
+		{B3660BBE-E160-4BA7-8727-78F964C84291}.StaticDebug|x64.ActiveCfg = StaticDebug|x64
+		{B3660BBE-E160-4BA7-8727-78F964C84291}.StaticDebug|x64.Build.0 = StaticDebug|x64
+		{B3660BBE-E160-4BA7-8727-78F964C84291}.StaticRelease|Win32.ActiveCfg = StaticRelease|Win32
+		{B3660BBE-E160-4BA7-8727-78F964C84291}.StaticRelease|Win32.Build.0 = StaticRelease|Win32
+		{B3660BBE-E160-4BA7-8727-78F964C84291}.StaticRelease|x64.ActiveCfg = StaticRelease|x64
+		{B3660BBE-E160-4BA7-8727-78F964C84291}.StaticRelease|x64.Build.0 = StaticRelease|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
