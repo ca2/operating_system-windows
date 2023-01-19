@@ -171,6 +171,7 @@ namespace acme_windows
 
 
       void open_url(const ::string& strUrl) override;
+      void shell_launch(const ::string & strUrl) override;
 
 
       bool stdin_has_input_events() override;
