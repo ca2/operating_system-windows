@@ -630,7 +630,7 @@ namespace windows
 
       ::rectangle_i32 rectWindow;
 
-      m_puserinteraction->get_window_rect(rectWindow);
+      m_puserinteraction->window_rectangle(rectWindow);
 
       m_point = rectWindow.top_left();
 
@@ -943,7 +943,7 @@ namespace windows
       dumpcontext << "\nclass name = \"" << szBuf << "\"";
 
       ::rectangle_i32 rect;
-      ((::windows::interaction_impl *) this)->m_puserinteraction->get_window_rect(&rect);
+      ((::windows::interaction_impl *) this)->m_puserinteraction->window_rectangle(&rect);
       dumpcontext << "\nrect = " << rect;
       dumpcontext << "\nparent ::window_sp = " << ((::windows::interaction_impl *)this)->GetParent();
 
@@ -1706,7 +1706,7 @@ namespace windows
             }
             else
             {
-               m_puserinteraction->get_window_rect(rectWindow);
+               m_puserinteraction->window_rectangle(rectWindow);
             }
 
             pmouse->m_point.x += (LONG)rectWindow.left;
@@ -2052,7 +2052,7 @@ namespace windows
       //            oswindow_Child = ::GetNextWindow(oswindow_Child,GW_HWNDNEXT))
       //      {
       //         ::rectangle_i32 rect;
-      //         ::get_window_rect(oswindow_Child,&rect);
+      //         ::window_rectangle(oswindow_Child,&rect);
       //         screen_to_client(&rect);
       //         ::set_window_pos(oswindow_Child,nullptr,rect.left + xAmount,rect.top + yAmount,0,0,SWP_NOSIZE | SWP_NOACTIVATE | SWP_NOZORDER);
       //      }
@@ -2514,7 +2514,7 @@ namespace windows
 
       ::rectangle_i32 rectWindow;
 
-      m_puserinteraction->get_window_rect(rectWindow);
+      m_puserinteraction->window_rectangle(rectWindow);
 
       PAINTSTRUCT paint;
 
@@ -2722,7 +2722,7 @@ namespace windows
 
       //// get coordinates of the interaction_impl relative to its parent
       //rect rcDlg;
-      //get_window_rect(&rcDlg);
+      //window_rectangle(&rcDlg);
       //rect rcArea;
       //rect rcCenter;
       //__pointer(::user::interaction) oswindow_Parent;
@@ -2750,7 +2750,7 @@ namespace windows
       //   }
       //   else
       //   {
-      //   oswindow_Center->get_window_rect(&rcCenter);
+      //   oswindow_Center->window_rectangle(&rcCenter);
       //   ::GetMonitorInfo(::MonitorFromWindow(oswindow_Center->get_handle(),MONITOR_DEFAULTTONEAREST),&mi);
       //   rcArea = mi.rcWork;
       //   }
@@ -2762,9 +2762,9 @@ namespace windows
       //   oswindow_Parent = GetParent();
       //   ASSERT(oswindow_Parent->is_window());
 
-      //   oswindow_Parent->get_client_rect(&rcArea);
+      //   oswindow_Parent->client_rectangle(&rcArea);
       //   ASSERT(oswindow_Center->is_window());
-      //   oswindow_Center->get_client_rect(&rcCenter);
+      //   oswindow_Center->client_rectangle(&rcCenter);
       //   ::MapWindowPoints(oswindow_Center->get_handle(),oswindow_Parent->get_handle(),(const point &*)&rcCenter,2);
       //}
 

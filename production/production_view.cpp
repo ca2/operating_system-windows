@@ -135,7 +135,7 @@ namespace production
 
       m_iWScreen = rectangleDesktop.width();
       m_iHScreen = rectangleDesktop.height();
-      ::rectangle_i32 rectangleClient = get_client_rect();
+      ::rectangle_i32 rectangleClient = client_rectangle();
       //GetClientRect(rectangleClient);
       rectangleClient.deflate(2, 2);
       i32 iW = rectangleClient.width() / 2;
@@ -169,7 +169,7 @@ namespace production
 
       single_lock synchronouslock(&m_pproduction->m_mutexStatus,true);
 
-      ::rectangle_i32 rectangleClient = get_client_rect();
+      ::rectangle_i32 rectangleClient = client_rectangle();
       //GetClientRect(rectangleClient);
 
       pgraphics->SelectObject(_001GetFont(::user::font_default));
@@ -362,7 +362,7 @@ namespace production
 
    void impact::GetAreaThumbRect(LPRECT lprect, i32 iArea)
    {
-      ::rectangle_i32 rectangleClient = get_client_rect();
+      ::rectangle_i32 rectangleClient = client_rectangle();
       //GetClientRect(rectangleClient);
       if(iArea == m_iV)
       {
