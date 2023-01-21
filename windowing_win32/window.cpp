@@ -6006,7 +6006,7 @@ namespace windowing_win32
 //   }
 
 
-   bool window::get_window_rect(RECTANGLE_I32 * prectangle)
+   bool window::window_rectangle(RECTANGLE_I32 * prectangle)
    {
 
       RECT rectangle;
@@ -6038,7 +6038,7 @@ namespace windowing_win32
    }
 
 
-   bool window::get_client_rect(RECTANGLE_I32 * prectangle)
+   bool window::client_rectangle(RECTANGLE_I32 * prectangle)
    {
 
       RECT rectangle;

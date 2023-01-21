@@ -177,7 +177,7 @@ namespace windows
    {
    HWND hwndChild = hwnda[i];
    ::rectangle_i32 rectangleChild;
-   ::get_client_rect(hwndChild, rectangleChild);
+   ::client_rectangle(hwndChild, rectangleChild);
    ::_001ClientToScreen(hwndChild, &rectangleChild.top_left());
    ::_001ClientToScreen(hwndChild, &rectangleChild.bottom_right());
    ::_001ScreenToClient(hwnd, &rectangleChild.top_left());
@@ -196,7 +196,7 @@ namespace windows
    /*HRGN window_util::GetAClipRgn(HWND hwnd, const point_i32 & pointOffset, bool bExludeChildren)
    {
    ::rectangle_i32 rectangleWnd;
-   ::get_client_rect(hwnd, rectangleWnd);
+   ::client_rectangle(hwnd, rectangleWnd);
    rectangleWnd.offset(pointOffset);
    HRGN hrgn = ::create_rect(rectangleWnd);
 
@@ -529,11 +529,11 @@ namespace windows
       //      }
       //      else
       //      {
-      //         ::get_client_rect(hwndParent, rectangleMajor);
+      //         ::client_rectangle(hwndParent, rectangleMajor);
       //      }
       //
       //      ::rectangle_i32 rectangle;
-      //      ::get_client_rect(hwnd, rectangle);
+      //      ::client_rectangle(hwnd, rectangle);
       //
       //#ifdef WINDOWS_DESKTOP
       //

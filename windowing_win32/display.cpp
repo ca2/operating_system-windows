@@ -341,7 +341,7 @@ namespace windowing_win32
    //
    //      //throw ::exception(todo);
    //
-   //      //::get_window_rect(::get_desktop_window(),prectangle);
+   //      //::window_rectangle(::get_desktop_window(),prectangle);
    //
    //
    //      get_monitor_rect(iWkspace, prectangle);

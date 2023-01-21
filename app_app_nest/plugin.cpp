@@ -116,7 +116,7 @@ install:
    void plugin::on_paint(HDC hdcWindow, LPCRECT lprect)
    {
       RECT rectangleWindow;
-      get_window_rect(&rectangleWindow);
+      window_rectangle(&rectangleWindow);
 
       int cx = rectangleWindow.right - rectangleWindow.left;
       int cy = rectangleWindow.bottom - rectangleWindow.top;

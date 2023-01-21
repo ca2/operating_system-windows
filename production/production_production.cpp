@@ -443,7 +443,7 @@ pacmedir->system() / "config/production/mirror_status.txt";
 
             listing.filter_begins_ci("app-");
 
-            ::acme::container::copy(m_straRoot, listing);
+            ::generic::container::copy(m_straRoot, listing);
 
          }
 
@@ -2329,8 +2329,8 @@ pacmedir->create(pathTarget.folder()))
 
       ::file::listing straBase;
 
-      //::acme::container::copy(straBase, ::install::get_app_app_install_module_list(pszPlatform, m_strConfiguration));
-      //::acme::container::copy(straBase, ::install::get_app_app_install_module_list());
+      //::generic::container::copy(straBase, ::install::get_app_app_install_module_list(pszPlatform, m_strConfiguration));
+      //::generic::container::copy(straBase, ::install::get_app_app_install_module_list());
 
       //for (index i = 0; i < straBase.get_count(); i++)
       //{
@@ -2501,8 +2501,8 @@ pacmedir->create(pathTarget.folder()))
 
       ::file::listing straBase;
 
-      //::acme::container::copy(straBase,::install::get_app_app_install_module_list(strPlatform, m_strConfiguration));
-//      ::acme::container::copy(straBase, ::install::get_app_app_install_module_list());
+      //::generic::container::copy(straBase,::install::get_app_app_install_module_list(strPlatform, m_strConfiguration));
+//      ::generic::container::copy(straBase, ::install::get_app_app_install_module_list());
 
       straBase.add("npca2.dll");
 
@@ -2798,8 +2798,8 @@ pacmedir->create(pathTarget.folder()))
 
       ::file::listing straBase;
 
-      //::acme::container::copy(straBase,::install::get_app_app_install_module_list(strPlatform, m_strConfiguration));
-      //::acme::container::copy(straBase, ::install::get_app_app_install_module_list());
+      //::generic::container::copy(straBase,::install::get_app_app_install_module_list(strPlatform, m_strConfiguration));
+      //::generic::container::copy(straBase, ::install::get_app_app_install_module_list());
 
       //straBase.add("npca2.dll");
 
