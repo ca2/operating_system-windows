@@ -19,10 +19,6 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "networking_bsd", "..\..\..\
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "static_console_http_get", "..\..\..\source\console\http_get\static_console_http_get.vcxproj", "{539672ED-09C3-44E5-8F61-E8C09320439F}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_console_build_library", "..\..\..\source\console\build_library\shared_console_build_library.vcxproj", "{32B0F384-A600-4AFC-80AE-5B2A7D16EAAF}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "static_console_build_library", "..\..\..\source\console\build_library\static_console_build_library.vcxproj", "{4E5793F3-AD09-464D-A4D7-6ACD49C52541}"
-EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_console_http_get", "..\..\..\source\console\http_get\shared_console_http_get.vcxproj", "{4B776F6A-069F-4696-A099-980D732543AC}"
 EndProject
 Global
@@ -163,38 +159,6 @@ Global
 		{539672ED-09C3-44E5-8F61-E8C09320439F}.StaticRelease|Win32.Build.0 = StaticRelease|Win32
 		{539672ED-09C3-44E5-8F61-E8C09320439F}.StaticRelease|x64.ActiveCfg = StaticRelease|x64
 		{539672ED-09C3-44E5-8F61-E8C09320439F}.StaticRelease|x64.Build.0 = StaticRelease|x64
-		{32B0F384-A600-4AFC-80AE-5B2A7D16EAAF}.Debug|Win32.ActiveCfg = Debug|Win32
-		{32B0F384-A600-4AFC-80AE-5B2A7D16EAAF}.Debug|Win32.Build.0 = Debug|Win32
-		{32B0F384-A600-4AFC-80AE-5B2A7D16EAAF}.Debug|x64.ActiveCfg = Debug|x64
-		{32B0F384-A600-4AFC-80AE-5B2A7D16EAAF}.Debug|x64.Build.0 = Debug|x64
-		{32B0F384-A600-4AFC-80AE-5B2A7D16EAAF}.Release|Win32.ActiveCfg = Release|Win32
-		{32B0F384-A600-4AFC-80AE-5B2A7D16EAAF}.Release|Win32.Build.0 = Release|Win32
-		{32B0F384-A600-4AFC-80AE-5B2A7D16EAAF}.Release|x64.ActiveCfg = Release|x64
-		{32B0F384-A600-4AFC-80AE-5B2A7D16EAAF}.Release|x64.Build.0 = Release|x64
-		{32B0F384-A600-4AFC-80AE-5B2A7D16EAAF}.StaticDebug|Win32.ActiveCfg = StaticDebug|Win32
-		{32B0F384-A600-4AFC-80AE-5B2A7D16EAAF}.StaticDebug|Win32.Build.0 = StaticDebug|Win32
-		{32B0F384-A600-4AFC-80AE-5B2A7D16EAAF}.StaticDebug|x64.ActiveCfg = StaticDebug|x64
-		{32B0F384-A600-4AFC-80AE-5B2A7D16EAAF}.StaticDebug|x64.Build.0 = StaticDebug|x64
-		{32B0F384-A600-4AFC-80AE-5B2A7D16EAAF}.StaticRelease|Win32.ActiveCfg = StaticRelease|Win32
-		{32B0F384-A600-4AFC-80AE-5B2A7D16EAAF}.StaticRelease|Win32.Build.0 = StaticRelease|Win32
-		{32B0F384-A600-4AFC-80AE-5B2A7D16EAAF}.StaticRelease|x64.ActiveCfg = StaticRelease|x64
-		{32B0F384-A600-4AFC-80AE-5B2A7D16EAAF}.StaticRelease|x64.Build.0 = StaticRelease|x64
-		{4E5793F3-AD09-464D-A4D7-6ACD49C52541}.Debug|Win32.ActiveCfg = Debug|Win32
-		{4E5793F3-AD09-464D-A4D7-6ACD49C52541}.Debug|Win32.Build.0 = Debug|Win32
-		{4E5793F3-AD09-464D-A4D7-6ACD49C52541}.Debug|x64.ActiveCfg = Debug|x64
-		{4E5793F3-AD09-464D-A4D7-6ACD49C52541}.Debug|x64.Build.0 = Debug|x64
-		{4E5793F3-AD09-464D-A4D7-6ACD49C52541}.Release|Win32.ActiveCfg = Release|Win32
-		{4E5793F3-AD09-464D-A4D7-6ACD49C52541}.Release|Win32.Build.0 = Release|Win32
-		{4E5793F3-AD09-464D-A4D7-6ACD49C52541}.Release|x64.ActiveCfg = Release|x64
-		{4E5793F3-AD09-464D-A4D7-6ACD49C52541}.Release|x64.Build.0 = Release|x64
-		{4E5793F3-AD09-464D-A4D7-6ACD49C52541}.StaticDebug|Win32.ActiveCfg = StaticDebug|Win32
-		{4E5793F3-AD09-464D-A4D7-6ACD49C52541}.StaticDebug|Win32.Build.0 = StaticDebug|Win32
-		{4E5793F3-AD09-464D-A4D7-6ACD49C52541}.StaticDebug|x64.ActiveCfg = StaticDebug|x64
-		{4E5793F3-AD09-464D-A4D7-6ACD49C52541}.StaticDebug|x64.Build.0 = StaticDebug|x64
-		{4E5793F3-AD09-464D-A4D7-6ACD49C52541}.StaticRelease|Win32.ActiveCfg = StaticRelease|Win32
-		{4E5793F3-AD09-464D-A4D7-6ACD49C52541}.StaticRelease|Win32.Build.0 = StaticRelease|Win32
-		{4E5793F3-AD09-464D-A4D7-6ACD49C52541}.StaticRelease|x64.ActiveCfg = StaticRelease|x64
-		{4E5793F3-AD09-464D-A4D7-6ACD49C52541}.StaticRelease|x64.Build.0 = StaticRelease|x64
 		{4B776F6A-069F-4696-A099-980D732543AC}.Debug|Win32.ActiveCfg = Debug|Win32
 		{4B776F6A-069F-4696-A099-980D732543AC}.Debug|Win32.Build.0 = Debug|Win32
 		{4B776F6A-069F-4696-A099-980D732543AC}.Debug|x64.ActiveCfg = Debug|x64
