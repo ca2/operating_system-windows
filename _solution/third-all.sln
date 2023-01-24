@@ -33,6 +33,13 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libarchive", "..\..\..\source\port\libarchive\libarchive.vcxproj", "{B3660BBE-E160-4BA7-8727-78F964C84291}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libmysql", "..\..\..\source\port\libmysql\libmysql.vcxproj", "{802990AE-3CBE-4506-9863-DFA7E885C816}"
+	ProjectSection(ProjectDependencies) = postProject
+		{3A4E7BE6-8605-4EA9-9622-EAC363A90B8F} = {3A4E7BE6-8605-4EA9-9622-EAC363A90B8F}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "zstd", "..\..\..\source\port\zstd\zstd.vcxproj", "{8D02D39A-9154-4121-A46E-924257927C2E}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "uca9dump", "..\..\..\source\port\libmysql\uca9dump.vcxproj", "{3A4E7BE6-8605-4EA9-9622-EAC363A90B8F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -270,6 +277,38 @@ Global
 		{802990AE-3CBE-4506-9863-DFA7E885C816}.StaticRelease|Win32.Build.0 = StaticRelease|Win32
 		{802990AE-3CBE-4506-9863-DFA7E885C816}.StaticRelease|x64.ActiveCfg = StaticRelease|x64
 		{802990AE-3CBE-4506-9863-DFA7E885C816}.StaticRelease|x64.Build.0 = StaticRelease|x64
+		{8D02D39A-9154-4121-A46E-924257927C2E}.Debug|Win32.ActiveCfg = Debug|Win32
+		{8D02D39A-9154-4121-A46E-924257927C2E}.Debug|Win32.Build.0 = Debug|Win32
+		{8D02D39A-9154-4121-A46E-924257927C2E}.Debug|x64.ActiveCfg = Debug|x64
+		{8D02D39A-9154-4121-A46E-924257927C2E}.Debug|x64.Build.0 = Debug|x64
+		{8D02D39A-9154-4121-A46E-924257927C2E}.Release|Win32.ActiveCfg = Release|Win32
+		{8D02D39A-9154-4121-A46E-924257927C2E}.Release|Win32.Build.0 = Release|Win32
+		{8D02D39A-9154-4121-A46E-924257927C2E}.Release|x64.ActiveCfg = Release|x64
+		{8D02D39A-9154-4121-A46E-924257927C2E}.Release|x64.Build.0 = Release|x64
+		{8D02D39A-9154-4121-A46E-924257927C2E}.StaticDebug|Win32.ActiveCfg = StaticDebug|Win32
+		{8D02D39A-9154-4121-A46E-924257927C2E}.StaticDebug|Win32.Build.0 = StaticDebug|Win32
+		{8D02D39A-9154-4121-A46E-924257927C2E}.StaticDebug|x64.ActiveCfg = StaticDebug|x64
+		{8D02D39A-9154-4121-A46E-924257927C2E}.StaticDebug|x64.Build.0 = StaticDebug|x64
+		{8D02D39A-9154-4121-A46E-924257927C2E}.StaticRelease|Win32.ActiveCfg = StaticRelease|Win32
+		{8D02D39A-9154-4121-A46E-924257927C2E}.StaticRelease|Win32.Build.0 = StaticRelease|Win32
+		{8D02D39A-9154-4121-A46E-924257927C2E}.StaticRelease|x64.ActiveCfg = StaticRelease|x64
+		{8D02D39A-9154-4121-A46E-924257927C2E}.StaticRelease|x64.Build.0 = StaticRelease|x64
+		{3A4E7BE6-8605-4EA9-9622-EAC363A90B8F}.Debug|Win32.ActiveCfg = Debug|Win32
+		{3A4E7BE6-8605-4EA9-9622-EAC363A90B8F}.Debug|Win32.Build.0 = Debug|Win32
+		{3A4E7BE6-8605-4EA9-9622-EAC363A90B8F}.Debug|x64.ActiveCfg = Debug|x64
+		{3A4E7BE6-8605-4EA9-9622-EAC363A90B8F}.Debug|x64.Build.0 = Debug|x64
+		{3A4E7BE6-8605-4EA9-9622-EAC363A90B8F}.Release|Win32.ActiveCfg = Release|Win32
+		{3A4E7BE6-8605-4EA9-9622-EAC363A90B8F}.Release|Win32.Build.0 = Release|Win32
+		{3A4E7BE6-8605-4EA9-9622-EAC363A90B8F}.Release|x64.ActiveCfg = Release|x64
+		{3A4E7BE6-8605-4EA9-9622-EAC363A90B8F}.Release|x64.Build.0 = Release|x64
+		{3A4E7BE6-8605-4EA9-9622-EAC363A90B8F}.StaticDebug|Win32.ActiveCfg = Debug|Win32
+		{3A4E7BE6-8605-4EA9-9622-EAC363A90B8F}.StaticDebug|Win32.Build.0 = Debug|Win32
+		{3A4E7BE6-8605-4EA9-9622-EAC363A90B8F}.StaticDebug|x64.ActiveCfg = Debug|x64
+		{3A4E7BE6-8605-4EA9-9622-EAC363A90B8F}.StaticDebug|x64.Build.0 = Debug|x64
+		{3A4E7BE6-8605-4EA9-9622-EAC363A90B8F}.StaticRelease|Win32.ActiveCfg = Release|Win32
+		{3A4E7BE6-8605-4EA9-9622-EAC363A90B8F}.StaticRelease|Win32.Build.0 = Release|Win32
+		{3A4E7BE6-8605-4EA9-9622-EAC363A90B8F}.StaticRelease|x64.ActiveCfg = Release|x64
+		{3A4E7BE6-8605-4EA9-9622-EAC363A90B8F}.StaticRelease|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
