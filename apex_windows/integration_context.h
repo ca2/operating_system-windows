@@ -37,6 +37,8 @@ namespace apex_windows
          ~context() override;
 
 
+         void prepare() override;
+
          void prepare_compile_and_link_environment() override;
 
 
