@@ -620,13 +620,13 @@ namespace windowing_win32
    void windowing::set(::message::mouse * pmouse, oswindow oswindow, ::windowing::window * pwindow, const ::atom & atom, wparam wparam, ::lparam lparam)
    {
 
-      pmouse->m_nFlags = wparam;
+      //pmouse->m_nFlags = wparam;
 
-      pmouse->m_point = ::point_i32(lparam);
+      //pmouse->m_point = ::point_i32(lparam);
 
-      pmouse->m_bTranslated = true; // not in root coordinates
+      //pmouse->m_bTranslated = true; // not in root coordinates
 
-      ::ClientToScreen((HWND) pmouse->m_oswindow, (POINT *) &pmouse->m_point);
+      //::ClientToScreen((HWND) pmouse->m_oswindow, (POINT *) &pmouse->m_point);
 
    }
 

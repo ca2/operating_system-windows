@@ -33,7 +33,7 @@
       <AdditionalLibraryDirectories>$(SolutionDir)..\..\..\..\operating-system\storage-windows\$(PlatformName)\$(Configuration)\library\;$(SolutionDir)..\..\..\..\operating-system\storage-windows\$(PlatformName)\$(Configuration)\third\library\;$(OutDir)</AdditionalLibraryDirectories>
     </Link>
     <Manifest>
-      <AdditionalManifestFiles>$(__operating_system)operating-system-windows/windows9.manifest</AdditionalManifestFiles>
+      <AdditionalManifestFiles>$(__operating_system)operating-system-windows\windows10.manifest</AdditionalManifestFiles>
     </Manifest>
   </ItemDefinitionGroup>
   <ItemGroup>

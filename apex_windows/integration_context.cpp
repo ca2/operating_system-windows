@@ -34,38 +34,40 @@ namespace apex_windows
       }
 
 
-      void context::prepare_compile_and_link_environment()
+      void context::prepare()
       {
 
-
-         if(acmedirectory()->is("C:\\operating-system-new"))
+         if (acmedirectory()->is("C:\\operating-system"))
          {
 
+            m_pathOperatingSystemIncludeFolder = "C:\\operating-system\\operating-system-windows";
 
-            m_pathSourceFolder = "C:\\operating-system-new\\operating-system-windows";
+            m_pathOperatingSystemStorageFolder = "C:\\operating-system\\storage-windows";
 
-            m_pathStorageFolder = "C:\\operating-system-new\\storage-windows";
+            auto pathOperatingSystemIncludeFolder = m_pathOperatingSystemIncludeFolder;
 
-            auto pathSourceFolder = m_pathSourceFolder;
+            auto pathOperatingSystemStorageFolder = m_pathOperatingSystemStorageFolder / m_strPlatform / m_strConfiguration;
 
-            auto pathStorageFolder = m_pathStorageFolder / m_strPlatform / m_strConfiguration;
+            acmedirectory()->create(pathOperatingSystemIncludeFolder / "include");
 
-            acmedirectory()->create(pathSourceFolder / "include");
+            acmedirectory()->create(pathOperatingSystemStorageFolder / "binary");
 
-            acmedirectory()->create(pathStorageFolder / "binary");
-
-            acmedirectory()->create(pathStorageFolder / "library");
+            acmedirectory()->create(pathOperatingSystemStorageFolder / "library");
 
             m_pathFolder = "C:\\port\\";
 
-            m_path = m_strName / m_strRelease / m_strPlatform / m_strConfiguration;
-
-            acmedirectory()->create(m_pathFolder / m_path);
-
-            acmedirectory()->change_current(m_pathFolder / m_path);
-
+            ::integration::context::prepare();
 
          }
+
+      }
+
+
+      void context::prepare_compile_and_link_environment()
+      {
+
+         ::integration::context::prepare_compile_and_link_environment();
+
          //auto pacmedirectory = acmedirectory();
 
          //acmedirectory()->create(pacmedirectory->system() / "netnodelite/symbols");
@@ -249,7 +251,6 @@ namespace apex_windows
 
 #endif
 
-
       }
 
 
@@ -259,7 +260,7 @@ namespace apex_windows
          string_array stra;
 
 
-         string strLog;
+         //string strLog;
 
 
          auto papp = acmeapplication();
@@ -297,29 +298,45 @@ namespace apex_windows
 
          }
 
-         ::operating_system::process_pointer process(e_create, this);
+         //::operating_system::process_pointer process(e_create, this);
 
-         ::file::path pathEnvTxt;
+         //::file::path pathEnvTxt;
 
          auto pacmedirectory = acmedirectory();
 
          string strRel = prepare_path(m_pathFolder / m_path);
 
-         pathEnvTxt = pacmedirectory->system() / strRel / "env.txt";
+         //pathEnvTxt = pacmedirectory->system() / strRel / "env.txt";
 
-         acmefile()->put_contents(pacmedirectory->system() / strRel / "env1.bat", pacmedirectory->system() / strRel / "env.bat > \"" + pathEnvTxt + "\"");
+         //acmefile()->put_contents(pacmedirectory->system() / strRel / "env1.bat", pacmedirectory->system() / strRel / "env.bat > \"" + pathEnvTxt + "\"");
 
-         acmefile()->put_contents(pacmedirectory->system() / strRel / "env.bat", "@call " + strBuildCmd + "\r\n@set");
+         //acmefile()->put_contents(pacmedirectory->system() / strRel / "env.bat", "@call " + strBuildCmd + "\r\n@set");
 
          auto psystem = acmesystem();
 
          auto pnode = psystem->node();
 
-         pnode->run_silent(pacmedirectory->system() / strRel / "env1.bat", "");
+         //pnode->run_silent(pacmedirectory->system() / strRel / "env1.bat", "");
 
-         strLog = acmefile()->as_string(pacmedirectory->system() / strRel / "env.txt");
+         int iExitCode = 0;
 
-         stra.add_lines(strLog);
+         string strCommand;
+
+         //strCommand = "cmd.exe /c \"" + (pacmedirectory->system() / strRel / "env.bat") + "\"";
+
+         strCommand = "cmd.exe /c \"@call " + strBuildCmd + " && @set\"";
+
+         pnode->command_system(stra, iExitCode, strCommand, e_command_system_inline_log);
+
+         stra.each([](auto & str) { str.case_insensitive_begins_eat("i: "); });
+         stra.each([](auto & str) { str.case_insensitive_begins_eat("e: "); });
+
+         stra.trim();
+         stra.erase_empty();
+
+         //strLog = acmefile()->as_string(pacmedirectory->system() / strRel / "env.txt");
+
+         //stra.add_lines(strLog);
 
          //sleep(10000_ms);
 
@@ -332,25 +349,70 @@ namespace apex_windows
          for (auto & pproperty : setEnvironment)
          {
 
-            if (!::stricmp(pproperty->m_atom.as_string(), "PATH"))
+            auto strAtom = pproperty->m_atom.as_string();
+
+            wstring wstrItem(strAtom);
+
+            if (m_bMsys && strAtom.case_insensitive_equals("PATH"))
             {
 
                ::string strPath = pproperty->as_string();
 
                strPath = "C:\\msys64\\usr\\bin;" + strPath;
 
-               SetEnvironmentVariableW(wstring(pproperty->m_atom), wstring(strPath));
-            
+               SetEnvironmentVariableW(wstrItem, wstring(strPath));
+
+               /*wstring wstrClPath;
+
+               auto pszClPath = wstrClPath.get_string_buffer(4096);
+
+               auto dwClPath  = SearchPathW(
+  wstring(strPath),
+  L"CL",
+  L".EXE",
+  4096,
+  pszClPath,
+  nullptr
+               );
+
+               wstrClPath.release_string_buffer(dwClPath);*/
+
+               SetEnvironmentVariableW(L"CC", L"cl");
+
+               auto pathPkgConfig = m_pathPrefix / "lib/pkgconfig";
+
+               ::wstring wstrPkgConfigPath(pathPkgConfig);
+
+               SetEnvironmentVariableW(L"PKG_CONFIG_PATH", wstrPkgConfigPath);
+
+               //if (m_strPlatform.case_insensitive_equals("Win32"))
+               //{
+
+               //   SetEnvironmentVariableW(L"MSYSTEM", L"MINGW32");
+
+               //}
+               //else if (m_strPlatform.case_insensitive_equals("Win32"))
+               //{
+
+               //   SetEnvironmentVariableW(L"MSYSTEM", L"MINGW64");
+
+               //}
+
             }
             else
             {
-               SetEnvironmentVariableW(wstring(pproperty->m_atom), wstring(pproperty->as_string()));
+
+               wstring wstrPayload(pproperty->as_string());
+
+               auto pszItem = wstrItem.c_str();
+
+               auto pszPayload = wstrPayload.c_str();
+
+               SetEnvironmentVariableW(pszItem, pszPayload);
 
             }
 
          }
-
-
 
 #endif
 #endif
@@ -533,7 +595,7 @@ namespace apex_windows
          //
          //#endif
          //
-         stra.add_lines(strLog);
+         //stra.add_lines(strLog);
 
          //string strEnv = acmefile()->as_string(         auto psystem = acmesystem();
 
