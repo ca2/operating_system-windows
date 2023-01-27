@@ -380,7 +380,7 @@ namespace acme_windows
 
       wstring wstr(scopedstrValue);
 
-      return _set_value(wstr.c_str(), scopedstrValueName, REG_SZ, (::u32) wstr.length_in_bytes_with_null_terminator());
+      return _set_value(wstr.c_str(), scopedstrValueName, REG_SZ, (::u32) wstr.character_count_in_bytes());
 
    }
 
