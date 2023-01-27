@@ -5233,8 +5233,12 @@ void interaction_impl::set_tool_window(bool bSet)
    }
 
 
+   void interaction_impl::_raw_client_to_screen(::point_i32 &point)
+   {
 
+      ::ClientToScreen((HWND)oswindow(), (LPPOINT)&point);
 
+   }
 
 
 } // namespace aura_windows
