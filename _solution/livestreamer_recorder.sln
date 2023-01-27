@@ -60,10 +60,13 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "livestreamer_recorder", "..
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_livestreamer_recorder", "..\..\..\source\livestreamer\recorder\__implement\shared_livestreamer-recorder.vcxproj", "{F56DB659-EDAF-43FC-9BA2-C6496CA6B570}"
 	ProjectSection(ProjectDependencies) = postProject
+		{229A7009-5CA5-4C33-834F-B9753F40BC19} = {229A7009-5CA5-4C33-834F-B9753F40BC19}
 		{46D7D9C9-7B52-4DC6-AF84-46A5E3CDC43D} = {46D7D9C9-7B52-4DC6-AF84-46A5E3CDC43D}
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "networking_bsd", "..\..\..\source\app\networking_bsd\networking_bsd.vcxproj", "{46D7D9C9-7B52-4DC6-AF84-46A5E3CDC43D}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "api_twitch", "..\..\..\..\main\source\app-core\api_twitch\api_twitch.vcxproj", "{229A7009-5CA5-4C33-834F-B9753F40BC19}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -525,6 +528,22 @@ Global
 		{46D7D9C9-7B52-4DC6-AF84-46A5E3CDC43D}.StaticRelease|Win32.Build.0 = StaticRelease|Win32
 		{46D7D9C9-7B52-4DC6-AF84-46A5E3CDC43D}.StaticRelease|x64.ActiveCfg = StaticRelease|x64
 		{46D7D9C9-7B52-4DC6-AF84-46A5E3CDC43D}.StaticRelease|x64.Build.0 = StaticRelease|x64
+		{229A7009-5CA5-4C33-834F-B9753F40BC19}.Debug|Win32.ActiveCfg = Debug|Win32
+		{229A7009-5CA5-4C33-834F-B9753F40BC19}.Debug|Win32.Build.0 = Debug|Win32
+		{229A7009-5CA5-4C33-834F-B9753F40BC19}.Debug|x64.ActiveCfg = Debug|x64
+		{229A7009-5CA5-4C33-834F-B9753F40BC19}.Debug|x64.Build.0 = Debug|x64
+		{229A7009-5CA5-4C33-834F-B9753F40BC19}.Release|Win32.ActiveCfg = Release|Win32
+		{229A7009-5CA5-4C33-834F-B9753F40BC19}.Release|Win32.Build.0 = Release|Win32
+		{229A7009-5CA5-4C33-834F-B9753F40BC19}.Release|x64.ActiveCfg = Release|x64
+		{229A7009-5CA5-4C33-834F-B9753F40BC19}.Release|x64.Build.0 = Release|x64
+		{229A7009-5CA5-4C33-834F-B9753F40BC19}.StaticDebug|Win32.ActiveCfg = StaticDebug|Win32
+		{229A7009-5CA5-4C33-834F-B9753F40BC19}.StaticDebug|Win32.Build.0 = StaticDebug|Win32
+		{229A7009-5CA5-4C33-834F-B9753F40BC19}.StaticDebug|x64.ActiveCfg = StaticDebug|x64
+		{229A7009-5CA5-4C33-834F-B9753F40BC19}.StaticDebug|x64.Build.0 = StaticDebug|x64
+		{229A7009-5CA5-4C33-834F-B9753F40BC19}.StaticRelease|Win32.ActiveCfg = StaticRelease|Win32
+		{229A7009-5CA5-4C33-834F-B9753F40BC19}.StaticRelease|Win32.Build.0 = StaticRelease|Win32
+		{229A7009-5CA5-4C33-834F-B9753F40BC19}.StaticRelease|x64.ActiveCfg = StaticRelease|x64
+		{229A7009-5CA5-4C33-834F-B9753F40BC19}.StaticRelease|x64.Build.0 = StaticRelease|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

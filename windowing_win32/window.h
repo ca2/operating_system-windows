@@ -926,6 +926,11 @@ namespace windowing_win32
          /* [in] */ POINTL point,
          /* [out][in] */ __RPC__inout DWORD * pdwEffect);
 
+      ::pointer<::message::message> get_message(const ::atom & atom, wparam wparam, lparam lparam);
+
+      //void default_set(::message::message * pmessage, const ::atom & atom, wparam wparam, lparam lparam);
+
+
    };
 
 
