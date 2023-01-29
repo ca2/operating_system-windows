@@ -66,7 +66,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_livestreamer_recorde
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "networking_bsd", "..\..\..\source\app\networking_bsd\networking_bsd.vcxproj", "{46D7D9C9-7B52-4DC6-AF84-46A5E3CDC43D}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "api_twitch", "..\..\..\..\main\source\app-core\api_twitch\api_twitch.vcxproj", "{229A7009-5CA5-4C33-834F-B9753F40BC19}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "api_twitch", "..\..\..\source\app-core\api_twitch\api_twitch.vcxproj", "{229A7009-5CA5-4C33-834F-B9753F40BC19}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
