@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 
 #include "aura/user/user/interaction_impl.h"
@@ -754,6 +754,9 @@ namespace aura_windows
 
 
       virtual void activate_top_parent();
+
+
+      void _raw_client_to_screen(::point_i32 & point) override;
 
 
    };

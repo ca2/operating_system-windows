@@ -528,73 +528,73 @@ namespace windowing_win32
    }
 
 
-   ::pointer<::user::message>windowing::get_user_message(MESSAGE * pmsg)
-   {
+   //::pointer<::user::message>windowing::get_user_message(MESSAGE * pmsg)
+   //{
 
-      //throw ::exception(todo("message"));
-      //throw ::exception(todo("interaction"));
-      ::windowing::window * pwindow = nullptr;
+   //   //throw ::exception(todo("message"));
+   //   //throw ::exception(todo("interaction"));
+   //   ::windowing::window * pwindow = nullptr;
 
-      //if (pinteraction == nullptr && pmsg->hwnd != nullptr)
-      //{
+   //   //if (pinteraction == nullptr && pmsg->hwnd != nullptr)
+   //   //{
 
-      //   if (pmsg->message == 126)
-      //   {
+   //   //   if (pmsg->message == 126)
+   //   //   {
 
-      //      TRACE("e_message_display_change");
+   //   //      TRACE("e_message_display_change");
 
-      //   }
+   //   //   }
 
-      //   ::user::interaction_impl * pimpl = psystem->impl_from_handle(pmsg->hwnd);
+   //   //   ::user::interaction_impl * pimpl = psystem->impl_from_handle(pmsg->hwnd);
 
-      //   if (pimpl != nullptr)
-      //   {
+   //   //   if (pimpl != nullptr)
+   //   //   {
 
-      //      try
-      //      {
+   //   //      try
+   //   //      {
 
-      //         pinteraction = pimpl->acmesystem()interaction;
+   //   //         pinteraction = pimpl->acmesystem()interaction;
 
-      //      }
-      //      catch (...)
-      //      {
+   //   //      }
+   //   //      catch (...)
+   //   //      {
 
-      //         pinteraction = nullptr;
+   //   //         pinteraction = nullptr;
 
-      //      }
+   //   //      }
 
-      //   }
+   //   //   }
 
-      //   if (pinteraction == nullptr)
-      //   {
+   //   //   if (pinteraction == nullptr)
+   //   //   {
 
-      //      pinteraction = pimpl;
+   //   //      pinteraction = pimpl;
 
-      //   }
+   //   //   }
 
-      //}
+   //   //}
 
-      //if (pinteraction != nullptr)
-      //{
+   //   //if (pinteraction != nullptr)
+   //   //{
 
-      //   return pinteraction->get_message_base(pmsg->message, pmsg->wParam, pmsg->lParam);
+   //   //   return pinteraction->get_message_base(pmsg->message, pmsg->wParam, pmsg->lParam);
 
-      //}
+   //   //}
 
-      auto pusermessage = __new(::user::message);
+   //   auto pusermessage = __new(::user::message);
 
-      if (!pusermessage)
-      {
+   //   if (!pusermessage)
+   //   {
 
-         return nullptr;
+   //      return nullptr;
 
-      }
+   //   }
 
-      pusermessage->set(pmsg->oswindow, pwindow, pmsg->m_atom, pmsg->wParam, pmsg->lParam);
+   //   pusermessage->set(pmsg->oswindow, pwindow, pmsg->m_atom, pmsg->wParam, pmsg->lParam);
 
-      return pusermessage;
+   //   return pusermessage;
 
-   }
+   //}
 
 
    void windowing::set(message::key * pkey, oswindow oswindow, ::windowing::window * pwindow, const ::atom & atom, wparam wparam, ::lparam lparam)
@@ -620,13 +620,13 @@ namespace windowing_win32
    void windowing::set(::message::mouse * pmouse, oswindow oswindow, ::windowing::window * pwindow, const ::atom & atom, wparam wparam, ::lparam lparam)
    {
 
-      pmouse->m_nFlags = wparam;
+      //pmouse->m_nFlags = wparam;
 
-      pmouse->m_point = ::point_i32(lparam);
+      //pmouse->m_point = ::point_i32(lparam);
 
-      pmouse->m_bTranslated = true; // not in root coordinates
+      //pmouse->m_bTranslated = true; // not in root coordinates
 
-      ::ClientToScreen((HWND) pmouse->m_oswindow, (POINT *) &pmouse->m_point);
+      //::ClientToScreen((HWND) pmouse->m_oswindow, (POINT *) &pmouse->m_point);
 
    }
 

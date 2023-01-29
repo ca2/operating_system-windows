@@ -3034,7 +3034,9 @@ namespace acme_windows
             if (ecommandsystem & e_command_system_inline_log)
             {
 
-               printf("%s", str.c_str());
+               fprintf(stdout, "%s", str.c_str());
+
+               fflush(stdout);
 
             }
 
@@ -3069,6 +3071,8 @@ namespace acme_windows
             {
 
                fprintf(stderr, "%s", str.c_str());
+
+               fflush(stderr);
 
             }
 
@@ -3108,8 +3112,8 @@ namespace acme_windows
       ::CloseHandle(hErrRd);
       ::CloseHandle(hErrWr);
 
-      CloseHandle(pi.hProcess);
-      CloseHandle(pi.hThread);
+      ::CloseHandle(pi.hProcess);
+      ::CloseHandle(pi.hThread);
 
       ::str().get_lines(straOutput, strOutput, "I: ", true, &sl, pfileLines);
       ::str().get_lines(straOutput, strError, "E: ", true, &sl, pfileLines);
