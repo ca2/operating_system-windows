@@ -1,4 +1,4 @@
-// Created by camilo on 2021-01-30 <3ThomasBS_!!
+﻿// Created by camilo on 2021-01-30 <3ThomasBS_!!
 #pragma once
 
 
@@ -74,7 +74,7 @@ namespace windowing_win32
       //virtual ::extended::transport < ::windowing::icon > load_icon(const ::payload & payloadFile) override;
 
 
-      virtual ::pointer<::user::message>get_user_message(MESSAGE * pmsg);
+      //virtual ::pointer<::user::message>get_user_message(MESSAGE * pmsg);
 
 
       //virtual void enum_draw2d_fonts(::write_text::font_enumeration_item_array & itema) override;

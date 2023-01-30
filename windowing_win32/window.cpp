@@ -442,7 +442,7 @@ namespace windowing_win32
 
          string strMessage;
 
-         strMessage.format("%s\n\nSystem Error Code: %d", strLastError, dwLastError);
+         strMessage.format("%s\n\nSystem Error Code: %d", strLastError.c_str(), dwLastError);
 
          CATEGORY_WARNING(appmsg, "Warning: Window creation failed: get_last_error returned:");
 

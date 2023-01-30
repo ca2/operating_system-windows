@@ -4807,7 +4807,7 @@ void interaction_impl::set_tool_window(bool bSet)
    bool interaction_impl::on_mouse_message(::message::mouse * pmouse)
    {
 
-      if (pmouse->m_atom >= e_message_mouse_first
+      /*if (pmouse->m_atom >= e_message_mouse_first
          && pmouse->m_atom <= e_message_mouse_last
          && m_bTranslateMouseMessageCursor
          && !pmouse->m_bTranslated)
@@ -4817,7 +4817,7 @@ void interaction_impl::set_tool_window(bool bSet)
 
          ::ClientToScreen(m_hwnd, (POINT *)&pmouse->m_point);
 
-      }
+      }*/
 
       auto bRet = ::user::interaction_impl::on_mouse_message(pmouse);
 
@@ -5233,8 +5233,12 @@ void interaction_impl::set_tool_window(bool bSet)
    }
 
 
+   void interaction_impl::_raw_client_to_screen(::point_i32 &point)
+   {
 
+      ::ClientToScreen((HWND)oswindow(), (LPPOINT)&point);
 
+   }
 
 
 } // namespace aura_windows

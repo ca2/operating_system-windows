@@ -31,6 +31,7 @@ namespace apex_windows
          ::string          m_strLibPlatform;
 
          ::file::path      m_pathProjectDir;
+         //::string_array    m_straLog;
 
 
          context();

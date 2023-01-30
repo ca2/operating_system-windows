@@ -2863,7 +2863,7 @@ namespace acme_windows
    void node::command_system(string_array & straOutput, int & iExitCode, const scoped_string & scopedstr, enum_command_system ecommandsystem, const class time & timeTimeout, ::particle * pparticleSynchronization, ::file::file * pfileLines)
    {
 
-      straOutput.clear();
+      //straOutput.clear();
 
       string str(scopedstr);
 

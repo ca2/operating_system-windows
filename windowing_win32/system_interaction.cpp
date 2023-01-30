@@ -1,4 +1,4 @@
-#include "framework.h"
+﻿#include "framework.h"
 #include "system_interaction.h"
 #include "acme/constant/id.h"
 #include "acme/constant/message.h"
@@ -92,14 +92,14 @@ namespace windowing_win32
 
          string strLparamString;
 
-         if (pmessage->m_atom == WM_SETTINGCHANGE && wparam == 0)
+         if (pmessage->m_atom == (enum_message) WM_SETTINGCHANGE && wparam == 0)
          {
 
             strLparamString = (const WCHAR *)(LPARAM(lparam));
 
          }
 
-         if (pmessage->m_atom == WM_FONTCHANGE)
+         if (pmessage->m_atom == (enum_message) WM_FONTCHANGE)
          {
 
             auto psystem = acmesystem()->m_paurasystem;
@@ -118,7 +118,7 @@ namespace windowing_win32
          //}
          }
          else if (
-            pmessage->m_atom == WM_SETTINGCHANGE &&
+            pmessage->m_atom == (enum_message) WM_SETTINGCHANGE &&
             strLparamString == "ImmersiveColorSet")
          {
 
@@ -132,7 +132,7 @@ namespace windowing_win32
 
          }
          else if (pmessage->m_atom == e_message_display_change ||
-            (pmessage->m_atom == WM_SETTINGCHANGE &&
+            (pmessage->m_atom == (enum_message) WM_SETTINGCHANGE &&
                (pmessage->m_wparam == SPI_SETWORKAREA)))
          {
 

@@ -1,13 +1,18 @@
 ﻿#include "framework.h"
 #include "acme/constant/message.h"
+#include "acme/constant/message_prototype.h"
 #include "acme/constant/timer.h"
 #include "acme/exception/exception.h"
 #include "apex/filesystem/filesystem/dir_context.h"
+#include "aura/message/timer.h"
+#include "aura/message/user.h"
+#include "aura/user/user/system.h"
+#include "aura/user/user/user.h"
+#include "aura/platform/session.h"
+#include "aura/platform/system.h"
+#include "aura_windows/interaction_impl.h"
 #include "windowing_win32/window.h"
 #include "windowing_win32/windowing.h"
-#include "aura/user/user/system.h"
-#include "aura_windows/interaction_impl.h"
-#include "aura/platform/system.h"
 
 
 CLASS_DECL_WINDOWING_WIN32 WNDPROC windows_user_interaction_impl_get_window_procedure();
@@ -328,8 +333,12 @@ LRESULT CALLBACK __window_procedure(HWND hwnd, UINT message, WPARAM wparam, LPAR
          return ::DefWindowProcW(hwnd, message, wparam, lparam);
 
       }
+      if (message == 34831)
+      {
 
-      auto pmessage = puserinteraction->get_message((enum_message)message, wparam, (iptr) lparam);
+         output_debug_string("message34381");
+      }
+      auto pmessage = pimpl->get_message((enum_message)message, wparam, (iptr) lparam);
 
       try
       {
@@ -370,7 +379,22 @@ LRESULT CALLBACK __window_procedure(HWND hwnd, UINT message, WPARAM wparam, LPAR
 
 }
 
+namespace windowing_win32
+{
 
+
+
+
+
+//void window::default_set(::message::message * pmessage, const ::atom & atom, wparam wparam, lparam lparam)
+//{
+//
+//
+//
+//}
+
+
+} // namespace windowing_win32
 
 
 
