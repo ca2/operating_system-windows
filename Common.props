@@ -6,6 +6,8 @@
     <TimeDir>$(BaseDir)time-windows\</TimeDir>
     <__operating_system>$(BaseDir)operating-system\</__operating_system>
     <__toolsbin>$(__operating_system)tool-windows\bin\</__toolsbin>
+    <RootParentDir>$(SolutionDir)..\..\..\..\</RootParentDir>
+    <RootParentDirOperatingSystem>$(RootParentDir)operating-system\</RootParentDirOperatingSystem>
   </PropertyGroup>
   <PropertyGroup>
     <OutDir>$(TimeDir)$(PlatformName)\$(Configuration)\</OutDir>
@@ -27,7 +29,7 @@
       <ObjectFileName>$(IntDir)%(RelativeDir)</ObjectFileName>
     </ClCompile>
     <PreBuildEvent>
-      <Command>$(SolutionDir)..\..\..\operating-system\tool-windows\bin\application_build_helper $(ProjectDir) $(ProjectName) $(PlatformName) $(Configuration)</Command>
+      <Command>$(RootParentDirOperatingSystem)tool-windows\bin\application_build_helper $(ProjectDir) $(ProjectName) $(PlatformName) $(Configuration)</Command>
     </PreBuildEvent>
     <Link>
       <AdditionalLibraryDirectories>$(SolutionDir)..\..\..\..\operating-system\storage-windows\$(PlatformName)\$(Configuration)\library\;$(SolutionDir)..\..\..\..\operating-system\storage-windows\$(PlatformName)\$(Configuration)\third\library\;$(OutDir)</AdditionalLibraryDirectories>
@@ -48,6 +50,12 @@
     </BuildMacro>
     <BuildMacro Include="__toolsbin">
       <Value>$(__toolsbin)</Value>
+    </BuildMacro>
+    <BuildMacro Include="RootParentDir">
+      <Value>$(RootParentDir)</Value>
+    </BuildMacro>
+    <BuildMacro Include="RootParentDirOperatingSystem">
+      <Value>$(RootParentDirOperatingSystem)</Value>
     </BuildMacro>
   </ItemGroup>
 </Project>
