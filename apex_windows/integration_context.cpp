@@ -257,7 +257,7 @@ namespace apex_windows
       void context::prepare1(const ::scoped_string & scopedstrSource, const ::string & scopedstrTarget)
       {
 
-         string_array stra;
+         //string_array stra;
 
 
          //string strLog;
@@ -326,13 +326,15 @@ namespace apex_windows
 
          strCommand = "cmd.exe /c \"@call " + strBuildCmd + " && @set\"";
 
-         pnode->command_system(stra, iExitCode, strCommand, e_command_system_inline_log);
+         //int iStart = m_straLog.size();
+         pnode->command_system(m_straOutput, iExitCode, strCommand, e_command_system_inline_log);
+         //int iCount = m_straLog.size() - iStart;
 
-         stra.each([](auto & str) { str.case_insensitive_begins_eat("i: "); });
-         stra.each([](auto & str) { str.case_insensitive_begins_eat("e: "); });
+         m_straOutput.each([](auto & str) { str.case_insensitive_begins_eat("i: "); });
+         m_straOutput.each([](auto & str) { str.case_insensitive_begins_eat("e: "); });
 
-         stra.trim();
-         stra.erase_empty();
+         m_straOutput.trim();
+         m_straOutput.erase_empty();
 
          //strLog = acmefile()->as_string(pacmedirectory->system() / strRel / "env.txt");
 
@@ -344,7 +346,7 @@ namespace apex_windows
 
          property_set setEnvironment;
 
-         setEnvironment.parse_environment_variable(stra);
+         setEnvironment.parse_environment_variable(m_straOutput);
 
          for (auto & pproperty : setEnvironment)
          {
