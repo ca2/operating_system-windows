@@ -114,6 +114,8 @@ namespace apex_windows
       virtual error_code _windows_create_link(const ::wide_character* pszPathObj, const ::wide_character* pszPathLink, const ::wide_character* pszDesc, const ::wide_character* pszIconPath, ::i32 iIcon);
 
 
+
+
    };
 
 
