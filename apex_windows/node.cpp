@@ -21,12 +21,16 @@
 
 #include <shellapi.h>
 #include <shobjidl_core.h>
+#include <iphlpapi.h>
+
 
 //CLASS_DECL_APEX_WINDOWS HRESULT win_create_link(const ::wide_character * pszPathObj, const ::wide_character * pszPathLink, const ::wide_character * pszDesc, const ::wide_character * pszIconPath, ::i32 iIcon);
 CLASS_DECL_ACME_WINDOWS void shell_notify_folder_change(const wchar_t* pwsz);
 CLASS_DECL_ACME_WINDOWS void shell_notify_item_change(const wchar_t* pwsz);
 CLASS_DECL_ACME_WINDOWS void shell_notify_assoc_change();
 
+
+::pointer_array < ::networking::address > get_adapters_addresses();
 
 namespace apex_windows
 {
@@ -1121,6 +1125,8 @@ namespace apex_windows
       //}
 
    }
+
+
 
 
 } // namespace apex_windows

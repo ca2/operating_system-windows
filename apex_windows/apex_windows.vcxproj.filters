@@ -21,6 +21,9 @@
     <Filter Include="Header Files\shell">
       <UniqueIdentifier>{dcf3e796-4e35-4616-9195-8bc55b6c9de2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\networking">
+      <UniqueIdentifier>{dca36939-d726-40c4-9f03-c0739361e780}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="explorer\explorer_restart.h">
