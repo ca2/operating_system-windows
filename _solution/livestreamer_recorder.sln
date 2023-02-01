@@ -68,6 +68,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "networking_bsd", "..\..\..\
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "api_twitch", "..\..\..\source\app-core\api_twitch\api_twitch.vcxproj", "{229A7009-5CA5-4C33-834F-B9753F40BC19}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ffmpeg", "..\..\..\source\app-core\ffmpeg\ffmpeg.vcxproj", "{67DC7693-61A5-4991-AF68-559CABB20EAB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -544,6 +546,22 @@ Global
 		{229A7009-5CA5-4C33-834F-B9753F40BC19}.StaticRelease|Win32.Build.0 = StaticRelease|Win32
 		{229A7009-5CA5-4C33-834F-B9753F40BC19}.StaticRelease|x64.ActiveCfg = StaticRelease|x64
 		{229A7009-5CA5-4C33-834F-B9753F40BC19}.StaticRelease|x64.Build.0 = StaticRelease|x64
+		{67DC7693-61A5-4991-AF68-559CABB20EAB}.Debug|Win32.ActiveCfg = Debug|Win32
+		{67DC7693-61A5-4991-AF68-559CABB20EAB}.Debug|Win32.Build.0 = Debug|Win32
+		{67DC7693-61A5-4991-AF68-559CABB20EAB}.Debug|x64.ActiveCfg = Debug|x64
+		{67DC7693-61A5-4991-AF68-559CABB20EAB}.Debug|x64.Build.0 = Debug|x64
+		{67DC7693-61A5-4991-AF68-559CABB20EAB}.Release|Win32.ActiveCfg = Release|Win32
+		{67DC7693-61A5-4991-AF68-559CABB20EAB}.Release|Win32.Build.0 = Release|Win32
+		{67DC7693-61A5-4991-AF68-559CABB20EAB}.Release|x64.ActiveCfg = Release|x64
+		{67DC7693-61A5-4991-AF68-559CABB20EAB}.Release|x64.Build.0 = Release|x64
+		{67DC7693-61A5-4991-AF68-559CABB20EAB}.StaticDebug|Win32.ActiveCfg = StaticDebug|Win32
+		{67DC7693-61A5-4991-AF68-559CABB20EAB}.StaticDebug|Win32.Build.0 = StaticDebug|Win32
+		{67DC7693-61A5-4991-AF68-559CABB20EAB}.StaticDebug|x64.ActiveCfg = StaticDebug|x64
+		{67DC7693-61A5-4991-AF68-559CABB20EAB}.StaticDebug|x64.Build.0 = StaticDebug|x64
+		{67DC7693-61A5-4991-AF68-559CABB20EAB}.StaticRelease|Win32.ActiveCfg = StaticRelease|Win32
+		{67DC7693-61A5-4991-AF68-559CABB20EAB}.StaticRelease|Win32.Build.0 = StaticRelease|Win32
+		{67DC7693-61A5-4991-AF68-559CABB20EAB}.StaticRelease|x64.ActiveCfg = StaticRelease|x64
+		{67DC7693-61A5-4991-AF68-559CABB20EAB}.StaticRelease|x64.Build.0 = StaticRelease|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
