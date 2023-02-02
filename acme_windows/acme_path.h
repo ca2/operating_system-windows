@@ -30,6 +30,9 @@ namespace acme_windows
       ::file::path _final(const ::file::path & path) override;
 
 
+      ::file::path get_absolute_path(const ::scoped_string& scopedstr) override;
+
+
    };
 
 
