@@ -282,7 +282,7 @@ namespace windowing_win32
 
       auto puser = psession->user();
 
-      auto pwindowing = puser->windowing1();
+      auto pwindowing = puser->windowing();
 
       m_pwindowing = pwindowing;
 
@@ -1164,7 +1164,7 @@ namespace windowing_win32
 //      if (status != 0)
 //      {
 //
-//         //acmefile()->put_contents("/home/camilo/window.txt", __string((int)w->window()));
+//         //acmefile()->put_contents("/home/camilo/window.txt", ::as_string((int)w->window()));
 //         return false;
 //
 //      }
