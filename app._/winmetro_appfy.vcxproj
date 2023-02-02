@@ -64,7 +64,7 @@
     <PackageCertificateThumbprint>CF820A40C4761D038819DB3AD3649DE47E9D735D</PackageCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <OutDir>$(SolutionDir)..\..\..\stage\x86\</OutDir>
+    <OutDir>$(SolutionDir)..\..\..\Release\x86\</OutDir>
     <IntDir>$(TimeDir)intermediate\x86\$(ProjectName)\</IntDir>
     <ReferencePath>$(VCInstallDir)lib</ReferencePath>
     <LibraryPath>$(VCInstallDir)lib;$(WindowsSDK_LibraryPath_x86);</LibraryPath>
@@ -101,20 +101,20 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\..\stage\x86\draw2d_direct2d.dll">
+    <None Include="..\..\..\Release\x86\draw2d_direct2d.dll">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
       <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</DeploymentContent>
     </None>
     <None Include=".\winmetro_hellomultiverse.pfx" />
-    <None Include="..\..\..\platform\stage\matter\msvc++\msvcp110d.dll">
+    <None Include="..\..\..\platform\Release\matter\msvc++\msvcp110d.dll">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
       <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</DeploymentContent>
     </None>
-    <None Include="..\..\..\platform\stage\matter\msvc++\msvcr110d.dll">
+    <None Include="..\..\..\platform\Release\matter\msvc++\msvcr110d.dll">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
       <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</DeploymentContent>
     </None>
-    <None Include="..\..\..\platform\stage\matter\msvc++\vccorlib110d.dll">
+    <None Include="..\..\..\platform\Release\matter\msvc++\vccorlib110d.dll">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
       <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</DeploymentContent>
     </None>

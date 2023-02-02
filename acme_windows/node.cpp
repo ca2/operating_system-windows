@@ -963,7 +963,7 @@ namespace acme_windows
    //
    //         ::file::path strModule = module_path_from_pid(getpid());
    //
-   //         string strBasePath = acmedirectory()->system() / "memory_counters" / strModule.title() / __string(getpid());
+   //         string strBasePath = acmedirectory()->system() / "memory_counters" / strModule.title() / ::as_string(getpid());
    //
    //#endif
    //

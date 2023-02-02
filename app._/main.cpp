@@ -197,7 +197,7 @@ pacmedir->system() / "config/plugin/appfy_beg_debug_box.txt"))
       if (__argc < 4)
       {
 
-         os_output_error_message("Incorrect Number of Arguments passed to appfy. Expected 3 or 4; passed " + __string(__argc - 1), "", e_message_box_ok);
+         os_output_error_message("Incorrect Number of Arguments passed to appfy. Expected 3 or 4; passed " + ::as_string(__argc - 1), "", e_message_box_ok);
 
          papplication->m_result.add(error_bad_argument);
 

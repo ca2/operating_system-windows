@@ -1477,7 +1477,7 @@ namespace draw2d_gdiplus
 //
 //         //         if (g_cForkBlend % 100 == 0)
 //         //         {
-//         //            output_debug_string("\nfork_blend(" + __string(g_cForkBlend) + ") sample=" + __string(nWidth) + "," + __string(nHeight));
+//         //            output_debug_string("\nfork_blend(" + ::as_string(g_cForkBlend) + ") sample=" + ::as_string(nWidth) + "," + ::as_string(nHeight));
 //         //         }
 //
 //         //         return true;
@@ -3520,7 +3520,7 @@ namespace draw2d_gdiplus
 
    //   //         if (g_cForkBlend % 100 == 0)
    //   //         {
-   //   //            output_debug_string("\nfork_blend(" + __string(g_cForkBlend) + ") sample=" + __string(nSrcWidth) + "," + __string(nDestHeight));
+   //   //            output_debug_string("\nfork_blend(" + ::as_string(g_cForkBlend) + ") sample=" + ::as_string(nSrcWidth) + "," + ::as_string(nDestHeight));
    //   //         }
 
    //   //      }

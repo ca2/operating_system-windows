@@ -203,21 +203,21 @@ pacmedir->system() / "config/production/mirror_status.txt";
          if (m_iGlobalRetry > 8)
          {
 
-            add_status("Retried " + __string(m_iGlobalRetry) + " times - \"giving up\" this command!");
+            add_status("Retried " + ::as_string(m_iGlobalRetry) + " times - \"giving up\" this command!");
 
             //if (m_eversion == version_basis)
             //{
-            //   set["post"]["new_status"] = "<div style=\"display: block; " + strBackPostColor + "\"><h3 style=\"margin-bottom:0px; color: #555550;\">" + version_to_international_datetime(m_strStartTime) + "</h3><span style=\"color: #882266; display: block; margin-bottom: 1.5em;\">Retried " + __string(m_iGlobalRetry) + " times - \"giving up\" " + m_strConfiguration + " build command!</span>";
+            //   set["post"]["new_status"] = "<div style=\"display: block; " + strBackPostColor + "\"><h3 style=\"margin-bottom:0px; color: #555550;\">" + version_to_international_datetime(m_strStartTime) + "</h3><span style=\"color: #882266; display: block; margin-bottom: 1.5em;\">Retried " + ::as_string(m_iGlobalRetry) + " times - \"giving up\" " + m_strConfiguration + " build command!</span>";
             //}
             //else
             //{
-            //   set["post"]["new_status"] = "<div style=\"display: block; " + strBackPostColor + "\"><h3 style=\"margin-bottom:0px; color: #555550;\">" + version_to_international_datetime(m_strStartTime) + "</h3><span style=\"color: #228855; display: block; margin-bottom: 1.5em;\">Retried " + __string(m_iGlobalRetry) + " times - \"giving up\" " + m_strConfiguration + " build command!</span>";
+            //   set["post"]["new_status"] = "<div style=\"display: block; " + strBackPostColor + "\"><h3 style=\"margin-bottom:0px; color: #555550;\">" + version_to_international_datetime(m_strStartTime) + "</h3><span style=\"color: #228855; display: block; margin-bottom: 1.5em;\">Retried " + ::as_string(m_iGlobalRetry) + " times - \"giving up\" " + m_strConfiguration + " build command!</span>";
             //}
 
             //pcontext->m_papexcontext->http().get("http://api.ca2.cc/status/insert", str, set);
 
 
-            //string strTwit =  version_to_international_datetime(m_strStartTime) + " UTC Retried " + __string(m_iGlobalRetry) + " times - \"giving up\" " + m_strConfiguration + " build command!";
+            //string strTwit =  version_to_international_datetime(m_strStartTime) + " UTC Retried " + ::as_string(m_iGlobalRetry) + " times - \"giving up\" " + m_strConfiguration + " build command!";
 
             //twitter_twit(strTwit);
 
@@ -243,7 +243,7 @@ pacmedir->system() / "config/production/mirror_status.txt";
          //   }
          //   else
          //   {
-         //      m_strTry = __string(m_iGlobalRetry) + "th";
+         //      m_strTry = ::as_string(m_iGlobalRetry) + "th";
          //   }
 
          //   if (m_eversion == version_basis)
@@ -932,7 +932,7 @@ pacmedir->create(pathTarget.folder()))
          else
          {
 
-            output_debug_string(__string(cDirMkErrorCount) + " errors attempting to create directory and " + __string(cFileCopyErrorCount) + " errors attempting to do file copy batch at \"" + m_pathVrel + "\"\n");
+            output_debug_string(::as_string(cDirMkErrorCount) + " errors attempting to create directory and " + ::as_string(cFileCopyErrorCount) + " errors attempting to do file copy batch at \"" + m_pathVrel + "\"\n");
 
          }
 
@@ -1141,7 +1141,7 @@ pacmedir->create(pathTarget.folder()))
 
             straRoot.add("time");
 
-            add_status("***Preparing to release to mirrors in two phases with " + __string(straRoot.get_count()) + " steps each...");
+            add_status("***Preparing to release to mirrors in two phases with " + ::as_string(straRoot.get_count()) + " steps each...");
 
             add_status("1st phase : archiving files and directories into one archive...");
 
@@ -1152,7 +1152,7 @@ pacmedir->create(pathTarget.folder()))
 
                string strSpa = "ca2_spa_" + ::str().replace("-", "_", strRoot);
 
-               add_status(__string(i + 1) + ". dtf - fileset - file from directory " + strRoot);
+               add_status(::as_string(i + 1) + ". dtf - fileset - file from directory " + strRoot);
 
                pcontext->m_papexcontext->file().dtf(m_strCCVrelNew + "\\" + strSpa + ".fileset", m_strCCVrelNew + "\\" + strRoot, get_application());
 
@@ -1171,7 +1171,7 @@ pacmedir->create(pathTarget.folder()))
 
                string strSpa = "ca2_spa_" + ::str().replace("-", "_", strRoot);
 
-               add_status(__string(i + 1) + ". bz - bzip - compressing " + strRoot);
+               add_status(::as_string(i + 1) + ". bz - bzip - compressing " + strRoot);
 
                psystem->compress().bz(this, get_writer(m_strCCVrelNew + "\\" + strSpa + ".fileset.bz"), get_reader(m_strCCVrelNew + "\\" + strSpa + ".fileset"));
 
@@ -3048,7 +3048,7 @@ pacmedir->create(pathTarget.folder()))
             }
             else
             {
-               strTwit += " with " + __string(m_iGlobalRetry) + " retries";
+               strTwit += " with " + ::as_string(m_iGlobalRetry) + " retries";
             }
          }
 
@@ -3101,8 +3101,8 @@ pacmedir->create(pathTarget.folder()))
       twitterObj.get_oauth().setConsumerKey(m_strTwitterConsumerKey);
       twitterObj.get_oauth().setConsumerSecret(m_strTwitterConsumerSecret);
 
-      string strPathKey = dir().appdata() / "twitterClient_token_key" + __string((int)m_eversion) + ".txt";
-      string strPathSecret = dir().appdata() / "twitterClient_token_secret" + __string((int)m_eversion) + ".txt";
+      string strPathKey = dir().appdata() / "twitterClient_token_key" + ::as_string((int)m_eversion) + ".txt";
+      string strPathSecret = dir().appdata() / "twitterClient_token_secret" + ::as_string((int)m_eversion) + ".txt";
       /* Step 1: Check if we alredy have OAuth access token from a previous run */
       //    char szKey[1024];
       string myOAuthAccessTokenKey = pcontext->m_papexcontext->file().as_string(strPathKey);
@@ -3166,8 +3166,8 @@ Retry2:
       twitterObj.get_oauth().setConsumerKey(m_strTwitterConsumerKey);
       twitterObj.get_oauth().setConsumerSecret(m_strTwitterConsumerSecret);
 
-      string strPathKey = dir().appdata() / "twitterClient_token_key" + __string((int)m_eversion) + ".txt";
-      string strPathSecret = dir().appdata() / "twitterClient_token_secret" + __string((int)m_eversion) + ".txt";
+      string strPathKey = dir().appdata() / "twitterClient_token_key" + ::as_string((int)m_eversion) + ".txt";
+      string strPathSecret = dir().appdata() / "twitterClient_token_secret" + ::as_string((int)m_eversion) + ".txt";
       /* Step 1: Check if we alredy have OAuth access token from a previous run */
       //    char szKey[1024];
       string myOAuthAccessTokenKey = pcontext->m_papexcontext->file().as_string(strPathKey);

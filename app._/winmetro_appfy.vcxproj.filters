@@ -4,17 +4,17 @@
     <AppxManifest Include="Package.appxmanifest" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\..\platform\stage\matter\msvc++\msvcp110d.dll">
+    <None Include="..\..\..\platform\Release\matter\msvc++\msvcp110d.dll">
       <Filter>Library</Filter>
     </None>
-    <None Include="..\..\..\platform\stage\matter\msvc++\msvcr110d.dll">
+    <None Include="..\..\..\platform\Release\matter\msvc++\msvcr110d.dll">
       <Filter>Library</Filter>
     </None>
-    <None Include="..\..\..\platform\stage\matter\msvc++\vccorlib110d.dll">
+    <None Include="..\..\..\platform\Release\matter\msvc++\vccorlib110d.dll">
       <Filter>Library</Filter>
     </None>
     <None Include=".\winmetro_hellomultiverse.pfx" />
-    <None Include="..\..\..\stage\x86\draw2d_direct2d.dll">
+    <None Include="..\..\..\Release\x86\draw2d_direct2d.dll">
       <Filter>Library</Filter>
     </None>
   </ItemGroup>
