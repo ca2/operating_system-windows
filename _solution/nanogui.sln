@@ -44,11 +44,11 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "crypto_openssl", "..\..\..\
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "folder_zip", "..\..\..\source\app\folder_zip\folder_zip.vcxproj", "{A69CC125-E38A-4F77-9677-8860D43AB3B0}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "nanogui", "..\..\..\source\app\nanogui\nanogui.vcxproj", "{4FC273F2-A70C-444E-8952-ADFBB6575A3F}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "nanoui", "..\..\..\source\app\nanoui\nanoui.vcxproj", "{4FC273F2-A70C-444E-8952-ADFBB6575A3F}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_simple_nanogui_example", "..\..\..\source\app-simple\nanogui_example\app_simple_nanogui_example.vcxproj", "{4EEB9763-3CAF-4436-8654-A583351353E2}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_simple_nanoui_example", "..\..\..\source\app-simple\nanoui_example\app_simple_nanoui_example.vcxproj", "{4EEB9763-3CAF-4436-8654-A583351353E2}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_app_simple_nanogui_example", "..\..\..\source\app-simple\nanogui_example\shared_app_simple_nanogui_example.vcxproj", "{17A1FD59-DA1D-42FE-AC6B-8F42031E27DB}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shared_app_simple_nanoui_example", "..\..\..\source\app-simple\nanoui_example\shared_app_simple_nanoui_example.vcxproj", "{17A1FD59-DA1D-42FE-AC6B-8F42031E27DB}"
 	ProjectSection(ProjectDependencies) = postProject
 		{CC8E8200-00A9-414E-9829-7CA3F1091ADD} = {CC8E8200-00A9-414E-9829-7CA3F1091ADD}
 		{C598E718-55AE-4D6E-81E0-53450FC3A649} = {C598E718-55AE-4D6E-81E0-53450FC3A649}
