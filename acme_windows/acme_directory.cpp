@@ -9,6 +9,7 @@
 #include "acme/primitive/string/adaptor.h"
 #include "acme/primitive/string/str.h"
 #include "acme_windows_common/cotaskptr.h"
+#include "acme_windows_common/hresult_exception.h"
 #include <Shlobj.h>
 
 
@@ -79,10 +80,14 @@ namespace acme_windows
       }
       catch(const ::exception & e)
       { 
+
+         INFORMATION("_get_known_folder(FOLDERID_Profile) FAILED (1). \"" << e.m_strMessage << "\"");
       
       }
       catch (...)
       {
+
+         INFORMATION("_get_known_folder(FOLDERID_Profile) FAILED (2).");
 
       }
 
