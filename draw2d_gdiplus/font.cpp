@@ -122,6 +122,8 @@ namespace draw2d_gdiplus
 
       bool bFont = false;
 
+      Gdiplus::FontFamily * pfontfamily = nullptr;
+
       if (m_path.has_char())
       {
 
@@ -136,20 +138,6 @@ namespace draw2d_gdiplus
             {
 
                throw exception(error_resource);
-
-            }
-            else if (pprivatefont->m_iFamilyCount == 1)
-            {
-
-               auto pfont = new Gdiplus::Font(
-                  &pprivatefont->m_familya.first(),
-                  (Gdiplus::REAL)m_dFontSize,
-                  iStyle,
-                  unit);
-
-               set_gdiplus_font(pfont);
-
-               bFont = true;
 
             }
             else
@@ -175,7 +163,7 @@ namespace draw2d_gdiplus
                         if (strFontFamily.case_insensitive_order(m_strFontFamilyName) == 0)
                         {
 
-                           iFoundFamily = iFamily;
+                           pfontfamily = &fontfamily;
 
                            break;
 
@@ -187,35 +175,40 @@ namespace draw2d_gdiplus
 
                }
 
-               if (iFoundFamily >= 0)
+               if (::is_null(pfontfamily))
                {
 
-                  auto & fontfamily = pprivatefont->m_familya[iFoundFamily];
-
-                  if (fontfamily.GetFamilyName(wszGetFamilyName) != Gdiplus::Ok)
-                  {
-
-                     throw exception(error_resource);
-
-                  }
-
-                  auto pfont = new Gdiplus::Font(
-                     wszGetFamilyName,
-                     (Gdiplus::REAL)m_dFontSize,
-                     iStyle,
-                     unit,
-                     pprivatefont->m_pcollection);
-
-                  set_gdiplus_font(pfont);
-
-                  bFont = true;
+                  pfontfamily = &pprivatefont->m_familya.first();
 
                }
-               else
+
+               if (::is_set(pfontfamily))
                {
 
+                  //pfontfamily = &pprivatefont->m_familya[iFoundFamily];
+
+                  ////if (pfontfamily->GetFamilyName(wszGetFamilyName) != Gdiplus::Ok)
+                  ////{
+
+                  ////   throw exception(error_resource);
+
+                  ////}
+
+                  ////auto pfont = new Gdiplus::Font(
+                  ////   wszGetFamilyName,
+                  ////   (Gdiplus::REAL)m_dFontSize,
+                  ////   iStyle,
+                  ////   unit,
+                  ////   pprivatefont->m_pcollection);
+
+                  //pfontfamily
+
+                  //set_gdiplus_font(pfont);
+
+                  //bFont = true;
+
                   auto pfont = new Gdiplus::Font(
-                     &pprivatefont->m_familya.first(),
+                     pfontfamily,
                      (Gdiplus::REAL)m_dFontSize,
                      iStyle,
                      unit);
@@ -225,6 +218,20 @@ namespace draw2d_gdiplus
                   bFont = true;
 
                }
+               //else
+               //{
+
+               //   auto pfont = new Gdiplus::Font(
+               //      &pprivatefont->m_familya.first(),
+               //      (Gdiplus::REAL)m_dFontSize,
+               //      iStyle,
+               //      unit);
+
+               //   set_gdiplus_font(pfont);
+
+               //   bFont = true;
+
+               //}
 
             }
 
@@ -252,12 +259,24 @@ namespace draw2d_gdiplus
 
          Gdiplus::FontFamily fontfamily;
 
-         if (pfont->GetFamily(&fontfamily) == Gdiplus::Ok)
+         if (::is_null(pfontfamily))
+         {
+
+            if (pfont->GetFamily(&fontfamily) == Gdiplus::Ok)
+            {
+
+               pfontfamily = &fontfamily;
+
+            }
+
+         }
+
+         if(::is_set(pfontfamily))
          {
 
             INT iStyle = pfont->GetStyle();
 
-            double dHeight = fontfamily.GetEmHeight(iStyle);
+            double dHeight = pfontfamily->GetEmHeight(iStyle);
 
             double dSize = pfont->GetSize();
 
@@ -265,10 +284,10 @@ namespace draw2d_gdiplus
 
             auto & textmetric = m_textmetric2;
 
-            textmetric.m_dAscent = dSize * fontfamily.GetCellAscent(iStyle) / dHeight;
-            textmetric.m_dDescent = dSize * fontfamily.GetCellDescent(iStyle) / dHeight;
+            textmetric.m_dAscent = dSize * pfontfamily->GetCellAscent(iStyle) / dHeight;
+            textmetric.m_dDescent = dSize * pfontfamily->GetCellDescent(iStyle) / dHeight;
             textmetric.m_dInternalLeading = 0.;
-            textmetric.m_dExternalLeading = dSize * fontfamily.GetLineSpacing(iStyle) / dHeight -
+            textmetric.m_dExternalLeading = dSize * pfontfamily->GetLineSpacing(iStyle) / dHeight -
                (textmetric.m_dAscent + textmetric.m_dDescent);
 
          }
