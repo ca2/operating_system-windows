@@ -2734,9 +2734,21 @@ namespace acme_windows
    void node::open_url(const ::string & strUrl)
    {
 
+//#ifdef DEBUG
+//
+//      ::string_array straOutput;
+//
+//      int iExitCode = 0;
+//
+//      command_system(straOutput, iExitCode, "\"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\" \"" + strUrl + "\" --auto-open-devtools-for-tabs");
+//
+//#else
+
       wstring wstrUrl(strUrl);
 
       ::ShellExecuteW(nullptr, L"open", wstrUrl, nullptr, nullptr, SW_SHOWNORMAL);
+
+//#endif
 
    }
 
