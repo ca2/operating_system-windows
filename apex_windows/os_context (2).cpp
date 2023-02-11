@@ -1871,31 +1871,31 @@ retry:
             strId = "edge";
 
          }
-         if (strProgId.begins_ci("IE."))
+         if (strProgId.case_insensitive_begins("IE."))
          {
 
             strId = "ie";
 
          }
-         else if (strProgId.begins_ci("ChromeHTML"))
+         else if (strProgId.case_insensitive_begins("ChromeHTML"))
          {
 
             strId = "chrome";
 
          }
-         else if (strProgId.begins_ci("FirefoxHTML"))
+         else if (strProgId.case_insensitive_begins("FirefoxHTML"))
          {
 
             strId = "firefox";
 
          }
-         else if (strProgId.begins_ci("Opera"))
+         else if (strProgId.case_insensitive_begins("Opera"))
          {
 
             strId = "opera";
 
          }
-         else if (strProgId.begins_ci("VivaldiHTM."))
+         else if (strProgId.case_insensitive_begins("VivaldiHTM."))
          {
 
             strId = "vivaldi";
@@ -1927,7 +1927,7 @@ retry:
 
          }
 
-         bool bQuote = strDefault.begins_eat_ci("\"");
+         bool bQuote = strDefault.case_insensitive_begins_eat("\"");
 
          strsize iFind = strDefault.case_insensitive_find(".exe");
 
@@ -1949,7 +1949,7 @@ retry:
          if (bQuote)
          {
 
-            strParam.begins_eat_ci("\"");
+            strParam.case_insensitive_begins_eat("\"");
 
          }
 

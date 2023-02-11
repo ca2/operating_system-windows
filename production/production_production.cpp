@@ -447,7 +447,7 @@ pacmedir->system() / "config/production/mirror_status.txt";
 
          }
 
-         //         m_straRoot.filter([](const ::file::path & p) {return ::str().begins_ci(p.name(),"app-"); });
+         //         m_straRoot.filter([](const ::file::path & p) {return ::str().case_insensitive_begins(p.name(),"app-"); });
 
          m_straRoot.insert_at(0, "app");
 
@@ -2386,7 +2386,7 @@ pacmedir->create(pathTarget.folder()))
       for (i32 i = 0; i < m_straPath.get_count(); i++)
       {
          ::file::path strRelative = m_straPath[i].relative();
-         if (strRelative.begins_ci("META-INF\\"))
+         if (strRelative.case_insensitive_begins("META-INF\\"))
             continue;
          strRelative.replace("\\", "/");
          mem.set_size(0);

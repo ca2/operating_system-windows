@@ -543,7 +543,7 @@ namespace apex_windows
 
       //            string strFile = file_find.GetFileName();
 
-      //            if (strFile.begins_ci("resident_"))
+      //            if (strFile.case_insensitive_begins("resident_"))
       //            {
 
       //               INFORMATION("resident_*");
@@ -711,7 +711,7 @@ namespace apex_windows
 
    //               ::file::path pathName = file_find.GetFileName();
 
-   //               //if (strFile.begins_ci("resident_"))
+   //               //if (strFile.case_insensitive_begins("resident_"))
    //               //{
 
    //               //   TRACE("resident_*");

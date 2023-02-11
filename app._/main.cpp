@@ -239,52 +239,52 @@ pacmedir->system() / "config/plugin/appfy_beg_debug_box.txt"))
          string strParse(strApp);
 
             
-         if (strParse.begins_eat_ci("app_core_"))
+         if (strParse.case_insensitive_begins_eat("app_core_"))
          {
             strRoot = "app-core";
             strDomain = strParse;
          }
-         else if (strParse.begins_eat_ci("app_veriwell_"))
+         else if (strParse.case_insensitive_begins_eat("app_veriwell_"))
          {
             strRoot = "app-veriwell";
             strDomain = strParse;
          }
-         else if (strParse.begins_eat_ci("app_cidadedecuritiba_"))
+         else if (strParse.case_insensitive_begins_eat("app_cidadedecuritiba_"))
          {
             strRoot = "app-cidadedecuritiba";
             strDomain = strParse;
          }
-         else if (strParse.begins_eat_ci("app_gtech_"))
+         else if (strParse.case_insensitive_begins_eat("app_gtech_"))
          {
             strRoot = "app-gtech";
             strDomain = strParse;
          }
-         else if (strParse.begins_eat_ci("app_frontpage_"))
+         else if (strParse.case_insensitive_begins_eat("app_frontpage_"))
          {
             strRoot = "app-frontpage";
             strDomain = strParse;
          }
-         else if (strParse.begins_eat_ci("app_sysutils_"))
+         else if (strParse.case_insensitive_begins_eat("app_sysutils_"))
          {
             strRoot = "app-sysutils";
             strDomain = strParse;
          }
-         else if (strParse.begins_eat_ci("design_"))
+         else if (strParse.case_insensitive_begins_eat("design_"))
          {
             strRoot = "design";
             strDomain = strParse;
          }
-         else if (strParse.begins_eat_ci("game_"))
+         else if (strParse.case_insensitive_begins_eat("game_"))
          {
             strRoot = "game";
             strDomain = strParse;
          }
-         else if (strParse.begins_eat_ci("rootkiller_"))
+         else if (strParse.case_insensitive_begins_eat("rootkiller_"))
          {
             strRoot = "rootkiller";
             strDomain = strParse;
          }
-         else if (strParse.begins_eat_ci("app_"))
+         else if (strParse.case_insensitive_begins_eat("app_"))
          {
 
             auto iFind = strParse.find("_");
@@ -300,7 +300,7 @@ pacmedir->system() / "config/plugin/appfy_beg_debug_box.txt"))
                strDomain = strParse.substr(iFind + 1);
             }
          }
-         else if (strParse.begins_eat_ci("platform_"))
+         else if (strParse.case_insensitive_begins_eat("platform_"))
          {
             
             strRoot = "platform";
@@ -346,7 +346,7 @@ pacmedir->system() / "config/plugin/appfy_beg_debug_box.txt"))
 
                string strPrefix = straPrefix[iFind];
 
-               if (strParse.begins_eat_ci(strPrefix))
+               if (strParse.case_insensitive_begins_eat(strPrefix))
                {
 
                   strRoot = listing[iFind].name();
