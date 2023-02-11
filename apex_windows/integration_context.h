@@ -23,7 +23,7 @@ namespace apex_windows
          ::string          m_strContext;
          ::string          m_strVCVersion;
          ::string          m_strTime;
-         ::string          m_strSdk1;
+         //::string          m_strSdk1; // payload("sdk1")
          ::string          m_strPlat1;
          ::string          m_strPlat2;
          ::string          m_strVsTools;

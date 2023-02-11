@@ -93,7 +93,7 @@ namespace apex_windows
 
             m_strVsTools = "140";
 
-            m_strSdk1 = "vc140";
+            payload("sdk1") = "vc140";
 
          }
          else if (m_strVs == "2017")
@@ -101,7 +101,7 @@ namespace apex_windows
 
             m_strVsTools = "141";
 
-            m_strSdk1 = "vc141";
+            payload("sdk1") = "vc141";
 
          }
          else if (m_strVs == "2019")
@@ -109,7 +109,7 @@ namespace apex_windows
 
             m_strVsTools = "142";
 
-            m_strSdk1 = "vc142";
+            payload("sdk1") = "vc142";
 
          }
          else if (m_strVs == "2022")
@@ -117,7 +117,7 @@ namespace apex_windows
 
             m_strVsTools = "143";
 
-            m_strSdk1 = "vc143";
+            payload("sdk1") = "vc143";
 
          }
          else
@@ -190,7 +190,7 @@ namespace apex_windows
          catch (const ::e_status & estatus)
          {
 
-            output_debug_string("failed to setup visual studio environment " + as_string(estatus.as_i64()));
+            output_debug_string("failed to setup visual studio environment " + ::as_string(estatus.as_i64()));
 
          }
 
