@@ -26,7 +26,7 @@ namespace apex_windows
          //::string          m_strSdk1; // payload("sdk1")
          ::string          m_strPlat1;
          ::string          m_strPlat2;
-         ::string          m_strVsTools;
+         //::string          m_strVsTools; // payload("vstools")
          ::string          m_strStagePlatform;
          ::string          m_strLibPlatform;
 
@@ -47,6 +47,11 @@ namespace apex_windows
 
 
          ::string prepare_path(const ::file::path & path) override;
+
+         void prepare_compilation_script(::string& str) override;
+
+         void prepare_linking_script(::string& str) override;
+     
 
 
       };
