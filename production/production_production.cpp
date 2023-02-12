@@ -847,7 +847,7 @@ pacmedir->system() / "config/production/mirror_status.txt";
 
          int iBaseLen = m_strBase.length();
 
-         if (m_strBase.ends_ci("\\") || m_strBase.ends_ci("/"))
+         if (m_strBase.case_insensitive_ends("\\") || m_strBase.case_insensitive_ends("/"))
          {
 
             iBaseLen++;
@@ -1394,10 +1394,10 @@ pacmedir->create(pathTarget.folder()))
       auto pathSource = m_pathVrel / lpcszRelative;
 
 
-      //if (lpcszRelative.ends_ci(".dll")
-      //      || lpcszRelative.ends_ci(".exe")
-      //      || lpcszRelative.ends_ci(".ocx")
-      //      || lpcszRelative.ends_ci(".cab"))
+      //if (lpcszRelative.case_insensitive_ends(".dll")
+      //      || lpcszRelative.case_insensitive_ends(".exe")
+      //      || lpcszRelative.case_insensitive_ends(".ocx")
+      //      || lpcszRelative.case_insensitive_ends(".cab"))
       //{
 
       //   string strStatus;
@@ -1410,7 +1410,7 @@ pacmedir->create(pathTarget.folder()))
       //   add_status("Signing code ...");
 
       //}
-      //else if (lpcszRelative.ends_ci(".sys"))
+      //else if (lpcszRelative.case_insensitive_ends(".sys"))
       //{
 
       //   string strStatus;
@@ -1900,7 +1900,7 @@ pacmedir->create(pathTarget.folder()))
       for (; i < m_straFiles.get_size(); i++)
       {
          ::file::path & strFile = m_straFiles[i];
-         if (strFile.ends_ci(".zip"))
+         if (strFile.case_insensitive_ends(".zip"))
          {
          }
          else if (dir().is(strFile))
