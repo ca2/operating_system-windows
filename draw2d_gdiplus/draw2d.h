@@ -24,6 +24,9 @@ namespace draw2d_gdiplus
          raw_array < Gdiplus::FontFamily >                  m_familya;
          int                                                m_iFamilyCount;
 
+         private_font();
+         ~private_font() override;
+
       };
 
       //__creatable_from_base(draw2d, ::draw2d::draw2d);

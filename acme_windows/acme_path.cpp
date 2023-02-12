@@ -99,6 +99,39 @@ namespace acme_windows
    }
 
 
+   ::file::path acme_path::get_absolute_path(const ::scoped_string& scopedstr)
+   {
+
+
+      ::string result = scopedstr; //realpath() fails if path is already absolute
+
+      wstring wstrPath(scopedstr);
+
+      auto newLength = GetFullPathNameW(wstrPath, 0, nullptr, NULL);
+      
+      wstring wstrFullPath;
+
+      decltype(newLength) length;
+
+      do
+      {
+
+         length = newLength;
+
+         auto pszFullPath = wstrFullPath.get_string_buffer(length);
+
+         newLength = GetFullPathNameW(wstrPath, MAX_PATH, pszFullPath, NULL);
+
+         wstrFullPath.release_string_buffer(length);
+
+      } while (newLength < length);
+
+      
+      return result;
+   }
+
+
+
 } // namespace acme_windows
 
 

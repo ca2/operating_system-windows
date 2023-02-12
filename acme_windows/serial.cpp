@@ -608,7 +608,7 @@ namespace acme_windows
             }
 
             // time_out occured on reading 1 byte
-            preempt(maximum(100_ns, m_timeout.m_timeReadTimeoutConstant / 10));
+            preempt(maximum(100_ηs, m_timeout.m_timeReadTimeoutConstant / 10));
 
             if (!::task_get_run())
             {

@@ -1477,7 +1477,7 @@ namespace draw2d_gdiplus
 //
 //         //         if (g_cForkBlend % 100 == 0)
 //         //         {
-//         //            output_debug_string("\nfork_blend(" + __string(g_cForkBlend) + ") sample=" + __string(nWidth) + "," + __string(nHeight));
+//         //            output_debug_string("\nfork_blend(" + ::as_string(g_cForkBlend) + ") sample=" + ::as_string(nWidth) + "," + ::as_string(nHeight));
 //         //         }
 //
 //         //         return true;
@@ -3520,7 +3520,7 @@ namespace draw2d_gdiplus
 
    //   //         if (g_cForkBlend % 100 == 0)
    //   //         {
-   //   //            output_debug_string("\nfork_blend(" + __string(g_cForkBlend) + ") sample=" + __string(nSrcWidth) + "," + __string(nDestHeight));
+   //   //            output_debug_string("\nfork_blend(" + ::as_string(g_cForkBlend) + ") sample=" + ::as_string(nSrcWidth) + "," + ::as_string(nDestHeight));
    //   //         }
 
    //   //      }
@@ -6040,9 +6040,9 @@ namespace draw2d_gdiplus
 
       Gdiplus::PointF origin(0, 0);
 
-      Gdiplus::StringFormat strFormat(Gdiplus::StringFormat::GenericTypographic());
+      Gdiplus::StringFormat stringformat(Gdiplus::StringFormat::GenericTypographic());
 
-      strFormat.SetFormatFlags(strFormat.GetFormatFlags()
+      stringformat.SetFormatFlags(stringformat.GetFormatFlags()
          | Gdiplus::StringFormatFlagsNoClip | Gdiplus::StringFormatFlagsMeasureTrailingSpaces
       );
 
@@ -6061,7 +6061,14 @@ namespace draw2d_gdiplus
 
 #undef new
 
-      auto status = m_pgraphics->MeasureString(psz, iLen, pfont, origin, &strFormat, &box);
+      auto status = m_pgraphics->MeasureString(psz, iLen, pfont, origin, &stringformat, &box);
+
+      if(status != Gdiplus::Ok)
+      { 
+      
+         throw ::exception(error_failed);
+      
+      }
 
       text.m_size = size_f64((double)(box.Width * m_pfont->m_dFontWidth), (double)(box.Height));
 

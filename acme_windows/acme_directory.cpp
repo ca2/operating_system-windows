@@ -9,6 +9,7 @@
 #include "acme/primitive/string/adaptor.h"
 #include "acme/primitive/string/str.h"
 #include "acme_windows_common/cotaskptr.h"
+#include "acme_windows_common/hresult_exception.h"
 #include <Shlobj.h>
 
 
@@ -71,7 +72,26 @@ namespace acme_windows
    ::file::path acme_directory::home()
    {
 
-      return _get_known_folder(FOLDERID_Profile);
+      try
+      {
+
+         return _get_known_folder(FOLDERID_Profile);
+
+      }
+      catch(const ::exception & e)
+      { 
+
+         INFORMATION("_get_known_folder(FOLDERID_Profile) FAILED (1). \"" << e.m_strMessage << "\"");
+      
+      }
+      catch (...)
+      {
+
+         INFORMATION("_get_known_folder(FOLDERID_Profile) FAILED (2).");
+
+      }
+
+      return getenv("USERPROFILE");
 
    }
 
@@ -575,6 +595,8 @@ pacmedir->roaming();
       //::OpenProcessToken(::GetCurrentProcess(), TOKEN_QUERY | TOKEN_IMPERSONATE | TOKEN_DUPLICATE, &hToken);
 
       HRESULT hr = SHGetKnownFolderPath(kfid, 0, hToken, &pwszPath);
+
+      defer_throw_hresult(hr);
 
       return pwszPath.m_p;
 
