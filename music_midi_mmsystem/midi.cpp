@@ -66,7 +66,7 @@ namespace music
 
          //   string strEngine = device_engine(strDevice);
 
-         //   if (strEngine.compare_ci(m_strName) == 0)
+         //   if (strEngine.case_insensitive_order(m_strName) == 0)
          //   {
 
          //      return __new(sequence(this, strDevice));
@@ -419,7 +419,7 @@ namespace music
 
          //   string strEngine = device_engine(strDevice);
 
-         //   if (strEngine.compare_ci(m_strName) == 0)
+         //   if (strEngine.case_insensitive_order(m_strName) == 0)
          //   {
 
          //      //return __new(sequencer(psequence, strDevice));

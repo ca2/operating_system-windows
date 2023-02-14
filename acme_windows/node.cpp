@@ -11,6 +11,7 @@
 #include "acme/parallelization/install_mutex.h"
 #include "acme/platform/system.h"
 #include "acme/primitive/primitive/memory.h"
+#include "acme/primitive/string/__wide.h"
 #include "acme/primitive/string/adaptor.h"
 #include "acme/primitive/string/international.h"
 #include "acme/primitive/string/str.h"
@@ -30,21 +31,6 @@
 #endif
 
 
-void __wide_append(memory& memory, const scoped_string & scopedstr)
-{
-   wstring wstr(scopedstr);
-   memory.append(wstr.c_str(), wstr.length() * sizeof(wchar_t));
-
-}
-
-void __wide_append_null(memory& memory)
-{
-
-   wchar_t wch{};
-
-   memory.append(&wch, sizeof(wch));
-
-}
 
 CLASS_DECL_ACME_WINDOWS void call_async(const scoped_string & strPath, const scoped_string & strParam, const scoped_string & strDir, ::e_display edisplay, bool bPrivileged, unsigned int * puiPid);
 
@@ -2748,9 +2734,21 @@ namespace acme_windows
    void node::open_url(const ::string & strUrl)
    {
 
+//#ifdef DEBUG
+//
+//      ::string_array straOutput;
+//
+//      int iExitCode = 0;
+//
+//      command_system(straOutput, iExitCode, "\"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\" \"" + strUrl + "\" --auto-open-devtools-for-tabs");
+//
+//#else
+
       wstring wstrUrl(strUrl);
 
       ::ShellExecuteW(nullptr, L"open", wstrUrl, nullptr, nullptr, SW_SHOWNORMAL);
+
+//#endif
 
    }
 

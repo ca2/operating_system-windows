@@ -11,6 +11,21 @@ namespace draw2d_gdiplus
 {
 
 
+   draw2d::private_font::private_font()
+   {
+
+
+   }
+
+
+   draw2d::private_font::~private_font()
+   {
+
+
+
+   }
+
+
    draw2d::draw2d()
    {
       

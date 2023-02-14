@@ -91,33 +91,33 @@ namespace apex_windows
          if (m_strVs == "2015")
          {
 
-            m_strVsTools = "140";
+            payload("vstools") = "140";
 
-            m_strSdk1 = "vc140";
+            payload("sdk1") = "vc140";
 
          }
          else if (m_strVs == "2017")
          {
 
-            m_strVsTools = "141";
+            payload("vstools") = "141";
 
-            m_strSdk1 = "vc141";
+            payload("sdk1") = "vc141";
 
          }
          else if (m_strVs == "2019")
          {
 
-            m_strVsTools = "142";
+            payload("vstools") = "142";
 
-            m_strSdk1 = "vc142";
+            payload("sdk1") = "vc142";
 
          }
          else if (m_strVs == "2022")
          {
 
-            m_strVsTools = "143";
+            payload("vstools") = "143";
 
-            m_strSdk1 = "vc143";
+            payload("sdk1") = "vc143";
 
          }
          else
@@ -190,7 +190,7 @@ namespace apex_windows
          catch (const ::e_status & estatus)
          {
 
-            output_debug_string("failed to setup visual studio environment " + as_string(estatus.as_i64()));
+            output_debug_string("failed to setup visual studio environment " + ::as_string(estatus.as_i64()));
 
          }
 
@@ -677,6 +677,98 @@ namespace apex_windows
          return strSource;
 
       }
+
+
+      void context::prepare_compilation_script(::string& str)
+      {
+
+
+         ::integration::context::prepare_compilation_script(str);
+
+         
+         str.find_replace("%VS_VARS%", m_strContext);
+         str.find_replace("%VS_VARS_PLAT2%", m_strPlat2);
+         str.find_replace("%STAGEPLATFORM%",m_strStagePlatform);
+         str.find_replace("%SDK1%",payload("sdk1").as_string());
+
+
+         // programming/compiler
+   //      str.find_replace("%VS_VARS%", m_strContext);
+   //      str.find_replace("%VS_VARS_PLAT2%", m_strPlat2);
+   //      str.find_replace("%PROJECT_DIR%", m_pathProjectDir);
+   //      str.find_replace("%SDK1%", m_strSdk1);
+
+
+   // script_compiler cl
+   //      str.find_replace("%VS_VARS%",m_strContext);
+   //      str.find_replace("%VS_VARS_PLAT2%",m_strPlat2);
+   //      str.find_replace("%PLATFORM%",m_strPlatform);
+   //      str.find_replace("%STAGEPLATFORM%",m_strStagePlatform);
+   //      //      str.find_replace("%LIBPLATFORM%", m_strLibPlatform);
+   //      str.find_replace("%SDK1%",m_strSdk1);
+
+
+         
+
+      }
+
+
+      void context::prepare_linking_script(::string& str)
+      {
+
+         ::integration::context::prepare_linking_script(str);
+
+
+         str.find_replace("%VS_VARS%", m_strContext);
+         str.find_replace("%VS_VARS_PLAT2%", m_strPlat2);
+         str.find_replace("%STAGEPLATFORM%", m_strStagePlatform);
+         str.find_replace("%SDK1%", payload("sdk1").as_string());
+         str.find_replace("%LIBPLATFORM%", m_strLibPlatform);
+
+
+         //      str.find_replace("%VS_VARS%",m_strContext);
+         //      str.find_replace("%VS_VARS_PLAT2%",m_strPlat2);
+         //      str.find_replace("%PROJECT_DIR%", m_pathProjectDir);
+         //      str.find_replace("%PLATFORM%",m_strPlatform);
+         //      str.find_replace("%STAGEPLATFORM%",m_strStagePlatform);
+         //      //      str.find_replace("%LIBPLATFORM%", m_strLibPlatform);
+         //      str.find_replace("%SDK1%",m_strSdk1);
+
+
+         // script_compiler cl
+         //      str.find_replace("%VS_VARS%",m_strContext);
+         //      str.find_replace("%VS_VARS_PLAT2%",m_strPlat2);
+         //      str.find_replace("%PLATFORM%",m_strPlatform);
+         //      str.find_replace("%STAGEPLATFORM%",m_strStagePlatform);
+         //      //      str.find_replace("%LIBPLATFORM%", m_strLibPlatform);
+         //      str.find_replace("%SDK1%",m_strSdk1);
+
+
+         // script_compiler cl 2
+         //      str.find_replace("%VS_VARS%",m_strContext);
+         //      str.find_replace("%VS_VARS_PLAT2%",m_strPlat2);
+         //      str.find_replace("%PLATFORM%",m_strPlatform);
+         //      str.find_replace("%STAGEPLATFORM%",m_strStagePlatform);
+         //      //      str.find_replace("%LIBPLATFORM%", m_strLibPlatform);
+         //      str.find_replace("%SDK1%",m_strSdk1);
+
+
+         // script_compiler cl 3
+         //      str.find_replace("%PLATFORM%",m_strPlatform);
+         //      str.find_replace("%STAGEPLATFORM%",m_strStagePlatform);
+         //      str.find_replace("%LIBPLATFORM%",m_strLibPlatform);
+         //      str.find_replace("%SDK1%",m_strSdk1);
+
+
+         // script_compiler cl 4
+         //      str.find_replace("%PLATFORM%",m_strPlatform);
+         //      str.find_replace("%STAGEPLATFORM%",m_strStagePlatform);
+         //      str.find_replace("%LIBPLATFORM%",m_strLibPlatform);
+         //      str.find_replace("%SDK1%",m_strSdk1);
+
+      }
+
+
 
 
    } // namespace integration
