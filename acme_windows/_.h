@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 
 #include "acme/_.h"
@@ -14,7 +14,7 @@
 //#include <Winsvc.h>
 //
 
-#if defined(_ACME_WINDOWS_LIBRARY)
+#if defined(_acme_windows_project)
 #define CLASS_DECL_ACME_WINDOWS  CLASS_DECL_EXPORT
 #else
 #define CLASS_DECL_ACME_WINDOWS  CLASS_DECL_IMPORT

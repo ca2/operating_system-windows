@@ -1,13 +1,11 @@
-#pragma once
+﻿#pragma once
 
 
 #include "aura/_.h"
 #include "aura_windows/_.h"
 
 
-#ifdef _WINDOWING_WIN32_STATIC
-#define CLASS_DECL_WINDOWING_WIN32
-#elif defined(_WINDOWING_WIN32_LIBRARY)
+#if defined(_windowing_win32_project)
 #define CLASS_DECL_WINDOWING_WIN32  CLASS_DECL_EXPORT
 #else
 #define CLASS_DECL_WINDOWING_WIN32  CLASS_DECL_IMPORT

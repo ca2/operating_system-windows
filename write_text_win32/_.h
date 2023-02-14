@@ -1,4 +1,4 @@
-// Created by camilo 2021-02-10 <3TBS_!!
+﻿// Created by camilo 2021-02-10 <3TBS_!!
 #pragma once
 
 
@@ -6,9 +6,7 @@
 //#include "acme/operating_system.h"
 
 
-#ifdef _WINDOWING_WIN32_STATIC
-#define CLASS_DECL_WRITE_TEXT_WIN32
-#elif defined(_WRITE_TEXT_WIN32_LIBRARY)
+#if defined(_write_text_win32_project)
 #define CLASS_DECL_WRITE_TEXT_WIN32  CLASS_DECL_EXPORT
 #else
 #define CLASS_DECL_WRITE_TEXT_WIN32  CLASS_DECL_IMPORT

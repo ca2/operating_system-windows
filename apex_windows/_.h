@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 
 #include "apex/_.h"
@@ -6,7 +6,7 @@
 #include "apex_windows_common/_.h"
 
 
-#if defined(_APEX_WINDOWS_LIBRARY)
+#if defined(_apex_windows_project)
 #define CLASS_DECL_APEX_WINDOWS  CLASS_DECL_EXPORT
 #else
 #define CLASS_DECL_APEX_WINDOWS  CLASS_DECL_IMPORT
