@@ -2136,7 +2136,7 @@ pacmedir->create(pathTarget.folder()))
       for (; i < straFiles.get_size(); i++)
       {
          ::file::path & strFile = straFiles[i];
-         if (strFile.ext().compare_ci("zip") == 0)
+         if (strFile.ext().case_insensitive_order("zip") == 0)
          {
          }
          else if (dir().is(strFile))
@@ -3210,7 +3210,7 @@ Retry2:
          if(document.get_root()->child_at(0) != nullptr && document.get_root()->child_at(0)->get_name() == "error")
          {
          if(document.get_root()->child_at(0)->attr("code") != 34
-         && document.get_root()->child_at(0)->get_value().compare_ci("Status is a duplicate.") != 0)
+         && document.get_root()->child_at(0)->get_value().case_insensitive_order("Status is a duplicate.") != 0)
          {
 
          goto retry1;
@@ -3301,7 +3301,7 @@ Retry2:
          if(document.get_root()->child_at(0) != nullptr && document.get_root()->child_at(0)->get_name() == "error")
          {
          if(document.get_root()->child_at(0)->attr("code") != 34
-         && document.get_root()->child_at(0)->get_value().compare_ci("Status is a duplicate.") != 0)
+         && document.get_root()->child_at(0)->get_value().case_insensitive_order("Status is a duplicate.") != 0)
          {
 
          goto retry1;
@@ -3561,16 +3561,16 @@ retry1:
    string production::stage_platform(string strPlatform)
    {
 
-      if (strPlatform.compare_ci("x86") == 0
-            || strPlatform.compare_ci("Win32") == 0)
+      if (strPlatform.case_insensitive_order("x86") == 0
+            || strPlatform.case_insensitive_order("Win32") == 0)
       {
 
          return "Win32";
 
       }
 
-      if (strPlatform.compare_ci("x64") == 0
-            || strPlatform.compare_ci("amd64") == 0)
+      if (strPlatform.case_insensitive_order("x64") == 0
+            || strPlatform.case_insensitive_order("amd64") == 0)
       {
 
          return "x64";

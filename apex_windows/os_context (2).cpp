@@ -189,7 +189,7 @@ namespace windows
       get_all_processes(dwa);
       for(i32 i = 0; i < dwa.get_count(); i++)
       {
-         if(get_process_path(dwa[i]).compare_ci(lpszName) == 0)
+         if(get_process_path(dwa[i]).case_insensitive_order(lpszName) == 0)
          {
             dwPid = dwa[i];
             return true;
@@ -204,7 +204,7 @@ namespace windows
       get_all_processes(dwa);
       for(i32 i = 0; i < dwa.get_count(); i++)
       {
-         if(get_process_path(dwa[i]).title().compare_ci(lpszName) == 0)
+         if(get_process_path(dwa[i]).title().case_insensitive_order(lpszName) == 0)
          {
             dwPid = dwa[i];
             return true;
@@ -1216,7 +1216,7 @@ retry:
       ::application * papp = get_application();
 
       if(get_application()->m_strAppName.is_empty()
-            || get_application()->m_strAppName.compare_ci("bergedge") == 0
+            || get_application()->m_strAppName.case_insensitive_order("bergedge") == 0
             || !get_application()->is_serviceable())
          return "";
 
