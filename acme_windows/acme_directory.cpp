@@ -9,6 +9,9 @@
 #include "acme/primitive/string/adaptor.h"
 #include "acme/primitive/string/str.h"
 #include "acme_windows_common/cotaskptr.h"
+#include "acme_windows_common/hresult_exception.h"
+
+#include "acme/_operating_system.h"
 #include <Shlobj.h>
 
 
