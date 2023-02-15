@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 
 
@@ -33,8 +33,6 @@
 #define PLATFORM_COMMON_STRING "windows_common"
 
 #define DEFAULT_DIR_SEPARATOR "\\"
-
-
 
 #if !defined(WIN32)
 #define WIN32

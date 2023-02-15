@@ -2,6 +2,7 @@
 
 
 #include "aura/_.h"
+#undef USUAL_OPERATING_SYSTEM_SUPPRESSION
 #include "acme/_operating_system.h"
 #include <gdiplus.h>
 

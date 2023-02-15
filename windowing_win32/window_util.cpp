@@ -1,4 +1,5 @@
-#include "framework.h"
+﻿#include "framework.h"
+#undef USUAL_OPERATING_SYSTEM_SUPPRESSION
 #include "window_util.h"
 #include "aura/user/user/window_util.h"
 #include "aura/user/user/interaction.h"

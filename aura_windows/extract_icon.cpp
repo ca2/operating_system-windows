@@ -1,8 +1,8 @@
 ﻿#include "framework.h"
+
+
+#undef USUAL_OPERATING_SYSTEM_SUPPRESSION
 #include "node.h"
-
-
-#include "acme/_operating_system.h"
 
 
 //http://borland.public.cppbuilder.nativeapi.narkive.com/7OPcjHO5/loading-x48-icons-with-extracticonex

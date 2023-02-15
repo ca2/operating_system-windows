@@ -1,6 +1,5 @@
-#include "framework.h"
-
-
+﻿#include "framework.h"
+#undef USUAL_OPERATING_SYSTEM_SUPPRESSION
 #include "acme/_operating_system.h"
 
 

@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 
 #ifdef _WINDOWS_
@@ -8,6 +8,15 @@
 
 #define boolean windows_boolean
 #undef ERROR
+
+
+#define NOMINMAX
+
+
+#ifdef USUAL_OPERATING_SYSTEM_SUPPRESSION
+#define NOGDI
+#endif
+
 
 //
 //

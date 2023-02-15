@@ -1,4 +1,5 @@
 ﻿#include "framework.h"
+#undef USUAL_OPERATING_SYSTEM_SUPPRESSION
 #include "shell.h"
 #include "icon.h"
 #include "windowing.h"

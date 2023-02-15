@@ -1,4 +1,5 @@
 ﻿#include "framework.h"
+#undef USUAL_OPERATING_SYSTEM_SUPPRESSION
 #include "copydesk.h"
 #include "acme/exception/exception.h"
 #include "acme/parallelization/synchronous_lock.h"
