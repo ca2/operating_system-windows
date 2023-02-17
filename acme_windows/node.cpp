@@ -138,7 +138,7 @@ namespace acme_windows
 
             auto waitNow = minimum(timeWait - start.elapsed(), 1000_ms);
 
-            if (!waitNow)
+            if (waitNow <= 0_s)
             {
 
                break;
@@ -3470,22 +3470,19 @@ namespace acme_windows
    }
 
 
-   void node::operating_system_file_dialog(
-      void* poswindow,
-      const ::array < ::pair < ::string, ::string > >& filetypesParam,
-      const ::function < void(const ::file::path_array&) >& function,
-      bool save, bool multiple)
+   void node::operating_system_file_dialog(::operating_system_file_dialog * pdialogParameter)
    {
 
-      if (save && multiple)
+      if (pdialogParameter->m_bSave && pdialogParameter->m_bMultiple)
       {
 
          throw ::exception(error_bad_argument, "save and multiple must not both be true.");
 
       }
-      auto filetypes = filetypesParam;
 
-      main_asynchronous([poswindow, filetypes, function, save, multiple]
+      ::pointer < ::operating_system_file_dialog > pdialog(pdialogParameter);
+
+      main_asynchronous([pdialog]
          {
 
 
@@ -3521,25 +3518,25 @@ namespace acme_windows
 
       memory filter;
 
-      if (!save && filetypes.size() > 1) {
+      if (!pdialog->m_bSave && pdialog->m_filetypes.size() > 1) {
          __wide_append(filter, "Supported file types (");
-         for (::index i = 0; i < filetypes.size(); ++i) {
+         for (::index i = 0; i < pdialog->m_filetypes.size(); ++i) {
             __wide_append(filter, "*.");
-            __wide_append(filter, filetypes[i].m_element1.c_str());
-            if (i + 1 < filetypes.size())
+            __wide_append(filter, pdialog->m_filetypes[i].m_element1.c_str());
+            if (i + 1 < pdialog->m_filetypes.size())
                __wide_append(filter, ";");
          }
          __wide_append(filter, ")");
          __wide_append_null(filter);
-         for (::index i = 0; i < filetypes.size(); ++i) {
+         for (::index i = 0; i < pdialog->m_filetypes.size(); ++i) {
             __wide_append(filter, "*.");
-            __wide_append(filter, filetypes[i].m_element1.c_str());
-            if (i + 1 < filetypes.size())
+            __wide_append(filter, pdialog->m_filetypes[i].m_element1.c_str());
+            if (i + 1 < pdialog->m_filetypes.size())
                __wide_append(filter, ";");
          }
          __wide_append_null(filter);
       }
-      for (auto pair : filetypes) {
+      for (auto pair : pdialog->m_filetypes) {
          __wide_append(filter, pair.m_element2.c_str());
          __wide_append(filter, " (*.");
          __wide_append(filter, pair.m_element1.c_str());
@@ -3552,11 +3549,11 @@ namespace acme_windows
       __wide_append_null(filter);
       ofn.lpstrFilter = (LPWSTR)filter.data();
 
-      if (save) {
+      if (pdialog->m_bSave) {
          ofn.Flags = OFN_EXPLORER | OFN_PATHMUSTEXIST | OFN_OVERWRITEPROMPT;
          if (GetSaveFileNameW(&ofn) == FALSE)
          {
-            function({});
+            pdialog->m_function({});
 
             return;
 
@@ -3564,11 +3561,11 @@ namespace acme_windows
       }
       else {
          ofn.Flags = OFN_EXPLORER | OFN_PATHMUSTEXIST | OFN_FILEMUSTEXIST;
-         if (multiple)
+         if (pdialog->m_bMultiple)
             ofn.Flags |= OFN_ALLOWMULTISELECT;
          if (GetOpenFileNameW(&ofn) == FALSE)
          {
-            function({});
+            pdialog->m_function({});
             return;
          }
       }
@@ -3635,7 +3632,7 @@ namespace acme_windows
 
 #endif
 
-      function(patha);
+      pdialog->m_function(patha);
 
          });
 

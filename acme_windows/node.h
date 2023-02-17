@@ -53,7 +53,7 @@ namespace acme_windows
 
       //void initialize_integration();
 
-      void shell_open(const ::file::path& path, const ::string& strParams = "", const ::file::path& pathFolder = "") override;
+      void shell_open(const ::file::path & path, const ::string & strParams = "", const ::file::path & pathFolder = "") override;
 
 
       virtual bool win32_registry_windows_dark_mode_for_app();
@@ -67,13 +67,13 @@ namespace acme_windows
       void fetch_user_color() override;
 
 
-      virtual void install_crash_dump_reporting(const string& strModuleNameWithTheExeExtension) override;
+      virtual void install_crash_dump_reporting(const string & strModuleNameWithTheExeExtension) override;
 
 
 
       void reboot() override;
 
-      virtual platform_char** get_envp(wcsdup_array& a);
+      virtual platform_char ** get_envp(wcsdup_array & a);
 
 
       //virtual void datetime_to_filetime(file_time_t* pFileTime, const ::earth::time& time) override;
@@ -88,44 +88,44 @@ namespace acme_windows
       virtual string audio_get_default_library_name() override;
 
 
-      void create_process(const ::string& pszCommandLine, u32* pprocessId) override;
+      void create_process(const ::string & pszCommandLine, u32 * pprocessId) override;
 
 
-      void run_silent(const ::string& strFunct, const ::string& strstrParams) override;
+      void run_silent(const ::string & strFunct, const ::string & strstrParams) override;
 
 
-      bool process_modules(string_array& stra, u32 processID) override;
+      bool process_modules(string_array & stra, u32 processID) override;
 
 
-      bool load_modules_diff(string_array& straOld, string_array& straNew, const ::string& pszExceptDir) override;
+      bool load_modules_diff(string_array & straOld, string_array & straNew, const ::string & pszExceptDir) override;
 
 
-      atom_array module_path_get_pid(const ::string& pszModulePath, bool bModuleNameIsPropertyFormatted) override;
+      atom_array module_path_get_pid(const ::string & pszModulePath, bool bModuleNameIsPropertyFormatted) override;
 
       string module_path_from_pid(u32 pid) override;
 
-      bool is_shared_library_busy(u32 processid, const string_array& stra) override;
+      bool is_shared_library_busy(u32 processid, const string_array & stra) override;
 
-      bool is_shared_library_busy(const string_array& stra) override;
+      bool is_shared_library_busy(const string_array & stra) override;
 
-      bool process_contains_module(string& strImage, ::u32 processID, const ::string& pszLibrary) override;
+      bool process_contains_module(string & strImage, ::u32 processID, const ::string & pszLibrary) override;
 
-      void shared_library_process(dword_array& dwa, string_array& straProcesses, const ::string& pszLibrary) override;
+      void shared_library_process(dword_array & dwa, string_array & straProcesses, const ::string & pszLibrary) override;
 
       bool is_process_running(::u32 pid) override;
 
-      string get_environment_variable(const ::string& pszEnvironmentVariable) override;
+      string get_environment_variable(const ::string & pszEnvironmentVariable) override;
 
-      string expand_environment_variables(const string& str) override;
+      string expand_environment_variables(const string & str) override;
 
-      void set_environment_variable(const ::string& pszEnvironmentVariable, const ::string& pszValue) override;
+      void set_environment_variable(const ::string & pszEnvironmentVariable, const ::string & pszValue) override;
 
       //virtual ::u32       get_file_attributes(const ::string & pFileName);
-      virtual ::u32       get_current_directory(string& str);
-      virtual ::u32       get_temp_path(string& str);
-      virtual ::i32        reg_query_value(HKEY hkey, const ::string& pszSubKey, string& str);
-      virtual  HICON       extract_icon(HINSTANCE hInst, const ::string& pszExeFileName, ::u32 nIconIndex);
-      virtual  void        delete_file(const ::string& pFileName);
+      virtual ::u32       get_current_directory(string & str);
+      virtual ::u32       get_temp_path(string & str);
+      virtual ::i32        reg_query_value(HKEY hkey, const ::string & pszSubKey, string & str);
+      virtual  HICON       extract_icon(HINSTANCE hInst, const ::string & pszExeFileName, ::u32 nIconIndex);
+      virtual  void        delete_file(const ::string & pFileName);
       //virtual  i32     get_menu_string(HMENU hMenu, ::u32 uDItem, string& str, ::u32 flags);
       //virtual  void        time_to_filetime(::matter* pobject, const ::earth::time& time, LPFILETIME pFileTime);
 
@@ -133,24 +133,24 @@ namespace acme_windows
       array <::serial::port_info> list_serial_ports() override;
 
       string get_user_language() override;
-      
-      
+
+
       ::pointer < security_attributes > get_application_exclusivity_security_attributes() override;
 
 
-      void register_spa_file_type(const ::string& strAppIdHandler) override;
+      void register_spa_file_type(const ::string & strAppIdHandler) override;
       void start_program_files_app_app_admin(string strPlatform, string strConfiguration) override;
 
 
-      void get_folder_path_from_user(::file::path& pathFolder) override;
+      void get_folder_path_from_user(::file::path & pathFolder) override;
 
 
-      void register_dll(const ::file::path& pathDll);
+      void register_dll(const ::file::path & pathDll);
 
 
       //::string expand_environment_variables(const ::string & str) override;
 
-      virtual ::wstring expand_environment_variables(const ::wstring& wstr);
+      virtual ::wstring expand_environment_variables(const ::wstring & wstr);
 
       void implement(::pointer<::acme::node> & pnode, ::pointer<::acme::system> & psystem)override;
 
@@ -161,7 +161,7 @@ namespace acme_windows
       void on_start_system() override;
 
 
-      void create_app_shortcut(::acme::application* papp) override;
+      void create_app_shortcut(::acme::application * papp) override;
 
 
       //string get_local_mutex_name(const ::string& strAppId) override;
@@ -170,7 +170,7 @@ namespace acme_windows
       //string get_global_id_mutex_name(const ::string& strAppId, const ::string& strId) override;
 
 
-      void open_url(const ::string& strUrl) override;
+      void open_url(const ::string & strUrl) override;
       void shell_launch(const ::string & strUrl) override;
 
 
@@ -191,34 +191,30 @@ namespace acme_windows
 
 
       void launch_application(::particle * pparticle, const ::string & strAppId, const ::string & strParams, int iBitCount) override;
- 
+
 
       //void shell_open(const ::file::path & path, const string & strParams = "", const ::file::path & pathFolder = {}) override;
       //void open_url(const ::string & strUrl) override; //
-      void command_system(string_array & straOutput, int & iExitCode, const scoped_string & str, enum_command_system ecommandsystem = e_command_system_none, const class time & timeTimeout = ::time::infinite(), ::particle * pparticleSynchronization = nullptr, ::file::file * pfileLog = nullptr) override;
+      void command_system(string_array & straOutput, int & iExitCode, const scoped_string & str, enum_command_system ecommandsystem = e_command_system_none, const class time & timeTimeout = ::time::infinity(), ::particle * pparticleSynchronization = nullptr, ::file::file * pfileLog = nullptr) override;
 
       void shell_execute_async(const scoped_string & strFile, const scoped_string & strParams) override;
-      void shell_execute_sync(const scoped_string & strFile, const scoped_string & strParams, const class time & timeTimeout = 1_minute) override; 
+      void shell_execute_sync(const scoped_string & strFile, const scoped_string & strParams, const class time & timeTimeout = 1_minute) override;
 
       void root_execute_async(const scoped_string & strFile, const scoped_string & strParams) override;
       void root_execute_sync(const scoped_string & strFile, const scoped_string & strParams, const class time & timeTimeout = 1_minute) override;
 
-               bool set_process_priority(::enum_priority epriority) override;
-                ::string get_command_line() override;
-             
-            i32 get_current_processor_index() override;
-             i32 get_current_process_maximum_affinity() override;
-             
-              //i32 get_current_process_affinity_order() override;
-               ::u64 translate_processor_affinity(::i32 i) override;
-               void operating_system_file_dialog(
-                  void* poswindow,
-                  const ::array < ::pair < ::string, ::string > >& filetypesParam,
-                  const ::function < void(const ::file::path_array&) >& function,
-                  bool save, bool multiple) override;
+      bool set_process_priority(::enum_priority epriority) override;
+      ::string get_command_line() override;
 
-               //::file::path library_file_name(const ::scoped_string & scopedstr) override;
-    
+      i32 get_current_processor_index() override;
+      i32 get_current_process_maximum_affinity() override;
+
+      //i32 get_current_process_affinity_order() override;
+      ::u64 translate_processor_affinity(::i32 i) override;
+      void operating_system_file_dialog(::operating_system_file_dialog * pdialog) override;
+
+      //::file::path library_file_name(const ::scoped_string & scopedstr) override;
+
    };
 
 
