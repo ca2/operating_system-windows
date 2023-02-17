@@ -189,7 +189,6 @@
     </Midl>
     <ClCompile>
       <AdditionalOptions>/bigobj -Zm512</AdditionalOptions>
-      <PreprocessorDefinitions>_APEX_WINDOWS_LIBRARY;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <PrecompiledHeader>Use</PrecompiledHeader>
@@ -345,7 +344,6 @@
     <ClCompile>
       <AdditionalOptions>/bigobj -Zm512</AdditionalOptions>
       <Optimization>MaxSpeed</Optimization>
-      <PreprocessorDefinitions>_APEX_WINDOWS_LIBRARY;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>false</MinimalRebuild>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
@@ -503,7 +501,6 @@
     </Midl>
     <ClCompile>
       <AdditionalOptions>/bigobj -Zm512</AdditionalOptions>
-      <PreprocessorDefinitions>_APEX_WINDOWS_LIBRARY;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <PrecompiledHeader>Use</PrecompiledHeader>
@@ -654,7 +651,6 @@
     <ClCompile>
       <AdditionalOptions>/bigobj -Zm512</AdditionalOptions>
       <Optimization>MaxSpeed</Optimization>
-      <PreprocessorDefinitions>_APEX_WINDOWS_LIBRARY;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>false</MinimalRebuild>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
