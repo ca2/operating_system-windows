@@ -80,7 +80,8 @@ namespace acme_windows
          return _get_known_folder(FOLDERID_Profile);
 
       }
-      catch(const ::exception & e)
+      //catch(const ::exception & e)
+      catch (const ::exception &)
       { 
       
       }
