@@ -7,7 +7,7 @@
 //#include <mmeapi.h>
 
 
-#if defined(_MUSIC_MIDI_MMSYSTEM_LIBRARY)
+#if defined(_music_midi_mmsystem_project)
 #define CLASS_DECL_MUSIC_MIDI_MMSYSTEM  CLASS_DECL_EXPORT
 #else
 #define CLASS_DECL_MUSIC_MIDI_MMSYSTEM  CLASS_DECL_IMPORT

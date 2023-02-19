@@ -9,7 +9,7 @@
 
 
 
-#if defined(_MULTIMEDIA_XAUDIO7_LIBRARY)
+#if defined(_multimedia_xaudio7_project)
    #define CLASS_DECL_MULTIMEDIA_XAUDIO7  CLASS_DECL_EXPORT
 #else
    #define  CLASS_DECL_MULTIMEDIA_XAUDIO7  CLASS_DECL_IMPORT

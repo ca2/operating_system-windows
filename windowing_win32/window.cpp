@@ -1,6 +1,6 @@
 ﻿// created by Camilo 2021-01-31 04:56 BRT <3CamiloSasukeThomasBorregaardSoerensen
 #include "framework.h"
-#undef USUAL_OPERATING_SYSTEM_SUPPRESSION
+#undef USUAL_OPERATING_SYSTEM_SUPPRESSIONS
 #include "window.h"
 #include "windowing.h"
 #include "icon.h"

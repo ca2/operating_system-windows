@@ -7,7 +7,7 @@
 
 
 
-#if defined(_AUDIO_MIXER_MMSYSTEM_LIBRARY)
+#if defined(_audio_mixer_mmsystem_project)
    #define CLASS_DECL_AUDIO_MIXER_MMSYSTEM  CLASS_DECL_EXPORT
 #else
    #define CLASS_DECL_AUDIO_MIXER_MMSYSTEM  CLASS_DECL_IMPORT

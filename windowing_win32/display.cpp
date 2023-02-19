@@ -1,7 +1,7 @@
 ﻿// created by Camilo <3CamiloSasukeThomasBorregaardSoerensen  - Honoring Thomas Borregaard Sørensen MY ONLY LORD
 // recreated by Camilo 2021-02-02 20:55
 #include "framework.h"
-#undef USUAL_OPERATING_SYSTEM_SUPPRESSION
+#undef USUAL_OPERATING_SYSTEM_SUPPRESSIONS
 #include "display.h"
 #include "monitor.h"
 #include "windowing.h"
@@ -95,7 +95,7 @@ namespace windowing_win32
 
       auto pmonitor = get_monitor(iMainMonitor);
 
-      pmonitor->get_monitor_rectangle(rectangle);
+      rectangle = pmonitor->monitor_rectangle();
 
       return iMainMonitor;
 
@@ -263,7 +263,7 @@ namespace windowing_win32
 
       }
 
-      pmonitor->get_workspace_rectangle(rectangle);
+      rectangle = pmonitor->workspace_rectangle();
 
       return iMainWkspace;
 
@@ -502,7 +502,7 @@ namespace windowing_win32
 
          auto pmonitor = get_monitor(iMonitor);
 
-         pmonitor->get_monitor_rectangle(rectangleMonitor);
+         rectangleMonitor = pmonitor->monitor_rectangle();
 
          //if (pmonitor->get_monitor_rectangle(rectangleMonitor))
          //{
@@ -859,7 +859,7 @@ namespace windowing_win32
 
          auto pmonitor = get_monitor(iMonitor);
 
-         pmonitor->get_monitor_rectangle(rectangleMonitor);
+         rectangleMonitor = pmonitor->monitor_rectangle();
 
          //if ()
          {
@@ -942,7 +942,7 @@ namespace windowing_win32
 
          auto pmonitor = get_monitor(iWorkspace);
 
-         pmonitor->get_workspace_rectangle(rectangleMonitor);
+         rectangleMonitor = pmonitor->workspace_rectangle();
 
          //if ()
          {

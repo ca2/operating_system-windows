@@ -1,5 +1,5 @@
 ﻿#include "framework.h"
-#undef USUAL_OPERATING_SYSTEM_SUPPRESSION
+#undef USUAL_OPERATING_SYSTEM_SUPPRESSIONS
 #include "node.h"
 #include "acme_directory.h"
 #include "acme_file.h"
