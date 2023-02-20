@@ -1,1 +1,1 @@
-operating-system-multimedia/multimedia_mmsystem
+operating-system-windows/multimedia_mmsystem
