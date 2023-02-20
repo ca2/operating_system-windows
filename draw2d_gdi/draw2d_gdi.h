@@ -5,7 +5,7 @@
 
 
 
-#ifdef _DRAW2D_GDI_LIBRARY
+#if defined(_draw2d_gdi_project)
 #define CLASS_DECL_DRAW2D_GDI  CLASS_DECL_EXPORT
 #else
 #define CLASS_DECL_DRAW2D_GDI  CLASS_DECL_IMPORT

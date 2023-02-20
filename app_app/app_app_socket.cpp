@@ -46,7 +46,7 @@ namespace user_service
       for (auto & str : stra)
       {
 
-         if (strReferer.begins_ci(str))
+         if (strReferer.case_insensitive_begins(str))
          {
 
             strPrefix = str;
@@ -78,7 +78,7 @@ namespace user_service
 
             string strRequest = m_request.m_strRequestUri;
 
-            strRequest.begins_eat_ci(strStart);
+            strRequest.case_insensitive_begins_eat(strStart);
 
             strsize iFind = strRequest.case_insensitive_find('?');
 

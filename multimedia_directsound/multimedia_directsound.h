@@ -7,7 +7,7 @@
 
 
 
-#if defined(_MULTIMEDIA_DIRECTSOUND_LIBRARY)
+#if defined(_multimedia_directsound_project)
    #define CLASS_DECL_MULTIMEDIA_DIRECTSOUND  CLASS_DECL_EXPORT
 #else
    #define  CLASS_DECL_MULTIMEDIA_DIRECTSOUND  CLASS_DECL_IMPORT

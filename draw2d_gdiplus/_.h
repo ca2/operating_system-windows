@@ -1,15 +1,14 @@
-#pragma once
+﻿#pragma once
 
 
 #include "aura/_.h"
+#undef USUAL_OPERATING_SYSTEM_SUPPRESSIONS
 #include "acme/_operating_system.h"
 #include <gdiplus.h>
 
 
 
-#ifdef _DRAW2D_GDIPLUS_STATIC
-#define CLASS_DECL_DRAW2D_GDIPLUS
-#elif defined(_DRAW2D_GDIPLUS_LIBRARY)
+#if defined(_draw2d_gdiplus_project)
 #define CLASS_DECL_DRAW2D_GDIPLUS  CLASS_DECL_EXPORT
 #else
 #define CLASS_DECL_DRAW2D_GDIPLUS  CLASS_DECL_IMPORT

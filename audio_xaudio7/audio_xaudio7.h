@@ -5,7 +5,7 @@
 
 
 
-#if defined(_AUDIO_XAUDIO7_LIBRARY)
+#if defined(_audio_xaudio7_project)
    #define CLASS_DECL_AUDIO_XAUDIO7  CLASS_DECL_EXPORT
 #else
 #define  CLASS_DECL_AUDIO_XAUDIO7  CLASS_DECL_IMPORT

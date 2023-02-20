@@ -464,13 +464,13 @@ CLASS_DECL_ACME string defer_solve_relative(const scoped_string & strRelative, c
       return "";
    if (strAbsolute.is_empty())
       return solve_relative(strRelative);
-   if (strRelative.begins_ci("http://"))
+   if (strRelative.case_insensitive_begins("http://"))
       return solve_relative(strRelative);
-   if (strRelative.begins_ci("https://"))
+   if (strRelative.case_insensitive_begins("https://"))
       return solve_relative(strRelative);
-   if (strRelative.begins_ci("ftp://"))
+   if (strRelative.case_insensitive_begins("ftp://"))
       return solve_relative(strRelative);
-   if (strRelative.begins_ci("ext://"))
+   if (strRelative.case_insensitive_begins("ext://"))
       return solve_relative(strRelative);
    if (strRelative.begins("/"))
       return solve_relative(strRelative);
