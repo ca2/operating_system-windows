@@ -7,6 +7,8 @@
 #include "process.h"
 #include "exclusive.h"
 #include "acme/exception/exception.h"
+#include "acme/filesystem/filesystem/file_dialog.h"
+#include "acme/filesystem/filesystem/folder_dialog.h"
 #include "acme/operating_system/process.h"
 #include "acme/parallelization/synchronous_lock.h"
 #include "acme/parallelization/install_mutex.h"
@@ -16,6 +18,8 @@
 #include "acme/primitive/string/adaptor.h"
 #include "acme/primitive/string/international.h"
 #include "acme/primitive/string/str.h"
+#include "acme_windows_common/comptr.h"
+#include "acme_windows_common/cotaskptr.h"
 #include "acme_windows_common/security_attributes.h"
 
 
@@ -30,6 +34,13 @@
 //#  include <windows.h>
 #include <commdlg.h>
 #endif
+
+//#include <shobjidl.h>
+//#include <ShellApi.h>
+//#include <Security.h>
+//#include <wincred.h>
+#include <shobjidl_core.h>
+
 
 
 
@@ -3470,7 +3481,7 @@ namespace acme_windows
    }
 
 
-   void node::operating_system_file_dialog(::operating_system_file_dialog * pdialogParameter)
+   void node::_node_file_dialog(::file::file_dialog * pdialogParameter)
    {
 
       if (pdialogParameter->m_bSave && pdialogParameter->m_bMultiple)
@@ -3480,7 +3491,7 @@ namespace acme_windows
 
       }
 
-      ::pointer < ::operating_system_file_dialog > pdialog(pdialogParameter);
+      ::pointer < ::file::file_dialog > pdialog(pdialogParameter);
 
       main_asynchronous([pdialog]
          {
@@ -3489,19 +3500,6 @@ namespace acme_windows
             ::file::path_array patha;
 
 
-#if defined(EMSCRIPTEN)
-
-      throw std::runtime_error("Opening files is not supported when NanoGUI is compiled via Emscripten");
-
-#elif defined(WINDOWS_DESKTOP)
-
-      //array <  wstring_pair> wfiletypes;
-
-      //for (auto & p : filetypes)
-      //{
-      //   wfiletypes.add(wstring_pair( wstring(p.first.c_str()), wstring(p.second.c_str()) ));
-
-      //}
 
       OPENFILENAME ofn;
       ZeroMemory(&ofn, sizeof(OPENFILENAME));
@@ -3586,59 +3584,151 @@ namespace acme_windows
       //   result.erase(begin(result));
       //}
 
-#elif defined(LINUX)
-
-
-      throw ::exception(todo);
-
-      //         static const int FILE_DIALOG_MAX_BUFFER = 16384;
-      //
-      //         char buffer[FILE_DIALOG_MAX_BUFFER];
-      //
-      //         buffer[0] = '\0';
-      //
-      //         std::string cmd = "zenity --file-selection ";
-      //         // The safest separator for multiple selected paths is /, since / can never occur
-      //         // in file names. Only where two paths are concatenated will there be two / following
-      //         // each other.
-      //         if (multiple)
-      //            cmd += "--multiple --separator=\"/\" ";
-      //         if (save)
-      //            cmd += "--save ";
-      //         cmd += "--file-filter=\"";
-      //         for (auto pair : filetypes)
-      //            cmd += "\"*." + pair.first + "\" ";
-      //         cmd += "\"";
-      //         FILE * output = popen(cmd.c_str(), "r");
-      //         if (output == nullptr)
-      //            throw std::runtime_error("popen() failed -- could not launch zenity!");
-      //         while (fgets(buffer, FILE_DIALOG_MAX_BUFFER, output) != NULL)
-      //            ;
-      //         pclose(output);
-      //         std::string paths(buffer);
-      //         paths.erase(std::remove(paths.begin(), paths.end(), '\n'), paths.end());
-      //
-      //         while (!paths.empty()) {
-      //            size_t end = paths.find("//");
-      //            if (end == std::string::npos) {
-      //               result.emplace_back(paths);
-      //               paths = "";
-      //            }
-      //            else {
-      //               result.emplace_back(paths.substr(0, end));
-      //               paths = paths.substr(end + 1);
-      //            }
-      //         }
-
-#endif
-
-      pdialog->m_function(patha);
+//#elif defined(LINUX)
+//
+//
+//      throw ::exception(todo);
+//
+//      //         static const int FILE_DIALOG_MAX_BUFFER = 16384;
+//      //
+//      //         char buffer[FILE_DIALOG_MAX_BUFFER];
+//      //
+//      //         buffer[0] = '\0';
+//      //
+//      //         std::string cmd = "zenity --file-selection ";
+//      //         // The safest separator for multiple selected paths is /, since / can never occur
+//      //         // in file names. Only where two paths are concatenated will there be two / following
+//      //         // each other.
+//      //         if (multiple)
+//      //            cmd += "--multiple --separator=\"/\" ";
+//      //         if (save)
+//      //            cmd += "--save ";
+//      //         cmd += "--file-filter=\"";
+//      //         for (auto pair : filetypes)
+//      //            cmd += "\"*." + pair.first + "\" ";
+//      //         cmd += "\"";
+//      //         FILE * output = popen(cmd.c_str(), "r");
+//      //         if (output == nullptr)
+//      //            throw std::runtime_error("popen() failed -- could not launch zenity!");
+//      //         while (fgets(buffer, FILE_DIALOG_MAX_BUFFER, output) != NULL)
+//      //            ;
+//      //         pclose(output);
+//      //         std::string paths(buffer);
+//      //         paths.erase(std::remove(paths.begin(), paths.end(), '\n'), paths.end());
+//      //
+//      //         while (!paths.empty()) {
+//      //            size_t end = paths.find("//");
+//      //            if (end == std::string::npos) {
+//      //               result.emplace_back(paths);
+//      //               paths = "";
+//      //            }
+//      //            else {
+//      //               result.emplace_back(paths.substr(0, end));
+//      //               paths = paths.substr(end + 1);
+//      //            }
+//      //         }
+//
+//#endif
+      pdialog->m_patha = patha;
+      pdialog->m_function(pdialog);
 
          });
 
    }
 
-//#endif
+
+   void node::_node_folder_dialog(::file::folder_dialog* pdialogParameter)
+   {
+
+      ::pointer < ::file::folder_dialog > pdialog(pdialogParameter);
+
+      main_asynchronous([this, pdialog]
+         {
+
+
+            ::file::path_array patha;
+
+            bool bOk = false;
+
+            acmenode()->defer_co_initialize_ex(false);
+
+            comptr < IFileOpenDialog > pfileopen;
+
+            // Create the FileOpenDialog object.
+            HRESULT hr = pfileopen.CoCreateInstance(CLSID_FileOpenDialog, nullptr, CLSCTX_ALL);
+
+            if (SUCCEEDED(hr))
+            {
+
+               if (pdialog->m_path.has_char())
+               {
+
+                  wstring wstr(pdialog->m_path);
+
+                  comptr < IShellItem > psi;
+
+                  hr = SHCreateItemFromParsingName(wstr, nullptr, IID_IShellItem, (void**)&psi);
+
+                  if (SUCCEEDED(hr))
+                  {
+
+                     pfileopen->SetFolder(psi);
+
+                  }
+
+               }
+
+               pfileopen->SetOptions(FOS_PICKFOLDERS);
+
+               // Show the Open dialog box.
+               hr = pfileopen->Show(nullptr);
+
+               if (SUCCEEDED(hr))
+               {
+
+                  // Get the file name from the dialog box.
+                  comptr < IShellItem > pitem;
+
+                  hr = pfileopen->GetResult(&pitem);
+
+                  if (SUCCEEDED(hr))
+                  {
+
+                     ::cotaskptr < PWSTR > pwszFilePath;
+
+                     hr = pitem->GetDisplayName(SIGDN_FILESYSPATH, &pwszFilePath);
+
+                     // Display the file name to the user.
+                     if (SUCCEEDED(hr))
+                     {
+
+                        pdialog->m_path = ::string((PWSTR)pwszFilePath);
+
+                        pdialog->m_function(::transfer(pdialog));
+
+                        bOk = true;
+
+                     }
+
+                  }
+
+               }
+
+            }
+
+
+            if (!bOk)
+            {
+
+               pdialog->m_function({});
+
+            }
+
+
+
+         });
+
+   }
 
 
 } // namespace acme_windows

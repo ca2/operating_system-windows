@@ -805,9 +805,9 @@ namespace apex_windows
 
             strCommand = range.consume_quoted_value();
 
-            ::str::consume_spaces(range);
+            range.consume_spaces();
 
-            ::str::consume(range, "\"%L\"");
+            range.consume("\"%L\"");
 
             strParam = range;
 
@@ -3555,668 +3555,668 @@ repeat:
    }
 
 
-   void os_context::browse_file_open(property_set & set)
-   {
+   //void os_context::browse_file_open(property_set & set)
+   //{
 
-      //::user::interaction* pinteraction = nullptr;
-      //
-      //if (::is_set(puiOwner))
-      //{
+   //   //::user::interaction* pinteraction = nullptr;
+   //   //
+   //   //if (::is_set(puiOwner))
+   //   //{
 
-      //   pinteraction = puiOwner->get_wnd();
+   //   //   pinteraction = puiOwner->get_wnd();
 
-      //}
+   //   //}
 
-      bool bOk = false;
+   //   bool bOk = false;
 
-      //try
-      //{
+   //   //try
+   //   //{
 
-      //   if (::is_set(pinteraction))
-      //   {
+   //   //   if (::is_set(pinteraction))
+   //   //   {
 
-      //      pinteraction->enable_window(false);
+   //   //      pinteraction->enable_window(false);
 
-      //   }
+   //   //   }
 
-      //}
-      //catch (...)
-      //{
+   //   //}
+   //   //catch (...)
+   //   //{
 
 
-      //}
+   //   //}
 
-      //try
-      //{
+   //   //try
+   //   //{
 
-         bool bDisableOleDDE = true;
+   //      bool bDisableOleDDE = true;
 
-         acmenode()->defer_co_initialize_ex(false, bDisableOleDDE);
+   //      acmenode()->defer_co_initialize_ex(false, bDisableOleDDE);
 
-         comptr < IFileOpenDialog > pfileopen;
+   //      comptr < IFileOpenDialog > pfileopen;
 
-         HRESULT hr = pfileopen.CoCreateInstance(CLSID_FileOpenDialog, nullptr, CLSCTX_ALL);
+   //      HRESULT hr = pfileopen.CoCreateInstance(CLSID_FileOpenDialog, nullptr, CLSCTX_ALL);
 
-         if (SUCCEEDED(hr))
-         {
+   //      if (SUCCEEDED(hr))
+   //      {
 
-            FILEOPENDIALOGOPTIONS options = 0;
+   //         FILEOPENDIALOGOPTIONS options = 0;
 
-            hr = pfileopen->GetOptions(&options);
+   //         hr = pfileopen->GetOptions(&options);
 
-            array < COMDLG_FILTERSPEC > rgSpec;
+   //         array < COMDLG_FILTERSPEC > rgSpec;
 
-            array < wstring > wstraSpecs;
+   //         array < wstring > wstraSpecs;
 
-            ::generic::container::copy(wstraSpecs, set["file_filter_specs"].stra());
+   //         ::generic::container::copy(wstraSpecs, set["file_filter_specs"].stra());
 
-            array < wstring > wstraNames;
+   //         array < wstring > wstraNames;
 
-            ::generic::container::copy(wstraNames, set["file_filter_names"].stra());
+   //         ::generic::container::copy(wstraNames, set["file_filter_names"].stra());
 
-            rgSpec.set_size(minimum(wstraSpecs.get_size(), wstraNames.get_size()));
+   //         rgSpec.set_size(minimum(wstraSpecs.get_size(), wstraNames.get_size()));
 
-            for (index i = 0; i < rgSpec.get_size(); i++)
-            {
+   //         for (index i = 0; i < rgSpec.get_size(); i++)
+   //         {
 
-               rgSpec[i].pszName = wstraNames[i];
+   //            rgSpec[i].pszName = wstraNames[i];
 
-               rgSpec[i].pszSpec = wstraSpecs[i];
+   //            rgSpec[i].pszSpec = wstraSpecs[i];
 
-               //{ L"CSV files", L"*.csv" },
-               //{ L"Text files", L"*.txt" },
-               //{ L"All files", L"*.*" },
+   //            //{ L"CSV files", L"*.csv" },
+   //            //{ L"Text files", L"*.txt" },
+   //            //{ L"All files", L"*.*" },
 
-            }
+   //         }
 
-            if (rgSpec.get_size() > 0)
-            {
+   //         if (rgSpec.get_size() > 0)
+   //         {
 
-               pfileopen->SetFileTypes(::u32(rgSpec.get_size()), rgSpec.m_begin);
+   //            pfileopen->SetFileTypes(::u32(rgSpec.get_size()), rgSpec.m_begin);
 
-            }
+   //         }
 
-            if (set["allow_multi_select"].is_true())
-            {
+   //         if (set["allow_multi_select"].is_true())
+   //         {
 
-               options |= FOS_ALLOWMULTISELECT;
+   //            options |= FOS_ALLOWMULTISELECT;
 
-            }
+   //         }
 
-            hr = pfileopen->SetOptions(options);
+   //         hr = pfileopen->SetOptions(options);
 
-            if (set["default_file_extension"].length() > 0)
-            {
+   //         if (set["default_file_extension"].length() > 0)
+   //         {
 
-               pfileopen->SetDefaultExtension(wstring(set["default_file_extension"]));
+   //            pfileopen->SetDefaultExtension(wstring(set["default_file_extension"]));
 
-            }
+   //         }
 
-            if (set["file_name"].length() > 0)
-            {
+   //         if (set["file_name"].length() > 0)
+   //         {
 
-               pfileopen->SetFileName(wstring(set["file_name"]));
+   //            pfileopen->SetFileName(wstring(set["file_name"]));
 
-            }
+   //         }
 
-            if (set["folder"].length() > 0)
-            {
+   //         if (set["folder"].length() > 0)
+   //         {
 
-               wstring wstr(set["folder"]);
+   //            wstring wstr(set["folder"]);
 
-               comptr < IShellItem > psi;
+   //            comptr < IShellItem > psi;
 
-               hr = SHCreateItemFromParsingName(wstr, nullptr, IID_IShellItem, (void **)&psi);
+   //            hr = SHCreateItemFromParsingName(wstr, nullptr, IID_IShellItem, (void **)&psi);
 
-               if (SUCCEEDED(hr))
-               {
+   //            if (SUCCEEDED(hr))
+   //            {
 
-                  pfileopen->SetFolder(psi);
+   //               pfileopen->SetFolder(psi);
 
-               }
+   //            }
 
-            }
+   //         }
 
-            //HWND hwndOwner = nullptr;
+   //         //HWND hwndOwner = nullptr;
 
-            //if (::is_set(pinteraction))
-            //{
+   //         //if (::is_set(pinteraction))
+   //         //{
 
-            //   hwndOwner = pinteraction->get_handle();
+   //         //   hwndOwner = pinteraction->get_handle();
 
-            //}
+   //         //}
 
-            // Show the Save dialog box.
-            //hr = pfileopen->Show(hwndOwner);
-            hr = pfileopen->Show(nullptr);
+   //         // Show the Save dialog box.
+   //         //hr = pfileopen->Show(hwndOwner);
+   //         hr = pfileopen->Show(nullptr);
 
-            if (SUCCEEDED(hr))
-            {
+   //         if (SUCCEEDED(hr))
+   //         {
 
-               if (options & FOS_ALLOWMULTISELECT)
-               {
+   //            if (options & FOS_ALLOWMULTISELECT)
+   //            {
 
-                  comptr < IShellItemArray > pitema;
+   //               comptr < IShellItemArray > pitema;
 
-                  hr = pfileopen->GetResults(&pitema);
+   //               hr = pfileopen->GetResults(&pitema);
 
-                  if (SUCCEEDED(hr))
-                  {
+   //               if (SUCCEEDED(hr))
+   //               {
 
-                     DWORD dwNumItems = 0; // number of items in multiple selection
+   //                  DWORD dwNumItems = 0; // number of items in multiple selection
 
-                     hr = pitema->GetCount(&dwNumItems);  // get number of selected items
+   //                  hr = pitema->GetCount(&dwNumItems);  // get number of selected items
 
-                     auto & straDest = set["file_name"].string_array_reference();
+   //                  auto & straDest = set["file_name"].string_array_reference();
 
-                     // Loop through IShellItemArray and construct string for display
-                     for (u32 i = 0; i < dwNumItems; i++)
-                     {
-                        comptr < IShellItem > pitem;
+   //                  // Loop through IShellItemArray and construct string for display
+   //                  for (u32 i = 0; i < dwNumItems; i++)
+   //                  {
+   //                     comptr < IShellItem > pitem;
 
-                        hr = pitema->GetItemAt(i, &pitem); // get a selected item from the IShellItemArray
+   //                     hr = pitema->GetItemAt(i, &pitem); // get a selected item from the IShellItemArray
 
-                        if (SUCCEEDED(hr))
-                        {
+   //                     if (SUCCEEDED(hr))
+   //                     {
 
-                           ::cotaskptr < PWSTR > pwszFilePath;
+   //                        ::cotaskptr < PWSTR > pwszFilePath;
 
-                           hr = pitem->GetDisplayName(SIGDN_FILESYSPATH, &pwszFilePath);
+   //                        hr = pitem->GetDisplayName(SIGDN_FILESYSPATH, &pwszFilePath);
 
-                           // Display the file name to the user.
-                           if (SUCCEEDED(hr))
-                           {
+   //                        // Display the file name to the user.
+   //                        if (SUCCEEDED(hr))
+   //                        {
 
-                              string strPath((PWSTR)pwszFilePath);
+   //                           string strPath((PWSTR)pwszFilePath);
 
-                              straDest.add(strPath);
+   //                           straDest.add(strPath);
 
-                              bOk = true;
+   //                           bOk = true;
 
-                           }
+   //                        }
 
-                        }
+   //                     }
 
-                     }
+   //                  }
 
-                  }
+   //               }
 
-               }
-               else
-               {
+   //            }
+   //            else
+   //            {
 
-                  // Get the file name from the dialog box.
-                  comptr < IShellItem > pitem;
+   //               // Get the file name from the dialog box.
+   //               comptr < IShellItem > pitem;
 
-                  hr = pfileopen->GetResult(&pitem);
+   //               hr = pfileopen->GetResult(&pitem);
 
-                  if (SUCCEEDED(hr))
-                  {
+   //               if (SUCCEEDED(hr))
+   //               {
 
-                     ::cotaskptr < PWSTR > pwszFilePath;
+   //                  ::cotaskptr < PWSTR > pwszFilePath;
 
-                     hr = pitem->GetDisplayName(SIGDN_FILESYSPATH, &pwszFilePath);
+   //                  hr = pitem->GetDisplayName(SIGDN_FILESYSPATH, &pwszFilePath);
 
-                     // Display the file name to the user.
-                     if (SUCCEEDED(hr))
-                     {
+   //                  // Display the file name to the user.
+   //                  if (SUCCEEDED(hr))
+   //                  {
 
-                        set["file_name"] = string((PWSTR)pwszFilePath);
+   //                     set["file_name"] = string((PWSTR)pwszFilePath);
 
-                        bOk = true;
+   //                     bOk = true;
 
-                     }
+   //                  }
 
-                  }
+   //               }
 
-               }
+   //            }
 
-            }
+   //         }
 
-         }
+   //      }
 
-      //}
-      //catch (...)
-      //{
+   //   //}
+   //   //catch (...)
+   //   //{
 
-      //}
+   //   //}
 
-      //try
-      //{
+   //   //try
+   //   //{
 
-      //   if (::is_set(pinteraction))
-      //   {
+   //   //   if (::is_set(pinteraction))
+   //   //   {
 
-      //      pinteraction->enable_window();
+   //   //      pinteraction->enable_window();
 
-      //      pinteraction->order_top();
+   //   //      pinteraction->order_top();
 
-      //      pinteraction->display(e_display_restored, e_activation_set_foreground);
+   //   //      pinteraction->display(e_display_restored, e_activation_set_foreground);
 
-      //      pinteraction->set_need_redraw();
+   //   //      pinteraction->set_need_redraw();
 
-      //      pinteraction->post_redraw();
+   //   //      pinteraction->post_redraw();
 
-      //   }
+   //   //   }
 
-      //}
-      //catch (...)
-      //{
+   //   //}
+   //   //catch (...)
+   //   //{
 
-      //}
+   //   //}
 
-      //return bOk;
+   //   //return bOk;
 
-   }
+   //}
 
 
-   void os_context::browse_file_save(property_set & set)
-   {
+   //void os_context::browse_file_save(property_set & set)
+   //{
 
-      //::user::interaction* pinteraction = puiOwner->get_wnd();
+   //   //::user::interaction* pinteraction = puiOwner->get_wnd();
 
-      bool bOk = false;
+   //   bool bOk = false;
 
-      //try
-      //{
+   //   //try
+   //   //{
 
-      //   pinteraction->enable_window(false);
+   //   //   pinteraction->enable_window(false);
 
-      //}
-      //catch (...)
-      //{
+   //   //}
+   //   //catch (...)
+   //   //{
 
-      //}
+   //   //}
 
-      //try
-      //{
+   //   //try
+   //   //{
 
-      acmenode()->defer_co_initialize_ex(false);
+   //   acmenode()->defer_co_initialize_ex(false);
 
-         comptr < IFileSaveDialog > pfilesave;
+   //      comptr < IFileSaveDialog > pfilesave;
 
-         // Create the FileSaveDialog object.
-         HRESULT hr = pfilesave.CoCreateInstance(CLSID_FileSaveDialog, nullptr, CLSCTX_ALL);
+   //      // Create the FileSaveDialog object.
+   //      HRESULT hr = pfilesave.CoCreateInstance(CLSID_FileSaveDialog, nullptr, CLSCTX_ALL);
 
-         if (SUCCEEDED(hr))
-         {
+   //      if (SUCCEEDED(hr))
+   //      {
 
-            //COMDLG_FILTERSPEC rgSpec[] =
-            //{
-            // { L"CSV files", L"*.csv" },
-            // { L"Text files", L"*.txt" },
-            // { L"All files", L"*.*" },
-            //};
+   //         //COMDLG_FILTERSPEC rgSpec[] =
+   //         //{
+   //         // { L"CSV files", L"*.csv" },
+   //         // { L"Text files", L"*.txt" },
+   //         // { L"All files", L"*.*" },
+   //         //};
 
-            //pFileSave->SetFileTypes(3, rgSpec);
+   //         //pFileSave->SetFileTypes(3, rgSpec);
 
 
 
-            //pFileSave->SetFileName(L"Twitter Automator Export");
+   //         //pFileSave->SetFileName(L"Twitter Automator Export");
 
-            array < COMDLG_FILTERSPEC > rgSpec;
+   //         array < COMDLG_FILTERSPEC > rgSpec;
 
-            array < wstring > wstraSpecs;
+   //         array < wstring > wstraSpecs;
 
-            ::generic::container::copy(wstraSpecs, set["file_filter_specs"].stra());
+   //         ::generic::container::copy(wstraSpecs, set["file_filter_specs"].stra());
 
-            array < wstring > wstraNames;
+   //         array < wstring > wstraNames;
 
-            ::generic::container::copy(wstraNames, set["file_filter_names"].stra());
+   //         ::generic::container::copy(wstraNames, set["file_filter_names"].stra());
 
-            rgSpec.set_size(minimum(wstraSpecs.get_size(), wstraNames.get_size()));
+   //         rgSpec.set_size(minimum(wstraSpecs.get_size(), wstraNames.get_size()));
 
-            for (index i = 0; i < rgSpec.get_size(); i++)
-            {
+   //         for (index i = 0; i < rgSpec.get_size(); i++)
+   //         {
 
-               rgSpec[i].pszName = wstraNames[i];
+   //            rgSpec[i].pszName = wstraNames[i];
 
-               rgSpec[i].pszSpec = wstraSpecs[i];
+   //            rgSpec[i].pszSpec = wstraSpecs[i];
 
-               //{ L"CSV files", L"*.csv" },
-               //{ L"Text files", L"*.txt" },
-               //{ L"All files", L"*.*" },
+   //            //{ L"CSV files", L"*.csv" },
+   //            //{ L"Text files", L"*.txt" },
+   //            //{ L"All files", L"*.*" },
 
-            }
+   //         }
 
-            if (rgSpec.get_size() > 0)
-            {
+   //         if (rgSpec.get_size() > 0)
+   //         {
 
-               pfilesave->SetFileTypes(::u32 (rgSpec.get_size()), rgSpec.m_begin);
+   //            pfilesave->SetFileTypes(::u32 (rgSpec.get_size()), rgSpec.m_begin);
 
-            }
+   //         }
 
-            if (set["default_file_extension"].length() > 0)
-            {
+   //         if (set["default_file_extension"].length() > 0)
+   //         {
 
-               pfilesave->SetDefaultExtension(wstring(set["default_file_extension"]));
+   //            pfilesave->SetDefaultExtension(wstring(set["default_file_extension"]));
 
-            }
+   //         }
 
-            if (set["file_name"].length() > 0)
-            {
+   //         if (set["file_name"].length() > 0)
+   //         {
 
-               pfilesave->SetFileName(wstring(set["file_name"]));
+   //            pfilesave->SetFileName(wstring(set["file_name"]));
 
-            }
+   //         }
 
-            if (set["folder"].length() > 0)
-            {
+   //         if (set["folder"].length() > 0)
+   //         {
 
-               wstring wstr(set["folder"]);
+   //            wstring wstr(set["folder"]);
 
-               comptr < IShellItem > psi;
+   //            comptr < IShellItem > psi;
 
-               hr = SHCreateItemFromParsingName(wstr, nullptr, IID_IShellItem, (void **)&psi);
+   //            hr = SHCreateItemFromParsingName(wstr, nullptr, IID_IShellItem, (void **)&psi);
 
-               if (SUCCEEDED(hr))
-               {
+   //            if (SUCCEEDED(hr))
+   //            {
 
-                  pfilesave->SetFolder(psi);
+   //               pfilesave->SetFolder(psi);
 
-               }
+   //            }
 
-            }
+   //         }
 
-            // Show the Save dialog box.
-            hr = pfilesave->Show(nullptr);
+   //         // Show the Save dialog box.
+   //         hr = pfilesave->Show(nullptr);
 
-            if (SUCCEEDED(hr))
-            {
+   //         if (SUCCEEDED(hr))
+   //         {
 
-               // Get the file name from the dialog box.
-               comptr < IShellItem > pitem;
+   //            // Get the file name from the dialog box.
+   //            comptr < IShellItem > pitem;
 
-               hr = pfilesave->GetResult(&pitem);
+   //            hr = pfilesave->GetResult(&pitem);
 
-               if (SUCCEEDED(hr))
-               {
+   //            if (SUCCEEDED(hr))
+   //            {
 
-                  ::cotaskptr < PWSTR > pwszFilePath;
+   //               ::cotaskptr < PWSTR > pwszFilePath;
 
-                  hr = pitem->GetDisplayName(SIGDN_FILESYSPATH, &pwszFilePath);
+   //               hr = pitem->GetDisplayName(SIGDN_FILESYSPATH, &pwszFilePath);
 
-                  // Display the file name to the user.
-                  if (SUCCEEDED(hr))
-                  {
+   //               // Display the file name to the user.
+   //               if (SUCCEEDED(hr))
+   //               {
 
-                     set["file_name"] = string(pwszFilePath.m_p);
+   //                  set["file_name"] = string(pwszFilePath.m_p);
 
-                      bOk = true;
+   //                   bOk = true;
 
-                  }
+   //               }
 
-               }
+   //            }
 
-            }
+   //         }
 
-         }
+   //      }
 
-      //}
-      //catch (...)
-      //{
+   //   //}
+   //   //catch (...)
+   //   //{
 
-      //}
+   //   //}
 
-      //try
-      //{
+   //   //try
+   //   //{
 
-      //   pinteraction->enable_window();
+   //   //   pinteraction->enable_window();
 
-      //   pinteraction->order_top();
+   //   //   pinteraction->order_top();
 
-      //   pinteraction->display(e_display_restored, e_activation_set_foreground);
+   //   //   pinteraction->display(e_display_restored, e_activation_set_foreground);
 
-      //   pinteraction->set_need_redraw();
+   //   //   pinteraction->set_need_redraw();
 
-      //   pinteraction->post_redraw();
+   //   //   pinteraction->post_redraw();
 
-      //}
-      //catch (...)
-      //{
+   //   //}
+   //   //catch (...)
+   //   //{
 
-      //}
+   //   //}
 
-      //return bOk;
+   //   //return bOk;
 
-   }
+   //}
 
 
 
-   void os_context::browse_folder( property_set & set)
-   {
-
-      //::user::interaction* pinteraction = puiOwner->get_wnd();
-
-      bool bOk = false;
-
-      //try
-      //{
-
-      //   pinteraction->enable_window(false);
-
-      //}
-      //catch (...)
-      //{
-
-
-      //}
-
-      //try
-      //{
-
-      acmenode()->defer_co_initialize_ex(false);
-
-         comptr < IFileOpenDialog > pfileopen;
-
-         // Create the FileOpenDialog object.
-         HRESULT hr = pfileopen.CoCreateInstance(CLSID_FileOpenDialog, nullptr, CLSCTX_ALL);
-
-         if (SUCCEEDED(hr))
-         {
-
-            if (set["folder"].length() > 0)
-            {
-
-               wstring wstr(set["folder"]);
-
-               comptr < IShellItem > psi;
-
-               hr = SHCreateItemFromParsingName(wstr, nullptr, IID_IShellItem, (void **)&psi);
-
-               if (SUCCEEDED(hr))
-               {
-
-                  pfileopen->SetFolder(psi);
-
-               }
-
-            }
-
-            pfileopen->SetOptions(FOS_PICKFOLDERS);
-
-            // Show the Open dialog box.
-            hr = pfileopen->Show(nullptr);
-
-            if (SUCCEEDED(hr))
-            {
-
-               // Get the file name from the dialog box.
-               comptr < IShellItem > pitem;
-
-               hr = pfileopen->GetResult(&pitem);
-
-               if (SUCCEEDED(hr))
-               {
-
-                  ::cotaskptr < PWSTR > pwszFilePath;
-
-                  hr = pitem->GetDisplayName(SIGDN_FILESYSPATH, &pwszFilePath);
-
-                  // Display the file name to the user.
-                  if (SUCCEEDED(hr))
-                  {
-
-                     set["folder"] = string((PWSTR) pwszFilePath);
-
-                     bOk = true;
-
-                  }
-
-               }
-
-            }
-
-         }
-
-      //}
-      //catch (...)
-      //{
-
-      //}
-
-      //try
-      //{
-
-      //   pinteraction->enable_window();
-
-      //   pinteraction->order_top();
-
-      //   pinteraction->display(e_display_restored, e_activation_set_foreground);
-
-      //   pinteraction->set_need_redraw();
-
-      //   pinteraction->post_redraw();
-
-
-      //}
-      //catch (...)
-      //{
-
-
-      //}
-
-//      return bOk;
-
-   }
+//   void os_context::browse_folder( property_set & set)
+//   {
+//
+//      //::user::interaction* pinteraction = puiOwner->get_wnd();
+//
+//      bool bOk = false;
+//
+//      //try
+//      //{
+//
+//      //   pinteraction->enable_window(false);
+//
+//      //}
+//      //catch (...)
+//      //{
+//
+//
+//      //}
+//
+//      //try
+//      //{
+//
+//      acmenode()->defer_co_initialize_ex(false);
+//
+//         comptr < IFileOpenDialog > pfileopen;
+//
+//         // Create the FileOpenDialog object.
+//         HRESULT hr = pfileopen.CoCreateInstance(CLSID_FileOpenDialog, nullptr, CLSCTX_ALL);
+//
+//         if (SUCCEEDED(hr))
+//         {
+//
+//            if (set["folder"].length() > 0)
+//            {
+//
+//               wstring wstr(set["folder"]);
+//
+//               comptr < IShellItem > psi;
+//
+//               hr = SHCreateItemFromParsingName(wstr, nullptr, IID_IShellItem, (void **)&psi);
+//
+//               if (SUCCEEDED(hr))
+//               {
+//
+//                  pfileopen->SetFolder(psi);
+//
+//               }
+//
+//            }
+//
+//            pfileopen->SetOptions(FOS_PICKFOLDERS);
+//
+//            // Show the Open dialog box.
+//            hr = pfileopen->Show(nullptr);
+//
+//            if (SUCCEEDED(hr))
+//            {
+//
+//               // Get the file name from the dialog box.
+//               comptr < IShellItem > pitem;
+//
+//               hr = pfileopen->GetResult(&pitem);
+//
+//               if (SUCCEEDED(hr))
+//               {
+//
+//                  ::cotaskptr < PWSTR > pwszFilePath;
+//
+//                  hr = pitem->GetDisplayName(SIGDN_FILESYSPATH, &pwszFilePath);
+//
+//                  // Display the file name to the user.
+//                  if (SUCCEEDED(hr))
+//                  {
+//
+//                     set["folder"] = string((PWSTR) pwszFilePath);
+//
+//                     bOk = true;
+//
+//                  }
+//
+//               }
+//
+//            }
+//
+//         }
+//
+//      //}
+//      //catch (...)
+//      //{
+//
+//      //}
+//
+//      //try
+//      //{
+//
+//      //   pinteraction->enable_window();
+//
+//      //   pinteraction->order_top();
+//
+//      //   pinteraction->display(e_display_restored, e_activation_set_foreground);
+//
+//      //   pinteraction->set_need_redraw();
+//
+//      //   pinteraction->post_redraw();
+//
+//
+//      //}
+//      //catch (...)
+//      //{
+//
+//
+//      //}
+//
+////      return bOk;
+//
+//   }
 
   
-   void os_context::browse_file_or_folder(property_set & set)
-   {
+   //void os_context::browse_file_or_folder(property_set & set)
+   //{
 
-      //::user::interaction* pinteraction = puiOwner->get_wnd();
+   //   //::user::interaction* pinteraction = puiOwner->get_wnd();
 
-      bool bOk = false;
+   //   bool bOk = false;
 
-      //try
-      //{
+   //   //try
+   //   //{
 
-      //   pinteraction->enable_window(false);
+   //   //   pinteraction->enable_window(false);
 
-      //}
-      //catch (...)
-      //{
-
-
-      //}
-
-      //try
-      //{
-
-      acmenode()->defer_co_initialize_ex(false);
-
-         comptr < IFileOpenDialog > pfileopen;
-
-         // Create the FileOpenDialog object.
-         HRESULT hr = pfileopen.CoCreateInstance(CLSID_FileOpenDialog, nullptr, CLSCTX_ALL);
-
-         if (SUCCEEDED(hr))
-         {
-
-            if (set["folder"].length() > 0)
-            {
-
-               wstring wstr(set["folder"]);
-
-               comptr < IShellItem > psi;
-
-               hr = SHCreateItemFromParsingName(wstr, nullptr, IID_IShellItem, (void **)&psi);
-
-               if (SUCCEEDED(hr))
-               {
-
-                  pfileopen->SetFolder(psi);
-
-               }
-
-            }
-
-            pfileopen->SetOptions(FOS_PATHMUSTEXIST | FOS_PICKFOLDERS);
-
-            // Show the Open dialog box.
-            hr = pfileopen->Show(nullptr);
-
-            if (SUCCEEDED(hr))
-            {
-
-               // Get the file name from the dialog box.
-               comptr < IShellItem > pitem;
-
-               hr = pfileopen->GetResult(&pitem);
-
-               if (SUCCEEDED(hr))
-               {
-
-                  ::cotaskptr < PWSTR > pwszFilePath;
-
-                  hr = pitem->GetDisplayName(SIGDN_FILESYSPATH, &pwszFilePath);
-
-                  // Display the file name to the user.
-                  if (SUCCEEDED(hr))
-                  {
-
-                     set["path"] = string((PWSTR)pwszFilePath);
-
-                     bOk = true;
-
-                  }
-
-               }
-
-            }
-
-         }
-
-      //}
-      //catch (...)
-      //{
-
-      //}
-
-      //try
-      //{
-
-      //   pinteraction->enable_window();
-
-      //   pinteraction->order_top();
-
-      //   pinteraction->display(e_display_restored, e_activation_set_foreground);
-
-      //   pinteraction->set_need_redraw();
-
-      //   pinteraction->post_redraw();
-
-      //}
-      //catch (...)
-      //{
+   //   //}
+   //   //catch (...)
+   //   //{
 
 
-      //}
+   //   //}
 
-      //return bOk;
+   //   //try
+   //   //{
+
+   //   acmenode()->defer_co_initialize_ex(false);
+
+   //      comptr < IFileOpenDialog > pfileopen;
+
+   //      // Create the FileOpenDialog object.
+   //      HRESULT hr = pfileopen.CoCreateInstance(CLSID_FileOpenDialog, nullptr, CLSCTX_ALL);
+
+   //      if (SUCCEEDED(hr))
+   //      {
+
+   //         if (set["folder"].length() > 0)
+   //         {
+
+   //            wstring wstr(set["folder"]);
+
+   //            comptr < IShellItem > psi;
+
+   //            hr = SHCreateItemFromParsingName(wstr, nullptr, IID_IShellItem, (void **)&psi);
+
+   //            if (SUCCEEDED(hr))
+   //            {
+
+   //               pfileopen->SetFolder(psi);
+
+   //            }
+
+   //         }
+
+   //         pfileopen->SetOptions(FOS_PATHMUSTEXIST | FOS_PICKFOLDERS);
+
+   //         // Show the Open dialog box.
+   //         hr = pfileopen->Show(nullptr);
+
+   //         if (SUCCEEDED(hr))
+   //         {
+
+   //            // Get the file name from the dialog box.
+   //            comptr < IShellItem > pitem;
+
+   //            hr = pfileopen->GetResult(&pitem);
+
+   //            if (SUCCEEDED(hr))
+   //            {
+
+   //               ::cotaskptr < PWSTR > pwszFilePath;
+
+   //               hr = pitem->GetDisplayName(SIGDN_FILESYSPATH, &pwszFilePath);
+
+   //               // Display the file name to the user.
+   //               if (SUCCEEDED(hr))
+   //               {
+
+   //                  set["path"] = string((PWSTR)pwszFilePath);
+
+   //                  bOk = true;
+
+   //               }
+
+   //            }
+
+   //         }
+
+   //      }
+
+   //   //}
+   //   //catch (...)
+   //   //{
+
+   //   //}
+
+   //   //try
+   //   //{
+
+   //   //   pinteraction->enable_window();
+
+   //   //   pinteraction->order_top();
+
+   //   //   pinteraction->display(e_display_restored, e_activation_set_foreground);
+
+   //   //   pinteraction->set_need_redraw();
+
+   //   //   pinteraction->post_redraw();
+
+   //   //}
+   //   //catch (...)
+   //   //{
 
 
-   }
+   //   //}
+
+   //   //return bOk;
+
+
+   //}
 
 
    void os_context::list_process(::file::path_array & patha, u32_array & uaPid)
