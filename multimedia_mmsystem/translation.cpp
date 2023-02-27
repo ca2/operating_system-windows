@@ -1,6 +1,6 @@
 #include "framework.h"
-#include "app-core/audio/wave/format.h"
-#include "app-core/audio/wave/buffer.h"
+#include "audio/audio/wave/format.h"
+#include "audio/audio/wave/buffer.h"
 
 
 namespace multimedia

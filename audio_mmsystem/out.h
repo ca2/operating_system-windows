@@ -1,7 +1,7 @@
 ﻿#pragma once
 
 
-#include "app-core/audio/wave/out.h"
+#include "audio/audio/wave/out.h"
 
 
 namespace audio_mmsystem

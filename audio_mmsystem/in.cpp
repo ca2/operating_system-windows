@@ -4,9 +4,9 @@
 #include "acme/parallelization/synchronous_lock.h"
 #include "apex/message/message.h"
 #include "aqua/platform/system.h"
-#include "app-core/audio/audio.h"
-#include "app-core/audio/wave/wave.h"
-#include "app-core/audio/decode/encoder.h"
+#include "audio/audio/audio.h"
+#include "audio/audio/wave/wave.h"
+#include "audio/audio/decode/encoder.h"
 
 
 namespace audio_mmsystem

@@ -670,9 +670,6 @@
     <ResourceCompile Include="deployment.rc" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\source\app-core\audio\audio.vcxproj">
-      <Project>{20fd0446-aa14-4013-84e0-b5cb63fa354f}</Project>
-    </ProjectReference>
     <ProjectReference Include="..\..\..\source\app\acme\acme.vcxproj">
       <Project>{638b242f-0f21-41c3-9f66-724660046133}</Project>
     </ProjectReference>
@@ -681,6 +678,9 @@
     </ProjectReference>
     <ProjectReference Include="..\..\..\source\app\aqua\aqua.vcxproj">
       <Project>{1b06fe5f-f783-41a1-ac68-0e02880dbbac}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\source\audio\audio\audio.vcxproj">
+      <Project>{20fd0446-aa14-4013-84e0-b5cb63fa354f}</Project>
     </ProjectReference>
     <ProjectReference Include="..\multimedia_mmsystem\multimedia_mmsystem.vcxproj">
       <Project>{21da4a8c-5a05-40a4-bf5b-ff62b9ddd150}</Project>

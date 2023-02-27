@@ -3,9 +3,9 @@
 #include "acme/exception/exception.h"
 #include "acme/parallelization/synchronous_lock.h"
 #include "aqua/platform/system.h"
-#include "app-core/audio/audio.h"
-#include "app-core/audio/wave/wave.h"
-#include "app-core/audio/wave/player.h"
+#include "audio/audio/audio.h"
+#include "audio/audio/wave/wave.h"
+#include "audio/audio/wave/player.h"
 
 
 namespace audio_mmsystem
