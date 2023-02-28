@@ -2,11 +2,11 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ImportGroup Label="PropertySheets" />
   <PropertyGroup Label="UserMacros">
-    <BaseDir>$(SolutionDir)..\..\..\</BaseDir>
+    <BaseDir>$(SolutionDir)..\</BaseDir>
     <TimeDir>$(BaseDir)time-windows\</TimeDir>
     <__operating_system>$(BaseDir)operating-system\</__operating_system>
     <__toolsbin>$(__operating_system)tool-windows\bin\</__toolsbin>
-    <RootParentDir>$(SolutionDir)..\..\..\..\</RootParentDir>
+    <RootParentDir>$(SolutionDir)..\..\</RootParentDir>
     <RootParentDirOperatingSystem>$(RootParentDir)operating-system\</RootParentDirOperatingSystem>
   </PropertyGroup>
   <PropertyGroup>
@@ -15,7 +15,7 @@
   </PropertyGroup>
   <ItemDefinitionGroup>
     <ClCompile>
-      <AdditionalIncludeDirectories>$(SolutionDir)../../../../machine-include;$(SolutionDir)../../../base-include;.;..;../..;../../..;$(ProjectDir);$(ProjectDir)..;$(ProjectDir)../include;$(ProjectDir)../..;$(ProjectDir)../../..;$(__sensitive)/sensitive/include;$(SolutionDir)../../../source/include;$(SolutionDir)../../../operating-system/operating-system-windows/include;$(SolutionDir)../../../operating-system/operating-system-windows;$(SolutionDir)../../../operating-system/operating-system-windows_common;$(SolutionDir)../../../source/app/include;$(SolutionDir)../../../port/_;$(SolutionDir)../../../port/include;$(SolutionDir)../../../;$(SolutionDir)../../../source;$(SolutionDir)../../../source/app;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(RootParentDir)machine-include;$(BaseDir)base-include;.;..;../..;../../..;$(ProjectDir);$(ProjectDir)..;$(ProjectDir)../include;$(ProjectDir)../..;$(ProjectDir)../../..;$(__sensitive)/sensitive/include;$(BaseDir)source/include;$(BaseDir)operating-system/operating-system-windows/include;$(BaseDir)operating-system/operating-system-windows;$(BaseDir)operating-system/operating-system-windows_common;$(BaseDir)source/app/include;$(BaseDir)port/_;$(BaseDir)port/include;$(BaseDir);$(BaseDir)source;$(BaseDir)source/app;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_$(ProjectName)_project;_output_type_$(OutputType);%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <LanguageStandard_C>stdc11</LanguageStandard_C>
