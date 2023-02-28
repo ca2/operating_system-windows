@@ -410,6 +410,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "audio_decode_youtube_player
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "audio_decode_windows_media", "..\..\..\source\audio-generation1\audio_decode_windows_media\audio_decode_windows_media.vcxproj", "{2453409D-7D51-4E7E-A739-86234FFF3509}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "draw2d_cairo", "..\..\..\source\app\draw2d_cairo\draw2d_cairo.vcxproj", "{B5B26A30-A18D-4DC2-BACE-48C2DE33CD75}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		cover|Win32 = cover|Win32
@@ -3738,6 +3740,26 @@ Global
 		{2453409D-7D51-4E7E-A739-86234FFF3509}.StaticRelease|Win32.Build.0 = StaticRelease|Win32
 		{2453409D-7D51-4E7E-A739-86234FFF3509}.StaticRelease|x64.ActiveCfg = StaticRelease|x64
 		{2453409D-7D51-4E7E-A739-86234FFF3509}.StaticRelease|x64.Build.0 = StaticRelease|x64
+		{B5B26A30-A18D-4DC2-BACE-48C2DE33CD75}.cover|Win32.ActiveCfg = Debug|Win32
+		{B5B26A30-A18D-4DC2-BACE-48C2DE33CD75}.cover|Win32.Build.0 = Debug|Win32
+		{B5B26A30-A18D-4DC2-BACE-48C2DE33CD75}.cover|x64.ActiveCfg = Debug|x64
+		{B5B26A30-A18D-4DC2-BACE-48C2DE33CD75}.cover|x64.Build.0 = Debug|x64
+		{B5B26A30-A18D-4DC2-BACE-48C2DE33CD75}.Debug|Win32.ActiveCfg = Debug|Win32
+		{B5B26A30-A18D-4DC2-BACE-48C2DE33CD75}.Debug|Win32.Build.0 = Debug|Win32
+		{B5B26A30-A18D-4DC2-BACE-48C2DE33CD75}.Debug|x64.ActiveCfg = Debug|x64
+		{B5B26A30-A18D-4DC2-BACE-48C2DE33CD75}.Debug|x64.Build.0 = Debug|x64
+		{B5B26A30-A18D-4DC2-BACE-48C2DE33CD75}.Release|Win32.ActiveCfg = Release|Win32
+		{B5B26A30-A18D-4DC2-BACE-48C2DE33CD75}.Release|Win32.Build.0 = Release|Win32
+		{B5B26A30-A18D-4DC2-BACE-48C2DE33CD75}.Release|x64.ActiveCfg = Release|x64
+		{B5B26A30-A18D-4DC2-BACE-48C2DE33CD75}.Release|x64.Build.0 = Release|x64
+		{B5B26A30-A18D-4DC2-BACE-48C2DE33CD75}.StaticDebug|Win32.ActiveCfg = StaticDebug|Win32
+		{B5B26A30-A18D-4DC2-BACE-48C2DE33CD75}.StaticDebug|Win32.Build.0 = StaticDebug|Win32
+		{B5B26A30-A18D-4DC2-BACE-48C2DE33CD75}.StaticDebug|x64.ActiveCfg = StaticDebug|x64
+		{B5B26A30-A18D-4DC2-BACE-48C2DE33CD75}.StaticDebug|x64.Build.0 = StaticDebug|x64
+		{B5B26A30-A18D-4DC2-BACE-48C2DE33CD75}.StaticRelease|Win32.ActiveCfg = StaticRelease|Win32
+		{B5B26A30-A18D-4DC2-BACE-48C2DE33CD75}.StaticRelease|Win32.Build.0 = StaticRelease|Win32
+		{B5B26A30-A18D-4DC2-BACE-48C2DE33CD75}.StaticRelease|x64.ActiveCfg = StaticRelease|x64
+		{B5B26A30-A18D-4DC2-BACE-48C2DE33CD75}.StaticRelease|x64.Build.0 = StaticRelease|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
