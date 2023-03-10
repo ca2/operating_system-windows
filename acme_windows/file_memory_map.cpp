@@ -37,17 +37,17 @@ namespace acme_windows
       if (strPath.case_insensitive_begins("Local\\") || strPath.case_insensitive_begins("Global\\"))
       {
 
-         wstring wstr(strPath);
+         ::file::path path(strPath);
 
          m_hfile = INVALID_HANDLE_VALUE;
 
-         m_hfilemap = CreateFileMappingW(INVALID_HANDLE_VALUE, nullptr, PAGE_READWRITE, 0, (::u32)m_size, wstr);
+         m_hfilemap = CreateFileMappingW(INVALID_HANDLE_VALUE, nullptr, PAGE_READWRITE, 0, (::u32)m_size, path.get_os_path());
 
       }
       else
       {
 
-         acmedirectory()->create(file_path_folder(strPath));
+         acmedirectory()->create(::file::path(file_path_folder(strPath)).get_os_path());
 
          wstring wstr(strPath);
 

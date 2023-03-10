@@ -107,11 +107,10 @@ namespace acme_windows
    }
 
 
-   bool delete_file(const ::string & pFileName)
-
+   bool delete_file(const ::file::path & path)
    {
 
-      return ::DeleteFileW(utf8_to_unicode(pFileName)) != false;
+      return ::DeleteFileW(path.get_os_path()) != false;
 
 
    }

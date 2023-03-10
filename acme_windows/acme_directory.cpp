@@ -1317,7 +1317,7 @@ pacmedir->create CreateDirectoryW last error(%d)=%s", dwError, pszError);
 
          HANDLE hFind;
 
-         hFind = FindFirstFileW(wstring(listing.m_pathFinal) + L"\\*", &FindFileData);
+         hFind = FindFirstFileW(listing.m_pathFinal.get_os_path() + L"\\*", &FindFileData);
 
          if (hFind == INVALID_HANDLE_VALUE)
          {
@@ -2093,7 +2093,7 @@ pacmedir->create CreateDirectoryW last error(%d)=%s", dwError, pszError);
 //   }
 
 
-   string acme_directory::get_current()
+   ::file::path acme_directory::get_current()
    {
 
       auto size = GetCurrentDirectoryW(0, nullptr);

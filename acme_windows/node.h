@@ -125,7 +125,7 @@ namespace acme_windows
       virtual ::u32       get_temp_path(string & str);
       virtual ::i32        reg_query_value(HKEY hkey, const ::string & pszSubKey, string & str);
       virtual  HICON       extract_icon(HINSTANCE hInst, const ::string & pszExeFileName, ::u32 nIconIndex);
-      virtual  void        delete_file(const ::string & pFileName);
+      virtual  void        delete_file(const ::file::path & path);
       //virtual  i32     get_menu_string(HMENU hMenu, ::u32 uDItem, string& str, ::u32 flags);
       //virtual  void        time_to_filetime(::matter* pobject, const ::earth::time& time, LPFILETIME pFileTime);
 

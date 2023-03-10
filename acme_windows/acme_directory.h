@@ -126,7 +126,7 @@ namespace acme_windows
 
       //int make_path(const scoped_string & str) override;
 
-      string get_current() override;
+      ::file::path get_current() override;
       void change_current(const scoped_string & str) override;
 
 

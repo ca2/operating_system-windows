@@ -58,7 +58,7 @@ namespace acme_windows
 
       auto path = acmepath()->defer_process_relative_path(pathParam);
 
-      auto hFile = CreateFileW(wstring(path), GENERIC_READ, FILE_SHARE_READ, NULL,
+      auto hFile = CreateFileW(path.get_os_path(), GENERIC_READ, FILE_SHARE_READ, NULL,
          OPEN_EXISTING, 0, NULL);
 
       if (hFile == INVALID_HANDLE_VALUE)
@@ -108,7 +108,7 @@ namespace acme_windows
 
       auto path = acmepath()->defer_process_relative_path(pathParam);
 
-      auto hFile = CreateFileW(wstring(path), GENERIC_WRITE, 0, NULL, OPEN_EXISTING, 0, NULL);
+      auto hFile = CreateFileW(path.get_os_path(), GENERIC_WRITE, 0, NULL, OPEN_EXISTING, 0, NULL);
 
       if (hFile == INVALID_HANDLE_VALUE)
       {
@@ -183,7 +183,7 @@ namespace acme_windows
    void acme_file::_erase(const ::file::path & pathParam)
    {
 
-      ::wstring wstrPath(pathParam);
+      ::wstring wstrPath(pathParam.get_os_path());
 
       if (!::DeleteFileW(wstrPath))
       {
