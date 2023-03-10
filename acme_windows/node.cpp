@@ -2869,8 +2869,268 @@ namespace acme_windows
    }
 
 
+   //void node::command_system(string_array & straOutput, int & iExitCode, const scoped_string & scopedstr, enum_command_system ecommandsystem, const class time & timeTimeout, ::particle * pparticleSynchronization, ::file::file * pfileLines)
+   //{
 
-   void node::command_system(string_array & straOutput, int & iExitCode, const scoped_string & scopedstr, enum_command_system ecommandsystem, const class time & timeTimeout, ::particle * pparticleSynchronization, ::file::file * pfileLines)
+   //   //straOutput.clear();
+
+   //   string str(scopedstr);
+
+   //   wstring wstr;
+
+   //   wstr = str;
+
+   //   STARTUPINFO si = { sizeof(si) };
+   //   PROCESS_INFORMATION pi = {};
+   //   SECURITY_ATTRIBUTES saAttr;
+
+   //   ZeroMemory(&saAttr, sizeof(saAttr));
+
+   //   saAttr.nLength = sizeof(SECURITY_ATTRIBUTES);
+   //   saAttr.bInheritHandle = TRUE;
+   //   saAttr.lpSecurityDescriptor = NULL;
+
+   //   HANDLE hOutRd;
+   //   HANDLE hOutWr;
+
+   //   // Create a pipe for the child process's STDOUT. 
+
+   //   if (!CreatePipe(&hOutRd, &hOutWr, &saAttr, 0))
+   //   {
+
+   //      // log error
+   //      DWORD dwLastError = GetLastError();
+
+   //      auto estatus = ::windows::last_error_status(dwLastError);
+
+   //      throw ::exception(estatus);
+
+   //   }
+
+   //   // Ensure the read handle to the pipe for STDOUT is not inherited.
+   //   if (!SetHandleInformation(hOutRd, HANDLE_FLAG_INHERIT, 0))
+   //   {
+
+   //      ::CloseHandle(hOutRd);
+   //      ::CloseHandle(hOutWr);
+
+   //      // log error
+   //      DWORD dwLastError = GetLastError();
+
+   //      auto estatus = ::windows::last_error_status(dwLastError);
+
+   //      throw ::exception(estatus);
+
+   //   }
+
+   //   HANDLE hErrRd;
+   //   HANDLE hErrWr;
+
+   //   // Create a pipe for the child process's STDOUT. 
+
+   //   if (!CreatePipe(&hErrRd, &hErrWr, &saAttr, 0))
+   //   {
+
+   //      ::CloseHandle(hOutRd);
+   //      ::CloseHandle(hOutWr);
+
+   //      // log error
+   //      DWORD dwLastError = GetLastError();
+
+   //      auto estatus = ::windows::last_error_status(dwLastError);
+
+   //      throw ::exception(estatus);
+
+   //   }
+
+
+   //   // Ensure the read handle to the pipe for STDOUT is not inherited.
+   //   if (!SetHandleInformation(hErrRd, HANDLE_FLAG_INHERIT, 0))
+   //   {
+
+   //      ::CloseHandle(hOutRd);
+   //      ::CloseHandle(hOutWr);
+   //      ::CloseHandle(hErrRd);
+   //      ::CloseHandle(hErrWr);
+
+   //      // log error
+   //      DWORD dwLastError = GetLastError();
+
+   //      auto estatus = ::windows::last_error_status(dwLastError);
+
+   //      throw ::exception(estatus);
+
+   //   }
+
+   //   {
+
+   //      DWORD dwState = PIPE_NOWAIT;
+
+   //      SetNamedPipeHandleState(hOutRd, &dwState, nullptr, nullptr);
+
+   //   }
+
+   //   {
+
+   //      DWORD dwState = PIPE_NOWAIT;
+
+   //      SetNamedPipeHandleState(hErrRd, &dwState, nullptr, nullptr);
+
+   //   }
+
+   //   ZeroMemory(&si, sizeof(si));
+   //   si.cb = sizeof(si);
+   //   si.hStdError = hErrWr;
+   //   si.hStdOutput = hOutWr;
+   //   si.dwFlags |= STARTF_USESTDHANDLES;
+
+   //   ZeroMemory(&pi, sizeof(pi));
+
+   //   if (!CreateProcessW(nullptr, wstr, NULL, NULL, TRUE, CREATE_NO_WINDOW, NULL, NULL, &si, &pi))
+   //   {
+
+   //      ::CloseHandle(hOutRd);
+   //      ::CloseHandle(hOutWr);
+   //      ::CloseHandle(hErrRd);
+   //      ::CloseHandle(hErrWr);
+
+   //      DWORD dwLastError = ::GetLastError();
+
+   //      auto estatus = ::windows::last_error_status(dwLastError);
+
+   //      throw ::exception(estatus);
+
+   //   }
+
+   //   class ::time timeStart;
+
+   //   timeStart.Now();
+
+   //   string strError;
+
+   //   string strOutput;
+
+   //   single_lock sl(pparticleSynchronization);
+
+   //   while (true)
+   //   {
+
+   //      auto result = WaitForSingleObject(pi.hProcess, 100);
+
+   //      char sz[256];
+
+   //      while (true)
+   //      {
+
+   //         DWORD dwRead = 0;
+
+   //         if (!ReadFile(hOutRd, sz, 256, &dwRead, nullptr))
+   //         {
+
+   //            break;
+
+   //         }
+
+   //         if (dwRead == 0)
+   //         {
+
+   //            break;
+
+   //         }
+
+   //         string str(sz, dwRead);
+
+   //         if (ecommandsystem & e_command_system_inline_log)
+   //         {
+
+   //            fprintf(stdout, "%s", str.c_str());
+
+   //            fflush(stdout);
+
+   //         }
+
+   //         strOutput += str;
+
+   //         ::str().get_lines(straOutput, strOutput, "I: ", false, &sl, pfileLines);
+
+   //      };
+
+   //      while (true)
+   //      {
+
+   //         DWORD dwRead = 0;
+
+   //         if (!ReadFile(hErrRd, sz, 256, &dwRead, nullptr))
+   //         {
+
+   //            break;
+
+   //         }
+
+   //         if (dwRead == 0)
+   //         {
+
+   //            break;
+
+   //         }
+
+   //         string str(sz, dwRead);
+
+   //         if (ecommandsystem & e_command_system_inline_log)
+   //         {
+
+   //            fprintf(stderr, "%s", str.c_str());
+
+   //            fflush(stderr);
+
+   //         }
+
+   //         strError += str;
+
+   //         ::str().get_lines(straOutput, strError, "E: ", false, &sl, pfileLines);
+
+   //      };
+
+   //      if (result == WAIT_OBJECT_0)
+   //      {
+
+   //         break;
+
+   //      }
+
+   //      if (!timeTimeout.is_infinite() && timeStart.elapsed() > timeTimeout)
+   //      {
+
+   //         break;
+
+   //      }
+
+   //   }
+
+   //   DWORD dwExitCode = 0;
+
+   //   if (GetExitCodeProcess(pi.hProcess, &dwExitCode))
+   //   {
+
+   //      iExitCode = dwExitCode;
+
+   //   }
+
+   //   ::CloseHandle(hOutRd);
+   //   ::CloseHandle(hOutWr);
+   //   ::CloseHandle(hErrRd);
+   //   ::CloseHandle(hErrWr);
+
+   //   ::CloseHandle(pi.hProcess);
+   //   ::CloseHandle(pi.hThread);
+
+   //   ::str().get_lines(straOutput, strOutput, "I: ", true, &sl, pfileLines);
+   //   ::str().get_lines(straOutput, strError, "E: ", true, &sl, pfileLines);
+
+   //}
+
+
+   int node::command_system(const ::scoped_string& scopedstr, const a_trace_function& aTraceFunction)
    {
 
       //straOutput.clear();
