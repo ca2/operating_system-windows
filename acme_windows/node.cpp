@@ -2578,17 +2578,15 @@ namespace acme_windows
    //}
 
 
-   void node::delete_file(const ::string & pFileName)
+   void node::delete_file(const ::file::path & path)
    {
 
-      if (!::DeleteFileW(utf8_to_unicode(pFileName)))
+      if (!::DeleteFileW(path.get_os_path()))
       {
 
          throw ::exception(error_failed);
 
       }
-
-      //return ::success;
 
    }
 
@@ -3271,7 +3269,7 @@ namespace acme_windows
 
       string strOutput;
 
-      single_lock sl(pparticleSynchronization);
+      //single_lock sl(pparticleSynchronization);
 
       while (true)
       {
@@ -3301,18 +3299,33 @@ namespace acme_windows
 
             string str(sz, dwRead);
 
-            if (ecommandsystem & e_command_system_inline_log)
+            strOutput += str;
+
+            if (aTraceFunction)
             {
 
-               fprintf(stdout, "%s", str.c_str());
+               ::str::get_lines(strOutput, false, [&](auto& str)
+                  {
 
-               fflush(stdout);
+                     aTraceFunction(e_trace_level_information, str);
+
+                  });
 
             }
 
-            strOutput += str;
 
-            ::str().get_lines(straOutput, strOutput, "I: ", false, &sl, pfileLines);
+            //if (ecommandsystem & e_command_system_inline_log)
+            //{
+
+            //   fprintf(stdout, "%s", str.c_str());
+
+            //   fflush(stdout);
+
+            //}
+
+            //strOutput += str;
+
+            //::str().get_lines(straOutput, strOutput, "I: ", false, &sl, pfileLines);
 
          };
 
@@ -3337,18 +3350,33 @@ namespace acme_windows
 
             string str(sz, dwRead);
 
-            if (ecommandsystem & e_command_system_inline_log)
+            strError += str;
+
+            if (aTraceFunction)
             {
 
-               fprintf(stderr, "%s", str.c_str());
+               ::str::get_lines(strError, false, [&](auto& str)
+                  {
 
-               fflush(stderr);
+                     aTraceFunction(e_trace_level_error, str);
+
+                  });
 
             }
 
-            strError += str;
 
-            ::str().get_lines(straOutput, strError, "E: ", false, &sl, pfileLines);
+            //if (ecommandsystem & e_command_system_inline_log)
+            //{
+
+            //   fprintf(stderr, "%s", str.c_str());
+
+            //   fflush(stderr);
+
+            //}
+
+            //strError += str;
+
+            //::str().get_lines(straOutput, strError, "E: ", false, &sl, pfileLines);
 
          };
 
@@ -3359,7 +3387,9 @@ namespace acme_windows
 
          }
 
-         if (!timeTimeout.is_infinite() && timeStart.elapsed() > timeTimeout)
+         if (aTraceFunction 
+            && !aTraceFunction.m_timeTimeout.is_infinite() 
+            && timeStart.elapsed() > aTraceFunction.m_timeTimeout)
          {
 
             break;
@@ -3369,6 +3399,8 @@ namespace acme_windows
       }
 
       DWORD dwExitCode = 0;
+
+      int iExitCode = 0;
 
       if (GetExitCodeProcess(pi.hProcess, &dwExitCode))
       {
@@ -3385,8 +3417,25 @@ namespace acme_windows
       ::CloseHandle(pi.hProcess);
       ::CloseHandle(pi.hThread);
 
-      ::str().get_lines(straOutput, strOutput, "I: ", true, &sl, pfileLines);
-      ::str().get_lines(straOutput, strError, "E: ", true, &sl, pfileLines);
+
+      ::str::get_lines(strOutput, true, [&](auto& str)
+         {
+
+            aTraceFunction(e_trace_level_information, str);
+
+         });
+
+      ::str::get_lines(strError, true, [&](auto& str)
+         {
+
+            aTraceFunction(e_trace_level_error, str);
+
+         });
+
+      //::str().get_lines(straOutput, strOutput, "I: ", true, &sl, pfileLines);
+      //::str().get_lines(straOutput, strError, "E: ", true, &sl, pfileLines);
+
+      return iExitCode;
 
    }
 

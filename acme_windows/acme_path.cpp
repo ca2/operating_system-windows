@@ -25,7 +25,7 @@ namespace acme_windows
    ::file::path acme_path::_final(const ::file::path & pathParam)
    {
 
-      wstring wstr(pathParam);
+      wstring wstr(pathParam.get_os_path());
 
       HANDLE hfile = INVALID_HANDLE_VALUE;
 
@@ -60,7 +60,7 @@ namespace acme_windows
          if (hfile == INVALID_HANDLE_VALUE)
          {
 
-            return ::string(wstr);
+            return pathParam;
 
          }
 
