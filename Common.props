@@ -33,7 +33,7 @@
       <PrecompiledHeaderOutputFile>$(IntDir)framework.pch</PrecompiledHeaderOutputFile>
     </ClCompile>
     <PreBuildEvent>
-      <Command>application_build_helper --defer-prepare $(ProjectDir)</Command>
+      <Command>application_build_helper --defer-prepare-folder $(ProjectDir)</Command>
     </PreBuildEvent>
     <Link>
       <AdditionalLibraryDirectories>$(SolutionDir)..\..\..\..\operating_system\storage-windows\$(PlatformName)\$(Configuration)\library\;$(SolutionDir)..\..\..\..\operating_system\storage-windows\$(PlatformName)\$(Configuration)\third\library\;$(OutDir)</AdditionalLibraryDirectories>
