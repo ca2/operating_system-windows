@@ -326,8 +326,17 @@ namespace apex_windows
 
          strCommand = "cmd.exe /c \"@call " + strBuildCmd + " && @set\"";
 
+         auto functionTrace = [&](auto etracelevel, auto& str)
+         {
+
+            m_straOutput.append_format("%c: %s\n", trace_level_letter(etracelevel), str.c_str());
+
+            std_inline_log()(etracelevel, str);
+
+         };
+
          //int iStart = m_straLog.size();
-         pnode->command_system(m_straOutput, iExitCode, strCommand, e_command_system_inline_log);
+         pnode->command_system(strCommand, functionTrace);
          //int iCount = m_straLog.size() - iStart;
 
          m_straOutput.each([](auto & str) { str.case_insensitive_begins_eat("i: "); });
