@@ -4,10 +4,10 @@
   <PropertyGroup Label="UserMacros">
     <BaseDir>$(SolutionDir)..\</BaseDir>
     <TimeDir>$(BaseDir)time-windows\</TimeDir>
-    <__operating_system>$(BaseDir)operating-system\</__operating_system>
+    <__operating_system>$(BaseDir)operating_system\</__operating_system>
     <__toolsbin>$(__operating_system)tool-windows\bin\</__toolsbin>
     <RootParentDir>$(SolutionDir)..\..\</RootParentDir>
-    <RootParentDirOperatingSystem>$(RootParentDir)operating-system\</RootParentDirOperatingSystem>
+    <RootParentDirOperatingSystem>$(RootParentDir)operating_system\</RootParentDirOperatingSystem>
   </PropertyGroup>
   <PropertyGroup>
     <OutDir>$(TimeDir)$(PlatformName)\$(Configuration)\</OutDir>
@@ -15,7 +15,7 @@
   </PropertyGroup>
   <ItemDefinitionGroup>
     <ClCompile>
-      <AdditionalIncludeDirectories>$(RootParentDir)machine-include;$(BaseDir)base-include;.;..;../..;../../..;$(ProjectDir);$(ProjectDir)..;$(ProjectDir)../include;$(ProjectDir)../..;$(ProjectDir)../../..;$(__sensitive)/sensitive/include;$(BaseDir)source/include;$(BaseDir)operating-system/operating-system-windows/include;$(BaseDir)operating-system/operating-system-windows;$(BaseDir)operating-system/operating-system-windows_common;$(BaseDir)source/app/include;$(BaseDir)port/_;$(BaseDir)port/include;$(BaseDir);$(BaseDir)source;$(BaseDir)source/app;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(RootParentDir)machine-include;$(BaseDir)base-include;.;..;../..;../../..;$(ProjectDir);$(ProjectDir)..;$(ProjectDir)../include;$(ProjectDir)../..;$(ProjectDir)../../..;$(__sensitive)/sensitive/include;$(BaseDir)source/include;$(BaseDir)operating_system/operating_system-windows/include;$(BaseDir)operating_system/operating_system-windows;$(BaseDir)operating_system/operating_system-windows_common;$(BaseDir)source/app/include;$(BaseDir)port/_;$(BaseDir)port/include;$(BaseDir);$(BaseDir)source;$(BaseDir)source/app;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_$(ProjectName)_project;_output_type_$(OutputType);%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <LanguageStandard_C>stdc11</LanguageStandard_C>
@@ -36,10 +36,10 @@
       <Command>application_build_helper $(ProjectDir) $(ProjectName) $(PlatformName) $(Configuration)</Command>
     </PreBuildEvent>
     <Link>
-      <AdditionalLibraryDirectories>$(SolutionDir)..\..\..\..\operating-system\storage-windows\$(PlatformName)\$(Configuration)\library\;$(SolutionDir)..\..\..\..\operating-system\storage-windows\$(PlatformName)\$(Configuration)\third\library\;$(OutDir)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)..\..\..\..\operating_system\storage-windows\$(PlatformName)\$(Configuration)\library\;$(SolutionDir)..\..\..\..\operating_system\storage-windows\$(PlatformName)\$(Configuration)\third\library\;$(OutDir)</AdditionalLibraryDirectories>
     </Link>
     <Manifest>
-      <AdditionalManifestFiles>$(__operating_system)operating-system-windows\windows10.manifest</AdditionalManifestFiles>
+      <AdditionalManifestFiles>$(__operating_system)operating_system-windows\windows10.manifest</AdditionalManifestFiles>
     </Manifest>
   </ItemDefinitionGroup>
   <ItemGroup>

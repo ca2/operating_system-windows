@@ -29,15 +29,15 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "apex_windows", "..\apex_win
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "aura_windows", "..\aura_windows\aura_windows.vcxproj", "{94C3715A-7FBF-4455-917B-20CB7F40C58C}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "acme_windows_common", "..\..\operating-system-windows_common\acme_windows_common\acme_windows_common.vcxproj", "{EB9DC9C0-0573-4DA0-8700-4DBB371773F1}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "acme_windows_common", "..\..\operating_system-windows_common\acme_windows_common\acme_windows_common.vcxproj", "{EB9DC9C0-0573-4DA0-8700-4DBB371773F1}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "apex_windows_common", "..\..\operating-system-windows_common\apex_windows_common\apex_windows_common.vcxproj", "{A094E038-D195-4400-82CE-44A7EDF91B78}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "apex_windows_common", "..\..\operating_system-windows_common\apex_windows_common\apex_windows_common.vcxproj", "{A094E038-D195-4400-82CE-44A7EDF91B78}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "aura_windows_common", "..\..\operating-system-windows_common\aura_windows_common\aura_windows_common.vcxproj", "{99F5ABF0-7377-4CC7-B016-4CA7B365B9F1}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "aura_windows_common", "..\..\operating_system-windows_common\aura_windows_common\aura_windows_common.vcxproj", "{99F5ABF0-7377-4CC7-B016-4CA7B365B9F1}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "node_windows", "..\node_windows\node_windows.vcxproj", "{C1CCDF2E-9F27-45D3-B67A-B2EEB1754E72}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "imaging_wic", "..\..\operating-system-windows_common\imaging_wic\imaging_wic.vcxproj", "{D79C7DDB-A727-4B91-803E-41C4431693D6}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "imaging_wic", "..\..\operating_system-windows_common\imaging_wic\imaging_wic.vcxproj", "{D79C7DDB-A727-4B91-803E-41C4431693D6}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "regular_expression_pcre2", "..\..\..\source\app\regular_expression_pcre2\regular_expression_pcre2.vcxproj", "{DBA80336-2E72-4DCE-8AB3-C362F3B19106}"
 EndProject
@@ -59,9 +59,9 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "bred", "..\..\..\..\main\so
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "core", "..\..\..\..\main\source\app\core\core.vcxproj", "{29C1EB5B-060E-4021-AE12-D1BCFB1B1359}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "audio_mmsystem", "..\..\..\..\main\operating-system\operating-system-windows\audio_mmsystem\audio_mmsystem.vcxproj", "{54850FD8-653A-43B6-AA90-E59AC030559C}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "audio_mmsystem", "..\..\..\..\main\operating_system\operating_system-windows\audio_mmsystem\audio_mmsystem.vcxproj", "{54850FD8-653A-43B6-AA90-E59AC030559C}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "multimedia_mmsystem", "..\..\..\..\main\operating-system\operating-system-windows\multimedia_mmsystem\multimedia_mmsystem.vcxproj", "{21DA4A8C-5A05-40A4-BF5B-FF62B9DDD150}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "multimedia_mmsystem", "..\..\..\..\main\operating_system\operating_system-windows\multimedia_mmsystem\multimedia_mmsystem.vcxproj", "{21DA4A8C-5A05-40A4-BF5B-FF62B9DDD150}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "audio_resample_swresample", "..\..\..\..\main\source\app-core\audio_resample_swresample\audio_resample_swresample.vcxproj", "{AB2FD028-7E1B-4BDF-B317-DCC05194807F}"
 EndProject

@@ -5,7 +5,7 @@ VisualStudioVersion = 17.0.31825.309
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "acme", "..\..\..\source\app\acme\acme.vcxproj", "{638B242F-0F21-41C3-9F66-724660046133}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "acme_windows_common", "..\..\operating-system-windows_common\acme_windows_common\acme_windows_common.vcxproj", "{EB9DC9C0-0573-4DA0-8700-4DBB371773F1}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "acme_windows_common", "..\..\operating_system-windows_common\acme_windows_common\acme_windows_common.vcxproj", "{EB9DC9C0-0573-4DA0-8700-4DBB371773F1}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "acme_windows", "..\acme_windows\acme_windows.vcxproj", "{CC8E8200-00A9-414E-9829-7CA3F1091ADD}"
 EndProject

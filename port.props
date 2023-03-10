@@ -4,10 +4,10 @@
   <PropertyGroup Label="UserMacros">
     <BaseDir>$(SolutionDir)..\..\..\</BaseDir>
     <TimeDir>$(BaseDir)time-windows\</TimeDir>
-    <__operating_system>$(BaseDir)operating-system\</__operating_system>
+    <__operating_system>$(BaseDir)operating_system\</__operating_system>
     <__toolsbin>$(__operating_system)tool-windows\bin\</__toolsbin>
     <RootParentDir>$(SolutionDir)..\..\..\..\</RootParentDir>
-    <RootParentDirOperatingSystem>$(RootParentDir)operating-system\</RootParentDirOperatingSystem>
+    <RootParentDirOperatingSystem>$(RootParentDir)operating_system\</RootParentDirOperatingSystem>
   </PropertyGroup>
   <PropertyGroup>
     <OutDir>$(RootParentDirOperatingSystem)storage-windows\$(PlatformName)\$(Configuration)\third\binary\</OutDir>
@@ -33,10 +33,10 @@
       <Command>$(RootParentDirOperatingSystem)tool-windows\bin\application_build_helper $(ProjectDir) $(ProjectName) $(PlatformName) $(Configuration)</Command>
     </PreBuildEvent>
     <Link>
-      <AdditionalLibraryDirectories>$(SolutionDir)..\..\..\..\operating-system\storage-windows\$(PlatformName)\$(Configuration)\library\;$(SolutionDir)..\..\..\..\operating-system\storage-windows\$(PlatformName)\$(Configuration)\third\library\;$(OutDir)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)..\..\..\..\operating_system\storage-windows\$(PlatformName)\$(Configuration)\library\;$(SolutionDir)..\..\..\..\operating_system\storage-windows\$(PlatformName)\$(Configuration)\third\library\;$(OutDir)</AdditionalLibraryDirectories>
     </Link>
     <Manifest>
-      <AdditionalManifestFiles>$(__operating_system)operating-system-windows\windows10.manifest</AdditionalManifestFiles>
+      <AdditionalManifestFiles>$(__operating_system)operating_system-windows\windows10.manifest</AdditionalManifestFiles>
     </Manifest>
   </ItemDefinitionGroup>
   <ItemGroup>
