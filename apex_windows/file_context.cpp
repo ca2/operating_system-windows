@@ -331,13 +331,13 @@ namespace apex_windows
    }
 
 
-   void file_context::erase(const ::file::path & psz)
+   void file_context::erase(const ::file::path & path)
    {
 
 
 #ifdef WINDOWS_DESKTOP
 
-      HANDLE h = ::CreateFileW(utf8_to_unicode(string("\\\\?\\") + psz),
+      HANDLE h = ::CreateFileW(L"\\\\?\\" + path.get_os_path(),
          GENERIC_READ | GENERIC_WRITE, 0, nullptr, OPEN_EXISTING,
          FILE_FLAG_OPEN_REPARSE_POINT | FILE_FLAG_DELETE_ON_CLOSE, nullptr);
 
@@ -361,7 +361,7 @@ namespace apex_windows
 
          //strError.format("Failed to delete file \"%s\" error=%d", psz, dwError);
 
-         throw ::file::exception(estatus, errorcode, psz, "Failed to open file to be deleted.");
+         throw ::file::exception(estatus, errorcode, path, "Failed to open file to be deleted.");
 
       }
       else
