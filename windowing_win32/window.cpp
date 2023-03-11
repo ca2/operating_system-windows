@@ -378,7 +378,7 @@ namespace windowing_win32
 
       auto pusersystem = puserinteraction->m_pusersystem.get();
 
-      wstrWindowName = puserinteraction->m_strWindowText;
+      wstrWindowName = puserinteraction->m_strWindowText2;
 
       windowing()->__synthesizes_creates_styles(puserinteraction, dwExStyle, dwStyle);
 
@@ -3022,9 +3022,9 @@ namespace windowing_win32
 
       auto puserinteraction = m_puserinteractionimpl->m_puserinteraction;
 
-      puserinteraction->m_strWindowText = pszString;
+      puserinteraction->m_strWindowText2 = pszString;
 
-      wstring wstrText(puserinteraction->m_strWindowText);
+      wstring wstrText(puserinteraction->m_strWindowText2);
 
       const unichar * pwszText = wstrText;
 
