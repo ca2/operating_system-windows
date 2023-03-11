@@ -2,11 +2,11 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ImportGroup Label="PropertySheets" />
   <PropertyGroup Label="UserMacros">
-    <BaseDir>$(SolutionDir)..\..\..\</BaseDir>
+    <BaseDir>$(SolutionDir)..\</BaseDir>
     <TimeDir>$(BaseDir)time-windows\</TimeDir>
     <__operating_system>$(BaseDir)operating_system\</__operating_system>
     <__toolsbin>$(__operating_system)tool-windows\bin\</__toolsbin>
-    <RootParentDir>$(SolutionDir)..\..\..\..\</RootParentDir>
+    <RootParentDir>$(SolutionDir)..\..\</RootParentDir>
     <RootParentDirOperatingSystem>$(RootParentDir)operating_system\</RootParentDirOperatingSystem>
   </PropertyGroup>
   <PropertyGroup>
@@ -15,7 +15,7 @@
   </PropertyGroup>
   <ItemDefinitionGroup>
     <ClCompile>
-      <AdditionalIncludeDirectories>$(SolutionDir)../../../port/_;$(SolutionDir)../../../port/include;$(ProjectDir)/include/$(ProjectName);$(ProjectDir);$(SolutionDir)../../../port/_/$(ProjectName);$(SolutionDir)/../include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)../port/_/$(RootNamespace);$(SolutionDir)../port/_;$(SolutionDir)../port/include;$(SolutionDir)../operating_system/operating_system-windows/include;$(ProjectDir)/include/$(RootNamespace);$(ProjectDir);$(SolutionDir)../include</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_$(ProjectName)_project;_output_type_$(OutputType);WIN32;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <LanguageStandard>stdcpp14</LanguageStandard>
       <LanguageStandard_C>stdc11</LanguageStandard_C>

@@ -51,7 +51,7 @@ typedef int mode_t;
 #undef HAVE_SYS_IOCTL_H
 #undef HAVE_SYS_MOUNT_H
 #undef HAVE_SYS_PARAM_H
-#define HAVE_SYS_STAT_H 1
+#undef HAVE_SYS_STAT_H
 //#define HAVE_SYS_STATFS_H 1 (SYSMOUNT and SYSPARAM)
 #undef HAVE_SYS_STATVFS_H
 #undef HAVE_SYS_TIME_H

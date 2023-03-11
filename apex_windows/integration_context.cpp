@@ -326,10 +326,24 @@ namespace apex_windows
 
          strCommand = "cmd.exe /c \"@call " + strBuildCmd + " && @set\"";
 
+         string_array straOut;
+         string_array straErr;
+
          auto functionTrace = [&](auto etracelevel, auto& str)
          {
 
-            m_straOutput.append_format("%c: %s\n", trace_level_letter(etracelevel), str.c_str());
+            if (etracelevel <= e_trace_level_information)
+            {
+
+               straOut.add(str);
+
+            }
+            else
+            {
+
+               straErr.add(str);
+
+            }
 
             std_inline_log()(etracelevel, str);
 
@@ -339,11 +353,14 @@ namespace apex_windows
          pnode->command_system(strCommand, functionTrace);
          //int iCount = m_straLog.size() - iStart;
 
-         m_straOutput.each([](auto & str) { str.case_insensitive_begins_eat("i: "); });
-         m_straOutput.each([](auto & str) { str.case_insensitive_begins_eat("e: "); });
+         //m_straOutput.each([](auto & str) { str.case_insensitive_begins_eat("i: "); });
+         //m_straOutput.each([](auto & str) { str.case_insensitive_begins_eat("e: "); });
 
-         m_straOutput.trim();
-         m_straOutput.erase_empty();
+         //m_straOutput.trim();
+         //m_straOutput.erase_empty();
+
+         straOut.trim();
+         straOut.erase_empty();
 
          //strLog = acmefile()->as_string(pacmedirectory->system() / strRel / "env.txt");
 
@@ -355,7 +372,7 @@ namespace apex_windows
 
          property_set setEnvironment;
 
-         setEnvironment.parse_environment_variable(m_straOutput);
+         setEnvironment.parse_environment_variable(straOut);
 
          for (auto & pproperty : setEnvironment)
          {
