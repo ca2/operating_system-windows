@@ -87,7 +87,7 @@ extern "C" {
 
 
 /*************************************************************************
- * Compiler- and operating-system-specific preprocessor work
+ * Compiler- and operating_system-specific preprocessor work
  *************************************************************************/
 
 /* If we are we on Windows, we want a single define for it.
@@ -715,10 +715,10 @@ extern "C" {
  *  will exist.
  */
 #define GLFW_VERSION_UNAVAILABLE    0x00010007
-/*! @brief A operating-system-specific error occurred that does not match any of the
+/*! @brief A operating_system-specific error occurred that does not match any of the
  *  more specific categories.
  *
- *  A operating-system-specific error occurred that does not match any of the more
+ *  A operating_system-specific error occurred that does not match any of the more
  *  specific categories.
  *
  *  @analysis A bug or configuration error in GLFW, the underlying operating
@@ -1771,7 +1771,7 @@ GLFWAPI void glfwGetVersion(int* major, int* minor, int* rev);
  *
  *  This function returns the compile-time generated
  *  [version string](@ref intro_version_string) of the GLFW library binary.  It
- *  describes the version, platform, compiler and any operating-system-specific
+ *  describes the version, platform, compiler and any operating_system-specific
  *  compile-time options.  It should not be confused with the OpenGL or OpenGL
  *  ES version string, queried with `glGetString`.
  *
@@ -4042,15 +4042,15 @@ GLFWAPI int glfwRawMouseMotionSupported(void);
  */
 GLFWAPI const char* glfwGetKeyName(int key, int scancode);
 
-/*! @brief Returns the operating-system-specific scancode of the specified key.
+/*! @brief Returns the operating_system-specific scancode of the specified key.
  *
- *  This function returns the operating-system-specific scancode of the specified key.
+ *  This function returns the operating_system-specific scancode of the specified key.
  *
  *  If the key is `GLFW_KEY_UNKNOWN` or does not exist on the keyboard this
  *  method will return `-1`.
  *
  *  @param[in] key Any [named key](@ref keys).
- *  @return The operating-system-specific scancode for the key, or `-1` if an
+ *  @return The operating_system-specific scancode for the key, or `-1` if an
  *  [error](@ref error_handling) occurred.
  *
  *  @errors Possible errors include @ref GLFW_NOT_INITIALIZED, @ref
@@ -5478,7 +5478,7 @@ GLFWAPI const char** glfwGetRequiredInstanceExtensions(uint32_t* count);
  *  to check whether Vulkan is at least minimally available.
  *
  *  This function is equivalent to calling `vkGetInstanceProcAddr` with
- *  a operating-system-specific query of the Vulkan loader as a fallback.
+ *  a operating_system-specific query of the Vulkan loader as a fallback.
  *
  *  @param[in] instance The Vulkan instance to query, or `NULL` to retrieve
  *  functions related to instance creation.

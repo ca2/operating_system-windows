@@ -388,7 +388,7 @@ pacmedir->system() / "config/production/mirror_status.txt";
 
          }
          //m_strBase = papplication->command_value("base_dir");
-         m_strBase = pcontext->m_papexcontext->file().as_string("C:\\ca2\\config\\operating-system-windows\\production\\base_dir.txt").trimmed();
+         m_strBase = pcontext->m_papexcontext->file().as_string("C:\\ca2\\config\\operating_system-windows\\production\\base_dir.txt").trimmed();
 
 
          /*

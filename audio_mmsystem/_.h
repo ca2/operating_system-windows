@@ -1,7 +1,7 @@
 #pragma once
 
 
-#include "operating-system-windows/multimedia_mmsystem/_.h"
+#include "operating_system-windows/multimedia_mmsystem/_.h"
 
 
 #if defined(_audio_mmsystem_project)

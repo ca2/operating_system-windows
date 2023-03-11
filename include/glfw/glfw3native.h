@@ -71,8 +71,8 @@ extern "C" {
  *  * `GLFW_EXPOSE_NATIVE_OSMESA`
  *
  *  These macros select which of the native access functions that are declared
- *  and which operating-system-specific headers to include.  It is then up your (by
- *  definition operating-system-specific) code to handle which of these should be
+ *  and which operating_system-specific headers to include.  It is then up your (by
+ *  definition operating_system-specific) code to handle which of these should be
  *  defined.
  */
 

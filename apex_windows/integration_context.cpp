@@ -37,12 +37,12 @@ namespace apex_windows
       void context::prepare()
       {
 
-         if (acmedirectory()->is("C:\\operating-system"))
+         if (acmedirectory()->is("C:\\operating_system"))
          {
 
-            m_pathOperatingSystemIncludeFolder = "C:\\operating-system\\operating-system-windows";
+            m_pathOperatingSystemIncludeFolder = "C:\\operating_system\\operating_system-windows";
 
-            m_pathOperatingSystemStorageFolder = "C:\\operating-system\\storage-windows";
+            m_pathOperatingSystemStorageFolder = "C:\\operating_system\\storage-windows";
 
             auto pathOperatingSystemIncludeFolder = m_pathOperatingSystemIncludeFolder;
 
@@ -619,7 +619,7 @@ namespace apex_windows
          //if (!string_ends(strFolder, "/") && !string_ends(strFolder, "\\"))
          //   strFolder += "/";
          //string strTemplate;
-         //string strSource = "operating-system/operating-system-" OPERATING_SYSTEM_NAME "/_stage/dynamic_source/";
+         //string strSource = "operating_system/operating_system-" OPERATING_SYSTEM_NAME "/_stage/dynamic_source/";
          //strSource += lpcszSource;
 
          //   string strN = m_pmanager->m_strNetnodePath;

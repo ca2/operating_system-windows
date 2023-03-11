@@ -32,7 +32,7 @@
  * Special devices muxing/demuxing library.
  *
  * Libavdevice is a complementary library to @ref libavf "libavformat". It
- * provides various "special" operating-system-specific muxers and demuxers, e.g. for
+ * provides various "special" operating_system-specific muxers and demuxers, e.g. for
  * grabbing devices, audio capture and playback etc. As a consequence, the
  * (de)muxers in libavdevice are of the AVFMT_NOFILE type (they use their own
  * I/O functions). The filename passed to avformat_open_input() often does not

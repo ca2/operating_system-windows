@@ -203,7 +203,7 @@ int av_find_nearest_q_idx(AVRational q, const AVRational* q_list);
  * @param q Rational to be converted
  * @return Equivalent floating-point value, expressed as an unsigned 32-bit
  *         integer.
- * @note The returned value is operating-system-indepedant.
+ * @note The returned value is operating_system-indepedant.
  */
 uint32_t av_q2intfloat(AVRational q);
 

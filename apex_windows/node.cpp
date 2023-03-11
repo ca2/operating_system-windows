@@ -13,7 +13,7 @@
 #include "apex/platform/application.h"
 #include "apex/platform/os_context.h"
 #include "apex/platform/system.h"
-#include "operating-system/operating-system-windows/deployment/resource1.h"
+#include "operating_system/operating_system-windows/deployment/resource1.h"
 
 
 #include "acme/_operating_system.h"

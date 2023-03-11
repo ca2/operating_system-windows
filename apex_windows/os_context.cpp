@@ -877,12 +877,14 @@ namespace apex_windows
 
             //string strError;
 
-            string_array straOutput;
+            //string_array straOutput;
 
-            int iExitCode = 0;
+            //int iExitCode = 0;
 
             //auto estatus = 
-            acmenode()->command_system(straOutput, iExitCode, strCommand);
+            //acmenode()->command_system(straOutput, iExitCode, strCommand);
+
+            acmenode()->command_system(strCommand, [](auto etraceleve, auto & str) {});
 
             //return estatus;
 
