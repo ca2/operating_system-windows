@@ -1,3 +1,3 @@
 app/aura
-operating-system-windows/apex_windows
-operating-system-windows_common/aura_windows_common
+operating_system-windows/apex_windows
+operating_system-windows_common/aura_windows_common

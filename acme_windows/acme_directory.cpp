@@ -2113,10 +2113,10 @@ pacmedir->create CreateDirectoryW last error(%d)=%s", dwError, pszError);
    }
 
 
-   void acme_directory::change_current(const scoped_string & str)
+   void acme_directory::change_current(const ::file::path & path)
    {
 
-      wstring wstr(str);
+      auto wstr = path.get_os_path();
 
       if (!SetCurrentDirectoryW(wstr))
       {
