@@ -1,2 +1,2 @@
 app/aura
-operating-system-windows/aura_windows
+operating_system-windows/aura_windows
