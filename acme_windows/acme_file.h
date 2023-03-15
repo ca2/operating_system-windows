@@ -23,7 +23,7 @@ namespace acme_windows
 
 
       class ::time modification_time(const ::file::path & path) override;
-      void set_modification_time(const ::file::path & path, class ::time & time) override;
+      void set_modification_time(const ::file::path & path, const class ::time & time) override;
 
 
       ::file::path time_put_contents(const ::file::path & pathFolder, const ::string & strPrefix, const ::string & strExtension, const ::string& str) override;

@@ -25,7 +25,7 @@ namespace acme_windows
    ::file::path acme_path::_final(const ::file::path & path)
    {
 
-      ::windows::file_handle filehandle;
+      ::windows::file_instance fileinstance;
 
       try
       {
@@ -33,7 +33,7 @@ namespace acme_windows
          if (::is_directory(path))
          {
 
-            filehandle._create_file(path,
+            fileinstance.create_file(path,
                GENERIC_READ,          // open for reading
                FILE_SHARE_READ,       // share for reading
                nullptr,
@@ -45,7 +45,7 @@ namespace acme_windows
          else
          {
 
-            filehandle._create_file(path,
+            fileinstance.create_file(path,
                FILE_LIST_DIRECTORY,   // open for reading
                FILE_SHARE_READ,       // share for reading
                nullptr,
@@ -55,14 +55,14 @@ namespace acme_windows
 
          }
 
-         if (filehandle.nok())
+         if (fileinstance.nok())
          {
 
             return path;
 
          }
 
-         DWORD nCharacterCount = GetFinalPathNameByHandleW(filehandle, nullptr, 0, VOLUME_NAME_DOS);
+         DWORD nCharacterCount = GetFinalPathNameByHandleW(fileinstance, nullptr, 0, VOLUME_NAME_DOS);
 
          if (nCharacterCount > 0)
          {
@@ -71,14 +71,14 @@ namespace acme_windows
 
             auto pwszFinalPath = windowspathFinal.get_string_buffer(nCharacterCount);
 
-            nCharacterCount = GetFinalPathNameByHandleW(filehandle, pwszFinalPath, nCharacterCount, VOLUME_NAME_DOS);
+            nCharacterCount = GetFinalPathNameByHandleW(fileinstance, pwszFinalPath, nCharacterCount, VOLUME_NAME_DOS);
 
             if (nCharacterCount > 0)
             {
 
                windowspathFinal.release_string_buffer();
 
-               filehandle.m_windowspath = windowspathFinal;
+               fileinstance.m_windowspath = windowspathFinal;
 
             }
 
@@ -90,7 +90,7 @@ namespace acme_windows
 
       }
 
-      return ::string(filehandle.m_windowspath);
+      return ::string(fileinstance.m_windowspath);
 
    }
 

@@ -18,9 +18,9 @@ public:
 
    shared_memory(const memory_base & memory);
    shared_memory(memory_container * pmsc = nullptr, double dAllocationRateUp = 4096, ::u32 nAllocFlags = 0);
-   shared_memory(memory_container * pmsc, void * pMemory, memsize dwSize);
+   shared_memory(memory_container * pmsc, const void * pMemory, memsize dwSize);
    shared_memory(const void *, memsize iCount);
-   virtual ~shared_memory();
+   ~shared_memory() override;
 
 
    virtual void SetHandle(HGLOBAL hGlobalMemory, bool bAllowGrow = true);

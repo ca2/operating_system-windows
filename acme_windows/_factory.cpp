@@ -12,7 +12,7 @@
 #include "file_memory_map.h"
 #include "pipe.h"
 #include "console.h"
-#include "file.h"
+//#include "file.h"
 //#include "acme/operating_system.h"
 
 

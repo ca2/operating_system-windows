@@ -53,43 +53,42 @@ namespace acme_windows
    }
 
 
-   ::earth::time acme_file::modification_time(const ::file::path & pathParam)
+   class ::time acme_file::modification_time(const ::file::path & pathParam)
    {
 
       auto path = acmepath()->defer_process_relative_path(pathParam);
 
-      ::windows::file_handle filehandle;
+      ::windows::file_instance fileinstance;
 
-      filehandle.create_file(path, GENERIC_READ, FILE_SHARE_READ, NULL, OPEN_EXISTING, 0, NULL);
+      fileinstance.create_file(path, GENERIC_READ, FILE_SHARE_READ, NULL, OPEN_EXISTING, 0, NULL);
 
       FILETIME ftWrite;
 
-      filehandle.get_file_time(nullptr, nullptr, &ftWrite);
+      fileinstance.get_file_time(nullptr, nullptr, &ftWrite);
 
-      ::earth::time time;
+      class ::time time;
 
-      file_time_to_time(&time.m_time, (file_time_t *) & ftWrite);
+      file_time_to_time(&time, (file_time_t *) & ftWrite);
 
       return time;
 
    }
 
 
-   void acme_file::set_modification_time(const ::file::path & pathParam, const ::earth::time & time)
+   void acme_file::set_modification_time(const ::file::path & pathParam, const class ::time & time)
    {
 
       auto path = acmepath()->defer_process_relative_path(pathParam);
 
-      ::windows::file_handle filehandle;
+      ::windows::file_instance fileinstance;
 
-      filehandle.create_file(path, GENERIC_WRITE, 0, NULL, OPEN_EXISTING, 0, NULL);
+      fileinstance.create_file(path, GENERIC_WRITE, 0, NULL, OPEN_EXISTING, 0, NULL);
 
       ::file_time_t filetime;
 
-      time_to_file_time(&filetime, &time.m_time);
+      time_to_file_time(&filetime, &time);
 
-      // Retrieve the file times for the file.
-      filehandle.set_file_time(nullptr, nullptr, (FILETIME *)&filetime);
+      fileinstance.set_file_time(nullptr, nullptr, (FILETIME *)&filetime);
            
    }
 

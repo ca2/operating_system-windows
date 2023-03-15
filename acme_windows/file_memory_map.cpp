@@ -14,7 +14,6 @@ namespace acme_windows
    file_memory_map::file_memory_map()
    {
 
-      m_hfile = INVALID_HANDLE_VALUE;
       m_hfilemap = nullptr;
 
    }
@@ -43,7 +42,7 @@ namespace acme_windows
       if (strPath.case_insensitive_begins("Local\\") || strPath.case_insensitive_begins("Global\\"))
       {
 
-         m_hfile = INVALID_HANDLE_VALUE;
+         m_fileinstance.m_handle = INVALID_HANDLE_VALUE;
 
          m_hfilemap = CreateFileMappingW(INVALID_HANDLE_VALUE, nullptr, PAGE_READWRITE, 0, (::u32)m_size, windowspath);
 
@@ -74,28 +73,28 @@ namespace acme_windows
 
          }
 
-         ::windows::file_handle filehandle;
+         m_fileinstance.create_file(path, (m_bRead || m_bWrite ? FILE_READ_DATA : 0) | (m_bWrite ? FILE_WRITE_DATA : 0), FILE_SHARE_WRITE | FILE_SHARE_READ, nullptr, iOpen, FILE_ATTRIBUTE_NORMAL, nullptr);
 
-         filehandle._create_file(path, (m_bRead || m_bWrite ? FILE_READ_DATA : 0) | (m_bWrite ? FILE_WRITE_DATA : 0), FILE_SHARE_WRITE | FILE_SHARE_READ, nullptr, iOpen, FILE_ATTRIBUTE_NORMAL, nullptr);
-
-         if (filehandle.nok())
+         if (m_fileinstance.nok())
          {
 
             return false;
 
          }
 
-         filehandle.ensure_file_size(m_size);
+         m_fileinstance.ensure_file_size(m_size);
 
-         m_hfilemap = CreateFileMappingW(m_hfile, nullptr, PAGE_READWRITE, 0, 0, nullptr);
+         m_hfilemap = CreateFileMappingW(m_fileinstance, nullptr, PAGE_READWRITE, 0, 0, nullptr);
 
       }
 
       if (m_hfilemap == nullptr)
       {
+         
          close();
 
          return false;
+
       }
 
       m_pdata = ::MapViewOfFile(m_hfilemap, (m_bRead ? FILE_MAP_READ : 0) | (m_bWrite ? FILE_MAP_WRITE : 0), 0, 0, 0);
@@ -154,40 +153,19 @@ namespace acme_windows
 
       }
 
-      if (m_hfile != nullptr)
+      if (m_hfilemap != nullptr)
       {
 
-         try
-         {
+         ::CloseHandle(m_hfilemap);
 
-            ::CloseHandle(m_hfile);
-
-         }
-         catch (...)
-         {
-
-         }
-
-         m_hfile = nullptr;
+         m_hfilemap = nullptr;
 
       }
 
-
-      if (m_hfile != INVALID_HANDLE_VALUE)
+      if (m_fileinstance.is_ok())
       {
 
-         try
-         {
-
-            ::CloseHandle(m_hfile);
-
-         }
-         catch (...)
-         {
-
-         }
-
-         m_hfile = INVALID_HANDLE_VALUE;
+         m_fileinstance.close_handle();
 
       }
 

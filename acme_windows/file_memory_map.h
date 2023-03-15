@@ -18,7 +18,7 @@ namespace acme_windows
       //__creatable_from_base(file_memory_map, ::file::memory_map);
 
 
-      HANDLE                     m_hfile;
+      ::windows::file_instance   m_fileinstance;
       HANDLE                     m_hfilemap;
 
 
