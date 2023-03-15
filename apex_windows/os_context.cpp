@@ -1741,10 +1741,11 @@ retry:
 
 
 
-   void os_context::set_file_status(const ::string & pszFileName, const ::file::file_status& status)
+   void os_context::set_file_status(const ::file::path & path, const ::file::file_status& status)
    {
 
       u32 wAttr;
+
       FILETIME creationTime;
       FILETIME lastAccessTime;
       FILETIME lastWriteTime;
@@ -1754,50 +1755,53 @@ retry:
 
       LPFILETIME pLastWriteTime = nullptr;
 
-      wstring wstr(pszFileName);
+      wAttr = ::windows::get_file_attributes(path);
+      //{
 
-      if((wAttr = ::windows::get_file_attributes(pszFileName)) == (u32)-1L)
-      {
+      //   DWORD dwLastError = ::GetLastError();
 
-         DWORD dwLastError = ::GetLastError();
+      //   auto estatus = ::windows::last_error_status(dwLastError);
 
-         auto estatus = ::windows::last_error_status(dwLastError);
+      //   auto errorcode = ::windows::last_error_error_code(dwLastError);
 
-         auto errorcode = ::windows::last_error_error_code(dwLastError);
+      //   throw ::file::exception(estatus, errorcode, path, ::file::e_open_none, "!windows_get_file_attributes");
 
-         throw ::file::exception(estatus, errorcode, pszFileName, "!windows_get_file_attributes");
+      //}
 
-      }
 
-      //if ((u32)status.m_attribute != wAttr && (wAttr & ::file::readOnly))
+      if (status.m_attribute != wAttr && (wAttr & FILE_ATTRIBUTE_READONLY))
       {
 
          // set file attribute, only if currently readonly.
          // This way we will be able to modify the time assuming the
          // caller changed the file from readonly.
 
-         if (!::SetFileAttributesW(wstr, (u32)status.m_attribute))
-         {
-
-            DWORD dwLastError = ::GetLastError();
-
-            auto estatus = ::windows::last_error_status(dwLastError);
-
-            auto errorcode = ::windows::last_error_error_code(dwLastError);
-
-            throw ::file::exception(estatus, errorcode, ::string(wstr), "!SetFileAttributesW");
-
-         }
+         ::windows::set_file_attributes(path, status.m_attribute & ~FILE_ATTRIBUTE_READONLY);
 
       }
 
+
+      //{
+
+      //   DWORD dwLastError = ::GetLastError();
+
+      //   auto estatus = ::windows::last_error_status(dwLastError);
+
+      //   auto errorcode = ::windows::last_error_error_code(dwLastError);
+
+      //   throw ::file::exception(estatus, errorcode, ::string(wstr), ::file::e_open_none, "!SetFileAttributesW");
+
+      //}
+
+      //}
+
       // last modification time
-      if (status.m_mtime.get_time() != 0)
+      if (status.m_timeModification != 0_s)
       {
 
          //acmesystem()->m_pnode->datetime_to_filetime((file_time_t *) &lastWriteTime, status.m_mtime);
 
-         datetime_to_filetime((file_time_t *)&lastWriteTime, status.m_mtime);
+         time_to_file_time((file_time_t *)&lastWriteTime, &status.m_timeModification);
 
          pLastWriteTime = &lastWriteTime;
 
@@ -1805,12 +1809,12 @@ retry:
       }
 
       // last access time
-      if (status.m_atime.get_time() != 0)
+      if (status.m_timeAccess != 0_s)
       {
 
          //auto pnode = acmesystem()->m_papexsystem->node();
 
-         ::time_to_file_time((file_time_t*)&lastAccessTime, &status.m_atime.m_time);
+         ::time_to_file_time((file_time_t*)&lastAccessTime, &status.m_timeAccess);
 
          pLastAccessTime = &lastAccessTime;
 
@@ -1818,71 +1822,73 @@ retry:
       }
 
       // create time
-      if (status.m_ctime.get_time() != 0)
+      if (status.m_timeCreation != 0_s)
       {
 
-         time_to_file_time((file_time_t *)&creationTime, &status.m_ctime.m_time);
+         time_to_file_time((file_time_t *)&creationTime, &status.m_timeCreation);
 
          pCreationTime = &creationTime;
 
       }
 
-      HANDLE hFile = ::CreateFileW(wstr, GENERIC_READ | GENERIC_WRITE, FILE_SHARE_READ, nullptr, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, nullptr);
+      ::windows::file_instance fileinstance;
 
-      if(hFile == INVALID_HANDLE_VALUE)
+      fileinstance.create_file(path, GENERIC_READ | GENERIC_WRITE, FILE_SHARE_READ, nullptr, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, nullptr);
+
+      //if(hFile == INVALID_HANDLE_VALUE)
+      //{
+
+      //   DWORD dwLastError = ::GetLastError();
+
+      //   auto estatus = ::windows::last_error_status(dwLastError);
+
+      //   auto errorcode = ::windows::last_error_error_code(dwLastError);
+
+      //   throw ::file::exception(estatus, errorcode, wstr, "!CreateFileW");
+
+      //}
+
+      fileinstance.set_file_time(pCreationTime, pLastAccessTime, pLastWriteTime);
+      //{
+
+      //   DWORD dwLastError = ::GetLastError();
+
+      //   auto estatus = ::windows::last_error_status(dwLastError);
+
+      //   auto errorcode = ::windows::last_error_error_code(dwLastError);
+
+      //   throw ::file::exception(estatus, errorcode, wstr, "!SetFileTime");
+
+      //}
+
+      //if(!::CloseHandle(hFile))
+      //{
+
+      //   DWORD dwLastError = ::GetLastError();
+
+      //   auto estatus = ::windows::last_error_status(dwLastError);
+
+      //   auto errorcode = ::windows::last_error_error_code(dwLastError);
+
+      //   throw ::file::exception(estatus, errorcode, wstr, "!CloseHandle");
+
+      //}
+
+      if ((u32)status.m_attribute != wAttr && (status.m_attribute & FILE_ATTRIBUTE_READONLY))
       {
 
-         DWORD dwLastError = ::GetLastError();
+         ::windows::set_file_attributes(path, status.m_attribute);
+         //{
 
-         auto estatus = ::windows::last_error_status(dwLastError);
+         //   DWORD dwLastError = ::GetLastError();
 
-         auto errorcode = ::windows::last_error_error_code(dwLastError);
+         //   auto estatus = ::windows::last_error_status(dwLastError);
 
-         throw ::file::exception(estatus, errorcode, wstr, "!CreateFileW");
+         //   auto errorcode = ::windows::last_error_error_code(dwLastError);
 
-      }
+         //   throw ::file::exception(estatus, errorcode, wstr, "!SetFileAttributesW");
 
-      if(!SetFileTime((HANDLE)hFile, pCreationTime, pLastAccessTime, pLastWriteTime))
-      {
-
-         DWORD dwLastError = ::GetLastError();
-
-         auto estatus = ::windows::last_error_status(dwLastError);
-
-         auto errorcode = ::windows::last_error_error_code(dwLastError);
-
-         throw ::file::exception(estatus, errorcode, wstr, "!SetFileTime");
-
-      }
-
-      if(!::CloseHandle(hFile))
-      {
-
-         DWORD dwLastError = ::GetLastError();
-
-         auto estatus = ::windows::last_error_status(dwLastError);
-
-         auto errorcode = ::windows::last_error_error_code(dwLastError);
-
-         throw ::file::exception(estatus, errorcode, wstr, "!CloseHandle");
-
-      }
-
-      //if ((u32)status.m_attribute != wAttr && !(wAttr & ::acme_windows::file::readOnly))
-      {
-
-         if (!::SetFileAttributesW(wstr, (u32)status.m_attribute))
-         {
-
-            DWORD dwLastError = ::GetLastError();
-
-            auto estatus = ::windows::last_error_status(dwLastError);
-
-            auto errorcode = ::windows::last_error_error_code(dwLastError);
-
-            throw ::file::exception(estatus, errorcode, wstr, "!SetFileAttributesW");
-
-         }
+         //}
 
       }
 

@@ -336,10 +336,10 @@ namespace apex_windows
 
 //#ifdef WINDOWS_DESKTOP
 //
-      ::windows::file_handle filehandle;
+      ::windows::file_instance fileinstance;
 
       //filehandle.create_file(L"\\\\?\\" + path.get_os_path(),
-      filehandle.create_file(path,
+      fileinstance.create_file(path,
          GENERIC_READ | GENERIC_WRITE, 0, nullptr, OPEN_EXISTING,
          FILE_FLAG_OPEN_REPARSE_POINT | FILE_FLAG_DELETE_ON_CLOSE, nullptr);
 
@@ -369,7 +369,7 @@ namespace apex_windows
       //else
       //{
 
-      filehandle.flush_file_buffers();
+      fileinstance.flush_file_buffers();
          //::FlushFileBuffers(h);
          //::CloseHandle(h);
       //}
@@ -532,15 +532,15 @@ namespace apex_windows
       //auto pnode = psystem->node();
 
       // convert times as appropriate
-      file_time_to_time(&rStatus.m_ctime.m_time, (file_time_t *)&findFileData.ftCreationTime);
-      file_time_to_time(&rStatus.m_atime.m_time, (file_time_t *)&findFileData.ftLastAccessTime);
-      file_time_to_time(&rStatus.m_mtime.m_time, (file_time_t *)&findFileData.ftLastWriteTime);
+      file_time_to_time(&rStatus.m_timeCreation, (file_time_t *)&findFileData.ftCreationTime);
+      file_time_to_time(&rStatus.m_timeAccess, (file_time_t *)&findFileData.ftLastAccessTime);
+      file_time_to_time(&rStatus.m_timeModification, (file_time_t *)&findFileData.ftLastWriteTime);
 
-      if (rStatus.m_ctime.get_time() == 0)
-         rStatus.m_ctime = rStatus.m_mtime;
+      if (rStatus.m_timeCreation <= 0_s)
+         rStatus.m_timeCreation = rStatus.m_timeModification;
 
-      if (rStatus.m_atime.get_time() == 0)
-         rStatus.m_atime = rStatus.m_mtime;
+      if (rStatus.m_timeAccess <= 0_s)
+         rStatus.m_timeAccess = rStatus.m_timeModification;
 
       //return true;
 
@@ -727,7 +727,7 @@ namespace apex_windows
 
          auto errorcode = ::windows::last_error_error_code(dwLastError);
 
-         throw ::file::exception(estatus, errorcode, path, "!windows_get_file_attributes");
+         throw ::file::exception(estatus, errorcode, path, ::file::e_open_none, "!windows_get_file_attributes");
 
       }
 
@@ -746,35 +746,35 @@ namespace apex_windows
 
             auto errorcode = ::windows::last_error_error_code(dwLastError);
 
-            throw ::file::exception(estatus, errorcode, ::string(pszFileName), "!SetFileAttributesW");
+            throw ::file::exception(estatus, errorcode, ::string(pszFileName), ::file::e_open_none, "!SetFileAttributesW");
 
          }
 
       }
 
       // last modification time
-      if (status.m_mtime.get_time() != 0)
+      if (status.m_timeModification != 0_s)
       {
          
-         ::copy(lastWriteTime, status.m_mtime);
+         time_to_file_time((file_time_t *) & lastWriteTime, &status.m_timeModification);
 
          pLastWriteTime = &lastWriteTime;
 
          // last access time
-         if (status.m_atime.get_time() != 0)
+         if (status.m_timeAccess != 0_s)
          {
 
-            ::copy(lastAccessTime, status.m_atime);
+            time_to_file_time((file_time_t *)&lastAccessTime, &status.m_timeAccess);
 
             pLastAccessTime = &lastAccessTime;
 
          }
 
          // create time
-         if (status.m_ctime.get_time() != 0)
+         if (status.m_timeCreation != 0_s)
          {
 
-            ::copy(creationTime, status.m_ctime);
+            time_to_file_time((file_time_t *)&creationTime, &status.m_timeCreation);
 
             pCreationTime = &creationTime;
 

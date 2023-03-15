@@ -107,9 +107,7 @@ namespace apex_windows
 
       bool is_remote_session() override;
 
-      void set_file_status(const ::string & pszFileName, const ::file::file_status& status) override;
-
-
+      void set_file_status(const ::file::path & path, const ::file::file_status& status) override;
 
       void initialize_wallpaper_fileset(::file::set* pset, bool bAddSearch) override;
 

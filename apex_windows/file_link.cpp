@@ -197,8 +197,10 @@ namespace apex_windows
    }
 
 
-   void file_link::write(const ::file::path & pathWriteAs)
+   ::file::e_link file_link::write(const ::file::path & pathWriteAs)
    {
+
+      ::file::e_link elinkWritten = ::file::e_link_none;
 
       ::pointer < ::apex_windows::os_context > poscontext;
 
@@ -222,10 +224,10 @@ namespace apex_windows
 
          HRESULT hresult = m_pshelllink->SetPath(windowspath);
 
-         if (FAILED(hresult))
+         if (SUCCEEDED(hresult))
          {
 
-            throw ::hresult_exception(hresult);
+            elinkWritten |= ::file::e_link_target;
 
          }
 
@@ -240,10 +242,10 @@ namespace apex_windows
 
          HRESULT hresult = m_pshelllink->SetWorkingDirectory(windowspath);
 
-         if (FAILED(hresult))
+         if (SUCCEEDED(hresult))
          {
 
-            throw ::hresult_exception(hresult);
+            elinkWritten |= ::file::e_link_folder;
 
          }
 
@@ -252,16 +254,35 @@ namespace apex_windows
       if (m_elink & ::file::e_link_icon)
       {
 
-         auto strWindowsPath = m_pathFolder.windows_path();
+         auto strWindowsPath = m_pathIcon.windows_path();
 
-         ::windows_path windowspath = strWindowsPath;
-
-         HRESULT hresult = m_pshelllink->SetIconLocation(windowspath, m_iIcon);
-
-         if (FAILED(hresult))
+         if (strWindowsPath.is_empty())
          {
 
-            throw ::hresult_exception(hresult);
+            HRESULT hresult = m_pshelllink->SetIconLocation(nullptr, 0);
+
+            if (SUCCEEDED(hresult))
+            {
+            
+               elinkWritten |= ::file::e_link_icon;
+
+            }
+
+         }
+         else
+         {
+
+
+            ::windows_path windowspath = strWindowsPath;
+
+            HRESULT hresult = m_pshelllink->SetIconLocation(windowspath, m_iIcon);
+
+            if (SUCCEEDED(hresult))
+            {
+
+               elinkWritten |= ::file::e_link_icon;
+
+            }
 
          }
 
@@ -285,7 +306,13 @@ namespace apex_windows
 
       }
 
-      ppersistfile->Save(wstring(m_path), TRUE);
+      auto strWindowsPath = m_path.windows_path();
+
+      ::windows_path windowspath = strWindowsPath;
+
+      ppersistfile->Save(windowspath, TRUE);
+
+      return elinkWritten;
 
    }
 

@@ -36,7 +36,7 @@ namespace apex_windows
 
       void open(const ::file::path & path, const ::file::e_link & elink) override;
 
-      void write(const ::file::path & pathWriteAs = "") override;
+      ::file::e_link write(const ::file::path & pathWriteAs = "") override;
 
 
    };
