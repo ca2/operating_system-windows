@@ -6,14 +6,14 @@
 //#include "acme/primitive/time/integral/operator.h"
 
 
-namespace windows
-{
+// namespace windows
+// {
 
    
-   CLASS_DECL_ACME bool get_alternate_path(wstring & wstr);
+//    CLASS_DECL_ACME bool alternate_path(::windows_path & windowspath);
 
 
-} // namespace windows
+// } // namespace windows
 
 
 /* Copyright 2012 William Woodall and John Harrison */
@@ -34,16 +34,16 @@ namespace acme_windows
 {
 
 
-   inline wstring _prefix_port_if_needed(const wstring& wstrInput)
-   {
+   // inline windows_path _prefix_port_if_needed(const windows_path& windowspathInput)
+   // {
 
-      wstring wstr(wstrInput);
+   //    auto windowspath = windowspathInput;
 
-      ::windows::get_alternate_path(wstr);
+   //    ::windows::get_alternate_path(windowspath);
 
-      return wstr;
+   //    return windowspath;
 
-   }
+   // }
    
 
 
@@ -104,11 +104,9 @@ namespace acme_windows
       }
 
       // See: https://github.com/wjwwood/serial/issues/84
-      wstring port_with_prefix = _prefix_port_if_needed(m_wstrPort);
-      const ::wide_character* p_port = port_with_prefix.c_str();
+      wstring port_with_prefix = m_wstrPort.defer_prefixed(L"\\\\.\\");
 
-      m_hFile = CreateFileW(p_port,
-
+      m_hFile = CreateFileW(port_with_prefix,
          GENERIC_READ | GENERIC_WRITE,
          0,
          0,

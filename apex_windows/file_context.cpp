@@ -334,41 +334,45 @@ namespace apex_windows
    void file_context::erase(const ::file::path & path)
    {
 
+//#ifdef WINDOWS_DESKTOP
+//
+      ::windows::file_handle filehandle;
 
-#ifdef WINDOWS_DESKTOP
-
-      HANDLE h = ::CreateFileW(L"\\\\?\\" + path.get_os_path(),
+      //filehandle.create_file(L"\\\\?\\" + path.get_os_path(),
+      filehandle.create_file(path,
          GENERIC_READ | GENERIC_WRITE, 0, nullptr, OPEN_EXISTING,
          FILE_FLAG_OPEN_REPARSE_POINT | FILE_FLAG_DELETE_ON_CLOSE, nullptr);
 
-      if (h == INVALID_HANDLE_VALUE)
-      {
+      //if (h == INVALID_HANDLE_VALUE)
+      //{
 
-         DWORD dwLastError = ::GetLastError();
+      //   DWORD dwLastError = ::GetLastError();
 
-         if (dwLastError == 2) // the file does not exist, so delete "failed"
-         {
+      //   if (dwLastError == 2) // the file does not exist, so delete "failed"
+      //   {
 
-            return;
+      //      return;
 
-         }
+      //   }
 
-         auto estatus = ::windows::last_error_status(dwLastError);
+      //   auto estatus = ::windows::last_error_status(dwLastError);
 
-         auto errorcode = ::windows::last_error_error_code(dwLastError);
+      //   auto errorcode = ::windows::last_error_error_code(dwLastError);
 
-         //string strError;
+      //   //string strError;
 
-         //strError.format("Failed to delete file \"%s\" error=%d", psz, dwError);
+      //   //strError.format("Failed to delete file \"%s\" error=%d", psz, dwError);
 
-         throw ::file::exception(estatus, errorcode, path, "Failed to open file to be deleted.");
+      //   throw ::file::exception(estatus, errorcode, path, "Failed to open file to be deleted.");
 
-      }
-      else
-      {
-         ::FlushFileBuffers(h);
-         ::CloseHandle(h);
-      }
+      //}
+      //else
+      //{
+
+      filehandle.flush_file_buffers();
+         //::FlushFileBuffers(h);
+         //::CloseHandle(h);
+      //}
 
       /*      if(!::DeleteFileW(utf8_to_unicode(string("\\\\?\\") + psz)))
       {
@@ -381,19 +385,19 @@ namespace apex_windows
       }*/
 
 
-#else
-
-      if (unlink(psz) != 0)
-      {
-         i32 err = errno;
-         if (err != ENOENT) // already does not exist - consider removal successful - does not issue an exception
-         {
-            string strError;
-            strError.Format("Failed to delete file error=%d", err);
-            throw ::exception(::exception(strError));
-         }
-      }
-#endif
+//#else
+//
+//      if (unlink(psz) != 0)
+//      {
+//         i32 err = errno;
+//         if (err != ENOENT) // already does not exist - consider removal successful - does not issue an exception
+//         {
+//            string strError;
+//            strError.Format("Failed to delete file error=%d", err);
+//            throw ::exception(::exception(strError));
+//         }
+//      }
+//#endif
 
    }
 
@@ -846,7 +850,7 @@ namespace apex_windows
    //}
 
 
-   file_pointer file_context::get_file(const ::payload & payloadFile, const ::file::e_open & eopenFlags)
+   file_pointer file_context::get_file(const ::payload & payloadFile, const ::file::e_open & eopenFlags, ::pointer < ::file::exception > * ppfileexception)
    {
 
       return ::file_context::get_file(payloadFile, eopenFlags);

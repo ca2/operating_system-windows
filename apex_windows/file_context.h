@@ -84,11 +84,11 @@ namespace apex_windows
 
       //void update_module_path() override;
 
-      file_pointer get_file(const ::payload & payloadFile, const ::file::e_open & nOpenFlags) override;
-
+      file_pointer get_file(const ::payload & payloadFile, const ::file::e_open & eeopen, ::pointer < ::file::exception > * ppfileexception) override;
 
 
       ::file::path dropbox_info_network_payload() override;
+
 
       //virtual ::file::path onedrive_global_ini(::particle * pparticle) override;
       //virtual ::file::path onedrive_cid_ini(::particle * pparticle) override;

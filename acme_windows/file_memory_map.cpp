@@ -4,7 +4,7 @@
 #include "acme/parallelization/synchronous_lock.h"
 
 
-CLASS_DECL_ACME bool ensure_file_size_handle(HANDLE h, u64 iSize);
+//CLASS_DECL_ACME bool ensure_file_size_handle(HANDLE h, u64 iSize);
 
 
 namespace acme_windows
@@ -34,22 +34,30 @@ namespace acme_windows
 
       string strPath = get_path();
 
+      ::file::path path(strPath);
+
+      auto strWindowsPath = path.windows_path();
+
+      ::windows_path windowspath = strWindowsPath;
+
       if (strPath.case_insensitive_begins("Local\\") || strPath.case_insensitive_begins("Global\\"))
       {
 
-         ::file::path path(strPath);
-
          m_hfile = INVALID_HANDLE_VALUE;
 
-         m_hfilemap = CreateFileMappingW(INVALID_HANDLE_VALUE, nullptr, PAGE_READWRITE, 0, (::u32)m_size, path.get_os_path());
+         m_hfilemap = CreateFileMappingW(INVALID_HANDLE_VALUE, nullptr, PAGE_READWRITE, 0, (::u32)m_size, windowspath);
 
       }
       else
       {
 
-         acmedirectory()->create(::file::path(file_path_folder(strPath)).get_os_path());
+         auto pathFolder = path.folder();
 
-         wstring wstr(strPath);
+         auto strWindowsPathFolder = pathFolder.windows_path();
+
+         ::windows_path windowspathFolder = strWindowsPathFolder;
+
+         acmedirectory()->create(windowspathFolder);
 
          int iOpen;
 
@@ -66,22 +74,18 @@ namespace acme_windows
 
          }
 
-         m_hfile = CreateFileW(wstr, (m_bRead | m_bWrite ? FILE_READ_DATA : 0) | (m_bWrite ? FILE_WRITE_DATA : 0), FILE_SHARE_WRITE | FILE_SHARE_READ, nullptr, iOpen, FILE_ATTRIBUTE_NORMAL, nullptr);
+         ::windows::file_handle filehandle;
 
-         if (m_hfile == INVALID_HANDLE_VALUE)
+         filehandle._create_file(path, (m_bRead || m_bWrite ? FILE_READ_DATA : 0) | (m_bWrite ? FILE_WRITE_DATA : 0), FILE_SHARE_WRITE | FILE_SHARE_READ, nullptr, iOpen, FILE_ATTRIBUTE_NORMAL, nullptr);
+
+         if (filehandle.nok())
          {
-
-            close();
 
             return false;
 
          }
-         else
-         {
 
-            ensure_file_size_handle(m_hfile, m_size);
-
-         }
+         filehandle.ensure_file_size(m_size);
 
          m_hfilemap = CreateFileMappingW(m_hfile, nullptr, PAGE_READWRITE, 0, 0, nullptr);
 

@@ -953,9 +953,9 @@ namespace apex_windows
       if (!::DeleteFileW(utf8_to_unicode(pFileName)))
       {
 
-         auto lastError = ::GetLastError();
+         auto lasterror = ::GetLastError();
 
-         auto estatus = ::windows::last_error_status(lastError);
+         auto estatus = ::windows::last_error_status(lasterror);
 
          throw ::exception(estatus);
 

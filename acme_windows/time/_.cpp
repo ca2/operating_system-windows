@@ -439,7 +439,7 @@ bool __is_valid_atom(ATOM nAtom)
 }
 
 
-// __is_valid_address() returns true if the passed parameter is
+// is_memory_segment_ok() returns true if the passed parameter is
 // a valid representation of a local or a global atom within a const char *.
 
 bool __is_valid_atom(const scoped_string & str)

@@ -114,18 +114,17 @@ namespace acme_windows
 
       bool is_process_running(::u32 pid) override;
 
-      string get_environment_variable(const ::string & pszEnvironmentVariable) override;
+      ::string get_environment_variable(const ::scoped_string & scopedstrEnvironmentVariable) override;
 
-      string expand_environment_variables(const string & str) override;
+      ::string expand_environment_variables(const ::scoped_string & scopedstr) override;
 
-      void set_environment_variable(const ::string & pszEnvironmentVariable, const ::string & pszValue) override;
+      void set_environment_variable(const ::scoped_string & scopedstrEnvironmentVariable, const ::scoped_string & scopedstrValue) override;
 
       //virtual ::u32       get_file_attributes(const ::string & pFileName);
-      virtual ::u32       get_current_directory(string & str);
-      virtual ::u32       get_temp_path(string & str);
-      virtual ::i32        reg_query_value(HKEY hkey, const ::string & pszSubKey, string & str);
-      virtual  HICON       extract_icon(HINSTANCE hInst, const ::string & pszExeFileName, ::u32 nIconIndex);
-      virtual  void        delete_file(const ::file::path & path);
+      //virtual ::file::path       get_current_directory();
+      virtual ::i32              reg_query_value(HKEY hkey, const ::string & pszSubKey, string & str);
+      virtual  HICON             extract_icon(HINSTANCE hInst, const ::string & pszExeFileName, ::u32 nIconIndex);
+      virtual  void              delete_file(const ::file::path & path);
       //virtual  i32     get_menu_string(HMENU hMenu, ::u32 uDItem, string& str, ::u32 flags);
       //virtual  void        time_to_filetime(::matter* pobject, const ::earth::time& time, LPFILETIME pFileTime);
 
