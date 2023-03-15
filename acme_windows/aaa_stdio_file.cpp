@@ -35,7 +35,7 @@ namespace windows
       ASSERT(pszFileName != nullptr);
 
 
-      ASSERT(__is_valid_string(pszFileName));
+      ASSERT(is_string_ok(pszFileName));
 
 
       if ((eopen & ::file::e_open_defer_create_directory) && (eopen & ::file::e_open_write))
@@ -131,7 +131,7 @@ pacmedir->create(::file_path_folder(pszFileName));
       if (nCount == 0)
          return 0;   // avoid Win32 "null-read"
 
-      ASSERT(__is_valid_address(pdata, nCount));
+      ASSERT(is_memory_segment_ok(pdata, nCount));
 
 
       memsize nRead = 0;
@@ -159,7 +159,7 @@ pacmedir->create(::file_path_folder(pszFileName));
    {
       ASSERT_VALID(this);
       ASSERT(m_pStream != nullptr);
-      ASSERT(__is_valid_address(pdata, nCount, false));
+      ASSERT(is_memory_segment_ok(pdata, nCount, false));
 
 
       if (fwrite(pdata, sizeof(byte), (size_t)nCount, m_pStream) != nCount)
@@ -184,7 +184,7 @@ pacmedir->create(::file_path_folder(pszFileName));
    {
       ASSERT(psz != nullptr);
 
-      ASSERT(__is_valid_address(psz, nMax));
+      ASSERT(is_memory_segment_ok(psz, nMax));
 
       ASSERT(m_pStream != nullptr);
 
@@ -277,7 +277,7 @@ pacmedir->create(::file_path_folder(pszFileName));
    {
    ASSERT(psz != nullptr);
 
-   ASSERT(__is_valid_address(psz, nMax));
+   ASSERT(is_memory_segment_ok(psz, nMax));
 
    ASSERT(m_pStream != nullptr);
 

@@ -3320,7 +3320,7 @@ namespace draw2d_gdiplus
    void graphics::DPtoHIMETRIC(::size_f64 * psize)
 
    {
-      ASSERT(__is_valid_address(psize, sizeof(const size_f64 &)));
+      ASSERT(is_memory_segment_ok(psize, sizeof(const size_f64 &)));
 
 
       i32 nMapMode;
@@ -3359,7 +3359,7 @@ namespace draw2d_gdiplus
    void graphics::HIMETRICtoDP(::size_f64 * psize)
 
    {
-      ASSERT(__is_valid_address(psize, sizeof(const size_f64&)));
+      ASSERT(is_memory_segment_ok(psize, sizeof(const size_f64&)));
 
 
       i32 nMapMode;
@@ -3398,7 +3398,7 @@ namespace draw2d_gdiplus
    void graphics::LPtoHIMETRIC(::size_f64 * psize)
 
    {
-      ASSERT(__is_valid_address(psize, sizeof(const size_f64 &)));
+      ASSERT(is_memory_segment_ok(psize, sizeof(const size_f64 &)));
 
 
       LPtoDP(psize);
@@ -3411,7 +3411,7 @@ namespace draw2d_gdiplus
    void graphics::HIMETRICtoLP(::size_f64 * psize)
    {
 
-      ASSERT(__is_valid_address(psize, sizeof(const size_f64 &)));
+      ASSERT(is_memory_segment_ok(psize, sizeof(const size_f64 &)));
 
       HIMETRICtoDP(psize);
 
@@ -3453,11 +3453,11 @@ namespace draw2d_gdiplus
 
    //   /*
 
-   //         ASSERT(__is_valid_address(prectangle, sizeof(const rectangle_i32 &), false));
+   //         ASSERT(is_memory_segment_ok(prectangle, sizeof(const rectangle_i32 &), false));
 
    //         ASSERT(pRectLast == nullptr ||
 
-   //            __is_valid_address(pRectLast, sizeof(const rectangle_i32 &), false));
+   //            is_memory_segment_ok(pRectLast, sizeof(const rectangle_i32 &), false));
 
 
    //         // first, determine the update region and select it
@@ -5307,7 +5307,7 @@ namespace draw2d_gdiplus
    void graphics::LPtoDP(::size_f64 * psize)
 
    {
-      ASSERT(__is_valid_address(psize, sizeof(const size_f64 &)));
+      ASSERT(is_memory_segment_ok(psize, sizeof(const size_f64 &)));
 
 
       size_f64 sizeWinExt = GetWindowExt();
@@ -5322,7 +5322,7 @@ namespace draw2d_gdiplus
    void graphics::DPtoLP(::size_f64 * psize)
    {
 
-      ASSERT(__is_valid_address(psize, sizeof(const size_f64 &)));
+      ASSERT(is_memory_segment_ok(psize, sizeof(const size_f64 &)));
 
       size_f64 sizeWinExt = GetWindowExt();
 

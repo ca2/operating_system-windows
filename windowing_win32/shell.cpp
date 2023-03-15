@@ -10,6 +10,7 @@
 #include "acme/primitive/string/international.h"
 #include "apex/filesystem/filesystem/dir_context.h"
 #include "apex/filesystem/filesystem/file_context.h"
+#include "apex/filesystem/filesystem/link.h"
 #include "aura/graphics/image/context_image.h"
 #include "aura/graphics/image/drawing.h"
 #include "aura/graphics/image/list.h"
@@ -884,9 +885,11 @@ namespace windowing_win32
          && strFileParam.case_insensitive_ends(".lnk"))
       {
 
-         m_pcontext->m_papexcontext->file()->resolve_link(pathTarget, strFileParam);
+         auto plink = m_pcontext->m_papexcontext->file()->resolve_link(strFileParam);
 
-         if (!m_pcontext->m_papexcontext->file()->exists(pathTarget) && !m_pcontext->m_papexcontext->dir()->is(pathTarget))
+         if (plink
+            && !m_pcontext->m_papexcontext->file()->exists(plink->m_pathTarget)
+            && !m_pcontext->m_papexcontext->dir()->is(plink->m_pathTarget))
          {
 
             if (pathTarget.case_insensitive_ends(".exe"))

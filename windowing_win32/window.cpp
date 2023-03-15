@@ -1547,10 +1547,10 @@ namespace windowing_win32
 
       //{
       //   
-      //   DWORD lastError = ::GetLastError();
+      //   DWORD lasterror = ::GetLastError();
       //   //return ::error_failed;
 
-      //   if (lastError != NO_ERROR)
+      //   if (lasterror != NO_ERROR)
       //   {
 
       //      throw ::exception(error_failed);
@@ -6389,7 +6389,7 @@ namespace windowing_win32
 
       }
 
-      puserinteraction->interaction_post(pprodevian->m_procedureUpdateScreen);
+      pprodevian->post_procedure(pprodevian->m_procedureUpdateScreen);
 
    }
 

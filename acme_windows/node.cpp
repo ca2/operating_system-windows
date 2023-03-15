@@ -1880,12 +1880,12 @@ namespace acme_windows
    }
 
 
-   string node::get_environment_variable(const ::string & pszEnvironmentVariable)
+   string node::get_environment_variable(const ::scoped_string & scopedstrEnvironmentVariable)
    {
 
       string str;
 
-      wstring wstrEnvironmentVariable(pszEnvironmentVariable);
+      wstring wstrEnvironmentVariable(scopedstrEnvironmentVariable);
 
       DWORD dwSize = GetEnvironmentVariableW(wstrEnvironmentVariable, nullptr, 0);
 
@@ -1904,10 +1904,10 @@ namespace acme_windows
    }
 
 
-   string node::expand_environment_variables(const string & str)
+   ::string node::expand_environment_variables(const ::scoped_string & scopedstr)
    {
 
-      wstring wstrSource(str);
+      wstring wstrSource(scopedstr);
 
       auto len = ExpandEnvironmentStringsW(wstrSource, nullptr, 0);
 
@@ -1924,13 +1924,14 @@ namespace acme_windows
    }
 
 
-   void node::set_environment_variable(const ::string & pszEnvironmentVariable, const ::string & pszValue)
+   void node::set_environment_variable(const ::scoped_string & scopedstrEnvironmentVariable, const ::scoped_string & scopedstrValue)
    {
 
+      ::wstring wstrEnvironmentVariable(scopedstrEnvironmentVariable);
 
-      ::SetEnvironmentVariableW(wstring(pszEnvironmentVariable), wstring(pszValue));
+      ::wstring wstrValue(scopedstrValue);
 
-      //return ::success;
+      ::SetEnvironmentVariableW(wstrEnvironmentVariable, wstrValue);
 
    }
 
@@ -1960,9 +1961,9 @@ namespace acme_windows
          &ProcessInfo))
       {
 
-         auto lastError = ::GetLastError();
+         auto lasterror = ::GetLastError();
 
-         auto estatus = ::windows::last_error_status(lastError);
+         auto estatus = ::windows::last_error_status(lasterror);
 
          throw ::exception(estatus, "::windows::node::create_process (1)");
 
@@ -2062,9 +2063,9 @@ namespace acme_windows
          &ProcessInfo))
       {
 
-         auto lastError = ::GetLastError();
+         auto lasterror = ::GetLastError();
 
-         auto estatus = ::windows::last_error_status(lastError);
+         auto estatus = ::windows::last_error_status(lasterror);
 
          throw ::exception(estatus, "::windows::node::run_silent (1)");
 
@@ -2522,14 +2523,6 @@ namespace acme_windows
    }
 
 
-   ::u32 node::get_temp_path(string & str)
-   {
-
-      return ::GetTempPathW(MAX_PATH * 8, ::wstring_adaptor(str, MAX_PATH * 8));
-
-   }
-
-
    ::i32 node::reg_query_value(HKEY hkey, const ::string & pszSubKey, string & str)
    {
 
@@ -2578,25 +2571,17 @@ namespace acme_windows
    //}
 
 
-   void node::delete_file(const ::file::path & path)
+   void node::delete_file(const ::file::path & pathParam)
    {
 
-      if (!::DeleteFileW(path.get_os_path()))
-      {
+      auto path = m_pcontext->defer_process_path(pathParam);
 
-         throw ::exception(error_failed);
-
-      }
+      ::delete_file(path);
 
    }
 
 
-   ::u32 node::get_current_directory(string & str)
-   {
 
-      return ::GetCurrentDirectoryW(MAX_PATH * 8, wstring_adaptor(str, MAX_PATH * 8));
-
-   }
 
 
    void node::register_dll(const ::file::path & pathDll)
@@ -3692,9 +3677,9 @@ namespace acme_windows
       if (!::ShellExecuteExW(&infoa))
       {
 
-         auto lastError = ::GetLastError();
+         auto lasterror = ::GetLastError();
 
-         auto estatus = ::windows::last_error_status(lastError);
+         auto estatus = ::windows::last_error_status(lasterror);
 
          throw ::exception(estatus);
 

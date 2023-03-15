@@ -22,20 +22,18 @@ namespace acme_windows
    }
 
 
-   ::file::path acme_path::_final(const ::file::path & pathParam)
+   ::file::path acme_path::_final(const ::file::path & path)
    {
 
-      wstring wstr(pathParam.get_os_path());
-
-      HANDLE hfile = INVALID_HANDLE_VALUE;
+      ::windows::file_handle filehandle;
 
       try
       {
 
-         if (::is_directory(pathParam))
+         if (::is_directory(path))
          {
 
-            hfile = ::CreateFileW(wstr,
+            filehandle._create_file(path,
                GENERIC_READ,          // open for reading
                FILE_SHARE_READ,       // share for reading
                nullptr,
@@ -47,7 +45,7 @@ namespace acme_windows
          else
          {
 
-            hfile = ::CreateFileW(wstr,
+            filehandle._create_file(path,
                FILE_LIST_DIRECTORY,   // open for reading
                FILE_SHARE_READ,       // share for reading
                nullptr,
@@ -57,30 +55,30 @@ namespace acme_windows
 
          }
 
-         if (hfile == INVALID_HANDLE_VALUE)
+         if (filehandle.nok())
          {
 
-            return pathParam;
+            return path;
 
          }
 
-         DWORD dw = GetFinalPathNameByHandleW(hfile, nullptr, 0, VOLUME_NAME_DOS);
+         DWORD nCharacterCount = GetFinalPathNameByHandleW(filehandle, nullptr, 0, VOLUME_NAME_DOS);
 
-         if (dw > 0)
+         if (nCharacterCount > 0)
          {
 
-            wstring wstr2;
+            ::windows_path windowspathFinal;
 
-            auto * pwsz = wstr2.get_string_buffer(dw + 1);
+            auto pwszFinalPath = windowspathFinal.get_string_buffer(nCharacterCount);
 
-            dw = GetFinalPathNameByHandleW(hfile, pwsz, dw + 1, VOLUME_NAME_DOS);
+            nCharacterCount = GetFinalPathNameByHandleW(filehandle, pwszFinalPath, nCharacterCount, VOLUME_NAME_DOS);
 
-            if (dw > 0)
+            if (nCharacterCount > 0)
             {
 
-               wstr2.release_string_buffer();
+               windowspathFinal.release_string_buffer();
 
-               wstr = wstr2;
+               filehandle.m_windowspath = windowspathFinal;
 
             }
 
@@ -92,16 +90,13 @@ namespace acme_windows
 
       }
 
-      ::CloseHandle(hfile);
-
-      return ::string(wstr);
+      return ::string(filehandle.m_windowspath);
 
    }
 
 
    ::file::path acme_path::get_absolute_path(const ::scoped_string& scopedstr)
    {
-
 
       ::string result = scopedstr; //realpath() fails if path is already absolute
 

@@ -122,11 +122,11 @@ namespace windowing_win32
       if (NULL == hdevnotify)
       {
          
-         auto lastError = ::GetLastError();
+         auto lasterror = ::GetLastError();
          
          ERROR("RegisterDeviceNotification");
          
-         throw exception(::windows::last_error_status(lastError));
+         throw exception(::windows::last_error_status(lasterror));
 
       }
 

@@ -58,47 +58,19 @@ namespace acme_windows
 
       auto path = acmepath()->defer_process_relative_path(pathParam);
 
-      auto hFile = CreateFileW(path.get_os_path(), GENERIC_READ, FILE_SHARE_READ, NULL,
-         OPEN_EXISTING, 0, NULL);
+      ::windows::file_handle filehandle;
 
-      if (hFile == INVALID_HANDLE_VALUE)
-      {
-         
-         return {};
-      }
-      
+      filehandle.create_file(path, GENERIC_READ, FILE_SHARE_READ, NULL, OPEN_EXISTING, 0, NULL);
+
       FILETIME ftWrite;
 
-      // Retrieve the file times for the file.
-      if (!GetFileTime(hFile, nullptr, nullptr, &ftWrite))
-      {
-
-         ::CloseHandle(hFile);
-         return {};
-
-      }
-      ::CloseHandle(hFile);
-      // Convert the last-write time to local time.
-      //FileTimeToSystemTime(&ftWrite, &stUTC);
+      filehandle.get_file_time(nullptr, nullptr, &ftWrite);
 
       ::earth::time time;
 
       file_time_to_time(&time.m_time, (file_time_t *) & ftWrite);
 
       return time;
-
-      //SystemTimeToTzSpecificLocalTime(NULL, &stUTC, &stLocal);
-
-      // Build a string showing the date and time.
-      //dwRet = StringCchPrintf(lpszString, dwSize,
-         //TEXT("%02d/%02d/%d  %02d:%02d"),
-         //stLocal.wMonth, stLocal.wDay, stLocal.wYear,
-         //stLocal.wHour, stLocal.wMinute);
-
-      //if (S_OK == dwRet)
-        // return TRUE;
-      //else return FALSE;
-      
 
    }
 
@@ -108,39 +80,17 @@ namespace acme_windows
 
       auto path = acmepath()->defer_process_relative_path(pathParam);
 
-      auto hFile = CreateFileW(path.get_os_path(), GENERIC_WRITE, 0, NULL, OPEN_EXISTING, 0, NULL);
+      ::windows::file_handle filehandle;
 
-      if (hFile == INVALID_HANDLE_VALUE)
-      {
-         
-         auto lastError = GetLastError();
-         
-         auto estatus = ::windows::last_error_status(lastError);
-
-         throw ::exception(estatus, "windows::acme_file::set_modification_time (1)");
-
-      }
+      filehandle.create_file(path, GENERIC_WRITE, 0, NULL, OPEN_EXISTING, 0, NULL);
 
       ::file_time_t filetime;
 
       time_to_file_time(&filetime, &time.m_time);
 
       // Retrieve the file times for the file.
-      if (!SetFileTime(hFile, nullptr, nullptr, (FILETIME *) & filetime))
-      {
-
-         auto lastError = GetLastError();
-         
-         ::CloseHandle(hFile);
-         
-         auto estatus = ::windows::last_error_status(lastError);
-
-         throw ::exception(estatus, "windows::acme_file::set_modification_time (2)");
-
-      }
-
-      ::CloseHandle(hFile);
-      
+      filehandle.set_file_time(nullptr, nullptr, (FILETIME *)&filetime);
+           
    }
 
 
@@ -183,18 +133,9 @@ namespace acme_windows
    void acme_file::_erase(const ::file::path & pathParam)
    {
 
-      ::wstring wstrPath(pathParam.get_os_path());
+      auto path = acmepath()->defer_process_relative_path(pathParam);
 
-      if (!::DeleteFileW(wstrPath))
-      {
-
-         auto lastError = ::GetLastError();
-
-         auto estatus = ::windows::last_error_status(lastError);
-
-         throw ::exception(estatus, "Failed to delete file \"" + ::string(pathParam) + "\"");
-
-      }
+      ::delete_file(path);
 
    }
 
