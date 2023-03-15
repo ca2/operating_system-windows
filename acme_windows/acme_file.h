@@ -22,8 +22,8 @@ namespace acme_windows
       ::file::path module() override;
 
 
-      ::earth::time modification_time(const ::file::path & path) override;
-      void set_modification_time(const ::file::path & path, const ::earth::time & time) override;
+      class ::time modification_time(const ::file::path & path) override;
+      void set_modification_time(const ::file::path & path, class ::time & time) override;
 
 
       ::file::path time_put_contents(const ::file::path & pathFolder, const ::string & strPrefix, const ::string & strExtension, const ::string& str) override;
