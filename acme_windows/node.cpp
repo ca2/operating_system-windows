@@ -3810,32 +3810,33 @@ namespace acme_windows
 
       memory filter;
 
-      if (!pdialog->m_bSave && pdialog->m_filetypes.size() > 1) {
+      if (!pdialog->m_bSave && pdialog->m_filedialogfiltera.size() > 1) {
          __wide_append(filter, "Supported file types (");
-         for (::index i = 0; i < pdialog->m_filetypes.size(); ++i) {
-            __wide_append(filter, "*.");
-            __wide_append(filter, pdialog->m_filetypes[i].m_element1.c_str());
-            if (i + 1 < pdialog->m_filetypes.size())
+         for (::index i = 0; i < pdialog->m_filedialogfiltera.size(); ++i) {
+            //__wide_append(filter, "*.");
+            __wide_append(filter, pdialog->m_filedialogfiltera[i].m_strPatternList.c_str());
+            if (i + 1 < pdialog->m_filedialogfiltera.size())
                __wide_append(filter, ";");
          }
          __wide_append(filter, ")");
          __wide_append_null(filter);
-         for (::index i = 0; i < pdialog->m_filetypes.size(); ++i) {
-            __wide_append(filter, "*.");
-            __wide_append(filter, pdialog->m_filetypes[i].m_element1.c_str());
-            if (i + 1 < pdialog->m_filetypes.size())
+         for (::index i = 0; i < pdialog->m_filedialogfiltera.size(); ++i) {
+            //__wide_append(filter, "*.");
+            __wide_append(filter, pdialog->m_filedialogfiltera[i].m_strPatternList.c_str());
+            if (i + 1 < pdialog->m_filedialogfiltera.size())
                __wide_append(filter, ";");
          }
          __wide_append_null(filter);
       }
-      for (auto pair : pdialog->m_filetypes) {
-         __wide_append(filter, pair.m_element2.c_str());
-         __wide_append(filter, " (*.");
-         __wide_append(filter, pair.m_element1.c_str());
+      for (auto pair : pdialog->m_filedialogfiltera) {
+         __wide_append(filter, pair.m_strName.c_str());
+         //__wide_append(filter, " (*.");
+         __wide_append(filter, " (");
+         __wide_append(filter, pair.m_strPatternList.c_str());
          __wide_append(filter, ")");
          __wide_append_null(filter);
-         __wide_append(filter, "*.");
-         __wide_append(filter, pair.m_element1.c_str());
+         //__wide_append(filter, "*.");
+         __wide_append(filter, pair.m_strPatternList.c_str());
          __wide_append_null(filter);
       }
       __wide_append_null(filter);

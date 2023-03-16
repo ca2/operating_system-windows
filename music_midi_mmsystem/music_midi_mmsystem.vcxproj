@@ -680,9 +680,6 @@
     <ResourceCompile Include="deployment.rc" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\source\app-core\audio\audio.vcxproj">
-      <Project>{20fd0446-aa14-4013-84e0-b5cb63fa354f}</Project>
-    </ProjectReference>
     <ProjectReference Include="..\..\..\source\app-core\multimedia\multimedia.vcxproj">
       <Project>{2ee483c6-650e-463d-89d1-0fce7dfd604c}</Project>
     </ProjectReference>
