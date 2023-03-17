@@ -30,7 +30,7 @@
       <WarningLevel>Level3</WarningLevel>
     </ClCompile>
     <PreBuildEvent>
-      <Command>$(RootParentDirOperatingSystem)tool-windows\bin\application_build_helper $(ProjectDir) $(ProjectName) $(PlatformName) $(Configuration)</Command>
+      <Command>application_build_helper $(ProjectDir) $(ProjectName) $(PlatformName) $(Configuration)</Command>
     </PreBuildEvent>
     <Link>
       <AdditionalLibraryDirectories>$(SolutionDir)..\..\..\..\operating_system\storage-windows\$(PlatformName)\$(Configuration)\library\;$(SolutionDir)..\..\..\..\operating_system\storage-windows\$(PlatformName)\$(Configuration)\third\library\;$(OutDir)</AdditionalLibraryDirectories>
