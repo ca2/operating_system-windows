@@ -1938,7 +1938,7 @@ retry:
    }
 
 
-   ::pointer < ::file::link > os_context::resolve_link(const ::file::path & path, const ::file::e_link & elink)
+   ::pointer < ::file::link > os_context::resolve_link(const ::file::path & path, ::file::e_link elink)
    {
 
       auto plink = ::os_context::resolve_link(path, elink);
@@ -1969,7 +1969,7 @@ retry:
    }
 
 
-   ::pointer < ::file::link > os_context::resolve_lnk_link(const ::file::path & path, const ::file::e_link & elink)
+   ::pointer < ::file::link > os_context::resolve_lnk_link(const ::file::path & path, ::file::e_link elink)
    {
 
       auto plink = __create_new < ::apex_windows::file_link >();

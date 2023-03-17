@@ -34,7 +34,7 @@ namespace apex_windows
       ::pointer < ::file::link > create_clean_new() const override;
 
 
-      void open(const ::file::path & path, const ::file::e_link & elink) override;
+      void open(const ::file::path & path, ::file::e_link elink) override;
 
       ::file::e_link write(const ::file::path & pathWriteAs = "") override;
 

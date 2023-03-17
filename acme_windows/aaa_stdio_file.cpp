@@ -28,7 +28,7 @@ namespace windows
    }
 
 
-   ::extended::status stdio_file::open(const ::file::path & pszFileName, const ::file::e_open & eopen)
+   ::extended::status stdio_file::open(const ::file::path & pszFileName, ::file::e_open eopen)
 
    {
 

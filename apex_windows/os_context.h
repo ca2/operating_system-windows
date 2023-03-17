@@ -94,9 +94,9 @@ namespace apex_windows
       //void edit_link_folder(const ::file::path & path, const ::file::path & pathLink) override;
       //void edit_link_icon(const ::file::path& path, int iIcon, const ::file::path& pathLink) override;
 
-      ::pointer < ::file::link > resolve_link(const ::file::path & path, const ::file::e_link & elink = ::file::e_link_all) override;
+      ::pointer < ::file::link > resolve_link(const ::file::path & path, ::file::e_link elink = ::file::e_link_all) override;
 
-      virtual ::pointer < ::file::link > resolve_lnk_link(const ::file::path & path, const ::file::e_link & elink = ::file::e_link_all);
+      virtual ::pointer < ::file::link > resolve_lnk_link(const ::file::path & path, ::file::e_link elink = ::file::e_link_all);
 
       bool has_alias_in_path(const scoped_string & str, bool bNoUI = false, bool bNoMount = false) override;
 

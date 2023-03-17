@@ -42,7 +42,7 @@ namespace apex_windows
    }
 
 
-   void file_link::open(const ::file::path & path, const ::file::e_link & elink)
+   void file_link::open(const ::file::path & path, ::file::e_link elink)
    {
 
       clear();
