@@ -5,6 +5,7 @@
 #include "acme/exception/exception.h"
 #include "acme/filesystem/filesystem/listing.h"
 #include "acme/operating_system/process.h"
+#include "acme/platform/context.h"
 #include "acme/platform/node.h"
 #include "acme/primitive/string/adaptor.h"
 #include "acme/primitive/string/str.h"
@@ -13,6 +14,9 @@
 
 #include "acme/_operating_system.h"
 #include <Shlobj.h>
+
+
+#include "acme/operating_system/windows_common/find_file.h"
 
 
 //#ifdef WINDOWS_DESKTOP
@@ -1313,34 +1317,23 @@ pacmedir->create CreateDirectoryW last error(%d)=%s", dwError, pszError);
 
          }
 
-         WIN32_FIND_DATAW FindFileData;
+         ::windows::find_file findfile;
 
-         HANDLE hFind;
+         auto windowsPath = listing.m_pathFinal.windows_path();
 
-         hFind = FindFirstFileW(listing.m_pathFinal.get_os_path() + L"\\*", &FindFileData);
-
-         if (hFind == INVALID_HANDLE_VALUE)
+         if(!findfile.find_first_file(windowsPath + L"\\*"))
          {
 
             return true;
 
          }
 
-         while (true)
+         do
          {
 
-            defer_add(listing, FindFileData);
+            defer_add(listing, findfile.m_finddata);
 
-            if (!FindNextFileW(hFind, &FindFileData))
-            {
-
-               break;
-
-            }
-
-         }
-
-         FindClose(hFind);
+         } while (findfile.find_next_file());
 
          return true;
 
@@ -2113,19 +2106,19 @@ pacmedir->create CreateDirectoryW last error(%d)=%s", dwError, pszError);
    }
 
 
-   void acme_directory::change_current(const scoped_string & str)
+   void acme_directory::change_current(const ::file::path & pathParam)
    {
 
-      wstring wstr(str);
+      auto path = m_pcontext->defer_process_path(pathParam);
 
-      if (!SetCurrentDirectoryW(wstr))
+      auto strWindowsPath = path.windows_path();
+
+      ::windows_path windowspath = path.windows_path();
+
+      if (!::SetCurrentDirectoryW(windowspath))
       {
 
-         DWORD dwLastError = ::GetLastError();
-
-         auto estatus = ::windows::last_error_status(dwLastError);
-
-         throw ::exception(estatus, "windows::acme_directory::change_current");
+         throw_last_error_exception();
 
       }
 
@@ -2188,6 +2181,37 @@ pacmedir->create CreateDirectoryW last error(%d)=%s", dwError, pszError);
    //}
 
 
+   ::file::path acme_directory::temp()
+   {
+
+      ::string strPath;
+
+      if (!::GetTempPathW(MAX_PATH * 8, ::wstring_adaptor(strPath, MAX_PATH * 8)))
+      {
+
+         throw_last_error_exception();
+
+      }
+
+      return strPath;
+
+   }
+
+   /*::file::path node::current_directory()
+   {
+
+      ::string str;
+
+      if (!::GetCurrentDirectoryW(MAX_PATH * 8, wstring_adaptor(str, MAX_PATH * 8)))
+      {
+
+         throw_last_error_exception();
+
+      }
+
+      return str;
+
+   }*/
 
 
 } // namespace acme_windows

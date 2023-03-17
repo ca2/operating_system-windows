@@ -80,7 +80,7 @@ template < typename TYPE_CHAR >
 BSTR string_base < TYPE_CHAR >::SetSysString(BSTR * pbstr) const
 {
 
-   ASSERT(__is_valid_address(pbstr, sizeof(BSTR)));
+   ASSERT(is_memory_segment_ok(pbstr, sizeof(BSTR)));
 
    if (!::str().ReAllocSysString(pbstr, data(), get_length()))
    {

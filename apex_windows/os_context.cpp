@@ -1,6 +1,7 @@
 ﻿#include "framework.h"
 #undef USUAL_OPERATING_SYSTEM_SUPPRESSIONS
 #include "os_context.h"
+#include "file_link.h"
 #include "acme/filesystem/file/exception.h"
 #include "acme/operating_system/process.h"
 #include "acme_windows/registry.h"
@@ -1416,9 +1417,9 @@ retry:
       if(hdlSCM == 0)
       {
 
-         u32 lastError = ::GetLastError();
+         u32 lasterror = ::GetLastError();
 
-         ::windows::throw_last_error(lastError);
+         ::windows::throw_last_error(lasterror);
 
       }
 
@@ -1551,11 +1552,11 @@ retry:
       if(!hdlServ)
       {
 
-         u32 lastError = ::GetLastError();
+         u32 lasterror = ::GetLastError();
 
          CloseServiceHandle(hdlSCM);
 
-         ::windows::throw_last_error(lastError);
+         ::windows::throw_last_error(lasterror);
 
       }
 
@@ -1596,19 +1597,19 @@ retry:
 
       if(!hdlServ)
       {
-         u32 lastError = ::GetLastError();
+         u32 lasterror = ::GetLastError();
          CloseServiceHandle(hdlSCM);
-         if(lastError == 1060) // O serviço já não existe. Service already doesn't exist.
+         if(lasterror == 1060) // O serviço já não existe. Service already doesn't exist.
             return; // do self-healing
-         ::windows::throw_last_error(lastError);
+         ::windows::throw_last_error(lasterror);
       }
 
       if(!::DeleteService(hdlServ))
       {
-         u32 lastError = ::GetLastError();
+         u32 lasterror = ::GetLastError();
          CloseServiceHandle(hdlServ);
          CloseServiceHandle(hdlSCM);
-         ::windows::throw_last_error(lastError);
+         ::windows::throw_last_error(lasterror);
       }
 
       CloseServiceHandle(hdlServ);
@@ -1740,10 +1741,11 @@ retry:
 
 
 
-   void os_context::set_file_status(const ::string & pszFileName, const ::file::file_status& status)
+   void os_context::set_file_status(const ::file::path & path, const ::file::file_status& status)
    {
 
       u32 wAttr;
+
       FILETIME creationTime;
       FILETIME lastAccessTime;
       FILETIME lastWriteTime;
@@ -1753,50 +1755,53 @@ retry:
 
       LPFILETIME pLastWriteTime = nullptr;
 
-      wstring wstr(pszFileName);
+      wAttr = ::windows::get_file_attributes(path);
+      //{
 
-      if((wAttr = ::windows::get_file_attributes(pszFileName)) == (u32)-1L)
-      {
+      //   DWORD dwLastError = ::GetLastError();
 
-         DWORD dwLastError = ::GetLastError();
+      //   auto estatus = ::windows::last_error_status(dwLastError);
 
-         auto estatus = ::windows::last_error_status(dwLastError);
+      //   auto errorcode = ::windows::last_error_error_code(dwLastError);
 
-         auto errorcode = ::windows::last_error_error_code(dwLastError);
+      //   throw ::file::exception(estatus, errorcode, path, ::file::e_open_none, "!windows_get_file_attributes");
 
-         throw ::file::exception(estatus, errorcode, pszFileName, "!windows_get_file_attributes");
+      //}
 
-      }
 
-      //if ((u32)status.m_attribute != wAttr && (wAttr & ::file::readOnly))
+      if (status.m_attribute != wAttr && (wAttr & FILE_ATTRIBUTE_READONLY))
       {
 
          // set file attribute, only if currently readonly.
          // This way we will be able to modify the time assuming the
          // caller changed the file from readonly.
 
-         if (!::SetFileAttributesW(wstr, (u32)status.m_attribute))
-         {
-
-            DWORD dwLastError = ::GetLastError();
-
-            auto estatus = ::windows::last_error_status(dwLastError);
-
-            auto errorcode = ::windows::last_error_error_code(dwLastError);
-
-            throw ::file::exception(estatus, errorcode, ::string(wstr), "!SetFileAttributesW");
-
-         }
+         ::windows::set_file_attributes(path, status.m_attribute & ~FILE_ATTRIBUTE_READONLY);
 
       }
 
+
+      //{
+
+      //   DWORD dwLastError = ::GetLastError();
+
+      //   auto estatus = ::windows::last_error_status(dwLastError);
+
+      //   auto errorcode = ::windows::last_error_error_code(dwLastError);
+
+      //   throw ::file::exception(estatus, errorcode, ::string(wstr), ::file::e_open_none, "!SetFileAttributesW");
+
+      //}
+
+      //}
+
       // last modification time
-      if (status.m_mtime.get_time() != 0)
+      if (status.m_timeModification != 0_s)
       {
 
          //acmesystem()->m_pnode->datetime_to_filetime((file_time_t *) &lastWriteTime, status.m_mtime);
 
-         datetime_to_filetime((file_time_t *)&lastWriteTime, status.m_mtime);
+         time_to_file_time((file_time_t *)&lastWriteTime, &status.m_timeModification);
 
          pLastWriteTime = &lastWriteTime;
 
@@ -1804,12 +1809,12 @@ retry:
       }
 
       // last access time
-      if (status.m_atime.get_time() != 0)
+      if (status.m_timeAccess != 0_s)
       {
 
          //auto pnode = acmesystem()->m_papexsystem->node();
 
-         ::time_to_file_time((file_time_t*)&lastAccessTime, &status.m_atime.m_time);
+         ::time_to_file_time((file_time_t*)&lastAccessTime, &status.m_timeAccess);
 
          pLastAccessTime = &lastAccessTime;
 
@@ -1817,71 +1822,73 @@ retry:
       }
 
       // create time
-      if (status.m_ctime.get_time() != 0)
+      if (status.m_timeCreation != 0_s)
       {
 
-         time_to_file_time((file_time_t *)&creationTime, &status.m_ctime.m_time);
+         time_to_file_time((file_time_t *)&creationTime, &status.m_timeCreation);
 
          pCreationTime = &creationTime;
 
       }
 
-      HANDLE hFile = ::CreateFileW(wstr, GENERIC_READ | GENERIC_WRITE, FILE_SHARE_READ, nullptr, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, nullptr);
+      ::windows::file_instance fileinstance;
 
-      if(hFile == INVALID_HANDLE_VALUE)
+      fileinstance.create_file(path, GENERIC_READ | GENERIC_WRITE, FILE_SHARE_READ, nullptr, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, nullptr);
+
+      //if(hFile == INVALID_HANDLE_VALUE)
+      //{
+
+      //   DWORD dwLastError = ::GetLastError();
+
+      //   auto estatus = ::windows::last_error_status(dwLastError);
+
+      //   auto errorcode = ::windows::last_error_error_code(dwLastError);
+
+      //   throw ::file::exception(estatus, errorcode, wstr, "!CreateFileW");
+
+      //}
+
+      fileinstance.set_file_time(pCreationTime, pLastAccessTime, pLastWriteTime);
+      //{
+
+      //   DWORD dwLastError = ::GetLastError();
+
+      //   auto estatus = ::windows::last_error_status(dwLastError);
+
+      //   auto errorcode = ::windows::last_error_error_code(dwLastError);
+
+      //   throw ::file::exception(estatus, errorcode, wstr, "!SetFileTime");
+
+      //}
+
+      //if(!::CloseHandle(hFile))
+      //{
+
+      //   DWORD dwLastError = ::GetLastError();
+
+      //   auto estatus = ::windows::last_error_status(dwLastError);
+
+      //   auto errorcode = ::windows::last_error_error_code(dwLastError);
+
+      //   throw ::file::exception(estatus, errorcode, wstr, "!CloseHandle");
+
+      //}
+
+      if ((u32)status.m_attribute != wAttr && (status.m_attribute & FILE_ATTRIBUTE_READONLY))
       {
 
-         DWORD dwLastError = ::GetLastError();
+         ::windows::set_file_attributes(path, status.m_attribute);
+         //{
 
-         auto estatus = ::windows::last_error_status(dwLastError);
+         //   DWORD dwLastError = ::GetLastError();
 
-         auto errorcode = ::windows::last_error_error_code(dwLastError);
+         //   auto estatus = ::windows::last_error_status(dwLastError);
 
-         throw ::file::exception(estatus, errorcode, wstr, "!CreateFileW");
+         //   auto errorcode = ::windows::last_error_error_code(dwLastError);
 
-      }
+         //   throw ::file::exception(estatus, errorcode, wstr, "!SetFileAttributesW");
 
-      if(!SetFileTime((HANDLE)hFile, pCreationTime, pLastAccessTime, pLastWriteTime))
-      {
-
-         DWORD dwLastError = ::GetLastError();
-
-         auto estatus = ::windows::last_error_status(dwLastError);
-
-         auto errorcode = ::windows::last_error_error_code(dwLastError);
-
-         throw ::file::exception(estatus, errorcode, wstr, "!SetFileTime");
-
-      }
-
-      if(!::CloseHandle(hFile))
-      {
-
-         DWORD dwLastError = ::GetLastError();
-
-         auto estatus = ::windows::last_error_status(dwLastError);
-
-         auto errorcode = ::windows::last_error_error_code(dwLastError);
-
-         throw ::file::exception(estatus, errorcode, wstr, "!CloseHandle");
-
-      }
-
-      //if ((u32)status.m_attribute != wAttr && !(wAttr & ::acme_windows::file::readOnly))
-      {
-
-         if (!::SetFileAttributesW(wstr, (u32)status.m_attribute))
-         {
-
-            DWORD dwLastError = ::GetLastError();
-
-            auto estatus = ::windows::last_error_status(dwLastError);
-
-            auto errorcode = ::windows::last_error_error_code(dwLastError);
-
-            throw ::file::exception(estatus, errorcode, wstr, "!SetFileAttributesW");
-
-         }
+         //}
 
       }
 
@@ -1906,93 +1913,54 @@ retry:
 
       bool bOk = false;
 
-      comptr < IPersistFile > ppersistfile;
+      auto ppersistfile = pshelllink.as < IPersistFile >();
 
-      if (SUCCEEDED(hr = pshelllink.as(ppersistfile)))
+      if (!ppersistfile)
       {
 
-         if (SUCCEEDED(hr = ppersistfile->Load(wstring(pathLink), STGM_WRITE)))
+         return nullptr;
+
+      }
+
+      auto strWindowsPath = pathLink.windows_path();
+
+      ::windows_path windowspath = strWindowsPath;
+
+      if (FAILED(hr = ppersistfile->Load(windowspath, STGM_WRITE)))
+      {
+
+         return nullptr;
+
+      }
+
+      return pshelllink;
+
+   }
+
+
+   ::pointer < ::file::link > os_context::resolve_link(const ::file::path & path, ::file::e_link elink)
+   {
+
+      auto plink = ::os_context::resolve_link(path, elink);
+
+      if (plink)
+      {
+
+         return plink;
+
+      }
+
+      if (path.case_insensitive_ends(".lnk"))
+      {
+
+         plink = resolve_lnk_link(path, elink);
+
+         if(plink)
          {
 
-            //HWND hwnd = pinteraction == nullptr ? nullptr : pinteraction->get_handle();
-
-            HWND hwnd = nullptr;
-
-            u32 fFlags = 0;
-
-            //fFlags |= pinteraction == nullptr ? (SLR_NO_UI | (10 << 16)) : 0;
-            fFlags |= SLR_NO_UI;
-
-            fFlags |= SLR_NOUPDATE;
-
-            fFlags |= SLR_NOSEARCH;
-
-            fFlags |= SLR_NOTRACK;
-
-            return pshelllink;
+            return plink;
 
          }
-         //   wstring wstr;
-
-         //   auto pwsz = wstr.get_string_buffer(MAX_PATH * 8);
-
-         //   if (SUCCEEDED(pshelllink->GetPath(pwsz, MAX_PATH * 8, nullptr, 0)))
-         //   {
-
-         //      bOk = true;
-
-         //      wstr.release_string_buffer();
-
-         //      string strLink = unicode_to_utf8((const ::wide_character *)wstr);
-
-         //      if (strLink.is_empty() && pitemidlist)
-         //      {
-
-         //         pshelllink->GetIDList(&pitemidlist->m_pidl);
-
-         //      }
-         //      else
-         //      {
-
-         //         path = strLink;
-
-         //      }
-
-         //   }
-
-         //   if (::is_set(pstrDirectory))
-         //   {
-
-         //      auto pwsz = wstr.get_string_buffer(MAX_PATH * 8);
-
-         //      if (SUCCEEDED(pshelllink->GetWorkingDirectory(pwsz, MAX_PATH * 8)))
-         //      {
-
-         //         wstr.release_string_buffer();
-
-         //         *pstrDirectory = unicode_to_utf8((const ::wide_character *)wstr);
-
-         //      }
-
-         //   }
-
-         //   if (::is_set(pstrParams))
-         //   {
-
-         //      auto pwsz = wstr.get_string_buffer(MAX_PATH * 8);
-
-         //      if (SUCCEEDED(pshelllink->GetArguments(pwsz, MAX_PATH * 8)))
-         //      {
-
-         //         wstr.release_string_buffer();
-
-         //         *pstrParams = unicode_to_utf8((const ::wide_character *)wstr);
-
-         //      }
-
-         //   }
-
-         //}
 
       }
 
@@ -2001,301 +1969,14 @@ retry:
    }
 
 
-
-   void os_context::edit_link_target(const ::file::path & path, const ::file::path & pathLink)
+   ::pointer < ::file::link > os_context::resolve_lnk_link(const ::file::path & path, ::file::e_link elink)
    {
 
-      auto pshelllink = _get_IShellLinkW(pathLink);
+      auto plink = __create_new < ::apex_windows::file_link >();
 
-      HRESULT hresult = pshelllink->SetPath(wstring(path));
+      plink->open(path, elink);
 
-      auto estatus = ::windows::hresult_status(hresult);
-
-      if (!estatus)
-      {
-
-         throw ::exception(estatus);
-
-      }
-
-      comptr < IPersistFile > ppersistfile;
-
-      pshelllink.as(ppersistfile);
-
-      if (!ppersistfile)
-      {
-
-         throw ::exception(error_no_interface);
-
-      }
-
-      ppersistfile->Save(wstring(pathLink), TRUE);
-
-   }
-
-
-   void os_context::edit_link_folder(const ::file::path & path, const ::file::path & pathLink)
-   {
-
-      auto pshelllink = _get_IShellLinkW(pathLink);
-
-      HRESULT hresult = pshelllink->SetWorkingDirectory(wstring(path));
-
-      auto estatus = ::windows::hresult_status(hresult);
-
-      if (!estatus)
-      {
-
-         throw ::exception(estatus);
-
-      }
-
-      comptr < IPersistFile > ppersistfile;
-
-      pshelllink.as(ppersistfile);
-
-      if (!ppersistfile)
-      {
-
-         throw ::exception(error_no_interface);
-
-      }
-
-      ppersistfile->Save(wstring(pathLink), TRUE);
-
-   }
-
-
-
-   void os_context::edit_link_icon(const ::file::path& path, int iIcon, const ::file::path& pathLink)
-   {
-
-      auto pshelllink = _get_IShellLinkW(pathLink);
-
-      HRESULT hresult = pshelllink->SetIconLocation(wstring(path), iIcon);
-
-      auto estatus = ::windows::hresult_status(hresult);
-
-      if (!estatus)
-      {
-
-         throw ::exception(estatus);
-
-      }
-
-      comptr < IPersistFile > ppersistfile;
-
-      pshelllink.as(ppersistfile);
-
-      if (!ppersistfile)
-      {
-
-         throw ::exception(error_no_interface);
-
-      }
-
-      ppersistfile->Save(wstring(pathLink), TRUE);
-
-   }
-
-
-
-   bool os_context::resolve_link(::file::path & path, const ::string & strSource, string * pstrDirectory, string * pstrParams, string * pstrIcon, int * piIcon)
-   {
-
-      if (::os_context::resolve_link(path, strSource, pstrDirectory, pstrParams, pstrIcon, piIcon))
-      {
-
-         return true;
-
-      }
-
-      if (strSource.case_insensitive_ends(".lnk"))
-      {
-
-         if (resolve_lnk_link(path, strSource, pstrDirectory, pstrParams, pstrIcon, piIcon))         {
-
-            return true;
-
-         }
-
-      }
-
-      return false;
-
-   }
-
-
-   bool os_context::resolve_lnk_link(::file::path & path, const ::string & strSource, string * pstrDirectory, string * pstrParams, string * pstrIcon, int * piIcon)
-   {
-
-      ASSERT(strSource.case_insensitive_ends(".lnk"));
-
-      if (strSource.contains("0318") && strSource.contains("removal"))
-      {
-
-         output_debug_string("app.removal.tool link?!");
-
-      }
-
-      wstring wstrFileIn = utf8_to_unicode(strSource);
-
-      //bool bNativeUnicode = is_windows_native_unicode() != false;
-
-      SHFILEINFOW info{};
-
-      acmenode()->defer_co_initialize_ex(false);
-
-      DWORD_PTR dw = 0;
-
-      auto pitemidlist = path.m_pparticleOsPath.cast < ::itemidlist>();
-
-      if (pitemidlist)
-      {
-
-         dw = SHGetFileInfoW((const wchar_t *)pitemidlist->m_pidl, 0, &info, sizeof(info), SHGFI_ATTRIBUTES | SHGFI_PIDL);
-
-      }
-      else
-      {
-
-         dw = SHGetFileInfoW(wstrFileIn, 0, &info, sizeof(info), SHGFI_ATTRIBUTES);
-
-      }
-
-      if (dw == 0 || !(info.dwAttributes & SFGAO_LINK))
-      {
-
-         return false;
-
-      }
-
-      HRESULT hr;
-
-      comptr < IShellLinkW > pshelllink;
-
-      if (FAILED(hr = pshelllink.CoCreateInstance(CLSID_ShellLink, nullptr, CLSCTX_INPROC_SERVER)))
-      {
-
-         return false;
-
-      }
-
-      bool bOk = false;
-
-      comptr < IPersistFile > ppersistfile;
-
-      if (SUCCEEDED(hr = pshelllink.as(ppersistfile)))
-      {
-
-         if (SUCCEEDED(hr = ppersistfile->Load(wstrFileIn, STGM_READ)))
-         {
-
-            //HWND hwnd = pinteraction == nullptr ? nullptr : pinteraction->get_handle();
-
-            HWND hwnd = nullptr;
-
-            u32 fFlags = 0;
-
-            //fFlags |= pinteraction == nullptr ? (SLR_NO_UI | (10 << 16)) : 0;
-            fFlags |= SLR_NO_UI;
-
-            fFlags |= SLR_NOUPDATE;
-
-            fFlags |= SLR_NOSEARCH;
-
-            fFlags |= SLR_NOTRACK;
-
-            wstring wstr;
-
-            auto pwsz = wstr.get_string_buffer(MAX_PATH * 8);
-
-            if (SUCCEEDED(pshelllink->GetPath(pwsz, MAX_PATH * 8, nullptr, 0)))
-            {
-
-               bOk = true;
-
-               wstr.release_string_buffer();
-
-               string strLink = unicode_to_utf8((const ::wide_character *)wstr);
-
-               if (strLink.is_empty() && pitemidlist)
-               {
-
-                  pshelllink->GetIDList(&pitemidlist->m_pidl);
-
-               }
-               else
-               {
-
-                  path = strLink;
-
-               }
-
-            }
-
-            if (::is_set(pstrDirectory))
-            {
-
-               auto pwsz = wstr.get_string_buffer(MAX_PATH * 8);
-
-               if (SUCCEEDED(pshelllink->GetWorkingDirectory(pwsz, MAX_PATH * 8)))
-               {
-
-                  wstr.release_string_buffer();
-
-                  *pstrDirectory = unicode_to_utf8((const ::wide_character *)wstr);
-
-               }
-
-            }
-
-            if (::is_set(pstrParams))
-            {
-
-               auto pwsz = wstr.get_string_buffer(MAX_PATH * 8);
-
-               if (SUCCEEDED(pshelllink->GetArguments(pwsz, MAX_PATH * 8)))
-               {
-
-                  wstr.release_string_buffer();
-
-                  *pstrParams = unicode_to_utf8((const ::wide_character *)wstr);
-
-               }
-
-            }
-
-            if (::is_set(pstrIcon))
-            {
-
-               auto pwsz = wstr.get_string_buffer(MAX_PATH * 8);
-
-               int iIcon = 0;
-
-               if (SUCCEEDED(pshelllink->GetIconLocation(pwsz, MAX_PATH * 8, &iIcon)))
-               {
-
-                  wstr.release_string_buffer();
-
-                  *pstrIcon = unicode_to_utf8((const ::wide_character*)wstr);
-
-                  if (*piIcon)
-                  {
-
-                     *piIcon = iIcon;
-
-                  }
-
-               }
-
-            }
-
-         }
-
-      }
-
-      return bOk;
+      return plink;
 
    }
 

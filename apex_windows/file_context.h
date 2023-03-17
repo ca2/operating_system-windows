@@ -17,7 +17,7 @@ CLASS_DECL_APEX_WINDOWS string windows_get_short_file_name(const ::string & str)
 ///CLASS_DECL_APEX_WINDOWS void vfxGetModuleShortFileName(HINSTANCE hInst, string & strShortName);
 
 
-#include "apex/filesystem/filesystem/file_context.h"
+#include "apex_windows_common/file_context.h"
 
 
 namespace apex_windows
@@ -25,7 +25,7 @@ namespace apex_windows
 
 
    class CLASS_DECL_APEX_WINDOWS file_context :
-      virtual public ::file_context
+      virtual public ::apex_windows_common::file_context
    {
    public:
 
@@ -48,8 +48,8 @@ namespace apex_windows
       void init_system() override;
 
 
-      virtual void get_status(const ::file::path & path, ::file::file_status & status);
-      virtual void set_status(const ::file::path & path, const ::file::file_status & status);
+      //virtual void get_status(const ::file::path & path, ::file::file_status & status);
+      //virtual void set_status(const ::file::path & path, const ::file::file_status & status);
 
 
 
@@ -84,11 +84,11 @@ namespace apex_windows
 
       //void update_module_path() override;
 
-      file_pointer get_file(const ::payload & payloadFile, const ::file::e_open & nOpenFlags) override;
-
+      file_pointer get_file(const ::payload & payloadFile, ::file::e_open eopen, ::pointer < ::file::exception > * ppfileexception) override;
 
 
       ::file::path dropbox_info_network_payload() override;
+
 
       //virtual ::file::path onedrive_global_ini(::particle * pparticle) override;
       //virtual ::file::path onedrive_cid_ini(::particle * pparticle) override;

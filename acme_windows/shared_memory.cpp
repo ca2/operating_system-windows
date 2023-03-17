@@ -29,7 +29,8 @@ shared_memory::shared_memory(memory_container * pcontainer, double dAllocationRa
 
 }
 
-shared_memory::shared_memory(memory_container * pcontainer, void * pMemory, memsize dwSize)
+
+shared_memory::shared_memory(memory_container * pcontainer, const void * pMemory, memsize dwSize)
 {
 
    m_nAllocFlags = 0;
@@ -40,7 +41,7 @@ shared_memory::shared_memory(memory_container * pcontainer, void * pMemory, mems
 
    set_size(dwSize);
 
-   ASSERT(__is_valid_address(pMemory, (uptr)dwSize, false));
+   ASSERT(is_memory_segment_ok(pMemory, (uptr)dwSize));
 
    ::memcpy_dup(m_beginStorage, pMemory, (size_t)dwSize);
 
@@ -58,7 +59,7 @@ shared_memory::shared_memory(const void * pMemory, memsize dwSize)
 
    set_size(dwSize);
 
-   ASSERT(__is_valid_address(pMemory, (uptr)dwSize, false));
+   ASSERT(is_memory_segment_ok(pMemory, (uptr)dwSize));
 
    ::memcpy_dup(m_beginStorage, pMemory, (size_t)dwSize);
 

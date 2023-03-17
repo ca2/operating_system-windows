@@ -49,6 +49,7 @@ namespace acme_windows
       ::file::path stage(string strAppId, string strPlatform, string strConfiguration) override;
       ::file::path sys_temp() override;
       ::string dir_root() override;
+      ::file::path temp() override;
       //::file::path home() override;
       //::file::path program_data() override;
       //::file::path roaming() override;
@@ -127,7 +128,10 @@ namespace acme_windows
       //int make_path(const scoped_string & str) override;
 
       ::file::path get_current() override;
-      void change_current(const scoped_string & str) override;
+      void change_current(const ::file::path & path) override;
+
+
+      //::file::path temp() override;
 
 
    };

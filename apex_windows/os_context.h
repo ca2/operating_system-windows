@@ -90,13 +90,13 @@ namespace apex_windows
 
       comptr < IShellLinkW > _get_IShellLinkW(const ::file::path & pathLink);
 
-      void edit_link_target(const ::file::path & path, const ::file::path & pathLink) override;
-      void edit_link_folder(const ::file::path & path, const ::file::path & pathLink) override;
-      void edit_link_icon(const ::file::path& path, int iIcon, const ::file::path& pathLink) override;
+      //void edit_link_target(const ::file::path & path, const ::file::path & pathLink) override;
+      //void edit_link_folder(const ::file::path & path, const ::file::path & pathLink) override;
+      //void edit_link_icon(const ::file::path& path, int iIcon, const ::file::path& pathLink) override;
 
-      bool resolve_link(::file::path & path, const ::string & strSource, string * pstrDirectory = nullptr, string * pstrParams = nullptr, string * pstrIcon = nullptr, int * piIcon = nullptr) override;
+      ::pointer < ::file::link > resolve_link(const ::file::path & path, ::file::e_link elink = ::file::e_link_all) override;
 
-      bool resolve_lnk_link(::file::path & path, const ::string & strSource, string * pstrDirectory = nullptr, string * pstrParams = nullptr, string * pstrIcon = nullptr, int * piIcon = nullptr);
+      virtual ::pointer < ::file::link > resolve_lnk_link(const ::file::path & path, ::file::e_link elink = ::file::e_link_all);
 
       bool has_alias_in_path(const scoped_string & str, bool bNoUI = false, bool bNoMount = false) override;
 
@@ -107,9 +107,7 @@ namespace apex_windows
 
       bool is_remote_session() override;
 
-      void set_file_status(const ::string & pszFileName, const ::file::file_status& status) override;
-
-
+      void set_file_status(const ::file::path & path, const ::file::file_status& status) override;
 
       void initialize_wallpaper_fileset(::file::set* pset, bool bAddSearch) override;
 

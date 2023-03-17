@@ -4,7 +4,7 @@
 #include "acme/parallelization/synchronous_lock.h"
 
 
-CLASS_DECL_ACME bool ensure_file_size_handle(HANDLE h, u64 iSize);
+//CLASS_DECL_ACME bool ensure_file_size_handle(HANDLE h, u64 iSize);
 
 
 namespace acme_windows
@@ -14,7 +14,6 @@ namespace acme_windows
    file_memory_map::file_memory_map()
    {
 
-      m_hfile = INVALID_HANDLE_VALUE;
       m_hfilemap = nullptr;
 
    }
@@ -34,22 +33,30 @@ namespace acme_windows
 
       string strPath = get_path();
 
+      ::file::path path(strPath);
+
+      auto strWindowsPath = path.windows_path();
+
+      ::windows_path windowspath = strWindowsPath;
+
       if (strPath.case_insensitive_begins("Local\\") || strPath.case_insensitive_begins("Global\\"))
       {
 
-         ::file::path path(strPath);
+         m_fileinstance.m_handle = INVALID_HANDLE_VALUE;
 
-         m_hfile = INVALID_HANDLE_VALUE;
-
-         m_hfilemap = CreateFileMappingW(INVALID_HANDLE_VALUE, nullptr, PAGE_READWRITE, 0, (::u32)m_size, path.get_os_path());
+         m_hfilemap = CreateFileMappingW(INVALID_HANDLE_VALUE, nullptr, PAGE_READWRITE, 0, (::u32)m_size, windowspath);
 
       }
       else
       {
 
-         acmedirectory()->create(::file::path(file_path_folder(strPath)).get_os_path());
+         auto pathFolder = path.folder();
 
-         wstring wstr(strPath);
+         auto strWindowsPathFolder = pathFolder.windows_path();
+
+         ::windows_path windowspathFolder = strWindowsPathFolder;
+
+         acmedirectory()->create(windowspathFolder);
 
          int iOpen;
 
@@ -66,32 +73,28 @@ namespace acme_windows
 
          }
 
-         m_hfile = CreateFileW(wstr, (m_bRead | m_bWrite ? FILE_READ_DATA : 0) | (m_bWrite ? FILE_WRITE_DATA : 0), FILE_SHARE_WRITE | FILE_SHARE_READ, nullptr, iOpen, FILE_ATTRIBUTE_NORMAL, nullptr);
+         m_fileinstance.create_file(path, (m_bRead || m_bWrite ? FILE_READ_DATA : 0) | (m_bWrite ? FILE_WRITE_DATA : 0), FILE_SHARE_WRITE | FILE_SHARE_READ, nullptr, iOpen, FILE_ATTRIBUTE_NORMAL, nullptr);
 
-         if (m_hfile == INVALID_HANDLE_VALUE)
+         if (m_fileinstance.nok())
          {
-
-            close();
 
             return false;
 
          }
-         else
-         {
 
-            ensure_file_size_handle(m_hfile, m_size);
+         m_fileinstance.ensure_file_size(m_size);
 
-         }
-
-         m_hfilemap = CreateFileMappingW(m_hfile, nullptr, PAGE_READWRITE, 0, 0, nullptr);
+         m_hfilemap = CreateFileMappingW(m_fileinstance, nullptr, PAGE_READWRITE, 0, 0, nullptr);
 
       }
 
       if (m_hfilemap == nullptr)
       {
+         
          close();
 
          return false;
+
       }
 
       m_pdata = ::MapViewOfFile(m_hfilemap, (m_bRead ? FILE_MAP_READ : 0) | (m_bWrite ? FILE_MAP_WRITE : 0), 0, 0, 0);
@@ -150,40 +153,19 @@ namespace acme_windows
 
       }
 
-      if (m_hfile != nullptr)
+      if (m_hfilemap != nullptr)
       {
 
-         try
-         {
+         ::CloseHandle(m_hfilemap);
 
-            ::CloseHandle(m_hfile);
-
-         }
-         catch (...)
-         {
-
-         }
-
-         m_hfile = nullptr;
+         m_hfilemap = nullptr;
 
       }
 
-
-      if (m_hfile != INVALID_HANDLE_VALUE)
+      if (m_fileinstance.is_ok())
       {
 
-         try
-         {
-
-            ::CloseHandle(m_hfile);
-
-         }
-         catch (...)
-         {
-
-         }
-
-         m_hfile = INVALID_HANDLE_VALUE;
+         m_fileinstance.close_handle();
 
       }
 

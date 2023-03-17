@@ -43,7 +43,7 @@ namespace apex_windows
 
       //auto estatus = 
       
-      ::object::initialize(pparticle);
+      ::apex_windows_common::file_context::initialize(pparticle);
 
       //if (!estatus)
       //{
@@ -65,6 +65,8 @@ namespace apex_windows
 
    void file_context::init_system()
    {
+
+      ::apex_windows_common::file_context::init_system();
 
       //auto estatus = m_pfilesystem->update_module_path();
 
@@ -334,41 +336,45 @@ namespace apex_windows
    void file_context::erase(const ::file::path & path)
    {
 
+//#ifdef WINDOWS_DESKTOP
+//
+      ::windows::file_instance fileinstance;
 
-#ifdef WINDOWS_DESKTOP
-
-      HANDLE h = ::CreateFileW(L"\\\\?\\" + path.get_os_path(),
+      //filehandle.create_file(L"\\\\?\\" + path.get_os_path(),
+      fileinstance.create_file(path,
          GENERIC_READ | GENERIC_WRITE, 0, nullptr, OPEN_EXISTING,
          FILE_FLAG_OPEN_REPARSE_POINT | FILE_FLAG_DELETE_ON_CLOSE, nullptr);
 
-      if (h == INVALID_HANDLE_VALUE)
-      {
+      //if (h == INVALID_HANDLE_VALUE)
+      //{
 
-         DWORD dwLastError = ::GetLastError();
+      //   DWORD dwLastError = ::GetLastError();
 
-         if (dwLastError == 2) // the file does not exist, so delete "failed"
-         {
+      //   if (dwLastError == 2) // the file does not exist, so delete "failed"
+      //   {
 
-            return;
+      //      return;
 
-         }
+      //   }
 
-         auto estatus = ::windows::last_error_status(dwLastError);
+      //   auto estatus = ::windows::last_error_status(dwLastError);
 
-         auto errorcode = ::windows::last_error_error_code(dwLastError);
+      //   auto errorcode = ::windows::last_error_error_code(dwLastError);
 
-         //string strError;
+      //   //string strError;
 
-         //strError.format("Failed to delete file \"%s\" error=%d", psz, dwError);
+      //   //strError.format("Failed to delete file \"%s\" error=%d", psz, dwError);
 
-         throw ::file::exception(estatus, errorcode, path, "Failed to open file to be deleted.");
+      //   throw ::file::exception(estatus, errorcode, path, "Failed to open file to be deleted.");
 
-      }
-      else
-      {
-         ::FlushFileBuffers(h);
-         ::CloseHandle(h);
-      }
+      //}
+      //else
+      //{
+
+      fileinstance.flush_file_buffers();
+         //::FlushFileBuffers(h);
+         //::CloseHandle(h);
+      //}
 
       /*      if(!::DeleteFileW(utf8_to_unicode(string("\\\\?\\") + psz)))
       {
@@ -381,19 +387,19 @@ namespace apex_windows
       }*/
 
 
-#else
-
-      if (unlink(psz) != 0)
-      {
-         i32 err = errno;
-         if (err != ENOENT) // already does not exist - consider removal successful - does not issue an exception
-         {
-            string strError;
-            strError.Format("Failed to delete file error=%d", err);
-            throw ::exception(::exception(strError));
-         }
-      }
-#endif
+//#else
+//
+//      if (unlink(psz) != 0)
+//      {
+//         i32 err = errno;
+//         if (err != ENOENT) // already does not exist - consider removal successful - does not issue an exception
+//         {
+//            string strError;
+//            strError.Format("Failed to delete file error=%d", err);
+//            throw ::exception(::exception(strError));
+//         }
+//      }
+//#endif
 
    }
 
@@ -496,49 +502,6 @@ namespace apex_windows
       *pfiletime = data.ftLastWriteTime;
 
       return true;
-
-   }
-
-
-   void file_context::get_status(const ::file::path & path, ::file::file_status & rStatus)
-   {
-
-      wstring wstrFullName(path);
-
-      WIN32_FIND_DATAW findFileData;
-
-      HANDLE hFind = FindFirstFileW((LPWSTR)(const ::wide_character *)wstrFullName, &findFileData);
-
-      if (hFind == INVALID_HANDLE_VALUE)
-      {
-
-         throw ::exception(error_failed);
-
-      }
-
-      VERIFY(FindClose(hFind));
-
-      // strip attribute of NORMAL bit, our API doesn't have a "normal" bit.
-      rStatus.m_attribute = (byte)(findFileData.dwFileAttributes & ~FILE_ATTRIBUTE_NORMAL);
-
-      // get just the low ::u32 of the file size_i32
-      //ASSERT(findFileData.nFileSizeHigh == 0);
-      rStatus.m_filesize = (::filesize)make64_from32(findFileData.nFileSizeLow, findFileData.nFileSizeHigh);
-
-      //auto pnode = psystem->node();
-
-      // convert times as appropriate
-      file_time_to_time(&rStatus.m_ctime.m_time, (file_time_t *)&findFileData.ftCreationTime);
-      file_time_to_time(&rStatus.m_atime.m_time, (file_time_t *)&findFileData.ftLastAccessTime);
-      file_time_to_time(&rStatus.m_mtime.m_time, (file_time_t *)&findFileData.ftLastWriteTime);
-
-      if (rStatus.m_ctime.get_time() == 0)
-         rStatus.m_ctime = rStatus.m_mtime;
-
-      if (rStatus.m_atime.get_time() == 0)
-         rStatus.m_atime = rStatus.m_mtime;
-
-      //return true;
 
    }
 
@@ -698,136 +661,6 @@ namespace apex_windows
    //}
 
 
-   void file_context::set_status(const ::file::path & path, const ::file::file_status & status)
-   {
-
-      wstring pszFileName(path);
-
-
-      ::u32 wAttr;
-      FILETIME creationTime;
-      FILETIME lastAccessTime;
-      FILETIME lastWriteTime;
-      LPFILETIME pCreationTime = nullptr;
-
-      LPFILETIME pLastAccessTime = nullptr;
-
-      LPFILETIME pLastWriteTime = nullptr;
-
-      if ((wAttr = ::windows::get_file_attributes(path)) == (::u32)INVALID_FILE_ATTRIBUTES)
-      {
-
-         DWORD dwLastError = ::GetLastError();
-
-         auto estatus = ::windows::last_error_status(dwLastError);
-
-         auto errorcode = ::windows::last_error_error_code(dwLastError);
-
-         throw ::file::exception(estatus, errorcode, path, "!windows_get_file_attributes");
-
-      }
-
-      if ((::u32)status.m_attribute != wAttr && (wAttr & FILE_ATTRIBUTE_READONLY))
-      {
-         // set file attribute, only if currently readonly.
-         // This way we will be able to modify the time assuming the
-         // caller changed the file from readonly.
-
-         if (!SetFileAttributesW((LPWSTR)(const ::wide_character *)pszFileName, (::u32)status.m_attribute))
-         {
-
-            DWORD dwLastError = ::GetLastError();
-
-            auto estatus = ::windows::last_error_status(dwLastError);
-
-            auto errorcode = ::windows::last_error_error_code(dwLastError);
-
-            throw ::file::exception(estatus, errorcode, ::string(pszFileName), "!SetFileAttributesW");
-
-         }
-
-      }
-
-      // last modification time
-      if (status.m_mtime.get_time() != 0)
-      {
-         
-         ::copy(lastWriteTime, status.m_mtime);
-
-         pLastWriteTime = &lastWriteTime;
-
-         // last access time
-         if (status.m_atime.get_time() != 0)
-         {
-
-            ::copy(lastAccessTime, status.m_atime);
-
-            pLastAccessTime = &lastAccessTime;
-
-         }
-
-         // create time
-         if (status.m_ctime.get_time() != 0)
-         {
-
-            ::copy(creationTime, status.m_ctime);
-
-            pCreationTime = &creationTime;
-
-         }
-
-         HANDLE hFile = ::CreateFileW((LPWSTR)(const ::wide_character *)pszFileName, GENERIC_READ | GENERIC_WRITE,
-
-            FILE_SHARE_READ, nullptr, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL,
-            nullptr);
-
-         if (hFile == INVALID_HANDLE_VALUE)
-         {
-
-            auto estatus = ::windows::last_error_status(::GetLastError());
-
-            throw ::exception(estatus);
-
-            return;
-
-         }
-
-         if (!SetFileTime((HANDLE)hFile, pCreationTime, pLastAccessTime, pLastWriteTime))
-         {
-
-            auto estatus = ::windows::last_error_status(::GetLastError());
-
-            throw ::exception(estatus);
-
-         }
-
-         if (!::CloseHandle(hFile))
-         {
-
-            auto estatus = ::windows::last_error_status(::GetLastError());
-
-            throw ::exception(estatus);
-
-         }
-
-      }
-
-      if ((::u32)status.m_attribute != wAttr && !(wAttr & FILE_ATTRIBUTE_READONLY))
-      {
-
-         if (!SetFileAttributesW((LPWSTR)(const ::wide_character *)pszFileName, (::u32)status.m_attribute))
-         {
-
-            auto estatus = ::windows::last_error_status(::GetLastError());
-
-            throw ::exception(estatus);
-
-         }
-
-      }
-
-   }
-
 
    //void file_context::update_module_path()
    //{
@@ -846,10 +679,10 @@ namespace apex_windows
    //}
 
 
-   file_pointer file_context::get_file(const ::payload & payloadFile, const ::file::e_open & eopenFlags)
+   file_pointer file_context::get_file(const ::payload & payloadFile, ::file::e_open eopen, ::pointer < ::file::exception > * ppfileexception)
    {
 
-      return ::file_context::get_file(payloadFile, eopenFlags);
+      return ::file_context::get_file(payloadFile, eopen);
 
    }
 

@@ -107,14 +107,7 @@ namespace acme_windows
    }
 
 
-   bool delete_file(const ::file::path & path)
-   {
-
-      return ::DeleteFileW(path.get_os_path()) != false;
-
-
-   }
-
-
 } // namespace windows
+
+
 
