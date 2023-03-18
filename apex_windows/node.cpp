@@ -1135,7 +1135,7 @@ namespace apex_windows
       if (papplication->m_strAppName.has_char())
       {
 
-         strAppName = m_strAppName;
+         strAppName = papplication->m_strAppName;
 
       }
       else
@@ -1157,21 +1157,21 @@ namespace apex_windows
 
       ::file::path pathShortcut;
 
-#ifdef WINDOWS_DESKTOP
+//#ifdef WINDOWS_DESKTOP
 
       pathShortcut = acmedirectory()->roaming() / "Microsoft/Windows/Start Menu/Programs" / strRoot / (strAppName + ".lnk");
 
-#else
-
-      ::string strDesktopFileName;
-
-      strDesktopFileName = m_strAppId;
-
-      strDesktopFileName.find_replace("/", ".");
-
-      pathShortcut = acmedirectory()->home() / ".local/share/applications" / (strDesktopFileName + ".desktop");
-
-#endif
+//#else
+//
+//      ::string strDesktopFileName;
+//
+//      strDesktopFileName = m_strAppId;
+//
+//      strDesktopFileName.find_replace("/", ".");
+//
+//      pathShortcut = acmedirectory()->home() / ".local/share/applications" / (strDesktopFileName + ".desktop");
+//
+//#endif
 
       auto path = acmefile()->module();
 
@@ -1179,11 +1179,14 @@ namespace apex_windows
       ::file::path pathIcon;
       int iIcon = -1;
 
-      bool bEnoughCondition1 = !acmefile()->exists(pathShortcut);
-      bool bEnoughCondition2 = !acmenode()->m_papexnode->shell_link_target(pathTarget, pathShortcut);
-      bool bEnoughCondition3 = !acmepath()->final_is_same(pathTarget, path);
-      bool bEnoughCondition4 = !acmenode()->m_papexnode->shell_link_icon(pathIcon, iIcon, path);
-      bool bEnoughCondition5 = pathIcon.trimmed().is_empty() || !acmefile()->exists(pathIcon);
+      auto plink = acmenode()->m_papexnode->resolve_link(pathShortcut);
+
+      // Enough condition to create shortcut
+      bool bEnoughCondition1 = !plink;
+      bool bEnoughCondition2 = !(plink->m_elink & ::file::e_link_target);
+      bool bEnoughCondition3 = !acmepath()->final_is_same(plink->m_pathTarget, path);
+      bool bEnoughCondition4 = !(plink->m_elink & ::file::e_link_icon);
+      bool bEnoughCondition5 = plink->m_pathIcon.trimmed().is_empty() || !acmefile()->exists(plink->m_pathIcon);
 
       //if (!acmefile()->exists(pathCreatedShortcut)
       if (bEnoughCondition1
