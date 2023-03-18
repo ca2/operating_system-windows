@@ -2,6 +2,7 @@
 #include "node.h"
 #include "os_context.h"
 #include "acme/exception/exception.h"
+#include "acme/filesystem/filesystem/acme_path.h"
 #include "acme/platform/application.h"
 #include "acme/primitive/primitive/memory.h"
 #include "acme/primitive/string/adaptor.h"
@@ -10,6 +11,7 @@
 #include "acme_windows/acme_file.h"
 #include "acme_windows/registry.h"
 #include "apex/filesystem/filesystem/file_context.h"
+#include "apex/filesystem/filesystem/link.h"
 #include "apex/platform/application.h"
 #include "apex/platform/os_context.h"
 #include "apex/platform/system.h"
@@ -992,26 +994,26 @@ namespace apex_windows
 
                auto pnode = acmesystem()->node()->m_papexnode;
 
-               string strAppName;
+               string strAppName = papp->app_name();
 
-               string strAppIdUnderscore = papp->m_strAppId;
+               //string strAppIdUnderscore = papp->m_strAppId;
 
-               strAppIdUnderscore.find_replace("/", "_");
+               //strAppIdUnderscore.find_replace("/", "_");
 
-               strAppIdUnderscore.find_replace("-", "_");
+               //strAppIdUnderscore.find_replace("-", "_");
 
-               if (papp->m_strAppName.has_char())
-               {
+               //if (papp->m_strAppName.has_char())
+               //{
 
-                  strAppName = papp->m_strAppName;
+               //   strAppName = papp->m_strAppName;
 
-               }
-               else
-               {
+               //}
+               //else
+               //{
 
-                  strAppName = strAppIdUnderscore;
+               //   strAppName = strAppIdUnderscore;
 
-               }
+               //}
 
                string strRoot;
 
@@ -1130,76 +1132,37 @@ namespace apex_windows
    void node::on_create_app_shortcut(::acme::application * papplication)
    {
 
-      string strAppName;
+      defer_create_app_shortcut(papplication);
 
-      if (papplication->m_strAppName.has_char())
-      {
+   }
 
-         strAppName = papplication->m_strAppName;
 
-      }
-      else
-      {
+   ::file::path node::app_shortcut_path(::acme::application* papplication)
+   {
 
-         string strAppIdUnderscore = papplication->m_strAppId;
+      string strAppName = papplication->app_name();
 
-         strAppIdUnderscore.find_replace("/", "_");
-
-         strAppIdUnderscore.find_replace("-", "_");
-
-         strAppName = strAppIdUnderscore;
-
-      }
-
-      string strRoot = papplication->m_strAppId.left(papplication->m_strAppId.find('/'));
-
-      //auto pathCreatedShortcut = acmedirectory()->roaming() / m_strAppId / "created_shortcut.txt";
+      string strRoot = papplication->app_root();
 
       ::file::path pathShortcut;
 
-//#ifdef WINDOWS_DESKTOP
+      //#ifdef WINDOWS_DESKTOP
 
       pathShortcut = acmedirectory()->roaming() / "Microsoft/Windows/Start Menu/Programs" / strRoot / (strAppName + ".lnk");
 
-//#else
-//
-//      ::string strDesktopFileName;
-//
-//      strDesktopFileName = m_strAppId;
-//
-//      strDesktopFileName.find_replace("/", ".");
-//
-//      pathShortcut = acmedirectory()->home() / ".local/share/applications" / (strDesktopFileName + ".desktop");
-//
-//#endif
+      //#else
+      //
+      //      ::string strDesktopFileName;
+      //
+      //      strDesktopFileName = m_strAppId;
+      //
+      //      strDesktopFileName.find_replace("/", ".");
+      //
+      //      pathShortcut = acmedirectory()->home() / ".local/share/applications" / (strDesktopFileName + ".desktop");
+      //
+      //#endif
 
-      auto path = acmefile()->module();
-
-      ::file::path pathTarget;
-      ::file::path pathIcon;
-      int iIcon = -1;
-
-      auto plink = acmenode()->m_papexnode->resolve_link(pathShortcut);
-
-      // Enough condition to create shortcut
-      bool bEnoughCondition1 = !plink;
-      bool bEnoughCondition2 = !(plink->m_elink & ::file::e_link_target);
-      bool bEnoughCondition3 = !acmepath()->final_is_same(plink->m_pathTarget, path);
-      bool bEnoughCondition4 = !(plink->m_elink & ::file::e_link_icon);
-      bool bEnoughCondition5 = plink->m_pathIcon.trimmed().is_empty() || !acmefile()->exists(plink->m_pathIcon);
-
-      //if (!acmefile()->exists(pathCreatedShortcut)
-      if (bEnoughCondition1
-         || bEnoughCondition2
-         || bEnoughCondition3
-         || bEnoughCondition4
-         || bEnoughCondition5
-         )
-      {
-
-         create_app_shortcut();
-
-      }
+      return pathShortcut;
 
    }
 

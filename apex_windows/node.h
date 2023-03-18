@@ -117,6 +117,9 @@ namespace apex_windows
       void on_create_app_shortcut(::acme::application* papplication) override;
 
 
+      ::file::path app_shortcut_path(::acme::application* papplication) override;
+
+
    };
 
 
