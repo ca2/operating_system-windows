@@ -1126,7 +1126,79 @@ namespace apex_windows
 
    }
 
+   
+   void node::on_create_app_shortcut(::acme::application * papplication)
+   {
 
+      string strAppName;
+
+      if (papplication->m_strAppName.has_char())
+      {
+
+         strAppName = m_strAppName;
+
+      }
+      else
+      {
+
+         string strAppIdUnderscore = papplication->m_strAppId;
+
+         strAppIdUnderscore.find_replace("/", "_");
+
+         strAppIdUnderscore.find_replace("-", "_");
+
+         strAppName = strAppIdUnderscore;
+
+      }
+
+      string strRoot = papplication->m_strAppId.left(papplication->m_strAppId.find('/'));
+
+      //auto pathCreatedShortcut = acmedirectory()->roaming() / m_strAppId / "created_shortcut.txt";
+
+      ::file::path pathShortcut;
+
+#ifdef WINDOWS_DESKTOP
+
+      pathShortcut = acmedirectory()->roaming() / "Microsoft/Windows/Start Menu/Programs" / strRoot / (strAppName + ".lnk");
+
+#else
+
+      ::string strDesktopFileName;
+
+      strDesktopFileName = m_strAppId;
+
+      strDesktopFileName.find_replace("/", ".");
+
+      pathShortcut = acmedirectory()->home() / ".local/share/applications" / (strDesktopFileName + ".desktop");
+
+#endif
+
+      auto path = acmefile()->module();
+
+      ::file::path pathTarget;
+      ::file::path pathIcon;
+      int iIcon = -1;
+
+      bool bEnoughCondition1 = !acmefile()->exists(pathShortcut);
+      bool bEnoughCondition2 = !acmenode()->m_papexnode->shell_link_target(pathTarget, pathShortcut);
+      bool bEnoughCondition3 = !acmepath()->final_is_same(pathTarget, path);
+      bool bEnoughCondition4 = !acmenode()->m_papexnode->shell_link_icon(pathIcon, iIcon, path);
+      bool bEnoughCondition5 = pathIcon.trimmed().is_empty() || !acmefile()->exists(pathIcon);
+
+      //if (!acmefile()->exists(pathCreatedShortcut)
+      if (bEnoughCondition1
+         || bEnoughCondition2
+         || bEnoughCondition3
+         || bEnoughCondition4
+         || bEnoughCondition5
+         )
+      {
+
+         create_app_shortcut();
+
+      }
+
+   }
 
 
 } // namespace apex_windows

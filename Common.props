@@ -15,7 +15,7 @@
   </PropertyGroup>
   <ItemDefinitionGroup>
     <ClCompile>
-      <AdditionalIncludeDirectories>$(RootParentDir)machine-include;$(BaseDir)base-include;.;..;../..;../../..;$(ProjectDir);$(ProjectDir)..;$(ProjectDir)../include;$(ProjectDir)../..;$(ProjectDir)../../..;$(__sensitive)/sensitive/include;$(BaseDir)source/include;$(BaseDir)operating_system/operating_system-windows/include;$(BaseDir)operating_system/operating_system-windows;$(BaseDir)operating_system/operating_system-windows_common;$(BaseDir)source/app/include;$(BaseDir)port/_;$(BaseDir)port/include;$(BaseDir);$(BaseDir)source;$(BaseDir)source/app;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(RootParentDir)machine-include;$(BaseDir)base-include;.;..;../..;../../..;$(ProjectDir);$(ProjectDir)..;$(ProjectDir)../include;$(ProjectDir)../..;$(ProjectDir)../../..;$(__sensitive)/sensitive/include;$(BaseDir)source/include;$(BaseDir)operating_system/operating_system-windows/configuration;$(BaseDir)operating_system/operating_system-windows/include;$(BaseDir)operating_system/operating_system-windows;$(BaseDir)operating_system/operating_system-windows_common;$(BaseDir)source/app/include;$(BaseDir)port/include;$(BaseDir);$(BaseDir)source;$(BaseDir)source/app;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_$(ProjectName)_project;_output_type_$(OutputType);%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <LanguageStandard_C>stdc11</LanguageStandard_C>
