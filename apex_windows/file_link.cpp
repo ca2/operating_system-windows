@@ -86,7 +86,9 @@ namespace apex_windows
       if (dw == 0 || !(info.dwAttributes & SFGAO_LINK))
       {
 
-         throw ::exception(error_failed);
+         m_elink.clear();
+
+         return;
 
       }
 
