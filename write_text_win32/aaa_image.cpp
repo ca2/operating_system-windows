@@ -471,7 +471,7 @@ namespace draw2d_gdiplus
 
             psrc2 = (::color::color *)&psrc[scanSrc * y];
 
-            memcpy_dup(pdst2, psrc2, xEnd * 4);
+            memory_copy(pdst2, psrc2, xEnd * 4);
 
          }
 

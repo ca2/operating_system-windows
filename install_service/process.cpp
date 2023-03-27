@@ -10,7 +10,7 @@ int get_process_creation_time(HANDLE process_handle, FILETIME *ft) {
     return 1;
   }
 
-  __memmov(ft, &creation_time, sizeof(creation_time));
+  memory_transfer(ft, &creation_time, sizeof(creation_time));
 
   return 0;
 }
@@ -24,7 +24,7 @@ int get_process_exit_time(HANDLE process_handle, FILETIME *ft) {
   }
 
   if (! (exit_time.dwLowDateTime || exit_time.dwHighDateTime)) return 2;
-  __memmov(ft, &exit_time, sizeof(exit_time));
+  memory_transfer(ft, &exit_time, sizeof(exit_time));
 
   return 0;
 }

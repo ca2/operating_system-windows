@@ -475,7 +475,7 @@ static int native_set_dependongroup(const TCHAR *service_name, void *param, cons
     for (s = unformatted; *s; s++) {
       if (*s != SC_GROUP_IDENTIFIER) canon[i++] = SC_GROUP_IDENTIFIER;
       size_t len = _tcslen(s);
-      __memmov(canon + i, s, (len + 1) * sizeof(TCHAR));
+      memory_transfer(canon + i, s, (len + 1) * sizeof(TCHAR));
       i += len + 1;
       s += len;
     }
@@ -492,8 +492,8 @@ static int native_set_dependongroup(const TCHAR *service_name, void *param, cons
       return -1;
     }
 
-    __memmov(dependencies, buffer, buflen * sizeof(TCHAR));
-    __memmov(dependencies + buflen - 1, canon, newlen * sizeof(TCHAR));
+    memory_transfer(dependencies, buffer, buflen * sizeof(TCHAR));
+    memory_transfer(dependencies + buflen - 1, canon, newlen * sizeof(TCHAR));
   }
   else dependencies = canon;
 
@@ -576,8 +576,8 @@ static int native_set_dependonservice(const TCHAR *service_name, void *param, co
       return -1;
     }
 
-    __memmov(dependencies, buffer, buflen * sizeof(TCHAR));
-    __memmov(dependencies + buflen - 1, unformatted, newlen * sizeof(TCHAR));
+    memory_transfer(dependencies, buffer, buflen * sizeof(TCHAR));
+    memory_transfer(dependencies + buflen - 1, unformatted, newlen * sizeof(TCHAR));
   }
   else dependencies = unformatted;
 

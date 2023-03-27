@@ -87,7 +87,7 @@
 //      {
 //         TRACE("crypto::decrypt The encryption phase worked. \n");
 //         storageDecrypt.allocate(DataOut.cbData);
-//         ::memcpy_dup(storageDecrypt.get_data(), DataOut.pbData, DataOut.cbData);
+//         ::memory_copy(storageDecrypt.get_data(), DataOut.pbData, DataOut.cbData);
 //         LocalFree(pwsz);
 //
 //         LocalFree(DataOut.pbData);
@@ -175,7 +175,7 @@
 //      {
 //         TRACE("crypto::encrypt The encryption phase worked. \n");
 //         storageEncrypt.allocate(DataOut.cbData);
-//         ::memcpy_dup(storageEncrypt.get_data(), DataOut.pbData, DataOut.cbData);
+//         ::memory_copy(storageEncrypt.get_data(), DataOut.pbData, DataOut.cbData);
 //         LocalFree(DataOut.pbData);
 //         return true;
 //      }

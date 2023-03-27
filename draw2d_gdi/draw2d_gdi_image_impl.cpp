@@ -594,7 +594,7 @@ namespace draw2d_gdi
    //   if ( (pimage->cx!=this->cx) || (pimage->cy!=this->cy) )
    //      pimage->create ( this->cx, this->cy );
    //   // do copy
-   //   memcpy_dup ( pimage->get_data(), m_pcolorref, this->cx*this->cy*4 );
+   //   memory_copy ( pimage->get_data(), m_pcolorref, this->cx*this->cy*4 );
    //}
 
 
@@ -604,7 +604,7 @@ namespace draw2d_gdi
    //   if ( (this->cx!=pimage->cx) || (this->cy!=pimage->cy) )
    //      create ( pimage->cx, pimage->cy );
    //   // do Paste
-   //   memcpy_dup ( m_pcolorref, pimage->get_data(), this->cx*this->cy*4 );
+   //   memory_copy ( m_pcolorref, pimage->get_data(), this->cx*this->cy*4 );
    //}
 
    //bool image::color_blend(::color::color color32, BYTE bAlpha)
@@ -3123,7 +3123,7 @@ namespace draw2d_gdi
             return false;
          }
 
-         memcpy_dup(m_pcolorref, pcolorref, (size_t) (area() * sizeof(::color::color)));
+         memory_copy(m_pcolorref, pcolorref, (size_t) (area() * sizeof(::color::color)));
 
 
          RGBQUAD bkcolor;

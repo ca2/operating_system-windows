@@ -691,7 +691,7 @@ namespace music
 
                      DWORD tempo = 0;
 
-                     reverse_memcpy(&tempo, m_keyframe.rbTempo, 3);
+                     reverse_memory_copy(&tempo, m_keyframe.rbTempo, 3);
 
                      double dTempoShiftRate = m_psequence->m_pfile->GetTempoShiftRate();
 
@@ -795,7 +795,7 @@ namespace music
 
                   lpmidihdr->dwBytesRecorded = sizeof(gmModeOn);
 
-                  memcpy_dup(lpmidihdr->lpData, gmModeOn, sizeof(gmModeOn));
+                  memory_copy(lpmidihdr->lpData, gmModeOn, sizeof(gmModeOn));
 
                   m_psequence->clear_operation(e_operation_general_midi_reset);
 
@@ -817,7 +817,7 @@ namespace music
 
                   lpmidihdr->dwBytesRecorded = sizeof(xgSystemOn);
 
-                  memcpy_dup(lpmidihdr->lpData, xgSystemOn, sizeof(xgSystemOn));
+                  memory_copy(lpmidihdr->lpData, xgSystemOn, sizeof(xgSystemOn));
 
                   m_psequence->clear_operation(e_operation_xg_system_on);
 
@@ -1837,7 +1837,7 @@ namespace music
                pheader = (file::midi_stream_event_header *)&m_psequence->m_pfile->m_memstorageF1.data()[iSize];
                pheader->m_dwLength = (DWORD)pevent->size();
                pheader->m_dwType = *lpdwType;
-               memcpy_dup(
+               memory_copy(
                   &m_psequence->m_pfile->m_memstorageF1.data()[iSize + sizeof(file::midi_stream_event_header)],
                   lpbParam,
                   pheader->m_dwLength);
@@ -2401,7 +2401,7 @@ namespace music
                TRACE("!hmemcpy is about to fault");
             }
 
-            memcpy_dup(lpdw, m_psequence->m_pfile->m_hpbPendingUserEvent, dwLength);
+            memory_copy(lpdw, m_psequence->m_pfile->m_hpbPendingUserEvent, dwLength);
 
             byte * pb = (byte *)lpdw;
 

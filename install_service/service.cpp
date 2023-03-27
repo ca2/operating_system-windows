@@ -446,7 +446,7 @@ int set_service_dependencies(const TCHAR *service_name, SC_HANDLE service_handle
             if (str_equiv(g, group)) {
               ok = true;
               /* Set canonical name. */
-              __memmov(group, g, _tcslen(g) * sizeof(TCHAR));
+              memory_transfer(group, g, _tcslen(g) * sizeof(TCHAR));
               break;
             }
 
@@ -474,7 +474,7 @@ int set_service_dependencies(const TCHAR *service_name, SC_HANDLE service_handle
       }
 
       size_t len = _tcslen(dependency) + 1;
-      __memmov(dependencies + i, dependency, len * sizeof(TCHAR));
+      memory_transfer(dependencies + i, dependency, len * sizeof(TCHAR));
       i += len;
 
       while (*s) s++;
@@ -522,7 +522,7 @@ int get_service_dependencies(const TCHAR *service_name, SC_HANDLE service_handle
     return 4;
   }
 
-  if (type == DEPENDENCY_ALL) __memmov(*buffer, qsc->lpDependencies, *bufsize * sizeof(TCHAR));
+  if (type == DEPENDENCY_ALL) memory_transfer(*buffer, qsc->lpDependencies, *bufsize * sizeof(TCHAR));
   else {
     TCHAR *s;
     size_t i = 0;
@@ -532,7 +532,7 @@ int get_service_dependencies(const TCHAR *service_name, SC_HANDLE service_handle
       if ((*s == SC_GROUP_IDENTIFIER && type & DEPENDENCY_GROUPS) || (*s != SC_GROUP_IDENTIFIER && type & DEPENDENCY_SERVICES)) {
         size_t len = _tcslen(s) + 1;
         *bufsize += (unsigned long) len;
-        __memmov(*buffer + i, s, len * sizeof(TCHAR));
+        memory_transfer(*buffer + i, s, len * sizeof(TCHAR));
         i += len;
       }
 
@@ -662,7 +662,7 @@ int get_service_username(const TCHAR *service_name, const QUERY_SERVICE_CONFIG *
       return 2;
     }
 
-    __memmov(*username, qsc->lpServiceStartName, (len + 1) * sizeof(TCHAR));
+    memory_transfer(*username, qsc->lpServiceStartName, (len + 1) * sizeof(TCHAR));
     *usernamelen = len;
   }
 
@@ -746,7 +746,7 @@ int pre_install_service(int argc, TCHAR **argv) {
 
   for (i = 2; i < argc; i++) {
     size_t len = _tcslen(argv[i]);
-    __memmov(service->flags + s, argv[i], len * sizeof(TCHAR));
+    memory_transfer(service->flags + s, argv[i], len * sizeof(TCHAR));
     s += len;
     if (i < argc - 1) service->flags[s++] = _T(' ');
   }
@@ -1000,7 +1000,7 @@ int pre_edit_service(int argc, TCHAR **argv) {
     size_t s = 0;
     for (i = remainder; i < argc; i++) {
       size_t len = _tcslen(argv[i]);
-      __memmov(value.string + s, argv[i], len * sizeof(TCHAR));
+      memory_transfer(value.string + s, argv[i], len * sizeof(TCHAR));
       s += len;
       if (i < argc - 1) {
         if (setting->additional & ADDITIONAL_CRLF) {

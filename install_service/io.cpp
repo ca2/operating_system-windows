@@ -154,7 +154,7 @@ static void rotated_filename(TCHAR *path, TCHAR *rotated, unsigned long rotated_
   }
 
   TCHAR buffer[PATH_LENGTH];
-  __memmov(buffer, path, sizeof(buffer));
+  memory_transfer(buffer, path, sizeof(buffer));
   TCHAR *ext = PathFindExtension(buffer);
   TCHAR extension[PATH_LENGTH];
   _sntprintf_s(extension, _countof(extension), _TRUNCATE, _T("-%04u%02u%02uT%02u%02u%02u.%03u%s"), st->wYear, st->wMonth, st->wDay, st->wHour, st->wMinute, st->wSecond, st->wMilliseconds, ext);

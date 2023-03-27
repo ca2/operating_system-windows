@@ -397,7 +397,7 @@ int configure(HWND window, nssm_service_t *service, nssm_service_t *orig_service
           print_message(stderr, NSSM_MESSAGE_OUT_OF_MEMORY, _T("canon"), _T("install()"));
           return 6;
         }
-        __memmov(service->username, well_known, service->usernamelen * sizeof(TCHAR));
+        memory_transfer(service->username, well_known, service->usernamelen * sizeof(TCHAR));
       }
     }
     else {

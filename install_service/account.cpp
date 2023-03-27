@@ -44,7 +44,7 @@ int username_sid(const TCHAR *username, SID **sid, LSA_HANDLE *policy) {
       if (policy == &handle) LsaClose(handle);
       return 2;
     }
-    __memmov(expanded, username, expandedlen);
+    memory_transfer(expanded, username, expandedlen);
   }
   else {
     TCHAR computername[MAX_COMPUTERNAME_LENGTH + 1];
@@ -186,9 +186,9 @@ int canonicalise_username(const TCHAR *username, TCHAR **canon) {
   }
 
   /* Buffer is wchar_t but Length is in bytes. */
-  __memmov((char *) lsa_canon.Buffer, trust->Name.Buffer, trust->Name.Length);
-  __memmov((char *) lsa_canon.Buffer + trust->Name.Length, L"\\", sizeof(wchar_t));
-  __memmov((char *) lsa_canon.Buffer + trust->Name.Length + sizeof(wchar_t), translated_name->Name.Buffer, translated_name->Name.Length);
+  memory_transfer((char *) lsa_canon.Buffer, trust->Name.Buffer, trust->Name.Length);
+  memory_transfer((char *) lsa_canon.Buffer + trust->Name.Length, L"\\", sizeof(wchar_t));
+  memory_transfer((char *) lsa_canon.Buffer + trust->Name.Length + sizeof(wchar_t), translated_name->Name.Buffer, translated_name->Name.Length);
 
 #ifdef UNICODE
   *canon = lsa_canon.Buffer;

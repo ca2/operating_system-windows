@@ -490,15 +490,15 @@ namespace multimedia
             if(nullptr == lpvAudio2)
             {
 
-               memcpy_dup(lpvAudio1,out_get_buffer_data(i),dwBytesAudio1);
+               memory_copy(lpvAudio1,out_get_buffer_data(i),dwBytesAudio1);
 
             }
             else
             {
 
-               memcpy_dup(lpvAudio1,out_get_buffer_data(i),dwBytesAudio1);
+               memory_copy(lpvAudio1,out_get_buffer_data(i),dwBytesAudio1);
 
-               memcpy_dup(lpvAudio2,(byte *)out_get_buffer_data(i) + dwBytesAudio1,dwBytesAudio2);
+               memory_copy(lpvAudio2,(byte *)out_get_buffer_data(i) + dwBytesAudio1,dwBytesAudio2);
 
             }
 

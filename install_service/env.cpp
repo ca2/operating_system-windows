@@ -14,7 +14,7 @@ TCHAR *copy_environment_block(TCHAR *env) {
     return 0;
   }
 
-  __memmov(newenv, env, len * sizeof(TCHAR));
+  memory_transfer(newenv, env, len * sizeof(TCHAR));
   return newenv;
 }
 

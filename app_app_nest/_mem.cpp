@@ -42,10 +42,10 @@ void * calloc(  size_t sz, size_t sz2 )
    return ca2_alloc(sz * sz2);
 }*/
 
-#pragma function(memcpy_dup)
-void * memcpy_dup(void * dst, const void * src, size_t iSize)
+#pragma function(memory_copy)
+void * memory_copy(void * dst, const void * src, memsize iSize)
 {
-   return memcpy_dup(dst, src, iSize);
+   return memory_copy(dst, src, iSize);
 }
 
 #endif

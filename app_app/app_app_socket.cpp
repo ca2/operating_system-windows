@@ -158,7 +158,7 @@ namespace user_service
             m.set_size(strMessage.length() + 2);
             m.get_data()[0] = 0x81;
             m.get_data()[1] = strMessage.length();
-            memcpy_dup(&m.get_data()[2], strMessage.c_str(), strMessage.length());
+            memory_copy(&m.get_data()[2], strMessage.c_str(), strMessage.length());
             write(m.get_data(), m.get_size());
             return;
          }

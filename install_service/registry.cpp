@@ -260,7 +260,7 @@ int get_string(HKEY key, TCHAR *value, TCHAR *data, unsigned long datalen, bool 
 
   /* Technically we shouldn't expand environment strings from REG_SZ values */
   if (type != REG_EXPAND_SZ) {
-    __memmov(data, buffer, buflen);
+    memory_transfer(data, buffer, buflen);
     HeapFree(GetProcessHeap(), 0, buffer);
     return 0;
   }

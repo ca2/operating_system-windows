@@ -43,7 +43,7 @@ shared_memory::shared_memory(memory_container * pcontainer, const void * pMemory
 
    ASSERT(is_memory_segment_ok(pMemory, (uptr)dwSize));
 
-   ::memcpy_dup(m_beginStorage, pMemory, (size_t)dwSize);
+   ::memory_copy(m_beginStorage, pMemory, (size_t)dwSize);
 
 }
 
@@ -61,7 +61,7 @@ shared_memory::shared_memory(const void * pMemory, memsize dwSize)
 
    ASSERT(is_memory_segment_ok(pMemory, (uptr)dwSize));
 
-   ::memcpy_dup(m_beginStorage, pMemory, (size_t)dwSize);
+   ::memory_copy(m_beginStorage, pMemory, (size_t)dwSize);
 
 }
 
@@ -238,14 +238,14 @@ void shared_memory::impl_free(byte *)
 {
    ASSERT(pstorage != nullptr);
    allocate(pstorage->get_size());
-   ::memcpy_dup(get_data(), pstorage->get_data(), (size_t) this->get_size());
+   ::memory_copy(get_data(), pstorage->get_data(), (size_t) this->get_size());
 
 }
 
 void shared_memory::set_data(void *pdata, memsize uiSize)
 {
    allocate(uiSize);
-   ::memcpy_dup(get_data(), pdata, (size_t) uiSize);
+   ::memory_copy(get_data(), pdata, (size_t) uiSize);
 }
 */
 
@@ -345,14 +345,14 @@ void shared_memory::FromAsc(const ::string & psz)
 void shared_memory::from_string(const ::string & psz)
 {
    allocate(strlen(psz));
-   ::memcpy_dup(get_data(), psz, this->get_size());
+   ::memory_copy(get_data(), psz, this->get_size());
 }
 
 void shared_memory::to_string(string & str)
 {
    char * psz = str.get_string_buffer(this->get_size() + 1);
 
-   ::memcpy_dup(psz, get_data(), this->get_size());
+   ::memory_copy(psz, get_data(), this->get_size());
 
    psz[this->get_size()] = '\0';
 
