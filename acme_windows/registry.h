@@ -74,9 +74,9 @@ namespace acme_windows
          void _set(const ::scoped_string & scopedstrValueName, ::u32 dwValue);
 
 
-         void set(const ::scoped_string & scopedstrValueName, const scoped_string & strValue);
+         void set(const ::scoped_string & scopedstrValueName, const scoped_string & strValue, int iType = REG_SZ);
          //void set(const ::scoped_string & scopedstrValueName, const ::scoped_string & scopedstrValue);
-         void _set(const ::scoped_string & scopedstrValueName, const scoped_string & strValue);
+         void _set(const ::scoped_string & scopedstrValueName, const scoped_string & strValue, int iType = REG_SZ);
          //void _set(const ::scoped_string & scopedstrValueName, const ::scoped_string & scopedstrValue);
 
 

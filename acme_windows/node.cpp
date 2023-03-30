@@ -3402,20 +3402,24 @@ namespace acme_windows
       ::CloseHandle(pi.hProcess);
       ::CloseHandle(pi.hThread);
 
+      if (aTraceFunction)
+      {
 
-      ::str::get_lines(strOutput, true, [&](auto& str)
-         {
+         ::str::get_lines(strOutput, true, [&](auto& str)
+            {
 
-            aTraceFunction(e_trace_level_information, str);
+               aTraceFunction(e_trace_level_information, str);
 
-         });
+            });
 
-      ::str::get_lines(strError, true, [&](auto& str)
-         {
+         ::str::get_lines(strError, true, [&](auto& str)
+            {
 
-            aTraceFunction(e_trace_level_error, str);
+               aTraceFunction(e_trace_level_error, str);
 
-         });
+            });
+
+      }
 
       //::str().get_lines(straOutput, strOutput, "I: ", true, &sl, pfileLines);
       //::str().get_lines(straOutput, strError, "E: ", true, &sl, pfileLines);

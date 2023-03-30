@@ -270,7 +270,7 @@ namespace acme_windows
 
       }
 
-      if (dwType != REG_SZ)
+      if (dwType != REG_SZ && dwType != REG_EXPAND_SZ)
       {
 
          return false;
@@ -375,12 +375,12 @@ namespace acme_windows
    //}
 
 
-   void registry::key::_set(const ::scoped_string & scopedstrValueName, const ::scoped_string & scopedstrValue)
+   void registry::key::_set(const ::scoped_string & scopedstrValueName, const ::scoped_string & scopedstrValue, int iType)
    {
 
       wstring wstr(scopedstrValue);
 
-      return _set_value(wstr.c_str(), scopedstrValueName, REG_SZ, (::u32) wstr.character_count_in_bytes());
+      return _set_value(wstr.c_str(), scopedstrValueName, iType, (::u32) wstr.character_count_in_bytes());
 
    }
 
@@ -456,10 +456,10 @@ namespace acme_windows
 
    //}
 
-   void registry::key::set(const ::scoped_string & scopedstrValueName, const scoped_string & scopedstrValue)
+   void registry::key::set(const ::scoped_string & scopedstrValueName, const scoped_string & scopedstrValue, int iType)
    { 
 
-      /*auto estatus = */ _set(scopedstrValueName, scopedstrValue);
+      /*auto estatus = */ _set(scopedstrValueName, scopedstrValue, iType);
       
       //__defer_throw_estatus(estatus);
    

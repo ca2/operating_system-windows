@@ -4,10 +4,7 @@
 #include "file_link.h"
 #include "acme/filesystem/file/exception.h"
 #include "acme/operating_system/process.h"
-#include "acme_windows/registry.h"
-#include "acme_windows/itemidlist.h"
-#include "acme_windows/acme_directory.h"
-#include "acme_windows/acme_file.h"
+#include "acme/platform/scoped_restore.h"
 #include "acme/filesystem/file/status.h"
 #include "acme/filesystem/filesystem/acme_directory.h"
 #include "acme/filesystem/filesystem/acme_path.h"
@@ -24,10 +21,17 @@
 #include "apex/filesystem/filesystem/file_context.h"
 #include "apex/platform/application.h"
 #include "apex/platform/context.h"
-#include "acme_windows_common/cotaskptr.h"
 
 
 #include "acme/_operating_system.h"
+
+
+#include "acme_windows_common/cotaskptr.h"
+
+#include "acme_windows/registry.h"
+#include "acme_windows/itemidlist.h"
+#include "acme_windows/acme_directory.h"
+#include "acme_windows/acme_file.h"
 
 
 #include <wincred.h>
@@ -2224,28 +2228,50 @@ retry:
 
       auto path = m_pcontext->m_papexcontext->defer_process_path(pathParam);
 
-      fork([=]()
+      manual_reset_event manualresetevent;
+
+      ::e_status estatusFileOpen = ::success;
+      ::i32 iShellExecuteExitCode = 33;
+      DWORD dwLastError = 0;
+      const char* pszShellExecuteError = nullptr;
+
+      fork([=, &manualresetevent, &estatusFileOpen,
+      &dwLastError, &iShellExecuteExitCode, &pszShellExecuteError]()
       {
 
          ::CoInitializeEx(nullptr, COINIT_APARTMENTTHREADED | COINIT_DISABLE_OLE1DDE);
 
+            //::CoInitializeEx(nullptr, COINIT_DISABLE_OLE1DDE);
+
+         at_end_of_scope
+         {
+
+            manualresetevent.SetEvent();
+
+            ::CoUninitialize();
+
+         };
+
          SHELLEXECUTEINFOW si{};
 
-         PeekMessage(nullptr, nullptr, 0, 0, 0);
+         //PeekMessage(nullptr, nullptr, 0, 0, 0);
 
-         wstring wstrTarget(path);
+         ::windows_path windowspathTarget(path.windows_path());
 
-         wstring wstrFolder(pathFolder);
+         ::windows_path windowspathFolder(pathFolder.windows_path());
 
          wstring wstrParams(strParams);
 
          const wchar_t * pwszParams = wstrParams.c_str();
 
-         const wchar_t * pwszFolder = wstrFolder.c_str();
+         const wchar_t * pwszFolder = windowspathFolder.c_str();
 
          si.cbSize = sizeof(si);
 
-         si.fMask = SEE_MASK_ASYNCOK;
+         //si.fMask = SEE_MASK_ASYNCOK;
+         si.fMask = SEE_MASK_NOASYNC;
+
+         si.fMask |= SEE_MASK_WAITFORINPUTIDLE;
 
          si.hwnd = nullptr;
 
@@ -2253,7 +2279,7 @@ retry:
 
          ::pointer < ::itemidlist > pitemidlist = path.m_pparticleOsPath;
 
-         if (wstrTarget.is_empty() && pitemidlist)
+         if (windowspathTarget.is_empty() && pitemidlist)
          {
 
             si.fMask |= SEE_MASK_IDLIST;
@@ -2265,16 +2291,13 @@ retry:
          else
          {
 
-            si.lpFile = wstrTarget;
-
+            si.lpFile = windowspathTarget;
 
          }
 
          si.lpParameters = pwszParams;
 
-
          si.lpDirectory = pwszFolder;
-
 
          si.nShow = SW_SHOWDEFAULT;
 
@@ -2282,14 +2305,126 @@ retry:
 
          ShellExecuteExW(&si);
 
-         ::CoUninitialize();
+         iShellExecuteExitCode = (int)(iptr)si.hInstApp;
+
+         if (iShellExecuteExitCode > 32)
+         {
+
+            estatusFileOpen = ::success;
+
+         }
+         else
+         {
+            dwLastError = ::GetLastError();
+            switch (iShellExecuteExitCode)
+            {
+            case 0:
+               pszShellExecuteError = "The operating system is out of memory or resources.";
+               break;
+               //ERROR_FILE_NOT_FOUND
+               //pszShellExecuteError = "The specified file was not found.
+            case   SE_ERR_FNF:
+               pszShellExecuteError = "The specified file was not found.";
+               break;
+
+               //ERROR_PATH_NOT_FOUND
+               //pszShellExecuteError = "The specified path was not found.
+            case  SE_ERR_PNF:
+               pszShellExecuteError = "The specified path was not found.";
+               break;
+
+            case   ERROR_BAD_FORMAT:
+               pszShellExecuteError = "The.exe file is invalid(non - Win32.exe or error in.exe image).";
+               break;
+            case   SE_ERR_ACCESSDENIED:
+               pszShellExecuteError = "The operating system denied access to the specified file.";
+               break;
+            case   SE_ERR_ASSOCINCOMPLETE:
+               pszShellExecuteError = "The file name association is incomplete or invalid.";
+               break;
+            case   SE_ERR_DDEBUSY:
+               pszShellExecuteError = "The DDE transaction could not be completed because other DDE transactions were being processed.";
+               break;
+            case  SE_ERR_DDEFAIL:
+               pszShellExecuteError = "The DDE transaction failed.";
+               break;
+            case  SE_ERR_DDETIMEOUT:
+               pszShellExecuteError = "The DDE transaction could not be completed because the request timed out.";
+               break;
+            case   SE_ERR_DLLNOTFOUND:
+               pszShellExecuteError = "The specified DLL was not found.";
+               break;
+            case  SE_ERR_NOASSOC:
+               pszShellExecuteError = "There is no application associated with the given file name extension.This error will also be returned if you attempt to print a file that is not printable.";
+               break;
+            case  SE_ERR_OOM:
+               pszShellExecuteError = "There was not enough memory to complete the operation.";
+               break;
+            case  SE_ERR_SHARE:
+               pszShellExecuteError = "A sharing violation occurred.";
+               break;
+               break;
+            default:
+               pszShellExecuteError = "Some Error occurred";
+            }
+
+            estatusFileOpen = error_failed;
+
+         }
 
       });
 
-      //return true;
+      auto estatus = manualresetevent.wait(5_min);
+
+      if (::failed(estatusFileOpen))
+      {
+
+         ::string strMessage;
+
+         strMessage.format("apex_windows::os_context::file_open ShellExecuteExW failed with error (%d, %d) \"%s\"", iShellExecuteExitCode, dwLastError, pszShellExecuteError);
+
+         auto errorcode = ::windows::last_error_error_code(dwLastError);
+
+         throw exception(estatusFileOpen,{ errorcode }, strMessage);
+
+      }
+      else if (::failed(estatus))
+      {
+
+         throw exception(estatus, "apex_windows::os_context::file_open failed");
+
+      }
 
    }
 
+
+//https://stackoverflow.com/questions/1591342/c-how-to-determine-if-a-windows-process-is-running
+//#include <windows.h>
+//#include <tlhelp32.h>
+//#include <tchar.h>
+//
+//   bool IsProcessRunning(const TCHAR* const executableName) {
+//      PROCESSENTRY32 entry;
+//      entry.dwSize = sizeof(PROCESSENTRY32);
+//
+//      const auto snapshot = CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS, NULL);
+//
+//      if (!Process32First(snapshot, &entry)) {
+//         CloseHandle(snapshot);
+//         return false;
+//      }
+//
+//      do {
+//         if (!_tcsicmp(entry.szExeFile, executableName)) {
+//            CloseHandle(snapshot);
+//            return true;
+//         }
+//      } while (Process32Next(snapshot, &entry));
+//
+//      CloseHandle(snapshot);
+//      return false;
+//   }
+//
 
    void os_context::hidden_start(const ::file::path& pathParam, const string& strParams, const ::file::path& pathFolder)
    {
