@@ -2148,8 +2148,8 @@ retry:
 
       set_app_dark_mode1(bDarkMode);
 
-      //DWORD_PTR res;
-      //SendMessageTimeout(HWND_BROADCAST, WM_SETTINGCHANGE, 0, (LPARAM)TEXT("ImmersiveColorSet"), 0, 1000, &res);
+      DWORD_PTR res;
+      SendMessageTimeout(HWND_BROADCAST, WM_SETTINGCHANGE, 0, (LPARAM)TEXT("ImmersiveColorSet"), 0, 1000, &res);
 
       //return ::success;
 
