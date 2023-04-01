@@ -102,7 +102,7 @@ namespace str
 //    u32 xxxget_environment_variable(const ::wd16_character * pszVar, ::wd16_character * pszBuffer, u32 dwSize)
 //    {
 
-// #ifdef _UWP
+// #ifdef UNIVERSAL_WINDOWS
 
 //       throw ::exception(todo);
 

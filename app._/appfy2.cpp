@@ -1,7 +1,7 @@
 #include "framework.h"
 
 
-#ifdef _UWP
+#ifdef UNIVERSAL_WINDOWS
 [Platform::MTAThread]
 #endif
 BOOL WINAPI DllMain(HINSTANCE hInstance, DWORD dwReason, LPVOID lpReserved)

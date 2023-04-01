@@ -478,7 +478,7 @@
 /* Define to `unsigned long' if <sys/types.h> does not define. */
 #undef uintptr_t
 
-#ifdef _UWP
+#ifdef UNIVERSAL_WINDOWS
 #define HAVE_STRING_H 1
 #define HAVE_STRERROR 1
 #define HAVE_INTTYPES_H 1

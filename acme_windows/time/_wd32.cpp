@@ -103,7 +103,7 @@ u32 format_message(u32 dwFlags, const void * pSource, u32 dwMessageID, u32 dwLan
 // u32 xxxget_environment_variable(const ::wd32_character * pszVar, ::wd32_character * pszBuffer, u32 dwSize)
 // {
 
-// #ifdef _UWP
+// #ifdef UNIVERSAL_WINDOWS
 
 //    throw ::exception(todo);
 
