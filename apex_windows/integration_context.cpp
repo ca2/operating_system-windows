@@ -22,7 +22,19 @@ namespace apex_windows
       context::context()
       {
 
-         
+#ifdef WINDOWS
+
+#ifdef OSBIT == 64
+
+         m_strPlatform = "x64";
+
+#else
+
+         m_strPlatform = "Win32";
+
+#endif
+
+#endif
 
       }
 
