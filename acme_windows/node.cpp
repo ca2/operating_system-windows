@@ -4030,6 +4030,93 @@ namespace acme_windows
    }
 
 
+   ::string node::registry_environment_variable_to_system(const ::scoped_string& scopedstr)
+   {
+
+      if (scopedstr.case_insensitive_equals("path"))
+      {
+
+         return "PATH";
+
+      }
+
+      return scopedstr;
+
+   }
+
+
+   ::string node::system_environment_variable_to_registry(const ::scoped_string& scopedstr)
+   {
+
+      if (scopedstr.case_insensitive_equals("path"))
+      {
+
+         return "Path";
+
+      }
+
+      return scopedstr;
+
+   }
+
+   
+   int node::environment_variable_registry_payload_type(const ::scoped_string& scopedstr)
+   {
+
+      if (scopedstr.case_insensitive_equals("path"))
+      {
+
+         return REG_EXPAND_SZ;
+
+      }
+
+      return REG_SZ;
+
+   }
+
+
+   ::string node::get_user_permanent_environment_variable(const ::scoped_string& scopedstr)
+   {
+
+      ::acme_windows::registry::key key(HKEY_CURRENT_USER, "Environment");
+
+      string strName = system_environment_variable_to_registry(scopedstr);
+
+      ::string str;
+
+      if (!key.get(strName, str))
+      {
+
+         return {};
+
+      }
+
+      return str;
+
+   }
+
+
+   void node::set_user_permanent_environment_variable(const ::scoped_string& scopedstr, const ::scoped_string& scopedstrPayload)
+   {
+
+      ::acme_windows::registry::key key(HKEY_CURRENT_USER, "Environment");
+
+      string strName = system_environment_variable_to_registry(scopedstr);
+
+      if (strName.is_empty())
+      {
+
+         throw ::exception(error_failed);
+
+      }
+
+      int iPayloadType = environment_variable_registry_payload_type(strName);
+
+      key.set(strName, scopedstrPayload, iPayloadType);
+
+   }
+
+
 } // namespace acme_windows
 
 

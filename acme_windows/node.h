@@ -218,6 +218,14 @@ namespace acme_windows
 
       //::file::path library_file_name(const ::scoped_string & scopedstr) override;
 
+      virtual ::string registry_environment_variable_to_system(const ::scoped_string & scopedstr);
+      virtual ::string system_environment_variable_to_registry(const ::scoped_string & scopedstr);
+      virtual int environment_variable_registry_payload_type(const ::scoped_string& scopedstr);
+
+      ::string get_user_permanent_environment_variable(const ::scoped_string & scopedstr) override;
+      void set_user_permanent_environment_variable(const ::scoped_string & scopedstr, const ::scoped_string & strPayload) override;
+
+
    };
 
 
