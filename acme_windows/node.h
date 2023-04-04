@@ -226,6 +226,26 @@ namespace acme_windows
       void set_user_permanent_environment_variable(const ::scoped_string & scopedstr, const ::scoped_string & strPayload) override;
 
 
+#ifdef WINDOWS_DESKTOP
+
+      void _beta_use_unicode_utf8() override;
+
+#endif
+
+      void set_user_run_once(const ::scoped_string& scopedstrLabel, const ::scoped_string& scopedstrCommand) override;
+     
+
+      void unzip_to_folder(const ::file::path& pathFolder, const ::file::path& pathZip) override;
+
+
+      //https ://social.msdn.microsoft.com/Forums/vstudio/en-US/45668d18-2840-4887-87e1-4085201f4103/visual-c-to-unzip-a-zip-file-to-a-specific-directory
+      // removed return type and changed error returns to exceptions
+      // replace __try __finally with at_end_of_scope
+      // changed arguments to ansi_character * and used bstring class for string conversion
+      // use of comptr to guard COM objets and variant to guard VARIANTs
+      virtual void _unzip_to_folder(const char* pszZip, const char* pszFolder);
+   
+
    };
 
 

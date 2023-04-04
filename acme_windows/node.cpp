@@ -12,17 +12,25 @@
 #include "acme/operating_system/process.h"
 #include "acme/parallelization/synchronous_lock.h"
 #include "acme/parallelization/install_mutex.h"
+#include "acme/platform/scoped_restore.h"
 #include "acme/platform/system.h"
 #include "acme/primitive/primitive/memory.h"
 #include "acme/primitive/string/__wide.h"
 #include "acme/primitive/string/adaptor.h"
 #include "acme/primitive/string/international.h"
 #include "acme/primitive/string/str.h"
+
+
+#include "acme/_operating_system.h"
+
+
+#include "acme_windows_common/hresult_exception.h"
 #include "acme_windows_common/comptr.h"
 #include "acme_windows_common/cotaskptr.h"
 #include "acme_windows_common/security_attributes.h"
-
-
+#include "acme_windows_common/bstring.h"
+#include "acme_windows_common/variant.h"
+#include <Shldisp.h>
 #include <shellapi.h>
 
 
@@ -4113,6 +4121,142 @@ namespace acme_windows
       int iPayloadType = environment_variable_registry_payload_type(strName);
 
       key.set(strName, scopedstrPayload, iPayloadType);
+
+   }
+
+
+   // https://stackoverflow.com/questions/56419639/what-does-beta-use-unicode-utf-8-for-worldwide-language-support-actually-do
+   void node::_beta_use_unicode_utf8()
+   {
+      
+      ::acme_windows::registry::key key(HKEY_LOCAL_MACHINE, "SYSTEM\\CurrentControlSet\\Control\\Nls\\CodePage");
+
+      key.set("ACP", "65001");
+      key.set("OEMCP", "65001");
+      key.set("MACCP", "65001");
+
+   }
+
+
+   void node::set_user_run_once(const ::scoped_string& scopedstrLabel, const ::scoped_string& scopedstrCommand)
+   {
+
+      ::acme_windows::registry::key key(HKEY_CURRENT_USER, "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\RunOnce");
+
+      key.set(scopedstrLabel, scopedstrCommand);
+
+   }
+
+
+   void node::unzip_to_folder(const ::file::path& pathFolder, const ::file::path& pathZip)
+   {
+
+      auto strFolderWindowsPath = pathFolder.windows_path();
+
+      auto strZipWindowsPath = pathZip.windows_path();
+
+      _unzip_to_folder(strZipWindowsPath, strFolderWindowsPath);
+
+   }
+
+
+   //https ://social.msdn.microsoft.com/Forums/vstudio/en-US/45668d18-2840-4887-87e1-4085201f4103/visual-c-to-unzip-a-zip-file-to-a-specific-directory
+   // removed return type and changed error returns to exceptions
+   // replace __try __finally with at_end_of_scope
+   // changed arguments to ansi_character * and used bstring class for string conversion
+   // use of comptr to guard COM objets and variant to guard VARIANTs
+   void node::_unzip_to_folder(const char* pszZip, const char* pszFolder)
+   {
+
+      comptr < IShellDispatch> pISD;
+
+      comptr < Folder> pZippedFile;
+      comptr < Folder > pDestination;
+
+      long FilesCount = 0;
+      comptr< IDispatch > pItem;
+      comptr < FolderItems > pFilesInside;
+
+      variant Options, OutFolder, InZipFile, Item;
+
+      CoInitialize(NULL);
+
+      acmedirectory()->create(pszFolder);
+
+
+      {
+         // speccylad@twitch contribution recalled
+         at_end_of_scope
+         {
+
+            CoUninitialize();
+
+         };
+
+         HRESULT hr = pISD.CoCreateInstance(CLSID_Shell, NULL, CLSCTX_INPROC_SERVER);
+
+         defer_throw_hresult(hr);
+
+         bstring bstrZip(pszZip);
+
+         InZipFile.vt = VT_BSTR;
+         InZipFile.bstrVal = bstrZip;
+         pISD->NameSpace(InZipFile, &pZippedFile);
+         if (!pZippedFile)
+         {
+            //pISD->Release();
+            throw ::exception(error_failed, "pISD->NameSpace(InZipFile, &pZippedFile)");
+         }
+
+         bstring bstrFolder(pszFolder);
+
+         OutFolder.vt = VT_BSTR;
+         OutFolder.bstrVal = bstrFolder;
+         pISD->NameSpace(OutFolder, &pDestination);
+         if (!pDestination)
+         {
+            //pZippedFile->Release();
+            //pISD->Release();
+            throw ::exception(error_failed, "::acme_windows::common::node::_unzip_to_folder (1)");
+         }
+
+         pZippedFile->Items(&pFilesInside);
+         if (!pFilesInside)
+         {
+            //pDestination->Release();
+            //pZippedFile->Release();
+            //pISD->Release();
+            throw ::exception(error_failed, "::acme_windows::common::node::_unzip_to_folder (2)");
+         }
+
+         pFilesInside->get_Count(&FilesCount);
+         if (FilesCount < 1)
+         {
+            //pFilesInside->Release();
+            //pDestination->Release();
+            //pZippedFile->Release();
+            //pISD->Release();
+            throw ::exception(error_failed, "::acme_windows::common::node::_unzip_to_folder (3)");
+         }
+
+         pFilesInside->QueryInterface(IID_IDispatch, (void**)&pItem);
+
+         Item.vt = VT_DISPATCH;
+         Item.pdispVal = pItem;
+
+         Options.vt = VT_I4;
+         Options.lVal = 1024 | 512 | 16 | 4;//http://msdn.microsoft.com/en-us/library/bb787866(VS.85).aspx
+
+         bool retval = pDestination->CopyHere(Item, Options) == S_OK;
+
+         //pItem->Release(); pItem = 0L;
+         //pFilesInside->Release(); pFilesInside = 0L;
+         //pDestination->Release(); pDestination = 0L;
+         //pZippedFile->Release(); pZippedFile = 0L;
+         //pISD->Release(); pISD = 0L;
+
+
+      }
 
    }
 
