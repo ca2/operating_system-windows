@@ -961,7 +961,7 @@ namespace acme_windows
    //
    //         g_pMemoryCounters = new ::file::path();
    //
-   //#if defined(_UWP)
+   //#if defined(UNIVERSAL_WINDOWS)
    //
    //         string strBasePath = acmedirectory()->system() / "memory_counters";
    //
@@ -2012,7 +2012,7 @@ namespace acme_windows
    void node::run_silent(const ::string & strFunct, const ::string & strstrParams)
    {
 
-#if defined(_UWP)
+#if defined(UNIVERSAL_WINDOWS)
 
       throw ::interface_only();
 
@@ -2254,7 +2254,7 @@ namespace acme_windows
    string node::get_user_language()
    {
 
-      //#ifdef _UWP
+      //#ifdef UNIVERSAL_WINDOWS
       //
       //      string_array stra;
       //

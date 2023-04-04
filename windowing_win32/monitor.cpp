@@ -64,7 +64,7 @@ namespace windowing_win32
    ::u32 monitor::get_monitor_color_temperature()
    {
 
-#ifdef _UWP
+#ifdef UNIVERSAL_WINDOWS
 
       return 0;
 
@@ -431,7 +431,7 @@ namespace windowing_win32
 //   ::u32 monitor::get_monitor_color_temperature()
 //   {
 //
-//#ifdef _UWP
+//#ifdef UNIVERSAL_WINDOWS
 //
 //      return 0;
 //

@@ -508,7 +508,7 @@ namespace windows
 
    void window_util::ContraintPosToParent(HWND hwnd)
    {
-      //#if !defined(_UWP) && !defined(APPLE_IOS)
+      //#if !defined(UNIVERSAL_WINDOWS) && !defined(APPLE_IOS)
       //      ::rectangle_i32 rectangleMajor;
       //      HWND hwndParent = ::get_parent(hwnd);
       //      if(hwndParent == nullptr)
@@ -725,7 +725,7 @@ namespace windows
    i32 window_util::GetZOrder(HWND hwnd)
    {
 
-#ifdef _UWP
+#ifdef UNIVERSAL_WINDOWS
 
       return 0;
 

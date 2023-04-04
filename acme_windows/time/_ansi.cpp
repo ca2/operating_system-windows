@@ -80,7 +80,7 @@ namespace str
 //    ::u32 xxxget_environment_variable(const ::ansi_character * pszVar, ::ansi_character * pszBuffer, ::u32 dwSize)
 //    {
 
-// #ifdef _UWP
+// #ifdef UNIVERSAL_WINDOWS
 
 //          throw ::exception(todo);
 

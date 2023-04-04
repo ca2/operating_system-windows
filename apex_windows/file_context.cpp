@@ -277,7 +277,7 @@ namespace apex_windows
 
       }
 
-#elif defined(_UWP)
+#elif defined(UNIVERSAL_WINDOWS)
 
       ::winrt::Windows::Storage::StorageFile ^ file = get_os_file(psz, 0, 0, nullptr, OPEN_EXISTING, 0, nullptr);
 
@@ -420,7 +420,7 @@ namespace apex_windows
 
       return false;
 
-#elif defined(_UWP)
+#elif defined(UNIVERSAL_WINDOWS)
 
       throw ::exception(todo);
 

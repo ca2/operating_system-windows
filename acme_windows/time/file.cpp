@@ -237,7 +237,7 @@ struct PROCESS_INFO_t
 };
 
 
-//#if !defined(LINUX) && !defined(MACOS) && !defined(_UWP) && !defined(ANDROID)
+//#if !defined(LINUX) && !defined(MACOS) && !defined(UNIVERSAL_WINDOWS) && !defined(ANDROID)
 //
 ////#include <Tlhelp32.h>
 ////#include <Psapi.h>
@@ -335,7 +335,7 @@ struct PROCESS_INFO_t
 ////   }
 ////}
 //
-////#ifndef _UWP
+////#ifndef UNIVERSAL_WINDOWS
 ////
 ////typedef struct _SYSTEM_HANDLE_INFORMATION
 ////{
