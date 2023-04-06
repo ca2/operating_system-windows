@@ -115,6 +115,9 @@
     <ClCompile Include="gdi.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="message_window.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -208,6 +211,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="desktop_environment.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="message_window.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="message_window_listener.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
