@@ -42,5 +42,10 @@ __FACTORY_EXPORT void node_windows_factory(::factory::factory * pfactory)
 }
 
 
+__FACTORY_EXPORT void default_desktop_environment_factory(::factory::factory* pfactory)
+{
+
+}
+
 
 
