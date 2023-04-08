@@ -133,7 +133,7 @@
 
          ::rectangle_i32 rectangle(0, 0, 0, 0);
 
-         ::pointer<::audio_mixer::user::level_control>plevelcontrol = source->get_device()->get_mixer()->get_audio_mixer_callback()->allocate_level_control();
+         ::pointer<::audio_mixer_user::level_control>plevelcontrol = source->get_device()->get_mixer()->get_audio_mixer_callback()->allocate_level_control();
          if (plevelcontrol == nullptr)
          {
             return false;
@@ -147,7 +147,7 @@
          mcdvVolume->m_uiControlID = m_mixercontrol.dwControlID;
          mcdvVolume->nRange  = nRange;
          mcdvVolume->nPageInc = nPageInc;
-         plevelcontrol->SetOrientation(::audio_mixer::user::level_control::e_orientation_vertical);
+         plevelcontrol->SetOrientation(::audio_mixer_user::level_control::e_orientation_vertical);
          plevelcontrol->SetRange(0,mcdvVolume->nRange);
          plevelcontrol->SetLineSize(1);
          plevelcontrol->SetPageSize(mcdvVolume->nPageInc);
@@ -156,7 +156,7 @@
 
 
          string str;
-         ::pointer<::audio_mixer::user::label>plabelVolume = source->get_device()->get_mixer()->get_audio_mixer_callback()->allocate_label();
+         ::pointer<::audio_mixer_user::label>plabelVolume = source->get_device()->get_mixer()->get_audio_mixer_callback()->allocate_label();
          if(plabelVolume == nullptr)
             return false;
          plabelVolume->create_control(pParent, nVolumeLabelID);
@@ -172,7 +172,7 @@
 
          if(lcChannels == 2)
          {
-            ::pointer<::audio_mixer::user::level_control>pinteraction = source->get_device()->get_mixer()->get_audio_mixer_callback()->allocate_level_control();
+            ::pointer<::audio_mixer_user::level_control>pinteraction = source->get_device()->get_mixer()->get_audio_mixer_callback()->allocate_level_control();
             if(pinteraction == nullptr)
                return false;
 
@@ -185,14 +185,14 @@
             mcdvBalance->nRange  = nRange;
             mcdvBalance->nPageInc = nPageInc;
 
-            pinteraction->SetOrientation(::audio_mixer::user::level_control::e_orientation_horizontal);
+            pinteraction->SetOrientation(::audio_mixer_user::level_control::e_orientation_horizontal);
             pinteraction->SetRange(0,mcdvBalance->nRange);
             pinteraction->SetLineSize(1);
             pinteraction->SetPageSize(mcdvBalance->nPageInc);
 
             add(pinteraction.m_p);
 
-            ::pointer<::audio_mixer::user::label>plabel = m_pmixersource->get_device()->get_mixer()->get_audio_mixer_callback()->allocate_label();
+            ::pointer<::audio_mixer_user::label>plabel = m_pmixersource->get_device()->get_mixer()->get_audio_mixer_callback()->allocate_label();
             if(plabel == nullptr)
                return false;
 
@@ -277,7 +277,7 @@
          for(i32 iItem = 0; iItem < iItemCount; iItem++)
          {
             nMuteID = nID++;
-            ::pointer<::audio_mixer::user::toggle_control>pbtMute = pcallback->allocate_toggle_control();
+            ::pointer<::audio_mixer_user::toggle_control>pbtMute = pcallback->allocate_toggle_control();
             pbtMute->create_control(pParent, nMuteID);
             pbtMute->set_window_text(text.get_text());
             ::pointer<::audio_mixer::control_data_switch>mcdmMute = pbtMute->get_data();
@@ -304,9 +304,9 @@
          m_mixercontroldetails.dwControlID = m_mixercontrol.dwControlID;
       }
 
-      /*      ::pointer<::audio_mixer::user::control>control::GetControl(i32 iType)
+      /*      ::pointer<::audio_mixer_user::control>control::GetControl(i32 iType)
             {
-               ::audio_mixer::user::control  * pusercontrol = nullptr;
+               ::audio_mixer_user::control  * pusercontrol = nullptr;
                for(i32 i = 0; i < this->get_size(); i++)
                {
                   pusercontrol = this->element_at(i);
@@ -320,7 +320,7 @@
                return nullptr;
             }
 
-            ::audio_mixer::user::control * control::GetControlByIndex(::index iIndex)
+            ::audio_mixer_user::control * control::GetControlByIndex(::index iIndex)
             {
                return this->element_at(iIndex);
             }
@@ -421,9 +421,9 @@
             ASSERT(cMultipleItems == 1);
             if(cChannels == 2)
             {
-               ::pointer<::audio_mixer::user::level_control>pslVolume = GetControl(::audio_mixer::control_data::TypeStereoVolume);
+               ::pointer<::audio_mixer_user::level_control>pslVolume = GetControl(::audio_mixer::control_data::TypeStereoVolume);
                ::pointer<::audio_mixer::control_data_volume>lpmcdVolume = GetWindowData(::audio_mixer::control_data::TypeStereoVolume);
-               ::pointer<::audio_mixer::user::level_control>pslBalance = GetControl(::audio_mixer::control_data::TypeStereoBalance);
+               ::pointer<::audio_mixer_user::level_control>pslBalance = GetControl(::audio_mixer::control_data::TypeStereoBalance);
                double dActualBalance = pslBalance->GetPos();
 
                nRange = lpmcdVolume->nRange;
@@ -453,7 +453,7 @@
             }
             else if(cChannels == 1)
             {
-               ::pointer<::audio_mixer::user::level_control>pslVolume = GetControl(::audio_mixer::control_data::TypeStereoVolume);
+               ::pointer<::audio_mixer_user::level_control>pslVolume = GetControl(::audio_mixer::control_data::TypeStereoVolume);
                ::pointer<::audio_mixer::control_data_volume>lpmcdVolume =  GetWindowData(::audio_mixer::control_data::TypeStereoVolume);
 
                nRange = lpmcdVolume->nRange;
@@ -475,7 +475,7 @@
             for(auto & pusercontrol : m_usercontrola)
             {
 
-               ::pointer<::audio_mixer::user::toggle_control>pmutecontrol =  pusercontrol;
+               ::pointer<::audio_mixer_user::toggle_control>pmutecontrol =  pusercontrol;
 
                PMIXERCONTROLDETAILS_BOOLEAN pmxcd_f = (PMIXERCONTROLDETAILS_BOOLEAN) m_mixercontroldetails.paDetails;
 
@@ -495,7 +495,7 @@
       /*
       ::audio_mixer::control_data * control::GetWindowData(i32 iType)
       {
-         ::audio_mixer::user::control * pusercontrol = nullptr;
+         ::audio_mixer_user::control * pusercontrol = nullptr;
          for(i32 i = 0; i < this->get_size(); i++)
          {
             pusercontrol = this->element_at(i);
@@ -525,7 +525,7 @@
       audio_mixer::control * pinteraction = GetControlByDlgCtrlID(lpnmhdr->idFrom);
       if(pinteraction != nullptr)
       {
-      //            ::audio_mixer::user::level_control * plevelcontrol = (::audio_mixer::user::level_control *) pinteraction;
+      //            ::audio_mixer_user::level_control * plevelcontrol = (::audio_mixer_user::level_control *) pinteraction;
       /*if(base_class <CSliderCtrl >::bases(pusercontrol))
       {
       CSliderCtrl * pSlider = (CSliderCtrl *) pusercontrol;
@@ -646,9 +646,9 @@
 
       /*
 
-            ::audio_mixer::user::control * control::GetControlByDlgCtrlID(u32 nID)
+            ::audio_mixer_user::control * control::GetControlByDlgCtrlID(u32 nID)
             {
-               ::audio_mixer::user::control * pusercontrol = nullptr;
+               ::audio_mixer_user::control * pusercontrol = nullptr;
                for(i32 i = 0; i < this->get_size(); i++)
                {
                   pusercontrol = this->element_at(i);
@@ -665,7 +665,7 @@
 
             ::audio_mixer::control_data * control::GetWindowDataByDlgCtrlID(u32 nID)
             {
-               ::audio_mixer::user::control * pusercontrol = nullptr;
+               ::audio_mixer_user::control * pusercontrol = nullptr;
                for(i32 i = 0; i < this->get_size(); i++)
                {
                   pusercontrol = this->element_at(i);
@@ -701,13 +701,13 @@
                nSBCode == SB_PAGEDOWN ||
                nSBCode == SB_TOP )
          {
-            ::audio_mixer::user::control * pinteraction = GetControlByDlgCtrlID(pParamWnd->GetDlgCtrlId().as_u32());
+            ::audio_mixer_user::control * pinteraction = GetControlByDlgCtrlID(pParamWnd->GetDlgCtrlId().as_u32());
             if(pinteraction != nullptr)
             {
-               ::audio_mixer::user::level_control * pSlider = dynamic_cast<::audio_mixer::user::level_control*>(pinteraction);
+               ::audio_mixer_user::level_control * pSlider = dynamic_cast<::audio_mixer_user::level_control*>(pinteraction);
                if(nullptr != pSlider)
                {
-                  //mix::SliderInterface * pSlider = dynamic_cast < ::audio_mixer::user::level_control * > ( pusercontrol);
+                  //mix::SliderInterface * pSlider = dynamic_cast < ::audio_mixer_user::level_control * > ( pusercontrol);
                   ::audio_mixer::control_data * pData;
                   if(nullptr != (pData = GetWindowDataByDlgCtrlID(pParamWnd->GetDlgCtrlId().as_u32())))
                   {
@@ -717,8 +717,8 @@
                      {
                         ::pointer<::audio_mixer_mmsystem::source>source = m_pmixersource;
                         ::pointer<::audio_mixer_mmsystem::device>device = source->get_device();
-                        ::pointer<::audio_mixer::user::level_control>pslBalance;
-                        ::pointer<::audio_mixer::user::level_control>pslVolume;
+                        ::pointer<::audio_mixer_user::level_control>pslBalance;
+                        ::pointer<::audio_mixer_user::level_control>pslVolume;
                         if(pData->get_type() == ::audio_mixer::control_data::TypeStereoBalance)
                         {
                            pslBalance = pSlider;
@@ -851,9 +851,9 @@
          WORD wNotifyCode = HIWORD(wParam);
          WORD wID = LOWORD(wParam);
 
-         ::pointer<::audio_mixer::user::control>puserinteraction = GetControlByDlgCtrlID((u32)wID);
+         ::pointer<::audio_mixer_user::control>puserinteraction = GetControlByDlgCtrlID((u32)wID);
 
-         ::pointer<::audio_mixer::user::toggle_control>pmutecontrol =puserinteraction;
+         ::pointer<::audio_mixer_user::toggle_control>pmutecontrol =puserinteraction;
 
          if(pmutecontrol != nullptr)
          {
@@ -944,7 +944,7 @@
       }
 
 
-      iptr control::add(::audio_mixer::user::control * pusercontrol)
+      iptr control::add(::audio_mixer_user::control * pusercontrol)
       {
          return ::audio_mixer::control::add(pusercontrol);
          //pinteraction->get_data()->m_iIndex = m_usercontrola.get_size();

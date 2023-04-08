@@ -21,7 +21,7 @@ namespace multimedia
       }
 
 
-      ::audio_mixer::user::level_control * callback::allocate_level_control()
+      ::audio_mixer_user::level_control * callback::allocate_level_control()
       {
 
          return nullptr;
@@ -29,7 +29,7 @@ namespace multimedia
       }
 
 
-      ::audio_mixer::user::toggle_control * callback::allocate_toggle_control()
+      ::audio_mixer_user::toggle_control * callback::allocate_toggle_control()
       {
 
          return nullptr;
@@ -37,7 +37,7 @@ namespace multimedia
       }
 
 
-      ::audio_mixer::user::label * callback::allocate_label()
+      ::audio_mixer_user::label * callback::allocate_label()
       {
 
          return nullptr;

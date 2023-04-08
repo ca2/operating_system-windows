@@ -18,9 +18,9 @@ namespace multimedia
          virtual ~callback();
 
 
-         virtual ::audio_mixer::user::level_control * allocate_level_control();
-         virtual ::audio_mixer::user::toggle_control * allocate_toggle_control();
-         virtual ::audio_mixer::user::label * allocate_label();
+         virtual ::audio_mixer_user::level_control * allocate_level_control();
+         virtual ::audio_mixer_user::toggle_control * allocate_toggle_control();
+         virtual ::audio_mixer_user::label * allocate_label();
 
 
       };
