@@ -34,6 +34,9 @@
     <ClInclude Include="_.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="control.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Header Files">
@@ -78,6 +81,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="_.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="control.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

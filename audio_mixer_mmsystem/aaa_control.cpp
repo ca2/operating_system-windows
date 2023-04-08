@@ -398,7 +398,7 @@
 
          MMRESULT mmresult = mixerGetControlDetails((HMIXEROBJ) device->m_hMixer, &m_mixercontroldetails, MIXER_GETCONTROLDETAILSF_VALUE);
 
-         auto estatus = mmresult_to_status(mmresult);
+         auto estatus = mmresult_status(mmresult);
 
          if (!estatus)
          {
@@ -776,7 +776,7 @@
 
                            MMRESULT mmresult = mixerSetControlDetails((HMIXEROBJ) device->m_hMixer, &m_mixercontroldetails, MIXER_GETCONTROLDETAILSF_VALUE);
 
-                           auto estatus = mmresult_to_status(mmresult);
+                           auto estatus = mmresult_status(mmresult);
 
                            if (!estatus)
                            {
@@ -810,7 +810,7 @@
 
                            MMRESULT mmresult = mixerSetControlDetails((HMIXEROBJ) device->m_hMixer, &m_mixercontroldetails, MIXER_GETCONTROLDETAILSF_VALUE);
 
-                           auto estatus = mmresult_to_status(mmresult);
+                           auto estatus = mmresult_status(mmresult);
 
                            if (::failed(estatus))
                            {
@@ -888,7 +888,7 @@
 
                      MMRESULT mmresult = mixerSetControlDetails((HMIXEROBJ) device->m_hMixer, &m_mixercontroldetails, MIXER_GETCONTROLDETAILSF_VALUE);
 
-                     auto estatus = mmresult_to_status(mmresult);
+                     auto estatus = mmresult_status(mmresult);
 
                      if (!estatus)
                      {

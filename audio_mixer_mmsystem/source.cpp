@@ -5,6 +5,10 @@
 #include "destination.h"
 #include "acme/exception/exception.h"
 #include "audio-system/audio_mixer/user_control.h"
+#include "acme_windows/mmresult.h"
+
+
+
 //
 //
 //namespace multimedia
@@ -72,7 +76,7 @@
 
          mmresult = mixerGetLineControls((HMIXEROBJ) device->m_hMixer, &m_mixerlinecontrols, MIXER_GETLINECONTROLSF_ALL);
 
-         auto estatus = mmresult_to_status(mmresult);
+         auto estatus = mmresult_status(mmresult);
 
          if (::failed(estatus))
          {
@@ -248,7 +252,7 @@
 
          MMRESULT mmresult = ::mixerGetLineInfo((HMIXEROBJ)device->m_hMixer, &m_mixerline, fdwInfo);
 
-         auto estatus = mmresult_to_status(mmresult);
+         auto estatus = mmresult_status(mmresult);
 
          if (::failed(estatus))
          {

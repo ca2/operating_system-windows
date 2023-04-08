@@ -6,6 +6,7 @@
 #include "aura/message/user.h"
 #include "audio-system/audio_mixer/control.h"
 #include "audio-system/audio_mixer/user_control.h"
+#include "acme_windows/mmresult.h"
 
 //
 //namespace multimedia
@@ -81,7 +82,7 @@ namespace audio_mixer_mmsystem
 
       mmresult = mixerGetDevCaps(uiMixerId, &mxcaps, sizeof(mxcaps));
 
-      auto estatus = mmresult_to_status(mmresult);
+      auto estatus = mmresult_status(mmresult);
 
       if (::failed(estatus))
       {
@@ -100,7 +101,7 @@ namespace audio_mixer_mmsystem
 
       mmresult = mixerOpen(&hmx, uiMixerId, dwCallback, dwInstance, fdwOpen);
 
-      estatus = mmresult_to_status(mmresult);
+      estatus = mmresult_status(mmresult);
 
       if (::failed(estatus))
       {
@@ -135,7 +136,7 @@ namespace audio_mixer_mmsystem
 
       mmresult = mixerGetDevCaps((UINT_PTR)m_hMixer, &m_mixercaps, sizeof(MIXERCAPS));
 
-      auto estatus = mmresult_to_status(mmresult);
+      auto estatus = mmresult_status(mmresult);
 
       if (::failed(estatus))
       {
@@ -418,7 +419,7 @@ namespace audio_mixer_mmsystem
 
          MMRESULT mmresult = mixerClose(m_hMixer);
 
-         auto estatus = mmresult_to_status(mmresult);
+         auto estatus = mmresult_status(mmresult);
 
          if (!estatus)
          {

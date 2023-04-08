@@ -5,7 +5,7 @@
 #include "audio_mixer.h"
 #include "device.h"
 #include "destination.h"
-#include "audio-system/audio_mixer/user/control.h"
+//#include "audio-system/audio_mixer/user/control.h"
 
 //namespace multimedia
 //{

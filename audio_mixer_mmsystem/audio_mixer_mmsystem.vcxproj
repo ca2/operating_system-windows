@@ -642,6 +642,7 @@
     </Bscmake>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="control.h" />
     <ClInclude Include="_.h" />
     <ClInclude Include="destination.h" />
     <ClInclude Include="device.h" />
@@ -655,6 +656,7 @@
     <ClInclude Include="thread.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="control.cpp" />
     <ClCompile Include="destination.cpp" />
     <ClCompile Include="device.cpp" />
     <ClCompile Include="_factory.cpp" />
@@ -680,9 +682,6 @@
     <ResourceCompile Include="deployment.rc" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\source\app-core\multimedia\multimedia.vcxproj">
-      <Project>{2ee483c6-650e-463d-89d1-0fce7dfd604c}</Project>
-    </ProjectReference>
     <ProjectReference Include="..\..\..\source\app\acme\acme.vcxproj">
       <Project>{638b242f-0f21-41c3-9f66-724660046133}</Project>
     </ProjectReference>
@@ -695,8 +694,11 @@
     <ProjectReference Include="..\..\..\source\app\aura\aura.vcxproj">
       <Project>{e000ffaf-392f-4e32-bf51-fd7ed638991f}</Project>
     </ProjectReference>
-    <ProjectReference Include="..\multimedia_mmsystem\multimedia_mmsystem.vcxproj">
-      <Project>{21da4a8c-5a05-40a4-bf5b-ff62b9ddd150}</Project>
+    <ProjectReference Include="..\..\..\source\audio-system\audio_mixer\audio_mixer.vcxproj">
+      <Project>{2ff29048-1db7-4ca2-afc3-42b98af3cb1b}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\acme_windows\acme_windows.vcxproj">
+      <Project>{cc8e8200-00a9-414e-9829-7ca3f1091add}</Project>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
