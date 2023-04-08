@@ -27,31 +27,107 @@ namespace acme_windows
 
       ::windows::file_instance fileinstance;
 
+      auto etype = get_file_system_item_type(path);
+
+      if (etype == ::file::e_type_folder)
+      {
+
+         if (!fileinstance.safe_create_file(path,
+            GENERIC_READ,          // open for reading
+            FILE_SHARE_READ,       // share for reading
+            nullptr,
+            OPEN_EXISTING,         // existing file only
+            0,
+            nullptr))              // no ext. properties
+         {
+
+            DWORD dwLastError = ::GetLastError();
+
+            throw_last_error_exception(path, ::file::e_open_read, dwLastError, "acme_windows::acme_path::_real_path safe_create_file failed (e_type_directory)");
+
+            return {}; 
+
+         }
+
+      }
+      else if (etype == ::file::e_type_file)
+      {
+
+         if (!fileinstance.safe_create_file(path,
+            FILE_LIST_DIRECTORY,   // open for reading
+            FILE_SHARE_READ,       // share for reading
+            nullptr,
+            OPEN_EXISTING,         // existing file only
+            0,
+            nullptr))             // no ext. properties
+         {
+
+            DWORD dwLastError = ::GetLastError();
+
+            throw_last_error_exception(path, ::file::e_open_read, dwLastError, "acme_windows::acme_path::_real_path safe_create_file failed (e_type_file)");
+
+            return {};
+
+         }
+
+      }
+
+      if (fileinstance.nok())
+      {
+
+         return {};
+
+      }
+
+      auto pathFinal = fileinstance.get_final_path_by_handle();
+
+      return pathFinal;
+
+   }
+
+
+   ::file::path acme_path::_safe_real_path(const ::file::path & path)
+   {
+
+      ::windows::file_instance fileinstance;
+
       try
       {
 
-         if (::is_directory(path))
+         auto etype = safe_get_file_system_item_type(path);
+
+         if (etype == ::file::e_type_folder)
          {
 
-            fileinstance.create_file(path,
+            if (!fileinstance.safe_create_file(path,
                GENERIC_READ,          // open for reading
                FILE_SHARE_READ,       // share for reading
                nullptr,
                OPEN_EXISTING,         // existing file only
                0,
-               nullptr);              // no ext. properties
+               nullptr))              // no ext. properties
+            {
+
+               return {};
+
+            }
 
          }
-         else
+         else if (etype == ::file::e_type_file)
          {
 
-            fileinstance.create_file(path,
+            if (!fileinstance.safe_create_file(path,
                FILE_LIST_DIRECTORY,   // open for reading
                FILE_SHARE_READ,       // share for reading
                nullptr,
                OPEN_EXISTING,         // existing file only
                0,
-               nullptr);              // no ext. properties
+               nullptr))             // no ext. properties
+            {
+
+               return {};
+
+            }
 
          }
 
@@ -62,27 +138,9 @@ namespace acme_windows
 
          }
 
-         DWORD nCharacterCount = GetFinalPathNameByHandleW(fileinstance, nullptr, 0, VOLUME_NAME_DOS);
+         auto pathFinal = fileinstance.get_final_path_by_handle();
 
-         if (nCharacterCount > 0)
-         {
-
-            ::windows_path windowspathFinal;
-
-            auto pwszFinalPath = windowspathFinal.get_string_buffer(nCharacterCount);
-
-            nCharacterCount = GetFinalPathNameByHandleW(fileinstance, pwszFinalPath, nCharacterCount, VOLUME_NAME_DOS);
-
-            if (nCharacterCount > 0)
-            {
-
-               windowspathFinal.release_string_buffer();
-
-               fileinstance.m_windowspath = windowspathFinal;
-
-            }
-
-         }
+         return pathFinal;
 
       }
       catch (...)
@@ -90,40 +148,39 @@ namespace acme_windows
 
       }
 
-      return ::string(fileinstance.m_windowspath);
+      return {};
 
-   }
+}
 
+::file::path acme_path::get_absolute_path(const ::scoped_string & scopedstr)
+{
 
-   ::file::path acme_path::get_absolute_path(const ::scoped_string& scopedstr)
+   ::string result = scopedstr; //realpath() fails if path is already absolute
+
+   wstring wstrPath(scopedstr);
+
+   auto newLength = GetFullPathNameW(wstrPath, 0, nullptr, NULL);
+
+   wstring wstrFullPath;
+
+   decltype(newLength) length;
+
+   do
    {
 
-      ::string result = scopedstr; //realpath() fails if path is already absolute
+      length = newLength;
 
-      wstring wstrPath(scopedstr);
+      auto pszFullPath = wstrFullPath.get_string_buffer(length);
 
-      auto newLength = GetFullPathNameW(wstrPath, 0, nullptr, NULL);
-      
-      wstring wstrFullPath;
+      newLength = GetFullPathNameW(wstrPath, MAX_PATH, pszFullPath, NULL);
 
-      decltype(newLength) length;
+      wstrFullPath.release_string_buffer(length);
 
-      do
-      {
+   } while (newLength < length);
 
-         length = newLength;
 
-         auto pszFullPath = wstrFullPath.get_string_buffer(length);
-
-         newLength = GetFullPathNameW(wstrPath, MAX_PATH, pszFullPath, NULL);
-
-         wstrFullPath.release_string_buffer(length);
-
-      } while (newLength < length);
-
-      
-      return result;
-   }
+   return result;
+}
 
 
 

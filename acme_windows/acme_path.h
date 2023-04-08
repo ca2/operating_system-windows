@@ -28,6 +28,9 @@ namespace acme_windows
       ::file::path _real_path(const ::file::path & path) override;
 
 
+      ::file::path _safe_real_path(const ::file::path & path) override;
+
+
       ::file::path get_absolute_path(const ::scoped_string& scopedstr) override;
 
 
