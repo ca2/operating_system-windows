@@ -2,9 +2,9 @@
 #include "destination.h"
 #include "device.h"
 
-
-namespace multimedia
-{
+//
+//namespace multimedia
+//{
 
 
    namespace audio_mixer_mmsystem
@@ -28,7 +28,7 @@ namespace multimedia
       void destination::initialize_source_info()
       {
 
-         ::pointer<::multimedia::audio_mixer_mmsystem::source>    lpSource;
+         ::pointer<::audio_mixer_mmsystem::source>    lpSource;
 
          i32 iConnections = (i32) m_mixerline.cConnections;
 
@@ -55,7 +55,7 @@ namespace multimedia
 
          GetLineControls();
 
-         ::multimedia::audio_mixer::source_array & sourcea = m_mixersourcea;
+         ::audio_mixer::source_array & sourcea = m_mixersourcea;
 
          for(i32 i = 0; i < sourcea.get_size(); i++)
          {
@@ -72,9 +72,9 @@ namespace multimedia
       void destination::update_all_controls()
       {
 
-         ::multimedia::audio_mixer::source::update_all_controls();
+         ::audio_mixer::source::update_all_controls();
 
-         ::multimedia::audio_mixer::source_array & sourcea = m_mixersourcea;
+         ::audio_mixer::source_array & sourcea = m_mixersourcea;
 
          for(i32 i = 0; i < sourcea.get_size(); i++)
          {
@@ -94,7 +94,7 @@ namespace multimedia
       }
 
 
-      ::multimedia::audio_mixer::device * destination::get_device()
+      ::audio_mixer::device * destination::get_device()
       {
 
          return m_pmixerdevice;
@@ -102,7 +102,7 @@ namespace multimedia
       }
 
 
-      void destination::set_device(::multimedia::audio_mixer::device * pdevice)
+      void destination::set_device(::audio_mixer::device * pdevice)
       {
 
          m_pmixerdevice = pdevice;
@@ -110,7 +110,7 @@ namespace multimedia
       }
 
 
-      ::multimedia::audio_mixer::source_array & destination::get_source_info()
+      ::audio_mixer::source_array & destination::get_source_info()
       {
 
          return m_mixersourcea;
@@ -128,12 +128,12 @@ namespace multimedia
 
    } // namespace audio_mixer_mmsystem
 
-
-} // namespace multimedia
-
-
-
-
-
-
-
+//
+//} // namespace multimedia
+//
+//
+//
+//
+//
+//
+//

@@ -3121,7 +3121,7 @@ namespace acme_windows
    //}
 
 
-   int node::command_system(const ::scoped_string& scopedstr, const a_trace_function& aTraceFunction)
+   int node::command_system(const ::scoped_string& scopedstr, const ::trace_function& tracefunction)
    {
 
       //straOutput.clear();
@@ -3294,13 +3294,13 @@ namespace acme_windows
 
             strOutput += str;
 
-            if (aTraceFunction)
+            if (tracefunction)
             {
 
                ::str::get_lines(strOutput, false, [&](auto& str)
                   {
 
-                     aTraceFunction(e_trace_level_information, str);
+                     tracefunction(e_trace_level_information, str);
 
                   });
 
@@ -3345,13 +3345,13 @@ namespace acme_windows
 
             strError += str;
 
-            if (aTraceFunction)
+            if (tracefunction)
             {
 
                ::str::get_lines(strError, false, [&](auto& str)
                   {
 
-                     aTraceFunction(e_trace_level_error, str);
+                     tracefunction(e_trace_level_error, str);
 
                   });
 
@@ -3380,9 +3380,9 @@ namespace acme_windows
 
          }
 
-         if (aTraceFunction 
-            && !aTraceFunction.m_timeTimeout.is_infinite() 
-            && timeStart.elapsed() > aTraceFunction.m_timeTimeout)
+         if (tracefunction
+            && !tracefunction.m_timeTimeout.is_infinite()
+            && timeStart.elapsed() > tracefunction.m_timeTimeout)
          {
 
             break;
@@ -3410,20 +3410,20 @@ namespace acme_windows
       ::CloseHandle(pi.hProcess);
       ::CloseHandle(pi.hThread);
 
-      if (aTraceFunction)
+      if (tracefunction)
       {
 
          ::str::get_lines(strOutput, true, [&](auto& str)
             {
 
-               aTraceFunction(e_trace_level_information, str);
+               tracefunction(e_trace_level_information, str);
 
             });
 
          ::str::get_lines(strError, true, [&](auto& str)
             {
 
-               aTraceFunction(e_trace_level_error, str);
+               tracefunction(e_trace_level_error, str);
 
             });
 

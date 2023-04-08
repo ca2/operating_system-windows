@@ -4,11 +4,11 @@
 #include "control.h"
 #include "destination.h"
 #include "acme/exception/exception.h"
-#include "app-core/multimedia/audio_mixer/user/control.h"
-
-
-namespace multimedia
-{
+#include "audio-system/audio_mixer/user_control.h"
+//
+//
+//namespace multimedia
+//{
 
 
    namespace audio_mixer_mmsystem
@@ -68,7 +68,7 @@ namespace multimedia
             m_mixerlinecontrols.pamxctrl[i].cbStruct = sizeof(MIXERCONTROL);
          }
 
-         ::pointer<::multimedia::audio_mixer_mmsystem::device>device = get_device();
+         ::pointer<::audio_mixer_mmsystem::device>device = get_device();
 
          mmresult = mixerGetLineControls((HMIXEROBJ) device->m_hMixer, &m_mixerlinecontrols, MIXER_GETLINECONTROLSF_ALL);
 
@@ -96,7 +96,7 @@ namespace multimedia
             //    i32         nIndex;
             PMIXERCONTROL       pamxctrl;
             //        LPMIXERCONTROLDETAILS lpmcd;
-            ::pointer<::multimedia::audio_mixer_mmsystem::control>    lpMixerControl;
+            ::pointer<::audio_mixer_mmsystem::control>    lpMixerControl;
 
             //        if (0 != (APP_OPTF_DEBUGLOG & gfuAppOptions))
             //          MixAppDebugLog(nullptr);
@@ -110,7 +110,7 @@ namespace multimedia
                //*m_mixerlinecontrols.pamxctrl = m_mixerlinecontrols.pamxctrl[i];
                *pamxctrl = m_mixerlinecontrols.pamxctrl[i];
                lpMixerControl->Prepare();
-               //            ::multimedia::audio_mixer::audio_mixer::get_control_type_name(pamxctrl, lpMixerControl->m_strTypeName);
+               //            ::audio_mixer::audio_mixer::get_control_type_name(pamxctrl, lpMixerControl->m_strTypeName);
 
                switch (pamxctrl->dwControlType)
                {
@@ -163,9 +163,9 @@ namespace multimedia
 
       }
 
-      /*void     source::GetControl(u32 dwControlType, u32 dwControlFlags,  ::multimedia::audio_mixer::control ** ppControl)
+      /*void     source::GetControl(u32 dwControlType, u32 dwControlFlags,  ::audio_mixer::control ** ppControl)
       {
-      ::multimedia::audio_mixer::control_array & controla = m_mixercontrola;
+      ::audio_mixer::control_array & controla = m_mixercontrola;
       if(controla.get_size() <= 0)
       GetLineControls();
       if(controla.get_size() <= 0)
@@ -184,7 +184,7 @@ namespace multimedia
 
       /*void source::OnArrayReallocation(void *pNewPointer)
       {
-      m_pmixerdestination = (::multimedia::audio_mixer::destination *) pNewPointer;
+      m_pmixerdestination = (::audio_mixer::destination *) pNewPointer;
       }*/
 
       void source::OnMixerLineChange()
@@ -196,7 +196,7 @@ namespace multimedia
 
       void source::update_all_controls()
       {
-         ::multimedia::audio_mixer::control_array & controla = get_control_array();
+         ::audio_mixer::control_array & controla = get_control_array();
          for(i32 i = 0; i < controla.get_size(); i++)
          {
             controla[i]->OnMixerControlChange();
@@ -226,12 +226,12 @@ namespace multimedia
       }
 
 
-      ::multimedia::audio_mixer::device * source::get_device()
+      ::audio_mixer::device * source::get_device()
       {
          return m_pdestination->get_device();
       }
 
-      void source::SetDestination(::multimedia::audio_mixer::destination * pdestination)
+      void source::SetDestination(::audio_mixer::destination * pdestination)
       {
          m_pdestination = pdestination;
       }
@@ -244,7 +244,7 @@ namespace multimedia
          m_mixerline.dwDestination  = dwDestination;
          m_mixerline.dwSource       = dwSource;
 
-         ::pointer<::multimedia::audio_mixer_mmsystem::device>device = get_device();
+         ::pointer<::audio_mixer_mmsystem::device>device = get_device();
 
          MMRESULT mmresult = ::mixerGetLineInfo((HMIXEROBJ)device->m_hMixer, &m_mixerline, fdwInfo);
 
@@ -268,10 +268,10 @@ namespace multimedia
       }
 
 
-      void source::get_line_info(u32 dwSource, ::multimedia::audio_mixer::destination * pdestination)
+      void source::get_line_info(u32 dwSource, ::audio_mixer::destination * pdestination)
       {
 
-         ::pointer<::multimedia::audio_mixer_mmsystem::destination>destination = pdestination;
+         ::pointer<::audio_mixer_mmsystem::destination>destination = pdestination;
 
          get_line_info(dwSource, destination->m_mixerline.dwDestination, MIXER_GETLINEINFOF_SOURCE);
 
@@ -282,7 +282,7 @@ namespace multimedia
       }
 
 
-      ::multimedia::audio_mixer::destination * source::get_destination()
+      ::audio_mixer::destination * source::get_destination()
       {
 
          return m_pdestination;
@@ -295,7 +295,7 @@ namespace multimedia
          return m_bHasV001Controls;
       }
 
-      ::multimedia::audio_mixer::control_array & source::get_control_array()
+      ::audio_mixer::control_array & source::get_control_array()
       {
          return m_mixercontrola;
       }
@@ -313,9 +313,9 @@ namespace multimedia
 
    } // namespace audio_mixer_mmsystem
 
-
-} // namespace multimedia
-
-
-
-
+//
+//} // namespace multimedia
+//
+//
+//
+//
