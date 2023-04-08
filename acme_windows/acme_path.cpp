@@ -22,7 +22,7 @@ namespace acme_windows
    }
 
 
-   ::file::path acme_path::_final(const ::file::path & path)
+   ::file::path acme_path::_real_path(const ::file::path & path)
    {
 
       ::windows::file_instance fileinstance;

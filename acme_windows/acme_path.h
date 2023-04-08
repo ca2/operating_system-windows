@@ -22,12 +22,10 @@ namespace acme_windows
       ~acme_path() override;
 
 
-
-
       //virtual bool __win_find_is_dots(WIN32_FIND_DATAW & data);
 
 
-      ::file::path _final(const ::file::path & path) override;
+      ::file::path _real_path(const ::file::path & path) override;
 
 
       ::file::path get_absolute_path(const ::scoped_string& scopedstr) override;
