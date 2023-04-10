@@ -4260,6 +4260,15 @@ namespace acme_windows
 
    //}
 
+   ::pointer <::operating_system::summary > node::operating_system_summary()
+   {
+
+
+
+   }
+
+
+
 
 } // namespace acme_windows
 

@@ -245,6 +245,8 @@ namespace acme_windows
       //// use of comptr to guard COM objets and variant to guard VARIANTs
       //virtual void _unzip_to_folder(const char* pszZip, const char* pszFolder);
    
+      ::pointer <::operating_system::summary > operating_system_summary() override;
+
 
    };
 
