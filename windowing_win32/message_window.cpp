@@ -43,7 +43,7 @@ namespace windowing_win32
       if (m_pinteractionlistener)
       {
 
-         m_pinteractionlistener->install_interaction_routing(this);
+         m_pinteractionlistener->install_interaction_message_routing(this);
 
       }
 
@@ -74,10 +74,10 @@ namespace windowing_win32
    void message_window::message_window_message_handler(::message::message * pmessage)
    {
 
-      if(m_plistener != nullptr)
+      if(m_pinteractionlistener != nullptr)
       {
 
-         m_plistener->message_window_message_handler(pmessage);
+         m_pinteractionlistener->interaction_message_handler(pmessage);
 
       }
 
