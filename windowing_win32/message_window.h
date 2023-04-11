@@ -11,7 +11,7 @@ namespace windowing_win32
 
 
    class CLASS_DECL_WINDOWING_WIN32 message_window :
-      virtual public message_window_listener,
+      virtual public ::user::interaction_listener,
       virtual public ::user::interaction
    {
    public:
