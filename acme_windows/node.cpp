@@ -10,6 +10,7 @@
 #include "acme/filesystem/filesystem/file_dialog.h"
 #include "acme/filesystem/filesystem/folder_dialog.h"
 #include "acme/operating_system/process.h"
+#include "acme/operating_system/summary.h"
 #include "acme/parallelization/synchronous_lock.h"
 #include "acme/parallelization/install_mutex.h"
 #include "acme/platform/scoped_restore.h"
@@ -4263,6 +4264,15 @@ namespace acme_windows
    ::pointer <::operating_system::summary > node::operating_system_summary()
    {
 
+      auto psummary = __create_new < ::operating_system::summary >();
+
+      psummary->m_strDistro = "windows";
+      psummary->m_strDistroBranch = "windows";
+      psummary->m_strDistroFamily = "windows";
+      psummary->m_strDistroRelease = "10";
+      psummary->m_strSlashedOperatingSystem = "windows";
+
+      return psummary;
 
 
    }

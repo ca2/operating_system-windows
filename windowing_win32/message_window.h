@@ -2,7 +2,7 @@
 #pragma once
 
 
-#include "message_window_listener.h"
+#include "aura/user/user/interaction_listener.h"
 #include "aura/user/user/interaction.h"
 
 
@@ -17,14 +17,14 @@ namespace windowing_win32
    public:
 
 
-      ::pointer<message_window_listener>     m_plistener;
+      ::pointer<::user::interaction_listener>     m_pinteractionlistener;
 
 
       message_window();
       ~message_window() override;
 
 
-      virtual void create_message_window(const ::string & pszName,::windowing_win32::message_window_listener * plistener = nullptr);
+      virtual void create_message_window(const ::string & pszName,::user::interaction_listener * plistener = nullptr);
 
       virtual void message_handler(::user::message * pusermessage);
 
