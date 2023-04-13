@@ -4270,7 +4270,8 @@ namespace acme_windows
       psummary->m_strDistroBranch = "windows";
       psummary->m_strDistroFamily = "windows";
       psummary->m_strDistroRelease = "10";
-      psummary->m_strSlashedOperatingSystem = "windows";
+      psummary->m_strSlashedIntegration = "windows";
+      psummary->m_strSlashedStore = "windows";
 
       return psummary;
 
