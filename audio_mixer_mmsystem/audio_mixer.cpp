@@ -5,9 +5,9 @@
 #include "destination.h"
 
 
-namespace multimedia
-{
-
+//namespace multimedia
+//{
+//
 
    namespace audio_mixer_mmsystem
    {
@@ -18,7 +18,7 @@ namespace multimedia
 
          //m_window.m_pmixer = this;
 
-//         m_pdevice = new ::multimedia::audio_mixer::device(this);
+//         m_pdevice = new ::audio_mixer::device(this);
 
       }
 
@@ -48,7 +48,7 @@ namespace multimedia
       void audio_mixer::initialize(::particle * pparticle)
       {
 
-         ::multimedia::audio_mixer::audio_mixer::initialize(pparticle);
+         ::audio_mixer::audio_mixer::initialize(pparticle);
 
          __construct_new(m_pwindow);
 
@@ -313,7 +313,7 @@ namespace multimedia
       void audio_mixer::OnMixerLineChange(HMIXER hMixer, u32 dwLineID)
       {
 
-         ::pointer<::multimedia::audio_mixer_mmsystem::device>device = m_paudiomixerdevice;
+         ::pointer<::audio_mixer_mmsystem::device>device = m_paudiomixerdevice;
 
          if(hMixer == device->m_hMixer)
          {
@@ -334,7 +334,7 @@ namespace multimedia
       void audio_mixer::OnMixerControlChange(HMIXER hMixer, u32 dwControlID)
       {
 
-         ::pointer<::multimedia::audio_mixer_mmsystem::device>device = m_paudiomixerdevice;
+         ::pointer<::audio_mixer_mmsystem::device>device = m_paudiomixerdevice;
 
          if(hMixer == device->m_hMixer)
          {
@@ -355,7 +355,7 @@ namespace multimedia
       void audio_mixer::on_message(::message::message * pmessage)
       {
 
-         ::pointer<::multimedia::audio_mixer_mmsystem::device>pdevice = m_paudiomixerdevice;
+         ::pointer<::audio_mixer_mmsystem::device>pdevice = m_paudiomixerdevice;
 
          if (::is_set(pdevice))
          {
@@ -368,6 +368,6 @@ namespace multimedia
 
 
    } // namespace audio_mixer_mmsystem
-
-
-} // namespace multimedia
+//
+//
+//} // namespace multimedia

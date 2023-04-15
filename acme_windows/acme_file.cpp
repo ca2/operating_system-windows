@@ -60,7 +60,14 @@ namespace acme_windows
 
       ::windows::file_instance fileinstance;
 
-      fileinstance.create_file(path, GENERIC_READ, FILE_SHARE_READ, NULL, OPEN_EXISTING, 0, NULL);
+      if (!fileinstance.safe_create_file(path, GENERIC_READ, FILE_SHARE_READ, NULL, OPEN_EXISTING, 0, NULL))
+      {
+
+         DWORD dwLastError = ::GetLastError();
+
+         throw_last_error_exception(path, ::file::e_open_read, dwLastError, "acme_windows::acme_file::modification_time safe_create_file failed");
+
+      }
 
       FILETIME ftWrite;
 
@@ -82,7 +89,14 @@ namespace acme_windows
 
       ::windows::file_instance fileinstance;
 
-      fileinstance.create_file(path, GENERIC_WRITE, 0, NULL, OPEN_EXISTING, 0, NULL);
+      if (!fileinstance.safe_create_file(path, GENERIC_WRITE, 0, NULL, OPEN_EXISTING, 0, NULL))
+      {
+
+         DWORD dwLastError = ::GetLastError();
+
+         throw_last_error_exception(path, ::file::e_open_write, dwLastError, "acme_windows::acme_file::set_modification_time safe_create_file failed");
+
+      }
 
       ::file_time_t filetime;
 

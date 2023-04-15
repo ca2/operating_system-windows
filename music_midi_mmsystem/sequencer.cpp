@@ -13,6 +13,7 @@
 #include "app-veriwell/multimedia/music/midi/file.h"
 #include "app-veriwell/multimedia/music/midi/player_command.h"
 #include "app-veriwell/multimedia/music/midi/event.h"
+#include "acme_windows/mmresult.h"
 
 
 template < typename TYPE, std::size_t N >
@@ -275,7 +276,7 @@ namespace music
 
                //estatus = translate_os_result(mmr, "sequencer::mm_start", "midiStreamOpen error");
 
-               auto estatus = mmresult_to_status(mmresult);
+               auto estatus = mmresult_status(mmresult);
 
                if (!estatus)
                {
@@ -542,7 +543,7 @@ namespace music
 
                         MMRESULT mmresult = midiStreamPosition(m_hstream, &mmt, sizeof(mmt));
 
-                        auto estatus = mmresult_to_status(mmresult);
+                        auto estatus = mmresult_status(mmresult);
 
                         if (!estatus)
                         {
@@ -1453,7 +1454,7 @@ namespace music
 
             MMRESULT mmresult = midiOutOpen(&m_hmidiout, uDeviceID, (DWORD_PTR)m_eventLongMessage.m_hsynchronization, 0, CALLBACK_EVENT);
 
-            auto estatus = mmresult_to_status(mmresult);
+            auto estatus = mmresult_status(mmresult);
 
             if (!estatus)
             {
@@ -1503,7 +1504,7 @@ namespace music
 
             mmresult = midiOutPrepareHeader(hmidiout, pmidihdr, sizeof(MIDIHDR));
 
-            estatus = mmresult_to_status(mmresult);
+            estatus = mmresult_status(mmresult);
 
             if (!estatus)
             {
@@ -1516,7 +1517,7 @@ namespace music
 
             mmresult = midiOutLongMsg(hmidiout, pmidihdr, sizeof(MIDIHDR));
 
-            estatus = mmresult_to_status(mmresult);
+            estatus = mmresult_status(mmresult);
 
             if (!estatus)
             {
@@ -1538,7 +1539,7 @@ namespace music
 
             mmresult = midiOutUnprepareHeader(hmidiout, pmidihdr, sizeof(MIDIHDR));
 
-            estatus = mmresult_to_status(mmresult);
+            estatus = mmresult_status(mmresult);
 
             if (!estatus)
             {
@@ -1685,7 +1686,7 @@ namespace music
 
             mmresult = midiOutOpen(&hmidiout, uDeviceID, (DWORD_PTR)event.m_hsynchronization, 0, CALLBACK_THREAD);
 
-            auto estatus = mmresult_to_status(mmresult);
+            auto estatus = mmresult_status(mmresult);
 
             if (!estatus)
             {
@@ -1714,7 +1715,7 @@ namespace music
 
             mmresult = midiOutPrepareHeader(hmidiout, lpmh, sizeof(MIDIHDR));
 
-            estatus = mmresult_to_status(mmresult);
+            estatus = mmresult_status(mmresult);
 
             if (!estatus)
             {
@@ -1727,7 +1728,7 @@ namespace music
 
             mmresult = midiOutLongMsg(hmidiout, lpmh, sizeof(MIDIHDR));
 
-            estatus = mmresult_to_status(mmresult);
+            estatus = mmresult_status(mmresult);
 
             if (!estatus)
             {
@@ -1745,7 +1746,7 @@ namespace music
 
             mmresult = midiOutUnprepareHeader(hmidiout, lpmh, sizeof(MIDIHDR));
 
-            estatus = mmresult_to_status(mmresult);
+            estatus = mmresult_status(mmresult);
 
             if (!estatus)
             {
@@ -1756,7 +1757,7 @@ namespace music
 
             mmresult = midiOutClose(hmidiout);
 
-            estatus = mmresult_to_status(mmresult);
+            estatus = mmresult_status(mmresult);
 
             if (!estatus)
             {

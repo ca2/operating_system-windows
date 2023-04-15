@@ -2,7 +2,7 @@
 
 
 #include "aura/user/user/copydesk.h"
-#include "aura/operating_system/windows/message_window.h"
+#include "message_window.h"
 
 
 #include "acme/_operating_system.h"
@@ -14,10 +14,9 @@ namespace windowing_win32
 
    class CLASS_DECL_WINDOWING_WIN32 copydesk :
       virtual public ::user::copydesk,
-      virtual public ::user::message_window
+      virtual public ::windowing_win32::message_window
    {
    public:
-
 
 
       //__creatable_from_base(copydesk, ::user::copydesk);

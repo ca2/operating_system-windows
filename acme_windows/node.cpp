@@ -10,6 +10,7 @@
 #include "acme/filesystem/filesystem/file_dialog.h"
 #include "acme/filesystem/filesystem/folder_dialog.h"
 #include "acme/operating_system/process.h"
+#include "acme/operating_system/summary.h"
 #include "acme/parallelization/synchronous_lock.h"
 #include "acme/parallelization/install_mutex.h"
 #include "acme/platform/scoped_restore.h"
@@ -3121,7 +3122,7 @@ namespace acme_windows
    //}
 
 
-   int node::command_system(const ::scoped_string& scopedstr, const a_trace_function& aTraceFunction)
+   int node::command_system(const ::scoped_string& scopedstr, const ::trace_function& tracefunction)
    {
 
       //straOutput.clear();
@@ -3294,13 +3295,13 @@ namespace acme_windows
 
             strOutput += str;
 
-            if (aTraceFunction)
+            if (tracefunction)
             {
 
                ::str::get_lines(strOutput, false, [&](auto& str)
                   {
 
-                     aTraceFunction(e_trace_level_information, str);
+                     tracefunction(e_trace_level_information, str);
 
                   });
 
@@ -3345,13 +3346,13 @@ namespace acme_windows
 
             strError += str;
 
-            if (aTraceFunction)
+            if (tracefunction)
             {
 
                ::str::get_lines(strError, false, [&](auto& str)
                   {
 
-                     aTraceFunction(e_trace_level_error, str);
+                     tracefunction(e_trace_level_error, str);
 
                   });
 
@@ -3380,9 +3381,9 @@ namespace acme_windows
 
          }
 
-         if (aTraceFunction 
-            && !aTraceFunction.m_timeTimeout.is_infinite() 
-            && timeStart.elapsed() > aTraceFunction.m_timeTimeout)
+         if (tracefunction
+            && !tracefunction.m_timeTimeout.is_infinite()
+            && timeStart.elapsed() > tracefunction.m_timeTimeout)
          {
 
             break;
@@ -3410,20 +3411,20 @@ namespace acme_windows
       ::CloseHandle(pi.hProcess);
       ::CloseHandle(pi.hThread);
 
-      if (aTraceFunction)
+      if (tracefunction)
       {
 
          ::str::get_lines(strOutput, true, [&](auto& str)
             {
 
-               aTraceFunction(e_trace_level_information, str);
+               tracefunction(e_trace_level_information, str);
 
             });
 
          ::str::get_lines(strError, true, [&](auto& str)
             {
 
-               aTraceFunction(e_trace_level_error, str);
+               tracefunction(e_trace_level_error, str);
 
             });
 
@@ -4259,6 +4260,25 @@ namespace acme_windows
    //   }
 
    //}
+
+   ::pointer <::operating_system::summary > node::operating_system_summary()
+   {
+
+      auto psummary = __create_new < ::operating_system::summary >();
+
+      psummary->m_strDistro = "windows";
+      psummary->m_strDistroBranch = "windows";
+      psummary->m_strDistroFamily = "windows";
+      psummary->m_strDistroRelease = "10";
+      psummary->m_strSlashedIntegration = "windows";
+      psummary->m_strSlashedStore = "windows";
+
+      return psummary;
+
+
+   }
+
+
 
 
 } // namespace acme_windows

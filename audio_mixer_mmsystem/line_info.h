@@ -1,11 +1,11 @@
 #pragma once
 
 
-#include "app-core/multimedia/audio_mixer/line_info.h"
+#include "audio-system/audio_mixer/line_info.h"
 
-
-namespace multimedia
-{
+//
+//namespace multimedia
+//{
 
 
    namespace audio_mixer_mmsystem
@@ -13,7 +13,7 @@ namespace multimedia
 
 
       class CLASS_DECL_AUDIO_MIXER_MMSYSTEM line_info :
-         virtual public ::multimedia::audio_mixer::line_info
+         virtual public ::audio_mixer::line_info
       {
       public:
 
@@ -25,7 +25,7 @@ namespace multimedia
 
 
          line_info();
-         virtual ~line_info();
+         ~line_info() override;
 
 
       };
@@ -34,13 +34,13 @@ namespace multimedia
    } // namespace audio_mixer_mmsystem
 
 
-} // namespace multimedia
-
-
-
-
-
-
-
-
-
+//} // namespace multimedia
+//
+//
+//
+//
+//
+//
+//
+//
+//
