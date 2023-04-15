@@ -7,6 +7,7 @@
 #include "window.h"
 #include "keyboard.h"
 #include "display.h"
+#include "message_window.h"
 #include "monitor.h"
 #include "system_interaction.h"
 #include "top_level_enum.h"
@@ -1395,6 +1396,18 @@ namespace windowing_win32
          m_emessageWindowsTaskbarCreatedMessage = (enum_message)RegisterWindowMessageW(L"TaskbarCreated");
 
       }
+
+   }
+
+
+   ::user::interaction * windowing::create_message_window(const ::string & pszName, ::user::interaction_listener * pinteractionlistener)
+   {
+
+      auto pmessagewindow = __create_new < message_window >();
+
+      pmessagewindow->create_message_window(pszName, pinteractionlistener);
+
+      return pmessagewindow;
 
    }
 

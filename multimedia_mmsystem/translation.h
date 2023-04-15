@@ -24,7 +24,7 @@ namespace multimedia
 } // namespace multimedia
 
 
-CLASS_DECL_MULTIMEDIA_MMSYSTEM ::e_status mmresult_to_status(MMRESULT mmr);
+//CLASS_DECL_MULTIMEDIA_MMSYSTEM ::e_status mmresult_status(MMRESULT mmr);
 
 
 

@@ -2,6 +2,7 @@
 #include "buffer.h"
 #include "sequencer.h"
 #include "acme/parallelization/synchronous_lock.h"
+#include "acme_windows/mmresult.h"
 #include "app-veriwell/multimedia/music/midi/sequence.h"
 
 
@@ -129,7 +130,7 @@ namespace music
 
             MMRESULT mmresult = ::midiOutPrepareHeader(hmidiout, &m_midihdr, sizeof(m_midihdr));
 
-            auto estatus = mmresult_to_status(mmresult);
+            auto estatus = mmresult_status(mmresult);
 
             if (!estatus)
             {
@@ -191,7 +192,7 @@ namespace music
 
             MMRESULT mmresult = ::midiOutUnprepareHeader(hmidiout, &m_midihdr, sizeof(m_midihdr));
 
-            auto estatus = mmresult_to_status(mmresult);
+            auto estatus = mmresult_status(mmresult);
 
             if (!estatus)
             {
@@ -265,7 +266,7 @@ namespace music
 
             MMRESULT mmresult = ::midiStreamOut(hmidiout, &m_midihdr, sizeof(m_midihdr));
 
-            auto estatus = mmresult_to_status(mmresult);
+            auto estatus = mmresult_status(mmresult);
 
             if (!estatus)
             {

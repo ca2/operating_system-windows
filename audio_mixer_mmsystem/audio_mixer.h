@@ -1,24 +1,24 @@
 #pragma once
 
 
-#include "app-core/multimedia/audio_mixer/audio_mixer.h"
+#include "audio-system/audio_mixer/audio_mixer.h"
 
-
-namespace multimedia
-{
-
+//
+//namespace multimedia
+//{
+//
 
    namespace audio_mixer_mmsystem
    {
 
 
       class CLASS_DECL_AUDIO_MIXER_MMSYSTEM audio_mixer :
-         virtual public ::multimedia::audio_mixer::audio_mixer
+         virtual public ::audio_mixer::audio_mixer
       {
       public:
 
 
-         ::pointer<::multimedia::audio_mixer_mmsystem::interaction> m_pwindow;
+         ::pointer<::audio_mixer_mmsystem::interaction> m_pwindow;
 
 
          audio_mixer();
@@ -45,13 +45,13 @@ namespace multimedia
 
 
    } // namespace audio_mixer_mmsystem
-
-
-} // namespace multimedia
-
-
-
-
-
-
-
+//
+//
+//} // namespace multimedia
+//
+//
+//
+//
+//
+//
+//

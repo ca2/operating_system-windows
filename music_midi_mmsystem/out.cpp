@@ -5,6 +5,7 @@
 #include "acme/exception/exception.h"
 #include "acme/parallelization/synchronous_lock.h"
 #include "acme/primitive/primitive/memory.h"
+#include "acme_windows/mmresult.h"
 #include "app-veriwell/multimedia/music/midi/midi.h"
 
 
@@ -86,10 +87,10 @@ namespace music
          void     out::send_short_message(::music::midi::enum_midi_message emessage, int iChannel, int iData1, int iData2)
          {
 
-//            return mmresult_to_status(midiOutShortMsg(m_hmidiout, MIDIMSG(((int)emessage) >> 4, iChannel, iData1, iData2)), "out::send_short_message");
+//            return mmresult_status(midiOutShortMsg(m_hmidiout, MIDIMSG(((int)emessage) >> 4, iChannel, iData1, iData2)), "out::send_short_message");
             MMRESULT mmresult = midiOutShortMsg(m_hmidiout, MIDIMSG(((int)emessage) >> 4, iChannel, iData1, iData2));
 
-            auto estatus = mmresult_to_status(mmresult);
+            auto estatus = mmresult_status(mmresult);
 
             if (!estatus)
             {
@@ -150,7 +151,7 @@ namespace music
 
             }
 
-            //return mmresult_to_status(e);
+            //return mmresult_status(e);
 
          }
 

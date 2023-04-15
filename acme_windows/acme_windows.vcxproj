@@ -718,6 +718,7 @@
     <ClCompile Include="language.cpp" />
     <ClCompile Include="list_serial_ports.cpp" />
     <ClCompile Include="message_loop.cpp" />
+    <ClCompile Include="mmresult.cpp" />
     <ClCompile Include="node.cpp" />
     <ClCompile Include="acme_path.cpp" />
     <ClCompile Include="console.cpp" />
@@ -785,6 +786,7 @@
     <ClInclude Include="handle.h" />
     <ClInclude Include="itemidlist.h" />
     <ClInclude Include="known_folder_struct.h" />
+    <ClInclude Include="mmresult.h" />
     <ClInclude Include="nano_timer.h" />
     <ClInclude Include="node.h" />
     <ClInclude Include="path.h" />

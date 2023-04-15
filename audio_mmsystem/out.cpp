@@ -6,6 +6,7 @@
 #include "audio/audio/audio.h"
 #include "audio/audio/wave/wave.h"
 #include "audio/audio/wave/player.h"
+#include "acme_windows/mmresult.h"
 
 
 namespace audio_mmsystem
@@ -134,7 +135,7 @@ namespace audio_mmsystem
 
             TRACE("multimedia::audio_mmsystem::out::out_open_ex waveOutOpen: ERROR %d!!", mmresult);
 
-            estatus = mmresult_to_status(mmresult);
+            estatus = mmresult_status(mmresult);
 
             //if (estatus == ::success)
             //{
@@ -239,7 +240,7 @@ namespace audio_mmsystem
 
          }
 
-         estatus = mmresult_to_status(mmresult);
+         estatus = mmresult_status(mmresult);
 
          if (estatus != ::success)
          {
@@ -341,7 +342,7 @@ namespace audio_mmsystem
 
          mmresult = waveOutUnprepareHeader(m_hwaveout, wave_hdr(i), sizeof(WAVEHDR));
 
-         estatus = mmresult_to_status(mmresult);
+         estatus = mmresult_status(mmresult);
 
          if(::succeeded(estatus))
          {
@@ -356,7 +357,7 @@ namespace audio_mmsystem
 
       mmresult = waveOutClose(m_hwaveout);
 
-      estatus = mmresult_to_status(mmresult);
+      estatus = mmresult_status(mmresult);
 
       m_hwaveout = nullptr;
 
@@ -391,7 +392,7 @@ namespace audio_mmsystem
 
       MMRESULT mmresult = waveOutWrite(m_hwaveout, lpwavehdr, sizeof(WAVEHDR));
 
-      auto estatus = mmresult_to_status(mmresult);
+      auto estatus = mmresult_status(mmresult);
 
       if(::failed(estatus))
       {
@@ -429,7 +430,7 @@ namespace audio_mmsystem
 
       MMRESULT mmresult = waveOutReset(m_hwaveout);
 
-      m_estatusWave = mmresult_to_status(mmresult);
+      m_estatusWave = mmresult_status(mmresult);
 
       if(m_estatusWave == ::success)
       {
@@ -463,7 +464,7 @@ namespace audio_mmsystem
       // to zero. All pending playback buffers are marked as done and
       // returned to the application.
 
-      m_estatusWave = mmresult_to_status(waveOutPause(m_hwaveout));
+      m_estatusWave = mmresult_status(waveOutPause(m_hwaveout));
 
       ASSERT(m_estatusWave == ::success);
 
@@ -501,7 +502,7 @@ namespace audio_mmsystem
 
       MMRESULT mmresult = waveOutRestart(m_hwaveout);
 
-      m_estatusWave = mmresult_to_status(mmresult);
+      m_estatusWave = mmresult_status(mmresult);
 
       ASSERT(m_estatusWave == ::success);
 
@@ -549,7 +550,7 @@ namespace audio_mmsystem
 
       mmt.wType = TIME_BYTES;
 
-      auto estatus = mmresult_to_status(waveOutGetPosition(m_hwaveout, &mmt, sizeof(mmt)));
+      auto estatus = mmresult_status(waveOutGetPosition(m_hwaveout, &mmt, sizeof(mmt)));
 
       if (::success != estatus)
       {
@@ -602,7 +603,7 @@ namespace audio_mmsystem
    //   if(m_hwaveout != nullptr)
    //   {
 
-   //      estatus = mmresult_to_status(waveOutGetPosition(m_hwaveout, &mmt, sizeof(mmt)));
+   //      estatus = mmresult_status(waveOutGetPosition(m_hwaveout, &mmt, sizeof(mmt)));
 
    //      try
    //      {

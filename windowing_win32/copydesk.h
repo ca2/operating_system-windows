@@ -14,10 +14,9 @@ namespace windowing_win32
 
    class CLASS_DECL_WINDOWING_WIN32 copydesk :
       virtual public ::user::copydesk,
-      virtual public ::user::message_window
+      virtual public ::windowing_win32::message_window
    {
    public:
-
 
 
       //__creatable_from_base(copydesk, ::user::copydesk);

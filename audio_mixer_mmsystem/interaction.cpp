@@ -3,68 +3,68 @@
 #include "audio_mixer.h"
 
 
-namespace multimedia
+//namespace multimedia
+//{
+//
+
+namespace audio_mixer_mmsystem
 {
 
 
-   namespace audio_mixer_mmsystem
+   interaction::interaction()
    {
 
-
-      interaction::interaction()
-      {
-
-      }
+   }
 
 
-      interaction::~interaction()
-      {
+   interaction::~interaction()
+   {
 
-      }
-
-
-      void interaction::install_message_routing(::channel * pchannel)
-      {
-
-         ::user::interaction::install_message_routing(pchannel);
-
-         MESSAGE_LINK(MM_MIXM_CONTROL_CHANGE, pchannel, this, &interaction::_001OnMixerControlChange);
-         MESSAGE_LINK(MM_MIXM_LINE_CHANGE, pchannel, this, &interaction::_001OnMixerLineChange);
-
-      }
+   }
 
 
-      void interaction::_001OnMixerControlChange(::message::message * pmessage)
-      {
+   void interaction::install_message_routing(::channel * pchannel)
+   {
 
-         auto paudiomixer = m_paudiomixer;
-         
-         paudiomixer->OnMixerControlChange((HMIXER)pmessage->m_wparam.m_number, (u32)pmessage->m_lparam);
+      ::user::interaction::install_message_routing(pchannel);
 
-         pmessage->m_lresult = 0;
+      MESSAGE_LINK(MM_MIXM_CONTROL_CHANGE, pchannel, this, &interaction::_001OnMixerControlChange);
+      MESSAGE_LINK(MM_MIXM_LINE_CHANGE, pchannel, this, &interaction::_001OnMixerLineChange);
 
-      }
-
-
-      void interaction::_001OnMixerLineChange(::message::message * pmessage)
-      {
-
-         auto paudiomixer = m_paudiomixer;
-
-         paudiomixer->OnMixerLineChange((HMIXER)pmessage->m_wparam.m_number, (u32)pmessage->m_lparam);
-
-         pmessage->m_lresult = 0;
-
-      }
+   }
 
 
-   } // namespace audio_mixer_mmsystem
+   void interaction::_001OnMixerControlChange(::message::message * pmessage)
+   {
+
+      auto paudiomixer = m_paudiomixer;
+
+      paudiomixer->OnMixerControlChange((HMIXER)pmessage->m_wparam.m_number, (u32)pmessage->m_lparam);
+
+      pmessage->m_lresult = 0;
+
+   }
 
 
-} // namespace multimedia
+   void interaction::_001OnMixerLineChange(::message::message * pmessage)
+   {
+
+      auto paudiomixer = m_paudiomixer;
+
+      paudiomixer->OnMixerLineChange((HMIXER)pmessage->m_wparam.m_number, (u32)pmessage->m_lparam);
+
+      pmessage->m_lresult = 0;
+
+   }
 
 
+} // namespace audio_mixer_mmsystem
 
-
-
-
+//
+//} // namespace multimedia
+//
+//
+//
+//
+//
+//
