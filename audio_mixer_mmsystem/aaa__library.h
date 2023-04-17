@@ -1,10 +1,10 @@
-// Created by camilo on 2021-06-10 02:20 PM <3 Thomas Borregaard Sørensen__!!
+// Created by camilo on 2021-06-10 02:20 PM <3 Thomas Borregaard Sï¿½rensen__!!
 #pragma 
 
 
 #include "app-core/multimedia/_library.h"
 #include "aura/user/user/_component.h"
-#include "app-core/multimedia/audio_mixer/_component.h"
+#include "audio-system/audio_mixer/_component.h"
 #include "multimedia_mmsystem/_library.h"
 
 

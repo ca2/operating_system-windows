@@ -3,45 +3,45 @@
 
 #include "aura/user/user/interaction.h"
 
+//
+//namespace multimedia
+//{
+//
 
-namespace multimedia
+namespace audio_mixer_mmsystem
 {
 
 
-   namespace audio_mixer_mmsystem
+   class audio_mixer;
+
+
+   class interaction :
+      public ::user::interaction
    {
+   public:
 
 
-      class audio_mixer;
+      ::pointer<audio_mixer>  m_paudiomixer;
 
 
-      class interaction :
-         public ::user::interaction
-      {
-      public:
+      interaction();
+      ~interaction() override;
 
 
-         ::pointer<audio_mixer>  m_paudiomixer;
+      void install_message_routing(::channel * pchannel);
 
 
-         interaction();
-         ~interaction() override;
+      DECLARE_MESSAGE_HANDLER(_001OnMixerControlChange);
+      DECLARE_MESSAGE_HANDLER(_001OnMixerLineChange);
 
 
-         void install_message_routing(::channel * pchannel);
+   };
 
 
-         DECLARE_MESSAGE_HANDLER(_001OnMixerControlChange);
-         DECLARE_MESSAGE_HANDLER(_001OnMixerLineChange);
+} // namespace audio_mixer_mmsystem
 
-
-      };
-
-
-   } // namespace audio_mixer_mmsystem
-
-
-} // namespace multimedia
-
-
-
+//
+//} // namespace multimedia
+//
+//
+//

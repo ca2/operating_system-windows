@@ -341,9 +341,16 @@ namespace apex_windows
       ::windows::file_instance fileinstance;
 
       //filehandle.create_file(L"\\\\?\\" + path.get_os_path(),
-      fileinstance.create_file(path,
+      if(!fileinstance.safe_create_file(path,
          GENERIC_READ | GENERIC_WRITE, 0, nullptr, OPEN_EXISTING,
-         FILE_FLAG_OPEN_REPARSE_POINT | FILE_FLAG_DELETE_ON_CLOSE, nullptr);
+         FILE_FLAG_OPEN_REPARSE_POINT | FILE_FLAG_DELETE_ON_CLOSE, nullptr))
+      {
+
+         DWORD dwLastError = ::GetLastError();
+
+         throw_last_error_exception(path, ::file::e_open_read | ::file::e_open_write, dwLastError, "apex_windows::file_context::erase safe_create_file failed");
+
+      }
 
       //if (h == INVALID_HANDLE_VALUE)
       //{

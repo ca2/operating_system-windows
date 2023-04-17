@@ -110,6 +110,12 @@
     <ClCompile Include="exclusive.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="mmresult.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="main_window.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="deployment.rc">
@@ -229,6 +235,15 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="exclusive.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="mmresult.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="application.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="main_window.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -11,7 +11,7 @@ namespace windowing_win32
    message_window::message_window()
    {
 
-      m_plistener          = nullptr;
+      // m_plistener = nullptr;
 
    }
 
@@ -22,10 +22,10 @@ namespace windowing_win32
    }
 
 
-   void message_window::create_message_window(const ::string & pszName,::windowing_win32::message_window_listener * plistener)
+   void message_window::create_message_window(const ::string & pszName,::user::interaction_listener * pinteractionlistener)
    {
 
-      m_plistener = plistener;
+      m_pinteractionlistener = pinteractionlistener;
 
       m_bMessageWindow = true;
 
@@ -40,10 +40,10 @@ namespace windowing_win32
 
       //}
 
-      if (m_plistener)
+      if (m_pinteractionlistener)
       {
 
-         m_plistener->install_message_window_routing(this);
+         m_pinteractionlistener->install_interaction_message_routing(this);
 
       }
 
@@ -74,10 +74,10 @@ namespace windowing_win32
    void message_window::message_window_message_handler(::message::message * pmessage)
    {
 
-      if(m_plistener != nullptr)
+      if(m_pinteractionlistener != nullptr)
       {
 
-         m_plistener->message_window_message_handler(pmessage);
+         m_pinteractionlistener->interaction_message_handler(pmessage);
 
       }
 

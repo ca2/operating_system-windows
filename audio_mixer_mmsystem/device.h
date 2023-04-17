@@ -1,11 +1,11 @@
 #pragma once
 
 
-#include "app-core/multimedia/audio_mixer/device.h"
+#include "audio-system/audio_mixer/device.h"
 
-
-namespace multimedia
-{
+//
+//namespace multimedia
+//{
 
 
    namespace audio_mixer_mmsystem
@@ -13,7 +13,7 @@ namespace multimedia
 
 
       class CLASS_DECL_AUDIO_MIXER_MMSYSTEM device :
-         virtual public ::multimedia::audio_mixer::device
+         virtual public ::audio_mixer::device
       {
       public:
 
@@ -26,23 +26,23 @@ namespace multimedia
          ~device() override;
 
          
-         void initialize_audio_mixer_device(::multimedia::audio_mixer::audio_mixer * pmixer) override;
+         void initialize_audio_mixer_device(::audio_mixer::audio_mixer * pmixer) override;
 
 
-         ::multimedia::audio_mixer::audio_mixer * get_mixer();
+         ::audio_mixer::audio_mixer * get_mixer();
 
          virtual string get_product_name() override;
          virtual void on_message(::message::message * pmessage);
          void     close();
-         void MapDlgCtrlIDToLineControls(::multimedia::audio_mixer::source * pSource);
+         void MapDlgCtrlIDToLineControls(::audio_mixer::source * pSource);
          void MapDlgCtrlIDToControls();
-         void MapLineControls(::multimedia::audio_mixer::source * pSource);
+         void MapLineControls(::audio_mixer::source * pSource);
          void OnMixerControlChange(u32 dwControlID);
          void OnMixerLineChange(u32 dwLineID);
          void map_lines();
          void map_controls();
          
-         ::pointer<::multimedia::audio_mixer::destination>get_destination(::multimedia::audio_mixer::e_destination edestination) override;
+         ::pointer<::audio_mixer::destination>get_destination(::audio_mixer::e_destination edestination) override;
 
          void     initialize_destinations();
          void     initialize_capabilities();
@@ -54,10 +54,10 @@ namespace multimedia
 
    } // namespace audio_mixer_mmsystem
 
-
-} // namespace multimedia
-
-
-
-
-
+//
+//} // namespace multimedia
+//
+//
+//
+//
+//

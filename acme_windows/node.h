@@ -88,31 +88,31 @@ namespace acme_windows
       virtual string audio_get_default_library_name() override;
 
 
-      void create_process(const ::string & pszCommandLine, u32 * pprocessId) override;
+      ::process_identifier create_process(const ::string & pszCommandLine) override;
 
 
       void run_silent(const ::string & strFunct, const ::string & strstrParams) override;
 
 
-      bool process_modules(string_array & stra, u32 processID) override;
+      bool process_modules(string_array & stra, ::process_identifier processidentifier) override;
 
 
       bool load_modules_diff(string_array & straOld, string_array & straNew, const ::string & pszExceptDir) override;
 
 
-      atom_array module_path_get_pid(const ::string & pszModulePath, bool bModuleNameIsPropertyFormatted) override;
+      ::process_identifier_array module_path_processes_identifiers(const ::string & pszModulePath, bool bModuleNameIsPropertyFormatted) override;
 
-      string module_path_from_pid(u32 pid) override;
+      string process_identifier_module_path(::process_identifier processidentifier) override;
 
-      bool is_shared_library_busy(u32 processid, const string_array & stra) override;
+      bool is_shared_library_busy(::process_identifier processidentifier, const string_array & stra) override;
 
       bool is_shared_library_busy(const string_array & stra) override;
 
-      bool process_contains_module(string & strImage, ::u32 processID, const ::string & pszLibrary) override;
+      bool process_contains_module(string & strImage, ::process_identifier processidentifier, const ::string & pszLibrary) override;
 
-      void shared_library_process(dword_array & dwa, string_array & straProcesses, const ::string & pszLibrary) override;
+      ::process_identifier_array shared_library_process(string_array & straProcesses, const ::string & pszLibrary) override;
 
-      bool is_process_running(::u32 pid) override;
+      bool is_process_running(::process_identifier processidentifier) override;
 
       ::string get_environment_variable(const ::scoped_string & scopedstrEnvironmentVariable) override;
 
@@ -195,7 +195,7 @@ namespace acme_windows
       //void shell_open(const ::file::path & path, const string & strParams = "", const ::file::path & pathFolder = {}) override;
       //void open_url(const ::string & strUrl) override; //
       //void command_system(string_array & straOutput, int & iExitCode, const scoped_string & str, enum_command_system ecommandsystem = e_command_system_none, const class time & timeTimeout = ::time::infinity(), ::particle * pparticleSynchronization = nullptr, ::file::file * pfileLog = nullptr) override;
-      int command_system(const ::scoped_string& scopedstr, const a_trace_function& aTraceFunction = nullptr) override;
+      int command_system(const ::scoped_string& scopedstr, const trace_function& tracefunction = nullptr) override;
 
       void shell_execute_async(const scoped_string & strFile, const scoped_string & strParams) override;
       void shell_execute_sync(const scoped_string & strFile, const scoped_string & strParams, const class time & timeTimeout = 1_minute) override;
@@ -245,6 +245,14 @@ namespace acme_windows
       //// use of comptr to guard COM objets and variant to guard VARIANTs
       //virtual void _unzip_to_folder(const char* pszZip, const char* pszFolder);
    
+      ::pointer <::operating_system::summary > operating_system_summary() override;
+
+      void launch_app(const ::string & psz, const char ** argv, int iFlags) override;
+
+
+      ::pointer < ::operating_system::application > module_path_application(const ::scoped_string & scopestr) override;
+
+
 
    };
 

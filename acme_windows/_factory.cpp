@@ -2,6 +2,8 @@
 #include "acme/platform/node.h"
 #include "acme/filesystem/filesystem/acme_directory.h"
 #include "node.h"
+#include "application.h"
+#include "main_window.h"
 #include "acme_directory.h"
 #include "acme_path.h"
 #include "acme_file.h"
@@ -87,6 +89,9 @@ IMPLEMENT_FACTORY(acme_windows)
    pfactory->add_factory_item < ::acme_windows::pipe, ::operating_system::pipe >();
    //pfactory->add_factory_item < ::windows::file, ::file::file >();
    pfactory->add_factory_item < ::acme_windows::console, ::console::console >();
+
+   pfactory->add_factory_item < ::acme_windows::application, ::operating_system::application >();
+   pfactory->add_factory_item < ::acme_windows::main_window, ::operating_system::main_window >();
 
    //pfactory->add_factory_item < ::windows::dir_system, ::dir_system >();
    //pfactory->add_factory_item < ::windows::file_system, ::file_system >();

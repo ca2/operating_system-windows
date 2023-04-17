@@ -7,6 +7,7 @@
 #include "window.h"
 #include "keyboard.h"
 #include "display.h"
+#include "message_window.h"
 #include "monitor.h"
 #include "system_interaction.h"
 #include "top_level_enum.h"
@@ -1226,37 +1227,7 @@ namespace windowing_win32
    string windowing::_get_window_text_timeout(oswindow oswindow, const class time & timeSendMessageMax)
    {
 
-      DWORD_PTR dw = 0;
-
-      //if (!SendMessageTimeoutW(hwnd, WM_GETTEXTLENGTH, 0, 0, SMTO_ABORTIFHUNG | SMTO_NOTIMEOUTIFNOTHUNG, 100, &dw))
-      if (!SendMessageTimeoutW((HWND)oswindow, WM_GETTEXTLENGTH, 0, 0, SMTO_ABORTIFHUNG, ::windows::wait(timeSendMessageMax), &dw))
-      {
-
-         return "";
-
-      }
-
-      if (!dw)
-      {
-
-         return "";
-
-      }
-
-      wstring wstr;
-
-      auto pwsz = wstr.get_string_buffer(dw);
-
-      if (!SendMessageTimeoutW((HWND)oswindow, WM_GETTEXT, dw + 1, (LPARAM)pwsz, SMTO_ABORTIFHUNG, ::windows::wait(timeSendMessageMax), &dw))
-      {
-
-         return "";
-
-      }
-
-      wstr.release_string_buffer();
-
-      return wstr;
+      return windows::get_window_text_timeout((HWND)oswindow, timeSendMessageMax);
 
    }
 
@@ -1269,7 +1240,7 @@ namespace windowing_win32
 
             //PSEUDO-Code char sz[1024]; GetWindowTextA(sz,1024, oswindow); return !strcmp(sz, str.c_str());
 
-            string strWindowText = _get_window_text_timeout(oswindow, 50_ms);
+            string strWindowText = _get_window_text_timeout(oswindow, 200_ms);
 
             return strWindowText.case_insensitive_contains(str);
 
@@ -1395,6 +1366,18 @@ namespace windowing_win32
          m_emessageWindowsTaskbarCreatedMessage = (enum_message)RegisterWindowMessageW(L"TaskbarCreated");
 
       }
+
+   }
+
+
+   ::user::interaction * windowing::create_message_window(const ::string & pszName, ::user::interaction_listener * pinteractionlistener)
+   {
+
+      auto pmessagewindow = __create_new < message_window >();
+
+      pmessagewindow->create_message_window(pszName, pinteractionlistener);
+
+      return pmessagewindow;
 
    }
 

@@ -73,7 +73,19 @@ namespace acme_windows
 
          }
 
-         m_fileinstance.create_file(path, (m_bRead || m_bWrite ? FILE_READ_DATA : 0) | (m_bWrite ? FILE_WRITE_DATA : 0), FILE_SHARE_WRITE | FILE_SHARE_READ, nullptr, iOpen, FILE_ATTRIBUTE_NORMAL, nullptr);
+         if (!m_fileinstance.safe_create_file(path, (m_bRead || m_bWrite ? FILE_READ_DATA : 0) | (m_bWrite ? FILE_WRITE_DATA : 0), FILE_SHARE_WRITE | FILE_SHARE_READ, nullptr, iOpen, FILE_ATTRIBUTE_NORMAL, nullptr))
+         {
+
+            DWORD dwLastError = ::GetLastError();
+
+            throw_last_error_exception(
+               path,
+               (m_bRead ? ::file::e_open_write : ::file::e_open_none) |
+               (m_bWrite ? ::file::e_open_write : ::file::e_open_none),
+               dwLastError,
+               "acme_windows::file_memory_map::open safe_create_file failed");
+
+         }
 
          if (m_fileinstance.nok())
          {

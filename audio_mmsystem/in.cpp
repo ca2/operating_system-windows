@@ -7,6 +7,7 @@
 #include "audio/audio/audio.h"
 #include "audio/audio/wave/wave.h"
 #include "audio/audio/decode/encoder.h"
+#include "acme_windows/mmresult.h"
 
 
 namespace audio_mmsystem
@@ -154,7 +155,7 @@ namespace audio_mmsystem
             (u32)0,
             CALLBACK_THREAD);
 
-         estatus = mmresult_to_status(mmresult);
+         estatus = mmresult_status(mmresult);
 
          if (::succeeded(estatus))
          {
@@ -254,9 +255,9 @@ namespace audio_mmsystem
 
          MMRESULT mmresult = waveInPrepareHeader(m_hwavein, ::multimedia::mmsystem::create_new_WAVEHDR(in_get_buffer(), i), sizeof(WAVEHDR));
 
-         auto estatus = mmresult_to_status(mmresult);
+         auto estatus = mmresult_status(mmresult);
 
-         //if(::success != (estatus = mmresult_to_status()))
+         //if(::success != (estatus = mmresult_status()))
          if(::failed(estatus))
          {
             
@@ -315,7 +316,7 @@ namespace audio_mmsystem
 
          MMRESULT mmresult = waveInUnprepareHeader(m_hwavein, wave_hdr(i), sizeof(WAVEHDR));
 
-         auto estatus = mmresult_to_status(mmresult);
+         auto estatus = mmresult_status(mmresult);
 
          if(::failed(estatus))
          {
@@ -330,7 +331,7 @@ namespace audio_mmsystem
 
       MMRESULT mmresult = waveInClose(m_hwavein);
 
-      estatus = mmresult_to_status(mmresult);
+      estatus = mmresult_status(mmresult);
 
       if (::failed(estatus))
       {
@@ -373,7 +374,7 @@ namespace audio_mmsystem
 
       ::e_status estatus;
 
-      if(::success != (estatus = mmresult_to_status(waveInStart(m_hwavein))))
+      if(::success != (estatus = mmresult_status(waveInStart(m_hwavein))))
       {
          
          TRACE("ERROR starting INPUT DEVICE ");
@@ -407,7 +408,7 @@ namespace audio_mmsystem
 
       MMRESULT mmresult = waveInStop(m_hwavein);
 
-      ::e_status estatus = mmresult_to_status(mmresult);
+      ::e_status estatus = mmresult_status(mmresult);
 
       if(::failed(estatus))
       {
@@ -479,7 +480,7 @@ namespace audio_mmsystem
 
       MMRESULT mmresult = waveInReset(m_hwavein);
 
-      auto estatus = mmresult_to_status(mmresult);
+      auto estatus = mmresult_status(mmresult);
 
       if(::failed(estatus))
       {
@@ -551,7 +552,7 @@ namespace audio_mmsystem
 
       MMRESULT mmresult = waveInAddBuffer(m_hwavein, lpwavehdr, sizeof(WAVEHDR));
 
-      estatus = mmresult_to_status(mmresult);
+      estatus = mmresult_status(mmresult);
 
       if(::failed(estatus))
       {

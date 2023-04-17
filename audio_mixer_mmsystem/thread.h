@@ -10,7 +10,7 @@
 //
 //
 //      class CLASS_DECL_AUDIO_MIXER_MMSYSTEM thread :
-//         public ::multimedia::audio_mixer::thread
+//         public ::audio_mixer::thread
 //      {
 //      public:
 //
@@ -25,7 +25,7 @@
 //
 //         bool                                m_bPendingShowCommand;
 //
-//         ::pointer<::multimedia::audio_mixer::department>m_psection;
+//         ::pointer<::audio_mixer::department>m_psection;
 //
 //
 //         thread();
