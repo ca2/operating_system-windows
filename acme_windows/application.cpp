@@ -1,5 +1,8 @@
+// Addition of implementation of ::operating_system::application by camilo on
+// 2023-04-15 19:11 <3ThomasBorregaardSorensen!!
 #include "framework.h"
 #include "node.h"
+#include "application.h"
 #include "acme/constant/message.h"
 #include "acme/parallelization/mutex.h"
 #include "acme/_operating_system.h"
@@ -922,58 +925,131 @@ bool is_good_active_w(HWND w)
 //}
 //
 //#endif
+//
+//BOOL CALLBACK TerminateGuiAppEnum(HWND hwnd, LPARAM lParam);
+//
+//::u32 TerminateGuiApp(::u32 dwPID, ::u32 tickTimeout)
+//{
+//   HANDLE   hProc;
+//   ::u32   dwRet;
+//
+//   // If we can't open the process with PROCESS_TERMINATE rights,
+//   // then we give up immediately.
+//   hProc = OpenProcess(SYNCHRONIZE | PROCESS_TERMINATE, false,
+//                       dwPID);
+//
+//   if (hProc == nullptr)
+//   {
+//      return TGA_FAILED;
+//   }
+//
+//   // TerminateAppEnum() posts MESSAGE_CLOSE to all windows whose PID
+//   // matches your process's.
+//   EnumWindows((WNDENUMPROC)TerminateGuiAppEnum, (LPARAM)dwPID);
+//
+//   // Wait on the handle. If it signals, great. If it times out,
+//   // then you kill it.
+//   if (WaitForSingleObject(hProc, tickTimeout) != WAIT_OBJECT_0)
+//      dwRet = (TerminateProcess(hProc, 0) ? TGA_SUCCESS_KILL : TGA_FAILED);
+//   else
+//      dwRet = TGA_SUCCESS_CLEAN;
+//
+//   CloseHandle(hProc);
+//
+//   return dwRet;
+//}
+//
 
-BOOL CALLBACK TerminateGuiAppEnum(HWND hwnd, LPARAM lParam);
+//
+//BOOL CALLBACK TerminateGuiAppEnum(HWND hwnd, LPARAM lParam)
+//{
+//   
+//   DWORD dwID;
+//
+//   GetWindowThreadProcessId(hwnd, &dwID);
+//
+//   if (dwID == (::u32)lParam)
+//   {
+//
+//      PostMessage(hwnd, MESSAGE_CLOSE, 0, 0);
+//
+//   }
+//
+//   return true;
+//}
+//
+//
 
-::u32 TerminateGuiApp(::u32 dwPID, ::u32 tickTimeout)
+
+namespace acme_windows
 {
-   HANDLE   hProc;
-   ::u32   dwRet;
 
-   // If we can't open the process with PROCESS_TERMINATE rights,
-   // then we give up immediately.
-   hProc = OpenProcess(SYNCHRONIZE | PROCESS_TERMINATE, false,
-                       dwPID);
 
-   if (hProc == nullptr)
+   application::application()
    {
-      return TGA_FAILED;
+
+      m_handle = nullptr;
+      m_bHandle = false;
+
    }
 
-   // TerminateAppEnum() posts MESSAGE_CLOSE to all windows whose PID
-   // matches your process's.
-   EnumWindows((WNDENUMPROC)TerminateGuiAppEnum, (LPARAM)dwPID);
 
-   // Wait on the handle. If it signals, great. If it times out,
-   // then you kill it.
-   if (WaitForSingleObject(hProc, tickTimeout) != WAIT_OBJECT_0)
-      dwRet = (TerminateProcess(hProc, 0) ? TGA_SUCCESS_KILL : TGA_FAILED);
-   else
-      dwRet = TGA_SUCCESS_CLEAN;
-
-   CloseHandle(hProc);
-
-   return dwRet;
-}
-
-
-
-BOOL CALLBACK TerminateGuiAppEnum(HWND hwnd, LPARAM lParam)
-{
-   
-   DWORD dwID;
-
-   GetWindowThreadProcessId(hwnd, &dwID);
-
-   if (dwID == (::u32)lParam)
+   application::~application()
    {
 
-      PostMessage(hwnd, MESSAGE_CLOSE, 0, 0);
+   }
+   //struct handle_data {
+//   unsigned long process_id;
+//   HWND window_handle;
+//};
+
+   //BOOL is_main_window(HWND handle)
+   //{
+   //   return GetWindow(handle, GW_OWNER) == (HWND)0 && IsWindowVisible(handle);
+   //}
+   //BOOL CALLBACK enum_windows_callback(HWND handle, LPARAM lParam)
+   //{
+   //   handle_data & data = *(handle_data *)lParam;
+   //   unsigned long process_id = 0;
+   //   GetWindowThreadProcessId(handle, &process_id);
+   //   if (data.process_id != process_id || !is_main_window(handle))
+   //      return TRUE;
+   //   data.window_handle = handle;
+   //   return FALSE;
+   //}
+   //HWND find_main_window(unsigned long process_id)
+   //{
+   //   handle_data data;
+   //   data.process_id = process_id;
+   //   data.window_handle = 0;
+   //   EnumWindows(enum_windows_callback, (LPARAM)&data);
+   //   return data.window_handle;
+   //}
+
+   //HWND windows_application_main_window(const WCHAR * currName)
+   //{
+
+   //   return find_main_window(windows_application_process_id(currName));
+   //}
+
+   //
+   void application::open_by_module_path(const ::scoped_string & scopedstr)
+   {
+
+      auto processesidentifiers = acmenode()->module_path_processes_identifiers(scopedstr, false);
+
+      if (processesidentifiers.has_element())
+      {
+
+         m_processidentifier = processesidentifiers.first();
+
+      }
 
    }
 
-   return true;
-}
+
+} // namespace acme_windows
+
 
 
 

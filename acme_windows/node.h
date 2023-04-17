@@ -88,31 +88,31 @@ namespace acme_windows
       virtual string audio_get_default_library_name() override;
 
 
-      void create_process(const ::string & pszCommandLine, u32 * pprocessId) override;
+      ::process_identifier create_process(const ::string & pszCommandLine) override;
 
 
       void run_silent(const ::string & strFunct, const ::string & strstrParams) override;
 
 
-      bool process_modules(string_array & stra, u32 processID) override;
+      bool process_modules(string_array & stra, ::process_identifier processidentifier) override;
 
 
       bool load_modules_diff(string_array & straOld, string_array & straNew, const ::string & pszExceptDir) override;
 
 
-      atom_array module_path_get_pid(const ::string & pszModulePath, bool bModuleNameIsPropertyFormatted) override;
+      ::process_identifier_array module_path_processes_identifiers(const ::string & pszModulePath, bool bModuleNameIsPropertyFormatted) override;
 
-      string module_path_from_pid(u32 pid) override;
+      string process_identifier_module_path(::process_identifier processidentifier) override;
 
-      bool is_shared_library_busy(u32 processid, const string_array & stra) override;
+      bool is_shared_library_busy(::process_identifier processidentifier, const string_array & stra) override;
 
       bool is_shared_library_busy(const string_array & stra) override;
 
-      bool process_contains_module(string & strImage, ::u32 processID, const ::string & pszLibrary) override;
+      bool process_contains_module(string & strImage, ::process_identifier processidentifier, const ::string & pszLibrary) override;
 
-      void shared_library_process(dword_array & dwa, string_array & straProcesses, const ::string & pszLibrary) override;
+      ::process_identifier_array shared_library_process(string_array & straProcesses, const ::string & pszLibrary) override;
 
-      bool is_process_running(::u32 pid) override;
+      bool is_process_running(::process_identifier processidentifier) override;
 
       ::string get_environment_variable(const ::scoped_string & scopedstrEnvironmentVariable) override;
 
@@ -246,6 +246,12 @@ namespace acme_windows
       //virtual void _unzip_to_folder(const char* pszZip, const char* pszFolder);
    
       ::pointer <::operating_system::summary > operating_system_summary() override;
+
+      void launch_app(const ::string & psz, const char ** argv, int iFlags) override;
+
+
+      ::pointer < ::operating_system::application > module_path_application(const ::scoped_string & scopestr) override;
+
 
 
    };
