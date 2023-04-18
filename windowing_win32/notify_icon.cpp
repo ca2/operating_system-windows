@@ -170,7 +170,6 @@ namespace windowing_win32
    }
 
 
-#ifdef WINDOWS_DESKTOP
 
 
    void notify_icon::destroy_window()
@@ -206,7 +205,6 @@ namespace windowing_win32
 
    }
 
-#endif // defined(WINDOWS_DESKTOP)
 
 
    void notify_icon::start_destroying_window()
@@ -221,42 +219,41 @@ namespace windowing_win32
 
       m_bCreated = false;
 
-#ifdef WINDOWS_DESKTOP
 
       ::user::interaction::start_destroying_window();
 
-      //return true;
-
-
-#elif defined(LINUX) && !defined(RASPBIAN)
-
-      if (m_pindicator)
-      {
-
-         auto pnode = Node;
-
-         pnode->appindicator_destroy(m_pindicator);
-
-         m_pindicator = nullptr;
-
-      }
-
-      return true;
-
-#elif defined(MACOS)
-
-      notify_icon_destroy();
-
-      return true;
-
-#else
-
-
-      throw ::exception(todo);
-
-      return true;
-
-#endif
+//      //return true;
+//
+//
+//#elif defined(LINUX) && !defined(RASPBIAN)
+//
+//      if (m_pindicator)
+//      {
+//
+//         auto pnode = Node;
+//
+//         pnode->appindicator_destroy(m_pindicator);
+//
+//         m_pindicator = nullptr;
+//
+//      }
+//
+//      return true;
+//
+//#elif defined(MACOS)
+//
+//      notify_icon_destroy();
+//
+//      return true;
+//
+//#else
+//
+//
+//      throw ::exception(todo);
+//
+//      return true;
+//
+//#endif
 
    }
 
