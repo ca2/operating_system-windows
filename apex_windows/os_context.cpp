@@ -2277,6 +2277,8 @@ retry:
          //si.fMask = SEE_MASK_ASYNCOK;
          si.fMask = SEE_MASK_NOASYNC;
 
+         si.fMask |= SEE_MASK_FLAG_NO_UI;
+
          si.fMask |= SEE_MASK_WAITFORINPUTIDLE;
 
          si.hwnd = nullptr;
