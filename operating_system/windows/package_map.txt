@@ -21,5 +21,5 @@ port/avformat=port/avformat-59
 port/swscale=port/swscale-6
 port/swresample=port/swresample-4
 port/avutil=port/avutil-57
-port/libmpg123=port/mpg123
 port/libx264=port/libx264-164
+port/assimp=port/assimp-vc143-mt
