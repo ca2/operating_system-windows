@@ -18,7 +18,7 @@
       public:
 
 
-         ::pointer<::audio_mixer_mmsystem::interaction> m_pwindow;
+         ::pointer<::audio_mixer_mmsystem::interaction> m_pinteraction;
 
 
          audio_mixer();
