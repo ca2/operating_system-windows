@@ -154,7 +154,7 @@ namespace acme_windows
       void implement(::pointer<::acme::node> & pnode, ::pointer<::acme::system> & psystem)override;
 
 
-      ::i64 get_current_process_id() override;
+      ::process_identifier current_process_identifier() override;
 
 
       void on_start_system() override;
