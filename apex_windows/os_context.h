@@ -33,12 +33,12 @@ namespace apex_windows
 
       void terminate_processes_by_title(const ::string & lpszName) override;
       //virtual ::file::path get_module_path(HMODULE hmodule) override;
-      bool path_pid(u32& dwPid, const ::string & lpszName) override;
-      bool title_pid(u32& dwPid, const ::string & lpszName) override;
-      void get_all_processes(u32_array & dwa) override;
-      ::file::path get_process_path(u32 dwPid) override;
+      ::process_identifier module_path_process_identifier(const ::string & lpszName) override;
+      ::process_identifier title_process_identifier(const ::string & lpszName) override;
+      ::process_identifier_array processes_identifiers() override;
+      ::file::path process_identifier_module_path(::process_identifier dwPid) override;
 
-      int get_pid() override;
+      ::process_identifier current_process_identifier() override;
 
 
       ::payload connection_settings_get_auto_detect() override;
@@ -128,7 +128,7 @@ namespace apex_windows
 
       void add_default_program(string_array & straExtension, string_array & straMimeType) override;
 
-      void list_process(::file::path_array & patha, u32_array & uaPid) override;
+      //void list_process(::file::path_array & patha, ::process_identifier_array & uaPid) override;
 
       //virtual icon_pointer load_icon(const ::payload & payloadFile) override;
 
