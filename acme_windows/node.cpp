@@ -2796,7 +2796,7 @@ void node::shell_launch(const ::string & strUrl)
 }
 
 
-::i64 node::get_current_process_id()
+::i64 node::current_process_identifier()
 {
 
    return ::GetCurrentProcessId();

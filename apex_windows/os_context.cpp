@@ -189,12 +189,13 @@ namespace apex_windows
       //return true;
    }
 
+
    void os_context::terminate_processes_by_title(const ::string & lpszName)
    {
 
-      u32 uPid;
+      ::process_identifier uPid;
 
-      while(title_pid(uPid, lpszName))
+      while((uPid = title_process_identifier(lpszName)) >= 0)
       {
 
          HANDLE hProcess = ::OpenProcess( PROCESS_QUERY_INFORMATION |
@@ -222,69 +223,59 @@ namespace apex_windows
    }
 
 
-   bool os_context::path_pid(u32& dwPid, const ::string & lpszName)
+   ::process_identifier os_context::module_path_process_identifier(const ::string & lpszName)
    {
       
-      u32_array dwa;
-
-      get_all_processes(dwa);
+      auto dwa = processes_identifiers();
 
       for(i32 i = 0; i < dwa.get_count(); i++)
       {
 
-         if(get_process_path(dwa[i]).case_insensitive_order(lpszName) == 0)
+         if(process_identifier_module_path(dwa[i]).case_insensitive_equals(lpszName))
          {
             
-            dwPid = dwa[i];
+            return dwa[i];
             
-            return true;
+         }
 
-            //return;
+      }
+
+      return -1;
+
+   }
+
+
+   ::process_identifier os_context::title_process_identifier(const ::string & lpszName)
+   {
+
+      auto dwa = processes_identifiers();
+
+      for(i32 i = 0; i < dwa.get_count(); i++)
+      {
+
+         if(process_identifier_module_path(dwa[i]).title().case_insensitive_equals(lpszName))
+         {
+
+            return dwa[i];
 
          }
 
       }
 
-      return false;
+      return -1;
 
    }
 
 
-   bool os_context::title_pid(u32& dwPid, const ::string & lpszName)
+   ::process_identifier os_context::current_process_identifier()
    {
 
-      u32_array dwa;
-
-      get_all_processes(dwa);
-
-      for(i32 i = 0; i < dwa.get_count(); i++)
-      {
-
-         if(get_process_path(dwa[i]).title().case_insensitive_order(lpszName) == 0)
-         {
-
-            dwPid = dwa[i];
-
-            return true;
-
-         }
-
-      }
-
-      return false;
+      return (int) acmenode()->current_process_identifier();
 
    }
 
 
-   int os_context::get_pid()
-   {
-
-      return (int) acmenode()->get_current_process_id();
-
-   }
-
-
-   ::file::path os_context::get_process_path(u32 dwPid)
+   ::file::path os_context::process_identifier_module_path(::process_identifier dwPid)
    {
       string strName = ":<unknown>";
       // get a handle to the process.
@@ -317,30 +308,31 @@ namespace apex_windows
    }
 
 
-   void os_context::get_all_processes(u32_array & ua)
+   ::process_identifier_array os_context::processes_identifiers()
    {
 
-      ASSERT(sizeof(::u32) == sizeof(u32));
+      return acmenode()->processes_identifiers();
+      //ASSERT(sizeof(::u32) == sizeof(u32));
 
-      ua.allocate(0);
+      //ua.allocate(0);
 
-      DWORD cbNeeded = 0;
+      //DWORD cbNeeded = 0;
 
-      while(cbNeeded == natural(ua.get_count()))
-      {
+      //while(cbNeeded == natural(ua.get_count()))
+      //{
 
-         ua.allocate(ua.get_count() + 1024);
+      //   ua.allocate(ua.get_count() + 1024);
 
-         if(!EnumProcesses((DWORD *) ua.m_begin, (DWORD) (ua.get_count() * sizeof(::u32)), &cbNeeded))
-         {
+      //   if(!EnumProcesses((DWORD *) ua.m_begin, (DWORD) (ua.get_count() * sizeof(::u32)), &cbNeeded))
+      //   {
 
-            return;
+      //      return;
 
-         }
+      //   }
 
-         ua.allocate(cbNeeded / sizeof(u32));
+      //   ua.allocate(cbNeeded / sizeof(u32));
 
-      }
+      //}
 
    }
 
@@ -4045,23 +4037,24 @@ repeat:
    //}
 
 
-   void os_context::list_process(::file::path_array & patha, u32_array & uaPid)
+   /*void os_context::list_process(::file::path_array & patha, ::process_identifier_array & uaPid)
    {
 
       ASSERT(sizeof(::u32) == sizeof(u32));
 
-      get_all_processes(uaPid);
+      uaPid = this->processes_identifiers();
 
       patha.set_size(uaPid.get_count());
 
       for(index i = 0; i < uaPid.get_count(); i++)
       {
 
-         patha[i] = get_process_path(uaPid[i]);
+         patha[i] = process_identifier_module_path(uaPid[i]);
 
       }
 
    }
+   */
 
 
    void os_context::broadcast_environment_variable_change()
