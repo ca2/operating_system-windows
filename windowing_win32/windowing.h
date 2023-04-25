@@ -23,7 +23,7 @@ namespace windowing_win32
       //i64_map < ::user::enum_key >     m_mapKey;
 
 
-      critical_section                 m_criticalsection;
+      ::pointer < critical_section >   &m_criticalsection;
       ::windows::window_map            m_windowmap;
       ::pointer<class display>         m_pdisplay;
 

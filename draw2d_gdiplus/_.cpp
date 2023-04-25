@@ -3,6 +3,9 @@
 #include "acme/_library.h"
 
 
+
+#pragma comment (lib, "gdiplus.lib")
+
 Gdiplus::GdiplusStartupInput *   g_pgdiplusStartupInput = nullptr;
 Gdiplus::GdiplusStartupOutput *  g_pgdiplusStartupOutput = nullptr;
 DWORD_PTR                        g_gdiplusToken = NULL;
