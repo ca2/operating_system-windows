@@ -325,9 +325,9 @@ namespace draw2d_gdiplus
 
 
       //bool draw_polygon(const POINT * ppoints, count nCount) override;
-      void draw_polygon(const POINT_F64 * ppoints, count nCount) override;
+      void draw_polygon(const ::point_f64 * ppoints, count nCount) override;
       //bool fill_polygon(const POINT * ppoints, count nCount) override;
-      void fill_polygon(const POINT_F64 * ppoints, count nCount) override;
+      void fill_polygon(const ::point_f64 * ppoints, count nCount) override;
       using ::draw2d::graphics::rectangle;
       using ::draw2d::graphics::draw_rectangle;
       using ::draw2d::graphics::fill_rectangle;
@@ -336,7 +336,7 @@ namespace draw2d_gdiplus
       virtual void draw_rectangle(const ::rectangle_f64 & rectangle, ::draw2d::pen * ppen) override;
       virtual void fill_rectangle(const ::rectangle_f64 & rectangle, ::draw2d::brush * pbrush) override;
 
-      virtual void round_rectangle(const ::rectangle_f64 & rectangle, double dRadius) override;
+      void round_rectangle(const ::rectangle_f64 & rectangle, double dRadius) override;
 
 
       using image_drawer::_draw_raw;

@@ -1173,7 +1173,7 @@ namespace draw2d_gdiplus
    }
 
 
-   void graphics::fill_polygon(const POINT_F64 * ppointParam, count nCount)
+   void graphics::fill_polygon(const ::point_f64 * ppointParam, count nCount)
    {
 
       if (nCount <= 0)
@@ -1256,7 +1256,7 @@ namespace draw2d_gdiplus
    //}
 
 
-   void graphics::draw_polygon(const POINT_F64 * ppointParam, count nCount)
+   void graphics::draw_polygon(const ::point_f64 * ppointParam, count nCount)
    {
 
       if (nCount <= 0)
