@@ -85,7 +85,7 @@ namespace acme_windows
       virtual ::e_status ExitCode_to_status(DWORD dwExitCode);
 
 
-      virtual string audio_get_default_library_name() override;
+      virtual string audio_get_default_implementation_name() override;
 
 
       ::process_identifier create_process(const ::string & pszCommandLine) override;

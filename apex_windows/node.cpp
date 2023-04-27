@@ -722,28 +722,28 @@ namespace apex_windows
    }
 
 
-   string node::veriwell_multimedia_music_midi_get_default_library_name()
+   string node::veriwell_multimedia_music_midi_get_default_implementation_name()
    {
 
-      return "music_midi_mmsystem";
+      return acmesystem()->implementation_name("music_midi", "mmsystem");
 
    }
 
 
-   string node::multimedia_audio_mixer_get_default_library_name()
+   string node::multimedia_audio_mixer_get_default_implementation_name()
    {
 
-      return "audio_mixer_mmsystem";
+      return acmesystem()->implementation_name("audio_mixer", "mmsystem");
 
    }
 
 
-   string node::multimedia_audio_get_default_library_name()
+   string node::multimedia_audio_get_default_implementation_name()
    {
 
       string str;
 
-      if (acmefile()->exists(acmedirectory()->system() / "config\\system\\audio.txt"))
+      if (acmefile()->exists(acmedirectory()->roaming() / "system/audio.txt"))
       {
 
          str = acmefile()->as_string(acmedirectory()->system() / "config\\system\\audio.txt");

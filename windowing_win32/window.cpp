@@ -573,7 +573,7 @@ namespace windowing_win32
                (pmessage->m_wparam == SPI_SETWORKAREA)))
          {
 
-            output_debug_string("test");
+            output_debug_string("WM_SETTINGCHANGE SPI_SETWORKAREA");
 
             //throw_todo();
 

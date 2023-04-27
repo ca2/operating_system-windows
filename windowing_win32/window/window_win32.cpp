@@ -182,7 +182,7 @@ LRESULT CALLBACK __window_procedure(HWND hwnd, UINT message, WPARAM wparam, LPAR
    if (message == e_message_activate)
    {
 
-      output_debug_string("test");
+      output_debug_string("__window_procedure e_message_activate");
 
    }
    else if (message == e_message_create)

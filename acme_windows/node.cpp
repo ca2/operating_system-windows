@@ -854,15 +854,15 @@ namespace acme_windows
    //   }
    //
    //
-   //   string node::veriwell_multimedia_music_midi_get_default_library_name()
+   //   string node::veriwell_multimedia_music_midi_get_default_implementation_name()
    //   {
    //
-   //      return "music_midi_mmsystem";
+   //      return acmesystem()->implementation_name("music_midi", "mmsystem");
    //
    //   }
    //
    //
-   //   string node::multimedia_audio_mixer_get_default_library_name()
+   //   string node::multimedia_audio_mixer_get_default_implementation_name()
    //   {
    //
    //      return "audio_mixer_mmsystem";
@@ -870,7 +870,7 @@ namespace acme_windows
    //   }
    //
    //
-   //   string node::multimedia_audio_get_default_library_name()
+   //   string node::multimedia_audio_get_default_implementation_name()
    //   {
    //
    //      string str;
@@ -1073,10 +1073,10 @@ namespace acme_windows
    }
 
 
-   string node::audio_get_default_library_name()
+   string node::audio_get_default_implementation_name()
    {
 
-      return "audio_mmsystem";
+      return acmesystem()->implementation_name("audio", "mmsystem");
 
    }
 

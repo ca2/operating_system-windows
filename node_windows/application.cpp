@@ -182,17 +182,17 @@ namespace aura
 
 
 
-   //string application::veriwell_multimedia_music_midi_get_default_library_name()
+   //string application::veriwell_multimedia_music_midi_get_default_implementation_name()
    //{
    //   return "music_midi_mmsystem";
    //}
 
-   //string application::multimedia_audio_mixer_get_default_library_name()
+   //string application::multimedia_audio_mixer_get_default_implementation_name()
    //{
    //   return "audio_mixer_mmsystem";
    //}
 
-   //string application::multimedia_audio_get_default_library_name()
+   //string application::multimedia_audio_get_default_implementation_name()
    //{
 
    //   string str;
