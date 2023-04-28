@@ -205,9 +205,9 @@ namespace windowing_win32
 
       update_buffer(sizeWindow);
 
-      return pimageBuffer->get_graphics();
+      //return pimageBuffer->get_graphics();
 
-      //return double_buffer::on_begin_draw();
+      return double_buffer::on_begin_draw();
 
    }
 
