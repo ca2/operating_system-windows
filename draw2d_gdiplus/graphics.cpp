@@ -807,7 +807,7 @@ namespace draw2d_gdiplus
    void graphics::frame_rectangle(const ::rectangle_f64 & rectangle, ::draw2d::brush * pbrush)
    {
 
-      return draw_inset_rectangle(rectangle, pbrush->m_color);
+      return draw_inset_rectangle(rectangle, pbrush->m_color, 1.0);
 
    }
 
