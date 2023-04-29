@@ -75,7 +75,7 @@ namespace windowing_win32
 
 
       //bool has_capture() const override;
-      //bool has_focus() const override;
+      //bool has_keyboard_focus() const override;
 
 
       //void send_client_event(Atom atom, unsigned int numArgs, ...);

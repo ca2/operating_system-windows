@@ -513,7 +513,7 @@ namespace windowing_win32
    //}
 
 
-   //bool window::has_focus() const
+   //bool window::has_keyboard_focus() const
    //{
 
    //   return ::GetFocus() == get_hwnd();
