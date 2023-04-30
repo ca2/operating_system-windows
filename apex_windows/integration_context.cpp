@@ -82,7 +82,7 @@ namespace apex_windows
 
          //auto pacmedirectory = acmedirectory();
 
-         //acmedirectory()->create(pacmedirectory->system() / "netnodelite/symbols");
+         //acmedirectory()->create(pacmedirectory->system() / "netnode_desktop/symbols");
 
          ::file::path strVars;
 
