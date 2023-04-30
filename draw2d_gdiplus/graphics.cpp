@@ -807,7 +807,7 @@ namespace draw2d_gdiplus
    void graphics::frame_rectangle(const ::rectangle_f64 & rectangle, ::draw2d::brush * pbrush)
    {
 
-      return draw_inset_rectangle(rectangle, pbrush->m_color);
+      return draw_inset_rectangle(rectangle, pbrush->m_color, 1.0);
 
    }
 
@@ -1173,7 +1173,7 @@ namespace draw2d_gdiplus
    }
 
 
-   void graphics::fill_polygon(const POINT_F64 * ppointParam, count nCount)
+   void graphics::fill_polygon(const ::point_f64 * ppointParam, count nCount)
    {
 
       if (nCount <= 0)
@@ -1256,7 +1256,7 @@ namespace draw2d_gdiplus
    //}
 
 
-   void graphics::draw_polygon(const POINT_F64 * ppointParam, count nCount)
+   void graphics::draw_polygon(const ::point_f64 * ppointParam, count nCount)
    {
 
       if (nCount <= 0)

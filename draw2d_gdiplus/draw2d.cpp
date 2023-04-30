@@ -75,7 +75,7 @@ namespace draw2d_gdiplus
    }
 
 
-   string draw2d::write_text_get_default_library_name()
+   string draw2d::write_text_get_default_implementation_name()
    {
 
       return "win32";

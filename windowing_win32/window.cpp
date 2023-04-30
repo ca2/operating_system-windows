@@ -513,7 +513,7 @@ namespace windowing_win32
    //}
 
 
-   //bool window::has_focus() const
+   //bool window::has_keyboard_focus() const
    //{
 
    //   return ::GetFocus() == get_hwnd();
@@ -573,7 +573,7 @@ namespace windowing_win32
                (pmessage->m_wparam == SPI_SETWORKAREA)))
          {
 
-            output_debug_string("test");
+            output_debug_string("WM_SETTINGCHANGE SPI_SETWORKAREA");
 
             //throw_todo();
 

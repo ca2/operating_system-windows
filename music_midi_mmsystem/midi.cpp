@@ -472,7 +472,9 @@ namespace music
             if (!pmessagein)
             {
 
-               auto pin = __new(in);
+               auto pin = __create_new<in>();
+
+               pin->m_pmidi = this;
 
                auto iPort = get_midi_in_device_port(strMMSystemDevice);
 

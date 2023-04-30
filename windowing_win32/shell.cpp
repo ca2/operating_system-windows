@@ -587,7 +587,7 @@ namespace windowing_win32
 
       comptr< IShellItemImageFactory> pfactory;
 
-      string strPath(getfileimage.m_imagekey.m_strPath);
+      auto strPath = m_pcontext->defer_process_path(getfileimage.m_imagekey.m_strPath);
 
       wstring wstrPath(strPath);
 
@@ -820,7 +820,7 @@ namespace windowing_win32
 
       }
 
-      if (FAILED(hrExtractImage) && getfileimage.m_pshellfolder)
+      if (FAILED(hrExtractImage) && getfileimage.m_pshellfolder && getfileimage.m_itemidlistChild.m_pidl)
       {
 
          hrExtractIconUI = getfileimage.m_pshellfolder->GetUIObjectOf(

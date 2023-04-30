@@ -38,7 +38,7 @@ namespace draw2d_gdiplus
 
       void initialize(::particle * pparticle) override;
 
-      virtual string write_text_get_default_library_name() override;
+      virtual string write_text_get_default_implementation_name() override;
 
 
       virtual private_font * get_file_private_font(::acme::context * pcontext, const ::file::path & path);

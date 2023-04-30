@@ -118,7 +118,7 @@ namespace acme_windows
    ::file::path acme_directory::appdata()
    {
 
-      return ca2roaming() / "appdata" / app_relative();
+      return roaming() / appid();
 
    }
 
@@ -219,14 +219,10 @@ namespace acme_windows
    #else
 
 
-   ::file::path acme_directory::app_relative()
+   ::string acme_directory::appid()
    {
 
-      ::file::path path = acmefile()->module();
-
-      path = relative(path);
-
-      return path;
+      return ::acme_windows_common::acme_directory::appid();
 
    }
 

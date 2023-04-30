@@ -26,10 +26,10 @@
       audio_mixer::~audio_mixer()
       {
 
-         if(m_pwindow->is_window())
+         if(m_pinteraction->is_window())
          {
 
-            m_pwindow->start_destroying_window();
+            m_pinteraction->start_destroying_window();
 
          }
 
@@ -50,11 +50,11 @@
 
          ::audio_mixer::audio_mixer::initialize(pparticle);
 
-         __construct_new(m_pwindow);
+         __construct_new(m_pinteraction);
 
-         m_pwindow->m_paudiomixer = this;
+         m_pinteraction->m_paudiomixer = this;
 
-         m_pwindow->create_message_queue("audio_mixer");
+         m_pinteraction->create_message_queue("audio_mixer");
 
       }
 
@@ -62,7 +62,7 @@
       void audio_mixer::set_new_device(u32 uiMixerId)
       {
 
-         m_paudiomixerdevice->open(uiMixerId, (UINT_PTR)m_pwindow->oswindow(), 0, CALLBACK_WINDOW);
+         m_paudiomixerdevice->open(uiMixerId, (UINT_PTR)m_pinteraction->oswindow(), 0, CALLBACK_WINDOW);
 
       }
 

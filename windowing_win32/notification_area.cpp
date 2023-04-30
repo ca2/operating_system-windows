@@ -137,7 +137,7 @@ namespace windowing_win32
 
          auto pnode = psystem->node();
 
-         info.m_strProcessPath = pnode->module_path_from_pid(dwProcessId);
+         info.m_strProcessPath = pnode->process_identifier_module_path(dwProcessId);
 
          unichar TipChar;
          unichar sTip[1024] = { 0 };
