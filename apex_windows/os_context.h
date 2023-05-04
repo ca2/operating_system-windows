@@ -33,8 +33,8 @@ namespace apex_windows
 
       void terminate_processes_by_title(const ::string & lpszName) override;
       //virtual ::file::path get_module_path(HMODULE hmodule) override;
-      ::process_identifier module_path_process_identifier(const ::string & lpszName) override;
-      ::process_identifier title_process_identifier(const ::string & lpszName) override;
+      ::process_identifier_array module_path_processes_identifiers(const ::scoped_string & scopedstrName) override;
+      ::process_identifier_array title_processes_identifiers(const ::scoped_string & scopedstrName) override;
       ::process_identifier_array processes_identifiers() override;
       ::file::path process_identifier_module_path(::process_identifier dwPid) override;
 

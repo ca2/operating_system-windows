@@ -74,7 +74,7 @@ _In_ u32                                      dwFlags,
 _In_ LPWSTR                                     pszUserName,
 _In_ LPWSTR                                     pszPassword,
 _Out_writes_bytes_opt_(*pcbPackedCredentials) PBYTE   pPackedCredentials,
-_Inout_ u32*                                  pcbPackedCredentials
+_Inout_ u32 * pcbPackedCredentials
 );
 
 
@@ -113,7 +113,7 @@ namespace apex_windows
       HANDLE hToken;
       TOKEN_PRIVILEGES tkp;
       if (!OpenProcessToken(GetCurrentProcess(),
-                            TOKEN_ADJUST_PRIVILEGES | TOKEN_QUERY, &hToken))
+         TOKEN_ADJUST_PRIVILEGES | TOKEN_QUERY, &hToken))
          throw ::exception(error_failed);
       LookupPrivilegeValue(nullptr, SE_SHUTDOWN_NAME, &tkp.Privileges[0].Luid);
       tkp.PrivilegeCount = 1;
@@ -130,22 +130,22 @@ namespace apex_windows
       //return retval;
    }
 
-   
+
    void os_context::reboot()
    {
       HANDLE hToken;
       TOKEN_PRIVILEGES tkp;
       if (!OpenProcessToken(GetCurrentProcess(),
-                            TOKEN_ADJUST_PRIVILEGES | TOKEN_QUERY, &hToken))
+         TOKEN_ADJUST_PRIVILEGES | TOKEN_QUERY, &hToken))
          throw ::exception(error_failed);
-      if(!LookupPrivilegeValue(nullptr, SE_SHUTDOWN_NAME, &tkp.Privileges[0].Luid))
+      if (!LookupPrivilegeValue(nullptr, SE_SHUTDOWN_NAME, &tkp.Privileges[0].Luid))
       {
          TRACELASTERROR();
          throw ::exception(error_failed);
       }
       tkp.PrivilegeCount = 1;
       tkp.Privileges[0].Attributes = SE_PRIVILEGE_ENABLED;
-      if(!AdjustTokenPrivileges(hToken, false, &tkp, 0, (PTOKEN_PRIVILEGES) nullptr, 0))
+      if (!AdjustTokenPrivileges(hToken, false, &tkp, 0, (PTOKEN_PRIVILEGES) nullptr, 0))
       {
          TRACELASTERROR();
          throw ::exception(error_failed);
@@ -178,7 +178,7 @@ namespace apex_windows
       //}
       //if (!ExitWindowsEx(EWX_REBOOT | EWX_FORCE,
       if (!ExitWindowsEx(EWX_REBOOT,
-      SHTDN_REASON_MAJOR_SOFTWARE | SHTDN_REASON_MINOR_INSTALLATION))
+         SHTDN_REASON_MAJOR_SOFTWARE | SHTDN_REASON_MINOR_INSTALLATION))
       {
          TRACELASTERROR();
          throw ::exception(error_failed);
@@ -193,76 +193,94 @@ namespace apex_windows
    void os_context::terminate_processes_by_title(const ::string & lpszName)
    {
 
-      ::process_identifier uPid;
-
-      while((uPid = title_process_identifier(lpszName)) >= 0)
+      while (true)
       {
 
-         HANDLE hProcess = ::OpenProcess( PROCESS_QUERY_INFORMATION |
-                                          PROCESS_VM_READ,
-                                          false, uPid);
-         TerminateProcess(hProcess, (::u32) -1);
-         CloseHandle(hProcess);
-         /*::EnumWindows((WNDENUMPROC)
-         CKillProcessHelper::TerminateAppEnum,
-         (LPARAM) dwId);
-         // Wait on the handle. If it signals, great.
+         auto processidentifiera = title_processes_identifiers(lpszName);
 
-         //If it times out, then you kill it.
+         if (processidentifiera.is_empty())
+         {
 
-         if(WaitForSingleObject(hProcess, 5000)
-         !=WAIT_OBJECT_0)
-         bResult = TerminateProcess(hProcess,0);
-         else
-         bResult = true;
-         CloseHandle(hProcess);
-         return bResult == true;*/
+            break;
+
+         }
+
+         for (auto & processidentifier : processidentifiera)
+         {
+
+            HANDLE hProcess = ::OpenProcess(PROCESS_QUERY_INFORMATION |
+                                             PROCESS_VM_READ,
+                                             false, processidentifier);
+            TerminateProcess(hProcess, (::u32)-1);
+            CloseHandle(hProcess);
+            /*::EnumWindows((WNDENUMPROC)
+            CKillProcessHelper::TerminateAppEnum,
+            (LPARAM) dwId);
+            // Wait on the handle. If it signals, great.
+
+            //If it times out, then you kill it.
+
+            if(WaitForSingleObject(hProcess, 5000)
+            !=WAIT_OBJECT_0)
+            bResult = TerminateProcess(hProcess,0);
+            else
+            bResult = true;
+            CloseHandle(hProcess);
+            return bResult == true;*/
+
+         }
+
+         preempt(200_ms);
 
       }
 
    }
 
 
-   ::process_identifier os_context::module_path_process_identifier(const ::string & lpszName)
+   ::process_identifier_array os_context::module_path_processes_identifiers(const ::scoped_string & scopedstrName)
    {
-      
-      auto dwa = processes_identifiers();
 
-      for(i32 i = 0; i < dwa.get_count(); i++)
+      ::process_identifier_array processidentifieraModulePath;
+
+      auto processidentifiera = processes_identifiers();
+
+      for (auto & processidentifier : processidentifiera)
       {
 
-         if(process_identifier_module_path(dwa[i]).case_insensitive_equals(lpszName))
+         if (process_identifier_module_path(processidentifier).case_insensitive_equals(scopedstrName))
          {
-            
-            return dwa[i];
-            
+
+            processidentifieraModulePath.add(processidentifier);
+
          }
 
       }
 
-      return -1;
+      return processidentifieraModulePath;
 
    }
 
 
-   ::process_identifier os_context::title_process_identifier(const ::string & lpszName)
+   ::process_identifier_array os_context::title_processes_identifiers(const ::scoped_string & scopedstrName)
    {
 
-      auto dwa = processes_identifiers();
+      ::process_identifier_array processidentifieraTitle;
 
-      for(i32 i = 0; i < dwa.get_count(); i++)
+      auto processidentifiera = processes_identifiers();
+
+      for (auto & processidentifier : processidentifiera)
       {
 
-         if(process_identifier_module_path(dwa[i]).title().case_insensitive_equals(lpszName))
+         if (process_identifier_module_path(processidentifier).title().case_insensitive_equals(scopedstrName))
          {
 
-            return dwa[i];
+            processidentifieraTitle.add(processidentifier);
 
          }
 
       }
 
-      return -1;
+      return processidentifieraTitle;
 
    }
 
@@ -270,7 +288,7 @@ namespace apex_windows
    ::process_identifier os_context::current_process_identifier()
    {
 
-      return (int) acmenode()->current_process_identifier();
+      return (int)acmenode()->current_process_identifier();
 
    }
 
@@ -279,29 +297,29 @@ namespace apex_windows
    {
       string strName = ":<unknown>";
       // get a handle to the process.
-      HANDLE hProcess = OpenProcess( PROCESS_QUERY_INFORMATION |
+      HANDLE hProcess = OpenProcess(PROCESS_QUERY_INFORMATION |
                                      PROCESS_VM_READ,
-                                     false, dwPid );
+                                     false, dwPid);
 
       // get the process name.
 
-      if (nullptr != hProcess )
+      if (nullptr != hProcess)
       {
-         
+
          HMODULE hMod;
 
          DWORD cbNeeded;
 
-         if(EnumProcessModules(hProcess, &hMod, sizeof(hMod), &cbNeeded))
+         if (EnumProcessModules(hProcess, &hMod, sizeof(hMod), &cbNeeded))
          {
-            
+
             strName = ::get_module_path(hMod);
 
          }
 
       }
 
-      CloseHandle( hProcess );
+      CloseHandle(hProcess);
 
       return strName;
 
@@ -373,7 +391,7 @@ namespace apex_windows
 
          key1.get("DefaultConnectionSettings", mem);
 
-         bool bAutoDetect = (((byte*)mem.data())[8] & 0x08) != 0;
+         bool bAutoDetect = (((byte *)mem.data())[8] & 0x08) != 0;
 
          if (!bAutoDetect)
          {
@@ -399,7 +417,7 @@ namespace apex_windows
    {
 
       string strUrl;
-      
+
       try
       {
 
@@ -412,7 +430,7 @@ namespace apex_windows
       {
 
          return estatus;
-   
+
       }
 
       return ::success;
@@ -420,7 +438,7 @@ namespace apex_windows
    }
 
 
-   void os_context::local_machine_set_run(const ::string & strKey, const ::string & strCommand, const ::string& strArguments, bool bSet)
+   void os_context::local_machine_set_run(const ::string & strKey, const ::string & strCommand, const ::string & strArguments, bool bSet)
    {
 
       try
@@ -428,7 +446,7 @@ namespace apex_windows
 
          ::acme_windows::registry::key keyKar(HKEY_LOCAL_MACHINE, "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
 
-         
+
          if (bSet)
          {
 
@@ -455,7 +473,7 @@ namespace apex_windows
    }
 
 
-   void os_context::local_machine_set_run_once(const ::string & pszKey, const ::string & pszCommand, const ::string& pszArguments, bool bSet)
+   void os_context::local_machine_set_run_once(const ::string & pszKey, const ::string & pszCommand, const ::string & pszArguments, bool bSet)
    {
 
       try
@@ -463,25 +481,25 @@ namespace apex_windows
 
          ::acme_windows::registry::key keyKar(HKEY_LOCAL_MACHINE, "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\RunOnce", true);
 
-      if (bSet)
-      {
+         if (bSet)
+         {
 
-         keyKar.set(pszKey, string(pszCommand));
+            keyKar.set(pszKey, string(pszCommand));
 
-      }
-      else
-      {
+         }
+         else
+         {
 
-         keyKar.delete_value(pszKey);
+            keyKar.delete_value(pszKey);
 
-      }
+         }
 
       }
       catch (...)
       {
 
          //return false;
-         
+
       }
 
       //return true;
@@ -489,7 +507,7 @@ namespace apex_windows
    }
 
 
-   void   os_context::current_user_set_run(const ::string & pszKey, const ::string & pszCommand, const ::string& strArguments, bool bSet)
+   void   os_context::current_user_set_run(const ::string & pszKey, const ::string & pszCommand, const ::string & strArguments, bool bSet)
    {
 
       try
@@ -497,30 +515,30 @@ namespace apex_windows
 
          ::acme_windows::registry::key keyKar(HKEY_CURRENT_USER, "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
 
- 
-            if (bSet)
-            {
 
-               string str;
+         if (bSet)
+         {
 
-               str = "\"" + string(pszCommand) + "\"" + ::str::has_char(strArguments, " ");
+            string str;
 
-               keyKar.set(pszKey, str);
+            str = "\"" + string(pszCommand) + "\"" + ::str::has_char(strArguments, " ");
 
-            }
-            else
-            {
+            keyKar.set(pszKey, str);
 
-               keyKar.delete_value(pszKey);
+         }
+         else
+         {
 
-            }
+            keyKar.delete_value(pszKey);
+
+         }
 
 
       }
       catch (...)
       {
 
-//         return false;
+         //         return false;
 
       }
 
@@ -529,7 +547,7 @@ namespace apex_windows
    }
 
 
-   void os_context::current_user_set_run_once(const ::string & pszKey, const ::string & pszCommand, const ::string& pszArguments, bool bSet)
+   void os_context::current_user_set_run_once(const ::string & pszKey, const ::string & pszCommand, const ::string & pszArguments, bool bSet)
    {
 
       try
@@ -537,18 +555,18 @@ namespace apex_windows
 
          ::acme_windows::registry::key keyKar(HKEY_CURRENT_USER, "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\RunOnce", true);
 
-      if (bSet)
-      {
+         if (bSet)
+         {
 
-         keyKar.set(pszKey, string(pszCommand));
+            keyKar.set(pszKey, string(pszCommand));
 
-      }
-      else
-      {
+         }
+         else
+         {
 
-         keyKar.delete_value(pszKey);
+            keyKar.delete_value(pszKey);
 
-      }
+         }
 
       }
       catch (...)
@@ -570,19 +588,19 @@ namespace apex_windows
 
       ::acme_windows::registry::key key;
 
-         key.open(HKEY_LOCAL_MACHINE, "SOFTWARE\\MozillaPlugins", true);
+      key.open(HKEY_LOCAL_MACHINE, "SOFTWARE\\MozillaPlugins", true);
 
-         key.open(key, "@ca2.cc/npca2", true);
+      key.open(key, "@ca2.cc/npca2", true);
 
-         key.set("Description", "ca2 plugin for NPAPI");
-         key.set("Path", dir()->module() /"npca2.dll");
-         key.set("ProductName", "ca2 plugin for NPAPI");
-         key.set("Vendor", "ca2 Desenvolvimento de Software Ltda.");
-         key.set("Version", file()->as_string(dir()->install()/"appdata/x86/ca2_build.txt"));
+      key.set("Description", "ca2 plugin for NPAPI");
+      key.set("Path", dir()->module() / "npca2.dll");
+      key.set("ProductName", "ca2 plugin for NPAPI");
+      key.set("Vendor", "ca2 Desenvolvimento de Software Ltda.");
+      key.set("Version", file()->as_string(dir()->install() / "appdata/x86/ca2_build.txt"));
 
-         key.open(key, "application/apex", true);
+      key.open(key, "application/apex", true);
 
-         key.set("Description", "apex Document");
+      key.set("Description", "apex Document");
 
       //}
       //catch (...)
@@ -603,17 +621,17 @@ namespace apex_windows
       //try
       //{
 
-         string strExt;
+      string strExt;
 
-         strExt = ".";
-         strExt += pszExtension;
+      strExt = ".";
+      strExt += pszExtension;
 
-         string strOpenWithKey;
-         strOpenWithKey = strExt + "\\OpenWithList";
+      string strOpenWithKey;
+      strOpenWithKey = strExt + "\\OpenWithList";
 
-         ::acme_windows::registry::key key(HKEY_CLASSES_ROOT, strOpenWithKey, false);
+      ::acme_windows::registry::key key(HKEY_CLASSES_ROOT, strOpenWithKey, false);
 
-         key.ls_key(straKey);
+      key.ls_key(straKey);
 
       //}
       //catch (...)
@@ -671,7 +689,7 @@ namespace apex_windows
    }
 
 
-   void os_context::file_association_set_shell_open_command(const ::string & pszExtension, const ::string & pszExtensionNamingClass,  const ::string & pszCommand, const ::string & pszParam)
+   void os_context::file_association_set_shell_open_command(const ::string & pszExtension, const ::string & pszExtensionNamingClass, const ::string & pszCommand, const ::string & pszParam)
    {
 
       //::e_status estatus = ::success;
@@ -714,7 +732,7 @@ namespace apex_windows
          strFormat = "\"" + strCommand + "\"";
 
          strFormat += pszParam;
-         
+
          keyLink1._set("", strFormat);
 
          //}
@@ -809,7 +827,7 @@ namespace apex_windows
             strParam = range;
 
          }
-         catch(...)
+         catch (...)
          {
          }
 
@@ -830,7 +848,7 @@ namespace apex_windows
    }
 
 
-   void os_context::link_open(const string& strUrl, const string& strProfile)
+   void os_context::link_open(const string & strUrl, const string & strProfile)
    {
 
       string strBrowser = "chrome";
@@ -909,35 +927,35 @@ namespace apex_windows
          string strCommand;
 
          ::acme_windows::registry::key key(HKEY_CLASSES_ROOT, ".html", false);
-         
-         if(key._open(HKEY_CLASSES_ROOT, ".html\\shell\\opennew\\command", false))
+
+         if (key._open(HKEY_CLASSES_ROOT, ".html\\shell\\opennew\\command", false))
          {
 
-            if(key._get("", str2))
+            if (key._get("", str2))
             {
-               
+
                string strCommand(str2);
 
                strCommand.replace_with(pcsz, "%1");
 
-               WinExec(strCommand,e_display_restored);
+               WinExec(strCommand, e_display_restored);
 
             }
 
          }
-         else if(key._open(HKEY_CLASSES_ROOT, str, false))
+         else if (key._open(HKEY_CLASSES_ROOT, str, false))
          {
-               
+
             str += "\\shell\\opennew\\command";
 
-            if(key._get("", str2))
+            if (key._get("", str2))
             {
-                     
+
                string strCommand(str2);
-                     
+
                strCommand.replace_with(pcsz, "%1");
 
-               WinExec(strCommand,e_display_restored);
+               WinExec(strCommand, e_display_restored);
 
             }
 
@@ -980,14 +998,14 @@ namespace apex_windows
 
       // Open the access token associated with the
       // current process
-      if(!OpenProcessToken(
-            GetCurrentProcess(),            // Process handle
-            TOKEN_READ,                     // Read access only
-            &tokenHandle))                  // Access token handle
+      if (!OpenProcessToken(
+         GetCurrentProcess(),            // Process handle
+         TOKEN_READ,                     // Read access only
+         &tokenHandle))                  // Access token handle
       {
-         
+
          u32 win32Status = GetLastError();
-         
+
          //debug_print("Cannot open token handle: %d\n",win32Status);
 
          bOk = false;
@@ -995,27 +1013,27 @@ namespace apex_windows
       }
 
       // Zero the tokenInfoBuffer structure.
-      ZeroMemory(&tokenInfo,sizeof(tokenInfo));
+      ZeroMemory(&tokenInfo, sizeof(tokenInfo));
 
       // Retrieve information about the access token. In this case,
       // retrieve a SID.
-      if(!GetTokenInformation(
-            tokenHandle,                    // Access token handle
-            TokenUser,                      // User for the token
-            &tokenInfo.tokenUser,     // Buffer to fill
-            sizeof(tokenInfo),        // Size of the buffer
-            &bytesReturned))                // Size needed
+      if (!GetTokenInformation(
+         tokenHandle,                    // Access token handle
+         TokenUser,                      // User for the token
+         &tokenInfo.tokenUser,     // Buffer to fill
+         sizeof(tokenInfo),        // Size of the buffer
+         &bytesReturned))                // Size needed
       {
-         
+
          u32 win32Status = GetLastError();
-         
+
          //debug_print("Cannot query token information: %d\n",win32Status);
 
          bOk = false;
 
       }
 
-      if(tokenHandle != nullptr)
+      if (tokenHandle != nullptr)
       {
 
          CloseHandle(tokenHandle);
@@ -1028,18 +1046,18 @@ namespace apex_windows
 
 
    BOOL
-   GetAccountSid(
-   TCHAR * SystemName,
-   TCHAR * AccountName,
-   PSID *Sid
-   )
+      GetAccountSid(
+      TCHAR * SystemName,
+      TCHAR * AccountName,
+      PSID * Sid
+      )
    {
 
-      LPTSTR ReferencedDomain=nullptr;
-      DWORD cbSid=128;    // initial allocation attempt
-      DWORD cchReferencedDomain=16; // initial allocation size_i32
+      LPTSTR ReferencedDomain = nullptr;
+      DWORD cbSid = 128;    // initial allocation attempt
+      DWORD cchReferencedDomain = 16; // initial allocation size_i32
       SID_NAME_USE peUse;
-      BOOL bSuccess=false; // assume this function will fail
+      BOOL bSuccess = false; // assume this function will fail
 
       __try
       {
@@ -1047,49 +1065,49 @@ namespace apex_windows
          //
          // initial memory allocations
          //
-         if((*Sid=HeapAlloc(
-                  GetProcessHeap(),
-                  0,
-                  cbSid
-                  )) == nullptr) __leave;
+         if ((*Sid = HeapAlloc(
+            GetProcessHeap(),
+            0,
+            cbSid
+         )) == nullptr) __leave;
 
-         if((ReferencedDomain=(TCHAR *)HeapAlloc(
-                              GetProcessHeap(),
-                              0,
-                              cchReferencedDomain * sizeof(TCHAR)
-                              )) == nullptr) __leave;
+         if ((ReferencedDomain = (TCHAR *)HeapAlloc(
+            GetProcessHeap(),
+            0,
+            cchReferencedDomain * sizeof(TCHAR)
+         )) == nullptr) __leave;
 
          //
          // Obtain the SID of the specified account on the specified system.
          //
-         while(!LookupAccountName(
-               SystemName,         // machine to lookup account on
-               AccountName,        // account to lookup
-               *Sid,               // SID of interest
-               &cbSid,             // size_i32 of SID
-               ReferencedDomain,   // domain account was found on
-               &cchReferencedDomain,
-               &peUse
-               ))
+         while (!LookupAccountName(
+            SystemName,         // machine to lookup account on
+            AccountName,        // account to lookup
+            *Sid,               // SID of interest
+            &cbSid,             // size_i32 of SID
+            ReferencedDomain,   // domain account was found on
+            &cchReferencedDomain,
+            &peUse
+         ))
          {
-            if(GetLastError() == ERROR_INSUFFICIENT_BUFFER)
+            if (GetLastError() == ERROR_INSUFFICIENT_BUFFER)
             {
                //
                // reallocate memory
                //
-               if((*Sid=HeapReAlloc(
-                        GetProcessHeap(),
-                        0,
-                        *Sid,
-                        cbSid
-                        )) == nullptr) __leave;
+               if ((*Sid = HeapReAlloc(
+                  GetProcessHeap(),
+                  0,
+                  *Sid,
+                  cbSid
+               )) == nullptr) __leave;
 
-               if((ReferencedDomain=(TCHAR *)HeapReAlloc(
-                                    GetProcessHeap(),
-                                    0,
-                                    ReferencedDomain,
-                                    cchReferencedDomain * sizeof(TCHAR)
-                                    )) == nullptr) __leave;
+               if ((ReferencedDomain = (TCHAR *)HeapReAlloc(
+                  GetProcessHeap(),
+                  0,
+                  ReferencedDomain,
+                  cchReferencedDomain * sizeof(TCHAR)
+               )) == nullptr) __leave;
             }
             else __leave;
          }
@@ -1097,7 +1115,7 @@ namespace apex_windows
          //
          // Indicate success.
          //
-         bSuccess=true;
+         bSuccess = true;
 
       } // finally
       __finally
@@ -1107,13 +1125,13 @@ namespace apex_windows
          // Cleanup and indicate failure, if appropriate.
          //
 
-         HeapFree(GetProcessHeap(),0,ReferencedDomain);
+         HeapFree(GetProcessHeap(), 0, ReferencedDomain);
 
-         if(!bSuccess)
+         if (!bSuccess)
          {
-            if(*Sid != nullptr)
+            if (*Sid != nullptr)
             {
-               HeapFree(GetProcessHeap(),0,*Sid);
+               HeapFree(GetProcessHeap(), 0, *Sid);
                *Sid = nullptr;
             }
          }
@@ -1124,7 +1142,7 @@ namespace apex_windows
    }
 
 
-   void os_context::_getCredentialsForService(const ::string & strService,WCHAR * szUsername,WCHAR *szPassword)
+   void os_context::_getCredentialsForService(const ::string & strService, WCHAR * szUsername, WCHAR * szPassword)
    {
 
       HRESULT hr = S_OK;
@@ -1136,7 +1154,7 @@ namespace apex_windows
       BOOL    fSave = false;
       WCHAR szDomainAndUser[CREDUI_MAX_USERNAME_LENGTH + CREDUI_MAX_DOMAIN_TARGET_LENGTH + 1];
       WCHAR szDomain[CREDUI_MAX_DOMAIN_TARGET_LENGTH + 1];
-//      TOKEN_INFO ti;
+      //      TOKEN_INFO ti;
 
       u32 maxLenName = CREDUI_MAX_USERNAME_LENGTH + 1;
       u32 maxLenPass = CREDUI_MAX_PASSWORD_LENGTH + 1;
@@ -1151,7 +1169,7 @@ namespace apex_windows
 
       // Retrieve the user name and domain name.
       // SID_NAME_USE    SidUse;
-      u32           cchTmpUsername = CREDUI_MAX_USERNAME_LENGTH +1;
+      u32           cchTmpUsername = CREDUI_MAX_USERNAME_LENGTH + 1;
       u32           cchTmpDomain = CREDUI_MAX_DOMAIN_TARGET_LENGTH + 1;
       u32           cchDomainAndUser = CREDUI_MAX_USERNAME_LENGTH + CREDUI_MAX_DOMAIN_TARGET_LENGTH + 1;
 
@@ -1186,7 +1204,7 @@ namespace apex_windows
 
       ULONG l = sizeof(szDomainAndUser) / sizeof(WCHAR);
 
-      ::GetUserNameExW(NameSamCompatible,szDomainAndUser,&l);
+      ::GetUserNameExW(NameSamCompatible, szDomainAndUser, &l);
 
       // Combine the domain and user names.
       /*swprintf_s(
@@ -1195,17 +1213,17 @@ namespace apex_windows
          L"%s\\%s",
          szDomain,
          szUsername);*/
-      ::zero(szPassword,CREDUI_MAX_PASSWORD_LENGTH);
+      ::zero(szPassword, CREDUI_MAX_PASSWORD_LENGTH);
 
       // Call CredPackAuthenticationBufferW once to determine the size,
       // in bytes, of the authentication buffer.
 
-      if(!CredPackAuthenticationBufferW(
-            0,                // Reserved
-            szDomainAndUser,  // Domain\User name
-            szPassword,       // User Password
-            nullptr,             // Packed credentials
-            &pvInAuthBlob.m_size)    // Size, in bytes, of credentials
+      if (!CredPackAuthenticationBufferW(
+         0,                // Reserved
+         szDomainAndUser,  // Domain\User name
+         szPassword,       // User Password
+         nullptr,             // Packed credentials
+         &pvInAuthBlob.m_size)    // Size, in bytes, of credentials
             && GetLastError() != ERROR_INSUFFICIENT_BUFFER)
       {
 
@@ -1220,7 +1238,7 @@ namespace apex_windows
       // Allocate memory for the input buffer.
       pvInAuthBlob.alloc();
 
-      if(pvInAuthBlob.is_null())
+      if (pvInAuthBlob.is_null())
       {
 
          //debug_print("\n getCredentialsForService CoTaskMemAlloc() Out of memory.\n");
@@ -1231,12 +1249,12 @@ namespace apex_windows
 
       // Call CredPackAuthenticationBufferW again to retrieve the
       // authentication buffer.
-      if(!CredPackAuthenticationBufferW(
-            0,
-            szDomainAndUser,
-            szPassword,
-            (PBYTE)pvInAuthBlob.m_p,
-            &pvInAuthBlob.m_size))
+      if (!CredPackAuthenticationBufferW(
+         0,
+         szDomainAndUser,
+         szPassword,
+         (PBYTE)pvInAuthBlob.m_p,
+         &pvInAuthBlob.m_size))
       {
          dwResult = GetLastError();
          //debug_print("\n CredPackAuthenticationBufferW (2) failed: win32 error = 0x%x\n",dwResult);
@@ -1245,10 +1263,10 @@ namespace apex_windows
 
       u.pszCaptionText = wstrCaption;
       u.pszMessageText = wstrMessage;
-      hicon = (HICON) ::LoadImageW(::GetModuleHandle(nullptr),MAKEINTRESOURCEW(1),IMAGE_ICON,48,48,LR_DEFAULTCOLOR);
+      hicon = (HICON) ::LoadImageW(::GetModuleHandle(nullptr), MAKEINTRESOURCEW(1), IMAGE_ICON, 48, 48, LR_DEFAULTCOLOR);
 
 
-      if(hicon != nullptr)
+      if (hicon != nullptr)
       {
 
          u.hbmBanner = get_icon_hbitmap(hicon);
@@ -1257,7 +1275,7 @@ namespace apex_windows
 
       }
 
-retry:
+   retry:
 
       dwResult = CredUIPromptForWindowsCredentialsW(
                  &u,             // Customizing information
@@ -1271,10 +1289,10 @@ retry:
                  //CREDUIWIN_SECURE_PROMPT |
                  CREDUIWIN_IN_CRED_ONLY |
                  CREDUIWIN_ENUMERATE_CURRENT_USER
-                 );
+      );
 
 
-      if(dwResult == NO_ERROR)
+      if (dwResult == NO_ERROR)
       {
 
          DWORD lenName = maxLenName;
@@ -1292,7 +1310,7 @@ retry:
                &lenPass) != false;
 
 
-         if(!bOk)
+         if (!bOk)
          {
             dwLastError = ::GetLastError();
             goto retry;
@@ -1300,7 +1318,7 @@ retry:
 
          //wcscpy(szDomainAndUser,szUsername);
 
-         ::GetUserNameExW(NameSamCompatible,szDomainAndUser,&l);
+         ::GetUserNameExW(NameSamCompatible, szDomainAndUser, &l);
 
          bOk = CredUIParseUserNameW(
                szDomainAndUser,
@@ -1308,9 +1326,9 @@ retry:
                CREDUI_MAX_USERNAME_LENGTH,
                szDomain,
                CREDUI_MAX_DOMAIN_TARGET_LENGTH
-               ) == NO_ERROR ;
+         ) == NO_ERROR;
 
-         if(!bOk)
+         if (!bOk)
          {
             dwLastError = ::GetLastError();
             goto retry;
@@ -1318,13 +1336,13 @@ retry:
 
          HANDLE h;
 
-         if(::LogonUserW(
-               szUsername,
-               szDomain,
-               szPassword,
-               LOGON32_LOGON_SERVICE,
-               LOGON32_PROVIDER_DEFAULT,
-               &h))
+         if (::LogonUserW(
+            szUsername,
+            szDomain,
+            szPassword,
+            LOGON32_LOGON_SERVICE,
+            LOGON32_PROVIDER_DEFAULT,
+            &h))
          {
 
             ::CloseHandle(h);
@@ -1339,7 +1357,7 @@ retry:
 
          }
 
-         wcscpy(szUsername,szDomainAndUser);
+         wcscpy(szUsername, szDomainAndUser);
 
       }
       else
@@ -1353,12 +1371,12 @@ retry:
          }
 
          hr = HRESULT_FROM_WIN32(dwResult);
-         
+
          bOk = false;
 
       }
 
-      if(u.hbmBanner != nullptr)
+      if (u.hbmBanner != nullptr)
       {
 
          ::DeleteObject(u.hbmBanner);
@@ -1380,7 +1398,7 @@ retry:
 
       ::acme::application * papp = get_app();
 
-      if(get_app()->m_papexapplication->m_strAppName.is_empty()
+      if (get_app()->m_papexapplication->m_strAppName.is_empty()
             || get_app()->m_papexapplication->m_strAppName.case_insensitive_order("bergedge") == 0
             || !get_app()->is_service())
          return "";
@@ -1410,7 +1428,7 @@ retry:
 
       SC_HANDLE hdlSCM = OpenSCManagerW(0, 0, SC_MANAGER_CREATE_SERVICE);
 
-      if(hdlSCM == 0)
+      if (hdlSCM == 0)
       {
 
          u32 lasterror = ::GetLastError();
@@ -1431,7 +1449,7 @@ retry:
 
       string strCalling = m_pcontext->m_papexcontext->dir()->module() / strExe + " : service";
 
-      if(is_true("no_remote_simpledb"))
+      if (is_true("no_remote_simpledb"))
       {
 
          strCalling += " no_remote_simpledb";
@@ -1446,14 +1464,14 @@ retry:
 
       auto papp = get_app()->m_papexapplication;
 
-      if(get_app()->is_user_service())
+      if (get_app()->is_user_service())
       {
 
          _getCredentialsForService(get_app()->m_strAppId, lpszName, pszPass);
-//         {
+         //         {
 
-            pname = lpszName;
-            ppass = pszPass;
+         pname = lpszName;
+         ppass = pszPass;
 
          //}
          //else
@@ -1465,7 +1483,7 @@ retry:
 
       }
 
-      enable_service(strServiceName,strDisplayName,strCalling,pname,ppass);
+      enable_service(strServiceName, strDisplayName, strCalling, pname, ppass);
 
    }
 
@@ -1514,9 +1532,9 @@ retry:
 
       }
 
-      SC_HANDLE hdlSCM = OpenSCManagerW(0,0,SC_MANAGER_CREATE_SERVICE);
+      SC_HANDLE hdlSCM = OpenSCManagerW(0, 0, SC_MANAGER_CREATE_SERVICE);
 
-      if(hdlSCM == 0)
+      if (hdlSCM == 0)
       {
          //::GetLastError()
          throw ::exception(error_failed);
@@ -1526,8 +1544,8 @@ retry:
       WCHAR lpszName[CREDUI_MAX_USERNAME_LENGTH + CREDUI_MAX_DOMAIN_TARGET_LENGTH + 1];
       WCHAR pszPass[CREDUI_MAX_PASSWORD_LENGTH + 1];
 
-      wcscpy(lpszName,wstring(strUser));
-      wcscpy(pszPass,wstring(strPass));
+      wcscpy(lpszName, wstring(strUser));
+      wcscpy(pszPass, wstring(strPass));
 
       SC_HANDLE hdlServ = ::CreateServiceW(
                           hdlSCM,                    // SCManager database
@@ -1545,7 +1563,7 @@ retry:
                           strPass.has_char() ? pszPass : nullptr);                     // no password
 
 
-      if(!hdlServ)
+      if (!hdlServ)
       {
 
          u32 lasterror = ::GetLastError();
@@ -1556,8 +1574,8 @@ retry:
 
       }
 
-      SecureZeroMemory(lpszName,sizeof(lpszName));
-      SecureZeroMemory(pszPass,sizeof(pszPass));
+      SecureZeroMemory(lpszName, sizeof(lpszName));
+      SecureZeroMemory(pszPass, sizeof(pszPass));
 
 
       CloseServiceHandle(hdlServ);
@@ -1578,9 +1596,9 @@ retry:
 
       }
 
-      SC_HANDLE hdlSCM = OpenSCManagerW(0,0,SC_MANAGER_ALL_ACCESS);
+      SC_HANDLE hdlSCM = OpenSCManagerW(0, 0, SC_MANAGER_ALL_ACCESS);
 
-      if(hdlSCM == 0)
+      if (hdlSCM == 0)
       {
          //::GetLastError();
          throw ::exception(error_failed);
@@ -1591,16 +1609,16 @@ retry:
                           wstring(strServiceName),
                           DELETE);
 
-      if(!hdlServ)
+      if (!hdlServ)
       {
          u32 lasterror = ::GetLastError();
          CloseServiceHandle(hdlSCM);
-         if(lasterror == 1060) // O serviço já não existe. Service already doesn't exist.
+         if (lasterror == 1060) // O serviço já não existe. Service already doesn't exist.
             return; // do self-healing
          ::windows::throw_last_error(lasterror);
       }
 
-      if(!::DeleteService(hdlServ))
+      if (!::DeleteService(hdlServ))
       {
          u32 lasterror = ::GetLastError();
          CloseServiceHandle(hdlServ);
@@ -1623,7 +1641,7 @@ retry:
 
       if (strServiceName.is_empty())
       {
-       
+
          throw ::exception(error_failed);
 
       }
@@ -1643,9 +1661,9 @@ retry:
 
       }
 
-      SC_HANDLE hdlSCM = OpenSCManagerW(0,0,SC_MANAGER_ALL_ACCESS);
+      SC_HANDLE hdlSCM = OpenSCManagerW(0, 0, SC_MANAGER_ALL_ACCESS);
 
-      if(hdlSCM == 0)
+      if (hdlSCM == 0)
       {
          //::GetLastError();
          throw ::exception(error_failed);
@@ -1658,14 +1676,14 @@ retry:
                           SERVICE_START);                     // no password
 
 
-      if(!hdlServ)
+      if (!hdlServ)
       {
          CloseServiceHandle(hdlSCM);
          //Ret = ::GetLastError();
          throw ::exception(error_failed);
       }
 
-      bool bOk = StartService(hdlServ,0,nullptr) != false;
+      bool bOk = StartService(hdlServ, 0, nullptr) != false;
 
       CloseServiceHandle(hdlServ);
       CloseServiceHandle(hdlSCM);
@@ -1683,9 +1701,9 @@ retry:
 
       }
 
-      SC_HANDLE hdlSCM = OpenSCManagerW(0,0,SC_MANAGER_ALL_ACCESS);
+      SC_HANDLE hdlSCM = OpenSCManagerW(0, 0, SC_MANAGER_ALL_ACCESS);
 
-      if(hdlSCM == 0)
+      if (hdlSCM == 0)
       {
          //::GetLastError();
          throw ::exception(error_failed);
@@ -1696,7 +1714,7 @@ retry:
                           wstring(strServiceName),
                           SERVICE_STOP);                     // no password
 
-      if(!hdlServ)
+      if (!hdlServ)
       {
          // Ret = ::GetLastError();
          CloseServiceHandle(hdlSCM);
@@ -1705,9 +1723,9 @@ retry:
 
       SERVICE_STATUS ss;
 
-      memory_set(&ss,0,sizeof(ss));
+      memory_set(&ss, 0, sizeof(ss));
 
-      bool bOk = ::ControlService(hdlServ,SERVICE_CONTROL_STOP,&ss) != false;
+      bool bOk = ::ControlService(hdlServ, SERVICE_CONTROL_STOP, &ss) != false;
 
       ::DeleteService(hdlServ);
 
@@ -1719,10 +1737,10 @@ retry:
    }
 
 
-   void os_context::raise_exception( u32 dwExceptionCode, u32 dwExceptionFlags)
+   void os_context::raise_exception(u32 dwExceptionCode, u32 dwExceptionFlags)
    {
 
-      RaiseException( dwExceptionCode, dwExceptionFlags, 0, nullptr );
+      RaiseException(dwExceptionCode, dwExceptionFlags, 0, nullptr);
 
    }
 
@@ -1735,7 +1753,7 @@ retry:
    }
 
 
-   void os_context::set_file_status(const ::file::path & path, const ::file::file_status& status)
+   void os_context::set_file_status(const ::file::path & path, const ::file::file_status & status)
    {
 
       u32 wAttr;
@@ -1808,7 +1826,7 @@ retry:
 
          //auto pnode = acmesystem()->m_papexsystem->node();
 
-         ::time_to_file_time((file_time_t*)&lastAccessTime, &status.m_timeAccess);
+         ::time_to_file_time((file_time_t *)&lastAccessTime, &status.m_timeAccess);
 
          pLastAccessTime = &lastAccessTime;
 
@@ -1896,7 +1914,7 @@ retry:
 
    }
 
-   
+
    comptr < IShellLinkW > os_context::_get_IShellLinkW(const ::file::path & pathLink)
    {
 
@@ -1957,7 +1975,7 @@ retry:
 
          plink = resolve_lnk_link(path, elink);
 
-         if(plink)
+         if (plink)
          {
 
             return plink;
@@ -2007,103 +2025,103 @@ retry:
 
       ::acme_windows::registry::key key;
 
-         key.open(HKEY_CURRENT_USER, "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\FileExts\\.html\\UserChoice", false);
+      key.open(HKEY_CURRENT_USER, "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\FileExts\\.html\\UserChoice", false);
 
-         string strProgId;
+      string strProgId;
 
-         string strHash;
+      string strHash;
 
-         key._get("Hash", strHash);
+      key._get("Hash", strHash);
 
-         key._get("ProgId", strProgId);
+      key._get("ProgId", strProgId);
 
-         if (strProgId.begins("App") && strHash.has_char())
-         {
+      if (strProgId.begins("App") && strHash.has_char())
+      {
 
-            strId = "edge";
+         strId = "edge";
 
-         }
-         if (strProgId.case_insensitive_begins("IE."))
-         {
+      }
+      if (strProgId.case_insensitive_begins("IE."))
+      {
 
-            strId = "ie";
+         strId = "ie";
 
-         }
-         else if (strProgId.case_insensitive_begins("ChromeHTML"))
-         {
+      }
+      else if (strProgId.case_insensitive_begins("ChromeHTML"))
+      {
 
-            strId = "chrome";
+         strId = "chrome";
 
-         }
-         else if (strProgId.case_insensitive_begins("FirefoxHTML"))
-         {
+      }
+      else if (strProgId.case_insensitive_begins("FirefoxHTML"))
+      {
 
-            strId = "firefox";
+         strId = "firefox";
 
-         }
-         else if (strProgId.case_insensitive_begins("Opera"))
-         {
+      }
+      else if (strProgId.case_insensitive_begins("Opera"))
+      {
 
-            strId = "opera";
+         strId = "opera";
 
-         }
-         else if (strProgId.case_insensitive_begins("VivaldiHTM."))
-         {
+      }
+      else if (strProgId.case_insensitive_begins("VivaldiHTM."))
+      {
 
-            strId = "vivaldi";
+         strId = "vivaldi";
 
-         }
-         else if (strProgId.case_insensitive_ends("app_core_commander"))
-         {
+      }
+      else if (strProgId.case_insensitive_ends("app_core_commander"))
+      {
 
-            strId = "commander";
+         strId = "commander";
 
-         }
-         else
-         {
+      }
+      else
+      {
 
-            strId = "commander";
+         strId = "commander";
 
-         }
+      }
 
-         string strDefault;
+      string strDefault;
 
-         key._open(HKEY_CLASSES_ROOT, strProgId + "\\shell\\open\\command", false);
+      key._open(HKEY_CLASSES_ROOT, strProgId + "\\shell\\open\\command", false);
 
-         key._get("", strDefault);
+      key._get("", strDefault);
 
-         if (strDefault.is_empty())
-         {
+      if (strDefault.is_empty())
+      {
 
-            throw ::exception(error_failed);
+         throw ::exception(error_failed);
 
-         }
+      }
 
-         bool bQuote = strDefault.case_insensitive_begins_eat("\"");
+      bool bQuote = strDefault.case_insensitive_begins_eat("\"");
 
-         strsize iFind = strDefault.case_insensitive_find_index(".exe");
+      strsize iFind = strDefault.case_insensitive_find_index(".exe");
 
-         if (iFind <= 0)
-         {
+      if (iFind <= 0)
+      {
 
-            throw ::exception(error_failed);
+         throw ::exception(error_failed);
 
-         }
+      }
 
-         path = strDefault.left(iFind);
+      path = strDefault.left(iFind);
 
-         path += ".exe";
+      path += ".exe";
 
-         //MessageBox(nullptr, path, "pathProgram", e_message_box_ok);
+      //MessageBox(nullptr, path, "pathProgram", e_message_box_ok);
 
-         strParam = strDefault.substr(iFind + 5);
+      strParam = strDefault.substr(iFind + 5);
 
-         if (bQuote)
-         {
+      if (bQuote)
+      {
 
-            strParam.case_insensitive_begins_eat("\"");
+         strParam.case_insensitive_begins_eat("\"");
 
-         }
+      }
 
       //   return true;
 
@@ -2118,7 +2136,7 @@ retry:
    }
 
 
-   void os_context::initialize_wallpaper_fileset(::file::set* pfileset, bool bAddSearch)
+   void os_context::initialize_wallpaper_fileset(::file::set * pfileset, bool bAddSearch)
    {
 
       if (bAddSearch)
@@ -2200,25 +2218,25 @@ retry:
 
 
 
-//#elif defined(LINUX)
-//   //string strDir;
-//   //strDir = m_pcontext->m_papexcontext->dir().path(getenv("HOME"), "Pictures");
-//   //imagefileset.add_search(strDir);
-//   string strDir;
-//   strDir = "/usr/share/backgrounds";
-//   imagefileset.add_search(strDir, true);
-//            }
-//
-//#elif defined(MACOS)
-//   //string strDir;
-//   //strDir = m_pcontext->m_papexcontext->dir().path(getenv("HOME"), "Pictures");
-//   //imagefileset.add_search(strDir);
-//   string strDir;
-//   strDir = "/Library/Desktop Pictures";
-//   imagefileset.add_search(strDir, true);
-//            }
-//
-//#else
+   //#elif defined(LINUX)
+   //   //string strDir;
+   //   //strDir = m_pcontext->m_papexcontext->dir().path(getenv("HOME"), "Pictures");
+   //   //imagefileset.add_search(strDir);
+   //   string strDir;
+   //   strDir = "/usr/share/backgrounds";
+   //   imagefileset.add_search(strDir, true);
+   //            }
+   //
+   //#elif defined(MACOS)
+   //   //string strDir;
+   //   //strDir = m_pcontext->m_papexcontext->dir().path(getenv("HOME"), "Pictures");
+   //   //imagefileset.add_search(strDir);
+   //   string strDir;
+   //   strDir = "/Library/Desktop Pictures";
+   //   imagefileset.add_search(strDir, true);
+   //            }
+   //
+   //#else
 
 
    void os_context::file_open(const ::file::path & pathParam, const string & strParams, const ::file::path & pathFolder)
@@ -2231,7 +2249,7 @@ retry:
       ::e_status estatusFileOpen = ::success;
       ::i32 iShellExecuteExitCode = 33;
       DWORD dwLastError = 0;
-      const char* pszShellExecuteError = nullptr;
+      const char * pszShellExecuteError = nullptr;
 
       fork([=, &manualresetevent, &estatusFileOpen,
       &dwLastError, &iShellExecuteExitCode, &pszShellExecuteError]()
@@ -2239,7 +2257,7 @@ retry:
 
          ::CoInitializeEx(nullptr, COINIT_APARTMENTTHREADED | COINIT_DISABLE_OLE1DDE);
 
-            //::CoInitializeEx(nullptr, COINIT_DISABLE_OLE1DDE);
+         //::CoInitializeEx(nullptr, COINIT_DISABLE_OLE1DDE);
 
          at_end_of_scope
          {
@@ -2385,7 +2403,7 @@ retry:
 
          auto errorcode = ::windows::last_error_error_code(dwLastError);
 
-         throw exception(estatusFileOpen,{ errorcode }, strMessage);
+         throw exception(estatusFileOpen, { errorcode }, strMessage);
 
       }
       else if (::failed(estatus))
@@ -2398,35 +2416,35 @@ retry:
    }
 
 
-//https://stackoverflow.com/questions/1591342/c-how-to-determine-if-a-windows-process-is-running
-//#include <windows.h>
-//#include <tlhelp32.h>
-//#include <tchar.h>
-//
-//   bool IsProcessRunning(const TCHAR* const executableName) {
-//      PROCESSENTRY32 entry;
-//      entry.dwSize = sizeof(PROCESSENTRY32);
-//
-//      const auto snapshot = CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS, NULL);
-//
-//      if (!Process32First(snapshot, &entry)) {
-//         CloseHandle(snapshot);
-//         return false;
-//      }
-//
-//      do {
-//         if (!_tcsicmp(entry.szExeFile, executableName)) {
-//            CloseHandle(snapshot);
-//            return true;
-//         }
-//      } while (Process32Next(snapshot, &entry));
-//
-//      CloseHandle(snapshot);
-//      return false;
-//   }
-//
+   //https://stackoverflow.com/questions/1591342/c-how-to-determine-if-a-windows-process-is-running
+   //#include <windows.h>
+   //#include <tlhelp32.h>
+   //#include <tchar.h>
+   //
+   //   bool IsProcessRunning(const TCHAR* const executableName) {
+   //      PROCESSENTRY32 entry;
+   //      entry.dwSize = sizeof(PROCESSENTRY32);
+   //
+   //      const auto snapshot = CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS, NULL);
+   //
+   //      if (!Process32First(snapshot, &entry)) {
+   //         CloseHandle(snapshot);
+   //         return false;
+   //      }
+   //
+   //      do {
+   //         if (!_tcsicmp(entry.szExeFile, executableName)) {
+   //            CloseHandle(snapshot);
+   //            return true;
+   //         }
+   //      } while (Process32Next(snapshot, &entry));
+   //
+   //      CloseHandle(snapshot);
+   //      return false;
+   //   }
+   //
 
-   void os_context::hidden_start(const ::file::path& pathParam, const string& strParams, const ::file::path& pathFolder)
+   void os_context::hidden_start(const ::file::path & pathParam, const string & strParams, const ::file::path & pathFolder)
    {
 
       auto path = m_pcontext->m_papexcontext->defer_process_path(pathParam);
@@ -2446,9 +2464,9 @@ retry:
 
             wstring wstrParams(strParams);
 
-            const wchar_t* pwszParams = wstrParams.c_str();
+            const wchar_t * pwszParams = wstrParams.c_str();
 
-            const wchar_t* pwszFolder = wstrFolder.c_str();
+            const wchar_t * pwszFolder = wstrFolder.c_str();
 
             si.cbSize = sizeof(si);
 
@@ -2498,7 +2516,7 @@ retry:
    }
 
 
-   void os_context::hidden_run(const class time & timeWait, const ::file::path& pathParam, const string& strParams, const ::file::path& pathFolder)
+   void os_context::hidden_run(const class time & timeWait, const ::file::path & pathParam, const string & strParams, const ::file::path & pathFolder)
    {
 
       auto pevent = __new(manual_reset_event);
@@ -2526,9 +2544,9 @@ retry:
 
             wstring wstrParams(strParams);
 
-            const wchar_t* pwszParams = wstrParams.c_str();
+            const wchar_t * pwszParams = wstrParams.c_str();
 
-            const wchar_t* pwszFolder = wstrFolder.c_str();
+            const wchar_t * pwszFolder = wstrFolder.c_str();
 
             si.cbSize = sizeof(si);
 
@@ -2609,7 +2627,7 @@ retry:
    }
 
 
-   void os_context::register_user_auto_start(const string& strId, const string& strCommand, const string & strArguments, bool bRegister)
+   void os_context::register_user_auto_start(const string & strId, const string & strCommand, const string & strArguments, bool bRegister)
    {
 
       current_user_set_run(strId, strCommand, strArguments, bRegister);
@@ -2657,7 +2675,7 @@ retry:
 
       string strDefault;
 
-repeat:
+   repeat:
 
       if (key._open(HKEY_LOCAL_MACHINE, "Software\\Microsoft\\Windows\\CurrentVersion\\App Paths\\" + str, false))
       {
@@ -2705,7 +2723,7 @@ repeat:
       strTargetProgId.replace_with("_", "/");
 
       __prevent_bad_status_exception;
-      
+
       {
 
          ::acme_windows::registry::key regkey(HKEY_LOCAL_MACHINE, "SOFTWARE\\RegisteredApplications", true);
@@ -2804,10 +2822,10 @@ repeat:
 
          string strValue;
 
-         regkey.set("HideIconsCommand", "\""+strModule + "\" : hide_icons");
+         regkey.set("HideIconsCommand", "\"" + strModule + "\" : hide_icons");
          regkey.set("IconsVisible", 1);
-         regkey.set("ReinstallCommand", "\""+strModule + "\" : install");
-         regkey.set("ShowIconsCommand", "\""+strModule + "\" : show_icons");
+         regkey.set("ReinstallCommand", "\"" + strModule + "\" : install");
+         regkey.set("ShowIconsCommand", "\"" + strModule + "\" : show_icons");
 
       }
 
@@ -2818,7 +2836,7 @@ repeat:
 
          string strValue;
 
-         regkey.set("", "\""+strModule + "\" : browser_weather=default");
+         regkey.set("", "\"" + strModule + "\" : browser_weather=default");
 
       }
 
@@ -2997,7 +3015,7 @@ repeat:
 
       }
 
-      
+
       {
 
          ::acme_windows::registry::key regkey(HKEY_LOCAL_MACHINE, pathApplication / "DefaultIcon", true);
@@ -3025,26 +3043,26 @@ repeat:
          string strValue;
 
          ///auto estatusRegistry = 
-         
+
          regkey._set("HideIconsCommand", "\"" + strModule + "\" : hide_icons");
 
          //if(estatusRegistry.succeeded())
          //{
 
-             regkey._set("IconsVisible", 1);
+         regkey._set("IconsVisible", 1);
 
          //}
 
          //if(estatusRegistry.succeeded())
          //{
-          
-             regkey._set("ReinstallCommand", "\"" + strModule + "\" : install");
+
+         regkey._set("ReinstallCommand", "\"" + strModule + "\" : install");
 
          //}
 
          //if(estatusRegistry.succeeded())
          //{
- regkey._set("ShowIconsCommand", "\"" + strModule + "\" : show_icons");
+         regkey._set("ShowIconsCommand", "\"" + strModule + "\" : show_icons");
 
          //}
 
@@ -3063,14 +3081,14 @@ repeat:
 
          string strValue;
 
-          regkey._set("", "\"" + strModule + "\" \"%1\"");
+         regkey._set("", "\"" + strModule + "\" \"%1\"");
 
-   /*      if (!estatusRegistry)
-         {
+         /*      if (!estatusRegistry)
+               {
 
-            estatus = estatusRegistry;
+                  estatus = estatusRegistry;
 
-         }*/
+               }*/
 
       }
 
@@ -3087,12 +3105,12 @@ repeat:
 
          /*auto estatusRegistry =*/ regkey._set(strTargetProgId, pathApplicationCapabilities);
 
- /*        if (!estatusRegistry)
-         {
+         /*        if (!estatusRegistry)
+                 {
 
-            estatus = estatusRegistry;
+                    estatus = estatusRegistry;
 
-         }*/
+                 }*/
 
       }
 
@@ -3168,7 +3186,7 @@ repeat:
 
             string strExtension = straExtension[i];
 
-             regkey._set("." + strExtension, strTargetProgId + "." + strExtension);
+            regkey._set("." + strExtension, strTargetProgId + "." + strExtension);
 
          }
 
@@ -3205,14 +3223,14 @@ repeat:
 
          regkey._set("ApplicationCompany", get_app()->find_string("ApplicationCompany"));
 
-            regkey._set("ApplicationDescription", get_app()->find_string("ApplicationDescription"));
+         regkey._set("ApplicationDescription", get_app()->find_string("ApplicationDescription"));
 
-         
-            regkey._set("ApplicationIcon", get_app()->find_string("ApplicationIcon"));
 
-            regkey._set("ApplicationName", get_app()->find_string("ApplicationName"));
+         regkey._set("ApplicationIcon", get_app()->find_string("ApplicationIcon"));
 
-            regkey._set("AppUserModelId", get_app()->find_string("AppUserModelId"));
+         regkey._set("ApplicationName", get_app()->find_string("ApplicationName"));
+
+         regkey._set("AppUserModelId", get_app()->find_string("AppUserModelId"));
 
          //}
 
@@ -3253,9 +3271,9 @@ repeat:
 
          //{
 
-            ::acme_windows::registry::key regkey(HKEY_CLASSES_ROOT, "." + strExtension + "\\OpenWithProgids", true);
+         ::acme_windows::registry::key regkey(HKEY_CLASSES_ROOT, "." + strExtension + "\\OpenWithProgids", true);
 
-            regkey._set(strTargetProgId, "");;
+         regkey._set(strTargetProgId, "");;
 
          //}
 
@@ -3350,11 +3368,11 @@ repeat:
          {
 
             acmenode()->defer_co_initialize_ex(false);
-            
 
-               SHChangeNotify(SHCNE_ASSOCCHANGED, SHCNF_DWORD | SHCNF_FLUSH, nullptr, nullptr);
 
-               preempt(3_s);
+            SHChangeNotify(SHCNE_ASSOCCHANGED, SHCNF_DWORD | SHCNF_FLUSH, nullptr, nullptr);
+
+            preempt(3_s);
 
             //}
 
@@ -3918,7 +3936,7 @@ repeat:
 //
 //   }
 
-  
+
    //void os_context::browse_file_or_folder(property_set & set)
    //{
 
