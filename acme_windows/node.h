@@ -114,6 +114,8 @@ namespace acme_windows
 
       bool is_process_running(::process_identifier processidentifier) override;
 
+      ::process_identifier_array processes_identifiers();
+
       ::string get_environment_variable(const ::scoped_string & scopedstrEnvironmentVariable) override;
 
       ::string expand_environment_variables(const ::scoped_string & scopedstr) override;

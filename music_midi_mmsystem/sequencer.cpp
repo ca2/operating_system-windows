@@ -1452,7 +1452,7 @@ namespace music
 
             m_eventLongMessage.ResetEvent();
 
-            MMRESULT mmresult = midiOutOpen(&m_hmidiout, uDeviceID, (DWORD_PTR)m_eventLongMessage.m_hsynchronization, 0, CALLBACK_EVENT);
+            MMRESULT mmresult = midiOutOpen(&m_hmidiout, uDeviceID, (DWORD_PTR)m_eventLongMessage.m_handle, 0, CALLBACK_EVENT);
 
             auto estatus = mmresult_status(mmresult);
 
@@ -1684,7 +1684,7 @@ namespace music
 
             event.ResetEvent();
 
-            mmresult = midiOutOpen(&hmidiout, uDeviceID, (DWORD_PTR)event.m_hsynchronization, 0, CALLBACK_THREAD);
+            mmresult = midiOutOpen(&hmidiout, uDeviceID, (DWORD_PTR)event.m_handle, 0, CALLBACK_THREAD);
 
             auto estatus = mmresult_status(mmresult);
 
