@@ -79,8 +79,6 @@ namespace windowing_win32
    buffer::buffer()
    {
 
-      defer_create_synchronization();
-
       m_rectangleLast.Null();
 
    }
@@ -98,6 +96,8 @@ namespace windowing_win32
       //auto estatus = 
       
       ::graphics::bitmap_source_buffer::initialize_graphics_graphics(pimpl);
+
+      defer_create_synchronization();
 
       //if (!estatus)
       //{
