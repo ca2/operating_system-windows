@@ -137,6 +137,12 @@ LRESULT CALLBACK __window_procedure(HWND hwnd, UINT message, WPARAM wparam, LPAR
       output_debug_string("WM_KEYDOWN");
 
    }
+   else if (message == WM_SYSKEYDOWN)
+   {
+
+      output_debug_string("WM_SYSKEYDOWN");
+
+   }
    else if (message == e_message_show_window)
    {
 

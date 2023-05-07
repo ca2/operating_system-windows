@@ -3287,45 +3287,7 @@ namespace windowing_win32
    void window::on_visual_applied()
    {
 
-      //rects_from_os();
-
-      //::user::window::on_visual_applied();
-
    }
-
-
-   // void window::window_apply_visual(const ::user::window_state & windowstate)
-   // {
-
-   //    return ::user::window::window_apply_visual(windowstate);
-
-   // }
-
-
-   //bool window::_is_window_visible()
-   //{
-
-   //   try
-   //   {
-
-   //      if (!::IsWindowVisible(get_hwnd()))
-   //      {
-
-   //         return false;
-
-   //      }
-
-   //      return true;
-
-   //   }
-   //   catch (...)
-   //   {
-
-   //      return false;
-
-   //   }
-
-   //}
 
 
    void window::ShowOwnedPopups(bool bShow)
