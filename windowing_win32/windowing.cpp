@@ -1370,7 +1370,7 @@ namespace windowing_win32
    }
 
 
-   ::user::interaction * windowing::create_message_window(const ::string & pszName, ::user::interaction_listener * pinteractionlistener)
+   ::pointer < ::user::interaction > windowing::create_message_window(const ::string & pszName, ::user::interaction_listener * pinteractionlistener)
    {
 
       auto pmessagewindow = __create_new < message_window >();
