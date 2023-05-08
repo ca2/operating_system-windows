@@ -24,7 +24,7 @@ namespace apex_windows
 
 #ifdef WINDOWS
 
-#ifdef OSBIT == 64
+#if OSBIT == 64
 
          m_strPlatform = "x64";
 

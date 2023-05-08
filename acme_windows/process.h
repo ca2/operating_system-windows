@@ -16,7 +16,7 @@ namespace acme_windows
 
 
    template < typename PRED >
-   bool predicate_process_module(u32 processid, PRED pred)
+   bool predicate_process_module(::process_identifier processidentifier, PRED pred)
    {
 
       HANDLE hModuleSnap = INVALID_HANDLE_VALUE;
@@ -25,7 +25,9 @@ namespace acme_windows
 
       bool bStopped = false;
 
-      hModuleSnap = CreateToolhelp32Snapshot(TH32CS_SNAPMODULE, processid);
+      DWORD dwProcess = (DWORD) processidentifier;
+
+      hModuleSnap = CreateToolhelp32Snapshot(TH32CS_SNAPMODULE, dwProcess);
 
       if (hModuleSnap == INVALID_HANDLE_VALUE)
       {

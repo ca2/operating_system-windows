@@ -1109,7 +1109,9 @@ namespace acme_windows
 
       u32 i;
 
-      hProcess = OpenProcess(PROCESS_QUERY_INFORMATION | PROCESS_VM_READ, false, processidentifier);
+      DWORD dwProcess = (DWORD)processidentifier;
+
+      hProcess = OpenProcess(PROCESS_QUERY_INFORMATION | PROCESS_VM_READ, false, dwProcess);
 
       if (nullptr == hProcess)
       {
@@ -1396,7 +1398,9 @@ namespace acme_windows
 
       //return strName;
 
-      HANDLE hProcess = OpenProcess(PROCESS_QUERY_INFORMATION | PROCESS_VM_READ, false, processidentifier);
+      DWORD dwProcess = (DWORD)processidentifier;
+
+      HANDLE hProcess = OpenProcess(PROCESS_QUERY_INFORMATION | PROCESS_VM_READ, false, dwProcess);
 
       if (hProcess == nullptr)
       {
@@ -1933,7 +1937,9 @@ namespace acme_windows
    bool node::is_process_running(::process_identifier processidentifier)
    {
 
-      HANDLE process = ::OpenProcess(SYNCHRONIZE, false, processidentifier);
+      DWORD dwProcess = (DWORD)processidentifier;
+
+      HANDLE process = ::OpenProcess(SYNCHRONIZE, false, dwProcess);
 
       DWORD ret = ::WaitForSingleObject(process, 0);
 
