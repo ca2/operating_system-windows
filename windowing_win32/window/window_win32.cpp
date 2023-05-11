@@ -149,6 +149,12 @@ LRESULT CALLBACK __window_procedure(HWND hwnd, UINT message, WPARAM wparam, LPAR
       output_debug_string("e_message_show_window");
 
    }
+   else if (message == e_message_left_button_double_click)
+   {
+
+      INFORMATION("e_message_left_button_double_click");
+
+   }
 
    if (is_registered_windows_message(message))
    {
@@ -601,8 +607,8 @@ wstring windowing::_windows_get_user_interaction_window_class(::user::interactio
 
    wndcls.cbWndExtra = wndcls.cbClsExtra = 40;
 
-   if (etype == ::user::interaction::type_frame
-      || etype == ::user::interaction::type_impact)
+   if (etype == ::user::interaction::e_type_frame
+      || etype == ::user::interaction::e_type_impact)
    {
 
       wndcls.style = CS_DBLCLKS | CS_HREDRAW | CS_VREDRAW | CS_OWNDC;
