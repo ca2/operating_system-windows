@@ -45,14 +45,14 @@ namespace acme_windows
          void close();
 
          
-         bool value(void * pvalue, const ::scoped_string & scopedstrValueName, DWORD & dwType, ::u32 & cbValue);
-         bool _value(void * pvalue, const ::scoped_string & scopedstrValueName, DWORD & dwType, ::u32& cbValue);
+         bool value(void * pvalue, const ::scoped_string & scopedstrValueName, DWORD & dwType, DWORD & cbValue);
+         bool _value(void * pvalue, const ::scoped_string & scopedstrValueName, DWORD & dwType, DWORD & cbValue);
 
-         void _set_value(const void* pvalue, const ::scoped_string & scopedstrValueName, ::u32 dwType, ::u32 cbValue);
+         void _set_value(const void* pvalue, const ::scoped_string & scopedstrValueName, DWORD dwType, DWORD cbValue);
 
 
-         bool value_type_and_size(const ::scoped_string & scopedstrValueName, DWORD & dwType, ::u32 & cbValue);
-         bool _value_type_and_size(const ::scoped_string & scopedstrValueName, DWORD & dwType, ::u32& cbValue) { return _value(nullptr, scopedstrValueName, dwType, cbValue); }
+         bool value_type_and_size(const ::scoped_string & scopedstrValueName, DWORD & dwType, DWORD & cbValue);
+         bool _value_type_and_size(const ::scoped_string & scopedstrValueName, DWORD & dwType, DWORD & cbValue) { return _value(nullptr, scopedstrValueName, dwType, cbValue); }
 
 
          bool get(const ::scoped_string & scopedstrValueName, DWORD & dwValue);
@@ -120,7 +120,7 @@ namespace acme_windows
 
 CLASS_DECL_ACME_WINDOWS void windows_registry_initialize();
 
-CLASS_DECL_ACME_WINDOWS int WinRegGetValueW(HKEY hkey, const ::wide_character * pSubKey, const ::wide_character * lpValue, ::u32 dwFlags, LPDWORD pdwType, PVOID pvData, LPDWORD pcbData);
+CLASS_DECL_ACME_WINDOWS int WinRegGetValueW(HKEY hkey, const ::wide_character * pSubKey, const ::wide_character * lpValue, DWORD dwFlags, LPDWORD pdwType, PVOID pvData, LPDWORD pcbData);
 
 CLASS_DECL_ACME_WINDOWS string file_get_mozilla_firefox_plugin_container_path();
 

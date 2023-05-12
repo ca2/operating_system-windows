@@ -104,6 +104,14 @@ namespace acme_windows
    }
 
 
+   void main_window::post_application_exit()
+   {
+
+      ::PostMessage(m_hwnd, e_message_application_exit, 0, 0);
+
+   }
+
+
    ::string main_window::get_window_text(const ::iptr_array & idPath)
    {
 

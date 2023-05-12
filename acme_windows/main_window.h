@@ -26,8 +26,11 @@ namespace acme_windows
 
       void post_close() override;
 
+      void post_application_exit() override;
+
       ::string get_window_text(const ::iptr_array & idPath) override;
       ::string indexed_get_window_text(const ::iptr_array & idPath) override;
+
 
    };
 

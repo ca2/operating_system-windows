@@ -1100,8 +1100,8 @@ namespace acme_windows
 
       DWORD cbNeeded;
 
-      while(!EnumProcessModules(hProcess, hmodulea.data(), hmodulea.get_size_in_bytes(), &cbNeeded)
-         || cbNeeded < hmodulea.get_size_in_bytes())
+      while(!EnumProcessModules(hProcess, hmodulea.data(), (DWORD) hmodulea.get_size_in_bytes(), &cbNeeded)
+         || hmodulea.get_size_in_bytes() < cbNeeded)
       {
 
          if (hmodulea.get_count() > 1024 * 1024)
@@ -1110,6 +1110,8 @@ namespace acme_windows
             return {};
 
          }
+
+         hmodulea.set_size(hmodulea.get_size() * 2);
 
       }
 
@@ -1122,7 +1124,7 @@ namespace acme_windows
       for(auto & hmodule : hmodulea)
       {
 
-         if (GetModuleFileNameExW(hProcess, hmodule, wchara.data(), wchara.size()))
+         if (GetModuleFileNameExW(hProcess, hmodule, wchara.data(), (DWORD) wchara.size()))
          {
 
             patha.add(wchara.data());
@@ -1138,25 +1140,25 @@ namespace acme_windows
    }
 
 
-   ::file::path_array node::modules_paths()
-   {
+   //::file::path_array node::modules_paths()
+   //{
 
-      auto processidentifiera = processes_identifiers();
+   //   auto processidentifiera = processes_identifiers();
 
-      ::file::path_array patha;
+   //   ::file::path_array patha;
 
-      for (auto processidentifier : processidentifiera)
-      {
+   //   for (auto processidentifier : processidentifiera)
+   //   {
 
-         auto pathaProcessModules = process_identifier_modules_paths(processidentifier);
+   //      auto pathaProcessModules = process_identifier_modules_paths(processidentifier);
 
-         patha.append_unique_ci(pathaProcessModules);
+   //      patha.append_unique_ci(pathaProcessModules);
 
-      }
+   //   }
 
-      return ::transfer(patha);
+   //   return ::transfer(patha);
 
-   }
+   //}
    
 
    bool node::load_modules_diff(string_array & straOld, string_array & straNew, const ::string & strExceptDir)
