@@ -89,7 +89,9 @@ namespace acme_windows
 
       auto processidentifier = papplication->m_processidentifier;
 
-      m_hwnd = process_identifier_main_window(processidentifier);
+      DWORD dwProcess = (DWORD) processidentifier;
+
+      m_hwnd = process_identifier_main_window(dwProcess);
 
    }
 
@@ -112,7 +114,7 @@ namespace acme_windows
       while (i < idPath.size())
       {
 
-         hwnd = ::GetDlgItem(hwnd, idPath[i]);
+         hwnd = ::GetDlgItem(hwnd, (int) idPath[i]);
 
          if (!hwnd)
          {

@@ -137,10 +137,22 @@ LRESULT CALLBACK __window_procedure(HWND hwnd, UINT message, WPARAM wparam, LPAR
       output_debug_string("WM_KEYDOWN");
 
    }
+   else if (message == WM_SYSKEYDOWN)
+   {
+
+      output_debug_string("WM_SYSKEYDOWN");
+
+   }
    else if (message == e_message_show_window)
    {
 
       output_debug_string("e_message_show_window");
+
+   }
+   else if (message == e_message_left_button_double_click)
+   {
+
+      INFORMATION("e_message_left_button_double_click");
 
    }
 
@@ -583,7 +595,7 @@ wstring windowing::_windows_calc_icon_window_class(::user::interaction * puserin
 wstring windowing::_windows_get_user_interaction_window_class(::user::interaction * puserinteraction)
 {
 
-   ::user::interaction::enum_type etype = puserinteraction->get_window_type();
+   ::user::enum_window_type ewindowtype = puserinteraction->get_window_type();
 
    WNDCLASSEXW wndcls;
 
@@ -595,8 +607,8 @@ wstring windowing::_windows_get_user_interaction_window_class(::user::interactio
 
    wndcls.cbWndExtra = wndcls.cbClsExtra = 40;
 
-   if (etype == ::user::interaction::type_frame
-      || etype == ::user::interaction::type_impact)
+   if (ewindowtype == ::user::e_window_type_frame
+      || ewindowtype == ::user::e_window_type_impact)
    {
 
       wndcls.style = CS_DBLCLKS | CS_HREDRAW | CS_VREDRAW | CS_OWNDC;

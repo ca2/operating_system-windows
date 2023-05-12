@@ -208,9 +208,11 @@ namespace apex_windows
          for (auto & processidentifier : processidentifiera)
          {
 
+            DWORD dwProcess = (DWORD) processidentifier;
+
             HANDLE hProcess = ::OpenProcess(PROCESS_QUERY_INFORMATION |
                                              PROCESS_VM_READ,
-                                             false, processidentifier);
+                                             false, dwProcess);
             TerminateProcess(hProcess, (::u32)-1);
             CloseHandle(hProcess);
             /*::EnumWindows((WNDENUMPROC)
@@ -293,13 +295,17 @@ namespace apex_windows
    }
 
 
-   ::file::path os_context::process_identifier_module_path(::process_identifier dwPid)
+   ::file::path os_context::process_identifier_module_path(::process_identifier processidentifier)
    {
+
       string strName = ":<unknown>";
+
+      DWORD dwProcess = (DWORD)processidentifier;
+
       // get a handle to the process.
       HANDLE hProcess = OpenProcess(PROCESS_QUERY_INFORMATION |
                                      PROCESS_VM_READ,
-                                     false, dwPid);
+                                     false, dwProcess);
 
       // get the process name.
 

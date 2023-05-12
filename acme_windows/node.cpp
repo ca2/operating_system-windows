@@ -1910,7 +1910,9 @@ namespace acme_windows
    bool node::is_process_running(::process_identifier processidentifier)
    {
 
-      HANDLE process = ::OpenProcess(SYNCHRONIZE, false, processidentifier);
+      DWORD dwProcess = (DWORD)processidentifier;
+
+      HANDLE process = ::OpenProcess(SYNCHRONIZE, false, dwProcess);
 
       DWORD ret = ::WaitForSingleObject(process, 0);
 
