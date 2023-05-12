@@ -94,7 +94,10 @@ namespace acme_windows
       void run_silent(const ::string & strFunct, const ::string & strstrParams) override;
 
 
-      bool process_modules(string_array & stra, ::process_identifier processidentifier) override;
+      ::file::path_array process_identifier_modules_paths(::process_identifier processidentifier) override;
+
+      
+      //::file::path_array modules_paths() override;
 
 
       bool load_modules_diff(string_array & straOld, string_array & straNew, const ::string & pszExceptDir) override;
@@ -104,9 +107,39 @@ namespace acme_windows
 
       string process_identifier_module_path(::process_identifier processidentifier) override;
 
-      bool is_shared_library_busy(::process_identifier processidentifier, const string_array & stra) override;
+      ////bool is_shared_library_busy(::process_identifier processidentifier, const string_array & stra) override;
 
-      bool is_shared_library_busy(const string_array & stra) override;
+      ////bool is_shared_library_busy(const string_array & stra) override;
+      //bool node::is_shared_library_busy(::process_identifier processidentifier, const string_array & stra)
+      //{
+
+      //   process_modules
+
+      //      straSuffix.surround("\\");
+
+      //   return ::windows::for_each_process_module(processidentifier, [&](auto & moduleentry32)
+      //      {
+
+      //            return !straSuffix.case_insensitive_suffixes(string(moduleentry32.szModule)) && !stra.case_insensitive_contains(string(moduleentry32.szModule));
+
+      //      });
+
+      //}
+
+
+      //bool node::is_shared_library_busy(const string_array & stra)
+      //{
+
+      //   return ::acme_windows::predicate_process([&](auto pid)
+      //      {
+
+      //            return !is_shared_library_busy(pid, stra);
+
+      //      });
+
+      //}
+
+
 
       bool process_contains_module(string & strImage, ::process_identifier processidentifier, const ::string & pszLibrary) override;
 

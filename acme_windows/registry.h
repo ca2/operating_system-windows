@@ -45,18 +45,18 @@ namespace acme_windows
          void close();
 
          
-         bool value(void * pvalue, const ::scoped_string & scopedstrValueName, ::u32 & dwType, ::u32 & cbValue);
-         bool _value(void * pvalue, const ::scoped_string & scopedstrValueName, ::u32& dwType, ::u32& cbValue);
+         bool value(void * pvalue, const ::scoped_string & scopedstrValueName, DWORD & dwType, ::u32 & cbValue);
+         bool _value(void * pvalue, const ::scoped_string & scopedstrValueName, DWORD & dwType, ::u32& cbValue);
 
          void _set_value(const void* pvalue, const ::scoped_string & scopedstrValueName, ::u32 dwType, ::u32 cbValue);
 
 
-         bool value_type_and_size(const ::scoped_string & scopedstrValueName, ::u32 & dwType, ::u32 & cbValue);
-         bool _value_type_and_size(const ::scoped_string & scopedstrValueName, ::u32& dwType, ::u32& cbValue) { return _value(nullptr, scopedstrValueName, dwType, cbValue); }
+         bool value_type_and_size(const ::scoped_string & scopedstrValueName, DWORD & dwType, ::u32 & cbValue);
+         bool _value_type_and_size(const ::scoped_string & scopedstrValueName, DWORD & dwType, ::u32& cbValue) { return _value(nullptr, scopedstrValueName, dwType, cbValue); }
 
 
-         bool get(const ::scoped_string & scopedstrValueName, ::u32 & dwValue);
-         bool _get(const ::scoped_string & scopedstrValueName, ::u32 & dwValue);
+         bool get(const ::scoped_string & scopedstrValueName, DWORD & dwValue);
+         bool _get(const ::scoped_string & scopedstrValueName, DWORD & dwValue);
 
          
          bool get(const ::scoped_string & scopedstrValueName, string & strValue);
@@ -70,8 +70,8 @@ namespace acme_windows
          ::payload get(const ::scoped_string & scopedstrValueName);
 
 
-         void set(const ::scoped_string & scopedstrValueName, ::u32 dwValue);
-         void _set(const ::scoped_string & scopedstrValueName, ::u32 dwValue);
+         void set(const ::scoped_string & scopedstrValueName, DWORD dwValue);
+         void _set(const ::scoped_string & scopedstrValueName, DWORD dwValue);
 
 
          void set(const ::scoped_string & scopedstrValueName, const scoped_string & strValue, int iType = REG_SZ);
@@ -109,10 +109,7 @@ namespace acme_windows
       };
 
       registry();
-      virtual ~registry();
-
-      
-
+      ~registry() override;
 
       
    };
