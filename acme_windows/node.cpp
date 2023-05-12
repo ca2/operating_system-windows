@@ -291,7 +291,7 @@ namespace acme_windows
 
          DWORD dwSystemUseLightTheme = 0;
 
-         key._get("SystemUseLightTheme", dwSystemUseLightTheme);
+         key._get("SystemUsesLightTheme", dwSystemUseLightTheme);
 
          return dwSystemUseLightTheme == 0;
 
