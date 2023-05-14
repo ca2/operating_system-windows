@@ -262,25 +262,11 @@ namespace acme_windows
 
          key.open(HKEY_CURRENT_USER, "Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize");
 
-         ::u32 dw;
+         DWORD dwAppUseLightTheme = 0;
 
-         /*auto estatus =*/ key._get("AppsUseLightTheme", dw);
+         key._get("AppsUseLightTheme", dwAppUseLightTheme);
 
-         //if (::failed(estatus))
-         //{
-
-         /*estatus =*/ key._get("SystemUseLightTheme", dw);
-
-         //   if (::failed(estatus))
-         //   {
-
-         //      return false;
-
-         //   }
-
-         //}
-
-         return dw == 0;
+         return dwAppUseLightTheme == 0;
 
       }
       catch (...)
@@ -303,25 +289,11 @@ namespace acme_windows
 
          key.open(HKEY_CURRENT_USER, "Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize");
 
-         ::u32 dw;
+         DWORD dwSystemUseLightTheme = 0;
 
-         auto ok = key._get("SystemUseLightTheme", dw);
+         key._get("SystemUsesLightTheme", dwSystemUseLightTheme);
 
-         if (!ok)
-         {
-
-            ok = key._get("AppsUseLightTheme", dw);
-
-            if (!ok)
-            {
-
-               return false;
-
-            }
-
-         }
-
-         return dw == 0;
+         return dwSystemUseLightTheme == 0;
 
       }
       catch (...)
@@ -1100,61 +1072,94 @@ namespace acme_windows
    //}
 
 
-   bool node::process_modules(string_array & stra, ::process_identifier processidentifier)
+   ::file::path_array node::process_identifier_modules_paths(::process_identifier processidentifier)
    {
 
       HANDLE hProcess;
 
-      DWORD cbNeeded;
+      //u32 i;
 
-      u32 i;
-
-      DWORD dwProcess = (DWORD)processidentifier;
+      DWORD dwProcess = (DWORD) processidentifier;
 
       hProcess = OpenProcess(PROCESS_QUERY_INFORMATION | PROCESS_VM_READ, false, dwProcess);
 
       if (nullptr == hProcess)
       {
 
-         return false;
+         return {};
 
       }
 
       const i32 iMaxModuleCount = 1024 * 8;
 
-      HMODULE * hMods = new HMODULE[iMaxModuleCount];
+      ::array < HMODULE > hmodulea;
 
-      const i32 iImageSize = MAX_PATH * 8;
+      hmodulea.set_size(iMaxModuleCount);
 
-      wchar_t * szImage = (wchar_t *)::memory_allocate(iImageSize * 2);
+      ::file::path_array patha;
 
-      if (EnumProcessModules(hProcess, hMods, sizeof(HMODULE) * iMaxModuleCount, &cbNeeded))
+      DWORD cbNeeded;
+
+      while(!EnumProcessModules(hProcess, hmodulea.data(), (DWORD) hmodulea.get_size_in_bytes(), &cbNeeded)
+         || hmodulea.get_size_in_bytes() < cbNeeded)
       {
 
-         for (i = 0; i < (cbNeeded / sizeof(HMODULE)); i++)
+         if (hmodulea.get_count() > 1024 * 1024)
          {
 
-            if (GetModuleFileNameExW(hProcess, hMods[i], szImage, iImageSize / sizeof(char)))
-            {
+            return {};
 
-               stra.add(string(szImage));
+         }
 
-            }
+         hmodulea.set_size(hmodulea.get_size() * 2);
+
+      }
+
+      hmodulea.set_size(cbNeeded / sizeof(HMODULE));
+
+      ::array < WCHAR > wchara;
+
+      wchara.set_size(MAX_PATH * 8);
+
+      for(auto & hmodule : hmodulea)
+      {
+
+         if (GetModuleFileNameExW(hProcess, hmodule, wchara.data(), (DWORD) wchara.size()))
+         {
+
+            patha.add(wchara.data());
 
          }
 
       }
 
-      memory_free_debug(szImage, 0);
-
-      delete hMods;
-
       CloseHandle(hProcess);
 
-      return true;
+      return ::transfer(patha);
 
    }
 
+
+   //::file::path_array node::modules_paths()
+   //{
+
+   //   auto processidentifiera = processes_identifiers();
+
+   //   ::file::path_array patha;
+
+   //   for (auto processidentifier : processidentifiera)
+   //   {
+
+   //      auto pathaProcessModules = process_identifier_modules_paths(processidentifier);
+
+   //      patha.append_unique_ci(pathaProcessModules);
+
+   //   }
+
+   //   return ::transfer(patha);
+
+   //}
+   
 
    bool node::load_modules_diff(string_array & straOld, string_array & straNew, const ::string & strExceptDir)
    {
@@ -1398,7 +1403,7 @@ namespace acme_windows
 
       //return strName;
 
-      DWORD dwProcess = (DWORD)processidentifier;
+      DWORD dwProcess = (DWORD) processidentifier;
 
       HANDLE hProcess = OpenProcess(PROCESS_QUERY_INFORMATION | PROCESS_VM_READ, false, dwProcess);
 
@@ -1465,36 +1470,6 @@ namespace acme_windows
    //else
    //RaiseLastOSError;
    //end;
-
-
-   bool node::is_shared_library_busy(::process_identifier processidentifier, const string_array & stra)
-   {
-
-      string_array straSuffix(stra);
-
-      straSuffix.surround("\\");
-
-      return ::acme_windows::predicate_process_module(processidentifier, [&](auto & me32)
-         {
-
-               return !straSuffix.case_insensitive_suffixes(string(me32.szModule)) && !stra.case_insensitive_contains(string(me32.szModule));
-
-         });
-
-   }
-
-
-   bool node::is_shared_library_busy(const string_array & stra)
-   {
-
-      return ::acme_windows::predicate_process([&](auto pid)
-         {
-
-               return !is_shared_library_busy(pid, stra);
-
-         });
-
-   }
 
 
    bool node::process_contains_module(string & strImage, ::process_identifier processidentifier, const ::string & pszLibrary)
@@ -1937,7 +1912,9 @@ namespace acme_windows
    bool node::is_process_running(::process_identifier processidentifier)
    {
 
-      HANDLE process = ::OpenProcess(SYNCHRONIZE, false, processidentifier);
+      DWORD dwProcess = (DWORD)processidentifier;
+
+      HANDLE process = ::OpenProcess(SYNCHRONIZE, false, dwProcess);
 
       DWORD ret = ::WaitForSingleObject(process, 0);
 

@@ -24,9 +24,9 @@ namespace acme_windows
    ::payload registry::key::get(const ::scoped_string & scopedstrValueName)
    {
 
-      ::u32 dwType;
+      DWORD dwType;
 
-      ::u32 cbValue;
+      DWORD cbValue;
 
       /* auto estatus = */ _value_type_and_size(scopedstrValueName, dwType, cbValue);
 
@@ -40,7 +40,7 @@ namespace acme_windows
       if (dwType == REG_DWORD)
       {
 
-         ::u32 uValue;
+         DWORD uValue;
 
          auto estatus = _value(&uValue, scopedstrValueName, dwType, cbValue);
 
@@ -51,7 +51,7 @@ namespace acme_windows
 
          }
 
-         return uValue;
+         return (::u32) uValue;
 
       }
       else if (dwType == REG_SZ)
@@ -166,7 +166,7 @@ namespace acme_windows
    }
 
 
-   bool registry::key::value(void * pvalue, const ::scoped_string & scopedstrValueName, ::u32 & dwType, ::u32 & cbValue)
+   bool registry::key::value(void * pvalue, const ::scoped_string & scopedstrValueName, DWORD & dwType, DWORD & cbValue)
    { 
       
       return _value(pvalue, scopedstrValueName, dwType, cbValue);
@@ -200,7 +200,7 @@ namespace acme_windows
    }
 
 
-   bool registry::key::_value(void* pvalue, const ::scoped_string & scopedstrValueName, ::u32& dwType, ::u32& cbValue)
+   bool registry::key::_value(void* pvalue, const ::scoped_string & scopedstrValueName, DWORD& dwType, DWORD& cbValue)
    {
 
       if (ERROR_SUCCESS != ::RegQueryValueExW(m_hkey, wstring(scopedstrValueName), nullptr, (LPDWORD) &dwType, (byte*)pvalue, (LPDWORD) &cbValue))
@@ -215,12 +215,12 @@ namespace acme_windows
    }
 
 
-   bool registry::key::_get(const ::scoped_string & scopedstrValueName, ::u32 & dwValue)
+   bool registry::key::_get(const ::scoped_string & scopedstrValueName, DWORD & dwValue)
    {
       
-      ::u32 dwType;
+      DWORD dwType;
 
-      ::u32 cbValue;
+      DWORD cbValue;
       
       auto bOk = _value_type_and_size(scopedstrValueName, dwType, cbValue);
 
@@ -257,9 +257,9 @@ namespace acme_windows
    bool registry::key::_get(const ::scoped_string & scopedstrValueName, string &str)
    {
 
-      ::u32 dwType;
+      DWORD dwType;
 
-      ::u32 cbValue;
+      DWORD cbValue;
 
       bool bOk = _value_type_and_size(scopedstrValueName, dwType, cbValue);
 
@@ -302,9 +302,9 @@ namespace acme_windows
    bool registry::key::_get(const ::scoped_string & scopedstrValueName, memory & mem)
    {
 
-      ::u32 dwType;
+      DWORD dwType;
 
-      ::u32 cbValue;
+      DWORD cbValue;
 
       auto bOk = _value_type_and_size(scopedstrValueName, dwType, cbValue);
 
@@ -340,7 +340,7 @@ namespace acme_windows
    }
 
    
-   void registry::key::_set_value(const void* pvalue, const ::scoped_string & scopedstrValueName, ::u32 dwType, ::u32 cbValue)
+   void registry::key::_set_value(const void* pvalue, const ::scoped_string & scopedstrValueName, DWORD dwType, DWORD cbValue)
    {
 
       auto lstatus = RegSetValueExW(m_hkey, scopedstrValueName.is_empty() ? nullptr : wstring(scopedstrValueName), 0, dwType, (const byte *) pvalue, cbValue);
@@ -359,7 +359,7 @@ namespace acme_windows
    }
 
 
-   bool registry::key::value_type_and_size(const ::scoped_string & scopedstrValueName, ::u32 & dwType, ::u32 & cbValue)
+   bool registry::key::value_type_and_size(const ::scoped_string & scopedstrValueName, DWORD & dwType, DWORD & cbValue)
    {
 
       return _value_type_and_size(scopedstrValueName, dwType, cbValue);
@@ -380,7 +380,7 @@ namespace acme_windows
 
       wstring wstr(scopedstrValue);
 
-      return _set_value(wstr.c_str(), scopedstrValueName, iType, (::u32) wstr.character_count_in_bytes());
+      return _set_value(wstr.c_str(), scopedstrValueName, iType, (DWORD) wstr.character_count_in_bytes());
 
    }
 
@@ -396,12 +396,12 @@ namespace acme_windows
    void registry::key::_set_binary(const ::scoped_string & scopedstrValueName, const memory & memValue)
    {
 
-      return _set_value(memValue.data(), scopedstrValueName, REG_BINARY, (::u32) memValue.size());
+      return _set_value(memValue.data(), scopedstrValueName, REG_BINARY, (DWORD) memValue.size());
 
    }
 
 
-   void registry::key::_set(const ::scoped_string & scopedstrValueName, ::u32 dwValue)
+   void registry::key::_set(const ::scoped_string & scopedstrValueName, DWORD dwValue)
    {
 
       return _set_value(&dwValue, scopedstrValueName, REG_DWORD, sizeof(dwValue));
@@ -409,7 +409,7 @@ namespace acme_windows
    }
 
 
-   bool registry::key::get(const ::scoped_string & scopedstrValueName, ::u32 & dwValue)
+   bool registry::key::get(const ::scoped_string & scopedstrValueName, DWORD & dwValue)
    { 
       
       return _get(scopedstrValueName, dwValue);
@@ -439,7 +439,7 @@ namespace acme_windows
    }
 
 
-   void registry::key::set(const ::scoped_string & scopedstrValueName, ::u32 dwValue)
+   void registry::key::set(const ::scoped_string & scopedstrValueName, DWORD dwValue)
    {
       
        _set(scopedstrValueName, dwValue);
@@ -601,7 +601,7 @@ namespace acme_windows
    void registry::key::_ls_value(string_array & stra)
    {
       
-      ::u32 dwMaxValueNameLen = 16384;
+      DWORD dwMaxValueNameLen = 16384;
 
       wstring hwstr;
       
@@ -701,7 +701,7 @@ LSTATUS
 LPFN_RegGetValueW g_pfnRegGetValueW = nullptr;
 
 
-int WinRegGetValueW(HKEY hkey, const ::wide_character * pSubKey, const ::wide_character * lpValue, ::u32 dwFlags, LPDWORD pdwType, PVOID pvData, LPDWORD pcbData)
+int WinRegGetValueW(HKEY hkey, const ::wide_character * pSubKey, const ::wide_character * lpValue, DWORD dwFlags, LPDWORD pdwType, PVOID pvData, LPDWORD pcbData)
 {
 
    if (g_pfnRegGetValueW != nullptr)

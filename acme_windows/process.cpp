@@ -4,6 +4,9 @@
 #include "acme/primitive/primitive/payload.h"
 
 
+#include "acme/_operating_system.h"
+
+
 #include <ShellApi.h>
 #include <Wtsapi32.h>
 #include <Userenv.h>

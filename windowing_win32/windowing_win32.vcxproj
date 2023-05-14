@@ -722,7 +722,6 @@
     <ClInclude Include="keyboard.h" />
     <ClInclude Include="keyboard_hook.h" />
     <ClInclude Include="message_window.h" />
-    <ClInclude Include="message_window_listener.h" />
     <ClInclude Include="monitor.h" />
     <ClInclude Include="mouse_hook.h" />
     <ClInclude Include="node.h" />

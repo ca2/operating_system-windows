@@ -1943,77 +1943,9 @@ namespace windows
       
    }
 
-
-   //bool interaction_impl::GetUpdateRect(RECTANGLE_I32 * prectangle, bool bErase)
-
-   //{
-   //   ASSERT(_is_window());
-   //   return ::GetUpdateRect(get_handle(), prectangle, bErase) != false;
-
-   //}
-
-   //
-   //i32 interaction_impl::GetUpdateRgn(::draw2d::region* pRgn, bool bErase)
-   //{
-   //
-   //   //ASSERT(_is_window());
-   //   //return ::GetUpdateRgn(get_handle(), (HRGN)pRgn->get_os_data(), bErase);
-
-   //   return 0;
-
-   //}
-
-
-   //void interaction_impl::Invalidate(bool bErase)
-   //{
-   //   ASSERT(_is_window());
-   //   ::InvalidateRect(get_handle(), nullptr, bErase);
-   //}
-
-   //void interaction_impl::InvalidateRect(const RECTANGLE_I32 * rectangle, bool bErase)
-
-   //{
-   //   ASSERT(_is_window());
-   //   ::InvalidateRect(get_handle(), rectangle, bErase);
-
-   //}
-
-   //
-   //void interaction_impl::InvalidateRgn(::draw2d::region* pRgn, bool bErase)
-   //{
-   //   
-   //   //ASSERT(_is_window());
-   //   //::InvalidateRgn(get_handle(), (HRGN)pRgn->get_os_data(), bErase);
-
-   //}
-
-
-   //void interaction_impl::ValidateRect(const RECTANGLE_I32 * rectangle_i32)
-
-   //{
-
-   //   ASSERT(_is_window());
-
-   //   ::ValidateRect(get_handle(), rectangle);
-
-
-   //}
-
-
-   //void interaction_impl::ValidateRgn(::draw2d::region* pRgn)
-   //{
-
-   //   ASSERT(_is_window());
-
-   //   //::ValidateRgn(get_handle(), (HRGN)pRgn->get_os_data());
-
-   //}
-
-
+   
    void interaction_impl::on_visual_applied()
    {
-
-      //rects_from_os();
 
       ::user::interaction_impl::on_visual_applied();
 

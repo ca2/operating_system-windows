@@ -52,25 +52,18 @@ namespace aura_windows
 
          key.open(HKEY_CURRENT_USER, "Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize");
 
-         ::u32 dw;
+         DWORD dwAppsUseLightTheme = 0;
 
-         auto estatus = key._get("AppsUseLightTheme", dw);
+         auto estatus = key._get("AppsUseLightTheme", dwAppsUseLightTheme);
 
          if (::failed(estatus))
          {
 
-            estatus = key._get("SystemUseLightTheme", dw);
-
-            if (::failed(estatus))
-            {
-
-               return false;
-
-            }
+            return false;
 
          }
 
-         return dw == 0;
+         return dwAppsUseLightTheme == 0;
 
       }
       catch (...)
@@ -93,25 +86,18 @@ namespace aura_windows
 
          key.open(HKEY_CURRENT_USER, "Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize");
 
-         ::u32 dw;
+         DWORD dwSystemUseLightTheme;
 
-         auto estatus = key._get("SystemUseLightTheme", dw);
+         auto estatus = key._get("SystemUseLightTheme", dwSystemUseLightTheme);
 
          if (::failed(estatus))
          {
 
-            estatus = key._get("AppsUseLightTheme", dw);
-
-            if (::failed(estatus))
-            {
-
-               return false;
-
-            }
+            return false;
 
          }
 
-         return dw == 0;
+         return dwSystemUseLightTheme == 0;
 
       }
       catch (...)

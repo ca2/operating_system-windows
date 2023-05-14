@@ -216,9 +216,6 @@
     <ClInclude Include="message_window.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="message_window_listener.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Header Files">
