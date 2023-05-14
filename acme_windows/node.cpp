@@ -1077,7 +1077,7 @@ namespace acme_windows
 
       HANDLE hProcess;
 
-      u32 i;
+      //u32 i;
 
       DWORD dwProcess = (DWORD) processidentifier;
 
