@@ -396,41 +396,20 @@ pacmedir->roaming();
    ::file::path acme_directory::program_files_x86()
    {
 
-      wstring wstrModuleFolder(e_get_buffer, sizeof(unichar) * 8);
+      wstring wstrModuleFolder;
 
-      wstring wstrModuleFilePath(e_get_buffer, sizeof(unichar) * 8);
+      wstring wstrModuleFilePath;
 
-      wcscpy(wstrModuleFilePath, _wgetenv(L"PROGRAMFILES(X86)"));
-
-      if (wcslen(wstrModuleFilePath) == 0)
-      {
-
-         SHGetSpecialFolderPathW(nullptr, wstrModuleFilePath, CSIDL_PROGRAM_FILES, false);
-
-      }
-
-      wstrModuleFilePath.trim_right(L"\\/");
-
-      wcscpy(wstrModuleFolder, wstrModuleFilePath);
-
-      return string(wstrModuleFolder);
-
-   }
-
-
-   ::file::path acme_directory::program_files()
-   {
-
-      wstring wstrModuleFolder(e_get_buffer, sizeof(unichar) * 8);
-
-      wstring wstrModuleFilePath(e_get_buffer, sizeof(unichar) * 8);
-
-      wcscpy(wstrModuleFilePath, _wgetenv(L"PROGRAMW6432"));
+      wstrModuleFilePath = _wgetenv(L"PROGRAMFILES(X86)");
 
       if (wcslen(wstrModuleFilePath) == 0)
       {
 
-         SHGetSpecialFolderPathW(nullptr, wstrModuleFilePath, CSIDL_PROGRAM_FILES, false);
+         auto p = wstrModuleFilePath.get_string_buffer(MAX_PATH * 8);
+
+         SHGetSpecialFolderPathW(nullptr, p, CSIDL_PROGRAM_FILES, false);
+
+         wstrModuleFilePath.release_string_buffer();
 
       }
 
@@ -440,7 +419,34 @@ pacmedir->roaming();
 
       return string(wstrModuleFolder);
 
+   }
 
+
+   ::file::path acme_directory::program_files()
+   {
+
+      wstring wstrModuleFolder;
+
+      wstring wstrModuleFilePath;
+
+      wstrModuleFilePath = _wgetenv(L"PROGRAMW6432");
+
+      if (wcslen(wstrModuleFilePath) == 0)
+      {
+
+         auto p = wstrModuleFilePath.get_string_buffer(MAX_PATH * 8);
+
+         SHGetSpecialFolderPathW(nullptr, p, CSIDL_PROGRAM_FILES, false);
+
+         wstrModuleFilePath.release_string_buffer();
+
+      }
+
+      wstrModuleFilePath.trim_right(L"\\/");
+
+      wstrModuleFolder = wstrModuleFilePath;
+
+      return string(wstrModuleFolder);
 
    }
 
@@ -1211,14 +1217,18 @@ pacmedir->create CreateDirectoryW last error(%d)=%s", dwError, pszError);
 
 #ifdef WINDOWS
 
-         wstring path(e_get_buffer, MAX_PATH * 8);
+         wstring path;
 
-         if (!GetModuleFileNameW(nullptr, path, (::u32)path.size()))
+         auto p = path.get_string_buffer(MAX_PATH * 8);
+
+         if (!GetModuleFileNameW(nullptr, p, (::u32)path.size()))
          {
 
             return "";
 
          }
+
+         path.release_string_buffer();
 
          string strPath(path);
 

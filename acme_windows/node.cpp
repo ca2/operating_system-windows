@@ -1109,7 +1109,9 @@ namespace acme_windows
 
       u32 i;
 
-      hProcess = OpenProcess(PROCESS_QUERY_INFORMATION | PROCESS_VM_READ, false, processidentifier);
+      DWORD dwProcess = (DWORD)processidentifier;
+
+      hProcess = OpenProcess(PROCESS_QUERY_INFORMATION | PROCESS_VM_READ, false, dwProcess);
 
       if (nullptr == hProcess)
       {
@@ -1396,7 +1398,9 @@ namespace acme_windows
 
       //return strName;
 
-      HANDLE hProcess = OpenProcess(PROCESS_QUERY_INFORMATION | PROCESS_VM_READ, false, processidentifier);
+      DWORD dwProcess = (DWORD)processidentifier;
+
+      HANDLE hProcess = OpenProcess(PROCESS_QUERY_INFORMATION | PROCESS_VM_READ, false, dwProcess);
 
       if (hProcess == nullptr)
       {
@@ -2017,7 +2021,9 @@ namespace acme_windows
 
       StartupInfo.wShowWindow = SW_HIDE;
 
-      if (!CreateProcessW(nullptr, wstring(pszCommandLine), nullptr, nullptr, false,
+      wstring wstrCommandLine(pszCommandLine);
+
+      if (!CreateProcessW(nullptr, (WCHAR *) wstrCommandLine.c_str(), nullptr, nullptr, false,
          CREATE_NEW_CONSOLE,
          nullptr,
          nullptr,
@@ -2114,7 +2120,9 @@ namespace acme_windows
       //the parameters passed to the application being run from the command window.
       ansi_concatenate(Args, strstrParams);
 
-      if (!CreateProcessW(nullptr, wstring(Args), nullptr, nullptr, false,
+      wstring wstrArguments(Args);
+
+      if (!CreateProcessW(nullptr, (WCHAR *) wstrArguments.c_str(), nullptr, nullptr, false,
          CREATE_NEW_CONSOLE,
          nullptr,
          nullptr,
@@ -3289,7 +3297,7 @@ namespace acme_windows
 
       ZeroMemory(&pi, sizeof(pi));
 
-      if (!CreateProcessW(nullptr, wstr, NULL, NULL, TRUE, CREATE_NO_WINDOW, NULL, NULL, &si, &pi))
+      if (!CreateProcessW(nullptr, (WCHAR *) wstr.c_str(), NULL, NULL, TRUE, CREATE_NO_WINDOW, NULL, NULL, &si, &pi))
       {
 
          ::CloseHandle(hOutRd);
