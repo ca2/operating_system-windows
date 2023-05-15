@@ -1119,7 +1119,9 @@ namespace windowing_win32
    bool display::impl_set_wallpaper(index iScreen, string strLocalImagePath)
    {
 
-      return SystemParametersInfoW(SPI_SETDESKWALLPAPER, 0, wstring(strLocalImagePath), SPIF_UPDATEINIFILE | SPIF_SENDCHANGE) != false;
+      wstring wstrLocalImagetPath(strLocalImagePath);
+
+      return SystemParametersInfoW(SPI_SETDESKWALLPAPER, 0, (PVOID) wstr.c_str(), SPIF_UPDATEINIFILE | SPIF_SENDCHANGE) != false;
 
    }
 
