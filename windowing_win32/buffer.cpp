@@ -205,8 +205,6 @@ namespace windowing_win32
 
       update_buffer(sizeWindow);
 
-      //return pimageBuffer->get_graphics();
-
       return double_buffer::on_begin_draw();
 
    }
@@ -222,7 +220,7 @@ namespace windowing_win32
 
       }
 
-      os_buffer & buffer = m_osbuffera[m_iCurrentBuffer];
+      os_buffer & buffer = m_osbuffera[m_bSingleBufferMode ? 0 : m_iCurrentBuffer];
 
       auto size = sizeParam;
 
@@ -411,7 +409,7 @@ namespace windowing_win32
 
       index iScreenBuffer = get_screen_index();
 
-      auto & buffer = m_osbuffera[iScreenBuffer];
+      auto & buffer = m_osbuffera[m_bSingleBufferMode ? 0 : iScreenBuffer];
 
       auto size = buffer.m_pixmap.size();
 

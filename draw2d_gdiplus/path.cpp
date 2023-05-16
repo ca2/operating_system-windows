@@ -211,7 +211,7 @@ namespace draw2d_gdiplus
    }
 
 
-   bool path::internal_add_rect(double x,double y, double cx, double cy)
+   bool path::internal_add_rect(double x,double y, double cx, double cy, ::draw2d::graphics * pgraphics)
    {
 
       if (m_ppath == nullptr)
@@ -236,6 +236,10 @@ namespace draw2d_gdiplus
          try
          {
 
+            rectangle.X = (Gdiplus::REAL)(rectangle.X + pgraphics->m_pointAddShapeTranslate.x);
+
+            rectangle.Y = (Gdiplus::REAL)(rectangle.Y + pgraphics->m_pointAddShapeTranslate.y);
+
             bOk2 = m_ppath->AddRectangle(rectangle) == Gdiplus::Status::Ok;
 
          }
@@ -258,6 +262,10 @@ namespace draw2d_gdiplus
 
          try
          {
+
+            rectangle.X = (Gdiplus::REAL)(rectangle.X + pgraphics->m_pointAddShapeTranslate.x);
+
+            rectangle.Y = (Gdiplus::REAL)(rectangle.Y + pgraphics->m_pointAddShapeTranslate.y);
 
             bOk2 = m_ppath->AddRectangle(rectangle) == Gdiplus::Status::Ok;
 
@@ -667,7 +675,7 @@ namespace draw2d_gdiplus
    bool path::_set(::draw2d::graphics * pgraphics, const ::rectangle & rectangle)
    {
 
-      return internal_add_rect(rectangle.left, rectangle.top,  rectangle.width(), rectangle.height());
+      return internal_add_rect(rectangle.left, rectangle.top,  rectangle.width(), rectangle.height(), pgraphics);
 
    }
 
