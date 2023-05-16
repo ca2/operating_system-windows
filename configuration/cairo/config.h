@@ -6,7 +6,9 @@
 
 
 #ifdef _WIN32
+#ifndef _CRT_SECURE_NO_WARNINGS
 #define _CRT_SECURE_NO_WARNINGS
+#endif
 #define HAVE_STDINT_H 1
 #endif
 

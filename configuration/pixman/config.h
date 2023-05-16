@@ -1,8 +1,9 @@
 ﻿// Created by camilo on 2023-02-28 01:35 BRT <3ThomasBorregaardSorensen!!
 #pragma once
 
-
+#ifndef _CRT_SECURE_NO_WARNINGS
 #define _CRT_SECURE_NO_WARNINGS
+#endif
 
 
 
