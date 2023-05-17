@@ -64,10 +64,10 @@ namespace draw2d_gdiplus
    }
 
    
-   bool image::on_host_read_pixels(const ::pixmap* pixmap)
+   bool image::on_host_read_pixels(::pixmap* ppixmapHost) const
    {
 
-      return false;
+      return ::image::on_host_read_pixels(ppixmapHost);
 
    }
 

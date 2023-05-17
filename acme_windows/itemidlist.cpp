@@ -1102,7 +1102,7 @@ HRESULT itemidlist::_parse(itemidlist & idl, const ::string & strPath)
 
    ULONG chEaten = 0;
 
-   hr = pshellfolderDesktop->ParseDisplayName(nullptr, nullptr, wstrPath, &chEaten, &idl.m_pidl, nullptr);
+   hr = pshellfolderDesktop->ParseDisplayName(nullptr, nullptr, (WCHAR *) wstrPath.c_str(), &chEaten, &idl.m_pidl, nullptr);
 
    return hr;
 

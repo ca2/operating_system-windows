@@ -4,6 +4,7 @@
 #include "brush.h"
 #include "font.h"
 #include "path.h"
+#include "region.h"
 #include "acme/parallelization/synchronous_lock.h"
 #include "acme/platform/scoped_restore.h"
 #include "acme/primitive/string/international.h"
@@ -4809,6 +4810,18 @@ namespace draw2d_gdiplus
    //   return ::success;
 
    //}
+
+
+   void graphics::set_clipping(::draw2d::region* pregion)
+   {
+
+      ::pointer < ::draw2d_gdiplus::region > pregionGdiplus = pregion;
+
+      auto p = pregionGdiplus->get(this);
+
+      m_pgraphics->SetClip(p, ::Gdiplus::CombineModeReplace);
+
+   }
 
 
    void graphics::_add_clipping_shape(const ::ellipse & ellipse, ___shape < ::draw2d::region > & shaperegion)

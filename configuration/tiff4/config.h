@@ -2,4 +2,10 @@
 #pragma once
 
 
+#define __STDC_FORMAT_MACROS 1
+
+
+#define HAVE_STDIO_H 1
+#define HAVE_INTTYPES_H 1
+
 

@@ -215,6 +215,7 @@ namespace draw2d_gdiplus
 
       void intersect_clip(const ::rectangle& rectangle) override;
 
+      virtual void set_clipping(::draw2d::region* pregion);
 
       //void PtVisible(double x, double y) override;
       //bool PtVisible(const ::point_i32 & point) override;

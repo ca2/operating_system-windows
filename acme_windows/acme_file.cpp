@@ -33,9 +33,11 @@ namespace acme_windows
 
       {
 
-         wstring wstrPath(e_get_buffer, MAX_PATH * 16);
+         wstring wstrPath;
 
-         if (!GetModuleFileNameW(nullptr, wstrPath, (DWORD)wstrPath.length()))
+         auto p = wstrPath.get_string_buffer(MAX_PATH * 16);
+
+         if (!GetModuleFileNameW(nullptr, p, (DWORD)wstrPath.length()))
          {
 
             return "";

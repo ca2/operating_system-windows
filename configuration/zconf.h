@@ -9,6 +9,13 @@
 #define ZCONF_H
 
 
+#if defined(_output_type_static) || defined(CUBE)
+#undef ZLIB_DLL
+#else
+#define ZLIB_DLL
+#endif
+
+
 //#include "third_private_c.h"
 
 /*
@@ -344,6 +351,18 @@
 #      endif
 #    endif
 #  endif  /* ZLIB_DLL */
+#  if defined(_output_type_static)
+#        define MINIZEXPORT
+#else
+#    if defined(WIN32) && (!defined(__BORLANDC__) || (__BORLANDC__ >= 0x500))
+#      ifdef _minizip_project
+#        define MINIZEXPORT extern __declspec(dllexport)
+#      else
+#        define MINIZEXPORT extern __declspec(dllimport)
+#      endif
+#    endif
+#  endif  /* ZLIB_DLL */
+
    /* If building or using zlib with the WINAPI/WINAPIV calling convention,
     * define ZLIB_WINAPI.
     * Caution: the standard ZLIB1.DLL is NOT compiled using ZLIB_WINAPI.
@@ -535,3 +554,6 @@ typedef uLong FAR uLongf;
 #endif
 
 #endif /* ZCONF_H */
+
+
+

@@ -41,7 +41,7 @@ namespace draw2d_gdiplus
       virtual bool internal_close_figure();
 
       virtual bool internal_add_line(double x1, double y1, double x2, double y2);
-      virtual bool internal_add_rect(double x, double y, double cx, double cy);
+      virtual bool internal_add_rect(double x, double y, double cx, double cy, ::draw2d::graphics * pgraphics);
       virtual bool internal_add_ellipse(double x, double y, double cx, double cy);
       //virtual bool internal_add_line(double x, double y);
       //virtual bool internal_add_move(double x, double y);
