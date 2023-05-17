@@ -111,7 +111,7 @@ u32 format_message(u32 dwFlags, const void * pSource, u32 dwMessageID, u32 dwLan
 
 //    wstring wstr;
 
-//    auto psz = wstr.get_string_buffer(dwSize);
+//    auto psz = wstr.get_buffer(dwSize);
 
 //    wstring wstrVar(pszVar);
 

@@ -236,9 +236,9 @@ namespace draw2d_gdiplus
          try
          {
 
-            rectangle.X = (Gdiplus::REAL)(rectangle.X + pgraphics->m_pointAddShapeTranslate.x);
+            rectangle.X = (INT)(rectangle.X + pgraphics->m_pointAddShapeTranslate.x);
 
-            rectangle.Y = (Gdiplus::REAL)(rectangle.Y + pgraphics->m_pointAddShapeTranslate.y);
+            rectangle.Y = (INT)(rectangle.Y + pgraphics->m_pointAddShapeTranslate.y);
 
             bOk2 = m_ppath->AddRectangle(rectangle) == Gdiplus::Status::Ok;
 

@@ -172,11 +172,11 @@ namespace win32
 
       wstring wstr;
 
-      unichar * p = wstr.get_string_buffer(s + 1);
+      unichar * p = wstr.get_buffer(s + 1);
 
       GetWindowTextW(m_hwnd, p, (int) (s + 1));
 
-      wstr.release_string_buffer();
+      wstr.release_buffer();
 
       return wstr;
 

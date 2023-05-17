@@ -404,7 +404,7 @@ namespace apex_windows
 
                /*wstring wstrClPath;
 
-               auto pszClPath = wstrClPath.get_string_buffer(4096);
+               auto pszClPath = wstrClPath.get_buffer(4096);
 
                auto dwClPath  = SearchPathW(
   wstring(strPath),
@@ -415,7 +415,7 @@ namespace apex_windows
   nullptr
                );
 
-               wstrClPath.release_string_buffer(dwClPath);*/
+               wstrClPath.release_buffer(dwClPath);*/
 
                SetEnvironmentVariableW(L"CC", L"cl");
 

@@ -1936,11 +1936,11 @@ namespace acme_windows
 
       wstring wstr;
 
-      auto pwsz = wstr.get_string_buffer(dwSize);
+      auto pwsz = wstr.get_buffer(dwSize);
 
       dwSize = GetEnvironmentVariableW(wstrEnvironmentVariable, pwsz, dwSize);
 
-      wstr.release_string_buffer(dwSize);
+      wstr.release_buffer(dwSize);
 
       str = wstr;
 
@@ -1958,11 +1958,11 @@ namespace acme_windows
 
       wstring wstrTarget;
 
-      auto pwszTarget = wstrTarget.get_string_buffer(len);
+      auto pwszTarget = wstrTarget.get_buffer(len);
 
       ExpandEnvironmentStringsW(wstrSource, pwszTarget, len + 1);
 
-      wstrTarget.release_string_buffer(len);
+      wstrTarget.release_buffer(len);
 
       return wstrTarget;
 
@@ -2582,15 +2582,15 @@ namespace acme_windows
 
          wstring wstr;
 
-         auto pwsz = wstr.get_string_buffer(dwSize);
+         auto pwsz = wstr.get_buffer(dwSize);
 
          lResult = RegQueryValueExW(hkey, wstring(pszSubKey), nullptr, &dwType, (byte *)(unichar *)pwsz, &dwSize);
 
-         wstr.release_string_buffer(dwSize);
+         wstr.release_buffer(dwSize);
 
          str = wstr;
 
-         //str.release_string_buffer(dwSize);
+         //str.release_buffer(dwSize);
 
          return lResult;
 
@@ -2725,11 +2725,11 @@ namespace acme_windows
       if (dwCharLen)
       {
 
-         auto pwsz = wstrTarget.get_string_buffer(dwCharLen);
+         auto pwsz = wstrTarget.get_buffer(dwCharLen);
 
          ::ExpandEnvironmentStringsW(wstr, pwsz, dwCharLen + 1);
 
-         wstrTarget.release_string_buffer();
+         wstrTarget.release_buffer();
 
       }
 

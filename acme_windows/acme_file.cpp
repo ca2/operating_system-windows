@@ -35,7 +35,7 @@ namespace acme_windows
 
          wstring wstrPath;
 
-         auto p = wstrPath.get_string_buffer(MAX_PATH * 16);
+         auto p = wstrPath.get_buffer(MAX_PATH * 16);
 
          if (!GetModuleFileNameW(nullptr, p, (DWORD)wstrPath.length()))
          {
@@ -44,7 +44,7 @@ namespace acme_windows
 
          }
 
-         wstrPath.release_string_buffer();
+         wstrPath.release_buffer();
 
          path = ::string(wstrPath);
 

@@ -350,7 +350,7 @@ void shared_memory::from_string(const ::string & psz)
 
 void shared_memory::to_string(string & str)
 {
-   char * psz = str.get_string_buffer(this->get_size() + 1);
+   char * psz = str.get_buffer(this->get_size() + 1);
 
    ::memory_copy(psz, get_data(), this->get_size());
 

@@ -59,7 +59,7 @@ namespace acme_windows
 
          wstring wstrValue;
        
-         auto pwszValue = wstrValue.get_string_buffer(cbValue);
+         auto pwszValue = wstrValue.get_buffer(cbValue);
 
          auto estatus = _value(pwszValue, scopedstrValueName, dwType, cbValue);
 
@@ -70,7 +70,7 @@ namespace acme_windows
 
          }
          
-         wstrValue.release_string_buffer();
+         wstrValue.release_buffer();
 
          return string(wstrValue);
 
@@ -279,11 +279,11 @@ namespace acme_windows
 
       wstring wstr;
 
-      auto pwsz = wstr.get_string_buffer(cbValue);
+      auto pwsz = wstr.get_buffer(cbValue);
 
       bOk = _value(pwsz, scopedstrValueName, dwType, cbValue);
 
-      wstr.release_string_buffer();
+      wstr.release_buffer();
 
       str = wstr;
 
@@ -605,7 +605,7 @@ namespace acme_windows
 
       wstring hwstr;
       
-      auto pwsz=hwstr.get_string_buffer(dwMaxValueNameLen * 2);
+      auto pwsz=hwstr.get_buffer(dwMaxValueNameLen * 2);
 
       ::i32 l;
 
@@ -652,15 +652,15 @@ namespace acme_windows
 
          wstring wstr;
          
-         auto pwsz = wstr.get_string_buffer(dwSize/sizeof(::wide_character));
+         auto pwsz = wstr.get_buffer(dwSize/sizeof(::wide_character));
 
          lResult = RegQueryValueExW(hkey, wstring(pszSubKey), nullptr, &dwType, (byte *)(unichar *)pwsz, &dwSize);
 
-         wstr.release_string_buffer(dwSize / sizeof(::wide_character));
+         wstr.release_buffer(dwSize / sizeof(::wide_character));
 
          str = wstr;
 
-         //str.release_string_buffer(dwSize);
+         //str.release_buffer(dwSize);
 
          return lResult;
 
@@ -805,13 +805,13 @@ string file_get_mozilla_firefox_plugin_container_path()
       }
 
       wstring wstrVersion;
-      auto pwszVersion = wstrVersion.get_string_buffer(dwData);
+      auto pwszVersion = wstrVersion.get_buffer(dwData);
       if (::WinRegGetValueW(hkeyMozillaFirefox, nullptr, L"CurrentVersion", RRF_RT_REG_SZ, &dwType, pwszVersion, &dwData) != ERROR_SUCCESS)
       {
-         wstrVersion.release_string_buffer();
+         wstrVersion.release_buffer();
          goto ret1;
       }
-      wstrVersion.release_string_buffer();
+      wstrVersion.release_buffer();
 
       wstring wstrMainSubKey = wstrVersion + L"\\Main";
       dwData = 0;
@@ -822,13 +822,13 @@ string file_get_mozilla_firefox_plugin_container_path()
       }
 
       wstring wstrDir;
-      auto pwszDir = wstrDir.get_string_buffer(dwData);
+      auto pwszDir = wstrDir.get_buffer(dwData);
       if (::WinRegGetValueW(hkeyMozillaFirefox, wstrMainSubKey, L"Install Directory", RRF_RT_REG_SZ, &dwType, pwszDir, &dwData) != ERROR_SUCCESS)
       {
-         wstrDir.release_string_buffer();
+         wstrDir.release_buffer();
          goto ret1;
       }
-      wstrDir.release_string_buffer();
+      wstrDir.release_buffer();
 
       ::file::path strDir;
 
@@ -860,14 +860,14 @@ bool CLASS_DECL_ACME_WINDOWS windows_get_in_proc_server(const ::string & pszCLSI
             ERROR_SUCCESS)
          {
             wstring wstr;
-            LPWSTR psz = wstr.get_string_buffer(_MAX_PATH);
+            LPWSTR psz = wstr.get_buffer(_MAX_PATH);
 
             DWORD dwSize = _MAX_PATH * sizeof(WCHAR);
             DWORD dwType;
             ::i32 lRes = ::RegQueryValueExW(hKeyInProc, L"",
                nullptr, &dwType, (byte *)psz, &dwSize);
 
-            str.release_string_buffer();
+            str.release_buffer();
             str = wstr;
             b = (lRes == ERROR_SUCCESS);
             RegCloseKey(hKeyInProc);

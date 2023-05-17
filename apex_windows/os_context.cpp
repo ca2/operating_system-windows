@@ -373,10 +373,10 @@ namespace apex_windows
 
    //      dwSize = ::GetModuleFileNameW(
    //               hmodule,
-   //               wstrPath.get_string_buffer(dwSize + 1024),
+   //               wstrPath.get_buffer(dwSize + 1024),
    //               (dwSize + 1024));
 
-   //      wstrPath.release_string_buffer();
+   //      wstrPath.release_buffer();
 
    //   }
 

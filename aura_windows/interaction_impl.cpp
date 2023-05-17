@@ -216,9 +216,9 @@ namespace aura_windows
    //      i32 nLen = ::GetWindowTextLength(oswindow);
    //      wstring wstr;
 
-   //      ::GetWindowTextW(oswindow, wstr.get_string_buffer(nLen), nLen + 1);
+   //      ::GetWindowTextW(oswindow, wstr.get_buffer(nLen), nLen + 1);
 
-   //      wstr.release_string_buffer();
+   //      wstr.release_buffer();
 
    //      rString = wstr;
 

@@ -405,11 +405,11 @@ pacmedir->roaming();
       if (wcslen(wstrModuleFilePath) == 0)
       {
 
-         auto p = wstrModuleFilePath.get_string_buffer(MAX_PATH * 8);
+         auto p = wstrModuleFilePath.get_buffer(MAX_PATH * 8);
 
          SHGetSpecialFolderPathW(nullptr, p, CSIDL_PROGRAM_FILES, false);
 
-         wstrModuleFilePath.release_string_buffer();
+         wstrModuleFilePath.release_buffer();
 
       }
 
@@ -434,11 +434,11 @@ pacmedir->roaming();
       if (wcslen(wstrModuleFilePath) == 0)
       {
 
-         auto p = wstrModuleFilePath.get_string_buffer(MAX_PATH * 8);
+         auto p = wstrModuleFilePath.get_buffer(MAX_PATH * 8);
 
          SHGetSpecialFolderPathW(nullptr, p, CSIDL_PROGRAM_FILES, false);
 
-         wstrModuleFilePath.release_string_buffer();
+         wstrModuleFilePath.release_buffer();
 
       }
 
@@ -876,7 +876,7 @@ bool windows_file_find_is_dots(const WIN32_FIND_DATAW & data)
 //
 //         }
 //
-//         wstrModuleFolder.release_string_buffer();
+//         wstrModuleFolder.release_buffer();
 //
 //         wstrModuleFolder.trim_right(L"\\/");
 //
@@ -886,7 +886,7 @@ bool windows_file_find_is_dots(const WIN32_FIND_DATAW & data)
 //
 //         string strModuleFolder;
 //
-//         auto wstrModuleFolder = strModuleFolder.get_string_buffer(MAX_PATH * 8);
+//         auto wstrModuleFolder = strModuleFolder.get_buffer(MAX_PATH * 8);
 //
 //         throw ::exception(todo);
 //
@@ -1219,7 +1219,7 @@ pacmedir->create CreateDirectoryW last error(%d)=%s", dwError, pszError);
 
          wstring path;
 
-         auto p = path.get_string_buffer(MAX_PATH * 8);
+         auto p = path.get_buffer(MAX_PATH * 8);
 
          if (!GetModuleFileNameW(nullptr, p, (::u32)path.size()))
          {
@@ -1228,7 +1228,7 @@ pacmedir->create CreateDirectoryW last error(%d)=%s", dwError, pszError);
 
          }
 
-         path.release_string_buffer();
+         path.release_buffer();
 
          string strPath(path);
 
@@ -2099,11 +2099,11 @@ pacmedir->create CreateDirectoryW last error(%d)=%s", dwError, pszError);
 
       wstring wstr;
 
-      auto buffer = wstr.get_string_buffer(size);
+      auto buffer = wstr.get_buffer(size);
 
       GetCurrentDirectoryW(size + 1, buffer);
 
-      wstr.release_string_buffer(size);
+      wstr.release_buffer(size);
 
       string str(wstr);
 

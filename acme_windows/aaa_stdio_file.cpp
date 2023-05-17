@@ -210,7 +210,7 @@ pacmedir->create(::file_path_folder(pszFileName));
 
       const i32 nMaxSize = 128;
 
-      char * psz = rString.get_string_buffer(nMaxSize);
+      char * psz = rString.get_buffer(nMaxSize);
 
       char * pszResult;
 
@@ -221,7 +221,7 @@ pacmedir->create(::file_path_folder(pszFileName));
 
          pszResult = fgets(psz, nMaxSize+1, m_pStream);
 
-         rString.release_string_buffer();
+         rString.release_buffer();
 
          // handle error/eof case
          if (pszResult == nullptr && !feof(m_pStream))
@@ -243,7 +243,7 @@ pacmedir->create(::file_path_folder(pszFileName));
 
          nLen = rString.get_length();
 
-         psz = rString.get_string_buffer(nMaxSize + nLen) + nLen;
+         psz = rString.get_buffer(nMaxSize + nLen) + nLen;
 
       }
 
