@@ -132,7 +132,7 @@ CLASS_DECL_ACME bool solve_relative_inline(string & str, bool & bUrl, bool & bOn
 
    strsize iLen = str.length();
 
-   char * psz = str.get_string_buffer(iLen);
+   char * psz = str.get_buffer(iLen);
 
    //string strAbsolute(strParam);
 
@@ -274,7 +274,7 @@ CLASS_DECL_ACME bool solve_relative_inline(string & str, bool & bUrl, bool & bOn
                   if (!bDup)
                   {
 
-                     psz = str.get_string_buffer();
+                     psz = str.get_buffer();
 
                      bDup = true;
 
@@ -329,7 +329,7 @@ CLASS_DECL_ACME bool solve_relative_inline(string & str, bool & bUrl, bool & bOn
                if (!bDup)
                {
 
-                  psz = str.get_string_buffer();
+                  psz = str.get_buffer();
 
                   bDup = true;
 
@@ -441,7 +441,7 @@ ret:
    if (bDup)
    {
 
-      str.release_string_buffer(iPos);
+      str.release_buffer(iPos);
 
    }
    else if (iPos < iLen)

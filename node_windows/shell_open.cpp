@@ -96,11 +96,11 @@ namespace windows
 
          dwSize = DdeGetData(
             hdata,
-            (LPBYTE)str.get_string_buffer(dwSize),
+            (LPBYTE)str.get_buffer(dwSize),
             dwSize,
             0);
 
-         str.release_string_buffer();
+         str.release_buffer();
 
          //throw ::not_implemented();
          /*

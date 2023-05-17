@@ -25,10 +25,10 @@ namespace music
 
             wstring wstr;
 
-            if (midiInGetErrorTextW(mmr, wstr.get_string_buffer(4096), 4096 * sizeof(wchar_t)) == MMSYSERR_NOERROR)
+            if (midiInGetErrorTextW(mmr, wstr.get_buffer(4096), 4096 * sizeof(wchar_t)) == MMSYSERR_NOERROR)
             {
 
-               wstr.release_string_buffer();
+               wstr.release_buffer();
 
                strOsMessage = wstr;
 

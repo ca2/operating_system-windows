@@ -3066,7 +3066,7 @@ namespace windowing_win32
 
       wstring wstr;
 
-      if (!::SendMessageTimeoutW(get_hwnd(), WM_GETTEXT, (lparam)wstr.get_string_buffer(lresult + 1), lresult + 1, SMTO_ABORTIFHUNG, 90, &lresult))
+      if (!::SendMessageTimeoutW(get_hwnd(), WM_GETTEXT, (lparam)wstr.get_buffer(lresult + 1), lresult + 1, SMTO_ABORTIFHUNG, 90, &lresult))
          return;
 
       str = wstr;

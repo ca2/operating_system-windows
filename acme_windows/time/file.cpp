@@ -272,7 +272,7 @@ struct PROCESS_INFO_t
 //
 //   LIBCALL(shlwapi,PathRemoveFileSpecW)(pPath);
 //
-//   csFilePath.release_string_buffer();
+//   csFilePath.release_buffer();
 //   if(IsWow64())
 //   {
 //      csFilePath += DRIVER_FILE_NAME_64;
@@ -436,7 +436,7 @@ struct PROCESS_INFO_t
 ////
 ////   wstring csShortName;
 ////   GetShortPathNameW( wstring(csPath), csShortName.get_buffer( MAX_PATH), MAX_PATH );
-////   csShortName.release_string_buffer();
+////   csShortName.release_buffer();
 ////   string strShortName(csShortName);
 ////   strShortName.make_lower();
 ////   bool bShortPath = false;
@@ -656,7 +656,7 @@ struct PROCESS_INFO_t
 ////{
 ////   wstring csShortName;
 ////   GetShortPathNameW(wstring( csPath), csShortName.get_buffer( MAX_PATH), MAX_PATH );
-////   csShortName.release_string_buffer();
+////   csShortName.release_buffer();
 ////   string strShortName(csShortName);
 ////   strShortName.make_lower();
 ////   bool bShortPath = false;
@@ -1058,7 +1058,7 @@ bool GetDrive(const scoped_string & strDosName, string& csDrive, bool bDriveLett
 //
 //      LIBCALL(shlwapi, PathRemoveFileSpecW)(pPath);
 //
-//      csFilePath.release_string_buffer();
+//      csFilePath.release_buffer();
 //      if (IsWow64())
 //      {
 //         csFilePath += DRIVER_FILE_NAME_64;

@@ -632,11 +632,11 @@ namespace apex_windows
 
       wstring wstrTarget;
 
-      auto pwsz = wstrTarget.get_string_buffer(MAX_PATH * 8);
+      auto pwsz = wstrTarget.get_buffer(MAX_PATH * 8);
 
       HRESULT hresult = pshelllink->GetPath(pwsz, MAX_PATH * 8, nullptr, 0);
 
-      wstrTarget.release_string_buffer();
+      wstrTarget.release_buffer();
 
       if (FAILED(hresult))
       {
@@ -681,11 +681,11 @@ namespace apex_windows
 
       wstring wstrIcon;
 
-      auto pwsz = wstrIcon.get_string_buffer(MAX_PATH * 8);
+      auto pwsz = wstrIcon.get_buffer(MAX_PATH * 8);
 
       HRESULT hresult = pshelllink->GetIconLocation(pwsz, MAX_PATH * 8, &iIcon);
 
-      wstrIcon.release_string_buffer();
+      wstrIcon.release_buffer();
 
       if (FAILED(hresult))
       {
@@ -920,11 +920,11 @@ namespace apex_windows
 
          wstring wstr;
          
-         auto pwsz = wstr.get_string_buffer(dwSize);
+         auto pwsz = wstr.get_buffer(dwSize);
 
          lResult = RegQueryValueExW(hkey, wstring(pszSubKey), nullptr, &dwType, (byte*)(unichar*)pwsz, &dwSize);
 
-         wstr.release_string_buffer(dwSize);
+         wstr.release_buffer(dwSize);
 
          str = wstr;
 
