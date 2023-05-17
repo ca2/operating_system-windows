@@ -205,7 +205,7 @@ namespace music
             mmr = midiInMessage(
                   h,
                   DRV_QUERYDEVICEINTERFACE,
-                  reinterpret_cast<DWORD_PTR>((wchar_t *) wstr),
+                  reinterpret_cast<DWORD_PTR>((wchar_t *) wstr.c_str()),
                   size
                   );
 
@@ -257,7 +257,7 @@ namespace music
             mmr = midiOutMessage(
                   h,
                   DRV_QUERYDEVICEINTERFACE,
-                  reinterpret_cast<DWORD_PTR>((wchar_t *) wstr),
+                  reinterpret_cast<DWORD_PTR>((wchar_t *) wstr.c_str()),
                   size
                   );
 
