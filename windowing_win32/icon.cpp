@@ -324,7 +324,7 @@ uint32_t GetColorMonochrome(uint8_t * xordata, uint8_t * anddata, int x, int y, 
 //               uint32_t w = ((BITMAPINFOHEADER *)(data))->biWidth;
 //               uint32_t h = (((BITMAPINFOHEADER *)(data))->biHeight >> 1); //icons have doubled height value.
 //               uint32_t c = ((BITMAPINFOHEADER *)(data))->biClrUsed;
-//               results.push_back(CreateBmp32bppFromIconResData(data, size, b, w, h, c));
+//               results.add(CreateBmp32bppFromIconResData(data, size, b, w, h, c));
 //            }
 //         }
 //      }
@@ -338,7 +338,7 @@ uint32_t GetColorMonochrome(uint8_t * xordata, uint8_t * anddata, int x, int y, 
 //      uint32_t w = ((BITMAPINFOHEADER *)(data))->biWidth;
 //      uint32_t h = (((BITMAPINFOHEADER *)(data))->biHeight >> 1); //icons have doubled height value.
 //      uint32_t c = ((BITMAPINFOHEADER *)(data))->biClrUsed;
-//      results.push_back(CreateBmp32bppFromIconResData(data, size, b, w, h, c));
+//      results.add(CreateBmp32bppFromIconResData(data, size, b, w, h, c));
 //   }
 //   return results;
 //}
@@ -361,7 +361,7 @@ uint32_t GetColorMonochrome(uint8_t * xordata, uint8_t * anddata, int x, int y, 
 //         uint32_t w = ((BITMAPINFOHEADER *)(data))->biWidth;
 //         uint32_t h = (((BITMAPINFOHEADER *)(data))->biHeight >> 1); //icons have doubled height value.
 //         uint32_t c = ((BITMAPINFOHEADER *)(data))->biClrUsed;
-//         results.push_back(CreateBmp32bppFromIconResData(data, size, b, w, h, c));
+//         results.add(CreateBmp32bppFromIconResData(data, size, b, w, h, c));
 //      }
 //   }
 //   return results;

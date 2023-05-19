@@ -475,12 +475,14 @@ namespace windowing_win32
 
          auto size = layout.design().size();
 
-         if (size != m_pimpl->m_sizeDrawn)
+         auto sizeDrawn = m_pimpl->m_sizeDrawn;
+
+         if (size.cx < sizeDrawn.cx && size.cy < sizeDrawn.cy)
          {
 
             ERROR("Resized size is different of drawn buffer size.");
 
-            m_pimpl->m_puserinteraction->set_need_redraw();
+            //m_pimpl->m_puserinteraction->set_need_redraw();
 
             m_pimpl->m_puserinteraction->post_redraw();
 
