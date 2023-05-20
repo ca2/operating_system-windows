@@ -3473,6 +3473,19 @@ namespace acme_windows
    }
 
 
+   void node::open_terminal_and_run(const ::scoped_string& scopedstr)
+   {
+
+      ::wstring wstrParameters;
+
+      wstrParameters = L"/c ";
+
+      wstrParameters += ::wstring(scopedstr);
+
+      ::ShellExecuteW(nullptr, L"open", L"cmd", wstrParameters, nullptr, SW_SHOW);
+
+   }
+
 
    ::u64 node::translate_processor_affinity(int iOrder)
    {
