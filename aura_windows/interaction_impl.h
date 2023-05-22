@@ -209,12 +209,12 @@ namespace aura_windows
 
 
       // Window Text Functions
-      virtual void set_window_text(const ::string & pszString) override;
+      //virtual void set_window_text(const ::string & pszString) override;
 
-      virtual strsize get_window_text(char * pszStringBuf, strsize nMaxCount) override;
+      //virtual strsize get_window_text(char * pszStringBuf, strsize nMaxCount) override;
 
-      virtual void get_window_text(string & rectangleString) override;
-      virtual strsize get_window_text_length() override;
+      //virtual void get_window_text(string & rectangleString) override;
+      //virtual strsize get_window_text_length() override;
 
       virtual void on_layout(::draw2d::graphics_pointer & pgraphics) override;
       //virtual void on_reposition() override;
