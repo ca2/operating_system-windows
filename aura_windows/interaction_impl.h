@@ -736,7 +736,7 @@ namespace aura_windows
       //virtual void set_window_long_ptr(i32 nIndex, iptr lValue);
 
 
-      void _001OnTriggerMouseInside();
+      //void _001OnTriggerMouseInside();
 
       void set_origin(::draw2d::graphics_pointer & pgraphics);
 

@@ -3015,14 +3015,14 @@ namespace windowing_win32
    //}
 
 
-   void window::set_window_text(const ::string & pszString)
+   void window::set_window_text(const ::scoped_string & scopedstr)
    {
 
       DWORD_PTR lresult = 0;
 
       auto puserinteraction = m_puserinteractionimpl->m_puserinteraction;
 
-      puserinteraction->m_strWindowText2 = pszString;
+      puserinteraction->m_strWindowText2 = scopedstr;
 
       wstring wstrText(puserinteraction->m_strWindowText2);
 
@@ -3035,53 +3035,65 @@ namespace windowing_win32
 
       }
 
-      string str;
+      //string str;
 
-      get_window_text(str);
-
-   }
-
-
-   strsize window::get_window_text(char * pszString, strsize nMaxCount)
-   {
-
-      string str;
-
-      get_window_text(str);
-
-      ansi_count_copy(pszString, str, (size_t)minimum(nMaxCount, str.length()));
-
-      return str.length();
+      //get_window_text(str);
 
    }
 
 
-   void window::get_window_text(string & str)
+   //::string window::get_window_text()
+   //{
+
+   //   string str;
+
+   //   get_window_text(str);
+
+   //   ansi_count_copy(pszString, str, (size_t)minimum(nMaxCount, str.length()));
+
+   //   return str.length();
+
+   //}
+
+
+   ::string window::get_window_text()
    {
 
       DWORD_PTR lresult = 0;
 
       if (!::SendMessageTimeoutW(get_hwnd(), WM_GETTEXTLENGTH, 0, 0, SMTO_ABORTIFHUNG, 90, &lresult))
-         return;
+      {
+
+         return {};
+
+      }
 
       wstring wstr;
 
-      if (!::SendMessageTimeoutW(get_hwnd(), WM_GETTEXT, (lparam)wstr.get_buffer(lresult + 1), lresult + 1, SMTO_ABORTIFHUNG, 90, &lresult))
-         return;
+      auto p = wstr.get_buffer(lresult);
 
-      str = wstr;
+      if (!::SendMessageTimeoutW(get_hwnd(), WM_GETTEXT, (lparam)p, lresult + 1, SMTO_ABORTIFHUNG, 90, &lresult))
+      {
 
-   }
+         return {};
 
+      }
 
-   strsize window::get_window_text_length()
-   {
+      wstr.release_buffer();
 
-      ASSERT(::IsWindow(get_hwnd()));
-
-      return ::GetWindowTextLength(get_hwnd());
+      return wstr;
 
    }
+
+
+   //strsize window::get_window_text_length()
+   //{
+
+   //   ASSERT(::IsWindow(get_hwnd()));
+
+   //   return ::GetWindowTextLength(get_hwnd());
+
+   //}
 
 
    //void window::DragAcceptFiles(bool bAccept)

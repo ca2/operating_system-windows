@@ -1563,64 +1563,64 @@ namespace aura_windows
    //}
 
 
-   void interaction_impl::set_window_text(const ::string & pszString)
-   {
+   //void interaction_impl::set_window_text(const ::string & pszString)
+   //{
 
-      m_pwindow->set_window_text(pszString);
+   //   m_pwindow->set_window_text(pszString);
 
-      //DWORD_PTR lresult = 0;
+   //   //DWORD_PTR lresult = 0;
 
-      //m_puserinteraction->m_strWindowText = pszString;
+   //   //m_puserinteraction->m_strWindowText = pszString;
 
-      //wstring wstrText(m_puserinteraction->m_strWindowText);
+   //   //wstring wstrText(m_puserinteraction->m_strWindowText);
 
-      //const unichar * pwszText = wstrText;
+   //   //const unichar * pwszText = wstrText;
 
-      //if (!::SendMessageTimeoutW(get_handle(), WM_SETTEXT, 0, (lparam)pwszText, SMTO_ABORTIFHUNG, 500, &lresult))
-      //{
+   //   //if (!::SendMessageTimeoutW(get_handle(), WM_SETTEXT, 0, (lparam)pwszText, SMTO_ABORTIFHUNG, 500, &lresult))
+   //   //{
 
-      //   return;
+   //   //   return;
 
-      //}
+   //   //}
 
-      //string str;
+   //   //string str;
 
-      //get_window_text(str);
+   //   //get_window_text(str);
 
-   }
-
-
-
-   strsize interaction_impl::get_window_text(char * pszString, strsize nMaxCount)
-
-   {
-
-      string str;
-
-      get_window_text(str);
-
-      ansi_count_copy(pszString, str, (size_t) minimum(nMaxCount, str.length()));
+   //}
 
 
-      return str.length();
 
-   }
+   //strsize interaction_impl::get_window_text(char * pszString, strsize nMaxCount)
+
+   //{
+
+   //   string str;
+
+   //   get_window_text(str);
+
+   //   ansi_count_copy(pszString, str, (size_t) minimum(nMaxCount, str.length()));
+
+
+   //   return str.length();
+
+   //}
 
    
-   void interaction_impl::get_window_text(string & str)
-   {
+   //void interaction_impl::get_window_text(string & str)
+   //{
 
-      m_pwindow->set_window_text(str);
+   //   m_pwindow->set_window_text(str);
 
-   }
+   //}
 
 
-   strsize interaction_impl::get_window_text_length()
-   {
+   //strsize interaction_impl::get_window_text_length()
+   //{
 
-      return m_pwindow->get_window_text_length();
+   //   return m_pwindow->get_window_text_length();
 
-   }
+   //}
 
 
    void interaction_impl::DragAcceptFiles(bool bAccept)
@@ -3218,17 +3218,17 @@ namespace aura_windows
 
 
 
-   void interaction_impl::_001OnTriggerMouseInside()
-   {
+   //void interaction_impl::_001OnTriggerMouseInside()
+   //{
 
-      ::user::interaction_impl::_001OnTriggerMouseInside();
+   //   ::user::interaction_impl::_001OnTriggerMouseInside();
 
-      //TRACKMOUSEEVENT tme = { sizeof(tme) };
-      //tme.dwFlags = TME_LEAVE;
-      //tme.hwndTrack = get_handle();
-      //TrackMouseEvent(&tme);
+   //   //TRACKMOUSEEVENT tme = { sizeof(tme) };
+   //   //tme.dwFlags = TME_LEAVE;
+   //   //tme.hwndTrack = get_handle();
+   //   //TrackMouseEvent(&tme);
 
-   }
+   //}
 
 
 

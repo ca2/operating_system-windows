@@ -301,12 +301,12 @@ namespace windowing_win32
 
 
       // Window Text Functions
-      virtual void set_window_text(const ::string & pszString) override;
+      void set_window_text(const ::scoped_string & scopedstr) override;
 
-      virtual strsize get_window_text(char * pszStringBuf, strsize nMaxCount) override;
+      ::string get_window_text() override;
 
-      virtual void get_window_text(string & rectangleString) override;
-      virtual strsize get_window_text_length() override;
+      //virtual void get_window_text(string & rectangleString) override;
+      //virtual strsize get_window_text_length() override;
 
       //virtual void on_layout(::draw2d::graphics_pointer & pgraphics) override;
       //virtual void on_reposition() override;
