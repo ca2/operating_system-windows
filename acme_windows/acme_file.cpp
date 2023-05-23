@@ -26,33 +26,33 @@ namespace acme_windows
    }
 
 
-   ::file::path acme_file::module()
-   {
+   //::file::path acme_file::module()
+   //{
 
-      ::file::path path;
+   //   ::file::path path;
 
-      {
+   //   {
 
-         wstring wstrPath;
+   //      wstring wstrPath;
 
-         auto p = wstrPath.get_buffer(MAX_PATH * 16);
+   //      auto p = wstrPath.get_buffer(MAX_PATH * 16);
 
-         if (!GetModuleFileNameW(nullptr, p, (DWORD)wstrPath.length()))
-         {
+   //      if (!GetModuleFileNameW(nullptr, p, (DWORD)wstrPath.length()))
+   //      {
 
-            return "";
+   //         return "";
 
-         }
+   //      }
 
-         wstrPath.release_buffer();
+   //      wstrPath.release_buffer();
 
-         path = ::string(wstrPath);
+   //      path = ::string(wstrPath);
 
-      }
+   //   }
 
-      return path;
+   //   return path;
 
-   }
+   //}
 
 
    class ::time acme_file::modification_time(const ::file::path & pathParam)
