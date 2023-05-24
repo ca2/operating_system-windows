@@ -525,7 +525,7 @@ namespace windowing_win32
             //else
             //{
 
-            POINT_I32 pointSrc = { 0 };
+            ::point_i32 pointSrc = { 0 };
 
             BLENDFUNCTION blendPixelFunction = { AC_SRC_OVER, 0, 255, AC_SRC_ALPHA };
 
@@ -668,15 +668,15 @@ namespace windowing_win32
 #endif // __DEBUG
 
 
-            //point.x = 100;
+            //point.x() = 100;
 
-            //point.y = 100;
+            //point.y() = 100;
 
             //size.cx = 200;
 
             //size.cy = 200;
 
-            //::SetWindowPos(get_hwnd(), HWND_TOPMOST, point.x, point.y, size.cx, size.cy, SWP_NOZORDER);
+            //::SetWindowPos(get_hwnd(), HWND_TOPMOST, point.x(), point.y(), size.cx, size.cy, SWP_NOZORDER);
 
             string strType = __type_name(m_pimpl->m_puserinteraction);
 
@@ -775,7 +775,7 @@ namespace windowing_win32
 
                   //}
 
-                  //TRACE("UpdateLayeredWindow Bottom Right (%d, %d)", pointBottomRight.x, pointBottomRight.y);
+                  //TRACE("UpdateLayeredWindow Bottom Right (%d, %d)", pointBottomRight.x(), pointBottomRight.y());
 
 
                }
@@ -795,17 +795,17 @@ namespace windowing_win32
                //                     | SWP_NOOWNERZORDER
                //                     | SWP_DEFERERASE
                //                  | SWP_NOZORDER;
-               //                  ::SetWindowPos(get_hwnd(), NULL, point.x, point.y, size.cx, size.cy, 
+               //                  ::SetWindowPos(get_hwnd(), NULL, point.x(), point.y(), size.cx, size.cy, 
                //                     uFlags);
                //                  m_pimpl->on_visual_applied();
                //
                //               }
 
-                              //RECTANGLE_I32 r3;
+                              //::rectangle_i32 r3;
 
                               //GetWindowRect(m_oswindow, &r3);
 
-                              //RECTANGLE_I32 r4;
+                              //::rectangle_i32 r4;
 
                               //GetClientRect(m_oswindow, &r4);
 

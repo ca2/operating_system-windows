@@ -729,7 +729,7 @@ namespace windowing_win32
    }
 
 
-   void windowing::get_cursor_pos(POINT_I32 * ppoint)
+   void windowing::get_cursor_pos(::point_i32 * ppoint)
    {
 
 
@@ -740,9 +740,9 @@ namespace windowing_win32
 
          ::GetCursorPos(&point);
 
-         m_pointCursor.x = point.x;
+         m_pointCursor.x() = point.x();
 
-         m_pointCursor.y = point.y;
+         m_pointCursor.y() = point.y();
 
       }
 
@@ -759,7 +759,7 @@ namespace windowing_win32
    void windowing::set_cursor_position(const ::point_i32 & point)
    {
 
-      if (!::SetCursorPos(point.x, point.y))
+      if (!::SetCursorPos(point.x(), point.y()))
       {
 
          //return false;
@@ -838,7 +838,7 @@ namespace windowing_win32
 //   }
 
    
-   int_bool windowing::point_is_window_origin(POINT_I32 ptHitTest, oswindow oswindowExclude, int iMargin)
+   int_bool windowing::point_is_window_origin(::point_i32 ptHitTest, oswindow oswindowExclude, int iMargin)
    {
 
       HWND hwndExclude = __hwnd(oswindowExclude);
@@ -1120,7 +1120,7 @@ namespace windowing_win32
    }
 
 
-   //void windowing::get_cursor_position(POINT_I32* ppoint)
+   //void windowing::get_cursor_position(::point_i32* ppoint)
    //{
 
    //   ::GetCursorPos((POINT *) ppoint);

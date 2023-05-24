@@ -212,8 +212,8 @@ namespace windowing_win32
       HGLOBAL hglb = ::GlobalAlloc(GMEM_MOVEABLE, (SIZE_T) (sizeof(DROPFILES) + (iLen + 1) * sizeof(WCHAR)));
       LPDROPFILES pDropFiles = (LPDROPFILES) ::GlobalLock(hglb);
       pDropFiles->pFiles = sizeof(DROPFILES);
-      pDropFiles->pt.x = 0;
-      pDropFiles->pt.y = 0;
+      pDropFiles->pt.x() = 0;
+      pDropFiles->pt.y() = 0;
       pDropFiles->fNC = true;
       pDropFiles->fWide = true;
 

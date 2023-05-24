@@ -219,9 +219,9 @@ namespace draw2d_gdi
 
       return SetDIBitsToDevice(
              (dynamic_cast<::draw2d_gdi::graphics * >(pgraphics))->get_handle1(),
-             point.x, point.y,
+             point.x(), point.y(),
              size.cx, size.cy,
-             pointSrc.x, pointSrc.y, pointSrc.y, height() - pointSrc.y,
+             pointSrc.x(), pointSrc.y(), pointSrc.y(), height() - pointSrc.y(),
              colorref(), &m_info, 0)
              != false;
 
@@ -271,7 +271,7 @@ namespace draw2d_gdi
    bool image::from(const ::point_i32 & pointDest, ::draw2d::graphics_pointer & pgraphics, const ::point_i32 & point, const ::size_i32 & sz)
    {
 
-      return m_spgraphics->BitBlt(pointDest.x, pointDest.y, sz.cx, sz.cy, pgraphics, point.x, point.y, SRCCOPY) != false;
+      return m_spgraphics->BitBlt(pointDest.x(), pointDest.y(), sz.cx, sz.cy, pgraphics, point.x(), point.y(), SRCCOPY) != false;
 
    }
 

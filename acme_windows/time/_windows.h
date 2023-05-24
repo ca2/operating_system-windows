@@ -23,8 +23,8 @@
 //    pmsg->message = (UINT) pmessage->m_atom.i64();
 //    pmsg->wParam = pmessage->wParam;
 //    pmsg->lParam = pmessage->lParam;
-//    pmsg->pt.x = pmessage->pt.x;
-//    pmsg->pt.y = pmessage->pt.y;
+//    pmsg->pt.x() = pmessage->pt.x();
+//    pmsg->pt.y() = pmessage->pt.y();
 //    pmsg->time = (DWORD)pmessage->time;
 
 

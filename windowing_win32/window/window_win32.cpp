@@ -280,7 +280,7 @@ LRESULT CALLBACK __window_procedure(HWND hwnd, UINT message, WPARAM wparam, LPAR
 
       //   pimpl->m_pointCursor = pointCursor;
 
-      //   lparam = MAKELPARAM(pointCursor.x, pointCursor.y);
+      //   lparam = MAKELPARAM(pointCursor.x(), pointCursor.y());
 
       //   pimpl->call_message_handler(e_message_mouse_move, 0, lparam);
 

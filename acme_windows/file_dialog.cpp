@@ -82,7 +82,7 @@ namespace acme_windows
             
             memory memoryFileNames;
             
-            const int FILE_DIALOG_MAX_BUFFER = 16_KiB;
+            const auto FILE_DIALOG_MAX_BUFFER = 16_KiB;
 
             memoryFileNames.set_size(FILE_DIALOG_MAX_BUFFER);
 

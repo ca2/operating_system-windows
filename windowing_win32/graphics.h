@@ -317,9 +317,9 @@ namespace draw2d_gdiplus
 
 
       //bool draw_polygon(const POINT * ppoints, count nCount) override;
-      bool draw_polygon(const POINT_F64 * ppoints, count nCount) override;
+      bool draw_polygon(const ::point_f64 * ppoints, count nCount) override;
       //bool fill_polygon(const POINT * ppoints, count nCount) override;
-      bool fill_polygon(const POINT_F64 * ppoints, count nCount) override;
+      bool fill_polygon(const ::point_f64 * ppoints, count nCount) override;
       using ::draw2d::graphics::rectangle_i32;
       using ::draw2d::graphics::draw_rectangle;
       using ::draw2d::graphics::fill_rectangle;

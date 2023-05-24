@@ -707,7 +707,7 @@ int imm_client::on_text_composition_message(int iMessage)
 
 
 
-      //int y = (iLine)* m_iLineHeight - get_context_offset().y;
+      //int y = (iLine)* m_iLineHeight - get_context_offset().y();
       //int y2 = y + m_iLineHeight;
       // ::point_i32 point(x, y);
       //::rectangle_i32 r;
@@ -744,7 +744,7 @@ int imm_client::on_text_composition_message(int iMessage)
 
       copy(com.ptCurrentPos, rectangle.top_left());
 
-      com.ptCurrentPos.y -= 100;
+      com.ptCurrentPos.y() -= 100;
 
       ::rectangle_i32 rect2(rectangle);
 
