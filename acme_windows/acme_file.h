@@ -19,7 +19,7 @@ namespace acme_windows
       ~acme_file() override;
 
 
-      ::file::path module() override;
+      //::file::path module() override;
 
 
       class ::time modification_time(const ::file::path & path) override;
