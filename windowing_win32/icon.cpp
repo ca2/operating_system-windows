@@ -324,7 +324,7 @@ uint32_t GetColorMonochrome(uint8_t * xordata, uint8_t * anddata, int x, int y, 
 //               uint32_t w = ((BITMAPINFOHEADER *)(data))->biWidth;
 //               uint32_t h = (((BITMAPINFOHEADER *)(data))->biHeight >> 1); //icons have doubled height value.
 //               uint32_t c = ((BITMAPINFOHEADER *)(data))->biClrUsed;
-//               results.push_back(CreateBmp32bppFromIconResData(data, size, b, w, h, c));
+//               results.add(CreateBmp32bppFromIconResData(data, size, b, w, h, c));
 //            }
 //         }
 //      }
@@ -338,7 +338,7 @@ uint32_t GetColorMonochrome(uint8_t * xordata, uint8_t * anddata, int x, int y, 
 //      uint32_t w = ((BITMAPINFOHEADER *)(data))->biWidth;
 //      uint32_t h = (((BITMAPINFOHEADER *)(data))->biHeight >> 1); //icons have doubled height value.
 //      uint32_t c = ((BITMAPINFOHEADER *)(data))->biClrUsed;
-//      results.push_back(CreateBmp32bppFromIconResData(data, size, b, w, h, c));
+//      results.add(CreateBmp32bppFromIconResData(data, size, b, w, h, c));
 //   }
 //   return results;
 //}
@@ -361,7 +361,7 @@ uint32_t GetColorMonochrome(uint8_t * xordata, uint8_t * anddata, int x, int y, 
 //         uint32_t w = ((BITMAPINFOHEADER *)(data))->biWidth;
 //         uint32_t h = (((BITMAPINFOHEADER *)(data))->biHeight >> 1); //icons have doubled height value.
 //         uint32_t c = ((BITMAPINFOHEADER *)(data))->biClrUsed;
-//         results.push_back(CreateBmp32bppFromIconResData(data, size, b, w, h, c));
+//         results.add(CreateBmp32bppFromIconResData(data, size, b, w, h, c));
 //      }
 //   }
 //   return results;
@@ -775,7 +775,7 @@ namespace windowing_win32
    }
 
 
-   void icon::get_sizes(array < concrete < ::size_i32 > > & a)
+   void icon::get_sizes(array < ::size_i32 > & a)
    {
 
       a.erase_all();
@@ -789,7 +789,7 @@ namespace windowing_win32
 
    }
 
-   image_pointer icon::get_image(const concrete < ::size_i32 > & size)
+   image_pointer icon::get_image(const ::size_i32 & size)
    {
 
       auto& pimage  = m_imagemap[size];
@@ -808,7 +808,7 @@ namespace windowing_win32
    }
 
 
-   image_pointer icon::_create_image(const concrete < ::size_i32 > & size)
+   image_pointer icon::_create_image(const ::size_i32 & size)
    {
 
       HICON hicon = (HICON) get_os_data(size);

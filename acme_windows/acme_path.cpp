@@ -170,11 +170,11 @@ namespace acme_windows
 
       length = newLength;
 
-      auto pszFullPath = wstrFullPath.get_string_buffer(length);
+      auto pszFullPath = wstrFullPath.get_buffer(length);
 
       newLength = GetFullPathNameW(wstrPath, MAX_PATH, pszFullPath, NULL);
 
-      wstrFullPath.release_string_buffer(length);
+      wstrFullPath.release_buffer(length);
 
    } while (newLength < length);
 

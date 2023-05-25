@@ -106,7 +106,7 @@ namespace draw2d_gdi
       LOGPEN lp;
       VERIFY(get_object(sizeof(lp), &lp));
       dumpcontext << "lgpn.lopnStyle = " << lp.lopnStyle;
-      dumpcontext << "\nlgpn.lopnWidth.x (width) = " << lp.lopnWidth.x;
+      dumpcontext << "\nlgpn.lopnWidth.x() (width) = " << lp.lopnWidth.x();
       dumpcontext << "\nlgpn.lopnColor = " << (void *)(DWORD_PTR)lp.lopnColor;
 
       dumpcontext << "\n";

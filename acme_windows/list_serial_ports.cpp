@@ -141,7 +141,7 @@ namespace acme_windows
 			portinfo.description = friendlyName;
 			portinfo.hardware_id = hardwareId;
 
-			devices_found.push_back(portinfo);
+			devices_found.add(portinfo);
 
 		}
 

@@ -46,6 +46,13 @@ namespace windowing_win32
 
       }
 
+      if (ch == ' ')
+      {
+
+         return ::user::e_key_space;
+
+      }
+
       switch (iVirtualKey)
       {
       case VK_LEFT:

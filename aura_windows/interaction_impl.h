@@ -209,12 +209,12 @@ namespace aura_windows
 
 
       // Window Text Functions
-      virtual void set_window_text(const ::string & pszString) override;
+      //virtual void set_window_text(const ::string & pszString) override;
 
-      virtual strsize get_window_text(char * pszStringBuf, strsize nMaxCount) override;
+      //virtual strsize get_window_text(char * pszStringBuf, strsize nMaxCount) override;
 
-      virtual void get_window_text(string & rectangleString) override;
-      virtual strsize get_window_text_length() override;
+      //virtual void get_window_text(string & rectangleString) override;
+      //virtual strsize get_window_text_length() override;
 
       virtual void on_layout(::draw2d::graphics_pointer & pgraphics) override;
       //virtual void on_reposition() override;
@@ -328,7 +328,7 @@ namespace aura_windows
 //#if(_WIN32_WINNT >= 0x0500)
 //
 //      virtual bool SetLayeredWindowAttributes(::color::color crKey, byte bAlpha, u32 dwFlags);
-//      virtual bool UpdateLayeredWindow(::draw2d::graphics * pDCDst, ::point_i32 *pptDst, ::size_i32 *psize,
+//      virtual bool UpdateLayeredWindow(::draw2d::graphics * pDCDst, ::point_i32 *pptDst, SIZE_I32 *psize,
 //                                       ::draw2d::graphics * pDCSrc, ::point_i32 *pptSrc, ::color::color crKey, BLENDFUNCTION *pblend, u32 dwFlags);
 //
 //#endif   // _WIN32_WINNT >= 0x0500
@@ -736,7 +736,7 @@ namespace aura_windows
       //virtual void set_window_long_ptr(i32 nIndex, iptr lValue);
 
 
-      void _001OnTriggerMouseInside();
+      //void _001OnTriggerMouseInside();
 
       void set_origin(::draw2d::graphics_pointer & pgraphics);
 

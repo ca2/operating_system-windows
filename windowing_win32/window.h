@@ -301,12 +301,12 @@ namespace windowing_win32
 
 
       // Window Text Functions
-      virtual void set_window_text(const ::string & pszString) override;
+      void set_window_text(const ::scoped_string & scopedstr) override;
 
-      virtual strsize get_window_text(char * pszStringBuf, strsize nMaxCount) override;
+      ::string get_window_text() override;
 
-      virtual void get_window_text(string & rectangleString) override;
-      virtual strsize get_window_text_length() override;
+      //virtual void get_window_text(string & rectangleString) override;
+      //virtual strsize get_window_text_length() override;
 
       //virtual void on_layout(::draw2d::graphics_pointer & pgraphics) override;
       //virtual void on_reposition() override;
@@ -420,7 +420,7 @@ namespace windowing_win32
       //#if(_WIN32_WINNT >= 0x0500)
       //
       //      virtual bool SetLayeredWindowAttributes(::color::color crKey, byte bAlpha, u32 dwFlags);
-      //      virtual bool UpdateLayeredWindow(::draw2d::graphics * pDCDst, ::point_i32 *pptDst, ::size_i32 *psize,
+      //      virtual bool UpdateLayeredWindow(::draw2d::graphics * pDCDst, ::point_i32 *pptDst, SIZE_I32 *psize,
       //                                       ::draw2d::graphics * pDCSrc, ::point_i32 *pptSrc, ::color::color crKey, BLENDFUNCTION *pblend, u32 dwFlags);
       //
       //#endif   // _WIN32_WINNT >= 0x0500

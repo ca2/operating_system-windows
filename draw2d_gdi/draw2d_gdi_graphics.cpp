@@ -225,7 +225,7 @@ namespace draw2d_gdi
 
       ::point_i32 pointRet;
 
-      VERIFY(::SetBrushOrgEx(get_handle1(), point.x, point.y, pointRet));
+      VERIFY(::SetBrushOrgEx(get_handle1(), point.x(), point.y(), pointRet));
 
       return pointRet;
 
@@ -445,7 +445,7 @@ namespace draw2d_gdi
    ::point_i32 graphics::SetViewportOrg(const ::point_i32 & point)
    {
 
-      return SetViewportOrg(point.x, point.y);
+      return SetViewportOrg(point.x(), point.y());
 
    }
 
@@ -461,7 +461,7 @@ namespace draw2d_gdi
    ::point_i32 graphics::SetWindowOrg(const ::point_i32 & point)
    {
 
-      return SetWindowOrg(point.x, point.y);
+      return SetWindowOrg(point.x(), point.y());
 
    }
 
@@ -563,7 +563,7 @@ namespace draw2d_gdi
 
       ASSERT(get_handle1() != nullptr);
 
-      return PtVisible(point.x, point.y) != false;
+      return PtVisible(point.x(), point.y()) != false;
 
    }
 
@@ -607,7 +607,7 @@ namespace draw2d_gdi
 
       ASSERT(get_handle1() != nullptr);
 
-      return ::Arc(get_handle1(), rectangle.left, rectangle.top, rectangle.right, rectangle.bottom, pointStart.x, pointStart.y, pointEnd.x, pointEnd.y) != false;
+      return ::Arc(get_handle1(), rectangle.left, rectangle.top, rectangle.right, rectangle.bottom, pointStart.x(), pointStart.y(), pointEnd.x(), pointEnd.y()) != false;
 
    }
 
@@ -709,7 +709,7 @@ namespace draw2d_gdi
          return false;
 
       return false;
-      //return ::DrawIcon(get_handle1(), point.x, point.y, picon->m_hicon) != false;
+      //return ::DrawIcon(get_handle1(), point.x(), point.y(), picon->m_hicon) != false;
 
    }
 
@@ -755,7 +755,7 @@ namespace draw2d_gdi
    //   ASSERT(get_handle1() != nullptr);
 
    //   return ::DrawState(get_handle1(), hBrush,
-   //                      nullptr, (LPARAM)hBitmap, 0, point.x, point.y, size.cx, size.cy, nFlags|DST_BITMAP) != false;
+   //                      nullptr, (LPARAM)hBitmap, 0, point.x(), point.y(), size.cx, size.cy, nFlags|DST_BITMAP) != false;
 
    //}
 
@@ -766,7 +766,7 @@ namespace draw2d_gdi
    //   ASSERT(get_handle1() != nullptr);
 
    //   return ::DrawState(get_handle1(), (HBRUSH)pBrush->get_os_data(),
-   //                      nullptr, (LPARAM)pBitmap->get_os_data(), 0, point.x, point.y, size.cx, size.cy, nFlags|DST_BITMAP) != false;
+   //                      nullptr, (LPARAM)pBitmap->get_os_data(), 0, point.x(), point.y(), size.cx, size.cy, nFlags|DST_BITMAP) != false;
 
    //}
 
@@ -777,7 +777,7 @@ namespace draw2d_gdi
    //   ASSERT(get_handle1() != nullptr);
 
    //   return ::DrawState(get_handle1(), hBrush, nullptr,
-   //                      (LPARAM)hIcon, 0, point.x, point.y, size.cx, size.cy, nFlags|DST_ICON) != false;
+   //                      (LPARAM)hIcon, 0, point.x(), point.y(), size.cx, size.cy, nFlags|DST_ICON) != false;
 
    //}
 
@@ -788,7 +788,7 @@ namespace draw2d_gdi
    //   ASSERT(get_handle1() != nullptr);
 
    //   return ::DrawState(get_handle1(), (HBRUSH)pBrush->get_os_data(), nullptr,
-   //                      (LPARAM)hIcon, 0, point.x, point.y, size.cx, size.cy, nFlags|DST_ICON) != false;
+   //                      (LPARAM)hIcon, 0, point.x(), point.y(), size.cx, size.cy, nFlags|DST_ICON) != false;
 
    //}
 
@@ -799,7 +799,7 @@ namespace draw2d_gdi
    //   ASSERT(get_handle1() != nullptr);
 
    //   return ::DrawState(get_handle1(), hBrush,
-   //                      nullptr, (LPARAM)lpszText, (WPARAM)nTextLen, point.x, point.y, size.cx, size.cy, nFlags|(bPrefixText ? DST_PREFIXTEXT : DST_TEXT)) != false;
+   //                      nullptr, (LPARAM)lpszText, (WPARAM)nTextLen, point.x(), point.y(), size.cx, size.cy, nFlags|(bPrefixText ? DST_PREFIXTEXT : DST_TEXT)) != false;
 
    //}
 
@@ -810,7 +810,7 @@ namespace draw2d_gdi
    //   ASSERT(get_handle1() != nullptr);
 
    //   return ::DrawState(get_handle1(), (HBRUSH)pBrush->get_os_data(),
-   //                      nullptr, (LPARAM)lpszText, (WPARAM)nTextLen, point.x, point.y, size.cx, size.cy, nFlags|(bPrefixText ? DST_PREFIXTEXT : DST_TEXT)) != false;
+   //                      nullptr, (LPARAM)lpszText, (WPARAM)nTextLen, point.x(), point.y(), size.cx, size.cy, nFlags|(bPrefixText ? DST_PREFIXTEXT : DST_TEXT)) != false;
 
    //}
 
@@ -821,7 +821,7 @@ namespace draw2d_gdi
    //   ASSERT(get_handle1() != nullptr);
 
    //   return ::DrawState(get_handle1(), hBrush,
-   //                      lpDrawProc, lData, 0, point.x, point.y, size.cx, size.cy, nFlags|DST_COMPLEX) != false;
+   //                      lpDrawProc, lData, 0, point.x(), point.y(), size.cx, size.cy, nFlags|DST_COMPLEX) != false;
 
    //}
 
@@ -832,7 +832,7 @@ namespace draw2d_gdi
    //   ASSERT(get_handle1() != nullptr);
 
    //   return ::DrawState(get_handle1(), (HBRUSH)pBrush->get_os_data(),
-   //                      lpDrawProc, lData, 0, point.x, point.y, size.cx, size.cy, nFlags|DST_COMPLEX) != false;
+   //                      lpDrawProc, lData, 0, point.x(), point.y(), size.cx, size.cy, nFlags|DST_COMPLEX) != false;
 
    //}
 
@@ -872,7 +872,7 @@ namespace draw2d_gdi
 
       ASSERT(get_handle1() != nullptr);
 
-      return ::Chord(get_handle1(), rectangle.left, rectangle.top, rectangle.right, rectangle.bottom, pointStart.x, pointStart.y, pointEnd.x, pointEnd.y) != false;
+      return ::Chord(get_handle1(), rectangle.left, rectangle.top, rectangle.right, rectangle.bottom, pointStart.x(), pointStart.y(), pointEnd.x(), pointEnd.y()) != false;
 
    }
 
@@ -1187,8 +1187,8 @@ namespace draw2d_gdi
       ASSERT(get_handle1() != nullptr);
 
       return ::Pie(get_handle1(), rectangle.left, rectangle.top,
-                   rectangle.right, rectangle.bottom, pointStart.x, pointStart.y,
-                   pointEnd.x, pointEnd.y) != false;
+                   rectangle.right, rectangle.bottom, pointStart.x(), pointStart.y(),
+                   pointEnd.x(), pointEnd.y()) != false;
 
    }
 
@@ -1198,7 +1198,7 @@ namespace draw2d_gdi
 
       ASSERT(get_handle1() != nullptr);
 
-      return ::RoundRect(get_handle1(), rectangle.left, rectangle.top, ::width(rectangle), ::height(rectangle), point.x, point.y) != false;
+      return ::RoundRect(get_handle1(), rectangle.left, rectangle.top, ::width(rectangle), ::height(rectangle), point.x(), point.y()) != false;
 
    }
 
@@ -1220,8 +1220,8 @@ namespace draw2d_gdi
       i32 y = rectangle.top;
       i32 nWidth = ::width(rectangle);
       i32 nHeight = ::height(rectangle);
-      i32 xSrc = point.x;
-      i32 ySrc = point.y;
+      i32 xSrc = point.x();
+      i32 ySrc = point.y();
 
       synchronous_lock ml(synchronization());
 
@@ -1251,36 +1251,36 @@ namespace draw2d_gdi
 
             if(xSrc < 0)
             {
-               pointDst.x -= xSrc;
+               pointDst.x() -= xSrc;
                xSrc = 0;
             }
             if(ySrc < 0)
             {
-               pointDst.x -= ySrc;
+               pointDst.x() -= ySrc;
                ySrc = 0;
             }
 
-            if(pointDst.x < 0)
+            if(pointDst.x() < 0)
             {
-               size.cx += pointDst.x;
-               pointDst.x = 0;
+               size.cx += pointDst.x();
+               pointDst.x() = 0;
             }
 
             if(size.cx < 0)
                return true;
 
-            if(pointDst.y < 0)
+            if(pointDst.y() < 0)
             {
-               size.cy += pointDst.y;
-               pointDst.y = 0;
+               size.cy += pointDst.y();
+               pointDst.y() = 0;
             }
 
             if(size.cy < 0)
                return true;
 
-            int xEnd = minimum(size.cx, minimum(pimage->width() - pointSrc.x, m_pimage->width() - pointDst->x));
+            int xEnd = minimum(size.cx, minimum(pimage->width() - pointSrc.x(), m_pimage->width() - pointDst->x));
 
-            int yEnd = minimum(size.cy, minimum(pimage->height() - pointSrc.y, m_pimage->height() - pointDst->y));
+            int yEnd = minimum(size.cy, minimum(pimage->height() - pointSrc.y(), m_pimage->height() - pointDst->y));
 
             if(xEnd < 0)
                return false;
@@ -1317,8 +1317,8 @@ namespace draw2d_gdi
             i32 scan1 = m_pimage->scan;
 
             ::point_i32 point = GetViewportOrg();
-            x += point.x;
-            y += point.y;
+            x += point.x();
+            y += point.y();
 
             nWidth  = minimum(nWidth   , minimum(cx - xSrc, cx1 - x));
             nHeight = minimum(nHeight  , minimum(cy - ySrc, cy1 - y));
@@ -1375,7 +1375,7 @@ namespace draw2d_gdi
 
             GdiFlush();
 
-            ::AlphaBlend(m_hdc, pointDst.x, pointDst.y, size.cx, size.cy, (HDC) pimage->g()->get_os_data(), 0, 0, size.cx, size.cy, bf);
+            ::AlphaBlend(m_hdc, pointDst.x(), pointDst.y(), size.cx, size.cy, (HDC) pimage->g()->get_os_data(), 0, 0, size.cx, size.cy, bf);
 
             /*for(int y = 0; y < nHeight; y++)
             {
@@ -1518,7 +1518,7 @@ namespace draw2d_gdi
 
       ASSERT(get_handle1() != nullptr);
 
-      return ::GetPixel(get_handle1(), point.x, point.y);
+      return ::GetPixel(get_handle1(), point.x(), point.y());
 
    }
 
@@ -1538,7 +1538,7 @@ namespace draw2d_gdi
 
       ASSERT(get_handle1() != nullptr);
 
-      return ::SetPixel(get_handle1(), point.x, point.y, crColor);
+      return ::SetPixel(get_handle1(), point.x(), point.y(), crColor);
 
    }
 
@@ -1642,7 +1642,7 @@ namespace draw2d_gdi
 
          ::point_i32 point = GetViewportOrg();
 
-         GDI_DIB(pimage.m_p)->process_blend(&brush, (int) x + point.x, (int) y + point.y, m_ealphamode, m_pimage);
+         GDI_DIB(pimage.m_p)->process_blend(&brush, (int) x + point.x(), (int) y + point.y(), m_ealphamode, m_pimage);
 
          if(m_ealphamode == ::draw2d::e_alpha_mode_blend)
          {
@@ -2177,7 +2177,7 @@ namespace draw2d_gdi
 
       ASSERT(get_handle1() != nullptr);
 
-      return ::SetPixelV(get_handle1(), point.x, point.y, crColor) != false;
+      return ::SetPixelV(get_handle1(), point.x(), point.y(), crColor) != false;
 
    }
 
@@ -2198,7 +2198,7 @@ namespace draw2d_gdi
    bool graphics::ArcTo(const ::rectangle_i32 & rectangle, const ::point_i32 & pointStart, const ::point_i32 & pointEnd)
    {
 
-      ASSERT(get_handle1() != nullptr); return ArcTo(rectangle.left, rectangle.top, rectangle.right, rectangle.bottom, pointStart.x, pointStart.y, pointEnd.x, pointEnd.y) != false;
+      ASSERT(get_handle1() != nullptr); return ArcTo(rectangle.left, rectangle.top, rectangle.right, rectangle.bottom, pointStart.x(), pointStart.y(), pointEnd.x(), pointEnd.y()) != false;
 
    }
 
@@ -3078,8 +3078,8 @@ namespace draw2d_gdi
 
    imageWork4.Fill(255, 0, 0, 0);
 
-   imageWork4.from(point_i32(maximum(0, m_pointAlphaBlend.x - xDest), maximum(0, m_pointAlphaBlend.y - yDest)),
-   m_pimageAlphaBlend->get_graphics(), point_i32(maximum(0, xDest - m_pointAlphaBlend.x), maximum(0, yDest - m_pointAlphaBlend.y)), size);
+   imageWork4.from(point_i32(maximum(0, m_pointAlphaBlend.x() - xDest), maximum(0, m_pointAlphaBlend.y() - yDest)),
+   m_pimageAlphaBlend->get_graphics(), point_i32(maximum(0, xDest - m_pointAlphaBlend.x()), maximum(0, yDest - m_pointAlphaBlend.y())), size);
 
    imageWork.channel_multiply(::color::e_channel_alpha, imageWork4);
 
@@ -3144,8 +3144,8 @@ namespace draw2d_gdi
 
          image4.fill(255, 0, 0, 0);
 
-         image4.from(point_i32(maximum(0, m_pointAlphaBlend.x - xDest), maximum(0, m_pointAlphaBlend.y - yDest)),
-                     m_pimageAlphaBlend->get_graphics(), point_i32(maximum(0, xDest - m_pointAlphaBlend.x), maximum(0, yDest - m_pointAlphaBlend.y)), size);
+         image4.from(point_i32(maximum(0, m_pointAlphaBlend.x() - xDest), maximum(0, m_pointAlphaBlend.y() - yDest)),
+                     m_pimageAlphaBlend->get_graphics(), point_i32(maximum(0, xDest - m_pointAlphaBlend.x()), maximum(0, yDest - m_pointAlphaBlend.y())), size);
 
          pimage1->channel_multiply(::color::e_channel_alpha, image4);
 
@@ -3153,7 +3153,7 @@ namespace draw2d_gdi
          __keep(m_pimageAlphaBlend->m_pimpl, nullptr);
 
 
-         return BitBlt(pointDest.x, pointDest.y, size.cx, size.cy, pimage1->g(), pointSrc.x, pointSrc.y, SRCCOPY) != false;
+         return BitBlt(pointDest.x(), pointDest.y(), size.cx, size.cy, pimage1->g(), pointSrc.x(), pointSrc.y(), SRCCOPY) != false;
 
       }
       if(dOpacity < 0.0)
@@ -4248,14 +4248,14 @@ namespace draw2d_gdi
       if (get_handle1() != nullptr && get_handle1() != get_handle2())
       {
 
-         ::MoveToEx(get_handle1(), point.x, point.y, &point);
+         ::MoveToEx(get_handle1(), point.x(), point.y(), &point);
 
       }
 
       if (get_handle2() != nullptr)
       {
 
-         ::MoveToEx(get_handle2(), point.x, point.y, &point);
+         ::MoveToEx(get_handle2(), point.x(), point.y(), &point);
 
       }
 
@@ -4393,7 +4393,7 @@ namespace draw2d_gdi
 
          VERIFY(::GetCurrentPositionEx(get_handle1(), &point));
 
-         VERIFY(::MoveToEx(get_handle2(), point.x, point.y, nullptr));
+         VERIFY(::MoveToEx(get_handle2(), point.x(), point.y(), nullptr));
 
       }
 
@@ -4427,7 +4427,7 @@ namespace draw2d_gdi
 
          VERIFY(::GetCurrentPositionEx(get_handle1(), &point));
 
-         VERIFY(::MoveToEx(get_handle2(), point.x, point.y, nullptr));
+         VERIFY(::MoveToEx(get_handle2(), point.x(), point.y(), nullptr));
 
 
       }
@@ -4452,7 +4452,7 @@ namespace draw2d_gdi
 
          VERIFY(::GetCurrentPositionEx(get_handle1(), &point));
 
-         VERIFY(::MoveToEx(get_handle2(), point.x, point.y, nullptr));
+         VERIFY(::MoveToEx(get_handle2(), point.x(), point.y(), nullptr));
 
       }
 
@@ -4482,7 +4482,7 @@ namespace draw2d_gdi
       {
          ::point_i32 point;
          VERIFY(::GetCurrentPositionEx(get_handle1(), &point));
-         VERIFY(::MoveToEx(get_handle2(), point.x, point.y, nullptr));
+         VERIFY(::MoveToEx(get_handle2(), point.x(), point.y(), nullptr));
 
       }
 
@@ -4876,12 +4876,12 @@ namespace draw2d_gdi
 
       double f2 = arc.m_dAngle2;
 
-      point1.x          = (LONG) (arc.m_xCenter + arc.m_dRadiusX * cos(f1));
-      point1.y          = (LONG) (arc.m_yCenter - arc.m_dRadiusY * sin(f1));
-      point2.x          = (LONG) (arc.m_xCenter + arc.m_dRadiusX * cos(f2));
-      point2.y          = (LONG) (arc.m_yCenter - arc.m_dRadiusY * sin(f2));
+      point1.x()          = (LONG) (arc.m_xCenter + arc.m_dRadiusX * cos(f1));
+      point1.y()          = (LONG) (arc.m_yCenter - arc.m_dRadiusY * sin(f1));
+      point2.x()          = (LONG) (arc.m_xCenter + arc.m_dRadiusX * cos(f2));
+      point2.y()          = (LONG) (arc.m_yCenter - arc.m_dRadiusY * sin(f2));
 
-      return ::ArcTo(m_hdc, rectangle.left, rectangle.top, rectangle.right - rectangle.left, rectangle.bottom - rectangle.top, point1.x, point1.y, point2.x, point2.y) != false;
+      return ::ArcTo(m_hdc, rectangle.left, rectangle.top, rectangle.right - rectangle.left, rectangle.bottom - rectangle.top, point1.x(), point1.y(), point2.x(), point2.y()) != false;
 
    }
 

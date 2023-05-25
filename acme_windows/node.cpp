@@ -8,8 +8,8 @@
 #include "exclusive.h"
 #include "application.h"
 #include "acme/exception/exception.h"
-#include "acme/filesystem/filesystem/file_dialog.h"
-#include "acme/filesystem/filesystem/folder_dialog.h"
+//#include "acme/filesystem/filesystem/file_dialog.h"
+//#include "acme/filesystem/filesystem/folder_dialog.h"
 #include "acme/operating_system/process.h"
 #include "acme/operating_system/summary.h"
 #include "acme/parallelization/synchronous_lock.h"
@@ -36,21 +36,21 @@
 #include <shellapi.h>
 
 
-
-#if defined(_WIN32)
-#  ifndef NOMINMAX
-#  define NOMINMAX 1
-#  endif
-//#  include <windows.h>
-#include <commdlg.h>
-#endif
-
-//#include <shobjidl.h>
-//#include <ShellApi.h>
-//#include <Security.h>
-//#include <wincred.h>
-#include <shobjidl_core.h>
-
+//
+//#if defined(_WIN32)
+//#  ifndef NOMINMAX
+//#  define NOMINMAX 1
+//#  endif
+////#  include <windows.h>
+//#include <commdlg.h>
+////#endif
+//
+////#include <shobjidl.h>
+////#include <ShellApi.h>
+////#include <Security.h>
+////#include <wincred.h>
+//#include <shobjidl_core.h>
+//
 
 
 
@@ -1936,11 +1936,11 @@ namespace acme_windows
 
       wstring wstr;
 
-      auto pwsz = wstr.get_string_buffer(dwSize);
+      auto pwsz = wstr.get_buffer(dwSize);
 
       dwSize = GetEnvironmentVariableW(wstrEnvironmentVariable, pwsz, dwSize);
 
-      wstr.release_string_buffer(dwSize);
+      wstr.release_buffer(dwSize);
 
       str = wstr;
 
@@ -1958,11 +1958,11 @@ namespace acme_windows
 
       wstring wstrTarget;
 
-      auto pwszTarget = wstrTarget.get_string_buffer(len);
+      auto pwszTarget = wstrTarget.get_buffer(len);
 
       ExpandEnvironmentStringsW(wstrSource, pwszTarget, len + 1);
 
-      wstrTarget.release_string_buffer(len);
+      wstrTarget.release_buffer(len);
 
       return wstrTarget;
 
@@ -2582,15 +2582,15 @@ namespace acme_windows
 
          wstring wstr;
 
-         auto pwsz = wstr.get_string_buffer(dwSize);
+         auto pwsz = wstr.get_buffer(dwSize);
 
          lResult = RegQueryValueExW(hkey, wstring(pszSubKey), nullptr, &dwType, (byte *)(unichar *)pwsz, &dwSize);
 
-         wstr.release_string_buffer(dwSize);
+         wstr.release_buffer(dwSize);
 
          str = wstr;
 
-         //str.release_string_buffer(dwSize);
+         //str.release_buffer(dwSize);
 
          return lResult;
 
@@ -2725,11 +2725,11 @@ namespace acme_windows
       if (dwCharLen)
       {
 
-         auto pwsz = wstrTarget.get_string_buffer(dwCharLen);
+         auto pwsz = wstrTarget.get_buffer(dwCharLen);
 
          ::ExpandEnvironmentStringsW(wstr, pwsz, dwCharLen + 1);
 
-         wstrTarget.release_string_buffer();
+         wstrTarget.release_buffer();
 
       }
 
@@ -3473,6 +3473,19 @@ namespace acme_windows
    }
 
 
+   void node::open_terminal_and_run(const ::scoped_string& scopedstr)
+   {
+
+      ::wstring wstrParameters;
+
+      wstrParameters = L"/c ";
+
+      wstrParameters += ::wstring(scopedstr);
+
+      ::ShellExecuteW(nullptr, L"open", L"cmd", wstrParameters, nullptr, SW_SHOW);
+
+   }
+
 
    ::u64 node::translate_processor_affinity(int iOrder)
    {
@@ -3823,255 +3836,6 @@ namespace acme_windows
    }
 
 
-   void node::_node_file_dialog(::file::file_dialog * pdialogParameter)
-   {
-
-      if (pdialogParameter->m_bSave && pdialogParameter->m_bMultiple)
-      {
-
-         throw ::exception(error_bad_argument, "save and multiple must not both be true.");
-
-      }
-
-      ::pointer < ::file::file_dialog > pdialog(pdialogParameter);
-
-      main_asynchronous([pdialog]
-         {
-
-
-               ::file::path_array patha;
-
-
-
-               OPENFILENAME ofn;
-               ZeroMemory(&ofn, sizeof(OPENFILENAME));
-               ofn.lStructSize = sizeof(OPENFILENAME);
-               memory tmp1;
-               static const int FILE_DIALOG_MAX_BUFFER = 16384;
-               tmp1.set_size(FILE_DIALOG_MAX_BUFFER);
-               tmp1.zero();
-               wchar_t * tmp = (wchar_t *)tmp1.data();
-               ofn.lpstrFile = tmp;
-               //;; ZeroMemory(tmp, FILE_DIALOG_MAX_BUFFER);
-               ofn.nMaxFile = (DWORD)tmp1.size();
-               ofn.nFilterIndex = 1;
-
-               memory filter;
-
-               if (!pdialog->m_bSave && pdialog->m_filedialogfiltera.size() > 1) {
-                  __wide_append(filter, "Supported file types (");
-                  for (::index i = 0; i < pdialog->m_filedialogfiltera.size(); ++i) {
-                     //__wide_append(filter, "*.");
-                     __wide_append(filter, pdialog->m_filedialogfiltera[i].m_strPatternList.c_str());
-                     if (i + 1 < pdialog->m_filedialogfiltera.size())
-                        __wide_append(filter, ";");
-                  }
-                  __wide_append(filter, ")");
-                  __wide_append_null(filter);
-                  for (::index i = 0; i < pdialog->m_filedialogfiltera.size(); ++i) {
-                     //__wide_append(filter, "*.");
-                     __wide_append(filter, pdialog->m_filedialogfiltera[i].m_strPatternList.c_str());
-                     if (i + 1 < pdialog->m_filedialogfiltera.size())
-                        __wide_append(filter, ";");
-                  }
-                  __wide_append_null(filter);
-               }
-               for (auto pair : pdialog->m_filedialogfiltera) {
-                  __wide_append(filter, pair.m_strName.c_str());
-                  //__wide_append(filter, " (*.");
-                  __wide_append(filter, " (");
-                  __wide_append(filter, pair.m_strPatternList.c_str());
-                  __wide_append(filter, ")");
-                  __wide_append_null(filter);
-                  //__wide_append(filter, "*.");
-                  __wide_append(filter, pair.m_strPatternList.c_str());
-                  __wide_append_null(filter);
-               }
-               __wide_append_null(filter);
-               ofn.lpstrFilter = (LPWSTR)filter.data();
-
-               if (pdialog->m_bSave) {
-                  ofn.Flags = OFN_EXPLORER | OFN_PATHMUSTEXIST | OFN_OVERWRITEPROMPT;
-                  if (GetSaveFileNameW(&ofn) == FALSE)
-                  {
-                     pdialog->m_function({});
-
-                     return;
-
-                  }
-               }
-               else {
-                  ofn.Flags = OFN_EXPLORER | OFN_PATHMUSTEXIST | OFN_FILEMUSTEXIST;
-                  if (pdialog->m_bMultiple)
-                     ofn.Flags |= OFN_ALLOWMULTISELECT;
-                  if (GetOpenFileNameW(&ofn) == FALSE)
-                  {
-                     pdialog->m_function({});
-                     return;
-                  }
-               }
-
-               size_t i = 0;
-               while (*tmp != L'\0') {
-
-                  wstring wstr(tmp);
-                  patha.add(string(wstr).c_str());
-
-                  tmp += wcslen(tmp) + 1;
-               }
-
-               //if (result.size() > 1) {
-               //   for (i = 1; i < result.size(); ++i) {
-               //      result[i] = result[0] + "\\" + result[i];
-               //   }
-               //   result.erase(begin(result));
-               //}
-
-         //#elif defined(LINUX)
-         //
-         //
-         //      throw ::exception(todo);
-         //
-         //      //         static const int FILE_DIALOG_MAX_BUFFER = 16384;
-         //      //
-         //      //         char buffer[FILE_DIALOG_MAX_BUFFER];
-         //      //
-         //      //         buffer[0] = '\0';
-         //      //
-         //      //         std::string cmd = "zenity --file-selection ";
-         //      //         // The safest separator for multiple selected paths is /, since / can never occur
-         //      //         // in file names. Only where two paths are concatenated will there be two / following
-         //      //         // each other.
-         //      //         if (multiple)
-         //      //            cmd += "--multiple --separator=\"/\" ";
-         //      //         if (save)
-         //      //            cmd += "--save ";
-         //      //         cmd += "--file-filter=\"";
-         //      //         for (auto pair : filetypes)
-         //      //            cmd += "\"*." + pair.first + "\" ";
-         //      //         cmd += "\"";
-         //      //         FILE * output = popen(cmd.c_str(), "r");
-         //      //         if (output == nullptr)
-         //      //            throw std::runtime_error("popen() failed -- could not launch zenity!");
-         //      //         while (fgets(buffer, FILE_DIALOG_MAX_BUFFER, output) != NULL)
-         //      //            ;
-         //      //         pclose(output);
-         //      //         std::string paths(buffer);
-         //      //         paths.erase(std::remove(paths.begin(), paths.end(), '\n'), paths.end());
-         //      //
-         //      //         while (!paths.empty()) {
-         //      //            size_t end = paths.find("//");
-         //      //            if (end == std::string::npos) {
-         //      //               result.emplace_back(paths);
-         //      //               paths = "";
-         //      //            }
-         //      //            else {
-         //      //               result.emplace_back(paths.substr(0, end));
-         //      //               paths = paths.substr(end + 1);
-         //      //            }
-         //      //         }
-         //
-         //#endif
-               pdialog->m_patha = patha;
-               pdialog->m_function(pdialog);
-
-         });
-
-   }
-
-
-   void node::_node_folder_dialog(::file::folder_dialog * pdialogParameter)
-   {
-
-      ::pointer < ::file::folder_dialog > pdialog(pdialogParameter);
-
-      main_asynchronous([this, pdialog]
-         {
-
-
-               ::file::path_array patha;
-
-               bool bOk = false;
-
-               acmenode()->defer_co_initialize_ex(false);
-
-               comptr < IFileOpenDialog > pfileopen;
-
-               // Create the FileOpenDialog object.
-               HRESULT hr = pfileopen.CoCreateInstance(CLSID_FileOpenDialog, nullptr, CLSCTX_ALL);
-
-               if (SUCCEEDED(hr))
-               {
-
-                  if (pdialog->m_path.has_char())
-                  {
-
-                     wstring wstr(pdialog->m_path);
-
-                     comptr < IShellItem > psi;
-
-                     hr = SHCreateItemFromParsingName(wstr, nullptr, IID_IShellItem, (void **)&psi);
-
-                     if (SUCCEEDED(hr))
-                     {
-
-                        pfileopen->SetFolder(psi);
-
-                     }
-
-                  }
-
-                  pfileopen->SetOptions(FOS_PICKFOLDERS);
-
-                  // Show the Open dialog box.
-                  hr = pfileopen->Show(nullptr);
-
-                  if (SUCCEEDED(hr))
-                  {
-
-                     // Get the file name from the dialog box.
-                     comptr < IShellItem > pitem;
-
-                     hr = pfileopen->GetResult(&pitem);
-
-                     if (SUCCEEDED(hr))
-                     {
-
-                        ::cotaskptr < PWSTR > pwszFilePath;
-
-                        hr = pitem->GetDisplayName(SIGDN_FILESYSPATH, &pwszFilePath);
-
-                        // Display the file name to the user.
-                        if (SUCCEEDED(hr))
-                        {
-
-                           pdialog->m_path = ::string((PWSTR)pwszFilePath);
-
-                           pdialog->m_function(::transfer(pdialog));
-
-                           bOk = true;
-
-                        }
-
-                     }
-
-                  }
-
-               }
-
-
-               if (!bOk)
-               {
-
-                  pdialog->m_function({});
-
-               }
-
-
-
-         });
-
-   }
 
 
    ::string node::registry_environment_variable_to_system(const ::scoped_string & scopedstr)

@@ -236,9 +236,9 @@ namespace draw2d_gdiplus
          try
          {
 
-            rectangle.X = (Gdiplus::REAL)(rectangle.X + pgraphics->m_pointAddShapeTranslate.x);
+            rectangle.X = (INT)(rectangle.X + pgraphics->m_pointAddShapeTranslate.x());
 
-            rectangle.Y = (Gdiplus::REAL)(rectangle.Y + pgraphics->m_pointAddShapeTranslate.y);
+            rectangle.Y = (INT)(rectangle.Y + pgraphics->m_pointAddShapeTranslate.y());
 
             bOk2 = m_ppath->AddRectangle(rectangle) == Gdiplus::Status::Ok;
 
@@ -263,9 +263,9 @@ namespace draw2d_gdiplus
          try
          {
 
-            rectangle.X = (Gdiplus::REAL)(rectangle.X + pgraphics->m_pointAddShapeTranslate.x);
+            rectangle.X = (Gdiplus::REAL)(rectangle.X + pgraphics->m_pointAddShapeTranslate.x());
 
-            rectangle.Y = (Gdiplus::REAL)(rectangle.Y + pgraphics->m_pointAddShapeTranslate.y);
+            rectangle.Y = (Gdiplus::REAL)(rectangle.Y + pgraphics->m_pointAddShapeTranslate.y());
 
             bOk2 = m_ppath->AddRectangle(rectangle) == Gdiplus::Status::Ok;
 
@@ -653,15 +653,15 @@ namespace draw2d_gdiplus
 
       ::rectangle_f64 rectangle;
 
-      rectangle.left      = arc.m_pointCenter.x - arc.m_sizeRadius.cx;
-      rectangle.right     = arc.m_pointCenter.x + arc.m_sizeRadius.cx;
-      rectangle.top       = arc.m_pointCenter.y - arc.m_sizeRadius.cy;
-      rectangle.bottom    = arc.m_pointCenter.y + arc.m_sizeRadius.cy;
+      rectangle.left      = arc.m_pointCenter.x() - arc.m_sizeRadius.cx;
+      rectangle.right     = arc.m_pointCenter.x() + arc.m_sizeRadius.cx;
+      rectangle.top       = arc.m_pointCenter.y() - arc.m_sizeRadius.cy;
+      rectangle.bottom    = arc.m_pointCenter.y() + arc.m_sizeRadius.cy;
 
       //if (!m_bHasPath && m_bHasPointInternal)
       //{
 
-      //   internal_add_line(parc->m_pointBeg.x, parc->m_pointBeg.y);
+      //   internal_add_line(parc->m_pointBeg.x(), parc->m_pointBeg.y());
 
       //}
 
@@ -691,7 +691,7 @@ namespace draw2d_gdiplus
    bool path::_set(::draw2d::graphics * pgraphics, const ::line & line)
    {
 
-      return internal_add_line(line.m_p1.x, line.m_p1.y, line.m_p2.x, line.m_p2.y);
+      return internal_add_line(line.m_p1.x(), line.m_p1.y(), line.m_p2.x(), line.m_p2.y());
 
    }
 
@@ -743,8 +743,8 @@ namespace draw2d_gdiplus
 
       return internal_add_text_out(
          pgraphics,
-         (i32)textout.m_point.x,
-         (i32)textout.m_point.y,
+         (i32)textout.m_point.x(),
+         (i32)textout.m_point.y(),
          textout.m_strText,
          textout.m_pfont);
 
@@ -783,7 +783,7 @@ namespace draw2d_gdiplus
 
       }
 
-      Gdiplus::PointF p((FLOAT) point.x, (FLOAT) point.y);
+      Gdiplus::PointF p((FLOAT) point.x(), (FLOAT) point.y());
 
       return pospath->IsVisible(p);
 

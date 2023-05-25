@@ -280,7 +280,7 @@ LRESULT CALLBACK __window_procedure(HWND hwnd, UINT message, WPARAM wparam, LPAR
 
       //   pimpl->m_pointCursor = pointCursor;
 
-      //   lparam = MAKELPARAM(pointCursor.x, pointCursor.y);
+      //   lparam = MAKELPARAM(pointCursor.x(), pointCursor.y());
 
       //   pimpl->call_message_handler(e_message_mouse_move, 0, lparam);
 
@@ -668,7 +668,7 @@ wstring windowing::_windows_register_window_class(::u32 nClassStyle, HCURSOR hCu
 
    {
 
-      LPWSTR lpwsz = wstrClassName.get_string_buffer(iLen);
+      LPWSTR lpwsz = wstrClassName.get_buffer(iLen);
 
       if (hCursor == nullptr && hbrBackground == nullptr && hIcon == nullptr)
       {
@@ -683,7 +683,7 @@ wstring windowing::_windows_register_window_class(::u32 nClassStyle, HCURSOR hCu
 
       }
 
-      wstrClassName.release_string_buffer();
+      wstrClassName.release_buffer();
 
    }
 

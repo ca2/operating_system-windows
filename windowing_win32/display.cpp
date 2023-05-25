@@ -1001,7 +1001,7 @@ namespace windowing_win32
 
       ::rectangle_i32 rectangleMonitor;
 
-      index iMatchingMonitor = get_best_monitor(rectangleMonitor, rectangleParam);
+      index iMatchingMonitor = get_best_monitor(&rectangleMonitor, rectangleParam);
 
       prectangle->left = rectangleMonitor.left;
 
@@ -1121,7 +1121,7 @@ namespace windowing_win32
 
       wstring wstrLocalImagetPath(strLocalImagePath);
 
-      return SystemParametersInfoW(SPI_SETDESKWALLPAPER, 0, (PVOID) wstr.c_str(), SPIF_UPDATEINIFILE | SPIF_SENDCHANGE) != false;
+      return SystemParametersInfoW(SPI_SETDESKWALLPAPER, 0, (PVOID)wstrLocalImagetPath.c_str(), SPIF_UPDATEINIFILE | SPIF_SENDCHANGE) != false;
 
    }
 
@@ -1129,17 +1129,20 @@ namespace windowing_win32
    string display::impl_get_wallpaper(index iScreen)
    {
 
-      wstring  wstr;
+      wstring wstr;
 
-      wstr.get_string_buffer(MAX_PATH * 8);
-      //::u32 uLen = pwsz.memsize();
+      auto size = MAX_PATH * 8;
 
-      if (!SystemParametersInfoW(SPI_GETDESKWALLPAPER, (::u32)wstr.storage_character_count(), wstr.data(), 0))
+      auto psz = wstr.get_buffer(size);
+
+      if (!SystemParametersInfoW(SPI_GETDESKWALLPAPER, size, psz, 0))
       {
+      
          return "";
 
       }
-      wstr.release_string_buffer();
+
+      wstr.release_buffer();
 
       return wstr;
 

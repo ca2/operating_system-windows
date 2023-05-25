@@ -545,9 +545,9 @@ namespace windows
    //      i32 nLen = ::GetWindowTextLength(oswindow);
    //      wstring wstr;
 
-   //      ::GetWindowTextW(oswindow, wstr.get_string_buffer(nLen), nLen + 1);
+   //      ::GetWindowTextW(oswindow, wstr.get_buffer(nLen), nLen + 1);
 
-   //      wstr.release_string_buffer();
+   //      wstr.release_buffer();
 
    //      rString = wstr;
 
@@ -666,7 +666,7 @@ namespace windows
    //   return ::SetLayeredWindowAttributes(get_handle(), crKey, bAlpha, dwFlags) != false;
    //}
 
-   //bool interaction_impl::UpdateLayeredWindow(::draw2d::graphics * pDCDst, ::point_i32 *pptDst, ::size_i32 *psize,
+   //bool interaction_impl::UpdateLayeredWindow(::draw2d::graphics * pDCDst, ::point_i32 *pptDst, SIZE_I32 *psize,
    //      ::draw2d::graphics * pDCSrc, ::point_i32 *pptSrc, color32_t crKey, BLENDFUNCTION *pblend, u32 dwFlags)
    //{
    //   ASSERT(_is_window());
@@ -1461,9 +1461,9 @@ namespace windows
 
       ////m_puserinteraction->m_sizeScreen = rectangleScreen.size();
 
-      ////m_puserinteraction->m_pointScreenClient.x = 0;
+      ////m_puserinteraction->m_pointScreenClient.x() = 0;
 
-      ////m_puserinteraction->m_pointScreenClient.y = 0;
+      ////m_puserinteraction->m_pointScreenClient.y() = 0;
 
       ////::ScreenToClient(m_oswindow, m_puserinteraction->m_pointScreenClient);
 
@@ -1472,9 +1472,9 @@ namespace windows
       ////if (hwndParent != NULL)
       ////{
 
-      ////   m_puserinteraction->m_pointParentClient.x = 0;
+      ////   m_puserinteraction->m_pointParentClient.x() = 0;
 
-      ////   m_puserinteraction->m_pointParentClient.y = 0;
+      ////   m_puserinteraction->m_pointParentClient.y() = 0;
 
       ////   ::ClientToScreen(m_oswindow, m_puserinteraction->m_pointParentClient);
 
@@ -1502,7 +1502,7 @@ namespace windows
 
    //   ::ClientToScreen(m_oswindow, &point);
 
-   //   return point_f64(point.x, point.y);
+   //   return point_f64(point.x(), point.y());
 
    //}
 
@@ -3992,7 +3992,7 @@ void interaction_impl::set_tool_window(bool bSet)
 //
 //         ::ScreenToClient(oswindow, pointCursor);
 //
-//         lparam = MAKELPARAM(pointCursor.x, pointCursor.y);
+//         lparam = MAKELPARAM(pointCursor.x(), pointCursor.y());
 //
 //         pimpl->call_message_handler(e_message_mouse_move, 0, lparam);
 //
@@ -4647,7 +4647,7 @@ void interaction_impl::set_tool_window(bool bSet)
 //            // handler has set it to another one.
 //            pmouse->m_ecursor = cursor_default;
 //
-//            //INFORMATION("windows::e_message_mouse_move(%d,%d)", pmouse->m_point.x, pmouse->m_point.y);
+//            //INFORMATION("windows::e_message_mouse_move(%d,%d)", pmouse->m_point.x(), pmouse->m_point.y());
 //
 //            string strType;
 //

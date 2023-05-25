@@ -197,7 +197,7 @@ namespace music
             }
 
             wstring wstr;
-            wstr.get_string_buffer(size);
+            wstr.get_buffer(size);
 
 
 
@@ -205,11 +205,11 @@ namespace music
             mmr = midiInMessage(
                   h,
                   DRV_QUERYDEVICEINTERFACE,
-                  reinterpret_cast<DWORD_PTR>((wchar_t *) wstr),
+                  reinterpret_cast<DWORD_PTR>((wchar_t *) wstr.c_str()),
                   size
                   );
 
-            wstr.release_string_buffer();
+            wstr.release_buffer();
 
             if (MMSYSERR_NOERROR != mmr)
             {
@@ -252,16 +252,16 @@ namespace music
             }
 
             wstring wstr;
-            wstr.get_string_buffer(size);
+            wstr.get_buffer(size);
 
             mmr = midiOutMessage(
                   h,
                   DRV_QUERYDEVICEINTERFACE,
-                  reinterpret_cast<DWORD_PTR>((wchar_t *) wstr),
+                  reinterpret_cast<DWORD_PTR>((wchar_t *) wstr.c_str()),
                   size
                   );
 
-            wstr.release_string_buffer();
+            wstr.release_buffer();
             if (MMSYSERR_NOERROR != mmr)
             {
                INFORMATION("midiOutMessage(DRV_QUERYDEVICEINTERFACE) failed: mmr = 0x%08x", mmr);

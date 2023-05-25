@@ -187,9 +187,9 @@ namespace production
 
       ::point_i32 pointOffset = get_context_offset();
 
-      i32 iStart = pointOffset.y / m_iLineHeight;
-      i32 y = m_iLineHeight - pointOffset.y % m_iLineHeight;
-      if(pointOffset.y > m_iLineHeight)
+      i32 iStart = pointOffset.y() / m_iLineHeight;
+      i32 y = m_iLineHeight - pointOffset.y() % m_iLineHeight;
+      if(pointOffset.y() > m_iLineHeight)
       {
          iStart--;
          y -= m_iLineHeight;
@@ -380,7 +380,7 @@ namespace production
       }
    }
 
-   ::item_pointer impact::on_hit_test(const ::point_i32 &point)
+   ::item_pointer impact::on_hit_test(const ::point_i32 &point, ::user::e_zorder ezorder)
    {
 
       ::rectangle_i32 rectangleArea;
@@ -443,7 +443,7 @@ namespace production
             menu.set_app(get_application());
             ::aura::menu menuPopup(menu.GetSubMenu(0));
             menuPopup.set_app(get_application());
-            menuPopup.track_popup_menu(0, pmouse->m_point.x, pmouse->m_point.y, get_parent_frame().GetSafeoswindow_());
+            menuPopup.track_popup_menu(0, pmouse->m_point.x(), pmouse->m_point.y(), get_parent_frame().GetSafeoswindow_());
          }
         */
    }

@@ -83,8 +83,8 @@ namespace draw2d_gdiplus
       void DeleteDC() override;
 
       // Device-Context Functions
-      virtual i32 SaveDC() override;
-      virtual void RestoreDC(i32 nSavedDC) override;
+      i32 save_graphics_context() override;
+      void restore_graphics_context(i32 nSavedContext) override;
       i32 GetDeviceCaps(i32 nIndex) override;
       virtual ::u32 SetBoundsRect(const ::rectangle_f64 & rectangleBounds, ::u32 flags);
       virtual ::u32 GetBoundsRect(::rectangle_f64 * rectdBounds, ::u32 flags);

@@ -475,12 +475,14 @@ namespace windowing_win32
 
          auto size = layout.design().size();
 
-         if (size != m_pimpl->m_sizeDrawn)
+         auto sizeDrawn = m_pimpl->m_sizeDrawn;
+
+         if (size.cx < sizeDrawn.cx && size.cy < sizeDrawn.cy)
          {
 
             ERROR("Resized size is different of drawn buffer size.");
 
-            m_pimpl->m_puserinteraction->set_need_redraw();
+            //m_pimpl->m_puserinteraction->set_need_redraw();
 
             m_pimpl->m_puserinteraction->post_redraw();
 
@@ -666,15 +668,15 @@ namespace windowing_win32
 #endif // __DEBUG
 
 
-            //point.x = 100;
+            //point.x() = 100;
 
-            //point.y = 100;
+            //point.y() = 100;
 
             //size.cx = 200;
 
             //size.cy = 200;
 
-            //::SetWindowPos(get_hwnd(), HWND_TOPMOST, point.x, point.y, size.cx, size.cy, SWP_NOZORDER);
+            //::SetWindowPos(get_hwnd(), HWND_TOPMOST, point.x(), point.y(), size.cx, size.cy, SWP_NOZORDER);
 
             string strType = __type_name(m_pimpl->m_puserinteraction);
 
@@ -773,7 +775,7 @@ namespace windowing_win32
 
                   //}
 
-                  //TRACE("UpdateLayeredWindow Bottom Right (%d, %d)", pointBottomRight.x, pointBottomRight.y);
+                  //TRACE("UpdateLayeredWindow Bottom Right (%d, %d)", pointBottomRight.x(), pointBottomRight.y());
 
 
                }
@@ -793,7 +795,7 @@ namespace windowing_win32
                //                     | SWP_NOOWNERZORDER
                //                     | SWP_DEFERERASE
                //                  | SWP_NOZORDER;
-               //                  ::SetWindowPos(get_hwnd(), NULL, point.x, point.y, size.cx, size.cy, 
+               //                  ::SetWindowPos(get_hwnd(), NULL, point.x(), point.y(), size.cx, size.cy, 
                //                     uFlags);
                //                  m_pimpl->on_visual_applied();
                //

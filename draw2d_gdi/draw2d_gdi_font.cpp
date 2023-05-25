@@ -145,12 +145,12 @@ namespace draw2d_gdi
       LOGFONTW logFont = *lpLogFont;
       ::point_i32 point;
       // 72 points/inch, 10 decipoints/point_i32
-      point.y = ::MulDiv(::GetDeviceCaps(hDC, LOGPIXELSY), logFont.lfHeight, 720);
-      point.x = 0;
+      point.y() = ::MulDiv(::GetDeviceCaps(hDC, LOGPIXELSY), logFont.lfHeight, 720);
+      point.x() = 0;
       ::DPtoLP(hDC, &point, 1);
       ::point_i32 pointOrg;
       ::DPtoLP(hDC, pointOrg, 1);
-      logFont.lfHeight = -abs(point.y - pointOrg.y);
+      logFont.lfHeight = -abs(point.y() - pointOrg.y());
 
       if (pgraphics == nullptr)
          ReleaseDC(nullptr, hDC);

@@ -740,9 +740,9 @@ namespace windowing_win32
 
          ::GetCursorPos(&point);
 
-         m_pointCursor.x = point.x;
+         m_pointCursor.x() = point.x;
 
-         m_pointCursor.y = point.y;
+         m_pointCursor.y() = point.y;
 
       }
 
@@ -759,7 +759,7 @@ namespace windowing_win32
    void windowing::set_cursor_position(const ::point_i32 & point)
    {
 
-      if (!::SetCursorPos(point.x, point.y))
+      if (!::SetCursorPos(point.x(), point.y()))
       {
 
          //return false;

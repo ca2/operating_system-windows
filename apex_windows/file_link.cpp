@@ -117,12 +117,12 @@ namespace apex_windows
 
          wstring wstr;
 
-         auto pwsz = wstr.get_string_buffer(MAX_PATH * 8);
+         auto pwsz = wstr.get_buffer(MAX_PATH * 8);
 
          if (SUCCEEDED(m_pshelllink->GetPath(pwsz, MAX_PATH * 8, nullptr, 0)))
          {
 
-            wstr.release_string_buffer();
+            wstr.release_buffer();
 
             m_pathTarget = wstr;
 
@@ -137,12 +137,12 @@ namespace apex_windows
 
          wstring wstr;
 
-         auto pwsz = wstr.get_string_buffer(MAX_PATH * 8);
+         auto pwsz = wstr.get_buffer(MAX_PATH * 8);
 
          if (SUCCEEDED(m_pshelllink->GetWorkingDirectory(pwsz, MAX_PATH * 8)))
          {
 
-            wstr.release_string_buffer();
+            wstr.release_buffer();
 
             m_pathFolder = wstr;
 
@@ -157,12 +157,12 @@ namespace apex_windows
 
          wstring wstr;
 
-         auto pwsz = wstr.get_string_buffer(MAX_PATH * 8);
+         auto pwsz = wstr.get_buffer(MAX_PATH * 8);
 
          if (SUCCEEDED(m_pshelllink->GetArguments(pwsz, MAX_PATH * 8)))
          {
 
-            wstr.release_string_buffer();
+            wstr.release_buffer();
 
             m_strArguments = wstr;
 
@@ -177,14 +177,14 @@ namespace apex_windows
 
          wstring wstr;
 
-         auto pwsz = wstr.get_string_buffer(MAX_PATH * 8);
+         auto pwsz = wstr.get_buffer(MAX_PATH * 8);
 
          int iIcon = 0;
 
          if (SUCCEEDED(m_pshelllink->GetIconLocation(pwsz, MAX_PATH * 8, &iIcon)))
          {
 
-            wstr.release_string_buffer();
+            wstr.release_buffer();
 
             m_pathIcon = wstr;
 

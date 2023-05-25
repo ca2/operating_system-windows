@@ -685,7 +685,9 @@
     <ClCompile Include="application.cpp" />
     <ClCompile Include="Debug.cpp" />
     <ClCompile Include="exclusive.cpp" />
+    <ClCompile Include="file_dialog.cpp" />
     <ClCompile Include="file_find.cpp" />
+    <ClCompile Include="folder_dialog.cpp" />
     <ClCompile Include="itemidlist.cpp" />
     <ClCompile Include="known_folder_struct.cpp" />
     <ClCompile Include="language.cpp" />

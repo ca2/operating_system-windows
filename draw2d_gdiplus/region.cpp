@@ -76,7 +76,7 @@ namespace draw2d_gdiplus
 
       }
 
-      Gdiplus::PointF pointf((Gdiplus::REAL) point.x, (Gdiplus::REAL) point.y);
+      Gdiplus::PointF pointf((Gdiplus::REAL) point.x(), (Gdiplus::REAL) point.y());
 
       return m_pregion->IsVisible(pointf)  != false;
 
@@ -184,7 +184,7 @@ namespace draw2d_gdiplus
 
       for(i32 i = 0; i < pitem->m_polygon.get_size(); i++)
       {
-         pa.add(Gdiplus::PointF((Gdiplus::REAL) pitem->m_polygon[i].x, (Gdiplus::REAL) pitem->m_polygon[i].y));
+         pa.add(Gdiplus::PointF((Gdiplus::REAL) pitem->m_polygon[i].x(), (Gdiplus::REAL) pitem->m_polygon[i].y()));
       }
 
       if(pitem->m_efillmode == ::draw2d::e_fill_mode_alternate)
@@ -235,7 +235,7 @@ namespace draw2d_gdiplus
          for(i32 j = 0; j < jCount; j++)
          {
 
-            pa.add(Gdiplus::PointF((Gdiplus::REAL) polygon[n].x, (Gdiplus::REAL) polygon[n].y));
+            pa.add(Gdiplus::PointF((Gdiplus::REAL) polygon[n].x(), (Gdiplus::REAL) polygon[n].y()));
 
             n++;
 

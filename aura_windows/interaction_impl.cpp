@@ -216,9 +216,9 @@ namespace aura_windows
    //      i32 nLen = ::GetWindowTextLength(oswindow);
    //      wstring wstr;
 
-   //      ::GetWindowTextW(oswindow, wstr.get_string_buffer(nLen), nLen + 1);
+   //      ::GetWindowTextW(oswindow, wstr.get_buffer(nLen), nLen + 1);
 
-   //      wstr.release_string_buffer();
+   //      wstr.release_buffer();
 
    //      rString = wstr;
 
@@ -337,7 +337,7 @@ namespace aura_windows
    //   return ::SetLayeredWindowAttributes(get_handle(), crKey, bAlpha, dwFlags) != false;
    //}
 
-   //bool interaction_impl::UpdateLayeredWindow(::draw2d::graphics * pDCDst, ::point_i32 *pptDst, ::size_i32 *psize,
+   //bool interaction_impl::UpdateLayeredWindow(::draw2d::graphics * pDCDst, ::point_i32 *pptDst, SIZE_I32 *psize,
    //      ::draw2d::graphics * pDCSrc, ::point_i32 *pptSrc, ::color::color crKey, BLENDFUNCTION *pblend, u32 dwFlags)
    //{
    //   ASSERT(_is_window());
@@ -1192,9 +1192,9 @@ namespace aura_windows
 
       ////m_puserinteraction->m_sizeScreen = rectangleScreen.size();
 
-      ////m_puserinteraction->m_pointScreenClient.x = 0;
+      ////m_puserinteraction->m_pointScreenClient.x() = 0;
 
-      ////m_puserinteraction->m_pointScreenClient.y = 0;
+      ////m_puserinteraction->m_pointScreenClient.y() = 0;
 
       ////::ScreenToClient(m_hwnd, m_puserinteraction->m_pointScreenClient);
 
@@ -1203,9 +1203,9 @@ namespace aura_windows
       ////if (hwndParent != NULL)
       ////{
 
-      ////   m_puserinteraction->m_pointParentClient.x = 0;
+      ////   m_puserinteraction->m_pointParentClient.x() = 0;
 
-      ////   m_puserinteraction->m_pointParentClient.y = 0;
+      ////   m_puserinteraction->m_pointParentClient.y() = 0;
 
       ////   ::ClientToScreen(m_hwnd, m_puserinteraction->m_pointParentClient);
 
@@ -1233,7 +1233,7 @@ namespace aura_windows
 
    //   ::ClientToScreen(m_hwnd, &point);
 
-   //   return point_f64(point.x, point.y);
+   //   return point_f64(point.x(), point.y());
 
    //}
 
@@ -1563,64 +1563,64 @@ namespace aura_windows
    //}
 
 
-   void interaction_impl::set_window_text(const ::string & pszString)
-   {
+   //void interaction_impl::set_window_text(const ::string & pszString)
+   //{
 
-      m_pwindow->set_window_text(pszString);
+   //   m_pwindow->set_window_text(pszString);
 
-      //DWORD_PTR lresult = 0;
+   //   //DWORD_PTR lresult = 0;
 
-      //m_puserinteraction->m_strWindowText = pszString;
+   //   //m_puserinteraction->m_strWindowText = pszString;
 
-      //wstring wstrText(m_puserinteraction->m_strWindowText);
+   //   //wstring wstrText(m_puserinteraction->m_strWindowText);
 
-      //const unichar * pwszText = wstrText;
+   //   //const unichar * pwszText = wstrText;
 
-      //if (!::SendMessageTimeoutW(get_handle(), WM_SETTEXT, 0, (lparam)pwszText, SMTO_ABORTIFHUNG, 500, &lresult))
-      //{
+   //   //if (!::SendMessageTimeoutW(get_handle(), WM_SETTEXT, 0, (lparam)pwszText, SMTO_ABORTIFHUNG, 500, &lresult))
+   //   //{
 
-      //   return;
+   //   //   return;
 
-      //}
+   //   //}
 
-      //string str;
+   //   //string str;
 
-      //get_window_text(str);
+   //   //get_window_text(str);
 
-   }
-
-
-
-   strsize interaction_impl::get_window_text(char * pszString, strsize nMaxCount)
-
-   {
-
-      string str;
-
-      get_window_text(str);
-
-      ansi_count_copy(pszString, str, (size_t) minimum(nMaxCount, str.length()));
+   //}
 
 
-      return str.length();
 
-   }
+   //strsize interaction_impl::get_window_text(char * pszString, strsize nMaxCount)
+
+   //{
+
+   //   string str;
+
+   //   get_window_text(str);
+
+   //   ansi_count_copy(pszString, str, (size_t) minimum(nMaxCount, str.length()));
+
+
+   //   return str.length();
+
+   //}
 
    
-   void interaction_impl::get_window_text(string & str)
-   {
+   //void interaction_impl::get_window_text(string & str)
+   //{
 
-      m_pwindow->set_window_text(str);
+   //   m_pwindow->set_window_text(str);
 
-   }
+   //}
 
 
-   strsize interaction_impl::get_window_text_length()
-   {
+   //strsize interaction_impl::get_window_text_length()
+   //{
 
-      return m_pwindow->get_window_text_length();
+   //   return m_pwindow->get_window_text_length();
 
-   }
+   //}
 
 
    void interaction_impl::DragAcceptFiles(bool bAccept)
@@ -3218,17 +3218,17 @@ namespace aura_windows
 
 
 
-   void interaction_impl::_001OnTriggerMouseInside()
-   {
+   //void interaction_impl::_001OnTriggerMouseInside()
+   //{
 
-      ::user::interaction_impl::_001OnTriggerMouseInside();
+   //   ::user::interaction_impl::_001OnTriggerMouseInside();
 
-      //TRACKMOUSEEVENT tme = { sizeof(tme) };
-      //tme.dwFlags = TME_LEAVE;
-      //tme.hwndTrack = get_handle();
-      //TrackMouseEvent(&tme);
+   //   //TRACKMOUSEEVENT tme = { sizeof(tme) };
+   //   //tme.dwFlags = TME_LEAVE;
+   //   //tme.hwndTrack = get_handle();
+   //   //TrackMouseEvent(&tme);
 
-   }
+   //}
 
 
 
@@ -3676,7 +3676,7 @@ void interaction_impl::set_tool_window(bool bSet)
 //
 //         ::ScreenToClient(oswindow, pointCursor);
 //
-//         lparam = MAKELPARAM(pointCursor.x, pointCursor.y);
+//         lparam = MAKELPARAM(pointCursor.x(), pointCursor.y());
 //
 //         pimpl->call_message_handler(e_message_mouse_move, 0, lparam);
 //
@@ -4385,7 +4385,7 @@ void interaction_impl::set_tool_window(bool bSet)
 //            // handler has set it to another one.
 //            pmouse->m_ecursor = cursor_default;
 //
-//            //INFORMATION("windows::e_message_mouse_move(%d,%d)", pmouse->m_point.x, pmouse->m_point.y);
+//            //INFORMATION("windows::e_message_mouse_move(%d,%d)", pmouse->m_point.x(), pmouse->m_point.y());
 //
 //            string strType;
 //
