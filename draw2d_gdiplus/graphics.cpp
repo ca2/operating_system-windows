@@ -1218,7 +1218,7 @@ namespace draw2d_gdiplus
    }
 
 
-   //void graphics::fill_polygon(const POINT_F64 * ppointParam,count nCount)
+   //void graphics::fill_polygon(const ::point_f64 * ppointParam,count nCount)
    //{
 
    //   if (nCount <= 0)
@@ -1299,7 +1299,7 @@ namespace draw2d_gdiplus
    }
 
 
-   //void graphics::draw_polygon(const POINT_F64 * ppointParam, count nCount)
+   //void graphics::draw_polygon(const ::point_f64 * ppointParam, count nCount)
    //{
 
    //   if (nCount <= 0)
@@ -4913,7 +4913,7 @@ namespace draw2d_gdiplus
 
    //   auto ppath = __auto(new Gdiplus::GraphicsPath());
 
-   //   auto copy = [this](Gdiplus::PointF* p2, const POINT_F64* p1)
+   //   auto copy = [this](Gdiplus::PointF* p2, const ::point_f64* p1)
    //   {
 
    //      p2->X = (Gdiplus::REAL) (p1->x + m_pointAddShapeTranslate.x);

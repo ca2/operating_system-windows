@@ -368,7 +368,7 @@ ready:
    //         byte taskbarPosition = data[12];
    //         taskbarPosition = edge;
    //         data[12] = taskbarPosition;
-   //         RECTANGLE_I32* taskbarRect = (RECTANGLE_I32*)&data[24];
+   //         ::rectangle_i32* taskbarRect = (::rectangle_i32*)&data[24];
    //         CopyRect(taskbarRect, &abd.rc);
    //         result = ::RegSetValueEx(hKey, settingValue, 0, REG_BINARY, (LPBYTE)data.data(), dwDataBufSize);
    //      }
@@ -604,7 +604,7 @@ bool position_desk_toolbar2()
    //         byte taskbarPosition = data[12];
    //         taskbarPosition = edge;
    //         data[12] = taskbarPosition;
-   //         RECTANGLE_I32* taskbarRect = (RECTANGLE_I32*)&data[24];
+   //         ::rectangle_i32* taskbarRect = (::rectangle_i32*)&data[24];
    //         CopyRect(taskbarRect, &abd.rc);
    //         result = ::RegSetValueEx(hKey, settingValue, 0, REG_BINARY, (LPBYTE)data.data(), dwDataBufSize);
    //      }

@@ -88,7 +88,7 @@ namespace windowing_win32
    //}
 
    //void interaction_impl::ScrollWindow(i32 xAmount, i32 yAmount,
-   //   const RECTANGLE_I32 * rectangle, const RECTANGLE_I32 * lpClipRect)
+   //   const ::rectangle_i32 * rectangle, const ::rectangle_i32 * lpClipRect)
 
    //{
    //   //ASSERT(::IsWindow(get_handle()));

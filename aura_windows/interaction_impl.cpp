@@ -337,8 +337,8 @@ namespace aura_windows
    //   return ::SetLayeredWindowAttributes(get_handle(), crKey, bAlpha, dwFlags) != false;
    //}
 
-   //bool interaction_impl::UpdateLayeredWindow(::draw2d::graphics * pDCDst, POINT_I32 *pptDst, SIZE_I32 *psize,
-   //      ::draw2d::graphics * pDCSrc, POINT_I32 *pptSrc, ::color::color crKey, BLENDFUNCTION *pblend, u32 dwFlags)
+   //bool interaction_impl::UpdateLayeredWindow(::draw2d::graphics * pDCDst, ::point_i32 *pptDst, ::size_i32 *psize,
+   //      ::draw2d::graphics * pDCSrc, ::point_i32 *pptSrc, ::color::color crKey, BLENDFUNCTION *pblend, u32 dwFlags)
    //{
    //   ASSERT(_is_window());
    //   throw ::interface_only();
@@ -1238,7 +1238,7 @@ namespace aura_windows
    //}
 
 
-   bool interaction_impl::window_rect_from_os(RECTANGLE_I32 * prectangle)
+   bool interaction_impl::window_rect_from_os(::rectangle_i32 * prectangle)
    {
 
       if (!_is_window())
@@ -1281,7 +1281,7 @@ namespace aura_windows
    }
 
 
-   bool interaction_impl::client_rect_from_os(RECTANGLE_I32 * prectangle)
+   bool interaction_impl::client_rect_from_os(::rectangle_i32 * prectangle)
    {
 
       //oswindow handle = get_handle();
@@ -1639,7 +1639,7 @@ namespace aura_windows
    }
 
 
-   //void interaction_impl::MapWindowPoints(::user::interaction_impl * puserinteractionTo, POINT_I32 * pPoint, ::u32 nCount)
+   //void interaction_impl::MapWindowPoints(::user::interaction_impl * puserinteractionTo, ::point_i32 * pPoint, ::u32 nCount)
 
    //{
    //   ASSERT(_is_window());
@@ -1647,11 +1647,11 @@ namespace aura_windows
 
    //}
 
-   //void interaction_impl::MapWindowPoints(::user::interaction_impl * puserinteractionTo, RECTANGLE_I32 * prectangle)
+   //void interaction_impl::MapWindowPoints(::user::interaction_impl * puserinteractionTo, ::rectangle_i32 * prectangle)
 
    //{
    //   ASSERT(_is_window());
-   //   ::MapWindowPoints(get_handle(), puserinteractionTo->get_handle(), (POINT_I32 *)prectangle, 2);
+   //   ::MapWindowPoints(get_handle(), puserinteractionTo->get_handle(), (::point_i32 *)prectangle, 2);
 
    //}
 
@@ -2055,9 +2055,9 @@ namespace aura_windows
 
    //}
    //i32 interaction_impl::ScrollWindowEx(i32 dx, i32 dy,
-   //   const RECTANGLE_I32 * pRectScroll, const RECTANGLE_I32 * lpRectClip,
+   //   const ::rectangle_i32 * pRectScroll, const ::rectangle_i32 * lpRectClip,
 
-   //                                     ::draw2d::region* prgnUpdate, RECTANGLE_I32 * pRectUpdate, ::u32 flags)
+   //                                     ::draw2d::region* prgnUpdate, ::rectangle_i32 * pRectUpdate, ::u32 flags)
 
    //{
 
@@ -2259,7 +2259,7 @@ namespace aura_windows
 
    //   ::point_i32 point;
 
-   //   ::GetCaretPos((POINT_I32 *)&point);
+   //   ::GetCaretPos((::point_i32 *)&point);
 
    //   return point;
 
@@ -2958,11 +2958,11 @@ namespace aura_windows
 //   {
 //      Default();
 //   }
-//   void interaction_impl::OnSizing(::u32, RECTANGLE_I32 *)
+//   void interaction_impl::OnSizing(::u32, ::rectangle_i32 *)
 //   {
 //      Default();
 //   }
-//   void interaction_impl::OnMoving(::u32, RECTANGLE_I32 *)
+//   void interaction_impl::OnMoving(::u32, ::rectangle_i32 *)
 //   {
 //      Default();
 //   }
@@ -3254,7 +3254,7 @@ namespace aura_windows
 
 
 
-   void interaction_impl::get_rect_normal(RECTANGLE_I32 * prectangle)
+   void interaction_impl::get_rect_normal(::rectangle_i32 * prectangle)
 
    {
 

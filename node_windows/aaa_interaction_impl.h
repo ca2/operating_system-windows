@@ -174,7 +174,7 @@ namespace windows
 
       // Advanced: virtual AdjustWindowRect
       //enum AdjustType { adjustBorder = 0, adjustOutside = 1 };
-      //virtual void CalcWindowRect(RECTANGLE_I32 * pClientRect, ::u32 nAdjustType = adjustBorder);
+      //virtual void CalcWindowRect(::rectangle_i32 * pClientRect, ::u32 nAdjustType = adjustBorder);
 
 
 
@@ -235,15 +235,15 @@ namespace windows
       //virtual void BringToTop(::e_display edisplay);
       //virtual bool BringWindowToTop();
       //using ::user::interaction_impl::window_rectangle;
-      //virtual bool window_rectangle(RECTANGLE_I64 * prectangle);
+      //virtual bool window_rectangle(::rectangle_i64 * prectangle);
 
       //using ::user::interaction_impl::client_rectangle;
-      //virtual bool client_rectangle(RECTANGLE_I64 * prectangle);
+      //virtual bool client_rectangle(::rectangle_i64 * prectangle);
 
 
       virtual void rects_from_os();
-      virtual bool window_rect_from_os(RECTANGLE_I32 * prectangle);
-      virtual bool client_rect_from_os(RECTANGLE_I32 * prectangle);
+      virtual bool window_rect_from_os(::rectangle_i32 * prectangle);
+      virtual bool client_rect_from_os(::rectangle_i32 * prectangle);
 
 
 
@@ -255,9 +255,9 @@ namespace windows
       //virtual bool SetWindowPlacement(const WINDOWPLACEMENT* puserinteractionpl);
 
 
-      //virtual void MapWindowPoints(::user::interaction_impl * puserinteractionTo, POINT_I32 * pPoint, ::u32 nCount);
+      //virtual void MapWindowPoints(::user::interaction_impl * puserinteractionTo, ::point_i32 * pPoint, ::u32 nCount);
 
-      //virtual void MapWindowPoints(::user::interaction_impl * puserinteractionTo, RECTANGLE_I32 * prectangle);
+      //virtual void MapWindowPoints(::user::interaction_impl * puserinteractionTo, ::rectangle_i32 * prectangle);
 
 
       virtual void Print(::draw2d::graphics_pointer & pgraphics, u32 dwFlags) const;
@@ -265,14 +265,14 @@ namespace windows
 
       virtual void UpdateWindow();
       virtual void SetRedraw(bool bRedraw = true);
-      //virtual bool GetUpdateRect(RECTANGLE_I32 * prectangle, bool bErase = false);
+      //virtual bool GetUpdateRect(::rectangle_i32 * prectangle, bool bErase = false);
 
       //virtual i32 GetUpdateRgn(::draw2d::region* pRgn, bool bErase = false);
       //virtual void Invalidate(bool bErase = true);
-      //virtual void InvalidateRect(const RECTANGLE_I32 * rectangle, bool bErase = true);
+      //virtual void InvalidateRect(const ::rectangle_i32 * rectangle, bool bErase = true);
 
       //virtual void InvalidateRgn(::draw2d::region* pRgn, bool bErase = true);
-      //virtual void ValidateRect(const RECTANGLE_I32 * rectangle_i32);
+      //virtual void ValidateRect(const ::rectangle_i32 * rectangle_i32);
 
       //virtual void ValidateRgn(::draw2d::region* pRgn);
       virtual bool display(::e_display edisplay);
@@ -319,8 +319,8 @@ namespace windows
 //#if(_WIN32_WINNT >= 0x0500)
 //
 //      virtual bool SetLayeredWindowAttributes(::color::color crKey, byte bAlpha, u32 dwFlags);
-//      virtual bool UpdateLayeredWindow(::draw2d::graphics * pDCDst, POINT_I32 *pptDst, SIZE_I32 *psize,
-//                                       ::draw2d::graphics * pDCSrc, POINT_I32 *pptSrc, ::color::color crKey, BLENDFUNCTION *pblend, u32 dwFlags);
+//      virtual bool UpdateLayeredWindow(::draw2d::graphics * pDCDst, ::point_i32 *pptDst, ::size_i32 *psize,
+//                                       ::draw2d::graphics * pDCSrc, ::point_i32 *pptSrc, ::color::color crKey, BLENDFUNCTION *pblend, u32 dwFlags);
 //
 //#endif   // _WIN32_WINNT >= 0x0500
 
@@ -384,9 +384,9 @@ namespace windows
       //virtual void GetScrollRange(i32 nBar, LPINT pMinPos, LPINT lpMaxPos) const;
 
       //virtual void ScrollWindow(i32 xAmount, i32 yAmount,
-      //   const RECTANGLE_I32 * rectangle = nullptr,
+      //   const ::rectangle_i32 * rectangle = nullptr,
 
-      //   const RECTANGLE_I32 * pClipRect = nullptr);
+      //   const ::rectangle_i32 * pClipRect = nullptr);
 
       //virtual i32 SetScrollPos(i32 nBar, i32 nPos, bool bRedraw = true);
       //virtual void SetScrollRange(i32 nBar, i32 nMinPos, i32 nMaxPos,
@@ -395,9 +395,9 @@ namespace windows
       //virtual void EnableScrollBarCtrl(i32 nBar, bool bEnable = true);
 
       //virtual i32 ScrollWindowEx(i32 dx, i32 dy,
-      //   const RECTANGLE_I32 * pRectScroll, const RECTANGLE_I32 * lpRectClip,
+      //   const ::rectangle_i32 * pRectScroll, const ::rectangle_i32 * lpRectClip,
 
-      //                           ::draw2d::region* prgnUpdate, RECTANGLE_I32 * pRectUpdate, ::u32 flags);
+      //                           ::draw2d::region* prgnUpdate, ::rectangle_i32 * pRectUpdate, ::u32 flags);
 
       //virtual bool SetScrollInfo(i32 nBar, LPSCROLLINFO pScrollInfo,
 
@@ -636,9 +636,9 @@ namespace windows
 
       //void OnStyleChanging(i32 nStyleType, LPSTYLESTRUCT pStyleStruct);
 
-      //void OnSizing(::u32 nSide, RECTANGLE_I32 * prectangle);
+      //void OnSizing(::u32 nSide, ::rectangle_i32 * prectangle);
 
-      //void OnMoving(::u32 nSide, RECTANGLE_I32 * prectangle);
+      //void OnMoving(::u32 nSide, ::rectangle_i32 * prectangle);
 
       //void OnCaptureChanged(::user::interaction_impl * pwindow);
       //bool OnDeviceChange(::u32 nEventType, uptr dwData);
@@ -729,7 +729,7 @@ namespace windows
       void on_set_parent(::user::interaction * pinteraction);
 
 
-      virtual bool get_rect_normal(RECTANGLE_I32 * prectangle);
+      virtual bool get_rect_normal(::rectangle_i32 * prectangle);
       virtual void register_drop_target();
       virtual void show_task(bool bShow);
       virtual void window_show_change_visibility(::e_display edisplay, ::e_activation eactivation) override;

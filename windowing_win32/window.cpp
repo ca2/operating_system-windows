@@ -1828,7 +1828,7 @@ namespace windowing_win32
    }
 
 
-   bool window::client_to_screen(POINT_I32 * ppoint)
+   bool window::client_to_screen(::point_i32 * ppoint)
    {
 
       HWND hwnd = get_hwnd();
@@ -1840,7 +1840,7 @@ namespace windowing_win32
    }
 
 
-   bool window::screen_to_client(POINT_I32 * ppoint)
+   bool window::screen_to_client(::point_i32 * ppoint)
    {
 
       HWND hwnd = get_hwnd();
@@ -3187,7 +3187,7 @@ namespace windowing_win32
       //}
 
 
-   //void window::MapWindowPoints(::user::window * puserinteractionTo, POINT_I32 * pPoint, ::u32 nCount)
+   //void window::MapWindowPoints(::user::window * puserinteractionTo, ::point_i32 * pPoint, ::u32 nCount)
    //{
 
    //   ASSERT(::IsWindow(get_hwnd()));
@@ -3197,11 +3197,11 @@ namespace windowing_win32
    //}
 
 
-   //void window::MapWindowPoints(::user::window * puserinteractionTo, RECTANGLE_I32 * prectangle)
+   //void window::MapWindowPoints(::user::window * puserinteractionTo, ::rectangle_i32 * prectangle)
 
    //{
    //   ASSERT(::IsWindow(get_hwnd()));
-   //   ::MapWindowPoints(get_hwnd(), puserinteractionTo->get_hwnd(), (POINT_I32 *)prectangle, 2);
+   //   ::MapWindowPoints(get_hwnd(), puserinteractionTo->get_hwnd(), (::point_i32 *)prectangle, 2);
 
    //}
 
@@ -3218,7 +3218,7 @@ namespace windowing_win32
       ::SendMessage(get_hwnd(), WM_SETREDRAW, bRedraw, 0);
    }
 
-   bool window::GetUpdateRect(RECTANGLE_I32 * prectangle, bool bErase)
+   bool window::GetUpdateRect(::rectangle_i32 * prectangle, bool bErase)
    {
 
       ASSERT(::IsWindow(get_hwnd()));
@@ -3244,7 +3244,7 @@ namespace windowing_win32
       ::InvalidateRect(get_hwnd(), nullptr, bErase);
    }
 
-   void window::InvalidateRect(const RECTANGLE_I32 * rectangle, bool bErase)
+   void window::InvalidateRect(const ::rectangle_i32 * rectangle, bool bErase)
 
    {
       ASSERT(::IsWindow(get_hwnd()));
@@ -3262,7 +3262,7 @@ namespace windowing_win32
    }
 
 
-   void window::ValidateRect(const RECTANGLE_I32 * rectangle)
+   void window::ValidateRect(const ::rectangle_i32 * rectangle)
 
    {
 
@@ -3695,9 +3695,9 @@ namespace windowing_win32
 
    //}
    //i32 window::ScrollWindowEx(i32 dx, i32 dy,
-   //   const RECTANGLE_I32 * pRectScroll, const RECTANGLE_I32 * lpRectClip,
+   //   const ::rectangle_i32 * pRectScroll, const ::rectangle_i32 * lpRectClip,
 
-   //   ::draw2d::region * prgnUpdate, RECTANGLE_I32 * pRectUpdate, ::u32 flags)
+   //   ::draw2d::region * prgnUpdate, ::rectangle_i32 * pRectUpdate, ::u32 flags)
 
    //{
 
@@ -4577,11 +4577,11 @@ namespace windowing_win32
    //   {
    //      Default();
    //   }
-   //   void window::OnSizing(::u32, RECTANGLE_I32 *)
+   //   void window::OnSizing(::u32, ::rectangle_i32 *)
    //   {
    //      Default();
    //   }
-   //   void window::OnMoving(::u32, RECTANGLE_I32 *)
+   //   void window::OnMoving(::u32, ::rectangle_i32 *)
    //   {
    //      Default();
    //   }
@@ -4923,7 +4923,7 @@ namespace windowing_win32
       throw ::interface_only();
    }
 
-    bool window::get_rect_normal(RECTANGLE_I32 * prectangle) {
+    bool window::get_rect_normal(::rectangle_i32 * prectangle) {
 
        throw ::interface_only();
        return false;
@@ -4959,7 +4959,7 @@ namespace windowing_win32
 
 
 
-   //bool window::get_rect_normal(RECTANGLE_I32 * prectangle)
+   //bool window::get_rect_normal(::rectangle_i32 * prectangle)
 
    //{
 
@@ -5969,7 +5969,7 @@ namespace windowing_win32
 //   }
 
 
-   bool window::window_rectangle(RECTANGLE_I32 * prectangle)
+   bool window::window_rectangle(::rectangle_i32 * prectangle)
    {
 
       RECT rectangle;
@@ -6001,7 +6001,7 @@ namespace windowing_win32
    }
 
 
-   bool window::client_rectangle(RECTANGLE_I32 * prectangle)
+   bool window::client_rectangle(::rectangle_i32 * prectangle)
    {
 
       RECT rectangle;
@@ -6399,7 +6399,7 @@ namespace windowing_win32
    //}
 
    
-   void window::get_cursor_position(POINT_I32 * ppointCursor)
+   void window::get_cursor_position(::point_i32 * ppointCursor)
    {
 
       ::GetCursorPos((POINT *)&m_pointCursor);

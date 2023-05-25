@@ -57,7 +57,7 @@ namespace draw2d_gdiplus
 
 
 
-   void region::max_bounding_box(RECTANGLE_F64 * prectangle, ::draw2d::graphics * pgraphics)
+   void region::max_bounding_box(::rectangle_f64 * prectangle, ::draw2d::graphics * pgraphics)
    {
 
       ::rectangle_i32 rectangle;
