@@ -844,7 +844,7 @@ namespace draw2d_gdiplus
    void graphics::invert_rectangle(const ::rectangle_f64 & rectangle)
    {
 
-      //::draw2d::savedc save(this);
+      //::draw2d::save_context savecontext(this);
 
       //Gdiplus::REAL colorMatrixElements[][] = {
       //   {-1,  0,  0,  0, 0},
@@ -4441,7 +4441,7 @@ namespace draw2d_gdiplus
    }
 
 
-   i32 graphics::SaveDC()
+   i32 graphics::save_graphics_context()
    {
 
       Gdiplus::GraphicsState state = m_pgraphics->Save();
@@ -4451,7 +4451,7 @@ namespace draw2d_gdiplus
    }
 
 
-   void graphics::RestoreDC(i32 nSavedDC)
+   void graphics::restore_graphics_context(i32 iSaveContext)
    {
 
       if (::is_null(m_pgraphics))
@@ -4461,7 +4461,7 @@ namespace draw2d_gdiplus
 
       }
 
-      Gdiplus::Status status = m_pgraphics->Restore((Gdiplus::GraphicsState)nSavedDC);
+      Gdiplus::Status status = m_pgraphics->Restore((Gdiplus::GraphicsState)iSaveContext);
 
       bool bOk = status == Gdiplus::Ok;
 
@@ -6575,7 +6575,7 @@ namespace draw2d_gdiplus
 
       }
 
-      ::draw2d::savedc k(this);
+      ::draw2d::save_context savecontext(this);
 
       //if(get_alpha_mode() == ::draw2d::e_alpha_mode_blend)
       //{

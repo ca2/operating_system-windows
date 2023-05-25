@@ -42,11 +42,11 @@ namespace windowing_win32
 
       virtual bool add_icon(HICON hicon);
 
-      void get_sizes(array < concrete < ::size_i32 > > & a) override;
+      void get_sizes(array < ::size_i32 > & a) override;
 
-      image_pointer get_image(const concrete < ::size_i32 > & size) override;
+      image_pointer get_image(const ::size_i32 & size) override;
 
-      virtual image_pointer _create_image(const concrete < ::size_i32 >& size);
+      virtual image_pointer _create_image(const ::size_i32 & size);
 
 
       void _erase_all();

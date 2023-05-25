@@ -2352,9 +2352,9 @@ namespace windowing_win32
 
       ::point_i32 point_i32;
 
-      point_i32.x() = point.x();
+      point_i32.x() = point.x;
 
-      point_i32.y() = point.y();
+      point_i32.y() = point.y;
 
       return point_i32;
 

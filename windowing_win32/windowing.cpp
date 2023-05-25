@@ -740,9 +740,9 @@ namespace windowing_win32
 
          ::GetCursorPos(&point);
 
-         m_pointCursor.x() = point.x();
+         m_pointCursor.x() = point.x;
 
-         m_pointCursor.y() = point.y();
+         m_pointCursor.y() = point.y;
 
       }
 

@@ -820,7 +820,7 @@ namespace draw2d_gdiplus
    bool graphics::invert_rectangle(const ::rectangle_f64 & rectangle)
    {
 
-      //::draw2d::savedc save(this);
+      //::draw2d::save_context savecontext(this);
 
       //Gdiplus::REAL colorMatrixElements[][] = {
       //   {-1,  0,  0,  0, 0},
@@ -6297,7 +6297,7 @@ namespace draw2d_gdiplus
 
       }
 
-      ::draw2d::savedc k(this);
+      ::draw2d::save_context savecontext(this);
 
       set_alpha_mode(::draw2d::e_alpha_mode_blend);
 

@@ -1001,7 +1001,7 @@ namespace windowing_win32
 
       ::rectangle_i32 rectangleMonitor;
 
-      index iMatchingMonitor = get_best_monitor(rectangleMonitor, rectangleParam);
+      index iMatchingMonitor = get_best_monitor(&rectangleMonitor, rectangleParam);
 
       prectangle->left = rectangleMonitor.left;
 

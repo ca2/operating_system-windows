@@ -744,7 +744,7 @@ int imm_client::on_text_composition_message(int iMessage)
 
       copy(com.ptCurrentPos, rectangle.top_left());
 
-      com.ptCurrentPos.y() -= 100;
+      com.ptCurrentPos.y -= 100;
 
       ::rectangle_i32 rect2(rectangle);
 

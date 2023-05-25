@@ -775,7 +775,7 @@ namespace windowing_win32
    }
 
 
-   void icon::get_sizes(array < concrete < ::size_i32 > > & a)
+   void icon::get_sizes(array < ::size_i32 > & a)
    {
 
       a.erase_all();
@@ -789,7 +789,7 @@ namespace windowing_win32
 
    }
 
-   image_pointer icon::get_image(const concrete < ::size_i32 > & size)
+   image_pointer icon::get_image(const ::size_i32 & size)
    {
 
       auto& pimage  = m_imagemap[size];
@@ -808,7 +808,7 @@ namespace windowing_win32
    }
 
 
-   image_pointer icon::_create_image(const concrete < ::size_i32 > & size)
+   image_pointer icon::_create_image(const ::size_i32 & size)
    {
 
       HICON hicon = (HICON) get_os_data(size);
