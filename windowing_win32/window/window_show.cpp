@@ -18,7 +18,7 @@ namespace windows
       {
       case e_display_default:
          return SW_SHOWDEFAULT;
-      case e_display_restored:
+      case e_display_normal:
          if (bNoActivate)
             return SW_SHOWNA;
          else
@@ -60,21 +60,21 @@ namespace windows
       case SW_SHOWDEFAULT:
          return e_display_default;
       case SW_SHOW:
-         return e_display_restored;
+         return e_display_normal;
       case SW_RESTORE:
-         return e_display_restored;
+         return e_display_normal;
       case SW_MINIMIZE:
          return e_display_iconic;
       case SW_MAXIMIZE:
          return e_display_zoomed;
       case SW_SHOWNA:
          eactivation = e_activation_no_activate;
-         return e_display_restored;
+         return e_display_normal;
       case SW_SHOWMINNOACTIVE:
          eactivation = e_activation_no_activate;
          return e_display_iconic;
       default:
-         return e_display_restored;
+         return e_display_normal;
       }
 
    }

@@ -33,7 +33,7 @@ namespace apex_windows
       //      wstring(m_strFile),
       //      wstring(m_strParameters),
       //      wstring(m_strDirectory),
-      //      windows_show_window(m_edisplay, m_eactivation));
+      //      windows_show_window(m_edisplay, XXXXm_eactivation));
 
       //}
 

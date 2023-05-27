@@ -3,6 +3,7 @@
 #pragma once
 
 
+#include "acme/parallelization/manual_reset_event.h"
 #include "aura/graphics/graphics/double_buffer.h"
 #include "aura/graphics/graphics/bitmap_source_buffer.h"
 #include "aura/graphics/image/pixmap.h"
@@ -25,13 +26,14 @@ namespace windowing_win32
       //__creatable_from_base(buffer, ::graphics::graphics);
 
 
-      class os_buffer
+      class layered_window_buffer :
+         virtual public ::particle
       {
       public:
 
 
-         os_buffer();
-         ~os_buffer();
+         layered_window_buffer();
+         ~layered_window_buffer();
 
 
          ::pixmap                      m_pixmap;
@@ -46,11 +48,14 @@ namespace windowing_win32
       };
 
 
-      os_buffer                     m_osbuffera[2];
+      //layered_window_buffer         m_layeredwindowbuffera[2];
       HDC                           m_hdcScreen;
       bool                          m_bWindowDC;
       oswindow                      m_hwndIpc;
       ::rectangle_i32               m_rectangleLast;
+      ::task_pointer                m_ptaskUpdateScreen;
+      ::manual_reset_event          m_eventUpdateScreen;
+      bool                          m_bSingleBufferMode;
 
 
       buffer();
@@ -60,19 +65,23 @@ namespace windowing_win32
       virtual void initialize_graphics_graphics(::user::interaction_impl * pimpl) override;
 
 
-      virtual bool update_buffer(const ::size_i32 & size, int iStride = -1) override;
-      virtual void destroy_buffer() override;
-      virtual bool update_screen() override;
+      bool is_single_buffer_mode() const override;
 
 
-      virtual bool update_screen(::image * pimage) override;
+      bool update_buffer(::graphics::buffer_item * pitem) override;
+      void destroy_buffer() override;
+      bool update_screen() override;
 
 
-      virtual ::draw2d::graphics * on_begin_draw() override;
+      virtual bool on_update_screen(::graphics::buffer_item * pitem) override;
+
+      virtual void update_screen_task();
+
+      virtual ::graphics::buffer_item * on_begin_draw() override;
 
 
-      bool create_os_buffer(const ::size_i32 & size, int iStride = -1);
-      void destroy_os_buffer();
+      bool create_window_device_context(const ::size_i32 & size, int iStride = -1);
+      void destroy_window_device_context();
 
 
       virtual bool buffer_lock_round_swap_key_buffers() override;

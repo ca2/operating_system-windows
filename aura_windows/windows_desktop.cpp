@@ -108,7 +108,7 @@
 ////      return false;
 ////   }
 ////
-////   ShowWindow(hWnd, nCmdShow);
+////   XXXShowWindow(hWnd, nCmdShow);
 ////   UpdateWindow(hWnd);
 ////
 ////   return true;

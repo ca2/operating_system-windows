@@ -86,10 +86,17 @@ namespace draw2d_gdiplus
 
       if (m_pbitmap.is_set()
             && m_pbitmap->get_os_data() != nullptr
-            && ppixmap->size() == size()
+            && ppixmap->m_sizeRaw == this->m_sizeRaw
             && ppixmap->colorref() == colorref()
             && ppixmap->scan_size() == scan_size())
       {
+
+         if (ppixmap->size() != size())
+         {
+
+            m_size = ppixmap->size();
+
+         }
 
          return true;
 

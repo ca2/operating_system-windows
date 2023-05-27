@@ -7201,6 +7201,29 @@ namespace draw2d_gdiplus
    }
 
 
+   Gdiplus::Region * graphics::defer_update_os_data(::pointer < ::geometry2d::region > & pregion)
+   {
+
+      ::pointer < region > pgdiplusregion = pregion;
+
+      if (!pgdiplusregion)
+      {
+
+         pgdiplusregion = __create_new < region >();
+
+         pgdiplusregion->m_eregion = pregion->m_eregion;
+
+         pgdiplusregion->m_pitem = pregion->m_pitem;
+
+         pregion = pgdiplusregion;
+
+      }
+
+      return (Gdiplus::Region *) pgdiplusregion->get_os_data(this);
+
+    }
+
+
    //HDC graphics::get_handle1() const
    //{
 

@@ -264,9 +264,11 @@ namespace draw2d_gdiplus
 
       }
 
-      Gdiplus::Region * pregion = pitem->m_pregion1->get_os_data < Gdiplus::Region *>(pgraphics)->Clone();
+      ::pointer < graphics > pgdiplusgraphics = pgraphics;
 
-      Gdiplus::Region * pregionOp = pitem->m_pregion2->get_os_data < Gdiplus::Region *>(pgraphics);
+      Gdiplus::Region * pregion = pgdiplusgraphics->defer_update_os_data(pitem->m_pregion1)->Clone();
+
+      Gdiplus::Region * pregionOp = pgdiplusgraphics->defer_update_os_data(pitem->m_pregion2);
 
       if(pitem->m_ecombine == ::draw2d::e_combine_add)
       {

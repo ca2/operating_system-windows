@@ -325,10 +325,10 @@ namespace windows
 
    //      m_puserinteraction->layout().sketch().origin()= pmove->m_point;
 
-   //      if (m_puserinteraction->layout().sketch().display() != e_display_restored)
+   //      if (m_puserinteraction->layout().sketch().display() != e_display_normal)
    //      {
 
-   //         m_puserinteraction->display(e_display_restored);
+   //         m_puserinteraction->display(e_display_normal);
 
    //      }
 
@@ -365,10 +365,10 @@ namespace windows
 
    //      m_puserinteraction->layout().sketch().size() = psize->m_size;
 
-   //      if (m_puserinteraction->layout().sketch().display() != e_display_restored)
+   //      if (m_puserinteraction->layout().sketch().display() != e_display_normal)
    //      {
 
-   //         m_puserinteraction->display(e_display_restored);
+   //         m_puserinteraction->display(e_display_normal);
 
    //      }
 
@@ -904,7 +904,7 @@ namespace windows
    //   case SC_NEXTWINDOW:
    //      if (LOWORD(lParam) == VK_F6 && pParent)
    //      {
-   //         pParent->SetFocus();
+   //         pParent->XXXSetFocus();
    //         return true;
    //      }
    //      break;
@@ -925,7 +925,7 @@ namespace windows
    //            // and focus after sending it.
    //            ::windowing::window * pwindow_Save = get_handle();
    //            ::windowing::window * pwindow_Focus = ::GetFocus();
-   //            pParent->SetActiveWindow();
+   //            pParent->set_active_window();
    //            pParent->send_message(WM_SYSCOMMAND, nID, lParam);
 
    //            // be very careful here...
@@ -2077,7 +2077,7 @@ namespace windows
          //      if (m_iShowFlags & SWP_SHOWWINDOW)
          //      {
 
-         //         display(e_display_restored);
+         //         display(e_display_normal);
 
          //      }
 
@@ -2189,10 +2189,10 @@ namespace windows
    //}
 
 
-   //bool interaction_impl::SetFocus()
+   //bool interaction_impl::XXXSetFocus()
    //{
 
-   //   return m_pwindow->SetFocus();
+   //   return m_pwindow->XXXSetFocus();
 
    //}
 

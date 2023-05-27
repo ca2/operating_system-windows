@@ -16,6 +16,7 @@
 #include "acme/exception/interface_only.h"
 #include "acme/parallelization/synchronous_lock.h"
 #include "acme/platform/node.h"
+#include "acme/primitive/geometry2d/_text_stream.h"
 #include "aura_windows/interaction_impl.h"
 #include "aura/graphics/draw2d/graphics.h"
 #include "aura/user/user/interaction_prodevian.h"
@@ -1792,7 +1793,7 @@ namespace windowing_win32
 
    //   int nCmdShow = windows_show_window(edisplay, eactivation);
 
-   //   if(!::ShowWindow(get_hwnd(), nCmdShow))
+   //   if(!::XXXShowWindow(get_hwnd(), nCmdShow))
    //   {
 
    //      return ::error_failed;
@@ -1999,7 +2000,7 @@ namespace windowing_win32
 
 #undef SET_WINDOW_POS_LOG
 
-   bool window::set_window_position(const class ::zorder& zorder, i32 x, i32 y, i32 cx, i32 cy, const ::e_activation& eactivation, bool bNoZorder, bool bNoMove, bool bNoSize, bool bShow, bool bHide)
+   bool window::set_window_position(const class ::zorder & zorder, i32 x, i32 y, i32 cx, i32 cy, const ::e_activation & eactivation, bool bNoZorder, bool bNoMove, bool bNoSize, bool bShow, bool bHide)
    {
 
       HWND hwnd = get_hwnd();
@@ -2050,7 +2051,7 @@ namespace windowing_win32
          nFlags |= SWP_HIDEWINDOW;
 
       }
-         
+
       if (::GetWindowLong(hwnd, GWL_EXSTYLE) & WS_EX_LAYERED)
       {
 
@@ -2059,6 +2060,18 @@ namespace windowing_win32
          nFlags |= SWP_NOSIZE;
 
       }
+
+      if (_get_ex_style() & WS_EX_LAYERED)
+      {
+
+         // If the window is layered, SetWindowPos gonna be called
+         // very close to UpdateLayeredWindow call.
+
+         return true;
+
+      }
+   
+      INFORMATION("::SetWindowPos " << ::rectangle_i32_dimension(x, y, cx, cy));
 
       auto bSetWindowPos = ::SetWindowPos(hwnd, hwndInsertAfter, x, y, cx, cy, nFlags);
 
@@ -2527,7 +2540,7 @@ namespace windowing_win32
       //   if (puserinteractionTopLevel)
       //   {
 
-      //      puserinteractionTopLevel->SetForegroundWindow();
+      //      puserinteractionTopLevel->set_foreground_window();
 
       //   }
 
@@ -3408,7 +3421,7 @@ namespace windowing_win32
          //      if (m_iShowFlags & SWP_SHOWWINDOW)
          //      {
 
-         //         display(e_display_restored);
+         //         display(e_display_normal);
 
          //      }
 
@@ -3491,7 +3504,7 @@ namespace windowing_win32
 
    //   HWND hwnd = get_hwnd();
 
-   //   if (!::SetFocus(hwnd))
+   //   if (!::XXXSetFocus(hwnd))
    //   {
 
    //      return ::error_failed;
@@ -3505,7 +3518,7 @@ namespace windowing_win32
 
 
 
-   //bool window::SetFocus()
+   //bool window::XXXSetFocus()
    //{
 
    //   if (!::IsWindow(get_hwnd()))
@@ -3525,9 +3538,9 @@ namespace windowing_win32
    //   puserinteraction->post_procedure(__routine([this]()
    //      {
 
-   //         HWND hwnd = ::SetFocus(get_hwnd());
+   //         HWND hwnd = ::XXXSetFocus(get_hwnd());
 
-   //         ::output_debug_string("::windowing_win32::window::SetFocus ::SetFocus(" + ::hex::lower_from((iptr)hwnd) + ")");
+   //         ::output_debug_string("::windowing_win32::window::XXXSetFocus ::XXXSetFocus(" + ::hex::lower_from((iptr)hwnd) + ")");
 
    //         return ::success;
 
@@ -6368,7 +6381,18 @@ namespace windowing_win32
 
       }
 
-      pprodevian->post_procedure(pprodevian->m_procedureUpdateScreen);
+      if(m_bUpdateScreenSynchronously)
+      {
+
+         pprodevian->m_procedureUpdateScreen();
+
+      }
+      else
+      {
+      
+         pprodevian->post_procedure(pprodevian->m_procedureUpdateScreen);
+
+      }
 
    }
 

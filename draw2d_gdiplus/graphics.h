@@ -614,6 +614,9 @@ namespace draw2d_gdiplus
 
 //      void attach(void * pdata) override;
 
+      //using ::draw2d::graphics::get_os_data;
+      virtual Gdiplus::Region * defer_update_os_data(::pointer < ::geometry2d::region > & pregion);
+
 
       virtual Gdiplus::FillMode gdiplus_get_fill_mode();
 

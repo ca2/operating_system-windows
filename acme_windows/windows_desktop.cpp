@@ -107,7 +107,7 @@ CLASS_DECL_ACME_WINDOWS ATOM MyRegisterClass(HINSTANCE hInstance)
 //      return false;
 //   }
 //
-//   ShowWindow(hWnd, nCmdShow);
+//   XXXShowWindow(hWnd, nCmdShow);
 //   UpdateWindow(hWnd);
 //
 //   return true;

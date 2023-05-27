@@ -285,13 +285,13 @@ namespace windowing_win32
                if (pframe != nullptr)
                {
 
-                  pframe->display(e_display_restored);
+                  pframe->display(e_display_normal);
 
                }
                else
                {
 
-                  m_userinteractionaHidden.element_at(0)->display(e_display_restored);
+                  m_userinteractionaHidden.element_at(0)->display(e_display_normal);
 
                }
 

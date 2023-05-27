@@ -255,6 +255,7 @@ namespace win32
 
    }
 
+   
    void window::show_window(int nCmdShow)
    {
 

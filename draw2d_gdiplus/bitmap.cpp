@@ -70,7 +70,7 @@ namespace draw2d_gdiplus
    void bitmap::host_bitmap(::draw2d::graphics * pgraphics, const pixmap * ppixmap)
    {
 
-      if (ppixmap->m_size == m_size)
+      if (ppixmap->m_sizeRaw == m_size)
       {
 
          //return true;
@@ -94,7 +94,7 @@ namespace draw2d_gdiplus
 
       }
 
-      m_pbitmap = new Gdiplus::Bitmap(ppixmap->width(), ppixmap->height(), m_iStride, PixelFormat32bppPARGB, (BYTE *) ppixmap->colorref());
+      m_pbitmap = new Gdiplus::Bitmap(ppixmap->m_sizeRaw.cx, ppixmap->m_sizeRaw.cy, m_iStride, PixelFormat32bppPARGB, (BYTE *) ppixmap->colorref());
 
       if (m_pbitmap == nullptr)
       {

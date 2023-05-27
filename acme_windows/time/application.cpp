@@ -113,13 +113,13 @@ bool is_good_active_w(HWND w)
 //   text[2] = 0;
 //
 //
-//   ::ShowWindow(w, SW_SHOWNORMAL);
+//   ::XXXShowWindow(w, SW_SHOWNORMAL);
 //
 //   ::SetWindowPos(w, HWND_TOP, 0, 0, 0, 0, SWP_NOSIZE | SWP_NOMOVE);
 //
 //   ::BringWindowToTop(w);
 //
-//   ::SetForegroundWindow(w);
+//   ::XXXSetForegroundWindow(w);
 //
 //   if (!is_good_active_w(w))
 //      return 0;
@@ -888,7 +888,7 @@ bool is_good_active_w(HWND w)
 //   if (!display(chrome, SW_SHOWNORMAL))
 //      return 0;
 //
-//   if (!SetForegroundWindow(chrome))
+//   if (!XXXSetForegroundWindow(chrome))
 //      return 0;
 //
 //   int iSleep = 40;

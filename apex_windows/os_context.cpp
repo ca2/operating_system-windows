@@ -944,7 +944,7 @@ namespace apex_windows
 
                strCommand.replace_with(pcsz, "%1");
 
-               WinExec(strCommand, e_display_restored);
+               WinExec(strCommand, e_display_normal);
 
             }
 
@@ -961,7 +961,7 @@ namespace apex_windows
 
                strCommand.replace_with(pcsz, "%1");
 
-               WinExec(strCommand, e_display_restored);
+               WinExec(strCommand, e_display_normal);
 
             }
 
@@ -3633,7 +3633,7 @@ namespace apex_windows
 
    //   //      pinteraction->order_top();
 
-   //   //      pinteraction->display(e_display_restored, e_activation_set_foreground);
+   //   //      pinteraction->display(e_display_normal, XXXXe_activation_set_foreground);
 
    //   //      pinteraction->set_need_redraw();
 
@@ -3807,7 +3807,7 @@ namespace apex_windows
 
    //   //   pinteraction->order_top();
 
-   //   //   pinteraction->display(e_display_restored, e_activation_set_foreground);
+   //   //   pinteraction->display(e_display_normal, XXXXe_activation_set_foreground);
 
    //   //   pinteraction->set_need_redraw();
 
@@ -3924,7 +3924,7 @@ namespace apex_windows
 //
 //      //   pinteraction->order_top();
 //
-//      //   pinteraction->display(e_display_restored, e_activation_set_foreground);
+//      //   pinteraction->display(e_display_normal, XXXXe_activation_set_foreground);
 //
 //      //   pinteraction->set_need_redraw();
 //
@@ -4042,7 +4042,7 @@ namespace apex_windows
 
    //   //   pinteraction->order_top();
 
-   //   //   pinteraction->display(e_display_restored, e_activation_set_foreground);
+   //   //   pinteraction->display(e_display_normal, XXX_activation_set_foreground);
 
    //   //   pinteraction->set_need_redraw();
 

@@ -528,25 +528,27 @@ namespace aura_windows
          if (puserinteraction)
          {
 
-            if (puserinteraction->layout().m_statea[::user::e_layout_normal].m_bProdevian)
-            {
+            //if (puserinteraction->layout().m_statea[::user::e_layout_normal].m_bProdevian)
+            //{
 
-               //puserinteraction->set_prodevian();
+            //   //puserinteraction->set_prodevian();
 
-            }
+            //}
 
-            if (puserinteraction->layout().m_statea[::user::e_layout_normal].display() == e_display_zoomed)
-            {
+            //if (puserinteraction->layout().m_statea[::user::e_layout_normal].display() == e_display_zoomed)
+            //{
 
-               puserinteraction->_001Maximize();
+            //   puserinteraction->_001Maximize();
 
-            }
-            else
-            {
+            //}
+            //else
+            //{
 
-               puserinteraction->_001Restore();
+            //   puserinteraction->_001Restore();
 
-            }
+            //}
+
+            puserinteraction->display_previous();
 
             puserinteraction->set_need_redraw();
 
@@ -635,7 +637,7 @@ namespace aura_windows
    //   case SC_NEXTWINDOW:
    //      if (LOWORD(lParam) == VK_F6 && pParent)
    //      {
-   //         pParent->SetFocus();
+   //         pParent->XXXSetFocus();
    //         return true;
    //      }
    //      break;
@@ -656,7 +658,7 @@ namespace aura_windows
    //            // and focus after sending it.
    //            ::windowing::window * pwindow_Save = get_handle();
    //            ::windowing::window * pwindow_Focus = ::GetFocus();
-   //            pParent->SetActiveWindow();
+   //            pParent->set_active_window();
    //            pParent->send_message(WM_SYSCOMMAND, nID, lParam);
 
    //            // be very careful here...
@@ -1351,10 +1353,10 @@ namespace aura_windows
    //}
 
 
-   //void interaction_impl::design_window_restore(::e_display edisplay)
+   //void interaction_impl::design_window_normal(::e_display edisplay)
    //{
 
-   //   primitive_impl::design_window_restore(edisplay);
+   //   primitive_impl::design_window_normal(edisplay);
 
    //}
 
@@ -1747,7 +1749,7 @@ namespace aura_windows
          //      if (m_iShowFlags & SWP_SHOWWINDOW)
          //      {
 
-         //         display(e_display_restored);
+         //         display(e_display_normal);
 
          //      }
 
@@ -1874,10 +1876,10 @@ namespace aura_windows
    //}
 
 
-   //bool interaction_impl::SetFocus()
+   //bool interaction_impl::XXXSetFocus()
    //{
 
-   //   return m_pwindow->SetFocus();
+   //   return m_pwindow->XXXSetFocus();
 
    //}
 

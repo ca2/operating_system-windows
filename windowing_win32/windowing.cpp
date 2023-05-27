@@ -654,7 +654,7 @@ namespace windowing_win32
    //   if (pinteraction->get_wnd() != nullptr)
    //   {
 
-   //      pinteraction->SetFocus();
+   //      pinteraction->XXXSetFocus();
 
    //   }
 
