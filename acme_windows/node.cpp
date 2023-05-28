@@ -12,12 +12,14 @@
 //#include "acme/filesystem/filesystem/folder_dialog.h"
 #include "acme/operating_system/process.h"
 #include "acme/operating_system/summary.h"
-#include "acme/parallelization/synchronous_lock.h"
 #include "acme/parallelization/install_mutex.h"
+#include "acme/parallelization/manual_reset_event.h"
+#include "acme/parallelization/synchronous_lock.h"
 #include "acme/platform/scoped_restore.h"
 #include "acme/platform/system.h"
 #include "acme/primitive/primitive/memory.h"
 #include "acme/primitive/string/__wide.h"
+#include "acme/primitive/string/str.h"
 #include "acme/primitive/string/adaptor.h"
 #include "acme/primitive/string/international.h"
 #include "acme/primitive/string/str.h"
@@ -3160,15 +3162,63 @@ namespace acme_windows
    int node::command_system(const ::scoped_string & scopedstr, const ::trace_function & tracefunction)
    {
 
-      //straOutput.clear();
+      SIZE_T sizeAttrList = 0;
+      InitializeProcThreadAttributeList(
+         NULL,
+         1,
+         0,
+         &sizeAttrList
+      );
+      ::memory memoryAttrList;
+      memoryAttrList.set_size(sizeAttrList);
+      auto pattrList = (LPPROC_THREAD_ATTRIBUTE_LIST) memoryAttrList.data();
+         InitializeProcThreadAttributeList(
+            pattrList,
+            1,
+            0,
+            &sizeAttrList
+         );
+         
+            //straOutput.clear();
+      auto iPipeSize = 16_KiB;
 
       string str(scopedstr);
 
-      wstring wstr;
 
-      wstr = str;
+      ::string str1;
+      auto range = str();
+      range.m_erange = e_range_none;
+      try
+      {
+         str1 = range.consume_quoted_value();
 
-      STARTUPINFO si = { sizeof(si) };
+      }
+      catch (...)
+      {
+
+
+      }
+      ::string str2;
+      if (str1.is_empty())
+      {
+         ::string strCmd = acmenode()->get_environment_variable("ComSpec");
+         str1 ="\"" + strCmd + "\"";
+         str2 = "\"" + strCmd + "\" /c " + scopedstr;
+      }
+      else
+      {
+
+         str2 = scopedstr;
+         str2.trim();
+      }
+
+      wstring wstr1;
+      wstring wstr2;
+
+      wstr1 = str1;
+      wstr2 = str2;
+
+      STARTUPINFOEX si = { {sizeof(si)} };
       PROCESS_INFORMATION pi = {};
       SECURITY_ATTRIBUTES saAttr;
 
@@ -3183,7 +3233,7 @@ namespace acme_windows
 
       // Create a pipe for the child process's STDOUT. 
 
-      if (!CreatePipe(&hOutRd, &hOutWr, &saAttr, 0))
+      if (!CreatePipe(&hOutRd, &hOutWr, &saAttr, (DWORD) iPipeSize))
       {
 
          // log error
@@ -3211,12 +3261,29 @@ namespace acme_windows
 
       }
 
+
+      // Ensure the read handle to the pipe for STDOUT is not inherited.
+      if (!SetHandleInformation(hOutWr, HANDLE_FLAG_INHERIT, HANDLE_FLAG_INHERIT))
+      {
+
+         ::CloseHandle(hOutRd);
+         ::CloseHandle(hOutWr);
+
+         // log error
+         DWORD dwLastError = GetLastError();
+
+         auto estatus = ::windows::last_error_status(dwLastError);
+
+         throw ::exception(estatus);
+
+      }
+
       HANDLE hErrRd;
       HANDLE hErrWr;
 
       // Create a pipe for the child process's STDOUT. 
 
-      if (!CreatePipe(&hErrRd, &hErrWr, &saAttr, 0))
+      if (!CreatePipe(&hErrRd, &hErrWr, &saAttr, (DWORD)iPipeSize))
       {
 
          ::CloseHandle(hOutRd);
@@ -3250,31 +3317,9 @@ namespace acme_windows
 
       }
 
-      {
 
-         DWORD dwState = PIPE_NOWAIT;
-
-         SetNamedPipeHandleState(hOutRd, &dwState, nullptr, nullptr);
-
-      }
-
-      {
-
-         DWORD dwState = PIPE_NOWAIT;
-
-         SetNamedPipeHandleState(hErrRd, &dwState, nullptr, nullptr);
-
-      }
-
-      ZeroMemory(&si, sizeof(si));
-      si.cb = sizeof(si);
-      si.hStdError = hErrWr;
-      si.hStdOutput = hOutWr;
-      si.dwFlags |= STARTF_USESTDHANDLES;
-
-      ZeroMemory(&pi, sizeof(pi));
-
-      if (!CreateProcessW(nullptr, (WCHAR *) wstr.c_str(), NULL, NULL, TRUE, CREATE_NO_WINDOW, NULL, NULL, &si, &pi))
+      // Ensure the read handle to the pipe for STDOUT is not inherited.
+      if (!SetHandleInformation(hErrWr, HANDLE_FLAG_INHERIT, HANDLE_FLAG_INHERIT))
       {
 
          ::CloseHandle(hOutRd);
@@ -3282,13 +3327,153 @@ namespace acme_windows
          ::CloseHandle(hErrRd);
          ::CloseHandle(hErrWr);
 
-         DWORD dwLastError = ::GetLastError();
+         // log error
+         DWORD dwLastError = GetLastError();
 
          auto estatus = ::windows::last_error_status(dwLastError);
 
          throw ::exception(estatus);
 
       }
+
+      HANDLE hInRd;
+      HANDLE hInWr;
+
+      // Create a pipe for the child process's STDOUT. 
+
+      if (!CreatePipe(&hInRd, &hInWr, &saAttr, (DWORD)iPipeSize))
+      {
+
+         ::CloseHandle(hOutRd);
+         ::CloseHandle(hOutWr);
+         ::CloseHandle(hErrRd);
+         ::CloseHandle(hErrWr);
+
+         // log error
+         DWORD dwLastError = GetLastError();
+
+         auto estatus = ::windows::last_error_status(dwLastError);
+
+         throw ::exception(estatus);
+
+      }
+
+
+      // Ensure the read handle to the pipe for STDOUT is not inherited.
+      if (!SetHandleInformation(hInWr, HANDLE_FLAG_INHERIT, 0))
+      {
+
+         ::CloseHandle(hOutRd);
+         ::CloseHandle(hOutWr);
+         ::CloseHandle(hErrRd);
+         ::CloseHandle(hErrWr);
+         ::CloseHandle(hInRd);
+         ::CloseHandle(hInWr);
+
+         // log error
+         DWORD dwLastError = GetLastError();
+
+         auto estatus = ::windows::last_error_status(dwLastError);
+
+         throw ::exception(estatus);
+
+      }
+      if (!SetHandleInformation(hInRd, HANDLE_FLAG_INHERIT, HANDLE_FLAG_INHERIT))
+      {
+
+         ::CloseHandle(hOutRd);
+         ::CloseHandle(hOutWr);
+         ::CloseHandle(hErrRd);
+         ::CloseHandle(hErrWr);
+         ::CloseHandle(hInRd);
+         ::CloseHandle(hInWr);
+
+         // log error
+         DWORD dwLastError = GetLastError();
+
+         auto estatus = ::windows::last_error_status(dwLastError);
+
+         throw ::exception(estatus);
+
+      }
+
+      //{
+
+      //   DWORD dwState = PIPE_NOWAIT;
+
+      //   SetNamedPipeHandleState(hOutRd, &dwState, nullptr, nullptr);
+
+      //}
+
+      //{
+
+      //   DWORD dwState = PIPE_NOWAIT;
+
+      //   SetNamedPipeHandleState(hErrRd, &dwState, nullptr, nullptr);
+
+      //}
+
+      //{
+
+      //   DWORD dwState = PIPE_NOWAIT;
+
+      //   SetNamedPipeHandleState(hInWr, &dwState, nullptr, nullptr);
+
+      //}
+
+      HANDLE hList[3];
+
+      hList[0] = hErrWr;
+      hList[1] = hOutWr;
+      hList[2] = hInRd;
+
+      UpdateProcThreadAttribute(
+        pattrList,
+         0,
+         PROC_THREAD_ATTRIBUTE_HANDLE_LIST,
+         hList,
+         sizeof(hList),
+         nullptr,
+         nullptr
+      );
+
+      ZeroMemory(&si, sizeof(si));
+      si.StartupInfo.cb = sizeof(si);
+      si.StartupInfo.hStdError = hErrWr;
+      si.StartupInfo.hStdOutput = hOutWr;
+      si.StartupInfo.hStdInput = hInRd;
+      si.StartupInfo.wShowWindow = SW_HIDE; // Don't show the console window (DOS box)
+      si.StartupInfo.dwFlags |= STARTF_USESHOWWINDOW;
+      si.StartupInfo.dwFlags |= STARTF_USESTDHANDLES;
+      si.lpAttributeList = pattrList;
+
+      ZeroMemory(&pi, sizeof(pi));
+
+
+      if (!CreateProcessW((WCHAR *)wstr1.c_str(), (WCHAR*)wstr2.c_str(), NULL, NULL, TRUE, EXTENDED_STARTUPINFO_PRESENT | CREATE_NEW_CONSOLE, NULL, NULL, &si.StartupInfo, &pi))
+      {
+
+         ::CloseHandle(hOutRd);
+         ::CloseHandle(hOutWr);
+         ::CloseHandle(hErrRd);
+         ::CloseHandle(hErrWr);
+         ::CloseHandle(hInRd);
+         ::CloseHandle(hInWr);
+
+         DWORD dwLastError = ::GetLastError();
+
+         printf("Create Process failed with lasterror = %d\n", dwLastError);
+         printf("Parameters: %s %s\n", str1.c_str(), str2.c_str());
+
+         auto estatus = ::windows::last_error_status(dwLastError);
+
+         throw ::exception(estatus);
+
+      }
+
+      ::CloseHandle(hOutWr);
+      ::CloseHandle(hErrWr);
+      ::CloseHandle(hInRd);
 
       class ::time timeStart;
 
@@ -3298,116 +3483,143 @@ namespace acme_windows
 
       string strOutput;
 
-      //single_lock sl(pparticleSynchronization);
+      manual_reset_event eventEndOut;
 
-      while (true)
-      {
-
-         auto result = WaitForSingleObject(pi.hProcess, 100);
-
-         char sz[256];
-
-         while (true)
+      fork([this, hOutRd, tracefunction, &strOutput, &eventEndOut]()
          {
 
-            DWORD dwRead = 0;
+            char sz[256];
 
-            if (!ReadFile(hOutRd, sz, 256, &dwRead, nullptr))
+            while (true)
             {
 
-               break;
+               DWORD dwRead = 0;
 
-            }
+               if (!ReadFile(hOutRd, sz, 256, &dwRead, nullptr))
+               {
 
-            if (dwRead == 0)
-            {
+                  break;
 
-               break;
+               }
 
-            }
+               if (dwRead == 0)
+               {
 
-            string str(sz, dwRead);
+                  break;
 
-            strOutput += str;
+               }
 
-            if (tracefunction)
-            {
+               string str(sz, dwRead);
 
-               ::str::get_lines(strOutput, false, [&](auto & str)
-                  {
+               strOutput += str;
+
+               if (tracefunction)
+               {
+
+                  ::str::get_lines(strOutput, false, [&](auto& str)
+                     {
 
                         tracefunction(e_trace_level_information, str);
 
-                  });
+                     });
 
-            }
+               }
 
 
-            //if (ecommandsystem & e_command_system_inline_log)
-            //{
+               //if (ecommandsystem & e_command_system_inline_log)
+               //{
 
-            //   fprintf(stdout, "%s", str.c_str());
+               //   fprintf(stdout, "%s", str.c_str());
 
-            //   fflush(stdout);
+               //   fflush(stdout);
 
-            //}
+               //}
 
-            //strOutput += str;
+               //strOutput += str;
 
-            //::str().get_lines(straOutput, strOutput, "I: ", false, &sl, pfileLines);
+               //::str().get_lines(straOutput, strOutput, "I: ", false, &sl, pfileLines);
 
-         };
+            };
 
-         while (true)
+            ::CloseHandle(hOutRd);
+
+            ::output_debug_string("read out end");
+            eventEndOut.SetEvent();
+
+
+         });
+
+      manual_reset_event eventEndErr;
+
+
+      fork([this, hErrRd, tracefunction, &strError, &eventEndErr]()
          {
 
-            DWORD dwRead = 0;
+            char sz[256];
 
-            if (!ReadFile(hErrRd, sz, 256, &dwRead, nullptr))
+            while (true)
             {
 
-               break;
+               DWORD dwRead = 0;
 
-            }
+               if (!ReadFile(hErrRd, sz, 256, &dwRead, nullptr))
+               {
 
-            if (dwRead == 0)
-            {
+                  break;
 
-               break;
+               }
 
-            }
+               if (dwRead == 0)
+               {
 
-            string str(sz, dwRead);
+                  break;
 
-            strError += str;
+               }
 
-            if (tracefunction)
-            {
+               string str(sz, dwRead);
 
-               ::str::get_lines(strError, false, [&](auto & str)
-                  {
+               strError += str;
+
+               if (tracefunction)
+               {
+
+                  ::str::get_lines(strError, false, [&](auto& str)
+                     {
 
                         tracefunction(e_trace_level_error, str);
 
-                  });
+                     });
 
-            }
+               }
 
 
-            //if (ecommandsystem & e_command_system_inline_log)
-            //{
+               //if (ecommandsystem & e_command_system_inline_log)
+               //{
 
-            //   fprintf(stderr, "%s", str.c_str());
+               //   fprintf(stdout, "%s", str.c_str());
 
-            //   fflush(stderr);
+               //   fflush(stdout);
 
-            //}
+               //}
 
-            //strError += str;
+               //strOutput += str;
 
-            //::str().get_lines(straOutput, strError, "E: ", false, &sl, pfileLines);
+               //::str().get_lines(straOutput, strOutput, "I: ", false, &sl, pfileLines);
 
-         };
+            };
+
+            ::CloseHandle(hErrRd);
+
+            ::output_debug_string("read err end");
+            eventEndErr.SetEvent();
+
+
+         });
+
+      while (::task_get_run())
+      {
+
+         auto result = WaitForSingleObject(pi.hProcess, 100);
 
          if (result == WAIT_OBJECT_0)
          {
@@ -3427,6 +3639,69 @@ namespace acme_windows
 
       }
 
+
+
+      ////single_lock sl(pparticleSynchronization);
+
+      //while (true)
+      //{
+
+
+      //   while (true)
+      //   {
+
+      //      DWORD dwRead = 0;
+
+      //      if (!ReadFile(hErrRd, sz, 256, &dwRead, nullptr))
+      //      {
+
+      //         break;
+
+      //      }
+
+      //      if (dwRead == 0)
+      //      {
+
+      //         break;
+
+      //      }
+
+      //      string str(sz, dwRead);
+
+      //      strError += str;
+
+      //      if (tracefunction)
+      //      {
+
+      //         ::str::get_lines(strError, false, [&](auto & str)
+      //            {
+
+      //                  tracefunction(e_trace_level_error, str);
+
+      //            });
+
+      //      }
+
+
+      //      //if (ecommandsystem & e_command_system_inline_log)
+      //      //{
+
+      //      //   fprintf(stderr, "%s", str.c_str());
+
+      //      //   fflush(stderr);
+
+      //      //}
+
+      //      //strError += str;
+
+      //      //::str().get_lines(straOutput, strError, "E: ", false, &sl, pfileLines);
+
+      //   };
+
+
+
+      //}
+
       DWORD dwExitCode = 0;
 
       int iExitCode = 0;
@@ -3438,13 +3713,22 @@ namespace acme_windows
 
       }
 
-      ::CloseHandle(hOutRd);
-      ::CloseHandle(hOutWr);
-      ::CloseHandle(hErrRd);
-      ::CloseHandle(hErrWr);
+      while (true)
+      {
+
+         if (eventEndOut._wait(100_ms) && eventEndErr._wait(100_ms))
+         {
+
+            break;
+
+         }
+
+      }
 
       ::CloseHandle(pi.hProcess);
       ::CloseHandle(pi.hThread);
+
+      ::CloseHandle(hInWr);
 
       if (tracefunction)
       {
@@ -3465,8 +3749,189 @@ namespace acme_windows
 
       }
 
+      DeleteProcThreadAttributeList(
+         pattrList
+      );
       //::str().get_lines(straOutput, strOutput, "I: ", true, &sl, pfileLines);
       //::str().get_lines(straOutput, strError, "E: ", true, &sl, pfileLines);
+
+      return iExitCode;
+
+   }
+
+
+   int node::command_system(const ::scoped_string& scopedstr, const class ::time& timeOut)
+   {
+
+
+      string str(scopedstr);
+
+
+      ::string str1;
+      auto range = str();
+      range.m_erange = e_range_none;
+      try
+      {
+         str1 = range.consume_quoted_value();
+
+      }
+      catch (...)
+      {
+
+
+      }
+      ::string str2;
+      if (str1.is_empty())
+      {
+         ::string strCmd = acmenode()->get_environment_variable("ComSpec");
+         str1 = "\"" + strCmd + "\"";
+         str2 = "\"" + strCmd + "\" /c " + scopedstr;
+      }
+      else
+      {
+
+         str2 = scopedstr;
+         str2.trim();
+      }
+
+      wstring wstr1;
+      wstring wstr2;
+
+      wstr1 = str1;
+      wstr2 = str2;
+
+      STARTUPINFO si = { {sizeof(si)} };
+      PROCESS_INFORMATION pi = {};
+
+
+      ZeroMemory(&si, sizeof(si));
+      si.cb = sizeof(si);
+      si.wShowWindow = SW_HIDE; // Don't show the console window (DOS box)
+      si.dwFlags |= STARTF_USESHOWWINDOW;
+
+      ZeroMemory(&pi, sizeof(pi));
+
+
+      if (!CreateProcessW((WCHAR*)wstr1.c_str(), (WCHAR*)wstr2.c_str(), NULL, NULL, TRUE,  0, NULL, NULL, &si, &pi))
+      {
+
+         DWORD dwLastError = ::GetLastError();
+
+         printf("Create Process(2) failed with lasterror = %d\n", dwLastError);
+         printf("Parameters(2): %s %s\n", str1.c_str(), str2.c_str());
+
+         auto estatus = ::windows::last_error_status(dwLastError);
+
+         throw ::exception(estatus);
+
+      }
+
+      class ::time timeStart;
+
+      timeStart.Now();
+
+
+      while (::task_get_run())
+      {
+
+         auto result = WaitForSingleObject(pi.hProcess, 100);
+
+         if (result == WAIT_OBJECT_0)
+         {
+
+            break;
+
+         }
+
+         if (
+            !timeOut.is_infinite()
+            && timeStart.elapsed() > timeOut)
+         {
+
+            break;
+
+         }
+
+      }
+
+
+
+      ////single_lock sl(pparticleSynchronization);
+
+      //while (true)
+      //{
+
+
+      //   while (true)
+      //   {
+
+      //      DWORD dwRead = 0;
+
+      //      if (!ReadFile(hErrRd, sz, 256, &dwRead, nullptr))
+      //      {
+
+      //         break;
+
+      //      }
+
+      //      if (dwRead == 0)
+      //      {
+
+      //         break;
+
+      //      }
+
+      //      string str(sz, dwRead);
+
+      //      strError += str;
+
+      //      if (tracefunction)
+      //      {
+
+      //         ::str::get_lines(strError, false, [&](auto & str)
+      //            {
+
+      //                  tracefunction(e_trace_level_error, str);
+
+      //            });
+
+      //      }
+
+
+      //      //if (ecommandsystem & e_command_system_inline_log)
+      //      //{
+
+      //      //   fprintf(stderr, "%s", str.c_str());
+
+      //      //   fflush(stderr);
+
+      //      //}
+
+      //      //strError += str;
+
+      //      //::str().get_lines(straOutput, strError, "E: ", false, &sl, pfileLines);
+
+      //   };
+
+
+
+      //}
+
+      DWORD dwExitCode = 0;
+
+      int iExitCode = 0;
+
+      if (GetExitCodeProcess(pi.hProcess, &dwExitCode))
+      {
+
+         iExitCode = dwExitCode;
+
+      }
+
+
+
+      ::CloseHandle(pi.hProcess);
+      ::CloseHandle(pi.hThread);
 
       return iExitCode;
 

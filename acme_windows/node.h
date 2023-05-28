@@ -231,6 +231,7 @@ namespace acme_windows
       //void open_url(const ::string & strUrl) override; //
       //void command_system(string_array & straOutput, int & iExitCode, const scoped_string & str, enum_command_system ecommandsystem = e_command_system_none, const class time & timeTimeout = ::time::infinity(), ::particle * pparticleSynchronization = nullptr, ::file::file * pfileLog = nullptr) override;
       int command_system(const ::scoped_string& scopedstr, const trace_function& tracefunction = nullptr) override;
+      int command_system(const ::scoped_string& scopedstr, const class ::time& timeOut = 15_min) override;
 
       void open_terminal_and_run(const ::scoped_string& scopedstr);
 

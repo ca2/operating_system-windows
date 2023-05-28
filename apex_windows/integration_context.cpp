@@ -263,6 +263,19 @@ namespace apex_windows
 
 #endif
 
+         if (m_bMsys)
+         {
+            //s += "set CHERE_INVOKING=1\n";
+            //s += "set MSYSTEM=MSYS\n";
+            //s += "set MSYS2_PATH_TYPE=inherit\n";
+
+
+            acmenode()->set_environment_variable("CHERE_INVOKING", "1");
+            acmenode()->set_environment_variable("MSYSTEM", "MSYS");
+            acmenode()->set_environment_variable("MSYS2_PATH_TYPE", "inherit");
+
+         }
+
       }
 
 
@@ -335,8 +348,8 @@ namespace apex_windows
          string strCommand;
 
          //strCommand = "cmd.exe /c \"" + (pacmedirectory->system() / strRel / "env.bat") + "\"";
-
-         strCommand = "cmd.exe /c \"@call " + strBuildCmd + " && @set\"";
+         ::string strCmd = acmenode()->get_environment_variable("ComSpec");
+         strCommand = "\""+strCmd+"\" /c \"@call " + strBuildCmd + " && @set\"";
 
          string_array straOut;
          string_array straErr;
