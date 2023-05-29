@@ -600,7 +600,7 @@ namespace windowing_win32
             else 
             {
 
-               hicon = (HICON) ::LoadImageW(nullptr, wstring(m_pathProcessed), IMAGE_ICON, size.cx, size.cy, LR_LOADFROMFILE);
+               hicon = (HICON) ::LoadImageW(nullptr, wstring(m_pathProcessed), IMAGE_ICON, size.cx(), size.cy(), LR_LOADFROMFILE);
 
             }
 
@@ -623,11 +623,11 @@ namespace windowing_win32
 
                auto info = MyGetIconInfo((HICON) hicon1);
 
-               if (info.nWidth > size1.cx && info.nHeight > size1.cy)
+               if (info.nWidth > size1.cx() && info.nHeight > size1.cy())
                {
 
-                  size1.cx = info.nWidth;
-                  size1.cy = info.nHeight;
+                  size1.cx() = info.nWidth;
+                  size1.cy() = info.nHeight;
                   hicon = (HICON) hicon1;
 
                }
@@ -637,8 +637,8 @@ namespace windowing_win32
             if (!hicon)
             {
 
-               size1.cx = 0;
-               size1.cy = 0;
+               size1.cx() = 0;
+               size1.cy() = 0;
 
                for (auto& pair : m_iconmap)
                {
@@ -647,12 +647,12 @@ namespace windowing_win32
 
                   auto info = MyGetIconInfo(hicon1);
 
-                  if (info.nWidth > size1.cx
-                     && info.nHeight > size1.cy)
+                  if (info.nWidth > size1.cx()
+                     && info.nHeight > size1.cy())
                   {
 
-                     size1.cx = info.nWidth;
-                     size1.cy = info.nHeight;
+                     size1.cx() = info.nWidth;
+                     size1.cy() = info.nHeight;
                      hicon = hicon1;
 
                   }
@@ -839,15 +839,15 @@ namespace windowing_win32
 
          ZeroMemory(&info, sizeof(BITMAPINFO));
 
-         auto iScan = size.cx * 4;
+         auto iScan = size.cx() * 4;
 
          info.bmiHeader.biSize = sizeof(BITMAPINFOHEADER);
-         info.bmiHeader.biWidth = size.cx;
-         info.bmiHeader.biHeight = -size.cy;
+         info.bmiHeader.biWidth = size.cx();
+         info.bmiHeader.biHeight = -size.cy();
          info.bmiHeader.biPlanes = 1;
          info.bmiHeader.biBitCount = 32;
          info.bmiHeader.biCompression = BI_RGB;
-         info.bmiHeader.biSizeImage = size.cy * iScan;
+         info.bmiHeader.biSizeImage = size.cy() * iScan;
 
          ::color32_t * pcolorref = nullptr;
 
@@ -861,7 +861,7 @@ namespace windowing_win32
 
          hbitmapOld = (HBITMAP) ::SelectObject(hdc, hbitmap);
 
-         if (!::DrawIconEx(hdc, 0, 0, hicon, size.cx, size.cy, 0, nullptr, DI_IMAGE | DI_MASK))
+         if (!::DrawIconEx(hdc, 0, 0, hicon, size.cx(), size.cy(), 0, nullptr, DI_IMAGE | DI_MASK))
          {
 
             return nullptr;

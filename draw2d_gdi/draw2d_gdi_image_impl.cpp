@@ -83,8 +83,8 @@ namespace draw2d_gdi
       zero(m_info);
 
       m_info.bmiHeader.biSize          = sizeof (BITMAPINFOHEADER);
-      m_info.bmiHeader.biWidth         = size.cx;
-      m_info.bmiHeader.biHeight        =- size.cy;
+      m_info.bmiHeader.biWidth         = size.cx();
+      m_info.bmiHeader.biHeight        =- size.cy();
       m_info.bmiHeader.biPlanes        = 1;
       m_info.bmiHeader.biBitCount      = 32;
       m_info.bmiHeader.biCompression   = BI_RGB;
@@ -93,15 +93,15 @@ namespace draw2d_gdi
       if(m_pbitmap.m_p == nullptr)
       {
 
-         m_sizeRaw.cx = 0;
+         m_sizeRaw.cx() = 0;
 
-         m_sizeRaw.cy = 0;
+         m_sizeRaw.cy() = 0;
 
          return false;
 
       }
 
-      int iScan = size.cx * __sizeof(::color::color);
+      int iScan = size.cx() * __sizeof(::color::color);
 
       ::color::color * pcolorref = nullptr;
 
@@ -109,9 +109,9 @@ namespace draw2d_gdi
       if (!m_pbitmap->CreateDIBSection(nullptr, size, DIB_RGB_COLORS, (void **)&pcolorref, &iScan, nullptr, 0))
       {
 
-         m_sizeRaw.cx = 0;
+         m_sizeRaw.cx() = 0;
 
-         m_sizeRaw.cy = 0;
+         m_sizeRaw.cy() = 0;
 
          return false;
 
@@ -220,7 +220,7 @@ namespace draw2d_gdi
       return SetDIBitsToDevice(
              (dynamic_cast<::draw2d_gdi::graphics * >(pgraphics))->get_handle1(),
              point.x(), point.y(),
-             size.cx, size.cy,
+             size.cx(), size.cy(),
              pointSrc.x(), pointSrc.y(), pointSrc.y(), height() - pointSrc.y(),
              colorref(), &m_info, 0)
              != false;
@@ -271,7 +271,7 @@ namespace draw2d_gdi
    bool image::from(const ::point_i32 & pointDest, ::draw2d::graphics_pointer & pgraphics, const ::point_i32 & point, const ::size_i32 & sz)
    {
 
-      return m_spgraphics->BitBlt(pointDest.x(), pointDest.y(), sz.cx, sz.cy, pgraphics, point.x(), point.y(), SRCCOPY) != false;
+      return m_spgraphics->BitBlt(pointDest.x(), pointDest.y(), sz.cx(), sz.cy(), pgraphics, point.x(), point.y(), SRCCOPY) != false;
 
    }
 
@@ -1340,14 +1340,14 @@ namespace draw2d_gdi
 //
 //
 //         if(xL < 0) xL = 0;
-//         if(xU >= m_Size.cx) xU = m_Size.cx - 1;
+//         if(xU >= m_Size.cx()) xU = m_Size.cx() - 1;
 //         if(yL < 0) yL = 0;
-//         if(yU >= m_Size.cy) yU = m_Size.cy - 1;
+//         if(yU >= m_Size.cy()) yU = m_Size.cy() - 1;
 //
 //
-//         BYTE *dst = ((BYTE*)(m_pcolorref + xL + yL * m_Size.cx));
-//         u32 dwAdd = ((m_Size.cx - 1 - xU) + xL) * 4;
-//         int size_i32=m_Size.cx*m_Size.cy;
+//         BYTE *dst = ((BYTE*)(m_pcolorref + xL + yL * m_Size.cx()));
+//         u32 dwAdd = ((m_Size.cx() - 1 - xU) + xL) * 4;
+//         int size_i32=m_Size.cx()*m_Size.cy();
 //         double iLevel;
 //
 //         int dx, dy;
@@ -1500,14 +1500,14 @@ namespace draw2d_gdi
 //
 //
 //         if(xL < 0) xL = 0;
-//         if(xU >= m_Size.cx) xU = m_Size.cx - 1;
+//         if(xU >= m_Size.cx()) xU = m_Size.cx() - 1;
 //         if(yL < 0) yL = 0;
-//         if(yU >= m_Size.cy) yU = m_Size.cy - 1;
+//         if(yU >= m_Size.cy()) yU = m_Size.cy() - 1;
 //
 //
-//         BYTE *dst = ((BYTE*)(m_pcolorref + xL + yL * m_Size.cx));
-//         u32 dwAdd = ((m_Size.cx - 1 - xU) + xL) * 4;
-//         int size_i32=m_Size.cx*m_Size.cy;
+//         BYTE *dst = ((BYTE*)(m_pcolorref + xL + yL * m_Size.cx()));
+//         u32 dwAdd = ((m_Size.cx() - 1 - xU) + xL) * 4;
+//         int size_i32=m_Size.cx()*m_Size.cy();
 //         double iLevel;
 //
 //         int dx, dy;
@@ -2123,8 +2123,8 @@ namespace draw2d_gdi
    //void image::create_frame(::size_i32 size, int iFrameCount)
    //{
    //   int iSliceCount = (int) sqrt((double) iFrameCount);
-   //   int iFrameWidth = size.cx / iSliceCount;
-   //   int iFrameHeight = size.cy / iSliceCount;
+   //   int iFrameWidth = size.cx() / iSliceCount;
+   //   int iFrameHeight = size.cy() / iSliceCount;
    //   create(iFrameWidth, iFrameHeight);
    //}
 
@@ -2506,7 +2506,7 @@ namespace draw2d_gdi
 
    //   class ::rectangle_i32 rectangle(rectangleWindow);
 
-   //   //papplication->window_graphics_update_window(puserinteraction->get_window_graphics(),puserinteraction->get_handle(),m_pcolorref,rectangle,m_size.cx,m_size.cy,m_iScan, bTransferBuffer);
+   //   //papplication->window_graphics_update_window(puserinteraction->get_window_graphics(),puserinteraction->get_handle(),m_pcolorref,rectangle,m_size.cx(),m_size.cy(),m_iScan, bTransferBuffer);
 
    //   return true;
 
@@ -2609,8 +2609,8 @@ namespace draw2d_gdi
 
    //   rectx.left = 0;
    //   rectx.top = 0;
-   //   rectx.right = size.cx;
-   //   rectx.bottom = size.cy;
+   //   rectx.right = size.cx();
+   //   rectx.bottom = size.cy();
 
    //   try
    //   {

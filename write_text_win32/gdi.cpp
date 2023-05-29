@@ -239,15 +239,15 @@ namespace windowing_win32
 
       zero(bitmapinfo);
 
-      auto iScan = size.cx * 4;
+      auto iScan = size.cx() * 4;
 
       bitmapinfo.bmiHeader.biSize = sizeof(BITMAPINFOHEADER);
-      bitmapinfo.bmiHeader.biWidth = (::i32)size.cx;
-      bitmapinfo.bmiHeader.biHeight = (::i32)-size.cy;
+      bitmapinfo.bmiHeader.biWidth = (::i32)size.cx();
+      bitmapinfo.bmiHeader.biHeight = (::i32)-size.cy();
       bitmapinfo.bmiHeader.biPlanes = 1;
       bitmapinfo.bmiHeader.biBitCount = 32;
       bitmapinfo.bmiHeader.biCompression = BI_RGB;
-      bitmapinfo.bmiHeader.biSizeImage = (::i32)(size.cy * iScan);
+      bitmapinfo.bmiHeader.biSizeImage = (::i32)(size.cy() * iScan);
 
       color32_t * pcolorref = nullptr;
 
