@@ -3784,8 +3784,8 @@ namespace acme_windows
       if (str1.is_empty())
       {
          ::string strCmd = acmenode()->get_environment_variable("ComSpec");
-         str1 = "\"" + strCmd + "\"";
-         str2 = "\"" + strCmd + "\" /c " + scopedstr;
+         str1 = strCmd;
+         str2 = "\"" + strCmd + "\" /c \"" + scopedstr + "\"";
       }
       else
       {
