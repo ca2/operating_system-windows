@@ -208,12 +208,12 @@ namespace draw2d_gdiplus
       //void add_clipping_shapes(const shape_array<::draw2d::region>& shapea) override;
       void reset_clip() override;
       void _intersect_clip() override;
-      void _add_clipping_shape(const ::rectangle & rectangle, ___shape < ::draw2d::region > & shaperegion) override;
-      void _add_clipping_shape(const ::ellipse & ellipse, ___shape < ::draw2d::region > & shaperegion) override;
-      void _add_clipping_shape(const ::polygon & polygon, ___shape < ::draw2d::region > & shaperegion) override;
+      void _add_clipping_shape(const ::rectangle_f64 & rectangle, ___shape < ::draw2d::region > & shaperegion) override;
+      void _add_clipping_shape(const ::ellipse_f64 & ellipse, ___shape < ::draw2d::region > & shaperegion) override;
+      void _add_clipping_shape(const ::polygon_f64 & polygon, ___shape < ::draw2d::region > & shaperegion) override;
 
 
-      void intersect_clip(const ::rectangle& rectangle) override;
+      void intersect_clip(const ::rectangle_f64 & rectangle) override;
 
       virtual void set_clipping(::draw2d::region* pregion);
 
@@ -251,9 +251,9 @@ namespace draw2d_gdiplus
       void arc(double x1,double y1,double x2,double y2,double x3,double y3,double x4,double y4) override;
 
       //bool arc(i32 x1,i32 y1,i32 x2,i32 y2, angle start, angle extends) override;
-      void arc(double x1,double y1,double x2,double y2,angle start, angle extends) override;
+      void arc(double x1,double y1,double x2,double y2, ::angle_f64 start, ::angle_f64 extends) override;
 
-      void angle_arc(double x,double y, double nRadius, angle fStartAngle, angle fSweepAngle) override;
+      void angle_arc(double x,double y, double nRadius, ::angle_f64 fStartAngle, ::angle_f64 fSweepAngle) override;
       //bool arc_to(i32 x1, i32 y1, i32 x2, i32 y2, i32 x3, i32 y3, i32 x4, i32 y4) override;
       void arc_to(const rectangle_f64 &  prectangle, const point_f64 & pointStart, const point_f64 & pointEnd) override;
 

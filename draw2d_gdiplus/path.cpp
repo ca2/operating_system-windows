@@ -482,8 +482,7 @@ namespace draw2d_gdiplus
    }
 
 
-
-   bool path::internal_add_arc(const ::rectangle_f64 & rectangle, const ::angle& angleBeg, const ::angle& angleEnd)
+   bool path::internal_add_arc(const ::rectangle_f64 & rectangle, const ::angle_f64 & angleBeg, const ::angle_f64 & angleEnd)
    {
 
       if (m_ppath == nullptr)
@@ -507,6 +506,7 @@ namespace draw2d_gdiplus
          m_ppath->GetLastPoint(&point);
 
          m_pointInternal.X = point.X;
+
          m_pointInternal.Y = point.Y;
 
       }
@@ -648,7 +648,7 @@ namespace draw2d_gdiplus
    }
 
 
-   bool path::_set(::draw2d::graphics * pgraphics, const ::arc & arc)
+   bool path::_set(::draw2d::graphics * pgraphics, const ::arc_f64 & arc)
    {
 
       ::rectangle_f64 rectangle;
@@ -672,7 +672,7 @@ namespace draw2d_gdiplus
    }
 
 
-   bool path::_set(::draw2d::graphics * pgraphics, const ::rectangle & rectangle)
+   bool path::_set(::draw2d::graphics * pgraphics, const ::rectangle_f64 & rectangle)
    {
 
       return internal_add_rect(rectangle.left, rectangle.top,  rectangle.width(), rectangle.height(), pgraphics);
@@ -680,7 +680,7 @@ namespace draw2d_gdiplus
    }
 
 
-   bool path::_set(::draw2d::graphics * pgraphics, const ::ellipse & ellipse)
+   bool path::_set(::draw2d::graphics * pgraphics, const ::ellipse_f64 & ellipse)
    {
 
       return internal_add_ellipse(ellipse.left, ellipse.top, ellipse.width(), ellipse.height());
@@ -688,7 +688,7 @@ namespace draw2d_gdiplus
    }
 
 
-   bool path::_set(::draw2d::graphics * pgraphics, const ::line & line)
+   bool path::_set(::draw2d::graphics * pgraphics, const ::line_f64 & line)
    {
 
       return internal_add_line(line.m_p1.x(), line.m_p1.y(), line.m_p2.x(), line.m_p2.y());
@@ -696,7 +696,7 @@ namespace draw2d_gdiplus
    }
 
 
-   bool path::_set(::draw2d::graphics* pgraphics, const ::lines & lines)
+   bool path::_set(::draw2d::graphics* pgraphics, const ::lines_f64 & lines)
    {
 
       ::array < Gdiplus::PointF > pointa;
@@ -717,7 +717,7 @@ namespace draw2d_gdiplus
    }
 
 
-   bool path::_set(::draw2d::graphics* pgraphics, const ::polygon & polygon)
+   bool path::_set(::draw2d::graphics* pgraphics, const ::polygon_f64 & polygon)
    {
 
       ::array < Gdiplus::PointF > pointa;

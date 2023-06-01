@@ -795,7 +795,7 @@ namespace draw2d_gdiplus
    //}
 
 
-   void graphics::arc(double x1, double y1, double w, double h, angle start, angle extends)
+   void graphics::arc(double x1, double y1, double w, double h, ::angle_f64 start, ::angle_f64 extends)
    {
 
       ::Gdiplus::RectF rectangle_f32((Gdiplus::REAL)x1, (Gdiplus::REAL)y1, (Gdiplus::REAL)w, (Gdiplus::REAL)h);
@@ -2966,7 +2966,7 @@ namespace draw2d_gdiplus
 
    //}
 
-   void graphics::angle_arc(double x, double y, double nRadius, angle fStartAngle, angle fSweepAngle)
+   void graphics::angle_arc(double x, double y, double nRadius, ::angle_f64 fStartAngle, ::angle_f64 fSweepAngle)
    {
       //   //ASSERT(get_handle1() != nullptr);
       //   //return ::AngleArc(get_handle1(), x, y, nRadius, fStartAngle, fSweepAngle) != false;
@@ -4770,7 +4770,7 @@ namespace draw2d_gdiplus
    }
 
 
-   void graphics::_add_clipping_shape(const ::rectangle & rectangle, ___shape < ::draw2d::region > & shaperegion)
+   void graphics::_add_clipping_shape(const ::rectangle_f64 & rectangle, ___shape < ::draw2d::region > & shaperegion)
    {
 
       if (!shaperegion.holdee() || shaperegion.holdee()->m_pointOffset != m_pointAddShapeTranslate)
@@ -4824,7 +4824,7 @@ namespace draw2d_gdiplus
    }
 
 
-   void graphics::_add_clipping_shape(const ::ellipse & ellipse, ___shape < ::draw2d::region > & shaperegion)
+   void graphics::_add_clipping_shape(const ::ellipse_f64 & ellipse, ___shape < ::draw2d::region > & shaperegion)
    {
 
       if (!shaperegion.holdee() || shaperegion.holdee()->m_pointOffset != m_pointAddShapeTranslate)
@@ -4869,7 +4869,7 @@ namespace draw2d_gdiplus
    //}
 
 
-   void graphics::_add_clipping_shape(const ::polygon & polygon, ___shape < ::draw2d::region > & shaperegion)
+   void graphics::_add_clipping_shape(const ::polygon_f64 & polygon, ___shape < ::draw2d::region > & shaperegion)
    {
 
       if (!shaperegion.holdee() || shaperegion.holdee()->m_pointOffset != m_pointAddShapeTranslate)
@@ -4892,7 +4892,7 @@ namespace draw2d_gdiplus
    }
 
 
-   void graphics::intersect_clip(const ::rectangle& rectangle)
+   void graphics::intersect_clip(const ::rectangle_f64 & rectangle)
    {
 
       Gdiplus::RectF r;

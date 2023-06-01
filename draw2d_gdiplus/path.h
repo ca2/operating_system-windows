@@ -27,7 +27,7 @@ namespace draw2d_gdiplus
       virtual ~path();
 
 
-      virtual bool internal_add_arc(const ::rectangle_f64 & rectangle, const ::angle & angleBeg, const ::angle& angleEnd);
+      virtual bool internal_add_arc(const ::rectangle_f64 & rectangle, const ::angle_f64 & angleBeg, const ::angle_f64 & angleEnd);
 
       virtual point_f64 internal_last_point();
 
@@ -55,17 +55,17 @@ namespace draw2d_gdiplus
 
       virtual bool _set(::draw2d::graphics* pgraphics, const enum_shape& eshape);
 
-      virtual bool _set(::draw2d::graphics* pgraphics, const ::arc& parc);
+      virtual bool _set(::draw2d::graphics* pgraphics, const ::arc_f64 & parc);
 
-      virtual bool _set(::draw2d::graphics* pgraphics, const ::line& pline);
+      virtual bool _set(::draw2d::graphics* pgraphics, const ::line_f64 & pline);
 
-      virtual bool _set(::draw2d::graphics* pgraphics, const ::lines& pline);
+      virtual bool _set(::draw2d::graphics* pgraphics, const ::lines_f64 & pline);
 
-      virtual bool _set(::draw2d::graphics* pgraphics, const ::rectangle & rectangle);
+      virtual bool _set(::draw2d::graphics* pgraphics, const ::rectangle_f64 & rectangle);
 
-      virtual bool _set(::draw2d::graphics * pgraphics, const ::ellipse & ellipse);
+      virtual bool _set(::draw2d::graphics * pgraphics, const ::ellipse_f64 & ellipse);
 
-      virtual bool _set(::draw2d::graphics* pgraphics, const ::polygon & polygon);
+      virtual bool _set(::draw2d::graphics* pgraphics, const ::polygon_f64 & polygon);
 
       virtual bool _set(::draw2d::graphics* pgraphics, const ::write_text::text_out& ptextout);
 
