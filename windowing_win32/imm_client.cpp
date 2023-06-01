@@ -742,7 +742,7 @@ int imm_client::on_text_composition_message(int iMessage)
 
       com.dwStyle = CFS_FORCE_POSITION;
 
-      copy(com.ptCurrentPos, rectangle.top_left());
+      com.ptCurrentPos.x = rectangle.top;
 
       com.ptCurrentPos.y -= 100;
 
@@ -792,7 +792,9 @@ int imm_client::on_text_composition_message(int iMessage)
 
       can.dwStyle = CFS_CANDIDATEPOS;
 
-      copy(can.ptCurrentPos, rectangle.bottom_left());
+      can.ptCurrentPos.x = rectangle.left;
+
+      can.ptCurrentPos.y = rectangle.bottom;
 
       if (::ImmSetCandidateWindow(imm, &can))
       {

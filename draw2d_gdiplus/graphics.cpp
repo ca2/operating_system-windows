@@ -4899,9 +4899,13 @@ namespace draw2d_gdiplus
 
       copy(r, rectangle);
 
-      r.X = (Gdiplus::REAL) (r.X + m_pointAddShapeTranslate.x());
+      //r.X = (Gdiplus::REAL) (r.X + m_pointAddShapeTranslate.x());
 
-      r.Y = (Gdiplus::REAL) (r.Y + m_pointAddShapeTranslate.y());
+      //r.Y = (Gdiplus::REAL) (r.Y + m_pointAddShapeTranslate.y());
+
+      //r.X = (Gdiplus::REAL) (r.X);
+
+      //r.Y = (Gdiplus::REAL) (r.Y);
 
       m_pgraphics->SetClip(r, Gdiplus::CombineModeIntersect);
 
