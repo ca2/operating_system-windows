@@ -34,7 +34,7 @@ namespace draw2d_gdiplus
 
       bool get_bounding_box(::rectangle_i32 & rectangle, ::draw2d::graphics * pgraphics = nullptr) override;
 
-      void max_bounding_box(::rectangle_f64 & rectangle, ::draw2d::graphics * pgraphics) override;
+      void expand_bounding_box(::rectangle_f64 & rectangle, ::draw2d::graphics * pgraphics) override;
 
       Gdiplus::Region * get(::draw2d::graphics * pgraphics);
       Gdiplus::Region * get_rectangle(::draw2d::graphics * pgraphics);

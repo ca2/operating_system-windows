@@ -4773,12 +4773,13 @@ namespace draw2d_gdiplus
    void graphics::_add_clipping_shape(const ::rectangle_f64 & rectangle, ___shape < ::draw2d::region > & shaperegion)
    {
 
-      if (!shaperegion.holdee() || shaperegion.holdee()->m_pointOffset != m_pointAddShapeTranslate)
+      //if (!shaperegion.holdee() || shaperegion.holdee()->m_pointOffset != m_pointAddShapeTranslate)
+      if (!shaperegion.holdee())
       {
 
          auto pregion = __create < ::draw2d::region >();
 
-         pregion->m_pointOffset = m_pointAddShapeTranslate;
+         //pregion->m_pointOffset = m_pointAddShapeTranslate;
 
          pregion->create_rectangle(rectangle);
 
@@ -4827,12 +4828,13 @@ namespace draw2d_gdiplus
    void graphics::_add_clipping_shape(const ::ellipse_f64 & ellipse, ___shape < ::draw2d::region > & shaperegion)
    {
 
-      if (!shaperegion.holdee() || shaperegion.holdee()->m_pointOffset != m_pointAddShapeTranslate)
+      //if (!shaperegion.holdee() || shaperegion.holdee()->m_pointOffset != m_pointAddShapeTranslate)
+      if (!shaperegion.holdee())
       {
 
          auto pregion= __create < ::draw2d::region >();
 
-         pregion->m_pointOffset = m_pointAddShapeTranslate;
+         //pregion->m_pointOffset = m_pointAddShapeTranslate;
 
          pregion->create_ellipse(ellipse);
 
@@ -4872,12 +4874,13 @@ namespace draw2d_gdiplus
    void graphics::_add_clipping_shape(const ::polygon_f64 & polygon, ___shape < ::draw2d::region > & shaperegion)
    {
 
-      if (!shaperegion.holdee() || shaperegion.holdee()->m_pointOffset != m_pointAddShapeTranslate)
+      //if (!shaperegion.holdee() || shaperegion.holdee()->m_pointOffset != m_pointAddShapeTranslate)
+      if (!shaperegion.holdee())
       {
 
          auto pregion = __create < ::draw2d::region >();
 
-         pregion->m_pointOffset = m_pointAddShapeTranslate;
+         //pregion->m_pointOffset = m_pointAddShapeTranslate;
 
          pregion->create_polygon(polygon);
 
