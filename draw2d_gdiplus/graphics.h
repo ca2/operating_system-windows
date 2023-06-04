@@ -208,9 +208,9 @@ namespace draw2d_gdiplus
       //void add_clipping_shapes(const shape_array<::draw2d::region>& shapea) override;
       void reset_clip() override;
       void _intersect_clip() override;
-      void _add_clipping_shape(const ::rectangle_f64 & rectangle, ___shape < ::draw2d::region > & shaperegion) override;
-      void _add_clipping_shape(const ::ellipse_f64 & ellipse, ___shape < ::draw2d::region > & shaperegion) override;
-      void _add_clipping_shape(const ::polygon_f64 & polygon, ___shape < ::draw2d::region > & shaperegion) override;
+      void _add_clipping_shape(const ::rectangle_f64 & rectangle, ::draw2d::region * pregion) override;
+      void _add_clipping_shape(const ::ellipse_f64 & ellipse, ::draw2d::region * pregion) override;
+      void _add_clipping_shape(const ::polygon_f64 & polygon, ::draw2d::region * pregion) override;
 
 
       void intersect_clip(const ::rectangle_f64 & rectangle) override;

@@ -5,16 +5,19 @@
 #include "font.h"
 #include "path.h"
 #include "region.h"
+#include "acme/exception/interface_only.h"
+#include "acme/exception/not_implemented.h"
 #include "acme/parallelization/synchronous_lock.h"
 #include "acme/platform/scoped_restore.h"
+#include "acme/primitive/geometry2d/item.h"
 #include "acme/primitive/string/international.h"
 #include "aura/graphics/image/context_image.h"
 #include "aura/graphics/image/drawing.h"
 #include "aura/graphics/image/map.h"
 #include "acme/primitive/mathematics/mathematics.h"
-#include "acme/primitive/geometry2d/_enhanced.h"
-#include "acme/primitive/geometry2d/_collection_enhanced.h"
-#include "acme/primitive/geometry2d/_defer_shape.h"
+//#include "acme/primitive/geometry2d/_enhanced.h"
+//#include "acme/primitive/geometry2d/_collection_enhanced.h"
+//#include "acme/primitive/geometry2d/_defer_shape.h"
 
 
 #undef new
@@ -304,7 +307,7 @@ namespace draw2d_gdiplus
 
       throw ::not_implemented();
 
-      return nullptr;
+      return {};
 
    }
 
@@ -322,7 +325,8 @@ namespace draw2d_gdiplus
 
       throw ::not_implemented();
 
-      return nullptr;
+      return {};
+
    }
 
 
@@ -335,7 +339,7 @@ namespace draw2d_gdiplus
 
       throw ::interface_only();
 
-      return nullptr;
+      return {};
 
    }
 
@@ -514,7 +518,7 @@ namespace draw2d_gdiplus
       //return ::size_f64;
       throw ::not_implemented();
 
-      return nullptr;
+      return {};
 
 
    }
@@ -530,7 +534,7 @@ namespace draw2d_gdiplus
       //return point;
       throw ::interface_only();
 
-      return nullptr;
+      return {};
 
    }
 
@@ -543,7 +547,7 @@ namespace draw2d_gdiplus
 
       throw ::interface_only();
 
-      return nullptr;
+      return {};
 
    }
 
@@ -693,7 +697,7 @@ namespace draw2d_gdiplus
 
       throw ::interface_only();
 
-      return nullptr;
+      return {};
 
 
    }
@@ -770,9 +774,9 @@ namespace draw2d_gdiplus
 
       auto pmathematics = ::mathematics::mathematics();
 
-      double start = atan2(y3 - centery, x3 - centerx) * 180.0 / pmathematics->get_pi();
-      double end = atan2(y4 - centery, x4 - centerx) * 180.0 / pmathematics->get_pi();
-      double sweep = fabs(end - start);
+      auto start = radians(atan2(y3 - centery, x3 - centerx));
+      auto end = radians(atan2(y4 - centery, x4 - centerx));
+      auto sweep = radians(fabs(end - start));
 
       /*if(GetArcDirection() == AD_COUNTERCLOCKWISE)
       {
@@ -4652,7 +4656,7 @@ namespace draw2d_gdiplus
       //   ::SetWindowOrgEx(get_handle1(), x, y, &point);
       //if(get_handle2() != nullptr)
       //   ::SetWindowOrgEx(get_handle2(), x, y, &point);
-      return nullptr;
+      return {};
    }
 
 
@@ -4663,7 +4667,7 @@ namespace draw2d_gdiplus
             //   ::OffsetWindowOrgEx(get_handle1(), nWidth, nHeight, &point);
             //if(get_handle2() != nullptr)
             //   ::OffsetWindowOrgEx(get_handle2(), nWidth, nHeight, &point);
-      return nullptr;
+      return {};
    }
 
 
@@ -4770,26 +4774,31 @@ namespace draw2d_gdiplus
    }
 
 
-   void graphics::_add_clipping_shape(const ::rectangle_f64 & rectangle, ___shape < ::draw2d::region > & shaperegion)
+   void graphics::_add_clipping_shape(const ::rectangle_f64 & rectangle, ::draw2d::region * pregion)
    {
 
       //if (!shaperegion.holdee() || shaperegion.holdee()->m_pointOffset != m_pointAddShapeTranslate)
-      if (!shaperegion.holdee())
-      {
+      //if (!shaperegion.holdee())
+      //{
 
-         auto pregion = __create < ::draw2d::region >();
+      //   auto pregion = __create < ::draw2d::region >();
 
-         //pregion->m_pointOffset = m_pointAddShapeTranslate;
+      //   //pregion->m_pointOffset = m_pointAddShapeTranslate;
 
-         pregion->create_rectangle(rectangle);
+      //   pregion->create_rectangle(rectangle);
 
-         shaperegion.holdee(pregion);
+      //   shaperegion.holdee(pregion);
 
-      }
+      //}
 
-      Gdiplus::Region* pregion = (Gdiplus::Region*)shaperegion.holdee()->get_os_data(this, 0);
+      //Gdiplus::Region* pregion = (Gdiplus::Region*)shaperegion.holdee()->get_os_data(this, 0);
 
-      m_pgraphics->SetClip(pregion, Gdiplus::CombineModeIntersect);
+      //m_pgraphics->SetClip(pregion, Gdiplus::CombineModeIntersect);
+      // 
+      Gdiplus::RectF r;
+
+      copy(r, rectangle);
+      m_pgraphics->SetClip(r, Gdiplus::CombineModeIntersect);
       //return ::success;
 
    }
@@ -4825,26 +4834,43 @@ namespace draw2d_gdiplus
    }
 
 
-   void graphics::_add_clipping_shape(const ::ellipse_f64 & ellipse, ___shape < ::draw2d::region > & shaperegion)
+   void graphics::_add_clipping_shape(const ::ellipse_f64 & ellipse, ::draw2d::region * pregion)
    {
 
       //if (!shaperegion.holdee() || shaperegion.holdee()->m_pointOffset != m_pointAddShapeTranslate)
-      if (!shaperegion.holdee())
-      {
+      //if (!shaperegion.holdee())
+      //{
 
-         auto pregion= __create < ::draw2d::region >();
+      //   auto pregion= __create < ::draw2d::region >();
 
-         //pregion->m_pointOffset = m_pointAddShapeTranslate;
+      //   //pregion->m_pointOffset = m_pointAddShapeTranslate;
 
-         pregion->create_ellipse(ellipse);
+      //   pregion->create_ellipse(ellipse);
 
-         shaperegion.holdee(pregion);
+      //   shaperegion.holdee(pregion);
 
-      }
+      //}
 
-      Gdiplus::Region * pregion = (Gdiplus::Region * ) shaperegion.holdee()->get_os_data(this, 0);
+      //Gdiplus::Region * pregion = (Gdiplus::Region * ) shaperegion.holdee()->get_os_data(this, 0);
 
-      m_pgraphics->SetClip(pregion, Gdiplus::CombineModeIntersect);
+      //auto pregion = new Gdiplus::Region();
+
+      //pregion->
+
+      //m_pgraphics->SetClip(pregion, Gdiplus::CombineModeIntersect);
+      Gdiplus::GraphicsPath path;
+
+      Gdiplus::RectF r;
+
+      copy(r, ellipse);
+
+      path.AddEllipse(r);
+
+      //auto pregion = new Gdiplus::Region(&path);
+
+      m_pgraphics->SetClip(&path, Gdiplus::CombineModeIntersect);
+
+      //delete pregion;
 
    }
 
@@ -4871,26 +4897,50 @@ namespace draw2d_gdiplus
    //}
 
 
-   void graphics::_add_clipping_shape(const ::polygon_f64 & polygon, ___shape < ::draw2d::region > & shaperegion)
+   void graphics::_add_clipping_shape(const ::polygon_f64 & polygon, ::draw2d::region * pregion)
    {
 
       //if (!shaperegion.holdee() || shaperegion.holdee()->m_pointOffset != m_pointAddShapeTranslate)
-      if (!shaperegion.holdee())
+      //if (!shaperegion.holdee())
+      //{
+
+      //   auto pregion = __create < ::draw2d::region >();
+
+      //   //pregion->m_pointOffset = m_pointAddShapeTranslate;
+
+      //   pregion->create_polygon(polygon);
+
+      //   shaperegion.holdee(pregion);
+
+      //}
+
+      //Gdiplus::Region* pregion = (Gdiplus::Region*)shaperegion.holdee()->get_os_data(this, 0);
+
+      //m_pgraphics->SetClip(pregion, Gdiplus::CombineModeIntersect);
+
+      Gdiplus::GraphicsPath path;
+
+      array < Gdiplus::PointF > pa;
+
+      //::pointer<::geometry2d::polygon_item>pitem = pregion->m_pitem;
+
+      for (i32 i = 0; i < polygon.get_size(); i++)
       {
-
-         auto pregion = __create < ::draw2d::region >();
-
-         //pregion->m_pointOffset = m_pointAddShapeTranslate;
-
-         pregion->create_polygon(polygon);
-
-         shaperegion.holdee(pregion);
-
+         pa.add(Gdiplus::PointF((Gdiplus::REAL)polygon[i].x(), (Gdiplus::REAL)polygon[i].y()));
       }
 
-      Gdiplus::Region* pregion = (Gdiplus::Region*)shaperegion.holdee()->get_os_data(this, 0);
+      if (m_efillmode == ::draw2d::e_fill_mode_alternate)
+      {
+         path.SetFillMode(Gdiplus::FillModeAlternate);
+      }
+      else
+      {
+         path.SetFillMode(Gdiplus::FillModeWinding);
+      }
 
-      m_pgraphics->SetClip(pregion, Gdiplus::CombineModeIntersect);
+      path.AddPolygon(pa.data(), (i32)pa.get_count());
+
+      m_pgraphics->SetClip(&path, Gdiplus::CombineModeIntersect);
 
    }
 
@@ -7218,7 +7268,7 @@ namespace draw2d_gdiplus
 
          pgdiplusregion = __create_new < region >();
 
-         pgdiplusregion->m_eregion = pregion->m_eregion;
+         //pgdiplusregion->m_eregion = pregion->m_eregion;
 
          pgdiplusregion->m_pitem = pregion->m_pitem;
 

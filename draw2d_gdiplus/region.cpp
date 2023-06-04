@@ -2,6 +2,8 @@
 #include "region.h"
 #include "graphics.h"
 #include "acme/exception/interface_only.h"
+#include "acme/primitive/geometry2d/item.h"
+#include "acme/primitive/geometry2d/_defer_item.h"
 
 
 #undef new
@@ -110,23 +112,25 @@ namespace draw2d_gdiplus
    Gdiplus::Region * region::get(::draw2d::graphics * pgraphics)
    {
 
-      switch(m_eregion)
+      auto eitem = this->m_pitem->type();
+
+      switch(eitem)
       {
-      case ::draw2d::e_region_none:
+      case ::draw2d::e_item_none:
       {
 
          return new Gdiplus::Region();
 
       }
-      case ::draw2d::e_region_rect:
+      case ::draw2d::e_item_rectangle:
          return get_rectangle(pgraphics);
-      case ::draw2d::e_region_ellipse:
+      case ::draw2d::e_item_ellipse:
          return get_ellipse(pgraphics);
-      case ::draw2d::e_region_polygon:
+      case ::draw2d::e_item_polygon:
          return get_polygon(pgraphics);
-      case ::draw2d::e_region_poly_polygon:
+      case ::draw2d::e_item_poly_polygon:
          return get_polygon(pgraphics);
-      case ::draw2d::e_region_combine:
+      case ::draw2d::e_item_combine:
          return get_combine(pgraphics);
       default:
          throw ::interface_only();
@@ -144,9 +148,9 @@ namespace draw2d_gdiplus
 
       Gdiplus::RectF rectangle;
 
-      ::pointer<rectangle_item>pitem = m_pitem;
+      ::pointer<::geometry2d::rectangle_item>pitem = m_pitem;
 
-      copy(rectangle, pitem->m_rectangle);
+      copy(rectangle, pitem->m_item);
 
       //path.AddRectangle(rectangle);
 
@@ -160,13 +164,12 @@ namespace draw2d_gdiplus
 
       Gdiplus::GraphicsPath path;
 
+      ::pointer<::geometry2d::ellipse_item>pitem = m_pitem;
 
-      ::pointer<ellipse_item>pitem = m_pitem;
-
-      path.AddEllipse((INT) pitem->m_rectangle.left,
-         (INT) pitem->m_rectangle.top,
-         (INT) pitem->m_rectangle.width(),
-         (INT) pitem->m_rectangle.height());
+      path.AddEllipse((INT) pitem->m_item.left,
+         (INT) pitem->m_item.top,
+         (INT) pitem->m_item.width(),
+         (INT) pitem->m_item.height());
 
       return new Gdiplus::Region(&path);
 
@@ -180,7 +183,7 @@ namespace draw2d_gdiplus
 
       array < Gdiplus::PointF > pa;
 
-      ::pointer<polygon_item>pitem = m_pitem;
+      ::pointer<::geometry2d::polygon_item>pitem = m_pitem;
 
       for(i32 i = 0; i < pitem->m_polygon.get_size(); i++)
       {
@@ -210,7 +213,7 @@ namespace draw2d_gdiplus
 
       array < Gdiplus::PointF > pa;
 
-      ::pointer<poly_polygon_item>pitem = m_pitem;
+      ::pointer<::geometry2d::poly_polygon_item>pitem = m_pitem;
 
       if(pitem->m_efillmode == ::draw2d::e_fill_mode_alternate)
       {
@@ -223,19 +226,21 @@ namespace draw2d_gdiplus
 
       i32 n = 0;
 
-      for(i32 i = 0; i < pitem->m_polygona.get_size(); i++)
+      for(i32 i = 0; i < pitem->m_polypolygon.get_size(); i++)
       {
 
-         auto & polygon = *pitem->m_polygona[i];
+         auto & ppolygon = pitem->m_polypolygon[i];
             
-         auto jCount = polygon.get_size();
+         auto jCount = ppolygon->get_size();
 
          pa.erase_all();
 
          for(i32 j = 0; j < jCount; j++)
          {
 
-            pa.add(Gdiplus::PointF((Gdiplus::REAL) polygon[n].x(), (Gdiplus::REAL) polygon[n].y()));
+            auto & point = ppolygon->element_at(n);
+
+            pa.add(Gdiplus::PointF((Gdiplus::REAL)point.x(), (Gdiplus::REAL) point.y()));
 
             n++;
 
@@ -255,7 +260,7 @@ namespace draw2d_gdiplus
    Gdiplus::Region * region::get_combine(::draw2d::graphics * pgraphics)
    {
 
-      ::pointer<combine_item>pitem = m_pitem;
+      ::pointer<::geometry2d::combine_item>pitem = m_pitem;
 
       if (!pitem->m_pregion1 || !pitem->m_pregion2)
       {

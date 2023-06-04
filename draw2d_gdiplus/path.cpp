@@ -610,10 +610,10 @@ namespace draw2d_gdiplus
    }
 
    
-   bool path::_set(::draw2d::graphics* pgraphics, const enum_shape& eshape)
+   bool path::_set(::draw2d::graphics* pgraphics, const ::draw2d::enum_item & eitem)
    {
 
-      if (eshape == e_shape_begin_figure)
+      if (eitem == ::draw2d::e_item_begin_figure)
       {
 
          internal_begin_figure();
@@ -621,7 +621,7 @@ namespace draw2d_gdiplus
          return true;
 
       }
-      else if(eshape == e_shape_close_figure)
+      else if(eitem == ::draw2d::e_item_close_figure)
       {
 
          internal_close_figure();
@@ -629,7 +629,7 @@ namespace draw2d_gdiplus
          return true;
 
       }
-      else if (eshape == e_shape_end_figure)
+      else if (eitem == ::draw2d::e_item_end_figure)
       {
 
          
@@ -640,7 +640,7 @@ namespace draw2d_gdiplus
       else
       {
 
-         return ::draw2d::path::_set(pgraphics, eshape);
+         return ::draw2d::path::_set(pgraphics, eitem);
 
       }
 
@@ -653,10 +653,12 @@ namespace draw2d_gdiplus
 
       ::rectangle_f64 rectangle;
 
-      rectangle.left      = arc.m_pointCenter.x() - arc.m_sizeRadius.cx();
-      rectangle.right     = arc.m_pointCenter.x() + arc.m_sizeRadius.cx();
-      rectangle.top       = arc.m_pointCenter.y() - arc.m_sizeRadius.cy();
-      rectangle.bottom    = arc.m_pointCenter.y() + arc.m_sizeRadius.cy();
+      rectangle = arc;
+
+      //rectangle.left      = arc.m_pointCenter.x() - arc.m_sizeRadius.cx();
+      //rectangle.right     = arc.m_pointCenter.x() + arc.m_sizeRadius.cx();
+      //rectangle.top       = arc.m_pointCenter.y() - arc.m_sizeRadius.cy();
+      //rectangle.bottom    = arc.m_pointCenter.y() + arc.m_sizeRadius.cy();
 
       //if (!m_bHasPath && m_bHasPointInternal)
       //{
