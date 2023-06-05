@@ -195,9 +195,9 @@ namespace aura_windows
 //
 //#endif   // WINVER >= 0x0500
 
-      lresult send_message(const ::atom & atom, wparam wParam = 0, lparam lParam = nullptr, const ::point_i32& point = nullptr) override;
+      lresult send_message(const ::atom & atom, wparam wParam = 0, lparam lParam = {}, const ::point_i32 & point = {}) override;
 
-      void post_message(const ::atom & atom, wparam wParam = 0, lparam lParam = nullptr) override;
+      void post_message(const ::atom & atom, wparam wParam = 0, lparam lParam = {}) override;
 
 
       //bool SendNotifyMessage(::u32 message, wparam wParam, lparam lParam);
