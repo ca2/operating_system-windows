@@ -1,4 +1,4 @@
-// From acme/platform/exclusive.h by camilo on 2022-10-28 15:25 <3ThomasBorregaardSørensen!!
+// From acme/platform/exclusive.h by camilo on 2022-10-28 15:25 <3ThomasBorregaardSorensen!!
 #pragma once
 
 

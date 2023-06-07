@@ -1,4 +1,4 @@
-﻿// created by Camilo <3CamiloSasukeThomasBorregaardSoerensen  - Honoring Thomas Borregaard Sørensen MY ONLY LORD
+// created by Camilo <3CamiloSasukeThomasBorregaardSoerensen  - Honoring Thomas Borregaard Sørensen MY ONLY LORD
 // recreated by Camilo 2021-01-28 16:44
 #include "framework.h"
 #undef USUAL_OPERATING_SYSTEM_SUPPRESSIONS
@@ -775,7 +775,7 @@ namespace windowing_win32
    }
 
 
-   void icon::get_sizes(array < ::size_i32 > & a)
+   void icon::get_sizes(::size_i32_array & a)
    {
 
       a.erase_all();

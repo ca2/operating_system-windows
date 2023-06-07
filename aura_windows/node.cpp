@@ -1,4 +1,4 @@
-﻿#include "framework.h"
+#include "framework.h"
 #include "node.h"
 #include "acme/platform/system.h"
 #include "acme_windows/registry.h"

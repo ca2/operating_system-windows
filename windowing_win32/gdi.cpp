@@ -1,4 +1,4 @@
-﻿#include "framework.h"
+#include "framework.h"
 #undef USUAL_OPERATING_SYSTEM_SUPPRESSIONS
 #include "windowing.h"
 #include "apex/filesystem/filesystem/dir_context.h"

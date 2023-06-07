@@ -1,4 +1,4 @@
-﻿#include "framework.h"
+#include "framework.h"
 #include "device.h"
 #include "destination.h"
 #include "control.h"

@@ -1,4 +1,4 @@
-﻿#include "framework.h"
+#include "framework.h"
 #include "acme/constant/message.h"
 #include "acme/constant/message_prototype.h"
 #include "acme/constant/timer.h"

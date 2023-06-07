@@ -1,4 +1,4 @@
-﻿#include "framework.h"
+#include "framework.h"
 #include "midi.h"
 #include "sequencer.h"
 #include "out.h"

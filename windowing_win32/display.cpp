@@ -1,4 +1,4 @@
-﻿// created by Camilo <3CamiloSasukeThomasBorregaardSoerensen  - Honoring Thomas Borregaard Sørensen MY ONLY LORD
+// created by Camilo <3CamiloSasukeThomasBorregaardSoerensen  - Honoring Thomas Borregaard Sørensen MY ONLY LORD
 // recreated by Camilo 2021-02-02 20:55
 #include "framework.h"
 #undef USUAL_OPERATING_SYSTEM_SUPPRESSIONS
@@ -53,9 +53,9 @@ namespace windowing_win32
 
          m_monitora.add(pmonitor);
 
-         copy(pmonitor->m_rectangle, m_monitorinfoa[iMonitor].rcMonitor);
+         pmonitor->m_rectangle = m_monitorinfoa[iMonitor].rcMonitor;
 
-         copy(pmonitor->m_rectangleWorkspace, m_monitorinfoa[iMonitor].rcWork);
+         pmonitor->m_rectangleWorkspace = m_monitorinfoa[iMonitor].rcWork;
 
       }
 

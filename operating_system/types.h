@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 
 
 typedef char                     ansi_character;

@@ -1,4 +1,4 @@
-﻿// Created by camilo on 2021-11-16 12:53 BRT <3ThomasBorregaardS�rensen!!
+// Created by camilo on 2021-11-16 12:53 BRT <3ThomasBorregaardSorensen!!
 #include "framework.h"
 #undef USUAL_OPERATING_SYSTEM_SUPPRESSIONS
 #include "aura/graphics/image/image.h"
@@ -17,7 +17,7 @@ namespace aura_windows
    // and then pass that stream to the Bitmap class constructor 
    // or Bitmap::FromStream() method, and then finally call the 
    // Bitmap::ToHICON() method.
-   // � Remy Lebeau,  Feb 11 '17 at 3:34
+   // ... Remy Lebeau,  Feb 11 '17 at 3:34
    void* node::HICON_from_image(::image *pimage)
    {
 

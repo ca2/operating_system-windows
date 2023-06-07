@@ -1,4 +1,4 @@
-﻿///////////////////////////////
+///////////////////////////////
 /* uac_tools.cxx - version 2.1
 
 THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF

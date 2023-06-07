@@ -1,4 +1,4 @@
-﻿#include "framework.h"
+#include "framework.h"
 #include "path.h"
 #include "graphics.h"
 #include "font.h"

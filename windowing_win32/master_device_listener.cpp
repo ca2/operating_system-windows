@@ -1,4 +1,4 @@
-// Created by camilo on 2022-02-20 12:08 <3ThomasBorregaardS�rensen!! (Thomas Likes number 5)! I like also this Infinity up!!
+// Created by camilo on 2022-02-20 12:08 <3ThomasBorregaardSorensen!! (Thomas Likes number 5)! I like also this Infinity up!!
 #include "framework.h"
 #include "master_device_listener.h"
 #include "devices.h"

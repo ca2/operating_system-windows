@@ -1,4 +1,4 @@
-﻿#include "framework.h"
+#include "framework.h"
 #include "font.h"
 #include "draw2d.h"
 #include "acme/exception/exception.h"

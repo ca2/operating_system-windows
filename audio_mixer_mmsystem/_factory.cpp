@@ -1,4 +1,4 @@
-﻿#include "framework.h"
+#include "framework.h"
 #include "control.h"
 #include "line_info.h"
 #include "source.h"

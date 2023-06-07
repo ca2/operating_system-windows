@@ -1,4 +1,4 @@
-﻿// Created by camilo 2021-01
+// Created by camilo 2021-01
 // Recreated by camilo 2021-02-10 <3TBS_!!
 #include "framework.h"
 #undef USUAL_OPERATING_SYSTEM_SUPPRESSIONS

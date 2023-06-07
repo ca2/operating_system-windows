@@ -1,4 +1,4 @@
-﻿#include "framework.h"
+#include "framework.h"
 #include "process.h"
 #include "acme/exception/exception.h"
 #include "acme/primitive/string/parse.h"

@@ -1,4 +1,4 @@
-﻿// Created by camilo on 2022-02-20 12:22 <3ThomasBorregaardS�rensen!!
+// Created by camilo on 2022-02-20 12:22 <3ThomasBorregaardSorensen!!
 #include "framework.h"
 #include "devices.h"
 #include "master_device_listener.h"

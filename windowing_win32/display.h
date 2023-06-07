@@ -1,4 +1,4 @@
-﻿// created by Camilo <3ThomasBorregaardSoerensen_!!
+// created by Camilo <3ThomasBorregaardSoerensen_!!
 // recreated by Camilo 2021-02-02 16:49
 #pragma once
 

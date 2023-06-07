@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 
 
 #include "audio/audio/wave/out.h"

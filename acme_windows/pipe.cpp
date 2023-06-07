@@ -1,4 +1,4 @@
-﻿#include "framework.h"
+#include "framework.h"
 #include "pipe.h"
 #include "acme/exception/exception.h"
 #include "acme/filesystem/file/file.h"

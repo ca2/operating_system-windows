@@ -83,7 +83,7 @@ namespace acme_windows
 // From acme/filesystem/file/dir.cpp by camilo 
 // From acme_posix/acme_directory.h
 // on 2021-08-09 03:20 BRT
-// <3ThomasBorregaardSørensen!!
+// <3ThomasBorregaardSorensen!!
 
 
 // namespace posix

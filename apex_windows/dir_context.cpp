@@ -1,4 +1,4 @@
-﻿#include "framework.h"
+#include "framework.h"
 #include "dir_context.h"
 #include "dir_system.h"
 #include "acme_windows/file_find.h"

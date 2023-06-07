@@ -1,4 +1,4 @@
-﻿#include "framework.h"
+#include "framework.h"
 #include "file_context.h"
 #include "dir_system.h"
 #include "node.h"

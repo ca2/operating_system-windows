@@ -1,4 +1,4 @@
-﻿// Created by camilo on 2023-01-24 09:45 <3ThomasBorregaardSørensen!!
+// Created by camilo on 2023-01-24 09:45 <3ThomasBorregaardSorensen!!
 #pragma once
 
 #define MAX_INDEXES 255

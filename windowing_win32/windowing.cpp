@@ -1,4 +1,4 @@
-﻿// Created by camilo on 2021-01-30 <3ThomasBS_!!
+// Created by camilo on 2021-01-30 <3ThomasBS_!!
 #include "framework.h"
 #undef USUAL_OPERATING_SYSTEM_SUPPRESSIONS
 #include "mouse_hook.h"
@@ -872,7 +872,7 @@ namespace windowing_win32
 
                ::rectangle_i32 rectangleHitTest;
 
-               copy(rectangleHitTest, rectWindow);
+               rectangleHitTest = rectWindow;
 
                rectangleHitTest.inflate(iMargin + 1);
 

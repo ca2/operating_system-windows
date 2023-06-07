@@ -1,4 +1,4 @@
-﻿#include "framework.h"
+#include "framework.h"
 #include "shared_memory.h"
 #include "acme/primitive/primitive/pointer.h"
 #include "acme/exception/exception.h"

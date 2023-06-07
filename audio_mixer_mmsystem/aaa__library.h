@@ -1,4 +1,4 @@
-// Created by camilo on 2021-06-10 02:20 PM <3 Thomas Borregaard S�rensen__!!
+// Created by camilo on 2021-06-10 02:20 PM <3 Thomas Borregaard Sorensen__!!
 #pragma 
 
 
