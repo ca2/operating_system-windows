@@ -6011,7 +6011,7 @@ namespace windowing_win32
 
       }
 
-      copy(*prectangle, rectangle);
+      *prectangle = rectangle;
 
       return true;
 
@@ -6043,7 +6043,7 @@ namespace windowing_win32
 
       }
 
-      copy(*prectangle, rectangle);
+      *prectangle = rectangle;
 
       return true;
 
