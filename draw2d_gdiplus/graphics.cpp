@@ -1025,15 +1025,15 @@ namespace draw2d_gdiplus
 
       auto x = (Gdiplus::REAL) rectangleParam.left;
       auto y = (Gdiplus::REAL) rectangleParam.top;
-      auto Δx = (Gdiplus::REAL) rectangleParam.width();
-      auto Δy = (Gdiplus::REAL) rectangleParam.height();
+      auto greekdeltax = (Gdiplus::REAL) rectangleParam.width();
+      auto greekdeltay = (Gdiplus::REAL) rectangleParam.height();
 
-      auto status = m_pgraphics->DrawEllipse(ppen, x, y, Δx, Δy);
+      auto status = m_pgraphics->DrawEllipse(ppen, x, y, greekdeltax, greekdeltay);
 
       if (status != Gdiplus::Status::Ok)
       {
 
-         FORMATTED_WARNING("Gdiplus Failed to DrawEllipse (%f, %f, %f, %f)", x, y, Δx, Δy);
+         FORMATTED_WARNING("Gdiplus Failed to DrawEllipse (%f, %f, %f, %f)", x, y, greekdeltax, greekdeltay);
 
       }
 
@@ -1137,15 +1137,15 @@ namespace draw2d_gdiplus
 
       auto x = (Gdiplus::REAL)rectangleParam.left;
       auto y = (Gdiplus::REAL)rectangleParam.top;
-      auto Δx = (Gdiplus::REAL)rectangleParam.width();
-      auto Δy = (Gdiplus::REAL)rectangleParam.height();
+      auto greekdeltax = (Gdiplus::REAL)rectangleParam.width();
+      auto greekdeltay = (Gdiplus::REAL)rectangleParam.height();
 
-      auto status = m_pgraphics->FillEllipse(pbrush, x, y, Δx, Δy);
+      auto status = m_pgraphics->FillEllipse(pbrush, x, y, greekdeltax, greekdeltay);
       
       if(status != Gdiplus::Status::Ok)
       {
 
-         FORMATTED_WARNING("Gdiplus Failed to FillEllipse (%f, %f, %f, %f)", x, y, Δx, Δy);
+         FORMATTED_WARNING("Gdiplus Failed to FillEllipse (%f, %f, %f, %f)", x, y, greekdeltax, greekdeltay);
 
       }
 

@@ -1619,7 +1619,7 @@ namespace apex_windows
       {
          u32 lasterror = ::GetLastError();
          CloseServiceHandle(hdlSCM);
-         if (lasterror == 1060) // O serviço já não existe. Service already doesn't exist.
+         if (lasterror == 1060) // Service already doesn't exist.
             return; // do self-healing
          ::windows::throw_last_error(lasterror);
       }
