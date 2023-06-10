@@ -779,7 +779,7 @@ namespace draw2d_gdiplus
 
       }*/
 
-      pimage2->fill(0, 0, 0, 0);
+      pimage2->fill_byte(0);
 
       {
 
