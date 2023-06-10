@@ -70,7 +70,7 @@ namespace acme_windows
 				_T("PortName"),
 				nullptr,
 				nullptr,
-				(byte*)port_name,
+				(::u8*)port_name,
 				&port_name_length);
 
 			RegCloseKey(hkey);

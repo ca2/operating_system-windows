@@ -922,7 +922,7 @@ namespace apex_windows
          
          auto pwsz = wstr.get_buffer(dwSize);
 
-         lResult = RegQueryValueExW(hkey, wstring(pszSubKey), nullptr, &dwType, (byte*)(unichar*)pwsz, &dwSize);
+         lResult = RegQueryValueExW(hkey, wstring(pszSubKey), nullptr, &dwType, (::u8*)(unichar*)pwsz, &dwSize);
 
          wstr.release_buffer(dwSize);
 

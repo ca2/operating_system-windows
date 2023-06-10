@@ -49,10 +49,10 @@ namespace windows
       HDDEDATA dwData2
    )
    {
-      __UNREFERENCED_PARAMETER(uFmt);
-      __UNREFERENCED_PARAMETER(hconv);
-      __UNREFERENCED_PARAMETER(dwData1);
-      __UNREFERENCED_PARAMETER(dwData2);
+      UNREFERENCED_PARAMETER(uFmt);
+      UNREFERENCED_PARAMETER(hconv);
+      UNREFERENCED_PARAMETER(dwData1);
+      UNREFERENCED_PARAMETER(dwData2);
       switch (uType)
       {
       case XTYP_REGISTER:

@@ -936,7 +936,7 @@ namespace music
          void sequencer::OnDone(HMIDISTRM hmidistream, LPMIDIHDR lpmidihdr)
          {
 
-            __UNREFERENCED_PARAMETER(hmidistream);
+            UNREFERENCED_PARAMETER(hmidistream);
 
             ASSERT(lpmidihdr != nullptr);
 
@@ -1132,8 +1132,8 @@ namespace music
          void CALLBACK sequencer::MidiOutProc(HMIDIOUT hmo, UINT wMsg, DWORD_PTR dwInstance, DWORD_PTR dwParam1, DWORD_PTR dwParam2)
          {
 
-            __UNREFERENCED_PARAMETER(hmo);
-            __UNREFERENCED_PARAMETER(dwParam2);
+            UNREFERENCED_PARAMETER(hmo);
+            UNREFERENCED_PARAMETER(dwParam2);
 
             LPMIDIHDR lpmidihdr     = (LPMIDIHDR) dwParam1;
             sequencer * psequence    = (sequencer *)dwInstance;
@@ -1801,8 +1801,8 @@ namespace music
          )
          {
 
-            __UNREFERENCED_PARAMETER(tkMax);
-            __UNREFERENCED_PARAMETER(cbPrerollNomimalMax);
+            UNREFERENCED_PARAMETER(tkMax);
+            UNREFERENCED_PARAMETER(cbPrerollNomimalMax);
 
             ::e_status estatus;
 
@@ -1823,7 +1823,7 @@ namespace music
             }
 
             m_psequence->m_pfile->m_memstorageF1.set_size(iSize);
-            byte * lpbParam;
+            ::u8 * lpbParam;
             LPDWORD lpdwType;
             file::midi_stream_event_header * pheader;
             pheader = (file::midi_stream_event_header *)&m_psequence->m_pfile->m_memstorageF1.data()[0];
@@ -1873,7 +1873,7 @@ namespace music
             u32 cbPrerollNominalMax)
          {
 
-            __UNREFERENCED_PARAMETER(tkMax);
+            UNREFERENCED_PARAMETER(tkMax);
 
             if (pevent->GetFlags() & 1)
             {
@@ -1910,7 +1910,7 @@ namespace music
 
                   i32 iProgramChange = pevent->GetChB1();
 
-                  m_keyframe.rbProgram[iTrack] = (byte)iProgramChange;
+                  m_keyframe.rbProgram[iTrack] = (::u8)iProgramChange;
 
                }
                else if (pevent->GetType() == control_change)
@@ -1925,7 +1925,7 @@ namespace music
                   if (iController >= 0 && iController < 120)
                   {
 
-                     m_keyframe.rbControl[iTrack][iController] = (byte)iControllerValue;
+                     m_keyframe.rbControl[iTrack][iController] = (::u8)iControllerValue;
 
                   }
 
@@ -1986,7 +1986,7 @@ namespace music
 
                      }
 
-                     pevent->SetNotePitch((byte)iNotePitch);
+                     pevent->SetNotePitch((::u8)iNotePitch);
 
                   }
 
@@ -2386,7 +2386,7 @@ namespace music
 
             //if (m_psequence->m_pfile->m_flags & InsertSysEx)
             //{
-            //   byte* lpb = (byte*)lpdw;
+            //   ::u8* lpb = (::u8*)lpdw;
             //   //*lpb++ = sys_ex;
             //   m_psequence->m_pfile->m_flags &= ~InsertSysEx;
             //   //dwLength;
@@ -2404,7 +2404,7 @@ namespace music
 
             memory_copy(lpdw, m_psequence->m_pfile->m_hpbPendingUserEvent, dwLength);
 
-            byte * pb = (byte *)lpdw;
+            ::u8 * pb = (::u8 *)lpdw;
 
             string strMessageText;
 
@@ -2592,7 +2592,7 @@ namespace music
 
                            clip(0, 127, m_psequence->m_iaRefVolume[iTrack]);
 
-                           byte bVolume = (byte)(m_psequence->m_iaRefVolume[iTrack] * maximum(0.0, minimum(1.0, dVolume)));
+                           ::u8 bVolume = (::u8)(m_psequence->m_iaRefVolume[iTrack] * maximum(0.0, minimum(1.0, dVolume)));
 
                            if (abs((int)m_keyframe.rbControl[iTrack][e_control_change_volume] - (int)bVolume) < 3)
                            {

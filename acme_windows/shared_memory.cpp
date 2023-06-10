@@ -79,7 +79,7 @@ shared_memory::~shared_memory()
 }
 
 
-byte * shared_memory::detach_shared_memory(HGLOBAL & hglobal)
+::u8 * shared_memory::detach_shared_memory(HGLOBAL & hglobal)
 {
 
    if (this->offset() > 0)
@@ -99,7 +99,7 @@ byte * shared_memory::detach_shared_memory(HGLOBAL & hglobal)
 
    }
 
-   byte * pbStorage = m_beginStorage;
+   ::u8 * pbStorage = m_beginStorage;
 
    m_hGlobalMemory = nullptr;
    m_beginStorage = nullptr;
@@ -115,7 +115,7 @@ byte * shared_memory::detach_shared_memory(HGLOBAL & hglobal)
 void shared_memory::SetHandle(HGLOBAL hGlobalMemory, bool bAllowGrow)
 {
 
-   __UNREFERENCED_PARAMETER(bAllowGrow);
+   UNREFERENCED_PARAMETER(bAllowGrow);
 
    ASSERT(m_hGlobalMemory == nullptr);        // do once only
 
@@ -130,7 +130,7 @@ void shared_memory::SetHandle(HGLOBAL hGlobalMemory, bool bAllowGrow)
 
    m_hGlobalMemory = hGlobalMemory;
 
-   m_beginStorage = (byte *)::GlobalLock(m_hGlobalMemory);
+   m_beginStorage = (::u8 *)::GlobalLock(m_hGlobalMemory);
 
    m_begin = m_beginStorage;
 
@@ -141,7 +141,7 @@ void shared_memory::SetHandle(HGLOBAL hGlobalMemory, bool bAllowGrow)
 }
 
 
-byte * shared_memory::impl_alloc(memsize nBytes)
+::u8 * shared_memory::impl_alloc(memsize nBytes)
 {
 
    ASSERT(m_hGlobalMemory == nullptr);        // do once only
@@ -151,12 +151,12 @@ byte * shared_memory::impl_alloc(memsize nBytes)
    if (m_hGlobalMemory == nullptr)
       return nullptr;
 
-   return (byte *) ::GlobalLock(m_hGlobalMemory);
+   return (::u8 *) ::GlobalLock(m_hGlobalMemory);
 
 }
 
 
-byte * shared_memory::impl_realloc(void *, memsize nBytes)
+::u8 * shared_memory::impl_realloc(void *, memsize nBytes)
 {
 
    if (!m_bAllowGrow)
@@ -175,12 +175,12 @@ byte * shared_memory::impl_realloc(void *, memsize nBytes)
 
    m_hGlobalMemory = hNew;
 
-   return (byte *) ::GlobalLock(m_hGlobalMemory);
+   return (::u8 *) ::GlobalLock(m_hGlobalMemory);
 
 }
 
 
-void shared_memory::impl_free(byte *)
+void shared_memory::impl_free(::u8 *)
 {
 
    ASSERT(m_hGlobalMemory != nullptr);
@@ -192,7 +192,7 @@ void shared_memory::impl_free(byte *)
 }
 
 
-//byte * * shared_memory::detach()
+//::u8 * * shared_memory::detach()
 //{
 
 //   throw ::exception(not_supported_exception("not valid for Global Memory(\"HGLOBAL\")"));

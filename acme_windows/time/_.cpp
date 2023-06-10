@@ -34,11 +34,11 @@ string key_to_char(wparam wparam, lparam lparam)
 
    unichar wsz[32];
 
-   byte baState[256];
+   ::u8 baState[256];
 
    for(int i = 0; i < 256; i++)
    {
-      baState[i] = (byte) GetAsyncKeyState(i);
+      baState[i] = (::u8) GetAsyncKeyState(i);
    }
 
    if((GetAsyncKeyState(VK_SHIFT) & 0x80000000) != 0)
@@ -159,7 +159,7 @@ int GetVersion_ex1()
    ::u32    dwVersion = GetVersion();
    // Get major and minor version numbers of Windows
    ::u16 loword = LOWORD(dwVersion);
-   int lowbyte = __LOBYTE(loword);
+   int lowbyte = lower_u8(loword);
    int hibyte = HIBYTE(loword);
 
    debug_print("Window major version = %d and minor version = %d\n", lowbyte, hibyte);
@@ -365,7 +365,7 @@ int_bool is_windows_native_unicode()
 
       // get the Windows version.
 
-      ::u32 dwWindowsMajorVersion = (::u32)(__LOBYTE(LOWORD(dwVersion)));
+      ::u32 dwWindowsMajorVersion = (::u32)(lower_u8(LOWORD(dwVersion)));
       ::u32 dwWindowsMinorVersion = (::u32)(HIBYTE(LOWORD(dwVersion)));
 
       // get the build number.

@@ -25,14 +25,14 @@ public:
 
    virtual void SetHandle(HGLOBAL hGlobalMemory, bool bAllowGrow = true);
 
-   virtual byte * impl_alloc(memsize nBytes) override;
-   virtual byte * impl_realloc(void * pdata, memsize nBytes) override;
-   virtual void impl_free(byte * pMem) override;
+   virtual ::u8 * impl_alloc(memsize nBytes) override;
+   virtual ::u8 * impl_realloc(void * pdata, memsize nBytes) override;
+   virtual void impl_free(::u8 * pMem) override;
 
 
 
-   byte * detach_shared_memory(HGLOBAL & hglobal);
-   //byte * detach(HGLOBAL & hglobal);
+   ::u8 * detach_shared_memory(HGLOBAL & hglobal);
+   //::u8 * detach(HGLOBAL & hglobal);
 //      virtual bool allocate_internal(memsize dwNewLength);
 
 

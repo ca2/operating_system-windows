@@ -410,7 +410,7 @@ namespace windows
    //void interaction_impl::on_message_destroy(::message::message * pmessage)
    //{
 
-   //   __UNREFERENCED_PARAMETER(pmessage);
+   //   UNREFERENCED_PARAMETER(pmessage);
 
    //   //__release(m_pthreadUserImpl OBJECT_REFERENCE_COUNT_DEBUG_COMMA_THIS);
 
@@ -604,8 +604,8 @@ namespace windows
 
    //bool interaction_impl::_EnableToolTips(bool bEnable, ::u32 nFlag)
    //{
-   //   __UNREFERENCED_PARAMETER(bEnable);
-   //   __UNREFERENCED_PARAMETER(nFlag);
+   //   UNREFERENCED_PARAMETER(bEnable);
+   //   UNREFERENCED_PARAMETER(nFlag);
    //   return false;
    //}
 
@@ -660,7 +660,7 @@ namespace windows
 
 
 
-   //bool interaction_impl::SetLayeredWindowAttributes(color32_t crKey, byte bAlpha, u32 dwFlags)
+   //bool interaction_impl::SetLayeredWindowAttributes(color32_t crKey, ::u8 bAlpha, u32 dwFlags)
    //{
    //   ASSERT(_is_window());
    //   return ::SetLayeredWindowAttributes(get_handle(), crKey, bAlpha, dwFlags) != false;
@@ -677,7 +677,7 @@ namespace windows
    //}
 
 
-   //bool interaction_impl::GetLayeredWindowAttributes(color32_t *pcrKey, byte *pbAlpha, u32 *pdwFlags) const
+   //bool interaction_impl::GetLayeredWindowAttributes(color32_t *pcrKey, ::u8 *pbAlpha, u32 *pdwFlags) const
    //{
    //   ASSERT(::is_window(((interaction_impl *)this)->get_handle()));
    //   return ::GetLayeredWindowAttributes(((interaction_impl *)this)->get_handle(), pcrKey, pbAlpha, (LPDWORD)pdwFlags) != false;
@@ -706,8 +706,8 @@ namespace windows
 
    //void interaction_impl::WinHelp(uptr dwData, ::u32 nCmd)
    //{
-   //   __UNREFERENCED_PARAMETER(dwData);
-   //   __UNREFERENCED_PARAMETER(nCmd);
+   //   UNREFERENCED_PARAMETER(dwData);
+   //   UNREFERENCED_PARAMETER(nCmd);
    //   throw ::interface_only();
 
    //   /*      application* pApp = ::auraacmesystem();
@@ -792,8 +792,8 @@ namespace windows
 
    //void interaction_impl::WinHelpInternal(uptr dwData, ::u32 nCmd)
    //{
-   //   __UNREFERENCED_PARAMETER(dwData);
-   //   __UNREFERENCED_PARAMETER(nCmd);
+   //   UNREFERENCED_PARAMETER(dwData);
+   //   UNREFERENCED_PARAMETER(nCmd);
    //   throw ::interface_only();
    //   /*
    //   application* pApp = ::auraacmesystem();
@@ -828,7 +828,7 @@ namespace windows
 
    //bool interaction_impl::OnCommand(::user::message * pusermessage)
    //{
-   //   __UNREFERENCED_PARAMETER(pusermessage);
+   //   UNREFERENCED_PARAMETER(pusermessage);
    //   return false;
    //}
 
@@ -1111,7 +1111,7 @@ namespace windows
 //   void interaction_impl::OnDevModeChange(__in char * pDeviceName)
 //
 //   {
-//      __UNREFERENCED_PARAMETER(pDeviceName);
+//      UNREFERENCED_PARAMETER(pDeviceName);
 //
 //      throw ::interface_only();
 //      /*application* pApp = ::auraacmesystem();
@@ -1250,7 +1250,7 @@ namespace windows
    //void interaction_impl::_001OnProdevianSynch(::message::message * pmessage)
    //{
 
-   //   __UNREFERENCED_PARAMETER(pmessage);
+   //   UNREFERENCED_PARAMETER(pmessage);
 
    //}
 

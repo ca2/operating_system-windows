@@ -43,7 +43,7 @@
 #define SENSE_LEN                 14     /* Default sense buffer length    */
 #define SRB_DIR_SCSI              0x00   /* Direction determined by SCSI   */
 #define SRB_POSTING               0x01   /* Enable ASPI posting            */
-#define SRB_ENABLE_RESIDUAL_COUNT 0x04   /* Enable residual byte count     */
+#define SRB_ENABLE_RESIDUAL_COUNT 0x04   /* Enable residual ::u8 count     */
                                          /* reporting                      */
 #define SRB_DIR_IN                0x08   /* Transfer from SCSI target to   */
                                          /* host                           */
@@ -129,7 +129,7 @@
  ***************************************************************************/
 typedef struct {
   BYTE     SRB_Cmd;           /* 00/000 ASPI command code == SC_HA_INQUIRY */
-  BYTE     SRB_Status;        /* 01/001 ASPI command status byte           */
+  BYTE     SRB_Status;        /* 01/001 ASPI command status ::u8           */
   BYTE     SRB_HaID;          /* 02/002 ASPI host adapter number           */
   BYTE     SRB_Flags;         /* 03/003 ASPI request flags                 */
   uint32_t    SRB_Hdr_Rsvd;      /* 04/004 Reserved, must = 0                 */
@@ -149,7 +149,7 @@ typedef struct {
 typedef struct
 {
   BYTE     SRB_Cmd;           /* 00/000 ASPI cmd code == SC_GET_DEV_TYPE   */
-  BYTE     SRB_Status;        /* 01/001 ASPI command status byte           */
+  BYTE     SRB_Status;        /* 01/001 ASPI command status ::u8           */
   BYTE     SRB_HaID;          /* 02/002 ASPI host adapter number           */
   BYTE     SRB_Flags;         /* 03/003 Reserved, must = 0                 */
   uint32_t    SRB_Hdr_Rsvd;      /* 04/004 Reserved, must = 0                 */
@@ -167,7 +167,7 @@ typedef struct
 typedef struct
 {
   BYTE     SRB_Cmd;           /* 00/000 ASPI cmd code == SC_EXEC_SCSI_CMD  */
-  BYTE     SRB_Status;        /* 01/001 ASPI command status byte           */
+  BYTE     SRB_Status;        /* 01/001 ASPI command status ::u8           */
   BYTE     SRB_HaID;          /* 02/002 ASPI host adapter number           */
   BYTE     SRB_Flags;         /* 03/003 Reserved, must = 0                 */
   uint32_t    SRB_Hdr_Rsvd;      /* 04/004 Reserved, must = 0                 */
@@ -193,7 +193,7 @@ typedef struct
 typedef struct
 {
   BYTE     SRB_Cmd;           /* 00/000 ASPI cmd code == SC_RESET_DEV      */
-  BYTE     SRB_Status;        /* 01/001 ASPI command status byte           */
+  BYTE     SRB_Status;        /* 01/001 ASPI command status ::u8           */
   BYTE     SRB_HaId;          /* 02/002 ASPI host adapter number           */
   BYTE     SRB_Flags;         /* 03/003 Reserved, must = 0                 */
   uint32_t    SRB_Hdr_Rsvd;      /* 04/004 Reserved                           */

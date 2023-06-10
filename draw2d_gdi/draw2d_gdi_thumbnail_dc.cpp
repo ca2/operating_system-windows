@@ -606,7 +606,7 @@ size_i32 preview_dc::ComputeDeltas(int& x, const ::string & lpszString, UINT &nC
          *lpszOutputString++ = *lpszCurChar;
          if (_istlead(*lpszCurChar))
          {
-            *lpszOutputString++ = *(lpszCurChar+1); // copy trailing byte
+            *lpszOutputString++ = *(lpszCurChar+1); // copy trailing ::u8
             *(pnCurDelta + 1) = *pnCurDelta;        // double wide
             nCurrentPos += *pnCurDelta;
             pnCurDelta++;

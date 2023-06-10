@@ -68,7 +68,7 @@ namespace ca2plugin_container
    void application::on_receive(::aura::ipc::rx * prx, const ::string & pszMessage)
    {
 
-      __UNREFERENCED_PARAMETER(pszMessage);
+      UNREFERENCED_PARAMETER(pszMessage);
 
    }
 

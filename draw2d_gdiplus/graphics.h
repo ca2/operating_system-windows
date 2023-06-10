@@ -566,7 +566,7 @@ namespace draw2d_gdiplus
 
       float GetMiterLimit() override;
       void SetMiterLimit(float fMiterLimit) override;
-      //i32 GetPath(::point_f64 * ppoint, byte * lpTypes,count nCount) override;
+      //i32 GetPath(::point_f64 * ppoint, ::u8 * lpTypes,count nCount) override;
 
       void SelectClipPath(i32 nMode) override;
 

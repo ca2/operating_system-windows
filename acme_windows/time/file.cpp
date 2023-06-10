@@ -374,7 +374,7 @@ struct PROCESS_INFO_t
 ////
 ////   THREAD_PARAMS * pThreadParam = (THREAD_PARAMS *) p;
 ////
-////   FILE_NAME_INFO * pinfo = (FILE_NAME_INFO *)new byte[MAX_PATH * 8];
+////   FILE_NAME_INFO * pinfo = (FILE_NAME_INFO *)new ::u8[MAX_PATH * 8];
 ////
 ////   GetFinalPathNameByHandleDef pGetFinalPathNameByHandle = pThreadParam->pGetFinalPathNameByHandle;
 ////   for( g_CurrentIndex; g_CurrentIndex < pThreadParam->pSysHandleInformation->dwCount;  )
@@ -414,7 +414,7 @@ struct PROCESS_INFO_t
 ////      SetEvent( pThreadParam->hFinishedEvent );
 ////
 ////   }
-////   delete[] (byte *) pinfo;
+////   delete[] (::u8 *) pinfo;
 ////   return ::success;
 ////}
 //
@@ -469,7 +469,7 @@ struct PROCESS_INFO_t
 ////      // The previously supplied buffer wasn't enough.
 ////      delete pSysHandleInformation;
 ////      size = needed + 1024;
-////      pSysHandleInformation = (PSYSTEM_HANDLE_INFORMATION)new byte[size_i32];
+////      pSysHandleInformation = (PSYSTEM_HANDLE_INFORMATION)new ::u8[size_i32];
 ////      status = NtQuerySystemInformation( SystemHandleInformation, pSysHandleInformation, size, &needed );
 ////      if( !NT_SUCCESS(status))
 ////      {
@@ -666,7 +666,7 @@ struct PROCESS_INFO_t
 ////   }
 ////
 ////   u32 dwsize = 300;
-////   PDWORD pDwId = (PDWORD)new byte[dwsize];
+////   PDWORD pDwId = (PDWORD)new ::u8[dwsize];
 ////   DWORD dwReturned = dwsize;
 ////   // Enum all the process first
 ////   while( 1 )
@@ -678,7 +678,7 @@ struct PROCESS_INFO_t
 ////      }
 ////      delete pDwId;
 ////      dwsize += 50;
-////      pDwId = (PDWORD)new byte[dwsize];
+////      pDwId = (PDWORD)new ::u8[dwsize];
 ////   }
 ////   i32 nCount = dwReturned / sizeof(u32);
 ////   i32 nItemCount = -1;

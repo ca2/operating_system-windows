@@ -880,8 +880,8 @@ namespace apex_windows
    ::file::path dir_context::time_square(const ::string & strPrefix, const ::string & strSuffix)
    {
 
-      __UNREFERENCED_PARAMETER(strPrefix);
-      __UNREFERENCED_PARAMETER(strSuffix);
+      UNREFERENCED_PARAMETER(strPrefix);
+      UNREFERENCED_PARAMETER(strSuffix);
       return time() / "time";
 
    }
@@ -1272,7 +1272,7 @@ namespace apex_windows
    //   VERIFY(FindClose(hFind));
 
    //   // strip attribute of NORMAL bit, our API doesn't have a "normal" bit.
-   //   rStatus.m_attribute = (byte)(findFileData.dwFileAttributes & ~FILE_ATTRIBUTE_NORMAL);
+   //   rStatus.m_attribute = (::u8)(findFileData.dwFileAttributes & ~FILE_ATTRIBUTE_NORMAL);
 
    //   // get just the low ::u32 of the file size_i32
    //   ASSERT(findFileData.nFileSizeHigh == 0);

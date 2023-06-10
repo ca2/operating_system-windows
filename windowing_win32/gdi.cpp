@@ -68,9 +68,9 @@ namespace windows
       // Set the alpha values for each pixel in the cursor so that
       // the complete cursor is semi-transparent.
 
-      int iStrideDst = dwWidth * sizeof(::color32_t);
+      int iStrideDst = dwWidth * sizeof(::image32_t);
 
-      ::copy_colorref((::color32_t *)pBits, pimage->width(), pimage->height(), iStrideDst, pimage->get_data(), pimage->scan_size());
+      ::copy_image32((::image32_t *)pBits, pimage->width(), pimage->height(), iStrideDst, pimage->get_data(), pimage->scan_size());
 
       return hBitmap;
 
@@ -138,7 +138,7 @@ namespace windows
 
       pixmap pixmap;
 
-      pixmap.m_iScan = ppixmap->width() * sizeof(::color32_t);
+      pixmap.m_iScan = ppixmap->width() * sizeof(::image32_t);
 
       pixmap.m_size = ppixmap->size();
 
@@ -151,7 +151,7 @@ namespace windows
 
       }
 
-      ::copy_colorref(ppixmap, &pixmap);
+      ::copy_image32(ppixmap, &pixmap);
 
       return hbitmap;
 
@@ -177,7 +177,7 @@ namespace windows
 
       HDC hdcScreen = GetDC(nullptr);
 
-      hbmp = CreateDIBSection(hdcScreen, &bminfo, DIB_RGB_COLORS, (void **)&ppixmap->m_pcolorrefRaw, nullptr, 0);
+      hbmp = CreateDIBSection(hdcScreen, &bminfo, DIB_RGB_COLORS, (void **)&ppixmap->m_pimage32Raw, nullptr, 0);
 
       ReleaseDC(nullptr, hdcScreen);
 
@@ -188,7 +188,7 @@ namespace windows
 
       }
 
-      ppixmap->m_iScan = ppixmap->width() * sizeof(::color32_t);
+      ppixmap->m_iScan = ppixmap->width() * sizeof(::image32_t);
 
       return hbmp;
 
@@ -203,10 +203,7 @@ namespace windows
    }
 
 
-
-
-
-   CLASS_DECL_WINDOWING_WIN32 HBITMAP create_windows_dib(const ::size_i32 & size, i32 * piScan, ::color32_t ** ppdata)
+   CLASS_DECL_WINDOWING_WIN32 HBITMAP create_windows_dib(const ::size_i32 & size, i32 * piScan, ::image32_t ** ppdata)
    {
 
       BITMAPINFO bitmapinfo{};
@@ -221,9 +218,9 @@ namespace windows
       bitmapinfo.bmiHeader.biCompression = BI_RGB;
       bitmapinfo.bmiHeader.biSizeImage = (::i32)(size.cy() * iScan);
 
-      ::color32_t * pcolorref = nullptr;
+      ::image32_t * pimage32 = nullptr;
 
-      HBITMAP hbitmap = ::CreateDIBSection(nullptr, &bitmapinfo, DIB_RGB_COLORS, (void **)&pcolorref, nullptr, 0);
+      HBITMAP hbitmap = ::CreateDIBSection(nullptr, &bitmapinfo, DIB_RGB_COLORS, (void **)&pimage32, nullptr, 0);
 
       if (hbitmap == nullptr)
       {
@@ -242,7 +239,7 @@ namespace windows
       if (ppdata)
       {
 
-         *ppdata = pcolorref;
+         *ppdata = pimage32;
 
       }
 

@@ -92,7 +92,7 @@ u32 plugin_container_app(const ::string & strChannel)
 i32 __win_main(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmdLine, i32 nCmdShow)
 {
 
-   __UNREFERENCED_PARAMETER(lpCmdLine);
+   UNREFERENCED_PARAMETER(lpCmdLine);
 
    if(!defer_core_init())
    {

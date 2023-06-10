@@ -2,6 +2,7 @@
 #include "font.h"
 #include "draw2d.h"
 #include "acme/exception/exception.h"
+#include "acme/parallelization/synchronous_lock.h"
 #include "acme/primitive/string/international.h"
 
 
@@ -294,12 +295,9 @@ namespace draw2d_gdiplus
 
       }
 
+      synchronous_lock synchronouslock(acmesystem()->m_paurasystem->draw2d()->write_text()->m_pparticleFontTextMapSynchronization);
 
-
-
-      m_mapText.erase_all();
-
-      //return true;
+      m_mapFontText.erase_all();
 
    }
 

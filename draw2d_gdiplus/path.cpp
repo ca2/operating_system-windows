@@ -3,8 +3,10 @@
 #include "graphics.h"
 #include "font.h"
 #include "acme/exception/exception.h"
+#include "acme/primitive/geometry2d/arc.h"
 #include "aura/graphics/write_text/text_out.h"
 #include "aura/graphics/write_text/draw_text.h"
+#include "acme/primitive/geometry2d/line.h"
 
 
 #undef new

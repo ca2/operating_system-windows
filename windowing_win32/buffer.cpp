@@ -282,7 +282,7 @@ namespace windowing_win32
 
       }
 
-      ::color32_t * pcolorref = nullptr;
+      ::image32_t * pimage32 = nullptr;
 
       int iScan = -1;
 
@@ -324,10 +324,10 @@ namespace windowing_win32
          || playeredwindowbuffer->m_pixmap.m_sizeRaw.cy() < sizeLargeInternalBitmap.cy())
       {
 
-         HBITMAP hbitmap = ::windows::create_windows_dib(sizeLargeInternalBitmap, &iScan, &pcolorref);
+         HBITMAP hbitmap = ::windows::create_windows_dib(sizeLargeInternalBitmap, &iScan, &pimage32);
 
          if (hbitmap == nullptr
-            || pcolorref == nullptr
+            || pimage32 == nullptr
             || iScan == 0)
          {
 
@@ -342,7 +342,7 @@ namespace windowing_win32
 
          }
 
-         playeredwindowbuffer->m_pixmap.init(sizeLargeInternalBitmap, pcolorref, iScan);
+         playeredwindowbuffer->m_pixmap.init(sizeLargeInternalBitmap, pimage32, iScan);
 
          if (playeredwindowbuffer->m_hbitmap != nullptr)
          {
@@ -507,9 +507,9 @@ namespace windowing_win32
 
       //FORMATTED_INFORMATION("windowing_win32::buffer::update_screen size(%d, %d)", size.cx(), size.cy());
 
-      auto pixmapRawData = playeredwindowbuffer->m_pixmap.m_pcolorrefRaw;
+      auto pixmapRawData = playeredwindowbuffer->m_pixmap.m_pimage32Raw;
 
-      auto pimageRawData = pitem->m_pimage->m_pcolorrefRaw;
+      auto pimageRawData = pitem->m_pimage->m_pimage32Raw;
 
       if (m_bDibIsHostingBuffer && pimageRawData == pixmapRawData)
       {
@@ -532,7 +532,7 @@ namespace windowing_win32
 
          pitem->m_pimage->map();
 
-         ::copy_colorref(playeredwindowbuffer->m_pixmap, sizeLayeredWindowBuffer, pitem->m_pimage);
+         ::copy_image32(playeredwindowbuffer->m_pixmap, sizeLayeredWindowBuffer, pitem->m_pimage);
 
       }
 
@@ -612,7 +612,7 @@ namespace windowing_win32
 
          //      pimage->map();
 
-         //      ::copy_colorref(cx, cy, m_pcolorref, m_iScan, pimage->get_data(), pimage->scan_size());
+         //      ::copy_image32(cx, cy, m_pcolorref, m_iScan, pimage->get_data(), pimage->scan_size());
 
          //   }
          //   catch (...)
@@ -867,7 +867,7 @@ namespace windowing_win32
                      | SWP_SHOWWINDOW;
 
 
-                  ::UpdateLayeredWindow(hwnd, m_hdcScreen, (POINT *)&point, (SIZE *)&size, playeredwindowbuffer->m_hdc, (POINT *)&pointSrc, rgb(0, 0, 0), &blendPixelFunction, ULW_ALPHA);
+                  ::UpdateLayeredWindow(hwnd, m_hdcScreen, (POINT *)&point, (SIZE *)&size, playeredwindowbuffer->m_hdc, (POINT *)&pointSrc, 0, &blendPixelFunction, ULW_ALPHA);
 
                   if (rectangleWindowCurrent.top_left() != point
                      || rectangleWindowCurrent.size() != size)

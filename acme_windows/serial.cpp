@@ -605,7 +605,7 @@ namespace acme_windows
 
             }
 
-            // time_out occured on reading 1 byte
+            // time_out occured on reading 1 ::u8
             preempt(maximum(100_greekethas, m_timeout.m_timeReadTimeoutConstant / 10));
 
             if (!::task_get_run())

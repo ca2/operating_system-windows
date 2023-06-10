@@ -147,7 +147,7 @@ namespace production
    ::filemanager::data * pdata,
    ::file::item_array & itema)
    {
-      __UNREFERENCED_PARAMETER(pdata);
+      UNREFERENCED_PARAMETER(pdata);
       if(itema.get_size() > 0)
       {
          pcontext->m_papexcontext->os().file_open(this, itema[0]->m_filepathFinal, "", itema[0]->m_filepathFinal.folder());

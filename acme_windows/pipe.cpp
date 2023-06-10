@@ -225,7 +225,7 @@ namespace acme_windows
    )
    {
 
-      __UNREFERENCED_PARAMETER(dwErrorCode);
+      UNREFERENCED_PARAMETER(dwErrorCode);
 
       overlapped * plap = nullptr;
 

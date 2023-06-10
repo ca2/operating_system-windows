@@ -275,8 +275,8 @@ namespace aura_windows
 
    //bool interaction_impl::_EnableToolTips(bool bEnable, ::u32 nFlag)
    //{
-   //   __UNREFERENCED_PARAMETER(bEnable);
-   //   __UNREFERENCED_PARAMETER(nFlag);
+   //   UNREFERENCED_PARAMETER(bEnable);
+   //   UNREFERENCED_PARAMETER(nFlag);
    //   return false;
    //}
 
@@ -331,7 +331,7 @@ namespace aura_windows
 
 
 
-   //bool interaction_impl::SetLayeredWindowAttributes(::color::color crKey, byte bAlpha, u32 dwFlags)
+   //bool interaction_impl::SetLayeredWindowAttributes(::color::color crKey, ::u8 bAlpha, u32 dwFlags)
    //{
    //   ASSERT(_is_window());
    //   return ::SetLayeredWindowAttributes(get_handle(), crKey, bAlpha, dwFlags) != false;
@@ -348,7 +348,7 @@ namespace aura_windows
    //}
 
 
-   //bool interaction_impl::GetLayeredWindowAttributes(::color::color *pcrKey, byte *pbAlpha, u32 *pdwFlags) const
+   //bool interaction_impl::GetLayeredWindowAttributes(::color::color *pcrKey, ::u8 *pbAlpha, u32 *pdwFlags) const
    //{
    //   ASSERT(::is_window(((interaction_impl *)this)->get_handle()));
    //   return ::GetLayeredWindowAttributes(((interaction_impl *)this)->get_handle(), pcrKey, pbAlpha, (LPDWORD)pdwFlags) != false;
@@ -417,7 +417,7 @@ namespace aura_windows
 
    //bool interaction_impl::OnCommand(::user::message * pusermessage)
    //{
-   //   __UNREFERENCED_PARAMETER(pusermessage);
+   //   UNREFERENCED_PARAMETER(pusermessage);
    //   return false;
    //}
 
@@ -609,7 +609,7 @@ namespace aura_windows
 //
 //#ifdef WINDOWS_DESKTOP
 //
-//      __UNREFERENCED_PARAMETER(window);
+//      UNREFERENCED_PARAMETER(window);
 //
 //      if (!::SetCursor(hcursor))
 //      {
@@ -844,7 +844,7 @@ namespace aura_windows
 //   void interaction_impl::OnDevModeChange(__in char * pDeviceName)
 //
 //   {
-//      __UNREFERENCED_PARAMETER(pDeviceName);
+//      UNREFERENCED_PARAMETER(pDeviceName);
 //
 //      throw ::interface_only();
 //      /*application* pApp = ::auraacmesystem();
@@ -983,7 +983,7 @@ namespace aura_windows
    //void interaction_impl::_001OnProdevianSynch(::message::message * pmessage)
    //{
 
-   //   __UNREFERENCED_PARAMETER(pmessage);
+   //   UNREFERENCED_PARAMETER(pmessage);
 
    //}
 

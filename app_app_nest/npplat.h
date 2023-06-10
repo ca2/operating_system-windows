@@ -143,13 +143,13 @@ NPError Private_SetValue(NPP instance, NPNVariable variable, void *value);
 
 #endif //XP_MAC
 
-#ifndef HIBYTE
-#define HIBYTE(i) (i >> 8)
-#endif
+// #ifndef HIBYTE
+// #define HIBYTE(i) (i >> 8)
+// #endif
 
-#ifndef __LOBYTE
-#define __LOBYTE(i) (i & 0xff)
-#endif
+// #ifndef lower_u8
+// #define lower_u8(i) (i & 0xff)
+// #endif
 
 
 typedef unsigned short uint16;

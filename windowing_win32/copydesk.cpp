@@ -306,7 +306,7 @@ namespace windowing_win32
 
       }
 
-      byte * p = (byte *) ::GlobalLock(hglb);
+      ::u8 * p = (::u8 *) ::GlobalLock(hglb);
 
 
       pimage->map();
@@ -640,7 +640,7 @@ namespace windowing_win32
             if (pimage->area() > 0)
             {
 
-               pimage->fill(0);
+               pimage->fill_byte(0);
 
                hdcMem = ::CreateCompatibleDC(nullptr);
 

@@ -151,7 +151,7 @@
 //      //--------------------------------------------------------------------
 //      // Initialize the DataIn structure.
 //
-//      DataIn.pbData = (byte *)storageDecrypt.get_data();
+//      DataIn.pbData = (::u8 *)storageDecrypt.get_data();
 //      DataIn.cbData = (::u32)storageDecrypt.get_size();
 //
 //      //      unichar * pwsz = nullptr;

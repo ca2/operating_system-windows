@@ -342,7 +342,7 @@ namespace acme_windows
 
       string str;
 
-      str.format("\n\n\nWindow Background Color rgb(%d,%d,%d)\n\n", colorWindowBackground.red, colorWindowBackground.green, colorWindowBackground.blue);
+      str.format("\n\n\nWindow Background Color rgb(%d,%d,%d)\n\n", colorWindowBackground.m_u8Red, colorWindowBackground.m_u8Green, colorWindowBackground.m_u8Blue);
 
       ::output_debug_string(str);
 
@@ -889,11 +889,11 @@ namespace acme_windows
       {
          ::file::path str = acmedirectory()->system() / "CrashDumps" / strModuleNameWithTheExeExtension;
          wstring wstr = str;
-         RegSetValueExW(k.m_hkey, L"DumpFolder", 0, REG_EXPAND_SZ, (byte *)wstr.c_str(), ::u32((wcslen(wstr) + 1) * sizeof(wchar_t)));
+         RegSetValueExW(k.m_hkey, L"DumpFolder", 0, REG_EXPAND_SZ, (::u8 *)wstr.c_str(), ::u32((wcslen(wstr) + 1) * sizeof(wchar_t)));
          ::u32 dw = 10;
-         RegSetValueExW(k.m_hkey, L"DumpCount", 0, REG_DWORD, (byte *)&dw, sizeof(dw));
+         RegSetValueExW(k.m_hkey, L"DumpCount", 0, REG_DWORD, (::u8 *)&dw, sizeof(dw));
          dw = 2;
-         RegSetValueExW(k.m_hkey, L"DumpType", 0, REG_DWORD, (byte *)&dw, sizeof(dw));
+         RegSetValueExW(k.m_hkey, L"DumpType", 0, REG_DWORD, (::u8 *)&dw, sizeof(dw));
 
       }
 
@@ -2407,8 +2407,8 @@ namespace acme_windows
          output_debug_string("Could not create or open a registrty key\n");
          throw ::exception(error_resource);
       }
-      RegSetValueExW(hkey, L"", 0, REG_SZ, (byte *)desc.c_str(), ::u32(desc.length() * sizeof(wchar_t))); // default vlaue is description of file extension
-      RegSetValueExW(hkey, L"ContentType", 0, REG_SZ, (byte *)content_type.c_str(), ::u32(content_type.length() * sizeof(wchar_t))); // default vlaue is description of file extension
+      RegSetValueExW(hkey, L"", 0, REG_SZ, (::u8 *)desc.c_str(), ::u32(desc.length() * sizeof(wchar_t))); // default vlaue is description of file extension
+      RegSetValueExW(hkey, L"ContentType", 0, REG_SZ, (::u8 *)content_type.c_str(), ::u32(content_type.length() * sizeof(wchar_t))); // default vlaue is description of file extension
       RegCloseKey(hkey);
 
 
@@ -2420,7 +2420,7 @@ namespace acme_windows
          output_debug_string("Could not create or open a registrty key\n");
          throw ::exception(error_resource);
       }
-      RegSetValueExW(hkey, L"", 0, REG_SZ, (byte *)app.c_str(), ::u32(app.length() * sizeof(wchar_t)));
+      RegSetValueExW(hkey, L"", 0, REG_SZ, (::u8 *)app.c_str(), ::u32(app.length() * sizeof(wchar_t)));
       RegCloseKey(hkey);
 
 
@@ -2431,7 +2431,7 @@ namespace acme_windows
          output_debug_string("Could not create or open a registrty key\n");
          throw ::exception(error_resource);
       }
-      RegSetValueExW(hkey, L"", 0, REG_SZ, (byte *)icon.c_str(), ::u32(icon.length() * sizeof(wchar_t)));
+      RegSetValueExW(hkey, L"", 0, REG_SZ, (::u8 *)icon.c_str(), ::u32(icon.length() * sizeof(wchar_t)));
       RegCloseKey(hkey);
 
       ::file::path pathFile(acmedirectory()->stage(strAppIdHandler, process_platform_name(), process_configuration_name()) / "spa_register.txt");
@@ -2586,7 +2586,7 @@ namespace acme_windows
 
          auto pwsz = wstr.get_buffer(dwSize);
 
-         lResult = RegQueryValueExW(hkey, wstring(pszSubKey), nullptr, &dwType, (byte *)(unichar *)pwsz, &dwSize);
+         lResult = RegQueryValueExW(hkey, wstring(pszSubKey), nullptr, &dwType, (::u8 *)(unichar *)pwsz, &dwSize);
 
          wstr.release_buffer(dwSize);
 

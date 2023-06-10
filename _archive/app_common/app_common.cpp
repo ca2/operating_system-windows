@@ -12,7 +12,7 @@ extern "C" i32 app_common_main(HINSTANCE hinstance, HINSTANCE hPrevInstance, LPT
 
    //MessageBox(nullptr, lpCmdLine, "msg", 0);
 
-   __UNREFERENCED_PARAMETER(lpCmdLine);
+   UNREFERENCED_PARAMETER(lpCmdLine);
 
    string strAppId = read_resource_as_string(nullptr, 2000, "APPID");
 

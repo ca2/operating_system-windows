@@ -498,7 +498,7 @@ namespace multimedia
 
                memory_copy(lpvAudio1,out_get_buffer_data(i),dwBytesAudio1);
 
-               memory_copy(lpvAudio2,(byte *)out_get_buffer_data(i) + dwBytesAudio1,dwBytesAudio2);
+               memory_copy(lpvAudio2,(::u8 *)out_get_buffer_data(i) + dwBytesAudio1,dwBytesAudio2);
 
             }
 

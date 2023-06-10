@@ -182,7 +182,7 @@ namespace acme_windows
 
       ::serial::timeout           m_timeout;           // timeout for read operations
       unsigned long     m_ulBaudrate;    // Baudrate
-      u32          m_uiByteTimeNs;     // Nanoseconds to transmit/receive a single byte
+      u32          m_uiByteTimeNs;     // Nanoseconds to transmit/receive a single ::u8
 
       ::serial::enum_parity          m_eparity;           // Parity
       ::serial::enum_byte_size        m_ebytesize;       // Size of the bytes

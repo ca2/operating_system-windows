@@ -34,7 +34,11 @@ void gdiplus_draw_text(::draw2d::graphics * pgraphics, ::draw2d::path * ppath, c
 inline auto gdiplus_color(const ::color::color & color)
 {
 
-   return Gdiplus::Color(color.alpha, color.red, color.green, color.blue);
+   return Gdiplus::Color(
+      color.m_u8Opacity,
+      color.m_u8Red,
+      color.m_u8Green,
+      color.m_u8Blue);
 
 }
 

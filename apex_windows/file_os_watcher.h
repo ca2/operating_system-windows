@@ -39,7 +39,7 @@ namespace apex_windows
 
       OVERLAPPED           m_overlapped;
       HANDLE               m_hDirectory;
-      byte                 m_buffer[32 * 1024];
+      ::u8                 m_buffer[32 * 1024];
       LPARAM               m_lparam;
       DWORD                m_dwNotify;
       bool                 m_bRefresh;

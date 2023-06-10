@@ -43,8 +43,8 @@ typedef struct _SYSTEM_HANDLE
 {
    
    u32       dwProcessId;
-   byte		      bObjectType;
-   byte		      bFlags;
+   ::u8		      bObjectType;
+   ::u8		      bFlags;
    ::u16		      wValue;
    PVOID          pAddress;
    u32       GrantedAccess;

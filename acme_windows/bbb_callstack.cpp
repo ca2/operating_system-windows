@@ -123,7 +123,7 @@ index engine_fileline(OS_DWORD dwAddress, char* psz, int nCount, u32* pline, u32
 size_t engine_symbol(char* sz, int n, OS_DWORD* pdisplacement, OS_DWORD dwAddress)
 {
 
-   byte symbol[4096];
+   ::u8 symbol[4096];
    OS_PIMAGEHLP_SYMBOL pSym = (OS_PIMAGEHLP_SYMBOL)&symbol;
    memory_set(pSym, 0, sizeof(symbol));
    pSym->SizeOfStruct = sizeof(OS_IMAGEHLP_SYMBOL);

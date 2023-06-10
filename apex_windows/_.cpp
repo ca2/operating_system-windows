@@ -85,7 +85,7 @@ namespace apex_windows
 
    //      natural_wstring pwsz(byte_count, dwSize);
 
-   //      lResult = RegQueryValueExW(hkey, wstring(pszSubKey), nullptr, &dwType, (byte*)(unichar*)pwsz, &dwSize);
+   //      lResult = RegQueryValueExW(hkey, wstring(pszSubKey), nullptr, &dwType, (::u8*)(unichar*)pwsz, &dwSize);
 
    //      str = pwsz;
 

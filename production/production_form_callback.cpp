@@ -15,8 +15,8 @@ namespace production
    void form_callback::update(::user::form * pform, ::update & update)
    {
 
-      __UNREFERENCED_PARAMETER(pform);
-      __UNREFERENCED_PARAMETER(ptopic);
+      UNREFERENCED_PARAMETER(pform);
+      UNREFERENCED_PARAMETER(ptopic);
 
    }
 
@@ -24,7 +24,7 @@ namespace production
    void form_callback::handle(::topic * ptopic, ::context * pcontext)
    {
 
-      __UNREFERENCED_PARAMETER(pevent);
+      UNREFERENCED_PARAMETER(pevent);
 
    }
 

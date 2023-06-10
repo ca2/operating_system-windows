@@ -4,6 +4,11 @@
 #include "path.h"
 #include "brush.h"
 #include "acme/exception/exception.h"
+#include "acme/parallelization/synchronous_lock.h"
+#include "acme/platform/acme.h"
+#include "acme/platform/sub_system.h"
+#include "aura/graphics/draw2d/draw2d.h"
+#include "aura/platform/system.h"
 
 
 void gdiplus_draw_text(::draw2d::graphics* pgraphicsParam, ::draw2d::path* ppathParam, const string& str, rectangle_f64& rectangleParam, const ::e_align & ealign, const ::e_draw_text & edrawtext, ::write_text::font* pfontParam, double dFontWidth, ::draw2d::brush* pbrushParam, bool bMeasure)
@@ -44,6 +49,8 @@ void gdiplus_draw_text(::draw2d::graphics* pgraphicsParam, ::draw2d::path* ppath
       pgraphics = __graphics(pgraphicsParam)->m_pgraphics;
 
    }
+
+   synchronous_lock synchronouslock(::acme::acme::g_pacme->m_psubsystem->acmesystem()->m_paurasystem->draw2d()->write_text()->m_pparticleFontTextMapSynchronization);
 
    Gdiplus::GraphicsPath* ppath = nullptr;
 
@@ -174,7 +181,7 @@ void gdiplus_draw_text(::draw2d::graphics* pgraphicsParam, ::draw2d::path* ppath
 
       }
 
-      auto& text = pfontParam->m_mapText[str];
+      auto& text = pfontParam->m_mapFontText[str];
 
       if (text.m_wstr.is_empty())
       {
