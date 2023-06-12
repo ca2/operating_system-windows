@@ -26,7 +26,7 @@ namespace apex_windows
       if (err != 0)
       {
 
-         INFORMATION("Failed in call to WSAStartup, return value was %d\n", err);
+         information() << "Failed in call to WSAStartup, return value was %d\n", err;
 
          throw ::exception(error_not_supported);
 
@@ -39,7 +39,7 @@ namespace apex_windows
       if ((lower_u8(wsaData.wVersion) != 1) || (HIBYTE(wsaData.wVersion) != 1))
       {
 
-         INFORMATION("Failed to find a usable winsock stack which supports Winsock 1.1\n");
+         information() << "Failed to find a usable winsock stack which supports Winsock 1.1\n";
 
          throw ::exception(error_not_supported);
 
@@ -107,7 +107,7 @@ namespace apex_windows
       if (gethostname(szHostname, sizeof(szHostname)))
       {
 
-         INFORMATION("Failed in call to gethostname, WSAGetLastError returns %d\n", WSAGetLastError());
+         information() << "Failed in call to gethostname, WSAGetLastError returns %d\n", WSAGetLastError();
 
          return false;
 

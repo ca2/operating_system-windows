@@ -139,7 +139,7 @@ namespace apex_windows
 
             strMessage = "There is a hole here. You should fill it with fullfillment. Missing f**k " + path;
 
-            FATAL(strMessage);
+            fatal() <<strMessage;
 
          }
 

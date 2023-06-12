@@ -29,7 +29,7 @@ namespace windowing_win32
          if (m_event.wait(tickTimeout).timeout())
          {
 
-            INFORMATION("print_window::time_out");
+            information() << "print_window::time_out";
 
          }
 

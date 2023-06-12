@@ -478,7 +478,7 @@ namespace music
                if (::success != m_psequence->m_estatusLastError)
                {
 
-                  WARNING("::music::midi::sequencer::stop -> midiStreamStop returned %lu", (u32)m_psequence->m_estatusLastError.as_i64());
+                  warning() <<"::music::midi::sequencer::stop -> midiStreamStop returned %lu", (u32)m_psequence->m_estatusLastError.as_i64();
 
                   m_psequence->m_flags.erase(sequence::e_flag_waiting);
 
@@ -548,7 +548,7 @@ namespace music
                         if (!estatus)
                         {
 
-                           WARNING("midiStreamPosition() returned :" << estatus.as_i64());
+                           warning() <<"midiStreamPosition() returned :" << estatus.as_i64();
 
                            return estatus;
 
@@ -1010,7 +1010,7 @@ namespace music
 
                default:
 
-                  INFORMATION("sequencer::fill_buffer returned %lu", (u32)estatus.as_i64());
+                  information() << "sequencer::fill_buffer returned %lu", (u32)estatus.as_i64();
 
                   m_psequence->set_state(sequence::e_state_stopping);
 
@@ -1032,7 +1032,7 @@ namespace music
                   else
                   {
 
-                     INFORMATION("e_event_midi_stream_out : midiStreamOut returned %lu", (u32)estatus.as_i64());
+                     information() << "e_event_midi_stream_out : midiStreamOut returned %lu", (u32)estatus.as_i64();
 
                      m_psequence->set_state(sequence::e_state_stopping);
 
@@ -1279,7 +1279,7 @@ namespace music
 
                //default:
 
-               //   INFORMATION("sequencer::fill_buffer returned %lu", (u32)estatus.m_estatus);
+               //   information() << "sequencer::fill_buffer returned %lu", (u32)estatus.m_estatus;
 
                //   m_psequence->set_state(sequence::e_state_stopping);
 
@@ -1301,7 +1301,7 @@ namespace music
                //   else
                //   {
 
-               //      INFORMATION("e_event_midi_stream_out : midiStreamOut returned %lu", (u32)estatus.m_estatus);
+               //      information() << "e_event_midi_stream_out : midiStreamOut returned %lu", (u32)estatus.m_estatus;
 
                //      m_psequence->set_state(sequence::e_state_stopping);
 
@@ -1658,7 +1658,7 @@ namespace music
             if (!estatus)
             {
 
-               ERROR("midiOutClose error");
+               error() <<"midiOutClose error";
 
             }
 
@@ -1778,7 +1778,7 @@ namespace music
 
                ASSERT(m_iBuffersInMMSYSTEM <= 0);
 
-               INFORMATION("music_midi_on_playback_end");
+               information() << "music_midi_on_playback_end";
 
                close_device();
 
@@ -1856,7 +1856,7 @@ namespace music
             if (!estatus)
             {
 
-               WARNING("smfInsertParmData[2] : " << estatus.as_i64());
+               warning() <<"smfInsertParmData[2] : " << estatus.as_i64();
 
             }
 
@@ -2176,7 +2176,7 @@ namespace music
                   if (!estatus)
                   {
 
-                     WARNING("smfInsertParmData[2] : " << estatus.as_i64());
+                     warning() <<"smfInsertParmData[2] : " << estatus.as_i64();
 
                      return estatus;
 
@@ -2417,7 +2417,7 @@ namespace music
 
             }
 
-            FORMATTED_INFORMATION("sysex:%s", strMessageText.c_str());
+            information("sysex:%s", strMessageText.c_str());
 
             auto remainingBytes = dwRounded - dwLength;
 
@@ -2463,7 +2463,7 @@ namespace music
                if (!estatus)
                {
 
-                  WARNING("smfInsertParmData() -> : " << estatus.as_i64());
+                  warning() <<"smfInsertParmData() -> : " << estatus.as_i64();
 
                   return estatus;
 

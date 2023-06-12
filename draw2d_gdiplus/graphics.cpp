@@ -385,7 +385,7 @@ namespace draw2d_gdiplus
          catch (...)
          {
 
-            INFORMATION("graphics::set(::draw2d::bitmap *) : Failed to delete Gdiplus::Graphics");
+            information() << "graphics::set(::draw2d::bitmap *) : Failed to delete Gdiplus::Graphics";
 
          }
 
@@ -1038,7 +1038,7 @@ namespace draw2d_gdiplus
       if (status != Gdiplus::Status::Ok)
       {
 
-         FORMATTED_WARNING("Gdiplus Failed to DrawEllipse (%f, %f, %f, %f)", x, y, greekdeltax, greekdeltay);
+         warning("Gdiplus Failed to DrawEllipse (%f, %f, %f, %f)", x, y, greekdeltax, greekdeltay);
 
       }
 
@@ -1150,7 +1150,7 @@ namespace draw2d_gdiplus
       if (status != Gdiplus::Status::Ok)
       {
 
-         FORMATTED_WARNING("Gdiplus Failed to FillEllipse (%f, %f, %f, %f)", x, y, greekdeltax, greekdeltay);
+         warning("Gdiplus Failed to FillEllipse (%f, %f, %f, %f)", x, y, greekdeltax, greekdeltay);
 
       }
 
@@ -1351,12 +1351,21 @@ namespace draw2d_gdiplus
 
       }
 
-      //if (payload("log_fill_rectangle"))
-      //{
+      if (payload("log_fill_rectangle"))
+      {
 
-      //   INFORMATION("log_fill_rectangle " << rectangleParam);
+         if (rectangleParam.minimum_dimension() > 24)
+         {
 
-      //}
+            tracer().width(4);
+
+            tracer().precision(0);
+
+            information() << "log_fill_rectangle " << rectangleParam << " color: " << pbrush->m_color;
+
+         }
+
+      }
 
       Gdiplus::Rect rectangle;
 
@@ -1369,7 +1378,7 @@ namespace draw2d_gdiplus
       if (!bOk)
       {
 
-         FORMATTED_WARNING("Gdiplus Failed to FillRectangle (%d, %d, %d, %d)",
+         warning("Gdiplus Failed to FillRectangle (%d, %d, %d, %d)",
             rectangle.X, rectangle.Y, rectangle.Width, rectangle.Height);
 
       }
@@ -1970,7 +1979,7 @@ namespace draw2d_gdiplus
          if (ret != Gdiplus::Status::Ok)
          {
 
-            FORMATTED_WARNING("Gdiplus Failed to DrawImage (%f, %f, %f, %f) - (%f, %f, %f, %f)",
+            warning("Gdiplus Failed to DrawImage (%f, %f, %f, %f) - (%f, %f, %f, %f)",
                rectfTarget.X, rectfTarget.Y, rectfTarget.Width, rectfTarget.Height,
                xSrc, ySrc, nSrcWidth, nSrcHeight);
 
@@ -3898,10 +3907,18 @@ namespace draw2d_gdiplus
          if (payload("log_fill_rectangle"))
          {
 
-            INFORMATION("log_fill_rectangle " << rectangleParam << " color: " << color);
+            if (rectangleParam.minimum_dimension() > 24)
+            {
+
+               tracer().width(4);
+
+               tracer().precision(0);
+
+               information() << "log_fill_rectangle " << rectangleParam << " color: " << ::file::hex << color;
+
+            }
 
          }
-
 
          Gdiplus::RectF rectangle;
 
@@ -4398,7 +4415,7 @@ namespace draw2d_gdiplus
          catch (...)
          {
 
-            INFORMATION("graphics::DeleteDC : Failed to delete Gdiplus::Graphics");
+            information() << "graphics::DeleteDC : Failed to delete Gdiplus::Graphics";
 
          }
 
@@ -4414,7 +4431,7 @@ namespace draw2d_gdiplus
          if (!bDeleted)
          {
 
-            INFORMATION("graphics::DeleteDC : Failed to delete GDI device context");
+            information() << "graphics::DeleteDC : Failed to delete GDI device context";
 
          }
 

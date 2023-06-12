@@ -446,20 +446,20 @@ namespace windowing_win32
 
          strMessage.format("%s\n\nSystem Error Code: %d", strLastError.c_str(), dwLastError);
 
-         CATEGORY_WARNING(appmsg, "Warning: Window creation failed: get_last_error returned:");
+         warning()(e_trace_category_appmsg) << "Warning: Window creation failed: get_last_error returned:";
 
-         CATEGORY_WARNING(appmsg, strMessage);
+         warning()(e_trace_category_appmsg) << strMessage;
 
          if (dwLastError == 0x0000057e)
          {
 
-            TRACE("Cannot create a top-level child window.");
+            information("Cannot create a top-level child window.");
 
          }
          else
          {
 
-            TRACE("%s", strMessage);
+            information("%s", strMessage);
 
          }
 
@@ -657,7 +657,7 @@ namespace windowing_win32
    //      //HWND hwnd = get_hwnd();
    //      m_puserinteractionimpl->m_puserinteraction->post_message(WM_SETICON, ICON_SMALL, (LPARAM)hiconSmall);
    //      //DWORD dwLastError = ::GetLastError();
-   //      //INFORMATION("ICON_BIT_SMALLER" << dwLastError);
+   //      //information() << "ICON_BIT_SMALLER" << dwLastError;
    //   }
    //   //SetLastError(0);
    //   {
@@ -666,7 +666,7 @@ namespace windowing_win32
    //      //::SendMessage(hwnd, WM_SETICON, ICON_BIG, (LPARAM)hicon);
    //      //DWORD dwLastError = ::GetLastError();
 
-   //      //INFORMATION("ICON_LARGER" << dwLastError);
+   //      //information() << "ICON_LARGER" << dwLastError;
    //   }
    //   SetLastError(0);
 
@@ -1585,7 +1585,7 @@ namespace windowing_win32
 
          //return ::error_failed;
 
-         INFORMATION("failed to window::set_active_window");
+         information() << "failed to window::set_active_window";
 
          //throw ::exception(error_failed);
 
@@ -2071,7 +2071,7 @@ namespace windowing_win32
 
       }
    
-      INFORMATION("::SetWindowPos " << ::rectangle_i32_dimension(x, y, cx, cy));
+      information() << "::SetWindowPos " << ::rectangle_i32_dimension(x, y, cx, cy);
 
       auto bSetWindowPos = ::SetWindowPos(hwnd, hwndInsertAfter, x, y, cx, cy, nFlags);
 
@@ -2141,7 +2141,7 @@ namespace windowing_win32
 //
 //#ifdef SET_WINDOW_POS_LOG
 //
-//            INFORMATION("XMoveResizeWindow (%d, %d) - (%d, %d)", x, y, cx, cy);
+//            information() << "XMoveResizeWindow (%d, %d) - (%d, %d)", x, y, cx, cy;
 //
 //#endif
 //
@@ -2154,7 +2154,7 @@ namespace windowing_win32
 //
 //#ifdef SET_WINDOW_POS_LOG
 //
-//               INFORMATION("Changing parameters... (%d, %d) - (%d, %d)", x, y, cx, cy);
+//               information() << "Changing parameters... (%d, %d) - (%d, %d)", x, y, cx, cy;
 //
 //#endif
 //
@@ -2198,7 +2198,7 @@ namespace windowing_win32
 //      //            if(!XChangeWindowAttributes(display(), window(), CWOverrideRedirect, &set))
 //      //            {
 //      //
-//      //               INFORMATION("linux::window::_native_create_window_ex failed to clear override_redirect");
+//      //               information() << "linux::window::_native_create_window_ex failed to clear override_redirect";
 //      //
 //      //            }
 //      //
@@ -4277,7 +4277,7 @@ namespace windowing_win32
          if (puserinteraction->const_layout().is_moving())
          {
 
-            INFORMATION("Window is Moving :: on_message_move");
+            information() << "Window is Moving :: on_message_move";
 
          }
 
@@ -5074,7 +5074,7 @@ namespace windowing_win32
 
             hr = tasklist->AddTab(get_hwnd());
 
-            TRACE("result = %d", hr);
+            information("result = %d", hr);
 
          }
          else
@@ -5229,7 +5229,7 @@ namespace windowing_win32
       // TODO: Add your message handler code here and/or call default
       //if(bCalcValidRects)
       //{
-      //   TRACE("1");
+      //   information("1");
       //   pncsp->rgrc[0].left = lpncsp->lppos->x + 1;
 
       //   pncsp->rgrc[0].right = lpncsp->lppos->x + lpncsp->lppos->cx - 1;
@@ -5248,7 +5248,7 @@ namespace windowing_win32
       //   prectangle->bottom--;
       //   prectangle->right--;
 
-      //   TRACE("2");
+      //   information("2");
       //}
       const rectangle_i32 & nonclient = pncsp->rgrc[0];
 
@@ -5408,7 +5408,7 @@ namespace windowing_win32
             //HWND hwnd = get_hwnd();
             m_puserinteractionimpl->m_puserinteraction->post_message(WM_SETICON, ICON_SMALL, (LPARAM)hiconSmall);
             //DWORD dwLastError = ::GetLastError();
-            //INFORMATION("ICON_BIT_SMALLER" << dwLastError);
+            //information() << "ICON_BIT_SMALLER" << dwLastError;
          }
 
          ::SendMessage(hwnd, WM_SETICON, ICON_SMALL, (LPARAM)hiconSmall);
@@ -5425,7 +5425,7 @@ namespace windowing_win32
             //::SendMessage(hwnd, WM_SETICON, ICON_BIG, (LPARAM)hicon);
             //DWORD dwLastError = ::GetLastError();
 
-            //INFORMATION("ICON_LARGER" << dwLastError);
+            //information() << "ICON_LARGER" << dwLastError;
          }
          ::SendMessage(hwnd, WM_SETICON, ICON_BIG, (LPARAM)hiconBig);
 
@@ -5580,51 +5580,51 @@ namespace windowing_win32
 //            switch (message)
 //            {
 //            case e_message_create:
-//               TRACE("e_message_create wparam=%08x lparam=%08x", pmessage->m_wparam, pmessage->m_lparam);
+//               information("e_message_create wparam=%08x lparam=%08x", pmessage->m_wparam, pmessage->m_lparam);
 //
 //               break;
 //            case e_message_window_position_changing:
-//               TRACE("e_message_window_position_changing wparam=%08x lparam=%08x", pmessage->m_wparam, pmessage->m_lparam);
+//               information("e_message_window_position_changing wparam=%08x lparam=%08x", pmessage->m_wparam, pmessage->m_lparam);
 //
 //               break;
 //            case e_message_window_position_changed:
-//               TRACE("e_message_window_position_changed wparam=%08x lparam=%08x", pmessage->m_wparam, pmessage->m_lparam);
+//               information("e_message_window_position_changed wparam=%08x lparam=%08x", pmessage->m_wparam, pmessage->m_lparam);
 //
 //               break;
 //            case e_message_activate:
-//               TRACE("e_message_activate wparam=%08x lparam=%08x", pmessage->m_wparam, pmessage->m_lparam);
+//               information("e_message_activate wparam=%08x lparam=%08x", pmessage->m_wparam, pmessage->m_lparam);
 //
 //               break;
 //            case WM_ACTIVATEAPP:
-//               TRACE("WM_ACTIVATEAPP wparam=%08x lparam=%08x", pmessage->m_wparam, pmessage->m_lparam);
+//               information("WM_ACTIVATEAPP wparam=%08x lparam=%08x", pmessage->m_wparam, pmessage->m_lparam);
 //
 //               break;
 //            case e_message_mouse_activate:
-//               TRACE("e_message_mouse_activate wparam=%08x lparam=%08x", pmessage->m_wparam, pmessage->m_lparam);
+//               information("e_message_mouse_activate wparam=%08x lparam=%08x", pmessage->m_wparam, pmessage->m_lparam);
 //
 //               break;
 //            case e_message_non_client_activate:
-//               TRACE("e_message_non_client_activate wparam=%08x lparam=%08x", pmessage->m_wparam, pmessage->m_lparam);
+//               information("e_message_non_client_activate wparam=%08x lparam=%08x", pmessage->m_wparam, pmessage->m_lparam);
 //
 //               break;
 //            case e_message_set_focus:
-//               TRACE("e_message_set_focus wparam=%08x lparam=%08x", pmessage->m_wparam, pmessage->m_lparam);
+//               information("e_message_set_focus wparam=%08x lparam=%08x", pmessage->m_wparam, pmessage->m_lparam);
 //
 //               break;
 //            case e_message_kill_focus:
-//               TRACE("e_message_kill_focus wparam=%08x lparam=%08x", pmessage->m_wparam, pmessage->m_lparam);
+//               information("e_message_kill_focus wparam=%08x lparam=%08x", pmessage->m_wparam, pmessage->m_lparam);
 //
 //               break;
 //            case e_message_move:
-//               TRACE("e_message_move wparam=%08x lparam=%08x", pmessage->m_wparam, pmessage->m_lparam);
+//               information("e_message_move wparam=%08x lparam=%08x", pmessage->m_wparam, pmessage->m_lparam);
 //
 //               break;
 //            case e_message_size:
-//               TRACE("e_message_size wparam=%08x lparam=%08x", pmessage->m_wparam, pmessage->m_lparam);
+//               information("e_message_size wparam=%08x lparam=%08x", pmessage->m_wparam, pmessage->m_lparam);
 //
 //               break;
 //            default:
-//               TRACE("MESSAGE %08x wparam=%08x lparam=%08x", message, pmessage->m_wparam, pmessage->m_lparam);
+//               information("MESSAGE %08x wparam=%08x lparam=%08x", message, pmessage->m_wparam, pmessage->m_lparam);
 //
 //               break;
 //            }
@@ -5711,7 +5711,7 @@ namespace windowing_win32
 //         if (message == e_message_left_button_down)
 //         {
 //
-//            TRACE("e_message_left_button_down");
+//            information("e_message_left_button_down");
 //
 //            string strType = ::str().demangle(puserinteraction->type_name());
 //
@@ -5726,19 +5726,19 @@ namespace windowing_win32
 //         else if (message == e_message_left_button_up)
 //         {
 //
-//            TRACE("e_message_left_button_up");
+//            information("e_message_left_button_up");
 //
 //         }
 //         else if (message == e_message_non_client_left_button_up)
 //         {
 //
-//            TRACE("e_message_non_client_left_button_up");
+//            information("e_message_non_client_left_button_up");
 //
 //         }
 //         else if (message == e_message_non_client_left_button_down)
 //         {
 //
-//            TRACE("e_message_non_client_left_button_down");
+//            information("e_message_non_client_left_button_down");
 //
 //            string strType;
 //
@@ -5778,7 +5778,7 @@ namespace windowing_win32
 //            // handler has set it to another one.
 //            pmouse->m_ecursor = cursor_default;
 //
-//            //INFORMATION("windows::e_message_mouse_move(%d,%d)", pmouse->m_point.x(), pmouse->m_point.y());
+//            //information() << "windows::e_message_mouse_move(%d,%d)", pmouse->m_point.x(), pmouse->m_point.y();
 //
 //            string strType;
 //
@@ -6135,7 +6135,7 @@ namespace windowing_win32
    void window::_task_transparent_mouse_event()
    {
 
-      TRACE("start window::_task_transparent_mouse_event");
+      information("start window::_task_transparent_mouse_event");
 
       auto ptask = ::get_task();
 
@@ -6232,7 +6232,7 @@ namespace windowing_win32
 
       }
 
-      TRACE("end window::_task_transparent_mouse_event");
+      information("end window::_task_transparent_mouse_event");
 
    }
 
@@ -6272,7 +6272,7 @@ namespace windowing_win32
          if (m_puserinteractionimpl->m_puserinteraction->is_message_only_window() || m_puserinteractionimpl->m_puserinteraction.cast <::windowing_win32::system_interaction >())
          {
 
-            TRACE("good : opt out!");
+            information("good : opt out!");
 
          }
 
@@ -6425,7 +6425,7 @@ namespace windowing_win32
 
    //         hr = tasklist->AddTab((HWND)get_oswindow());
 
-   //         TRACE("result = %d", hr);
+   //         information("result = %d", hr);
 
    //      }
    //      else

@@ -127,13 +127,13 @@ namespace audio_mmsystem
          if (mmresult == MMSYSERR_NOERROR)
          {
 
-            TRACE("multimedia::audio_mmsystem::out::out_open_ex waveOutOpen: Success!!");
+            information("multimedia::audio_mmsystem::out::out_open_ex waveOutOpen: Success!!");
 
          }
          else
          {
 
-            TRACE("multimedia::audio_mmsystem::out::out_open_ex waveOutOpen: ERROR %d!!", mmresult);
+            information("multimedia::audio_mmsystem::out::out_open_ex waveOutOpen: ERROR %d!!", mmresult);
 
             estatus = mmresult_status(mmresult);
 
@@ -163,7 +163,7 @@ namespace audio_mmsystem
             //if(estatus != ::success)
             //{
 
-            //   TRACE(status_short_description(estatus));
+            //   information(status_short_description(estatus));
 
             //   return estatus;
 
@@ -230,13 +230,13 @@ namespace audio_mmsystem
          if (mmresult == MMSYSERR_NOERROR)
          {
 
-            TRACE("multimedia::audio_mmsystem::out::out_open_ex waveOutPrepareHeader: Success!!");
+            information("multimedia::audio_mmsystem::out::out_open_ex waveOutPrepareHeader: Success!!");
 
          }
          else
          {
 
-            TRACE("multimedia::audio_mmsystem::out::out_open_ex waveOutPrepareHeader: ERROR %d!!", mmresult);
+            information("multimedia::audio_mmsystem::out::out_open_ex waveOutPrepareHeader: ERROR %d!!", mmresult);
 
          }
 
@@ -257,13 +257,13 @@ namespace audio_mmsystem
                if (mmresult2 == MMSYSERR_NOERROR)
                {
 
-                  TRACE("multimedia::audio_mmsystem::out::out_open_ex waveOutUnprepareHeader: Cascade Success");
+                  information("multimedia::audio_mmsystem::out::out_open_ex waveOutUnprepareHeader: Cascade Success");
 
                }
                else
                {
 
-                  TRACE("multimedia::audio_mmsystem::out::out_open_ex waveOutUnprepareHeader: Cascade ERROR %d!!", mmresult);
+                  information("multimedia::audio_mmsystem::out::out_open_ex waveOutUnprepareHeader: Cascade ERROR %d!!", mmresult);
 
                }
 
@@ -281,19 +281,19 @@ namespace audio_mmsystem
                if (mmresult3 == MMSYSERR_NOERROR)
                {
 
-                  TRACE("multimedia::audio_mmsystem::out::out_open_ex waveOutClose: Cascade Success");
+                  information("multimedia::audio_mmsystem::out::out_open_ex waveOutClose: Cascade Success");
 
                }
                else
                {
 
-                  TRACE("multimedia::audio_mmsystem::out::out_open_ex waveOutClose: Cascade ERROR %d!!", mmresult);
+                  information("multimedia::audio_mmsystem::out::out_open_ex waveOutClose: Cascade ERROR %d!!", mmresult);
 
                }
 
             }
 
-            TRACE("ERROR !! Failed to prepare output device buffers");
+            information("ERROR !! Failed to prepare output device buffers");
 
             throw ::exception(estatus);
 
@@ -347,7 +347,7 @@ namespace audio_mmsystem
          if(::succeeded(estatus))
          {
 
-            ERROR("ERROR OPENING Unpreparing INPUT DEVICE buffer : " << estatus.as_i64());
+            error() <<"ERROR OPENING Unpreparing INPUT DEVICE buffer : " << estatus.as_i64();
 
          }
 
@@ -382,7 +382,7 @@ namespace audio_mmsystem
       if(out_get_state() != ::wave::e_out_state_playing)
       {
 
-         TRACE("ERROR out::BufferReady while out_get_state() != ::wave::e_out_state_playing");
+         information("ERROR out::BufferReady while out_get_state() != ::wave::e_out_state_playing");
 
          return;
 
@@ -555,7 +555,7 @@ namespace audio_mmsystem
       if (::success != estatus)
       {
 
-         TRACE( "waveOutGetPosition() returned %llu", estatus.as_i64());
+         information( "waveOutGetPosition() returned %llu", estatus.as_i64());
 
          return 0_s;
 
@@ -611,7 +611,7 @@ namespace audio_mmsystem
    //         if (::success != estatus)
    //         {
 
-   //            TRACE( "waveOutGetPosition() returned %lu", (u32)estatus);
+   //            information( "waveOutGetPosition() returned %lu", (u32)estatus);
 
    //            return 0;
 

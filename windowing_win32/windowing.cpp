@@ -88,7 +88,7 @@ namespace windowing_win32
       if (!bCreateSessionWindow)
       {
 
-         WARNING("Could not create session window");
+         warning() <<"Could not create session window";
 
       }
 

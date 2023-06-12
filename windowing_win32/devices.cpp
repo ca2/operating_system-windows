@@ -124,7 +124,7 @@ namespace windowing_win32
          
          auto lasterror = ::GetLastError();
          
-         ERROR("RegisterDeviceNotification");
+         error() <<"RegisterDeviceNotification";
          
          throw exception(::windows::last_error_status(lasterror));
 

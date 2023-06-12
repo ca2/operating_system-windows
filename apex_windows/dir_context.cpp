@@ -546,7 +546,7 @@ namespace apex_windows
       //            if (strFile.case_insensitive_begins("resident_"))
       //            {
 
-      //               INFORMATION("resident_*");
+      //               information() << "resident_*";
 
       //            }
 

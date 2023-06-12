@@ -131,7 +131,7 @@ typedef struct HKEY__ *HKEY;
 #define RGN_ERROR 0
 
 #undef ERROR
-#define ERROR(...) TRACE_LOG_ERROR(__VA_ARGS__)
+#define ERROR LOG_ERROR
 
 
 

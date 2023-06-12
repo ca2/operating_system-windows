@@ -319,7 +319,7 @@ namespace windows
    //      if (m_puserinteraction->layout().is_moving())
    //      {
 
-   //         INFORMATION("Window is Moving :: on_message_move");
+   //         information() << "Window is Moving :: on_message_move";
 
    //      }
 
@@ -1439,7 +1439,7 @@ namespace windows
       //if (::IsIconic(m_oswindow))
       //{
 
-      //   INFORMATION("interaction_impl::rects_from_os window is iconic");
+      //   information() << "interaction_impl::rects_from_os window is iconic";
 
       //}
       //else
@@ -2943,7 +2943,7 @@ namespace windows
    //      if (m_puserinteraction->layout().is_moving())
    //      {
 
-   //         INFORMATION("Window is Moving :: on_message_move");
+   //         information() << "Window is Moving :: on_message_move";
 
    //      }
 
@@ -4647,7 +4647,7 @@ void interaction_impl::set_tool_window(bool bSet)
 //            // handler has set it to another one.
 //            pmouse->m_ecursor = cursor_default;
 //
-//            //INFORMATION("windows::e_message_mouse_move(%d,%d)", pmouse->m_point.x(), pmouse->m_point.y());
+//            //information() << "windows::e_message_mouse_move(%d,%d)", pmouse->m_point.x(), pmouse->m_point.y();
 //
 //            string strType;
 //

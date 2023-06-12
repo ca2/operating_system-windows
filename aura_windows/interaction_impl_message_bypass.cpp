@@ -277,7 +277,7 @@
 //      if (bTrace)
 //      {
 //
-//         INFORMATION("\n" + str);
+//         information() << "\n" + str;
 //
 //      }
 //

@@ -273,7 +273,7 @@ namespace windowing_win32
 
       //pitem->m_size = m_pimpl->m_puserinteraction->const_layout().design().m_size;
 
-      //FORMATTED_INFORMATION("windowing_win32::buffer::update_buffer size(%d, %d)", size.cx(), size.cy());
+      //information("windowing_win32::buffer::update_buffer size(%d, %d)", size.cx(), size.cy());
 
       if (pitem->m_size == playeredwindowbuffer->m_pixmap.size())
       {
@@ -505,7 +505,7 @@ namespace windowing_win32
 
       auto sizeLayeredWindowBuffer = playeredwindowbuffer->m_pixmap.size();
 
-      //FORMATTED_INFORMATION("windowing_win32::buffer::update_screen size(%d, %d)", size.cx(), size.cy());
+      //information("windowing_win32::buffer::update_screen size(%d, %d)", size.cx(), size.cy());
 
       auto pixmapRawData = playeredwindowbuffer->m_pixmap.m_pimage32Raw;
 
@@ -571,10 +571,10 @@ namespace windowing_win32
          if (size != sizeBuffer)
          {
 
-            ERROR("Requested size is different of buffer size.");
-            ERROR("Requested size: " << size);
-            ERROR("Buffer size: " << sizeBuffer);
-            //ERROR("Design size: " << sizeDesign);
+            error() <<"Requested size is different of buffer size.";
+            error() <<"Requested size: " << size;
+            error() <<"Buffer size: " << sizeBuffer;
+            //error() <<"Design size: " << sizeDesign;
 
             //m_pimpl->m_puserinteraction->set_need_redraw();
 
@@ -586,9 +586,9 @@ namespace windowing_win32
          else if (sizeLayeredWindowBuffer != sizeBuffer)
          {
 
-            ERROR("Os buffer size is different of buffer size.");
-            ERROR("Os buffer size: " << sizeLayeredWindowBuffer);
-            ERROR("Buffer size: " << sizeBuffer);
+            error() <<"Os buffer size is different of buffer size.";
+            error() <<"Os buffer size: " << sizeLayeredWindowBuffer;
+            error() <<"Buffer size: " << sizeBuffer;
 
             m_pimpl->m_puserinteraction->post_redraw();
 
@@ -796,20 +796,20 @@ namespace windowing_win32
             if (strType.case_insensitive_contains("font_format"))
             {
 
-               INFORMATION("font_format going to UpdateLayeredWindow");
+               information() << "font_format going to UpdateLayeredWindow";
 
                bool bVisible = IsWindowVisible(get_hwnd());
 
                if (bVisible)
                {
 
-                  INFORMATION("font_format is visible!!");
+                  information() << "font_format is visible!!";
 
                }
                else
                {
 
-                  INFORMATION("font_format ISN'T visible!!");
+                  information() << "font_format ISN'T visible!!";
 
                }
 
@@ -818,7 +818,7 @@ namespace windowing_win32
                if (::GetWindowRect(get_hwnd(), &rectangleProbe))
                {
 
-                  INFORMATION("GetWindowRect (%d, %d) - (%d, %d)", rectangleProbe.left, rectangleProbe.top, rectangleProbe.right, rectangleProbe.bottom);
+                  information() << "GetWindowRect (%d, %d) - (%d, %d)", rectangleProbe.left, rectangleProbe.top, rectangleProbe.right, rectangleProbe.bottom;
 
                }
 
@@ -867,7 +867,7 @@ namespace windowing_win32
                      | SWP_SHOWWINDOW;
 
 
-                  ::UpdateLayeredWindow(hwnd, m_hdcScreen, (POINT *)&point, (SIZE *)&size, playeredwindowbuffer->m_hdc, (POINT *)&pointSrc, 0, &blendPixelFunction, ULW_ALPHA);
+                  ::UpdateLayeredWindow(hwnd, m_hdcScreen, (POINT *)&point, (SIZE *)&size, playeredwindowbuffer->m_hdc, (POINT *)&pointSrc, make_u32(0, 0, 0, 0), &blendPixelFunction, ULW_ALPHA);
 
                   if (rectangleWindowCurrent.top_left() != point
                      || rectangleWindowCurrent.size() != size)

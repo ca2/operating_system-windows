@@ -109,7 +109,7 @@ namespace apex_windows
             if (FAILED(hresultGetIDList))
             {
 
-               FORMATTED_INFORMATION("Failed to get ID Link %s", path.c_str());
+               information("Failed to get ID Link %s", path.c_str());
 
             }
 

@@ -152,7 +152,7 @@ LRESULT CALLBACK __window_procedure(HWND hwnd, UINT message, WPARAM wparam, LPAR
    else if (message == e_message_left_button_double_click)
    {
 
-      INFORMATION("e_message_left_button_double_click");
+      pwindow->information() << "e_message_left_button_double_click";
 
    }
 

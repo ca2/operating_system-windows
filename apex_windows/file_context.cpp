@@ -257,7 +257,7 @@ namespace apex_windows
 
                   strError.format("Failed to delete the file to move \"%s\" error=%d", psz, dwError);
 
-                  INFORMATION("%s", strError);
+                  information() << "%s", strError;
 
                }
 

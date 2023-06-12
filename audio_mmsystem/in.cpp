@@ -32,7 +32,7 @@ namespace audio_mmsystem
    void in::init_task()
    {
 
-      TRACE("in::initialize_instance %X\n", get_itask());
+      information("in::initialize_instance %X\n", get_itask());
 
       //SetMainWnd(nullptr);
       //ASSERT(GetMainWnd() == nullptr);
@@ -144,8 +144,8 @@ namespace audio_mmsystem
 
          m_iBuffer = 0;
 
-         INFORMATION("waveInOpen");
-         INFORMATION(waveformat.nSamplesPerSec << " Hz");
+         information() << "waveInOpen";
+         information() << waveformat.nSamplesPerSec << " Hz";
 
          mmresult = waveInOpen(
             &m_hwavein,
@@ -167,25 +167,25 @@ namespace audio_mmsystem
          if (mmresult == MMSYSERR_ALLOCATED)
          {
 
-            ERROR("Specified resource is already allocated.");
+            error() <<"Specified resource is already allocated.";
 
          }
          else if (mmresult == MMSYSERR_BADDEVICEID)
          {
 
-            ERROR("Specified device identifier is out of range.");
+            error() <<"Specified device identifier is out of range.";
 
          }
          else if (mmresult == WAVERR_BADFORMAT)
          {
 
-            ERROR("Attempted to open with an unsupported waveform-audio_mmsystem format.");
+            error() <<"Attempted to open with an unsupported waveform-audio_mmsystem format.";
 
          }
          else
          {
 
-            ERROR("ERROR OPENING WAVE INPUT DEVICE");
+            error() <<"ERROR OPENING WAVE INPUT DEVICE";
 
          }
 
@@ -261,7 +261,7 @@ namespace audio_mmsystem
          if(::failed(estatus))
          {
             
-            TRACE("ERROR OPENING Preparing INPUT DEVICE buffer");
+            information("ERROR OPENING Preparing INPUT DEVICE buffer");
             
             throw ::exception(estatus);
 
@@ -321,7 +321,7 @@ namespace audio_mmsystem
          if(::failed(estatus))
          {
 
-            ERROR("ERROR OPENING Unpreparing INPUT DEVICE buffer");
+            error() <<"ERROR OPENING Unpreparing INPUT DEVICE buffer";
             //return estatus;
          }
 
@@ -377,7 +377,7 @@ namespace audio_mmsystem
       if(::success != (estatus = mmresult_status(waveInStart(m_hwavein))))
       {
          
-         TRACE("ERROR starting INPUT DEVICE ");
+         information("ERROR starting INPUT DEVICE ");
          
          //return estatus;
 
@@ -413,7 +413,7 @@ namespace audio_mmsystem
       if(::failed(estatus))
       {
 
-         TRACE("in::in_stop : ERROR OPENING stopping INPUT DEVICE ");
+         information("in::in_stop : ERROR OPENING stopping INPUT DEVICE ");
 
       }
 
@@ -485,7 +485,7 @@ namespace audio_mmsystem
       if(::failed(estatus))
       {
 
-         ERROR("in::Reset error resetting input device");
+         error() <<"in::Reset error resetting input device";
 
          throw ::exception(estatus);
 
@@ -557,7 +557,7 @@ namespace audio_mmsystem
       if(::failed(estatus))
       {
 
-         TRACE("ERROR OPENING Adding INPUT DEVICE buffer");
+         information("ERROR OPENING Adding INPUT DEVICE buffer");
 
       }
 

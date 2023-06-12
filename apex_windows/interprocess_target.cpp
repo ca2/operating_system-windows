@@ -367,7 +367,7 @@ namespace apex_windows
       if (!ChangeWindowMessageFilterEx((HWND)get_hwnd(), WM_COPYDATA, MSGFLT_ADD, NULL))
       {
 
-         INFORMATION("Failed to change WM_COPYDATA message filter");
+         information() << "Failed to change WM_COPYDATA message filter";
 
       }
 

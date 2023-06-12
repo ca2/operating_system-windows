@@ -278,7 +278,7 @@ namespace windowing_win32
       if (bTrace)
       {
 
-         INFORMATION("\n" + str);
+         information() << "\n" + str;
 
       }
 
