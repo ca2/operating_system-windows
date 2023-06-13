@@ -2315,7 +2315,7 @@ namespace draw2d_gdiplus
 
          m_pimage->map();
 
-         m_pimage->image32()[(int)point.x() + (int)point.y() * m_pimage->scan_size()] = color;
+         m_pimage->image32()[(int)point.x() + (int)point.y() * m_pimage->scan_size()].assign( color, m_pimage->color_indexes());
 
       }
       else
@@ -2338,13 +2338,13 @@ namespace draw2d_gdiplus
 
          m_pimage->map();
 
-         ::color::color color = m_pimage->image32()[(int)point.x() + (int)point.y() * m_pimage->scan_size()];
+         ::color::color color = m_pimage->image32()[(int)point.x() + (int)point.y() * m_pimage->scan_size()].color(m_pimage->color_indexes());
 
          color.m_u8Red = (int)(color.m_u8Red * (1.0 - colorChange.f64_opacity()) + colorChange.m_u8Red * colorChange.f64_opacity());
          color.m_u8Green = (int)(color.m_u8Green * (1.0 - colorChange.f64_opacity()) + colorChange.m_u8Green * colorChange.f64_opacity());
          color.m_u8Blue = (int)(color.m_u8Blue * (1.0 - colorChange.f64_opacity()) + colorChange.m_u8Blue * colorChange.f64_opacity());
 
-         m_pimage->image32()[(int)point.x() + (int)point.y() * m_pimage->scan_size()] = color;
+         m_pimage->image32()[(int)point.x() + (int)point.y() * m_pimage->scan_size()].assign(color, m_pimage->color_indexes());
          //colorCurrent.m_iA = colorCurrent.m_iA * (1.0 - color.da()) + color.m_iR * color.da();
 
       }
