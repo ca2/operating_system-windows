@@ -298,7 +298,7 @@ namespace music
                if (estatus != ::success)
                {
 
-                  TRACE("midiStreamProperty() -> %04X", (WORD)estatus.as_i64());
+                  information("midiStreamProperty() -> %04X", (WORD)estatus.as_i64());
 
                   close_device();
 
@@ -530,7 +530,7 @@ namespace music
                   if (m_hstream == nullptr)
                   {
 
-                     TRACE("m_hmidi == nullptr!!!!");
+                     information("m_hmidi == nullptr!!!!");
 
                      return error_not_ready;
 
@@ -604,7 +604,7 @@ namespace music
                sequence::e_state_stopping != m_psequence->get_state())
             {
 
-               TRACE("seqTime(): State wrong! [is %u]", m_psequence->get_state());
+               information("seqTime(): State wrong! [is %u]", m_psequence->get_state());
 
                return error_unsupported_function;
 
@@ -623,7 +623,7 @@ namespace music
                   if (m_hstream == nullptr)
                   {
 
-                     TRACE("m_hmidi == nullptr!!!!");
+                     information("m_hmidi == nullptr!!!!");
 
                      return error_not_ready;
 
@@ -639,7 +639,7 @@ namespace music
                         if (::success != estatus)
                         {
 
-                           TRACE("midiStreamPosition() returned %lu", (u32)estatus.as_i64());
+                           information("midiStreamPosition() returned %lu", (u32)estatus.as_i64());
 
                            return error_not_ready;
 
@@ -918,7 +918,7 @@ namespace music
                default:
 
 
-                  TRACE("smfReadEvents returned %lu in callback!", (u32)estatus.as_i64());
+                  information("smfReadEvents returned %lu in callback!", (u32)estatus.as_i64());
 
                   m_psequence->set_state(sequence::e_state_stopping);
 
@@ -969,7 +969,7 @@ namespace music
 
                   m_psequence->m_flags.erase(sequence::e_flag_operation_end);
 
-                  TRACE("::music::midi::sequencer::MidiOutProc m_flags.has(flag_operation_end)\n");
+                  information("::music::midi::sequencer::MidiOutProc m_flags.has(flag_operation_end)\n");
 
                   post_midi_sequence_event(sequence::e_event_operation, lpmidihdr);
 
@@ -977,7 +977,7 @@ namespace music
                else if (m_iBuffersInMMSYSTEM <= 0)
                {
 
-                  TRACE("::music::midi::sequencer::MidiOutProc sequence::e_state_stopping == pSeq->m_psequence->get_state()\n");
+                  information("::music::midi::sequencer::MidiOutProc sequence::e_state_stopping == pSeq->m_psequence->get_state()\n");
 
                   music_midi_on_playback_end();
 
@@ -1210,7 +1210,7 @@ namespace music
             if (!estatus)
             {
 
-               TRACE("midiOutUnprepareHeader failed in seqBufferDone! (%lu)", (u32)estatus.as_i64());
+               information("midiOutUnprepareHeader failed in seqBufferDone! (%lu)", (u32)estatus.as_i64());
 
             }
 
@@ -1444,7 +1444,7 @@ namespace music
          void sequencer::midi_out_open()
          {
 
-            TRACE("::music::midi::mmsystem::player::SendReset : (0)");
+            information("::music::midi::mmsystem::player::SendReset : (0)");
 
             m_hmidiout = nullptr;
 
@@ -1480,7 +1480,7 @@ namespace music
 
             }
 
-            TRACE("::music::midi::mmsystem::player::SendReset : (0)");
+            information("::music::midi::mmsystem::player::SendReset : (0)");
 
             ::e_status estatus = ::success;
 
@@ -1672,7 +1672,7 @@ namespace music
 
             synchronous_lock synchronouslock(((midi *) m_pmidi->m_pMidi)->get_midi_mutex());
 
-            TRACE("::music::midi::mmsystem::player::SendReset : (0)");
+            information("::music::midi::mmsystem::player::SendReset : (0)");
 
             HMIDIOUT hmidiout = nullptr;
 
@@ -2022,7 +2022,7 @@ namespace music
                if (pevent->size() != 3)
                {
 
-                  TRACE("smfReadEvents: Corrupt tempo event");
+                  information("smfReadEvents: Corrupt tempo event");
 
                   return error_invalid_file;
 
@@ -2075,7 +2075,7 @@ namespace music
             //         smfrc = smfInsertParmData(pSmf, pEvent->tkDelta, lpmh);
             //            if (::success != smfrc)
             //            {
-            //                TRACE( "smfInsertParmData[2] %u", (DWORD)smfrc);
+            //                information( "smfInsertParmData[2] %u", (DWORD)smfrc);
             //                return smfrc;
             //            }
 
@@ -2085,7 +2085,7 @@ namespace music
             //smfrc = smfInsertParmData(pSmf, pEvent->tkDelta, lpmh);
             //if (::success != smfrc)
             //{
-            //    TRACE( "smfInsertParmData[2] %u", (DWORD)smfrc);
+            //    information( "smfInsertParmData[2] %u", (DWORD)smfrc);
             //    return smfrc;
             //}
             //         _CrtSetReportFile(_CRT_WARN, debugFile);
@@ -2254,7 +2254,7 @@ namespace music
                /* If we got here with a real delta, that means smfReadEvents screwed
                ** up calculating left space and we should flag it somehow.
                */
-               TRACE("Can't fit initial piece of SysEx into file!");
+               information("Can't fit initial piece of SysEx into file!");
                return error_invalid_file;
 
             }
@@ -2334,7 +2334,7 @@ namespace music
                /* If we got here with a real delta, that means smfReadEvents screwed
                ** up calculating left space and we should flag it somehow.
                */
-               TRACE("Can't fit initial piece of SysEx into file!");
+               information("Can't fit initial piece of SysEx into file!");
                return error_invalid_file;
             }
 
@@ -2396,10 +2396,10 @@ namespace music
 
             if (dwLength & 0x80000000L)
             {
-               TRACE("dwLength %08lX  dwBytesRecorded %08lX  dwBufferLength %08lX", dwLength, lpmh->dwBytesRecorded, lpmh->dwBufferLength);
-               TRACE("cbPendingUserEvent %08lX  dwPendingUserEvent %08lX dwRounded %08lX", m_psequence->m_pfile->m_cbPendingUserEvent, m_psequence->m_pfile->m_dwPendingUserEvent, dwRounded);
-               TRACE("offset into MIDI image %08lX", (DWORD)(m_psequence->m_pfile->m_hpbPendingUserEvent - m_psequence->m_pfile->GetImage()));
-               TRACE("!hmemcpy is about to fault");
+               information("dwLength %08lX  dwBytesRecorded %08lX  dwBufferLength %08lX", dwLength, lpmh->dwBytesRecorded, lpmh->dwBufferLength);
+               information("cbPendingUserEvent %08lX  dwPendingUserEvent %08lX dwRounded %08lX", m_psequence->m_pfile->m_cbPendingUserEvent, m_psequence->m_pfile->m_dwPendingUserEvent, dwRounded);
+               information("offset into MIDI image %08lX", (DWORD)(m_psequence->m_pfile->m_hpbPendingUserEvent - m_psequence->m_pfile->GetImage()));
+               information("!hmemcpy is about to fault");
             }
 
             memory_copy(lpdw, m_psequence->m_pfile->m_hpbPendingUserEvent, dwLength);
@@ -2597,7 +2597,7 @@ namespace music
                            if (abs((int)m_keyframe.rbControl[iTrack][e_control_change_volume] - (int)bVolume) < 3)
                            {
 
-                              TRACE("too few difference!! opt-ed out");
+                              information("too few difference!! opt-ed out");
 
                            }
                            else

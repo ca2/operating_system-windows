@@ -543,7 +543,7 @@ namespace windowing_win32
    //   //   if (pmsg->message == 126)
    //   //   {
 
-   //   //      TRACE("e_message_display_change");
+   //   //      information("e_message_display_change");
 
    //   //   }
 

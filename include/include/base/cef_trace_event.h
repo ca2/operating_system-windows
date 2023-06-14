@@ -36,7 +36,7 @@
 ///    Counters
 ///
 /// Events are issued against categories. Whereas LOG's categories are
-/// statically defined, TRACE categories are created implicitly with a string.
+/// statically defined, information categories are created implicitly with a string.
 /// For example: <pre>
 ///   TRACE_EVENT_INSTANT0("MY_SUBSYSTEM", "SomeImportantEvent")
 /// </pre>

@@ -251,7 +251,7 @@ namespace multimedia
 
          //   if(MMSYSERR_NOERROR != (mmr =  directsound::translate(waveOutPrepareHeader(m_hwaveout, directsound::create_new_WAVEHDR(m_pwavebuffer, i), sizeof(WAVEHDR)))))
          //   {
-         //      TRACE("ERROR OPENING Preparing INPUT DEVICE buffer");
+         //      information("ERROR OPENING Preparing INPUT DEVICE buffer");
          //      return mmr;
          //   }
          //}
@@ -341,8 +341,8 @@ namespace multimedia
          if(mmr != ::success)
          {
 
-            //TRACE("%s", ::multimedia::strerror(mmr));
-            TRACE("%d", mmr);
+            //information("%s", ::multimedia::strerror(mmr));
+            information("%d", mmr);
 
             return mmr;
 
@@ -434,7 +434,7 @@ namespace multimedia
 
          //   if(::success != (mmr = directsound::translate(waveOutUnprepareHeader(m_hwaveout, wave_hdr(i), sizeof(WAVEHDR)))))
          //   {
-         //      TRACE("ERROR OPENING Unpreparing INPUT DEVICE buffer =%d", mmr);
+         //      information("ERROR OPENING Unpreparing INPUT DEVICE buffer =%d", mmr);
          //   }
 
          //   delete wave_hdr(i);
@@ -671,7 +671,7 @@ namespace multimedia
          //   {
          //      if (::success != mmr)
          //      {
-         //         TRACE( "waveOutGetPosition() returned %lu", (u32)mmr);
+         //         information( "waveOutGetPosition() returned %lu", (u32)mmr);
          //         //      return MCIERR_DEVICE_NOT_READY;
          //         return 0;
          //      }
@@ -732,7 +732,7 @@ namespace multimedia
          //      if (::success != mmr)
          //      {
 
-         //         TRACE( "waveOutGetPosition() returned %lu", (u32)mmr);
+         //         information( "waveOutGetPosition() returned %lu", (u32)mmr);
 
          //         return 0;
 

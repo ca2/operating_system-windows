@@ -849,7 +849,7 @@ namespace windowing_win32
                                  //else
                                  //{
 
-                                 //   TRACE("Update discarded");
+                                 //   information("Update discarded");
 
                                  //}
 
@@ -882,7 +882,7 @@ namespace windowing_win32
                }
                //else
                //{
-               //   TRACE("Update discarded");
+               //   information("Update discarded");
 
                //}
 
@@ -891,13 +891,13 @@ namespace windowing_win32
                //if (g_pointLastBottomRight != pointBottomRight)
                //{
 
-               //   TRACE("UpdateLayeredWindow Changed");
+               //   information("UpdateLayeredWindow Changed");
 
                //   g_pointLastBottomRight = pointBottomRight;
 
                //}
 
-               //TRACE("UpdateLayeredWindow Bottom Right (%d, %d)", pointBottomRight.x(), pointBottomRight.y());
+               //information("UpdateLayeredWindow Bottom Right (%d, %d)", pointBottomRight.x(), pointBottomRight.y());
 
 
             }

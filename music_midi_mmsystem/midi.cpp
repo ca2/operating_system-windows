@@ -16,7 +16,7 @@
 ////0
 //// MSDN Blogs > Matthew van Eerde's web log > Enumerating MIDI devices
 //#undef LOG
-//#define log_information((format, ...) TRACE(format, __VA_ARGS__)
+//#define log_information((format, ...) information(format, __VA_ARGS__)
 
 
 
@@ -275,7 +275,7 @@ namespace music
 
          void midi::mmsystem_LogMidiInCaps(UINT_PTR i, MIDIINCAPSW caps)
          {
-            log_information((
+            information(
             "-- %u: %S --\n"
             "    Device ID: %u\n"
             "    Manufacturer identifier: %u\n"
@@ -317,7 +317,7 @@ namespace music
          void midi::mmsystem_LogMidiOutCaps(UINT_PTR i, MIDIOUTCAPSW caps)
          {
 
-            log_information((
+            information(
             "-- %u: %S --\n"
             "    Device ID: %u\n"
             "    Manufacturer identifier: %u\n"

@@ -3360,7 +3360,7 @@ namespace apex_windows
       //   if(!regkey.set(strTargetProgId, ""))
       //   {
 
-      //      TRACE("Failure to set .htm/OpenWithProgids");
+      //      information("Failure to set .htm/OpenWithProgids");
 
       //   }
 

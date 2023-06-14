@@ -790,7 +790,7 @@ bool preview_dc::GrayString(::draw2d::brush*,
             bool (CALLBACK *)(HDC, LPARAM, int),
                LPARAM lpData, int nCount, int x, int y, int, int)
 {
-   TRACE(::radix::trace::category_AppMsg, 0, "text_out() substituted for GrayString() in Print Preview.\n");
+   information(::radix::trace::category_AppMsg, 0, "text_out() substituted for GrayString() in Print Preview.\n");
    return text_out(x, y, (const ::string &)lpData, nCount);
 }
 

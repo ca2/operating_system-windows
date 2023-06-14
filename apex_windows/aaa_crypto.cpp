@@ -85,7 +85,7 @@
 //            0,
 //            &DataOut))
 //      {
-//         TRACE("crypto::decrypt The encryption phase worked. \n");
+//         information("crypto::decrypt The encryption phase worked. \n");
 //         storageDecrypt.allocate(DataOut.cbData);
 //         ::memory_copy(storageDecrypt.get_data(), DataOut.pbData, DataOut.cbData);
 //         LocalFree(pwsz);
@@ -96,7 +96,7 @@
 //      else
 //      {
 //         //         TRACELASTERROR();
-//         TRACE("crypto::decrypt Decryption error! (1)");
+//         information("crypto::decrypt Decryption error! (1)");
 //         return false;
 //      }
 //
@@ -173,7 +173,7 @@
 //            0,
 //            &DataOut))
 //      {
-//         TRACE("crypto::encrypt The encryption phase worked. \n");
+//         information("crypto::encrypt The encryption phase worked. \n");
 //         storageEncrypt.allocate(DataOut.cbData);
 //         ::memory_copy(storageEncrypt.get_data(), DataOut.pbData, DataOut.cbData);
 //         LocalFree(DataOut.pbData);
@@ -181,7 +181,7 @@
 //      }
 //      else
 //      {
-//         TRACE("crypto::encrypt Encryption error! (1)");
+//         information("crypto::encrypt Encryption error! (1)");
 //         return false;
 //      }
 //#else

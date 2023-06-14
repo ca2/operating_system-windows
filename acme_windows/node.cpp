@@ -1648,7 +1648,7 @@ namespace acme_windows
    //         {
    //            DWORD dwLastError = GetLastError();
    //
-   //            //            TRACE(this)("%d", dwLastError);
+   //            //            information(this)("%d", dwLastError);
    //         }
    //      }
    //

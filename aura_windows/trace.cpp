@@ -270,7 +270,7 @@ void TraceDDE(const ::string & pszPrefix, const MSG* pMsg)
          // format names.
       }
 
-      //TRACE(
+      //information(
       //   "%s: Advise item='%s', Format='%s', Ack=%d, Defer Update= %d\n",
       //   pszPrefix, szItem, szFormat, lpAdvise->fAckReq,
 

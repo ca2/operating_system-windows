@@ -4507,7 +4507,7 @@ namespace draw2d_gdi
          HRGN hRgn = ::CreateRectRgn(0, 0, 0, 0);
          if (::GetClipRgn(get_handle1(), hRgn) < 0 || !::SelectClipRgn(get_handle2(), hRgn))
          {
-            TRACE("Error: unable to transfer clip region in graphics::SelectClipPath!\n");
+            information("Error: unable to transfer clip region in graphics::SelectClipPath!\n");
             bResult = false;
          }
          ::DeleteObject(hRgn);
