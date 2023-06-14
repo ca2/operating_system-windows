@@ -85,7 +85,7 @@ shared_memory::~shared_memory()
    if (this->offset() > 0)
    {
 
-      ::pointer<shared_memory>pusermessage = interface_clone();
+      ::pointer<shared_memory>pusermessage = clone();
 
       impl_free(m_beginStorage);
 
