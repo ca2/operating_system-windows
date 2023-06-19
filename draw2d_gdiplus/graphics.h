@@ -208,12 +208,25 @@ namespace draw2d_gdiplus
       //void add_clipping_shapes(const shape_array<::draw2d::region>& shapea) override;
       void reset_clip() override;
       void _intersect_clip() override;
-      void _add_clipping_shape(const ::rectangle_f64 & rectangle, ::draw2d::region * pregion) override;
-      void _add_clipping_shape(const ::ellipse_f64 & ellipse, ::draw2d::region * pregion) override;
-      void _add_clipping_shape(const ::polygon_f64 & polygon, ::draw2d::region * pregion) override;
+      void _add_shape(const ::rectangle_f64 & rectangle) override;
+      void _add_shape(const ::ellipse_f64 & ellipse) override;
+      void _add_shape(const ::polygon_f64 & polygon) override;
+
+
+      virtual void intersect_clip(const ::draw2d::clip_group & clipgroup);
+      virtual void _add_clip_item(::draw2d::clip_item * pclipitem);
+
+
+
+      virtual void _add_shape(Gdiplus::GraphicsPath * ppath, ::draw2d::clip_item * pclipitem);
+      virtual void _add_shape(Gdiplus::GraphicsPath * ppath, const ::rectangle_f64 & rectangle);
+      virtual void _add_shape(Gdiplus::GraphicsPath * ppath, const ::ellipse_f64 & ellipse);
+      virtual void _add_shape(Gdiplus::GraphicsPath * ppath, const ::polygon_f64 & polygon);
 
 
       void intersect_clip(const ::rectangle_f64 & rectangle) override;
+      void intersect_clip(const ::ellipse_f64 & rectangle) override;
+      void intersect_clip(const ::polygon_f64 & rectangle) override;
 
       virtual void set_clipping(::draw2d::region* pregion);
 

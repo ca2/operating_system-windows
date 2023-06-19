@@ -2315,7 +2315,7 @@ namespace draw2d_gdiplus
 
          m_pimage->map();
 
-         m_pimage->image32()[(int)point.x() + (int)point.y() * m_pimage->scan_size()].assign( color, m_pimage->color_indexes());
+         m_pimage->image32()[(int)point.x() + (int)point.y() * m_pimage->scan_size()].assign(color, m_pimage->color_indexes());
 
       }
       else
@@ -3925,9 +3925,9 @@ namespace draw2d_gdiplus
          copy(rectangle, rectangleParam);
 
          Gdiplus::SolidBrush b(Gdiplus::Color(
-            color.m_u8Opacity, 
+            color.m_u8Opacity,
             color.m_u8Red,
-            color.m_u8Green, 
+            color.m_u8Green,
             color.m_u8Blue));
 
          auto status = m_pgraphics->FillRectangle(&b, rectangle);
@@ -4986,49 +4986,161 @@ namespace draw2d_gdiplus
    }
 
 
+   void graphics::_add_clip_item(gdiplus::GraphicsPath * ppath, ::draw2d::clip_item * pclipitem)
+   {
+
+      switch (pclipitem->clip_item_type())
+      {
+      case e_clip_item_rectangle:
+         _add_shape(ppath, dynamic_cast<clip_rectangle *>(pclipitem)->m_item);
+         break;
+      case e_clip_item_ellipse:
+         _add_shape(ppath, dynamic_cast<clip_ellipse *>(pclipitem)->m_item);
+         break;
+      case e_clip_item_polygon:
+         _add_shape(ppath, dynamic_cast<clip_polygon *>(pclipitem)->m_item);
+         break;
+      default:
+         break;
+      };
+
+   }
+
+
+   void graphics::_add_shape(gdiplus::GraphicsPath * ppath, const ::rectangle_f64 & rectangle)
+   {
+
+      Gdiplus::RectF rectf;
+
+      copy(rectf, rectangle);
+
+      ppath->AddRect(rectf);
+
+   }
+
+
+   void graphics::_add_shape(gdiplus::GraphicsPath * ppath, const ::ellipse_f64 & ellipse)
+   {
+
+      Gdiplus::RectF rectf;
+
+      copy(rectf, ellipse);
+
+      ppath->AddEllipse(rectf);
+
+   }
+
+
+   void graphics::_add_shape(gdiplus::GraphicsPath * ppath, const ::polygon_f64 & polygon)
+   {
+
+      ::array<Gdiplus::PointF>pointa;
+
+      for (auto & point : polygon)
+      {
+
+         pointa.add({ point.x(), point.y() });
+
+      }
+
+      ppath->AddPolygon(pointa.data(), pointa.size());
+
+   }
+
+
+   void graphics::intersect_clip(const ::draw2d::clip_group & clipgroup)
+   {
+
+      auto_pointer < Gdiplus::GraphicsPath > ppath(create_new_t{});
+
+      ppath->SetFillMode(Gdiplus::FillModeWinding);
+
+      for (auto & pclipitem : clipgroup)
+      {
+
+         _add_shape(ppath, pclipitem);
+
+      }
+
+      m_pgraphics->SetClip(ppath, Gdiplus::CombineModeIntersect);
+
+   }
+
+
+   void graphics::_add_clip_item(clip_item * pclipitem)
+   {
+
+      throw ::exception(error_not_supported);
+
+   }
+
+
    void graphics::intersect_clip(const ::rectangle_f64 & rectangle)
    {
 
-      Gdiplus::RectF r;
+      Gdiplus::RectF rectf;
 
-      copy(r, rectangle);
-
-      //r.X = (Gdiplus::REAL) (r.X + m_pointAddShapeTranslate.x());
-
-      //r.Y = (Gdiplus::REAL) (r.Y + m_pointAddShapeTranslate.y());
-
-      //r.X = (Gdiplus::REAL) (r.X);
-
-      //r.Y = (Gdiplus::REAL) (r.Y);
+      copy(rectf, rectangle);
 
       m_pgraphics->SetClip(r, Gdiplus::CombineModeIntersect);
 
    }
 
 
-   //void graphics::intersect_clip(const ::polygon_f64& polygon_i32)
-   //{
+   void graphics::intersect_clip(const ::ellipse_f64 & ellipse)
+   {
 
-   //   auto ppath = __auto(new Gdiplus::GraphicsPath());
+      auto_pointer < Gdiplus::GraphicsPath > ppath(create_new_t{});
 
-   //   auto copy = [this](Gdiplus::PointF* p2, const ::point_f64* p1)
-   //   {
+      _add_shape(ppath, ellipse);
 
-   //      p2->X = (Gdiplus::REAL) (p1->x + m_pointAddShapeTranslate.x());
+      m_pgraphics->SetClip(ppath, Gdiplus::CombineModeIntersect);
 
-   //      p2->Y = (Gdiplus::REAL) (p1->y + m_pointAddShapeTranslate.y());
+   }
 
-   //   };
 
-   //   ap(Gdiplus::PointF) ppoint(polygon_i32.get_data(), polygon_i32.get_count(), copy);
+   void graphics::intersect_clip(const ::polygon_f64 & polygon)
+   {
 
-   //   ppath->AddPolygon(ppoint, (INT) polygon_i32.get_count());
+      auto_pointer < Gdiplus::GraphicsPath > ppath(create_new_t{});
 
-   //   m_pgraphics->SetClip(ppath, Gdiplus::CombineModeIntersect);
+      _add_shape(ppath, polygon);
 
-   //   return ::success;
+      m_pgraphics->SetClip(ppath, Gdiplus::CombineModeIntersect);
 
-   //}
+   }
+
+
+   void graphics::_intersect_clip()
+   {
+
+      throw ::exception(error_not_supported);
+
+   }
+
+
+   void graphics::_add_shape(const ::rectangle_f64 & rectangle)
+   {
+
+      throw ::exception(error_not_supported);
+
+   }
+
+
+   void graphics::_add_shape(const ::ellipse_f64 & ellipse)
+   {
+
+      throw ::exception(error_not_supported);
+
+   }
+
+
+   void graphics::_add_shape(const ::polygon_f64 & polygon)
+   {
+
+      throw ::exception(error_not_supported);
+
+   }
 
 
    //i32 graphics::SelectClipRgn(::draw2d::region * pregion)
