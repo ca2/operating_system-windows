@@ -218,7 +218,7 @@ namespace draw2d_gdiplus
 
 
 
-      virtual void _add_shape(Gdiplus::GraphicsPath * ppath, ::draw2d::clip_item * pclipitem);
+      virtual void _add_clip_item(Gdiplus::GraphicsPath * ppath, ::draw2d::clip_item * pclipitem);
       virtual void _add_shape(Gdiplus::GraphicsPath * ppath, const ::rectangle_f64 & rectangle);
       virtual void _add_shape(Gdiplus::GraphicsPath * ppath, const ::ellipse_f64 & ellipse);
       virtual void _add_shape(Gdiplus::GraphicsPath * ppath, const ::polygon_f64 & polygon);
