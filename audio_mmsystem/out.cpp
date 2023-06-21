@@ -564,17 +564,19 @@ namespace audio_mmsystem
       if(mmt.wType == TIME_BYTES)
       {
 
-         double d = (mmt.u.cb* 8.0)/ (m_pwaveformat->m_waveformat.wBitsPerSample * m_pwaveformat->m_waveformat.nChannels * m_pwaveformat->m_waveformat.nSamplesPerSec);
+         //double d =  );
 
-         //return floating_second((double) d / (double) wave_base_get_byte_count_per_second());
+         ////return floating_second((double) d / (double) wave_base_get_byte_count_per_second());
 
-         return floating_second((double)d);
+         return second_time(
+            mmt.u.cb * 8 / (m_pwaveformat->m_waveformat.wBitsPerSample * m_pwaveformat->m_waveformat.nChannels),
+            m_pwaveformat->m_waveformat.nSamplesPerSec);
 
       }
       else
       {
 
-         return floating_second((double) mmt.u.ms / 1'000.0);
+         return second_time(mmt.u.ms, 1'000);
 
       }
 
