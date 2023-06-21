@@ -7,6 +7,7 @@
 #include "display.h"
 #include "window.h"
 #include "monitor.h"
+#include "acme/constant/message.h"
 #include "acme/exception/exception.h"
 #include "acme/parallelization/mutex.h"
 #include "acme/parallelization/task.h"
@@ -876,6 +877,20 @@ namespace windowing_win32
                      ::SetWindowPos(hwnd, nullptr, point.x(), point.y(), size.cx(), size.cy(), uFlagsSetWindowPos);
 
                      bSizeOrPositionChanged = true;
+
+                  }
+
+                  if (m_pimpl->m_puserinteraction->const_layout().window().origin() != point)
+                  {
+
+                     m_pimpl->m_puserinteraction->post_message(e_message_reposition, 0, point);
+
+                  }
+
+                  if (m_pimpl->m_puserinteraction->const_layout().window().size() != size)
+                  {
+
+                     m_pimpl->m_puserinteraction->post_message(e_message_size, 0, size);
 
                   }
 
