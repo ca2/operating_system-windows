@@ -3,7 +3,7 @@
 #include "out.h"
 
 
-__FACTORY_EXPORT void audio_mmsystem_factory(::factory::factory * pfactory)
+IMPLEMENT_FACTORY(audio_mmsystem)
 {
 
    pfactory->add_factory_item < ::audio_mmsystem::in, ::wave::in >();
