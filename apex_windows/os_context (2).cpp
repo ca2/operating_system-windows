@@ -321,7 +321,7 @@ namespace windows
 
          key1.get("DefaultConnectionSettings", mem);
 
-         bool bAutoDetect = (((byte*)mem.get_data())[8] & 0x08) != 0;
+         bool bAutoDetect = (((::u8*)mem.get_data())[8] & 0x08) != 0;
 
          if (!bAutoDetect)
          {
@@ -822,7 +822,7 @@ namespace windows
    struct TOKEN_INFO
    {
       TOKEN_USER tokenUser;
-      byte buffer[SECURITY_MAX_SID_SIZE];
+      ::u8 buffer[SECURITY_MAX_SID_SIZE];
    };
 
 
@@ -1103,10 +1103,10 @@ retry:
                  &u,             // Customizing information
                  dwLastError,               // Error code to display
                  &ulAuthPackage,  // Authorization package
-                 pvInAuthBlob,    // Credential byte array
+                 pvInAuthBlob,    // Credential ::u8 array
                  pvInAuthBlob.m_size,    // Size of credential input buffer
-                 &pvAuthBlob,     // Output credential byte array
-                 &pvAuthBlob.m_size,     // Size of credential byte array
+                 &pvAuthBlob,     // Output credential ::u8 array
+                 &pvAuthBlob.m_size,     // Size of credential ::u8 array
                  &fSave,          // Select the save check box.
                  //CREDUIWIN_SECURE_PROMPT |
                  CREDUIWIN_IN_CRED_ONLY |
@@ -1432,7 +1432,7 @@ retry:
       {
          u32 Ret = ::GetLastError();
          CloseServiceHandle(hdlSCM);
-         if(Ret == 1060) // O serviço já não existe. Service already doesn't exist.
+         if(Ret == 1060) // Service already doesn't exist.
             return true; // do self-healing
          return false;
       }
@@ -2807,7 +2807,7 @@ repeat:
             if(!estatusRegistry)
             {
 
-               TRACE("Failure to set ." + strExtension + "\\OpenWithProgids");
+               information("Failure to set ." + strExtension + "\\OpenWithProgids");
 
                estatus = estatusRegistry;
 
@@ -2892,7 +2892,7 @@ repeat:
       //   if(!regkey.set(strTargetProgId, ""))
       //   {
 
-      //      TRACE("Failure to set .htm/OpenWithProgids");
+      //      information("Failure to set .htm/OpenWithProgids");
 
       //   }
 

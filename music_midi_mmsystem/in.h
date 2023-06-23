@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 
 
 #include "app-veriwell/multimedia/music/midi/in.h"
@@ -37,7 +37,7 @@ namespace music
             virtual void     stop() override;
             virtual void     close() override;
 
-            virtual void on_os_message(byte b, byte b1, byte b2) override;
+            virtual void on_os_message(::u8 b, ::u8 b1, ::u8 b2) override;
 
             void     send_short_message(::music::midi::enum_midi_message emessage, int iChannel, int iData1, int iData2);
 

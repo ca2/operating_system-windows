@@ -136,7 +136,7 @@ pacmedir->create(::file_path_folder(pszFileName));
 
       memsize nRead = 0;
 
-      if ((nRead = fread(pdata, sizeof(byte), (size_t) nCount, m_pStream)) == 0 && !feof(m_pStream))
+      if ((nRead = fread(pdata, sizeof(::u8), (size_t) nCount, m_pStream)) == 0 && !feof(m_pStream))
       {
 
          throw ::file::exception(error_file, _doserrno, m_path);
@@ -162,7 +162,7 @@ pacmedir->create(::file_path_folder(pszFileName));
       ASSERT(is_memory_segment_ok(pdata, nCount, false));
 
 
-      if (fwrite(pdata, sizeof(byte), (size_t)nCount, m_pStream) != nCount)
+      if (fwrite(pdata, sizeof(::u8), (size_t)nCount, m_pStream) != nCount)
 
          throw ::file::exception(error_file, _doserrno, m_path);
    }

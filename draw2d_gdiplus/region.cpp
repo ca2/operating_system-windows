@@ -1,4 +1,4 @@
-﻿#include "framework.h"
+#include "framework.h"
 #include "region.h"
 #include "graphics.h"
 #include "acme/exception/interface_only.h"
@@ -61,7 +61,7 @@ namespace draw2d_gdiplus
 
       ((region*)this)->get_bounding_box(rectanglei32, pgraphics);
 
-      copy(rectangle, rectanglei32);
+      rectangle = rectanglei32;
 
    }
 

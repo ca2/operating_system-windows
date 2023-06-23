@@ -1,4 +1,4 @@
-﻿#include "framework.h"
+#include "framework.h"
 #include "acme/constant/message.h"
 #include "acme/constant/message_prototype.h"
 #include "acme/constant/timer.h"
@@ -152,7 +152,7 @@ LRESULT CALLBACK __window_procedure(HWND hwnd, UINT message, WPARAM wparam, LPAR
    else if (message == e_message_left_button_double_click)
    {
 
-      INFORMATION("e_message_left_button_double_click");
+      pwindow->information() << "e_message_left_button_double_click";
 
    }
 
@@ -242,7 +242,7 @@ LRESULT CALLBACK __window_procedure(HWND hwnd, UINT message, WPARAM wparam, LPAR
 
       pimpl->m_lparamLastMouseMove = lparam;
 
-      ::point_i32 pointMouseMove(GET_X_LPARAM(lparam), GET_Y_LPARAM(lparam));
+      ::point_i32 pointMouseMove(i32_x(lparam), i32_y(lparam));
 
       if (pimpl->m_pointMouseMove == pointMouseMove)
       {

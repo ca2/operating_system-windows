@@ -110,9 +110,9 @@ typedef struct
 #endif
 
 /*
- * TOCTRACK and TOC must be byte-aligned.  If you're not using Mingw32,
+ * TOCTRACK and TOC must be ::u8-aligned.  If you're not using Mingw32,
  * CygWin, map some other compiler that understands the PACKED keyword,
- * you need to ensure that these structures are byte aligned.  Usually,
+ * you need to ensure that these structures are ::u8 aligned.  Usually,
  * this is done using a
  *  #pragma pack(1)
  * See your compiler's documentation for details

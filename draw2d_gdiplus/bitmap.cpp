@@ -1,4 +1,4 @@
-﻿#include "framework.h"
+#include "framework.h"
 #include "bitmap.h"
 #include "acme/exception/exception.h"
 #include "acme/exception/interface_only.h"
@@ -45,7 +45,7 @@ namespace draw2d_gdiplus
 
    {
 
-      __UNREFERENCED_PARAMETER(pgraphics);
+      UNREFERENCED_PARAMETER(pgraphics);
 
       ::acme::del(m_pbitmap);
 
@@ -61,7 +61,7 @@ namespace draw2d_gdiplus
 
    {
 
-      __UNREFERENCED_PARAMETER(pgraphics);
+      UNREFERENCED_PARAMETER(pgraphics);
 
       return false;
    }
@@ -79,13 +79,13 @@ namespace draw2d_gdiplus
 
       }
 
-      __UNREFERENCED_PARAMETER(pgraphics);
+      UNREFERENCED_PARAMETER(pgraphics);
 
       ::acme::del(m_pbitmap);
 
       m_iStride = ppixmap->m_iScan;
 
-      if (ppixmap->colorref() == nullptr)
+      if (ppixmap->image32() == nullptr)
       {
 
          //return false;
@@ -94,7 +94,7 @@ namespace draw2d_gdiplus
 
       }
 
-      m_pbitmap = new Gdiplus::Bitmap(ppixmap->m_sizeRaw.cx(), ppixmap->m_sizeRaw.cy(), m_iStride, PixelFormat32bppPARGB, (BYTE *) ppixmap->colorref());
+      m_pbitmap = new Gdiplus::Bitmap(ppixmap->m_sizeRaw.cx(), ppixmap->m_sizeRaw.cy(), m_iStride, PixelFormat32bppPARGB, (BYTE *) ppixmap->image32());
 
       if (m_pbitmap == nullptr)
       {
@@ -138,7 +138,7 @@ namespace draw2d_gdiplus
 
       const BITMAPINFO* pbmi = &info;
 
-      __UNREFERENCED_PARAMETER(pgraphics);
+      UNREFERENCED_PARAMETER(pgraphics);
 
       ::acme::del(m_pbitmap);
 

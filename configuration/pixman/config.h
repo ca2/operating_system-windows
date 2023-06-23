@@ -1,4 +1,4 @@
-﻿// Created by camilo on 2023-02-28 01:35 BRT <3ThomasBorregaardSorensen!!
+// Created by camilo on 2023-02-28 01:35 BRT <3ThomasBorregaardSorensen!!
 #pragma once
 
 #ifndef _CRT_SECURE_NO_WARNINGS

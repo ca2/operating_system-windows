@@ -1,4 +1,4 @@
-﻿#include "framework.h"
+#include "framework.h"
 #include "graphics.h"
 #include "pen.h"
 #include "brush.h"
@@ -7,14 +7,20 @@
 #include "region.h"
 #include "acme/exception/interface_only.h"
 #include "acme/exception/not_implemented.h"
+#include "acme/graphics/draw2d/_text_stream.h"
 #include "acme/parallelization/synchronous_lock.h"
 #include "acme/platform/scoped_restore.h"
+#include "acme/primitive/geometry2d/ellipse.h"
 #include "acme/primitive/geometry2d/item.h"
+#include "acme/primitive/geometry2d/_text_stream.h"
+#include "acme/primitive/mathematics/mathematics.h"
 #include "acme/primitive/string/international.h"
+#include "aura/graphics/draw2d/clip.h"
+#include "aura/graphics/draw2d/draw2d.h"
 #include "aura/graphics/image/context_image.h"
 #include "aura/graphics/image/drawing.h"
 #include "aura/graphics/image/map.h"
-#include "acme/primitive/mathematics/mathematics.h"
+#include "aura/platform/system.h"
 //#include "acme/primitive/geometry2d/_enhanced.h"
 //#include "acme/primitive/geometry2d/_collection_enhanced.h"
 //#include "acme/primitive/geometry2d/_defer_shape.h"
@@ -101,47 +107,47 @@ void trilinearImageScaling(
 
 
          // trilinear interpolate blue matter
-         blue = (A & 0xff) * (1 - w_diff) * (1 - h_diff) * (1 - h3_diff) +
-            (B & 0xff) * (w_diff) * (1 - h_diff) * (1 - h3_diff) +
-            (C & 0xff) * (h_diff) * (1 - w_diff) * (1 - h3_diff) +
-            (D & 0xff) * (w_diff) * (h_diff) * (1 - h3_diff) +
-            (E & 0xff) * (1 - w2_diff) * (1 - h2_diff) * (h3_diff)+
-            (F & 0xff) * (w2_diff) * (1 - h2_diff) * (h3_diff)+
-            (G & 0xff) * (h2_diff) * (1 - w2_diff) * (h3_diff)+
-            (H & 0xff) * (w2_diff) * (h2_diff) * (h3_diff);
+         blue = (A.u8_blue()) * (1 - w_diff) * (1 - h_diff) * (1 - h3_diff) +
+            (B.u8_blue()) * (w_diff) * (1 - h_diff) * (1 - h3_diff) +
+            (C.u8_blue()) * (h_diff) * (1 - w_diff) * (1 - h3_diff) +
+            (D.u8_blue()) * (w_diff) * (h_diff) * (1 - h3_diff) +
+            (E.u8_blue()) * (1 - w2_diff) * (1 - h2_diff) * (h3_diff)+
+            (F.u8_blue()) * (w2_diff) * (1 - h2_diff) * (h3_diff)+
+            (G.u8_blue()) * (h2_diff) * (1 - w2_diff) * (h3_diff)+
+            (H.u8_blue()) * (w2_diff) * (h2_diff) * (h3_diff);
 
          // trilinear interpolate green matter
-         green = ((A >> 8) & 0xff) * (1 - w_diff) * (1 - h_diff) * (1 - h3_diff) +
-            ((B >> 8) & 0xff) * (w_diff) * (1 - h_diff) * (1 - h3_diff) +
-            ((C >> 8) & 0xff) * (h_diff) * (1 - w_diff) * (1 - h3_diff) +
-            ((D >> 8) & 0xff) * (w_diff) * (h_diff) * (1 - h3_diff) +
-            ((E >> 8) & 0xff) * (1 - w2_diff) * (1 - h2_diff) * (h3_diff)+
-            ((F >> 8) & 0xff) * (w2_diff) * (1 - h2_diff) * (h3_diff)+
-            ((G >> 8) & 0xff) * (h2_diff) * (1 - w2_diff) * (h3_diff)+
-            ((H >> 8) & 0xff) * (w2_diff) * (h2_diff) * (h3_diff);
+         green = ((A.u8_green())) * (1 - w_diff) * (1 - h_diff) * (1 - h3_diff) +
+            ((B.u8_green())) * (w_diff) * (1 - h_diff) * (1 - h3_diff) +
+            ((C.u8_green())) * (h_diff) * (1 - w_diff) * (1 - h3_diff) +
+            ((D.u8_green())) * (w_diff) * (h_diff) * (1 - h3_diff) +
+            ((E.u8_green())) * (1 - w2_diff) * (1 - h2_diff) * (h3_diff)+
+            ((F.u8_green())) * (w2_diff) * (1 - h2_diff) * (h3_diff)+
+            ((G.u8_green())) * (h2_diff) * (1 - w2_diff) * (h3_diff)+
+            ((H.u8_green())) * (w2_diff) * (h2_diff) * (h3_diff);
 
          // trilinear interpolate red matter
-         red = ((A >> 16) & 0xff) * (1 - w_diff) * (1 - h_diff) * (1 - h3_diff) +
-            ((B >> 16) & 0xff) * (w_diff) * (1 - h_diff) * (1 - h3_diff) +
-            ((C >> 16) & 0xff) * (h_diff) * (1 - w_diff) * (1 - h3_diff) +
-            ((D >> 16) & 0xff) * (w_diff) * (h_diff) * (1 - h3_diff) +
-            ((E >> 16) & 0xff) * (1 - w2_diff) * (1 - h2_diff) * (h3_diff)+
-            ((F >> 16) & 0xff) * (w2_diff) * (1 - h2_diff) * (h3_diff)+
-            ((G >> 16) & 0xff) * (h2_diff) * (1 - w2_diff) * (h3_diff)+
-            ((H >> 16) & 0xff) * (w2_diff) * (h2_diff) * (h3_diff);
+         red = ((A.u8_red())) * (1 - w_diff) * (1 - h_diff) * (1 - h3_diff) +
+            ((B.u8_red())) * (w_diff) * (1 - h_diff) * (1 - h3_diff) +
+            ((C.u8_red())) * (h_diff) * (1 - w_diff) * (1 - h3_diff) +
+            ((D.u8_red())) * (w_diff) * (h_diff) * (1 - h3_diff) +
+            ((E.u8_red())) * (1 - w2_diff) * (1 - h2_diff) * (h3_diff)+
+            ((F.u8_red())) * (w2_diff) * (1 - h2_diff) * (h3_diff)+
+            ((G.u8_red())) * (h2_diff) * (1 - w2_diff) * (h3_diff)+
+            ((H.u8_red())) * (w2_diff) * (h2_diff) * (h3_diff);
 
          // trilinear interpolate alpha matter
-         alpha = ((A >> 24) & 0xff) * (1 - w_diff) * (1 - h_diff) * (1 - h3_diff) +
-            ((B >> 24) & 0xff) * (w_diff) * (1 - h_diff) * (1 - h3_diff) +
-            ((C >> 24) & 0xff) * (h_diff) * (1 - w_diff) * (1 - h3_diff) +
-            ((D >> 24) & 0xff) * (w_diff) * (h_diff) * (1 - h3_diff) +
-            ((E >> 24) & 0xff) * (1 - w2_diff) * (1 - h2_diff) * (h3_diff)+
-            ((F >> 24) & 0xff) * (w2_diff) * (1 - h2_diff) * (h3_diff)+
-            ((G >> 24) & 0xff) * (h2_diff) * (1 - w2_diff) * (h3_diff)+
-            ((H >> 24) & 0xff) * (w2_diff) * (h2_diff) * (h3_diff);
+         alpha = ((A.u8_opacity())) * (1 - w_diff) * (1 - h_diff) * (1 - h3_diff) +
+            ((B.u8_opacity())) * (w_diff) * (1 - h_diff) * (1 - h3_diff) +
+            ((C.u8_opacity())) * (h_diff) * (1 - w_diff) * (1 - h3_diff) +
+            ((D.u8_opacity())) * (w_diff) * (h_diff) * (1 - h3_diff) +
+            ((E.u8_opacity())) * (1 - w2_diff) * (1 - h2_diff) * (h3_diff)+
+            ((F.u8_opacity())) * (w2_diff) * (1 - h2_diff) * (h3_diff)+
+            ((G.u8_opacity())) * (h2_diff) * (1 - w2_diff) * (h3_diff)+
+            ((H.u8_opacity())) * (w2_diff) * (h2_diff) * (h3_diff);
 
 
-         *lineRet =
+         lineRet->m_u32 =
             (int)(blue) |
             ((int)(green)) << 8 |
             ((int)(red)) << 16 |
@@ -174,30 +180,30 @@ namespace draw2d_gdiplus
    }
 
 
-//#ifdef DEBUG
-//
-//
-//   void graphics::assert_ok() const
-//   {
-//
-//      object::assert_ok();
-//
-//   }
-//
-//
-//   void graphics::dump(dump_context & dumpcontext) const
-//   {
-//
-//      object::dump(dumpcontext);
-//
-//      dumpcontext << "m_pgraphics = " << (iptr)m_pgraphics;
-//      dumpcontext << "\nm_bPrinting = " << m_bPrinting;
-//
-//      dumpcontext << "\n";
-//   }
-//
-//
-//#endif
+   //#ifdef DEBUG
+   //
+   //
+   //   void graphics::assert_ok() const
+   //   {
+   //
+   //      object::assert_ok();
+   //
+   //   }
+   //
+   //
+   //   void graphics::dump(dump_context & dumpcontext) const
+   //   {
+   //
+   //      object::dump(dumpcontext);
+   //
+   //      dumpcontext << "m_pgraphics = " << (iptr)m_pgraphics;
+   //      dumpcontext << "\nm_bPrinting = " << m_bPrinting;
+   //
+   //      dumpcontext << "\n";
+   //   }
+   //
+   //
+   //#endif
 
 
    graphics::~graphics()
@@ -380,7 +386,7 @@ namespace draw2d_gdiplus
          catch (...)
          {
 
-            INFORMATION("graphics::set(::draw2d::bitmap *) : Failed to delete Gdiplus::Graphics");
+            information() << "graphics::set(::draw2d::bitmap *) : Failed to delete Gdiplus::Graphics";
 
          }
 
@@ -1023,17 +1029,17 @@ namespace draw2d_gdiplus
 
       }
 
-      auto x = (Gdiplus::REAL) rectangleParam.left;
-      auto y = (Gdiplus::REAL) rectangleParam.top;
-      auto Δx = (Gdiplus::REAL) rectangleParam.width();
-      auto Δy = (Gdiplus::REAL) rectangleParam.height();
+      auto x = (Gdiplus::REAL)rectangleParam.left;
+      auto y = (Gdiplus::REAL)rectangleParam.top;
+      auto greekdeltax = (Gdiplus::REAL)rectangleParam.width();
+      auto greekdeltay = (Gdiplus::REAL)rectangleParam.height();
 
-      auto status = m_pgraphics->DrawEllipse(ppen, x, y, Δx, Δy);
+      auto status = m_pgraphics->DrawEllipse(ppen, x, y, greekdeltax, greekdeltay);
 
       if (status != Gdiplus::Status::Ok)
       {
 
-         FORMATTED_WARNING("Gdiplus Failed to DrawEllipse (%f, %f, %f, %f)", x, y, Δx, Δy);
+         warning("Gdiplus Failed to DrawEllipse (%f, %f, %f, %f)", x, y, greekdeltax, greekdeltay);
 
       }
 
@@ -1137,15 +1143,15 @@ namespace draw2d_gdiplus
 
       auto x = (Gdiplus::REAL)rectangleParam.left;
       auto y = (Gdiplus::REAL)rectangleParam.top;
-      auto Δx = (Gdiplus::REAL)rectangleParam.width();
-      auto Δy = (Gdiplus::REAL)rectangleParam.height();
+      auto greekdeltax = (Gdiplus::REAL)rectangleParam.width();
+      auto greekdeltay = (Gdiplus::REAL)rectangleParam.height();
 
-      auto status = m_pgraphics->FillEllipse(pbrush, x, y, Δx, Δy);
-      
-      if(status != Gdiplus::Status::Ok)
+      auto status = m_pgraphics->FillEllipse(pbrush, x, y, greekdeltax, greekdeltay);
+
+      if (status != Gdiplus::Status::Ok)
       {
 
-         FORMATTED_WARNING("Gdiplus Failed to FillEllipse (%f, %f, %f, %f)", x, y, Δx, Δy);
+         warning("Gdiplus Failed to FillEllipse (%f, %f, %f, %f)", x, y, greekdeltax, greekdeltay);
 
       }
 
@@ -1346,6 +1352,22 @@ namespace draw2d_gdiplus
 
       }
 
+      if (payload("log_fill_rectangle"))
+      {
+
+         if (rectangleParam.minimum_dimension() > 24)
+         {
+
+            tracer().width(4);
+
+            tracer().precision(0);
+
+            information() << "log_fill_rectangle " << rectangleParam << " color: " << pbrush->m_color;
+
+         }
+
+      }
+
       Gdiplus::Rect rectangle;
 
       copy(rectangle, rectangleParam);
@@ -1357,7 +1379,7 @@ namespace draw2d_gdiplus
       if (!bOk)
       {
 
-         FORMATTED_WARNING("Gdiplus Failed to FillRectangle (%d, %d, %d, %d)",
+         warning("Gdiplus Failed to FillRectangle (%d, %d, %d, %d)",
             rectangle.X, rectangle.Y, rectangle.Width, rectangle.Height);
 
       }
@@ -1639,7 +1661,7 @@ namespace draw2d_gdiplus
       //else
       //{
 
-         pimage->defer_update_image();
+      pimage->defer_update_image();
 
       //}
 
@@ -1958,7 +1980,7 @@ namespace draw2d_gdiplus
          if (ret != Gdiplus::Status::Ok)
          {
 
-            FORMATTED_WARNING("Gdiplus Failed to DrawImage (%f, %f, %f, %f) - (%f, %f, %f, %f)",
+            warning("Gdiplus Failed to DrawImage (%f, %f, %f, %f) - (%f, %f, %f, %f)",
                rectfTarget.X, rectfTarget.Y, rectfTarget.Width, rectfTarget.Height,
                xSrc, ySrc, nSrcWidth, nSrcHeight);
 
@@ -2262,7 +2284,7 @@ namespace draw2d_gdiplus
       //return ::GetPixel(get_handle1(), x, y);
       throw ::not_implemented();
 
-      return false;
+      return {};
 
    }
 
@@ -2273,7 +2295,7 @@ namespace draw2d_gdiplus
       //return ::GetPixel(get_handle1(), point.x(), point.y());
       throw ::not_implemented();
 
-      return false;
+      return color::transparent;
 
    }
 
@@ -2281,7 +2303,7 @@ namespace draw2d_gdiplus
    ::color::color graphics::SetPixel(double x, double y, const ::color::color & color)
    {
 
-      return 0;
+      return color::transparent;
 
    }
 
@@ -2294,7 +2316,7 @@ namespace draw2d_gdiplus
 
          m_pimage->map();
 
-         m_pimage->colorref()[(int)point.x() + (int)point.y() * m_pimage->scan_size()] = color;
+         m_pimage->image32()[(int)point.x() + (int)point.y() * m_pimage->scan_size()].assign(color, m_pimage->color_indexes());
 
       }
       else
@@ -2317,13 +2339,13 @@ namespace draw2d_gdiplus
 
          m_pimage->map();
 
-         ::color::color color = m_pimage->colorref()[(int)point.x() + (int)point.y() * m_pimage->scan_size()];
+         ::color::color color = m_pimage->image32()[(int)point.x() + (int)point.y() * m_pimage->scan_size()].color(m_pimage->color_indexes());
 
-         color.red = (int)(color.red * (1.0 - colorChange.da()) + colorChange.red * colorChange.da());
-         color.green = (int)(color.green * (1.0 - colorChange.da()) + colorChange.green * colorChange.da());
-         color.blue = (int)(color.blue * (1.0 - colorChange.da()) + colorChange.blue * colorChange.da());
+         color.m_u8Red = (int)(color.m_u8Red * (1.0 - colorChange.f64_opacity()) + colorChange.m_u8Red * colorChange.f64_opacity());
+         color.m_u8Green = (int)(color.m_u8Green * (1.0 - colorChange.f64_opacity()) + colorChange.m_u8Green * colorChange.f64_opacity());
+         color.m_u8Blue = (int)(color.m_u8Blue * (1.0 - colorChange.f64_opacity()) + colorChange.m_u8Blue * colorChange.f64_opacity());
 
-         m_pimage->colorref()[(int)point.x() + (int)point.y() * m_pimage->scan_size()] = color;
+         m_pimage->image32()[(int)point.x() + (int)point.y() * m_pimage->scan_size()].assign(color, m_pimage->color_indexes());
          //colorCurrent.m_iA = colorCurrent.m_iA * (1.0 - color.da()) + color.m_iR * color.da();
 
       }
@@ -3220,7 +3242,7 @@ namespace draw2d_gdiplus
    }
 
 
-   //i32 graphics::GetPath(::point_f64 * pPoints, byte * lpTypes, count nCount)
+   //i32 graphics::GetPath(::point_f64 * pPoints, ::u8 * lpTypes, count nCount)
 
    //{
 
@@ -3519,7 +3541,7 @@ namespace draw2d_gdiplus
 
    //   //         m_pimage->fork_blend(point_i32(xDest + GetViewportOrg().x(), yDest + GetViewportOrg().y()), pgraphicsSrc->m_pimage,
    //   //                                                point_i32(xSrc + pgraphicsSrc->GetViewportOrg().x(), ySrc + pgraphicsSrc->GetViewportOrg().y()),
-   //   //                                                ::size_f64(nSrcWidth, nDestHeight), (byte)(dRate * 255.0f));
+   //   //                                                ::size_f64(nSrcWidth, nDestHeight), (::u8)(dRate * 255.0f));
 
    //   //         g_cForkBlend++;
 
@@ -3534,7 +3556,7 @@ namespace draw2d_gdiplus
 
    //   //         m_pimage->blend(point_i32(xDest + GetViewportOrg().x(), yDest + GetViewportOrg().y()), pgraphicsSrc->m_pimage,
    //   //                                           point_i32(xSrc+pgraphicsSrc->GetViewportOrg().x(), ySrc + pgraphicsSrc->GetViewportOrg().y()),
-   //   //                                           ::size_f64(nSrcWidth, nDestHeight), (byte)(dRate * 255.0f));
+   //   //                                           ::size_f64(nSrcWidth, nDestHeight), (::u8)(dRate * 255.0f));
 
    //   //      }
 
@@ -3544,7 +3566,7 @@ namespace draw2d_gdiplus
 
    //   //      m_pimage->from(point_i32(xDest + GetViewportOrg().x(), yDest + GetViewportOrg().y()), pgraphicsSrc->m_pimage,
    //   //                                       point_i32(xSrc + pgraphicsSrc->GetViewportOrg().x(), ySrc + pgraphicsSrc->GetViewportOrg().y()),
-   //   //                                       ::size_f64(nSrcWidth, nDestHeight), (byte) (dRate * 255.0f));
+   //   //                                       ::size_f64(nSrcWidth, nDestHeight), (::u8) (dRate * 255.0f));
 
 
    //   //   }
@@ -3883,11 +3905,31 @@ namespace draw2d_gdiplus
 
          }
 
+         if (payload("log_fill_rectangle"))
+         {
+
+            if (rectangleParam.minimum_dimension() > 24)
+            {
+
+               tracer().width(4);
+
+               tracer().precision(0);
+
+               information() << "log_fill_rectangle " << rectangleParam << " color: " << ::file::hex << color;
+
+            }
+
+         }
+
          Gdiplus::RectF rectangle;
 
          copy(rectangle, rectangleParam);
 
-         Gdiplus::SolidBrush b(Gdiplus::Color(color.alpha, color.red, color.green, color.blue));
+         Gdiplus::SolidBrush b(Gdiplus::Color(
+            color.m_u8Opacity,
+            color.m_u8Red,
+            color.m_u8Green,
+            color.m_u8Blue));
 
          auto status = m_pgraphics->FillRectangle(&b, rectangle);
 
@@ -4374,7 +4416,7 @@ namespace draw2d_gdiplus
          catch (...)
          {
 
-            INFORMATION("graphics::DeleteDC : Failed to delete Gdiplus::Graphics");
+            information() << "graphics::DeleteDC : Failed to delete Gdiplus::Graphics";
 
          }
 
@@ -4390,7 +4432,7 @@ namespace draw2d_gdiplus
          if (!bDeleted)
          {
 
-            INFORMATION("graphics::DeleteDC : Failed to delete GDI device context");
+            information() << "graphics::DeleteDC : Failed to delete GDI device context";
 
          }
 
@@ -4767,41 +4809,41 @@ namespace draw2d_gdiplus
    }
 
 
-   void graphics::_intersect_clip() 
+   void graphics::_intersect_clip()
    {
 
 
    }
 
 
-   void graphics::_add_clipping_shape(const ::rectangle_f64 & rectangle, ::draw2d::region * pregion)
-   {
+   //void graphics::_add_clipping_shape(const ::rectangle_f64 & rectangle, ::draw2d::region * pregion)
+   //{
 
-      //if (!shaperegion.holdee() || shaperegion.holdee()->m_pointOffset != m_pointAddShapeTranslate)
-      //if (!shaperegion.holdee())
-      //{
+   //   //if (!shaperegion.holdee() || shaperegion.holdee()->m_pointOffset != m_pointAddShapeTranslate)
+   //   //if (!shaperegion.holdee())
+   //   //{
 
-      //   auto pregion = __create < ::draw2d::region >();
+   //   //   auto pregion = __create < ::draw2d::region >();
 
-      //   //pregion->m_pointOffset = m_pointAddShapeTranslate;
+   //   //   //pregion->m_pointOffset = m_pointAddShapeTranslate;
 
-      //   pregion->create_rectangle(rectangle);
+   //   //   pregion->create_rectangle(rectangle);
 
-      //   shaperegion.holdee(pregion);
+   //   //   shaperegion.holdee(pregion);
 
-      //}
+   //   //}
 
-      //Gdiplus::Region* pregion = (Gdiplus::Region*)shaperegion.holdee()->get_os_data(this, 0);
+   //   //Gdiplus::Region* pregion = (Gdiplus::Region*)shaperegion.holdee()->get_os_data(this, 0);
 
-      //m_pgraphics->SetClip(pregion, Gdiplus::CombineModeIntersect);
-      // 
-      Gdiplus::RectF r;
+   //   //m_pgraphics->SetClip(pregion, Gdiplus::CombineModeIntersect);
+   //   // 
+   //   Gdiplus::RectF r;
 
-      copy(r, rectangle);
-      m_pgraphics->SetClip(r, Gdiplus::CombineModeIntersect);
-      //return ::success;
+   //   copy(r, rectangle);
+   //   m_pgraphics->SetClip(r, Gdiplus::CombineModeIntersect);
+   //   //return ::success;
 
-   }
+   //}
 
 
    //void graphics::intersect_clip(const ::rectangle & rectangle)
@@ -4822,7 +4864,7 @@ namespace draw2d_gdiplus
    //}
 
 
-   void graphics::set_clipping(::draw2d::region* pregion)
+   void graphics::set_clipping(::draw2d::region * pregion)
    {
 
       ::pointer < ::draw2d_gdiplus::region > pregionGdiplus = pregion;
@@ -4834,45 +4876,45 @@ namespace draw2d_gdiplus
    }
 
 
-   void graphics::_add_clipping_shape(const ::ellipse_f64 & ellipse, ::draw2d::region * pregion)
-   {
+   //void graphics::_add_clipping_shape(const ::ellipse_f64 & ellipse, ::draw2d::region * pregion)
+   //{
 
-      //if (!shaperegion.holdee() || shaperegion.holdee()->m_pointOffset != m_pointAddShapeTranslate)
-      //if (!shaperegion.holdee())
-      //{
+   //   //if (!shaperegion.holdee() || shaperegion.holdee()->m_pointOffset != m_pointAddShapeTranslate)
+   //   //if (!shaperegion.holdee())
+   //   //{
 
-      //   auto pregion= __create < ::draw2d::region >();
+   //   //   auto pregion= __create < ::draw2d::region >();
 
-      //   //pregion->m_pointOffset = m_pointAddShapeTranslate;
+   //   //   //pregion->m_pointOffset = m_pointAddShapeTranslate;
 
-      //   pregion->create_ellipse(ellipse);
+   //   //   pregion->create_ellipse(ellipse);
 
-      //   shaperegion.holdee(pregion);
+   //   //   shaperegion.holdee(pregion);
 
-      //}
+   //   //}
 
-      //Gdiplus::Region * pregion = (Gdiplus::Region * ) shaperegion.holdee()->get_os_data(this, 0);
+   //   //Gdiplus::Region * pregion = (Gdiplus::Region * ) shaperegion.holdee()->get_os_data(this, 0);
 
-      //auto pregion = new Gdiplus::Region();
+   //   //auto pregion = new Gdiplus::Region();
 
-      //pregion->
+   //   //pregion->
 
-      //m_pgraphics->SetClip(pregion, Gdiplus::CombineModeIntersect);
-      Gdiplus::GraphicsPath path;
+   //   //m_pgraphics->SetClip(pregion, Gdiplus::CombineModeIntersect);
+   //   Gdiplus::GraphicsPath path;
 
-      Gdiplus::RectF r;
+   //   Gdiplus::RectF r;
 
-      copy(r, ellipse);
+   //   copy(r, ellipse);
 
-      path.AddEllipse(r);
+   //   path.AddEllipse(r);
 
-      //auto pregion = new Gdiplus::Region(&path);
+   //   //auto pregion = new Gdiplus::Region(&path);
 
-      m_pgraphics->SetClip(&path, Gdiplus::CombineModeIntersect);
+   //   m_pgraphics->SetClip(&path, Gdiplus::CombineModeIntersect);
 
-      //delete pregion;
+   //   //delete pregion;
 
-   }
+   //}
 
 
    //void graphics::intersect_clip(const ::ellipse & ellipse)
@@ -4897,50 +4939,139 @@ namespace draw2d_gdiplus
    //}
 
 
-   void graphics::_add_clipping_shape(const ::polygon_f64 & polygon, ::draw2d::region * pregion)
+   //void graphics::_add_clipping_shape(const ::polygon_f64 & polygon, ::draw2d::region * pregion)
+   //{
+
+   //   //if (!shaperegion.holdee() || shaperegion.holdee()->m_pointOffset != m_pointAddShapeTranslate)
+   //   //if (!shaperegion.holdee())
+   //   //{
+
+   //   //   auto pregion = __create < ::draw2d::region >();
+
+   //   //   //pregion->m_pointOffset = m_pointAddShapeTranslate;
+
+   //   //   pregion->create_polygon(polygon);
+
+   //   //   shaperegion.holdee(pregion);
+
+   //   //}
+
+   //   //Gdiplus::Region* pregion = (Gdiplus::Region*)shaperegion.holdee()->get_os_data(this, 0);
+
+   //   //m_pgraphics->SetClip(pregion, Gdiplus::CombineModeIntersect);
+
+   //   Gdiplus::GraphicsPath path;
+
+   //   array < Gdiplus::PointF > pa;
+
+   //   //::pointer<::geometry2d::polygon_item>pitem = pregion->m_pitem;
+
+   //   for (i32 i = 0; i < polygon.get_size(); i++)
+   //   {
+   //      pa.add(Gdiplus::PointF((Gdiplus::REAL)polygon[i].x(), (Gdiplus::REAL)polygon[i].y()));
+   //   }
+
+   //   if (m_efillmode == ::draw2d::e_fill_mode_alternate)
+   //   {
+   //      path.SetFillMode(Gdiplus::FillModeAlternate);
+   //   }
+   //   else
+   //   {
+   //      path.SetFillMode(Gdiplus::FillModeWinding);
+   //   }
+
+   //   path.AddPolygon(pa.data(), (i32)pa.get_count());
+
+   //   m_pgraphics->SetClip(&path, Gdiplus::CombineModeIntersect);
+
+   //}
+
+
+   void graphics::_add_clip_item(Gdiplus::GraphicsPath * ppath, ::draw2d::clip_item * pclipitem)
    {
 
-      //if (!shaperegion.holdee() || shaperegion.holdee()->m_pointOffset != m_pointAddShapeTranslate)
-      //if (!shaperegion.holdee())
-      //{
-
-      //   auto pregion = __create < ::draw2d::region >();
-
-      //   //pregion->m_pointOffset = m_pointAddShapeTranslate;
-
-      //   pregion->create_polygon(polygon);
-
-      //   shaperegion.holdee(pregion);
-
-      //}
-
-      //Gdiplus::Region* pregion = (Gdiplus::Region*)shaperegion.holdee()->get_os_data(this, 0);
-
-      //m_pgraphics->SetClip(pregion, Gdiplus::CombineModeIntersect);
-
-      Gdiplus::GraphicsPath path;
-
-      array < Gdiplus::PointF > pa;
-
-      //::pointer<::geometry2d::polygon_item>pitem = pregion->m_pitem;
-
-      for (i32 i = 0; i < polygon.get_size(); i++)
+      switch (pclipitem->clip_item_type())
       {
-         pa.add(Gdiplus::PointF((Gdiplus::REAL)polygon[i].x(), (Gdiplus::REAL)polygon[i].y()));
+      case ::draw2d::e_clip_item_rectangle:
+         _add_shape(ppath, dynamic_cast<::draw2d::clip_rectangle *>(pclipitem)->m_item);
+         break;
+      case ::draw2d::e_clip_item_ellipse:
+         _add_shape(ppath, dynamic_cast<::draw2d::clip_ellipse *>(pclipitem)->m_item);
+         break;
+      case ::draw2d::e_clip_item_polygon:
+         _add_shape(ppath, dynamic_cast<::draw2d::clip_polygon *>(pclipitem)->m_item);
+         break;
+      default:
+         break;
+      };
+
+   }
+
+
+   void graphics::_add_shape(Gdiplus::GraphicsPath * ppath, const ::rectangle_f64 & rectangle)
+   {
+
+      Gdiplus::RectF rectf;
+
+      copy(rectf, rectangle);
+
+      ppath->AddRectangle(rectf);
+
+   }
+
+
+   void graphics::_add_shape(Gdiplus::GraphicsPath * ppath, const ::ellipse_f64 & ellipse)
+   {
+
+      Gdiplus::RectF rectf;
+
+      copy(rectf, ellipse);
+
+      ppath->AddEllipse(rectf);
+
+   }
+
+
+   void graphics::_add_shape(Gdiplus::GraphicsPath * ppath, const ::polygon_f64 & polygon)
+   {
+
+      ::array<Gdiplus::PointF>pointa;
+
+      for (auto & point : polygon)
+      {
+
+         pointa.add({ (Gdiplus::REAL) point.x(), (Gdiplus::REAL) point.y() });
+
       }
 
-      if (m_efillmode == ::draw2d::e_fill_mode_alternate)
+      ppath->AddPolygon(pointa.data(), (INT) pointa.size());
+
+   }
+
+
+   void graphics::intersect_clip(const ::draw2d::clip_group & clipgroup)
+   {
+
+      auto_pointer < Gdiplus::GraphicsPath > ppath(create_new_t{});
+
+      ppath->SetFillMode(Gdiplus::FillModeWinding);
+
+      for (auto & pclipitem : clipgroup)
       {
-         path.SetFillMode(Gdiplus::FillModeAlternate);
-      }
-      else
-      {
-         path.SetFillMode(Gdiplus::FillModeWinding);
+
+         _add_clip_item(ppath, pclipitem);
+
       }
 
-      path.AddPolygon(pa.data(), (i32)pa.get_count());
+      m_pgraphics->SetClip(ppath, Gdiplus::CombineModeIntersect);
 
-      m_pgraphics->SetClip(&path, Gdiplus::CombineModeIntersect);
+   }
+
+
+   void graphics::_add_clip_item(::draw2d::clip_item * pclipitem)
+   {
+
+      throw ::exception(error_not_supported);
 
    }
 
@@ -4948,46 +5079,69 @@ namespace draw2d_gdiplus
    void graphics::intersect_clip(const ::rectangle_f64 & rectangle)
    {
 
-      Gdiplus::RectF r;
+      Gdiplus::RectF rectf;
 
-      copy(r, rectangle);
+      copy(rectf, rectangle);
 
-      //r.X = (Gdiplus::REAL) (r.X + m_pointAddShapeTranslate.x());
-
-      //r.Y = (Gdiplus::REAL) (r.Y + m_pointAddShapeTranslate.y());
-
-      //r.X = (Gdiplus::REAL) (r.X);
-
-      //r.Y = (Gdiplus::REAL) (r.Y);
-
-      m_pgraphics->SetClip(r, Gdiplus::CombineModeIntersect);
+      m_pgraphics->SetClip(rectf, Gdiplus::CombineModeIntersect);
 
    }
 
 
-   //void graphics::intersect_clip(const ::polygon_f64& polygon_i32)
+   void graphics::intersect_clip(const ::ellipse_f64 & ellipse)
+   {
+
+      auto_pointer < Gdiplus::GraphicsPath > ppath(create_new_t{});
+
+      _add_shape(ppath, ellipse);
+
+      m_pgraphics->SetClip(ppath, Gdiplus::CombineModeIntersect);
+
+   }
+
+
+   void graphics::intersect_clip(const ::polygon_f64 & polygon)
+   {
+
+      auto_pointer < Gdiplus::GraphicsPath > ppath(create_new_t{});
+
+      _add_shape(ppath, polygon);
+
+      m_pgraphics->SetClip(ppath, Gdiplus::CombineModeIntersect);
+
+   }
+
+
+   //void graphics::_intersect_clip()
    //{
 
-   //   auto ppath = __auto(new Gdiplus::GraphicsPath());
-
-   //   auto copy = [this](Gdiplus::PointF* p2, const ::point_f64* p1)
-   //   {
-
-   //      p2->X = (Gdiplus::REAL) (p1->x + m_pointAddShapeTranslate.x());
-
-   //      p2->Y = (Gdiplus::REAL) (p1->y + m_pointAddShapeTranslate.y());
-
-   //   };
-
-   //   ap(Gdiplus::PointF) ppoint(polygon_i32.get_data(), polygon_i32.get_count(), copy);
-
-   //   ppath->AddPolygon(ppoint, (INT) polygon_i32.get_count());
-
-   //   m_pgraphics->SetClip(ppath, Gdiplus::CombineModeIntersect);
-
-   //   return ::success;
+   //   throw ::exception(error_not_supported);
 
    //}
+
+
+   void graphics::_add_shape(const ::rectangle_f64 & rectangle)
+   {
+
+      throw ::exception(error_not_supported);
+
+   }
+
+
+   void graphics::_add_shape(const ::ellipse_f64 & ellipse)
+   {
+
+      throw ::exception(error_not_supported);
+
+   }
+
+
+   void graphics::_add_shape(const ::polygon_f64 & polygon)
+   {
+
+      throw ::exception(error_not_supported);
+
+   }
 
 
    //i32 graphics::SelectClipRgn(::draw2d::region * pregion)
@@ -5796,6 +5950,8 @@ namespace draw2d_gdiplus
 
       }
 
+      synchronous_lock synchronouslock(acmesystem()->m_paurasystem->draw2d()->write_text()->m_pparticleFontTextMapSynchronization);
+
       daLeft.erase_all();
 
       daRight.erase_all();
@@ -5806,7 +5962,7 @@ namespace draw2d_gdiplus
 
       m_pfont->defer_update(this, 0);
 
-      auto & text = m_pfont->m_mapText[str];
+      auto & text = m_pfont->m_mapFontText[str];
 
       if (text.m_wstr.is_empty())
       {
@@ -6088,9 +6244,11 @@ namespace draw2d_gdiplus
 
       }
 
+      synchronous_lock synchronouslock(acmesystem()->m_paurasystem->draw2d()->write_text()->m_pparticleFontTextMapSynchronization);
+
       m_pfont->defer_update(this, 0);
 
-      auto & text = m_pfont->m_mapText[scopedstr];
+      auto & text = m_pfont->m_mapFontText[scopedstr];
 
       if (text.m_bSize)
       {
@@ -6133,11 +6291,11 @@ namespace draw2d_gdiplus
 
       auto status = m_pgraphics->MeasureString(psz, iLen, pfont, origin, &stringformat, &box);
 
-      if(status != Gdiplus::Ok)
-      { 
-      
+      if (status != Gdiplus::Ok)
+      {
+
          throw ::exception(error_failed);
-      
+
       }
 
       text.m_size = size_f64((double)(box.Width * m_pfont->m_dFontWidth), (double)(box.Height));
@@ -6584,7 +6742,9 @@ namespace draw2d_gdiplus
 
       Gdiplus::Font * pfont = m_pfont->get_os_data < Gdiplus::Font * >(this);
 
-      auto & text = m_pfont->m_mapText[scopedstr];
+      synchronous_lock synchronouslock(acmesystem()->m_paurasystem->draw2d()->write_text()->m_pparticleFontTextMapSynchronization);
+
+      auto & text = m_pfont->m_mapFontText[scopedstr];
 
       if (text.m_wstr.is_empty())
       {
@@ -7276,9 +7436,9 @@ namespace draw2d_gdiplus
 
       }
 
-      return (Gdiplus::Region *) pgdiplusregion->get_os_data(this);
+      return (Gdiplus::Region *)pgdiplusregion->get_os_data(this);
 
-    }
+   }
 
 
    //HDC graphics::get_handle1() const

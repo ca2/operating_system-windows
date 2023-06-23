@@ -1,4 +1,4 @@
-﻿// created by Camilo <3CamiloSasukeThomasBorregaardSoerensen  - Honoring Thomas Borregaard Sørensen MY ONLY LORD
+// created by Camilo <3CamiloSasukeThomasBorregaardSoerensen  - Honoring Thomas Borregaard Soerensen MY ONLY LORD
 // recreated by Camilo 2021-02-02 20:55
 #include "framework.h"
 #undef USUAL_OPERATING_SYSTEM_SUPPRESSIONS
@@ -53,9 +53,9 @@ namespace windowing_win32
 
          m_monitora.add(pmonitor);
 
-         copy(pmonitor->m_rectangle, m_monitorinfoa[iMonitor].rcMonitor);
+         pmonitor->m_rectangle = m_monitorinfoa[iMonitor].rcMonitor;
 
-         copy(pmonitor->m_rectangleWorkspace, m_monitorinfoa[iMonitor].rcWork);
+         pmonitor->m_rectangleWorkspace = m_monitorinfoa[iMonitor].rcWork;
 
       }
 
@@ -1071,8 +1071,8 @@ namespace windowing_win32
    void display::monitor_enum(HMONITOR hmonitor, HDC hdcMonitor, LPRECT prcMonitor)
    {
 
-      __UNREFERENCED_PARAMETER(hdcMonitor);
-      __UNREFERENCED_PARAMETER(prcMonitor);
+      UNREFERENCED_PARAMETER(hdcMonitor);
+      UNREFERENCED_PARAMETER(prcMonitor);
 
       m_monitorinfoa.allocate(m_monitorinfoa.get_size() + 1);
 
@@ -1086,10 +1086,10 @@ namespace windowing_win32
 
       MONITORINFO mi = m_monitorinfoa.last();
 
-      TRACE("display::monitor_enum\n");
-      TRACE("upper_bound %d\n", m_monitorinfoa.get_upper_bound());
-      TRACE("rcMonitor(left, top, right, bottom) %d, %d, %d, %d\n", mi.rcMonitor.left, mi.rcMonitor.top, mi.rcMonitor.right, mi.rcMonitor.bottom);
-      TRACE("rcWork(left, top, right, bottom) %d, %d, %d, %d\n", mi.rcWork.left, mi.rcWork.top, mi.rcWork.right, mi.rcWork.bottom);
+      information("display::monitor_enum");
+      information("upper_bound %d", m_monitorinfoa.get_upper_bound());
+      information("rcMonitor(left, top, right, bottom) %d, %d, %d, %d", mi.rcMonitor.left, mi.rcMonitor.top, mi.rcMonitor.right, mi.rcMonitor.bottom);
+      information("rcWork(left, top, right, bottom) %d, %d, %d, %d", mi.rcWork.left, mi.rcWork.top, mi.rcWork.right, mi.rcWork.bottom);
 
 
    }
@@ -1160,7 +1160,7 @@ namespace windowing_win32
    //bool user::impl_set_os_desktop_theme(string strTheme)
    //{
 
-   //   __UNREFERENCED_PARAMETER(strTheme);
+   //   UNREFERENCED_PARAMETER(strTheme);
 
    //   return true;
 

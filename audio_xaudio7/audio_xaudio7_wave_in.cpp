@@ -29,7 +29,7 @@ namespace multimedia
 
       bool in::initialize_instance()
       {
-         TRACE("in::initialize_instance %X\n", get_os_int());
+         information("in::initialize_instance %X\n", get_os_int());
          //SetMainWnd(nullptr);
          //ASSERT(GetMainWnd() == nullptr);
          set_thread_priority(::e_priority_highest);
@@ -118,17 +118,17 @@ namespace multimedia
 //         {
 //            if(mmr == MMSYSERR_ALLOCATED)
 //            {
-//               TRACE("Specified resource is already allocated.");
+//               information("Specified resource is already allocated.");
 //            }
 //            else if(mmr == MMSYSERR_BADDEVICEID)
 //            {
-//               TRACE("Specified device identifier is out of range.");
+//               information("Specified device identifier is out of range.");
 //            }
 //            else if(mmr == WAVERR_BADFORMAT)
 //            {
-//               TRACE("Attempted to open with an unsupported waveform-audio_xaudio7 format.");
+//               information("Attempted to open with an unsupported waveform-audio_xaudio7 format.");
 //            }
-//            TRACE("ERROR OPENING WAVE INPUT DEVICE");
+//            information("ERROR OPENING WAVE INPUT DEVICE");
 //            return mmr;
 //         }
 //
@@ -190,7 +190,7 @@ namespace multimedia
 //
 //            if(MMSYSERR_NOERROR != (mmr = xaudio7::translate(waveInPrepareHeader(m_hwavein, xaudio7::create_new_WAVEHDR(in_get_buffer(), i), sizeof(WAVEHDR)))))
 //            {
-//               TRACE("ERROR OPENING Preparing INPUT DEVICE buffer");
+//               information("ERROR OPENING Preparing INPUT DEVICE buffer");
 //               return mmr;
 //            }
 //
@@ -237,7 +237,7 @@ namespace multimedia
 
          //   if(::success != (mmr = xaudio7::translate(waveInUnprepareHeader(m_hwavein, wave_hdr(i), sizeof(WAVEHDR)))))
          //   {
-         //      TRACE("ERROR OPENING Unpreparing INPUT DEVICE buffer");
+         //      information("ERROR OPENING Unpreparing INPUT DEVICE buffer");
          //      //return mmr;
          //   }
 
@@ -272,7 +272,7 @@ namespace multimedia
 
          //if(::success != (mmr = xaudio7::translate(waveInStart(m_hwavein))))
          //{
-         //   TRACE("ERROR starting INPUT DEVICE ");
+         //   information("ERROR starting INPUT DEVICE ");
          //   return mmr;
          //}
 
@@ -300,7 +300,7 @@ namespace multimedia
          //   if(::success != (mmr = xaudio7::translate(waveInStop(m_hwavein))))
          //   {
 
-         //      TRACE("in::in_stop : ERROR OPENING stopping INPUT DEVICE ");
+         //      information("in::in_stop : ERROR OPENING stopping INPUT DEVICE ");
 
          //   }
 
@@ -308,7 +308,7 @@ namespace multimedia
          //catch(...)
          //{
 
-         //   TRACE("in::in_stop : Exception OPENING stopping INPUT DEVICE ");
+         //   information("in::in_stop : Exception OPENING stopping INPUT DEVICE ");
 
          //}
 
@@ -324,10 +324,10 @@ namespace multimedia
       //void CALLBACK in::in_proc(HWAVEIN hwi, UINT uMsg, DWORD dwInstance, DWORD dwParam1, DWORD dwParam2)
       //{
 
-      //   __UNREFERENCED_PARAMETER(hwi);
-      //   __UNREFERENCED_PARAMETER(dwInstance);
-      //   __UNREFERENCED_PARAMETER(dwParam1);
-      //   __UNREFERENCED_PARAMETER(dwParam2);
+      //   UNREFERENCED_PARAMETER(hwi);
+      //   UNREFERENCED_PARAMETER(dwInstance);
+      //   UNREFERENCED_PARAMETER(dwParam1);
+      //   UNREFERENCED_PARAMETER(dwParam2);
       //   if(uMsg == WIM_DATA)
       //   {
       //      ASSERT(false);
@@ -374,7 +374,7 @@ namespace multimedia
          //   if(::success != (mmr = in_stop()))
          //   {
 
-         //      TRACE("in::Reset error stopping input device");
+         //      information("in::Reset error stopping input device");
 
          //      return mmr;
 
@@ -389,7 +389,7 @@ namespace multimedia
          //   if(::success != (mmr = xaudio7::translate(waveInReset(m_hwavein))))
          //   {
          //
-         //      TRACE("in::Reset error resetting input device");
+         //      information("in::Reset error resetting input device");
 
          //      return mmr;
 
@@ -464,7 +464,7 @@ namespace multimedia
       //   if(::success != (mmr = xaudio7::translate(waveInAddBuffer(m_hwavein, lpwavehdr, sizeof(WAVEHDR)))))
       //   {
 
-      //      TRACE("ERROR OPENING Adding INPUT DEVICE buffer");
+      //      information("ERROR OPENING Adding INPUT DEVICE buffer");
 
       //   }
 

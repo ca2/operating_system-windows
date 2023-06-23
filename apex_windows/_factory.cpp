@@ -1,4 +1,4 @@
-﻿#include "framework.h"
+#include "framework.h"
 #include "service_handler.h"
 #include "ip_enum.h"
 #include "node.h"

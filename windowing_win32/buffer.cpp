@@ -1,4 +1,4 @@
-﻿// created by Camilo <3CamiloSasukeThomasBorregaardSoerensen  - Honoring Thomas Borregaard Sørensen MY ONLY LORD
+// created by Camilo <3CamiloSasukeThomasBorregaardSoerensen  - Honoring Thomas Borregaard Soerensen MY ONLY LORD
 // recreated by Camilo 2021-02-01 23:29
 #include "framework.h"
 #undef USUAL_OPERATING_SYSTEM_SUPPRESSIONS
@@ -7,6 +7,7 @@
 #include "display.h"
 #include "window.h"
 #include "monitor.h"
+#include "acme/constant/message.h"
 #include "acme/exception/exception.h"
 #include "acme/parallelization/mutex.h"
 #include "acme/parallelization/task.h"
@@ -273,7 +274,7 @@ namespace windowing_win32
 
       //pitem->m_size = m_pimpl->m_puserinteraction->const_layout().design().m_size;
 
-      //FORMATTED_INFORMATION("windowing_win32::buffer::update_buffer size(%d, %d)", size.cx(), size.cy());
+      //information("windowing_win32::buffer::update_buffer size(%d, %d)", size.cx(), size.cy());
 
       if (pitem->m_size == playeredwindowbuffer->m_pixmap.size())
       {
@@ -282,7 +283,7 @@ namespace windowing_win32
 
       }
 
-      ::color32_t * pcolorref = nullptr;
+      ::image32_t * pimage32 = nullptr;
 
       int iScan = -1;
 
@@ -324,10 +325,10 @@ namespace windowing_win32
          || playeredwindowbuffer->m_pixmap.m_sizeRaw.cy() < sizeLargeInternalBitmap.cy())
       {
 
-         HBITMAP hbitmap = ::windows::create_windows_dib(sizeLargeInternalBitmap, &iScan, &pcolorref);
+         HBITMAP hbitmap = ::windows::create_windows_dib(sizeLargeInternalBitmap, &iScan, &pimage32);
 
          if (hbitmap == nullptr
-            || pcolorref == nullptr
+            || pimage32 == nullptr
             || iScan == 0)
          {
 
@@ -342,7 +343,7 @@ namespace windowing_win32
 
          }
 
-         playeredwindowbuffer->m_pixmap.init(sizeLargeInternalBitmap, pcolorref, iScan);
+         playeredwindowbuffer->m_pixmap.init(sizeLargeInternalBitmap, pimage32, iScan);
 
          if (playeredwindowbuffer->m_hbitmap != nullptr)
          {
@@ -505,11 +506,11 @@ namespace windowing_win32
 
       auto sizeLayeredWindowBuffer = playeredwindowbuffer->m_pixmap.size();
 
-      //FORMATTED_INFORMATION("windowing_win32::buffer::update_screen size(%d, %d)", size.cx(), size.cy());
+      //information("windowing_win32::buffer::update_screen size(%d, %d)", size.cx(), size.cy());
 
-      auto pixmapRawData = playeredwindowbuffer->m_pixmap.m_pcolorrefRaw;
+      auto pixmapRawData = playeredwindowbuffer->m_pixmap.m_pimage32Raw;
 
-      auto pimageRawData = pitem->m_pimage->m_pcolorrefRaw;
+      auto pimageRawData = pitem->m_pimage->m_pimage32Raw;
 
       if (m_bDibIsHostingBuffer && pimageRawData == pixmapRawData)
       {
@@ -532,7 +533,7 @@ namespace windowing_win32
 
          pitem->m_pimage->map();
 
-         ::copy_colorref(playeredwindowbuffer->m_pixmap, sizeLayeredWindowBuffer, pitem->m_pimage);
+         ::copy_image32(playeredwindowbuffer->m_pixmap, sizeLayeredWindowBuffer, pitem->m_pimage);
 
       }
 
@@ -571,10 +572,10 @@ namespace windowing_win32
          if (size != sizeBuffer)
          {
 
-            ERROR("Requested size is different of buffer size.");
-            ERROR("Requested size: " << size);
-            ERROR("Buffer size: " << sizeBuffer);
-            //ERROR("Design size: " << sizeDesign);
+            error() <<"Requested size is different of buffer size.";
+            error() <<"Requested size: " << size;
+            error() <<"Buffer size: " << sizeBuffer;
+            //error() <<"Design size: " << sizeDesign;
 
             //m_pimpl->m_puserinteraction->set_need_redraw();
 
@@ -586,9 +587,9 @@ namespace windowing_win32
          else if (sizeLayeredWindowBuffer != sizeBuffer)
          {
 
-            ERROR("Os buffer size is different of buffer size.");
-            ERROR("Os buffer size: " << sizeLayeredWindowBuffer);
-            ERROR("Buffer size: " << sizeBuffer);
+            error() <<"Os buffer size is different of buffer size.";
+            error() <<"Os buffer size: " << sizeLayeredWindowBuffer;
+            error() <<"Buffer size: " << sizeBuffer;
 
             m_pimpl->m_puserinteraction->post_redraw();
 
@@ -612,7 +613,7 @@ namespace windowing_win32
 
          //      pimage->map();
 
-         //      ::copy_colorref(cx, cy, m_pcolorref, m_iScan, pimage->get_data(), pimage->scan_size());
+         //      ::copy_image32(cx, cy, m_pcolorref, m_iScan, pimage->get_data(), pimage->scan_size());
 
          //   }
          //   catch (...)
@@ -796,20 +797,20 @@ namespace windowing_win32
             if (strType.case_insensitive_contains("font_format"))
             {
 
-               INFORMATION("font_format going to UpdateLayeredWindow");
+               information() << "font_format going to UpdateLayeredWindow";
 
                bool bVisible = IsWindowVisible(get_hwnd());
 
                if (bVisible)
                {
 
-                  INFORMATION("font_format is visible!!");
+                  information() << "font_format is visible!!";
 
                }
                else
                {
 
-                  INFORMATION("font_format ISN'T visible!!");
+                  information() << "font_format ISN'T visible!!";
 
                }
 
@@ -818,7 +819,7 @@ namespace windowing_win32
                if (::GetWindowRect(get_hwnd(), &rectangleProbe))
                {
 
-                  INFORMATION("GetWindowRect (%d, %d) - (%d, %d)", rectangleProbe.left, rectangleProbe.top, rectangleProbe.right, rectangleProbe.bottom);
+                  information() << "GetWindowRect (%d, %d) - (%d, %d)", rectangleProbe.left, rectangleProbe.top, rectangleProbe.right, rectangleProbe.bottom;
 
                }
 
@@ -849,7 +850,7 @@ namespace windowing_win32
                                  //else
                                  //{
 
-                                 //   TRACE("Update discarded");
+                                 //   information("Update discarded");
 
                                  //}
 
@@ -867,7 +868,7 @@ namespace windowing_win32
                      | SWP_SHOWWINDOW;
 
 
-                  ::UpdateLayeredWindow(hwnd, m_hdcScreen, (POINT *)&point, (SIZE *)&size, playeredwindowbuffer->m_hdc, (POINT *)&pointSrc, rgb(0, 0, 0), &blendPixelFunction, ULW_ALPHA);
+                  ::UpdateLayeredWindow(hwnd, m_hdcScreen, (POINT *)&point, (SIZE *)&size, playeredwindowbuffer->m_hdc, (POINT *)&pointSrc, make_u32(0, 0, 0, 0), &blendPixelFunction, ULW_ALPHA);
 
                   if (rectangleWindowCurrent.top_left() != point
                      || rectangleWindowCurrent.size() != size)
@@ -879,10 +880,24 @@ namespace windowing_win32
 
                   }
 
+                  if (m_pimpl->m_puserinteraction->const_layout().window().origin() != point)
+                  {
+
+                     m_pimpl->m_puserinteraction->post_message(e_message_reposition, 0, point);
+
+                  }
+
+                  if (m_pimpl->m_puserinteraction->const_layout().window().size() != size)
+                  {
+
+                     m_pimpl->m_puserinteraction->post_message(e_message_size, 0, size);
+
+                  }
+
                }
                //else
                //{
-               //   TRACE("Update discarded");
+               //   information("Update discarded");
 
                //}
 
@@ -891,13 +906,13 @@ namespace windowing_win32
                //if (g_pointLastBottomRight != pointBottomRight)
                //{
 
-               //   TRACE("UpdateLayeredWindow Changed");
+               //   information("UpdateLayeredWindow Changed");
 
                //   g_pointLastBottomRight = pointBottomRight;
 
                //}
 
-               //TRACE("UpdateLayeredWindow Bottom Right (%d, %d)", pointBottomRight.x(), pointBottomRight.y());
+               //information("UpdateLayeredWindow Bottom Right (%d, %d)", pointBottomRight.x(), pointBottomRight.y());
 
 
             }

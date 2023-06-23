@@ -66,7 +66,7 @@ namespace windowing_win32
    //bool interaction_impl::GetScrollInfo(i32 nBar, LPSCROLLINFO pScrollInfo, ::u32 nMask)
    //{
 
-   //   __UNREFERENCED_PARAMETER(nMask);
+   //   UNREFERENCED_PARAMETER(nMask);
    //   ASSERT(pScrollInfo != nullptr);
 
 

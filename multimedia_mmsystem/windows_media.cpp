@@ -1,4 +1,4 @@
-﻿#include "framework.h"
+#include "framework.h"
 #include "acme/primitive/primitive/memory.h"
 #include "acme_windows_common/comptr.h"
 
@@ -48,7 +48,7 @@ string extract_mccdi(string str)
       mem.set_size(wLength);
 
       if (FAILED(pIWMHeaderInfo3->GetAttributeByName(
-         &wStreamNum, g_wszWMMCDI, &wmtDataType, (byte *)mem.data(), &wLength))) break;
+         &wStreamNum, g_wszWMMCDI, &wmtDataType, (::u8 *)mem.data(), &wLength))) break;
 
       bOK = true;
 

@@ -137,7 +137,7 @@
 //
 //      void thread::OnVmsmException(::message::message * pmessage)
 //      {
-//         __UNREFERENCED_PARAMETER(pmessage);
+//         UNREFERENCED_PARAMETER(pmessage);
 //         //::pointer<::axis::application>pApp = (::pointer<::axis::application>System;
 //         //pApp->post_thread_message(VMSM_EXCEPTION, wParam, lParam);
 //      }

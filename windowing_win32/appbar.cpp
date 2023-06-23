@@ -1,11 +1,10 @@
-﻿// created by Camilo <3CamiloSasukeThomasBorregaardSoerensen  - Honoring Thomas Borregaard Sørensen MY ONLY LORD
+// created by Camilo <3CamiloSasukeThomasBorregaardSoerensen  - Honoring Thomas Borregaard Soerensen MY ONLY LORD
 // recreated by Camilo 2021-02-01 23:31
 #include "framework.h"
-#undef USUAL_OPERATING_SYSTEM_SUPPRESSIONS
-#include "acme/primitive/geometry2d/_geometry2d.h"
-
-
-#include "acme/_operating_system.h"
+//#undef USUAL_OPERATING_SYSTEM_SUPPRESSIONS
+//#include "acme/primitive/geometry2d/_geometry2d.h"
+#include "acme/primitive/geometry2d/rectangle.h"
+#include "acme/_win32_gdi.h"
 
 
 #ifdef WINDOWS_DESKTOP
@@ -39,7 +38,10 @@ bool has_autohide_appbar(::u32 edge, const rectangle_i32 & mon)
 
       data.uEdge = edge;
 
-      copy(data.rc, mon);
+      data.rc.left = mon.left;
+      data.rc.top = mon.top;
+      data.rc.right = mon.right;
+      data.rc.bottom = mon.bottom;
 
       return SHAppBarMessage(0x0000000b, &data);
 

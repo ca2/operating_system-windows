@@ -1,4 +1,4 @@
-﻿#include "framework.h"
+#include "framework.h"
 #include "imm_client.h"
 #include "imm_context.h"
 #include "acme/constant/message.h"
@@ -389,7 +389,7 @@ void imm_client::_001OnIme(::message::message * pmessage)
 
          //      }
 
-         //      ::output_debug_string("\nWM_IME_COMPOSITION Compositè String Length = " + ::as_string(strComposition.length()));
+         //      ::output_debug_string("\nWM_IME_COMPOSITION Composite String Length = " + ::as_string(strComposition.length()));
 
          //      on_text_composition(strComposition);
 
@@ -752,7 +752,12 @@ int imm_client::on_text_composition_message(int iMessage)
 
       com.dwStyle = CFS_RECT;
 
-      copy(com.rcArea, rect2);
+      com.rcArea.left = rect2.left;
+      com.rcArea.top = rect2.top;
+      com.rcArea.right = rect2.right;
+      com.rcArea.bottom = rect2.bottom;
+
+      //copy(com.rcArea, rect2);
 
       //ShowCaret(get_handle());
 

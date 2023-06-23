@@ -536,7 +536,7 @@ namespace windows
                   if (strFile.case_insensitive_begins("resident_"))
                   {
 
-                     TRACE("resident_*");
+                     information("resident_*");
 
                   }
 
@@ -714,7 +714,7 @@ namespace windows
                   //if (strFile.case_insensitive_begins("resident_"))
                   //{
 
-                  //   TRACE("resident_*");
+                  //   information("resident_*");
                   //}
 
                   if (matches_wildcard_criteria_ci(listing.m_straPattern, pathName))
@@ -877,8 +877,8 @@ namespace windows
    ::file::path dir_context::time_square(const ::string & strPrefix, const ::string & strSuffix)
    {
 
-      __UNREFERENCED_PARAMETER(strPrefix);
-      __UNREFERENCED_PARAMETER(strSuffix);
+      UNREFERENCED_PARAMETER(strPrefix);
+      UNREFERENCED_PARAMETER(strSuffix);
       return time() / "time";
 
    }
@@ -996,7 +996,7 @@ namespace windows
 
                FormatMessageW(FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_SYSTEM, nullptr, dwError, 0, (WCHAR *) &pwszError, 8, nullptr);
 
-               //TRACE("dir_context::mk CreateDirectoryW last error(%d)=%s", dwError, pszError);
+               //information("dir_context::mk CreateDirectoryW last error(%d)=%s", dwError, pszError);
 
                ::LocalFree(pwszError);
 
@@ -1253,7 +1253,7 @@ namespace windows
    //   VERIFY(FindClose(hFind));
 
    //   // strip attribute of NORMAL bit, our API doesn't have a "normal" bit.
-   //   rStatus.m_attribute = (byte)(findFileData.dwFileAttributes & ~FILE_ATTRIBUTE_NORMAL);
+   //   rStatus.m_attribute = (::u8)(findFileData.dwFileAttributes & ~FILE_ATTRIBUTE_NORMAL);
 
    //   // get just the low ::u32 of the file size_i32
    //   ASSERT(findFileData.nFileSizeHigh == 0);

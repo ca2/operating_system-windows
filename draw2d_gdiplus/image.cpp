@@ -1,4 +1,4 @@
-﻿#include "framework.h"
+#include "framework.h"
 #include "image.h"
 #include "graphics.h"
 #include "bitmap.h"
@@ -87,7 +87,7 @@ namespace draw2d_gdiplus
       if (m_pbitmap.is_set()
             && m_pbitmap->get_os_data() != nullptr
             && ppixmap->m_sizeRaw == this->m_sizeRaw
-            && ppixmap->colorref() == colorref()
+            && ppixmap->image32() == image32()
             && ppixmap->scan_size() == scan_size())
       {
 
@@ -155,7 +155,7 @@ namespace draw2d_gdiplus
 
       //}
 
-      init(ppixmap->size(), ppixmap->colorref(), ppixmap->m_iScan);
+      init(ppixmap->size(), ppixmap->image32(), ppixmap->m_iScan);
 
       m_pgraphics->set(m_pbitmap);
 
@@ -172,7 +172,7 @@ namespace draw2d_gdiplus
    }
 
 
-   void image::create_ex(const ::size_i32& size, ::color32_t * pcolorref, int iScan, ::enum_flag eflagCreate, int iGoodStride, bool bPreserve)
+   void image::create_ex(const ::size_i32& size, ::image32_t * pimage32, int iScan, ::enum_flag eflagCreate, int iGoodStride, bool bPreserve)
    {
 
       if (m_pbitmap.is_set()
@@ -247,11 +247,11 @@ namespace draw2d_gdiplus
 
       //int iScan = 0;
 
-      //::color32_t * pcolorref = nullptr;
+      //::image32_t * pimage32 = nullptr;
 
-      pbitmap->create_bitmap(nullptr, size, (void**)&pcolorref, &iScan);
+      pbitmap->create_bitmap(nullptr, size, (void**)&pimage32, &iScan);
 
-      //if (!pbitmap->create_bitmap(nullptr, size, (void**)&pcolorref, &iScan))
+      //if (!pbitmap->create_bitmap(nullptr, size, (void**)&pimage32, &iScan))
       //{
 
       //   //destroy();
@@ -314,7 +314,7 @@ namespace draw2d_gdiplus
 
       m_pgraphics = pgraphics;
 
-      pixmap::init(size, pcolorref, iScan);
+      pixmap::init(size, pimage32, iScan);
 
       m_pgraphics->m_pimage = this;
       //m_sizeRaw.cx() = width;
@@ -394,9 +394,9 @@ namespace draw2d_gdiplus
 
    //   //int iScan = 0;
 
-   //   //::color32_t * pcolorref = nullptr;
+   //   //::image32_t * pimage32 = nullptr;
 
-   //   //if (!m_pbitmap->create_bitmap(nullptr, size, (void **)&pcolorref, &iScan))
+   //   //if (!m_pbitmap->create_bitmap(nullptr, size, (void **)&pimage32, &iScan))
    //   //{
 
    //   //   destroy();
@@ -414,7 +414,7 @@ namespace draw2d_gdiplus
 
    //   //}
 
-   //   //pixmap::init(size, pcolorref, iScan);
+   //   //pixmap::init(size, pimage32, iScan);
 
    //   //m_pgraphics->set(m_pbitmap);
    //   //m_pgraphics->set_origin(origin());
@@ -521,7 +521,7 @@ namespace draw2d_gdiplus
 
    ////   HDC hdc = __graphics(pgraphics)->get_hdc();
 
-   ////   bool bOk = GetDIBits(hdc, (HBITMAP)bitmap->get_os_data(), 0, height(), m_pcolorrefRaw, nullptr, DIB_RGB_COLORS) != false;
+   ////   bool bOk = GetDIBits(hdc, (HBITMAP)bitmap->get_os_data(), 0, height(), m_pimage32Raw, nullptr, DIB_RGB_COLORS) != false;
 
    ////   g()->set(bitmap);
 
@@ -643,9 +643,9 @@ namespace draw2d_gdiplus
 
          i32 scanSrc = pimageSrc->scan_size();
 
-         u8 * pdst = &((u8 *)pimageDst->colorref())[scanDst * rectangleTarget.top + rectangleTarget.left * sizeof(::color::color)];
+         u8 * pdst = &((u8 *)pimageDst->image32())[scanDst * rectangleTarget.top + rectangleTarget.left * sizeof(::color::color)];
 
-         u8 * psrc = &((u8 *)pimageSrc->colorref())[scanSrc * pointSrc.y() + pointSrc.x() * sizeof(::color::color)];
+         u8 * psrc = &((u8 *)pimageSrc->image32())[scanSrc * pointSrc.y() + pointSrc.x() * sizeof(::color::color)];
 
          ::color::color * pdst2;
 
@@ -739,7 +739,7 @@ namespace draw2d_gdiplus
 
 
 
-      pimage1->set_rgb(255, 255, 255);
+      pimage1->clear(color::white);
 
       {
       
@@ -779,7 +779,7 @@ namespace draw2d_gdiplus
 
       }*/
 
-      pimage2->fill(0, 0, 0, 0);
+      pimage2->fill_byte(0);
 
       {
 
@@ -834,14 +834,14 @@ namespace draw2d_gdiplus
 
       }
 
-      u8 * r1 = (u8 *)pimage1->colorref();
-      u8 * r2 = (u8 *)pimage2->colorref();
-      u8 * srcM = (u8 *)pimageM->colorref();
-      u8 * dest = (u8 *)colorref();
+      u8 * r1 = (u8 *)pimage1->image32();
+      u8 * r2 = (u8 *)pimage2->image32();
+      u8 * srcM = (u8 *)pimageM->image32();
+      u8 * dest = (u8 *)image32();
       i32 iSize = cx*cy;
 
-      byte b;
-      byte bMax;
+      ::u8 b;
+      ::u8 bMax;
       while (iSize-- > 0)
       {
          if (srcM[0] == 255)
@@ -851,11 +851,11 @@ namespace draw2d_gdiplus
          else
          {
             bMax = 0;
-            b = (byte)(r1[0] - r2[0]);
+            b = (::u8)(r1[0] - r2[0]);
             bMax = maximum(b, bMax);
-            b = (byte)(r1[1] - r2[1]);
+            b = (::u8)(r1[1] - r2[1]);
             bMax = maximum(b, bMax);
-            b = (byte)(r1[2] - r2[2]);
+            b = (::u8)(r1[2] - r2[2]);
             bMax = maximum(b, bMax);
             bMax = 255 - bMax;
          }

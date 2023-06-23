@@ -55,7 +55,7 @@
 //
 //   //{
 //
-//   //   __UNREFERENCED_PARAMETER(pcsz);
+//   //   UNREFERENCED_PARAMETER(pcsz);
 //
 //
 //   //   return false;

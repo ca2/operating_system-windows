@@ -1,4 +1,4 @@
-﻿#include "framework.h"
+#include "framework.h"
 #include "draw2d.h"
 #include "acme/primitive/primitive/memory.h"
 
@@ -122,7 +122,7 @@ namespace draw2d_gdiplus
             if (pfont->m_familya[iFamily].GetLastStatus() != Gdiplus::Ok)
             {
 
-               FORMATTED_WARNING("font family nok");
+               warning("font family nok");
 
             }
 

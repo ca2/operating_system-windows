@@ -837,7 +837,7 @@ pacmedir->system() / "config/production/mirror_status.txt";
                i++;
             }
          }
-         TRACE("\n");
+         information("\n");
          string strStatus;
 
          ::file::path pathTarget;
@@ -1238,7 +1238,7 @@ pacmedir->create(pathTarget.folder()))
          //straServer.add("east-api.ca2.cc");
 
 
-         //straStatus.add(unitext("025 releasing at netnode : América Latina (São Paulo, Brazil)"));
+         //straStatus.add(unitext("025 releasing at netnode : Amehrica Latina (San Paulo, Brazil)"));
          //straServer.add("la-api.ca2.cc");
 
 
@@ -1258,7 +1258,7 @@ pacmedir->create(pathTarget.folder()))
          //straServer.add("hk-api.ca2.cc");
 
 
-         //straStatus.add(unitext("084 releasing at netnode : Asia (日本、東京)"));
+         //straStatus.add(unitext("084 releasing at netnode : Asia (Japan, Tokyo)"));
          //straServer.add("asia-api.ca2.cc");
 
 
@@ -1969,7 +1969,7 @@ pacmedir->create(pathTarget.folder()))
 
          }
 
-         TRACE(strStatus + " " + strRelative);
+         information(strStatus + " " + strRelative);
 
       }
 
@@ -2911,7 +2911,7 @@ pacmedir->create(pathTarget.folder()))
          single_lock synchronouslock(&m_mutexStatus, true);
          m_straStatus.add(psz);
       }
-      TRACE("%s", psz);
+      information("%s", psz);
       m_pimpact->post_message(WM_USER, 1);
    }
 

@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 
 
 #ifdef _WINDOWS_
@@ -8,6 +8,7 @@
 
 #define boolean windows_boolean
 #undef ERROR
+#undef UNREFERENCED_PARAMETER
 
 
 #define NOMINMAX
@@ -130,7 +131,7 @@ typedef struct HKEY__ *HKEY;
 #define RGN_ERROR 0
 
 #undef ERROR
-#define ERROR(...) TRACE_LOG_ERROR(__VA_ARGS__)
+#define ERROR LOG_ERROR
 
 
 

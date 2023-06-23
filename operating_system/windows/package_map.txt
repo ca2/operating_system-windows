@@ -22,4 +22,5 @@ port/swscale=port/swscale-7
 port/swresample=port/swresample-4
 port/avutil=port/avutil-58
 port/libx264=port/libx264-164
+port/libx265=port/libx265
 port/assimp=port/assimp-vc143-mt

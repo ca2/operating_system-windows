@@ -1,4 +1,4 @@
-﻿#include "framework.h"
+#include "framework.h"
 #include "control.h"
 #include "source.h"
 #include "device.h"
@@ -48,8 +48,8 @@
 
       bool control::CreateWindows(::pointer<::user::interaction>pParent, i32 iStyle)
       {
-         __UNREFERENCED_PARAMETER(pParent);
-         __UNREFERENCED_PARAMETER(iStyle);
+         UNREFERENCED_PARAMETER(pParent);
+         UNREFERENCED_PARAMETER(iStyle);
          return true;
       }
 
@@ -449,7 +449,7 @@
                {
                   pslBalance->SetPos(nBalance);
                }
-               TRACE("Left %d Right %d nBalance %d\n", nLeftValue, nRightValue, nBalance);
+               information("Left %d Right %d nBalance %d\n", nLeftValue, nRightValue, nBalance);
             }
             else if(cChannels == 1)
             {
@@ -511,7 +511,7 @@
 
       /*bool control::OnNotify(u32 nID, LPNMHDR lpnmhdr)
       {
-      __UNREFERENCED_PARAMETER(nID);
+      UNREFERENCED_PARAMETER(nID);
       if(lpnmhdr->code == TB_BOTTOM ||
       lpnmhdr->code == TB_ENDTRACK ||
       lpnmhdr->code == TB_LINEDOWN ||
@@ -682,7 +682,7 @@
 
       void control::OnVHScroll(u32 nSBCode, u32 nPos, ::pointer<::user::interaction>pScrollBar)
       {
-         __UNREFERENCED_PARAMETER(nPos);
+         UNREFERENCED_PARAMETER(nPos);
          ::pointer<::user::interaction>pParamWnd = pScrollBar;
          if(nSBCode == SB_LEFT ||
                nSBCode == SB_ENDSCROLL ||
@@ -847,7 +847,7 @@
 
       bool control::OnCommand(WPARAM wParam, LPARAM lParam)
       {
-         __UNREFERENCED_PARAMETER(lParam);
+         UNREFERENCED_PARAMETER(lParam);
          WORD wNotifyCode = HIWORD(wParam);
          WORD wID = LOWORD(wParam);
 

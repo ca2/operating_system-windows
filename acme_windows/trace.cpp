@@ -1,4 +1,4 @@
-﻿#include "framework.h"
+#include "framework.h"
 #include "acme/exception/exception.h"
 #include "acme/_operating_system.h"
 #include <dde.h>
@@ -271,7 +271,7 @@ void TraceDDE(const ::string & pszPrefix, const MSG* pMsg)
          // format names.
       }
 
-      //TRACE(
+      //information(
       //   "%s: Advise item='%s', Format='%s', Ack=%d, Defer Update= %d\n",
       //   pszPrefix, szItem, szFormat, lpAdvise->fAckReq,
 

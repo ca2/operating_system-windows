@@ -632,7 +632,7 @@ FT_BEGIN_HEADER
   *     A handle to the source face.
   *
   *   tag ::
-  *     The four-byte tag of the table to load.  Use the value~0 if you want
+  *     The four-::u8 tag of the table to load.  Use the value~0 if you want
   *     to access the whole font file.  Otherwise, you can use one of the
   *     definitions found in the @FT_TRUETYPE_TAGS_H file, or forge a new
   *     one with @FT_MAKE_TAG.

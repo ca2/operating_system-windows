@@ -1,4 +1,4 @@
-﻿#include "framework.h"
+#include "framework.h"
 #undef USUAL_OPERATING_SYSTEM_SUPPRESSIONS
 #include "shell.h"
 #include "icon.h"
@@ -142,9 +142,9 @@ bool IsDibSection(HBITMAP bmp)
 //   // Set the alpha values for each pixel in the cursor so that
 //   // the complete cursor is semi-transparent.
 //
-//   int iStrideDst = dwWidth * sizeof(::color32_t);
+//   int iStrideDst = dwWidth * sizeof(::image32_t);
 //
-//   ::copy_colorref(pimage->get_data(), pimage->width(), pimage->height(), pimage->scan_size(), (const color32_t *) pBits, iStride);
+//   ::copy_image32(pimage->get_data(), pimage->width(), pimage->height(), pimage->scan_size(), (const image32_t *) pBits, iStride);
 //
 //   return pimage;
 //
@@ -176,13 +176,13 @@ bool IsDibSection(HBITMAP bmp)
          if (h < 0)
          {
          
-            ::vertical_swap_copy_colorref(pimage->data(), pimage->width(), pimage->height(), pimage->scan_size(), (const color32_t *)pBits, iStride);
+            ::vertical_swap_copy_image32(pimage->data(), pimage->width(), pimage->height(), pimage->scan_size(), (const image32_t *)pBits, iStride);
 
          }
          else
          {
 
-            ::copy_colorref(pimage->data(), pimage->width(), pimage->height(), pimage->scan_size(), (const color32_t *)pBits, iStride);
+            ::copy_image32(pimage->data(), pimage->width(), pimage->height(), pimage->scan_size(), (const image32_t *)pBits, iStride);
 
          }
 
@@ -215,7 +215,7 @@ bool IsDibSection(HBITMAP bmp)
    HDC hdc = ::CreateCompatibleDC(NULL);
 
 
-   if (!::GetDIBits(hdc, hbitmap, 0, bitmap.bmHeight, pimage->m_pcolorrefRaw, &bitmapinfo, DIB_RGB_COLORS))
+   if (!::GetDIBits(hdc, hbitmap, 0, bitmap.bmHeight, pimage->m_pimage32Raw, &bitmapinfo, DIB_RGB_COLORS))
    {
 
       ::DeleteDC(hdc);
@@ -1663,7 +1663,7 @@ namespace windowing_win32
    //         break;
    //      pshiidLast = lpshiid;
 
-   //      pshiid = (LPSHITEMID)(((byte *)lpshiid) + cb);
+   //      pshiid = (LPSHITEMID)(((::u8 *)lpshiid) + cb);
 
 
    //   }

@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 
 
 #undef INLINE
@@ -46,8 +46,7 @@
 #include <concepts>
 
 
-
-
+#include <tuple>
 
 
 #include <intrin.h>

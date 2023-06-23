@@ -494,7 +494,7 @@ namespace windows
    //   ::u32 cbFileInfo,
    //   ::u32 uFlags)
    //{
-   //   __UNREFERENCED_PARAMETER(cbFileInfo);
+   //   UNREFERENCED_PARAMETER(cbFileInfo);
    //   string strPath;
    //   UnicodeToACP(strPath, pszPath);
    //   SHFILEINFOA shia;

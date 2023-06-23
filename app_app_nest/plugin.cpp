@@ -250,7 +250,7 @@ install:
       try
       {
          iExitCode = papp->exit_thread();
-         //TRACE("Exit Code from retract_app %d (exit_thread %s)", iExitCode, typeid(*papp).raw_name());
+         //information("Exit Code from retract_app %d (exit_thread %s)", iExitCode, typeid(*papp).raw_name());
       }
       catch(...)
       {

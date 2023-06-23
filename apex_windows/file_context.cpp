@@ -1,4 +1,4 @@
-﻿#include "framework.h"
+#include "framework.h"
 #include "file_context.h"
 #include "dir_system.h"
 #include "node.h"
@@ -257,7 +257,7 @@ namespace apex_windows
 
                   strError.format("Failed to delete the file to move \"%s\" error=%d", psz, dwError);
 
-                  INFORMATION("%s", strError);
+                  information() << "%s", strError;
 
                }
 

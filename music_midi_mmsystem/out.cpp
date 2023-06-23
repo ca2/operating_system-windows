@@ -1,4 +1,4 @@
-﻿#include "framework.h"
+#include "framework.h"
 #include "out.h"
 #include "midi.h"
 #include "multimedia_mmsystem/translation.h"

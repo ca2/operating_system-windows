@@ -1,4 +1,4 @@
-﻿// created by Camilo 2021-01-31 06:25 BRT <3CamiloSasukeThomasBorregaardSoerensen
+// created by Camilo 2021-01-31 06:25 BRT <3CamiloSasukeThomasBorregaardSoerensen
 #include "framework.h"
 #undef USUAL_OPERATING_SYSTEM_SUPPRESSIONS
 #include "window.h"
@@ -54,9 +54,9 @@ namespace windowing_win32
 
       }
 
-      copy(m_rectangle, mi.rcMonitor);
+      m_rectangle = mi.rcMonitor;
 
-      copy(m_rectangleWorkspace, mi.rcWork);
+      m_rectangleWorkspace = mi.rcWork;
 
    }
 

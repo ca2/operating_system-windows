@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 /*-------------------------------------
 |   itemidlist class for operate     |
 | ITEMIDLIST data type and more       |
@@ -128,7 +128,7 @@ public:
    inline static LPCITEMIDLIST _next(LPCITEMIDLIST pidl)
    {
 
-      byte * pMem = (byte *)pidl;
+      ::u8 * pMem = (::u8 *)pidl;
 
       pMem += pidl->mkid.cb;
 

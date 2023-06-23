@@ -1,4 +1,4 @@
-﻿#include "framework.h"
+#include "framework.h"
 #include "file_memory_map.h"
 #include "acme_directory.h"
 #include "acme/parallelization/synchronous_lock.h"

@@ -1,4 +1,4 @@
-﻿#include "framework.h"
+#include "framework.h"
 #undef USUAL_OPERATING_SYSTEM_SUPPRESSIONS
 #include "os_context.h"
 #include "file_link.h"
@@ -397,7 +397,7 @@ namespace apex_windows
 
          key1.get("DefaultConnectionSettings", mem);
 
-         bool bAutoDetect = (((byte *)mem.data())[8] & 0x08) != 0;
+         bool bAutoDetect = (((::u8 *)mem.data())[8] & 0x08) != 0;
 
          if (!bAutoDetect)
          {
@@ -988,7 +988,7 @@ namespace apex_windows
    struct TOKEN_INFO
    {
       TOKEN_USER tokenUser;
-      byte buffer[SECURITY_MAX_SID_SIZE];
+      ::u8 buffer[SECURITY_MAX_SID_SIZE];
    };
 
 
@@ -1287,10 +1287,10 @@ namespace apex_windows
                  &u,             // Customizing information
                  dwLastError,               // Error code to display
                  &ulAuthPackage,  // Authorization package
-                 pvInAuthBlob,    // Credential byte array
+                 pvInAuthBlob,    // Credential ::u8 array
                  pvInAuthBlob.m_size,    // Size of credential input buffer
-                 &pvAuthBlob,     // Output credential byte array
-                 &pvAuthBlob.m_size,     // Size of credential byte array
+                 &pvAuthBlob,     // Output credential ::u8 array
+                 &pvAuthBlob.m_size,     // Size of credential ::u8 array
                  &fSave,          // Select the save check box.
                  //CREDUIWIN_SECURE_PROMPT |
                  CREDUIWIN_IN_CRED_ONLY |
@@ -1619,7 +1619,7 @@ namespace apex_windows
       {
          u32 lasterror = ::GetLastError();
          CloseServiceHandle(hdlSCM);
-         if (lasterror == 1060) // O serviço já não existe. Service already doesn't exist.
+         if (lasterror == 1060) // Service already doesn't exist.
             return; // do self-healing
          ::windows::throw_last_error(lasterror);
       }
@@ -3360,7 +3360,7 @@ namespace apex_windows
       //   if(!regkey.set(strTargetProgId, ""))
       //   {
 
-      //      TRACE("Failure to set .htm/OpenWithProgids");
+      //      information("Failure to set .htm/OpenWithProgids");
 
       //   }
 

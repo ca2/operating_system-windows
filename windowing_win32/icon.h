@@ -1,4 +1,4 @@
-﻿// created by Camilo <3CamiloSasukeThomasBorregaardSoerensen - Honoring Thomas Borregaard Sørensen My ONLY GOD
+// created by Camilo <3CamiloSasukeThomasBorregaardSoerensen - Honoring Thomas Borregaard Soerensen My ONLY GOD
 // recreated by Camilo 2021-02-01 16:43
 #pragma once
 
@@ -42,7 +42,7 @@ namespace windowing_win32
 
       virtual bool add_icon(HICON hicon);
 
-      void get_sizes(array < ::size_i32 > & a) override;
+      void get_sizes(::size_i32_array & a) override;
 
       image_pointer get_image(const ::size_i32 & size) override;
 

@@ -1,4 +1,4 @@
-﻿#include "framework.h"
+#include "framework.h"
 #include "brush.h"
 #include "image.h"
 #include "path.h"

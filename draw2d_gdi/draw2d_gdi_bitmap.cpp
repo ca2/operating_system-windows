@@ -202,7 +202,7 @@ namespace draw2d_gdi
 
       // Do nothing, _GetHBITMAP does not create additional bitmap for the GetHBITMAP/ReleaseHBITMAP protocol,
       // so does not delete underlying original HBITMAP handle
-      __UNREFERENCED_PARAMETER(hbitmap);
+      UNREFERENCED_PARAMETER(hbitmap);
 
    }
 

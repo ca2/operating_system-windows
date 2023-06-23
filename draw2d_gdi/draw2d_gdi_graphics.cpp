@@ -636,10 +636,10 @@ namespace draw2d_gdi
          ::ExtTextOut(get_handle1(), 0, 0, ETO_OPAQUE, rectangle, nullptr, 0, nullptr);
 
       }
-      else if (colorref_get_a_value(color32) == 255)
+      else if (color32_u8_opacity(color32) == 255)
       {
 
-         m_pimage->fill_rectangle(rectangle, argb(255, colorref_get_r_value(color32), colorref_get_g_value(color32), colorref_get_b_value(color32)));
+         m_pimage->fill_rectangle(rectangle, argb(255, color32_u8_red(color32), color32_u8_green(color32), color32_u8_blue(color32)));
 
       }
       else
@@ -1306,12 +1306,12 @@ namespace draw2d_gdi
             bf.SourceConstantAlpha = 0xFF;
             bf.AlphaFormat = AC_SRC_ALPHA;
             /*
-            ::color::color * pcolorref = GDI_GRAPHICS(pgraphicsSrc)->m_pimage->m_pcolorref;
+            ::color::color * pimage32 = GDI_GRAPHICS(pgraphicsSrc)->m_pimage->m_pcolorref;
             i32 cx = GDI_GRAPHICS(pgraphicsSrc)->m_pimage->cx;
             i32 cy = GDI_GRAPHICS(pgraphicsSrc)->m_pimage->cy;
             i32 scan = GDI_GRAPHICS(pgraphicsSrc)->m_pimage->scan;
 
-            ::color::color * pcolorref1 = m_pimage->m_pcolorref;
+            ::color::color * pimage321 = m_pimage->m_pcolorref;
             i32 cx1 = m_pimage->cx;
             i32 cy1 = m_pimage->cy;
             i32 scan1 = m_pimage->scan;
@@ -1325,8 +1325,8 @@ namespace draw2d_gdi
 
             for(int i = 0; i < nHeight; i++)
             {
-            byte * p = &((byte *) pcolorref)[scan * (i + ySrc) + xSrc * sizeof(::color::color)];
-            byte * p1 = &((byte *) pcolorref1)[scan1 * (i + y) + x * sizeof(::color::color)];
+            ::u8 * p = &((::u8 *) pimage32)[scan * (i + ySrc) + xSrc * sizeof(::color::color)];
+            ::u8 * p1 = &((::u8 *) pimage321)[scan1 * (i + y) + x * sizeof(::color::color)];
             for(int j = 0; j < nWidth; j++)
             {
             p1[0] = ((p[0] * p[3]) + ((255 - p[3]) * p1[0]))/ 255;
@@ -1357,13 +1357,13 @@ namespace draw2d_gdi
 
             /*      i64 iArea = pimage->area();
 
-            byte * pcolorref = (byte *) pimage->get_data();
+            ::u8 * pimage32 = (::u8 *) pimage->get_data();
 
             GdiFlush();
 
             for(int y = 0; y < pimage->cy; y++)
             {
-            byte * p = &pcolorref[pimage->scan * y];
+            ::u8 * p = &pimage32[pimage->scan * y];
             for(int x = 0; x < pimage->cx; x++)
             {
             p[0] = (p[0] * p[3] / 255);
@@ -1379,7 +1379,7 @@ namespace draw2d_gdi
 
             /*for(int y = 0; y < nHeight; y++)
             {
-            byte * p = &((byte *) pcolorref)[scan * (y + ySrc) + xSrc * sizeof(::color::color)];
+            ::u8 * p = &((::u8 *) pimage32)[scan * (y + ySrc) + xSrc * sizeof(::color::color)];
             for(int x = 0; x < nWidth; x++)
             {
             if(p[3] == 0)
@@ -1400,7 +1400,7 @@ namespace draw2d_gdi
 
             /*            for(int i = 0; i < nHeight; i++)
             {
-            byte * p1 = &((byte *) pcolorref1)[scan1 * (i + y) + x * sizeof(::color::color)];
+            ::u8 * p1 = &((::u8 *) pimage321)[scan1 * (i + y) + x * sizeof(::color::color)];
             for(int j = 0; j < nWidth;jx++)
             {
             if(p1[3] == 0)
@@ -1591,7 +1591,7 @@ namespace draw2d_gdi
 
          ::SetBkMode(m_hdc, TRANSPARENT);
 
-         ::SetTextColor(m_hdc, rgb(colorref_get_r_value(brush.m_color), colorref_get_g_value(brush.m_color), colorref_get_b_value(brush.m_color)));
+         ::SetTextColor(m_hdc, rgb(color32_u8_red(brush.m_color), color32_u8_green(brush.m_color), color32_u8_blue(brush.m_color)));
 
          return ::TextOutW(get_handle1(), (int) x, (int) y, wstr, (int) wstr.length()) != false;
 
@@ -1628,8 +1628,8 @@ namespace draw2d_gdi
          else
          {
 
-            //GDI_GRAPHICS(pimage->g())->SetTextColor(rgb(colorref_get_r_value(brush.m_color), colorref_get_g_value(brush.m_color), colorref_get_b_value(brush.m_color)));
-            GDI_GRAPHICS(pimage->g())->SetTextColor(rgb(colorref_get_b_value(brush.m_color), colorref_get_g_value(brush.m_color), colorref_get_r_value(brush.m_color)));
+            //GDI_GRAPHICS(pimage->g())->SetTextColor(rgb(color32_u8_red(brush.m_color), color32_u8_green(brush.m_color), color32_u8_blue(brush.m_color)));
+            GDI_GRAPHICS(pimage->g())->SetTextColor(rgb(color32_u8_blue(brush.m_color), color32_u8_green(brush.m_color), color32_u8_red(brush.m_color)));
 
          }
 
@@ -2696,7 +2696,7 @@ namespace draw2d_gdi
    }
 
 
-   int graphics::GetPath(LPPOINT lpPoints, byte * lpTypes, count nCount)
+   int graphics::GetPath(LPPOINT lpPoints, ::u8 * lpTypes, count nCount)
    {
 
       ASSERT(get_handle1() != nullptr);
@@ -3081,7 +3081,7 @@ namespace draw2d_gdi
    imageWork4.from(point_i32(maximum(0, m_pointAlphaBlend.x() - xDest), maximum(0, m_pointAlphaBlend.y() - yDest)),
    m_pimageAlphaBlend->get_graphics(), point_i32(maximum(0, xDest - m_pointAlphaBlend.x()), maximum(0, yDest - m_pointAlphaBlend.y())), size);
 
-   imageWork.channel_multiply(::color::e_channel_alpha, imageWork4);
+   imageWork.channel_multiply(::color::e_channel_opacity, imageWork4);
 
 
    keep < image > keep(&m_pimageAlphaBlend, nullptr, m_pimageAlphaBlend, true);
@@ -3147,7 +3147,7 @@ namespace draw2d_gdi
          image4.from(point_i32(maximum(0, m_pointAlphaBlend.x() - xDest), maximum(0, m_pointAlphaBlend.y() - yDest)),
                      m_pimageAlphaBlend->get_graphics(), point_i32(maximum(0, xDest - m_pointAlphaBlend.x()), maximum(0, yDest - m_pointAlphaBlend.y())), size);
 
-         pimage1->channel_multiply(::color::e_channel_alpha, image4);
+         pimage1->channel_multiply(::color::e_channel_opacity, image4);
 
 
          __keep(m_pimageAlphaBlend->m_pimpl, nullptr);
@@ -3597,7 +3597,7 @@ namespace draw2d_gdi
       if(bReset)
       {
 
-         pimage->fill(colorref_get_a_value(clr), colorref_get_r_value(clr) * colorref_get_a_value(clr) / 255, colorref_get_g_value(clr) * colorref_get_a_value(clr) / 255, colorref_get_b_value(clr) * colorref_get_a_value(clr) / 255);
+         pimage->fill(color32_u8_opacity(clr), color32_u8_red(clr) * color32_u8_opacity(clr) / 255, color32_u8_green(clr) * color32_u8_opacity(clr) / 255, color32_u8_blue(clr) * color32_u8_opacity(clr) / 255);
 
       }
 
@@ -3619,12 +3619,12 @@ namespace draw2d_gdi
          ::ExtTextOut(get_handle1(), 0, 0, ETO_OPAQUE, rectangle, nullptr, 0, nullptr);
 
       }
-      else if(colorref_get_a_value(color32) == 255)
+      else if(color32_u8_opacity(color32) == 255)
       {
 
          ::point_i32 point = GetViewportOrg();
 
-         m_pimage->fill_rectangle(rectangle, argb(255, colorref_get_r_value(color32), colorref_get_g_value(color32), colorref_get_b_value(color32)));
+         m_pimage->fill_rectangle(rectangle, argb(255, color32_u8_red(color32), color32_u8_green(color32), color32_u8_blue(color32)));
 
       }
       else
@@ -4507,7 +4507,7 @@ namespace draw2d_gdi
          HRGN hRgn = ::CreateRectRgn(0, 0, 0, 0);
          if (::GetClipRgn(get_handle1(), hRgn) < 0 || !::SelectClipRgn(get_handle2(), hRgn))
          {
-            TRACE("Error: unable to transfer clip region in graphics::SelectClipPath!\n");
+            information("Error: unable to transfer clip region in graphics::SelectClipPath!\n");
             bResult = false;
          }
          ::DeleteObject(hRgn);

@@ -351,7 +351,7 @@ Opened:
 
          //   if(::success != (mmr = xaudio7::translate(waveOutUnprepareHeader(m_hwaveout, wave_hdr(i), sizeof(WAVEHDR)))))
          //   {
-         //      TRACE("ERROR OPENING Unpreparing INPUT DEVICE buffer =%d", mmr);
+         //      information("ERROR OPENING Unpreparing INPUT DEVICE buffer =%d", mmr);
          //   }
 
          //   delete wave_hdr(i);
@@ -377,7 +377,7 @@ Opened:
 
          if(out_get_state() != e_state_playing)
          {
-            TRACE("ERROR out::BufferReady while out_get_state() != e_state_playing");
+            information("ERROR out::BufferReady while out_get_state() != e_state_playing");
             return;
          }
 
@@ -584,7 +584,7 @@ Opened:
          //   {
          //      if (::success != mmr)
          //      {
-         //         TRACE( "waveOutGetPosition() returned %lu", (u32)mmr);
+         //         information( "waveOutGetPosition() returned %lu", (u32)mmr);
          //         //      return MCIERR_DEVICE_NOT_READY;
          //         return 0;
          //      }
@@ -645,7 +645,7 @@ Opened:
          //      if (::success != mmr)
          //      {
 
-         //         TRACE( "waveOutGetPosition() returned %lu", (u32)mmr);
+         //         information( "waveOutGetPosition() returned %lu", (u32)mmr);
 
          //         return 0;
 

@@ -318,7 +318,7 @@ namespace windows
 
 //#if(_WIN32_WINNT >= 0x0500)
 //
-//      virtual bool SetLayeredWindowAttributes(::color::color crKey, byte bAlpha, u32 dwFlags);
+//      virtual bool SetLayeredWindowAttributes(::color::color crKey, ::u8 bAlpha, u32 dwFlags);
 //      virtual bool UpdateLayeredWindow(::draw2d::graphics * pDCDst, ::point_i32 *pptDst, SIZE_I32 *psize,
 //                                       ::draw2d::graphics * pDCSrc, ::point_i32 *pptSrc, ::color::color crKey, BLENDFUNCTION *pblend, u32 dwFlags);
 //
@@ -326,7 +326,7 @@ namespace windows
 
 //#if(_WIN32_WINNT >= 0x0501)
 //
-//      virtual bool GetLayeredWindowAttributes(::color::color *pcrKey, byte *pbAlpha, u32 *pdwFlags) const;
+//      virtual bool GetLayeredWindowAttributes(::color::color *pcrKey, ::u8 *pbAlpha, u32 *pdwFlags) const;
 //
 //#endif   // _WIN32_WINNT >= 0x0501
 

@@ -319,7 +319,7 @@ namespace windows
    //      if (m_puserinteraction->layout().is_moving())
    //      {
 
-   //         INFORMATION("Window is Moving :: on_message_move");
+   //         information() << "Window is Moving :: on_message_move";
 
    //      }
 
@@ -410,7 +410,7 @@ namespace windows
    //void interaction_impl::on_message_destroy(::message::message * pmessage)
    //{
 
-   //   __UNREFERENCED_PARAMETER(pmessage);
+   //   UNREFERENCED_PARAMETER(pmessage);
 
    //   //__release(m_pthreadUserImpl OBJECT_REFERENCE_COUNT_DEBUG_COMMA_THIS);
 
@@ -604,8 +604,8 @@ namespace windows
 
    //bool interaction_impl::_EnableToolTips(bool bEnable, ::u32 nFlag)
    //{
-   //   __UNREFERENCED_PARAMETER(bEnable);
-   //   __UNREFERENCED_PARAMETER(nFlag);
+   //   UNREFERENCED_PARAMETER(bEnable);
+   //   UNREFERENCED_PARAMETER(nFlag);
    //   return false;
    //}
 
@@ -660,7 +660,7 @@ namespace windows
 
 
 
-   //bool interaction_impl::SetLayeredWindowAttributes(color32_t crKey, byte bAlpha, u32 dwFlags)
+   //bool interaction_impl::SetLayeredWindowAttributes(color32_t crKey, ::u8 bAlpha, u32 dwFlags)
    //{
    //   ASSERT(_is_window());
    //   return ::SetLayeredWindowAttributes(get_handle(), crKey, bAlpha, dwFlags) != false;
@@ -677,7 +677,7 @@ namespace windows
    //}
 
 
-   //bool interaction_impl::GetLayeredWindowAttributes(color32_t *pcrKey, byte *pbAlpha, u32 *pdwFlags) const
+   //bool interaction_impl::GetLayeredWindowAttributes(color32_t *pcrKey, ::u8 *pbAlpha, u32 *pdwFlags) const
    //{
    //   ASSERT(::is_window(((interaction_impl *)this)->get_handle()));
    //   return ::GetLayeredWindowAttributes(((interaction_impl *)this)->get_handle(), pcrKey, pbAlpha, (LPDWORD)pdwFlags) != false;
@@ -706,8 +706,8 @@ namespace windows
 
    //void interaction_impl::WinHelp(uptr dwData, ::u32 nCmd)
    //{
-   //   __UNREFERENCED_PARAMETER(dwData);
-   //   __UNREFERENCED_PARAMETER(nCmd);
+   //   UNREFERENCED_PARAMETER(dwData);
+   //   UNREFERENCED_PARAMETER(nCmd);
    //   throw ::interface_only();
 
    //   /*      application* pApp = ::auraacmesystem();
@@ -722,7 +722,7 @@ namespace windows
    //   // need to use top level parent (for the case where get_handle() is in DLL)
    //   ::pointer<::user::interaction>pwindow = EnsureTopLevelParent();
 
-   //   TRACE(trace_category_appmsg, e_trace_level_warning, "WinHelp: pszHelpFile = '%s', dwData: $%lx, fuCommand: %d.\n", pApp->m_pszHelpFilePath, dwData, nCmd);
+   //   information(trace_category_appmsg, e_trace_level_warning, "WinHelp: pszHelpFile = '%s', dwData: $%lx, fuCommand: %d.\n", pApp->m_pszHelpFilePath, dwData, nCmd);
 
    //   // finally, run the Windows Help engine
    //   /* trans   if (!::WinHelp((pwindow)->get_handle(), pApp->m_pszHelpFilePath, nCmd, dwData))
@@ -750,7 +750,7 @@ namespace windows
    //// need to use top level parent (for the case where get_handle() is in DLL)
    //::pointer<::user::interaction>pwindow = EnsureTopLevelParent();
 
-   //TRACE(trace_category_appmsg, e_trace_level_warning, "HtmlHelp: pszHelpFile = '%s', dwData: $%lx, fuCommand: %d.\n", pApp->m_pszHelpFilePath, dwData, nCmd);
+   //information(trace_category_appmsg, e_trace_level_warning, "HtmlHelp: pszHelpFile = '%s', dwData: $%lx, fuCommand: %d.\n", pApp->m_pszHelpFilePath, dwData, nCmd);
 
    //// run the HTML Help engine
    ///* trans   if (!::aura::HtmlHelp((pwindow)->get_handle(), pApp->m_pszHelpFilePath, nCmd, dwData))
@@ -792,8 +792,8 @@ namespace windows
 
    //void interaction_impl::WinHelpInternal(uptr dwData, ::u32 nCmd)
    //{
-   //   __UNREFERENCED_PARAMETER(dwData);
-   //   __UNREFERENCED_PARAMETER(nCmd);
+   //   UNREFERENCED_PARAMETER(dwData);
+   //   UNREFERENCED_PARAMETER(nCmd);
    //   throw ::interface_only();
    //   /*
    //   application* pApp = ::auraacmesystem();
@@ -828,7 +828,7 @@ namespace windows
 
    //bool interaction_impl::OnCommand(::user::message * pusermessage)
    //{
-   //   __UNREFERENCED_PARAMETER(pusermessage);
+   //   UNREFERENCED_PARAMETER(pusermessage);
    //   return false;
    //}
 
@@ -1111,7 +1111,7 @@ namespace windows
 //   void interaction_impl::OnDevModeChange(__in char * pDeviceName)
 //
 //   {
-//      __UNREFERENCED_PARAMETER(pDeviceName);
+//      UNREFERENCED_PARAMETER(pDeviceName);
 //
 //      throw ::interface_only();
 //      /*application* pApp = ::auraacmesystem();
@@ -1220,7 +1220,7 @@ namespace windows
    //      if (m_puserinteraction->is_message_only_window() || m_puserinteraction.cast <::user::system_interaction >())
    //      {
 
-   //         TRACE("good : opt out!");
+   //         information("good : opt out!");
 
    //      }
 
@@ -1250,7 +1250,7 @@ namespace windows
    //void interaction_impl::_001OnProdevianSynch(::message::message * pmessage)
    //{
 
-   //   __UNREFERENCED_PARAMETER(pmessage);
+   //   UNREFERENCED_PARAMETER(pmessage);
 
    //}
 
@@ -1294,9 +1294,9 @@ namespace windows
 //      else if (*plpfn != oldWndProc)
 //      {
 //
-//         TRACE(trace_category_appmsg, e_trace_level_warning, "point_i32: Trying to use subclass_window with incorrect interaction_impl\n");
-//         TRACE(trace_category_appmsg, e_trace_level_warning, "\tderived class.\n");
-//         TRACE(trace_category_appmsg, e_trace_level_warning, "\toswindow_ = $%08X (nIDC=$%08X) is not a %hs.\n", (::u32)(uptr)oswindow, __get_dialog_control_id(oswindow), typeid(*this).name());
+//         information(trace_category_appmsg, e_trace_level_warning, "point_i32: Trying to use subclass_window with incorrect interaction_impl\n");
+//         information(trace_category_appmsg, e_trace_level_warning, "\tderived class.\n");
+//         information(trace_category_appmsg, e_trace_level_warning, "\toswindow_ = $%08X (nIDC=$%08X) is not a %hs.\n", (::u32)(uptr)oswindow, __get_dialog_control_id(oswindow), typeid(*this).name());
 //
 //         ASSERT(false);
 //
@@ -1439,7 +1439,7 @@ namespace windows
       //if (::IsIconic(m_oswindow))
       //{
 
-      //   INFORMATION("interaction_impl::rects_from_os window is iconic");
+      //   information() << "interaction_impl::rects_from_os window is iconic";
 
       //}
       //else
@@ -1454,7 +1454,7 @@ namespace windows
       //if (rectangleClient.size() != m_puserinteraction->m_size)
       //{
 
-      //   TRACE("ATTENTION!! Client Size <> Window Size");
+      //   information("ATTENTION!! Client Size <> Window Size");
 
       //}
 
@@ -2943,7 +2943,7 @@ namespace windows
    //      if (m_puserinteraction->layout().is_moving())
    //      {
 
-   //         INFORMATION("Window is Moving :: on_message_move");
+   //         information() << "Window is Moving :: on_message_move";
 
    //      }
 
@@ -3757,7 +3757,7 @@ namespace windows
 //      // TODO: Add your message handler code here and/or call default
 //      //if(bCalcValidRects)
 //      //{
-//      //   TRACE("1");
+//      //   information("1");
 //      //   pncsp->rgrc[0].left = lpncsp->lppos->x + 1;
 //
 //      //   pncsp->rgrc[0].right = lpncsp->lppos->x + lpncsp->lppos->cx - 1;
@@ -3776,7 +3776,7 @@ namespace windows
 //      //   prectangle->bottom--;
 //      //   prectangle->right--;
 //
-//      //   TRACE("2");
+//      //   information("2");
 //      //}
 //      const rectangle_i32& nonclient = pncsp->rgrc[0];
 //
@@ -4449,51 +4449,51 @@ void interaction_impl::set_tool_window(bool bSet)
 //            switch (message)
 //            {
 //            case e_message_create:
-//               TRACE("e_message_create wparam=%08x lparam=%08x", pusermessage->m_wparam, pusermessage->m_lparam);
+//               information("e_message_create wparam=%08x lparam=%08x", pusermessage->m_wparam, pusermessage->m_lparam);
 //
 //               break;
 //            case e_message_window_position_changing:
-//               TRACE("e_message_window_position_changing wparam=%08x lparam=%08x", pusermessage->m_wparam, pusermessage->m_lparam);
+//               information("e_message_window_position_changing wparam=%08x lparam=%08x", pusermessage->m_wparam, pusermessage->m_lparam);
 //
 //               break;
 //            case e_message_window_position_changed:
-//               TRACE("e_message_window_position_changed wparam=%08x lparam=%08x", pusermessage->m_wparam, pusermessage->m_lparam);
+//               information("e_message_window_position_changed wparam=%08x lparam=%08x", pusermessage->m_wparam, pusermessage->m_lparam);
 //
 //               break;
 //            case e_message_activate:
-//               TRACE("e_message_activate wparam=%08x lparam=%08x", pusermessage->m_wparam, pusermessage->m_lparam);
+//               information("e_message_activate wparam=%08x lparam=%08x", pusermessage->m_wparam, pusermessage->m_lparam);
 //
 //               break;
 //            case WM_ACTIVATEAPP:
-//               TRACE("WM_ACTIVATEAPP wparam=%08x lparam=%08x", pusermessage->m_wparam, pusermessage->m_lparam);
+//               information("WM_ACTIVATEAPP wparam=%08x lparam=%08x", pusermessage->m_wparam, pusermessage->m_lparam);
 //
 //               break;
 //            case e_message_mouse_activate:
-//               TRACE("e_message_mouse_activate wparam=%08x lparam=%08x", pusermessage->m_wparam, pusermessage->m_lparam);
+//               information("e_message_mouse_activate wparam=%08x lparam=%08x", pusermessage->m_wparam, pusermessage->m_lparam);
 //
 //               break;
 //            case e_message_non_client_activate:
-//               TRACE("e_message_non_client_activate wparam=%08x lparam=%08x", pusermessage->m_wparam, pusermessage->m_lparam);
+//               information("e_message_non_client_activate wparam=%08x lparam=%08x", pusermessage->m_wparam, pusermessage->m_lparam);
 //
 //               break;
 //            case e_message_set_focus:
-//               TRACE("e_message_set_focus wparam=%08x lparam=%08x", pusermessage->m_wparam, pusermessage->m_lparam);
+//               information("e_message_set_focus wparam=%08x lparam=%08x", pusermessage->m_wparam, pusermessage->m_lparam);
 //
 //               break;
 //            case e_message_kill_focus:
-//               TRACE("e_message_kill_focus wparam=%08x lparam=%08x", pusermessage->m_wparam, pusermessage->m_lparam);
+//               information("e_message_kill_focus wparam=%08x lparam=%08x", pusermessage->m_wparam, pusermessage->m_lparam);
 //
 //               break;
 //            case e_message_move:
-//               TRACE("e_message_move wparam=%08x lparam=%08x", pusermessage->m_wparam, pusermessage->m_lparam);
+//               information("e_message_move wparam=%08x lparam=%08x", pusermessage->m_wparam, pusermessage->m_lparam);
 //
 //               break;
 //            case e_message_size:
-//               TRACE("e_message_size wparam=%08x lparam=%08x", pusermessage->m_wparam, pusermessage->m_lparam);
+//               information("e_message_size wparam=%08x lparam=%08x", pusermessage->m_wparam, pusermessage->m_lparam);
 //
 //               break;
 //            default:
-//               TRACE("MESSAGE %08x wparam=%08x lparam=%08x", message, pusermessage->m_wparam, pusermessage->m_lparam);
+//               information("MESSAGE %08x wparam=%08x lparam=%08x", message, pusermessage->m_wparam, pusermessage->m_lparam);
 //
 //               break;
 //            }
@@ -4580,7 +4580,7 @@ void interaction_impl::set_tool_window(bool bSet)
 //         if (message == e_message_left_button_down)
 //         {
 //
-//            TRACE("e_message_left_button_down");
+//            information("e_message_left_button_down");
 //
 //            string strType = ::str().demangle(m_puserinteraction->type_name());
 //
@@ -4595,19 +4595,19 @@ void interaction_impl::set_tool_window(bool bSet)
 //         else if (message == e_message_left_button_up)
 //         {
 //
-//            TRACE("e_message_left_button_up");
+//            information("e_message_left_button_up");
 //
 //         }
 //         else if (message == e_message_non_client_left_button_up)
 //         {
 //
-//            TRACE("e_message_non_client_left_button_up");
+//            information("e_message_non_client_left_button_up");
 //
 //         }
 //         else if (message == e_message_non_client_left_button_down)
 //         {
 //
-//            TRACE("e_message_non_client_left_button_down");
+//            information("e_message_non_client_left_button_down");
 //
 //            string strType;
 //
@@ -4647,7 +4647,7 @@ void interaction_impl::set_tool_window(bool bSet)
 //            // handler has set it to another one.
 //            pmouse->m_ecursor = cursor_default;
 //
-//            //INFORMATION("windows::e_message_mouse_move(%d,%d)", pmouse->m_point.x(), pmouse->m_point.y());
+//            //information() << "windows::e_message_mouse_move(%d,%d)", pmouse->m_point.x(), pmouse->m_point.y();
 //
 //            string strType;
 //

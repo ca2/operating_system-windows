@@ -1,4 +1,4 @@
-﻿#include "framework.h"
+#include "framework.h"
 #include "serial.h"
 #include "acme/parallelization/mutex.h"
 #include "acme/parallelization/synchronous_lock.h"
@@ -605,7 +605,7 @@ namespace acme_windows
 
             }
 
-            // time_out occured on reading 1 byte
+            // time_out occured on reading 1 ::u8
             preempt(maximum(100_ηs, m_timeout.m_timeReadTimeoutConstant / 10));
 
             if (!::task_get_run())

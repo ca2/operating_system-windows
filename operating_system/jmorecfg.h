@@ -393,7 +393,7 @@ typedef enum { FALSE = 0, TRUE = 1 } boolean;
  * Ordering of RGB data in scanlines passed to or from the application.
  * If your application wants to deal with data in the order B,G,R, just
  * change these macros.  You can also deal with formats such as R,G,B,X
- * (one extra byte per pixel) by changing RGB_PIXELSIZE.  Note that changing
+ * (one extra ::u8 per pixel) by changing RGB_PIXELSIZE.  Note that changing
  * the offsets will also change the order in which colormap data is organized.
  * RESTRICTIONS:
  * 1. The sample applications cjpeg,djpeg do NOT support modified RGB formats.

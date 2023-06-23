@@ -446,9 +446,9 @@ namespace windows
 
          strMessage.Format("%s\n\nSystem Error Code: %d", strLastError, dwLastError);
 
-         TRACE(trace_category_appmsg, trace_level_warning, "Warning: Window creation failed: get_last_error returned:\n");
+         information(trace_category_appmsg, trace_level_warning, "Warning: Window creation failed: get_last_error returned:\n");
 
-         TRACE(trace_category_appmsg, trace_level_warning, "%s\n", strMessage);
+         information(trace_category_appmsg, trace_level_warning, "%s\n", strMessage);
 
          try
          {
@@ -456,13 +456,13 @@ namespace windows
             if (dwLastError == 0x0000057e)
             {
 
-               TRACE("Cannot create a top-level child interaction_impl.");
+               information("Cannot create a top-level child interaction_impl.");
 
             }
             else
             {
 
-               TRACE("%s", strMessage);
+               information("%s", strMessage);
 
             }
 
@@ -1289,7 +1289,7 @@ namespace windows
       // need to use top level parent (for the case where get_handle() is in DLL)
       __pointer(::user::interaction) pwindow = EnsureTopLevelParent();
 
-      TRACE(trace_category_appmsg, trace_level_warning, "WinHelp: pszHelpFile = '%s', dwData: $%lx, fuCommand: %d.\n", pApp->m_pszHelpFilePath, dwData, nCmd);
+      information(trace_category_appmsg, trace_level_warning, "WinHelp: pszHelpFile = '%s', dwData: $%lx, fuCommand: %d.\n", pApp->m_pszHelpFilePath, dwData, nCmd);
 
       // finally, run the Windows Help engine
       /* trans   if (!::WinHelp((pwindow)->get_handle(), pApp->m_pszHelpFilePath, nCmd, dwData))
@@ -1317,7 +1317,7 @@ namespace windows
    // need to use top level parent (for the case where get_handle() is in DLL)
    __pointer(::user::interaction) pwindow = EnsureTopLevelParent();
 
-   TRACE(trace_category_appmsg, trace_level_warning, "HtmlHelp: pszHelpFile = '%s', dwData: $%lx, fuCommand: %d.\n", pApp->m_pszHelpFilePath, dwData, nCmd);
+   information(trace_category_appmsg, trace_level_warning, "HtmlHelp: pszHelpFile = '%s', dwData: $%lx, fuCommand: %d.\n", pApp->m_pszHelpFilePath, dwData, nCmd);
 
    // run the HTML Help engine
    /* trans   if (!::aura::HtmlHelp((pwindow)->get_handle(), pApp->m_pszHelpFilePath, nCmd, dwData))
@@ -1435,31 +1435,31 @@ namespace windows
       if (emessage == e_message_enable)
       {
 
-         //TRACE("e_message_enable enable = " + string(pbase->m_wparam ? "true" : "false"));
+         //information("e_message_enable enable = " + string(pbase->m_wparam ? "true" : "false"));
 
       }
       if (emessage == WM_GETTEXTLENGTH)
       {
 
-         //TRACE("WM_GETTEXTLENGTH");
+         //information("WM_GETTEXTLENGTH");
 
       }
       if (emessage == WM_GETTEXT)
       {
 
-         //TRACE("WM_GETTEXT");
+         //information("WM_GETTEXT");
 
       }
       if (emessage == e_message_create)
       {
 
-         //TRACE("e_message_create");
+         //information("e_message_create");
 
       }
       if (emessage == e_message_nccreate)
       {
 
-         //TRACE("e_message_nccreate");
+         //information("e_message_nccreate");
 
       }
       if (emessage == e_message_size || emessage == e_message_move)
@@ -1538,11 +1538,11 @@ namespace windows
 
       //   if (m_puserinteraction->window_is_moving())
       //   {
-      //      //TRACE("moving: skip pre translate message");
+      //      //information("moving: skip pre translate message");
       //   }
       //   else if (m_puserinteraction->window_is_sizing())
       //   {
-      //      //TRACE("sizing: skip pre translate message");
+      //      //information("sizing: skip pre translate message");
       //   }
       //   else
       //   {
@@ -1600,51 +1600,51 @@ namespace windows
             switch (emessage)
             {
             case e_message_create:
-               TRACE("e_message_create wparam=%08x lparam=%08x", pbase->m_wparam, pbase->m_lparam);
+               information("e_message_create wparam=%08x lparam=%08x", pbase->m_wparam, pbase->m_lparam);
 
                break;
             case e_message_window_position_changing:
-               TRACE("e_message_window_position_changing wparam=%08x lparam=%08x", pbase->m_wparam, pbase->m_lparam);
+               information("e_message_window_position_changing wparam=%08x lparam=%08x", pbase->m_wparam, pbase->m_lparam);
 
                break;
             case e_message_window_position_changed:
-               TRACE("e_message_window_position_changed wparam=%08x lparam=%08x", pbase->m_wparam, pbase->m_lparam);
+               information("e_message_window_position_changed wparam=%08x lparam=%08x", pbase->m_wparam, pbase->m_lparam);
 
                break;
             case e_message_activate:
-               TRACE("e_message_activate wparam=%08x lparam=%08x", pbase->m_wparam, pbase->m_lparam);
+               information("e_message_activate wparam=%08x lparam=%08x", pbase->m_wparam, pbase->m_lparam);
 
                break;
             case WM_ACTIVATEAPP:
-               TRACE("WM_ACTIVATEAPP wparam=%08x lparam=%08x", pbase->m_wparam, pbase->m_lparam);
+               information("WM_ACTIVATEAPP wparam=%08x lparam=%08x", pbase->m_wparam, pbase->m_lparam);
 
                break;
             case e_message_mouse_activate:
-               TRACE("e_message_mouse_activate wparam=%08x lparam=%08x", pbase->m_wparam, pbase->m_lparam);
+               information("e_message_mouse_activate wparam=%08x lparam=%08x", pbase->m_wparam, pbase->m_lparam);
 
                break;
             case e_message_ncactivate:
-               TRACE("e_message_ncactivate wparam=%08x lparam=%08x", pbase->m_wparam, pbase->m_lparam);
+               information("e_message_ncactivate wparam=%08x lparam=%08x", pbase->m_wparam, pbase->m_lparam);
 
                break;
             case e_message_set_focus:
-               TRACE("e_message_set_focus wparam=%08x lparam=%08x", pbase->m_wparam, pbase->m_lparam);
+               information("e_message_set_focus wparam=%08x lparam=%08x", pbase->m_wparam, pbase->m_lparam);
 
                break;
             case e_message_kill_focus:
-               TRACE("e_message_kill_focus wparam=%08x lparam=%08x", pbase->m_wparam, pbase->m_lparam);
+               information("e_message_kill_focus wparam=%08x lparam=%08x", pbase->m_wparam, pbase->m_lparam);
 
                break;
             case e_message_move:
-               TRACE("e_message_move wparam=%08x lparam=%08x", pbase->m_wparam, pbase->m_lparam);
+               information("e_message_move wparam=%08x lparam=%08x", pbase->m_wparam, pbase->m_lparam);
 
                break;
             case e_message_size:
-               TRACE("e_message_size wparam=%08x lparam=%08x", pbase->m_wparam, pbase->m_lparam);
+               information("e_message_size wparam=%08x lparam=%08x", pbase->m_wparam, pbase->m_lparam);
 
                break;
             default:
-               TRACE("MESSAGE %08x wparam=%08x lparam=%08x", emessage, pbase->m_wparam, pbase->m_lparam);
+               information("MESSAGE %08x wparam=%08x lparam=%08x", emessage, pbase->m_wparam, pbase->m_lparam);
 
                break;
             }
@@ -1719,7 +1719,7 @@ namespace windows
          if (emessage == e_message_left_button_down)
          {
 
-            TRACE("e_message_left_button_down");
+            information("e_message_left_button_down");
 
          }
 
@@ -2396,7 +2396,7 @@ namespace windows
             || dynamic_cast <::user::system_interaction_impl *>(m_puserinteraction) != nullptr)
       {
 
-         TRACE("good : opt out!");
+         information("good : opt out!");
 
       }
 
@@ -2454,7 +2454,7 @@ namespace windows
          if (m_event.wait(tickTimeout).timeout())
          {
 
-            TRACE("print_window::time_out");
+            information("print_window::time_out");
 
          }
 
@@ -2667,7 +2667,7 @@ namespace windows
       if (hDC == nullptr)
       {
          // sometimes Win32 passes a nullptr hDC in the WM_CTLCOLOR message.
-         //         TRACE(trace_category_appmsg, trace_level_warning, "Warning: hDC is nullptr in interaction_impl::GrayCtlColor; WM_CTLCOLOR not processed.\n");
+         //         information(trace_category_appmsg, trace_level_warning, "Warning: hDC is nullptr in interaction_impl::GrayCtlColor; WM_CTLCOLOR not processed.\n");
          return FALSE;
       }
 
@@ -3090,9 +3090,9 @@ namespace windows
 
       {
 
-         TRACE(trace_level_warning, "point: Trying to use subclass_window with incorrect interaction_impl\n");
-         TRACE(trace_level_warning, "\tderived class.\n");
-         TRACE(trace_level_warning, "\toswindow_ = $%08X (nIDC=$%08X) is not a %hs.\n", (UINT)(uptr)oswindow, __get_dialog_control_id(oswindow), typeid(*this).name());
+         information(trace_level_warning, "point: Trying to use subclass_window with incorrect interaction_impl\n");
+         information(trace_level_warning, "\tderived class.\n");
+         information(trace_level_warning, "\toswindow_ = $%08X (nIDC=$%08X) is not a %hs.\n", (UINT)(uptr)oswindow, __get_dialog_control_id(oswindow), typeid(*this).name());
 
          ASSERT(FALSE);
 
@@ -3224,7 +3224,7 @@ namespace windows
       if (rectClient.size() != m_puserinteraction->m_size)
       {
 
-         TRACE("ATTENTION!! Client Size <> Window Size");
+         information("ATTENTION!! Client Size <> Window Size");
 
       }
 
@@ -5544,7 +5544,7 @@ lCallNextHook:
 
             HRESULT hr = tasklist->AddTab(get_handle());
 
-            TRACE("result = %d", hr);
+            information("result = %d", hr);
 
          }
          else

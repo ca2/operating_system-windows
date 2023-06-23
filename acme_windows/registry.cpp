@@ -1,4 +1,4 @@
-﻿#include "framework.h"
+#include "framework.h"
 #include "acme/exception/exception.h"
 #include "acme/primitive/primitive/memory.h"
 #include "acme/primitive/string/international.h"
@@ -203,7 +203,7 @@ namespace acme_windows
    bool registry::key::_value(void* pvalue, const ::scoped_string & scopedstrValueName, DWORD& dwType, DWORD& cbValue)
    {
 
-      if (ERROR_SUCCESS != ::RegQueryValueExW(m_hkey, wstring(scopedstrValueName), nullptr, (LPDWORD) &dwType, (byte*)pvalue, (LPDWORD) &cbValue))
+      if (ERROR_SUCCESS != ::RegQueryValueExW(m_hkey, wstring(scopedstrValueName), nullptr, (LPDWORD) &dwType, (::u8*)pvalue, (LPDWORD) &cbValue))
       {
 
          return false;
@@ -343,7 +343,7 @@ namespace acme_windows
    void registry::key::_set_value(const void* pvalue, const ::scoped_string & scopedstrValueName, DWORD dwType, DWORD cbValue)
    {
 
-      auto lstatus = RegSetValueExW(m_hkey, scopedstrValueName.is_empty() ? nullptr : wstring(scopedstrValueName), 0, dwType, (const byte *) pvalue, cbValue);
+      auto lstatus = RegSetValueExW(m_hkey, scopedstrValueName.is_empty() ? nullptr : wstring(scopedstrValueName), 0, dwType, (const ::u8 *) pvalue, cbValue);
 
       if (lstatus != ERROR_SUCCESS)
       {
@@ -654,7 +654,7 @@ namespace acme_windows
          
          auto pwsz = wstr.get_buffer(dwSize/sizeof(::wide_character));
 
-         lResult = RegQueryValueExW(hkey, wstring(pszSubKey), nullptr, &dwType, (byte *)(unichar *)pwsz, &dwSize);
+         lResult = RegQueryValueExW(hkey, wstring(pszSubKey), nullptr, &dwType, (::u8 *)(unichar *)pwsz, &dwSize);
 
          wstr.release_buffer(dwSize / sizeof(::wide_character));
 
@@ -713,7 +713,7 @@ int WinRegGetValueW(HKEY hkey, const ::wide_character * pSubKey, const ::wide_ch
    else
    {
 
-      LSTATUS lstatus = RegQueryValueExW(hkey, pSubKey, nullptr, pdwType, (byte *)pvData, pcbData);
+      LSTATUS lstatus = RegQueryValueExW(hkey, pSubKey, nullptr, pdwType, (::u8 *)pvData, pcbData);
 
       if (lstatus == ERROR_SUCCESS)
       {
@@ -865,7 +865,7 @@ bool CLASS_DECL_ACME_WINDOWS windows_get_in_proc_server(const ::string & pszCLSI
             DWORD dwSize = _MAX_PATH * sizeof(WCHAR);
             DWORD dwType;
             ::i32 lRes = ::RegQueryValueExW(hKeyInProc, L"",
-               nullptr, &dwType, (byte *)psz, &dwSize);
+               nullptr, &dwType, (::u8 *)psz, &dwSize);
 
             str.release_buffer();
             str = wstr;

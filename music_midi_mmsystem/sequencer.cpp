@@ -1,4 +1,4 @@
-﻿#include "framework.h"
+#include "framework.h"
 #include "sequencer.h"
 #include "midi.h"
 #include "acme/filesystem/file/binary_stream.h"
@@ -298,7 +298,7 @@ namespace music
                if (estatus != ::success)
                {
 
-                  TRACE("midiStreamProperty() -> %04X", (WORD)estatus.as_i64());
+                  information("midiStreamProperty() -> %04X", (WORD)estatus.as_i64());
 
                   close_device();
 
@@ -478,7 +478,7 @@ namespace music
                if (::success != m_psequence->m_estatusLastError)
                {
 
-                  WARNING("::music::midi::sequencer::stop -> midiStreamStop returned %lu", (u32)m_psequence->m_estatusLastError.as_i64());
+                  warning() <<"::music::midi::sequencer::stop -> midiStreamStop returned %lu", (u32)m_psequence->m_estatusLastError.as_i64();
 
                   m_psequence->m_flags.erase(sequence::e_flag_waiting);
 
@@ -530,7 +530,7 @@ namespace music
                   if (m_hstream == nullptr)
                   {
 
-                     TRACE("m_hmidi == nullptr!!!!");
+                     information("m_hmidi == nullptr!!!!");
 
                      return error_not_ready;
 
@@ -548,7 +548,7 @@ namespace music
                         if (!estatus)
                         {
 
-                           WARNING("midiStreamPosition() returned :" << estatus.as_i64());
+                           warning() <<"midiStreamPosition() returned :" << estatus.as_i64();
 
                            return estatus;
 
@@ -604,7 +604,7 @@ namespace music
                sequence::e_state_stopping != m_psequence->get_state())
             {
 
-               TRACE("seqTime(): State wrong! [is %u]", m_psequence->get_state());
+               information("seqTime(): State wrong! [is %u]", m_psequence->get_state());
 
                return error_unsupported_function;
 
@@ -623,7 +623,7 @@ namespace music
                   if (m_hstream == nullptr)
                   {
 
-                     TRACE("m_hmidi == nullptr!!!!");
+                     information("m_hmidi == nullptr!!!!");
 
                      return error_not_ready;
 
@@ -639,7 +639,7 @@ namespace music
                         if (::success != estatus)
                         {
 
-                           TRACE("midiStreamPosition() returned %lu", (u32)estatus.as_i64());
+                           information("midiStreamPosition() returned %lu", (u32)estatus.as_i64());
 
                            return error_not_ready;
 
@@ -653,7 +653,7 @@ namespace music
 
                      }
 
-                     time += integral_millisecond(mmtime.u.ms);
+                     time += millisecond_time(mmtime.u.ms);
 
                   }
 
@@ -918,7 +918,7 @@ namespace music
                default:
 
 
-                  TRACE("smfReadEvents returned %lu in callback!", (u32)estatus.as_i64());
+                  information("smfReadEvents returned %lu in callback!", (u32)estatus.as_i64());
 
                   m_psequence->set_state(sequence::e_state_stopping);
 
@@ -936,7 +936,7 @@ namespace music
          void sequencer::OnDone(HMIDISTRM hmidistream, LPMIDIHDR lpmidihdr)
          {
 
-            __UNREFERENCED_PARAMETER(hmidistream);
+            UNREFERENCED_PARAMETER(hmidistream);
 
             ASSERT(lpmidihdr != nullptr);
 
@@ -969,7 +969,7 @@ namespace music
 
                   m_psequence->m_flags.erase(sequence::e_flag_operation_end);
 
-                  TRACE("::music::midi::sequencer::MidiOutProc m_flags.has(flag_operation_end)\n");
+                  information("::music::midi::sequencer::MidiOutProc m_flags.has(flag_operation_end)\n");
 
                   post_midi_sequence_event(sequence::e_event_operation, lpmidihdr);
 
@@ -977,7 +977,7 @@ namespace music
                else if (m_iBuffersInMMSYSTEM <= 0)
                {
 
-                  TRACE("::music::midi::sequencer::MidiOutProc sequence::e_state_stopping == pSeq->m_psequence->get_state()\n");
+                  information("::music::midi::sequencer::MidiOutProc sequence::e_state_stopping == pSeq->m_psequence->get_state()\n");
 
                   music_midi_on_playback_end();
 
@@ -1010,7 +1010,7 @@ namespace music
 
                default:
 
-                  INFORMATION("sequencer::fill_buffer returned %lu", (u32)estatus.as_i64());
+                  information() << "sequencer::fill_buffer returned %lu", (u32)estatus.as_i64();
 
                   m_psequence->set_state(sequence::e_state_stopping);
 
@@ -1032,7 +1032,7 @@ namespace music
                   else
                   {
 
-                     INFORMATION("e_event_midi_stream_out : midiStreamOut returned %lu", (u32)estatus.as_i64());
+                     information() << "e_event_midi_stream_out : midiStreamOut returned %lu", (u32)estatus.as_i64();
 
                      m_psequence->set_state(sequence::e_state_stopping);
 
@@ -1132,8 +1132,8 @@ namespace music
          void CALLBACK sequencer::MidiOutProc(HMIDIOUT hmo, UINT wMsg, DWORD_PTR dwInstance, DWORD_PTR dwParam1, DWORD_PTR dwParam2)
          {
 
-            __UNREFERENCED_PARAMETER(hmo);
-            __UNREFERENCED_PARAMETER(dwParam2);
+            UNREFERENCED_PARAMETER(hmo);
+            UNREFERENCED_PARAMETER(dwParam2);
 
             LPMIDIHDR lpmidihdr     = (LPMIDIHDR) dwParam1;
             sequencer * psequence    = (sequencer *)dwInstance;
@@ -1210,7 +1210,7 @@ namespace music
             if (!estatus)
             {
 
-               TRACE("midiOutUnprepareHeader failed in seqBufferDone! (%lu)", (u32)estatus.as_i64());
+               information("midiOutUnprepareHeader failed in seqBufferDone! (%lu)", (u32)estatus.as_i64());
 
             }
 
@@ -1279,7 +1279,7 @@ namespace music
 
                //default:
 
-               //   INFORMATION("sequencer::fill_buffer returned %lu", (u32)estatus.m_estatus);
+               //   information() << "sequencer::fill_buffer returned %lu", (u32)estatus.m_estatus;
 
                //   m_psequence->set_state(sequence::e_state_stopping);
 
@@ -1301,7 +1301,7 @@ namespace music
                //   else
                //   {
 
-               //      INFORMATION("e_event_midi_stream_out : midiStreamOut returned %lu", (u32)estatus.m_estatus);
+               //      information() << "e_event_midi_stream_out : midiStreamOut returned %lu", (u32)estatus.m_estatus;
 
                //      m_psequence->set_state(sequence::e_state_stopping);
 
@@ -1444,7 +1444,7 @@ namespace music
          void sequencer::midi_out_open()
          {
 
-            TRACE("::music::midi::mmsystem::player::SendReset : (0)");
+            information("::music::midi::mmsystem::player::SendReset : (0)");
 
             m_hmidiout = nullptr;
 
@@ -1480,7 +1480,7 @@ namespace music
 
             }
 
-            TRACE("::music::midi::mmsystem::player::SendReset : (0)");
+            information("::music::midi::mmsystem::player::SendReset : (0)");
 
             ::e_status estatus = ::success;
 
@@ -1658,7 +1658,7 @@ namespace music
             if (!estatus)
             {
 
-               ERROR("midiOutClose error");
+               error() <<"midiOutClose error";
 
             }
 
@@ -1672,7 +1672,7 @@ namespace music
 
             synchronous_lock synchronouslock(((midi *) m_pmidi->m_pMidi)->get_midi_mutex());
 
-            TRACE("::music::midi::mmsystem::player::SendReset : (0)");
+            information("::music::midi::mmsystem::player::SendReset : (0)");
 
             HMIDIOUT hmidiout = nullptr;
 
@@ -1778,7 +1778,7 @@ namespace music
 
                ASSERT(m_iBuffersInMMSYSTEM <= 0);
 
-               INFORMATION("music_midi_on_playback_end");
+               information() << "music_midi_on_playback_end";
 
                close_device();
 
@@ -1801,8 +1801,8 @@ namespace music
          )
          {
 
-            __UNREFERENCED_PARAMETER(tkMax);
-            __UNREFERENCED_PARAMETER(cbPrerollNomimalMax);
+            UNREFERENCED_PARAMETER(tkMax);
+            UNREFERENCED_PARAMETER(cbPrerollNomimalMax);
 
             ::e_status estatus;
 
@@ -1823,7 +1823,7 @@ namespace music
             }
 
             m_psequence->m_pfile->m_memstorageF1.set_size(iSize);
-            byte * lpbParam;
+            ::u8 * lpbParam;
             LPDWORD lpdwType;
             file::midi_stream_event_header * pheader;
             pheader = (file::midi_stream_event_header *)&m_psequence->m_pfile->m_memstorageF1.data()[0];
@@ -1856,7 +1856,7 @@ namespace music
             if (!estatus)
             {
 
-               WARNING("smfInsertParmData[2] : " << estatus.as_i64());
+               warning() <<"smfInsertParmData[2] : " << estatus.as_i64();
 
             }
 
@@ -1873,7 +1873,7 @@ namespace music
             u32 cbPrerollNominalMax)
          {
 
-            __UNREFERENCED_PARAMETER(tkMax);
+            UNREFERENCED_PARAMETER(tkMax);
 
             if (pevent->GetFlags() & 1)
             {
@@ -1910,7 +1910,7 @@ namespace music
 
                   i32 iProgramChange = pevent->GetChB1();
 
-                  m_keyframe.rbProgram[iTrack] = (byte)iProgramChange;
+                  m_keyframe.rbProgram[iTrack] = (::u8)iProgramChange;
 
                }
                else if (pevent->GetType() == control_change)
@@ -1925,7 +1925,7 @@ namespace music
                   if (iController >= 0 && iController < 120)
                   {
 
-                     m_keyframe.rbControl[iTrack][iController] = (byte)iControllerValue;
+                     m_keyframe.rbControl[iTrack][iController] = (::u8)iControllerValue;
 
                   }
 
@@ -1986,7 +1986,7 @@ namespace music
 
                      }
 
-                     pevent->SetNotePitch((byte)iNotePitch);
+                     pevent->SetNotePitch((::u8)iNotePitch);
 
                   }
 
@@ -2022,7 +2022,7 @@ namespace music
                if (pevent->size() != 3)
                {
 
-                  TRACE("smfReadEvents: Corrupt tempo event");
+                  information("smfReadEvents: Corrupt tempo event");
 
                   return error_invalid_file;
 
@@ -2075,7 +2075,7 @@ namespace music
             //         smfrc = smfInsertParmData(pSmf, pEvent->tkDelta, lpmh);
             //            if (::success != smfrc)
             //            {
-            //                TRACE( "smfInsertParmData[2] %u", (DWORD)smfrc);
+            //                information( "smfInsertParmData[2] %u", (DWORD)smfrc);
             //                return smfrc;
             //            }
 
@@ -2085,7 +2085,7 @@ namespace music
             //smfrc = smfInsertParmData(pSmf, pEvent->tkDelta, lpmh);
             //if (::success != smfrc)
             //{
-            //    TRACE( "smfInsertParmData[2] %u", (DWORD)smfrc);
+            //    information( "smfInsertParmData[2] %u", (DWORD)smfrc);
             //    return smfrc;
             //}
             //         _CrtSetReportFile(_CRT_WARN, debugFile);
@@ -2176,7 +2176,7 @@ namespace music
                   if (!estatus)
                   {
 
-                     WARNING("smfInsertParmData[2] : " << estatus.as_i64());
+                     warning() <<"smfInsertParmData[2] : " << estatus.as_i64();
 
                      return estatus;
 
@@ -2254,7 +2254,7 @@ namespace music
                /* If we got here with a real delta, that means smfReadEvents screwed
                ** up calculating left space and we should flag it somehow.
                */
-               TRACE("Can't fit initial piece of SysEx into file!");
+               information("Can't fit initial piece of SysEx into file!");
                return error_invalid_file;
 
             }
@@ -2334,7 +2334,7 @@ namespace music
                /* If we got here with a real delta, that means smfReadEvents screwed
                ** up calculating left space and we should flag it somehow.
                */
-               TRACE("Can't fit initial piece of SysEx into file!");
+               information("Can't fit initial piece of SysEx into file!");
                return error_invalid_file;
             }
 
@@ -2386,7 +2386,7 @@ namespace music
 
             //if (m_psequence->m_pfile->m_flags & InsertSysEx)
             //{
-            //   byte* lpb = (byte*)lpdw;
+            //   ::u8* lpb = (::u8*)lpdw;
             //   //*lpb++ = sys_ex;
             //   m_psequence->m_pfile->m_flags &= ~InsertSysEx;
             //   //dwLength;
@@ -2396,15 +2396,15 @@ namespace music
 
             if (dwLength & 0x80000000L)
             {
-               TRACE("dwLength %08lX  dwBytesRecorded %08lX  dwBufferLength %08lX", dwLength, lpmh->dwBytesRecorded, lpmh->dwBufferLength);
-               TRACE("cbPendingUserEvent %08lX  dwPendingUserEvent %08lX dwRounded %08lX", m_psequence->m_pfile->m_cbPendingUserEvent, m_psequence->m_pfile->m_dwPendingUserEvent, dwRounded);
-               TRACE("offset into MIDI image %08lX", (DWORD)(m_psequence->m_pfile->m_hpbPendingUserEvent - m_psequence->m_pfile->GetImage()));
-               TRACE("!hmemcpy is about to fault");
+               information("dwLength %08lX  dwBytesRecorded %08lX  dwBufferLength %08lX", dwLength, lpmh->dwBytesRecorded, lpmh->dwBufferLength);
+               information("cbPendingUserEvent %08lX  dwPendingUserEvent %08lX dwRounded %08lX", m_psequence->m_pfile->m_cbPendingUserEvent, m_psequence->m_pfile->m_dwPendingUserEvent, dwRounded);
+               information("offset into MIDI image %08lX", (DWORD)(m_psequence->m_pfile->m_hpbPendingUserEvent - m_psequence->m_pfile->GetImage()));
+               information("!hmemcpy is about to fault");
             }
 
             memory_copy(lpdw, m_psequence->m_pfile->m_hpbPendingUserEvent, dwLength);
 
-            byte * pb = (byte *)lpdw;
+            ::u8 * pb = (::u8 *)lpdw;
 
             string strMessageText;
 
@@ -2417,7 +2417,7 @@ namespace music
 
             }
 
-            FORMATTED_INFORMATION("sysex:%s", strMessageText.c_str());
+            information("sysex:%s", strMessageText.c_str());
 
             auto remainingBytes = dwRounded - dwLength;
 
@@ -2463,7 +2463,7 @@ namespace music
                if (!estatus)
                {
 
-                  WARNING("smfInsertParmData() -> : " << estatus.as_i64());
+                  warning() <<"smfInsertParmData() -> : " << estatus.as_i64();
 
                   return estatus;
 
@@ -2592,12 +2592,12 @@ namespace music
 
                            clip(0, 127, m_psequence->m_iaRefVolume[iTrack]);
 
-                           byte bVolume = (byte)(m_psequence->m_iaRefVolume[iTrack] * maximum(0.0, minimum(1.0, dVolume)));
+                           ::u8 bVolume = (::u8)(m_psequence->m_iaRefVolume[iTrack] * maximum(0.0, minimum(1.0, dVolume)));
 
                            if (abs((int)m_keyframe.rbControl[iTrack][e_control_change_volume] - (int)bVolume) < 3)
                            {
 
-                              TRACE("too few difference!! opt-ed out");
+                              information("too few difference!! opt-ed out");
 
                            }
                            else

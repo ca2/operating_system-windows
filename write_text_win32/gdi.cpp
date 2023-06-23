@@ -65,7 +65,7 @@ namespace windowing_win32
 
       int iStrideDst = dwWidth * sizeof(color32_t);
 
-      ::copy_colorref((color32_t *)pBits, pimage->width(), pimage->height(), iStrideDst, pimage->get_data(), pimage->scan_size());
+      ::copy_image32((color32_t *)pBits, pimage->width(), pimage->height(), iStrideDst, pimage->get_data(), pimage->scan_size());
 
       return hBitmap;
 
@@ -146,7 +146,7 @@ namespace windowing_win32
 
       }
 
-      ::copy_colorref(ppixmap, &pixmap);
+      ::copy_image32(ppixmap, &pixmap);
 
       return hbitmap;
 
@@ -172,7 +172,7 @@ namespace windowing_win32
 
       HDC hdcScreen = GetDC(nullptr);
 
-      hbmp = CreateDIBSection(hdcScreen, &bminfo, DIB_RGB_COLORS, (void **)&ppixmap->m_pcolorrefRaw, nullptr, 0);
+      hbmp = CreateDIBSection(hdcScreen, &bminfo, DIB_RGB_COLORS, (void **)&ppixmap->m_pimage32Raw, nullptr, 0);
 
       ReleaseDC(nullptr, hdcScreen);
 
@@ -249,9 +249,9 @@ namespace windowing_win32
       bitmapinfo.bmiHeader.biCompression = BI_RGB;
       bitmapinfo.bmiHeader.biSizeImage = (::i32)(size.cy() * iScan);
 
-      color32_t * pcolorref = nullptr;
+      color32_t * pimage32 = nullptr;
 
-      HBITMAP hbitmap = ::CreateDIBSection(nullptr, &bitmapinfo, DIB_RGB_COLORS, (void **)&pcolorref, nullptr, 0);
+      HBITMAP hbitmap = ::CreateDIBSection(nullptr, &bitmapinfo, DIB_RGB_COLORS, (void **)&pimage32, nullptr, 0);
 
       if (hbitmap == nullptr)
       {
@@ -270,7 +270,7 @@ namespace windowing_win32
       if (ppdata)
       {
 
-         *ppdata = pcolorref;
+         *ppdata = pimage32;
 
       }
 

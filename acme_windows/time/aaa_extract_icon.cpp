@@ -24,10 +24,10 @@ struct extract_resource_icon
 
 typedef struct
 {
-   byte        bWidth;          // Width, in pixels, of the image
-   byte        bHeight;         // Height, in pixels, of the image
-   byte        bColorCount;     // Number of colors in image (0 if >=8bpp)
-   byte        bReserved;       // Reserved ( must be 0)
+   ::u8        bWidth;          // Width, in pixels, of the image
+   ::u8        bHeight;         // Height, in pixels, of the image
+   ::u8        bColorCount;     // Number of colors in image (0 if >=8bpp)
+   ::u8        bReserved;       // Reserved ( must be 0)
    ::u16        wPlanes;         // Color Planes
    ::u16        wBitCount;       // Bits per pixel
    ::u32       dwBytesInRes;    // How many bytes in this resource?
@@ -46,18 +46,18 @@ typedef struct
 {
    BITMAPINFOHEADER   icHeader;      // DIB header
    RGBQUAD         icColors[1];   // Color table
-   byte            icXOR[1];      // DIB bits for XOR mask
-   byte            icAND[1];      // DIB bits for AND mask
+   ::u8            icXOR[1];      // DIB bits for XOR mask
+   ::u8            icAND[1];      // DIB bits for AND mask
 } ICONIMAGE, * LPICONIMAGE;
 
 #pragma pack( push )
 #pragma pack( 2 )
 typedef struct
 {
-   byte   bWidth;               // Width, in pixels, of the image
-   byte   bHeight;              // Height, in pixels, of the image
-   byte   bColorCount;          // Number of colors in image (0 if >=8bpp)
-   byte   bReserved;            // Reserved
+   ::u8   bWidth;               // Width, in pixels, of the image
+   ::u8   bHeight;              // Height, in pixels, of the image
+   ::u8   bColorCount;          // Number of colors in image (0 if >=8bpp)
+   ::u8   bReserved;            // Reserved
    ::u16   wPlanes;              // Color Planes
    ::u16   wBitCount;            // Bits per pixel
    ::u32   dwBytesInRes;         // how many bytes in this resource?

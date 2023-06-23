@@ -20,7 +20,7 @@ extern "C" {
 # endif
 
 /*
- * TRACE CATEGORIES
+ * information CATEGORIES
  */
 
 /*
@@ -67,7 +67,7 @@ int OSSL_trace_get_category_num(const char *name);
 const char *OSSL_trace_get_category_name(int num);
 
 /*
- * TRACE CONSUMERS
+ * information CONSUMERS
  */
 
 /*
@@ -125,7 +125,7 @@ typedef size_t (*OSSL_trace_cb)(const char *buffer, size_t count,
 int OSSL_trace_set_callback(int category, OSSL_trace_cb callback, void *data);
 
 /*
- * TRACE PRODUCERS
+ * information PRODUCERS
  */
 
 /*

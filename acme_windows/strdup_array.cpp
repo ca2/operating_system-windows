@@ -1,4 +1,4 @@
-﻿#include "framework.h"
+#include "framework.h"
 #include "node.h"
 #include "acme/primitive/collection/strdup_array.h"
 
@@ -19,7 +19,7 @@ namespace acme_windows
 
       }
 
-      // Variable strings are separated by NULL byte, and the block is terminated by a NULL byte.
+      // Variable strings are separated by NULL ::u8, and the block is terminated by a NULL ::u8.
 
       for (auto lpszVariable = (LPWSTR)lpvEnv; *lpszVariable; lpszVariable++)
       {

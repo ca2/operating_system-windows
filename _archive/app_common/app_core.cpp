@@ -10,7 +10,7 @@ extern "C" i32 app_core_main(HINSTANCE hinstance, HINSTANCE hPrevInstance, LPTST
 
    //MessageBox(nullptr, lpCmdLine, "msg", 0);
 
-   __UNREFERENCED_PARAMETER(lpCmdLine);
+   UNREFERENCED_PARAMETER(lpCmdLine);
 
    ::aura::system * psystem                     = g_pfn_create_system();
 

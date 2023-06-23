@@ -20,8 +20,8 @@
 //                      LPTSTR lpCmdLine,
 //                      int nCmdShow)
 //{
-//   __UNREFERENCED_PARAMETER(hPrevInstance);
-//   __UNREFERENCED_PARAMETER(lpCmdLine);
+//   UNREFERENCED_PARAMETER(hPrevInstance);
+//   UNREFERENCED_PARAMETER(lpCmdLine);
 
 int APIENTRY app_chromium_deferred_run(HINSTANCE hInstance,
                                        HINSTANCE hPrevInstance,

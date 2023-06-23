@@ -26,7 +26,7 @@ namespace apex_windows
       if (err != 0)
       {
 
-         INFORMATION("Failed in call to WSAStartup, return value was %d\n", err);
+         information() << "Failed in call to WSAStartup, return value was %d\n", err;
 
          throw ::exception(error_not_supported);
 
@@ -36,10 +36,10 @@ namespace apex_windows
       m_bWinsockInitialized = true;
 
       //Code requires at least Winsock 1.1
-      if ((__LOBYTE(wsaData.wVersion) != 1) || (HIBYTE(wsaData.wVersion) != 1))
+      if ((lower_u8(wsaData.wVersion) != 1) || (HIBYTE(wsaData.wVersion) != 1))
       {
 
-         INFORMATION("Failed to find a usable winsock stack which supports Winsock 1.1\n");
+         information() << "Failed to find a usable winsock stack which supports Winsock 1.1\n";
 
          throw ::exception(error_not_supported);
 
@@ -59,7 +59,7 @@ namespace apex_windows
    char szHostname[256];
    if (gethostname(szHostname, sizeof(szHostname)))
    {
-   TRACE("Failed in call to gethostname, WSAGetLastError returns %d\n", WSAGetLastError());
+   information("Failed in call to gethostname, WSAGetLastError returns %d\n", WSAGetLastError());
    return false;
    }
 
@@ -67,14 +67,14 @@ namespace apex_windows
    HOSTENT* pHostEnt = gethostbyname(szHostname);
    if (pHostEnt == nullptr)
    {
-   TRACE("Failed in call to gethostbyname, WSAGetLastError returns %d\n", WSAGetLastError());
+   information("Failed in call to gethostbyname, WSAGetLastError returns %d\n", WSAGetLastError());
    return false;
    }
 
    //check the length of the IP adress
    if (pHostEnt->h_length != 4)
    {
-   TRACE("IP address returned is not 32 bits !!\n");
+   information("IP address returned is not 32 bits !!\n");
    return false;
    }
 
@@ -107,7 +107,7 @@ namespace apex_windows
       if (gethostname(szHostname, sizeof(szHostname)))
       {
 
-         INFORMATION("Failed in call to gethostname, WSAGetLastError returns %d\n", WSAGetLastError());
+         information() << "Failed in call to gethostname, WSAGetLastError returns %d\n", WSAGetLastError();
 
          return false;
 

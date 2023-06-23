@@ -1,4 +1,4 @@
-﻿// Created by camilo on 2022-02-20 12:22 <3ThomasBorregaardS�rensen!!
+// Created by camilo on 2022-02-20 12:22 <3ThomasBorregaardSorensen!!
 #include "framework.h"
 #include "devices.h"
 #include "master_device_listener.h"
@@ -124,7 +124,7 @@ namespace windowing_win32
          
          auto lasterror = ::GetLastError();
          
-         ERROR("RegisterDeviceNotification");
+         error() <<"RegisterDeviceNotification";
          
          throw exception(::windows::last_error_status(lasterror));
 

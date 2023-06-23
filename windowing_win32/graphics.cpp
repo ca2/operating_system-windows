@@ -362,7 +362,7 @@ namespace draw2d_gdiplus
          catch(...)
          {
 
-            TRACE("graphics::set(::draw2d::bitmap *) : Failed to delete Gdiplus::Graphics");
+            information("graphics::set(::draw2d::bitmap *) : Failed to delete Gdiplus::Graphics");
 
          }
 
@@ -2080,7 +2080,7 @@ namespace draw2d_gdiplus
 
          m_pimage->map();
 
-         m_pimage->colorref()[(int) point.x() + (int) point.y() * m_pimage->scan_size()] = color;
+         m_pimage->image32()[(int) point.x() + (int) point.y() * m_pimage->scan_size()] = color;
 
       }
       else
@@ -2103,13 +2103,13 @@ namespace draw2d_gdiplus
 
          m_pimage->map();
 
-         ::color::color color = m_pimage->colorref()[(int) point.x() + (int) point.y() * m_pimage->scan_size()];
+         ::color::color color = m_pimage->image32()[(int) point.x() + (int) point.y() * m_pimage->scan_size()];
 
          color.m_iR = (int) (color.m_iR * (1.0 - colorChange.da()) + colorChange.m_iR * colorChange.da());
          color.m_iG = (int) (color.m_iG * (1.0 - colorChange.da()) + colorChange.m_iG * colorChange.da());
          color.m_iB = (int) (color.m_iB * (1.0 - colorChange.da()) + colorChange.m_iB * colorChange.da());
 
-         m_pimage->colorref()[(int) point.x() + (int) point.y() * m_pimage->scan_size()] = color;
+         m_pimage->image32()[(int) point.x() + (int) point.y() * m_pimage->scan_size()] = color;
          //colorCurrent.m_iA = colorCurrent.m_iA * (1.0 - color.da()) + color.m_iR * color.da();
 
       }
@@ -2983,7 +2983,7 @@ namespace draw2d_gdiplus
    }
 
 
-   i32 graphics::GetPath(::point_f64 * pPoints, byte * lpTypes, count nCount)
+   i32 graphics::GetPath(::point_f64 * pPoints, ::u8 * lpTypes, count nCount)
 
    {
 
@@ -3194,7 +3194,7 @@ namespace draw2d_gdiplus
 
    //   //         m_pimage->fork_blend(point_i32(xDest + GetViewportOrg().x(), yDest + GetViewportOrg().y()), pgraphicsSrc->m_pimage,
    //   //                                                point_i32(xSrc + pgraphicsSrc->GetViewportOrg().x(), ySrc + pgraphicsSrc->GetViewportOrg().y()),
-   //   //                                                ::size_f64(nSrcWidth, nDestHeight), (byte)(dRate * 255.0f));
+   //   //                                                ::size_f64(nSrcWidth, nDestHeight), (::u8)(dRate * 255.0f));
 
    //   //         g_cForkBlend++;
 
@@ -3209,7 +3209,7 @@ namespace draw2d_gdiplus
 
    //   //         m_pimage->blend(point_i32(xDest + GetViewportOrg().x(), yDest + GetViewportOrg().y()), pgraphicsSrc->m_pimage,
    //   //                                           point_i32(xSrc+pgraphicsSrc->GetViewportOrg().x(), ySrc + pgraphicsSrc->GetViewportOrg().y()),
-   //   //                                           ::size_f64(nSrcWidth, nDestHeight), (byte)(dRate * 255.0f));
+   //   //                                           ::size_f64(nSrcWidth, nDestHeight), (::u8)(dRate * 255.0f));
 
    //   //      }
 
@@ -3219,7 +3219,7 @@ namespace draw2d_gdiplus
 
    //   //      m_pimage->from(point_i32(xDest + GetViewportOrg().x(), yDest + GetViewportOrg().y()), pgraphicsSrc->m_pimage,
    //   //                                       point_i32(xSrc + pgraphicsSrc->GetViewportOrg().x(), ySrc + pgraphicsSrc->GetViewportOrg().y()),
-   //   //                                       ::size_f64(nSrcWidth, nDestHeight), (byte) (dRate * 255.0f));
+   //   //                                       ::size_f64(nSrcWidth, nDestHeight), (::u8) (dRate * 255.0f));
 
 
    //   //   }
@@ -4040,7 +4040,7 @@ namespace draw2d_gdiplus
          catch (...)
          {
 
-            TRACE("graphics::DeleteDC : Failed to delete Gdiplus::Graphics");
+            information("graphics::DeleteDC : Failed to delete Gdiplus::Graphics");
 
          }
 
@@ -4056,7 +4056,7 @@ namespace draw2d_gdiplus
          if (!bDeleted)
          {
 
-            TRACE("graphics::DeleteDC : Failed to delete GDI device context");
+            information("graphics::DeleteDC : Failed to delete GDI device context");
 
          }
 
@@ -4188,7 +4188,7 @@ namespace draw2d_gdiplus
       catch(...)
       {
 
-         TRACE("graphics::Detach : Failed to delete Gdiplus::Graphics");
+         information("graphics::Detach : Failed to delete Gdiplus::Graphics");
 
       }
 
