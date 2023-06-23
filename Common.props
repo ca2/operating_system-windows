@@ -38,7 +38,7 @@
       <Command>application_build_helper --defer-prepare-folder $(ProjectDir) $(PlatformName) $(ConfigurationName)</Command>
     </PreBuildEvent>
     <Link>
-      <AdditionalLibraryDirectories>$(SolutionDir)..\..\..\..\operating_system\storage-windows\$(PlatformName)\$(Configuration)\library\;$(SolutionDir)..\..\..\..\operating_system\storage-windows\$(PlatformName)\$(Configuration)\third\library\;$(OutDir)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(RootParentDir)operating_system\storage-windows\$(PlatformName)\$(Configuration)\library\;$(RootParentDir)operating_system\storage-windows\$(PlatformName)\$(Configuration)\third\library\;$(OutDir)</AdditionalLibraryDirectories>
     </Link>
     <Manifest>
       <AdditionalManifestFiles>$(__operating_system)operating_system-windows\windows10.manifest</AdditionalManifestFiles>
