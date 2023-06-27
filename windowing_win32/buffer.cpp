@@ -216,7 +216,7 @@ namespace windowing_win32
 
       buffer_size_and_position(pitem);
 
-      auto pimageBuffer = pitem->m_pimage;
+      auto pimageBuffer = pitem->m_pimage2;
 
       update_buffer(pitem);
 
@@ -387,7 +387,7 @@ namespace windowing_win32
 
       playeredwindowbuffer->m_pixmap.m_size = pitem->m_size;
 
-      if (pitem->m_pimage->host(playeredwindowbuffer->m_pixmap))
+      if (pitem->m_pimage2->host(playeredwindowbuffer->m_pixmap))
       {
 
          m_bDibIsHostingBuffer = true;
@@ -399,7 +399,7 @@ namespace windowing_win32
          try
          {
 
-            pitem->m_pimage->create(playeredwindowbuffer->m_pixmap.m_sizeRaw);
+            pitem->m_pimage2->create(playeredwindowbuffer->m_pixmap.m_sizeRaw);
 
          }
          catch (...)
@@ -474,7 +474,7 @@ namespace windowing_win32
    bool buffer::on_update_screen(::graphics::buffer_item * pitem)
    {
 
-      if (!pitem->m_pimage.ok())
+      if (!pitem->m_pimage2.ok())
       {
 
          return false;
@@ -510,13 +510,13 @@ namespace windowing_win32
 
       auto pixmapRawData = playeredwindowbuffer->m_pixmap.m_pimage32Raw;
 
-      auto pimageRawData = pitem->m_pimage->m_pimage32Raw;
+      auto pimageRawData = pitem->m_pimage2->m_pimage32Raw;
 
       if (m_bDibIsHostingBuffer && pimageRawData == pixmapRawData)
       {
 
       }
-      else if (m_bDibIsHostingBuffer && pitem->m_pimage->on_host_read_pixels(playeredwindowbuffer->m_pixmap))
+      else if (m_bDibIsHostingBuffer && pitem->m_pimage2->on_host_read_pixels(playeredwindowbuffer->m_pixmap))
       {
 
 
@@ -524,16 +524,16 @@ namespace windowing_win32
       else
       {
 
-         if (sizeLayeredWindowBuffer != pitem->m_pimage->size())
+         if (sizeLayeredWindowBuffer != pitem->m_pimage2->size())
          {
 
             return false;
 
          }
 
-         pitem->m_pimage->map();
+         pitem->m_pimage2->map();
 
-         ::copy_image32(playeredwindowbuffer->m_pixmap, sizeLayeredWindowBuffer, pitem->m_pimage);
+         ::copy_image32(playeredwindowbuffer->m_pixmap, sizeLayeredWindowBuffer, pitem->m_pimage2);
 
       }
 
@@ -565,7 +565,7 @@ namespace windowing_win32
 
          auto size = pitem->m_size;
 
-         auto sizeBuffer = pitem->m_pimage->size();
+         auto sizeBuffer = pitem->m_pimage2->size();
 
          //if (size.cx() < sizeDrawn.cx() && size.cy() < sizeDrawn.cy())
          //if (size != sizeDrawn || sizeDesign != size)
