@@ -874,7 +874,15 @@ namespace windowing_win32
                      || rectangleWindowCurrent.size() != size)
                   {
 
-                     ::SetWindowPos(hwnd, nullptr, point.x(), point.y(), size.cx(), size.cy(), uFlagsSetWindowPos);
+                     m_pimpl->m_pwindow->_set_window_pos(
+                        {}, 
+                        point.x(),
+                        point.y(),
+                        size.cx(),
+                        size.cy(),
+                        e_activation_default, 
+                        true, false, false, true, false, 
+                        uFlagsSetWindowPos);
 
                      bSizeOrPositionChanged = true;
 

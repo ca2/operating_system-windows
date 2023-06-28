@@ -19,13 +19,16 @@
 #include "acme/primitive/geometry2d/_text_stream.h"
 #include "aura_windows/interaction_impl.h"
 #include "aura/graphics/draw2d/graphics.h"
+#include "aura/graphics/graphics/graphics.h"
 #include "aura/user/user/interaction_prodevian.h"
 #include "aura/message/user.h"
 #include "aura/user/user/user.h"
 #include "aura/user/user/system.h"
 #include "aura/platform/session.h"
 #include "aura/platform/system.h"
+#include "aura/windowing/placement_log.h"
 #include "acme_windows_common/comptr.h"
+
 
 
 
@@ -2080,8 +2083,66 @@ namespace windowing_win32
    }
 
 
-//   bool window::_set_window_pos(class ::zorder zorder, i32 x, i32 y, i32 cx, i32 cy, ::u32 nFlags)
-//   {
+   bool window::_set_window_pos(const class ::zorder& zorder, i32 x, i32 y, i32 cx, i32 cy, const ::e_activation& eactivation, bool bNoZorder, bool bNoMove, bool bNoSize, bool bShow, bool bHide, ::u32 nOverrideFlags)
+   {
+
+      ::rectangle_i32 rectangle;
+
+      rectangle.left = x;
+      rectangle.top = y;
+      rectangle.set_width(cx);
+      rectangle.set_height(cy);
+
+      placement_log()->add(rectangle);
+
+      if (nOverrideFlags == 0)
+      {
+
+         if (bNoMove)
+         {
+
+            nOverrideFlags |= SWP_NOMOVE;
+
+         }
+
+         if (bNoSize)
+         {
+
+            nOverrideFlags |= SWP_NOSIZE;
+
+         }
+
+         if (bNoZorder)
+         {
+
+            nOverrideFlags |= SWP_NOZORDER;
+
+         }
+
+         if (bShow)
+         {
+
+            nOverrideFlags |= SWP_SHOWWINDOW;
+
+         }
+
+         if (bHide)
+         {
+
+            nOverrideFlags |= SWP_HIDEWINDOW;
+
+         }
+
+      }
+
+      HWND hwnd = get_hwnd();
+
+      ::SetWindowPos(hwnd, nullptr, x, y, cx, cy, nOverrideFlags);
+
+      return true;
+
+   }
+
 //
 //      synchronous_lock synchronouslock(x11_mutex());
 //
@@ -6363,7 +6424,9 @@ namespace windowing_win32
    void window::update_screen()
    {
 
-      auto puserinteraction = m_puserinteractionimpl->m_puserinteraction;
+      m_puserinteractionimpl->m_pgraphics->update_screen();
+
+      /*auto puserinteraction = m_puserinteractionimpl->m_puserinteraction;
 
       if (!puserinteraction)
       {
@@ -6392,7 +6455,7 @@ namespace windowing_win32
       
          pprodevian->post_procedure(pprodevian->m_procedureUpdateScreen);
 
-      }
+      }*/
 
    }
 
