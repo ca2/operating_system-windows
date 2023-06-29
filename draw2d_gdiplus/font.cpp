@@ -97,29 +97,7 @@ namespace draw2d_gdiplus
 
       }
 
-      Gdiplus::Unit unit;
-
-      switch (m_fontsize.m_eunit)
-      {
-      case ::e_unit_pixel:
-
-         unit = Gdiplus::UnitPixel;
-
-         break;
-
-      case ::e_unit_point:
-
-         unit = Gdiplus::UnitPoint;
-
-         break;
-
-      default:
-
-         unit = Gdiplus::UnitPoint;
-
-         break;
-
-      };
+      auto unit = gdiplus_font_unit(m_fontsize);
 
       bool bFont = false;
 

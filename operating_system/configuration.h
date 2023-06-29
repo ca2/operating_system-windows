@@ -1,6 +1,8 @@
 #pragma once
 
 
+#pragma warning( disable : 4455) // literal suffix identifiers that do not start with an underscore are reserved
+
 
 #include "inc.h"
 
