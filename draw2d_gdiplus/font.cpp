@@ -69,7 +69,7 @@ namespace draw2d_gdiplus
 
       i32 iStyle = 0;
 
-      if (m_iFontWeight >= 600)
+      if (m_fontweight > e_font_weight_semibold)
       {
 
          iStyle |= (i32)Gdiplus::FontStyleBold;
@@ -99,15 +99,15 @@ namespace draw2d_gdiplus
 
       Gdiplus::Unit unit;
 
-      switch (m_eunitFontSize)
+      switch (m_fontsize.m_eunit)
       {
-      case ::draw2d::e_unit_pixel:
+      case ::e_unit_pixel:
 
          unit = Gdiplus::UnitPixel;
 
          break;
 
-      case ::draw2d::e_unit_point:
+      case ::e_unit_point:
 
          unit = Gdiplus::UnitPoint;
 
@@ -148,7 +148,7 @@ namespace draw2d_gdiplus
 
                WCHAR wszGetFamilyName[LF_FACESIZE];
 
-               if (m_strFontFamilyName.has_char())
+               if (::write_text::font::m_pfontfamily->m_strFamilyName.has_char())
                {
 
                   for (int iFamily = 0; iFamily < pprivatefont->m_iFamilyCount; iFamily++)
@@ -161,7 +161,7 @@ namespace draw2d_gdiplus
 
                         string strFontFamily = wszGetFamilyName;
 
-                        if (strFontFamily.case_insensitive_order(m_strFontFamilyName) == 0)
+                        if (strFontFamily.case_insensitive_order(::write_text::font::m_pfontfamily->m_strFamilyName) == 0)
                         {
 
                            pfontfamily = &fontfamily;
@@ -210,9 +210,9 @@ namespace draw2d_gdiplus
 
                   auto pfont = new Gdiplus::Font(
                      pfontfamily,
-                     (Gdiplus::REAL)m_dFontSize,
+                     gdiplus_font_size(m_fontsize),
                      iStyle,
-                     unit);
+                     gdiplus_font_unit(m_fontsize));
 
                   set_gdiplus_font(pfont);
 
@@ -244,10 +244,10 @@ namespace draw2d_gdiplus
       {
 
          auto pfont = new Gdiplus::Font(
-            utf8_to_unicode(m_strFontFamilyName),
-            (Gdiplus::REAL)m_dFontSize,
+            utf8_to_unicode(m_pfontfamily->family_name(this)),
+            gdiplus_font_size(m_fontsize),
             iStyle,
-            unit);
+            gdiplus_font_unit(m_fontsize));
 
          set_gdiplus_font(pfont);
 

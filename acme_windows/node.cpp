@@ -3180,7 +3180,7 @@ namespace acme_windows
          );
          
             //straOutput.clear();
-      auto iPipeSize = 16_KiB;
+      auto iPipeSize = 16KiB;
 
       string str(scopedstr);
 

@@ -541,7 +541,7 @@ namespace draw2d_gdiplus
 
          wstring wstr(strText);
 
-         Gdiplus::REAL dSize = (Gdiplus::REAL) pfont->m_dFontSize;
+         Gdiplus::REAL dSize = (Gdiplus::REAL)(::f64) pfont->m_fontsize;
 
          Gdiplus::Unit unit = __graphics(pgraphics)->m_pgraphics->GetPageUnit();
 
