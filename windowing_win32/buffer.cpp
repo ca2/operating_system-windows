@@ -15,9 +15,12 @@
 #include "aura/graphics/image/image.h"
 #include "aura/user/user/interaction_impl.h"
 #include "aura/graphics/image/image.h"
+//#define REDRAW_HINTING
 #ifdef REDRAW_HINTING
 #include <gdiplus.h>
 #endif
+
+
 
 namespace windowing_win32
 {
@@ -212,20 +215,20 @@ namespace windowing_win32
    ::graphics::buffer_item * buffer::on_begin_draw()
    {
 
-      auto pitem = get_buffer_item();
+      auto pbufferitem = get_buffer_item();
 
-      buffer_size_and_position(pitem);
+      buffer_size_and_position(pbufferitem);
 
-      auto pimageBuffer = pitem->m_pimage2;
+      auto pimageBuffer = pbufferitem->m_pimage2;
 
-      update_buffer(pitem);
+      update_buffer(pbufferitem);
 
       return double_buffer::on_begin_draw();
 
    }
 
 
-   bool buffer::update_buffer(::graphics::buffer_item * pitem)
+   bool buffer::update_buffer(::graphics::buffer_item * pbufferitem)
    {
 
       if (is_single_buffer_mode() && m_ptaskUpdateScreen)
@@ -255,11 +258,7 @@ namespace windowing_win32
 
       }
 
-      //auto size = pitem->m_size;
-
-      //auto pitem = get_buffer_item();
-
-      auto & pparticleData = pitem->m_pparticleData;
+      auto & pparticleData = pbufferitem->m_pparticleData;
 
       if (!pparticleData)
       {
@@ -270,13 +269,7 @@ namespace windowing_win32
 
       ::pointer < layered_window_buffer > playeredwindowbuffer = pparticleData;
 
-      //pitem->m_point = m_pimpl->m_puserinteraction->const_layout().design().m_point;
-
-      //pitem->m_size = m_pimpl->m_puserinteraction->const_layout().design().m_size;
-
-      //information("windowing_win32::buffer::update_buffer size(%d, %d)", size.cx(), size.cy());
-
-      if (pitem->m_size == playeredwindowbuffer->m_pixmap.size())
+      if (pbufferitem->m_size == playeredwindowbuffer->m_pixmap.size())
       {
 
          return false;
@@ -293,17 +286,17 @@ namespace windowing_win32
 
       auto sizeLargeInternalBitmap = pdisplay->get_monitor_union_size();
 
-      if (pitem->m_size.cx() > sizeLargeInternalBitmap.cx())
+      if (pbufferitem->m_size.cx() > sizeLargeInternalBitmap.cx())
       {
 
-         sizeLargeInternalBitmap.cx() = pitem->m_size.cx();
+         sizeLargeInternalBitmap.cx() = pbufferitem->m_size.cx();
 
       }
 
-      if (pitem->m_size.cy() > sizeLargeInternalBitmap.cy())
+      if (pbufferitem->m_size.cy() > sizeLargeInternalBitmap.cy())
       {
 
-         sizeLargeInternalBitmap.cy() = pitem->m_size.cy();
+         sizeLargeInternalBitmap.cy() = pbufferitem->m_size.cy();
 
       }
 
@@ -327,9 +320,7 @@ namespace windowing_win32
 
          HBITMAP hbitmap = ::windows::create_windows_dib(sizeLargeInternalBitmap, &iScan, &pimage32);
 
-         if (hbitmap == nullptr
-            || pimage32 == nullptr
-            || iScan == 0)
+         if (hbitmap == nullptr || pimage32 == nullptr || iScan == 0)
          {
 
             if (hbitmap != nullptr)
@@ -385,9 +376,9 @@ namespace windowing_win32
 
       }
 
-      playeredwindowbuffer->m_pixmap.m_size = pitem->m_size;
+      playeredwindowbuffer->m_pixmap.m_size = pbufferitem->m_size;
 
-      if (pitem->m_pimage2->host(playeredwindowbuffer->m_pixmap))
+      if (pbufferitem->m_pimage2->host(playeredwindowbuffer->m_pixmap))
       {
 
          m_bDibIsHostingBuffer = true;
@@ -399,7 +390,7 @@ namespace windowing_win32
          try
          {
 
-            pitem->m_pimage2->create(playeredwindowbuffer->m_pixmap.m_sizeRaw);
+            pbufferitem->m_pimage2->create(playeredwindowbuffer->m_pixmap.m_sizeRaw);
 
          }
          catch (...)
@@ -421,19 +412,19 @@ namespace windowing_win32
    void buffer::destroy_buffer()
    {
 
-      auto pitem = get_buffer_item();
+      auto pbufferitem = get_buffer_item();
 
-      if (pitem)
+      if (pbufferitem)
       {
 
-         ::pointer < layered_window_buffer > playeredwindowbuffer = pitem->m_pparticleData;
+         ::pointer < layered_window_buffer > playeredwindowbuffer = pbufferitem->m_pparticleData;
 
          if (playeredwindowbuffer)
          {
 
             playeredwindowbuffer->destroy_buffer();
 
-            pitem->m_pparticleData.release();
+            pbufferitem->m_pparticleData.release();
 
          }
 
@@ -471,10 +462,10 @@ namespace windowing_win32
    ::point_i32 g_pointLastBottomRight;
 
 
-   bool buffer::on_update_screen(::graphics::buffer_item * pitem)
+   bool buffer::on_update_screen(::graphics::buffer_item * pbufferitem)
    {
 
-      if (!pitem->m_pimage2.ok())
+      if (!pbufferitem->m_pimage2.ok())
       {
 
          return false;
@@ -502,7 +493,7 @@ namespace windowing_win32
 
       index iScreenBuffer = get_screen_index();
 
-      ::pointer < layered_window_buffer > playeredwindowbuffer = pitem->m_pparticleData;
+      ::pointer < layered_window_buffer > playeredwindowbuffer = pbufferitem->m_pparticleData;
 
       auto sizeLayeredWindowBuffer = playeredwindowbuffer->m_pixmap.size();
 
@@ -510,13 +501,13 @@ namespace windowing_win32
 
       auto pixmapRawData = playeredwindowbuffer->m_pixmap.m_pimage32Raw;
 
-      auto pimageRawData = pitem->m_pimage2->m_pimage32Raw;
+      auto pimageRawData = pbufferitem->m_pimage2->m_pimage32Raw;
 
       if (m_bDibIsHostingBuffer && pimageRawData == pixmapRawData)
       {
 
       }
-      else if (m_bDibIsHostingBuffer && pitem->m_pimage2->on_host_read_pixels(playeredwindowbuffer->m_pixmap))
+      else if (m_bDibIsHostingBuffer && pbufferitem->m_pimage2->on_host_read_pixels(playeredwindowbuffer->m_pixmap))
       {
 
 
@@ -524,16 +515,16 @@ namespace windowing_win32
       else
       {
 
-         if (sizeLayeredWindowBuffer != pitem->m_pimage2->size())
+         if (sizeLayeredWindowBuffer != pbufferitem->m_pimage2->size())
          {
 
             return false;
 
          }
 
-         pitem->m_pimage2->map();
+         pbufferitem->m_pimage2->map();
 
-         ::copy_image32(playeredwindowbuffer->m_pixmap, sizeLayeredWindowBuffer, pitem->m_pimage2);
+         ::copy_image32(playeredwindowbuffer->m_pixmap, sizeLayeredWindowBuffer, pbufferitem->m_pimage2);
 
       }
 
@@ -561,11 +552,11 @@ namespace windowing_win32
 
          //auto size = layout.output().size();
 
-         auto point = pitem->m_point;
+         auto point = pbufferitem->m_point;
 
-         auto size = pitem->m_size;
+         auto size = pbufferitem->m_size;
 
-         auto sizeBuffer = pitem->m_pimage2->size();
+         auto sizeBuffer = pbufferitem->m_pimage2->size();
 
          //if (size.cx() < sizeDrawn.cx() && size.cy() < sizeDrawn.cy())
          //if (size != sizeDrawn || sizeDesign != size)
@@ -670,7 +661,7 @@ namespace windowing_win32
                rectangle.Y = 0;
                rectangle.Height = size.cy();
 
-               Gdiplus::SolidBrush b(Gdiplus::Color(argb(255, 155, 240, 255)));
+               Gdiplus::SolidBrush b(Gdiplus::Color(255, 155, 240, 255));
 
                g.FillRectangle(&b, rectangle);
 
@@ -702,7 +693,7 @@ namespace windowing_win32
                //::FillRect(m_hdc, rectangle, h);
 
                //::DeleteObject(h);
-               Gdiplus::Graphics g(buffer.m_hdc);
+               Gdiplus::Graphics g(playeredwindowbuffer->m_hdc);
 
                Gdiplus::Rect rectangle;
 
@@ -711,7 +702,7 @@ namespace windowing_win32
                rectangle.Width = size.cx();
                rectangle.Height = size.cy();
 
-               Gdiplus::SolidBrush b(Gdiplus::Color(argb(127, 255, 210, 170)));
+               Gdiplus::SolidBrush b(Gdiplus::Color(127, 255, 210, 170));
 
                g.FillRectangle(&b, rectangle);
             }
@@ -867,6 +858,12 @@ namespace windowing_win32
                      | SWP_NOACTIVATE
                      | SWP_SHOWWINDOW;
 
+                  if (!::IsWindowVisible(hwnd))
+                  {
+
+                     warning() << "Window is not visible!!";
+
+                  }
 
                   ::UpdateLayeredWindow(hwnd, m_hdcScreen, (POINT *)&point, (SIZE *)&size, playeredwindowbuffer->m_hdc, (POINT *)&pointSrc, make_u32(0, 0, 0, 0), &blendPixelFunction, ULW_ALPHA);
 

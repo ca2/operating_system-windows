@@ -5052,18 +5052,64 @@ namespace draw2d_gdiplus
    void graphics::intersect_clip(const ::draw2d::clip_group & clipgroup)
    {
 
-      auto_pointer < Gdiplus::GraphicsPath > ppath(create_new_t{});
-
-      ppath->SetFillMode(Gdiplus::FillModeWinding);
+      auto_pointer < Gdiplus::Region > pregion;
 
       for (auto & pclipitem : clipgroup)
       {
 
-         _add_clip_item(ppath, pclipitem);
+         if (pclipitem->clip_item_type() == ::draw2d::e_clip_item_rectangle)
+         {
+
+            Gdiplus::Rect rect;
+
+            copy(rect, dynamic_cast<::draw2d::clip_rectangle *>(pclipitem.m_p)->m_item);
+
+            if (!pregion)
+            {
+
+               pregion = new Gdiplus::Region(rect);
+
+            }
+            else
+            {
+
+               pregion->Union(rect);
+
+            }
+
+         }
+         else
+         {
+
+            auto_pointer < Gdiplus::GraphicsPath > ppath(create_new_t{});
+
+            ppath->SetFillMode(Gdiplus::FillModeWinding);
+
+            _add_clip_item(ppath, pclipitem);
+
+            if (!pregion)
+            {
+
+               pregion = new Gdiplus::Region(ppath);
+
+            }
+            else
+            {
+
+               pregion->Union(ppath);
+
+            }
+
+         }
 
       }
 
-      m_pgraphics->SetClip(ppath, Gdiplus::CombineModeIntersect);
+      if (pregion)
+      {
+
+         m_pgraphics->SetClip(pregion, Gdiplus::CombineModeIntersect);
+
+      }
 
    }
 
