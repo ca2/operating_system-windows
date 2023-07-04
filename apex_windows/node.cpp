@@ -281,7 +281,7 @@ namespace apex_windows
 
 #ifdef WINDOWS
       {
-         //time_t t = time(nullptr);
+         //posix_time t = time(nullptr);
 
          //struct tm *p = localtime(&t);
 
@@ -312,7 +312,7 @@ namespace apex_windows
 #else
       {
 
-         time_t t = time(nullptr);
+         posix_time t = time(nullptr);
 
          struct tm lt = { 0 };
 
