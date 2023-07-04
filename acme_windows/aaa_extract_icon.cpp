@@ -183,7 +183,7 @@ BOOL ExtractResourceIcon_EnumNamesFunc(HMODULE hModule, const ::wide_character *
    if (pi->iIcon < 0xC0000000)
    {
 
-      if (pi->iIcon != 0x80000000)
+      if (pi->iIcon != I32_MINIMUM)
       {
 
          pi->iIcon--;
@@ -213,7 +213,7 @@ BOOL ExtractResourceIcon_EnumNamesFunc(HMODULE hModule, const ::wide_character *
    GRPICONDIR* pGrpIconDir = (LPGRPICONDIR)LockResource(hGroup);
 
 
-   if (pi->iIcon >= 0 && pi->iIcon != 0x80000000)
+   if (pi->iIcon >= 0 && pi->iIcon != I32_MINIMUM)
    {
 
       if (pGrpIconDir->idCount > 0)

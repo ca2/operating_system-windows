@@ -297,7 +297,7 @@ namespace windowing_win32
    //
    //#else
    //
-   //         return 0x80000000;
+   //         return I32_MINIMUM;
    //
    //#endif // WINDOWS_DESKTOP
    //
@@ -500,7 +500,7 @@ namespace windowing_win32
 
       }
 
-      getfileimage.m_iImage = 0x80000000;
+      getfileimage.m_iImage = I32_MINIMUM;
 
       if (would_set_thumbnail_for(getfileimage))
       {
@@ -529,7 +529,7 @@ namespace windowing_win32
       default:
          // unexpected icon type
          ASSERT(false);
-         getfileimage.m_iImage = 0x80000000;
+         getfileimage.m_iImage = I32_MINIMUM;
          return false;
       }
 
@@ -718,7 +718,7 @@ namespace windowing_win32
          //      if (wcscmp(wszPath, L"*") == 0)
          //      {
 
-         //         imagekey.m_iIcon = 0x80000000;
+         //         imagekey.m_iIcon = I32_MINIMUM;
 
          //         imagekey.set_extension(strFileParam);
 
@@ -782,7 +782,7 @@ namespace windowing_win32
                   if (wcscmp(wszPath, L"*") == 0)
                   {
 
-                     getfileimage.m_imagekey.m_iIcon = 0x80000000;
+                     getfileimage.m_imagekey.m_iIcon = I32_MINIMUM;
 
                      getfileimage.m_imagekey.set_path(strFileParam);
 
@@ -853,7 +853,7 @@ namespace windowing_win32
             if (wcscmp(wszPath, L"*") == 0)
             {
 
-               getfileimage.m_imagekey.m_iIcon = 0x80000000;
+               getfileimage.m_imagekey.m_iIcon = I32_MINIMUM;
 
                getfileimage.m_imagekey.set_extension(strFileParam);
 
@@ -880,7 +880,7 @@ namespace windowing_win32
       ::file::path pathTarget;
 
       if (((FAILED(hrIconLocation) && FAILED(hrGetLocation))
-         || getfileimage.m_imagekey.m_iIcon == 0x80000000
+         || getfileimage.m_imagekey.m_iIcon == I32_MINIMUM
          || !m_pcontext->m_papexcontext->file()->exists(strIconLocation))
          && strFileParam.case_insensitive_ends(".lnk"))
       {
@@ -934,7 +934,7 @@ namespace windowing_win32
 
       }
 
-      if (getfileimage.m_imagekey.m_iIcon == 0x80000000)
+      if (getfileimage.m_imagekey.m_iIcon == I32_MINIMUM)
       {
 
          if (getfileimage.m_imagekey.m_strShellThemePrefix.has_char())
@@ -1320,7 +1320,7 @@ namespace windowing_win32
    bool shell::_get_file_image(_get_file_image_ & getfileimage)
    {
 
-      getfileimage.m_iImage = 0x80000000;
+      getfileimage.m_iImage = I32_MINIMUM;
 
       if (getfileimage.m_imagekey.m_strPath.case_insensitive_begins("uifs:"))
       {
@@ -1971,7 +1971,7 @@ namespace windowing_win32
             if (hicon == nullptr && getfileimage.m_imagekey.m_iIcon == 0)
             {
 
-               hicon = pnode->extract_resource_icon(strIconLocation, iSizeOut, iSizeOut, 0x80000000);
+               hicon = pnode->extract_resource_icon(strIconLocation, iSizeOut, iSizeOut, I32_MINIMUM);
 
             }
 

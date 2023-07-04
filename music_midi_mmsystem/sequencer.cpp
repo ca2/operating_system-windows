@@ -884,7 +884,7 @@ namespace music
 
                   m_psequence->m_pfile->GetTempoEvent(event);
 
-                  StreamEvent(event.GetDelta(), &event, lpmidihdr, 0x7fffffff, 256);
+                  StreamEvent(event.GetDelta(), &event, lpmidihdr, I32_MAXIMUM, 256);
 
                   m_psequence->clear_operation(e_operation_tempo_change);
 

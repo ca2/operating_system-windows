@@ -171,7 +171,7 @@ namespace apex_windows
 
       COPYDATASTRUCT cds;
 
-      cds.dwData = 0x80000000;
+      cds.dwData = I32_MINIMUM;
       cds.cbData = (unsigned int) strUri.length();
       cds.lpData = (void *) strUri.c_str();
 
@@ -214,7 +214,7 @@ namespace apex_windows
    //void interprocess_caller::send(int message, void * pdata, int len, const class time & timeTimeout)
    //{
 
-   //   if (message == 0x80000000)
+   //   if (message == I32_MINIMUM)
    //   {
 
    //      throw ::exception(error_failed);

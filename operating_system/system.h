@@ -35,13 +35,13 @@
 #define WINDOWS
 
 
-#include <stdio.h>
-#include <memory.h>
-#include <string.h>
-#include <wchar.h>
-#include <ctype.h>
+//#include <stdio.h>
+//#include <memory.h>
+//#include <string.h>
+//#include <wchar.h>
+//#include <ctype.h>
 #include <stdarg.h>
-
+//
 
 #include <concepts>
 

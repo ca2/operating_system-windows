@@ -41,7 +41,7 @@ string key_to_char(wparam wparam, lparam lparam)
       baState[i] = (::u8) GetAsyncKeyState(i);
    }
 
-   if((GetAsyncKeyState(VK_SHIFT) & 0x80000000) != 0)
+   if((GetAsyncKeyState(VK_SHIFT) & I32_MINIMUM) != 0)
    {
       baState[VK_SHIFT] |= 0x80;
    }
@@ -61,7 +61,7 @@ string key_to_char(wparam wparam, lparam lparam)
 
       if((GetAsyncKeyState(VK_CAPITAL) & 0x0001) != 0)
       {
-         if((GetAsyncKeyState(VK_SHIFT) & 0x80000000) != 0)
+         if((GetAsyncKeyState(VK_SHIFT) & I32_MINIMUM) != 0)
          {
             str.make_lower();
          }
@@ -72,7 +72,7 @@ string key_to_char(wparam wparam, lparam lparam)
       }
       else
       {
-         if((GetAsyncKeyState(VK_SHIFT) & 0x80000000) != 0)
+         if((GetAsyncKeyState(VK_SHIFT) & I32_MINIMUM) != 0)
          {
             str.make_upper();
          }
@@ -164,7 +164,7 @@ int GetVersion_ex1()
 
    debug_print("Window major version = %d and minor version = %d\n", lowbyte, hibyte);
 
-   if (!(dwVersion & 0x80000000))                // Windows NT, 2000, XP
+   if (!(dwVersion & I32_MINIMUM))                // Windows NT, 2000, XP
       return 1;
    else         // Windows 95, 98, ME
       return 0;
@@ -211,7 +211,7 @@ int_bool is_windows_nt()
 
 #else
 
-   return !(GetVersion() & 0x80000000);
+   return !(GetVersion() & I32_MINIMUM);
 
 #endif
 
@@ -372,14 +372,14 @@ int_bool is_windows_native_unicode()
 
       ::u32 dwBuild;
 
-      if (dwVersion < 0x80000000)              // Windows NT
+      if (dwVersion < I32_MINIMUM)              // Windows NT
          dwBuild = (::u32)(HIWORD(dwVersion));
       else if (dwWindowsMajorVersion < 4)      // Win32s
          dwBuild = (::u32)(HIWORD(dwVersion) & ~0x8000);
       else                                     // Windows Me/98/95
          dwBuild = 0;
 
-      if (dwVersion < 0x80000000)              // Windows NT
+      if (dwVersion < I32_MINIMUM)              // Windows NT
          s_bNativeUnicode = true;
       else if (dwWindowsMajorVersion < 4)      // Win32s
          s_bNativeUnicode = false;
