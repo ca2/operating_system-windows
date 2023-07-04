@@ -506,9 +506,9 @@ namespace acme_windows
 
       class time time;
 
-      time.m_iSecond = uint64_muldiv(count, m_uiByteTimeNs, 1'000'000'000);
+      time.m_posixtime.m_iSecond = uint64_muldiv(count, m_uiByteTimeNs, 1'000'000'000);
 
-      time.m_iNanosecond = (count * m_uiByteTimeNs) % 1'000'000'000;
+      time.m_nanosecond.m_iNanosecond = (count * m_uiByteTimeNs) % 1'000'000'000;
 
       preempt(time);
 
