@@ -25,7 +25,7 @@
 /* Define if you have the bcopy function.  */
 #undef HAVE_BCOPY
 
-/* Define if you have the memmove function.  */
+/* Define if you have the memory_transfer function.  */
 #define HAVE_MEMMOVE 1
 
 /* Define if you have the <unistd.h> header file.  */
@@ -44,9 +44,9 @@
 
 #ifndef HAVE_MEMMOVE
 #ifdef HAVE_BCOPY
-#define memmove(d,s,l) bcopy((s),(d),(l))
+#define memory_transfer(d,s,l) bcopy((s),(d),(l))
 #else
-#define memmove(d,s,l) ;punting on memmove;
+#define memory_transfer(d,s,l) ;punting on memory_transfer;
 #endif
 
 #endif

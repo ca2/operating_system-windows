@@ -35,8 +35,8 @@ such macros are listed as a commented #undef in config.h.element. Macros such
 as MATCH_LIMIT, whose actual value is relevant, have defaults defined, but are
 surrounded by #ifndef/#endif lines so that the value can be overridden by -D.
 
-PCRE2 uses memmove() if HAVE_MEMMOVE is defined; otherwise it uses bcopy() if
-HAVE_BCOPY is defined. If your system has neither bcopy() nor memmove(), make
+PCRE2 uses memory_transfer() if HAVE_MEMMOVE is defined; otherwise it uses bcopy() if
+HAVE_BCOPY is defined. If your system has neither bcopy() nor memory_transfer(), make
 sure both macros are undefined; an emulation function will then be used. */
 
 /* By default, the \R escape sequence matches any Unicode line ending
@@ -102,7 +102,7 @@ sure both macros are undefined; an emulation function will then be used. */
 
 #define HAVE_LIMITS_H 1
 
-/* Define to 1 if you have the `memmove' function. */
+/* Define to 1 if you have the `memory_transfer' function. */
 /* #undef HAVE_MEMMOVE */
 
 #define HAVE_MEMMOVE 1
