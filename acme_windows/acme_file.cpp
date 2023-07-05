@@ -216,99 +216,99 @@ namespace acme_windows
    }
 
 
-   void acme_file::write_memory_to_file(FILE * file, const void * pdata, memsize nCount, memsize * puiWritten)
-   {
-
-#if OSBIT > 32
-
-      memsize pos = 0;
-
-      ::u32 dw = 0;
-
-      ::u32 dwWrite;
-
-      memsize uiWrittenTotal = 0;
-
-      while (pos < nCount)
-      {
-
-         dwWrite = (::u32)minimum(nCount - uiWrittenTotal, 0xffffffffu);
-
-         dw = (::u32)(fwrite(&((u8 *)pdata)[pos], 1, dwWrite, file));
-
-
-         if (dw != dwWrite)
-         {
-
-            uiWrittenTotal += dw;
-
-            if (puiWritten != nullptr)
-            {
-
-               *puiWritten = uiWrittenTotal;
-
-            }
-
-            throw ::exception(error_io);
-
-         }
-
-         uiWrittenTotal += dw;
-
-         if (dw != dwWrite)
-         {
-
-            break;
-
-         }
-
-         pos += dw;
-
-      }
-
-      if (puiWritten != nullptr)
-      {
-
-         *puiWritten = uiWrittenTotal;
-
-      }
-
-      if (uiWrittenTotal != nCount)
-      {
-
-         throw ::exception(error_failed);
-
-      }
-
-      // return ::success;
-
-#else
-
-      ::u32 dw = 0;
-
-      dw = ::fwrite(pdata, 1, (size_t)nCount, file);
-
-      int_bool bOk = dw == nCount;
-
-      if (puiWritten != nullptr)
-      {
-
-         *puiWritten = dw;
-
-      }
-
-      if (!bOk)
-      {
-
-         throw ::exception(error_failed);
-
-      }
-
-      // return success;
-
-#endif
-
-   }
+//   void acme_file::write_memory_to_file(FILE * file, const void * pdata, memsize nCount, memsize * puiWritten)
+//   {
+//
+//#if OSBIT > 32
+//
+//      memsize pos = 0;
+//
+//      ::u32 dw = 0;
+//
+//      ::u32 dwWrite;
+//
+//      memsize uiWrittenTotal = 0;
+//
+//      while (pos < nCount)
+//      {
+//
+//         dwWrite = (::u32)minimum(nCount - uiWrittenTotal, 0xffffffffu);
+//
+//         dw = (::u32)(fwrite(&((u8 *)pdata)[pos], 1, dwWrite, file));
+//
+//
+//         if (dw != dwWrite)
+//         {
+//
+//            uiWrittenTotal += dw;
+//
+//            if (puiWritten != nullptr)
+//            {
+//
+//               *puiWritten = uiWrittenTotal;
+//
+//            }
+//
+//            throw ::exception(error_io);
+//
+//         }
+//
+//         uiWrittenTotal += dw;
+//
+//         if (dw != dwWrite)
+//         {
+//
+//            break;
+//
+//         }
+//
+//         pos += dw;
+//
+//      }
+//
+//      if (puiWritten != nullptr)
+//      {
+//
+//         *puiWritten = uiWrittenTotal;
+//
+//      }
+//
+//      if (uiWrittenTotal != nCount)
+//      {
+//
+//         throw ::exception(error_failed);
+//
+//      }
+//
+//      // return ::success;
+//
+//#else
+//
+//      ::u32 dw = 0;
+//
+//      dw = ::fwrite(pdata, 1, (size_t)nCount, file);
+//
+//      int_bool bOk = dw == nCount;
+//
+//      if (puiWritten != nullptr)
+//      {
+//
+//         *puiWritten = dw;
+//
+//      }
+//
+//      if (!bOk)
+//      {
+//
+//         throw ::exception(error_failed);
+//
+//      }
+//
+//      // return success;
+//
+//#endif
+//
+//   }
 
 
 
