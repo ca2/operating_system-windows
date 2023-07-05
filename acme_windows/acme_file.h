@@ -34,7 +34,7 @@ namespace acme_windows
 
       string get_temporary_file_name(const ::scoped_string & scopedstrName, const ::scoped_string & scopedstrExtension) override;
       
-      void write_memory_to_file(FILE * file, const void * pdata, memsize nCount, memsize * puiWritten) override;
+      //void write_memory_to_file(FILE * file, const void * pdata, memsize nCount, memsize * puiWritten) override;
 
    
    };
