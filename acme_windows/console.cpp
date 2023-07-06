@@ -29,7 +29,7 @@ namespace acme_windows
 
       m_pfileOut = __new(std_out_buffer());
 
-      m_cout.m_pfile = m_pfileOut;
+      m_cout.m_pstringbuffer = m_pfileOut;
 
 
       //CONSOLE_FONT_INFOEX info = {};
@@ -215,23 +215,9 @@ namespace acme_windows
 } // namespace acme_windows
 
 
-void std_out_buffer::write(const void* pdata, memsize nCount)
-{
-
-#ifdef WINDOWS
-
-   DWORD dw;
-
-   WriteFile(GetStdHandle(STD_OUTPUT_HANDLE), pdata, (::u32)nCount, &dw, nullptr);
-
-#else
-
-   fwrite(pdata, nCount, 1, stdout);
 
 
-#endif
 
-}
 
 
 

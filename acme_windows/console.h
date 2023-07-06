@@ -18,10 +18,10 @@ namespace acme_windows
       //__creatable_from_base(console, ::console::console);
 
 
-      int                                    m_iW;
-      int                                    m_iH;
+      int                                       m_iW;
+      int                                       m_iH;
       //write_text_stream < ::file::file >     m_cout;
-      ::file_pointer                         m_pfileOut;
+      ::pointer < ::string_reference_buffer >   m_pfileOut;
 
 
       console();
