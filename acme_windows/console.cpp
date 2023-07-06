@@ -29,7 +29,7 @@ namespace acme_windows
 
       m_pfileOut = __new(std_out_buffer());
 
-      m_cout.m_pstringbuffer = m_pfileOut;
+      m_cout.m_pfile = m_pfileOut;
 
 
       //CONSOLE_FONT_INFOEX info = {};
