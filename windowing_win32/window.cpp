@@ -2795,15 +2795,15 @@ namespace windowing_win32
    bool window::is_iconic()
    {
 
-      if (_get_ex_style() & WS_EX_LAYERED)
-      {
-         
-         auto puserinteraction = m_puserinteractionimpl->m_puserinteraction;
+      //if (_get_ex_style() & WS_EX_LAYERED)
+      //{
+      //   
+      //   auto puserinteraction = m_puserinteractionimpl->m_puserinteraction;
 
-         return puserinteraction->const_layout().sketch().display() == ::e_display_iconic;
+      //   return puserinteraction->const_layout().sketch().display() == ::e_display_iconic;
 
-      }
-      else
+      //}
+      //else
       {
 
          if (!::IsWindow(get_hwnd()))
