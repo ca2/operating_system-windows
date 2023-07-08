@@ -5493,7 +5493,7 @@ namespace draw2d_gdiplus
 
    // return Extents per UTF8 Char Boundaries, so there can be lesser
    // "extents" than bytes
-   ::count graphics::get_character_extent(double_array & daLeft, double_array& daRight, const ::string & str, strsize iStartParam, strsize iCountParam)
+   ::count graphics::get_character_extent(::f64_array & daLeft, ::f64_array& daRight, const ::string & str, strsize iStartParam, strsize iCountParam)
    {
 
       if (str.is_empty())

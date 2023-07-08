@@ -401,7 +401,7 @@ namespace draw2d_gdiplus
 
       virtual bool draw_text_ex(const ::string & str,const ::rectangle_f64 & rectangle, const ::e_align & ealign = e_align_top_left, const ::e_draw_text & edrawtext = e_draw_text_none) override;
 
-      virtual ::count get_character_extent(double_array & daLeft, double_array& daRight, const ::string & str, strsize iStart = 0, strsize iEnd = -1) override;
+      virtual ::count get_character_extent(::f64_array & daLeft, ::f64_array& daRight, const ::string & str, strsize iStart = 0, strsize iEnd = -1) override;
 
       virtual size_f64 get_text_extent(const ::string & pszString, strsize nCount, strsize iIndex) override;
 
