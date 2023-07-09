@@ -1819,7 +1819,7 @@ namespace apex_windows
 
          //acmesystem()->m_pnode->datetime_to_filetime((file_time_t *) &lastWriteTime, status.m_mtime);
 
-         time_to_file_time((file_time_t *)&lastWriteTime, &status.m_timeModification);
+         lastWriteTime = as_FILETIME(file_time(status.m_timeModification));
 
          pLastWriteTime = &lastWriteTime;
 
@@ -1832,7 +1832,7 @@ namespace apex_windows
 
          //auto pnode = acmesystem()->m_papexsystem->node();
 
-         ::time_to_file_time((file_time_t *)&lastAccessTime, &status.m_timeAccess);
+         lastAccessTime = as_FILETIME(file_time(status.m_timeAccess));
 
          pLastAccessTime = &lastAccessTime;
 
@@ -1843,7 +1843,7 @@ namespace apex_windows
       if (status.m_timeCreation != 0_s)
       {
 
-         time_to_file_time((file_time_t *)&creationTime, &status.m_timeCreation);
+         creationTime = as_FILETIME(file_time(status.m_timeCreation));
 
          pCreationTime = &creationTime;
 
