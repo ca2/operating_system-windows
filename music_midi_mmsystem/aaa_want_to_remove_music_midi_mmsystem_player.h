@@ -32,7 +32,7 @@ namespace music
 
 
             virtual bool PlayRate(double dRate = 0.0, u32 dwEllapse = (u32) -1) override;
-            virtual bool Play(::duration tkStart, u32 dwEllapse = (u32)-1) override;
+            virtual bool Play(::duration tickStart, u32 dwEllapse = (u32)-1) override;
 
             virtual bool init_thread() override;
             virtual void term_thread() override;

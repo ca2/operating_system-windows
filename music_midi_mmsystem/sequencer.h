@@ -112,7 +112,7 @@ namespace music
             //virtual void karaoke_get_time(class ::time& time);
 
             
-            virtual ::e_status      get_position(musical_tick & tk);
+            virtual ::e_status      get_position(musical_tick & tick);
             virtual musical_tick    get_position();
 
 
@@ -147,17 +147,17 @@ namespace music
             virtual void music_midi_on_playback_end();
 
 
-            ::e_status WorkStreamRender(LPMIDIHDR lpmh, musical_tick tkMax, i32 iBufferNominalMax);
+            ::e_status WorkStreamRender(LPMIDIHDR lpmh, musical_tick tickMax, i32 iBufferNominalMax);
 
-            ::e_status WorkSeek(musical_tick tkPosition, LPMIDIHDR lpmh);
+            ::e_status WorkSeek(musical_tick tickPosition, LPMIDIHDR lpmh);
 
-            ::e_status StreamEvent(musical_tick tkDelta, ::music::midi::event* Event, LPMIDIHDR lpmh, musical_tick tkMax, u32 cbPrerollNomimalMax);
+            ::e_status StreamEvent(musical_tick tickDelta, ::music::midi::event* Event, LPMIDIHDR lpmh, musical_tick tickMax, u32 cbPrerollNomimalMax);
 
-            ::e_status StreamEventF1(musical_tick tkDelta, array < ::music::midi::event*, ::music::midi::event* >& eventptra, LPMIDIHDR lpmh, musical_tick tkMax, u32 cbPrerollNomimalMax);
+            ::e_status StreamEventF1(musical_tick tickDelta, array < ::music::midi::event*, ::music::midi::event* >& eventptra, LPMIDIHDR lpmh, musical_tick tickMax, u32 cbPrerollNomimalMax);
 
-            ::e_status InsertParmData(musical_tick tkDelta, LPMIDIHDR lpmh);
+            ::e_status InsertParmData(musical_tick tickDelta, LPMIDIHDR lpmh);
 
-            ::e_status InsertPadEvent(musical_tick tkDelta, LPMIDIHDR lpmh);
+            ::e_status InsertPadEvent(musical_tick tickDelta, LPMIDIHDR lpmh);
 
             //DECLARE_MESSAGE_HANDLER(_001OnMidiOutDone);
             //DECLARE_MESSAGE_HANDLER(_001OnMidiOutPositionCB);

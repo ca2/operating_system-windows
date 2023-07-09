@@ -338,7 +338,7 @@ namespace multimedia
       //      LPWAVEPROCDATAMESSAGE lpxfwm = new WAVEPROCDATAMESSAGE;
       //      lpxfwm->bDelete = true;
       //      lpxfwm->msSampleTime = msSampleTime;
-      //      //      lpxfwm->tkSamplePosition = tkPosition;
+      //      //      lpxfwm->tickSamplePosition = tickPosition;
       //      lpxfwm->lpWaveHdr = lpWaveHdr;
       //      pthread->post_thread_message(
       //      WM_USER,

@@ -604,7 +604,7 @@ Opened:
          //   }
          //   else
          //   {
-         //      //*pTicks += mmt.u.ticks;
+         //      //& ticka += mmt.u.ticks;
          //      return (u32) mmt.u.ms;
          //   }
          //}

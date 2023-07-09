@@ -490,7 +490,7 @@ int_bool EnableTokenPrivilege(LPCTSTR pszPrivilege)
 
    HANDLE hToken = 0;
 
-   TOKEN_PRIVILEGES tkp = { 0 };
+   TOKEN_PRIVILEGES tokenprivileges = { 0 };
 
    // Get a token for this process.
    if (!OpenProcessToken(GetCurrentProcess(), TOKEN_ADJUST_PRIVILEGES | TOKEN_QUERY, &hToken))
@@ -501,15 +501,15 @@ int_bool EnableTokenPrivilege(LPCTSTR pszPrivilege)
    }
 
    // Get the LUID for the privilege.
-   if (LookupPrivilegeValue(nullptr, pszPrivilege, &tkp.Privileges[0].Luid))
+   if (LookupPrivilegeValue(nullptr, pszPrivilege, &tokenprivileges.Privileges[0].Luid))
    {
       
-      tkp.PrivilegeCount = 1;  // one privilege to set
+      tokenprivileges.PrivilegeCount = 1;  // one privilege to set
       
-      tkp.Privileges[0].Attributes = SE_PRIVILEGE_ENABLED;
+      tokenprivileges.Privileges[0].Attributes = SE_PRIVILEGE_ENABLED;
 
       // set the privilege for this process.
-      AdjustTokenPrivileges(hToken, false, &tkp, 0, (PTOKEN_PRIVILEGES)nullptr, 0);
+      AdjustTokenPrivileges(hToken, false, &tokenprivileges, 0, (PTOKEN_PRIVILEGES)nullptr, 0);
 
       DWORD dwError = ::GetLastError();
 

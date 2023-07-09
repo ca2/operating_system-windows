@@ -495,7 +495,7 @@ namespace music
          }
 
 
-         ::e_status sequencer::get_position(musical_tick & tk)
+         ::e_status sequencer::get_position(musical_tick & tick)
          {
 
             synchronous_lock synchronouslock(synchronization());
@@ -515,12 +515,12 @@ namespace music
 
             }
 
-            tk = 0;
+            tick = 0;
 
             if (sequence::e_state_opened != m_psequence->get_state())
             {
 
-               tk = m_psequence->m_tkBase;
+               tick = m_psequence->m_tkBase;
 
                if (sequence::e_state_pre_rolled != m_psequence->get_state())
                {
@@ -562,7 +562,7 @@ namespace music
 
                      }
 
-                     tk += mmt.u.ticks;
+                     tick += mmt.u.ticks;
 
                   }
 
@@ -1375,9 +1375,9 @@ namespace music
          //   return musical_tick(MillisecsToTicks((iptr)::time));
          //}
 
-         //::time sequencer::PositionToTime(musical_tick tk)
+         //::time sequencer::PositionToTime(musical_tick tick)
          //{
-         //   return ::time(TicksToMillisecs((musical_tick)(iptr)tk));
+         //   return ::time(TicksToMillisecs((musical_tick)(iptr)tick));
          //}
 
 
@@ -1793,15 +1793,15 @@ namespace music
          }
 
 
-         ::e_status sequencer::StreamEventF1(musical_tick tkDelta,
+         ::e_status sequencer::StreamEventF1(musical_tick tickDelta,
             array < ::music::midi::event *, ::music::midi::event * > & eventptra,
             LPMIDIHDR lpmh,
-            musical_tick tkMax,
+            musical_tick tickMax,
             u32 cbPrerollNomimalMax
          )
          {
 
-            UNREFERENCED_PARAMETER(tkMax);
+            UNREFERENCED_PARAMETER(tickMax);
             UNREFERENCED_PARAMETER(cbPrerollNomimalMax);
 
             ::e_status estatus;
@@ -1851,7 +1851,7 @@ namespace music
             m_psequence->m_pfile->m_flags &= ~InsertSysEx;
             m_psequence->m_pfile->m_dwPendingUserEvent = ((MEVT_F_CALLBACK | MEVT_F_LONG | (((DWORD)MEVT_COMMENT) << 24)) & 0xFF000000L);
 
-            estatus = InsertParmData(tkDelta, lpmh);
+            estatus = InsertParmData(tickDelta, lpmh);
 
             if (!estatus)
             {
@@ -1866,14 +1866,14 @@ namespace music
 
 
          ::e_status sequencer::StreamEvent(
-            musical_tick tkDelta,
+            musical_tick tickDelta,
             ::music::midi::event * pevent,
             LPMIDIHDR lpmh,
-            musical_tick tkMax,
+            musical_tick tickMax,
             u32 cbPrerollNominalMax)
          {
 
-            UNREFERENCED_PARAMETER(tkMax);
+            UNREFERENCED_PARAMETER(tickMax);
 
             if (pevent->GetFlags() & 1)
             {
@@ -1999,7 +1999,7 @@ namespace music
 
                }
 
-               *lpdw++ = (DWORD)tkDelta;
+               *lpdw++ = (DWORD)tickDelta;
                *lpdw++ = 0;
                *lpdw++ = (((DWORD)MEVT_SHORTMSG) << 24) |
                   ((DWORD)pevent->GetFullType()) |
@@ -2043,7 +2043,7 @@ namespace music
 
                DWORD dw = (((DWORD)MEVT_TEMPO) << 24) | dwTempo;
 
-               *lpdw++ = (DWORD)tkDelta;
+               *lpdw++ = (DWORD)tickDelta;
                *lpdw++ = 0;
                *lpdw++ = dw;
 
@@ -2053,7 +2053,7 @@ namespace music
             //       else if ((Meta == pEvent->GetType()) &&
             //          (05 == pEvent->GetType()))
             ///      {
-            /**lpdw++ = (DWORD)pEvent->tkDelta;
+            /**lpdw++ = (DWORD)pEvent->tickDelta;
             *lpdw++ = 0;
             *lpdw++ = MEVT_F_SHORT | MEVT_F_CALLBACK |
             (((DWORD)MEVT_SHORTMSG )<<24) |
@@ -2072,7 +2072,7 @@ namespace music
             //            m_fdwSMF &= ~FlagInsertSysEx;
             //         m_dwPendingUserEvent = MEVT_F_CALLBACK |(((DWORD)MEVT_LONGMSG )<<24);
             //m_dwPendingUserEvent = (((DWORD)MEVT_LONGMSG )<<24);
-            //         smfrc = smfInsertParmData(pSmf, pEvent->tkDelta, lpmh);
+            //         smfrc = smfInsertParmData(pSmf, pEvent->tickDelta, lpmh);
             //            if (::success != smfrc)
             //            {
             //                information( "smfInsertParmData[2] %u", (DWORD)smfrc);
@@ -2082,7 +2082,7 @@ namespace music
             //            lpdw = (LPDWORD)(lpmh->lpData + lpmh->dwBytesRecorded);
 
 
-            //smfrc = smfInsertParmData(pSmf, pEvent->tkDelta, lpmh);
+            //smfrc = smfInsertParmData(pSmf, pEvent->tickDelta, lpmh);
             //if (::success != smfrc)
             //{
             //    information( "smfInsertParmData[2] %u", (DWORD)smfrc);
@@ -2171,7 +2171,7 @@ namespace music
 
                   //}
 
-                  estatus = InsertParmData(tkDelta, lpmh);
+                  estatus = InsertParmData(tickDelta, lpmh);
 
                   if (!estatus)
                   {
@@ -2196,10 +2196,10 @@ namespace music
             else // Meta
             {
 
-               // if the meta event has tkDelta > 0,
+               // if the meta event has tickDelta > 0,
                // the meta event is inserted in the stream
                // so syncing is maintained.
-               if (tkDelta > 0)
+               if (tickDelta > 0)
                {
 
                   if (16 * sizeof(DWORD) > cbPrerollNominalMax)
@@ -2209,7 +2209,7 @@ namespace music
 
                   }
 
-                  InsertPadEvent(tkDelta, lpmh);
+                  InsertPadEvent(tickDelta, lpmh);
 
                   lpdw = (LPDWORD)(lpmh->lpData + lpmh->dwBytesRecorded);
 
@@ -2222,7 +2222,7 @@ namespace music
          }
 
 
-         ::e_status sequencer::InsertPadEvent(musical_tick tkDelta, LPMIDIHDR lpmh)
+         ::e_status sequencer::InsertPadEvent(musical_tick tickDelta, LPMIDIHDR lpmh)
          {
 
             LPDWORD     lpdw;
@@ -2230,10 +2230,10 @@ namespace music
             DWORD    dwLength;
 
 
-            ASSERT(tkDelta >= 0);
+            ASSERT(tickDelta >= 0);
             ASSERT(lpmh != nullptr);
 
-            /* Can't fit 4 DWORD's? (tkDelta + stream-atom + event + some data)
+            /* Can't fit 4 DWORD's? (tickDelta + stream-atom + event + some data)
             ** Can't do anything.
             */
             ASSERT(lpmh->dwBufferLength >= lpmh->dwBytesRecorded);
@@ -2248,7 +2248,7 @@ namespace music
 
             if (lpmh->dwBufferLength - lpmh->dwBytesRecorded < 4 * sizeof(DWORD))
             {
-               if (0 == tkDelta)
+               if (0 == tickDelta)
                   return ::success;
 
                /* If we got here with a real delta, that means smfReadEvents screwed
@@ -2270,8 +2270,8 @@ namespace music
 
             dwRounded = (dwLength + 3) & (~3L);
 
-            //tkOffset = tkDelta;
-            *lpdw++ = (DWORD)tkDelta;
+            //tickOffset = tickDelta;
+            *lpdw++ = (DWORD)tickDelta;
             *lpdw++ = 0;
             //*lpdw++ = ((MEVT_F_CALLBACK | MEVT_F_LONG |(((DWORD)MEVT_LONGMSG)<<24)) & 0xFF000000L )   | (dwLength & 0x00FFFFFFL);;
             //   *lpdw++ = ((MEVT_F_CALLBACK | MEVT_F_LONG |(((DWORD)MEVT_COMMENT)<<24)) & 0xFF000000L )   | (dwLength & 0x00FFFFFFL);;
@@ -2311,7 +2311,7 @@ namespace music
          }
 
 
-         ::e_status sequencer::InsertParmData(musical_tick tkDelta, LPMIDIHDR lpmh)
+         ::e_status sequencer::InsertParmData(musical_tick tickDelta, LPMIDIHDR lpmh)
          {
 
             DWORD             dwLength;
@@ -2321,14 +2321,14 @@ namespace music
             //    assert(pSmf != nullptr);
             ASSERT(lpmh != nullptr);
 
-            /* Can't fit 4 DWORD's? (tkDelta + stream-atom + event + some data)
+            /* Can't fit 4 DWORD's? (tickDelta + stream-atom + event + some data)
             ** Can't do anything.
             */
             ASSERT(lpmh->dwBufferLength >= lpmh->dwBytesRecorded);
 
             if (lpmh->dwBufferLength - lpmh->dwBytesRecorded < 4 * sizeof(DWORD))
             {
-               if (0 == tkDelta)
+               if (0 == tickDelta)
                   return ::success;
 
                /* If we got here with a real delta, that means smfReadEvents screwed
@@ -2361,7 +2361,7 @@ namespace music
             //if (!m_bHadNoteOn)
             //{
 
-            //   if (tkDelta == 0)
+            //   if (tickDelta == 0)
             //   {
 
             //      *lpdw++ = (DWORD)480;
@@ -2377,7 +2377,7 @@ namespace music
             //}
             //else
             //{
-            * lpdw++ = (DWORD)tkDelta;
+            * lpdw++ = (DWORD)tickDelta;
             //}
             *lpdw++ = 0L;
             *lpdw++ = (m_psequence->m_pfile->m_dwPendingUserEvent & 0xFF000000L) | (dwLength & 0x00FFFFFFL);
@@ -2444,12 +2444,12 @@ namespace music
          }
 
 
-         ::e_status sequencer::WorkStreamRender(LPMIDIHDR lpmh, musical_tick tkMax, i32 iBufferNominalMax)
+         ::e_status sequencer::WorkStreamRender(LPMIDIHDR lpmh, musical_tick tickMax, i32 iBufferNominalMax)
          {
 
             ::e_status              estatus;
-            musical_tick            tkDelta;
-            musical_tick            tkLastPosition;
+            musical_tick            tickDelta;
+            musical_tick            tickLastPosition;
 
             ASSERT(lpmh != nullptr);
 
@@ -2478,7 +2478,7 @@ namespace music
 
             }
 
-            tkLastPosition = m_psequence->m_pfile->GetPosition();
+            tickLastPosition = m_psequence->m_pfile->GetPosition();
 
             while (true)
             {
@@ -2520,7 +2520,7 @@ namespace music
 
                int iLeft = iBufferNominalMax - lpmh->dwBytesRecorded;
 
-               estatus = m_psequence->m_pfile->WorkGetNextEvent(pevent, tkMax, true, &iLeft);
+               estatus = m_psequence->m_pfile->WorkGetNextEvent(pevent, tickMax, true, &iLeft);
 
                if (estatus == ::error_would_reach_buffer_limit)
                {
@@ -2541,42 +2541,42 @@ namespace music
 
                }
 
-               ASSERT(m_psequence->m_pfile->GetPosition() >= tkLastPosition);
+               ASSERT(m_psequence->m_pfile->GetPosition() >= tickLastPosition);
 
-               musical_tick tkPosition = m_psequence->m_pfile->GetPosition();
+               musical_tick tickPosition = m_psequence->m_pfile->GetPosition();
 
                if (m_psequence->m_eeffect == e_effect_fade_in || m_psequence->m_eeffect == e_effect_fade_out)
                {
 
-                  musical_tick tkDiv = m_psequence->GetQuarterNote();
+                  musical_tick tickDiv = m_psequence->GetQuarterNote();
 
-                  while ((m_psequence->tick_to_time(tkLastPosition + tkDiv) - m_psequence->tick_to_time(tkLastPosition)) > 100_ms)
+                  while ((m_psequence->tick_to_time(tickLastPosition + tickDiv) - m_psequence->tick_to_time(tickLastPosition)) > 100_ms)
                   {
 
-                     tkDiv /= 2;
+                     tickDiv /= 2;
 
                   }
 
                   while (true)
                   {
 
-                     musical_tick tkOp = ((m_tkLastOp + tkDiv) / tkDiv) * tkDiv;
+                     musical_tick tickOp = ((m_tkLastOp + tickDiv) / tickDiv) * tickDiv;
 
-                     if (tkOp > tkPosition)
+                     if (tickOp > tickPosition)
                      {
 
                         break;
 
                      }
 
-                     if (tkOp < tkLastPosition)
+                     if (tickOp < tickLastPosition)
                      {
 
-                        tkOp = tkPosition;
+                        tickOp = tickPosition;
 
                      }
 
-                     tkDelta = tkOp - tkLastPosition;
+                     tickDelta = tickOp - tickLastPosition;
 
                      LPDWORD lpdw = (LPDWORD)(lpmh->lpData + lpmh->dwBytesRecorded);
 
@@ -2585,7 +2585,7 @@ namespace music
                      if (m_psequence->m_eeffect == e_effect_fade_in || m_psequence->m_eeffect == e_effect_fade_out)
                      {
 
-                        double dVolume = m_psequence->get_fade_volume(m_psequence->tick_to_time(tkOp));
+                        double dVolume = m_psequence->get_fade_volume(m_psequence->tick_to_time(tickOp));
 
                         for (int iTrack = 0; iTrack < 16; iTrack++)
                         {
@@ -2608,7 +2608,7 @@ namespace music
                               DWORD dwChB1 = e_control_change_volume;
                               DWORD dwChB2 = bVolume;
 
-                              *lpdw++ = (DWORD)tkDelta;
+                              *lpdw++ = (DWORD)tickDelta;
                               *lpdw++ = 0;
                               *lpdw++ = (((DWORD)MEVT_SHORTMSG) << 24) |
                                  (dwFullType) |
@@ -2616,9 +2616,9 @@ namespace music
                                  (dwChB2 << 16);
 
 
-                              tkLastPosition += tkDelta;
+                              tickLastPosition += tickDelta;
 
-                              tkDelta = 0;
+                              tickDelta = 0;
 
                               lpmh->dwBytesRecorded += 3 * sizeof(DWORD);
 
@@ -2650,13 +2650,13 @@ namespace music
 
                         }
 
-                        *lpdw++ = (DWORD)tkDelta;
+                        *lpdw++ = (DWORD)tickDelta;
                         *lpdw++ = 0;
                         *lpdw++ = (MEVT_NOP << 24);
 
-                        tkLastPosition += tkDelta;
+                        tickLastPosition += tickDelta;
 
-                        tkDelta = 0;
+                        tickDelta = 0;
 
                         lpmh->dwBytesRecorded += 3 * sizeof(DWORD);
 
@@ -2665,17 +2665,17 @@ namespace music
 
                      }
 
-                     m_tkLastOp = tkOp;
+                     m_tkLastOp = tickOp;
 
                   }
 
                }
 
-               tkDelta = tkPosition - tkLastPosition;
+               tickDelta = tickPosition - tickLastPosition;
 
                iLeft = lpmh->dwBufferLength - lpmh->dwBytesRecorded;
 
-               estatus = StreamEvent(tkDelta, pevent, lpmh, tkMax, minimum(iBufferNominalMax, iLeft));
+               estatus = StreamEvent(tickDelta, pevent, lpmh, tickMax, minimum(iBufferNominalMax, iLeft));
 
                if (estatus == ::error_would_reach_buffer_limit)
                {
@@ -2684,7 +2684,7 @@ namespace music
 
                }
 
-               tkLastPosition = tkPosition;
+               tickLastPosition = tickPosition;
 
             }
 
