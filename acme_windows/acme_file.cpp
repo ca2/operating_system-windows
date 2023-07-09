@@ -75,11 +75,7 @@ namespace acme_windows
 
       fileinstance.get_file_time(nullptr, nullptr, &ftWrite);
 
-      class ::time time;
-
-      file_time_to_time(&time, (file_time_t *) & ftWrite);
-
-      return time;
+      return class ::time(as_file_time(ftWrite));
 
    }
 
@@ -100,11 +96,9 @@ namespace acme_windows
 
       }
 
-      ::file_time_t filetime;
+      auto FILETIME = as_FILETIME(file_time(time));
 
-      time_to_file_time(&filetime, &time);
-
-      fileinstance.set_file_time(nullptr, nullptr, (FILETIME *)&filetime);
+      fileinstance.set_file_time(nullptr, nullptr, &FILETIME);
            
    }
 

@@ -220,7 +220,7 @@ namespace acme_windows
       if (m_pFoundInfo != nullptr)
       {
 
-         file_time_to_earth_time(&refTime, (file_time_t*)&m_pFoundInfo->ftLastAccessTime);
+         refTime = ::earth::time(as_file_time(m_pFoundInfo->ftLastAccessTime));
 
          return true;
 
@@ -244,7 +244,7 @@ namespace acme_windows
 
       }
        
-      file_time_to_earth_time(&refTime, (file_time_t *)&m_pFoundInfo->ftLastWriteTime);
+      refTime = ::earth::time(as_file_time(m_pFoundInfo->ftLastWriteTime));
 
       return true;
 
@@ -264,7 +264,7 @@ namespace acme_windows
 
       }
          
-      file_time_to_earth_time(&refTime, (file_time_t *)&((LPWIN32_FIND_DATAW)m_pFoundInfo)->ftCreationTime);
+      refTime = ::earth::time(as_file_time(m_pFoundInfo->ftCreationTime));
       
       return true;
       
