@@ -636,13 +636,13 @@ int ASN1_TIME_normalize(ASN1_TIME *s);
 int ASN1_TIME_cmp_time_t(const ASN1_TIME *s, time_t t);
 int ASN1_TIME_compare(const ASN1_TIME *a, const ASN1_TIME *b);
 
-int i2a_ASN1_INTEGER(BIO *bp, const ASN1_INTEGER *a);
+int iaa_ASN1_INTEGER(BIO *bp, const ASN1_INTEGER *a);
 int a2i_ASN1_INTEGER(BIO *bp, ASN1_INTEGER *bs, char *buf, int size);
-int i2a_ASN1_ENUMERATED(BIO *bp, const ASN1_ENUMERATED *a);
+int iaa_ASN1_ENUMERATED(BIO *bp, const ASN1_ENUMERATED *a);
 int a2i_ASN1_ENUMERATED(BIO *bp, ASN1_ENUMERATED *bs, char *buf, int size);
-int i2a_ASN1_OBJECT(BIO *bp, const ASN1_OBJECT *a);
+int iaa_ASN1_OBJECT(BIO *bp, const ASN1_OBJECT *a);
 int a2i_ASN1_STRING(BIO *bp, ASN1_STRING *bs, char *buf, int size);
-int i2a_ASN1_STRING(BIO *bp, const ASN1_STRING *a, int type);
+int iaa_ASN1_STRING(BIO *bp, const ASN1_STRING *a, int type);
 int i2t_ASN1_OBJECT(char *buf, int buf_len, const ASN1_OBJECT *a);
 
 int a2d_ASN1_OBJECT(unsigned char *out, int olen, const char *buf, int num);
