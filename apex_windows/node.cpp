@@ -595,7 +595,7 @@ namespace apex_windows
 
       auto estatus = ::windows::hresult_status(hresult);
 
-      if (::failed(estatus))
+      if (estatus.failed())
       {
 
          throw ::exception(estatus);

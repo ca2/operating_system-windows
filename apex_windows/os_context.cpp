@@ -410,7 +410,7 @@ namespace apex_windows
       catch (const ::e_status & estatus)
       {
 
-         return estatus;
+         return estatus.m_eenum;
 
       }
 
@@ -435,7 +435,7 @@ namespace apex_windows
       catch (const ::e_status & estatus)
       {
 
-         return estatus;
+         return estatus.m_eenum;
 
       }
 
@@ -2400,7 +2400,7 @@ namespace apex_windows
 
       auto estatus = manualresetevent.wait(5_min);
 
-      if (::failed(estatusFileOpen))
+      if (estatusFileOpen.failed())
       {
 
          ::string strMessage;
@@ -2412,7 +2412,7 @@ namespace apex_windows
          throw exception(estatusFileOpen, { errorcode }, strMessage);
 
       }
-      else if (::failed(estatus))
+      else if (estatus.failed())
       {
 
          throw exception(estatus, "apex_windows::os_context::file_open failed");

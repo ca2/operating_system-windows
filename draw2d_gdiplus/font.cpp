@@ -221,8 +221,48 @@ namespace draw2d_gdiplus
       if (!bFont)
       {
 
+         ::string strFamilyName = m_pfontfamily->family_name(this);
+
+         if (strFamilyName.case_insensitive_equals("Segoe UI"))
+         {
+
+            auto efontweight = m_fontweight.sink(m_fontweight.i32());
+
+            if (efontweight == e_font_weight_thin)
+            {
+
+               strFamilyName += " Light";
+
+            }
+            else if (efontweight == e_font_weight_extra_light)
+            {
+
+               strFamilyName += " Light";
+
+            }
+            else if (efontweight == e_font_weight_light)
+            {
+
+               strFamilyName += " Semilight";
+
+            }
+            else if (efontweight == e_font_weight_semi_light)
+            {
+
+               strFamilyName += " Semilight";
+
+            }
+            else if (efontweight > e_font_weight_normal)
+            {
+
+               strFamilyName += " Black";
+
+            }
+
+         }
+
          auto pfont = new Gdiplus::Font(
-            utf8_to_unicode(m_pfontfamily->family_name(this)),
+            utf8_to_unicode(strFamilyName),
             gdiplus_font_size(m_fontsize),
             iStyle,
             gdiplus_font_unit(m_fontsize));

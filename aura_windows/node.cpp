@@ -54,9 +54,9 @@ namespace aura_windows
 
          DWORD dwAppsUseLightTheme = 0;
 
-         auto estatus = key._get("AppsUseLightTheme", dwAppsUseLightTheme);
+         auto bOk = key._get("AppsUseLightTheme", dwAppsUseLightTheme);
 
-         if (::failed(estatus))
+         if (!bOk)
          {
 
             return false;
@@ -88,9 +88,9 @@ namespace aura_windows
 
          DWORD dwSystemUseLightTheme;
 
-         auto estatus = key._get("SystemUseLightTheme", dwSystemUseLightTheme);
+         auto bOk = key._get("SystemUseLightTheme", dwSystemUseLightTheme);
 
-         if (::failed(estatus))
+         if (!bOk)
          {
 
             return false;
