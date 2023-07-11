@@ -84,7 +84,7 @@ namespace audio_mixer_mmsystem
 
       auto estatus = mmresult_status(mmresult);
 
-      if (::failed(estatus))
+      if (estatus.failed())
       {
 
          //string strMessage;
@@ -103,7 +103,7 @@ namespace audio_mixer_mmsystem
 
       estatus = mmresult_status(mmresult);
 
-      if (::failed(estatus))
+      if (estatus.failed())
       {
 
          //string strMessage;
@@ -138,7 +138,7 @@ namespace audio_mixer_mmsystem
 
       auto estatus = mmresult_status(mmresult);
 
-      if (::failed(estatus))
+      if (estatus.failed())
       {
 
          //string strMessage;

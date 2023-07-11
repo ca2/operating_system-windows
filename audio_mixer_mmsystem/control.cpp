@@ -857,7 +857,7 @@ namespace audio_mixer_mmsystem
 
                         auto estatus = mmresult_status(mmresult);
 
-                        if (::failed(estatus))
+                        if (estatus.failed())
                         {
 
                            throw ::exception(estatus);

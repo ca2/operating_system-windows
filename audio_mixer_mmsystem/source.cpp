@@ -78,7 +78,7 @@
 
          auto estatus = mmresult_status(mmresult);
 
-         if (::failed(estatus))
+         if (estatus.failed())
          {
 
             //string strMessage;
@@ -254,7 +254,7 @@
 
          auto estatus = mmresult_status(mmresult);
 
-         if (::failed(estatus))
+         if (estatus.failed())
          {
 
             //string strMessage;
