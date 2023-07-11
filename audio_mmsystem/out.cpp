@@ -344,7 +344,7 @@ namespace audio_mmsystem
 
          estatus = mmresult_status(mmresult);
 
-         if(::succeeded(estatus))
+         if(estatus.succeeded())
          {
 
             error() <<"ERROR OPENING Unpreparing INPUT DEVICE buffer : " << estatus.as_i64();
@@ -394,7 +394,7 @@ namespace audio_mmsystem
 
       auto estatus = mmresult_status(mmresult);
 
-      if(::failed(estatus))
+      if(estatus.failed())
       {
 
          m_iBufferedCount--;

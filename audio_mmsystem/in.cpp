@@ -157,7 +157,7 @@ namespace audio_mmsystem
 
          estatus = mmresult_status(mmresult);
 
-         if (::succeeded(estatus))
+         if (estatus.succeeded())
          {
 
             break;
@@ -191,7 +191,7 @@ namespace audio_mmsystem
 
       }
 
-      if (::failed(estatus))
+      if (estatus.failed())
       {
 
          throw ::exception(estatus);
@@ -258,7 +258,7 @@ namespace audio_mmsystem
          auto estatus = mmresult_status(mmresult);
 
          //if(::success != (estatus = mmresult_status()))
-         if(::failed(estatus))
+         if(estatus.failed())
          {
             
             information("ERROR OPENING Preparing INPUT DEVICE buffer");
@@ -318,7 +318,7 @@ namespace audio_mmsystem
 
          auto estatus = mmresult_status(mmresult);
 
-         if(::failed(estatus))
+         if(estatus.failed())
          {
 
             error() <<"ERROR OPENING Unpreparing INPUT DEVICE buffer";
@@ -333,7 +333,7 @@ namespace audio_mmsystem
 
       estatus = mmresult_status(mmresult);
 
-      if (::failed(estatus))
+      if (estatus.failed())
       {
 
          throw ::exception(estatus);
@@ -410,7 +410,7 @@ namespace audio_mmsystem
 
       ::e_status estatus = mmresult_status(mmresult);
 
-      if(::failed(estatus))
+      if(estatus.failed())
       {
 
          information("in::in_stop : ERROR OPENING stopping INPUT DEVICE ");
@@ -482,7 +482,7 @@ namespace audio_mmsystem
 
       auto estatus = mmresult_status(mmresult);
 
-      if(::failed(estatus))
+      if(estatus.failed())
       {
 
          error() <<"in::Reset error resetting input device";
@@ -554,7 +554,7 @@ namespace audio_mmsystem
 
       estatus = mmresult_status(mmresult);
 
-      if(::failed(estatus))
+      if(estatus.failed())
       {
 
          information("ERROR OPENING Adding INPUT DEVICE buffer");
