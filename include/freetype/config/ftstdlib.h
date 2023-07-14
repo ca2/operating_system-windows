@@ -80,7 +80,7 @@
 #define ft_memchr   memchr
 #define ft_memcmp   memcmp
 #define ft_memcpy   memcpy
-#define ft_memmove  memory_transfer
+#define ft_memmove  memmove
 #define ft_memset   memset
 #define ft_strcat   strcat
 #define ft_strcmp   strcmp

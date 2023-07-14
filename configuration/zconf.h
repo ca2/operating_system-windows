@@ -9,7 +9,7 @@
 #define ZCONF_H
 
 
-#if defined(_output_type_static) || defined(CUBE)
+#if defined(_output_type_staticlibrary) || defined(CUBE)
 #undef ZLIB_DLL
 #else
 #define ZLIB_DLL
