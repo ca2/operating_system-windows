@@ -2135,9 +2135,44 @@ namespace windowing_win32
 
       }
 
+      if (eactivation.eflag() & ::e_activation_no_activate)
+      {
+
+         nOverrideFlags |= SWP_NOACTIVATE;
+
+      }
+
+      if (eactivation.eflag() & ::e_activation_set_popup)
+      {
+
+         _modify_style(0, WS_POPUP);
+
+      }
+
+
       HWND hwnd = get_hwnd();
 
-      ::SetWindowPos(hwnd, nullptr, x, y, cx, cy, nOverrideFlags);
+      ::pointer < class windowing > pwindowing = m_pwindowing;
+
+      HWND hwndZorder = pwindowing->zorder_to_hwnd(zorder);
+
+      if (hwndZorder != nullptr)
+      {
+
+         nOverrideFlags &= ~SWP_NOZORDER;
+
+      }
+
+      ::SetWindowPos(hwnd, hwndZorder, x, y, cx, cy, nOverrideFlags);
+
+      if (eactivation & e_activation_set_foreground)
+      {
+
+         ::SetForegroundWindow(hwnd);
+
+         ::BringWindowToTop(hwnd);
+
+      }
 
       return true;
 

@@ -868,18 +868,23 @@ namespace windowing_win32
                   ::UpdateLayeredWindow(hwnd, m_hdcScreen, (POINT *)&point, (SIZE *)&size, playeredwindowbuffer->m_hdc, (POINT *)&pointSrc, make_u32(0, 0, 0, 0), &blendPixelFunction, ULW_ALPHA);
 
                   if (rectangleWindowCurrent.top_left() != point
-                     || rectangleWindowCurrent.size() != size)
+                     || rectangleWindowCurrent.size() != size
+                     || m_pimpl->m_puserinteraction->const_layout().design().has_activation_request())
                   {
 
+
                      m_pimpl->m_pwindow->_set_window_pos(
-                        {}, 
+                        m_pimpl->m_puserinteraction->const_layout().design().zorder(),
                         point.x(),
                         point.y(),
                         size.cx(),
                         size.cy(),
-                        e_activation_default, 
+                        m_pimpl->m_puserinteraction->const_layout().design().activation(),
                         true, false, false, true, false, 
                         uFlagsSetWindowPos);
+
+
+                     m_pimpl->m_puserinteraction->clear_activation();
 
                      bSizeOrPositionChanged = true;
 
