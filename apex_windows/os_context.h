@@ -45,10 +45,10 @@ namespace apex_windows
       ::payload connection_settings_get_auto_config_url() override;
 
 
-      void local_machine_set_run(const ::string & pszKey, const ::string & pszCommand, const ::string& strArguments, bool bSet) override;
-      void local_machine_set_run_once(const ::string & pszKey, const ::string & pszCommand, const ::string& strArguments, bool bSet) override;
-      void current_user_set_run(const ::string & pszKey, const ::string & pszCommand, const ::string & strArguments, bool bSet) override;
-      void current_user_set_run_once(const ::string & pszKey, const ::string & pszCommand, const ::string& strArguments, bool bSet) override;
+      void local_machine_set_run(const ::string & pszKey, const ::file::path & pathExecutable, const ::string& strArguments, bool bSet) override;
+      void local_machine_set_run_once(const ::string & pszKey, const ::file::path & pathExecutable, const ::string& strArguments, bool bSet) override;
+      void current_user_set_run(const ::string & pszKey, const ::file::path & pathExecutable, const ::string & strArguments, bool bSet) override;
+      void current_user_set_run_once(const ::string & pszKey, const ::file::path & pathExecutable, const ::string& strArguments, bool bSet) override;
       void defer_register_ca2_plugin_for_mozilla() override;
 
       void file_extension_get_open_with_list_keys(string_array & straKey, const ::string & pszExtension) override;
@@ -118,7 +118,7 @@ namespace apex_windows
 
       virtual void get_default_browser(string & strId, ::file::path & path, string & strParam) override;
 
-      void register_user_auto_start(const string & strAppId, const string & strCommand, const string & strArguments, bool bRegister) override;
+      void register_user_auto_start(const string & strAppId, const ::file::path & pathExecutable, const string & strArguments, bool bRegister) override;
 
       bool is_user_auto_start(const ::string & strAppId) override;
 

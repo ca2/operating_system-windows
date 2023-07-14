@@ -444,7 +444,7 @@ namespace apex_windows
    }
 
 
-   void os_context::local_machine_set_run(const ::string & strKey, const ::string & strCommand, const ::string & strArguments, bool bSet)
+   void os_context::local_machine_set_run(const ::string & strKey, const ::file::path & pathExecutable, const ::string & strArguments, bool bSet)
    {
 
       try
@@ -456,7 +456,9 @@ namespace apex_windows
          if (bSet)
          {
 
-            keyKar.set(strKey, strCommand);
+            auto windowspath = pathExecutable.windows_path();
+
+            keyKar.set(strKey, windowspath);
 
          }
          else
@@ -479,7 +481,7 @@ namespace apex_windows
    }
 
 
-   void os_context::local_machine_set_run_once(const ::string & pszKey, const ::string & pszCommand, const ::string & pszArguments, bool bSet)
+   void os_context::local_machine_set_run_once(const ::string & pszKey, const ::file::path & pathExecutable, const ::string & pszArguments, bool bSet)
    {
 
       try
@@ -490,7 +492,9 @@ namespace apex_windows
          if (bSet)
          {
 
-            keyKar.set(pszKey, string(pszCommand));
+            auto windowspath = pathExecutable.windows_path();
+
+            keyKar.set(pszKey, windowspath);
 
          }
          else
@@ -513,7 +517,7 @@ namespace apex_windows
    }
 
 
-   void   os_context::current_user_set_run(const ::string & pszKey, const ::string & pszCommand, const ::string & strArguments, bool bSet)
+   void os_context::current_user_set_run(const ::string & pszKey, const ::file::path & pathExecutable, const ::string & strArguments, bool bSet)
    {
 
       try
@@ -527,7 +531,9 @@ namespace apex_windows
 
             string str;
 
-            str = "\"" + string(pszCommand) + "\"" + ::str::has_char(strArguments, " ");
+            auto windowspath = pathExecutable.windows_path();
+
+            str = "\"" + string(windowspath) + "\"" + ::str::has_char(strArguments, " ");
 
             keyKar.set(pszKey, str);
 
@@ -553,7 +559,7 @@ namespace apex_windows
    }
 
 
-   void os_context::current_user_set_run_once(const ::string & pszKey, const ::string & pszCommand, const ::string & pszArguments, bool bSet)
+   void os_context::current_user_set_run_once(const ::string & pszKey, const ::file::path & pathExecutable, const ::string & pszArguments, bool bSet)
    {
 
       try
@@ -564,7 +570,9 @@ namespace apex_windows
          if (bSet)
          {
 
-            keyKar.set(pszKey, string(pszCommand));
+            auto windowspath = pathExecutable.windows_path();
+
+            keyKar.set(pszKey, windowspath);
 
          }
          else
@@ -2633,10 +2641,10 @@ namespace apex_windows
    }
 
 
-   void os_context::register_user_auto_start(const string & strId, const string & strCommand, const string & strArguments, bool bRegister)
+   void os_context::register_user_auto_start(const string & strId, const ::file::path & pathExecutable, const string & strArguments, bool bRegister)
    {
 
-      current_user_set_run(strId, strCommand, strArguments, bRegister);
+      current_user_set_run(strId, pathExecutable, strArguments, bRegister);
 
       //return true;
 
