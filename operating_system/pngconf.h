@@ -50,7 +50,7 @@
 #  include <setjmp.h>
 #endif
 
-#ifdef PNG_CONVERT_tIME_SUPPORTED
+#ifdef PNG_CONVERT_TIME_SUPPORTED
    /* Required for struct tm: */
 #  include <time.h>
 #endif
