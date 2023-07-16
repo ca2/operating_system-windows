@@ -37,11 +37,11 @@ namespace aura_windows
 
       point_i32                                 m_point;
 
-      ::user::primitive *                       m_pbasewnd;
+      ::user::primitive* m_pbasewnd;
 
       u32                                       m_uiLastRedrawRequest;
 
-      IDropTargetHelper *                       m_piDropHelper;
+      IDropTargetHelper* m_piDropHelper;
 
       bool                                      m_bUseDnDHelper;
 
@@ -80,7 +80,7 @@ namespace aura_windows
 
       //virtual bool __windows_message_bypass(HWND oswindow, ::u32 message, wparam wparam, lparam lparam, lresult & lresult);
 
-      void install_message_routing(::channel * pchannel) override;
+      void install_message_routing(::channel* pchannel) override;
 
       bool operator==(const interaction_impl& wnd) const;
       bool operator!=(const interaction_impl& wnd) const;
@@ -93,7 +93,7 @@ namespace aura_windows
       //virtual ::user::interaction * get_owner();
       //virtual void set_owner(::user::interaction * pOwnerWnd);
 
-      virtual void route_command(::message::command * pcommand, bool bRouteToKeyDescendant = false) override;
+      virtual void route_command(::message::command* pcommand, bool bRouteToKeyDescendant = false) override;
 
       //void _002OnDraw(::image * pimage);
 
@@ -140,7 +140,7 @@ namespace aura_windows
 #endif   // WINVER >= 0x0500
 
       //      virtual ::user::interaction * from_os_data(void * pdata);
-      virtual void * get_os_data() const;
+      virtual void* get_os_data() const;
 
 
       //virtual void finish(::object * pcontextobjectFinish) override;
@@ -189,15 +189,15 @@ namespace aura_windows
 
       virtual bool _is_window() override;
 
-//#if(WINVER >= 0x0500)
-//
-//      ::user::interaction_impl * GetAncestor(::u32 gaFlags) const;
-//
-//#endif   // WINVER >= 0x0500
+      //#if(WINVER >= 0x0500)
+      //
+      //      ::user::interaction_impl * GetAncestor(::u32 gaFlags) const;
+      //
+      //#endif   // WINVER >= 0x0500
 
-      lresult send_message(const ::atom & atom, wparam wParam = 0, lparam lParam = {}, const ::point_i32 & point = {}) override;
+      lresult send_message(const ::atom& atom, wparam wParam = 0, lparam lParam = {}, const ::point_i32& point = {}) override;
 
-      void post_message(const ::atom & atom, wparam wParam = 0, lparam lParam = {}) override;
+      void post_message(const ::atom& atom, wparam wParam = 0, lparam lParam = {}) override;
 
 
       //bool SendNotifyMessage(::u32 message, wparam wParam, lparam lParam);
@@ -216,7 +216,7 @@ namespace aura_windows
       //virtual void get_window_text(string & rectangleString) override;
       //virtual strsize get_window_text_length() override;
 
-      virtual void on_layout(::draw2d::graphics_pointer & pgraphics) override;
+      virtual void on_layout(::draw2d::graphics_pointer& pgraphics) override;
       //virtual void on_reposition() override;
       //virtual void on_show_window() override;
       //virtual void on_zorder() override;
@@ -247,8 +247,8 @@ namespace aura_windows
 
 
       virtual void rects_from_os();
-      virtual bool window_rect_from_os(::rectangle_i32 * prectangle);
-      virtual bool client_rect_from_os(::rectangle_i32 * prectangle);
+      virtual bool window_rect_from_os(::rectangle_i32* prectangle);
+      virtual bool client_rect_from_os(::rectangle_i32* prectangle);
 
 
 
@@ -265,8 +265,8 @@ namespace aura_windows
       //virtual void MapWindowPoints(::user::interaction_impl * puserinteractionTo, ::rectangle_i32 * prectangle);
 
 
-      virtual void Print(::draw2d::graphics_pointer & pgraphics, u32 dwFlags);
-      virtual void PrintClient(::draw2d::graphics_pointer & pgraphics, u32 dwFlags);
+      virtual void Print(::draw2d::graphics_pointer& pgraphics, u32 dwFlags);
+      virtual void PrintClient(::draw2d::graphics_pointer& pgraphics, u32 dwFlags);
 
       virtual void UpdateWindow();
       virtual void SetRedraw(bool bRedraw = true);
@@ -296,11 +296,12 @@ namespace aura_windows
       virtual void LockWindowUpdate();
       virtual void UnlockWindowUpdate();
 
-      void show_software_keyboard(::user::element * pelement) override;
-      void hide_software_keyboard(::user::element * pelement) override;
+      void show_software_keyboard(::user::element* pelement) override;
+      void hide_software_keyboard(::user::element* pelement) override;
 
 
-      virtual void RedrawWindow(const ::rectangle_i32 & rectangleUpdate = nullptr, 
+      virtual void RedrawWindow(const ::rectangle_i32& rectangleUpdate =
+         {},
          ::draw2d::region* prgnUpdate = nullptr,
          ::u32 flags = RDW_INVALIDATE | RDW_ERASE);
 

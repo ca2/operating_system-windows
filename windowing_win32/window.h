@@ -39,29 +39,29 @@ namespace windowing_win32
       //void dump(dump_context & dumpcontext) const override;
 
 
-      void install_message_routing(channel * pchannel) override;
+      void install_message_routing(channel* pchannel) override;
 
 
-      
-      void create_window(::user::interaction_impl * pimpl) override;
+
+      void create_window(::user::interaction_impl* pimpl) override;
 
 
-      inline HWND get_hwnd() const { return (HWND) oswindow(); }
+      inline HWND get_hwnd() const { return (HWND)oswindow(); }
       inline void set_hwnd(HWND hwnd) { set_oswindow(__oswindow(hwnd)); }
 
 
-      bool operator== (const window & window) const
+      bool operator== (const window& window) const
       {
          return oswindow() == window.oswindow();
       }
 
-      bool operator!= (const window & window) const
+      bool operator!= (const window& window) const
       {
          return !operator==(window);
       }
 
 
-      ::windowing_win32::windowing * windowing() const { return m_pwindowing.cast < ::windowing_win32::windowing > (); }
+      ::windowing_win32::windowing* windowing() const { return m_pwindowing.cast < ::windowing_win32::windowing >(); }
 
 
       //virtual void set_oswindow(oswindow oswindow) override;
@@ -82,16 +82,18 @@ namespace windowing_win32
       //i32 store_name(const ::string & psz);
       //i32 select_input(i32 iInput);
       //i32 select_all_input();
-      
+
       //virtual i32 map_window();
-      
+
       //virtual i32 unmap_window(bool bWithdraw) override;
 
       //virtual void set_wm_class(const ::string & psz) override;
 
       void exit_iconify() override;
 
-      void full_screen(const::rectangle_i32 & rectangle = nullptr) override;
+      
+      void full_screen(const::rectangle_i32& rectangle = {}) override;
+      
 
       void exit_full_screen() override;
 
@@ -392,7 +394,7 @@ namespace windowing_win32
       virtual bool LockWindowUpdate();
       virtual void UnlockWindowUpdate();
 
-      virtual bool RedrawWindow(const ::rectangle_i32 & rectangleUpdate = nullptr,
+      virtual bool RedrawWindow(const ::rectangle_i32& rectangleUpdate = {},
          ::draw2d::region * prgnUpdate = nullptr,
          ::u32 flags = RDW_INVALIDATE | RDW_ERASE);
 
