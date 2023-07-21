@@ -4,6 +4,7 @@
 #include "acme/exception/exception.h"
 #include "acme/parallelization/synchronous_lock.h"
 #include "acme/primitive/string/international.h"
+#include "aura/graphics/write_text/fonts.h"
 
 
 #undef new
@@ -103,10 +104,51 @@ namespace draw2d_gdiplus
 
       Gdiplus::FontFamily * pfontfamily = nullptr;
 
+      //::string strFamilyName = m_pfontfamily->family_name(this);
+
+      //if (m_path.is_empty())
+      //{
+
+      //   ::string strFontBranch;
+
+      //   if (strFamilyName.begins_eat("font_foundry:"))
+      //   {
+
+      //      auto pFind = strFamilyName.find_first("://");
+
+      //      if (pFind)
+      //      {
+
+      //         strFontBranch = strFamilyName(0, pFind);
+
+      //         strFamilyName = pFind + 3;
+
+      //         auto penumeration = acmesystem()->m_paurasystem->draw2d()->write_text()->fonts()->enumeration(strFontBranch);
+
+      //         if (penumeration)
+      //         {
+
+      //            //m_path = penumeration->m_pfontenumerationitema->predicate_find_first([](auto pitem)
+
+      //         }
+
+      //      }
+
+      //   }
+
+      //}
+
       if (m_path.has_char())
       {
 
          ::pointer<::draw2d_gdiplus::draw2d>pdraw2d = acmesystem()->m_paurasystem->draw2d();
+
+         if (m_pfontfamily && m_pfontfamily->m_strBranch.has_char())
+         {
+
+            pdraw2d->write_text()->fonts()->enumeration(m_pfontfamily->m_strBranch)->defer_download_font(m_path);
+
+         }
 
          auto pprivatefont = pdraw2d->get_file_private_font(pgraphics->m_pcontext, m_path);
 

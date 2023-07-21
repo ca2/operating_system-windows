@@ -6290,9 +6290,9 @@ namespace draw2d_gdiplus
 
       }
 
-      synchronous_lock synchronouslock(acmesystem()->m_paurasystem->draw2d()->write_text()->m_pparticleFontTextMapSynchronization);
-
       m_pfont->defer_update(this, 0);
+
+      synchronous_lock synchronouslock(acmesystem()->m_paurasystem->draw2d()->write_text()->m_pparticleFontTextMapSynchronization);
 
       auto & text = m_pfont->m_mapFontText[scopedstr];
 
