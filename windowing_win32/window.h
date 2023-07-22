@@ -859,7 +859,7 @@ namespace windowing_win32
       virtual bool get_rect_normal(::rectangle_i32 * prectangle);
       //virtual void register_drop_target();
       //virtual void show_task(bool bShow);
-      virtual void window_show_change_visibility(::e_display edisplay, ::e_activation eactivation) override;
+      void _window_show_change_visibility(::e_display edisplay, ::e_activation eactivation) override;
 
 
       virtual void non_top_most_upper_window_rects(::rectangle_i32_array & recta) override;
@@ -893,8 +893,8 @@ namespace windowing_win32
       virtual float dpiy(float y) override;
       virtual float dpix(float x) override;
 
-      virtual void window_show() override;
-      virtual void update_screen() override;
+      void _window_request_presentation() override;
+      void window_update_screen_buffer() override;
 
       void get_cursor_position(::point_i32 * ppointCursor) override;
       void set_cursor_position(const ::point_i32 & pointCursor) override;

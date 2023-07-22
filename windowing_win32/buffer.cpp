@@ -929,7 +929,7 @@ namespace windowing_win32
 
             //m_pimpl->m_puserinteraction->post_message(message_do_show_window);
 
-            m_pimpl->m_puserinteraction->window_show_change_visibility();
+            m_pimpl->m_puserinteraction->_window_show_change_visibility();
 
             if (bSizeOrPositionChanged)
             {

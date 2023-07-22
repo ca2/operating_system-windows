@@ -3331,10 +3331,10 @@ namespace aura_windows
 */
 
 
-   void interaction_impl::window_show_change_visibility(::e_display edisplay, ::e_activation eactivation)
+   void interaction_impl::_window_show_change_visibility(::e_display edisplay, ::e_activation eactivation)
    {
 
-      ::user::interaction_impl::window_show_change_visibility(edisplay, eactivation);
+      ::user::interaction_impl::_window_show_change_visibility(edisplay, eactivation);
 
    }
 

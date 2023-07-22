@@ -5064,7 +5064,8 @@ namespace windowing_win32
     //}
     //
 
-    void window::window_show_change_visibility(::e_display edisplay, ::e_activation eactivation)
+
+    void window::_window_show_change_visibility(::e_display edisplay, ::e_activation eactivation)
     {
 
        throw ::interface_only();
@@ -6444,19 +6445,21 @@ namespace windowing_win32
    }
 
 
-   void window::window_show()
+   void window::_window_request_presentation()
    {
 
       auto puserinteraction = m_puserinteractionimpl->m_puserinteraction;
 
-      auto pprodevian = m_puserinteractionimpl->m_pprodevian;
+      puserinteraction->_window_request_presentation();
 
-      puserinteraction->interaction_post(pprodevian->m_procedureWindowShow);
+      //auto pprodevian = m_puserinteractionimpl->m_pprodevian;
+
+      //puserinteraction->interaction_post(pprodevian->m_procedureWindowShow);
 
    }
 
 
-   void window::update_screen()
+   void window::window_update_screen_buffer()
    {
 
       m_puserinteractionimpl->m_pgraphics->update_screen();

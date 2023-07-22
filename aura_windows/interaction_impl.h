@@ -748,7 +748,7 @@ namespace aura_windows
       virtual void get_rect_normal(::rectangle_i32 * prectangle);
       virtual void register_drop_target();
       virtual void show_task(bool bShow);
-      virtual void window_show_change_visibility(::e_display edisplay, ::e_activation eactivation) override;
+      void _window_show_change_visibility(::e_display edisplay, ::e_activation eactivation) override;
 
 
       //virtual void non_top_most_upper_window_rects(::rectangle_i32_array& recta) override;
