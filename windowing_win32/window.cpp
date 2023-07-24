@@ -6269,7 +6269,7 @@ namespace windowing_win32
          if (hwndCapture != nullptr)
          {
 
-            output_debug_string("a mouse capture");
+            //output_debug_string("a mouse capture");
 
          }
 
