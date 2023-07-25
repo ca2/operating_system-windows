@@ -108,6 +108,8 @@ namespace aura_windows
       //virtual void window_apply_visual(const ::user::window_state & windowstate) override;
 
       DECLARE_MESSAGE_HANDLER(_001OnSysCommand);
+      DECLARE_MESSAGE_HANDLER(on_message_reposition);
+      DECLARE_MESSAGE_HANDLER(on_message_size);
       //DECLARE_MESSAGE_HANDLER(on_message_destroy);
       //DECLARE_MESSAGE_HANDLER(on_message_create);
       //DECLARE_MESSAGE_HANDLER(on_message_kill_focus);

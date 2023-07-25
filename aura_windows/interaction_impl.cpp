@@ -10,7 +10,8 @@
 #include "aura/windowing/window.h"
 #include "aura/message/user.h"
 #include "aura/user/user/interaction.h"
-
+#include "aura/user/user/interaction_scaler.h"
+#include "aura/windowing/placement_log.h"
 
 #include "acme/_operating_system.h"
 
@@ -128,6 +129,8 @@ namespace aura_windows
       ::user::interaction_impl::install_message_routing(pchannel);
 
       MESSAGE_LINK(WM_SYSCOMMAND, pchannel, this, &interaction_impl::_001OnSysCommand);
+      MESSAGE_LINK(e_message_reposition, pchannel, this, &interaction_impl::on_message_reposition);
+      MESSAGE_LINK(e_message_size, pchannel, this, &interaction_impl::on_message_size);
 
 
    }
@@ -2680,6 +2683,246 @@ namespace aura_windows
    //   pmessage->m_bRet = true;
 
    //}
+
+
+void interaction_impl::on_message_reposition(::message::message* pmessage)
+{
+
+   m_puserinteraction->m_pinteractionScaler->on_display_change(m_puserinteraction);
+
+   if (m_bEatMoveEvent)
+   {
+
+      m_bEatMoveEvent = false;
+
+      return;
+
+   }
+
+   if (m_bDestroyImplOnly)
+   {
+
+      return;
+
+   }
+
+   //      if (m_puserinteraction->layout().m_eflag)
+   //      {
+   //
+   //         return;
+   //
+   //      }
+
+   ::pointer<::message::reposition>preposition(pmessage);
+
+   //      if(m_puserinteraction->m_ewindowflag & e_window_flag_postpone_visual_update)
+   //      {
+   //
+   //         return;
+   //
+   //      }
+
+   //      bool bLayered = m_puserinteraction->GetExStyle() & WS_EX_LAYERED;
+   //
+   //#ifndef WINDOWS_DESKTOP
+   //
+   //      bLayered = false;
+   //
+   //#endif
+   //
+   //      if(!bLayered)
+   //      {
+   //
+   //         m_puserinteraction->layout().sketch().origin() = preposition->m_point;
+   //
+   //         m_puserinteraction->screen_origin() = preposition->m_point;
+   //
+   //      }
+
+            //m_pwindow->m_point = preposition->m_point;
+
+   auto& layout = m_puserinteraction->const_layout();
+
+   auto sketch_origin = layout.sketch().origin();
+
+   auto window_origin = layout.window().origin();
+
+   //information() << "interaction_impl::on_message_reposition preposition->m_point " << preposition->m_point;
+
+   //information() << "interaction_impl::on_message_reposition window_origin " << window_origin;
+
+   //information() << "interaction_impl::on_message_reposition sketch_origin " << sketch_origin;
+
+   //if(preposition->m_point.x() == 0)
+   //{
+
+   //  information() << "interaction_impl::on_message_reposition x is zero";
+
+   //}
+
+   if (!m_pwindow->is_iconic())
+   {
+
+      m_puserinteraction->set_position(preposition->m_point, ::user::e_layout_window);
+
+      if (!m_pwindow->placement_log()->has_recent(preposition->m_point))
+      {
+
+         m_puserinteraction->set_position(preposition->m_point, ::user::e_layout_sketch);
+
+         m_puserinteraction->set_reposition();
+
+         m_puserinteraction->set_need_redraw();
+
+         m_puserinteraction->post_redraw();
+
+      }
+
+   }
+
+   //if (m_puserinteraction->layout().is_moving())
+   //{
+
+     // information() << "\nWindow is Moving :: on_message_move";
+
+   //}
+
+   //m_puserinteraction->layout().sketch().origin() = preposition->m_point;
+
+   //if (m_puserinteraction->layout().sketch().display() != e_display_normal)
+   //{
+
+     // m_puserinteraction->display(e_display_normal);
+
+   //}
+
+   //m_puserinteraction->set_reposition();
+
+   //m_puserinteraction->set_need_redraw();
+
+   //m_puserinteraction->post_redraw();
+
+//}
+
+}
+
+
+void interaction_impl::on_message_size(::message::message* pmessage)
+{
+
+   if (m_bEatSizeEvent)
+   {
+
+      m_bEatSizeEvent = false;
+
+      return;
+
+   }
+
+   if (m_bDestroyImplOnly)
+   {
+
+      return;
+
+   }
+
+   if (m_puserinteraction->layout().m_eflag)
+   {
+
+      return;
+
+   }
+
+   ::pointer<::message::size>psize(pmessage);
+
+   //      bool bLayered = m_puserinteraction->GetExStyle() & WS_EX_LAYERED;
+   //
+   //#ifndef WINDOWS_DESKTOP
+   //
+   //      bLayered = false;
+   //
+   //#endif
+   //
+   //      if(!bLayered)
+   //      {
+   //
+   //         m_puserinteraction->layout().window() = psize->m_size;
+   //
+   //      }
+
+   //      if (m_puserinteraction->layout().sketch().size() != psize->m_size)
+   //      {
+   //
+   //         m_puserinteraction->layout().sketch() = psize->m_size;
+   //
+   //         if (m_puserinteraction->layout().sketch().display() != e_display_normal)
+   //         {
+   //
+   //            m_puserinteraction->display(e_display_normal);
+   //
+   //         }
+   //
+   //         m_puserinteraction->set_need_layout();
+   //
+   //         m_puserinteraction->set_need_redraw();
+   //
+   //         m_puserinteraction->post_redraw();
+   //
+   //      }
+
+         //m_pwindow->m_size = psize->m_size;
+
+   m_puserinteraction->set_size(psize->m_size, ::user:: e_layout_window);
+
+   m_sizeSetWindowSizeRequest = psize->m_size;
+
+   if (!m_pwindow->placement_log()->has_recent(psize->m_size))
+   {
+
+      m_puserinteraction->set_size(m_puserinteraction->const_layout().window().size(), ::user::e_layout_sketch);
+
+      int cx = m_puserinteraction->const_layout().sketch().size().width();
+
+      int cy = m_puserinteraction->const_layout().sketch().size().height();
+      //         m_puserinteraction->layout().design().size() = m_puserinteraction->layout().window().size();
+
+
+      m_puserinteraction->set_need_layout();
+
+      m_puserinteraction->set_need_redraw();
+
+      m_puserinteraction->post_redraw();
+
+      //
+      //         m_puserinteraction->post_redraw();
+
+
+      //if (m_puserinteraction->layout().is_moving())
+      //{
+
+      // information() << "\nWindow is Moving :: on_message_move";
+
+      //}
+
+      //m_puserinteraction->layout().sketch().origin() = preposition->m_point;
+
+      //if (m_puserinteraction->layout().sketch().display() != e_display_normal)
+      //{
+
+      // m_puserinteraction->display(e_display_normal);
+
+      //}
+
+//         m_puserinteraction->set_reposition();
+//
+//         m_puserinteraction->set_need_redraw();
+//
+//         m_puserinteraction->post_redraw();
+
+   }
+
+}
+
 
 
    //void interaction_impl::_001OnGetMinMaxInfo(::message::message * pmessage)

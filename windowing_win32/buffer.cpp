@@ -872,7 +872,6 @@ namespace windowing_win32
                      || m_pimpl->m_puserinteraction->const_layout().design().has_activation_request())
                   {
 
-
                      m_pimpl->m_pwindow->_set_window_pos(
                         m_pimpl->m_puserinteraction->const_layout().design().zorder(),
                         point.x(),
@@ -882,7 +881,6 @@ namespace windowing_win32
                         m_pimpl->m_puserinteraction->const_layout().design().activation(),
                         true, false, false, true, false, 
                         uFlagsSetWindowPos);
-
 
                      m_pimpl->m_puserinteraction->clear_activation();
 
