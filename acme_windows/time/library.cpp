@@ -219,7 +219,7 @@ finished:
 
    }
 
-   ::output_debug_string(strMessage + "\n\n");
+   information() << strMessage;
 
    return plibrary;
 
