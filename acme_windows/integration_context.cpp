@@ -5,13 +5,13 @@
 #include "node.h"
 #include "acme/filesystem/filesystem/acme_directory.h"
 #include "acme/filesystem/filesystem/acme_file.h"
-#include "apex/filesystem/filesystem/file_context.h"
+//#include "apex/filesystem/filesystem/file_context.h"
 #include "acme/operating_system/process.h"
 #include "acme/platform/application.h"
 #include "acme/platform/system.h"
 
 
-namespace apex_windows
+namespace acme_windows
 {
 
 
@@ -96,7 +96,7 @@ namespace apex_windows
 
          auto pcontext = m_pcontext;
 
-         m_strVs = file()->as_string(path);
+         m_strVs = acmefile()->as_string(path);
 
          m_strVs.trim();
 
@@ -329,7 +329,7 @@ namespace apex_windows
 
          auto pacmedirectory = acmedirectory();
 
-         string strRel = prepare_path(m_pathFolder / m_path);
+         string strRel = prepare_path(m_pathFolder / m_pathBase / m_pathPlatformConfiguration);
 
          //pathEnvTxt = pacmedirectory->system() / strRel / "env.txt";
 
@@ -830,11 +830,9 @@ namespace apex_windows
    void node::integration_factory()
    {
 
-      acmesystem()->m_psubsystem->m_pfactory->add_factory_item < ::apex_windows::integration::context, ::integration::context >();
+      acmesystem()->m_psubsystem->m_pfactory->add_factory_item < ::acme_windows::integration::context, ::integration::context >();
 
    }
-
-
 
 
 } // namespace acme_windows

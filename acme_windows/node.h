@@ -291,6 +291,9 @@ namespace acme_windows
       ::pointer < ::operating_system::application > module_path_application(const ::scoped_string & scopestr) override;
 
 
+      void integration_factory() override;
+
+
 
    };
 

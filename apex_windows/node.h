@@ -49,9 +49,6 @@ namespace apex_windows
 
       //virtual bool _os_calc_system_dark_mode();
 
-      void integration_factory() override;
-
-
       virtual ::color::color get_default_color(::u64 u);
 
       virtual void set_console_colors(::u32 dwScreenColors, ::u32 dwPopupColors, ::u32 dwWindowAlpha);

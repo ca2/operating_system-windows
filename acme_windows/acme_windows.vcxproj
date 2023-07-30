@@ -687,6 +687,7 @@
     <ClCompile Include="file_dialog.cpp" />
     <ClCompile Include="file_find.cpp" />
     <ClCompile Include="folder_dialog.cpp" />
+    <ClCompile Include="integration_context.cpp" />
     <ClCompile Include="itemidlist.cpp" />
     <ClCompile Include="known_folder_struct.cpp" />
     <ClCompile Include="language.cpp" />
@@ -760,6 +761,7 @@
     <ClInclude Include="file_memory_map2.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="handle.h" />
+    <ClInclude Include="integration_context.h" />
     <ClInclude Include="itemidlist.h" />
     <ClInclude Include="known_folder_struct.h" />
     <ClInclude Include="main_window.h" />

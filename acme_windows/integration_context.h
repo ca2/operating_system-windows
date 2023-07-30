@@ -2,10 +2,10 @@
 #pragma once
 
 
-#include "apex/platform/integration_context.h"
+#include "acme/platform/integration_context.h"
 
 
-namespace apex_windows
+namespace acme_windows
 {
 
 
@@ -13,7 +13,7 @@ namespace apex_windows
    {
 
 
-      class CLASS_DECL_APEX_WINDOWS context :
+      class CLASS_DECL_ACME_WINDOWS context :
          virtual public ::integration::context
       {
       public:
@@ -60,7 +60,7 @@ namespace apex_windows
    } // namespace integration
 
 
-} // namespace apex_windows
+} // namespace acme_windows
 
 
 

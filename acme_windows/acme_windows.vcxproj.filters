@@ -122,6 +122,9 @@
     <ClCompile Include="folder_dialog.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="integration_context.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="deployment.rc">
@@ -250,6 +253,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="main_window.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="integration_context.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
