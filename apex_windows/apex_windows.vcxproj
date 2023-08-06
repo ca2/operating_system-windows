@@ -684,7 +684,6 @@
     <ClInclude Include="dir_system.h" />
     <ClInclude Include="explorer\explorer_restart.h" />
     <ClInclude Include="file_context.h" />
-    <ClInclude Include="file_link.h" />
     <ClInclude Include="file_os_watcher.h" />
     <ClInclude Include="file_system.h" />
     <ClInclude Include="framework.h" />
@@ -708,7 +707,6 @@
     <ClCompile Include="app_launcher.cpp" />
     <ClCompile Include="dir_context.cpp" />
     <ClCompile Include="dir_system.cpp" />
-    <ClCompile Include="file_link.cpp" />
     <ClCompile Include="gdi.cpp" />
     <ClCompile Include="interprocess_base.cpp" />
     <ClCompile Include="interprocess_caller.cpp" />

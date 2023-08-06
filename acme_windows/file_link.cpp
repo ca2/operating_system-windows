@@ -2,9 +2,10 @@
 #include "framework.h"
 #include "file_link.h"
 #include "node.h"
-#include "os_context.h"
+#include "acme_path.h"
+//#include "os_context.h"
 #include "acme/platform/system.h"
-#include "apex/platform/context.h"
+//#include "apex/platform/context.h//"
 #include "acme_windows_common/hresult_exception.h"
 #include "acme_windows/itemidlist.h"
 
@@ -16,7 +17,7 @@
 #include <ShellApi.h>
 
 
-namespace apex_windows
+namespace acme_windows
 {
 
 
@@ -37,7 +38,7 @@ namespace apex_windows
    ::pointer < ::file::link > file_link::create_clean_new() const
    {
 
-      return ((::apex_windows::file_link *)this)->__create_new < ::apex_windows::file_link >();
+      return ((::acme_windows::file_link *)this)->__create_new < ::acme_windows::file_link >();
 
    }
 
@@ -92,11 +93,11 @@ namespace apex_windows
 
       }
 
-      ::pointer < ::apex_windows::os_context > poscontext;
+      ::pointer < ::acme_windows::acme_path > pacmepath;
 
-      poscontext = acmesystem()->m_papexcontext->os_context();
+      pacmepath = acmepath();
 
-      m_pshelllink = poscontext->_get_IShellLinkW(m_path);
+      m_pshelllink = pacmepath->_get_IShellLinkW(m_path);
 
       if (elink & ::file::e_link_target)
       {
@@ -204,9 +205,9 @@ namespace apex_windows
 
       ::file::e_link elinkWritten = ::file::e_link_none;
 
-      ::pointer < ::apex_windows::os_context > poscontext;
+      ::pointer < ::acme_windows::acme_path > pacmepath;
 
-      poscontext = acmesystem()->m_papexcontext->os_context();
+      pacmepath = acmepath();
 
       //auto pshelllink = poscontext->_get_IShellLinkW(m_path);
 
@@ -319,7 +320,7 @@ namespace apex_windows
    }
 
 
-} // namespace apex_windows
+} // namespace acme_windows
 
 
 

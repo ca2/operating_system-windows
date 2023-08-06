@@ -125,6 +125,9 @@
     <ClCompile Include="integration_context.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="file_link.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="deployment.rc">
@@ -256,6 +259,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="integration_context.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="file_link.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

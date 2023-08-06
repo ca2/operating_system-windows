@@ -3,6 +3,10 @@
 
 
 #include "acme_windows_common/acme_path.h"
+#include "acme_windows_common/comptr.h"
+
+
+#include <shobjidl_core.h>
 
 
 namespace acme_windows
@@ -32,6 +36,11 @@ namespace acme_windows
 
 
       ::file::path get_absolute_path(const ::scoped_string& scopedstr) override;
+
+      
+      comptr < IShellLinkW > _get_IShellLinkW(const ::file::path & pathLink);
+
+
 
 
    };

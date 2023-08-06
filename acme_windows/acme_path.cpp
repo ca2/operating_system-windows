@@ -1,6 +1,7 @@
 // Create on 2021-03-22 09:12 <3ThomasBS_
 #include "framework.h"
 #include "acme_path.h"
+#include "node.h"
 #include "acme/filesystem/filesystem/path.h"
 #include "acme/_operating_system.h"
 
@@ -45,7 +46,7 @@ namespace acme_windows
 
             throw_last_error_exception(path, ::file::e_open_read, dwLastError, "acme_windows::acme_path::_real_path safe_create_file failed (e_type_directory)");
 
-            return {}; 
+            return {};
 
          }
 
@@ -150,37 +151,80 @@ namespace acme_windows
 
       return {};
 
-}
+   }
 
-::file::path acme_path::get_absolute_path(const ::scoped_string & scopedstr)
-{
-
-   ::string result = scopedstr; //realpath() fails if path is already absolute
-
-   wstring wstrPath(scopedstr);
-
-   auto newLength = GetFullPathNameW(wstrPath, 0, nullptr, NULL);
-
-   wstring wstrFullPath;
-
-   decltype(newLength) length;
-
-   do
+   ::file::path acme_path::get_absolute_path(const ::scoped_string & scopedstr)
    {
 
-      length = newLength;
+      ::string result = scopedstr; //realpath() fails if path is already absolute
 
-      auto pszFullPath = wstrFullPath.get_buffer(length);
+      wstring wstrPath(scopedstr);
 
-      newLength = GetFullPathNameW(wstrPath, MAX_PATH, pszFullPath, NULL);
+      auto newLength = GetFullPathNameW(wstrPath, 0, nullptr, NULL);
 
-      wstrFullPath.release_buffer(length);
+      wstring wstrFullPath;
 
-   } while (newLength < length);
+      decltype(newLength) length;
+
+      do
+      {
+
+         length = newLength;
+
+         auto pszFullPath = wstrFullPath.get_buffer(length);
+
+         newLength = GetFullPathNameW(wstrPath, MAX_PATH, pszFullPath, NULL);
+
+         wstrFullPath.release_buffer(length);
+
+      } while (newLength < length);
 
 
-   return result;
-}
+      return result;
+   }
+
+
+   comptr < IShellLinkW > acme_path::_get_IShellLinkW(const ::file::path & pathLink)
+   {
+
+      acmenode()->defer_co_initialize_ex(false);
+
+      HRESULT hr;
+
+      comptr < IShellLinkW > pshelllink;
+
+      if (FAILED(hr = pshelllink.CoCreateInstance(CLSID_ShellLink, nullptr, CLSCTX_INPROC_SERVER)))
+      {
+
+         return nullptr;
+
+      }
+
+      bool bOk = false;
+
+      auto ppersistfile = pshelllink.as < IPersistFile >();
+
+      if (!ppersistfile)
+      {
+
+         return nullptr;
+
+      }
+
+      auto strWindowsPath = pathLink.windows_path();
+
+      ::windows_path windowspath = strWindowsPath;
+
+      if (FAILED(hr = ppersistfile->Load(windowspath, STGM_WRITE)))
+      {
+
+         return nullptr;
+
+      }
+
+      return pshelllink;
+
+   }
 
 
 

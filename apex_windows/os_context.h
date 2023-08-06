@@ -2,10 +2,6 @@
 
 
 #include "apex/platform/os_context.h"
-#include "acme_windows_common/comptr.h"
-
-
-#include <shobjidl_core.h>
 
 
 namespace apex_windows
@@ -87,8 +83,6 @@ namespace apex_windows
       void stop_service(const ::string & strServiceName) override;
 
       string calc_service_name();
-
-      comptr < IShellLinkW > _get_IShellLinkW(const ::file::path & pathLink);
 
       //void edit_link_target(const ::file::path & path, const ::file::path & pathLink) override;
       //void edit_link_folder(const ::file::path & path, const ::file::path & pathLink) override;

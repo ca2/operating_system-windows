@@ -1929,47 +1929,6 @@ namespace apex_windows
    }
 
 
-   comptr < IShellLinkW > os_context::_get_IShellLinkW(const ::file::path & pathLink)
-   {
-
-      acmenode()->defer_co_initialize_ex(false);
-
-      HRESULT hr;
-
-      comptr < IShellLinkW > pshelllink;
-
-      if (FAILED(hr = pshelllink.CoCreateInstance(CLSID_ShellLink, nullptr, CLSCTX_INPROC_SERVER)))
-      {
-
-         return nullptr;
-
-      }
-
-      bool bOk = false;
-
-      auto ppersistfile = pshelllink.as < IPersistFile >();
-
-      if (!ppersistfile)
-      {
-
-         return nullptr;
-
-      }
-
-      auto strWindowsPath = pathLink.windows_path();
-
-      ::windows_path windowspath = strWindowsPath;
-
-      if (FAILED(hr = ppersistfile->Load(windowspath, STGM_WRITE)))
-      {
-
-         return nullptr;
-
-      }
-
-      return pshelllink;
-
-   }
 
 
    ::pointer < ::file::link > os_context::resolve_link(const ::file::path & path, ::file::e_link elink)

@@ -686,6 +686,7 @@
     <ClCompile Include="exclusive.cpp" />
     <ClCompile Include="file_dialog.cpp" />
     <ClCompile Include="file_find.cpp" />
+    <ClCompile Include="file_link.cpp" />
     <ClCompile Include="folder_dialog.cpp" />
     <ClCompile Include="integration_context.cpp" />
     <ClCompile Include="itemidlist.cpp" />
@@ -757,6 +758,7 @@
     <ClInclude Include="file_change_event.h" />
     <ClInclude Include="aaa_file_exception.h" />
     <ClInclude Include="file_find.h" />
+    <ClInclude Include="file_link.h" />
     <ClInclude Include="file_memory_map.h" />
     <ClInclude Include="file_memory_map2.h" />
     <ClInclude Include="framework.h" />

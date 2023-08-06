@@ -2,7 +2,7 @@
 #pragma once
 
 
-#include "apex/filesystem/filesystem/link.h"
+#include "acme/filesystem/filesystem/link.h"
 
 
 #include "acme/_operating_system.h"
@@ -14,11 +14,11 @@
 #include <shobjidl_core.h>
 
 
-namespace apex_windows
+namespace acme_windows
 {
 
 
-   class CLASS_DECL_APEX_WINDOWS file_link :
+   class CLASS_DECL_ACME_WINDOWS file_link :
       virtual public ::file::link
    {
    public:
@@ -42,7 +42,7 @@ namespace apex_windows
    };
 
 
-} // namespace apex_windows
+} // namespace acme_windows
 
 
 
