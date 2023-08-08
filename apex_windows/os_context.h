@@ -74,7 +74,7 @@ namespace apex_windows
       void start_service() override;
       void stop_service() override;
 
-      void _getCredentialsForService(const string& strService, WCHAR* szUsername, WCHAR* szPassword);
+      void _getCredentialsForService(const string& strService, ::string & strUsername, ::string & strPassword);
 
       void enable_service(const ::string & strServiceName, const ::string & strDisplayName, const ::string & strCommand, const ::string & strUser = "", const ::string & strPass = "") override;
       void disable_service(const ::string & strServiceName) override;
@@ -90,7 +90,7 @@ namespace apex_windows
 
       //::pointer < ::file::link > resolve_link(const ::file::path & path, ::file::e_link elink = ::file::e_link_all) override;
 
-      virtual ::pointer < ::file::link > resolve_lnk_link(const ::file::path & path, ::file::e_link elink = ::file::e_link_all);
+      //virtual ::pointer < ::file::link > resolve_lnk_link(const ::file::path & path, ::file::e_link elink = ::file::e_link_all);
 
       bool has_alias_in_path(const scoped_string & str, bool bNoUI = false, bool bNoMount = false) override;
 

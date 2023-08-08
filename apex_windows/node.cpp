@@ -3,15 +3,16 @@
 #include "os_context.h"
 #include "acme/exception/exception.h"
 #include "acme/filesystem/filesystem/acme_path.h"
+#include "acme/filesystem/filesystem/link.h"
 #include "acme/platform/application.h"
 #include "acme/primitive/primitive/memory.h"
 #include "acme/primitive/string/adaptor.h"
 #include "acme/primitive/string/international.h"
 #include "acme_windows/acme_directory.h"
 #include "acme_windows/acme_file.h"
+#include "acme_windows/acme_path.h"
 #include "acme_windows/registry.h"
 #include "apex/filesystem/filesystem/file_context.h"
-#include "apex/filesystem/filesystem/link.h"
 #include "apex/platform/application.h"
 #include "apex/platform/os_context.h"
 #include "apex/platform/system.h"
@@ -619,9 +620,9 @@ namespace apex_windows
 
       wstring wstrLnk(pathLnk);
 
-      ::pointer < ::apex_windows::os_context > poscontext = acmesystem()->m_papexsystem->os_context();
+      ::pointer < ::acme_windows::acme_path > pacmepath = acmepath();
 
-      comptr < IShellLinkW > pshelllink = poscontext->_get_IShellLinkW(pathLnk);
+      auto pshelllink = pacmepath->_get_IShellLinkW(pathLnk);
 
       if (!pshelllink)
       {
@@ -668,9 +669,9 @@ namespace apex_windows
 
       wstring wstrLnk(pathLnk);
 
-      ::pointer < ::apex_windows::os_context > poscontext = acmesystem()->m_papexsystem->os_context();
+      ::pointer < ::acme_windows::acme_path > pacmepath = acmepath();
 
-      comptr < IShellLinkW > pshelllink = poscontext->_get_IShellLinkW(pathLnk);
+      auto pshelllink = pacmepath->_get_IShellLinkW(pathLnk);
 
       if (!pshelllink)
       {

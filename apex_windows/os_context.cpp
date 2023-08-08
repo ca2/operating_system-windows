@@ -1,7 +1,7 @@
 #include "framework.h"
 #undef USUAL_OPERATING_SYSTEM_SUPPRESSIONS
 #include "os_context.h"
-#include "file_link.h"
+//#include "file_link.h"
 #include "acme/filesystem/file/exception.h"
 #include "acme/operating_system/process.h"
 #include "acme/platform/scoped_restore.h"
@@ -1156,7 +1156,7 @@ namespace apex_windows
    }
 
 
-   void os_context::_getCredentialsForService(const ::string & strService, WCHAR * szUsername, WCHAR * szPassword)
+   void os_context::_getCredentialsForService(const ::string & strService, ::string & strUsername, ::string & strPassword)
    {
 
       HRESULT hr = S_OK;
@@ -1227,6 +1227,8 @@ namespace apex_windows
          L"%s\\%s",
          szDomain,
          szUsername);*/
+
+      WCHAR szPassword[CREDUI_MAX_PASSWORD_LENGTH + 1];
       ::zero(szPassword, CREDUI_MAX_PASSWORD_LENGTH);
 
       // Call CredPackAuthenticationBufferW once to determine the size,
@@ -1304,6 +1306,9 @@ namespace apex_windows
                  CREDUIWIN_IN_CRED_ONLY |
                  CREDUIWIN_ENUMERATE_CURRENT_USER
       );
+
+
+      WCHAR szUsername[CREDUI_MAX_USERNAME_LENGTH + 1];
 
 
       if (dwResult == NO_ERROR)
@@ -1404,6 +1409,10 @@ namespace apex_windows
 
       }
 
+      strUsername = szUsername;
+
+      strPassword = szPassword;
+
    }
 
 
@@ -1470,22 +1479,19 @@ namespace apex_windows
 
       }
 
-      WCHAR * pname = nullptr;
-      WCHAR * ppass = nullptr;
-
-      WCHAR lpszName[CREDUI_MAX_USERNAME_LENGTH + CREDUI_MAX_DOMAIN_TARGET_LENGTH + 1];
-      WCHAR pszPass[CREDUI_MAX_PASSWORD_LENGTH + 1];
+      ::string strUserName;
+      ::string strPassword;
 
       auto papp = get_app()->m_papexapplication;
 
       if (get_app()->is_user_service())
       {
 
-         _getCredentialsForService(get_app()->m_strAppId, lpszName, pszPass);
+         _getCredentialsForService(get_app()->m_strAppId, strUserName, strPassword);
          //         {
 
-         pname = lpszName;
-         ppass = pszPass;
+         //pname = lpszName;
+         //ppass = pszPass;
 
          //}
          //else
@@ -1497,7 +1503,7 @@ namespace apex_windows
 
       }
 
-      enable_service(strServiceName, strDisplayName, strCalling, pname, ppass);
+      enable_service(strServiceName, strDisplayName, strCalling, strUserName, strPassword);
 
    }
 
@@ -1931,47 +1937,6 @@ namespace apex_windows
 
 
 
-   ::pointer < ::file::link > os_context::resolve_link(const ::file::path & path, ::file::e_link elink)
-   {
-
-      auto plink = ::os_context::resolve_link(path, elink);
-
-      if (plink)
-      {
-
-         return plink;
-
-      }
-
-      if (path.case_insensitive_ends(".lnk"))
-      {
-
-         plink = resolve_lnk_link(path, elink);
-
-         if (plink)
-         {
-
-            return plink;
-
-         }
-
-      }
-
-      return nullptr;
-
-   }
-
-
-   ::pointer < ::file::link > os_context::resolve_lnk_link(const ::file::path & path, ::file::e_link elink)
-   {
-
-      auto plink = __create_new < ::apex_windows::file_link >();
-
-      plink->open(path, elink);
-
-      return plink;
-
-   }
 
 
    bool os_context::has_alias_in_path(const scoped_string & str, bool bNoUI, bool bNoMount)

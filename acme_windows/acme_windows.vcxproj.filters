@@ -9,7 +9,7 @@
       <UniqueIdentifier>{740b13d3-bf25-4793-a3e0-4d13e3e71c4a}</UniqueIdentifier>
       <Extensions>h;hpp;hxx;hm;inl</Extensions>
     </Filter>
-    <Filter Include="Resource Files">
+    <Filter Include="Source Files\Resource Files">
       <UniqueIdentifier>{2ec8ecd0-d089-4887-98eb-a66497a4e6c3}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -131,7 +131,7 @@
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="deployment.rc">
-      <Filter>Resource Files</Filter>
+      <Filter>Source Files\Resource Files</Filter>
     </ResourceCompile>
   </ItemGroup>
   <ItemGroup>

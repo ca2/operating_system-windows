@@ -1,6 +1,7 @@
 // Create on 2021-03-22 09:12 <3ThomasBS_
 #include "framework.h"
 #include "acme_path.h"
+#include "file_link.h"
 #include "node.h"
 #include "acme/filesystem/filesystem/path.h"
 #include "acme/_operating_system.h"
@@ -226,6 +227,48 @@ namespace acme_windows
 
    }
 
+
+   ::pointer < ::file::link > acme_path::resolve_link(const ::file::path & path, ::file::e_link elink)
+   {
+
+      auto plink = ::acme_path::resolve_link(path, elink);
+
+      if (plink)
+      {
+
+         return plink;
+
+      }
+
+      if (path.case_insensitive_ends(".lnk"))
+      {
+
+         plink = resolve_lnk_link(path, elink);
+
+         if (plink)
+         {
+
+            return plink;
+
+         }
+
+      }
+
+      return nullptr;
+
+   }
+
+
+   ::pointer < ::file::link > acme_path::resolve_lnk_link(const ::file::path & path, ::file::e_link elink)
+   {
+
+      auto plink = __create_new < ::acme_windows::file_link >();
+
+      plink->open(path, elink);
+
+      return plink;
+
+   }
 
 
 } // namespace acme_windows

@@ -5,12 +5,13 @@
 #include "windowing.h"
 #include "system_interaction.h"
 #include "acme/filesystem/filesystem/acme_directory.h"
+#include "acme/filesystem/filesystem/acme_path.h"
+#include "acme/filesystem/filesystem/link.h"
 #include "acme/parallelization/synchronous_lock.h"
 #include "acme/primitive/geometry2d/_collection.h"
 #include "acme/primitive/string/international.h"
 #include "apex/filesystem/filesystem/dir_context.h"
 #include "apex/filesystem/filesystem/file_context.h"
-#include "apex/filesystem/filesystem/link.h"
 #include "aura/graphics/image/context_image.h"
 #include "aura/graphics/image/drawing.h"
 #include "aura/graphics/image/list.h"
@@ -885,7 +886,7 @@ namespace windowing_win32
          && strFileParam.case_insensitive_ends(".lnk"))
       {
 
-         auto plink = m_pcontext->m_papexcontext->file()->resolve_link(strFileParam);
+         auto plink = acmepath()->resolve_link(strFileParam);
 
          if (plink
             && !m_pcontext->m_papexcontext->file()->exists(plink->m_pathTarget)

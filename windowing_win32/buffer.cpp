@@ -882,7 +882,7 @@ namespace windowing_win32
                         true, false, false, true, false, 
                         uFlagsSetWindowPos);
 
-                     m_pimpl->m_puserinteraction->clear_activation();
+                     m_pimpl->m_puserinteraction->reset_pending();
 
                      bSizeOrPositionChanged = true;
 

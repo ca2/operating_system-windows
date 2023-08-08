@@ -41,6 +41,9 @@ namespace acme_windows
       comptr < IShellLinkW > _get_IShellLinkW(const ::file::path & pathLink);
 
 
+      ::pointer < ::file::link > resolve_link(const ::file::path & path, ::file::e_link elink = ::file::e_link_all) override;
+
+      virtual ::pointer < ::file::link > resolve_lnk_link(const ::file::path & path, ::file::e_link elink = ::file::e_link_all);
 
 
    };
