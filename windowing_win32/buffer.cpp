@@ -221,7 +221,12 @@ namespace windowing_win32
 
       auto pimageBuffer = pbufferitem->m_pimage2;
 
-      update_buffer(pbufferitem);
+      if (pimageBuffer->m_size != pbufferitem->m_size)
+      {
+
+         update_buffer(pbufferitem);
+
+      }
 
       return double_buffer::on_begin_draw();
 
@@ -515,7 +520,9 @@ namespace windowing_win32
       else
       {
 
-         if (sizeLayeredWindowBuffer != pbufferitem->m_pimage2->size())
+         auto sizeBufferImage = pbufferitem->m_pimage2->size();
+
+         if (sizeLayeredWindowBuffer != sizeBufferImage)
          {
 
             return false;
@@ -656,6 +663,8 @@ namespace windowing_win32
 
                Gdiplus::Rect rectangle;
 
+               g.SetCompositingMode(Gdiplus::CompositingModeSourceOver);
+
                rectangle.X = 10;
                rectangle.Width = 10;
                rectangle.Y = 0;
@@ -696,6 +705,8 @@ namespace windowing_win32
                Gdiplus::Graphics g(playeredwindowbuffer->m_hdc);
 
                Gdiplus::Rect rectangle;
+
+               g.SetCompositingMode(Gdiplus::CompositingModeSourceOver);
 
                rectangle.X = 0;
                rectangle.Y = 0;
