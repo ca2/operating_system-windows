@@ -1834,6 +1834,7 @@ namespace windowing_win32
      
       pdrawicon->initialize_with_windowing_icon(pwindowingicon);
 
+      if(::is_ok(pdrawicon))
       {
 
          image_source imagesource(pdrawicon);
