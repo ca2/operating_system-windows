@@ -6,7 +6,6 @@
 //
 #pragma once
 
-
 #include "acme_windows_common/node.h"
 #include "acme/primitive/collection/numeric_array.h"
 #include "acme/_operating_system.h"
@@ -294,15 +293,16 @@ namespace acme_windows
       void integration_factory() override;
 
 
+      void play_sound(const ::file::path& path) override;
+
+
+      void speak(const ::scoped_string& scopedstr) override;
 
 
    };
 
 
 } // namespace acme
-
-
-
 
 
 
