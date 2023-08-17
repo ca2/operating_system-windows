@@ -9,6 +9,7 @@
 #include "acme/operating_system/process.h"
 #include "acme/platform/application.h"
 #include "acme/platform/system.h"
+#include "acme/platform/sequencer.h"
 
 
 namespace acme_windows
@@ -93,6 +94,17 @@ namespace acme_windows
          ::file::path path;
 
          path = pacmedirectory->config() / "programming/vs.txt";
+
+         if (!acmefile()->exists(path))
+         {
+
+            auto psequencer = message_box("File with Visual Studio version not found : \"" + path + "\"");
+
+            psequencer->do_synchronously();
+
+            throw ::exception(error_field_not_found, path);
+
+         }
 
          auto pcontext = m_pcontext;
 

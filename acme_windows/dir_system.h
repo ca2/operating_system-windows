@@ -4,11 +4,11 @@
 #include "acme/filesystem/filesystem/dir_system.h"
 
 
-namespace apex_windows
+namespace acme_windows
 {
 
 
-   class CLASS_DECL_APEX_WINDOWS dir_system:
+   class CLASS_DECL_ACME_WINDOWS dir_system:
       virtual public ::dir_system
    {
    public:

@@ -2,6 +2,10 @@
 #include "acme/platform/node.h"
 #include "acme/filesystem/filesystem/acme_directory.h"
 #include "node.h"
+#include "dir_context.h"
+#include "dir_system.h"
+#include "file_context.h"
+#include "file_system.h"
 #include "application.h"
 #include "main_window.h"
 #include "acme_directory.h"
@@ -63,6 +67,15 @@ IMPLEMENT_FACTORY(acme_windows)
    pfactory->add_factory_item < ::acme_windows::acme_directory, ::acme_directory >();
    pfactory->add_factory_item < ::acme_windows::acme_file, ::acme_file >();
    pfactory->add_factory_item < ::acme_windows::acme_path, ::acme_path >();
+
+
+
+   pfactory->add_factory_item < ::acme_windows::dir_system, ::dir_system >();
+   pfactory->add_factory_item < ::acme_windows::file_system, ::file_system >();
+
+   pfactory->add_factory_item < ::acme_windows::dir_context, ::dir_context >();
+   pfactory->add_factory_item < ::acme_windows::file_context, ::file_context >();
+
 
    //pfactory->add_factory_item < ::windows::interprocess_communication_base, ::inteprocess_channel::base >();
    //pfactory->add_factory_item < ::windows::interprocess_handler, ::inteprocess::handler >();

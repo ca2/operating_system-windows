@@ -36,12 +36,6 @@ IMPLEMENT_FACTORY(apex_windows)
 
    acme_windows_factory(pfactory);
 
-   pfactory->add_factory_item < ::apex_windows::dir_system, ::dir_system >();
-   pfactory->add_factory_item < ::apex_windows::file_system, ::file_system >();
-
-   pfactory->add_factory_item < ::apex_windows::dir_context, ::dir_context >();
-   pfactory->add_factory_item < ::apex_windows::file_context, ::file_context >();
-
    //add_factory_item < ::windows::stdio_file, ::file::text_file >();
    //add_factory_item < ::windows::file, ::file::file >();
    pfactory->add_factory_item < ::apex_windows::os_context, ::os_context >();

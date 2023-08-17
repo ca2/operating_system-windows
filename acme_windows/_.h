@@ -148,3 +148,19 @@
 //
 //
 //#include "simple_hold_handle.h"
+
+
+
+namespace acme_windows
+{
+
+
+   class dir_context;
+   class dir_system;
+
+   class file_context;
+   class file_system;
+
+
+} // namespace apex_windows
+
