@@ -1,5 +1,5 @@
 /*
- * Copyright 2019-2021 The OpenSSL Project Authors. All Rights Reserved.
+ * Copyright 2019-2023 The OpenSSL Project Authors. All Rights Reserved.
  *
  * Licensed under the Apache License 2.0 (the "License").  You may not use
  * this file except in compliance with the License.  You can obtain a copy
@@ -20,7 +20,7 @@ extern "C" {
 # endif
 
 /*
- * information CATEGORIES
+ * TRACE CATEGORIES
  */
 
 /*
@@ -43,10 +43,8 @@ extern "C" {
 # define OSSL_TRACE_CATEGORY_TLS                 3
 # define OSSL_TRACE_CATEGORY_TLS_CIPHER          4
 # define OSSL_TRACE_CATEGORY_CONF                5
-# ifndef OPENSSL_NO_ENGINE
-#  define OSSL_TRACE_CATEGORY_ENGINE_TABLE       6
-#  define OSSL_TRACE_CATEGORY_ENGINE_REF_COUNT   7
-# endif
+# define OSSL_TRACE_CATEGORY_ENGINE_TABLE        6
+# define OSSL_TRACE_CATEGORY_ENGINE_REF_COUNT    7
 # define OSSL_TRACE_CATEGORY_PKCS5V2             8
 # define OSSL_TRACE_CATEGORY_PKCS12_KEYGEN       9
 # define OSSL_TRACE_CATEGORY_PKCS12_DECRYPT     10
@@ -67,7 +65,7 @@ int OSSL_trace_get_category_num(const char *name);
 const char *OSSL_trace_get_category_name(int num);
 
 /*
- * information CONSUMERS
+ * TRACE CONSUMERS
  */
 
 /*
@@ -125,7 +123,7 @@ typedef size_t (*OSSL_trace_cb)(const char *buffer, size_t count,
 int OSSL_trace_set_callback(int category, OSSL_trace_cb callback, void *data);
 
 /*
- * information PRODUCERS
+ * TRACE PRODUCERS
  */
 
 /*
