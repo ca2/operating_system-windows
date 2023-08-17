@@ -72,12 +72,12 @@ BEGIN
 BLOCK "040904b0"
 BEGIN
 VALUE "CompanyName", "operating_system-windows"
-VALUE "FileDescription", "acme_windows"
+VALUE "FileDescription", "audio_directsound"
 VALUE "FileVersion", "2023.0407.0133.07"
 VALUE "InternalName", "ca2"
 VALUE "LegalCopyright", "Copyright (C) 2023-04-07-01-33-07"
 VALUE "OriginalFilename", "ca2"
-VALUE "ProductName", "acme_windows"
+VALUE "ProductName", "audio_directsound"
 VALUE "ProductVersion", "2023.0407.0133.07"
 END
 END
