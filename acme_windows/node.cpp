@@ -8,7 +8,7 @@
 #include "exclusive.h"
 #include "application.h"
 #include "acme/exception/exception.h"
-//#include "acme/filesystem/filesystem/file_dialog.h"
+#include "acme/filesystem/filesystem/dir_context.h"
 //#include "acme/filesystem/filesystem/folder_dialog.h"
 #include "acme/operating_system/process.h"
 #include "acme/operating_system/summary.h"

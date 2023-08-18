@@ -1,6 +1,7 @@
 #include "framework.h"
 #include "file_context.h"
 #include "dir_system.h"
+#include "file_system.h"
 #include "node.h"
 #include "acme/exception/exception.h"
 #include "acme/filesystem/file/exception.h"
@@ -11,7 +12,7 @@
 #include "acme/platform/debug.h"
 #include "acme/primitive/primitive/payload.h"
 #include "acme/primitive/string/international.h"
-#include "apex/platform/system.h"
+#include "acme/platform/system.h"
 
 
 CLASS_DECL_ACME_WINDOWS const void * get_resource_pointer(HINSTANCE hinst, DWORD nID, const char * pcszType, memsize & memsize);
@@ -20,7 +21,7 @@ CLASS_DECL_ACME::file::path get_module_path(HMODULE hmodule);
 CLASS_DECL_ACME FILETIME & copy(FILETIME & filetime, const ::earth::time & time);
 
 
-namespace apex_windows
+namespace acme_windows
 {
 
 
@@ -43,7 +44,7 @@ namespace apex_windows
 
       //auto estatus = 
       
-      ::apex_windows_common::file_context::initialize(pparticle);
+      ::acme_windows_common::file_context::initialize(pparticle);
 
       //if (!estatus)
       //{
@@ -52,7 +53,7 @@ namespace apex_windows
 
       //}
 
-      ::pointer<::apex::system>psystem = acmesystem();
+      ::pointer<::acme::system>psystem = acmesystem();
 
       m_pfilesystem = psystem->m_pfilesystem;
 
@@ -66,7 +67,7 @@ namespace apex_windows
    void file_context::init_system()
    {
 
-      ::apex_windows_common::file_context::init_system();
+      ::acme_windows_common::file_context::init_system();
 
       //auto estatus = m_pfilesystem->update_module_path();
 
@@ -450,7 +451,7 @@ namespace apex_windows
 
       memsize s = 0;
 
-      const void* pdata = get_resource_pointer((HINSTANCE)acmesystem()->m_papexsystem->m_psubsystem->m_hinstanceThis, 1024, "ZIP", s);
+      const void* pdata = get_resource_pointer((HINSTANCE)acmesystem()->m_psubsystem->m_hinstanceThis, 1024, "ZIP", s);
 
       //m_memoryMainResource.assign(pdata, s);
 
@@ -479,7 +480,7 @@ namespace apex_windows
 
       }
 
-      ::pointer<::apex::system>psystem = acmesystem();
+      ::pointer<::acme::system>psystem = acmesystem();
 
       if (read_resource_as_memory(*pfile->get_primitive_memory(), (HINSTANCE) psystem->m_psubsystem->m_hinstanceThis, iId, psz))
       {

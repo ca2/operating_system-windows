@@ -13,19 +13,19 @@
 
 //CLASS_DECL_APEX_WINDOWS string windows_get_module_path(HINSTANCE hInst);
 
-CLASS_DECL_APEX_WINDOWS string windows_get_short_file_name(const ::string & str);
+CLASS_DECL_ACME_WINDOWS string windows_get_short_file_name(const ::string & str);
 ///CLASS_DECL_APEX_WINDOWS void vfxGetModuleShortFileName(HINSTANCE hInst, string & strShortName);
 
 
-#include "apex_windows_common/file_context.h"
+#include "acme_windows_common/file_context.h"
 
 
-namespace apex_windows
+namespace acme_windows
 {
 
 
-   class CLASS_DECL_APEX_WINDOWS file_context :
-      virtual public ::apex_windows_common::file_context
+   class CLASS_DECL_ACME_WINDOWS file_context :
+      virtual public ::acme_windows_common::file_context
    {
    public:
 

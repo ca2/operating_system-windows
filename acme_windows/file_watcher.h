@@ -19,16 +19,16 @@
 #pragma once
 
 
-#include "apex/filesystem/file/watch.h"
-#include "apex/filesystem/file/watcher.h"
+#include "acme/filesystem/watcher/watch.h"
+#include "acme/filesystem/watcher/watcher.h"
 #include "acme/_operating_system.h"
 
 
-namespace apex_windows
+namespace acme_windows
 {
 
 
-   class CLASS_DECL_APEX_WINDOWS os_watch :
+   class CLASS_DECL_ACME_WINDOWS file_watch :
       virtual public ::file::watch
    {
    public:
@@ -45,8 +45,8 @@ namespace apex_windows
       bool                 m_bRefresh;
 
 
-      os_watch();
-      ~os_watch() override;
+      file_watch();
+      ~file_watch() override;
 
       bool open(const ::file::path & pathFolder, bool bRecursive) override;
 
@@ -58,7 +58,7 @@ namespace apex_windows
    };
 
 
-   class CLASS_DECL_APEX_WINDOWS os_watcher :
+   class CLASS_DECL_ACME_WINDOWS file_watcher :
       virtual public ::file::watcher
    {
    public:
@@ -67,8 +67,8 @@ namespace apex_windows
       //__creatable_from_base(os_watcher, ::file::watcher);
 
 
-      os_watcher();
-      ~os_watcher() override;
+      file_watcher();
+      ~file_watcher() override;
 
 
       //virtual void     run() override;
@@ -79,7 +79,7 @@ namespace apex_windows
    };
 
 
-} // namespace apex_windows
+} // namespace acme_windows
 
 
 
