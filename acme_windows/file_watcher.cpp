@@ -17,26 +17,26 @@
 //
 //
 #include "framework.h"
-#include "file_os_watcher.h"
+#include "file_watcher.h"
 #include "acme/parallelization/event.h"
-#include "apex/filesystem/file/action.h"
-#include "apex/filesystem/file/listener.h"
+#include "acme/filesystem/watcher/action.h"
+#include "acme/filesystem/watcher/listener.h"
 #include "acme/_operating_system.h"
 
 
-namespace apex_windows
+namespace acme_windows
 {
 
 
    /// Starts monitoring a directory.
-   os_watch::os_watch()
+   file_watch::file_watch()
    {
 
 
    }
 
 
-   os_watch::~os_watch()
+   file_watch::~file_watch()
    {
 
       m_bRefresh = false;
@@ -75,7 +75,7 @@ namespace apex_windows
    }
 
 
-   bool os_watch::open(const ::file::path & pathFolder, bool bRecursive)
+   bool file_watch::open(const ::file::path & pathFolder, bool bRecursive)
    {
 
       if (!watch::open(pathFolder, bRecursive))
@@ -149,14 +149,14 @@ namespace apex_windows
    }
 
 
-   void CALLBACK os_watch::callback(DWORD dwErrorCode, DWORD dwNumberOfBytesTransfered,LPOVERLAPPED pOverlapped)
+   void CALLBACK file_watch::callback(DWORD dwErrorCode, DWORD dwNumberOfBytesTransfered,LPOVERLAPPED pOverlapped)
    {
 
       //TCHAR szFile[MAX_PATH];
 
       PFILE_NOTIFY_INFORMATION pNotify;
 
-      os_watch * pwatch = (os_watch*)pOverlapped->Pointer;
+      file_watch * pwatch = (file_watch*)pOverlapped->Pointer;
 
 
       size_t offset = 0;
@@ -230,7 +230,7 @@ namespace apex_windows
    }
 
 
-   bool os_watch::step()
+   bool file_watch::step()
    {
 
       return ReadDirectoryChangesW(
@@ -241,18 +241,18 @@ namespace apex_windows
              m_dwNotify,
              nullptr,
              &m_overlapped,
-             m_bStop ? NULL : &os_watch::callback) != 0;
+             m_bStop ? NULL : &file_watch::callback) != 0;
 
    }
 
 
-   os_watcher::os_watcher()
+   file_watcher::file_watcher()
    {
 
    }
 
 
-   os_watcher::~os_watcher()
+   file_watcher::~file_watcher()
    {
 
       m_watchmap.clear();
@@ -260,7 +260,7 @@ namespace apex_windows
    }
 
 
-   bool os_watcher::step()
+   bool file_watcher::step()
    {
 
       MsgWaitForMultipleObjectsEx(0,nullptr,500,QS_ALLINPUT,MWMO_ALERTABLE);
@@ -284,7 +284,7 @@ namespace apex_windows
    }
 
 
-} // namespace apex_windows
+} // namespace acme_windows
 
 
 

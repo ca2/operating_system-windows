@@ -705,16 +705,11 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="app_launcher.cpp" />
-    <ClCompile Include="dir_context.cpp" />
-    <ClCompile Include="dir_system.cpp" />
     <ClCompile Include="gdi.cpp" />
     <ClCompile Include="interprocess_base.cpp" />
     <ClCompile Include="interprocess_caller.cpp" />
     <ClCompile Include="interprocess_target.cpp" />
     <ClCompile Include="_factory.cpp" />
-    <ClCompile Include="file_context.cpp" />
-    <ClCompile Include="file_os_watcher.cpp" />
-    <ClCompile Include="file_system.cpp" />
     <ClCompile Include="ip_enum.cpp" />
     <ClCompile Include="launcher.cpp" />
     <ClCompile Include="node.cpp" />
