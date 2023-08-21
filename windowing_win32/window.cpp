@@ -2174,6 +2174,9 @@ namespace windowing_win32
 
       }
 
+      m_puserinteractionimpl->m_puserinteraction->set_position({x, y}, ::user::e_layout_window);
+      m_puserinteractionimpl->m_puserinteraction->set_size({ cx, cy }, ::user::e_layout_window);
+
       return true;
 
    }
