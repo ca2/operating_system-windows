@@ -1100,7 +1100,7 @@ namespace windowing_win32
 
       bool bOk1 = double_buffer::buffer_lock_round_swap_key_buffers();
 
-      if (!m_pimpl || !m_pimpl->m_pprodevian)
+      if (!m_pimpl || !m_pimpl->m_pgraphicsthread)
       {
 
          return false;
