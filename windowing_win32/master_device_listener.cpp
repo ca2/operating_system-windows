@@ -72,6 +72,12 @@ namespace windowing_win32
          on_device_remove_complete(phdr);
 
       }
+      else if (wparam.m_number == DBT_DEVNODES_CHANGED)
+      {
+
+         on_device_nodes_changed();
+
+      }
 
    //// Output some messages to the window.
    //switch (wparam.m_wparam)
@@ -128,6 +134,7 @@ namespace windowing_win32
 
    }
 
+
    void master_device_listener::on_device_remove_complete(DEV_BROADCAST_HDR * phdr)
    {
 
@@ -144,6 +151,26 @@ namespace windowing_win32
          {
 
             on_device_unplugged(m_edevice);
+
+         }
+
+      }
+
+   }
+
+
+   void master_device_listener::on_device_nodes_changed()
+   {
+
+      auto & pdevicelistenera = m_pdevices->m_mapdevicelistenera[m_edevice];
+
+      if (pdevicelistenera)
+      {
+
+         for (auto & pdevice : *pdevicelistenera)
+         {
+
+            pdevice->on_device_nodes_changed();
 
          }
 
