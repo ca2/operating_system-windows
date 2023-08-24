@@ -534,7 +534,7 @@ namespace aura_windows
             //if (puserinteraction->layout().m_statea[::user::e_layout_normal].m_bProdevian)
             //{
 
-            //   //puserinteraction->set_prodevian();
+            //   //puserinteraction->set_auto_refresh();
 
             //}
 
@@ -574,7 +574,7 @@ namespace aura_windows
          if (puserinteraction)
          {
 
-            if (puserinteraction->layout().m_statea[::user::e_layout_normal].m_bProdevian)
+            if (puserinteraction->layout().m_statea[::user::e_layout_normal].m_bAutoRefresh)
             {
 
                // puserinteraction->clear_prodevian();

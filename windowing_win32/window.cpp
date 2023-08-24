@@ -20,7 +20,7 @@
 #include "aura_windows/interaction_impl.h"
 #include "aura/graphics/draw2d/graphics.h"
 #include "aura/graphics/graphics/graphics.h"
-#include "aura/user/user/interaction_prodevian.h"
+#include "aura/user/user/interaction_graphics_thread.h"
 #include "aura/message/user.h"
 #include "aura/user/user/user.h"
 #include "aura/user/user/system.h"
@@ -2173,6 +2173,9 @@ namespace windowing_win32
          ::BringWindowToTop(hwnd);
 
       }
+
+      m_puserinteractionimpl->m_puserinteraction->set_position({x, y}, ::user::e_layout_window);
+      m_puserinteractionimpl->m_puserinteraction->set_size({ cx, cy }, ::user::e_layout_window);
 
       return true;
 

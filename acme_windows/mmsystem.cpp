@@ -4,6 +4,7 @@
 #include "acme/filesystem/filesystem/file_context.h"
 #include "acme/_operating_system.h"
 #include <mmsystem.h>
+#pragma comment( lib, "Winmm.lib" )
 
 
 namespace acme_windows
