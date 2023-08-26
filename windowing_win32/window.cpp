@@ -1315,7 +1315,7 @@ namespace windowing_win32
    }
 
 
-   void window::show_window(const ::e_display & edisplay, const ::e_activation & eactivation)
+   void window::_show_window_unlocked(const ::e_display & edisplay, const ::e_activation & eactivation)
    {
 
       auto iShowWindow = windows::show_window(edisplay, eactivation);

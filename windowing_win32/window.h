@@ -124,7 +124,7 @@ namespace windowing_win32
 
       void destroy_window() override;
 
-      void show_window(const ::e_display & edisplay, const ::e_activation & eactivation) override;
+      void _show_window_unlocked(const ::e_display & edisplay, const ::e_activation & eactivation) override;
 
       //virtual void set_user_interaction(::layered * pinteraction) override;
 
