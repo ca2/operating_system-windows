@@ -156,7 +156,7 @@ namespace windowing_win32
 
       bool set_window_position(const class ::zorder& zorder, i32 x, i32 y, i32 cx, i32 cy, const ::e_activation& eactivation, bool bNoZorder, bool bNoMove, bool bNoSize, bool bShow, bool bHide) override;
 
-      bool _set_window_pos(const class ::zorder& zorder, i32 x, i32 y, i32 cx, i32 cy, const ::e_activation& eactivation, bool bNoZorder, bool bNoMove, bool bNoSize, bool bShow, bool bHide, ::u32 nOverrideFlags = 0);
+      bool _set_window_position(const class ::zorder& zorder, i32 x, i32 y, i32 cx, i32 cy, const ::e_activation& eactivation, bool bNoZorder, bool bNoMove, bool bNoSize, bool bShow, bool bHide, ::u32 nOverrideFlags = 0) override;
 
       bool is_destroying() override;
 
@@ -893,7 +893,7 @@ namespace windowing_win32
       virtual float dpiy(float y) override;
       virtual float dpix(float x) override;
 
-      void _window_request_presentation() override;
+      void _window_request_presentation_locked() override;
       void window_update_screen_buffer() override;
 
       void get_cursor_position(::point_i32 * ppointCursor) override;

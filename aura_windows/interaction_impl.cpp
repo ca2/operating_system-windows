@@ -3574,10 +3574,10 @@ void interaction_impl::on_message_size(::message::message* pmessage)
 */
 
 
-   void interaction_impl::_window_show_change_visibility(::e_display edisplay, ::e_activation eactivation)
+   void interaction_impl::_window_show_change_visibility_unlocked(::e_display edisplay, ::e_activation eactivation)
    {
 
-      ::user::interaction_impl::_window_show_change_visibility(edisplay, eactivation);
+      ::user::interaction_impl::_window_show_change_visibility_unlocked(edisplay, eactivation);
 
    }
 

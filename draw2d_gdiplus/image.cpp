@@ -72,15 +72,15 @@ namespace draw2d_gdiplus
    }
 
 
-   bool image::host(const ::pixmap * ppixmap)
+   bool image::host(::pixmap * ppixmap)
    {
 
       if (!ppixmap->is_ok())
       {
 
-         return false;
+         //return false;
 
-         //throw ::exception(error_failed);
+         throw ::exception(error_failed);
 
       }
 

@@ -2083,7 +2083,7 @@ namespace windowing_win32
    }
 
 
-   bool window::_set_window_pos(const class ::zorder& zorder, i32 x, i32 y, i32 cx, i32 cy, const ::e_activation& eactivation, bool bNoZorder, bool bNoMove, bool bNoSize, bool bShow, bool bHide, ::u32 nOverrideFlags)
+   bool window::_set_window_position(const class ::zorder& zorder, i32 x, i32 y, i32 cx, i32 cy, const ::e_activation& eactivation, bool bNoZorder, bool bNoMove, bool bNoSize, bool bShow, bool bHide, ::u32 nOverrideFlags)
    {
 
       ::rectangle_i32 rectangle;
@@ -6448,12 +6448,12 @@ namespace windowing_win32
    }
 
 
-   void window::_window_request_presentation()
+   void window::_window_request_presentation_locked()
    {
 
       auto puserinteraction = m_puserinteractionimpl->m_puserinteraction;
 
-      puserinteraction->_window_request_presentation();
+      puserinteraction->_window_request_presentation_unlocked();
 
       //auto pprodevian = m_puserinteractionimpl->m_pprodevian;
 

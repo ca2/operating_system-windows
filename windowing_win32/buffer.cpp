@@ -883,7 +883,7 @@ namespace windowing_win32
                      || m_pimpl->m_puserinteraction->const_layout().design().has_activation_request())
                   {
 
-                     m_pimpl->m_pwindow->_set_window_pos(
+                     m_pimpl->m_pwindow->_set_window_position(
                         m_pimpl->m_puserinteraction->const_layout().design().zorder(),
                         point.x(),
                         point.y(),
@@ -938,7 +938,7 @@ namespace windowing_win32
 
             //m_pimpl->m_puserinteraction->post_message(message_do_show_window);
 
-            m_pimpl->m_puserinteraction->_window_show_change_visibility();
+            m_pimpl->m_puserinteraction->_window_show_change_visibility_unlocked();
 
             if (bSizeOrPositionChanged)
             {
