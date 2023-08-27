@@ -244,8 +244,8 @@ namespace aura_windows
       //using ::user::interaction_impl::window_rectangle;
       //virtual bool window_rectangle(::rectangle_i64 * prectangle);
 
-      //using ::user::interaction_impl::client_rectangle;
-      //virtual bool client_rectangle(::rectangle_i64 * prectangle);
+      //using ::user::interaction_impl::this->rectangle;
+      //virtual bool this->rectangle(::rectangle_i64 * prectangle);
 
 
       virtual void rects_from_os();

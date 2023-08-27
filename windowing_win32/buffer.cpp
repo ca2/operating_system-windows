@@ -20,6 +20,8 @@
 #include <gdiplus.h>
 #endif
 
+CLASS_DECL_AURA::point_i32 __get_bottom_right();
+CLASS_DECL_AURA void __set_bottom_right(const ::point_i32 & pointBottomRight);
 
 
 namespace windowing_win32
@@ -678,13 +680,13 @@ namespace windowing_win32
 
 #endif
 
-            SelectClipRgn(m_hdcScreen, nullptr);
+            //SelectClipRgn(m_hdcScreen, nullptr);
 
-            SelectClipRgn(playeredwindowbuffer->m_hdc, nullptr);
+            //SelectClipRgn(playeredwindowbuffer->m_hdc, nullptr);
 
-            SetViewportOrgEx(m_hdcScreen, 0, 0, nullptr);
+            //SetViewportOrgEx(m_hdcScreen, 0, 0, nullptr);
 
-            SetViewportOrgEx(playeredwindowbuffer->m_hdc, 0, 0, nullptr);
+            //SetViewportOrgEx(playeredwindowbuffer->m_hdc, 0, 0, nullptr);
 
 #ifdef REDRAW_HINTING
 
@@ -860,44 +862,127 @@ namespace windowing_win32
                                  //if (rectangleDrawing.size() == pimage->m_rectangleTag.size())
                                  //{
 
+
+
+
                   UINT uFlagsSetWindowPos = SWP_NOZORDER
                      | SWP_ASYNCWINDOWPOS
-                     | SWP_FRAMECHANGED
+                     //| SWP_FRAMECHANGED
+                     //| SWP_NOSENDCHANGING
                      | SWP_NOREDRAW
                      | SWP_NOCOPYBITS
-                     | SWP_DEFERERASE
-                     | SWP_NOACTIVATE
+                     //| SWP_DEFERERASE
+                     //| SWP_NOACTIVATE
                      | SWP_SHOWWINDOW;
 
-                  if (!::IsWindowVisible(hwnd))
+     /*             if (!::IsWindowVisible(hwnd))
                   {
 
                      warning() << "Window is not visible!!";
 
-                  }
+                  }*/
 
-                  ::UpdateLayeredWindow(hwnd, m_hdcScreen, (POINT *)&point, (SIZE *)&size, playeredwindowbuffer->m_hdc, (POINT *)&pointSrc, make_u32(0, 0, 0, 0), &blendPixelFunction, ULW_ALPHA);
+                  //::procedure p = [&, this]()
+                  //   {
 
-                  if (rectangleWindowCurrent.top_left() != point
-                     || rectangleWindowCurrent.size() != size
-                     || m_pimpl->m_puserinteraction->const_layout().design().has_activation_request())
+                        bool bSetWindowPos = false;
+
+                        if (rectangleWindowCurrent.top_left() != point
+         || rectangleWindowCurrent.size() != size
+         || m_pimpl->m_puserinteraction->const_layout().design().has_activation_request())
+                        {
+
+                           m_pimpl->m_pwindow->_set_window_position(
+                              m_pimpl->m_puserinteraction->const_layout().design().zorder(),
+                              point.x(),
+                              point.y(),
+                              size.cx(),
+                              size.cy(),
+                              m_pimpl->m_puserinteraction->const_layout().design().activation(),
+                              true, false, false, true, false,
+                              uFlagsSetWindowPos);
+
+                           bSetWindowPos = true;
+
+                           bSizeOrPositionChanged = true;
+
+                           m_pimpl->m_puserinteraction->reset_pending();
+
+
+                        }
+
+                        if (bSetWindowPos)
+                        {
+
+                           //::Sleep(4);
+
+                        }
+
+                        //::GdiFlush();
+
+                        ::UpdateLayeredWindow(hwnd, m_hdcScreen, (POINT *)&point, (SIZE *)&size, playeredwindowbuffer->m_hdc, (POINT *)&pointSrc, make_u32(0, 0, 0, 0), &blendPixelFunction, ULW_ALPHA);
+
+                        //::GdiFlush();
+
+                        if (bSetWindowPos)
+                        {
+
+                           //::Sleep(8);
+
+                        }
+
+
+        /*             };
+
+                  p();*/
+
+                  //::SendMessage((HWND) m_pwindow->oswindow(),
+   //WM_APP + 12345, 0, (LPARAM) p.m_pbase.m_p);
+
+                  //if (m_pimpl->m_puserinteraction->get_parent() == nullptr)
                   {
 
-                     m_pimpl->m_pwindow->_set_window_position(
-                        m_pimpl->m_puserinteraction->const_layout().design().zorder(),
-                        point.x(),
-                        point.y(),
-                        size.cx(),
-                        size.cy(),
-                        m_pimpl->m_puserinteraction->const_layout().design().activation(),
-                        true, false, false, true, false, 
-                        uFlagsSetWindowPos);
+                     auto p = __get_bottom_right();
 
-                     m_pimpl->m_puserinteraction->reset_pending();
+                     if (p.is_set())
+                     {
 
-                     bSizeOrPositionChanged = true;
+                        auto r = ::rectangle_i32(point, size);
+
+                        auto Δ = r.bottom_right() - p;
+
+                        if (Δ.cx() != 0 || Δ.cy() != 0)
+                        {
+
+                           //information() << "sketch_to_lading top right offset not null " << Δ;
+
+                        }
+
+                     }
 
                   }
+
+
+                  //if (rectangleWindowCurrent.top_left() != point
+                  //   || rectangleWindowCurrent.size() != size
+                  //   || m_pimpl->m_puserinteraction->const_layout().design().has_activation_request())
+                  //{
+
+                  //   m_pimpl->m_pwindow->_set_window_position(
+                  //      m_pimpl->m_puserinteraction->const_layout().design().zorder(),
+                  //      point.x(),
+                  //      point.y(),
+                  //      size.cx(),
+                  //      size.cy(),
+                  //      m_pimpl->m_puserinteraction->const_layout().design().activation(),
+                  //      true, false, false, true, false, 
+                  //      uFlagsSetWindowPos);
+
+                  //   m_pimpl->m_puserinteraction->reset_pending();
+
+                  //   bSizeOrPositionChanged = true;
+
+                  //}
 
                   if (m_pimpl->m_puserinteraction->const_layout().window().origin() != point)
                   {

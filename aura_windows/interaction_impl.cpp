@@ -1164,9 +1164,9 @@ namespace aura_windows
    void interaction_impl::rects_from_os()
    {
 
-      //::rectangle_i32 rectangleClient;
+      //::rectangle_i32 rectangleX;
 
-      //::GetClientRect(m_hwnd, rectangleClient);
+      //::GetClientRect(m_hwnd, rectangleX);
 
       //::rectangle_i32 rectangleScreen;
 
@@ -1187,7 +1187,7 @@ namespace aura_windows
 
       //}
 
-      //if (rectangleClient.size() != m_puserinteraction->m_size)
+      //if (rectangleX.size() != m_puserinteraction->m_size)
       //{
 
       //   information("ATTENTION!! Client Size <> Window Size");
@@ -2763,12 +2763,12 @@ void interaction_impl::on_message_reposition(::message::message* pmessage)
    if (!m_pwindow->is_iconic())
    {
 
-      m_puserinteraction->set_position(preposition->m_point, ::user::e_layout_window);
+      //m_puserinteraction->set_position(preposition->m_point, ::user::e_layout_window);
 
       if (!m_pwindow->placement_log()->has_recent(preposition->m_point))
       {
 
-         m_puserinteraction->set_position(preposition->m_point, ::user::e_layout_sketch);
+         //m_puserinteraction->set_position(preposition->m_point, ::user::e_layout_sketch);
 
          m_puserinteraction->set_reposition();
 
@@ -2872,14 +2872,14 @@ void interaction_impl::on_message_size(::message::message* pmessage)
 
          //m_pwindow->m_size = psize->m_size;
 
-   m_puserinteraction->set_size(psize->m_size, ::user:: e_layout_window);
+   //m_puserinteraction->set_size(psize->m_size, ::user:: e_layout_window);
 
    m_sizeSetWindowSizeRequest = psize->m_size;
 
    if (!m_pwindow->placement_log()->has_recent(psize->m_size))
    {
 
-      m_puserinteraction->set_size(m_puserinteraction->const_layout().window().size(), ::user::e_layout_sketch);
+      //m_puserinteraction->set_size(m_puserinteraction->const_layout().window().size(), ::user::e_layout_sketch);
 
       int cx = m_puserinteraction->const_layout().sketch().size().width();
 
@@ -4398,8 +4398,8 @@ void interaction_impl::set_tool_window(bool bSet)
 //      }
 //      else if (message == e_message_left_button_down)
 //      {
-//         ::rectangle_i32 rectangleClient;
-//         ::GetClientRect(get_handle(), rectangleClient);
+//         ::rectangle_i32 rectangleX;
+//         ::GetClientRect(get_handle(), rectangleX);
 //         ::rectangle_i32 rectangleWindow;
 //         ::GetWindowRect(get_handle(), rectangleWindow);
 //         ::rectangle_i32 rectangleRegion;

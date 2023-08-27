@@ -2163,7 +2163,12 @@ namespace windowing_win32
 
       }
 
-      ::SetWindowPos(hwnd, hwndZorder, x, y, cx, cy, nOverrideFlags);
+      if (!(GetWindowLong(hwnd, GWL_EXSTYLE) & WS_EX_LAYERED))
+      {
+
+         ::SetWindowPos(hwnd, hwndZorder, x, y, cx, cy, nOverrideFlags);
+
+      }
 
       if (eactivation & e_activation_set_foreground)
       {
@@ -2610,7 +2615,7 @@ namespace windowing_win32
    }
 
 
-   void window::set_foreground_window()
+   void window::_set_foreground_window_unlocked()
    {
 
       HWND hwnd = get_hwnd();
@@ -5646,8 +5651,8 @@ namespace windowing_win32
 //      }
 //      else if (message == e_message_left_button_down)
 //      {
-//         ::rectangle_i32 rectangleClient;
-//         ::GetClientRect(get_hwnd(), rectangleClient);
+//         ::rectangle_i32 rectangleX;
+//         ::GetClientRect(get_hwnd(), rectangleX);
 //         ::rectangle_i32 rectangleWindow;
 //         ::GetWindowRect(get_hwnd(), rectangleWindow);
 //         ::rectangle_i32 rectangleRegion;
@@ -6131,7 +6136,7 @@ namespace windowing_win32
    }
 
 
-   bool window::client_rectangle(::rectangle_i32 * prectangle)
+   bool window::rectangle(::rectangle_i32 * prectangle)
    {
 
       RECT rectangle;
@@ -6253,7 +6258,7 @@ namespace windowing_win32
 
       lparam lparam;
 
-      ::rectangle_i32 rectangleClient;
+      ::rectangle_i32 rectangleX;
 
       while (ptask->task_get_run())
       {
@@ -6300,9 +6305,9 @@ namespace windowing_win32
 
          }
 
-         ::GetClientRect(hwnd, (RECT *)&rectangleClient);
+         ::GetClientRect(hwnd, (RECT *)&rectangleX);
 
-         if (!rectangleClient.contains(pointMouseMove))
+         if (!rectangleX.contains(pointMouseMove))
          {
 
             if (m_bTrackMouseLeave)

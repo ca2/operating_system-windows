@@ -107,7 +107,7 @@ namespace windowing_win32
 
       void switch_to_this_window(bool b) override;
 
-      void set_foreground_window() override;
+      void _set_foreground_window_unlocked() override;
 
       void set_mouse_capture() override;
 
@@ -125,6 +125,8 @@ namespace windowing_win32
       void destroy_window() override;
 
       void _show_window_unlocked(const ::e_display & edisplay, const ::e_activation & eactivation) override;
+
+      //void _set_foreground_window_unlocked() override;
 
       //virtual void set_user_interaction(::layered * pinteraction) override;
 
@@ -336,13 +338,13 @@ namespace windowing_win32
       //using ::user::interaction_impl::window_rectangle;
       //virtual bool window_rectangle(::rectangle_i64 * prectangle);
 
-      //using ::user::interaction_impl::client_rectangle;
-      //virtual bool client_rectangle(::rectangle_i64 * prectangle);
+      //using ::user::interaction_impl::this->rectangle;
+      //virtual bool this->rectangle(::rectangle_i64 * prectangle);
 
 
       //virtual void rects_from_os();
       virtual bool window_rectangle(::rectangle_i32 * prectangle);
-      virtual bool client_rectangle(::rectangle_i32 * prectangle);
+      virtual bool rectangle(::rectangle_i32 * prectangle);
 
 
 

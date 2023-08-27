@@ -1362,7 +1362,7 @@ namespace draw2d_gdiplus
 
             tracer().precision(0);
 
-            information() << "log_fill_rectangle " << rectangleParam << " color: " << pbrush->m_color;
+            //information() << "log_fill_rectangle " << rectangleParam << " color: " << pbrush->m_color;
 
          }
 
@@ -3915,7 +3915,7 @@ namespace draw2d_gdiplus
 
                tracer().precision(0);
 
-               information() << "log_fill_rectangle " << rectangleParam << " color: " << ::file::hex << color;
+               //information() << "log_fill_rectangle " << rectangleParam << " color: " << ::file::hex << color;
 
             }
 

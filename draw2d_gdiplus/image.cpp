@@ -128,7 +128,11 @@ namespace draw2d_gdiplus
       //}
 
       
-      m_pbitmap->host_bitmap(nullptr, ppixmap);
+      if (m_pbitmap->host_bitmap(nullptr, ppixmap))
+      {
+         //this->m_sizeRaw = ppixmap->m_sizeRaw;
+
+      }
       //if (!)
       //{
 
@@ -155,7 +159,9 @@ namespace draw2d_gdiplus
 
       //}
 
-      init(ppixmap->size(), ppixmap->image32(), ppixmap->m_iScan);
+      init(ppixmap->m_sizeRaw, ppixmap->image32(), ppixmap->m_iScan);
+
+      m_size = ppixmap->m_size;
 
       m_pgraphics->set(m_pbitmap);
 

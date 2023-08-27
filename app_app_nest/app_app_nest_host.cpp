@@ -79,7 +79,7 @@ namespace ca2plugin_container
 
          _001UpdateWindow();
 
-         on_paint(nullptr,m_rectangleClient);
+         on_paint(nullptr,m_rectangleX);
 
          //if(!m_bMayProDevian && get_parent() == nullptr)
          //{
@@ -394,9 +394,9 @@ namespace ca2plugin_container
 
                m_rectangle = rectangle;
 
-               m_rectangleClient = rectangle;
+               m_rectangleX = rectangle;
 
-               m_rectangleClient.offset(-m_rectangleClient.top_left());
+               m_rectangleX.offset(-m_rectangleX.top_left());
 
                m_rectangleWindow = rectangle;
 
@@ -449,9 +449,9 @@ namespace ca2plugin_container
 
                //g->CreateCompatibleDC(nullptr);
 
-               //on_paint(g,m_rectangleClient);
+               //on_paint(g,m_rectangleX);
 
-               on_paint(nullptr,m_rectangleClient);
+               on_paint(nullptr,m_rectangleX);
 
             }
             catch(...)
