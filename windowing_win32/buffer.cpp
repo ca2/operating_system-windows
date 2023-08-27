@@ -920,7 +920,12 @@ namespace windowing_win32
 
                         //::GdiFlush();
 
-                        ::UpdateLayeredWindow(hwnd, m_hdcScreen, (POINT *)&point, (SIZE *)&size, playeredwindowbuffer->m_hdc, (POINT *)&pointSrc, make_u32(0, 0, 0, 0), &blendPixelFunction, ULW_ALPHA);
+                        if (::IsWindowVisible(hwnd))
+                        {
+
+                           ::UpdateLayeredWindow(hwnd, m_hdcScreen, (POINT *)&point, (SIZE *)&size, playeredwindowbuffer->m_hdc, (POINT *)&pointSrc, make_u32(0, 0, 0, 0), &blendPixelFunction, ULW_ALPHA);
+
+                        }
 
                         //::GdiFlush();
 

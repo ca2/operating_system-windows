@@ -2163,7 +2163,11 @@ namespace windowing_win32
 
       }
 
-      if (!(GetWindowLong(hwnd, GWL_EXSTYLE) & WS_EX_LAYERED))
+      bool bIsWindowVisible = ::IsWindowVisible(hwnd);
+
+      if (!(GetWindowLong(hwnd, GWL_EXSTYLE) & WS_EX_LAYERED)
+         || (bIsWindowVisible && bHide)
+         || !(bIsWindowVisible && bShow))
       {
 
          ::SetWindowPos(hwnd, hwndZorder, x, y, cx, cy, nOverrideFlags);
