@@ -846,6 +846,18 @@ namespace draw2d_gdiplus
 
       copy(rectangle, rectangleParam);
 
+      if (rectangleParam.height() > 400)
+      {
+
+         if (ppen->m_color.u8_red() > 180)
+         {
+
+            information() << "draw_rectangle " << rectangleParam;
+
+         }
+
+      }
+
       m_pgraphics->DrawRectangle(ppen->get_os_data < ::Gdiplus::Pen *>(this), rectangle);
 
    }
