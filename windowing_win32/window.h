@@ -107,6 +107,8 @@ namespace windowing_win32
 
       void switch_to_this_window(bool b) override;
 
+      void set_foreground_window() override;
+
       void _set_foreground_window_unlocked() override;
 
       void set_mouse_capture() override;

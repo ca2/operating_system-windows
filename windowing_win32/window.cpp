@@ -2619,6 +2619,14 @@ namespace windowing_win32
    }
 
 
+   void window::set_foreground_window()
+   {
+
+      return _set_foreground_window_unlocked();
+
+   }
+
+
    void window::_set_foreground_window_unlocked()
    {
 
