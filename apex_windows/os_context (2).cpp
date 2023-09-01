@@ -1938,7 +1938,7 @@ retry:
 
          }
 
-         path = strDefault.left(iFind);
+         path = strDefault.left()(iFind);
 
          path += ".exe";
 

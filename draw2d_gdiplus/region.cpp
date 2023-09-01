@@ -166,8 +166,8 @@ namespace draw2d_gdiplus
 
       ::pointer<::geometry2d::ellipse_item>pitem = m_pitem;
 
-      path.AddEllipse((INT) pitem->m_item.left,
-         (INT) pitem->m_item.top,
+      path.AddEllipse((INT) pitem->m_item.left(),
+         (INT) pitem->m_item.top(),
          (INT) pitem->m_item.width(),
          (INT) pitem->m_item.height());
 

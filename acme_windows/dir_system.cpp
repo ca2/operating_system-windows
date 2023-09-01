@@ -81,7 +81,7 @@ namespace acme_windows
          //   strsize iFind1 = strRelative.rear_find("\\", iFind);
          //   strsize iFind2 = strRelative.rear_find("/", iFind);
          //   strsize iStart = maximum(iFind1 + 1, iFind2 + 1);
-         //   strRelative = strRelative.left(iFind - 1) + "_" + strRelative.substr(iStart, iFind - iStart) + strRelative.substr(iFind + 1);
+         //   strRelative = strRelative.left()(iFind - 1) + "_" + strRelative.substr(iStart, iFind - iStart) + strRelative.substr(iFind + 1);
          //}
 
 

@@ -266,7 +266,7 @@ namespace acme_windows
       else
       {
 
-         path /= strAppId.left(iFind);
+         path /= strAppId.left()(iFind);
 
          path /= strAppId.substr(iFind + 1);
 
