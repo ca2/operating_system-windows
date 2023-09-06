@@ -937,7 +937,7 @@ namespace windowing_win32
 
                ::point_i32 pointBottomRight = point + size;
 
-               if (::IsWindowVisible(hwnd))
+               if (::IsWindowVisible(hwnd) && !::IsIconic(hwnd))
                {
 
                   ::UpdateLayeredWindow(hwnd, m_hdcScreen, (POINT *)&point, (SIZE *)&size, playeredwindowbuffer->m_hdc, (POINT *)&pointSrc, make_u32(0, 0, 0, 0), &blendPixelFunction, ULW_ALPHA);

@@ -553,6 +553,8 @@ namespace aura_windows
 
             puserinteraction->display_previous();
 
+            puserinteraction->set_need_layout();
+
             puserinteraction->set_need_redraw();
 
             puserinteraction->post_redraw();
