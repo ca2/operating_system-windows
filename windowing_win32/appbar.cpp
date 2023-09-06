@@ -38,10 +38,10 @@ bool has_autohide_appbar(::u32 edge, const rectangle_i32 & mon)
 
       data.uEdge = edge;
 
-      data.rc.left() = mon.left();
-      data.rc.top() = mon.top();
-      data.rc.right() = mon.right();
-      data.rc.bottom() = mon.bottom();
+      data.rc.left = mon.left();
+      data.rc.top = mon.top();
+      data.rc.right = mon.right();
+      data.rc.bottom = mon.bottom();
 
       return SHAppBarMessage(0x0000000b, &data);
 

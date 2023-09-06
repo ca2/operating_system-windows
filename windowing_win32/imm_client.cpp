@@ -738,24 +738,24 @@ int imm_client::on_text_composition_message(int iMessage)
 
       m_puserinteraction->get_text_composition_area(rectangle);
 
-      COMPOSITIONFORM com = {};
+      COMPOSITIONFORM compositionform = {};
 
-      com.dwStyle = CFS_FORCE_POSITION;
+      compositionform.dwStyle = CFS_FORCE_POSITION;
 
-      com.ptCurrentPos.x = rectangle.top();
+      compositionform.ptCurrentPos.x = rectangle.top();
 
-      com.ptCurrentPos.y -= 100;
+      compositionform.ptCurrentPos.y -= 100;
 
       ::rectangle_i32 rect2(rectangle);
 
       rect2.offset_y(-100);
 
-      com.dwStyle = CFS_RECT;
+      compositionform.dwStyle = CFS_RECT;
 
-      com.rcArea.left() = rect2.left();
-      com.rcArea.top() = rect2.top();
-      com.rcArea.right() = rect2.right();
-      com.rcArea.bottom() = rect2.bottom();
+      compositionform.rcArea.left = rect2.left();
+      compositionform.rcArea.top = rect2.top();
+      compositionform.rcArea.right = rect2.right();
+      compositionform.rcArea.bottom = rect2.bottom();
 
       //copy(com.rcArea, rect2);
 
@@ -786,22 +786,22 @@ int imm_client::on_text_composition_message(int iMessage)
 
       //}
 
-      if (::ImmSetCompositionWindow(imm, &com))
+      if (::ImmSetCompositionWindow(imm, &compositionform))
       {
 
          output_debug_string("set ime composition window pos");
 
       }
 
-      CANDIDATEFORM can = {};
+      CANDIDATEFORM candidateform = {};
 
-      can.dwStyle = CFS_CANDIDATEPOS;
+      candidateform.dwStyle = CFS_CANDIDATEPOS;
 
-      can.ptCurrentPos.x = rectangle.left();
+      candidateform.ptCurrentPos.x = rectangle.left();
 
-      can.ptCurrentPos.y = rectangle.bottom();
+      candidateform.ptCurrentPos.y = rectangle.bottom();
 
-      if (::ImmSetCandidateWindow(imm, &can))
+      if (::ImmSetCandidateWindow(imm, &candidateform))
       {
 
          output_debug_string("set ime candidate window pos");

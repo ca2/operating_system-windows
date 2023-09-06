@@ -823,15 +823,30 @@ namespace windowing_win32
                if (::GetWindowRect(get_hwnd(), &rectangleProbe))
                {
 
-                  information() << "GetWindowRect (%d, %d) - (%d, %d)", rectangleProbe.left(), rectangleProbe.top(), rectangleProbe.right(), rectangleProbe.bottom();
+                  information("GetWindowRect (%d, %d) - (%d, %d)", rectangleProbe.left, rectangleProbe.top, rectangleProbe.right, rectangleProbe.bottom);
 
                }
 
             }
 
-            bool bOk = true;
 
-            bool bSizeOrPositionChanged = false;
+            ::pointer < ::windowing_win32::window > pwindow = m_pimpl->m_pwindow;
+
+            try
+            {
+
+               pwindow->full_set_window_position_unlocked();
+
+            }
+            catch (...)
+            {
+
+            }
+
+
+            //bool bOk = true;
+
+            //bool bSizeOrPositionChanged = false;
 
             //if (layout.design().is_screen_visible())
             {
@@ -842,99 +857,9 @@ namespace windowing_win32
 
                //rectangle_i32 rectangleDrawing(point, size);
 
-               rectangle_i32 rectangleWindowCurrent;
-
-               GetWindowRect(hwnd, (RECT *)&rectangleWindowCurrent);
 
                   //if (rectangleDrawing.size() == pimage->m_rectangleTag.size())
                {
-
-
-                  //               }
-                                 //else
-                                 //{
-
-                                 //   information("Update discarded");
-
-                                 //}
-
-
-                                 //if (rectangleDrawing.size() == pimage->m_rectangleTag.size())
-                                 //{
-
-
-
-
-                  UINT uFlagsSetWindowPos = SWP_NOZORDER
-                     | SWP_ASYNCWINDOWPOS
-                     //| SWP_FRAMECHANGED
-                     //| SWP_NOSENDCHANGING
-                     | SWP_NOREDRAW
-                     | SWP_NOCOPYBITS
-                     //| SWP_DEFERERASE
-                     //| SWP_NOACTIVATE
-                     | SWP_SHOWWINDOW;
-
-     /*             if (!::IsWindowVisible(hwnd))
-                  {
-
-                     warning() << "Window is not visible!!";
-
-                  }*/
-
-                  //::procedure p = [&, this]()
-                  //   {
-
-                        bool bSetWindowPos = false;
-
-                        if (rectangleWindowCurrent.top_left() != point
-         || rectangleWindowCurrent.size() != size
-         || m_pimpl->m_puserinteraction->const_layout().design().has_activation_request())
-                        {
-
-                           m_pimpl->m_pwindow->_set_window_position(
-                              m_pimpl->m_puserinteraction->const_layout().design().zorder(),
-                              point.x(),
-                              point.y(),
-                              size.cx(),
-                              size.cy(),
-                              m_pimpl->m_puserinteraction->const_layout().design().activation(),
-                              true, false, false, true, false,
-                              uFlagsSetWindowPos);
-
-                           bSetWindowPos = true;
-
-                           bSizeOrPositionChanged = true;
-
-                           m_pimpl->m_puserinteraction->reset_pending();
-
-
-                        }
-
-                        if (bSetWindowPos)
-                        {
-
-                           //::Sleep(4);
-
-                        }
-
-                        //::GdiFlush();
-
-                        if (::IsWindowVisible(hwnd))
-                        {
-
-                           ::UpdateLayeredWindow(hwnd, m_hdcScreen, (POINT *)&point, (SIZE *)&size, playeredwindowbuffer->m_hdc, (POINT *)&pointSrc, make_u32(0, 0, 0, 0), &blendPixelFunction, ULW_ALPHA);
-
-                        }
-
-                        //::GdiFlush();
-
-                        if (bSetWindowPos)
-                        {
-
-                           //::Sleep(8);
-
-                        }
 
 
         /*             };
@@ -1012,6 +937,14 @@ namespace windowing_win32
 
                ::point_i32 pointBottomRight = point + size;
 
+               if (::IsWindowVisible(hwnd))
+               {
+
+                  ::UpdateLayeredWindow(hwnd, m_hdcScreen, (POINT *)&point, (SIZE *)&size, playeredwindowbuffer->m_hdc, (POINT *)&pointSrc, make_u32(0, 0, 0, 0), &blendPixelFunction, ULW_ALPHA);
+
+               }
+
+
                //if (g_pointLastBottomRight != pointBottomRight)
                //{
 
@@ -1028,14 +961,14 @@ namespace windowing_win32
 
             //m_pimpl->m_puserinteraction->post_message(message_do_show_window);
 
-            m_pimpl->m_puserinteraction->_window_show_change_visibility_unlocked();
+            //m_pimpl->m_puserinteraction->_window_show_change_visibility_unlocked();
 
-            if (bSizeOrPositionChanged)
-            {
+            //if (bSizeOrPositionChanged)
+            //{
 
-               m_pimpl->m_puserinteraction->on_visual_applied();
+            //   m_pimpl->m_puserinteraction->on_visual_applied();
 
-            }
+            //}
 
             //#ifdef WINDOWS_DESKTOP
             //               if ((m_pimpl->m_puserinteraction->GetExStyle() & WS_EX_LAYERED))
@@ -1132,12 +1065,12 @@ namespace windowing_win32
 
             //}
 
-            if (!bOk)
+     /*       if (!bOk)
             {
 
                output_debug_string("UpdateLayeredWindow failed");
 
-            }
+            }*/
 
 #endif // __DEBUG
 

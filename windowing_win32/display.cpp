@@ -43,9 +43,9 @@ namespace windowing_win32
       for (index iMonitor = 0; iMonitor < m_monitorinfoa.get_count(); iMonitor++)
       {
 
-         auto pmonitor = __new(::windowing_win32::monitor());
+         auto pmonitor = __create_new < ::windowing_win32::monitor >();
 
-         pmonitor->initialize(this);
+         pmonitor->m_pdisplay = this;
 
          pmonitor->m_hmonitor = m_hmonitora[iMonitor];
 
@@ -1088,8 +1088,8 @@ namespace windowing_win32
 
       information("display::monitor_enum");
       information("upper_bound %d", m_monitorinfoa.get_upper_bound());
-      information("rcMonitor(left, top, right, bottom) %d, %d, %d, %d", mi.rcMonitor.left(), mi.rcMonitor.top(), mi.rcMonitor.right(), mi.rcMonitor.bottom());
-      information("rcWork(left, top, right, bottom) %d, %d, %d, %d", mi.rcWork.left(), mi.rcWork.top(), mi.rcWork.right(), mi.rcWork.bottom());
+      information("rcMonitor(left, top, right, bottom) %d, %d, %d, %d", mi.rcMonitor.left, mi.rcMonitor.top, mi.rcMonitor.right, mi.rcMonitor.bottom);
+      information("rcWork(left, top, right, bottom) %d, %d, %d, %d", mi.rcWork.left, mi.rcWork.top, mi.rcWork.right, mi.rcWork.bottom);
 
 
    }

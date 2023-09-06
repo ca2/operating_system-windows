@@ -86,6 +86,8 @@ namespace windowing_win32
       
       m_pWindow4 = this;
 
+      m_uExtraFlagsSetWindowPos = 0;
+
       //set_layer(LAYERED_IMPL, this);
       //m_plongmap  = new iptr_to_iptr;
 
@@ -501,9 +503,67 @@ namespace windowing_win32
 
       }
 
+
+      if (_get_ex_style() & WS_EX_LAYERED)
+      {
+
+
+         m_uExtraFlagsSetWindowPos = SWP_NOZORDER
+            | SWP_ASYNCWINDOWPOS
+            //| SWP_FRAMECHANGED
+            //| SWP_NOSENDCHANGING
+            | SWP_NOREDRAW
+            | SWP_NOCOPYBITS
+            //| SWP_DEFERERASE
+            //| SWP_NOACTIVATE
+            | SWP_SHOWWINDOW;
+      }
+
       puserinteraction->increment_reference_count(OBJECT_REFERENCE_COUNT_DEBUG_THIS);
 
       puserinteraction->m_ewindowflag |= e_window_flag_window_created;
+
+   }
+
+
+   void window::window_do_update_screen()
+   {
+
+      //      if(m_interlockedPostedScreenUpdate > 0)
+      //      {
+      //
+      //         return;
+      //
+      //      }
+      //
+      //      m_interlockedPostedScreenUpdate++;
+
+            //windowing()->windowing_post([this]()
+              //                          {
+
+      {
+
+         //_synchronous_lock synchronouslock(user_synchronization());
+
+         //display_lock displayLock(x11_display()->Display());
+
+         auto pimpl = m_puserinteractionimpl;
+
+         //configure_window_unlocked();
+
+         pimpl->m_pgraphics->update_screen();
+
+         //pbuffer->_update_screen_lesser_lock();
+
+      }
+
+      auto pimpl = m_puserinteractionimpl;
+
+      pimpl->m_pgraphicsthread->on_graphics_thread_iteration_end();
+
+      //                                  });
+
+            //m_interlockedPostedScreenUpdate--;
 
    }
 
@@ -1315,7 +1375,7 @@ namespace windowing_win32
    }
 
 
-   void window::_show_window_unlocked(const ::e_display & edisplay, const ::e_activation & eactivation)
+   bool window::_configure_window_unlocked(const class ::zorder & zorder, const ::e_activation & eactivation, bool bNoZorder, ::e_display edisplay)
    {
 
       auto iShowWindow = windows::show_window(edisplay, eactivation);
@@ -1344,6 +1404,8 @@ namespace windowing_win32
       //}
 
       ////return ::success;
+
+      return true;
 
    }
 
@@ -1820,6 +1882,120 @@ namespace windowing_win32
    }
 
 
+   bool window::_set_window_position_unlocked(const class ::zorder & zorder, i32 x, i32 y, i32 cx, i32 cy, const ::e_activation & eactivation, bool bNoZorder, bool bNoMove, bool bNoSize, ::e_display edisplay)
+   {
+
+      HWND hwnd = get_hwnd();
+
+      ::e_display edisplayOutput = e_display_none;
+
+      ::e_display edisplayWindow = e_display_none;
+
+      if (::IsWindowVisible(hwnd))
+      {
+
+         if (::IsIconic(hwnd))
+         {
+
+            edisplayWindow = e_display_iconic;
+
+         }
+         else if (::IsZoomed(hwnd))
+         {
+
+            edisplayWindow = e_display_zoomed;
+
+         }
+         else
+         {
+
+            edisplayWindow = e_display_normal;
+
+         }
+
+      }
+
+      if (edisplay == e_display_iconic)
+      {
+
+         edisplayOutput = edisplay;
+
+      }
+      else if (edisplay == e_display_zoomed)
+      {
+
+         edisplayOutput = edisplay;
+
+      }
+      else if (windowing()->is_screen_visible(edisplay))
+      {
+
+         edisplayOutput = e_display_normal;
+
+      }
+
+
+      if (!is_equivalent_in_equivalence_sink(edisplayOutput, edisplayWindow))
+      {
+
+         if (is_equivalent_in_equivalence_sink(edisplayOutput, e_display_normal))
+         {
+
+            if (eactivation & e_activation_set_active
+               || eactivation & e_activation_set_foreground
+               || eactivation & e_activation_on_center_of_screen)
+            {
+
+               ::ShowWindow(hwnd, SW_NORMAL);
+
+            }
+            else if (edisplayWindow == e_display_zoomed)
+            {
+
+               ::ShowWindow(hwnd, SW_RESTORE);
+
+            }
+            else
+            {
+
+               ::ShowWindow(hwnd, SW_SHOWNOACTIVATE);
+
+            }
+
+         }
+         else if (edisplayOutput == e_display_zoomed)
+         {
+
+            ::ShowWindow(hwnd, SW_MAXIMIZE);
+
+         }
+         else if (edisplayOutput == e_display_iconic)
+         {
+
+            ::ShowWindow(hwnd, SW_MINIMIZE);
+
+         }
+         else
+         {
+
+            ::ShowWindow(hwnd, SW_HIDE);
+
+         }
+
+      }
+
+      bool bShow = windowing()->is_screen_visible(edisplayOutput) || edisplay == e_display_iconic;
+
+      bool bHide = !windowing()->is_screen_visible(edisplayOutput) && edisplay != e_display_iconic;
+
+      return __set_window_position(
+         zorder, x, y, cx, cy,
+         eactivation, bNoZorder, bNoMove, bNoSize, 
+         bShow, bHide);
+
+   }
+
+
    bool window::_set_window_long_ptr(i32 nIndex, iptr i)
    {
 
@@ -1854,6 +2030,107 @@ namespace windowing_win32
       return true;
 
    }
+
+
+//   bool window::strict_set_window_position_unlocked()
+//   {
+//
+//
+//      rectangle_i32 rectangleWindowCurrent;
+//
+//      GetWindowRect(get_hwnd(), (RECT *)&rectangleWindowCurrent);
+//
+//      //               }
+//                     //else
+//                     //{
+//
+//                     //   information("Update discarded");
+//
+//                     //}
+//
+//
+//                     //if (rectangleDrawing.size() == pimage->m_rectangleTag.size())
+//                     //{
+//
+//
+//
+//
+//      UINT uFlagsSetWindowPos = SWP_NOZORDER
+//         | SWP_ASYNCWINDOWPOS
+//         //| SWP_FRAMECHANGED
+//         //| SWP_NOSENDCHANGING
+//         | SWP_NOREDRAW
+//         | SWP_NOCOPYBITS
+//         //| SWP_DEFERERASE
+//         //| SWP_NOACTIVATE
+//         | SWP_SHOWWINDOW;
+//
+//      /*             if (!::IsWindowVisible(hwnd))
+//                   {
+//
+//                      warning() << "Window is not visible!!";
+//
+//                   }*/
+//
+//                   //::procedure p = [&, this]()
+//                   //   {
+//
+//      bool bSetWindowPos = false;
+//
+//      if (rectangleWindowCurrent.top_left() != point
+//|| rectangleWindowCurrent.size() != size
+//|| m_pimpl->m_puserinteraction->const_layout().design().has_activation_request())
+//      {
+//
+//         ::pointer < ::windowing_win32::window > pwindow;
+//
+//         pwindow = m_pimpl->m_pwindow;
+//
+//         pwindow->__set_window_position(
+//            m_pimpl->m_puserinteraction->const_layout().design().zorder(),
+//            point.x(),
+//            point.y(),
+//            size.cx(),
+//            size.cy(),
+//            m_pimpl->m_puserinteraction->const_layout().design().activation(),
+//            true, false, false, true, false,
+//            uFlagsSetWindowPos);
+//
+//         bSetWindowPos = true;
+//
+//         bSizeOrPositionChanged = true;
+//
+//         m_pimpl->m_puserinteraction->reset_pending();
+//
+//
+//      }
+//
+//      if (bSetWindowPos)
+//      {
+//
+//         //::Sleep(4);
+//
+//      }
+//
+//      //::GdiFlush();
+//
+//      if (::IsWindowVisible(hwnd))
+//      {
+//
+//         ::UpdateLayeredWindow(hwnd, m_hdcScreen, (POINT *)&point, (SIZE *)&size, playeredwindowbuffer->m_hdc, (POINT *)&pointSrc, make_u32(0, 0, 0, 0), &blendPixelFunction, ULW_ALPHA);
+//
+//      }
+//
+//      //::GdiFlush();
+//
+//      if (bSetWindowPos)
+//      {
+//
+//         //::Sleep(8);
+//
+//      }
+//
+//   }
 
 
    //long window::get_state()
@@ -1985,25 +2262,26 @@ namespace windowing_win32
    }
 
 
-   bool window::on_set_window_position(const class ::zorder& zorder, i32 x, i32 y, i32 cx, i32 cy, const ::e_activation& eactivation, bool bNoZorder, bool bNoMove, bool bNoSize, bool bShow, bool bHide)
-   {
+   //bool window::on_set_window_position(const class ::zorder& zorder, i32 x, i32 y, i32 cx, i32 cy, const ::e_activation& eactivation, bool bNoZorder, bool bNoMove, bool bNoSize, bool bShow, bool bHide)
+   //{
 
-      //if (!(_get_ex_style() & WS_EX_LAYERED))
-      {
+   //   //if (!(_get_ex_style() & WS_EX_LAYERED))
+   //   {
 
-         ::windowing::window::on_set_window_position(zorder, x, y, cx, cy, eactivation, 
-            bNoZorder, bNoMove, bNoSize, bShow, bHide);
+   //      ::windowing::window::on_set_window_position(zorder, x, y, cx, cy, eactivation, 
+   //         bNoZorder, bNoMove, bNoSize, bShow, bHide);
 
-      }
+   //   }
 
-      return false;
+   //   return false;
 
-   }
+   //}
 
 
 #undef SET_WINDOW_POS_LOG
 
-   bool window::set_window_position(const class ::zorder & zorder, i32 x, i32 y, i32 cx, i32 cy, const ::e_activation & eactivation, bool bNoZorder, bool bNoMove, bool bNoSize, bool bShow, bool bHide)
+
+   bool window::__set_window_position(const class ::zorder & zorder, i32 x, i32 y, i32 cx, i32 cy, const ::e_activation & eactivation, bool bNoZorder, bool bNoMove, bool bNoSize, bool bShow, bool bHide, ::u32 nOverrideFlags)
    {
 
       HWND hwnd = get_hwnd();
@@ -2055,140 +2333,146 @@ namespace windowing_win32
 
       }
 
-      if (::GetWindowLong(hwnd, GWL_EXSTYLE) & WS_EX_LAYERED)
-      {
 
-         nFlags |= SWP_NOMOVE;
+      //if (::GetWindowLong(hwnd, GWL_EXSTYLE) & WS_EX_LAYERED)
+      //{
 
-         nFlags |= SWP_NOSIZE;
+      //   nFlags |= SWP_NOMOVE;
 
-      }
+      //   nFlags |= SWP_NOSIZE;
 
-      if (_get_ex_style() & WS_EX_LAYERED)
-      {
+      //}
 
-         // If the window is layered, SetWindowPos gonna be called
-         // very close to UpdateLayeredWindow call.
+      nFlags |= m_uExtraFlagsSetWindowPos;
 
-         return true;
+      //if (_get_ex_style() & WS_EX_LAYERED)
+      //{
 
-      }
+      //   // If the window is layered, SetWindowPos gonna be called
+      //   // very close to UpdateLayeredWindow call.
+
+      //   return true;
+
+      //}
    
       information() << "::SetWindowPos " << ::rectangle_i32_dimension(x, y, cx, cy);
 
-      auto bSetWindowPos = ::SetWindowPos(hwnd, hwndInsertAfter, x, y, cx, cy, nFlags);
+      auto bSetWindowPos = ::SetWindowPos(
+         hwnd, hwndInsertAfter, 
+         x, y, cx, cy, nFlags);
 
       return bSetWindowPos != FALSE;
 
    }
 
 
-   bool window::_set_window_position(const class ::zorder& zorder, i32 x, i32 y, i32 cx, i32 cy, const ::e_activation& eactivation, bool bNoZorder, bool bNoMove, bool bNoSize, bool bShow, bool bHide, ::u32 nOverrideFlags)
-   {
+   ////bool window::_set_window_position(const class ::zorder& zorder, i32 x, i32 y, i32 cx, i32 cy, const ::e_activation& eactivation, bool bNoZorder, bool bNoMove, bool bNoSize, bool bShow, bool bHide, ::u32 nOverrideFlags)
+   //bool window::_configure_window_unlocked(const class ::zorder & zorder, const ::e_activation & eactivation, bool bNoZorder, ::e_display edisplay)
+   //{
 
-      ::rectangle_i32 rectangle;
+   //   //::rectangle_i32 rectangle;
 
-      rectangle.left() = x;
-      rectangle.top() = y;
-      rectangle.set_width(cx);
-      rectangle.set_height(cy);
+   //   //rectangle.left() = x;
+   //   //rectangle.top() = y;
+   //   //rectangle.set_width(cx);
+   //   //rectangle.set_height(cy);
 
-      placement_log()->add(rectangle);
+   //   //placement_log()->add(rectangle);
 
-      if (nOverrideFlags == 0)
-      {
+   //   //if (nOverrideFlags == 0)
+   //   //{
 
-         if (bNoMove)
-         {
+   //   //   if (bNoMove)
+   //   //   {
 
-            nOverrideFlags |= SWP_NOMOVE;
+   //   //      nOverrideFlags |= SWP_NOMOVE;
 
-         }
+   //   //   }
 
-         if (bNoSize)
-         {
+   //   //   if (bNoSize)
+   //   //   {
 
-            nOverrideFlags |= SWP_NOSIZE;
+   //   //      nOverrideFlags |= SWP_NOSIZE;
 
-         }
+   //   //   }
 
-         if (bNoZorder)
-         {
+   //   //   if (bNoZorder)
+   //   //   {
 
-            nOverrideFlags |= SWP_NOZORDER;
+   //   //      nOverrideFlags |= SWP_NOZORDER;
 
-         }
+   //   //   }
 
-         if (bShow)
-         {
+   //   //   if (bShow)
+   //   //   {
 
-            nOverrideFlags |= SWP_SHOWWINDOW;
+   //   //      nOverrideFlags |= SWP_SHOWWINDOW;
 
-         }
+   //   //   }
 
-         if (bHide)
-         {
+   //   //   if (bHide)
+   //   //   {
 
-            nOverrideFlags |= SWP_HIDEWINDOW;
+   //   //      nOverrideFlags |= SWP_HIDEWINDOW;
 
-         }
+   //   //   }
 
-      }
+   //   //}
 
-      if (eactivation.eflag() & ::e_activation_no_activate)
-      {
+   //   //if (eactivation.eflag() & ::e_activation_no_activate)
+   //   //{
 
-         nOverrideFlags |= SWP_NOACTIVATE;
+   //   //   nOverrideFlags |= SWP_NOACTIVATE;
 
-      }
+   //   //}
 
-      if (eactivation.eflag() & ::e_activation_set_popup)
-      {
+   //   //if (eactivation.eflag() & ::e_activation_set_popup)
+   //   //{
 
-         _modify_style(0, WS_POPUP);
+   //   //   _modify_style(0, WS_POPUP);
 
-      }
+   //   //}
 
 
-      HWND hwnd = get_hwnd();
+   //   HWND hwnd = get_hwnd();
 
-      ::pointer < class windowing > pwindowing = m_pwindowing;
+   //   ::pointer < class windowing > pwindowing = m_pwindowing;
 
-      HWND hwndZorder = pwindowing->zorder_to_hwnd(zorder);
+   //   HWND hwndZorder = pwindowing->zorder_to_hwnd(zorder);
 
-      if (hwndZorder != nullptr)
-      {
+   //   //if (hwndZorder != nullptr)
+   //   //{
 
-         nOverrideFlags &= ~SWP_NOZORDER;
+   //   //   nOverrideFlags &= ~SWP_NOZORDER;
 
-      }
+   //   //}
 
-      bool bIsWindowVisible = ::IsWindowVisible(hwnd);
+   //   /*bool bIsWindowVisible = ::IsWindowVisible(hwnd);
 
-      if (!(GetWindowLong(hwnd, GWL_EXSTYLE) & WS_EX_LAYERED)
-         || (bIsWindowVisible && bHide)
-         || !(bIsWindowVisible && bShow))
-      {
+   //   if (!(GetWindowLong(hwnd, GWL_EXSTYLE) & WS_EX_LAYERED)
+   //      || (bIsWindowVisible && bHide)
+   //      || !(bIsWindowVisible && bShow))
+   //   {
 
-         ::SetWindowPos(hwnd, hwndZorder, x, y, cx, cy, nOverrideFlags);
+   //      ::SetWindowPos(hwnd, hwndZorder, x, y, cx, cy, nOverrideFlags);
 
-      }
+   //   }*/
 
-      if (eactivation & e_activation_set_foreground)
-      {
+   //   if (eactivation & e_activation_set_foreground)
+   //   {
 
-         ::SetForegroundWindow(hwnd);
+   //      ::SetForegroundWindow(hwnd);
 
-         ::BringWindowToTop(hwnd);
+   //      ::BringWindowToTop(hwnd);
 
-      }
+   //   }
 
-      m_puserinteractionimpl->m_puserinteraction->set_position({x, y}, ::user::e_layout_window);
-      m_puserinteractionimpl->m_puserinteraction->set_size({ cx, cy }, ::user::e_layout_window);
+   //   //m_puserinteractionimpl->m_puserinteraction->set_position({x, y}, ::user::e_layout_window);
+   //   //m_puserinteractionimpl->m_puserinteraction->set_size({ cx, cy }, ::user::e_layout_window);
 
-      return true;
+   //   return true;
 
-   }
+   //}
 
 //
 //      synchronous_lock synchronouslock(x11_mutex());
@@ -5386,13 +5670,13 @@ namespace windowing_win32
          /* Maximized windows always have a non-client border that hangs over
          the edge of the screen, so the size_i32 proposed by e_message_non_client_calc_size is
          fine. Just adjust the top border to erase the u title. */
-         pncsp->rgrc[0].left() = client.left();
+         pncsp->rgrc[0].left = client.left();
 
-         pncsp->rgrc[0].top() = nonclient.top() + wi.cyWindowBorders;
+         pncsp->rgrc[0].top = nonclient.top() + wi.cyWindowBorders;
 
-         pncsp->rgrc[0].right() = client.right();
+         pncsp->rgrc[0].right = client.right();
 
-         pncsp->rgrc[0].bottom() = client.bottom();
+         pncsp->rgrc[0].bottom = client.bottom();
 
 
          HMONITOR mon = MonitorFromWindow(hwnd, MONITOR_DEFAULTTOPRIMARY);
@@ -5411,16 +5695,16 @@ namespace windowing_win32
 
          {
             if (has_autohide_appbar(ABE_BOTTOM, mi.rcMonitor))
-               pncsp->rgrc[0].bottom()--;
+               pncsp->rgrc[0].bottom--;
 
             else if (has_autohide_appbar(ABE_LEFT, mi.rcMonitor))
-               pncsp->rgrc[0].left()++;
+               pncsp->rgrc[0].left++;
 
             else if (has_autohide_appbar(ABE_TOP, mi.rcMonitor))
-               pncsp->rgrc[0].top()++;
+               pncsp->rgrc[0].top++;
 
             else if (has_autohide_appbar(ABE_RIGHT, mi.rcMonitor))
-               pncsp->rgrc[0].right()--;
+               pncsp->rgrc[0].right--;
 
          }
       }
@@ -5430,7 +5714,7 @@ namespace windowing_win32
          /* For the non-maximized case, set the output const rectangle_i32 & to what it was
          before e_message_non_client_calc_size modified it. This will make the client size_i32 the
          same as the non-client size. */
-         copy(pncsp->rgrc[0], nonclient);
+         ::copy(&pncsp->rgrc[0], &nonclient);
 
       }
 
@@ -6465,18 +6749,18 @@ namespace windowing_win32
    }
 
 
-   void window::_window_request_presentation_locked()
-   {
+   //void window::_window_request_presentation_locked()
+   //{
 
-      auto puserinteraction = m_puserinteractionimpl->m_puserinteraction;
+   //   auto puserinteraction = m_puserinteractionimpl->m_puserinteraction;
 
-      puserinteraction->_window_request_presentation_unlocked();
+   //   puserinteraction->_window_request_presentation_unlocked();
 
-      //auto pprodevian = m_puserinteractionimpl->m_pprodevian;
+   //   //auto pprodevian = m_puserinteractionimpl->m_pprodevian;
 
-      //puserinteraction->interaction_post(pprodevian->m_procedureWindowShow);
+   //   //puserinteraction->interaction_post(pprodevian->m_procedureWindowShow);
 
-   }
+   //}
 
 
    void window::window_update_screen_buffer()

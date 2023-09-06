@@ -1128,7 +1128,7 @@ namespace acme_windows
                break;
             iLast--;
          }
-         return str.left()(iLast + 1);
+         return str.left(iLast + 1);
       }
       else
       {
@@ -1147,7 +1147,7 @@ namespace acme_windows
       {
          string strDir = name(psz);
          string str;
-         str = strDir.left()(2);
+         str = strDir.left(2);
          str += "\\trash_that_is_not_trash\\";
          string strFormat;
          ::earth::time time;
