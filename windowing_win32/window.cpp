@@ -513,10 +513,10 @@ namespace windowing_win32
             //| SWP_FRAMECHANGED
             //| SWP_NOSENDCHANGING
             | SWP_NOREDRAW
-            | SWP_NOCOPYBITS
+            | SWP_NOCOPYBITS;
             //| SWP_DEFERERASE
             //| SWP_NOACTIVATE
-            | SWP_SHOWWINDOW;
+            //| SWP_SHOWWINDOW;
       }
 
       puserinteraction->increment_reference_count(OBJECT_REFERENCE_COUNT_DEBUG_THIS);
@@ -2290,7 +2290,7 @@ namespace windowing_win32
 
       HWND hwndInsertAfter = pwindowing->zorder_to_hwnd(zorder);
 
-      UINT nFlags = 0;
+      UINT nFlags = m_uExtraFlagsSetWindowPos;
 
       if (eactivation & e_activation_no_activate)
       {
@@ -2306,14 +2306,14 @@ namespace windowing_win32
 
       }
 
-      if (bNoMove)
+      if (bNoMove || bHide)
       {
 
          nFlags |= SWP_NOMOVE;
 
       }
 
-      if (bNoSize)
+      if (bNoSize || bHide)
       {
 
          nFlags |= SWP_NOSIZE;
@@ -2324,12 +2324,14 @@ namespace windowing_win32
       {
 
          nFlags |= SWP_SHOWWINDOW;
+         nFlags &= ~SWP_HIDEWINDOW;
 
       }
       else if (bHide)
       {
 
          nFlags |= SWP_HIDEWINDOW;
+         nFlags &= ~SWP_SHOWWINDOW;
 
       }
 
@@ -2342,8 +2344,6 @@ namespace windowing_win32
       //   nFlags |= SWP_NOSIZE;
 
       //}
-
-      nFlags |= m_uExtraFlagsSetWindowPos;
 
       //if (_get_ex_style() & WS_EX_LAYERED)
       //{
