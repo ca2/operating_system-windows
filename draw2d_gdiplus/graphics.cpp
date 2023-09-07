@@ -6304,7 +6304,24 @@ namespace draw2d_gdiplus
 
       m_pfont->defer_update(this, 0);
 
-      synchronous_lock synchronouslock(acmesystem()->m_paurasystem->draw2d()->write_text()->m_pparticleFontTextMapSynchronization);
+      auto psystem = acmesystem();
+
+      auto paurasystem = psystem->m_paurasystem;
+
+      auto pdraw2d = paurasystem->draw2d();
+
+      auto pwritetext = pdraw2d->write_text();
+
+      ::particle * psynchronization = nullptr;
+
+      if (::is_set(pwritetext))
+      {
+
+         psynchronization = pwritetext->m_pparticleFontTextMapSynchronization;
+
+      }
+
+      synchronous_lock synchronouslock(psynchronization ? psynchronization : nullptr);
 
       auto & text = m_pfont->m_mapFontText[scopedstr];
 
@@ -6800,7 +6817,24 @@ namespace draw2d_gdiplus
 
       Gdiplus::Font * pfont = m_pfont->get_os_data < Gdiplus::Font * >(this);
 
-      synchronous_lock synchronouslock(acmesystem()->m_paurasystem->draw2d()->write_text()->m_pparticleFontTextMapSynchronization);
+      auto psystem = acmesystem();
+
+      auto paurasystem = psystem->m_paurasystem;
+
+      auto pdraw2d = paurasystem->draw2d();
+
+      auto pwritetext = pdraw2d->write_text();
+
+      ::particle * psynchronization = nullptr;
+
+      if (::is_set(pwritetext))
+      {
+
+         psynchronization = pwritetext->m_pparticleFontTextMapSynchronization;
+
+      }
+
+      synchronous_lock synchronouslock(psynchronization ? psynchronization : nullptr);
 
       auto & text = m_pfont->m_mapFontText[scopedstr];
 
