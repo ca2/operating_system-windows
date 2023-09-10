@@ -291,7 +291,9 @@ namespace windowing_win32
 
       auto pdisplay = pwindowing->display();
 
-      auto sizeLargeInternalBitmap = pdisplay->get_monitor_union_size();
+      auto rectangleUnion = pdisplay->get_monitor_union_rectangle();
+
+      auto sizeLargeInternalBitmap = rectangleUnion.size();
 
       if (pbufferitem->m_size.cx() > sizeLargeInternalBitmap.cx())
       {
