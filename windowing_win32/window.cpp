@@ -2357,6 +2357,24 @@ namespace windowing_win32
    
       information() << "::SetWindowPos " << ::rectangle_i32_dimension(x, y, cx, cy);
 
+      if (!(nFlags & SWP_NOMOVE))
+      {
+
+         m_pointWindow.x() = x;
+
+         m_pointWindow.y() = y;
+
+      }
+
+      if (!(nFlags & SWP_NOSIZE))
+      {
+
+         m_sizeWindow.cx() = cx;
+
+         m_sizeWindow.cy() = cy;
+
+      }
+
       auto bSetWindowPos = ::SetWindowPos(
          hwnd, hwndInsertAfter, 
          x, y, cx, cy, nFlags);
@@ -2699,51 +2717,53 @@ namespace windowing_win32
    void window::set_mouse_cursor(::windowing::cursor * pcursor)
    {
 
-      HCURSOR hcursor = nullptr;
-      
-      if (::is_set(pcursor))
-      {
+      ::windowing::window::set_mouse_cursor(pcursor);
 
-         hcursor = (HCURSOR)pcursor->get_os_data();
+      //HCURSOR hcursor = nullptr;
+      //
+      //if (::is_set(pcursor))
+      //{
 
-         if (hcursor == nullptr)
-         {
+      //   hcursor = (HCURSOR)pcursor->get_os_data();
 
-            //auto estatus = 
-            
-            pcursor->_create_os_cursor();
+      //   if (hcursor == nullptr)
+      //   {
 
-            //if (!estatus)
-            //{
+      //      //auto estatus = 
+      //      
+      //      pcursor->_create_os_cursor();
 
-            //   return estatus;
+      //      //if (!estatus)
+      //      //{
 
-            //};
+      //      //   return estatus;
 
-            hcursor = (HCURSOR)pcursor->get_os_data();
+      //      //};
 
-            //if (!hcursor)
-            //{
+      //      hcursor = (HCURSOR)pcursor->get_os_data();
 
-            //   return error_resource;
+      //      //if (!hcursor)
+      //      //{
 
-            //}
+      //      //   return error_resource;
 
-         }
+      //      //}
 
-      }
+      //   }
 
-      // At windows SetMouseCursor(nullptr) removes the cursor from screen
-      // similar apis in other platforms behave the same?
+      //}
 
-      if (!::SetCursor(hcursor))
-      {
+      //// At windows SetMouseCursor(nullptr) removes the cursor from screen
+      //// similar apis in other platforms behave the same?
 
-         throw ::exception(error_failed);
+      //if (!::SetCursor(hcursor))
+      //{
 
-      }
+      //   throw ::exception(error_failed);
 
-      //return ::success;
+      //}
+
+      ////return ::success;
 
    }
 
