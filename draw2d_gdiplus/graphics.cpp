@@ -1648,14 +1648,14 @@ namespace draw2d_gdiplus
 
       auto pimage = imagedrawing.image();
 
-      if (::is_null(pimage))
+      if (!::is_ok(pimage))
       {
 
          //return false;
 
          auto pimage2 = imagedrawing.image();
 
-         throw ::exception(error_null_pointer);
+         throw ::exception(error_failed);
 
       }
 

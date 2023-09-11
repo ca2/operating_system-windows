@@ -17,16 +17,61 @@ struct sz_known_folder_struct g_knownfolderstructa[] =
 
 };
 
+const char * skip_file_name(const char * psz)
+{
+
+   while (character_isalnum(*psz) || *psz == '_' || *psz == '-' || *psz == '.')
+   {
+
+      psz++;
+
+   }
+
+   return psz;
+
+}
+
+::string get_known_folder_name_candidate(const ::scoped_string & scopedstrKnownFolderCandidate)
+{
+
+   string strKnownFolderCandidate = scopedstrKnownFolderCandidate;
+
+   auto psz = skip_file_name(strKnownFolderCandidate);
+
+   if (strcmp(psz, "") == 0)
+   {
+
+      strKnownFolderCandidate += "://";
+
+   }
+   else if (strcmp(psz, ":") == 0)
+   {
+
+      strKnownFolderCandidate += "//";
+
+   }
+   else if (strcmp(psz, ":/") == 0)
+   {
+
+      strKnownFolderCandidate += "/";
+
+   }
+
+   return strKnownFolderCandidate;
+
+}
 
 sz_known_folder_struct * get_known_folder_struct(const ::string & strKnownFolder)
 {
+
+   string strKnownFolderCandidate = get_known_folder_name_candidate(strKnownFolder);
 
    auto pknownfolderstruct = g_knownfolderstructa;
 
    while (pknownfolderstruct->m_pszKnownFolder)
    {
 
-      if (strKnownFolder.case_insensitive_order(pknownfolderstruct->m_pszKnownFolder) == 0)
+      if (strKnownFolderCandidate.case_insensitive_order(pknownfolderstruct->m_pszKnownFolder) == 0)
       {
 
          return pknownfolderstruct;

@@ -552,10 +552,12 @@ namespace windowing_win32
    void * icon::get_os_data(const ::size_i32 & size) const
    {
 
-      auto & hicon = ((icon *)this)->m_iconmap[size];
+      auto & iconitem = ((icon *)this)->m_iconmap[size];
 
-      if (!hicon)
+      if (!iconitem.m_bCalculated)
       {
+
+         iconitem.m_bCalculated = true;
 
          if (m_pathProcessed.has_char())
          {
@@ -578,7 +580,9 @@ namespace windowing_win32
 
                auto pimageResized = m_pcontext->m_pauracontext->create_image(size);
 
-               
+               bool bOk = false;
+
+               try
                {
 
                   image_source imagesource(pimage);
@@ -591,16 +595,27 @@ namespace windowing_win32
 
                   pimageResized->draw(imagedrawing);
 
+                  bOk = true;
+
+               }
+               catch (...)
+               {
+
+
                }
 
+               if (bOk)
+               {
 
-               hicon = (HICON) ((icon*)this)->acmesystem()->node()->m_pauranode->HICON_from_image(pimageResized);
+                  iconitem.m_hicon = (HICON)((icon *)this)->acmesystem()->node()->m_pauranode->HICON_from_image(pimageResized);
+
+               }
 
             }
             else 
             {
 
-               hicon = (HICON) ::LoadImageW(nullptr, wstring(m_pathProcessed), IMAGE_ICON, size.cx(), size.cy(), LR_LOADFROMFILE);
+               iconitem.m_hicon = (HICON) ::LoadImageW(nullptr, wstring(m_pathProcessed), IMAGE_ICON, size.cx(), size.cy(), LR_LOADFROMFILE);
 
             }
 
@@ -608,7 +623,7 @@ namespace windowing_win32
 
       }
 
-      if (!hicon)
+      if (!iconitem.m_hicon)
       {
 
          if (!m_iconmap.is_empty())
@@ -619,22 +634,27 @@ namespace windowing_win32
             for (auto& pair : m_iconmap)
             {
 
-               auto hicon1 = pair.element2();
+               auto iconitem1 = pair.element2();
 
-               auto info = MyGetIconInfo((HICON) hicon1);
-
-               if (info.nWidth > size1.cx() && info.nHeight > size1.cy())
+               if (iconitem1.m_hicon)
                {
 
-                  size1.cx() = info.nWidth;
-                  size1.cy() = info.nHeight;
-                  hicon = (HICON) hicon1;
+                  auto info = MyGetIconInfo((HICON)iconitem1.m_hicon);
+
+                  if (info.nWidth > size1.cx() && info.nHeight > size1.cy())
+                  {
+
+                     size1.cx() = info.nWidth;
+                     size1.cy() = info.nHeight;
+                     iconitem.m_hicon = (HICON)iconitem1.m_hicon;
+
+                  }
 
                }
 
             }
 
-            if (!hicon)
+            if (!iconitem.m_hicon)
             {
 
                size1.cx() = 0;
@@ -643,17 +663,22 @@ namespace windowing_win32
                for (auto& pair : m_iconmap)
                {
 
-                  auto & hicon1 = pair.m_element2;
+                  auto & iconitem1 = pair.m_element2;
 
-                  auto info = MyGetIconInfo(hicon1);
-
-                  if (info.nWidth > size1.cx()
-                     && info.nHeight > size1.cy())
+                  if (iconitem1.m_hicon)
                   {
 
-                     size1.cx() = info.nWidth;
-                     size1.cy() = info.nHeight;
-                     hicon = hicon1;
+                     auto info = MyGetIconInfo(iconitem1.m_hicon);
+
+                     if (info.nWidth > size1.cx()
+                        && info.nHeight > size1.cy())
+                     {
+
+                        size1.cx() = info.nWidth;
+                        size1.cy() = info.nHeight;
+                        iconitem.m_hicon = iconitem1.m_hicon;
+
+                     }
 
                   }
 
@@ -661,12 +686,11 @@ namespace windowing_win32
 
             }
 
-
          }
 
       }
 
-      return hicon;
+      return iconitem.m_hicon;
 
    }
 
@@ -674,9 +698,18 @@ namespace windowing_win32
    bool icon::add_icon(HICON hicon)
    {
 
+      if (::is_null(hicon))
+      {
+
+         return false;
+
+      }
+
       auto info = MyGetIconInfo(hicon);
 
-      m_iconmap[{info.nWidth, info.nHeight}] = hicon;
+      m_iconmap[{info.nWidth, info.nHeight}].m_hicon = hicon;
+
+      m_iconmap[{info.nWidth, info.nHeight}].m_bCalculated = true;
       
       return true;
 
@@ -715,7 +748,7 @@ namespace windowing_win32
       for (auto & size : sizes)
       {
          // just to enumerate the sizes
-         m_iconmap.set_at(size, nullptr);
+         m_iconmap.set_at(size, { });
 
       }
 
@@ -959,15 +992,22 @@ namespace windowing_win32
    void icon::_erase_all()
    {
 
-      for (auto hicon : m_iconmap.payloads())
+      for (auto iconitem : m_iconmap.payloads())
       {
 
-         ::DestroyIcon(hicon);
+         if (iconitem.m_hicon)
+         {
+
+            ::DestroyIcon(iconitem.m_hicon);
+
+         }
 
       }
 
       m_iconmap.erase_all();
+
    }
+
 
 } // namespace windowing_win32
 
