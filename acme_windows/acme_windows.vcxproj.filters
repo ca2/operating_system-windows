@@ -134,6 +134,21 @@
     <ClCompile Include="mmsystem.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="dir_context.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dir_system.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="file_context.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="file_system.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="file_watcher.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="deployment.rc">
@@ -268,6 +283,21 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="file_link.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dir_context.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dir_system.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="file_context.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="file_system.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="file_watcher.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -67,6 +67,18 @@ int g_iCol = 0;
 
 LRESULT CALLBACK __window_procedure(HWND hwnd, UINT message, WPARAM wparam, LPARAM lparam)
 {
+   if (message == WM_APP + 12345)
+   {
+
+      ::procedure p;
+
+      p.m_pbase.m_p = (decltype(p.m_pbase.m_p)) lparam;
+
+      p();
+
+      return 0;
+
+   }
 
    ::windowing_win32::window * pwindow = (::windowing_win32::window *) ::GetWindowLongPtr(hwnd, 0);
 
@@ -348,7 +360,7 @@ LRESULT CALLBACK __window_procedure(HWND hwnd, UINT message, WPARAM wparam, LPAR
       if (message == 34831)
       {
 
-         output_debug_string("message34381");
+         //output_debug_string("message34381");
       }
       auto pmessage = pimpl->get_message((enum_message)message, wparam, (iptr) lparam);
 

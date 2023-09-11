@@ -534,7 +534,7 @@ namespace aura_windows
             //if (puserinteraction->layout().m_statea[::user::e_layout_normal].m_bProdevian)
             //{
 
-            //   //puserinteraction->set_prodevian();
+            //   //puserinteraction->set_auto_refresh();
 
             //}
 
@@ -552,6 +552,8 @@ namespace aura_windows
             //}
 
             puserinteraction->display_previous();
+
+            puserinteraction->set_need_layout();
 
             puserinteraction->set_need_redraw();
 
@@ -574,7 +576,7 @@ namespace aura_windows
          if (puserinteraction)
          {
 
-            if (puserinteraction->layout().m_statea[::user::e_layout_normal].m_bProdevian)
+            if (puserinteraction->layout().m_statea[::user::e_layout_normal].m_bAutoRefresh)
             {
 
                // puserinteraction->clear_prodevian();
@@ -1164,9 +1166,9 @@ namespace aura_windows
    void interaction_impl::rects_from_os()
    {
 
-      //::rectangle_i32 rectangleClient;
+      //::rectangle_i32 rectangleX;
 
-      //::GetClientRect(m_hwnd, rectangleClient);
+      //::GetClientRect(m_hwnd, rectangleX);
 
       //::rectangle_i32 rectangleScreen;
 
@@ -1187,7 +1189,7 @@ namespace aura_windows
 
       //}
 
-      //if (rectangleClient.size() != m_puserinteraction->m_size)
+      //if (rectangleX.size() != m_puserinteraction->m_size)
       //{
 
       //   information("ATTENTION!! Client Size <> Window Size");
@@ -2763,12 +2765,12 @@ void interaction_impl::on_message_reposition(::message::message* pmessage)
    if (!m_pwindow->is_iconic())
    {
 
-      m_puserinteraction->set_position(preposition->m_point, ::user::e_layout_window);
+      //m_puserinteraction->set_position(preposition->m_point, ::user::e_layout_window);
 
       if (!m_pwindow->placement_log()->has_recent(preposition->m_point))
       {
 
-         m_puserinteraction->set_position(preposition->m_point, ::user::e_layout_sketch);
+         //m_puserinteraction->set_position(preposition->m_point, ::user::e_layout_sketch);
 
          m_puserinteraction->set_reposition();
 
@@ -2872,14 +2874,14 @@ void interaction_impl::on_message_size(::message::message* pmessage)
 
          //m_pwindow->m_size = psize->m_size;
 
-   m_puserinteraction->set_size(psize->m_size, ::user:: e_layout_window);
+   //m_puserinteraction->set_size(psize->m_size, ::user:: e_layout_window);
 
    m_sizeSetWindowSizeRequest = psize->m_size;
 
    if (!m_pwindow->placement_log()->has_recent(psize->m_size))
    {
 
-      m_puserinteraction->set_size(m_puserinteraction->const_layout().window().size(), ::user::e_layout_sketch);
+      //m_puserinteraction->set_size(m_puserinteraction->const_layout().window().size(), ::user::e_layout_sketch);
 
       int cx = m_puserinteraction->const_layout().sketch().size().width();
 
@@ -3574,12 +3576,12 @@ void interaction_impl::on_message_size(::message::message* pmessage)
 */
 
 
-   void interaction_impl::_window_show_change_visibility(::e_display edisplay, ::e_activation eactivation)
-   {
+   //void interaction_impl::_window_show_change_visibility_unlocked(::e_display edisplay, ::e_activation eactivation)
+   //{
 
-      ::user::interaction_impl::_window_show_change_visibility(edisplay, eactivation);
+   //   ::user::interaction_impl::_window_show_change_visibility_unlocked(edisplay, eactivation);
 
-   }
+   //}
 
 
    //void interaction_impl::_001OnActivate(::message::message* pmessage)
@@ -3688,23 +3690,23 @@ void interaction_impl::on_message_size(::message::message* pmessage)
 //      //if(bCalcValidRects)
 //      //{
 //      //   information("1");
-//      //   pncsp->rgrc[0].left = lpncsp->lppos->x + 1;
+//      //   pncsp->rgrc[0].left() = lpncsp->lppos->x + 1;
 //
-//      //   pncsp->rgrc[0].right = lpncsp->lppos->x + lpncsp->lppos->cx - 1;
+//      //   pncsp->rgrc[0].right() = lpncsp->lppos->x + lpncsp->lppos->cx - 1;
 //
-//      //   pncsp->rgrc[0].top = lpncsp->lppos->y + 32;
+//      //   pncsp->rgrc[0].top() = lpncsp->lppos->y + 32;
 //
-//      //   pncsp->rgrc[0].bottom = lpncsp->lppos->y + lpncsp->lppos->cy - 1;
+//      //   pncsp->rgrc[0].bottom() = lpncsp->lppos->y + lpncsp->lppos->cy - 1;
 //
 //      //}
 //      //else
 //      //{
 //      //   CRect * prectangle = (CRect *) pncsp;
 //
-//      //   prectangle->top += 32;
-//      //   prectangle->left++;
-//      //   prectangle->bottom--;
-//      //   prectangle->right--;
+//      //   prectangle->top() += 32;
+//      //   prectangle->left()++;
+//      //   prectangle->bottom()--;
+//      //   prectangle->right()--;
 //
 //      //   information("2");
 //      //}
@@ -3723,13 +3725,13 @@ void interaction_impl::on_message_size(::message::message* pmessage)
 //         /* Maximized windows always have a non-client border that hangs over
 //         the edge of the screen, so the size_i32 proposed by e_message_non_client_calc_size is
 //         fine. Just adjust the top border to erase the u title. */
-//         pncsp->rgrc[0].left = client.left;
+//         pncsp->rgrc[0].left() = client.left();
 //
-//         pncsp->rgrc[0].top = nonclient.top + wi.cyWindowBorders;
+//         pncsp->rgrc[0].top() = nonclient.top() + wi.cyWindowBorders;
 //
-//         pncsp->rgrc[0].right = client.right;
+//         pncsp->rgrc[0].right() = client.right();
 //
-//         pncsp->rgrc[0].bottom = client.bottom;
+//         pncsp->rgrc[0].bottom() = client.bottom();
 //
 //
 //         HMONITOR mon = MonitorFromWindow(m_hwnd, MONITOR_DEFAULTTOPRIMARY);
@@ -3748,16 +3750,16 @@ void interaction_impl::on_message_size(::message::message* pmessage)
 //
 //         {
 //            if (has_autohide_appbar(ABE_BOTTOM, mi.rcMonitor))
-//               pncsp->rgrc[0].bottom--;
+//               pncsp->rgrc[0].bottom()--;
 //
 //            else if (has_autohide_appbar(ABE_LEFT, mi.rcMonitor))
-//               pncsp->rgrc[0].left++;
+//               pncsp->rgrc[0].left()++;
 //
 //            else if (has_autohide_appbar(ABE_TOP, mi.rcMonitor))
-//               pncsp->rgrc[0].top++;
+//               pncsp->rgrc[0].top()++;
 //
 //            else if (has_autohide_appbar(ABE_RIGHT, mi.rcMonitor))
-//               pncsp->rgrc[0].right--;
+//               pncsp->rgrc[0].right()--;
 //
 //         }
 //      }
@@ -4398,8 +4400,8 @@ void interaction_impl::set_tool_window(bool bSet)
 //      }
 //      else if (message == e_message_left_button_down)
 //      {
-//         ::rectangle_i32 rectangleClient;
-//         ::GetClientRect(get_handle(), rectangleClient);
+//         ::rectangle_i32 rectangleX;
+//         ::GetClientRect(get_handle(), rectangleX);
 //         ::rectangle_i32 rectangleWindow;
 //         ::GetWindowRect(get_handle(), rectangleWindow);
 //         ::rectangle_i32 rectangleRegion;

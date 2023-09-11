@@ -1,12 +1,14 @@
 #include "framework.h"
 #include "dir_context.h"
 #include "dir_system.h"
+#include "file_system.h"
 #include "acme_windows/file_find.h"
 #include "acme_windows/registry.h"
 #include "acme/constant/id.h"
 #include "acme/parallelization/task_flag.h"
 #include "acme/primitive/string/str.h"
-#include "apex/platform/system.h"
+#include "acme/platform/application.h"
+#include "acme/platform/system.h"
 #include "acme/filesystem/filesystem/acme_directory.h"
 #include "acme/filesystem/filesystem/listing.h"
 #include "acme_windows/acme_directory.h"
@@ -18,7 +20,7 @@
 #include <Shlobj.h>
 
 
-namespace apex_windows
+namespace acme_windows
 {
 
 
@@ -49,7 +51,7 @@ namespace apex_windows
 
       //}
 
-      ::pointer<::apex::system>psystem = acmesystem();
+      ::pointer<::acme::system>psystem = acmesystem();
 
       //__refer(
       m_pfilesystem = psystem->m_pfilesystem;
@@ -802,7 +804,7 @@ namespace apex_windows
       if (::task_flag().is_set(e_task_flag_compress_is_dir) && iLast >= 3 && !ansi_count_compare_ci(&((const ::string &)str)[iLast - 3], ".zip", 4))
       {
 
-         //m_isdirmap.set(str.left(iLast + 1), true, 0);
+         //m_isdirmap.set(str.left()(iLast + 1), true, 0);
 
          return true;
 
@@ -814,7 +816,7 @@ namespace apex_windows
 
       bIsDir = (dwAttrib != INVALID_FILE_ATTRIBUTES) && (dwAttrib & FILE_ATTRIBUTE_DIRECTORY);
 
-      //      m_isdirmap.set(str.left(iLast + 1), bIsDir, bIsDir ? 0 : ::GetLastError());
+      //      m_isdirmap.set(str.left()(iLast + 1), bIsDir, bIsDir ? 0 : ::GetLastError());
 
       return bIsDir;
 

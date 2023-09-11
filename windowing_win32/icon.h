@@ -22,8 +22,14 @@ namespace windowing_win32
    public:
       
 
+      struct icon_item
+      {
+         HICON m_hicon = nullptr;
+         bool m_bCalculated = false;
 
-      map < ::size_i32, HICON >              m_iconmap;
+      };
+
+      map < ::size_i32, icon_item >              m_iconmap;
 
       ::file::path                           m_pathProcessed;
 

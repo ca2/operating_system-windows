@@ -67,15 +67,13 @@ namespace draw2d_gdiplus
    }
 
 
-   void bitmap::host_bitmap(::draw2d::graphics * pgraphics, const pixmap * ppixmap)
+   bool bitmap::host_bitmap(::draw2d::graphics * pgraphics, pixmap * ppixmap)
    {
 
       if (ppixmap->m_sizeRaw == m_size)
       {
 
-         //return true;
-
-         return;
+         return true;
 
       }
 
@@ -109,7 +107,7 @@ namespace draw2d_gdiplus
 
       m_size = ppixmap->m_size;
 
-      //return true;
+      return true;
 
    }
 

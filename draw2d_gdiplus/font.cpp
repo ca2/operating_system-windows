@@ -355,9 +355,24 @@ namespace draw2d_gdiplus
 
       }
 
-      synchronous_lock synchronouslock(acmesystem()->m_paurasystem->draw2d()->write_text()->m_pparticleFontTextMapSynchronization);
+      auto psystem = acmesystem();
 
-      m_mapFontText.erase_all();
+      auto paurasystem = psystem->m_paurasystem;
+
+      auto pdraw2d = paurasystem->draw2d();
+
+      auto pwritetext = pdraw2d->write_text();
+
+      if (::is_set(pwritetext))
+      {
+
+         auto psynchronization = pwritetext->m_pparticleFontTextMapSynchronization;
+
+         synchronous_lock synchronouslock(psynchronization);
+
+         m_mapFontText.erase_all();
+
+      }
 
    }
 

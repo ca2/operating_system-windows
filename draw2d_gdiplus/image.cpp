@@ -72,15 +72,15 @@ namespace draw2d_gdiplus
    }
 
 
-   bool image::host(const ::pixmap * ppixmap)
+   bool image::host(::pixmap * ppixmap)
    {
 
       if (!ppixmap->is_ok())
       {
 
-         return false;
+         //return false;
 
-         //throw ::exception(error_failed);
+         throw ::exception(error_failed);
 
       }
 
@@ -128,7 +128,11 @@ namespace draw2d_gdiplus
       //}
 
       
-      m_pbitmap->host_bitmap(nullptr, ppixmap);
+      if (m_pbitmap->host_bitmap(nullptr, ppixmap))
+      {
+         //this->m_sizeRaw = ppixmap->m_sizeRaw;
+
+      }
       //if (!)
       //{
 
@@ -155,7 +159,9 @@ namespace draw2d_gdiplus
 
       //}
 
-      init(ppixmap->size(), ppixmap->image32(), ppixmap->m_iScan);
+      init(ppixmap->m_sizeRaw, ppixmap->image32(), ppixmap->m_iScan);
+
+      m_size = ppixmap->m_size;
 
       m_pgraphics->set(m_pbitmap);
 
@@ -570,7 +576,7 @@ namespace draw2d_gdiplus
          if (pointSrc.x() < 0)
          {
 
-            rectangleTarget.left -= pointSrc.x();
+            rectangleTarget.left() -= pointSrc.x();
 
             pointSrc.x() = 0;
 
@@ -579,20 +585,20 @@ namespace draw2d_gdiplus
          if (pointSrc.y() < 0)
          {
 
-            rectangleTarget.top -= pointSrc.y();
+            rectangleTarget.top() -= pointSrc.y();
 
             pointSrc.y() = 0;
 
          }
 
-         if (rectangleTarget.left < 0)
+         if (rectangleTarget.left() < 0)
          {
 
-            size.cx() += rectangleTarget.left;
+            size.cx() += rectangleTarget.left();
 
-            pointSrc.x() -= rectangleTarget.left;
+            pointSrc.x() -= rectangleTarget.left();
 
-            rectangleTarget.left = 0;
+            rectangleTarget.left() = 0;
 
          }
 
@@ -603,14 +609,14 @@ namespace draw2d_gdiplus
 
          }
 
-         if (rectangleTarget.top < 0)
+         if (rectangleTarget.top() < 0)
          {
 
-            size.cy() += rectangleTarget.top;
+            size.cy() += rectangleTarget.top();
 
-            pointSrc.y() -= rectangleTarget.top;
+            pointSrc.y() -= rectangleTarget.top();
 
-            rectangleTarget.top = 0;
+            rectangleTarget.top() = 0;
 
          }
 
@@ -621,9 +627,9 @@ namespace draw2d_gdiplus
 
          }
 
-         int xEnd = minimum(size.cx(), minimum(pimageSrc->width() - pointSrc.x(), pimageDst->width() - rectangleTarget.left));
+         int xEnd = minimum(size.cx(), minimum(pimageSrc->width() - pointSrc.x(), pimageDst->width() - rectangleTarget.left()));
 
-         int yEnd = minimum(size.cy(), minimum(pimageSrc->height() - pointSrc.y(), pimageDst->height() - rectangleTarget.top));
+         int yEnd = minimum(size.cy(), minimum(pimageSrc->height() - pointSrc.y(), pimageDst->height() - rectangleTarget.top()));
 
          if (xEnd < 0)
          {
@@ -643,7 +649,7 @@ namespace draw2d_gdiplus
 
          i32 scanSrc = pimageSrc->scan_size();
 
-         u8 * pdst = &((u8 *)pimageDst->image32())[scanDst * rectangleTarget.top + rectangleTarget.left * sizeof(::color::color)];
+         u8 * pdst = &((u8 *)pimageDst->image32())[scanDst * rectangleTarget.top() + rectangleTarget.left() * sizeof(::color::color)];
 
          u8 * psrc = &((u8 *)pimageSrc->image32())[scanSrc * pointSrc.y() + pointSrc.x() * sizeof(::color::color)];
 

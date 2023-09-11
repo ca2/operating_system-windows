@@ -5,16 +5,16 @@
 #include "interprocess_caller.h"
 #include "interprocess_target.h"
 #include "launcher.h"
-#include "dir_system.h"
-#include "dir_context.h"
-#include "file_system.h"
-#include "file_context.h"
+//#include "dir_system.h"
+//#include "dir_context.h"
+//#include "file_system.h"
+//#include "file_context.h"
 #include "process.h"
 #include "app_launcher.h"
 #include "os_context.h"
-#include "file_os_watcher.h"
+//#include "file_os_watcher.h"
 #include "acme/parallelization/event.h"
-#include "apex/filesystem/file/listener.h"
+//#include "apex/filesystem/file/listener.h"
 #include "apex/platform/launcher.h"
 #include "apex/parallelization/service.h"
 #include "apex/parallelization/service_handler.h"
@@ -36,12 +36,6 @@ IMPLEMENT_FACTORY(apex_windows)
 
    acme_windows_factory(pfactory);
 
-   pfactory->add_factory_item < ::apex_windows::dir_system, ::dir_system >();
-   pfactory->add_factory_item < ::apex_windows::file_system, ::file_system >();
-
-   pfactory->add_factory_item < ::apex_windows::dir_context, ::dir_context >();
-   pfactory->add_factory_item < ::apex_windows::file_context, ::file_context >();
-
    //add_factory_item < ::windows::stdio_file, ::file::text_file >();
    //add_factory_item < ::windows::file, ::file::file >();
    pfactory->add_factory_item < ::apex_windows::os_context, ::os_context >();
@@ -62,8 +56,6 @@ IMPLEMENT_FACTORY(apex_windows)
    //add_factory_item < ::windows::buffer, ::graphics::graphics >();
    //add_factory_item < ::windows::interaction_impl, ::user::interaction_impl >();
 
-   pfactory->add_factory_item < ::apex_windows::os_watcher, ::file::watcher >();
-   pfactory->add_factory_item < ::apex_windows::os_watch, ::file::watch >();
 
 
    pfactory->add_factory_item < ::apex_windows::app_launcher, ::apex::app_launcher >();

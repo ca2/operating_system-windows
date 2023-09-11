@@ -29,6 +29,7 @@ namespace windowing_win32
       ::pointer<::aura_windows::interaction_impl>    m_pimpl2;
       class ::time                                      m_timeLastMouseMove;
       ::point_i32                                     m_pointMouseMove;
+      ::u32                                           m_uExtraFlagsSetWindowPos;
 
 
       window();
@@ -109,6 +110,8 @@ namespace windowing_win32
 
       void set_foreground_window() override;
 
+      void _set_foreground_window_unlocked() override;
+
       void set_mouse_capture() override;
 
 
@@ -124,7 +127,7 @@ namespace windowing_win32
 
       void destroy_window() override;
 
-      void show_window(const ::e_display & edisplay, const ::e_activation & eactivation) override;
+      //void _set_foreground_window_unlocked() override;
 
       //virtual void set_user_interaction(::layered * pinteraction) override;
 
@@ -152,11 +155,19 @@ namespace windowing_win32
 
       bool screen_to_client(::point_i32 * ppoint) override;
 
-      bool on_set_window_position(const class ::zorder& zorder, i32 x, i32 y, i32 cx, i32 cy, const ::e_activation& eactivation, bool bNoZorder, bool bNoMove, bool bNoSize, bool bShow, bool bHide) override;
+      //bool on_set_window_position(const class ::zorder& zorder, i32 x, i32 y, i32 cx, i32 cy, const ::e_activation& eactivation, bool bNoZorder, bool bNoMove, bool bNoSize, bool bShow, bool bHide) override;
 
-      bool set_window_position(const class ::zorder& zorder, i32 x, i32 y, i32 cx, i32 cy, const ::e_activation& eactivation, bool bNoZorder, bool bNoMove, bool bNoSize, bool bShow, bool bHide) override;
+      //bool set_window_position(const class ::zorder& zorder, i32 x, i32 y, i32 cx, i32 cy, const ::e_activation& eactivation, bool bNoZorder, bool bNoMove, bool bNoSize, bool bShow, bool bHide) override;
 
-      bool _set_window_pos(const class ::zorder& zorder, i32 x, i32 y, i32 cx, i32 cy, const ::e_activation& eactivation, bool bNoZorder, bool bNoMove, bool bNoSize, bool bShow, bool bHide, ::u32 nOverrideFlags = 0);
+      bool _configure_window_unlocked(const class ::zorder & zorder, const ::e_activation & eactivation, bool bNoZorder, ::e_display edisplay) override;
+
+      virtual bool __set_window_position(const class ::zorder& zorder, i32 x, i32 y, i32 cx, i32 cy, const ::e_activation& eactivation, bool bNoZorder, bool bNoMove, bool bNoSize, bool bShow, bool bHide, ::u32 nOverrideFlags = 0);
+
+      bool _set_window_position_unlocked(const class ::zorder & zorder, i32 x, i32 y, i32 cx, i32 cy, const ::e_activation & eactivation, bool bNoZorder, bool bNoMove, bool bNoSize, ::e_display edisplay) override;
+
+      void window_do_update_screen() override;
+
+      //bool strict_set_window_position_unlocked() override;
 
       bool is_destroying() override;
 
@@ -336,13 +347,13 @@ namespace windowing_win32
       //using ::user::interaction_impl::window_rectangle;
       //virtual bool window_rectangle(::rectangle_i64 * prectangle);
 
-      //using ::user::interaction_impl::client_rectangle;
-      //virtual bool client_rectangle(::rectangle_i64 * prectangle);
+      //using ::user::interaction_impl::this->rectangle;
+      //virtual bool this->rectangle(::rectangle_i64 * prectangle);
 
 
       //virtual void rects_from_os();
       virtual bool window_rectangle(::rectangle_i32 * prectangle);
-      virtual bool client_rectangle(::rectangle_i32 * prectangle);
+      virtual bool rectangle(::rectangle_i32 * prectangle);
 
 
 
@@ -893,7 +904,7 @@ namespace windowing_win32
       virtual float dpiy(float y) override;
       virtual float dpix(float x) override;
 
-      void _window_request_presentation() override;
+      //void _window_request_presentation_locked() override;
       void window_update_screen_buffer() override;
 
       void get_cursor_position(::point_i32 * ppointCursor) override;

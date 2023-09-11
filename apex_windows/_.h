@@ -17,8 +17,8 @@ namespace apex_windows
 {
 
 
-   class dir_context;
-   class dir_system;
+   //class dir_context;
+   //class dir_system;
 
 
 } // namespace apex_windows

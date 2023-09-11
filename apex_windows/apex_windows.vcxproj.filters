@@ -106,9 +106,6 @@
     <ClCompile Include="shell\shell.cpp">
       <Filter>Source Files\shell</Filter>
     </ClCompile>
-    <ClCompile Include="dir_context.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="_factory.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -116,18 +113,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="os_context.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="dir_system.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="file_context.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="file_os_watcher.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="file_system.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ip_enum.cpp">

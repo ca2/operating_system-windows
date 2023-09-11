@@ -48,6 +48,8 @@ namespace windowing_win32
 
       virtual void on_device_remove_complete(DEV_BROADCAST_HDR* phdr);
 
+      virtual void on_device_nodes_changed();
+
       void on_device_plugged(::hardware::enum_device edevice) override;
 
       void on_device_unplugged(::hardware::enum_device edevice) override;

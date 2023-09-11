@@ -42,13 +42,13 @@ namespace draw2d_gdiplus
 
       m_pregion->GetBounds(&rectangle, __graphics(pgraphics)->m_pgraphics);
 
-      prectangle->left = rectangle.X;
+      prectangle->left() = rectangle.X;
 
-      prectangle->top = rectangle.Y;
+      prectangle->top() = rectangle.Y;
 
-      prectangle->right = rectangle.X + rectangle.Width;
+      prectangle->right() = rectangle.X + rectangle.Width;
 
-      prectangle->bottom = rectangle.Y + rectangle.Height;
+      prectangle->bottom() = rectangle.Y + rectangle.Height;
 
 
       return true;

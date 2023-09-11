@@ -178,7 +178,7 @@ namespace windows
    {
    HWND hwndChild = hwnda[i];
    ::rectangle_i32 rectangleChild;
-   ::client_rectangle(hwndChild, rectangleChild);
+   ::this->rectangle(hwndChild, rectangleChild);
    ::_001ClientToScreen(hwndChild, &rectangleChild.top_left());
    ::_001ClientToScreen(hwndChild, &rectangleChild.bottom_right());
    ::_001ScreenToClient(hwnd, &rectangleChild.top_left());
@@ -197,7 +197,7 @@ namespace windows
    /*HRGN window_util::GetAClipRgn(HWND hwnd, const point_i32 & pointOffset, bool bExludeChildren)
    {
    ::rectangle_i32 rectangleWnd;
-   ::client_rectangle(hwnd, rectangleWnd);
+   ::this->rectangle(hwnd, rectangleWnd);
    rectangleWnd.offset(pointOffset);
    HRGN hrgn = ::create_rect(rectangleWnd);
 
@@ -516,10 +516,10 @@ namespace windows
       //
       //#ifdef WINDOWS_DESKTOP
       //
-      //         rectangleMajor.left = 0;
-      //         rectangleMajor.top = 0;
-      //         rectangleMajor.right = GetSystemMetrics(SM_CXSCREEN);
-      //         rectangleMajor.bottom = GetSystemMetrics(SM_CYSCREEN);
+      //         rectangleMajor.left() = 0;
+      //         rectangleMajor.top() = 0;
+      //         rectangleMajor.right() = GetSystemMetrics(SM_CXSCREEN);
+      //         rectangleMajor.bottom() = GetSystemMetrics(SM_CYSCREEN);
       //
       //#else
       //
@@ -530,11 +530,11 @@ namespace windows
       //      }
       //      else
       //      {
-      //         ::client_rectangle(hwndParent, rectangleMajor);
+      //         ::this->rectangle(hwndParent, rectangleMajor);
       //      }
       //
       //      ::rectangle_i32 rectangle;
-      //      ::client_rectangle(hwnd, rectangle);
+      //      ::this->rectangle(hwnd, rectangle);
       //
       //#ifdef WINDOWS_DESKTOP
       //
@@ -559,26 +559,26 @@ namespace windows
       //
       //      bool bModified = false;
       //
-      //      if(rectangle.left > rectangleMajor.right)
+      //      if(rectangle.left() > rectangleMajor.right())
       //      {
-      //         rectangle.offset(- rectangle.width() - (rectangle.left - rectangleMajor.right), 0);
+      //         rectangle.offset(- rectangle.width() - (rectangle.left() - rectangleMajor.right()), 0);
       //         bModified = true;
       //      }
-      //      if(rectangle.right < rectangleMajor.left)
+      //      if(rectangle.right() < rectangleMajor.left())
       //      {
-      //         rectangle.offset(rectangle.width() + (rectangleMajor.left - rectangle.right), 0);
+      //         rectangle.offset(rectangle.width() + (rectangleMajor.left() - rectangle.right()), 0);
       //         bModified = true;
       //      }
-      //      if(rectangle.top > rectangleMajor.bottom)
+      //      if(rectangle.top() > rectangleMajor.bottom())
       //      {
-      //         rectangle.offset(0, - rectangle.height() - (rectangle.top - rectangleMajor.bottom));
+      //         rectangle.offset(0, - rectangle.height() - (rectangle.top() - rectangleMajor.bottom()));
       //         bModified = true;
       //      }
       //
-      //      if(rectangle.bottom < rectangleMajor.top)
+      //      if(rectangle.bottom() < rectangleMajor.top())
       //      {
       //
-      //         rectangle.offset(0, rectangle.height() + (rectangleMajor.top - rectangle.bottom));
+      //         rectangle.offset(0, rectangle.height() + (rectangleMajor.top() - rectangle.bottom()));
       //
       //         bModified = true;
       //
@@ -590,7 +590,7 @@ namespace windows
       //      if(bModified)
       //      {
       //
-      //         ::set_window_position(hwnd, HWND_TOP, rectangle.left, rectangle.top, rectangle.width(), rectangle.height(), 0);
+      //         ::set_window_position(hwnd, HWND_TOP, rectangle.left(), rectangle.top(), rectangle.width(), rectangle.height(), 0);
       //
       //      }
       //

@@ -319,6 +319,13 @@ namespace windowing_win32
 
       auto bThumbnail = _defer_set_thumbnail_IThumbnailProvider((_get_file_image_ &)getfileimage);
 
+      if (!bThumbnail)
+      {
+
+         bThumbnail = ::user::shell::defer_set_thumbnail(getfileimage);
+
+      }
+
       return bThumbnail;
 
    }
@@ -1524,7 +1531,7 @@ namespace windowing_win32
       //if (iFind >= 0 || iFind2 >= 2)
       //{
 
-      //   string strProtocol = imagekey.m_strPath.left(maximum(iFind, iFind2));
+      //   string strProtocol = imagekey.m_strPath.left()(maximum(iFind, iFind2));
 
       //   i32 i = 0;
 
@@ -1834,7 +1841,7 @@ namespace windowing_win32
      
       pdrawicon->initialize_with_windowing_icon(pwindowingicon);
 
-      if(::is_ok(pdrawicon))
+      //if(::is_ok(pdrawicon))
       {
 
          image_source imagesource(pdrawicon);

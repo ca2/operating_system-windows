@@ -20,6 +20,8 @@
 #include <gdiplus.h>
 #endif
 
+CLASS_DECL_AURA::point_i32 __get_bottom_right();
+CLASS_DECL_AURA void __set_bottom_right(const ::point_i32 & pointBottomRight);
 
 
 namespace windowing_win32
@@ -289,7 +291,9 @@ namespace windowing_win32
 
       auto pdisplay = pwindowing->display();
 
-      auto sizeLargeInternalBitmap = pdisplay->get_monitor_union_size();
+      auto rectangleUnion = pdisplay->get_monitor_union_rectangle();
+
+      auto sizeLargeInternalBitmap = rectangleUnion.size();
 
       if (pbufferitem->m_size.cx() > sizeLargeInternalBitmap.cx())
       {
@@ -650,10 +654,10 @@ namespace windowing_win32
 
                //rectangle r;
 
-               //rectangle.left = 10;
-               //rectangle.right = 20;
-               //rectangle.top = 0;
-               //rectangle.bottom = sz.cy();
+               //rectangle.left() = 10;
+               //rectangle.right() = 20;
+               //rectangle.top() = 0;
+               //rectangle.bottom() = sz.cy();
 
                //::FillRect(m_hdc, rectangle, h);
 
@@ -678,13 +682,13 @@ namespace windowing_win32
 
 #endif
 
-            SelectClipRgn(m_hdcScreen, nullptr);
+            //SelectClipRgn(m_hdcScreen, nullptr);
 
-            SelectClipRgn(playeredwindowbuffer->m_hdc, nullptr);
+            //SelectClipRgn(playeredwindowbuffer->m_hdc, nullptr);
 
-            SetViewportOrgEx(m_hdcScreen, 0, 0, nullptr);
+            //SetViewportOrgEx(m_hdcScreen, 0, 0, nullptr);
 
-            SetViewportOrgEx(playeredwindowbuffer->m_hdc, 0, 0, nullptr);
+            //SetViewportOrgEx(playeredwindowbuffer->m_hdc, 0, 0, nullptr);
 
 #ifdef REDRAW_HINTING
 
@@ -694,10 +698,10 @@ namespace windowing_win32
 
                //rectangle r;
 
-               //rectangle.left = 20;
-               //rectangle.right = 30;
-               //rectangle.top = 0;
-               //rectangle.bottom = sz.cy();
+               //rectangle.left() = 20;
+               //rectangle.right() = 30;
+               //rectangle.top() = 0;
+               //rectangle.bottom() = sz.cy();
 
                //::FillRect(m_hdc, rectangle, h);
 
@@ -728,10 +732,10 @@ namespace windowing_win32
 
                               //rectangle r;
 
-                              //rectangle.left = 20;
-                              //rectangle.right = 30;
-                              //rectangle.top = 0;
-                              //rectangle.bottom = sz.cy();
+                              //rectangle.left() = 20;
+                              //rectangle.right() = 30;
+                              //rectangle.top() = 0;
+                              //rectangle.bottom() = sz.cy();
 
                               //::FillRect(m_hdc, rectangle, h);
 
@@ -821,15 +825,30 @@ namespace windowing_win32
                if (::GetWindowRect(get_hwnd(), &rectangleProbe))
                {
 
-                  information() << "GetWindowRect (%d, %d) - (%d, %d)", rectangleProbe.left, rectangleProbe.top, rectangleProbe.right, rectangleProbe.bottom;
+                  information("GetWindowRect (%d, %d) - (%d, %d)", rectangleProbe.left, rectangleProbe.top, rectangleProbe.right, rectangleProbe.bottom);
 
                }
 
             }
 
-            bool bOk = true;
 
-            bool bSizeOrPositionChanged = false;
+            ::pointer < ::windowing_win32::window > pwindow = m_pimpl->m_pwindow;
+
+            try
+            {
+
+               pwindow->full_set_window_position_unlocked();
+
+            }
+            catch (...)
+            {
+
+            }
+
+
+            //bool bOk = true;
+
+            //bool bSizeOrPositionChanged = false;
 
             //if (layout.design().is_screen_visible())
             {
@@ -840,64 +859,62 @@ namespace windowing_win32
 
                //rectangle_i32 rectangleDrawing(point, size);
 
-               rectangle_i32 rectangleWindowCurrent;
-
-               GetWindowRect(hwnd, (RECT *)&rectangleWindowCurrent);
 
                   //if (rectangleDrawing.size() == pimage->m_rectangleTag.size())
                {
 
 
-                  //               }
-                                 //else
-                                 //{
+        /*             };
 
-                                 //   information("Update discarded");
+                  p();*/
 
-                                 //}
+                  //::SendMessage((HWND) m_pwindow->oswindow(),
+   //WM_APP + 12345, 0, (LPARAM) p.m_pbase.m_p);
 
-
-                                 //if (rectangleDrawing.size() == pimage->m_rectangleTag.size())
-                                 //{
-
-                  UINT uFlagsSetWindowPos = SWP_NOZORDER
-                     | SWP_ASYNCWINDOWPOS
-                     | SWP_FRAMECHANGED
-                     | SWP_NOREDRAW
-                     | SWP_NOCOPYBITS
-                     | SWP_DEFERERASE
-                     | SWP_NOACTIVATE
-                     | SWP_SHOWWINDOW;
-
-                  if (!::IsWindowVisible(hwnd))
+                  //if (m_pimpl->m_puserinteraction->get_parent() == nullptr)
                   {
 
-                     warning() << "Window is not visible!!";
+                     auto p = __get_bottom_right();
+
+                     if (p.is_set())
+                     {
+
+                        auto r = ::rectangle_i32(point, size);
+
+                        auto Δ = r.bottom_right() - p;
+
+                        if (Δ.cx() != 0 || Δ.cy() != 0)
+                        {
+
+                           //information() << "sketch_to_lading top right offset not null " << Δ;
+
+                        }
+
+                     }
 
                   }
 
-                  ::UpdateLayeredWindow(hwnd, m_hdcScreen, (POINT *)&point, (SIZE *)&size, playeredwindowbuffer->m_hdc, (POINT *)&pointSrc, make_u32(0, 0, 0, 0), &blendPixelFunction, ULW_ALPHA);
 
-                  if (rectangleWindowCurrent.top_left() != point
-                     || rectangleWindowCurrent.size() != size
-                     || m_pimpl->m_puserinteraction->const_layout().design().has_activation_request())
-                  {
+                  //if (rectangleWindowCurrent.top_left() != point
+                  //   || rectangleWindowCurrent.size() != size
+                  //   || m_pimpl->m_puserinteraction->const_layout().design().has_activation_request())
+                  //{
 
-                     m_pimpl->m_pwindow->_set_window_pos(
-                        m_pimpl->m_puserinteraction->const_layout().design().zorder(),
-                        point.x(),
-                        point.y(),
-                        size.cx(),
-                        size.cy(),
-                        m_pimpl->m_puserinteraction->const_layout().design().activation(),
-                        true, false, false, true, false, 
-                        uFlagsSetWindowPos);
+                  //   m_pimpl->m_pwindow->_set_window_position(
+                  //      m_pimpl->m_puserinteraction->const_layout().design().zorder(),
+                  //      point.x(),
+                  //      point.y(),
+                  //      size.cx(),
+                  //      size.cy(),
+                  //      m_pimpl->m_puserinteraction->const_layout().design().activation(),
+                  //      true, false, false, true, false, 
+                  //      uFlagsSetWindowPos);
 
-                     m_pimpl->m_puserinteraction->reset_pending();
+                  //   m_pimpl->m_puserinteraction->reset_pending();
 
-                     bSizeOrPositionChanged = true;
+                  //   bSizeOrPositionChanged = true;
 
-                  }
+                  //}
 
                   if (m_pimpl->m_puserinteraction->const_layout().window().origin() != point)
                   {
@@ -922,6 +939,14 @@ namespace windowing_win32
 
                ::point_i32 pointBottomRight = point + size;
 
+               if (::IsWindowVisible(hwnd) && !::IsIconic(hwnd))
+               {
+
+                  ::UpdateLayeredWindow(hwnd, m_hdcScreen, (POINT *)&point, (SIZE *)&size, playeredwindowbuffer->m_hdc, (POINT *)&pointSrc, make_u32(0, 0, 0, 0), &blendPixelFunction, ULW_ALPHA);
+
+               }
+
+
                //if (g_pointLastBottomRight != pointBottomRight)
                //{
 
@@ -938,14 +963,14 @@ namespace windowing_win32
 
             //m_pimpl->m_puserinteraction->post_message(message_do_show_window);
 
-            m_pimpl->m_puserinteraction->_window_show_change_visibility();
+            //m_pimpl->m_puserinteraction->_window_show_change_visibility_unlocked();
 
-            if (bSizeOrPositionChanged)
-            {
+            //if (bSizeOrPositionChanged)
+            //{
 
-               m_pimpl->m_puserinteraction->on_visual_applied();
+            //   m_pimpl->m_puserinteraction->on_visual_applied();
 
-            }
+            //}
 
             //#ifdef WINDOWS_DESKTOP
             //               if ((m_pimpl->m_puserinteraction->GetExStyle() & WS_EX_LAYERED))
@@ -1042,12 +1067,12 @@ namespace windowing_win32
 
             //}
 
-            if (!bOk)
+     /*       if (!bOk)
             {
 
                output_debug_string("UpdateLayeredWindow failed");
 
-            }
+            }*/
 
 #endif // __DEBUG
 
@@ -1100,7 +1125,7 @@ namespace windowing_win32
 
       bool bOk1 = double_buffer::buffer_lock_round_swap_key_buffers();
 
-      if (!m_pimpl || !m_pimpl->m_pprodevian)
+      if (!m_pimpl || !m_pimpl->m_pgraphicsthread)
       {
 
          return false;
