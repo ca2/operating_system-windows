@@ -30,20 +30,6 @@ namespace draw2d_gdiplus
    }
 
 
-//#ifdef DEBUG
-//
-//
-//   void font::dump(dump_context & dumpcontext) const
-//   {
-//
-//      ::draw2d::object::dump(dumpcontext);
-//
-//   }
-//
-//
-//#endif
-
-
    void font::destroy()
    {
 
@@ -102,7 +88,7 @@ namespace draw2d_gdiplus
 
       bool bFont = false;
 
-      Gdiplus::FontFamily * pfontfamily = nullptr;
+      auto & pgdiplusfontfamily = m_pgdiplusfontfamily;
 
       //::string strFamilyName = m_pfontfamily->family_name(this);
 
@@ -184,7 +170,7 @@ namespace draw2d_gdiplus
                         if (strFontFamily.case_insensitive_order(::write_text::font::m_pfontfamily->m_strFamilyName) == 0)
                         {
 
-                           pfontfamily = &fontfamily;
+                           pgdiplusfontfamily = fontfamily.Clone();
 
                            break;
 
@@ -196,14 +182,14 @@ namespace draw2d_gdiplus
 
                }
 
-               if (::is_null(pfontfamily))
+               if (::is_null(pgdiplusfontfamily))
                {
 
-                  pfontfamily = &pprivatefont->m_familya.first();
+                  pgdiplusfontfamily = pprivatefont->m_familya.first().Clone();
 
                }
 
-               if (::is_set(pfontfamily))
+               if (::is_set(pgdiplusfontfamily))
                {
 
                   //pfontfamily = &pprivatefont->m_familya[iFoundFamily];
@@ -228,13 +214,13 @@ namespace draw2d_gdiplus
 
                   //bFont = true;
 
-                  auto pfont = new Gdiplus::Font(
-                     pfontfamily,
+                  auto pgdiplusfont = new Gdiplus::Font(
+                     pgdiplusfontfamily,
                      gdiplus_font_size(m_fontsize),
                      iStyle,
                      gdiplus_font_unit(m_fontsize));
 
-                  set_gdiplus_font(pfont);
+                  set_gdiplus_font(pgdiplusfont);
 
                   bFont = true;
 
@@ -303,13 +289,13 @@ namespace draw2d_gdiplus
 
          }
 
-         auto pfont = new Gdiplus::Font(
+         auto pgdiplusfont = new Gdiplus::Font(
             utf8_to_unicode(strFamilyName),
             gdiplus_font_size(m_fontsize),
             iStyle,
             gdiplus_font_unit(m_fontsize));
 
-         set_gdiplus_font(pfont);
+         set_gdiplus_font(pgdiplusfont);
 
       }
 
@@ -318,26 +304,26 @@ namespace draw2d_gdiplus
       if (pfont)
       {
 
-         Gdiplus::FontFamily fontfamily;
-
-         if (::is_null(pfontfamily))
+         if (::is_null(pgdiplusfontfamily))
          {
 
-            if (pfont->GetFamily(&fontfamily) == Gdiplus::Ok)
+            auto pgdiplusfontfamilyNew = new Gdiplus::FontFamily();
+
+            if (pfont->GetFamily(pgdiplusfontfamilyNew) == Gdiplus::Ok)
             {
 
-               pfontfamily = &fontfamily;
+               pgdiplusfontfamily = pgdiplusfontfamilyNew;
 
             }
 
          }
 
-         if(::is_set(pfontfamily))
+         if(::is_set(pgdiplusfontfamily))
          {
 
             INT iStyle = pfont->GetStyle();
 
-            double dHeight = pfontfamily->GetEmHeight(iStyle);
+            double dHeight = pgdiplusfontfamily->GetEmHeight(iStyle);
 
             double dSize = pfont->GetSize();
 
@@ -345,10 +331,10 @@ namespace draw2d_gdiplus
 
             auto & textmetric = m_textmetric2;
 
-            textmetric.m_dAscent = dSize * pfontfamily->GetCellAscent(iStyle) / dHeight;
-            textmetric.m_dDescent = dSize * pfontfamily->GetCellDescent(iStyle) / dHeight;
+            textmetric.m_dAscent = dSize * pgdiplusfontfamily->GetCellAscent(iStyle) / dHeight;
+            textmetric.m_dDescent = dSize * pgdiplusfontfamily->GetCellDescent(iStyle) / dHeight;
             textmetric.m_dInternalLeading = 0.;
-            textmetric.m_dExternalLeading = dSize * pfontfamily->GetLineSpacing(iStyle) / dHeight -
+            textmetric.m_dExternalLeading = dSize * pgdiplusfontfamily->GetLineSpacing(iStyle) / dHeight -
                (textmetric.m_dAscent + textmetric.m_dDescent);
 
          }
@@ -373,6 +359,10 @@ namespace draw2d_gdiplus
          m_mapFontText.erase_all();
 
       }
+
+      m_osdata[1]= pgdiplusfontfamily;
+
+      m_baCalculated[1] = true;
 
    }
 

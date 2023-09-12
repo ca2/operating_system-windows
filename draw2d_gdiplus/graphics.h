@@ -111,10 +111,10 @@ namespace draw2d_gdiplus
       //i32 GetROP2() override;
       //i32 GetStretchBltMode() override;
 
-      void _get(::draw2d::matrix & matrix) override;
-      void _set(const ::draw2d::matrix & matrix) override;
-      //bool append(const ::draw2d::matrix & matrix) override;
-      //bool prepend(const ::draw2d::matrix & matrix) override;
+      void _get(::geometry2d::matrix & matrix) override;
+      void _set(const ::geometry2d::matrix & matrix) override;
+      //bool append(const ::geometry2d::matrix & matrix) override;
+      //bool prepend(const ::geometry2d::matrix & matrix) override;
 
       //i32 SetPolyFillMode(i32 nPolyFillMode) override;
       //i32 SetROP2(i32 nDrawMode) override;

@@ -168,6 +168,10 @@ TCHAR * windows_get_system_cursor(enum_cursor ecursor)
       return IDC_SIZENS;
    case e_cursor_size_bottom:
       return IDC_SIZENS;
+   case e_cursor_wait:
+      return IDC_WAIT;
+   case e_cursor_wait_arrow:
+      return IDC_WAIT;
    default:
       return IDC_ARROW;
    }

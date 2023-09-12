@@ -21,7 +21,7 @@ namespace draw2d_gdiplus
       public:
 
          auto_pointer < Gdiplus::PrivateFontCollection >    m_pcollection;
-         raw_array < Gdiplus::FontFamily >                  m_familya;
+         ::raw_array < Gdiplus::FontFamily >                m_familya;
          int                                                m_iFamilyCount;
 
          private_font();
