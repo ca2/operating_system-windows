@@ -2768,7 +2768,27 @@ namespace windowing_win32
    }
 
 
-   ::point_i32 window::get_mouse_cursor_position()
+   ::point_i32 window::get_mouse_cursor_host_position()
+   {
+
+      POINT point;
+
+      ::GetCursorPos(&point);
+
+      ::ScreenToClient(get_hwnd(), &point);
+
+      ::point_i32 point_i32;
+
+      point_i32.x() = point.x;
+
+      point_i32.y() = point.y;
+
+      return point_i32;
+
+   }
+   
+
+   ::point_i32 window::get_mouse_cursor_absolute_position()
    {
 
       POINT point;
@@ -2784,8 +2804,7 @@ namespace windowing_win32
       return point_i32;
 
    }
-   
-   
+
    
    //bool window::reset(::windowing::cursor * pcursor, ::aura::session * psession)
    //{
