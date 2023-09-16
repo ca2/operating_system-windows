@@ -28,6 +28,8 @@ namespace windows
    CLASS_DECL_WINDOWING_WIN32 enum_display show_window_to_edisplay(int iShowWindow, enum_activation & eactivation);
 
    CLASS_DECL_WINDOWING_WIN32 HWND get_mouse_capture(itask_t itask);
+   CLASS_DECL_WINDOWING_WIN32 bool set_mouse_capture(itask_t itask, HWND hwnd);
+   CLASS_DECL_WINDOWING_WIN32 bool defer_release_mouse_capture(itask_t itask, HWND hwnd);
 
 
    using window_map = map < HWND, ::pointer<::windowing_win32::window >>;

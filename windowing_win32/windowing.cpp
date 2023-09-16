@@ -666,12 +666,18 @@ namespace windowing_win32
    ::windowing::window* windowing::get_mouse_capture(::thread* pthread)
    {
 
-      itask_t itask = 0;
+      itask_t itask;
 
       if (pthread)
       {
 
          itask = pthread->get_itask();
+
+      }
+      else
+      {
+
+         itask = ::current_itask();
 
       }
 
@@ -687,6 +693,56 @@ namespace windowing_win32
       auto pwindow = _window(hwndCapture);
 
       return pwindow;
+
+   }
+
+
+   bool windowing::defer_release_mouse_capture(::thread* pthread, ::windowing::window* pwindowDeferRelease)
+   {
+
+      itask_t itask;
+
+      if (pthread)
+      {
+
+         itask = pthread->get_itask();
+
+      }
+      else
+      {
+
+         itask = ::current_itask();
+
+      }
+
+      auto hwndCapture = ::windows::get_mouse_capture(itask);
+
+      if (::is_null(hwndCapture))
+      {
+
+         return false;
+
+      }
+
+      auto pwindow = _window(hwndCapture);
+
+      if (pwindow != pwindowDeferRelease)
+      {
+
+         return false;
+
+      }
+
+      bool bOk = ::windows::defer_release_mouse_capture(itask, hwndCapture);
+
+      if (!bOk)
+      {
+
+         return false;
+
+      }
+
+      return true;
 
    }
 
@@ -712,21 +768,21 @@ namespace windowing_win32
    //}
 
 
-   void windowing::release_mouse_capture()
-   {
+   //void windowing::release_mouse_capture()
+   //{
 
-      if (!::ReleaseCapture())
-      {
+   //   if (!::ReleaseCapture())
+   //   {
 
-         //return error_failed;
+   //      //return error_failed;
 
-         throw ::exception(error_null_pointer);
+   //      throw ::exception(error_null_pointer);
 
-      }
+   //   }
 
-      //return success;
+   //   //return success;
 
-   }
+   //}
 
 
    void windowing::get_cursor_pos(::point_i32* ppoint)

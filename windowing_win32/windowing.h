@@ -105,9 +105,7 @@ namespace windowing_win32
       //HWND _get_mouse_capture(itask_t itask);
 
 
-      virtual void release_mouse_capture() override;
-
-
+      bool defer_release_mouse_capture(::thread* pthread, ::windowing::window* pwindowDeferRelease) override;
       
 
       virtual void erase_window(::windowing::window * pwindow);
