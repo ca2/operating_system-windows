@@ -10,7 +10,7 @@
 //END_FACTORY()
 
 
-__FACTORY_EXPORT void write_text_win32_factory(::factory::factory * pfactory)
+IMPLEMENT_FACTORY(write_text_win32)
 {
 
    pfactory->add_factory_item < ::write_text_win32::fonts, ::write_text::fonts >();

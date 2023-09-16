@@ -7299,7 +7299,7 @@ namespace draw2d_gdiplus
    //}
 
 
-   bool graphics::_get(::draw2d::matrix & matrix)
+   bool graphics::_get(::geometry2d::matrix & matrix)
    {
 
       Gdiplus::Matrix m;
@@ -7315,7 +7315,7 @@ namespace draw2d_gdiplus
 
       m.GetElements(fa);
 
-      matrix = ::draw2d::matrix();
+      matrix = ::geometry2d::matrix();
 
       matrix.SetElements(fa);
 
@@ -7324,7 +7324,7 @@ namespace draw2d_gdiplus
    }
 
 
-   bool graphics::_set(const ::draw2d::matrix & matrix)
+   bool graphics::_set(const ::geometry2d::matrix & matrix)
    {
 
       Gdiplus::Matrix m;
@@ -7336,10 +7336,10 @@ namespace draw2d_gdiplus
    }
 
 
-   //bool graphics::append(const ::draw2d::matrix & matrix)
+   //bool graphics::append(const ::geometry2d::matrix & matrix)
    //{
 
-   //   ::draw2d::matrix m;
+   //   ::geometry2d::matrix m;
 
    //   get(m);
 
@@ -7350,10 +7350,10 @@ namespace draw2d_gdiplus
    //}
 
 
-   //bool graphics::prepend(const ::draw2d::matrix & matrix)
+   //bool graphics::prepend(const ::geometry2d::matrix & matrix)
    //{
 
-   //   ::draw2d::matrix m;
+   //   ::geometry2d::matrix m;
 
    //   get(m);
 

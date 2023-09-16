@@ -20,7 +20,7 @@
 #include "aura/platform/session.h"
 #include "aura/platform/application.h"
 #include "aura/user/user/interaction_array.h"
-
+#include "aura/windowing/cursor.h"
 
 
 wparam MapLeftRightKeys(wparam vk, lparam lParam);
@@ -35,7 +35,7 @@ namespace windowing_win32
 
       m_pWindowing4 = this;
 
-//      set_layer(LAYERED_IMPL, this);
+      //      set_layer(LAYERED_IMPL, this);
       m_emessageWindowsTaskbarCreatedMessage = e_message_undefined;
 
    }
@@ -47,11 +47,11 @@ namespace windowing_win32
    }
 
 
-   void windowing::initialize_windowing(::user::user * puser)
+   void windowing::initialize_windowing(::user::user* puser)
    {
 
       //auto estatus = 
-      
+
       ::windowing::windowing::initialize_windowing(puser);
 
       //if (!estatus)
@@ -62,7 +62,7 @@ namespace windowing_win32
       //}
 
       //estatus = 
-      
+
       __construct(m_pdisplay);
 
       //if (!estatus)
@@ -73,7 +73,7 @@ namespace windowing_win32
       //}
 
       //estatus =
-      
+
       m_pdisplay->initialize_display(this);
 
       //if (!estatus)
@@ -88,7 +88,7 @@ namespace windowing_win32
       if (!bCreateSessionWindow)
       {
 
-         warning() <<"Could not create session window";
+         warning() << "Could not create session window";
 
       }
 
@@ -135,7 +135,7 @@ namespace windowing_win32
       psysteminteraction->display(e_display_none);
 
       //auto estatus = 
-      
+
       psysteminteraction->create_host();
 
       //if(!estatus)
@@ -176,7 +176,7 @@ namespace windowing_win32
 
    }
 
-   
+
    void windowing::destroy()
    {
 
@@ -188,7 +188,7 @@ namespace windowing_win32
       }
 
       //auto estatus = 
-      
+
       ::windowing::windowing::destroy();
 
       //if (!estatus)
@@ -213,7 +213,7 @@ namespace windowing_win32
    //}
 
 
-   ::windowing_win32::window * windowing::_window(HWND hwnd)
+   ::windowing_win32::window* windowing::_window(HWND hwnd)
    {
 
       if (::is_null(hwnd))
@@ -232,7 +232,7 @@ namespace windowing_win32
 
       critical_section_lock synchronouslock(&m_criticalsection);
 
-      auto & pwindow = m_windowmap[hwnd];
+      auto& pwindow = m_windowmap[hwnd];
 
       if (!pwindow)
       {
@@ -245,8 +245,8 @@ namespace windowing_win32
 
    }
 
-   
-   ::windowing::display * windowing::display()
+
+   ::windowing::display* windowing::display()
    {
 
       return m_pdisplay;
@@ -256,7 +256,7 @@ namespace windowing_win32
 
 
 
-   ::windowing::window * windowing::window(oswindow oswindow)
+   ::windowing::window* windowing::window(oswindow oswindow)
    {
 
       HWND hwnd = __hwnd(oswindow);
@@ -268,7 +268,7 @@ namespace windowing_win32
    }
 
 
-   HWND windowing::zorder_to_hwnd(const zorder & zorder)
+   HWND windowing::zorder_to_hwnd(const zorder& zorder)
    {
 
       if (zorder.m_ezorder == e_zorder_normal)
@@ -381,7 +381,7 @@ namespace windowing_win32
    }
 
 
-   void windowing::__synthesizes_creates_styles(::user::interaction * pinteraction, ::u32 & nExStyle, ::u32 & nStyle)
+   void windowing::__synthesizes_creates_styles(::user::interaction* pinteraction, ::u32& nExStyle, ::u32& nStyle)
    {
 
       if (pinteraction->m_bCompositedFrameWindow)
@@ -390,7 +390,7 @@ namespace windowing_win32
          nExStyle |= WS_EX_LAYERED;
 
          nStyle |= WS_POPUP;
-         
+
          nStyle |= WS_SYSMENU | WS_MINIMIZEBOX | WS_MAXIMIZEBOX;
 
       }
@@ -411,8 +411,8 @@ namespace windowing_win32
 
    }
 
-   
-   ::windowing::window * windowing::get_desktop_window()
+
+   ::windowing::window* windowing::get_desktop_window()
    {
 
       HWND hwnd = ::GetDesktopWindow();
@@ -424,7 +424,7 @@ namespace windowing_win32
    }
 
 
-   ::windowing::window * windowing::get_active_window(::thread * pthread)
+   ::windowing::window* windowing::get_active_window(::thread* pthread)
    {
 
       itask_t itask = 0;
@@ -442,7 +442,7 @@ namespace windowing_win32
 
       HWND hwndActive;
 
-      if (GetGUIThreadInfo((DWORD) itask, &info))
+      if (GetGUIThreadInfo((DWORD)itask, &info))
       {
 
          hwndActive = info.hwndActive;
@@ -469,7 +469,7 @@ namespace windowing_win32
    }
 
 
-   void windowing::clear_keyboard_focus(::user::element * pelementGainingFocusIfAny)
+   void windowing::clear_keyboard_focus(::user::element* pelementGainingFocusIfAny)
    {
 
 
@@ -477,7 +477,7 @@ namespace windowing_win32
    }
 
 
-   ::windowing::window * windowing::get_keyboard_focus(::thread * pthread)
+   ::windowing::window* windowing::get_keyboard_focus(::thread* pthread)
    {
 
       itask_t itask = 0;
@@ -522,7 +522,7 @@ namespace windowing_win32
    }
 
 
-   void windowing::get_app_wnda(::windows::hwnd_array & wnda)
+   void windowing::get_app_wnda(::windows::hwnd_array& wnda)
    {
 
       EnumWindows(&windowing::GetAppsEnumWindowsProc, (lparam)&wnda);
@@ -599,7 +599,7 @@ namespace windowing_win32
    //}
 
 
-   void windowing::set(message::key * pkey, oswindow oswindow, ::windowing::window * pwindow, const ::atom & atom, wparam wparam, ::lparam lparam)
+   void windowing::set(message::key* pkey, oswindow oswindow, ::windowing::window* pwindow, const ::atom& atom, wparam wparam, ::lparam lparam)
    {
 
       pkey->m_nChar = static_cast<::u32>(wparam);
@@ -619,7 +619,7 @@ namespace windowing_win32
    }
 
 
-   void windowing::set(::message::mouse * pmouse, oswindow oswindow, ::windowing::window * pwindow, const ::atom & atom, wparam wparam, ::lparam lparam)
+   void windowing::set(::message::mouse* pmouse, oswindow oswindow, ::windowing::window* pwindow, const ::atom& atom, wparam wparam, ::lparam lparam)
    {
 
       //pmouse->m_nFlags = wparam;
@@ -663,7 +663,7 @@ namespace windowing_win32
    //}
 
 
-   ::windowing::window * windowing::get_mouse_capture(::thread * pthread)
+   ::windowing::window* windowing::get_mouse_capture(::thread* pthread)
    {
 
       itask_t itask = 0;
@@ -711,7 +711,7 @@ namespace windowing_win32
 
    //}
 
-   
+
    void windowing::release_mouse_capture()
    {
 
@@ -729,7 +729,7 @@ namespace windowing_win32
    }
 
 
-   void windowing::get_cursor_pos(::point_i32 * ppoint)
+   void windowing::get_cursor_pos(::point_i32* ppoint)
    {
 
 
@@ -756,7 +756,7 @@ namespace windowing_win32
    }
 
 
-   void windowing::set_cursor_position(const ::point_i32 & point)
+   void windowing::set_cursor_position(const ::point_i32& point)
    {
 
       if (!::SetCursorPos(point.x(), point.y()))
@@ -771,7 +771,7 @@ namespace windowing_win32
    }
 
 
-   void windowing::erase_window(::windowing::window * pwindow)
+   void windowing::erase_window(::windowing::window* pwindow)
    {
 
       if (!m_windowmap.erase_item(__hwnd(pwindow->oswindow())))
@@ -787,7 +787,7 @@ namespace windowing_win32
 
 
 
-   ::windowing::cursor * windowing::get_cursor()
+   ::windowing::cursor* windowing::get_cursor()
    {
 
       if (m_ecursor == e_cursor_none)
@@ -812,7 +812,7 @@ namespace windowing_win32
    }
 
 
-   ::windowing::cursor * windowing::get_default_cursor()
+   ::windowing::cursor* windowing::get_default_cursor()
    {
 
       return get_cursor(m_ecursorDefault);
@@ -820,24 +820,24 @@ namespace windowing_win32
    }
 
 
-//   enum_dialog_result windowing::message_box(const ::string & pszMessage, const ::string & pszTitle, const ::e_message_box & emessagebox)
-//   {
-//
-//      wstring wstrMessage(pszMessage);
-//
-//      wstring wstrTitle(pszTitle);
-//
-//      auto iResult = ::MessageBoxW(nullptr, wstrMessage, wstrTitle, emessagebox);
-//
-////      auto strResult = message_box_result_to_string(iResult);
-//
-////      return setrResult;
-//
-//      return (enum_dialog_result) iResult;
-//
-//   }
+   //   enum_dialog_result windowing::message_box(const ::string & pszMessage, const ::string & pszTitle, const ::e_message_box & emessagebox)
+   //   {
+   //
+   //      wstring wstrMessage(pszMessage);
+   //
+   //      wstring wstrTitle(pszTitle);
+   //
+   //      auto iResult = ::MessageBoxW(nullptr, wstrMessage, wstrTitle, emessagebox);
+   //
+   ////      auto strResult = message_box_result_to_string(iResult);
+   //
+   ////      return setrResult;
+   //
+   //      return (enum_dialog_result) iResult;
+   //
+   //   }
 
-   
+
    int_bool windowing::point_is_window_origin(::point_i32 ptHitTest, oswindow oswindowExclude, int iMargin)
    {
 
@@ -854,7 +854,7 @@ namespace windowing_win32
 
       ::RECT rectWindow;
 
-      for (auto & hwnd : *phwnda)
+      for (auto& hwnd : *phwnda)
       {
 
          if (hwnd != hwndExclude)
@@ -896,7 +896,7 @@ namespace windowing_win32
    }
 
 
-   ::windows::hwnd_array windowing::_get_hwnda(const ::user::primitive_pointer_array & primitivepointera)
+   ::windows::hwnd_array windowing::_get_hwnda(const ::user::primitive_pointer_array& primitivepointera)
    {
 
       ::windows::hwnd_array hwnda;
@@ -906,7 +906,7 @@ namespace windowing_win32
 
          ::pointer<::user::interaction>puserinteraction = primitivepointera.primitive_at(i);
 
-         hwnda.add((HWND) puserinteraction->oswindow());
+         hwnda.add((HWND)puserinteraction->oswindow());
 
       }
 
@@ -915,7 +915,7 @@ namespace windowing_win32
    }
 
 
-   ::pointer<::windowing::window>windowing::window_from_point(::aura::application * papp, const ::point_i32 & point)
+   ::pointer<::windowing::window>windowing::window_from_point(::aura::application* papp, const ::point_i32& point)
    {
 
       auto uia = *papp->m_puserinteractiona;
@@ -947,7 +947,7 @@ namespace windowing_win32
    }
 
 
-   void windowing::windowing_post(const ::procedure & procedure)
+   void windowing::windowing_post(const ::procedure& procedure)
    {
 
       acmesystem()->m_papexsystem->post_procedure(procedure);
@@ -992,7 +992,7 @@ namespace windowing_win32
    BOOL CALLBACK windowing::GetAppsEnumWindowsProc(HWND hwnd, LPARAM lParam)
    {
 
-      ::windows::hwnd_array * phwnda = (::windows::hwnd_array *) lParam;
+      ::windows::hwnd_array* phwnda = (::windows::hwnd_array*)lParam;
 
       phwnda->add(hwnd);
 
@@ -1015,7 +1015,7 @@ namespace windowing_win32
    //}
 
 
-   void windowing::initialize_keyboard(::windowing::keyboard * pkeyboard)
+   void windowing::initialize_keyboard(::windowing::keyboard* pkeyboard)
    {
 
 
@@ -1029,43 +1029,43 @@ namespace windowing_win32
       for (char ch = '0'; ch <= '9'; ch++)
       {
 
-          pkeyboard->m_mapKey[ch] = (::user::enum_key)(::user::e_key_0 + (ch - '0'));
+         pkeyboard->m_mapKey[ch] = (::user::enum_key)(::user::e_key_0 + (ch - '0'));
 
       }
 
-       pkeyboard->m_mapKey[VK_LEFT] = ::user::e_key_left;
-       pkeyboard->m_mapKey[VK_RIGHT] = ::user::e_key_right;
-       pkeyboard->m_mapKey[VK_UP] = ::user::e_key_up;
-       pkeyboard->m_mapKey[VK_DOWN] = ::user::e_key_down;
-       pkeyboard->m_mapKey[VK_DELETE] = ::user::e_key_delete;
-       pkeyboard->m_mapKey[VK_BACK] = ::user::e_key_back;
-       pkeyboard->m_mapKey[VK_RETURN] = ::user::e_key_return;
-       pkeyboard->m_mapKey[VK_SPACE] = ::user::e_key_space;
-       pkeyboard->m_mapKey[VK_HOME] = ::user::e_key_home;
-       pkeyboard->m_mapKey[VK_END] = ::user::e_key_end;
-       pkeyboard->m_mapKey[VK_PRIOR] = ::user::e_key_prior;
-       pkeyboard->m_mapKey[VK_NEXT] = ::user::e_key_next;
-       pkeyboard->m_mapKey[VK_TAB] = ::user::e_key_tab;
-       pkeyboard->m_mapKey[VK_ESCAPE] = ::user::e_key_escape;
-       pkeyboard->m_mapKey[VK_TAB] = ::user::e_key_tab;
-       pkeyboard->m_mapKey[VK_F1] = ::user::e_key_f1;
-       pkeyboard->m_mapKey[VK_F2] = ::user::e_key_f2;
-       pkeyboard->m_mapKey[VK_F3] = ::user::e_key_f3;
-       pkeyboard->m_mapKey[VK_F4] = ::user::e_key_f4;
-       pkeyboard->m_mapKey[VK_F5] = ::user::e_key_f5;
-       pkeyboard->m_mapKey[VK_F6] = ::user::e_key_f6;
-       pkeyboard->m_mapKey[VK_F7] = ::user::e_key_f7;
-       pkeyboard->m_mapKey[VK_F8] = ::user::e_key_f8;
-       pkeyboard->m_mapKey[VK_F9] = ::user::e_key_f9;
-       pkeyboard->m_mapKey[VK_F10] = ::user::e_key_f10;
-       pkeyboard->m_mapKey[VK_F11] = ::user::e_key_f11;
-       pkeyboard->m_mapKey[VK_F12] = ::user::e_key_f12;
-       pkeyboard->m_mapKey[VK_LSHIFT] = ::user::e_key_left_shift;
-       pkeyboard->m_mapKey[VK_RSHIFT] = ::user::e_key_right_shift;
-       pkeyboard->m_mapKey[VK_LCONTROL] = ::user::e_key_left_control;
-       pkeyboard->m_mapKey[VK_RCONTROL] = ::user::e_key_right_control;
-       pkeyboard->m_mapKey[VK_LMENU] = ::user::e_key_left_alt;
-       pkeyboard->m_mapKey[VK_RMENU] = ::user::e_key_right_alt;
+      pkeyboard->m_mapKey[VK_LEFT] = ::user::e_key_left;
+      pkeyboard->m_mapKey[VK_RIGHT] = ::user::e_key_right;
+      pkeyboard->m_mapKey[VK_UP] = ::user::e_key_up;
+      pkeyboard->m_mapKey[VK_DOWN] = ::user::e_key_down;
+      pkeyboard->m_mapKey[VK_DELETE] = ::user::e_key_delete;
+      pkeyboard->m_mapKey[VK_BACK] = ::user::e_key_back;
+      pkeyboard->m_mapKey[VK_RETURN] = ::user::e_key_return;
+      pkeyboard->m_mapKey[VK_SPACE] = ::user::e_key_space;
+      pkeyboard->m_mapKey[VK_HOME] = ::user::e_key_home;
+      pkeyboard->m_mapKey[VK_END] = ::user::e_key_end;
+      pkeyboard->m_mapKey[VK_PRIOR] = ::user::e_key_prior;
+      pkeyboard->m_mapKey[VK_NEXT] = ::user::e_key_next;
+      pkeyboard->m_mapKey[VK_TAB] = ::user::e_key_tab;
+      pkeyboard->m_mapKey[VK_ESCAPE] = ::user::e_key_escape;
+      pkeyboard->m_mapKey[VK_TAB] = ::user::e_key_tab;
+      pkeyboard->m_mapKey[VK_F1] = ::user::e_key_f1;
+      pkeyboard->m_mapKey[VK_F2] = ::user::e_key_f2;
+      pkeyboard->m_mapKey[VK_F3] = ::user::e_key_f3;
+      pkeyboard->m_mapKey[VK_F4] = ::user::e_key_f4;
+      pkeyboard->m_mapKey[VK_F5] = ::user::e_key_f5;
+      pkeyboard->m_mapKey[VK_F6] = ::user::e_key_f6;
+      pkeyboard->m_mapKey[VK_F7] = ::user::e_key_f7;
+      pkeyboard->m_mapKey[VK_F8] = ::user::e_key_f8;
+      pkeyboard->m_mapKey[VK_F9] = ::user::e_key_f9;
+      pkeyboard->m_mapKey[VK_F10] = ::user::e_key_f10;
+      pkeyboard->m_mapKey[VK_F11] = ::user::e_key_f11;
+      pkeyboard->m_mapKey[VK_F12] = ::user::e_key_f12;
+      pkeyboard->m_mapKey[VK_LSHIFT] = ::user::e_key_left_shift;
+      pkeyboard->m_mapKey[VK_RSHIFT] = ::user::e_key_right_shift;
+      pkeyboard->m_mapKey[VK_LCONTROL] = ::user::e_key_left_control;
+      pkeyboard->m_mapKey[VK_RCONTROL] = ::user::e_key_right_control;
+      pkeyboard->m_mapKey[VK_LMENU] = ::user::e_key_left_alt;
+      pkeyboard->m_mapKey[VK_RMENU] = ::user::e_key_right_alt;
 
    }
 
@@ -1223,8 +1223,8 @@ namespace windowing_win32
 //
 //   }
 
-   
-   string windowing::_get_window_text_timeout(oswindow oswindow, const class time & timeSendMessageMax)
+
+   string windowing::_get_window_text_timeout(oswindow oswindow, const class time& timeSendMessageMax)
    {
 
       return windows::get_window_text_timeout((HWND)oswindow, timeSendMessageMax);
@@ -1370,7 +1370,7 @@ namespace windowing_win32
    }
 
 
-   ::pointer < ::user::interaction > windowing::create_message_window(const ::string & pszName, ::user::interaction_listener * pinteractionlistener)
+   ::pointer < ::user::interaction > windowing::create_message_window(const ::string& pszName, ::user::interaction_listener* pinteractionlistener)
    {
 
       auto pmessagewindow = __create_new < message_window >();
@@ -1378,6 +1378,60 @@ namespace windowing_win32
       pmessagewindow->create_message_window(pszName, pinteractionlistener);
 
       return pmessagewindow;
+
+   }
+
+
+   void windowing::set_mouse_cursor(::windowing::cursor* pcursor)
+   {
+
+      HCURSOR hcursor = nullptr;
+
+      if (::is_set(pcursor))
+      {
+
+         hcursor = (HCURSOR)pcursor->get_os_data();
+
+         if (hcursor == nullptr)
+         {
+
+            //auto estatus =
+
+            pcursor->_create_os_cursor();
+
+            //if (!estatus)
+            //{
+
+            //   return estatus;
+
+            //};
+
+            hcursor = (HCURSOR)pcursor->get_os_data();
+
+            //if (!hcursor)
+            //{
+
+            //   return error_resource;
+
+            //}
+
+         }
+
+      }
+
+      // At windows SetMouseCursor(nullptr) removes the cursor from screen
+      // similar apis in other platforms behave the same?
+
+      if (!::SetCursor(hcursor))
+      {
+
+         throw ::exception(error_failed);
+
+      }
+
+      //return ::success;
+
+
 
    }
 

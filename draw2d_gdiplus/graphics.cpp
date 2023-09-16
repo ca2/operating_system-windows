@@ -2593,9 +2593,9 @@ namespace draw2d_gdiplus
 
       graphics * pgraphics = ((graphics *)this);
 
-      Gdiplus::Font * pfont = m_pfont->get_os_data < Gdiplus::Font * >(this);
+      Gdiplus::Font * pgdiplusfont = m_pfont->get_os_data < Gdiplus::Font * >(this);
 
-      if (pfont == nullptr)
+      if (pgdiplusfont == nullptr)
       {
 
          //return false;
@@ -2604,29 +2604,46 @@ namespace draw2d_gdiplus
 
       }
 
-      Gdiplus::FontFamily family;
+      Gdiplus::FontFamily * pgdiplusfontfamily = m_pfont->get_os_data < Gdiplus::FontFamily* >(this, 1);
 
-      pfont->GetFamily(&family);
+      if (pgdiplusfontfamily == nullptr)
+      {
 
-      INT iStyle = pfont->GetStyle();
+         //return false;
 
-      double dHeight = family.GetEmHeight(iStyle);
+         throw ::exception(error_null_pointer);
 
-      double dSize = pfont->GetSize();
+      }
 
-      double dFontHeight = pfont->GetHeight((Gdiplus::REAL)pgraphics->get_dpiy());
+      INT iStyle = pgdiplusfont->GetStyle();
 
-      pmetric->m_dAscent = dSize * family.GetCellAscent(iStyle) / dHeight;
+      //Gdiplus::FontFamily family;
 
-      pmetric->m_dDescent = dSize * family.GetCellDescent(iStyle) / dHeight;
+      //pfont->GetFamily(&family);
+
+      double dHeight = pgdiplusfontfamily->GetEmHeight(iStyle);
+
+      double dCellAscent = pgdiplusfontfamily->GetCellAscent(iStyle);
+
+      double dCellDescent = pgdiplusfontfamily->GetCellDescent(iStyle);
+
+      double dLineSpacing = pgdiplusfontfamily->GetLineSpacing(iStyle);
+
+      double dSize = pgdiplusfont->GetSize();
+
+      double dFontHeight = pgdiplusfont->GetHeight((Gdiplus::REAL)pgraphics->get_dpiy());
+
+      pmetric->m_dAscent = dSize * pmetric->m_dAscent / dHeight;
+
+      pmetric->m_dDescent = dSize * pmetric->m_dDescent / dHeight;
 
       pmetric->m_dHeight = dFontHeight;
 
-      double dLineSpacing = maximum(dFontHeight, dSize * family.GetLineSpacing(iStyle) / dHeight);
+      double dLineSpacing2 = maximum(dFontHeight, dSize * dLineSpacing / dHeight);
 
       pmetric->m_dInternalLeading = 0;
 
-      pmetric->m_dExternalLeading = dLineSpacing - (pmetric->m_dAscent + pmetric->m_dDescent);
+      pmetric->m_dExternalLeading = dLineSpacing2 - (pmetric->m_dAscent + pmetric->m_dDescent);
 
       //return true;
 
@@ -8012,7 +8029,7 @@ namespace draw2d_gdiplus
    //}
 
 
-   void graphics::_get(::draw2d::matrix & matrix)
+   void graphics::_get(::geometry2d::matrix & matrix)
    {
 
       Gdiplus::Matrix m;
@@ -8031,7 +8048,7 @@ namespace draw2d_gdiplus
 
       m.GetElements(fa);
 
-      matrix = ::draw2d::matrix();
+      matrix = ::geometry2d::matrix();
 
       matrix.SetElements(fa);
 
@@ -8040,7 +8057,7 @@ namespace draw2d_gdiplus
    }
 
 
-   void graphics::_set(const ::draw2d::matrix & matrix)
+   void graphics::_set(const ::geometry2d::matrix & matrix)
    {
 
       Gdiplus::Matrix m;
@@ -8052,10 +8069,10 @@ namespace draw2d_gdiplus
    }
 
 
-   //void graphics::append(const ::draw2d::matrix & matrix)
+   //void graphics::append(const ::geometry2d::matrix & matrix)
    //{
 
-   //   ::draw2d::matrix m;
+   //   ::geometry2d::matrix m;
 
    //   get(m);
 
@@ -8066,10 +8083,10 @@ namespace draw2d_gdiplus
    //}
 
 
-   //void graphics::prepend(const ::draw2d::matrix & matrix)
+   //void graphics::prepend(const ::geometry2d::matrix & matrix)
    //{
 
-   //   ::draw2d::matrix m;
+   //   ::geometry2d::matrix m;
 
    //   get(m);
 

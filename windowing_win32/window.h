@@ -135,7 +135,9 @@ namespace windowing_win32
 
       void set_mouse_cursor(::windowing::cursor * pcursor) override;
 
-      ::point_i32 get_mouse_cursor_position() override;
+      ::point_i32 get_mouse_cursor_host_position() override;
+
+      ::point_i32 get_mouse_cursor_absolute_position() override;
 
 //      virtual bool is_child_of(const ::windowing::window * pwindowAscendantCandidate) const override;
       

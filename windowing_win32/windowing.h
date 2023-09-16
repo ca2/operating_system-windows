@@ -200,6 +200,8 @@ namespace windowing_win32
       ::pointer < ::user::interaction > create_message_window(const ::string & pszName, ::user::interaction_listener * plistener = nullptr) override;
 
 
+      void set_mouse_cursor(::windowing::cursor* pcursor) override;
+
 
    };
 
