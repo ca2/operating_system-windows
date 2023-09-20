@@ -1,0 +1,5 @@
+LIBRARY "input_win32"
+
+EXPORTS
+
+

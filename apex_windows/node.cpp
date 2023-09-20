@@ -967,7 +967,7 @@ namespace apex_windows
    }
 
 
-   void node::node_post(const ::procedure& procedure)
+   void node::user_post(const ::procedure& procedure)
    {
 
       acmesystem()->m_papexsystem->post_procedure(procedure);

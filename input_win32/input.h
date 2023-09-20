@@ -6,12 +6,12 @@
 #include "win32.h"
 
 
-namespace windowing_win32
+namespace input_win32
 {
 
 
-   class CLASS_DECL_WINDOWING_WIN32 windowing :
-      virtual public ::windowing::windowing
+   class CLASS_DECL_INPUT_WIN32 input :
+      virtual public ::input::input
    {
    public:
 
@@ -183,6 +183,11 @@ namespace windowing_win32
       virtual string _get_window_text_timeout(oswindow oswindow, const class time & time = 1_s);
 
 
+      void install_keyboard_hook(::matter* pmatterListener) override;
+      void uninstall_keyboard_hook(::matter* pmatterListener) override;
+
+      void install_mouse_hook(::matter* pmatterListener) override;
+      void uninstall_mouse_hook(::matter* pmatterListener) override;
 
 
 

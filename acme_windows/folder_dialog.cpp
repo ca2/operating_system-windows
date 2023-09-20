@@ -62,7 +62,7 @@ namespace acme_windows
 
       ::pointer < ::file::folder_dialog > pdialog(pdialogParameter);
 
-      main_asynchronous([this, pdialog]
+      user_post([this, pdialog]
          {
 
 
