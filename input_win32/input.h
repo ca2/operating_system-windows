@@ -16,16 +16,16 @@ namespace input_win32
    public:
 
 
-      enum_message                                       m_emessageWindowsTaskbarCreatedMessage;
+      //enum_message                                       m_emessageWindowsTaskbarCreatedMessage;
       //__creatable_from_base(windowing, ::windowing::windowing);
 
 
       //i64_map < ::user::enum_key >     m_mapKey;
 
 
-      ::critical_section               m_criticalsection;
-      ::windows::window_map            m_windowmap;
-      ::pointer<class display>         m_pdisplay;
+      //::critical_section               m_criticalsection;
+      //::windows::window_map            m_windowmap;
+      //::pointer<class display>         m_pdisplay;
 
 //#ifdef WINDOWS_DESKTOP
 
