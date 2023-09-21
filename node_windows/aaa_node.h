@@ -8,17 +8,12 @@
 #pragma once
 
 
-namespace aura
+namespace node_windows
 {
 
 
-   namespace windows
-   {
-
-
       class CLASS_DECL_AURA_WINDOWS node :
-         virtual public ::apex::windows::node,
-         virtual public ::aura::windows_common::node
+         virtual public ::aura_windows::node
       {
       public:
 

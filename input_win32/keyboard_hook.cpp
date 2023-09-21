@@ -3,25 +3,70 @@
 #include "keyboard_hook.h"
 #include "acme/constant/message.h"
 #include "acme/exception/exception.h"
+#include "acme/parallelization/task.h"
+#include "acme/platform/scoped_restore.h"
 #include "acme/primitive/primitive/particle.h"
-
-
 #include "acme/_operating_system.h"
+#include "aura/message/user.h"
 
 
-namespace keyboard_hook
+namespace input_win32
 {
 
+
+   bool              keyboard_hook::s_bKeyboardHook = false;
+   keyboard_hook *   keyboard_hook::s_pkeyboardhook = nullptr;
+   ::task_pointer    keyboard_hook::s_ptaskKeyboard;
+   HHOOK             keyboard_hook::s_hhookKeyboard = nullptr;
+
+
+   keyboard_hook::keyboard_hook()
+   {
+
+
+   }
+
+
+   keyboard_hook::~keyboard_hook()
+   {
+
+
+   }
+
+
+   void keyboard_hook::install_keyboard_hook()
+   {
+
+      if (is_keyboard_hook_installed())
+      {
+
+         return;
+
+      }
+
+      s_bKeyboardHook = true;
+
+      s_pkeyboardhook = this;
+
+      s_ptaskKeyboard = app_fork([this]()
+      {
+
+         _keyboard_hook_task();
+
+      });
+
+   }
+
    
-   ::particle * g_pparticle = nullptr;
+   bool keyboard_hook::is_keyboard_hook_installed()
+   {
 
-   HHOOK g_hhook = nullptr;
+      return s_bKeyboardHook;
 
-   int alt = 0;
+   }
 
-   int g_bRun = false;
-
-   LRESULT CALLBACK LowLevelKeyboardProc(int nCode, WPARAM wParam, LPARAM lParam)
+   
+   LRESULT CALLBACK keyboard_hook::LowLevelKeyboardProc(int nCode, WPARAM wParam, LPARAM lParam)
    {
 
       if (nCode == 0)
@@ -34,39 +79,39 @@ namespace keyboard_hook
 
             auto emessage = (enum_message)wParam;
 
-            g_pparticle->call(emessage, pk->vkCode, pk->scanCode, g_pparticle);
+            s_pkeyboardhook->keyboard_proc(emessage, pk->vkCode, pk->scanCode);
 
-            output_debug_string("X");
+            //output_debug_string("X");
 
-            if (pk->vkCode == VK_MENU)
-            {
+            //if (pk->vkCode == VK_MENU)
+            //{
 
-               alt = 1;
+            //   alt = 1;
 
-            }
-            else if (pk->vkCode == '0')
-            {
+            //}
+            //else if (pk->vkCode == '0')
+            //{
 
-               if (GetAsyncKeyState(VK_CONTROL) & 0x8000)
-               {
+            //   if (GetAsyncKeyState(VK_CONTROL) & 0x8000)
+            //   {
 
-                  INPUT inputa[2];
+            //      INPUT inputa[2];
 
-                  zero(inputa);
+            //      zero(inputa);
 
-                  inputa[0].type = INPUT_KEYBOARD;
-                  inputa[0].ki.dwFlags = KEYEVENTF_UNICODE;
-                  inputa[0].ki.wScan = 0xb7;
+            //      inputa[0].type = INPUT_KEYBOARD;
+            //      inputa[0].ki.dwFlags = KEYEVENTF_UNICODE;
+            //      inputa[0].ki.wScan = 0xb7;
 
-                  inputa[1].type = INPUT_KEYBOARD;
-                  inputa[1].ki.dwFlags = KEYEVENTF_UNICODE | KEYEVENTF_KEYUP;
-                  inputa[1].ki.wScan = 0xb7;
+            //      inputa[1].type = INPUT_KEYBOARD;
+            //      inputa[1].ki.dwFlags = KEYEVENTF_UNICODE | KEYEVENTF_KEYUP;
+            //      inputa[1].ki.wScan = 0xb7;
 
-                  ::SendInput(2, inputa, sizeof(INPUT));
+            //      ::SendInput(2, inputa, sizeof(INPUT));
 
-               }
+            //   }
 
-            }
+            //}
 
          }
          else if (wParam == e_message_key_up || wParam == e_message_sys_key_up)
@@ -74,27 +119,27 @@ namespace keyboard_hook
 
             auto emessage = (enum_message)wParam;
 
-            g_pparticle->call(emessage, pk->vkCode, pk->scanCode, g_pparticle);
+            s_pkeyboardhook->keyboard_proc(emessage, pk->vkCode, pk->scanCode);
 
-            output_debug_string("Y");
+            //output_debug_string("Y");
 
-            if (pk->vkCode == VK_MENU)
-            {
+            //if (pk->vkCode == VK_MENU)
+            //{
 
-               alt = 0;
+            //   alt = 0;
 
-            }
+            //}
 
          }
 
       }
 
-      return ::CallNextHookEx(g_hhook, nCode, wParam, lParam);
+      return ::CallNextHookEx(s_hhookKeyboard, nCode, wParam, lParam);
 
    }
 
 
-   void run()
+   void keyboard_hook::_keyboard_hook_task()
    {
 
       ::parallelization::set_priority(::e_priority_time_critical);
@@ -103,11 +148,11 @@ namespace keyboard_hook
 
       ::PeekMessage(&msg, nullptr, 0, 0xffffffff, false);
 
-      g_hhook = SetWindowsHookEx(WH_KEYBOARD_LL, LowLevelKeyboardProc, ::LoadLibraryW(L"app_core_auratype.dll"), 0);
+      s_hhookKeyboard = SetWindowsHookEx(WH_KEYBOARD_LL, LowLevelKeyboardProc, ::LoadLibraryW(L"app_core_auratype.dll"), 0);
 
       SetTimer(NULL, NULL, 250, NULL);
 
-      while (::task_get_run() && g_bRun)
+      while (::task_get_run())
       {
 
          int iRet = ::GetMessage(&msg, 0, 0, 0xffffffff);
@@ -125,11 +170,25 @@ namespace keyboard_hook
 
       }
 
-      UnhookWindowsHookEx(g_hhook);
+      try
+      {
 
-      g_hhook = nullptr;
+         UnhookWindowsHookEx(s_hhookKeyboard);
 
-      //return ::success;
+      }
+      catch (...)
+      {
+
+
+      }
+
+      s_hhookKeyboard = nullptr;
+
+      s_bKeyboardHook = false;
+
+      s_ptaskKeyboard = nullptr;
+
+      s_ptaskKeyboard.release();
 
    }
 
@@ -137,39 +196,50 @@ namespace keyboard_hook
    void install(::particle * pparticle)
    {
 
-      if (g_hhook != nullptr)
-      {
-
-         //return true;
-
-         return;
-
-      }
-
-      g_pparticle = pparticle;
-
-      g_bRun = true;
-
-      //return true;
 
    }
 
 
-   void uninstall(::particle * pparticle)
+   void keyboard_hook::uninstall_keyboard_hook()
    {
 
-      if (g_hhook == nullptr)
+      if (s_ptaskKeyboard)
       {
 
-         //return false;
-
-         throw ::exception(error_null_pointer);
+         s_ptaskKeyboard->set_finish();
 
       }
 
-      g_bRun = false;
+   }
 
-      //return true;
+
+   void keyboard_hook::keyboard_proc(enum_message emessage, int iVirtualKeyCode, int iScanCode)
+   {
+
+      auto pkeyboard = __create_new < ::message::key >();
+
+      pkeyboard->m_atom = emessage;
+
+      if (iVirtualKeyCode == VK_RETURN)
+      {
+
+         pkeyboard->m_ekey = ::user::e_key_return;
+
+      }
+      else if (iVirtualKeyCode == VK_SPACE)
+      {
+
+         pkeyboard->m_ekey = ::user::e_key_space;
+
+      }
+      else
+      {
+
+         pkeyboard->m_ekey = ::user::e_key_a;
+
+      }
+
+      handle(pkeyboard);
 
    }
 

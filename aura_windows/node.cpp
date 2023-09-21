@@ -2,8 +2,7 @@
 #include "node.h"
 #include "acme/platform/system.h"
 #include "acme_windows/registry.h"
-
-
+#include "apex/input/input.h"
 #include "acme/_operating_system.h"
 #include <shellapi.h>
 
@@ -400,6 +399,21 @@ namespace aura_windows
       return iResult;
 
    }
+
+
+   ::pointer < ::input::input > node::get_input()
+   {
+
+      auto pfactory = acmesystem()->factory("input", "win32");
+
+      auto pinput = pfactory->create<::input::input >();
+
+      pinput->initialize(this);
+
+      return pinput;
+
+   }
+
 
 
 } // namespace aura_windows

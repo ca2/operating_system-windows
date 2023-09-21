@@ -67,6 +67,9 @@ namespace aura_windows
       void* HICON_from_image(::image * pimage);
 
 
+      ::pointer < ::input::input > get_input() override;
+
+
    };
 
 

@@ -2,6 +2,8 @@
 #pragma once
 
 
+#include "keyboard_hook.h"
+#include "mouse_hook.h"
 #include "apex/input/input.h"
 
 
@@ -10,7 +12,9 @@ namespace input_win32
 
 
    class CLASS_DECL_INPUT_WIN32 input :
-      virtual public ::input::input
+      virtual public ::input::input,
+      virtual public keyboard_hook,
+      virtual public mouse_hook
    {
    public:
 
@@ -187,7 +191,7 @@ namespace input_win32
       //virtual bool _top_level_contains_name(string str);
       //virtual string _get_window_text_timeout(oswindow oswindow, const class time & time = 1_s);
 
-void defer_input() override;
+      void defer_input() override;
 
       //void install_keyboard_hook(::matter* pmatterListener) override;
       //void uninstall_keyboard_hook(::matter* pmatterListener) override;
@@ -205,6 +209,9 @@ void defer_input() override;
 
 
       //void set_mouse_cursor(::windowing::cursor* pcursor) override;
+
+
+      void handle(::message::message * pmessage) override;
 
 
    };

@@ -3,24 +3,91 @@
 #include "mouse_hook.h"
 #include "acme/constant/message.h"
 #include "acme/exception/exception.h"
+#include "acme/parallelization/task.h"
+#include "acme/platform/scoped_restore.h"
 #include "acme/primitive/primitive/particle.h"
+#include "aura/message/user.h"
 
 
-#include "acme/_operating_system.h"
-
-
-namespace mouse_hook
+namespace input_win32
 {
 
-   static ::particle * g_pparticle;
 
-   static bool g_bRun = false;
+   bool           mouse_hook::s_bMouseHook = false;
+   mouse_hook *   mouse_hook::s_pmousehook = nullptr;
+   ::task_pointer mouse_hook::s_ptaskMouse;
+   HHOOK          mouse_hook::s_hhookMouse = nullptr;
 
-   HHOOK g_hhook = nullptr;
 
-   itask_t g_itask = 0;
+   mouse_hook::mouse_hook()
+   {
 
-   LRESULT CALLBACK LowLevelMouseProc(int nCode, WPARAM wParam, LPARAM lParam)
+
+   }
+
+
+   mouse_hook::~mouse_hook()
+   {
+
+
+   }
+
+
+   void mouse_hook::install_mouse_hook()
+   {
+
+      if (is_mouse_hook_installed())
+      {
+
+         return;
+
+      }
+
+      s_bMouseHook = true;
+
+      s_pmousehook = this;
+
+      //if (g_hhook != nullptr)
+      //{
+
+      //   //return false;
+
+      //   throw ::exception(error_null_pointer);
+
+      //}
+
+      s_ptaskMouse = app_fork([this]()
+      {
+
+         _mouse_hook_task();
+
+      });
+
+   }
+
+
+   void mouse_hook::uninstall_mouse_hook()
+   {
+
+      if (s_ptaskMouse)
+      {
+
+         s_ptaskMouse->set_finish();
+
+      }
+
+   }
+
+
+   bool mouse_hook::is_mouse_hook_installed()
+   {
+
+      return s_bMouseHook;
+
+   }
+
+
+   LRESULT CALLBACK mouse_hook::LowLevelMouseProc(int nCode, WPARAM wParam, LPARAM lParam)
    {
 
       if (nCode == 0)
@@ -37,21 +104,21 @@ namespace mouse_hook
 
             enum_message emessage = (enum_message)wParam;
 
-            g_pparticle->call(emessage);
+            s_pmousehook->mouse_proc(emessage);
 
          }
 
       }
 
-      return ::CallNextHookEx(g_hhook, nCode, wParam, lParam);
+      return ::CallNextHookEx(s_hhookMouse, nCode, wParam, lParam);
 
    }
 
 
-   void run()
+   void mouse_hook::_mouse_hook_task()
    {
 
-      auto ptask = get_task();
+      //auto ptask = get_task();
 
       //auto pthread = ptask->m_pthread;
 
@@ -66,86 +133,76 @@ namespace mouse_hook
 
       // g_hhook = nullptr;
 
-      g_itask = ::GetCurrentThreadId();
+      //g_itask = ::GetCurrentThreadId();
 
-      MSG msg;
-
-      ::PeekMessage(&msg, nullptr, 0, 0xffffffff, false);
-
-      g_hhook = SetWindowsHookEx(WH_MOUSE_LL, LowLevelMouseProc, ::LoadLibraryW(L"app_core_auraclick.dll"), 0);
-
-      while (task_get_run())
+      try
       {
 
-         int iRet = ::GetMessage(&msg, 0, 0, 0xffffffff);
+         MSG msg;
 
-         if (iRet == 0)
+         ::PeekMessage(&msg, nullptr, 0, 0xffffffff, false);
+
+         s_hhookMouse = SetWindowsHookEx(WH_MOUSE_LL, LowLevelMouseProc, ::LoadLibraryW(L"app_core_auraclick.dll"), 0);
+
+         while (task_get_run())
          {
 
-            break;
+            int iRet = ::GetMessage(&msg, 0, 0, 0xffffffff);
+
+            if (iRet == 0)
+            {
+
+               break;
+
+            }
+
+            ::TranslateMessage(&msg);
+
+            ::DispatchMessage(&msg);
 
          }
 
-         ::TranslateMessage(&msg);
-
-         ::DispatchMessage(&msg);
-
       }
-
-      UnhookWindowsHookEx(g_hhook);
-
-      g_hhook = nullptr;
-
-      //return ::success;
-
-   }
-
-
-   void install(::particle * pparticle)
-   {
-
-      if (g_hhook != nullptr)
+      catch (...)
       {
 
-         //return false;
-
-         throw ::exception(error_null_pointer);
-
       }
 
-      g_pparticle = pparticle;
-
-      g_bRun = true;
-      
-      //return ::success;
-
-   }
-
-
-   void uninstall(::particle * pparticle)
-   {
-
-      if (g_hhook == nullptr)
+      try
       {
 
-         //return false;
+         UnhookWindowsHookEx(s_hhookMouse);
 
-         throw ::exception(error_null_pointer);
+      }
+      catch (...)
+      {
 
       }
 
-      g_pparticle = nullptr;
+      s_hhookMouse = nullptr;
 
-      PostThreadMessage((DWORD) g_itask, WM_QUIT, 0, 0);
+      s_bMouseHook = false;
 
-      g_bRun = false;
+      s_pmousehook = nullptr;
 
-      //return ::success;
+      s_ptaskMouse.release();
 
    }
 
 
-} // namespace mouse_hook
+   void mouse_hook::mouse_proc(enum_message emessage)
+   {
+
+      auto pmouse = __create_new < ::message::mouse >();
+
+      pmouse->m_atom = emessage;
+
+      handle(pmouse);
+
+   }
+
+
+} // namespace input_win32
 
 
 

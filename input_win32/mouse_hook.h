@@ -2,18 +2,45 @@
 #pragma once
 
 
-namespace mouse_hook
+#include "acme/_operating_system.h"
+
+
+namespace input_win32
 {
-   
-   
-   void install(::particle * pparticle);
-
-   void uninstall(::particle * pparticle);
-
-   void run();
 
 
-} // namespace mouse_hook
+   class mouse_hook :
+      virtual public ::particle
+   {
+   public:
+
+
+      static bool                s_bMouseHook;
+      static mouse_hook *        s_pmousehook;
+      static ::task_pointer      s_ptaskMouse;
+      static HHOOK               s_hhookMouse;
+
+      
+      mouse_hook();
+      ~mouse_hook() override;
+
+
+      virtual void install_mouse_hook();
+
+      virtual void uninstall_mouse_hook();
+
+      virtual bool is_mouse_hook_installed();
+
+      virtual void _mouse_hook_task();
+
+      static LRESULT CALLBACK LowLevelMouseProc(int nCode, WPARAM wParam, LPARAM lParam);
+
+      virtual void mouse_proc(enum_message emessage);
+
+   };
+
+
+} // namespace input_win32
 
 
 
