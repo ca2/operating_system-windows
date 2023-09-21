@@ -1,8 +1,8 @@
 // Created by camilo on 2021-01-30 <3ThomasBS_!!
 #include "framework.h"
 #undef USUAL_OPERATING_SYSTEM_SUPPRESSIONS
-#include "mouse_hook.h"
-#include "keyboard_hook.h"
+//#include "mouse_hook.h"
+//#include "keyboard_hook.h"
 #include "windowing.h"
 #include "window.h"
 #include "keyboard.h"

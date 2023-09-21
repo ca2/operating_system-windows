@@ -82,13 +82,7 @@
     <ClCompile Include="window\window_show.cpp">
       <Filter>Source Files\window</Filter>
     </ClCompile>
-    <ClCompile Include="mouse_hook.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="node.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="keyboard_hook.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="master_device_listener.cpp">
@@ -193,12 +187,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="node.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="mouse_hook.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="keyboard_hook.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="master_device_listener.h">

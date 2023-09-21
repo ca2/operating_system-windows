@@ -723,10 +723,8 @@
     <ClInclude Include="imm_client.h" />
     <ClInclude Include="imm_context.h" />
     <ClInclude Include="keyboard.h" />
-    <ClInclude Include="keyboard_hook.h" />
     <ClInclude Include="message_window.h" />
     <ClInclude Include="monitor.h" />
-    <ClInclude Include="mouse_hook.h" />
     <ClInclude Include="node.h" />
     <ClInclude Include="notification_area.h" />
     <ClInclude Include="notify_icon.h" />
@@ -758,14 +756,12 @@
     <ClCompile Include="top_level_enum.cpp" />
     <ClCompile Include="_factory.cpp" />
     <ClCompile Include="gdi.cpp" />
-    <ClCompile Include="keyboard_hook.cpp" />
     <ClCompile Include="icon.cpp" />
     <ClCompile Include="imm_client.cpp" />
     <ClCompile Include="imm_context.cpp" />
     <ClCompile Include="keyboard.cpp" />
     <ClCompile Include="message_bypass.cpp" />
     <ClCompile Include="monitor.cpp" />
-    <ClCompile Include="mouse_hook.cpp" />
     <ClCompile Include="node.cpp" />
     <ClCompile Include="notification_area.cpp" />
     <ClCompile Include="notify_icon.cpp" />
