@@ -2768,42 +2768,42 @@ namespace windowing_win32
    }
 
 
-   ::point_i32 window::get_mouse_cursor_host_position()
-   {
+   //::point_i32 window::get_mouse_cursor_host_position()
+   //{
 
-      POINT point;
+   //   POINT point;
 
-      ::GetCursorPos(&point);
+   //   ::GetCursorPos(&point);
 
-      ::ScreenToClient(get_hwnd(), &point);
+   //   ::ScreenToClient(get_hwnd(), &point);
 
-      ::point_i32 point_i32;
+   //   ::point_i32 point_i32;
 
-      point_i32.x() = point.x;
+   //   point_i32.x() = point.x;
 
-      point_i32.y() = point.y;
+   //   point_i32.y() = point.y;
 
-      return point_i32;
+   //   return point_i32;
 
-   }
-   
+   //}
+   //
 
-   ::point_i32 window::get_mouse_cursor_absolute_position()
-   {
+   //::point_i32 window::get_mouse_cursor_absolute_position()
+   //{
 
-      POINT point;
+   //   POINT point;
 
-      ::GetCursorPos(&point);
+   //   ::GetCursorPos(&point);
 
-      ::point_i32 point_i32;
+   //   ::point_i32 point_i32;
 
-      point_i32.x() = point.x;
+   //   point_i32.x() = point.x;
 
-      point_i32.y() = point.y;
+   //   point_i32.y() = point.y;
 
-      return point_i32;
+   //   return point_i32;
 
-   }
+   //}
 
    
    //bool window::reset(::windowing::cursor * pcursor, ::aura::session * psession)
@@ -6884,22 +6884,22 @@ namespace windowing_win32
    //}
 
    
-   void window::get_cursor_position(::point_i32 * ppointCursor)
-   {
+   //void window::get_cursor_position(::point_i32 * ppointCursor)
+   //{
 
-      ::GetCursorPos((POINT *)&m_pointCursor);
+   //   ::GetCursorPos((POINT *)&m_pointCursor);
 
-      *ppointCursor = m_pointCursor;
+   //   *ppointCursor = m_pointCursor;
 
-   }
+   //}
 
 
-   void window::set_cursor_position(const ::point_i32 & pointCursor)
-   {
+   //void window::set_cursor_position(const ::point_i32 & pointCursor)
+   //{
 
-      ::SetCursorPos(pointCursor.x(), pointCursor.y());
+   //   ::SetCursorPos(pointCursor.x(), pointCursor.y());
 
-   }
+   //}
 
 
 

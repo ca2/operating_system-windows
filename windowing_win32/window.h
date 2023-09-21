@@ -135,9 +135,9 @@ namespace windowing_win32
 
       void set_mouse_cursor(::windowing::cursor * pcursor) override;
 
-      ::point_i32 get_mouse_cursor_host_position() override;
+      //::point_i32 get_mouse_cursor_host_position() override;
 
-      ::point_i32 get_mouse_cursor_absolute_position() override;
+      //::point_i32 _get_mouse_cursor_position() override;
 
 //      virtual bool is_child_of(const ::windowing::window * pwindowAscendantCandidate) const override;
       
@@ -909,8 +909,8 @@ namespace windowing_win32
       //void _window_request_presentation_locked() override;
       void window_update_screen_buffer() override;
 
-      void get_cursor_position(::point_i32 * ppointCursor) override;
-      void set_cursor_position(const ::point_i32 & pointCursor) override;
+      //void get_cursor_position(::point_i32 * ppointCursor) override;
+      //void set_cursor_position(const ::point_i32 & pointCursor) override;
 
       
 

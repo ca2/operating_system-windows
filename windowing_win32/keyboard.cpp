@@ -92,9 +92,9 @@ namespace windowing_win32
       case VK_END:
          return ::user::e_key_end;
       case VK_PRIOR:
-         return ::user::e_key_prior;
+         return ::user::e_key_page_up;
       case VK_NEXT:
-         return ::user::e_key_next;
+         return ::user::e_key_page_down;
       }
 
       return ::user::e_key_none;

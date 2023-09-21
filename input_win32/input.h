@@ -2,8 +2,7 @@
 #pragma once
 
 
-#include "aura/windowing/windowing.h"
-#include "win32.h"
+#include "apex/input/input.h"
 
 
 namespace input_win32
@@ -30,43 +29,49 @@ namespace input_win32
 //#ifdef WINDOWS_DESKTOP
 
       //#pragma message("at macos??")
-      ::pointer<system_interaction>    m_psysteminteraction;
+      //::pointer<system_interaction>    m_psysteminteraction;
 
 //#endif
 
+      //bool     m_bMouseHook = false;
+      //bool     m_bKeyboardHook = false;
 
-      windowing();
-      ~windowing() override;
+
+      ::task_pointer                   m_ptaskMouse;
+      ::task_pointer                   m_ptaskKeyboard;
+
+      input();
+      ~input() override;
 
 
-      void initialize_windowing(::user::user * puser) override;
+      //void initialize_windowing(::user::user * puser) override;
 
-      void defer_term_ui() override;
+      //void defer_term_ui() override;
 
-      void finalize_windowing() override;
-
-      void destroy() override;
+      //void finalize_windowing() override;
 
       //void destroy() override;
 
-      //void get_cursor_position(::point_i32* ppoint) override;
+      ////void destroy() override;
 
-      virtual bool defer_create_system_window();
-      //virtual ::pointer<::user::interaction>create_system_window();
-      ::pointer<system_interaction>create_system_window();
+      ////void get_cursor_position(::point_i32* ppoint) override;
+
+      //virtual bool defer_create_system_window();
+      ////virtual ::pointer<::user::interaction>create_system_window();
+      //::pointer<system_interaction>create_system_window();
 
 
-      inline system_interaction * system_interaction() { return m_psysteminteraction; }
+      //inline system_interaction * system_interaction() { return m_psysteminteraction; }
 
-      virtual HICON _load_icon(string_array& straMatter, string strIcon, int cx, int cy);
+      //virtual HICON _load_icon(string_array& straMatter, string strIcon, int cx, int cy);
 
-      virtual ::windows::hwnd_array _get_hwnda(const ::user::primitive_pointer_array& primitivepointera);
+      //virtual ::windows::hwnd_array _get_hwnda(const ::user::primitive_pointer_array& primitivepointera);
 
-      virtual ::windowing::window * window(oswindow oswindow) override;
+      //virtual ::windowing::window * window(oswindow oswindow) override;
 
-      virtual ::windowing_win32::window * _window(HWND hwnd);
+      //virtual ::windowing_win32::window * _window(HWND hwnd);
 
-      virtual ::windowing::display * display() override;
+      //virtual ::windowing::display * display() override;
 
       //::pointer<::windowing::monitor>get_main_monitor();
 
@@ -80,125 +85,126 @@ namespace input_win32
       //virtual void enum_draw2d_fonts(::write_text::font_enumeration_item_array & itema) override;
       
       
-      virtual ::windowing::window * get_desktop_window() override;
+      //virtual ::windowing::window * get_desktop_window() override;
 
 
-      virtual ::windowing::window * get_active_window(::thread * pthread) override;
+      //virtual ::windowing::window * get_active_window(::thread * pthread) override;
 
 
-      virtual void __synthesizes_creates_styles(::user::interaction * pinteraction, ::u32 & nExStyle, ::u32 & nStyle);
+      //virtual void __synthesizes_creates_styles(::user::interaction * pinteraction, ::u32 & nExStyle, ::u32 & nStyle);
 
-      
-      virtual zorder zorder_from_hwnd(HWND hwnd);
-      virtual HWND zorder_to_hwnd(const zorder & zorder);
-
-
-      void clear_keyboard_focus(::user::element * pelementGainingFocusIfAny) override;
-
-      
-      ::windowing::window * get_keyboard_focus(::thread * pthread) override;
+      //
+      //virtual zorder zorder_from_hwnd(HWND hwnd);
+      //virtual HWND zorder_to_hwnd(const zorder & zorder);
 
 
-      ::windowing::window * get_mouse_capture(::thread * pthread) override;
+      //void clear_keyboard_focus(::user::element * pelementGainingFocusIfAny) override;
 
-      
-      //HWND _get_mouse_capture(itask_t itask);
+      //
+      //::windowing::window * get_keyboard_focus(::thread * pthread) override;
 
 
-      bool defer_release_mouse_capture(::thread* pthread, ::windowing::window* pwindowDeferRelease) override;
-      
+      //::windowing::window * get_mouse_capture(::thread * pthread) override;
 
-      virtual void erase_window(::windowing::window * pwindow);
+      //
+      ////HWND _get_mouse_capture(itask_t itask);
+
+
+      //bool defer_release_mouse_capture(::thread* pthread, ::windowing::window* pwindowDeferRelease) override;
+      //
+
+      //virtual void erase_window(::windowing::window * pwindow);
     
 
-      using windowing::windowing::get_cursor;
+      //using windowing::windowing::get_cursor;
 
 
-      virtual ::windowing::cursor * get_cursor();
-      virtual ::windowing::cursor * get_default_cursor();
+      //virtual ::windowing::cursor * get_cursor();
+      //virtual ::windowing::cursor * get_default_cursor();
 
 
-      //virtual enum_dialog_result message_box(const ::string & pszMessage, const ::string & pszTitle, const ::e_message_box & emessagebox);
+      ////virtual enum_dialog_result message_box(const ::string & pszMessage, const ::string & pszTitle, const ::e_message_box & emessagebox);
 
 
-      virtual void get_cursor_pos(::point_i32 * ppoint);
+      //virtual void get_cursor_pos(::point_i32 * ppoint);
 
-      virtual void set_cursor_position(const ::point_i32 & point);
-
-
-
-      virtual int_bool point_is_window_origin(::point_i32 ptHitTest, oswindow oswindowExclude, int iMargin);
-
-      //virtual void top_windows_by_z_order(hwnd_array & a);
+      //virtual void set_cursor_position(const ::point_i32 & point);
 
 
-      virtual bool is_window(oswindow oswindow) override;
 
-      bool _is_window(HWND hwnd);
+      //virtual int_bool point_is_window_origin(::point_i32 ptHitTest, oswindow oswindowExclude, int iMargin);
 
-
-      virtual void get_app_wnda(::windows::hwnd_array & wnda);
-
-      ::pointer<::windowing::window>window_from_point(::aura::application * papp, const ::point_i32 & point);
-
-      
-      //virtual void windowing_post(const ::procedure & procedure) override;
+      ////virtual void top_windows_by_z_order(hwnd_array & a);
 
 
-      static BOOL CALLBACK GetAppsEnumWindowsProc(HWND hwnd, LPARAM lParam);
+      //virtual bool is_window(oswindow oswindow) override;
+
+      //bool _is_window(HWND hwnd);
 
 
-      virtual void set(::message::key * pkey, oswindow oswindow, ::windowing::window * pwindow, const ::atom & atom, wparam wparam, ::lparam lparam) override;
-      virtual void set(::message::mouse * pmouse, oswindow oswindow, ::windowing::window * pwindow, const ::atom & atom, wparam wparam, ::lparam lparam) override;
+      //virtual void get_app_wnda(::windows::hwnd_array & wnda);
 
+      //::pointer<::windowing::window>window_from_point(::aura::application * papp, const ::point_i32 & point);
 
-      virtual void initialize_keyboard(::windowing::keyboard * pkeyboard) override;
-
-      virtual void lock_set_foreground_window(bool bLock) override;
-
-      virtual wstring _windows_register_window_class(::u32 nClassStyle, HCURSOR hCursor = 0, HBRUSH hbrBackground = 0, HICON hIcon = 0);
-      //CLASS_DECL_WINDOWING_WIN32 wstring windows_register_window_class(::particle * pparticle, ::u32 nClassStyle, hcursor hCursor = 0, HBRUSH hbrBackground = 0, hicon hIcon = 0);
-      virtual bool _windows_register_class(WNDCLASSEXW* puserinteractionclass);
       //
-      virtual wstring _windows_calc_icon_window_class(::user::interaction* pinteraction, u32 dwDefaultStyle, const ::string & pszMatter) override;
-      virtual wstring _windows_get_user_interaction_window_class(::user::interaction* pinteraction) override;
-      virtual bool _windows_register_with_icon(WNDCLASSEXW* puserinteractionclass, const unichar* pszClassName, ::u32 nIDIcon);
-
-      virtual void _window_create_caret(HWND hwnd, HBITMAP hbitmap);
-      virtual void _window_create_solid_caret(HWND hwnd, i32 nWidth, i32 nHeight);
-      virtual void _window_create_gray_caret(HWND hwnd, i32 nWidth, i32 nHeight);
+      ////virtual void windowing_post(const ::procedure & procedure) override;
 
 
-      //template < typename PRED >
-      //bool _top_level_contains_predicate(PRED pred);
+      //static BOOL CALLBACK GetAppsEnumWindowsProc(HWND hwnd, LPARAM lParam);
 
 
-      //template < typename PREDICATE >
-      //bool _top_level_contains_bool_member(PREDICATE predicate);
+      //virtual void set(::message::key * pkey, oswindow oswindow, ::windowing::window * pwindow, const ::atom & atom, wparam wparam, ::lparam lparam) override;
+      //virtual void set(::message::mouse * pmouse, oswindow oswindow, ::windowing::window * pwindow, const ::atom & atom, wparam wparam, ::lparam lparam) override;
 
 
-      bool _visible_top_level_contains_all_names(const string_array& stra) override;
-      bool _visible_top_level_contains_name(string str) override;
-      virtual bool _top_level_contains_name(string str);
-      virtual string _get_window_text_timeout(oswindow oswindow, const class time & time = 1_s);
+      //virtual void initialize_keyboard(::windowing::keyboard * pkeyboard) override;
+
+      //virtual void lock_set_foreground_window(bool bLock) override;
+
+      //virtual wstring _windows_register_window_class(::u32 nClassStyle, HCURSOR hCursor = 0, HBRUSH hbrBackground = 0, HICON hIcon = 0);
+      ////CLASS_DECL_WINDOWING_WIN32 wstring windows_register_window_class(::particle * pparticle, ::u32 nClassStyle, hcursor hCursor = 0, HBRUSH hbrBackground = 0, hicon hIcon = 0);
+      //virtual bool _windows_register_class(WNDCLASSEXW* puserinteractionclass);
+      ////
+      //virtual wstring _windows_calc_icon_window_class(::user::interaction* pinteraction, u32 dwDefaultStyle, const ::string & pszMatter) override;
+      //virtual wstring _windows_get_user_interaction_window_class(::user::interaction* pinteraction) override;
+      //virtual bool _windows_register_with_icon(WNDCLASSEXW* puserinteractionclass, const unichar* pszClassName, ::u32 nIDIcon);
+
+      //virtual void _window_create_caret(HWND hwnd, HBITMAP hbitmap);
+      //virtual void _window_create_solid_caret(HWND hwnd, i32 nWidth, i32 nHeight);
+      //virtual void _window_create_gray_caret(HWND hwnd, i32 nWidth, i32 nHeight);
 
 
-      void install_keyboard_hook(::matter* pmatterListener) override;
-      void uninstall_keyboard_hook(::matter* pmatterListener) override;
-
-      void install_mouse_hook(::matter* pmatterListener) override;
-      void uninstall_mouse_hook(::matter* pmatterListener) override;
+      ////template < typename PRED >
+      ////bool _top_level_contains_predicate(PRED pred);
 
 
+      ////template < typename PREDICATE >
+      ////bool _top_level_contains_bool_member(PREDICATE predicate);
 
 
-      virtual void register_windows_message();
+      //bool _visible_top_level_contains_all_names(const string_array& stra) override;
+      //bool _visible_top_level_contains_name(string str) override;
+      //virtual bool _top_level_contains_name(string str);
+      //virtual string _get_window_text_timeout(oswindow oswindow, const class time & time = 1_s);
+
+void defer_input() override;
+
+      //void install_keyboard_hook(::matter* pmatterListener) override;
+      //void uninstall_keyboard_hook(::matter* pmatterListener) override;
+
+      //void install_mouse_hook(::matter* pmatterListener) override;
+      //void uninstall_mouse_hook(::matter* pmatterListener) override;
 
 
-      ::pointer < ::user::interaction > create_message_window(const ::string & pszName, ::user::interaction_listener * plistener = nullptr) override;
 
 
-      void set_mouse_cursor(::windowing::cursor* pcursor) override;
+      //virtual void register_windows_message();
+
+
+      //::pointer < ::user::interaction > create_message_window(const ::string & pszName, ::user::interaction_listener * plistener = nullptr) override;
+
+
+      //void set_mouse_cursor(::windowing::cursor* pcursor) override;
 
 
    };

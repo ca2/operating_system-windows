@@ -5,29 +5,21 @@
 #include "aura_windows/_.h"
 
 
-#if defined(_windowing_win32_project)
-#define CLASS_DECL_WINDOWING_WIN32  CLASS_DECL_EXPORT
+#if defined(_input_win32_project)
+#define CLASS_DECL_INPUT_WIN32  CLASS_DECL_EXPORT
 #else
-#define CLASS_DECL_WINDOWING_WIN32  CLASS_DECL_IMPORT
+#define CLASS_DECL_INPUT_WIN32  CLASS_DECL_IMPORT
 #endif
 
 
-namespace windowing_win32
+namespace input_win32
 {
 
    
-   class windowing;
-   class system_interaction;
-   class window;
+   class input;
 
 
-   class master_device_listener;
-
-
-   class devices;
-
-
-} // namespace windowing_win32
+} // namespace input_win32
 
 
 

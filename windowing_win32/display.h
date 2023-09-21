@@ -27,7 +27,7 @@ namespace windowing_win32
 
 #ifdef WINDOWS_DESKTOP
 
-
+      
 #else
 
       //rectangle_i32_array                                         m_rectangleaMonitor;
@@ -80,9 +80,7 @@ namespace windowing_win32
 
       virtual void monitor_enum(HMONITOR hmonitor, HDC hdcMonitor, LPRECT prcMonitor);
 
-
-      virtual bool set_main_monitor(index iMonitor);
-
+      bool set_main_monitor(index iMonitor) override;
 
       //virtual bool wkspace_to_monitor(::rectangle_i32 * prectangle, index iMonitor, index iWkspace) override;
 
@@ -95,12 +93,11 @@ namespace windowing_win32
 
       virtual void _get_monitor(rectangle_i32_array & rectaMonitor, rectangle_i32_array& rectaIntersect, const rectangle_i32 & rectangleParam);
 
+      virtual index _get_best_zoneing(::e_display * pedisplay, ::rectangle_i32 * prectangle, const ::rectangle_i32 & rectangle, bool bPreserveSize = false) override;
 
-      virtual index _get_best_zoneing(::e_display * pedisplay, ::rectangle_i32 * prectangle, const ::rectangle_i32 & rectangle, bool bPreserveSize = false);
+      index get_best_monitor(::rectangle_i32 * prectangle, const ::rectangle_i32 & rectangle, ::e_activation eactivation = e_activation_default, ::user::interaction * puserinteractionCursorPosition = nullptr) override;
 
-      index get_best_monitor(::rectangle_i32 * prectangle, const ::rectangle_i32 & rectangle, ::e_activation eactivation = e_activation_default, ::windowing::window * pwindowCursorPosition = nullptr);
-
-      index get_best_workspace(::rectangle_i32 * prectangle, const ::rectangle_i32 & rectangle, ::e_activation eactivation = e_activation_default, ::windowing::window * pwindowCursorPosition = nullptr) override;
+      index get_best_workspace(::rectangle_i32 * prectangle, const ::rectangle_i32 & rectangle, ::e_activation eactivation = e_activation_default, ::user::interaction * puserinteractionCursorPosition = nullptr) override;
 
       index get_good_iconify(::rectangle_i32 * prectangle, const ::rectangle_i32 & rectangle) override;
 
@@ -116,6 +113,10 @@ namespace windowing_win32
 
       void on_device_plugged(::hardware::enum_device edevice) override;
       void on_device_unplugged(::hardware::enum_device edevice) override;
+
+      
+      ::point_i32 _get_mouse_cursor_position() override;
+
 
    };
 

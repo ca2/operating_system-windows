@@ -798,7 +798,7 @@ namespace windowing_win32
 
             //::SetWindowPos(get_hwnd(), HWND_TOPMOST, point.x(), point.y(), size.cx(), size.cy(), SWP_NOZORDER);
 
-            string strType = __type_name(m_pimpl->m_puserinteraction);
+            string strType = ::type(m_pimpl->m_puserinteraction).name();
 
             if (strType.case_insensitive_contains("font_format"))
             {

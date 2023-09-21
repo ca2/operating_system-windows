@@ -9,6 +9,7 @@
 #include "acme/parallelization/synchronous_lock.h"
 #include "acme/primitive/geometry2d/rectangle_array.h"
 #include "aura/platform/system.h"
+#include "aura/user/user/interaction.h"
 
 
 namespace windowing_win32
@@ -815,7 +816,7 @@ namespace windowing_win32
    }
 
 
-   index display::get_best_monitor(::rectangle_i32 * prectangle, const rectangle_i32 & rectangleParam, ::e_activation eactivation, ::windowing::window * pwindowCursorPosition)
+   index display::get_best_monitor(::rectangle_i32 * prectangle, const rectangle_i32 & rectangleParam, ::e_activation eactivation, ::user::interaction * puserinteractionCursorPosition)
    {
 
       index iMatchingMonitor = -1;
@@ -831,18 +832,16 @@ namespace windowing_win32
 
          ::point_i32 pointCursor;
 
-         if (::is_null(pwindowCursorPosition))
+         if (::is_null(puserinteractionCursorPosition))
          {
 
-            auto pwindowing = m_pwindowing;
-
-            pointCursor = pwindowing->get_cursor_position();
+            pointCursor = get_mouse_cursor_position();
 
          }
          else
          {
 
-            pointCursor = pwindowCursorPosition->get_cursor_position();
+            pointCursor = puserinteractionCursorPosition->host_mouse_cursor_position();
 
          }
 
@@ -913,7 +912,7 @@ namespace windowing_win32
    }
 
 
-   index display::get_best_workspace(::rectangle_i32 * prectangle, const rectangle_i32 & rectangleParam, ::e_activation eactivation, ::windowing::window * pwindowCursorPosition)
+   index display::get_best_workspace(::rectangle_i32 * prectangle, const rectangle_i32 & rectangleParam, ::e_activation eactivation, ::user::interaction * puserinteractionCursorPosition)
    {
 
       index iMatchingWkspace = -1;
@@ -927,7 +926,20 @@ namespace windowing_win32
       if (eactivation & e_activation_under_mouse_cursor)
       {
 
-         ::point_i32 pointCursor = pwindowCursorPosition->get_cursor_position();
+         ::point_i32 pointCursor;
+
+         if (::is_null(puserinteractionCursorPosition))
+         {
+
+            pointCursor = get_mouse_cursor_position();
+
+         }
+         else
+         {
+
+            pointCursor = puserinteractionCursorPosition->host_mouse_cursor_position();
+
+         }
 
          rectangle.set(pointCursor - ::size_i32(5, 5), ::size_i32(10, 10));
 
@@ -1187,6 +1199,24 @@ namespace windowing_win32
 
    }
 
+
+   ::point_i32 display::_get_mouse_cursor_position()
+   {
+
+      POINT point;
+
+      ::GetCursorPos(&point);
+
+      ::point_i32 point_i32;
+
+      point_i32.x() = point.x;
+
+      point_i32.y() = point.y;
+
+      return point_i32;
+
+   }
+   
 
 
 } // namespace windowing_win32

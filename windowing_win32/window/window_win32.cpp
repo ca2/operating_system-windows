@@ -231,7 +231,7 @@ LRESULT CALLBACK __window_procedure(HWND hwnd, UINT message, WPARAM wparam, LPAR
    else if (message == 33815)
    {
 
-      string strType = __type_name(puserinteraction);
+      string strType = ::type(puserinteraction).name();
 
       if (strType.contains("list_box"))
       {

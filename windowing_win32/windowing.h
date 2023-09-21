@@ -121,9 +121,9 @@ namespace windowing_win32
       //virtual enum_dialog_result message_box(const ::string & pszMessage, const ::string & pszTitle, const ::e_message_box & emessagebox);
 
 
-      virtual void get_cursor_pos(::point_i32 * ppoint);
+      //virtual void get_cursor_pos(::point_i32 * ppoint);
 
-      virtual void set_cursor_position(const ::point_i32 & point);
+      //virtual void set_cursor_position(const ::point_i32 & point);
 
 
 

@@ -136,7 +136,7 @@ namespace windowing_win32
 
       //auto estatus = 
 
-      psysteminteraction->create_host();
+      psysteminteraction->create_host(e_parallelization_synchronous);
 
       //if(!estatus)
       //{
@@ -785,46 +785,46 @@ namespace windowing_win32
    //}
 
 
-   void windowing::get_cursor_pos(::point_i32* ppoint)
-   {
+   //void windowing::get_cursor_pos(::point_i32* ppoint)
+   //{
 
 
-      if (get_session()->m_bSystemSynchronizedCursor)
-      {
+   //   if (get_session()->m_bSystemSynchronizedCursor)
+   //   {
 
-         POINT point;
+   //      POINT point;
 
-         ::GetCursorPos(&point);
+   //      ::GetCursorPos(&point);
 
-         m_pointCursor.x() = point.x;
+   //      m_pointCursor.x() = point.x;
 
-         m_pointCursor.y() = point.y;
+   //      m_pointCursor.y() = point.y;
 
-      }
+   //   }
 
-      if (ppoint != nullptr)
-      {
+   //   if (ppoint != nullptr)
+   //   {
 
-         *ppoint = m_pointCursor;
+   //      *ppoint = m_pointCursor;
 
-      }
+   //   }
 
-   }
+   //}
 
 
-   void windowing::set_cursor_position(const ::point_i32& point)
-   {
+   //void windowing::set_cursor_position(const ::point_i32& point)
+   //{
 
-      if (!::SetCursorPos(point.x(), point.y()))
-      {
+   //   if (!::SetCursorPos(point.x(), point.y()))
+   //   {
 
-         //return false;
+   //      //return false;
 
-      }
+   //   }
 
-      //return tru;
+   //   //return tru;
 
-   }
+   //}
 
 
    void windowing::erase_window(::windowing::window* pwindow)
@@ -1003,12 +1003,12 @@ namespace windowing_win32
    }
 
 
-   void windowing::windowing_post(const ::procedure& procedure)
-   {
+   //void windowing::windowing_post(const ::procedure& procedure)
+   //{
 
-      acmesystem()->m_papexsystem->post_procedure(procedure);
+   //   acmesystem()->m_papexsystem->post_procedure(procedure);
 
-   }
+   //}
 
 
    bool windowing::_is_window(HWND hwnd)
@@ -1099,8 +1099,8 @@ namespace windowing_win32
       pkeyboard->m_mapKey[VK_SPACE] = ::user::e_key_space;
       pkeyboard->m_mapKey[VK_HOME] = ::user::e_key_home;
       pkeyboard->m_mapKey[VK_END] = ::user::e_key_end;
-      pkeyboard->m_mapKey[VK_PRIOR] = ::user::e_key_prior;
-      pkeyboard->m_mapKey[VK_NEXT] = ::user::e_key_next;
+      pkeyboard->m_mapKey[VK_PRIOR] = ::user::e_key_page_up;
+      pkeyboard->m_mapKey[VK_NEXT] = ::user::e_key_page_down;
       pkeyboard->m_mapKey[VK_TAB] = ::user::e_key_tab;
       pkeyboard->m_mapKey[VK_ESCAPE] = ::user::e_key_escape;
       pkeyboard->m_mapKey[VK_TAB] = ::user::e_key_tab;
@@ -1365,52 +1365,52 @@ namespace windowing_win32
    }
 
 
-   void windowing::install_keyboard_hook(::matter* pmatterListener)
-   {
+   //void windowing::install_keyboard_hook(::matter* pmatterListener)
+   //{
 
-      //auto estatus = 
+   //   //auto estatus = 
 
-      ::keyboard_hook::install(pmatterListener);
+   //   ::keyboard_hook::install(pmatterListener);
 
-      fork([]()
-         {
+   //   fork([]()
+   //      {
 
-            ::keyboard_hook::run();
+   //         ::keyboard_hook::run();
 
-         });
+   //      });
 
-   }
-
-
-   void windowing::uninstall_keyboard_hook(::matter* pmatterListener)
-   {
-
-      ::keyboard_hook::uninstall(pmatterListener);
-
-   }
+   //}
 
 
-   void windowing::install_mouse_hook(::matter* pmatterListener)
-   {
+   //void windowing::uninstall_keyboard_hook(::matter* pmatterListener)
+   //{
 
-      ::mouse_hook::install(pmatterListener);
+   //   ::keyboard_hook::uninstall(pmatterListener);
 
-      fork([]()
-         {
-
-            ::mouse_hook::run();
-
-         });
-
-   }
+   //}
 
 
-   void windowing::uninstall_mouse_hook(::matter* pmatterListener)
-   {
+   //void windowing::install_mouse_hook(::matter* pmatterListener)
+   //{
 
-      ::mouse_hook::uninstall(pmatterListener);
+   //   ::mouse_hook::install(pmatterListener);
 
-   }
+   //   fork([]()
+   //      {
+
+   //         ::mouse_hook::run();
+
+   //      });
+
+   //}
+
+
+   //void windowing::uninstall_mouse_hook(::matter* pmatterListener)
+   //{
+
+   //   ::mouse_hook::uninstall(pmatterListener);
+
+   //}
 
 
    void windowing::register_windows_message()
