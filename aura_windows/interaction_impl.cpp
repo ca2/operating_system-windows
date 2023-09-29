@@ -1680,12 +1680,12 @@ namespace aura_windows
    }
 
 
-   void interaction_impl::on_visual_applied()
-   {
+   //void interaction_impl::on_visual_applied()
+   //{
 
-      ::user::interaction_impl::on_visual_applied();
+   //   ::user::interaction_impl::on_visual_applied();
 
-   }
+   //}
 
 
    void interaction_impl::LockWindowUpdate()

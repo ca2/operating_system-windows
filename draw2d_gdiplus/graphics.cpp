@@ -3940,9 +3940,9 @@ namespace draw2d_gdiplus
             if (rectangleParam.minimum_dimension() > 24)
             {
 
-               tracer().width(4);
+               tracer()->width(4);
 
-               tracer().precision(0);
+               tracer()->precision(0);
 
                //information() << "log_fill_rectangle " << rectangleParam << " color: " << ::file::hex << color;
 

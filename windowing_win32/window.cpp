@@ -3796,8 +3796,10 @@ namespace windowing_win32
    }
 
 
-   void window::on_visual_applied()
+   void window::_on_configure_notify_unlocked(const ::rectangle_i32 & rectangle)
    {
+
+      ::windowing::window::_on_configure_notify_unlocked(rectangle);
 
    }
 

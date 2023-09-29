@@ -103,7 +103,7 @@ namespace aura_windows
 
       //virtual bool set_icon(::draw2d::icon * picon, bool bSmall) override;
 
-      virtual void on_visual_applied() override;
+      //void _on_configure_notify_unlocked(const ::rectangle_i32& rectangle) override;
 
       //virtual void window_apply_visual(const ::user::window_state & windowstate) override;
 
