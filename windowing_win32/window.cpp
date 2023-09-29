@@ -2761,6 +2761,8 @@ namespace windowing_win32
 
       ::windowing::window::set_mouse_cursor(pcursor);
 
+      windowing()->set_mouse_cursor(pcursor);
+
       //HCURSOR hcursor = nullptr;
       //
       //if (::is_set(pcursor))

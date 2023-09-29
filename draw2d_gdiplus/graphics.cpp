@@ -2633,9 +2633,9 @@ namespace draw2d_gdiplus
 
       double dFontHeight = pgdiplusfont->GetHeight((Gdiplus::REAL)pgraphics->get_dpiy());
 
-      pmetric->m_dAscent = dSize * pmetric->m_dAscent / dHeight;
+      pmetric->m_dAscent = dSize * dCellAscent / dHeight;
 
-      pmetric->m_dDescent = dSize * pmetric->m_dDescent / dHeight;
+      pmetric->m_dDescent = dSize * dCellDescent / dHeight;
 
       pmetric->m_dHeight = dFontHeight;
 
