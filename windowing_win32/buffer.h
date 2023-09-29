@@ -73,18 +73,18 @@ namespace windowing_win32
       bool update_screen() override;
 
 
-      virtual bool on_update_screen(::graphics::buffer_item * pitem) override;
+      bool on_update_screen(::graphics::buffer_item * pitem) override;
 
       virtual void update_screen_task();
 
-      virtual ::graphics::buffer_item * on_begin_draw() override;
+      bool _on_begin_draw(::graphics::buffer_item * pbufferitem) override;
 
 
       bool create_window_device_context(const ::size_i32 & size, int iStride = -1);
       void destroy_window_device_context();
 
 
-      virtual bool buffer_lock_round_swap_key_buffers() override;
+      bool buffer_lock_round_swap_key_buffers() override;
 
       virtual HWND get_hwnd() const;
 
