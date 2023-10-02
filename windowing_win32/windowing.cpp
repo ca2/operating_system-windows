@@ -724,9 +724,9 @@ namespace windowing_win32
 
       }
 
-      auto pwindow = _window(hwndCapture);
+      auto hwndDeferRelease = (HWND)pwindowDeferRelease->get_os_data();
 
-      if (pwindow != pwindowDeferRelease)
+      if (hwndDeferRelease != hwndCapture)
       {
 
          return false;

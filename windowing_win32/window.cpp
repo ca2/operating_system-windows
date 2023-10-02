@@ -7052,7 +7052,7 @@ namespace windows
       if (::GetGUIThreadInfo((DWORD)itask, &info))
       {
 
-         if (info.hwndCapture == hwnd)
+         if (info.hwndCapture != hwnd)
          {
 
             return false;

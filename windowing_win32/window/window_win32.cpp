@@ -167,6 +167,21 @@ LRESULT CALLBACK __window_procedure(HWND hwnd, UINT message, WPARAM wparam, LPAR
       pwindow->information() << "e_message_left_button_double_click";
 
    }
+   else if (message == e_message_activate)
+   {
+
+      if (wparam > 0)
+      {
+
+         pwindow->information() << "activation window " << (iptr) hwnd;
+
+         pwindow->information() << "GetCapture " << (iptr)::GetCapture();
+
+      }
+
+      pwindow->information() << "e_message_activate wparam : " << wparam;
+
+   }
 
    if (is_registered_windows_message(message))
    {
