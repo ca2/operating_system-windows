@@ -1,6 +1,8 @@
 // created by Camilo 2021-01-31 04:56 BRT <3CamiloSasukeThomasBorregaardSoerensen
 #include "framework.h"
 #undef USUAL_OPERATING_SYSTEM_SUPPRESSIONS
+#include "display.h"
+#include "monitor.h"
 #include "window.h"
 #include "windowing.h"
 #include "icon.h"
@@ -1410,7 +1412,8 @@ namespace windowing_win32
 
       ////return ::success;
 
-      if (eactivation.eflag() & ::e_activation_set_popup)
+      if (eactivation.eflag() & ::e_activation_set_popup
+         || eactivation.eflag() & ::e_activation_for_context_menu)
       {
 
          _modify_style(0, WS_POPUP);
@@ -2301,6 +2304,143 @@ namespace windowing_win32
 
 
 #undef SET_WINDOW_POS_LOG
+   //::rectangle_i32 get_task_bar_rectangle() {
+   //   APPBARDATA abd = { 0 };
+   //   abd.cbSize = sizeof(abd);
+   //   if (!::SHAppBarMessage(ABM_GETTASKBARPOS, &abd)) {
+   //      throw ::exception(error_failed, "SHAppBarMessage failed.");
+   //   }
+   //   return abd.rc;
+   //}
+
+   class task_bar :
+      virtual public ::particle
+   {
+   public:
+
+      HWND                    m_hwnd;
+      rectangle_i32           m_rectangle;
+      bool                    m_bSecondary;
+      ::windowing::monitor *  m_pmonitor;
+
+   };
+
+   class task_bar_array :
+      virtual public ::pointer_array < task_bar >
+   {
+   public:
+
+      task_bar_array(::windowing::display * pdisplay)
+      {
+
+         ::EnumWindows(&task_bar_array::enum_window, (LPARAM) (iptr) (void *) this);
+
+         fill_monitor(pdisplay);
+
+      }
+
+      static BOOL enum_window(HWND hwnd, LPARAM lparam)
+      {
+
+         char sz[256];
+
+         GetClassNameA(hwnd, sz, sizeof(sz));
+
+         if (strcmp(sz, "Shell_TrayWnd") == 0)
+         {
+
+            auto ptaskbara = (task_bar_array *)lparam;
+
+            ptaskbara->a_task_bar_question(hwnd, false);
+
+         }
+         else if (strcmp(sz, "Shell_SecondaryTrayWnd") == 0)
+         {
+
+            auto ptaskbara = (task_bar_array *)lparam;
+
+            ptaskbara->a_task_bar_question(hwnd, true);
+
+         }
+
+         return TRUE;
+
+      }
+
+
+      void a_task_bar_question(HWND hwnd, bool bSecondary)
+      {
+
+         RECT r;
+
+         if (GetWindowRect(hwnd, &r))
+         {
+
+            auto ptaskbar = __create_new < task_bar >();
+
+            ptaskbar->m_hwnd = hwnd;
+
+            ptaskbar->m_rectangle = r;
+
+            this->add(ptaskbar);
+
+         }
+
+      }
+
+
+      void fill_monitor(::windowing::display * pdisplay)
+      {
+
+         for (auto & ptaskbar : *this)
+         {
+
+            ptaskbar->m_pmonitor = pdisplay->get_best_monitor(ptaskbar->m_rectangle);
+
+         }
+
+      }
+
+      task_bar * get_best_task_bar(const rectangle_i32 & rectangle)
+      {
+
+         ::i32 iArea = 0;
+         ::index iFound = -1;
+
+         for (::index i = 0; i < this->get_count(); i++)
+         {
+
+            ::rectangle_i32 rIntersect;
+
+            auto ptaskbar = this->element_at(i);
+
+            rIntersect.intersect(ptaskbar->m_pmonitor->m_rectangle, rectangle);
+
+            if (rIntersect.area() > iArea)
+            {
+
+               iArea = rIntersect.area();
+
+               iFound = i;
+
+            }
+
+         }
+
+         if (iFound < 0)
+         {
+
+            return nullptr;
+
+         }
+
+         return this->element_at(iFound);
+
+      }
+
+
+   };
+
 
 
    bool window::__set_window_position(const class ::zorder & zorder, i32 x, i32 y, i32 cx, i32 cy, const ::e_activation & eactivation, bool bNoZorder, bool bNoMove, bool bNoSize, bool bShow, bool bHide, ::u32 nOverrideFlags)
@@ -2397,7 +2537,8 @@ namespace windowing_win32
 
       }
 
-      if (eactivation.eflag() & ::e_activation_set_popup)
+      if (eactivation.eflag() & ::e_activation_set_popup
+         || eactivation.eflag() & ::e_activation_for_context_menu)
       {
 
          _modify_style(0, WS_POPUP);
@@ -2405,6 +2546,38 @@ namespace windowing_win32
          nFlags |= SWP_FRAMECHANGED;
 
       }
+
+      if (eactivation.eflag() & ::e_activation_for_context_menu)
+      {
+
+         int bottom = y + cy;
+
+         auto rectangle = ::rectangle_i32_dimension(x, y, cx, cy);
+
+         task_bar_array taskbara(windowing()->display());
+
+         auto ptaskbar = taskbara.get_best_task_bar(rectangle);
+
+         int iBottomTaskBar = ptaskbar->m_rectangle.bottom();
+
+         int iBottomMonitor = ptaskbar->m_pmonitor->m_rectangle.bottom();
+
+         if (iBottomTaskBar == iBottomMonitor)
+         {
+
+            if (bottom > ptaskbar->m_rectangle.top())
+            {
+
+               bottom = ptaskbar->m_rectangle.top() - 16;
+
+               y = bottom - cy;
+
+            }
+
+         }
+
+      }
+
 
       auto bSetWindowPos = ::SetWindowPos(
          hwnd, hwndInsertAfter,
