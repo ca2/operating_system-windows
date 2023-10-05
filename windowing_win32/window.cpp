@@ -1389,19 +1389,25 @@ namespace windowing_win32
 
       HWND hwnd = get_hwnd();
 
+      //if (iShowWindow == SW_MAXIMIZE)
+      //{
+
+      //   if (_get_ex_style() & WS_EX_LAYERED)
+      //   {
+
+      //      iShowWindow = SW_NORMAL;
+
+      //   }
+
+      //}
+
       if (iShowWindow == SW_MAXIMIZE)
       {
 
-         if (_get_ex_style() & WS_EX_LAYERED)
-         {
 
-            iShowWindow = SW_NORMAL;
-
-         }
+         ::ShowWindow(hwnd, iShowWindow);
 
       }
-
-      ::ShowWindow(hwnd, iShowWindow);
       //{
 
       //   //return ::error_failed;
@@ -1971,7 +1977,12 @@ namespace windowing_win32
                || eactivation & e_activation_on_center_of_screen)
             {
 
-               ::ShowWindow(hwnd, SW_NORMAL);
+               if (::IsZoomed(hwnd) || ::IsIconic(hwnd))
+               {
+
+                  ::ShowWindow(hwnd, SW_NORMAL);
+
+               }
 
             }
             else if (edisplayWindow == e_display_zoomed)
@@ -2454,6 +2465,14 @@ namespace windowing_win32
 
       UINT nFlags = m_uExtraFlagsSetWindowPos;
 
+      if (zorder.is_change_request())
+      {
+
+         nFlags &= ~SWP_NOZORDER;
+
+      }
+
+
       if (eactivation & e_activation_no_activate)
       {
 
@@ -2545,39 +2564,46 @@ namespace windowing_win32
 
          nFlags |= SWP_FRAMECHANGED;
 
-      }
+         nFlags &= ~SWP_NOACTIVATE;
 
-      if (eactivation.eflag() & ::e_activation_for_context_menu)
-      {
+         nFlags &= ~SWP_NOREDRAW;
 
-         int bottom = y + cy;
+         nFlags &= ~SWP_NOCOPYBITS;
 
-         auto rectangle = ::rectangle_i32_dimension(x, y, cx, cy);
-
-         task_bar_array taskbara(windowing()->display());
-
-         auto ptaskbar = taskbara.get_best_task_bar(rectangle);
-
-         int iBottomTaskBar = ptaskbar->m_rectangle.bottom();
-
-         int iBottomMonitor = ptaskbar->m_pmonitor->m_rectangle.bottom();
-
-         if (iBottomTaskBar == iBottomMonitor)
-         {
-
-            if (bottom > ptaskbar->m_rectangle.top())
-            {
-
-               bottom = ptaskbar->m_rectangle.top() - 16;
-
-               y = bottom - cy;
-
-            }
-
-         }
+         nFlags &= ~SWP_ASYNCWINDOWPOS;
 
       }
 
+      //if (eactivation.eflag() & ::e_activation_for_context_menu)
+      //{
+
+      //   int bottom = y + cy;
+
+      //   auto rectangle = ::rectangle_i32_dimension(x, y, cx, cy);
+
+      //   task_bar_array taskbara(windowing()->display());
+
+      //   auto ptaskbar = taskbara.get_best_task_bar(rectangle);
+
+      //   int iBottomTaskBar = ptaskbar->m_rectangle.bottom();
+
+      //   int iBottomMonitor = ptaskbar->m_pmonitor->m_rectangle.bottom();
+
+      //   if (iBottomTaskBar == iBottomMonitor)
+      //   {
+
+      //      if (bottom > ptaskbar->m_rectangle.top())
+      //      {
+
+      //         bottom = ptaskbar->m_rectangle.top() - 16;
+
+      //         y = bottom - cy;
+
+      //      }
+
+      //   }
+
+      //}
 
       auto bSetWindowPos = ::SetWindowPos(
          hwnd, hwndInsertAfter,
