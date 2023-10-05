@@ -6130,9 +6130,13 @@ namespace draw2d_gdiplus
             for (index iAnsiChar = 0; iAnsiChar < iUtf8Length; iAnsiChar++)
             {
 
-               daLeft.add(rectangleBound.GetLeft());
+               double dLeft = rectangleBound.GetLeft();
 
-               daRight.add(rectangleBound.GetRight());
+               double dRight = rectangleBound.GetRight();
+
+               daLeft.add(dLeft);
+
+               daRight.add(dRight);
 
             }
 
