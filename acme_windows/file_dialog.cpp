@@ -82,7 +82,7 @@ namespace acme_windows
             
             memory memoryFileNames;
             
-            const auto FILE_DIALOG_MAX_BUFFER = 16_KiB;
+            const auto FILE_DIALOG_MAX_BUFFER = 256_MiB;
 
             memoryFileNames.set_size(FILE_DIALOG_MAX_BUFFER);
 
@@ -200,6 +200,8 @@ namespace acme_windows
                
                if (GetOpenFileNameW(&openfilename) == FALSE)
                {
+
+                  DWORD dwError = CommDlgExtendedError();
 
                   pdialog->m_function({});
 
