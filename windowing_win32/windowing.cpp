@@ -477,7 +477,7 @@ namespace windowing_win32
    }
 
 
-   ::windowing::window* windowing::get_keyboard_focus(::thread* pthread)
+   ::windowing::window_base* windowing::get_keyboard_focus(::thread* pthread)
    {
 
       itask_t itask = 0;

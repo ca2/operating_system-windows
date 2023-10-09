@@ -2,7 +2,7 @@
 #include "bitmap.h"
 #include "acme/exception/exception.h"
 #include "acme/exception/interface_only.h"
-#include "aura/graphics/image/pixmap.h"
+#include "acme/graphics/image/pixmap.h"
 
 #undef new
 

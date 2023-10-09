@@ -96,7 +96,7 @@ namespace windowing_win32
       void clear_keyboard_focus(::user::element * pelementGainingFocusIfAny) override;
 
       
-      ::windowing::window * get_keyboard_focus(::thread * pthread) override;
+      ::windowing::window_base * get_keyboard_focus(::thread * pthread) override;
 
 
       ::windowing::window * get_mouse_capture(::thread * pthread) override;

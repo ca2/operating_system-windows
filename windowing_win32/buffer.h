@@ -6,7 +6,7 @@
 #include "acme/parallelization/manual_reset_event.h"
 #include "aura/graphics/graphics/double_buffer.h"
 #include "aura/graphics/graphics/bitmap_source_buffer.h"
-#include "aura/graphics/image/pixmap.h"
+#include "acme/graphics/image/pixmap.h"
 
 
 #include "acme/_operating_system.h"
