@@ -1645,7 +1645,7 @@ namespace windowing_win32
 
       HWND hwnd = get_hwnd();
 
-      if (!::SetActiveWindow(hwnd))
+      if (!::SetActiveWindowXXX(hwnd))
       {
 
          //return ::error_failed;

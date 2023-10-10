@@ -3790,7 +3790,6 @@ void interaction_impl::set_tool_window(bool bSet)
 
    return m_pwindow->set_tool_window(bSet);
 
-
 }
 
 

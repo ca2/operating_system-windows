@@ -556,13 +556,32 @@ namespace windowing_win32
          //pimpl->m_puserinteraction->user_send([pimpl]()
            // {
 
+
+
+
                pimpl->m_pgraphics->update_screen();
 
 //});
+               //bool bWindowsApplyVisual = true;
+
+               auto & edisplayOutput = pimpl->m_puserinteraction->const_layout().output().m_edisplay;
+
+               auto & edisplayDesign = pimpl->m_puserinteraction->const_layout().design().m_edisplay;
+
+               if (edisplayOutput != edisplayDesign)
+               {
+
+                  pimpl->m_puserinteraction->layout().m_statea[::user::e_layout_output].m_edisplay = edisplayDesign;
+
+                  pimpl->m_puserinteraction->send_message(e_message_show_window, ::is_screen_visible(edisplayDesign) ? 1 : 0);
+
+               }
 
          //pbuffer->_update_screen_lesser_lock();
 
       }
+
+
 
       auto pimpl = m_puserinteractionimpl;
 
@@ -1638,6 +1657,8 @@ namespace windowing_win32
    void window::set_keyboard_focus()
    {
 
+      information() << "set_keyboard_focus";
+
       HWND hwnd = get_hwnd();
 
       HWND hwndThreadPreviousFocus = ::SetFocus(hwnd);
@@ -1673,6 +1694,8 @@ namespace windowing_win32
 
    void window::set_active_window()
    {
+
+      information() << "set_active_window";
 
       HWND hwnd = get_hwnd();
 
@@ -1972,20 +1995,7 @@ namespace windowing_win32
          if (is_equivalent_in_equivalence_sink(edisplayOutput, e_display_normal))
          {
 
-            if (eactivation & e_activation_set_active
-               || eactivation & e_activation_set_foreground
-               || eactivation & e_activation_on_center_of_screen)
-            {
-
-               if (::IsZoomed(hwnd) || ::IsIconic(hwnd))
-               {
-
-                  ::ShowWindow(hwnd, SW_NORMAL);
-
-               }
-
-            }
-            else if (edisplayWindow == e_display_zoomed)
+            if (edisplayWindow == e_display_zoomed)
             {
 
                ::ShowWindow(hwnd, SW_RESTORE);
@@ -1994,7 +2004,30 @@ namespace windowing_win32
             else
             {
 
-               ::ShowWindow(hwnd, SW_SHOWNOACTIVATE);
+               if (eactivation & e_activation_set_active
+               || eactivation & e_activation_set_foreground
+               || eactivation & e_activation_on_center_of_screen)
+               {
+
+                  if (::IsZoomed(hwnd) || ::IsIconic(hwnd))
+                  {
+
+                     ::ShowWindow(hwnd, SW_NORMAL);
+
+                  }
+
+               }
+               else
+               {
+
+                  if (::IsZoomed(hwnd) || ::IsIconic(hwnd))
+                  {
+
+                     ::ShowWindow(hwnd, SW_SHOWNOACTIVATE);
+
+                  }
+
+               }
 
             }
 
@@ -2611,6 +2644,8 @@ namespace windowing_win32
 
       if (eactivation & e_activation_set_foreground)
       {
+
+         information() << "__set_window_position SetForegroundWindow BringWindowToTop SetActiveWindow";
 
          ::SetForegroundWindow(hwnd);
 
@@ -3659,7 +3694,12 @@ namespace windowing_win32
       if (nFlags)
       {
 
-         ::SetWindowPos(get_hwnd(), 0, 0, 0, 0, 0, SWP_NOSIZE | SWP_NOZORDER | SWP_NOMOVE | nFlags);
+         ::SetWindowPos(get_hwnd(), 0, 0, 0, 0, 0, 
+            SWP_NOSIZE
+            | SWP_NOZORDER 
+            | SWP_NOMOVE 
+            | SWP_NOACTIVATE
+            | nFlags);
 
       }
 
