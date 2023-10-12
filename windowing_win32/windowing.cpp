@@ -14,6 +14,7 @@
 #include "win32.h"
 #include "window_util.h"
 #include "acme/constant/message.h"
+#include "acme/constant/user_key.h"
 #include "acme/exception/exception.h"
 #include "apex/platform/system.h"
 #include "aura/message/user.h"
@@ -1073,7 +1074,6 @@ namespace windowing_win32
 
    void windowing::initialize_keyboard(::windowing::keyboard* pkeyboard)
    {
-
 
       for (char ch = 'A'; ch <= 'Z'; ch++)
       {
