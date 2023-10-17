@@ -564,6 +564,14 @@ namespace windowing_win32
 //});
                //bool bWindowsApplyVisual = true;
 
+               if (!pimpl
+                  || !pimpl->m_puserinteraction)
+               {
+
+                  return;
+
+               }
+
                auto & edisplayOutput = pimpl->m_puserinteraction->const_layout().output().m_edisplay;
 
                auto & edisplayDesign = pimpl->m_puserinteraction->const_layout().design().m_edisplay;

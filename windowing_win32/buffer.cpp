@@ -933,6 +933,14 @@ namespace windowing_win32
 
                   //}
 
+                  if (!m_pimpl
+                     || !m_pimpl->m_puserinteraction)
+                  {
+
+                     return false;
+
+                  }
+
                   if (m_pimpl->m_puserinteraction->const_layout().window().origin() != point)
                   {
 
