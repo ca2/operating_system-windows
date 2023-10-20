@@ -958,7 +958,7 @@ namespace aura_windows
    //      if (m_puserinteraction->is_message_only_window() || m_puserinteraction.cast <::user::system_interaction >())
    //      {
 
-   //         information("good : opt out!");
+   //         informationf("good : opt out!");
 
    //      }
 
@@ -1192,7 +1192,7 @@ namespace aura_windows
       //if (rectangleX.size() != m_puserinteraction->m_size)
       //{
 
-      //   information("ATTENTION!! Client Size <> Window Size");
+      //   informationf("ATTENTION!! Client Size <> Window Size");
 
       //}
 
@@ -3689,7 +3689,7 @@ void interaction_impl::on_message_size(::message::message* pmessage)
 //      // TODO: Add your message handler code here and/or call default
 //      //if(bCalcValidRects)
 //      //{
-//      //   information("1");
+//      //   informationf("1");
 //      //   pncsp->rgrc[0].left() = lpncsp->lppos->x + 1;
 //
 //      //   pncsp->rgrc[0].right() = lpncsp->lppos->x + lpncsp->lppos->cx - 1;
@@ -3708,7 +3708,7 @@ void interaction_impl::on_message_size(::message::message* pmessage)
 //      //   prectangle->bottom()--;
 //      //   prectangle->right()--;
 //
-//      //   information("2");
+//      //   informationf("2");
 //      //}
 //      const rectangle_i32& nonclient = pncsp->rgrc[0];
 //
@@ -4433,51 +4433,51 @@ void interaction_impl::set_tool_window(bool bSet)
 //            switch (message)
 //            {
 //            case e_message_create:
-//               information("e_message_create wparam=%08x lparam=%08x", pusermessage->m_wparam, pusermessage->m_lparam);
+//               informationf("e_message_create wparam=%08x lparam=%08x", pusermessage->m_wparam, pusermessage->m_lparam);
 //
 //               break;
 //            case e_message_window_position_changing:
-//               information("e_message_window_position_changing wparam=%08x lparam=%08x", pusermessage->m_wparam, pusermessage->m_lparam);
+//               informationf("e_message_window_position_changing wparam=%08x lparam=%08x", pusermessage->m_wparam, pusermessage->m_lparam);
 //
 //               break;
 //            case e_message_window_position_changed:
-//               information("e_message_window_position_changed wparam=%08x lparam=%08x", pusermessage->m_wparam, pusermessage->m_lparam);
+//               informationf("e_message_window_position_changed wparam=%08x lparam=%08x", pusermessage->m_wparam, pusermessage->m_lparam);
 //
 //               break;
 //            case e_message_activate:
-//               information("e_message_activate wparam=%08x lparam=%08x", pusermessage->m_wparam, pusermessage->m_lparam);
+//               informationf("e_message_activate wparam=%08x lparam=%08x", pusermessage->m_wparam, pusermessage->m_lparam);
 //
 //               break;
 //            case WM_ACTIVATEAPP:
-//               information("WM_ACTIVATEAPP wparam=%08x lparam=%08x", pusermessage->m_wparam, pusermessage->m_lparam);
+//               informationf("WM_ACTIVATEAPP wparam=%08x lparam=%08x", pusermessage->m_wparam, pusermessage->m_lparam);
 //
 //               break;
 //            case e_message_mouse_activate:
-//               information("e_message_mouse_activate wparam=%08x lparam=%08x", pusermessage->m_wparam, pusermessage->m_lparam);
+//               informationf("e_message_mouse_activate wparam=%08x lparam=%08x", pusermessage->m_wparam, pusermessage->m_lparam);
 //
 //               break;
 //            case e_message_non_client_activate:
-//               information("e_message_non_client_activate wparam=%08x lparam=%08x", pusermessage->m_wparam, pusermessage->m_lparam);
+//               informationf("e_message_non_client_activate wparam=%08x lparam=%08x", pusermessage->m_wparam, pusermessage->m_lparam);
 //
 //               break;
 //            case e_message_set_focus:
-//               information("e_message_set_focus wparam=%08x lparam=%08x", pusermessage->m_wparam, pusermessage->m_lparam);
+//               informationf("e_message_set_focus wparam=%08x lparam=%08x", pusermessage->m_wparam, pusermessage->m_lparam);
 //
 //               break;
 //            case e_message_kill_focus:
-//               information("e_message_kill_focus wparam=%08x lparam=%08x", pusermessage->m_wparam, pusermessage->m_lparam);
+//               informationf("e_message_kill_focus wparam=%08x lparam=%08x", pusermessage->m_wparam, pusermessage->m_lparam);
 //
 //               break;
 //            case e_message_move:
-//               information("e_message_move wparam=%08x lparam=%08x", pusermessage->m_wparam, pusermessage->m_lparam);
+//               informationf("e_message_move wparam=%08x lparam=%08x", pusermessage->m_wparam, pusermessage->m_lparam);
 //
 //               break;
 //            case e_message_size:
-//               information("e_message_size wparam=%08x lparam=%08x", pusermessage->m_wparam, pusermessage->m_lparam);
+//               informationf("e_message_size wparam=%08x lparam=%08x", pusermessage->m_wparam, pusermessage->m_lparam);
 //
 //               break;
 //            default:
-//               information("MESSAGE %08x wparam=%08x lparam=%08x", message, pusermessage->m_wparam, pusermessage->m_lparam);
+//               informationf("MESSAGE %08x wparam=%08x lparam=%08x", message, pusermessage->m_wparam, pusermessage->m_lparam);
 //
 //               break;
 //            }
@@ -4564,7 +4564,7 @@ void interaction_impl::set_tool_window(bool bSet)
 //         if (message == e_message_left_button_down)
 //         {
 //
-//            information("e_message_left_button_down");
+//            informationf("e_message_left_button_down");
 //
 //            string strType = ::str().demangle(m_puserinteraction->type_name());
 //
@@ -4579,19 +4579,19 @@ void interaction_impl::set_tool_window(bool bSet)
 //         else if (message == e_message_left_button_up)
 //         {
 //
-//            information("e_message_left_button_up");
+//            informationf("e_message_left_button_up");
 //
 //         }
 //         else if (message == e_message_non_client_left_button_up)
 //         {
 //
-//            information("e_message_non_client_left_button_up");
+//            informationf("e_message_non_client_left_button_up");
 //
 //         }
 //         else if (message == e_message_non_client_left_button_down)
 //         {
 //
-//            information("e_message_non_client_left_button_down");
+//            informationf("e_message_non_client_left_button_down");
 //
 //            string strType;
 //
@@ -5096,51 +5096,51 @@ void interaction_impl::set_tool_window(bool bSet)
 //            switch (message)
 //            {
 //            case e_message_create:
-//               information("e_message_create wparam=%08x lparam=%08x", pmessage->m_wparam, pmessage->m_lparam);
+//               informationf("e_message_create wparam=%08x lparam=%08x", pmessage->m_wparam, pmessage->m_lparam);
 //
 //               break;
 //            case e_message_window_position_changing:
-//               information("e_message_window_position_changing wparam=%08x lparam=%08x", pmessage->m_wparam, pmessage->m_lparam);
+//               informationf("e_message_window_position_changing wparam=%08x lparam=%08x", pmessage->m_wparam, pmessage->m_lparam);
 //
 //               break;
 //            case e_message_window_position_changed:
-//               information("e_message_window_position_changed wparam=%08x lparam=%08x", pmessage->m_wparam, pmessage->m_lparam);
+//               informationf("e_message_window_position_changed wparam=%08x lparam=%08x", pmessage->m_wparam, pmessage->m_lparam);
 //
 //               break;
 //            case e_message_activate:
-//               information("e_message_activate wparam=%08x lparam=%08x", pmessage->m_wparam, pmessage->m_lparam);
+//               informationf("e_message_activate wparam=%08x lparam=%08x", pmessage->m_wparam, pmessage->m_lparam);
 //
 //               break;
 //            case e_message_activate_app:
-//               information("WM_ACTIVATEAPP wparam=%08x lparam=%08x", pmessage->m_wparam, pmessage->m_lparam);
+//               informationf("WM_ACTIVATEAPP wparam=%08x lparam=%08x", pmessage->m_wparam, pmessage->m_lparam);
 //
 //               break;
 //            case e_message_mouse_activate:
-//               information("e_message_mouse_activate wparam=%08x lparam=%08x", pmessage->m_wparam, pmessage->m_lparam);
+//               informationf("e_message_mouse_activate wparam=%08x lparam=%08x", pmessage->m_wparam, pmessage->m_lparam);
 //
 //               break;
 //            case e_message_non_client_activate:
-//               information("e_message_non_client_activate wparam=%08x lparam=%08x", pmessage->m_wparam, pmessage->m_lparam);
+//               informationf("e_message_non_client_activate wparam=%08x lparam=%08x", pmessage->m_wparam, pmessage->m_lparam);
 //
 //               break;
 //            case e_message_set_focus:
-//               information("e_message_set_focus wparam=%08x lparam=%08x", pmessage->m_wparam, pmessage->m_lparam);
+//               informationf("e_message_set_focus wparam=%08x lparam=%08x", pmessage->m_wparam, pmessage->m_lparam);
 //
 //               break;
 //            case e_message_kill_focus:
-//               information("e_message_kill_focus wparam=%08x lparam=%08x", pmessage->m_wparam, pmessage->m_lparam);
+//               informationf("e_message_kill_focus wparam=%08x lparam=%08x", pmessage->m_wparam, pmessage->m_lparam);
 //
 //               break;
 //            case e_message_move:
-//               information("e_message_move wparam=%08x lparam=%08x", pmessage->m_wparam, pmessage->m_lparam);
+//               informationf("e_message_move wparam=%08x lparam=%08x", pmessage->m_wparam, pmessage->m_lparam);
 //
 //               break;
 //            case e_message_size:
-//               information("e_message_size wparam=%08x lparam=%08x", pmessage->m_wparam, pmessage->m_lparam);
+//               informationf("e_message_size wparam=%08x lparam=%08x", pmessage->m_wparam, pmessage->m_lparam);
 //
 //               break;
 //            default:
-//               information("MESSAGE %08x wparam=%08x lparam=%08x", message, pmessage->m_wparam, pmessage->m_lparam);
+//               informationf("MESSAGE %08x wparam=%08x lparam=%08x", message, pmessage->m_wparam, pmessage->m_lparam);
 //
 //               break;
 //            }

@@ -3292,7 +3292,7 @@ namespace apex_windows
       //   if(!regkey.set(strTargetProgId, ""))
       //   {
 
-      //      information("Failure to set .htm/OpenWithProgids");
+      //      informationf("Failure to set .htm/OpenWithProgids");
 
       //   }
 

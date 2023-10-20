@@ -14,6 +14,9 @@ namespace appfy
 
         application();
         ~application() override;
+      
+      __DECLARE_APPLICATION_RELEASE_TIME();
+
 
 
         virtual void on_request(::create* pcreate) override;

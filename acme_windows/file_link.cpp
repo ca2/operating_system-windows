@@ -110,7 +110,7 @@ namespace acme_windows
             if (FAILED(hresultGetIDList))
             {
 
-               information("Failed to get ID Link %s", path.c_str());
+               informationf("Failed to get ID Link %s", path.c_str());
 
             }
 

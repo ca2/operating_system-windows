@@ -15,7 +15,10 @@ namespace aura
 
    //
    //
-   //   application::application() :
+   //   __IMPLEMENT_APPLICATION_RELEASE_TIME();
+
+
+   application::application() :
    //      ::object(pobject)
    //   {
    //

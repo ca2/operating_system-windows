@@ -362,7 +362,7 @@ namespace draw2d_gdiplus
          catch(...)
          {
 
-            information("graphics::set(::draw2d::bitmap *) : Failed to delete Gdiplus::Graphics");
+            informationf("graphics::set(::draw2d::bitmap *) : Failed to delete Gdiplus::Graphics");
 
          }
 
@@ -4040,7 +4040,7 @@ namespace draw2d_gdiplus
          catch (...)
          {
 
-            information("graphics::DeleteDC : Failed to delete Gdiplus::Graphics");
+            informationf("graphics::DeleteDC : Failed to delete Gdiplus::Graphics");
 
          }
 
@@ -4056,7 +4056,7 @@ namespace draw2d_gdiplus
          if (!bDeleted)
          {
 
-            information("graphics::DeleteDC : Failed to delete GDI device context");
+            informationf("graphics::DeleteDC : Failed to delete GDI device context");
 
          }
 
@@ -4188,7 +4188,7 @@ namespace draw2d_gdiplus
       catch(...)
       {
 
-         information("graphics::Detach : Failed to delete Gdiplus::Graphics");
+         informationf("graphics::Detach : Failed to delete Gdiplus::Graphics");
 
       }
 

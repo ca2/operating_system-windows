@@ -68,7 +68,7 @@ void * __node_library_open(const scoped_string & strPath, string & strMessage)
    if (plibrary != nullptr)
    {
 
-      //information("Loaded Library (1) %s", strPath.c_str());
+      //informationf("Loaded Library (1) %s", strPath.c_str());
 
       goto finished;
 

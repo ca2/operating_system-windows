@@ -122,7 +122,7 @@ namespace draw2d_gdiplus
             if (pfont->m_familya[iFamily].GetLastStatus() != Gdiplus::Ok)
             {
 
-               warning("font family nok");
+               warningf("font family nok");
 
             }
 

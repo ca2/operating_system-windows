@@ -351,7 +351,7 @@ Opened:
 
          //   if(::success != (mmr = xaudio7::translate(waveOutUnprepareHeader(m_hwaveout, wave_hdr(i), sizeof(WAVEHDR)))))
          //   {
-         //      information("ERROR OPENING Unpreparing INPUT DEVICE buffer =%d", mmr);
+         //      informationf("ERROR OPENING Unpreparing INPUT DEVICE buffer =%d", mmr);
          //   }
 
          //   delete wave_hdr(i);
@@ -377,7 +377,7 @@ Opened:
 
          if(out_get_state() != e_state_playing)
          {
-            information("ERROR out::BufferReady while out_get_state() != e_state_playing");
+            informationf("ERROR out::BufferReady while out_get_state() != e_state_playing");
             return;
          }
 

@@ -114,7 +114,7 @@ LRESULT CALLBACK __window_procedure(HWND hwnd, UINT message, WPARAM wparam, LPAR
             if (dwResult)
             {
 
-               pwindow->information("__window_procedure SetWindowLongPtr Failed");
+               pwindow->informationf("__window_procedure SetWindowLongPtr Failed");
 
             }
 
@@ -147,19 +147,19 @@ LRESULT CALLBACK __window_procedure(HWND hwnd, UINT message, WPARAM wparam, LPAR
    if (message == WM_KEYDOWN)
    {
 
-      pwindow->information("WM_KEYDOWN");
+      pwindow->informationf("WM_KEYDOWN");
 
    }
    else if (message == WM_SYSKEYDOWN)
    {
 
-      pwindow->information("WM_SYSKEYDOWN");
+      pwindow->informationf("WM_SYSKEYDOWN");
 
    }
    else if (message == e_message_show_window)
    {
 
-      pwindow->information("e_message_show_window");
+      pwindow->informationf("e_message_show_window");
 
    }
    else if (message == e_message_left_button_double_click)
@@ -222,26 +222,26 @@ LRESULT CALLBACK __window_procedure(HWND hwnd, UINT message, WPARAM wparam, LPAR
    if (message == e_message_activate)
    {
 
-      puserinteraction->information("__window_procedure e_message_activate");
+      puserinteraction->informationf("__window_procedure e_message_activate");
 
    }
    else if (message == e_message_create)
    {
 
-      puserinteraction->information("e_message_create");
+      puserinteraction->informationf("e_message_create");
 
    }
 
    if (message == e_message_left_button_down)
    {
 
-      puserinteraction->information("e_message_left_button_down");
+      puserinteraction->informationf("e_message_left_button_down");
 
    }
    else if (message == e_message_left_button_up)
    {
 
-      puserinteraction->information("e_message_left_button_up");
+      puserinteraction->informationf("e_message_left_button_up");
 
    }
    else if (message == 33815)
@@ -252,7 +252,7 @@ LRESULT CALLBACK __window_procedure(HWND hwnd, UINT message, WPARAM wparam, LPAR
       if (strType.contains("list_box"))
       {
 
-         puserinteraction->information("list_box");
+         puserinteraction->informationf("list_box");
 
       }
 

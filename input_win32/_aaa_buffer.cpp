@@ -506,7 +506,7 @@ namespace windowing_win32
 
       auto sizeLayeredWindowBuffer = playeredwindowbuffer->m_pixmap.size();
 
-      //information("windowing_win32::buffer::update_screen size(%d, %d)", size.cx(), size.cy());
+      //informationf("windowing_win32::buffer::update_screen size(%d, %d)", size.cx(), size.cy());
 
       auto pixmapRawData = playeredwindowbuffer->m_pixmap.m_pimage32Raw;
 
@@ -825,7 +825,7 @@ namespace windowing_win32
                if (::GetWindowRect(get_hwnd(), &rectangleProbe))
                {
 
-                  information("GetWindowRect (%d, %d) - (%d, %d)", rectangleProbe.left, rectangleProbe.top, rectangleProbe.right, rectangleProbe.bottom);
+                  informationf("GetWindowRect (%d, %d) - (%d, %d)", rectangleProbe.left, rectangleProbe.top, rectangleProbe.right, rectangleProbe.bottom);
 
                }
 
@@ -933,7 +933,7 @@ namespace windowing_win32
                }
                //else
                //{
-               //   information("Update discarded");
+               //   informationf("Update discarded");
 
                //}
 
@@ -950,13 +950,13 @@ namespace windowing_win32
                //if (g_pointLastBottomRight != pointBottomRight)
                //{
 
-               //   information("UpdateLayeredWindow Changed");
+               //   informationf("UpdateLayeredWindow Changed");
 
                //   g_pointLastBottomRight = pointBottomRight;
 
                //}
 
-               //information("UpdateLayeredWindow Bottom Right (%d, %d)", pointBottomRight.x(), pointBottomRight.y());
+               //informationf("UpdateLayeredWindow Bottom Right (%d, %d)", pointBottomRight.x(), pointBottomRight.y());
 
 
             }

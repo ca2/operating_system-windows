@@ -382,7 +382,7 @@
 #      ifndef PNG_PRIVATE
 #        if 0 /* Doesn't work so we use deprecated instead*/
 #          define PNG_PRIVATE \
-            __attribute__((warning("This function is not exported by libpng.")))
+            __attribute__((warningf("This function is not exported by libpng.")))
 #        else
 #          define PNG_PRIVATE \
             __attribute__((__deprecated__))

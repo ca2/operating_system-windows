@@ -251,7 +251,7 @@ namespace multimedia
 
          //   if(MMSYSERR_NOERROR != (mmr =  directsound::translate(waveOutPrepareHeader(m_hwaveout, directsound::create_new_WAVEHDR(m_pwavebuffer, i), sizeof(WAVEHDR)))))
          //   {
-         //      information("ERROR OPENING Preparing INPUT DEVICE buffer");
+         //      informationf("ERROR OPENING Preparing INPUT DEVICE buffer");
          //      return mmr;
          //   }
          //}
@@ -341,8 +341,8 @@ namespace multimedia
          if(mmr != ::success)
          {
 
-            //information("%s", ::multimedia::strerror(mmr));
-            information("%d", mmr);
+            //informationf("%s", ::multimedia::strerror(mmr));
+            informationf("%d", mmr);
 
             return mmr;
 
@@ -434,7 +434,7 @@ namespace multimedia
 
          //   if(::success != (mmr = directsound::translate(waveOutUnprepareHeader(m_hwaveout, wave_hdr(i), sizeof(WAVEHDR)))))
          //   {
-         //      information("ERROR OPENING Unpreparing INPUT DEVICE buffer =%d", mmr);
+         //      informationf("ERROR OPENING Unpreparing INPUT DEVICE buffer =%d", mmr);
          //   }
 
          //   delete wave_hdr(i);

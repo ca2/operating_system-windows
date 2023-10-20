@@ -449,7 +449,7 @@
                {
                   pslBalance->SetPos(nBalance);
                }
-               information("Left %d Right %d nBalance %d\n", nLeftValue, nRightValue, nBalance);
+               informationf("Left %d Right %d nBalance %d\n", nLeftValue, nRightValue, nBalance);
             }
             else if(cChannels == 1)
             {
