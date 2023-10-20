@@ -555,7 +555,7 @@ namespace audio_mmsystem
       if (::success != estatus)
       {
 
-         information( "waveOutGetPosition() returned %llu", estatus.as_i64());
+         informationf( "waveOutGetPosition() returned %llu", estatus.as_i64());
 
          return 0_s;
 
