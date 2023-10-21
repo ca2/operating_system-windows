@@ -1214,7 +1214,7 @@ namespace file
 
    //   strExtra += m_strAdd;
 
-   //   strMessage.format("file error number: %d - %s - file: %s", m_estatus.m_estatus, strExtra.c_str(), strFileName.c_str());
+   //   strMessage.formatf("file error number: %d - %s - file: %s", m_estatus.m_estatus, strExtra.c_str(), strFileName.c_str());
 
    //   str = strMessage;
 

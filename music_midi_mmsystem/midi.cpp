@@ -299,13 +299,13 @@ namespace music
             if (caps.szPname != nullptr)
             {
 
-               strName.format("%s (%d)", caps.szPname, i);
+               strName.formatf("%s (%d)", caps.szPname, i);
 
             }
             else
             {
 
-               strName.format("(no name midi In device) (%d)", i);
+               strName.formatf("(no name midi In device) (%d)", i);
 
             }
 
@@ -362,7 +362,7 @@ namespace music
             if (caps.szPname != nullptr)
             {
 
-               strName.format("%S (%d)", caps.szPname, i);
+               strName.formatf("%S (%d)", caps.szPname, i);
 
                m_straMidiOutName.add(caps.szPname);
 
@@ -370,7 +370,7 @@ namespace music
             else
             {
 
-               strName.format("(no name midi Out device) (%d)", i);
+               strName.formatf("(no name midi Out device) (%d)", i);
 
                m_straMidiOutName.add(strName);
 

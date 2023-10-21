@@ -45,7 +45,7 @@
 HRESULT SetTouchDisableProperty(HWND hwnd, BOOL fDisableTouch);
 
 ::u32 get_dpi_for_window(oswindow hwnd);
-
+bool is_registered_windows_message(::u32 message);
 
 //CLASS_DECL_ACME HWND windows_get_mouse_capture();
 
@@ -451,7 +451,7 @@ namespace windowing_win32
 
          string strMessage;
 
-         strMessage.format("%s\n\nSystem Error Code: %d", strLastError.c_str(), dwLastError);
+         strMessage.formatf("%s\n\nSystem Error Code: %d", strLastError.c_str(), dwLastError);
 
          warning()(e_trace_category_appmsg) << "Warning: Window creation failed: get_last_error returned:";
 
@@ -2163,7 +2163,7 @@ namespace windowing_win32
    //
    //         pwindow = m_pimpl->m_pwindow;
    //
-   //         pwindow->__set_window_position(
+   //         __set_window_position(
    //            m_pimpl->m_puserinteraction->const_layout().design().zorder(),
    //            point.x(),
    //            point.y(),
@@ -7196,157 +7196,294 @@ namespace windowing_win32
    //}
 
 
+   LRESULT window::__window_procedure(HWND hwnd, UINT message, WPARAM wparam, LPARAM lparam)
+   {
+
+
+      lresult lresult = 0;
+
+      if (message == WM_KEYDOWN)
+      {
+
+         informationf("WM_KEYDOWN");
+
+      }
+      else if (message == WM_SYSKEYDOWN)
+      {
+
+         informationf("WM_SYSKEYDOWN");
+
+      }
+      else if (message == e_message_show_window)
+      {
+
+         informationf("e_message_show_window");
+
+      }
+      else if (message == e_message_left_button_double_click)
+      {
+
+         information() << "e_message_left_button_double_click";
+
+      }
+      else if (message == e_message_activate)
+      {
+
+         if (wparam > 0)
+         {
+
+            information() << "activation window " << (iptr)hwnd;
+
+            information() << "GetCapture " << (iptr)::GetCapture();
+
+         }
+
+         information() << "e_message_activate wparam : " << wparam;
+
+      }
+
+      if (is_registered_windows_message(message))
+      {
+
+         lresult = ::DefWindowProcW(hwnd, message, wparam, lparam);
+
+         return lresult;
+
+      }
+
+      auto pimpl = m_puserinteractionimpl;
+
+      if (pimpl)
+      {
+
+         if (pimpl->__windows_message_bypass(this, message, wparam, (iptr)lparam, lresult))
+         {
+
+            return lresult;
+
+         }
+
+      }
+
+      //return ::DefWindowProcW(hwnd, message, wparam, lparam);
+
+      //auto psystem = pimpl->acmesystem();
+
+      pimpl->m_uiMessage = message;
+
+      pimpl->m_wparam = wparam;
+
+      pimpl->m_lparam = lparam;
+
+      auto puserinteraction = pimpl->m_puserinteraction;
+
+      if (message == e_message_activate)
+      {
+
+         puserinteraction->informationf("__window_procedure e_message_activate");
+
+      }
+      else if (message == e_message_create)
+      {
+
+         puserinteraction->informationf("e_message_create");
+
+      }
+
+      if (message == e_message_left_button_down)
+      {
+
+         puserinteraction->informationf("e_message_left_button_down");
+
+      }
+      else if (message == e_message_left_button_up)
+      {
+
+         puserinteraction->informationf("e_message_left_button_up");
+
+      }
+      else if (message == e_message_right_button_up)
+      {
+
+         HMENU menu = GetSystemMenu(hwnd, false);
+         SetForegroundWindow(hwnd);
+         TrackPopupMenu(menu, TPM_LEFTALIGN | TPM_BOTTOMALIGN, 0, 0, 0, hwnd, NULL);
+         PostMessage(hwnd, WM_NULL, 0, 0);
+      }
+      else if (message == 33815)
+      {
+
+         string strType = ::type(puserinteraction).name();
+
+         if (strType.contains("list_box"))
+         {
+
+            puserinteraction->informationf("list_box");
+
+         }
+
+      }
+
+      if (message == e_message_mouse_move)
+      {
+
+         if (lparam == pimpl->m_lparamLastMouseMove)
+         {
+
+            return 0;
+
+         }
+
+         pimpl->m_lparamLastMouseMove = lparam;
+
+         ::point_i32 pointMouseMove(i32_x(lparam), i32_y(lparam));
+
+         if (pimpl->m_pointMouseMove == pointMouseMove)
+         {
+
+            return 0;
+
+         }
+
+         pimpl->m_pointMouseMove = pointMouseMove;
+
+         if (m_pointMouseMove == pointMouseMove)
+         {
+
+            return 0;
+
+         }
+
+         m_pointMouseMove = pointMouseMove;
+
+         m_timeLastMouseMove.Now();
+
+      }
+      else if (message == e_message_timer)
+      {
+
+         //if (wparam == e_timer_transparent_mouse_event)
+         //{
+
+         //   if (pimpl->m_pointMouseMove == pointMouseMove)
+         //   {
+
+         //      return 0;
+
+         //   }
+
+         //   pimpl->m_pointCursor = pointCursor;
+
+         //   lparam = MAKELPARAM(pointCursor.x(), pointCursor.y());
+
+         //   pimpl->call_message_handler(e_message_mouse_move, 0, lparam);
+
+         //}
+         //else
+         //{
+
+         //   // ignoring Timer Event
+
+         //   output_debug_string("iTE\n");
+
+         //}
+
+         return 0;
+
+      }
+
+      if (pimpl->m_bDestroyImplOnly || ::is_null(puserinteraction))
+      {
+
+         auto pmessage = pimpl->get_message((enum_message)message, wparam, (iptr)lparam);
+
+         try
+         {
+
+            pimpl->message_handler(pmessage);
+
+         }
+         catch (...)
+         {
+
+         }
+
+         if (!pmessage->m_bRet)
+         {
+
+            pimpl->default_message_handler(pmessage);
+
+         }
+
+         lresult = pmessage->m_lresult;
+
+      }
+      else if (::is_set(puserinteraction))
+      {
+
+         if (message == WM_GETTEXT)
+         {
+
+            return ::DefWindowProcW(hwnd, message, wparam, lparam);
+
+         }
+         else if (message == WM_GETTEXTLENGTH)
+         {
+
+            return ::DefWindowProcW(hwnd, message, wparam, lparam);
+
+         }
+         else if (message == WM_SETTEXT)
+         {
+
+            return ::DefWindowProcW(hwnd, message, wparam, lparam);
+
+         }
+         if (message == 34831)
+         {
+
+            //output_debug_string("message34381");
+         }
+         auto pmessage = pimpl->get_message((enum_message)message, wparam, (iptr)lparam);
+
+         try
+         {
+
+            //puserinteraction->message_handler(pmessage);
+            message_handler(pmessage);
+
+         }
+         catch (::exception & e)
+         {
+
+            get_task()->handle_exception(e);
+
+         }
+         catch (...)
+         {
+
+         }
+
+         if (!pmessage->m_bRet)
+         {
+
+            puserinteraction->default_message_handler(pmessage);
+
+         }
+
+         lresult = pmessage->m_lresult;
+
+      }
+      else
+      {
+
+         lresult = ::DefWindowProcW(hwnd, message, wparam, lparam);
+
+      }
+
+      return lresult;
+
+   }
+
 
 } // namespace windowing_win32
-
-
-namespace windows
-{
-
-
-   HWND get_mouse_capture(itask_t itask)
-   {
-
-      GUITHREADINFO info = {};
-
-      info.cbSize = sizeof(GUITHREADINFO);
-
-      HWND hwndCapture = nullptr;
-
-      if (GetGUIThreadInfo((DWORD)itask, &info))
-      {
-
-         hwndCapture = info.hwndCapture;
-
-      }
-
-      if (!hwndCapture)
-      {
-
-         hwndCapture = ::GetCapture();
-
-      }
-
-      return hwndCapture;
-
-   }
-
-
-   bool set_mouse_capture(itask_t itask, HWND hwnd)
-   {
-
-      GUITHREADINFO info = {};
-
-      info.cbSize = sizeof(GUITHREADINFO);
-
-      if (::GetGUIThreadInfo((DWORD)itask, &info))
-      {
-
-         if (info.hwndCapture == hwnd)
-         {
-
-            return false;
-
-         }
-
-         DWORD currentThreadId = ::GetCurrentThreadId();
-
-         if ((DWORD)itask != currentThreadId)
-         {
-
-            ::AttachThreadInput(currentThreadId, (DWORD)itask, TRUE);
-
-         }
-
-         ::SetCapture(hwnd);
-
-         if ((DWORD)itask != currentThreadId)
-         {
-
-            ::AttachThreadInput(currentThreadId, (DWORD)itask, FALSE);
-
-         }
-
-      }
-      else
-      {
-
-         auto hwndCapture = ::GetCapture();
-
-         if (hwndCapture == hwnd)
-         {
-
-            return false;
-
-         }
-
-         ::SetCapture(hwnd);
-
-      }
-
-      return true;
-
-   }
-
-
-   bool defer_release_mouse_capture(itask_t itask, HWND hwnd)
-   {
-
-      GUITHREADINFO info = {};
-
-      info.cbSize = sizeof(GUITHREADINFO);
-
-      if (::GetGUIThreadInfo((DWORD)itask, &info))
-      {
-
-         if (info.hwndCapture != hwnd)
-         {
-
-            return false;
-
-         }
-
-         DWORD currentThreadId = ::GetCurrentThreadId();
-
-         if ((DWORD)itask != currentThreadId)
-         {
-
-            ::AttachThreadInput(currentThreadId, (DWORD)itask, TRUE);
-
-         }
-
-         ::ReleaseCapture();
-
-         if ((DWORD)itask != currentThreadId)
-         {
-
-            ::AttachThreadInput(currentThreadId, (DWORD)itask, FALSE);
-
-         }
-
-      }
-      else
-      {
-
-         auto hwndCapture = ::GetCapture();
-
-         if (hwndCapture == hwnd)
-         {
-
-            return false;
-
-         }
-
-         ::ReleaseCapture();
-
-      }
-
-      return true;
-
-   }
-
-
-} // namespace windowss
-
-
-

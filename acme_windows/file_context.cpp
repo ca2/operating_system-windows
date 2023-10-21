@@ -256,7 +256,7 @@ namespace acme_windows
 
                   string strError;
 
-                  strError.format("Failed to delete the file to move \"%s\" error=%d", psz, dwError);
+                  strError.formatf("Failed to delete the file to move \"%s\" error=%d", psz, dwError);
 
                   information() << "%s", strError;
 
@@ -272,7 +272,7 @@ namespace acme_windows
 
          string strError;
 
-         strError.format("Failed to move file \"%s\" to \"%s\" error=%d", psz, pszNew, dwError);
+         strError.formatf("Failed to move file \"%s\" to \"%s\" error=%d", psz, pszNew, dwError);
 
          throw ::exception(::error_io, strError);
 
@@ -371,7 +371,7 @@ namespace acme_windows
 
       //   //string strError;
 
-      //   //strError.format("Failed to delete file \"%s\" error=%d", psz, dwError);
+      //   //strError.formatf("Failed to delete file \"%s\" error=%d", psz, dwError);
 
       //   throw ::file::exception(estatus, errorcode, path, "Failed to open file to be deleted.");
 

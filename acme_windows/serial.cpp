@@ -125,10 +125,10 @@ namespace acme_windows
          {
          case ERROR_FILE_NOT_FOUND:
             // Use this->getPort to convert to a std::string
-            str.format("Specified port, %d, does not exist.", this->getPort());
+            str.formatf("Specified port, %d, does not exist.", this->getPort());
             throw ::exception(error_serial, str);
          default:
-            str.format("Unknown error opening the serial port: %d", dwLastError);
+            str.formatf("Unknown error opening the serial port: %d", dwLastError);
             throw ::exception(error_serial, str);
          }
       }
@@ -436,7 +436,7 @@ namespace acme_windows
 
                DWORD dwLastError = ::GetLastError();
 
-               str.format("Error while closing serial port: %d", dwLastError);
+               str.formatf("Error while closing serial port: %d", dwLastError);
                throw ::exception(error_io, str);
             }
             else
@@ -478,7 +478,7 @@ namespace acme_windows
 
          DWORD dwLastError = ::GetLastError();
 
-         str.format("Error while checking status of the serial port: %d", dwLastError);
+         str.formatf("Error while checking status of the serial port: %d", dwLastError);
 
          throw ::exception(error_io, str);
 
@@ -534,7 +534,7 @@ namespace acme_windows
 
          DWORD dwLastError = ::GetLastError();
 
-         ss.format("Error while reading from the serial port: %d", dwLastError);
+         ss.formatf("Error while reading from the serial port: %d", dwLastError);
 
          throw ::exception(error_io, ss);
 
@@ -564,7 +564,7 @@ namespace acme_windows
 
          DWORD dwLastError = ::GetLastError();
 
-         str.format("Error while writing to the serial port: %d", dwLastError);
+         str.formatf("Error while writing to the serial port: %d", dwLastError);
 
          throw ::exception(error_io, str);
 

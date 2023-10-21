@@ -1152,7 +1152,7 @@ namespace acme_windows
          string strFormat;
          ::earth::time time;
          time = ::earth::time::now();
-         strFormat.format("%04d-%02d-%02d %02d-%02d-%02d\\", time.year(), time.month(), time.day(), time.hour(), time.minute(), time.second());
+         strFormat.formatf("%04d-%02d-%02d %02d-%02d-%02d\\", time.year(), time.month(), time.day(), time.hour(), time.minute(), time.second());
          str += strFormat;
          if (strDir.m_begin[2] == '\\')
          {

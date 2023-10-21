@@ -42,7 +42,7 @@ bool __windows_message_bypass(HWND oswindow, ::u32 message, wparam wparam, lpara
 
          //string str;
 
-         //str.format("\n%s", get_message_text(message, true).c_str());
+         //str.formatf("\n%s", get_message_text(message, true).c_str());
 
          //output_debug_string(str);
 
@@ -242,7 +242,7 @@ namespace windowing_win32
 
       string strMessageText = ::operating_system::get_message_text((::enum_message)message);
 
-      str.format("%s %d", strMessageText.c_str(), message, wparam, lparam);
+      str.formatf("%s %d", strMessageText.c_str(), message, wparam, lparam);
 
       if (message == e_message_activate)
       {

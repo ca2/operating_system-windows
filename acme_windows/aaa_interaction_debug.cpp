@@ -18,7 +18,7 @@ bool __windows_message_bypass(oswindow oswindow, const ::atom & atom, wparam wpa
 
          //string str;
 
-         //str.format("\n%s", get_message_text(message, true).c_str());
+         //str.formatf("\n%s", get_message_text(message, true).c_str());
 
          //output_debug_string(str);
 
@@ -220,7 +220,7 @@ namespace windows
 
       string str;
 
-      str.format("%s", get_message_text(message, true).c_str(), wparam, lparam);
+      str.formatf("%s", get_message_text(message, true).c_str(), wparam, lparam);
 
       if (message == e_message_activate)
       {

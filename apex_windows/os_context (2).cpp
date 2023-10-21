@@ -2077,7 +2077,7 @@ retry:
 
          //string str;
 
-         //str.format("ShellExecuteExW %d GetLastError = %d", iResult, dwLastError);
+         //str.formatf("ShellExecuteExW %d GetLastError = %d", iResult, dwLastError);
 
          //output_debug_string(str);
 

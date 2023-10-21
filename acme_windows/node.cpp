@@ -342,7 +342,7 @@ namespace acme_windows
 
       string str;
 
-      str.format("\n\n\nWindow Background Color rgb(%d,%d,%d)\n\n", colorWindowBackground.m_u8Red, colorWindowBackground.m_u8Green, colorWindowBackground.m_u8Blue);
+      str.formatf("\n\n\nWindow Background Color rgb(%d,%d,%d)\n\n", colorWindowBackground.m_u8Red, colorWindowBackground.m_u8Green, colorWindowBackground.m_u8Blue);
 
       ::output_debug_string(str);
 
@@ -1853,7 +1853,7 @@ namespace acme_windows
    //   {
    //      DWORD dwError = ::GetLastError();
    //      string str;
-   //      str.format("lookup Privilege value Error: %u\n", dwError);
+   //      str.formatf("lookup Privilege value Error: %u\n", dwError);
    //      message_box(str, "Help Me", e_message_box_ok);
    //      return false;
    //   }

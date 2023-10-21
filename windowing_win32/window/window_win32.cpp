@@ -18,6 +18,160 @@
 CLASS_DECL_WINDOWING_WIN32 WNDPROC windows_user_interaction_impl_get_window_procedure();
 
 
+namespace windows
+{
+
+
+   HWND get_mouse_capture(itask_t itask)
+   {
+
+      GUITHREADINFO info = {};
+
+      info.cbSize = sizeof(GUITHREADINFO);
+
+      HWND hwndCapture = nullptr;
+
+      if (GetGUIThreadInfo((DWORD)itask, &info))
+      {
+
+         hwndCapture = info.hwndCapture;
+
+      }
+
+      if (!hwndCapture)
+      {
+
+         hwndCapture = ::GetCapture();
+
+      }
+
+      return hwndCapture;
+
+   }
+
+
+   bool set_mouse_capture(itask_t itask, HWND hwnd)
+   {
+
+      GUITHREADINFO info = {};
+
+      info.cbSize = sizeof(GUITHREADINFO);
+
+      if (::GetGUIThreadInfo((DWORD)itask, &info))
+      {
+
+         if (info.hwndCapture == hwnd)
+         {
+
+            return false;
+
+         }
+
+         DWORD currentThreadId = ::GetCurrentThreadId();
+
+         if ((DWORD)itask != currentThreadId)
+         {
+
+            ::AttachThreadInput(currentThreadId, (DWORD)itask, TRUE);
+
+         }
+
+         ::SetCapture(hwnd);
+
+         if ((DWORD)itask != currentThreadId)
+         {
+
+            ::AttachThreadInput(currentThreadId, (DWORD)itask, FALSE);
+
+         }
+
+      }
+      else
+      {
+
+         auto hwndCapture = ::GetCapture();
+
+         if (hwndCapture == hwnd)
+         {
+
+            return false;
+
+         }
+
+         ::SetCapture(hwnd);
+
+      }
+
+      return true;
+
+   }
+
+
+   bool defer_release_mouse_capture(itask_t itask, HWND hwnd)
+   {
+
+      GUITHREADINFO info = {};
+
+      info.cbSize = sizeof(GUITHREADINFO);
+
+      if (::GetGUIThreadInfo((DWORD)itask, &info))
+      {
+
+         if (info.hwndCapture != hwnd)
+         {
+
+            return false;
+
+         }
+
+         DWORD currentThreadId = ::GetCurrentThreadId();
+
+         if ((DWORD)itask != currentThreadId)
+         {
+
+            ::AttachThreadInput(currentThreadId, (DWORD)itask, TRUE);
+
+         }
+
+         ::ReleaseCapture();
+
+         if ((DWORD)itask != currentThreadId)
+         {
+
+            ::AttachThreadInput(currentThreadId, (DWORD)itask, FALSE);
+
+         }
+
+      }
+      else
+      {
+
+         auto hwndCapture = ::GetCapture();
+
+         if (hwndCapture == hwnd)
+         {
+
+            return false;
+
+         }
+
+         ::ReleaseCapture();
+
+      }
+
+      return true;
+
+   }
+
+
+
+
+} // namespace windowss
+
+
+
+
+
 // https://stackoverflow.com/questions/15966642/how-do-you-tell-lshift-apart-from-rshift-in-wm-keydown-events
 
 wparam MapLeftRightKeys(wparam vk, lparam lParam)
@@ -142,278 +296,7 @@ LRESULT CALLBACK __window_procedure(HWND hwnd, UINT message, WPARAM wparam, LPAR
 
    }
 
-   lresult lresult = 0;
-
-   if (message == WM_KEYDOWN)
-   {
-
-      pwindow->informationf("WM_KEYDOWN");
-
-   }
-   else if (message == WM_SYSKEYDOWN)
-   {
-
-      pwindow->informationf("WM_SYSKEYDOWN");
-
-   }
-   else if (message == e_message_show_window)
-   {
-
-      pwindow->informationf("e_message_show_window");
-
-   }
-   else if (message == e_message_left_button_double_click)
-   {
-
-      pwindow->information() << "e_message_left_button_double_click";
-
-   }
-   else if (message == e_message_activate)
-   {
-
-      if (wparam > 0)
-      {
-
-         pwindow->information() << "activation window " << (iptr) hwnd;
-
-         pwindow->information() << "GetCapture " << (iptr)::GetCapture();
-
-      }
-
-      pwindow->information() << "e_message_activate wparam : " << wparam;
-
-   }
-
-   if (is_registered_windows_message(message))
-   {
-
-      lresult = ::DefWindowProcW(hwnd, message, wparam, lparam);
-
-      return lresult;
-
-   }
-
-   auto pimpl = pwindow->m_puserinteractionimpl;
-
-   if (pimpl)
-   {
-
-      if (pimpl->__windows_message_bypass(pwindow, message, wparam, (iptr)lparam, lresult))
-      {
-
-         return lresult;
-
-      }
-
-   }
-
-   //return ::DefWindowProcW(hwnd, message, wparam, lparam);
-
-   //auto psystem = pimpl->acmesystem();
-
-   pimpl->m_uiMessage = message;
-
-   pimpl->m_wparam = wparam;
-
-   pimpl->m_lparam = lparam;
-
-   auto puserinteraction = pimpl->m_puserinteraction;
-
-   if (message == e_message_activate)
-   {
-
-      puserinteraction->informationf("__window_procedure e_message_activate");
-
-   }
-   else if (message == e_message_create)
-   {
-
-      puserinteraction->informationf("e_message_create");
-
-   }
-
-   if (message == e_message_left_button_down)
-   {
-
-      puserinteraction->informationf("e_message_left_button_down");
-
-   }
-   else if (message == e_message_left_button_up)
-   {
-
-      puserinteraction->informationf("e_message_left_button_up");
-
-   }
-   else if (message == 33815)
-   {
-
-      string strType = ::type(puserinteraction).name();
-
-      if (strType.contains("list_box"))
-      {
-
-         puserinteraction->informationf("list_box");
-
-      }
-
-   }
-
-   if (message == e_message_mouse_move)
-   {
-
-      if (lparam == pimpl->m_lparamLastMouseMove)
-      {
-
-         return 0;
-
-      }
-
-      pimpl->m_lparamLastMouseMove = lparam;
-
-      ::point_i32 pointMouseMove(i32_x(lparam), i32_y(lparam));
-
-      if (pimpl->m_pointMouseMove == pointMouseMove)
-      {
-
-         return 0;
-
-      }
-
-      pimpl->m_pointMouseMove = pointMouseMove;
-
-      if (pwindow->m_pointMouseMove == pointMouseMove)
-      {
-
-         return 0;
-
-      }
-
-      pwindow->m_pointMouseMove = pointMouseMove;
-
-      pwindow->m_timeLastMouseMove.Now();
-
-   }
-   else if (message == e_message_timer)
-   {
-
-      //if (wparam == e_timer_transparent_mouse_event)
-      //{
-
-      //   if (pimpl->m_pointMouseMove == pointMouseMove)
-      //   {
-
-      //      return 0;
-
-      //   }
-
-      //   pimpl->m_pointCursor = pointCursor;
-
-      //   lparam = MAKELPARAM(pointCursor.x(), pointCursor.y());
-
-      //   pimpl->call_message_handler(e_message_mouse_move, 0, lparam);
-
-      //}
-      //else
-      //{
-
-      //   // ignoring Timer Event
-
-      //   output_debug_string("iTE\n");
-
-      //}
-
-      return 0;
-
-   }
-
-   if (pimpl->m_bDestroyImplOnly || ::is_null(puserinteraction))
-   {
-
-      auto pmessage = pimpl->get_message((enum_message)message, wparam, (iptr) lparam);
-
-      try
-      {
-
-         pimpl->message_handler(pmessage);
-
-      }
-      catch (...)
-      {
-
-      }
-
-      if (!pmessage->m_bRet)
-      {
-
-         pimpl->default_message_handler(pmessage);
-
-      }
-
-      lresult = pmessage->m_lresult;
-
-   }
-   else if (::is_set(puserinteraction))
-   {
-
-      if (message == WM_GETTEXT)
-      {
-
-         return ::DefWindowProcW(hwnd, message, wparam, lparam);
-
-      }
-      else if (message == WM_GETTEXTLENGTH)
-      {
-
-         return ::DefWindowProcW(hwnd, message, wparam, lparam);
-
-      }
-      else if (message == WM_SETTEXT)
-      {
-
-         return ::DefWindowProcW(hwnd, message, wparam, lparam);
-
-      }
-      if (message == 34831)
-      {
-
-         //output_debug_string("message34381");
-      }
-      auto pmessage = pimpl->get_message((enum_message)message, wparam, (iptr) lparam);
-
-      try
-      {
-
-         //puserinteraction->message_handler(pmessage);
-         pwindow->message_handler(pmessage);
-
-      }
-      catch (::exception & e)
-      {
-
-         get_task()->handle_exception(e);
-
-      }
-      catch (...)
-      {
-
-      }
-
-      if (!pmessage->m_bRet)
-      {
-
-         puserinteraction->default_message_handler(pmessage);
-
-      }
-
-      lresult = pmessage->m_lresult;
-
-   }
-   else
-   {
-
-      lresult = ::DefWindowProcW(hwnd, message, wparam, lparam);
-
-   }
+   auto lresult = pwindow->__window_procedure(hwnd, message, wparam, lparam);
 
    return lresult;
 

@@ -943,6 +943,7 @@ namespace windowing_win32
 
       //void default_set(::message::message * pmessage, const ::atom & atom, wparam wparam, lparam lparam);
 
+      virtual LRESULT __window_procedure(HWND hwnd, UINT message, WPARAM wparam, LPARAM lparam);
 
    };
 

@@ -457,7 +457,7 @@ void imm_client::_001OnIme(::message::message * pmessage)
 
          string str;
 
-         str.format("\n" "WM_IME_NOTIFY" " > " "IMN_SETCONVERSIONMODE conversion=%d sentence=%d", dwConversion, dwSentence);
+         str.formatf("\n" "WM_IME_NOTIFY" " > " "IMN_SETCONVERSIONMODE conversion=%d sentence=%d", dwConversion, dwSentence);
 
          str += "\n";
 

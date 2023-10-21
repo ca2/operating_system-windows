@@ -645,7 +645,7 @@ namespace ca2plugin_container
 
                      string str;
 
-                     str.format("%0.1f fps",dLast);
+                     str.formatf("%0.1f fps",dLast);
 
                      pgraphics->set_text_color(argb(255,255,255,0));
 

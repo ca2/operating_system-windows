@@ -797,7 +797,7 @@ namespace apex_windows
 
          string strFormat;
 
-         strFormat.format("\"%s\" %s", strCommand.c_str(), pszParam);
+         strFormat.formatf("\"%s\" %s", strCommand.c_str(), pszParam);
 
          keyLink1._set("", strFormat);
       }
@@ -2337,7 +2337,7 @@ namespace apex_windows
 
          ::string strMessage;
 
-         strMessage.format("apex_windows::os_context::file_open ShellExecuteExW failed with error (%d, %d) \"%s\"", iShellExecuteExitCode, dwLastError, pszShellExecuteError);
+         strMessage.formatf("apex_windows::os_context::file_open ShellExecuteExW failed with error (%d, %d) \"%s\"", iShellExecuteExitCode, dwLastError, pszShellExecuteError);
 
          auto errorcode = ::windows::last_error_error_code(dwLastError);
 
