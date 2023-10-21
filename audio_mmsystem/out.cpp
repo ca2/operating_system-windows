@@ -127,13 +127,13 @@ namespace audio_mmsystem
          if (mmresult == MMSYSERR_NOERROR)
          {
 
-            information("multimedia::audio_mmsystem::out::out_open_ex waveOutOpen: Success!!");
+            informationf("multimedia::audio_mmsystem::out::out_open_ex waveOutOpen: Success!!");
 
          }
          else
          {
 
-            information("multimedia::audio_mmsystem::out::out_open_ex waveOutOpen: ERROR %d!!", mmresult);
+            informationf("multimedia::audio_mmsystem::out::out_open_ex waveOutOpen: ERROR %d!!", mmresult);
 
             estatus = mmresult_status(mmresult);
 
@@ -230,13 +230,13 @@ namespace audio_mmsystem
          if (mmresult == MMSYSERR_NOERROR)
          {
 
-            information("multimedia::audio_mmsystem::out::out_open_ex waveOutPrepareHeader: Success!!");
+            informationf("multimedia::audio_mmsystem::out::out_open_ex waveOutPrepareHeader: Success!!");
 
          }
          else
          {
 
-            information("multimedia::audio_mmsystem::out::out_open_ex waveOutPrepareHeader: ERROR %d!!", mmresult);
+            informationf("multimedia::audio_mmsystem::out::out_open_ex waveOutPrepareHeader: ERROR %d!!", mmresult);
 
          }
 
@@ -257,13 +257,13 @@ namespace audio_mmsystem
                if (mmresult2 == MMSYSERR_NOERROR)
                {
 
-                  information("multimedia::audio_mmsystem::out::out_open_ex waveOutUnprepareHeader: Cascade Success");
+                  informationf("multimedia::audio_mmsystem::out::out_open_ex waveOutUnprepareHeader: Cascade Success");
 
                }
                else
                {
 
-                  information("multimedia::audio_mmsystem::out::out_open_ex waveOutUnprepareHeader: Cascade ERROR %d!!", mmresult);
+                  informationf("multimedia::audio_mmsystem::out::out_open_ex waveOutUnprepareHeader: Cascade ERROR %d!!", mmresult);
 
                }
 
@@ -281,19 +281,19 @@ namespace audio_mmsystem
                if (mmresult3 == MMSYSERR_NOERROR)
                {
 
-                  information("multimedia::audio_mmsystem::out::out_open_ex waveOutClose: Cascade Success");
+                  informationf("multimedia::audio_mmsystem::out::out_open_ex waveOutClose: Cascade Success");
 
                }
                else
                {
 
-                  information("multimedia::audio_mmsystem::out::out_open_ex waveOutClose: Cascade ERROR %d!!", mmresult);
+                  informationf("multimedia::audio_mmsystem::out::out_open_ex waveOutClose: Cascade ERROR %d!!", mmresult);
 
                }
 
             }
 
-            information("ERROR !! Failed to prepare output device buffers");
+            informationf("ERROR !! Failed to prepare output device buffers");
 
             throw ::exception(estatus);
 
@@ -382,7 +382,7 @@ namespace audio_mmsystem
       if(out_get_state() != ::wave::e_out_state_playing)
       {
 
-         information("ERROR out::BufferReady while out_get_state() != ::wave::e_out_state_playing");
+         informationf("ERROR out::BufferReady while out_get_state() != ::wave::e_out_state_playing");
 
          return;
 
@@ -555,7 +555,7 @@ namespace audio_mmsystem
       if (::success != estatus)
       {
 
-         information( "waveOutGetPosition() returned %llu", estatus.as_i64());
+         informationf( "waveOutGetPosition() returned %llu", estatus.as_i64());
 
          return 0_s;
 

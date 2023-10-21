@@ -2,6 +2,7 @@
 #include "imm_client.h"
 #include "imm_context.h"
 #include "acme/constant/message.h"
+#include "acme/constant/user_key.h"
 #include "acme/parallelization/synchronous_lock.h"
 #include "aura/message/user.h"
 #include "aura/user/user/interaction.h"
@@ -88,19 +89,21 @@ void imm_client::_011OnChar(::message::message * pmessage)
 
       }
 
-      if (pmessage->m_wparam == '\b')
+      if (pmessage->m_wparam >= 0 && pmessage->m_wparam <= 31)
       {
+
+         // if it is control character
 
          return;
 
       }
 
-      if (pmessage->m_wparam == '\t')
-      {
+      //if (pmessage->m_wparam == '\t')
+      //{
 
-         return;
+      //   return;
 
-      }
+      //}
 
       wchar_t wsz[2];
       wsz[0] = (wchar_t)pusermessage->m_wparam;

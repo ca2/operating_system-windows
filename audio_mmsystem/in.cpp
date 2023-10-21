@@ -32,7 +32,7 @@ namespace audio_mmsystem
    void in::init_task()
    {
 
-      information("in::initialize_instance %X\n", get_itask());
+      informationf("in::initialize_instance %X\n", get_itask());
 
       //SetMainWnd(nullptr);
       //ASSERT(GetMainWnd() == nullptr);
@@ -261,7 +261,7 @@ namespace audio_mmsystem
          if(estatus.failed())
          {
             
-            information("ERROR OPENING Preparing INPUT DEVICE buffer");
+            informationf("ERROR OPENING Preparing INPUT DEVICE buffer");
             
             throw ::exception(estatus);
 
@@ -377,7 +377,7 @@ namespace audio_mmsystem
       if(::success != (estatus = mmresult_status(waveInStart(m_hwavein))))
       {
          
-         information("ERROR starting INPUT DEVICE ");
+         informationf("ERROR starting INPUT DEVICE ");
          
          //return estatus;
 
@@ -413,7 +413,7 @@ namespace audio_mmsystem
       if(estatus.failed())
       {
 
-         information("in::in_stop : ERROR OPENING stopping INPUT DEVICE ");
+         informationf("in::in_stop : ERROR OPENING stopping INPUT DEVICE ");
 
       }
 
@@ -557,7 +557,7 @@ namespace audio_mmsystem
       if(estatus.failed())
       {
 
-         information("ERROR OPENING Adding INPUT DEVICE buffer");
+         informationf("ERROR OPENING Adding INPUT DEVICE buffer");
 
       }
 

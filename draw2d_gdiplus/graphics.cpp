@@ -846,17 +846,17 @@ namespace draw2d_gdiplus
 
       copy(rectangle, rectangleParam);
 
-      if (rectangleParam.height() > 400)
-      {
+      //if (rectangleParam.height() > 400)
+      //{
 
-         if (ppen->m_color.u8_red() > 180)
-         {
+      //   if (ppen->m_color.u8_red() > 180)
+      //   {
 
-            information() << "draw_rectangle " << rectangleParam;
+      //      information() << "draw_rectangle,400+,red180+ " << rectangleParam;
 
-         }
+      //   }
 
-      }
+      //}
 
       m_pgraphics->DrawRectangle(ppen->get_os_data < ::Gdiplus::Pen *>(this), rectangle);
 
@@ -1051,7 +1051,7 @@ namespace draw2d_gdiplus
       if (status != Gdiplus::Status::Ok)
       {
 
-         warning("Gdiplus Failed to DrawEllipse (%f, %f, %f, %f)", x, y, greekdeltax, greekdeltay);
+         warningf("Gdiplus Failed to DrawEllipse (%f, %f, %f, %f)", x, y, greekdeltax, greekdeltay);
 
       }
 
@@ -1163,7 +1163,7 @@ namespace draw2d_gdiplus
       if (status != Gdiplus::Status::Ok)
       {
 
-         warning("Gdiplus Failed to FillEllipse (%f, %f, %f, %f)", x, y, greekdeltax, greekdeltay);
+         warningf("Gdiplus Failed to FillEllipse (%f, %f, %f, %f)", x, y, greekdeltax, greekdeltay);
 
       }
 
@@ -1391,7 +1391,7 @@ namespace draw2d_gdiplus
       if (!bOk)
       {
 
-         warning("Gdiplus Failed to FillRectangle (%d, %d, %d, %d)",
+         warningf("Gdiplus Failed to FillRectangle (%d, %d, %d, %d)",
             rectangle.X, rectangle.Y, rectangle.Width, rectangle.Height);
 
       }
@@ -1992,7 +1992,7 @@ namespace draw2d_gdiplus
          if (ret != Gdiplus::Status::Ok)
          {
 
-            warning("Gdiplus Failed to DrawImage (%f, %f, %f, %f) - (%f, %f, %f, %f)",
+            warningf("Gdiplus Failed to DrawImage (%f, %f, %f, %f) - (%f, %f, %f, %f)",
                rectfTarget.X, rectfTarget.Y, rectfTarget.Width, rectfTarget.Height,
                xSrc, ySrc, nSrcWidth, nSrcHeight);
 

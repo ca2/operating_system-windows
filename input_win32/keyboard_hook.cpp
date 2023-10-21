@@ -2,6 +2,7 @@
 #include "framework.h"
 #include "keyboard_hook.h"
 #include "acme/constant/message.h"
+#include "acme/constant/user_key.h"
 #include "acme/exception/exception.h"
 #include "acme/parallelization/task.h"
 #include "acme/platform/scoped_restore.h"

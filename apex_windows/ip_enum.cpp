@@ -59,7 +59,7 @@ namespace apex_windows
    char szHostname[256];
    if (gethostname(szHostname, sizeof(szHostname)))
    {
-   information("Failed in call to gethostname, WSAGetLastError returns %d\n", WSAGetLastError());
+   informationf("Failed in call to gethostname, WSAGetLastError returns %d\n", WSAGetLastError());
    return false;
    }
 
@@ -67,14 +67,14 @@ namespace apex_windows
    HOSTENT* pHostEnt = gethostbyname(szHostname);
    if (pHostEnt == nullptr)
    {
-   information("Failed in call to gethostbyname, WSAGetLastError returns %d\n", WSAGetLastError());
+   informationf("Failed in call to gethostbyname, WSAGetLastError returns %d\n", WSAGetLastError());
    return false;
    }
 
    //check the length of the IP adress
    if (pHostEnt->h_length != 4)
    {
-   information("IP address returned is not 32 bits !!\n");
+   informationf("IP address returned is not 32 bits !!\n");
    return false;
    }
 

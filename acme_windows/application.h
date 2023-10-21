@@ -22,8 +22,8 @@ namespace acme_windows
 
       application();
       ~application() override;
-
-
+      
+      
       virtual void open_by_module_path(const ::scoped_string & scopedstr);
 
       //virtual ::pointer < ::operating_system::main_window > main_window();

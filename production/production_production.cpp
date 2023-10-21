@@ -837,7 +837,7 @@ pacmedir->system() / "config/production/mirror_status.txt";
                i++;
             }
          }
-         information("\n");
+         informationf("\n");
          string strStatus;
 
          ::file::path pathTarget;
@@ -2911,7 +2911,7 @@ pacmedir->create(pathTarget.folder()))
          single_lock synchronouslock(&m_mutexStatus, true);
          m_straStatus.add(psz);
       }
-      information("%s", psz);
+      informationf("%s", psz);
       m_pimpact->post_message(WM_USER, 1);
    }
 

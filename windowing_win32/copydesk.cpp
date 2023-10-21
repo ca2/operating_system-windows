@@ -97,7 +97,7 @@ namespace windowing_win32
 
       //}
 
-      synchronous_lock synchronouslock(synchronization());
+      //synchronous_lock synchronouslock(synchronization());
 
       //WNDCLASS wndcls = {};
 

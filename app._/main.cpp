@@ -96,7 +96,10 @@ void copy(MEM_ICON_ITEM * dst, ICON_ITEM * pitem)
 //
 //
 //
-//   application::application()
+//   __IMPLEMENT_APPLICATION_RELEASE_TIME();
+
+
+   application::application()
 //   {
 //
 //      //{

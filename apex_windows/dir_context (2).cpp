@@ -536,7 +536,7 @@ namespace windows
                   if (strFile.case_insensitive_begins("resident_"))
                   {
 
-                     information("resident_*");
+                     informationf("resident_*");
 
                   }
 
@@ -714,7 +714,7 @@ namespace windows
                   //if (strFile.case_insensitive_begins("resident_"))
                   //{
 
-                  //   information("resident_*");
+                  //   informationf("resident_*");
                   //}
 
                   if (matches_wildcard_criteria_ci(listing.m_straPattern, pathName))
@@ -996,7 +996,7 @@ namespace windows
 
                FormatMessageW(FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_SYSTEM, nullptr, dwError, 0, (WCHAR *) &pwszError, 8, nullptr);
 
-               //information("dir_context::mk CreateDirectoryW last error(%d)=%s", dwError, pszError);
+               //informationf("dir_context::mk CreateDirectoryW last error(%d)=%s", dwError, pszError);
 
                ::LocalFree(pwszError);
 

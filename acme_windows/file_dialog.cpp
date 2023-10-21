@@ -211,18 +211,70 @@ namespace acme_windows
 
             }
 
-            while (*wszFileNames != L'\0') 
+            if (openfilename.Flags & OFN_ALLOWMULTISELECT)
             {
 
-               wstring wstr(wszFileNames);
+               if (*wszFileNames != L'\0')
+               {
 
-               ::string str(wstr);
+                  wstring wstrFolder(wszFileNames);
 
-               ::file::path path(str);
+                  ::string strFolder(wstrFolder);
 
-               pdialog->m_patha.add(path);
+                  ::file::path pathFolder(strFolder);
 
-               wszFileNames += wcslen(wszFileNames) + 1;
+                  wszFileNames += wcslen(wszFileNames) + 1;
+
+                  if (*wszFileNames == L'\0')
+                  {
+
+                     auto path = pathFolder;
+
+                     pdialog->m_patha.add(path);
+
+                  }
+                  else
+                  {
+
+                     while (*wszFileNames != L'\0')
+                     {
+
+                        wstring wstr(wszFileNames);
+
+                        ::string str(wstr);
+
+                        ::file::path path;
+
+                        path = pathFolder / str;
+
+                        pdialog->m_patha.add(path);
+
+                        wszFileNames += wcslen(wszFileNames) + 1;
+
+                     }
+
+                  }
+
+               }
+
+            }
+            else
+            {
+
+               while (*wszFileNames != L'\0')
+               {
+
+                  wstring wstr(wszFileNames);
+
+                  ::string str(wstr);
+
+                  ::file::path path(str);
+
+                  pdialog->m_patha.add(path);
+
+                  wszFileNames += wcslen(wszFileNames) + 1;
+
+               }
 
             }
 

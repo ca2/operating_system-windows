@@ -487,3 +487,9 @@
 //struct lconv *localeconv(void);
 
 #endif
+
+// changed by camilo on 2023-10-18 17:52 BRT
+// changed by camilo on 2023-05-14 19:50 BRT
+#define CAIRO_HAS_GLAD 1
+
+

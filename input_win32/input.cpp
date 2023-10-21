@@ -548,7 +548,7 @@ namespace input_win32
    //   //   //   if (pmsg->message == 126)
    //   //   //   {
    //
-   //   //   //      information("e_message_display_change");
+   //   //   //      informationf("e_message_display_change");
    //
    //   //   //   }
    //

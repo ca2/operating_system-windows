@@ -244,13 +244,13 @@ namespace user_service
    void socket::OnExecute()
    {
       string strUrl = m_request.attr("http_protocol").get_string() + "://" + m_request.header("host").get_string() + m_request.attr("request_uri").get_string();
-      information("netnode::socket::OnExecute Url ----**START**====> %s", strUrl);
+      informationf("netnode::socket::OnExecute Url ----**START**====> %s", strUrl);
 auto tickExecuteBeg = ::tick::now();
       m_bEnd = false;
       send_response();
 auto tickExecuteEnd = ::tick::now();
-      information("netnode::socket::OnExecute Url ----**END****====> %s", strUrl);
-      information("netnode::socket::OnExecute Ms -----**END****====> " __prtick, __pr(tickExecuteEnd - tickExecuteBeg));
+      informationf("netnode::socket::OnExecute Url ----**END****====> %s", strUrl);
+      informationf("netnode::socket::OnExecute Ms -----**END****====> " __prtick, __pr(tickExecuteEnd - tickExecuteBeg));
    }
 
    void socket::OnResponseComplete()

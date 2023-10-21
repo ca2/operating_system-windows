@@ -456,13 +456,13 @@ namespace windows
             if (dwLastError == 0x0000057e)
             {
 
-               information("Cannot create a top-level child interaction_impl.");
+               informationf("Cannot create a top-level child interaction_impl.");
 
             }
             else
             {
 
-               information("%s", strMessage);
+               informationf("%s", strMessage);
 
             }
 
@@ -1435,31 +1435,31 @@ namespace windows
       if (emessage == e_message_enable)
       {
 
-         //information("e_message_enable enable = " + string(pbase->m_wparam ? "true" : "false"));
+         //informationf("e_message_enable enable = " + string(pbase->m_wparam ? "true" : "false"));
 
       }
       if (emessage == WM_GETTEXTLENGTH)
       {
 
-         //information("WM_GETTEXTLENGTH");
+         //informationf("WM_GETTEXTLENGTH");
 
       }
       if (emessage == WM_GETTEXT)
       {
 
-         //information("WM_GETTEXT");
+         //informationf("WM_GETTEXT");
 
       }
       if (emessage == e_message_create)
       {
 
-         //information("e_message_create");
+         //informationf("e_message_create");
 
       }
       if (emessage == e_message_nccreate)
       {
 
-         //information("e_message_nccreate");
+         //informationf("e_message_nccreate");
 
       }
       if (emessage == e_message_size || emessage == e_message_move)
@@ -1538,11 +1538,11 @@ namespace windows
 
       //   if (m_puserinteraction->window_is_moving())
       //   {
-      //      //information("moving: skip pre translate message");
+      //      //informationf("moving: skip pre translate message");
       //   }
       //   else if (m_puserinteraction->window_is_sizing())
       //   {
-      //      //information("sizing: skip pre translate message");
+      //      //informationf("sizing: skip pre translate message");
       //   }
       //   else
       //   {
@@ -1600,51 +1600,51 @@ namespace windows
             switch (emessage)
             {
             case e_message_create:
-               information("e_message_create wparam=%08x lparam=%08x", pbase->m_wparam, pbase->m_lparam);
+               informationf("e_message_create wparam=%08x lparam=%08x", pbase->m_wparam, pbase->m_lparam);
 
                break;
             case e_message_window_position_changing:
-               information("e_message_window_position_changing wparam=%08x lparam=%08x", pbase->m_wparam, pbase->m_lparam);
+               informationf("e_message_window_position_changing wparam=%08x lparam=%08x", pbase->m_wparam, pbase->m_lparam);
 
                break;
             case e_message_window_position_changed:
-               information("e_message_window_position_changed wparam=%08x lparam=%08x", pbase->m_wparam, pbase->m_lparam);
+               informationf("e_message_window_position_changed wparam=%08x lparam=%08x", pbase->m_wparam, pbase->m_lparam);
 
                break;
             case e_message_activate:
-               information("e_message_activate wparam=%08x lparam=%08x", pbase->m_wparam, pbase->m_lparam);
+               informationf("e_message_activate wparam=%08x lparam=%08x", pbase->m_wparam, pbase->m_lparam);
 
                break;
             case WM_ACTIVATEAPP:
-               information("WM_ACTIVATEAPP wparam=%08x lparam=%08x", pbase->m_wparam, pbase->m_lparam);
+               informationf("WM_ACTIVATEAPP wparam=%08x lparam=%08x", pbase->m_wparam, pbase->m_lparam);
 
                break;
             case e_message_mouse_activate:
-               information("e_message_mouse_activate wparam=%08x lparam=%08x", pbase->m_wparam, pbase->m_lparam);
+               informationf("e_message_mouse_activate wparam=%08x lparam=%08x", pbase->m_wparam, pbase->m_lparam);
 
                break;
             case e_message_ncactivate:
-               information("e_message_ncactivate wparam=%08x lparam=%08x", pbase->m_wparam, pbase->m_lparam);
+               informationf("e_message_ncactivate wparam=%08x lparam=%08x", pbase->m_wparam, pbase->m_lparam);
 
                break;
             case e_message_set_focus:
-               information("e_message_set_focus wparam=%08x lparam=%08x", pbase->m_wparam, pbase->m_lparam);
+               informationf("e_message_set_focus wparam=%08x lparam=%08x", pbase->m_wparam, pbase->m_lparam);
 
                break;
             case e_message_kill_focus:
-               information("e_message_kill_focus wparam=%08x lparam=%08x", pbase->m_wparam, pbase->m_lparam);
+               informationf("e_message_kill_focus wparam=%08x lparam=%08x", pbase->m_wparam, pbase->m_lparam);
 
                break;
             case e_message_move:
-               information("e_message_move wparam=%08x lparam=%08x", pbase->m_wparam, pbase->m_lparam);
+               informationf("e_message_move wparam=%08x lparam=%08x", pbase->m_wparam, pbase->m_lparam);
 
                break;
             case e_message_size:
-               information("e_message_size wparam=%08x lparam=%08x", pbase->m_wparam, pbase->m_lparam);
+               informationf("e_message_size wparam=%08x lparam=%08x", pbase->m_wparam, pbase->m_lparam);
 
                break;
             default:
-               information("MESSAGE %08x wparam=%08x lparam=%08x", emessage, pbase->m_wparam, pbase->m_lparam);
+               informationf("MESSAGE %08x wparam=%08x lparam=%08x", emessage, pbase->m_wparam, pbase->m_lparam);
 
                break;
             }
@@ -1719,7 +1719,7 @@ namespace windows
          if (emessage == e_message_left_button_down)
          {
 
-            information("e_message_left_button_down");
+            informationf("e_message_left_button_down");
 
          }
 
@@ -2396,7 +2396,7 @@ namespace windows
             || dynamic_cast <::user::system_interaction_impl *>(m_puserinteraction) != nullptr)
       {
 
-         information("good : opt out!");
+         informationf("good : opt out!");
 
       }
 
@@ -2454,7 +2454,7 @@ namespace windows
          if (m_event.wait(tickTimeout).timeout())
          {
 
-            information("print_window::time_out");
+            informationf("print_window::time_out");
 
          }
 
@@ -3224,7 +3224,7 @@ namespace windows
       if (rectClient.size() != m_puserinteraction->m_size)
       {
 
-         information("ATTENTION!! Client Size <> Window Size");
+         informationf("ATTENTION!! Client Size <> Window Size");
 
       }
 
@@ -5544,7 +5544,7 @@ lCallNextHook:
 
             HRESULT hr = tasklist->AddTab(get_handle());
 
-            information("result = %d", hr);
+            informationf("result = %d", hr);
 
          }
          else

@@ -275,7 +275,7 @@ namespace music
 
          void midi::mmsystem_LogMidiInCaps(UINT_PTR i, MIDIINCAPSW caps)
          {
-            information(
+            informationf(
             "-- %u: %S --\n"
             "    Device ID: %u\n"
             "    Manufacturer identifier: %u\n"
@@ -317,7 +317,7 @@ namespace music
          void midi::mmsystem_LogMidiOutCaps(UINT_PTR i, MIDIOUTCAPSW caps)
          {
 
-            information(
+            informationf(
             "-- %u: %S --\n"
             "    Device ID: %u\n"
             "    Manufacturer identifier: %u\n"

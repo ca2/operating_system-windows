@@ -2807,7 +2807,7 @@ repeat:
             if(!estatusRegistry)
             {
 
-               information("Failure to set ." + strExtension + "\\OpenWithProgids");
+               informationf("Failure to set ." + strExtension + "\\OpenWithProgids");
 
                estatus = estatusRegistry;
 
@@ -2892,7 +2892,7 @@ repeat:
       //   if(!regkey.set(strTargetProgId, ""))
       //   {
 
-      //      information("Failure to set .htm/OpenWithProgids");
+      //      informationf("Failure to set .htm/OpenWithProgids");
 
       //   }
 

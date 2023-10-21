@@ -67,6 +67,7 @@ int g_iCol = 0;
 
 LRESULT CALLBACK __window_procedure(HWND hwnd, UINT message, WPARAM wparam, LPARAM lparam)
 {
+
    if (message == WM_APP + 12345)
    {
 
@@ -113,7 +114,7 @@ LRESULT CALLBACK __window_procedure(HWND hwnd, UINT message, WPARAM wparam, LPAR
             if (dwResult)
             {
 
-               ::output_debug_string("SetWindowLongPtr Failed");
+               pwindow->informationf("__window_procedure SetWindowLongPtr Failed");
 
             }
 
@@ -146,19 +147,19 @@ LRESULT CALLBACK __window_procedure(HWND hwnd, UINT message, WPARAM wparam, LPAR
    if (message == WM_KEYDOWN)
    {
 
-      output_debug_string("WM_KEYDOWN");
+      pwindow->informationf("WM_KEYDOWN");
 
    }
    else if (message == WM_SYSKEYDOWN)
    {
 
-      output_debug_string("WM_SYSKEYDOWN");
+      pwindow->informationf("WM_SYSKEYDOWN");
 
    }
    else if (message == e_message_show_window)
    {
 
-      output_debug_string("e_message_show_window");
+      pwindow->informationf("e_message_show_window");
 
    }
    else if (message == e_message_left_button_double_click)
@@ -221,26 +222,26 @@ LRESULT CALLBACK __window_procedure(HWND hwnd, UINT message, WPARAM wparam, LPAR
    if (message == e_message_activate)
    {
 
-      output_debug_string("__window_procedure e_message_activate");
+      puserinteraction->informationf("__window_procedure e_message_activate");
 
    }
    else if (message == e_message_create)
    {
 
-      output_debug_string("e_message_create");
+      puserinteraction->informationf("e_message_create");
 
    }
 
    if (message == e_message_left_button_down)
    {
 
-      ::output_debug_string("e_message_left_button_down");
+      puserinteraction->informationf("e_message_left_button_down");
 
    }
    else if (message == e_message_left_button_up)
    {
 
-      ::output_debug_string("e_message_left_button_up");
+      puserinteraction->informationf("e_message_left_button_up");
 
    }
    else if (message == 33815)
@@ -251,7 +252,7 @@ LRESULT CALLBACK __window_procedure(HWND hwnd, UINT message, WPARAM wparam, LPAR
       if (strType.contains("list_box"))
       {
 
-         ::output_debug_string("list_box");
+         puserinteraction->informationf("list_box");
 
       }
 
@@ -418,11 +419,9 @@ LRESULT CALLBACK __window_procedure(HWND hwnd, UINT message, WPARAM wparam, LPAR
 
 }
 
+
 namespace windowing_win32
 {
-
-
-
 
 
 //void window::default_set(::message::message * pmessage, const ::atom & atom, wparam wparam, lparam lparam)
