@@ -152,6 +152,8 @@ TCHAR * windows_get_system_cursor(enum_cursor ecursor)
       return IDC_IBEAM;
    case e_cursor_hand:
       return IDC_HAND;
+   case e_cursor_move:
+      return IDC_SIZEALL;
    case e_cursor_size_bottom_right:
       return IDC_SIZENWSE;
    case e_cursor_size_top_left:

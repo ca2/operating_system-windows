@@ -85,6 +85,7 @@ namespace windowing_win32
    window::window()
    {
 
+      m_hmenuSystem = nullptr;
 
       m_pWindow4 = this;
 
@@ -7196,13 +7197,35 @@ namespace windowing_win32
    //}
 
 
+   void window::defer_show_system_menu(::message::mouse * pmouse)
+   {
+
+      auto hwnd = (HWND)m_oswindow;
+
+      GetSystemMenu(hwnd, true);
+      m_hmenuSystem = GetSystemMenu(hwnd, false);
+      //SetForegroundWindow(hwnd);
+      TrackPopupMenu(m_hmenuSystem, TPM_LEFTALIGN | TPM_TOPALIGN, pmouse->m_pointAbsolute.x(),
+         pmouse->m_pointAbsolute.y(),0,
+         hwnd, NULL);
+      //PostMessage(hwnd, WM_NULL, 0, 0);
+
+   }
+
+
    LRESULT window::__window_procedure(HWND hwnd, UINT message, WPARAM wparam, LPARAM lparam)
    {
 
 
       lresult lresult = 0;
 
-      if (message == WM_KEYDOWN)
+      if (message == WM_SYSCOMMAND)
+      {
+
+         informationf("WM_SYSCOMMAND");
+
+      }
+      else if (message == WM_KEYDOWN)
       {
 
          informationf("WM_KEYDOWN");
@@ -7265,6 +7288,72 @@ namespace windowing_win32
 
       }
 
+      if (message == WM_INITMENU)
+      {
+         auto hmenu = (HMENU)wparam;
+         if (hmenu == m_hmenuSystem)
+         {
+
+            int iPositionSeparator = -1;
+
+            for (int iPosition = 0; iPosition < ::GetMenuItemCount(hmenu); iPosition++)
+            {
+
+               auto nID = GetMenuItemID(hmenu, iPosition);
+
+               if (nID == 0)
+               {
+
+                  iPositionSeparator = iPosition;
+
+               }
+
+            }
+
+            if (iPositionSeparator > 0)
+            {
+
+               {
+
+                  MENUITEMINFOW menu_item_info{};
+                  menu_item_info.cbSize = sizeof(MENUITEMINFO);
+
+                  menu_item_info.fMask = MIIM_TYPE;
+                  menu_item_info.fType = MFT_SEPARATOR;
+
+                  //menu_item_info.hSubMenu = submenu.handle();
+
+                  //menu_item_info.dwTypeData = const_cast<wchar_t *>(L"About...");
+                  //menu_item_info.cch = wcslen(const_cast<wchar_t *>(menu_item_info.dwTypeData));
+
+                  InsertMenuItemW(m_hmenuSystem, iPositionSeparator, TRUE, &menu_item_info);
+
+               }
+
+               {
+
+                  MENUITEMINFOW menu_item_info{};
+                  menu_item_info.cbSize = sizeof(MENUITEMINFO);
+
+                  menu_item_info.fMask = MIIM_TYPE | MIIM_ID;
+                  menu_item_info.fType = MFT_STRING;
+
+                  //menu_item_info.hSubMenu = submenu.handle();
+
+                  menu_item_info.wID = 123;
+                  menu_item_info.dwTypeData = const_cast<wchar_t *>(L"About...");
+                  menu_item_info.cch = wcslen(const_cast<wchar_t *>(menu_item_info.dwTypeData));
+
+                  InsertMenuItemW(m_hmenuSystem, iPositionSeparator+1, TRUE, &menu_item_info);
+
+               }
+
+            }
+
+         }
+
+      }
+
       //return ::DefWindowProcW(hwnd, message, wparam, lparam);
 
       //auto psystem = pimpl->acmesystem();
@@ -7305,10 +7394,6 @@ namespace windowing_win32
       else if (message == e_message_right_button_up)
       {
 
-         HMENU menu = GetSystemMenu(hwnd, false);
-         SetForegroundWindow(hwnd);
-         TrackPopupMenu(menu, TPM_LEFTALIGN | TPM_BOTTOMALIGN, 0, 0, 0, hwnd, NULL);
-         PostMessage(hwnd, WM_NULL, 0, 0);
       }
       else if (message == 33815)
       {

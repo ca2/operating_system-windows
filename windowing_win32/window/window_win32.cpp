@@ -222,6 +222,19 @@ int g_iCol = 0;
 LRESULT CALLBACK __window_procedure(HWND hwnd, UINT message, WPARAM wparam, LPARAM lparam)
 {
 
+   if (message == WM_SYSCOMMAND)
+   {
+
+      ::informationf("WM_SYSCOMMAND");
+
+   }
+   else if (message == WM_COMMAND)
+   {
+
+      ::informationf("WM_COMMAND");
+
+   }
+
    if (message == WM_APP + 12345)
    {
 

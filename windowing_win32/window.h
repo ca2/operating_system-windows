@@ -21,6 +21,7 @@ namespace windowing_win32
 
       //HICON                                         m_hiconSmall;
       //HICON                                         m_hiconBig;
+      HMENU                                           m_hmenuSystem;
       bool                                            m_bTrackMouseLeave : 1;
       WNDPROC                                         m_pfnSuper;
       //UINT                                          m_uiMessage;
@@ -939,11 +940,16 @@ namespace windowing_win32
          /* [in] */ POINTL point,
          /* [out][in] */ __RPC__inout DWORD * pdwEffect);
 
+
+      void defer_show_system_menu(::message::mouse * pmouse) override;
+
+
       //::pointer<::message::message> get_message(const ::atom & atom, wparam wparam, lparam lparam);
 
       //void default_set(::message::message * pmessage, const ::atom & atom, wparam wparam, lparam lparam);
 
       virtual LRESULT __window_procedure(HWND hwnd, UINT message, WPARAM wparam, LPARAM lparam);
+
 
    };
 

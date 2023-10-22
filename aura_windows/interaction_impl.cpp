@@ -6,6 +6,7 @@
 #include "acme/exception/exception.h"
 #include "acme/exception/interface_only.h"
 #include "acme/parallelization/synchronous_lock.h"
+#include "acme/platform/application.h"
 #include "aura/graphics/draw2d/graphics.h"
 #include "aura/windowing/window.h"
 #include "aura/message/user.h"
@@ -129,6 +130,7 @@ namespace aura_windows
       ::user::interaction_impl::install_message_routing(pchannel);
 
       MESSAGE_LINK(WM_SYSCOMMAND, pchannel, this, &interaction_impl::_001OnSysCommand);
+      MESSAGE_LINK(WM_COMMAND, pchannel, this, &interaction_impl::_001OnSysCommand);
       MESSAGE_LINK(e_message_reposition, pchannel, this, &interaction_impl::on_message_reposition);
       MESSAGE_LINK(e_message_size, pchannel, this, &interaction_impl::on_message_size);
 
@@ -523,6 +525,12 @@ namespace aura_windows
          return;
 
       }
+      else if (wparam == SC_CLOSE)
+      {
+
+         post_message(e_message_close);
+
+      }
       else if (wparam == SC_RESTORE)
       {
 
@@ -605,6 +613,43 @@ namespace aura_windows
          return;
 
       }
+      else if (wparam == SC_MOVE)
+      { 
+
+         auto puserinteraction = m_puserinteraction;
+
+         if (puserinteraction)
+         {
+
+            puserinteraction->m_ekeyboardmode = ::user::e_keyboard_mode_reposition;
+
+            puserinteraction->set_keyboard_focus();
+
+         }
+
+      }
+      else if (wparam == SC_SIZE)
+      {
+
+         auto puserinteraction = m_puserinteraction;
+
+         if (puserinteraction)
+         {
+
+            puserinteraction->m_ekeyboardmode = ::user::e_keyboard_mode_resize;
+
+            puserinteraction->set_keyboard_focus();
+
+         }
+
+      }
+      else if(wparam == 123)
+      {
+
+
+         acmeapplication()->show_about_box();
+
+         }
 
    }
 

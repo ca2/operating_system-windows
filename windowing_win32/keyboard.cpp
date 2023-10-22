@@ -96,6 +96,8 @@ namespace windowing_win32
          return ::user::e_key_page_up;
       case VK_NEXT:
          return ::user::e_key_page_down;
+      case VK_ESCAPE:
+         return ::user::e_key_escape;
       }
 
       return ::user::e_key_none;
