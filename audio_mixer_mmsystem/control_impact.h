@@ -127,9 +127,9 @@
          DECLARE_MESSAGE_HANDLER(_001OnButtonReserve);
          DECLARE_MESSAGE_HANDLER(on_message_create);
          DECLARE_MESSAGE_HANDLER(_001OnUpdateImpactUpdate);
-         DECLARE_MESSAGE_HANDLER(_001OnVScroll);
+         DECLARE_MESSAGE_HANDLER(on_message_scroll_y);
          DECLARE_MESSAGE_HANDLER(_001OnCtlColor);
-         DECLARE_MESSAGE_HANDLER(_001OnHScroll);
+         DECLARE_MESSAGE_HANDLER(on_message_scroll_x);
 
          //void _OnUpdate(::pointer<::user::impact>pimpact, LPARAM lhint, ::object * pupdate);
 

@@ -7342,7 +7342,7 @@ namespace windowing_win32
 
                   menu_item_info.wID = 123;
                   menu_item_info.dwTypeData = const_cast<wchar_t *>(L"About...");
-                  menu_item_info.cch = wcslen(const_cast<wchar_t *>(menu_item_info.dwTypeData));
+                  menu_item_info.cch = (UINT) wcslen(const_cast<wchar_t *>(menu_item_info.dwTypeData));
 
                   InsertMenuItemW(m_hmenuSystem, iPositionSeparator+1, TRUE, &menu_item_info);
 

@@ -262,7 +262,7 @@ namespace production
       ::rectangle_i32 rectangle;
       //rectangle.null();
 
-      //if(!m_pscrollbarHorizontal->create_window(
+      //if(!m_pscrollbarX->create_window(
       // e_orientation_horizontal,
       // WS_CHILD
       // | WS_VISIBLE,
@@ -275,7 +275,7 @@ namespace production
 
       //  rectangle.null();
 
-      //if(!m_pscrollbarVertical->create_window(
+      //if(!m_pscrollbarY->create_window(
       // e_orientation_vertical,
       // WS_CHILD
       // | WS_VISIBLE,
