@@ -1086,7 +1086,7 @@ namespace windowing_win32
       UNREFERENCED_PARAMETER(hdcMonitor);
       UNREFERENCED_PARAMETER(prcMonitor);
 
-      m_monitorinfoa.allocate(m_monitorinfoa.get_size() + 1);
+      m_monitorinfoa.set_size(m_monitorinfoa.get_size() + 1);
 
       memset(&m_monitorinfoa.last(), 0, sizeof(MONITORINFO));
 
