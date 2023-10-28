@@ -186,9 +186,6 @@
     <ClInclude Include="_impl.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="node.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="master_device_listener.h">
       <Filter>Header Files</Filter>
     </ClInclude>

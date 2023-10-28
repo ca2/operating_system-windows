@@ -725,7 +725,6 @@
     <ClInclude Include="keyboard.h" />
     <ClInclude Include="message_window.h" />
     <ClInclude Include="monitor.h" />
-    <ClInclude Include="node.h" />
     <ClInclude Include="notification_area.h" />
     <ClInclude Include="notify_icon.h" />
     <ClInclude Include="print_window.h" />
