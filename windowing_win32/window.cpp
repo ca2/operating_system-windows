@@ -7197,7 +7197,7 @@ namespace windowing_win32
    //}
 
 
-   void window::defer_show_system_menu(::message::mouse * pmouse)
+   void window::defer_show_system_menu(const ::point_i32 & pointAbsolute)
    {
 
       auto hwnd = (HWND)m_oswindow;
@@ -7205,8 +7205,11 @@ namespace windowing_win32
       GetSystemMenu(hwnd, true);
       m_hmenuSystem = GetSystemMenu(hwnd, false);
       //SetForegroundWindow(hwnd);
-      TrackPopupMenu(m_hmenuSystem, TPM_LEFTALIGN | TPM_TOPALIGN, pmouse->m_pointAbsolute.x(),
-         pmouse->m_pointAbsolute.y(),0,
+      TrackPopupMenu(m_hmenuSystem, 
+         TPM_LEFTALIGN | TPM_TOPALIGN, 
+         pointAbsolute.x(),
+         pointAbsolute.y(),
+         0,
          hwnd, NULL);
       //PostMessage(hwnd, WM_NULL, 0, 0);
 
@@ -7216,13 +7219,18 @@ namespace windowing_win32
    LRESULT window::__window_procedure(HWND hwnd, UINT message, WPARAM wparam, LPARAM lparam)
    {
 
-
       lresult lresult = 0;
 
       if (message == WM_SYSCOMMAND)
       {
 
          informationf("WM_SYSCOMMAND");
+
+      }
+      else if (message == WM_CHAR)
+      {
+
+         informationf("WM_CHAR");
 
       }
       else if (message == WM_KEYDOWN)
@@ -7235,6 +7243,12 @@ namespace windowing_win32
       {
 
          informationf("WM_SYSKEYDOWN");
+
+      }
+      else if (message == WM_SYSKEYUP)
+      {
+
+         informationf("WM_SYSKEYUP");
 
       }
       else if (message == e_message_show_window)
@@ -7287,31 +7301,60 @@ namespace windowing_win32
          }
 
       }
+      if (message == WM_SYSCOMMAND)
+      {
+
+         if(wparam == SC_KEYMENU)
+         {
+      //}
+      //if (message == WM_KEYDOWN || message == WM_SYSKEYDOWN)
+      //{
+
+      //   if (wparam == VK_SPACE)
+      //   {
+
+      //      if (0x8000 & GetAsyncKeyState(VK_RMENU)
+      //         || 0x8000 & GetAsyncKeyState(VK_LMENU))
+      //      {
+
+               RECT r;
+
+               GetWindowRect(hwnd, &r);
+
+               defer_show_system_menu({r.left, r.top});
+
+               return 0;
+
+            //}
+
+         }
+
+      }
 
       if (message == WM_INITMENU)
       {
+
          auto hmenu = (HMENU)wparam;
+
+         auto cMenuItemCount = ::GetMenuItemCount(hmenu);
+
          if (hmenu == m_hmenuSystem)
          {
 
-            int iPositionSeparator = -1;
+            HMENU hmenuSystem = hmenu;
 
-            for (int iPosition = 0; iPosition < ::GetMenuItemCount(hmenu); iPosition++)
+            auto iLast = ::GetMenuItemCount(hmenuSystem) - 1;
+
+            auto idLast = GetMenuItemID(hmenuSystem, iLast);
+
+            auto iOneBeforeLast = iLast - 1;
+
+            auto idOneBeforeLast = GetMenuItemID(hmenuSystem, iOneBeforeLast);
+
+            if (idLast == SC_CLOSE && idOneBeforeLast == 0)
             {
 
-               auto nID = GetMenuItemID(hmenu, iPosition);
-
-               if (nID == 0)
-               {
-
-                  iPositionSeparator = iPosition;
-
-               }
-
-            }
-
-            if (iPositionSeparator > 0)
-            {
+               // Seems like System Menu
 
                {
 
@@ -7326,7 +7369,7 @@ namespace windowing_win32
                   //menu_item_info.dwTypeData = const_cast<wchar_t *>(L"About...");
                   //menu_item_info.cch = wcslen(const_cast<wchar_t *>(menu_item_info.dwTypeData));
 
-                  InsertMenuItemW(m_hmenuSystem, iPositionSeparator, TRUE, &menu_item_info);
+                  InsertMenuItemW(hmenuSystem, iOneBeforeLast, TRUE, &menu_item_info);
 
                }
 
@@ -7342,11 +7385,13 @@ namespace windowing_win32
 
                   menu_item_info.wID = 123;
                   menu_item_info.dwTypeData = const_cast<wchar_t *>(L"About...");
-                  menu_item_info.cch = (UINT) wcslen(const_cast<wchar_t *>(menu_item_info.dwTypeData));
+                  menu_item_info.cch = (UINT)wcslen(const_cast<wchar_t *>(menu_item_info.dwTypeData));
 
-                  InsertMenuItemW(m_hmenuSystem, iPositionSeparator+1, TRUE, &menu_item_info);
+                  InsertMenuItemW(hmenuSystem, iOneBeforeLast + 1, TRUE, &menu_item_info);
 
                }
+
+               return 0;
 
             }
 

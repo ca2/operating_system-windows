@@ -1,6 +1,7 @@
 #include "framework.h"
 #include "node.h"
 #include "os_context.h"
+#include "acme/constant/user_key.h"
 #include "acme/exception/exception.h"
 #include "acme/filesystem/filesystem/acme_path.h"
 #include "acme/filesystem/filesystem/link.h"
@@ -32,6 +33,10 @@ CLASS_DECL_ACME_WINDOWS void shell_notify_folder_change(const wchar_t* pwsz);
 CLASS_DECL_ACME_WINDOWS void shell_notify_item_change(const wchar_t* pwsz);
 CLASS_DECL_ACME_WINDOWS void shell_notify_assoc_change();
 
+namespace windows
+{
+   int user_key_to_key_code(::user::enum_key ekey);
+}
 
 ::pointer_array < ::networking::address > get_adapters_addresses();
 
@@ -1168,7 +1173,134 @@ namespace apex_windows
    }
 
 
+#define PRESSED(key) ((::GetAsyncKeyState(key) & 0x8000) != 0)
+
+
+   bool node::is_key_pressed(bool * pbPressed, ::user::enum_key ekey)
+   {
+
+      if (ekey == ::user::e_key_alt)
+      {
+
+         *pbPressed = PRESSED(VK_MENU) || PRESSED(VK_RMENU) || PRESSED(VK_LMENU);
+
+      }
+      else if (ekey == ::user::e_key_control)
+      {
+
+         *pbPressed = PRESSED(VK_CONTROL) || PRESSED(VK_RCONTROL) || PRESSED(VK_LCONTROL);
+
+      }
+      else if (ekey == ::user::e_key_shift)
+      {
+
+         *pbPressed = PRESSED(VK_SHIFT) || PRESSED(VK_RSHIFT) || PRESSED(VK_LSHIFT);
+
+      }
+      else if (ekey == ::user::e_key_command)
+      {
+
+         *pbPressed = PRESSED(VK_RWIN) || PRESSED(VK_LWIN);
+
+      }
+      else
+      {
+
+         int iKeyCode = ::windows::user_key_to_key_code(ekey);
+
+         *pbPressed = (::GetAsyncKeyState(iKeyCode) & 0x8000) != 0;
+
+      }
+
+      return true;
+
+   }
+
+
+
 } // namespace apex_windows
+
+
+namespace windows
+{
+
+
+   int user_key_to_key_code(::user::enum_key ekey)
+   {
+
+      if (ekey >= ::user::e_key_0 && ekey <= ::user::e_key_9)
+      {
+
+         return (int)('0' + (ekey - ::user::e_key_0));
+
+      }
+
+      if (ekey >= ::user::e_key_a && ekey <= ::user::e_key_z)
+      {
+
+         return (int)('A' + (ekey - ::user::e_key_a));
+
+      }
+
+      if (ekey == ::user::e_key_space)
+      {
+
+         return (int)ekey;
+
+      }
+
+      switch (ekey)
+      {
+      case ::user::e_key_left:
+         return VK_LEFT;
+      case ::user::e_key_right:
+         return VK_RIGHT;
+      case ::user::e_key_up:
+         return VK_UP;
+      case ::user::e_key_down:
+         return VK_DOWN;
+      case ::user::e_key_tab:
+         return VK_TAB;
+      case ::user::e_key_return:
+         return VK_RETURN;
+      case ::user::e_key_left_shift:
+         return VK_LSHIFT;
+      case ::user::e_key_right_shift:
+         return VK_RSHIFT;
+      case ::user::e_key_left_control:
+         return VK_LCONTROL;
+      case ::user::e_key_right_control:
+         return VK_RCONTROL;
+      case ::user::e_key_left_alt:
+         return VK_LMENU;
+      case ::user::e_key_right_alt:
+         return VK_RMENU;
+      case ::user::e_key_left_command:
+         return VK_LWIN;
+      case ::user::e_key_right_command:
+         return VK_RWIN;
+      case ::user::e_key_back:
+         return VK_BACK;
+      case ::user::e_key_delete:
+         return VK_DELETE;
+      case ::user::e_key_home:
+         return VK_HOME;
+      case ::user::e_key_end:
+         return VK_END;
+      case ::user::e_key_page_up:
+         return VK_PRIOR;
+      case ::user::e_key_page_down:
+         return VK_NEXT;
+      case ::user::e_key_escape:
+         return VK_ESCAPE;
+      }
+
+      return ::user::e_key_none;
+
+   }
+
+
+} // namespace windows
 
 
 

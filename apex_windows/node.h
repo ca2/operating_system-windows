@@ -117,6 +117,9 @@ namespace apex_windows
       ::file::path app_shortcut_path(::acme::application* papplication) override;
 
 
+      bool is_key_pressed(bool * pbPressed, ::user::enum_key ekey) override;
+
+
    };
 
 

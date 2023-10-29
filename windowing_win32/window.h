@@ -941,7 +941,9 @@ namespace windowing_win32
          /* [out][in] */ __RPC__inout DWORD * pdwEffect);
 
 
-      void defer_show_system_menu(::message::mouse * pmouse) override;
+      //void defer_show_system_menu(::message::mouse * pmouse) override;
+
+      void defer_show_system_menu(const ::point_i32 & pointAbsolute) override;
 
 
       //::pointer<::message::message> get_message(const ::atom & atom, wparam wparam, lparam lparam);
