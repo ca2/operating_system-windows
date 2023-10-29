@@ -401,7 +401,7 @@ namespace aura_windows
    }
 
 
-   ::pointer < ::input::input > node::get_input()
+   ::pointer < ::input::input > node::create_input()
    {
 
       auto pfactory = acmesystem()->factory("input", "win32");
@@ -413,7 +413,6 @@ namespace aura_windows
       return pinput;
 
    }
-
 
 
 } // namespace aura_windows
