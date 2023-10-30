@@ -511,8 +511,9 @@ namespace windowing_win32
       {
 
 
-         m_uExtraFlagsSetWindowPos = SWP_NOZORDER
-            | SWP_ASYNCWINDOWPOS
+         m_uExtraFlagsSetWindowPos =
+            //SWP_NOZORDER |
+            SWP_ASYNCWINDOWPOS
             //| SWP_FRAMECHANGED
             //| SWP_NOSENDCHANGING
             | SWP_NOREDRAW
@@ -3669,18 +3670,29 @@ namespace windowing_win32
    bool window::_modify_style(iptr dwRemove, iptr dwAdd, ::u32 nFlags)
    {
 
-      auto nStyle = _get_style();
+      auto nStyleOld = _get_style();
 
-      nStyle &= ~dwRemove;
+      auto nStyleNew = nStyleOld & ~dwRemove;
 
-      nStyle |= dwAdd;
+      nStyleNew |= dwAdd;
 
-      _set_style(nStyle);
-
-      if (nFlags)
+      if (nStyleNew != nStyleOld)
       {
 
-         ::SetWindowPos(get_hwnd(), 0, 0, 0, 0, 0, SWP_NOSIZE | SWP_NOZORDER | SWP_NOMOVE | nFlags);
+         _set_style(nStyleNew);
+
+         if (nFlags)
+         {
+
+            ::SetWindowPos(get_hwnd(), 
+               0, 0, 0, 0, 0,
+               SWP_NOSIZE 
+               | SWP_NOZORDER
+               | SWP_NOMOVE
+               | SWP_NOACTIVATE
+               | nFlags);
+
+         }
 
       }
 
@@ -3692,23 +3704,29 @@ namespace windowing_win32
    bool window::_modify_ex_style(iptr dwRemove, iptr dwAdd, ::u32 nFlags)
    {
 
-      auto nExStyle = _get_ex_style();
+      auto nExStyleOld = _get_ex_style();
 
-      nExStyle &= ~dwRemove;
+      auto nExStyleNew = nExStyleOld & ~dwRemove;
 
-      nExStyle |= dwAdd;
+      nExStyleNew |= dwAdd;
 
-      _set_ex_style(nExStyle);
-
-      if (nFlags)
+      if (nExStyleNew != nExStyleOld)
       {
 
-         ::SetWindowPos(get_hwnd(), 0, 0, 0, 0, 0, 
-            SWP_NOSIZE
-            | SWP_NOZORDER 
-            | SWP_NOMOVE 
-            | SWP_NOACTIVATE
-            | nFlags);
+         _set_ex_style(nExStyleNew);
+
+         if (nFlags)
+         {
+
+            ::SetWindowPos(get_hwnd(), 
+               0, 0, 0, 0, 0,
+               SWP_NOSIZE
+               | SWP_NOZORDER
+               | SWP_NOMOVE
+               | SWP_NOACTIVATE
+               | nFlags);
+
+         }
 
       }
 
