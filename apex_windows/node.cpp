@@ -1179,6 +1179,15 @@ namespace apex_windows
    bool node::is_key_pressed(bool * pbPressed, ::user::enum_key ekey)
    {
 
+      if (ekey == ::user::e_key_left_button
+         || ekey == ::user::e_key_middle_button
+         || ekey == ::user::e_key_right_button)
+      {
+
+         return apex_windows_common::node::is_key_pressed(pbPressed, ekey);
+
+      }
+
       if (ekey == ::user::e_key_alt)
       {
 
