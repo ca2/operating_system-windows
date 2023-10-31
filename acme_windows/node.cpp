@@ -8,6 +8,7 @@
 #include "exclusive.h"
 #include "application.h"
 #include "acme/exception/exception.h"
+#include "acme/filesystem/filesystem/file_context.h"
 #include "acme/filesystem/filesystem/dir_context.h"
 //#include "acme/filesystem/filesystem/folder_dialog.h"
 #include "acme/operating_system/process.h"
@@ -4561,6 +4562,85 @@ namespace acme_windows
 
    }
 
+
+   ::string node::operating_system_application_version()
+   {
+
+      auto pathModule = file()->module();
+
+      ::wstring wstrModulePath(pathModule);
+
+      DWORD dw;
+
+      ::u32 dwResSize = GetFileVersionInfoSizeW(
+         wstrModulePath,
+         &dw);
+
+
+      if (dwResSize > 0)
+      {
+         memory memory;
+         memory.set_size(dwResSize);
+         if (GetFileVersionInfoW(
+            wstrModulePath,
+            0,
+            dwResSize,
+            memory.data()))
+         {
+            ::u32 cbTranslate;
+            struct LANGANDCODEPAGE
+            {
+               ::u16 wLanguage;
+               ::u16 wCodePage;
+            } *lpTranslate;
+
+            // read the list of languages and code pages.
+
+            VerQueryValueW(memory.data(),
+               TEXT("\\VarFileInfo\\Translation"),
+               (LPVOID*)&lpTranslate,
+               &cbTranslate);
+
+            wstring wstrKey;
+            //for( i=0; i < (cbTranslate/sizeof(struct LANGANDCODEPAGE)); i++ )
+            for (int i = 0; i < 1; i++)
+            {
+               wchar_t* lpwsz;
+               ::u32 uSize;
+
+               wstrKey.formatf(
+                  TEXT("\\StringFileInfo\\%04x%04x\\FileDescription"),
+                  lpTranslate[i].wLanguage,
+                  lpTranslate[i].wCodePage);
+
+
+
+
+               wstrKey.formatf(
+                  TEXT("\\StringFileInfo\\%04x%04x\\FileVersion"),
+                  lpTranslate[i].wLanguage,
+                  lpTranslate[i].wCodePage);
+
+               // Retrieve file description for language and code page "i".
+               VerQueryValueW(memory.data(),
+                  (wchar_t*)(const wchar_t*)wstrKey,
+                  (LPVOID*)&lpwsz,
+                  &uSize);
+
+
+               wstring wstrVersion(lpwsz, uSize);
+
+               return wstrVersion;
+
+            }
+
+         }
+
+      }
+
+      return "";
+
+   }
 
 
 
