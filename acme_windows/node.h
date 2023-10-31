@@ -299,6 +299,9 @@ namespace acme_windows
       void speak(const ::scoped_string& scopedstr) override;
 
 
+      ::string operating_system_application_version() override;
+
+
    };
 
 
