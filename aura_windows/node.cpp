@@ -406,7 +406,7 @@ namespace aura_windows
 
       auto pfactory = acmesystem()->factory("input", "win32");
 
-      auto pinput = pfactory->create<::input::input >();
+      auto pinput = pfactory->create<::input::input >(this);
 
       pinput->initialize(this);
 

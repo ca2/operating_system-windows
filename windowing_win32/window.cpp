@@ -530,7 +530,7 @@ namespace windowing_win32
    }
 
 
-   void window::window_do_update_screen()
+   void window::window_update_screen()
    {
 
       //      if(m_interlockedPostedScreenUpdate > 0)
@@ -7115,7 +7115,7 @@ namespace windowing_win32
    //}
 
 
-   void window::window_update_screen_buffer()
+   void window::__update_graphics_buffer()
    {
 
       m_puserinteractionimpl->m_pgraphics->update_screen();
