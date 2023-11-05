@@ -39,6 +39,9 @@
 #include <shellapi.h>
 
 
+#pragma comment(lib, "Version.lib")
+
+
 //
 //#if defined(_WIN32)
 //#  ifndef NOMINMAX
