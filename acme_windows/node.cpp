@@ -2744,10 +2744,11 @@ namespace acme_windows
    }
 
 
-   void node::implement(::pointer<::acme::node> & pnode, ::pointer<::acme::system> & psystem)
+   //void node::implement(::pointer<::acme::node> & pnode, ::pointer<::acme::system> & psystem)
+   void node::node_main()
    {
 
-      return ::acme::node::implement(pnode, psystem);
+      return ::acme::node::node_main();
 
    }
 

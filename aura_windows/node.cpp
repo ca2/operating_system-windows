@@ -343,11 +343,12 @@ namespace aura_windows
    }
 
 
-   void node::implement(::pointer<::acme::node>& pnode, ::pointer<::acme::system> & psystem)
+   void node::node_main()
    {
 
+      auto pacmesystem = acmesystem();
 
-      psystem->main();
+      pacmesystem->main();
 
    }
 

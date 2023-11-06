@@ -137,7 +137,9 @@ namespace windowing_win32
 
       //auto estatus = 
 
-      psysteminteraction->create_host(e_parallelization_synchronous);
+      //psysteminteraction->create_host(e_parallelization_synchronous);
+
+      psysteminteraction->create_host();
 
       //if(!estatus)
       //{

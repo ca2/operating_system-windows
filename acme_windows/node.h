@@ -185,7 +185,9 @@ namespace acme_windows
 
       virtual ::wstring expand_environment_variables(const ::wstring & wstr);
 
-      void implement(::pointer<::acme::node> & pnode, ::pointer<::acme::system> & psystem)override;
+      //void implement(::pointer<::acme::node> & pnode, ::pointer<::acme::system> & psystem)override;
+
+      void node_main()override;
 
 
       ::process_identifier current_process_identifier() override;
