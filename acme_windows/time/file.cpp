@@ -38,12 +38,12 @@ int_bool read_resource_as_file(const scoped_string & strFile, HINSTANCE hinstanc
 
       pResource = (DWORD *) LockResource(hglobalResource);
 
-         auto psystem = acmesystem();
+         auto psystem = system();
 
          auto pacmedir = psystem->m_pacmedirectory;
 
 
-               auto psystem = acmesystem();
+               auto psystem = system();
 
          auto pacmedir = psystem->m_pacmedirectory;
 
@@ -91,7 +91,7 @@ int_bool acmefile()->exists(const char * path1)
 int_bool acmefile()->put_contents(const char * path, const char * contents, memsize len)
 {
 
-            auto psystem = acmesystem();
+            auto psystem = system();
 
          auto pacmedir = psystem->m_pacmedirectory;
 

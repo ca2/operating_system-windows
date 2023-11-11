@@ -97,7 +97,7 @@ BOOL CLibraryFrame::PreCreateWindow(CREATESTRUCT& cs)
       return false;
    pusersystem->m_createstruct.dwExStyle &= ~WS_EX_TOOLWINDOW;
    pusersystem->m_createstruct.style |= MFS_SYNCACTIVE;
-   pusersystem->m_createstruct.hwndParent = acmeapplication()->m_pMainWnd->GetSafeHwnd();
+   pusersystem->m_createstruct.hwndParent = application()->m_pMainWnd->GetSafeHwnd();
    return true;
 
 }
@@ -219,7 +219,7 @@ BOOL CLibraryFrame::OnNcCreate(LPCREATESTRUCT lpcs)
    if(GetStyle() & MFS_SYNCACTIVE)
    {
       // syncronize activation state with top level parent
-      CWnd* pParentWnd = acmeapplication()->m_pMainWnd;
+      CWnd* pParentWnd = application()->m_pMainWnd;
       CWnd* pActiveWnd = GetForegroundWindow();
       BOOL bActive = (pParentWnd == pActiveWnd) ||
          (pParentWnd->GetLastActivePopup() == pActiveWnd &&
@@ -423,7 +423,7 @@ BOOL CLibraryFrame::LoadFrame(UINT nIDResource,DWORD dwDefaultStyle,
    // attempt to create the window
    LPCTSTR lpszClass = GetIconWndClass(dwDefaultStyle,nIDResource);
    CString strTitle = m_strTitle;
-   if(!Create(acmeapplication()->m_pMainWnd, 0, pContext))
+   if(!Create(application()->m_pMainWnd, 0, pContext))
    {
       return false;   // will self destruct on failure normally
    }

@@ -94,12 +94,12 @@ void __cdecl _null_se_translator(u32 uiCode, EXCEPTION_POINTERS * ppointers)
 //         strLinkTitle.replace("\\", "_");
 //         strLinkTitle.replace("-", "_");
 //
-//         pathLnk =          auto psystem = acmesystem();
+//         pathLnk =          auto psystem = system();
 
 
          //pacmedir->localconfig() / "desk/monitor-0/2desk" / strLinkTitle + ".lnk";
 //
-//                  auto psystem = acmesystem();
+//                  auto psystem = system();
 
 
 //pacmedir->create(pathLnk.folder());
@@ -131,7 +131,7 @@ void os_post_quit()
 //
 //   ::pointer<::matter>pobjectTask = pobjectTaskParam;
 //   
-//   acmesystem()->post_predicate([pobjectTask]()
+//   system()->post_predicate([pobjectTask]()
 //   {
 //
 //      pobjectTask->call();
@@ -146,7 +146,7 @@ void os_post_quit()
 //   
 //   ::pointer<::matter>pobjectTask = pobjectTaskParam;
 //   
-//   acmesystem()->send_predicate([pobjectTask]()
+//   system()->send_predicate([pobjectTask]()
 //   {
 //
 //      pobjectTask->call();

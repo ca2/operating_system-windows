@@ -776,7 +776,7 @@ namespace draw2d_gdiplus
       double centerx = (x2 + x1) / 2.0;
       double centery = (y2 + y1) / 2.0;
 
-      //::pointer<::aura::system>psystem = acmesystem();
+      //::pointer<::aura::system>psystem = system();
 
       auto pmathematics = ::mathematics::mathematics();
 
@@ -6025,7 +6025,7 @@ namespace draw2d_gdiplus
 
       }
 
-      synchronous_lock synchronouslock(acmesystem()->m_paurasystem->draw2d()->write_text()->m_pparticleFontTextMapSynchronization);
+      synchronous_lock synchronouslock(system()->m_paurasystem->draw2d()->write_text()->m_pparticleFontTextMapSynchronization);
 
       daLeft.erase_all();
 
@@ -6325,7 +6325,7 @@ namespace draw2d_gdiplus
 
       m_pfont->defer_update(this, 0);
 
-      auto psystem = acmesystem();
+      auto psystem = system();
 
       auto paurasystem = psystem->m_paurasystem;
 
@@ -6838,7 +6838,7 @@ namespace draw2d_gdiplus
 
       Gdiplus::Font * pfont = m_pfont->get_os_data < Gdiplus::Font * >(this);
 
-      auto psystem = acmesystem();
+      auto psystem = system();
 
       auto paurasystem = psystem->m_paurasystem;
 

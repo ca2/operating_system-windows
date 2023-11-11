@@ -142,7 +142,7 @@ namespace acme_windows
    //string file_memory_map::calculate_path_from_name(const ::string & strName)
    //{
 
-   //   auto pathFolder = acmesystem()->get_memory_map_base_folder_path();
+   //   auto pathFolder = system()->get_memory_map_base_folder_path();
 
    //   auto path = pathFolder / (strName + ".filememorymap");
 

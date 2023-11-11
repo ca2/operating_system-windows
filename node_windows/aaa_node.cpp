@@ -393,9 +393,9 @@ namespace aura
       void node::system_main()
       {
 
-         //::pointer<::node::system>psystem = acmesystem();
+         //::pointer<::node::system>psystem = system();
 
-         auto psystem = acmesystem();
+         auto psystem = system();
 
          auto estatus = psystem->main();
 
@@ -406,7 +406,7 @@ namespace aura
 
          }
 
-         estatus = acmesystem()->inline_term();
+         estatus = system()->inline_term();
 
          if (!estatus)
          {

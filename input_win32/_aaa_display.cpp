@@ -550,7 +550,7 @@ namespace windowing_win32
 
       ::e_display edisplayPrevious = *pedisplay;
 
-      auto psystem = acmesystem()->m_paurasystem;
+      auto psystem = system()->m_paurasystem;
 
       double dMargin = psystem->m_dDpi;
 

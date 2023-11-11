@@ -28,7 +28,7 @@ namespace apex_windows
 
       string strParams = get_params();
 
-      auto psystem = acmesystem();
+      auto psystem = system();
 
       auto pnode = psystem->node();
 

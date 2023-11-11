@@ -102,7 +102,7 @@ namespace acme_windows
 
       }
 
-      auto psystem = acmesystem();
+      auto psystem = system();
 
       auto pacmedir = psystem->m_pacmedirectory;
 
@@ -115,7 +115,7 @@ namespace acme_windows
 
       }
 
-          /*     auto psystem = acmesystem();
+          /*     auto psystem = system();
 
          auto pacmedir = psystem->m_pacmedirectory;*/
 

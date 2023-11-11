@@ -50,7 +50,7 @@ void gdiplus_draw_text(::draw2d::graphics* pgraphicsParam, ::draw2d::path* ppath
 
    }
 
-   synchronous_lock synchronouslock(::acme::acme::g_pacme->m_pplatform->acmesystem()->m_paurasystem->draw2d()->write_text()->m_pparticleFontTextMapSynchronization);
+   synchronous_lock synchronouslock(::platform::get()->system()->m_paurasystem->draw2d()->write_text()->m_pparticleFontTextMapSynchronization);
 
    Gdiplus::GraphicsPath* ppath = nullptr;
 

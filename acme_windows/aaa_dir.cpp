@@ -121,7 +121,7 @@
 //
 //            FormatMessage(FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_SYSTEM, nullptr, dwError, 0, (WCHAR *)&pwszError, 8, nullptr);
 //
-//            //informationf("         auto psystem = acmesystem();
+//            //informationf("         auto psystem = system();
 
 //         auto pacmedir = psystem->m_pacmedirectory;
 //

@@ -51,7 +51,7 @@ namespace acme_windows
 
       //}
 
-      ::pointer<::acme::system>psystem = acmesystem();
+      ::pointer<::acme::system>psystem = system();
 
       //__refer(
       m_pfilesystem = psystem->m_pfilesystem;
@@ -858,13 +858,13 @@ namespace acme_windows
    ::file::path dir_context::module()
    {
 
-      //::pointer<::apex::system>psystem = acmesystem();
+      //::pointer<::apex::system>psystem = system();
 
       //return psystem->m_pdirsystem->m_pathModule;
 
-      auto pacmeapplication = acmeapplication();
+      auto papplication = application();
 
-      return pacmeapplication->get_module_folder();
+      return papplication->get_module_folder();
 
    }
 
@@ -872,7 +872,7 @@ namespace acme_windows
    //::file::path dir_context::ca2module()
    //{
 
-   //   ::pointer<::apex::system>psystem = acmesystem();
+   //   ::pointer<::apex::system>psystem = system();
 
    //   return psystem->m_pdirsystem->m_pathCa2Module;
 

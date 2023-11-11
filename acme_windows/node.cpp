@@ -726,7 +726,7 @@ namespace acme_windows
    //   void node::start()
    //   {
    //
-   //      auto estatus = acmesystem()->m_papexsystem->m_papex->thread_initialize(acmesystem()->m_papexsystem);
+   //      auto estatus = system()->m_papexsystem->m_papex->thread_initialize(system()->m_papexsystem);
    //
    //      if (!estatus)
    //      {
@@ -735,7 +735,7 @@ namespace acme_windows
    //
    //      }
    //
-   //      estatus = acmesystem()->on_start();
+   //      estatus = system()->on_start();
    //
    //      if (!estatus)
    //      {
@@ -744,7 +744,7 @@ namespace acme_windows
    //
    //      }
    //
-   //      estatus = acmesystem()->main();
+   //      estatus = system()->main();
    //
    //      if (!estatus)
    //      {
@@ -753,7 +753,7 @@ namespace acme_windows
    //
    //      }
    //
-   //      estatus = acmesystem()->inline_term();
+   //      estatus = system()->inline_term();
    //
    //      if (!estatus)
    //      {
@@ -835,7 +835,7 @@ namespace acme_windows
    //   string node::veriwell_multimedia_music_midi_get_default_implementation_name()
    //   {
    //
-   //      return acmesystem()->implementation_name("music_midi", "mmsystem");
+   //      return system()->implementation_name("music_midi", "mmsystem");
    //
    //   }
    //
@@ -1054,7 +1054,7 @@ namespace acme_windows
    string node::audio_get_default_implementation_name()
    {
 
-      return acmesystem()->implementation_name("audio", "mmsystem");
+      return system()->implementation_name("audio", "mmsystem");
 
    }
 
@@ -1062,7 +1062,7 @@ namespace acme_windows
    //void node::on_start_system()
    //{
 
-   //   auto psystem = acmesystem();
+   //   auto psystem = system();
 
    //   auto estatus = psystem->post_initial_request();
 
@@ -2756,8 +2756,8 @@ namespace acme_windows
    void node::on_start_system()
    {
 
-      //auto estatus = acmesystem()->post_initial_request();
-      acmesystem()->defer_post_initial_request();
+      //auto estatus = system()->post_initial_request();
+      system()->defer_post_initial_request();
 
       //if (!estatus)
       //{

@@ -252,7 +252,7 @@ namespace apex_windows
             s_pservicehandler->control_stop(control);
             s_pservicehandler->update_state(SERVICE_STOPPED);
 
-            auto psystem = s_pservicehandler->acmesystem();
+            auto psystem = s_pservicehandler->system();
 
             psystem->set_finish();
 

@@ -346,7 +346,7 @@ namespace aura_windows
    void node::node_main()
    {
 
-      auto pacmesystem = acmesystem();
+      auto pacmesystem = system();
 
       pacmesystem->main();
 
@@ -356,9 +356,9 @@ namespace aura_windows
    void node::system_main()
    {
 
-      //::pointer<::node::system>psystem = acmesystem();
+      //::pointer<::node::system>psystem = system();
 
-      auto psystem = acmesystem();
+      auto psystem = system();
 
       //auto estatus = 
 
@@ -371,7 +371,7 @@ namespace aura_windows
 
       //}
 
-      /*estatus = acmesystem()->inline_term();
+      /*estatus = system()->inline_term();
 
       if (!estatus)
       {
@@ -405,7 +405,7 @@ namespace aura_windows
    ::pointer < ::input::input > node::create_input()
    {
 
-      auto pfactory = acmesystem()->factory("input", "win32");
+      auto pfactory = system()->factory("input", "win32");
 
       auto pinput = pfactory->create<::input::input >(this);
 

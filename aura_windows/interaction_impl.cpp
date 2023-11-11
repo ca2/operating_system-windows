@@ -647,7 +647,7 @@ namespace aura_windows
       {
 
 
-         acmeapplication()->show_about_box();
+         application()->show_about_box();
 
          }
 
@@ -4207,12 +4207,12 @@ void interaction_impl::set_tool_window(bool bSet)
 //void interaction_impl::native_create_host()
 //{
 //
-//   auto pwindowMain = acmesystem()->m_paurasystem->m_pwindowMain;
+//   auto pwindowMain = system()->m_paurasystem->m_pwindowMain;
 //
 //   if (pwindowMain && !pwindowMain->m_puserinteractionimpl)
 //   {
 //
-//      m_pwindow = acmesystem()->m_paurasystem->m_pwindowMain;
+//      m_pwindow = system()->m_paurasystem->m_pwindowMain;
 //
 //      m_pwindow->m_puserinteractionimpl = this;
 //
@@ -4233,10 +4233,10 @@ void interaction_impl::set_tool_window(bool bSet)
 //
 //      //}
 //
-//      if (!acmesystem()->m_paurasystem->m_pwindowMain)
+//      if (!system()->m_paurasystem->m_pwindowMain)
 //      {
 //
-//         acmesystem()->m_paurasystem->m_pwindowMain = m_pwindow;
+//         system()->m_paurasystem->m_pwindowMain = m_pwindow;
 //
 //      }
 //

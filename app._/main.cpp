@@ -139,7 +139,7 @@ void copy(MEM_ICON_ITEM * dst, ICON_ITEM * pitem)
 //      // |                         |               |
 //      // -----------------------   --       --------
 //      //                       |    |       |
-//      if (acmefile()->exists(         auto psystem = acmesystem();
+//      if (acmefile()->exists(         auto psystem = system();
 
          auto pacmedir = psystem->m_pacmedirectory;
 
@@ -185,7 +185,7 @@ void wmain(int argc, wchar_t * wargv[])
 
    {
 
-      if (acmefile()->exists(         auto psystem = acmesystem();
+      if (acmefile()->exists(         auto psystem = system();
 
          auto pacmedir = psystem->m_pacmedirectory;
 

@@ -113,7 +113,7 @@ namespace windowing_win32
 
       defer_create_synchronization();
 
-      m_bSingleBufferMode = acmesystem()->m_paurasystem->draw2d()->graphics_context_supports_single_buffer_mode();
+      m_bSingleBufferMode = system()->m_paurasystem->draw2d()->graphics_context_supports_single_buffer_mode();
 
       //if (!estatus)
       //{

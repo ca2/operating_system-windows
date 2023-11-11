@@ -481,7 +481,7 @@ namespace apex_windows
    {
 
       //auto estatus = 
-      acmesystem()->m_pacmenode->m_papexnode->thread_initialize(acmesystem()->m_papexsystem);
+      system()->m_pacmenode->m_papexnode->thread_initialize(system()->m_papexsystem);
 
       //if (!estatus)
       //{
@@ -492,7 +492,7 @@ namespace apex_windows
 
       //estatus = 
 
-      acmesystem()->on_start_system();
+      system()->on_start_system();
 
       //if (!estatus)
       //{
@@ -502,7 +502,7 @@ namespace apex_windows
       //}
 
       //estatus = 
-      acmesystem()->main();
+      system()->main();
 
       //if (!estatus)
       //{
@@ -511,7 +511,7 @@ namespace apex_windows
 
       //}
 
-      //estatus = acmesystem()->inline_term();
+      //estatus = system()->inline_term();
 
       //if (!estatus)
       //{
@@ -731,7 +731,7 @@ namespace apex_windows
    string node::veriwell_multimedia_music_midi_get_default_implementation_name()
    {
 
-      return acmesystem()->implementation_name("music_midi", "mmsystem");
+      return system()->implementation_name("music_midi", "mmsystem");
 
    }
 
@@ -739,7 +739,7 @@ namespace apex_windows
    string node::multimedia_audio_mixer_get_default_implementation_name()
    {
 
-      return acmesystem()->implementation_name("audio_mixer", "mmsystem");
+      return system()->implementation_name("audio_mixer", "mmsystem");
 
    }
 
@@ -975,7 +975,7 @@ namespace apex_windows
    void node::user_post(const ::procedure& procedure)
    {
 
-      acmesystem()->m_papexsystem->post_procedure(procedure);
+      system()->m_papexsystem->post_procedure(procedure);
 
    }
 
@@ -998,7 +998,7 @@ namespace apex_windows
             if (strAppId.has_char())
             {
 
-               auto pnode = acmesystem()->node()->m_papexnode;
+               auto pnode = system()->node()->m_papexnode;
 
                string strAppName = papp->app_name();
 
@@ -1128,7 +1128,7 @@ namespace apex_windows
 
       //   acmedirectory()->create(pathLnk.folder());
 
-      //   acmesystem()->m_pacmenode->m_papexnode->shell_create_link(pathObj, pathLnk, "app=" + papplication->m_strAppName);
+      //   system()->m_pacmenode->m_papexnode->shell_create_link(pathObj, pathLnk, "app=" + papplication->m_strAppName);
 
       //}
 

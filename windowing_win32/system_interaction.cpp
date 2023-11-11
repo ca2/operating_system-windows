@@ -71,7 +71,7 @@ namespace windowing_win32
 
       //::finalize_windows_devices();
 
-      acmesystem()->m_paurasystem->m_phardwaredevices.release();
+      system()->m_paurasystem->m_phardwaredevices.release();
 
       ::pointer<::user::message>pusermessage(pmessage);
 
@@ -102,7 +102,7 @@ namespace windowing_win32
          if (pmessage->m_atom == (enum_message) WM_FONTCHANGE)
          {
 
-            auto psystem = acmesystem()->m_paurasystem;
+            auto psystem = system()->m_paurasystem;
 
             psystem->signal(id_operating_system_font_list_change);/*
 
@@ -122,7 +122,7 @@ namespace windowing_win32
             strLparamString == "ImmersiveColorSet")
          {
 
-            auto psystem = acmesystem()->m_paurasystem;
+            auto psystem = system()->m_paurasystem;
 
             psystem->m_pnode->fetch_user_color();
 

@@ -94,13 +94,13 @@ string ca2_command_line(hinstance hinstance)
 //         strLinkTitle.replace("\\", "_");
 //         strLinkTitle.replace("-", "_");
 //
-//         pathLnk =          auto psystem = acmesystem();
+//         pathLnk =          auto psystem = system();
 
          auto pacmedir = psystem->m_pacmedirectory;
 
 pacmedir->localconfig() / "desk/monitor-0/2desk" / strLinkTitle + ".lnk";
 //
-//                  auto psystem = acmesystem();
+//                  auto psystem = system();
 
          auto pacmedir = psystem->m_pacmedirectory;
 
@@ -133,7 +133,7 @@ void os_post_quit()
 //
 //   ::pointer<::matter>pobjectTask = pobjectTaskParam;
 //   
-//   acmesystem()->post_predicate([pobjectTask]()
+//   system()->post_predicate([pobjectTask]()
 //   {
 //
 //      pobjectTask->call();
@@ -148,7 +148,7 @@ void os_post_quit()
 //   
 //   ::pointer<::matter>pobjectTask = pobjectTaskParam;
 //   
-//   acmesystem()->send_predicate([pobjectTask]()
+//   system()->send_predicate([pobjectTask]()
 //   {
 //
 //      pobjectTask->call();
