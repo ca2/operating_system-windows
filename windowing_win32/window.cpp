@@ -525,7 +525,9 @@ namespace windowing_win32
 
       puserinteraction->increment_reference_count(OBJECT_REFERENCE_COUNT_DEBUG_THIS);
 
-      puserinteraction->m_ewindowflag |= e_window_flag_window_created;
+      puserinteraction->on_finished_window_creation();
+
+      //puserinteraction->m_ewindowflag |= e_window_flag_window_created;
 
    }
 
