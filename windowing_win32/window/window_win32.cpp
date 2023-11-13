@@ -234,6 +234,12 @@ LRESULT CALLBACK __window_procedure(HWND hwnd, UINT message, WPARAM wparam, LPAR
       ::informationf("WM_COMMAND");
 
    }
+   else if (message == WM_KILLFOCUS)
+   {
+
+      ::informationf("WM_KILLFOCUS");
+
+   }
 
    if (message == WM_APP + 12345)
    {
