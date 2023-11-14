@@ -52,6 +52,7 @@ namespace acme_windows
 
       //void initialize_integration();
 
+
       void shell_open(const ::file::path & path, const ::string & strParams = "", const ::file::path & pathFolder = "") override;
 
 
