@@ -411,7 +411,7 @@ namespace acme_windows
    //   }
    //
    //
-   //   bool node::_os_calc_system_dark_mode()
+   //   bool node::_os_calc_dark_mode()
    //   {
    //
    //      try
@@ -2756,8 +2756,10 @@ namespace acme_windows
    void node::on_start_system()
    {
 
+      ::acme::node::on_start_system();
+
+
       //auto estatus = system()->post_initial_request();
-      system()->defer_post_initial_request();
 
       //if (!estatus)
       //{
