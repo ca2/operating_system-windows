@@ -346,9 +346,11 @@ namespace aura_windows
    void node::node_main()
    {
 
-      auto pacmesystem = system();
+      //auto pacmesystem = system();
 
-      pacmesystem->main();
+      //pacmesystem->main();
+
+      ::apex_windows::node::node_main();
 
    }
 
@@ -356,13 +358,15 @@ namespace aura_windows
    void node::system_main()
    {
 
+      apex_windows::node::system_main();
+
       //::pointer<::node::system>psystem = system();
 
-      auto psystem = system();
+      //auto psystem = system();
 
       //auto estatus = 
 
-      psystem->main();
+//      psystem->main();
 
       //if (!estatus)
       //{

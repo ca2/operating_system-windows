@@ -480,47 +480,49 @@ namespace apex_windows
    void node::system_main()
    {
 
-      //auto estatus = 
-      system()->m_pacmenode->m_papexnode->thread_initialize(system()->m_papexsystem);
+      acme_windows::node::system_main();
 
-      //if (!estatus)
-      //{
+      ////auto estatus = 
+      //system()->m_pacmenode->m_papexnode->thread_initialize(system()->m_papexsystem);
 
-      //   return estatus;
+      ////if (!estatus)
+      ////{
 
-      //}
+      ////   return estatus;
 
-      //estatus = 
+      ////}
 
-      system()->on_start_system();
+      ////estatus = 
 
-      //if (!estatus)
-      //{
+      //system()->on_start_system();
 
-      //   return estatus;
+      ////if (!estatus)
+      ////{
 
-      //}
+      ////   return estatus;
 
-      //estatus = 
-      system()->main();
+      ////}
 
-      //if (!estatus)
-      //{
+      ////estatus = 
+      //system()->main();
 
-      //   return estatus;
+      ////if (!estatus)
+      ////{
 
-      //}
+      ////   return estatus;
 
-      //estatus = system()->inline_term();
+      ////}
 
-      //if (!estatus)
-      //{
+      ////estatus = system()->inline_term();
 
-      //   return estatus;
+      ////if (!estatus)
+      ////{
 
-      //}
+      ////   return estatus;
 
-      //return estatus;
+      ////}
+
+      ////return estatus;
 
 
    }
