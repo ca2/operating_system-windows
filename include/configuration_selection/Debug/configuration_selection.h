@@ -6,8 +6,18 @@
 #define _DEBUG
 #endif // _DEBUG
 
-#define MEMDLEAK 1
-#define MEMDLEAK_CALL_STACK 1
+
+// #define MEMDLEAK 1
+// #define MEMDLEAK_CALL_STACK 1
+// #define MEMDLEAK_DEFAULT 1
+
+
+#define MEMDLEAK 0
+#define MEMDLEAK_CALL_STACK 0
+#define MEMDLEAK_DEFAULT 0
+
+
+#define OBJECT_REFERENCE_COUNT_DEBUG 1
 
 
 
