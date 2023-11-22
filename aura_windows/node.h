@@ -56,7 +56,10 @@ namespace aura_windows
       virtual void register_dll(const ::file::path& pathDll) override;
 
 
-      void implement(::pointer<::acme::node>& pnode, ::pointer<::acme::system> & psystem) override;
+      //void implement(::pointer<::acme::node>& pnode, ::pointer<::acme::system> & psystem) override;
+      //void implement(::pointer<::acme::node> & pnode, ::pointer<::acme::system> & psystem) override;
+
+      void node_main() override;
 
       virtual void system_main() override;
 
@@ -67,7 +70,7 @@ namespace aura_windows
       void* HICON_from_image(::image * pimage);
 
 
-      ::pointer < ::input::input > get_input() override;
+      ::pointer < ::input::input > create_input() override;
 
 
    };

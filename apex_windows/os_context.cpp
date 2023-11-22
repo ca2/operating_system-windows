@@ -879,9 +879,9 @@ namespace apex_windows
       //if (strProfile.has_char())
       //{
 
-      //   auto path = acmesystem()->m_papexsystem->dir().config() / "config/browser" / strBrowser / (strProfile + ".txt");
+      //   auto path = system()->m_papexsystem->dir().config() / "config/browser" / strBrowser / (strProfile + ".txt");
 
-      //   strMappedProfile = acmesystem()->m_papexsystem->file().as_string(path);
+      //   strMappedProfile = system()->m_papexsystem->file().as_string(path);
 
       //}
 
@@ -1831,7 +1831,7 @@ namespace apex_windows
       if (status.m_timeModification != 0_s)
       {
 
-         //acmesystem()->m_pnode->datetime_to_filetime((file_time_t *) &lastWriteTime, status.m_mtime);
+         //system()->m_pnode->datetime_to_filetime((file_time_t *) &lastWriteTime, status.m_mtime);
 
          lastWriteTime = as_FILETIME(file_time(status.m_timeModification));
 
@@ -1844,7 +1844,7 @@ namespace apex_windows
       if (status.m_timeAccess != 0_s)
       {
 
-         //auto pnode = acmesystem()->m_papexsystem->node();
+         //auto pnode = system()->m_papexsystem->node();
 
          lastAccessTime = as_FILETIME(file_time(status.m_timeAccess));
 

@@ -3,6 +3,7 @@
 #include "master_device_listener.h"
 #include "devices.h"
 #include "apex/message/message.h"
+#include "aura/hardware/device_group.h"
 
 
 namespace windowing_win32
@@ -162,12 +163,12 @@ namespace windowing_win32
    void master_device_listener::on_device_nodes_changed()
    {
 
-      auto & pdevicelistenera = m_pdevices->m_mapdevicelistenera[m_edevice];
+      auto & pdevicegroup = m_pdevices->m_mapdevicegroup[m_edevice];
 
-      if (pdevicelistenera)
+      if (pdevicegroup)
       {
 
-         for (auto & pdevice : *pdevicelistenera)
+         for (auto & pdevice : *pdevicegroup)
          {
 
             pdevice->on_device_nodes_changed();
@@ -182,12 +183,12 @@ namespace windowing_win32
    void master_device_listener::on_device_plugged(::hardware::enum_device edevice)
    {
 
-      auto& pdevicelistenera = m_pdevices->m_mapdevicelistenera[m_edevice];
+      auto& pdevicegroup = m_pdevices->m_mapdevicegroup[m_edevice];
 
-      if (pdevicelistenera)
+      if (pdevicegroup)
       {
 
-         for (auto& pdevice : *pdevicelistenera)
+         for (auto& pdevice : *pdevicegroup)
          {
 
             pdevice->on_device_plugged(edevice);
@@ -202,12 +203,12 @@ namespace windowing_win32
    void master_device_listener::on_device_unplugged(::hardware::enum_device edevice)
    {
 
-      auto& pdevicelistenera = m_pdevices->m_mapdevicelistenera[m_edevice];
+      auto& pdevicegroup = m_pdevices->m_mapdevicegroup[m_edevice];
 
-      if (pdevicelistenera)
+      if (pdevicegroup)
       {
 
-         for (auto& pdevice : *pdevicelistenera)
+         for (auto& pdevice : *pdevicegroup)
          {
 
             pdevice->on_device_unplugged(edevice);

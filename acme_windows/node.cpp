@@ -8,6 +8,7 @@
 #include "exclusive.h"
 #include "application.h"
 #include "acme/exception/exception.h"
+#include "acme/filesystem/filesystem/file_context.h"
 #include "acme/filesystem/filesystem/dir_context.h"
 //#include "acme/filesystem/filesystem/folder_dialog.h"
 #include "acme/operating_system/process.h"
@@ -36,6 +37,9 @@
 #include "acme_windows_common/variant.h"
 #include <Shldisp.h>
 #include <shellapi.h>
+
+
+#pragma comment(lib, "Version.lib")
 
 
 //
@@ -407,7 +411,7 @@ namespace acme_windows
    //   }
    //
    //
-   //   bool node::_os_calc_system_dark_mode()
+   //   bool node::_os_calc_dark_mode()
    //   {
    //
    //      try
@@ -722,7 +726,7 @@ namespace acme_windows
    //   void node::start()
    //   {
    //
-   //      auto estatus = acmesystem()->m_papexsystem->m_papex->thread_initialize(acmesystem()->m_papexsystem);
+   //      auto estatus = system()->m_papexsystem->m_papex->thread_initialize(system()->m_papexsystem);
    //
    //      if (!estatus)
    //      {
@@ -731,7 +735,7 @@ namespace acme_windows
    //
    //      }
    //
-   //      estatus = acmesystem()->on_start();
+   //      estatus = system()->on_start();
    //
    //      if (!estatus)
    //      {
@@ -740,7 +744,7 @@ namespace acme_windows
    //
    //      }
    //
-   //      estatus = acmesystem()->main();
+   //      estatus = system()->main();
    //
    //      if (!estatus)
    //      {
@@ -749,7 +753,7 @@ namespace acme_windows
    //
    //      }
    //
-   //      estatus = acmesystem()->inline_term();
+   //      estatus = system()->inline_term();
    //
    //      if (!estatus)
    //      {
@@ -831,7 +835,7 @@ namespace acme_windows
    //   string node::veriwell_multimedia_music_midi_get_default_implementation_name()
    //   {
    //
-   //      return acmesystem()->implementation_name("music_midi", "mmsystem");
+   //      return system()->implementation_name("music_midi", "mmsystem");
    //
    //   }
    //
@@ -1050,7 +1054,7 @@ namespace acme_windows
    string node::audio_get_default_implementation_name()
    {
 
-      return acmesystem()->implementation_name("audio", "mmsystem");
+      return system()->implementation_name("audio", "mmsystem");
 
    }
 
@@ -1058,7 +1062,7 @@ namespace acme_windows
    //void node::on_start_system()
    //{
 
-   //   auto psystem = acmesystem();
+   //   auto psystem = system();
 
    //   auto estatus = psystem->post_initial_request();
 
@@ -2740,10 +2744,11 @@ namespace acme_windows
    }
 
 
-   void node::implement(::pointer<::acme::node> & pnode, ::pointer<::acme::system> & psystem)
+   //void node::implement(::pointer<::acme::node> & pnode, ::pointer<::acme::system> & psystem)
+   void node::node_main()
    {
 
-      return ::acme::node::implement(pnode, psystem);
+      return ::acme::node::node_main();
 
    }
 
@@ -2751,8 +2756,10 @@ namespace acme_windows
    void node::on_start_system()
    {
 
-      //auto estatus = acmesystem()->post_initial_request();
-      acmesystem()->defer_post_initial_request();
+      ::acme::node::on_start_system();
+
+
+      //auto estatus = system()->post_initial_request();
 
       //if (!estatus)
       //{
@@ -4561,6 +4568,85 @@ namespace acme_windows
 
    }
 
+
+   ::string node::operating_system_application_version()
+   {
+
+      auto pathModule = file()->module();
+
+      ::wstring wstrModulePath(pathModule);
+
+      DWORD dw;
+
+      ::u32 dwResSize = GetFileVersionInfoSizeW(
+         wstrModulePath,
+         &dw);
+
+
+      if (dwResSize > 0)
+      {
+         memory memory;
+         memory.set_size(dwResSize);
+         if (GetFileVersionInfoW(
+            wstrModulePath,
+            0,
+            dwResSize,
+            memory.data()))
+         {
+            ::u32 cbTranslate;
+            struct LANGANDCODEPAGE
+            {
+               ::u16 wLanguage;
+               ::u16 wCodePage;
+            } *lpTranslate;
+
+            // read the list of languages and code pages.
+
+            VerQueryValueW(memory.data(),
+               TEXT("\\VarFileInfo\\Translation"),
+               (LPVOID*)&lpTranslate,
+               &cbTranslate);
+
+            wstring wstrKey;
+            //for( i=0; i < (cbTranslate/sizeof(struct LANGANDCODEPAGE)); i++ )
+            for (int i = 0; i < 1; i++)
+            {
+               wchar_t* lpwsz;
+               ::u32 uSize;
+
+               wstrKey.formatf(
+                  TEXT("\\StringFileInfo\\%04x%04x\\FileDescription"),
+                  lpTranslate[i].wLanguage,
+                  lpTranslate[i].wCodePage);
+
+
+
+
+               wstrKey.formatf(
+                  TEXT("\\StringFileInfo\\%04x%04x\\FileVersion"),
+                  lpTranslate[i].wLanguage,
+                  lpTranslate[i].wCodePage);
+
+               // Retrieve file description for language and code page "i".
+               VerQueryValueW(memory.data(),
+                  (wchar_t*)(const wchar_t*)wstrKey,
+                  (LPVOID*)&lpwsz,
+                  &uSize);
+
+
+               wstring wstrVersion(lpwsz, uSize);
+
+               return wstrVersion;
+
+            }
+
+         }
+
+      }
+
+      return "";
+
+   }
 
 
 

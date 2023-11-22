@@ -85,6 +85,8 @@ void imm_client::_011OnChar(::message::message * pmessage)
          || psession->is_key_pressed(::user::e_key_alt))
       {
 
+         information() << "CTRL and/or ALT pressed : ignoring key press";
+
          return;
 
       }

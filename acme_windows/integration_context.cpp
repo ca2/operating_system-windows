@@ -158,7 +158,7 @@ namespace acme_windows
 
 #endif
 
-         auto papp = acmeapplication();
+         auto papp = application();
 
 #ifdef WINDOWS_DESKTOP
 
@@ -300,7 +300,7 @@ namespace acme_windows
          //string strLog;
 
 
-         auto papp = acmeapplication();
+         auto papp = application();
 
 
 #ifdef WINDOWS
@@ -349,7 +349,7 @@ namespace acme_windows
 
          //acmefile()->put_contents(pacmedirectory->system() / strRel / "env.bat", "@call " + strBuildCmd + "\r\n@set");
 
-         auto psystem = acmesystem();
+         auto psystem = system();
 
          auto pnode = psystem->node();
 
@@ -543,7 +543,7 @@ namespace acme_windows
          //   set_thread_priority(::e_priority_highest);
          //   process->prop("inherit") = false;
          //
-         //   ::file::path pathCommand =          auto psystem = acmesystem();
+         //   ::file::path pathCommand =          auto psystem = system();
 
          //         auto pacmedirectory = psystem->m_pacmedirectory;
          //
@@ -662,7 +662,7 @@ namespace acme_windows
          //
          //stra.add_lines(strLog);
 
-         //string strEnv = acmefile()->as_string(         auto psystem = acmesystem();
+         //string strEnv = acmefile()->as_string(         auto psystem = system();
 
       //         auto pacmedirectory = psystem->m_pacmedirectory;
       //
@@ -842,7 +842,7 @@ namespace acme_windows
    void node::integration_factory()
    {
 
-      acmesystem()->m_psubsystem->m_pfactory->add_factory_item < ::acme_windows::integration::context, ::integration::context >();
+      system()->m_pplatform->m_pfactory->add_factory_item < ::acme_windows::integration::context, ::integration::context >();
 
    }
 

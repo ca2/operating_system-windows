@@ -168,7 +168,7 @@ namespace windowing_win32
 
       bool _set_window_position_unlocked(const class ::zorder & zorder, i32 x, i32 y, i32 cx, i32 cy, const ::e_activation & eactivation, bool bNoZorder, bool bNoMove, bool bNoSize, ::e_display edisplay) override;
 
-      void window_do_update_screen() override;
+      void window_update_screen() override;
 
       //bool strict_set_window_position_unlocked() override;
 
@@ -906,7 +906,7 @@ namespace windowing_win32
       virtual float dpix(float x) override;
 
       //void _window_request_presentation_locked() override;
-      void window_update_screen_buffer() override;
+      void __update_graphics_buffer() override;
 
       //void get_cursor_position(::point_i32 * ppointCursor) override;
       //void set_cursor_position(const ::point_i32 & pointCursor) override;
@@ -941,7 +941,9 @@ namespace windowing_win32
          /* [out][in] */ __RPC__inout DWORD * pdwEffect);
 
 
-      void defer_show_system_menu(::message::mouse * pmouse) override;
+      //void defer_show_system_menu(::message::mouse * pmouse) override;
+
+      void defer_show_system_menu(const ::point_i32 & pointAbsolute) override;
 
 
       //::pointer<::message::message> get_message(const ::atom & atom, wparam wparam, lparam lparam);

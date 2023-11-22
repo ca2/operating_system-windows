@@ -265,7 +265,7 @@ namespace windowing_win32
       MESSAGE_LINK(WM_GETICON, pchannel, this, &window::on_message_get_icon);
 
       //MESSAGE_LINK(MESSAGE_CREATE, pchannel, pimpl, &::user::interaction_impl::_001OnPrioCreate);
-      auto psystem = acmesystem();
+      auto psystem = system();
 
       //auto pnode = psystem->m_pnode->m_pauranode->m_pWindowingWin32Node;
 
@@ -511,8 +511,9 @@ namespace windowing_win32
       {
 
 
-         m_uExtraFlagsSetWindowPos = SWP_NOZORDER
-            | SWP_ASYNCWINDOWPOS
+         m_uExtraFlagsSetWindowPos =
+            //SWP_NOZORDER |
+            SWP_ASYNCWINDOWPOS
             //| SWP_FRAMECHANGED
             //| SWP_NOSENDCHANGING
             | SWP_NOREDRAW
@@ -524,12 +525,14 @@ namespace windowing_win32
 
       puserinteraction->increment_reference_count(OBJECT_REFERENCE_COUNT_DEBUG_THIS);
 
-      puserinteraction->m_ewindowflag |= e_window_flag_window_created;
+      puserinteraction->on_finished_window_creation();
+
+      //puserinteraction->m_ewindowflag |= e_window_flag_window_created;
 
    }
 
 
-   void window::window_do_update_screen()
+   void window::window_update_screen()
    {
 
       //      if(m_interlockedPostedScreenUpdate > 0)
@@ -642,7 +645,7 @@ namespace windowing_win32
          if (pmessage->m_atom == WM_FONTCHANGE)
          {
 
-            auto psystem = acmesystem()->m_paurasystem;
+            auto psystem = system()->m_paurasystem;
 
             psystem->signal(id_operating_system_font_list_change);
 
@@ -662,7 +665,7 @@ namespace windowing_win32
          else if (pmessage->m_atom == WM_SETTINGCHANGE && strLparamString == "ImmersiveColorSet")
          {
 
-            auto pnode = acmesystem()->m_pnode;
+            auto pnode = system()->m_pnode;
 
             pnode->fetch_user_color();
 
@@ -725,10 +728,10 @@ namespace windowing_win32
    //   int iIconCx = 256;
    //   int iIconCy = 256;
 
-   //   //HICON hiconSmall = (HICON) ::LoadIcon((HINSTANCE)acmesystem()->m_hinstanceThis, MAKEINTRESOURCE(128));
+   //   //HICON hiconSmall = (HICON) ::LoadIcon((HINSTANCE)system()->m_hinstanceThis, MAKEINTRESOURCE(128));
 
-   //   HICON hiconSmall =(HICON) ::LoadImage((HINSTANCE)acmesystem()->m_hinstanceThis, MAKEINTRESOURCE(128), IMAGE_ICON, 0, 0, LR_DEFAULTCOLOR | LR_DEFAULTSIZE);
-   //   //HICON hicon = (HICON)::LoadImage((HINSTANCE)acmesystem()->m_hinstanceThis, MAKEINTRESOURCE(128), IMAGE_ICON, iIconCx, iIconCy, LR_DEFAULTCOLOR);
+   //   HICON hiconSmall =(HICON) ::LoadImage((HINSTANCE)system()->m_hinstanceThis, MAKEINTRESOURCE(128), IMAGE_ICON, 0, 0, LR_DEFAULTCOLOR | LR_DEFAULTSIZE);
+   //   //HICON hicon = (HICON)::LoadImage((HINSTANCE)system()->m_hinstanceThis, MAKEINTRESOURCE(128), IMAGE_ICON, iIconCx, iIconCy, LR_DEFAULTCOLOR);
    //   HICON hicon = nullptr;
 
    //   if (!hicon)
@@ -3669,18 +3672,29 @@ namespace windowing_win32
    bool window::_modify_style(iptr dwRemove, iptr dwAdd, ::u32 nFlags)
    {
 
-      auto nStyle = _get_style();
+      auto nStyleOld = _get_style();
 
-      nStyle &= ~dwRemove;
+      auto nStyleNew = nStyleOld & ~dwRemove;
 
-      nStyle |= dwAdd;
+      nStyleNew |= dwAdd;
 
-      _set_style(nStyle);
-
-      if (nFlags)
+      if (nStyleNew != nStyleOld)
       {
 
-         ::SetWindowPos(get_hwnd(), 0, 0, 0, 0, 0, SWP_NOSIZE | SWP_NOZORDER | SWP_NOMOVE | nFlags);
+         _set_style(nStyleNew);
+
+         if (nFlags)
+         {
+
+            ::SetWindowPos(get_hwnd(), 
+               0, 0, 0, 0, 0,
+               SWP_NOSIZE 
+               | SWP_NOZORDER
+               | SWP_NOMOVE
+               | SWP_NOACTIVATE
+               | nFlags);
+
+         }
 
       }
 
@@ -3692,23 +3706,29 @@ namespace windowing_win32
    bool window::_modify_ex_style(iptr dwRemove, iptr dwAdd, ::u32 nFlags)
    {
 
-      auto nExStyle = _get_ex_style();
+      auto nExStyleOld = _get_ex_style();
 
-      nExStyle &= ~dwRemove;
+      auto nExStyleNew = nExStyleOld & ~dwRemove;
 
-      nExStyle |= dwAdd;
+      nExStyleNew |= dwAdd;
 
-      _set_ex_style(nExStyle);
-
-      if (nFlags)
+      if (nExStyleNew != nExStyleOld)
       {
 
-         ::SetWindowPos(get_hwnd(), 0, 0, 0, 0, 0, 
-            SWP_NOSIZE
-            | SWP_NOZORDER 
-            | SWP_NOMOVE 
-            | SWP_NOACTIVATE
-            | nFlags);
+         _set_ex_style(nExStyleNew);
+
+         if (nFlags)
+         {
+
+            ::SetWindowPos(get_hwnd(), 
+               0, 0, 0, 0, 0,
+               SWP_NOSIZE
+               | SWP_NOZORDER
+               | SWP_NOMOVE
+               | SWP_NOACTIVATE
+               | nFlags);
+
+         }
 
       }
 
@@ -7097,7 +7117,7 @@ namespace windowing_win32
    //}
 
 
-   void window::window_update_screen_buffer()
+   void window::__update_graphics_buffer()
    {
 
       m_puserinteractionimpl->m_pgraphics->update_screen();
@@ -7197,7 +7217,7 @@ namespace windowing_win32
    //}
 
 
-   void window::defer_show_system_menu(::message::mouse * pmouse)
+   void window::defer_show_system_menu(const ::point_i32 & pointAbsolute)
    {
 
       auto hwnd = (HWND)m_oswindow;
@@ -7205,8 +7225,11 @@ namespace windowing_win32
       GetSystemMenu(hwnd, true);
       m_hmenuSystem = GetSystemMenu(hwnd, false);
       //SetForegroundWindow(hwnd);
-      TrackPopupMenu(m_hmenuSystem, TPM_LEFTALIGN | TPM_TOPALIGN, pmouse->m_pointAbsolute.x(),
-         pmouse->m_pointAbsolute.y(),0,
+      TrackPopupMenu(m_hmenuSystem, 
+         TPM_LEFTALIGN | TPM_TOPALIGN, 
+         pointAbsolute.x(),
+         pointAbsolute.y(),
+         0,
          hwnd, NULL);
       //PostMessage(hwnd, WM_NULL, 0, 0);
 
@@ -7216,13 +7239,18 @@ namespace windowing_win32
    LRESULT window::__window_procedure(HWND hwnd, UINT message, WPARAM wparam, LPARAM lparam)
    {
 
-
       lresult lresult = 0;
 
       if (message == WM_SYSCOMMAND)
       {
 
          informationf("WM_SYSCOMMAND");
+
+      }
+      else if (message == WM_CHAR)
+      {
+
+         informationf("WM_CHAR");
 
       }
       else if (message == WM_KEYDOWN)
@@ -7235,6 +7263,12 @@ namespace windowing_win32
       {
 
          informationf("WM_SYSKEYDOWN");
+
+      }
+      else if (message == WM_SYSKEYUP)
+      {
+
+         informationf("WM_SYSKEYUP");
 
       }
       else if (message == e_message_show_window)
@@ -7287,31 +7321,60 @@ namespace windowing_win32
          }
 
       }
+      if (message == WM_SYSCOMMAND)
+      {
+
+         if(wparam == SC_KEYMENU)
+         {
+      //}
+      //if (message == WM_KEYDOWN || message == WM_SYSKEYDOWN)
+      //{
+
+      //   if (wparam == VK_SPACE)
+      //   {
+
+      //      if (0x8000 & GetAsyncKeyState(VK_RMENU)
+      //         || 0x8000 & GetAsyncKeyState(VK_LMENU))
+      //      {
+
+               RECT r;
+
+               GetWindowRect(hwnd, &r);
+
+               defer_show_system_menu({r.left, r.top});
+
+               return 0;
+
+            //}
+
+         }
+
+      }
 
       if (message == WM_INITMENU)
       {
+
          auto hmenu = (HMENU)wparam;
+
+         auto cMenuItemCount = ::GetMenuItemCount(hmenu);
+
          if (hmenu == m_hmenuSystem)
          {
 
-            int iPositionSeparator = -1;
+            HMENU hmenuSystem = hmenu;
 
-            for (int iPosition = 0; iPosition < ::GetMenuItemCount(hmenu); iPosition++)
+            auto iLast = ::GetMenuItemCount(hmenuSystem) - 1;
+
+            auto idLast = GetMenuItemID(hmenuSystem, iLast);
+
+            auto iOneBeforeLast = iLast - 1;
+
+            auto idOneBeforeLast = GetMenuItemID(hmenuSystem, iOneBeforeLast);
+
+            if (idLast == SC_CLOSE && idOneBeforeLast == 0)
             {
 
-               auto nID = GetMenuItemID(hmenu, iPosition);
-
-               if (nID == 0)
-               {
-
-                  iPositionSeparator = iPosition;
-
-               }
-
-            }
-
-            if (iPositionSeparator > 0)
-            {
+               // Seems like System Menu
 
                {
 
@@ -7326,7 +7389,7 @@ namespace windowing_win32
                   //menu_item_info.dwTypeData = const_cast<wchar_t *>(L"About...");
                   //menu_item_info.cch = wcslen(const_cast<wchar_t *>(menu_item_info.dwTypeData));
 
-                  InsertMenuItemW(m_hmenuSystem, iPositionSeparator, TRUE, &menu_item_info);
+                  InsertMenuItemW(hmenuSystem, iOneBeforeLast, TRUE, &menu_item_info);
 
                }
 
@@ -7342,11 +7405,13 @@ namespace windowing_win32
 
                   menu_item_info.wID = 123;
                   menu_item_info.dwTypeData = const_cast<wchar_t *>(L"About...");
-                  menu_item_info.cch = (UINT) wcslen(const_cast<wchar_t *>(menu_item_info.dwTypeData));
+                  menu_item_info.cch = (UINT)wcslen(const_cast<wchar_t *>(menu_item_info.dwTypeData));
 
-                  InsertMenuItemW(m_hmenuSystem, iPositionSeparator+1, TRUE, &menu_item_info);
+                  InsertMenuItemW(hmenuSystem, iOneBeforeLast + 1, TRUE, &menu_item_info);
 
                }
+
+               return 0;
 
             }
 
@@ -7356,7 +7421,7 @@ namespace windowing_win32
 
       //return ::DefWindowProcW(hwnd, message, wparam, lparam);
 
-      //auto psystem = pimpl->acmesystem();
+      //auto psystem = pimpl->system();
 
       pimpl->m_uiMessage = message;
 

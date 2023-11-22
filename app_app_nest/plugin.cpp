@@ -185,7 +185,7 @@ install:
 /*   UINT plugin::start_bergedge_cube()
    {
    
-      ::cube8::system * papp = acmesystem();
+      ::cube8::system * papp = system();
       
       if(!papp->initialize_instance())
          return 0;

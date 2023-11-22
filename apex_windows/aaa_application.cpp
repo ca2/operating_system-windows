@@ -199,12 +199,12 @@ namespace apex
 
    string application::veriwell_multimedia_music_midi_get_default_implementation_name()
    {
-      return acmesystem()->implementation_name("music_midi", "mmsystem");
+      return system()->implementation_name("music_midi", "mmsystem");
    }
 
    string application::multimedia_audio_mixer_get_default_implementation_name()
    {
-      return acmesystem()->implementation_name("audio_mixer", "mmsystem");
+      return system()->implementation_name("audio_mixer", "mmsystem");
    }
 
    string application::multimedia_audio_get_default_implementation_name()
@@ -232,7 +232,7 @@ namespace apex
       if (str.has_char())
          return "audio_" + str;
       else
-         return acmesystem()->implementation_name("audio", "mmsystem");
+         return system()->implementation_name("audio", "mmsystem");
 
    }
 

@@ -50,9 +50,9 @@ u32 plugin_container_app(const ::string & strChannel)
 
    papp->get_application() = psystem;
 
-   papp->acmesystem() = psystem;
+   papp->system() = psystem;
 
-   papp->acmesystem() = psystem;
+   papp->system() = psystem;
 
    papp->m_hinstance = psystem->m_hinstance;
 

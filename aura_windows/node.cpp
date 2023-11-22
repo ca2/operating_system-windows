@@ -343,11 +343,14 @@ namespace aura_windows
    }
 
 
-   void node::implement(::pointer<::acme::node>& pnode, ::pointer<::acme::system> & psystem)
+   void node::node_main()
    {
 
+      //auto pacmesystem = system();
 
-      psystem->main();
+      //pacmesystem->main();
+
+      ::apex_windows::node::node_main();
 
    }
 
@@ -355,13 +358,15 @@ namespace aura_windows
    void node::system_main()
    {
 
-      //::pointer<::node::system>psystem = acmesystem();
+      apex_windows::node::system_main();
 
-      auto psystem = acmesystem();
+      //::pointer<::node::system>psystem = system();
+
+      //auto psystem = system();
 
       //auto estatus = 
 
-      psystem->main();
+//      psystem->main();
 
       //if (!estatus)
       //{
@@ -370,7 +375,7 @@ namespace aura_windows
 
       //}
 
-      /*estatus = acmesystem()->inline_term();
+      /*estatus = system()->inline_term();
 
       if (!estatus)
       {
@@ -401,19 +406,18 @@ namespace aura_windows
    }
 
 
-   ::pointer < ::input::input > node::get_input()
+   ::pointer < ::input::input > node::create_input()
    {
 
-      auto pfactory = acmesystem()->factory("input", "win32");
+      auto pfactory = system()->factory("input", "win32");
 
-      auto pinput = pfactory->create<::input::input >();
+      auto pinput = pfactory->create<::input::input >(this);
 
       pinput->initialize(this);
 
       return pinput;
 
    }
-
 
 
 } // namespace aura_windows

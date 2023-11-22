@@ -137,7 +137,9 @@ namespace windowing_win32
 
       //auto estatus = 
 
-      psysteminteraction->create_host(e_parallelization_synchronous);
+      //psysteminteraction->create_host(e_parallelization_synchronous);
+
+      psysteminteraction->create_host();
 
       //if(!estatus)
       //{
@@ -556,7 +558,7 @@ namespace windowing_win32
    //   //      try
    //   //      {
 
-   //   //         pinteraction = pimpl->acmesystem()interaction;
+   //   //         pinteraction = pimpl->system()interaction;
 
    //   //      }
    //   //      catch (...)
@@ -1007,7 +1009,7 @@ namespace windowing_win32
    //void windowing::windowing_post(const ::procedure& procedure)
    //{
 
-   //   acmesystem()->m_papexsystem->post_procedure(procedure);
+   //   system()->m_papexsystem->post_procedure(procedure);
 
    //}
 

@@ -31,7 +31,9 @@ namespace windowing_win32
 
       m_strWindowText2 = pszName;
 
-      create_host(e_parallelization_synchronous);
+      //create_host(e_parallelization_synchronous);
+
+      create_host();
 
       //if (!create_host())
       //{

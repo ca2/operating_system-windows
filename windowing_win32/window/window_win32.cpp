@@ -234,6 +234,12 @@ LRESULT CALLBACK __window_procedure(HWND hwnd, UINT message, WPARAM wparam, LPAR
       ::informationf("WM_COMMAND");
 
    }
+   else if (message == WM_KILLFOCUS)
+   {
+
+      ::informationf("WM_KILLFOCUS");
+
+   }
 
    if (message == WM_APP + 12345)
    {
@@ -489,14 +495,14 @@ wstring windowing::_windows_calc_icon_window_class(::user::interaction * puserin
    if (hIcon != nullptr)
    {
 
-      auto psystem = acmesystem()->m_paurasystem;
+      auto psystem = system()->m_paurasystem;
       // will fill pszClassName with default WNDCLASS name
 
       // ignore instance handle from pre_create_window.
 
       WNDCLASSEXW wndcls;
 
-      if (strClass.length() > 0 && GetClassInfoExW((HINSTANCE)psystem->m_psubsystem->m_hinstanceThis, strClass, &wndcls) && wndcls.hIcon != hIcon)
+      if (strClass.length() > 0 && GetClassInfoExW((HINSTANCE)psystem->m_pplatform->m_hinstanceThis, strClass, &wndcls) && wndcls.hIcon != hIcon)
       {
 
          // register a very similar WNDCLASS

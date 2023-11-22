@@ -54,7 +54,7 @@ namespace windowing_win32
    void devices::on_initialize_object()
    {
 
-      auto psession = acmesession()->m_paurasession;
+      auto psession = session()->m_paurasession;
 
       auto puser = psession->user();
 
@@ -135,7 +135,7 @@ namespace windowing_win32
 
       plistener->m_hdevnotify = hdevnotify;
 
-      auto psession = acmesession()->m_paurasession;
+      auto psession = session()->m_paurasession;
 
       auto puser = psession->user();
 

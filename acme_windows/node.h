@@ -52,6 +52,7 @@ namespace acme_windows
 
       //void initialize_integration();
 
+
       void shell_open(const ::file::path & path, const ::string & strParams = "", const ::file::path & pathFolder = "") override;
 
 
@@ -185,7 +186,9 @@ namespace acme_windows
 
       virtual ::wstring expand_environment_variables(const ::wstring & wstr);
 
-      void implement(::pointer<::acme::node> & pnode, ::pointer<::acme::system> & psystem)override;
+      //void implement(::pointer<::acme::node> & pnode, ::pointer<::acme::system> & psystem)override;
+
+      void node_main()override;
 
 
       ::process_identifier current_process_identifier() override;
@@ -297,6 +300,9 @@ namespace acme_windows
 
 
       void speak(const ::scoped_string& scopedstr) override;
+
+
+      ::string operating_system_application_version() override;
 
 
    };

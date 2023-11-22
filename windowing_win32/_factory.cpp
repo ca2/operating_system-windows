@@ -14,6 +14,7 @@
 #include "imm_client.h"
 #include "buffer.h"
 #include "acme/parallelization/mutex.h"
+#include "aura/hardware/device_group.h"
 
 
 //BEGIN_FACTORY(windowing_win32)
@@ -59,6 +60,8 @@ __FACTORY_EXPORT void windowing_win32_factory(::factory::factory * pfactory)
    pfactory->add_factory_item < ::windowing_win32::monitor, ::windowing::monitor >();
 
    //pfactory->add_factory_item < ::windowing_win32::node, ::acme::node >();
+
+   pfactory->add_factory_item < ::hardware::device_group >();
 
    pfactory->add_factory_item < ::windowing_win32::devices, ::hardware::devices >();
 

@@ -585,7 +585,7 @@ namespace windowing_win32
 
       auto puser = psession->user();
 
-      auto pnode = acmesystem()->node();
+      auto pnode = system()->node();
 
       ::pointer < windowing > pwindowing = puser->windowing();
 
@@ -606,7 +606,7 @@ namespace windowing_win32
 
       }
 
-      //auto psystem = acmesystem()->m_paurasystem;
+      //auto psystem = system()->m_paurasystem;
 
 
       comptr < IShellIcon > pshellicon;
@@ -736,7 +736,7 @@ namespace windowing_win32
          //      else
          //      {
 
-         //         auto psystem = acmesystem();
+         //         auto psystem = system();
 
          //         auto pnode = psystem->node();
 
@@ -800,7 +800,7 @@ namespace windowing_win32
                   else
                   {
 
-                     auto psystem = acmesystem();
+                     auto psystem = system();
 
                      auto pnode = psystem->node();
 
@@ -1283,7 +1283,7 @@ namespace windowing_win32
 
       unicode_to_utf8(strPath, wstrPath);
 
-      auto psystem = acmesystem();
+      auto psystem = system();
 
       auto pacmedir = psystem->m_pacmedirectory;
 
@@ -1960,7 +1960,7 @@ namespace windowing_win32
       if (reserve_image(getfileimage))
       {
 
-         auto psystem = acmesystem()->m_paurasystem;
+         auto psystem = system()->m_paurasystem;
 
          auto pnode = psystem->node()->m_pAuraPlatform;
 

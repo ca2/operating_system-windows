@@ -12,7 +12,9 @@
 #include "acme/parallelization/mutex.h"
 #include "acme/parallelization/task.h"
 #include "acme/primitive/geometry2d/_text_stream.h"
+#include "aura/graphics/draw2d/draw2d.h"
 #include "aura/graphics/image/image.h"
+#include "aura/platform/system.h"
 #include "aura/user/user/interaction_impl.h"
 #include "aura/graphics/image/image.h"
 //#define REDRAW_HINTING
@@ -91,6 +93,8 @@ namespace windowing_win32
 
       m_bSingleBufferMode = true;
 
+      //m_bAllocateBiggerBuffer = true;
+
    }
 
 
@@ -108,6 +112,8 @@ namespace windowing_win32
       ::graphics::bitmap_source_buffer::initialize_graphics_graphics(pimpl);
 
       defer_create_synchronization();
+
+      m_bSingleBufferMode = system()->m_paurasystem->draw2d()->graphics_context_supports_single_buffer_mode();
 
       //if (!estatus)
       //{
@@ -303,6 +309,8 @@ namespace windowing_win32
       ::image32_t * pimage32 = nullptr;
 
       int iScan = -1;
+
+      ::size_i32 sizeAllocate;
 
       auto pwindowing = m_pimpl->m_puserinteraction->windowing();
 

@@ -18,7 +18,7 @@ namespace ca2plugin_container
 
       host *                     m_phost;
 
-      ::plugin::system *         acmesystem();
+      ::plugin::system *         system();
 
 
       application(::plugin::system * psystem, const ::string & pszChannel);
