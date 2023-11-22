@@ -6,5 +6,8 @@
 #define _DEBUG
 #endif // _DEBUG
 
+#define MEMDLEAK 1
+#define MEMDLEAK_CALL_STACK 1
+
 
 
