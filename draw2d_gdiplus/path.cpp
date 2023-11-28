@@ -602,8 +602,10 @@ namespace draw2d_gdiplus
       ::rectangle_f64 rectangle(rectangleParam);
 
       //auto estatus = 
+
+      ::pointer < graphics > p = pgraphics;
       
-      gdiplus_draw_text(pgraphics, this, strText, rectangle, ealign, edrawtext, pfont, 1.0);
+      p->_gdiplus_draw_text(this, strText, rectangle, ealign, edrawtext, pfont, 1.0);
 
       ///return !estatus;
 

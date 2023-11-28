@@ -16,18 +16,18 @@
 
 #include <crtdbg.h>
 #include "vld.h"
-#define memory_allocate malloc
+#define ::heap::management::memory(::heap::e_memory_main)->allocate malloc
 #define memory_reallocate realloc
-#define memory_free free
+#define ::heap::management::memory(::heap::e_memory_main)->free free
 #endif
 
 #ifdef __MCRTDBG
 #define _CRTDBG_MAP_ALLOC
 
 #include <crtdbg.h>
-#define memory_allocate malloc
+#define ::heap::management::memory(::heap::e_memory_main)->allocate malloc
 #define memory_reallocate realloc
-#define memory_free free
+#define ::heap::management::memory(::heap::e_memory_main)->free free
 #endif
 
 

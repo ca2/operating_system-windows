@@ -2457,7 +2457,7 @@ namespace apex_windows
    void os_context::hidden_run(const class time & timeWait, const ::file::path & pathParam, const string & strParams, const ::file::path & pathFolder)
    {
 
-      auto pevent = __new(manual_reset_event);
+      auto pevent = __allocate< manual_reset_event >();
 
       auto path = m_pcontext->m_papexcontext->defer_process_path(pathParam);
 

@@ -5882,7 +5882,9 @@ namespace draw2d_gdiplus
 
       //return 
 
-      gdiplus_draw_text(this, nullptr, str, rectangleParam, ealign, edrawtext, m_pfont, m_pfont->m_dFontWidth, m_pbrush, bMeasure);
+      //::pointer < graphics > p = 
+
+      _gdiplus_draw_text(nullptr, str, rectangleParam, ealign, edrawtext, m_pfont, m_pfont->m_dFontWidth, m_pbrush, bMeasure);
 
    }
 

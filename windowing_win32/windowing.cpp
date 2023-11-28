@@ -133,7 +133,7 @@ namespace windowing_win32
 
       auto psysteminteraction = __create_new < ::windowing_win32::system_interaction >();
 
-      psysteminteraction->display(e_display_none);
+      //psysteminteraction->display(e_display_none);
 
       //auto estatus = 
 
@@ -240,7 +240,7 @@ namespace windowing_win32
       if (!pwindow)
       {
 
-         pwindow = __new(::windowing_win32::window());
+         pwindow = __allocate< ::windowing_win32::window >();
 
       }
 
@@ -586,7 +586,7 @@ namespace windowing_win32
 
    //   //}
 
-   //   auto pusermessage = __new(::user::message);
+   //   auto pusermessage = __allocate< ::user::message >();
 
    //   if (!pusermessage)
    //   {

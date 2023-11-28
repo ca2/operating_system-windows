@@ -320,7 +320,7 @@ namespace windows
 
       while (hwndChild != nullptr)
       {
-         m_hwndtreea.add_new(this);
+         m_hwndtreea.add_construct(this);
          hwnd_tree & hwndtreeChild = m_hwndtreea.last_ref();
          hwndtreeChild.m_hwnd = hwndChild;
          hwndtreeChild.m_dwUser = 0;

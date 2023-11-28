@@ -554,7 +554,7 @@ namespace acme_windows
          //#ifdef WINDOWS_DESKTOP
          //   {
          //      u32 dwSize = GetEnvironmentVariable("PATH", nullptr, 0);
-         //      char * lpsz = memory_new char[dwSize + 1];
+         //      char * lpsz = __new_array< char >(dwSize + 1);
          //      dwSize = GetEnvironmentVariable("PATH", lpsz, dwSize + 1);
          //      delete lpsz;
          //   }
@@ -628,7 +628,7 @@ namespace acme_windows
          //   #ifdef WINDOWS_DESKTOP
          //   {
          //      u32 dwSize = GetEnvironmentVariable("PATH", nullptr, 0);
-         //      char * lpsz = memory_new char[dwSize + 1];
+         //      char * lpsz = __new_array< char >(dwSize + 1);
          //      dwSize = GetEnvironmentVariable("PATH", lpsz, dwSize + 1);
          //      delete lpsz;
          //   }

@@ -49,7 +49,7 @@
 //   }
 //
 //   /* allocate memory to hold the command line */
-//   WCHAR * commandLineContents = (WCHAR *)memory_allocate(ustrCommandLine.Length + sizeof(WCHAR));
+//   WCHAR * commandLineContents = (WCHAR *)::heap::management::memory(::heap::e_memory_main)->allocate(ustrCommandLine.Length + sizeof(WCHAR));
 //   /* read the command line */
 //   if (!ReadProcessMemory(handleProcess, ustrCommandLine.Buffer, commandLineContents, ustrCommandLine.Length, nullptr))
 //   {

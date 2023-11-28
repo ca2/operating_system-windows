@@ -16,6 +16,7 @@
 #include "acme/constant/timer.h"
 #include "acme/exception/exception.h"
 #include "acme/exception/interface_only.h"
+#include "acme/handler/topic.h"
 #include "acme/parallelization/synchronous_lock.h"
 #include "acme/platform/node.h"
 #include "acme/primitive/geometry2d/_text_stream.h"
@@ -307,7 +308,7 @@ namespace windowing_win32
       if (!puserinteraction->m_pusersystem)
       {
 
-         puserinteraction->m_pusersystem = __new(::user::system);
+         puserinteraction->m_pusersystem = __allocate< ::user::system >();
 
       }
 
@@ -523,7 +524,7 @@ namespace windowing_win32
          //| SWP_SHOWWINDOW;
       }
 
-      puserinteraction->increment_reference_count(OBJECT_REFERENCE_COUNT_DEBUG_THIS);
+      puserinteraction->increment_reference_count(REFERENCING_DEBUGGING_THIS);
 
       puserinteraction->on_finished_window_creation();
 
@@ -955,7 +956,7 @@ namespace windowing_win32
    //   pdata->m_puserinteractionimpl = puserinteraction;
    //   pdata->m_osdisplay = nullptr;
    //   pdata->m_parent = 0;
-   //   pdata->m_pmq = puserinteraction->puserinteraction->m_pthreadUserInteraction->get_message_queue();
+   //   pdata->m_pmq = puserinteraction->puserinteraction->m_pthreadUserInteraction->aaa_get_message_queue();
 
    //   ::window::s_pdataptra->add(pdata);
 

@@ -118,7 +118,7 @@ namespace windowing_win32
          if (penum->m_bRaster)
          {
 
-            penum->m_itema.add(__new(::write_text::font_enumeration_item(plf->lfFaceName)));
+            penum->m_itema.add(__allocate< ::write_text::font_enumeration_item >(plf->lfFaceName));
 
          }
 
@@ -129,7 +129,7 @@ namespace windowing_win32
          if (penum->m_bTrueType)
          {
 
-            penum->m_itema.add(__new(::write_text::font_enumeration_item(plf->lfFaceName)));
+            penum->m_itema.add(__allocate< ::write_text::font_enumeration_item >(plf->lfFaceName));
 
          }
 
@@ -140,7 +140,7 @@ namespace windowing_win32
          if (penum->m_bOther)
          {
 
-            penum->m_itema.add(__new(::write_text::font_enumeration_item(plf->lfFaceName)));
+            penum->m_itema.add(__allocate< ::write_text::font_enumeration_item >(plf->lfFaceName));
 
          }
 

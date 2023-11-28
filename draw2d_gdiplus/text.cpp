@@ -11,64 +11,32 @@
 #include "aura/platform/system.h"
 
 
-void gdiplus_draw_text(::draw2d::graphics* pgraphicsParam, ::draw2d::path* ppathParam, const string& str, rectangle_f64& rectangleParam, const ::e_align & ealign, const ::e_draw_text & edrawtext, ::write_text::font* pfontParam, double dFontWidth, ::draw2d::brush* pbrushParam, bool bMeasure)
+namespace draw2d_gdiplus
 {
 
-   if (str.is_empty())
+
+   void graphics::_gdiplus_draw_text(::draw2d::path * ppathParam, const string & str, rectangle_f64 & rectangleParam, const ::e_align & ealign, const ::e_draw_text & edrawtext, ::write_text::font * pfontParam, double dFontWidth, ::draw2d::brush * pbrushParam, bool bMeasure)
    {
 
-      //return ::success;
+      if (str.is_empty())
+      {
 
-      return;
+         //return ::success;
 
-   }
+         return;
 
-   if (::is_null(pfontParam))
-   {
+      }
 
-      throw ::exception(error_failed);
+      if (::is_null(pfontParam))
+      {
 
-   }
+         throw ::exception(error_failed);
 
-   auto pfont = __font(pfontParam)->get_os_data < Gdiplus::Font * >(pgraphicsParam);
+      }
 
-   if (::is_null(pfont))
-   {
+      auto pfont = __font(pfontParam)->get_os_data < Gdiplus::Font * >(this);
 
-      //return ::error_failed;
-
-      throw ::exception(error_failed);
-
-   }
-
-   Gdiplus::Graphics* pgraphics = nullptr;
-
-   if (::is_set(pgraphicsParam))
-   {
-
-      pgraphics = __graphics(pgraphicsParam)->m_pgraphics;
-
-   }
-
-   synchronous_lock synchronouslock(::platform::get()->system()->m_paurasystem->draw2d()->write_text()->m_pparticleFontTextMapSynchronization);
-
-   Gdiplus::GraphicsPath* ppath = nullptr;
-
-   if (::is_set(ppathParam))
-   {
-
-      ppath = __graphics_path(ppathParam)->get_os_data < Gdiplus::GraphicsPath * >(pgraphicsParam);
-
-   }
-
-   Gdiplus::Brush* pbrush = nullptr;
-
-   if (::is_set(pbrushParam))
-   {
-
-      pbrush = __brush(pbrushParam)->get_os_data < Gdiplus::Brush * >(pgraphicsParam);
-
-      if (::is_null(pbrush))
+      if (::is_null(pfont))
       {
 
          //return ::error_failed;
@@ -77,87 +45,116 @@ void gdiplus_draw_text(::draw2d::graphics* pgraphicsParam, ::draw2d::path* ppath
 
       }
 
-   }
+      Gdiplus::Graphics * pgraphics = m_pgraphics;
 
-   ASSERT(pgraphics != nullptr || ppath != nullptr);
-   ASSERT(pfont != nullptr);
-   ASSERT(ppath != nullptr || pbrush != nullptr);
+      synchronous_lock synchronouslock(draw2d()->write_text()->m_pparticleFontTextMapSynchronization);
 
-   Gdiplus::Status status = Gdiplus::Status::GenericError;
+      Gdiplus::GraphicsPath * ppath = nullptr;
 
-   Gdiplus::StringFormat format(Gdiplus::StringFormat::GenericTypographic());
+      if (::is_set(ppathParam))
+      {
 
-   format.SetFormatFlags((format.GetFormatFlags()
-      //| Gdiplus::StringFormatFlagsNoClip | Gdiplus::StringFormatFlagsMeasureTrailingSpaces
-      | Gdiplus::StringFormatFlagsMeasureTrailingSpaces
-      | (edrawtext & DT_SINGLELINE ? Gdiplus::StringFormatFlagsNoWrap : 0))
-      & ~(Gdiplus::StringFormatFlagsLineLimit));
+         ppath = __graphics_path(ppathParam)->get_os_data < Gdiplus::GraphicsPath * >(this);
 
-   if (edrawtext & e_draw_text_path_ellipsis)
-   {
+      }
 
-      format.SetTrimming(Gdiplus::StringTrimmingEllipsisPath);
+      Gdiplus::Brush * pbrush = nullptr;
 
-   }
-   else if (edrawtext & e_draw_text_end_ellipsis)
-   {
+      if (::is_set(pbrushParam))
+      {
 
-      format.SetTrimming(Gdiplus::StringTrimmingEllipsisCharacter);
+         pbrush = __brush(pbrushParam)->get_os_data < Gdiplus::Brush * >(this);
 
-   }
+         if (::is_null(pbrush))
+         {
 
-   if (ealign & e_align_left)
-   {
+            //return ::error_failed;
 
-      format.SetAlignment(Gdiplus::StringAlignmentNear);
+            throw ::exception(error_failed);
 
-   }
-   else if (ealign & e_align_right)
-   {
+         }
 
-      format.SetAlignment(Gdiplus::StringAlignmentFar);
+      }
 
-   }
-   else if (ealign & e_align_horizontal_center)
-   {
+      ASSERT(pgraphics != nullptr || ppath != nullptr);
+      ASSERT(pfont != nullptr);
+      ASSERT(ppath != nullptr || pbrush != nullptr);
 
-      format.SetAlignment(Gdiplus::StringAlignmentCenter);
+      Gdiplus::Status status = Gdiplus::Status::GenericError;
 
-   }
-   else
-   {
+      Gdiplus::StringFormat format(Gdiplus::StringFormat::GenericTypographic());
 
-      format.SetAlignment(Gdiplus::StringAlignmentNear);
+      format.SetFormatFlags((format.GetFormatFlags()
+         //| Gdiplus::StringFormatFlagsNoClip | Gdiplus::StringFormatFlagsMeasureTrailingSpaces
+         | Gdiplus::StringFormatFlagsMeasureTrailingSpaces
+         | (edrawtext & DT_SINGLELINE ? Gdiplus::StringFormatFlagsNoWrap : 0))
+         & ~(Gdiplus::StringFormatFlagsLineLimit));
 
-   }
+      if (edrawtext & e_draw_text_path_ellipsis)
+      {
 
-   if (ealign & e_align_bottom)
-   {
+         format.SetTrimming(Gdiplus::StringTrimmingEllipsisPath);
 
-      format.SetLineAlignment(Gdiplus::StringAlignmentFar);
+      }
+      else if (edrawtext & e_draw_text_end_ellipsis)
+      {
 
-   }
-   else if (ealign & e_align_top)
-   {
+         format.SetTrimming(Gdiplus::StringTrimmingEllipsisCharacter);
 
-      format.SetLineAlignment(Gdiplus::StringAlignmentNear);
+      }
 
-   }
-   else if (ealign & e_align_vertical_center)
-   {
+      if (ealign & e_align_left)
+      {
 
-      format.SetLineAlignment(Gdiplus::StringAlignmentCenter);
+         format.SetAlignment(Gdiplus::StringAlignmentNear);
 
-   }
-   else
-   {
+      }
+      else if (ealign & e_align_right)
+      {
 
-      format.SetLineAlignment(Gdiplus::StringAlignmentNear);
+         format.SetAlignment(Gdiplus::StringAlignmentFar);
 
-   }
+      }
+      else if (ealign & e_align_horizontal_center)
+      {
 
-   //try
-   //{
+         format.SetAlignment(Gdiplus::StringAlignmentCenter);
+
+      }
+      else
+      {
+
+         format.SetAlignment(Gdiplus::StringAlignmentNear);
+
+      }
+
+      if (ealign & e_align_bottom)
+      {
+
+         format.SetLineAlignment(Gdiplus::StringAlignmentFar);
+
+      }
+      else if (ealign & e_align_top)
+      {
+
+         format.SetLineAlignment(Gdiplus::StringAlignmentNear);
+
+      }
+      else if (ealign & e_align_vertical_center)
+      {
+
+         format.SetLineAlignment(Gdiplus::StringAlignmentCenter);
+
+      }
+      else
+      {
+
+         format.SetLineAlignment(Gdiplus::StringAlignmentNear);
+
+      }
+
+      //try
+      //{
 
       Gdiplus::FontFamily f;
       int nStyle;
@@ -181,7 +178,7 @@ void gdiplus_draw_text(::draw2d::graphics* pgraphicsParam, ::draw2d::path* ppath
 
       }
 
-      auto& text = pfontParam->m_mapFontText[str];
+      auto & text = pfontParam->m_mapFontText[str];
 
       if (text.m_wstr.is_empty())
       {
@@ -193,7 +190,7 @@ void gdiplus_draw_text(::draw2d::graphics* pgraphicsParam, ::draw2d::path* ppath
       if (dFontWidth == 1.0)
       {
 
-         Gdiplus::RectF rectangle_f32((Gdiplus::REAL) rectangleParam.left(), (Gdiplus::REAL) rectangleParam.top(), (Gdiplus::REAL) (width(rectangleParam) * dFontWidth), (Gdiplus::REAL) (height(rectangleParam)));
+         Gdiplus::RectF rectangle_f32((Gdiplus::REAL)rectangleParam.left(), (Gdiplus::REAL)rectangleParam.top(), (Gdiplus::REAL)(width(rectangleParam) * dFontWidth), (Gdiplus::REAL)(height(rectangleParam)));
 
          strsize iSize = text.m_wstr.length();
 
@@ -261,11 +258,11 @@ void gdiplus_draw_text(::draw2d::graphics* pgraphicsParam, ::draw2d::path* ppath
 
          }
 
-            //auto e = pgraphics->GetTextRenderingHint();
+         //auto e = pgraphics->GetTextRenderingHint();
 
-            //status = pgraphics->DrawString(text.m_wstr, (INT)iSize, pfont, rectangle_f32, &format, pbrush);
+         //status = pgraphics->DrawString(text.m_wstr, (INT)iSize, pfont, rectangle_f32, &format, pbrush);
 
-         //}
+      //}
 
       }
       else if (pgraphics)
@@ -279,11 +276,11 @@ void gdiplus_draw_text(::draw2d::graphics* pgraphicsParam, ::draw2d::path* ppath
 
          auto pmNew = as_auto_pointer(m.Clone());
 
-         status = pmNew->Translate((Gdiplus::REAL) rectangleParam.left(), (Gdiplus::REAL) rectangleParam.top());
+         status = pmNew->Translate((Gdiplus::REAL)rectangleParam.left(), (Gdiplus::REAL)rectangleParam.top());
 
-         status = pmNew->Scale((Gdiplus::REAL) dFontWidth, (Gdiplus::REAL) 1.0, Gdiplus::MatrixOrderAppend);
+         status = pmNew->Scale((Gdiplus::REAL)dFontWidth, (Gdiplus::REAL)1.0, Gdiplus::MatrixOrderAppend);
 
-         Gdiplus::RectF rectangle_f32(0, 0, (Gdiplus::REAL) (width(rectangleParam) * dFontWidth), (Gdiplus::REAL) (height(rectangleParam)));
+         Gdiplus::RectF rectangle_f32(0, 0, (Gdiplus::REAL)(width(rectangleParam) * dFontWidth), (Gdiplus::REAL)(height(rectangleParam)));
 
          status = pgraphics->SetTransform(pmNew);
 
@@ -336,14 +333,21 @@ void gdiplus_draw_text(::draw2d::graphics* pgraphicsParam, ::draw2d::path* ppath
       }
 
 
-   //}
-   //catch (...)
-   //{
+      //}
+      //catch (...)
+      //{
 
-   //}
+      //}
 
-   //return Gdiplus::Status::Ok;
+      //return Gdiplus::Status::Ok;
 
-}
+   }
+
+
+} // namespace draw2d_gdiplus
+
+
+
+
 
 

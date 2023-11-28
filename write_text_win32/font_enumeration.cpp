@@ -90,7 +90,7 @@ namespace write_text_win32
 
             auto pszFaceName = plogfont->lfFaceName;
 
-            auto pfontenumerationitem = __new(::write_text::font_enumeration_item(pszFaceName));
+            auto pfontenumerationitem = __allocate< ::write_text::font_enumeration_item >(pszFaceName);
 
             pfontenumeration->m_pfontenumerationitema->add(pfontenumerationitem);
 
@@ -105,7 +105,7 @@ namespace write_text_win32
 
             auto pszFaceName = plogfont->lfFaceName;
 
-            auto pfontenumerationitem = __new(::write_text::font_enumeration_item(pszFaceName));
+            auto pfontenumerationitem = __allocate< ::write_text::font_enumeration_item >(pszFaceName);
 
             pfontenumeration->m_pfontenumerationitema->add(pfontenumerationitem);
 
@@ -120,7 +120,7 @@ namespace write_text_win32
 
             auto pszFaceName = plogfont->lfFaceName;
 
-            auto pfontenumerationitem = __new(::write_text::font_enumeration_item(pszFaceName));
+            auto pfontenumerationitem = __allocate< ::write_text::font_enumeration_item >(pszFaceName);
 
             pfontenumeration->m_pfontenumerationitema->add(pfontenumerationitem);
 

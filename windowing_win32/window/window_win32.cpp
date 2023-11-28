@@ -225,19 +225,19 @@ LRESULT CALLBACK __window_procedure(HWND hwnd, UINT message, WPARAM wparam, LPAR
    if (message == WM_SYSCOMMAND)
    {
 
-      ::informationf("WM_SYSCOMMAND");
+      ::acme::get()->platform()->informationf("WM_SYSCOMMAND");
 
    }
    else if (message == WM_COMMAND)
    {
 
-      ::informationf("WM_COMMAND");
+      ::acme::get()->platform()->informationf("WM_COMMAND");
 
    }
    else if (message == WM_KILLFOCUS)
    {
 
-      ::informationf("WM_KILLFOCUS");
+      ::acme::get()->platform()->informationf("WM_KILLFOCUS");
 
    }
 

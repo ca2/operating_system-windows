@@ -744,12 +744,16 @@ CLASS_DECL_ACME_WINDOWS void reg_delete_tree_dup(HKEY hkey, const char * name)
 
       u32 dwAlloc = 1026 * 64;
 
-      wchar_t * szKey = (wchar_t *)memory_allocate(dwAlloc * 2);
+      ::wstring wstr;
+
+      auto szKey = wstr.get_buffer(dwAlloc * 2);
 
       u32 dwIndex = 0;
 
       while (ERROR_SUCCESS == ::RegEnumKeyW(hkeySub, dwIndex, szKey, dwAlloc))
       {
+
+         wstr.release_buffer();
 
          reg_delete_tree_dup(hkeySub, string(szKey));
 
@@ -757,7 +761,7 @@ CLASS_DECL_ACME_WINDOWS void reg_delete_tree_dup(HKEY hkey, const char * name)
 
       }
 
-      memory_free_debug(szKey, 0);
+      //memory_free_debug(szKey, 0);
 
       ::RegCloseKey(hkeySub);
 

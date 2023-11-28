@@ -304,7 +304,7 @@ namespace windowing_win32
       if (!puserinteraction->m_pusersystem)
       {
 
-         puserinteraction->m_pusersystem = __new(::user::system);
+         puserinteraction->m_pusersystem = __allocate< ::user::system >();
 
       }
 
@@ -519,7 +519,7 @@ namespace windowing_win32
             //| SWP_SHOWWINDOW;
       }
 
-      puserinteraction->increment_reference_count(OBJECT_REFERENCE_COUNT_DEBUG_THIS);
+      puserinteraction->increment_reference_count(REFERENCING_DEBUGGING_THIS);
 
       puserinteraction->m_ewindowflag |= e_window_flag_window_created;
 
@@ -917,7 +917,7 @@ namespace windowing_win32
    //   pdata->m_puserinteractionimpl = puserinteraction;
    //   pdata->m_osdisplay = nullptr;
    //   pdata->m_parent = 0;
-   //   pdata->m_pmq = puserinteraction->puserinteraction->m_pthreadUserInteraction->get_message_queue();
+   //   pdata->m_pmq = puserinteraction->puserinteraction->m_pthreadUserInteraction->aaa_get_message_queue();
 
    //   ::window::s_pdataptra->add(pdata);
 

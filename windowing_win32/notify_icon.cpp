@@ -4,6 +4,7 @@
 #include "acme/constant/id.h"
 #include "acme/constant/message.h"
 #include "acme/exception/exception.h"
+#include "acme/handler/topic.h"
 
 
 static ::user::notify_icon * g_pnotifyiconLast = nullptr;

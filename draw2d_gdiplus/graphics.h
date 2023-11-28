@@ -660,6 +660,9 @@ namespace draw2d_gdiplus
       virtual i32 meta_file_procedure(HDC hDC, HANDLETABLE* pHandleTable, METARECORD* pMetaRec, i32 nHandles);
 
 
+      void _gdiplus_draw_text(::draw2d::path * ppathParam, const string & str, rectangle_f64 & rectangleParam, const ::e_align & ealign, const ::e_draw_text & edrawtext, ::write_text::font * pfontParam, double dFontWidth, ::draw2d::brush * pbrushParam = nullptr, bool bMeasure = false);
+
+
    };
 
 

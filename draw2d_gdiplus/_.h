@@ -26,7 +26,7 @@ inline void copy(Gdiplus::ColorMatrix & a, const color_matrix & b)
 }
 
 
-void gdiplus_draw_text(::draw2d::graphics * pgraphics, ::draw2d::path * ppath, const ::string & str, rectangle_f64 & rectangleParam, const ::e_align & ealign, const ::e_draw_text & edrawtext, ::write_text::font * pfont, double dFontWidth, ::draw2d::brush * pbrush = nullptr, bool bMeasure = false);
+//void gdiplus_draw_text(::draw2d::graphics * pgraphics, ::draw2d::path * ppath, const ::string & str, rectangle_f64 & rectangleParam, const ::e_align & ealign, const ::e_draw_text & edrawtext, ::write_text::font * pfont, double dFontWidth, ::draw2d::brush * pbrush = nullptr, bool bMeasure = false);
 
 
 inline auto gdiplus_color(const ::color::color & color)
