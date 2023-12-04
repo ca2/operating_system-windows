@@ -519,7 +519,7 @@ namespace windowing_win32
             //| SWP_SHOWWINDOW;
       }
 
-      puserinteraction->increment_reference_count(REFERENCING_DEBUGGING_THIS);
+      puserinteraction->increment_reference_count();
 
       puserinteraction->m_ewindowflag |= e_window_flag_window_created;
 

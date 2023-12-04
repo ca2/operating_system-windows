@@ -173,6 +173,15 @@ namespace windowing_win32
    void windowing::finalize_windowing()
    {
 
+      if (m_pdisplay)
+      {
+
+         m_pdisplay->finalize_display();
+
+      }
+
+      m_pdisplay.release();
+
       ::windowing::windowing::finalize_windowing();
 
       m_psysteminteraction.release();

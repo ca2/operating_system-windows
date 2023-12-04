@@ -32,7 +32,8 @@ namespace windowing_win32
       void register_device_listener(::hardware::device_listener* pdevicelistener, ::hardware::enum_device edevice) override;
 
       void _register_device_listener(master_device_listener * pdevicelistener, GUID InterfaceClassGuid);
-
+      void _unregister_device_listener(master_device_listener * pdevicelistener, GUID InterfaceClassGuid);
+      void erase_device_group(::hardware::device_group * pdevicegroup) override;
 
    };
 

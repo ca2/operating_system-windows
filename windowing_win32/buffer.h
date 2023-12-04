@@ -73,6 +73,8 @@ namespace windowing_win32
       bool update_screen() override;
 
 
+      void destroy() override;
+
       bool on_update_screen(::graphics::buffer_item * pitem) override;
 
       virtual void update_screen_task();

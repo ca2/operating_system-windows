@@ -411,7 +411,7 @@ namespace aura_windows
 
       auto pfactory = system()->factory("input", "win32");
 
-      auto pinput = pfactory->create<::input::input >(this);
+      auto pinput = __create<::input::input >(pfactory);
 
       pinput->initialize(this);
 

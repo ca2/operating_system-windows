@@ -5,25 +5,33 @@ project(acme_windows CXX)
 list(APPEND library_source
    _.cpp
    _.h
-   acme_dir.cpp
-   acme_dir.h
+   acme_directory.cpp
+   acme_directory.h
    acme_path.cpp
    acme_path.h
-   argcargv.cpp
-   callstack.cpp
+   dir_context.cpp
+   dir_context.h
+   dir_system.cpp
+   dir_system.h
+   file_context.cpp
+   file_context.h
+   file_system.cpp
+   file_system.h
+   #argcargv.cpp
+   #callstack.cpp
    console.cpp
    console.h
    _factory.cpp
-   file.cpp
-   file.h
+   #file.cpp
+   #file.h
    file_find.cpp
    file_memory_map.cpp
    file_memory_map.h
    framework.cpp
    framework.h
    list_serial_ports.cpp
-   mutex.cpp
-   mutex.h
+   #mutex.cpp
+   #mutex.h
    node.cpp
    node.h
    pipe.cpp
@@ -35,7 +43,7 @@ list(APPEND library_source
    shared_memory.cpp
    shared_memory.h
    strdup_array.cpp
-   timer.cpp
+   #timer.cpp
    trace.cpp
    uac_tools.cpp
    uac_tools.h

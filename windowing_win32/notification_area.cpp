@@ -180,7 +180,7 @@ namespace windowing_win32
 
             ::pointer<::draw2d::icon>picon;
 
-            picon.create(this);
+            __construct(picon);
 
             picon->initialize_with_windowing_icon(pwindowingicon);
 

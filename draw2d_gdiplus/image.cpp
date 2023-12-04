@@ -106,9 +106,9 @@ namespace draw2d_gdiplus
 
       //destroy();
 
-      m_pbitmap.defer_create(this);
+      __defer_construct(m_pbitmap);
 
-      m_pgraphics.defer_create(this);
+      __defer_construct(m_pgraphics);
 
       //if (m_pbitmap.is_null())
       //{
@@ -491,10 +491,6 @@ namespace draw2d_gdiplus
    {
 
       ::image::destroy();
-
-      m_pgraphics.release();
-
-      m_pbitmap.release();
 
       //return ::success;
 

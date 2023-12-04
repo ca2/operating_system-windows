@@ -71,7 +71,7 @@ namespace windowing_win32
 
       //::finalize_windows_devices();
 
-      system()->m_paurasystem->m_phardwaredevices.release();
+      //system()->m_paurasystem->m_phardwaredevices.release();
 
       ::pointer<::user::message>pusermessage(pmessage);
 

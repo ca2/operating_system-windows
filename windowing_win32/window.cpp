@@ -524,7 +524,9 @@ namespace windowing_win32
          //| SWP_SHOWWINDOW;
       }
 
-      puserinteraction->increment_reference_count(REFERENCING_DEBUGGING_THIS);
+
+
+      //puserinteraction->increment_reference_count();
 
       puserinteraction->on_finished_window_creation();
 
@@ -564,7 +566,7 @@ namespace windowing_win32
 
 
 
-               pimpl->m_pgraphics->update_screen();
+               pimpl->m_pgraphicsgraphics->update_screen();
 
 //});
                //bool bWindowsApplyVisual = true;
@@ -1357,6 +1359,10 @@ namespace windowing_win32
 
       //}
 
+      m_pimpl2.release();
+
+      ::windowing::window::post_non_client_destroy();
+
    }
 
 
@@ -1916,6 +1922,8 @@ namespace windowing_win32
       }
 
       //return ::success;
+
+      ::windowing::window::destroy_window();
 
    }
 
@@ -7121,7 +7129,7 @@ namespace windowing_win32
    void window::__update_graphics_buffer()
    {
 
-      m_puserinteractionimpl->m_pgraphics->update_screen();
+      m_puserinteractionimpl->m_pgraphicsgraphics->update_screen();
 
       /*auto puserinteraction = m_puserinteractionimpl->m_puserinteraction;
 

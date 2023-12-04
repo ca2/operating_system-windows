@@ -7,6 +7,7 @@
 #include "acme/constant/message.h"
 #include "acme/exception/exception.h"
 #include "acme/platform/system.h"
+#include "aura/hardware/device_group.h"
 #include "aura/user/user/user.h"
 #include "aura/platform/session.h"
 
@@ -89,6 +90,22 @@ namespace windowing_win32
 
    }
 
+   void devices::erase_device_group(::hardware::device_group * pdevicegroup)
+   {
+      auto & pmasterdevicelistener = m_mapmasterdevicelistener[pdevicegroup->m_edevice];
+
+      if (pmasterdevicelistener)
+      {
+
+         _unregister_device_listener(pmasterdevicelistener, get_device_guid(pdevicegroup->m_edevice));
+
+      }
+
+
+      ::hardware::devices::erase_device_group(pdevicegroup);
+
+   }
+
    void devices::_register_device_listener(master_device_listener * plistener, GUID guid)
       // Parameters:
       //     guid - The interface class GUID for the device interfaces. 
@@ -145,6 +162,44 @@ namespace windowing_win32
       
       psysteminteraction->add_message_handler(e_message_device_change, { plistener, &master_device_listener::on_message_device_change }, false);
 
+
+   }
+
+
+   void devices::_unregister_device_listener(master_device_listener * plistener, GUID guid)
+      // Parameters:
+      //     guid - The interface class GUID for the device interfaces. 
+      // Note:
+      //     RegisterDeviceNotification also allows a service handle be used,
+      //     so a similar wrapper function to this one supporting that scenario
+      //     could be made from this template.
+   {
+
+      if (plistener->m_hdevnotify == nullptr)
+      {
+
+         throw exception(error_wrong_state);
+
+      }
+
+      auto hdevnotify = plistener->m_hdevnotify;
+
+      plistener->m_hdevnotify = nullptr;
+
+      BOOL bOk =  UnregisterDeviceNotification(hdevnotify);
+
+      if (!bOk)
+      {
+
+         auto lasterror = ::GetLastError();
+
+         error() << "UnregisterDeviceNotification";
+
+         throw exception(::windows::last_error_status(lasterror));
+
+      }
+
+      m_mapmasterdevicelistener.erase_item(plistener->m_edevice);
 
    }
 

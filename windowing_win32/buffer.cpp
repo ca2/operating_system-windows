@@ -493,6 +493,16 @@ namespace windowing_win32
    }
 
 
+   void buffer::destroy()
+   {
+
+      ::graphics::double_buffer::destroy();
+
+      destroy_buffer();
+
+   }
+
+
    ::point_i32 g_pointLastBottomRight;
 
 

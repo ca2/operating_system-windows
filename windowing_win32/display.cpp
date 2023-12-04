@@ -1033,9 +1033,17 @@ namespace windowing_win32
 
       ::windowing::display::initialize_display(pwindowing);
 
-      m_pwindowing = pwindowing;
-
       enum_display_monitors();
+
+   }
+
+
+   void display::finalize_display()
+   {
+
+      unregister_device_listener(::hardware::e_device_monitor);
+
+      ::windowing::display::finalize_display();
 
    }
 

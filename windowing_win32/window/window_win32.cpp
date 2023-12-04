@@ -228,6 +228,12 @@ LRESULT CALLBACK __window_procedure(HWND hwnd, UINT message, WPARAM wparam, LPAR
       ::acme::get()->platform()->informationf("WM_SYSCOMMAND");
 
    }
+   else if (message == WM_NCDESTROY)
+   {
+
+      ::acme::get()->platform()->informationf("WM_NCDESTROY");
+
+   }
    else if (message == WM_COMMAND)
    {
 

@@ -43,7 +43,7 @@ list(APPEND draw2d_gdiplus_source
         path.h
         pen.cpp
         pen.h
-        preview_dc.cpp
+        #preview_dc.cpp
         region.cpp
         region.h
         text.cpp)
