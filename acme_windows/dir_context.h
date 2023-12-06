@@ -25,9 +25,16 @@ namespace acme_windows
       ~dir_context() override;
 
 
-      virtual void initialize(::particle * pparticle) override;
+      void initialize(::particle * pparticle) override;
 
-      virtual void init_system() override;
+      void init_system() override;
+
+      void term_system() override;
+
+
+      void finalize() override;
+
+
 
       using ::dir_context::enumerate;
       // rls fetchs should set a meaningful m_iRelative value at each returned path

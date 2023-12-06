@@ -83,6 +83,36 @@ namespace acme_windows
    }
 
 
+   void file_context::term_system()
+   {
+
+      ::acme_windows_common::file_context::init_system();
+
+      //auto estatus = m_pfilesystem->update_module_path();
+
+      //if (!estatus)
+      //{
+
+      //   return estatus;
+
+      //}
+
+//      return ::success;
+
+   }
+
+
+   void file_context::finalize()
+   {
+
+      m_pfilesystem.release();
+
+      m_pdirsystem.release();
+
+      ::acme_windows_common::file_context::finalize();
+
+   }
+
    //bool file_context::FullPath(string & str, const ::string & pszFileIn)
    //{
 

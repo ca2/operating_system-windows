@@ -116,6 +116,69 @@ namespace acme_windows
    }
 
 
+   void dir_context::term_system()
+   {
+
+      //auto estatus = 
+
+      ::dir_context::term_system();
+
+      //if (!estatus)
+      //{
+
+      //   return estatus;
+
+      //}
+
+      //auto pdocument = create_xml_document();
+
+      //if (pdocument->load(m_pcontext->m_papexcontext->file().as_string(::dir::appdata() / "configuration/directory.xml")))
+      //{
+
+      //   //xxdebug_box("win_dir::initialize (configuration)", "win_dir::initialize", 0);
+
+      //   if (pdocument->root()->get_name() == "directory_configuration")
+      //   {
+
+      //      ::file::path pathFolderTime = pdocument->root()->get_child_value("time");
+
+      //      if (m_pcontext->m_papexcontext->dir().is(pathFolderTime))
+      //      {
+
+      //         m_pdirsystem->m_strTimeFolder = pathFolderTime;
+
+      //      }
+
+      //      ::file::path pathFolderNetseed = pdocument->root()->get_child_value("netseed");
+
+      //      if (m_pcontext->m_papexcontext->dir().is(pathFolderNetseed))
+      //      {
+
+      //         m_pdirsystem->m_strNetSeedFolder = pathFolderNetseed;
+
+      //      }
+
+      //   }
+
+      //}
+
+      //return ::success;
+
+   }
+
+
+   void dir_context::finalize()
+   {
+
+      m_pfilesystem.release();
+
+      m_pdirsystem.release();
+
+      ::dir_context::finalize();
+
+   }
+
+
    inline bool myspace(char ch)
    {
       return ch == ' ' ||

@@ -48,6 +48,12 @@ namespace acme_windows
       void init_system() override;
 
 
+      void term_system() override;
+
+
+      void finalize() override;
+
+
       //virtual void get_status(const ::file::path & path, ::file::file_status & status);
       //virtual void set_status(const ::file::path & path, const ::file::file_status & status);
 

@@ -684,12 +684,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="app_launcher.h" />
-    <ClInclude Include="dir_context.h" />
-    <ClInclude Include="dir_system.h" />
     <ClInclude Include="explorer\explorer_restart.h" />
-    <ClInclude Include="file_context.h" />
-    <ClInclude Include="file_os_watcher.h" />
-    <ClInclude Include="file_system.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="interprocess_base.h" />
     <ClInclude Include="interprocess_caller.h" />

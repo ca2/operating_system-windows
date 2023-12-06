@@ -44,21 +44,6 @@
     <ClInclude Include="node.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="dir_context.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="dir_system.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="file_context.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="file_os_watcher.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="file_system.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="ip_enum.h">
       <Filter>Header Files</Filter>
     </ClInclude>

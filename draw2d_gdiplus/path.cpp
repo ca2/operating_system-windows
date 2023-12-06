@@ -479,7 +479,7 @@ namespace draw2d_gdiplus
 
       ::acme::del(m_ppath);
 
-      //return ::success;
+      ::draw2d::path::destroy();
 
    }
 
