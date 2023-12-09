@@ -91,7 +91,7 @@ namespace windowing_win32
 
       void install_message_routing(::channel * pchannel) override;
 
-      bool step() override;
+      bool notify_icon_step() override;
 
 //#if defined(APPLE_IOS) || defined(WINDOWS_DESKTOP) || defined(ANDROID) || defined(UNIVERSAL_WINDOWS)
 //      virtual void notify_icon_play(const ::string & action);

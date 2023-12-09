@@ -45,7 +45,7 @@ namespace acme_windows
 
       CancelIo(m_hDirectory);
 
-      step();
+      file_watch_step();
 
       if (!HasOverlappedIoCompleted(&m_overlapped))
       {
@@ -230,7 +230,7 @@ namespace acme_windows
    }
 
 
-   bool file_watch::step()
+   bool file_watch::file_watch_step()
    {
 
       return ReadDirectoryChangesW(
@@ -260,7 +260,7 @@ namespace acme_windows
    }
 
 
-   bool file_watcher::step()
+   bool file_watcher::file_watcher_step()
    {
 
       MsgWaitForMultipleObjectsEx(0,nullptr,500,QS_ALLINPUT,MWMO_ALERTABLE);
@@ -272,7 +272,7 @@ namespace acme_windows
 
       }
 
-      if (!watcher::step())
+      if (!watcher::file_watcher_step())
       {
 
          return false;

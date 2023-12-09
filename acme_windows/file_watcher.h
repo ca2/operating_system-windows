@@ -52,7 +52,7 @@ namespace acme_windows
 
       static void CALLBACK callback(DWORD dwErrorCode, DWORD dwNumberOfBytesTransfered, LPOVERLAPPED pOverlapped);
 
-      virtual bool step() override;
+      bool file_watch_step() override;
 
 
    };
@@ -73,7 +73,7 @@ namespace acme_windows
 
       //virtual void     run() override;
 
-      bool step() override;
+      bool file_watcher_step() override;
 
 
    };

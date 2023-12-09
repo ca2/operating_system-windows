@@ -351,7 +351,7 @@ namespace windowing_win32
    //}
 
 
-   bool notify_icon::step()
+   bool notify_icon::notify_icon_step()
    {
 
 #if defined(LINUX)
