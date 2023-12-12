@@ -1,11 +1,24 @@
 cmake_minimum_required(VERSION 3.17)
 project(aura_windows CXX)
+
+
+
 list(APPEND library_source
    _.cpp
    _.h
    _factory.cpp
+   extract_icon.cpp
+   extract_icon.h
    framework.cpp
-   framework.h)
+   framework.h
+    interaction_impl.cpp
+   interaction_impl.h
+   node.cpp
+   node.h
+   shell_open.cpp
+   shell_open.h
+
+)
 
 add_library(aura_windows SHARED ${library_source})
 
@@ -18,7 +31,17 @@ if (MSVC)
     target_link_options(aura_windows PRIVATE "/DEFAULTLIB:msvcrt$<$<CONFIG:Debug>:d>")
     target_link_options(aura_windows PRIVATE "/IMPLIB:${LIBRARY_OUTPUT_PATH}/aura_windows.lib")
     target_link_options(aura_windows PRIVATE "/DEF:${CMAKE_CURRENT_SOURCE_DIR}/aura_windows.def")
-    target_link_libraries(aura_windows PRIVATE acme apex aqua aura Gdiplus)
+    target_link_libraries(aura_windows PRIVATE
+       aura_windows_common
+       apex_windows
+       apex_windows_common
+       acme_windows
+       acme_windows_common
+       acme
+       apex
+       aqua
+       aura
+       Gdiplus)
 elseif(${LINUX})
 
     if(NOT DONT_USE_PKG_CONFIG)
@@ -54,6 +77,7 @@ target_include_directories(aura_windows PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../.
 target_include_directories(aura_windows PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
 
 
-target_compile_definitions(aura_windows PRIVATE _AURA_WINDOWS_LIBRARY)
-target_compile_definitions(aura_windows PRIVATE UNICODE)
-target_compile_definitions(aura_windows PRIVATE _UNICODE)
+target_compile_definitions(${PROJECT_NAME} PRIVATE _${PROJECT_NAME}_project)
+
+
+

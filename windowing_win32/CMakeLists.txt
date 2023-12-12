@@ -1,9 +1,6 @@
 cmake_minimum_required(VERSION 3.17)
 project(windowing_win32 CXX)
 
-set(CMAKE_CXX_STANDARD 14)
-set(CMAKE_CXX_EXTENSIONS OFF)
-
 
 message(STATUS "CMAKE_SYSTEM_NAME is ${CMAKE_SYSTEM_NAME}")
 
@@ -63,7 +60,14 @@ if (MSVC)
     target_link_options(${PROJECT_NAME} PRIVATE "/DEFAULTLIB:msvcrt$<$<CONFIG:Debug>:d>")
     target_link_options(${PROJECT_NAME} PRIVATE "/IMPLIB:${LIBRARY_OUTPUT_PATH}/${PROJECT_NAME}.lib")
     target_link_options(${PROJECT_NAME} PRIVATE "/DEF:${CMAKE_CURRENT_SOURCE_DIR}/${PROJECT_NAME}.def")
-    target_link_libraries(${PROJECT_NAME} PRIVATE acme apex aqua aura Gdiplus)
+    target_link_libraries(${PROJECT_NAME} PRIVATE
+       aura_windows
+       aura_windows_common
+       apex_windows
+       apex_windows_common
+       acme_windows
+       acme_windows_common
+       acme apex aqua aura Gdiplus)
 elseif(LINUX)
 
     if(NOT DONT_USE_PKG_CONFIG)
@@ -99,6 +103,7 @@ target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/.
 target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
 
 
-target_compile_definitions(${PROJECT_NAME} PRIVATE _DRAW2D_GDIPLUS_LIBRARY)
-target_compile_definitions(${PROJECT_NAME} PRIVATE UNICODE)
-target_compile_definitions(${PROJECT_NAME} PRIVATE _UNICODE)
+target_compile_definitions(${PROJECT_NAME} PRIVATE _${PROJECT_NAME}_project)
+
+
+

@@ -1,8 +1,8 @@
 cmake_minimum_required(VERSION 3.17)
 project(input_win32 CXX)
 
-set(CMAKE_CXX_STANDARD 14)
-set(CMAKE_CXX_EXTENSIONS OFF)
+
+
 
 
 message(STATUS "CMAKE_SYSTEM_NAME is ${CMAKE_SYSTEM_NAME}")

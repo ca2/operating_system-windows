@@ -7,8 +7,18 @@ list(APPEND library_source
         _.cpp
         _.h
         _factory.cpp
+   font_enumeration.cpp
+   font_enumeration.h
+   fonts.cpp
+   fonts.h
+
         framework.cpp
-        framework.h)
+        framework.h
+   write_text.cpp
+   write_text.h
+   write_text_win32_gdi.cpp
+   write_text_win32_gdi.h
+)
 
 
 
@@ -60,6 +70,7 @@ target_include_directories(write_text_win32 PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/
 target_include_directories(write_text_win32 PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
 
 
-target_compile_definitions(write_text_win32 PRIVATE _write_text_win32_LIBRARY)
-target_compile_definitions(write_text_win32 PRIVATE UNICODE)
-target_compile_definitions(write_text_win32 PRIVATE _UNICODE)
+target_compile_definitions(${PROJECT_NAME} PRIVATE _${PROJECT_NAME}_project)
+
+
+

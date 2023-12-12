@@ -7,7 +7,33 @@ list(APPEND library_source
    _.h
    _factory.cpp
    framework.cpp
-   framework.h)
+   framework.h
+    gdi.cpp
+   interprocess_base.cpp
+   interprocess_base.h
+   interprocess_caller.cpp
+   interprocess_caller.h
+   interprocess_target.cpp
+   interprocess_target.h
+   ip_enum.cpp
+   ip_enum.h
+   launcher.cpp
+   launcher.h
+   node.cpp
+   node.h
+   os_context.cpp
+   os_context.h
+   process.cpp
+   process.h
+   process_data.h
+   #service.cpp
+   #service.h
+   service_handler.cpp
+   service_handler.h
+   shell_launcher.cpp
+   shell_launcher.h
+   tts_speaker.h
+)
 
 
 add_library(apex_windows SHARED ${library_source})
@@ -24,7 +50,7 @@ if (MSVC)
     target_link_options(apex_windows PRIVATE "/DEFAULTLIB:msvcrt$<$<CONFIG:Debug>:d>")
     target_link_options(apex_windows PRIVATE "/IMPLIB:${LIBRARY_OUTPUT_PATH}/apex_windows.lib")
     target_link_options(apex_windows PRIVATE "/DEF:${CMAKE_CURRENT_SOURCE_DIR}/apex_windows.def")
-    target_link_libraries(apex_windows PRIVATE acme apex aqua aura Gdiplus)
+    target_link_libraries(apex_windows PRIVATE acme_windows acme_windows_common apex_windows_common acme apex aqua aura Gdiplus)
 elseif(LINUX)
 
     if(NOT DONT_USE_PKG_CONFIG)
@@ -47,6 +73,7 @@ target_include_directories(apex_windows PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/..)
 target_include_directories(apex_windows PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
 
 
-target_compile_definitions(apex_windows PRIVATE _APEX_WINDOWS_LIBRARY)
-target_compile_definitions(apex_windows PRIVATE UNICODE)
-target_compile_definitions(apex_windows PRIVATE _UNICODE)
+target_compile_definitions(${PROJECT_NAME} PRIVATE _${PROJECT_NAME}_project)
+
+
+

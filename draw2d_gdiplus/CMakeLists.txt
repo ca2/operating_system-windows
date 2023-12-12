@@ -1,8 +1,8 @@
 cmake_minimum_required(VERSION 3.17)
 project(draw2d_gdiplus CXX)
 
-set(CMAKE_CXX_STANDARD 14)
-set(CMAKE_CXX_EXTENSIONS OFF)
+
+
 
 
 message(STATUS "CMAKE_SYSTEM_NAME is ${CMAKE_SYSTEM_NAME}")
@@ -104,6 +104,6 @@ target_include_directories(draw2d_gdiplus PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/..
 target_include_directories(draw2d_gdiplus PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
 
 
-target_compile_definitions(draw2d_gdiplus PRIVATE _DRAW2D_GDIPLUS_LIBRARY)
-target_compile_definitions(draw2d_gdiplus PRIVATE UNICODE)
-target_compile_definitions(draw2d_gdiplus PRIVATE _UNICODE)
+target_compile_definitions(${PROJECT_NAME} PRIVATE _${PROJECT_NAME}_project)
+
+

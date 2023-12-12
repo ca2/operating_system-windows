@@ -1,5 +1,5 @@
 LIBRARY "acme_windows"
 
 EXPORTS
-acme_windows_factory_exchange
+acme_windows_factory
 

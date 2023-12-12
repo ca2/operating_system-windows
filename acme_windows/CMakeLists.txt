@@ -5,45 +5,66 @@ project(acme_windows CXX)
 list(APPEND library_source
    _.cpp
    _.h
+   _factory.cpp
+   _file.cpp
    acme_directory.cpp
    acme_directory.h
+   acme_file.cpp
+   acme_file.h
    acme_path.cpp
    acme_path.h
+   application.cpp
+   application.h
+   console.cpp
+   console.h
    dir_context.cpp
    dir_context.h
    dir_system.cpp
    dir_system.h
+   exclusive.cpp
+   exclusive.h
    file_context.cpp
    file_context.h
-   file_system.cpp
-   file_system.h
-   #argcargv.cpp
-   #callstack.cpp
-   console.cpp
-   console.h
-   _factory.cpp
-   #file.cpp
-   #file.h
+   file_dialog.cpp
    file_find.cpp
+   file_find.h
+   file_link.cpp
+   file_link.h
    file_memory_map.cpp
    file_memory_map.h
+   file_system.cpp
+   file_system.h
+   file_watcher.cpp
+   file_watcher.h
+   folder_dialog.cpp
    framework.cpp
    framework.h
+   integration_context.cpp
+   integration_context.h
+   itemidlist.cpp
+   itemidlist.h
+   known_folder_struct.cpp
+   known_folder_struct.h
+   language.cpp
    list_serial_ports.cpp
-   #mutex.cpp
-   #mutex.h
+   main_window.cpp
+   main_window.h
+   message_loop.cpp
+   mmresult.cpp
+   mmresult.h
+   mmsystem.cpp
    node.cpp
    node.h
    pipe.cpp
    pipe.h
    registry.cpp
    registry.h
+   sapi.cpp
    serial.cpp
    serial.h
    shared_memory.cpp
    shared_memory.h
    strdup_array.cpp
-   #timer.cpp
    trace.cpp
    uac_tools.cpp
    uac_tools.h
@@ -62,7 +83,15 @@ if (MSVC)
     target_link_options(acme_windows PRIVATE "/DEFAULTLIB:msvcrt$<$<CONFIG:Debug>:d>")
     target_link_options(acme_windows PRIVATE "/IMPLIB:${LIBRARY_OUTPUT_PATH}/acme_windows.lib")
     target_link_options(acme_windows PRIVATE "/DEF:${CMAKE_CURRENT_SOURCE_DIR}/acme_windows.def")
-    target_link_libraries(acme_windows PRIVATE acme apex aqua aura Gdiplus)
+    target_link_libraries(acme_windows PRIVATE
+       acme_windows_common
+       acme
+       apex
+       aqua
+       aura
+       Gdiplus
+       Setupapi
+       Credui)
 elseif(LINUX)
 
     if(NOT DONT_USE_PKG_CONFIG)
@@ -85,6 +114,4 @@ target_include_directories(acme_windows PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/..)
 target_include_directories(acme_windows PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
 
 
-target_compile_definitions(acme_windows PRIVATE _ACME_WINDOWS_LIBRARY)
-target_compile_definitions(acme_windows PRIVATE UNICODE)
-target_compile_definitions(acme_windows PRIVATE _UNICODE)
+target_compile_definitions(${PROJECT_NAME} PRIVATE _${PROJECT_NAME}_project)

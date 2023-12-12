@@ -1,5 +1,5 @@
 LIBRARY "apex_windows"
 
 EXPORTS
-apex_windows_factory_exchange
+apex_windows_factory
 

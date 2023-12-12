@@ -1,8 +1,6 @@
 cmake_minimum_required(VERSION 3.17)
 project(music_midi_mmsystem CXX)
 
-set(CMAKE_CXX_STANDARD 14)
-set(CMAKE_CXX_EXTENSIONS OFF)
 
 
 message(STATUS "CMAKE_SYSTEM_NAME is ${CMAKE_SYSTEM_NAME}")
@@ -84,6 +82,7 @@ target_include_directories(music_midi_mmsystem PRIVATE ${CMAKE_CURRENT_SOURCE_DI
 target_include_directories(music_midi_mmsystem PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
 
 
-target_compile_definitions(music_midi_mmsystem PRIVATE _music_midi_mmsystem_LIBRARY)
-target_compile_definitions(music_midi_mmsystem PRIVATE UNICODE)
-target_compile_definitions(music_midi_mmsystem PRIVATE _UNICODE)
+target_compile_definitions(${PROJECT_NAME} PRIVATE _${PROJECT_NAME}_project)
+
+
+

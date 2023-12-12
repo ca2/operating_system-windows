@@ -6,9 +6,11 @@ elseif(CMAKE_SIZEOF_VOID_P EQUAL 4)
    set(PLATFORM_CONFIGURATION "Win32")
 endif()
 
+
+
 #message(STATUS "CMAKE_GENERATOR_PLATFORM is ${CMAKE_GENERATOR_PLATFORM}")
 
-message(STATUS "PLATFORM_CONFIGURATION is ${PLATFORM_CONFIGURATION}")
+set(CONFIGURATION_NAME ${CMAKE_BUILD_TYPE})
 
 set(PLATFORM_NAME "windows")
 set(OPERATING_SYSTEM_NAME "windows")
@@ -16,7 +18,7 @@ set(WIN32 TRUE)
 set(UWP FALSE)
 set(LINUX FALSE)
 set(FREEBSD FALSE)
-
+set(NO_PRECOMPILED_HEADER FALSE)
 
 set(default_node "node_windows")
 set(default_draw2d "draw2d_gdiplus")
@@ -29,6 +31,8 @@ set(default_networking "networking_bsd")
 
 
 add_compile_definitions(UNICODE)
+add_compile_definitions(_UNICODE)
+add_compile_definitions(WINDOWS_DESKTOP)
 
 
 list(APPEND app_common_dependencies
@@ -43,12 +47,13 @@ acme_windows_common
 
 
 #set(LIBRARY_OUTPUT_PATH ${CMAKE_CURRENT_SOURCE_DIR}/time-${OPERATING_SYSTEM_NAME}/x64/basis)
-set(LIBRARY_OUTPUT_PATH ${CMAKE_BINARY_DIR}/output)
+set(LIBRARY_OUTPUT_PATH ${CMAKE_BINARY_DIR}/library)
 #set(EXECUTABLE_OUTPUT_PATH ${CMAKE_CURRENT_SOURCE_DIR}/time-${OPERATING_SYSTEM_NAME}/x64/basis)
 set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR}/output)
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/library)
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/output)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/output)
+set(CMAKE_SHARED_LIBRARY_PREFIX "")
 
 
 message(STATUS "CMAKE_BINARY_DIR is ${CMAKE_BINARY_DIR}")
@@ -78,3 +83,9 @@ include_directories(${WORKSPACE_FOLDER}/operating_system/operating_system-${OPER
 include_directories(${WORKSPACE_FOLDER}/operating_system/operating_system-${OPERATING_SYSTEM_NAME}/include/configuration_selection/${CMAKE_BUILD_TYPE})
 include_directories(${WORKSPACE_FOLDER}/operating_system/operating_system-${OPERATING_SYSTEM_NAME}/operating_system/${SLASHED_OPERATING_SYSTEM})
 include_directories(${WORKSPACE_FOLDER}/operating_system/operating_system-${OPERATING_SYSTEM_NAME}/operating_system/${DISTRO})
+
+
+message(STATUS "PLATFORM_CONFIGURATION is ${PLATFORM_CONFIGURATION}")
+message(STATUS "CMAKE_BUILD_TYPE is ${CMAKE_BUILD_TYPE}")
+message(STATUS "OPERATING_SYSTEM_NAME is ${OPERATING_SYSTEM_NAME}")
+
