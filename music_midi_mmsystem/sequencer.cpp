@@ -5,6 +5,7 @@
 #include "acme/filesystem/file/memory_file.h"
 #include "acme/parallelization/manual_reset_event.h"
 #include "acme/parallelization/synchronous_lock.h"
+#include "acme/primitive/mathematics/clip.h"
 #include "acme/primitive/string/hex.h"
 #include "aqua/multimedia/exception.h"
 #include "aqua/platform/system.h"
@@ -2590,7 +2591,7 @@ namespace music
                         for (int iTrack = 0; iTrack < 16; iTrack++)
                         {
 
-                           clip(0, 127, m_psequence->m_iaRefVolume[iTrack]);
+                           clip(m_psequence->m_iaRefVolume[iTrack], 0, 127);
 
                            ::u8 bVolume = (::u8)(m_psequence->m_iaRefVolume[iTrack] * maximum(0.0, minimum(1.0, dVolume)));
 
@@ -2642,7 +2643,7 @@ namespace music
 
                            }
 
-                           clip(0, 127, m_keyframe.rbControl[iTrack][e_control_change_volume]);
+                           clip(m_keyframe.rbControl[iTrack][e_control_change_volume], 0, 127);
 
                            int iVolume = m_keyframe.rbControl[iTrack][e_control_change_volume];
 
