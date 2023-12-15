@@ -1596,7 +1596,12 @@ namespace aura_windows
    void interaction_impl::post_message(const ::atom & atom, wparam wparam, lparam lparam)
    {
 
-      //return
+      if (!m_pwindow)
+      {
+
+         return;
+
+      }
       
       m_pwindow->post_message(atom, wparam, lparam);
 
