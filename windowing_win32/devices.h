@@ -25,7 +25,7 @@ namespace windowing_win32
       devices();
       ~devices() override;
 
-      virtual void on_initialize_object();
+      void on_initialize_particle() override;
 
       void on_message_device_change(::message::message * pmessage);
 

@@ -52,12 +52,22 @@ namespace windowing_win32
 
    }
 
-   void devices::on_initialize_object()
+
+   void devices::on_initialize_particle()
    {
+
+      ::hardware::devices::on_initialize_particle();
 
       auto psession = session()->m_paurasession;
 
       auto puser = psession->user();
+
+      if (!puser->windowing())
+      {
+
+         puser->create_windowing();
+
+      }
 
       auto pwindowing = (::windowing_win32::windowing*)puser->m_pwindowing->m_pWindowing4;
 
