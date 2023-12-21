@@ -7432,211 +7432,216 @@ namespace windowing_win32
 
       //auto psystem = pimpl->system();
 
-      pimpl->m_uiMessage = message;
-
-      pimpl->m_wparam = wparam;
-
-      pimpl->m_lparam = lparam;
-
-      auto puserinteraction = pimpl->m_puserinteraction;
-
-      if (message == e_message_activate)
+      if (pimpl)
       {
 
-         puserinteraction->informationf("__window_procedure e_message_activate");
+         pimpl->m_uiMessage = message;
 
-      }
-      else if (message == e_message_create)
-      {
+         pimpl->m_wparam = wparam;
 
-         puserinteraction->informationf("e_message_create");
+         pimpl->m_lparam = lparam;
 
-      }
+         auto puserinteraction = pimpl->m_puserinteraction;
 
-      if (message == e_message_left_button_down)
-      {
-
-         puserinteraction->informationf("e_message_left_button_down");
-
-      }
-      else if (message == e_message_left_button_up)
-      {
-
-         puserinteraction->informationf("e_message_left_button_up");
-
-      }
-      else if (message == e_message_right_button_up)
-      {
-
-      }
-      else if (message == 33815)
-      {
-
-         string strType = ::type(puserinteraction).name();
-
-         if (strType.contains("list_box"))
+         if (message == e_message_activate)
          {
 
-            puserinteraction->informationf("list_box");
+            puserinteraction->informationf("__window_procedure e_message_activate");
+
+         }
+         else if (message == e_message_create)
+         {
+
+            puserinteraction->informationf("e_message_create");
 
          }
 
-      }
-
-      if (message == e_message_mouse_move)
-      {
-
-         if (lparam == pimpl->m_lparamLastMouseMove)
+         if (message == e_message_left_button_down)
          {
+
+            puserinteraction->informationf("e_message_left_button_down");
+
+         }
+         else if (message == e_message_left_button_up)
+         {
+
+            puserinteraction->informationf("e_message_left_button_up");
+
+         }
+         else if (message == e_message_right_button_up)
+         {
+
+         }
+         else if (message == 33815)
+         {
+
+            string strType = ::type(puserinteraction).name();
+
+            if (strType.contains("list_box"))
+            {
+
+               puserinteraction->informationf("list_box");
+
+            }
+
+         }
+
+         if (message == e_message_mouse_move)
+         {
+
+            if (lparam == pimpl->m_lparamLastMouseMove)
+            {
+
+               return 0;
+
+            }
+
+            pimpl->m_lparamLastMouseMove = lparam;
+
+            ::point_i32 pointMouseMove(i32_x(lparam), i32_y(lparam));
+
+            if (pimpl->m_pointMouseMove == pointMouseMove)
+            {
+
+               return 0;
+
+            }
+
+            pimpl->m_pointMouseMove = pointMouseMove;
+
+            if (m_pointMouseMove == pointMouseMove)
+            {
+
+               return 0;
+
+            }
+
+            m_pointMouseMove = pointMouseMove;
+
+            m_timeLastMouseMove.Now();
+
+         }
+         else if (message == e_message_timer)
+         {
+
+            //if (wparam == e_timer_transparent_mouse_event)
+            //{
+
+            //   if (pimpl->m_pointMouseMove == pointMouseMove)
+            //   {
+
+            //      return 0;
+
+            //   }
+
+            //   pimpl->m_pointCursor = pointCursor;
+
+            //   lparam = MAKELPARAM(pointCursor.x(), pointCursor.y());
+
+            //   pimpl->call_message_handler(e_message_mouse_move, 0, lparam);
+
+            //}
+            //else
+            //{
+
+            //   // ignoring Timer Event
+
+            //   output_debug_string("iTE\n");
+
+            //}
 
             return 0;
 
          }
 
-         pimpl->m_lparamLastMouseMove = lparam;
-
-         ::point_i32 pointMouseMove(i32_x(lparam), i32_y(lparam));
-
-         if (pimpl->m_pointMouseMove == pointMouseMove)
+         if (pimpl->m_bDestroyImplOnly || ::is_null(puserinteraction))
          {
 
-            return 0;
+            auto pmessage = pimpl->get_message((enum_message)message, wparam, (iptr)lparam);
+
+            try
+            {
+
+               pimpl->message_handler(pmessage);
+
+            }
+            catch (...)
+            {
+
+            }
+
+            if (!pmessage->m_bRet)
+            {
+
+               pimpl->default_message_handler(pmessage);
+
+            }
+
+            lresult = pmessage->m_lresult;
 
          }
-
-         pimpl->m_pointMouseMove = pointMouseMove;
-
-         if (m_pointMouseMove == pointMouseMove)
+         else if (::is_set(puserinteraction))
          {
 
-            return 0;
+            if (message == WM_GETTEXT)
+            {
+
+               return ::DefWindowProcW(hwnd, message, wparam, lparam);
+
+            }
+            else if (message == WM_GETTEXTLENGTH)
+            {
+
+               return ::DefWindowProcW(hwnd, message, wparam, lparam);
+
+            }
+            else if (message == WM_SETTEXT)
+            {
+
+               return ::DefWindowProcW(hwnd, message, wparam, lparam);
+
+            }
+            if (message == 34831)
+            {
+
+               //output_debug_string("message34381");
+            }
+            auto pmessage = pimpl->get_message((enum_message)message, wparam, (iptr)lparam);
+
+            try
+            {
+
+               //puserinteraction->message_handler(pmessage);
+               message_handler(pmessage);
+
+            }
+            catch (::exception & e)
+            {
+
+               get_task()->handle_exception(e);
+
+            }
+            catch (...)
+            {
+
+            }
+
+            if (!pmessage->m_bRet)
+            {
+
+               puserinteraction->default_message_handler(pmessage);
+
+            }
+
+            lresult = pmessage->m_lresult;
 
          }
-
-         m_pointMouseMove = pointMouseMove;
-
-         m_timeLastMouseMove.Now();
-
-      }
-      else if (message == e_message_timer)
-      {
-
-         //if (wparam == e_timer_transparent_mouse_event)
-         //{
-
-         //   if (pimpl->m_pointMouseMove == pointMouseMove)
-         //   {
-
-         //      return 0;
-
-         //   }
-
-         //   pimpl->m_pointCursor = pointCursor;
-
-         //   lparam = MAKELPARAM(pointCursor.x(), pointCursor.y());
-
-         //   pimpl->call_message_handler(e_message_mouse_move, 0, lparam);
-
-         //}
-         //else
-         //{
-
-         //   // ignoring Timer Event
-
-         //   output_debug_string("iTE\n");
-
-         //}
-
-         return 0;
-
-      }
-
-      if (pimpl->m_bDestroyImplOnly || ::is_null(puserinteraction))
-      {
-
-         auto pmessage = pimpl->get_message((enum_message)message, wparam, (iptr)lparam);
-
-         try
+         else
          {
 
-            pimpl->message_handler(pmessage);
+            lresult = ::DefWindowProcW(hwnd, message, wparam, lparam);
 
          }
-         catch (...)
-         {
-
-         }
-
-         if (!pmessage->m_bRet)
-         {
-
-            pimpl->default_message_handler(pmessage);
-
-         }
-
-         lresult = pmessage->m_lresult;
-
-      }
-      else if (::is_set(puserinteraction))
-      {
-
-         if (message == WM_GETTEXT)
-         {
-
-            return ::DefWindowProcW(hwnd, message, wparam, lparam);
-
-         }
-         else if (message == WM_GETTEXTLENGTH)
-         {
-
-            return ::DefWindowProcW(hwnd, message, wparam, lparam);
-
-         }
-         else if (message == WM_SETTEXT)
-         {
-
-            return ::DefWindowProcW(hwnd, message, wparam, lparam);
-
-         }
-         if (message == 34831)
-         {
-
-            //output_debug_string("message34381");
-         }
-         auto pmessage = pimpl->get_message((enum_message)message, wparam, (iptr)lparam);
-
-         try
-         {
-
-            //puserinteraction->message_handler(pmessage);
-            message_handler(pmessage);
-
-         }
-         catch (::exception & e)
-         {
-
-            get_task()->handle_exception(e);
-
-         }
-         catch (...)
-         {
-
-         }
-
-         if (!pmessage->m_bRet)
-         {
-
-            puserinteraction->default_message_handler(pmessage);
-
-         }
-
-         lresult = pmessage->m_lresult;
-
-      }
-      else
-      {
-
-         lresult = ::DefWindowProcW(hwnd, message, wparam, lparam);
 
       }
 
