@@ -7645,6 +7645,18 @@ namespace windowing_win32
 
       }
 
+      if (message == WM_CREATE)
+      {
+
+         if (lresult == 0)
+         {
+
+            auto lresult2 = __window_procedure(hwnd, e_message_pos_create, wparam, lparam);
+
+         }
+
+      }
+
       return lresult;
 
    }
