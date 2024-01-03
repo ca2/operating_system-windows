@@ -354,7 +354,7 @@ namespace draw2d_gdiplus
 
          auto psynchronization = pwritetext->m_pparticleFontTextMapSynchronization;
 
-         synchronous_lock synchronouslock(psynchronization);
+         _synchronous_lock synchronouslock(psynchronization);
 
          m_mapFontText.erase_all();
 
