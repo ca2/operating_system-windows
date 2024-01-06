@@ -703,7 +703,6 @@
     <ClCompile Include="language.cpp" />
     <ClCompile Include="list_serial_ports.cpp" />
     <ClCompile Include="main_window.cpp" />
-    <ClCompile Include="message_loop.cpp" />
     <ClCompile Include="mmresult.cpp" />
     <ClCompile Include="mmsystem.cpp" />
     <ClCompile Include="node.cpp" />

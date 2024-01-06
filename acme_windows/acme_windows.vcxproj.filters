@@ -92,9 +92,6 @@
     <ClCompile Include="language.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="message_loop.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="printer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
