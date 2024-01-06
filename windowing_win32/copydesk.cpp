@@ -37,7 +37,7 @@ namespace windowing_win32
    void copydesk::OnClipboardUpdate()
    {
 
-      synchronous_lock synchronouslock(synchronization());
+      _synchronous_lock synchronouslock(synchronization());
 
       m_cFileCount = -1;
       m_iPriorityTextFormat = -2;
@@ -97,7 +97,7 @@ namespace windowing_win32
 
       //}
 
-      //synchronous_lock synchronouslock(synchronization());
+      //_synchronous_lock synchronouslock(synchronization());
 
       //WNDCLASS wndcls = {};
 
@@ -361,7 +361,7 @@ namespace windowing_win32
          else
          {
 
-            synchronous_lock synchronouslock(synchronization());
+            _synchronous_lock synchronouslock(synchronization());
 
             if (!::OpenClipboard(__hwnd(oswindow())))
             //if(!OpenClipboard())
@@ -411,7 +411,7 @@ namespace windowing_win32
 
       }
 
-      synchronous_lock synchronouslock(synchronization());
+      _synchronous_lock synchronouslock(synchronization());
 
       if (!::OpenClipboard(__hwnd(oswindow())))
       {
@@ -449,7 +449,7 @@ namespace windowing_win32
    bool copydesk::_set_filea(const ::file::path_array & patha, enum_op eop)
    {
 
-      synchronous_lock synchronouslock(synchronization());
+      _synchronous_lock synchronouslock(synchronization());
 
       if (!::OpenClipboard(__hwnd(oswindow())))
       {
@@ -495,7 +495,7 @@ namespace windowing_win32
 
       //ASSERT(::IsWindow(m_hwnd));
 
-      synchronous_lock synchronouslock(synchronization());
+      _synchronous_lock synchronouslock(synchronization());
 
       if (!::OpenClipboard(__hwnd(oswindow())))
       {
@@ -538,7 +538,7 @@ namespace windowing_win32
 
       }
 
-      synchronous_lock synchronouslock(synchronization());
+      _synchronous_lock synchronouslock(synchronization());
 
       if (!::OpenClipboard(__hwnd(oswindow())))
       {
@@ -604,7 +604,7 @@ namespace windowing_win32
 
       }
 
-      synchronous_lock synchronouslock(synchronization());
+      _synchronous_lock synchronouslock(synchronization());
 
       if (!::OpenClipboard(__hwnd(oswindow())))
       {
@@ -704,7 +704,7 @@ namespace windowing_win32
 
       //ASSERT(::IsWindow(m_hwnd));
 
-      synchronous_lock synchronouslock(synchronization());
+      _synchronous_lock synchronouslock(synchronization());
 
       if (!::OpenClipboard(__hwnd(oswindow())))
       {

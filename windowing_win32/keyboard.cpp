@@ -108,7 +108,7 @@ namespace windowing_win32
    void keyboard::translate_os_key_message(::user::key* pkey)
    {
 
-      synchronous_lock synchronouslock(synchronization());
+      _synchronous_lock synchronouslock(synchronization());
 
       if (pkey->m_ekey == ::user::e_key_refer_to_text_member
          && pkey->m_strText.has_char())

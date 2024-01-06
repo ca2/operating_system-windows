@@ -37,7 +37,7 @@ namespace windowing_win32
 
       ::EnumDisplayMonitors(nullptr, nullptr, &display::monitor_enum_proc, (LPARAM)this);
 
-      synchronous_lock synchronouslock(synchronization());
+      _synchronous_lock synchronouslock(synchronization());
 
       m_monitora.erase_all();
 
@@ -116,7 +116,7 @@ namespace windowing_win32
 
 #elif defined(LINUX)
 
-      synchronous_lock synchronouslock(synchronization());
+      _synchronous_lock synchronouslock(synchronization());
 
       return m_rectangleaMonitor.get_count();
 
@@ -174,7 +174,7 @@ namespace windowing_win32
    //
    //#elif defined(LINUX)
    //
-   //      synchronous_lock synchronouslock(synchronization());
+   //      _synchronous_lock synchronouslock(synchronization());
    //
    //      if (iMonitor < 0 || iMonitor >= get_monitor_count())
    //      {
@@ -325,7 +325,7 @@ namespace windowing_win32
    //
    //#elif defined(LINUX)
    //
-   //      synchronous_lock synchronouslock(synchronization());
+   //      _synchronous_lock synchronouslock(synchronization());
    //
    //      if (iWkspace < 0 || iWkspace >= get_wkspace_count())
    //      {

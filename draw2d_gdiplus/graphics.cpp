@@ -3549,7 +3549,7 @@ namespace draw2d_gdiplus
 
    //   }
 
-   //   synchronous_lock slSource(pgraphicsSrc->synchronization());
+   //   _synchronous_lock slSource(pgraphicsSrc->synchronization());
 
    //   //bool bThreadToolsForIncreasedFps = ::get_task()->m_bThreadToolsForIncreasedFps;
 
@@ -5849,7 +5849,7 @@ namespace draw2d_gdiplus
 
       }
 
-      synchronous_lock synchronouslock(synchronization());
+      _synchronous_lock synchronouslock(synchronization());
 
       if (m_pfont.is_null())
       {
@@ -6027,7 +6027,7 @@ namespace draw2d_gdiplus
 
       }
 
-      synchronous_lock synchronouslock(system()->m_paurasystem->draw2d()->write_text()->m_pparticleFontTextMapSynchronization);
+      _synchronous_lock synchronouslock(system()->m_paurasystem->draw2d()->write_text()->m_pparticleFontTextMapSynchronization);
 
       daLeft.erase_all();
 
@@ -6344,7 +6344,7 @@ namespace draw2d_gdiplus
 
       }
 
-      synchronous_lock synchronouslock(psynchronization ? psynchronization : nullptr);
+      _synchronous_lock synchronouslock(psynchronization ? psynchronization : nullptr);
 
       auto & text = m_pfont->m_mapFontText[scopedstr];
 
@@ -6857,7 +6857,7 @@ namespace draw2d_gdiplus
 
       }
 
-      synchronous_lock synchronouslock(psynchronization ? psynchronization : nullptr);
+      _synchronous_lock synchronouslock(psynchronization ? psynchronization : nullptr);
 
       auto & text = m_pfont->m_mapFontText[scopedstr];
 
@@ -7091,7 +7091,7 @@ namespace draw2d_gdiplus
 
       }
 
-      synchronous_lock synchronouslock(synchronization());
+      _synchronous_lock synchronouslock(synchronization());
 
       if (m_ppen.cast < ::draw2d_gdiplus::pen >()->m_egdiplusalign != Gdiplus::PenAlignment::PenAlignmentCenter)
       {
@@ -7117,7 +7117,7 @@ namespace draw2d_gdiplus
 
    //{
 
-   //   synchronous_lock synchronouslock(synchronization());
+   //   _synchronous_lock synchronouslock(synchronization());
 
    //   if(m_ppen.cast < ::draw2d_gdiplus::pen >()->m_egdiplusalign != Gdiplus::PenAlignment::PenAlignmentCenter)
    //   {
@@ -7171,7 +7171,7 @@ namespace draw2d_gdiplus
 
       }
 
-      synchronous_lock synchronouslock(synchronization());
+      _synchronous_lock synchronouslock(synchronization());
 
       auto ppen = ppenParam->get_os_data < Gdiplus::Pen * >(this);
 
@@ -7191,7 +7191,7 @@ namespace draw2d_gdiplus
    //void graphics::draw_line(double x1, double y1, double x2, double y2, ::draw2d::pen * ppenParam)
    //{
 
-   //   synchronous_lock synchronouslock(synchronization());
+   //   _synchronous_lock synchronouslock(synchronization());
 
    //   auto ppen = (Gdiplus::Pen *) ppenParam->get_os_data(this);
 
@@ -7663,7 +7663,7 @@ namespace draw2d_gdiplus
    Gdiplus::Pen * graphics::m_ppen->get_os_data < Pen * >(this)
    {
 
-      synchronous_lock synchronouslock(synchronization());
+      _synchronous_lock synchronouslock(synchronization());
 
       if(m_ppen.is_null())
       {
@@ -7783,7 +7783,7 @@ namespace draw2d_gdiplus
    void graphics::flush()
    {
 
-      synchronous_lock synchronouslock(synchronization());
+      _synchronous_lock synchronouslock(synchronization());
 
       m_pgraphics->Flush();
 
@@ -7795,7 +7795,7 @@ namespace draw2d_gdiplus
    void graphics::sync_flush()
    {
 
-      synchronous_lock synchronouslock(synchronization());
+      _synchronous_lock synchronouslock(synchronization());
 
       m_pgraphics->Flush(Gdiplus::FlushIntentionSync);
 

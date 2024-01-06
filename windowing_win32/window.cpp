@@ -476,6 +476,8 @@ namespace windowing_win32
 
       }
 
+      SendMessage(hwnd, e_message_pos_create, 0, 0);
+
       if (puserinteraction->m_bEdgeGestureDisableTouchWhenFullscreen)
       {
 
@@ -7640,18 +7642,6 @@ namespace windowing_win32
          {
 
             lresult = ::DefWindowProcW(hwnd, message, wparam, lparam);
-
-         }
-
-      }
-
-      if (message == WM_CREATE)
-      {
-
-         if (lresult == 0)
-         {
-
-            auto lresult2 = __window_procedure(hwnd, e_message_pos_create, wparam, lparam);
 
          }
 
