@@ -945,6 +945,15 @@ namespace windowing_win32
 
       }
 
+      if (rectangle.is_empty())
+      {
+
+         iMatchingWkspace = get_main_workspace(*prectangle);
+
+         return iMatchingWkspace;
+
+      }
+
       for (index iWorkspace = 0; iWorkspace < get_workspace_count(); iWorkspace++)
       {
 

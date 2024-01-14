@@ -231,6 +231,7 @@ namespace windowing_win32
       ::windowing::window::install_message_routing(pchannel);
 
       MESSAGE_LINK(MESSAGE_CREATE, pchannel, this, &window::_001OnCreate);
+      MESSAGE_LINK(e_message_window_position_changed, pchannel, this, & window::on_message_window_position_changed);
 
       auto puserinteraction = m_puserinteractionimpl->m_puserinteraction;
 
@@ -7650,6 +7651,27 @@ namespace windowing_win32
       return lresult;
 
    }
+
+
+   void window::on_message_window_position_changed(::message::message * pmessage)
+   {
+
+      auto pwindowpos = (WINDOWPOS*) (void *) pmessage->m_lparam.m_lparam;
+
+      if (pwindowpos)
+      {
+
+         auto r = ::rectangle_i32_dimension(
+            pwindowpos->x, pwindowpos->y,
+            pwindowpos->cx, pwindowpos->cy
+         );
+
+         _on_configure_notify_unlocked(r);
+
+      }
+
+   }
+
 
 
 } // namespace windowing_win32
