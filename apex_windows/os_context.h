@@ -120,7 +120,7 @@ namespace apex_windows
 
       void set_default_browser() override;
 
-      void add_default_program(string_array & straExtension, string_array & straMimeType) override;
+      //void add_default_program(string_array & straExtension, string_array & straMimeType) override;
 
       //void list_process(::file::path_array & patha, ::process_identifier_array & uaPid) override;
 
