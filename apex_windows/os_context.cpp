@@ -2910,7 +2910,7 @@ namespace apex_windows
    }
 
 
-   void os_context::add_default_program(string_array & straExtension, string_array & straMimeType)
+   void os_context::set_file_extension_mime_type(string_array & straExtension, string_array & straMimeType)
    {
 
       string strTargetProgId;
