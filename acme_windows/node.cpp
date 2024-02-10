@@ -3208,7 +3208,7 @@ namespace acme_windows
       ::string str2;
       if (str1.is_empty())
       {
-         ::string strCmd = node()->get_environment_variable("ComSpec");
+         ::string strCmd = this->get_environment_variable("ComSpec");
          str1 =strCmd;
          str2 = "\"" + strCmd + "\" /c \"" + scopedstr + "\"";
       }
@@ -3790,7 +3790,7 @@ namespace acme_windows
       ::string str2;
       if (str1.is_empty())
       {
-         ::string strCmd = node()->get_environment_variable("ComSpec");
+         ::string strCmd = this->get_environment_variable("ComSpec");
          str1 = strCmd;
          str2 = "\"" + strCmd + "\" /c \"" + scopedstr + "\"";
       }

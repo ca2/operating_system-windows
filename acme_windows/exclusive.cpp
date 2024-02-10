@@ -25,7 +25,7 @@ namespace acme_windows
       try
       {
 
-         ::pointer <::acme_windows_common::node>pnode = pparticle->acmenode();
+         ::pointer <::acme_windows_common::node>pnode = pparticle->node();
 
          m_pmutex = pnode->create_named_mutex(pparticle, false, strId);
 
