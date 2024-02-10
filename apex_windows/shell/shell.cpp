@@ -18,7 +18,7 @@ namespace apex_windows
 
       IShellLinkW* psl;
 
-      acmenode()->defer_co_initialize_ex(false);
+      node()->defer_co_initialize_ex(false);
 
       // Get a pointer to the IShellLink interface. It is assumed that CoInitialize
       // has already been called.

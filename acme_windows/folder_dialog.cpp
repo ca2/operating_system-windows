@@ -70,7 +70,7 @@ namespace acme_windows
 
             bool bOk = false;
 
-            acmenode()->defer_co_initialize_ex(false);
+            node()->defer_co_initialize_ex(false);
 
             comptr < IFileOpenDialog > pfileopen;
 

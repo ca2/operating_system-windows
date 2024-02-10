@@ -65,7 +65,7 @@ namespace acme_windows
 
       SHFILEINFOW info{};
 
-      acmenode()->defer_co_initialize_ex(false);
+      node()->defer_co_initialize_ex(false);
 
       DWORD_PTR dw = 0;
 

@@ -56,7 +56,7 @@ namespace music
 
             defer_create_synchronization();
 
-            m_pparticleMidiMutex = acmenode()->create_mutex();
+            m_pparticleMidiMutex = node()->create_mutex();
 
          }
 

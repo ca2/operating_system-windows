@@ -44,7 +44,7 @@ public:
 block_input::block_input( int iSleep)
 {
 
-   m_pmutexCa2Input = acmenode()->create_global_named_mutex(this, false, "ca2_Input");
+   m_pmutexCa2Input = node()->create_global_named_mutex(this, false, "ca2_Input");
    
    m_pmutexCa2Input->lock();
    //   repeat:
@@ -1036,7 +1036,7 @@ namespace acme_windows
    void application::open_by_module_path(const ::scoped_string & scopedstr)
    {
 
-      auto processesidentifiers = acmenode()->module_path_processes_identifiers(scopedstr, false);
+      auto processesidentifiers = node()->module_path_processes_identifiers(scopedstr, false);
 
       if (processesidentifiers.has_element())
       {

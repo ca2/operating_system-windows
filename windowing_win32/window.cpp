@@ -5827,7 +5827,7 @@ namespace windowing_win32
 
       set_tool_window(!bShowTaskBar);
 
-      acmenode()->defer_co_initialize_ex(false);
+      node()->defer_co_initialize_ex(false);
 
       comptr < ITaskbarList>                     tasklist;
 

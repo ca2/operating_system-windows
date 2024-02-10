@@ -290,7 +290,7 @@ namespace apex_windows
    ::process_identifier os_context::current_process_identifier()
    {
 
-      return (int)acmenode()->current_process_identifier();
+      return (int)node()->current_process_identifier();
 
    }
 
@@ -335,7 +335,7 @@ namespace apex_windows
    ::process_identifier_array os_context::processes_identifiers()
    {
 
-      return acmenode()->processes_identifiers();
+      return node()->processes_identifiers();
       //ASSERT(sizeof(::u32) == sizeof(u32));
 
       //ua.allocate(0);
@@ -911,9 +911,9 @@ namespace apex_windows
             //int iExitCode = 0;
 
             //auto estatus = 
-            //acmenode()->command_system(straOutput, iExitCode, strCommand);
+            //node()->command_system(straOutput, iExitCode, strCommand);
 
-            acmenode()->command_system(strCommand, [](auto etraceleve, auto & str) {});
+            node()->command_system(strCommand, [](auto etraceleve, auto & str) {});
 
             //return estatus;
 
@@ -3305,7 +3305,7 @@ namespace apex_windows
       fork([this]()
          {
 
-            acmenode()->defer_co_initialize_ex(false);
+            node()->defer_co_initialize_ex(false);
 
 
             SHChangeNotify(SHCNE_ASSOCCHANGED, SHCNF_DWORD | SHCNF_FLUSH, nullptr, nullptr);
@@ -3365,7 +3365,7 @@ namespace apex_windows
 
    //      bool bDisableOleDDE = true;
 
-   //      acmenode()->defer_co_initialize_ex(false, bDisableOleDDE);
+   //      node()->defer_co_initialize_ex(false, bDisableOleDDE);
 
    //      comptr < IFileOpenDialog > pfileopen;
 
@@ -3605,7 +3605,7 @@ namespace apex_windows
    //   //try
    //   //{
 
-   //   acmenode()->defer_co_initialize_ex(false);
+   //   node()->defer_co_initialize_ex(false);
 
    //      comptr < IFileSaveDialog > pfilesave;
 
@@ -3779,7 +3779,7 @@ namespace apex_windows
 //      //try
 //      //{
 //
-//      acmenode()->defer_co_initialize_ex(false);
+//      node()->defer_co_initialize_ex(false);
 //
 //         comptr < IFileOpenDialog > pfileopen;
 //
@@ -3897,7 +3897,7 @@ namespace apex_windows
    //   //try
    //   //{
 
-   //   acmenode()->defer_co_initialize_ex(false);
+   //   node()->defer_co_initialize_ex(false);
 
    //      comptr < IFileOpenDialog > pfileopen;
 

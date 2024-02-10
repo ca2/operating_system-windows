@@ -1722,7 +1722,7 @@ namespace windowing_win32
    void shell::init_task()
    {
 
-      acmenode()->defer_co_initialize_ex(false);
+      node()->defer_co_initialize_ex(false);
 
       ::user::shell::init_task();
 
@@ -1732,7 +1732,7 @@ namespace windowing_win32
    void shell::run()
    {
 
-      acmenode()->defer_co_initialize_ex(false);
+      node()->defer_co_initialize_ex(false);
 
 
 

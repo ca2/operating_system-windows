@@ -188,7 +188,7 @@ namespace acme_windows
    comptr < IShellLinkW > acme_path::_get_IShellLinkW(const ::file::path & pathLink)
    {
 
-      acmenode()->defer_co_initialize_ex(false);
+      node()->defer_co_initialize_ex(false);
 
       HRESULT hr;
 

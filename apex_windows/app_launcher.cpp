@@ -96,7 +96,7 @@ namespace apex_windows
 //
 //      }
 //
-//      return acmedirectory()->app_app(m_strPlatform, acmenode()->process_configuration_name());
+//      return acmedirectory()->app_app(m_strPlatform, node()->process_configuration_name());
 //
 //   }
 //

@@ -282,9 +282,9 @@ namespace acme_windows
             //s += "set MSYS2_PATH_TYPE=inherit\n";
 
 
-            acmenode()->set_environment_variable("CHERE_INVOKING", "1");
-            acmenode()->set_environment_variable("MSYSTEM", "MSYS");
-            acmenode()->set_environment_variable("MSYS2_PATH_TYPE", "inherit");
+            node()->set_environment_variable("CHERE_INVOKING", "1");
+            node()->set_environment_variable("MSYSTEM", "MSYS");
+            node()->set_environment_variable("MSYS2_PATH_TYPE", "inherit");
 
          }
 
@@ -360,7 +360,7 @@ namespace acme_windows
          string strCommand;
 
          //strCommand = "cmd.exe /c \"" + (pacmedirectory->system() / strRel / "env.bat") + "\"";
-         ::string strCmd = acmenode()->get_environment_variable("ComSpec");
+         ::string strCmd = node()->get_environment_variable("ComSpec");
          strCommand = "\""+strCmd+"\" /c \"@call " + strBuildCmd + " && @set\"";
 
          string_array straOut;
