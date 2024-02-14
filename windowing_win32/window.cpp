@@ -287,16 +287,13 @@ namespace windowing_win32
    }
 
 
-   void window::create_window(::user::interaction_impl * pimpl)
+   //void window::create_window(::user::interaction_impl * pimpl)
+   void window::create_window()
    {
 
-      auto psession = get_session();
+      auto pwindowing = m_pwindowing;
 
-      auto puser = psession->user();
-
-      auto pwindowing = puser->windowing();
-
-      m_pwindowing = pwindowing;
+      auto pimpl = m_puserinteractionimpl;
 
       m_pimpl2 = pimpl->m_pImpl2;
 
@@ -322,11 +319,11 @@ namespace windowing_win32
 
       }
 
-      m_puserinteractionimpl = pimpl;
+      //m_puserinteractionimpl = pimpl;
 
-      m_puserinteractionimpl->m_pwindow = this;
+      //m_puserinteractionimpl->m_pwindow = this;
 
-      puserinteraction->m_pwindow = this;
+      //puserinteraction->m_pwindow = this;
 
       if (puserinteraction->m_bMessageWindow)
       {
@@ -529,11 +526,11 @@ namespace windowing_win32
 
 
 
-      //puserinteraction->increment_reference_count();
+      ////puserinteraction->increment_reference_count();
 
-      puserinteraction->on_finished_window_creation();
+      //puserinteraction->on_finished_window_creation();
 
-      //puserinteraction->m_ewindowflag |= e_window_flag_window_created;
+      ////puserinteraction->m_ewindowflag |= e_window_flag_window_created;
 
    }
 

@@ -45,7 +45,9 @@ namespace windowing_win32
 
 
 
-      void create_window(::user::interaction_impl* pimpl) override;
+      //void create_window(::user::interaction_impl* pimpl) override;
+
+      void create_window() override;
 
 
       inline HWND get_hwnd() const { return (HWND)oswindow(); }
