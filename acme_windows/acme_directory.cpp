@@ -1312,7 +1312,14 @@ pacmedir->create CreateDirectoryW last error(%d)=%s", dwError, pszError);
          if (!is(listing.m_pathFinal))
          {
 
-            return false;
+            listing.m_pathFinal = m_pcontext->defer_process_path(listing.m_pathFinal);
+
+            if (!is(listing.m_pathFinal))
+            {
+
+               return false;
+
+            }
 
          }
 
