@@ -692,7 +692,7 @@
     <ClInclude Include="ip_enum.h" />
     <ClInclude Include="launcher.h" />
     <ClInclude Include="node.h" />
-    <ClInclude Include="os_context.h" />
+    <ClInclude Include="aaa_os_context.h" />
     <ClInclude Include="process.h" />
     <ClInclude Include="process_data.h" />
     <ClInclude Include="service.h" />
@@ -712,7 +712,9 @@
     <ClCompile Include="ip_enum.cpp" />
     <ClCompile Include="launcher.cpp" />
     <ClCompile Include="node.cpp" />
-    <ClCompile Include="os_context.cpp" />
+    <ClCompile Include="aaa_os_context.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="process.cpp" />
     <ClCompile Include="service_handler.cpp" />
     <ClCompile Include="shell\shell.cpp" />

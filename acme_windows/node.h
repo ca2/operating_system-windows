@@ -105,7 +105,7 @@ namespace acme_windows
 
       ::process_identifier_array module_path_processes_identifiers(const ::string & pszModulePath, bool bModuleNameIsPropertyFormatted) override;
 
-      string process_identifier_module_path(::process_identifier processidentifier) override;
+      ::file::path process_identifier_module_path(::process_identifier processidentifier) override;
 
       ////bool is_shared_library_busy(::process_identifier processidentifier, const string_array & stra) override;
 
@@ -206,7 +206,7 @@ namespace acme_windows
       //string get_global_id_mutex_name(const ::string& strAppId, const ::string& strId) override;
 
 
-      void open_url(const ::string & strUrl) override;
+      void open_url_link_at_system_browser(const ::string& strUrl, const ::string& strProfile = {}) override;
       void shell_launch(const ::string & strUrl) override;
 
 

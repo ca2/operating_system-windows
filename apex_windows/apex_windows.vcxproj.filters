@@ -47,7 +47,7 @@
     <ClInclude Include="ip_enum.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="os_context.h">
+    <ClInclude Include="aaa_os_context.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="process.h">
@@ -97,7 +97,7 @@
     <ClCompile Include="node.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="os_context.cpp">
+    <ClCompile Include="aaa_os_context.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ip_enum.cpp">
