@@ -2230,7 +2230,7 @@ namespace apex_windows
 
       }
 
-      return ::acme_windows_common::node::open_url_link_at_system_browser(strUrl, strProfile);
+      return ::acme_windows::node::open_url_link_at_system_browser(strUrl, strProfile);
 
    }
 
