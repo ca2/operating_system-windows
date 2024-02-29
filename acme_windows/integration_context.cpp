@@ -835,15 +835,7 @@ namespace acme_windows
       ::file::path context::base_integration_folder()
       {
 
-#ifdef WINDOWS_DESKTOP
-
-         return "C:/integration";
-
-#else
-
-         return acmedirectory() / "integration";
-
-#endif
+         return {};
 
       }
 
@@ -856,6 +848,20 @@ namespace acme_windows
       }
 
 
+      void context::list_host_builds()
+      {
+
+         auto pathHostIntegrationFolder = host_integration_folder();
+
+         ::string_array straPattern;
+
+         straPattern.add("????-??-?? ??-??-??");
+
+         m_listingBuild.set_pattern_folder_listing(pathHostIntegrationFolder);
+
+         acmedirectory()->enumerate(m_listingBuild);
+
+      }
 
    } // namespace integration
 

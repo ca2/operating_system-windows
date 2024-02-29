@@ -52,9 +52,7 @@ namespace acme_windows
 
          void prepare_linking_script(::string& str) override;
      
-         virtual ::file::path base_integration_folder();
-
-         virtual ::file::path host_integration_folder();
+         ::file::path base_integration_folder() override;
 
 
       };
