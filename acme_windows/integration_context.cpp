@@ -832,6 +832,29 @@ namespace acme_windows
       }
 
 
+      ::file::path context::base_integration_folder()
+      {
+
+#ifdef WINDOWS_DESKTOP
+
+         return "C:/integration";
+
+#else
+
+         return acmedirectory() / "integration";
+
+#endif
+
+      }
+
+
+      ::file::path context::host_integration_folder()
+      {
+
+         return base_integration_folder() / "_____" / node()->operating_system_summary()->m_strSlashedIntegration;
+
+      }
+
 
 
    } // namespace integration
