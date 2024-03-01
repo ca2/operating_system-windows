@@ -52,6 +52,7 @@ namespace acme_windows
 
          void prepare_linking_script(::string& str) override;
      
+         ::file::path base_integration_folder() override;
 
 
       };

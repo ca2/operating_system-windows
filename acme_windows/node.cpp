@@ -1263,15 +1263,9 @@ namespace acme_windows
 
       ::file::path pathModule(pszModulePath);
 
-      auto windowspath = pathModule.windows_path();
-
-      ::wstring wstr;
-
-      wstr = windowspath;
-
       process_identifier_array processesidentifiers;
 
-      if (wstr.is_empty())
+      if (pathModule.is_empty())
       {
 
          return processesidentifiers;
@@ -1291,7 +1285,7 @@ namespace acme_windows
       for (auto & dwProcess : dwaProcesses)
       {
 
-         auto pathModule = process_identifier_module_path(dwProcess);
+         auto pathProcessModule = process_identifier_module_path(dwProcess);
 
          //HANDLE handleProcess = OpenProcess(PROCESS_QUERY_INFORMATION | PROCESS_VM_READ, FALSE, dwProcess);
 
@@ -1306,7 +1300,7 @@ namespace acme_windows
 
          //   wstring wstr(name);
 
-         if (pathModule == wstr)
+         if (pathModule == pathProcessModule)
          {
 
             processesidentifiers.add(dwProcess);
@@ -1376,7 +1370,7 @@ namespace acme_windows
 //}
 
 
-   string node::process_identifier_module_path(::process_identifier processidentifier)
+   ::file::path node::process_identifier_module_path(::process_identifier processidentifier)
    {
 
       //HANDLE hModuleSnap = INVALID_HANDLE_VALUE;
@@ -2779,7 +2773,7 @@ namespace acme_windows
    }
 
 
-   void node::open_url(const ::string & strUrl)
+   void node::open_url_link_at_system_browser(const ::string & strUrl, const ::string & strProfile)
    {
 
       //#ifdef DEBUG

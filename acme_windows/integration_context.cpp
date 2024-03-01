@@ -832,7 +832,36 @@ namespace acme_windows
       }
 
 
+      ::file::path context::base_integration_folder()
+      {
 
+         return "C:/integration";
+
+      }
+
+
+      //::file::path context::host_integration_folder()
+      //{
+
+      //   return base_integration_folder() / "_____" / node()->operating_system_summary()->m_strSlashedIntegration;
+
+      //}
+
+
+      //void context::list_host_builds()
+      //{
+
+      //   auto pathHostIntegrationFolder = host_integration_folder();
+
+      //   ::string_array straPattern;
+
+      //   straPattern.add("????-??-?? ??-??-??");
+
+      //   m_listingBuild.set_pattern_folder_listing(pathHostIntegrationFolder);
+
+      //   acmedirectory()->enumerate(m_listingBuild);
+
+      //}
 
    } // namespace integration
 
