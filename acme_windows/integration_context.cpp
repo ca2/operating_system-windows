@@ -835,33 +835,33 @@ namespace acme_windows
       ::file::path context::base_integration_folder()
       {
 
-         return {};
+         return "C:/integration";
 
       }
 
 
-      ::file::path context::host_integration_folder()
-      {
+      //::file::path context::host_integration_folder()
+      //{
 
-         return base_integration_folder() / "_____" / node()->operating_system_summary()->m_strSlashedIntegration;
+      //   return base_integration_folder() / "_____" / node()->operating_system_summary()->m_strSlashedIntegration;
 
-      }
+      //}
 
 
-      void context::list_host_builds()
-      {
+      //void context::list_host_builds()
+      //{
 
-         auto pathHostIntegrationFolder = host_integration_folder();
+      //   auto pathHostIntegrationFolder = host_integration_folder();
 
-         ::string_array straPattern;
+      //   ::string_array straPattern;
 
-         straPattern.add("????-??-?? ??-??-??");
+      //   straPattern.add("????-??-?? ??-??-??");
 
-         m_listingBuild.set_pattern_folder_listing(pathHostIntegrationFolder);
+      //   m_listingBuild.set_pattern_folder_listing(pathHostIntegrationFolder);
 
-         acmedirectory()->enumerate(m_listingBuild);
+      //   acmedirectory()->enumerate(m_listingBuild);
 
-      }
+      //}
 
    } // namespace integration
 
