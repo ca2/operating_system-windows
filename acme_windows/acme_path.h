@@ -46,6 +46,8 @@ namespace acme_windows
       virtual ::pointer < ::file::link > resolve_lnk_link(const ::file::path & path, ::file::e_link elink = ::file::e_link_all);
 
 
+      void rename(const ::file::path& pathNewName, const ::file::path& pathOldName) override;
+
    };
 
 

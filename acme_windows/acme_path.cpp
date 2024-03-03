@@ -271,6 +271,29 @@ namespace acme_windows
    }
 
 
+   void acme_path::rename(const ::file::path& pathNewName, const ::file::path& pathOldName)
+   {
+
+      auto windowspathOld = pathOldName.windows_path();
+      
+      auto windowspathNew = pathNewName.windows_path();
+
+      ::wstring wstrOld = windowspathOld;
+
+      ::wstring wstrNew = windowspathNew;
+
+      if (!::MoveFileW(wstrOld, wstrNew))
+      {
+
+         DWORD dwLastError = ::GetLastError();
+
+         throw ::exception(error_failed);
+
+      }
+
+   }
+
+
 } // namespace acme_windows
 
 
