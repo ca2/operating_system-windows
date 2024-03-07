@@ -63,7 +63,7 @@
 #include <shobjidl_core.h>
 
 
-CLASS_DECL_ACME::file::path get_module_path(HMODULE hmodule);
+CLASS_DECL_ACME::file::path get_module_path(HANDLE hProcess, HMODULE hmodule);
 
 
 //::e_status hresult_to_estatus(HRESULT hresult)
@@ -1591,7 +1591,7 @@ namespace apex_windows
    ::file::path node::process_identifier_module_path(::process_identifier processidentifier)
    {
 
-      string strName = ":<unknown>";
+      string strName;
 
       DWORD dwProcess = (DWORD)processidentifier;
 
@@ -1612,7 +1612,7 @@ namespace apex_windows
          if (EnumProcessModules(hProcess, &hMod, sizeof(hMod), &cbNeeded))
          {
 
-            strName = ::get_module_path(hMod);
+            strName = ::get_module_path(hProcess, hMod);
 
          }
 
