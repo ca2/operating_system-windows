@@ -19,6 +19,7 @@ namespace acme_windows
       public:
 
 
+         bool              m_bMsys2;
          ::string          m_strVs;
          ::string          m_strContext;
          ::string          m_strVCVersion;
@@ -53,6 +54,20 @@ namespace acme_windows
          void prepare_linking_script(::string& str) override;
      
          ::file::path base_integration_folder() override;
+
+
+         ::i32 bash(const ::scoped_string & scopedstr) override;
+         ::i32 zsh(const ::scoped_string& scopedstr) override;
+
+
+         void set_msys2(bool bSet = true) override;
+
+
+         virtual ::file::path msys2();
+         virtual void defer_msys2();
+
+
+         int unix_shell_command(const ::scoped_string& scopedstrCommand, const trace_function& tracefunction) override;
 
 
       };

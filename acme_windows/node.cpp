@@ -7,7 +7,9 @@
 #include "process.h"
 #include "exclusive.h"
 #include "application.h"
+#include "create_process.h"
 #include "acme/exception/exception.h"
+#include "acme/exception/status.h"
 #include "acme/filesystem/filesystem/file_context.h"
 #include "acme/filesystem/filesystem/dir_context.h"
 //#include "acme/filesystem/filesystem/folder_dialog.h"
@@ -3163,784 +3165,288 @@ namespace acme_windows
    int node::command_system(const ::scoped_string & scopedstr, const ::trace_function & tracefunction)
    {
 
-      SIZE_T sizeAttrList = 0;
-      InitializeProcThreadAttributeList(
-         NULL,
-         1,
-         0,
-         &sizeAttrList
-      );
-      ::memory memoryAttrList;
-      memoryAttrList.set_size(sizeAttrList);
-      auto pattrList = (LPPROC_THREAD_ATTRIBUTE_LIST) memoryAttrList.data();
-         InitializeProcThreadAttributeList(
-            pattrList,
-            1,
-            0,
-            &sizeAttrList
-         );
-         
-            //straOutput.clear();
-      auto iPipeSize = 16_KiB;
+      auto pcreateprocess = __create_new < ::acme_windows::create_process>();
 
-      string str(scopedstr);
 
+      pcreateprocess->initialize_stdout();
+      pcreateprocess->initialize_stderr();
+      pcreateprocess->initialize_stdin();
 
-      ::string str1;
-      auto range = str();
-      range.m_erange = e_range_none;
-      try
-      {
-         str1 = range.consume_quoted_value();
+      pcreateprocess->prepare();
 
-      }
-      catch (...)
-      {
+      //pcreateprocess->set_create_new_console();
+      pcreateprocess->call_create_process(scopedstr);
+      //string str(scopedstr);
 
 
-      }
-      ::string str2;
-      if (str1.is_empty())
-      {
-         ::string strCmd = this->get_environment_variable("ComSpec");
-         str1 =strCmd;
-         str2 = "\"" + strCmd + "\" /c \"" + scopedstr + "\"";
-      }
-      else
-      {
-
-         str2 = scopedstr;
-         str2.trim();
-      }
-
-      wstring wstr1;
-      wstring wstr2;
-
-      wstr1 = str1;
-      wstr2 = str2;
-
-      STARTUPINFOEX si = { {sizeof(si)} };
-      PROCESS_INFORMATION pi = {};
-      SECURITY_ATTRIBUTES saAttr;
-
-      ZeroMemory(&saAttr, sizeof(saAttr));
-
-      saAttr.nLength = sizeof(SECURITY_ATTRIBUTES);
-      saAttr.bInheritHandle = TRUE;
-      saAttr.lpSecurityDescriptor = NULL;
-
-      HANDLE hOutRd;
-      HANDLE hOutWr;
-
-      // Create a pipe for the child process's STDOUT. 
-
-      if (!CreatePipe(&hOutRd, &hOutWr, &saAttr, (DWORD) iPipeSize))
-      {
-
-         // log error
-         DWORD dwLastError = GetLastError();
-
-         auto estatus = ::windows::last_error_status(dwLastError);
-
-         throw ::exception(estatus);
-
-      }
-
-      // Ensure the read handle to the pipe for STDOUT is not inherited.
-      if (!SetHandleInformation(hOutRd, HANDLE_FLAG_INHERIT, 0))
-      {
-
-         ::CloseHandle(hOutRd);
-         ::CloseHandle(hOutWr);
-
-         // log error
-         DWORD dwLastError = GetLastError();
-
-         auto estatus = ::windows::last_error_status(dwLastError);
-
-         throw ::exception(estatus);
-
-      }
-
-
-      // Ensure the read handle to the pipe for STDOUT is not inherited.
-      if (!SetHandleInformation(hOutWr, HANDLE_FLAG_INHERIT, HANDLE_FLAG_INHERIT))
-      {
-
-         ::CloseHandle(hOutRd);
-         ::CloseHandle(hOutWr);
-
-         // log error
-         DWORD dwLastError = GetLastError();
-
-         auto estatus = ::windows::last_error_status(dwLastError);
-
-         throw ::exception(estatus);
-
-      }
-
-      HANDLE hErrRd;
-      HANDLE hErrWr;
-
-      // Create a pipe for the child process's STDOUT. 
-
-      if (!CreatePipe(&hErrRd, &hErrWr, &saAttr, (DWORD)iPipeSize))
-      {
-
-         ::CloseHandle(hOutRd);
-         ::CloseHandle(hOutWr);
-
-         // log error
-         DWORD dwLastError = GetLastError();
-
-         auto estatus = ::windows::last_error_status(dwLastError);
-
-         throw ::exception(estatus);
-
-      }
-
-
-      // Ensure the read handle to the pipe for STDOUT is not inherited.
-      if (!SetHandleInformation(hErrRd, HANDLE_FLAG_INHERIT, 0))
-      {
-
-         ::CloseHandle(hOutRd);
-         ::CloseHandle(hOutWr);
-         ::CloseHandle(hErrRd);
-         ::CloseHandle(hErrWr);
-
-         // log error
-         DWORD dwLastError = GetLastError();
-
-         auto estatus = ::windows::last_error_status(dwLastError);
-
-         throw ::exception(estatus);
-
-      }
-
-
-      // Ensure the read handle to the pipe for STDOUT is not inherited.
-      if (!SetHandleInformation(hErrWr, HANDLE_FLAG_INHERIT, HANDLE_FLAG_INHERIT))
-      {
-
-         ::CloseHandle(hOutRd);
-         ::CloseHandle(hOutWr);
-         ::CloseHandle(hErrRd);
-         ::CloseHandle(hErrWr);
-
-         // log error
-         DWORD dwLastError = GetLastError();
-
-         auto estatus = ::windows::last_error_status(dwLastError);
-
-         throw ::exception(estatus);
-
-      }
-
-      HANDLE hInRd;
-      HANDLE hInWr;
-
-      // Create a pipe for the child process's STDOUT. 
-
-      if (!CreatePipe(&hInRd, &hInWr, &saAttr, (DWORD)iPipeSize))
-      {
-
-         ::CloseHandle(hOutRd);
-         ::CloseHandle(hOutWr);
-         ::CloseHandle(hErrRd);
-         ::CloseHandle(hErrWr);
-
-         // log error
-         DWORD dwLastError = GetLastError();
-
-         auto estatus = ::windows::last_error_status(dwLastError);
-
-         throw ::exception(estatus);
-
-      }
-
-
-      // Ensure the read handle to the pipe for STDOUT is not inherited.
-      if (!SetHandleInformation(hInWr, HANDLE_FLAG_INHERIT, 0))
-      {
-
-         ::CloseHandle(hOutRd);
-         ::CloseHandle(hOutWr);
-         ::CloseHandle(hErrRd);
-         ::CloseHandle(hErrWr);
-         ::CloseHandle(hInRd);
-         ::CloseHandle(hInWr);
-
-         // log error
-         DWORD dwLastError = GetLastError();
-
-         auto estatus = ::windows::last_error_status(dwLastError);
-
-         throw ::exception(estatus);
-
-      }
-      if (!SetHandleInformation(hInRd, HANDLE_FLAG_INHERIT, HANDLE_FLAG_INHERIT))
-      {
-
-         ::CloseHandle(hOutRd);
-         ::CloseHandle(hOutWr);
-         ::CloseHandle(hErrRd);
-         ::CloseHandle(hErrWr);
-         ::CloseHandle(hInRd);
-         ::CloseHandle(hInWr);
-
-         // log error
-         DWORD dwLastError = GetLastError();
-
-         auto estatus = ::windows::last_error_status(dwLastError);
-
-         throw ::exception(estatus);
-
-      }
-
+      //::string str1;
+      //auto range = str();
+      //range.m_erange = e_range_none;
+      //try
       //{
-
-      //   DWORD dwState = PIPE_NOWAIT;
-
-      //   SetNamedPipeHandleState(hOutRd, &dwState, nullptr, nullptr);
+      //   str1 = range.consume_quoted_value();
 
       //}
-
-      //{
-
-      //   DWORD dwState = PIPE_NOWAIT;
-
-      //   SetNamedPipeHandleState(hErrRd, &dwState, nullptr, nullptr);
-
-      //}
-
-      //{
-
-      //   DWORD dwState = PIPE_NOWAIT;
-
-      //   SetNamedPipeHandleState(hInWr, &dwState, nullptr, nullptr);
-
-      //}
-
-      HANDLE hList[3];
-
-      hList[0] = hErrWr;
-      hList[1] = hOutWr;
-      hList[2] = hInRd;
-
-      UpdateProcThreadAttribute(
-        pattrList,
-         0,
-         PROC_THREAD_ATTRIBUTE_HANDLE_LIST,
-         hList,
-         sizeof(hList),
-         nullptr,
-         nullptr
-      );
-
-      ZeroMemory(&si, sizeof(si));
-      si.StartupInfo.cb = sizeof(si);
-      si.StartupInfo.hStdError = hErrWr;
-      si.StartupInfo.hStdOutput = hOutWr;
-      si.StartupInfo.hStdInput = hInRd;
-      si.StartupInfo.wShowWindow = SW_HIDE; // Don't show the console window (DOS box)
-      si.StartupInfo.dwFlags |= STARTF_USESHOWWINDOW;
-      si.StartupInfo.dwFlags |= STARTF_USESTDHANDLES;
-      si.lpAttributeList = pattrList;
-
-      ZeroMemory(&pi, sizeof(pi));
-
-
-      if (!CreateProcessW((WCHAR *)wstr1.c_str(), (WCHAR*)wstr2.c_str(), NULL, NULL, TRUE, EXTENDED_STARTUPINFO_PRESENT | CREATE_NEW_CONSOLE, NULL, NULL, &si.StartupInfo, &pi))
-      {
-
-         ::CloseHandle(hOutRd);
-         ::CloseHandle(hOutWr);
-         ::CloseHandle(hErrRd);
-         ::CloseHandle(hErrWr);
-         ::CloseHandle(hInRd);
-         ::CloseHandle(hInWr);
-
-         DWORD dwLastError = ::GetLastError();
-
-         printf("Create Process failed with lasterror = %d\n", dwLastError);
-         printf("Parameters: %s %s\n", str1.c_str(), str2.c_str());
-
-         auto estatus = ::windows::last_error_status(dwLastError);
-
-         throw ::exception(estatus);
-
-      }
-
-      ::CloseHandle(hOutWr);
-      ::CloseHandle(hErrWr);
-      ::CloseHandle(hInRd);
-
-      class ::time timeStart;
-
-      timeStart.Now();
-
-      string strError;
-
-      string strOutput;
-
-      manual_reset_event eventEndOut;
-
-      fork([this, hOutRd, tracefunction, &strOutput, &eventEndOut]()
-         {
-
-            char sz[256];
-
-            while (true)
-            {
-
-               DWORD dwRead = 0;
-
-               if (!ReadFile(hOutRd, sz, 256, &dwRead, nullptr))
-               {
-
-                  break;
-
-               }
-
-               if (dwRead == 0)
-               {
-
-                  break;
-
-               }
-
-               string str(sz, dwRead);
-
-               strOutput += str;
-
-               if (tracefunction)
-               {
-
-                  ::str::get_lines(strOutput, false, [&](auto& str)
-                     {
-
-                        tracefunction(e_trace_level_information, str);
-
-                     });
-
-               }
-
-
-               //if (ecommandsystem & e_command_system_inline_log)
-               //{
-
-               //   fprintf(stdout, "%s", str.c_str());
-
-               //   fflush(stdout);
-
-               //}
-
-               //strOutput += str;
-
-               //::str().get_lines(straOutput, strOutput, "I: ", false, &sl, pfileLines);
-
-            };
-
-            ::CloseHandle(hOutRd);
-
-            ::output_debug_string("read out end");
-            eventEndOut.SetEvent();
-
-
-         });
-
-      manual_reset_event eventEndErr;
-
-
-      fork([this, hErrRd, tracefunction, &strError, &eventEndErr]()
-         {
-
-            char sz[256];
-
-            while (true)
-            {
-
-               DWORD dwRead = 0;
-
-               if (!ReadFile(hErrRd, sz, 256, &dwRead, nullptr))
-               {
-
-                  break;
-
-               }
-
-               if (dwRead == 0)
-               {
-
-                  break;
-
-               }
-
-               string str(sz, dwRead);
-
-               strError += str;
-
-               if (tracefunction)
-               {
-
-                  ::str::get_lines(strError, false, [&](auto& str)
-                     {
-
-                        tracefunction(e_trace_level_error, str);
-
-                     });
-
-               }
-
-
-               //if (ecommandsystem & e_command_system_inline_log)
-               //{
-
-               //   fprintf(stdout, "%s", str.c_str());
-
-               //   fflush(stdout);
-
-               //}
-
-               //strOutput += str;
-
-               //::str().get_lines(straOutput, strOutput, "I: ", false, &sl, pfileLines);
-
-            };
-
-            ::CloseHandle(hErrRd);
-
-            ::output_debug_string("read err end");
-            eventEndErr.SetEvent();
-
-
-         });
-
-      while (::task_get_run())
-      {
-
-         auto result = WaitForSingleObject(pi.hProcess, 100);
-
-         if (result == WAIT_OBJECT_0)
-         {
-
-            break;
-
-         }
-
-         if (tracefunction
-            && !tracefunction.m_timeTimeout.is_infinite()
-            && timeStart.elapsed() > tracefunction.m_timeTimeout)
-         {
-
-            break;
-
-         }
-
-      }
-
-
-
-      ////single_lock sl(pparticleSynchronization);
-
-      //while (true)
+      //catch (...)
       //{
 
 
-      //   while (true)
-      //   {
+      //}
+      //::string str2;
+      //if (str1.is_empty())
+      //{
+      //   ::string strCmd = this->get_environment_variable("ComSpec");
+      //   str1 = strCmd;
+      //   str2 = "\"" + strCmd + "\" /c \"" + scopedstr + "\"";
+      //}
+      //else
+      //{
 
-      //      DWORD dwRead = 0;
+      //   str2 = scopedstr;
+      //   str2.trim();
+      //}
 
-      //      if (!ReadFile(hErrRd, sz, 256, &dwRead, nullptr))
-      //      {
+      //wstring wstr1;
+      //wstring wstr2;
 
-      //         break;
-
-      //      }
-
-      //      if (dwRead == 0)
-      //      {
-
-      //         break;
-
-      //      }
-
-      //      string str(sz, dwRead);
-
-      //      strError += str;
-
-      //      if (tracefunction)
-      //      {
-
-      //         ::str::get_lines(strError, false, [&](auto & str)
-      //            {
-
-      //                  tracefunction(e_trace_level_error, str);
-
-      //            });
-
-      //      }
+      //wstr1 = str1;
+      //wstr2 = str2;
 
 
-      //      //if (ecommandsystem & e_command_system_inline_log)
-      //      //{
 
-      //      //   fprintf(stderr, "%s", str.c_str());
+      //if (!CreateProcessW(
+      //   (WCHAR *)wstr1.c_str(), (WCHAR*)wstr2.c_str(), 
+      //   NULL, NULL, TRUE, EXTENDED_STARTUPINFO_PRESENT | CREATE_NEW_CONSOLE, NULL, NULL,
+      //   &pcreateprocess->m_si.StartupInfo, &pcreateprocess->m_pi))
+      //{
 
-      //      //   fflush(stderr);
+      //   //::CloseHandle(hOutRd);
+      //   //::CloseHandle(hOutWr);
+      //   //::CloseHandle(hErrRd);
+      //   //::CloseHandle(hErrWr);
+      //   //::CloseHandle(hInRd);
+      //   //::CloseHandle(hInWr);
 
-      //      //}
+      //   DWORD dwLastError = ::GetLastError();
 
-      //      //strError += str;
+      //   printf("Create Process failed with lasterror = %d\n", dwLastError);
+      //   printf("Parameters: %s %s\n", str1.c_str(), str2.c_str());
 
-      //      //::str().get_lines(straOutput, strError, "E: ", false, &sl, pfileLines);
+      //   auto estatus = ::windows::last_error_status(dwLastError);
 
-      //   };
-
-
+      //   throw ::exception(estatus);
 
       //}
 
-      DWORD dwExitCode = 0;
 
-      int iExitCode = 0;
+//      class ::time timeStart;
 
-      if (GetExitCodeProcess(pi.hProcess, &dwExitCode))
-      {
+  //    timeStart.Now();
 
-         iExitCode = dwExitCode;
+      pcreateprocess->wait_process(tracefunction);
 
-      }
+//      return iExitCode;
 
-      while (true)
-      {
-
-         if (eventEndOut._wait(100_ms) && eventEndErr._wait(100_ms))
-         {
-
-            break;
-
-         }
-
-      }
-
-      ::CloseHandle(pi.hProcess);
-      ::CloseHandle(pi.hThread);
-
-      ::CloseHandle(hInWr);
-
-      if (tracefunction)
-      {
-
-         ::str::get_lines(strOutput, true, [&](auto & str)
-            {
-
-                  tracefunction(e_trace_level_information, str);
-
-            });
-
-         ::str::get_lines(strError, true, [&](auto & str)
-            {
-
-                  tracefunction(e_trace_level_error, str);
-
-            });
-
-      }
-
-      DeleteProcThreadAttributeList(
-         pattrList
-      );
-      //::str().get_lines(straOutput, strOutput, "I: ", true, &sl, pfileLines);
-      //::str().get_lines(straOutput, strError, "E: ", true, &sl, pfileLines);
-
-      return iExitCode;
+      return pcreateprocess->m_iExitCode;
 
    }
 
 
-   int node::command_system(const ::scoped_string& scopedstr, const class ::time& timeOut)
+   bool node::has_command(const ::scoped_string& scopedstrCommand)
    {
 
+      ::string strOutput;
+      
+      int iExitCode = get_command_output(strOutput, "WHERE " + scopedstrCommand);
 
-      string str(scopedstr);
+      strOutput.trim();
+
+      if (!acmefile()->exists(strOutput))
+      {
+
+         return false;
+
+      }
+
+      return true;
+
+   }
 
 
-      ::string str1;
-      auto range = str();
-      range.m_erange = e_range_none;
+   int node::command(const ::scoped_string& scopedstrCommand, const trace_function& tracefunction)
+   {
+
       try
       {
-         str1 = range.consume_quoted_value();
+
+         //string strEscaped = scopedstrCommand;
+
+         //::string strCommand;
+
+         //informationf("Current Directory: %s\n", acmedirectory()->get_current().c_str());
+         //informationf("%s\n", strEscaped.c_str());
+
+         ////if (m_bMsys)
+         ////{
+
+         ////   strCommand = "\"C:\\msys64\\usr\\bin\\bash.exe\" -c \'" + strEscaped + "\'";
+
+         ////}
+         ////else
+         //{
+
+         //   strCommand = "\"cmd.exe\" /c " + strEscaped;
+
+         //}
+
+         ////
+
+         auto iExitCode = this->command_system(scopedstrCommand, tracefunction);
+
+         ///command_system("cmd.exe -c \"C:\\msys64\\msys2_shell.cmd\" \"" + strEscaped + "\"");
+
+         return iExitCode;
 
       }
       catch (...)
       {
 
-
-      }
-      ::string str2;
-      if (str1.is_empty())
-      {
-         ::string strCmd = this->get_environment_variable("ComSpec");
-         str1 = strCmd;
-         str2 = "\"" + strCmd + "\" /c \"" + scopedstr + "\"";
-      }
-      else
-      {
-
-         str2 = scopedstr;
-         str2.trim();
       }
 
-      wstring wstr1;
-      wstring wstr2;
-
-      wstr1 = str1;
-      wstr2 = str2;
-
-      STARTUPINFO si = { {sizeof(si)} };
-      PROCESS_INFORMATION pi = {};
-
-
-      ZeroMemory(&si, sizeof(si));
-      si.cb = sizeof(si);
-      si.wShowWindow = SW_HIDE; // Don't show the console window (DOS box)
-      si.dwFlags |= STARTF_USESHOWWINDOW;
-
-      ZeroMemory(&pi, sizeof(pi));
-
-
-      if (!CreateProcessW((WCHAR*)wstr1.c_str(), (WCHAR*)wstr2.c_str(), NULL, NULL, TRUE,  0, NULL, NULL, &si, &pi))
-      {
-
-         DWORD dwLastError = ::GetLastError();
-
-         printf("Create Process(2) failed with lasterror = %d\n", dwLastError);
-         printf("Parameters(2): %s %s\n", str1.c_str(), str2.c_str());
-
-         auto estatus = ::windows::last_error_status(dwLastError);
-
-         throw ::exception(estatus);
-
-      }
-
-      class ::time timeStart;
-
-      timeStart.Now();
-
-
-      while (::task_get_run())
-      {
-
-         auto result = WaitForSingleObject(pi.hProcess, 100);
-
-         if (result == WAIT_OBJECT_0)
-         {
-
-            break;
-
-         }
-
-         if (
-            !timeOut.is_infinite()
-            && timeStart.elapsed() > timeOut)
-         {
-
-            break;
-
-         }
-
-      }
-
-
-
-      ////single_lock sl(pparticleSynchronization);
-
-      //while (true)
-      //{
-
-
-      //   while (true)
-      //   {
-
-      //      DWORD dwRead = 0;
-
-      //      if (!ReadFile(hErrRd, sz, 256, &dwRead, nullptr))
-      //      {
-
-      //         break;
-
-      //      }
-
-      //      if (dwRead == 0)
-      //      {
-
-      //         break;
-
-      //      }
-
-      //      string str(sz, dwRead);
-
-      //      strError += str;
-
-      //      if (tracefunction)
-      //      {
-
-      //         ::str::get_lines(strError, false, [&](auto & str)
-      //            {
-
-      //                  tracefunction(e_trace_level_error, str);
-
-      //            });
-
-      //      }
-
-
-      //      //if (ecommandsystem & e_command_system_inline_log)
-      //      //{
-
-      //      //   fprintf(stderr, "%s", str.c_str());
-
-      //      //   fflush(stderr);
-
-      //      //}
-
-      //      //strError += str;
-
-      //      //::str().get_lines(straOutput, strError, "E: ", false, &sl, pfileLines);
-
-      //   };
-
-
-
-      //}
-
-      DWORD dwExitCode = 0;
-
-      int iExitCode = 0;
-
-      if (GetExitCodeProcess(pi.hProcess, &dwExitCode))
-      {
-
-         iExitCode = dwExitCode;
-
-      }
-
-
-
-      ::CloseHandle(pi.hProcess);
-      ::CloseHandle(pi.hThread);
-
-      return iExitCode;
+      return -1;
 
    }
+
+
+
+   //int node::command_system(const ::scoped_string& scopedstr, const class ::time& timeOut)
+   //{
+
+
+   //   //class ::time timeStart;
+
+   //   //timeStart.Now();
+
+
+   //   while (::task_get_run())
+   //   {
+
+   //      auto result = WaitForSingleObject(m_pi.hProcess, 100);
+
+   //      if (result == WAIT_OBJECT_0)
+   //      {
+
+   //         break;
+
+   //      }
+
+   //      if (
+   //         !timeOut.is_infinite()
+   //         && timeStart.elapsed() > timeOut)
+   //      {
+
+   //         break;
+
+   //      }
+
+   //   }
+
+
+
+   //   ////single_lock sl(pparticleSynchronization);
+
+   //   //while (true)
+   //   //{
+
+
+   //   //   while (true)
+   //   //   {
+
+   //   //      DWORD dwRead = 0;
+
+   //   //      if (!ReadFile(hErrRd, sz, 256, &dwRead, nullptr))
+   //   //      {
+
+   //   //         break;
+
+   //   //      }
+
+   //   //      if (dwRead == 0)
+   //   //      {
+
+   //   //         break;
+
+   //   //      }
+
+   //   //      string str(sz, dwRead);
+
+   //   //      strError += str;
+
+   //   //      if (tracefunction)
+   //   //      {
+
+   //   //         ::str::get_lines(strError, false, [&](auto & str)
+   //   //            {
+
+   //   //                  tracefunction(e_trace_level_error, str);
+
+   //   //            });
+
+   //   //      }
+
+
+   //   //      //if (ecommandsystem & e_command_system_inline_log)
+   //   //      //{
+
+   //   //      //   fprintf(stderr, "%s", str.c_str());
+
+   //   //      //   fflush(stderr);
+
+   //   //      //}
+
+   //   //      //strError += str;
+
+   //   //      //::str().get_lines(straOutput, strError, "E: ", false, &sl, pfileLines);
+
+   //   //   };
+
+
+
+   //   //}
+
+   //   DWORD dwExitCode = 0;
+
+   //   int iExitCode = 0;
+
+   //   if (GetExitCodeProcess(pi.hProcess, &dwExitCode))
+   //   {
+
+   //      iExitCode = dwExitCode;
+
+   //   }
+
+
+
+   //   ::CloseHandle(pi.hProcess);
+   //   ::CloseHandle(pi.hThread);
+
+   //   return iExitCode;
+
+   //}
 
 
    void node::open_terminal_and_run(const ::scoped_string& scopedstr)
    {
+
+      ::file::path pathCurrentDirectory;
+
+      pathCurrentDirectory = acmedirectory()->get_current();
+
+      auto windowspathCurrentDirectory = pathCurrentDirectory.windows_path();
+
+      ::wstring wstrCurrentDirectory;
+
+      wstrCurrentDirectory = windowspathCurrentDirectory;
 
       ::wstring wstrParameters;
 
@@ -3948,7 +3454,22 @@ namespace acme_windows
 
       wstrParameters += ::wstring(scopedstr);
 
-      ::ShellExecuteW(nullptr, L"open", L"cmd", wstrParameters, nullptr, SW_SHOW);
+      auto iResult = (INT_PTR) ::ShellExecuteW(nullptr, L"open", L"cmd.exe", wstrParameters, wstrCurrentDirectory, SW_SHOW);
+
+      DWORD dw = ::GetLastError();
+
+      if (iResult >= 32)
+      {
+
+         information() << "ShellExecuteW \"" + scopedstr + "\" succeeded : " << iResult;
+
+      }
+      else
+      {
+
+         information() << "ShellExecuteW \"" + scopedstr + "\" failed : " << iResult;
+
+      }
 
    }
 

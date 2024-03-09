@@ -2227,6 +2227,18 @@ pacmedir->create CreateDirectoryW last error(%d)=%s", dwError, pszError);
    }*/
 
 
+   //::file::path acme_directory::msys2()
+   //{
+
+   //   ::file::path pathMsys2;
+
+   //   pathMsys2 = "C:\\msys64";
+
+   //   return pathMsys2;
+
+   //}
+
+
 } // namespace acme_windows
 
 

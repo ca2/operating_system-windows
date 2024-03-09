@@ -23,6 +23,8 @@ namespace acme_windows
       context::context()
       {
 
+         m_bMsys2 = false;
+
 #ifdef WINDOWS
 
 #if OSBIT == 64
@@ -275,7 +277,7 @@ namespace acme_windows
 
 #endif
 
-         if (m_bMsys)
+         if (m_bMsys2)
          {
             //s += "set CHERE_INVOKING=1\n";
             //s += "set MSYSTEM=MSYS\n";
@@ -418,7 +420,7 @@ namespace acme_windows
 
             wstring wstrItem(strAtom);
 
-            if (m_bMsys && strAtom.case_insensitive_equals("PATH"))
+            if (m_bMsys2 && strAtom.case_insensitive_equals("PATH"))
             {
 
                ::string strPath = pproperty->as_string();
@@ -840,6 +842,86 @@ namespace acme_windows
       }
 
 
+      ::i32 context::bash(const ::scoped_string& scopedstr)
+      {
+
+         string strEscaped = scopedstr;
+
+         ::string strCommand;
+
+         printf("Current Directory: %s\n", acmedirectory()->get_current().c_str());
+
+         printf("%s\n", strEscaped.c_str());
+
+         if (m_bMsys2)
+         {
+
+            auto pathMsys2 = this->msys2();
+
+            auto windowspath = pathMsys2.windows_path();
+
+            strCommand = "\"" + windowspath + "\\usr\\bin\\bash.exe\" -c \'" + strEscaped + "\'";
+            //strCommand = "\"" + windowspath + "\\usr\\bin\\bash.exe\" -l -c \'" + strEscaped + "; exit $?\'";
+            //strCommand = "\"" + windowspath + "\\msys2_shell.cmd\" -c \'" + strEscaped + "\'";
+
+//            cmd.exe - c \"C:\\msys64\\msys2_shell.cmd\" \"" + strEscaped + "\""
+
+         }
+         else
+         {
+
+            strCommand = "\"C:\\Program Files\\Git\\bin\\bash.exe\" -c \'" + strEscaped + "\'";
+
+         }
+
+         //
+
+         auto iExitCode = command_system(strCommand, 12_h);
+
+         ///command_system("cmd.exe -c \"C:\\msys64\\msys2_shell.cmd\" \"" + strEscaped + "\"");
+
+         return iExitCode;
+
+      }
+
+
+      ::i32 context::zsh(const ::scoped_string& scopedstr)
+      {
+
+         string strEscaped = scopedstr;
+
+         ::string strCommand;
+
+         printf("Current Directory: %s\n", acmedirectory()->get_current().c_str());
+         printf("%s\n", strEscaped.c_str());
+
+         if (m_bMsys2)
+         {
+
+            strCommand = "\"C:\\msys64\\usr\\bin\\bash.exe\" -c \'" + strEscaped + "\'";
+
+         }
+         else
+         {
+
+            strCommand = "\"C:\\Program Files\\Git\\bin\\bash.exe\" -c \'" + strEscaped + "\'";
+
+         }
+
+         //
+
+         auto iExitCode = command_system(strCommand, 12_h);
+
+         ///command_system("cmd.exe -c \"C:\\msys64\\msys2_shell.cmd\" \"" + strEscaped + "\"");
+
+
+         return iExitCode;
+
+
+      }
+
+
+
       //::file::path context::host_integration_folder()
       //{
 
@@ -863,9 +945,99 @@ namespace acme_windows
 
       //}
 
+
+      void context::set_msys2(bool bSet)
+      {
+
+         m_bMsys2 = bSet;
+
+         if (bSet)
+         {
+
+            defer_msys2();
+
+         }
+
+      }
+
+      
+      ::file::path context::msys2()
+      {
+
+         return "C:/msys64";
+
+      }
+
+
+      void context::defer_msys2()
+      {
+
+         auto pathMsys2 = this->msys2();
+
+         if (!acmedirectory()->is(pathMsys2))
+         {
+
+            ::string strMessage;
+            
+            strMessage = "MSYS2 should be installed at \"" + pathMsys2.windows_path() + "\"";
+
+            throw ::exception(::error_file_not_found, strMessage);
+
+         }
+
+      }
+
+
+      int context::unix_shell_command(const ::scoped_string& scopedstrCommand, const trace_function& tracefunction)
+      {
+
+         try
+         {
+
+            string strEscaped = scopedstrCommand;
+
+            ::string strCommand;
+
+            informationf("Current Directory: %s\n", acmedirectory()->get_current().c_str());
+            informationf("%s\n", strEscaped.c_str());
+
+            if (m_bMsys2)
+            {
+
+               auto pathMsys2 = this->msys2();
+
+               auto windowspath = pathMsys2.windows_path();
+
+               strCommand = "\"" + windowspath + "\\usr\\bin\\bash.exe\" -l -c \'" + strEscaped + "\'";
+
+            }
+            else
+            {
+
+               strCommand = "\"C:\\Program Files\\Git\\bin\\bash.exe\" -c \'" + strEscaped + "; exit\'";
+
+            }
+
+            //
+
+            auto iExitCode = this->command_system(strCommand, tracefunction);
+
+            ///command_system("cmd.exe -c \"C:\\msys64\\msys2_shell.cmd\" \"" + strEscaped + "\"");
+
+            return iExitCode;
+
+         }
+         catch (...)
+         {
+
+         }
+
+         return -1;
+
+      }
+
+
    } // namespace integration
-
-
 
 
    void node::integration_factory()

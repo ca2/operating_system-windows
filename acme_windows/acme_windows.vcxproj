@@ -862,6 +862,7 @@
     <ClCompile Include="acme_directory.cpp" />
     <ClCompile Include="acme_file.cpp" />
     <ClCompile Include="application.cpp" />
+    <ClCompile Include="create_process.cpp" />
     <ClCompile Include="Debug.cpp" />
     <ClCompile Include="dir_context.cpp" />
     <ClCompile Include="dir_system.cpp" />
@@ -978,6 +979,7 @@
     <ClInclude Include="serial.h" />
     <ClInclude Include="shared_memory.h" />
     <ClInclude Include="simple_hold_handle.h" />
+    <ClInclude Include="create_process.h" />
     <ClInclude Include="sync_options.h" />
     <ClInclude Include="uac_tools.h" />
     <ClInclude Include="utils.h" />
