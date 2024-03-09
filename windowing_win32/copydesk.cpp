@@ -510,12 +510,21 @@ namespace windowing_win32
 
       SetClipboardData(CF_TEXT, hglobal_get_utf8_text(str));
 
-      ::file::path_array patha;
-
-      if (string_to_filea(&patha, str))
+      try
       {
 
-         SetClipboardData(CF_TEXT, hglobal_get_filea(patha));
+         ::file::path_array patha;
+
+         if (string_to_filea(&patha, str))
+         {
+
+            SetClipboardData(CF_TEXT, hglobal_get_filea(patha));
+
+         }
+
+      }
+      catch (...)
+      {
 
       }
 
