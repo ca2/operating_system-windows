@@ -4224,6 +4224,12 @@ namespace apex_windows
 
       string strTargetProgId;
 
+      strTargetProgId = get_app()->m_papexapplication->m_strAppName;
+
+      strTargetProgId.replace_with("_", "-");
+      strTargetProgId.replace_with("_", "\\");
+      strTargetProgId.replace_with("_", "/");
+
       string strModule = solve_relative(acmefile()->module());
 
       string strApplicationRegistryPath = find_string("ApplicationRegistryPath");
@@ -4236,17 +4242,13 @@ namespace apex_windows
 
       pathApplication /= strTargetProgId;
 
-      strTargetProgId = get_app()->m_papexapplication->m_strAppName;
-
-      strTargetProgId.replace_with("_", "-");
-      strTargetProgId.replace_with("_", "\\");
-      strTargetProgId.replace_with("_", "/");
-
       ::e_status estatus = ::success;
 
       {
 
-         ::acme_windows::registry::key regkey(HKEY_LOCAL_MACHINE, pathApplication, true);
+         //::acme_windows::registry::key regkey(HKEY_LOCAL_MACHINE, pathApplication, true);
+
+         ::acme_windows::registry::key regkey(HKEY_CURRENT_USER, pathApplication, true);
 
          string strValue;
 
@@ -4265,7 +4267,9 @@ namespace apex_windows
 
       {
 
-         ::acme_windows::registry::key regkey(HKEY_LOCAL_MACHINE, pathApplication / "DefaultIcon", true);
+         //::acme_windows::registry::key regkey(HKEY_LOCAL_MACHINE, pathApplication / "DefaultIcon", true);
+
+         ::acme_windows::registry::key regkey(HKEY_CURRENT_USER, pathApplication / "DefaultIcon", true);
 
          string strValue;
 
@@ -4285,7 +4289,9 @@ namespace apex_windows
 
       {
 
-         ::acme_windows::registry::key regkey(HKEY_LOCAL_MACHINE, pathApplication / "InstallInfo", true);
+         //::acme_windows::registry::key regkey(HKEY_LOCAL_MACHINE, pathApplication / "InstallInfo", true);
+
+         ::acme_windows::registry::key regkey(HKEY_CURRENT_USER, pathApplication / "InstallInfo", true);
 
          string strValue;
 
@@ -4324,7 +4330,9 @@ namespace apex_windows
 
       {
 
-         ::acme_windows::registry::key regkey(HKEY_LOCAL_MACHINE, pathApplication / "shell/open/command", true);
+         //::acme_windows::registry::key regkey(HKEY_LOCAL_MACHINE, pathApplication / "shell/open/command", true);
+
+         ::acme_windows::registry::key regkey(HKEY_CURRENT_USER, pathApplication / "shell/open/command", true);
 
          string strValue;
 
@@ -4346,7 +4354,9 @@ namespace apex_windows
 
       {
 
-         ::acme_windows::registry::key regkey(HKEY_LOCAL_MACHINE, "SOFTWARE\\RegisteredApplications", true);
+         //::acme_windows::registry::key regkey(HKEY_LOCAL_MACHINE, "SOFTWARE\\RegisteredApplications", true);
+
+         ::acme_windows::registry::key regkey(HKEY_CURRENT_USER, "SOFTWARE\\RegisteredApplications", true);
 
          string strValue;
 
@@ -4363,7 +4373,9 @@ namespace apex_windows
 
       {
 
-         ::acme_windows::registry::key regkey(HKEY_LOCAL_MACHINE, pathApplicationCapabilities, true);
+         //::acme_windows::registry::key regkey(HKEY_LOCAL_MACHINE, pathApplicationCapabilities, true);
+
+         ::acme_windows::registry::key regkey(HKEY_CURRENT_USER, pathApplicationCapabilities, true);
 
          string strValue;
 
@@ -4398,7 +4410,9 @@ namespace apex_windows
 
       {
 
-         ::acme_windows::registry::key regkey(HKEY_LOCAL_MACHINE, pathApplicationCapabilities / "FileAssociations", true);
+         //::acme_windows::registry::key regkey(HKEY_LOCAL_MACHINE, pathApplicationCapabilities / "FileAssociations", true);
+
+         ::acme_windows::registry::key regkey(HKEY_CURRENT_USER, pathApplicationCapabilities / "FileAssociations", true);
 
          string strValue;
 
@@ -4426,7 +4440,9 @@ namespace apex_windows
 
       {
 
-         ::acme_windows::registry::key regkey(HKEY_LOCAL_MACHINE, pathApplicationCapabilities / "FileAssociations", true);
+         //::acme_windows::registry::key regkey(HKEY_LOCAL_MACHINE, pathApplicationCapabilities / "FileAssociations", true);
+
+         ::acme_windows::registry::key regkey(HKEY_CURRENT_USER, pathApplicationCapabilities / "FileAssociations", true);
 
          for (index i = 0; i < straMimeType.get_count(); i++)
          {
@@ -4441,7 +4457,9 @@ namespace apex_windows
 
       {
 
-         ::acme_windows::registry::key regkey(HKEY_LOCAL_MACHINE, pathApplicationCapabilities / "MimeAssociations", true);
+         //::acme_windows::registry::key regkey(HKEY_LOCAL_MACHINE, pathApplicationCapabilities / "MimeAssociations", true);
+
+         ::acme_windows::registry::key regkey(HKEY_CURRENT_USER, pathApplicationCapabilities / "MimeAssociations", true);
 
          for (index i = 0; i < straMimeType.get_count(); i++)
          {
@@ -4466,7 +4484,9 @@ namespace apex_windows
       //}
       {
 
-         ::acme_windows::registry::key regkey(HKEY_CLASSES_ROOT, strTargetProgId + "\\papplication", true);
+         //::acme_windows::registry::key regkey(HKEY_CLASSES_ROOT, strTargetProgId + "\\Application", true);
+
+         ::acme_windows::registry::key regkey(HKEY_CURRENT_USER, "Software\\Classes\\" + strTargetProgId + "\\Application", true);
 
          regkey._set("ApplicationCompany", get_app()->find_string("ApplicationCompany"));
 
@@ -4491,7 +4511,9 @@ namespace apex_windows
       }
       {
 
-         ::acme_windows::registry::key regkey(HKEY_CLASSES_ROOT, strTargetProgId + "\\DefaultIcon", true);
+         //::acme_windows::registry::key regkey(HKEY_CLASSES_ROOT, strTargetProgId + "\\DefaultIcon", true);
+
+         ::acme_windows::registry::key regkey(HKEY_CURRENT_USER, "Software\\Classes\\" + strTargetProgId + "\\DefaultIcon", true);
 
          regkey._set("", get_app()->find_string("DefaultIcon"));
 
@@ -4518,7 +4540,9 @@ namespace apex_windows
 
          //{
 
-         ::acme_windows::registry::key regkey(HKEY_CLASSES_ROOT, "." + strExtension + "\\OpenWithProgids", true);
+         //::acme_windows::registry::key regkey(HKEY_CLASSES_ROOT, "." + strExtension + "\\OpenWithProgids", true);
+
+         ::acme_windows::registry::key regkey(HKEY_CURRENT_USER, "Software\\Classes\\." + strExtension + "\\OpenWithProgids", true);
 
          regkey._set(strTargetProgId, "");;
 
