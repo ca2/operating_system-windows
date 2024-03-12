@@ -263,7 +263,7 @@ namespace acme_windows
       virtual int environment_variable_registry_payload_type(const ::scoped_string& scopedstr);
 
       ::string get_user_permanent_environment_variable(const ::scoped_string & scopedstr) override;
-      void set_user_permanent_environment_variable(const ::scoped_string & scopedstr, const ::scoped_string & strPayload) override;
+      void set_user_permanent_environment_variable(const ::scoped_string & scopedstr, const ::scoped_string & strPayload, bool bNoSystemNotify = false) override;
 
 
 #ifdef WINDOWS_DESKTOP

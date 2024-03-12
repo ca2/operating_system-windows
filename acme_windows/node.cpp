@@ -3891,7 +3891,7 @@ namespace acme_windows
    }
 
 
-   void node::set_user_permanent_environment_variable(const ::scoped_string & scopedstr, const ::scoped_string & scopedstrPayload)
+   void node::set_user_permanent_environment_variable(const ::scoped_string & scopedstr, const ::scoped_string & scopedstrPayload, bool bNoSystemNotify)
    {
 
       ::acme_windows::registry::key key(HKEY_CURRENT_USER, "Environment");
@@ -3908,6 +3908,19 @@ namespace acme_windows
       int iPayloadType = environment_variable_registry_payload_type(strName);
 
       key.set(strName, scopedstrPayload, iPayloadType);
+
+      if (!bNoSystemNotify)
+      {
+
+         DWORD_PTR dwptrResult = 0;
+
+         ::SendMessageTimeoutW(HWND_BROADCAST, WM_SETTINGCHANGE,
+            0, (LPARAM)L"Environment",
+            SMTO_ABORTIFHUNG | SMTO_NOTIMEOUTIFNOTHUNG, 10000, &dwptrResult);
+
+         ::preempt(10_s);
+
+      }
 
    }
 
