@@ -249,11 +249,11 @@ namespace acme_windows
    void node::shell_open(const ::file::path & pathFile, const ::string & strParams, const ::file::path & pathFolder)
    {
 
-      wstring wstrFile(pathFile);
+      wstring wstrFile(pathFile.windows_path());
 
       wstring wstrParams(strParams);
 
-      wstring wstrFolder(pathFolder);
+      wstring wstrFolder(pathFolder.windows_path());
 
       int iRet = (int)(iptr) ::ShellExecuteW(nullptr, L"open", wstrFile, wstrParams, wstrFolder, SW_RESTORE);
 
