@@ -56,8 +56,8 @@ namespace acme_windows
          ::file::path base_integration_folder() override;
 
 
-         ::i32 bash(const ::scoped_string & scopedstr) override;
-         ::i32 zsh(const ::scoped_string& scopedstr) override;
+         ::i32 bash(const ::scoped_string & scopedstr, const class ::time & timeTimeout) override;
+         ::i32 zsh(const ::scoped_string& scopedstr, const class ::time& timeTimeout) override;
 
 
          void set_msys2(bool bSet = true) override;

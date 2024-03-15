@@ -842,7 +842,7 @@ namespace acme_windows
       }
 
 
-      ::i32 context::bash(const ::scoped_string& scopedstr)
+      ::i32 context::bash(const ::scoped_string& scopedstr, const class ::time & timeTimeout)
       {
 
          string strEscaped = scopedstr;
@@ -876,7 +876,7 @@ namespace acme_windows
 
          //
 
-         auto iExitCode = command_system(strCommand, 12_h);
+         auto iExitCode = command_system(strCommand, timeTimeout);
 
          ///command_system("cmd.exe -c \"C:\\msys64\\msys2_shell.cmd\" \"" + strEscaped + "\"");
 
@@ -885,7 +885,7 @@ namespace acme_windows
       }
 
 
-      ::i32 context::zsh(const ::scoped_string& scopedstr)
+      ::i32 context::zsh(const ::scoped_string& scopedstr, const class ::time& timeTimeout)
       {
 
          string strEscaped = scopedstr;
@@ -910,7 +910,7 @@ namespace acme_windows
 
          //
 
-         auto iExitCode = command_system(strCommand, 12_h);
+         auto iExitCode = command_system(strCommand, timeTimeout);
 
          ///command_system("cmd.exe -c \"C:\\msys64\\msys2_shell.cmd\" \"" + strEscaped + "\"");
 
