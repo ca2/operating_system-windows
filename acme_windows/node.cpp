@@ -322,6 +322,19 @@ namespace acme_windows
    }
 
 
+   bool node::dark_mode() const
+   {
+
+      auto pthis = (node*)this;
+
+      auto bDarkMode = pthis->win32_registry_windows_darkness();
+
+      return bDarkMode;
+
+
+   }
+
+
    ::color::color node::reinterpreted_windows_darkness_background_color()
    {
 
@@ -352,7 +365,7 @@ namespace acme_windows
 
       ::output_debug_string(str);
 
-      background_color(colorWindowBackground);
+      system()->background_color(colorWindowBackground);
 
    }
 
