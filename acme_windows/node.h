@@ -61,6 +61,9 @@ namespace acme_windows
       virtual bool win32_registry_windows_darkness();
 
 
+      bool dark_mode() const override;
+
+
       virtual ::color::color reinterpreted_windows_darkness_background_color();
 
 
