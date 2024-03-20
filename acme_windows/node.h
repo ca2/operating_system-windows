@@ -64,6 +64,8 @@ namespace acme_windows
       bool dark_mode() const override;
 
 
+      ::file::path get_default_base_integration_folder() override;
+
       virtual ::color::color reinterpreted_windows_darkness_background_color();
 
 

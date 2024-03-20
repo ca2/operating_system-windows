@@ -2239,6 +2239,27 @@ pacmedir->create CreateDirectoryW last error(%d)=%s", dwError, pszError);
    //}
 
 
+
+   ::file::path acme_directory::windows()
+   {
+
+      return _get_known_folder(FOLDERID_Windows);
+
+   }
+
+
+   ::file::path acme_directory::system_drive()
+   {
+
+      auto windows = this->windows();
+
+      auto system_drive = windows.folder();
+
+      return system_drive;
+
+   }
+
+
 } // namespace acme_windows
 
 

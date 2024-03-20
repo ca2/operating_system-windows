@@ -10,6 +10,7 @@
 #include "create_process.h"
 #include "acme/exception/exception.h"
 #include "acme/exception/status.h"
+#include "acme/filesystem/filesystem/acme_directory.h"
 #include "acme/filesystem/filesystem/file_context.h"
 #include "acme/filesystem/filesystem/dir_context.h"
 //#include "acme/filesystem/filesystem/folder_dialog.h"
@@ -331,6 +332,14 @@ namespace acme_windows
 
       return bDarkMode;
 
+
+   }
+
+
+   ::file::path node::get_default_base_integration_folder()
+   {
+
+      return acmedirectory()->system_drive() / "integration" / "_____";
 
    }
 

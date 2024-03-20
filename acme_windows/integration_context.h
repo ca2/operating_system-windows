@@ -30,7 +30,6 @@ namespace acme_windows
          //::string          m_strVsTools; // payload("vstools")
          ::string          m_strStagePlatform;
          ::string          m_strLibPlatform;
-
          ::file::path      m_pathProjectDir;
          //::string_array    m_straLog;
 
@@ -53,7 +52,7 @@ namespace acme_windows
 
          void prepare_linking_script(::string& str) override;
      
-         ::file::path base_integration_folder() override;
+         //::file::path base_integration_folder() override;
 
 
          ::i32 bash(const ::scoped_string & scopedstr, const class ::time & timeTimeout) override;

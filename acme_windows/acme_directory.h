@@ -136,6 +136,10 @@ namespace acme_windows
 
       //::file::path msys2() override;
 
+      ::file::path windows() override;
+
+      ::file::path system_drive() override;
+
 
    };
 

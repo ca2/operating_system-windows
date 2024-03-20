@@ -834,12 +834,12 @@ namespace acme_windows
       }
 
 
-      ::file::path context::base_integration_folder()
-      {
+      //::file::path context::base_integration_folder()
+      //{
 
-         return "C:/integration";
+      //   return "C:/integration";
 
-      }
+      //}
 
 
       ::i32 context::bash(const ::scoped_string& scopedstr, const class ::time & timeTimeout)
