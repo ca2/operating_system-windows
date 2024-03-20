@@ -197,7 +197,7 @@ namespace input_win32
 
       pmouse->m_atom = emessage;
 
-      handle(pmouse);
+      handle_message(pmouse);
 
    }
 

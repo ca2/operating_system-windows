@@ -240,7 +240,7 @@ namespace input_win32
 
       }
 
-      handle(pkeyboard);
+      handle_message(pkeyboard);
 
    }
 

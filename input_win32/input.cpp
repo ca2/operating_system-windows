@@ -1530,7 +1530,7 @@ namespace input_win32
    }
 
 
-   void input::handle(::message::message * pmessage)
+   void input::handle_message(::message::message * pmessage)
    {
 
       if (pmessage->m_atom.m_etype == atom::e_type_message)
@@ -1543,7 +1543,7 @@ namespace input_win32
             for (auto & pparticle : m_particleaMouseHandler)
             {
 
-               pparticle->handle(pmessage);
+               pparticle->call_handle_message(pmessage);
 
             }
 
@@ -1555,7 +1555,7 @@ namespace input_win32
             for (auto & pparticle : m_particleaKeyboardHandler)
             {
 
-               pparticle->handle(pmessage);
+               pparticle->call_handle_message(pmessage);
 
             }
 
