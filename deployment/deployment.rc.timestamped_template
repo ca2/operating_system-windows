@@ -25,8 +25,8 @@ LANGUAGE LANG_NEUTRAL, SUBLANG_DEFAULT
 //
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION %RELEASECOMMA%
- PRODUCTVERSION %RELEASECOMMA%
+ FILEVERSION 2024,0310,0000,00
+ PRODUCTVERSION 2024,0310,0000,00
  FILEFLAGSMASK 0x3fL
 #ifdef _DEBUG
  FILEFLAGS 0x1L
@@ -43,9 +43,9 @@ BEGIN
         BEGIN
 			VALUE "CompanyName", "%ROOTNAME%"
 			VALUE "FileDescription", "%PROJECTNAME%"
-            VALUE "FileVersion", "%RELEASEDOT%"
-            VALUE "LegalCopyright", "Copyright (C) %RELEASEDATETIME%"
-            VALUE "ProductVersion", "%RELEASEDOT%"
+            VALUE "FileVersion", "2024.0310.0000.00"
+            VALUE "LegalCopyright", "Copyright (C) 2024-03-10-00-00-00"
+            VALUE "ProductVersion", "2024.0310.0000.00"
         END
     END
     BLOCK "VarFileInfo"
