@@ -719,9 +719,9 @@ namespace windowing_win32
    void icon::load_file(const ::string & strPath)
    {
 
-      m_pathProcessed = m_pcontext->m_papexcontext->defer_process_matter_path(strPath);
+      m_pathProcessed = context()->defer_process_matter_path(strPath);
 
-      auto memory = m_pcontext->m_papexcontext->file()->as_memory(m_pathProcessed);
+      auto memory = file()->as_memory(m_pathProcessed);
 
       if (memory.is_empty())
       {

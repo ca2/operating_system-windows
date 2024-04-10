@@ -1009,7 +1009,7 @@ namespace windowing_win32
 
             HRESULT hrExtract = E_FAIL;
 
-            synchronous_lock synchronouslock(synchronization());
+            _synchronous_lock synchronouslock(synchronization());
 
             auto iaSize = m_iaSize;
 
@@ -1758,7 +1758,7 @@ namespace windowing_win32
    void shell::add_system_icon(int iIcon, _get_file_image_ & getfileimage)
    {
 
-      synchronous_lock synchronouslock(synchronization());
+      _synchronous_lock synchronouslock(synchronization());
 
       auto iaSize = m_iaSize;
 
@@ -1785,7 +1785,7 @@ namespace windowing_win32
       if (pathIconParam.case_insensitive_ends(".ico"))
       {
 
-         synchronous_lock synchronouslock(synchronization());
+         _synchronous_lock synchronouslock(synchronization());
 
          auto iaSize = m_iaSize;
 
@@ -1829,10 +1829,6 @@ namespace windowing_win32
    void shell::add_icon(int iSize, HICON hicon, _get_file_image_ & getfileimage)
    {
 
-      synchronous_lock synchronouslock(m_pimagelist[iSize]->synchronization());
-
-      synchronous_lock slHover(m_pimagelistHover[iSize]->synchronization());
-
       auto pwindowingicon = __create_new < ::windowing_win32::icon >();
 
       pwindowingicon->add_icon(hicon);
@@ -1841,29 +1837,9 @@ namespace windowing_win32
      
       pdrawicon->initialize_with_windowing_icon(pwindowingicon);
 
-      //if(::is_ok(pdrawicon))
-      {
+      image_source imagesource(pdrawicon);
 
-         image_source imagesource(pdrawicon);
-
-         //   m_pimagelist[iSize]->set(getfileimage.m_iImage, imagesource);
-
-         //}
-
-         //if (getfileimage.m_iImage == 14)
-         //{
-
-         //   //iImage = m_pimagelist[iSize]->add(picon);
-
-         //}
-
-         //getfileimage.m_iImage = add_hover_image(iSize, getfileimage.m_iImage, getfileimage.m_imagekey.m_cr);
-
-         //return iImage;
-
-         set_image(getfileimage.m_iImage, iSize, imagesource);
-
-      }
+      set_image(getfileimage.m_iImage, iSize, imagesource);
 
    }
 
@@ -1964,7 +1940,7 @@ namespace windowing_win32
 
          auto pnode = psystem->node()->m_pAuraPlatform;
 
-         synchronous_lock synchronouslock(synchronization());
+         _synchronous_lock synchronouslock(synchronization());
 
          auto iaSize = m_iaSize;
 
