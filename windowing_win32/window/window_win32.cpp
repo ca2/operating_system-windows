@@ -246,6 +246,12 @@ LRESULT CALLBACK __window_procedure(HWND hwnd, UINT message, WPARAM wparam, LPAR
       ::acme::get()->platform()->informationf("WM_KILLFOCUS");
 
    }
+   else if (message == WM_MOUSEWHEEL)
+   {
+
+      ::acme::get()->platform()->informationf("WM_MOUSEWHEEL");
+
+   }
 
    if (message == WM_APP + 12345)
    {
