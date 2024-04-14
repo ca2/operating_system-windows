@@ -431,7 +431,9 @@ namespace acme_windows
 
       }
 
-      return ::file::path(m_pFoundInfo->cFileName, ::e_path_file, IsDirectory() ? 1 : 0, false, get_length());
+      auto etype = IsDirectory() ? ::file::e_type_existent_folder : ::file::e_type_existent_file;
+
+      return ::file::path(m_pFoundInfo->cFileName, ::e_path_file, etype, false, get_length());
 
    }
 

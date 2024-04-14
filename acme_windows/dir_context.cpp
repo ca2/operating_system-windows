@@ -448,7 +448,7 @@ namespace acme_windows
 
          path = str;
 
-         path.m_iDir = 1;
+         path.set_folder_path();
 
          listing.defer_add(path);
          

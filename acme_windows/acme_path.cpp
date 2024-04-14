@@ -31,7 +31,7 @@ namespace acme_windows
 
       auto etype = get_file_system_item_type(path);
 
-      if (etype == ::file::e_type_folder)
+      if (etype & ::file::e_type_folder2)
       {
 
          if (!fileinstance.safe_create_file(path,
@@ -52,7 +52,7 @@ namespace acme_windows
          }
 
       }
-      else if (etype == ::file::e_type_file)
+      else if (etype & ::file::e_type_file2)
       {
 
          if (!fileinstance.safe_create_file(path,
@@ -98,7 +98,7 @@ namespace acme_windows
 
          auto etype = safe_get_file_system_item_type(path);
 
-         if (etype == ::file::e_type_folder)
+         if (etype & ::file::e_type_folder2)
          {
 
             if (!fileinstance.safe_create_file(path,
@@ -115,7 +115,7 @@ namespace acme_windows
             }
 
          }
-         else if (etype == ::file::e_type_file)
+         else if (etype & ::file::e_type_file2)
          {
 
             if (!fileinstance.safe_create_file(path,

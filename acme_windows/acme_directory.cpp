@@ -1290,7 +1290,17 @@ pacmedir->create CreateDirectoryW last error(%d)=%s", dwError, pszError);
 
          bool bDirectory = (finddata.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY);
 
-         path.m_iDir = bDirectory ? 1 : 0;
+         if (bDirectory)
+         {
+
+            path.set_existent_folder();
+
+         }
+         else
+         {
+
+            path.set_existent_file();
+
 
          path.m_iSize = make64_from32(finddata.nFileSizeLow, finddata.nFileSizeHigh);
 
