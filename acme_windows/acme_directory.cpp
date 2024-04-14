@@ -1302,6 +1302,8 @@ pacmedir->create CreateDirectoryW last error(%d)=%s", dwError, pszError);
             path.set_existent_file();
 
 
+         }
+
          path.m_iSize = make64_from32(finddata.nFileSizeLow, finddata.nFileSizeHigh);
 
          listing.defer_add(path);
