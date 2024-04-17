@@ -19,7 +19,7 @@ namespace acme_windows
       PROCESS_INFORMATION m_pi = {};
       ::memory m_memoryAttrList;
 
-      const ::i32 m_iPipeSize = 16_KiB;
+      const memsize m_iPipeSize = 16_KiB;
 
       HANDLE m_hOutRd;
       HANDLE m_hOutWr;
