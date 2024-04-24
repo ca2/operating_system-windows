@@ -3874,10 +3874,11 @@ namespace apex_windows
    }
 
 
-   void node::register_user_auto_start(const string& strId, const ::file::path& pathExecutable, const string& strArguments, bool bRegister)
+   void node::register_user_auto_start(::acme::application * papplication, const string& strArguments, bool bRegister)
    {
 
-      current_user_set_run(strId, pathExecutable, strArguments, bRegister);
+      current_user_set_run(papplication->m_strAppId,
+         papplication->get_module_path(), strArguments, bRegister);
 
       //return true;
 

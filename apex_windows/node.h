@@ -211,7 +211,7 @@ namespace apex_windows
 
       virtual void get_default_browser(string& strId, ::file::path& path, string& strParam) override;
 
-      void register_user_auto_start(const string& strAppId, const ::file::path& pathExecutable, const string& strArguments, bool bRegister) override;
+      void register_user_auto_start(::acme::application * papplication, const string& strArguments, bool bRegister) override;
 
       bool is_user_auto_start(const ::string& strAppId) override;
 
