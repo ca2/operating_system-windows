@@ -21,14 +21,14 @@ namespace acme_windows
    }
 
    
-   ::payload registry::key::get(const ::scoped_string & scopedstrValueName)
+   ::payload registry::key::get(const ::scoped_string & scopedstrName)
    {
 
       DWORD dwType;
 
-      DWORD cbValue;
+      DWORD cbData;
 
-      /* auto estatus = */ _value_type_and_size(scopedstrValueName, dwType, cbValue);
+      /* auto estatus = */ _data_type_and_size(scopedstrName, dwType, cbData);
 
       //if (::failed(estatus))
       //{
@@ -40,9 +40,9 @@ namespace acme_windows
       if (dwType == REG_DWORD)
       {
 
-         DWORD uValue;
+         DWORD uData;
 
-         auto estatus = _value(&uValue, scopedstrValueName, dwType, cbValue);
+         auto estatus = _data(&uData, scopedstrName, dwType, cbData);
 
          if(!estatus)
          {
@@ -51,17 +51,17 @@ namespace acme_windows
 
          }
 
-         return (::u32) uValue;
+         return (::u32) uData;
 
       }
       else if (dwType == REG_SZ)
       {
 
-         wstring wstrValue;
+         wstring wstrData;
        
-         auto pwszValue = wstrValue.get_buffer(cbValue);
+         auto pwszData = wstrData.get_buffer(cbData);
 
-         auto estatus = _value(pwszValue, scopedstrValueName, dwType, cbValue);
+         auto estatus = _data(pwszData, scopedstrName, dwType, cbData);
 
          if(!estatus)
          {
@@ -70,9 +70,9 @@ namespace acme_windows
 
          }
          
-         wstrValue.release_buffer();
+         wstrData.release_buffer();
 
-         return string(wstrValue);
+         return string(wstrData);
 
       }
       else if (dwType == REG_BINARY)
@@ -80,9 +80,9 @@ namespace acme_windows
 
          ::memory memory;
 
-         memory.set_size(cbValue);
+         memory.set_size(cbData);
 
-         auto estatus = _value(memory.data(), scopedstrValueName, dwType, cbValue);
+         auto estatus = _data(memory.data(), scopedstrName, dwType, cbData);
          
          if (!estatus)
          {
@@ -103,15 +103,24 @@ namespace acme_windows
    registry::key::key()
    {
 
-      m_hkey = nullptr;
+      m_hkey2 = nullptr;
+      m_hkeySub = nullptr;
 
+   }
+
+
+   registry::key::key(HKEY hkey, const ::scoped_string& scopedstrSubKey, bool bCreate)
+   {
+      
+      _open(hkey, scopedstrSubKey, bCreate); 
+   
    }
 
 
    registry::key::~key()
    {
 
-      if(m_hkey != nullptr)
+      if(m_hkeySub != nullptr)
       {
 
          close();
@@ -137,39 +146,36 @@ namespace acme_windows
       if(bCreate)
       {
 
-         lstatus = ::RegCreateKeyW(hkey, wstring(scopedstrSubKey), &m_hkey);
-
-         if (lstatus != ERROR_SUCCESS)
-         {
-
-            return false;
-
-         }
+         lstatus = ::RegCreateKeyW(hkey, wstring(scopedstrSubKey), &m_hkeySub);
 
       }
       else
       {
 
-         lstatus = ::RegOpenKeyW(hkey, wstring(scopedstrSubKey), &m_hkey);
+         lstatus = ::RegOpenKeyW(hkey, wstring(scopedstrSubKey), &m_hkeySub);
          
-         if (lstatus != ERROR_SUCCESS)
-         {
+      }
 
-            return false;
+      if (lstatus != ERROR_SUCCESS)
+      {
 
-         }
+         return false;
 
       }
+
+      m_hkey2 = hkey;
+
+      m_strSubKey = scopedstrSubKey;
 
       return true;
 
    }
 
 
-   bool registry::key::value(void * pvalue, const ::scoped_string & scopedstrValueName, DWORD & dwType, DWORD & cbValue)
+   bool registry::key::data(void * pdata, const ::scoped_string & scopedstrName, DWORD & dwType, DWORD & cbData)
    { 
       
-      return _value(pvalue, scopedstrValueName, dwType, cbValue);
+      return _data(pdata, scopedstrName, dwType, cbData);
 
    }
 
@@ -185,25 +191,27 @@ namespace acme_windows
    void registry::key::close()
    {
 
-      if(m_hkey != nullptr)
+      if(m_hkeySub != nullptr)
       {
 
-         if(ERROR_SUCCESS == ::RegCloseKey(m_hkey))
+         if(ERROR_SUCCESS == ::RegCloseKey(m_hkeySub))
          {
 
-            m_hkey = nullptr;
+            m_hkeySub = nullptr;
 
          }
 
       }
 
+      m_hkey2 = nullptr;
+
    }
 
 
-   bool registry::key::_value(void* pvalue, const ::scoped_string & scopedstrValueName, DWORD& dwType, DWORD& cbValue)
+   bool registry::key::_data(void* pdata, const ::scoped_string & scopedstrName, DWORD& dwType, DWORD& cbData)
    {
 
-      if (ERROR_SUCCESS != ::RegQueryValueExW(m_hkey, wstring(scopedstrValueName), nullptr, (LPDWORD) &dwType, (::u8*)pvalue, (LPDWORD) &cbValue))
+      if (ERROR_SUCCESS != ::RegQueryValueExW(m_hkeySub, wstring(scopedstrName), nullptr, (LPDWORD) &dwType, (::u8*)pdata, (LPDWORD) &cbData))
       {
 
          return false;
@@ -215,14 +223,14 @@ namespace acme_windows
    }
 
 
-   bool registry::key::_get(const ::scoped_string & scopedstrValueName, DWORD & dwValue)
+   bool registry::key::_get(const ::scoped_string & scopedstrName, DWORD & dwData)
    {
       
       DWORD dwType;
 
-      DWORD cbValue;
+      DWORD cbData;
       
-      auto bOk = _value_type_and_size(scopedstrValueName, dwType, cbValue);
+      auto bOk = _data_type_and_size(scopedstrName, dwType, cbData);
 
       if (!bOk)
       {
@@ -238,9 +246,9 @@ namespace acme_windows
 
       }
 
-      cbValue = sizeof(dwValue);
+      cbData = sizeof(dwData);
 
-      bOk = _value(&dwValue, scopedstrValueName, dwType, cbValue);
+      bOk = _data(&dwData, scopedstrName, dwType, cbData);
 
       if (!bOk)
       {
@@ -254,14 +262,14 @@ namespace acme_windows
    }
 
 
-   bool registry::key::_get(const ::scoped_string & scopedstrValueName, string &str)
+   bool registry::key::_get(const ::scoped_string & scopedstrName, string &str)
    {
 
       DWORD dwType;
 
-      DWORD cbValue;
+      DWORD cbData;
 
-      bool bOk = _value_type_and_size(scopedstrValueName, dwType, cbValue);
+      bool bOk = _data_type_and_size(scopedstrName, dwType, cbData);
 
       if (!bOk)
       {
@@ -279,9 +287,9 @@ namespace acme_windows
 
       wstring wstr;
 
-      auto pwsz = wstr.get_buffer(cbValue);
+      auto pwsz = wstr.get_buffer(cbData);
 
-      bOk = _value(pwsz, scopedstrValueName, dwType, cbValue);
+      bOk = _data(pwsz, scopedstrName, dwType, cbData);
 
       wstr.release_buffer();
 
@@ -299,14 +307,14 @@ namespace acme_windows
    }
 
 
-   bool registry::key::_get(const ::scoped_string & scopedstrValueName, memory & mem)
+   bool registry::key::_get(const ::scoped_string & scopedstrName, memory & mem)
    {
 
       DWORD dwType;
 
-      DWORD cbValue;
+      DWORD cbData;
 
-      auto bOk = _value_type_and_size(scopedstrValueName, dwType, cbValue);
+      auto bOk = _data_type_and_size(scopedstrName, dwType, cbData);
 
       if (!bOk)
       {
@@ -322,9 +330,9 @@ namespace acme_windows
 
       }
 
-      mem.set_size(cbValue);
+      mem.set_size(cbData);
 
-      bOk = _value(mem.data(), scopedstrValueName, dwType, cbValue);
+      bOk = _data(mem.data(), scopedstrName, dwType, cbData);
 
       if (!bOk)
       {
@@ -340,10 +348,10 @@ namespace acme_windows
    }
 
    
-   void registry::key::_set_value(const void* pvalue, const ::scoped_string & scopedstrValueName, DWORD dwType, DWORD cbValue)
+   void registry::key::_set_data(const void* pdata, const ::scoped_string & scopedstrName, DWORD dwType, DWORD cbData)
    {
 
-      auto lstatus = RegSetValueExW(m_hkey, scopedstrValueName.is_empty() ? nullptr : wstring(scopedstrValueName), 0, dwType, (const ::u8 *) pvalue, cbValue);
+      auto lstatus = ::RegSetValueExW(m_hkeySub, scopedstrName.is_empty() ? nullptr : wstring(scopedstrName), 0, dwType, (const ::u8 *) pdata, cbData);
 
       if (lstatus != ERROR_SUCCESS)
       {
@@ -359,147 +367,155 @@ namespace acme_windows
    }
 
 
-   bool registry::key::value_type_and_size(const ::scoped_string & scopedstrValueName, DWORD & dwType, DWORD & cbValue)
+   bool registry::key::data_type_and_size(const ::scoped_string & scopedstrName, DWORD & dwType, DWORD & cbData)
    {
 
-      return _value_type_and_size(scopedstrValueName, dwType, cbValue);
+      return _data_type_and_size(scopedstrName, dwType, cbData);
 
    }
 
 
-   //void registry::key::_set(const ::string & strValueName, const scoped_string & scopedstrValue)
+   bool registry::key::_data_type_and_size(const ::scoped_string& scopedstrName, DWORD& dwType, DWORD& cbData) 
+   {
+      
+      return _data(nullptr, scopedstrName, dwType, cbData); 
+   
+   }
+
+
+   //void registry::key::_set(const ::string & strDataName, const scoped_string & scopedstrData)
    //{
 
-   //   return this->_set(strValueName, (const ::string &)scopedstrValue);
+   //   return this->_set(strDataName, (const ::string &)scopedstrData);
 
    //}
 
 
-   void registry::key::_set(const ::scoped_string & scopedstrValueName, const ::scoped_string & scopedstrValue, int iType)
+   void registry::key::_set(const ::scoped_string & scopedstrName, const ::scoped_string & scopedstrData, int iType)
    {
 
-      wstring wstr(scopedstrValue);
+      wstring wstr(scopedstrData);
 
-      return _set_value(wstr.c_str(), scopedstrValueName, iType, (DWORD) wstr.character_count_in_bytes());
+      return _set_data(wstr.c_str(), scopedstrName, iType, (DWORD) wstr.character_count_in_bytes());
 
    }
 
 
-   //void registry::key::_set(const ::scoped_string & scopedstrValueName, const ::string & pszValue)
+   //void registry::key::_set(const ::scoped_string & scopedstrName, const ::string & pszData)
    //{
 
-   //   return _set(pcszValueName, string(pszValue));
+   //   return _set(pcszDataName, string(pszData));
 
    //}
 
 
-   void registry::key::_set_binary(const ::scoped_string & scopedstrValueName, const memory & memValue)
+   void registry::key::_set_binary(const ::scoped_string & scopedstrName, const memory & memData)
    {
 
-      return _set_value(memValue.data(), scopedstrValueName, REG_BINARY, (DWORD) memValue.size());
+      return _set_data(memData.data(), scopedstrName, REG_BINARY, (DWORD) memData.size());
 
    }
 
 
-   void registry::key::_set(const ::scoped_string & scopedstrValueName, DWORD dwValue)
+   void registry::key::_set(const ::scoped_string & scopedstrName, DWORD dwData)
    {
 
-      return _set_value(&dwValue, scopedstrValueName, REG_DWORD, sizeof(dwValue));
+      return _set_data(&dwData, scopedstrName, REG_DWORD, sizeof(dwData));
 
    }
 
 
-   bool registry::key::get(const ::scoped_string & scopedstrValueName, DWORD & dwValue)
+   bool registry::key::get(const ::scoped_string & scopedstrName, DWORD & dwData)
    { 
       
-      return _get(scopedstrValueName, dwValue);
+      return _get(scopedstrName, dwData);
 
       //__defer_throw_estatus(estatus);
    
    }
 
 
-   bool registry::key::get(const ::scoped_string & scopedstrValueName, string & strValue)
+   bool registry::key::get(const ::scoped_string & scopedstrName, string & strData)
    { 
       
-      return _get(scopedstrValueName, strValue);
+      return _get(scopedstrName, strData);
 
       //__defer_throw_estatus(estatus);
    
    }
 
 
-   bool registry::key::get(const ::scoped_string & scopedstrValueName, memory & mem)
+   bool registry::key::get(const ::scoped_string & scopedstrName, memory & mem)
    { 
       
-      return _get(scopedstrValueName, mem);
+      return _get(scopedstrName, mem);
 //
   ///    __defer_throw_estatus(estatus);
    
    }
 
 
-   void registry::key::set(const ::scoped_string & scopedstrValueName, DWORD dwValue)
+   void registry::key::set(const ::scoped_string & scopedstrName, DWORD dwData)
    {
       
-       _set(scopedstrValueName, dwValue);
+       _set(scopedstrName, dwData);
 
       //__defer_throw_estatus(estatus);
 
    
    }
 
-   //void registry::key::set(const ::string & strValueName, const scoped_string & strValue)
+   //void registry::key::set(const ::string & strDataName, const scoped_string & strData)
    //{
 
-   //   this->set(strValueName, (const string &)strValue);
+   //   this->set(strDataName, (const string &)strData);
 
    //}
 
-   void registry::key::set(const ::scoped_string & scopedstrValueName, const scoped_string & scopedstrValue, int iType)
+   void registry::key::set(const ::scoped_string & scopedstrName, const scoped_string & scopedstrData, int iType)
    { 
 
-      /*auto estatus = */ _set(scopedstrValueName, scopedstrValue, iType);
+      /*auto estatus = */ _set(scopedstrName, scopedstrData, iType);
       
       //__defer_throw_estatus(estatus);
    
    }
 
 
-   //void registry::key::set(const ::string & strValueName, const ::string & strValue)
+   //void registry::key::set(const ::string & strDataName, const ::string & strData)
    //{
 
-   //   auto estatus = _set(strValueName, strValue);
+   //   auto estatus = _set(strDataName, strData);
 
    //   __defer_throw_estatus(estatus);
 
    //}
 
 
-   void registry::key::set_binary(const ::scoped_string & scopedstrValueName, const memory & mem)
+   void registry::key::set_binary(const ::scoped_string & scopedstrName, const memory & mem)
    { 
 
-      /*auto estatus =*/ _set_binary(scopedstrValueName, mem);
+      /*auto estatus =*/ _set_binary(scopedstrName, mem);
       
       //__defer_throw_estatus(estatus);
    
    }
 
 
-   void registry::key::delete_value(const ::scoped_string & scopedstrValueName)
+   void registry::key::erase_data(const ::scoped_string & scopedstrName)
    { 
       
-      /*auto estatus = */ _delete_value(scopedstrValueName);
+      /*auto estatus = */ _erase_data(scopedstrName);
 
       //__defer_throw_estatus(estatus);
    
    }
 
 
-   void registry::key::delete_key()
+   void registry::key::erase_key(const ::scoped_string& scopedstrKey)
    { 
 
-      /*auto estatus = */ _delete_key();
+      /*auto estatus = */ _erase_key(scopedstrKey);
       
       // __defer_throw_estatus(estatus);
    
@@ -516,22 +532,22 @@ namespace acme_windows
    }
 
 
-   void registry::key::ls_value(string_array & stra)
+   void registry::key::ls_data(string_array & stra)
    {
 
-      /*auto estatus = */ _ls_value(stra);
+      /*auto estatus = */ _ls_data(stra);
 
       //__defer_throw_estatus(estatus);
 
    }
 
 
-   void registry::key::_delete_value(const ::scoped_string & scopedstrValueName)
+   void registry::key::_erase_data(const ::scoped_string & scopedstrName)
    {
 
-      wstring wstr(scopedstrValueName);
+      wstring wstr(scopedstrName);
 
-      if (ERROR_SUCCESS != ::RegDeleteValueW(m_hkey, (WCHAR *) wstr.c_str()))
+      if (ERROR_SUCCESS != ::RegDeleteValueW(m_hkeySub, (WCHAR *) wstr.c_str()))
       {
 
          throw ::exception(error_failed);
@@ -543,14 +559,14 @@ namespace acme_windows
    }
 
 
-   void registry::key::_delete_key()
+   void registry::key::_erase_key(const ::scoped_string& scopedstrKey)
    {
 
-      ASSERT(false);
+      //ASSERT(false);
       // please verify if
-      // using nullptr for the value parameter
+      // using nullptr for the data parameter
       // deletes the key.
-      if (ERROR_SUCCESS != ::RegDeleteKey(m_hkey, nullptr))
+      if (ERROR_SUCCESS != ::RegDeleteKeyW(m_hkeySub, wstring(scopedstrKey)))
       {
 
          throw ::exception(error_failed);
@@ -568,7 +584,7 @@ namespace acme_windows
       DWORD dwMaxSubKeyLen;
 
       RegQueryInfoKey(
-      m_hkey,
+      m_hkeySub,
       nullptr,
       nullptr,
       nullptr,
@@ -583,7 +599,7 @@ namespace acme_windows
       i32 iSize = maximum(dwMaxSubKeyLen, 1024u);
       wchar_t *buf = (wchar_t *) malloc(iSize * 2);
       i32 iKey = 0;
-      while(::RegEnumKeyW(m_hkey, iKey, buf, iSize) == ERROR_SUCCESS)
+      while(::RegEnumKeyW(m_hkeySub, iKey, buf, iSize) == ERROR_SUCCESS)
       {
          stra.add(string(buf));
          iKey++;
@@ -593,28 +609,43 @@ namespace acme_windows
    }
 
 
-   registry::key::operator HKEY()
-   {
-      return m_hkey;
+   ::string_array registry::key::ls_key()
+   { 
+      
+      string_array stra; 
+      
+      ls_key(stra); 
+      
+      return stra; 
+   
    }
 
-   void registry::key::_ls_value(string_array & stra)
+
+   registry::key::operator HKEY()
    {
       
-      DWORD dwMaxValueNameLen = 16384;
+      return m_hkeySub;
+
+   }
+
+
+   void registry::key::_ls_data(string_array & stra)
+   {
+      
+      DWORD dwMaxDataNameLen = 16384;
 
       wstring hwstr;
       
-      auto pwsz=hwstr.get_buffer(dwMaxValueNameLen * 2);
+      auto pwsz=hwstr.get_buffer(dwMaxDataNameLen * 2);
 
       ::i32 l;
 
       DWORD dwIndex = 0;
 
-      DWORD dwLen = dwMaxValueNameLen;
+      DWORD dwLen = dwMaxDataNameLen;
 
-      while(ERROR_SUCCESS == (l = RegEnumValueW(
-                                  m_hkey,
+      while(ERROR_SUCCESS == (l = ::RegEnumValueW(
+                                  m_hkeySub,
                                   dwIndex,
          pwsz,
                                   &dwLen,
@@ -628,7 +659,7 @@ namespace acme_windows
 
          dwIndex++;
 
-         dwLen = dwMaxValueNameLen;
+         dwLen = dwMaxDataNameLen;
 
       }
       
@@ -637,43 +668,101 @@ namespace acme_windows
    }
 
 
-   ::i32 reg_query_value(HKEY hkey, const ::string & pszSubKey, string & str)
-   {
-
-      DWORD dwType = 0;
-      DWORD dwSize = 0;
-      ::i32 lResult = RegQueryValueExW(hkey, wstring(pszSubKey), nullptr, &dwType, nullptr, &dwSize);
-
-      if (lResult != ERROR_SUCCESS)
-         return lResult;
-      ASSERT(dwType == REG_SZ || dwType == REG_MULTI_SZ || dwType == REG_EXPAND_SZ);
-      if (dwType == REG_SZ || dwType == REG_MULTI_SZ || dwType == REG_EXPAND_SZ)
-      {
-
-         wstring wstr;
-         
-         auto pwsz = wstr.get_buffer(dwSize/sizeof(::wide_character));
-
-         lResult = RegQueryValueExW(hkey, wstring(pszSubKey), nullptr, &dwType, (::u8 *)(unichar *)pwsz, &dwSize);
-
-         wstr.release_buffer(dwSize / sizeof(::wide_character));
-
-         str = wstr;
-
-         //str.release_buffer(dwSize);
-
-         return lResult;
-
-      }
-      else
-      {
-
-         return ERROR_NOT_SUPPORTED;
-
-      }
-
+   ::string_array registry::key::ls_data()
+   { 
+      
+      string_array stra; 
+      
+      ls_data(stra); 
+      
+      return stra; 
+   
    }
 
+
+   //::i32 reg_query_data(HKEY hkey, const ::string & pszSubKey, string & str)
+   //{
+
+   //   DWORD dwType = 0;
+   //   DWORD dwSize = 0;
+   //   ::i32 lResult = RegQueryValueExW(hkey, wstring(pszSubKey), nullptr, &dwType, nullptr, &dwSize);
+
+   //   if (lResult != ERROR_SUCCESS)
+   //      return lResult;
+   //   ASSERT(dwType == REG_SZ || dwType == REG_MULTI_SZ || dwType == REG_EXPAND_SZ);
+   //   if (dwType == REG_SZ || dwType == REG_MULTI_SZ || dwType == REG_EXPAND_SZ)
+   //   {
+
+   //      wstring wstr;
+   //      
+   //      auto pwsz = wstr.get_buffer(dwSize/sizeof(::wide_character));
+
+   //      lResult = RegQueryValueExW(hkey, wstring(pszSubKey), nullptr, &dwType, (::u8 *)(unichar *)pwsz, &dwSize);
+
+   //      wstr.release_buffer(dwSize / sizeof(::wide_character));
+
+   //      str = wstr;
+
+   //      //str.release_buffer(dwSize);
+
+   //      return lResult;
+
+   //   }
+   //   else
+   //   {
+
+   //      return ERROR_NOT_SUPPORTED;
+
+   //   }
+
+   //}
+
+   
+   void registry::key::erase_tree()
+   {
+
+      //HKEY hkeySub = nullptr;
+
+      //if (ERROR_SUCCESS == ::RegOpenKeyW(hkey, wstring(name), &hkeySub))
+      {
+
+         u32 dwAlloc = 1026 * 64;
+
+         ::wstring wstr;
+
+         auto szKey = wstr.get_buffer(dwAlloc * 2);
+
+         u32 dwIndex = 0;
+
+         while (ERROR_SUCCESS == ::RegEnumKeyW(m_hkeySub, dwIndex, szKey, dwAlloc))
+         {
+
+            wstr.release_buffer();
+
+            key keySub;
+
+            if (!keySub._open(m_hkeySub, string(szKey)))
+            {
+
+               throw ::exception(error_failed);
+
+            }
+
+            keySub.erase_tree();
+
+            dwIndex++;
+
+         }
+
+         //memory_free_debug(szKey, 0);
+
+         ::RegCloseKey(m_hkeySub);
+
+      }
+
+      ::RegDeleteKeyW(m_hkeySub, wstring(m_strSubKey));
+
+   }
 
 
 } // namespace acme_windows
@@ -685,11 +774,11 @@ namespace acme_windows
 
 typedef
 LSTATUS
-(APIENTRY * LPFN_RegGetValueW) (
+(APIENTRY * LPFN_RegGetDataW) (
    HKEY hkey,
    const ::wide_character * pSubKey,
 
-   const ::wide_character * pValue,
+   const ::wide_character * pData,
 
    u32 dwFlags,
    LPDWORD pdwType,
@@ -698,16 +787,16 @@ LSTATUS
    );
 
 
-LPFN_RegGetValueW g_pfnRegGetValueW = nullptr;
+LPFN_RegGetDataW g_pfnRegGetDataW = nullptr;
 
 
-int WinRegGetValueW(HKEY hkey, const ::wide_character * pSubKey, const ::wide_character * lpValue, DWORD dwFlags, LPDWORD pdwType, PVOID pvData, LPDWORD pcbData)
+int WinRegGetDataW(HKEY hkey, const ::wide_character * pSubKey, const ::wide_character * lpData, DWORD dwFlags, LPDWORD pdwType, PVOID pvData, LPDWORD pcbData)
 {
 
-   if (g_pfnRegGetValueW != nullptr)
+   if (g_pfnRegGetDataW != nullptr)
    {
 
-      return g_pfnRegGetValueW(hkey, pSubKey, lpValue, dwFlags, pdwType, pvData, pcbData);
+      return g_pfnRegGetDataW(hkey, pSubKey, lpData, dwFlags, pdwType, pvData, pcbData);
 
    }
    else
@@ -772,15 +861,15 @@ CLASS_DECL_ACME_WINDOWS void reg_delete_tree_dup(HKEY hkey, const char * name)
 }
 
 
-CLASS_DECL_ACME_WINDOWS void windows_registry_initialize()
-{
-
-   HMODULE hmoduleAdvApi32 = ::LoadLibraryW(L"AdvApi32");
-
-   g_pfnRegGetValueW = (LPFN_RegGetValueW) ::GetProcAddress(hmoduleAdvApi32, "RegGetValueW");
-
-}
-
+//CLASS_DECL_ACME_WINDOWS void windows_registry_initialize()
+//{
+//
+//   HMODULE hmoduleAdvApi32 = ::LoadLibraryW(L"AdvApi32");
+//
+//   g_pfnRegGetDataW = (LPFN_RegGetDataW) ::GetProcAddress(hmoduleAdvApi32, "RegGetDataW");
+//
+//}
+//
 
 
 
@@ -803,14 +892,14 @@ string file_get_mozilla_firefox_plugin_container_path()
       DWORD dwType;
       DWORD dwData;
       dwData = 0;
-      if (::WinRegGetValueW(hkeyMozillaFirefox, nullptr, L"CurrentVersion", RRF_RT_REG_SZ, &dwType, nullptr, &dwData) != ERROR_SUCCESS)
+      if (::WinRegGetDataW(hkeyMozillaFirefox, nullptr, L"CurrentVersion", RRF_RT_REG_SZ, &dwType, nullptr, &dwData) != ERROR_SUCCESS)
       {
          goto ret1;
       }
 
       wstring wstrVersion;
       auto pwszVersion = wstrVersion.get_buffer(dwData);
-      if (::WinRegGetValueW(hkeyMozillaFirefox, nullptr, L"CurrentVersion", RRF_RT_REG_SZ, &dwType, pwszVersion, &dwData) != ERROR_SUCCESS)
+      if (::WinRegGetDataW(hkeyMozillaFirefox, nullptr, L"CurrentVersion", RRF_RT_REG_SZ, &dwType, pwszVersion, &dwData) != ERROR_SUCCESS)
       {
          wstrVersion.release_buffer();
          goto ret1;
@@ -820,14 +909,14 @@ string file_get_mozilla_firefox_plugin_container_path()
       wstring wstrMainSubKey = wstrVersion + L"\\Main";
       dwData = 0;
 
-      if (::WinRegGetValueW(hkeyMozillaFirefox, wstrMainSubKey, L"Install Directory", RRF_RT_REG_SZ, &dwType, nullptr, &dwData) != ERROR_SUCCESS)
+      if (::WinRegGetDataW(hkeyMozillaFirefox, wstrMainSubKey, L"Install Directory", RRF_RT_REG_SZ, &dwType, nullptr, &dwData) != ERROR_SUCCESS)
       {
          goto ret1;
       }
 
       wstring wstrDir;
       auto pwszDir = wstrDir.get_buffer(dwData);
-      if (::WinRegGetValueW(hkeyMozillaFirefox, wstrMainSubKey, L"Install Directory", RRF_RT_REG_SZ, &dwType, pwszDir, &dwData) != ERROR_SUCCESS)
+      if (::WinRegGetDataW(hkeyMozillaFirefox, wstrMainSubKey, L"Install Directory", RRF_RT_REG_SZ, &dwType, pwszDir, &dwData) != ERROR_SUCCESS)
       {
          wstrDir.release_buffer();
          goto ret1;

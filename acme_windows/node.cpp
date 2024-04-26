@@ -222,7 +222,7 @@ namespace acme_windows
 
       //}
 
-      windows_registry_initialize();
+      //windows_registry_initialize();
 
       //return estatus;
 
@@ -917,11 +917,11 @@ namespace acme_windows
       {
          ::file::path str = acmedirectory()->system() / "CrashDumps" / strModuleNameWithTheExeExtension;
          wstring wstr = str;
-         RegSetValueExW(k.m_hkey, L"DumpFolder", 0, REG_EXPAND_SZ, (::u8 *)wstr.c_str(), ::u32((wcslen(wstr) + 1) * sizeof(wchar_t)));
+         RegSetValueExW(k.m_hkeySub, L"DumpFolder", 0, REG_EXPAND_SZ, (::u8 *)wstr.c_str(), ::u32((wcslen(wstr) + 1) * sizeof(wchar_t)));
          ::u32 dw = 10;
-         RegSetValueExW(k.m_hkey, L"DumpCount", 0, REG_DWORD, (::u8 *)&dw, sizeof(dw));
+         RegSetValueExW(k.m_hkeySub, L"DumpCount", 0, REG_DWORD, (::u8 *)&dw, sizeof(dw));
          dw = 2;
-         RegSetValueExW(k.m_hkey, L"DumpType", 0, REG_DWORD, (::u8 *)&dw, sizeof(dw));
+         RegSetValueExW(k.m_hkeySub, L"DumpType", 0, REG_DWORD, (::u8 *)&dw, sizeof(dw));
 
       }
 
@@ -4074,6 +4074,32 @@ namespace acme_windows
    }
 
 
+   bool node::_is_tortoise_git_installed()
+   {
+
+      ::acme_windows::registry::key key;
+
+      if (!key._open(HKEY_LOCAL_MACHINE, "SOFTWARE\\TortoiseGit"))
+      {
+
+         return false;
+
+      }
+
+      ::string str;
+
+      if (!key._get("Directory", str) || str.is_empty())
+      {
+
+         return false;
+
+      }
+
+      return true;
+
+   }
+
+
    bool node::_is_code_exe_user_path_environment_variable_ok(::string* pstrCorrectPath)
    {
 
@@ -4115,6 +4141,58 @@ namespace acme_windows
 
       return false;
       
+   }
+
+
+   bool node::_is_coder_mode_enabled()
+   {
+
+      ::acme_windows::registry::key key;
+      
+      if (!key._open(HKEY_LOCAL_MACHINE, "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\AppModelUnlock"))
+      {
+
+         return false;
+
+      }
+
+      DWORD dwAllowDevelopmentWithoutDevLicense{};
+
+      if (!key._get("AllowDevelopmentWithoutDevLicense", dwAllowDevelopmentWithoutDevLicense))
+      {
+
+         return false;
+
+      }
+
+      return dwAllowDevelopmentWithoutDevLicense != 0;
+
+   }
+
+
+   void node::_enable_coder_mode(bool bEnable)
+   {
+
+      ::acme_windows::registry::key key;
+
+      if (!key._open(HKEY_LOCAL_MACHINE, "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\AppModelUnlock", true))
+      {
+
+         throw ::exception(error_failed);
+
+      }
+
+      DWORD dwAllowDevelopmentWithoutDevLicense = bEnable ? 1 : 0;
+
+      key._set("AllowDevelopmentWithoutDevLicense", dwAllowDevelopmentWithoutDevLicense);
+
+      ////if (!key._set("AllowDevelopmentWithoutDevLicense", dwAllowDevelopmentWithoutDevLicense))
+      //{
+
+      //   throw ::exception(error_failed);
+
+      //}
+
    }
 
 

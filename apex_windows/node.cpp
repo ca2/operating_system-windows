@@ -1773,7 +1773,7 @@ namespace apex_windows
          else
          {
 
-            keyKar.delete_value(strKey);
+            keyKar.erase_data(strKey);
 
          }
 
@@ -1809,7 +1809,7 @@ namespace apex_windows
          else
          {
 
-            keyKar.delete_value(pszKey);
+            keyKar.erase_data(pszKey);
 
          }
 
@@ -1850,7 +1850,7 @@ namespace apex_windows
          else
          {
 
-            keyKar.delete_value(pszKey);
+            keyKar.erase_data(pszKey);
 
          }
 
@@ -1887,7 +1887,7 @@ namespace apex_windows
          else
          {
 
-            keyKar.delete_value(pszKey);
+            keyKar.erase_data(pszKey);
 
          }
 
@@ -4128,7 +4128,7 @@ namespace apex_windows
          if (strProgId != strTargetProgId)
          {
 
-            regkey.delete_value("Hash");
+            regkey.erase_data("Hash");
 
             regkey.set("ProgId", strTargetProgId);
 
@@ -4149,7 +4149,7 @@ namespace apex_windows
 
             string strHash;
 
-            key.delete_value("Hash");
+            key.erase_data("Hash");
 
             key.set("ProgId", strTargetProgId);
 
@@ -4168,7 +4168,7 @@ namespace apex_windows
          if (strProgId != strTargetProgId)
          {
 
-            key.delete_value("Hash");
+            key.erase_data("Hash");
 
             key.set("ProgId", strTargetProgId);
 
@@ -4187,7 +4187,7 @@ namespace apex_windows
          if (strProgId != strTargetProgId)
          {
 
-            key.delete_value("Hash");
+            key.erase_data("Hash");
 
             key.set("ProgId", strTargetProgId);
 

@@ -281,7 +281,13 @@ namespace acme_windows
 
       bool _is_visual_studio_installed() override;
 
+      bool _is_tortoise_git_installed() override;
+
       bool _is_code_exe_user_path_environment_variable_ok(::string* pstrCorrectPath = nullptr) override;
+
+      bool _is_coder_mode_enabled() override;
+
+      void _enable_coder_mode(bool bEnable) override;
 
 //#endif
 
