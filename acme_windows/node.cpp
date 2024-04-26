@@ -3947,16 +3947,174 @@ namespace acme_windows
    }
 
 
-   // https://stackoverflow.com/questions/56419639/what-does-beta-use-unicode-utf-8-for-worldwide-language-support-actually-do
-   void node::_beta_use_unicode_utf8()
+   bool node::_has_beta_use_unicode_utf8()
    {
 
-      ::acme_windows::registry::key key(HKEY_LOCAL_MACHINE, "SYSTEM\\CurrentControlSet\\Control\\Nls\\CodePage");
+      ::acme_windows::registry::key key;
 
-      key.set("ACP", "65001");
-      key.set("OEMCP", "65001");
-      key.set("MACCP", "65001");
+      if (!key._open(HKEY_LOCAL_MACHINE, "SYSTEM\\CurrentControlSet\\Control\\Nls\\CodePage"))
+      {
 
+         return false;
+
+      }
+
+      {
+
+         ::string str;
+
+         if (!key._get("ACP", str) || str != "65001")
+         {
+
+            return false;
+
+         }
+
+      }
+
+      {
+
+         ::string str;
+
+         if (!key._get("OEMCP", str) || str != "65001")
+         {
+
+            return false;
+
+         }
+
+      }
+
+      {
+
+         ::string str;
+
+         if (!key._get("MACCP", str) || str != "65001")
+         {
+
+            return false;
+
+         }
+
+      }
+
+      return true;
+
+   }
+
+   // https://stackoverflow.com/questions/56419639/what-does-beta-use-unicode-utf-8-for-worldwide-language-support-actually-do
+   ::e_status node::_defer_beta_use_unicode_utf8()
+   {
+
+      if (_has_beta_use_unicode_utf8())
+      {
+
+         return ::success;
+
+      }
+
+      return _beta_use_unicode_utf8();
+
+   }
+
+
+   ::e_status node::_beta_use_unicode_utf8()
+   {
+
+      ::acme_windows::registry::key key;
+      
+      if (!key._open(HKEY_LOCAL_MACHINE, "SYSTEM\\CurrentControlSet\\Control\\Nls\\CodePage", true))
+      {
+
+         return error_failed;
+
+      }
+
+      try
+      {
+
+         key.set("ACP", "65001");
+         key.set("OEMCP", "65001");
+         key.set("MACCP", "65001");
+
+      }
+      catch (...)
+      {
+
+         return error_failed;
+
+      }
+
+      return error_need_restart_application_to_activate_feature;
+
+   }
+
+
+   bool node::_is_visual_studio_installed()
+   {
+
+      ::acme_windows::registry::key key;
+
+      if (key._open(HKEY_LOCAL_MACHINE, "SOFTWARE\\Microsoft\\VisualStudio\\17.0"))
+      {
+
+         return true;
+
+      }
+
+      if (key._open(HKEY_LOCAL_MACHINE, "SOFTWARE\\WOW6432Node\\Microsoft\\VisualStudio\\17.0"))
+      {
+
+         return true;
+
+      }
+
+      return false;
+
+   }
+
+
+   bool node::_is_code_exe_user_path_environment_variable_ok(::string* pstrCorrectPath)
+   {
+
+      auto str = get_user_permanent_environment_variable("PATH");
+
+      bool bChanged = false;
+
+      if (!str.case_insensitive_contains("C:\\operating_system\\bin"))
+      {
+
+         str += ";C:\\operating_system\\bin";
+
+         bChanged = true;
+
+      }
+
+      if (!str.case_insensitive_contains("C:\\operating_system\\tool-windows\\bin"))
+      {
+
+         str += ";C:\\operating_system\\tool-windows\\bin";
+
+         bChanged = true;
+
+      }
+
+      if (!bChanged)
+      {
+
+         return true;
+
+      }
+
+      if (::is_set(pstrCorrectPath))
+      {
+
+         *pstrCorrectPath = str;
+
+      }
+
+      return false;
+      
    }
 
 
@@ -4198,7 +4356,7 @@ namespace acme_windows
 
    }
 
-
+   
 
 } // namespace acme_windows
 

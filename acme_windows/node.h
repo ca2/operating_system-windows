@@ -271,11 +271,19 @@ namespace acme_windows
       void set_user_permanent_environment_variable(const ::scoped_string & scopedstr, const ::scoped_string & strPayload, bool bNoSystemNotify = false) override;
 
 
-#ifdef WINDOWS_DESKTOP
+//#ifdef WINDOWS_DESKTOP
 
-      void _beta_use_unicode_utf8() override;
+      ::e_status _defer_beta_use_unicode_utf8() override;
 
-#endif
+      virtual ::e_status _beta_use_unicode_utf8();
+
+      bool _has_beta_use_unicode_utf8() override;
+
+      bool _is_visual_studio_installed() override;
+
+      bool _is_code_exe_user_path_environment_variable_ok(::string* pstrCorrectPath = nullptr) override;
+
+//#endif
 
       void set_user_run_once(const ::scoped_string& scopedstrLabel, const ::scoped_string& scopedstrCommand) override;
      
