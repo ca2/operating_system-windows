@@ -4193,6 +4193,20 @@ namespace acme_windows
 
       //}
 
+      DWORD_PTR dwptrResult = 0;
+
+      ::SendMessageTimeoutW(HWND_BROADCAST, WM_SETTINGCHANGE,
+         0, (LPARAM)L"AppModelUnlock",
+         SMTO_ABORTIFHUNG | SMTO_NOTIMEOUTIFNOTHUNG, 10000, &dwptrResult);
+
+      ::SendMessageTimeoutW(HWND_BROADCAST, WM_SETTINGCHANGE,
+         0, (LPARAM)L"AllowDevelopmentWithoutDevLicense",
+         SMTO_ABORTIFHUNG | SMTO_NOTIMEOUTIFNOTHUNG, 10000, &dwptrResult);
+
+      ::preempt(5_s);
+
+      int iExitCode = this->::particle::node()->command_system("gpupdate /force", 5_min);
+
    }
 
 
