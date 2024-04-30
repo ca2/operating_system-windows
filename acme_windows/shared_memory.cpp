@@ -115,7 +115,7 @@ shared_memory::~shared_memory()
 void shared_memory::SetHandle(HGLOBAL hGlobalMemory, bool bAllowGrow)
 {
 
-   UNREFERENCED_PARAMETER(bAllowGrow);
+   __UNREFERENCED_PARAMETER(bAllowGrow);
 
    ASSERT(m_hGlobalMemory == nullptr);        // do once only
 

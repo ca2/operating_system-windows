@@ -6,8 +6,8 @@
 #endif
 BOOL WINAPI DllMain(HINSTANCE hInstance, DWORD dwReason, LPVOID lpReserved)
 {
-   UNREFERENCED_PARAMETER(hInstance);
-   UNREFERENCED_PARAMETER(lpReserved);
+   __UNREFERENCED_PARAMETER(hInstance);
+   __UNREFERENCED_PARAMETER(lpReserved);
 
    if (dwReason == DLL_PROCESS_ATTACH)
    {

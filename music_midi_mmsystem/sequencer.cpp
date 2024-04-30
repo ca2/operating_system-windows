@@ -937,7 +937,7 @@ namespace music
          void sequencer::OnDone(HMIDISTRM hmidistream, LPMIDIHDR lpmidihdr)
          {
 
-            UNREFERENCED_PARAMETER(hmidistream);
+            __UNREFERENCED_PARAMETER(hmidistream);
 
             ASSERT(lpmidihdr != nullptr);
 
@@ -1133,8 +1133,8 @@ namespace music
          void CALLBACK sequencer::MidiOutProc(HMIDIOUT hmo, UINT wMsg, DWORD_PTR dwInstance, DWORD_PTR dwParam1, DWORD_PTR dwParam2)
          {
 
-            UNREFERENCED_PARAMETER(hmo);
-            UNREFERENCED_PARAMETER(dwParam2);
+            __UNREFERENCED_PARAMETER(hmo);
+            __UNREFERENCED_PARAMETER(dwParam2);
 
             LPMIDIHDR lpmidihdr     = (LPMIDIHDR) dwParam1;
             sequencer * psequence    = (sequencer *)dwInstance;
@@ -1802,8 +1802,8 @@ namespace music
          )
          {
 
-            UNREFERENCED_PARAMETER(tickMax);
-            UNREFERENCED_PARAMETER(cbPrerollNomimalMax);
+            __UNREFERENCED_PARAMETER(tickMax);
+            __UNREFERENCED_PARAMETER(cbPrerollNomimalMax);
 
             ::e_status estatus;
 
@@ -1874,7 +1874,7 @@ namespace music
             u32 cbPrerollNominalMax)
          {
 
-            UNREFERENCED_PARAMETER(tickMax);
+            __UNREFERENCED_PARAMETER(tickMax);
 
             if (pevent->GetFlags() & 1)
             {

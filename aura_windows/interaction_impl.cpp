@@ -280,8 +280,8 @@ namespace aura_windows
 
    //bool interaction_impl::_EnableToolTips(bool bEnable, ::u32 nFlag)
    //{
-   //   UNREFERENCED_PARAMETER(bEnable);
-   //   UNREFERENCED_PARAMETER(nFlag);
+   //   __UNREFERENCED_PARAMETER(bEnable);
+   //   __UNREFERENCED_PARAMETER(nFlag);
    //   return false;
    //}
 
@@ -422,7 +422,7 @@ namespace aura_windows
 
    //bool interaction_impl::OnCommand(::user::message * pusermessage)
    //{
-   //   UNREFERENCED_PARAMETER(pusermessage);
+   //   __UNREFERENCED_PARAMETER(pusermessage);
    //   return false;
    //}
 
@@ -659,7 +659,7 @@ namespace aura_windows
 //
 //#ifdef WINDOWS_DESKTOP
 //
-//      UNREFERENCED_PARAMETER(window);
+//      __UNREFERENCED_PARAMETER(window);
 //
 //      if (!::SetCursor(hcursor))
 //      {
@@ -894,7 +894,7 @@ namespace aura_windows
 //   void interaction_impl::OnDevModeChange(__in char * pDeviceName)
 //
 //   {
-//      UNREFERENCED_PARAMETER(pDeviceName);
+//      __UNREFERENCED_PARAMETER(pDeviceName);
 //
 //      throw ::interface_only();
 //      /*application* pApp = ::auraacmesystem();
@@ -1033,7 +1033,7 @@ namespace aura_windows
    //void interaction_impl::_001OnProdevianSynch(::message::message * pmessage)
    //{
 
-   //   UNREFERENCED_PARAMETER(pmessage);
+   //   __UNREFERENCED_PARAMETER(pmessage);
 
    //}
 

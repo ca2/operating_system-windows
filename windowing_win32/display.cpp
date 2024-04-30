@@ -1100,8 +1100,8 @@ namespace windowing_win32
    void display::monitor_enum(HMONITOR hmonitor, HDC hdcMonitor, LPRECT prcMonitor)
    {
 
-      UNREFERENCED_PARAMETER(hdcMonitor);
-      UNREFERENCED_PARAMETER(prcMonitor);
+      __UNREFERENCED_PARAMETER(hdcMonitor);
+      __UNREFERENCED_PARAMETER(prcMonitor);
 
       m_monitorinfoa.set_size(m_monitorinfoa.get_size() + 1);
 
@@ -1189,7 +1189,7 @@ namespace windowing_win32
    //bool user::impl_set_os_desktop_theme(string strTheme)
    //{
 
-   //   UNREFERENCED_PARAMETER(strTheme);
+   //   __UNREFERENCED_PARAMETER(strTheme);
 
    //   return true;
 

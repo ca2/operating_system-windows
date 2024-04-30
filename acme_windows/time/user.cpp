@@ -23,7 +23,7 @@ namespace user
 //   void _os_process_user_theme(string strTheme)
 //   {
 //
-//      UNREFERENCED_PARAMETER(strTheme);
+//      __UNREFERENCED_PARAMETER(strTheme);
 //
 //   }
 

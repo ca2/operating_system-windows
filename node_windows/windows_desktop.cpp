@@ -23,8 +23,8 @@
 ////   _In_ int       nCmdShow)
 //   int windows_desktop1_main(HINSTANCE hInstance,int       nCmdShow)
 //{
-//   //UNREFERENCED_PARAMETER(hPrevInstance);
-//   //UNREFERENCED_PARAMETER(lpCmdLine);
+//   //__UNREFERENCED_PARAMETER(hPrevInstance);
+//   //__UNREFERENCED_PARAMETER(lpCmdLine);
 //
 //   // TODO: Place code here.
 //
@@ -150,7 +150,7 @@
 //// Message handler for about box.
 //INT_PTR CALLBACK About(HWND hDlg, ::u32 message, wparam wParam, lparam lParam)
 //{
-//   UNREFERENCED_PARAMETER(lParam);
+//   __UNREFERENCED_PARAMETER(lParam);
 //   switch (message)
 //   {
 //   case WM_INITDIALOG:

@@ -8,7 +8,7 @@
 
 #define boolean windows_boolean
 #undef ERROR
-#undef UNREFERENCED_PARAMETER
+#undef __UNREFERENCED_PARAMETER
 
 
 #define NOMINMAX

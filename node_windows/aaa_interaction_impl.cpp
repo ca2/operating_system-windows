@@ -410,7 +410,7 @@ namespace windows
    //void interaction_impl::on_message_destroy(::message::message * pmessage)
    //{
 
-   //   UNREFERENCED_PARAMETER(pmessage);
+   //   __UNREFERENCED_PARAMETER(pmessage);
 
    //   //__release(m_pthreadUserImpl REFERENCING_DEBUGGING_COMMA_THIS);
 
@@ -604,8 +604,8 @@ namespace windows
 
    //bool interaction_impl::_EnableToolTips(bool bEnable, ::u32 nFlag)
    //{
-   //   UNREFERENCED_PARAMETER(bEnable);
-   //   UNREFERENCED_PARAMETER(nFlag);
+   //   __UNREFERENCED_PARAMETER(bEnable);
+   //   __UNREFERENCED_PARAMETER(nFlag);
    //   return false;
    //}
 
@@ -706,8 +706,8 @@ namespace windows
 
    //void interaction_impl::WinHelp(uptr dwData, ::u32 nCmd)
    //{
-   //   UNREFERENCED_PARAMETER(dwData);
-   //   UNREFERENCED_PARAMETER(nCmd);
+   //   __UNREFERENCED_PARAMETER(dwData);
+   //   __UNREFERENCED_PARAMETER(nCmd);
    //   throw ::interface_only();
 
    //   /*      application* pApp = ::auraacmesystem();
@@ -792,8 +792,8 @@ namespace windows
 
    //void interaction_impl::WinHelpInternal(uptr dwData, ::u32 nCmd)
    //{
-   //   UNREFERENCED_PARAMETER(dwData);
-   //   UNREFERENCED_PARAMETER(nCmd);
+   //   __UNREFERENCED_PARAMETER(dwData);
+   //   __UNREFERENCED_PARAMETER(nCmd);
    //   throw ::interface_only();
    //   /*
    //   application* pApp = ::auraacmesystem();
@@ -828,7 +828,7 @@ namespace windows
 
    //bool interaction_impl::OnCommand(::user::message * pusermessage)
    //{
-   //   UNREFERENCED_PARAMETER(pusermessage);
+   //   __UNREFERENCED_PARAMETER(pusermessage);
    //   return false;
    //}
 
@@ -1111,7 +1111,7 @@ namespace windows
 //   void interaction_impl::OnDevModeChange(__in char * pDeviceName)
 //
 //   {
-//      UNREFERENCED_PARAMETER(pDeviceName);
+//      __UNREFERENCED_PARAMETER(pDeviceName);
 //
 //      throw ::interface_only();
 //      /*application* pApp = ::auraacmesystem();
@@ -1250,7 +1250,7 @@ namespace windows
    //void interaction_impl::_001OnProdevianSynch(::message::message * pmessage)
    //{
 
-   //   UNREFERENCED_PARAMETER(pmessage);
+   //   __UNREFERENCED_PARAMETER(pmessage);
 
    //}
 
