@@ -760,6 +760,7 @@ namespace aura_windows
 
 
       void _raw_client_to_screen(::point_i32 & point) override;
+      void _raw_screen_to_client(::point_i32 & point) override;
 
 
    };
