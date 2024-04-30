@@ -6,6 +6,7 @@
 #include "acme/platform/application.h"
 #include "acme/platform/node.h"
 #include "acme/primitive/string/str.h"
+#include "registry.h"
 
 
 namespace acme_windows
@@ -353,7 +354,6 @@ namespace acme_windows
 
 
 
-
       string str(scopedstr);
 
 
@@ -370,12 +370,28 @@ namespace acme_windows
 
 
       }
+      
       ::string str2;
-      if (str1.is_empty() || str1.case_insensitive_ends(".cmd"))
+
+      if (str.begins_eat("powershell://"))
       {
-         ::string strCmd = node()->get_environment_variable("ComSpec");
+
+         auto strPowerShell = node()->_get_power_shell_path().windows_path();
+
+         str1 = strPowerShell;
+
+         str2 = "\""+ strPowerShell +"\" /c " + scopedstr;
+
+      }
+      else if (str1.is_empty() || str1.case_insensitive_ends(".cmd"))
+      {
+
+         ::string strCmd = node()->_get_cmd_path().windows_path();
+
          str1 = strCmd;
+
          str2 = "\"" + strCmd + "\" /c " + scopedstr;
+
       }
       else
       {
@@ -400,7 +416,18 @@ namespace acme_windows
       //m_si.dwFlags |= STARTF_USESHOWWINDOW;
 
 
+      ::wstring wstrWorkingDirectory;
+      
+      wstrWorkingDirectory = m_pathWorkingDirectory.windows_path();
 
+      LPCWSTR pszWorkingDirectory = nullptr;
+
+      if (wstrWorkingDirectory.has_char())
+      {
+
+         pszWorkingDirectory = wstrWorkingDirectory;
+
+      }
 
       if (!CreateProcessW(
          (WCHAR*)wstr1.c_str(),
@@ -410,7 +437,7 @@ namespace acme_windows
          TRUE,
          m_dwCreationFlags,
          NULL,
-         NULL,
+         pszWorkingDirectory,
          &m_si.StartupInfo,
          &m_pi))
       {

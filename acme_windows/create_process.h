@@ -43,6 +43,8 @@ namespace acme_windows
 
       DWORD m_dwCreationFlags;
 
+      ::file::path m_pathWorkingDirectory;
+
 
       create_process();
       ~create_process();

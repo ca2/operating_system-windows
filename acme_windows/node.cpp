@@ -87,7 +87,9 @@ namespace acme_windows
 
       wstring        m_wstrParams;
 
-      shell_execute(const scoped_string & strFile, const scoped_string & strParams)
+      wstring        m_wstrWorkingDirectory;
+
+      shell_execute(const scoped_string& strFile, const scoped_string& strParams, const ::file::path& pathWorkingDirectory = {})
       {
 
          ::zero(this, sizeof(SHELLEXECUTEINFOW));
@@ -98,7 +100,6 @@ namespace acme_windows
 
          lpFile = m_wstrFile;
 
-
          if (strParams.has_char())
          {
 
@@ -106,6 +107,14 @@ namespace acme_windows
 
             lpParameters = m_wstrParams;
 
+         }
+
+         if (pathWorkingDirectory.has_char())
+         {
+
+            m_wstrWorkingDirectory = pathWorkingDirectory.windows_path();
+
+            lpDirectory = m_wstrWorkingDirectory;
 
          }
 
@@ -115,7 +124,7 @@ namespace acme_windows
       bool async()
       {
 
-         if (::ShellExecuteExW(this))
+         if (!::ShellExecuteExW(this))
          {
 
             return false;
@@ -127,7 +136,7 @@ namespace acme_windows
       }
 
 
-      bool synchronization_object(const class time & timeWait)
+      bool synchronization_object(const class time & timeWait, DWORD & dwExitCode)
       {
 
          fMask = SEE_MASK_NOASYNC | SEE_MASK_NOCLOSEPROCESS;
@@ -143,7 +152,7 @@ namespace acme_windows
 
          DWORD dwError = ::GetLastError();
 
-         DWORD dwExitCode = 0;
+         dwExitCode = 0;
 
          while (true)
          {
@@ -3184,10 +3193,13 @@ namespace acme_windows
    //}
 
 
-   int node::command_system(const ::scoped_string & scopedstr, const ::trace_function & tracefunction)
+   int node::command_system(const ::scoped_string & scopedstr, const ::trace_function & tracefunction, const ::file::path & pathWorkingDirectory)
    {
 
       auto pcreateprocess = __create_new < ::acme_windows::create_process>();
+
+
+      pcreateprocess->m_pathWorkingDirectory = pathWorkingDirectory;
 
 
       pcreateprocess->initialize_stdout();
@@ -3599,47 +3611,64 @@ namespace acme_windows
    }
 
 
-   void node::shell_execute_async(const scoped_string & scopedstrFile, const scoped_string & scopedstrParams)
+   void node::shell_execute_async(const scoped_string & scopedstrFile, const scoped_string & scopedstrParams, const ::file::path& pathWorkingDirectory)
    {
 
-      shell_execute execute(scopedstrFile, scopedstrParams);
+      shell_execute execute(scopedstrFile, scopedstrParams, pathWorkingDirectory);
 
       execute.async();
 
    }
 
 
-   void node::shell_execute_sync(const scoped_string & scopedstrFile, const scoped_string & scopedstrParams, const class time & timeTimeout)
+   int node::shell_execute_sync(const scoped_string & scopedstrFile, const scoped_string & scopedstrParams, const class time & timeTimeout, const ::file::path& pathWorkingDirectory)
    {
 
-      shell_execute execute(scopedstrFile, scopedstrParams);
+      shell_execute execute(scopedstrFile, scopedstrParams, pathWorkingDirectory);
 
-      execute.synchronization_object(timeTimeout);
+      DWORD dwExitCode = 0;
+
+      if (!execute.synchronization_object(timeTimeout, dwExitCode))
+      {
+
+         throw ::exception(error_failed);
+
+      }
+
+      return dwExitCode;
 
    }
 
 
-   void node::root_execute_async(const scoped_string & scopedstrFile, const scoped_string & scopedstrParams)
+   void node::root_execute_async(const scoped_string & scopedstrFile, const scoped_string & scopedstrParams, const ::file::path& pathWorkingDirectory)
    {
 
-      shell_execute execute(scopedstrFile, scopedstrParams);
+      shell_execute execute(scopedstrFile, scopedstrParams, pathWorkingDirectory);
 
       execute.lpVerb = L"RunAs";
-
 
       execute.async();
 
    }
 
 
-   void node::root_execute_sync(const scoped_string & scopedstrFile, const scoped_string & scopedstrParams, const class time & timeTimeout)
+   int node::root_execute_sync(const scoped_string & scopedstrFile, const scoped_string & scopedstrParams, const class time & timeTimeout, const ::file::path& pathWorkingDirectory)
    {
 
-      shell_execute execute(scopedstrFile, scopedstrParams);
+      shell_execute execute(scopedstrFile, scopedstrParams, pathWorkingDirectory);
 
       execute.lpVerb = L"RunAs";
 
-      execute.synchronization_object(timeTimeout);
+      DWORD dwExitCode = 0;
+
+      if (!execute.synchronization_object(timeTimeout, dwExitCode))
+      {
+
+         throw ::exception(error_failed);
+
+      }
+
+      return dwExitCode;
 
    }
 
@@ -4100,6 +4129,32 @@ namespace acme_windows
    }
 
 
+   bool node::_is_smart_git_installed()
+   {
+
+      ::acme_windows::registry::key key;
+
+      if (!key._open(HKEY_LOCAL_MACHINE, "SOFTWARE\\SmartGit"))
+      {
+
+         return false;
+
+      }
+
+      ::string str;
+
+      if (!key._get("ApplicationName", str) || str.is_empty())
+      {
+
+         return false;
+
+      }
+
+      return true;
+
+   }
+
+
    bool node::_is_code_exe_user_path_environment_variable_ok(::string* pstrCorrectPath)
    {
 
@@ -4448,7 +4503,42 @@ namespace acme_windows
 
    }
 
-   
+
+   ::file::path node::_get_power_shell_path()
+   {
+
+      registry::key key(HKEY_CLASSES_ROOT, "Microsoft.PowerShellConsole.1");
+
+      ::string str;
+
+      key.get("FriendlyTypeName", str);
+
+      str.begins_eat("@");
+
+      auto r = str();
+
+      ::string str2 = r.consume_quoted_value();
+
+      auto psystem = system();
+
+      auto pnode = psystem->node();
+
+      ::string strPowerShell = pnode->expand_environment_variables(str2);
+
+      return strPowerShell;
+
+   }
+
+
+   ::file::path node::_get_cmd_path()
+   {
+
+      ::string strCmd = get_environment_variable("ComSpec");
+
+      return strCmd;
+
+   }
+
 
 } // namespace acme_windows
 

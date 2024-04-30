@@ -2621,7 +2621,7 @@ namespace draw2d_gdiplus
 
       //pfont->GetFamily(&family);
 
-      double dHeight = pgdiplusfontfamily->GetEmHeight(iStyle);
+      double dEmHeight = pgdiplusfontfamily->GetEmHeight(iStyle);
 
       double dCellAscent = pgdiplusfontfamily->GetCellAscent(iStyle);
 
@@ -2629,17 +2629,21 @@ namespace draw2d_gdiplus
 
       double dLineSpacing = pgdiplusfontfamily->GetLineSpacing(iStyle);
 
-      double dSize = pgdiplusfont->GetSize();
+      double dFontSize = pgdiplusfont->GetSize();
 
-      double dFontHeight = pgdiplusfont->GetHeight((Gdiplus::REAL)pgraphics->get_dpiy());
+      auto pg = (Gdiplus::Graphics*)pgraphics->get_os_data();
 
-      pmetric->m_dAscent = dSize * dCellAscent / dHeight;
+      double dFontHeight = pgdiplusfont->GetHeight(pg);
 
-      pmetric->m_dDescent = dSize * dCellDescent / dHeight;
+      auto dpiY = pg->GetDpiY();
+      //m_pgraphics->DrawLine(m_ppen->get_os_data < Gdiplus::Pen* >(this), Gdiplus::PointF((Gdiplus::REAL)m_point.x(), (Gdiplus::REAL)m_point.y()), Gdiplus::PointF((Gdiplus::REAL)x, (Gdiplus::REAL)y));
+      pmetric->m_dAscent = dFontSize * dCellAscent * pg->GetDpiY() / (dEmHeight * 72.0 + 0.5);
+
+      pmetric->m_dDescent = dFontSize * dCellDescent * pg->GetDpiY() / (dEmHeight * 72.0 + 0.5);
 
       pmetric->m_dHeight = dFontHeight;
 
-      double dLineSpacing2 = maximum(dFontHeight, dSize * dLineSpacing / dHeight);
+      double dLineSpacing2 = maximum(dFontHeight, dFontSize * dLineSpacing * pg->GetDpiY() / (dEmHeight *72.0 + 0.5));
 
       pmetric->m_dInternalLeading = 0;
 
@@ -6930,6 +6934,36 @@ namespace draw2d_gdiplus
       //   }
 
       //}
+
+
+
+#define DRAW_BASE_LINE 0
+
+#if DRAW_BASE_LINE
+
+      {
+         auto s = get_text_extent(scopedstr);
+
+         auto a = m_pfont->get_ascent(this);
+
+         ::point_f64 p1(x, y+a);
+         ::point_f64 p2(x + s.cx(), y+a);
+
+         auto ppen = __create < ::draw2d::pen >();
+
+         ppen->m_color = ::color::red;
+
+         ppen->m_dWidth = 1.0;
+
+         ::draw2d::graphics::set(ppen);
+
+         ::draw2d::graphics::draw_line(p1, p2);
+
+
+      }
+
+#endif
+
 
 
       Gdiplus::StringFormat format(Gdiplus::StringFormat::GenericTypographic());
