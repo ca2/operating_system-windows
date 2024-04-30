@@ -386,7 +386,7 @@ namespace windows
       {
 
 
-         index iStart = listing.get_size();
+         ::raw::index iStart = listing.get_size();
 
 
          {
@@ -478,7 +478,7 @@ namespace windows
 
          }
 
-         for (index i = iStart; i < listing.get_size(); i++)
+         for (::raw::index i = iStart; i < listing.get_size(); i++)
          {
 
             listing[i].m_iRelative = listing.m_pathUser.get_length() + 1;
@@ -573,7 +573,7 @@ namespace windows
 
          // to finish;
 
-         index iStart = listing.get_size();
+         ::raw::index iStart = listing.get_size();
 
          {
 
@@ -667,7 +667,7 @@ namespace windows
 
          }
 
-         for (index i = iStart; i < listing.get_size(); i++)
+         for (::raw::index i = iStart; i < listing.get_size(); i++)
          {
 
             listing[i].m_iRelative = listing.m_pathUser.get_length() + 1;
@@ -905,7 +905,7 @@ namespace windows
 
       path.ascendants_path(stra);
 
-      index i = stra.get_upper_bound();
+      ::raw::index i = stra.get_upper_bound();
 
       for (; i >= 0; i--)
       {

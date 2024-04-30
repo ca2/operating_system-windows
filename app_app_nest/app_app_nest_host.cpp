@@ -621,7 +621,7 @@ namespace ca2plugin_container
                   {
 
                      static tick dwLast = 0;
-                     static ::count c = 0;
+                     static ::raw::count c = 0;
                      static double dLast = 0.0;
 
                      c++;

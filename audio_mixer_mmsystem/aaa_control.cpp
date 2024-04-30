@@ -320,7 +320,7 @@
                return nullptr;
             }
 
-            ::audio_mixer_user::control * control::GetControlByIndex(::index iIndex)
+            ::audio_mixer_user::control * control::GetControlByIndex(::raw::index iIndex)
             {
                return this->element_at(iIndex);
             }
@@ -470,7 +470,7 @@
          else if((m_mixercontrol.dwControlType & MIXERCONTROL_CT_UNITS_MASK) == MIXERCONTROL_CT_UNITS_BOOLEAN)
          {
 
-            ::index i = 0;
+            ::raw::index i = 0;
 
             for(auto & pusercontrol : m_usercontrola)
             {
@@ -874,7 +874,7 @@
                         m_mixercontroldetails.cChannels = 1;
 
 
-                     ::index iSel = pmutecontrol->get_data()->m_iIndex;
+                     ::raw::index iSel = pmutecontrol->get_data()->m_iIndex;
 
                      //m_mixercontroldetails.cChannels      = cChannels;
                      m_mixercontroldetails.cMultipleItems = m_mixercontrol.cMultipleItems;

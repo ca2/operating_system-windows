@@ -477,11 +477,11 @@ CLASS_DECL_ACME string defer_solve_relative(const scoped_string & strRelative, c
    if (strRelative.begins("\\\\"))
       return solve_relative(strRelative);
 
-   index iFind = strRelative.find(":\\");
+   ::raw::index iFind = strRelative.find(":\\");
 
    if (iFind >= 0)
    {
-      index i = 0;
+      ::raw::index i = 0;
       for (; i < iFind; i++)
       {
          if (!ansi_char_isalpha(strRelative[i]) && !ansi_char_isdigit(strRelative[i]))

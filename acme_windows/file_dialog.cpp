@@ -105,7 +105,7 @@ namespace acme_windows
 
                __wide_append(memoryFilter, "Supported file types (");
 
-               for (::index i = 0; i < pdialog->m_filedialogfiltera.size(); ++i) 
+               for (::raw::index i = 0; i < pdialog->m_filedialogfiltera.size(); ++i) 
                {
                   
                   //__wide_append(memoryFilter, "*.");
@@ -127,7 +127,7 @@ namespace acme_windows
 
                __wide_append_null(memoryFilter);
 
-               for (::index i = 0; i < pdialog->m_filedialogfiltera.size(); ++i) 
+               for (::raw::index i = 0; i < pdialog->m_filedialogfiltera.size(); ++i) 
                {
                
                   //__wide_append(memoryFilter, "*.");

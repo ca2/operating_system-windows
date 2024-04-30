@@ -41,7 +41,7 @@ namespace windows
 
 
          bool erase(HWND hwnd);
-         index find(HWND hwnd);
+         ::raw::index find(HWND hwnd);
          void EnumDescendants();
          Array & operator = (hwnd_array & hwnda);
 

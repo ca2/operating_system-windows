@@ -709,7 +709,7 @@ namespace draw2d_gdiplus
       
       pointa.set_size(lines.get_count());
 
-      for (::index i = 0; i < pointa.get_size(); i++)
+      for (::raw::index i = 0; i < pointa.get_size(); i++)
       {
 
          copy(pointa[i], lines[i]);
@@ -730,7 +730,7 @@ namespace draw2d_gdiplus
 
       pointa.set_size(polygon.get_count());
 
-      for (::index i = 0; i < pointa.get_size(); i++)
+      for (::raw::index i = 0; i < pointa.get_size(); i++)
       {
 
          copy(pointa[i], polygon[i]);

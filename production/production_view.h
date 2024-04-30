@@ -30,11 +30,11 @@ namespace production
       i32                     m_iItemHeight;
       i32                     m_iTaskOffset;
 
-      ::index                     m_iV;
+      ::raw::index                     m_iV;
       i32                     m_iVH;
       i32                     m_iVW;
       // veriwell ca2os ca2 out world stage
-      ::index                     m_iVs;
+      ::raw::index                     m_iVs;
       i32                     m_iVsH;
       i32                     m_iVsW;
       ::image_pointer             m_pimageV;

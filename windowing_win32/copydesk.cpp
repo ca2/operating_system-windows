@@ -227,7 +227,7 @@ namespace windowing_win32
       for (i32 i = 0; i < patha.get_size(); i++)
       {
 
-         ::count c = utf8_to_unicode_count(patha[i]) + 1;
+         ::raw::count c = utf8_to_unicode_count(patha[i]) + 1;
 
          utf8_to_unicode(pwsz, c, patha[i]);
 
@@ -250,7 +250,7 @@ namespace windowing_win32
    HGLOBAL copydesk::hglobal_get_wide_text(const ::string & str)
    {
 
-      ::count c = utf8_to_unicode_count(str) + 1;
+      ::raw::count c = utf8_to_unicode_count(str) + 1;
       HGLOBAL hglb = ::GlobalAlloc(GMEM_MOVEABLE, (SIZE_T) (c * sizeof(WCHAR)));
       unichar * pwsz = (unichar *) ::GlobalLock(hglb);
 
@@ -346,7 +346,7 @@ namespace windowing_win32
    }
 
 
-   ::count copydesk::_get_file_count()
+   ::raw::count copydesk::_get_file_count()
    {
 
       if(m_cFileCount < 0)
@@ -375,7 +375,7 @@ namespace windowing_win32
 
                HDROP hdrop = (HDROP) ::GetClipboardData(CF_HDROP);
 
-               ::count c = 0;
+               ::raw::count c = 0;
 
                if (hdrop != nullptr)
                {
@@ -402,7 +402,7 @@ namespace windowing_win32
    bool copydesk::_get_filea(::file::path_array & patha, enum_op & eop)
    {
 
-      ::count c = _get_file_count();
+      ::raw::count c = _get_file_count();
 
       if (c <= 0)
       {
@@ -422,7 +422,7 @@ namespace windowing_win32
 
       HDROP hdrop = (HDROP) ::GetClipboardData(CF_HDROP);
 
-      for (::index i = 0; i < c; i++)
+      for (::raw::index i = 0; i < c; i++)
       {
 
          ::u32 uLen = ::DragQueryFileW(hdrop, (::u32) i, nullptr, 0);

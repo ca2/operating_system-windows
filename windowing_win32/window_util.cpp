@@ -374,13 +374,13 @@ namespace windows
       return *this;
    }
 
-   index hwnd_tree::compare_hwnd(const hwnd_tree * ptree1, const hwnd_tree * ptree2)
+   ::raw::index hwnd_tree::compare_hwnd(const hwnd_tree * ptree1, const hwnd_tree * ptree2)
    {
-      return (index)((u8 *)(void *)ptree1->m_hwnd - (u8 *)(void *)ptree2->m_hwnd);
+      return (::raw::index)((u8 *)(void *)ptree1->m_hwnd - (u8 *)(void *)ptree2->m_hwnd);
    }
 
 
-   index hwnd_tree::Array::find(HWND hwnd)
+   ::raw::index hwnd_tree::Array::find(HWND hwnd)
    {
 
       return comp_find_first(hwnd_tree(hwnd), &hwnd_tree::compare_hwnd);

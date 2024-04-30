@@ -501,7 +501,7 @@ Opened:
 
          m_estate = e_state_playing;
 
-         for(index i = 0; i < out_get_buffer()->GetBufferCount(); i++)
+         for(::raw::index i = 0; i < out_get_buffer()->GetBufferCount(); i++)
          {
 
             out_free(i);

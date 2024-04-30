@@ -1249,7 +1249,7 @@ namespace windowing_win32
    //}
 
 
-   //index shell::GetCSIDLSort(index iCsidl)
+   //index shell::GetCSIDLSort(::raw::index iCsidl)
    //{
    //   switch (iCsidl)
    //   {

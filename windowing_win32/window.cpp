@@ -2470,9 +2470,9 @@ namespace windowing_win32
       {
 
          ::i32 iArea = 0;
-         ::index iFound = -1;
+         ::raw::index iFound = -1;
 
-         for (::index i = 0; i < this->get_count(); i++)
+         for (::raw::index i = 0; i < this->get_count(); i++)
          {
 
             ::rectangle_i32 rIntersect;
@@ -6824,7 +6824,7 @@ namespace windowing_win32
 
       HWND hwnd = get_hwnd();
 
-      index iFind = phwnda->find_first(hwnd);
+      ::raw::index iFind = phwnda->find_first(hwnd);
 
       if (iFind < 0)
       {

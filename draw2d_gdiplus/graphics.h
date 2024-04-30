@@ -256,7 +256,7 @@ namespace draw2d_gdiplus
       virtual void line_to(double x, double y) override;
       //bool line_to(const ::point_f64& point) override;
       //  bool line_to(const ::point_i32 & point) override;
-      virtual void polyline(const ::point_f64 * ppoint,count nCount) override;
+      virtual void polyline(const ::point_f64 * ppoint, ::raw::count nCount) override;
 
 
       using ::draw2d::graphics::arc;
@@ -273,16 +273,16 @@ namespace draw2d_gdiplus
       //i32 GetArcDirection() override;
       //i32 SetArcDirection(i32 nArcDirection) override;
 
-      virtual void polydraw(const ::point_f64 * ppoint, const BYTE* lpTypes, ::count nCount) override;
+      virtual void polydraw(const ::point_f64 * ppoint, const BYTE* lpTypes, ::raw::count nCount) override;
 
-      virtual void polyline_to(const ::point_f64 * ppoint,count nCount) override;
+      virtual void polyline_to(const ::point_f64 * ppoint, ::raw::count nCount) override;
 
-      virtual void poly_polyline(const ::point_f64 * ppoint, const int * lpPolyPoints, ::count nCount) override;
+      virtual void poly_polyline(const ::point_f64 * ppoint, const int * lpPolyPoints, ::raw::count nCount) override;
 
 
-      virtual void poly_bezier(const ::point_f64 * ppoint, ::count nCount) override;
+      virtual void poly_bezier(const ::point_f64 * ppoint, ::raw::count nCount) override;
 
-      virtual void poly_bezier_to(const ::point_f64 * ppoint, ::count nCount) override;
+      virtual void poly_bezier_to(const ::point_f64 * ppoint, ::raw::count nCount) override;
 
 
 
@@ -338,10 +338,10 @@ namespace draw2d_gdiplus
       void Pie(const rectangle_f64 &  prectangle, const point_f64 & pointStart, const point_f64 & pointEnd) override;
 
 
-      //bool draw_polygon(const POINT * ppoints, count nCount) override;
-      void draw_polygon(const ::point_f64 * ppoints, count nCount) override;
-      //bool fill_polygon(const POINT * ppoints, count nCount) override;
-      void fill_polygon(const ::point_f64 * ppoints, count nCount) override;
+      //bool draw_polygon(const POINT * ppoints, ::raw::count nCount) override;
+      void draw_polygon(const ::point_f64 * ppoints, ::raw::count nCount) override;
+      //bool fill_polygon(const POINT * ppoints, ::raw::count nCount) override;
+      void fill_polygon(const ::point_f64 * ppoints, ::raw::count nCount) override;
       using ::draw2d::graphics::rectangle;
       using ::draw2d::graphics::draw_rectangle;
       using ::draw2d::graphics::fill_rectangle;
@@ -423,7 +423,7 @@ namespace draw2d_gdiplus
 
       void draw_text_ex(const ::string & str,const ::rectangle_f64 & rectangle, const ::e_align & ealign = e_align_top_left, const ::e_draw_text & edrawtext = e_draw_text_none) override;
 
-      virtual ::count get_character_extent(::f64_array & daLeft, ::f64_array& daRight, const ::string & str, strsize iStart = 0, strsize iEnd = -1) override;
+      virtual ::raw::count get_character_extent(::f64_array & daLeft, ::f64_array& daRight, const ::string & str, strsize iStart = 0, strsize iEnd = -1) override;
 
       //virtual size_f64 get_text_extent(const scoped_string & strString, strsize iIndex) override;
 

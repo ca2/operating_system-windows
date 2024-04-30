@@ -76,7 +76,7 @@ bool engine_get_line_from_address(HANDLE hprocess, OS_DWORD uiAddress, ::u32* pu
 
 
 
-index engine_fileline(OS_DWORD dwAddress, char* psz, int nCount, u32* pline, u32* pdisplacement = 0)
+::raw::index engine_fileline(OS_DWORD dwAddress, char* psz, int nCount, u32* pline, u32* pdisplacement = 0)
 {
 
    OS_IMAGEHLP_LINE img_line = {};
@@ -324,7 +324,7 @@ namespace windows
    }
 
 
-   index callstack::fileline(char* psz, int nCount, u32* pline, u32* pdisplacement)
+   ::raw::index callstack::fileline(char* psz, int nCount, u32* pline, u32* pdisplacement)
    {
 
       if (!check())

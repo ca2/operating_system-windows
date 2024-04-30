@@ -41,9 +41,9 @@ namespace music
 
 
 
-            ::index get_os_out_device_id(const ::string & strDevice);
+            ::raw::index get_os_out_device_id(const ::string & strDevice);
 
-            ::index get_os_in_device_id(const ::string & strDevice);
+            ::raw::index get_os_in_device_id(const ::string & strDevice);
 
 
             virtual ::pointer<::music::midi::sequencer>create_midi_sequencer(sequence * psequence, const string& strDevice) override;

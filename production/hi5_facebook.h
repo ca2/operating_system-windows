@@ -56,7 +56,7 @@ namespace hi5
       const string TWIT_FRIENDSIDS_URL;
       const string TWIT_FOLLOWERSIDS_URL;
 
-      /* Ac::count URLs */
+      /* Ac::raw::count URLs */
       const string TWIT_ACCOUNTRATELIMIT_URL;
 
       /* Favorites URLs */
@@ -147,7 +147,7 @@ namespace hi5
       bool friendsIdsGet(string & userInfo /* in */, bool isUserId = false /* in */);
       bool followersIdsGet(string & userInfo /* in */, bool isUserId = false /* in */);
 
-      /* Twitter ac::count APIs */
+      /* Twitter ac::raw::count APIs */
       bool accountRateLimitGet();
 
       /* Twitter favorites APIs */

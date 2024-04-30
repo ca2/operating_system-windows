@@ -4445,7 +4445,7 @@ namespace apex_windows
 
          ::acme_windows::registry::key regkey(HKEY_CURRENT_USER, pathApplicationCapabilities / "FileAssociations", true);
 
-         for (index i = 0; i < straMimeType.get_count(); i++)
+         for (::raw::index i = 0; i < straMimeType.get_count(); i++)
          {
 
             string strExtension = straExtension[i];
@@ -4462,7 +4462,7 @@ namespace apex_windows
 
          ::acme_windows::registry::key regkey(HKEY_CURRENT_USER, pathApplicationCapabilities / "MimeAssociations", true);
 
-         for (index i = 0; i < straMimeType.get_count(); i++)
+         for (::raw::index i = 0; i < straMimeType.get_count(); i++)
          {
 
             string strMimeType = straMimeType[i];
@@ -4527,7 +4527,7 @@ namespace apex_windows
 
       }
 
-      for (index i = 0; i < straExtension.get_count(); i++)
+      for (::raw::index i = 0; i < straExtension.get_count(); i++)
       {
 
          string strExtension = straExtension[i];
@@ -4724,7 +4724,7 @@ namespace apex_windows
 
    //         rgSpec.set_size(minimum(wstraSpecs.get_size(), wstraNames.get_size()));
 
-   //         for (index i = 0; i < rgSpec.get_size(); i++)
+   //         for (::raw::index i = 0; i < rgSpec.get_size(); i++)
    //         {
 
    //            rgSpec[i].pszName = wstraNames[i];
@@ -4974,7 +4974,7 @@ namespace apex_windows
 
    //         rgSpec.set_size(minimum(wstraSpecs.get_size(), wstraNames.get_size()));
 
-   //         for (index i = 0; i < rgSpec.get_size(); i++)
+   //         for (::raw::index i = 0; i < rgSpec.get_size(); i++)
    //         {
 
    //            rgSpec[i].pszName = wstraNames[i];
@@ -5336,7 +5336,7 @@ namespace apex_windows
 
       patha.set_size(uaPid.get_count());
 
-      for(index i = 0; i < uaPid.get_count(); i++)
+      for(::raw::index i = 0; i < uaPid.get_count(); i++)
       {
 
          patha[i] = process_identifier_module_path(uaPid[i]);

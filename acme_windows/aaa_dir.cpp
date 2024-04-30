@@ -34,7 +34,7 @@
 //
 //      path.ascendants_path(stra);
 //
-//      index i = stra.get_upper_bound();
+//      ::raw::index i = stra.get_upper_bound();
 //
 //      for (; i >= 0; i--)
 //      {

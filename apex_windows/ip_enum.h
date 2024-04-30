@@ -35,8 +35,8 @@ namespace apex_windows
       virtual ~ip_enum();
 
 
-      //      virtual ::count enumerate(ip_array & ipa);
-      virtual ::count enumerate(pointer_array < ::networking::address > & ipa) override;
+      //      virtual ::raw::count enumerate(ip_array & ipa);
+      virtual ::raw::count enumerate(pointer_array < ::networking::address > & ipa) override;
 
    };
 

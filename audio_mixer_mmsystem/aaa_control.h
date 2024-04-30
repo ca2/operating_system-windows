@@ -44,7 +44,7 @@ namespace audio_mixer_mmsystem
       //::audio_mixer::control_data * GetWindowData(i32 iType);
       void OnMixerControlChange();
       //::audio_mixer::user_control * GetControl(i32 iType);
-      //::audio_mixer::user_control * GetControlByIndex(::index iIndex);
+      //::audio_mixer::user_control * GetControlByIndex(::raw::index iIndex);
       void Prepare();
       bool CreateWindowsVolumeV001(::pointer<::user::interaction>pParent, u32 nStartID, u32 * nNextID);
 
