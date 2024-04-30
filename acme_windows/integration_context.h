@@ -54,7 +54,7 @@ namespace acme_windows
      
          //::file::path base_integration_folder() override;
 
-
+         ::i32 git_bash(const ::scoped_string& scopedstr, const class ::time& timeTimeout) override;
          ::i32 bash(const ::scoped_string & scopedstr, const class ::time & timeTimeout) override;
          ::i32 zsh(const ::scoped_string& scopedstr, const class ::time& timeTimeout) override;
 

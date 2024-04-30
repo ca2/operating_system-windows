@@ -4390,16 +4390,25 @@ namespace acme_windows
    ::pointer <::operating_system::summary > node::operating_system_summary()
    {
 
-      auto psummary = __create_new < ::operating_system::summary >();
+      _synchronous_lock synchronouslock(this->synchronization());
 
-      psummary->m_strDistro = "windows";
-      psummary->m_strDistroBranch = "windows";
-      psummary->m_strDistroFamily = "windows";
-      psummary->m_strDistroRelease = "10";
-      psummary->m_strSlashedIntegration = "windows";
-      psummary->m_strSlashedStore = "windows";
+      if (!m_poperatingsystemsummary)
+      {
 
-      return psummary;
+         auto psummary = __create_new < ::operating_system::summary >();
+
+         m_poperatingsystemsummary = psummary;
+
+         psummary->m_strDistro = "windows";
+         psummary->m_strDistroBranch = "windows";
+         psummary->m_strDistroFamily = "windows";
+         psummary->m_strDistroRelease = "10";
+         psummary->m_strSlashedIntegration = "windows";
+         psummary->m_strSlashedStore = "windows";
+
+      }
+
+      return m_poperatingsystemsummary;
 
 
    }

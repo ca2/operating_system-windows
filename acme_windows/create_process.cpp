@@ -262,7 +262,7 @@ namespace acme_windows
 
       //   DWORD dwState = PIPE_NOWAIT;
 
-      //   SetNamedPipeHandleState(hOutRd, &dwState, nullptr, nullptr);
+      //   SetNamedPipeHandleState(m_hOutRd, &dwState, nullptr, nullptr);
 
       //}
 
@@ -270,7 +270,7 @@ namespace acme_windows
 
       //   DWORD dwState = PIPE_NOWAIT;
 
-      //   SetNamedPipeHandleState(hErrRd, &dwState, nullptr, nullptr);
+      //   SetNamedPipeHandleState(m_hErrRd, &dwState, nullptr, nullptr);
 
       //}
 
@@ -278,7 +278,7 @@ namespace acme_windows
 
       //   DWORD dwState = PIPE_NOWAIT;
 
-      //   SetNamedPipeHandleState(hInWr, &dwState, nullptr, nullptr);
+      //   SetNamedPipeHandleState(m_hInWr, &dwState, nullptr, nullptr);
 
       //}
 
@@ -313,12 +313,14 @@ namespace acme_windows
       hList[1] = m_hOutWr;
       hList[2] = m_hInRd;
 
+      auto s = sizeof(hList);
+
       UpdateProcThreadAttribute(
          m_pattrList,
          0,
          PROC_THREAD_ATTRIBUTE_HANDLE_LIST,
          hList,
-         sizeof(hList),
+         s,
          nullptr,
          nullptr
       );
@@ -487,6 +489,10 @@ namespace acme_windows
                if (dwRead == 0)
                {
 
+                  //preempt(10_ms);
+
+                  //continue;
+
                   break;
 
                }
@@ -555,6 +561,10 @@ namespace acme_windows
 
                if (dwRead == 0)
                {
+                  
+                  //preempt(10_ms);
+
+                  //continue;
 
                   break;
 

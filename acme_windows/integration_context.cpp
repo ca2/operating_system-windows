@@ -859,8 +859,8 @@ namespace acme_windows
             auto pathMsys2 = this->msys2();
 
             auto windowspath = pathMsys2.windows_path();
-
-            strCommand = "\"" + windowspath + "\\usr\\bin\\bash.exe\" -c \'" + strEscaped + "\'";
+            strEscaped.find_replace("\"", "\\\"");
+            strCommand = "\"" + windowspath + "\\usr\\bin\\bash.exe\" /c \"" + strEscaped + "\"";
             //strCommand = "\"" + windowspath + "\\usr\\bin\\bash.exe\" -l -c \'" + strEscaped + "; exit $?\'";
             //strCommand = "\"" + windowspath + "\\msys2_shell.cmd\" -c \'" + strEscaped + "\'";
 
@@ -870,7 +870,7 @@ namespace acme_windows
          else
          {
 
-            strCommand = "\"C:\\Program Files\\Git\\bin\\bash.exe\" -c \'" + strEscaped + "\'";
+            strCommand = "\"C:\\Program Files\\Git\\bin\\bash.exe\" /c \'" + strEscaped + "\'";
 
          }
 
@@ -885,6 +885,29 @@ namespace acme_windows
       }
 
 
+      ::i32 context::git_bash(const ::scoped_string& scopedstr, const class ::time& timeTimeout)
+      {
+
+         string strEscaped = scopedstr;
+
+         ::string strCommand;
+
+         printf("Current Directory: %s\n", acmedirectory()->get_current().c_str());
+
+         printf("%s\n", strEscaped.c_str());
+         strEscaped.find_replace("\"", "\\\"");
+            strCommand = "\"C:\\Program Files\\Git\\bin\\bash.exe\" /c \"" + strEscaped + "\"";
+
+         //
+
+         auto iExitCode = command_system(strCommand, timeTimeout);
+
+         ///command_system("cmd.exe -c \"C:\\msys64\\msys2_shell.cmd\" \"" + strEscaped + "\"");
+
+         return iExitCode;
+
+      }
+
       ::i32 context::zsh(const ::scoped_string& scopedstr, const class ::time& timeTimeout)
       {
 
@@ -898,13 +921,13 @@ namespace acme_windows
          if (m_bMsys2)
          {
 
-            strCommand = "\"C:\\msys64\\usr\\bin\\bash.exe\" -c \'" + strEscaped + "\'";
+            strCommand = "\"C:\\msys64\\usr\\bin\\bash.exe\" /c \'" + strEscaped + "\'";
 
          }
          else
          {
 
-            strCommand = "\"C:\\Program Files\\Git\\bin\\bash.exe\" -c \'" + strEscaped + "\'";
+            strCommand = "\"C:\\Program Files\\Git\\bin\\bash.exe\" /c \'" + strEscaped + "\'";
 
          }
 
@@ -1008,13 +1031,17 @@ namespace acme_windows
 
                auto windowspath = pathMsys2.windows_path();
 
-               strCommand = "\"" + windowspath + "\\usr\\bin\\bash.exe\" -l -c \'" + strEscaped + "\'";
+               //strCommand = "\"" + windowspath + "\\usr\\bin\\mintty.exe\" -i \"/msys2.ico\" -t \"MSYS2 MSYS\" \"/usr/bin/bash\" -l -c \'" + strEscaped + "\'";
+
+//               strCommand = "\"" + windowspath + "\\usr\\bin\\bash.exe\" -l -c \'" + strEscaped + "\'";
+               strEscaped.find_replace("\"", "\\\"");
+               strCommand = "\"" + windowspath + "\\usr\\bin\\bash.exe\" /l /c \"" + strEscaped + "\"";
 
             }
             else
             {
 
-               strCommand = "\"C:\\Program Files\\Git\\bin\\bash.exe\" -c \'" + strEscaped + "; exit\'";
+               strCommand = "\"C:\\Program Files\\Git\\bin\\bash.exe\" /c \'" + strEscaped + "; exit\'";
 
             }
 

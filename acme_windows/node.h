@@ -28,7 +28,7 @@ namespace acme_windows
       ::file::path            m_strAppData;
       ::file::path            m_strPrograms;
       ::file::path            m_strCommonPrograms;
-
+      ::pointer<::operating_system::summary> m_poperatingsystemsummary;
 
       node();
       ~node() override;
