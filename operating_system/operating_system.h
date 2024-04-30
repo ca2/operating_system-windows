@@ -6,9 +6,7 @@
 #endif
 
 
-#define boolean windows_boolean
 #undef ERROR
-#undef __UNREFERENCED_PARAMETER
 
 
 #define NOMINMAX
