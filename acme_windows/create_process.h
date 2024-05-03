@@ -15,6 +15,7 @@ namespace acme_windows
    {
    public:
 
+
       STARTUPINFOEX m_si = {};
       PROCESS_INFORMATION m_pi = {};
       ::memory m_memoryAttrList;
@@ -27,6 +28,9 @@ namespace acme_windows
       HANDLE m_hErrWr;
       HANDLE m_hInRd;
       HANDLE m_hInWr;
+
+      //OVERLAPPED m_overlappedOut;
+      //OVERLAPPED m_overlappedErr;
 
       class ::time m_timeStart;;
 
@@ -44,6 +48,7 @@ namespace acme_windows
       DWORD m_dwCreationFlags;
 
       ::file::path m_pathWorkingDirectory;
+      ::e_display m_edisplay = e_display_none;
 
 
       create_process();
@@ -63,6 +68,9 @@ namespace acme_windows
       void call_create_process(const ::scoped_string& scopedstr);
 
       void wait_process(const trace_function& tracefunction);
+
+      //void _read_task(enum_trace_level etracelevel, const trace_function& tracefunction, ::string * pstrOut, OVERLAPPED * poverlapped);
+      //void __read_task(enum_trace_level etracelevel, const trace_function& tracefunction, ::string* pstrOut, const void * p, ::raw::count c);
 
    };
 

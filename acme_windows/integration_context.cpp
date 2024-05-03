@@ -7,6 +7,7 @@
 #include "acme/filesystem/filesystem/acme_file.h"
 //#include "acme/filesystem/filesystem/file_context.h"
 #include "acme/operating_system/process.h"
+#include "acme/parallelization/synchronous_lock.h"
 #include "acme/platform/application.h"
 #include "acme/platform/system.h"
 #include "acme/platform/sequencer.h"
@@ -52,12 +53,12 @@ namespace acme_windows
       void context::prepare()
       {
 
-         if (acmedirectory()->is("C:\\operating_system"))
+         //if (acmedirectory()->is("C:\\operating_system"))
          {
 
-            m_pathOperatingSystemIncludeFolder = "C:\\operating_system\\operating_system-windows";
+            m_pathOperatingSystemIncludeFolder = m_pathFolder / "operating_system-windows";
 
-            m_pathOperatingSystemStorageFolder = "C:\\operating_system\\storage-windows";
+            m_pathOperatingSystemStorageFolder = m_pathFolder / "storage-windows";
 
             auto pathOperatingSystemIncludeFolder = m_pathOperatingSystemIncludeFolder;
 
@@ -69,7 +70,7 @@ namespace acme_windows
 
             acmedirectory()->create(pathOperatingSystemStorageFolder / "library");
 
-            m_pathFolder = "C:\\port\\";
+            //m_pathFolder = "C:\\port\\";
 
             ::integration::context::prepare();
 
@@ -368,23 +369,23 @@ namespace acme_windows
          string_array straOut;
          string_array straErr;
 
-         auto functionTrace = [&](auto etracelevel, auto& str)
+         auto functionTrace = [&](auto etracelevel, auto& str, bool bCarriage)
          {
 
             if (etracelevel <= e_trace_level_information)
             {
 
-               straOut.add(str);
+               straOut.feed_line(str, bCarriage);
 
             }
             else
             {
 
-               straErr.add(str);
+               straErr.feed_line(str, bCarriage);
 
             }
 
-            std_inline_log()(etracelevel, str);
+            //std_inline_log()(etracelevel, str);
 
          };
 
@@ -860,7 +861,7 @@ namespace acme_windows
 
             auto windowspath = pathMsys2.windows_path();
             strEscaped.find_replace("\"", "\\\"");
-            strCommand = "\"" + windowspath + "\\usr\\bin\\bash.exe\" /c \"" + strEscaped + "\"";
+            strCommand = "\"" + windowspath + "\\usr\\bin\\bash.exe\" -l -c \"" + strEscaped + "\"";
             //strCommand = "\"" + windowspath + "\\usr\\bin\\bash.exe\" -l -c \'" + strEscaped + "; exit $?\'";
             //strCommand = "\"" + windowspath + "\\msys2_shell.cmd\" -c \'" + strEscaped + "\'";
 
@@ -870,7 +871,7 @@ namespace acme_windows
          else
          {
 
-            strCommand = "\"C:\\Program Files\\Git\\bin\\bash.exe\" /c \'" + strEscaped + "\'";
+            strCommand = "\"C:\\Program Files\\Git\\bin\\bash.exe\" -l -c \'" + strEscaped + "\'";
 
          }
 
@@ -896,7 +897,7 @@ namespace acme_windows
 
          printf("%s\n", strEscaped.c_str());
          strEscaped.find_replace("\"", "\\\"");
-            strCommand = "\"C:\\Program Files\\Git\\bin\\bash.exe\" /c \"" + strEscaped + "\"";
+            strCommand = "\"C:\\Program Files\\Git\\bin\\bash.exe\" -l -c \"" + strEscaped + "\"";
 
          //
 
@@ -921,13 +922,13 @@ namespace acme_windows
          if (m_bMsys2)
          {
 
-            strCommand = "\"C:\\msys64\\usr\\bin\\bash.exe\" /c \'" + strEscaped + "\'";
+            strCommand = "\"C:\\msys64\\usr\\bin\\bash.exe\" -c \'" + strEscaped + "\'";
 
          }
          else
          {
 
-            strCommand = "\"C:\\Program Files\\Git\\bin\\bash.exe\" /c \'" + strEscaped + "\'";
+            strCommand = "\"C:\\Program Files\\Git\\bin\\bash.exe\" -c \'" + strEscaped + "\'";
 
          }
 
@@ -1035,15 +1036,27 @@ namespace acme_windows
 
 //               strCommand = "\"" + windowspath + "\\usr\\bin\\bash.exe\" -l -c \'" + strEscaped + "\'";
                strEscaped.find_replace("\"", "\\\"");
-               strCommand = "\"" + windowspath + "\\usr\\bin\\bash.exe\" /l /c \"" + strEscaped + "\"";
+               strCommand = "\"" + windowspath + "\\usr\\bin\\bash.exe\" -l -c \"" + strEscaped + "\"";
 
             }
             else
             {
 
-               strCommand = "\"C:\\Program Files\\Git\\bin\\bash.exe\" /c \'" + strEscaped + "; exit\'";
+               strCommand = "\"C:\\Program Files\\Git\\bin\\bash.exe\" -c \'" + strEscaped + "; exit\'";
 
             }
+
+
+            //::pointer < ::mutex> pmutex;
+            //
+            //if (scopedstrCommand.case_insensitive_begins("command -v"))
+            //{
+
+            //   pmutex = node()->create_global_named_mutex(m_pcontext, false, "msys2_exclusive", node()->get_application_exclusivity_security_attributes());
+
+            //}
+
+            //synchronous_lock synchronouslock(pmutex);
 
             //
 

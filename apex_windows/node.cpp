@@ -2222,7 +2222,7 @@ namespace apex_windows
             //auto estatus = 
             //node()->command_system(straOutput, iExitCode, strCommand);
 
-            command_system(strCommand, [](auto etraceleve, auto& str) {});
+            command_system(strCommand, [](auto etracelevel, auto& str, bool bCarriage) {});
 
             //return estatus;
 

@@ -3193,7 +3193,7 @@ namespace acme_windows
    //}
 
 
-   int node::command_system(const ::scoped_string & scopedstr, const ::trace_function & tracefunction, const ::file::path & pathWorkingDirectory)
+   int node::command_system(const ::scoped_string & scopedstr, const ::trace_function & tracefunction, const ::file::path & pathWorkingDirectory, ::e_display edisplay)
    {
 
       auto pcreateprocess = __create_new < ::acme_windows::create_process>();
@@ -3201,12 +3201,21 @@ namespace acme_windows
 
       pcreateprocess->m_pathWorkingDirectory = pathWorkingDirectory;
 
+      pcreateprocess->m_edisplay = edisplay;
+
 
       pcreateprocess->initialize_stdout();
       pcreateprocess->initialize_stderr();
       pcreateprocess->initialize_stdin();
 
       pcreateprocess->prepare();
+
+      if (edisplay == e_display_up)
+      {
+
+         pcreateprocess->set_create_new_console();
+
+      }
 
       //pcreateprocess->set_create_new_console();
       pcreateprocess->call_create_process(scopedstr);
@@ -3282,6 +3291,25 @@ namespace acme_windows
 //      return iExitCode;
 
       return pcreateprocess->m_iExitCode;
+
+   }
+
+
+   void node::launch_command_system(const ::scoped_string& scopedstr, const ::file::path& pathWorkingDirectory, ::e_display edisplay)
+   {
+
+      auto pcreateprocess = __create_new < ::acme_windows::create_process>();
+
+
+      pcreateprocess->m_pathWorkingDirectory = pathWorkingDirectory;
+
+      pcreateprocess->m_edisplay = edisplay;
+
+      pcreateprocess->prepare();
+
+      pcreateprocess->set_create_new_console();
+
+      pcreateprocess->call_create_process(scopedstr);
 
    }
 
@@ -3469,43 +3497,43 @@ namespace acme_windows
    //}
 
 
-   void node::open_terminal_and_run(const ::scoped_string& scopedstr)
-   {
+   //void node::open_terminal_and_run(const ::scoped_string& scopedstr)
+   //{
 
-      ::file::path pathCurrentDirectory;
+   //   ::file::path pathCurrentDirectory;
 
-      pathCurrentDirectory = acmedirectory()->get_current();
+   //   pathCurrentDirectory = acmedirectory()->get_current();
 
-      auto windowspathCurrentDirectory = pathCurrentDirectory.windows_path();
+   //   auto windowspathCurrentDirectory = pathCurrentDirectory.windows_path();
 
-      ::wstring wstrCurrentDirectory;
+   //   ::wstring wstrCurrentDirectory;
 
-      wstrCurrentDirectory = windowspathCurrentDirectory;
+   //   wstrCurrentDirectory = windowspathCurrentDirectory;
 
-      ::wstring wstrParameters;
+   //   ::wstring wstrParameters;
 
-      wstrParameters = L"/c ";
+   //   wstrParameters = L"/c ";
 
-      wstrParameters += ::wstring(scopedstr);
+   //   wstrParameters += ::wstring(scopedstr);
 
-      auto iResult = (INT_PTR) ::ShellExecuteW(nullptr, L"open", L"cmd.exe", wstrParameters, wstrCurrentDirectory, SW_SHOW);
+   //   auto iResult = (INT_PTR) ::ShellExecuteW(nullptr, L"open", L"cmd.exe", wstrParameters, wstrCurrentDirectory, SW_SHOW);
 
-      DWORD dw = ::GetLastError();
+   //   DWORD dw = ::GetLastError();
 
-      if (iResult >= 32)
-      {
+   //   if (iResult >= 32)
+   //   {
 
-         information() << "ShellExecuteW \"" + scopedstr + "\" succeeded : " << iResult;
+   //      information() << "ShellExecuteW \"" + scopedstr + "\" succeeded : " << iResult;
 
-      }
-      else
-      {
+   //   }
+   //   else
+   //   {
 
-         information() << "ShellExecuteW \"" + scopedstr + "\" failed : " << iResult;
+   //      information() << "ShellExecuteW \"" + scopedstr + "\" failed : " << iResult;
 
-      }
+   //   }
 
-   }
+   //}
 
 
    ::u64 node::translate_processor_affinity(int iOrder)
@@ -4545,6 +4573,18 @@ namespace acme_windows
       ::string strCmd = get_environment_variable("ComSpec");
 
       return strCmd;
+
+   }
+
+
+   int node::get_processor_count()
+   {
+
+      SYSTEM_INFO sysinfo;
+
+      GetSystemInfo(&sysinfo);
+
+      return sysinfo.dwNumberOfProcessors;
 
    }
 

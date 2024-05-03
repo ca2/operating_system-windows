@@ -6863,12 +6863,27 @@ namespace draw2d_gdiplus
 
       _synchronous_lock synchronouslock(psynchronization ? psynchronization : nullptr);
 
-      auto & text = m_pfont->m_mapFontText[scopedstr];
+      ::write_text::font::text* ptext = nullptr;
 
-      if (text.m_wstr.is_empty())
+      ::write_text::font::text text2;
+
+      if (m_pfont->m_bCacheLayout)
       {
 
-         text.m_wstr = scopedstr;
+         ptext = &m_pfont->m_mapFontText[scopedstr];
+
+      }
+      else
+      {
+
+         ptext = &text2;
+
+      }
+
+      if (ptext->m_wstr.is_empty())
+      {
+
+         ptext->m_wstr = scopedstr;
 
       }
 
@@ -6996,7 +7011,7 @@ namespace draw2d_gdiplus
 
             double d3 = d1 * d2;
 
-            status = path.AddString(text.m_wstr, (INT)text.m_wstr.length(), &fontfamily, pfont->GetStyle(), (Gdiplus::REAL)d1, origin, &format);
+            status = path.AddString(ptext->m_wstr, (INT)ptext->m_wstr.length(), &fontfamily, pfont->GetStyle(), (Gdiplus::REAL)d1, origin, &format);
 
             m_ppath->AddPath(&path, false);
 
@@ -7020,7 +7035,7 @@ namespace draw2d_gdiplus
 
             }
 
-            status = m_pgraphics->DrawString(text.m_wstr, (INT)text.m_wstr.length(), pfont, origin, &format, pbrush);
+            status = m_pgraphics->DrawString(ptext->m_wstr, (INT)ptext->m_wstr.length(), pfont, origin, &format, pbrush);
 
             if (eCompositingMode == Gdiplus::CompositingModeSourceCopy)
             {
@@ -7088,7 +7103,7 @@ namespace draw2d_gdiplus
 
             double d3 = d1 * d2;
 
-            status = path.AddString(text.m_wstr, (INT)text.m_wstr.length(), &fontfamily, pfont->GetStyle(), (Gdiplus::REAL)d1, origin, &format);
+            status = path.AddString(ptext->m_wstr, (INT)ptext->m_wstr.length(), &fontfamily, pfont->GetStyle(), (Gdiplus::REAL)d1, origin, &format);
 
             path.Transform(pmNew);
 
@@ -7100,7 +7115,7 @@ namespace draw2d_gdiplus
 
             m_pgraphics->SetTransform(pmNew);
 
-            status = m_pgraphics->DrawString(text.m_wstr, (INT)text.m_wstr.length(), pfont, origin, &format, pbrush);
+            status = m_pgraphics->DrawString(ptext->m_wstr, (INT)ptext->m_wstr.length(), pfont, origin, &format, pbrush);
 
             m_pgraphics->SetTransform(&m);
 
