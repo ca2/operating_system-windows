@@ -93,24 +93,28 @@ namespace acme_windows
 
          auto pacmedirectory = acmedirectory();
 
-         ::file::path path;
+         //::file::path path;
 
-         path = pacmedirectory->config() / "programming/vs.txt";
+         //path = pacmedirectory->config() / "programming/vs.txt";
 
-         if (!acmefile()->exists(path))
-         {
+         //if (!acmefile()->exists(path))
+         //{
 
-            auto psequencer = message_box("File with Visual Studio version not found : \"" + path + "\"");
+         //   acmefile()->put_contents(path, "2022");
 
-            psequencer->do_synchronously();
+         //   //auto psequencer = message_box("File with Visual Studio version not found : \"" + path + "\"");
 
-            throw ::exception(error_field_not_found, path);
+         //   //psequencer->do_synchronously();
 
-         }
+         //   //throw ::exception(error_field_not_found, path);
 
-         auto pcontext = m_pcontext;
+         //}
 
-         m_strVs = acmefile()->as_string(path);
+         //auto pcontext = m_pcontext;
+
+         //m_strVs = acmefile()->as_string(path);
+
+         m_strVs = "2022";
 
          m_strVs.trim();
 
@@ -151,7 +155,7 @@ namespace acme_windows
 
             string strMessage;
 
-            strMessage = "There is a hole here. You should fill it with fullfillment. Missing f**k " + path;
+            strMessage = "There is a hole here. You should fill it with fullfillment. Missing f**k ";
 
             fatal() <<strMessage;
 
