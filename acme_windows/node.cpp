@@ -4183,6 +4183,36 @@ namespace acme_windows
    }
 
 
+   bool node::_is_msys2_installed()
+   {
+
+      if (!acmedirectory()->is("C:/msys64"))
+      {
+
+         return false;
+
+      }
+
+      return true;
+
+   }
+
+
+   bool node::_is_strawberry_perl_installed()
+   {
+
+      if (!acmefile()->exists("C:/Strawberry/perl/bin/perl.exe"))
+      {
+
+         return false;
+
+      }
+
+      return true;
+
+   }
+
+
    bool node::_is_code_exe_user_path_environment_variable_ok(::string* pstrCorrectPath)
    {
 

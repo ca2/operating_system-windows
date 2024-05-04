@@ -286,6 +286,10 @@ namespace acme_windows
 
       bool _is_smart_git_installed() override;
 
+      bool _is_msys2_installed() override;
+
+      bool _is_strawberry_perl_installed() override;
+
       bool _is_code_exe_user_path_environment_variable_ok(::string* pstrCorrectPath = nullptr) override;
 
       bool _is_coder_mode_enabled() override;
