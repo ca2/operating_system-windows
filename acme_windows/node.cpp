@@ -3991,15 +3991,23 @@ namespace acme_windows
       if (!bNoSystemNotify)
       {
 
-         DWORD_PTR dwptrResult = 0;
-
-         ::SendMessageTimeoutW(HWND_BROADCAST, WM_SETTINGCHANGE,
-            0, (LPARAM)L"Environment",
-            SMTO_ABORTIFHUNG | SMTO_NOTIMEOUTIFNOTHUNG, 10000, &dwptrResult);
-
-         ::preempt(10_s);
-
+         system_notify_environment_variable_change();
+         
       }
+
+   }
+
+
+   void node::system_notify_environment_variable_change()
+   {
+
+      DWORD_PTR dwptrResult = 0;
+
+      ::SendMessageTimeoutW(HWND_BROADCAST, WM_SETTINGCHANGE,
+         0, (LPARAM)L"Environment",
+         SMTO_ABORTIFHUNG | SMTO_NOTIMEOUTIFNOTHUNG, 10000, &dwptrResult);
+
+      ::preempt(10_s);
 
    }
 

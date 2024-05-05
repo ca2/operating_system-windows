@@ -270,7 +270,7 @@ namespace acme_windows
 
       ::string get_user_permanent_environment_variable(const ::scoped_string & scopedstr) override;
       void set_user_permanent_environment_variable(const ::scoped_string & scopedstr, const ::scoped_string & strPayload, bool bNoSystemNotify = false) override;
-
+      void system_notify_environment_variable_change() override;
 
 //#ifdef WINDOWS_DESKTOP
 
