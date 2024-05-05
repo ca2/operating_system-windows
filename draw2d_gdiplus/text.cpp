@@ -47,7 +47,7 @@ namespace draw2d_gdiplus
 
       Gdiplus::Graphics * pgraphics = m_pgraphics;
 
-      synchronous_lock synchronouslock(draw2d()->write_text()->m_pparticleFontTextMapSynchronization);
+      _synchronous_lock synchronouslock(::is_set(ppathParam)?draw2d()->write_text()->m_pparticleFontTextMapSynchronization: nullptr);
 
       Gdiplus::GraphicsPath * ppath = nullptr;
 
@@ -178,12 +178,27 @@ namespace draw2d_gdiplus
 
       }
 
-      auto & text = pfontParam->m_mapFontText[str];
+      ::write_text::font::text* ptext = nullptr;
 
-      if (text.m_wstr.is_empty())
+      ::write_text::font::text text2;
+
+      if (pfontParam->m_bCacheLayout)
       {
 
-         text.m_wstr = str;
+         ptext = &pfontParam->m_mapFontText[str];
+
+      }
+      else
+      {
+
+         ptext = &text2;
+
+      }
+
+      if (ptext->m_wstr.is_empty())
+      {
+
+         ptext->m_wstr = str;
 
       }
 
@@ -192,19 +207,19 @@ namespace draw2d_gdiplus
 
          Gdiplus::RectF rectangle_f32((Gdiplus::REAL)rectangleParam.left(), (Gdiplus::REAL)rectangleParam.top(), (Gdiplus::REAL)(width(rectangleParam) * dFontWidth), (Gdiplus::REAL)(height(rectangleParam)));
 
-         strsize iSize = text.m_wstr.length();
+         strsize iSize = ptext->m_wstr.length();
 
          if (ppath)
          {
 
-            status = ppath->AddString(text.m_wstr, (INT)iSize, &f, nStyle, size, rectangle_f32, &format);
+            status = ppath->AddString(ptext->m_wstr, (INT)iSize, &f, nStyle, size, rectangle_f32, &format);
 
             if (bMeasure)
             {
 
                Gdiplus::RectF box;
 
-               status = pgraphics->MeasureString(text.m_wstr, (INT)iSize, pfont, rectangle_f32, &format, &box);
+               status = pgraphics->MeasureString(ptext->m_wstr, (INT)iSize, pfont, rectangle_f32, &format, &box);
 
                copy(rectangleParam, box);
 
@@ -230,14 +245,14 @@ namespace draw2d_gdiplus
 
             }
 
-            status = pgraphics->DrawString(text.m_wstr, (INT)text.m_wstr.length(), pfont, rectangle_f32, &format, pbrush);
+            status = pgraphics->DrawString(ptext->m_wstr, (INT)ptext->m_wstr.length(), pfont, rectangle_f32, &format, pbrush);
 
             if (bMeasure)
             {
 
                Gdiplus::RectF box;
 
-               status = pgraphics->MeasureString(text.m_wstr, (INT)iSize, pfont, rectangle_f32, &format, &box);
+               status = pgraphics->MeasureString(ptext->m_wstr, (INT)iSize, pfont, rectangle_f32, &format, &box);
 
                copy(rectangleParam, box);
 
@@ -260,7 +275,7 @@ namespace draw2d_gdiplus
 
          //auto e = pgraphics->GetTextRenderingHint();
 
-         //status = pgraphics->DrawString(text.m_wstr, (INT)iSize, pfont, rectangle_f32, &format, pbrush);
+         //status = pgraphics->DrawString(ptext->m_wstr, (INT)iSize, pfont, rectangle_f32, &format, pbrush);
 
       //}
 
@@ -284,16 +299,16 @@ namespace draw2d_gdiplus
 
          status = pgraphics->SetTransform(pmNew);
 
-         strsize iSize = text.m_wstr.length();
+         strsize iSize = ptext->m_wstr.length();
 
-         status = pgraphics->DrawString(text.m_wstr, (INT)iSize, pfont, rectangle_f32, &format, pbrush);
+         status = pgraphics->DrawString(ptext->m_wstr, (INT)iSize, pfont, rectangle_f32, &format, pbrush);
 
          if (bMeasure)
          {
 
             Gdiplus::RectF box;
 
-            status = pgraphics->MeasureString(text.m_wstr, (INT)iSize, pfont, rectangle_f32, &format, &box);
+            status = pgraphics->MeasureString(ptext->m_wstr, (INT)iSize, pfont, rectangle_f32, &format, &box);
 
             copy(rectangleParam, box);
 
@@ -318,15 +333,15 @@ namespace draw2d_gdiplus
 
          //status = ppath->SetTransform(pmNew);
 
-         //wstring text.m_wstr = utf8_to_unicode(str);
+         //wstring ptext->m_wstr = utf8_to_unicode(str);
 
          //Gdiplus::Font * pfont = gdiplus_font();
 
          //Gdiplus::Brush * pbrush = gdiplus_brush();
 
-         //strsize iSize = text.m_wstr.get_length();
+         //strsize iSize = ptext->m_wstr.get_length();
 
-         //status = ppath->AddString(text.m_wstr, (INT)iSize, f, nStyle, emSize, rectangle_f32, &format);
+         //status = ppath->AddString(ptext->m_wstr, (INT)iSize, f, nStyle, emSize, rectangle_f32, &format);
 
          //status = ppath->SetTransform(m);
 

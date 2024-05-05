@@ -15,6 +15,10 @@
 #include "windowing_win32/windowing.h"
 
 
+CLASS_DECL_ACME void acme_set_main_hwnd(HWND hwnd);
+CLASS_DECL_ACME HWND acme_get_main_hwnd();
+
+
 CLASS_DECL_WINDOWING_WIN32 WNDPROC windows_user_interaction_impl_get_window_procedure();
 
 
@@ -250,6 +254,22 @@ LRESULT CALLBACK __window_procedure(HWND hwnd, UINT message, WPARAM wparam, LPAR
    {
 
       ::acme::get()->platform()->informationf("WM_MOUSEWHEEL");
+
+   }
+   else if (message == WM_SHOWWINDOW)
+   {
+
+      if (wparam)
+      {
+
+         if(!acme_get_main_hwnd() || !::IsWindow(acme_get_main_hwnd()))
+         {
+
+            acme_set_main_hwnd(hwnd);
+
+         }
+
+      }
 
    }
 

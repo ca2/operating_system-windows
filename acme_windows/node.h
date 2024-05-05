@@ -237,10 +237,11 @@ namespace acme_windows
       //void shell_open(const ::file::path & path, const string & strParams = "", const ::file::path & pathFolder = {}) override;
       //void open_url(const ::string & strUrl) override; //
       //void command_system(string_array & straOutput, int & iExitCode, const scoped_string & str, enum_command_system ecommandsystem = e_command_system_none, const class time & timeTimeout = ::time::infinity(), ::particle * pparticleSynchronization = nullptr, ::file::file * pfileLog = nullptr) override;
-      int command_system(const ::scoped_string& scopedstr, const trace_function& tracefunction = nullptr, const ::file::path& pathWorkingDirectory = {}) override;
+      int command_system(const ::scoped_string& scopedstr, const trace_function& tracefunction = nullptr, const ::file::path& pathWorkingDirectory = {}, ::e_display edisplay = e_display_none) override;
       //int command_system(const ::scoped_string& scopedstr, const class ::time& timeOut = 15_min) override;
 
-      void open_terminal_and_run(const ::scoped_string& scopedstr);
+      //void open_terminal_and_run(const ::scoped_string& scopedstr);
+      virtual void launch_command_system(const ::scoped_string& scopedstr, const ::file::path& pathWorkingDirectory = {}, ::e_display edisplay = e_display_none);
 
       void shell_execute_async(const scoped_string & strFile, const scoped_string & strParams, const ::file::path& pathWorkingDirectory = {}) override;
       int shell_execute_sync(const scoped_string & strFile, const scoped_string & strParams, const class time & timeTimeout = 1_minute, const ::file::path& pathWorkingDirectory = {}) override;
@@ -269,7 +270,7 @@ namespace acme_windows
 
       ::string get_user_permanent_environment_variable(const ::scoped_string & scopedstr) override;
       void set_user_permanent_environment_variable(const ::scoped_string & scopedstr, const ::scoped_string & strPayload, bool bNoSystemNotify = false) override;
-
+      void system_notify_environment_variable_change() override;
 
 //#ifdef WINDOWS_DESKTOP
 
@@ -284,6 +285,10 @@ namespace acme_windows
       bool _is_tortoise_git_installed() override;
 
       bool _is_smart_git_installed() override;
+
+      bool _is_msys2_installed() override;
+
+      bool _is_strawberry_perl_installed() override;
 
       bool _is_code_exe_user_path_environment_variable_ok(::string* pstrCorrectPath = nullptr) override;
 
@@ -336,6 +341,8 @@ namespace acme_windows
       ::file::path _get_power_shell_path() override;
 
       ::file::path _get_cmd_path() override;
+
+      int get_processor_count() override;
 
 
    };
