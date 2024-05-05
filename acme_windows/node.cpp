@@ -44,6 +44,8 @@
 
 #pragma comment(lib, "Version.lib")
 
+CLASS_DECL_ACME void acme_set_main_hwnd(HWND hwnd);
+CLASS_DECL_ACME HWND acme_get_main_hwnd();
 
 //
 //#if defined(_WIN32)
@@ -219,7 +221,7 @@ namespace acme_windows
    }
 
 
-   void node::initialize(::particle * pparticle)
+   void node::initialize(::particle* pparticle)
    {
 
       ::acme::node::initialize(pparticle);
@@ -256,16 +258,41 @@ namespace acme_windows
 
 
 
-   void node::shell_open(const ::file::path & pathFile, const ::string & strParams, const ::file::path & pathFolder)
+   void node::shell_open(const ::file::path& pathFile, const ::string& strParams, const ::file::path& pathFolder)
    {
 
       wstring wstrFile(pathFile.windows_path());
 
+      const wchar_t* pwszParams = nullptr;
+
       wstring wstrParams(strParams);
+
+      if (wstrParams.has_char())
+      {
+
+         pwszParams = wstrParams;
+
+      }
+
+      const wchar_t* pwszFolder = nullptr;
 
       wstring wstrFolder(pathFolder.windows_path());
 
-      int iRet = (int)(iptr) ::ShellExecuteW(nullptr, L"open", wstrFile, wstrParams, wstrFolder, SW_RESTORE);
+      if (wstrFolder.has_char())
+      {
+
+         pwszFolder = wstrFolder;
+
+      }
+
+      HWND hwndMain = acme_get_main_hwnd();
+
+      int iRet = (int)(iptr) ::ShellExecuteW(hwndMain,
+         L"open",
+         wstrFile,
+         pwszParams,
+         pwszFolder,
+         SW_SHOWNORMAL);
 
    }
 
@@ -4642,4 +4669,5 @@ int windows_desktop1_main(HINSTANCE hInstance, int nCmdShow);
 //#include "apex/operating_system/windows/_.h"
 
 #endif
+
 
