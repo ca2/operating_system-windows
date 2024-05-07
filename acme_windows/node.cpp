@@ -4233,6 +4233,68 @@ namespace acme_windows
    }
 
 
+   bool node::has_posix_shell_command(const ::scoped_string& scopedstr, enum_posix_shell eposixshell)
+   {
+
+      try
+      {
+
+         ::string strCheckCommand;
+
+         strCheckCommand.formatf("command -v %s", scopedstr.c_str());
+
+         ::string strOutput;
+
+         auto iExitCode = get_posix_shell_command_output(strOutput, strCheckCommand, eposixshell, 1_min);
+
+         return iExitCode == 0 || strOutput.has_char();
+
+      }
+      catch (...)
+      {
+
+      }
+
+      return false;
+
+   }
+
+   
+   void node::install_posix_shell_command(const ::scoped_string& scopedstr, enum_posix_shell eposixshell, const ::trace_function & tracefunction)
+   {
+
+      ::string strOutput;
+
+      if (eposixshell == e_posix_shell_msys2)
+      {
+
+         ::string strInstallCommand;
+
+         strInstallCommand = "pacman -S --noconfirm " + scopedstr;
+
+         posix_shell_command(strInstallCommand, eposixshell, tracefunction);
+
+      }
+      else
+      {
+
+         ::string strOutput;
+
+         strOutput.formatf("install_posix_shell_command failed for command %s: installation method not standard, inexistent or not implemented for shell %d",
+            scopedstr.c_str(),
+            eposixshell);
+
+         tracefunction(e_trace_level_error, strOutput, false);
+
+         throw ::exception(error_failed, strOutput);
+
+      }
+
+      //return strOutput;
+
+   }
+
+
    bool node::_is_strawberry_perl_installed()
    {
 
@@ -4642,7 +4704,7 @@ namespace acme_windows
    }
 
 
-   int node::get_processor_count()
+   int node::performance_core_count()
    {
 
       SYSTEM_INFO sysinfo;

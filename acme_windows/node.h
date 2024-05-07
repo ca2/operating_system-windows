@@ -6,6 +6,7 @@
 //
 #pragma once
 
+
 #include "acme_windows_common/node.h"
 #include "acme/primitive/collection/numeric_array.h"
 #include "acme/_operating_system.h"
@@ -288,6 +289,14 @@ namespace acme_windows
 
       bool _is_msys2_installed() override;
 
+      bool has_posix_shell_command(const ::scoped_string& scopedstr, enum_posix_shell eposixshell) override;
+
+      void install_posix_shell_command(const ::scoped_string& scopedstr, enum_posix_shell eposixshell, const ::trace_function & tracefunction) override;
+
+      //bool _has_msys2_command(const ::scoped_string& scopedstr) override;
+
+      //void _install_msys2_package(const ::scoped_string& scopedstr) override;
+
       bool _is_strawberry_perl_installed() override;
 
       bool _is_code_exe_user_path_environment_variable_ok(::string* pstrCorrectPath = nullptr) override;
@@ -342,7 +351,11 @@ namespace acme_windows
 
       ::file::path _get_cmd_path() override;
 
-      int get_processor_count() override;
+      //int building_core_count(bool bDedicatedBuilder) override;
+
+      int performance_core_count() override;
+
+      //int efficiency_core_count() override;
 
 
    };

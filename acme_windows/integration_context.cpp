@@ -1016,7 +1016,7 @@ namespace acme_windows
       }
 
 
-      int context::unix_shell_command(const ::scoped_string& scopedstrCommand, const trace_function& tracefunction)
+      int context::posix_shell_command(const ::scoped_string& scopedstrCommand, enum_posix_shell eposixshell, const trace_function& tracefunction)
       {
 
          try
