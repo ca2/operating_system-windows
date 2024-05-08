@@ -65,7 +65,7 @@ CLASS_DECL_ACME HWND acme_get_main_hwnd();
 
 
 
-CLASS_DECL_ACME_WINDOWS void call_async(const scoped_string & strPath, const scoped_string & strParam, const scoped_string & strDir, ::e_display edisplay, bool bPrivileged, unsigned int * puiPid);
+CLASS_DECL_ACME_WINDOWS void call_async(const scoped_string& strPath, const scoped_string& strParam, const scoped_string& strDir, ::e_display edisplay, bool bPrivileged, unsigned int* puiPid);
 
 
 namespace windows
@@ -138,7 +138,7 @@ namespace acme_windows
       }
 
 
-      bool synchronization_object(const class time & timeWait, DWORD & dwExitCode)
+      bool synchronization_object(const class time& timeWait, DWORD& dwExitCode)
       {
 
          fMask = SEE_MASK_NOASYNC | SEE_MASK_NOCLOSEPROCESS;
@@ -942,7 +942,7 @@ namespace acme_windows
    // enzymes: Liveedu.tv, Twitch.tv and Mixer.com streamers and viewers
    // Mummi and bilbo!!
    // create call to :
-   void node::install_crash_dump_reporting(const string & strModuleNameWithTheExeExtension)
+   void node::install_crash_dump_reporting(const string& strModuleNameWithTheExeExtension)
    {
 
       ::acme_windows::registry::key k;
@@ -953,11 +953,11 @@ namespace acme_windows
       {
          ::file::path str = acmedirectory()->system() / "CrashDumps" / strModuleNameWithTheExeExtension;
          wstring wstr = str;
-         RegSetValueExW(k.m_hkeySub, L"DumpFolder", 0, REG_EXPAND_SZ, (::u8 *)wstr.c_str(), ::u32((wcslen(wstr) + 1) * sizeof(wchar_t)));
+         RegSetValueExW(k.m_hkeySub, L"DumpFolder", 0, REG_EXPAND_SZ, (::u8*)wstr.c_str(), ::u32((wcslen(wstr) + 1) * sizeof(wchar_t)));
          ::u32 dw = 10;
-         RegSetValueExW(k.m_hkeySub, L"DumpCount", 0, REG_DWORD, (::u8 *)&dw, sizeof(dw));
+         RegSetValueExW(k.m_hkeySub, L"DumpCount", 0, REG_DWORD, (::u8*)&dw, sizeof(dw));
          dw = 2;
-         RegSetValueExW(k.m_hkeySub, L"DumpType", 0, REG_DWORD, (::u8 *)&dw, sizeof(dw));
+         RegSetValueExW(k.m_hkeySub, L"DumpType", 0, REG_DWORD, (::u8*)&dw, sizeof(dw));
 
       }
 
@@ -1145,7 +1145,7 @@ namespace acme_windows
 
       //u32 i;
 
-      DWORD dwProcess = (DWORD) processidentifier;
+      DWORD dwProcess = (DWORD)processidentifier;
 
       hProcess = OpenProcess(PROCESS_QUERY_INFORMATION | PROCESS_VM_READ, false, dwProcess);
 
@@ -1166,7 +1166,7 @@ namespace acme_windows
 
       DWORD cbNeeded;
 
-      while(!EnumProcessModules(hProcess, hmodulea.data(), (DWORD) hmodulea.get_size_in_bytes(), &cbNeeded)
+      while (!EnumProcessModules(hProcess, hmodulea.data(), (DWORD)hmodulea.get_size_in_bytes(), &cbNeeded)
          || hmodulea.get_size_in_bytes() < cbNeeded)
       {
 
@@ -1187,10 +1187,10 @@ namespace acme_windows
 
       wchara.set_size(MAX_PATH * 8);
 
-      for(auto & hmodule : hmodulea)
+      for (auto& hmodule : hmodulea)
       {
 
-         if (GetModuleFileNameExW(hProcess, hmodule, wchara.data(), (DWORD) wchara.size()))
+         if (GetModuleFileNameExW(hProcess, hmodule, wchara.data(), (DWORD)wchara.size()))
          {
 
             patha.add(wchara.data());
@@ -1225,9 +1225,9 @@ namespace acme_windows
    //   return ::transfer(patha);
 
    //}
-   
 
-   bool node::load_modules_diff(string_array & straOld, string_array & straNew, const ::string & strExceptDir)
+
+   bool node::load_modules_diff(string_array& straOld, string_array& straNew, const ::string& strExceptDir)
    {
 
       bool bFound;
@@ -1318,7 +1318,7 @@ namespace acme_windows
    }
 
 
-   ::process_identifier_array node::module_path_processes_identifiers(const ::string & pszModulePath, bool bModuleNameIsPropertyFormatted)
+   ::process_identifier_array node::module_path_processes_identifiers(const ::string& pszModulePath, bool bModuleNameIsPropertyFormatted)
    {
 
       ::file::path pathModule(pszModulePath);
@@ -1342,7 +1342,7 @@ namespace acme_windows
       //GetModuleFileNameEx(GetCurrentProcess(), NULL, currName, MAX_PATH);
       //DWORD currProcessId = GetCurrentProcessId();
 
-      for (auto & dwProcess : dwaProcesses)
+      for (auto& dwProcess : dwaProcesses)
       {
 
          auto pathProcessModule = process_identifier_module_path(dwProcess);
@@ -1463,7 +1463,7 @@ namespace acme_windows
 
       //return strName;
 
-      DWORD dwProcess = (DWORD) processidentifier;
+      DWORD dwProcess = (DWORD)processidentifier;
 
       HANDLE hProcess = OpenProcess(PROCESS_QUERY_INFORMATION | PROCESS_VM_READ, false, dwProcess);
 
@@ -1500,7 +1500,7 @@ namespace acme_windows
 
       ::windows::enum_processes(dwaProcesses);
 
-      for (auto & dwProcess : dwaProcesses)
+      for (auto& dwProcess : dwaProcesses)
       {
 
          processidentifiera.add(dwProcess);
@@ -1532,7 +1532,7 @@ namespace acme_windows
    //end;
 
 
-   bool node::process_contains_module(string & strImage, ::process_identifier processidentifier, const ::string & pszLibrary)
+   bool node::process_contains_module(string& strImage, ::process_identifier processidentifier, const ::string& pszLibrary)
    {
 
       HANDLE hProcess;
@@ -1558,9 +1558,9 @@ namespace acme_windows
 
       memory.set_size(iImageSize);
 
-      GetModuleFileNameExW(hProcess, nullptr, (WCHAR *)memory.data(), (DWORD)(memory.size() / sizeof(WCHAR)));
+      GetModuleFileNameExW(hProcess, nullptr, (WCHAR*)memory.data(), (DWORD)(memory.size() / sizeof(WCHAR)));
 
-      strImage = (const wchar_t *)memory.data();
+      strImage = (const wchar_t*)memory.data();
 
       wstring wstrLibrary(pszLibrary);
 
@@ -1574,10 +1574,10 @@ namespace acme_windows
 
             // Get the full path to the module's file.
 
-            if (GetModuleFileNameExW(hProcess, hmods[i], (WCHAR *)memory.data(), (DWORD)(memory.size() / sizeof(WCHAR))))
+            if (GetModuleFileNameExW(hProcess, hmods[i], (WCHAR*)memory.data(), (DWORD)(memory.size() / sizeof(WCHAR))))
             {
 
-               if (case_insensitive_string_order((const wchar_t *)memory.data(), wstrLibrary) == 0)
+               if (case_insensitive_string_order((const wchar_t*)memory.data(), wstrLibrary) == 0)
                {
 
                   bFound = true;
@@ -1599,7 +1599,7 @@ namespace acme_windows
    }
 
 
-   ::process_identifier_array node::shared_library_process(string_array & straProcesses, const ::string & pszLibrary)
+   ::process_identifier_array node::shared_library_process(string_array& straProcesses, const ::string& pszLibrary)
    {
 
       process_identifier_array processidentifiera;
@@ -1608,7 +1608,7 @@ namespace acme_windows
 
       ::string strImage;
 
-      for (auto & dwProcess : dwaProcesses)
+      for (auto& dwProcess : dwaProcesses)
       {
 
          if (process_contains_module(strImage, dwProcess, pszLibrary))
@@ -1985,7 +1985,7 @@ namespace acme_windows
    }
 
 
-   string node::get_environment_variable(const ::scoped_string & scopedstrEnvironmentVariable)
+   string node::get_environment_variable(const ::scoped_string& scopedstrEnvironmentVariable)
    {
 
       string str;
@@ -2009,7 +2009,7 @@ namespace acme_windows
    }
 
 
-   ::string node::expand_environment_variables(const ::scoped_string & scopedstr)
+   ::string node::expand_environment_variables(const ::scoped_string& scopedstr)
    {
 
       wstring wstrSource(scopedstr);
@@ -2029,7 +2029,7 @@ namespace acme_windows
    }
 
 
-   void node::set_environment_variable(const ::scoped_string & scopedstrEnvironmentVariable, const ::scoped_string & scopedstrValue)
+   void node::set_environment_variable(const ::scoped_string& scopedstrEnvironmentVariable, const ::scoped_string& scopedstrValue)
    {
 
       ::wstring wstrEnvironmentVariable(scopedstrEnvironmentVariable);
@@ -2041,7 +2041,7 @@ namespace acme_windows
    }
 
 
-   ::process_identifier node::create_process(const ::string & pszCommandLine)
+   ::process_identifier node::create_process(const ::string& pszCommandLine)
    {
 
       STARTUPINFO StartupInfo;
@@ -2060,7 +2060,7 @@ namespace acme_windows
 
       wstring wstrCommandLine(pszCommandLine);
 
-      if (!CreateProcessW(nullptr, (WCHAR *) wstrCommandLine.c_str(), nullptr, nullptr, false,
+      if (!CreateProcessW(nullptr, (WCHAR*)wstrCommandLine.c_str(), nullptr, nullptr, false,
          CREATE_NEW_CONSOLE,
          nullptr,
          nullptr,
@@ -2103,7 +2103,7 @@ namespace acme_windows
    }
 
 
-   void node::run_silent(const ::string & strFunct, const ::string & strstrParams)
+   void node::run_silent(const ::string& strFunct, const ::string& strstrParams)
    {
 
 #if defined(UNIVERSAL_WINDOWS)
@@ -2118,9 +2118,9 @@ namespace acme_windows
 
       char Args[4096];
 
-      char * pEnvCMD = nullptr;
+      char* pEnvCMD = nullptr;
 
-      const char * pDefaultCMD = "CMD.EXE";
+      const char* pDefaultCMD = "CMD.EXE";
 
       ULONG rc;
 
@@ -2159,7 +2159,7 @@ namespace acme_windows
 
       wstring wstrArguments(Args);
 
-      if (!CreateProcessW(nullptr, (WCHAR *) wstrArguments.c_str(), nullptr, nullptr, false,
+      if (!CreateProcessW(nullptr, (WCHAR*)wstrArguments.c_str(), nullptr, nullptr, false,
          CREATE_NEW_CONSOLE,
          nullptr,
          nullptr,
@@ -2239,7 +2239,7 @@ namespace acme_windows
 
 #endif
 
-}
+   }
 
 
    void node::reboot()
@@ -2401,7 +2401,7 @@ namespace acme_windows
       pSecurityAttributes->bInheritHandle = false; // object uninheritable
 
       // declare and initialize a security descriptor
-      auto pSecurityDescriptor = (SECURITY_DESCRIPTOR *)(pSecurityAttributes + 1);
+      auto pSecurityDescriptor = (SECURITY_DESCRIPTOR*)(pSecurityAttributes + 1);
 
       bool bInitializeOk = InitializeSecurityDescriptor(pSecurityDescriptor, SECURITY_DESCRIPTOR_REVISION) != false;
 
@@ -2434,7 +2434,7 @@ namespace acme_windows
    }
 
 
-   void node::register_spa_file_type(const ::string & strAppIdHandler)
+   void node::register_spa_file_type(const ::string& strAppIdHandler)
    {
 
 #ifdef WINDOWS_DESKTOP
@@ -2465,8 +2465,8 @@ namespace acme_windows
          output_debug_string("Could not create or open a registrty key\n");
          throw ::exception(error_resource);
       }
-      RegSetValueExW(hkey, L"", 0, REG_SZ, (::u8 *)desc.c_str(), ::u32(desc.length() * sizeof(wchar_t))); // default vlaue is description of file extension
-      RegSetValueExW(hkey, L"ContentType", 0, REG_SZ, (::u8 *)content_type.c_str(), ::u32(content_type.length() * sizeof(wchar_t))); // default vlaue is description of file extension
+      RegSetValueExW(hkey, L"", 0, REG_SZ, (::u8*)desc.c_str(), ::u32(desc.length() * sizeof(wchar_t))); // default vlaue is description of file extension
+      RegSetValueExW(hkey, L"ContentType", 0, REG_SZ, (::u8*)content_type.c_str(), ::u32(content_type.length() * sizeof(wchar_t))); // default vlaue is description of file extension
       RegCloseKey(hkey);
 
 
@@ -2478,7 +2478,7 @@ namespace acme_windows
          output_debug_string("Could not create or open a registrty key\n");
          throw ::exception(error_resource);
       }
-      RegSetValueExW(hkey, L"", 0, REG_SZ, (::u8 *)app.c_str(), ::u32(app.length() * sizeof(wchar_t)));
+      RegSetValueExW(hkey, L"", 0, REG_SZ, (::u8*)app.c_str(), ::u32(app.length() * sizeof(wchar_t)));
       RegCloseKey(hkey);
 
 
@@ -2489,7 +2489,7 @@ namespace acme_windows
          output_debug_string("Could not create or open a registrty key\n");
          throw ::exception(error_resource);
       }
-      RegSetValueExW(hkey, L"", 0, REG_SZ, (::u8 *)icon.c_str(), ::u32(icon.length() * sizeof(wchar_t)));
+      RegSetValueExW(hkey, L"", 0, REG_SZ, (::u8*)icon.c_str(), ::u32(icon.length() * sizeof(wchar_t)));
       RegCloseKey(hkey);
 
       ::file::path pathFile(acmedirectory()->stage(strAppIdHandler, process_platform_name(), process_configuration_name()) / "spa_register.txt");
@@ -2555,7 +2555,7 @@ namespace acme_windows
    }
 
 
-   void node::get_folder_path_from_user(::file::path & pathFolder)
+   void node::get_folder_path_from_user(::file::path& pathFolder)
    {
 
       wstring wstrFolder(pathFolder);
@@ -2617,7 +2617,7 @@ namespace acme_windows
 
 
 
-   HICON node::extract_icon(HINSTANCE hInst, const ::string & pszExeFileName, ::u32 nIconIndex)
+   HICON node::extract_icon(HINSTANCE hInst, const ::string& pszExeFileName, ::u32 nIconIndex)
 
    {
 
@@ -2627,7 +2627,7 @@ namespace acme_windows
    }
 
 
-   ::i32 node::reg_query_value(HKEY hkey, const ::string & pszSubKey, string & str)
+   ::i32 node::reg_query_value(HKEY hkey, const ::string& pszSubKey, string& str)
    {
 
       DWORD dwType = 0;
@@ -2644,7 +2644,7 @@ namespace acme_windows
 
          auto pwsz = wstr.get_buffer(dwSize);
 
-         lResult = RegQueryValueExW(hkey, wstring(pszSubKey), nullptr, &dwType, (::u8 *)(unichar *)pwsz, &dwSize);
+         lResult = RegQueryValueExW(hkey, wstring(pszSubKey), nullptr, &dwType, (::u8*)(unichar*)pwsz, &dwSize);
 
          wstr.release_buffer(dwSize);
 
@@ -2675,7 +2675,7 @@ namespace acme_windows
    //}
 
 
-   void node::delete_file(const ::file::path & pathParam)
+   void node::delete_file(const ::file::path& pathParam)
    {
 
       auto path = m_pcontext->defer_process_path(pathParam);
@@ -2688,7 +2688,7 @@ namespace acme_windows
 
 
 
-   void node::register_dll(const ::file::path & pathDll)
+   void node::register_dll(const ::file::path& pathDll)
    {
 
 
@@ -2775,7 +2775,7 @@ namespace acme_windows
    //}
 
 
-   ::wstring node::expand_environment_variables(const ::wstring & wstr)
+   ::wstring node::expand_environment_variables(const ::wstring& wstr)
    {
 
       DWORD dwCharLen = ::ExpandEnvironmentStringsW(wstr, nullptr, 0);
@@ -2827,13 +2827,13 @@ namespace acme_windows
    }
 
 
-   void node::create_app_shortcut(::acme::application * papp)
+   void node::create_app_shortcut(::acme::application* papp)
    {
 
    }
 
 
-   void node::open_url_link_at_system_browser(const ::string & strUrl, const ::string & strProfile)
+   void node::open_url_link_at_system_browser(const ::string& strUrl, const ::string& strProfile)
    {
 
       //#ifdef DEBUG
@@ -2855,7 +2855,7 @@ namespace acme_windows
    }
 
 
-   void node::shell_launch(const ::string & strUrl)
+   void node::shell_launch(const ::string& strUrl)
    {
 
       wstring wstrUrl(strUrl);
@@ -2951,7 +2951,7 @@ namespace acme_windows
    }
 
 
-   ::pointer < ::acme::exclusive > node::_get_exclusive(::particle * pparticleContext, const ::string & strName, ::security_attributes * psecurityattributes)
+   ::pointer < ::acme::exclusive > node::_get_exclusive(::particle* pparticleContext, const ::string& strName, ::security_attributes* psecurityattributes)
    {
 
       return __allocate< exclusive >(pparticleContext, strName, psecurityattributes);
@@ -3220,7 +3220,7 @@ namespace acme_windows
    //}
 
 
-   int node::command_system(const ::scoped_string & scopedstr, const ::trace_function & tracefunction, const ::file::path & pathWorkingDirectory, ::e_display edisplay)
+   int node::command_system(const ::scoped_string& scopedstr, const ::trace_function& tracefunction, const ::file::path& pathWorkingDirectory, ::e_display edisplay)
    {
 
       auto pcreateprocess = __create_new < ::acme_windows::create_process>();
@@ -3315,7 +3315,7 @@ namespace acme_windows
 
       pcreateprocess->wait_process(tracefunction);
 
-//      return iExitCode;
+      //      return iExitCode;
 
       return pcreateprocess->m_iExitCode;
 
@@ -3345,7 +3345,7 @@ namespace acme_windows
    {
 
       ::string strOutput;
-      
+
       int iExitCode = get_command_output(strOutput, "WHERE " + scopedstrCommand);
 
       strOutput.trim();
@@ -3666,7 +3666,7 @@ namespace acme_windows
    }
 
 
-   void node::shell_execute_async(const scoped_string & scopedstrFile, const scoped_string & scopedstrParams, const ::file::path& pathWorkingDirectory)
+   void node::shell_execute_async(const scoped_string& scopedstrFile, const scoped_string& scopedstrParams, const ::file::path& pathWorkingDirectory)
    {
 
       shell_execute execute(scopedstrFile, scopedstrParams, pathWorkingDirectory);
@@ -3676,7 +3676,7 @@ namespace acme_windows
    }
 
 
-   int node::shell_execute_sync(const scoped_string & scopedstrFile, const scoped_string & scopedstrParams, const class time & timeTimeout, const ::file::path& pathWorkingDirectory)
+   int node::shell_execute_sync(const scoped_string& scopedstrFile, const scoped_string& scopedstrParams, const class time& timeTimeout, const ::file::path& pathWorkingDirectory)
    {
 
       shell_execute execute(scopedstrFile, scopedstrParams, pathWorkingDirectory);
@@ -3695,7 +3695,7 @@ namespace acme_windows
    }
 
 
-   void node::root_execute_async(const scoped_string & scopedstrFile, const scoped_string & scopedstrParams, const ::file::path& pathWorkingDirectory)
+   void node::root_execute_async(const scoped_string& scopedstrFile, const scoped_string& scopedstrParams, const ::file::path& pathWorkingDirectory)
    {
 
       shell_execute execute(scopedstrFile, scopedstrParams, pathWorkingDirectory);
@@ -3707,7 +3707,7 @@ namespace acme_windows
    }
 
 
-   int node::root_execute_sync(const scoped_string & scopedstrFile, const scoped_string & scopedstrParams, const class time & timeTimeout, const ::file::path& pathWorkingDirectory)
+   int node::root_execute_sync(const scoped_string& scopedstrFile, const scoped_string& scopedstrParams, const class time& timeTimeout, const ::file::path& pathWorkingDirectory)
    {
 
       shell_execute execute(scopedstrFile, scopedstrParams, pathWorkingDirectory);
@@ -3728,7 +3728,7 @@ namespace acme_windows
    }
 
 
-   void node::call_async(const ::string & strPath, const ::string & strParam, const ::string & strDir, ::e_display edisplay, bool bPrivileged, unsigned int * puiPid)
+   void node::call_async(const ::string& strPath, const ::string& strParam, const ::string& strDir, ::e_display edisplay, bool bPrivileged, unsigned int* puiPid)
    {
 
       SHELLEXECUTEINFOW info = {};
@@ -3799,7 +3799,7 @@ namespace acme_windows
    }
 
 
-   void node::call_sync(const ::string & strPath, const ::string & strParam, const ::string & strDir, ::e_display edisplay, const class time & timeTimeout, ::property_set & set, int * piExitCode)
+   void node::call_sync(const ::string& strPath, const ::string& strParam, const ::string& strDir, ::e_display edisplay, const class time& timeTimeout, ::property_set& set, int* piExitCode)
    {
 
       SHELLEXECUTEINFOW infoa;
@@ -3922,7 +3922,7 @@ namespace acme_windows
    }
 
 
-   void node::launch_application(::particle * pparticle, const ::string & strAppId, const ::string & strParams, int iBitCount)
+   void node::launch_application(::particle* pparticle, const ::string& strAppId, const ::string& strParams, int iBitCount)
    {
 
 
@@ -3931,7 +3931,7 @@ namespace acme_windows
 
 
 
-   ::string node::registry_environment_variable_to_system(const ::scoped_string & scopedstr)
+   ::string node::registry_environment_variable_to_system(const ::scoped_string& scopedstr)
    {
 
       if (scopedstr.case_insensitive_equals("path"))
@@ -3946,7 +3946,7 @@ namespace acme_windows
    }
 
 
-   ::string node::system_environment_variable_to_registry(const ::scoped_string & scopedstr)
+   ::string node::system_environment_variable_to_registry(const ::scoped_string& scopedstr)
    {
 
       if (scopedstr.case_insensitive_equals("path"))
@@ -3961,7 +3961,7 @@ namespace acme_windows
    }
 
 
-   int node::environment_variable_registry_payload_type(const ::scoped_string & scopedstr)
+   int node::environment_variable_registry_payload_type(const ::scoped_string& scopedstr)
    {
 
       if (scopedstr.case_insensitive_equals("path"))
@@ -3976,7 +3976,7 @@ namespace acme_windows
    }
 
 
-   ::string node::get_user_permanent_environment_variable(const ::scoped_string & scopedstr)
+   ::string node::get_user_permanent_environment_variable(const ::scoped_string& scopedstr)
    {
 
       ::acme_windows::registry::key key(HKEY_CURRENT_USER, "Environment");
@@ -3997,7 +3997,28 @@ namespace acme_windows
    }
 
 
-   void node::set_user_permanent_environment_variable(const ::scoped_string & scopedstr, const ::scoped_string & scopedstrPayload, bool bNoSystemNotify)
+   ::string node::get_system_permanent_environment_variable(const ::scoped_string& scopedstr)
+   {
+
+      ::acme_windows::registry::key key(HKEY_LOCAL_MACHINE, "SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Environment");
+
+      string strName = system_environment_variable_to_registry(scopedstr);
+
+      ::string str;
+
+      if (!key.get(strName, str))
+      {
+
+         return {};
+
+      }
+
+      return str;
+
+   }
+
+
+   void node::set_user_permanent_environment_variable(const ::scoped_string& scopedstr, const ::scoped_string& scopedstrPayload, bool bNoSystemNotify)
    {
 
       ::acme_windows::registry::key key(HKEY_CURRENT_USER, "Environment");
@@ -4019,7 +4040,7 @@ namespace acme_windows
       {
 
          system_notify_environment_variable_change();
-         
+
       }
 
    }
@@ -4035,6 +4056,87 @@ namespace acme_windows
          SMTO_ABORTIFHUNG | SMTO_NOTIMEOUTIFNOTHUNG, 10000, &dwptrResult);
 
       ::preempt(10_s);
+
+   }
+
+
+   void node::_update_process_environment_variable(const ::scoped_string& scopedstr)
+   {
+
+      auto strUser = get_user_permanent_environment_variable(scopedstr);
+
+      auto strSystem = get_system_permanent_environment_variable(scopedstr);
+
+      ::string str;
+
+      if (scopedstr == "PATH")
+      {
+
+         if (strUser.has_char())
+         {
+
+            if (strSystem.has_char())
+            {
+
+               str = strUser + ";" + strSystem;
+
+            }
+            else
+            {
+
+               str = strUser;
+
+            }
+
+         }
+         else
+         {
+
+            str = strSystem;
+
+         }
+
+      }
+      else
+      {
+
+         if (strUser.has_char())
+         {
+
+            str = strUser;
+
+         }
+         else
+         {
+
+            str = strSystem;
+
+         }
+
+      }
+
+      ::string strCurrent = get_environment_variable(scopedstr);
+
+      if (strCurrent != str)
+      {
+
+         ::wstring wstrKey(scopedstr);
+
+         ::wstring wstr(str);
+
+         wstr = expand_environment_variables(wstr);
+
+         SetEnvironmentVariableW(wstrKey, wstr);
+
+      }
+
+   }
+
+
+   void node::update_process_environment_variables()
+   {
+
+      _update_process_environment_variable("PATH");
 
    }
 
@@ -4114,7 +4216,7 @@ namespace acme_windows
    {
 
       ::acme_windows::registry::key key;
-      
+
       if (!key._open(HKEY_LOCAL_MACHINE, "SYSTEM\\CurrentControlSet\\Control\\Nls\\CodePage", true))
       {
 
@@ -4259,8 +4361,8 @@ namespace acme_windows
 
    }
 
-   
-   void node::install_posix_shell_command(const ::scoped_string& scopedstr, enum_posix_shell eposixshell, const ::trace_function & tracefunction)
+
+   void node::install_posix_shell_command(const ::scoped_string& scopedstr, enum_posix_shell eposixshell, const ::trace_function& tracefunction)
    {
 
       ::string strOutput;
@@ -4350,7 +4452,7 @@ namespace acme_windows
       }
 
       return false;
-      
+
    }
 
 
@@ -4358,7 +4460,7 @@ namespace acme_windows
    {
 
       ::acme_windows::registry::key key;
-      
+
       if (!key._open(HKEY_LOCAL_MACHINE, "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\AppModelUnlock"))
       {
 
@@ -4420,7 +4522,7 @@ namespace acme_windows
    }
 
 
-   void node::set_user_run_once(const ::scoped_string & scopedstrLabel, const ::scoped_string & scopedstrCommand)
+   void node::set_user_run_once(const ::scoped_string& scopedstrLabel, const ::scoped_string& scopedstrCommand)
    {
 
       ::acme_windows::registry::key key(HKEY_CURRENT_USER, "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\RunOnce");
@@ -4568,7 +4670,7 @@ namespace acme_windows
 
    }
 
-   void node::launch_app(const ::string & psz, const char ** argv, int iFlags)
+   void node::launch_app(const ::string& psz, const char** argv, int iFlags)
    {
 
       shell_open(psz);
@@ -4576,7 +4678,7 @@ namespace acme_windows
    }
 
 
-   ::pointer < ::operating_system::application > node::module_path_application(const ::scoped_string & scopedstr)
+   ::pointer < ::operating_system::application > node::module_path_application(const ::scoped_string& scopedstr)
    {
 
       auto papplication = __create < ::operating_system::application >();
