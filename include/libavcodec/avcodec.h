@@ -1505,7 +1505,7 @@ typedef struct AVCodecContext {
      */
     int hwaccel_flags;
 
-    /*
+    /**
      * Video decoding only.  Sets the number of extra hardware frames which
      * the decoder will allocate for use by the caller.  This must be set
      * before avcodec_open2() is called.
@@ -2028,6 +2028,53 @@ typedef struct AVCodecContext {
      *   an error.
      */
     int64_t frame_num;
+
+    /**
+     * Decoding only. May be set by the caller before avcodec_open2() to an
+     * av_malloc()'ed array (or via AVOptions). Owned and freed by the decoder
+     * afterwards.
+     *
+     * Side data attached to decoded frames may come from several sources:
+     * 1. coded_side_data, which the decoder will for certain types translate
+     *    from packet-type to frame-type and attach to frames;
+     * 2. side data attached to an AVPacket sent for decoding (same
+     *    considerations as above);
+     * 3. extracted from the coded bytestream.
+     * The first two cases are supplied by the caller and typically come from a
+     * container.
+     *
+     * This array configures decoder behaviour in cases when side data of the
+     * same type is present both in the coded bytestream and in the
+     * user-supplied side data (items 1. and 2. above). In all cases, at most
+     * one instance of each side data type will be attached to output frames. By
+     * default it will be the bytestream side data. Adding an
+     * AVPacketSideDataType value to this array will flip the preference for
+     * this type, thus making the decoder prefer user-supplied side data over
+     * bytestream. In case side data of the same type is present both in
+     * coded_data and attacked to a packet, the packet instance always has
+     * priority.
+     *
+     * The array may also contain a single -1, in which case the preference is
+     * switched for all side data types.
+     */
+    int        *side_data_prefer_packet;
+    /**
+     * Number of entries in side_data_prefer_packet.
+     */
+    unsigned nb_side_data_prefer_packet;
+
+    /**
+     * Array containing static side data, such as HDR10 CLL / MDCV structures.
+     * Side data entries should be allocated by usage of helpers defined in
+     * libavutil/frame.h.
+     *
+     * - encoding: may be set by user before calling avcodec_open2() for
+     *             encoder configuration. Afterwards owned and freed by the
+     *             encoder.
+     * - decoding: may be set by libavcodec in avcodec_open2().
+     */
+    AVFrameSideData  **decoded_side_data;
+    int             nb_decoded_side_data;
 } AVCodecContext;
 
 /**
