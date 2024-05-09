@@ -53,7 +53,7 @@ namespace apex_windows
    }
 
 
-   /*   ::raw::count ip_enum::enumerate(ip_array & ipa)
+   /*   ::collection::count ip_enum::enumerate(ip_array & ipa)
    {
    //get this machines host name
    char szHostname[256];
@@ -98,7 +98,7 @@ namespace apex_windows
    return true;
    }
    */
-   ::raw::count ip_enum::enumerate(pointer_array < ::networking::address > & ipa)
+   ::collection::count ip_enum::enumerate(pointer_array < ::networking::address > & ipa)
    {
 
       //get this machines host name

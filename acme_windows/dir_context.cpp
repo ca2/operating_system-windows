@@ -562,7 +562,7 @@ namespace acme_windows
 
       //   }
 
-      //   for (::raw::index i = iStart; i < listing.get_size(); i++)
+      //   for (::collection::index i = iStart; i < listing.get_size(); i++)
       //   {
 
       //      listing[i].m_iRelative = listing.m_pathUser.get_length() + 1;
@@ -739,7 +739,7 @@ namespace acme_windows
 
    //      }
 
-   //      for (::raw::index i = iStart; i < listing.get_size(); i++)
+   //      for (::collection::index i = iStart; i < listing.get_size(); i++)
    //      {
 
    //         listing[i].m_iRelative = listing.m_pathUser.get_length() + 1;
@@ -984,7 +984,7 @@ namespace acme_windows
 
    //   //path.ascendants_path(stra);
 
-   //   //::raw::index i = stra.get_upper_bound();
+   //   //::collection::index i = stra.get_upper_bound();
 
    //   //for (; i >= 0; i--)
    //   //{

@@ -113,7 +113,7 @@ namespace windows
       // symbol handler queries
       size_t      module(char* str, int nCount);
       size_t      symbol(char* str, int nCount, OS_DWORD* pdisplacement = 0);
-      ::raw::index       fileline(char* str, int nCount, u32* pline, u32* pdisplacement = 0);
+      ::collection::index       fileline(char* str, int nCount, u32* pline, u32* pdisplacement = 0);
 
 
       // stack walk

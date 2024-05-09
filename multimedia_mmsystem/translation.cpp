@@ -27,7 +27,7 @@ namespace multimedia
       }
 
 
-      void translate(WAVEHDR & wavehdr, ::wave::buffer * pwavebuffer, ::raw::index iBuffer)
+      void translate(WAVEHDR & wavehdr, ::wave::buffer * pwavebuffer, ::collection::index iBuffer)
       {
 
          ::wave::buffer::item * pitem  = pwavebuffer->get_buffer(iBuffer);
@@ -43,7 +43,7 @@ namespace multimedia
       }
 
 
-      LPWAVEHDR create_new_WAVEHDR(::wave::buffer * pwavebuffer, ::raw::index iBuffer)
+      LPWAVEHDR create_new_WAVEHDR(::wave::buffer * pwavebuffer, ::collection::index iBuffer)
       {
 
          LPWAVEHDR lpwavehdr = new WAVEHDR;
@@ -54,7 +54,7 @@ namespace multimedia
 
       }
 
-      LPWAVEHDR get_os_data(::wave::buffer * pwavebuffer, ::raw::index iBuffer)
+      LPWAVEHDR get_os_data(::wave::buffer * pwavebuffer, ::collection::index iBuffer)
       {
 
          ::wave::buffer::item * pbuffer = pwavebuffer->get_buffer(iBuffer);

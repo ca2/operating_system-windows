@@ -806,7 +806,7 @@ namespace acme_windows
 
    }
 
-//   void create_process::__read_task(enum_trace_level etracelevel, const trace_function& tracefunction, ::string* pstrOut, const void* p, ::raw::count c)
+//   void create_process::__read_task(enum_trace_level etracelevel, const trace_function& tracefunction, ::string* pstrOut, const void* p, ::collection::count c)
 //   {
 //
 //      pstrOutput->append(p, c);

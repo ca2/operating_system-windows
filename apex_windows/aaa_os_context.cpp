@@ -3119,7 +3119,7 @@ namespace apex_windows
 
          ::acme_windows::registry::key regkey(HKEY_LOCAL_MACHINE, pathApplicationCapabilities / "FileAssociations", true);
 
-         for (::raw::index i = 0; i < straMimeType.get_count(); i++)
+         for (::collection::index i = 0; i < straMimeType.get_count(); i++)
          {
 
             string strExtension = straExtension[i];
@@ -3134,7 +3134,7 @@ namespace apex_windows
 
          ::acme_windows::registry::key regkey(HKEY_LOCAL_MACHINE, pathApplicationCapabilities / "MimeAssociations", true);
 
-         for (::raw::index i = 0; i < straMimeType.get_count(); i++)
+         for (::collection::index i = 0; i < straMimeType.get_count(); i++)
          {
 
             string strMimeType = straMimeType[i];
@@ -3195,7 +3195,7 @@ namespace apex_windows
 
       }
 
-      for (::raw::index i = 0; i < straExtension.get_count(); i++)
+      for (::collection::index i = 0; i < straExtension.get_count(); i++)
       {
 
          string strExtension = straExtension[i];
@@ -3390,7 +3390,7 @@ namespace apex_windows
 
    //         rgSpec.set_size(minimum(wstraSpecs.get_size(), wstraNames.get_size()));
 
-   //         for (::raw::index i = 0; i < rgSpec.get_size(); i++)
+   //         for (::collection::index i = 0; i < rgSpec.get_size(); i++)
    //         {
 
    //            rgSpec[i].pszName = wstraNames[i];
@@ -3640,7 +3640,7 @@ namespace apex_windows
 
    //         rgSpec.set_size(minimum(wstraSpecs.get_size(), wstraNames.get_size()));
 
-   //         for (::raw::index i = 0; i < rgSpec.get_size(); i++)
+   //         for (::collection::index i = 0; i < rgSpec.get_size(); i++)
    //         {
 
    //            rgSpec[i].pszName = wstraNames[i];
@@ -4002,7 +4002,7 @@ namespace apex_windows
 
       patha.set_size(uaPid.get_count());
 
-      for(::raw::index i = 0; i < uaPid.get_count(); i++)
+      for(::collection::index i = 0; i < uaPid.get_count(); i++)
       {
 
          patha[i] = process_identifier_module_path(uaPid[i]);

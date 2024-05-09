@@ -115,7 +115,7 @@ namespace acme_windows
    ::string main_window::get_window_text(const ::iptr_array & idPath)
    {
 
-      ::raw::index i = 0;
+      ::collection::index i = 0;
 
       HWND hwnd = m_hwnd;
 
@@ -143,7 +143,7 @@ namespace acme_windows
    ::string main_window::indexed_get_window_text(const ::iptr_array & idPath)
    {
 
-      ::raw::index i = 0;
+      ::collection::index i = 0;
 
       HWND hwnd = m_hwnd;
 

@@ -127,7 +127,7 @@ namespace multimedia
 
          virtual class ::time out_get_time();
          class ::time out_get_time();
-         virtual void out_filled(::raw::index iBuffer) override;
+         virtual void out_filled(::collection::index iBuffer) override;
          //virtual void out_buffer_ready(LPWAVEHDR lpwavehdr);
 
          virtual void     out_open(::thread * pthreadCallback, i32 iBufferCount, i32 iBufferSampleCount);
@@ -140,7 +140,7 @@ namespace multimedia
          //HWAVEOUT out_get_safe_HWAVEOUT();
 
          virtual void out_on_playback_end();
-         virtual void out_free(::raw::index iBuffer) override;
+         virtual void out_free(::collection::index iBuffer) override;
          //virtual void out_free(LPWAVEHDR lpwavehdr);
 
          virtual bool init_thread() override;

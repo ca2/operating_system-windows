@@ -70,7 +70,7 @@ namespace acme_windows
       void wait_process(const trace_function& tracefunction);
 
       //void _read_task(enum_trace_level etracelevel, const trace_function& tracefunction, ::string * pstrOut, OVERLAPPED * poverlapped);
-      //void __read_task(enum_trace_level etracelevel, const trace_function& tracefunction, ::string* pstrOut, const void * p, ::raw::count c);
+      //void __read_task(enum_trace_level etracelevel, const trace_function& tracefunction, ::string* pstrOut, const void * p, ::collection::count c);
 
    };
 

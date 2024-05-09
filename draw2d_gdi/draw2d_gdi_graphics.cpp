@@ -474,7 +474,7 @@ namespace draw2d_gdi
    }
 
 
-   void graphics::DPtoLP(POINT * lpPoints, ::raw::count nCount)
+   void graphics::DPtoLP(POINT * lpPoints, ::collection::count nCount)
    {
 
       ::DPtoLP(get_handle2(), lpPoints, (int) nCount);
@@ -492,7 +492,7 @@ namespace draw2d_gdi
 
 
 
-   void graphics::LPtoDP(LPPOINT lpPoints, ::raw::count nCount)
+   void graphics::LPtoDP(LPPOINT lpPoints, ::collection::count nCount)
    {
 
       ::LPtoDP(get_handle2(), lpPoints, (int) nCount);
@@ -612,7 +612,7 @@ namespace draw2d_gdi
    }
 
 
-   bool graphics::polyline(const POINT* lpPoints, ::raw::count nCount)
+   bool graphics::polyline(const POINT* lpPoints, ::collection::count nCount)
    {
 
       ASSERT(get_handle1() != nullptr);
@@ -1011,7 +1011,7 @@ namespace draw2d_gdi
    }
 
 
-   bool graphics::polygon_i32(const POINT * lppoints, ::raw::count nCount)
+   bool graphics::polygon_i32(const POINT * lppoints, ::collection::count nCount)
    {
 
       ::rectangle_i32 rectangle;
@@ -1036,7 +1036,7 @@ namespace draw2d_gdi
    }
 
 
-   bool graphics::draw_polygon(const POINT * lppoints, ::raw::count nCount)
+   bool graphics::draw_polygon(const POINT * lppoints, ::collection::count nCount)
    {
 
       ::rectangle_i32 rectangle;
@@ -1061,7 +1061,7 @@ namespace draw2d_gdi
    }
 
 
-   bool graphics::fill_polygon(const POINT * lppoints, ::raw::count nCount)
+   bool graphics::fill_polygon(const POINT * lppoints, ::collection::count nCount)
    {
 
       ::rectangle_i32 rectangle;
@@ -1086,7 +1086,7 @@ namespace draw2d_gdi
    }
 
 
-   bool graphics::poly_polygon(const POINT * lppoints, const INT * lpPolyCounts, ::raw::count nCount)
+   bool graphics::poly_polygon(const POINT * lppoints, const INT * lpPolyCounts, ::collection::count nCount)
    {
 
       ::rectangle_i32 rectangle;
@@ -1117,7 +1117,7 @@ namespace draw2d_gdi
    }
 
 
-   bool graphics::draw_poly_polygon(const POINT * lppoints, const INT * lpPolyCounts, ::raw::count nCount)
+   bool graphics::draw_poly_polygon(const POINT * lppoints, const INT * lpPolyCounts, ::collection::count nCount)
    {
 
       ::rectangle_i32 rectangle;
@@ -1144,7 +1144,7 @@ namespace draw2d_gdi
    }
 
 
-   bool graphics::fill_poly_polygon(const POINT * lppoints, const INT * lpPolyCounts, ::raw::count nCount)
+   bool graphics::fill_poly_polygon(const POINT * lppoints, const INT * lpPolyCounts, ::collection::count nCount)
    {
 
       ::rectangle_i32 rectangle;
@@ -1699,7 +1699,7 @@ namespace draw2d_gdi
    }
 
 
-   ::size_i32 graphics::TabbedTextOut(int x, int y, const ::string & lpszString, strsize nCount, ::raw::count nTabPositions, LPINT lpnTabStopPositions, i32 nTabOrigin)
+   ::size_i32 graphics::TabbedTextOut(int x, int y, const ::string & lpszString, strsize nCount, ::collection::count nTabPositions, LPINT lpnTabStopPositions, i32 nTabOrigin)
    {
 
       ASSERT(get_handle1() != nullptr);
@@ -1711,7 +1711,7 @@ namespace draw2d_gdi
    }
 
 
-   ::size_i32 graphics::TabbedTextOut(int x, int y, const ::string & str, ::raw::count nTabPositions, LPINT lpnTabStopPositions, i32 nTabOrigin)
+   ::size_i32 graphics::TabbedTextOut(int x, int y, const ::string & str, ::collection::count nTabPositions, LPINT lpnTabStopPositions, i32 nTabOrigin)
    {
 
       ASSERT(get_handle1() != nullptr);
@@ -1768,7 +1768,7 @@ namespace draw2d_gdi
    }
 
 
-   ::size_i32 graphics::GetTabbedTextExtent(const ::string & str, ::raw::count nTabPositions, LPINT lpnTabStopPositions)
+   ::size_i32 graphics::GetTabbedTextExtent(const ::string & str, ::collection::count nTabPositions, LPINT lpnTabStopPositions)
    {
 
       ASSERT(get_handle2() != nullptr);
@@ -1780,7 +1780,7 @@ namespace draw2d_gdi
    }
 
 
-   ::size_i32 graphics::GetOutputTabbedTextExtent(const ::string & lpszString,strsize nCount, ::raw::count nTabPositions,LPINT lpnTabStopPositions)
+   ::size_i32 graphics::GetOutputTabbedTextExtent(const ::string & lpszString,strsize nCount, ::collection::count nTabPositions,LPINT lpnTabStopPositions)
    {
 
       ASSERT(get_handle1() != nullptr);
@@ -1792,7 +1792,7 @@ namespace draw2d_gdi
    }
 
 
-   ::size_i32 graphics::GetOutputTabbedTextExtent(const ::string & str, ::raw::count nTabPositions, LPINT lpnTabStopPositions)
+   ::size_i32 graphics::GetOutputTabbedTextExtent(const ::string & str, ::collection::count nTabPositions, LPINT lpnTabStopPositions)
    {
 
       ASSERT(get_handle1() != nullptr);
@@ -2215,7 +2215,7 @@ namespace draw2d_gdi
 
 
 
-   bool graphics::poly_polyline(const POINT* lpPoints, const INT * lpPolyPoints, ::raw::count nCount)
+   bool graphics::poly_polyline(const POINT* lpPoints, const INT * lpPolyPoints, ::collection::count nCount)
    {
 
       ASSERT(get_handle1() != nullptr);
@@ -2348,7 +2348,7 @@ namespace draw2d_gdi
    }
 
 
-   bool graphics::poly_bezier(const POINT* lpPoints, ::raw::count nCount)
+   bool graphics::poly_bezier(const POINT* lpPoints, ::collection::count nCount)
    {
 
       ASSERT(get_handle1() != nullptr);
@@ -2696,7 +2696,7 @@ namespace draw2d_gdi
    }
 
 
-   int graphics::GetPath(LPPOINT lpPoints, ::u8 * lpTypes, ::raw::count nCount)
+   int graphics::GetPath(LPPOINT lpPoints, ::u8 * lpTypes, ::collection::count nCount)
    {
 
       ASSERT(get_handle1() != nullptr);
@@ -4413,7 +4413,7 @@ namespace draw2d_gdi
       return nResult;
    }
 
-   bool graphics::PolyDraw(const POINT* lpPoints, const BYTE* lpTypes, ::raw::count nCount)
+   bool graphics::PolyDraw(const POINT* lpPoints, const BYTE* lpTypes, ::collection::count nCount)
    {
 
       ASSERT(get_handle1() != nullptr);
@@ -4438,7 +4438,7 @@ namespace draw2d_gdi
    }
 
 
-   bool graphics::polyline_to(const POINT* lpPoints, ::raw::count nCount)
+   bool graphics::polyline_to(const POINT* lpPoints, ::collection::count nCount)
    {
 
       ASSERT(get_handle1() != nullptr);

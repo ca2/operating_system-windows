@@ -610,7 +610,7 @@ namespace draw2d_gdiplus
       
       pointa.set_size(lines.get_count());
 
-      for (::raw::index i = 0; i < pointa.get_size(); i++)
+      for (::collection::index i = 0; i < pointa.get_size(); i++)
       {
 
          __copy(pointa[i], lines[i]);
@@ -631,7 +631,7 @@ namespace draw2d_gdiplus
 
       pointa.set_size(lines.get_count());
 
-      for (::raw::index i = 0; i < pointa.get_size(); i++)
+      for (::collection::index i = 0; i < pointa.get_size(); i++)
       {
 
          __copy(pointa[i], lines[i]);
@@ -652,7 +652,7 @@ namespace draw2d_gdiplus
 
       pointa.set_size(polygon_i32.get_count());
 
-      for (::raw::index i = 0; i < pointa.get_size(); i++)
+      for (::collection::index i = 0; i < pointa.get_size(); i++)
       {
 
          __copy(pointa[i], polygon_i32[i]);
@@ -673,7 +673,7 @@ namespace draw2d_gdiplus
 
       pointa.set_size(polygon_i32.get_count());
 
-      for (::raw::index i = 0; i < pointa.get_size(); i++)
+      for (::collection::index i = 0; i < pointa.get_size(); i++)
       {
 
          __copy(pointa[i], polygon_i32[i]);

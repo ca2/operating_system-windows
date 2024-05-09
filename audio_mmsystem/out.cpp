@@ -218,7 +218,7 @@ namespace audio_mmsystem
 
       m_pprebuffer->open(m_pwaveformat->m_waveformat.nChannels, iBufferCount, iBufferSampleCount);
 
-      ::raw::index i;
+      ::collection::index i;
 
       auto iSize = out_get_buffer()->GetBufferCount();
 
@@ -333,7 +333,7 @@ namespace audio_mmsystem
 
       MMRESULT mmresult;
 
-      ::raw::index i;
+      ::collection::index i;
 
       auto iSize = out_get_buffer()->GetBufferCount();
 
@@ -366,7 +366,7 @@ namespace audio_mmsystem
    }
 
 
-   void out::out_filled(::raw::index iBuffer)
+   void out::out_filled(::collection::index iBuffer)
    {
 
       out_filled(wave_hdr(iBuffer));
@@ -663,7 +663,7 @@ namespace audio_mmsystem
    //}
 
 
-   void out::out_free(::raw::index iBuffer)
+   void out::out_free(::collection::index iBuffer)
    {
 
       ::wave::out::out_free(iBuffer);
@@ -718,7 +718,7 @@ namespace audio_mmsystem
    }
 
 
-   LPWAVEHDR out::wave_hdr(::raw::index iBuffer)
+   LPWAVEHDR out::wave_hdr(::collection::index iBuffer)
    {
 
       return ::multimedia::mmsystem::get_os_data(out_get_buffer(), iBuffer);

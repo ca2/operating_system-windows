@@ -500,7 +500,7 @@ namespace windowing_win32
 
       bool bWasVisible = false;
 
-      ::raw::index iScreenBuffer = get_screen_index();
+      ::collection::index iScreenBuffer = get_screen_index();
 
       ::pointer < layered_window_buffer > playeredwindowbuffer = pbufferitem->m_pparticleData;
 

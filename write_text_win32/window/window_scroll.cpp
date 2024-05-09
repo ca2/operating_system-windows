@@ -104,7 +104,7 @@ namespace windowing_win32
    //   //{
    //   //   // Windows does not perform any scrolling if the interaction_impl is
    //   //   // not visible.  This leaves child windows unscrolled.
-   //   //   // To ac::raw::count for this oversight, the child windows are moved
+   //   //   // To ac::collection::count for this oversight, the child windows are moved
    //   //   // directly instead.
    //   //   ::windowing::window * pwindow_Child = ::GetWindow(get_handle(),GW_CHILD);
    //   //   if(oswindow_Child != nullptr)

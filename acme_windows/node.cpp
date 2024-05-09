@@ -1234,7 +1234,7 @@ namespace acme_windows
 
       HMODULE hmodule;
 
-      ::raw::count iLenExcept;
+      ::collection::count iLenExcept;
 
       if (strExceptDir.has_char())
       {
@@ -1539,7 +1539,7 @@ namespace acme_windows
 
       DWORD cbNeeded;
 
-      ::raw::index i;
+      ::collection::index i;
 
       hProcess = OpenProcess(PROCESS_QUERY_INFORMATION | PROCESS_VM_READ, false, (DWORD)processidentifier);
 
@@ -1569,7 +1569,7 @@ namespace acme_windows
       if (EnumProcessModules(hProcess, hmods.data(), (DWORD)(hmods.get_size_in_bytes()), &cbNeeded))
       {
 
-         for (i = 0; i < ::raw::index(cbNeeded / sizeof(HMODULE)); i++)
+         for (i = 0; i < ::collection::index(cbNeeded / sizeof(HMODULE)); i++)
          {
 
             // Get the full path to the module's file.

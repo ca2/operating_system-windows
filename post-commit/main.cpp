@@ -26,7 +26,7 @@ public:
                     &m_argc
                     );
       m_argv = new char *[m_argc];
-      for(::raw::index i = 0; i < m_argc; i++)
+      for(::collection::index i = 0; i < m_argc; i++)
       {
          m_argv[i] = ansi_duplicate(string(pwa[i]));
       }
@@ -247,7 +247,7 @@ i32 app_t::run()
 
    printf("Number of arguments : %d\n", m_argc);
 
-   for (::raw::index i = 0; i < m_argc; i++)
+   for (::collection::index i = 0; i < m_argc; i++)
    {
       printf("m_argv[%d] = \"%s\"\n", i, m_argv[i]);
    }

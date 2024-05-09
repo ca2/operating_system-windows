@@ -230,7 +230,7 @@ pacmedir->system() / "config/plugin/appfy_beg_debug_box.txt"))
 
       string strDomain;
 
-      ::raw::index iFind = strApp.find("/");
+      ::collection::index iFind = strApp.find("/");
 
       if (iFind >= 0)
       {

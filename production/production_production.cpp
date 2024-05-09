@@ -259,7 +259,7 @@ pacmedir->system() / "config/production/mirror_status.txt";
          //   {
          //      single_lock synchronouslock(&m_mutexStatus,true);
          //      set["post"]["new_status"] = set["post"]["new_status"] + "Last Stati:<br />";
-         //      for (::raw::count i = minimum(5, m_straStatus.get_count() - 1); i >= 1; i--)
+         //      for (::collection::count i = minimum(5, m_straStatus.get_count() - 1); i >= 1; i--)
          //      {
          //         set["post"]["new_status"] = set["post"]["new_status"] + puser->m_phtml->entities(m_straStatus.element_at(i));
          //         set["post"]["new_status"] = set["post"]["new_status"] + "<br />";
@@ -825,7 +825,7 @@ pacmedir->system() / "config/production/mirror_status.txt";
          generate_appmatter_spa();
 
 
-         ::raw::count iCount = m_straFiles.get_size();
+         ::collection::count iCount = m_straFiles.get_size();
          for (i32 i = 0; i < iCount;)
          {
             if (m_straFiles[i].find("\\.svn\\") >= 0 || (m_straFiles[i].get_length() < 5 || m_straFiles[i].right()(5) == "\\.svn"))
@@ -842,8 +842,8 @@ pacmedir->system() / "config/production/mirror_status.txt";
 
          ::file::path pathTarget;
 
-         ::raw::count cDirMkErrorCount = 0;
-         ::raw::count cFileCopyErrorCount = 0;
+         ::collection::count cDirMkErrorCount = 0;
+         ::collection::count cFileCopyErrorCount = 0;
 
          int iBaseLen = m_strBase.length();
 
@@ -1145,7 +1145,7 @@ pacmedir->create(pathTarget.folder()))
 
             add_status("1st phase : archiving files and directories into one archive...");
 
-            for (::raw::index i = 0; i < straRoot.get_count(); i++)
+            for (::collection::index i = 0; i < straRoot.get_count(); i++)
             {
 
                string strRoot = straRoot[i];
@@ -1164,7 +1164,7 @@ pacmedir->create(pathTarget.folder()))
 
             add_status("2st phase : compressing archives...");
 
-            for (::raw::index i = 0; i < straRoot.get_count(); i++)
+            for (::collection::index i = 0; i < straRoot.get_count(); i++)
             {
 
                string strRoot = straRoot[i];
@@ -1272,7 +1272,7 @@ pacmedir->create(pathTarget.folder()))
 
          {
 
-            for (::raw::index i = 0; i < straStatus.get_count(); i++)
+            for (::collection::index i = 0; i < straStatus.get_count(); i++)
             {
 
                string strStatus = straStatus[i];
@@ -2332,7 +2332,7 @@ pacmedir->create(pathTarget.folder()))
       //::generic::container::copy(straBase, ::install::get_app_app_install_module_list(pszPlatform, m_strConfiguration));
       //::generic::container::copy(straBase, ::install::get_app_app_install_module_list());
 
-      //for (::raw::index i = 0; i < straBase.get_count(); i++)
+      //for (::collection::index i = 0; i < straBase.get_count(); i++)
       //{
 
       //   add_path(pszDir, "plugins\\" + straBase[i]);
@@ -2510,7 +2510,7 @@ pacmedir->create(pathTarget.folder()))
 
       string strCmd;
 
-      for (::raw::index i = 0; i < straBase.get_count(); i++)
+      for (::collection::index i = 0; i < straBase.get_count(); i++)
       {
 
          ::file::path strLibrary = straBase[i];
@@ -2807,7 +2807,7 @@ pacmedir->create(pathTarget.folder()))
 
       string strCmd;
 
-      for (::raw::index i = 0; i < straBase.get_count(); i++)
+      for (::collection::index i = 0; i < straBase.get_count(); i++)
       {
 
          ::file::path strLibrary = straBase[i];
@@ -3469,7 +3469,7 @@ retry1:
             if (!str.has_char())
                break;
          }
-         ::raw::index iFind;
+         ::collection::index iFind;
          while ((iFind = strAccumul.find("\r\n")) >= 0)
          {
             add_status(strAccumul.left()(iFind));
@@ -3485,7 +3485,7 @@ retry1:
          if (!str.has_char())
             break;
       }
-      ::raw::index iFind;
+      ::collection::index iFind;
       while ((iFind = strAccumul.find("\r\n")) >= 0)
       {
          add_status(strAccumul.left()(iFind));
@@ -3508,11 +3508,11 @@ retry1:
 
       string str = pcontext->m_papexcontext->file().as_string(pszUrl);
 
-      ::raw::index iFind1 = str.rear_find("FILEVERSION ");
+      ::collection::index iFind1 = str.rear_find("FILEVERSION ");
       if (iFind1 > 0)
       {
 
-         ::raw::index iFind2 = str.find("\r\n", iFind1);
+         ::collection::index iFind2 = str.find("\r\n", iFind1);
 
          string strVersion1;
 
@@ -3534,7 +3534,7 @@ retry1:
       if (iFind1 > 0)
       {
 
-         ::raw::index iFind2 = str.find("\"", iFind1);
+         ::collection::index iFind2 = str.find("\"", iFind1);
 
          string strVersion2;
 

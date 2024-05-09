@@ -251,16 +251,16 @@ namespace draw2d_gdiplus
       //i32 GetArcDirection() override;
       //i32 SetArcDirection(i32 nArcDirection) override;
 
-      virtual bool polydraw(const ::point_f64 * ppoint, const BYTE* lpTypes, ::raw::count nCount) override;
+      virtual bool polydraw(const ::point_f64 * ppoint, const BYTE* lpTypes, ::collection::count nCount) override;
 
       virtual bool polyline_to(const ::point_f64 * ppoint,count nCount) override;
 
-      virtual bool poly_polyline(const ::point_f64 * ppoint, const int * lpPolyPoints, ::raw::count nCount) override;
+      virtual bool poly_polyline(const ::point_f64 * ppoint, const int * lpPolyPoints, ::collection::count nCount) override;
 
 
-      virtual bool poly_bezier(const ::point_f64 * ppoint, ::raw::count nCount) override;
+      virtual bool poly_bezier(const ::point_f64 * ppoint, ::collection::count nCount) override;
 
-      virtual bool poly_bezier_to(const ::point_f64 * ppoint, ::raw::count nCount) override;
+      virtual bool poly_bezier_to(const ::point_f64 * ppoint, ::collection::count nCount) override;
 
 
 
@@ -316,10 +316,10 @@ namespace draw2d_gdiplus
       bool Pie(const rectangle_f64 &  prectangle, const point_f64 & pointStart, const point_f64 & pointEnd) override;
 
 
-      //bool draw_polygon(const POINT * ppoints, ::raw::count nCount) override;
-      bool draw_polygon(const ::point_f64 * ppoints, ::raw::count nCount) override;
-      //bool fill_polygon(const POINT * ppoints, ::raw::count nCount) override;
-      bool fill_polygon(const ::point_f64 * ppoints, ::raw::count nCount) override;
+      //bool draw_polygon(const POINT * ppoints, ::collection::count nCount) override;
+      bool draw_polygon(const ::point_f64 * ppoints, ::collection::count nCount) override;
+      //bool fill_polygon(const POINT * ppoints, ::collection::count nCount) override;
+      bool fill_polygon(const ::point_f64 * ppoints, ::collection::count nCount) override;
       using ::draw2d::graphics::rectangle_i32;
       using ::draw2d::graphics::draw_rectangle;
       using ::draw2d::graphics::fill_rectangle;
@@ -401,7 +401,7 @@ namespace draw2d_gdiplus
 
       virtual bool draw_text_ex(const ::string & str,const ::rectangle_f64 & rectangle, const ::e_align & ealign = e_align_top_left, const ::e_draw_text & edrawtext = e_draw_text_none) override;
 
-      virtual ::raw::count get_character_extent(::f64_array & daLeft, ::f64_array& daRight, const ::string & str, strsize iStart = 0, strsize iEnd = -1) override;
+      virtual ::collection::count get_character_extent(::f64_array & daLeft, ::f64_array& daRight, const ::string & str, strsize iStart = 0, strsize iEnd = -1) override;
 
       virtual size_f64 get_text_extent(const ::string & pszString, strsize nCount, strsize iIndex) override;
 

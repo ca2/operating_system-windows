@@ -381,7 +381,7 @@ namespace multimedia
          m_haEvent.erase_all();
          m_notifya.erase_all();
 
-         for(::raw::index i = 0; i < iBufferCount; i++)
+         for(::collection::index i = 0; i < iBufferCount; i++)
          {
 
             m_haEvent.add(CreateEvent(nullptr,false,false,nullptr));
@@ -425,7 +425,7 @@ namespace multimedia
 
          //void     mmr;
 
-         ::raw::count iSize;
+         ::collection::count iSize;
 
          iSize =  out_get_buffer()->GetBufferCount();
 
@@ -454,7 +454,7 @@ namespace multimedia
       }
 
 
-      void out::out_filled(::raw::index i)
+      void out::out_filled(::collection::index i)
       {
 
          synchronous_lock synchronouslock(synchronization());
@@ -588,7 +588,7 @@ namespace multimedia
 
          m_estate = e_state_playing;
 
-         for(::raw::index i = 0; i < out_get_buffer()->GetBufferCount(); i++)
+         for(::collection::index i = 0; i < out_get_buffer()->GetBufferCount(); i++)
          {
 
             out_free(i);
@@ -761,7 +761,7 @@ namespace multimedia
       }
 
 
-      void out::out_free(::raw::index iBuffer)
+      void out::out_free(::collection::index iBuffer)
       {
 
          //out_free(wave_hdr(iBuffer));

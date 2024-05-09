@@ -6500,7 +6500,7 @@ namespace windowing_win32
 
       HWND hwnd = get_hwnd();
 
-      ::raw::index iFind = phwnda->find_first(hwnd);
+      ::collection::index iFind = phwnda->find_first(hwnd);
 
       if (iFind < 0)
       {

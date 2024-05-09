@@ -208,10 +208,10 @@ namespace draw2d_gdi
       virtual ::size_i32 scale_window_ext(int xNum, int xDenom, int yNum, int yDenom) override;
 
       // Coordinate Functions
-      void DPtoLP(LPPOINT lpPoints, ::raw::count nCount = 1) override;
+      void DPtoLP(LPPOINT lpPoints, ::collection::count nCount = 1) override;
       void DPtoLP(RECT * prectangle) override;
       void DPtoLP(LPSIZE lpSize) override;
-      void LPtoDP(LPPOINT lpPoints, ::raw::count nCount = 1) override;
+      void LPtoDP(LPPOINT lpPoints, ::collection::count nCount = 1) override;
       void LPtoDP(RECT * prectangle) override;
       void LPtoDP(LPSIZE lpSize) override;
 
@@ -306,13 +306,13 @@ namespace draw2d_gdi
       bool draw_rectangle(const ::rectangle_i32 & rectangle) override;
       bool fill_rectangle(const ::rectangle_i32 & rectangle) override;
 
-      bool polygon_i32(const POINT * ppoint, ::raw::count nCount) override;
+      bool polygon_i32(const POINT * ppoint, ::collection::count nCount) override;
       bool draw_polygon(const POINT * ppoint,count nCount) override;
       bool fill_polygon(const POINT * ppoint,count nCount) override;
 
       bool poly_polygon(const POINT * ppoint, const INT * piPolyCount,count nCount) override;
       bool draw_poly_polygon(const POINT * ppoint, const INT * piPolyCount,count nCount) override;
-      bool fill_poly_polygon(const POINT * ppoint, const INT * piPolyCount, ::raw::count nCount) override;
+      bool fill_poly_polygon(const POINT * ppoint, const INT * piPolyCount, ::collection::count nCount) override;
 
       bool Pie(int x1, int y1, int x2, int y2, int x3, int y3, int x4, int y4) override;
       bool Pie(const ::rectangle_i32 & rectangle, const ::point_i32 & pointStart, const ::point_i32 & pointEnd) override;
@@ -354,10 +354,10 @@ namespace draw2d_gdi
       // Text Functions
       virtual bool text_out(double x, double y, const ::string & lpszString, strsize nCount) override;
       virtual bool text_out(int x, int y, const ::string & str) override;
-      virtual bool ExtTextOut(int x, int y, UINT nOptions, const ::rectangle_i32 & rectangle, const ::string & lpszString, ::raw::count nCount, INT * lpDxWidths) override;
+      virtual bool ExtTextOut(int x, int y, UINT nOptions, const ::rectangle_i32 & rectangle, const ::string & lpszString, ::collection::count nCount, INT * lpDxWidths) override;
       virtual bool ExtTextOut(int x, int y, UINT nOptions, const ::rectangle_i32 & rectangle, const ::string & str, INT * lpDxWidths) override;
-      virtual ::size_i32 TabbedTextOut(int x, int y, const ::string & lpszString, strsize nCount, ::raw::count nTabPositions, INT * lpnTabStopPositions, i32 nTabOrigin) override;
-      virtual ::size_i32 TabbedTextOut(int x, int y, const ::string & str, ::raw::count nTabPositions, INT * lpnTabStopPositions, i32 nTabOrigin) override;
+      virtual ::size_i32 TabbedTextOut(int x, int y, const ::string & lpszString, strsize nCount, ::collection::count nTabPositions, INT * lpnTabStopPositions, i32 nTabOrigin) override;
+      virtual ::size_i32 TabbedTextOut(int x, int y, const ::string & str, ::collection::count nTabPositions, INT * lpnTabStopPositions, i32 nTabOrigin) override;
 
       virtual bool draw_text(const ::string & lpszString,strsize nCount,const ::rectangle_i32 & rectangle, const ::e_align & ealign = e_align_top_left, const ::e_draw_text & edrawtext = e_draw_text_none) override;
       virtual bool draw_text(const ::string & str,const ::rectangle_i32 & rectangle, const ::e_align & ealign = e_align_top_left, const ::e_draw_text & edrawtext = e_draw_text_none) override;
@@ -369,10 +369,10 @@ namespace draw2d_gdi
       virtual size_f64 get_text_extent(const ::string & str) override;
       virtual ::size_i32 GetOutputTextExtent(const ::string & lpszString,strsize nCount) override;
       virtual ::size_i32 GetOutputTextExtent(const ::string & str) override;
-      virtual ::size_i32 GetTabbedTextExtent(const ::string & lpszString,strsize nCount, ::raw::count nTabPositions, INT * lpnTabStopPositions) override;
-      virtual ::size_i32 GetTabbedTextExtent(const ::string & str, ::raw::count nTabPositions, INT * lpnTabStopPositions) override;
-      virtual ::size_i32 GetOutputTabbedTextExtent(const ::string & lpszString,strsize nCount, ::raw::count nTabPositions, INT * lpnTabStopPositions) override;
-      virtual ::size_i32 GetOutputTabbedTextExtent(const ::string & str, ::raw::count nTabPositions, INT * lpnTabStopPositions) override;
+      virtual ::size_i32 GetTabbedTextExtent(const ::string & lpszString,strsize nCount, ::collection::count nTabPositions, INT * lpnTabStopPositions) override;
+      virtual ::size_i32 GetTabbedTextExtent(const ::string & str, ::collection::count nTabPositions, INT * lpnTabStopPositions) override;
+      virtual ::size_i32 GetOutputTabbedTextExtent(const ::string & lpszString,strsize nCount, ::collection::count nTabPositions, INT * lpnTabStopPositions) override;
+      virtual ::size_i32 GetOutputTabbedTextExtent(const ::string & str, ::collection::count nTabPositions, INT * lpnTabStopPositions) override;
       virtual bool GrayString(::draw2d::brush* pBrush, bool (CALLBACK* lpfnOutput)(HDC, LPARAM, int), LPARAM lpData, int nCount, int x, int y, int nWidth, int nHeight) override;
       virtual UINT GetTextAlign() override;
       virtual UINT SetTextAlign(UINT nFlags) override;
@@ -467,7 +467,7 @@ namespace draw2d_gdi
       bool widen_path() override;
       float GetMiterLimit() override;
       bool SetMiterLimit(float fMiterLimit) override;
-      int GetPath(LPPOINT lpPoints, LPBYTE lpTypes, ::raw::count nCount) override;
+      int GetPath(LPPOINT lpPoints, LPBYTE lpTypes, ::collection::count nCount) override;
       bool SelectClipPath(int nMode) override;
 
       // Misc Helper Functions

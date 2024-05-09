@@ -489,7 +489,7 @@ namespace music
          }
 
 
-         ::raw::index midi::get_os_out_device_id(const ::string & strDevice)
+         ::collection::index midi::get_os_out_device_id(const ::string & strDevice)
          {
 
             return m_straDeviceOut.find_first(strDevice);
@@ -497,7 +497,7 @@ namespace music
          }
 
 
-         ::raw::index midi::get_os_in_device_id(const ::string & strDevice)
+         ::collection::index midi::get_os_in_device_id(const ::string & strDevice)
          {
 
             return m_straDeviceIn.find_first(strDevice);

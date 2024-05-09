@@ -41,7 +41,7 @@ namespace windows
 
 
          bool erase(HWND hwnd);
-         ::raw::index find(HWND hwnd);
+         ::collection::index find(HWND hwnd);
          void EnumDescendants();
          Array & operator = (hwnd_array & hwnda);
 
@@ -66,7 +66,7 @@ namespace windows
       hwnd_tree & operator = (const hwnd_tree & tree);
 
 
-      static ::raw::index compare_hwnd(const hwnd_tree * ptree1, const hwnd_tree * ptree2);
+      static ::collection::index compare_hwnd(const hwnd_tree * ptree1, const hwnd_tree * ptree2);
 
 
    };

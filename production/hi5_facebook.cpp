@@ -87,7 +87,7 @@ namespace hi5
       TWIT_FRIENDSIDS_URL("http://twitter.com/friends/ids.xml"),
       TWIT_FOLLOWERSIDS_URL("http://twitter.com/followers/ids.xml"),
 
-      /* Ac::raw::count URLs */
+      /* Ac::collection::count URLs */
       TWIT_ACCOUNTRATELIMIT_URL("http://twitter.com/account/rate_limit_status.xml"),
 
       /* Favorites URLs */

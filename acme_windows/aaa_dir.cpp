@@ -34,7 +34,7 @@
 //
 //      path.ascendants_path(stra);
 //
-//      ::raw::index i = stra.get_upper_bound();
+//      ::collection::index i = stra.get_upper_bound();
 //
 //      for (; i >= 0; i--)
 //      {

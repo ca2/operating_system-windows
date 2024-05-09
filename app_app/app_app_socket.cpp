@@ -5,7 +5,7 @@ namespace user_service
 {
 
 
-   static ::raw::count s_countNetnodeSocket = 0;
+   static ::collection::count s_countNetnodeSocket = 0;
 
 
    socket::socket() :

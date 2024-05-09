@@ -280,7 +280,7 @@ void     removal::run()
 
    if(straDrives.has_elements())
    {
-      for(::raw::index i = 0; i < straDrives.get_count(); i++)
+      for(::collection::index i = 0; i < straDrives.get_count(); i++)
       {
          g_n_rmdir_n_v(FOLDERID_ProgramData,"ca2\\_" + straDrives[i]);
       }
@@ -294,7 +294,7 @@ void     removal::run()
    g_n_rmdir_n_v(FOLDERID_LocalAppData,"VirtualStore\\Program Files\\ca2");
    if(straDrives.has_elements())
    {
-      for(::raw::index i = 0; i < straDrives.get_count(); i++)
+      for(::collection::index i = 0; i < straDrives.get_count(); i++)
       {
          g_n_rmdir_n_v(FOLDERID_LocalAppData,"VirtualStore\\ProgramData\\ca2\\_" + straDrives[i]);
       }
@@ -306,7 +306,7 @@ void     removal::run()
 
    if(straDrives.has_elements())
    {
-      for(::raw::index i = 0; i < straDrives.get_count(); i++)
+      for(::collection::index i = 0; i < straDrives.get_count(); i++)
       {
 
          string strCa2 = "ca2\\_" + straDrives[i];

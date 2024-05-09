@@ -233,7 +233,7 @@ bool pre_explorer_restart2(DWORD & dwSession)
          //using undocumented setting structure, could break any time
 
          //edge setting is stored at HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\StuckRects2!Settings
-         ::raw::count cWait = 45;
+         ::collection::count cWait = 45;
 
          while (cWait > 0)
          {
@@ -250,7 +250,7 @@ bool pre_explorer_restart2(DWORD & dwSession)
 
             dwError = RmGetList(dwSession, &nProcInfoNeeded, &nProcInfo, rgpi, &dwReason);
 
-            for (::raw::index i = 0; i < nProcInfo; i++)
+            for (::collection::index i = 0; i < nProcInfo; i++)
             {
 
                if (rgpi[i].AppStatus & RmStatusRunning)
@@ -289,12 +289,12 @@ bool pos_explorer_restart2(DWORD dwSession)
 
    RmRestart(dwSession, 0, nullptr);
 
-   ::raw::count cWait = 45;
+   ::collection::count cWait = 45;
 
    while (cWait > 0)
    {
 
-      ::raw::count cRestarted = 0;
+      ::collection::count cRestarted = 0;
 
       DWORD dwReason;
 
@@ -306,7 +306,7 @@ bool pos_explorer_restart2(DWORD dwSession)
 
       DWORD dwError = RmGetList(dwSession, &nProcInfoNeeded, &nProcInfo, rgpi, &dwReason);
 
-      for (::raw::index i = 0; i < nProcInfo; i++)
+      for (::collection::index i = 0; i < nProcInfo; i++)
       {
          if (rgpi[i].AppStatus & RmStatusRestarted)
          {

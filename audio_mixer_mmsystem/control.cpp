@@ -317,7 +317,7 @@ namespace audio_mixer_mmsystem
             return nullptr;
          }
 
-         ::audio_mixer_user::control * control::GetControlByIndex(::raw::index iIndex)
+         ::audio_mixer_user::control * control::GetControlByIndex(::collection::index iIndex)
          {
             return this->element_at(iIndex);
          }
@@ -482,7 +482,7 @@ namespace audio_mixer_mmsystem
       else if ((m_mixercontrol.dwControlType & MIXERCONTROL_CT_UNITS_MASK) == MIXERCONTROL_CT_UNITS_BOOLEAN)
       {
 
-         ::raw::index i = 0;
+         ::collection::index i = 0;
 
          for (auto & pusercontrol : m_usercontrola)
          {
@@ -920,9 +920,9 @@ namespace audio_mixer_mmsystem
                         m_mixercontroldetails.cChannels = 1;
 
 
-                  //::raw::index iSel = pmutecontrol->get_data()->m_iIndex;
+                  //::collection::index iSel = pmutecontrol->get_data()->m_iIndex;
 
-                  ::raw::index iSel = mute_index();
+                  ::collection::index iSel = mute_index();
 
                   //m_mixercontroldetails.cChannels      = cChannels;
                   m_mixercontroldetails.cMultipleItems = m_mixercontrol.cMultipleItems;
