@@ -228,6 +228,12 @@ namespace apex_windows
       void broadcast_environment_variable_change() override;
 
 
+      bool has_ip4_internet() override;
+
+      bool has_ip6_internet() override;
+
+
+
    };
 
 

@@ -704,6 +704,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="app_launcher.cpp" />
+    <ClCompile Include="connectivity.cpp" />
     <ClCompile Include="gdi.cpp" />
     <ClCompile Include="interprocess_base.cpp" />
     <ClCompile Include="interprocess_caller.cpp" />
