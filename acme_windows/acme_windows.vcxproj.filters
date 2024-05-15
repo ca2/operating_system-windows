@@ -125,9 +125,6 @@
     <ClCompile Include="file_link.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="sapi.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="mmsystem.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
