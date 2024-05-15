@@ -7,6 +7,7 @@
 #pragma once
 
 
+
 #include "acme_windows_common/node.h"
 #include "acme/primitive/collection/numeric_array.h"
 #include "acme/_operating_system.h"
@@ -339,7 +340,7 @@ namespace acme_windows
       void play_sound(const ::file::path& path) override;
 
 
-      void speak(const ::scoped_string& scopedstr) override;
+      //void speak(const ::scoped_string& scopedstr, const ::scoped_string& scopedstrLang = "en-us", enum_gender egender = e_gender_none) override;
 
 
       ::string operating_system_application_version() override;
