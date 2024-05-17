@@ -299,6 +299,8 @@ namespace acme_windows
 
       void install_posix_shell_command(const ::scoped_string& scopedstr, enum_posix_shell eposixshell, const ::trace_function & tracefunction) override;
 
+      ::string posix_shell_command_install_package(const ::scoped_string& scopedstr, enum_posix_shell eposixshell = e_posix_shell_system_default) override;
+
       //bool _has_msys2_command(const ::scoped_string& scopedstr) override;
 
       //void _install_msys2_package(const ::scoped_string& scopedstr) override;
@@ -342,6 +344,7 @@ namespace acme_windows
 
       //void speak(const ::scoped_string& scopedstr, const ::scoped_string& scopedstrLang = "en-us", enum_gender egender = e_gender_none) override;
 
+      ::string default_component_implementation(const ::scoped_string& scopedstrComponentName) override;
 
       ::string operating_system_application_version() override;
 
