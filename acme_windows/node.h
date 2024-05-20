@@ -362,7 +362,7 @@ namespace acme_windows
 
       //int building_core_count(bool bDedicatedBuilder) override;
 
-      int performance_core_count() override;
+      //int performance_core_count() override;
 
       //int efficiency_core_count() override;
 

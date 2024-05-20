@@ -4849,16 +4849,6 @@ namespace acme_windows
    }
 
 
-   int node::performance_core_count()
-   {
-
-      SYSTEM_INFO sysinfo;
-
-      GetSystemInfo(&sysinfo);
-
-      return sysinfo.dwNumberOfProcessors;
-
-   }
 
 
 } // namespace acme_windows
