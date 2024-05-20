@@ -1219,12 +1219,22 @@ namespace acme_windows
       if(m_dwExitCode2 == STILL_ACTIVE)
       {
 
+         auto elapsed = m_timeStart.elapsed();
+
          if (tracefunction
             && !tracefunction.m_timeTimeout.is_infinite()
-            && m_timeStart.elapsed() > tracefunction.m_timeTimeout)
+            && elapsed > tracefunction.m_timeTimeout)
          {
 
-            throw ::exception(error_wait_timeout, "create_process::wait_process failed by timeout " + datetime()->elapsed_time_text(m_timeStart.elapsed()));
+            ::string strElapsed = datetime()->elapsed_time_text(elapsed);
+
+            ::string strMessage;
+
+            strMessage = "create_process::wait_process failed by timeout ";
+
+            strMessage = strElapsed;
+
+            throw ::exception(error_wait_timeout, strMessage);
 
          }
 
