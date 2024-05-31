@@ -171,10 +171,13 @@ namespace acme_windows
 
             openfilename.lpstrFilter = (LPWSTR)memoryFilter.data();
 
+            openfilename.lpstrDefExt = L"";
+
             if (pdialog->m_bSave) 
             {
 
-               openfilename.Flags = OFN_EXPLORER | OFN_PATHMUSTEXIST | OFN_OVERWRITEPROMPT;
+               //openfilename.Flags = OFN_EXPLORER | OFN_PATHMUSTEXIST | OFN_OVERWRITEPROMPT;
+               openfilename.Flags = OFN_EXTENSIONDIFFERENT | OFN_EXPLORER | OFN_NOVALIDATE | OFN_OVERWRITEPROMPT;
 
                if (GetSaveFileNameW(&openfilename) == FALSE)
                {
