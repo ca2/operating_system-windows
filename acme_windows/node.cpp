@@ -3225,11 +3225,9 @@ namespace acme_windows
 
       auto pcreateprocess = __create_new < ::acme_windows::create_process>();
 
-
       pcreateprocess->m_pathWorkingDirectory = pathWorkingDirectory;
 
       pcreateprocess->m_edisplay = edisplay;
-
 
       pcreateprocess->initialize_stdout();
       pcreateprocess->initialize_stderr();
@@ -4370,9 +4368,13 @@ namespace acme_windows
       if (eposixshell == e_posix_shell_msys2)
       {
 
+         ::string strInstallPackage;
+
+         strInstallPackage = posix_shell_command_install_package(scopedstr, eposixshell);
+
          ::string strInstallCommand;
 
-         strInstallCommand = "pacman -S --noconfirm " + scopedstr;
+         strInstallCommand = "pacman -S --noconfirm " + strInstallPackage;
 
          posix_shell_command(strInstallCommand, eposixshell, tracefunction);
 
@@ -4393,6 +4395,31 @@ namespace acme_windows
       }
 
       //return strOutput;
+
+   }
+
+
+   ::string node::posix_shell_command_install_package(const ::scoped_string& scopedstr, enum_posix_shell eposixshell)
+   {
+
+      ::string str(scopedstr);
+
+      str.trim();
+
+      str.ends_eat(".exe");
+
+      str.trim();
+
+      str.make_lower();
+
+      if (str == "cmp")
+      {
+
+         return "diffutils";
+
+      }
+
+      return ::acme_windows_common::node::posix_shell_command_install_package(scopedstr, eposixshell);
 
    }
 
@@ -4690,6 +4717,22 @@ namespace acme_windows
    }
 
 
+   ::string node::default_component_implementation(const ::scoped_string& scopedstrComponentName)
+   {
+
+      if (scopedstrComponentName == "nano_speech"
+         || scopedstrComponentName == "text_to_speech")
+      {
+
+         return "sapi";
+
+      }
+
+      return ::acme_windows_common::node::default_component_implementation(scopedstrComponentName);
+
+   }
+
+
    ::string node::operating_system_application_version()
    {
 
@@ -4806,16 +4849,6 @@ namespace acme_windows
    }
 
 
-   int node::performance_core_count()
-   {
-
-      SYSTEM_INFO sysinfo;
-
-      GetSystemInfo(&sysinfo);
-
-      return sysinfo.dwNumberOfProcessors;
-
-   }
 
 
 } // namespace acme_windows

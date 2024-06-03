@@ -1038,7 +1038,6 @@
     <ClCompile Include="node.cpp" />
     <ClCompile Include="acme_path.cpp" />
     <ClCompile Include="console.cpp" />
-    <ClCompile Include="sapi.cpp" />
     <ClCompile Include="_file.cpp" />
     <ClCompile Include="file_memory_map.cpp" />
     <ClCompile Include="pipe.cpp" />

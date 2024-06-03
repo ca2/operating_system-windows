@@ -38,7 +38,7 @@ namespace acme_windows
          ~context() override;
 
 
-         void prepare() override;
+         void prepare(const ::scoped_string & scopedstrOperatingSystem) override;
 
          void prepare_compile_and_link_environment() override;
 

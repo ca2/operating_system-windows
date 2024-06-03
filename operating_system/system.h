@@ -73,6 +73,7 @@
 #include <limits.h>
 #include <new.h>
 #include <eh.h>
+#include <new>
 
 #undef __window_procedure
 

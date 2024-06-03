@@ -72,12 +72,12 @@ BEGIN
 BLOCK "040904b0"
 BEGIN
 VALUE "CompanyName", "operating_system-windows"
-VALUE "FileDescription", "acme_windows"
+VALUE "FileDescription", "nano_speech_sapi"
 VALUE "FileVersion", "2024.0508.1428.14"
 VALUE "InternalName", "ca2"
 VALUE "LegalCopyright", "Copyright (C) 2024-05-08-14-28-14"
 VALUE "OriginalFilename", "ca2"
-VALUE "ProductName", "acme_windows"
+VALUE "ProductName", "nano_speech_sapi"
 VALUE "ProductVersion", "2024.0508.1428.14"
 END
 END

@@ -50,15 +50,17 @@ namespace acme_windows
       }
 
 
-      void context::prepare()
+      void context::prepare(const ::scoped_string & scopedstrOperatingSystem)
       {
+
+         ::string strOperatingSystem(scopedstrOperatingSystem);
 
          //if (acmedirectory()->is("C:\\operating_system"))
          {
 
-            m_pathOperatingSystemIncludeFolder = m_pathFolder / "operating_system-windows";
+            m_pathOperatingSystemIncludeFolder = m_pathFolder / ("operating_system-" + strOperatingSystem);
 
-            m_pathOperatingSystemStorageFolder = m_pathFolder / "storage-windows";
+            m_pathOperatingSystemStorageFolder = m_pathFolder / ("storage-" + strOperatingSystem);
 
             auto pathOperatingSystemIncludeFolder = m_pathOperatingSystemIncludeFolder;
 
@@ -72,7 +74,7 @@ namespace acme_windows
 
             //m_pathFolder = "C:\\port\\";
 
-            ::integration::context::prepare();
+            ::integration::context::prepare(scopedstrOperatingSystem);
 
          }
 

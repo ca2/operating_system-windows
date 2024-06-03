@@ -6,6 +6,7 @@
 #include "acme/parallelization/synchronous_lock.h"
 #include "acme/platform/application.h"
 #include "acme/platform/node.h"
+#include "acme/primitive/datetime/datetime.h"
 #include "acme/primitive/string/str.h"
 #include "registry.h"
 
@@ -1215,7 +1216,30 @@ namespace acme_windows
       //::str().get_lines(straOutput, strOutput, "I: ", true, &sl, pfileLines);
       //::str().get_lines(straOutput, strError, "E: ", true, &sl, pfileLines);
 
+      if(m_dwExitCode2 == STILL_ACTIVE)
+      {
 
+         auto elapsed = m_timeStart.elapsed();
+
+         if (tracefunction
+            && !tracefunction.m_timeTimeout.is_infinite()
+            && elapsed > tracefunction.m_timeTimeout)
+         {
+
+            ::string strElapsed = datetime()->elapsed_time_text(elapsed);
+
+            ::string strMessage;
+
+            strMessage = "create_process::wait_process failed by timeout ";
+
+            strMessage = strElapsed;
+
+            throw ::exception(error_wait_timeout, strMessage);
+
+         }
+
+
+      }
 
    }
 
