@@ -4439,10 +4439,23 @@ namespace acme_windows
    }
 
 
-   bool node::_is_code_exe_user_path_environment_variable_ok(::string* pstrCorrectPath)
+   bool node::_is_code_exe_user_path_environment_variable_ok(::string* pstrCorrectPath, const char * pszPath)
    {
 
-      auto str = get_user_permanent_environment_variable("PATH");
+      ::string str;
+      
+      if (::is_null(pszPath))
+      {
+
+         str = get_user_permanent_environment_variable("PATH");
+
+      }
+      else
+      {
+
+         str = pszPath;
+
+      }
 
       bool bChanged = false;
 

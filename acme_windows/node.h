@@ -307,7 +307,7 @@ namespace acme_windows
 
       bool _is_strawberry_perl_installed() override;
 
-      bool _is_code_exe_user_path_environment_variable_ok(::string* pstrCorrectPath = nullptr) override;
+      bool _is_code_exe_user_path_environment_variable_ok(::string* pstrCorrectPath = nullptr, const char * pszPath = nullptr) override;
 
       bool _is_coder_mode_enabled() override;
 
