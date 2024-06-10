@@ -493,7 +493,7 @@ namespace audio_mixer_mmsystem
 
             bool fValue = pmxcd_f[cMultipleItems - i - 1].fValue != false;
 
-            //            pmutecontrol->_001SetCheck(fValue ? e_check_checked : e_check_unchecked, ::e_source_user);
+            //            pmutecontrol->set_check(fValue ? e_check_checked : e_check_unchecked, ::e_source_user);
 
             mute_set_check(fValue);
 
