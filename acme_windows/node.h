@@ -365,7 +365,8 @@ namespace acme_windows
       //int performance_core_count() override;
 
       //int efficiency_core_count() override;
-
+      bool _is_google_chrome_installed() override;
+      bool _is_visual_studio_code_installed() override;
 
    };
 

@@ -8,6 +8,7 @@
 #include "exclusive.h"
 #include "application.h"
 #include "create_process.h"
+#include "file_link.h"
 #include "acme/exception/exception.h"
 #include "acme/exception/status.h"
 #include "acme/filesystem/filesystem/acme_directory.h"
@@ -4860,7 +4861,89 @@ namespace acme_windows
       return strCmd;
 
    }
+   
+   
+   bool node::_is_google_chrome_installed()
+   {
 
+      try
+      {
+
+         ::acme_windows::registry::key key;
+
+         key.open(HKEY_LOCAL_MACHINE, "Software\\Microsoft\\Windows\\CurrentVersion\\App Paths\\chrome.exe");
+
+         ::string strPath;
+
+         key._get({}, strPath);
+
+         strPath.trim();
+
+         if (strPath.is_empty() || !acmefile()->exists(strPath))
+         {
+
+            return false;
+
+         }
+
+         return true;
+
+      }
+      catch (...)
+      {
+
+      }
+
+      return false;
+
+   }
+
+
+   bool node::_is_visual_studio_code_installed()
+   {
+
+      try
+      {
+
+         auto pathHome = acmedirectory()->home();
+
+         auto pathVsLnk = pathHome / "AppData/Roaming/Microsoft/Windows/Start Menu/Programs/Visual Studio Code/Visual Studio Code.lnk";
+
+         if (!acmefile()->exists(pathVsLnk))
+         {
+
+            return false;
+
+         }
+
+         auto plink = __create_new<::acme_windows::file_link>();
+
+         plink->open(pathVsLnk, ::file::e_link_target);
+
+         auto pathTarget = plink->m_pathTarget;
+
+         if (!acmefile()->exists(pathTarget))
+         {
+
+            return false;
+
+         }
+
+         return true;
+
+      }
+      catch (...)
+      {
+
+
+      }
+
+      return false;
+
+   }
+
+
+   
 
 
 
