@@ -3340,6 +3340,26 @@ namespace acme_windows
    }
 
 
+   int node::synchronous_posix_terminal(const ::scoped_string& scopedstrCommand, enum_posix_shell eposixshell , const trace_function& tracefunction)
+   {
+
+      ::file::path pathGitBash = "C:/Program Files/Git/git-bash.exe";
+
+      ::string strCommand(pathGitBash);
+
+      strCommand.double_quote(true);
+
+      ::string strParameters;
+
+      strParameters = " -i -c " + scopedstrCommand.double_quoted(true);
+
+      int iExitCode = command_system(pathGitBash + strParameters, tracefunction);
+
+      return iExitCode;
+
+   }
+
+
    bool node::has_command(const ::scoped_string& scopedstrCommand)
    {
 

@@ -243,7 +243,9 @@ namespace acme_windows
       //int command_system(const ::scoped_string& scopedstr, const class ::time& timeOut = 15_min) override;
 
       //void open_terminal_and_run(const ::scoped_string& scopedstr);
-      virtual void launch_command_system(const ::scoped_string& scopedstr, const ::file::path& pathWorkingDirectory = {}, ::e_display edisplay = e_display_none);
+      void launch_command_system(const ::scoped_string& scopedstr, const ::file::path& pathWorkingDirectory = {}, ::e_display edisplay = e_display_none) override;
+      int synchronous_posix_terminal(const ::scoped_string& scopedstrCommand, enum_posix_shell eposixshell = e_posix_shell_system_default, const trace_function& tracefunction = nullptr) override;
+
 
       void shell_execute_async(const scoped_string & strFile, const scoped_string & strParams, const ::file::path& pathWorkingDirectory = {}) override;
       int shell_execute_sync(const scoped_string & strFile, const scoped_string & strParams, const class time & timeTimeout = 1_minute, const ::file::path& pathWorkingDirectory = {}) override;
