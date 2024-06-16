@@ -3345,6 +3345,10 @@ namespace acme_windows
 
       ::file::path pathGitBash = "C:/Program Files/Git/git-bash.exe";
 
+      ::string strGitBash(pathGitBash);
+
+      strGitBash.double_quote();
+
       ::string strCommand(pathGitBash);
 
       strCommand.double_quote(true);
@@ -3353,7 +3357,7 @@ namespace acme_windows
 
       strParameters = " -i -c " + scopedstrCommand.double_quoted(true);
 
-      int iExitCode = command_system(pathGitBash + strParameters, tracefunction);
+      int iExitCode = command_system(strGitBash + strParameters, tracefunction);
 
       return iExitCode;
 

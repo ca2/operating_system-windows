@@ -24,12 +24,15 @@ namespace acme_windows
 
       void from_application(::operating_system::application * papplication) override;
 
+      bool is_window() override;
+
       void post_close() override;
 
       void post_application_exit() override;
 
       ::string get_window_text(const ::iptr_array & idPath) override;
       ::string indexed_get_window_text(const ::iptr_array & idPath) override;
+      void activate() override;
 
 
    };
