@@ -129,10 +129,10 @@ void imm_client::_011OnChar(::message::message * pmessage)
 }
 
 
-void imm_client::insert_text(string str, bool bForceNewStep, const ::action_context & context)
+void imm_client::insert_text(const ::scoped_string & scopedstr, bool bForceNewStep, const ::action_context & context)
 {
 
-   text_composition_client::insert_text(str, bForceNewStep, context);
+   text_composition_client::insert_text(scopedstr, bForceNewStep, context);
 
 }
 

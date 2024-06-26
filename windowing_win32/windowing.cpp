@@ -1489,16 +1489,7 @@ namespace windowing_win32
       // At windows SetMouseCursor(nullptr) removes the cursor from screen
       // similar apis in other platforms behave the same?
 
-      if (!::SetCursor(hcursor))
-      {
-
-         throw ::exception(error_failed);
-
-      }
-
-      //return ::success;
-
-
+      ::SetCursor(hcursor);
 
    }
 

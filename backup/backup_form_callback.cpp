@@ -37,7 +37,7 @@ namespace backup
             auto pinteraction = pimpact->get_child_by_name("lfs");
             
             string strPath;
-            pinteraction->_001SetText(strPath, pupdate->m_actioncontext);
+            pinteraction->set_text(strPath, pupdate->m_actioncontext);
 
             ptopic->Ret();
 
@@ -67,7 +67,7 @@ namespace backup
                         Ex1VirtualGuie * pinteraction = pimpact->get_child_by_name("lfs");
                         ::pointer<::user::edit_text>ptext =pinteraction;
                         string str;
-                        ptext->_001GetText(str);
+                        ptext->get_text(str);
                         wstra.AddUnique(str);
                         //VmsDataSet(m_pmanager->get_filemanager_template()->m_strDataKeyStatic, 0, 0, wstra);
 
@@ -80,10 +80,10 @@ namespace backup
                         auto pupdate = new_update();
                         Ex1VirtualGuieInterface * pinteraction = pimpact->get_child_by_name("encontrar");
                         ::pointer<::user::edit_text>ptext =pinteraction;
-                        //ptext->_001GetText(update.m_strFind);
+                        //ptext->get_text(update.m_strFind);
                         pinteraction = pimpact->get_child_by_name("substituir");
                         ptext =pinteraction;
-                        //ptext->_001GetText(update.m_strReplace);
+                        //ptext->get_text(update.m_strReplace);
                         pimpact->get_document()->update_all_impacts(ptopic);
                      }*/
             ptopic->Ret();

@@ -66,7 +66,7 @@ public:
    template<typename TSUBTYPE> bool ReadData(TSUBTYPE * data, const void * pData)
 
    {
-      return m_hProcess ? ReadProcessMemory(m_hProcess, pData, (LPVOID)data, sizeof( TSUBTYPE), nullptr) != false : false;
+      return m_hProcess ? ReadProcessMemory(m_hProcess, pData, (LPVOID)data, sizeof(TSUBTYPE), nullptr) != false : false;
 
    }
 
