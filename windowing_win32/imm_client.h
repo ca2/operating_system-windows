@@ -39,7 +39,7 @@ public:
 
    virtual void on_text_composition(string strMessage);
 
-   virtual void plain_edit_insert_text(const ::scoped_string & scopedstr, bool bForceNewStep, const ::action_context& actioncontext) override;
+   virtual void insert_text(const ::scoped_string & scopedstr, bool bForceNewStep, const ::action_context& actioncontext) override;
 
    virtual bool is_text_composition_active() const;
 
