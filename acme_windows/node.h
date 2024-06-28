@@ -370,6 +370,9 @@ namespace acme_windows
       bool _is_google_chrome_installed() override;
       bool _is_visual_studio_code_installed() override;
 
+      
+
+
    };
 
 

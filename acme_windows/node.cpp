@@ -4967,7 +4967,21 @@ namespace acme_windows
    }
 
 
-   
+   //::file::path node::___fonts_folder()
+   //{
+
+   //   WCHAR windir[MAX_PATH];
+
+   //   GetWindowsDirectoryW(windir, MAX_PATH);
+
+   //   ::file::path pathWindows = windir;
+
+   //   auto pathFonts = pathWindows / "Fonts";
+
+   //   return pathFolder;
+
+   //}
+
 
 
 
