@@ -1451,13 +1451,21 @@ namespace acme_windows
 
       ::acme_windows::registry::key key;
 
-      if (key._open(HKEY_CURRENT_USER, "SOFTWARE\\Microsoft\\Onedrive", false))
+      if (key._open(HKEY_CURRENT_USER, "SOFTWARE\\Microsoft\\OneDrive", false))
       {
 
+         string strPath;
+
+         if (key._get("UserFolder", strPath))
+         {
+
+            return strPath;
+
+         }
 
       }
 
-      if (key._open(HKEY_CURRENT_USER, "SOFTWARE\\Microsoft\\Window\\CurrentVersion\\SkyDrive", false))
+      if (key._open(HKEY_CURRENT_USER, "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\SkyDrive", false))
       {
 
          string strPath;
