@@ -8,11 +8,16 @@
 #include "acme/filesystem/file/memory_file.h"
 #include "acme/filesystem/file/status.h"
 #include "acme/filesystem/filesystem/acme_directory.h"
+#include "acme/filesystem/filesystem/dir_context.h"
 
 #include "acme/platform/debug.h"
 #include "acme/primitive/primitive/payload.h"
 #include "acme/primitive/string/international.h"
 #include "acme/platform/system.h"
+
+#include "acme/_operating_system.h"
+#include "acme_windows/registry.h"
+
 
 
 CLASS_DECL_ACME_WINDOWS const void * get_resource_pointer(HINSTANCE hinst, DWORD nID, const char * pcszType, memsize & memsize);
@@ -737,6 +742,24 @@ namespace acme_windows
    }
 
 
+   ::file::path file_context::dropbox_client()
+   {
+
+      auto pathClientFolder = dir()->dropbox_client();
+
+      if (pathClientFolder.is_empty() || !dir()->is(pathClientFolder))
+      {
+
+         return {};
+
+      }
+
+      return pathClientFolder / "Dropbox.exe";
+
+   }
+
+
 } // namespace apex_windows
+
 
 

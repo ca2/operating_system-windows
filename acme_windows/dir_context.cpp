@@ -1484,6 +1484,46 @@ namespace acme_windows
    }
 
 
+   ::file::path dir_context::dropbox_client()
+   {
+
+      ::acme_windows::registry::key key;
+
+      if (key._open(HKEY_LOCAL_MACHINE, "SOFTWARE\\Dropbox"))
+      {
+
+         ::string str;
+
+         if (key._get("InstallPath", str))
+         {
+
+            return str;
+
+         }
+
+      }
+
+      if (key._open(HKEY_LOCAL_MACHINE, "SOFTWARE\\WOW6432Node\\Dropbox"))
+      {
+
+         ::string str;
+
+         if (key._get("InstallPath", str))
+         {
+
+            return str;
+
+         }
+
+      }
+
+      return {};
+
+
+   }
+
+
+
 } // namespace apex_windows
 
 

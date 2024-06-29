@@ -98,7 +98,7 @@ namespace acme_windows
 
       //virtual ::file::path onedrive_global_ini(::particle * pparticle) override;
       //virtual ::file::path onedrive_cid_ini(::particle * pparticle) override;
-
+      ::file::path dropbox_client() override;
 
    };
 
