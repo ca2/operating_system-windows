@@ -4903,6 +4903,8 @@ namespace acme_windows
 
          strPath.trim();
 
+         strPath.paired_trim_quotes();
+
          if (strPath.is_empty() || !acmefile()->exists(strPath))
          {
 
@@ -4938,6 +4940,8 @@ namespace acme_windows
          key._get({}, strPath);
 
          strPath.trim();
+
+         strPath.paired_trim_quotes();
 
          if (strPath.is_empty() || !acmefile()->exists(strPath))
          {
