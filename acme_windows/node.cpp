@@ -4923,6 +4923,42 @@ namespace acme_windows
    }
 
 
+   bool node::_is_opera_browser_installed()
+   {
+
+      try
+      {
+
+         ::acme_windows::registry::key key;
+
+         key.open(HKEY_CURRENT_USER, "Software\\Microsoft\\Windows\\CurrentVersion\\App Paths\\opera.exe");
+
+         ::string strPath;
+
+         key._get({}, strPath);
+
+         strPath.trim();
+
+         if (strPath.is_empty() || !acmefile()->exists(strPath))
+         {
+
+            return false;
+
+         }
+
+         return true;
+
+      }
+      catch (...)
+      {
+
+      }
+
+      return false;
+
+   }
+
+
    bool node::_is_visual_studio_code_installed()
    {
 

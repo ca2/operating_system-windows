@@ -368,6 +368,7 @@ namespace acme_windows
 
       //int efficiency_core_count() override;
       bool _is_google_chrome_installed() override;
+      bool _is_opera_browser_installed() override;
       bool _is_visual_studio_code_installed() override;
 
       
