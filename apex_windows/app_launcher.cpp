@@ -111,7 +111,7 @@ namespace apex_windows
 
 #ifdef WINDOWS_DESKTOP
 
-      if (string_ends_ci(get_executable_path(), "\\app.exe"))
+      if (case_insensitive_string_ends(get_executable_path(), "\\app.exe"))
 
 #endif
 

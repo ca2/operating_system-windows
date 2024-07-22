@@ -3,6 +3,7 @@
 #include "acme_path.h"
 #include "file_link.h"
 #include "node.h"
+#include "acme/filesystem/filesystem/acme_directory.h"
 #include "acme/filesystem/filesystem/path.h"
 #include "acme/_operating_system.h"
 
