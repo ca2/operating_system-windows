@@ -1275,7 +1275,7 @@ namespace acme_windows
          for (i32 j = 0; j < straNew.get_count(); j++)
          {
 
-            if (ansi_compare_ci(straOld[i], straNew[j]) == 0)
+            if (case_insensitive_ansi_compare(straOld[i], straNew[j]) == 0)
             {
 
                bFound = true;

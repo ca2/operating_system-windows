@@ -48,6 +48,12 @@ namespace acme_windows
 
       void rename(const ::file::path& pathNewName, const ::file::path& pathOldName) override;
 
+
+
+      void symbolic_link(const ::file::path & pathTarget, const ::file::path & pathSource) override;
+
+
+
    };
 
 
