@@ -271,11 +271,11 @@ namespace acme_windows
    }
 
 
-   void acme_path::rename(const ::file::path& pathNewName, const ::file::path& pathOldName)
+   void acme_path::rename(const ::file::path & pathNewName, const ::file::path & pathOldName)
    {
 
       auto windowspathOld = pathOldName.windows_path();
-      
+
       auto windowspathNew = pathNewName.windows_path();
 
       ::wstring wstrOld = windowspathOld;
@@ -286,6 +286,44 @@ namespace acme_windows
       {
 
          DWORD dwLastError = ::GetLastError();
+
+         throw ::exception(error_failed);
+
+      }
+
+   }
+
+
+   void acme_path::symbolic_link(const ::file::path & pathTarget, const ::file::path & pathSource)
+   {
+
+      auto windowspathTarget = pathTarget.windows_path();
+
+      auto windowspathSource = pathSource.windows_path();
+
+      windowspathTarget = "\\\\?\\" + windowspathTarget;
+
+      windowspathSource = "\\\\?\\" + windowspathSource;
+
+      ::wstring wstrTarget = windowspathTarget;
+      
+      ::wstring wstrSource = windowspathSource;
+
+      DWORD dwFlag = 0;
+
+      if (acmedirectory()->is(pathSource))
+      {
+
+         dwFlag |= SYMBOLIC_LINK_FLAG_DIRECTORY;
+
+      }
+
+      dwFlag |= SYMBOLIC_LINK_FLAG_ALLOW_UNPRIVILEGED_CREATE;
+
+      bool bOk = ::CreateSymbolicLinkW(wstrTarget, wstrSource, dwFlag);
+
+      if (!bOk)
+      {
 
          throw ::exception(error_failed);
 
