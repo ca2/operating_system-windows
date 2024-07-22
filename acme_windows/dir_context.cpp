@@ -1519,9 +1519,7 @@ namespace acme_windows
 
       return {};
 
-
    }
-
 
 
 } // namespace apex_windows
