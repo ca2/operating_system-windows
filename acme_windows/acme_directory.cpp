@@ -2260,6 +2260,9 @@ pacmedir->create CreateDirectoryW last error(%d)=%s", dwError, pszError);
    }
 
 
+
+
+
    ::file::path acme_directory::system_drive()
    {
 
@@ -2268,6 +2271,22 @@ pacmedir->create CreateDirectoryW last error(%d)=%s", dwError, pszError);
       auto system_drive = windows.folder();
 
       return system_drive;
+
+   }
+
+
+   ::file::path acme_directory::___fonts()
+   {
+
+      return this->fonts();
+
+   }
+
+
+   ::file::path acme_directory::fonts()
+   {
+
+      return this->windows() / "Fonts";
 
    }
 

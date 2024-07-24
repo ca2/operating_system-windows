@@ -8,6 +8,7 @@
 #include "exclusive.h"
 #include "application.h"
 #include "create_process.h"
+#include "file_link.h"
 #include "acme/exception/exception.h"
 #include "acme/exception/status.h"
 #include "acme/filesystem/filesystem/acme_directory.h"
@@ -1274,7 +1275,7 @@ namespace acme_windows
          for (i32 j = 0; j < straNew.get_count(); j++)
          {
 
-            if (ansi_compare_ci(straOld[i], straNew[j]) == 0)
+            if (case_insensitive_ansi_compare(straOld[i], straNew[j]) == 0)
             {
 
                bFound = true;
@@ -3339,6 +3340,30 @@ namespace acme_windows
    }
 
 
+   int node::synchronous_posix_terminal(const ::scoped_string& scopedstrCommand, enum_posix_shell eposixshell , const trace_function& tracefunction)
+   {
+
+      ::file::path pathGitBash = "C:/Program Files/Git/git-bash.exe";
+
+      ::string strGitBash(pathGitBash);
+
+      strGitBash.double_quote();
+
+      ::string strCommand(pathGitBash);
+
+      strCommand.double_quote(true);
+
+      ::string strParameters;
+
+      strParameters = " -i -c " + scopedstrCommand.double_quoted(true);
+
+      int iExitCode = command_system(strGitBash + strParameters, tracefunction);
+
+      return iExitCode;
+
+   }
+
+
    bool node::has_command(const ::scoped_string& scopedstrCommand)
    {
 
@@ -4439,10 +4464,23 @@ namespace acme_windows
    }
 
 
-   bool node::_is_code_exe_user_path_environment_variable_ok(::string* pstrCorrectPath)
+   bool node::_is_code_exe_user_path_environment_variable_ok(::string* pstrCorrectPath, const char * pszPath)
    {
 
-      auto str = get_user_permanent_environment_variable("PATH");
+      ::string str;
+      
+      if (::is_null(pszPath))
+      {
+
+         str = get_user_permanent_environment_variable("PATH");
+
+      }
+      else
+      {
+
+         str = pszPath;
+
+      }
 
       bool bChanged = false;
 
@@ -4847,6 +4885,142 @@ namespace acme_windows
       return strCmd;
 
    }
+   
+   
+   bool node::_is_google_chrome_installed()
+   {
+
+      try
+      {
+
+         ::acme_windows::registry::key key;
+
+         key.open(HKEY_LOCAL_MACHINE, "Software\\Microsoft\\Windows\\CurrentVersion\\App Paths\\chrome.exe");
+
+         ::string strPath;
+
+         key._get({}, strPath);
+
+         strPath.trim();
+
+         strPath.pair_trim_quotes();
+
+         if (strPath.is_empty() || !acmefile()->exists(strPath))
+         {
+
+            return false;
+
+         }
+
+         return true;
+
+      }
+      catch (...)
+      {
+
+      }
+
+      return false;
+
+   }
+
+
+   bool node::_is_opera_browser_installed()
+   {
+
+      try
+      {
+
+         ::acme_windows::registry::key key;
+
+         key.open(HKEY_CURRENT_USER, "Software\\Microsoft\\Windows\\CurrentVersion\\App Paths\\opera.exe");
+
+         ::string strPath;
+
+         key._get({}, strPath);
+
+         strPath.trim();
+
+         strPath.pair_trim_quotes();
+
+         if (strPath.is_empty() || !acmefile()->exists(strPath))
+         {
+
+            return false;
+
+         }
+
+         return true;
+
+      }
+      catch (...)
+      {
+
+      }
+
+      return false;
+
+   }
+
+
+   bool node::_is_visual_studio_code_installed()
+   {
+
+      try
+      {
+
+         auto pathHome = acmedirectory()->home();
+
+         auto pathVsLnk = pathHome / "AppData/Roaming/Microsoft/Windows/Start Menu/Programs/Visual Studio Code/Visual Studio Code.lnk";
+
+         if (!acmefile()->exists(pathVsLnk))
+         {
+
+            return false;
+
+         }
+
+         auto plink = __create_new<::acme_windows::file_link>();
+
+         plink->open(pathVsLnk, ::file::e_link_target);
+
+         auto pathTarget = plink->m_pathTarget;
+
+         if (!acmefile()->exists(pathTarget))
+         {
+
+            return false;
+
+         }
+
+         return true;
+
+      }
+      catch (...)
+      {
+
+
+      }
+
+      return false;
+
+   }
+
+
+   //::file::path node::___fonts_folder()
+   //{
+
+   //   WCHAR windir[MAX_PATH];
+
+   //   GetWindowsDirectoryW(windir, MAX_PATH);
+
+   //   ::file::path pathWindows = windir;
+
+   //   auto pathFonts = pathWindows / "Fonts";
+
+   //   return pathFolder;
+
+   //}
 
 
 

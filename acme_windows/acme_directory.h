@@ -141,6 +141,10 @@ namespace acme_windows
       ::file::path system_drive() override;
 
 
+      ::file::path ___fonts() override;
+      ::file::path fonts() override;
+
+
    };
 
 

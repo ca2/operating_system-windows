@@ -21,5 +21,7 @@
 
 #define REFERENCING_DEBUGGING 0
 
+#define MEMORY_ANNOTATION 0
+
 
 

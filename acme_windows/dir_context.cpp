@@ -864,7 +864,7 @@ namespace acme_windows
 
       bool bIsDir;
 
-      if (::task_flag().is_set(e_task_flag_compress_is_dir) && iLast >= 3 && !ansi_count_compare_ci(&((const ::string &)str)[iLast - 3], ".zip", 4))
+      if (::task_flag().is_set(e_task_flag_compress_is_dir) && iLast >= 3 && !case_insensitive_ansi_count_compare( & ((const ::string &)str)[iLast - 3], ".zip", 4))
       {
 
          //m_isdirmap.set(str.left()(iLast + 1), true, 0);
@@ -1451,13 +1451,21 @@ namespace acme_windows
 
       ::acme_windows::registry::key key;
 
-      if (key._open(HKEY_CURRENT_USER, "SOFTWARE\\Microsoft\\Onedrive", false))
+      if (key._open(HKEY_CURRENT_USER, "SOFTWARE\\Microsoft\\OneDrive", false))
       {
 
+         string strPath;
+
+         if (key._get("UserFolder", strPath))
+         {
+
+            return strPath;
+
+         }
 
       }
 
-      if (key._open(HKEY_CURRENT_USER, "SOFTWARE\\Microsoft\\Window\\CurrentVersion\\SkyDrive", false))
+      if (key._open(HKEY_CURRENT_USER, "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\SkyDrive", false))
       {
 
          string strPath;
@@ -1472,6 +1480,44 @@ namespace acme_windows
       }
 
       return "";
+
+   }
+
+
+   ::file::path dir_context::dropbox_client()
+   {
+
+      ::acme_windows::registry::key key;
+
+      if (key._open(HKEY_LOCAL_MACHINE, "SOFTWARE\\Dropbox"))
+      {
+
+         ::string str;
+
+         if (key._get("InstallPath", str))
+         {
+
+            return str;
+
+         }
+
+      }
+
+      if (key._open(HKEY_LOCAL_MACHINE, "SOFTWARE\\WOW6432Node\\Dropbox"))
+      {
+
+         ::string str;
+
+         if (key._get("InstallPath", str))
+         {
+
+            return str;
+
+         }
+
+      }
+
+      return {};
 
    }
 

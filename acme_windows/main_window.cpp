@@ -95,6 +95,13 @@ namespace acme_windows
 
    }
 
+
+   bool main_window::is_window()
+   {
+
+      return ::IsWindow(m_hwnd);
+
+   }
    
    void main_window::post_close()
    {
@@ -167,6 +174,15 @@ namespace acme_windows
 
    }
 
+
+   void main_window::activate()
+   {
+
+      ::SetForegroundWindow(m_hwnd);
+
+      ::BringWindowToTop(m_hwnd);
+
+   }
 
 } // namespace acme_windows
 
