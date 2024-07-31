@@ -18,7 +18,7 @@ namespace windowing_win32
    {
    public:
 
-
+      ::u8                                            m_uOpacity;
       //HICON                                         m_hiconSmall;
       //HICON                                         m_hiconBig;
       HMENU                                           m_hmenuSystem;
@@ -955,6 +955,9 @@ namespace windowing_win32
 
       virtual LRESULT __window_procedure(HWND hwnd, UINT message, WPARAM wparam, LPARAM lparam);
 
+
+      void set_opacity(double dOpacity) override;
+      
 
    };
 

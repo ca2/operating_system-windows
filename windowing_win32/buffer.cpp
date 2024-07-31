@@ -676,9 +676,11 @@ namespace windowing_win32
             //else
             //{
 
+            ::pointer < ::windowing_win32::window > pwindow = m_pimpl->m_pwindow;
+
             ::point_i32 pointSrc = { 0 };
 
-            BLENDFUNCTION blendPixelFunction = { AC_SRC_OVER, 0, 255, AC_SRC_ALPHA };
+            BLENDFUNCTION blendPixelFunction = { AC_SRC_OVER, 0, pwindow->m_uOpacity, AC_SRC_ALPHA };
 
             //::SelectClipRgn(m_hdcScreen, nullptr);
 
@@ -867,7 +869,7 @@ namespace windowing_win32
             }
 
 
-            ::pointer < ::windowing_win32::window > pwindow = m_pimpl->m_pwindow;
+            //::pointer < ::windowing_win32::window > pwindow = m_pimpl->m_pwindow;
 
             try
             {

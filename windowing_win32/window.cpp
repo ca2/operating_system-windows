@@ -86,6 +86,8 @@ namespace windowing_win32
    window::window()
    {
 
+      m_uOpacity = 255;
+
       m_hmenuSystem = nullptr;
 
       m_pWindow4 = this;
@@ -7669,6 +7671,12 @@ namespace windowing_win32
 
    }
 
+   void window::set_opacity(double dOpacity)
+   {
+
+      m_uOpacity = (::u8) (minimum_maximum(dOpacity, 0., 1.) * 255.0);
+
+   }
 
 
 } // namespace windowing_win32
