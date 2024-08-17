@@ -171,7 +171,7 @@ bool IsDibSection(HBITMAP bmp)
          int h = ds.dsBmih.biHeight;
 
          auto pBits = ds.dsBm.bmBits;
-         auto pimage = pparticle->m_pcontext->m_pauracontext->create_image({ w, h });
+         auto pimage = pparticle->context_image()->create_image({ w, h });
          int iStride = ds.dsBmih.biSizeImage / abs(h );
 
          if (h < 0)
@@ -197,7 +197,7 @@ bool IsDibSection(HBITMAP bmp)
 
    ::GetObject(hbitmap, sizeof(bitmap), &bitmap);
 
-   auto pimage = pparticle->m_pcontext->m_pauracontext->create_image({ bitmap.bmWidth, bitmap.bmHeight });
+   auto pimage = pparticle->context_image()->create_image({ bitmap.bmWidth, bitmap.bmHeight });
 
    BITMAPINFO bitmapinfo = {};
 
