@@ -578,7 +578,7 @@ namespace windowing_win32
 
                auto pimage = m_pcontext->context_image()->get_image(pfile);
 
-               auto pimageResized = m_pcontext->m_pauracontext->create_image(size);
+               auto pimageResized = context_image()->create_image(size);
 
                bool bOk = false;
 
