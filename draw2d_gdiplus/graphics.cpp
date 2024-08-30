@@ -1364,7 +1364,7 @@ namespace draw2d_gdiplus
 
       }
 
-      if (payload("log_fill_rectangle"))
+      if (payload("log_fill_rectangle").is_true())
       {
 
          if (rectangleParam.minimum_dimension() > 24)
@@ -3938,7 +3938,7 @@ namespace draw2d_gdiplus
 
          }
 
-         if (payload("log_fill_rectangle"))
+         if (payload("log_fill_rectangle").is_true())
          {
 
             if (rectangleParam.minimum_dimension() > 24)
