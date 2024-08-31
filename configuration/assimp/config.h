@@ -725,302 +725,308 @@ enum aiComponent
 #define AI_CONFIG_IMPORT_MDL_HL1_READ_ANIMATION_EVENTS "IMPORT_MDL_HL1_READ_ANIMATION_EVENTS"
 
                      // ---------------------------------------------------------------------------
-                     /** @brief Set whether the MDL (HL1) importer will read blend controllers.
-                      * \note This property requires AI_CONFIG_IMPORT_MDL_HL1_READ_ANIMATIONS to be set to true.
-                      *
-                      * The default value is true (1)
+                     /** @brief Set whether you want to convert the HS1 coordinate system in a special way.
+                      * The default value is true (S1)
                       * Property type: bool
                       */
-#define AI_CONFIG_IMPORT_MDL_HL1_READ_BLEND_CONTROLLERS "IMPORT_MDL_HL1_READ_BLEND_CONTROLLERS"
-
+#define AI_CONFIG_IMPORT_MDL_HL1_TRANSFORM_COORD_SYSTEM "TRANSFORM COORDSYSTEM FOR HS! MODELS"
                       // ---------------------------------------------------------------------------
-                      /** @brief Set whether the MDL (HL1) importer will read sequence transition graph.
+                      /** @brief Set whether the MDL (HL1) importer will read blend controllers.
                        * \note This property requires AI_CONFIG_IMPORT_MDL_HL1_READ_ANIMATIONS to be set to true.
                        *
                        * The default value is true (1)
                        * Property type: bool
                        */
-#define AI_CONFIG_IMPORT_MDL_HL1_READ_SEQUENCE_TRANSITIONS "IMPORT_MDL_HL1_READ_SEQUENCE_TRANSITIONS"
+#define AI_CONFIG_IMPORT_MDL_HL1_READ_BLEND_CONTROLLERS "IMPORT_MDL_HL1_READ_BLEND_CONTROLLERS"
 
                        // ---------------------------------------------------------------------------
-                       /** @brief Set whether the MDL (HL1) importer will read attachments info.
+                       /** @brief Set whether the MDL (HL1) importer will read sequence transition graph.
+                        * \note This property requires AI_CONFIG_IMPORT_MDL_HL1_READ_ANIMATIONS to be set to true.
                         *
                         * The default value is true (1)
                         * Property type: bool
                         */
-#define AI_CONFIG_IMPORT_MDL_HL1_READ_ATTACHMENTS "IMPORT_MDL_HL1_READ_ATTACHMENTS"
+#define AI_CONFIG_IMPORT_MDL_HL1_READ_SEQUENCE_TRANSITIONS "IMPORT_MDL_HL1_READ_SEQUENCE_TRANSITIONS"
 
                         // ---------------------------------------------------------------------------
-                        /** @brief Set whether the MDL (HL1) importer will read bone controllers info.
+                        /** @brief Set whether the MDL (HL1) importer will read attachments info.
                          *
                          * The default value is true (1)
                          * Property type: bool
                          */
-#define AI_CONFIG_IMPORT_MDL_HL1_READ_BONE_CONTROLLERS "IMPORT_MDL_HL1_READ_BONE_CONTROLLERS"
+#define AI_CONFIG_IMPORT_MDL_HL1_READ_ATTACHMENTS "IMPORT_MDL_HL1_READ_ATTACHMENTS"
 
                          // ---------------------------------------------------------------------------
-                         /** @brief Set whether the MDL (HL1) importer will read hitboxes info.
+                         /** @brief Set whether the MDL (HL1) importer will read bone controllers info.
                           *
                           * The default value is true (1)
                           * Property type: bool
                           */
-#define AI_CONFIG_IMPORT_MDL_HL1_READ_HITBOXES "IMPORT_MDL_HL1_READ_HITBOXES"
+#define AI_CONFIG_IMPORT_MDL_HL1_READ_BONE_CONTROLLERS "IMPORT_MDL_HL1_READ_BONE_CONTROLLERS"
 
                           // ---------------------------------------------------------------------------
-                          /** @brief Set whether the MDL (HL1) importer will read miscellaneous global model info.
+                          /** @brief Set whether the MDL (HL1) importer will read hitboxes info.
                            *
                            * The default value is true (1)
                            * Property type: bool
                            */
-#define AI_CONFIG_IMPORT_MDL_HL1_READ_MISC_GLOBAL_INFO "IMPORT_MDL_HL1_READ_MISC_GLOBAL_INFO"
+#define AI_CONFIG_IMPORT_MDL_HL1_READ_HITBOXES "IMPORT_MDL_HL1_READ_HITBOXES"
 
                            // ---------------------------------------------------------------------------
-                           /** Smd load multiple animations
+                           /** @brief Set whether the MDL (HL1) importer will read miscellaneous global model info.
                             *
-                            *  Property type: bool. Default value: true.
+                            * The default value is true (1)
+                            * Property type: bool
                             */
-#define AI_CONFIG_IMPORT_SMD_LOAD_ANIMATION_LIST "IMPORT_SMD_LOAD_ANIMATION_LIST"
+#define AI_CONFIG_IMPORT_MDL_HL1_READ_MISC_GLOBAL_INFO "IMPORT_MDL_HL1_READ_MISC_GLOBAL_INFO"
 
                             // ---------------------------------------------------------------------------
-                            /** @brief  Configures the AC loader to collect all surfaces which have the
-                             *    "Backface cull" flag set in separate meshes.
+                            /** Smd load multiple animations
                              *
                              *  Property type: bool. Default value: true.
                              */
+#define AI_CONFIG_IMPORT_SMD_LOAD_ANIMATION_LIST "IMPORT_SMD_LOAD_ANIMATION_LIST"
+
+                             // ---------------------------------------------------------------------------
+                             /** @brief  Configures the AC loader to collect all surfaces which have the
+                              *    "Backface cull" flag set in separate meshes.
+                              *
+                              *  Property type: bool. Default value: true.
+                              */
 #define AI_CONFIG_IMPORT_AC_SEPARATE_BFCULL \
     "IMPORT_AC_SEPARATE_BFCULL"
 
-                             // ---------------------------------------------------------------------------
-                             /** @brief  Configures whether the AC loader evaluates subdivision surfaces (
-                              *  indicated by the presence of the 'subdiv' attribute in the file). By
-                              *  default, Assimp performs the subdivision using the standard
-                              *  Catmull-Clark algorithm
-                              *
-                              * * Property type: bool. Default value: true.
-                              */
-#define AI_CONFIG_IMPORT_AC_EVAL_SUBDIVISION    \
-    "IMPORT_AC_EVAL_SUBDIVISION"
-
                               // ---------------------------------------------------------------------------
-                              /** @brief  Configures the UNREAL 3D loader to separate faces with different
-                               *    surface flags (e.g. two-sided vs. single-sided).
+                              /** @brief  Configures whether the AC loader evaluates subdivision surfaces (
+                               *  indicated by the presence of the 'subdiv' attribute in the file). By
+                               *  default, Assimp performs the subdivision using the standard
+                               *  Catmull-Clark algorithm
                                *
                                * * Property type: bool. Default value: true.
                                */
+#define AI_CONFIG_IMPORT_AC_EVAL_SUBDIVISION    \
+    "IMPORT_AC_EVAL_SUBDIVISION"
+
+                               // ---------------------------------------------------------------------------
+                               /** @brief  Configures the UNREAL 3D loader to separate faces with different
+                                *    surface flags (e.g. two-sided vs. single-sided).
+                                *
+                                * * Property type: bool. Default value: true.
+                                */
 #define AI_CONFIG_IMPORT_UNREAL_HANDLE_FLAGS \
     "UNREAL_HANDLE_FLAGS"
 
-                               // ---------------------------------------------------------------------------
-                               /** @brief Configures the terragen import plugin to compute uv's for
-                                *  terrains, if not given. Furthermore a default texture is assigned.
-                                *
-                                * UV coordinates for terrains are so simple to compute that you'll usually
-                                * want to compute them on your own, if you need them. This option is intended
-                                * for model viewers which want to offer an easy way to apply textures to
-                                * terrains.
-                                * * Property type: bool. Default value: false.
-                                */
+                                // ---------------------------------------------------------------------------
+                                /** @brief Configures the terragen import plugin to compute uv's for
+                                 *  terrains, if not given. Furthermore a default texture is assigned.
+                                 *
+                                 * UV coordinates for terrains are so simple to compute that you'll usually
+                                 * want to compute them on your own, if you need them. This option is intended
+                                 * for model viewers which want to offer an easy way to apply textures to
+                                 * terrains.
+                                 * * Property type: bool. Default value: false.
+                                 */
 #define AI_CONFIG_IMPORT_TER_MAKE_UVS \
     "IMPORT_TER_MAKE_UVS"
 
-                                // ---------------------------------------------------------------------------
-                                /** @brief  Configures the ASE loader to always reconstruct normal vectors
-                                 *  basing on the smoothing groups loaded from the file.
-                                 *
-                                 * Some ASE files have carry invalid normals, other don't.
-                                 * * Property type: bool. Default value: true.
-                                 */
+                                 // ---------------------------------------------------------------------------
+                                 /** @brief  Configures the ASE loader to always reconstruct normal vectors
+                                  *  basing on the smoothing groups loaded from the file.
+                                  *
+                                  * Some ASE files have carry invalid normals, other don't.
+                                  * * Property type: bool. Default value: true.
+                                  */
 #define AI_CONFIG_IMPORT_ASE_RECONSTRUCT_NORMALS    \
     "IMPORT_ASE_RECONSTRUCT_NORMALS"
 
-                                 // ---------------------------------------------------------------------------
-                                 /** @brief  Configures the M3D loader to detect and process multi-part
-                                  *    Quake player models.
-                                  *
-                                  * These models usually consist of 3 files, lower.md3, upper.md3 and
-                                  * head.md3. If this property is set to true, Assimp will try to load and
-                                  * combine all three files if one of them is loaded.
-                                  * Property type: bool. Default value: true.
-                                  */
+                                  // ---------------------------------------------------------------------------
+                                  /** @brief  Configures the M3D loader to detect and process multi-part
+                                   *    Quake player models.
+                                   *
+                                   * These models usually consist of 3 files, lower.md3, upper.md3 and
+                                   * head.md3. If this property is set to true, Assimp will try to load and
+                                   * combine all three files if one of them is loaded.
+                                   * Property type: bool. Default value: true.
+                                   */
 #define AI_CONFIG_IMPORT_MD3_HANDLE_MULTIPART \
     "IMPORT_MD3_HANDLE_MULTIPART"
 
-                                  // ---------------------------------------------------------------------------
-                                  /** @brief  Tells the MD3 loader which skin files to load.
-                                   *
-                                   * When loading MD3 files, Assimp checks whether a file
-                                   * [md3_file_name]_[skin_name].skin is existing. These files are used by
-                                   * Quake III to be able to assign different skins (e.g. red and blue team)
-                                   * to models. 'default', 'red', 'blue' are typical skin names.
-                                   * Property type: String. Default value: "default".
-                                   */
+                                   // ---------------------------------------------------------------------------
+                                   /** @brief  Tells the MD3 loader which skin files to load.
+                                    *
+                                    * When loading MD3 files, Assimp checks whether a file
+                                    * [md3_file_name]_[skin_name].skin is existing. These files are used by
+                                    * Quake III to be able to assign different skins (e.g. red and blue team)
+                                    * to models. 'default', 'red', 'blue' are typical skin names.
+                                    * Property type: String. Default value: "default".
+                                    */
 #define AI_CONFIG_IMPORT_MD3_SKIN_NAME \
     "IMPORT_MD3_SKIN_NAME"
 
-                                   // ---------------------------------------------------------------------------
-                                   /** @brief  Specify if to try load Quake 3 shader files. This also controls
-                                    *  original surface name handling: when disabled it will be used unchanged.
-                                    *
-                                    * Property type: bool. Default value: true.
-                                    */
+                                    // ---------------------------------------------------------------------------
+                                    /** @brief  Specify if to try load Quake 3 shader files. This also controls
+                                     *  original surface name handling: when disabled it will be used unchanged.
+                                     *
+                                     * Property type: bool. Default value: true.
+                                     */
 #define AI_CONFIG_IMPORT_MD3_LOAD_SHADERS \
     "IMPORT_MD3_LOAD_SHADERS"
 
-                                    // ---------------------------------------------------------------------------
-                                    /** @brief  Specify the Quake 3 shader file to be used for a particular
-                                     *  MD3 file. This can also be a search path.
-                                     *
-                                     * By default Assimp's behaviour is as follows: If a MD3 file
-                                     * <tt>any_path/models/any_q3_subdir/model_name/file_name.md3</tt> is
-                                     * loaded, the library tries to locate the corresponding shader file in
-                                     * <tt>any_path/scripts/model_name.shader</tt>. This property overrides this
-                                     * behaviour. It can either specify a full path to the shader to be loaded
-                                     * or alternatively the path (relative or absolute) to the directory where
-                                     * the shaders for all MD3s to be loaded reside. Assimp attempts to open
-                                     * <tt>IMPORT_MD3_SHADER_SRC/model_name.shader</tt> first, <tt>IMPORT_MD3_SHADER_SRC/file_name.shader</tt>
-                                     * is the fallback file. Note that IMPORT_MD3_SHADER_SRC should have a terminal (back)slash.
-                                     * Property type: String. Default value: n/a.
-                                     */
+                                     // ---------------------------------------------------------------------------
+                                     /** @brief  Specify the Quake 3 shader file to be used for a particular
+                                      *  MD3 file. This can also be a search path.
+                                      *
+                                      * By default Assimp's behaviour is as follows: If a MD3 file
+                                      * <tt>any_path/models/any_q3_subdir/model_name/file_name.md3</tt> is
+                                      * loaded, the library tries to locate the corresponding shader file in
+                                      * <tt>any_path/scripts/model_name.shader</tt>. This property overrides this
+                                      * behaviour. It can either specify a full path to the shader to be loaded
+                                      * or alternatively the path (relative or absolute) to the directory where
+                                      * the shaders for all MD3s to be loaded reside. Assimp attempts to open
+                                      * <tt>IMPORT_MD3_SHADER_SRC/model_name.shader</tt> first, <tt>IMPORT_MD3_SHADER_SRC/file_name.shader</tt>
+                                      * is the fallback file. Note that IMPORT_MD3_SHADER_SRC should have a terminal (back)slash.
+                                      * Property type: String. Default value: n/a.
+                                      */
 #define AI_CONFIG_IMPORT_MD3_SHADER_SRC \
     "IMPORT_MD3_SHADER_SRC"
 
-                                     // ---------------------------------------------------------------------------
-                                     /** @brief  Configures the LWO loader to load just one layer from the model.
-                                      *
-                                      * LWO files consist of layers and in some cases it could be useful to load
-                                      * only one of them. This property can be either a string - which specifies
-                                      * the name of the layer - or an integer - the index of the layer. If the
-                                      * property is not set the whole LWO model is loaded. Loading fails if the
-                                      * requested layer is not available. The layer index is zero-based and the
-                                      * layer name may not be empty.<br>
-                                      * Property type: Integer. Default value: all layers are loaded.
-                                      */
+                                      // ---------------------------------------------------------------------------
+                                      /** @brief  Configures the LWO loader to load just one layer from the model.
+                                       *
+                                       * LWO files consist of layers and in some cases it could be useful to load
+                                       * only one of them. This property can be either a string - which specifies
+                                       * the name of the layer - or an integer - the index of the layer. If the
+                                       * property is not set the whole LWO model is loaded. Loading fails if the
+                                       * requested layer is not available. The layer index is zero-based and the
+                                       * layer name may not be empty.<br>
+                                       * Property type: Integer. Default value: all layers are loaded.
+                                       */
 #define AI_CONFIG_IMPORT_LWO_ONE_LAYER_ONLY         \
     "IMPORT_LWO_ONE_LAYER_ONLY"
 
-                                      // ---------------------------------------------------------------------------
-                                      /** @brief  Configures the MD5 loader to not load the MD5ANIM file for
-                                       *  a MD5MESH file automatically.
-                                       *
-                                       * The default strategy is to look for a file with the same name but the
-                                       * MD5ANIM extension in the same directory. If it is found, it is loaded
-                                       * and combined with the MD5MESH file. This configuration option can be
-                                       * used to disable this behaviour.
-                                       *
-                                       * * Property type: bool. Default value: false.
-                                       */
+                                       // ---------------------------------------------------------------------------
+                                       /** @brief  Configures the MD5 loader to not load the MD5ANIM file for
+                                        *  a MD5MESH file automatically.
+                                        *
+                                        * The default strategy is to look for a file with the same name but the
+                                        * MD5ANIM extension in the same directory. If it is found, it is loaded
+                                        * and combined with the MD5MESH file. This configuration option can be
+                                        * used to disable this behaviour.
+                                        *
+                                        * * Property type: bool. Default value: false.
+                                        */
 #define AI_CONFIG_IMPORT_MD5_NO_ANIM_AUTOLOAD           \
     "IMPORT_MD5_NO_ANIM_AUTOLOAD"
 
-                                       // ---------------------------------------------------------------------------
-                                       /** @brief Defines the begin of the time range for which the LWS loader
-                                        *    evaluates animations and computes aiNodeAnim's.
-                                        *
-                                        * Assimp provides full conversion of LightWave's envelope system, including
-                                        * pre and post conditions. The loader computes linearly subsampled animation
-                                        * chanels with the frame rate given in the LWS file. This property defines
-                                        * the start time. Note: animation channels are only generated if a node
-                                        * has at least one envelope with more tan one key assigned. This property.
-                                        * is given in frames, '0' is the first frame. By default, if this property
-                                        * is not set, the importer takes the animation start from the input LWS
-                                        * file ('FirstFrame' line)<br>
-                                        * Property type: Integer. Default value: taken from file.
-                                        *
-                                        * @see AI_CONFIG_IMPORT_LWS_ANIM_END - end of the imported time range
-                                        */
+                                        // ---------------------------------------------------------------------------
+                                        /** @brief Defines the begin of the time range for which the LWS loader
+                                         *    evaluates animations and computes aiNodeAnim's.
+                                         *
+                                         * Assimp provides full conversion of LightWave's envelope system, including
+                                         * pre and post conditions. The loader computes linearly subsampled animation
+                                         * chanels with the frame rate given in the LWS file. This property defines
+                                         * the start time. Note: animation channels are only generated if a node
+                                         * has at least one envelope with more tan one key assigned. This property.
+                                         * is given in frames, '0' is the first frame. By default, if this property
+                                         * is not set, the importer takes the animation start from the input LWS
+                                         * file ('FirstFrame' line)<br>
+                                         * Property type: Integer. Default value: taken from file.
+                                         *
+                                         * @see AI_CONFIG_IMPORT_LWS_ANIM_END - end of the imported time range
+                                         */
 #define AI_CONFIG_IMPORT_LWS_ANIM_START         \
     "IMPORT_LWS_ANIM_START"
 #define AI_CONFIG_IMPORT_LWS_ANIM_END           \
     "IMPORT_LWS_ANIM_END"
 
-                                        // ---------------------------------------------------------------------------
-                                        /** @brief Defines the output frame rate of the IRR loader.
-                                         *
-                                         * IRR animations are difficult to convert for Assimp and there will
-                                         * always be a loss of quality. This setting defines how many keys per second
-                                         * are returned by the converter.<br>
-                                         * Property type: integer. Default value: 100
-                                         */
+                                         // ---------------------------------------------------------------------------
+                                         /** @brief Defines the output frame rate of the IRR loader.
+                                          *
+                                          * IRR animations are difficult to convert for Assimp and there will
+                                          * always be a loss of quality. This setting defines how many keys per second
+                                          * are returned by the converter.<br>
+                                          * Property type: integer. Default value: 100
+                                          */
 #define AI_CONFIG_IMPORT_IRR_ANIM_FPS               \
     "IMPORT_IRR_ANIM_FPS"
 
-                                         // ---------------------------------------------------------------------------
-                                         /** @brief Ogre Importer will try to find referenced materials from this file.
-                                          *
-                                          * Ogre meshes reference with material names, this does not tell Assimp the file
-                                          * where it is located in. Assimp will try to find the source file in the following
-                                          * order: <material-name>.material, <mesh-filename-base>.material and
-                                          * lastly the material name defined by this config property.
-                                          * <br>
-                                          * Property type: String. Default value: Scene.material.
-                                          */
+                                          // ---------------------------------------------------------------------------
+                                          /** @brief Ogre Importer will try to find referenced materials from this file.
+                                           *
+                                           * Ogre meshes reference with material names, this does not tell Assimp the file
+                                           * where it is located in. Assimp will try to find the source file in the following
+                                           * order: <material-name>.material, <mesh-filename-base>.material and
+                                           * lastly the material name defined by this config property.
+                                           * <br>
+                                           * Property type: String. Default value: Scene.material.
+                                           */
 #define AI_CONFIG_IMPORT_OGRE_MATERIAL_FILE \
     "IMPORT_OGRE_MATERIAL_FILE"
 
-                                          // ---------------------------------------------------------------------------
-                                          /** @brief Ogre Importer detect the texture usage from its filename.
-                                           *
-                                           * Ogre material texture units do not define texture type, the textures usage
-                                           * depends on the used shader or Ogre's fixed pipeline. If this config property
-                                           * is true Assimp will try to detect the type from the textures filename postfix:
-                                           * _n, _nrm, _nrml, _normal, _normals and _normalmap for normal map, _s, _spec,
-                                           * _specular and _specularmap for specular map, _l, _light, _lightmap, _occ
-                                           * and _occlusion for light map, _disp and _displacement for displacement map.
-                                           * The matching is case insensitive. Post fix is taken between the last
-                                           * underscore and the last period.
-                                           * Default behavior is to detect type from lower cased texture unit name by
-                                           * matching against: normalmap, specularmap, lightmap and displacementmap.
-                                           * For both cases if no match is found aiTextureType_DIFFUSE is used.
-                                           * <br>
-                                           * Property type: Bool. Default value: false.
-                                           */
+                                           // ---------------------------------------------------------------------------
+                                           /** @brief Ogre Importer detect the texture usage from its filename.
+                                            *
+                                            * Ogre material texture units do not define texture type, the textures usage
+                                            * depends on the used shader or Ogre's fixed pipeline. If this config property
+                                            * is true Assimp will try to detect the type from the textures filename postfix:
+                                            * _n, _nrm, _nrml, _normal, _normals and _normalmap for normal map, _s, _spec,
+                                            * _specular and _specularmap for specular map, _l, _light, _lightmap, _occ
+                                            * and _occlusion for light map, _disp and _displacement for displacement map.
+                                            * The matching is case insensitive. Post fix is taken between the last
+                                            * underscore and the last period.
+                                            * Default behavior is to detect type from lower cased texture unit name by
+                                            * matching against: normalmap, specularmap, lightmap and displacementmap.
+                                            * For both cases if no match is found aiTextureType_DIFFUSE is used.
+                                            * <br>
+                                            * Property type: Bool. Default value: false.
+                                            */
 #define AI_CONFIG_IMPORT_OGRE_TEXTURETYPE_FROM_FILENAME \
     "IMPORT_OGRE_TEXTURETYPE_FROM_FILENAME"
 
-                                           /** @brief Specifies whether the Android JNI asset extraction is supported.
-                                            *
-                                            * Turn on this option if you want to manage assets in native
-                                            * Android application without having to keep the internal directory and asset
-                                            * manager pointer.
-                                            */
+                                            /** @brief Specifies whether the Android JNI asset extraction is supported.
+                                             *
+                                             * Turn on this option if you want to manage assets in native
+                                             * Android application without having to keep the internal directory and asset
+                                             * manager pointer.
+                                             */
 #define AI_CONFIG_ANDROID_JNI_ASSIMP_MANAGER_SUPPORT "AI_CONFIG_ANDROID_JNI_ASSIMP_MANAGER_SUPPORT"
 
-                                            // ---------------------------------------------------------------------------
-                                            /** @brief Specifies whether the IFC loader skips over IfcSpace elements.
-                                             *
-                                             * IfcSpace elements (and their geometric representations) are used to
-                                             * represent, well, free space in a building storey.<br>
-                                             * Property type: Bool. Default value: true.
-                                             */
-#define AI_CONFIG_IMPORT_IFC_SKIP_SPACE_REPRESENTATIONS "IMPORT_IFC_SKIP_SPACE_REPRESENTATIONS"
-
                                              // ---------------------------------------------------------------------------
-                                             /** @brief Specifies whether the IFC loader will use its own, custom triangulation
-                                              *   algorithm to triangulate wall and floor meshes.
+                                             /** @brief Specifies whether the IFC loader skips over IfcSpace elements.
                                               *
-                                              * If this property is set to false, walls will be either triangulated by
-                                              * #aiProcess_Triangulate or will be passed through as huge polygons with
-                                              * faked holes (i.e. holes that are connected with the outer boundary using
-                                              * a dummy edge). It is highly recommended to set this property to true
-                                              * if you want triangulated data because #aiProcess_Triangulate is known to
-                                              * have problems with the kind of polygons that the IFC loader spits out for
-                                              * complicated meshes.
+                                              * IfcSpace elements (and their geometric representations) are used to
+                                              * represent, well, free space in a building storey.<br>
                                               * Property type: Bool. Default value: true.
                                               */
-#define AI_CONFIG_IMPORT_IFC_CUSTOM_TRIANGULATION "IMPORT_IFC_CUSTOM_TRIANGULATION"
+#define AI_CONFIG_IMPORT_IFC_SKIP_SPACE_REPRESENTATIONS "IMPORT_IFC_SKIP_SPACE_REPRESENTATIONS"
 
                                               // ---------------------------------------------------------------------------
-                                              /** @brief  Set the tessellation conic angle for IFC smoothing curves.
+                                              /** @brief Specifies whether the IFC loader will use its own, custom triangulation
+                                               *   algorithm to triangulate wall and floor meshes.
                                                *
-                                               * This is used by the IFC importer to determine the tessellation parameter
-                                               * for smoothing curves.
-                                               * @note The default value is AI_IMPORT_IFC_DEFAULT_SMOOTHING_ANGLE and the
-                                               * accepted values are in range [5.0, 120.0].
-                                               * Property type: Float.
+                                               * If this property is set to false, walls will be either triangulated by
+                                               * #aiProcess_Triangulate or will be passed through as huge polygons with
+                                               * faked holes (i.e. holes that are connected with the outer boundary using
+                                               * a dummy edge). It is highly recommended to set this property to true
+                                               * if you want triangulated data because #aiProcess_Triangulate is known to
+                                               * have problems with the kind of polygons that the IFC loader spits out for
+                                               * complicated meshes.
+                                               * Property type: Bool. Default value: true.
                                                */
+#define AI_CONFIG_IMPORT_IFC_CUSTOM_TRIANGULATION "IMPORT_IFC_CUSTOM_TRIANGULATION"
+
+                                               // ---------------------------------------------------------------------------
+                                               /** @brief  Set the tessellation conic angle for IFC smoothing curves.
+                                                *
+                                                * This is used by the IFC importer to determine the tessellation parameter
+                                                * for smoothing curves.
+                                                * @note The default value is AI_IMPORT_IFC_DEFAULT_SMOOTHING_ANGLE and the
+                                                * accepted values are in range [5.0, 120.0].
+                                                * Property type: Float.
+                                                */
 #define AI_CONFIG_IMPORT_IFC_SMOOTHING_ANGLE "IMPORT_IFC_SMOOTHING_ANGLE"
 
-                                               // default value for AI_CONFIG_IMPORT_IFC_SMOOTHING_ANGLE
+                                                // default value for AI_CONFIG_IMPORT_IFC_SMOOTHING_ANGLE
 #if (!defined AI_IMPORT_IFC_DEFAULT_SMOOTHING_ANGLE)
 #   define AI_IMPORT_IFC_DEFAULT_SMOOTHING_ANGLE 10.0f
 #endif
