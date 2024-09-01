@@ -8,8 +8,8 @@
 #define OS64BIT
 #define OSBIT 64
 
-#define __END_OSBIT(xxx) __CONCAT(xxx, 64)
-#define __MID_OSBIT(xxx, zzz) __CONCAT3(xxx, 64, zzz)
+#define __END_OSBIT(xxx) __CONCATENATE(xxx, 64)
+#define __MID_OSBIT(xxx, zzz) __CONCATENATE3(xxx, 64, zzz)
 
 
 
@@ -21,8 +21,8 @@
 #define OSBIT 32
 #define _X86_
 
-#define __END_OSBIT(xxx) __CONCAT(xxx, 32)
-#define __MID_OSBIT(xxx, zzz) __CONCAT3(xxx, 32, zzz)
+#define __END_OSBIT(xxx) __CONCATENATE(xxx, 32)
+#define __MID_OSBIT(xxx, zzz) __CONCATENATE3(xxx, 32, zzz)
 
 
 #endif
