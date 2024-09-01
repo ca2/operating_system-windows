@@ -130,7 +130,7 @@ namespace music
             *lpdw++ = 0;
             *lpdw++ = 0;
             *lpdw++ = ((MEVT_LONGMSG << 24) & 0xff000000) | (block.size() & 0xffffff);
-            memcpy(lpdw, block.data(), block.size());
+            memory_copy(lpdw, block.data(), block.size());
 
             auto e = midiOutPrepareHeader(
                m_hmidiout,
