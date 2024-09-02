@@ -2955,7 +2955,7 @@ namespace acme_windows
    ::pointer < ::acme::exclusive > node::_get_exclusive(::particle* pparticleContext, const ::string& strName, ::security_attributes* psecurityattributes)
    {
 
-      return __allocate< exclusive >(pparticleContext, strName, psecurityattributes);
+      return ::place(new exclusive(pparticleContext, strName, psecurityattributes));
 
    }
 

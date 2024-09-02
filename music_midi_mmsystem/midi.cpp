@@ -69,7 +69,7 @@ namespace music
          //   if (strEngine.case_insensitive_order(m_strName) == 0)
          //   {
 
-         //      return __allocate< sequence >(this, strDevice);
+         //      return ::place(new sequence(this, strDevice));
 
          //   }
 
@@ -87,7 +87,7 @@ namespace music
             if (strEngine.case_insensitive_equals(m_strName))
             {
 
-               return __allocate< sequencer >(psequence, strDevice);
+               return ::place(new sequencer(psequence, strDevice));
 
             }
 
@@ -100,7 +100,7 @@ namespace music
 
             }
 
-            return __allocate< sequencer >(psequence, strDevice);
+            return ::place(new sequencer(psequence, strDevice));
 
          }
 
@@ -422,7 +422,7 @@ namespace music
          //   if (strEngine.case_insensitive_order(m_strName) == 0)
          //   {
 
-         //      //return __allocate< sequencer >(psequence, strDevice);
+         //      //return ::place(new sequencer(psequence, strDevice));
          //      return nullptr;
 
          //   }
@@ -440,7 +440,7 @@ namespace music
             if (!pmessageout)
             {
 
-               auto pout = __allocate< out >();
+               auto pout = ::place(new out());
 
                pout->initialize_message_out(this, strDeviceId);
 

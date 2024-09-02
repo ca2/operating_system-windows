@@ -249,7 +249,7 @@ namespace windowing_win32
       if (!pwindow)
       {
 
-         pwindow = __allocate< ::windowing_win32::window >();
+         pwindow = ::place(new ::windowing_win32::window());
 
       }
 
@@ -595,7 +595,7 @@ namespace windowing_win32
 
    //   //}
 
-   //   auto pusermessage = __allocate< ::user::message >();
+   //   auto pusermessage = ::place(new ::user::message());
 
    //   if (!pusermessage)
    //   {
