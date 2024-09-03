@@ -118,6 +118,10 @@ namespace windowing_win32
       ::point_i32 _get_mouse_cursor_position() override;
 
 
+      virtual bool _get_monitor_rectangle(::collection::index iMonitor, ::rectangle_i32 & rectangle);
+      virtual bool _get_workspace_rectangle(::collection::index iMonitor, ::rectangle_i32 & rectangle);
+
+
    };
 
 

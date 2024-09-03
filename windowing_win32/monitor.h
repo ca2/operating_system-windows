@@ -29,6 +29,7 @@ namespace windowing_win32
       virtual bool adjust_monitor(::u32 dwTemperature, double dBrightness, double dGamma) override;
 
 
+
    };
 
 

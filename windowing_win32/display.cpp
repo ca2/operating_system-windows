@@ -1235,6 +1235,39 @@ namespace windowing_win32
    }
    
 
+   bool display::_get_monitor_rectangle(::collection::index iMonitor, ::rectangle_i32 & rectangle)
+   {
+
+      if (iMonitor < 0 || iMonitor >= m_monitorinfoa.size())
+      {
+
+         return false;
+
+      }
+
+      rectangle = m_monitorinfoa[iMonitor].rcMonitor;
+
+      return true;
+
+   }
+
+
+   bool display::_get_workspace_rectangle(::collection::index iMonitor, ::rectangle_i32 & rectangle)
+   {
+
+      if (iMonitor < 0 || iMonitor >= m_monitorinfoa.size())
+      {
+
+         return false;
+
+      }
+
+      rectangle = m_monitorinfoa[iMonitor].rcWork;
+
+      return true;
+
+   }
+
 
 } // namespace windowing_win32
 

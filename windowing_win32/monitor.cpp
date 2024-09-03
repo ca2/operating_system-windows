@@ -1,6 +1,7 @@
 // created by Camilo 2021-01-31 06:25 BRT <3CamiloSasukeThomasBorregaardSoerensen
 #include "framework.h"
 #undef USUAL_OPERATING_SYSTEM_SUPPRESSIONS
+#include "display.h"
 #include "window.h"
 #include "windowing.h"
 #include "monitor.h"
@@ -428,6 +429,26 @@ namespace windowing_win32
    }
 
 
+   //::rectangle_i32 monitor::monitor_rectangle()
+   //{
+
+   //   m_pdisplay->get_monitor_rectangle(m_iIndex, m_rectangle);
+
+   //   return m_rectangle;
+
+   //}
+
+
+   //::rectangle_i32 monitor::workspace_rectangle()
+   //{
+
+   //   m_pdisplay->get_monitor_rectangle(m_iIndex, m_rectangleWorkspace);
+
+   //   return m_rectangleWorkspace;
+
+   //}
+
+
 //   ::u32 monitor::get_monitor_color_temperature()
 //   {
 //
@@ -594,8 +615,6 @@ namespace windows
       return MonitorFromPoint(pointZero, MONITOR_DEFAULTTOPRIMARY);
 
    }
-
-
 
 } // namespace windows
 
