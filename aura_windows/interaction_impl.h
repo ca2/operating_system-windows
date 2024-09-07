@@ -95,13 +95,13 @@ namespace aura_windows
 
       virtual void route_command(::message::command* pcommand, bool bRouteToKeyDescendant = false) override;
 
-      //void _002OnDraw(::image * pimage);
+      //void _002OnDraw(::image::image * pimage);
 
       virtual void present();
 
       //virtual void defer_start_prodevian();
 
-      //virtual bool set_icon(::draw2d::icon * picon, bool bSmall) override;
+      //virtual bool set_icon(::image::icon * picon, bool bSmall) override;
 
       //void _on_configure_notify_unlocked(const ::rectangle_i32& rectangle) override;
 

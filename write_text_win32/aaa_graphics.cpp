@@ -1539,7 +1539,7 @@ namespace draw2d_gdiplus
 //   }
 
 
-   bool graphics::_draw_raw(const ::image_drawing & imagedrawing)
+   bool graphics::_draw_raw(const ::image::image_drawing & imagedrawing)
    {
 
       if (::is_null(imagedrawing.m_pimage))
@@ -1669,7 +1669,7 @@ namespace draw2d_gdiplus
                if (iFind >= 0)
                {
 
-                  ::image_pointer pimage = pgraphicsSrc->m_pimage->get_image(iFind);
+                  ::image::image_pointer pimage = pgraphicsSrc->m_pimage->get_image(iFind);
 
                   auto emode = m_pgraphics->GetInterpolationMode();
 
@@ -1836,9 +1836,9 @@ namespace draw2d_gdiplus
    //               y2 = 0;
    //            }*/
 
-   //            //::image_pointer pimage = m_pimage;
+   //            //::image::image_pointer pimage = m_pimage;
    //            //int iScan = pimage->m_iScan;
-   //            //::image_pointer pimageMipmap = pgraphicsSrc->m_pimage;
+   //            //::image::image_pointer pimageMipmap = pgraphicsSrc->m_pimage;
    //            //::color::color * pcrMipmap = imageMipmap.m_pcolorref;
    //            //int iMimapScan = imageMipmap.m_iScan;
    //            //::size_f64 sizeMipmap = imageMipmap.m_size;
@@ -1931,7 +1931,7 @@ namespace draw2d_gdiplus
    //            if (iFind >= 0)
    //            {
 
-   //               ::image_pointer pimage = pgraphicsSrc->m_pimage->get_image(iFind);
+   //               ::image::image_pointer pimage = pgraphicsSrc->m_pimage->get_image(iFind);
 
    //               auto emode = m_pgraphics->GetInterpolationMode();
 
@@ -7156,7 +7156,7 @@ namespace draw2d_gdiplus
          if (rectangleIntersect.intersect(rectangleIntersect, rectangleText))
          {
 
-            ::image_pointer pimage1;
+            ::image::image_pointer pimage1;
 
             pimage1 = create_image(rectangleText.size());
 
@@ -7174,7 +7174,7 @@ namespace draw2d_gdiplus
 
             auto rectangleSource = ::rectangle_f64(rectangleText.size());
 
-            image_drawing_options imagedrawingoptions;
+            ::image::image_drawing_options imagedrawingoptions;
 
             _draw_raw(rectangleTarget, pimage1, imagedrawingoptions, ::point_f64());
 
@@ -7257,7 +7257,7 @@ namespace draw2d_gdiplus
    //         //else
    //         {
 
-   //            ::image_pointer pimage1;
+   //            ::image::image_pointer pimage1;
    //            
    //            auto estatus = __construct(pimage1);
 

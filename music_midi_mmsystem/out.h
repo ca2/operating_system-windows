@@ -29,7 +29,7 @@ namespace music
             ~out() override;
 
 
-            void open() override;
+            void open(bool bForSequencing) override;
             void close() override;
 
             void send_short_message(::music::midi::enum_midi_message emessage, int iChannel, int iData1, int iData2);

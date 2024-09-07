@@ -62,7 +62,7 @@ namespace windowing_win32
       virtual HGLOBAL hglobal_get_filea(const ::file::path_array & stra);
       virtual HGLOBAL hglobal_get_wide_text(const ::string & str);
       virtual HGLOBAL hglobal_get_utf8_text(const ::string & str);
-      virtual HGLOBAL hglobal_get_image(const ::image * pimage);
+      virtual HGLOBAL hglobal_get_image(const ::image::image * pimage);
 
 
       bool _set_filea(const ::file::path_array & stra, enum_op eop) override;
@@ -75,8 +75,8 @@ namespace windowing_win32
       bool _has_plain_text() override;
 
 
-      bool _desk_to_image(::image * pimage) override;
-      bool _image_to_desk(const ::image * pimage) override;
+      bool _desk_to_image(::image::image * pimage) override;
+      bool _image_to_desk(const ::image::image * pimage) override;
       bool _has_image() override;
 
 

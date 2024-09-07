@@ -266,8 +266,8 @@ namespace draw2d_gdiplus
 
       bool frame_rectangle(const ::rectangle_f64 & rectangle, ::draw2d::brush* pBrush) override;
       bool invert_rectangle(const ::rectangle_f64 & rectangle) override;
-      //bool draw(const ::point_i32 & point, ::draw2d::icon * picon, const ::size_i32 & size) override;
-      //bool DrawIcon(double x, double y, ::draw2d::icon * picon, i32 cx, i32 cy, UINT istepIfAniCur, HBRUSH hbrFlickerFreeDraw, UINT diFlags) override;
+      //bool draw(const ::point_i32 & point, ::image::icon * picon, const ::size_i32 & size) override;
+      //bool DrawIcon(double x, double y, ::image::icon * picon, i32 cx, i32 cy, UINT istepIfAniCur, HBRUSH hbrFlickerFreeDraw, UINT diFlags) override;
       //bool DrawState(const ::point_i32 & point, const ::size_i32 & size, HBITMAP hBitmap, UINT nFlags,
         //             HBRUSH hBrush = nullptr) override;
       //bool DrawState(const ::point_i32 & point, const ::size_i32 & size, ::draw2d::bitmap* pBitmap, UINT nFlags,
@@ -332,7 +332,7 @@ namespace draw2d_gdiplus
 
 
       using image_drawer::_draw_raw;
-      virtual bool _draw_raw(const ::image_drawing & imagedrawing) override;
+      virtual bool _draw_raw(const ::image::image_drawing & imagedrawing) override;
       
       
       //virtual bool _stretch_raw(const ::rectangle_f64 & rectangleTarget, ::draw2d::graphics * pgraphicsSrc, const ::rectangle_f64 & rectangleSource = ::rectangle_f64()) override;

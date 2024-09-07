@@ -28,7 +28,7 @@ namespace draw2d_gdiplus
 
       
       //using ::image::stretch;
-      //virtual bool stretch(::image * pimage) override;
+      //virtual bool stretch(::image::image * pimage) override;
 
 
       bool dc_select(bool bSelect = true);
@@ -51,11 +51,11 @@ namespace draw2d_gdiplus
 
 
       //cvirtual bool stretch(::draw2d::graphics * pgraphics) override;
-      //virtual bool draw(const ::image * pimage) override;
-      virtual bool _draw_raw(const ::rectangle_i32 & rectangleTarget, ::image * pimageSrc, const ::point_i32 & pointSrc) override;
+      //virtual bool draw(const ::image::image * pimage) override;
+      virtual bool _draw_raw(const ::rectangle_i32 & rectangleTarget, ::image::image * pimageSrc, const ::point_i32 & pointSrc) override;
 
 
-      virtual void SetIconMask(::draw2d::icon * picon, i32 cx, i32 cy) override;
+      virtual void SetIconMask(::image::icon * picon, i32 cx, i32 cy) override;
 
 
    };

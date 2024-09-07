@@ -67,7 +67,7 @@ namespace draw2d_gdiplus
    bool image::on_host_read_pixels(::pixmap* ppixmapHost) const
    {
 
-      return ::image::on_host_read_pixels(ppixmapHost);
+      return ::image::image::on_host_read_pixels(ppixmapHost);
 
    }
 
@@ -490,7 +490,7 @@ namespace draw2d_gdiplus
    void image::destroy()
    {
 
-      ::image::destroy();
+      ::image::image::destroy();
 
       //return ::success;
 
@@ -505,7 +505,7 @@ namespace draw2d_gdiplus
    //}
 
 
-   //bool image::stretch(::image * pimage)
+   //bool image::stretch(::image::image * pimage)
    //{
 
    ////   ::draw2d::bitmap_pointer bitmap(get_application());
@@ -545,7 +545,7 @@ namespace draw2d_gdiplus
    //}
 
 
-   //bool image::draw(const ::point_i32 & pointDest, ::image * pimage, const ::rectangle_i32 & rectangleSource)
+   //bool image::draw(const ::point_i32 & pointDest, ::image::image * pimage, const ::rectangle_i32 & rectangleSource)
    //{
 
    //   return m_pgraphics->draw(pointDest, pimage, rectangleSource) != false;
@@ -553,7 +553,7 @@ namespace draw2d_gdiplus
    //}
 
 
-   void image::_draw_raw(const ::rectangle_i32 & rectangleDstParam, ::image * pimageSrc, const ::point_i32 & pointSrcParam)
+   void image::_draw_raw(const ::rectangle_i32 & rectangleDstParam, ::image::image * pimageSrc, const ::point_i32 & pointSrcParam)
    {
 
       ::rectangle_i32 rectangleTarget(rectangleDstParam);
@@ -562,7 +562,7 @@ namespace draw2d_gdiplus
 
       ::size_i32 size(rectangleTarget.size());
 
-      ::image * pimageDst = this;
+      ::image::image * pimageDst = this;
 
       if (pimageDst->m_bMapped && pimageSrc->m_bMapped)
       {
@@ -668,11 +668,11 @@ namespace draw2d_gdiplus
       else
       {
 
-         image_source imagesource(pimageSrc, ::rectangle_f64(pointSrc, size));
+         ::image::image_source imagesource(pimageSrc, ::rectangle_f64(pointSrc, size));
 
-         image_drawing_options imagedrawingoptions(::rectangle_f64(rectangleTarget.top_left(), size));
+         ::image::image_drawing_options imagedrawingoptions(::rectangle_f64(rectangleTarget.top_left(), size));
 
-         image_drawing imagedrawing(imagedrawingoptions, imagesource);
+         ::image::image_drawing imagedrawing(imagedrawingoptions, imagesource);
 
          pimageDst->g()->draw(imagedrawing);
 
@@ -683,7 +683,7 @@ namespace draw2d_gdiplus
    }
 
 
- /*  bool image::draw(const ::rectangle_i32 & rectangleTarget, ::image * pimage, const ::point_i32 & pointSrc)
+ /*  bool image::draw(const ::rectangle_i32 & rectangleTarget, ::image::image * pimage, const ::point_i32 & pointSrc)
    {
 
       return ::image::draw(rectangleTarget, pimage, pointSrc);
@@ -691,7 +691,7 @@ namespace draw2d_gdiplus
    }*/
 
 
-   void image::SetIconMask(::draw2d::icon * picon, i32 cx, i32 cy)
+   void image::SetIconMask(::image::icon * picon, i32 cx, i32 cy)
    {
 
       if (cx <= 0 || cy <= 0)
@@ -715,7 +715,7 @@ namespace draw2d_gdiplus
       //}
 
       // White blend image
-      ::image_pointer pimage1;
+      ::image::image_pointer pimage1;
 
       //estatus = 
       
@@ -745,18 +745,18 @@ namespace draw2d_gdiplus
 
       {
       
-         image_source imagesource(picon);
+         ::image::image_source imagesource(picon);
 
-         image_drawing_options imagedrawingoptions(rectangle_i32_dimension(0, 0, cx, cy));
+         ::image::image_drawing_options imagedrawingoptions(rectangle_i32_dimension(0, 0, cx, cy));
 
-         image_drawing imagedrawing(imagedrawingoptions, imagesource);
+         ::image::image_drawing imagedrawing(imagedrawingoptions, imagesource);
 
          pimage1->g()->draw(imagedrawing);
 
       }
 
       // Black blend image
-      ::image_pointer pimage2;
+      ::image::image_pointer pimage2;
 
       //estatus = 
       
@@ -785,11 +785,11 @@ namespace draw2d_gdiplus
 
       {
 
-         image_source imagesource(picon);
+         ::image::image_source imagesource(picon);
 
-         image_drawing_options imagedrawingoptions(rectangle_i32_dimension(0, 0, cx, cy));
+         ::image::image_drawing_options imagedrawingoptions(rectangle_i32_dimension(0, 0, cx, cy));
 
-         image_drawing imagedrawing(imagedrawingoptions, imagesource);
+         ::image::image_drawing imagedrawing(imagedrawingoptions, imagesource);
 
          pimage2->g()->draw(imagedrawing);
 
@@ -799,7 +799,7 @@ namespace draw2d_gdiplus
       //DI_IMAGE | DI_MASK);
 
       // Mask image
-      ::image_pointer pimageM;
+      ::image::image_pointer pimageM;
 
       //estatus = 
       
@@ -826,11 +826,11 @@ namespace draw2d_gdiplus
 
       {
 
-         image_source imagesource(picon);
+         ::image::image_source imagesource(picon);
 
-         image_drawing_options imagedrawingoptions(rectangle_i32_dimension(0, 0, cx, cy));
+         ::image::image_drawing_options imagedrawingoptions(rectangle_i32_dimension(0, 0, cx, cy));
 
-         image_drawing imagedrawing(imagedrawingoptions, imagesource);
+         ::image::image_drawing imagedrawing(imagedrawingoptions, imagesource);
 
          pimageM->g()->draw(imagedrawing);
 
@@ -918,7 +918,7 @@ namespace draw2d_gdiplus
    void image::on_exif_orientation()
    {
 
-      ::image::on_exif_orientation();
+      ::image::image::on_exif_orientation();
 
    }
 

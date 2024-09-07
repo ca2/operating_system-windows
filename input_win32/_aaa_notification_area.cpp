@@ -178,13 +178,13 @@ namespace windowing_win32
             
             pwindowingicon->add_icon(tray.hIcon);
 
-            ::pointer<::draw2d::icon>picon;
+            ::pointer<::image::icon>picon;
 
             picon.create(this);
 
             picon->initialize_with_windowing_icon(pwindowingicon);
 
-            image_source imagesource(picon);
+            ::image::image_source imagesource(picon);
 
             iconindex = m_pil16->add(imagesource);
 

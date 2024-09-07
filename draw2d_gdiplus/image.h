@@ -9,7 +9,7 @@ namespace draw2d_gdiplus
 
 
    class CLASS_DECL_DRAW2D_GDIPLUS image :
-      virtual public ::image
+      virtual public ::image::image
    {
    public:
 
@@ -34,7 +34,7 @@ namespace draw2d_gdiplus
 
       
       //using ::image::stretch;
-      //virtual bool stretch(::image * pimage) override;
+      //virtual bool stretch(::image::image * pimage) override;
 
 
       void dc_select(bool bSelect = true);
@@ -53,17 +53,17 @@ namespace draw2d_gdiplus
       //void initialize(const ::size_i32 & size, ::image32_t * pimage32, int iScan, ::enum_flag eflagCreate = DEFAULT_CREATE_IMAGE_OBJECT_FLAG) override;
       virtual bool host(::pixmap * pixmap) override;
       bool on_host_read_pixels(::pixmap* pixmap) const override;
-      using ::image::create;
+      using ::image::image::create;
       virtual void create(::draw2d::graphics * pgraphics) override;
       void destroy() override;
 
 
       //cvirtual bool stretch(::draw2d::graphics * pgraphics) override;
-      //virtual bool draw(const ::image * pimage) override;
-      virtual void _draw_raw(const ::rectangle_i32 & rectangleTarget, ::image * pimageSrc, const ::point_i32 & pointSrc) override;
+      //virtual bool draw(const ::image::image * pimage) override;
+      virtual void _draw_raw(const ::rectangle_i32 & rectangleTarget, ::image::image * pimageSrc, const ::point_i32 & pointSrc) override;
 
 
-      virtual void SetIconMask(::draw2d::icon * picon, i32 cx, i32 cy) override;
+      virtual void SetIconMask(::image::icon * picon, i32 cx, i32 cy) override;
 
 
    };

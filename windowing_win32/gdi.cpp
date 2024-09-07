@@ -10,7 +10,7 @@ namespace windows
 {
 
 
-   CLASS_DECL_WINDOWING_WIN32 HBITMAP create_alpha_bitmap_v5(::image * pimage)
+   CLASS_DECL_WINDOWING_WIN32 HBITMAP create_alpha_bitmap_v5(::image::image * pimage)
    {
 
       if (!pimage->is_ok())
@@ -77,7 +77,7 @@ namespace windows
    }
 
 
-   HCURSOR create_alpha_icon(::image * pimage, bool bIcon, int xHotSpot, int yHotSpot)
+   HCURSOR create_alpha_icon(::image::image * pimage, bool bIcon, int xHotSpot, int yHotSpot)
    {
 
       if (!pimage->is_ok())
@@ -118,7 +118,7 @@ namespace windows
    }
 
 
-   HCURSOR create_alpha_cursor(::image * pimage, int xHotSpot, int yHotSpot)
+   HCURSOR create_alpha_cursor(::image::image * pimage, int xHotSpot, int yHotSpot)
    {
 
       if (pimage)

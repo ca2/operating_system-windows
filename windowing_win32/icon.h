@@ -33,7 +33,7 @@ namespace windowing_win32
 
       ::file::path                           m_pathProcessed;
 
-      map < ::size_i32, image_pointer >      m_imagemap;
+      map < ::size_i32, ::image::image_pointer >      m_imagemap;
 
       
       icon();
@@ -50,9 +50,9 @@ namespace windowing_win32
 
       void get_sizes(::size_i32_array & a) override;
 
-      image_pointer get_image(const ::size_i32 & size) override;
+      ::image::image_pointer get_image(const ::size_i32 & size) override;
 
-      virtual image_pointer _create_image(const ::size_i32 & size);
+      virtual ::image::image_pointer _create_image(const ::size_i32 & size);
 
 
       void _erase_all();

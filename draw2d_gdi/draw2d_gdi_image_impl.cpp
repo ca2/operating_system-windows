@@ -1645,7 +1645,7 @@ namespace draw2d_gdi
 //
 
 
-   bool image::SetIconMask(::draw2d::icon * picon, int cx, int cy)
+   bool image::SetIconMask(::image::icon * picon, int cx, int cy)
    {
 
       if (!create({ cx, cy }))
@@ -1663,7 +1663,7 @@ namespace draw2d_gdi
       }
 
       // White blend image_impl
-      ::image_pointer pimage1;
+      ::image::image_pointer pimage1;
 
       pimage1 = create_image({cx,  cy});
 
@@ -1678,7 +1678,7 @@ namespace draw2d_gdi
       DI_IMAGE | DI_MASK);
 
       // Black blend image_impl
-      ::image_pointer pimage2;
+      ::image::image_pointer pimage2;
 
       pimage2 = create_image({cx,  cy});
 
@@ -1693,7 +1693,7 @@ namespace draw2d_gdi
       DI_IMAGE | DI_MASK);
 
       // Mask image_impl
-      ::image_pointer pimageM;
+      ::image::image_pointer pimageM;
 
       imageM = create_image({cx,  cy});
 
@@ -2328,7 +2328,7 @@ namespace draw2d_gdi
    //}
 
 
-   bool image::stretch_image(::image * pimage)
+   bool image::stretch_image(::image::image * pimage)
    {
 
       return ::StretchDIBits(
@@ -2532,7 +2532,7 @@ namespace draw2d_gdi
 
       GdiFlush();
 
-      ((::image *) this)->m_bMapped = true;
+      ((::image::image * ) this)->m_bMapped = true;
 
       return true;
 
@@ -2577,7 +2577,7 @@ namespace draw2d_gdi
 
       */
 
-      ((::image *) this)->m_bMapped = false;
+      ((::image::image * ) this)->m_bMapped = false;
 
       return true;
 
@@ -2619,7 +2619,7 @@ namespace draw2d_gdi
 
    //      puserinteraction->GetWindowRect(rectangleWindow);
 
-   //      ::image_pointer pimage = create_image(rectangleWindow.bottom_right());
+   //      ::image::image_pointer pimage = create_image(rectangleWindow.bottom_right());
 
    //      if (!pimage)
    //      {
@@ -2702,7 +2702,7 @@ namespace draw2d_gdi
 //end;
 
 
-   bool image::process_blend(::color::color clr, i32 x, i32 y, ::draw2d::e_alpha_mode ealphamode, ::image * pimageSrc)
+   bool image::process_blend(::color::color clr, i32 x, i32 y, ::draw2d::e_alpha_mode ealphamode, ::image::image * pimageSrc)
    {
 
       ::GdiFlush();
@@ -2860,7 +2860,7 @@ namespace draw2d_gdi
    }
 
 
-   bool image::process_blend(::image * pimage, i32 x, i32 y, ::draw2d::e_alpha_mode ealphamode, ::image * pimageSrc)
+   bool image::process_blend(::image::image * pimage, i32 x, i32 y, ::draw2d::e_alpha_mode ealphamode, ::image::image * pimageSrc)
    {
 
       if (::is_null(pimpl))
@@ -2949,7 +2949,7 @@ namespace draw2d_gdi
    }
 
 
-   bool image::process_blend(::draw2d::brush * pbrush, i32 x, i32 y, ::draw2d::e_alpha_mode ealphamode, ::image * pimageSrc)
+   bool image::process_blend(::draw2d::brush * pbrush, i32 x, i32 y, ::draw2d::e_alpha_mode ealphamode, ::image::image * pimageSrc)
    {
 
       if(pbrush->m_etype == ::draw2d::brush::e_type_null)
@@ -2973,7 +2973,7 @@ namespace draw2d_gdi
       if(pbrush->m_etype == ::draw2d::brush::type_linear_gradient_point_color)
       {
 
-         ::image_pointer pimage1;
+         ::image::image_pointer pimage1;
 
          pimage1 = create_image(get_size());
 
@@ -3022,7 +3022,7 @@ namespace draw2d_gdi
    }
 
 
-   bool image::process_blend(::draw2d::pen * ppen, i32 x, i32 y, ::draw2d::e_alpha_mode ealphamode, ::image * pimage)
+   bool image::process_blend(::draw2d::pen * ppen, i32 x, i32 y, ::draw2d::e_alpha_mode ealphamode, ::image::image * pimage)
    {
 
       if(ppen->m_etype == ::draw2d::pen::e_type_null)

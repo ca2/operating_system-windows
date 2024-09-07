@@ -444,7 +444,7 @@ namespace music
 
                pout->initialize_message_out(this, strDeviceId);
 
-               pout->open();
+               pout->open(false);
 
                pmessageout = pout;
 

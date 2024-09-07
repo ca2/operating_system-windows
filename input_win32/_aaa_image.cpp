@@ -316,7 +316,7 @@ namespace draw2d_gdiplus
    //}
 
 
-   //bool image::stretch(::image * pimage)
+   //bool image::stretch(::image::image * pimage)
    //{
 
    ////   ::draw2d::bitmap_pointer bitmap(get_application());
@@ -356,7 +356,7 @@ namespace draw2d_gdiplus
    //}
 
 
-   //bool image::draw(const ::point_i32 & pointDest, ::image * pimage, const ::rectangle_i32 & rectangleSource)
+   //bool image::draw(const ::point_i32 & pointDest, ::image::image * pimage, const ::rectangle_i32 & rectangleSource)
    //{
 
    //   return m_pgraphics->draw(pointDest, pimage, rectangleSource) != false;
@@ -364,7 +364,7 @@ namespace draw2d_gdiplus
    //}
 
 
-   bool image::_draw_raw(const ::rectangle_i32 & rectangleDstParam, ::image * pimageSrc, const ::point_i32 & pointSrcParam)
+   bool image::_draw_raw(const ::rectangle_i32 & rectangleDstParam, ::image::image * pimageSrc, const ::point_i32 & pointSrcParam)
    {
 
       ::rectangle_i32 rectangleTarget(rectangleDstParam);
@@ -488,7 +488,7 @@ namespace draw2d_gdiplus
    }
 
 
- /*  bool image::draw(const ::rectangle_i32 & rectangleTarget, ::image * pimage, const ::point_i32 & pointSrc)
+ /*  bool image::draw(const ::rectangle_i32 & rectangleTarget, ::image::image * pimage, const ::point_i32 & pointSrc)
    {
 
       return ::image::draw(rectangleTarget, pimage, pointSrc);
@@ -496,7 +496,7 @@ namespace draw2d_gdiplus
    }*/
 
 
-   void image::SetIconMask(::draw2d::icon * picon, i32 cx, i32 cy)
+   void image::SetIconMask(::image::icon * picon, i32 cx, i32 cy)
    {
 
       if (cx <= 0 || cy <= 0)
@@ -516,7 +516,7 @@ namespace draw2d_gdiplus
       }
 
       // White blend image
-      ::image_pointer pimage1;
+      ::image::image_pointer pimage1;
 
       estatus = __construct(pimage1);
 
@@ -543,7 +543,7 @@ namespace draw2d_gdiplus
       pimage1->g()->draw(::rect_dim(0, 0, cx, cy), picon);
 
       // Black blend image
-      ::image_pointer pimage2;
+      ::image::image_pointer pimage2;
 
       estatus = __construct(pimage2);
       
@@ -572,7 +572,7 @@ namespace draw2d_gdiplus
       //DI_IMAGE | DI_MASK);
 
       // Mask image
-      ::image_pointer pimageM;
+      ::image::image_pointer pimageM;
 
       estatus = __construct(pimageM);
 

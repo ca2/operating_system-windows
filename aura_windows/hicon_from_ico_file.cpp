@@ -18,7 +18,7 @@ namespace aura_windows
    // or Bitmap::FromStream() method, and then finally call the 
    // Bitmap::ToHICON() method.
    // ... Remy Lebeau,  Feb 11 '17 at 3:34
-   void* node::HICON_from_image(::image *pimage)
+   void* node::HICON_from_image(::image::image * pimage)
    {
 
       //comptr < IStream > pistream = SHCreateMemStream((const BYTE*)block.get_data(), (UINT)block.get_size());

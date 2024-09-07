@@ -37,8 +37,8 @@ namespace production
       ::collection::index                     m_iVs;
       i32                     m_iVsH;
       i32                     m_iVsW;
-      ::image_pointer             m_pimageV;
-      ::image_pointer             m_pimageVs;
+      ::image::image_pointer             m_pimageV;
+      ::image::image_pointer             m_pimageVs;
       ::draw2d::brush_pointer          m_pbrushBkActive;
       ::draw2d::brush_pointer          m_pbrushBkInactive;
 

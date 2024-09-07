@@ -35,7 +35,7 @@ namespace draw2d_gdi
       //virtual ::color::color * get_data();
 
 
-      bool stretch_image(::image * pimage);
+      bool stretch_image(::image::image * pimage);
 
 
       bool dc_select(bool bSelect = true);
@@ -58,14 +58,14 @@ namespace draw2d_gdi
       //virtual bool update_window(::aura::draw_interface * puserinteraction,::message::message * pmessage,bool bTransferBuffer = true);
       //virtual bool print_window(::aura::draw_interface * puserinteraction,::message::message * pmessage);
 
-      virtual bool SetIconMask(::draw2d::icon * picon, i32 cx, i32 cy) override;
+      virtual bool SetIconMask(::image::icon * picon, i32 cx, i32 cy) override;
 
 
-      virtual bool process_blend(::color::color clr, i32 x, i32 y, ::draw2d::e_alpha_mode ealphamode, ::image * pimageSrc);
-      virtual bool process_blend(::image * pimage, i32 x, i32 y, ::draw2d::e_alpha_mode ealphamode, ::image * pimageSrc);
-      virtual bool process_blend(::draw2d::brush * pbrush, i32 x, i32 y, ::draw2d::e_alpha_mode ealphamode, ::image * pimageSrc);
+      virtual bool process_blend(::color::color clr, i32 x, i32 y, ::draw2d::e_alpha_mode ealphamode, ::image::image * pimageSrc);
+      virtual bool process_blend(::image::image * pimage, i32 x, i32 y, ::draw2d::e_alpha_mode ealphamode, ::image::image * pimageSrc);
+      virtual bool process_blend(::draw2d::brush * pbrush, i32 x, i32 y, ::draw2d::e_alpha_mode ealphamode, ::image::image * pimageSrc);
       virtual bool process_initialize(::draw2d::brush * pbrush, bool bReset = true);
-      virtual bool process_blend(::draw2d::pen * ppen, i32 x, i32 y, ::draw2d::e_alpha_mode ealphamode, ::image * pimage);
+      virtual bool process_blend(::draw2d::pen * ppen, i32 x, i32 y, ::draw2d::e_alpha_mode ealphamode, ::image::image * pimage);
       virtual bool process_initialize(::draw2d::pen * ppen, bool bReset = true);
 
       virtual ::color::color make_colorref(i32 a, i32 rectangle, i32 g, i32 b);

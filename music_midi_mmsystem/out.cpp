@@ -36,7 +36,7 @@ namespace music
          }
 
 
-         void out::open()
+         void out::open(bool bForSequencing)
          {
 
             synchronous_lock synchronouslock(((midi*)m_pmidi->m_pMidi)->get_midi_mutex());

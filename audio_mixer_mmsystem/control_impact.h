@@ -116,7 +116,7 @@
          virtual void OnInitialUpdate();
          virtual bool pre_create_window(::user::system * pusersystem) override;
          void handle(::topic * ptopic, ::context * pcontext) override;
-         virtual void OnDraw(::image * pimage);
+         virtual void OnDraw(::image::image * pimage);
          //virtual bool OnNotify(::user::message * pusermessage) override;
          //virtual bool OnCommand(::user::message * pusermessage) override;
          DECLARE_MESSAGE_HANDLER(_001OnColumnclickList);

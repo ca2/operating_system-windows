@@ -2180,7 +2180,7 @@ namespace apex_windows
    void os_context::file_open(const ::file::path & pathParam, const string & strParams, const ::file::path & pathFolder)
    {
 
-      auto path = m_pcontext->m_papexcontext->defer_process_path(pathParam);
+      auto path = m_pcontext->defer_process_matter_path(pathParam);
 
       manual_reset_event manualresetevent;
 
@@ -2385,7 +2385,7 @@ namespace apex_windows
    void os_context::hidden_start(const ::file::path & pathParam, const string & strParams, const ::file::path & pathFolder)
    {
 
-      auto path = m_pcontext->m_papexcontext->defer_process_path(pathParam);
+      auto path = m_pcontext->defer_process_matter_path(pathParam);
 
       fork([=]()
          {
@@ -2459,7 +2459,7 @@ namespace apex_windows
 
       auto pevent = ::place(new manual_reset_event());
 
-      auto path = m_pcontext->m_papexcontext->defer_process_path(pathParam);
+      auto path = m_pcontext->defer_process_matter_path(pathParam);
 
       class ::time timeStart;
 

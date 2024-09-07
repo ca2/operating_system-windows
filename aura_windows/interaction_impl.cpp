@@ -950,7 +950,7 @@ namespace aura_windows
 //   }
 //
 //
-   //void interaction_impl::_002OnDraw(::image * pimage)
+   //void interaction_impl::_002OnDraw(::image::image * pimage)
    //{
 
    //   throw ::interface_only();
@@ -3541,7 +3541,7 @@ void interaction_impl::on_message_size(::message::message* pmessage)
 
    /*
 
-/*   void interaction_impl::_001DeferPaintLayeredWindowBackground(::image * pimage)
+/*   void interaction_impl::_001DeferPaintLayeredWindowBackground(::image::image * pimage)
    {
 
 
@@ -4302,7 +4302,7 @@ void interaction_impl::set_tool_window(bool bSet)
 //   }
 //
 //
-//   bool interaction_impl::set_icon(::draw2d::icon * picon, bool bSmall)
+//   bool interaction_impl::set_icon(::image::icon * picon, bool bSmall)
 //   {
 //
 //      if (::is_null(picon))

@@ -65,7 +65,7 @@ namespace draw2d_gdi
       virtual HDC get_handle() const;
 
 
-      ::image_pointer pimage_work(const ::size_i32 & size, bool bReset);
+      ::image::image_pointer pimage_work(const ::size_i32 & size, bool bReset);
       image fill_image_work(::color::color clr, const ::size_i32 & size, bool bReset);
 
       bool internal_fill_path(void (::draw2d_gdi::graphics::* pfnInternalSetPath)(void *), void * pparam, const ::rectangle_i32 & rectangleParam, ::draw2d::brush * pbrush);
@@ -271,9 +271,9 @@ namespace draw2d_gdi
       bool fill_rectangle(const ::rectangle_i32 & rectangle, ::draw2d::brush* pBrush) override;
       void frame_rectangle(const ::rectangle_i32 & rectangle, ::draw2d::brush* pBrush) override;
       void invert_rectangle(const ::rectangle_i32 & rectangle) override;
-      bool DrawIcon(int x, int y, ::draw2d::icon * picon) override;
-      bool DrawIcon(const ::point_i32 & point, ::draw2d::icon * picon) override;
-      bool DrawIcon(int x, int y, ::draw2d::icon * picon, int cx, int cy, UINT istepIfAniCur, HBRUSH hbrFlickerFreeDraw, UINT diFlags) override;
+      bool DrawIcon(int x, int y, ::image::icon * picon) override;
+      bool DrawIcon(const ::point_i32 & point, ::image::icon * picon) override;
+      bool DrawIcon(int x, int y, ::image::icon * picon, int cx, int cy, UINT istepIfAniCur, HBRUSH hbrFlickerFreeDraw, UINT diFlags) override;
       //bool DrawState(const ::point_i32 & point, const ::size_i32 & size, HBITMAP hBitmap, UINT nFlags,
       //               HBRUSH hBrush = nullptr) override;
       //bool DrawState(const ::point_i32 & point, const ::size_i32 & size, ::draw2d::bitmap* pBitmap, UINT nFlags,

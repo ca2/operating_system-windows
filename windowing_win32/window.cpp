@@ -1098,7 +1098,7 @@ namespace windowing_win32
    //}
 
 //
-//   bool window::set_icon(::image * pimage)
+//   bool window::set_icon(::image::image * pimage)
 //   {
 //
 //      // http://stackoverflow.com/questions/10699927/xlib-argb-window-icon
@@ -5745,7 +5745,7 @@ namespace windowing_win32
 
    /*
 
-/*   void window::_001DeferPaintLayeredWindowBackground(::image * pimage)
+/*   void window::_001DeferPaintLayeredWindowBackground(::image::image * pimage)
    {
 
 

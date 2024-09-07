@@ -51,7 +51,7 @@ namespace backup
          string str;
 
          string strFile = dir().install() / "basis/ca2/app/dbbk.bat";
-         if(!pcontext->m_papexcontext->file().exists(strFile))
+         if(!file().exists(strFile))
          {
             string str;
             str.formatf("***File %s does not exist. (mysqldump -uroot -ppassword --opt --all-databases > %%1)", strFile);
@@ -346,7 +346,7 @@ namespace backup
       string strSrc = get_new_db_local_path("all.sql");
       string strDst;
       strDst.Format("C:\\ca2\\bk\\%s\\db\\all.sql", m_strTag);
-      pcontext->m_papexcontext->file().copy(strDst, strSrc);
+      file().copy(strDst, strSrc);
 
       return true;
 

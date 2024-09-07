@@ -127,7 +127,7 @@ namespace user_service
             //         outheader("Cache-control") = "public";
             //         outheader("Pragma") = "public";
             //         i32 iPathCount;
-            //         outheader("Expires") = pcontext->m_papexcontext->http().gmdate(pdatetime->strtotime(nullptr, "+1 day", 0, iPathCount));
+            //         outheader("Expires") = http()->gmdate(pdatetime->strtotime(nullptr, "+1 day", 0, iPathCount));
             //#ifdef WINDOWS
             //         simple_file_server(::file::path("Z:\\") / m_request.m_strRequestUri);
             //#else
@@ -330,7 +330,7 @@ auto tickExecuteEnd = ::tick::now();
       }
       else
       {
-/*         ::image_pointer pimage;
+/*         ::image::image_pointer pimage;
 
 /*         pimage->load_image(pszPath);
 
@@ -356,13 +356,13 @@ auto tickExecuteEnd = ::tick::now();
 
          double dRate = minimum(dRateW, dRateH);
 
-/*         ::image_pointer pimage;
+/*         ::image::image_pointer pimage;
 
 /*         pimage = create_image({(i32)(pimage->width() * dRate),  (i32)(pimage->height() * dRate)});
 
 /*         pimage->stretch_image(pimage);
 
-/*         ::save_image saveimage;
+/*         ::image::save_options saveoptions;
 
 /*         savepimage->m_eformat = pimage::e_format_jpeg;
 /*         savepimage->m_iQuality = 50;
@@ -370,7 +370,7 @@ auto tickExecuteEnd = ::tick::now();
          outheader("content-type") = "image/jpeg";
 
 
-/*         pimage->save_to_file(&response().file(), &saveimage);
+/*         pimage->save_to_file(&response().file(), saveoptions);
 
 
       }

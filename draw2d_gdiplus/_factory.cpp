@@ -27,7 +27,7 @@ __FACTORY_EXPORT void draw2d_gdiplus_factory(::factory::factory * pfactory)
 {
 
 
-   pfactory->add_factory_item < ::draw2d_gdiplus::image, ::image >();
+   pfactory->add_factory_item < ::draw2d_gdiplus::image, ::image::image >();
    pfactory->add_factory_item < ::draw2d_gdiplus::graphics, ::draw2d::graphics >();
    pfactory->add_factory_item < ::draw2d_gdiplus::bitmap, ::draw2d::bitmap >();
    pfactory->add_factory_item < ::draw2d_gdiplus::pen, ::draw2d::pen >();

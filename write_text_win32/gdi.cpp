@@ -5,7 +5,7 @@ namespace windowing_win32
 {
 
 
-   CLASS_DECL_WINDOWING_WIN32 HBITMAP create_alpha_bitmap_v5(const ::image * pimage)
+   CLASS_DECL_WINDOWING_WIN32 HBITMAP create_alpha_bitmap_v5(const ::image::image * pimage)
    {
 
       if (!pimage->is_ok())
@@ -72,7 +72,7 @@ namespace windowing_win32
    }
 
 
-   HCURSOR create_alpha_icon(const ::image * pimage, bool bIcon, int xHotSpot, int yHotSpot)
+   HCURSOR create_alpha_icon(const ::image::image * pimage, bool bIcon, int xHotSpot, int yHotSpot)
    {
 
       if (!pimage->is_ok())
@@ -113,7 +113,7 @@ namespace windowing_win32
    }
 
 
-   HCURSOR create_alpha_cursor(const ::image * pimage, int xHotSpot, int yHotSpot)
+   HCURSOR create_alpha_cursor(const ::image::image * pimage, int xHotSpot, int yHotSpot)
    {
 
       if (pimage.nok())

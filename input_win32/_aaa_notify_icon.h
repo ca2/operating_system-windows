@@ -54,7 +54,7 @@ namespace windowing_win32
 //#endif
 //      notify_icon_listener * m_plistener;
 //      pointer_array < ::user::interaction >   m_wndptraHidden;
-//      ::pointer<draw2d::icon>          m_piconCurrent;
+//      ::pointer<::image::icon>          m_piconCurrent;
 
 
       notify_icon();

@@ -17,7 +17,7 @@
 #include "acme/primitive/string/international.h"
 #include "aura/graphics/draw2d/clip.h"
 #include "aura/graphics/draw2d/draw2d.h"
-#include "aura/graphics/image/context_image.h"
+#include "aura/graphics/image/context.h"
 #include "aura/graphics/image/drawing.h"
 #include "aura/graphics/image/map.h"
 #include "aura/platform/system.h"
@@ -1643,7 +1643,7 @@ namespace draw2d_gdiplus
 //   }
 
 
-   void graphics::_draw_raw(const ::image_drawing & imagedrawing)
+   void graphics::_draw_raw(const ::image::image_drawing & imagedrawing)
    {
 
       auto pimage = imagedrawing.image();
@@ -1749,13 +1749,13 @@ namespace draw2d_gdiplus
                   if (!bExists)
                   {
 
-                     image_source imagesource3(imagedrawing);
+                     ::image::image_source imagesource3(imagedrawing);
 
                      ::rectangle_f64 r3(0, 0, iW, iH);
 
-                     image_drawing_options imagedrawingoptions3(r3);
+                     ::image::image_drawing_options imagedrawingoptions3(r3);
 
-                     image_drawing imagedrawing3(imagedrawingoptions3, imagesource3);
+                     ::image::image_drawing imagedrawing3(imagedrawingoptions3, imagesource3);
 
                      scoped_restore(pimage->g()->m_bUseImageMipMapsOrResizedImages);
 
@@ -1765,15 +1765,15 @@ namespace draw2d_gdiplus
 
                   }
 
-                  image_source imagesource2(pimage);
+                  ::image::image_source imagesource2(pimage);
 
-                  image_drawing_options imagedrawingoptions2((const ::image_drawing_options &)imagedrawing);
+                  ::image::image_drawing_options imagedrawingoptions2((const ::image::image_drawing_options &)imagedrawing);
 
                   imagedrawingoptions2.m_rectangleTarget.right() = imagedrawingoptions2.m_rectangleTarget.left() + (double)iW;
 
                   imagedrawingoptions2.m_rectangleTarget.bottom() = imagedrawingoptions2.m_rectangleTarget.top() + (double)iH;
 
-                  image_drawing imagedrawing2(imagedrawingoptions2, imagesource2);
+                  ::image::image_drawing imagedrawing2(imagedrawingoptions2, imagesource2);
 
                   _draw_raw(imagedrawing2);
 
@@ -1782,7 +1782,7 @@ namespace draw2d_gdiplus
                }
 
 
-               if (pgraphicsSrc->m_pimage->m_emipmap == ::draw2d::e_mipmap_anisotropic)
+               if (pgraphicsSrc->m_pimage->m_emipmap == ::image::e_mipmap_anisotropic)
                {
 
                   try
@@ -1866,7 +1866,7 @@ namespace draw2d_gdiplus
                      if (iFind >= 0)
                      {
 
-                        ::image_pointer pimage = pgraphicsSrc->m_pimage->get_image(iFind);
+                        ::image::image_pointer pimage = pgraphicsSrc->m_pimage->get_image(iFind);
 
                         auto emode = m_pgraphics->GetInterpolationMode();
 
@@ -2084,9 +2084,9 @@ namespace draw2d_gdiplus
    //               y2 = 0;
    //            }*/
 
-   //            //::image_pointer pimage = m_pimage;
+   //            //::image::image_pointer pimage = m_pimage;
    //            //int iScan = pimage->m_iScan;
-   //            //::image_pointer pimageMipmap = pgraphicsSrc->m_pimage;
+   //            //::image::image_pointer pimageMipmap = pgraphicsSrc->m_pimage;
    //            //::color::color * pcrMipmap = imageMipmap.m_pcolorref;
    //            //int iMimapScan = imageMipmap.m_iScan;
    //            //::size_f64 sizeMipmap = imageMipmap.m_size;
@@ -2179,7 +2179,7 @@ namespace draw2d_gdiplus
    //            if (iFind >= 0)
    //            {
 
-   //               ::image_pointer pimage = pgraphicsSrc->m_pimage->get_image(iFind);
+   //               ::image::image_pointer pimage = pgraphicsSrc->m_pimage->get_image(iFind);
 
    //               auto emode = m_pgraphics->GetInterpolationMode();
 
@@ -7927,9 +7927,9 @@ namespace draw2d_gdiplus
    //      if (rectangleIntersect.intersect(rectangleAlphaBlend, rectangleText))
    //      {
 
-   //         ::image_pointer pimage1;
+   //         ::image::image_pointer pimage1;
 
-   //         pimage1 = context_image()->create_image(rectangleText.size());
+   //         pimage1 = image()->create_image(rectangleText.size());
 
    //         pimage1->fill(0);
 
@@ -7957,7 +7957,7 @@ namespace draw2d_gdiplus
 
    //         pimage1->blend2(pointDst, m_pimageAlphaBlend, pointSrc, rectangleIntersect.size(), 255);
 
-   //         image_drawing_options imagedrawingoptions;
+   //         ::image::image_drawing_options imagedrawingoptions;
 
    //         set_alpha_mode(::draw2d::e_alpha_mode_blend);
 
@@ -8042,7 +8042,7 @@ namespace draw2d_gdiplus
    //         //else
    //         {
 
-   //            ::image_pointer pimage1;
+   //            ::image::image_pointer pimage1;
    //            
    //            auto estatus = __construct(pimage1);
 

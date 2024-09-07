@@ -12,7 +12,7 @@
 #include "acme/primitive/string/international.h"
 #include "acme/filesystem/filesystem/dir_context.h"
 #include "acme/filesystem/filesystem/file_context.h"
-#include "aura/graphics/image/context_image.h"
+#include "aura/graphics/image/context.h"
 #include "aura/graphics/image/drawing.h"
 #include "aura/graphics/image/list.h"
 #include "aura/graphics/image/icon.h"
@@ -151,7 +151,7 @@ bool IsDibSection(HBITMAP bmp)
 //
 //}
 
-::pointer<::image>create_image_from_hbitmap(::particle * pparticle, HBITMAP hbitmap)
+::image::image_pointer create_image_from_hbitmap(::particle * pparticle, HBITMAP hbitmap)
 {
 
 
@@ -171,7 +171,7 @@ bool IsDibSection(HBITMAP bmp)
          int h = ds.dsBmih.biHeight;
 
          auto pBits = ds.dsBm.bmBits;
-         auto pimage = pparticle->context_image()->create_image({ w, h });
+         auto pimage = pparticle->image()->create_image({ w, h });
          int iStride = ds.dsBmih.biSizeImage / abs(h );
 
          if (h < 0)
@@ -197,7 +197,7 @@ bool IsDibSection(HBITMAP bmp)
 
    ::GetObject(hbitmap, sizeof(bitmap), &bitmap);
 
-   auto pimage = pparticle->context_image()->create_image({ bitmap.bmWidth, bitmap.bmHeight });
+   auto pimage = pparticle->image()->create_image({ bitmap.bmWidth, bitmap.bmHeight });
 
    BITMAPINFO bitmapinfo = {};
 
@@ -356,9 +356,9 @@ namespace windowing_win32
             if (getfileimage.m_iImage >= 0)
             {
 
-               ::image_pointer pimageFirst;
+               ::image::image_pointer pimageFirst;
 
-               ::image_pointer pimage;
+               ::image::image_pointer pimage;
 
                for (auto i = m_iaSize.get_upper_bound(); i >= 0; i--)
                {
@@ -431,9 +431,9 @@ namespace windowing_win32
 
                   }
 
-                  image_source imagesource(pimage);
+                  ::image::image_source imagesource(pimage);
 
-                  image_drawing_options imagedrawingoptions(::rectangle_f64(), e_placement_aspect_fit);
+                  ::image::image_drawing_options imagedrawingoptions(::rectangle_f64(), ::image::e_placement_aspect_fit);
 
                   set_image(getfileimage.m_iImage, iSize, { imagedrawingoptions, imagesource });
 
@@ -1791,7 +1791,7 @@ namespace windowing_win32
 
          synchronouslock.unlock();
 
-         ::file::path path = m_pcontext->m_papexcontext->defer_process_path(pathIconParam);
+         ::file::path path = m_pcontext->defer_process_matter_path(pathIconParam);
 
          for (auto iSize : m_iaSize)
          {
@@ -1833,11 +1833,11 @@ namespace windowing_win32
 
       pwindowingicon->add_icon(hicon);
 
-      auto pdrawicon = __create < ::draw2d::icon >();
+      auto pdrawicon = __create < ::image::icon >();
      
       pdrawicon->initialize_with_windowing_icon(pwindowingicon);
 
-      image_source imagesource(pdrawicon);
+      ::image::image_source imagesource(pdrawicon);
 
       set_image(getfileimage.m_iImage, iSize, imagesource);
 

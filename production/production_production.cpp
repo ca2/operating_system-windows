@@ -214,7 +214,7 @@ pacmedir->system() / "config/production/mirror_status.txt";
             //   set["post"]["new_status"] = "<div style=\"display: block; " + strBackPostColor + "\"><h3 style=\"margin-bottom:0px; color: #555550;\">" + version_to_international_datetime(m_strStartTime) + "</h3><span style=\"color: #228855; display: block; margin-bottom: 1.5em;\">Retried " + ::as_string(m_iGlobalRetry) + " times - \"giving up\" " + m_strConfiguration + " build command!</span>";
             //}
 
-            //pcontext->m_papexcontext->http().get("http://api.ca2.cc/status/insert", str, set);
+            //http()->get("http://api.ca2.cc/status/insert", str, set);
 
 
             //string strTwit =  version_to_international_datetime(m_strStartTime) + " UTC Retried " + ::as_string(m_iGlobalRetry) + " times - \"giving up\" " + m_strConfiguration + " build command!";
@@ -270,7 +270,7 @@ pacmedir->system() / "config/production/mirror_status.txt";
          //   }
 
 
-         //   pcontext->m_papexcontext->http().get("http://api.ca2.cc/status/insert", str, set);
+         //   http()->get("http://api.ca2.cc/status/insert", str, set);
 
          //   ::earth::time timeNow = ::earth::time::now();
 
@@ -354,7 +354,7 @@ pacmedir->system() / "config/production/mirror_status.txt";
 
             //   property_set set;
 
-            //   pcontext->m_papexcontext->http().get("http://api.ca2.cc/status/insert", set);
+            //   http()->get("http://api.ca2.cc/status/insert", set);
 
             //}
 
@@ -379,7 +379,7 @@ pacmedir->system() / "config/production/mirror_status.txt";
             //      set["post"]["new_status"] = "<div style=\"display: block; background-color: #E0FFCC; \"><h2 style=\"margin-bottom:0px; color: #55CCAA;\">Medium Size Status Text" + version_to_international_datetime(m_strBuild) + "</h2><span style=\"color: #228855; display: block; margin-bottom: 1.5em;\">" + m_strBuildTook + " and finished at " + strEndTime + "<br>New release of <a href=\"http://ca2.cc/\">stage</a> applications labeled " + m_strBuild + " is ready for download through compatible gateways.<br>Check <a href=\"http://desktop.ca2.cc/\">desktop.ca2.cc</a> or <a href=\"http://store.ca2.cc/\">store.ca2.cc</a> for simple gateway implementations.</span></div";
             //   }
 
-            //   pcontext->m_papexcontext->http().get("http://api.ca2.cc/status/insert", str, set);
+            //   http()->get("http://api.ca2.cc/status/insert", str, set);
 
             //}
 
@@ -388,7 +388,7 @@ pacmedir->system() / "config/production/mirror_status.txt";
 
          }
          //m_strBase = papplication->command_value("base_dir");
-         m_strBase = pcontext->m_papexcontext->file().as_string("C:\\ca2\\config\\operating_system-windows\\production\\base_dir.txt").trimmed();
+         m_strBase = file().as_string("C:\\ca2\\config\\operating_system-windows\\production\\base_dir.txt").trimmed();
 
 
          /*
@@ -399,7 +399,7 @@ pacmedir->system() / "config/production/mirror_status.txt";
 
             string strContentsSet;
 
-            string strContentsGet = pcontext->m_papexcontext->file().as_string(strContentsSrc);
+            string strContentsGet = file().as_string(strContentsSrc);
 
             if (m_eversion == version_basis)
             {
@@ -417,7 +417,7 @@ pacmedir->system() / "config/production/mirror_status.txt";
             if (strContentsSet != strContentsGet)
             {
 
-              pcontext->m_papexcontext->file().put_contents(strContentsSrc, strContentsSet);
+              file().put_contents(strContentsSrc, strContentsSet);
 
             }
 
@@ -428,7 +428,7 @@ pacmedir->system() / "config/production/mirror_status.txt";
 
          m_strSignTool = "C:\\bergedge\\hi5\\program\\bin\\signtool.exe";
          m_strSpc = "C:\\sensitive\\sensitive\\certificate\\ca2.p12";
-         m_strSignPass = pcontext->m_papexcontext->file().as_string("C:\\sensitive\\sensitive\\certificate\\2011-05-ca2.pass");
+         m_strSignPass = file().as_string("C:\\sensitive\\sensitive\\certificate\\2011-05-ca2.pass");
 
          m_iLoop++;
          defer_quit();
@@ -520,7 +520,7 @@ pacmedir->system() / "config/production/mirror_status.txt";
 
             //   //   property_set set;
 
-            //   //   pcontext->m_papexcontext->http().get("http://api.ca2.cc/status/insert",set);
+            //   //   http()->get("http://api.ca2.cc/status/insert",set);
 
             //   //}
 
@@ -537,7 +537,7 @@ pacmedir->system() / "config/production/mirror_status.txt";
             //   //      set["post"]["new_status"] = "<div style=\"display: block; " + m_strBackPostColor + "\"><h3 style=\"margin-bottom:0px; color: #22552F;\">" + version_to_international_datetime(m_strStartTime) + "</h3><span style=\"color: #228855; display: block; margin-bottom: 1.5em;\">Check app working copy.</span>";
             //   //   }
 
-            //   //   pcontext->m_papexcontext->http().get("http://api.ca2.cc/status/insert",str,set);
+            //   //   http()->get("http://api.ca2.cc/status/insert",str,set);
 
             //   //}
 
@@ -609,7 +609,7 @@ pacmedir->system() / "config/production/mirror_status.txt";
 
             //      property_set set;
 
-            //      pcontext->m_papexcontext->http().get("http://api.ca2.cc/status/insert",set);
+            //      http()->get("http://api.ca2.cc/status/insert",set);
 
             //   }
 
@@ -626,7 +626,7 @@ pacmedir->system() / "config/production/mirror_status.txt";
             //      set["post"]["new_status"] = "<div style=\"display: block; " + m_strBackPostColor + "\"><h3 style=\"margin-bottom:0px; color: #22552F;\">" + version_to_international_datetime(m_strStartTime) + "</h3><span style=\"color: #228855; display: block; margin-bottom: 1.5em;\">Starting production of new <a href=\"http://ca2.cc/\">stage</a> release.</span>";
             //   }
 
-            //   pcontext->m_papexcontext->http().get("http://api.ca2.cc/status/insert",str,set);
+            //   http()->get("http://api.ca2.cc/status/insert",str,set);
 
             //}
 
@@ -650,7 +650,7 @@ pacmedir->system() / "config/production/mirror_status.txt";
             //   set["post"]["new_status"] = "<div style=\"display: block; background-color: #E0FFCC; \"><h2 style=\"margin-bottom:0px; color: #55CCAA;\">" + version_to_international_datetime(m_strBuild) + "</h2><span style=\"color: #228855; display: block; margin-bottom: 1.5em;\">" + m_strBuildTook + " and finished at " + strEndTime + "<br>New release of <a href=\"http://ca2.cc/\">stage</a> applications labeled " + m_strBuild + " is ready for download through compatible gateways.<br>Check <a href=\"http://desktop.ca2.cc/\">desktop.ca2.cc</a> or <a href=\"http://store.ca2.cc/\">store.ca2.cc</a> for simple gateway implementations.</span></div";
             //}
 
-            //pcontext->m_papexcontext->http().get("http://api.ca2.cc/status/insert", str, set);
+            //http()->get("http://api.ca2.cc/status/insert", str, set);
 
             //}
 
@@ -691,7 +691,7 @@ pacmedir->system() / "config/production/mirror_status.txt";
             string strBuildH;
             strBuildH.Format("-c1-production -c2-producer -t12n-producing -mmmi- %s", m_strTag);
             strBuildH += " - ";
-            strBuildH += pcontext->m_papexcontext->file().as_string(m_strBase / "app/stage" / "build_machine_pp_comment.txt");
+            strBuildH += file().as_string(m_strBase / "app/stage" / "build_machine_pp_comment.txt");
             strBuildH += "#define THIS_PRODUCT_VERSION \"" + m_strTag + "\\0\"\r\n#define THIS_FILE_VERSION \"" + m_strTag + "\\0\"\r\n";
             strBuildH += "#define __THIS_PRODUCT_VERSION " + strVerWin + "\r\n#define __THIS_FILE_VERSION " + strVerWin + "\r\n";
             strBuildH += "\r\n";
@@ -718,7 +718,7 @@ pacmedir->system() / "config/production/mirror_status.txt";
 
                //   set["post"]["new_status"] = "<div style=\"display: block; " + m_strBackPostColor + "\"><h5 style=\"margin-bottom:0px; " + m_strEmpPostColor + "\">" + version_to_international_datetime(m_strStartTime) + "</h5><span style=\"" + m_strStdPostColor + m_strBackPostColor + " display: block; margin-bottom: 0.95em;\">" + version_to_international_datetime(::earth::time::now().FormatGmt("%Y-%m-%d %H-%M-%S")) + " Cleaning...</span></div>";
 
-               //   pcontext->m_papexcontext->http().get("http://api.ca2.cc/status/insert", str, set);
+               //   http()->get("http://api.ca2.cc/status/insert", str, set);
 
                //}
                ::process::process_pointer process(e_create);
@@ -747,12 +747,12 @@ pacmedir->system() / "config/production/mirror_status.txt";
             for (auto & strRoot : m_straRoot)
             {
 
-               pcontext->m_papexcontext->file().put_contents(m_strBase / strRoot / "build.txt", m_strBuild);
+               file().put_contents(m_strBase / strRoot / "build.txt", m_strBuild);
 
             }
 
-            //pcontext->m_papexcontext->file().put_text_utf8(m_strBase / "app\\this_version_info.h", strBuildH);
-            pcontext->m_papexcontext->file().put_text_utf8(m_strBase / "app\\this_version_info.txt", strBuildH);
+            //file().put_text_utf8(m_strBase / "app\\this_version_info.h", strBuildH);
+            file().put_text_utf8(m_strBase / "app\\this_version_info.txt", strBuildH);
 
             //update_rc_file_version(m_strBase / "app\\base\\base.rc");
             //update_rc_file_version(m_strBase / "app-core\\iexca2\\iexca2.rc");
@@ -779,7 +779,7 @@ pacmedir->system() / "config/production/mirror_status.txt";
 
             //   set["post"]["new_status"] = "<div style=\"display: block; " + m_strBackPostColor + "\"><h5 style=\"margin-bottom:0px; " + m_strEmpPostColor + "\">" + version_to_international_datetime(m_strStartTime) + "</h5><span style=\"" + m_strStdPostColor + m_strBackPostColor + " display: block; margin-bottom: 0.95em;\">" + version_to_international_datetime(::earth::time::now().FormatGmt("%Y-%m-%d %H-%M-%S")) + " Cleaning...</span></div>";
 
-            //   pcontext->m_papexcontext->http().get("http://api.ca2.cc/status/insert", str, set);
+            //   http()->get("http://api.ca2.cc/status/insert", str, set);
 
             //}
 
@@ -787,11 +787,11 @@ pacmedir->system() / "config/production/mirror_status.txt";
             ::file::path strPath = dir().install() / "time\\stage\\app\\matter\\job.bat";
 
 
-            //pcontext->m_papexcontext->http().ms_download("http://api.ca2.cc/spaignition/clean",
+            //http()->ms_download("http://api.ca2.cc/spaignition/clean",
             //   dir().install() / "time\\spaignition_update.txt"), nullptr, post, headers, ::ca2::acme::application(get_application()).user()->get_user());
             /*add_status("Cleaning folder...");
             ::process::process_pointer process(e_create);
-            pcontext->m_papexcontext->file().put_contents(strPath, "rmdir /s /q C:\\ca2\\vrel\\" + m_strConfiguration);
+            file().put_contents(strPath, "rmdir /s /q C:\\ca2\\vrel\\" + m_strConfiguration);
             if (!process->create_child_process(strPath, false))
             {
                u32 dw = GetLastError();
@@ -947,7 +947,7 @@ pacmedir->create(pathTarget.folder()))
 
          //   set["post"]["new_status"] = "<div style=\"display: block; " + m_strBackPostColor + "\"><h5 style=\"margin-bottom:0px; " + m_strEmpPostColor + "\">" + version_to_international_datetime(m_strStartTime) + "</h5><span style=\"" + m_strStdPostColor + m_strBackPostColor + " display: block; margin-bottom: 0.95em;\">" + version_to_international_datetime(::earth::time::now().FormatGmt("%Y-%m-%d %H-%M-%S")) + " Copying...</span></div>";
 
-         //   pcontext->m_papexcontext->http().get("http://api.ca2.cc/status/insert", str, set);
+         //   http()->get("http://api.ca2.cc/status/insert", str, set);
 
          //}
          //}
@@ -963,7 +963,7 @@ pacmedir->create(pathTarget.folder()))
 
          //   set["post"]["new_status"] = "<div style=\"display: block; " + m_strBackPostColor + "\"><h5 style=\"margin-bottom:0px; " + m_strEmpPostColor + "\">" + version_to_international_datetime(m_strStartTime) + "</h5><span style=\"" + m_strStdPostColor + m_strBackPostColor + " display: block; margin-bottom: 0.95em;\">" + version_to_international_datetime(::earth::time::now().FormatGmt("%Y-%m-%d %H-%M-%S")) + " Compressing...</span></div>";
 
-         //   pcontext->m_papexcontext->http().get("http://api.ca2.cc/status/insert", str, set);
+         //   http()->get("http://api.ca2.cc/status/insert", str, set);
 
          //}
          compress();
@@ -975,7 +975,7 @@ pacmedir->create(pathTarget.folder()))
 
          //   set["post"]["new_status"] = "<div style=\"display: block; " + m_strBackPostColor + "\"><h5 style=\"margin-bottom:0px; " + m_strEmpPostColor + "\">" + version_to_international_datetime(m_strStartTime) + "</h5><span style=\"" + m_strStdPostColor + m_strBackPostColor + " display: block; margin-bottom: 0.95em;\">" + version_to_international_datetime(::earth::time::now().FormatGmt("%Y-%m-%d %H-%M-%S")) + " Resources...</span></div>";
 
-         //   pcontext->m_papexcontext->http().get("http://api.ca2.cc/status/insert", str, set);
+         //   http()->get("http://api.ca2.cc/status/insert", str, set);
 
          //}
 
@@ -1006,10 +1006,10 @@ pacmedir->create(pathTarget.folder()))
          return 1;
          }*/
          dir().create("C:\\home\\ca2_spa\\" + m_strConfiguration + "\\app\\");
-         pcontext->m_papexcontext->file().put_contents("C:\\home\\ca2_spa\\" + m_strConfiguration + "\\app\\build.txt", m_strBuild);
-         pcontext->m_papexcontext->file().put_contents(m_strCCVrelNew + "\\app\\build.txt", m_strBuild);
+         file().put_contents("C:\\home\\ca2_spa\\" + m_strConfiguration + "\\app\\build.txt", m_strBuild);
+         file().put_contents(m_strCCVrelNew + "\\app\\build.txt", m_strBuild);
          dir().create(m_strTagPath.folder());
-         pcontext->m_papexcontext->file().put_contents(m_strTagPath, m_strTag);
+         file().put_contents(m_strTagPath, m_strTag);
 
          //commit_source("C:\\netnodenet\\net");
 
@@ -1021,7 +1021,7 @@ pacmedir->create(pathTarget.folder()))
 
          //   set["post"]["new_status"] = "<div style=\"display: block; " + m_strBackPostColor + "\"><h5 style=\"margin-bottom:0px; " + m_strEmpPostColor + "\">" + version_to_international_datetime(m_strStartTime) + "</h5><span style=\"" + m_strStdPostColor + m_strBackPostColor + " display: block; margin-bottom: 0.95em;\">" + version_to_international_datetime(::earth::time::now().FormatGmt("%Y-%m-%d %H-%M-%S")) + " Storing Symbols...</span></div>";
 
-         //   pcontext->m_papexcontext->http().get("http://api.ca2.cc/status/insert", str, set);
+         //   http()->get("http://api.ca2.cc/status/insert", str, set);
 
          //}
 
@@ -1044,7 +1044,7 @@ pacmedir->create(pathTarget.folder()))
 
             ::process::process_pointer process(e_create);
             string strCommand = "\"C:\\Program Files (x86)\\Windows Kits\\10\\Debuggers\\x86\\symstore.exe\"  add /r /f "+strStageUnc+"\\stage\\" + m_strFormatBuild + "\\time\\Win32\\stage\\*.pdb /s " + strStageUnc + "\\symbol_server\\ /t \"ca2\" /v \"" + m_strFormatBuild + "\"";
-            pcontext->m_papexcontext->file().put_contents(strPath, strCommand);
+            file().put_contents(strPath, strCommand);
             if (!process->create_child_process(strPath, false))
             {
                u32 dw = GetLastError();
@@ -1080,7 +1080,7 @@ pacmedir->create(pathTarget.folder()))
 
             ::process::process_pointer process(e_create);
             string strCommand = "\"C:\\Program Files (x86)\\Windows Kits\\10\\Debuggers\\x64\\symstore.exe\"  add /r /f " + strStageUnc + "\\stage\\" + m_strFormatBuild + "\\time\\x64\\stage\\*.pdb /s " + strStageUnc + "\\symbol_server\\ /t \"ca2\" /v \"" + m_strFormatBuild + "\"";
-            pcontext->m_papexcontext->file().put_contents(strPath, strCommand);
+            file().put_contents(strPath, strCommand);
             if (!process->create_child_process(strPath, false))
             {
                u32 dw = GetLastError();
@@ -1118,7 +1118,7 @@ pacmedir->create(pathTarget.folder()))
 
          //   set["post"]["new_status"] = "<div style=\"display: block; " + m_strBackPostColor + "\"><h5 style=\"margin-bottom:0px; " + m_strEmpPostColor + "\">" + version_to_international_datetime(m_strStartTime) + "</h5><span style=\"" + m_strStdPostColor + m_strBackPostColor + " display: block; margin-bottom: 0.95em;\">" + version_to_international_datetime(::earth::time::now().FormatGmt("%Y-%m-%d %H-%M-%S")) + " Packaging...</span></div>";
 
-         //   pcontext->m_papexcontext->http().get("http://api.ca2.cc/status/insert", str, set);
+         //   http()->get("http://api.ca2.cc/status/insert", str, set);
 
          //}
 
@@ -1154,7 +1154,7 @@ pacmedir->create(pathTarget.folder()))
 
                add_status(::as_string(i + 1) + ". dtf - fileset - file from directory " + strRoot);
 
-               pcontext->m_papexcontext->file().dtf(m_strCCVrelNew + "\\" + strSpa + ".fileset", m_strCCVrelNew + "\\" + strRoot, get_application());
+               file().dtf(m_strCCVrelNew + "\\" + strSpa + ".fileset", m_strCCVrelNew + "\\" + strRoot, get_application());
 
             }
 
@@ -1306,7 +1306,7 @@ pacmedir->create(pathTarget.folder()))
 
                //   set["post"]["new_status"] = "<div style=\"display: block; " + m_strBackPostColor + "\"><h5 style=\"margin-bottom:0px; " + m_strEmpPostColor + "\">" + version_to_international_datetime(m_strStartTime) + "</h5><span style=\"" + m_strStdPostColor + m_strBackPostColor + " display: block; margin-bottom: 0.95em;\">" + version_to_international_datetime(::earth::time::now().FormatGmt("%Y-%m-%d %H-%M-%S")) + " " + strStatus + "</span></div>";
 
-               //   pcontext->m_papexcontext->http().get("http://api.ca2.cc/status/insert", str, set);
+               //   http()->get("http://api.ca2.cc/status/insert", str, set);
 
                //}
 
@@ -1325,7 +1325,7 @@ pacmedir->create(pathTarget.folder()))
 
          //   set["post"]["new_status"] = "<div style=\"display: block; " + m_strBackPostColor + "\"><h5 style=\"margin-bottom:0px; " + m_strEmpPostColor + "\">" + version_to_international_datetime(m_strStartTime) + "</h5><span style=\"" + m_strStdPostColor + m_strBackPostColor + " display: block; margin-bottom: 0.95em;\">" + version_to_international_datetime(::earth::time::now().FormatGmt("%Y-%m-%d %H-%M-%S")) + " Releasing...</span></div>";
 
-         //   pcontext->m_papexcontext->http().get("http://api.ca2.cc/status/insert", str, set);
+         //   http()->get("http://api.ca2.cc/status/insert", str, set);
 
          //}
 
@@ -1614,7 +1614,7 @@ pacmedir->create(pathTarget.folder()))
 
 
 
-   pcontext->m_papexcontext->http().ms_download(strUrl,
+   http()->ms_download(strUrl,
    dir().install() / "time\\spaignition_update.txt"), nullptr, post, headers, psession->user()->get_user());
    i += 8;
    }
@@ -1854,7 +1854,7 @@ pacmedir->create(pathTarget.folder()))
                i++;
             }
          }
-         pcontext->m_papexcontext->file().dtf(strFile, stra1, get_application());
+         file().dtf(strFile, stra1, get_application());
          stra.add(strFile);
       }
       else
@@ -1920,10 +1920,10 @@ pacmedir->create(pathTarget.folder()))
          strBz = m_strCCAuth / strRelative + ".bz";
          strUn = m_pathVrel / strRelative;
 
-         strMd5 = pcontext->m_papexcontext->file().md5(strUn);
+         strMd5 = file().md5(strUn);
 
-         varUnSize = pcontext->m_papexcontext->file().length(strUn);
-         varBzSize = pcontext->m_papexcontext->file().length(strBz);
+         varUnSize = file().length(strUn);
+         varBzSize = file().length(strBz);
 
          strRelease = m_strCCVrel / strRelative;
          strRelease += ".bz.";
@@ -1943,10 +1943,10 @@ pacmedir->create(pathTarget.folder()))
 
          strStatus.empty();
 
-         if (!pcontext->m_papexcontext->file().exists(strRelease))
+         if (!file().exists(strRelease))
          {
 
-            if (pcontext->m_papexcontext->file().copy(strRelease, strBz, false).failed())
+            if (file().copy(strRelease, strBz, false).failed())
             {
 
                strStatus += "<1>";
@@ -1955,7 +1955,7 @@ pacmedir->create(pathTarget.folder()))
 
          }
 
-         if (pcontext->m_papexcontext->file().copy(strReleaseNew, strBz, false).failed())
+         if (file().copy(strReleaseNew, strBz, false).failed())
          {
 
             strStatus += "<2>";
@@ -1975,9 +1975,9 @@ pacmedir->create(pathTarget.folder()))
 
       strRelative = "app\\stage\\metastage\\index-" + m_strFormatBuild + ".spa";
       string strIndex = m_pathVrel / strRelative;
-      pcontext->m_papexcontext->file().put_contents(strIndex, strContents);
+      file().put_contents(strIndex, strContents);
 
-      m_strIndexMd5 = pcontext->m_papexcontext->file().md5(strIndex);
+      m_strIndexMd5 = file().md5(strIndex);
 
       strBz = m_strCCAuth / strRelative + ".bz";
       ::DeleteFileW(utf8_to_unicode(strBz));
@@ -1985,24 +1985,24 @@ pacmedir->create(pathTarget.folder()))
 
       string strRelativeMd5 = "app\\stage\\metastage\\index-" + m_strFormatBuild + ".md5";
       strMd5 = m_pathVrel / strRelativeMd5;
-      pcontext->m_papexcontext->file().put_contents(strMd5, m_strIndexMd5);
+      file().put_contents(strMd5, m_strIndexMd5);
 
       //string strStage = dir().path("C:\\home\\ca2_spa\\" + m_strVersionShift, strRelative) + ".bz";
       //::DeleteFileW(utf8_to_unicode(
       // strStage));
-      //pcontext->m_papexcontext->file().copy(strStage, strBz);
+      //file().copy(strStage, strBz);
       strRelease = m_strCCVrel / strRelative + ".bz";
       //::DeleteFileW(utf8_to_unicode(
       // strRelease));
-      pcontext->m_papexcontext->file().copy(strRelease, strBz);
+      file().copy(strRelease, strBz);
       strRelease = m_strCCVrel / strRelativeMd5;
-      pcontext->m_papexcontext->file().copy(strRelease, strMd5);
+      file().copy(strRelease, strMd5);
       strReleaseNew = m_strCCVrelNew / strRelative + ".bz";
       //::DeleteFileW(utf8_to_unicode(
       // strRelease));
-      pcontext->m_papexcontext->file().copy(strReleaseNew, strBz);
+      file().copy(strReleaseNew, strBz);
       strReleaseNew = m_strCCVrelNew / strRelativeMd5;
-      pcontext->m_papexcontext->file().copy(strReleaseNew, strMd5);
+      file().copy(strReleaseNew, strMd5);
    }
 
    void production::generate_appmatter_spa()
@@ -2166,7 +2166,7 @@ pacmedir->create(pathTarget.folder()))
          strContents += "\n";
 
          m_straFiles.add(strFile);
-         //         m_straTitle.add(pcontext->m_papexcontext->file().title_(strFile));
+         //         m_straTitle.add(file().title_(strFile));
          //       m_straRelative.add(strRelative);
 
          stra1.add(strFile);
@@ -2180,19 +2180,19 @@ pacmedir->create(pathTarget.folder()))
 
       m_straFiles.add(strFile);
 
-      //      m_straTitle.add(pcontext->m_papexcontext->file().title_(strFile));
+      //      m_straTitle.add(file().title_(strFile));
 
       //m_straRelative.add("app\\stage\\metastagez\\" + strRelative + ".expand_fileset.spa");
 
-      pcontext->m_papexcontext->file().put_contents(strFile, strContents);
+      file().put_contents(strFile, strContents);
 
 
       strFile = m_strBase / strRelative + ".expand_fileset";
 
 
-      pcontext->m_papexcontext->file().dtf(strFile, stra1, get_application());
+      file().dtf(strFile, stra1, get_application());
       m_straFiles.add(strFile);
-      //m_straTitle.add(pcontext->m_papexcontext->file().title_(strFile));
+      //m_straTitle.add(file().title_(strFile));
       //m_straRelative.add(strRelative + ".expand_fileset.spa");
 
 
@@ -2390,7 +2390,7 @@ pacmedir->create(pathTarget.folder()))
             continue;
          strRelative.replace("\\", "/");
          mem.set_size(0);
-         pcontext->m_papexcontext->file().as_memory(m_straPath[i], mem);
+         file().as_memory(m_straPath[i], mem);
          xpi_section("Name: " + strRelative + "\n" + xpi_digest(mem), "Name: " + strRelative + "\n");
       }
 
@@ -2398,8 +2398,8 @@ pacmedir->create(pathTarget.folder()))
       string strManifest = m_straManifest.implode("\n");
       string strSignature = m_straSignature.implode("\n");
 
-      pcontext->m_papexcontext->file().put_contents(pszDir / "META-INF/manifest.mf", strManifest);
-      pcontext->m_papexcontext->file().put_contents(pszDir / "META-INF/zigbert.sf", strSignature);
+      file().put_contents(pszDir / "META-INF/manifest.mf", strManifest);
+      file().put_contents(pszDir / "META-INF/zigbert.sf", strSignature);
 
       psystem->crypto().np_make_zigbert_rsa(pszDir, strSignerPath, strKeyPath, strOthersPath, strSignature);
 
@@ -2441,14 +2441,14 @@ pacmedir->create(pathTarget.folder()))
          strIconUrl = "chrome://npca2@ca2.cc/skin/ca2-5c-32.png";
       }
 
-      string strChromeManifest = pcontext->m_papexcontext->file().as_string(m_strBase / "platform/stage/matter/npca2/chrome.manifest");
+      string strChromeManifest = file().as_string(m_strBase / "platform/stage/matter/npca2/chrome.manifest");
       strChromeManifest.replace("%BUILD%", strNpca2Version);
       strChromeManifest.replace("%PLATFORM%", "/" + m_strFormatBuild + "/stage/" + strPlatform);
       strChromeManifest.replace("%DOWNLOADSITE%", m_strDownloadSite);
       strChromeManifest.replace("%VERSION%", strVersionUrl);
       strChromeManifest.replace("%ICONURL%", strIconUrl);
 
-      pcontext->m_papexcontext->file().put_contents(strDir / "npca2" / "chrome.manifest", strChromeManifest);
+      file().put_contents(strDir / "npca2" / "chrome.manifest", strChromeManifest);
 
       string strIcon;
       string strIconName;
@@ -2464,30 +2464,30 @@ pacmedir->create(pathTarget.folder()))
          strIcon = dir().matter("ca2-5c-32.png");
          strIconName = "ca2-5c-32.png";
       }
-      pcontext->m_papexcontext->file().copy(strDir / "npca2/skin/classic" / strIconName, strIcon);
+      file().copy(strDir / "npca2/skin/classic" / strIconName, strIcon);
 
-      string strInstall = pcontext->m_papexcontext->file().as_string(m_strBase / "platform/stage/matter/npca2/install.rdf");
+      string strInstall = file().as_string(m_strBase / "platform/stage/matter/npca2/install.rdf");
       strInstall.replace("%BUILD%", strNpca2Version);
       strInstall.replace("%PLATFORM%", "/plugin/" + strPlatform);
       strInstall.replace("%DOWNLOADSITE%", "anycast.ca2.cc");
       strInstall.replace("%VERSION%", strVersionUrl);
       strInstall.replace("%ICONURL%", strIconUrl);
 
-      pcontext->m_papexcontext->file().put_contents(strDir / "npca2/install.rdf", strInstall);
+      file().put_contents(strDir / "npca2/install.rdf", strInstall);
 
 
-      string strWindows = pcontext->m_papexcontext->file().as_string(m_strBase / "platform/stage/matter/npca2/npca2_windows.rdf");
+      string strWindows = file().as_string(m_strBase / "platform/stage/matter/npca2/npca2_windows.rdf");
       strWindows.replace("%BUILD%", strNpca2Version);
       strWindows.replace("%PLATFORM%", "/" + m_strFormatBuild + "/stage/" + strPlatform);
       strWindows.replace("%DOWNLOADSITE%", m_strDownloadSite + "");
       strWindows.replace("%VERSION%", strVersionUrl);
       strWindows.replace("%ICONURL%", strIconUrl);
-      pcontext->m_papexcontext->file().put_contents(strDir / "npca2_windows.rdf", strWindows);
+      file().put_contents(strDir / "npca2_windows.rdf", strWindows);
 
 
       //add_status("Signing npca2.dll for Firefox ...");
       //string strFile = strDir /  "npca2/plugins", "npca2.dll");
-      //pcontext->m_papexcontext->file().copy(strFile, m_pathVrel / "stage/" + strPlatform + "/npca2.dll"));
+      //file().copy(strFile, m_pathVrel / "stage/" + strPlatform + "/npca2.dll"));
       //string strCmd = "\"" + m_strSignTool + "\" sign /f \"" + m_strSpc + "\" /p " + m_strSignPass + " \"" + strFile + "\"";
       //psystem->process().synch(strCmd);
 
@@ -2495,7 +2495,7 @@ pacmedir->create(pathTarget.folder()))
 
       //add_status("Signing app_app_admin.exe for Firefox ...");
       //strFile = strDir /  "npca2/plugins", "app_app_admin.exe");
-      //pcontext->m_papexcontext->file().copy(strFile, m_pathVrel / "stage/" + strPlatform + "/app_app_admin.exe"));
+      //file().copy(strFile, m_pathVrel / "stage/" + strPlatform + "/app_app_admin.exe"));
       //strCmd = "\"" + m_strSignTool + "\" sign /f \"" + m_strSpc + "\" /p " + m_strSignPass + " \"" + strFile + "\"";
       //psystem->process().synch(strCmd);
 
@@ -2519,7 +2519,7 @@ pacmedir->create(pathTarget.folder()))
 
          strFile = strDir / "npca2/plugins" / strLibrary;
 
-         pcontext->m_papexcontext->file().copy(strFile, m_pathVrel / "time" / stage_platform(strPlatform) / m_strConfiguration / strLibrary);
+         file().copy(strFile, m_pathVrel / "time" / stage_platform(strPlatform) / m_strConfiguration / strLibrary);
 
          strCmd = "\"" + m_strSignTool + "\" sign /f \"" + m_strSpc + "\" /p " + m_strSignPass + " \"" + strFile + "\"";
 
@@ -2530,43 +2530,43 @@ pacmedir->create(pathTarget.folder()))
 
       //add_status("Signing base.dll for Firefox ...");
       //strFile = strDir /  "npca2/plugins", "base.dll");
-      //pcontext->m_papexcontext->file().copy(strFile, m_pathVrel / "stage/" + strPlatform + "/base.dll"));
+      //file().copy(strFile, m_pathVrel / "stage/" + strPlatform + "/base.dll"));
       //strCmd = "\"" + m_strSignTool + "\" sign /f \"" + m_strSpc + "\" /p " + m_strSignPass + " \"" + strFile + "\"";
       //psystem->process().synch(strCmd);
 
       /*
           add_status("Signing os.dll for Firefox ...");
           strFile = strDir /  "npca2/plugins", "os.dll");
-          pcontext->m_papexcontext->file().copy(strFile, m_pathVrel / "stage/" + strPlatform + "/os.dll"));
+          file().copy(strFile, m_pathVrel / "stage/" + strPlatform + "/os.dll"));
           strCmd = "\"" + m_strSignTool + "\" sign /f \"" + m_strSpc + "\" /p " + m_strSignPass + " \"" + strFile + "\"";
           psystem->process().synch(strCmd);
           */
 
       //add_status("Signing msvcr120d.dll for Firefox ...");
       //strFile = strDir /  "npca2/plugins", "msvcr120d.dll");
-      //pcontext->m_papexcontext->file().copy(strFile, m_pathVrel / "stage/" + strPlatform + "/msvcr120d.dll"));
+      //file().copy(strFile, m_pathVrel / "stage/" + strPlatform + "/msvcr120d.dll"));
       //strCmd = "\"" + m_strSignTool + "\" sign /f \"" + m_strSpc + "\" /p " + m_strSignPass + " \"" + strFile + "\"";
       //psystem->process().synch(strCmd);
 
       //add_status("Signing msvcp120d.dll for Firefox ...");
       //strFile = strDir /  "npca2/plugins", "msvcp120d.dll");
-      //pcontext->m_papexcontext->file().copy(strFile, m_pathVrel / "stage/" + strPlatform + "/msvcp120d.dll"));
+      //file().copy(strFile, m_pathVrel / "stage/" + strPlatform + "/msvcp120d.dll"));
       //strCmd = "\"" + m_strSignTool + "\" sign /f \"" + m_strSpc + "\" /p " + m_strSignPass + " \"" + strFile + "\"";
       //psystem->process().synch(strCmd);
 
       //strFile = strDir /  "npca2/plugins", "draw2d_gdiplus.dll");
-      //pcontext->m_papexcontext->file().copy(strFile, m_pathVrel / "stage/" + strPlatform + "/draw2d_gdiplus.dll"));
+      //file().copy(strFile, m_pathVrel / "stage/" + strPlatform + "/draw2d_gdiplus.dll"));
       //strCmd = "\"" + m_strSignTool + "\" sign /f \"" + m_strSpc + "\" /p " + m_strSignPass + " \"" + strFile + "\"";
       //psystem->process().synch(strCmd);
 
       add_status("Signing code for Firefox ...");
 
-      pcontext->m_papexcontext->file().del(strDir / "npca2.xpi");
+      file().del(strDir / "npca2.xpi");
 
       create_xpi(pszPlatform, false);
 
-      pcontext->m_papexcontext->file().copy(m_pathVrel / "time" / stage_platform(strPlatform) / m_strConfiguration / "npca2.xpi", strDir / "npca2.xpi");
-      pcontext->m_papexcontext->file().copy(m_strCCVrel / "plugin" / strPlatform / "npca2_windows.rdf", strDir / "npca2_windows.rdf");
+      file().copy(m_pathVrel / "time" / stage_platform(strPlatform) / m_strConfiguration / "npca2.xpi", strDir / "npca2.xpi");
+      file().copy(m_strCCVrel / "plugin" / strPlatform / "npca2_windows.rdf", strDir / "npca2_windows.rdf");
 
       return true;
    }
@@ -2694,12 +2694,12 @@ pacmedir->create(pathTarget.folder()))
       atoi(m_strFormatBuild.substr(17, 2))
       );
 
-      string strChromeManifest = pcontext->m_papexcontext->file().as_string(m_strBase / "platform/stage/script/iexca2.inf");
+      string strChromeManifest = file().as_string(m_strBase / "platform/stage/script/iexca2.inf");
       strChromeManifest.replace("%VERSION%", strNpca2Version);
       //      strChromeManifest.replace("%PLATFORM%", "/" + m_strFormatBuild + "/stage/" + strPlatform);
       //    strChromeManifest.replace("%DOWNLOADSITE%", m_strDownloadSite);
       //      strChromeManifest.replace("%VERSION%", strVersionUrl);
-      pcontext->m_papexcontext->file().put_contents(m_strBase / "time\\iexca2" / strPlatform / "iexca2.inf", strChromeManifest);
+      file().put_contents(m_strBase / "time\\iexca2" / strPlatform / "iexca2.inf", strChromeManifest);
 
 
       string str;
@@ -2724,7 +2724,7 @@ pacmedir->create(pathTarget.folder()))
          i++;
       }
 
-      pcontext->m_papexcontext->file().copy(m_pathVrel / "time" / stage_platform(strPlatform) / m_strConfiguration / "iexca2.cab", m_strBase / "time\\iexca2" / strPlatform / "iexca2.cab");
+      file().copy(m_pathVrel / "time" / stage_platform(strPlatform) / m_strConfiguration / "iexca2.cab", m_strBase / "time\\iexca2" / strPlatform / "iexca2.cab");
 
       return true;
 
@@ -2772,12 +2772,12 @@ pacmedir->create(pathTarget.folder()))
       }
 
 
-      string strManifestJson = pcontext->m_papexcontext->file().as_string(m_strBase / "platform/stage/matter/crxca2/manifest.network_payload");
+      string strManifestJson = file().as_string(m_strBase / "platform/stage/matter/crxca2/manifest.network_payload");
       strManifestJson.replace("%BUILD%", strCrxca2Version);
       strManifestJson.replace("%PLATFORM%", strPlatform);
       strManifestJson.replace("%DOWNLOADSITE%", m_strDownloadSite);
       strManifestJson.replace("%ICONURL%", strIconUrl);
-      pcontext->m_papexcontext->file().put_contents(strDir / "manifest.network_payload", strManifestJson);
+      file().put_contents(strDir / "manifest.network_payload", strManifestJson);
 
       string strIcon;
       string strIconName;
@@ -2793,7 +2793,7 @@ pacmedir->create(pathTarget.folder()))
          strIcon = dir().matter("ca2-5c-32.png");
          strIconName = "ca2-5c-32.png";
       }
-      pcontext->m_papexcontext->file().copy(strDir / strIconName, strIcon);
+      file().copy(strDir / strIconName, strIcon);
 
 
       ::file::listing straBase;
@@ -2816,7 +2816,7 @@ pacmedir->create(pathTarget.folder()))
 
          strFile = strDir / "npca2/plugins" / strLibrary;
 
-         pcontext->m_papexcontext->file().copy(strFile, m_pathVrel / "time" / stage_platform(strPlatform) / m_strConfiguration / strLibrary);
+         file().copy(strFile, m_pathVrel / "time" / stage_platform(strPlatform) / m_strConfiguration / strLibrary);
 
          strCmd = "\"" + m_strSignTool + "\" sign /f \"" + m_strSpc + "\" /p " + m_strSignPass + " \"" + strFile + "\"";
 
@@ -2826,45 +2826,45 @@ pacmedir->create(pathTarget.folder()))
 
       //add_status("Signing npca2.dll for Chrome ...");
       //string strFile = strDir /  "npca2.dll");
-      //pcontext->m_papexcontext->file().copy(strFile, m_pathVrel / "stage/" + strPlatform + "/npca2.dll"));
+      //file().copy(strFile, m_pathVrel / "stage/" + strPlatform + "/npca2.dll"));
       //string strCmd = "\"" + m_strSignTool + "\" sign /f \"" + m_strSpc + "\" /p " + m_strSignPass + " \"" + strFile + "\"";
       //psystem->process().synch(strCmd);
 
       //add_status("Signing app_app_admin.exe for Chrome ...");
       //strFile = strDir /  "app_app_admin.exe");
-      //pcontext->m_papexcontext->file().copy(strFile, m_pathVrel / "stage/" + strPlatform + "/app_app_admin.exe"));
+      //file().copy(strFile, m_pathVrel / "stage/" + strPlatform + "/app_app_admin.exe"));
       //strCmd = "\"" + m_strSignTool + "\" sign /f \"" + m_strSpc + "\" /p " + m_strSignPass + " \"" + strFile + "\"";
       //psystem->process().synch(strCmd);
 
       //add_status("Signing base.dll for Chrome ...");
       //strFile = strDir /  "base.dll");
-      //pcontext->m_papexcontext->file().copy(strFile, m_pathVrel / "stage/" + strPlatform + "/base.dll"));
+      //file().copy(strFile, m_pathVrel / "stage/" + strPlatform + "/base.dll"));
       //strCmd = "\"" + m_strSignTool + "\" sign /f \"" + m_strSpc + "\" /p " + m_strSignPass + " \"" + strFile + "\"";
       //psystem->process().synch(strCmd);
 
       /*
           add_status("Signing os.dll for Chrome ...");
           strFile = strDir /  "os.dll");
-          pcontext->m_papexcontext->file().copy(strFile, m_pathVrel / "stage/" + strPlatform + "/os.dll"));
+          file().copy(strFile, m_pathVrel / "stage/" + strPlatform + "/os.dll"));
           strCmd = "\"" + m_strSignTool + "\" sign /f \"" + m_strSpc + "\" /p " + m_strSignPass + " \"" + strFile + "\"";
           psystem->process().synch(strCmd);
           */
 
       //add_status("Signing msvcp120d.dll for Chrome ...");
       //strFile = strDir /  "msvcp120d.dll");
-      //pcontext->m_papexcontext->file().copy(strFile, m_pathVrel / "stage/" + strPlatform + "/msvcp120d.dll"));
+      //file().copy(strFile, m_pathVrel / "stage/" + strPlatform + "/msvcp120d.dll"));
       //strCmd = "\"" + m_strSignTool + "\" sign /f \"" + m_strSpc + "\" /p " + m_strSignPass + " \"" + strFile + "\"";
       //psystem->process().synch(strCmd);
 
       //add_status("Signing msvcr120d.dll for Chrome ...");
       //strFile = strDir /  "msvcr120d.dll");
-      //pcontext->m_papexcontext->file().copy(strFile, m_pathVrel / "stage/" + strPlatform + "/msvcr120d.dll"));
+      //file().copy(strFile, m_pathVrel / "stage/" + strPlatform + "/msvcr120d.dll"));
       //strCmd = "\"" + m_strSignTool + "\" sign /f \"" + m_strSpc + "\" /p " + m_strSignPass + " \"" + strFile + "\"";
       //psystem->process().synch(strCmd);
 
       //add_status("Signing draw2d_gdiplus.dll for Chrome ...");
       //strFile = strDir /  "draw2d_gdiplus.dll");
-      //pcontext->m_papexcontext->file().copy(strFile, m_pathVrel / "stage/" + strPlatform + "/draw2d_gdiplus.dll"));
+      //file().copy(strFile, m_pathVrel / "stage/" + strPlatform + "/draw2d_gdiplus.dll"));
       //strCmd = "\"" + m_strSignTool + "\" sign /f \"" + m_strSpc + "\" /p " + m_strSignPass + " \"" + strFile + "\"";
       //psystem->process().synch(strCmd);
 
@@ -2899,7 +2899,7 @@ pacmedir->create(pathTarget.folder()))
       }
 
 
-      pcontext->m_papexcontext->file().copy(m_pathVrel / "time" / stage_platform(strPlatform) / m_strConfiguration / "crxca2.crx", strDir.folder() / "crxca2.crx");
+      file().copy(m_pathVrel / "time" / stage_platform(strPlatform) / m_strConfiguration / "crxca2.crx", strDir.folder() / "crxca2.crx");
 
       return true;
    }
@@ -2973,7 +2973,7 @@ pacmedir->create(pathTarget.folder()))
 
       set["disable_ca2_sessid"] = true;
 
-      pcontext->m_papexcontext->http().get(m_strRelease, str, set);
+      http()->get(m_strRelease, str, set);
 
       synchronous_lock synchronouslock(&m_pproduction->m_mutexRelease);
 
@@ -3033,7 +3033,7 @@ pacmedir->create(pathTarget.folder()))
 
          string str;
 
-         pcontext->m_papexcontext->http().get("http://api.ca2.cc/status/insert", str, set);
+         http()->get("http://api.ca2.cc/status/insert", str, set);
 
          string strTwit;
 
@@ -3105,8 +3105,8 @@ pacmedir->create(pathTarget.folder()))
       string strPathSecret = dir().appdata() / "twitterClient_token_secret" + ::as_string((int)m_eversion) + ".txt";
       /* Step 1: Check if we alredy have OAuth access token from a previous run */
       //    char szKey[1024];
-      string myOAuthAccessTokenKey = pcontext->m_papexcontext->file().as_string(strPathKey);
-      string myOAuthAccessTokenSecret = pcontext->m_papexcontext->file().as_string(strPathSecret);
+      string myOAuthAccessTokenKey = file().as_string(strPathKey);
+      string myOAuthAccessTokenSecret = file().as_string(strPathSecret);
 
       if (myOAuthAccessTokenKey.has_char() && myOAuthAccessTokenSecret.has_char())
       {
@@ -3140,8 +3140,8 @@ pacmedir->create(pathTarget.folder()))
 
          ///* Step 6: Save these keys in a file or wherever */
 
-         //pcontext->m_papexcontext->file().put_contents(strPathKey, myOAuthAccessTokenKey);
-         //pcontext->m_papexcontext->file().put_contents(strPathSecret, myOAuthAccessTokenSecret);
+         //file().put_contents(strPathKey, myOAuthAccessTokenKey);
+         //file().put_contents(strPathSecret, myOAuthAccessTokenSecret);
 
       }
 
@@ -3170,8 +3170,8 @@ Retry2:
       string strPathSecret = dir().appdata() / "twitterClient_token_secret" + ::as_string((int)m_eversion) + ".txt";
       /* Step 1: Check if we alredy have OAuth access token from a previous run */
       //    char szKey[1024];
-      string myOAuthAccessTokenKey = pcontext->m_papexcontext->file().as_string(strPathKey);
-      string myOAuthAccessTokenSecret = pcontext->m_papexcontext->file().as_string(strPathSecret);
+      string myOAuthAccessTokenKey = file().as_string(strPathKey);
+      string myOAuthAccessTokenSecret = file().as_string(strPathSecret);
 
       if (myOAuthAccessTokenKey.has_char() && myOAuthAccessTokenSecret.has_char())
       {
@@ -3233,8 +3233,8 @@ retry1:
       {
          return replyMsg = "failed";
       }
-      pcontext->m_papexcontext->file().del(strPathKey);
-      pcontext->m_papexcontext->file().del(strPathSecret);
+      file().del(strPathKey);
+      file().del(strPathSecret);
       twitter_auth();
       iRetry++;
       goto Retry2;
@@ -3261,8 +3261,8 @@ Retry2:
       string strPathSecret = dir().appdata() / "facebookClient_token_secret" + ::str().from_int(m_eversion) + ".txt";
       /* Step 1: Check if we alredy have OAuth access token from a previous run */
       //    char szKey[1024];
-      string myOAuthAccessTokenKey = pcontext->m_papexcontext->file().as_string(strPathKey);
-      string myOAuthAccessTokenSecret = pcontext->m_papexcontext->file().as_string(strPathSecret);
+      string myOAuthAccessTokenKey = file().as_string(strPathKey);
+      string myOAuthAccessTokenSecret = file().as_string(strPathSecret);
 
       if (myOAuthAccessTokenKey.has_char() && myOAuthAccessTokenSecret.has_char())
       {
@@ -3324,8 +3324,8 @@ retry1:
       {
          return replyMsg = "failed";
       }
-      pcontext->m_papexcontext->file().del(strPathKey);
-      pcontext->m_papexcontext->file().del(strPathSecret);
+      file().del(strPathKey);
+      file().del(strPathSecret);
       facebook_auth();
       iRetry++;
       goto Retry2;
@@ -3434,7 +3434,7 @@ retry1:
 
       //   set["post"]["new_status"] = "<div style=\"display: block; " + m_strBackPostColor + "\"><h5 style=\"margin-bottom:0px; " + m_strEmpPostColor + "\">" + version_to_international_datetime(m_strStartTime) + "</h5><span style=\"" + m_strStdPostColor + m_strBackPostColor + " display: block; margin-bottom: 0.95em;\">" + version_to_international_datetime(::earth::time::now().FormatGmt("%Y-%m-%d %H-%M-%S")) + " Building " + strApp + "...</span></div>";
 
-      //   pcontext->m_papexcontext->http().get("http://api.ca2.cc/status/insert", str, set);
+      //   http()->get("http://api.ca2.cc/status/insert", str, set);
 
       //}
       ::process::process_pointer process(e_create);
@@ -3506,7 +3506,7 @@ retry1:
    void production::update_rc_file_version(const ::string & pszUrl)
    {
 
-      string str = pcontext->m_papexcontext->file().as_string(pszUrl);
+      string str = file().as_string(pszUrl);
 
       ::collection::index iFind1 = str.rear_find("FILEVERSION ");
       if (iFind1 > 0)
@@ -3552,7 +3552,7 @@ retry1:
 
       }
 
-      pcontext->m_papexcontext->file().put_contents(pszUrl, str);
+      file().put_contents(pszUrl, str);
 
 
    }

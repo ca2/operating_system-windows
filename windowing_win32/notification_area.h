@@ -53,7 +53,7 @@ namespace windowing_win32
 
 
       HWND                             m_hwndTray;
-      ::pointer<::image_list>         m_pil16;
+      ::image::image_list_pointer          m_pil16;
       
       pointer_array < TrayItemInfo >    m_infoa;
       HFONT                            m_hfontHidden;

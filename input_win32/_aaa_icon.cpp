@@ -7,7 +7,7 @@
 #include "acme/filesystem/file/memory_file.h"
 #include "acme/platform/system.h"
 #include "acme/filesystem/filesystem/file_context.h"
-#include "aura/graphics/image/context_image.h"
+#include "aura/graphics/image/context.h"
 #include "aura/graphics/image/drawing.h"
 #include "aura/platform/context.h"
 #include "aura/platform/node.h"
@@ -569,27 +569,27 @@ namespace windowing_win32
 
                auto pfile = m_pcontext->file()->create_resource_file(strPath);
 
-               if (!m_pcontext->context_image())
+               if (!image())
                {
 
                   return nullptr;
 
                }
 
-               auto pimage = m_pcontext->context_image()->get_image(pfile);
+               auto pimage = image()->get_image(pfile);
 
-               auto pimageResized = context_image()->create_image(size);
+               auto pimageResized = image()->create_image(size);
 
                bool bOk = false;
 
                try
                {
 
-                  image_source imagesource(pimage);
+                  ::image::image_source imagesource(pimage);
 
-                  image_drawing_options imagedrawingoptions(size);
+                  ::image::image_drawing_options imagedrawingoptions(size);
 
-                  image_drawing imagedrawing(imagedrawingoptions, imagesource);
+                  ::image::image_drawing imagedrawing(imagedrawingoptions, imagesource);
 
                   pimageResized->g()->set_compositing_quality(::draw2d::e_compositing_quality_high_quality);
 
@@ -719,7 +719,7 @@ namespace windowing_win32
    void icon::load_file(const ::string & strPath)
    {
 
-      m_pathProcessed = m_pcontext->m_papexcontext->defer_process_matter_path(strPath);
+      m_pathProcessed = m_pcontext->defer_process_matter_path(strPath);
 
       auto memory = m_pcontext->m_papexcontext->file()->as_memory(m_pathProcessed);
 
@@ -732,7 +732,7 @@ namespace windowing_win32
 
       auto pmemoryfile = create_memory_file(memory);
 
-      auto pimage = m_pcontext->m_papexcontext->context_image()->load_image(pmemoryfile);
+      auto pimage = image()->load_image(pmemoryfile);
 
       if (pimage.ok())
       {
@@ -822,7 +822,7 @@ namespace windowing_win32
 
    }
 
-   image_pointer icon::get_image(const ::size_i32 & size)
+   ::image::image_pointer icon::get_image(const ::size_i32 & size)
    {
 
       auto& pimage  = m_imagemap[size];
@@ -841,7 +841,7 @@ namespace windowing_win32
    }
 
 
-   image_pointer icon::_create_image(const ::size_i32 & size)
+   ::image::image_pointer icon::_create_image(const ::size_i32 & size)
    {
 
       HICON hicon = (HICON) get_os_data(size);

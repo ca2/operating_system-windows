@@ -645,7 +645,7 @@ namespace draw2d_gdi
       else
       {
 
-         ::image_pointer pimage = fill_image_work(color32, rectangle.size(), false);
+         ::image::image_pointer pimage = fill_image_work(color32, rectangle.size(), false);
 
          BLENDFUNCTION bf;
          bf.BlendOp = AC_SRC_OVER;
@@ -682,7 +682,7 @@ namespace draw2d_gdi
    }
 
 
-   bool graphics::DrawIcon(int x, int y, ::draw2d::icon * picon)
+   bool graphics::DrawIcon(int x, int y, ::image::icon * picon)
    {
 
       ASSERT(get_handle1() != nullptr);
@@ -700,7 +700,7 @@ namespace draw2d_gdi
    }
 
 
-   bool graphics::DrawIcon(const ::point_i32 & point, ::draw2d::icon * picon)
+   bool graphics::DrawIcon(const ::point_i32 & point, ::image::icon * picon)
    {
 
       ASSERT(get_handle1() != nullptr);
@@ -713,7 +713,7 @@ namespace draw2d_gdi
 
    }
 
-   bool graphics::DrawIcon(int x, int y, ::draw2d::icon * picon, int cx, int cy, UINT istepIfAniCur, HBRUSH hbrFlickerFreeDraw, UINT diFlags)
+   bool graphics::DrawIcon(int x, int y, ::image::icon * picon, int cx, int cy, UINT istepIfAniCur, HBRUSH hbrFlickerFreeDraw, UINT diFlags)
    {
 
       ASSERT(get_handle1() != nullptr);
@@ -730,7 +730,7 @@ namespace draw2d_gdi
       else
       {
 
-         ::image_pointer pimage;
+         ::image::image_pointer pimage;
 
          pimage = create_image({cx, cy});
 
@@ -1246,7 +1246,7 @@ namespace draw2d_gdi
             ::size_i32 size(nWidth, nHeight);
             ::point_i32 pointSrc(xSrc, ySrc);
 
-            ::image_pointer pimage = pgraphicsSrc->m_pimage;
+            ::image::image_pointer pimage = pgraphicsSrc->m_pimage;
 
 
             if(xSrc < 0)
@@ -1456,12 +1456,12 @@ namespace draw2d_gdi
       else
       {
 
-         ::image_pointer pimage1 = image_work(size(nWidth, nHeight), false);
+         ::image::image_pointer pimage1 = image_work(size(nWidth, nHeight), false);
 
          if(pimage1->is_null())
             return false;
 
-         ::image_pointer pimage2 = image_work(size(nSrcWidth, nSrcHeight), false);
+         ::image::image_pointer pimage2 = image_work(size(nSrcWidth, nSrcHeight), false);
 
          if(pimage2->is_null())
             return false;
@@ -1482,7 +1482,7 @@ namespace draw2d_gdi
 
 //         pimage1->stretch_image(pimage2);
 
-         ::image_pointer pimpl1 = pimage1->m_pimpl;
+         ::image::image_pointer pimpl1 = pimage1->m_pimpl;
 
          pimpl1->stretch_image(pimage2);
 
@@ -1608,7 +1608,7 @@ namespace draw2d_gdi
 
          }
 
-         ::image_pointer pimage = image_work(size, true);
+         ::image::image_pointer pimage = image_work(size, true);
 
          BLENDFUNCTION bf;
          bf.BlendOp     = AC_SRC_OVER;
@@ -2475,7 +2475,7 @@ namespace draw2d_gdi
 
       m_sppath->get_bounding_rect(rectangle);
 
-      ::image_pointer pimage = image_work(rectangle.size());
+      ::image::image_pointer pimage = image_work(rectangle.size());
 
       BLENDFUNCTION bf;
       bf.BlendOp     = AC_SRC_OVER;
@@ -2628,7 +2628,7 @@ namespace draw2d_gdi
 
          ::rectangle_i32 rectangle(rectangleParam);
 
-         ::image_pointer pimage = image_work(rectangle.size(), false);
+         ::image::image_pointer pimage = image_work(rectangle.size(), false);
 
          if (pimage)
          {
@@ -2806,7 +2806,7 @@ namespace draw2d_gdi
          bf.SourceConstantAlpha = 0xFF;
          bf.AlphaFormat = AC_SRC_ALPHA;
 
-         ::image_pointer pimage = image_work(rectangle.size(), false);
+         ::image::image_pointer pimage = image_work(rectangle.size(), false);
 
          if(pimage->is_ok())
             return false;
@@ -2883,7 +2883,7 @@ namespace draw2d_gdi
          bf.SourceConstantAlpha = 0xFF;
          bf.AlphaFormat = AC_SRC_ALPHA;
 
-         ::image_pointer pimage = image_work(rectangle.size(), false);
+         ::image::image_pointer pimage = image_work(rectangle.size(), false);
 
          if(pimage->is_ok())
             return false;
@@ -2924,7 +2924,7 @@ namespace draw2d_gdi
          }
 
 
-         //::image_pointer pimage2 = image_work(rectangle.size());
+         //::image::image_pointer pimage2 = image_work(rectangle.size());
 
          if(GDI_DIB(pimage.m_p)->process_initialize(&pen))
          {
@@ -3021,10 +3021,10 @@ namespace draw2d_gdi
    ::rectangle_i32 rectangleIntersect(m_pointAlphaBlend, m_pimageAlphaBlend->size());
 
 
-   ::image_pointer pimageWork = nullptr;
-   ::image_pointer pimageWork2 = nullptr;
-   //         ::image_pointer pimageWork3 = nullptr;
-   ::image_pointer pimageWork4 = nullptr;
+   ::image::image_pointer pimageWork = nullptr;
+   ::image::image_pointer pimageWork2 = nullptr;
+   //         ::image::image_pointer pimageWork3 = nullptr;
+   ::image::image_pointer pimageWork4 = nullptr;
 
 
    ::point_i32 pointSrc(xSrc, ySrc);
@@ -3033,7 +3033,7 @@ namespace draw2d_gdi
 
 
 
-   ::image_pointer pimage;
+   ::image::image_pointer pimage;
 
    if(imageWork == nullptr)
    {
@@ -3056,7 +3056,7 @@ namespace draw2d_gdi
 
 
 
-   ::image_pointer pimage2;
+   ::image::image_pointer pimage2;
    if(imageWork2 == nullptr)
    {
    pimage2->create(this);
@@ -3064,7 +3064,7 @@ namespace draw2d_gdi
    }
 
 
-   ::image_pointer pimage4;
+   ::image::image_pointer pimage4;
    if(imageWork4 == nullptr)
    {
    image4.create(this);
@@ -3117,7 +3117,7 @@ namespace draw2d_gdi
 
          ::size_i32 size(nDestWidth, nDestHeight);
 
-         ::image_pointer pimage1 = create_image(size);
+         ::image::image_pointer pimage1 = create_image(size);
 
          if (!pimage1)
          {
@@ -3133,7 +3133,7 @@ namespace draw2d_gdi
 
          }
 
-         ::image_pointer pimage4 = create_image(size);
+         ::image::image_pointer pimage4 = create_image(size);
 
          if (!image4)
          {
@@ -3560,7 +3560,7 @@ namespace draw2d_gdi
 
       }
 
-      ::image_pointer pimage = t_pimagemap->operator[](d);
+      ::image::image_pointer pimage = t_pimagemap->operator[](d);
 
       if(bReset)
       {
@@ -3592,7 +3592,7 @@ namespace draw2d_gdi
 
       }
 
-      ::image_pointer pimage = t_pimagemap->operator[](d);
+      ::image::image_pointer pimage = t_pimagemap->operator[](d);
 
       if(bReset)
       {
@@ -3638,7 +3638,7 @@ namespace draw2d_gdi
 
          int cy = ::height(rectangle);
 
-         ::image_pointer pimage = fill_image_work(color32, ::size_i32(rectangle), false);
+         ::image::image_pointer pimage = fill_image_work(color32, ::size_i32(rectangle), false);
 
          BLENDFUNCTION bf;
          bf.BlendOp     = AC_SRC_OVER;

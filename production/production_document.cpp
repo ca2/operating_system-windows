@@ -57,7 +57,7 @@ namespace production
    bool document::on_open_document(const var & payloadFile)
    {
 
-      string str = pcontext->m_papexcontext->file().as_string(payloadFile);
+      string str = file().as_string(payloadFile);
 
       //  m_document.load(str);
 

@@ -278,7 +278,7 @@ namespace windowing_win32
    }
 
 
-   HGLOBAL copydesk::hglobal_get_image(const ::image * pimage)
+   HGLOBAL copydesk::hglobal_get_image(const ::image::image * pimage)
    {
 
       ::u32 dwWidth, dwHeight;
@@ -603,7 +603,7 @@ namespace windowing_win32
    }
 
 
-   bool copydesk::_desk_to_image(::image * pimage)
+   bool copydesk::_desk_to_image(::image::image * pimage)
    {
 
       if (!_has_image())
@@ -708,7 +708,7 @@ namespace windowing_win32
    }
 
 
-   bool copydesk::_image_to_desk(const ::image * pimage)
+   bool copydesk::_image_to_desk(const ::image::image * pimage)
    {
 
       //ASSERT(::IsWindow(m_hwnd));

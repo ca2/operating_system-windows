@@ -393,7 +393,7 @@ pacmedir->system() / "config/plugin/appfy_beg_debug_box.txt"))
 
       }
 
-      pcontext->m_papexcontext->file().copy(strDst, strSrc, false);
+      file().copy(strDst, strSrc, false);
 
       dprint("main copy should be done!!");
 
@@ -405,7 +405,7 @@ pacmedir->system() / "config/plugin/appfy_beg_debug_box.txt"))
 
       pathMatter = psystem->get_matter_cache_path(pathMatter);
 
-      if (pcontext->m_papexcontext->file().exists(pathMatter))
+      if (file().exists(pathMatter))
       {
 
          pathIcon = pathMatter;
@@ -421,7 +421,7 @@ pacmedir->system() / "config/plugin/appfy_beg_debug_box.txt"))
 
          pathMatter |= ::file::e_flag_get_local_path;
 
-         if (pcontext->m_papexcontext->file().exists(pathMatter))
+         if (file().exists(pathMatter))
          {
 
             pathIcon = pathMatter;
@@ -458,7 +458,7 @@ pacmedir->system() / "config/plugin/appfy_beg_debug_box.txt"))
 
       }
 
-      if (pcontext->m_papexcontext->file().exists(pathIcon))
+      if (file().exists(pathIcon))
       {
 
          memory memory;
@@ -467,7 +467,7 @@ pacmedir->system() / "config/plugin/appfy_beg_debug_box.txt"))
 
          auto pfileHd = create_memory_file();
 
-         pcontext->m_papexcontext->file().as_memory(pathIcon, memory);
+         file().as_memory(pathIcon, memory);
 
          dprint("icon as memory");
 
