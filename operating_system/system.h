@@ -56,17 +56,10 @@
 
 
 
-#include "cross/cross.h"
-
-
-
-
-
-
-
-
-
-
+//#include "cross/cross.h"
+#define __time_t time_t
+#define stat64 _stat64
+using int_bool = int;
 
 
 #include <stddef.h>
