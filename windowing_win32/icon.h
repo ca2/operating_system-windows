@@ -57,6 +57,8 @@ namespace windowing_win32
 
       void _erase_all();
 
+      ::pointer < ::innate_ui::icon > innate_ui_icon(const ::size_i32 & size) override;
+
       
    };
 

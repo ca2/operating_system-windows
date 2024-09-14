@@ -2975,8 +2975,6 @@ void interaction_impl::on_message_size(::message::message* pmessage)
 
 }
 
-
-
    //void interaction_impl::_001OnGetMinMaxInfo(::message::message * pmessage)
    //{
 

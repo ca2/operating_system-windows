@@ -7,6 +7,7 @@
 #include "acme/filesystem/file/memory_file.h"
 #include "acme/platform/system.h"
 #include "acme/filesystem/filesystem/file_context.h"
+#include "innate_ui_win32/icon.h"
 #include "aura/graphics/image/context.h"
 #include "aura/graphics/image/drawing.h"
 #include "aura/platform/context.h"
@@ -804,6 +805,20 @@ namespace windowing_win32
       //}
 
       //return true;
+
+   }
+
+
+   ::pointer < ::innate_ui::icon > icon::innate_ui_icon(const ::size_i32 & size)
+   {
+
+      auto hicon = (HICON) get_os_data(size);
+
+      auto picon = __create_new < ::innate_ui_win32::icon>();
+
+      picon->m_hicon = hicon;
+
+      return picon;
 
    }
 

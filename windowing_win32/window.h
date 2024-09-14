@@ -2,10 +2,14 @@
 #pragma once
 
 
+
 #include "aura/windowing/window.h"
 
+#include "acme/operating_system/windows/window.h"
 
-#include "acme/_operating_system.h"
+
+
+//#include "acme/_operating_system.h"
 
 
 namespace windowing_win32
@@ -14,14 +18,16 @@ namespace windowing_win32
 
    class CLASS_DECL_WINDOWING_WIN32 window :
       virtual public ::windowing::window,
+      virtual public ::windows::window,
       virtual public IDropTarget
    {
    public:
 
+      //;; bool                                            m_bSizeMoveMode;
       ::u8                                            m_uOpacity;
       //HICON                                         m_hiconSmall;
       //HICON                                         m_hiconBig;
-      HMENU                                           m_hmenuSystem;
+      //HMENU                                           m_hmenuSystem;
       bool                                            m_bTrackMouseLeave : 1;
       WNDPROC                                         m_pfnSuper;
       //UINT                                          m_uiMessage;
@@ -53,6 +59,8 @@ namespace windowing_win32
       inline HWND get_hwnd() const { return (HWND)oswindow(); }
       inline void set_hwnd(HWND hwnd) { set_oswindow(__oswindow(hwnd)); }
 
+      ::oswindow oswindow() const override;
+      void _set_oswindow(::oswindow oswindow) override;
 
       bool operator== (const window& window) const
       {

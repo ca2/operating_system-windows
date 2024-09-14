@@ -987,7 +987,13 @@ namespace windowing_win32
                if (::IsWindowVisible(hwnd) && !::IsIconic(hwnd))
                {
 
-                  ::UpdateLayeredWindow(hwnd, m_hdcScreen, (POINT *)&point, (SIZE *)&size, playeredwindowbuffer->m_hdc, (POINT *)&pointSrc, make_u32(0, 0, 0, 0), &blendPixelFunction, ULW_ALPHA);
+                  //::pointer < ::windowing_win32::window > p2 = m_pwindow;
+
+                  //if (!p2->m_bSizeMoveMode)
+                  {
+                     ::UpdateLayeredWindow(hwnd, m_hdcScreen, (POINT *)&point, (SIZE *)&size, playeredwindowbuffer->m_hdc, (POINT *)&pointSrc, make_u32(0, 0, 0, 0), &blendPixelFunction, ULW_ALPHA);
+
+                  }
 
                }
 

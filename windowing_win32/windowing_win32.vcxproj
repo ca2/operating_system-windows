@@ -824,6 +824,9 @@
     <ProjectReference Include="..\aura_windows\aura_windows.vcxproj">
       <Project>{94c3715a-7fbf-4455-917b-20cb7f40c58c}</Project>
     </ProjectReference>
+    <ProjectReference Include="..\innate_ui_win32\innate_ui_win32.vcxproj">
+      <Project>{31f3d4c6-61f7-4e68-8c48-6de00a2d7d78}</Project>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="windowing_win32.def" />

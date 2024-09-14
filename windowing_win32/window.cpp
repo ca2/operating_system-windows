@@ -1,6 +1,7 @@
 // created by Camilo 2021-01-31 04:56 BRT <3CamiloSasukeThomasBorregaardSoerensen
 #include "framework.h"
 #undef USUAL_OPERATING_SYSTEM_SUPPRESSIONS
+#include "buffer.h"
 #include "display.h"
 #include "monitor.h"
 #include "window.h"
@@ -17,6 +18,7 @@
 #include "acme/exception/exception.h"
 #include "acme/exception/interface_only.h"
 #include "acme/handler/topic.h"
+#include "acme/nano/nano.h"
 #include "acme/parallelization/synchronous_lock.h"
 #include "acme/platform/node.h"
 #include "acme/primitive/geometry2d/_text_stream.h"
@@ -27,10 +29,12 @@
 #include "aura/message/user.h"
 #include "aura/user/user/user.h"
 #include "aura/user/user/system.h"
+#include "acme/operating_system/windows/nano/user/user.h"
 #include "aura/platform/session.h"
 #include "aura/platform/system.h"
 #include "aura/windowing/placement_log.h"
 #include "acme_windows_common/comptr.h"
+
 
 
 
@@ -85,10 +89,10 @@ namespace windowing_win32
 
    window::window()
    {
-
+      //m_bSizeMoveMode = false;
       m_uOpacity = 255;
 
-      m_hmenuSystem = nullptr;
+      //m_hmenuSystem = nullptr;
 
       m_pWindow4 = this;
 
@@ -285,6 +289,22 @@ namespace windowing_win32
          MESSAGE_LINK(emessageTaskbarCreated, pchannel, this, &window::_001OnTaskbarCreated);
 
       }
+
+   }
+   
+   
+   ::oswindow window::oswindow() const
+   {
+
+      return (::oswindow) m_hwnd;
+
+   }
+
+
+   void window::_set_oswindow(::oswindow oswindow)
+   {
+
+      m_hwnd = (HWND) oswindow;
 
    }
 
@@ -2513,6 +2533,13 @@ namespace windowing_win32
    bool window::__set_window_position(const class ::zorder & zorder, i32 x, i32 y, i32 cx, i32 cy, const ::e_activation & eactivation, bool bNoZorder, bool bNoMove, bool bNoSize, bool bShow, bool bHide, ::u32 nOverrideFlags)
    {
 
+      if (m_bSizeMoveMode)
+      {
+
+         return true;
+
+      }
+
       HWND hwnd = get_hwnd();
 
       auto pwindowing = windowing();
@@ -3016,9 +3043,16 @@ namespace windowing_win32
    void window::set_mouse_cursor(::windowing::cursor * pcursor)
    {
 
+      if (m_bSizeMoveMode)
+      {
+
+         return;
+
+      }
+
       ::windowing::window::set_mouse_cursor(pcursor);
 
-      windowing()->set_mouse_cursor(pcursor);
+      windowing()->set_mouse_cursor2(pcursor);
 
       //HCURSOR hcursor = nullptr;
       //
@@ -7231,18 +7265,13 @@ namespace windowing_win32
    void window::defer_show_system_menu(const ::point_i32 & pointAbsolute)
    {
 
-      auto hwnd = (HWND)m_oswindow;
+      //::pointer < ::windows::nano::user::user >pnanouserWindows = nano()->user();
 
-      GetSystemMenu(hwnd, true);
-      m_hmenuSystem = GetSystemMenu(hwnd, false);
-      //SetForegroundWindow(hwnd);
-      TrackPopupMenu(m_hmenuSystem, 
-         TPM_LEFTALIGN | TPM_TOPALIGN, 
-         pointAbsolute.x(),
-         pointAbsolute.y(),
-         0,
-         hwnd, NULL);
-      //PostMessage(hwnd, WM_NULL, 0, 0);
+      //auto hwnd = m_hwnd;
+
+      //pnanouserWindows->_defer_show_system_menu(hwnd, &m_hmenuSystem, pointAbsolute);
+
+      _defer_show_system_menu(pointAbsolute);
 
    }
 
@@ -7251,6 +7280,80 @@ namespace windowing_win32
    {
 
       lresult lresult = 0;
+
+      if (hwnd == m_hwnd && on_window_procedure(lresult, message, wparam, lparam))
+      {
+
+         return lresult;
+
+      }
+
+      if (message == WM_WINDOWPOSCHANGED)
+      {
+
+         if (m_bSizeMoveMode)
+         {
+
+            auto pwindowpos = (WINDOWPOS *)lparam;
+
+            //::GetWindowRect(m_hwnd, &r);
+
+            ::point_i32 pLparam(lparam);
+
+            //auto xPos = (int)(short)LOWORD(lparam);   // horizontal position 
+            //auto yPos = (int)(short)HIWORD(lparam);   // vertical position 
+            auto xPos = pwindowpos->x;
+            auto yPos = pwindowpos->y;
+
+            //::point_i32 p(r.left, r.top);
+
+            ::point_i32 p(xPos, yPos);
+
+            m_pointWindow = p;
+
+            //::SetWindowPos(m_hwnd, nullptr, xPos, yPos, 0, 0, SWP_NOSIZE | SWP_NOZORDER);
+
+            m_puserinteractionimpl->m_puserinteraction->layout().m_statea[::user::e_layout_sketch].m_point2 = p;
+            m_puserinteractionimpl->m_puserinteraction->layout().m_statea[::user::e_layout_lading].m_point2 = p;
+            m_puserinteractionimpl->m_puserinteraction->layout().m_statea[::user::e_layout_layout].m_point2 = p;
+            m_puserinteractionimpl->m_puserinteraction->layout().m_statea[::user::e_layout_design].m_point2 = p;
+            m_puserinteractionimpl->m_puserinteraction->layout().m_statea[::user::e_layout_output].m_point2 = p;
+            m_puserinteractionimpl->m_puserinteraction->layout().m_statea[::user::e_layout_window].m_point2 = p;
+            m_puserinteractionimpl->m_puserinteraction->layout().m_statea[::user::e_layout_normal].m_point2 = p;
+
+            ::pointer < buffer > pbuffer  = m_puserinteractionimpl->m_pgraphicsgraphics;
+
+            {
+
+               auto pitem = pbuffer->get_buffer_item();
+
+               if (pitem)
+               {
+
+                  pitem->m_point = p;
+
+               }
+
+            }
+
+            {
+
+               auto pitem = pbuffer->get_screen_item();
+
+               if (pitem)
+               {
+
+                  pitem->m_point = p;
+
+               }
+
+            }
+
+            return 0;
+
+         }
+
+      }
 
       if (message == WM_SYSCOMMAND)
       {
@@ -7362,73 +7465,21 @@ namespace windowing_win32
 
       }
 
-      if (message == WM_INITMENU)
-      {
+      //if (message == WM_INITMENU)
+      //{
 
-         auto hmenu = (HMENU)wparam;
+      //   ::pointer < ::windows::nano::user::user > pnanouser = nano()->user();
 
-         auto cMenuItemCount = ::GetMenuItemCount(hmenu);
+      //   LRESULT lresult = 0;
 
-         if (hmenu == m_hmenuSystem)
-         {
+      //   if (pnanouser->_on_default_system_menu_init_menu(lresult, m_hwnd, m_hmenuSystem, wparam))
+      //   {
 
-            HMENU hmenuSystem = hmenu;
+      //      return lresult;
 
-            auto iLast = ::GetMenuItemCount(hmenuSystem) - 1;
+      //   }
 
-            auto idLast = GetMenuItemID(hmenuSystem, iLast);
-
-            auto iOneBeforeLast = iLast - 1;
-
-            auto idOneBeforeLast = GetMenuItemID(hmenuSystem, iOneBeforeLast);
-
-            if (idLast == SC_CLOSE && idOneBeforeLast == 0)
-            {
-
-               // Seems like System Menu
-
-               {
-
-                  MENUITEMINFOW menu_item_info{};
-                  menu_item_info.cbSize = sizeof(MENUITEMINFO);
-
-                  menu_item_info.fMask = MIIM_TYPE;
-                  menu_item_info.fType = MFT_SEPARATOR;
-
-                  //menu_item_info.hSubMenu = submenu.handle();
-
-                  //menu_item_info.dwTypeData = const_cast<wchar_t *>(L"About...");
-                  //menu_item_info.cch = wcslen(const_cast<wchar_t *>(menu_item_info.dwTypeData));
-
-                  InsertMenuItemW(hmenuSystem, iOneBeforeLast, TRUE, &menu_item_info);
-
-               }
-
-               {
-
-                  MENUITEMINFOW menu_item_info{};
-                  menu_item_info.cbSize = sizeof(MENUITEMINFO);
-
-                  menu_item_info.fMask = MIIM_TYPE | MIIM_ID;
-                  menu_item_info.fType = MFT_STRING;
-
-                  //menu_item_info.hSubMenu = submenu.handle();
-
-                  menu_item_info.wID = 123;
-                  menu_item_info.dwTypeData = const_cast<wchar_t *>(L"About...");
-                  menu_item_info.cch = (UINT)wcslen(const_cast<wchar_t *>(menu_item_info.dwTypeData));
-
-                  InsertMenuItemW(hmenuSystem, iOneBeforeLast + 1, TRUE, &menu_item_info);
-
-               }
-
-               return 0;
-
-            }
-
-         }
-
-      }
+      //}
 
       //return ::DefWindowProcW(hwnd, message, wparam, lparam);
 
