@@ -9,6 +9,7 @@
 #include "acme/parallelization/manual_reset_event.h"
 #include "acme/primitive/geometry2d/size.h"
 #include "acme/operating_system/windows/nano/user/user.h"
+#include "acme/user/user/mouse.h"
 
 
 
@@ -487,14 +488,14 @@ namespace innate_ui_win32
    }
 
    
-   void window::defer_show_system_menu(const ::point_i32 & pointAbsolute)
+   void window::defer_show_system_menu(::user::mouse * pmouse)
    {
 
       //::pointer < ::windows::nano::user::user >pnanouserWindows = nano()->user();
 
       //pnanouserWindows->_defer_show_system_menu(m_hwnd, &m_hmenuSystem, pointAbsolute);
 
-      _defer_show_system_menu(pointAbsolute);
+      _defer_show_system_menu(pmouse->m_pointAbsolute);
 
    }
 

@@ -66,10 +66,10 @@ namespace windowing_win32
 
       ::collection::index get_main_workspace(::rectangle_i32 & rectangle) override;
 
-      ::collection::count get_workspace_count() override;
+      ///::collection::count get_workspace_count() override;
       //virtual bool  get_wkspace_rect(::collection::index iWkspace, ::rectangle_i32 * prectangle) override;
 
-      ::collection::count get_desk_workspace_count() override;
+      //::collection::count get_desk_workspace_count() override;
       //virtual bool  get_desk_wkspace_rect(::collection::index iWkspace, ::rectangle_i32 * prectangle) override;
 
       //virtual ::collection::index get_ui_wkspace(::user::interaction * pinteraction) override;

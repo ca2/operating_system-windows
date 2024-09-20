@@ -241,7 +241,7 @@ namespace windowing_win32
 
       HMONITOR hwkspacePrimary = ::windows::get_primary_monitor_handle();
 
-      for (::collection::index iWkspace = 0; iWkspace < get_workspace_count(); iWkspace++)
+      for (::collection::index iWkspace = 0; iWkspace < get_monitor_count(); iWkspace++)
       {
 
          if (m_hmonitora[iWkspace] == hwkspacePrimary)
@@ -271,20 +271,20 @@ namespace windowing_win32
    }
 
 
-   ::collection::count display::get_workspace_count()
-   {
-
-#ifdef WINDOWS_DESKTOP
-
-      return m_monitorinfoa.get_count();
-
-#else
-
-      return get_monitor_count();
-
-#endif
-
-   }
+//   ::collection::count display::get_workspace_count()
+//   {
+//
+//#ifdef WINDOWS_DESKTOP
+//
+//      return m_monitorinfoa.get_count();
+//
+//#else
+//
+//      return get_monitor_count();
+//
+//#endif
+//
+//   }
 
 
    //   bool display::get_wkspace_rect(::collection::index iWkspace, ::rectangle_i32 * prectangle)
@@ -356,12 +356,12 @@ namespace windowing_win32
    //   }
 
 
-   ::collection::count display::get_desk_workspace_count()
-   {
+   //::collection::count display::get_desk_workspace_count()
+   //{
 
-      return get_workspace_count();
+   //   return get_workspace_count();
 
-   }
+   //}
 
 
    //bool display::get_desk_wkspace_rect(::collection::index iWkspace, ::rectangle_i32 * prectangle)
@@ -954,7 +954,7 @@ namespace windowing_win32
 
       }
 
-      for (::collection::index iWorkspace = 0; iWorkspace < get_workspace_count(); iWorkspace++)
+      for (::collection::index iWorkspace = 0; iWorkspace < get_monitor_count(); iWorkspace++)
       {
 
          ::rectangle_i32 rectangleIntersect;

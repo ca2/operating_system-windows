@@ -65,7 +65,7 @@ namespace innate_ui_win32
 
       virtual int _get_id();
 
-      void defer_show_system_menu(const ::point_i32 & pointAbsolute) override;
+      void defer_show_system_menu(::user::mouse * pmouse) override;
 
    };
 

@@ -954,7 +954,7 @@ namespace windowing_win32
 
       //void defer_show_system_menu(::message::mouse * pmouse) override;
 
-      void defer_show_system_menu(const ::point_i32 & pointAbsolute) override;
+      void defer_show_system_menu(::user::mouse * pmouse) override;
 
 
       //::pointer<::message::message> get_message(const ::atom & atom, wparam wparam, lparam lparam);

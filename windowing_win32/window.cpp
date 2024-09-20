@@ -7262,7 +7262,7 @@ namespace windowing_win32
    //}
 
 
-   void window::defer_show_system_menu(const ::point_i32 & pointAbsolute)
+   void window::defer_show_system_menu(::user::mouse * pmouse)
    {
 
       //::pointer < ::windows::nano::user::user >pnanouserWindows = nano()->user();
@@ -7271,7 +7271,7 @@ namespace windowing_win32
 
       //pnanouserWindows->_defer_show_system_menu(hwnd, &m_hmenuSystem, pointAbsolute);
 
-      _defer_show_system_menu(pointAbsolute);
+      _defer_show_system_menu(pmouse->m_pointAbsolute);
 
    }
 
@@ -7298,7 +7298,7 @@ namespace windowing_win32
 
             //::GetWindowRect(m_hwnd, &r);
 
-            ::point_i32 pLparam(lparam);
+            auto pointLparam = lparam_as_point(lparam);
 
             //auto xPos = (int)(short)LOWORD(lparam);   // horizontal position 
             //auto yPos = (int)(short)HIWORD(lparam);   // vertical position 
@@ -7455,7 +7455,12 @@ namespace windowing_win32
 
                GetWindowRect(hwnd, &r);
 
-               defer_show_system_menu({r.left, r.top});
+               auto pmouse = __create_new < ::message::mouse >();
+
+               pmouse->m_pointAbsolute.x() = r.left;
+               pmouse->m_pointAbsolute.y() = r.top;
+
+               defer_show_system_menu(pmouse);
 
                return 0;
 
