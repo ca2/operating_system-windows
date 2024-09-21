@@ -371,7 +371,7 @@ namespace acme_windows
       bool _is_opera_browser_installed() override;
       bool _is_visual_studio_code_installed() override;
 
-      
+      void do_windowing_system_factory() override;
 
 
    };

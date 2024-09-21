@@ -5023,6 +5023,14 @@ namespace acme_windows
    //}
 
 
+   void node::do_windowing_system_factory()
+   {
+
+      auto pfactory = system()->factory("windowing_system", "win32");
+
+      pfactory->merge_to_global_factory();
+
+   }
 
 
 } // namespace acme_windows

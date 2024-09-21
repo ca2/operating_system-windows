@@ -232,6 +232,8 @@ namespace apex_windows
 
       bool has_ip6_internet() override;
 
+      
+      void defer_innate_ui() override;
 
 
    };

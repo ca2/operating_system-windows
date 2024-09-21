@@ -5357,6 +5357,15 @@ namespace apex_windows
    }
 
 
+   void node::defer_innate_ui()
+   {
+
+      auto pfactory = system()->factory("innate_ui", "win32");
+
+      pfactory->merge_to_global_factory();
+
+   }
+
 
 } // namespace windows
 
