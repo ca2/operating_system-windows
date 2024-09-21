@@ -428,7 +428,7 @@ namespace innate_ui_win32
             r.bottom = r.top + size.cy();
 
 
-            AdjustWindowRect(&r, _get_style(), FALSE);
+            ::AdjustWindowRect(&r, (DWORD) _get_style(), FALSE);
 
             ::SetWindowPos(m_hwnd, nullptr, 0, 0, width(r), height(r), SWP_NOMOVE);
 
