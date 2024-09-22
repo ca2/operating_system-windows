@@ -678,14 +678,8 @@
     <ProjectReference Include="..\..\..\source\app\aqua\aqua.vcxproj">
       <Project>{1b06fe5f-f783-41a1-ac68-0e02880dbbac}</Project>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\source\audio\audio\audio.vcxproj">
-      <Project>{20fd0446-aa14-4013-84e0-b5cb63fa354f}</Project>
-    </ProjectReference>
     <ProjectReference Include="..\acme_windows\acme_windows.vcxproj">
       <Project>{cc8e8200-00a9-414e-9829-7ca3f1091add}</Project>
-    </ProjectReference>
-    <ProjectReference Include="..\multimedia_mmsystem\multimedia_mmsystem.vcxproj">
-      <Project>{21da4a8c-5a05-40a4-bf5b-ff62b9ddd150}</Project>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
