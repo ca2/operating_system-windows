@@ -8,10 +8,10 @@
 #include "acme_windows/_.h"
 
 
-#if defined(_windowing_system_win32_project)
-#define CLASS_DECL_WINDOWING_SYSTEM_WIN32  CLASS_DECL_EXPORT
+#if defined(_nano_graphics_gdi_project)
+#define CLASS_DECL_NANO_GRAPHICS_GDI  CLASS_DECL_EXPORT
 #else
-#define CLASS_DECL_WINDOWING_SYSTEM_WIN32  CLASS_DECL_IMPORT
+#define CLASS_DECL_NANO_GRAPHICS_GDI  CLASS_DECL_IMPORT
 #endif
 
 
@@ -50,7 +50,7 @@
 //void __x11_hook_on_idle(Display * pdisplay);
 
 
-//CLASS_DECL_ACME ::particle * user_synchronization();
+//CLASS_DECL_NANO_GRAPHICS_GDI ::particle * user_synchronization();
 
 
 //#include "x11_exception.h"

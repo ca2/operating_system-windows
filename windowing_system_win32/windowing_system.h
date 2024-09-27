@@ -51,7 +51,7 @@ namespace windowing_system_win32
       virtual void _set_system_dark_mode1(bool bSet = true);
       virtual void _set_app_dark_mode1(bool bSet = true);
 
-
+      void on_start_system() override;
 
    };
 

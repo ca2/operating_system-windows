@@ -48,6 +48,10 @@
 CLASS_DECL_ACME void acme_set_main_hwnd(HWND hwnd);
 CLASS_DECL_ACME HWND acme_get_main_hwnd();
 
+//CLASS_DECL_ACME void nano_graphics_win32_factory(::factory::factory * pfactory);
+//CLASS_DECL_ACME extern "C" void nano_user_win32_factory(::factory::factory * pfactory);
+
+
 //
 //#if defined(_WIN32)
 //#  ifndef NOMINMAX
@@ -4675,6 +4679,12 @@ namespace acme_windows
          return "sapi";
 
       }
+      else if (scopedstrComponentName == "nano_graphics")
+      {
+
+         return "gdi";
+
+      }
 
       return ::acme_windows_common::node::default_component_implementation(scopedstrComponentName);
 
@@ -4939,6 +4949,36 @@ namespace acme_windows
       auto pfactory = system()->factory("windowing_system", "win32");
 
       pfactory->merge_to_global_factory();
+
+   }
+
+
+   bool node::defer_component_factory(const ::scoped_string & scopedstrComponent)
+   {
+
+      //if (scopedstrComponent == "nano_graphics")
+      //{
+
+
+      //   auto pfactory = this->factory();
+
+      //   nano_graphics_win32_factory(pfactory);
+
+      //   return true;
+
+      //}
+
+
+      if (acme_windows_common::node::defer_component_factory(scopedstrComponent))
+      {
+
+
+         return true;
+
+      }
+
+      return false;
+
 
    }
 

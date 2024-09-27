@@ -371,6 +371,17 @@ namespace windowing_system_win32
    }
 
 
+
+   void windowing_system::on_start_system()
+   {
+
+      auto * psystem = this->system();
+
+      psystem->on_branch_system_from_main_thread_startup();
+
+   }
+
+
 } // namespace windowing_system_win32
 
 

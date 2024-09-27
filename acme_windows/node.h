@@ -368,6 +368,9 @@ namespace acme_windows
       bool _is_visual_studio_code_installed() override;
 
       void do_windowing_system_factory() override;
+      
+      
+      bool defer_component_factory(const ::scoped_string & scopedstrComponent) override;
 
 
    };
