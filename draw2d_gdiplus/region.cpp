@@ -2,8 +2,8 @@
 #include "region.h"
 #include "graphics.h"
 #include "acme/exception/interface_only.h"
-#include "acme/primitive/geometry2d/item.h"
-#include "acme/primitive/geometry2d/_defer_item.h"
+#include "acme/prototype/geometry2d/item.h"
+#include "acme/prototype/geometry2d/_defer_item.h"
 
 
 #undef new

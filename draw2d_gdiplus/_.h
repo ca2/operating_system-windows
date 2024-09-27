@@ -15,7 +15,7 @@
 
 #include "aura/graphics/draw2d/color_matrix.h"
 
-#include "acme/primitive/geometry2d/_collection.h"
+#include "acme/prototype/geometry2d/_collection.h"
 
 
 inline void copy(Gdiplus::ColorMatrix & a, const color_matrix & b)

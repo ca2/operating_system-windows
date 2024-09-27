@@ -6,7 +6,7 @@
 #include "destination.h"
 #include "acme/exception/exception.h"
 #include "acme/platform/context.h"
-#include "acme/primitive/text/text.h"
+#include "acme/prototype/text/text.h"
 #include "audio-system/audio_mixer/callback.h"
 #include "audio-system/audio_mixer/user/level_control.h"
 #include "audio-system/audio_mixer/control_data_volume.h"

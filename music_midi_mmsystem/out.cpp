@@ -4,7 +4,7 @@
 #include "multimedia_mmsystem/translation.h"
 #include "acme/exception/exception.h"
 #include "acme/parallelization/synchronous_lock.h"
-#include "acme/primitive/primitive/memory.h"
+#include "acme/prototype/prototype/memory.h"
 #include "acme_windows/mmresult.h"
 #include "app-veriwell/multimedia/music/midi/midi.h"
 

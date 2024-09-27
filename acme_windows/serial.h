@@ -37,7 +37,7 @@
 
 
 #include "acme/platform/serial.h"
-#include "acme/primitive/primitive/pointer.h"
+#include "acme/prototype/prototype/pointer.h"
 
 
 #include "acme/_operating_system.h"

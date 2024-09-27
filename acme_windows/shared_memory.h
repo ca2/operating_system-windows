@@ -1,7 +1,7 @@
 #pragma once
 
 
-#include "acme/primitive/primitive/memory_base.h"
+#include "acme/prototype/prototype/memory_base.h"
 #include "acme/_operating_system.h"
 
 

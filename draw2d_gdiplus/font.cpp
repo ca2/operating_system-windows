@@ -3,7 +3,7 @@
 #include "draw2d.h"
 #include "acme/exception/exception.h"
 #include "acme/parallelization/synchronous_lock.h"
-#include "acme/primitive/string/international.h"
+#include "acme/prototype/string/international.h"
 #include "aura/graphics/write_text/fonts.h"
 
 

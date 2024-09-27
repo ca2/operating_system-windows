@@ -7,7 +7,7 @@
 #include "acme/platform/application.h"
 #include "acme/platform/system.h"
 #include "acme/parallelization/manual_reset_event.h"
-#include "acme/primitive/geometry2d/size.h"
+#include "acme/prototype/geometry2d/size.h"
 #include "acme/operating_system/windows/nano/user/user.h"
 #include "acme/user/user/mouse.h"
 
@@ -495,7 +495,7 @@ namespace innate_ui_win32
 
       //pnanouserWindows->_defer_show_system_menu(m_hwnd, &m_hmenuSystem, pointAbsolute);
 
-      _defer_show_system_menu(pmouse->m_pointAbsolute);
+      _defer_show_system_menu(pmouse);
 
    }
 

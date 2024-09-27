@@ -1,10 +1,10 @@
 #pragma once
 
 
-#include "acme/primitive/collection/array.h"
-#include "acme/primitive/collection/comparable_eq_array.h"
-#include "acme/primitive/collection/comparable_array.h"
-#include "acme/primitive/collection/pointer_array.h"
+#include "acme/prototype/collection/array.h"
+#include "acme/prototype/collection/comparable_eq_array.h"
+#include "acme/prototype/collection/comparable_array.h"
+#include "acme/prototype/collection/pointer_array.h"
 
 
 #include "acme/_operating_system.h"

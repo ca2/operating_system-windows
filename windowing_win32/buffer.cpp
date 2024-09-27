@@ -11,7 +11,7 @@
 #include "acme/exception/exception.h"
 #include "acme/parallelization/mutex.h"
 #include "acme/parallelization/task.h"
-#include "acme/primitive/geometry2d/_text_stream.h"
+#include "acme/prototype/geometry2d/_text_stream.h"
 #include "aura/graphics/draw2d/draw2d.h"
 #include "aura/graphics/image/image.h"
 #include "aura/platform/system.h"

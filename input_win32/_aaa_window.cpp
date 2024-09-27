@@ -16,7 +16,7 @@
 #include "acme/exception/interface_only.h"
 #include "acme/parallelization/synchronous_lock.h"
 #include "acme/platform/node.h"
-#include "acme/primitive/geometry2d/_text_stream.h"
+#include "acme/prototype/geometry2d/_text_stream.h"
 #include "aura_windows/interaction_impl.h"
 #include "aura/graphics/draw2d/graphics.h"
 #include "aura/graphics/graphics/graphics.h"

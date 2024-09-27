@@ -6,8 +6,8 @@
 #include "acme/parallelization/synchronous_lock.h"
 #include "acme/platform/application.h"
 #include "acme/platform/node.h"
-#include "acme/primitive/datetime/datetime.h"
-#include "acme/primitive/string/str.h"
+#include "acme/prototype/datetime/datetime.h"
+#include "acme/prototype/string/str.h"
 #include "registry.h"
 
 ///******************************************************************************\

@@ -1,7 +1,7 @@
 #pragma once
 
 
-#include "acme/primitive/primitive/particle.h"
+#include "acme/prototype/prototype/particle.h"
 #include "acme/_operating_system.h"
 
 

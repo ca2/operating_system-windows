@@ -9,7 +9,7 @@
 
 
 #include "acme_windows_common/node.h"
-#include "acme/primitive/collection/numeric_array.h"
+#include "acme/prototype/collection/numeric_array.h"
 #include "acme/_operating_system.h"
 
 
@@ -63,7 +63,7 @@ namespace acme_windows
       virtual bool win32_registry_windows_darkness();
 
 
-      bool dark_mode() const override;
+      //bool dark_mode() const override;
 
 
       ::file::path get_default_base_integration_folder() override;
@@ -71,7 +71,7 @@ namespace acme_windows
       virtual ::color::color reinterpreted_windows_darkness_background_color();
 
 
-      void fetch_user_color() override;
+      //void fetch_user_color() override;
 
 
       virtual void install_crash_dump_reporting(const string & strModuleNameWithTheExeExtension) override;

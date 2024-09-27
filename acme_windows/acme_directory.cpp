@@ -7,8 +7,8 @@
 #include "acme/operating_system/process.h"
 #include "acme/platform/context.h"
 #include "acme/platform/node.h"
-#include "acme/primitive/string/adaptor.h"
-#include "acme/primitive/string/str.h"
+#include "acme/prototype/string/adaptor.h"
+#include "acme/prototype/string/str.h"
 #include "acme_windows_common/cotaskptr.h"
 #include "acme_windows_common/hresult_exception.h"
 

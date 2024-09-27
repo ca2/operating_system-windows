@@ -4,7 +4,7 @@
 #include "acme/exception/exception.h"
 #include "acme/parallelization/synchronous_lock.h"
 #include "acme/platform/debug.h"
-#include "acme/primitive/string/international.h"
+#include "acme/prototype/string/international.h"
 #include "aura/graphics/image/image.h"
 
 

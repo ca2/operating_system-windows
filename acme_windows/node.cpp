@@ -22,12 +22,12 @@
 #include "acme/parallelization/synchronous_lock.h"
 #include "acme/platform/scoped_restore.h"
 #include "acme/platform/system.h"
-#include "acme/primitive/primitive/memory.h"
-#include "acme/primitive/string/__wide.h"
-#include "acme/primitive/string/str.h"
-#include "acme/primitive/string/adaptor.h"
-#include "acme/primitive/string/international.h"
-#include "acme/primitive/string/str.h"
+#include "acme/prototype/prototype/memory.h"
+#include "acme/prototype/string/__wide.h"
+#include "acme/prototype/string/str.h"
+#include "acme/prototype/string/adaptor.h"
+#include "acme/prototype/string/international.h"
+#include "acme/prototype/string/str.h"
 
 
 #include "acme/_operating_system.h"

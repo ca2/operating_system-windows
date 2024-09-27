@@ -1,9 +1,9 @@
 #pragma once
 
 
-#include "acme/primitive/collection/pointer_array.h"
-#include "acme/primitive/primitive/particle.h"
-#include "acme/primitive/primitive/pointer.h"
+#include "acme/prototype/collection/pointer_array.h"
+#include "acme/prototype/prototype/particle.h"
+#include "acme/prototype/prototype/pointer.h"
 
 
 #include "acme/_operating_system.h"
