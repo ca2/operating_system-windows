@@ -360,18 +360,6 @@ namespace acme_windows
    }
 
 
-   bool node::dark_mode() const
-   {
-
-      auto pthis = (node*)this;
-
-      auto bDarkMode = pthis->win32_registry_windows_darkness();
-
-      return bDarkMode;
-
-
-   }
-
 
    ::file::path node::get_default_base_integration_folder()
    {

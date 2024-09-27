@@ -213,6 +213,18 @@ namespace windowing_system_win32
 //
 //    }
 
+   bool windowing_system::dark_mode()
+   {
+
+      auto pthis = (node *)this;
+
+      auto bDarkMode = pthis->win32_registry_windows_darkness();
+
+      return bDarkMode;
+
+
+   }
+
 
 } // namespace windowing_system_win32
 
