@@ -37,7 +37,7 @@ namespace windowing_system_win32
 //   void x11_display_error_trap_pop_ignored(int i) override;
 
       bool dark_mode() override;
-
+      void fetch_system_background_color() override;
 
    };
 

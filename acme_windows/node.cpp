@@ -384,25 +384,7 @@ namespace acme_windows
    }
 
 
-   void node::fetch_user_color()
-   {
 
-      //DWORD dwBackgroundWindowColor = ::GetSysColor(COLOR_WINDOW);
-
-      //auto colorWindowBackground = argb(255, GetRValue(dwBackgroundWindowColor), GetGValue(dwBackgroundWindowColor), GetBValue(dwBackgroundWindowColor));
-
-      auto colorWindowBackground = reinterpreted_windows_darkness_background_color();
-
-      string str;
-
-      str.formatf("\n\n\nWindow Background Color rgb(%d,%d,%d)\n\n", colorWindowBackground.m_u8Red, colorWindowBackground.m_u8Green, colorWindowBackground.m_u8Blue);
-
-      ::output_debug_string(str);
-
-      system()->background_color(colorWindowBackground);
-
-
-   }
 
 
    //   string node::get_user_name()
