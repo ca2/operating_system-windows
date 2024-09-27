@@ -312,9 +312,9 @@ namespace windowing_win32
       //
       //#endif   // WINVER >= 0x0500
 
-      virtual lresult send_message(const ::atom & atom, wparam wParam = 0, lparam lParam = nullptr) override;
+      lresult send_message(const ::atom & atom, wparam wParam = 0, lparam lParam = nullptr) override;
 
-      virtual bool post_message(const ::atom & atom, wparam wParam = 0, lparam lParam = nullptr) override;
+      void post_message(const ::atom & atom, wparam wParam = 0, lparam lParam = nullptr) override;
 
 
       //bool SendNotifyMessage(::u32 message, wparam wParam, lparam lParam);
@@ -463,7 +463,7 @@ namespace windowing_win32
 
             // Window State Functions
       virtual bool is_this_enabled();
-      virtual bool enable_window(bool bEnable = true);
+      virtual void enable_window(bool bEnable = true);
 
       // the active interaction_impl applies only to top-level (frame windows)
       //virtual ::user::interaction * get_active_window();

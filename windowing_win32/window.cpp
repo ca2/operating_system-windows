@@ -22,6 +22,7 @@
 #include "acme/parallelization/synchronous_lock.h"
 #include "acme/platform/node.h"
 #include "acme/prototype/geometry2d/_text_stream.h"
+#include "acme/windowing_system/windowing_system.h"
 #include "aura_windows/interaction_impl.h"
 #include "aura/graphics/draw2d/graphics.h"
 #include "aura/graphics/graphics/graphics.h"
@@ -690,9 +691,11 @@ namespace windowing_win32
          else if (pmessage->m_atom == WM_SETTINGCHANGE && strLparamString == "ImmersiveColorSet")
          {
 
-            auto pnode = system()->m_pnode;
+            //auto pnode = system()->m_pnode;
 
-            pnode->fetch_user_color();
+            //pnode->fetch_user_color();
+
+            system()->windowing_system()->fetch_system_background_color();
 
          }
          else if (pmessage->m_atom == e_message_display_change ||
@@ -3801,7 +3804,7 @@ namespace windowing_win32
    }
 
 
-   bool window::post_message(const ::atom & atom, wparam wParam, lparam lParam)
+   void window::post_message(const ::atom & atom, wparam wParam, lparam lParam)
    {
 
       HWND hwnd = get_hwnd();
@@ -3810,7 +3813,14 @@ namespace windowing_win32
 
       wparam wparam = wParam;
 
-      return ::PostMessage(hwnd, message, wparam, lParam.m_lparam) != false;
+      BOOL bOk = ::PostMessage(hwnd, message, wparam, lParam.m_lparam);
+
+      if (!bOk)
+      {
+
+         throw ::exception(error_failed);
+
+      }
 
    }
 
@@ -4290,10 +4300,24 @@ namespace windowing_win32
    }
 
 
-   bool window::enable_window(bool bEnable)
+   void window::enable_window(bool bEnable)
    {
 
-      return ::EnableWindow(get_hwnd(), bEnable) != false;
+      BOOL bStateOk = ::EnableWindow(get_hwnd(), bEnable);
+
+
+      if (is_different(bStateOk, bEnable))
+      {
+
+         debugf("EnableWindow has change enabled state");
+
+      }
+      else
+      {
+
+         debugf("EnableWindow hasn't change enabled state");
+
+      }
 
    }
 
@@ -7271,7 +7295,7 @@ namespace windowing_win32
 
       //pnanouserWindows->_defer_show_system_menu(hwnd, &m_hmenuSystem, pointAbsolute);
 
-      _defer_show_system_menu(pmouse->m_pointAbsolute);
+      _defer_show_system_menu(pmouse);
 
    }
 
