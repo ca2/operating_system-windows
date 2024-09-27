@@ -298,67 +298,6 @@ namespace acme_windows
    }
 
 
-   bool node::win32_registry_windows_dark_mode_for_app()
-   {
-
-      try
-      {
-
-         ::acme_windows::registry::key key;
-
-         key.open(HKEY_CURRENT_USER, "Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize");
-
-         DWORD dwAppUseLightTheme = 0;
-
-         key._get("AppsUseLightTheme", dwAppUseLightTheme);
-
-         return dwAppUseLightTheme == 0;
-
-      }
-      catch (...)
-      {
-
-         return false;
-
-      }
-
-   }
-
-
-   bool node::win32_registry_windows_dark_mode_for_system()
-   {
-
-      try
-      {
-
-         ::acme_windows::registry::key key;
-
-         key.open(HKEY_CURRENT_USER, "Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize");
-
-         DWORD dwSystemUseLightTheme = 0;
-
-         key._get("SystemUsesLightTheme", dwSystemUseLightTheme);
-
-         return dwSystemUseLightTheme == 0;
-
-      }
-      catch (...)
-      {
-
-         return false;
-
-      }
-
-   }
-
-
-   bool node::win32_registry_windows_darkness()
-   {
-
-      return win32_registry_windows_dark_mode_for_app() || win32_registry_windows_dark_mode_for_system();
-
-   }
-
 
 
    ::file::path node::get_default_base_integration_folder()

@@ -216,7 +216,7 @@ namespace windowing_system_win32
    bool windowing_system::dark_mode()
    {
 
-      auto pthis = (node *)this;
+      auto pthis = (windowing_system *)this;
 
       auto bDarkMode = pthis->win32_registry_windows_darkness();
 
@@ -224,6 +224,69 @@ namespace windowing_system_win32
 
 
    }
+
+
+   bool windowing_system::_win32_registry_windows_dark_mode_for_app()
+   {
+
+      try
+      {
+
+         ::acme_windows::registry::key key;
+
+         key.open(HKEY_CURRENT_USER, "Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize");
+
+         DWORD dwAppUseLightTheme = 0;
+
+         key._get("AppsUseLightTheme", dwAppUseLightTheme);
+
+         return dwAppUseLightTheme == 0;
+
+      }
+      catch (...)
+      {
+
+         return false;
+
+      }
+
+   }
+
+
+   bool windowing_system::_win32_registry_windows_dark_mode_for_system()
+   {
+
+      try
+      {
+
+         ::acme_windows::registry::key key;
+
+         key.open(HKEY_CURRENT_USER, "Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize");
+
+         DWORD dwSystemUseLightTheme = 0;
+
+         key._get("SystemUsesLightTheme", dwSystemUseLightTheme);
+
+         return dwSystemUseLightTheme == 0;
+
+      }
+      catch (...)
+      {
+
+         return false;
+
+      }
+
+   }
+
+
+   bool windowing_system::_win32_registry_windows_darkness()
+   {
+
+      return win32_registry_windows_dark_mode_for_app() || win32_registry_windows_dark_mode_for_system();
+
+   }
+
 
 
    void windowing_system::fetch_system_background_color()

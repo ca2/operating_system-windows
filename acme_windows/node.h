@@ -58,10 +58,6 @@ namespace acme_windows
       void shell_open(const ::file::path & path, const ::string & strParams = "", const ::file::path & pathFolder = "") override;
 
 
-      virtual bool win32_registry_windows_dark_mode_for_app();
-      virtual bool win32_registry_windows_dark_mode_for_system();
-      virtual bool win32_registry_windows_darkness();
-
 
       //bool dark_mode() const override;
 

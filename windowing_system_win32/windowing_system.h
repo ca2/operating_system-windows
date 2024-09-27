@@ -39,6 +39,13 @@ namespace windowing_system_win32
       bool dark_mode() override;
       void fetch_system_background_color() override;
 
+
+      virtual bool _win32_registry_windows_dark_mode_for_app();
+      virtual bool _win32_registry_windows_dark_mode_for_system();
+      virtual bool _win32_registry_windows_darkness();
+
+
+
    };
 
 
