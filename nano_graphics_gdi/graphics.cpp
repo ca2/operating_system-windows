@@ -4,8 +4,25 @@
 #include "framework.h"
 #include "graphics.h"
 #include "acme/platform/application.h"
+#include <objidl.h>  // For IStream
+#include <gdiplus.h> // For GDI+
+#pragma comment (lib, "gdiplus.lib")
+#pragma comment (lib, "ole32.lib") // For CreateStreamOnHGlobal
 
+using namespace Gdiplus;
 
+// Function to initialize GDI+
+void InitGDIPlus(ULONG_PTR * gdiplusToken)
+{
+   GdiplusStartupInput gdiplusStartupInput;
+   GdiplusStartup(gdiplusToken, &gdiplusStartupInput, NULL);
+}
+
+// Function to shutdown GDI+
+void ShutdownGDIPlus(ULONG_PTR gdiplusToken)
+{
+   GdiplusShutdown(gdiplusToken);
+}
 namespace windows
 {
 
@@ -19,15 +36,21 @@ namespace windows
       {
 
 
+
          graphics::graphics()
          {
 
+            gdiplusToken = 0;
+
+            InitGDIPlus(&gdiplusToken);
 
          }
 
 
          graphics::~graphics()
          {
+            
+            ShutdownGDIPlus(gdiplusToken);
 
          }
 

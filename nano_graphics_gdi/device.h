@@ -46,6 +46,9 @@ namespace windows
             void rectangle(const ::rectangle_i32& rectangle, ::nano::graphics::brush* pnanobrush, ::nano::graphics::pen* pnanopen) override;
 
 
+            void draw(::nano::graphics::icon * picon, int x, int y, int cx, int cy) override;
+
+
          };
 
 

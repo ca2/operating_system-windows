@@ -26,7 +26,7 @@ namespace windows
          {
          public:
 
-
+            ULONG_PTR gdiplusToken;
             graphics();
             ~graphics() override;
 

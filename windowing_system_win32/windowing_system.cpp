@@ -377,7 +377,7 @@ namespace windowing_system_win32
 
       auto * psystem = this->system();
 
-      psystem->on_branch_system_from_main_thread_startup();
+      psystem->defer_post_initial_request();
 
    }
 

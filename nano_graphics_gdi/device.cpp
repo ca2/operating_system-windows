@@ -5,12 +5,13 @@
 #include "device.h"
 #include "brush.h"
 #include "font.h"
+#include "icon.h"
 #include "pen.h"
 #include "acme/prototype/geometry2d/size.h"
 #include "acme/prototype/geometry2d/rectangle.h"
 ////#include "acme/exception/exception.h"
-
-
+#pragma comment(lib, "Msimg32.lib")
+#include <gdiplus.h>
 int align_to_windows_draw_text_align(enum_align ealign);
 
 int draw_text_to_windows_draw_text(enum_draw_text edrawtext);
@@ -137,6 +138,49 @@ namespace windows
                rectangle.right(),
                rectangle.bottom());
 
+
+         }
+
+
+         void device::draw(::nano::graphics::icon * picon, int x, int y, int cx, int cy)
+         {
+
+
+
+            ::pointer < ::windows::nano::graphics::icon > pwindowsicon = picon;
+
+            Gdiplus::Graphics g(m_hdc);
+
+            Gdiplus::Rect r;
+
+            r.X = x;
+            r.Y = y;
+            r.Width = cx;
+            r.Height = cy;
+
+            g.DrawImage(pwindowsicon->m_pimage, r);
+            //)
+
+            //HDC hdcMem = ::CreateCompatibleDC(m_hdc);
+
+            //HBITMAP hOldBitmap = (HBITMAP)SelectObject(hdcMem, pwindowsicon->m_hgdiobj);
+
+            //// Step 3: Use BitBlt to copy the bitmap from the memory DC to the destination DC
+            //    // Set up the BLENDFUNCTION structure for alpha blending
+            //BLENDFUNCTION blendFunction;
+            //blendFunction.BlendOp = AC_SRC_OVER;
+            //blendFunction.BlendFlags = 0;
+            //blendFunction.SourceConstantAlpha = 255;  // Use full opacity
+            //blendFunction.AlphaFormat = AC_SRC_ALPHA; // The source bitmap has an alpha channel
+
+            //// Step 3: Use AlphaBlend to copy the bitmap from the memory DC to the destination DC
+            //AlphaBlend(m_hdc, x, y, cx, cy, hdcMem, 0, 0, cx, cy, blendFunction);
+
+
+            //// Step 4: Restore the old bitmap in the memory DC
+            //SelectObject(hdcMem, hOldBitmap);
+
+            //::DeleteDC(hdcMem);
 
          }
 

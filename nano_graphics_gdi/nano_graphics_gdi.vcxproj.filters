@@ -25,6 +25,9 @@
     <ClInclude Include="pen.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="icon.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Header Files">
@@ -63,6 +66,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="pen.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="icon.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
