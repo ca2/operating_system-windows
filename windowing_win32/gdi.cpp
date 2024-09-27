@@ -70,7 +70,7 @@ namespace windows
 
       int iStrideDst = dwWidth * sizeof(::image32_t);
 
-      ::copy_image32((::image32_t *)pBits, pimage->width(), pimage->height(), iStrideDst, pimage->get_data(), pimage->scan_size());
+      ((::image32_t *)pBits)->copy(pimage->size(), iStrideDst, pimage->get_data(), pimage->scan_size());
 
       return hBitmap;
 
@@ -151,7 +151,7 @@ namespace windows
 
       }
 
-      ::copy_image32(ppixmap, &pixmap);
+      ppixmap->copy(&pixmap);
 
       return hbitmap;
 

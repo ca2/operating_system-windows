@@ -570,7 +570,7 @@ namespace windowing_win32
 
          pbufferitem->m_pimage2->map();
 
-         ::copy_image32(playeredwindowbuffer->m_pixmap, sizeLayeredWindowBuffer, pbufferitem->m_pimage2);
+         playeredwindowbuffer->m_pixmap.copy(sizeLayeredWindowBuffer, pbufferitem->m_pimage2);
 
       }
 

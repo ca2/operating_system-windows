@@ -177,13 +177,13 @@ bool IsDibSection(HBITMAP bmp)
          if (h < 0)
          {
          
-            ::vertical_swap_copy_image32(pimage->data(), pimage->width(), pimage->height(), pimage->scan_size(), (const image32_t *)pBits, iStride);
+            pimage->data()->vertical_swap_copy(pimage->size(), pimage->scan_size(), (const image32_t *)pBits, iStride);
 
          }
          else
          {
 
-            ::copy_image32(pimage->data(), pimage->width(), pimage->height(), pimage->scan_size(), (const image32_t *)pBits, iStride);
+            pimage->data()->copy(pimage->size(), pimage->scan_size(), (const image32_t *)pBits, iStride);
 
          }
 
