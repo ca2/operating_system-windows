@@ -53,6 +53,10 @@ namespace windowing_system_win32
 
       void on_start_system() override;
 
+
+      void windowing_system_post_quit() override;
+
+
    };
 
 

@@ -382,6 +382,20 @@ namespace windowing_system_win32
    }
 
 
+   void windowing_system::windowing_system_post_quit()
+   {
+
+      main_post([this]()
+         {
+
+            ::PostQuitMessage(0);
+
+});
+
+   }
+
+
+
 } // namespace windowing_system_win32
 
 
