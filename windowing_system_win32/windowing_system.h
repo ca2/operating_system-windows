@@ -36,6 +36,9 @@ namespace windowing_system_win32
 //   void x11_display_error_trap_push(int i) override;
 //   void x11_display_error_trap_pop_ignored(int i) override;
 
+      void set_dark_mode(bool bDarkMode) override;
+
+
       bool dark_mode() override;
       void fetch_system_background_color() override;
 
@@ -43,6 +46,10 @@ namespace windowing_system_win32
       virtual bool _win32_registry_windows_dark_mode_for_app();
       virtual bool _win32_registry_windows_dark_mode_for_system();
       virtual bool _win32_registry_windows_darkness();
+
+
+      virtual void _set_system_dark_mode1(bool bSet = true);
+      virtual void _set_app_dark_mode1(bool bSet = true);
 
 
 

@@ -64,7 +64,7 @@ namespace acme_windows
 
       ::file::path get_default_base_integration_folder() override;
 
-      virtual ::color::color reinterpreted_windows_darkness_background_color();
+      //virtual ::color::color reinterpreted_windows_darkness_background_color();
 
 
       //void fetch_user_color() override;

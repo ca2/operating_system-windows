@@ -308,19 +308,19 @@ namespace acme_windows
    }
 
 
-   ::color::color node::reinterpreted_windows_darkness_background_color()
-   {
+   //::color::color node::reinterpreted_windows_darkness_background_color()
+   //{
 
-      if (win32_registry_windows_darkness())
-      {
+   //   if (_win32_registry_windows_darkness())
+   //   {
 
-         return ::color::black;
+   //      return ::color::black;
 
-      }
+   //   }
 
-      return ::color::white;
+   //   return ::color::white;
 
-   }
+   //}
 
 
 

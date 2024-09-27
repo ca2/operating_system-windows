@@ -400,47 +400,6 @@ namespace apex_windows
 
 
 
-   void node::set_system_dark_mode1(bool bSet)
-   {
-
-      ::acme_windows::registry::key key(HKEY_CURRENT_USER, "Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize", true);
-
-      ::u32 dwSystemUseLightTheme;
-      if (bSet)
-      {
-         dwSystemUseLightTheme = 0;
-      }
-      else
-      {
-         dwSystemUseLightTheme = 1;
-      }
-
-      key._set("SystemUsesLightTheme", dwSystemUseLightTheme);
-      //         return ::success;
-
-   }
-
-
-   void node::set_app_dark_mode1(bool bSet)
-   {
-
-      ::acme_windows::registry::key key(HKEY_CURRENT_USER, "Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize", true);
-
-      ::u32 dwAppsUseLightTheme;
-      if (bSet)
-      {
-         dwAppsUseLightTheme = 0;
-      }
-      else
-      {
-         dwAppsUseLightTheme = 1;
-      }
-
-      key._set("AppsUseLightTheme", dwAppsUseLightTheme);
-
-      //return ::success;
-
-   }
 
 
    double node::get_time_zone()
@@ -3404,19 +3363,6 @@ namespace apex_windows
    }
 
 
-   void node::set_dark_mode(bool bDarkMode)
-   {
-
-      set_system_dark_mode1(bDarkMode);
-
-      set_app_dark_mode1(bDarkMode);
-
-      DWORD_PTR res;
-      SendMessageTimeout(HWND_BROADCAST, WM_SETTINGCHANGE, 0, (LPARAM)TEXT("ImmersiveColorSet"), 0, 1000, &res);
-
-      //return ::success;
-
-   }
 
 
    //void node::set_system_dark_mode1(bool bSet)

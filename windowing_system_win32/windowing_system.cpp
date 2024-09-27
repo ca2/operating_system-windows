@@ -8,6 +8,8 @@
 #include "acme/parallelization/manual_reset_event.h"
 #include "acme/platform/node.h"
 #include "acme/platform/system.h"
+#include "acme/_operating_system.h"
+#include "acme_windows/registry.h"
 //#include <X11/Xatom.h>
 //#include <xkbcommon/xkbcommon.h>
 //#include <X11/XKBlib.h>
@@ -218,7 +220,7 @@ namespace windowing_system_win32
 
       auto pthis = (windowing_system *)this;
 
-      auto bDarkMode = pthis->win32_registry_windows_darkness();
+      auto bDarkMode = pthis->_win32_registry_windows_darkness();
 
       return bDarkMode;
 
@@ -283,7 +285,8 @@ namespace windowing_system_win32
    bool windowing_system::_win32_registry_windows_darkness()
    {
 
-      return win32_registry_windows_dark_mode_for_app() || win32_registry_windows_dark_mode_for_system();
+      return _win32_registry_windows_dark_mode_for_app() 
+         ||  _win32_registry_windows_dark_mode_for_system();
 
    }
 
@@ -296,7 +299,7 @@ namespace windowing_system_win32
 
       //auto colorWindowBackground = argb(255, GetRValue(dwBackgroundWindowColor), GetGValue(dwBackgroundWindowColor), GetBValue(dwBackgroundWindowColor));
 
-      auto colorWindowBackground = reinterpreted_windows_darkness_background_color();
+      auto colorWindowBackground = reinterpreted_background_color();
 
       string str;
 
@@ -308,6 +311,65 @@ namespace windowing_system_win32
 
 
    }
+
+
+   void windowing_system::set_dark_mode(bool bDarkMode)
+   {
+
+      _set_system_dark_mode1(bDarkMode);
+
+      _set_app_dark_mode1(bDarkMode);
+
+      DWORD_PTR res;
+      SendMessageTimeout(HWND_BROADCAST, WM_SETTINGCHANGE, 0, (LPARAM)TEXT("ImmersiveColorSet"), 0, 1000, &res);
+
+      //return ::success;
+
+   }
+
+
+   void windowing_system::_set_system_dark_mode1(bool bSet)
+   {
+
+      ::acme_windows::registry::key key(HKEY_CURRENT_USER, "Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize", true);
+
+      ::u32 dwSystemUseLightTheme;
+      if (bSet)
+      {
+         dwSystemUseLightTheme = 0;
+      }
+      else
+      {
+         dwSystemUseLightTheme = 1;
+      }
+
+      key._set("SystemUsesLightTheme", dwSystemUseLightTheme);
+      //         return ::success;
+
+   }
+
+
+   void windowing_system::_set_app_dark_mode1(bool bSet)
+   {
+
+      ::acme_windows::registry::key key(HKEY_CURRENT_USER, "Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize", true);
+
+      ::u32 dwAppsUseLightTheme;
+      if (bSet)
+      {
+         dwAppsUseLightTheme = 0;
+      }
+      else
+      {
+         dwAppsUseLightTheme = 1;
+      }
+
+      key._set("AppsUseLightTheme", dwAppsUseLightTheme);
+
+      //return ::success;
+
+   }
+
 
 } // namespace windowing_system_win32
 
