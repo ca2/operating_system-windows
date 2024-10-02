@@ -58,20 +58,9 @@ namespace windowing_win32
 
       ::hardware::devices::on_initialize_particle();
 
-      auto psession = session()->m_paurasession;
+      ::pointer < ::windowing_win32::windowing > pwin32windowing = user()->windowing();
 
-      auto puser = psession->user();
-
-      if (!puser->windowing())
-      {
-
-         puser->create_windowing();
-
-      }
-
-      auto pwindowing = (::windowing_win32::windowing*)puser->m_pwindowing->m_pWindowing4;
-
-      auto psysteminteraction = pwindowing->system_interaction();
+      auto psysteminteraction = pwin32windowing->system_interaction();
 
       m_hwnd = (HWND) psysteminteraction->oswindow();
 
