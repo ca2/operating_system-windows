@@ -127,7 +127,7 @@ namespace windowing_win32
 
 
 
-      bool has_mouse_capture() const override;
+      bool has_mouse_capture() override;
       bool has_keyboard_focus() const override;
 
 

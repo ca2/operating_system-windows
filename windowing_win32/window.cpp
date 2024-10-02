@@ -1811,7 +1811,7 @@ namespace windowing_win32
    }
 
 
-   bool window::has_mouse_capture() const
+   bool window::has_mouse_capture()
    {
 
       itask_t itask = get_itask();

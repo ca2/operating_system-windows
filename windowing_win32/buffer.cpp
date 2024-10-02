@@ -874,7 +874,7 @@ namespace windowing_win32
             try
             {
 
-               pwindow->full_set_window_position_unlocked();
+               pwindow->set_window_position_unlocked();
 
             }
             catch (...)
