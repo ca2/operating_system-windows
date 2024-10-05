@@ -4,7 +4,7 @@
 #pragma once
 
 
-#include "acme/windowing_system/windowing_system.h"
+#include "acme/windowing/windowing_base.h"
 
 
 namespace windowing_system_win32
@@ -12,7 +12,7 @@ namespace windowing_system_win32
 
 
    class CLASS_DECL_WINDOWING_SYSTEM_WIN32 windowing_system :
-           virtual public ::windowing_system::windowing_system
+           virtual public ::windowing::windowing_base
    {
    public:
 

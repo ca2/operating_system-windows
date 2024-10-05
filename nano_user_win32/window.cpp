@@ -9,7 +9,7 @@
 #include "acme/nano/user/message_box.h"
 #include "acme/platform/system.h"
 #include "acme/user/user/mouse.h"
-#include "acme/windowing_system/windowing_system.h"
+#include "acme/windowing/windowing_base.h"
 
 
 CLASS_DECL_ACME bool _c_simple_message_loop_step();
@@ -698,7 +698,7 @@ namespace windows
             //   break;
             case WM_DESTROY:
                //PostQuitMessage(0);
-               system()->windowing_system()->m_windowbasea.erase(this);
+               system()->windowing_base()->m_windowbasea.erase(this);
                break;
             case WM_CREATE:
             {
@@ -1008,7 +1008,7 @@ namespace windows
 
                   ::DestroyWindow(m_hwnd);
 
-                  system()->windowing_system()->process_messages();
+                  system()->windowing_base()->process_messages();
 
                });
 

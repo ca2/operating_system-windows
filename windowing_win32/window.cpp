@@ -22,7 +22,7 @@
 #include "acme/parallelization/synchronous_lock.h"
 #include "acme/platform/node.h"
 #include "acme/prototype/geometry2d/_text_stream.h"
-#include "acme/windowing_system/windowing_system.h"
+#include "acme/windowing/windowing_base.h"
 #include "aura_windows/interaction_impl.h"
 #include "aura/graphics/draw2d/graphics.h"
 #include "aura/graphics/graphics/graphics.h"
@@ -695,7 +695,7 @@ namespace windowing_win32
 
             //pnode->fetch_user_color();
 
-            system()->windowing_system()->fetch_system_background_color();
+            system()->windowing_base()->fetch_system_background_color();
 
          }
          else if (pmessage->m_atom == e_message_display_change ||
