@@ -698,7 +698,7 @@ namespace windows
             //   break;
             case WM_DESTROY:
                //PostQuitMessage(0);
-               system()->windowing_base()->m_windowbasea.erase(this);
+               nano()->user()->m_windowbasea.erase(this);
                break;
             case WM_CREATE:
             {
@@ -1008,7 +1008,7 @@ namespace windows
 
                   ::DestroyWindow(m_hwnd);
 
-                  system()->windowing_base()->process_messages();
+                  nano()->user()->process_messages();
 
                });
 

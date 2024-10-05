@@ -123,7 +123,7 @@ namespace windowing_win32
             strLparamString == "ImmersiveColorSet")
          {
 
-            system()->windowing_base()->fetch_system_background_color();
+            nano()->user()->fetch_system_background_color();
 
             /*auto ptopic = psystem->topic(id_os_dark_mode);
 
