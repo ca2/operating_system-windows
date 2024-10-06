@@ -1172,7 +1172,7 @@ namespace windows
             if (!hwndDesktop)
             {
 
-               return ::windowing::window_base::get_main_screen_size();
+               return ::nano::windowing::window::get_main_screen_size();
 
             }
 
@@ -1197,7 +1197,7 @@ namespace windows
             else
             {
 
-               ::windowing::window_base::user_post(procedure);
+               ::nano::windowing::window::user_post(procedure);
 
             }
 

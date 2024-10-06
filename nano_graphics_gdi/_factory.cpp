@@ -20,7 +20,7 @@ IMPLEMENT_FACTORY(nano_graphics_gdi)
 {
 
 
-   //pfactory->add_factory_item < ::windows::nano::user::window, ::windowing::window_base >();
+   //pfactory->add_factory_item < ::windows::nano::user::window, ::nano::windowing::window >();
    pfactory->add_factory_item < ::windows::nano::graphics::brush, ::nano::graphics::brush >();
    pfactory->add_factory_item < ::windows::nano::graphics::font, ::nano::graphics::font >();
    pfactory->add_factory_item < ::windows::nano::graphics::pen, ::nano::graphics::pen >();

@@ -22,7 +22,7 @@ namespace windows
 
 
          class CLASS_DECL_NANO_USER_WIN32 window :
-            virtual public ::windowing::window_base,
+            virtual public ::nano::windowing::window,
             virtual public ::windows::window
          {
          public:
