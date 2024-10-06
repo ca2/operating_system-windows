@@ -2,8 +2,8 @@
 #pragma once
 
 
-#include "acme/nano/user/window_implementation.h"
-#include "acme/windowing/window_base.h"
+#include "acme/nano/windowing/window.h"
+//#include "acme/windowing/window_base.h"
 #include "acme/operating_system/windows/window.h"
 #undef USUAL_OPERATING_SYSTEM_SUPPRESSIONS
 #include "acme/_operating_system.h"

@@ -37,7 +37,7 @@ namespace aura_windows
 
       point_i32                                 m_point;
 
-      ::user::prototype* m_pbasewnd;
+      ::user::interaction_base* m_pbasewnd;
 
       u32                                       m_uiLastRedrawRequest;
 

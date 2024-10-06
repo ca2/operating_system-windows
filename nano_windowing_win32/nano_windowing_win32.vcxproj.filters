@@ -7,7 +7,7 @@
     <ClInclude Include="_.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="windowing_system.h">
+    <ClInclude Include="windowing.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -32,7 +32,7 @@
     <ClCompile Include="_.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="windowing_system.cpp">
+    <ClCompile Include="windowing.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

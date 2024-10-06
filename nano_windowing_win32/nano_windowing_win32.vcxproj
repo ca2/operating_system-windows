@@ -38,7 +38,7 @@
     <ProjectGuid>{9273D94E-BF81-41ED-9CB2-83D981450C9B}</ProjectGuid>
     <RootNamespace>platform</RootNamespace>
     <Keyword>Win32Proj</Keyword>
-    <ProjectName>windowing_system_win32</ProjectName>
+    <ProjectName>nano_windowing_win32</ProjectName>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -647,11 +647,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="_.h" />
-    <ClInclude Include="windowing_system.h" />
+    <ClInclude Include="windowing.h" />
     <ClInclude Include="framework.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="windowing_system.cpp" />
+    <ClCompile Include="windowing.cpp" />
     <ClCompile Include="_factory.cpp" />
     <ClCompile Include="framework.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

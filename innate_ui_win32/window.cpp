@@ -40,7 +40,7 @@ namespace innate_ui_win32
 
       ::wstring wstr(scopedstr);
 
-      post([this, wstr]
+      main_post([this, wstr]
       ()
          {
 
@@ -155,8 +155,7 @@ namespace innate_ui_win32
    void window::create()
    {
 
-
-      sync([this]()
+      main_send([this]()
          {
 
             _register_class();
@@ -285,7 +284,7 @@ namespace innate_ui_win32
 
       ::pointer< window > pwindowImpl = pwindow;
 
-      sync([this, pwindowImpl]()
+      main_send([this, pwindowImpl]()
          {
 
             _create_child(pwindowImpl);
@@ -340,10 +339,11 @@ namespace innate_ui_win32
 
    }
 
+
    void window::show()
    {
 
-      post([this]()
+      main_post([this]()
          {
 
             ShowWindow(m_hwnd, SW_SHOW);
@@ -366,7 +366,7 @@ namespace innate_ui_win32
 
       auto point = pointParam;
 
-      sync([this, point]()
+      main_send([this, point]()
          {
 
             auto p = point;
@@ -400,7 +400,7 @@ namespace innate_ui_win32
 
       auto size = sizeParam;
 
-      sync([this, size]()
+      main_send([this, size]()
          {
 
             ::SetWindowPos(m_hwnd, nullptr, 0, 0, size.cx(), size.cy(), SWP_NOMOVE);
@@ -419,7 +419,7 @@ namespace innate_ui_win32
 
       auto size = sizeParam;
 
-      sync([this, size]()
+      main_send([this, size]()
          {
 
             RECT r{};
@@ -444,7 +444,7 @@ namespace innate_ui_win32
    void window::center()
    {
 
-      sync([this]()
+      main_send([this]()
    {
 
 

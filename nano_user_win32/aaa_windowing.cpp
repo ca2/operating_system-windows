@@ -1,8 +1,10 @@
 //
 // Created by camilo on 2024-05-26 22:03 <3ThomasBorregaardSorensen!!
+// Merged from windowing_system_win32 to
+//     nano_user_win32 by camilo on 2024-10-05 10:17 <3ThomasBorregaardSorensen!!
 //
 #include "framework.h"
-#include "windowing_system.h"
+#include "windowing.h"
 #include "acme/nano/nano.h"
 #include "acme/nano/user/user.h"
 #include "acme/parallelization/manual_reset_event.h"
@@ -15,7 +17,7 @@
 //#include <X11/XKBlib.h>
 //#include <X11/Xutil.h>
 
-namespace windowing_system_win32
+namespace nano_user_win32
 {
 
 
@@ -396,7 +398,7 @@ namespace windowing_system_win32
 
 
 
-} // namespace windowing_system_win32
+} // namespace nano_user_win32
 
 
 

@@ -49,7 +49,8 @@ namespace innate_ui_win32
 
    }
 
-   void innate_ui::post(const ::procedure & procedure)
+   
+   void innate_ui::main_post(const ::procedure & procedure)
    {
 
       auto pparticle = (::subparticle *)procedure.m_pbase;
