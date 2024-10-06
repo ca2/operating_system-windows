@@ -54,7 +54,7 @@ IMPLEMENT_FACTORY(apex_windows)
 
 
    //add_factory_item < ::windows::buffer, ::graphics::graphics >();
-   //add_factory_item < ::windows::interaction_impl, ::user::interaction_impl >();
+   //add_factory_item < ::windows::interaction_impl, ::windowing::window >();
 
 
 

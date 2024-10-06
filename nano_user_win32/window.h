@@ -67,7 +67,7 @@ namespace windows
 
             //void on_draw(::nano::graphics::device * pnanodevice) override;
 
-            void on_char(int iChar) override;
+            //void on_char(int iChar) override;
 
             //bool is_active() override;
 
@@ -112,7 +112,7 @@ namespace windows
             void redraw() override;
 
 
-            ::point_i32 try_absolute_mouse_position(const ::point_i32& point) override;
+            //::point_i32 try_absolute_mouse_position(const ::point_i32& point) override;
 
 
 

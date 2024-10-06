@@ -21,7 +21,7 @@ __FACTORY_EXPORT void node_windows_factory(::factory::factory * pfactory)
 
 
    //add_factory_item < ::windows::buffer, ::graphics::graphics >();
-   //pfactory->add_factory_item < ::windows::interaction_impl, ::user::interaction_impl >();
+   //pfactory->add_factory_item < ::windows::interaction_impl, ::windowing::window >();
 
    //add_factory_item < ::file::os_watcher, ::file::watcher >();
    //add_factory_item < ::file::os_watch, ::file::watch >();
@@ -34,7 +34,7 @@ __FACTORY_EXPORT void node_windows_factory(::factory::factory * pfactory)
    //add_factory_item < ::windows::inteprocess_channel, ::inteprocess_channel::inteprocess_channel >();
 
 
-   //pfactory->add_factory_item < ::windows::interaction_impl, ::user::interaction_impl >();
+   //pfactory->add_factory_item < ::windows::interaction_impl, ::windowing::window >();
 
    //pfactory->add_factory_item < ::node_windows::node, ::acme::node >();
 

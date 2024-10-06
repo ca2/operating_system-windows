@@ -559,7 +559,7 @@ namespace windowing_win32
 
    //   //   }
 
-   //   //   ::user::interaction_impl * pimpl = psystem->impl_from_handle(pmsg->hwnd);
+   //   //   ::windowing::window * pimpl = psystem->impl_from_handle(pmsg->hwnd);
 
    //   //   if (pimpl != nullptr)
    //   //   {

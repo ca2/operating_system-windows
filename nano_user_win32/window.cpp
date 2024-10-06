@@ -9,7 +9,7 @@
 #include "acme/nano/user/message_box.h"
 #include "acme/platform/system.h"
 #include "acme/user/user/mouse.h"
-#include "acme/windowing/windowing_base.h"
+#include "acme/nano/windowing/windowing.h"
 
 
 CLASS_DECL_ACME bool _c_simple_message_loop_step();
@@ -200,16 +200,16 @@ namespace windows
 
             }
 
-            wstring wstrTitle(m_puserinteractionbase->m_strTitle);
+            wstring wstrTitle(m_pnanouserinteraction->m_strTitle);
 
             auto hinstanceWndProc = nano_message_box_hinstance();
 
             m_ptask = ::get_task();
 
-            auto r = m_puserinteractionbase->get_window_rectangle();
+            auto r = m_pnanouserinteraction->get_window_rectangle();
 
             HWND hwnd = CreateWindowEx(
-               m_puserinteractionbase->m_bTopMost ? WS_EX_TOPMOST : 0,
+               m_bTopMost ? WS_EX_TOPMOST : 0,
                _T(NANO_WINDOW_CLASS),
                wstrTitle,
                WS_POPUP | WS_SYSMENU,
@@ -232,12 +232,12 @@ namespace windows
          }
 
 
-         void window::on_char(int iChar)
-         {
+         //void window::on_char(int iChar)
+         //{
 
-            m_puserinteractionbase->on_char(iChar);
+         //   m_pnanouserinteraction->on_char(iChar);
 
-         }
+         //}
 
 
          void window::_draw(HDC hdc)
@@ -259,7 +259,16 @@ namespace windows
 
                m_pnanodevice->attach(hdc);
 
-               m_puserinteractionbase->draw(m_pnanodevice);
+               ::pointer < ::nano::user::elemental > pelemental;
+
+               pelemental = m_pnanouserinteraction;
+
+               if (pelemental)
+               {
+
+                  pelemental->draw(m_pnanodevice);
+
+               }
 
             }
 
@@ -321,7 +330,7 @@ namespace windows
 
          //   //}
 
-         //   m_puserinteractionbase->delete_drawing_objects();
+         //   m_pnanouserinteraction->delete_drawing_objects();
 
          //}
 
@@ -370,7 +379,7 @@ namespace windows
          //   //m_hpenBorder = CreatePen(PS_SOLID, 1, m_crText);
          //   //m_hpenBorderFocus = CreatePen(PS_SOLID, 1, m_crFocus);
 
-         //   m_puserinteractionbase->create_drawing_objects();
+         //   m_pnanouserinteraction->create_drawing_objects();
 
          //}
 
@@ -429,7 +438,7 @@ namespace windows
 
          //   //}
 
-         //   m_puserinteractionbase->on_left_button_down(pmouse);
+         //   m_pnanouserinteraction->on_left_button_down(pmouse);
 
          //}
 
@@ -461,7 +470,7 @@ namespace windows
 
          //   //}
 
-         //   m_puserinteractionbase->on_left_button_up(pmouse);
+         //   m_pnanouserinteraction->on_left_button_up(pmouse);
 
          //}
 
@@ -494,7 +503,7 @@ namespace windows
 
          //   //}
 
-         //   m_puserinteractionbase->on_mouse_move(pmouse);
+         //   m_pnanouserinteraction->on_mouse_move(pmouse);
 
          //}
 
@@ -525,7 +534,7 @@ namespace windows
 
          //   //}
 
-         //   m_puserinteractionbase->on_right_button_down(pmouse);
+         //   m_pnanouserinteraction->on_right_button_down(pmouse);
 
          //}
 
@@ -557,7 +566,7 @@ namespace windows
 
          //   //}
 
-         //   m_puserinteractionbase->on_right_button_up(pmouse);
+         //   m_pnanouserinteraction->on_right_button_up(pmouse);
 
          //}
 
@@ -566,7 +575,7 @@ namespace windows
          //::payload window::get_result()
          //{
 
-         //   return m_puserinteractionbase->get_result();
+         //   return m_pnanouserinteraction->get_result();
 
          //}
 
@@ -576,7 +585,7 @@ namespace windows
          //::nano::user::child * window::hit_test(const ::point_i32 & point, ::user::e_zorder ezorder)
          //{
 
-         //   return m_puserinteractionbase->hit_test(point);
+         //   return m_pnanouserinteraction->hit_test(point);
 
          //}
 
@@ -650,16 +659,16 @@ namespace windows
             {
             case WM_COMMAND:
             {
-              /* ::pointer < ::windows::nano::user::user > pnanouser = nano()->user();
+               /* ::pointer < ::windows::nano::user::user > pnanouser = nano()->user();
 
-               LRESULT lresult = 0;
+                LRESULT lresult = 0;
 
-               if (pnanouser->_on_command(lresult, m_hwnd, wparam, lparam))
-               {
+                if (pnanouser->_on_command(lresult, m_hwnd, wparam, lparam))
+                {
 
-                  return lresult;
+                   return lresult;
 
-               }*/
+                }*/
 
                return DefWindowProc(m_hwnd, message, wparam, lparam);
 
@@ -675,8 +684,20 @@ namespace windows
 
             break;
             case WM_CLOSE:
+            {
                //DestroyWindow(m_hwnd);
-               m_puserinteractionbase->on_click(e_dialog_result_cancel, nullptr);
+               ::pointer < ::nano::user::elemental > pelemental;
+
+               pelemental = m_pnanouserinteraction;
+
+               if (pelemental)
+               {
+
+                  pelemental->on_click(e_dialog_result_cancel, nullptr);
+
+               }
+
+            }
                return 0;
                break;
             case WM_NCDESTROY:
@@ -698,7 +719,7 @@ namespace windows
             //   break;
             case WM_DESTROY:
                //PostQuitMessage(0);
-               nano()->user()->m_windowbasea.erase(this);
+               nano()->windowing()->m_windowa.erase(this);
                break;
             case WM_CREATE:
             {
@@ -710,7 +731,16 @@ namespace windows
             break;
             case WM_CHAR:
             {
-               on_char((int)wparam);
+               ::pointer < ::nano::user::elemental > pelemental;
+
+               pelemental = m_pnanouserinteraction;
+
+               if (pelemental)
+               {
+
+                  pelemental->on_char((int)wparam);
+
+               }
                return 0;
             }
             break;
@@ -727,7 +757,16 @@ namespace windows
 
                pmouse->m_pointAbsolute = { point.x, point.y };
 
-               m_puserinteractionbase->on_left_button_down(pmouse);
+               ::pointer < ::nano::user::elemental > pelemental;
+
+               pelemental = m_pnanouserinteraction;
+
+               if (pelemental)
+               {
+
+                  pelemental->on_left_button_down(pmouse);
+
+               }
 
             }
             break;
@@ -744,7 +783,16 @@ namespace windows
 
                pmouse->m_pointAbsolute = { point.x, point.y };
 
-               m_puserinteractionbase->on_mouse_move(pmouse);
+               ::pointer < ::nano::user::elemental > pelemental;
+
+               pelemental = m_pnanouserinteraction;
+
+               if (pelemental)
+               {
+
+                  pelemental->on_mouse_move(pmouse);
+
+               }
 
             }
             break;
@@ -761,7 +809,16 @@ namespace windows
 
                pmouse->m_pointAbsolute = { point.x, point.y };
 
-               m_puserinteractionbase->on_left_button_up(pmouse);
+               ::pointer < ::nano::user::elemental > pelemental;
+
+               pelemental = m_pnanouserinteraction;
+
+               if (pelemental)
+               {
+
+                  pelemental->on_left_button_up(pmouse);
+
+               }
 
             }
             break;
@@ -778,7 +835,16 @@ namespace windows
 
                pmouse->m_pointAbsolute = { point.x, point.y };
 
-               m_puserinteractionbase->on_right_button_down(pmouse);
+               ::pointer < ::nano::user::elemental > pelemental;
+
+               pelemental = m_pnanouserinteraction;
+
+               if (pelemental)
+               {
+
+                  pelemental->on_right_button_down(pmouse);
+
+               }
 
             }
             break;
@@ -795,7 +861,16 @@ namespace windows
 
                pmouse->m_pointAbsolute = { point.x, point.y };
 
-               m_puserinteractionbase->on_right_button_up(pmouse);
+               ::pointer < ::nano::user::elemental > pelemental;
+
+               pelemental = m_pnanouserinteraction;
+
+               if (pelemental)
+               {
+
+                  pelemental->on_right_button_up(pmouse);
+
+               }
 
             }
             break;
@@ -979,7 +1054,7 @@ namespace windows
          //void window::add_child(::nano::user::child* pchild)
          //{
 
-         //   m_puserinteractionbase->add_child(pchild);
+         //   m_pnanouserinteraction->add_child(pchild);
 
          //}
 
@@ -1063,7 +1138,7 @@ namespace windows
          //   //fork([this, atom, pmouse]()
          //      //{
 
-         //   m_puserinteractionbase->on_click(payload, pmouse);
+         //   m_pnanouserinteraction->on_click(payload, pmouse);
 
          //   //}, { pmouse });
 
@@ -1078,7 +1153,7 @@ namespace windows
          //   //fork([this, atom, pmouse]()
          //     // {
 
-         //   m_puserinteractionbase->on_right_click(payload, pmouse);
+         //   m_pnanouserinteraction->on_right_click(payload, pmouse);
 
          //   //}, {pmouse});
 
@@ -1094,12 +1169,12 @@ namespace windows
          }
 
 
-         ::point_i32 window::try_absolute_mouse_position(const ::point_i32& point)
-         {
+         //::point_i32 window::try_absolute_mouse_position(const ::point_i32& point)
+         //{
 
-            return point;
+         //   return point;
 
-         }
+         //}
 
 
          //::rectangle_i32 window::get_client_rectangle()
@@ -1231,14 +1306,14 @@ namespace windows
 
             auto strThreadName = ::task_get_name();
 
-            //auto pmessagebox = m_puserinteractionbase.cast < ::nano::user::message_box >();
+            //auto pmessagebox = m_pnanouserinteraction.cast < ::nano::user::message_box >();
 
             //::string strAbbreviation("window");
 
             //if (strType.contains("message_box"))
             //if (pmessagebox)
             //{
-               //auto pmessagebox = m_puserinteractionbase.cast<nano::me
+               //auto pmessagebox = m_pnanouserinteraction.cast<nano::me
                /// @brief ////////123456789012345
                //strAbbreviation = "msgbx:" + pmessagebox->m_strMessage.left(20);
 

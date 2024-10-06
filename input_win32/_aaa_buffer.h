@@ -62,7 +62,7 @@ namespace windowing_win32
       ~buffer() override;
 
 
-      virtual void initialize_graphics_graphics(::user::interaction_impl * pimpl) override;
+      virtual void initialize_graphics_graphics(::windowing::window * pimpl) override;
 
 
       bool is_single_buffer_mode() const override;
