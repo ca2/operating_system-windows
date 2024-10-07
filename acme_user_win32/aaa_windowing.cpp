@@ -17,7 +17,7 @@
 //#include <X11/XKBlib.h>
 //#include <X11/Xutil.h>
 
-namespace nano_user_win32
+namespace acme_user_win32
 {
 
 
@@ -59,7 +59,7 @@ namespace nano_user_win32
 
       informationf("windowing_system_win32::windowing_system::initialize_windowing_system going to call init_threads");
 
-      if (!nano()->user()->init_threads())
+      if (!system()->acme_windowing()->init_threads())
       {
 
          return ::error_failed;
@@ -191,7 +191,7 @@ namespace nano_user_win32
 //    void node::sync(const ::procedure & procedure)
 //    {
 //
-//        nano()->user()->x11_sync(procedure);
+//        system()->acme_windowing()->x11_sync(procedure);
 //
 //    }
 //
@@ -199,7 +199,7 @@ namespace nano_user_win32
 //    void node::async(const ::procedure & procedure)
 //    {
 //
-//        nano()->user()->x11_async(procedure);
+//        system()->acme_windowing()->x11_async(procedure);
 //
 //    }
 //
@@ -398,7 +398,7 @@ namespace nano_user_win32
 
 
 
-} // namespace nano_user_win32
+} // namespace acme_user_win32
 
 
 

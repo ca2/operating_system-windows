@@ -9,7 +9,7 @@
 #include "acme/nano/user/message_box.h"
 #include "acme/platform/system.h"
 #include "acme/user/user/mouse.h"
-#include "acme/nano/windowing/windowing.h"
+#include "acme/windowing/windowing.h"
 
 
 CLASS_DECL_ACME bool _c_simple_message_loop_step();
@@ -49,7 +49,7 @@ namespace windows
 
 
 
-   namespace nano
+   namespace acme
    {
 
 
@@ -148,14 +148,14 @@ namespace windows
          LRESULT CALLBACK nano_window_procedure(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
          {
 
-            ::windows::nano::user::window* pwindow = nullptr;
+            ::windows::micro::window* pwindow = nullptr;
 
             if (msg == WM_NCCREATE)
             {
 
                CREATESTRUCT* pcreatestruct = (CREATESTRUCT*)lParam;
 
-               pwindow = (::windows::nano::user::window*)pcreatestruct->lpCreateParams;
+               pwindow = (::windows::micro::window*)pcreatestruct->lpCreateParams;
 
                SetWindowLongPtr(hwnd, GWLP_USERDATA, (LONG_PTR)pwindow);
 
@@ -165,7 +165,7 @@ namespace windows
             else
             {
 
-               pwindow = (::windows::nano::user::window*)GetWindowLongPtr(hwnd, GWLP_USERDATA);
+               pwindow = (::windows::micro::window*)GetWindowLongPtr(hwnd, GWLP_USERDATA);
 
             }
 
@@ -259,7 +259,7 @@ namespace windows
 
                m_pnanodevice->attach(hdc);
 
-               ::pointer < ::nano::user::elemental > pelemental;
+               ::pointer < ::micro::elemental > pelemental;
 
                pelemental = m_pnanouserinteraction;
 
@@ -582,7 +582,7 @@ namespace windows
 
 
 
-         //::nano::user::child * window::hit_test(const ::point_i32 & point, ::user::e_zorder ezorder)
+         //::micro::child * window::hit_test(const ::point_i32 & point, ::user::e_zorder ezorder)
          //{
 
          //   return m_pnanouserinteraction->hit_test(point);
@@ -590,7 +590,7 @@ namespace windows
          //}
 
 
-      //LRESULT CALLBACK ::nano::user::message_box::s_window_procedure(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
+      //LRESULT CALLBACK ::micro::message_box::s_window_procedure(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
       //{
       //if (msg == WM_NCCREATE)
       //{
@@ -599,7 +599,7 @@ namespace windows
       //   SetWindowLongPtr(hwnd, GWLP_USERDATA, (LONG_PTR)pcreatestruct->lpCreateParams);
       //
       //}
-      //::nano::user::message_box * pwindow = (::nano::user::message_box *)GetWindowLongPtr(hwnd, GWLP_USERDATA);
+      //::micro::message_box * pwindow = (::micro::message_box *)GetWindowLongPtr(hwnd, GWLP_USERDATA);
       //
       //if (!pwindow)
       //{
@@ -659,7 +659,7 @@ namespace windows
             {
             case WM_COMMAND:
             {
-               /* ::pointer < ::windows::nano::user::user > pnanouser = nano()->user();
+               /* ::pointer < ::windows::micro::user > pnanouser = system()->acme_windowing();
 
                 LRESULT lresult = 0;
 
@@ -686,7 +686,7 @@ namespace windows
             case WM_CLOSE:
             {
                //DestroyWindow(m_hwnd);
-               ::pointer < ::nano::user::elemental > pelemental;
+               ::pointer < ::micro::elemental > pelemental;
 
                pelemental = m_pnanouserinteraction;
 
@@ -704,7 +704,7 @@ namespace windows
                break;
             //case WM_INITMENU:
             //   {
-            //   ::pointer < ::windows::nano::user::user > pnanouser = nano()->user();
+            //   ::pointer < ::windows::micro::user > pnanouser = system()->acme_windowing();
 
             //   LRESULT lresult = 0;
 
@@ -719,7 +719,7 @@ namespace windows
             //   break;
             case WM_DESTROY:
                //PostQuitMessage(0);
-               nano()->windowing()->m_windowa.erase(this);
+               system()->acme_windowing()->m_windowa.erase(this);
                break;
             case WM_CREATE:
             {
@@ -731,7 +731,7 @@ namespace windows
             break;
             case WM_CHAR:
             {
-               ::pointer < ::nano::user::elemental > pelemental;
+               ::pointer < ::micro::elemental > pelemental;
 
                pelemental = m_pnanouserinteraction;
 
@@ -757,7 +757,7 @@ namespace windows
 
                pmouse->m_pointAbsolute = { point.x, point.y };
 
-               ::pointer < ::nano::user::elemental > pelemental;
+               ::pointer < ::micro::elemental > pelemental;
 
                pelemental = m_pnanouserinteraction;
 
@@ -783,7 +783,7 @@ namespace windows
 
                pmouse->m_pointAbsolute = { point.x, point.y };
 
-               ::pointer < ::nano::user::elemental > pelemental;
+               ::pointer < ::micro::elemental > pelemental;
 
                pelemental = m_pnanouserinteraction;
 
@@ -809,7 +809,7 @@ namespace windows
 
                pmouse->m_pointAbsolute = { point.x, point.y };
 
-               ::pointer < ::nano::user::elemental > pelemental;
+               ::pointer < ::micro::elemental > pelemental;
 
                pelemental = m_pnanouserinteraction;
 
@@ -835,7 +835,7 @@ namespace windows
 
                pmouse->m_pointAbsolute = { point.x, point.y };
 
-               ::pointer < ::nano::user::elemental > pelemental;
+               ::pointer < ::micro::elemental > pelemental;
 
                pelemental = m_pnanouserinteraction;
 
@@ -861,7 +861,7 @@ namespace windows
 
                pmouse->m_pointAbsolute = { point.x, point.y };
 
-               ::pointer < ::nano::user::elemental > pelemental;
+               ::pointer < ::micro::elemental > pelemental;
 
                pelemental = m_pnanouserinteraction;
 
@@ -1051,7 +1051,7 @@ namespace windows
 
 
 
-         //void window::add_child(::nano::user::child* pchild)
+         //void window::add_child(::micro::child* pchild)
          //{
 
          //   m_pnanouserinteraction->add_child(pchild);
@@ -1083,7 +1083,7 @@ namespace windows
 
                   ::DestroyWindow(m_hwnd);
 
-                  nano()->user()->process_messages();
+                  system()->acme_windowing()->process_messages();
 
                });
 
@@ -1247,7 +1247,7 @@ namespace windows
             if (!hwndDesktop)
             {
 
-               return ::nano::windowing::window::get_main_screen_size();
+               return ::acme::windowing::window::get_main_screen_size();
 
             }
 
@@ -1272,7 +1272,7 @@ namespace windows
             else
             {
 
-               ::nano::windowing::window::user_post(procedure);
+               ::acme::windowing::window::user_post(procedure);
 
             }
 
@@ -1291,7 +1291,7 @@ namespace windows
          void window::defer_show_system_menu(::user::mouse *pmouse)
          {
 
-            //::pointer < ::windows::nano::user::user > pnanouser = nano()->user();
+            //::pointer < ::windows::micro::user > pnanouser = system()->acme_windowing();
 
             //pnanouser->_defer_show_system_menu(m_hwnd, &m_hmenuSystem, pointAbsolute);
 
@@ -1306,7 +1306,7 @@ namespace windows
 
             auto strThreadName = ::task_get_name();
 
-            //auto pmessagebox = m_pnanouserinteraction.cast < ::nano::user::message_box >();
+            //auto pmessagebox = m_pnanouserinteraction.cast < ::micro::message_box >();
 
             //::string strAbbreviation("window");
 
@@ -1343,7 +1343,7 @@ namespace windows
       } // namespace user
 
 
-   } // namespace nano
+   } // namespace acme
 
 } // namespace windows
 

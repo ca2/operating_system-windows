@@ -5,7 +5,7 @@
 #include "acme/nano/nano.h"
 #include "acme/nano/user/user.h"
 #include "acme/platform/node.h"
-#include "acme/nano/windowing/windowing.h"
+#include "acme/windowing/windowing.h"
 #include "aura/message/user.h"
 #include "aura/platform/system.h"
 
@@ -125,7 +125,7 @@ namespace windowing_win32
             strLparamString == "ImmersiveColorSet")
          {
 
-            nano()->user()->fetch_system_background_color();
+            system()->acme_windowing()->fetch_system_background_color();
 
             /*auto ptopic = psystem->topic(id_os_dark_mode);
 

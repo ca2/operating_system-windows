@@ -491,7 +491,7 @@ namespace innate_ui_win32
    void window::defer_show_system_menu(::user::mouse * pmouse)
    {
 
-      //::pointer < ::windows::nano::user::user >pnanouserWindows = nano()->user();
+      //::pointer < ::windows::micro::user >pnanouserWindows = system()->acme_windowing();
 
       //pnanouserWindows->_defer_show_system_menu(m_hwnd, &m_hmenuSystem, pointAbsolute);
 

@@ -14,7 +14,7 @@ namespace windows
 
 
 
-   namespace nano
+   namespace acme
    {
 
 
@@ -23,7 +23,7 @@ namespace windows
 
 
          class CLASS_DECL_ACME object :
-            virtual public ::nano::user::object
+            virtual public ::micro::object
          {
          public:
 
@@ -48,7 +48,7 @@ namespace windows
       } // namespace user
 
 
-   } // namespace nano
+   } // namespace acme
 
 
 } // namespace windows

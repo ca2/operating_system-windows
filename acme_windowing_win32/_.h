@@ -99,7 +99,7 @@
 namespace win32
 {
 
-   namespace nano
+   namespace acme
    {
 
 
@@ -111,7 +111,7 @@ namespace win32
       } // namespace windowing
 
 
-   } // namespace nano
+   } // namespace acme
 
 
 

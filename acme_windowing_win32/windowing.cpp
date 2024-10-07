@@ -19,7 +19,7 @@ namespace win32
 {
 
 
-   namespace nano
+   namespace acme
    {
 
 
@@ -65,7 +65,7 @@ namespace win32
 
             informationf("windowing_system_win32::windowing::initialize_windowing_system going to call init_threads");
 
-            if (!nano()->user()->init_threads())
+            if (!system()->acme_windowing()->init_threads())
             {
 
                return ::error_failed;
@@ -197,7 +197,7 @@ namespace win32
          //    void node::sync(const ::procedure & procedure)
          //    {
          //
-         //        nano()->user()->x11_sync(procedure);
+         //        system()->acme_windowing()->x11_sync(procedure);
          //
          //    }
          //
@@ -205,7 +205,7 @@ namespace win32
          //    void node::async(const ::procedure & procedure)
          //    {
          //
-         //        nano()->user()->x11_async(procedure);
+         //        system()->acme_windowing()->x11_async(procedure);
          //
          //    }
          //
@@ -406,7 +406,7 @@ namespace win32
       } // namespace windowing
 
 
-   } // namespace nano
+   } // namespace acme
 
 
 } // namespace windowing_system_win32

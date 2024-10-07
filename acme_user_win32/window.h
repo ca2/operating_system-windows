@@ -13,7 +13,7 @@ namespace windows
 {
 
 
-   namespace nano
+   namespace acme
    {
 
 
@@ -22,14 +22,14 @@ namespace windows
 
 
          class CLASS_DECL_NANO_USER_WIN32 window :
-            virtual public ::nano::windowing::window,
+            virtual public ::acme::windowing::window,
             virtual public ::windows::window
          {
          public:
 
 
             bool m_bNcActive;
-            //CreatableFromBase(window, ::nano::user::window_implementation);
+            //CreatableFromBase(window, ::micro::window_implementation);
             //bool m_bSizeMoveMode;
             //HWND m_hwnd;
             //HMENU m_hmenuSystem;
@@ -44,11 +44,11 @@ namespace windows
       //      rectangle_i32 m_rectangle;
       //      rectangle_i32 m_rectangleX;
       //
-      //      pointer_array < ::nano::user::child > m_childa;
+      //      pointer_array < ::micro::child > m_childa;
       //      ::atom m_atomLeftButtonDown;
       //      ::atom m_atomLeftButtonUp;
       //      //::atom                             m_atomResult;
-      //      ::pointer<::nano::user::child>m_pchildFocus;
+      //      ::pointer<::micro::child>m_pchildFocus;
             ::task_pointer       m_ptask;
 
             ::pointer < ::nano::graphics::device > m_pnanodevice;
@@ -81,9 +81,9 @@ namespace windows
 
             //void update_drawing_objects() override;
 
-            //::nano::user::child * on_hit_test(const ::point_i32 & point, ::user::e_zorder ezorder) override;
+            //::micro::child * on_hit_test(const ::point_i32 & point, ::user::e_zorder ezorder) override;
 
-            //void add_child(::nano::user::child* pchild) override;
+            //void add_child(::micro::child* pchild) override;
 
             //::payload get_result() override;
 
@@ -155,7 +155,7 @@ namespace windows
       } // namespace user
 
       
-   } // namespace nano
+   } // namespace acme
 
 
 } // namespace windows

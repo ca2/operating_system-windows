@@ -4,13 +4,13 @@
 #pragma once
 
 
-#include "acme/nano/windowing/windowing.h"
+#include "acme/windowing/windowing.h"
 
 
 namespace win32
 {
 
-   namespace nano
+   namespace acme
    {
 
       namespace windowing
@@ -18,7 +18,7 @@ namespace win32
 
 
          class CLASS_DECL_NANO_WINDOWING_WIN32 windowing :
-            virtual public ::nano::windowing::windowing
+            virtual public ::acme::windowing::windowing
          {
          public:
 
@@ -69,7 +69,7 @@ namespace win32
       } // namespace windowing
 
 
-   }// namespace nano
+   }// namespace acme
 
 
 } // namespace win32

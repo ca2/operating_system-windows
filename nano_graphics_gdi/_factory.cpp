@@ -20,7 +20,7 @@ IMPLEMENT_FACTORY(nano_graphics_gdi)
 {
 
 
-   //pfactory->add_factory_item < ::windows::nano::user::window, ::nano::windowing::window >();
+   //pfactory->add_factory_item < ::windows::micro::window, ::acme::windowing::window >();
    pfactory->add_factory_item < ::windows::nano::graphics::brush, ::nano::graphics::brush >();
    pfactory->add_factory_item < ::windows::nano::graphics::font, ::nano::graphics::font >();
    pfactory->add_factory_item < ::windows::nano::graphics::pen, ::nano::graphics::pen >();
@@ -30,8 +30,8 @@ IMPLEMENT_FACTORY(nano_graphics_gdi)
 
    pfactory->add_factory_item < ::windows::nano::graphics::graphics, ::nano::graphics::graphics >();
 
-   //pfactory->add_factory_item < ::windows::nano::user::user, ::nano::user::user >();
-   //pfactory->add_factory_item < ::windows::nano::user::user, ::nano::user::user >();
+   //pfactory->add_factory_item < ::windows::micro::user, ::micro::user >();
+   //pfactory->add_factory_item < ::windows::micro::user, ::micro::user >();
 
    //::rectangle_i32 rectangleMainScreen;
 

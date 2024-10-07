@@ -13,7 +13,7 @@ namespace windows
 {
 
 
-   namespace nano
+   namespace acme
    {
 
 
@@ -22,7 +22,7 @@ namespace windows
 
 
          class CLASS_DECL_NANO_USER_WIN32 user :
-            virtual public ::nano::user::user
+            virtual public ::micro::user
          {
          public:
 
@@ -42,7 +42,7 @@ namespace windows
       } // namespace user
 
 
-   } // namespace nano
+   } // namespace acme
 
 } // namespace windows
 

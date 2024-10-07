@@ -23,7 +23,7 @@
 #include "acme/parallelization/synchronous_lock.h"
 #include "acme/platform/node.h"
 #include "acme/prototype/geometry2d/_text_stream.h"
-#include "acme/nano/windowing/windowing.h"
+#include "acme/windowing/windowing.h"
 //#include "aura_windows/interaction_impl.h"
 #include "aura/graphics/draw2d/graphics.h"
 #include "aura/graphics/graphics/graphics.h"
@@ -696,7 +696,7 @@ namespace windowing_win32
 
             //pnode->fetch_user_color();
 
-            nano()->user()->fetch_system_background_color();
+            system()->acme_windowing()->fetch_system_background_color();
 
          }
          else if (pmessage->m_atom == e_message_display_change ||
@@ -7290,7 +7290,7 @@ namespace windowing_win32
    void window::defer_show_system_menu(::user::mouse * pmouse)
    {
 
-      //::pointer < ::windows::nano::user::user >pnanouserWindows = nano()->user();
+      //::pointer < ::windows::micro::user >pnanouserWindows = system()->acme_windowing();
 
       //auto hwnd = m_hwnd;
 
@@ -7498,7 +7498,7 @@ namespace windowing_win32
       //if (message == WM_INITMENU)
       //{
 
-      //   ::pointer < ::windows::nano::user::user > pnanouser = nano()->user();
+      //   ::pointer < ::windows::micro::user > pnanouser = system()->acme_windowing();
 
       //   LRESULT lresult = 0;
 

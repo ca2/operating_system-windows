@@ -16,13 +16,13 @@ IMPLEMENT_FACTORY(nano_user_win32)
 {
 
 
-   pfactory->add_factory_item < ::windows::nano::user::window, ::nano::windowing::window >();
+   pfactory->add_factory_item < ::windows::micro::window, ::acme::windowing::window >();
    //pfactory->add_factory_item < ::windows::nano::graphics::brush, ::nano::graphics::brush >();
    //pfactory->add_factory_item < ::windows::nano::graphics::font, ::nano::graphics::font >();
    //pfactory->add_factory_item < ::windows::nano::graphics::pen, ::nano::graphics::pen >();
    //pfactory->add_factory_item < ::windows::nano::graphics::device, ::nano::graphics::device >();
 
-   pfactory->add_factory_item < ::windows::nano::user::user, ::nano::user::user >();
+   pfactory->add_factory_item < ::windows::micro::user, ::micro::user >();
 
    //::rectangle_i32 rectangleMainScreen;
 

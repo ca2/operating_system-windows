@@ -1,17 +1,18 @@
 // Created by camilo on 2022-01-21 05:05 PM <3ThomasBorregaardSorensen
 #include "framework.h"
-#include "device.h"
+#include "acme/nano/graphics/device.h"
 #include "window.h"
 #include "user.h"
 #include "acme/parallelization/task.h"
 #include "acme/nano/nano.h"
 #include "acme/nano/user/button.h"
 #include "acme/nano/user/message_box.h"
-#include "acme/nano/user/window.h"
+#include "acme/platform/system.h"
 #include "acme/user/user/mouse.h"
+#include "acme/windowing/windowing.h"
 
 
-bool _c_simple_message_loop_step();
+CLASS_DECL_ACME bool _c_simple_message_loop_step();
 
 CLASS_DECL_ACME string task_get_name();
 CLASS_DECL_ACME void task_set_name(const char* pszName);
@@ -48,7 +49,7 @@ namespace windows
 
 
 
-   namespace nano
+   namespace acme
    {
 
 
@@ -61,14 +62,14 @@ namespace windows
             //      m_bDestroy = false;
             m_hwnd = nullptr;
             m_hmenuSystem = nullptr;
-
+            m_bNcActive = false;
          }
 
 
          window::~window()
          {
 
-            delete_drawing_objects();
+            //delete_drawing_objects();
 
          }
 
@@ -180,8 +181,15 @@ namespace windows
          }
 
 
+         void window::create_window()
+         {
 
-         void window::create()
+            _create_window();
+
+         }
+
+
+         void window::_create_window()
          {
 
 
@@ -192,21 +200,23 @@ namespace windows
 
             }
 
-            wstring wstrTitle(m_pinterface->m_strTitle);
+            wstring wstrTitle(m_pnanouserinteraction->m_strTitle);
 
             auto hinstanceWndProc = nano_message_box_hinstance();
 
             m_ptask = ::get_task();
 
+            auto r = m_pnanouserinteraction->get_window_rectangle();
+
             HWND hwnd = CreateWindowEx(
-               m_pinterface->m_bTopMost ? WS_EX_TOPMOST : 0,
+               m_bTopMost ? WS_EX_TOPMOST : 0,
                _T(NANO_WINDOW_CLASS),
                wstrTitle,
                WS_POPUP | WS_SYSMENU,
-               m_pinterface->m_rectangle.left(),
-               m_pinterface->m_rectangle.top(),
-               m_pinterface->m_rectangle.width(),
-               m_pinterface->m_rectangle.height(),
+               r.left(),
+               r.top(),
+               r.width(),
+               r.height(),
                NULL, NULL, hinstanceWndProc, this);
 
             if (hwnd == NULL)
@@ -215,23 +225,27 @@ namespace windows
                return;
             }
 
-            nanowindowimplementationa().add(this);
+            //nanowindowimplementationa().add(this);
+
+            //system()->window_
 
          }
 
 
-         void window::on_char(int iChar)
-         {
+         //void window::on_char(int iChar)
+         //{
 
-            m_pinterface->on_char(iChar);
+         //   m_pnanouserinteraction->on_char(iChar);
 
-         }
+         //}
 
 
          void window::_draw(HDC hdc)
          {
 
-            GetWindowRect(m_hwnd, (LPRECT)&m_pinterface->m_rectangle);
+            ::rectangle_i32 r;
+
+            GetWindowRect(m_hwnd, (LPRECT)&r);
 
             HGDIOBJ hbrushOld = ::GetCurrentObject(hdc, OBJ_BRUSH);
             HGDIOBJ hfontOld = ::GetCurrentObject(hdc, OBJ_FONT);
@@ -239,9 +253,22 @@ namespace windows
 
             {
 
-               auto pnanodevice = ::place(new ::windows::nano::graphics::device(hdc));
+               nano()->graphics();
 
-               m_pinterface->draw(pnanodevice);
+               __construct(m_pnanodevice);
+
+               m_pnanodevice->attach(hdc);
+
+               ::pointer < ::micro::elemental > pelemental;
+
+               pelemental = m_pnanouserinteraction;
+
+               if (pelemental)
+               {
+
+                  pelemental->draw(m_pnanodevice);
+
+               }
 
             }
 
@@ -272,98 +299,98 @@ namespace windows
 
          //}
 
-         void window::delete_drawing_objects()
-         {
+         //void window::delete_drawing_objects()
+         //{
 
-            //if (m_hbrushWindow)
-            //{
+         //   //if (m_hbrushWindow)
+         //   //{
 
-            //   ::DeleteObject(m_hbrushWindow);
+         //   //   ::DeleteObject(m_hbrushWindow);
 
-            //   m_hbrushWindow = nullptr;
+         //   //   m_hbrushWindow = nullptr;
 
-            //}
+         //   //}
 
-            //if (m_hpenBorder)
-            //{
+         //   //if (m_hpenBorder)
+         //   //{
 
-            //   ::DeleteObject(m_hpenBorder);
+         //   //   ::DeleteObject(m_hpenBorder);
 
-            //   m_hpenBorder = nullptr;
+         //   //   m_hpenBorder = nullptr;
 
-            //}
-
-
-            //if (m_hpenBorderFocus)
-            //{
-
-            //   ::DeleteObject(m_hpenBorderFocus);
-
-            //   m_hpenBorderFocus = nullptr;
-
-            //}
-
-            m_pinterface->delete_drawing_objects();
-
-         }
+         //   //}
 
 
-         bool window::get_dark_mode()
-         {
+         //   //if (m_hpenBorderFocus)
+         //   //{
 
-            return !_is_light_theme();
+         //   //   ::DeleteObject(m_hpenBorderFocus);
 
-         }
+         //   //   m_hpenBorderFocus = nullptr;
 
+         //   //}
 
-         void window::create_drawing_objects()
-         {
+         //   m_pnanouserinteraction->delete_drawing_objects();
 
-            //if (m_hfont == nullptr)
-            //{
-
-            //   HDC hdc = ::GetDC(m_hwnd);
-            //   int nHeight = -MulDiv(14, GetDeviceCaps(hdc, LOGPIXELSY), 72);
-            //   m_hfont = ::CreateFontW(nHeight, 0, 0, 0, FW_NORMAL, 0, 0, 0, DEFAULT_CHARSET, OUT_OUTLINE_PRECIS,
-            //                           CLIP_DEFAULT_PRECIS, CLEARTYPE_QUALITY, FF_SWISS, L"Segoe UI");
-            //   ::ReleaseDC(m_hwnd, hdc);
-
-            //}
-
-            //bool bDarkMode = get_dark_mode();
-
-            //if (bDarkMode)
-            //{
-
-            //   m_crWindow = RGB(0, 0, 0);
-            //   m_crText = RGB(255, 255, 255);
-            //   m_crFocus = RGB(2, 128, 255);
-
-            //} else
-            //{
-
-            //   m_crWindow = RGB(255, 255, 255);
-            //   m_crText = RGB(0, 0, 0);
-            //   m_crFocus = RGB(1, 64, 128);
-
-            //}
-
-            //m_hbrushWindow = CreateSolidBrush(m_crWindow);
-            //m_hpenBorder = CreatePen(PS_SOLID, 1, m_crText);
-            //m_hpenBorderFocus = CreatePen(PS_SOLID, 1, m_crFocus);
-
-            m_pinterface->create_drawing_objects();
-
-         }
-
-         void window::update_drawing_objects()
-         {
-
-            delete_drawing_objects();
-            create_drawing_objects();
+         //}
 
 
-         }
+         //bool window::get_dark_mode()
+         //{
+
+         //   return !_is_light_theme();
+
+         //}
+
+
+         //void window::create_drawing_objects()
+         //{
+
+         //   //if (m_hfont == nullptr)
+         //   //{
+
+         //   //   HDC hdc = ::GetDC(m_hwnd);
+         //   //   int nHeight = -MulDiv(14, GetDeviceCaps(hdc, LOGPIXELSY), 72);
+         //   //   m_hfont = ::CreateFontW(nHeight, 0, 0, 0, FW_NORMAL, 0, 0, 0, DEFAULT_CHARSET, OUT_OUTLINE_PRECIS,
+         //   //                           CLIP_DEFAULT_PRECIS, CLEARTYPE_QUALITY, FF_SWISS, L"Segoe UI");
+         //   //   ::ReleaseDC(m_hwnd, hdc);
+
+         //   //}
+
+         //   //bool bDarkMode = get_dark_mode();
+
+         //   //if (bDarkMode)
+         //   //{
+
+         //   //   m_crWindow = RGB(0, 0, 0);
+         //   //   m_crText = RGB(255, 255, 255);
+         //   //   m_crFocus = RGB(2, 128, 255);
+
+         //   //} else
+         //   //{
+
+         //   //   m_crWindow = RGB(255, 255, 255);
+         //   //   m_crText = RGB(0, 0, 0);
+         //   //   m_crFocus = RGB(1, 64, 128);
+
+         //   //}
+
+         //   //m_hbrushWindow = CreateSolidBrush(m_crWindow);
+         //   //m_hpenBorder = CreatePen(PS_SOLID, 1, m_crText);
+         //   //m_hpenBorderFocus = CreatePen(PS_SOLID, 1, m_crFocus);
+
+         //   m_pnanouserinteraction->create_drawing_objects();
+
+         //}
+
+         //void window::update_drawing_objects()
+         //{
+
+         //   delete_drawing_objects();
+         //   create_drawing_objects();
+
+
+         //}
 
 
          //::atom window::hit_test(int x, int y)
@@ -385,172 +412,172 @@ namespace windows
          //}
          //
 
-         void window::on_left_button_down(::user::mouse* pmouse)
-         {
+         //void window::on_left_button_down(::user::mouse* pmouse)
+         //{
 
-            //SetCapture(m_hwnd);
+         //   //SetCapture(m_hwnd);
 
-            //m_atomLeftButtonDown = hit_test(x, y);
+         //   //m_atomLeftButtonDown = hit_test(x, y);
 
-            //if (m_pdragmove && m_atomLeftButtonDown == e_dialog_result_none)
-            //{
+         //   //if (m_pdragmove && m_atomLeftButtonDown == e_dialog_result_none)
+         //   //{
 
-            //   m_pdragmove->m_bLButtonDown = true;
+         //   //   m_pdragmove->m_bLButtonDown = true;
 
-            //   m_pdragmove->m_bDrag = false;
+         //   //   m_pdragmove->m_bDrag = false;
 
-            //   point_i32 pointCursor(x, y);
+         //   //   point_i32 pointCursor(x, y);
 
-            //   pointCursor += m_rectangle.origin();
+         //   //   pointCursor += m_rectangle.origin();
 
-            //   m_pdragmove->m_pointLButtonDown = pointCursor;
+         //   //   m_pdragmove->m_pointLButtonDown = pointCursor;
 
-            //   m_pdragmove->m_sizeLButtonDownOffset = m_pdragmove->m_pointLButtonDown - m_rectangle.origin();
+         //   //   m_pdragmove->m_sizeLButtonDownOffset = m_pdragmove->m_pointLButtonDown - m_rectangle.origin();
 
-            //   return;
+         //   //   return;
 
-            //}
+         //   //}
 
-            m_pinterface->on_left_button_down(pmouse);
+         //   m_pnanouserinteraction->on_left_button_down(pmouse);
 
-         }
+         //}
 
 
-         void window::on_left_button_up(::user::mouse* pmouse)
-         {
+         //void window::on_left_button_up(::user::mouse* pmouse)
+         //{
 
-            //ReleaseCapture();
+         //   //ReleaseCapture();
 
-            //if (m_pdragmove && (m_pdragmove->m_bLButtonDown || m_pdragmove->m_bDrag))
-            //{
+         //   //if (m_pdragmove && (m_pdragmove->m_bLButtonDown || m_pdragmove->m_bDrag))
+         //   //{
 
-            //   m_pdragmove->m_bLButtonDown = false;
+         //   //   m_pdragmove->m_bLButtonDown = false;
 
-            //   m_pdragmove->m_bDrag = false;
+         //   //   m_pdragmove->m_bDrag = false;
 
-            //   return;
+         //   //   return;
 
-            //}
+         //   //}
 
-            //m_atomLeftButtonUp = hit_test(x, y);
+         //   //m_atomLeftButtonUp = hit_test(x, y);
 
-            //if (m_atomLeftButtonUp == m_atomLeftButtonDown && m_atomLeftButtonUp != e_dialog_result_none)
-            //{
+         //   //if (m_atomLeftButtonUp == m_atomLeftButtonDown && m_atomLeftButtonUp != e_dialog_result_none)
+         //   //{
 
-            //   m_atomResult = m_atomLeftButtonUp;
+         //   //   m_atomResult = m_atomLeftButtonUp;
 
-            //   on_click(m_atomResult);
+         //   //   on_click(m_atomResult);
 
-            //}
+         //   //}
 
-            m_pinterface->on_left_button_up(pmouse);
+         //   m_pnanouserinteraction->on_left_button_up(pmouse);
 
-         }
+         //}
 
-         void window::on_mouse_move(::user::mouse* pmouse)
-         {
+         //void window::on_mouse_move(::user::mouse* pmouse)
+         //{
 
-            //if (m_pdragmove && m_pdragmove->m_bLButtonDown)
-            //{
+         //   //if (m_pdragmove && m_pdragmove->m_bLButtonDown)
+         //   //{
 
-            //   ::SetCursor(::LoadCursor(NULL, IDC_SIZEALL));
+         //   //   ::SetCursor(::LoadCursor(NULL, IDC_SIZEALL));
 
-            //   if (!m_pdragmove->m_bDrag)
-            //   {
+         //   //   if (!m_pdragmove->m_bDrag)
+         //   //   {
 
-            //      m_pdragmove->m_bDrag = true;
+         //   //      m_pdragmove->m_bDrag = true;
 
-            //      point_i32 pointCursor(x, y);
+         //   //      point_i32 pointCursor(x, y);
 
-            //      pointCursor += m_rectangle.origin();
+         //   //      pointCursor += m_rectangle.origin();
 
-            //      auto point = pointCursor - m_pdragmove->m_sizeLButtonDownOffset;
+         //   //      auto point = pointCursor - m_pdragmove->m_sizeLButtonDownOffset;
 
-            //      move_to(pmouse);
+         //   //      move_to(pmouse);
 
-            //      m_pdragmove->m_bDrag = false;
+         //   //      m_pdragmove->m_bDrag = false;
 
-            //   }
+         //   //   }
 
-            //   return;
+         //   //   return;
 
-            //}
+         //   //}
 
-            m_pinterface->on_mouse_move(pmouse);
+         //   m_pnanouserinteraction->on_mouse_move(pmouse);
 
-         }
+         //}
 
 
-         void window::on_right_button_down(::user::mouse* pmouse)
-         {
+         //void window::on_right_button_down(::user::mouse* pmouse)
+         //{
 
-            //SetCapture(m_hwnd);
+         //   //SetCapture(m_hwnd);
 
-            //m_atomLeftButtonDown = hit_test(x, y);
+         //   //m_atomLeftButtonDown = hit_test(x, y);
 
-            //if (m_pdragmove && m_atomLeftButtonDown == e_dialog_result_none)
-            //{
+         //   //if (m_pdragmove && m_atomLeftButtonDown == e_dialog_result_none)
+         //   //{
 
-            //   m_pdragmove->m_bLButtonDown = true;
+         //   //   m_pdragmove->m_bLButtonDown = true;
 
-            //   m_pdragmove->m_bDrag = false;
+         //   //   m_pdragmove->m_bDrag = false;
 
-            //   point_i32 pointCursor(x, y);
+         //   //   point_i32 pointCursor(x, y);
 
-            //   pointCursor += m_rectangle.origin();
+         //   //   pointCursor += m_rectangle.origin();
 
-            //   m_pdragmove->m_pointLButtonDown = pointCursor;
+         //   //   m_pdragmove->m_pointLButtonDown = pointCursor;
 
-            //   m_pdragmove->m_sizeLButtonDownOffset = m_pdragmove->m_pointLButtonDown - m_rectangle.origin();
+         //   //   m_pdragmove->m_sizeLButtonDownOffset = m_pdragmove->m_pointLButtonDown - m_rectangle.origin();
 
-            //   return;
+         //   //   return;
 
-            //}
+         //   //}
 
-            m_pinterface->on_right_button_down(pmouse);
+         //   m_pnanouserinteraction->on_right_button_down(pmouse);
 
-         }
+         //}
 
 
-         void window::on_right_button_up(::user::mouse* pmouse)
-         {
+         //void window::on_right_button_up(::user::mouse* pmouse)
+         //{
 
-            //ReleaseCapture();
+         //   //ReleaseCapture();
 
-            //if (m_pdragmove && (m_pdragmove->m_bLButtonDown || m_pdragmove->m_bDrag))
-            //{
+         //   //if (m_pdragmove && (m_pdragmove->m_bLButtonDown || m_pdragmove->m_bDrag))
+         //   //{
 
-            //   m_pdragmove->m_bLButtonDown = false;
+         //   //   m_pdragmove->m_bLButtonDown = false;
 
-            //   m_pdragmove->m_bDrag = false;
+         //   //   m_pdragmove->m_bDrag = false;
 
-            //   return;
+         //   //   return;
 
-            //}
+         //   //}
 
-            //m_atomLeftButtonUp = hit_test(x, y);
+         //   //m_atomLeftButtonUp = hit_test(x, y);
 
-            //if (m_atomLeftButtonUp == m_atomLeftButtonDown && m_atomLeftButtonUp != e_dialog_result_none)
-            //{
+         //   //if (m_atomLeftButtonUp == m_atomLeftButtonDown && m_atomLeftButtonUp != e_dialog_result_none)
+         //   //{
 
-            //   m_atomResult = m_atomLeftButtonUp;
+         //   //   m_atomResult = m_atomLeftButtonUp;
 
-            //   on_click(m_atomResult);
+         //   //   on_click(m_atomResult);
 
-            //}
+         //   //}
 
-            m_pinterface->on_right_button_up(pmouse);
+         //   m_pnanouserinteraction->on_right_button_up(pmouse);
 
-         }
+         //}
 
 
 
-         ::payload window::get_result()
-         {
+         //::payload window::get_result()
+         //{
 
-            return m_pinterface->get_result();
+         //   return m_pnanouserinteraction->get_result();
 
-         }
+         //}
 
 
 
@@ -558,7 +585,7 @@ namespace windows
          //::micro::child * window::hit_test(const ::point_i32 & point, ::user::e_zorder ezorder)
          //{
 
-         //   return m_pinterface->hit_test(point);
+         //   return m_pnanouserinteraction->hit_test(point);
 
          //}
 
@@ -632,16 +659,16 @@ namespace windows
             {
             case WM_COMMAND:
             {
-              /* ::pointer < ::windows::micro::user > pnanouser = system()->acme_windowing();
+               /* ::pointer < ::windows::micro::user > pnanouser = system()->acme_windowing();
 
-               LRESULT lresult = 0;
+                LRESULT lresult = 0;
 
-               if (pnanouser->_on_command(lresult, m_hwnd, wparam, lparam))
-               {
+                if (pnanouser->_on_command(lresult, m_hwnd, wparam, lparam))
+                {
 
-                  return lresult;
+                   return lresult;
 
-               }*/
+                }*/
 
                return DefWindowProc(m_hwnd, message, wparam, lparam);
 
@@ -657,8 +684,20 @@ namespace windows
 
             break;
             case WM_CLOSE:
+            {
                //DestroyWindow(m_hwnd);
-               m_pinterface->on_click(e_dialog_result_cancel, nullptr);
+               ::pointer < ::micro::elemental > pelemental;
+
+               pelemental = m_pnanouserinteraction;
+
+               if (pelemental)
+               {
+
+                  pelemental->on_click(e_dialog_result_cancel, nullptr);
+
+               }
+
+            }
                return 0;
                break;
             case WM_NCDESTROY:
@@ -680,19 +719,28 @@ namespace windows
             //   break;
             case WM_DESTROY:
                //PostQuitMessage(0);
-               nanowindowimplementationa().erase(this);
+               system()->acme_windowing()->m_windowa.erase(this);
                break;
             case WM_CREATE:
             {
-               update_drawing_objects();
+               //update_drawing_objects();
 
-               on_create();
+               on_create_window();
 
             }
             break;
             case WM_CHAR:
             {
-               on_char((int)wparam);
+               ::pointer < ::micro::elemental > pelemental;
+
+               pelemental = m_pnanouserinteraction;
+
+               if (pelemental)
+               {
+
+                  pelemental->on_char((int)wparam);
+
+               }
                return 0;
             }
             break;
@@ -709,7 +757,16 @@ namespace windows
 
                pmouse->m_pointAbsolute = { point.x, point.y };
 
-               on_left_button_down(pmouse);
+               ::pointer < ::micro::elemental > pelemental;
+
+               pelemental = m_pnanouserinteraction;
+
+               if (pelemental)
+               {
+
+                  pelemental->on_left_button_down(pmouse);
+
+               }
 
             }
             break;
@@ -726,7 +783,16 @@ namespace windows
 
                pmouse->m_pointAbsolute = { point.x, point.y };
 
-               on_mouse_move(pmouse);
+               ::pointer < ::micro::elemental > pelemental;
+
+               pelemental = m_pnanouserinteraction;
+
+               if (pelemental)
+               {
+
+                  pelemental->on_mouse_move(pmouse);
+
+               }
 
             }
             break;
@@ -743,7 +809,16 @@ namespace windows
 
                pmouse->m_pointAbsolute = { point.x, point.y };
 
-               on_left_button_up(pmouse);
+               ::pointer < ::micro::elemental > pelemental;
+
+               pelemental = m_pnanouserinteraction;
+
+               if (pelemental)
+               {
+
+                  pelemental->on_left_button_up(pmouse);
+
+               }
 
             }
             break;
@@ -760,7 +835,16 @@ namespace windows
 
                pmouse->m_pointAbsolute = { point.x, point.y };
 
-               on_right_button_down(pmouse);
+               ::pointer < ::micro::elemental > pelemental;
+
+               pelemental = m_pnanouserinteraction;
+
+               if (pelemental)
+               {
+
+                  pelemental->on_right_button_down(pmouse);
+
+               }
 
             }
             break;
@@ -777,7 +861,16 @@ namespace windows
 
                pmouse->m_pointAbsolute = { point.x, point.y };
 
-               on_right_button_up(pmouse);
+               ::pointer < ::micro::elemental > pelemental;
+
+               pelemental = m_pnanouserinteraction;
+
+               if (pelemental)
+               {
+
+                  pelemental->on_right_button_up(pmouse);
+
+               }
 
             }
             break;
@@ -817,7 +910,7 @@ namespace windows
             case WM_NCACTIVATE:
             {
                LRESULT lresult = DefWindowProc(m_hwnd, message, wparam, lparam);
-               m_pinterface->m_bNcActive = wparam != 0;
+               m_bNcActive = wparam != 0;
                redraw();
 
                return lresult;
@@ -858,9 +951,9 @@ namespace windows
                if (strLparamString == "ImmersiveColorSet")
                {
 
-                  update_drawing_objects();
+                  //update_drawing_objects();
 
-                  redraw();
+                  //redraw();
 
                }
                else if (wparam == SPI_SETWORKAREA)
@@ -945,7 +1038,7 @@ namespace windows
          //}
          //
 
-         void window::display()
+         void window::show_window()
          {
 
             ::ShowWindow(m_hwnd, SW_SHOW);
@@ -958,12 +1051,12 @@ namespace windows
 
 
 
-         void window::add_child(::micro::child* pchild)
-         {
+         //void window::add_child(::micro::child* pchild)
+         //{
 
-            m_pinterface->add_child(pchild);
+         //   m_pnanouserinteraction->add_child(pchild);
 
-         }
+         //}
 
 
          void window::redraw()
@@ -990,7 +1083,7 @@ namespace windows
 
                   ::DestroyWindow(m_hwnd);
 
-                  process_messages();
+                  system()->acme_windowing()->process_messages();
 
                });
 
@@ -1037,67 +1130,73 @@ namespace windows
          //}
 
 
-         void window::on_click(const ::payload& payloadParam, ::user::mouse* pmouse)
-         {
+         //void window::on_click(const ::payload& payloadParam, ::user::mouse* pmouse)
+         //{
 
-            auto payload = payloadParam;
+         //   auto payload = payloadParam;
 
-            //fork([this, atom, pmouse]()
-               //{
+         //   //fork([this, atom, pmouse]()
+         //      //{
 
-            m_pinterface->on_click(payload, pmouse);
+         //   m_pnanouserinteraction->on_click(payload, pmouse);
 
-            //}, { pmouse });
+         //   //}, { pmouse });
 
-         }
-
-
-         void window::on_right_click(const ::payload& payloadParam, ::user::mouse* pmouse)
-         {
-
-            auto payload = payloadParam;
-
-            //fork([this, atom, pmouse]()
-              // {
-
-            m_pinterface->on_right_click(payload, pmouse);
-
-            //}, {pmouse});
+         //}
 
 
-         }
+         //void window::on_right_click(const ::payload& payloadParam, ::user::mouse* pmouse)
+         //{
+
+         //   auto payload = payloadParam;
+
+         //   //fork([this, atom, pmouse]()
+         //     // {
+
+         //   m_pnanouserinteraction->on_right_click(payload, pmouse);
+
+         //   //}, {pmouse});
 
 
-         void window::move_to(const ::point_i32& point)
+         //}
+
+
+         void window::set_position(const ::point_i32& point)
          {
 
             ::SetWindowPos(m_hwnd, nullptr, point.x(), point.y(), 0, 0, SWP_NOSIZE | SWP_NOZORDER);
 
-            ::GetWindowRect(m_hwnd, (RECT*)&m_pinterface->m_rectangle);
-
          }
 
 
-         ::point_i32 window::try_absolute_mouse_position(const ::point_i32& point)
+         //::point_i32 window::try_absolute_mouse_position(const ::point_i32& point)
+         //{
+
+         //   return point;
+
+         //}
+
+
+         //::rectangle_i32 window::get_client_rectangle()
+         //{
+
+         //   ::rectangle_i32 rectangle;
+
+         //   ::GetClientRect(m_hwnd, (LPRECT)&rectangle);
+
+         //   return rectangle;
+
+         //}
+
+
+         rectangle_i32 window::get_window_rectangle()
          {
 
-            return point;
-
-         }
-
-
-         void window::get_client_rectangle(::rectangle_i32& rectangle)
-         {
-
-            ::GetClientRect(m_hwnd, (LPRECT)&rectangle);
-
-         }
-
-
-         void window::get_window_rectangle(::rectangle_i32& rectangle)
-         {
+            ::rectangle_i32 rectangle;
 
             ::GetWindowRect(m_hwnd, (LPRECT)&rectangle);
+
+            return rectangle;
 
          }
 
@@ -1110,7 +1209,7 @@ namespace windows
          }
 
 
-         bool window::has_capture() const
+         bool window::has_capture()
          {
 
             return ::GetCapture() == m_hwnd;
@@ -1148,7 +1247,7 @@ namespace windows
             if (!hwndDesktop)
             {
 
-               return ::micro::window_implementation::get_main_screen_size();
+               return ::acme::windowing::window::get_main_screen_size();
 
             }
 
@@ -1173,7 +1272,7 @@ namespace windows
             else
             {
 
-               ::micro::window_implementation::user_post(procedure);
+               ::acme::windowing::window::user_post(procedure);
 
             }
 
@@ -1189,14 +1288,14 @@ namespace windows
          }
 
 
-         void window::defer_show_system_menu(const ::point_i32 & pointAbsolute)
+         void window::defer_show_system_menu(::user::mouse *pmouse)
          {
 
             //::pointer < ::windows::micro::user > pnanouser = system()->acme_windowing();
 
             //pnanouser->_defer_show_system_menu(m_hwnd, &m_hmenuSystem, pointAbsolute);
 
-            _defer_show_system_menu(pointAbsolute);
+            _defer_show_system_menu(pmouse);
             
 
          }
@@ -1207,14 +1306,14 @@ namespace windows
 
             auto strThreadName = ::task_get_name();
 
-            //auto pmessagebox = m_pinterface.cast < ::micro::message_box >();
+            //auto pmessagebox = m_pnanouserinteraction.cast < ::micro::message_box >();
 
             //::string strAbbreviation("window");
 
             //if (strType.contains("message_box"))
             //if (pmessagebox)
             //{
-               //auto pmessagebox = m_pinterface.cast<nano::me
+               //auto pmessagebox = m_pnanouserinteraction.cast<nano::me
                /// @brief ////////123456789012345
                //strAbbreviation = "msgbx:" + pmessagebox->m_strMessage.left(20);
 
@@ -1244,7 +1343,7 @@ namespace windows
       } // namespace user
 
 
-   } // namespace nano
+   } // namespace acme
 
 } // namespace windows
 

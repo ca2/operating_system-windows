@@ -2,7 +2,7 @@
 // Created by camilo on 31/01/2022 16:06 <3ThomasBorregaardSorensen!!
 //
 #include "framework.h"
-#include "brush.h"
+#include "pen.h"
 //#include "_nano.h"
 
 
@@ -11,14 +11,14 @@ namespace windows
 
 
 
-   namespace nano
+   namespace acme
    {
 
 
       namespace user
       {
 
-         brush::brush()
+         pen::pen()
          {
 
             m_pthis = this;
@@ -26,13 +26,13 @@ namespace windows
          }
 
 
-         brush::~brush()
+         pen::~pen()
          {
 
          }
 
 
-         void brush::update(::nano::graphics::device* pnanodevice)
+         void pen::update(::nano::graphics::device* pnanodevice)
          {
 
             if (m_bModified)
@@ -40,7 +40,7 @@ namespace windows
 
                destroy();
 
-               m_hgdiobj = ::CreateSolidBrush(win32_COLORREF(m_color));
+               m_hgdiobj = ::CreatePen(PS_SOLID, m_iWidth, win32_COLORREF(m_color));
 
                m_bModified = false;
 
@@ -53,11 +53,10 @@ namespace windows
       } // namespace user
 
 
-   } // namespace nano
+   } // namespace acme
 
 
 } // namespace windows
-
 
 
 
