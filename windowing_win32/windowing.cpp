@@ -964,15 +964,15 @@ namespace windowing_win32
    }
 
 
-   ::windows::hwnd_array windowing::_get_hwnda(const ::user::primitive_pointer_array& primitivepointera)
+   ::windows::hwnd_array windowing::_get_hwnda(const ::user::interaction_array& userinteractiona)
    {
 
       ::windows::hwnd_array hwnda;
 
-      for (i32 i = 0; i < primitivepointera.primitive_count(); i++)
+      for (i32 i = 0; i < userinteractiona.interaction_count(); i++)
       {
 
-         ::pointer<::user::interaction>puserinteraction = primitivepointera.primitive_at(i);
+         ::pointer<::user::interaction>puserinteraction = userinteractiona.interaction_at(i);
 
          hwnda.add((HWND)puserinteraction->oswindow());
 

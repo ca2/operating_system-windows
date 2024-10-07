@@ -2,8 +2,10 @@
 #include "system_interaction.h"
 #include "acme/constant/id.h"
 #include "acme/constant/message.h"
+#include "acme/nano/nano.h"
+#include "acme/nano/user/user.h"
 #include "acme/platform/node.h"
-#include "acme/windowing/windowing_base.h"
+#include "acme/nano/windowing/windowing.h"
 #include "aura/message/user.h"
 #include "aura/platform/system.h"
 

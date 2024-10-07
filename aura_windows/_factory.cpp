@@ -1,7 +1,7 @@
 #include "framework.h"
 #include "shell_open.h"
 #include "node.h"
-#include "interaction_impl.h"
+//#include "interaction_impl.h"
 
 
 
@@ -44,7 +44,7 @@ __FACTORY_EXPORT void aura_windows_factory(::factory::factory * pfactory)
    //add_factory_item < ::windows::inteprocess_channel, ::inteprocess_channel::inteprocess_channel >();
 
 
-   pfactory->add_factory_item < ::aura_windows::interaction_impl, ::windowing::window >();
+   //pfactory->add_factory_item < ::aura_windows::interaction_impl, ::windowing::window >();
 
    pfactory->add_factory_item < ::aura_windows::node, ::acme::node >();
 

@@ -60,7 +60,7 @@ namespace windowing_win32
 
       virtual HICON _load_icon(string_array& straMatter, string strIcon, int cx, int cy);
 
-      virtual ::windows::hwnd_array _get_hwnda(const ::user::primitive_pointer_array& primitivepointera);
+      virtual ::windows::hwnd_array _get_hwnda(const ::user::interaction_array& userinteractiona);
 
       virtual ::windowing::window * window(oswindow oswindow) override;
 

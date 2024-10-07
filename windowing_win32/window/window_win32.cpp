@@ -10,7 +10,7 @@
 #include "aura/user/user/user.h"
 #include "aura/platform/session.h"
 #include "aura/platform/system.h"
-#include "aura_windows/interaction_impl.h"
+//#include "aura_windows/interaction_impl.h"
 #include "windowing_win32/window.h"
 #include "windowing_win32/windowing.h"
 
@@ -335,7 +335,7 @@ LRESULT CALLBACK __window_procedure(HWND hwnd, UINT message, WPARAM wparam, LPAR
 
          pwindowing->m_windowmap[hwnd] = pwindow;
 
-         pwindow->m_pimpl2->m_hwnd = hwnd;
+         //pwindow->m_pimpl2->m_hwnd = hwnd;
 
       }
       else

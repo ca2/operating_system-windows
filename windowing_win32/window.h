@@ -7,9 +7,12 @@
 
 #include "acme/operating_system/windows/window.h"
 
-
+#include "acme/_operating_system.h"
 
 //#include "acme/_operating_system.h"
+
+#include <shobjidl_core.h>
+
 
 
 namespace windowing_win32
@@ -33,10 +36,44 @@ namespace windowing_win32
       //UINT                                          m_uiMessage;
       //WPARAM                                        m_wparam;
       //LPARAM                                        m_lparam;
-      ::pointer<::aura_windows::interaction_impl>    m_pimpl2;
+      //::pointer<::aura_windows::interaction_impl>    m_pimpl2;
       class ::time                                      m_timeLastMouseMove;
       ::point_i32                                     m_pointMouseMove;
       ::u32                                           m_uExtraFlagsSetWindowPos;
+
+
+      /// windows::interaction_impl
+
+
+      //HWND                                      m_hwnd;
+      bool                                      m_bClipboardOpened : 1;
+      bool                                      m_bFocusImpl : 1;
+      bool                                      m_bSystemCaret : 1;
+
+      ::rectangle_i32                           m_rectangleLast;
+
+      bool                                      m_bUpdateGraphics;
+
+      size_i32                                  m_size;
+
+      point_i32                                 m_point;
+
+      ::user::interaction_base * m_pbasewnd;
+
+      u32                                       m_uiLastRedrawRequest;
+
+      IDropTargetHelper * m_piDropHelper;
+
+      bool                                      m_bUseDnDHelper;
+
+      //WNDPROC                                   m_pfnSuper; // for subclassing of controls
+
+      ::e_display                               m_edisplayLayout;
+      rectangle_i64                             m_rectangleLastPos;
+      class ::time                                m_timeLastPos;
+      string                                    m_strDebug;
+
+      ::point_i32                               m_pointCursor;
 
 
       window();
@@ -128,10 +165,10 @@ namespace windowing_win32
 
 
       bool has_mouse_capture() override;
-      bool has_keyboard_focus() const override;
+      bool has_keyboard_focus() override;
 
 
-      bool is_active_window() const override;
+      bool is_active_window() override;
 
 
 

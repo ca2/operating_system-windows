@@ -706,16 +706,25 @@
   <ItemGroup>
     <ClInclude Include="extract_icon.h" />
     <ClInclude Include="framework.h" />
-    <ClInclude Include="interaction_impl.h" />
+    <ClInclude Include="aaa_interaction_impl.h" />
     <ClInclude Include="node.h" />
     <ClInclude Include="shell_open.h" />
     <ClInclude Include="_.h" />
     <ClInclude Include="_library.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="aaa_interaction_impl.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="extract_icon.cpp" />
     <ClCompile Include="hicon_from_ico_file.cpp" />
-    <ClCompile Include="interaction_impl.cpp" />
     <ClCompile Include="node.cpp" />
     <ClCompile Include="shell_open.cpp" />
     <ClCompile Include="_factory.cpp" />
