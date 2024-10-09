@@ -242,7 +242,7 @@ namespace input_win32
    //      if (!pwindow)
    //      {
    //
-   //         pwindow = ::place(new ::windowing_win32::window());
+   //         pwindow = __new ::windowing_win32::window();
    //
    //      }
    //
@@ -588,7 +588,7 @@ namespace input_win32
    //
    //   //   //}
    //
-   //   //   auto pusermessage = ::place(new ::user::message());
+   //   //   auto pusermessage = __new ::user::message();
    //
    //   //   if (!pusermessage)
    //   //   {

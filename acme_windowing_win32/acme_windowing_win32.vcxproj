@@ -646,12 +646,15 @@
     </Bscmake>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="display.h" />
+    <ClInclude Include="window.h" />
     <ClInclude Include="_.h" />
     <ClInclude Include="windowing.h" />
     <ClInclude Include="framework.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="user.cpp" />
+    <ClCompile Include="display.cpp" />
+    <ClCompile Include="message_box.cpp" />
     <ClCompile Include="window.cpp" />
     <ClCompile Include="windowing.cpp" />
     <ClCompile Include="_factory.cpp" />

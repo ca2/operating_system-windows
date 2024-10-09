@@ -8,10 +8,10 @@
 #include "acme_windows/_.h"
 
 
-#if defined(_nano_windowing_win32_project)
-#define CLASS_DECL_NANO_WINDOWING_WIN32  CLASS_DECL_EXPORT
+#if defined(_acme_windowing_win32_project)
+#define CLASS_DECL_ACME_WINDOWING_WIN32  CLASS_DECL_EXPORT
 #else
-#define CLASS_DECL_NANO_WINDOWING_WIN32  CLASS_DECL_IMPORT
+#define CLASS_DECL_ACME_WINDOWING_WIN32  CLASS_DECL_IMPORT
 #endif
 
 

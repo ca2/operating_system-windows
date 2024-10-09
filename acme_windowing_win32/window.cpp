@@ -2,12 +2,14 @@
 #include "framework.h"
 #include "acme/nano/graphics/device.h"
 #include "window.h"
-#include "user.h"
+//#include "user.h"
 #include "acme/parallelization/task.h"
-#include "acme/nano/nano.h"
-#include "acme/nano/user/button.h"
-#include "acme/nano/user/message_box.h"
+//#include "acme/nano/nano.h"
+//#include "acme/nano/user/button.h"
+//#include "acme/nano/user/message_box.h"
 #include "acme/platform/system.h"
+#include "acme/user/micro/elemental.h"
+#include "acme/user/user/interaction.h"
 #include "acme/user/user/mouse.h"
 #include "acme/windowing/windowing.h"
 
@@ -44,20 +46,21 @@ public:
 };
 
 
-namespace windows
+namespace win32
 {
-
 
 
    namespace acme
    {
 
 
-      namespace user
+      namespace windowing
       {
+
 
          window::window()
          {
+
             m_bSizeMoveMode = false;
             //      m_bDestroy = false;
             m_hwnd = nullptr;
@@ -78,19 +81,19 @@ namespace windows
 
 
 
-         LRESULT CALLBACK nano_window_procedure(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam);
+         LRESULT CALLBACK acme_window_procedure(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam);
 
 
-#define NANO_WINDOW_CLASS "nano_window_class"
+#define ACME_WINDOW_CLASS "acme_window_class"
 
 
 
 
 
-         HINSTANCE nano_message_box_hinstance()
+         HINSTANCE acme_message_box_hinstance()
          {
 
-            HINSTANCE hinstanceWndProc = (HINSTANCE) ::GetModuleHandleA("acme.dll");
+            HINSTANCE hinstanceWndProc = (HINSTANCE) ::GetModuleHandleA("acme_windowing_win32.dll");
 
             if (hinstanceWndProc == nullptr)
             {
@@ -114,14 +117,14 @@ namespace windows
 
             }
 
-            auto hinstanceWndProc = nano_message_box_hinstance();
+            auto hinstanceWndProc = acme_message_box_hinstance();
 
             WNDCLASSEX wndclassex{};
 
             //Step 1: Registering the Window Class
             wndclassex.cbSize = sizeof(WNDCLASSEX);
             wndclassex.style = CS_DBLCLKS;
-            wndclassex.lpfnWndProc = &nano_window_procedure;
+            wndclassex.lpfnWndProc = &acme_window_procedure;
             wndclassex.cbClsExtra = 0;
             wndclassex.cbWndExtra = 0;
             wndclassex.hInstance = hinstanceWndProc;
@@ -129,7 +132,7 @@ namespace windows
             wndclassex.hCursor = LoadCursor(NULL, IDC_ARROW);
             wndclassex.hbrBackground = (HBRUSH)(COLOR_WINDOW + 1);
             wndclassex.lpszMenuName = NULL;
-            wndclassex.lpszClassName = _T(NANO_WINDOW_CLASS);
+            wndclassex.lpszClassName = _T(ACME_WINDOW_CLASS);
             wndclassex.hIconSm = LoadIcon(NULL, IDI_APPLICATION);
 
             if (!RegisterClassEx(&wndclassex))
@@ -145,17 +148,17 @@ namespace windows
 
 
          // Step 4: the Window Procedure
-         LRESULT CALLBACK nano_window_procedure(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
+         LRESULT CALLBACK acme_window_procedure(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
          {
 
-            ::windows::micro::window* pwindow = nullptr;
+            ::win32::acme::windowing::window* pwindow = nullptr;
 
             if (msg == WM_NCCREATE)
             {
 
                CREATESTRUCT* pcreatestruct = (CREATESTRUCT*)lParam;
 
-               pwindow = (::windows::micro::window*)pcreatestruct->lpCreateParams;
+               pwindow = (::win32::acme::windowing::window *)pcreatestruct->lpCreateParams;
 
                SetWindowLongPtr(hwnd, GWLP_USERDATA, (LONG_PTR)pwindow);
 
@@ -165,7 +168,7 @@ namespace windows
             else
             {
 
-               pwindow = (::windows::micro::window*)GetWindowLongPtr(hwnd, GWLP_USERDATA);
+               pwindow = (::win32::acme::windowing::window*)GetWindowLongPtr(hwnd, GWLP_USERDATA);
 
             }
 
@@ -200,17 +203,17 @@ namespace windows
 
             }
 
-            wstring wstrTitle(m_pnanouserinteraction->m_strTitle);
+            wstring wstrTitle(m_pacmeuserinteraction->m_strTitle);
 
-            auto hinstanceWndProc = nano_message_box_hinstance();
+            auto hinstanceWndProc = acme_message_box_hinstance();
 
             m_ptask = ::get_task();
 
-            auto r = m_pnanouserinteraction->get_window_rectangle();
+            auto r = m_pacmeuserinteraction->get_window_rectangle();
 
             HWND hwnd = CreateWindowEx(
                m_bTopMost ? WS_EX_TOPMOST : 0,
-               _T(NANO_WINDOW_CLASS),
+               _T(ACME_WINDOW_CLASS),
                wstrTitle,
                WS_POPUP | WS_SYSMENU,
                r.left(),
@@ -235,7 +238,7 @@ namespace windows
          //void window::on_char(int iChar)
          //{
 
-         //   m_pnanouserinteraction->on_char(iChar);
+         //   m_pacmeuserinteraction->on_char(iChar);
 
          //}
 
@@ -253,7 +256,7 @@ namespace windows
 
             {
 
-               nano()->graphics();
+               //nano()->graphics();
 
                __construct(m_pnanodevice);
 
@@ -261,7 +264,7 @@ namespace windows
 
                ::pointer < ::micro::elemental > pelemental;
 
-               pelemental = m_pnanouserinteraction;
+               pelemental = m_pacmeuserinteraction;
 
                if (pelemental)
                {
@@ -330,7 +333,7 @@ namespace windows
 
          //   //}
 
-         //   m_pnanouserinteraction->delete_drawing_objects();
+         //   m_pacmeuserinteraction->delete_drawing_objects();
 
          //}
 
@@ -379,7 +382,7 @@ namespace windows
          //   //m_hpenBorder = CreatePen(PS_SOLID, 1, m_crText);
          //   //m_hpenBorderFocus = CreatePen(PS_SOLID, 1, m_crFocus);
 
-         //   m_pnanouserinteraction->create_drawing_objects();
+         //   m_pacmeuserinteraction->create_drawing_objects();
 
          //}
 
@@ -438,7 +441,7 @@ namespace windows
 
          //   //}
 
-         //   m_pnanouserinteraction->on_left_button_down(pmouse);
+         //   m_pacmeuserinteraction->on_left_button_down(pmouse);
 
          //}
 
@@ -470,7 +473,7 @@ namespace windows
 
          //   //}
 
-         //   m_pnanouserinteraction->on_left_button_up(pmouse);
+         //   m_pacmeuserinteraction->on_left_button_up(pmouse);
 
          //}
 
@@ -503,7 +506,7 @@ namespace windows
 
          //   //}
 
-         //   m_pnanouserinteraction->on_mouse_move(pmouse);
+         //   m_pacmeuserinteraction->on_mouse_move(pmouse);
 
          //}
 
@@ -534,7 +537,7 @@ namespace windows
 
          //   //}
 
-         //   m_pnanouserinteraction->on_right_button_down(pmouse);
+         //   m_pacmeuserinteraction->on_right_button_down(pmouse);
 
          //}
 
@@ -566,7 +569,7 @@ namespace windows
 
          //   //}
 
-         //   m_pnanouserinteraction->on_right_button_up(pmouse);
+         //   m_pacmeuserinteraction->on_right_button_up(pmouse);
 
          //}
 
@@ -575,7 +578,7 @@ namespace windows
          //::payload window::get_result()
          //{
 
-         //   return m_pnanouserinteraction->get_result();
+         //   return m_pacmeuserinteraction->get_result();
 
          //}
 
@@ -585,7 +588,7 @@ namespace windows
          //::micro::child * window::hit_test(const ::point_i32 & point, ::user::e_zorder ezorder)
          //{
 
-         //   return m_pnanouserinteraction->hit_test(point);
+         //   return m_pacmeuserinteraction->hit_test(point);
 
          //}
 
@@ -688,7 +691,7 @@ namespace windows
                //DestroyWindow(m_hwnd);
                ::pointer < ::micro::elemental > pelemental;
 
-               pelemental = m_pnanouserinteraction;
+               pelemental = m_pacmeuserinteraction;
 
                if (pelemental)
                {
@@ -733,7 +736,7 @@ namespace windows
             {
                ::pointer < ::micro::elemental > pelemental;
 
-               pelemental = m_pnanouserinteraction;
+               pelemental = m_pacmeuserinteraction;
 
                if (pelemental)
                {
@@ -759,7 +762,7 @@ namespace windows
 
                ::pointer < ::micro::elemental > pelemental;
 
-               pelemental = m_pnanouserinteraction;
+               pelemental = m_pacmeuserinteraction;
 
                if (pelemental)
                {
@@ -785,7 +788,7 @@ namespace windows
 
                ::pointer < ::micro::elemental > pelemental;
 
-               pelemental = m_pnanouserinteraction;
+               pelemental = m_pacmeuserinteraction;
 
                if (pelemental)
                {
@@ -811,7 +814,7 @@ namespace windows
 
                ::pointer < ::micro::elemental > pelemental;
 
-               pelemental = m_pnanouserinteraction;
+               pelemental = m_pacmeuserinteraction;
 
                if (pelemental)
                {
@@ -837,7 +840,7 @@ namespace windows
 
                ::pointer < ::micro::elemental > pelemental;
 
-               pelemental = m_pnanouserinteraction;
+               pelemental = m_pacmeuserinteraction;
 
                if (pelemental)
                {
@@ -863,7 +866,7 @@ namespace windows
 
                ::pointer < ::micro::elemental > pelemental;
 
-               pelemental = m_pnanouserinteraction;
+               pelemental = m_pacmeuserinteraction;
 
                if (pelemental)
                {
@@ -1054,7 +1057,7 @@ namespace windows
          //void window::add_child(::micro::child* pchild)
          //{
 
-         //   m_pnanouserinteraction->add_child(pchild);
+         //   m_pacmeuserinteraction->add_child(pchild);
 
          //}
 
@@ -1138,7 +1141,7 @@ namespace windows
          //   //fork([this, atom, pmouse]()
          //      //{
 
-         //   m_pnanouserinteraction->on_click(payload, pmouse);
+         //   m_pacmeuserinteraction->on_click(payload, pmouse);
 
          //   //}, { pmouse });
 
@@ -1153,7 +1156,7 @@ namespace windows
          //   //fork([this, atom, pmouse]()
          //     // {
 
-         //   m_pnanouserinteraction->on_right_click(payload, pmouse);
+         //   m_pacmeuserinteraction->on_right_click(payload, pmouse);
 
          //   //}, {pmouse});
 
@@ -1306,14 +1309,14 @@ namespace windows
 
             auto strThreadName = ::task_get_name();
 
-            //auto pmessagebox = m_pnanouserinteraction.cast < ::micro::message_box >();
+            //auto pmessagebox = m_pacmeuserinteraction.cast < ::micro::message_box >();
 
             //::string strAbbreviation("window");
 
             //if (strType.contains("message_box"))
             //if (pmessagebox)
             //{
-               //auto pmessagebox = m_pnanouserinteraction.cast<nano::me
+               //auto pmessagebox = m_pacmeuserinteraction.cast<nano::me
                /// @brief ////////123456789012345
                //strAbbreviation = "msgbx:" + pmessagebox->m_strMessage.left(20);
 
@@ -1340,12 +1343,13 @@ namespace windows
          }
 
 
-      } // namespace user
+      } // namespace windowing
 
 
    } // namespace acme
 
-} // namespace windows
+
+} // namespace win32
 
 
 

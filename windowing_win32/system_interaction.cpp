@@ -3,7 +3,7 @@
 #include "acme/constant/id.h"
 #include "acme/constant/message.h"
 #include "acme/nano/nano.h"
-#include "acme/nano/user/user.h"
+#include "acme/user/micro/user.h"
 #include "acme/platform/node.h"
 #include "acme/windowing/windowing.h"
 #include "aura/message/user.h"

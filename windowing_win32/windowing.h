@@ -2,6 +2,7 @@
 #pragma once
 
 
+#include "acme_windowing_win32/windowing.h"
 #include "aura/windowing/windowing.h"
 #include "win32.h"
 
@@ -11,7 +12,8 @@ namespace windowing_win32
 
 
    class CLASS_DECL_WINDOWING_WIN32 windowing :
-      virtual public ::windowing::windowing
+      virtual public ::windowing::windowing,
+      virtual public ::win32::acme::windowing::windowing
    {
    public:
 
@@ -25,7 +27,7 @@ namespace windowing_win32
 
       ::critical_section               m_criticalsection;
       ::windows::window_map            m_windowmap;
-      ::pointer<class display>         m_pdisplay;
+      //::pointer<class display>         m_pdisplay;
 
 //#ifdef WINDOWS_DESKTOP
 
@@ -66,7 +68,7 @@ namespace windowing_win32
 
       virtual ::windowing_win32::window * _window(HWND hwnd);
 
-      virtual ::windowing::display * display() override;
+      //virtual ::windowing::display * display() override;
 
       //::pointer<::windowing::monitor>get_main_monitor();
 
@@ -176,6 +178,7 @@ namespace windowing_win32
       //template < typename PREDICATE >
       //bool _top_level_contains_bool_member(PREDICATE predicate);
 
+      void set_dark_mode(bool bDarkMode) override;
 
       bool _visible_top_level_contains_all_names(const string_array& stra) override;
       bool _visible_top_level_contains_name(string str) override;

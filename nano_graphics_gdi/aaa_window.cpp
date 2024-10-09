@@ -5,9 +5,9 @@
 #include "user.h"
 #include "acme/parallelization/task.h"
 #include "acme/nano/nano.h"
-#include "acme/nano/user/button.h"
-#include "acme/nano/user/message_box.h"
-#include "acme/nano/user/window.h"
+#include "acme/user/micro/button.h"
+#include "acme/user/micro/message_box.h"
+#include "acme/user/micro/window.h"
 #include "acme/user/user/mouse.h"
 
 
@@ -239,7 +239,7 @@ namespace windows
 
             {
 
-               auto pnanodevice = ::place(new ::windows::nano::graphics::device(hdc));
+               auto pnanodevice = __new ::windows::nano::graphics::device(hdc);
 
                m_pinterface->draw(pnanodevice);
 

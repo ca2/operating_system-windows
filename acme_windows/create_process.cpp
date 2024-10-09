@@ -1099,7 +1099,7 @@ namespace acme_windows
          while (dwReadOut > 0 || dwReadErr > 0);
 
          if (tracefunction
-            && !tracefunction.m_timeTimeout.is_infinite()
+            && !tracefunction.timeout().is_infinite()
             && m_timeStart.elapsed() > tracefunction.m_timeTimeout)
          {
 

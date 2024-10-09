@@ -10,14 +10,16 @@
 namespace win32
 {
 
+
    namespace acme
    {
+
 
       namespace windowing
       {
 
 
-         class CLASS_DECL_NANO_WINDOWING_WIN32 windowing :
+         class CLASS_DECL_ACME_WINDOWING_WIN32 windowing :
             virtual public ::acme::windowing::windowing
          {
          public:
@@ -63,13 +65,15 @@ namespace win32
             void windowing_system_post_quit() override;
 
 
+            void show(::particle_pointer pparticle) override;
+
          };
 
 
       } // namespace windowing
 
 
-   }// namespace acme
+   } // namespace acme
 
 
 } // namespace win32

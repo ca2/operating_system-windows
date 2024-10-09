@@ -991,7 +991,58 @@ namespace windowing_win32
 
                   //if (!p2->m_bSizeMoveMode)
                   {
+
+                     ::rectangle_i32 rectangleWindow;
+                     
+                     RECT rectWindow;
+                     
+                     ::GetWindowRect(hwnd, &rectWindow);
+
+                     rectangleWindow = rectWindow;
+
+                     ::rectangle_i32 rectangleRequest(point, size);
+
+                     if (rectangleWindow != rectangleRequest)
+                     {
+
+                        if (!::IsIconic(hwnd))
+                        {
+
+                           auto nFlags = pwindow->m_uSetWindowPosLastFlags;
+
+                           nFlags &= ~SWP_NOMOVE;
+                           nFlags &= ~SWP_NOSIZE;
+                           nFlags |= SWP_NOZORDER;
+
+                           ::SetWindowPos(
+                              hwnd,
+                              nullptr,
+                              rectangleRequest.left(),
+                              rectangleRequest.top(),
+                              rectangleRequest.width(),
+                              rectangleRequest.height(),
+                              nFlags);
+
+                        }
+
+                     }
+
                      ::UpdateLayeredWindow(hwnd, m_hdcScreen, (POINT *)&point, (SIZE *)&size, playeredwindowbuffer->m_hdc, (POINT *)&pointSrc, make_u32(0, 0, 0, 0), &blendPixelFunction, ULW_ALPHA);
+
+                     ::GetWindowRect(hwnd, &rectWindow);
+
+                     rectangleWindow = rectWindow;
+
+                     ::rectangle_i32 rectangleCache(pwindow->m_pointWindow, pwindow->m_sizeWindow);
+
+                     if (rectangleCache != rectangleWindow)
+                     {
+
+                        pwindow->m_pointWindow = rectangleWindow.origin();
+
+                        pwindow->m_sizeWindow = rectangleWindow.size();
+
+                     }
 
                   }
 
@@ -1193,7 +1244,7 @@ namespace windowing_win32
    HWND buffer::get_hwnd() const
    {
 
-      return (HWND)m_pwindow->get_os_data();
+      return (HWND)m_pwindow->oswindow();
 
    }
 

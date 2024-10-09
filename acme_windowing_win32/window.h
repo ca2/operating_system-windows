@@ -2,14 +2,14 @@
 #pragma once
 
 
-#include "acme/nano/windowing/window.h"
+#include "acme/windowing/window.h"
 //#include "acme/windowing/window_base.h"
 #include "acme/operating_system/windows/window.h"
 #undef USUAL_OPERATING_SYSTEM_SUPPRESSIONS
 #include "acme/_operating_system.h"
 
 
-namespace windows
+namespace win32
 {
 
 
@@ -17,11 +17,11 @@ namespace windows
    {
 
 
-      namespace user
+      namespace windowing
       {
 
 
-         class CLASS_DECL_NANO_USER_WIN32 window :
+         class CLASS_DECL_ACME_WINDOWING_WIN32 window :
             virtual public ::acme::windowing::window,
             virtual public ::windows::window
          {
@@ -152,17 +152,13 @@ namespace windows
          //CLASS_DECL_ACME void process_messages(bool bWait = false);
 
 
-      } // namespace user
+      } // namespace windowing
 
       
    } // namespace acme
 
 
-} // namespace windows
-
-
-
-
+} // namespace win32
 
 
 

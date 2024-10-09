@@ -3,9 +3,9 @@
 
 
 
-#include "aura/windowing/window.h"
+#include "acme_windowing_win32/window.h"
 
-#include "acme/operating_system/windows/window.h"
+#include "aura/windowing/window.h"
 
 #include "acme/_operating_system.h"
 
@@ -21,7 +21,7 @@ namespace windowing_win32
 
    class CLASS_DECL_WINDOWING_WIN32 window :
       virtual public ::windowing::window,
-      virtual public ::windows::window,
+      virtual public ::win32::acme::windowing::window,
       virtual public IDropTarget
    {
    public:
@@ -40,6 +40,7 @@ namespace windowing_win32
       class ::time                                      m_timeLastMouseMove;
       ::point_i32                                     m_pointMouseMove;
       ::u32                                           m_uExtraFlagsSetWindowPos;
+      ::u32                                           m_uSetWindowPosLastFlags;
 
 
       /// windows::interaction_impl
@@ -84,13 +85,20 @@ namespace windowing_win32
       //void dump(dump_context & dumpcontext) const override;
 
 
-      void install_message_routing(channel* pchannel) override;
+      //void install_message_routing(channel* pchannel) override;
+
+
+      void prio_install_message_routing(::channel * pchannel) override;
+      void last_install_message_routing(::channel * pchannel) override;
+
 
 
 
       //void create_window(::windowing::window* pimpl) override;
 
       void create_window() override;
+
+      void _create_window() override;
 
 
       inline HWND get_hwnd() const { return (HWND)oswindow(); }
@@ -110,14 +118,14 @@ namespace windowing_win32
       }
 
 
-      ::windowing_win32::windowing* windowing() const { return m_pwindowing.cast < ::windowing_win32::windowing >(); }
+      void destroy() override;
+
+      ::windowing_win32::windowing * win32_windowing();
 
 
       //virtual void set_oswindow(oswindow oswindow) override;
 
 
-      DECLARE_MESSAGE_HANDLER(_001OnMessage);
-      DECLARE_MESSAGE_HANDLER(_001OnTaskbarCreated);
 
 
       //bool defer_set_icon() override;
@@ -137,6 +145,10 @@ namespace windowing_win32
       //virtual i32 unmap_window(bool bWithdraw) override;
 
       //virtual void set_wm_class(const ::string & psz) override;
+
+      void user_post(const ::procedure & procedure) override;
+
+      void main_post(const ::procedure & procedure) override;
 
       void exit_iconify() override;
 
@@ -286,6 +298,9 @@ namespace windowing_win32
       //DECLARE_MESSAGE_HANDLER(_001OnGetMinMaxInfo);
       DECLARE_MESSAGE_HANDLER(_001OnEnable);
       DECLARE_MESSAGE_HANDLER(on_message_get_icon);
+      DECLARE_MESSAGE_HANDLER(_001OnMessage);
+      DECLARE_MESSAGE_HANDLER(_001OnTaskbarCreated);
+      DECLARE_MESSAGE_HANDLER(_001OnSysCommand);
 
 
       //virtual void win_update_graphics();
@@ -600,19 +615,19 @@ namespace windowing_win32
 
 
       virtual ::windowing::window * get_next_window(::u32 nFlag = GW_HWNDNEXT);
-      virtual ::windowing::window * get_top_window() const;
+      virtual ::windowing::window * get_top_window();
 
 
-      virtual ::windowing::window * get_window(::u32 nCmd) const;
-      virtual ::windowing::window * get_last_active_popup() const;
+      virtual ::windowing::window * get_window(::u32 nCmd);
+      virtual ::windowing::window * get_last_active_popup();
 
       
-      virtual ::windowing::window * get_parent() const override;
-      virtual ::oswindow get_parent_oswindow() const override;
+      //virtual ::windowing::window * get_parent() override;
+      //virtual ::oswindow get_parent_oswindow() override;
       virtual void set_parent(::windowing::window * pwindow) override;
 
-      virtual ::windowing::window * get_owner() const override;
-      virtual ::oswindow get_owner_oswindow() const override;
+      virtual ::windowing::window * window_get_owner() override;
+      virtual ::oswindow get_owner_oswindow() override;
       virtual void set_owner(::windowing::window * pwindow) override;
 
       //virtual ::user::interaction * set_owner(::user::interaction * pWndNewParent);

@@ -1037,10 +1037,8 @@ namespace windowing_win32
    }
 
 
-   void display::initialize_display(::windowing::windowing * pwindowing)
+   void display::open_display()
    {
-
-      ::windowing::display::initialize_display(pwindowing);
 
       enum_display_monitors();
 
