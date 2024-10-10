@@ -203,13 +203,13 @@ namespace win32
 
             }
 
-            wstring wstrTitle(m_pacmeuserinteraction->m_strTitle);
+            wstring wstrTitle(m_pacmeuserinteraction->get_title());
 
             auto hinstanceWndProc = acme_message_box_hinstance();
 
             m_ptask = ::get_task();
 
-            auto r = m_pacmeuserinteraction->get_window_rectangle();
+            auto r = m_pacmeuserinteraction->get_rectangle();
 
             HWND hwnd = CreateWindowEx(
                m_bTopMost ? WS_EX_TOPMOST : 0,
@@ -231,6 +231,31 @@ namespace win32
             //nanowindowimplementationa().add(this);
 
             //system()->window_
+
+         }
+
+
+         void window::destroy_window()
+         {
+
+            main_post()
+               << [this]()
+               {
+
+                  if (!::DestroyWindow(m_hwnd))
+                  {
+
+                     informationf("window::destroy_window Failed to destroy window");
+
+                  }
+                  else
+                  {
+
+                     informationf("window::destroy_window Window destroyed!!");
+
+                  }
+
+               };
 
          }
 
@@ -1044,15 +1069,43 @@ namespace win32
          void window::show_window()
          {
 
-            ::ShowWindow(m_hwnd, SW_SHOW);
+            main_send([this]()
+               {
 
-            ::UpdateWindow(m_hwnd);
+                  if (!::IsWindow(m_hwnd))
+                  {
 
-            ::BringWindowToTop(m_hwnd);
+                     create_window();
+
+                  }
+
+                  ::ShowWindow(m_hwnd, SW_SHOW);
+
+                  ::UpdateWindow(m_hwnd);
+
+                  ::BringWindowToTop(m_hwnd);
+
+            });
 
          }
 
 
+         void window::hide_window()
+         {
+
+            main_send([this]()
+               {
+
+                  if (::IsWindow(m_hwnd))
+                  {
+
+                     ::ShowWindow(m_hwnd, SW_HIDE);
+
+                  }
+
+            });
+
+         }
 
          //void window::add_child(::micro::child* pchild)
          //{
@@ -1263,19 +1316,19 @@ namespace win32
          }
 
 
-         void window::user_post(const ::procedure& procedure)
+         void window::_user_post(const ::procedure& procedure)
          {
 
             if (m_ptask)
             {
 
-               m_ptask->post_procedure(procedure);
+               m_ptask->post(procedure);
 
             }
             else
             {
 
-               ::acme::windowing::window::user_post(procedure);
+               ::acme::windowing::window::_user_post(procedure);
 
             }
 

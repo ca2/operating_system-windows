@@ -132,11 +132,17 @@ namespace windows
 
             ::SelectObject(m_hdc, (HGDIOBJ)pnanopen->operating_system_data());
 
+
+            auto r = rectangle;
+
+            r.left() += pnanopen->m_iWidth - 1;
+            r.top() += pnanopen->m_iWidth - 1;
+
             ::Rectangle(m_hdc,
-               rectangle.left(),
-               rectangle.top(),
-               rectangle.right(),
-               rectangle.bottom());
+               r.left(),
+               r.top(),
+               r.right(),
+               r.bottom());
 
 
          }

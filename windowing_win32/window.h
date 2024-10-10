@@ -146,9 +146,9 @@ namespace windowing_win32
 
       //virtual void set_wm_class(const ::string & psz) override;
 
-      void user_post(const ::procedure & procedure) override;
+      //void _user_post(const ::procedure & procedure) override;
 
-      void main_post(const ::procedure & procedure) override;
+      //void _main_post(const ::procedure & procedure) override;
 
       void exit_iconify() override;
 
@@ -1017,6 +1017,12 @@ namespace windowing_win32
 
 
       void set_opacity(double dOpacity) override;
+
+      void _user_send(const ::procedure & procedure) override;
+      void _user_post(const ::procedure & procedure) override;
+
+      void _main_send(const ::procedure & procedure) override;
+      void _main_post(const ::procedure & procedure) override;
       
 
    };

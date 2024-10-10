@@ -543,7 +543,7 @@ namespace windowing_win32
 
       auto edisplaySketch = m_puserinteraction->const_layout().sketch().display();
 
-      if (is_equivalent(edisplaySketch, e_display_normal))
+      if (is_equivalent_in_equivalence_sink(edisplaySketch, e_display_normal))
       {
 
          ::rectangle_i32 rectangleRequest;
@@ -724,7 +724,7 @@ namespace windowing_win32
 
                   m_puserinteraction->layout().m_statea[::user::e_layout_output].m_edisplay = edisplayDesign;
 
-                  m_puserinteraction->send_message(e_message_show_window, ::is_screen_visible(edisplayDesign) ? 1 : 0);
+                  //m_puserinteraction->send_message(e_message_show_window, ::is_screen_visible(edisplayDesign) ? 1 : 0);
 
                }
 
@@ -1690,20 +1690,20 @@ namespace windowing_win32
    }
 
 
-   void window::user_post(const ::procedure & procedure)
-   {
+   //void window::_user_post(const ::procedure & procedure)
+   //{
 
-      m_puserinteraction->user_post(procedure);
+   //   m_puserinteraction->_user_post(procedure);
 
-   }
+   //}
 
 
-   void window::main_post(const ::procedure & procedure)
-   {
+   //void window::_main_post(const ::procedure & procedure)
+   //{
 
-      m_puserinteraction->main_post(procedure);
+   //   m_puserinteraction->_main_post(procedure);
 
-   }
+   //}
 
 
    void window::exit_iconify()
@@ -2064,20 +2064,27 @@ namespace windowing_win32
    void window::destroy_window()
    {
 
-      HWND hwnd = get_hwnd();
+      main_send()
+         << [this]()
+         {
 
-      if (!::DestroyWindow(hwnd))
-      {
+            HWND hwnd = get_hwnd();
 
-         //return ::error_failed;
+            if (!::DestroyWindow(hwnd))
+            {
 
-         throw ::exception(error_failed);
+               DWORD dwLastError = ::GetLastError();
+               //return ::error_failed;
 
-      }
+               throw ::exception(error_failed);
 
-      //return ::success;
+            }
 
-      ::windowing::window::destroy_window();
+            //return ::success;
+
+            ::windowing::window::destroy_window();
+
+         };
 
    }
 
@@ -7633,6 +7640,17 @@ namespace windowing_win32
    LRESULT window::__window_procedure(HWND hwnd, UINT message, WPARAM wparam, LPARAM lparam)
    {
 
+      if (message == WM_USER + 1297)
+      {
+
+         ::procedure procedure(lparam);
+
+         procedure();
+
+         return 0;
+
+      }
+
       lresult lresult = 0;
 
       if (hwnd == m_hwnd && on_window_procedure(lresult, message, wparam, lparam))
@@ -8087,6 +8105,39 @@ namespace windowing_win32
       m_uOpacity = (::u8) (minimum_maximum(dOpacity, 0., 1.) * 255.0);
 
    }
+
+
+   void window::_user_send(const ::procedure & procedure)
+   {
+
+      ::SendMessage(m_hwnd, WM_USER + 1297, 0, (lparam)(::uptr)(::subparticle*)procedure.m_pbase.m_p);
+
+   }
+
+
+   void window::_user_post(const ::procedure & procedure)
+   {
+
+      m_puserinteraction->_user_post(procedure);
+
+   }
+
+
+   void window::_main_send(const ::procedure & procedure)
+   {
+
+      _user_send(procedure);
+
+   }
+
+
+   void window::_main_post(const ::procedure & procedure)
+   {
+
+      _user_post(procedure);
+
+   }
+
 
 
 } // namespace windowing_win32

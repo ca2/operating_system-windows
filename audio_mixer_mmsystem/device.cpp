@@ -74,7 +74,7 @@ namespace audio_mixer_mmsystem
 
             //strMessage.formatf("mixerClose() failed on hmx=%.04Xh, mmr=%u!", m_hMixer, mmrct);
 
-            //message_box(this, strMessage, nullptr, e_message_box_icon_exclamation);
+            //message_box(strMessage, nullptr, e_message_box_icon_exclamation);
 
          //}
 

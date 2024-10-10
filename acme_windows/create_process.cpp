@@ -1100,7 +1100,7 @@ namespace acme_windows
 
          if (tracefunction
             && !tracefunction.timeout().is_infinite()
-            && m_timeStart.elapsed() > tracefunction.m_timeTimeout)
+            && m_timeStart.elapsed() > tracefunction.timeout())
          {
 
             break;
@@ -1222,8 +1222,8 @@ namespace acme_windows
          auto elapsed = m_timeStart.elapsed();
 
          if (tracefunction
-            && !tracefunction.m_timeTimeout.is_infinite()
-            && elapsed > tracefunction.m_timeTimeout)
+            && !tracefunction.timeout().is_infinite()
+            && elapsed > tracefunction.timeout())
          {
 
             ::string strElapsed = datetime()->elapsed_time_text(elapsed);

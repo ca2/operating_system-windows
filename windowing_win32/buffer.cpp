@@ -475,12 +475,13 @@ namespace windowing_win32
       if (m_ptaskUpdateScreen)
       {
 
-         m_ptaskUpdateScreen->post_procedure([this]()
+         m_ptaskUpdateScreen->main_post()
+            << [this]()
             {
 
                double_buffer::update_screen();
 
-});
+            };
 
          m_eventUpdateScreen.SetEvent();
 
@@ -609,9 +610,9 @@ namespace windowing_win32
          if (size != sizeBuffer)
          {
 
-            error() <<"Requested size is different of buffer size.";
-            error() <<"Requested size: " << size;
-            error() <<"Buffer size: " << sizeBuffer;
+            error() << "Requested size is different of buffer size.";
+            error() << "Requested size: " << size;
+            error() << "Buffer size: " << sizeBuffer;
             //error() <<"Design size: " << sizeDesign;
 
             //m_pwindow->m_puserinteraction->set_need_redraw();
@@ -624,9 +625,9 @@ namespace windowing_win32
          else if (sizeLayeredWindowBuffer != sizeBuffer)
          {
 
-            error() <<"Os buffer size is different of buffer size.";
-            error() <<"Os buffer size: " << sizeLayeredWindowBuffer;
-            error() <<"Buffer size: " << sizeBuffer;
+            error() << "Os buffer size is different of buffer size.";
+            error() << "Os buffer size: " << sizeLayeredWindowBuffer;
+            error() << "Buffer size: " << sizeBuffer;
 
             m_pwindow->m_puserinteraction->post_redraw();
 
@@ -901,14 +902,14 @@ namespace windowing_win32
                {
 
 
-        /*             };
+                  /*             };
 
-                  p();*/
+                            p();*/
 
-                  //::SendMessage((HWND) m_pwindow->oswindow(),
-   //WM_APP + 12345, 0, (LPARAM) p.m_pbase.m_p);
+                            //::SendMessage((HWND) m_pwindow->oswindow(),
+             //WM_APP + 12345, 0, (LPARAM) p.m_pbase.m_p);
 
-                  //if (m_pwindow->m_puserinteraction->get_parent() == nullptr)
+                            //if (m_pwindow->m_puserinteraction->get_parent() == nullptr)
                   {
 
                      auto p = __get_bottom_right();
@@ -993,9 +994,9 @@ namespace windowing_win32
                   {
 
                      ::rectangle_i32 rectangleWindow;
-                     
+
                      RECT rectWindow;
-                     
+
                      ::GetWindowRect(hwnd, &rectWindow);
 
                      rectangleWindow = rectWindow;

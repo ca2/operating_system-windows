@@ -104,7 +104,7 @@ namespace win32
          }
 
 
-         void windowing::main_send(const ::procedure & procedure)
+         void windowing::_main_send(const ::procedure & procedure)
          {
 
             if (::is_main_thread())
@@ -123,7 +123,7 @@ namespace win32
 
             auto pevent = __new manual_reset_event();
 
-            user_post([procedure, pevent]
+            _user_post([procedure, pevent]
                       {
 
                          procedure();
@@ -132,7 +132,7 @@ namespace win32
 
                       });
 
-            if (!pevent->wait(procedure.m_timeTimeout))
+            if (!pevent->wait(procedure.timeout()))
             {
 
                throw ::exception(error_timeout);
@@ -150,10 +150,10 @@ namespace win32
          }
 
 
-         void windowing::main_post(const ::procedure & procedure)
+         void windowing::_main_post(const ::procedure & procedure)
          {
 
-            node()->main_post(procedure);
+            system()->_post(procedure);
 
          }
 
@@ -403,7 +403,46 @@ namespace win32
          }
 
 
-         
+         bool windowing::_process_windowing_messages()
+         {
+            if (MsgWaitForMultipleObjects(0, NULL, FALSE, 100, QS_ALLINPUT) == WAIT_OBJECT_0)
+            {
+               MSG msg;
+
+               while (PeekMessage(&msg, 0, 0, 0, PM_REMOVE))
+               {
+                  if (msg.message == WM_QUIT)
+                  {
+                     return false;
+
+                  }
+                  //if (!TranslateAccelerator(msg.hwnd, hAccelTable, &msg))
+                  {
+                     TranslateMessage(&msg);
+                     DispatchMessage(&msg);
+                  }
+               }
+            }
+            system()->run_posted_procedures();
+            return true;
+         }
+
+
+         void windowing::windowing_system_application_main_loop()
+         {
+            while (true)
+            {
+               if (!_process_windowing_messages())
+               {
+                  break;
+               }
+            }
+         }
+
+
+         void windowing::_do_tasks()
+         {
+            _process_windowing_messages();
 
          }
 

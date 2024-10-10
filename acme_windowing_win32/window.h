@@ -61,7 +61,11 @@ namespace win32
 
             void _create_window() override;
 
+            void destroy_window() override;
+
             void show_window() override;
+
+            void hide_window() override;
 
             virtual void _draw(HDC hdc);
 
@@ -134,7 +138,7 @@ namespace win32
             ::size_i32 get_main_screen_size() override;
 
 
-            void user_post(const ::procedure& procedure) override;
+            void _user_post(const ::procedure& procedure) override;
 
 
             virtual void implementation_message_loop_step();

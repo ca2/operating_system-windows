@@ -34,7 +34,7 @@ namespace innate_ui_win32
       
       void _defer_run_innate_ui_win32_user_loop();
       
-      void main_post(const ::procedure & procedure) override;
+      void _main_post(const ::procedure & procedure) override;
 
 
       virtual LRESULT _window_procedure(HWND hwnd, UINT message, WPARAM wparam, LPARAM lparam);

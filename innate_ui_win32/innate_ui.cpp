@@ -50,7 +50,7 @@ namespace innate_ui_win32
    }
 
    
-   void innate_ui::main_post(const ::procedure & procedure)
+   void innate_ui::_main_post(const ::procedure & procedure)
    {
 
       auto pparticle = (::subparticle *)procedure.m_pbase;
@@ -132,7 +132,7 @@ namespace innate_ui_win32
                         if (msg.message == WM_APP + 123)
                         {
 
-                           auto psubparticle = ::place((::subparticle *)msg.lParam);
+                           auto psubparticle = __transfer_as_pointer(::subparticle *)msg.lParam ;
 
                            psubparticle->run();
 

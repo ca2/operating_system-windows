@@ -1,4 +1,10 @@
 #include "framework.h"
+#include "windowing.h"
+#include "acme/_operating_system.h"
+
+
+CLASS_DECL_ACME int message_box_to_windows_message_box(enum_message_box emessagebox);
+CLASS_DECL_ACME enum_dialog_result windows_message_box_result_to_dialog_result(int iResult);
 
 
 namespace win32
@@ -13,56 +19,7 @@ namespace win32
       {
 
 
-         int message_box_to_windows_message_box(enum_message_box emessagebox)
-         {
 
-            int iMessageBox = 0;
-
-            iMessageBox |= message_box_to_windows_message_box_type(emessagebox);
-
-            iMessageBox |= message_box_to_windows_message_box_icon(emessagebox);
-
-            iMessageBox |= message_box_to_windows_message_box_default_button(emessagebox);
-
-            return iMessageBox;
-
-         }
-
-
-         enum_dialog_result windows_message_box_result_to_dialog_result(int iResult)
-         {
-
-            switch (iResult)
-            {
-            case IDOK:
-               return e_dialog_result_ok;
-            case IDCANCEL:
-               return e_dialog_result_cancel;
-            case IDABORT:
-               return e_dialog_result_abort;
-            case IDRETRY:
-               return e_dialog_result_retry;
-            case IDIGNORE:
-               return e_dialog_result_ignore;
-            case IDYES:
-               return e_dialog_result_yes;
-            case IDNO:
-               return e_dialog_result_no;
-            case IDCLOSE:
-               return e_dialog_result_close;
-            case IDHELP:
-               return e_dialog_result_help;
-            case IDTRYAGAIN:
-               return e_dialog_result_try_again;
-            case IDCONTINUE:
-               return e_dialog_result_continue;
-            case IDTIMEOUT:
-               return e_dialog_result_timeout;
-            default:
-               return e_dialog_result_none;
-            }
-
-         }
 
 
 
@@ -94,33 +51,33 @@ namespace win32
                   //      ::enum_dialog_result m_edialogresult;
                   //      void run() override
                   //      {
-                  auto iType = message_box_to_windows_message_box(pmessageobx->m_emessagebox);
+                  auto iType = message_box_to_windows_message_box(pmessagebox->m_emessagebox);
                   ::wstring wstrMessage(pmessagebox->m_strMessage);
                   ::wstring wstrTitle(pmessagebox->m_strTitle);
 
                   auto iRet = ::MessageBoxW(nullptr, wstrMessage, wstrTitle, iType);
 
-                  pmessagebox->m_edialogresult = windows_message_box_result_to_dialog_result(iRet);
+                  pmessagebox->m_payloadResult = windows_message_box_result_to_dialog_result(iRet);
 
 
                }
 
 
-               void complete_step(sequencer & sequencer) override
+        /*       void complete_step(sequencer & sequencer) override
                {
 
                   sequencer.add_result(m_edialogresult);
 
-               }
+               }*/
 
             };
 
 
          } // namespace windows
 
-      }
+      //}
 
-   }
+   //}
 
 
       } // namespace windowing

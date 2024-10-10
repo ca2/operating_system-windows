@@ -32,8 +32,8 @@ namespace win32
             ::e_status defer_initialize_windowing_system() override;
             ::e_status initialize_windowing_system() override;
             void * get_display() override;
-            void main_send(const ::procedure & procedure) override;
-            void main_post(const ::procedure & procedure) override;
+            void _main_send(const ::procedure & procedure) override;
+            void _main_post(const ::procedure & procedure) override;
             void display_error_trap_push(int i) override;
             void display_error_trap_pop_ignored(int i) override;
 
@@ -65,7 +65,16 @@ namespace win32
             void windowing_system_post_quit() override;
 
 
+            void windowing_system_application_main_loop() override;
+
+
             void show(::particle_pointer pparticle) override;
+
+
+            void _do_tasks() override;
+
+            bool _process_windowing_messages();
+
 
          };
 

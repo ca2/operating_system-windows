@@ -41,7 +41,7 @@ HBITMAP LoadPNGFromMemoryIntoHBITMAP(const void * pngData, size_t dataSize, HDC 
    }
 
    // Initialize the stream with the memory buffer
-   hr = pStream->InitializeFromMemory((BYTE *)pngData, dataSize);
+   hr = pStream->InitializeFromMemory((BYTE *)pngData, (DWORD) dataSize);
 
    if (FAILED(hr))
    {
