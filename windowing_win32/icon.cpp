@@ -965,7 +965,7 @@ namespace windowing_win32
 
             pimage->map();
 
-            ::copy_image32(pimage, pixmap);
+            pimage->copy(pixmap);
 
          //}
 

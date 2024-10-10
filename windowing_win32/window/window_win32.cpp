@@ -10,7 +10,7 @@
 #include "aura/user/user/user.h"
 #include "aura/platform/session.h"
 #include "aura/platform/system.h"
-#include "aura_windows/interaction_impl.h"
+//#include "aura_windows/interaction_impl.h"
 #include "windowing_win32/window.h"
 #include "windowing_win32/windowing.h"
 
@@ -244,6 +244,18 @@ LRESULT CALLBACK __window_procedure(HWND hwnd, UINT message, WPARAM wparam, LPAR
       ::acme::get()->platform()->informationf("WM_COMMAND");
 
    }
+   else if (message == WM_MOUSEMOVE)
+   {
+
+      informationf("WM_MOUSEMOVE");
+
+   }
+   else if (message == WM_NCMOUSEMOVE)
+   {
+
+      informationf("WM_NCMOUSEMOVE");
+
+   }
    else if (message == WM_KILLFOCUS)
    {
 
@@ -298,7 +310,7 @@ LRESULT CALLBACK __window_procedure(HWND hwnd, UINT message, WPARAM wparam, LPAR
 
          ::user::system * psystem = (::user::system *)pcreatestructw->lpCreateParams;
 
-         pwindow = (::windowing_win32::window *) psystem->m_pwindow->m_pWindow4;
+         pwindow = psystem->m_pwindow.cast < ::windowing_win32::window >();
 
          if (!pwindow)
          {
@@ -329,13 +341,13 @@ LRESULT CALLBACK __window_procedure(HWND hwnd, UINT message, WPARAM wparam, LPAR
 
          pwindow->set_os_data(hwnd);
 
-         auto pwindowing = (::windowing_win32::windowing *) pwindow->m_pwindowing->m_pWindowing4;
+         auto pwin32windowing = pwindow->win32_windowing();
 
-         critical_section_lock synchronouslock(&pwindowing->m_criticalsection);
+         critical_section_lock synchronouslock(&pwin32windowing->m_criticalsection);
 
-         pwindowing->m_windowmap[hwnd] = pwindow;
+         pwin32windowing->m_windowmap[hwnd] = pwindow;
 
-         pwindow->m_pimpl2->m_hwnd = hwnd;
+         //pwindow->m_pimpl2->m_hwnd = hwnd;
 
       }
       else

@@ -56,7 +56,7 @@ void ([a-z0-9_]+)_factory(::factory::factory * pfactory)
 
    //pfactory->add_factory_item < ::windows::file_memory_map, ::file::memory_map >();
    //pfactory->add_factory_item < ::windows::buffer, ::graphics::graphics >();
-   //pfactory->add_factory_item < ::windows::interaction_impl, ::user::interaction_impl >();
+   //pfactory->add_factory_item < ::windows::interaction_impl, ::windowing::window >();
 
    //pfactory->add_factory_item < ::file::os_watcher, ::file::watcher >();
    //pfactory->add_factory_item < ::file::os_watch, ::file::watch >();

@@ -7,9 +7,9 @@
 #include "acme/filesystem/filesystem/acme_path.h"
 #include "acme/filesystem/filesystem/link.h"
 #include "acme/platform/application.h"
-#include "acme/primitive/primitive/memory.h"
-#include "acme/primitive/string/adaptor.h"
-#include "acme/primitive/string/international.h"
+#include "acme/prototype/prototype/memory.h"
+#include "acme/prototype/string/adaptor.h"
+#include "acme/prototype/string/international.h"
 #include "acme_windows/acme_directory.h"
 #include "acme_windows/acme_file.h"
 #include "acme_windows/acme_path.h"
@@ -31,10 +31,10 @@
 #include "acme/parallelization/manual_reset_event.h"
 #include "acme/parallelization/task_flag.h"
 #include "acme/platform/node.h"
-#include "acme/primitive/collection/_container.h"
-#include "acme/primitive/string/international.h"
-#include "acme/primitive/string/string.h"
-#include "acme/primitive/string/str.h"
+#include "acme/prototype/collection/_container.h"
+#include "acme/prototype/string/international.h"
+#include "acme/prototype/string/string.h"
+#include "acme/prototype/string/str.h"
 #include "apex/filesystem/file/set.h"
 #include "acme/filesystem/filesystem/dir_context.h"
 #include "acme/filesystem/filesystem/file_context.h"
@@ -400,47 +400,6 @@ namespace apex_windows
 
 
 
-   void node::set_system_dark_mode1(bool bSet)
-   {
-
-      ::acme_windows::registry::key key(HKEY_CURRENT_USER, "Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize", true);
-
-      ::u32 dwSystemUseLightTheme;
-      if (bSet)
-      {
-         dwSystemUseLightTheme = 0;
-      }
-      else
-      {
-         dwSystemUseLightTheme = 1;
-      }
-
-      key._set("SystemUsesLightTheme", dwSystemUseLightTheme);
-      //         return ::success;
-
-   }
-
-
-   void node::set_app_dark_mode1(bool bSet)
-   {
-
-      ::acme_windows::registry::key key(HKEY_CURRENT_USER, "Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize", true);
-
-      ::u32 dwAppsUseLightTheme;
-      if (bSet)
-      {
-         dwAppsUseLightTheme = 0;
-      }
-      else
-      {
-         dwAppsUseLightTheme = 1;
-      }
-
-      key._set("AppsUseLightTheme", dwAppsUseLightTheme);
-
-      //return ::success;
-
-   }
 
 
    double node::get_time_zone()
@@ -1137,10 +1096,12 @@ namespace apex_windows
    }
 
 
-   void node::user_post(const ::procedure& procedure)
+   void node::_user_post(const ::procedure& procedure)
    {
 
-      system()->m_papexsystem->post_procedure(procedure);
+      //system()->m_papexsystem->_user_post(procedure);
+
+      ::acme::node::_user_post(procedure);
 
    }
 
@@ -3404,19 +3365,6 @@ namespace apex_windows
    }
 
 
-   void node::set_dark_mode(bool bDarkMode)
-   {
-
-      set_system_dark_mode1(bDarkMode);
-
-      set_app_dark_mode1(bDarkMode);
-
-      DWORD_PTR res;
-      SendMessageTimeout(HWND_BROADCAST, WM_SETTINGCHANGE, 0, (LPARAM)TEXT("ImmersiveColorSet"), 0, 1000, &res);
-
-      //return ::success;
-
-   }
 
 
    //void node::set_system_dark_mode1(bool bSet)
@@ -3766,7 +3714,7 @@ namespace apex_windows
    void node::hidden_run(const class time& timeWait, const ::file::path& pathParam, const string& strParams, const ::file::path& pathFolder)
    {
 
-      auto pevent = ::place(new manual_reset_event());
+      auto pevent = __new manual_reset_event();
 
       auto path = m_pcontext->defer_process_matter_path(pathParam);
 
@@ -5356,6 +5304,15 @@ namespace apex_windows
 
    }
 
+
+   void node::defer_innate_ui()
+   {
+
+      auto pfactory = system()->factory("innate_ui", "win32");
+
+      pfactory->merge_to_global_factory();
+
+   }
 
 
 } // namespace windows

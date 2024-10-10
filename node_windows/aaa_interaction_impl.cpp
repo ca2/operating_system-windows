@@ -229,7 +229,7 @@ namespace windows
 
    //   last_install_message_routing(pchannel);
    //   
-   //   ::user::interaction_impl::install_message_routing(pchannel);
+   //   ::windowing::window::install_message_routing(pchannel);
 
    //   if (!m_puserinteraction->m_bMessageWindow)
    //   {
@@ -423,7 +423,7 @@ namespace windows
       m_pwindow->post_nc_destroy();
 
 
-      ::user::interaction_impl::post_non_client_destroy();
+      ::windowing::window::post_non_client_destroy();
 
    }
 
@@ -458,7 +458,7 @@ namespace windows
    void interaction_impl::install_message_routing(::channel * pchannel)
    {
 
-      ::user::interaction_impl::install_message_routing(pchannel);
+      ::windowing::window::install_message_routing(pchannel);
 
       //m_puserinteraction->install_message_routing(pchannel);
 
@@ -486,7 +486,7 @@ namespace windows
    {
 
 
-      return ::user::interaction_impl::destroy_impl_only();
+      return ::windowing::window::destroy_impl_only();
 
    }
 
@@ -494,7 +494,7 @@ namespace windows
    bool interaction_impl::start_destroying_window()
    {
 
-      return ::user::interaction_impl::start_destroying_window();
+      return ::windowing::window::start_destroying_window();
 
    }
 
@@ -502,7 +502,7 @@ namespace windows
    void interaction_impl::destroy_window()
    {
 
-      return ::user::interaction_impl::destroy_window();
+      return ::windowing::window::destroy_window();
 
    }
 
@@ -617,7 +617,7 @@ namespace windows
    //   return ::GetWindowInfo(((interaction_impl *)this)->get_handle(), pwi) != false;
    //}
 
-   //::user::interaction_impl * interaction_impl::GetAncestor(::u32 gaFlags) const
+   //::windowing::window * interaction_impl::GetAncestor(::u32 gaFlags) const
    //{
    //   ASSERT(::is_window(((interaction_impl *)this)->get_handle()));
    //   return  psystem->ui_from_handle(::GetAncestor(((interaction_impl *)this)->get_handle(), gaFlags));
@@ -1187,7 +1187,7 @@ namespace windows
    //{
 
 
-   //   ::user::interaction_impl::defer_start_prodevian();
+   //   ::windowing::window::defer_start_prodevian();
 
 
    //}
@@ -1317,7 +1317,7 @@ namespace windows
 //   }
 
 
-   //bool interaction_impl::SubclassDlgItem(::u32 nID, ::user::interaction_impl * pParent)
+   //bool interaction_impl::SubclassDlgItem(::u32 nID, ::windowing::window * pParent)
    //{
 
    //   ASSERT(pParent);
@@ -1654,7 +1654,7 @@ namespace windows
    bool interaction_impl::window_is_zoomed()
    {
 
-      return ::user::interaction_impl::window_is_zoomed();
+      return ::windowing::window::window_is_zoomed();
 
    }
 
@@ -1910,7 +1910,7 @@ namespace windows
    }
 
 
-   //void interaction_impl::MapWindowPoints(::user::interaction_impl * puserinteractionTo, ::point_i32 * pPoint, ::u32 nCount)
+   //void interaction_impl::MapWindowPoints(::windowing::window * puserinteractionTo, ::point_i32 * pPoint, ::u32 nCount)
 
    //{
    //   ASSERT(_is_window());
@@ -1918,7 +1918,7 @@ namespace windows
 
    //}
 
-   //void interaction_impl::MapWindowPoints(::user::interaction_impl * puserinteractionTo, ::rectangle_i32 * prectangle)
+   //void interaction_impl::MapWindowPoints(::windowing::window * puserinteractionTo, ::rectangle_i32 * prectangle)
 
    //{
    //   ASSERT(_is_window());
@@ -1947,7 +1947,7 @@ namespace windows
    void interaction_impl::on_visual_applied()
    {
 
-      ::user::interaction_impl::on_visual_applied();
+      ::windowing::window::on_visual_applied();
 
    }
 
@@ -1955,7 +1955,7 @@ namespace windows
    // void interaction_impl::window_apply_visual(const ::user::window_state & windowstate)
    // {
 
-   //    return ::user::interaction_impl::window_apply_visual(windowstate);
+   //    return ::windowing::window::window_apply_visual(windowstate);
 
    // }
 
@@ -2320,7 +2320,7 @@ namespace windows
    //}
 
 
-   ////::user::interaction_impl * interaction_impl::GetNextDlgGroupItem(::user::interaction_impl * pWndCtl, bool bPrevious) const
+   ////::windowing::window * interaction_impl::GetNextDlgGroupItem(::windowing::window * pWndCtl, bool bPrevious) const
    ////{
 
    ////   ASSERT(::is_window(((interaction_impl *)this)->get_handle()));
@@ -2330,7 +2330,7 @@ namespace windows
    ////}
 
 
-   ////::user::interaction_impl * interaction_impl::GetNextDlgTabItem(::user::interaction_impl * pWndCtl, bool bPrevious) const
+   ////::windowing::window * interaction_impl::GetNextDlgTabItem(::windowing::window * pWndCtl, bool bPrevious) const
    ////{
 
    ////   ASSERT(::is_window(((interaction_impl *)this)->get_handle()));
@@ -2692,7 +2692,7 @@ namespace windows
    //{
    //   Default();
    //}
-   //void interaction_impl::OnActivate(::u32, ::user::interaction_impl *, bool)
+   //void interaction_impl::OnActivate(::u32, ::windowing::window *, bool)
    //{
    //   Default();
    //}
@@ -2708,12 +2708,12 @@ namespace windows
    //{
    //   Default();
    //}
-   //void interaction_impl::OnContextMenu(::user::interaction_impl *, point_i32)
+   //void interaction_impl::OnContextMenu(::windowing::window *, point_i32)
    //{
    //   Default();
    //}
 
-   //bool interaction_impl::OnCopyData(::user::interaction_impl *, COPYDATASTRUCT*)
+   //bool interaction_impl::OnCopyData(::windowing::window *, COPYDATASTRUCT*)
    //{
 
    //   return Default() != false;
@@ -3006,7 +3006,7 @@ namespace windows
 //   {
 //      Default();
 //   }
-//   void interaction_impl::OnPaletteIsChanging(::user::interaction_impl *)
+//   void interaction_impl::OnPaletteIsChanging(::windowing::window *)
 //   {
 //      Default();
 //   }
@@ -3106,7 +3106,7 @@ namespace windows
 //   {
 //      Default();
 //   }
-//   void interaction_impl::OnPaletteChanged(::user::interaction_impl *)
+//   void interaction_impl::OnPaletteChanged(::windowing::window *)
 //   {
 //      Default();
 //   }
@@ -3158,7 +3158,7 @@ namespace windows
 //   {
 //      Default();
 //   }
-//   i32 interaction_impl::OnMouseActivate(::user::interaction_impl *, ::u32, ::u32)
+//   i32 interaction_impl::OnMouseActivate(::windowing::window *, ::u32, ::u32)
 //   {
 //      return (i32)Default();
 //   }
@@ -3224,11 +3224,11 @@ namespace windows
 //   {
 //      Default();
 //   }
-//   void interaction_impl::OnHScrollClipboard(::user::interaction_impl *, ::u32, ::u32)
+//   void interaction_impl::OnHScrollClipboard(::windowing::window *, ::u32, ::u32)
 //   {
 //      Default();
 //   }
-//   void interaction_impl::OnPaintClipboard(::user::interaction_impl *, HGLOBAL)
+//   void interaction_impl::OnPaintClipboard(::windowing::window *, HGLOBAL)
 //   {
 //      Default();
 //   }
@@ -3240,11 +3240,11 @@ namespace windows
 //   {
 //      Default();
 //   }
-//   void interaction_impl::OnSizeClipboard(::user::interaction_impl *, HGLOBAL)
+//   void interaction_impl::OnSizeClipboard(::windowing::window *, HGLOBAL)
 //   {
 //      Default();
 //   }
-//   void interaction_impl::OnVScrollClipboard(::user::interaction_impl *, ::u32, ::u32)
+//   void interaction_impl::OnVScrollClipboard(::windowing::window *, ::u32, ::u32)
 //   {
 //      Default();
 //   }
@@ -3252,7 +3252,7 @@ namespace windows
 //   {
 //      return (::u32)Default();
 //   }
-//   void interaction_impl::OnMDIActivate(bool, ::user::interaction_impl *, ::user::interaction_impl *)
+//   void interaction_impl::OnMDIActivate(bool, ::windowing::window *, ::windowing::window *)
 //   {
 //      Default();
 //   }
@@ -3281,7 +3281,7 @@ namespace windows
 //   {
 //      Default();
 //   }
-//   void interaction_impl::OnCaptureChanged(::user::interaction_impl *)
+//   void interaction_impl::OnCaptureChanged(::windowing::window *)
 //   {
 //      Default();
 //   }
@@ -3536,7 +3536,7 @@ namespace windows
    void interaction_impl::_001OnTriggerMouseInside()
    {
 
-      ::user::interaction_impl::_001OnTriggerMouseInside();
+      ::windowing::window::_001OnTriggerMouseInside();
 
       //TRACKMOUSEEVENT tme = { sizeof(tme) };
       //tme.dwFlags = TME_LEAVE;
@@ -3618,7 +3618,7 @@ namespace windows
    /*bool interaction_impl::set_window_position(class ::user::zorder zorder, i32 x, i32 y, i32 cx, i32 cy, ::u32 nFlags)
    {
 
-      if (!::user::interaction_impl::set_window_position(zorder, x, y, cx, cy, nFlags))
+      if (!::windowing::window::set_window_position(zorder, x, y, cx, cy, nFlags))
       {
 
          return false;
@@ -3647,7 +3647,7 @@ namespace windows
    void interaction_impl::window_show_change_visibility(::e_display edisplay, ::e_activation eactivation)
    {
 
-      ::user::interaction_impl::window_show_change_visibility(edisplay, eactivation);
+      ::windowing::window::window_show_change_visibility(edisplay, eactivation);
 
    }
 
@@ -3880,7 +3880,7 @@ void interaction_impl::set_tool_window(bool bSet)
 //lresult CALLBACK __window_procedure(HWND oswindow, ::u32 message, wparam wparam, lparam lparam)
 //{
 //
-//   ::user::interaction_impl * pimpl = oswindow_interaction_impl(oswindow);
+//   ::windowing::window * pimpl = oswindow_interaction_impl(oswindow);
 //
 //   lresult lresult = 0;
 //
@@ -4174,7 +4174,7 @@ void interaction_impl::set_tool_window(bool bSet)
 //
 
 //
-//void CLASS_DECL_AURA_WINDOWS _handle_activate(::user::interaction_impl * pwindow, wparam nState, ::user::interaction_impl * pWndOther)
+//void CLASS_DECL_AURA_WINDOWS _handle_activate(::windowing::window * pwindow, wparam nState, ::windowing::window * pWndOther)
 //{
 //
 //   ASSERT(pwindow);
@@ -4823,7 +4823,7 @@ void interaction_impl::set_tool_window(bool bSet)
 //
 //      }
 //
-//      ::user::interaction_impl::message_handler(pusermessage);
+//      ::windowing::window::message_handler(pusermessage);
 //
 //      //if(pmessage->m_bRet && !pusermessage->m_bDoSystemDefault)
 //

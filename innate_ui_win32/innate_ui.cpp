@@ -6,7 +6,7 @@
 #include "acme/platform/application.h"
 #include "acme/platform/system.h"
 #include "acme/parallelization/manual_reset_event.h"
-#include "acme/primitive/geometry2d/size.h"
+#include "acme/prototype/geometry2d/size.h"
 
 
 namespace innate_ui_win32
@@ -49,7 +49,8 @@ namespace innate_ui_win32
 
    }
 
-   void innate_ui::post(const ::procedure & procedure)
+   
+   void innate_ui::_main_post(const ::procedure & procedure)
    {
 
       auto pparticle = (::subparticle *)procedure.m_pbase;
@@ -131,7 +132,7 @@ namespace innate_ui_win32
                         if (msg.message == WM_APP + 123)
                         {
 
-                           auto psubparticle = ::place((::subparticle *)msg.lParam);
+                           auto psubparticle = __transfer_as_pointer(::subparticle *)msg.lParam ;
 
                            psubparticle->run();
 

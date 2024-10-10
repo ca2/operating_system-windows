@@ -21,7 +21,7 @@ namespace aura
 //
 //      ///throw ::exception(todo);
 //
-////      auto pwindowing = puser->m_pwindowing;
+////      auto pwindowing = system()->windowing();
 //
 ////      auto ret = pwindowing->message_box(pszMessage, pszTitle, emessagebox);
 //
@@ -39,7 +39,7 @@ namespace aura
 
    //   auto puser = psession->m_puser;
 
-   //   auto pwindowing = puser->m_pwindowing;
+   //   auto pwindowing = system()->windowing();
 
    //   auto ret = pwindowing->message_box(pszMessage, pszTitle, emessagebox);
 

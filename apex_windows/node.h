@@ -53,10 +53,6 @@ namespace apex_windows
 
       virtual void set_console_colors(::u32 dwScreenColors, ::u32 dwPopupColors, ::u32 dwWindowAlpha);
 
-      virtual void set_system_dark_mode1(bool bSet = true);
-
-      virtual void set_app_dark_mode1(bool bSet = true);
-
       virtual double get_time_zone();
 
       //virtual void get_system_time(system_time_t * psystemtime);
@@ -100,7 +96,7 @@ namespace apex_windows
       virtual string get_version();
       virtual void show_wait_cursor(bool bShow);
 
-      void user_post(const ::procedure& procedure) override;
+      void _user_post(const ::procedure& procedure) override;
 
       void create_app_shortcut(::acme::application* papp) override;
 
@@ -204,7 +200,6 @@ namespace apex_windows
 
       void initialize_wallpaper_fileset(::file::set* pset, bool bAddSearch) override;
 
-      void set_dark_mode(bool bDarkMode) override;
 
       //virtual void set_system_dark_mode1(bool bSet);
       //virtual void set_app_dark_mode1(bool bSet);
@@ -232,6 +227,8 @@ namespace apex_windows
 
       bool has_ip6_internet() override;
 
+      
+      void defer_innate_ui() override;
 
 
    };

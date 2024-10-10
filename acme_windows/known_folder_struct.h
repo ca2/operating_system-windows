@@ -2,7 +2,7 @@
 #pragma once
 
 
-#include "acme/primitive/string/string.h"
+#include "acme/prototype/string/string.h"
 #include "acme/_operating_system.h"
 
 

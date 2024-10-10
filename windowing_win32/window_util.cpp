@@ -42,16 +42,16 @@ namespace windows
    // have a permanent interaction_impl associated object
    // and that all interaction_impl array pointers
    // are pointers to permanent objects.
-   /*void window_util::SortByZOrder(Carray < ::user::interaction_impl *, ::user::interaction_impl * > & wndpa)
+   /*void window_util::SortByZOrder(Carray < ::windowing::window *, ::windowing::window * > & wndpa)
    {
    if(wndpa.get_size() <= 0)
    return;
 
-   Carray < ::user::interaction_impl *, ::user::interaction_impl * > wndpa2;
+   Carray < ::windowing::window *, ::windowing::window * > wndpa2;
 
-   ::user::interaction_impl * puserinteraction = wndpa[0];
+   ::windowing::window * puserinteraction = wndpa[0];
 
-   ::user::interaction_impl * puserinteractionChild = puserinteraction->GetWindow(GW_HWNDFIRST);
+   ::windowing::window * puserinteractionChild = puserinteraction->GetWindow(GW_HWNDFIRST);
 
    while(puserinteractionChild != nullptr
    && ::IsWindow(puserinteractionChild->GetSafehwnd_()))
@@ -81,8 +81,8 @@ namespace windows
    puserinteractionChild = puserinteractionChild->GetWindow(GW_HWNDNEXT);
    }
 
-   Carray < ::user::interaction_impl *, ::user::interaction_impl * > wndpa3;
-   Carray < ::user::interaction_impl *, ::user::interaction_impl * > wndpa4;
+   Carray < ::windowing::window *, ::windowing::window * > wndpa3;
+   Carray < ::windowing::window *, ::windowing::window * > wndpa4;
 
    for(i32 i = 0; i < wndpa2.get_size(); i++)
    {
@@ -217,11 +217,11 @@ namespace windows
    // to the interaction_impl array wndpa. The top
    // windows come first in the enumeration.
 
-   /*void window_util::EnumChildren(::user::interaction_impl * puserinteraction, interaction_pointer_array & wndpa)
+   /*void window_util::EnumChildren(::windowing::window * puserinteraction, interaction_pointer_array & wndpa)
    {
    if(!::IsWindow(puserinteraction->GetSafehwnd_()))
    return;
-   ::user::interaction_impl * puserinteractionChild = puserinteraction->GetTopWindow();
+   ::windowing::window * puserinteractionChild = puserinteraction->GetTopWindow();
    while(puserinteractionChild != nullptr)
    {
    wndpa.add(puserinteractionChild);
@@ -448,9 +448,9 @@ namespace windows
 
    interaction_pointer_array wndpa2;
 
-   ::user::interaction_impl * puserinteraction = wndpa[0];
+   ::windowing::window * puserinteraction = wndpa[0];
 
-   ::user::interaction_impl * puserinteractionChild = puserinteraction->GetWindow(GW_HWNDFIRST);
+   ::windowing::window * puserinteractionChild = puserinteraction->GetWindow(GW_HWNDFIRST);
 
    while(puserinteractionChild != nullptr)
    {
@@ -614,7 +614,7 @@ namespace windows
    // if bOnlyPerm is true, don't send to non-permanent windows
    if (bOnlyPerm)
    {
-   ::user::interaction_impl * pwindow = interaction_impl::FromHandlePermanent(hwnd_Child);
+   ::windowing::window * pwindow = interaction_impl::FromHandlePermanent(hwnd_Child);
    if (pwindow != nullptr)
    {
    // call interaction_impl proc directly since it is a C++ interaction_impl

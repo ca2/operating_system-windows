@@ -41,7 +41,7 @@ namespace draw2d_gdiplus
          return m_pgraphics;
       }
 
-//      ::user::interaction_impl * GetWindow() override;
+//      ::windowing::window * GetWindow() override;
 
       virtual void attach(void * pgraphics) override;   // attach/detach affects only the Output DC
       virtual void * detach() override;

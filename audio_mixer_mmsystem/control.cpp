@@ -6,7 +6,7 @@
 #include "destination.h"
 #include "acme/exception/exception.h"
 #include "acme/platform/context.h"
-#include "acme/primitive/text/text.h"
+#include "acme/prototype/text/text.h"
 #include "audio-system/audio_mixer/callback.h"
 //#include "audio-system/audio_mixer/user/level_control.h"
 #include "audio-system/audio_mixer/control_data_volume.h"
@@ -955,7 +955,7 @@ namespace audio_mixer_mmsystem
 
                   //   strMessage.formatf("mixerGetControlDetails(ctrlid=%.08lXh) failed on hmx=%.04Xh, mmr=%u!",
                   //                     m_mixercontrol.dwControlID, device->m_hMixer, mmrc);
-                  //   //pmutecontrol->message_box(this, strMessage, nullptr, e_message_box_icon_exclamation);
+                  //   //pmutecontrol->message_box(strMessage, nullptr, e_message_box_icon_exclamation);
                   //}
                   // 
 

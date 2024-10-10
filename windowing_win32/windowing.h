@@ -2,6 +2,7 @@
 #pragma once
 
 
+#include "acme_windowing_win32/windowing.h"
 #include "aura/windowing/windowing.h"
 #include "win32.h"
 
@@ -11,7 +12,8 @@ namespace windowing_win32
 
 
    class CLASS_DECL_WINDOWING_WIN32 windowing :
-      virtual public ::windowing::windowing
+      virtual public ::windowing::windowing,
+      virtual public ::win32::acme::windowing::windowing
    {
    public:
 
@@ -25,7 +27,7 @@ namespace windowing_win32
 
       ::critical_section               m_criticalsection;
       ::windows::window_map            m_windowmap;
-      ::pointer<class display>         m_pdisplay;
+      //::pointer<class display>         m_pdisplay;
 
 //#ifdef WINDOWS_DESKTOP
 
@@ -60,13 +62,13 @@ namespace windowing_win32
 
       virtual HICON _load_icon(string_array& straMatter, string strIcon, int cx, int cy);
 
-      virtual ::windows::hwnd_array _get_hwnda(const ::user::primitive_pointer_array& primitivepointera);
+      virtual ::windows::hwnd_array _get_hwnda(const ::user::interaction_array& userinteractiona);
 
       virtual ::windowing::window * window(oswindow oswindow) override;
 
       virtual ::windowing_win32::window * _window(HWND hwnd);
 
-      virtual ::windowing::display * display() override;
+      //virtual ::windowing::display * display() override;
 
       //::pointer<::windowing::monitor>get_main_monitor();
 
@@ -96,7 +98,7 @@ namespace windowing_win32
       void clear_keyboard_focus(::user::element * pelementGainingFocusIfAny) override;
 
       
-      ::windowing::window_base * get_keyboard_focus(::thread * pthread) override;
+      ::acme::windowing::window * get_keyboard_focus(::thread * pthread) override;
 
 
       ::windowing::window * get_mouse_capture(::thread * pthread) override;
@@ -176,6 +178,7 @@ namespace windowing_win32
       //template < typename PREDICATE >
       //bool _top_level_contains_bool_member(PREDICATE predicate);
 
+      void set_dark_mode(bool bDarkMode) override;
 
       bool _visible_top_level_contains_all_names(const string_array& stra) override;
       bool _visible_top_level_contains_name(string str) override;

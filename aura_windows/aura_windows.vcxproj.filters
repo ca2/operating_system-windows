@@ -26,7 +26,7 @@
     <ClInclude Include="framework.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="interaction_impl.h">
+    <ClInclude Include="aaa_interaction_impl.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="extract_icon.h">
@@ -49,9 +49,6 @@
     <ClCompile Include="_.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="interaction_impl.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="extract_icon.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -61,11 +58,13 @@
     <ClCompile Include="shell_open.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="aaa_interaction_impl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="deployment.rc">
       <Filter>Resource Files</Filter>
     </ResourceCompile>
-
   </ItemGroup>
 </Project>

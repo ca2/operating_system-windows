@@ -7,7 +7,7 @@
 #include "acme/filesystem/filesystem/acme_directory.h"
 #include "acme/platform/node.h"
 #include "acme/platform/system.h"
-#include "acme/primitive/primitive/object.h"
+#include "acme/prototype/prototype/object.h"
 #include "acme/_operating_system.h"
 
 
@@ -29,7 +29,7 @@ namespace acme_windows
 
          m_pmutex = pnode->create_named_mutex(pparticle, false, strId);
 
-         //m_pmutex = //::place(new ::pointer < ::mutex > (pparticle, false, strId ADD_PARAM_SEC_ATTRS));
+         //m_pmutex = //__new ::pointer < ::mutex > (pparticle, false, strId ADD_PARAM_SEC_ATTRS);
 
          //m_dwLastError = ::GetLastError();
 
@@ -40,7 +40,7 @@ namespace acme_windows
          try
          {
 
-            m_pmutex = ::place(new ::acme_windows_common::mutex(pparticle, false, strId));
+            m_pmutex = __new ::acme_windows_common::mutex(pparticle, false, strId);
 
             m_dwLastError = ::GetLastError();
 

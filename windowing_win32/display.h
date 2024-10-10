@@ -46,7 +46,7 @@ namespace windowing_win32
       ~display() override;
 
 
-      void initialize_display(::windowing::windowing * pwindowing) override;
+      void open_display() override;
       void finalize_display() override;
 
       virtual void update_dpi();

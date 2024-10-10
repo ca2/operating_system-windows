@@ -19,17 +19,20 @@
 #include "acme/exception/interface_only.h"
 #include "acme/handler/topic.h"
 #include "acme/nano/nano.h"
+#include "acme/user/micro/user.h"
 #include "acme/parallelization/synchronous_lock.h"
 #include "acme/platform/node.h"
-#include "acme/primitive/geometry2d/_text_stream.h"
-#include "aura_windows/interaction_impl.h"
+#include "acme/prototype/geometry2d/_text_stream.h"
+#include "acme/windowing/windowing.h"
+//#include "aura_windows/interaction_impl.h"
 #include "aura/graphics/draw2d/graphics.h"
 #include "aura/graphics/graphics/graphics.h"
 #include "aura/user/user/interaction_graphics_thread.h"
+#include "aura/user/user/interaction_thread.h"
 #include "aura/message/user.h"
 #include "aura/user/user/user.h"
 #include "aura/user/user/system.h"
-#include "acme/operating_system/windows/nano/user/user.h"
+//#include "acme/operating_system/windows/nano/user/user.h"
 #include "aura/platform/session.h"
 #include "aura/platform/system.h"
 #include "aura/windowing/placement_log.h"
@@ -44,7 +47,7 @@
 
 
 #include <dwmapi.h>
-
+#include <shellapi.h>
 
 #define IDI_ICON_WINDOW 256
 HRESULT SetTouchDisableProperty(HWND hwnd, BOOL fDisableTouch);
@@ -94,7 +97,7 @@ namespace windowing_win32
 
       //m_hmenuSystem = nullptr;
 
-      m_pWindow4 = this;
+      //m_pWindow4 = this;
 
       m_uExtraFlagsSetWindowPos = 0;
 
@@ -120,7 +123,7 @@ namespace windowing_win32
 
       m_bTrackMouseLeave = false;
 
-      //m_puserinteractionimpl = nullptr;
+      //m_pwindow = nullptr;
 
       m_bMessageOnlyWindow = false;
 
@@ -197,7 +200,7 @@ namespace windowing_win32
    //   //}
 
    //   ////auto puserinteraction = psystem->ui_from_handle(((::windowing_win32::window *)this)->get_hwnd());
-   //   ////if (puserinteraction->m_puserinteractionimpl != (::user::window *)this)
+   //   ////if (puserinteraction->m_pwindow != (::user::window *)this)
    //   ////   dumpcontext << " (Detached or temporary window)";
    //   ////else
    //   ////   dumpcontext << " (permanent window)";
@@ -223,7 +226,7 @@ namespace windowing_win32
    //void window::install_system_interaction_message_handling(::user::interaction * puserinteraction)
    //{
 
-   //   auto pchannel = puserinteraction->m_puserinteractionimpl;
+   //   auto pchannel = puserinteraction->m_pwindow;
 
    //   MESSAGE_LINK(WM_SETTINGCHANGE, pchannel, this, &window::_001OnMessage);
    //   MESSAGE_LINK(WM_FONTCHANGE, pchannel, this, &window::_001OnMessage);
@@ -231,57 +234,24 @@ namespace windowing_win32
    //}
 
 
-   void window::install_message_routing(channel * pchannel)
+   void window::prio_install_message_routing(::channel * pchannel)
    {
 
-      ::windowing::window::install_message_routing(pchannel);
-
-      MESSAGE_LINK(MESSAGE_CREATE, pchannel, this, &window::_001OnCreate);
-      MESSAGE_LINK(e_message_window_position_changed, pchannel, this, & window::on_message_window_position_changed);
-
-      auto puserinteraction = m_puserinteractionimpl->m_puserinteraction;
-
-      auto pimpl = m_puserinteractionimpl.m_p;
-
-      if (!puserinteraction->m_bMessageWindow)
-      {
-
-         //MESSAGE_LINK(e_message_redraw, pchannel, pimpl, &::user::interaction_impl::_001OnRedraw);
-         //MESSAGE_LINK(e_message_apply_visual, pchannel, pimpl, &::user::interaction_impl::_001OnApplyVisual);
-
-
-         //#ifndef LINUX
-         //MESSAGE_LINK(e_message_move, pchannel, this, &window::on_message_move);
-         //MESSAGE_LINK(e_message_size, pchannel, this, &window::on_message_size);
-         //#endif
-
-
-         //MESSAGE_LINK(e_message_show_window, pchannel, this, &window::on_message_show_window);
-         //MESSAGE_LINK(e_message_kill_focus, pchannel, this, &window::on_message_kill_focus);
-         //MESSAGE_LINK(e_message_set_focus, pchannel, this, &window::on_message_set_focus);
-         //MESSAGE_LINK(e_message_set_cursor, pchannel, this, &window::on_message_set_cursor);
-
-      }
-
-      MESSAGE_LINK(WM_ACTIVATE, pchannel, this, &window::_001OnActivate);
-      MESSAGE_LINK(WM_DWMNCRENDERINGCHANGED, pchannel, this, &window::_001OnDwmNcRenderingChanged);
-
-      pimpl->install_message_routing(pchannel);
-
+      ::windowing::window::prio_install_message_routing(pchannel);
 
       MESSAGE_LINK(MESSAGE_DESTROY, pchannel, this, &window::on_message_destroy);
       MESSAGE_LINK(WM_GETICON, pchannel, this, &window::on_message_get_icon);
 
-      //MESSAGE_LINK(MESSAGE_CREATE, pchannel, pimpl, &::user::interaction_impl::_001OnPrioCreate);
+      //MESSAGE_LINK(MESSAGE_CREATE, pchannel, pimpl, &::windowing::window::_001OnPrioCreate);
       auto psystem = system();
 
       //auto pnode = psystem->m_pnode->m_pauranode->m_pWindowingWin32Node;
 
       //auto emessageTaskbarCreated = pnode->m_emessageWindowsTaskbarCreatedMessage;
 
-      auto pwindowing = (::windowing_win32::windowing *)windowing()->m_pWindowing4;
+      auto pwin32windowing = win32_windowing();
 
-      auto emessageTaskbarCreated = pwindowing->m_emessageWindowsTaskbarCreatedMessage;
+      auto emessageTaskbarCreated = pwin32windowing->m_emessageWindowsTaskbarCreatedMessage;
 
       if (emessageTaskbarCreated != e_message_undefined)
       {
@@ -291,6 +261,84 @@ namespace windowing_win32
       }
 
    }
+
+
+   void window::last_install_message_routing(::channel * pchannel)
+   {
+
+      MESSAGE_LINK(MESSAGE_CREATE, pchannel, this, &window::_001OnCreate);
+      MESSAGE_LINK(e_message_window_position_changed, pchannel, this, &window::on_message_window_position_changed);
+      MESSAGE_LINK(WM_SYSCOMMAND, pchannel, this, &window::_001OnSysCommand);
+      MESSAGE_LINK(WM_COMMAND, pchannel, this, &window::_001OnSysCommand);
+
+      ::windowing::window::last_install_message_routing(pchannel);
+
+      MESSAGE_LINK(WM_ACTIVATE, pchannel, this, &window::_001OnActivate);
+      MESSAGE_LINK(WM_DWMNCRENDERINGCHANGED, pchannel, this, &window::_001OnDwmNcRenderingChanged);
+
+   }
+
+
+   //void window::install_message_routing(channel * pchannel)
+   //{
+
+   //   //::windowing::window::install_message_routing(pchannel);
+
+   //   MESSAGE_LINK(MESSAGE_CREATE, pchannel, this, &window::_001OnCreate);
+   //   MESSAGE_LINK(e_message_window_position_changed, pchannel, this, & window::on_message_window_position_changed);
+
+   //   auto puserinteraction = m_puserinteraction;
+
+   //   //auto pimpl = m_pwindow.m_p;
+
+   //   if (!puserinteraction->m_bMessageWindow)
+   //   {
+
+   //      //MESSAGE_LINK(e_message_redraw, pchannel, pimpl, &::windowing::window::_001OnRedraw);
+   //      //MESSAGE_LINK(e_message_apply_visual, pchannel, pimpl, &::windowing::window::_001OnApplyVisual);
+
+
+   //      //#ifndef LINUX
+   //      //MESSAGE_LINK(e_message_move, pchannel, this, &window::on_message_move);
+   //      //MESSAGE_LINK(e_message_size, pchannel, this, &window::on_message_size);
+   //      //#endif
+
+
+   //      //MESSAGE_LINK(e_message_show_window, pchannel, this, &window::on_message_show_window);
+   //      //MESSAGE_LINK(e_message_kill_focus, pchannel, this, &window::on_message_kill_focus);
+   //      //MESSAGE_LINK(e_message_set_focus, pchannel, this, &window::on_message_set_focus);
+   //      //MESSAGE_LINK(e_message_set_cursor, pchannel, this, &window::on_message_set_cursor);
+
+   //   }
+
+   //   MESSAGE_LINK(WM_ACTIVATE, pchannel, this, &window::_001OnActivate);
+   //   MESSAGE_LINK(WM_DWMNCRENDERINGCHANGED, pchannel, this, &window::_001OnDwmNcRenderingChanged);
+
+   //   m_puserinteraction->install_message_routing(pchannel);
+
+
+   //   MESSAGE_LINK(MESSAGE_DESTROY, pchannel, this, &window::on_message_destroy);
+   //   MESSAGE_LINK(WM_GETICON, pchannel, this, &window::on_message_get_icon);
+
+   //   //MESSAGE_LINK(MESSAGE_CREATE, pchannel, pimpl, &::windowing::window::_001OnPrioCreate);
+   //   auto psystem = system();
+
+   //   //auto pnode = psystem->m_pnode->m_pauranode->m_pWindowingWin32Node;
+
+   //   //auto emessageTaskbarCreated = pnode->m_emessageWindowsTaskbarCreatedMessage;
+
+   //   auto pwin32windowing = win32_windowing();
+
+   //   auto emessageTaskbarCreated = pwin32windowing->m_emessageWindowsTaskbarCreatedMessage;
+
+   //   if (emessageTaskbarCreated != e_message_undefined)
+   //   {
+
+   //      MESSAGE_LINK(emessageTaskbarCreated, pchannel, this, &window::_001OnTaskbarCreated);
+
+   //   }
+
+   //}
    
    
    ::oswindow window::oswindow() const
@@ -309,26 +357,71 @@ namespace windowing_win32
    }
 
 
-   //void window::create_window(::user::interaction_impl * pimpl)
+   void window::destroy()
+   {
+
+      ::windowing::window::destroy();
+      ::win32::acme::windowing::window::destroy();
+
+   }
+
+
+   ::windowing_win32::windowing * window::win32_windowing()
+   {
+
+      return  dynamic_cast < ::windowing_win32::windowing * > (windowing());
+
+   }
+
+
+   //void window::create_window(::windowing::window * pimpl)
    void window::create_window()
    {
 
-      auto pwindowing = m_pwindowing;
+      ::windowing::window::create_window();
 
-      auto pimpl = m_puserinteractionimpl;
+   }
 
-      m_pimpl2 = pimpl->m_pImpl2;
+
+   void window::_create_window()
+   {
+
+      auto pwindowing = this->windowing();
+
+      //auto pimpl = m_pwindow;
+
+      //m_pimpl2 = m_pImpl2;
 
       wstring wstrClassName;
 
-      auto puserinteraction = pimpl->m_puserinteraction;
+      auto puserinteraction = m_puserinteraction;
 
       wstrClassName = pwindowing->_windows_get_user_interaction_window_class(puserinteraction);
 
-      if (!puserinteraction->m_pusersystem)
+      //if (!puserinteraction->m_pusersystem)
+      //{
+
+      //   puserinteraction->m_pusersystem = __new ::user::system();
+
+      //}
+
+      ::pointer<::user::system> pusersystem;
+
+      if (!m_puserinteraction->is_system_message_window())
       {
 
-         puserinteraction->m_pusersystem = ::place(new ::user::system());
+         if (m_puserinteraction->m_pusersystem)
+         {
+
+            pusersystem = m_puserinteraction->m_pusersystem;
+
+         }
+         else
+         {
+
+            pusersystem = __new ::user::system();
+
+         }
 
       }
 
@@ -341,9 +434,9 @@ namespace windowing_win32
 
       }
 
-      //m_puserinteractionimpl = pimpl;
+      //m_pwindow = pimpl;
 
-      //m_puserinteractionimpl->m_pwindow = this;
+      //m_pwindow = this;
 
       //puserinteraction->m_pwindow = this;
 
@@ -406,11 +499,11 @@ namespace windowing_win32
 
       ::u32 dwStyle = 0;
 
-      auto pusersystem = puserinteraction->m_pusersystem.get();
+      //auto pusersystem = puserinteraction->m_pusersystem.get();
 
       wstrWindowName = puserinteraction->m_strWindowText2;
 
-      windowing()->__synthesizes_creates_styles(puserinteraction, dwExStyle, dwStyle);
+      win32_windowing()->__synthesizes_creates_styles(puserinteraction, dwExStyle, dwStyle);
 
       pusersystem->m_pwindow = this;
 
@@ -444,7 +537,22 @@ namespace windowing_win32
       if (hwndParent == nullptr || hwndParent == HWND_MESSAGE)
       {
 
-         puserinteraction->m_puserinteractionTopLevel = puserinteraction;
+         //puserinteraction->m_puserinteractionTopLevel = puserinteraction;
+
+      }
+
+      auto edisplaySketch = m_puserinteraction->const_layout().sketch().display();
+
+      if (is_equivalent_in_equivalence_sink(edisplaySketch, e_display_normal))
+      {
+
+         ::rectangle_i32 rectangleRequest;
+
+         rectangleRequest.left() = x;
+         rectangleRequest.top() = y;
+         rectangleRequest.set_size({ cx, cy });
+
+         m_puserinteraction->set_window_normal_stored_rectangle(rectangleRequest);
 
       }
 
@@ -557,6 +665,13 @@ namespace windowing_win32
    }
 
 
+   //void window::_create_window()
+   //{
+
+
+   //}
+
+
    void window::window_update_screen()
    {
 
@@ -578,39 +693,38 @@ namespace windowing_win32
 
          //display_lock displayLock(x11_display()->Display());
 
-         auto pimpl = m_puserinteractionimpl;
+         //auto pimpl = m_pwindow;
 
          //configure_window_unlocked();
 
-         //pimpl->m_puserinteraction->user_send([pimpl]()
+         //m_puserinteraction->user_send([pimpl]()
            // {
 
 
 
 
-               pimpl->m_pgraphicsgraphics->update_screen();
+               m_pgraphicsgraphics->update_screen();
 
 //});
                //bool bWindowsApplyVisual = true;
 
-               if (!pimpl
-                  || !pimpl->m_puserinteraction)
+               if (!m_puserinteraction)
                {
 
                   return;
 
                }
 
-               auto & edisplayOutput = pimpl->m_puserinteraction->const_layout().output().m_edisplay;
+               auto & edisplayOutput = m_puserinteraction->const_layout().output().m_edisplay;
 
-               auto & edisplayDesign = pimpl->m_puserinteraction->const_layout().design().m_edisplay;
+               auto & edisplayDesign = m_puserinteraction->const_layout().design().m_edisplay;
 
                if (edisplayOutput != edisplayDesign)
                {
 
-                  pimpl->m_puserinteraction->layout().m_statea[::user::e_layout_output].m_edisplay = edisplayDesign;
+                  m_puserinteraction->layout().m_statea[::user::e_layout_output].m_edisplay = edisplayDesign;
 
-                  pimpl->m_puserinteraction->send_message(e_message_show_window, ::is_screen_visible(edisplayDesign) ? 1 : 0);
+                  //m_puserinteraction->send_message(e_message_show_window, ::is_screen_visible(edisplayDesign) ? 1 : 0);
 
                }
 
@@ -620,9 +734,9 @@ namespace windowing_win32
 
 
 
-      auto pimpl = m_puserinteractionimpl;
+      //auto pimpl = m_pwindow;
 
-      pimpl->m_pgraphicsthread->on_graphics_thread_iteration_end();
+      m_pgraphicsthread->on_graphics_thread_iteration_end();
 
       //                                  });
 
@@ -690,9 +804,11 @@ namespace windowing_win32
          else if (pmessage->m_atom == WM_SETTINGCHANGE && strLparamString == "ImmersiveColorSet")
          {
 
-            auto pnode = system()->m_pnode;
+            //auto pnode = system()->m_pnode;
 
-            pnode->fetch_user_color();
+            //pnode->fetch_user_color();
+
+            system()->acme_windowing()->fetch_system_background_color();
 
          }
          else if (pmessage->m_atom == e_message_display_change ||
@@ -736,7 +852,7 @@ namespace windowing_win32
 
       ::topic topic(id_task_bar_created);
 
-      m_puserinteractionimpl->m_puserinteraction->handle(&topic, nullptr);
+      m_puserinteraction->handle(&topic, nullptr);
 
    }
 
@@ -781,14 +897,14 @@ namespace windowing_win32
    //   //SetLastError(0);
    //   {
    //      //HWND hwnd = get_hwnd();
-   //      m_puserinteractionimpl->m_puserinteraction->post_message(WM_SETICON, ICON_SMALL, (LPARAM)hiconSmall);
+   //      m_puserinteraction->post_message(WM_SETICON, ICON_SMALL, (LPARAM)hiconSmall);
    //      //DWORD dwLastError = ::GetLastError();
    //      //information() << "ICON_BIT_SMALLER" << dwLastError;
    //   }
    //   //SetLastError(0);
    //   {
    //     // HWND hwnd = get_hwnd();
-   //      m_puserinteractionimpl->m_puserinteraction->post_message(WM_SETICON, ICON_BIG, (LPARAM)hicon);
+   //      m_puserinteraction->post_message(WM_SETICON, ICON_BIG, (LPARAM)hicon);
    //      //::SendMessage(hwnd, WM_SETICON, ICON_BIG, (LPARAM)hicon);
    //      //DWORD dwLastError = ::GetLastError();
 
@@ -901,7 +1017,7 @@ namespace windowing_win32
    //   {
 
    //      if (::window::s_pdataptra->element_at(i)->m_bMessageOnlyWindow
-   //         && ::window::s_pdataptra->element_at(i)->m_puserinteractionimpl == pimpl)
+   //         && ::window::s_pdataptra->element_at(i)->m_pwindow == pimpl)
    //      {
 
    //         return i;
@@ -977,10 +1093,10 @@ namespace windowing_win32
 
    //   pdata->m_bMessageOnlyWindow = true;
    //   pdata->m_window = None;
-   //   pdata->m_puserinteractionimpl = puserinteraction;
+   //   pdata->m_pwindow = puserinteraction;
    //   pdata->m_osdisplay = nullptr;
    //   pdata->m_parent = 0;
-   //   pdata->m_pmq = puserinteraction->puserinteraction->m_pthreadUserInteraction->aaa_get_message_queue();
+   //   pdata->m_pmq = puserinteraction->puserinteraction->user_thread()->aaa_get_message_queue();
 
    //   ::window::s_pdataptra->add(pdata);
 
@@ -1055,7 +1171,7 @@ namespace windowing_win32
    //
    //   g_oswindowDesktop = oswindow_get(dpy, DefaultRootWindow(dpy));
    //
-   //   g_oswindowDesktop->m_puserinteractionimpl = nullptr;
+   //   g_oswindowDesktop->m_pwindow = nullptr;
    //
    //   XSelectInput(g_oswindowDesktop->display(), g_oswindowDesktop->window(), StructureNotifyMask);
    //
@@ -1370,7 +1486,7 @@ namespace windowing_win32
 
       }
 
-      m_pwindowing->erase_window(this);
+      this->windowing()->erase_window(this);
 
       set_hwnd(nullptr);
 
@@ -1381,37 +1497,37 @@ namespace windowing_win32
 
       //}
 
-      m_pimpl2.release();
+      //m_pimpl2.release();
 
       ::windowing::window::post_non_client_destroy();
 
    }
 
 
-   ::windowing::window * window::get_parent() const
-   {
+   //::windowing::window * window::get_parent() const
+   //{
 
-      auto oswindow = get_parent_oswindow();
+   //   auto oswindow = get_parent_oswindow();
 
-      auto pwindow = m_pwindowing->window(oswindow);
+   //   auto pwindow = win32_windowing()->window(oswindow);
 
-      return pwindow;
+   //   return pwindow;
 
-   }
+   //}
 
 
-   oswindow window::get_parent_oswindow() const
-   {
+   //oswindow window::get_parent_oswindow() const
+   //{
 
-      auto hwnd = get_hwnd();
+   //   auto hwnd = get_hwnd();
 
-      auto hwndParent = ::GetParent(hwnd);
+   //   auto hwndParent = ::GetParent(hwnd);
 
-      auto oswindowParent = __oswindow(hwndParent);
+   //   auto oswindowParent = __oswindow(hwndParent);
 
-      return oswindowParent;
+   //   return oswindowParent;
 
-   }
+   //}
 
 
    void window::set_parent(::windowing::window * pwindowParent)
@@ -1572,6 +1688,22 @@ namespace windowing_win32
       //return ::success;
 
    }
+
+
+   //void window::_user_post(const ::procedure & procedure)
+   //{
+
+   //   m_puserinteraction->_user_post(procedure);
+
+   //}
+
+
+   //void window::_main_post(const ::procedure & procedure)
+   //{
+
+   //   m_puserinteraction->_main_post(procedure);
+
+   //}
 
 
    void window::exit_iconify()
@@ -1808,7 +1940,7 @@ namespace windowing_win32
    }
 
 
-   bool window::has_mouse_capture() const
+   bool window::has_mouse_capture()
    {
 
       itask_t itask = get_itask();
@@ -1829,7 +1961,7 @@ namespace windowing_win32
    }
 
 
-   bool window::has_keyboard_focus() const
+   bool window::has_keyboard_focus()
    {
 
       auto itask = get_itask();
@@ -1865,17 +1997,17 @@ namespace windowing_win32
    }
 
 
-   bool window::is_active_window() const
+   bool window::is_active_window()
    {
 
       itask_t itask = 0;
 
-      auto puserinteraction = m_puserinteractionimpl->m_puserinteraction;
+      auto puserinteraction = m_puserinteraction;
 
-      if (puserinteraction && puserinteraction->m_pthreadUserInteraction)
+      if (puserinteraction && puserinteraction->user_thread())
       {
 
-         itask = puserinteraction->m_pthreadUserInteraction->get_itask();
+         itask = puserinteraction->user_thread()->get_itask();
 
       }
 
@@ -1910,7 +2042,7 @@ namespace windowing_win32
       //if (::is_set(puserinteraction))
       //{
 
-      //   if (puserinteraction->m_pthreadUserInteraction == puserinteraction->m_pthreadUserInteraction)
+      //   if (puserinteraction->user_thread() == puserinteraction->user_thread())
       //   {
 
       //      if (puserinteraction->m_ewindowflag & e_window_flag_satellite_window)
@@ -1932,20 +2064,27 @@ namespace windowing_win32
    void window::destroy_window()
    {
 
-      HWND hwnd = get_hwnd();
+      main_send()
+         << [this]()
+         {
 
-      if (!::DestroyWindow(hwnd))
-      {
+            HWND hwnd = get_hwnd();
 
-         //return ::error_failed;
+            if (!::DestroyWindow(hwnd))
+            {
 
-         throw ::exception(error_failed);
+               DWORD dwLastError = ::GetLastError();
+               //return ::error_failed;
 
-      }
+               throw ::exception(error_failed);
 
-      //return ::success;
+            }
 
-      ::windowing::window::destroy_window();
+            //return ::success;
+
+            ::windowing::window::destroy_window();
+
+         };
 
    }
 
@@ -2353,14 +2492,14 @@ namespace windowing_win32
 
       }
 
-      if (m_puserinteractionimpl == nullptr)
-      {
+      //if (m_pwindow == nullptr)
+      //{
 
-         return true;
+      //   return true;
 
-      }
+      //}
 
-      auto puserinteraction = m_puserinteractionimpl->m_puserinteraction;
+      auto puserinteraction = m_puserinteraction;
 
       if (!puserinteraction->m_bUserElementOk)
       {
@@ -2542,9 +2681,9 @@ namespace windowing_win32
 
       HWND hwnd = get_hwnd();
 
-      auto pwindowing = windowing();
+      auto pwin32windowing = win32_windowing();
 
-      HWND hwndInsertAfter = pwindowing->zorder_to_hwnd(zorder);
+      HWND hwndInsertAfter = pwin32windowing->zorder_to_hwnd(zorder);
 
       UINT nFlags = m_uExtraFlagsSetWindowPos;
 
@@ -2609,15 +2748,17 @@ namespace windowing_win32
 
       //}
 
-      //if (_get_ex_style() & WS_EX_LAYERED)
-      //{
+      if (_get_ex_style() & WS_EX_LAYERED)
+      {
 
-      //   // If the window is layered, SetWindowPos gonna be called
-      //   // very close to UpdateLayeredWindow call.
+         // If the window is layered, SetWindowPos gonna be called
+         // very close to UpdateLayeredWindow call.
 
-      //   return true;
+         m_uSetWindowPosLastFlags = nFlags;
 
-      //}
+         return true;
+
+      }
 
       information() << "::SetWindowPos " << ::rectangle_i32_dimension(x, y, cx, cy);
 
@@ -2780,7 +2921,7 @@ namespace windowing_win32
 
    //   HWND hwnd = get_hwnd();
 
-   //   ::pointer < class windowing > pwindowing = m_pwindowing;
+   //   ::pointer < class windowing > pwindowing = this->windowing();
 
    //   HWND hwndZorder = pwindowing->zorder_to_hwnd(zorder);
 
@@ -2811,8 +2952,8 @@ namespace windowing_win32
 
    //   }
 
-   //   //m_puserinteractionimpl->m_puserinteraction->set_position({x, y}, ::user::e_layout_window);
-   //   //m_puserinteractionimpl->m_puserinteraction->set_size({ cx, cy }, ::user::e_layout_window);
+   //   //m_puserinteraction->set_position({x, y}, ::user::e_layout_window);
+   //   //m_puserinteraction->set_size({ cx, cy }, ::user::e_layout_window);
 
    //   return true;
 
@@ -3031,7 +3172,7 @@ namespace windowing_win32
 //
 //      }
 //
-//      //m_puserinteractionimpl->on_change_visibility();
+//      //on_change_visibility();
 //
 //      windowing_output_debug_string("\n::window::set_window_position 2");
 //
@@ -3169,7 +3310,7 @@ namespace windowing_win32
    //      if (pmessage->m_wparam == SC_SCREENSAVE)
    //      {
 
-   //         auto puserinteraction = m_puserinteractionimpl->m_puserinteraction;
+   //         auto puserinteraction = m_puserinteraction;
 
    //         if (puserinteraction && !puserinteraction->_001CanEnterScreenSaver())
    //         {
@@ -3186,7 +3327,7 @@ namespace windowing_win32
    //      else if (pmessage->m_wparam == SC_MAXIMIZE)
    //      {
 
-   //         auto puserinteraction = m_puserinteractionimpl->m_puserinteraction;
+   //         auto puserinteraction = m_puserinteraction;
 
    //         if (puserinteraction && !puserinteraction->_001Maximize())
    //         {
@@ -3202,7 +3343,7 @@ namespace windowing_win32
    //      else if (pmessage->m_wparam == SC_RESTORE)
    //      {
 
-   //         auto puserinteraction = m_puserinteractionimpl->m_puserinteraction;
+   //         auto puserinteraction = m_puserinteraction;
 
    //         if (puserinteraction && !puserinteraction->_001Restore())
    //         {
@@ -3218,7 +3359,7 @@ namespace windowing_win32
 
    //   }
 
-   //   auto puserinteraction = m_puserinteractionimpl->m_puserinteraction;
+   //   auto puserinteraction = m_puserinteraction;
 
    //   if (puserinteraction)
    //   {
@@ -3264,7 +3405,7 @@ namespace windowing_win32
    bool window::set_window_placement(const WINDOWPLACEMENT * puserinteractionpl)
    {
 
-      auto puserinteraction = m_puserinteractionimpl->m_puserinteraction;
+      auto puserinteraction = m_puserinteraction;
 
       synchronous_lock synchronouslock(puserinteraction->synchronization());
 
@@ -3321,6 +3462,175 @@ namespace windowing_win32
    }
 
 
+
+   void window::_001OnSysCommand(::message::message * pmessage)
+   {
+
+      auto wparam = pmessage->m_wparam;
+
+      if (wparam == SC_SCREENSAVE)
+      {
+
+         auto puserinteraction = m_puserinteraction;
+
+         if (puserinteraction && !puserinteraction->_001CanEnterScreenSaver())
+         {
+
+            pmessage->m_bRet = true;
+
+            pmessage->m_lresult = 0;
+
+         }
+
+         return;
+
+      }
+      else if (wparam == SC_MAXIMIZE)
+      {
+
+         auto puserinteraction = m_puserinteraction;
+
+         if (puserinteraction)
+         {
+            puserinteraction->_001Maximize();
+
+            pmessage->m_bRet = true;
+
+            pmessage->m_lresult = 0;
+
+         }
+
+         return;
+
+      }
+      else if (wparam == SC_CLOSE)
+      {
+
+         post_message(e_message_close);
+
+      }
+      else if (wparam == SC_RESTORE)
+      {
+
+         auto puserinteraction = m_puserinteraction;
+
+         if (puserinteraction)
+         {
+
+            //if (puserinteraction->layout().m_statea[::user::e_layout_normal].m_bProdevian)
+            //{
+
+            //   //puserinteraction->set_auto_refresh();
+
+            //}
+
+            //if (puserinteraction->layout().m_statea[::user::e_layout_normal].display() == e_display_zoomed)
+            //{
+
+            //   puserinteraction->_001Maximize();
+
+            //}
+            //else
+            //{
+
+            //   puserinteraction->_001Restore();
+
+            //}
+
+            puserinteraction->display_previous(true);
+
+            puserinteraction->set_need_layout();
+
+            puserinteraction->set_need_redraw();
+
+            puserinteraction->post_redraw();
+
+            pmessage->m_bRet = true;
+
+            pmessage->m_lresult = 0;
+
+         }
+
+         return;
+
+      }
+      else if (wparam == SC_MINIMIZE)
+      {
+
+         auto puserinteraction = m_puserinteraction;
+
+         if (puserinteraction)
+         {
+
+            //if (puserinteraction->layout().m_statea[::user::e_layout_normal].m_bAutoRefresh)
+            {
+
+               // puserinteraction->clear_prodevian();
+
+            }
+
+            //if (puserinteraction->layout().m_statea[::user::e_layout_normal].display() == e_display_zoomed)
+            //{
+
+            //   puserinteraction->_001Maximize();
+
+            //}
+            //else
+            //{
+
+            puserinteraction->_001Minimize();
+
+            //            }
+
+            pmessage->m_bRet = true;
+
+            pmessage->m_lresult = 0;
+
+         }
+
+         return;
+
+      }
+      else if (wparam == SC_MOVE)
+      {
+
+         auto puserinteraction = m_puserinteraction;
+
+         if (puserinteraction)
+         {
+
+            puserinteraction->m_ekeyboardmode = ::user::e_keyboard_mode_reposition;
+
+            puserinteraction->set_keyboard_focus();
+
+         }
+
+      }
+      else if (wparam == SC_SIZE)
+      {
+
+         auto puserinteraction = m_puserinteraction;
+
+         if (puserinteraction)
+         {
+
+            puserinteraction->m_ekeyboardmode = ::user::e_keyboard_mode_resize;
+
+            puserinteraction->set_keyboard_focus();
+
+         }
+
+      }
+      else if (wparam == 123)
+      {
+
+
+         application()->show_about_box();
+
+      }
+
+   }
+
    void window::_001OnPaint(::message::message * pmessage)
    {
 
@@ -3343,7 +3653,7 @@ namespace windowing_win32
 
       ::rectangle_i32 rectangleWindow;
 
-      auto puserinteraction = m_puserinteractionimpl->m_puserinteraction;
+      auto puserinteraction = m_puserinteraction;
 
       rectangleWindow = puserinteraction->screen_rectangle();
 
@@ -3511,7 +3821,7 @@ namespace windowing_win32
       //if (_get_ex_style() & WS_EX_LAYERED)
       //{
       //   
-      //   auto puserinteraction = m_puserinteractionimpl->m_puserinteraction;
+      //   auto puserinteraction = m_puserinteraction;
 
       //   return puserinteraction->const_layout().sketch().display() == ::e_display_iconic;
 
@@ -3535,19 +3845,19 @@ namespace windowing_win32
 
 
 
-   ::windowing::window * window::get_owner() const
+   ::windowing::window * window::window_get_owner()
    {
 
       ::oswindow oswindow = get_owner_oswindow();
 
-      auto pwindow = m_pwindowing->window(oswindow);
+      auto pwindow = win32_windowing()->window(oswindow);
 
       return pwindow;
 
    }
 
 
-   oswindow window::get_owner_oswindow() const
+   oswindow window::get_owner_oswindow()
    {
 
       if (!::IsWindow(get_hwnd()))
@@ -3569,7 +3879,7 @@ namespace windowing_win32
       if (hwndOwner == nullptr)
       {
 
-         return get_parent_oswindow();
+         return window_get_parent()->oswindow();
 
       }
 
@@ -3801,7 +4111,7 @@ namespace windowing_win32
    }
 
 
-   bool window::post_message(const ::atom & atom, wparam wParam, lparam lParam)
+   void window::post_message(const ::atom & atom, wparam wParam, lparam lParam)
    {
 
       HWND hwnd = get_hwnd();
@@ -3810,7 +4120,14 @@ namespace windowing_win32
 
       wparam wparam = wParam;
 
-      return ::PostMessage(hwnd, message, wparam, lParam.m_lparam) != false;
+      BOOL bOk = ::PostMessage(hwnd, message, wparam, lParam.m_lparam);
+
+      if (!bOk)
+      {
+
+         throw ::exception(error_failed);
+
+      }
 
    }
 
@@ -3830,7 +4147,7 @@ namespace windowing_win32
 
       DWORD_PTR lresult = 0;
 
-      auto puserinteraction = m_puserinteractionimpl->m_puserinteraction;
+      auto puserinteraction = m_puserinteraction;
 
       puserinteraction->m_strWindowText2 = scopedstr;
 
@@ -4114,6 +4431,36 @@ namespace windowing_win32
    void window::_on_configure_notify_unlocked(const ::rectangle_i32 & rectangle)
    {
 
+      auto p = rectangle.origin();
+
+      ::pointer < buffer > pbuffer = m_pgraphicsgraphics;
+
+      {
+
+         auto pitem = pbuffer->get_buffer_item();
+
+         if (pitem)
+         {
+
+            pitem->m_point = p;
+
+         }
+
+      }
+
+      {
+
+         auto pitem = pbuffer->get_screen_item();
+
+         if (pitem)
+         {
+
+            pitem->m_point = p;
+
+         }
+
+      }
+
       ::windowing::window::_on_configure_notify_unlocked(rectangle);
 
    }
@@ -4177,7 +4524,7 @@ namespace windowing_win32
 
       //}
 
-      auto puserinteraction = m_puserinteractionimpl->m_puserinteraction;
+      auto puserinteraction = m_puserinteraction;
 
       if (!puserinteraction->is_window_visible(::user::e_layout_sketch))
       {
@@ -4290,10 +4637,24 @@ namespace windowing_win32
    }
 
 
-   bool window::enable_window(bool bEnable)
+   void window::enable_window(bool bEnable)
    {
 
-      return ::EnableWindow(get_hwnd(), bEnable) != false;
+      BOOL bStateOk = ::EnableWindow(get_hwnd(), bEnable);
+
+
+      if (is_different(bStateOk, bEnable))
+      {
+
+         debugf("EnableWindow has change enabled state");
+
+      }
+      else
+      {
+
+         debugf("EnableWindow hasn't change enabled state");
+
+      }
 
    }
 
@@ -4572,57 +4933,57 @@ namespace windowing_win32
 
       HWND hwndNext = ::GetNextWindow(hwnd, nFlag);
 
-      auto pwindowing = windowing();
+      auto pwin32windowing = win32_windowing();
 
-      auto pwindowNext = pwindowing->_window(hwndNext);
+      auto pwindowNext = pwin32windowing->_window(hwndNext);
 
       return pwindowNext;
 
    }
 
 
-   ::windowing::window * window::get_top_window() const
+   ::windowing::window * window::get_top_window()
    {
 
       HWND hwnd = get_hwnd();
 
       HWND hwndTop = ::GetTopWindow(hwnd);
 
-      auto pwindowing = windowing();
+      auto pwin32windowing = win32_windowing();
 
-      auto pwindowTop = pwindowing->_window(hwndTop);
+      auto pwindowTop = pwin32windowing->_window(hwndTop);
 
       return pwindowTop;
 
    }
 
 
-   ::windowing::window * window::get_window(::u32 nCmd) const
+   ::windowing::window * window::get_window(::u32 nCmd)
    {
 
       HWND hwnd = get_hwnd();
 
       HWND hwndGet = ::GetWindow(hwnd, nCmd);
 
-      auto pwindowing = windowing();
+      auto pwin32windowing = win32_windowing();
 
-      auto pwindowGet = pwindowing->_window(hwndGet);
+      auto pwindowGet = pwin32windowing->_window(hwndGet);
 
       return pwindowGet;
 
    }
 
 
-   ::windowing::window * window::get_last_active_popup() const
+   ::windowing::window * window::get_last_active_popup()
    {
 
       HWND hwnd = get_hwnd();
 
       HWND hwndLastActivePopup = ::GetLastActivePopup(hwnd);
 
-      auto pwindowing = windowing();
+      auto pwin32windowing = win32_windowing();
 
-      auto pwindowLastActivePopup = pwindowing->_window(hwndLastActivePopup);
+      auto pwindowLastActivePopup = pwin32windowing->_window(hwndLastActivePopup);
 
       return pwindowLastActivePopup;
 
@@ -5025,7 +5386,7 @@ namespace windowing_win32
       if (::IsIconic(get_hwnd()))
       {
 
-         auto puserinteraction = m_puserinteractionimpl->m_puserinteraction;
+         auto puserinteraction = m_puserinteraction;
 
          if (puserinteraction->const_layout().sketch().display() != ::e_display_iconic)
          {
@@ -5038,7 +5399,7 @@ namespace windowing_win32
       else if (::IsZoomed(get_hwnd()))
       {
 
-         auto puserinteraction = m_puserinteractionimpl->m_puserinteraction;
+         auto puserinteraction = m_puserinteraction;
 
          if (puserinteraction->const_layout().window().display() != ::e_display_zoomed)
          {
@@ -5057,7 +5418,7 @@ namespace windowing_win32
 
       //}
 
-      auto puserinteraction = m_puserinteractionimpl->m_puserinteraction;
+      auto puserinteraction = m_puserinteraction;
 
       if (puserinteraction->layout().m_eflag)
       {
@@ -5625,7 +5986,7 @@ namespace windowing_win32
 
    //         ASSERT(oswindow_get(hwnd) == nullptr);
 
-   //         puserinteraction->puserinteraction->m_puserinteractionimpl = puserinteraction;
+   //         puserinteraction->puserinteraction->m_pwindow = puserinteraction;
 
    //         puserinteraction->attach(hwnd);
 
@@ -5718,7 +6079,7 @@ namespace windowing_win32
    void window::track_mouse_hover()
    {
 
-      if (m_puserinteractionimpl->m_bTransparentMouseEvents)
+      if (m_bTransparentMouseEvents)
       {
 
          m_bTrackMouseLeave = true;
@@ -5732,7 +6093,7 @@ namespace windowing_win32
       tme.hwndTrack = get_hwnd();
       TrackMouseEvent(&tme);
 
-      m_puserinteractionimpl->track_mouse_leave();
+      track_mouse_leave();
 
    }
 
@@ -5815,14 +6176,14 @@ namespace windowing_win32
 
    //   HRESULT hr = OleInitialize(nullptr);
 
-   //   hr = ::RegisterDragDrop(pimpl->get_hwnd(), pimpl);
+   //   hr = ::RegisterDragDrop(get_hwnd(), pimpl);
 
    //   if (SUCCEEDED(CoCreateInstance(CLSID_DragDropHelper, nullptr,
    //      CLSCTX_INPROC_SERVER,
    //      IID_IDropTargetHelper,
-   //      (void **)&pimpl->m_piDropHelper)))
+   //      (void **)&m_piDropHelper)))
    //   {
-   //      pimpl->m_bUseDnDHelper = true;
+   //      m_bUseDnDHelper = true;
    //   }
 
    //   MSG msg;
@@ -6206,7 +6567,7 @@ namespace windowing_win32
 
          {
             //HWND hwnd = get_hwnd();
-            m_puserinteractionimpl->m_puserinteraction->post_message(WM_SETICON, ICON_SMALL, (LPARAM)hiconSmall);
+            m_puserinteraction->post_message(WM_SETICON, ICON_SMALL, (LPARAM)hiconSmall);
             //DWORD dwLastError = ::GetLastError();
             //information() << "ICON_BIT_SMALLER" << dwLastError;
          }
@@ -6221,7 +6582,7 @@ namespace windowing_win32
          //SetLastError(0);
          {
             // HWND hwnd = get_hwnd();
-            //m_puserinteractionimpl->m_puserinteraction->post_message(WM_SETICON, ICON_BIG, (LPARAM)hiconBig);
+            //m_puserinteraction->post_message(WM_SETICON, ICON_BIG, (LPARAM)hiconBig);
             //::SendMessage(hwnd, WM_SETICON, ICON_BIG, (LPARAM)hicon);
             //DWORD dwLastError = ::GetLastError();
 
@@ -6943,11 +7304,11 @@ namespace windowing_win32
 
       ::point_i32 pointMouseMove;
 
-      auto pimpl = m_puserinteractionimpl;
+      //auto pimpl = m_pwindow;
 
       auto pwindowing = windowing();
 
-      auto itask = m_puserinteractionimpl->m_puserinteraction->m_pthreadUserInteraction->m_itask;
+      auto itask = m_puserinteraction->user_thread()->m_itask;
 
       HWND hwnd = get_hwnd();
 
@@ -7008,7 +7369,7 @@ namespace windowing_win32
             if (m_bTrackMouseLeave)
             {
 
-               m_puserinteractionimpl->m_puserinteraction->post_message(e_message_mouse_leave);
+               m_puserinteraction->post_message(e_message_mouse_leave);
 
             }
 
@@ -7022,9 +7383,9 @@ namespace windowing_win32
 
          m_timeLastMouseMove.Now();
 
-         //pimpl->m_puserinteraction->post_message(e_message_mouse_move, 0, lparam);
+         //m_puserinteraction->post_message(e_message_mouse_move, 0, lparam);
 
-         pimpl->m_puserinteraction->send_message(e_message_mouse_move, 0, lparam);
+         m_puserinteraction->send_message(e_message_mouse_move, 0, lparam);
 
          //::SendMessage(hwnd, e_message_mouse_move, 0, lparam);
 
@@ -7066,17 +7427,17 @@ namespace windowing_win32
 
       //         default_message_handler(pmessage);
 
-      if (m_puserinteractionimpl->m_puserinteraction)
+      if (m_puserinteraction)
       {
 
-         if (m_puserinteractionimpl->m_puserinteraction->is_message_only_window() || m_puserinteractionimpl->m_puserinteraction.cast <::windowing_win32::system_interaction >())
+         if (m_puserinteraction->is_message_only_window() || m_puserinteraction.cast <::windowing_win32::system_interaction >())
          {
 
             informationf("good : opt out!");
 
          }
 
-         if (m_puserinteractionimpl->m_puserinteraction->m_bUserElementOk)
+         if (m_puserinteraction->m_bUserElementOk)
          {
 
             pcreate->m_lresult = 0;
@@ -7151,11 +7512,11 @@ namespace windowing_win32
    //void window::_window_request_presentation_locked()
    //{
 
-   //   auto puserinteraction = m_puserinteractionimpl->m_puserinteraction;
+   //   auto puserinteraction = m_puserinteraction;
 
    //   puserinteraction->_window_request_presentation_unlocked();
 
-   //   //auto pprodevian = m_puserinteractionimpl->m_pprodevian;
+   //   //auto pprodevian = m_pprodevian;
 
    //   //puserinteraction->interaction_post(pprodevian->m_procedureWindowShow);
 
@@ -7165,9 +7526,9 @@ namespace windowing_win32
    void window::__update_graphics_buffer()
    {
 
-      m_puserinteractionimpl->m_pgraphicsgraphics->update_screen();
+      m_pgraphicsgraphics->update_screen();
 
-      /*auto puserinteraction = m_puserinteractionimpl->m_puserinteraction;
+      /*auto puserinteraction = m_puserinteraction;
 
       if (!puserinteraction)
       {
@@ -7176,7 +7537,7 @@ namespace windowing_win32
 
       }
 
-      auto pprodevian = m_puserinteractionimpl->m_pprodevian;
+      auto pprodevian = m_pprodevian;
 
       if (!pprodevian)
       {
@@ -7265,19 +7626,30 @@ namespace windowing_win32
    void window::defer_show_system_menu(::user::mouse * pmouse)
    {
 
-      //::pointer < ::windows::nano::user::user >pnanouserWindows = nano()->user();
+      //::pointer < ::windows::micro::user >pnanouserWindows = system()->acme_windowing();
 
       //auto hwnd = m_hwnd;
 
       //pnanouserWindows->_defer_show_system_menu(hwnd, &m_hmenuSystem, pointAbsolute);
 
-      _defer_show_system_menu(pmouse->m_pointAbsolute);
+      _defer_show_system_menu(pmouse);
 
    }
 
 
    LRESULT window::__window_procedure(HWND hwnd, UINT message, WPARAM wparam, LPARAM lparam)
    {
+
+      if (message == WM_USER + 1297)
+      {
+
+         ::procedure procedure(lparam);
+
+         procedure();
+
+         return 0;
+
+      }
 
       lresult lresult = 0;
 
@@ -7288,72 +7660,72 @@ namespace windowing_win32
 
       }
 
-      if (message == WM_WINDOWPOSCHANGED)
-      {
+      //if (message == WM_WINDOWPOSCHANGED)
+      //{
 
-         if (m_bSizeMoveMode)
-         {
+      //   //if (m_bSizeMoveMode)
+      //   {
 
-            auto pwindowpos = (WINDOWPOS *)lparam;
+      //      auto pwindowpos = (WINDOWPOS *)lparam;
 
-            //::GetWindowRect(m_hwnd, &r);
+      //      //::GetWindowRect(m_hwnd, &r);
 
-            auto pointLparam = lparam_as_point(lparam);
+      //      auto pointLparam = lparam_as_point(lparam);
 
-            //auto xPos = (int)(short)LOWORD(lparam);   // horizontal position 
-            //auto yPos = (int)(short)HIWORD(lparam);   // vertical position 
-            auto xPos = pwindowpos->x;
-            auto yPos = pwindowpos->y;
+      //      //auto xPos = (int)(short)LOWORD(lparam);   // horizontal position 
+      //      //auto yPos = (int)(short)HIWORD(lparam);   // vertical position 
+      //      auto xPos = pwindowpos->x;
+      //      auto yPos = pwindowpos->y;
 
-            //::point_i32 p(r.left, r.top);
+      //      //::point_i32 p(r.left, r.top);
 
-            ::point_i32 p(xPos, yPos);
+      //      ::point_i32 p(xPos, yPos);
 
-            m_pointWindow = p;
+      //      m_pointWindow = p;
 
-            //::SetWindowPos(m_hwnd, nullptr, xPos, yPos, 0, 0, SWP_NOSIZE | SWP_NOZORDER);
+      //      //::SetWindowPos(m_hwnd, nullptr, xPos, yPos, 0, 0, SWP_NOSIZE | SWP_NOZORDER);
 
-            m_puserinteractionimpl->m_puserinteraction->layout().m_statea[::user::e_layout_sketch].m_point2 = p;
-            m_puserinteractionimpl->m_puserinteraction->layout().m_statea[::user::e_layout_lading].m_point2 = p;
-            m_puserinteractionimpl->m_puserinteraction->layout().m_statea[::user::e_layout_layout].m_point2 = p;
-            m_puserinteractionimpl->m_puserinteraction->layout().m_statea[::user::e_layout_design].m_point2 = p;
-            m_puserinteractionimpl->m_puserinteraction->layout().m_statea[::user::e_layout_output].m_point2 = p;
-            m_puserinteractionimpl->m_puserinteraction->layout().m_statea[::user::e_layout_window].m_point2 = p;
-            m_puserinteractionimpl->m_puserinteraction->layout().m_statea[::user::e_layout_normal].m_point2 = p;
+      //      m_puserinteraction->layout().m_statea[::user::e_layout_sketch].m_point2 = p;
+      //      m_puserinteraction->layout().m_statea[::user::e_layout_lading].m_point2 = p;
+      //      m_puserinteraction->layout().m_statea[::user::e_layout_layout].m_point2 = p;
+      //      m_puserinteraction->layout().m_statea[::user::e_layout_design].m_point2 = p;
+      //      m_puserinteraction->layout().m_statea[::user::e_layout_output].m_point2 = p;
+      //      m_puserinteraction->layout().m_statea[::user::e_layout_window].m_point2 = p;
+      //      m_puserinteraction->layout().m_statea[::user::e_layout_normal].m_point2 = p;
 
-            ::pointer < buffer > pbuffer  = m_puserinteractionimpl->m_pgraphicsgraphics;
+      //      ::pointer < buffer > pbuffer  = m_pgraphicsgraphics;
 
-            {
+      //      {
 
-               auto pitem = pbuffer->get_buffer_item();
+      //         auto pitem = pbuffer->get_buffer_item();
 
-               if (pitem)
-               {
+      //         if (pitem)
+      //         {
 
-                  pitem->m_point = p;
+      //            pitem->m_point = p;
 
-               }
+      //         }
 
-            }
+      //      }
 
-            {
+      //      {
 
-               auto pitem = pbuffer->get_screen_item();
+      //         auto pitem = pbuffer->get_screen_item();
 
-               if (pitem)
-               {
+      //         if (pitem)
+      //         {
 
-                  pitem->m_point = p;
+      //            pitem->m_point = p;
 
-               }
+      //         }
 
-            }
+      //      }
 
-            return 0;
+      //      return 0;
 
-         }
+      //   }
 
-      }
+      //}
 
       if (message == WM_SYSCOMMAND)
       {
@@ -7422,12 +7794,12 @@ namespace windowing_win32
 
       }
 
-      auto pimpl = m_puserinteractionimpl;
+      //auto pimpl = m_pwindow;
 
-      if (pimpl)
+      //if (pimpl)
       {
 
-         if (pimpl->__windows_message_bypass(this, message, wparam, (iptr)lparam, lresult))
+         if (__windows_message_bypass(m_hwnd, message, wparam, (iptr)lparam, lresult))
          {
 
             return lresult;
@@ -7473,7 +7845,7 @@ namespace windowing_win32
       //if (message == WM_INITMENU)
       //{
 
-      //   ::pointer < ::windows::nano::user::user > pnanouser = nano()->user();
+      //   ::pointer < ::windows::micro::user > pnanouser = system()->acme_windowing();
 
       //   LRESULT lresult = 0;
 
@@ -7488,18 +7860,18 @@ namespace windowing_win32
 
       //return ::DefWindowProcW(hwnd, message, wparam, lparam);
 
-      //auto psystem = pimpl->system();
+      //auto psystem = system();
 
-      if (pimpl)
+      //if (pimpl)
       {
 
-         pimpl->m_uiMessage = message;
+         m_uiMessage = message;
 
-         pimpl->m_wparam = wparam;
+         m_wparam = wparam;
 
-         pimpl->m_lparam = lparam;
+         m_lparam = lparam;
 
-         auto puserinteraction = pimpl->m_puserinteraction;
+         auto puserinteraction = m_puserinteraction;
 
          if (message == e_message_activate)
          {
@@ -7547,25 +7919,16 @@ namespace windowing_win32
          if (message == e_message_mouse_move)
          {
 
-            if (lparam == pimpl->m_lparamLastMouseMove)
+            if (lparam == m_lparamLastMouseMove)
             {
 
                return 0;
 
             }
 
-            pimpl->m_lparamLastMouseMove = lparam;
+            m_lparamLastMouseMove = lparam;
 
             ::point_i32 pointMouseMove(i32_x(lparam), i32_y(lparam));
-
-            if (pimpl->m_pointMouseMove == pointMouseMove)
-            {
-
-               return 0;
-
-            }
-
-            pimpl->m_pointMouseMove = pointMouseMove;
 
             if (m_pointMouseMove == pointMouseMove)
             {
@@ -7573,6 +7936,15 @@ namespace windowing_win32
                return 0;
 
             }
+
+            m_pointMouseMove = pointMouseMove;
+
+            //if (m_pointMouseMove == pointMouseMove)
+            //{
+
+            //   return 0;
+
+            //}
 
             m_pointMouseMove = pointMouseMove;
 
@@ -7585,18 +7957,18 @@ namespace windowing_win32
             //if (wparam == e_timer_transparent_mouse_event)
             //{
 
-            //   if (pimpl->m_pointMouseMove == pointMouseMove)
+            //   if (m_pointMouseMove == pointMouseMove)
             //   {
 
             //      return 0;
 
             //   }
 
-            //   pimpl->m_pointCursor = pointCursor;
+            //   m_pointCursor = pointCursor;
 
             //   lparam = MAKELPARAM(pointCursor.x(), pointCursor.y());
 
-            //   pimpl->call_message_handler(e_message_mouse_move, 0, lparam);
+            //   call_message_handler(e_message_mouse_move, 0, lparam);
 
             //}
             //else
@@ -7612,15 +7984,15 @@ namespace windowing_win32
 
          }
 
-         if (pimpl->m_bDestroyImplOnly || ::is_null(puserinteraction))
+         if (m_bDestroyImplOnly || ::is_null(puserinteraction))
          {
 
-            auto pmessage = pimpl->get_message((enum_message)message, wparam, (iptr)lparam);
+            auto pmessage = get_message((enum_message)message, wparam, (iptr)lparam);
 
             try
             {
 
-               pimpl->message_handler(pmessage);
+               message_handler(pmessage);
 
             }
             catch (...)
@@ -7631,7 +8003,7 @@ namespace windowing_win32
             if (!pmessage->m_bRet)
             {
 
-               pimpl->default_message_handler(pmessage);
+               default_message_handler(pmessage);
 
             }
 
@@ -7664,7 +8036,7 @@ namespace windowing_win32
 
                //output_debug_string("message34381");
             }
-            auto pmessage = pimpl->get_message((enum_message)message, wparam, (iptr)lparam);
+            auto pmessage = get_message((enum_message)message, wparam, (iptr)lparam);
 
             try
             {
@@ -7733,6 +8105,48 @@ namespace windowing_win32
       m_uOpacity = (::u8) (minimum_maximum(dOpacity, 0., 1.) * 255.0);
 
    }
+
+
+   void window::_user_send(const ::procedure & procedure)
+   {
+
+      ::SendMessage(m_hwnd, WM_USER + 1297, 0, (lparam)(::uptr)(::subparticle*)procedure.m_pbase.m_p);
+
+   }
+
+
+   void window::_user_post(const ::procedure & procedure)
+   {
+
+      if (!m_puserinteraction)
+      {
+
+         ::windowing::window::_user_post(procedure);
+
+         return;
+
+      }
+
+      m_puserinteraction->_user_post(procedure);
+
+   }
+
+
+   void window::_main_send(const ::procedure & procedure)
+   {
+
+      _user_send(procedure);
+
+   }
+
+
+   void window::_main_post(const ::procedure & procedure)
+   {
+
+      _user_post(procedure);
+
+   }
+
 
 
 } // namespace windowing_win32

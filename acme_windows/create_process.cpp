@@ -6,8 +6,8 @@
 #include "acme/parallelization/synchronous_lock.h"
 #include "acme/platform/application.h"
 #include "acme/platform/node.h"
-#include "acme/primitive/datetime/datetime.h"
-#include "acme/primitive/string/str.h"
+#include "acme/prototype/datetime/datetime.h"
+#include "acme/prototype/string/str.h"
 #include "registry.h"
 
 ///******************************************************************************\
@@ -1099,8 +1099,8 @@ namespace acme_windows
          while (dwReadOut > 0 || dwReadErr > 0);
 
          if (tracefunction
-            && !tracefunction.m_timeTimeout.is_infinite()
-            && m_timeStart.elapsed() > tracefunction.m_timeTimeout)
+            && !tracefunction.timeout().is_infinite()
+            && m_timeStart.elapsed() > tracefunction.timeout())
          {
 
             break;
@@ -1222,8 +1222,8 @@ namespace acme_windows
          auto elapsed = m_timeStart.elapsed();
 
          if (tracefunction
-            && !tracefunction.m_timeTimeout.is_infinite()
-            && elapsed > tracefunction.m_timeTimeout)
+            && !tracefunction.timeout().is_infinite()
+            && elapsed > tracefunction.timeout())
          {
 
             ::string strElapsed = datetime()->elapsed_time_text(elapsed);

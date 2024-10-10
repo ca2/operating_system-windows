@@ -11,9 +11,9 @@
 #include "acme/exception/exception.h"
 #include "acme/parallelization/mutex.h"
 #include "acme/parallelization/task.h"
-#include "acme/primitive/geometry2d/_text_stream.h"
+#include "acme/prototype/geometry2d/_text_stream.h"
 #include "aura/graphics/image/image.h"
-#include "aura/user/user/interaction_impl.h"
+//#include "aura/user/user/interaction_impl.h"
 #include "aura/graphics/image/image.h"
 //#define REDRAW_HINTING
 #ifdef REDRAW_HINTING
@@ -100,7 +100,7 @@ namespace windowing_win32
    }
 
 
-   void buffer::initialize_graphics_graphics(::user::interaction_impl * pimpl)
+   void buffer::initialize_graphics_graphics(::windowing::window * pimpl)
    {
 
       //auto estatus = 

@@ -255,7 +255,7 @@ namespace production
    {
       if(ptopic->m_atom == ::id_set_check)
       {
-         if(ptopic->user_element_id() == "clean")
+         if(ptopic->user_interaction_id() == "clean")
          {
             ::pointer<::user::interaction>pinteraction = m_pviewOptions->get_child_by_id("clean");
             ::pointer<::user::check_box>pcheckbox =  (pinteraction);
@@ -263,7 +263,7 @@ namespace production
             ptopic->payload(id_clean) = pcheckbox->echeck() == ::e_check_checked;
             get_document()->update_all_impacts(ptopic);
          }
-         else if(ptopic->user_element_id() == "build")
+         else if(ptopic->user_interaction_id() == "build")
          {
             ::pointer<::user::interaction>pinteraction = m_pviewOptions->get_child_by_id("build");
             ::pointer<::user::check_box>pcheckbox =  (pinteraction);

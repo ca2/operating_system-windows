@@ -4,18 +4,55 @@
 #include "still.h"
 
 
+::Gdiplus::Image * LoadImageFromMemory(const void * imageData, memsize size)
+{
+   // Create an IStream object from the memory buffer
+   HGLOBAL hGlobal = GlobalAlloc(GMEM_MOVEABLE, size);
+   if (!hGlobal)
+      return nullptr;
+
+   void * pData = GlobalLock(hGlobal);
+   memcpy(pData, imageData, size);
+   GlobalUnlock(hGlobal);
+
+   IStream * pStream = nullptr;
+   HRESULT hr = CreateStreamOnHGlobal(hGlobal, TRUE, &pStream); // TRUE so the stream releases the memory
+   if (FAILED(hr))
+   {
+      GlobalFree(hGlobal);
+      return nullptr;
+   }
+
+   // Load the image from the stream using GDI+
+   ::Gdiplus::Image * image = new ::Gdiplus::Image(pStream);
+   pStream->Release();
+
+   return image;
+}
+
 namespace innate_ui_win32
 {
 
+   LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
 
    still::still()
    {
+      m_bIcon = false;
       m_iCreateStyle = WS_TABSTOP | WS_VISIBLE | WS_CHILD | SS_LEFT;
    }
 
 
    still::~still()
    {
+
+      if (m_pgdiplusimage)
+      {
+
+         delete m_pgdiplusimage;
+
+         m_pgdiplusimage = nullptr;
+
+      }
 
    }
 
@@ -38,12 +75,21 @@ namespace innate_ui_win32
          (HINSTANCE)GetWindowLongPtr(pwindowParent->m_hwnd, GWLP_HINSTANCE),
          NULL);
 
+      if (m_bIcon)
+      {
+
+         SetWindowLongPtr(m_hwnd, GWLP_WNDPROC, (LPARAM)WndProc);
+
+      }
+
    }
 
    void still::create_icon_still(::innate_ui::window * pwindowParent)
    {
 
-      m_iCreateStyle = WS_TABSTOP | WS_VISIBLE | WS_CHILD | SS_ICON | SS_REALSIZEIMAGE;
+      m_bIcon = true;
+
+      m_iCreateStyle = WS_TABSTOP | WS_VISIBLE | WS_CHILD | SS_OWNERDRAW;
 
       create_child(pwindowParent);
 
@@ -56,12 +102,52 @@ namespace innate_ui_win32
 
       ::pointer <::innate_ui_win32::icon > picon = piconParam;
 
-      sync([this, picon]()
+      main_send([this, picon]()
       {
          
-         ::SendMessage(m_hwnd, STM_SETICON, (WPARAM) picon->m_hicon, 0);
+         //::SendMessage(m_hwnd, STM_SETICON, (WPARAM) picon->m_hicon, 0);
+
+         m_pgdiplusimage = LoadImageFromMemory(picon->m_memory.data(), picon->m_memory.size());
          
-         });
+      });
+
+   }
+
+   
+   LRESULT still::_window_procedure(UINT message, WPARAM wparam, LPARAM lparam)
+   {
+
+      if (message == WM_PAINT && m_bIcon)
+      {
+         
+         PAINTSTRUCT ps;
+
+         HDC hdc = ::BeginPaint(m_hwnd, &ps);
+
+         ::Gdiplus::Graphics graphics(hdc);
+
+         if (m_pgdiplusimage)
+         {
+
+            Gdiplus::Rect r;
+            RECT rectClient;
+            ::GetClientRect(m_hwnd, &rectClient);
+            r.X = 0;
+            r.Y = 0;
+            r.Width = ::width(rectClient);
+            r.Height = ::height(rectClient);
+
+            graphics.DrawImage(m_pgdiplusimage, r, 0, 0, 
+               m_pgdiplusimage->GetWidth(),
+               m_pgdiplusimage->GetHeight(), Gdiplus::UnitPixel);
+
+         }
+
+         ::EndPaint(m_hwnd, &ps);
+
+      }
+
+      return ::innate_ui_win32::window::_window_procedure(message, wparam, lparam);
 
    }
 

@@ -7,7 +7,7 @@
 #include "windowing.h"
 #include "window.h"
 #include "acme/parallelization/synchronous_lock.h"
-#include "acme/primitive/geometry2d/rectangle_array.h"
+#include "acme/prototype/geometry2d/rectangle_array.h"
 #include "aura/platform/system.h"
 #include "aura/user/user/interaction.h"
 
@@ -1037,10 +1037,8 @@ namespace windowing_win32
    }
 
 
-   void display::initialize_display(::windowing::windowing * pwindowing)
+   void display::open_display()
    {
-
-      ::windowing::display::initialize_display(pwindowing);
 
       enum_display_monitors();
 

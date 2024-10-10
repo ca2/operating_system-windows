@@ -1,7 +1,7 @@
 #pragma once
 
 
-#include "aura/user/user/interaction_impl.h"
+//#include "aura/user/user/interaction_impl.h"
 
 
 #include "acme/_operating_system.h"
@@ -16,12 +16,12 @@ namespace aura_windows
 
 
    class CLASS_DECL_AURA_WINDOWS interaction_impl :
-      virtual public ::user::interaction_impl
+      virtual public ::windowing::window
    {
    public:
 
 
-      //__creatable_from_base(interaction_impl, ::user::interaction_impl);
+      //__creatable_from_base(interaction_impl, ::windowing::window);
 
 
       HWND                                      m_hwnd;
@@ -37,7 +37,7 @@ namespace aura_windows
 
       point_i32                                 m_point;
 
-      ::user::primitive* m_pbasewnd;
+      ::user::interaction_base* m_pbasewnd;
 
       u32                                       m_uiLastRedrawRequest;
 
@@ -153,7 +153,7 @@ namespace aura_windows
       // subclassing/unsubclassing functions
       //virtual void pre_subclass_window();
       //bool subclass_window(::windowing::window * pwindow);
-      //bool SubclassDlgItem(::u32 nID, ::user::interaction_impl * pParent);
+      //bool SubclassDlgItem(::u32 nID, ::windowing::window * pParent);
       //oswindow unsubclass_window();
 
       // handling of RT_DLGINIT resource (extension to RT_DIALOG)
@@ -186,14 +186,14 @@ namespace aura_windows
 
 
       //// get immediate child with given ID
-      //using ::user::interaction_impl::get_child_by_id;
+      //using ::windowing::window::get_child_by_id;
       //void get_child_by_id(atom atom, oswindow* poswindow_) const;
 
       virtual bool _is_window() override;
 
       //#if(WINVER >= 0x0500)
       //
-      //      ::user::interaction_impl * GetAncestor(::u32 gaFlags) const;
+      //      ::windowing::window * GetAncestor(::u32 gaFlags) const;
       //
       //#endif   // WINVER >= 0x0500
 
@@ -241,10 +241,10 @@ namespace aura_windows
       virtual ::u32 ArrangeIconicWindows();
       //virtual void BringToTop(::e_display edisplay);
       //virtual bool BringWindowToTop();
-      //using ::user::interaction_impl::window_rectangle;
+      //using ::windowing::window::window_rectangle;
       //virtual bool window_rectangle(::rectangle_i64 * prectangle);
 
-      //using ::user::interaction_impl::this->rectangle;
+      //using ::windowing::window::this->rectangle;
       //virtual bool this->rectangle(::rectangle_i64 * prectangle);
 
 
@@ -262,9 +262,9 @@ namespace aura_windows
       //virtual bool SetWindowPlacement(const WINDOWPLACEMENT* puserinteractionpl);
 
 
-      //virtual void MapWindowPoints(::user::interaction_impl * puserinteractionTo, ::point_i32 * pPoint, ::u32 nCount);
+      //virtual void MapWindowPoints(::windowing::window * puserinteractionTo, ::point_i32 * pPoint, ::u32 nCount);
 
-      //virtual void MapWindowPoints(::user::interaction_impl * puserinteractionTo, ::rectangle_i32 * prectangle);
+      //virtual void MapWindowPoints(::windowing::window * puserinteractionTo, ::rectangle_i32 * prectangle);
 
 
       virtual void Print(::draw2d::graphics_pointer& pgraphics, u32 dwFlags);
@@ -427,9 +427,9 @@ namespace aura_windows
       // Window Access Functions
       //virtual ::user::interaction * ChildWindowFromPoint(const ::point_i32 & point);
       //virtual ::user::interaction * ChildWindowFromPoint(const ::point_i32 & point, ::u32 nFlags);
-      ///      virtual ::user::interaction_impl * FindWindow(const ::string & pszClassName, const ::string & pszWindowName);
+      ///      virtual ::windowing::window * FindWindow(const ::string & pszClassName, const ::string & pszWindowName);
 
-      //   virtual ::user::interaction_impl * FindWindowEx(::windowing::window * pwindowParent,::windowing::window * pwindowChildAfter, const ::string & lpszClass, const ::string & pszWindow);
+      //   virtual ::windowing::window * FindWindowEx(::windowing::window * pwindowParent,::windowing::window * pwindowChildAfter, const ::string & lpszClass, const ::string & pszWindow);
 
       //virtual ::point_i64 _client_parent_top_left() override;
       //virtual ::point_i64 _client_screen_top_left() override;
@@ -510,21 +510,21 @@ namespace aura_windows
       //virtual bool OnCommand(::message::message * pmessage);
       //virtual bool OnNotify(::message::message * pmessage);
 
-      //void OnActivate(::u32 nState, ::user::interaction_impl * pWndOther, bool bMinimized);
+      //void OnActivate(::u32 nState, ::windowing::window * pWndOther, bool bMinimized);
       //void OnActivateApp(bool bActive, u32 dwThreadID);
       //lresult OnActivateTopLevel(wparam, lparam);
       //void OnCancelMode();
       //void OnChildActivate();
       //void OnClose();
-      //void OnContextMenu(::user::interaction_impl * pwindow, point_i32 pos);
-      //bool OnCopyData(::user::interaction_impl * pwindow, COPYDATASTRUCT* pCopyDataStruct);
+      //void OnContextMenu(::windowing::window * pwindow, point_i32 pos);
+      //bool OnCopyData(::windowing::window * pwindow, COPYDATASTRUCT* pCopyDataStruct);
 
-      //HBRUSH OnCtlColor(::draw2d::graphics_pointer & pgraphics, ::user::interaction_impl * pwindow, ::u32 nCtlColor);
+      //HBRUSH OnCtlColor(::draw2d::graphics_pointer & pgraphics, ::windowing::window * pwindow, ::u32 nCtlColor);
 
 
       //void OnEnable(bool bEnable);
       //void OnEndSession(bool bEnding);
-      //void OnEnterIdle(::u32 nWhy, ::user::interaction_impl * pWho);
+      //void OnEnterIdle(::u32 nWhy, ::windowing::window * pWho);
       //bool OnEraseBkgnd(::draw2d::graphics_pointer & pgraphics);
       //void OnGetMinMaxInfo(MINMAXINFO* pMMI);
 
@@ -568,7 +568,7 @@ namespace aura_windows
 
       //// ::auraacmesystem() message handler member functions
       //void OnDropFiles(HDROP hDropInfo);
-      //void OnPaletteIsChanging(::user::interaction_impl * pRealizeWnd);
+      //void OnPaletteIsChanging(::windowing::window * pRealizeWnd);
       //void OnSysChar(::u32 nChar, ::u32 nRepCnt, ::u32 nFlags);
       //void OnSysCommand(::u32 nID, lparam lParam);
       //void OnSysDeadChar(::u32 nChar, ::u32 nRepCnt, ::u32 nFlags);
@@ -578,7 +578,7 @@ namespace aura_windows
       //void OnDevModeChange(__in_z char * pDeviceName);
 
       //void OnFontChange();
-      //void OnPaletteChanged(::user::interaction_impl * pFocusWnd);
+      //void OnPaletteChanged(::windowing::window * pFocusWnd);
       //void OnSpoolerStatus(::u32 nStatus, ::u32 nJobs);
       //void OnSysColorChange();
       //void OnTimeChange();
@@ -600,7 +600,7 @@ namespace aura_windows
       //void OnMButtonDblClk(::u32 nFlags, const ::point_i32 & point);
       //void OnMButtonDown(::u32 nFlags, const ::point_i32 & point);
       //void OnMButtonUp(::u32 nFlags, const ::point_i32 & point);
-      //i32 OnMouseActivate(::user::interaction_impl * pDesktopWnd, ::u32 nHitTest, const ::atom & atom);
+      //i32 OnMouseActivate(::windowing::window * pDesktopWnd, ::u32 nHitTest, const ::atom & atom);
       //void OnMouseMove(::u32 nFlags, const ::point_i32 & point);
       //bool OnMouseWheel(::u32 nFlags, i16 zDelta, const ::point_i32 & point);
       //lresult OnRegisteredMouseWheel(wparam wParam, lparam lParam);
@@ -619,12 +619,12 @@ namespace aura_windows
       //void OnChangeCbChain(::windowing::window * pwindow_Remove, ::windowing::window * pwindow_After);
       //void OnDestroyClipboard();
       //void OnDrawClipboard();
-      //void OnHScrollClipboard(::user::interaction_impl * pClipAppWnd, ::u32 nSBCode, ::u32 nPos);
-      //void OnPaintClipboard(::user::interaction_impl * pClipAppWnd, HGLOBAL hPaintStruct);
+      //void OnHScrollClipboard(::windowing::window * pClipAppWnd, ::u32 nSBCode, ::u32 nPos);
+      //void OnPaintClipboard(::windowing::window * pClipAppWnd, HGLOBAL hPaintStruct);
       //void OnRenderAllFormats();
       //void OnRenderFormat(::u32 nFormat);
-      //void OnSizeClipboard(::user::interaction_impl * pClipAppWnd, HGLOBAL hRect);
-      //void OnVScrollClipboard(::user::interaction_impl * pClipAppWnd, ::u32 nSBCode, ::u32 nPos);
+      //void OnSizeClipboard(::windowing::window * pClipAppWnd, HGLOBAL hRect);
+      //void OnVScrollClipboard(::windowing::window * pClipAppWnd, ::u32 nSBCode, ::u32 nPos);
 
       //// control message handler member functions
       //i32 OnCompareItem(i32 nIDCtl, LPCOMPAREITEMSTRUCT pCompareItemStruct);
@@ -637,7 +637,7 @@ namespace aura_windows
 
       // MDI message handler member functions
       //void OnMDIActivate(bool bActivate,
-      //                   ::user::interaction_impl * pActivateWnd, ::user::interaction_impl * pDeactivateWnd);
+      //                   ::windowing::window * pActivateWnd, ::windowing::window * pDeactivateWnd);
 
       // menu loop notification messages
       //void OnEnterMenuLoop(bool bIstrack_popup_menu);
@@ -652,7 +652,7 @@ namespace aura_windows
 
       //void OnMoving(::u32 nSide, ::rectangle_i32 * prectangle);
 
-      //void OnCaptureChanged(::user::interaction_impl * pwindow);
+      //void OnCaptureChanged(::windowing::window * pwindow);
       //bool OnDeviceChange(::u32 nEventType, uptr dwData);
 
       // Overridables and other helpers (for implementation of derived classes)
@@ -708,7 +708,7 @@ namespace aura_windows
       //virtual void on_final_release();
       ///virtual bool ModifyStyle(u32 dwRemove, u32 dwAdd, ::u32 nFlags);
       //virtual bool ModifyStyleEx(u32 dwRemove, u32 dwAdd, ::u32 nFlags);
-      //virtual void _FilterToolTipMessage(MSG* pMsg,::user::interaction_impl * pwindow);
+      //virtual void _FilterToolTipMessage(MSG* pMsg,::windowing::window * pwindow);
       //bool _EnableToolTips(bool bEnable, ::u32 nFlag);
       //virtual oswindow get_safe_owner(::windowing::window * pwindow, ::oswindow * pWndTop);
       //void PrepareForHelp();
@@ -719,7 +719,7 @@ namespace aura_windows
 
       friend class frame_window;
 
-      bool CreateDlg(const ::string & pszTemplateName, ::user::interaction_impl * pParentWnd);
+      bool CreateDlg(const ::string & pszTemplateName, ::windowing::window * pParentWnd);
 
 
 

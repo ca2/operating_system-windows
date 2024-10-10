@@ -34,7 +34,7 @@ namespace windowing_win32
    windowing::windowing()
    {
 
-      m_pWindowing4 = this;
+      //m_pWindowing4 = this;
 
       //      set_layer(LAYERED_IMPL, this);
       m_emessageWindowsTaskbarCreatedMessage = e_message_undefined;
@@ -64,7 +64,7 @@ namespace windowing_win32
 
       //estatus = 
 
-      __construct(m_pdisplay);
+      //__construct(m_pdisplay);
 
       //if (!estatus)
       //{
@@ -75,7 +75,7 @@ namespace windowing_win32
 
       //estatus =
 
-      m_pdisplay->initialize_display(this);
+      //m_pdisplay->initialize_display(this);
 
       //if (!estatus)
       //{
@@ -139,7 +139,7 @@ namespace windowing_win32
 
       //psysteminteraction->create_host(e_parallelization_synchronous);
 
-      psysteminteraction->create_host();
+      psysteminteraction->create_window();
 
       //if(!estatus)
       //{
@@ -173,14 +173,18 @@ namespace windowing_win32
    void windowing::finalize_windowing()
    {
 
-      if (m_pdisplay)
+      auto pdisplay = display();
+
+      if (pdisplay)
       {
 
-         m_pdisplay->finalize_display();
+         pdisplay->finalize_display();
 
       }
 
-      m_pdisplay.release();
+      m_pacmedisplay.release();
+
+      //m_pdisplay.release();
 
       ::windowing::windowing::finalize_windowing();
 
@@ -249,7 +253,7 @@ namespace windowing_win32
       if (!pwindow)
       {
 
-         pwindow = ::place(new ::windowing_win32::window());
+         pwindow = __new ::windowing_win32::window();
 
       }
 
@@ -258,12 +262,14 @@ namespace windowing_win32
    }
 
 
-   ::windowing::display* windowing::display()
-   {
+   //::windowing::display* windowing::display()
+   //{
 
-      return m_pdisplay;
+   //   ::windowing::windowing::display();
 
-   }
+   //   return m_pdisplay;
+
+   //}
 
 
 
@@ -489,7 +495,7 @@ namespace windowing_win32
    }
 
 
-   ::windowing::window_base* windowing::get_keyboard_focus(::thread* pthread)
+   ::acme::windowing::window* windowing::get_keyboard_focus(::thread* pthread)
    {
 
       itask_t itask = 0;
@@ -559,7 +565,7 @@ namespace windowing_win32
 
    //   //   }
 
-   //   //   ::user::interaction_impl * pimpl = psystem->impl_from_handle(pmsg->hwnd);
+   //   //   ::windowing::window * pimpl = psystem->impl_from_handle(pmsg->hwnd);
 
    //   //   if (pimpl != nullptr)
    //   //   {
@@ -595,7 +601,7 @@ namespace windowing_win32
 
    //   //}
 
-   //   auto pusermessage = ::place(new ::user::message());
+   //   auto pusermessage = __new ::user::message();
 
    //   if (!pusermessage)
    //   {
@@ -736,7 +742,7 @@ namespace windowing_win32
 
       }
 
-      auto hwndDeferRelease = (HWND)pwindowDeferRelease->get_os_data();
+      auto hwndDeferRelease = (HWND)pwindowDeferRelease->oswindow();
 
       if (hwndDeferRelease != hwndCapture)
       {
@@ -964,15 +970,15 @@ namespace windowing_win32
    }
 
 
-   ::windows::hwnd_array windowing::_get_hwnda(const ::user::primitive_pointer_array& primitivepointera)
+   ::windows::hwnd_array windowing::_get_hwnda(const ::user::interaction_array& userinteractiona)
    {
 
       ::windows::hwnd_array hwnda;
 
-      for (i32 i = 0; i < primitivepointera.primitive_count(); i++)
+      for (i32 i = 0; i < userinteractiona.interaction_count(); i++)
       {
 
-         ::pointer<::user::interaction>puserinteraction = primitivepointera.primitive_at(i);
+         ::pointer<::user::interaction>puserinteraction = userinteractiona.interaction_at(i);
 
          hwnda.add((HWND)puserinteraction->oswindow());
 
@@ -1336,6 +1342,13 @@ namespace windowing_win32
             return strWindowText.case_insensitive_contains(str);
 
          });
+
+   }
+
+
+   void windowing::set_dark_mode(bool bDarkMode)
+   {
+
 
    }
 

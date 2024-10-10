@@ -12,10 +12,10 @@
 #include "acme/parallelization/manual_reset_event.h"
 #include "acme/parallelization/task_flag.h"
 #include "acme/platform/node.h"
-#include "acme/primitive/collection/_container.h"
-#include "acme/primitive/string/international.h"
-#include "acme/primitive/string/string.h"
-#include "acme/primitive/string/str.h"
+#include "acme/prototype/collection/_container.h"
+#include "acme/prototype/string/international.h"
+#include "acme/prototype/string/string.h"
+#include "acme/prototype/string/str.h"
 #include "apex/filesystem/file/set.h"
 #include "acme/filesystem/filesystem/dir_context.h"
 #include "acme/filesystem/filesystem/file_context.h"
@@ -2457,7 +2457,7 @@ namespace apex_windows
    void os_context::hidden_run(const class time & timeWait, const ::file::path & pathParam, const string & strParams, const ::file::path & pathFolder)
    {
 
-      auto pevent = ::place(new manual_reset_event());
+      auto pevent = __new manual_reset_event();
 
       auto path = m_pcontext->defer_process_matter_path(pathParam);
 

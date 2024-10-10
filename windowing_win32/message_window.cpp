@@ -33,7 +33,7 @@ namespace windowing_win32
 
       //create_host(e_parallelization_synchronous);
 
-      create_host();
+      create_window();
 
       //if (!create_host())
       //{

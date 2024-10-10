@@ -2,8 +2,8 @@
 // recreated by Camilo 2021-02-01 23:31
 #include "framework.h"
 //#undef USUAL_OPERATING_SYSTEM_SUPPRESSIONS
-//#include "acme/primitive/geometry2d/_geometry2d.h"
-#include "acme/primitive/geometry2d/rectangle.h"
+//#include "acme/prototype/geometry2d/_geometry2d.h"
+#include "acme/prototype/geometry2d/rectangle.h"
 #include "acme/_win32_gdi.h"
 
 

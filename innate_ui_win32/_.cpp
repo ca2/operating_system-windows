@@ -1,8 +1,8 @@
 #include "framework.h"
 #include "acme/filesystem/filesystem/path.h"
-#include "acme/primitive/string/adaptor.h"
-#include "acme/primitive/string/international.h"
-#include "acme/primitive/string/string.h"
+#include "acme/prototype/string/adaptor.h"
+#include "acme/prototype/string/international.h"
+#include "acme/prototype/string/string.h"
 #include "acme/_library.h"
 #include <shellapi.h>
 #include <shlobj.h>

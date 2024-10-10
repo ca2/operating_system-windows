@@ -25,7 +25,7 @@ namespace music
             string_array         m_straDeviceOut;
             string_array         m_straDeviceIn;
 
-            ::pointer < ::particle >      m_pparticleMidiMutex;
+            ::particle_pointer      m_pparticleMidiMutex;
 
 
             midi();

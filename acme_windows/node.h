@@ -9,7 +9,7 @@
 
 
 #include "acme_windows_common/node.h"
-#include "acme/primitive/collection/numeric_array.h"
+#include "acme/prototype/collection/numeric_array.h"
 #include "acme/_operating_system.h"
 
 
@@ -58,20 +58,16 @@ namespace acme_windows
       void shell_open(const ::file::path & path, const ::string & strParams = "", const ::file::path & pathFolder = "") override;
 
 
-      virtual bool win32_registry_windows_dark_mode_for_app();
-      virtual bool win32_registry_windows_dark_mode_for_system();
-      virtual bool win32_registry_windows_darkness();
 
-
-      bool dark_mode() const override;
+      //bool dark_mode() const override;
 
 
       ::file::path get_default_base_integration_folder() override;
 
-      virtual ::color::color reinterpreted_windows_darkness_background_color();
+      //virtual ::color::color reinterpreted_windows_darkness_background_color();
 
 
-      void fetch_user_color() override;
+      //void fetch_user_color() override;
 
 
       virtual void install_crash_dump_reporting(const string & strModuleNameWithTheExeExtension) override;
@@ -371,9 +367,12 @@ namespace acme_windows
       bool _is_opera_browser_installed() override;
       bool _is_visual_studio_code_installed() override;
 
+      void do_windowing_system_factory() override;
       
+      
+      bool defer_component_factory(const ::scoped_string & scopedstrComponent) override;
 
-
+      void realize(::particle_pointer pparticle) override;
    };
 
 

@@ -1,6 +1,6 @@
 #include "framework.h"
 #include "node.h"
-#include "acme/primitive/collection/strdup_array.h"
+#include "acme/prototype/collection/strdup_array.h"
 
 
 namespace acme_windows 

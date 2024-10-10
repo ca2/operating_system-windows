@@ -186,9 +186,9 @@ namespace acme_windows
 
             ::file::action action;
 
-            action.m_pwatch = pwatch;
+            action.m_pfilewatch = pwatch;
 
-            action.m_watchid = pwatch->m_watchid;
+            //action.m_pfilewatch = pwatch->m_pfilewatch;
 
             action.m_pathFolder = pwatch->m_pathFolder;
 
@@ -255,7 +255,7 @@ namespace acme_windows
    file_watcher::~file_watcher()
    {
 
-      m_watchmap.clear();
+      m_watchset.clear();
 
    }
 

@@ -7,7 +7,7 @@
 #include "windowing.h"
 #include "window.h"
 #include "acme/parallelization/synchronous_lock.h"
-#include "acme/primitive/geometry2d/rectangle_array.h"
+#include "acme/prototype/geometry2d/rectangle_array.h"
 #include "aura/platform/system.h"
 
 

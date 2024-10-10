@@ -22,12 +22,12 @@
 #include "acme/parallelization/synchronous_lock.h"
 #include "acme/platform/scoped_restore.h"
 #include "acme/platform/system.h"
-#include "acme/primitive/primitive/memory.h"
-#include "acme/primitive/string/__wide.h"
-#include "acme/primitive/string/str.h"
-#include "acme/primitive/string/adaptor.h"
-#include "acme/primitive/string/international.h"
-#include "acme/primitive/string/str.h"
+#include "acme/prototype/prototype/memory.h"
+#include "acme/prototype/string/__wide.h"
+#include "acme/prototype/string/str.h"
+#include "acme/prototype/string/adaptor.h"
+#include "acme/prototype/string/international.h"
+#include "acme/prototype/string/str.h"
 
 
 #include "acme/_operating_system.h"
@@ -47,6 +47,10 @@
 
 CLASS_DECL_ACME void acme_set_main_hwnd(HWND hwnd);
 CLASS_DECL_ACME HWND acme_get_main_hwnd();
+
+//CLASS_DECL_ACME void nano_graphics_win32_factory(::factory::factory * pfactory);
+//CLASS_DECL_ACME extern "C" void nano_user_win32_factory(::factory::factory * pfactory);
+
 
 //
 //#if defined(_WIN32)
@@ -298,79 +302,6 @@ namespace acme_windows
    }
 
 
-   bool node::win32_registry_windows_dark_mode_for_app()
-   {
-
-      try
-      {
-
-         ::acme_windows::registry::key key;
-
-         key.open(HKEY_CURRENT_USER, "Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize");
-
-         DWORD dwAppUseLightTheme = 0;
-
-         key._get("AppsUseLightTheme", dwAppUseLightTheme);
-
-         return dwAppUseLightTheme == 0;
-
-      }
-      catch (...)
-      {
-
-         return false;
-
-      }
-
-   }
-
-
-   bool node::win32_registry_windows_dark_mode_for_system()
-   {
-
-      try
-      {
-
-         ::acme_windows::registry::key key;
-
-         key.open(HKEY_CURRENT_USER, "Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize");
-
-         DWORD dwSystemUseLightTheme = 0;
-
-         key._get("SystemUsesLightTheme", dwSystemUseLightTheme);
-
-         return dwSystemUseLightTheme == 0;
-
-      }
-      catch (...)
-      {
-
-         return false;
-
-      }
-
-   }
-
-
-   bool node::win32_registry_windows_darkness()
-   {
-
-      return win32_registry_windows_dark_mode_for_app() || win32_registry_windows_dark_mode_for_system();
-
-   }
-
-
-   bool node::dark_mode() const
-   {
-
-      auto pthis = (node*)this;
-
-      auto bDarkMode = pthis->win32_registry_windows_darkness();
-
-      return bDarkMode;
-
-
-   }
 
 
    ::file::path node::get_default_base_integration_folder()
@@ -381,39 +312,22 @@ namespace acme_windows
    }
 
 
-   ::color::color node::reinterpreted_windows_darkness_background_color()
-   {
+   //::color::color node::reinterpreted_windows_darkness_background_color()
+   //{
 
-      if (win32_registry_windows_darkness())
-      {
+   //   if (_win32_registry_windows_darkness())
+   //   {
 
-         return ::color::black;
+   //      return ::color::black;
 
-      }
+   //   }
 
-      return ::color::white;
+   //   return ::color::white;
 
-   }
+   //}
 
 
-   void node::fetch_user_color()
-   {
 
-      //DWORD dwBackgroundWindowColor = ::GetSysColor(COLOR_WINDOW);
-
-      //auto colorWindowBackground = argb(255, GetRValue(dwBackgroundWindowColor), GetGValue(dwBackgroundWindowColor), GetBValue(dwBackgroundWindowColor));
-
-      auto colorWindowBackground = reinterpreted_windows_darkness_background_color();
-
-      string str;
-
-      str.formatf("\n\n\nWindow Background Color rgb(%d,%d,%d)\n\n", colorWindowBackground.m_u8Red, colorWindowBackground.m_u8Green, colorWindowBackground.m_u8Blue);
-
-      ::output_debug_string(str);
-
-      system()->background_color(colorWindowBackground);
-
-   }
 
 
    //   string node::get_user_name()
@@ -2955,7 +2869,7 @@ namespace acme_windows
    ::pointer < ::acme::exclusive > node::_get_exclusive(::particle* pparticleContext, const ::string& strName, ::security_attributes* psecurityattributes)
    {
 
-      return ::place(new exclusive(pparticleContext, strName, psecurityattributes));
+      return __new exclusive(pparticleContext, strName, psecurityattributes);
 
    }
 
@@ -4765,6 +4679,12 @@ namespace acme_windows
          return "sapi";
 
       }
+      else if (scopedstrComponentName == "nano_graphics")
+      {
+
+         return "gdi";
+
+      }
 
       return ::acme_windows_common::node::default_component_implementation(scopedstrComponentName);
 
@@ -5023,7 +4943,51 @@ namespace acme_windows
    //}
 
 
+   void node::do_windowing_system_factory()
+   {
 
+      auto pfactory = system()->factory("windowing_system", "win32");
+
+      pfactory->merge_to_global_factory();
+
+   }
+
+
+   bool node::defer_component_factory(const ::scoped_string & scopedstrComponent)
+   {
+
+      //if (scopedstrComponent == "nano_graphics")
+      //{
+
+
+      //   auto pfactory = this->factory();
+
+      //   nano_graphics_win32_factory(pfactory);
+
+      //   return true;
+
+      //}
+
+
+      if (acme_windows_common::node::defer_component_factory(scopedstrComponent))
+      {
+
+
+         return true;
+
+      }
+
+      return false;
+
+
+   }
+
+
+   void node::realize(::particle_pointer pparticle)
+   {
+
+
+   }
 
 } // namespace acme_windows
 

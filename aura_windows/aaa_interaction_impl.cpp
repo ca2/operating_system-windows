@@ -111,7 +111,7 @@ namespace aura_windows
 
       m_pwindow->post_non_client_destroy();
 
-      ::user::interaction_impl::post_non_client_destroy();
+      ::windowing::window::post_non_client_destroy();
 
    }
 
@@ -127,7 +127,7 @@ namespace aura_windows
    void interaction_impl::install_message_routing(::channel * pchannel)
    {
 
-      ::user::interaction_impl::install_message_routing(pchannel);
+      ::windowing::window::install_message_routing(pchannel);
 
       MESSAGE_LINK(WM_SYSCOMMAND, pchannel, this, &interaction_impl::_001OnSysCommand);
       MESSAGE_LINK(WM_COMMAND, pchannel, this, &interaction_impl::_001OnSysCommand);
@@ -160,7 +160,7 @@ namespace aura_windows
 
 
       //return 
-      ::user::interaction_impl::destroy_impl_only();
+      ::windowing::window::destroy_impl_only();
 
    }
 
@@ -170,7 +170,7 @@ namespace aura_windows
 
       //return 
       
-      ::user::interaction_impl::start_destroying_window();
+      ::windowing::window::start_destroying_window();
 
    }
 
@@ -178,7 +178,7 @@ namespace aura_windows
    void interaction_impl::destroy_window()
    {
 
-      return ::user::interaction_impl::destroy_window();
+      return ::windowing::window::destroy_window();
 
    }
 
@@ -293,7 +293,7 @@ namespace aura_windows
    //   return ::GetWindowInfo(((interaction_impl *)this)->get_handle(), pwi) != false;
    //}
 
-   //::user::interaction_impl * interaction_impl::GetAncestor(::u32 gaFlags) const
+   //::windowing::window * interaction_impl::GetAncestor(::u32 gaFlags) const
    //{
    //   ASSERT(::is_window(((interaction_impl *)this)->get_handle()));
    //   return  psystem->ui_from_handle(::GetAncestor(((interaction_impl *)this)->get_handle(), gaFlags));
@@ -970,7 +970,7 @@ namespace aura_windows
    //{
 
 
-   //   ::user::interaction_impl::defer_start_prodevian();
+   //   ::windowing::window::defer_start_prodevian();
 
 
    //}
@@ -1100,7 +1100,7 @@ namespace aura_windows
 //   }
 
 
-   //bool interaction_impl::SubclassDlgItem(::u32 nID, ::user::interaction_impl * pParent)
+   //bool interaction_impl::SubclassDlgItem(::u32 nID, ::windowing::window * pParent)
    //{
 
    //   ASSERT(pParent);
@@ -1437,7 +1437,7 @@ namespace aura_windows
    bool interaction_impl::window_is_zoomed()
    {
 
-      return ::user::interaction_impl::window_is_zoomed();
+      return ::windowing::window::window_is_zoomed();
 
    }
 
@@ -1696,7 +1696,7 @@ namespace aura_windows
    }
 
 
-   //void interaction_impl::MapWindowPoints(::user::interaction_impl * puserinteractionTo, ::point_i32 * pPoint, ::u32 nCount)
+   //void interaction_impl::MapWindowPoints(::windowing::window * puserinteractionTo, ::point_i32 * pPoint, ::u32 nCount)
 
    //{
    //   ASSERT(_is_window());
@@ -1704,7 +1704,7 @@ namespace aura_windows
 
    //}
 
-   //void interaction_impl::MapWindowPoints(::user::interaction_impl * puserinteractionTo, ::rectangle_i32 * prectangle)
+   //void interaction_impl::MapWindowPoints(::windowing::window * puserinteractionTo, ::rectangle_i32 * prectangle)
 
    //{
    //   ASSERT(_is_window());
@@ -1733,7 +1733,7 @@ namespace aura_windows
    //void interaction_impl::on_visual_applied()
    //{
 
-   //   ::user::interaction_impl::on_visual_applied();
+   //   ::windowing::window::on_visual_applied();
 
    //}
 
@@ -2062,7 +2062,7 @@ namespace aura_windows
    //}
 
 
-   ////::user::interaction_impl * interaction_impl::GetNextDlgGroupItem(::user::interaction_impl * pWndCtl, bool bPrevious) const
+   ////::windowing::window * interaction_impl::GetNextDlgGroupItem(::windowing::window * pWndCtl, bool bPrevious) const
    ////{
 
    ////   ASSERT(::is_window(((interaction_impl *)this)->get_handle()));
@@ -2072,7 +2072,7 @@ namespace aura_windows
    ////}
 
 
-   ////::user::interaction_impl * interaction_impl::GetNextDlgTabItem(::user::interaction_impl * pWndCtl, bool bPrevious) const
+   ////::windowing::window * interaction_impl::GetNextDlgTabItem(::windowing::window * pWndCtl, bool bPrevious) const
    ////{
 
    ////   ASSERT(::is_window(((interaction_impl *)this)->get_handle()));
@@ -2434,7 +2434,7 @@ namespace aura_windows
    //{
    //   Default();
    //}
-   //void interaction_impl::OnActivate(::u32, ::user::interaction_impl *, bool)
+   //void interaction_impl::OnActivate(::u32, ::windowing::window *, bool)
    //{
    //   Default();
    //}
@@ -2450,12 +2450,12 @@ namespace aura_windows
    //{
    //   Default();
    //}
-   //void interaction_impl::OnContextMenu(::user::interaction_impl *, point_i32)
+   //void interaction_impl::OnContextMenu(::windowing::window *, point_i32)
    //{
    //   Default();
    //}
 
-   //bool interaction_impl::OnCopyData(::user::interaction_impl *, COPYDATASTRUCT*)
+   //bool interaction_impl::OnCopyData(::windowing::window *, COPYDATASTRUCT*)
    //{
 
    //   return Default() != false;
@@ -2986,7 +2986,7 @@ void interaction_impl::on_message_size(::message::message* pmessage)
 //   {
 //      Default();
 //   }
-//   void interaction_impl::OnPaletteIsChanging(::user::interaction_impl *)
+//   void interaction_impl::OnPaletteIsChanging(::windowing::window *)
 //   {
 //      Default();
 //   }
@@ -3086,7 +3086,7 @@ void interaction_impl::on_message_size(::message::message* pmessage)
 //   {
 //      Default();
 //   }
-//   void interaction_impl::OnPaletteChanged(::user::interaction_impl *)
+//   void interaction_impl::OnPaletteChanged(::windowing::window *)
 //   {
 //      Default();
 //   }
@@ -3138,7 +3138,7 @@ void interaction_impl::on_message_size(::message::message* pmessage)
 //   {
 //      Default();
 //   }
-//   i32 interaction_impl::OnMouseActivate(::user::interaction_impl *, ::u32, ::u32)
+//   i32 interaction_impl::OnMouseActivate(::windowing::window *, ::u32, ::u32)
 //   {
 //      return (i32)Default();
 //   }
@@ -3204,11 +3204,11 @@ void interaction_impl::on_message_size(::message::message* pmessage)
 //   {
 //      Default();
 //   }
-//   void interaction_impl::OnHScrollClipboard(::user::interaction_impl *, ::u32, ::u32)
+//   void interaction_impl::OnHScrollClipboard(::windowing::window *, ::u32, ::u32)
 //   {
 //      Default();
 //   }
-//   void interaction_impl::OnPaintClipboard(::user::interaction_impl *, HGLOBAL)
+//   void interaction_impl::OnPaintClipboard(::windowing::window *, HGLOBAL)
 //   {
 //      Default();
 //   }
@@ -3220,11 +3220,11 @@ void interaction_impl::on_message_size(::message::message* pmessage)
 //   {
 //      Default();
 //   }
-//   void interaction_impl::OnSizeClipboard(::user::interaction_impl *, HGLOBAL)
+//   void interaction_impl::OnSizeClipboard(::windowing::window *, HGLOBAL)
 //   {
 //      Default();
 //   }
-//   void interaction_impl::OnVScrollClipboard(::user::interaction_impl *, ::u32, ::u32)
+//   void interaction_impl::OnVScrollClipboard(::windowing::window *, ::u32, ::u32)
 //   {
 //      Default();
 //   }
@@ -3232,7 +3232,7 @@ void interaction_impl::on_message_size(::message::message* pmessage)
 //   {
 //      return (::u32)Default();
 //   }
-//   void interaction_impl::OnMDIActivate(bool, ::user::interaction_impl *, ::user::interaction_impl *)
+//   void interaction_impl::OnMDIActivate(bool, ::windowing::window *, ::windowing::window *)
 //   {
 //      Default();
 //   }
@@ -3261,7 +3261,7 @@ void interaction_impl::on_message_size(::message::message* pmessage)
 //   {
 //      Default();
 //   }
-//   void interaction_impl::OnCaptureChanged(::user::interaction_impl *)
+//   void interaction_impl::OnCaptureChanged(::windowing::window *)
 //   {
 //      Default();
 //   }
@@ -3516,7 +3516,7 @@ void interaction_impl::on_message_size(::message::message* pmessage)
    //void interaction_impl::_001OnTriggerMouseInside()
    //{
 
-   //   ::user::interaction_impl::_001OnTriggerMouseInside();
+   //   ::windowing::window::_001OnTriggerMouseInside();
 
    //   //TRACKMOUSEEVENT tme = { sizeof(tme) };
    //   //tme.dwFlags = TME_LEAVE;
@@ -3598,7 +3598,7 @@ void interaction_impl::on_message_size(::message::message* pmessage)
    /*bool interaction_impl::set_window_position(class ::user::zorder zorder, i32 x, i32 y, i32 cx, i32 cy, ::u32 nFlags)
    {
 
-      if (!::user::interaction_impl::set_window_position(zorder, x, y, cx, cy, nFlags))
+      if (!::windowing::window::set_window_position(zorder, x, y, cx, cy, nFlags))
       {
 
          return false;
@@ -3627,7 +3627,7 @@ void interaction_impl::on_message_size(::message::message* pmessage)
    //void interaction_impl::_window_show_change_visibility_unlocked(::e_display edisplay, ::e_activation eactivation)
    //{
 
-   //   ::user::interaction_impl::_window_show_change_visibility_unlocked(edisplay, eactivation);
+   //   ::windowing::window::_window_show_change_visibility_unlocked(edisplay, eactivation);
 
    //}
 
@@ -3858,7 +3858,7 @@ void interaction_impl::set_tool_window(bool bSet)
 //lresult CALLBACK __window_procedure(HWND oswindow, ::u32 message, wparam wparam, lparam lparam)
 //{
 //
-//   ::user::interaction_impl * pimpl = oswindow_interaction_impl(oswindow);
+//   ::windowing::window * pimpl = oswindow_interaction_impl(oswindow);
 //
 //   lresult lresult = 0;
 //
@@ -4152,7 +4152,7 @@ void interaction_impl::set_tool_window(bool bSet)
 //
 
 //
-//void CLASS_DECL_AURA_WINDOWS _handle_activate(::user::interaction_impl * pwindow, wparam nState, ::user::interaction_impl * pWndOther)
+//void CLASS_DECL_AURA_WINDOWS _handle_activate(::windowing::window * pwindow, wparam nState, ::windowing::window * pWndOther)
 //{
 //
 //   ASSERT(pwindow);
@@ -4212,12 +4212,12 @@ void interaction_impl::set_tool_window(bool bSet)
 //
 //   auto pwindowMain = system()->m_paurasystem->m_pwindowMain;
 //
-//   if (pwindowMain && !pwindowMain->m_puserinteractionimpl)
+//   if (pwindowMain && !pwindowMain->m_pwindow)
 //   {
 //
 //      m_pwindow = system()->m_paurasystem->m_pwindowMain;
 //
-//      m_pwindow->m_puserinteractionimpl = this;
+//      m_pwindow->m_pwindow = this;
 //
 //      m_puserinteraction->m_pinteractionimpl = this;
 //
@@ -4855,7 +4855,7 @@ void interaction_impl::set_tool_window(bool bSet)
 //
 //      }
 //
-//      ::user::interaction_impl::message_handler(pusermessage);
+//      ::windowing::window::message_handler(pusermessage);
 //
 //      //if(pmessage->m_bRet && !pusermessage->m_bDoSystemDefault)
 //
@@ -4982,7 +4982,7 @@ void interaction_impl::set_tool_window(bool bSet)
 
       }*/
 
-      auto bRet = ::user::interaction_impl::on_mouse_message(pmouse);
+      auto bRet = ::windowing::window::on_mouse_message(pmouse);
 
       if (!bRet)
       {
@@ -4999,7 +4999,7 @@ void interaction_impl::set_tool_window(bool bSet)
    void interaction_impl::message_handler(::message::message * pmessage)
    {
 
-      return ::user::interaction_impl::message_handler(pmessage);
+      return ::windowing::window::message_handler(pmessage);
 
 //      ::message::key* pkey = nullptr;
 //
@@ -5351,7 +5351,7 @@ void interaction_impl::set_tool_window(bool bSet)
 //
 //      //}
 //
-//      ::user::interaction_impl::message_handler(pmessage);
+//      ::windowing::window::message_handler(pmessage);
 //
 //      //if(pmessage->m_bRet && !pmessage->m_bDoSystemDefault)
 //

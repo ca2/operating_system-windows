@@ -2,7 +2,10 @@
 #include "system_interaction.h"
 #include "acme/constant/id.h"
 #include "acme/constant/message.h"
+#include "acme/nano/nano.h"
+#include "acme/user/micro/user.h"
 #include "acme/platform/node.h"
+#include "acme/windowing/windowing.h"
 #include "aura/message/user.h"
 #include "aura/platform/system.h"
 
@@ -122,9 +125,7 @@ namespace windowing_win32
             strLparamString == "ImmersiveColorSet")
          {
 
-            auto psystem = system()->m_paurasystem;
-
-            psystem->m_pnode->fetch_user_color();
+            system()->acme_windowing()->fetch_system_background_color();
 
             /*auto ptopic = psystem->topic(id_os_dark_mode);
 

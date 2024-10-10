@@ -815,6 +815,9 @@
     <ProjectReference Include="..\..\operating_system-windows_common\aura_windows_common\aura_windows_common.vcxproj">
       <Project>{99f5abf0-7377-4cc7-b016-4ca7b365b9f1}</Project>
     </ProjectReference>
+    <ProjectReference Include="..\acme_windowing_win32\acme_windowing_win32.vcxproj">
+      <Project>{9273d94e-bf81-41ed-9cb2-83d981450c9b}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\acme_windows\acme_windows.vcxproj">
       <Project>{cc8e8200-00a9-414e-9829-7ca3f1091add}</Project>
     </ProjectReference>

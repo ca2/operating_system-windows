@@ -11,8 +11,8 @@
 #include "acme/filesystem/filesystem/dir_context.h"
 
 #include "acme/platform/debug.h"
-#include "acme/primitive/primitive/payload.h"
-#include "acme/primitive/string/international.h"
+#include "acme/prototype/prototype/payload.h"
+#include "acme/prototype/string/international.h"
 #include "acme/platform/system.h"
 
 #include "acme/_operating_system.h"

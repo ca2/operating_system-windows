@@ -58,20 +58,9 @@ namespace windowing_win32
 
       ::hardware::devices::on_initialize_particle();
 
-      auto psession = session()->m_paurasession;
+      ::pointer < ::windowing_win32::windowing > pwin32windowing = user()->windowing();
 
-      auto puser = psession->user();
-
-      if (!puser->windowing())
-      {
-
-         puser->create_windowing();
-
-      }
-
-      auto pwindowing = (::windowing_win32::windowing*)puser->m_pwindowing->m_pWindowing4;
-
-      auto psysteminteraction = pwindowing->system_interaction();
+      auto psysteminteraction = pwin32windowing->system_interaction();
 
       m_hwnd = (HWND) psysteminteraction->oswindow();
 
@@ -166,9 +155,9 @@ namespace windowing_win32
 
       auto puser = psession->user();
 
-      auto pwindowing = (::windowing_win32::windowing*)puser->m_pwindowing->m_pWindowing4;
+      auto pwin32windowing = system()->windowing()->cast < ::windowing_win32::windowing >();
 
-      auto psysteminteraction = pwindowing->system_interaction();
+      auto psysteminteraction = pwin32windowing->system_interaction();
       
       psysteminteraction->add_message_handler(e_message_device_change, { plistener, &master_device_listener::on_message_device_change }, false);
 

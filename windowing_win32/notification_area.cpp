@@ -12,7 +12,7 @@ Contact : nish@voidnish.com
 #include "acme/constant/message.h"
 #include "acme/platform/node.h"
 #include "acme/platform/system.h"
-#include "acme/primitive/string/international.h"
+#include "acme/prototype/string/international.h"
 #include "apex_windows/process_data.h"
 #include "aura/graphics/image/list.h"
 #include "aura/graphics/image/icon.h"
@@ -68,7 +68,7 @@ namespace windowing_win32
 
       //m_hwndTray = FindTrayToolbarWindow();
 
-      //m_pil16 = ::place(new image_list());
+      //m_pil16 = __new image_list();
 
       //m_pil16->create(16,16,ILC_COLOR24,16,16);
 
@@ -174,7 +174,7 @@ namespace windowing_win32
          if (GetIconInfo(tray.hIcon, &iinfo) != 0)
          {
 
-            auto pwindowingicon = ::place(new ::windowing_win32::icon());
+            auto pwindowingicon = __new ::windowing_win32::icon();
             
             pwindowingicon->add_icon(tray.hIcon);
 

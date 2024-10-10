@@ -6,7 +6,7 @@
 #include "acme_windows/registry.h"
 #include "acme/constant/id.h"
 #include "acme/parallelization/task_flag.h"
-#include "acme/primitive/string/str.h"
+#include "acme/prototype/string/str.h"
 #include "acme/platform/application.h"
 #include "acme/platform/system.h"
 #include "acme/filesystem/filesystem/acme_directory.h"

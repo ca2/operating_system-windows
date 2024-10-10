@@ -4,6 +4,7 @@
 
 #include "apex/innate_ui/still.h"
 #include "window.h"
+#include <gdiplus.h>
 
 
 namespace innate_ui_win32
@@ -16,6 +17,9 @@ namespace innate_ui_win32
    {
    public:
 
+
+      ::Gdiplus::Image * m_pgdiplusimage;
+      bool m_bIcon;
       
 
       still();
@@ -26,6 +30,8 @@ namespace innate_ui_win32
       void create_icon_still(::innate_ui::window * pwindowParent) override;
 
       void set_icon(::innate_ui::icon * picon) override;
+
+      LRESULT _window_procedure(UINT message, WPARAM wparam, LPARAM lparam) override;
 
    };
 

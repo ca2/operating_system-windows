@@ -8,8 +8,8 @@
 #include "acme/filesystem/filesystem/acme_path.h"
 #include "acme/filesystem/filesystem/link.h"
 #include "acme/parallelization/synchronous_lock.h"
-#include "acme/primitive/geometry2d/_collection.h"
-#include "acme/primitive/string/international.h"
+#include "acme/prototype/geometry2d/_collection.h"
+#include "acme/prototype/string/international.h"
 #include "acme/filesystem/filesystem/dir_context.h"
 #include "acme/filesystem/filesystem/file_context.h"
 #include "aura/graphics/image/context.h"
@@ -177,13 +177,13 @@ bool IsDibSection(HBITMAP bmp)
          if (h < 0)
          {
          
-            ::vertical_swap_copy_image32(pimage->data(), pimage->width(), pimage->height(), pimage->scan_size(), (const image32_t *)pBits, iStride);
+            pimage->data()->vertical_swap_copy(pimage->size(), pimage->scan_size(), (const image32_t *)pBits, iStride);
 
          }
          else
          {
 
-            ::copy_image32(pimage->data(), pimage->width(), pimage->height(), pimage->scan_size(), (const image32_t *)pBits, iStride);
+            pimage->data()->copy(pimage->size(), pimage->scan_size(), (const image32_t *)pBits, iStride);
 
          }
 

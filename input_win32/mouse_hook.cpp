@@ -5,7 +5,7 @@
 #include "acme/exception/exception.h"
 #include "acme/parallelization/task.h"
 #include "acme/platform/scoped_restore.h"
-#include "acme/primitive/primitive/particle.h"
+#include "acme/prototype/prototype/particle.h"
 #include "aura/message/user.h"
 
 
