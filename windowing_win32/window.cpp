@@ -8118,6 +8118,15 @@ namespace windowing_win32
    void window::_user_post(const ::procedure & procedure)
    {
 
+      if (!m_puserinteraction)
+      {
+
+         ::windowing::window::_user_post(procedure);
+
+         return;
+
+      }
+
       m_puserinteraction->_user_post(procedure);
 
    }

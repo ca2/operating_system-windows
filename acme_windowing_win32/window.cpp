@@ -1132,16 +1132,18 @@ namespace win32
          void window::destroy()
          {
 
-            user_post([this]()
-               {
+            ::acme::windowing::window::destroy();
+            ::windows::window::destroy();
+            //user_post([this]()
+            //   {
 
-                  //::ShowWindow(m_hwnd, SW_HIDE);
+            //      //::ShowWindow(m_hwnd, SW_HIDE);
 
-                  ::DestroyWindow(m_hwnd);
+            //      ::DestroyWindow(m_hwnd);
 
-                  system()->acme_windowing()->process_messages();
+            //      system()->acme_windowing()->process_messages();
 
-               });
+            //   });
 
          }
 
