@@ -7,7 +7,7 @@
 #include "aura/graphics/write_text/fonts.h"
 
 
-#undef new
+#undef __new
 
 
 namespace draw2d_gdiplus
@@ -201,7 +201,7 @@ namespace draw2d_gdiplus
 
                   ////}
 
-                  ////auto pfont = new Gdiplus::Font(
+                  ////auto pfont = __new Gdiplus::Font(
                   ////   wszGetFamilyName,
                   ////   (Gdiplus::REAL)m_dFontSize,
                   ////   iStyle,
@@ -214,7 +214,7 @@ namespace draw2d_gdiplus
 
                   //bFont = true;
 
-                  auto pgdiplusfont = new Gdiplus::Font(
+                  auto pgdiplusfont = __new Gdiplus::Font(
                      pgdiplusfontfamily,
                      gdiplus_font_size(m_fontsize),
                      iStyle,
@@ -228,7 +228,7 @@ namespace draw2d_gdiplus
                //else
                //{
 
-               //   auto pfont = new Gdiplus::Font(
+               //   auto pfont = __new Gdiplus::Font(
                //      &pprivatefont->m_familya.first(),
                //      (Gdiplus::REAL)m_dFontSize,
                //      iStyle,
@@ -289,7 +289,7 @@ namespace draw2d_gdiplus
 
          }
 
-         auto pgdiplusfont = new Gdiplus::Font(
+         auto pgdiplusfont = __new Gdiplus::Font(
             utf8_to_unicode(strFamilyName),
             gdiplus_font_size(m_fontsize),
             iStyle,
@@ -307,7 +307,7 @@ namespace draw2d_gdiplus
          if (::is_null(pgdiplusfontfamily))
          {
 
-            auto pgdiplusfontfamilyNew = new Gdiplus::FontFamily();
+            auto pgdiplusfontfamilyNew = __new Gdiplus::FontFamily();
 
             if (pfont->GetFamily(pgdiplusfontfamilyNew) == Gdiplus::Ok)
             {

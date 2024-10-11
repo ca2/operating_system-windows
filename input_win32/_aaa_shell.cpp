@@ -268,7 +268,7 @@ namespace windowing_win32
    ::user::shell::_get_file_image_ * shell::new_get_file_image()
    {
 
-      auto pgetfileimage = new _get_file_image_;
+      auto pgetfileimage = __new _get_file_image_;
 
       pgetfileimage->m_knownfoldermanager.CoCreateInstance(CLSID_KnownFolderManager);
 

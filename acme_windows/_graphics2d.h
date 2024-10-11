@@ -1,11 +1,11 @@
 #pragma once
 
 
-#undef new
+#undef __new
 #ifdef WINDOWS_DESKTOP
 #include <gdiplus.h>
 #endif
-#define new ACME_NEW
+#define __new ACME_NEW
 #ifdef WINDOWS
 #include <D2d1.h>
 #endif

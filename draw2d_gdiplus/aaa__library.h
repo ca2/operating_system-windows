@@ -3,7 +3,7 @@
 
 
 #include "acme/operating_system.h"
-#undef new
+#undef __new
 #include <gdiplus.h>
 
 

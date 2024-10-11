@@ -209,7 +209,7 @@ namespace acme_windows
    node::node()
    {
 
-      //::windows::callstack::s_pcriticalsection = new critical_section();
+      //::windows::callstack::s_pcriticalsection = __new critical_section();
 
    }
 
@@ -894,7 +894,7 @@ namespace acme_windows
    //         if (g_iMemoryCounters)
    //         {
    //
-   //            g_pmutexMemoryCounters = new ::mutex(e_create_new, false, "Global\\ca2_memory_counters");
+   //            g_pmutexMemoryCounters = __new ::mutex(e_create_new, false, "Global\\ca2_memory_counters");
    //
    //         }
    //
@@ -914,7 +914,7 @@ namespace acme_windows
    //      if (g_iMemoryCountersStartable && g_pMemoryCounters == nullptr)
    //      {
    //
-   //         g_pMemoryCounters = new ::file::path();
+   //         g_pMemoryCounters = __new ::file::path();
    //
    //#if defined(UNIVERSAL_WINDOWS)
    //
@@ -2869,7 +2869,7 @@ namespace acme_windows
    ::pointer < ::acme::exclusive > node::_get_exclusive(::particle* pparticleContext, const ::string& strName, ::security_attributes* psecurityattributes)
    {
 
-      return __new exclusive(pparticleContext, strName, psecurityattributes);
+      return __allocate exclusive(pparticleContext, strName, psecurityattributes);
 
    }
 

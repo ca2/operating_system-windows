@@ -76,7 +76,7 @@ public:
 //
 //   }
 //
-//   removal * premoval = new removal();
+//   removal * premoval = __new removal();
 //
 //   int iRet = ::app_main(premoval, hInstance,hPrevInstance,lpCmdLine,nCmdShow);
 //
@@ -92,7 +92,7 @@ public:
 ::aura::application * get_acid_app(::particle * pparticle)
 {
 
-   return new removal(pobject);
+   return __new removal(pobject);
 
 }
 

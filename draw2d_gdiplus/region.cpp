@@ -6,7 +6,7 @@
 #include "acme/prototype/geometry2d/_defer_item.h"
 
 
-#undef new
+#undef __new
 
 
 namespace draw2d_gdiplus
@@ -119,7 +119,7 @@ namespace draw2d_gdiplus
       case ::draw2d::e_item_none:
       {
 
-         return new Gdiplus::Region();
+         return __new Gdiplus::Region();
 
       }
       case ::draw2d::e_item_rectangle:
@@ -154,7 +154,7 @@ namespace draw2d_gdiplus
 
       //path.AddRectangle(rectangle);
 
-      return new Gdiplus::Region(rectangle);
+      return __new Gdiplus::Region(rectangle);
 
    }
 
@@ -171,7 +171,7 @@ namespace draw2d_gdiplus
          (INT) pitem->m_item.width(),
          (INT) pitem->m_item.height());
 
-      return new Gdiplus::Region(&path);
+      return __new Gdiplus::Region(&path);
 
    }
 
@@ -201,7 +201,7 @@ namespace draw2d_gdiplus
 
       path.AddPolygon(pa.data(), (i32) pa.get_count());
 
-      return new Gdiplus::Region(&path);
+      return __new Gdiplus::Region(&path);
 
    }
 
@@ -252,7 +252,7 @@ namespace draw2d_gdiplus
 
       }
 
-      return new Gdiplus::Region(&path);
+      return __new Gdiplus::Region(&path);
 
    }
 

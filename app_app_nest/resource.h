@@ -8,7 +8,7 @@
 #define IDC_BUTTON1                     1005
 #define IDC_BUTTON_DONT                 1005
 
-// Next default values for new objects
+// Next default values for __new objects
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS

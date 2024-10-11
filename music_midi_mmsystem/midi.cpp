@@ -69,7 +69,7 @@ namespace music
          //   if (strEngine.case_insensitive_order(m_strName) == 0)
          //   {
 
-         //      return __new sequence(this, strDevice);
+         //      return __allocate sequence(this, strDevice);
 
          //   }
 
@@ -87,7 +87,7 @@ namespace music
             if (strEngine.case_insensitive_equals(m_strName))
             {
 
-               return __new sequencer(psequence, strDevice);
+               return __allocate sequencer(psequence, strDevice);
 
             }
 
@@ -100,7 +100,7 @@ namespace music
 
             }
 
-            return __new sequencer(psequence, strDevice);
+            return __allocate sequencer(psequence, strDevice);
 
          }
 
@@ -400,7 +400,7 @@ namespace music
          //   if(s_pmutex == nullptr)
          //   {
 
-         //      s_pmutex = new ::mutex();
+         //      s_pmutex = __new ::mutex();
 
          //      // TODO :
          //      // register s_pmutex in Sys(::get_thread_app()).register_static_system_object
@@ -422,7 +422,7 @@ namespace music
          //   if (strEngine.case_insensitive_order(m_strName) == 0)
          //   {
 
-         //      //return __new sequencer(psequence, strDevice);
+         //      //return __allocate sequencer(psequence, strDevice);
          //      return nullptr;
 
          //   }
@@ -440,7 +440,7 @@ namespace music
             if (!pmessageout)
             {
 
-               auto pout = __new out();
+               auto pout = __allocate out();
 
                pout->initialize_message_out(this, strDeviceId);
 

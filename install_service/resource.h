@@ -65,7 +65,7 @@
 #define IDC_CONSOLE                     1045
 #define IDC_DEPENDENCIES                1046
 
-// Next default values for new objects
+// Next default values for __new objects
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS

@@ -1,7 +1,7 @@
 #include "framework.h"
 
 
-#undef new
+#undef __new
 
 
 count g_cForkBlend = 0;
@@ -10,7 +10,7 @@ count g_cForkBlend = 0;
 
 /**
 *
-* Trilinear scale two images, pixels and pixels2, to get a new
+* Trilinear scale two images, pixels and pixels2, to get a __new
 * interpolated image with ::size_f64 width * height.
 * pixels is the larger image with ::size_f64 w * h.
 * pixels2 is the smaller image with ::size_f64 w2 * h2.
@@ -152,7 +152,7 @@ namespace draw2d_gdiplus
       m_ewritetextrendering  = ::write_text::e_rendering_none;
       m_dFontFactor     = 1.0;
 
-      m_pm = new Gdiplus::Matrix();
+      m_pm = __new Gdiplus::Matrix();
 
    }
 
@@ -262,7 +262,7 @@ namespace draw2d_gdiplus
 
       m_hdcGraphics = hdc;
 
-      m_pgraphics = new Gdiplus::Graphics(m_hdcGraphics);
+      m_pgraphics = __new Gdiplus::Graphics(m_hdcGraphics);
 
       m_pgraphics->SetPageUnit(Gdiplus::UnitPixel);
 
@@ -829,7 +829,7 @@ namespace draw2d_gdiplus
       //   {0,   0,  0,  1, 0},
       //   {1,   1,  1,  0, 1}};
 
-      //ColorMatrix * colorMatrix = new ColorMatrix(colorMatrixElements);
+      //ColorMatrix * colorMatrix = __new ColorMatrix(colorMatrixElements);
 
       //imageAttributes.SetColorMatrix(
       //   colorMatrix,
@@ -840,7 +840,7 @@ namespace draw2d_gdiplus
 
       //e.Graphics.DrawImage(
       //   image,
-      //   new Rectangle(150, 10, width, height),  // destination rectangle_i32
+      //   __new Rectangle(150, 10, width, height),  // destination rectangle_i32
       //   0, 0,        // upper-left corner of source rectangle_i32
       //   width,       // width of source rectangle_i32
       //   height,      // height of source rectangle_i32
@@ -2602,7 +2602,7 @@ namespace draw2d_gdiplus
 
       ::StartPage(m_hdc);
 
-      m_pgraphics = new Gdiplus::Graphics(m_hdc);
+      m_pgraphics = __new Gdiplus::Graphics(m_hdc);
 
       m_pgraphics->SetPageUnit(Gdiplus::UnitPixel);
 
@@ -2918,7 +2918,7 @@ namespace draw2d_gdiplus
 
       }
 
-      m_ppath = new Gdiplus::GraphicsPath;
+      m_ppath = __new Gdiplus::GraphicsPath;
 
       return m_ppath != nullptr;
 
@@ -3132,7 +3132,7 @@ namespace draw2d_gdiplus
 
       Gdiplus::RectF rectangle_i32((Gdiplus::REAL) rectangleBounds.left(),(Gdiplus::REAL) rectangleBounds.top(),(Gdiplus::REAL) width(rectangleBounds),(Gdiplus::REAL) height(rectangleBounds));
 
-      ap(Gdiplus::Metafile) pMeta = new Gdiplus::Metafile(hEnhMF, false);
+      ap(Gdiplus::Metafile) pMeta = __new Gdiplus::Metafile(hEnhMF, false);
 
       Gdiplus::Status ret = m_pgraphics->DrawImage(pMeta, rectangle);
 
@@ -3491,7 +3491,7 @@ namespace draw2d_gdiplus
    //         if (pRectLast != nullptr)
 
    //         {
-   //            // find difference between new region and old region
+   //            // find difference between __new region and old region
    //            rgnLast.create_rect(0, 0, 0, 0);
    //            rgnOutside.SetRectRgn(pRectLast);
 
@@ -3522,7 +3522,7 @@ namespace draw2d_gdiplus
    //            pBrushOld = nullptr;
    //         }
 
-   //         // draw into the update/new region
+   //         // draw into the update/__new region
    //         SelectClipRgn(rgnUpdate.get_os_data() != nullptr ? &rgnUpdate : &rgnNew);
    //         get_clip_box(&rectangle);
    //         pBrushOld = set(pBrush);
@@ -4130,7 +4130,7 @@ namespace draw2d_gdiplus
       if(hdc != nullptr)
       {
 
-         m_pgraphics = new ::Gdiplus::Graphics((HDC) hdc);
+         m_pgraphics = __new ::Gdiplus::Graphics((HDC) hdc);
 
          m_pgraphics->SetPageUnit(Gdiplus::UnitPixel);
 
@@ -4630,7 +4630,7 @@ namespace draw2d_gdiplus
    void graphics::intersect_clip(const ::oval& oval)
    {
 
-      auto ppath = __auto(new Gdiplus::GraphicsPath());
+      auto ppath = __auto(__new Gdiplus::GraphicsPath());
 
       Gdiplus::RectF r;
 
@@ -4652,7 +4652,7 @@ namespace draw2d_gdiplus
    void graphics::intersect_clip(const ::ovald& oval)
    {
 
-      auto ppath = __auto(new Gdiplus::GraphicsPath());
+      auto ppath = __auto(__new Gdiplus::GraphicsPath());
 
       Gdiplus::RectF r;
 
@@ -4674,7 +4674,7 @@ namespace draw2d_gdiplus
    void graphics::intersect_clip(const ::polygon_i32& polygon_i32)
    {
 
-      auto ppath = __auto(new Gdiplus::GraphicsPath());
+      auto ppath = __auto(__new Gdiplus::GraphicsPath());
 
       auto copy = [this](Gdiplus::PointF* p2, const POINT* p1)
       {
@@ -4699,7 +4699,7 @@ namespace draw2d_gdiplus
    void graphics::intersect_clip(const ::polygon_f64& polygon_i32)
    {
 
-      auto ppath = __auto(new Gdiplus::GraphicsPath());
+      auto ppath = __auto(__new Gdiplus::GraphicsPath());
 
       auto copy = [this](Gdiplus::PointF* p2, const ::point_f64* p1)
       {
@@ -5582,11 +5582,11 @@ namespace draw2d_gdiplus
 
          i32 count = strFormat.GetMeasurableCharacterRangeCount();
 
-#undef new
+#undef __new
 
-         ap(Gdiplus::Region) regiona(new_array, new Gdiplus::Region[count]);
+         ap(Gdiplus::Region) regiona(new_array, __new Gdiplus::Region[count]);
 
-#define new ACME_NEW
+#define __new ACME_NEW
 
          Gdiplus::RectF box(0.0f, 0.0f, 0.0f, 0.0f);
 
@@ -5685,11 +5685,11 @@ namespace draw2d_gdiplus
 
       Gdiplus::RectF box(0.0f, 0.0f, 128.0f * 1024.0f, 128.0f * 1024.0f);
 
-#undef new
+#undef __new
 
-      Gdiplus::Region * pCharRangeRegions = new Gdiplus::Region[count];
+      Gdiplus::Region * pCharRangeRegions = __new Gdiplus::Region[count];
 
-#define new ACME_NEW
+#define __new ACME_NEW
 
       m_pgraphics->MeasureCharacterRanges(wstr, (INT) wstr.get_length(), m_pfont->get_os_data < Gdiplus::Font * >(this), box, &strFormat, (INT) count, pCharRangeRegions);
 
@@ -5765,11 +5765,11 @@ namespace draw2d_gdiplus
 
       Gdiplus::RectF box(0.0f, 0.0f, 128.0f * 1024.0f, 128.0f * 1024.0f);
 
-#undef new
+#undef __new
 
-      Gdiplus::Region * pCharRangeRegions = new Gdiplus::Region[count];
+      Gdiplus::Region * pCharRangeRegions = __new Gdiplus::Region[count];
 
-#define new ACME_NEW
+#define __new ACME_NEW
 
       m_pgraphics->MeasureCharacterRanges(wstr, (INT)wstr.get_length(), m_pfont->get_os_data < Gdiplus::Font * >(this), box, &strFormat, (INT)count, pCharRangeRegions);
 
@@ -6025,11 +6025,11 @@ namespace draw2d_gdiplus
 
       i32 count = strFormat.GetMeasurableCharacterRangeCount();
 
-#undef new
+#undef __new
 
-      Gdiplus::Region * pCharRangeRegions = new Gdiplus::Region[count];
+      Gdiplus::Region * pCharRangeRegions = __new Gdiplus::Region[count];
 
-#define new ACME_NEW
+#define __new ACME_NEW
 
       //Gdiplus::RectF box(0.0f, 0.0f, 128.0f * 1024.0f, 128.0f * 1024.0f);
 
@@ -6373,11 +6373,11 @@ namespace draw2d_gdiplus
          if (m_ppath != nullptr)
          {
 
-#undef new
+#undef __new
 
-            pmNew = new Gdiplus::Matrix();
+            pmNew = __new Gdiplus::Matrix();
 
-#define new ACME_NEW
+#define __new ACME_NEW
 
          }
          else

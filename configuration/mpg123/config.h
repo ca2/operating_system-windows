@@ -392,7 +392,7 @@
 /* Define if modules are enabled */
 #undef USE_MODULES
 
-/* Define for new Huffman decoding scheme. */
+/* Define for __new Huffman decoding scheme. */
 #undef USE_NEW_HUFFTABLE
 
 /* Define to use yasm for assemble AVX sources. */

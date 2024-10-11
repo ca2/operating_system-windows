@@ -102,7 +102,7 @@ namespace windowing_win32
       m_uExtraFlagsSetWindowPos = 0;
 
       //set_layer(LAYERED_IMPL, this);
-      //m_plongmap  = new iptr_to_iptr;
+      //m_plongmap  = __new iptr_to_iptr;
 
 //      m_iXic = 0;
 //
@@ -401,7 +401,7 @@ namespace windowing_win32
       //if (!puserinteraction->m_pusersystem)
       //{
 
-      //   puserinteraction->m_pusersystem = __new ::user::system();
+      //   puserinteraction->m_pusersystem = __allocate ::user::system();
 
       //}
 
@@ -419,7 +419,7 @@ namespace windowing_win32
          else
          {
 
-            pusersystem = __new ::user::system();
+            pusersystem = __allocate ::user::system();
 
          }
 
@@ -1089,7 +1089,7 @@ namespace windowing_win32
 
    //   }
 
-   //   ::window * pdata = new window;
+   //   ::window * pdata = __new window;
 
    //   pdata->m_bMessageOnlyWindow = true;
    //   pdata->m_window = None;
@@ -1139,7 +1139,7 @@ namespace windowing_win32
 
    //   }
 
-   //   ::window * pdata = new ::window;
+   //   ::window * pdata = __new ::window;
 
    //   pdata->m_bMessageOnlyWindow = false;
    //   pdata->m_osdisplay = osdisplay_get(pdisplay);

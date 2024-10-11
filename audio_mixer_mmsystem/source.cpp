@@ -65,7 +65,7 @@
          ////////////mxlc.dwControlType  = 0;
          m_mixerlinecontrols.cControls      = iControlCount;
          m_mixerlinecontrols.cbmxctrl       = sizeof(*m_mixerlinecontrols.pamxctrl);
-         m_mixerlinecontrols.pamxctrl       = new MIXERCONTROL[m_mixerline.cControls];
+         m_mixerlinecontrols.pamxctrl       = __new MIXERCONTROL[m_mixerline.cControls];
 
          for (i32 i = 0; i < iControlCount; i++)
          {

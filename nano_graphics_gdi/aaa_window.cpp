@@ -239,7 +239,7 @@ namespace windows
 
             {
 
-               auto pnanodevice = __new ::windows::nano::graphics::device(hdc);
+               auto pnanodevice = __allocate ::windows::nano::graphics::device(hdc);
 
                m_pinterface->draw(pnanodevice);
 

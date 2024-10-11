@@ -10,7 +10,7 @@ HANDLE g_hmutex = nullptr;
 u32 plugin_container_app(const ::string & strChannel)
 {
 
-   ::plugin::system * psystem = new ::plugin::system(nullptr, nullptr);
+   ::plugin::system * psystem = __new ::plugin::system(nullptr, nullptr);
 
    psystem->m_hinstance = ::GetModuleHandle(nullptr);
 
@@ -38,7 +38,7 @@ u32 plugin_container_app(const ::string & strChannel)
 
    psystem->begin();
 
-   ::ca2plugin_container::application * papp = new ::ca2plugin_container::application(psystem, strChannel);
+   ::ca2plugin_container::application * papp = __new ::ca2plugin_container::application(psystem, strChannel);
 
    papp->m_psession = psystem->m_psession;
 

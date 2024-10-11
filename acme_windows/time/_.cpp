@@ -11,10 +11,10 @@
 
 // #endif
 
-#undef new
+#undef __new
 #include "gdiplus.h"
 #include <ddeml.h>
-#define new ACME_NEW
+#define __new ACME_NEW
 
 
 void __term_threading();
@@ -649,7 +649,7 @@ namespace windows
 
 //    wstring wstrTitle(strTitle);
 
-//    auto pmessagebox = __new windows::message_box();
+//    auto pmessagebox = __allocate windows::message_box();
 
 //    auto pfuture = pmessagebox->::extended::asynchronous <::conversation>::future();
 

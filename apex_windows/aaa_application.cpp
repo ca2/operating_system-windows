@@ -249,7 +249,7 @@ namespace apex
 //{
 //
 //
-//   ::comm::command * pmaininitdata = new ::windows::command;
+//   ::comm::command * pmaininitdata = __new ::windows::command;
 //
 //
 //   pmaininitdata->m_hInstance = hInstance;

@@ -510,7 +510,7 @@ Opened:
 
          m_estatusWave = xaudio7::translate(m_psourcevoice->Start(0,XAUDIO2_COMMIT_NOW));
 
-         //         m_prunstepthread = new run_step_thread(this);
+         //         m_prunstepthread = __new run_step_thread(this);
 
 
          return ::success;

@@ -89,7 +89,7 @@ int main(int argc, char **argv)
 
       /* Save client session. Sever session is saves as part of shutdown.
       * The saved session is destroyed and stored from the ssl object
-      * before shutdown in case a renegotation took place and a new
+      * before shutdown in case a renegotation took place and a __new
       * session was created. */
       if (session != nullptr)
          SSL_SESSION_free(session);

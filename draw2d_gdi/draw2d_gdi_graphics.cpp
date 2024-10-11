@@ -3493,7 +3493,7 @@ namespace draw2d_gdi
    //   ::draw2d::region_pointer rgnLast(e_create), rgnUpdate(e_create);
    //   if (!IsRectEmpty(&lpRectLast))
    //   {
-   //      // find difference between new region and old region
+   //      // find difference between __new region and old region
    //      rgnLast->create_rect_dim(0, 0, 0, 0);
    //      rgnOutside->create_rect(&lpRectLast);
    //      rectangle = lpRectLast;
@@ -3523,7 +3523,7 @@ namespace draw2d_gdi
    //      pBrushOld = nullptr;
    //   }
 
-   //   // draw into the update/new region
+   //   // draw into the update/__new region
    //   SelectClipRgn(rgnUpdate->get_os_data() != nullptr ? rgnUpdate : rgnNew);
    //   get_clip_box(&rectangle);
    //   pBrushOld = SelectObject(pBrush);
@@ -3556,7 +3556,7 @@ namespace draw2d_gdi
       if (t_pimagemap == nullptr)
       {
 
-         t_pimagemap = new image_descriptor_map(get_application());
+         t_pimagemap = __new image_descriptor_map(get_application());
 
       }
 
@@ -3588,7 +3588,7 @@ namespace draw2d_gdi
       if (t_pimagemap == nullptr)
       {
 
-         t_pimagemap = new image_descriptor_map(get_application());
+         t_pimagemap = __new image_descriptor_map(get_application());
 
       }
 

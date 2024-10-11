@@ -43,6 +43,6 @@ static ::mutex * s_pmutex = nullptr;
 void init_draw2d_gdi_mutex(::particle * pparticle)
 {
 
-   s_pmutex = new ::mutex();
+   s_pmutex = __new ::mutex();
 
 }

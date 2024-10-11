@@ -119,7 +119,7 @@ namespace ca2plugin_container
    void host::start_plugin()
    {
 
-      ::plugin::instance * pplugin           = new ::plugin::instance(this);
+      ::plugin::instance * pplugin           = __new ::plugin::instance(this);
 
       m_pplugin                              = pplugin;
 
