@@ -405,25 +405,29 @@ namespace win32
 
          bool windowing::_process_windowing_messages()
          {
-            if (MsgWaitForMultipleObjects(0, NULL, FALSE, 100, QS_ALLINPUT) == WAIT_OBJECT_0)
+            if (is_main_thread())
             {
-               MSG msg;
-
-               while (PeekMessage(&msg, 0, 0, 0, PM_REMOVE))
+               if (MsgWaitForMultipleObjects(0, NULL, FALSE, 100, QS_ALLINPUT) == WAIT_OBJECT_0)
                {
-                  if (msg.message == WM_QUIT)
-                  {
-                     return false;
+                  MSG msg;
 
-                  }
-                  //if (!TranslateAccelerator(msg.hwnd, hAccelTable, &msg))
+                  while (PeekMessage(&msg, 0, 0, 0, PM_REMOVE))
                   {
-                     TranslateMessage(&msg);
-                     DispatchMessage(&msg);
+                     if (msg.message == WM_QUIT)
+                     {
+                        return false;
+
+                     }
+                     //if (!TranslateAccelerator(msg.hwnd, hAccelTable, &msg))
+                     {
+                        TranslateMessage(&msg);
+                        DispatchMessage(&msg);
+                     }
                   }
                }
+               system()->run_posted_procedures();
+
             }
-            system()->run_posted_procedures();
             return true;
          }
 

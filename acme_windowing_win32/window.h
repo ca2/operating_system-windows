@@ -116,6 +116,8 @@ namespace win32
             void redraw() override;
 
 
+            bool _is_window() override;
+
             //::point_i32 try_absolute_mouse_position(const ::point_i32& point) override;
 
 

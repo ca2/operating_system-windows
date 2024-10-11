@@ -1123,6 +1123,14 @@ namespace win32
          }
 
 
+         bool window::_is_window()
+         {
+
+            return ::IsWindow(m_hwnd);
+
+         }
+
+
          //void window::_destroy_window()
          //{
          //
