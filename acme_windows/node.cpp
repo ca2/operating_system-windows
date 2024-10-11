@@ -4943,14 +4943,14 @@ namespace acme_windows
    //}
 
 
-   void node::do_windowing_system_factory()
-   {
+   //void node::do_windowing_system_factory()
+   //{
 
-      auto pfactory = system()->factory("windowing_system", "win32");
+   //   auto pfactory = system()->factory("windowing_system", "win32");
 
-      pfactory->merge_to_global_factory();
+   //   pfactory->merge_to_global_factory();
 
-   }
+   //}
 
 
    bool node::defer_component_factory(const ::scoped_string & scopedstrComponent)

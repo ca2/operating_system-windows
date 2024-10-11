@@ -4,7 +4,7 @@
 #include "path.h"
 
 
-#undef __new
+//#undef __new
 
 
 namespace draw2d_gdiplus

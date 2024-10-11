@@ -9,7 +9,7 @@
 #include "acme/prototype/geometry2d/line.h"
 
 
-#undef __new
+//#undef __new
 
 
 bool almost_integer(double d)

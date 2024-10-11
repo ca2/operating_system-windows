@@ -202,7 +202,7 @@
 //#undef __new
 
 
-//void* operator __new(const size_t, void* p) noexcept;
+//void* operator new(const size_t, void* p) noexcept;
 
 
 #undef HAVE_UNISTD_H 

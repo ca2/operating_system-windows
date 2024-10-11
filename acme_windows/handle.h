@@ -136,9 +136,9 @@ struct ConstructDestruct
    }
    static void Construct(TYPE * pObject)
    {
-#undef __new
-      __new (pObject) TYPE;
-#define __new ACME_NEW
+//#undef __new
+      new (pObject) TYPE;
+//#define __new ACME_NEW
    }
    static void Destruct(TYPE * pObject)
    {

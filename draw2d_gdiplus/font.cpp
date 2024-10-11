@@ -7,7 +7,7 @@
 #include "aura/graphics/write_text/fonts.h"
 
 
-#undef __new
+//#undef __new
 
 
 namespace draw2d_gdiplus

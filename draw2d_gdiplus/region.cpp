@@ -6,7 +6,7 @@
 #include "acme/prototype/geometry2d/_defer_item.h"
 
 
-#undef __new
+//#undef __new
 
 
 namespace draw2d_gdiplus

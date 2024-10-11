@@ -26,7 +26,7 @@
 //#include "acme/prototype/geometry2d/_defer_shape.h"
 
 
-#undef __new
+//#undef __new
 
 
 ::collection::count g_cForkBlend = 0;
@@ -6389,7 +6389,7 @@ namespace draw2d_gdiplus
 
       int iLen = (i32)text.m_wstr.length();
 
-#undef __new
+//#undef __new
 
       auto status = m_pgraphics->MeasureString(psz, iLen, pfont, origin, &stringformat, &box);
 
