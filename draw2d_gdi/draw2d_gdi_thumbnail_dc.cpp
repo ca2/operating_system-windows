@@ -364,7 +364,7 @@ void preview_dc::MirrorFont()
    }
 
    ::windows_definition::DeleteObject((HGDIOBJ*)&m_hFont);  // delete the old logical font
-   m_hFont = hNewFont;         // save the new one
+   m_hFont = hNewFont;         // save the __new one
 }
 
 ::write_text::font* preview_dc::SelectObject(::write_text::font* pFont)
@@ -661,8 +661,8 @@ bool preview_dc::ExtTextOut(int x, int y, UINT nOptions, const ::rectangle_i32 &
 
       try
       {
-         pDeltas = new int[nCount];
-         pOutputString = new char[nCount];
+         pDeltas = __new int[nCount];
+         pOutputString = __new char[nCount];
       }
       catch(::exception::base * pe)
       {
@@ -713,8 +713,8 @@ size_i32 preview_dc::TabbedTextOut(int x, int y, const ::string & lpszString, in
 
    try
    {
-      pDeltas = new int[nCount];
-      pOutputString = new char[nCount];
+      pDeltas = __new int[nCount];
+      pOutputString = __new char[nCount];
    }
    catch(::exception::base * pe)
    {

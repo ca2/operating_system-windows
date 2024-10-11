@@ -675,7 +675,7 @@ wstring windowing::_windows_register_window_class(::u32 nClassStyle, HCURSOR hCu
 
    }
    wndcls.cbSize = sizeof(wndcls);
-   // otherwise we need to register a new class
+   // otherwise we need to register a __new class
    wndcls.style = nClassStyle;
    wndcls.lpfnWndProc = windows_user_interaction_impl_get_window_procedure();
 

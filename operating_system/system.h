@@ -64,9 +64,9 @@ using int_bool = int;
 
 #include <stddef.h>
 #include <limits.h>
-#include <new.h>
+#include <__new.h>
 #include <eh.h>
-#include <new>
+#include <__new>
 
 #undef __window_procedure
 

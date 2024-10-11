@@ -305,7 +305,7 @@ auto tickExecuteEnd = ::tick::now();
                straRange.explode("-", stra[i]);
                if (straRange.get_count() == 2)
                {
-                  rangea.add(new ::i32_array());
+                  rangea.add(__new ::i32_array());
                   rangea.last_ptr()->add(atoi(straRange[0]));
                   straRange[1].trim();
                   if (strlen(straRange[1]) == 0)

@@ -1077,7 +1077,7 @@ namespace music
                   {
                      if (plyriceventa == nullptr)
                      {
-                        plyriceventa = new array <::ikaraoke::lyric_event_v1, ::ikaraoke::lyric_event_v1 &>;
+                        plyriceventa = __new array <::ikaraoke::lyric_event_v1, ::ikaraoke::lyric_event_v1 &>;
                      }
                      ::memory_file memFile((LPBYTE)&lpdwParam[1], pheader->m_dwLength - sizeof(DWORD));
                      /* x2x                  CArchive ar(&memFile, CArchive::load);
@@ -1431,7 +1431,7 @@ namespace music
 
          //   ASSERT(this != nullptr);
 
-         //   event * pevent = new event();
+         //   event * pevent = __new event();
 
          //   ptopic->m_atom = eevent;
          //   ptopic->m_psequence = this;

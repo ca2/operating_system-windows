@@ -248,11 +248,11 @@ pacmedir->system() / "config/production/mirror_status.txt";
 
          //   if (m_eversion == version_basis)
          //   {
-         //      set["post"]["new_status"] = "<div style=\"display: block; " + strBackPostColor + "\"><h3 style=\"margin-bottom:0px; color: #555550;\">" + version_to_international_datetime(m_strStartTime) + "</h3><span style=\"color: #222218; display: block; margin-bottom: 1.5em;\">General build failure. Starting " + m_strTry + " retry of new <a href=\"http://code.ca2.cc/\" class=\"fluidbasis\" >basis</a> release.<br />";
+         //      set["post"]["new_status"] = "<div style=\"display: block; " + strBackPostColor + "\"><h3 style=\"margin-bottom:0px; color: #555550;\">" + version_to_international_datetime(m_strStartTime) + "</h3><span style=\"color: #222218; display: block; margin-bottom: 1.5em;\">General build failure. Starting " + m_strTry + " retry of __new <a href=\"http://code.ca2.cc/\" class=\"fluidbasis\" >basis</a> release.<br />";
          //   }
          //   else
          //   {
-         //      set["post"]["new_status"] = "<div style=\"display: block; " + strBackPostColor + "\"><h3 style=\"margin-bottom:0px; color: #555550;\">" + version_to_international_datetime(m_strStartTime) + "</h3><span style=\"color: #222218; display: block; margin-bottom: 1.5em;\">General build failure. Starting " + m_strTry + " retry  of new <a href=\"http://ca2.cc/\">stage</a> release.<br />";
+         //      set["post"]["new_status"] = "<div style=\"display: block; " + strBackPostColor + "\"><h3 style=\"margin-bottom:0px; color: #555550;\">" + version_to_international_datetime(m_strStartTime) + "</h3><span style=\"color: #222218; display: block; margin-bottom: 1.5em;\">General build failure. Starting " + m_strTry + " retry  of __new <a href=\"http://ca2.cc/\">stage</a> release.<br />";
          //   }
 
          //   if (m_straStatus.get_count() > 1)
@@ -619,11 +619,11 @@ pacmedir->system() / "config/production/mirror_status.txt";
 
             //   if(m_eversion == version_basis)
             //   {
-            //      set["post"]["new_status"] = "<div style=\"display: block; " + m_strBackPostColor + "\"><h3 style=\"margin-bottom:0px; color: #552250;\">" + version_to_international_datetime(m_strStartTime) + "</h3><span style=\"color: #882266; display: block; margin-bottom: 1.5em;\">Starting production of new <a href=\"http://code.ca2.cc/\" class=\"fluidbasis\" >basis</a> release.</span>";
+            //      set["post"]["new_status"] = "<div style=\"display: block; " + m_strBackPostColor + "\"><h3 style=\"margin-bottom:0px; color: #552250;\">" + version_to_international_datetime(m_strStartTime) + "</h3><span style=\"color: #882266; display: block; margin-bottom: 1.5em;\">Starting production of __new <a href=\"http://code.ca2.cc/\" class=\"fluidbasis\" >basis</a> release.</span>";
             //   }
             //   else
             //   {
-            //      set["post"]["new_status"] = "<div style=\"display: block; " + m_strBackPostColor + "\"><h3 style=\"margin-bottom:0px; color: #22552F;\">" + version_to_international_datetime(m_strStartTime) + "</h3><span style=\"color: #228855; display: block; margin-bottom: 1.5em;\">Starting production of new <a href=\"http://ca2.cc/\">stage</a> release.</span>";
+            //      set["post"]["new_status"] = "<div style=\"display: block; " + m_strBackPostColor + "\"><h3 style=\"margin-bottom:0px; color: #22552F;\">" + version_to_international_datetime(m_strStartTime) + "</h3><span style=\"color: #228855; display: block; margin-bottom: 1.5em;\">Starting production of __new <a href=\"http://ca2.cc/\">stage</a> release.</span>";
             //   }
 
             //   http()->get("http://api.ca2.cc/status/insert",str,set);
@@ -659,7 +659,7 @@ pacmedir->system() / "config/production/mirror_status.txt";
 
                    if(m_iGlobalRetry <= 0)
                    {
-                      strTwit = "ca2twit-lib : new " + m_strConfiguration + " build starting " + version_to_international_datetime(m_strBuild) + " UTC. More details at http://status.ca2.cc/" + m_strStatusEmail;
+                      strTwit = "ca2twit-lib : __new " + m_strConfiguration + " build starting " + version_to_international_datetime(m_strBuild) + " UTC. More details at http://status.ca2.cc/" + m_strStatusEmail;
                    }
                    else
                    {
@@ -1284,7 +1284,7 @@ pacmedir->create(pathTarget.folder()))
                if (i == 0)
                {
 
-                  class release * prelease = new class release(this, "https://" + strServer + strObject1, strServer);
+                  class release * prelease = __new class release(this, "https://" + strServer + strObject1, strServer);
 
                   prelease->raw_run();
 
@@ -1292,7 +1292,7 @@ pacmedir->create(pathTarget.folder()))
                else
                {
 
-                  class release * prelease = new class release(this, "https://" + strServer + strObject, strServer);
+                  class release * prelease = __new class release(this, "https://" + strServer + strObject, strServer);
 
                   prelease->begin();
 
@@ -1524,7 +1524,7 @@ pacmedir->create(pathTarget.folder()))
          synchronization_array ptra;
          for (index u = 0; u < uiProcessorCount; u++)
          {
-            compress_thread * pthread = new compress_thread(this, eventa[u]);
+            compress_thread * pthread = __new compress_thread(this, eventa[u]);
             threada.add(pthread);
             pthread->m_dwThreadAffinityMask = 1 << u;
             //pthread->m_bAutoDelete = false;
@@ -1671,7 +1671,7 @@ pacmedir->create(pathTarget.folder()))
    {
       return false;
       string strStatus;
-      strStatus = unitext("Commit for new Build and new Release!!");
+      strStatus = unitext("Commit for __new Build and __new Release!!");
       add_status(strStatus);
 
 
@@ -1726,7 +1726,7 @@ pacmedir->create(pathTarget.folder()))
             if (dwExitCode != STILL_ACTIVE)
                break;
             Sleep(2300);
-            str.formatf("%d: Stage for new Build and new Release : %s ...", i, psz);
+            str.formatf("%d: Stage for __new Build and __new Release : %s ...", i, psz);
             add_status(str);
             i++;
          }
@@ -1765,7 +1765,7 @@ pacmedir->create(pathTarget.folder()))
          if (dwExitCode != STILL_ACTIVE)
             break;
          Sleep(2300);
-         str.formatf("%d: Commit for new Build and new Release : %s ...", i, psz);
+         str.formatf("%d: Commit for __new Build and __new Release : %s ...", i, psz);
          add_status(str);
          i++;
       }
@@ -1801,7 +1801,7 @@ pacmedir->create(pathTarget.folder()))
          if (dwExitCode != STILL_ACTIVE)
             break;
          Sleep(2300);
-         str.formatf("%d: Push for new Build and new Release : %s ...", i, psz);
+         str.formatf("%d: Push for __new Build and __new Release : %s ...", i, psz);
          add_status(str);
          i++;
       }
@@ -3190,7 +3190,7 @@ Retry2:
       //twitterObj.setTwitterUsername( userName );
       //twitterObj.setTwitterPassword( passWord );
 
-      /* Post a new status message */
+      /* Post a __new status message */
       tmpStr = pszMessage;
       replyMsg = "";
       if (twitterObj.statusUpdate(tmpStr))
@@ -3281,7 +3281,7 @@ Retry2:
       //twitterObj.setTwitterUsername( userName );
       //twitterObj.setTwitterPassword( passWord );
 
-      /* Post a new status message */
+      /* Post a __new status message */
       tmpStr = pszMessage;
       replyMsg = "";
       if (twitterObj.statusUpdate(tmpStr))

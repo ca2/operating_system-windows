@@ -341,7 +341,7 @@ namespace multimedia
       //      thread * pthread = (thread *) dwInstance;
       //      ASSERT(pthread != nullptr);
       //      LPWAVEHDR lpWaveHdr = (LPWAVEHDR) dwParam1;
-      //      LPWAVEPROCDATAMESSAGE lpxfwm = new WAVEPROCDATAMESSAGE;
+      //      LPWAVEPROCDATAMESSAGE lpxfwm = __new WAVEPROCDATAMESSAGE;
       //      lpxfwm->bDelete = true;
       //      lpxfwm->msSampleTime = msSampleTime;
       //      //      lpxfwm->tickSamplePosition = tickPosition;

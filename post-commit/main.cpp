@@ -25,7 +25,7 @@ public:
                     GetCommandLineW(),
                     &m_argc
                     );
-      m_argv = new char *[m_argc];
+      m_argv = __new char *[m_argc];
       for(::collection::index i = 0; i < m_argc; i++)
       {
          m_argv[i] = ansi_duplicate(string(pwa[i]));
@@ -210,7 +210,7 @@ void app_t::win_sync_out(string strLocal,string strRepos)
 //
 //   }
 //
-//   app_t * psystem = new app_t;
+//   app_t * psystem = __new app_t;
 //
 //   int iReturnCode = ::app_main(psystem, nullptr,nullptr,nullptr,0);
 //
@@ -224,7 +224,7 @@ void app_t::win_sync_out(string strLocal,string strRepos)
 ::aura::application * get_acid_app(::particle * pparticle)
 {
 
-   return new app_t();
+   return __new app_t();
 
 }
 

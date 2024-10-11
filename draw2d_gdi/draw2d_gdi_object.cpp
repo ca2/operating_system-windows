@@ -101,17 +101,17 @@ namespace draw2d_gdi
       switch(::GetObjectType(h))
       {
       case OBJ_BITMAP:
-         return __new bitmap(papp);
+         return __allocate bitmap(papp);
       case OBJ_REGION:
-         return __new region(papp);
+         return __allocate region(papp);
       case OBJ_PEN:
-         return __new pen(papp);
+         return __allocate pen(papp);
       case OBJ_BRUSH:
-         return __new brush(papp);
+         return __allocate brush(papp);
       case OBJ_PAL:
-         return __new palette(papp);
+         return __allocate palette(papp);
       case OBJ_FONT:
-         return __new font(papp);
+         return __allocate font(papp);
       }
 
       return nullptr;

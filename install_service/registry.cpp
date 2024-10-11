@@ -599,7 +599,7 @@ int get_parameters(nssm_service_t *service, STARTUPINFO *si) {
   if (get_number(key, NSSM_REG_ROTATE_BYTES_LOW, &service->rotate_bytes_low, false) != 1) service->rotate_bytes_low = 0;
   if (get_number(key, NSSM_REG_ROTATE_BYTES_HIGH, &service->rotate_bytes_high, false) != 1) service->rotate_bytes_high = 0;
 
-  /* Try to get force new console setting - may fail. */
+  /* Try to get force __new console setting - may fail. */
   if (get_number(key, NSSM_REG_NO_CONSOLE, &service->no_console, false) != 1) service->no_console = 0;
 
   /* Change to startup directory in case stdout/stderr are relative paths. */

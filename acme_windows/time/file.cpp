@@ -160,9 +160,9 @@ int_bool file_is_equal_path_dup(const scoped_string & str1, const scoped_string 
 
    unichar * pwszFile2;
 
-   unichar * pwszPath1 = new unichar[iBufSize];
+   unichar * pwszPath1 = __new unichar[iBufSize];
 
-   unichar * pwszPath2 = new unichar[iBufSize];
+   unichar * pwszPath2 = __new unichar[iBufSize];
 
    i32 iCmp = -1;
    
@@ -374,7 +374,7 @@ struct PROCESS_INFO_t
 ////
 ////   THREAD_PARAMS * pThreadParam = (THREAD_PARAMS *) p;
 ////
-////   FILE_NAME_INFO * pinfo = (FILE_NAME_INFO *)new ::u8[MAX_PATH * 8];
+////   FILE_NAME_INFO * pinfo = (FILE_NAME_INFO *)__new ::u8[MAX_PATH * 8];
 ////
 ////   GetFinalPathNameByHandleDef pGetFinalPathNameByHandle = pThreadParam->pGetFinalPathNameByHandle;
 ////   for( g_CurrentIndex; g_CurrentIndex < pThreadParam->pSysHandleInformation->dwCount;  )
@@ -456,7 +456,7 @@ struct PROCESS_INFO_t
 ////   }
 ////
 ////   // Get the list of all handles in the file_system
-////   PSYSTEM_HANDLE_INFORMATION pSysHandleInformation = new SYSTEM_HANDLE_INFORMATION;
+////   PSYSTEM_HANDLE_INFORMATION pSysHandleInformation = __new SYSTEM_HANDLE_INFORMATION;
 ////   u32 size = sizeof(SYSTEM_HANDLE_INFORMATION);
 ////   DWORD needed = 0;
 ////   NTSTATUS status = NtQuerySystemInformation( SystemHandleInformation, pSysHandleInformation, size, &needed );
@@ -469,7 +469,7 @@ struct PROCESS_INFO_t
 ////      // The previously supplied buffer wasn't enough.
 ////      delete pSysHandleInformation;
 ////      size = needed + 1024;
-////      pSysHandleInformation = (PSYSTEM_HANDLE_INFORMATION)new ::u8[size_i32];
+////      pSysHandleInformation = (PSYSTEM_HANDLE_INFORMATION)__new ::u8[size_i32];
 ////      status = NtQuerySystemInformation( SystemHandleInformation, pSysHandleInformation, size, &needed );
 ////      if( !NT_SUCCESS(status))
 ////      {
@@ -666,7 +666,7 @@ struct PROCESS_INFO_t
 ////   }
 ////
 ////   u32 dwsize = 300;
-////   PDWORD pDwId = (PDWORD)new ::u8[dwsize];
+////   PDWORD pDwId = (PDWORD)__new ::u8[dwsize];
 ////   DWORD dwReturned = dwsize;
 ////   // Enum all the process first
 ////   while( 1 )
@@ -678,7 +678,7 @@ struct PROCESS_INFO_t
 ////      }
 ////      delete pDwId;
 ////      dwsize += 50;
-////      pDwId = (PDWORD)new ::u8[dwsize];
+////      pDwId = (PDWORD)__new ::u8[dwsize];
 ////   }
 ////   i32 nCount = dwReturned / sizeof(u32);
 ////   i32 nItemCount = -1;

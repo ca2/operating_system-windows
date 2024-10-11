@@ -174,7 +174,7 @@
 //
 //            //            if(m_poptionsview == nullptr)
 //            {
-//               //                m_poptionsview = new COptionsDialog();
+//               //                m_poptionsview = __new COptionsDialog();
 //               //              m_poptionsview->create(nullptr);
 //            }
 //

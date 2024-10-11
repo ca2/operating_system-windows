@@ -25,7 +25,7 @@ void __cdecl _null_se_translator(u32 uiCode, EXCEPTION_POINTERS * ppointers)
 
 
 
-#undef new
+#undef __new
 
 
 CLASS_DECL_ACME bool os_init_application()

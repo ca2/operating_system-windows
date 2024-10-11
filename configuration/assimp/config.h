@@ -1097,7 +1097,7 @@ enum aiComponent
 
      /** @brief Specifies whether to use the deprecated KHR_materials_pbrSpecularGlossiness extension
       *
-      * When this flag is undefined any material with specularity will use the new KHR_materials_specular
+      * When this flag is undefined any material with specularity will use the __new KHR_materials_specular
       * extension. Enabling this flag will revert to the deprecated extension. Note that exporting
       * KHR_materials_pbrSpecularGlossiness with extensions other than KHR_materials_unlit is unsupported,
       * including the basic pbrMetallicRoughness spec.

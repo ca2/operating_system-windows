@@ -16,7 +16,7 @@ void check_console() {
   */
   if (GetCurrentProcessId() != pid) return;
 
-  /* We close our new console so that subsequent messages appear in a popup. */
+  /* We close our __new console so that subsequent messages appear in a popup. */
   FreeConsole();
 }
 
