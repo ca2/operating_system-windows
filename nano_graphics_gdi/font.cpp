@@ -109,7 +109,7 @@ namespace windows
             if (::GetObjectW(hfont, sizeof(logFont), pLogFont))
             {
 
-               ::acme::get()->platform()->informationf("got log font");
+               ::informationf("got log font");
 
             }
 

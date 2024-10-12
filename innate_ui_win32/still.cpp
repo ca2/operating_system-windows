@@ -24,7 +24,7 @@
    }
 
    // Load the image from the stream using GDI+
-   ::Gdiplus::Image * image = __new ::Gdiplus::Image(pStream);
+   ::Gdiplus::Image * image = new ::Gdiplus::Image(pStream);
    pStream->Release();
 
    return image;

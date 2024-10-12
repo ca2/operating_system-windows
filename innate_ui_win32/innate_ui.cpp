@@ -93,7 +93,7 @@ namespace innate_ui_win32
 
       event.ResetEvent();
 
-      ::platform::get()->application()->fork([this, &event]()
+      system()->application()->fork([this, &event]()
          {
                try
                {
@@ -169,7 +169,7 @@ namespace innate_ui_win32
    LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
    {
 
-      ::pointer <::innate_ui_win32::innate_ui> pinnateui = ::platform::get()->system()->innate_ui();
+      ::pointer <::innate_ui_win32::innate_ui> pinnateui = system()->innate_ui();
 
       return pinnateui->_window_procedure(hWnd, message, wParam, lParam);
 

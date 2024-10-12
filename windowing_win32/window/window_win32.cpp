@@ -229,19 +229,19 @@ LRESULT CALLBACK __window_procedure(HWND hwnd, UINT message, WPARAM wparam, LPAR
    if (message == WM_SYSCOMMAND)
    {
 
-      ::acme::get()->platform()->informationf("WM_SYSCOMMAND");
+      informationf("WM_SYSCOMMAND");
 
    }
    else if (message == WM_NCDESTROY)
    {
 
-      ::acme::get()->platform()->informationf("WM_NCDESTROY");
+      informationf("WM_NCDESTROY");
 
    }
    else if (message == WM_COMMAND)
    {
 
-      ::acme::get()->platform()->informationf("WM_COMMAND");
+      informationf("WM_COMMAND");
 
    }
    else if (message == WM_MOUSEMOVE)
@@ -259,13 +259,13 @@ LRESULT CALLBACK __window_procedure(HWND hwnd, UINT message, WPARAM wparam, LPAR
    else if (message == WM_KILLFOCUS)
    {
 
-      ::acme::get()->platform()->informationf("WM_KILLFOCUS");
+      informationf("WM_KILLFOCUS");
 
    }
    else if (message == WM_MOUSEWHEEL)
    {
 
-      ::acme::get()->platform()->informationf("WM_MOUSEWHEEL");
+      informationf("WM_MOUSEWHEEL");
 
    }
    else if (message == WM_SHOWWINDOW)

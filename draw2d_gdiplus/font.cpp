@@ -214,7 +214,7 @@ namespace draw2d_gdiplus
 
                   //bFont = true;
 
-                  auto pgdiplusfont = __new Gdiplus::Font(
+                  auto pgdiplusfont = __raw_new Gdiplus::Font(
                      pgdiplusfontfamily,
                      gdiplus_font_size(m_fontsize),
                      iStyle,
@@ -289,7 +289,7 @@ namespace draw2d_gdiplus
 
          }
 
-         auto pgdiplusfont = __new Gdiplus::Font(
+         auto pgdiplusfont = __raw_new Gdiplus::Font(
             utf8_to_unicode(strFamilyName),
             gdiplus_font_size(m_fontsize),
             iStyle,
@@ -307,7 +307,7 @@ namespace draw2d_gdiplus
          if (::is_null(pgdiplusfontfamily))
          {
 
-            auto pgdiplusfontfamilyNew = __new Gdiplus::FontFamily();
+            auto pgdiplusfontfamilyNew = __raw_new Gdiplus::FontFamily();
 
             if (pfont->GetFamily(pgdiplusfontfamilyNew) == Gdiplus::Ok)
             {
