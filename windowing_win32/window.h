@@ -278,6 +278,7 @@ namespace windowing_win32
       //virtual void window_apply_visual(const ::user::window_state & windowstate) override;
 
       DECLARE_MESSAGE_HANDLER(on_message_destroy);
+      DECLARE_MESSAGE_HANDLER(on_message_non_client_destroy);
       DECLARE_MESSAGE_HANDLER(_001OnCreate);
       DECLARE_MESSAGE_HANDLER(on_message_window_position_changed);
       //DECLARE_MESSAGE_HANDLER(on_message_kill_focus);

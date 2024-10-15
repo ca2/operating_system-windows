@@ -985,7 +985,7 @@ namespace windowing_win32
 
                ::point_i32 pointBottomRight = point + size;
 
-               if (::IsWindowVisible(hwnd) && !::IsIconic(hwnd))
+               //if (::IsWindowVisible(hwnd) && !::IsIconic(hwnd))
                {
 
                   //::pointer < ::windowing_win32::window > p2 = m_pwindow;

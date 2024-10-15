@@ -239,7 +239,8 @@ namespace windowing_win32
 
       ::windowing::window::prio_install_message_routing(pchannel);
 
-      MESSAGE_LINK(MESSAGE_DESTROY, pchannel, this, &window::on_message_destroy);
+      MESSAGE_LINK(e_message_destroy, pchannel, this, &window::on_message_destroy);
+      MESSAGE_LINK(e_message_non_client_destroy, pchannel, this, &window::on_message_non_client_destroy);
       MESSAGE_LINK(WM_GETICON, pchannel, this, &window::on_message_get_icon);
 
       //MESSAGE_LINK(MESSAGE_CREATE, pchannel, pimpl, &::windowing::window::_001OnPrioCreate);
@@ -686,7 +687,7 @@ namespace windowing_win32
 
             //windowing()->windowing_post([this]()
               //                          {
-
+      if(m_pgraphicsgraphics)
       {
 
          //_synchronous_lock synchronouslock(user_synchronization());
@@ -2061,12 +2062,76 @@ namespace windowing_win32
    }
 
 
+   //void window::start_destroying_window()
+   //{
+
+   //   if (!m_bUserImplCreated)
+   //   {
+
+   //      return;
+
+   //   }
+
+   //   m_bUserImplCreated = false;
+
+   //   if (m_puserinteraction == nullptr && !m_bDestroyImplOnly)
+   //   {
+
+   //      return;
+
+   //   }
+
+   //   //::pointer<::windowing::window>pimplThis = this;
+
+   //   //::pointer<::user::interaction>puiThis = m_puserinteraction;
+
+   //   //if (puiThis)
+   //   //{
+
+   //   //   try
+   //   //   {
+
+   //   //      puiThis->send_message(e_message_destroy);
+
+   //   //   }
+   //   //   catch (...)
+   //   //   {
+
+   //   //   }
+
+   //   //   try
+   //   //   {
+
+   //   //      puiThis->send_message(e_message_non_client_destroy);
+
+   //   //   }
+   //   //   catch (...)
+   //   //   {
+
+   //   //   }
+
+   //   //}
+
+   //   ////return true;
+
+   //}
+
+
    void window::destroy_window()
    {
 
       main_send()
          << [this]()
          {
+
+            ::ShowWindow(m_hwnd, SW_HIDE);
+
+            if (m_pgraphicsthread)
+            {
+
+               m_pgraphicsthread->stop_task();
+
+            }
 
             HWND hwnd = get_hwnd();
 
@@ -7402,6 +7467,16 @@ namespace windowing_win32
    {
 
       __UNREFERENCED_PARAMETER(pmessage);
+
+   }
+
+
+   void window::on_message_non_client_destroy(::message::message* pmessage)
+   {
+
+      __UNREFERENCED_PARAMETER(pmessage);
+
+      destroy();
 
    }
 

@@ -153,7 +153,9 @@ namespace win32
          void windowing::_main_post(const ::procedure & procedure)
          {
 
-            system()->_post(procedure);
+            //system()->_post(procedure);
+
+            _post(procedure);
 
          }
 
@@ -425,7 +427,7 @@ namespace win32
                      }
                   }
                }
-               system()->run_posted_procedures();
+               run_posted_procedures();
 
             }
             return true;
@@ -434,6 +436,9 @@ namespace win32
 
          void windowing::windowing_system_application_main_loop()
          {
+
+            system()->defer_post_initial_request();
+
             while (true)
             {
                if (!_process_windowing_messages())
