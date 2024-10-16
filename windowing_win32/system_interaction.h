@@ -30,9 +30,9 @@ namespace windowing_win32
       DECLARE_MESSAGE_HANDLER(_001OnDeviceChange);
       
 
-      virtual void start_destroying_window() override;
+      void destroy_window() override;
 
-      virtual bool is_system_message_window() override;
+      bool is_system_message_window() override;
 
       //void initialize_windows_devices();
 

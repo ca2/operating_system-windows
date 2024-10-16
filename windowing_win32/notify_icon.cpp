@@ -107,7 +107,7 @@ namespace windowing_win32
 
          m_puserinteractionNotify.release();
 
-         start_destroying_window();
+         destroy_window();
 
          throw ::exception(error_null_pointer);
 
@@ -176,6 +176,15 @@ namespace windowing_win32
    void notify_icon::destroy_window()
    {
 
+      if (!m_bCreated)
+      {
+
+         return;
+
+      }
+
+      m_bCreated = false;
+
       m_nid.uFlags = 0;
 
       if (!Shell_NotifyIcon(NIM_DELETE, &m_nid))
@@ -198,65 +207,64 @@ namespace windowing_win32
    }
 
 
-   void notify_icon::post_non_client_destroy()
+   void notify_icon::destroy()
    {
 
-      ::user::interaction::post_non_client_destroy();
-
+      ::user::interaction::destroy();
 
    }
 
 
 
-   void notify_icon::start_destroying_window()
-   {
-
-      if (!m_bCreated)
-      {
-
-         return;
-
-      }
-
-      m_bCreated = false;
-
-
-      ::user::interaction::start_destroying_window();
-
-//      //return true;
+//   void notify_icon::destroy_window()
+//   {
 //
-//
-//#elif defined(LINUX) && !defined(RASPBIAN)
-//
-//      if (m_pindicator)
+//      if (!m_bCreated)
 //      {
 //
-//         auto pnode = Node;
-//
-//         pnode->appindicator_destroy(m_pindicator);
-//
-//         m_pindicator = nullptr;
+//         return;
 //
 //      }
 //
-//      return true;
-//
-//#elif defined(MACOS)
-//
-//      notify_icon_destroy();
-//
-//      return true;
-//
-//#else
+//      m_bCreated = false;
 //
 //
-//      throw ::exception(todo);
+//      ::user::interaction::destroy_window();
 //
-//      return true;
+////      //return true;
+////
+////
+////#elif defined(LINUX) && !defined(RASPBIAN)
+////
+////      if (m_pindicator)
+////      {
+////
+////         auto pnode = Node;
+////
+////         pnode->appindicator_destroy(m_pindicator);
+////
+////         m_pindicator = nullptr;
+////
+////      }
+////
+////      return true;
+////
+////#elif defined(MACOS)
+////
+////      notify_icon_destroy();
+////
+////      return true;
+////
+////#else
+////
+////
+////      throw ::exception(todo);
+////
+////      return true;
+////
+////#endif
 //
-//#endif
-
-   }
+//   }
 
 
    void notify_icon::on_message_destroy(::message::message * pmessage)

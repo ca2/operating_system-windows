@@ -191,7 +191,7 @@ namespace windowing_win32
 
       //virtual void set_user_interaction(::layered * pinteraction) override;
 
-      void post_non_client_destroy() override;
+      //void destroy() override;
 
       void set_mouse_cursor(::windowing::cursor * pcursor) override;
 

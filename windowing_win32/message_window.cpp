@@ -129,7 +129,7 @@ namespace windowing_win32
    void message_window::message_window_destroy()
    {
 
-      start_destroying_window();
+      destroy_window();
 
    }
 

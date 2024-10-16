@@ -63,21 +63,19 @@ namespace windowing_win32
 
       void add_hidden_window(::user::interaction * puserinteraction) override;
 
-#ifdef WINDOWS_DESKTOP
+//#ifdef WINDOWS_DESKTOP
 
-      virtual void erase_all_routes() override;
+      void erase_all_routes() override;
 
-      virtual void start_destroying_window() override;
+      void destroy_window() override;
 
-      virtual void destroy_window() override;
+      void destroy() override;
 
-      virtual void post_non_client_destroy() override;
+//#else
 
-#else
+      //virtual bool DestroyWindow();
 
-      virtual bool DestroyWindow();
-
-#endif
+//#endif
 
 
       void modify_icon(::windowing::icon * picon) override;

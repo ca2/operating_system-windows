@@ -361,6 +361,38 @@ namespace windowing_win32
    void window::destroy()
    {
 
+      WNDPROC pfnWndProc = WNDPROC(::GetWindowLongPtr(get_hwnd(), GWLP_WNDPROC));
+
+      if (WNDPROC(::GetWindowLongPtr(get_hwnd(), GWLP_WNDPROC)) == pfnWndProc)
+      {
+
+         WNDPROC pfnSuper = *GetSuperWndProcAddr();
+
+         if (pfnSuper != nullptr)
+         {
+
+            ::SetWindowLongPtr(get_hwnd(), GWLP_WNDPROC, reinterpret_cast<iptr>(pfnSuper));
+
+         }
+
+      }
+
+      this->windowing()->erase_window(this);
+
+      set_hwnd(nullptr);
+
+      //if (!::is_null(this))
+      //{
+
+      //   oswindow_erase(display(), window());
+
+      //}
+
+      //m_pimpl2.release();
+
+      //::windowing::window::destroy();
+
+
       ::windowing::window::destroy();
       ::win32::acme::windowing::window::destroy();
 
@@ -448,7 +480,7 @@ namespace windowing_win32
 
       }
 
-      install_message_routing(puserinteraction);
+      //install_message_routing(puserinteraction);
 
       wstring wstrWindowName;
 
@@ -1467,42 +1499,78 @@ namespace windowing_win32
    //}
 
 
-   void window::post_non_client_destroy()
-   {
+   //void window::destroy()
+   //{
 
 
-      WNDPROC pfnWndProc = WNDPROC(::GetWindowLongPtr(get_hwnd(), GWLP_WNDPROC));
+   //   WNDPROC pfnWndProc = WNDPROC(::GetWindowLongPtr(get_hwnd(), GWLP_WNDPROC));
 
-      if (WNDPROC(::GetWindowLongPtr(get_hwnd(), GWLP_WNDPROC)) == pfnWndProc)
-      {
+   //   if (WNDPROC(::GetWindowLongPtr(get_hwnd(), GWLP_WNDPROC)) == pfnWndProc)
+   //   {
 
-         WNDPROC pfnSuper = *GetSuperWndProcAddr();
+   //      WNDPROC pfnSuper = *GetSuperWndProcAddr();
 
-         if (pfnSuper != nullptr)
-         {
+   //      if (pfnSuper != nullptr)
+   //      {
 
-            ::SetWindowLongPtr(get_hwnd(), GWLP_WNDPROC, reinterpret_cast<iptr>(pfnSuper));
+   //         ::SetWindowLongPtr(get_hwnd(), GWLP_WNDPROC, reinterpret_cast<iptr>(pfnSuper));
 
-         }
+   //      }
 
-      }
+   //   }
 
-      this->windowing()->erase_window(this);
+   //   this->windowing()->erase_window(this);
 
-      set_hwnd(nullptr);
+   //   set_hwnd(nullptr);
 
-      //if (!::is_null(this))
-      //{
+   //   //if (!::is_null(this))
+   //   //{
 
-      //   oswindow_erase(display(), window());
+   //   //   oswindow_erase(display(), window());
 
-      //}
+   //   //}
 
-      //m_pimpl2.release();
+   //   //m_pimpl2.release();
 
-      ::windowing::window::post_non_client_destroy();
+   //   ::windowing::window::destroy();
 
-   }
+   //}
+   //void window::destroy()
+   //{
+
+
+   //   WNDPROC pfnWndProc = WNDPROC(::GetWindowLongPtr(get_hwnd(), GWLP_WNDPROC));
+
+   //   if (WNDPROC(::GetWindowLongPtr(get_hwnd(), GWLP_WNDPROC)) == pfnWndProc)
+   //   {
+
+   //      WNDPROC pfnSuper = *GetSuperWndProcAddr();
+
+   //      if (pfnSuper != nullptr)
+   //      {
+
+   //         ::SetWindowLongPtr(get_hwnd(), GWLP_WNDPROC, reinterpret_cast<iptr>(pfnSuper));
+
+   //      }
+
+   //   }
+
+   //   this->windowing()->erase_window(this);
+
+   //   set_hwnd(nullptr);
+
+   //   //if (!::is_null(this))
+   //   //{
+
+   //   //   oswindow_erase(display(), window());
+
+   //   //}
+
+   //   //m_pimpl2.release();
+
+   //   ::windowing::window::destroy();
+
+   //}
 
 
    //::windowing::window * window::get_parent() const
@@ -2074,47 +2142,47 @@ namespace windowing_win32
 
    //   m_bUserImplCreated = false;
 
-   //   if (m_puserinteraction == nullptr && !m_bDestroyImplOnly)
-   //   {
+   ////   if (m_puserinteraction == nullptr && !m_bDestroyImplOnly)
+   ////   {
 
-   //      return;
+   ////      return;
 
-   //   }
+   ////   }
 
-   //   //::pointer<::windowing::window>pimplThis = this;
+   ////   //::pointer<::windowing::window>pimplThis = this;
 
-   //   //::pointer<::user::interaction>puiThis = m_puserinteraction;
+   ////   //::pointer<::user::interaction>puiThis = m_puserinteraction;
 
-   //   //if (puiThis)
-   //   //{
+   ////   //if (puiThis)
+   ////   //{
 
-   //   //   try
-   //   //   {
+   ////   //   try
+   ////   //   {
 
-   //   //      puiThis->send_message(e_message_destroy);
+   ////   //      puiThis->send_message(e_message_destroy);
 
-   //   //   }
-   //   //   catch (...)
-   //   //   {
+   ////   //   }
+   ////   //   catch (...)
+   ////   //   {
 
-   //   //   }
+   ////   //   }
 
-   //   //   try
-   //   //   {
+   ////   //   try
+   ////   //   {
 
-   //   //      puiThis->send_message(e_message_non_client_destroy);
+   ////   //      puiThis->send_message(e_message_non_client_destroy);
 
-   //   //   }
-   //   //   catch (...)
-   //   //   {
+   ////   //   }
+   ////   //   catch (...)
+   ////   //   {
 
-   //   //   }
+   ////   //   }
 
-   //   //}
+   ////   //}
 
-   //   ////return true;
+   ////   ////return true;
 
-   //}
+   ////}
 
 
    void window::destroy_window()
@@ -2124,7 +2192,12 @@ namespace windowing_win32
          << [this]()
          {
 
-            ::ShowWindow(m_hwnd, SW_HIDE);
+            if (::IsWindowVisible(m_hwnd))
+            {
+
+               ::ShowWindow(m_hwnd, SW_HIDE);
+
+            }
 
             if (m_pgraphicsthread)
             {
@@ -7476,7 +7549,7 @@ namespace windowing_win32
 
       __UNREFERENCED_PARAMETER(pmessage);
 
-      destroy();
+      //destroy();
 
    }
 

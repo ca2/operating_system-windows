@@ -59,12 +59,12 @@ namespace windowing_win32
    }
 
 
-   void system_interaction::start_destroying_window()
+   void system_interaction::destroy_window()
    {
 
-      //return 
-      
-      ::user::interaction::start_destroying_window();
+   //   //return 
+   //   
+      ::user::interaction::destroy_window();
 
    }
 

@@ -163,7 +163,7 @@ namespace windowing_win32
       if (m_psysteminteraction)
       {
 
-         m_psysteminteraction->start_destroying_window();
+         m_psysteminteraction->destroy_window();
 
       }
 
@@ -199,7 +199,7 @@ namespace windowing_win32
       if (m_psysteminteraction)
       {
 
-         m_psysteminteraction->start_destroying_window();
+         m_psysteminteraction->destroy_window();
 
       }
 
