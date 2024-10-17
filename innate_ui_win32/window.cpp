@@ -210,17 +210,55 @@ namespace innate_ui_win32
    LRESULT window::_window_procedure(UINT message, WPARAM wparam, LPARAM lparam)
    {
 
-
+      LRESULT lresult = 0;
 
       switch (message)
 
       {
+      case WM_SHOWWINDOW:
+      {
+         if (wparam)
+         {
+            if (!m_hmenuSystem)
+            {
+               //auto hmenu = GetSystemMenu(m_hwnd, true);
+               m_hmenuSystem = GetSystemMenu(m_hwnd, false);
+               WPARAM wparamHere = (WPARAM) m_hmenuSystem;
+               LRESULT lresultHere = 1;
+               if (_on_default_system_menu_init_menu(lresultHere, wparamHere))
+               {
+
+                  return lresult;
+
+               }
+
+            }
+         }
+
+      }
+      break;
       case WM_APP + 124:
          PostQuitMessage(0);
+         break;
+      case WM_SYSCOMMAND:
+      {
+         int wmId = LOWORD(wparam);
+         if (wmId == 123)
+         {
+            application()->show_about_box();
+            return 0;
+         }
+         return DefWindowProc(m_hwnd, message, wparam, lparam);
+      }
          break;
       case WM_COMMAND:
       {
          int wmId = LOWORD(wparam);
+         if (wmId == 123)
+         {
+            application()->show_about_box();
+            return 0;
+         }
          auto pchild = _get_child_with_id(wmId);
 
          if (pchild)
@@ -248,6 +286,11 @@ namespace innate_ui_win32
          //}
       }
       break;
+      case WM_INITMENU:
+      {
+
+      }
+         break;
       case WM_PAINT:
       {
          //PAINTSTRUCT ps;
@@ -265,7 +308,7 @@ namespace innate_ui_win32
       default:
          return DefWindowProc(m_hwnd, message, wparam, lparam);
       }
-      return 0;
+      return lresult;
 
 
    }

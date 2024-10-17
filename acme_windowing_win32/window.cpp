@@ -238,7 +238,7 @@ namespace win32
          void window::destroy_window()
          {
 
-            main_post()
+            main_send()
                << [this]()
                {
 
@@ -256,6 +256,8 @@ namespace win32
                   }
 
                };
+
+            destroy();
 
          }
 
