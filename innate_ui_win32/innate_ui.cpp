@@ -53,11 +53,15 @@ namespace innate_ui_win32
    void innate_ui::_main_post(const ::procedure & procedure)
    {
 
-      auto pparticle = (::subparticle *)procedure.m_pbase;
+      auto psubparticle = (::subparticle *)procedure.m_pbase;
 
-      pparticle->increment_reference_count();
+      __refdbg_add_referer
 
-      PostThreadMessage(m_dwThread, WM_APP + 123, 0, (LPARAM)pparticle);
+      psubparticle->increment_reference_count();
+
+      psubparticle->m_prefererTransfer = psubparticle->m_preferenceitema->m_itema.last()->m_preferer;
+
+      PostThreadMessage(m_dwThread, WM_APP + 123, 0, (LPARAM)psubparticle);
 
    }
 
@@ -97,18 +101,41 @@ namespace innate_ui_win32
          {
                try
                {
+                  
+                  __check_refdbg
+
                   MSG msg;
                   // Main message loop:
                   ::PeekMessage(&msg, nullptr, 0, 0, 0);
+
+
+                  __check_refdbg
+
                   m_hthread = ::GetCurrentThread();
+
+                  __check_refdbg
+
                   m_dwThread = ::GetCurrentThreadId();
+
+                  __check_refdbg
+
                   event.SetEvent();
+
+                  __check_refdbg
+
                   while (::task_get_run())
                   {
+
+                     __check_refdbg
+
                      DWORD timeout = 100; // 100 ::times;
+
+                     __check_refdbg
 
                      while (MsgWaitForMultipleObjects(0, NULL, FALSE, timeout, QS_ALLINPUT) != WAIT_OBJECT_0)
                      {
+
+                        __check_refdbg
 
                         if (PeekMessage(&msg, nullptr, 0, 0, false))
                         {
@@ -116,6 +143,8 @@ namespace innate_ui_win32
                            break;
 
                         }
+
+                        __check_refdbg
 
                         if (!task_get_run())
                         {
@@ -126,13 +155,21 @@ namespace innate_ui_win32
 
                      }
 
+                     __check_refdbg
+
                      if (GetMessage(&msg, nullptr, 0, 0))
                      {
+
+                        __check_refdbg
 
                         if (msg.message == WM_APP + 123)
                         {
 
-                           auto psubparticle = __transfer_as_pointer(::subparticle *)msg.lParam ;
+                           __check_refdbg
+
+                           ::pointer < ::subparticle > psubparticle = { transfer_t{}, (::subparticle *)msg.lParam };
+
+                           psubparticle.m_preferer = psubparticle->m_prefererTransfer;
 
                            psubparticle->run();
 

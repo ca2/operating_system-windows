@@ -381,18 +381,6 @@ namespace windowing_win32
 
       set_hwnd(nullptr);
 
-      //if (!::is_null(this))
-      //{
-
-      //   oswindow_erase(display(), window());
-
-      //}
-
-      //m_pimpl2.release();
-
-      //::windowing::window::destroy();
-
-
       ::windowing::window::destroy();
       ::win32::acme::windowing::window::destroy();
 
@@ -7926,6 +7914,14 @@ namespace windowing_win32
             information() << "activation window " << (iptr)hwnd;
 
             information() << "GetCapture " << (iptr)::GetCapture();
+
+         }
+         else
+         {
+
+            information() << "(2) activation window " << (iptr)hwnd;
+
+            information() << "(2) GetCapture " << (iptr)::GetCapture();
 
          }
 

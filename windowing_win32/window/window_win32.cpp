@@ -247,7 +247,7 @@ LRESULT CALLBACK __window_procedure(HWND hwnd, UINT message, WPARAM wparam, LPAR
    else if (message == WM_MOUSEMOVE)
    {
 
-      informationf("WM_MOUSEMOVE");
+      //informationf("WM_MOUSEMOVE");
 
    }
    else if (message == WM_NCMOUSEMOVE)

@@ -3,6 +3,7 @@
 //
 #include "framework.h"
 #include "windowing.h"
+#include "acme/constant/message.h"
 #include "acme/nano/nano.h"
 #include "acme/user/micro/user.h"
 #include "acme/parallelization/manual_reset_event.h"
@@ -132,7 +133,10 @@ namespace win32
 
                       });
 
-            if (!pevent->wait(procedure.timeout()))
+
+            auto timeout = procedure.timeout();
+
+            if (!pevent->wait(timeout))
             {
 
                throw ::exception(error_timeout);
@@ -392,23 +396,54 @@ namespace win32
          }
 
 
+         void windowing::set_finish()
+         {
+
+            if (m_itask)
+            {
+
+               ::PostThreadMessage(m_itask, e_message_quit, 0, 0);
+
+            }
+
+            ::acme::windowing::windowing::set_finish();
+
+         }
+
+
+         void windowing::kick_idle()
+         {
+
+            ::PostThreadMessage(m_itask, e_message_kick_idle, 0, 0);
+
+         }
+
+
          void windowing::windowing_system_post_quit()
          {
 
-            main_post([this]()
+            ::procedure procedure;
+
+            procedure = [this]()
                {
 
                   ::PostQuitMessage(0);
 
-      });
+               };
+
+            main_post(procedure);
 
          }
 
 
          bool windowing::_process_windowing_messages()
          {
+
             if (is_main_thread())
             {
+
+               run_posted_procedures();
+
                if (MsgWaitForMultipleObjects(0, NULL, FALSE, 100, QS_ALLINPUT) == WAIT_OBJECT_0)
                {
                   MSG msg;
@@ -420,6 +455,12 @@ namespace win32
                         return false;
 
                      }
+                     else if (msg.message == e_message_kick_idle)
+                     {
+
+                        return true;
+
+                     }
                      //if (!TranslateAccelerator(msg.hwnd, hAccelTable, &msg))
                      {
                         TranslateMessage(&msg);
@@ -427,7 +468,6 @@ namespace win32
                      }
                   }
                }
-               run_posted_procedures();
 
             }
             return true;
@@ -437,20 +477,37 @@ namespace win32
          void windowing::windowing_system_application_main_loop()
          {
 
+            set_current_handles();
+
+            ::set_main_thread();
+
             system()->defer_post_initial_request();
 
             while (true)
             {
+
                if (!_process_windowing_messages())
                {
+
                   break;
+
                }
+
             }
+
+            if (::acme::get()->m_pmanualreseteventMainLoopEnd)
+            {
+
+               ::acme::get()->m_pmanualreseteventMainLoopEnd->set_event();
+
+            }
+
          }
 
 
          void windowing::_do_tasks()
          {
+
             _process_windowing_messages();
 
          }

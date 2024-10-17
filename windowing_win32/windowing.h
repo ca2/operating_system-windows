@@ -56,6 +56,9 @@ namespace windowing_win32
       virtual bool defer_create_system_window();
       //virtual ::pointer<::user::interaction>create_system_window();
       ::pointer<system_interaction>create_system_window();
+      
+      
+      void kick_idle() override;
 
 
       inline system_interaction * system_interaction() { return m_psysteminteraction; }

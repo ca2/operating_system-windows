@@ -155,6 +155,12 @@ namespace windowing_win32
    }
 
 
+   void windowing::kick_idle()
+   {
+
+      ::win32::acme::windowing::windowing::kick_idle();
+
+   }
 
 
    void windowing::defer_term_ui()
@@ -253,7 +259,9 @@ namespace windowing_win32
       if (!pwindow)
       {
 
-         pwindow = __allocate ::windowing_win32::window();
+         ///pwindow = __allocate ::windowing_win32::window();
+
+         return nullptr;
 
       }
 

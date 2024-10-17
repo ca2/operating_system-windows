@@ -61,6 +61,8 @@ namespace win32
 
             void on_start_system() override;
 
+            void set_finish() override;
+            void kick_idle() override;
 
             void windowing_system_post_quit() override;
 
