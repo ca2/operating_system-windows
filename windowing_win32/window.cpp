@@ -2176,6 +2176,8 @@ namespace windowing_win32
    void window::destroy_window()
    {
 
+      set_destroying_flag();
+
       main_send()
          << [this]()
          {
