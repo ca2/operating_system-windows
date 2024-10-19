@@ -101,6 +101,9 @@ namespace windowing_win32
 
       m_uExtraFlagsSetWindowPos = 0;
 
+      m_uSetWindowPosLastFlags = 0;
+      m_hwndSetWindowPosLastInsertAfter = nullptr;
+
       //set_layer(LAYERED_IMPL, this);
       //m_plongmap  = __new iptr_to_iptr;
 
@@ -377,11 +380,28 @@ namespace windowing_win32
 
       }
 
-      this->windowing()->erase_window(this);
+      auto pacmewindowing = system()->m_pacmewindowing;
+
+      if (pacmewindowing)
+      {
+
+         ::pointer < ::windowing::windowing > pwindowing;
+
+         pwindowing = pacmewindowing;
+
+         if (pwindowing)
+         {
+
+            pwindowing->erase_window(this);
+
+         }
+
+      }
 
       set_hwnd(nullptr);
 
       ::windowing::window::destroy();
+
       ::win32::acme::windowing::window::destroy();
 
    }
@@ -428,7 +448,13 @@ namespace windowing_win32
 
       ::pointer<::user::system> pusersystem;
 
-      if (!m_puserinteraction->is_system_message_window())
+      if (m_puserinteraction->is_system_message_window())
+      {
+
+         pusersystem = __allocate::user::system();
+
+      }
+      else
       {
 
          if (m_puserinteraction->m_pusersystem)
@@ -524,16 +550,34 @@ namespace windowing_win32
 
       wstrWindowName = puserinteraction->m_strWindowText2;
 
-      win32_windowing()->__synthesizes_creates_styles(puserinteraction, dwExStyle, dwStyle);
-
-      pusersystem->m_pwindow = this;
-
-      int x = puserinteraction->const_layout().sketch().origin().x();
-      int y = puserinteraction->const_layout().sketch().origin().y();
-      int cx = puserinteraction->const_layout().sketch().size().cx();
-      int cy = puserinteraction->const_layout().sketch().size().cy();
+      int x = 0;
+      int y = 0;
+      int cx = 0;
+      int cy = 0;
 
       HWND hwndParent = nullptr;
+
+      if (m_puserinteraction->m_bMessageWindow)
+      {
+
+         hwndParent = HWND_MESSAGE;
+         dwExStyle = 0;
+         dwStyle = 0;
+
+      }
+      else
+      {
+       
+         win32_windowing()->__synthesizes_creates_styles(puserinteraction, dwExStyle, dwStyle);
+
+         x = puserinteraction->const_layout().sketch().origin().x();
+         y = puserinteraction->const_layout().sketch().origin().y();
+         cx = puserinteraction->const_layout().sketch().size().cx();
+         cy = puserinteraction->const_layout().sketch().size().cy();
+
+      }
+
+      pusersystem->m_pwindow = this;
 
       HMENU hmenu = nullptr;
 
@@ -541,26 +585,9 @@ namespace windowing_win32
 
       void * lpCreateParams = pusersystem;
 
-      if (puserinteraction->m_bMessageWindow)
-      {
-
-         hwndParent = HWND_MESSAGE;
-         dwExStyle = 0;
-         dwStyle = 0;
-         x = y = cx = cy = 0;
-
-      }
-
       bool bWsChildStyle = dwStyle & WS_CHILD;
 
       DWORD dwLastErrorPreCreateWindow = ::GetLastError();
-
-      if (hwndParent == nullptr || hwndParent == HWND_MESSAGE)
-      {
-
-         //puserinteraction->m_puserinteractionTopLevel = puserinteraction;
-
-      }
 
       auto edisplaySketch = m_puserinteraction->const_layout().sketch().display();
 
@@ -2298,7 +2325,6 @@ namespace windowing_win32
 
       }
 
-
       if (!is_equivalent_in_equivalence_sink(edisplayOutput, edisplayWindow))
       {
 
@@ -2366,6 +2392,17 @@ namespace windowing_win32
       bool bShow = windowing()->is_screen_visible(edisplayOutput) || edisplay == e_display_iconic;
 
       bool bHide = !windowing()->is_screen_visible(edisplayOutput) && edisplay != e_display_iconic;
+
+      ::string strType;
+
+      strType = ::type(m_puserinteraction).name();
+
+      if (strType.contains("list_box"))
+      {
+
+         output_debug_string("list_box");
+
+      }
 
       return __set_window_position(
          zorder, x, y, cx, cy,
@@ -2823,7 +2860,7 @@ namespace windowing_win32
       }
 
 
-      if (eactivation & e_activation_no_activate)
+      if (!(eactivation & e_activation_set_active))
       {
 
          nFlags |= SWP_NOACTIVATE;
@@ -2883,6 +2920,8 @@ namespace windowing_win32
          // very close to UpdateLayeredWindow call.
 
          m_uSetWindowPosLastFlags = nFlags;
+
+         m_hwndSetWindowPosLastInsertAfter = hwndInsertAfter;
 
          return true;
 
@@ -4558,6 +4597,13 @@ namespace windowing_win32
 
    void window::_on_configure_notify_unlocked(const ::rectangle_i32 & rectangle)
    {
+
+      if (has_finishing_flag() || has_destroying_flag())
+      {
+
+         return;
+
+      }
 
       auto p = rectangle.origin();
 

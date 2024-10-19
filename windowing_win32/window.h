@@ -41,6 +41,7 @@ namespace windowing_win32
       ::point_i32                                     m_pointMouseMove;
       ::u32                                           m_uExtraFlagsSetWindowPos;
       ::u32                                           m_uSetWindowPosLastFlags;
+      HWND                                            m_hwndSetWindowPosLastInsertAfter;
 
 
       /// windows::interaction_impl

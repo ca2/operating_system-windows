@@ -12,6 +12,7 @@
 #include "acme/parallelization/mutex.h"
 #include "acme/parallelization/task.h"
 #include "acme/prototype/geometry2d/_text_stream.h"
+#include "acme/user/user/_string.h"
 #include "aura/graphics/draw2d/draw2d.h"
 #include "aura/graphics/image/image.h"
 #include "aura/platform/system.h"
@@ -868,6 +869,41 @@ namespace windowing_win32
                }
 
             }
+            else if (strType.case_insensitive_contains("list_box"))
+            {
+
+               information() << "list_box going to UpdateLayeredWindow";
+
+               bool bVisible = IsWindowVisible(get_hwnd());
+
+               if (bVisible)
+               {
+
+                  information() << "list_box is visible!!";
+
+               }
+               else
+               {
+
+                  information() << "list_box ISN'T visible!!";
+
+               }
+
+               RECT rectangleProbe;
+
+               if (::GetWindowRect(get_hwnd(), &rectangleProbe))
+               {
+
+                  informationf("GetWindowRect (%d, %d) - (%d, %d)", rectangleProbe.left, rectangleProbe.top, rectangleProbe.right, rectangleProbe.bottom);
+
+               }
+
+               auto edisplay = m_pwindow->m_puserinteraction->const_layout().sketch().display();
+
+
+               information() << "list_box display is : " << ::as_string(edisplay.m_eenum);
+
+            }
 
 
             //::pointer < ::windowing_win32::window > pwindow = m_pwindow->m_pwindow;
@@ -1011,22 +1047,66 @@ namespace windowing_win32
                      //}
 
                      bool bDifferent = rectangleWindow != rectangleRequest;
+                     auto hwndInsertAfter = pwindow->m_hwndSetWindowPosLastInsertAfter;
 
-                     if (rectangleWindow != rectangleRequest)
+                     auto pOwner = pwindow->m_puserinteraction->m_puserinteractionOwner;
+                     if (pOwner)
+                     {
+                        auto pwnd = pOwner->get_wnd();
+                        if (pwnd)
+                        {
+
+                           ::pointer <::windowing_win32::window > pwindow2;
+
+                           pwindow2 = pwnd->m_pacmewindowingwindow;
+
+                           if (pwindow2)
+                           {
+                              hwndInsertAfter = pwindow2->m_hwnd;
+                              hwndInsertAfter = HWND_TOPMOST;
+                           }
+
+                        }
+                     }
+
+                     bool bWindowVisible = ::IsWindowVisible(pwindow->m_hwnd) ? true : false;
+
+                     if (rectangleWindow != rectangleRequest
+                        || (hwndInsertAfter == HWND_TOPMOST
+                           && !(::GetWindowLongPtr(pwindow->m_hwnd,
+                              GWL_EXSTYLE) & WS_EX_TOPMOST))
+                        || !is_equivalent(bWindowVisible,
+                           (pwindow->m_uSetWindowPosLastFlags & SWP_SHOWWINDOW)
+                        || !(pwindow->m_uSetWindowPosLastFlags & SWP_HIDEWINDOW)))
                      {
 
                         if (!::IsIconic(hwnd))
                         {
 
                            auto nFlags = pwindow->m_uSetWindowPosLastFlags;
-
                            nFlags &= ~SWP_NOMOVE;
                            nFlags &= ~SWP_NOSIZE;
-                           nFlags |= SWP_NOZORDER;
+                           //nFlags |= SWP_NOZORDER;
+                           if (strType.case_insensitive_contains("list_box"))
+                           {
+
+                              if (nFlags & SWP_SHOWWINDOW)
+                              {
+
+                                 print_line("nFlags & SWP_SHOWWINDOW");
+                              }
+
+                              if (nFlags & SWP_HIDEWINDOW)
+                              {
+
+                                 print_line("nFlags & SWP_HIDEWINDOW");
+                              }
+
+                           }
 
                            ::SetWindowPos(
                               hwnd,
-                              nullptr,
+                              hwndInsertAfter,
                               rectangleRequest.left(),
                               rectangleRequest.top(),
                               rectangleRequest.width(),
@@ -1038,8 +1118,12 @@ namespace windowing_win32
                      }
 
                      //GdiFlush();
+                     if (::IsWindowVisible(pwindow->m_hwnd))
+                     {
 
-                     ::UpdateLayeredWindow(hwnd, m_hdcScreen, (POINT *)&point, (SIZE *)&size, playeredwindowbuffer->m_hdc, (POINT *)&pointSrc, make_u32(0, 0, 0, 0), &blendPixelFunction, ULW_ALPHA);
+                        ::UpdateLayeredWindow(hwnd, m_hdcScreen, (POINT *)&point, (SIZE *)&size, playeredwindowbuffer->m_hdc, (POINT *)&pointSrc, make_u32(0, 0, 0, 0), &blendPixelFunction, ULW_ALPHA);
+
+                     }
 
                      //GdiFlush();
 

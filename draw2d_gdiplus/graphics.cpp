@@ -842,7 +842,7 @@ namespace draw2d_gdiplus
    void graphics::draw_rectangle(const ::rectangle_f64 & rectangleParam, ::draw2d::pen * ppen)
    {
 
-      Gdiplus::Rect rectangle;
+      Gdiplus::RectF rectangle;
 
       copy(rectangle, rectangleParam);
 
