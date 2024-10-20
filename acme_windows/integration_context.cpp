@@ -105,9 +105,9 @@ namespace acme_windows
 
          //   acmefile()->put_contents(path, "2022");
 
-         //   //auto psequencer = message_box("File with Visual Studio version not found : \"" + path + "\"");
+         //   //auto pmessagebox = message_box("File with Visual Studio version not found : \"" + path + "\"");
 
-         //   //psequencer->do_synchronously();
+         //   //pmessagebox->sync();
 
          //   //throw ::exception(error_field_not_found, path);
 
