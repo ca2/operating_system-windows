@@ -124,7 +124,7 @@ namespace acme_windows
 
       //strMutex = strPath + "-::mutex";
 
-      //set_mutex(__new class ::mutex(e_create_new, strMutex, nullptr, false));
+      //set_mutex(___new class ::mutex(e_create_new, strMutex, nullptr, false));
 
       return true;
 

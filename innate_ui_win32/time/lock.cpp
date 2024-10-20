@@ -33,7 +33,7 @@ i32 _c_lock(const char * lpszName, void ** pdata)
    if(hmutex == INVALID_HANDLE_VALUE)
       return 0;
 
-   HANDLE * phandle = __new HANDLE;
+   HANDLE * phandle = ___new HANDLE;
    *phandle = hmutex;
    *pdata = phandle;
 

@@ -90,7 +90,7 @@ int APIENTRY app_chromium_deferred_run(HINSTANCE hInstance,
 //   // SimpleApp implements application-level callbacks for the browser process.
 //   // It will create the first browser instance in OnContextInitialized() after
 //   // CEF has initialized.
-//   CefRefPtr<SimpleApp> app(__new SimpleApp);
+//   CefRefPtr<SimpleApp> app(___new SimpleApp);
 //
 //   // Initialize CEF.
 //   CefInitialize(main_args, settings, app.get(), sandbox_info);

@@ -15,9 +15,9 @@ DWORD_PTR                        g_gdiplusHookToken = NULL;
 CLASS_DECL_ACMEvoid init_gdi_plus()
 {
 
-   g_pgdiplusStartupInput = __new Gdiplus::GdiplusStartupInput();
+   g_pgdiplusStartupInput = ___new Gdiplus::GdiplusStartupInput();
 
-   g_pgdiplusStartupOutput = __new Gdiplus::GdiplusStartupOutput();
+   g_pgdiplusStartupOutput = ___new Gdiplus::GdiplusStartupOutput();
 
    g_gdiplusToken = NULL;
 

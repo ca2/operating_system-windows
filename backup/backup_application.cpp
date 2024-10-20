@@ -41,7 +41,7 @@ namespace backup
       puser->filemanager()->m_strLevelUp = "levelup";
 
 
-      m_pimpactsystemMain = __new ::user::single_document_template(
+      m_pimpactsystemMain = ___new ::user::single_document_template(
       this,
       "production/frame",
       __type(document),

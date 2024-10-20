@@ -64,7 +64,7 @@
 //        may be written to the pipe by specifying this handle value in a
 //        subsequent call to WriteFile.
 //    lpPipeAttributes - An optional parameter that may be used to specify
-//        the attributes of the __new pipe.  If the parameter is not
+//        the attributes of the ___new pipe.  If the parameter is not
 //        specified, then the pipe is created without a security
 //        descriptor, and the resulting handles are not inherited on
 //        process creation.  Otherwise, the optional security attributes

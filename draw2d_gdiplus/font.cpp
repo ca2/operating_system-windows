@@ -7,7 +7,7 @@
 #include "aura/graphics/write_text/fonts.h"
 
 
-//#undef __new
+//#undef ___new
 
 
 namespace draw2d_gdiplus
@@ -201,7 +201,7 @@ namespace draw2d_gdiplus
 
                   ////}
 
-                  ////auto pfont = __new Gdiplus::Font(
+                  ////auto pfont = ___new Gdiplus::Font(
                   ////   wszGetFamilyName,
                   ////   (Gdiplus::REAL)m_dFontSize,
                   ////   iStyle,
@@ -228,7 +228,7 @@ namespace draw2d_gdiplus
                //else
                //{
 
-               //   auto pfont = __new Gdiplus::Font(
+               //   auto pfont = ___new Gdiplus::Font(
                //      &pprivatefont->m_familya.first(),
                //      (Gdiplus::REAL)m_dFontSize,
                //      iStyle,

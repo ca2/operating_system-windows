@@ -245,7 +245,7 @@ static inline unsigned long throttle_::times(unsigned long throttle) {
 }
 
 /*
-  Wrapper to be called in a __new thread so that we can acknowledge a STOP
+  Wrapper to be called in a ___new thread so that we can acknowledge a STOP
   control immediately.
 */
 static unsigned long WINAPI shutdown_service(void *arg) {
@@ -554,7 +554,7 @@ int set_service_description(const TCHAR *service_name, SC_HANDLE service_handle,
   SERVICE_DESCRIPTION description;
   ZeroMemory(&description, sizeof(description));
   /*
-    lpDescription must be nullptr if we aren't changing, the __new description
+    lpDescription must be nullptr if we aren't changing, the ___new description
     or "".
   */
   if (buffer && buffer[0]) description.lpDescription = buffer;
@@ -1520,7 +1520,7 @@ unsigned long WINAPI service_control_handler(unsigned long control, unsigned lon
       log_service_control(service->name, control, true);
       /*
         We MUST acknowledge the stop request promptly but we're committed to
-        waiting for the application to exit.  Spawn a __new thread to wait
+        waiting for the application to exit.  Spawn a ___new thread to wait
         while we acknowledge the request.
       */
       if (! CreateThread(nullptr, 0, shutdown_service, context, 0, nullptr)) {
@@ -1581,7 +1581,7 @@ int start_service(nssm_service_t *service) {
 
   if (service->process_handle) return 0;
 
-  /* Allocate a STARTUPINFO structure for a __new process */
+  /* Allocate a STARTUPINFO structure for a ___new process */
   STARTUPINFO si;
   ZeroMemory(&si, sizeof(si));
   si.cb = sizeof(si);

@@ -74,7 +74,7 @@ namespace hi5
 
       /* Direct messages URLs */
       TWIT_DIRECTMESSAGES_URL("http://twitter.com/direct_messages.xml"),
-      TWIT_DIRECTMESSAGENEW_URL("http://twitter.com/direct_messages/__new.xml"),
+      TWIT_DIRECTMESSAGENEW_URL("http://twitter.com/direct_messages/___new.xml"),
       TWIT_DIRECTMESSAGESSENT_URL("http://twitter.com/direct_messages/sent.xml"),
       TWIT_DIRECTMESSAGEDESTROY_URL("http://twitter.com/direct_messages/destroy/"),
 
@@ -233,7 +233,7 @@ namespace hi5
    /*++
    * @method: facebook::statusUpdate
    *
-   * @description: method to update __new status message in twitter profile
+   * @description: method to update ___new status message in twitter profile
    *
    * @input: newStatus
    *
@@ -246,7 +246,7 @@ namespace hi5
       bool retVal = false;
       if (true && newStatus.has_char())
       {
-         /* Prepare __new status message */
+         /* Prepare ___new status message */
          property_set post;
          post["status"] = newStatus;
 
@@ -548,7 +548,7 @@ namespace hi5
       bool retVal = false;
       if (true && userInfo.get_length() && dMsg.get_length())
       {
-         /* Prepare __new direct message */
+         /* Prepare ___new direct message */
          property_set post;
          post["text"] = dMsg;
 

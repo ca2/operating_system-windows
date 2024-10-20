@@ -442,7 +442,7 @@ FT_BEGIN_HEADER
 #endif
 
 
-  /* The following codes are __new as of 2000-03-10 */
+  /* The following codes are ___new as of 2000-03-10 */
 #define TT_MAC_LANGID_GALICIAN                    140
 #define TT_MAC_LANGID_AFRIKAANS                   141
 #define TT_MAC_LANGID_BRETON                      142
@@ -819,13 +819,13 @@ FT_BEGIN_HEADER
 #define TT_NAME_ID_PREFERRED_SUBFAMILY  17
 #define TT_NAME_ID_MAC_FULL_NAME        18
 
-  /* The following code is __new as of 2000-01-21 */
+  /* The following code is ___new as of 2000-01-21 */
 #define TT_NAME_ID_SAMPLE_TEXT          19
 
-  /* This is __new in OpenType 1.3 */
+  /* This is ___new in OpenType 1.3 */
 #define TT_NAME_ID_CID_FINDFONT_NAME    20
 
-  /* This is __new in OpenType 1.5 */
+  /* This is ___new in OpenType 1.5 */
 #define TT_NAME_ID_WWS_FAMILY           21
 #define TT_NAME_ID_WWS_SUBFAMILY        22
 

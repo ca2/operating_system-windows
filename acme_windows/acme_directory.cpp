@@ -1036,7 +1036,7 @@ bool windows_file_find_is_dots(const WIN32_FIND_DATAW & data)
       //
       //   #endif
       //
-      //      s_pstrCalc = __new string(str);
+      //      s_pstrCalc = ___new string(str);
       //
       //      return *s_pstrCalc;
       //

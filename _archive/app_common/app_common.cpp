@@ -70,7 +70,7 @@ extern "C" i32 app_common_main(HINSTANCE hinstance, HINSTANCE hPrevInstance, LPT
 
    ASSERT(hPrevInstance == nullptr);
 
-   ::windows::command * pmaininitdata    = __new ::windows::command;
+   ::windows::command * pmaininitdata    = ___new ::windows::command;
 
 
    pmaininitdata->m_hInstance                   = hinstance;

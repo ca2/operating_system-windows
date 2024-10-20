@@ -597,7 +597,7 @@ namespace multimedia
 
          m_estatusWave = directsound::translate(m_psoundbuffer->Play(0,0,DSBPLAY_LOOPING));
 
-         //m_prunstepthread = __new run_step_thread(this);
+         //m_prunstepthread = ___new run_step_thread(this);
 
 
          return ::success;

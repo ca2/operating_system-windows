@@ -400,7 +400,7 @@ namespace music
          //   if(s_pmutex == nullptr)
          //   {
 
-         //      s_pmutex = __new ::mutex();
+         //      s_pmutex = ___new ::mutex();
 
          //      // TODO :
          //      // register s_pmutex in Sys(::get_thread_app()).register_static_system_object

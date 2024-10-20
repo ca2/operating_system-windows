@@ -399,7 +399,7 @@ namespace acme_windows
 
             // Compensate for the e_stop_bit_one_point_five enum being equal to int 3,
             // and not 1.5.
-            // Update byte_time_ based on the __new settings.
+            // Update byte_time_ based on the ___new settings.
 
             if (m_estopbit == ::serial::e_stop_bit_one_point_five)
             {

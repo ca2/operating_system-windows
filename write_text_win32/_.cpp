@@ -11,9 +11,9 @@
 //CLASS_DECL_WINDOWING_WIN32 void initialize_gdiplus()
 //{
 //
-//   g_pgdiplusStartupInput = __new Gdiplus::GdiplusStartupInput();
+//   g_pgdiplusStartupInput = ___new Gdiplus::GdiplusStartupInput();
 //
-//   g_pgdiplusStartupOutput = __new Gdiplus::GdiplusStartupOutput();
+//   g_pgdiplusStartupOutput = ___new Gdiplus::GdiplusStartupOutput();
 //
 //   g_gdiplusToken = NULL;
 //

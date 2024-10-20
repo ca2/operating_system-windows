@@ -535,7 +535,7 @@ namespace windowing_win32
 
       //virtual ::user::interaction * get_desktop_window();
 
-      // Obsolete and non-portable APIs - not recommended for __new code
+      // Obsolete and non-portable APIs - not recommended for ___new code
       virtual void CloseWindow();
       virtual bool OpenIcon();
 

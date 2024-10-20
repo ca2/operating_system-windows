@@ -212,7 +212,7 @@ void rotate_file(TCHAR *service_name, TCHAR *path, unsigned long seconds, unsign
     if (info.nFileSizeHigh == high && info.nFileSizeLow < low) return;
   }
 
-  /* Get __new filename. */
+  /* Get ___new filename. */
   FileTimeToSystemTime(&info.ftLastWriteTime, &st);
 
   TCHAR rotated[PATH_LENGTH];
@@ -233,7 +233,7 @@ void rotate_file(TCHAR *service_name, TCHAR *path, unsigned long seconds, unsign
 int get_output_handles(nssm_service_t *service, STARTUPINFO *si) {
   if (! si) return 1;
 
-  /* Allocate a __new console so we get a fresh stdin, stdout and stderr. */
+  /* Allocate a ___new console so we get a fresh stdin, stdout and stderr. */
   alloc_console(service);
 
   /* stdin */
@@ -311,8 +311,8 @@ int get_output_handles(nssm_service_t *service, STARTUPINFO *si) {
   }
 
   /*
-    We need to set the startup_info flags to make the __new handles
-    inheritable by the __new process.
+    We need to set the startup_info flags to make the ___new handles
+    inheritable by the ___new process.
   */
   si->dwFlags |= STARTF_USESTDHANDLES;
 
@@ -434,7 +434,7 @@ complain_write:
   return ret;
 }
 
-/* Wrapper to be called in a __new thread for logging. */
+/* Wrapper to be called in a ___new thread for logging. */
 unsigned long WINAPI log_and_rotate(void *arg) {
   logger_t *logger = (logger_t *) arg;
   if (! logger) return 1;
@@ -534,7 +534,7 @@ unsigned long WINAPI log_and_rotate(void *arg) {
     }
 
     if (! size_i32) {
-      /* Write a BOM to the __new file. */
+      /* Write a BOM to the ___new file. */
       if (! charsize) charsize = guess_charsize(address, in);
       if (charsize == sizeof(wchar_t)) write_bom(logger, &out);
       size += (__int64) out;

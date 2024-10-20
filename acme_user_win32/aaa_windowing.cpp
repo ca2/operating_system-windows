@@ -69,7 +69,7 @@ namespace acme_user_win32
       // gdk_x11 does error handling?!?!?!
       //XSetErrorHandler(_c_XErrorHandler);
 
-      //g_pmutexX11 = __new ::pointer < ::mutex >();
+      //g_pmutexX11 = ___new ::pointer < ::mutex >();
 
       return ::success;
 

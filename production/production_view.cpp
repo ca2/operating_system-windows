@@ -583,7 +583,7 @@ namespace production
 
    production * impact::create_production()
    {
-      production * pclass = __new production(get_application());
+      production * pclass = ___new production(get_application());
       pclass->m_eversion = papplication->m_eversion;
       return pclass;
    }

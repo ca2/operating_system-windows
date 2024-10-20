@@ -1,7 +1,7 @@
 #include "framework.h"
 
 
-#undef __new
+#undef ___new
 
 
 namespace draw2d_gdiplus
@@ -114,7 +114,7 @@ namespace draw2d_gdiplus
       switch(m_eregion)
       {
       case ::draw2d::e_region_none:
-         return __new Gdiplus::Region();
+         return ___new Gdiplus::Region();
       case ::draw2d::e_region_rect:
          return get_rect(pgraphics);
       case ::draw2d::e_region_oval:
@@ -147,7 +147,7 @@ namespace draw2d_gdiplus
 
       path.AddRectangle(rectangle);
 
-      return __new Gdiplus::Region(&path);
+      return ___new Gdiplus::Region(&path);
 
    }
 
@@ -159,7 +159,7 @@ namespace draw2d_gdiplus
 
       path.AddEllipse((INT) m_x1, (INT) m_y1, (INT) (m_x2 - m_x1), (INT) (m_y2 - m_y1));
 
-      return __new Gdiplus::Region(&path);
+      return ___new Gdiplus::Region(&path);
 
    }
 
@@ -187,7 +187,7 @@ namespace draw2d_gdiplus
 
       path.AddPolygon(pa.get_data(), (i32) pa.get_count());
 
-      return __new Gdiplus::Region(&path);
+      return ___new Gdiplus::Region(&path);
 
    }
 
@@ -223,7 +223,7 @@ namespace draw2d_gdiplus
          path.CloseFigure();
       }
 
-      return __new Gdiplus::Region(&path);
+      return ___new Gdiplus::Region(&path);
 
    }
 

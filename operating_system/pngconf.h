@@ -436,7 +436,7 @@
 #  define PNG_NORETURN    /* This function does not return */
 #endif
 #ifndef PNG_ALLOCATED
-#  define PNG_ALLOCATED   /* The result of the function is __new memory */
+#  define PNG_ALLOCATED   /* The result of the function is ___new memory */
 #endif
 #ifndef PNG_PRIVATE
 #  define PNG_PRIVATE     /* This is a private libpng function */

@@ -261,7 +261,7 @@ pacmedir->system() / "config\\system\\audio.txt");
 //{
 //
 //
-//   ::comm::command * pmaininitdata = __new ::windows::command;
+//   ::comm::command * pmaininitdata = ___new ::windows::command;
 //
 //
 //   pmaininitdata->m_hInstance = hInstance;

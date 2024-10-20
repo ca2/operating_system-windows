@@ -327,5 +327,5 @@ install:
 
 ::hotplugin::plugin * new_hotplugin()
 {
-   return __new ::npca2::plugin();
+   return ___new ::npca2::plugin();
 }

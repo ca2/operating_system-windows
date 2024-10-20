@@ -568,11 +568,11 @@ pacmedir->system() / "config/plugin/appfy_beg_debug_box.txt"))
    }
 
 
-#undef __new
+#undef ___new
 void init_exception_engine(class ::exception_engine * pexceptionengine)
 {
 
-   __new(pexceptionengine) class ::OPERATING_SYSTEM_NAMESPACE::exception_engine;
+   ___new(pexceptionengine) class ::OPERATING_SYSTEM_NAMESPACE::exception_engine;
 
 }
 
@@ -585,7 +585,7 @@ void init_exception_engine(class ::exception_engine * pexceptionengine)
 //::aura::application * get_acid_app()
 //{
 //
-//   return __new ::appfy::application();
+//   return ___new ::appfy::application();
 //
 //}
 

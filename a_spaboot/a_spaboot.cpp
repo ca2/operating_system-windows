@@ -88,8 +88,8 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
       &numargs,
       &numchars);
 
-   wchar_t * pszCmdLine = __new WCHAR[numchars];
-   wchar_t ** argv = __new WCHAR*[numargs];
+   wchar_t * pszCmdLine = ___new WCHAR[numchars];
+   wchar_t ** argv = ___new WCHAR*[numargs];
 
    wparse_cmdline(
       lpwstr, 

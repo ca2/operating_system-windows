@@ -324,7 +324,7 @@ int bzuncompress_dup(LPCTSTR lpcszUncompressed, LPCTSTR lpcszGzFileCompressed)
    int g_iGzUncompressLen = 1024 * 256;
    if(g_pchGzUncompressBuffer == nullptr)
    {
-       g_pchGzUncompressBuffer = __new char[g_iGzUncompressLen];
+       g_pchGzUncompressBuffer = ___new char[g_iGzUncompressLen];
    }
    BZFILE * file = BZ2_bzopen(lpcszGzFileCompressed, "rb");
    if (file == nullptr)
@@ -383,7 +383,7 @@ bool read_resource_as_file(
                        GENERIC_WRITE,          // open for writing
                        0,                      // do not share
                        nullptr,                   // default security
-                       CREATE_ALWAYS,             // create __new file only
+                       CREATE_ALWAYS,             // create ___new file only
                        FILE_ATTRIBUTE_NORMAL,  // normal file
                        nullptr);  
       DWORD dwLastError = ::GetLastError();

@@ -577,7 +577,7 @@ namespace windowing_win32
    }
 
 
-#undef __new
+#undef ___new
 
    bool copydesk::_has_image()
    {

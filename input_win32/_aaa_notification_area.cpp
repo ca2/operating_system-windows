@@ -200,7 +200,7 @@ namespace windowing_win32
          //lv.mask = LVIF_IMAGE;
          //lv.iImage = iconindex;
 
-         m_infoa.add(__new TrayItemInfo(info));
+         m_infoa.add(___new TrayItemInfo(info));
          //i32 index = GetListCtrl().InsertItem(&lv);
          //GetListCtrl().set_item_text(index,1,info.sTip);
          //GetListCtrl().set_item_text(index,2,info.sProcessPath);

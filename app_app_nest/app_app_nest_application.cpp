@@ -105,7 +105,7 @@ namespace ca2plugin_container
    ::hotplugin::host * application::create_host()
    {
 
-      m_phost = __new host(this);
+      m_phost = ___new host(this);
 
       m_phost->::aura::application::m_psession = m_psession;
 

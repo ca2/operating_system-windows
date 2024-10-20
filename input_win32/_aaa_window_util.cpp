@@ -426,7 +426,7 @@ namespace windows
       for (i32 i = 0; i < hwnda.get_size(); i++)
       {
          hwndtree.m_hwnd = hwnda[i];
-         add(__new hwnd_tree(hwndtree));
+         add(___new hwnd_tree(hwndtree));
       }
       return *this;
    }

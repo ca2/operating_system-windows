@@ -3,7 +3,7 @@
 #include "brush.h"
 
 
-//#undef __new
+//#undef ___new
 
 
 namespace draw2d_gdiplus

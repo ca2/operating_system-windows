@@ -199,7 +199,7 @@
 
 
 
-//#undef __new
+//#undef ___new
 
 
 //void* operator new(const size_t, void* p) noexcept;

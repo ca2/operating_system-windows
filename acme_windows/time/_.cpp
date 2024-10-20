@@ -11,10 +11,10 @@
 
 // #endif
 
-#undef __new
+#undef ___new
 #include "gdiplus.h"
 #include <ddeml.h>
-#define __new ACME_NEW
+#define ___new ACME_NEW
 
 
 void __term_threading();

@@ -81,7 +81,7 @@ public:
    itemidlist & operator=(const ::string & strPath);
    itemidlist & operator=(const itemidlist & pidl);
    itemidlist & operator=(LPCITEMIDLIST pidl);
-   itemidlist & operator/=(const itemidlist & ciidl);//Add a __new pidl to tail.
+   itemidlist & operator/=(const itemidlist & ciidl);//Add a ___new pidl to tail.
    itemidlist & operator-=(int i);//erase i Count items from tail.
    itemidlist operator -(int i) const;//erase i Count items from tail.
    bool operator==(const itemidlist & ciidl) const;

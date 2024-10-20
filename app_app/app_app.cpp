@@ -4,6 +4,6 @@
 ::aura::application * get_acid_app(::particle * pparticle)
 {
 
-   return __new ::install::application();
+   return ___new ::install::application();
 
 }

@@ -1,7 +1,7 @@
 #include "framework.h"
 
 
-#undef __new
+#undef ___new
 
 
 bool almost_integer(double d)
@@ -348,13 +348,13 @@ namespace draw2d_gdiplus
       if(m_efillmode == ::draw2d::e_fill_mode_winding)
       {
 
-         m_ppath = __new Gdiplus::GraphicsPath(Gdiplus::FillModeWinding);
+         m_ppath = ___new Gdiplus::GraphicsPath(Gdiplus::FillModeWinding);
 
       }
       else
       {
 
-         m_ppath = __new Gdiplus::GraphicsPath(Gdiplus::FillModeAlternate);
+         m_ppath = ___new Gdiplus::GraphicsPath(Gdiplus::FillModeAlternate);
 
       }
 
