@@ -33,7 +33,7 @@ namespace audio_mixer_mmsystem
    void department::destroy()
    {
 
-      start_destroying_window();
+      destroy_window();
 
 
       //return true;

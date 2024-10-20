@@ -3,6 +3,7 @@
 #include "interaction.h"
 #include "device.h"
 #include "destination.h"
+#include "aura/user/user/interaction_thread.h"
 
 
 //namespace multimedia
@@ -29,7 +30,7 @@
          if(m_pinteraction->is_window())
          {
 
-            m_pinteraction->start_destroying_window();
+            m_pinteraction->destroy_window();
 
          }
 
