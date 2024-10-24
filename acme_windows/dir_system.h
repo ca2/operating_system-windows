@@ -1,20 +1,20 @@
 #pragma once
 
 
-#include "acme/filesystem/filesystem/dir_system.h"
+#include "acme/filesystem/filesystem/directory_system.h"
 
 
 namespace acme_windows
 {
 
 
-   class CLASS_DECL_ACME_WINDOWS dir_system:
-      virtual public ::dir_system
+   class CLASS_DECL_ACME_WINDOWS directory_system:
+      virtual public ::directory_system
    {
    public:
 
 
-      //__creatable_from_base(dir_system, ::dir_system);
+      //__creatable_from_base(directory_system, ::directory_system);
 
 
       ::file::path            m_strTimeFolder;
@@ -26,8 +26,8 @@ namespace acme_windows
       ::file::path            m_strCommonPrograms;
 
 
-      dir_system();
-      virtual ~dir_system();
+      directory_system();
+      virtual ~directory_system();
       
       
       virtual void initialize(::particle * pparticle) override;

@@ -4,7 +4,7 @@
 #include "acme_windows_common/mutex.h"
 #include "acme_windows_common/node.h"
 #include "acme/exception/exception.h"
-#include "acme/filesystem/filesystem/acme_directory.h"
+#include "acme/filesystem/filesystem/directory_system.h"
 #include "acme/platform/node.h"
 #include "acme/platform/system.h"
 #include "acme/prototype/prototype/object.h"
@@ -72,7 +72,7 @@ namespace acme_windows
    //      if(strId.case_insensitive_begins("Local\\"))
    //      {
    //
-   //         path = pparticle->acmedirectory()->home() / ".config/acme";
+   //         path = pparticle->directory_system()->home() / ".config/acme";
    //
    //      }
    //      else
@@ -84,7 +84,7 @@ namespace acme_windows
    //
    //      path /= strId;
    //
-   //      acmedirectory()->create(path.folder());
+   //      directory_system()->create(path.folder());
    //
    //      m_iFile = open(path, O_WRONLY | O_CREAT, 0777);
    //

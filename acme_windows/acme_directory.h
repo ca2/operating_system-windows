@@ -2,7 +2,7 @@
 #pragma once
 
 
-#include "acme_windows_common/acme_directory.h"
+#include "acme_windows_common/directory_system.h"
 #include "acme/_operating_system.h"
 
 
@@ -10,14 +10,14 @@ namespace acme_windows
 {
 
 
-   class CLASS_DECL_ACME_WINDOWS acme_directory :
-      virtual public ::acme_windows_common::acme_directory
+   class CLASS_DECL_ACME_WINDOWS directory_system :
+      virtual public ::acme_windows_common::directory_system
    {
    public:
 
 
-      acme_directory();
-      ~acme_directory() override;
+      directory_system();
+      ~directory_system() override;
 
 
       ::file::path install() override;
@@ -81,7 +81,7 @@ namespace acme_windows
 
 
 // From acme/filesystem/file/dir.cpp by camilo 
-// From acme_posix/acme_directory.h
+// From acme_posix/directory_system.h
 // on 2021-08-09 03:20 BRT
 // <3ThomasBorregaardSorensen!!
 
@@ -90,14 +90,14 @@ namespace acme_windows
 // {
 
 
-// class CLASS_DECL_ACME_POSIX acme_directory :
-// virtual public ::acme_directory
+// class CLASS_DECL_ACME_POSIX directory_system :
+// virtual public ::directory_system
 // {
 
 // public:
 
-// acme_directory();
-// ~acme_directory() override;
+// directory_system();
+// ~directory_system() override;
 
       //virtual string name(const char * path1) override;
 

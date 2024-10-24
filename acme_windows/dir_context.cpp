@@ -1,6 +1,6 @@
 #include "framework.h"
-#include "dir_context.h"
-#include "dir_system.h"
+#include "directory_context.h"
+#include "directory_system.h"
 #include "file_system.h"
 #include "acme_windows/file_find.h"
 #include "acme_windows/registry.h"
@@ -9,9 +9,9 @@
 #include "acme/prototype/string/str.h"
 #include "acme/platform/application.h"
 #include "acme/platform/system.h"
-#include "acme/filesystem/filesystem/acme_directory.h"
+#include "acme/filesystem/filesystem/directory_system.h"
 #include "acme/filesystem/filesystem/listing.h"
-#include "acme_windows/acme_directory.h"
+#include "acme_windows/directory_system.h"
 
 
 #include "acme/_operating_system.h"
@@ -24,20 +24,20 @@ namespace acme_windows
 {
 
 
-   dir_context::dir_context()
+   directory_context::directory_context()
    {
 
 
    }
 
 
-   dir_context::~dir_context()
+   directory_context::~directory_context()
    {
 
    }
 
 
-   void dir_context::initialize(::particle * pparticle)
+   void directory_context::initialize(::particle * pparticle)
    {
 
       //auto estatus = 
@@ -65,12 +65,12 @@ namespace acme_windows
    }
 
 
-   void dir_context::init_system()
+   void directory_context::init_system()
    {
 
       //auto estatus = 
       
-      ::dir_context::init_system();
+      ::directory_context::init_system();
 
       //if (!estatus)
       //{
@@ -116,12 +116,12 @@ namespace acme_windows
    }
 
 
-   void dir_context::term_system()
+   void directory_context::term_system()
    {
 
       //auto estatus = 
 
-      ::dir_context::term_system();
+      ::directory_context::term_system();
 
       //if (!estatus)
       //{
@@ -167,14 +167,14 @@ namespace acme_windows
    }
 
 
-   void dir_context::finalize()
+   void directory_context::finalize()
    {
 
       m_pfilesystem.release();
 
       m_pdirsystem.release();
 
-      ::dir_context::finalize();
+      ::directory_context::finalize();
 
    }
 
@@ -189,7 +189,7 @@ namespace acme_windows
 
 
 
-   //string dir_context::path(const ::string & pszFolder, strsize iLenFolder, const ::string & pszRelative, strsize iLenRelative, const ::string & psz2, strsize iLen2, bool bUrl)
+   //string directory_context::path(const ::string & pszFolder, strsize iLenFolder, const ::string & pszRelative, strsize iLenRelative, const ::string & psz2, strsize iLen2, bool bUrl)
    //{
 
    //   bool bEmptyRelative = iLenRelative == 0 || pszRelative == nullptr || *pszRelative == '\0';
@@ -329,7 +329,7 @@ namespace acme_windows
    //   return strPath;
    //}
 
-   //string dir_context::relpath(const string & pcszSource,const string & lpcszRelative)
+   //string directory_context::relpath(const string & pcszSource,const string & lpcszRelative)
 
    //{
    //   const scoped_string & strRequest;
@@ -371,7 +371,7 @@ namespace acme_windows
    //}
 
 
-   //string dir_context::relpath(const string & pcszSource, const string & lpcszRelative, const string & psz2)
+   //string directory_context::relpath(const string & pcszSource, const string & lpcszRelative, const string & psz2)
 
    //{
    //   const scoped_string & strRequest;
@@ -413,7 +413,7 @@ namespace acme_windows
    //}
 
 
-   ::file::listing & dir_context::root_ones(::file::listing & listing)
+   ::file::listing & directory_context::root_ones(::file::listing & listing)
    {
 
       listing.fix_flag();
@@ -466,17 +466,17 @@ namespace acme_windows
    }
 
 
-   bool dir_context::enumerate(::file::listing & listing)
+   bool directory_context::enumerate(::file::listing & listing)
    {
 
-      if (::dir_context::enumerate(listing))
+      if (::directory_context::enumerate(listing))
       {
 
          return true;
 
       }
 
-      return acmedirectory()->enumerate(listing);
+      return directory_system()->enumerate(listing);
 
       //   index iStart = listing.get_size();
 
@@ -495,16 +495,16 @@ namespace acme_windows
       //      for (i32 i = 0; i < dira.get_count(); i++)
       //      {
 
-      //         ::file::path dir_context = dira[i];
+      //         ::file::path directory_context = dira[i];
 
-      //         if (dir_context == listing.m_pathUser)
+      //         if (directory_context == listing.m_pathUser)
       //         {
 
       //            continue;
 
       //         }
 
-      //         listing.m_pathUser = dir_context;
+      //         listing.m_pathUser = directory_context;
 
       //         if (listing.m_eextract != e_extract_all)
       //         {
@@ -639,10 +639,10 @@ namespace acme_windows
    }
 
 
-   //bool dir_context::ls_relative_name(::file::listing & listing)
+   //bool directory_context::ls_relative_name(::file::listing & listing)
    //{
 
-   //   if (::dir_context::ls_relative_name(listing))
+   //   if (::directory_context::ls_relative_name(listing))
    //   {
 
    //      return true;
@@ -672,16 +672,16 @@ namespace acme_windows
    //         for (i32 i = 0; i < dira.get_count(); i++)
    //         {
 
-   //            ::file::path dir_context = dira[i];
+   //            ::file::path directory_context = dira[i];
 
-   //            if (dir_context == listing.m_pathUser)
+   //            if (directory_context == listing.m_pathUser)
    //            {
 
    //               continue;
 
    //            }
 
-   //            listing.m_pathUser = dir_context;
+   //            listing.m_pathUser = directory_context;
 
    //            if (listing.m_eextract != e_extract_all)
    //            {
@@ -806,10 +806,10 @@ namespace acme_windows
    //}
 
 
-   //bool dir_context::is_impl(const ::file::path & pcszPath)
+   //bool directory_context::is_impl(const ::file::path & pcszPath)
    //{
 
-   //   if (::dir_context::is_impl(pcszPath))
+   //   if (::directory_context::is_impl(pcszPath))
 
    //   {
 
@@ -828,7 +828,7 @@ namespace acme_windows
    //}
 
 
-   bool dir_context::name_is(const ::file::path & str)
+   bool directory_context::name_is(const ::file::path & str)
    {
 
       strsize iLast = str.length() - 1;
@@ -886,7 +886,7 @@ namespace acme_windows
    }
 
 
-   ::file::path dir_context::time()
+   ::file::path directory_context::time()
    {
       
       return m_pdirsystem->m_strTimeFolder;
@@ -894,7 +894,7 @@ namespace acme_windows
    }
 
 
-   ::file::path dir_context::stage()
+   ::file::path directory_context::stage()
    {
    
       return install() / "stage";
@@ -902,7 +902,7 @@ namespace acme_windows
    }
 
    
-   ::file::path dir_context::stageapp()
+   ::file::path directory_context::stageapp()
    {
 
       return install() / "basis";
@@ -910,7 +910,7 @@ namespace acme_windows
    }
 
    
-   ::file::path dir_context::netseed()
+   ::file::path directory_context::netseed()
    {
 
       return m_pdirsystem->m_strNetSeedFolder;
@@ -918,7 +918,7 @@ namespace acme_windows
    }
 
 
-   ::file::path dir_context::module()
+   ::file::path directory_context::module()
    {
 
       //::pointer<::apex::system>psystem = system();
@@ -932,7 +932,7 @@ namespace acme_windows
    }
 
 
-   //::file::path dir_context::ca2module()
+   //::file::path directory_context::ca2module()
    //{
 
    //   ::pointer<::apex::system>psystem = system();
@@ -942,7 +942,7 @@ namespace acme_windows
    //}
 
 
-   ::file::path dir_context::time_square(const ::string & strPrefix, const ::string & strSuffix)
+   ::file::path directory_context::time_square(const ::string & strPrefix, const ::string & strSuffix)
    {
 
       __UNREFERENCED_PARAMETER(strPrefix);
@@ -952,7 +952,7 @@ namespace acme_windows
    }
 
 
-   ::file::path dir_context::time_log()
+   ::file::path directory_context::time_log()
    {
 
       return appdata() / "log";
@@ -960,10 +960,10 @@ namespace acme_windows
    }
 
 
-   //void dir_context::create(const ::file::path & path)
+   //void directory_context::create(const ::file::path & path)
    //{
 
-   //   acmedirectory()->create(path);
+   //   directory_system()->create(path);
 
    //   //}
    //   //catch (...)
@@ -1015,12 +1015,12 @@ namespace acme_windows
    //   //   try
    //   //   {
 
-   //   //      acmedirectory()->create_directory(strDir)
+   //   //      directory_system()->create_directory(strDir)
 
    //   //   }
    //   //   catch(...)
 
-   //   //   //if (acmedirectory()->create_directory(strDir))
+   //   //   //if (directory_system()->create_directory(strDir))
    //   //   {
 
    //   //      //            m_isdirmap.set(strDir, true, 0);
@@ -1063,7 +1063,7 @@ namespace acme_windows
 
    //   //         }
 
-   //   //         if (acmedirectory()->create_directory(strDir))
+   //   //         if (directory_system()->create_directory(strDir))
    //   //         {
 
    //   //            //                  m_isdirmap.set(strDir, true, 0);
@@ -1080,7 +1080,7 @@ namespace acme_windows
 
    //   //         FormatMessageW(FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_SYSTEM, nullptr, dwError, 0, (WCHAR *) &pwszError, 8, nullptr);
 
-   //   //         //informationf("dir_context::mk CreateDirectoryW last error(%d)=%s", dwError, pszError);
+   //   //         //informationf("directory_context::mk CreateDirectoryW last error(%d)=%s", dwError, pszError);
 
    //   //         ::LocalFree(pwszError);
 
@@ -1099,7 +1099,7 @@ namespace acme_windows
    //}
 
 
-   //void dir_context::rm(const ::file::path & path, bool bRecursive)
+   //void directory_context::rm(const ::file::path & path, bool bRecursive)
    //{
 
    //   if (bRecursive)
@@ -1134,7 +1134,7 @@ namespace acme_windows
    //}
 
 
-   //::file::path dir_context::name(const ::file::path & path1)
+   //::file::path directory_context::name(const ::file::path & path1)
    //{
    //   const scoped_string & str = path1 + strlen(path1) - 1;
    //   while(psz >= path1)
@@ -1166,7 +1166,7 @@ namespace acme_windows
    //   }
    //}
 
-   ::file::path dir_context::name(const ::file::path & str)
+   ::file::path directory_context::name(const ::file::path & str)
    {
 
       strsize iLast = str.length() - 1;
@@ -1201,7 +1201,7 @@ namespace acme_windows
 
 
 
-   ::file::path dir_context::trash_that_is_not_trash(const ::file::path & psz)
+   ::file::path directory_context::trash_that_is_not_trash(const ::file::path & psz)
    {
       if (psz.is_empty())
          return "";
@@ -1231,15 +1231,15 @@ namespace acme_windows
       return "";
    }
 
-   ::file::path dir_context::appdata()
+   ::file::path directory_context::appdata()
    {
 
-      return ::dir_context::appdata();
+      return ::directory_context::appdata();
 
    }
 
 
-   ::file::path dir_context::commonappdata_root()
+   ::file::path directory_context::commonappdata_root()
    {
 
       return m_pdirsystem->m_strCommonAppData;
@@ -1247,7 +1247,7 @@ namespace acme_windows
    }
 
 
-   ::file::path dir_context::userquicklaunch()
+   ::file::path directory_context::userquicklaunch()
    {
 
       return m_pdirsystem->m_strAppData / "Microsoft\\Internet Explorer\\Quick Launch";
@@ -1255,7 +1255,7 @@ namespace acme_windows
    }
 
 
-   ::file::path dir_context::userprograms()
+   ::file::path directory_context::userprograms()
    {
 
       return m_pdirsystem->m_strPrograms;
@@ -1263,7 +1263,7 @@ namespace acme_windows
    }
 
 
-   ::file::path dir_context::commonprograms()
+   ::file::path directory_context::commonprograms()
    {
 
       return m_pdirsystem->m_strCommonPrograms;
@@ -1271,7 +1271,7 @@ namespace acme_windows
    }
 
 
-   bool dir_context::is_inside_time(const ::file::path & pszPath)
+   bool directory_context::is_inside_time(const ::file::path & pszPath)
    {
 
       return is_inside(time(), pszPath);
@@ -1279,7 +1279,7 @@ namespace acme_windows
    }
 
 
-   bool dir_context::is_inside(const ::file::path & pszDir, const ::file::path & pszPath)
+   bool directory_context::is_inside(const ::file::path & pszDir, const ::file::path & pszPath)
    {
 
       return pszDir.case_insensitive_begins(pszPath);
@@ -1287,7 +1287,7 @@ namespace acme_windows
    }
 
 
-   bool dir_context::has_subdir(const ::file::path & pszDir)
+   bool directory_context::has_subdir(const ::file::path & pszDir)
    {
 
       ::acme_windows::file_find file_find;
@@ -1357,12 +1357,12 @@ namespace acme_windows
    //   return true;
    //}
 
-   ::file::path dir_context::document()
+   ::file::path directory_context::document()
    {
 
       ::file::path path;
 
-      acmedirectory()->m_pplatformdir->_shell_get_special_folder_path(
+      directory_system()->m_pplatformdir->_shell_get_special_folder_path(
          nullptr,
          path,
          CSIDL_MYDOCUMENTS,
@@ -1372,12 +1372,12 @@ namespace acme_windows
 
    }
 
-   ::file::path dir_context::desktop()
+   ::file::path directory_context::desktop()
    {
 
       ::file::path path;
 
-      acmedirectory()->m_pplatformdir->_shell_get_special_folder_path(
+      directory_system()->m_pplatformdir->_shell_get_special_folder_path(
          nullptr,
          path,
          CSIDL_DESKTOP,
@@ -1387,23 +1387,23 @@ namespace acme_windows
 
    }
 
-   ::file::path dir_context::download()
+   ::file::path directory_context::download()
    {
 
       ::file::path path;
 
-      path = acmedirectory()->m_pplatformdir->_get_known_folder(FOLDERID_Downloads);
+      path = directory_system()->m_pplatformdir->_get_known_folder(FOLDERID_Downloads);
 
       return path;
 
    }
 
-   ::file::path dir_context::music()
+   ::file::path directory_context::music()
    {
 
       ::file::path path;
 
-      acmedirectory()->m_pplatformdir->_shell_get_special_folder_path(
+      directory_system()->m_pplatformdir->_shell_get_special_folder_path(
          nullptr,
          path,
          CSIDL_MYMUSIC,
@@ -1414,12 +1414,12 @@ namespace acme_windows
    }
 
 
-   ::file::path dir_context::video()
+   ::file::path directory_context::video()
    {
 
       ::file::path path;
 
-      acmedirectory()->m_pplatformdir->_shell_get_special_folder_path(
+      directory_system()->m_pplatformdir->_shell_get_special_folder_path(
          nullptr,
          path,
          CSIDL_MYVIDEO,
@@ -1430,12 +1430,12 @@ namespace acme_windows
    }
 
 
-   ::file::path dir_context::image()
+   ::file::path directory_context::image()
    {
 
       ::file::path path;
 
-      acmedirectory()->m_pplatformdir->_shell_get_special_folder_path(
+      directory_system()->m_pplatformdir->_shell_get_special_folder_path(
          nullptr,
          path,
          CSIDL_MYPICTURES,
@@ -1446,7 +1446,7 @@ namespace acme_windows
    }
 
 
-   ::file::path dir_context::onedrive()
+   ::file::path directory_context::onedrive()
    {
 
       ::acme_windows::registry::key key;
@@ -1484,7 +1484,7 @@ namespace acme_windows
    }
 
 
-   ::file::path dir_context::dropbox_client()
+   ::file::path directory_context::dropbox_client()
    {
 
       ::acme_windows::registry::key key;

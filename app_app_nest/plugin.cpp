@@ -102,7 +102,7 @@ namespace npca2
          if(pnode == nullptr)
             goto install;
          lpnodeInstalled->RemoveChild(pnode);
-         acmefile()->put_contents(dir::appdata("spa_install.xml"), node.GetXML(nullptr));
+         file_system()->put_contents(dir::appdata("spa_install.xml"), node.GetXML(nullptr));
       }
 install:
 

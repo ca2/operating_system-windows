@@ -3,8 +3,8 @@
 #include "integration_context.h"
 #include "acme_windows/registry.h"
 #include "node.h"
-#include "acme/filesystem/filesystem/acme_directory.h"
-#include "acme/filesystem/filesystem/acme_file.h"
+#include "acme/filesystem/filesystem/directory_system.h"
+#include "acme/filesystem/filesystem/file_system.h"
 //#include "acme/filesystem/filesystem/file_context.h"
 #include "acme/operating_system/process.h"
 #include "acme/parallelization/synchronous_lock.h"
@@ -55,7 +55,7 @@ namespace acme_windows
 
          ::string strOperatingSystem(scopedstrOperatingSystem);
 
-         //if (acmedirectory()->is("C:\\operating_system"))
+         //if (directory_system()->is("C:\\operating_system"))
          {
 
             m_pathOperatingSystemIncludeFolder = m_pathFolder / ("operating_system-" + strOperatingSystem);
@@ -66,11 +66,11 @@ namespace acme_windows
 
             auto pathOperatingSystemStorageFolder = m_pathOperatingSystemStorageFolder / m_strPlatform / m_strConfiguration;
 
-            acmedirectory()->create(pathOperatingSystemIncludeFolder / "include");
+            directory_system()->create(pathOperatingSystemIncludeFolder / "include");
 
-            acmedirectory()->create(pathOperatingSystemStorageFolder / "binary");
+            directory_system()->create(pathOperatingSystemStorageFolder / "binary");
 
-            acmedirectory()->create(pathOperatingSystemStorageFolder / "library");
+            directory_system()->create(pathOperatingSystemStorageFolder / "library");
 
             //m_pathFolder = "C:\\port\\";
 
@@ -86,24 +86,24 @@ namespace acme_windows
 
          ::integration::context::prepare_compile_and_link_environment();
 
-         //auto pacmedirectory = acmedirectory();
+         //auto pacmedirectory = directory_system();
 
-         //acmedirectory()->create(pacmedirectory->system() / "netnode_desktop/symbols");
+         //directory_system()->create(pacmedirectory->system() / "netnode_desktop/symbols");
 
          ::file::path strVars;
 
 #ifdef WINDOWS_DESKTOP
 
-         auto pacmedirectory = acmedirectory();
+         auto pacmedirectory = directory_system();
 
          //::file::path path;
 
          //path = pacmedirectory->config() / "programming/vs.txt";
 
-         //if (!acmefile()->exists(path))
+         //if (!file_system()->exists(path))
          //{
 
-         //   acmefile()->put_contents(path, "2022");
+         //   file_system()->put_contents(path, "2022");
 
          //   //auto pmessagebox = message_box("File with Visual Studio version not found : \"" + path + "\"");
 
@@ -115,7 +115,7 @@ namespace acme_windows
 
          //auto pcontext = m_papplication;
 
-         //m_strVs = acmefile()->as_string(path);
+         //m_strVs = file_system()->as_string(path);
 
          m_strVs = "2022";
 
@@ -348,15 +348,15 @@ namespace acme_windows
 
          //::file::path pathEnvTxt;
 
-         auto pacmedirectory = acmedirectory();
+         auto pacmedirectory = directory_system();
 
          string strRel = prepare_path(m_pathFolder / m_pathBase / m_pathPlatformConfiguration);
 
          //pathEnvTxt = pacmedirectory->system() / strRel / "env.txt";
 
-         //acmefile()->put_contents(pacmedirectory->system() / strRel / "env1.bat", pacmedirectory->system() / strRel / "env.bat > \"" + pathEnvTxt + "\"");
+         //file_system()->put_contents(pacmedirectory->system() / strRel / "env1.bat", pacmedirectory->system() / strRel / "env.bat > \"" + pathEnvTxt + "\"");
 
-         //acmefile()->put_contents(pacmedirectory->system() / strRel / "env.bat", "@call " + strBuildCmd + "\r\n@set");
+         //file_system()->put_contents(pacmedirectory->system() / strRel / "env.bat", "@call " + strBuildCmd + "\r\n@set");
 
          auto psystem = system();
 
@@ -408,7 +408,7 @@ namespace acme_windows
          straOut.trim();
          straOut.erase_empty();
 
-         //strLog = acmefile()->as_string(pacmedirectory->system() / strRel / "env.txt");
+         //strLog = file_system()->as_string(pacmedirectory->system() / strRel / "env.txt");
 
          //stra.add_lines(strLog);
 
@@ -492,7 +492,7 @@ namespace acme_windows
 #endif
 
          //   ::file::path strFolder;
-         //   strFolder = dir()->install();
+         //   strFolder = directory()->install();
          //   if (!string_ends(strFolder, "/") && !string_ends(strFolder, "\\"))
          //      strFolder += "/";
          //   string strTemplate;
@@ -519,7 +519,7 @@ namespace acme_windows
          //   str.replace("%VS_VARS%", m_strContext);
          //   str.replace("%VS_VARS_PLAT2%", m_strPlat2);
          //
-         //   string strV(dir()->install());
+         //   string strV(directory()->install());
          //   strV.replace("\\", "/");
          //   if (!string_ends(strV, "/") && !string_ends(strV, "\\"))
          //      strV += "/";
@@ -534,10 +534,10 @@ namespace acme_windows
          //   //#else
          //   // strCmd = strFolder, "app\\time-" OPERATING_SYSTEM_NAME"\\aura\\account\\app\\main\\front\\dynamic_source_cl.bat", false);
          //   //#endif
-         //   dir()->create(strCmd.folder());
+         //   directory()->create(strCmd.folder());
          //   //file()->put_text_utf8(strCmd, str);
          //   file()->put_contents(strCmd, str);
-         //   dir()->create(m_strTime / "dynamic_source");
+         //   directory()->create(m_strTime / "dynamic_source");
          //
          //
          //   string strBuildCmd = m_strContext;
@@ -547,7 +547,7 @@ namespace acme_windows
          //   ::process::process_pointer process(e_create);
          //
          //
-         //   acmefile()->put_contents(pacmedirectory->system() / "env.bat","@call " + strBuildCmd + " "+m_strVCVersion+"\r\n@set");
+         //   file_system()->put_contents(pacmedirectory->system() / "env.bat","@call " + strBuildCmd + " "+m_strVCVersion+"\r\n@set");
          //
          //   set_thread_priority(::e_priority_highest);
          //   process->prop("inherit") = false;
@@ -671,14 +671,14 @@ namespace acme_windows
          //
          //stra.add_lines(strLog);
 
-         //string strEnv = acmefile()->as_string(         auto psystem = system();
+         //string strEnv = file_system()->as_string(         auto psystem = system();
 
       //         auto pacmedirectory = psystem->m_pacmedirectory;
       //
       //pacmedirectory->system() / "env.txt");
 
          //::file::path strFolder;
-         //strFolder = dir()->install();
+         //strFolder = directory()->install();
          //if (!string_ends(strFolder, "/") && !string_ends(strFolder, "\\"))
          //   strFolder += "/";
          //string strTemplate;
@@ -703,7 +703,7 @@ namespace acme_windows
          //str.find_replace("%VS_VARS%", m_strContext);
          //str.find_replace("%VS_VARS_PLAT2%", m_strPlat2);
 
-         //string strV(dir()->install());
+         //string strV(directory()->install());
          //strV.find_replace("\\", "/");
          //if (!string_ends(strV, "/") && !string_ends(strV, "\\"))
          //   strV += "/";
@@ -720,10 +720,10 @@ namespace acme_windows
          ////#else
          //// strCmd = strFolder, "app\\_stage\\aura\\account\\app\\main\\front\\dynamic_source_cl.bat", false);
          ////#endif
-         //dir()->create(strCmd.folder());
+         //directory()->create(strCmd.folder());
          ////file()->put_text_utf8(strCmd, str);
          //file()->put_text(strCmd, str);
-         //dir()->create(m_strTime / "dynamic_source");
+         //directory()->create(m_strTime / "dynamic_source");
 
 
       }
@@ -856,7 +856,7 @@ namespace acme_windows
 
          ::string strCommand;
 
-         printf("Current Directory: %s\n", acmedirectory()->get_current().c_str());
+         printf("Current Directory: %s\n", directory_system()->get_current().c_str());
 
          printf("%s\n", strEscaped.c_str());
 
@@ -899,7 +899,7 @@ namespace acme_windows
 
          ::string strCommand;
 
-         printf("Current Directory: %s\n", acmedirectory()->get_current().c_str());
+         printf("Current Directory: %s\n", directory_system()->get_current().c_str());
 
          printf("%s\n", strEscaped.c_str());
          strEscaped.find_replace("\"", "\\\"");
@@ -922,7 +922,7 @@ namespace acme_windows
 
          ::string strCommand;
 
-         printf("Current Directory: %s\n", acmedirectory()->get_current().c_str());
+         printf("Current Directory: %s\n", directory_system()->get_current().c_str());
          printf("%s\n", strEscaped.c_str());
 
          if (m_bMsys2)
@@ -971,7 +971,7 @@ namespace acme_windows
 
       //   m_listingBuild.set_pattern_folder_listing(pathHostIntegrationFolder);
 
-      //   acmedirectory()->enumerate(m_listingBuild);
+      //   directory_system()->enumerate(m_listingBuild);
 
       //}
 
@@ -1004,7 +1004,7 @@ namespace acme_windows
 
          auto pathMsys2 = this->msys2();
 
-         if (!acmedirectory()->is(pathMsys2))
+         if (!directory_system()->is(pathMsys2))
          {
 
             ::string strMessage;
@@ -1028,7 +1028,7 @@ namespace acme_windows
 
             ::string strCommand;
 
-            informationf("Current Directory: %s\n", acmedirectory()->get_current().c_str());
+            informationf("Current Directory: %s\n", directory_system()->get_current().c_str());
             informationf("%s\n", strEscaped.c_str());
 
             if (m_bMsys2)

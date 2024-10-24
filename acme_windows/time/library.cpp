@@ -43,7 +43,7 @@ void * __node_library_open(const scoped_string & strPath, string & strMessage)
 
    }
 
-   if (strPath.find('.') < 0 || !acmefile()->exists(strPath))
+   if (strPath.find('.') < 0 || !file_system()->exists(strPath))
    {
 
       strPath += ".dll";

@@ -212,10 +212,10 @@ namespace apex
 
       string str;
 
-      if (acmefile()->exists(::dir::system() / "config\\system\\audio.txt"))
+      if (file_system()->exists(::dir::system() / "config\\system\\audio.txt"))
       {
 
-         str = acmefile()->as_string(::dir::system() / "config\\system\\audio.txt");
+         str = file_system()->as_string(::dir::system() / "config\\system\\audio.txt");
 
       }
       else
@@ -225,7 +225,7 @@ namespace apex
 
          strPath = ::dir::appdata() / "audio.txt";
 
-         str = acmefile()->as_string(strPath);
+         str = file_system()->as_string(strPath);
 
       }
 

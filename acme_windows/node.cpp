@@ -1,8 +1,8 @@
 #include "framework.h"
 #undef USUAL_OPERATING_SYSTEM_SUPPRESSIONS
 #include "node.h"
-#include "acme_directory.h"
-#include "acme_file.h"
+#include "directory_system.h"
+#include "file_system.h"
 #include "registry.h"
 #include "process.h"
 #include "exclusive.h"
@@ -11,9 +11,9 @@
 #include "file_link.h"
 #include "acme/exception/exception.h"
 #include "acme/exception/status.h"
-#include "acme/filesystem/filesystem/acme_directory.h"
+#include "acme/filesystem/filesystem/directory_system.h"
 #include "acme/filesystem/filesystem/file_context.h"
-#include "acme/filesystem/filesystem/dir_context.h"
+#include "acme/filesystem/filesystem/directory_context.h"
 //#include "acme/filesystem/filesystem/folder_dialog.h"
 #include "acme/operating_system/process.h"
 #include "acme/operating_system/summary.h"
@@ -307,7 +307,7 @@ namespace acme_windows
    ::file::path node::get_default_base_integration_folder()
    {
 
-      return acmedirectory()->system_drive() / "integration" / "_____";
+      return directory_system()->system_drive() / "integration" / "_____";
 
    }
 
@@ -637,7 +637,7 @@ namespace acme_windows
    //         
    //      //#else
    //      //
-   //      //   strPathDll = acmedirectory()->matter() / "time" / process_platform_name() /"stage/_desk_tb.dll";
+   //      //   strPathDll = directory_system()->matter() / "time" / process_platform_name() /"stage/_desk_tb.dll";
    //      //
    //      //#endif
    //         
@@ -828,10 +828,10 @@ namespace acme_windows
    //
    //      string str;
    //
-   //      if (acmefile()->exists(acmedirectory()->system() / "config\\system\\audio.txt"))
+   //      if (file_system()->exists(directory_system()->system() / "config\\system\\audio.txt"))
    //      {
    //
-   //         str = acmefile()->as_string(acmedirectory()->system() / "config\\system\\audio.txt");
+   //         str = file_system()->as_string(directory_system()->system() / "config\\system\\audio.txt");
    //
    //      }
    //      else
@@ -839,9 +839,9 @@ namespace acme_windows
    //
    //         ::file::path strPath;
    //
-   //         strPath = acmedirectory()->appdata() / "audio.txt";
+   //         strPath = directory_system()->appdata() / "audio.txt";
    //
-   //         str = acmefile()->as_string(strPath);
+   //         str = file_system()->as_string(strPath);
    //
    //      }
    //
@@ -866,7 +866,7 @@ namespace acme_windows
 
       if (k._open(HKEY_LOCAL_MACHINE, strKey, true))
       {
-         ::file::path str = acmedirectory()->system() / "CrashDumps" / strModuleNameWithTheExeExtension;
+         ::file::path str = directory_system()->system() / "CrashDumps" / strModuleNameWithTheExeExtension;
          wstring wstr = str;
          RegSetValueExW(k.m_hkeySub, L"DumpFolder", 0, REG_EXPAND_SZ, (::u8*)wstr.c_str(), ::u32((wcslen(wstr) + 1) * sizeof(wchar_t)));
          ::u32 dw = 10;
@@ -889,7 +889,7 @@ namespace acme_windows
    //      if (g_iMemoryCountersStartable && g_iMemoryCounters < 0)
    //      {
    //
-   //         g_iMemoryCounters = xxxxfile_exists(acmedirectory()->config() / "system/memory_counters.txt") ? 1 : 0;
+   //         g_iMemoryCounters = xxxxfile_exists(directory_system()->config() / "system/memory_counters.txt") ? 1 : 0;
    //
    //         if (g_iMemoryCounters)
    //         {
@@ -918,13 +918,13 @@ namespace acme_windows
    //
    //#if defined(UNIVERSAL_WINDOWS)
    //
-   //         string strBasePath = acmedirectory()->system() / "memory_counters";
+   //         string strBasePath = directory_system()->system() / "memory_counters";
    //
    //#else
    //
    //         ::file::path strModule = module_path_from_pid(getpid());
    //
-   //         string strBasePath = acmedirectory()->system() / "memory_counters" / strModule.title() / ::as_string(getpid());
+   //         string strBasePath = directory_system()->system() / "memory_counters" / strModule.title() / ::as_string(getpid());
    //
    //#endif
    //
@@ -2360,7 +2360,7 @@ namespace acme_windows
       wstring desc = L"spafile";          // file type description
       wstring content_type = L"application/x-spa";
 
-      wstring app(acmedirectory()->stage(strAppIdHandler, process_platform_name(), process_configuration_name()));
+      wstring app(directory_system()->stage(strAppIdHandler, process_platform_name(), process_configuration_name()));
 
       wstring icon(app);
 
@@ -2407,16 +2407,16 @@ namespace acme_windows
       RegSetValueExW(hkey, L"", 0, REG_SZ, (::u8*)icon.c_str(), ::u32(icon.length() * sizeof(wchar_t)));
       RegCloseKey(hkey);
 
-      ::file::path pathFile(acmedirectory()->stage(strAppIdHandler, process_platform_name(), process_configuration_name()) / "spa_register.txt");
+      ::file::path pathFile(directory_system()->stage(strAppIdHandler, process_platform_name(), process_configuration_name()) / "spa_register.txt");
 
       int iRetry = 9;
 
-      while (!acmefile()->exists(pathFile) && iRetry > 0)
+      while (!file_system()->exists(pathFile) && iRetry > 0)
       {
 
-         acmedirectory()->create(pathFile.folder());
+         directory_system()->create(pathFile.folder());
 
-         acmefile()->put_contents(pathFile, "");
+         file_system()->put_contents(pathFile, "");
 
          iRetry--;
 
@@ -2438,9 +2438,9 @@ namespace acme_windows
 
       SHELLEXECUTEINFOW sei = {};
 
-      string str = acmedirectory()->app_app_admin(strPlatform, strConfiguration);
+      string str = directory_system()->app_app_admin(strPlatform, strConfiguration);
 
-      if (!acmefile()->exists(str))
+      if (!file_system()->exists(str))
       {
 
          throw ::exception(error_failed);
@@ -3287,7 +3287,7 @@ namespace acme_windows
 
       strOutput.trim();
 
-      if (!acmefile()->exists(strOutput))
+      if (!file_system()->exists(strOutput))
       {
 
          return false;
@@ -3309,7 +3309,7 @@ namespace acme_windows
 
          //::string strCommand;
 
-         //informationf("Current Directory: %s\n", acmedirectory()->get_current().c_str());
+         //informationf("Current Directory: %s\n", directory_system()->get_current().c_str());
          //informationf("%s\n", strEscaped.c_str());
 
          ////if (m_bMsys)
@@ -3466,7 +3466,7 @@ namespace acme_windows
 
    //   ::file::path pathCurrentDirectory;
 
-   //   pathCurrentDirectory = acmedirectory()->get_current();
+   //   pathCurrentDirectory = directory_system()->get_current();
 
    //   auto windowspathCurrentDirectory = pathCurrentDirectory.windows_path();
 
@@ -4260,7 +4260,7 @@ namespace acme_windows
    bool node::_is_msys2_installed()
    {
 
-      if (!acmedirectory()->is("C:/msys64"))
+      if (!directory_system()->is("C:/msys64"))
       {
 
          return false;
@@ -4366,7 +4366,7 @@ namespace acme_windows
    bool node::_is_strawberry_perl_installed()
    {
 
-      if (!acmefile()->exists("C:/Strawberry/perl/bin/perl.exe"))
+      if (!file_system()->exists("C:/Strawberry/perl/bin/perl.exe"))
       {
 
          return false;
@@ -4544,7 +4544,7 @@ namespace acme_windows
 
    //   CoInitialize(NULL);
 
-   //   acmedirectory()->create(pszFolder);
+   //   directory_system()->create(pszFolder);
 
 
    //   {
@@ -4825,7 +4825,7 @@ namespace acme_windows
 
          strPath.pair_trim_quotes();
 
-         if (strPath.is_empty() || !acmefile()->exists(strPath))
+         if (strPath.is_empty() || !file_system()->exists(strPath))
          {
 
             return false;
@@ -4863,7 +4863,7 @@ namespace acme_windows
 
          strPath.pair_trim_quotes();
 
-         if (strPath.is_empty() || !acmefile()->exists(strPath))
+         if (strPath.is_empty() || !file_system()->exists(strPath))
          {
 
             return false;
@@ -4889,11 +4889,11 @@ namespace acme_windows
       try
       {
 
-         auto pathHome = acmedirectory()->home();
+         auto pathHome = directory_system()->home();
 
          auto pathVsLnk = pathHome / "AppData/Roaming/Microsoft/Windows/Start Menu/Programs/Visual Studio Code/Visual Studio Code.lnk";
 
-         if (!acmefile()->exists(pathVsLnk))
+         if (!file_system()->exists(pathVsLnk))
          {
 
             return false;
@@ -4906,7 +4906,7 @@ namespace acme_windows
 
          auto pathTarget = plink->m_pathTarget;
 
-         if (!acmefile()->exists(pathTarget))
+         if (!file_system()->exists(pathTarget))
          {
 
             return false;

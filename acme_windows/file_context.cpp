@@ -1,14 +1,14 @@
 #include "framework.h"
 #include "file_context.h"
-#include "dir_system.h"
+#include "directory_system.h"
 #include "file_system.h"
 #include "node.h"
 #include "acme/exception/exception.h"
 #include "acme/filesystem/file/exception.h"
 #include "acme/filesystem/file/memory_file.h"
 #include "acme/filesystem/file/status.h"
-#include "acme/filesystem/filesystem/acme_directory.h"
-#include "acme/filesystem/filesystem/dir_context.h"
+#include "acme/filesystem/filesystem/directory_system.h"
+#include "acme/filesystem/filesystem/directory_context.h"
 
 #include "acme/platform/debug.h"
 #include "acme/prototype/prototype/payload.h"
@@ -735,7 +735,7 @@ namespace acme_windows
 
       ::file::path pathNetworkPayload;
 
-      pathNetworkPayload = acmedirectory()->user_appdata_local() / "Dropbox/info" NETWORK_PAYLOAD_DEFAULT_EXTENSION;
+      pathNetworkPayload = directory_system()->user_appdata_local() / "Dropbox/info" NETWORK_PAYLOAD_DEFAULT_EXTENSION;
 
       return pathNetworkPayload;
 
@@ -745,9 +745,9 @@ namespace acme_windows
    ::file::path file_context::dropbox_client()
    {
 
-      auto pathClientFolder = dir()->dropbox_client();
+      auto pathClientFolder = directory()->dropbox_client();
 
-      if (pathClientFolder.is_empty() || !dir()->is(pathClientFolder))
+      if (pathClientFolder.is_empty() || !directory()->is(pathClientFolder))
       {
 
          return {};

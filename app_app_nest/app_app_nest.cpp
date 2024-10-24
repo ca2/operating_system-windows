@@ -102,7 +102,7 @@ i32 __win_main(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmdLine, i
    }
 
 
-   //if(acmefile()->exists("C:\\ca2\\config\\plugin\\npca2_beg_debug_box.txt"))
+   //if(file_system()->exists("C:\\ca2\\config\\plugin\\npca2_beg_debug_box.txt"))
    //{
 
    //   debug_box("app_app_nest boxmain NP_Initialize","app_app_nest box",MB_OK);
@@ -122,7 +122,7 @@ i32 __win_main(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmdLine, i
 
    }
 
-   if (acmefile()->exists("C:\\ca2\\config\\system\\beg_debug_box.txt"))
+   if (file_system()->exists("C:\\ca2\\config\\system\\beg_debug_box.txt"))
    {
 
       debug_box("app_app_nest", "app_app_nest", MB_OK);

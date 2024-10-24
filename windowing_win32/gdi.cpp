@@ -1,7 +1,7 @@
 #include "framework.h"
 #undef USUAL_OPERATING_SYSTEM_SUPPRESSIONS
 #include "windowing.h"
-#include "acme/filesystem/filesystem/dir_context.h"
+#include "acme/filesystem/filesystem/directory_context.h"
 #include "apex/platform/context.h"
 #include "aura/graphics/image/image.h"
 
@@ -269,7 +269,7 @@ namespace windowing_win32
 
          path = strMatter;
 
-         path = dir()->matter(path / strIcon);
+         path = directory()->matter(path / strIcon);
 
          path = pcontext->get_matter_cache_path(path);
 

@@ -1,8 +1,8 @@
 // From acme/filesystem/file/_.cpp by camilo on 2021-08-09 
 // 03:09 BRT <3ThomasBorregaardSorensen
 #include "framework.h"
-#include "acme_file.h"
-#include "acme_path.h"
+#include "file_system.h"
+#include "path_system.h"
 #include "acme/exception/exception.h"
 
 #include "acme/prototype/datetime/earth_time.h"
@@ -13,20 +13,20 @@ namespace acme_windows
 {
 
 
-   acme_file::acme_file()
+   file_system::file_system()
    {
 
    }
 
 
-   acme_file::~acme_file()
+   file_system::~file_system()
    {
 
 
    }
 
 
-   //::file::path acme_file::module()
+   //::file::path file_system::module()
    //{
 
    //   ::file::path path;
@@ -55,10 +55,10 @@ namespace acme_windows
    //}
 
 
-   class ::time acme_file::modification_time(const ::file::path & pathParam)
+   class ::time file_system::modification_time(const ::file::path & pathParam)
    {
 
-      auto path = acmepath()->defer_process_relative_path(pathParam);
+      auto path = path_system()->defer_process_relative_path(pathParam);
 
       ::windows::file_instance fileinstance;
 
@@ -67,7 +67,7 @@ namespace acme_windows
 
          DWORD dwLastError = ::GetLastError();
 
-         throw_last_error_exception(path, ::file::e_open_read, dwLastError, "acme_windows::acme_file::modification_time safe_create_file failed");
+         throw_last_error_exception(path, ::file::e_open_read, dwLastError, "acme_windows::file_system::modification_time safe_create_file failed");
 
       }
 
@@ -80,10 +80,10 @@ namespace acme_windows
    }
 
 
-   void acme_file::set_modification_time(const ::file::path & pathParam, const class ::time & time)
+   void file_system::set_modification_time(const ::file::path & pathParam, const class ::time & time)
    {
 
-      auto path = acmepath()->defer_process_relative_path(pathParam);
+      auto path = path_system()->defer_process_relative_path(pathParam);
 
       ::windows::file_instance fileinstance;
 
@@ -92,7 +92,7 @@ namespace acme_windows
 
          DWORD dwLastError = ::GetLastError();
 
-         throw_last_error_exception(path, ::file::e_open_write, dwLastError, "acme_windows::acme_file::set_modification_time safe_create_file failed");
+         throw_last_error_exception(path, ::file::e_open_write, dwLastError, "acme_windows::file_system::set_modification_time safe_create_file failed");
 
       }
 
@@ -103,7 +103,7 @@ namespace acme_windows
    }
 
 
-   ::file::path acme_file::time_put_contents(const ::file::path& pathFolder, const ::string& strPrefix, const ::string& strExtension, const ::string& str)
+   ::file::path file_system::time_put_contents(const ::file::path& pathFolder, const ::string& strPrefix, const ::string& strExtension, const ::string& str)
    {
 
       ::file::path path;
@@ -139,17 +139,17 @@ namespace acme_windows
    }
 
 
-   void acme_file::_erase(const ::file::path & pathParam)
+   void file_system::_erase(const ::file::path & pathParam)
    {
 
-      auto path = acmepath()->defer_process_relative_path(pathParam);
+      auto path = path_system()->defer_process_relative_path(pathParam);
 
       ::delete_file(path);
 
    }
 
 
-   string acme_file::get_temporary_file_name(const scoped_string & scopedstrName, const scoped_string & scopedstrExtension)
+   string file_system::get_temporary_file_name(const scoped_string & scopedstrName, const scoped_string & scopedstrExtension)
    {
 
 #ifdef WINDOWS
@@ -210,7 +210,7 @@ namespace acme_windows
    }
 
 
-//   void acme_file::write_memory_to_file(FILE * file, const void * pdata, memsize nCount, memsize * puiWritten)
+//   void file_system::write_memory_to_file(FILE * file, const void * pdata, memsize nCount, memsize * puiWritten)
 //   {
 //
 //#if OSBIT > 32

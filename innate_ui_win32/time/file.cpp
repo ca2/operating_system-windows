@@ -71,7 +71,7 @@ pacmedir->create(::file_path_folder(pszFile));
 }
 
 
-int_bool acmefile()->exists(const char * path1)
+int_bool file_system()->exists(const char * path1)
 {
 
    u32 dwFileAttributes = windows_get_file_attributes(path1);
@@ -88,7 +88,7 @@ int_bool acmefile()->exists(const char * path1)
 }
 
 
-int_bool acmefile()->put_contents(const char * path, const char * contents, memsize len)
+int_bool file_system()->put_contents(const char * path, const char * contents, memsize len)
 {
 
             auto psystem = system();

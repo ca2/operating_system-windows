@@ -41,10 +41,10 @@
 void ([a-z0-9_]+)_factory(::factory::factory * pfactory)
 {
 
-   add_factory_item < ::windows::dir_system, ::dir_system >();
+   add_factory_item < ::windows::directory_system, ::directory_system >();
    add_factory_item < ::windows::file_system, ::file_system >();
 
-   add_factory_item < ::windows::dir_context, ::dir_context >();
+   add_factory_item < ::windows::directory_context, ::directory_context >();
    add_factory_item < ::windows::file_context, ::file_context >();
 
    //add_factory_item < ::windows::stdio_file, ::file::text_file >();

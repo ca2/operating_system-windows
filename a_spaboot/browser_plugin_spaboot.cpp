@@ -23,7 +23,7 @@ extern std::string get_starter_version();
 int bzuncompress_dup(LPCTSTR lpcszUncompressed, LPCTSTR lpcszGzFileCompressed);
 bool read_resource_as_file(const ::string & pszFile, HINSTANCE hinst, UINT nID, LPCTSTR lpcszType);
 std::string get_temp_file_name_dup(const ::string & pszName, const ::string & pszExtension);
-bool acmefile()->exists(const ::string & path1);
+bool file_system()->exists(const ::string & path1);
 
 
 
@@ -159,7 +159,7 @@ int APIENTRY ca2_cube_install(const ::string & pszId)
 
 
 
-bool acmefile()->exists(const ::string & path1)
+bool file_system()->exists(const ::string & path1)
 {
    DWORD dwFileAttributes = ::GetFileAttributes(path1);
    if(dwFileAttributes != INVALID_FILE_ATTRIBUTES &&
@@ -433,7 +433,7 @@ std::string get_temp_file_name_dup(const ::string & pszName, const ::string & ps
       str += buf;
       str += ".";
       str += pszExtension;
-      if(acmefile()->exists(str.c_str()))
+      if(file_system()->exists(str.c_str()))
       {
          if(::DeleteFileA(str.c_str()))
             return str;
@@ -446,7 +446,7 @@ std::string get_temp_file_name_dup(const ::string & pszName, const ::string & ps
    return "";
 }
 
-bool acmefile()->exists(const ::string & path1)
+bool file_system()->exists(const ::string & path1)
 {
    DWORD dwFileAttributes = ::GetFileAttributes(path1);
    if(dwFileAttributes != INVALID_FILE_ATTRIBUTES &&

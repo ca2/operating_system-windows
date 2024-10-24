@@ -1,6 +1,6 @@
 #include "framework.h"
 #include "file_memory_map.h"
-#include "acme_directory.h"
+#include "directory_system.h"
 #include "acme/parallelization/synchronous_lock.h"
 
 
@@ -56,7 +56,7 @@ namespace acme_windows
 
          ::windows_path windowspathFolder = strWindowsPathFolder;
 
-         acmedirectory()->create(windowspathFolder);
+         directory_system()->create(windowspathFolder);
 
          int iOpen;
 

@@ -3,7 +3,7 @@
 #include "acme/constant/message_prototype.h"
 #include "acme/constant/timer.h"
 #include "acme/exception/exception.h"
-#include "acme/filesystem/filesystem/dir_context.h"
+#include "acme/filesystem/filesystem/directory_context.h"
 #include "aura/message/timer.h"
 #include "aura/message/user.h"
 #include "aura/user/user/system.h"
@@ -530,7 +530,7 @@ wstring windowing::_windows_calc_icon_window_class(::user::interaction * puserin
 
    pathIcon = pathFolder / "icon.ico";
 
-   string strPath = dir()->matter(pathIcon);
+   string strPath = directory()->matter(pathIcon);
 
    HICON hIcon = (HICON) ::LoadImageW(nullptr, wstring(pcontext->get_matter_path(strPath)), IMAGE_ICON, 256, 256, LR_LOADFROMFILE);
 

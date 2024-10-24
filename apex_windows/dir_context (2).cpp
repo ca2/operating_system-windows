@@ -8,20 +8,20 @@ namespace windows
 {
 
 
-   dir_context::dir_context()
+   directory_context::directory_context()
    {
 
 
    }
 
 
-   dir_context::~dir_context()
+   directory_context::~directory_context()
    {
 
    }
 
 
-   void dir_context::initialize(::context_object * pcontextobject)
+   void directory_context::initialize(::context_object * pcontextobject)
    {
 
       auto estatus = ::object::initialize(pcontextobject);
@@ -46,10 +46,10 @@ namespace windows
    }
 
 
-   void dir_context::init_system()
+   void directory_context::init_system()
    {
 
-      auto estatus = ::dir_context::init_system();
+      auto estatus = ::directory_context::init_system();
 
       if (!estatus)
       {
@@ -105,7 +105,7 @@ namespace windows
 
 
 
-   //string dir_context::path(const ::string & pszFolder, strsize iLenFolder, const ::string & pszRelative, strsize iLenRelative, const ::string & psz2, strsize iLen2, bool bUrl)
+   //string directory_context::path(const ::string & pszFolder, strsize iLenFolder, const ::string & pszRelative, strsize iLenRelative, const ::string & psz2, strsize iLen2, bool bUrl)
    //{
 
    //   bool bEmptyRelative = iLenRelative == 0 || pszRelative == nullptr || *pszRelative == '\0';
@@ -245,7 +245,7 @@ namespace windows
    //   return strPath;
    //}
 
-   //string dir_context::relpath(const string & pcszSource,const string & lpcszRelative)
+   //string directory_context::relpath(const string & pcszSource,const string & lpcszRelative)
 
    //{
    //   const scoped_string & strRequest;
@@ -287,7 +287,7 @@ namespace windows
    //}
 
 
-   //string dir_context::relpath(const string & pcszSource, const string & lpcszRelative, const string & psz2)
+   //string directory_context::relpath(const string & pcszSource, const string & lpcszRelative, const string & psz2)
 
    //{
    //   const scoped_string & strRequest;
@@ -328,7 +328,7 @@ namespace windows
    //   }
    //}
 
-   ::file::listing & dir_context::root_ones(::file::listing & listing)
+   ::file::listing & directory_context::root_ones(::file::listing & listing)
    {
 
       ::u32 dwSize = ::GetLogicalDriveStringsW(0, nullptr);
@@ -379,7 +379,7 @@ namespace windows
 
 
 
-   ::file::listing & dir_context::ls(::file::listing & listing)
+   ::file::listing & directory_context::ls(::file::listing & listing)
    {
 
       if (listing.m_bRecursive)
@@ -397,7 +397,7 @@ namespace windows
 
             __scoped_restore(listing.m_eextract);
 
-            if (::dir_context::ls(listing).succeeded())
+            if (::directory_context::ls(listing).succeeded())
             {
 
                listing.m_statusresult = ::error_failed;
@@ -415,12 +415,12 @@ namespace windows
             for (i32 i = 0; i < dira.get_count(); i++)
             {
 
-               ::file::path dir_context = dira[i];
+               ::file::path directory_context = dira[i];
 
-               if (dir_context == listing.m_pathUser)
+               if (directory_context == listing.m_pathUser)
                   continue;
 
-               listing.m_pathUser = dir_context;
+               listing.m_pathUser = directory_context;
 
                if (listing.m_eextract != e_extract_all)
                {
@@ -489,7 +489,7 @@ namespace windows
       else
       {
 
-         if (::dir_context::ls(listing).succeeded())
+         if (::directory_context::ls(listing).succeeded())
          {
 
             return listing;
@@ -564,7 +564,7 @@ namespace windows
    }
 
 
-   ::file::listing & dir_context::ls_relative_name(::file::listing & listing)
+   ::file::listing & directory_context::ls_relative_name(::file::listing & listing)
    {
 
 
@@ -583,7 +583,7 @@ namespace windows
 
             __scoped_restore(listing.m_eextract);
 
-            if (::dir_context::ls(listing).succeeded())
+            if (::directory_context::ls(listing).succeeded())
             {
 
                listing.m_statusresult = ::error_failed;
@@ -600,16 +600,16 @@ namespace windows
             for (i32 i = 0; i < dira.get_count(); i++)
             {
 
-               ::file::path dir_context = dira[i];
+               ::file::path directory_context = dira[i];
 
-               if (dir_context == listing.m_pathUser)
+               if (directory_context == listing.m_pathUser)
                {
 
                   continue;
 
                }
 
-               listing.m_pathUser = dir_context;
+               listing.m_pathUser = directory_context;
 
                if (listing.m_eextract != e_extract_all)
                {
@@ -678,7 +678,7 @@ namespace windows
       else
       {
 
-         if (::dir_context::ls(listing).succeeded())
+         if (::directory_context::ls(listing).succeeded())
          {
 
             return listing;
@@ -741,11 +741,11 @@ namespace windows
    }
 
 
-   bool dir_context::is_impl(const ::file::path & pcszPath)
+   bool directory_context::is_impl(const ::file::path & pcszPath)
 
    {
 
-      if (::dir_context::is_impl(pcszPath))
+      if (::directory_context::is_impl(pcszPath))
 
       {
 
@@ -764,7 +764,7 @@ namespace windows
    }
 
 
-   bool dir_context::name_is(const ::file::path & str)
+   bool directory_context::name_is(const ::file::path & str)
    {
 
       strsize iLast = str.length() - 1;
@@ -822,7 +822,7 @@ namespace windows
    }
 
 
-   ::file::path dir_context::time()
+   ::file::path directory_context::time()
    {
       
       return m_pdirsystem->m_strTimeFolder;
@@ -830,7 +830,7 @@ namespace windows
    }
 
 
-   ::file::path dir_context::stage()
+   ::file::path directory_context::stage()
    {
    
       return install() / "stage";
@@ -838,7 +838,7 @@ namespace windows
    }
 
    
-   ::file::path dir_context::stageapp()
+   ::file::path directory_context::stageapp()
    {
 
       return install() / "basis";
@@ -846,7 +846,7 @@ namespace windows
    }
 
    
-   ::file::path dir_context::netseed()
+   ::file::path directory_context::netseed()
    {
 
       return m_pdirsystem->m_strNetSeedFolder;
@@ -854,7 +854,7 @@ namespace windows
    }
 
 
-   ::file::path dir_context::module()
+   ::file::path directory_context::module()
    {
 
       ::pointer<::apex::system>psystem = system();
@@ -864,7 +864,7 @@ namespace windows
    }
 
 
-   ::file::path dir_context::ca2module()
+   ::file::path directory_context::ca2module()
    {
 
       ::pointer<::apex::system>psystem = system();
@@ -874,7 +874,7 @@ namespace windows
    }
 
 
-   ::file::path dir_context::time_square(const ::string & strPrefix, const ::string & strSuffix)
+   ::file::path directory_context::time_square(const ::string & strPrefix, const ::string & strSuffix)
    {
 
       __UNREFERENCED_PARAMETER(strPrefix);
@@ -884,14 +884,14 @@ namespace windows
    }
 
 
-   ::file::path dir_context::time_log()
+   ::file::path directory_context::time_log()
    {
 
       return appdata() / "log";
 
    }
 
-   bool dir_context::mk(const ::file::path & path)
+   bool directory_context::mk(const ::file::path & path)
    {
 
       if (is(path))
@@ -996,7 +996,7 @@ namespace windows
 
                FormatMessageW(FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_SYSTEM, nullptr, dwError, 0, (WCHAR *) &pwszError, 8, nullptr);
 
-               //informationf("dir_context::mk CreateDirectoryW last error(%d)=%s", dwError, pszError);
+               //informationf("directory_context::mk CreateDirectoryW last error(%d)=%s", dwError, pszError);
 
                ::LocalFree(pwszError);
 
@@ -1015,7 +1015,7 @@ namespace windows
    }
 
 
-   bool dir_context::rm(const ::file::path & path, bool bRecursive)
+   bool directory_context::rm(const ::file::path & path, bool bRecursive)
    {
 
       if (bRecursive)
@@ -1050,7 +1050,7 @@ namespace windows
    }
 
 
-   //::file::path dir_context::name(const ::file::path & path1)
+   //::file::path directory_context::name(const ::file::path & path1)
    //{
    //   const scoped_string & str = path1 + strlen(path1) - 1;
    //   while(psz >= path1)
@@ -1082,7 +1082,7 @@ namespace windows
    //   }
    //}
 
-   ::file::path dir_context::name(const ::file::path & str)
+   ::file::path directory_context::name(const ::file::path & str)
    {
 
       strsize iLast = str.length() - 1;
@@ -1117,7 +1117,7 @@ namespace windows
 
 
 
-   ::file::path dir_context::trash_that_is_not_trash(const ::file::path & psz)
+   ::file::path directory_context::trash_that_is_not_trash(const ::file::path & psz)
    {
       if (psz.is_empty())
          return "";
@@ -1147,15 +1147,15 @@ namespace windows
       return "";
    }
 
-   ::file::path dir_context::appdata()
+   ::file::path directory_context::appdata()
    {
 
-      return ::dir_context::appdata();
+      return ::directory_context::appdata();
 
    }
 
 
-   ::file::path dir_context::commonappdata_root()
+   ::file::path directory_context::commonappdata_root()
    {
 
       return m_pdirsystem->m_strCommonAppData;
@@ -1163,7 +1163,7 @@ namespace windows
    }
 
 
-   ::file::path dir_context::userquicklaunch()
+   ::file::path directory_context::userquicklaunch()
    {
 
       return m_pdirsystem->m_strAppData / "Microsoft\\Internet Explorer\\Quick Launch";
@@ -1171,7 +1171,7 @@ namespace windows
    }
 
 
-   ::file::path dir_context::userprograms()
+   ::file::path directory_context::userprograms()
    {
 
       return m_pdirsystem->m_strPrograms;
@@ -1179,7 +1179,7 @@ namespace windows
    }
 
 
-   ::file::path dir_context::commonprograms()
+   ::file::path directory_context::commonprograms()
    {
 
       return m_pdirsystem->m_strCommonPrograms;
@@ -1187,7 +1187,7 @@ namespace windows
    }
 
 
-   bool dir_context::is_inside_time(const ::file::path & pszPath)
+   bool directory_context::is_inside_time(const ::file::path & pszPath)
    {
 
       return is_inside(time(), pszPath);
@@ -1195,7 +1195,7 @@ namespace windows
    }
 
 
-   bool dir_context::is_inside(const ::file::path & pszDir, const ::file::path & pszPath)
+   bool directory_context::is_inside(const ::file::path & pszDir, const ::file::path & pszPath)
    {
 
       return pszDir.case_insensitive_begins(pszPath);
@@ -1203,7 +1203,7 @@ namespace windows
    }
 
 
-   bool dir_context::has_subdir(const ::file::path & pszDir)
+   bool directory_context::has_subdir(const ::file::path & pszDir)
    {
 
       file_find file_find;
@@ -1273,7 +1273,7 @@ namespace windows
    //   return true;
    //}
 
-   ::file::path dir_context::document()
+   ::file::path directory_context::document()
    {
 
       ::file::path path;
@@ -1288,7 +1288,7 @@ namespace windows
 
    }
 
-   ::file::path dir_context::desktop()
+   ::file::path directory_context::desktop()
    {
 
       ::file::path path;
@@ -1303,7 +1303,7 @@ namespace windows
 
    }
 
-   ::file::path dir_context::download()
+   ::file::path directory_context::download()
    {
 
       ::file::path path;
@@ -1314,7 +1314,7 @@ namespace windows
 
    }
 
-   ::file::path dir_context::music()
+   ::file::path directory_context::music()
    {
 
       ::file::path path;
@@ -1330,7 +1330,7 @@ namespace windows
    }
 
 
-   ::file::path dir_context::video()
+   ::file::path directory_context::video()
    {
 
       ::file::path path;
@@ -1346,7 +1346,7 @@ namespace windows
    }
 
 
-   ::file::path dir_context::image()
+   ::file::path directory_context::image()
    {
 
       ::file::path path;
@@ -1362,7 +1362,7 @@ namespace windows
    }
 
 
-   ::file::path dir_context::onedrive()
+   ::file::path directory_context::onedrive()
    {
 
       registry::key key;

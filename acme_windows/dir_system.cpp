@@ -1,8 +1,8 @@
 #include "framework.h"
-#include "dir_system.h"
-#include "acme/filesystem/filesystem/acme_directory.h"
+#include "directory_system.h"
+#include "acme/filesystem/filesystem/directory_system.h"
 #include "acme/platform/system.h"
-#include "acme_windows/acme_directory.h"
+#include "acme_windows/directory_system.h"
 #include <Shlobj.h>
 
 
@@ -10,7 +10,7 @@ namespace acme_windows
 {
 
 
-   dir_system::dir_system()
+   directory_system::directory_system()
    {
 
       
@@ -18,19 +18,19 @@ namespace acme_windows
    }
 
 
-   dir_system::~dir_system()
+   directory_system::~directory_system()
    {
 
    }
 
 
 
-   void dir_system::initialize(::particle * pparticle)
+   void directory_system::initialize(::particle * pparticle)
    {
 
       //auto estatus = 
       
-      ::dir_system::initialize(pparticle);
+      ::directory_system::initialize(pparticle);
 
       //if (!estatus)
       //{
@@ -39,9 +39,9 @@ namespace acme_windows
 
       //}
 
-      m_pathInstall = acmedirectory()->install();
+      m_pathInstall = directory_system()->install();
 
-      acmedirectory()->m_pplatformdir->_shell_get_special_folder_path(
+      directory_system()->m_pplatformdir->_shell_get_special_folder_path(
          nullptr,
          m_strCommonAppData,
          CSIDL_COMMON_APPDATA,
@@ -52,20 +52,20 @@ namespace acme_windows
       //CSIDL_PROFILE,
       //false);
 
-      m_pathHome = acmedirectory()->m_pplatformdir->_get_known_folder(FOLDERID_Profile);
+      m_pathHome = directory_system()->m_pplatformdir->_get_known_folder(FOLDERID_Profile);
 
-      m_pathCa2Config = acmedirectory()->ca2roaming();
+      m_pathCa2Config = directory_system()->ca2roaming();
 
       m_strCommonAppData /= "ca2";
 
-      m_strAppData = acmedirectory()->m_pplatformdir->_get_known_folder(FOLDERID_RoamingAppData);
+      m_strAppData = directory_system()->m_pplatformdir->_get_known_folder(FOLDERID_RoamingAppData);
 
-      acmedirectory()->m_pplatformdir->_shell_get_special_folder_path(
+      directory_system()->m_pplatformdir->_shell_get_special_folder_path(
          nullptr,
          m_strPrograms,
          CSIDL_PROGRAMS,
          false);
-      acmedirectory()->m_pplatformdir->_shell_get_special_folder_path(
+      directory_system()->m_pplatformdir->_shell_get_special_folder_path(
          nullptr,
          m_strCommonPrograms,
          CSIDL_COMMON_PROGRAMS,
@@ -91,14 +91,14 @@ namespace acme_windows
       if (m_strTimeFolder.is_empty())
       {
 
-         m_strTimeFolder = acmedirectory()->appdata() / "time";
+         m_strTimeFolder = directory_system()->appdata() / "time";
 
       }
 
       if (m_strNetSeedFolder.is_empty())
       {
 
-         m_strNetSeedFolder = acmedirectory()->install() / "net";
+         m_strNetSeedFolder = directory_system()->install() / "net";
 
       }
 
@@ -128,12 +128,12 @@ namespace acme_windows
    }
 
 
-   void dir_system::init_system()
+   void directory_system::init_system()
    {
 
       //auto estatus = 
       
-      ::dir_system::init_system();
+      ::directory_system::init_system();
 
       //if (!estatus)
       //{

@@ -153,8 +153,8 @@ pacmedir->system() / "config/production/mirror.txt";
 
 pacmedir->system() / "config/production/mirror_status.txt";
 
-         if (!acmefile()->exists(pathMirror)
-               || !acmefile()->exists(pathMirrorStatus))
+         if (!file_system()->exists(pathMirror)
+               || !file_system()->exists(pathMirrorStatus))
          {
 
             os_message_box(nullptr, "both " + pathMirror + " and " + pathMirrorStatus + " files must exist and maybe empty...", "The h***!!", e_message_box_icon_exclamation);
@@ -163,8 +163,8 @@ pacmedir->system() / "config/production/mirror_status.txt";
 
          }
 
-         m_straMirror.add_lines(::acmefile()->as_string(pathMirror));
-         m_straMirrorStatus.add_lines(::acmefile()->as_string(pathMirrorStatus));
+         m_straMirror.add_lines(::file_system()->as_string(pathMirror));
+         m_straMirrorStatus.add_lines(::file_system()->as_string(pathMirrorStatus));
 
          m_straMirror.erase_empty();
          m_straMirrorStatus.erase_empty();

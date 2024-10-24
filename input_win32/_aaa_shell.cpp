@@ -4,13 +4,13 @@
 #include "icon.h"
 #include "windowing.h"
 #include "system_interaction.h"
-#include "acme/filesystem/filesystem/acme_directory.h"
-#include "acme/filesystem/filesystem/acme_path.h"
+#include "acme/filesystem/filesystem/directory_system.h"
+#include "acme/filesystem/filesystem/path_system.h"
 #include "acme/filesystem/filesystem/link.h"
 #include "acme/parallelization/synchronous_lock.h"
 #include "acme/prototype/geometry2d/_collection.h"
 #include "acme/prototype/string/international.h"
-#include "acme/filesystem/filesystem/dir_context.h"
+#include "acme/filesystem/filesystem/directory_context.h"
 #include "acme/filesystem/filesystem/file_context.h"
 #include "aura/graphics/image/context.h"
 #include "aura/graphics/image/drawing.h"
@@ -893,11 +893,11 @@ namespace windowing_win32
          && strFileParam.case_insensitive_ends(".lnk"))
       {
 
-         auto plink = acmepath()->resolve_link(strFileParam);
+         auto plink = path_system()->resolve_link(strFileParam);
 
          if (plink
             && !m_papplication->file()->exists(plink->m_pathTarget)
-            && !m_papplication->dir()->is(plink->m_pathTarget))
+            && !m_papplication->directory()->is(plink->m_pathTarget))
          {
 
             if (pathTarget.case_insensitive_ends(".exe"))
@@ -969,7 +969,7 @@ namespace windowing_win32
 
             string strIcon;
 
-            strIcon = acmedirectory()->config() / "shell/app_theme" / getfileimage.m_imagekey.m_strShellThemePrefix + strExtension + ".ico";
+            strIcon = directory_system()->config() / "shell/app_theme" / getfileimage.m_imagekey.m_strShellThemePrefix + strExtension + ".ico";
 
             if (m_papplication->file()->exists(strIcon))
             {
@@ -1336,7 +1336,7 @@ namespace windowing_win32
          if (reserve_image(getfileimage))
          {
 
-            ::file::path path = m_papplication->dir()->matter("cloud.ico");
+            ::file::path path = m_papplication->directory()->matter("cloud.ico");
 
             set_icon(path, getfileimage);
 
@@ -1352,7 +1352,7 @@ namespace windowing_win32
          if (reserve_image(getfileimage))
          {
 
-            ::file::path path = m_papplication->dir()->matter("remote.ico");
+            ::file::path path = m_papplication->directory()->matter("remote.ico");
 
             set_icon(path, getfileimage);
 
@@ -1369,7 +1369,7 @@ namespace windowing_win32
          if (reserve_image(getfileimage))
          {
 
-            ::file::path path = m_papplication->dir()->matter("ftp.ico");
+            ::file::path path = m_papplication->directory()->matter("ftp.ico");
 
             set_icon(path, getfileimage);
 

@@ -2,7 +2,7 @@
 #include "framework.h"
 #include "file_link.h"
 #include "node.h"
-#include "acme_path.h"
+#include "path_system.h"
 //#include "os_context.h"
 #include "acme/platform/system.h"
 //#include "apex/platform/context.h//"
@@ -93,9 +93,9 @@ namespace acme_windows
 
       }
 
-      ::pointer < ::acme_windows::acme_path > pacmepath;
+      ::pointer < ::acme_windows::path_system > pacmepath;
 
-      pacmepath = acmepath();
+      pacmepath = path_system();
 
       m_pshelllink = pacmepath->_get_IShellLinkW(m_path);
 
@@ -205,9 +205,9 @@ namespace acme_windows
 
       ::file::e_link elinkWritten = ::file::e_link_none;
 
-      ::pointer < ::acme_windows::acme_path > pacmepath;
+      ::pointer < ::acme_windows::path_system > pacmepath;
 
-      pacmepath = acmepath();
+      pacmepath = path_system();
 
       //auto pshelllink = poscontext->_get_IShellLinkW(m_path);
 

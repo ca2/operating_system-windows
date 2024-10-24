@@ -1,28 +1,28 @@
 #pragma once
 
 
-#include "acme/filesystem/filesystem/dir_context.h"
+#include "acme/filesystem/filesystem/directory_context.h"
 
 
 namespace acme_windows
 {
 
 
-   class CLASS_DECL_ACME_WINDOWS dir_context :
-      virtual public ::dir_context
+   class CLASS_DECL_ACME_WINDOWS directory_context :
+      virtual public ::directory_context
    {
    public:
 
 
-      //__creatable_from_base(dir_context, ::dir_context);
+      //__creatable_from_base(directory_context, ::directory_context);
 
 
       ::pointer<file_system>     m_pfilesystem;
-      ::pointer<dir_system>      m_pdirsystem;
+      ::pointer<directory_system>      m_pdirsystem;
 
 
-      dir_context();
-      ~dir_context() override;
+      directory_context();
+      ~directory_context() override;
 
 
       void initialize(::particle * pparticle) override;
@@ -36,7 +36,7 @@ namespace acme_windows
 
 
 
-      using ::dir_context::enumerate;
+      using ::directory_context::enumerate;
       // rls fetchs should set a meaningful m_iRelative value at each returned path
       virtual bool enumerate(::file::listing & path);
       //virtual bool ls_relative_name(::file::listing & path);

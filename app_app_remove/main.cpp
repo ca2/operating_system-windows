@@ -247,28 +247,28 @@ void     removal::run()
    system("taskkill /F /IM app_app_admin.exe");
    system("taskkill /F /IM app_app_nest.exe");
 
-   if(acmefile()->exists("C:\\ca2\\config\\app-removal\\kill_browsers.txt") || acmefile()->exists("C:\\ca2\\config\\app-removal\\kill_plugin_container.txt"))
+   if(file_system()->exists("C:\\ca2\\config\\app-removal\\kill_browsers.txt") || file_system()->exists("C:\\ca2\\config\\app-removal\\kill_plugin_container.txt"))
    {
 
       system("taskkill /F /IM plugin-container.exe");
 
    }
 
-   if(acmefile()->exists("C:\\ca2\\config\\app-removal\\kill_browsers.txt") || acmefile()->exists("C:\\ca2\\config\\app-removal\\kill_ie.txt"))
+   if(file_system()->exists("C:\\ca2\\config\\app-removal\\kill_browsers.txt") || file_system()->exists("C:\\ca2\\config\\app-removal\\kill_ie.txt"))
    {
 
       system("taskkill /F /IM iexplore.exe");
 
    }
 
-   if(acmefile()->exists("C:\\ca2\\config\\app-removal\\kill_browsers.txt") || acmefile()->exists("C:\\ca2\\config\\app-removal\\kill_firefox.txt"))
+   if(file_system()->exists("C:\\ca2\\config\\app-removal\\kill_browsers.txt") || file_system()->exists("C:\\ca2\\config\\app-removal\\kill_firefox.txt"))
    {
 
       system("taskkill /F /IM firefox.exe");
 
    }
 
-   string strOnlyDrives = acmefile()->as_string("C:\\ca2\\config\\app-removal\\only_drives.txt");
+   string strOnlyDrives = file_system()->as_string("C:\\ca2\\config\\app-removal\\only_drives.txt");
    string_array straDrives;
    if(strOnlyDrives.has_char())
    {

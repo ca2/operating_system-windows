@@ -6,8 +6,8 @@
 #include "acme/operating_system/process.h"
 #include "acme/platform/scoped_restore.h"
 #include "acme/filesystem/file/status.h"
-#include "acme/filesystem/filesystem/acme_directory.h"
-#include "acme/filesystem/filesystem/acme_path.h"
+#include "acme/filesystem/filesystem/directory_system.h"
+#include "acme/filesystem/filesystem/path_system.h"
 
 #include "acme/parallelization/manual_reset_event.h"
 #include "acme/parallelization/task_flag.h"
@@ -17,7 +17,7 @@
 #include "acme/prototype/string/string.h"
 #include "acme/prototype/string/str.h"
 #include "apex/filesystem/file/set.h"
-#include "acme/filesystem/filesystem/dir_context.h"
+#include "acme/filesystem/filesystem/directory_context.h"
 #include "acme/filesystem/filesystem/file_context.h"
 #include "apex/platform/application.h"
 #include "apex/platform/context.h"
@@ -30,8 +30,8 @@
 
 #include "acme_windows/registry.h"
 #include "acme_windows/itemidlist.h"
-#include "acme_windows/acme_directory.h"
-#include "acme_windows/acme_file.h"
+#include "acme_windows/directory_system.h"
+#include "acme_windows/file_system.h"
 
 
 #include <wincred.h>
@@ -607,10 +607,10 @@ namespace apex_windows
       key.open(key, "@ca2.cc/npca2", true);
 
       key.set("Description", "ca2 plugin for NPAPI");
-      key.set("Path", dir()->module() / "npca2.dll");
+      key.set("Path", directory()->module() / "npca2.dll");
       key.set("ProductName", "ca2 plugin for NPAPI");
       key.set("Vendor", "ca2 Desenvolvimento de Software Ltda.");
-      key.set("Version", file()->as_string(dir()->install() / "appdata/x86/ca2_build.txt"));
+      key.set("Version", file()->as_string(directory()->install() / "appdata/x86/ca2_build.txt"));
 
       key.open(key, "application/apex", true);
 
@@ -1421,8 +1421,8 @@ namespace apex_windows
 
       ::platform::application * papp = get_app();
 
-      if (get_app()->m_papexapplication->m_strAppName.is_empty()
-            || get_app()->m_papexapplication->m_strAppName.case_insensitive_order("bergedge") == 0
+      if (get_app()->m_strAppName.is_empty()
+            || get_app()->m_strAppName.case_insensitive_order("bergedge") == 0
             || !get_app()->is_service())
          return "";
 
@@ -1470,7 +1470,7 @@ namespace apex_windows
 
       strExe += ".exe";
 
-      string strCalling = m_papplication->dir()->module() / strExe + " : service";
+      string strCalling = m_papplication->directory()->module() / strExe + " : service";
 
       if (is_true("no_remote_simpledb"))
       {
@@ -1482,7 +1482,7 @@ namespace apex_windows
       ::string strUserName;
       ::string strPassword;
 
-      auto papp = get_app()->m_papexapplication;
+      auto papp = get_app();
 
       if (get_app()->is_user_service())
       {
@@ -2082,7 +2082,7 @@ namespace apex_windows
 
          ::file::path pathFolder;
 
-         acmedirectory()->m_pplatformdir->_shell_get_special_folder_path(nullptr, pathFolder, CSIDL_WINDOWS, false);
+         directory_system()->m_pplatformdir->_shell_get_special_folder_path(nullptr, pathFolder, CSIDL_WINDOWS, false);
 
          pathFolder /= "Web/Wallpaper";
 
@@ -2649,12 +2649,12 @@ namespace apex_windows
    void os_context::set_default_browser()
    {
 
-      auto papp = get_app()->m_papexapplication;
+      auto papp = get_app();
 
       string strTargetProgId;
-      string strModule = solve_relative(acmefile()->module());
+      string strModule = solve_relative(file_system()->module());
 
-      strTargetProgId = get_app()->m_papexapplication->m_strAppName;
+      strTargetProgId = get_app()->m_strAppName;
 
       strTargetProgId.replace_with("_", "-");
       strTargetProgId.replace_with("_", "\\");
@@ -2915,7 +2915,7 @@ namespace apex_windows
 
       string strTargetProgId;
 
-      string strModule = solve_relative(acmefile()->module());
+      string strModule = solve_relative(file_system()->module());
 
       string strApplicationRegistryPath = find_string("ApplicationRegistryPath");
 
@@ -2927,7 +2927,7 @@ namespace apex_windows
 
       pathApplication /= strTargetProgId;
 
-      strTargetProgId = get_app()->m_papexapplication->m_strAppName;
+      strTargetProgId = get_app()->m_strAppName;
 
       strTargetProgId.replace_with("_", "-");
       strTargetProgId.replace_with("_", "\\");

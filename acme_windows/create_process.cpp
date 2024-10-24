@@ -1,7 +1,7 @@
 // Created by camilo on 2024-03-07 10:48 <3ThomasBorregaardSorensen!!
 #include "framework.h"
 #include "create_process.h"
-#include "acme/filesystem/filesystem/acme_file.h"
+#include "acme/filesystem/filesystem/file_system.h"
 #include "acme/parallelization/manual_reset_event.h"
 #include "acme/parallelization/synchronous_lock.h"
 #include "acme/platform/application.h"
@@ -720,7 +720,7 @@ namespace acme_windows
          str2 = "\"" + strPowerShell + "\" /c " + scopedstr;
 
       }
-      else if (acmefile()->exists(strCandidateFile))
+      else if (file_system()->exists(strCandidateFile))
       {
          str1 = strCandidateFile;
          str1.trim();

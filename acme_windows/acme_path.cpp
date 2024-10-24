@@ -1,9 +1,9 @@
 // Create on 2021-03-22 09:12 <3ThomasBS_
 #include "framework.h"
-#include "acme_path.h"
+#include "path_system.h"
 #include "file_link.h"
 #include "node.h"
-#include "acme/filesystem/filesystem/acme_directory.h"
+#include "acme/filesystem/filesystem/directory_system.h"
 #include "acme/filesystem/filesystem/path.h"
 #include "acme/_operating_system.h"
 
@@ -12,20 +12,20 @@ namespace acme_windows
 {
 
 
-   acme_path::acme_path()
+   path_system::path_system()
    {
 
    }
 
 
-   acme_path::~acme_path()
+   path_system::~path_system()
    {
 
 
    }
 
 
-   ::file::path acme_path::_real_path(const ::file::path & path)
+   ::file::path path_system::_real_path(const ::file::path & path)
    {
 
       ::windows::file_instance fileinstance;
@@ -46,7 +46,7 @@ namespace acme_windows
 
             DWORD dwLastError = ::GetLastError();
 
-            throw_last_error_exception(path, ::file::e_open_read, dwLastError, "acme_windows::acme_path::_real_path safe_create_file failed (e_type_directory)");
+            throw_last_error_exception(path, ::file::e_open_read, dwLastError, "acme_windows::path_system::_real_path safe_create_file failed (e_type_directory)");
 
             return {};
 
@@ -67,7 +67,7 @@ namespace acme_windows
 
             DWORD dwLastError = ::GetLastError();
 
-            throw_last_error_exception(path, ::file::e_open_read, dwLastError, "acme_windows::acme_path::_real_path safe_create_file failed (e_type_file)");
+            throw_last_error_exception(path, ::file::e_open_read, dwLastError, "acme_windows::path_system::_real_path safe_create_file failed (e_type_file)");
 
             return {};
 
@@ -89,7 +89,7 @@ namespace acme_windows
    }
 
 
-   ::file::path acme_path::_safe_real_path(const ::file::path & path)
+   ::file::path path_system::_safe_real_path(const ::file::path & path)
    {
 
       ::windows::file_instance fileinstance;
@@ -155,7 +155,7 @@ namespace acme_windows
 
    }
 
-   ::file::path acme_path::get_absolute_path(const ::scoped_string & scopedstr)
+   ::file::path path_system::get_absolute_path(const ::scoped_string & scopedstr)
    {
 
       ::string result = scopedstr; //realpath() fails if path is already absolute
@@ -186,7 +186,7 @@ namespace acme_windows
    }
 
 
-   comptr < IShellLinkW > acme_path::_get_IShellLinkW(const ::file::path & pathLink)
+   comptr < IShellLinkW > path_system::_get_IShellLinkW(const ::file::path & pathLink)
    {
 
       node()->defer_co_initialize_ex(false);
@@ -229,10 +229,10 @@ namespace acme_windows
    }
 
 
-   ::pointer < ::file::link > acme_path::resolve_link(const ::file::path & path, ::file::e_link elink)
+   ::pointer < ::file::link > path_system::resolve_link(const ::file::path & path, ::file::e_link elink)
    {
 
-      auto plink = ::acme_path::resolve_link(path, elink);
+      auto plink = ::path_system::resolve_link(path, elink);
 
       if (plink)
       {
@@ -260,7 +260,7 @@ namespace acme_windows
    }
 
 
-   ::pointer < ::file::link > acme_path::resolve_lnk_link(const ::file::path & path, ::file::e_link elink)
+   ::pointer < ::file::link > path_system::resolve_lnk_link(const ::file::path & path, ::file::e_link elink)
    {
 
       auto plink = __create_new < ::acme_windows::file_link >();
@@ -272,7 +272,7 @@ namespace acme_windows
    }
 
 
-   void acme_path::rename(const ::file::path & pathNewName, const ::file::path & pathOldName)
+   void path_system::rename(const ::file::path & pathNewName, const ::file::path & pathOldName)
    {
 
       auto windowspathOld = pathOldName.windows_path();
@@ -295,7 +295,7 @@ namespace acme_windows
    }
 
 
-   void acme_path::symbolic_link(const ::file::path & pathTarget, const ::file::path & pathSource)
+   void path_system::symbolic_link(const ::file::path & pathTarget, const ::file::path & pathSource)
    {
 
       auto windowspathTarget = pathTarget.windows_path();
@@ -312,7 +312,7 @@ namespace acme_windows
 
       DWORD dwFlag = 0;
 
-      if (acmedirectory()->is(pathSource))
+      if (directory_system()->is(pathSource))
       {
 
          dwFlag |= SYMBOLIC_LINK_FLAG_DIRECTORY;

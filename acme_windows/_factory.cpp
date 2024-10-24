@@ -1,19 +1,19 @@
 #include "framework.h"
 #include "acme/platform/node.h"
-#include "acme/filesystem/filesystem/acme_directory.h"
+#include "acme/filesystem/filesystem/directory_system.h"
 #include "node.h"
-#include "dir_context.h"
-#include "dir_system.h"
+#include "directory_context.h"
+#include "directory_system.h"
 #include "file_context.h"
 #include "file_system.h"
 #include "file_watcher.h"
 #include "application.h"
 #include "main_window.h"
-#include "acme_directory.h"
-#include "acme_path.h"
-#include "acme_file.h"
+#include "directory_system.h"
+#include "path_system.h"
+#include "file_system.h"
 #include "acme/platform/acme.h"
-#include "acme/filesystem/filesystem/acme_path.h"
+#include "acme/filesystem/filesystem/path_system.h"
 #include "acme/platform/serial.h"
 #include "serial.h"
 #include "file_memory_map.h"
@@ -25,9 +25,9 @@
 
 //BEGIN_FACTORY(acme_windows)
 //FACTORY_DEPENDENCY(acme_windows_common)
-//FACTORY_ITEM(::windows::acme_directory)
-//FACTORY_ITEM(::windows::acme_file)
-//FACTORY_ITEM(::windows::acme_path)
+//FACTORY_ITEM(::windows::directory_system)
+//FACTORY_ITEM(::windows::file_system)
+//FACTORY_ITEM(::windows::path_system)
 //FACTORY_ITEM(::acme::windows::node)
 //FACTORY_ITEM(::windows::file)
 //END_FACTORY()
@@ -48,10 +48,10 @@ IMPLEMENT_FACTORY(acme_windows)
 
    //_set_purecall_handler(_ca2_purecall);
 
-   //pfactory->add_factory_item < ::windows::dir_system, ::dir_system >();
+   //pfactory->add_factory_item < ::windows::directory_system, ::directory_system >();
    //pfactory->add_factory_item < ::windows::file_system, ::file_system >();
 
-   //pfactory->add_factory_item < ::windows::dir_context, ::dir_context >();
+   //pfactory->add_factory_item < ::windows::directory_context, ::directory_context >();
    //pfactory->add_factory_item < ::windows::file_context, ::file_context >();
 
    //add_factory_item < ::windows::stdio_file, ::file::text_file >();
@@ -65,16 +65,16 @@ IMPLEMENT_FACTORY(acme_windows)
    //pfactory->add_factory_item < ::windows::ip_enum, ::net::ip_enum >();
 
    pfactory->add_factory_item < ::acme_windows::node, ::platform::node >();
-   pfactory->add_factory_item < ::acme_windows::acme_directory, ::acme_directory >();
-   pfactory->add_factory_item < ::acme_windows::acme_file, ::acme_file >();
-   pfactory->add_factory_item < ::acme_windows::acme_path, ::acme_path >();
+   pfactory->add_factory_item < ::acme_windows::directory_system, ::directory_system >();
+   pfactory->add_factory_item < ::acme_windows::file_system, ::file_system >();
+   pfactory->add_factory_item < ::acme_windows::path_system, ::path_system >();
 
 
 
-   pfactory->add_factory_item < ::acme_windows::dir_system, ::dir_system >();
+   pfactory->add_factory_item < ::acme_windows::directory_system, ::directory_system >();
    pfactory->add_factory_item < ::acme_windows::file_system, ::file_system >();
 
-   pfactory->add_factory_item < ::acme_windows::dir_context, ::dir_context >();
+   pfactory->add_factory_item < ::acme_windows::directory_context, ::directory_context >();
    pfactory->add_factory_item < ::acme_windows::file_context, ::file_context >();
 
    pfactory->add_factory_item < ::acme_windows::file_watcher, ::file::watcher >();
@@ -109,10 +109,10 @@ IMPLEMENT_FACTORY(acme_windows)
    pfactory->add_factory_item < ::acme_windows::application, ::operating_system::application >();
    pfactory->add_factory_item < ::acme_windows::main_window, ::operating_system::main_window >();
 
-   //pfactory->add_factory_item < ::windows::dir_system, ::dir_system >();
+   //pfactory->add_factory_item < ::windows::directory_system, ::directory_system >();
    //pfactory->add_factory_item < ::windows::file_system, ::file_system >();
 
-   //pfactory->add_factory_item < ::windows::dir_context, ::dir_context >();
+   //pfactory->add_factory_item < ::windows::directory_context, ::directory_context >();
    //pfactory->add_factory_item < ::windows::file_context, ::file_context >();
 
    //pfactory->add_factory_item < ::windows::stdio_file, ::file::text_file >();

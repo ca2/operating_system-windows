@@ -2,7 +2,7 @@
 #pragma once
 
 
-#include "acme_windows_common/acme_path.h"
+#include "acme_windows_common/path_system.h"
 #include "acme_windows_common/comptr.h"
 
 
@@ -13,17 +13,17 @@ namespace acme_windows
 {
 
 
-   class CLASS_DECL_ACME_WINDOWS acme_path :
-      virtual public ::acme_windows_common::acme_path
+   class CLASS_DECL_ACME_WINDOWS path_system :
+      virtual public ::acme_windows_common::path_system
    {
    public:
 
 
-      //__creatable_from_base(acme_path, ::acme_path);
+      //__creatable_from_base(path_system, ::path_system);
 
 
-      acme_path();
-      ~acme_path() override;
+      path_system();
+      ~path_system() override;
 
 
       //virtual bool __win_find_is_dots(WIN32_FIND_DATAW & data);

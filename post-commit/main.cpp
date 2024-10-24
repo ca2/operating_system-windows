@@ -31,7 +31,7 @@ public:
          m_argv[i] = ansi_duplicate(string(pwa[i]));
       }
 
-      m_bMainRepos = acmefile()->exists("C:\\ca2\\config\\repos\\main.txt");
+      m_bMainRepos = file_system()->exists("C:\\ca2\\config\\repos\\main.txt");
 
    };
 
@@ -84,9 +84,9 @@ void app_t::win_sync_out(string strLocal,string strRepos)
    //try
    //{
 
-//     string strUser = acmefile()->as_string("C:\\sensitive\\sensitive\\seed\\user.txt");
+//     string strUser = file_system()->as_string("C:\\sensitive\\sensitive\\seed\\user.txt");
 
-   //	string strPass = acmefile()->as_string("C:\\sensitive\\sensitive\\seed\\pass.txt");
+   //	string strPass = file_system()->as_string("C:\\sensitive\\sensitive\\seed\\pass.txt");
 
    //	if(m_bMainRepos)
    //	{
@@ -192,7 +192,7 @@ void app_t::win_sync_out(string strLocal,string strRepos)
 
    //file::path pathLog = pathRepos / "synchronization_object-log" / strFileTime + ".txt";
 
-   //acmefile()->put_contents(pathLog,strLog);
+   //file_system()->put_contents(pathLog,strLog);
 
 
    ::system("C:\\bergedge\\hi5\\program\\hstart /NOCONSOLE \"cmd.exe /D /S /c call C:\\sensitive\\sensitive\\ca2\\fontopus\\script\\repossyncitem.bat " + strLocal + " " + strRepos + "\"");
@@ -268,14 +268,14 @@ i32 app_t::run()
          m_bMainRepos = false;
       }
 
-      string strUser = acmefile()->as_string("C:\\sensitive\\sensitive\\seed\\user.txt");
+      string strUser = file_system()->as_string("C:\\sensitive\\sensitive\\seed\\user.txt");
 
-      string strPass = acmefile()->as_string("C:\\sensitive\\sensitive\\seed\\pass.txt");
+      string strPass = file_system()->as_string("C:\\sensitive\\sensitive\\seed\\pass.txt");
 
       if (m_bMainRepos)
       {
 
-         str = acmefile()->as_string("C:\\ca2\\config\\repos\\mirror_list.txt");
+         str = file_system()->as_string("C:\\ca2\\config\\repos\\mirror_list.txt");
 
          stra.add_lines(str);
 
@@ -290,7 +290,7 @@ i32 app_t::run()
 
       }
 
-      str = acmefile()->as_string("C:\\ca2\\config\\repos\\mirror_list_here.txt");
+      str = file_system()->as_string("C:\\ca2\\config\\repos\\mirror_list_here.txt");
 
       stra.erase_all();
 
