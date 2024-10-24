@@ -80,7 +80,7 @@ namespace acme_user_win32
    void * windowing_system::get_display()
    {
 
-      //return ::acme::node::x11_get_display();
+      //return ::platform::node::x11_get_display();
 
       defer_initialize_windowing_system();
 

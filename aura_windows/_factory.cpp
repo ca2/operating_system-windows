@@ -46,7 +46,7 @@ __FACTORY_EXPORT void aura_windows_factory(::factory::factory * pfactory)
 
    //pfactory->add_factory_item < ::aura_windows::interaction_impl, ::windowing::window >();
 
-   pfactory->add_factory_item < ::aura_windows::node, ::acme::node >();
+   pfactory->add_factory_item < ::aura_windows::node, ::platform::node >();
 
    //add_factory_item < ::windows::console, ::console::console >();
 //add_factory_item < ::windows::crypto, ::crypto::crypto >();

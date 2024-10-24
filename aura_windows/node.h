@@ -23,7 +23,7 @@ namespace aura_windows
    public:
 
 
-      //__creatable_from_base(node, ::acme::node);
+      //__creatable_from_base(node, ::platform::node);
 
 
       node();
@@ -56,8 +56,8 @@ namespace aura_windows
       virtual void register_dll(const ::file::path& pathDll) override;
 
 
-      //void implement(::pointer<::acme::node>& pnode, ::pointer<::platform::system> & psystem) override;
-      //void implement(::pointer<::acme::node> & pnode, ::pointer<::platform::system> & psystem) override;
+      //void implement(::pointer<::platform::node>& pnode, ::pointer<::platform::system> & psystem) override;
+      //void implement(::pointer<::platform::node> & pnode, ::pointer<::platform::system> & psystem) override;
 
       void node_main() override;
 

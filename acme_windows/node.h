@@ -189,7 +189,7 @@ namespace acme_windows
 
       virtual ::wstring expand_environment_variables(const ::wstring & wstr);
 
-      //void implement(::pointer<::acme::node> & pnode, ::pointer<::platform::system> & psystem)override;
+      //void implement(::pointer<::platform::node> & pnode, ::pointer<::platform::system> & psystem)override;
 
       void node_main()override;
 

@@ -605,7 +605,7 @@ namespace apex_windows
       acme_windows::node::system_main();
 
       ////auto estatus = 
-      //system()->m_pacmenode->m_papexnode->thread_initialize(system());
+      //system()->m_pnode->m_papexnode->thread_initialize(system());
 
       ////if (!estatus)
       ////{
@@ -1101,7 +1101,7 @@ namespace apex_windows
 
       //system()->_user_post(procedure);
 
-      ::acme::node::_user_post(procedure);
+      ::platform::node::_user_post(procedure);
 
    }
 
@@ -1254,7 +1254,7 @@ namespace apex_windows
 
       //   acmedirectory()->create(pathLnk.folder());
 
-      //   system()->m_pacmenode->m_papexnode->shell_create_link(pathObj, pathLnk, "app=" + papplication->m_strAppName);
+      //   system()->m_pnode->m_papexnode->shell_create_link(pathObj, pathLnk, "app=" + papplication->m_strAppName);
 
       //}
 
@@ -2740,7 +2740,7 @@ namespace apex_windows
 
       strExe += ".exe";
 
-      string strCalling = m_papplication->m_papexcontext->dir()->module() / strExe + " : service";
+      string strCalling = m_papplication->dir()->module() / strExe + " : service";
 
       if (is_true("no_remote_simpledb"))
       {
@@ -3415,7 +3415,7 @@ namespace apex_windows
 
    //#elif defined(LINUX)
    //   //string strDir;
-   //   //strDir = m_papplication->m_papexcontext->dir().path(getenv("HOME"), "Pictures");
+   //   //strDir = m_papplication->dir().path(getenv("HOME"), "Pictures");
    //   //imagefileset.add_search(strDir);
    //   string strDir;
    //   strDir = "/usr/share/backgrounds";
@@ -3424,7 +3424,7 @@ namespace apex_windows
    //
    //#elif defined(MACOS)
    //   //string strDir;
-   //   //strDir = m_papplication->m_papexcontext->dir().path(getenv("HOME"), "Pictures");
+   //   //strDir = m_papplication->dir().path(getenv("HOME"), "Pictures");
    //   //imagefileset.add_search(strDir);
    //   string strDir;
    //   strDir = "/Library/Desktop Pictures";

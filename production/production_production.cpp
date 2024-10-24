@@ -283,7 +283,7 @@ pacmedir->system() / "config/production/mirror_status.txt";
       /*if(psystem->directrix()->has_property("quit_on_finish"))
       {
 
-      pcontext->m_papexcontext->os().post_to_all_threads(e_message_quit, 0, 0);
+      pcontext->os().post_to_all_threads(e_message_quit, 0, 0);
 
       }*/
 

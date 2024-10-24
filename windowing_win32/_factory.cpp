@@ -59,7 +59,7 @@ __FACTORY_EXPORT void windowing_win32_factory(::factory::factory * pfactory)
 
    pfactory->add_factory_item < ::windowing_win32::monitor, ::windowing::monitor >();
 
-   //pfactory->add_factory_item < ::windowing_win32::node, ::acme::node >();
+   //pfactory->add_factory_item < ::windowing_win32::node, ::platform::node >();
 
    pfactory->add_factory_item < ::hardware::device_group >();
 

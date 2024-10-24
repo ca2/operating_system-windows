@@ -532,7 +532,7 @@ wstring windowing::_windows_calc_icon_window_class(::user::interaction * puserin
 
    string strPath = dir()->matter(pathIcon);
 
-   HICON hIcon = (HICON) ::LoadImageW(nullptr, wstring(pcontext->m_papexcontext->get_matter_path(strPath)), IMAGE_ICON, 256, 256, LR_LOADFROMFILE);
+   HICON hIcon = (HICON) ::LoadImageW(nullptr, wstring(pcontext->get_matter_path(strPath)), IMAGE_ICON, 256, 256, LR_LOADFROMFILE);
 
    wstring strClass = _windows_get_user_interaction_window_class(puserinteraction);
 

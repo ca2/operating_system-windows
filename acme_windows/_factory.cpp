@@ -64,7 +64,7 @@ IMPLEMENT_FACTORY(acme_windows)
    //pfactory->add_factory_item < ::windows::crypto, ::crypto::crypto >();
    //pfactory->add_factory_item < ::windows::ip_enum, ::net::ip_enum >();
 
-   pfactory->add_factory_item < ::acme_windows::node, ::acme::node >();
+   pfactory->add_factory_item < ::acme_windows::node, ::platform::node >();
    pfactory->add_factory_item < ::acme_windows::acme_directory, ::acme_directory >();
    pfactory->add_factory_item < ::acme_windows::acme_file, ::acme_file >();
    pfactory->add_factory_item < ::acme_windows::acme_path, ::acme_path >();

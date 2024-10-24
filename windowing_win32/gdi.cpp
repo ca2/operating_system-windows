@@ -271,7 +271,7 @@ namespace windowing_win32
 
          path = dir()->matter(path / strIcon);
 
-         path = pcontext->m_papexcontext->get_matter_cache_path(path);
+         path = pcontext->get_matter_cache_path(path);
 
          hicon = (HICON) ::LoadImageW(nullptr, wstring(path), IMAGE_ICON, cx, cy, LR_LOADFROMFILE);
 

@@ -721,7 +721,7 @@ namespace windowing_win32
 
       m_pathProcessed = m_papplication->defer_process_matter_path(strPath);
 
-      auto memory = m_papplication->m_papexcontext->file()->as_memory(m_pathProcessed);
+      auto memory = m_papplication->file()->as_memory(m_pathProcessed);
 
       if (memory.is_empty())
       {

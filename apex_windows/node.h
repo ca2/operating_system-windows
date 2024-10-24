@@ -23,7 +23,7 @@ namespace apex_windows
    public:
 
 
-      //__creatable_from_base(node, ::acme::node);
+      //__creatable_from_base(node, ::platform::node);
 
 
       node();

@@ -63,7 +63,7 @@ IMPLEMENT_FACTORY(apex_windows)
    //pfactory->add_factory_item < ::windows::file_context, ::file_context >();
    pfactory->add_factory_item < ::apex_windows::service_handler, ::service_handler >();
 
-   pfactory->add_factory_item < ::apex_windows::node, ::acme::node >();
+   pfactory->add_factory_item < ::apex_windows::node, ::platform::node >();
 
    //add_factory_item < ::windows::copydesk, ::user::cop
    // 

@@ -229,7 +229,7 @@ namespace acme_windows
    void node::initialize(::particle* pparticle)
    {
 
-      ::acme::node::initialize(pparticle);
+      ::platform::node::initialize(pparticle);
 
       //if (!estatus)
       //{
@@ -2713,11 +2713,11 @@ namespace acme_windows
    }
 
 
-   //void node::implement(::pointer<::acme::node> & pnode, ::pointer<::platform::system> & psystem)
+   //void node::implement(::pointer<::platform::node> & pnode, ::pointer<::platform::system> & psystem)
    void node::node_main()
    {
 
-      return ::acme::node::node_main();
+      return ::platform::node::node_main();
 
    }
 
@@ -2725,7 +2725,7 @@ namespace acme_windows
    void node::on_start_system()
    {
 
-      ::acme::node::on_start_system();
+      ::platform::node::on_start_system();
 
 
       //auto estatus = system()->post_initial_request();

@@ -1470,7 +1470,7 @@ namespace apex_windows
 
       strExe += ".exe";
 
-      string strCalling = m_papplication->m_papexcontext->dir()->module() / strExe + " : service";
+      string strCalling = m_papplication->dir()->module() / strExe + " : service";
 
       if (is_true("no_remote_simpledb"))
       {
@@ -2158,7 +2158,7 @@ namespace apex_windows
 
    //#elif defined(LINUX)
    //   //string strDir;
-   //   //strDir = m_papplication->m_papexcontext->dir().path(getenv("HOME"), "Pictures");
+   //   //strDir = m_papplication->dir().path(getenv("HOME"), "Pictures");
    //   //imagefileset.add_search(strDir);
    //   string strDir;
    //   strDir = "/usr/share/backgrounds";
@@ -2167,7 +2167,7 @@ namespace apex_windows
    //
    //#elif defined(MACOS)
    //   //string strDir;
-   //   //strDir = m_papplication->m_papexcontext->dir().path(getenv("HOME"), "Pictures");
+   //   //strDir = m_papplication->dir().path(getenv("HOME"), "Pictures");
    //   //imagefileset.add_search(strDir);
    //   string strDir;
    //   strDir = "/Library/Desktop Pictures";
