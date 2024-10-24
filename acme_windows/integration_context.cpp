@@ -113,7 +113,7 @@ namespace acme_windows
 
          //}
 
-         //auto pcontext = m_pcontext;
+         //auto pcontext = m_papplication;
 
          //m_strVs = acmefile()->as_string(path);
 
@@ -1058,7 +1058,7 @@ namespace acme_windows
             //if (scopedstrCommand.case_insensitive_begins("command -v"))
             //{
 
-            //   pmutex = node()->create_global_named_mutex(m_pcontext, false, "msys2_exclusive", node()->get_application_exclusivity_security_attributes());
+            //   pmutex = node()->create_global_named_mutex(m_papplication, false, "msys2_exclusive", node()->get_application_exclusivity_security_attributes());
 
             //}
 

@@ -98,7 +98,7 @@ namespace apex_windows
 
       void _user_post(const ::procedure& procedure) override;
 
-      void create_app_shortcut(::acme::application* papp) override;
+      void create_app_shortcut(::platform::application* papp) override;
 
 
       void on_start_application(::apex::application * papplication) override;
@@ -107,10 +107,10 @@ namespace apex_windows
       virtual error_code _windows_create_link(const ::wide_character* pszPathObj, const ::wide_character* pszPathLink, const ::wide_character* pszDesc, const ::wide_character* pszIconPath, ::i32 iIcon);
 
 
-      void on_create_app_shortcut(::acme::application* papplication) override;
+      void on_create_app_shortcut(::platform::application* papplication) override;
 
 
-      ::file::path app_shortcut_path(::acme::application* papplication) override;
+      ::file::path app_shortcut_path(::platform::application* papplication) override;
 
 
       bool is_key_pressed(bool * pbPressed, ::user::enum_key ekey) override;
@@ -206,7 +206,7 @@ namespace apex_windows
 
       virtual void get_default_browser(string& strId, ::file::path& path, string& strParam) override;
 
-      void register_user_auto_start(::acme::application * papplication, const string& strArguments, bool bRegister) override;
+      void register_user_auto_start(::platform::application * papplication, const string& strArguments, bool bRegister) override;
 
       bool is_user_auto_start(const ::string& strAppId) override;
 

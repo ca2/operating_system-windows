@@ -84,7 +84,7 @@ void __cdecl _null_se_translator(u32 uiCode, EXCEPTION_POINTERS * ppointers)
 //
 //         ::file::path pathLnk;
 //
-//         pathObj = m_pcontext->m_papexcontext->file().module();
+//         pathObj = m_papplication->m_papexcontext->file().module();
 //
 //         string strLinkTitle;
 //

@@ -189,7 +189,7 @@ namespace acme_windows
 
       virtual ::wstring expand_environment_variables(const ::wstring & wstr);
 
-      //void implement(::pointer<::acme::node> & pnode, ::pointer<::acme::system> & psystem)override;
+      //void implement(::pointer<::acme::node> & pnode, ::pointer<::platform::system> & psystem)override;
 
       void node_main()override;
 
@@ -200,7 +200,7 @@ namespace acme_windows
       void on_start_system() override;
 
 
-      void create_app_shortcut(::acme::application * papp) override;
+      void create_app_shortcut(::platform::application * papp) override;
 
 
       //string get_local_mutex_name(const ::string& strAppId) override;
@@ -221,7 +221,7 @@ namespace acme_windows
       //string get_callstack(const scoped_string & strFormat, i32 iSkip, void * caller_address, int iCount) override;
 
 
-      ::pointer < ::acme::exclusive > _get_exclusive(::particle * pparticleContext, const ::string & strName, ::security_attributes * psecurityattributes = nullptr) override;
+      ::pointer < ::platform::exclusive > _get_exclusive(::particle * pparticleContext, const ::string & strName, ::security_attributes * psecurityattributes = nullptr) override;
       i32 get_current_process_affinity_order() override;
 
 

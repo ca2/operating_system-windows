@@ -5,7 +5,7 @@
 #include "acme/exception/exception.h"
 #include "acme/filesystem/filesystem/listing.h"
 #include "acme/operating_system/process.h"
-#include "acme/platform/context.h"
+#include "acme/platform/application.h"
 #include "acme/platform/node.h"
 #include "acme/prototype/string/adaptor.h"
 #include "acme/prototype/string/str.h"
@@ -531,7 +531,7 @@ pacmedir->roaming();
 
    //      strCandidate = stra[i] / pszTopic;
 
-   //      //if (m_pcontext->m_papexcontext->file().exists(strCandidate))
+   //      //if (m_papplication->m_papexcontext->file().exists(strCandidate))
    //      if (m_pacmefile->exists(strCandidate))
    //      {
 
@@ -1324,7 +1324,7 @@ pacmedir->create CreateDirectoryW last error(%d)=%s", dwError, pszError);
          if (!is(listing.m_pathFinal))
          {
 
-            listing.m_pathFinal = m_pcontext->defer_process_path(listing.m_pathFinal);
+            listing.m_pathFinal = m_papplication->defer_process_path(listing.m_pathFinal);
 
             if (!is(listing.m_pathFinal))
             {
@@ -2134,7 +2134,7 @@ pacmedir->create CreateDirectoryW last error(%d)=%s", dwError, pszError);
    void acme_directory::change_current(const ::file::path & pathParam)
    {
 
-      auto path = m_pcontext->defer_process_path(pathParam);
+      auto path = m_papplication->defer_process_path(pathParam);
 
       auto strWindowsPath = path.windows_path();
 

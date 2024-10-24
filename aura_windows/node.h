@@ -56,8 +56,8 @@ namespace aura_windows
       virtual void register_dll(const ::file::path& pathDll) override;
 
 
-      //void implement(::pointer<::acme::node>& pnode, ::pointer<::acme::system> & psystem) override;
-      //void implement(::pointer<::acme::node> & pnode, ::pointer<::acme::system> & psystem) override;
+      //void implement(::pointer<::acme::node>& pnode, ::pointer<::platform::system> & psystem) override;
+      //void implement(::pointer<::acme::node> & pnode, ::pointer<::platform::system> & psystem) override;
 
       void node_main() override;
 

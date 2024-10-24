@@ -5,7 +5,7 @@
 #include "audio_mixer.h"
 #include "destination.h"
 #include "acme/exception/exception.h"
-#include "acme/platform/context.h"
+#include "acme/platform/application.h"
 #include "acme/prototype/text/text.h"
 #include "audio-system/audio_mixer/callback.h"
 #include "audio-system/audio_mixer/user/level_control.h"
@@ -253,7 +253,7 @@
 
          ::text::text text;
 
-         auto pcontext = pParent->m_pcontext;
+         auto pcontext = pParent->m_papplication;
          
          if(m_pmixersource == m_pmixersource->get_destination())
          {

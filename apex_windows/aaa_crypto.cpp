@@ -36,7 +36,7 @@
 //   ::file::path crypto::get_crypt_key_file_path()
 //   {
 //
-//      return m_pcontext->m_papexcontext->dir().appdata() / ".ca2/databin.bin";
+//      return m_papplication->m_papexcontext->dir().appdata() / ".ca2/databin.bin";
 //
 //   }
 //

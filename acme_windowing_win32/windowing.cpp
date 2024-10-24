@@ -495,10 +495,10 @@ namespace win32
 
             }
 
-            if (::acme::get()->m_pmanualreseteventMainLoopEnd)
+            if (::system()->m_pmanualreseteventMainLoopEnd)
             {
 
-               ::acme::get()->m_pmanualreseteventMainLoopEnd->set_event();
+               ::system()->m_pmanualreseteventMainLoopEnd->set_event();
 
             }
 

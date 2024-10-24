@@ -595,7 +595,7 @@ namespace windowing_win32
 
       comptr< IShellItemImageFactory> pfactory;
 
-      auto strPath = m_pcontext->defer_process_path(getfileimage.m_imagekey.m_strPath);
+      auto strPath = m_papplication->defer_process_path(getfileimage.m_imagekey.m_strPath);
 
       wstring wstrPath(strPath);
 
@@ -889,15 +889,15 @@ namespace windowing_win32
 
       if (((FAILED(hrIconLocation) && FAILED(hrGetLocation))
          || getfileimage.m_imagekey.m_iIcon == I32_MINIMUM
-         || !m_pcontext->m_papexcontext->file()->exists(strIconLocation))
+         || !m_papplication->m_papexcontext->file()->exists(strIconLocation))
          && strFileParam.case_insensitive_ends(".lnk"))
       {
 
          auto plink = acmepath()->resolve_link(strFileParam);
 
          if (plink
-            && !m_pcontext->m_papexcontext->file()->exists(plink->m_pathTarget)
-            && !m_pcontext->m_papexcontext->dir()->is(plink->m_pathTarget))
+            && !m_papplication->m_papexcontext->file()->exists(plink->m_pathTarget)
+            && !m_papplication->m_papexcontext->dir()->is(plink->m_pathTarget))
          {
 
             if (pathTarget.case_insensitive_ends(".exe"))
@@ -971,7 +971,7 @@ namespace windowing_win32
 
             strIcon = acmedirectory()->config() / "shell/app_theme" / getfileimage.m_imagekey.m_strShellThemePrefix + strExtension + ".ico";
 
-            if (m_pcontext->m_papexcontext->file()->exists(strIcon))
+            if (m_papplication->m_papexcontext->file()->exists(strIcon))
             {
 
                if (reserve_image(getfileimage))
@@ -1336,7 +1336,7 @@ namespace windowing_win32
          if (reserve_image(getfileimage))
          {
 
-            ::file::path path = m_pcontext->m_papexcontext->dir()->matter("cloud.ico");
+            ::file::path path = m_papplication->m_papexcontext->dir()->matter("cloud.ico");
 
             set_icon(path, getfileimage);
 
@@ -1352,7 +1352,7 @@ namespace windowing_win32
          if (reserve_image(getfileimage))
          {
 
-            ::file::path path = m_pcontext->m_papexcontext->dir()->matter("remote.ico");
+            ::file::path path = m_papplication->m_papexcontext->dir()->matter("remote.ico");
 
             set_icon(path, getfileimage);
 
@@ -1369,7 +1369,7 @@ namespace windowing_win32
          if (reserve_image(getfileimage))
          {
 
-            ::file::path path = m_pcontext->m_papexcontext->dir()->matter("ftp.ico");
+            ::file::path path = m_papplication->m_papexcontext->dir()->matter("ftp.ico");
 
             set_icon(path, getfileimage);
 
@@ -1384,7 +1384,7 @@ namespace windowing_win32
       if (getfileimage.m_imagekey.m_strPath.case_insensitive_ends(".aura"))
       {
 
-         string str = m_pcontext->m_papexcontext->file()->as_string(getfileimage.m_imagekey.m_strPath);
+         string str = m_papplication->m_papexcontext->file()->as_string(getfileimage.m_imagekey.m_strPath);
 
          if (str.case_insensitive_begins_eat("ca2prompt\r\n"))
          {
@@ -1791,7 +1791,7 @@ namespace windowing_win32
 
          synchronouslock.unlock();
 
-         ::file::path path = m_pcontext->defer_process_matter_path(pathIconParam);
+         ::file::path path = m_papplication->defer_process_matter_path(pathIconParam);
 
          for (auto iSize : m_iaSize)
          {

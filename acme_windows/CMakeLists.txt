@@ -49,7 +49,7 @@ list(APPEND library_source
    list_serial_ports.cpp
    main_window.cpp
    main_window.h
-   message_loop.cpp
+   #message_loop.cpp
    mmresult.cpp
    mmresult.h
    mmsystem.cpp
@@ -59,7 +59,7 @@ list(APPEND library_source
    pipe.h
    registry.cpp
    registry.h
-   sapi.cpp
+   #sapi.cpp
    serial.cpp
    serial.h
    shared_memory.cpp

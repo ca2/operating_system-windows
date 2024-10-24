@@ -28,6 +28,11 @@ set(default_gpu "gpu_opengl")
 set(default_audio "audio_mmsystem")
 set(default_input "input_win32")
 set(default_networking "networking_bsd")
+set(default_acme "acme_windows")
+set(default_acme_windowing "acme_windowing_win32")
+set(default_nano_graphics "nano_graphics_gdi")
+set(default_apex "apex_windows")
+set(default_innate_ui "innate_ui_win32")
 
 
 add_compile_definitions(UNICODE)

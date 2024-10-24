@@ -58,7 +58,7 @@ namespace acme_windows
 
       //}
 
-      ::pointer<::acme::system>psystem = system();
+      ::pointer<::platform::system>psystem = system();
 
       m_pfilesystem = psystem->m_pfilesystem;
 
@@ -515,7 +515,7 @@ namespace acme_windows
 
       }
 
-      ::pointer<::acme::system>psystem = system();
+      ::pointer<::platform::system>psystem = system();
 
       if (read_resource_as_memory(*pfile->get_primitive_memory(), (HINSTANCE) psystem->m_pplatform->m_hinstanceThis, iId, psz))
       {

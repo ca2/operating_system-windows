@@ -1011,7 +1011,7 @@ namespace input_win32
    //   void windowing::windowing_post(const ::procedure& procedure)
    //   {
    //
-   //      system()->m_papexsystem->post_procedure(procedure);
+   //      system()->post_procedure(procedure);
    //
    //   }
    //

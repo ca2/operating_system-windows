@@ -879,9 +879,9 @@ namespace apex_windows
       //if (strProfile.has_char())
       //{
 
-      //   auto path = system()->m_papexsystem->dir().config() / "config/browser" / strBrowser / (strProfile + ".txt");
+      //   auto path = system()->dir().config() / "config/browser" / strBrowser / (strProfile + ".txt");
 
-      //   strMappedProfile = system()->m_papexsystem->file().as_string(path);
+      //   strMappedProfile = system()->file().as_string(path);
 
       //}
 
@@ -1419,7 +1419,7 @@ namespace apex_windows
    string os_context::calc_service_name()
    {
 
-      ::acme::application * papp = get_app();
+      ::platform::application * papp = get_app();
 
       if (get_app()->m_papexapplication->m_strAppName.is_empty()
             || get_app()->m_papexapplication->m_strAppName.case_insensitive_order("bergedge") == 0
@@ -1470,7 +1470,7 @@ namespace apex_windows
 
       strExe += ".exe";
 
-      string strCalling = m_pcontext->m_papexcontext->dir()->module() / strExe + " : service";
+      string strCalling = m_papplication->m_papexcontext->dir()->module() / strExe + " : service";
 
       if (is_true("no_remote_simpledb"))
       {
@@ -1844,7 +1844,7 @@ namespace apex_windows
       if (status.m_timeAccess != 0_s)
       {
 
-         //auto pnode = system()->m_papexsystem->node();
+         //auto pnode = system()->node();
 
          lastAccessTime = as_FILETIME(file_time(status.m_timeAccess));
 
@@ -2158,7 +2158,7 @@ namespace apex_windows
 
    //#elif defined(LINUX)
    //   //string strDir;
-   //   //strDir = m_pcontext->m_papexcontext->dir().path(getenv("HOME"), "Pictures");
+   //   //strDir = m_papplication->m_papexcontext->dir().path(getenv("HOME"), "Pictures");
    //   //imagefileset.add_search(strDir);
    //   string strDir;
    //   strDir = "/usr/share/backgrounds";
@@ -2167,7 +2167,7 @@ namespace apex_windows
    //
    //#elif defined(MACOS)
    //   //string strDir;
-   //   //strDir = m_pcontext->m_papexcontext->dir().path(getenv("HOME"), "Pictures");
+   //   //strDir = m_papplication->m_papexcontext->dir().path(getenv("HOME"), "Pictures");
    //   //imagefileset.add_search(strDir);
    //   string strDir;
    //   strDir = "/Library/Desktop Pictures";
@@ -2180,7 +2180,7 @@ namespace apex_windows
    void os_context::file_open(const ::file::path & pathParam, const string & strParams, const ::file::path & pathFolder)
    {
 
-      auto path = m_pcontext->defer_process_matter_path(pathParam);
+      auto path = m_papplication->defer_process_matter_path(pathParam);
 
       manual_reset_event manualresetevent;
 
@@ -2385,7 +2385,7 @@ namespace apex_windows
    void os_context::hidden_start(const ::file::path & pathParam, const string & strParams, const ::file::path & pathFolder)
    {
 
-      auto path = m_pcontext->defer_process_matter_path(pathParam);
+      auto path = m_papplication->defer_process_matter_path(pathParam);
 
       fork([=]()
          {
@@ -2459,7 +2459,7 @@ namespace apex_windows
 
       auto pevent = __allocate manual_reset_event();
 
-      auto path = m_pcontext->defer_process_matter_path(pathParam);
+      auto path = m_papplication->defer_process_matter_path(pathParam);
 
       class ::time timeStart;
 

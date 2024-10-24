@@ -567,7 +567,7 @@ namespace windowing_win32
             if (strPath.case_insensitive_begins_eat("zipresource://"))
             {
 
-               auto pfile = m_pcontext->file()->create_resource_file(strPath);
+               auto pfile = m_papplication->file()->create_resource_file(strPath);
 
                if (!image())
                {
@@ -719,9 +719,9 @@ namespace windowing_win32
    void icon::load_file(const ::string & strPath)
    {
 
-      m_pathProcessed = m_pcontext->defer_process_matter_path(strPath);
+      m_pathProcessed = m_papplication->defer_process_matter_path(strPath);
 
-      auto memory = m_pcontext->m_papexcontext->file()->as_memory(m_pathProcessed);
+      auto memory = m_papplication->m_papexcontext->file()->as_memory(m_pathProcessed);
 
       if (memory.is_empty())
       {

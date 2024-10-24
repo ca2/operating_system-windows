@@ -12,8 +12,8 @@
 //   ::u16 w16Task, ::u32 tickTimeout);
 
 //#endif
-//int SendCtrlShiftQToChrome(HWND chrome, int iSleep, ::acme::application * papp);
-//int SendURLToChrome(HWND chrome, string strUrl, ::acme::application * papp);
+//int SendCtrlShiftQToChrome(HWND chrome, int iSleep, ::platform::application * papp);
+//int SendURLToChrome(HWND chrome, string strUrl, ::platform::application * papp);
 class block_input :
    virtual public matter
 {
@@ -84,7 +84,7 @@ bool is_good_active_w(HWND w)
 
 }
 
-//int SendCtrlShiftQToChrome(oswindow w, int iSleep, ::acme::application * papp)
+//int SendCtrlShiftQToChrome(oswindow w, int iSleep, ::platform::application * papp)
 //{
 //   /*HWND h = ::GetWindow(chrome, GW_CHILD);
 //   SendMessage(chrome, 0x0272, 0, 0);
@@ -878,7 +878,7 @@ bool is_good_active_w(HWND w)
 //}
 //
 //
-//int SendURLToChrome(HWND chrome, string strUrl, ::acme::application * papp)
+//int SendURLToChrome(HWND chrome, string strUrl, ::platform::application * papp)
 //{
 //
 //   App(pbapp).message_box_timeout(nullptr, "Sending URL to browser...", seconds(3), MB_ICONASTERISK);

@@ -1,8 +1,5 @@
 cmake_minimum_required(VERSION 3.17)
-project(windowing_system_win32 CXX)
-
-
-
+project(acme_windowing_win32 CXX)
 
 
 message(STATUS "CMAKE_SYSTEM_NAME is ${CMAKE_SYSTEM_NAME}")
@@ -27,8 +24,10 @@ list(APPEND library_source
         keyboard.h
         xkb_input.cpp
         xkb_input.h
-        windowing_system.cpp
-        windowing_system.h
+   window.cpp
+   window.h
+        windowing.cpp
+        windowing.h
         )
 
 add_library(${PROJECT_NAME} SHARED ${library_source})

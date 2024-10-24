@@ -136,7 +136,7 @@ namespace draw2d_gdiplus
 
          }
 
-         auto pprivatefont = pdraw2d->get_file_private_font(pgraphics->m_pcontext, m_path);
+         auto pprivatefont = pdraw2d->get_file_private_font(pgraphics->m_papplication, m_path);
 
          if (pprivatefont)
          {

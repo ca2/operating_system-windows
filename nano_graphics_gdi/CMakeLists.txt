@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.17)
-project(windowing_system_win32 CXX)
+project(nano_graphics_gdi CXX)
 
 
 
@@ -23,12 +23,16 @@ list(APPEND library_source
         _factory.cpp
         framework.cpp
         framework.h
-        keyboard.cpp
-        keyboard.h
-        xkb_input.cpp
-        xkb_input.h
-        windowing_system.cpp
-        windowing_system.h
+#        keyboard.cpp
+#        keyboard.h
+#        xkb_input.cpp
+#        xkb_input.h
+#        windowing_system.cpp
+#        windowing_system.h
+   device.cpp
+   device.h
+   brush.cpp
+   brush.h
         )
 
 add_library(${PROJECT_NAME} SHARED ${library_source})

@@ -11,8 +11,8 @@ list(APPEND library_source
    extract_icon.h
    framework.cpp
    framework.h
-    interaction_impl.cpp
-   interaction_impl.h
+    #interaction_impl.cpp
+   #interaction_impl.h
    node.cpp
    node.h
    shell_open.cpp

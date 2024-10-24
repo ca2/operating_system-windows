@@ -11,7 +11,7 @@ namespace acme_windows
 
 
    class CLASS_DECL_ACME_WINDOWS exclusive :
-      virtual public ::acme::exclusive
+      virtual public ::platform::exclusive
    {
    public:
 

@@ -701,7 +701,7 @@ namespace acme_windows
    //   void node::start()
    //   {
    //
-   //      auto estatus = system()->m_papexsystem->m_papex->thread_initialize(system()->m_papexsystem);
+   //      auto estatus = system()->m_papex->thread_initialize(system());
    //
    //      if (!estatus)
    //      {
@@ -2593,7 +2593,7 @@ namespace acme_windows
    void node::delete_file(const ::file::path& pathParam)
    {
 
-      auto path = m_pcontext->defer_process_path(pathParam);
+      auto path = m_papplication->defer_process_path(pathParam);
 
       ::delete_file(path);
 
@@ -2713,7 +2713,7 @@ namespace acme_windows
    }
 
 
-   //void node::implement(::pointer<::acme::node> & pnode, ::pointer<::acme::system> & psystem)
+   //void node::implement(::pointer<::acme::node> & pnode, ::pointer<::platform::system> & psystem)
    void node::node_main()
    {
 
@@ -2742,7 +2742,7 @@ namespace acme_windows
    }
 
 
-   void node::create_app_shortcut(::acme::application* papp)
+   void node::create_app_shortcut(::platform::application* papp)
    {
 
    }
@@ -2866,7 +2866,7 @@ namespace acme_windows
    }
 
 
-   ::pointer < ::acme::exclusive > node::_get_exclusive(::particle* pparticleContext, const ::string& strName, ::security_attributes* psecurityattributes)
+   ::pointer < ::platform::exclusive > node::_get_exclusive(::particle* pparticleContext, const ::string& strName, ::security_attributes* psecurityattributes)
    {
 
       return __allocate exclusive(pparticleContext, strName, psecurityattributes);

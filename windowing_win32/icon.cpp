@@ -568,7 +568,7 @@ namespace windowing_win32
             if (strPath.case_insensitive_begins_eat("zipresource://"))
             {
 
-               auto pfile = m_pcontext->file()->create_resource_file(strPath);
+               auto pfile = m_papplication->file()->create_resource_file(strPath);
 
                if (!image())
                {

@@ -51,7 +51,7 @@ namespace acme_windows
 
       //}
 
-      ::pointer<::acme::system>psystem = system();
+      ::pointer<::platform::system>psystem = system();
 
       //__refer(
       m_pfilesystem = psystem->m_pfilesystem;
@@ -81,7 +81,7 @@ namespace acme_windows
 
       //auto pdocument = create_xml_document();
 
-      //if (pdocument->load(m_pcontext->m_papexcontext->file().as_string(::dir::appdata() / "configuration/directory.xml")))
+      //if (pdocument->load(m_papplication->m_papexcontext->file().as_string(::dir::appdata() / "configuration/directory.xml")))
       //{
 
       //   //xxdebug_box("win_dir::initialize (configuration)", "win_dir::initialize", 0);
@@ -91,7 +91,7 @@ namespace acme_windows
 
       //      ::file::path pathFolderTime = pdocument->root()->get_child_value("time");
 
-      //      if (m_pcontext->m_papexcontext->dir().is(pathFolderTime))
+      //      if (m_papplication->m_papexcontext->dir().is(pathFolderTime))
       //      {
 
       //         m_pdirsystem->m_strTimeFolder = pathFolderTime;
@@ -100,7 +100,7 @@ namespace acme_windows
 
       //      ::file::path pathFolderNetseed = pdocument->root()->get_child_value("netseed");
 
-      //      if (m_pcontext->m_papexcontext->dir().is(pathFolderNetseed))
+      //      if (m_papplication->m_papexcontext->dir().is(pathFolderNetseed))
       //      {
 
       //         m_pdirsystem->m_strNetSeedFolder = pathFolderNetseed;
@@ -132,7 +132,7 @@ namespace acme_windows
 
       //auto pdocument = create_xml_document();
 
-      //if (pdocument->load(m_pcontext->m_papexcontext->file().as_string(::dir::appdata() / "configuration/directory.xml")))
+      //if (pdocument->load(m_papplication->m_papexcontext->file().as_string(::dir::appdata() / "configuration/directory.xml")))
       //{
 
       //   //xxdebug_box("win_dir::initialize (configuration)", "win_dir::initialize", 0);
@@ -142,7 +142,7 @@ namespace acme_windows
 
       //      ::file::path pathFolderTime = pdocument->root()->get_child_value("time");
 
-      //      if (m_pcontext->m_papexcontext->dir().is(pathFolderTime))
+      //      if (m_papplication->m_papexcontext->dir().is(pathFolderTime))
       //      {
 
       //         m_pdirsystem->m_strTimeFolder = pathFolderTime;
@@ -151,7 +151,7 @@ namespace acme_windows
 
       //      ::file::path pathFolderNetseed = pdocument->root()->get_child_value("netseed");
 
-      //      if (m_pcontext->m_papexcontext->dir().is(pathFolderNetseed))
+      //      if (m_papplication->m_papexcontext->dir().is(pathFolderNetseed))
       //      {
 
       //         m_pdirsystem->m_strNetSeedFolder = pathFolderNetseed;
@@ -513,7 +513,7 @@ namespace acme_windows
 
       //         }
 
-      //         m_pcontext->m_papexcontext->dir().ls(listing);
+      //         m_papplication->m_papexcontext->dir().ls(listing);
 
       //      }
 
@@ -576,7 +576,7 @@ namespace acme_windows
       //   if (listing.m_pathFinal.is_empty())
       //   {
 
-      //      listing.m_pathFinal = m_pcontext->defer_process_matter_path(listing.m_pathUser);
+      //      listing.m_pathFinal = m_papplication->defer_process_matter_path(listing.m_pathUser);
 
       //   }
 
@@ -690,7 +690,7 @@ namespace acme_windows
 
    //            }
 
-   //            m_pcontext->m_papexcontext->dir().ls(listing);
+   //            m_papplication->m_papexcontext->dir().ls(listing);
 
    //         }
 
@@ -1040,7 +1040,7 @@ namespace acme_windows
    //   //         try
    //   //         {
 
-   //   //            m_pcontext->m_papexcontext->file().del(str);
+   //   //            m_papplication->m_papexcontext->file().del(str);
 
    //   //         }
    //   //         catch (...)
@@ -1055,7 +1055,7 @@ namespace acme_windows
    //   //         try
    //   //         {
 
-   //   //            m_pcontext->m_papexcontext->file().del(str);
+   //   //            m_papplication->m_papexcontext->file().del(str);
 
    //   //         }
    //   //         catch (...)

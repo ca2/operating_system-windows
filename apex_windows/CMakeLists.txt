@@ -21,8 +21,8 @@ list(APPEND library_source
    launcher.h
    node.cpp
    node.h
-   os_context.cpp
-   os_context.h
+   #os_context.cpp
+   #os_context.h
    process.cpp
    process.h
    process_data.h

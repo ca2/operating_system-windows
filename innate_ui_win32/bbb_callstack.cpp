@@ -470,7 +470,7 @@ namespace windows
          hprocess,
          current_htask(),
          &m_stackframe,
-         m_pcontext,
+         m_papplication,
          My_ReadProcessMemory,
          SymFunctionTableAccess64,
          SymGetModuleBase64,

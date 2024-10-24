@@ -788,7 +788,7 @@ pacmedir->system() / "config/production/mirror_status.txt";
 
 
             //http()->ms_download("http://api.ca2.cc/spaignition/clean",
-            //   dir().install() / "time\\spaignition_update.txt"), nullptr, post, headers, ::ca2::acme::application(get_application()).user()->get_user());
+            //   dir().install() / "time\\spaignition_update.txt"), nullptr, post, headers, ::ca2::platform::application(get_application()).user()->get_user());
             /*add_status("Cleaning folder...");
             ::process::process_pointer process(e_create);
             file().put_contents(strPath, "rmdir /s /q C:\\ca2\\vrel\\" + m_strConfiguration);
