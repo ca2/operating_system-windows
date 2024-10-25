@@ -29,9 +29,10 @@ namespace win32
             windowing();
             ~windowing() override;
 
-            ::e_status defer_initialize_windowing_system() override;
-            ::e_status initialize_windowing_system() override;
-            void * get_display() override;
+            ::e_status defer_initialize_windowing() override;
+            ::e_status initialize_windowing() override;
+            //void * get_display() override;
+            ::acme::windowing::display * acme_display() override;
             void _main_send(const ::procedure & procedure) override;
             void _main_post(const ::procedure & procedure) override;
             void display_error_trap_push(int i) override;
@@ -64,10 +65,10 @@ namespace win32
             void set_finish() override;
             void kick_idle() override;
 
-            void windowing_system_post_quit() override;
+            void windowing_post_quit() override;
 
 
-            void windowing_system_application_main_loop() override;
+            void windowing_application_main_loop() override;
 
 
             void show(::particle_pointer pparticle) override;

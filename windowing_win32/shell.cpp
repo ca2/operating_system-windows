@@ -587,7 +587,7 @@ namespace windowing_win32
 
       auto pnode = system()->node();
 
-      ::pointer < windowing > pwindowing = puser->windowing();
+      ::pointer < windowing > pwindowing = system()->windowing();
 
       HWND hwnd = __hwnd(pwindowing->system_interaction()->oswindow());
 

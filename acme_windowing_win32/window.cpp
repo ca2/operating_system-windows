@@ -1307,25 +1307,7 @@ namespace win32
 
 
 
-         ::size_i32 window::get_main_screen_size()
-         {
 
-            HWND hwndDesktop = ::GetDesktopWindow();
-
-            if (!hwndDesktop)
-            {
-
-               return ::acme::windowing::window::get_main_screen_size();
-
-            }
-
-            RECT r;
-
-            ::GetWindowRect(hwndDesktop, &r);
-
-            return { r.right - r.left, r.bottom - r.top };
-
-         }
 
 
          void window::_user_post(const ::procedure& procedure)

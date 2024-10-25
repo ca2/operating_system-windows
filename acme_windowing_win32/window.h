@@ -137,7 +137,7 @@ namespace win32
             static bool _is_light_theme();
 
 
-            ::size_i32 get_main_screen_size() override;
+            //::size_i32 get_main_screen_size() override;
 
 
             void _user_post(const ::procedure& procedure) override;

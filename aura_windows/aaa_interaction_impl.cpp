@@ -4562,7 +4562,7 @@ void interaction_impl::set_tool_window(bool bSet)
 //         if (papexsession)
 //         {
 //
-//            psession = papexsession->m_paurasession;
+//            psession = papexsession;
 //
 //         }
 //
@@ -4659,7 +4659,7 @@ void interaction_impl::set_tool_window(bool bSet)
 //         if (papexsession)
 //         {
 //
-//            psession = papexsession->m_paurasession;
+//            psession = papexsession;
 //
 //         }
 //
@@ -4793,7 +4793,7 @@ void interaction_impl::set_tool_window(bool bSet)
 //         if (papexsession)
 //         {
 //
-//            psession = papexsession->m_paurasession;
+//            psession = papexsession;
 //
 //         }
 //

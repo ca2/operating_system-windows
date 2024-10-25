@@ -151,7 +151,7 @@ namespace windowing_win32
 
       plistener->m_hdevnotify = hdevnotify;
 
-      auto psession = session()->m_paurasession;
+      auto psession = session();
 
       auto puser = psession->user();
 

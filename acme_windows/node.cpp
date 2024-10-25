@@ -21,6 +21,7 @@
 #include "acme/parallelization/manual_reset_event.h"
 #include "acme/parallelization/synchronous_lock.h"
 #include "acme/platform/scoped_restore.h"
+#include "acme/platform/application.h"
 #include "acme/platform/system.h"
 #include "acme/prototype/prototype/memory.h"
 #include "acme/prototype/string/__wide.h"
@@ -866,7 +867,7 @@ namespace acme_windows
 
       if (k._open(HKEY_LOCAL_MACHINE, strKey, true))
       {
-         ::file::path str = directory_system()->system() / "CrashDumps" / strModuleNameWithTheExeExtension;
+         ::file::path str = directory_system()->user() / "CrashDumps" / strModuleNameWithTheExeExtension;
          wstring wstr = str;
          RegSetValueExW(k.m_hkeySub, L"DumpFolder", 0, REG_EXPAND_SZ, (::u8*)wstr.c_str(), ::u32((wcslen(wstr) + 1) * sizeof(wchar_t)));
          ::u32 dw = 10;

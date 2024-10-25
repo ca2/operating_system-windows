@@ -289,7 +289,7 @@ namespace windowing_win32
 
       auto puser = psession->user();
 
-      auto pwindowing = puser->windowing();
+      auto pwindowing = system()->windowing();
 
       m_pwindowing = pwindowing;
 
@@ -6101,7 +6101,7 @@ namespace windowing_win32
 //         if (papexsession)
 //         {
 //
-//            psession = papexsession->m_paurasession;
+//            psession = papexsession;
 //
 //         }
 //
@@ -6198,7 +6198,7 @@ namespace windowing_win32
 //         if (papexsession)
 //         {
 //
-//            psession = papexsession->m_paurasession;
+//            psession = papexsession;
 //
 //         }
 //
@@ -6332,7 +6332,7 @@ namespace windowing_win32
 //         if (papexsession)
 //         {
 //
-//            psession = papexsession->m_paurasession;
+//            psession = papexsession;
 //
 //         }
 //

@@ -6996,7 +6996,7 @@ namespace windowing_win32
    //         if (papexsession)
    //         {
    //
-   //            psession = papexsession->m_paurasession;
+   //            psession = papexsession;
    //
    //         }
    //
@@ -7093,7 +7093,7 @@ namespace windowing_win32
    //         if (papexsession)
    //         {
    //
-   //            psession = papexsession->m_paurasession;
+   //            psession = papexsession;
    //
    //         }
    //
@@ -7227,7 +7227,7 @@ namespace windowing_win32
    //         if (papexsession)
    //         {
    //
-   //            psession = papexsession->m_paurasession;
+   //            psession = papexsession;
    //
    //         }
    //

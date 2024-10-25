@@ -153,7 +153,25 @@ namespace win32
             g_edisplaytype = edisplaytype;
 
          }
+         ::size_i32 display::get_main_screen_size()
+         {
 
+            HWND hwndDesktop = ::GetDesktopWindow();
+
+            if (!hwndDesktop)
+            {
+
+               return ::acme::windowing::window::get_main_screen_size();
+
+            }
+
+            RECT r;
+
+            ::GetWindowRect(hwndDesktop, &r);
+
+            return { r.right - r.left, r.bottom - r.top };
+
+         }
 
       } // namespace windowing
 

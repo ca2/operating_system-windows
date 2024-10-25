@@ -42,7 +42,7 @@ namespace win32
          }
 
 
-         ::e_status windowing::defer_initialize_windowing_system()
+         ::e_status windowing::defer_initialize_windowing()
          {
 
             //      if (m_estatusInitializeX11 == error_not_initialized)
@@ -59,7 +59,7 @@ namespace win32
          }
 
 
-         ::e_status windowing::initialize_windowing_system()
+         ::e_status windowing::initialize_windowing()
          {
 
             informationf("windowing_system_win32::windowing::initialize_windowing_system");
@@ -84,12 +84,12 @@ namespace win32
 
 
 
-         void * windowing::get_display()
+         ::acme::windowing::display * windowing::acme_display()
          {
 
             //return ::platform::node::x11_get_display();
 
-            defer_initialize_windowing_system();
+            defer_initialize_windowing();
 
             //      if(m_pvoidX11Display == NULL)
             //      {
@@ -419,7 +419,7 @@ namespace win32
          }
 
 
-         void windowing::windowing_system_post_quit()
+         void windowing::windowing_post_quit()
          {
 
             ::procedure procedure;
@@ -474,7 +474,7 @@ namespace win32
          }
 
 
-         void windowing::windowing_system_application_main_loop()
+         void windowing::windowing_application_main_loop()
          {
 
             set_current_handles();
