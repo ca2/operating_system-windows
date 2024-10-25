@@ -1,36 +1,46 @@
+// Created by camilo on 2021-08-09 14:19 <3ThomasBS_
 #pragma once
 
 
-#include "acme/filesystem/filesystem/file_system.h"
+#include "acme_windows_common/file_system.h"
 
 
 namespace acme_windows
 {
 
 
-   class CLASS_DECL_ACME_WINDOWS file_system:
-      virtual public ::file_system
+   class CLASS_DECL_ACME_WINDOWS file_system :
+      virtual public ::acme_windows_common::file_system
    {
    public:
-
-
-      //__creatable_from_base(file_system, ::file_system);
 
 
       file_system();
       ~file_system() override;
 
 
-      virtual void init_system() override;
+      //::file::path module() override;
 
 
-      //virtual void update_module_path() override;
+      class ::time modification_time(const ::file::path & path) override;
+      void set_modification_time(const ::file::path & path, const class ::time & time) override;
 
 
+      ::file::path time_put_contents(const ::file::path & pathFolder, const ::string & strPrefix, const ::string & strExtension, const ::string& str) override;
+
+
+      void _erase(const ::file::path & path) override;
+
+
+      string get_temporary_file_name(const ::scoped_string & scopedstrName, const ::scoped_string & scopedstrExtension) override;
+      
+      //void write_memory_to_file(FILE * file, const void * pdata, memsize nCount, memsize * puiWritten) override;
+
+   
    };
 
 
-} // namespace apex_windows
+} // namespace acme_windows
 
 
 

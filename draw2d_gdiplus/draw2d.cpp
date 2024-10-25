@@ -83,7 +83,7 @@ namespace draw2d_gdiplus
    }
 
 
-   draw2d::private_font * draw2d::get_file_private_font(::acme::context * pcontext, const ::file::path & path)
+   draw2d::private_font * draw2d::get_file_private_font(::platform::context * pcontext, const ::file::path & path)
    {
 
       auto & pfont = m_mapPrivateFont[path];

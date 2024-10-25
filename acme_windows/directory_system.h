@@ -16,6 +16,14 @@ namespace acme_windows
    public:
 
 
+      ::file::path            m_strTimeFolder;
+      ::file::path            m_strNetSeedFolder;
+
+      ::file::path            m_strCommonAppData;
+      ::file::path            m_strAppData;
+      ::file::path            m_strPrograms;
+      ::file::path            m_strCommonPrograms;
+
       directory_system();
       ~directory_system() override;
 
