@@ -486,7 +486,7 @@ namespace acme_windows
 
       memsize s = 0;
 
-      const void* pdata = get_resource_pointer((HINSTANCE)system()->m_pplatform->m_hinstanceThis, 1024, "ZIP", s);
+      const void* pdata = get_resource_pointer((HINSTANCE)system()->m_hinstanceThis, 1024, "ZIP", s);
 
       //m_memoryMainResource.assign(pdata, s);
 
@@ -517,7 +517,7 @@ namespace acme_windows
 
       ::pointer<::platform::system>psystem = system();
 
-      if (read_resource_as_memory(*pfile->get_primitive_memory(), (HINSTANCE) psystem->m_pplatform->m_hinstanceThis, iId, psz))
+      if (read_resource_as_memory(*pfile->get_primitive_memory(), (HINSTANCE) psystem->m_hinstanceThis, iId, psz))
       {
 
          return pfile;

@@ -27,6 +27,10 @@ namespace acme_windows
       directory_system();
       ~directory_system() override;
 
+      virtual void initialize(::particle * pparticle) override;
+
+
+      virtual void init_system() override;
 
       ::file::path install() override;
       ::file::path default_install() override;
@@ -37,8 +41,8 @@ namespace acme_windows
       ::file::path appdata() override; // appdata
       ::file::path archive() override;
       ::file::path tool() override;
-      ::file::path public_system() override;
-      ::file::path system() override;
+      //::file::path public_system() override;
+      ::file::path user() override;
       ::file::path config() override;
       ::file::path local() override;
       ::file::path sensitive() override;

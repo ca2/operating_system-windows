@@ -123,18 +123,18 @@ namespace acme_windows
    }
 
 
-   ::file::path directory_system::public_system()
+   // ::file::path directory_system::public_system()
+   // {
+   //
+   //    return public_root() / "system";
+   //
+   // }
+   //
+
+   ::file::path directory_system::user()
    {
 
-      return public_root() / "system";
-
-   }
-
-
-   ::file::path directory_system::system()
-   {
-
-      return ca2roaming() / "system";
+      return ca2roaming() / "user";
 
    }
 
@@ -2306,9 +2306,9 @@ pacmedir->create CreateDirectoryW last error(%d)=%s", dwError, pszError);
 
       //}
 
-      m_pathInstall = directory_system()->install();
+      m_pathInstall = this->install();
 
-      directory_system()->m_pplatformdir->_shell_get_special_folder_path(
+      this->m_pplatformdir->_shell_get_special_folder_path(
          nullptr,
          m_strCommonAppData,
          CSIDL_COMMON_APPDATA,
@@ -2319,20 +2319,20 @@ pacmedir->create CreateDirectoryW last error(%d)=%s", dwError, pszError);
       //CSIDL_PROFILE,
       //false);
 
-      m_pathHome = directory_system()->m_pplatformdir->_get_known_folder(FOLDERID_Profile);
+      m_pathHome = this->m_pplatformdir->_get_known_folder(FOLDERID_Profile);
 
-      m_pathCa2Config = directory_system()->ca2roaming();
+      m_pathCa2Config = this->ca2roaming();
 
       m_strCommonAppData /= "ca2";
 
-      m_strAppData = directory_system()->m_pplatformdir->_get_known_folder(FOLDERID_RoamingAppData);
+      m_strAppData = this->m_pplatformdir->_get_known_folder(FOLDERID_RoamingAppData);
 
-      directory_system()->m_pplatformdir->_shell_get_special_folder_path(
+      this->m_pplatformdir->_shell_get_special_folder_path(
          nullptr,
          m_strPrograms,
          CSIDL_PROGRAMS,
          false);
-      directory_system()->m_pplatformdir->_shell_get_special_folder_path(
+      this->m_pplatformdir->_shell_get_special_folder_path(
          nullptr,
          m_strCommonPrograms,
          CSIDL_COMMON_PROGRAMS,
@@ -2358,14 +2358,14 @@ pacmedir->create CreateDirectoryW last error(%d)=%s", dwError, pszError);
       if (m_strTimeFolder.is_empty())
       {
 
-         m_strTimeFolder = directory_system()->appdata() / "time";
+         m_strTimeFolder = this->appdata() / "time";
 
       }
 
       if (m_strNetSeedFolder.is_empty())
       {
 
-         m_strNetSeedFolder = directory_system()->install() / "net";
+         m_strNetSeedFolder = this->install() / "net";
 
       }
 

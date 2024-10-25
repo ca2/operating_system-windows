@@ -347,7 +347,7 @@ namespace apex_windows
 
       ::pointer<::apex::system>psystem = system();
 
-      HINSTANCE hinstance = (HINSTANCE)psystem->m_pplatform->m_hinstanceThis;
+      HINSTANCE hinstance = (HINSTANCE)psystem->m_hinstanceThis;
 
       ATOM atom = rx_register_class(hinstance);
 
