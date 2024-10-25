@@ -221,7 +221,7 @@ namespace acme_windows
       //string get_callstack(const scoped_string & strFormat, i32 iSkip, void * caller_address, int iCount) override;
 
 
-      ::pointer < ::platform::exclusive > _get_exclusive(::particle * pparticleContext, const ::string & strName, ::security_attributes * psecurityattributes = nullptr) override;
+      ::pointer < ::acme::exclusive > _get_exclusive(::particle * pparticleContext, const ::string & strName, ::security_attributes * psecurityattributes = nullptr) override;
       i32 get_current_process_affinity_order() override;
 
 
