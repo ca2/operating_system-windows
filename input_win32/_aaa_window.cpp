@@ -226,7 +226,7 @@ namespace windowing_win32
 
       ::windowing::window::install_message_routing(pchannel);
 
-      MESSAGE_LINK(MESSAGE_CREATE, pchannel, this, &window::_001OnCreate);
+      MESSAGE_LINK(e_message_create, pchannel, this, &window::_001OnCreate);
 
       auto puserinteraction = m_pwindow->m_puserinteraction;
 
@@ -258,10 +258,10 @@ namespace windowing_win32
       pimpl->install_message_routing(pchannel);
 
 
-      MESSAGE_LINK(MESSAGE_DESTROY, pchannel, this, &window::on_message_destroy);
+      MESSAGE_LINK(e_message_destroy, pchannel, this, &window::on_message_destroy);
       MESSAGE_LINK(WM_GETICON, pchannel, this, &window::on_message_get_icon);
 
-      //MESSAGE_LINK(MESSAGE_CREATE, pchannel, pimpl, &::windowing::window::_001OnPrioCreate);
+      //MESSAGE_LINK(e_message_create, pchannel, pimpl, &::windowing::window::_001OnPrioCreate);
       auto psystem = system();
 
       //auto pnode = psystem->m_pnode->m_pauranode->m_pWindowingWin32Node;

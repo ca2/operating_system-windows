@@ -72,8 +72,8 @@ int CALLBACK kill_window(HWND window, LPARAM arg) {
   if (! GetWindowThreadProcessId(window, &pid)) return 1;
   if (pid != k->pid) return 1;
 
-  /* First try sending MESSAGE_CLOSE to request that the window close. */
-  k->signalled |= PostMessage(window, MESSAGE_CLOSE, k->exitcode, 0);
+  /* First try sending e_message_close to request that the window close. */
+  k->signalled |= PostMessage(window, e_message_close, k->exitcode, 0);
 
   /*
     Then tell the window that the user is logging off and it should exit

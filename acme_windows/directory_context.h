@@ -17,8 +17,8 @@ namespace acme_windows
       //__creatable_from_base(directory_context, ::directory_context);
 
 
-      ::pointer<file_system>     m_pfilesystem;
-      ::pointer<directory_system>      m_pdirectorysystem;
+      ::pointer<::acme_windows::file_system>           m_pfilesystem;
+      ::pointer<::acme_windows::directory_system>      m_pdirectorysystem;
 
 
       directory_context();

@@ -1166,7 +1166,7 @@ INT_PTR CALLBACK nssm_dlg(HWND window, const ::atom & atom, WPARAM w, LPARAM l) 
       return 1;
 
     /* Window closing */
-    case MESSAGE_CLOSE:
+    case e_message_close:
       DestroyWindow(window);
       return 0;
     case e_message_destroy:

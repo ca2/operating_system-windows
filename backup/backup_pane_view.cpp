@@ -111,7 +111,7 @@ namespace backup
    void pane_impact::install_message_routing(::channel * pchannel)
    {
       ::userex::pane_tab_impact::install_message_routing(pchannel);
-      MESSAGE_LINK(MESSAGE_CREATE, pchannel, this, &pane_impact::_001OnCreate);
+      MESSAGE_LINK(e_message_create, pchannel, this, &pane_impact::_001OnCreate);
    }
 
 

@@ -246,7 +246,7 @@ namespace windowing_win32
       MESSAGE_LINK(e_message_non_client_destroy, pchannel, this, &window::on_message_non_client_destroy);
       MESSAGE_LINK(WM_GETICON, pchannel, this, &window::on_message_get_icon);
 
-      //MESSAGE_LINK(MESSAGE_CREATE, pchannel, pimpl, &::windowing::window::_001OnPrioCreate);
+      //MESSAGE_LINK(e_message_create, pchannel, pimpl, &::windowing::window::_001OnPrioCreate);
       auto psystem = system();
 
       //auto pnode = psystem->m_pnode->m_pauranode->m_pWindowingWin32Node;
@@ -270,7 +270,7 @@ namespace windowing_win32
    void window::last_install_message_routing(::channel * pchannel)
    {
 
-      MESSAGE_LINK(MESSAGE_CREATE, pchannel, this, &window::_001OnCreate);
+      MESSAGE_LINK(e_message_create, pchannel, this, &window::_001OnCreate);
       MESSAGE_LINK(e_message_window_position_changed, pchannel, this, &window::on_message_window_position_changed);
       MESSAGE_LINK(WM_SYSCOMMAND, pchannel, this, &window::_001OnSysCommand);
       MESSAGE_LINK(WM_COMMAND, pchannel, this, &window::_001OnSysCommand);
@@ -288,7 +288,7 @@ namespace windowing_win32
 
    //   //::windowing::window::install_message_routing(pchannel);
 
-   //   MESSAGE_LINK(MESSAGE_CREATE, pchannel, this, &window::_001OnCreate);
+   //   MESSAGE_LINK(e_message_create, pchannel, this, &window::_001OnCreate);
    //   MESSAGE_LINK(e_message_window_position_changed, pchannel, this, & window::on_message_window_position_changed);
 
    //   auto puserinteraction = m_puserinteraction;
@@ -321,10 +321,10 @@ namespace windowing_win32
    //   m_puserinteraction->install_message_routing(pchannel);
 
 
-   //   MESSAGE_LINK(MESSAGE_DESTROY, pchannel, this, &window::on_message_destroy);
+   //   MESSAGE_LINK(e_message_destroy, pchannel, this, &window::on_message_destroy);
    //   MESSAGE_LINK(WM_GETICON, pchannel, this, &window::on_message_get_icon);
 
-   //   //MESSAGE_LINK(MESSAGE_CREATE, pchannel, pimpl, &::windowing::window::_001OnPrioCreate);
+   //   //MESSAGE_LINK(e_message_create, pchannel, pimpl, &::windowing::window::_001OnPrioCreate);
    //   auto psystem = system();
 
    //   //auto pnode = psystem->m_pnode->m_pauranode->m_pWindowingWin32Node;

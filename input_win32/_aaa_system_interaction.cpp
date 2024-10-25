@@ -37,8 +37,8 @@ namespace windowing_win32
 
       ::user::interaction::install_message_routing(pchannel);
 
-      //MESSAGE_LINK(MESSAGE_CREATE, pchannel, this, &system_interaction::on_message_create);
-      MESSAGE_LINK(MESSAGE_DESTROY, pchannel, this, &system_interaction::on_message_destroy);
+      //MESSAGE_LINK(e_message_create, pchannel, this, &system_interaction::on_message_create);
+      MESSAGE_LINK(e_message_destroy, pchannel, this, &system_interaction::on_message_destroy);
       MESSAGE_LINK(e_message_display_change, pchannel, this, &system_interaction::_001OnMessage);
       MESSAGE_LINK(e_message_setting_change, pchannel, this, &system_interaction::_001OnMessage);
       MESSAGE_LINK(e_message_font_change, pchannel, this, &system_interaction::_001OnMessage);
