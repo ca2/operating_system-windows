@@ -85,7 +85,7 @@ namespace apex_windows
 //
 //#endif
 //
-//      auto pcontext = get_context();
+//      // auto pcontext = get_context();
 //
 //      ::file::path pathCandidate = directory()->module() / strExe;
 //

@@ -262,7 +262,7 @@ namespace windowing_win32
 
       ::file::path path;
 
-      auto pcontext = get_context();
+      // auto pcontext = get_context();
 
       for (auto & strMatter : straMatter)
       {

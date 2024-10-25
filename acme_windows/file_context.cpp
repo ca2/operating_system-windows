@@ -62,7 +62,7 @@ namespace acme_windows
 
       m_pfilesystem = psystem->m_pfilesystem;
 
-      m_pdirsystem = psystem->m_pdirsystem;
+      m_pdirectorysystem = psystem->m_pdirectorysystem;
 
       //return ::success;
 
@@ -112,7 +112,7 @@ namespace acme_windows
 
       m_pfilesystem.release();
 
-      m_pdirsystem.release();
+      m_pdirectorysystem.release();
 
       ::acme_windows_common::file_context::finalize();
 

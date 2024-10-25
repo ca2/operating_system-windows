@@ -99,7 +99,7 @@ namespace draw2d_gdiplus
 
       pfont->m_pcollection = __raw_new Gdiplus::PrivateFontCollection();
 
-      auto pmemory = system()->m_paurasystem->draw2d()->write_text()->get_file_memory(pcontext, path);
+      auto pmemory = system()->draw2d()->write_text()->get_file_memory(pcontext, path);
 
       if (pmemory->has_data())
       {

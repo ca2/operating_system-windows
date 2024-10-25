@@ -96,13 +96,13 @@ string ca2_command_line(hinstance hinstance)
 //
 //         pathLnk =          auto psystem = system();
 
-         auto pacmedir = psystem->m_pacmedirectory;
+         auto pacmedir = psystem->m_pdirectorysystem;
 
 pacmedir->localconfig() / "desk/monitor-0/2desk" / strLinkTitle + ".lnk";
 //
 //                  auto psystem = system();
 
-         auto pacmedir = psystem->m_pacmedirectory;
+         auto pacmedir = psystem->m_pdirectorysystem;
 
 pacmedir->create(pathLnk.folder());
 //

@@ -74,7 +74,7 @@ namespace windowing_win32
 
       //::finalize_windows_devices();
 
-      //system()->m_paurasystem->m_phardwaredevices.release();
+      //system()->m_phardwaredevices.release();
 
       ::pointer<::user::message>pusermessage(pmessage);
 
@@ -105,7 +105,7 @@ namespace windowing_win32
          if (pmessage->m_atom == (enum_message) WM_FONTCHANGE)
          {
 
-            auto psystem = system()->m_paurasystem;
+            auto psystem = system();
 
             psystem->signal(id_operating_system_font_list_change);/*
 

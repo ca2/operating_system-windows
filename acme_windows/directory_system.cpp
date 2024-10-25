@@ -278,12 +278,12 @@ namespace acme_windows
 
          auto psystem = system();
 
-         auto pacmedir = psystem->m_pacmedirectory;
+         auto pacmedir = psystem->m_pdirectorysystem;
 
 
       return          auto psystem = system();
 
-         auto pacmedir = psystem->m_pacmedirectory;
+         auto pacmedir = psystem->m_pdirectorysystem;
 
 pacmedir->roaming();
 
@@ -318,12 +318,12 @@ pacmedir->roaming();
 
          auto psystem = system();
 
-         auto pacmedir = psystem->m_pacmedirectory;
+         auto pacmedir = psystem->m_pdirectorysystem;
 
 
       return          auto psystem = system();
 
-         auto pacmedir = psystem->m_pacmedirectory;
+         auto pacmedir = psystem->m_pdirectorysystem;
 
 pacmedir->roaming();
 
@@ -358,13 +358,13 @@ pacmedir->roaming();
    #ifdef ANDROID
             auto psystem = system();
 
-         auto pacmedir = psystem->m_pacmedirectory;
+         auto pacmedir = psystem->m_pdirectorysystem;
 
 
 
       return          auto psystem = system();
 
-         auto pacmedir = psystem->m_pacmedirectory;
+         auto pacmedir = psystem->m_pdirectorysystem;
 
 pacmedir->roaming();
 
@@ -532,7 +532,7 @@ pacmedir->roaming();
    //      strCandidate = stra[i] / pszTopic;
 
    //      //if (m_papplication->file().exists(strCandidate))
-   //      if (m_pacmefile->exists(strCandidate))
+   //      if (m_pfilesystem->exists(strCandidate))
    //      {
 
    //         return strCandidate;
@@ -1186,7 +1186,7 @@ bool windows_file_find_is_dots(const WIN32_FIND_DATAW & data)
 
                //informationf("         auto psystem = system();
 
-         auto pacmedir = psystem->m_pacmedirectory;
+         auto pacmedir = psystem->m_pdirectorysystem;
 
 pacmedir->create CreateDirectoryW last error(%d)=%s", dwError, pszError);
 
@@ -1947,7 +1947,7 @@ pacmedir->create CreateDirectoryW last error(%d)=%s", dwError, pszError);
 
             strCandidate = ::file::path(stra[i]) / pszTopic;
 
-            if (m_pacmefile->exists(strCandidate))
+            if (m_pfilesystem->exists(strCandidate))
             {
                return strCandidate;
             }
@@ -2063,10 +2063,10 @@ pacmedir->create CreateDirectoryW last error(%d)=%s", dwError, pszError);
 //               if(exception.m_estatus == error_already_exists)
 //               {
 //
-//                  if (m_pacmefile->exists(strDir))
+//                  if (m_pfilesystem->exists(strDir))
 //                  {
 //
-//                     m_pacmefile->delete_file(strDir);
+//                     m_pfilesystem->delete_file(strDir);
 //
 //                     create_directory(strDir);
 //
@@ -2088,7 +2088,7 @@ pacmedir->create CreateDirectoryW last error(%d)=%s", dwError, pszError);
 ////
 ////               //informationf("         auto psystem = system();
 ////
-//////         auto pacmedir = psystem->m_pacmedirectory;
+//////         auto pacmedir = psystem->m_pdirectorysystem;
 //////
 //////pacmedir->create CreateDirectoryW last error(%d)=%s", dwError, pszError);
 //////
@@ -2371,7 +2371,7 @@ pacmedir->create CreateDirectoryW last error(%d)=%s", dwError, pszError);
 
       auto psystem = system();
 
-      auto pacmedir = psystem->m_pacmedirectory;
+      auto pacmedir = psystem->m_pdirectorysystem;
 
       pacmedir->create(m_strTimeFolder);
       //xxdebug_box("win_dir::initialize (m_strTimeFolder)", "win_dir::initialize", 0);
@@ -2384,7 +2384,7 @@ pacmedir->create CreateDirectoryW last error(%d)=%s", dwError, pszError);
 
           /*     auto psystem = system();
 
-         auto pacmedir = psystem->m_pacmedirectory;*/
+         auto pacmedir = psystem->m_pdirectorysystem;*/
 
       pacmedir->create(m_strTimeFolder / "time");
 

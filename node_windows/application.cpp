@@ -202,14 +202,14 @@ namespace aura
 
    //   if (file_system()->exists(         auto psystem = system();
 
-         auto pacmedir = psystem->m_pacmedirectory;
+         auto pacmedir = psystem->m_pdirectorysystem;
 
 pacmedir->system() / "config\\system\\audio.txt"))
    //   {
 
    //      str = file_system()->as_string(         auto psystem = system();
 
-         auto pacmedir = psystem->m_pacmedirectory;
+         auto pacmedir = psystem->m_pdirectorysystem;
 
 pacmedir->system() / "config\\system\\audio.txt");
 

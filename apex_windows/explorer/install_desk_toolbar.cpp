@@ -36,11 +36,11 @@ bool register_desk_toolbar(::apex::system* psystem)
    //}
 
    //sleep(1_s);
-   //auto psystem = system()->m_paurasystem;
+   //auto psystem = system();
 
    auto pnode = psystem->node()->m_papexnode;
 
-   ::file::path pathDll = psystem->m_pacmedirectory->module() / "_desk_tb.dll";
+   ::file::path pathDll = psystem->m_pdirectorysystem->module() / "_desk_tb.dll";
 
    pnode->register_dll(pathDll);
 

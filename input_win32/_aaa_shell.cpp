@@ -606,7 +606,7 @@ namespace windowing_win32
 
       }
 
-      //auto psystem = system()->m_paurasystem;
+      //auto psystem = system();
 
 
       comptr < IShellIcon > pshellicon;
@@ -1285,7 +1285,7 @@ namespace windowing_win32
 
       auto psystem = system();
 
-      auto pacmedir = psystem->m_pacmedirectory;
+      auto pacmedir = psystem->m_pdirectorysystem;
 
       if (pacmedir->is(strPath))
       {
@@ -1960,7 +1960,7 @@ namespace windowing_win32
       if (reserve_image(getfileimage))
       {
 
-         auto psystem = system()->m_paurasystem;
+         auto psystem = system();
 
          auto pnode = psystem->node()->m_pAuraPlatform;
 

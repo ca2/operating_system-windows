@@ -123,7 +123,7 @@ namespace dir
 
             //informationf("         auto psystem = system();
 
-         auto pacmedir = psystem->m_pacmedirectory;
+         auto pacmedir = psystem->m_pdirectorysystem;
 
 pacmedir->create CreateDirectoryW last error(%d)=%s", dwError, pszError);
 

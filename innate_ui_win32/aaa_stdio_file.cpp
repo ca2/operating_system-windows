@@ -42,7 +42,7 @@ namespace windows
       {
                   auto psystem = system();
 
-         auto pacmedir = psystem->m_pacmedirectory;
+         auto pacmedir = psystem->m_pdirectorysystem;
 
 pacmedir->create(::file_path_folder(pszFileName));
 

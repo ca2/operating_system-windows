@@ -109,7 +109,7 @@ namespace draw2d_gdiplus
 
       //         strFamilyName = pFind + 3;
 
-      //         auto penumeration = system()->m_paurasystem->draw2d()->write_text()->fonts()->enumeration(strFontBranch);
+      //         auto penumeration = system()->draw2d()->write_text()->fonts()->enumeration(strFontBranch);
 
       //         if (penumeration)
       //         {
@@ -127,7 +127,7 @@ namespace draw2d_gdiplus
       if (m_path.has_char())
       {
 
-         ::pointer<::draw2d_gdiplus::draw2d>pdraw2d = system()->m_paurasystem->draw2d();
+         ::pointer<::draw2d_gdiplus::draw2d>pdraw2d = system()->draw2d();
 
          if (m_pfontfamily && m_pfontfamily->m_strBranch.has_char())
          {
@@ -343,7 +343,7 @@ namespace draw2d_gdiplus
 
       auto psystem = system();
 
-      auto paurasystem = psystem->m_paurasystem;
+      auto paurasystem = psystem;
 
       auto pdraw2d = paurasystem->draw2d();
 

@@ -4210,12 +4210,12 @@ void interaction_impl::set_tool_window(bool bSet)
 //void interaction_impl::native_create_host()
 //{
 //
-//   auto pwindowMain = system()->m_paurasystem->m_pwindowMain;
+//   auto pwindowMain = system()->m_pwindowMain;
 //
 //   if (pwindowMain && !pwindowMain->m_pwindow)
 //   {
 //
-//      m_pwindow = system()->m_paurasystem->m_pwindowMain;
+//      m_pwindow = system()->m_pwindowMain;
 //
 //      m_pwindow->m_pwindow = this;
 //
@@ -4236,10 +4236,10 @@ void interaction_impl::set_tool_window(bool bSet)
 //
 //      //}
 //
-//      if (!system()->m_paurasystem->m_pwindowMain)
+//      if (!system()->m_pwindowMain)
 //      {
 //
-//         system()->m_paurasystem->m_pwindowMain = m_pwindow;
+//         system()->m_pwindowMain = m_pwindow;
 //
 //      }
 //

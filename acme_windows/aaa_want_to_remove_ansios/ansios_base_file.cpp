@@ -95,12 +95,12 @@ int_bool file_system()->put_contents(const char * path, const char * contents, :
 
          auto psystem = system();
 
-         auto pacmedir = psystem->m_pacmedirectory;
+         auto pacmedir = psystem->m_pdirectorysystem;
 
 
             auto psystem = system();
 
-         auto pacmedir = psystem->m_pacmedirectory;
+         auto pacmedir = psystem->m_pdirectorysystem;
 
 pacmedir->create(::file_path_folder(path));
 

@@ -554,7 +554,7 @@ namespace acme_windows
          //
          //   ::file::path pathCommand =          auto psystem = system();
 
-         //         auto pacmedirectory = psystem->m_pacmedirectory;
+         //         auto pacmedirectory = psystem->m_pdirectorysystem;
          //
          //pacmedirectory->system() / "env.bat";
          //
@@ -673,7 +673,7 @@ namespace acme_windows
 
          //string strEnv = file_system()->as_string(         auto psystem = system();
 
-      //         auto pacmedirectory = psystem->m_pacmedirectory;
+      //         auto pacmedirectory = psystem->m_pdirectorysystem;
       //
       //pacmedirectory->system() / "env.txt");
 

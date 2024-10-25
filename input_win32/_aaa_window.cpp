@@ -607,7 +607,7 @@ namespace windowing_win32
          if (pmessage->m_atom == WM_FONTCHANGE)
          {
 
-            auto psystem = system()->m_paurasystem;
+            auto psystem = system();
 
             psystem->signal(id_operating_system_font_list_change);
 
