@@ -52,7 +52,7 @@ namespace music
 
             defer_create_synchronization();
 
-            auto psystem = system()->m_paquasystem;
+            auto psystem = system();
 
             auto pmultimedia = psystem->multimedia()->m_pveriwellmultimediaThis;
 

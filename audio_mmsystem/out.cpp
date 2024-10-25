@@ -115,7 +115,7 @@ namespace audio_mmsystem
       m_pwaveformat->m_waveformat.nBlockAlign       = m_pwaveformat->m_waveformat.wBitsPerSample * m_pwaveformat->m_waveformat.nChannels / 8;
       m_pwaveformat->m_waveformat.nAvgBytesPerSec   = m_pwaveformat->m_waveformat.nSamplesPerSec * m_pwaveformat->m_waveformat.nBlockAlign;
       
-      auto paudio = system()->m_paquasystem->audio()->m_paudio;
+      auto paudio = system()->audio()->m_paudio;
 
       auto paudiowave = paudio->audiowave();
 
