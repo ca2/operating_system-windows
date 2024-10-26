@@ -58,7 +58,7 @@ namespace windowing_win32
 
       ::hardware::devices::on_initialize_particle();
 
-      ::pointer < ::windowing_win32::windowing > pwin32windowing = user()->windowing();
+      ::pointer < ::windowing_win32::windowing > pwin32windowing = system()->windowing();
 
       auto psysteminteraction = pwin32windowing->system_interaction();
 

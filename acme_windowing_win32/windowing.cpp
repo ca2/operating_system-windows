@@ -82,25 +82,16 @@ namespace win32
 
          }
 
+         //void windowing::show(::particle_pointer pparticle)
+         //{
 
+
+         //}
 
          ::acme::windowing::display * windowing::acme_display()
          {
 
-            //return ::platform::node::x11_get_display();
-
-            defer_initialize_windowing();
-
-            //      if(m_pvoidX11Display == NULL)
-            //      {
-            //
-            //         m_pvoidX11Display = fetch_windowing_system_display();
-            //
-            //      }
-            //
-            //      return m_pvoidX11Display;
-
-            return nullptr;
+            return ::acme::windowing::windowing::acme_display();
 
          }
 

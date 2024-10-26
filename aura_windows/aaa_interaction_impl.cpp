@@ -2580,7 +2580,7 @@ namespace aura_windows
 
    //   ::pointer<::user::message>pusermessage(pmessage);
 
-   //   auto psession = get_session();
+   //   
 
    //   auto pcursor = psession->get_cursor();
 
@@ -4411,7 +4411,7 @@ void interaction_impl::set_tool_window(bool bSet)
 //
 //         }
 //
-//         auto psession = get_session();
+//         
 //
 //         if (message == e_message_key_down || message == e_message_sys_key_down)
 //         {
@@ -4536,7 +4536,7 @@ void interaction_impl::set_tool_window(bool bSet)
 //
 //      }
 //      
-//      //auto psession = get_session();
+//      //
 //
 //
 //
@@ -5074,7 +5074,7 @@ void interaction_impl::set_tool_window(bool bSet)
 //
 //      //   }
 //
-//      //   auto psession = get_session();
+//      //   
 //
 //      //   if (message == e_message_key_down || message == e_message_sys_key_down)
 //      //   {
@@ -5199,7 +5199,7 @@ void interaction_impl::set_tool_window(bool bSet)
 //
 //      }
 //      
-//      //auto psession = get_session();
+//      //
 //
 //
 //

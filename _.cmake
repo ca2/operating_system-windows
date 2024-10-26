@@ -6,8 +6,9 @@ elseif(CMAKE_SIZEOF_VOID_P EQUAL 4)
    set(PLATFORM_CONFIGURATION "Win32")
 endif()
 
-
-
+add_compile_options(
+   /bigobj
+)
 #message(STATUS "CMAKE_GENERATOR_PLATFORM is ${CMAKE_GENERATOR_PLATFORM}")
 
 set(CONFIGURATION_NAME ${CMAKE_BUILD_TYPE})
@@ -94,3 +95,14 @@ message(STATUS "PLATFORM_CONFIGURATION is ${PLATFORM_CONFIGURATION}")
 message(STATUS "CMAKE_BUILD_TYPE is ${CMAKE_BUILD_TYPE}")
 message(STATUS "OPERATING_SYSTEM_NAME is ${OPERATING_SYSTEM_NAME}")
 
+
+
+add_custom_target(copy_libraries_step
+   COMMAND ${CMAKE_COMMAND} -E copy_directory_if_different
+   "${EXECUTABLE_OUTPUT_PATH}/../../../operating_system/storage-windows/x64/Debug/third/binary/"
+   "${EXECUTABLE_OUTPUT_PATH}"
+   COMMAND ${CMAKE_COMMAND} -E copy_directory_if_different
+   "${EXECUTABLE_OUTPUT_PATH}/../../../operating_system/storage-windows/x64/Debug/binary/"
+   "${EXECUTABLE_OUTPUT_PATH}"
+   COMMENT "copy_libraries_step"
+)

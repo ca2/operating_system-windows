@@ -720,7 +720,7 @@ namespace windowing_win32
    void icon::load_file(const ::string & strPath)
    {
 
-      m_pathProcessed = context()->defer_process_matter_path(strPath);
+      m_pathProcessed = application()->defer_process_matter_path(strPath);
 
       auto memory = file()->as_memory(m_pathProcessed);
 

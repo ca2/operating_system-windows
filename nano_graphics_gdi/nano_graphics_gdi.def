@@ -1,4 +1,3 @@
-LIBRARY  "audio_mmsystem"
+LIBRARY  "nano_graphics_gdi"
 
 EXPORTS
-audio_mmsystem_factory_exchange

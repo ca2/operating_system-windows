@@ -7,6 +7,9 @@ list(APPEND library_source
    _.h
    _factory.cpp
    _file.cpp
+   _no_pch.cpp
+   create_process.cpp
+   create_process.h
    directory_system.cpp
    directory_system.h
    file_system.cpp
@@ -71,6 +74,7 @@ list(APPEND library_source
    windows_desktop.cpp
    )
 
+set_source_files_properties(_no_pch.cpp PROPERTIES SKIP_PRECOMPILE_HEADERS ON)
 
 add_library(acme_windows SHARED ${library_source})
 

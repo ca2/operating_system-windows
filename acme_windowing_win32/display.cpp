@@ -10,6 +10,7 @@
 #include "acme/nano/nano.h"
 #include "acme/user/micro/user.h"
 #include "acme/windowing/windowing.h"
+#include "acme/_operating_system.h"
 
 namespace win32
 {
@@ -113,7 +114,16 @@ namespace win32
          ::size_i32 display::get_main_screen_size()
          {
 
-            return { 800, 600 };
+            auto hwnd = ::GetDesktopWindow();
+RECT r;
+            ::GetWindowRect(hwnd, &r);
+
+            if(::width(r) < 800 || ::height(r) < 600)
+            {
+               return { 800, 600 };
+            }
+
+            return {::width(r), ::height(r)};
 
          }
 
@@ -153,25 +163,25 @@ namespace win32
             g_edisplaytype = edisplaytype;
 
          }
-         ::size_i32 display::get_main_screen_size()
-         {
+         //::size_i32 display::get_main_screen_size()
+         //{
 
-            HWND hwndDesktop = ::GetDesktopWindow();
+         //   HWND hwndDesktop = ::GetDesktopWindow();
 
-            if (!hwndDesktop)
-            {
+         //   if (!hwndDesktop)
+         //   {
 
-               return ::acme::windowing::window::get_main_screen_size();
+         //      return ::acme::windowing::window::get_main_screen_size();
 
-            }
+         //   }
 
-            RECT r;
+         //   RECT r;
 
-            ::GetWindowRect(hwndDesktop, &r);
+         //   ::GetWindowRect(hwndDesktop, &r);
 
-            return { r.right - r.left, r.bottom - r.top };
+         //   return { r.right - r.left, r.bottom - r.top };
 
-         }
+         //}
 
       } // namespace windowing
 

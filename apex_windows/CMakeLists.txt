@@ -3,9 +3,14 @@ project(apex_windows CXX)
 
 
 list(APPEND library_source
+   shell/shell.cpp
+   shell/shell.h
    _.cpp
    _.h
    _factory.cpp
+   app_launcher.cpp
+   app_launcher.h
+   connectivity.cpp
    framework.cpp
    framework.h
     gdi.cpp
@@ -50,7 +55,17 @@ if (MSVC)
     target_link_options(apex_windows PRIVATE "/DEFAULTLIB:msvcrt$<$<CONFIG:Debug>:d>")
     target_link_options(apex_windows PRIVATE "/IMPLIB:${LIBRARY_OUTPUT_PATH}/apex_windows.lib")
     target_link_options(apex_windows PRIVATE "/DEF:${CMAKE_CURRENT_SOURCE_DIR}/apex_windows.def")
-    target_link_libraries(apex_windows PRIVATE acme_windows acme_windows_common apex_windows_common acme apex aqua aura Gdiplus)
+    target_link_libraries(apex_windows PRIVATE
+       acme_windows
+       acme_windows_common
+       apex_windows_common
+       acme
+       apex
+       Gdiplus
+       CredUI
+       WS2_32
+    Secur32
+    Version)
 elseif(LINUX)
 
     if(NOT DONT_USE_PKG_CONFIG)

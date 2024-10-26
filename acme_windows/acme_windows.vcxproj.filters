@@ -23,10 +23,10 @@
     <ClCompile Include="node.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="acme_directory.cpp">
+    <ClCompile Include="directory_system.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="acme_path.cpp">
+    <ClCompile Include="path_system.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="serial.cpp">
@@ -98,9 +98,6 @@
     <ClCompile Include="process.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="acme_file.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="_no_pch.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -128,10 +125,7 @@
     <ClCompile Include="mmsystem.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="dir_context.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="dir_system.cpp">
+    <ClCompile Include="directory_context.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="file_context.cpp">

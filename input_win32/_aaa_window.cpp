@@ -285,7 +285,7 @@ namespace windowing_win32
    void window::create_window(::windowing::window * pimpl)
    {
 
-      auto psession = get_session();
+      
 
       auto puser = psession->user();
 
@@ -5950,7 +5950,7 @@ namespace windowing_win32
 //
 //         }
 //
-//         auto psession = get_session();
+//         
 //
 //         if (message == e_message_key_down || message == e_message_sys_key_down)
 //         {
@@ -6075,7 +6075,7 @@ namespace windowing_win32
 //
 //      }
 //
-//      //auto psession = get_session();
+//      //
 //
 //
 //

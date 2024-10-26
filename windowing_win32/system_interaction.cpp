@@ -107,9 +107,18 @@ namespace windowing_win32
 
             auto psystem = system();
 
-            psystem->signal(id_operating_system_font_list_change);/*
+            ::cast <::manager> pmanager = psystem;
 
-            psystem->handle_subject(ptopic);*/
+            if (pmanager)
+            {
+
+               pmanager->signal(id_operating_system_font_list_change);
+
+            }
+
+
+
+            //psystem->handle_subject(ptopic);
 
             //fork([this]()
               // {

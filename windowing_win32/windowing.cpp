@@ -1313,6 +1313,23 @@ namespace windowing_win32
    }
 
 
+   void windowing::windowing_application_main_loop()
+   {
+
+      ::win32::acme::windowing::windowing::windowing_application_main_loop();
+
+   }
+
+
+   void windowing::windowing_post_quit()
+   {
+
+      ::win32::acme::windowing::windowing::windowing_post_quit();
+
+   }
+
+
+
    bool windowing::_top_level_contains_name(string str)
    {
 

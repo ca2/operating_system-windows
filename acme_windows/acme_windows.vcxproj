@@ -1012,13 +1012,11 @@
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="acme_directory.cpp" />
-    <ClCompile Include="acme_file.cpp" />
+    <ClCompile Include="directory_system.cpp" />
     <ClCompile Include="application.cpp" />
     <ClCompile Include="create_process.cpp" />
     <ClCompile Include="Debug.cpp" />
-    <ClCompile Include="dir_context.cpp" />
-    <ClCompile Include="dir_system.cpp" />
+    <ClCompile Include="directory_context.cpp" />
     <ClCompile Include="exclusive.cpp" />
     <ClCompile Include="file_context.cpp" />
     <ClCompile Include="file_dialog.cpp" />
@@ -1036,7 +1034,7 @@
     <ClCompile Include="mmresult.cpp" />
     <ClCompile Include="mmsystem.cpp" />
     <ClCompile Include="node.cpp" />
-    <ClCompile Include="acme_path.cpp" />
+    <ClCompile Include="path_system.cpp" />
     <ClCompile Include="console.cpp" />
     <ClCompile Include="_file.cpp" />
     <ClCompile Include="file_memory_map.cpp" />

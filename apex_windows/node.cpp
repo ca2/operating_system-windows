@@ -876,7 +876,7 @@ namespace apex_windows
       if (file_system()->exists(directory_system()->roaming() / "system/audio.txt"))
       {
 
-         str = file_system()->as_string(directory_system()->system() / "config\\system\\audio.txt");
+         str = file_system()->as_string(directory_system()->user() / "config\\system\\audio.txt");
 
       }
       else

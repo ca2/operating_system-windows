@@ -581,9 +581,9 @@ namespace windowing_win32
 
       }
 
-      auto psession = get_session();
+      
 
-      auto puser = psession->user();
+      auto puser = session()->user();
 
       auto pnode = system()->node();
 

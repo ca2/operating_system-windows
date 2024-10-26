@@ -6,69 +6,18 @@ list(APPEND library_source
    _.cpp
    _.h
    _factory.cpp
-   #_file.cpp
-   #acme_directory.cpp
-   #acme_directory.h
-   #acme_file.cpp
-   #acme_file.h
-#   acme_path.cpp
-#   acme_path.h
-#   application.cpp
-#   application.h
-#   console.cpp
-#   console.h
-#   dir_context.cpp
-#   dir_context.h
-#   dir_system.cpp
-#   dir_system.h
-#   exclusive.cpp
-#   exclusive.h
-#   file_context.cpp
-#   file_context.h
-#   file_dialog.cpp
-#   file_find.cpp
-#   file_find.h
-#   file_link.cpp
-#   file_link.h
-#   file_memory_map.cpp
-#   file_memory_map.h
-#   file_system.cpp
-#   file_system.h
-#   file_watcher.cpp
-#   file_watcher.h
-#   folder_dialog.cpp
+   button.cpp
+   button.h
+   dialog.cpp
+   dialog.h
    framework.cpp
    framework.h
-#   integration_context.cpp
-#   integration_context.h
-#   itemidlist.cpp
-#   itemidlist.h
-#   known_folder_struct.cpp
-#   known_folder_struct.h
-#   language.cpp
-#   list_serial_ports.cpp
-#   main_window.cpp
-#   main_window.h
-#   message_loop.cpp
-#   mmresult.cpp
-#   mmresult.h
-#   mmsystem.cpp
-#   node.cpp
-#   node.h
-#   pipe.cpp
-#   pipe.h
-#   registry.cpp
-#   registry.h
-#   sapi.cpp
-#   serial.cpp
-#   serial.h
-#   shared_memory.cpp
-#   shared_memory.h
-#   strdup_array.cpp
-#   trace.cpp
-#   uac_tools.cpp
-#   uac_tools.h
-#   windows_desktop.cpp
+   icon.cpp
+   icon.h
+   innate_ui.cpp
+   innate_ui.h
+   still.cpp
+   still.h
    window.cpp
    window.h
    )
@@ -85,15 +34,7 @@ if (MSVC)
     target_link_options(${PROJECT_NAME} PRIVATE "/DEFAULTLIB:msvcrt$<$<CONFIG:Debug>:d>")
     target_link_options(${PROJECT_NAME} PRIVATE "/IMPLIB:${LIBRARY_OUTPUT_PATH}/${PROJECT_NAME}.lib")
     target_link_options(${PROJECT_NAME} PRIVATE "/DEF:${CMAKE_CURRENT_SOURCE_DIR}/${PROJECT_NAME}.def")
-    target_link_libraries(${PROJECT_NAME} PRIVATE
-       ${PROJECT_NAME}_common
-       acme
-       apex
-       aqua
-       aura
-       Gdiplus
-       Setupapi
-       Credui)
+    target_link_libraries(${PROJECT_NAME} PRIVATE acme apex Gdiplus)
 elseif(LINUX)
 
     if(NOT DONT_USE_PKG_CONFIG)

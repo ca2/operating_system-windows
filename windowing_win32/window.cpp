@@ -834,7 +834,14 @@ namespace windowing_win32
 
             auto psystem = system();
 
-            psystem->signal(id_operating_system_font_list_change);
+            ::cast < ::manager > pmanager = psystem;
+
+            if (pmanager)
+            {
+
+               pmanager->signal(id_operating_system_font_list_change);
+
+            }
 
             //auto ptopic = psystem->topic(id_os_font_change);
 
@@ -6845,7 +6852,7 @@ namespace windowing_win32
    //
    //         }
    //
-   //         auto psession = get_session();
+   //         
    //
    //         if (message == e_message_key_down || message == e_message_sys_key_down)
    //         {
@@ -6970,7 +6977,7 @@ namespace windowing_win32
    //
    //      }
    //
-   //      //auto psession = get_session();
+   //      //
    //
    //
    //

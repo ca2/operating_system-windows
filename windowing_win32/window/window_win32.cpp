@@ -522,7 +522,7 @@ namespace windowing_win32
 wstring windowing::_windows_calc_icon_window_class(::user::interaction * puserinteraction, u32 dwDefaultStyle, const ::string & pszMatter)
 {
 
-   auto pcontext = puserinteraction->get_context();
+   auto papplication = application();
 
    ::file::path pathFolder(pszMatter);
 
@@ -532,7 +532,7 @@ wstring windowing::_windows_calc_icon_window_class(::user::interaction * puserin
 
    string strPath = directory()->matter(pathIcon);
 
-   HICON hIcon = (HICON) ::LoadImageW(nullptr, wstring(pcontext->get_matter_path(strPath)), IMAGE_ICON, 256, 256, LR_LOADFROMFILE);
+   HICON hIcon = (HICON) ::LoadImageW(nullptr, wstring(papplication->get_matter_path(strPath)), IMAGE_ICON, 256, 256, LR_LOADFROMFILE);
 
    wstring strClass = _windows_get_user_interaction_window_class(puserinteraction);
 
