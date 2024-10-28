@@ -232,6 +232,12 @@ LRESULT CALLBACK __window_procedure(HWND hwnd, UINT message, WPARAM wparam, LPAR
       informationf("WM_SYSCOMMAND");
 
    }
+   else if (message == WM_LBUTTONUP)
+   {
+
+      informationf("WM_LBUTTONUP");
+
+   }
    else if (message == WM_NCDESTROY)
    {
 

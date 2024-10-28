@@ -5,6 +5,7 @@
 
 #include "aura/windowing/display.h"
 #include "aura/hardware/device_listener.h"
+#include "acme_windowing_win32/display.h"
 
 
 #include "acme/_operating_system.h"
@@ -17,7 +18,8 @@ namespace windowing_win32
 
    class CLASS_DECL_WINDOWING_WIN32 display :
       virtual public ::windowing::display,
-      virtual public ::hardware::device_listener
+      virtual public ::hardware::device_listener,
+      virtual public ::win32::acme::windowing::display
    {
    public:
 

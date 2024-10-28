@@ -1313,7 +1313,7 @@ namespace windowing_win32
 
          m_eventUpdateScreen.ResetEvent();
 
-         m_ptaskUpdateScreen->run_posted_procedures();
+         m_ptaskUpdateScreen->task_iteration();
 
       }
 

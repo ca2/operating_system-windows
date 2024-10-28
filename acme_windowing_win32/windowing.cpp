@@ -31,7 +31,7 @@ namespace win32
          windowing::windowing()
          {
 
-
+            m_bKeepRunningPostedProcedures = true;
          }
 
 
@@ -393,7 +393,7 @@ namespace win32
             if (m_itask)
             {
 
-               ::PostThreadMessage((DWORD) m_itask, e_message_quit, 0, 0);
+               ::PostThreadMessage((DWORD)m_itask, e_message_quit, 0, 0);
 
             }
 
@@ -405,7 +405,7 @@ namespace win32
          void windowing::kick_idle()
          {
 
-            ::PostThreadMessage((DWORD) m_itask, e_message_kick_idle, 0, 0);
+            ::PostThreadMessage((DWORD)m_itask, e_message_kick_idle, 0, 0);
 
          }
 
@@ -427,64 +427,71 @@ namespace win32
          }
 
 
-         bool windowing::_process_windowing_messages()
+         bool windowing::handle_messages()
          {
 
-            if (is_main_thread())
+            ASSERT(is_current_task());
+
+            MSG msg;
+
+            while (PeekMessage(&msg, 0, 0, 0, PM_REMOVE))
             {
 
-               run_posted_procedures();
-
-               if (MsgWaitForMultipleObjects(0, NULL, FALSE, 100, QS_ALLINPUT) == WAIT_OBJECT_0)
+               if (msg.message == WM_QUIT)
                {
-                  MSG msg;
 
-                  while (PeekMessage(&msg, 0, 0, 0, PM_REMOVE))
-                  {
-                     if (msg.message == WM_QUIT)
-                     {
-                        return false;
+                  return false;
 
-                     }
-                     else if (msg.message == e_message_kick_idle)
-                     {
+               }
+               else if (msg.message == e_message_kick_idle)
+               {
 
-                        return true;
+                  return true;
 
-                     }
-                     //if (!TranslateAccelerator(msg.hwnd, hAccelTable, &msg))
-                     {
-                        TranslateMessage(&msg);
-                        DispatchMessage(&msg);
-                     }
-                  }
+               }
+
+               //if (!TranslateAccelerator(msg.hwnd, hAccelTable, &msg))
+               {
+
+                  TranslateMessage(&msg);
+
+                  DispatchMessage(&msg);
+
                }
 
             }
+
             return true;
+
          }
 
 
          void windowing::windowing_application_main_loop()
          {
 
-            set_current_handles();
+            //set_current_handles();
 
-            ::set_main_thread();
+            //::set_main_thread();
+
+            //system()->defer_post_initial_request();
+
+            //run();
 
             system()->defer_post_initial_request();
 
-            while (true)
-            {
+            main();
 
-               if (!_process_windowing_messages())
-               {
+            //while (true)
+            //{
 
-                  break;
+            //   if (!_process_windowing_messages())
+            //   {
 
-               }
+            //      break;
 
-            }
+            //   }
+
+            //}
 
             if (::system()->m_pmanualreseteventMainLoopEnd)
             {
@@ -496,12 +503,12 @@ namespace win32
          }
 
 
-         void windowing::_do_tasks()
-         {
+         //void windowing::_do_tasks()
+         //{
 
-            _process_windowing_messages();
+         //   _process_windowing_messages();
 
-         }
+         //}
 
 
       } // namespace windowing

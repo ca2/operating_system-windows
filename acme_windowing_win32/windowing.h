@@ -74,9 +74,9 @@ namespace win32
             void show(::particle_pointer pparticle) override;
 
 
-            void _do_tasks() override;
+            //void _do_tasks() override;
 
-            bool _process_windowing_messages();
+            bool handle_messages() override;
 
 
          };

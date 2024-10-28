@@ -8309,7 +8309,18 @@ namespace windowing_win32
    void window::_user_send(const ::procedure & procedure)
    {
 
-      ::SendMessage(m_hwnd, WM_USER + 1297, 0, (lparam)(::uptr)(::subparticle*)procedure.m_pbase.m_p);
+      if (m_hwnd)
+      {
+
+         ::SendMessage(m_hwnd, WM_USER + 1297, 0, (lparam)(::uptr)(::subparticle *)procedure.m_pbase.m_p);
+
+      }
+      else
+      {
+
+         ::win32::acme::windowing::window::_user_send(procedure);
+
+      }
 
    }
 
