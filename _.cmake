@@ -42,10 +42,13 @@ add_compile_definitions(WINDOWS_DESKTOP)
 
 
 list(APPEND app_common_dependencies
-acme_windows_common
+   acme_windows_common
    acme_windows
+   acme_windowing_win32
+   nano_graphics_gdi
    apex_windows_common
    apex_windows
+   innate_ui_win32
    aura_windows_common
    aura_windows
    windowing_win32

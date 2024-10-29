@@ -867,7 +867,7 @@ namespace acme_windows
 
       if (k._open(HKEY_LOCAL_MACHINE, strKey, true))
       {
-         ::file::path str = directory_system()->user() / "CrashDumps" / strModuleNameWithTheExeExtension;
+         ::file::path str = directory_system()->userconfig() / "CrashDumps" / strModuleNameWithTheExeExtension;
          wstring wstr = str;
          RegSetValueExW(k.m_hkeySub, L"DumpFolder", 0, REG_EXPAND_SZ, (::u8*)wstr.c_str(), ::u32((wcslen(wstr) + 1) * sizeof(wchar_t)));
          ::u32 dw = 10;

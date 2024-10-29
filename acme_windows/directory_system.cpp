@@ -131,7 +131,7 @@ namespace acme_windows
    // }
    //
 
-   ::file::path directory_system::user()
+   ::file::path directory_system::userconfig()
    {
 
       return ca2roaming() / "user";

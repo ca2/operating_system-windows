@@ -35,13 +35,9 @@
 
 
 
-__FACTORY_EXPORT void aura_windows_factory(::factory::factory * pfactory);
-
 
 __FACTORY_EXPORT void windowing_win32_factory(::factory::factory * pfactory)
 {
-
-   aura_windows_factory(pfactory);
 
    pfactory->add_factory_item < ::windowing_win32::windowing, ::acme::windowing::windowing >();
    pfactory->add_factory_item < ::windowing_win32::window, ::acme::windowing::window >();

@@ -3,12 +3,10 @@
 
 
 #include "aura/_.h"
-#include "apex_windows/_.h"
-#include "aura_windows_common/_.h"
-#include "windowing_win32/_.h"
+#include "aura_windows/_.h"
 
 
-#if defined(_node_windows_library)
+#if defined(_node_windows_project)
 #define CLASS_DECL_NODE_WINDOWS CLASS_DECL_EXPORT
 #else
 #define CLASS_DECL_NODE_WINDOWS CLASS_DECL_IMPORT

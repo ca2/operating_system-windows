@@ -707,10 +707,12 @@
     <ClInclude Include="framework.h" />
     <ClInclude Include="aaa_interaction_impl.h" />
     <ClInclude Include="aaa_node.h" />
+    <ClInclude Include="node.h" />
     <ClInclude Include="_.h" />
     <ClInclude Include="_library.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="node.cpp" />
     <ClCompile Include="_factory.cpp" />
     <ClCompile Include="framework.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>

@@ -4,49 +4,91 @@ project(windowing_win32 CXX)
 
 message(STATUS "CMAKE_SYSTEM_NAME is ${CMAKE_SYSTEM_NAME}")
 
-
-if(${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
-    set(LINUX TRUE)
-    set(OPERATING_SYSTEM_NAME "linux")
-    include(FindPkgConfig)
-elseif(WIN32)
-    set(OPERATING_SYSTEM_NAME "windows")
-endif()
-
-
-set(LIBRARY_OUTPUT_PATH ${CMAKE_CURRENT_SOURCE_DIR}/../../../time-${OPERATING_SYSTEM_NAME}/cmake)
-set(EXECUTABLE_OUTPUT_PATH ${CMAKE_CURRENT_SOURCE_DIR}/../../../time-${OPERATING_SYSTEM_NAME}/cmake)
-
+#
+#if(${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
+#    set(LINUX TRUE)
+#    set(OPERATING_SYSTEM_NAME "linux")
+#    include(FindPkgConfig)
+#elseif(WIN32)
+#    set(OPERATING_SYSTEM_NAME "windows")
+#endif()
+#
+#
+#set(LIBRARY_OUTPUT_PATH ${CMAKE_CURRENT_SOURCE_DIR}/../../../time-${OPERATING_SYSTEM_NAME}/cmake)
+#set(EXECUTABLE_OUTPUT_PATH ${CMAKE_CURRENT_SOURCE_DIR}/../../../time-${OPERATING_SYSTEM_NAME}/cmake)
+#
 
 list(APPEND draw2d_gdiplus_source
-        _.cpp
-        _.h
-        buffer.cpp
-
+   window/window_dpi.cpp
+   window/window_i_drop_target.cpp
+   window/window_i_unknown.cpp
+   window/window_property.cpp
+   window/window_scroll.cpp
+   window/window_show.cpp
+   window/window_utility.cpp
+   window/window_win32.cpp
+   _.cpp
+   _.h
+   _factory.cpp
+   appbar.cpp
+   buffer.cpp
    buffer.h
-
-        _factory.cpp
-        framework.cpp
-        framework.h
-        display.cpp
+   copydesk.cpp
+   copydesk.h
+   cursor.cpp
+   cursor.h
+   desktop_environment.cpp
+   desktop_environment.h
+   devices.cpp
+   devices.h
+   display.cpp
    display.h
-keyboard.cpp
+   framework.cpp
+   framework.h
+   gdi.cpp
+   icon.cpp
+   icon.h
+   #image.cpp
+   #image.h
+   imm_client.cpp
+   imm_client.h
+   imm_context.cpp
+   imm_context.h
+   keyboard.cpp
    keyboard.h
+   master_device_listener.cpp
+   master_device_listener.h
+   message_bypass.cpp
+   message_window.cpp
+   message_window.h
+   notification_area.cpp
+   notification_area.h
+   notify_icon.cpp
+   notify_icon.h
    monitor.cpp
    monitor.h
-window.cpp
+   shell.cpp
+   shell.h
+   system_interaction.cpp
+   system_interaction.h
+   top_level_enum.cpp
+   top_level_enum.h
+   win32.cpp
+   win32.h
+   window_util.cpp
+   window_util.h
+   window.cpp
    window.h
    windowing.cpp
    windowing.h
 )
 
 
-
 if (MSVC)
-    set(LIBCXX_TARGETING_MSVC ON)
-else()
-    set(LIBCXX_TARGETING_MSVC OFF)
-endif()
+   set(LIBCXX_TARGETING_MSVC ON)
+else ()
+   set(LIBCXX_TARGETING_MSVC OFF)
+endif ()
 
 
 add_library(${PROJECT_NAME} SHARED ${draw2d_gdiplus_source})
@@ -56,32 +98,38 @@ target_precompile_headers(${PROJECT_NAME} PRIVATE framework.h)
 set_target_properties(${PROJECT_NAME} PROPERTIES LINKER_LANGUAGE CXX)
 
 if (MSVC)
-    target_compile_options(${PROJECT_NAME} PRIVATE "/MD$<$<CONFIG:Debug>:d>")
-    target_link_options(${PROJECT_NAME} PRIVATE "/DEFAULTLIB:msvcrt$<$<CONFIG:Debug>:d>")
-    target_link_options(${PROJECT_NAME} PRIVATE "/IMPLIB:${LIBRARY_OUTPUT_PATH}/${PROJECT_NAME}.lib")
-    target_link_options(${PROJECT_NAME} PRIVATE "/DEF:${CMAKE_CURRENT_SOURCE_DIR}/${PROJECT_NAME}.def")
-    target_link_libraries(${PROJECT_NAME} PRIVATE
-       aura_windows
-       aura_windows_common
-       apex_windows
-       apex_windows_common
-       acme_windows
-       acme_windows_common
-       acme apex aqua aura Gdiplus)
-elseif(LINUX)
+   target_compile_options(${PROJECT_NAME} PRIVATE "/MD$<$<CONFIG:Debug>:d>")
+   target_link_options(${PROJECT_NAME} PRIVATE "/DEFAULTLIB:msvcrt$<$<CONFIG:Debug>:d>")
+   target_link_options(${PROJECT_NAME} PRIVATE "/IMPLIB:${LIBRARY_OUTPUT_PATH}/${PROJECT_NAME}.lib")
+   target_link_options(${PROJECT_NAME} PRIVATE "/DEF:${CMAKE_CURRENT_SOURCE_DIR}/${PROJECT_NAME}.def")
+   target_link_libraries(${PROJECT_NAME} PRIVATE
+      acme
+      apex
+      aqua
+      aura
+      acme_windows
+      acme_windows_common
+      acme_windowing_win32
+      apex_windows
+      apex_windows_common
+      innate_ui_win32
+      aura_windows
+      aura_windows_common
+      Gdiplus Dxva2 Dwmapi Imm32)
+elseif (LINUX)
 
-    if(NOT DONT_USE_PKG_CONFIG)
-        #pkg_check_modules(PKGCONFIG glib-2.0 gtk+-3.0 gdk-3.0 appindicator-0.1)
-        pkg_check_modules(PKGCONFIG glib-2.0 freetype2 gtk+-3.0 gdk-3.0)
-    endif()
-    target_compile_options(${PROJECT_NAME} PRIVATE ${PKGCONFIG_CFLAGS})
-    #target_compile_options(${PROJECT_NAME} PRIVATE -std=c++14)
-    #target_link_options(${PROJECT_NAME} PRIVATE ${GTK_LDFLAGS})
-    target_link_options(${PROJECT_NAME} PRIVATE -Wl,-rpath=\$ORIGIN)
-    target_link_libraries(${PROJECT_NAME} PRIVATE z dl pthread ncurses X11 Xrender Xinerama Xft ${PKGCONFIG_LIBRARIES})
-    target_link_options(${PROJECT_NAME} PRIVATE -Wl,-z,defs)
-    message("PKGCONFIG_LIBRARIES is " ${PKGCONFIG_LIBRARIES})
-endif()
+   if (NOT DONT_USE_PKG_CONFIG)
+      #pkg_check_modules(PKGCONFIG glib-2.0 gtk+-3.0 gdk-3.0 appindicator-0.1)
+      pkg_check_modules(PKGCONFIG glib-2.0 freetype2 gtk+-3.0 gdk-3.0)
+   endif ()
+   target_compile_options(${PROJECT_NAME} PRIVATE ${PKGCONFIG_CFLAGS})
+   #target_compile_options(${PROJECT_NAME} PRIVATE -std=c++14)
+   #target_link_options(${PROJECT_NAME} PRIVATE ${GTK_LDFLAGS})
+   target_link_options(${PROJECT_NAME} PRIVATE -Wl,-rpath=\$ORIGIN)
+   target_link_libraries(${PROJECT_NAME} PRIVATE z dl pthread ncurses X11 Xrender Xinerama Xft ${PKGCONFIG_LIBRARIES})
+   target_link_options(${PROJECT_NAME} PRIVATE -Wl,-z,defs)
+   message("PKGCONFIG_LIBRARIES is " ${PKGCONFIG_LIBRARIES})
+endif ()
 
 target_link_directories(${PROJECT_NAME} PRIVATE ${LIBRARY_OUTPUT_PATH})
 target_link_directories(${PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../../../operating_system/storage-${OPERATING_SYSTEM_NAME}/library/x64/basis)

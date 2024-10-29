@@ -8315,6 +8315,12 @@ namespace windowing_win32
          ::SendMessage(m_hwnd, WM_USER + 1297, 0, (lparam)(::uptr)(::subparticle *)procedure.m_pbase.m_p);
 
       }
+      else if (m_puserthread)
+      {
+
+         m_puserthread->send(procedure);
+
+      }
       else
       {
 

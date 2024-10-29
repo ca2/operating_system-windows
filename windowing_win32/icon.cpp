@@ -733,7 +733,7 @@ namespace windowing_win32
 
       auto pmemoryfile = create_memory_file(memory);
 
-      auto pimage = ::particle::image()->load_image(pmemoryfile);
+      auto pimage = image()->load_image(pmemoryfile);
 
       if (pimage.ok())
       {

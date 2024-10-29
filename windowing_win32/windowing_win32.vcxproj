@@ -761,7 +761,6 @@
     <ClCompile Include="keyboard.cpp" />
     <ClCompile Include="message_bypass.cpp" />
     <ClCompile Include="monitor.cpp" />
-    <ClCompile Include="node.cpp" />
     <ClCompile Include="notification_area.cpp" />
     <ClCompile Include="notify_icon.cpp" />
     <ClCompile Include="shell.cpp" />

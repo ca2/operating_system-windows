@@ -1,5 +1,5 @@
 #include "framework.h"
-
+#include "node.h"
 
 //BEGIN_FACTORY(node_windows)
 //   FACTORY_DEPENDENCY(windowing_win32)
@@ -7,13 +7,19 @@
 
 
 
-__FACTORY_EXPORT void windowing_win32_factory(::factory::factory * pfactory);
+//__FACTORY_EXPORT void windowing_win32_factory(::factory::factory * pfactory);
+__FACTORY_EXPORT void aura_windows_factory(::factory::factory * pfactory);
+
+
 
 
 __FACTORY_EXPORT void node_windows_factory(::factory::factory * pfactory)
 {
 
-   windowing_win32_factory(pfactory);
+
+   aura_windows_factory(pfactory);
+
+   //windowing_win32_factory(pfactory);
 
    //add_factory_item < ::windows::console, ::console::console >();
    //add_factory_item < ::windows::crypto, ::crypto::crypto >();
@@ -36,16 +42,16 @@ __FACTORY_EXPORT void node_windows_factory(::factory::factory * pfactory)
 
    //pfactory->add_factory_item < ::windows::interaction_impl, ::windowing::window >();
 
-   //pfactory->add_factory_item < ::node_windows::node, ::platform::node >();
+   pfactory->add_factory_item < ::node_windows::node, ::platform::node >();
 
 
 }
 
-
-__FACTORY_EXPORT void default_desktop_environment_factory(::factory::factory* pfactory)
-{
-
-}
+//
+// __FACTORY_EXPORT void default_desktop_environment_factory(::factory::factory* pfactory)
+// {
+//
+// }
 
 
 
