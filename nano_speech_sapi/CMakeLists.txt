@@ -89,6 +89,6 @@ target_include_directories(audio_mmsystem PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/..
 target_include_directories(audio_mmsystem PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
 
 
-target_compile_definitions(audio_mmsystem PRIVATE _DRAW2D_GDIPLUS_LIBRARY)
+target_compile_definitions(${PROJECT_NAME} PRIVATE _${PROJECT_NAME}_project)
 target_compile_definitions(audio_mmsystem PRIVATE UNICODE)
 target_compile_definitions(audio_mmsystem PRIVATE _UNICODE)

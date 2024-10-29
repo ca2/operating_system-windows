@@ -104,6 +104,6 @@ target_include_directories(multimedia_mmsystem PRIVATE ${CMAKE_CURRENT_SOURCE_DI
 target_include_directories(multimedia_mmsystem PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
 
 
-target_compile_definitions(multimedia_mmsystem PRIVATE _multimedia_mmsystem_LIBRARY)
+target_compile_definitions(${PROJECT_NAME} PRIVATE _${PROJECT_NAME}_project)
 target_compile_definitions(multimedia_mmsystem PRIVATE UNICODE)
 target_compile_definitions(multimedia_mmsystem PRIVATE _UNICODE)
