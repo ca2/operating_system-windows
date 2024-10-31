@@ -55,15 +55,13 @@ namespace innate_ui_win32
 
       auto psubparticle = (::subparticle *)procedure.m_pbase;
 
-      __refdbg_add_referer
-
-      psubparticle->increment_reference_count();
-
 #if REFERENCING_DEBUGGING
 
-      psubparticle->m_prefererTransfer = psubparticle->m_preferenceitema->m_itema.last()->m_preferer;
+      psubparticle->m_prefererTransfer2 = __refdbg_add_referer;
 
 #endif
+
+      psubparticle->increment_reference_count();
 
       PostThreadMessage(m_dwThread, WM_APP + 123, 0, (LPARAM)psubparticle);
 
@@ -172,12 +170,6 @@ namespace innate_ui_win32
                            __check_refdbg
 
                            ::pointer < ::subparticle > psubparticle = { transfer_t{}, (::subparticle *)msg.lParam };
-
-#if REFERENCING_DEBUGGING
-
-                           psubparticle.m_preferer = psubparticle->m_prefererTransfer;
-
-#endif
 
                            psubparticle->run();
 

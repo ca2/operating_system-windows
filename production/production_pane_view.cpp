@@ -191,10 +191,10 @@ namespace production
 
          m_pviewOptions->m_pcallback = this;
 
-         auto pupdate = topic(ID_BROWSE);
+         auto pupdate = topic(id_browse);
          pupdate->m_actioncontext = ::e_source_system;
          ptopic->m_atom = ;
-         ptopic->payload(ID_FORM) = "production\\options.xhtml";
+         ptopic->payload(id_form) = "production\\options.xhtml";
          pdocument->update_all_impacts(ptopic);
 
          ptopic->m_atom = id_get_form_impact;

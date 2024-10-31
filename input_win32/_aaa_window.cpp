@@ -287,7 +287,7 @@ namespace windowing_win32
 
       
 
-      auto puser = psession->user();
+      auto puser = user();
 
       auto pwindowing = system()->windowing();
 

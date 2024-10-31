@@ -83,8 +83,8 @@ namespace backup
          ::pointer<::user::impact>pimpact = pdocument->get_impact();
          auto pupdate = new_update();
          pupdate->m_actioncontext = ::e_source_system;
-         ptopic->m_atom = ID_BROWSE;
-         ptopic->payload(ID_FORM) = "filemanager\\replace_name_in_file_system.xhtml";
+         ptopic->m_atom = id_browse;
+         ptopic->payload(id_form) = "filemanager\\replace_name_in_file_system.xhtml";
          pdocument->update_all_impacts(ptopic);
 
          ptopic->m_atom = id_get_form_impact;

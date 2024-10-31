@@ -153,7 +153,7 @@ namespace windowing_win32
 
       auto psession = session();
 
-      auto puser = psession->user();
+      auto puser = user();
 
       auto pwin32windowing = system()->windowing()->cast < ::windowing_win32::windowing >();
 

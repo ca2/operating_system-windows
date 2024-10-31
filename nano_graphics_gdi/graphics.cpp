@@ -14,18 +14,25 @@ using namespace Gdiplus;
 // Function to initialize GDI+
 void InitGDIPlus(ULONG_PTR * gdiplusToken)
 {
+
    GdiplusStartupInput gdiplusStartupInput;
+
    GdiplusStartup(gdiplusToken, &gdiplusStartupInput, NULL);
+
 }
+
 
 // Function to shutdown GDI+
 void ShutdownGDIPlus(ULONG_PTR gdiplusToken)
 {
+
    GdiplusShutdown(gdiplusToken);
+
 }
+
+
 namespace windows
 {
-
 
 
    namespace nano

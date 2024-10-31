@@ -1615,7 +1615,7 @@ pacmedir->create(pathTarget.folder()))
 
 
    http()->ms_download(strUrl,
-   dir().install() / "time\\spaignition_update.txt"), nullptr, post, headers, psession->user()->get_user());
+   dir().install() / "time\\spaignition_update.txt"), nullptr, post, headers, user()->get_user());
    i += 8;
    }
    }*/

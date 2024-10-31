@@ -41,7 +41,7 @@ namespace windowing_win32
       ~windowing() override;
 
 
-      void initialize_windowing(::user::user * puser) override;
+      void initialize_windowing() override;
 
       void defer_term_ui() override;
 
@@ -53,15 +53,15 @@ namespace windowing_win32
 
       //void get_cursor_position(::point_i32* ppoint) override;
 
-      virtual bool defer_create_system_window();
+      virtual void initialize_system_interaction();
       //virtual ::pointer<::user::interaction>create_system_window();
-      ::pointer<system_interaction>create_system_window();
+      ::pointer<system_interaction>create_system_interaction();
       
       
       void kick_idle() override;
 
 
-      inline system_interaction * system_interaction() { return m_psysteminteraction; }
+      virtual system_interaction * system_interaction();
 
       virtual HICON _load_icon(string_array& straMatter, string strIcon, int cx, int cy);
 

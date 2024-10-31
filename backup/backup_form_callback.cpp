@@ -31,8 +31,8 @@ namespace backup
          {
             auto pupdate = new_update();
             pupdate->m_actioncontext = ::e_source_system;
-            ptopic->m_atom = ID_BROWSE;
-            ptopic->payload(ID_FORM) = "filemanager_add_location_lfs.xhtml";
+            ptopic->m_atom = id_browse;
+            ptopic->payload(id_form) = "filemanager_add_location_lfs.xhtml";
             dynamic_cast < ::user::form_impact * > (pimpact)->get_document()->update_all_impacts(ptopic);
             auto pinteraction = pimpact->get_child_by_name("lfs");
             
@@ -49,8 +49,8 @@ namespace backup
          {
             auto pupdate = new_update();
             pupdate->m_actioncontext = ::e_source_system;
-            ptopic->m_atom = ID_BROWSE;
-            ptopic->payload(ID_FORM) = "filemanager_add_location_ftp.xhtml";
+            ptopic->m_atom = id_browse;
+            ptopic->payload(id_form) = "filemanager_add_location_ftp.xhtml";
             dynamic_cast < ::user::form_impact * > (pimpact)->get_document()->update_all_impacts(ptopic);
             ptopic->Ret();
 

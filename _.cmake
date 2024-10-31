@@ -51,6 +51,7 @@ list(APPEND app_common_dependencies
    innate_ui_win32
    aura_windows_common
    aura_windows
+   node_windows
    windowing_win32
 )
 

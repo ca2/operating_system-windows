@@ -29,8 +29,8 @@ namespace win32
             windowing();
             ~windowing() override;
 
-            ::e_status defer_initialize_windowing() override;
-            ::e_status initialize_windowing() override;
+            //::e_status defer_initialize_windowing() override;
+            void initialize_windowing() override;
             //void * get_display() override;
             ::acme::windowing::display * acme_display() override;
             void _main_send(const ::procedure & procedure) override;

@@ -42,24 +42,24 @@ namespace win32
          }
 
 
-         ::e_status windowing::defer_initialize_windowing()
-         {
+         // ::e_status windowing::defer_initialize_windowing()
+         // {
+         //
+         //    //      if (m_estatusInitializeX11 == error_not_initialized)
+         //    //      {
+         //    //
+         //    //         m_estatusInitializeX11 = initialize_windowing_system();
+         //    //
+         //    //      }
+         //    //
+         //    //      return m_estatusInitializeX11;
+         //
+         //    return ::success;
+         //
+         // }
 
-            //      if (m_estatusInitializeX11 == error_not_initialized)
-            //      {
-            //
-            //         m_estatusInitializeX11 = initialize_windowing_system();
-            //
-            //      }
-            //
-            //      return m_estatusInitializeX11;
 
-            return ::success;
-
-         }
-
-
-         ::e_status windowing::initialize_windowing()
+         void windowing::initialize_windowing()
          {
 
             informationf("windowing_system_win32::windowing::initialize_windowing_system");
@@ -69,7 +69,7 @@ namespace win32
             if (!system()->acme_windowing()->init_threads())
             {
 
-               return ::error_failed;
+               throw ::exception(::error_failed, "Failed to init threads for initializing windowing");
 
             }
 
@@ -78,7 +78,7 @@ namespace win32
 
             //g_pmutexX11 = ___new ::pointer < ::mutex >();
 
-            return ::success;
+            //return ::success;
 
          }
 
@@ -439,6 +439,8 @@ namespace win32
 
                if (msg.message == WM_QUIT)
                {
+
+                  set_finish();
 
                   return false;
 

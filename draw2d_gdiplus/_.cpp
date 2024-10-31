@@ -54,8 +54,6 @@ CLASS_DECL_DRAW2D_GDIPLUS void initialize_gdiplus()
 
    }
 
-   //return ::success;
-
 }
 
 
@@ -72,13 +70,9 @@ CLASS_DECL_DRAW2D_GDIPLUS void terminate_gdiplus()
       ::acme::del(g_pgdiplusStartupInput);
       ::acme::del(g_pgdiplusStartupOutput);
 
-
    }
 
-   //return ::success;
-
 }
-
 
 
 

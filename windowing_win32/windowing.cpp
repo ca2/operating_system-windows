@@ -48,12 +48,12 @@ namespace windowing_win32
    }
 
 
-   void windowing::initialize_windowing(::user::user* puser)
+   void windowing::initialize_windowing()
    {
 
       //auto estatus = 
 
-      ::windowing::windowing::initialize_windowing(puser);
+      ::windowing::windowing::initialize_windowing();
 
       //if (!estatus)
       //{
@@ -84,14 +84,16 @@ namespace windowing_win32
 
       //}
 
-      bool bCreateSessionWindow = defer_create_system_window();
+      // bool bCreateSessionWindow = initialize_system_interaction();
+      //
+      // if (!bCreateSessionWindow)
+      // {
+      //
+      //    warning() << "Could not create session window";
+      //
+      // }
 
-      if (!bCreateSessionWindow)
-      {
-
-         warning() << "Could not create session window";
-
-      }
+      initialize_system_interaction();
 
       auto pdisplay = dynamic_cast <class display*>(display());
 
@@ -104,31 +106,29 @@ namespace windowing_win32
    }
 
 
-   bool windowing::defer_create_system_window()
+   void windowing::initialize_system_interaction()
    {
 
       if (m_psysteminteraction)
       {
 
-         return true;
+         return;
 
       }
 
-      m_psysteminteraction = create_system_window();
+      m_psysteminteraction = create_system_interaction();
 
       if (!m_psysteminteraction)
       {
 
-         return false;
+         throw ::exception(error_failed, "Failed to create system interaction");
 
       }
-
-      return true;
 
    }
 
 
-   ::pointer<system_interaction>windowing::create_system_window()
+   ::pointer<system_interaction>windowing::create_system_interaction()
    {
 
       auto psysteminteraction = __create_new < ::windowing_win32::system_interaction >();
@@ -161,6 +161,23 @@ namespace windowing_win32
       ::win32::acme::windowing::windowing::kick_idle();
 
    }
+
+
+   system_interaction * windowing::system_interaction()
+   {
+
+      if(!m_psysteminteraction)
+      {
+
+         initialize_system_interaction();
+
+      }
+
+      return m_psysteminteraction;
+
+   }
+
+
 
 
    void windowing::defer_term_ui()
