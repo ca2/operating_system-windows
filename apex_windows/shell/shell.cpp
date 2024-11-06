@@ -11,7 +11,7 @@ namespace apex_windows
 {
 
 
-   error_code node::_windows_create_link(const ::wide_character* pszPathObj, const ::wide_character* pszPathLink, const ::wide_character* pszDesc, const ::wide_character* pszIconPath, ::i32 iIcon)
+   error_code node::_windows_create_link(const ::wide_character* pszPathObj, const ::wide_character* pszPathLink, const ::wide_character* pszDesc, const ::wide_character* pszIconPath, int iIcon)
    {
 
       HRESULT hresult;

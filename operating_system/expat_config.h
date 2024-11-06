@@ -19,7 +19,7 @@
 #undef size_t
 
 /* Define if your processor stores words with the most significant
-   ::u8 first (like Motorola and SPARC, unlike Intel and VAX).  */
+   unsigned char first (like Motorola and SPARC, unlike Intel and VAX).  */
 #undef WORDS_BIGENDIAN
 
 /* Define if you have the bcopy function.  */

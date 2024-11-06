@@ -28,13 +28,13 @@ namespace audio_mmsystem
 
       virtual void in_initialize_encoder();
 
-      virtual void     in_add_buffer(i32 iBuffer);
+      virtual void     in_add_buffer(int iBuffer);
       virtual void     in_add_buffer(LPWAVEHDR lpwavehdr);
 
       HWAVEIN in_get_safe_HWAVEIN();
       virtual void * get_os_data();
 
-      void     in_open(i32 iBufferCount, i32 iBufferSampleCount);
+      void     in_open(int iBufferCount, int iBufferSampleCount);
       void     in_close();
       void     in_stop();
       void     in_start();

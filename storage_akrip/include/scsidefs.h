@@ -43,10 +43,10 @@
 #define SCSI_INQUIRY    0x12    // Inquiry (MANDATORY)
 #define SCSI_LOG_SELECT 0x4C    // Log Select (O)
 #define SCSI_LOG_SENSE  0x4D    // Log Sense (O)
-#define SCSI_MODE_SEL6  0x15    // Mode Select 6-::u8 (Device Specific)
-#define SCSI_MODE_SEL10 0x55    // Mode Select 10-::u8 (Device Specific)
-#define SCSI_MODE_SEN6  0x1A    // Mode Sense 6-::u8 (Device Specific)
-#define SCSI_MODE_SEN10 0x5A    // Mode Sense 10-::u8 (Device Specific)
+#define SCSI_MODE_SEL6  0x15    // Mode Select 6-unsigned char (Device Specific)
+#define SCSI_MODE_SEL10 0x55    // Mode Select 10-unsigned char (Device Specific)
+#define SCSI_MODE_SEN6  0x1A    // Mode Sense 6-unsigned char (Device Specific)
+#define SCSI_MODE_SEN10 0x5A    // Mode Sense 10-unsigned char (Device Specific)
 #define SCSI_READ_BUFF  0x3C    // Read buffer (O)
 #define SCSI_REQ_SENSE  0x03    // Request Sense (MANDATORY)
 #define SCSI_SEND_DIAG  0x1D    // Send Diagnostic (O)
@@ -61,8 +61,8 @@
 #define SCSI_LCK_UN_CAC 0x36    // Lock Unlock Cache (O)
 #define SCSI_PREFETCH   0x34    // Prefetch (O)
 #define SCSI_MED_REMOVL 0x1E    // Prevent/Allow medium Removal (O)
-#define SCSI_READ6      0x08    // Read 6-::u8 (MANDATORY)
-#define SCSI_READ10     0x28    // Read 10-::u8 (MANDATORY)
+#define SCSI_READ6      0x08    // Read 6-unsigned char (MANDATORY)
+#define SCSI_READ10     0x28    // Read 10-unsigned char (MANDATORY)
 #define SCSI_RD_CAPAC   0x25    // Read Capacity (MANDATORY)
 #define SCSI_RD_DEFECT  0x37    // Read Defect Data (O)
 #define SCSI_READ_LONG  0x3E    // Read Long (O)
@@ -73,15 +73,15 @@
 #define SCSI_SRCH_DAT_E 0x31    // Search Data Equal (O)
 #define SCSI_SRCH_DAT_H 0x30    // Search Data High (O)
 #define SCSI_SRCH_DAT_L 0x32    // Search Data Low (O)
-#define SCSI_SEEK6      0x0B    // Seek 6-::u8 (O)
-#define SCSI_SEEK10     0x2B    // Seek 10-::u8 (O)
+#define SCSI_SEEK6      0x0B    // Seek 6-unsigned char (O)
+#define SCSI_SEEK10     0x2B    // Seek 10-unsigned char (O)
 #define SCSI_SEND_DIAG  0x1D    // Send Diagnostics (MANDATORY)
 #define SCSI_SET_LIMIT  0x33    // Set Limits (O)
 #define SCSI_START_STP  0x1B    // Start/Stop Unit (O)
 #define SCSI_SYNC_CACHE 0x35    // Synchronize Cache (O)
 #define SCSI_VERIFY     0x2F    // Verify (O)
-#define SCSI_WRITE6     0x0A    // Write 6-::u8 (MANDATORY)
-#define SCSI_WRITE10    0x2A    // Write 10-::u8 (MANDATORY)
+#define SCSI_WRITE6     0x0A    // Write 6-unsigned char (MANDATORY)
+#define SCSI_WRITE10    0x2A    // Write 10-unsigned char (MANDATORY)
 #define SCSI_WRT_VERIFY 0x2E    // Write and Verify (O)
 #define SCSI_WRITE_LONG 0x3F    // Write Long (O)
 #define SCSI_WRITE_SAME 0x41    // Write Same (O)
@@ -120,29 +120,29 @@
 //              %%% Commands Unique to Write-Once Devices %%%
 //***************************************************************************
 #define SCSI_MEDIUM_SCN 0x38    // Medium Scan (O)
-#define SCSI_SRCHDATE10 0x31    // Search Data Equal 10-::u8 (O)
-#define SCSI_SRCHDATE12 0xB1    // Search Data Equal 12-::u8 (O)
-#define SCSI_SRCHDATH10 0x30    // Search Data High 10-::u8 (O)
-#define SCSI_SRCHDATH12 0xB0    // Search Data High 12-::u8 (O)
-#define SCSI_SRCHD10 0x32    // Search Data Low 10-::u8 (O)
-#define SCSI_SRCHD12 0xB2    // Search Data Low 12-::u8 (O)
-#define SCSI_SET_LIM_10 0x33    // Set Limits 10-::u8 (O)
-#define SCSI_SET_LIM_12 0xB3    // Set Limits 10-::u8 (O)
-#define SCSI_VERIFY10   0x2F    // Verify 10-::u8 (O)
-#define SCSI_VERIFY12   0xAF    // Verify 12-::u8 (O)
-#define SCSI_WRITE12    0xAA    // Write 12-::u8 (O)
-#define SCSI_WRT_VER10  0x2E    // Write and Verify 10-::u8 (O)
-#define SCSI_WRT_VER12  0xAE    // Write and Verify 12-::u8 (O)
+#define SCSI_SRCHDATE10 0x31    // Search Data Equal 10-unsigned char (O)
+#define SCSI_SRCHDATE12 0xB1    // Search Data Equal 12-unsigned char (O)
+#define SCSI_SRCHDATH10 0x30    // Search Data High 10-unsigned char (O)
+#define SCSI_SRCHDATH12 0xB0    // Search Data High 12-unsigned char (O)
+#define SCSI_SRCHD10 0x32    // Search Data Low 10-unsigned char (O)
+#define SCSI_SRCHD12 0xB2    // Search Data Low 12-unsigned char (O)
+#define SCSI_SET_LIM_10 0x33    // Set Limits 10-unsigned char (O)
+#define SCSI_SET_LIM_12 0xB3    // Set Limits 10-unsigned char (O)
+#define SCSI_VERIFY10   0x2F    // Verify 10-unsigned char (O)
+#define SCSI_VERIFY12   0xAF    // Verify 12-unsigned char (O)
+#define SCSI_WRITE12    0xAA    // Write 12-unsigned char (O)
+#define SCSI_WRT_VER10  0x2E    // Write and Verify 10-unsigned char (O)
+#define SCSI_WRT_VER12  0xAE    // Write and Verify 12-unsigned char (O)
 
 //***************************************************************************
 //                %%% Commands Unique to CD-ROM Devices %%%
 //***************************************************************************
-#define SCSI_PLAYAUD_10 0x45    // Play Audio 10-::u8 (O)
-#define SCSI_PLAYAUD_12 0xA5    // Play Audio 12-::u8 12-::u8 (O)
+#define SCSI_PLAYAUD_10 0x45    // Play Audio 10-unsigned char (O)
+#define SCSI_PLAYAUD_12 0xA5    // Play Audio 12-unsigned char 12-unsigned char (O)
 #define SCSI_PLAYAUDMSF 0x47    // Play Audio MSF (O)
 #define SCSI_PLAYA_TKIN 0x48    // Play Audio Track/Index (O)
-#define SCSI_PLYTKREL10 0x49    // Play Track Relative 10-::u8 (O)
-#define SCSI_PLYTKREL12 0xA9    // Play Track Relative 12-::u8 (O)
+#define SCSI_PLYTKREL10 0x49    // Play Track Relative 10-unsigned char (O)
+#define SCSI_PLYTKREL12 0xA9    // Play Track Relative 12-unsigned char (O)
 #define SCSI_READCDCAP  0x25    // Read CD-ROM Capacity (MANDATORY)
 #define SCSI_READHEADER 0x44    // Read Header (O)
 #define SCSI_SUBCHANNEL 0x42    // Read Subchannel (O)
@@ -174,12 +174,12 @@
 //***************************************************************************
 //            %%% Commands Unique to Communication Devices %%%
 //***************************************************************************
-#define SCSI_GET_MSG_6  0x08    // Get Message 6-::u8 (MANDATORY)
-#define SCSI_GET_MSG_10 0x28    // Get Message 10-::u8 (O)
-#define SCSI_GET_MSG_12 0xA8    // Get Message 12-::u8 (O)
-#define SCSI_SND_MSG_6  0x0A    // Send Message 6-::u8 (MANDATORY)
-#define SCSI_SND_MSG_10 0x2A    // Send Message 10-::u8 (O)
-#define SCSI_SND_MSG_12 0xAA    // Send Message 12-::u8 (O)
+#define SCSI_GET_MSG_6  0x08    // Get Message 6-unsigned char (MANDATORY)
+#define SCSI_GET_MSG_10 0x28    // Get Message 10-unsigned char (O)
+#define SCSI_GET_MSG_12 0xA8    // Get Message 12-unsigned char (O)
+#define SCSI_SND_MSG_6  0x0A    // Send Message 6-unsigned char (MANDATORY)
+#define SCSI_SND_MSG_10 0x2A    // Send Message 10-unsigned char (O)
+#define SCSI_SND_MSG_12 0xAA    // Send Message 12-unsigned char (O)
 
 //\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/
 //
@@ -207,9 +207,9 @@ typedef struct {
     BYTE    AddSenseCode;       // Additional Sense Code
     BYTE    AddSenQual;         // Additional Sense Code Qualifier
     BYTE    FieldRepUCode;      // Field Replaceable Unit Code
-    BYTE    SenKeySpec15;       // Sense Key Specific 15th ::u8
-    BYTE    SenKeySpec16;       // Sense Key Specific 16th ::u8
-    BYTE    SenKeySpec17;       // Sense Key Specific 17th ::u8
+    BYTE    SenKeySpec15;       // Sense Key Specific 15th unsigned char
+    BYTE    SenKeySpec16;       // Sense Key Specific 16th unsigned char
+    BYTE    SenKeySpec17;       // Sense Key Specific 17th unsigned char
     BYTE    AddSenseBytes;      // Additional Sense Bytes
 
 } SENSE_DATA_FMT;
@@ -223,10 +223,10 @@ typedef struct {
 //***************************************************************************
 //                   %%% REQUEST SENSE BIT DEFINITIONS %%%
 //***************************************************************************
-#define SENSE_VALID     0x80    // ::u8 0 Bit 7
-#define SENSE_FILEMRK   0x80    // ::u8 2 Bit 7
-#define SENSE_EOM       0x40    // ::u8 2 Bit 6
-#define SENSE_ILI       0x20    // ::u8 2 Bit 5
+#define SENSE_VALID     0x80    // unsigned char 0 Bit 7
+#define SENSE_FILEMRK   0x80    // unsigned char 2 Bit 7
+#define SENSE_EOM       0x40    // unsigned char 2 Bit 6
+#define SENSE_ILI       0x20    // unsigned char 2 Bit 5
 
 //***************************************************************************
 //               %%% REQUEST SENSE SENSE KEY DEFINITIONS %%%

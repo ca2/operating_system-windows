@@ -18,7 +18,7 @@ CLASS_DECL_ACME string ca2_command_line();
 
 
 
-typedef ::u32 thread_data_index;
+typedef unsigned int thread_data_index;
 
 
 CLASS_DECL_ACME void TRACELASTERROR();
@@ -29,7 +29,7 @@ CLASS_DECL_ACME string get_error_string(DWORD dwError);
 //CLASS_DECL_ACMEvoid init_gdi_plus();
 //CLASS_DECL_ACME void term_gdi_plus();
 
-CLASS_DECL_ACME string get_display_error(u32 NTStatusMessage);
+CLASS_DECL_ACME string get_display_error(unsigned int NTStatusMessage);
 CLASS_DECL_ACME void attach_thread_input_to_main_thread(bool bAttach = true);
 
 
@@ -48,7 +48,7 @@ class memory;
 //inline payload::operator long() const
 //{
 //
-//   return i32();
+//   return int();
 //
 //}
 //

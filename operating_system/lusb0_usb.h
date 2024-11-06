@@ -66,7 +66,7 @@
 #define USB_DT_HUB_NONVAR_SIZE		7
 
 
-/* ensure ::u8-packed structures */
+/* ensure unsigned char-packed structures */
 #include <pshpack1.h>
 
 

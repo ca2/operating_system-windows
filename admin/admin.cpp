@@ -6,7 +6,7 @@
 
 BEGIN_EXTERN_C
 
-i32 WINAPI _tWinMain(HINSTANCE hinstance, HINSTANCE hPrevInstance, LPTSTR lpCmdLine, i32 nCmdShow)
+int WINAPI _tWinMain(HINSTANCE hinstance, HINSTANCE hPrevInstance, LPTSTR lpCmdLine, int nCmdShow)
 {
 
    if(!defer_core_init())

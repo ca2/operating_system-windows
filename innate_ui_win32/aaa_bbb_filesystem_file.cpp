@@ -507,7 +507,7 @@ CLASS_DECL_ACME string defer_solve_relative(const scoped_string & strRelative, c
 
 
 
-//CLASS_DECL_ACME bool read_resource_as_file(const scoped_string & strFile,HINSTANCE hinst,::u32 nID,LPCTSTR pcszType);
+//CLASS_DECL_ACME bool read_resource_as_file(const scoped_string & strFile,HINSTANCE hinst,unsigned int nID,LPCTSTR pcszType);
 
 
 

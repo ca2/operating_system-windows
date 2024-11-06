@@ -88,8 +88,8 @@ namespace draw2d_gdi
       ::draw2d::bitmap *   get_current_bitmap() override;
 
       // for bidi and mirrored localization
-      u32 GetLayout() override;
-      u32 SetLayout(u32 dwLayout) override;
+      unsigned int GetLayout() override;
+      unsigned int SetLayout(unsigned int dwLayout) override;
 
       void set_original_object(int iType);
 
@@ -177,7 +177,7 @@ namespace draw2d_gdi
 
       // World transform
       bool SetWorldTransform(const XFORM* pXform) override;
-      bool ModifyWorldTransform(const XFORM* pXform,u32 iMode) override;
+      bool ModifyWorldTransform(const XFORM* pXform,unsigned int iMode) override;
       bool GetWorldTransform(XFORM* pXform) override;
 
       // Mapping Functions
@@ -320,10 +320,10 @@ namespace draw2d_gdi
       bool round_rectangle(const ::rectangle_i32 & rectangle, const ::point_i32 & lppt) override;
 
       // Bitmap Functions
-      bool PatBlt(int x, int y, int nWidth, int nHeight, u32 dwRop) override;
-      bool draw(const ::rectangle_i32 & rectangle, ::draw2d::graphics * pgraphicsSrc, const ::point_i32 & lppt, u32 dwRop) override;
+      bool PatBlt(int x, int y, int nWidth, int nHeight, unsigned int dwRop) override;
+      bool draw(const ::rectangle_i32 & rectangle, ::draw2d::graphics * pgraphicsSrc, const ::point_i32 & lppt, unsigned int dwRop) override;
       bool StretchBlt(double x, double y, double nWidth, double nHeight, ::draw2d::graphics * pgraphicsSrc,
-                      int xSrc, int ySrc, int nSrcWidth, int nSrcHeight, u32 dwRop) override;
+                      int xSrc, int ySrc, int nSrcWidth, int nSrcHeight, unsigned int dwRop) override;
       ::color::color GetPixel(int x, int y) override;
       ::color::color GetPixel(const ::point_i32 & point) override;
       ::color::color SetPixel(int x, int y, ::color::color crColor) override;
@@ -332,13 +332,13 @@ namespace draw2d_gdi
       bool ExtFloodFill(int x, int y, ::color::color crColor, UINT nFillType) override;
       bool MaskBlt(int x, int y, int nWidth, int nHeight, ::draw2d::graphics * pgraphicsSrc,
                    int xSrc, int ySrc, ::draw2d::bitmap& maskBitmap, int xMask, int yMask,
-                   u32 dwRop) override;
+                   unsigned int dwRop) override;
       bool PlgBlt(LPPOINT lpPoint, ::draw2d::graphics * pgraphicsSrc, int xSrc, int ySrc,
                   int nWidth, int nHeight, ::draw2d::bitmap& maskBitmap, int xMask, int yMask) override;
       bool SetPixelV(int x, int y, ::color::color crColor) override;
       bool SetPixelV(const ::point_i32 & point, ::color::color crColor) override;
       bool GradientFill(TRIVERTEX* pVertices, ULONG nVertices,
-                        void * pMesh, ULONG nMeshElements, u32 dwMode) override;
+                        void * pMesh, ULONG nMeshElements, unsigned int dwMode) override;
       bool TransparentBlt(int xDest, int yDest, int nDestWidth, int nDestHeight,
                           ::draw2d::graphics * pgraphicsSrc, int xSrc, int ySrc, int nSrcWidth, int nSrcHeight,
                           UINT clrTransparent) override;
@@ -356,8 +356,8 @@ namespace draw2d_gdi
       virtual bool text_out(int x, int y, const ::string & str) override;
       virtual bool ExtTextOut(int x, int y, UINT nOptions, const ::rectangle_i32 & rectangle, const ::string & lpszString, ::collection::count nCount, INT * lpDxWidths) override;
       virtual bool ExtTextOut(int x, int y, UINT nOptions, const ::rectangle_i32 & rectangle, const ::string & str, INT * lpDxWidths) override;
-      virtual ::size_i32 TabbedTextOut(int x, int y, const ::string & lpszString, strsize nCount, ::collection::count nTabPositions, INT * lpnTabStopPositions, i32 nTabOrigin) override;
-      virtual ::size_i32 TabbedTextOut(int x, int y, const ::string & str, ::collection::count nTabPositions, INT * lpnTabStopPositions, i32 nTabOrigin) override;
+      virtual ::size_i32 TabbedTextOut(int x, int y, const ::string & lpszString, strsize nCount, ::collection::count nTabPositions, INT * lpnTabStopPositions, int nTabOrigin) override;
+      virtual ::size_i32 TabbedTextOut(int x, int y, const ::string & str, ::collection::count nTabPositions, INT * lpnTabStopPositions, int nTabOrigin) override;
 
       virtual bool draw_text(const ::string & lpszString,strsize nCount,const ::rectangle_i32 & rectangle, const ::e_align & ealign = e_align_top_left, const ::e_draw_text & edrawtext = e_draw_text_none) override;
       virtual bool draw_text(const ::string & str,const ::rectangle_i32 & rectangle, const ::e_align & ealign = e_align_top_left, const ::e_draw_text & edrawtext = e_draw_text_none) override;
@@ -386,8 +386,8 @@ namespace draw2d_gdi
       virtual int GetTextCharacterExtra() override;
       virtual int SetTextCharacterExtra(int nCharExtra) override;
 
-      virtual u32 GetCharacterPlacement(const ::string & lpString, strsize nCount, strsize nMaxExtent, LPGCP_RESULTS lpResults, u32 dwFlags) override;
-      virtual u32 GetCharacterPlacement(string & str, strsize nMaxExtent, LPGCP_RESULTS lpResults, u32 dwFlags) override;
+      virtual unsigned int GetCharacterPlacement(const ::string & lpString, strsize nCount, strsize nMaxExtent, LPGCP_RESULTS lpResults, unsigned int dwFlags) override;
+      virtual unsigned int GetCharacterPlacement(string & str, strsize nMaxExtent, LPGCP_RESULTS lpResults, unsigned int dwFlags) override;
 
 #if (_WIN32_WINNT >= 0x0500)
 
@@ -409,21 +409,21 @@ namespace draw2d_gdi
       // font Functions
       bool GetCharWidth(UINT nFirstChar, UINT nLastChar, INT * lpBuffer) override;
       bool GetOutputCharWidth(UINT nFirstChar, UINT nLastChar, INT * lpBuffer) override;
-      u32 SetMapperFlags(u32 dwFlag) override;
+      unsigned int SetMapperFlags(unsigned int dwFlag) override;
       ::size_i32 GetAspectRatioFilter() override;
 
       bool GetCharABCWidths(UINT nFirstChar, UINT nLastChar, LPABC lpabc) override;
-      u32 GetFontData(u32 dwTable, u32 dwOffset, LPVOID lpData, u32 cbData) override;
+      unsigned int GetFontData(unsigned int dwTable, unsigned int dwOffset, LPVOID lpData, unsigned int cbData) override;
       int GetKerningPairs(int nPairs, LPKERNINGPAIR lpkrnpair) override;
       UINT GetOutlineTextMetrics(UINT cbData, LPOUTLINETEXTMETRICW lpotm) override;
-      u32 GetGlyphOutline(UINT nChar, const ::e_align & ealign = e_align_top_left, const ::e_draw_text & edrawtext = e_draw_text_none, LPGLYPHMETRICS lpgm, u32 cbBuffer, LPVOID lpBuffer, const MAT2* lpmat2) override;
+      unsigned int GetGlyphOutline(UINT nChar, const ::e_align & ealign = e_align_top_left, const ::e_draw_text & edrawtext = e_draw_text_none, LPGLYPHMETRICS lpgm, unsigned int cbBuffer, LPVOID lpBuffer, const MAT2* lpmat2) override;
 
       bool GetCharABCWidths(UINT nFirstChar, UINT nLastChar,
                             LPABCFLOAT lpABCF) override;
       bool GetCharWidth(UINT nFirstChar, UINT nLastChar,
                         float* lpFloatBuffer) override;
 
-      u32 GetFontLanguageInfo() override;
+      unsigned int GetFontLanguageInfo() override;
 
 #if (_WIN32_WINNT >= 0x0500)
 

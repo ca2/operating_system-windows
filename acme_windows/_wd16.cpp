@@ -10,7 +10,7 @@ BSTR AllocSysString(const ::wd16_character * pchData, strsize nDataLength) noexc
 
    strsize nLen = utf_to_utf_length(bstr, pchData, nDataLength);
 
-   bstr = ::SysAllocStringLen(nullptr, (::u32)nLen);
+   bstr = ::SysAllocStringLen(nullptr, (unsigned int)nLen);
 
    if (bstr != nullptr)
    {
@@ -30,7 +30,7 @@ bool ReAllocSysString(BSTR * pbstr, const ::wd16_character * pchData, strsize nD
 
    strsize nLen = utf_to_utf_length((wchar_t* ) pbstr, pchData, nDataLength);
 
-   bool bSuccess = ::SysReAllocStringLen(pbstr, nullptr, (::u32)nLen) != 0;
+   bool bSuccess = ::SysReAllocStringLen(pbstr, nullptr, (unsigned int)nLen) != 0;
 
    if (bSuccess)
    {
@@ -44,7 +44,7 @@ bool ReAllocSysString(BSTR * pbstr, const ::wd16_character * pchData, strsize nD
 }
 
 
-u32 format_message(u32 dwFlags, const void * pSource, u32 dwMessageID, u32 dwLanguageID, ::wd16_character * pszBuffer, u32 nSize, va_list * pArguments) noexcept
+unsigned int format_message(unsigned int dwFlags, const void * pSource, unsigned int dwMessageID, unsigned int dwLanguageID, ::wd16_character * pszBuffer, unsigned int nSize, va_list * pArguments) noexcept
 {
 
    return ::FormatMessageW(dwFlags, pSource, dwMessageID, dwLanguageID, pszBuffer, nSize, pArguments);

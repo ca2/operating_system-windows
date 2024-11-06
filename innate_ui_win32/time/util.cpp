@@ -2,12 +2,12 @@
 #include "acme/operating_system.h"
 
 //
-//bool CLASS_DECL_ACME __is_combo_box_control(HWND hwnd, ::u32 nStyle)
+//bool CLASS_DECL_ACME __is_combo_box_control(HWND hwnd, unsigned int nStyle)
 //{
 //   if (hwnd == nullptr)
 //      return false;
 //   // do cheap style compare first
-//   if ((::u32)(::GetWindowLong(hwnd, GWL_STYLE) & 0x0F) != nStyle)
+//   if ((unsigned int)(::GetWindowLong(hwnd, GWL_STYLE) & 0x0F) != nStyle)
 //      return false;
 //
 //   // do expensive classname compare next
@@ -44,7 +44,7 @@
 //   HWND oswindow_Child = ::GetWindow(hwnd, GW_CHILD);
 //   for (; oswindow_Child != nullptr; oswindow_Child = ::GetWindow(oswindow_Child, GW_HWNDNEXT))
 //   {
-//      if (::GetDlgCtrlID(oswindow_Child) != (::u16)0 &&
+//      if (::GetDlgCtrlID(oswindow_Child) != (unsigned short)0 &&
 //            (::GetWindowLong(oswindow_Child, GWL_STYLE) & WS_VISIBLE))
 //      {
 //         // see if point_i32 hits the child interaction_impl

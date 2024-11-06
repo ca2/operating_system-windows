@@ -130,8 +130,8 @@ namespace multimedia
          virtual void out_filled(::collection::index iBuffer) override;
          //virtual void out_buffer_ready(LPWAVEHDR lpwavehdr);
 
-         virtual void     out_open(::thread * pthreadCallback, i32 iBufferCount, i32 iBufferSampleCount);
-         virtual void     out_open_ex(::thread * pthreadCallback, i32 iBufferCount, i32 iBufferSampleCount, u32 uiSamplesPerSec, u32 uiChannelCount, u32 uiBitsPerSample);
+         virtual void     out_open(::thread * pthreadCallback, int iBufferCount, int iBufferSampleCount);
+         virtual void     out_open_ex(::thread * pthreadCallback, int iBufferCount, int iBufferSampleCount, unsigned int uiSamplesPerSec, unsigned int uiChannelCount, unsigned int uiBitsPerSample);
          virtual void     out_stop();
          virtual void     out_close();
          virtual void     out_pause();

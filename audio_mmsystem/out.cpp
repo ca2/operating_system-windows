@@ -83,7 +83,7 @@ namespace audio_mmsystem
    }
 
 
-   void out::out_open_ex(thread * pthreadCallback, u32 uiSamplesPerSec, u32 uiChannelCount, u32 uiBitsPerSample,::wave::enum_purpose epurpose)
+   void out::out_open_ex(thread * pthreadCallback, unsigned int uiSamplesPerSec, unsigned int uiChannelCount, unsigned int uiBitsPerSample,::wave::enum_purpose epurpose)
    {
 
       synchronous_lock synchronouslock(synchronization());
@@ -613,7 +613,7 @@ namespace audio_mmsystem
    //         if (::success != estatus)
    //         {
 
-   //            information( "waveOutGetPosition() returned %lu", (u32)estatus);
+   //            information( "waveOutGetPosition() returned %lu", (unsigned int)estatus);
 
    //            return 0;
 
@@ -630,7 +630,7 @@ namespace audio_mmsystem
    //      if(mmt.wType == TIME_MS)
    //      {
 
-   //         ::time position = (u32) mmt.u.ms;
+   //         ::time position = (unsigned int) mmt.u.ms;
 
    //         position *= m_pwaveformat->nSamplesPerSec;
 

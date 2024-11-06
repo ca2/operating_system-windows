@@ -26,7 +26,7 @@ namespace draw2d_gdi
    }
 
 
-   bool bitmap::CreateBitmap(::draw2d::graphics_pointer & pgraphics,int nWidth,int nHeight,UINT nPlanes,UINT nBitcount,const void * lpBits,i32 stride)
+   bool bitmap::CreateBitmap(::draw2d::graphics_pointer & pgraphics,int nWidth,int nHeight,UINT nPlanes,UINT nBitcount,const void * lpBits,int stride)
    {
 
       return Attach(::CreateBitmap(nWidth,nHeight,nPlanes,nBitcount,lpBits));
@@ -41,7 +41,7 @@ namespace draw2d_gdi
 
    }
 
-   bool bitmap::CreateDIBSection(::draw2d::graphics_pointer & pgraphics,const BITMAPINFO * lpbmi,UINT usage,void **ppvBits,i32 * stride,HANDLE hSection,u32 offset)
+   bool bitmap::CreateDIBSection(::draw2d::graphics_pointer & pgraphics,const BITMAPINFO * lpbmi,UINT usage,void **ppvBits,int * stride,HANDLE hSection,unsigned int offset)
    {
 
 
@@ -51,7 +51,7 @@ namespace draw2d_gdi
       if(stride != nullptr)
       {
 
-         i32 scan = abs((long)lpbmi->bmiHeader.biSizeImage) / abs((long)lpbmi->bmiHeader.biHeight);
+         int scan = abs((long)lpbmi->bmiHeader.biSizeImage) / abs((long)lpbmi->bmiHeader.biHeight);
 
          *stride = scan;
 
@@ -62,7 +62,7 @@ namespace draw2d_gdi
    }
 
 
-   bool bitmap::CreateDIBitmap(::draw2d::graphics_pointer & pgraphics,const BITMAPINFOHEADER *pbmih,u32 flInit,const void *pjBits,const BITMAPINFO *pbmi,UINT iUsage)
+   bool bitmap::CreateDIBitmap(::draw2d::graphics_pointer & pgraphics,const BITMAPINFOHEADER *pbmih,unsigned int flInit,const void *pjBits,const BITMAPINFO *pbmi,UINT iUsage)
    {
 
       return Attach(::CreateDIBitmap(GDI_HDC(pgraphics),pbmih,flInit,pjBits,pbmi,iUsage));
@@ -70,7 +70,7 @@ namespace draw2d_gdi
    }
 
 
-   u32 bitmap::SetBitmapBits(u32 dwCount,const void * lpBits)
+   unsigned int bitmap::SetBitmapBits(unsigned int dwCount,const void * lpBits)
    {
 
       return ::SetBitmapBits((HBITMAP)get_handle(),dwCount,lpBits);
@@ -78,7 +78,7 @@ namespace draw2d_gdi
    }
 
 
-   u32 bitmap::GetBitmapBits(u32 dwCount,LPVOID lpBits) const
+   unsigned int bitmap::GetBitmapBits(unsigned int dwCount,LPVOID lpBits) const
    {
 
       return ::GetBitmapBits((HBITMAP)get_handle(),dwCount,lpBits);

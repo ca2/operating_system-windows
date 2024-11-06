@@ -32,8 +32,8 @@ namespace aura_windows
       virtual void initialize(::particle * pparticle) override;
 
       static HDDEDATA CALLBACK DdeCallback(
-         u32 uType,
-         u32 uFmt,
+         unsigned int uType,
+         unsigned int uFmt,
          HCONV hconv,
          HDDEDATA hsz1,
          HDDEDATA hsz2,

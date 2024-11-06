@@ -34,7 +34,7 @@ namespace windowing_win32
 
       virtual void _load_default_cursor(enum_cursor ecursor);
 
-      virtual void _create_from_image(::image::image *  pimage, ::i32 xHotspot, ::i32 yHotspot);
+      virtual void _create_from_image(::image::image *  pimage, int xHotspot, int yHotspot);
 
 
    };

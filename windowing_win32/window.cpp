@@ -52,8 +52,8 @@
 #define IDI_ICON_WINDOW 256
 HRESULT SetTouchDisableProperty(HWND hwnd, BOOL fDisableTouch);
 
-::u32 get_dpi_for_window(oswindow hwnd);
-bool is_registered_windows_message(::u32 message);
+unsigned int get_dpi_for_window(oswindow hwnd);
+bool is_registered_windows_message(unsigned int message);
 
 //CLASS_DECL_ACME HWND windows_get_mouse_capture();
 
@@ -73,10 +73,10 @@ extern CLASS_DECL_ACME const unichar gen_WndOleControl[];
 CLASS_DECL_WINDOWING_WIN32 WNDPROC windows_user_interaction_impl_get_window_procedure();
 
 
-bool has_autohide_appbar(::u32 edge, const rectangle_i32 & mon);
+bool has_autohide_appbar(unsigned int edge, const rectangle_i32 & mon);
 
 
-CLASS_DECL_WINDOWING_WIN32 bool __is_combo_box_control(HWND hwnd, ::u32 nStyle);
+CLASS_DECL_WINDOWING_WIN32 bool __is_combo_box_control(HWND hwnd, unsigned int nStyle);
 CLASS_DECL_WINDOWING_WIN32 bool __check_center_dialog(const ::string & pszResource);
 
 CLASS_DECL_WINDOWING_WIN32 bool __compare_class_name(HWND hwnd, const ::string & pszClassName);
@@ -542,9 +542,9 @@ namespace windowing_win32
 
 #else
 
-      ::u32 dwExStyle = 0;
+      unsigned int dwExStyle = 0;
 
-      ::u32 dwStyle = 0;
+      unsigned int dwStyle = 0;
 
       //auto pusersystem = puserinteraction->m_pusersystem.get();
 
@@ -623,7 +623,7 @@ namespace windowing_win32
       if (hwnd == nullptr)
       {
 
-         u32 dwLastError = ::GetLastError();
+         unsigned int dwLastError = ::GetLastError();
 
          string strLastError = ::windows::last_error_message(dwLastError);
 
@@ -990,7 +990,7 @@ namespace windowing_win32
    //}
 
 
-   //i32 window::map_window()
+   //int window::map_window()
    //{
 
    //   //      int i = 0;
@@ -1025,7 +1025,7 @@ namespace windowing_win32
    //}
 
 
-   //i32 window::unmap_window(bool bWithdraw)
+   //int window::unmap_window(bool bWithdraw)
    //{
 
    //   //windowing_output_debug_string("\nwindow::unmap_window");
@@ -1060,7 +1060,7 @@ namespace windowing_win32
    //::mutex * window::s_pmutex = nullptr;
 
 
-   //i32 oswindow_find_message_only_window(::user::window * pimpl)
+   //int oswindow_find_message_only_window(::user::window * pimpl)
    //{
 
    //   if (pimpl == nullptr)
@@ -1068,7 +1068,7 @@ namespace windowing_win32
 
    //   single_lock slOsWindow(window::s_pmutex, true);
 
-   //   for (i32 i = 0; i < ::window::s_pdataptra->get_count(); i++)
+   //   for (int i = 0; i < ::window::s_pdataptra->get_count(); i++)
    //   {
 
    //      if (::window::s_pdataptra->element_at(i)->m_bMessageOnlyWindow
@@ -1085,12 +1085,12 @@ namespace windowing_win32
 
    //}
 
-   //i32 oswindow_find(Display * pdisplay, Window window)
+   //int oswindow_find(Display * pdisplay, Window window)
    //{
 
    //   single_lock slOsWindow(::window::s_pmutex, true);
 
-   //   for (i32 i = 0; i < ::window::s_pdataptra->get_count(); i++)
+   //   for (int i = 0; i < ::window::s_pdataptra->get_count(); i++)
    //   {
    //      if (!::window::s_pdataptra->element_at(i)->m_bMessageOnlyWindow
    //         && ::window::s_pdataptra->element_at(i)->m_osdisplay->display() == pdisplay
@@ -1104,12 +1104,12 @@ namespace windowing_win32
 
    //}
 
-   //i32 oswindow_find(Window window)
+   //int oswindow_find(Window window)
    //{
 
    //   single_lock slOsWindow(::window::s_pmutex, true);
 
-   //   for (i32 i = 0; i < ::window::s_pdataptra->get_count(); i++)
+   //   for (int i = 0; i < ::window::s_pdataptra->get_count(); i++)
    //   {
    //      if (!::window::s_pdataptra->element_at(i)->m_bMessageOnlyWindow
    //         && ::window::s_pdataptra->element_at(i)->m_window == window)
@@ -1473,7 +1473,7 @@ namespace windowing_win32
 //   }
 //
 
-   //i32 window::store_name(const ::string & psz)
+   //int window::store_name(const ::string & psz)
    //{
 
    //   windowing_output_debug_string("\nwindow::store_name");
@@ -1489,7 +1489,7 @@ namespace windowing_win32
    //}
 
 
-   //i32 window::select_input(i32 iInput)
+   //int window::select_input(int iInput)
    //{
 
    //   windowing_output_debug_string("\nwindow::select_input");
@@ -1505,7 +1505,7 @@ namespace windowing_win32
    //}
 
 
-   //i32 window::select_all_input()
+   //int window::select_all_input()
    //{
 
    //   windowing_output_debug_string("\nwindow::select_all_input");
@@ -2268,7 +2268,7 @@ namespace windowing_win32
    //}
 
 
-   iptr window::_get_window_long_ptr(i32 nIndex) const
+   iptr window::_get_window_long_ptr(int nIndex) const
    {
 
       HWND hwnd = get_hwnd();
@@ -2280,7 +2280,7 @@ namespace windowing_win32
    }
 
 
-   bool window::_set_window_position_unlocked(const class ::zorder & zorder, i32 x, i32 y, i32 cx, i32 cy, const ::e_activation & eactivation, bool bNoZorder, bool bNoMove, bool bNoSize, ::e_display edisplay)
+   bool window::_set_window_position_unlocked(const class ::zorder & zorder, int x, int y, int cx, int cy, const ::e_activation & eactivation, bool bNoZorder, bool bNoMove, bool bNoSize, ::e_display edisplay)
    {
 
       HWND hwnd = get_hwnd();
@@ -2419,7 +2419,7 @@ namespace windowing_win32
    }
 
 
-   bool window::_set_window_long_ptr(i32 nIndex, iptr i)
+   bool window::_set_window_long_ptr(int nIndex, iptr i)
    {
 
       HWND hwnd = get_hwnd();
@@ -2573,9 +2573,9 @@ namespace windowing_win32
 
       //   Atom actual_type = 0;
 
-      //   i32 actual_format = 0;
+      //   int actual_format = 0;
 
-      //   i32 status = 0;
+      //   int status = 0;
 
       //   unsigned char * point = nullptr;
 
@@ -2685,7 +2685,7 @@ namespace windowing_win32
    }
 
 
-   //bool window::on_set_window_position(const class ::zorder& zorder, i32 x, i32 y, i32 cx, i32 cy, const ::e_activation& eactivation, bool bNoZorder, bool bNoMove, bool bNoSize, bool bShow, bool bHide)
+   //bool window::on_set_window_position(const class ::zorder& zorder, int x, int y, int cx, int cy, const ::e_activation& eactivation, bool bNoZorder, bool bNoMove, bool bNoSize, bool bShow, bool bHide)
    //{
 
    //   //if (!(_get_ex_style() & WS_EX_LAYERED))
@@ -2802,7 +2802,7 @@ namespace windowing_win32
       task_bar * get_best_task_bar(const rectangle_i32 & rectangle)
       {
 
-         ::i32 iArea = 0;
+         int iArea = 0;
          ::collection::index iFound = -1;
 
          for (::collection::index i = 0; i < this->get_count(); i++)
@@ -2841,7 +2841,7 @@ namespace windowing_win32
 
 
 
-   bool window::__set_window_position(const class ::zorder & zorder, i32 x, i32 y, i32 cx, i32 cy, const ::e_activation & eactivation, bool bNoZorder, bool bNoMove, bool bNoSize, bool bShow, bool bHide, ::u32 nOverrideFlags)
+   bool window::__set_window_position(const class ::zorder & zorder, int x, int y, int cx, int cy, const ::e_activation & eactivation, bool bNoZorder, bool bNoMove, bool bNoSize, bool bShow, bool bHide, unsigned int nOverrideFlags)
    {
 
       if (m_bSizeMoveMode)
@@ -3025,7 +3025,7 @@ namespace windowing_win32
    }
 
 
-   ////bool window::_set_window_position(const class ::zorder& zorder, i32 x, i32 y, i32 cx, i32 cy, const ::e_activation& eactivation, bool bNoZorder, bool bNoMove, bool bNoSize, bool bShow, bool bHide, ::u32 nOverrideFlags)
+   ////bool window::_set_window_position(const class ::zorder& zorder, int x, int y, int cx, int cy, const ::e_activation& eactivation, bool bNoZorder, bool bNoMove, bool bNoSize, bool bShow, bool bHide, unsigned int nOverrideFlags)
    //bool window::_configure_window_unlocked(const class ::zorder & zorder, const ::e_activation & eactivation, bool bNoZorder, ::e_display edisplay)
    //{
 
@@ -4091,18 +4091,18 @@ namespace windowing_win32
 
 
 
-   //::i32 window::get_window_long(i32 nIndex) const
+   //int window::get_window_long(int nIndex) const
    //{
    //   return ::GetWindowLong(get_hwnd(), nIndex);
    //}
 
-   //::i32 window::set_window_long(i32 nIndex, ::i32 lValue)
+   //int window::set_window_long(int nIndex, int lValue)
    //{
    //   return ::SetWindowLong(get_hwnd(), nIndex, lValue);
    //}
 
 
-   //iptr window::get_window_long_ptr(i32 nIndex) const
+   //iptr window::get_window_long_ptr(int nIndex) const
    //{
 
    //   return ::GetWindowLongPtr(get_hwnd(), nIndex);
@@ -4110,7 +4110,7 @@ namespace windowing_win32
    //}
 
 
-   //iptr window::set_window_long_ptr(i32 nIndex, iptr lValue)
+   //iptr window::set_window_long_ptr(int nIndex, iptr lValue)
    //{
 
    //   return ::SetWindowLongPtr(get_hwnd(), nIndex, lValue);
@@ -4137,13 +4137,13 @@ namespace windowing_win32
       //}
 
 
-      //u32 window::GetStyle() const
+      //unsigned int window::GetStyle() const
       //{
 
       //   if (!::IsWindow(get_hwnd()))
       //      return 0;
 
-      //   return (u32)::GetWindowLong(get_hwnd(), GWL_STYLE);
+      //   return (unsigned int)::GetWindowLong(get_hwnd(), GWL_STYLE);
 
       //}
 
@@ -4198,7 +4198,7 @@ namespace windowing_win32
    }
 
 
-   bool window::_modify_style(iptr dwRemove, iptr dwAdd, ::u32 nFlags)
+   bool window::_modify_style(iptr dwRemove, iptr dwAdd, unsigned int nFlags)
    {
 
       auto nStyleOld = _get_style();
@@ -4232,7 +4232,7 @@ namespace windowing_win32
    }
 
 
-   bool window::_modify_ex_style(iptr dwRemove, iptr dwAdd, ::u32 nFlags)
+   bool window::_modify_ex_style(iptr dwRemove, iptr dwAdd, unsigned int nFlags)
    {
 
       auto nExStyleOld = _get_ex_style();
@@ -4266,7 +4266,7 @@ namespace windowing_win32
    }
 
 
-   //bool window::ModifyStyleEx(u32 dwRemove, u32 dwAdd, ::u32 nFlags)
+   //bool window::ModifyStyleEx(unsigned int dwRemove, unsigned int dwAdd, unsigned int nFlags)
    //{
 
    //   if (!::IsWindow(get_hwnd()))
@@ -4290,7 +4290,7 @@ namespace windowing_win32
 
       HWND hwnd = get_hwnd();
 
-      ::u32 message = atom.as_emessage();
+      unsigned int message = atom.as_emessage();
 
       wparam wparam = wParam;
 
@@ -4404,7 +4404,7 @@ namespace windowing_win32
    //}
 
 
-   ::u32 window::ArrangeIconicWindows()
+   unsigned int window::ArrangeIconicWindows()
    {
 
       ASSERT(::IsWindow(get_hwnd()));
@@ -4413,7 +4413,7 @@ namespace windowing_win32
    }
 
 
-   //i32 window::SetWindowRgn(HRGN hRgn,bool bRedraw)
+   //int window::SetWindowRgn(HRGN hRgn,bool bRedraw)
    //{
 
    //   //ASSERT(::IsWindow(get_hwnd())); return ::SetWindowRgn(get_hwnd(),hRgn,bRedraw);
@@ -4421,7 +4421,7 @@ namespace windowing_win32
    //}
 
 
-   //i32 window::GetWindowRgn(HRGN hRgn)
+   //int window::GetWindowRgn(HRGN hRgn)
    //{
 
    //   //ASSERT(::IsWindow(get_hwnd()) && hRgn != nullptr); return ::GetWindowRgn(get_hwnd(),hRgn);
@@ -4500,7 +4500,7 @@ namespace windowing_win32
       //}
 
 
-   //void window::MapWindowPoints(::user::window * puserinteractionTo, ::point_i32 * pPoint, ::u32 nCount)
+   //void window::MapWindowPoints(::user::window * puserinteractionTo, ::point_i32 * pPoint, unsigned int nCount)
    //{
 
    //   ASSERT(::IsWindow(get_hwnd()));
@@ -4545,7 +4545,7 @@ namespace windowing_win32
    }
 
 
-   i32 window::GetUpdateRgn(::draw2d::region * pRgn, bool bErase)
+   int window::GetUpdateRgn(::draw2d::region * pRgn, bool bErase)
    {
 
       //ASSERT(::IsWindow(get_hwnd()));
@@ -4659,7 +4659,7 @@ namespace windowing_win32
 
 
 
-   ::pointer<::draw2d::graphics>window::GetDCEx(::draw2d::region * prgnClip, u32 flags)
+   ::pointer<::draw2d::graphics>window::GetDCEx(::draw2d::region * prgnClip, unsigned int flags)
    {
 
       ASSERT(::IsWindow(get_hwnd()));
@@ -4695,7 +4695,7 @@ namespace windowing_win32
    }
 
 
-   bool window::RedrawWindow(const ::rectangle_i32 & rectangleUpdate, ::draw2d::region * prgnUpdate, ::u32 flags)
+   bool window::RedrawWindow(const ::rectangle_i32 & rectangleUpdate, ::draw2d::region * prgnUpdate, unsigned int flags)
    {
 
       //if (m_bDestroyImplOnly)
@@ -4776,7 +4776,7 @@ namespace windowing_win32
 
 
 
-   bool window::EnableScrollBar(i32 nSBFlags, ::u32 nArrowFlags)
+   bool window::EnableScrollBar(int nSBFlags, unsigned int nArrowFlags)
    {
 
       ASSERT(::IsWindow(get_hwnd()));
@@ -4785,7 +4785,7 @@ namespace windowing_win32
 
    }
 
-   //bool window::DrawAnimatedRects(i32 idAni, const LPRECTprcFrom, const LPRECTlprcTo)
+   //bool window::DrawAnimatedRects(int idAni, const LPRECTprcFrom, const LPRECTlprcTo)
 
    //{
 
@@ -4796,7 +4796,7 @@ namespace windowing_win32
 
    //}
 
-   bool window::DrawCaption(::draw2d::graphics_pointer & pgraphics, const rectangle_i32 & prc, ::u32 uFlags)
+   bool window::DrawCaption(::draw2d::graphics_pointer & pgraphics, const rectangle_i32 & prc, unsigned int uFlags)
 
    {
 
@@ -4901,9 +4901,9 @@ namespace windowing_win32
 
 
    // helper for radio buttons
-   //i32 window::GetCheckedRadioButton(i32 nIDFirstButton, i32 nIDLastButton)
+   //int window::GetCheckedRadioButton(int nIDFirstButton, int nIDLastButton)
    //{
-   //   for (i32 nID = nIDFirstButton; nID <= nIDLastButton; nID++)
+   //   for (int nID = nIDFirstButton; nID <= nIDLastButton; nID++)
    //   {
    //      if (IsDlgButtonChecked(nID))
    //         return nID; // atom that matched
@@ -4912,7 +4912,7 @@ namespace windowing_win32
    //}
 
 
-   //void window::CheckDlgButton(i32 nIDButton, ::u32 nCheck)
+   //void window::CheckDlgButton(int nIDButton, unsigned int nCheck)
    //{
 
    //   ASSERT(::IsWindow(get_hwnd()));
@@ -4922,7 +4922,7 @@ namespace windowing_win32
    //}
 
 
-   //void window::CheckRadioButton(i32 nIDFirstButton, i32 nIDLastButton, i32 nIDCheckButton)
+   //void window::CheckRadioButton(int nIDFirstButton, int nIDLastButton, int nIDCheckButton)
    //{
 
    //   ASSERT(::IsWindow(get_hwnd()));
@@ -4932,7 +4932,7 @@ namespace windowing_win32
    //}
 
 
-   //i32 window::DlgDirList(TCHAR * pPathSpec, i32 nIDListBox, i32 nIDStaticPath, ::u32 nFileType)
+   //int window::DlgDirList(TCHAR * pPathSpec, int nIDListBox, int nIDStaticPath, unsigned int nFileType)
 
    //{
 
@@ -4944,7 +4944,7 @@ namespace windowing_win32
    //}
 
 
-   //i32 window::DlgDirListComboBox(TCHAR * pPathSpec, i32 nIDComboBox, i32 nIDStaticPath, ::u32 nFileType)
+   //int window::DlgDirListComboBox(TCHAR * pPathSpec, int nIDComboBox, int nIDStaticPath, unsigned int nFileType)
 
    //{
 
@@ -4956,7 +4956,7 @@ namespace windowing_win32
    //}
 
 
-   //bool window::DlgDirSelect(TCHAR * pString, i32 nSize, i32 nIDListBox)
+   //bool window::DlgDirSelect(TCHAR * pString, int nSize, int nIDListBox)
 
    //{
 
@@ -4968,7 +4968,7 @@ namespace windowing_win32
    //}
 
 
-   //bool window::DlgDirSelectComboBox(TCHAR * pString, i32 nSize, i32 nIDComboBox)
+   //bool window::DlgDirSelectComboBox(TCHAR * pString, int nSize, int nIDComboBox)
 
    //{
 
@@ -4987,12 +4987,12 @@ namespace windowing_win32
 
    //   ASSERT(poswindow_ != nullptr);
 
-   //   *poswindow_ = ::GetDlgItem(((window *)this)->get_hwnd(), (i32)atom);
+   //   *poswindow_ = ::GetDlgItem(((window *)this)->get_hwnd(), (int)atom);
 
    //}
 
 
-   //::u32 window::GetChildByIdInt(i32 nID, BOOL * pTrans, bool bSigned) const
+   //unsigned int window::GetChildByIdInt(int nID, BOOL * pTrans, bool bSigned) const
 
    //{
 
@@ -5004,7 +5004,7 @@ namespace windowing_win32
    //}
 
 
-   //i32 window::GetChildByIdText(i32 nID, TCHAR * pStr, i32 nMaxCount) const
+   //int window::GetChildByIdText(int nID, TCHAR * pStr, int nMaxCount) const
 
    //{
 
@@ -5036,14 +5036,14 @@ namespace windowing_win32
    //}
 
 
-   //::u32 window::IsDlgButtonChecked(i32 nIDButton) const
+   //unsigned int window::IsDlgButtonChecked(int nIDButton) const
    //{
    //   ASSERT(::IsWindow(((window *)this)->get_hwnd()));
    //   return ::IsDlgButtonChecked(((window *)this)->get_hwnd(), nIDButton);
    //}
 
 
-   //lparam window::SendDlgItemMessage(i32 nID, ::u32 message, wparam wParam, lparam lParam)
+   //lparam window::SendDlgItemMessage(int nID, unsigned int message, wparam wParam, lparam lParam)
    //{
 
    //   ASSERT(::IsWindow(((window *)this)->get_hwnd()));
@@ -5053,22 +5053,22 @@ namespace windowing_win32
    //}
 
 
-   //void window::SetDlgItemInt(i32 nID, ::u32 nValue, bool bSigned)
+   //void window::SetDlgItemInt(int nID, unsigned int nValue, bool bSigned)
    //{
    //   ASSERT(::IsWindow(get_hwnd()));
    //   ::SetDlgItemInt(get_hwnd(), nID, nValue, bSigned);
    //}
-   //void window::SetDlgItemText(i32 nID, const ::string & pszString)
+   //void window::SetDlgItemText(int nID, const ::string & pszString)
 
    //{
    //   ASSERT(::IsWindow(get_hwnd()));
    //   ::SetDlgItemTextW(get_hwnd(), nID, wstring(pszString));
 
    //}
-   //i32 window::ScrollWindowEx(i32 dx, i32 dy,
+   //int window::ScrollWindowEx(int dx, int dy,
    //   const ::rectangle_i32 * pRectScroll, const ::rectangle_i32 * lpRectClip,
 
-   //   ::draw2d::region * prgnUpdate, ::rectangle_i32 * pRectUpdate, ::u32 flags)
+   //   ::draw2d::region * prgnUpdate, ::rectangle_i32 * pRectUpdate, unsigned int flags)
 
    //{
 
@@ -5082,7 +5082,7 @@ namespace windowing_win32
 
    //}
 
-   //void window::ShowScrollBar(::u32 nBar, bool bShow)
+   //void window::ShowScrollBar(unsigned int nBar, bool bShow)
    //{
    //   ASSERT(::IsWindow(get_hwnd()));
    //   ::ShowScrollBar(get_hwnd(), nBar, bShow);
@@ -5096,7 +5096,7 @@ namespace windowing_win32
 
    //}
 
-   //::user::interaction * window::ChildWindowFromPoint(const ::point_i32 & point, ::u32 nFlags)
+   //::user::interaction * window::ChildWindowFromPoint(const ::point_i32 & point, unsigned int nFlags)
    //{
    //   ASSERT(::IsWindow(get_hwnd()));
 
@@ -5107,7 +5107,7 @@ namespace windowing_win32
 
 
 
-   ::windowing::window * window::get_next_window(::u32 nFlag)
+   ::windowing::window * window::get_next_window(unsigned int nFlag)
    {
 
       HWND hwnd = get_hwnd();
@@ -5139,7 +5139,7 @@ namespace windowing_win32
    }
 
 
-   ::windowing::window * window::get_window(::u32 nCmd)
+   ::windowing::window * window::get_window(unsigned int nCmd)
    {
 
       HWND hwnd = get_hwnd();
@@ -5325,7 +5325,7 @@ namespace windowing_win32
 
    //}
 
-   //void window::Print(::draw2d::graphics_pointer & pgraphics, u32 dwFlags) const
+   //void window::Print(::draw2d::graphics_pointer & pgraphics, unsigned int dwFlags) const
    //{
 
    //   ASSERT(::IsWindow(((window *)this)->get_hwnd()));
@@ -5335,7 +5335,7 @@ namespace windowing_win32
 
    //}
 
-   //void window::PrintClient(::draw2d::graphics_pointer & pgraphics, u32 dwFlags) const
+   //void window::PrintClient(::draw2d::graphics_pointer & pgraphics, unsigned int dwFlags) const
    //{
 
    //   ASSERT(::IsWindow(((window *)this)->get_hwnd()));
@@ -5345,7 +5345,7 @@ namespace windowing_win32
 
    //}
 
-   //bool window::SetWindowContextHelpId(u32 dwContextHelpId)
+   //bool window::SetWindowContextHelpId(unsigned int dwContextHelpId)
    //{
 
    //   ASSERT(::IsWindow(((window *)this)->get_hwnd()));
@@ -5354,7 +5354,7 @@ namespace windowing_win32
 
    //}
 
-   //u32 window::GetWindowContextHelpId() const
+   //unsigned int window::GetWindowContextHelpId() const
    //{
 
    //   ASSERT(::IsWindow(((window *)this)->get_hwnd()));
@@ -5365,11 +5365,11 @@ namespace windowing_win32
 
 
    // Default message map implementations
-      //void window::OnActivateApp(bool, u32)
+      //void window::OnActivateApp(bool, unsigned int)
       //{
       //   Default();
       //}
-      //void window::OnActivate(::u32, ::user::window *, bool)
+      //void window::OnActivate(unsigned int, ::user::window *, bool)
       //{
       //   Default();
       //}
@@ -5455,7 +5455,7 @@ namespace windowing_win32
    //}
 
 
-   //lresult window::OnMenuChar(::u32, ::u32, ::user::menu*)
+   //lresult window::OnMenuChar(unsigned int, unsigned int, ::user::menu*)
    //{
 
    //   return Default();
@@ -5463,7 +5463,7 @@ namespace windowing_win32
    //}
 
 
-   //void window::OnMenuSelect(::u32, ::u32, HMENU)
+   //void window::OnMenuSelect(unsigned int, unsigned int, HMENU)
    //{
 
    //   Default();
@@ -5471,7 +5471,7 @@ namespace windowing_win32
    //}
 
 
-   //void window::OnMove(i32, i32)
+   //void window::OnMove(int, int)
    //{
 
    //   Default();
@@ -5524,7 +5524,7 @@ namespace windowing_win32
    //}
 
 
-   //void window::OnShowWindow(bool, ::u32)
+   //void window::OnShowWindow(bool, unsigned int)
    //{
 
    //   Default();
@@ -5532,7 +5532,7 @@ namespace windowing_win32
    //}
 
 
-   //void window::OnSize(::u32, i32, i32)
+   //void window::OnSize(unsigned int, int, int)
    //{
 
    //   Default();
@@ -5540,7 +5540,7 @@ namespace windowing_win32
    //}
 
 
-   //void window::OnTCard(::u32, u32)
+   //void window::OnTCard(unsigned int, unsigned int)
    //{
 
    //   Default();
@@ -5709,31 +5709,31 @@ namespace windowing_win32
    //   {
    //      return Default();
    //   }
-   //   void window::OnNcLButtonDblClk(::u32, const point_i32&)
+   //   void window::OnNcLButtonDblClk(unsigned int, const point_i32&)
    //   {
    //      Default();
    //   }
-   //   void window::OnNcLButtonDown(::u32, const point_i32&)
+   //   void window::OnNcLButtonDown(unsigned int, const point_i32&)
    //   {
    //      Default();
    //   }
-   //   void window::OnNcLButtonUp(::u32, const point_i32&)
+   //   void window::OnNcLButtonUp(unsigned int, const point_i32&)
    //   {
    //      Default();
    //   }
-   //   void window::OnNcMButtonDblClk(::u32, const point_i32&)
+   //   void window::OnNcMButtonDblClk(unsigned int, const point_i32&)
    //   {
    //      Default();
    //   }
-   //   void window::OnNcMButtonDown(::u32, const point_i32&)
+   //   void window::OnNcMButtonDown(unsigned int, const point_i32&)
    //   {
    //      Default();
    //   }
-   //   void window::OnNcMButtonUp(::u32, const point_i32&)
+   //   void window::OnNcMButtonUp(unsigned int, const point_i32&)
    //   {
    //      Default();
    //   }
-   //   void window::OnNcMouseMove(::u32, const point_i32&)
+   //   void window::OnNcMouseMove(unsigned int, const point_i32&)
    //   {
    //      Default();
    //   }
@@ -5741,39 +5741,39 @@ namespace windowing_win32
    //   {
    //      Default();
    //   }
-   //   void window::OnNcRButtonDblClk(::u32, const point_i32&)
+   //   void window::OnNcRButtonDblClk(unsigned int, const point_i32&)
    //   {
    //      Default();
    //   }
-   //   void window::OnNcRButtonDown(::u32, const point_i32&)
+   //   void window::OnNcRButtonDown(unsigned int, const point_i32&)
    //   {
    //      Default();
    //   }
-   //   void window::OnNcRButtonUp(::u32, const point_i32&)
+   //   void window::OnNcRButtonUp(unsigned int, const point_i32&)
    //   {
    //      Default();
    //   }
-   //   void window::OnSysChar(::u32, ::u32, ::u32)
+   //   void window::OnSysChar(unsigned int, unsigned int, unsigned int)
    //   {
    //      Default();
    //   }
-   //   void window::OnSysCommand(::u32, lparam)
+   //   void window::OnSysCommand(unsigned int, lparam)
    //   {
    //      Default();
    //   }
-   //   void window::OnSysDeadChar(::u32, ::u32, ::u32)
+   //   void window::OnSysDeadChar(unsigned int, unsigned int, unsigned int)
    //   {
    //      Default();
    //   }
-   //   void window::OnSysKeyDown(::u32, ::u32, ::u32)
+   //   void window::OnSysKeyDown(unsigned int, unsigned int, unsigned int)
    //   {
    //      Default();
    //   }
-   //   void window::OnSysKeyUp(::u32, ::u32, ::u32)
+   //   void window::OnSysKeyUp(unsigned int, unsigned int, unsigned int)
    //   {
    //      Default();
    //   }
-   //   void window::OnCompacting(::u32)
+   //   void window::OnCompacting(unsigned int)
    //   {
    //      Default();
    //   }
@@ -5785,7 +5785,7 @@ namespace windowing_win32
    //   {
    //      Default();
    //   }
-   //   void window::OnSpoolerStatus(::u32, ::u32)
+   //   void window::OnSpoolerStatus(unsigned int, unsigned int)
    //   {
    //      Default();
    //   }
@@ -5793,56 +5793,56 @@ namespace windowing_win32
    //   {
    //      Default();
    //   }
-   //   void window::OnChar(::u32, ::u32, ::u32)
+   //   void window::OnChar(unsigned int, unsigned int, unsigned int)
    //   {
    //      Default();
    //   }
-   //   void window::OnDeadChar(::u32, ::u32, ::u32)
+   //   void window::OnDeadChar(unsigned int, unsigned int, unsigned int)
    //   {
    //      Default();
    //   }
-   //   void window::OnKeyDown(::u32, ::u32, ::u32)
+   //   void window::OnKeyDown(unsigned int, unsigned int, unsigned int)
    //   {
    //      Default();
    //   }
-   //   void window::OnKeyUp(::u32, ::u32, ::u32)
+   //   void window::OnKeyUp(unsigned int, unsigned int, unsigned int)
    //   {
    //      Default();
    //   }
-   //   void window::OnLButtonDblClk(::u32, const point_i32&)
+   //   void window::OnLButtonDblClk(unsigned int, const point_i32&)
    //   {
    //      Default();
    //   }
-   //   void window::OnLButtonDown(::u32, const point_i32&)
+   //   void window::OnLButtonDown(unsigned int, const point_i32&)
    //   {
    //      Default();
    //   }
-   //   void window::OnLButtonUp(::u32, const point_i32&)
+   //   void window::OnLButtonUp(unsigned int, const point_i32&)
    //   {
    //      Default();
    //   }
-   //   void window::OnMButtonDblClk(::u32, const point_i32&)
+   //   void window::OnMButtonDblClk(unsigned int, const point_i32&)
    //   {
    //      Default();
    //   }
-   //   void window::OnMButtonDown(::u32, const point_i32&)
+   //   void window::OnMButtonDown(unsigned int, const point_i32&)
    //   {
    //      Default();
    //   }
-   //   void window::OnMButtonUp(::u32, const point_i32&)
+   //   void window::OnMButtonUp(unsigned int, const point_i32&)
    //   {
    //      Default();
    //   }
-   //   i32 window::OnMouseActivate(::user::window *, ::u32, ::u32)
+   //   int window::OnMouseActivate(::user::window *, unsigned int, unsigned int)
    //   {
-   //      return (i32)Default();
+   //      return (int)Default();
    //   }
-   //   void window::OnMouseMove(::u32, const point_i32&)
+   //   void window::OnMouseMove(unsigned int, const point_i32&)
    //   {
    //      Default();
    //   }
    //
-   //   bool window::OnMouseWheel(::u32, i16, const point_i32&)
+   //   bool window::OnMouseWheel(unsigned int, short, const point_i32&)
    //   {
    //
    //      return Default() != false;
@@ -5853,15 +5853,15 @@ namespace windowing_win32
    //   {
    //      return Default();
    //   }
-   //   void window::OnRButtonDblClk(::u32, const point_i32&)
+   //   void window::OnRButtonDblClk(unsigned int, const point_i32&)
    //   {
    //      Default();
    //   }
-   //   void window::OnRButtonDown(::u32, const point_i32&)
+   //   void window::OnRButtonDown(unsigned int, const point_i32&)
    //   {
    //      Default();
    //   }
-   //   void window::OnRButtonUp(::u32, const point_i32&)
+   //   void window::OnRButtonUp(unsigned int, const point_i32&)
    //   {
    //      Default();
    //   }
@@ -5873,11 +5873,11 @@ namespace windowing_win32
    //   {
    //      Default();
    //   }
-   //   void window::OnInitMenuPopup(::user::menu*, ::u32, bool)
+   //   void window::OnInitMenuPopup(::user::menu*, unsigned int, bool)
    //   {
    //      Default();
    //   }
-   //   void window::OnAskCbFormatName(__in ::u32 nMaxCount, __out_ecount_z(nMaxCount) char * lpszName)
+   //   void window::OnAskCbFormatName(__in unsigned int nMaxCount, __out_ecount_z(nMaxCount) char * lpszName)
    //   {
    //      (nMaxCount);
    //      if (nMaxCount > 0)
@@ -5899,7 +5899,7 @@ namespace windowing_win32
    //   {
    //      Default();
    //   }
-   //   void window::OnHScrollClipboard(::user::window *, ::u32, ::u32)
+   //   void window::OnHScrollClipboard(::user::window *, unsigned int, unsigned int)
    //   {
    //      Default();
    //   }
@@ -5911,7 +5911,7 @@ namespace windowing_win32
    //   {
    //      Default();
    //   }
-   //   void window::OnRenderFormat(::u32)
+   //   void window::OnRenderFormat(unsigned int)
    //   {
    //      Default();
    //   }
@@ -5919,13 +5919,13 @@ namespace windowing_win32
    //   {
    //      Default();
    //   }
-   //   void window::OnVScrollClipboard(::user::window *, ::u32, ::u32)
+   //   void window::OnVScrollClipboard(::user::window *, unsigned int, unsigned int)
    //   {
    //      Default();
    //   }
-   //   ::u32 window::OnGetDlgCode()
+   //   unsigned int window::OnGetDlgCode()
    //   {
-   //      return (::u32)Default();
+   //      return (unsigned int)Default();
    //   }
    //   void window::OnMDIActivate(bool, ::user::window *, ::user::window *)
    //   {
@@ -5940,19 +5940,19 @@ namespace windowing_win32
    //      Default();
    //   }
    //// Win4 support
-   //   void window::OnStyleChanged(i32, LPSTYLESTRUCT)
+   //   void window::OnStyleChanged(int, LPSTYLESTRUCT)
    //   {
    //      Default();
    //   }
-   //   void window::OnStyleChanging(i32, LPSTYLESTRUCT)
+   //   void window::OnStyleChanging(int, LPSTYLESTRUCT)
    //   {
    //      Default();
    //   }
-   //   void window::OnSizing(::u32, ::rectangle_i32 *)
+   //   void window::OnSizing(unsigned int, ::rectangle_i32 *)
    //   {
    //      Default();
    //   }
-   //   void window::OnMoving(::u32, ::rectangle_i32 *)
+   //   void window::OnMoving(unsigned int, ::rectangle_i32 *)
    //   {
    //      Default();
    //   }
@@ -5961,7 +5961,7 @@ namespace windowing_win32
    //      Default();
    //   }
    //
-   //   bool window::OnDeviceChange(::u32, uptr)
+   //   bool window::OnDeviceChange(unsigned int, uptr)
    //   {
    //
    //      return Default() != false;
@@ -5972,17 +5972,17 @@ namespace windowing_win32
    //   {
    //      Default();
    //   }
-   //   void window::OnChangeUIState(::u32, ::u32)
+   //   void window::OnChangeUIState(unsigned int, unsigned int)
    //   {
    //      Default();
    //   }
-   //   void window::OnUpdateUIState(::u32, ::u32)
+   //   void window::OnUpdateUIState(unsigned int, unsigned int)
    //   {
    //      Default();
    //   }
-   //   ::u32 window::OnQueryUIState()
+   //   unsigned int window::OnQueryUIState()
    //   {
-   //      return (::u32)Default();
+   //      return (unsigned int)Default();
    //   }
 
    // window dialog data support
@@ -6095,7 +6095,7 @@ namespace windowing_win32
    //}
 
 
-   //lresult CALLBACK __cbt_filter_hook(i32 code, wparam wParam, lparam lParam)
+   //lresult CALLBACK __cbt_filter_hook(int code, wparam wParam, lparam lParam)
    //{
 
    //   if (code != HCBT_CREATEWND)
@@ -6431,7 +6431,7 @@ namespace windowing_win32
    }
 
 
-   /*bool window::set_window_position(class ::user::zorder zorder, i32 x, i32 y, i32 cx, i32 cy, ::u32 nFlags)
+   /*bool window::set_window_position(class ::user::zorder zorder, int x, int y, int cx, int cy, unsigned int nFlags)
    {
 
       if (!::user::window::set_window_position(zorder, x, y, cx, cy, nFlags))
@@ -6484,13 +6484,13 @@ namespace windowing_win32
 
          MARGINS m = { 0,0,0,0 };
 
-         ::u32  dw = DWMNCRP_ENABLED;
+         unsigned int  dw = DWMNCRP_ENABLED;
 
          HWND hwnd = get_hwnd();
 
          DwmExtendFrameIntoClientArea(hwnd, &m);
 
-         DwmSetWindowAttribute(hwnd, DWMWA_NCRENDERING_POLICY, &dw, sizeof(::u32));
+         DwmSetWindowAttribute(hwnd, DWMWA_NCRENDERING_POLICY, &dw, sizeof(unsigned int));
 
       }
       else
@@ -6529,13 +6529,13 @@ namespace windowing_win32
 
          MARGINS m = { 0,0,0,0 };
 
-         ::u32  dw = DWMNCRP_ENABLED;
+         unsigned int  dw = DWMNCRP_ENABLED;
 
          HWND hwnd = get_hwnd();
 
          DwmExtendFrameIntoClientArea(hwnd, &m);
 
-         DwmSetWindowAttribute(hwnd, DWMWA_NCRENDERING_POLICY, &dw, sizeof(::u32));
+         DwmSetWindowAttribute(hwnd, DWMWA_NCRENDERING_POLICY, &dw, sizeof(unsigned int));
 
       }
       else
@@ -6683,13 +6683,13 @@ namespace windowing_win32
    //   if (pfnWndProc == nullptr)
    //   {
 
-   //      lresult = ::DefWindowProcW(m_oswindow, (::u32)pmessage->m_atom.i64(), pmessage->m_wparam, pmessage->m_lparam);
+   //      lresult = ::DefWindowProcW(m_oswindow, (unsigned int)pmessage->m_atom.i64(), pmessage->m_wparam, pmessage->m_lparam);
 
    //   }
    //   else
    //   {
 
-   //      lresult = ::CallWindowProc(pfnWndProc, m_oswindow, (::u32)pmessage->m_atom.i64(), pmessage->m_wparam, pmessage->m_lparam);
+   //      lresult = ::CallWindowProc(pfnWndProc, m_oswindow, (unsigned int)pmessage->m_atom.i64(), pmessage->m_wparam, pmessage->m_lparam);
 
    //   }
 
@@ -6795,7 +6795,7 @@ namespace windowing_win32
    //
    //      }
    //
-   //      ::u32 message;
+   //      unsigned int message;
    //
    //      message = pmessage->m_atom.umessage();
    //
@@ -7186,7 +7186,7 @@ namespace windowing_win32
    //         //wnda = *psystem->m_puiptraFrame;
    //         //hwnda = wnda.get_hwnda();
    //         //user::window_util::SortByZOrder(hwnda);
-   //         //for (i32 i = 0; i < hwnda.get_size(); i++)
+   //         //for (int i = 0; i < hwnda.get_size(); i++)
    //         //{
    //         //   ::pointer<::user::interaction>puserinteraction = wnda.find_first(hwnda[i]);
    //         //   if (puserinteraction != nullptr)
@@ -7753,7 +7753,7 @@ namespace windowing_win32
    }
 
 
-   void window::on_redraw_window(::u32 flags)
+   void window::on_redraw_window(unsigned int flags)
    {
 
       if (!(_get_ex_style() & WS_EX_LAYERED))
@@ -8301,7 +8301,7 @@ namespace windowing_win32
    void window::set_opacity(double dOpacity)
    {
 
-      m_uOpacity = (::u8) (minimum_maximum(dOpacity, 0., 1.) * 255.0);
+      m_uOpacity = (unsigned char) (minimum_maximum(dOpacity, 0., 1.) * 255.0);
 
    }
 

@@ -30,7 +30,7 @@ HANDLE SymGetProcessHandle()
 }
 
 
-bool engine_get_line_from_address(HANDLE hprocess, OS_DWORD uiAddress, ::u32* puiDisplacement, OS_IMAGEHLP_LINE* pline)
+bool engine_get_line_from_address(HANDLE hprocess, OS_DWORD uiAddress, unsigned int* puiDisplacement, OS_IMAGEHLP_LINE* pline)
 {
 
 #ifdef WORK_AROUND_SRCLINE_BUG
@@ -76,7 +76,7 @@ bool engine_get_line_from_address(HANDLE hprocess, OS_DWORD uiAddress, ::u32* pu
 
 
 
-::collection::index engine_fileline(OS_DWORD dwAddress, char* psz, int nCount, u32* pline, u32* pdisplacement = 0)
+::collection::index engine_fileline(OS_DWORD dwAddress, char* psz, int nCount, unsigned int* pline, unsigned int* pdisplacement = 0)
 {
 
    OS_IMAGEHLP_LINE img_line = {};
@@ -85,7 +85,7 @@ bool engine_get_line_from_address(HANDLE hprocess, OS_DWORD uiAddress, ::u32* pu
 
    HANDLE hprocess = SymGetProcessHandle();
 
-   ::u32 displacement = 0;
+   unsigned int displacement = 0;
 
    if (!engine_get_line_from_address(hprocess, dwAddress, &displacement, &img_line))
    {
@@ -123,7 +123,7 @@ bool engine_get_line_from_address(HANDLE hprocess, OS_DWORD uiAddress, ::u32* pu
 size_t engine_symbol(char* sz, int n, OS_DWORD* pdisplacement, OS_DWORD dwAddress)
 {
 
-   ::u8 symbol[4096];
+   unsigned char symbol[4096];
    OS_PIMAGEHLP_SYMBOL pSym = (OS_PIMAGEHLP_SYMBOL)&symbol;
    memory_set(pSym, 0, sizeof(symbol));
    pSym->SizeOfStruct = sizeof(OS_IMAGEHLP_SYMBOL);
@@ -166,7 +166,7 @@ int_bool __stdcall engine_ReadProcessMemory(HANDLE      hProcess,
    DWORD64     qwBaseAddress,
    PVOID       pBuffer,
 
-   ::u32       nSize,
+   unsigned int       nSize,
    LPDWORD     pNumberOfBytesRead
 
 );
@@ -182,7 +182,7 @@ _In_ HANDLE hProcess,
 _In_ DWORD64 qwBaseAddress,
 _Out_writes_bytes_(nSize) PVOID pBuffer,
 
-_In_ u32 nSize,
+_In_ unsigned int nSize,
 _Out_ LPDWORD pNumberOfBytesRead
 
 );*/
@@ -193,7 +193,7 @@ int_bool __stdcall engine_ReadProcessMemory(
    DWORD64     qwBaseAddress,
    PVOID       pBuffer,
 
-   ::u32       nSize,
+   unsigned int       nSize,
    LPDWORD     pNumberOfBytesRead
 
 )
@@ -209,7 +209,7 @@ int_bool __stdcall engine_ReadProcessMemory(
 
    }
 
-   *pNumberOfBytesRead = (u32)size;
+   *pNumberOfBytesRead = (unsigned int)size;
 
    return true;
 
@@ -218,7 +218,7 @@ int_bool __stdcall engine_ReadProcessMemory(
 
 #ifndef FAST_STACK_TRACE
 
-int_bool __stdcall engine_ReadProcessMemory32(HANDLE hProcess, ::u32 qwBaseAddress, PVOID pBuffer, ::u32 nSize, LPDWORD lpNumberOfBytesRead)
+int_bool __stdcall engine_ReadProcessMemory32(HANDLE hProcess, unsigned int qwBaseAddress, PVOID pBuffer, unsigned int nSize, LPDWORD lpNumberOfBytesRead)
 
 {
 
@@ -228,7 +228,7 @@ int_bool __stdcall engine_ReadProcessMemory32(HANDLE hProcess, ::u32 qwBaseAddre
 
       return false;
 
-   *pNumberOfBytesRead = (u32)size;
+   *pNumberOfBytesRead = (unsigned int)size;
 
 
    return true;
@@ -239,7 +239,7 @@ int_bool __stdcall engine_ReadProcessMemory32(HANDLE hProcess, ::u32 qwBaseAddre
 
 /*
 #else
-int_bool __stdcall My_ReadProcessMemory (HANDLE, const void * pBaseAddress, LPVOID lpBuffer, u32 nSize, SIZE_T * lpNumberOfBytesRead)
+int_bool __stdcall My_ReadProcessMemory (HANDLE, const void * pBaseAddress, LPVOID lpBuffer, unsigned int nSize, SIZE_T * lpNumberOfBytesRead)
 
 {
 return ReadProcessMemory(GetCurrentProcess(), pBaseAddress, lpBuffer, nSize, lpNumberOfBytesRead) != false;
@@ -256,7 +256,7 @@ namespace windows
    critical_section* callstack::s_pcriticalsection = nullptr;
 
 
-   callstack::callstack(const ::string & pszFormat, i32 iSkip, void* caller_address, int iCount) :
+   callstack::callstack(const ::string & pszFormat, int iSkip, void* caller_address, int iCount) :
       m_iSkip(iSkip),
       m_iCount(iCount),
       m_bOk(false),
@@ -324,7 +324,7 @@ namespace windows
    }
 
 
-   ::collection::index callstack::fileline(char* psz, int nCount, u32* pline, u32* pdisplacement)
+   ::collection::index callstack::fileline(char* psz, int nCount, unsigned int* pline, unsigned int* pdisplacement)
    {
 
       if (!check())
@@ -370,13 +370,13 @@ namespace windows
       m_stackframe.AddrFrame.Offset = pcontext->Ebp;
       m_stackframe.AddrFrame.Mode = AddrModeFlat;
 #else
-      m_stackframe.AddrPC.offset = (u32)pcontext->Fir;
+      m_stackframe.AddrPC.offset = (unsigned int)pcontext->Fir;
       m_stackframe.AddrPC.Mode = AddrModeFlat;
-      m_stackframe.AddrReturn.offset = (u32)pcontext->IntRa;
+      m_stackframe.AddrReturn.offset = (unsigned int)pcontext->IntRa;
       m_stackframe.AddrReturn.Mode = AddrModeFlat;
-      m_stackframe.AddrStack.offset = (u32)pcontext->IntSp;
+      m_stackframe.AddrStack.offset = (unsigned int)pcontext->IntSp;
       m_stackframe.AddrStack.Mode = AddrModeFlat;
-      m_stackframe.AddrFrame.offset = (u32)pcontext->IntFp;
+      m_stackframe.AddrFrame.offset = (unsigned int)pcontext->IntFp;
       m_stackframe.AddrFrame.Mode = AddrModeFlat;
 #endif
 
@@ -396,7 +396,7 @@ namespace windows
 
 #if FAST_STACK_TRACE
 
-      ::u32 maxframes = c;
+      unsigned int maxframes = c;
       ULONG BackTraceHash;
       c = RtlCaptureStackBackTrace(0, maxframes, reinterpret_cast<PVOID*>(pinteraction), &BackTraceHash);
 
@@ -408,7 +408,7 @@ namespace windows
    {
 
 #if FAST_STACK_TRACE
-      ::u32 maxframes = minimum_non_negative(iCount, (int)(sizeof(m_uia) / sizeof(m_uia[0])));
+      unsigned int maxframes = minimum_non_negative(iCount, (int)(sizeof(m_uia) / sizeof(m_uia[0])));
       ULONG BackTraceHash;
       m_iAddressWrite = RtlCaptureStackBackTrace(0, maxframes, reinterpret_cast<PVOID*>(&m_uia), &BackTraceHash);
 #else
@@ -426,7 +426,7 @@ namespace windows
          set_last_error(0);
          HANDLE hprocess = SymGetProcessHandle();
 
-         u32 dwType;
+         unsigned int dwType;
 
          bool bRetry;
 
@@ -438,7 +438,7 @@ namespace windows
 
 #if OSBIT == 64
          bool r = StackWalk64(
-            dwType,   // __in      u32 MachineType,
+            dwType,   // __in      unsigned int MachineType,
             hprocess,        // __in      HANDLE hProcess,
             current_htask(),         // __in      htask_t htask,
             &m_stackframe,                       // __inout   LP STACKFRAME64 StackFrame,
@@ -451,7 +451,7 @@ namespace windows
          ) != false;
 #else
          bool r = StackWalk(
-            dwType,   // __in      u32 MachineType,
+            dwType,   // __in      unsigned int MachineType,
             hprocess,        // __in      HANDLE hProcess,
             current_htask(),         // __in      htask_t htask,
             &m_stackframe,                       // __inout   LP STACKFRAME64 StackFrame,
@@ -543,7 +543,7 @@ namespace windows
    }
 
 
-   bool callstack::get_line_from_address(HANDLE hprocess, OS_DWORD uiAddress, ::u32* puiDisplacement, OS_IMAGEHLP_LINE* pline)
+   bool callstack::get_line_from_address(HANDLE hprocess, OS_DWORD uiAddress, unsigned int* puiDisplacement, OS_IMAGEHLP_LINE* pline)
    {
 
       return engine_get_line_from_address(hprocess, uiAddress, puiDisplacement, pline);
@@ -553,7 +553,7 @@ namespace windows
       //      // line addresses (after the first lookup) that fall exactly on
       //      // a zero displacement. I'll walk backward 100 bytes to
       //      // find the line and return the proper displacement.
-      //      u32 dwDisplacement = 0 ;
+      //      unsigned int dwDisplacement = 0 ;
       //      while (!SymGetLineFromAddr (hprocess, uiAddress - dwDisplacement, puiDisplacement, pline))
       //      {
       //         if (100 == ++dwDisplacement)
@@ -567,11 +567,11 @@ namespace windows
       //         *puiDisplacement = dwDisplacement;
       //      return true;
       //#else
-      //      return 0 != SymGetLineFromAddr64 (hprocess, uiAddress, (u32 *) puiDisplacement, pline);
+      //      return 0 != SymGetLineFromAddr64 (hprocess, uiAddress, (unsigned int *) puiDisplacement, pline);
       //#endif
    }
    //#else
-   //   bool callstack::get_line_from_address(HANDLE hprocess, DWORD64 uiAddress, ::u32 * puiDisplacement, IMAGEHLP_LINE64 * pline)
+   //   bool callstack::get_line_from_address(HANDLE hprocess, DWORD64 uiAddress, unsigned int * puiDisplacement, IMAGEHLP_LINE64 * pline)
    //   {
    //
    //      return engine_get_line_from_address(hprocess, uiAddress, puiDisplacement, pline);
@@ -581,7 +581,7 @@ namespace windows
    //      // line addresses (after the first lookup) that fall exactly on
    //      // a zero displacement. I'll walk backward 100 bytes to
    //      // find the line and return the proper displacement.
-   //      u32 dwDisplacement = 0;
+   //      unsigned int dwDisplacement = 0;
    //      while (!SymGetLineFromAddr64(hprocess, uiAddress - dwDisplacement, puiDisplacement, pline))
    //      {
    //         if (100 == ++dwDisplacement)
@@ -595,7 +595,7 @@ namespace windows
    //         *puiDisplacement = dwDisplacement;
    //      return true;
    //#else
-   //      return 0 != SymGetLineFromAddr64(hprocess, uiAddress, (u32 *)puiDisplacement, pline);
+   //      return 0 != SymGetLineFromAddr64(hprocess, uiAddress, (unsigned int *)puiDisplacement, pline);
    //#endif
    //   }
    //#endif
@@ -604,7 +604,7 @@ namespace windows
    size_t callstack::get_module_name(HMODULE hmodule, char* psz, int nCount)
    {
 
-      for (i32 i = 0; i < m_iMa; i++)
+      for (int i = 0; i < m_iMa; i++)
       {
          if (m_ma[i] == hmodule)
          {
@@ -628,7 +628,7 @@ namespace windows
       m_ma[m_iMa] = hmodule;
       m_szaModule[m_iMa] = strdup(filename);
       ansi_count_copy(psz, m_szaModule[m_iMa++], nCount);
-      //u32 r = GetModuleFileNameA(hmodule, psz, nCount);
+      //unsigned int r = GetModuleFileNameA(hmodule, psz, nCount);
 
       //if(!r)
       // return 0;
@@ -664,29 +664,29 @@ namespace windows
       return true;
 
       //      HANDLE hprocess = SymGetProcessHandle();
-      //      u32  dwPid = get_current_process_id();
+      //      unsigned int  dwPid = get_current_process_id();
       //
       //      // enumerate modules
       //      if (is_windows_nt())
       //      {
-      //         typedef bool (WINAPI *ENUMPROCESSMODULES)(HANDLE, HMODULE*, u32, LPDWORD);
+      //         typedef bool (WINAPI *ENUMPROCESSMODULES)(HANDLE, HMODULE*, unsigned int, LPDWORD);
       //
       //         HINSTANCE hInst = LoadLibrary("psapi.dll");
       //         if (hInst)
       //         {
       //            ENUMPROCESSMODULES fnEnumProcessModules =
       //            (ENUMPROCESSMODULES)GetProcAddress(hInst, "EnumProcessModules");
-      //            ::u32 cbNeeded = 0;
+      //            unsigned int cbNeeded = 0;
       //            if (fnEnumProcessModules &&
       //                  fnEnumProcessModules(GetCurrentProcess(), 0, 0, &cbNeeded) &&
       //                  cbNeeded)
       //            {
       //               HMODULE * pmod = (HMODULE *)alloca(cbNeeded);
-      //               ::u32 cb = cbNeeded;
+      //               unsigned int cb = cbNeeded;
       //               if (fnEnumProcessModules(GetCurrentProcess(), pmod, cb, &cbNeeded))
       //               {
       //                  m_iRef = 0;
-      //                  for (u32 i = 0; i < cb / sizeof (HMODULE); ++i)
+      //                  for (unsigned int i = 0; i < cb / sizeof (HMODULE); ++i)
       //                  {
       //                     if (!load_module(hprocess, pmod[i]))
       //                     {
@@ -712,7 +712,7 @@ namespace windows
       //      }
       //      else
       //      {
-      //         typedef HANDLE (WINAPI *CREATESNAPSHOT)(u32, u32);
+      //         typedef HANDLE (WINAPI *CREATESNAPSHOT)(unsigned int, unsigned int);
       //         typedef bool (WINAPI *MODULEWALK)(HANDLE, LPMODULEENTRY32);
       //
       //         HMODULE hMod = GetModuleHandle("kernel32");
@@ -851,7 +851,7 @@ namespace windows
       }
 
       HANDLE hprocess = SymGetProcessHandle();
-      u32  dwPid = get_current_process_id();
+      unsigned int  dwPid = get_current_process_id();
 
       // initializes
       //SymSetOptions(SymGetOptions()|SYMOPT_DEFERRED_LOADS|SYMOPT_LOAD_LINES);
@@ -859,7 +859,7 @@ namespace windows
       //   SymSetOptions (SYMOPT_UNDNAME|SYMOPT_LOAD_LINES);
       if (!::SymInitialize(hprocess, 0, true))
       {
-         ::u32 dw = ::GetLastError();
+         unsigned int dw = ::GetLastError();
          output_debug_string("Last Error = " + ::as_string(dw));
          ASSERT(0);
 
@@ -956,7 +956,7 @@ namespace windows
    bool callstack::load_module(HANDLE hProcess, HMODULE hMod)
    {
 
-      for (i32 i = 0; i < m_iHa; i++)
+      for (int i = 0; i < m_iHa; i++)
       {
 
          if (m_ha[i] == hMod)
@@ -1036,11 +1036,11 @@ namespace windows
    struct current_context : CONTEXT
    {
       HANDLE   thread;
-      volatile i32 signal;
+      volatile int signal;
    };
 
 
-//   u32 WINAPI callstack::stack_trace_ThreadProc(void* pvoidParam)
+//   unsigned int WINAPI callstack::stack_trace_ThreadProc(void* pvoidParam)
 //   {
 //
 //      current_context* pcontext = reinterpret_cast<current_context*>(pvoidParam);
@@ -1052,9 +1052,9 @@ namespace windows
 //
 //         // must wait in spin lock until Main thread will leave a ResumeThread (must return back to ::account::user context)
 //
-//         i32 iInverseAgility = 26 + 24; // former iPatienceQuota
+//         int iInverseAgility = 26 + 24; // former iPatienceQuota
 //
-//         i32 iPatience = iInverseAgility;
+//         int iPatience = iInverseAgility;
 //
 //         while (pcontext->signal && iPatience > 0)
 //         {
@@ -1306,8 +1306,8 @@ namespace windows
    //   *_strFile = '\0';
    //   *_strSymbol = '\0';
 
-   //   u32 uiLineDisplacement = 0;
-   //   u32 uiLineNumber = 0;
+   //   unsigned int uiLineDisplacement = 0;
+   //   unsigned int uiLineNumber = 0;
    //   OS_DWORD uiSymbolDisplacement = 0;
 
 
@@ -1424,7 +1424,7 @@ namespace  windows
       DWORD64     qwBaseAddress,
       PVOID       pBuffer,
 
-      u32       nSize,
+      unsigned int       nSize,
       LPDWORD     pNumberOfBytesRead,
 
       LPVOID      pUserData  // optional data, which was passed in "ShowCallstack"
@@ -1493,8 +1493,8 @@ namespace  windows
    //   *_strFile = '\0';
    //   *_strSymbol = '\0';
 
-   //   u32 uiLineDisplacement = 0;
-   //   u32 uiLineNumber = 0;
+   //   unsigned int uiLineDisplacement = 0;
+   //   unsigned int uiLineNumber = 0;
    //   OS_DWORD uiSymbolDisplacement = 0;
 
 
@@ -1599,7 +1599,7 @@ namespace  windows
    //}
 
 
-   const char* callstack::get_dup(const ::string & pszFormat, i32 iSkip, int iCount)
+   const char* callstack::get_dup(const ::string & pszFormat, int iSkip, int iCount)
    {
 
       if (iSkip >= 0)

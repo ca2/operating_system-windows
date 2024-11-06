@@ -54,7 +54,7 @@ namespace multimedia
 
       }
 
-      i32 out::run()
+      int out::run()
       {
          m_timeRunLock = ::time(1);
          while(m_bRun)
@@ -74,7 +74,7 @@ namespace multimedia
 
       }
 
-      i32 out::exit_thread()
+      int out::exit_thread()
       {
 
          ::wave::out::exit_thread();
@@ -83,7 +83,7 @@ namespace multimedia
 
       }
 
-      void     out::out_open(thread * pthreadCallback, i32 iBufferCount, i32 iBufferSampleCount)
+      void     out::out_open(thread * pthreadCallback, int iBufferCount, int iBufferSampleCount)
       {
 
          single_lock sLock(&m_mutex, true);
@@ -136,7 +136,7 @@ namespace multimedia
          //   audiowave->m_uiWaveInDevice,
          //   wave_format(),
          //   get_os_int(),
-         //   (u32) 0,
+         //   (unsigned int) 0,
          //   CALLBACK_THREAD))))
          //   goto Opened;
          //m_pwaveformat->nSamplesPerSec = 22050;
@@ -145,8 +145,8 @@ namespace multimedia
          //   &m_hwaveout,
          //   WAVE_MAPPER,
          //   ,
-         //   (u32) get_os_int(),
-         //   (u32) 0,
+         //   (unsigned int) get_os_int(),
+         //   (unsigned int) 0,
          //   CALLBACK_THREAD))))
          //   goto Opened;
          //m_pwaveformat->nSamplesPerSec = 11025;
@@ -155,8 +155,8 @@ namespace multimedia
          //   &m_hwaveout,
          //   WAVE_MAPPER,
          //   wave_format(),
-         //   (u32) get_os_int(),
-         //   (u32) 0,
+         //   (unsigned int) get_os_int(),
+         //   (unsigned int) 0,
          //   CALLBACK_THREAD))))
          //   goto Opened;
 
@@ -166,13 +166,13 @@ namespace multimedia
          //}
 
 Opened:
-         u32 uiBufferSizeLog2;
-         u32 uiBufferSize;
-         u32 uiAnalysisSize;
-         u32 uiAllocationSize;
-         u32 uiInterestSize;
-         u32 uiSkippedSamplesCount;
-         u32 uiBufferCount = iBufferCount;
+         unsigned int uiBufferSizeLog2;
+         unsigned int uiBufferSize;
+         unsigned int uiAnalysisSize;
+         unsigned int uiAllocationSize;
+         unsigned int uiInterestSize;
+         unsigned int uiSkippedSamplesCount;
+         unsigned int uiBufferCount = iBufferCount;
 
          if(m_pwaveformat->nSamplesPerSec == 44100)
          {
@@ -229,7 +229,7 @@ Opened:
 
       }
 
-      void     out::out_open_ex(thread * pthreadCallback, i32 iBufferCount, i32 iBufferSampleCount, u32 uiSamplesPerSec, u32 uiChannelCount, u32 uiBitsPerSample)
+      void     out::out_open_ex(thread * pthreadCallback, int iBufferCount, int iBufferSampleCount, unsigned int uiSamplesPerSec, unsigned int uiChannelCount, unsigned int uiBitsPerSample)
       {
 
          single_lock sLock(&m_mutex, true);
@@ -305,7 +305,7 @@ Opened:
          iBufferCount = 4;
          iBufferSampleCount = (1 << 10);
 
-         u32 uiBufferSize = iBufferSampleCount * m_pwaveformat->nChannels * 2;
+         unsigned int uiBufferSize = iBufferSampleCount * m_pwaveformat->nChannels * 2;
 
          ASSERT((uiBufferSize % 2048) == 0);// Streaming size_i32 must be 2K aligned to use for async I/O
 
@@ -342,7 +342,7 @@ Opened:
 
          void     mmr;
 
-         i32 i, iSize;
+         int i, iSize;
 
          iSize =  out_get_buffer()->GetBufferCount();
 
@@ -387,7 +387,7 @@ Opened:
          void     mmr;
          if(m_peffect != nullptr)
          {
-            m_peffect->Process16bits((i16 *)pbuffer->m_pData,pwbuffer->m_uiBufferSize / 2);
+            m_peffect->Process16bits((short *)pbuffer->m_pData,pwbuffer->m_uiBufferSize / 2);
          }
 
          XAUDIO2_BUFFER b;
@@ -483,7 +483,7 @@ Opened:
 
          ::wave::buffer::item * pbuffer = (::wave::buffer::item *)pBufferContext;
 
-         i32 iBuffer = (i32)pbuffer->m_iIndex;
+         int iBuffer = (int)pbuffer->m_iIndex;
 
          out_out_buffer_done(iBuffer);
 
@@ -584,7 +584,7 @@ Opened:
          //   {
          //      if (::success != mmr)
          //      {
-         //         information( "waveOutGetPosition() returned %lu", (u32)mmr);
+         //         information( "waveOutGetPosition() returned %lu", (unsigned int)mmr);
          //         //      return MCIERR_DEVICE_NOT_READY;
          //         return 0;
          //      }
@@ -605,7 +605,7 @@ Opened:
          //   else
          //   {
          //      //& ticka += mmt.u.ticks;
-         //      return (u32) mmt.u.ms;
+         //      return (unsigned int) mmt.u.ms;
          //   }
          //}
          //else
@@ -645,7 +645,7 @@ Opened:
          //      if (::success != mmr)
          //      {
 
-         //         information( "waveOutGetPosition() returned %lu", (u32)mmr);
+         //         information( "waveOutGetPosition() returned %lu", (unsigned int)mmr);
 
          //         return 0;
 
@@ -658,14 +658,14 @@ Opened:
          //   }
          //   if(mmt.wType == TIME_MS)
          //   {
-         //      ::time position = (u32) mmt.u.ms;
+         //      ::time position = (unsigned int) mmt.u.ms;
          //      position *= m_pwaveformat->wBitsPerSample * m_pwaveformat->nChannels * m_pwaveformat->nSamplesPerSec;
          //      position /= 8 * 1000;
          //      return position;
          //   }
          //   else
          //   {
-         //      return (u32) mmt.u.cb;
+         //      return (unsigned int) mmt.u.cb;
          //   }
          //}
          //else
@@ -790,7 +790,7 @@ Opened:
          begin();
       }
 
-      i32 out::run_step_thread::run()
+      int out::run_step_thread::run()
       {
 
          while(m_bRun && m_pout->m_estate == out::e_state_playing)

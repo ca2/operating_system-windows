@@ -38,7 +38,7 @@ namespace draw2d_gdiplus
 //
 //#endif
 
-   void brush::create(::draw2d::graphics * pgraphics, ::i8 iCreate)
+   void brush::create(::draw2d::graphics * pgraphics, char iCreate)
    {
 
       if(m_ebrush == ::draw2d::e_brush_solid)

@@ -82,7 +82,7 @@ namespace windows
          return false;
       if(m_hdc != nullptr)
          return false;
-      i32 iSize = DocumentProperties(nullptr, pprinter->m_hPrinter, (char *)(const ::string &) pprinter->m_strName, nullptr, nullptr, 0);
+      int iSize = DocumentProperties(nullptr, pprinter->m_hPrinter, (char *)(const ::string &) pprinter->m_strName, nullptr, nullptr, 0);
       m_pdevmode = (DEVMODE *) malloc(iSize);
       if(!DocumentProperties(nullptr, pprinter->m_hPrinter, (char *) (const ::string &) pprinter->m_strName, m_pdevmode, nullptr, DM_OUT_BUFFER))
       {

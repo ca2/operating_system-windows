@@ -472,7 +472,7 @@
  * png_uint_16 and png_int_16 should always be two bytes in size - this is
  * verified at library build time.
  *
- * png_byte must always be one ::u8 in size.
+ * png_byte must always be one unsigned char in size.
  *
  * The checks below use constants from limits.h, as defined by the ISOC90
  * standard.

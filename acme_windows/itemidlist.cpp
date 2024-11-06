@@ -615,7 +615,7 @@ int itemidlist::_len(LPCITEMIDLIST pidl, int nCount)
 }
 
 
-string itemidlist::display_name(::u32 dwFlags) const
+string itemidlist::display_name(unsigned int dwFlags) const
 {
 
    comptr < IShellFolder > psf;
@@ -1214,7 +1214,7 @@ string itemidlist::_display_name(STRRET & strret, LPCITEMIDLIST pidl)
 }
 
 
-string itemidlist::_display_name(IShellFolder * psf, LPCITEMIDLIST pi, ::u32 dwFlags)
+string itemidlist::_display_name(IShellFolder * psf, LPCITEMIDLIST pi, unsigned int dwFlags)
 {
 
    string str;

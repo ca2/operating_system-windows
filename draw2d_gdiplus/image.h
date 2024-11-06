@@ -63,7 +63,7 @@ namespace draw2d_gdiplus
       virtual void _draw_raw(const ::rectangle_i32 & rectangleTarget, ::image::image * pimageSrc, const ::point_i32 & pointSrc) override;
 
 
-      virtual void SetIconMask(::image::icon * picon, i32 cx, i32 cy) override;
+      virtual void SetIconMask(::image::icon * picon, int cx, int cy) override;
 
 
    };

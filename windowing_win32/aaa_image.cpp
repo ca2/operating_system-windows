@@ -452,9 +452,9 @@ namespace draw2d_gdiplus
 
          }
 
-         i32 scanDst = pimageDst->scan_size();
+         int scanDst = pimageDst->scan_size();
 
-         i32 scanSrc = pimageSrc->scan_size();
+         int scanSrc = pimageSrc->scan_size();
 
          u8 * pdst = &((u8 *)pimageDst->colorref())[scanDst * rectangleTarget.top() + rectangleTarget.left() * sizeof(::color::color)];
 
@@ -496,7 +496,7 @@ namespace draw2d_gdiplus
    }*/
 
 
-   void image::SetIconMask(::image::icon * picon, i32 cx, i32 cy)
+   void image::SetIconMask(::image::icon * picon, int cx, int cy)
    {
 
       if (cx <= 0 || cy <= 0)
@@ -599,10 +599,10 @@ namespace draw2d_gdiplus
       u8 * r2 = (u8 *)pimage2->colorref();
       u8 * srcM = (u8 *)pimageM->colorref();
       u8 * dest = (u8 *)colorref();
-      i32 iSize = cx*cy;
+      int iSize = cx*cy;
 
-      ::u8 b;
-      ::u8 bMax;
+      unsigned char b;
+      unsigned char bMax;
       while (iSize-- > 0)
       {
          if (srcM[0] == 255)
@@ -612,11 +612,11 @@ namespace draw2d_gdiplus
          else
          {
             bMax = 0;
-            b = (::u8)(r1[0] - r2[0]);
+            b = (unsigned char)(r1[0] - r2[0]);
             bMax = maximum(b, bMax);
-            b = (::u8)(r1[1] - r2[1]);
+            b = (unsigned char)(r1[1] - r2[1]);
             bMax = maximum(b, bMax);
-            b = (::u8)(r1[2] - r2[2]);
+            b = (unsigned char)(r1[2] - r2[2]);
             bMax = maximum(b, bMax);
             bMax = 255 - bMax;
          }

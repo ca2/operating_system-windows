@@ -31,8 +31,8 @@ namespace music
             virtual void install_message_routing(::channel * psender) override;
 
 
-            virtual bool PlayRate(double dRate = 0.0, u32 dwEllapse = (u32) -1) override;
-            virtual bool Play(::duration tickStart, u32 dwEllapse = (u32)-1) override;
+            virtual bool PlayRate(double dRate = 0.0, unsigned int dwEllapse = (unsigned int) -1) override;
+            virtual bool Play(::duration tickStart, unsigned int dwEllapse = (unsigned int)-1) override;
 
             virtual bool init_thread() override;
             virtual void term_thread() override;
@@ -42,7 +42,7 @@ namespace music
             virtual void SetPosition(double dRate) override;
             virtual void pause() override;
             virtual void close_file() override;
-            virtual bool ExecuteCommand(::music::midi::enum_command ecommand, u32 dwEllapse) override;
+            virtual bool ExecuteCommand(::music::midi::enum_command ecommand, unsigned int dwEllapse) override;
             virtual void OnMidiOutDeviceChange() override;
 
             //virtual var get_midi_out_device() override;

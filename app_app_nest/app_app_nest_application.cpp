@@ -73,7 +73,7 @@ namespace ca2plugin_container
    }
 
 
-   void application::on_receive(::aura::ipc::rx * prx, i32 message, void * pdata, i32 len)
+   void application::on_receive(::aura::ipc::rx * prx, int message, void * pdata, int len)
    {
 
       if(m_phost != nullptr)

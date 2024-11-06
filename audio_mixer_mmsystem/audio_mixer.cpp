@@ -60,7 +60,7 @@
       }
 
 
-      void audio_mixer::set_new_device(u32 uiMixerId)
+      void audio_mixer::set_new_device(unsigned int uiMixerId)
       {
 
          m_paudiomixerdevice->open(uiMixerId, (UINT_PTR)m_pinteraction->oswindow(), 0, CALLBACK_WINDOW);
@@ -311,7 +311,7 @@
 
       }
 
-      void audio_mixer::OnMixerLineChange(HMIXER hMixer, u32 dwLineID)
+      void audio_mixer::OnMixerLineChange(HMIXER hMixer, unsigned int dwLineID)
       {
 
          ::pointer<::audio_mixer_mmsystem::device>device = m_paudiomixerdevice;
@@ -332,7 +332,7 @@
       }
 
 
-      void audio_mixer::OnMixerControlChange(HMIXER hMixer, u32 dwControlID)
+      void audio_mixer::OnMixerControlChange(HMIXER hMixer, unsigned int dwControlID)
       {
 
          ::pointer<::audio_mixer_mmsystem::device>device = m_paudiomixerdevice;

@@ -163,7 +163,7 @@ uint32_t GetColorMonochrome(uint8_t * xordata, uint8_t * anddata, int x, int y, 
 //            for (int xx = 0; xx < w; ++xx) {
 //               _putpixel32(bmp, xx, yy, ((src[0] & 0x00FFFFFF) | 0xFF000000) & GetMaskBit(bitmask, xx, yy, w, h));
 //               src++;
-//               src = (uint32_t *)(((uint8_t *)src) - 1); //go back a ::u8 due to packing
+//               src = (uint32_t *)(((uint8_t *)src) - 1); //go back a unsigned char due to packing
 //               padding_checker += 3;
 //               padding_checker &= 3;
 //            }
@@ -260,7 +260,7 @@ uint32_t GetColorMonochrome(uint8_t * xordata, uint8_t * anddata, int x, int y, 
 //                  padding_checker &= 3;
 //               }
 //            }
-//            //if the pointer hasn't incremented to the next ::u8 yet, do so.
+//            //if the pointer hasn't incremented to the next unsigned char yet, do so.
 //            if (w & 1) //odd width
 //            {
 //               src++;
@@ -386,7 +386,7 @@ array< ::size_i32 > ico_file_sizes(const ::block & block)
          }
 
 
-         auto buf = (::u8 *)(((uint8_t *)block.data()) + ((uint32_t)offset));
+         auto buf = (unsigned char *)(((uint8_t *)block.data()) + ((uint32_t)offset));
 
          int w;
          int h;
@@ -911,7 +911,7 @@ namespace windowing_win32
          //int area = size.area();
 
          //auto pc = pixmap.colorref();
-         //::u8 * pA = &((::u8 *)pc)[3];
+         //unsigned char * pA = &((unsigned char *)pc)[3];
 
          //for (int i = 0; i < area; i++)
          //{
@@ -932,7 +932,7 @@ namespace windowing_win32
          //{
 
          //   pc = pixmap.colorref();
-         //   pA = &((::u8 *)pc)[3];
+         //   pA = &((unsigned char *)pc)[3];
 
          //   for (int i = 0; i < area; i++)
          //   {

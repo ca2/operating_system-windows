@@ -8,12 +8,12 @@
 
 
 
-i32 ansi_open(const scoped_string & str,i32 i)
+int ansi_open(const scoped_string & str,int i)
 {
    return _wopen(utf8_to_unicode(psz),i);
 }
 
-void ansi_get_errno(i32 * perrno)
+void ansi_get_errno(int * perrno)
 {
    *perrno = errno;
 }

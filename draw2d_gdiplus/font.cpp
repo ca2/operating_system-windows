@@ -51,36 +51,36 @@ namespace draw2d_gdiplus
    }
 
 
-   void font::create(::draw2d::graphics * pgraphics, ::i8 iCreate)
+   void font::create(::draw2d::graphics * pgraphics, char iCreate)
    {
 
-      i32 iStyle = 0;
+      int iStyle = 0;
 
       if (m_fontweight > e_font_weight_semibold)
       {
 
-         iStyle |= (i32)Gdiplus::FontStyleBold;
+         iStyle |= (int)Gdiplus::FontStyleBold;
 
       }
 
       if (m_bItalic)
       {
 
-         iStyle |= (i32)Gdiplus::FontStyleItalic;
+         iStyle |= (int)Gdiplus::FontStyleItalic;
 
       }
 
       if (m_bUnderline)
       {
 
-         iStyle |= (i32)Gdiplus::FontStyleUnderline;
+         iStyle |= (int)Gdiplus::FontStyleUnderline;
 
       }
 
       if (m_bStrikeout)
       {
 
-         iStyle |= (i32)Gdiplus::FontStyleStrikeout;
+         iStyle |= (int)Gdiplus::FontStyleStrikeout;
 
       }
 
@@ -254,7 +254,7 @@ namespace draw2d_gdiplus
          if (strFamilyName.case_insensitive_equals("Segoe UI"))
          {
 
-            auto efontweight = m_fontweight.sink(m_fontweight.i32());
+            auto efontweight = m_fontweight.sink(m_fontweight.int());
 
             if (efontweight == e_font_weight_thin)
             {

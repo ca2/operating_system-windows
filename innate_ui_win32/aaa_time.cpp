@@ -16,7 +16,7 @@
 //
 ///**********************************=> unix ************************************/
 //#ifndef _WIN32
-//void SleepInMs(u32 ms) {
+//void SleepInMs(unsigned int ms) {
 //   struct timespec ts;
 //   ts.tv_sec = ms / 1000;
 //   ts.tv_nsec = ms % 1000 * 1000000;
@@ -24,7 +24,7 @@
 //   while (nanosleep(&ts, &ts) == -1 && errno == EINTR);
 //}
 //
-//void SleepInUs(u32 us) {
+//void SleepInUs(unsigned int us) {
 //   struct timespec ts;
 //   ts.tv_sec = us / 1000000;
 //   ts.tv_nsec = us % 1000000 * 1000;
@@ -56,11 +56,11 @@
 //
 ///**********************************=> win *************************************/
 //#ifdef _WIN32
-//void SleepInMs(u32 ms) {
+//void SleepInMs(unsigned int ms) {
 //   ::sleep(ms);
 //}
 //
-//void SleepInUs(u32 us) {
+//void SleepInUs(unsigned int us) {
 //   ::LARGE_INTEGER ft;
 //   ft.QuadPart = -static_cast<i64>(us * 10);  // '-' using relative time
 //
@@ -153,12 +153,12 @@
 //
 //      SYSTEMTIME sysTime;
 //
-//      sysTime.wYear = (::u16)time.GetYear();
-//      sysTime.wMonth = (::u16)time.GetMonth();
-//      sysTime.wDay = (::u16)time.GetDay();
-//      sysTime.wHour = (::u16)time.GetHour();
-//      sysTime.wMinute = (::u16)time.GetMinute();
-//      sysTime.wSecond = (::u16)time.GetSecond();
+//      sysTime.wYear = (unsigned short)time.GetYear();
+//      sysTime.wMonth = (unsigned short)time.GetMonth();
+//      sysTime.wDay = (unsigned short)time.GetDay();
+//      sysTime.wHour = (unsigned short)time.GetHour();
+//      sysTime.wMinute = (unsigned short)time.GetMinute();
+//      sysTime.wSecond = (unsigned short)time.GetSecond();
 //      sysTime.wMilliseconds = 0;
 //
 //      // convert system time to local file time

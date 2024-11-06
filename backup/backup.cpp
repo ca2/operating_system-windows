@@ -1,8 +1,8 @@
 #include "framework.h"
 
 
-extern "C" i32 APIENTRY
-DllMain(HINSTANCE hInstance, u32 dwReason, LPVOID lpReserved)
+extern "C" int APIENTRY
+DllMain(HINSTANCE hInstance, unsigned int dwReason, LPVOID lpReserved)
 {
 
 

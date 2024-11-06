@@ -424,7 +424,7 @@ namespace windowing_win32
    }
 
 
-   void windowing::__synthesizes_creates_styles(::user::interaction* pinteraction, ::u32& nExStyle, ::u32& nStyle)
+   void windowing::__synthesizes_creates_styles(::user::interaction* pinteraction, unsigned int& nExStyle, unsigned int& nStyle)
    {
 
       if (pinteraction->m_bCompositedFrameWindow)
@@ -645,7 +645,7 @@ namespace windowing_win32
    void windowing::set(message::key* pkey, oswindow oswindow, ::windowing::window* pwindow, const ::atom& atom, wparam wparam, ::lparam lparam)
    {
 
-      pkey->m_nChar = static_cast<::u32>(wparam);
+      pkey->m_nChar = static_cast<unsigned int>(wparam);
 
       pkey->m_nRepCnt = LOWORD(lparam);
 
@@ -1000,7 +1000,7 @@ namespace windowing_win32
 
       ::windows::hwnd_array hwnda;
 
-      for (i32 i = 0; i < userinteractiona.interaction_count(); i++)
+      for (int i = 0; i < userinteractiona.interaction_count(); i++)
       {
 
          ::pointer<::user::interaction>puserinteraction = userinteractiona.interaction_at(i);
@@ -1025,7 +1025,7 @@ namespace windowing_win32
 
       ::windows::window_util::SortByZOrder(hwnda);
 
-      for (i32 i = 0; i < hwnda.get_count(); i++)
+      for (int i = 0; i < hwnda.get_count(); i++)
       {
 
          auto puieWindow = uia.find_first(__oswindow(hwnda[i]));
@@ -1233,7 +1233,7 @@ namespace windowing_win32
 //                  ::color::color crCustColors[16];
 //
 //                  // init-int this array did not affect the mouse problem
-//                  // ::u32 idx ;
+//                  // unsigned int idx ;
 //                  // for (idx=0; idx<16; idx++) {
 //                  // crCustColors[idx] = rgb(idx, idx, idx) ;
 //                  // }
@@ -1268,7 +1268,7 @@ namespace windowing_win32
 //      ::color::color crCustColors[16];
 //
 //      // init-int this array did not affect the mouse problem
-//      // ::u32 idx ;
+//      // unsigned int idx ;
 //      // for (idx=0; idx<16; idx++) {
 //      // crCustColors[idx] = rgb(idx, idx, idx) ;
 //      // }

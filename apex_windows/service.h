@@ -18,21 +18,21 @@ namespace apex_windows
       static service *           s_pservice;
       
 
-      service(u32 controlsAccepted = SERVICE_ACCEPT_PAUSE_CONTINUE | SERVICE_ACCEPT_STOP | SERVICE_ACCEPT_SHUTDOWN);
+      service(unsigned int controlsAccepted = SERVICE_ACCEPT_PAUSE_CONTINUE | SERVICE_ACCEPT_STOP | SERVICE_ACCEPT_SHUTDOWN);
       virtual ~service();
 
 
-      virtual void Start(u32);
+      virtual void Start(unsigned int);
 
-      virtual void Stop(u32);
+      virtual void Stop(unsigned int);
 
       virtual void _server();
 
       virtual void SetServiceStatus();
 
-      virtual void UpdateState(u32 state, HRESULT errorCode = S_OK);
+      virtual void UpdateState(unsigned int state, HRESULT errorCode = S_OK);
 
-      //virtual void _main_server(::u32 argumentCount, wchar_t * arguments);
+      //virtual void _main_server(unsigned int argumentCount, wchar_t * arguments);
 
       static void WINAPI ServiceMain(DWORD argumentCount, PWSTR * arguments);
 
@@ -44,7 +44,7 @@ namespace apex_windows
       
       static void serve(service * pservice);
 
-      virtual void _main_server(::u32 argumentCount, PWSTR * arguments);
+      virtual void _main_server(unsigned int argumentCount, PWSTR * arguments);
 
 
    };

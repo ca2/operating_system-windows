@@ -88,7 +88,7 @@
 #define PRIdPTR     "Id"
 #define PRIiPTR     "Ii"
 
-// The fprintf macros for u32 integers are:
+// The fprintf macros for unsigned int integers are:
 #define PRIo8       "o"
 #define PRIu8       "u"
 #define PRIx8       "x"
@@ -191,7 +191,7 @@
 #  define SCNiPTR     "li"
 #endif  // _WIN64 ]
 
-// The fscanf macros for u32 integers are:
+// The fscanf macros for unsigned int integers are:
 #define SCNo8       "o"
 #define SCNu8       "u"
 #define SCNx8       "x"

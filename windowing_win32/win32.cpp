@@ -37,7 +37,7 @@ namespace windowing_win32
    }
 
 
-   void windowing::_window_create_solid_caret(HWND hwnd, i32 nWidth, i32 nHeight)
+   void windowing::_window_create_solid_caret(HWND hwnd, int nWidth, int nHeight)
    {
 
       ASSERT(::IsWindow(hwnd));
@@ -47,7 +47,7 @@ namespace windowing_win32
    }
 
 
-   void windowing::_window_create_gray_caret(HWND hwnd, i32 nWidth, i32 nHeight)
+   void windowing::_window_create_gray_caret(HWND hwnd, int nWidth, int nHeight)
    {
 
       ASSERT(::IsWindow(hwnd));

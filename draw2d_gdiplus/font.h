@@ -34,7 +34,7 @@ namespace draw2d_gdiplus
 //#endif
 
 
-      virtual void create(::draw2d::graphics * pgraphics, ::i8 iCreate) override;
+      virtual void create(::draw2d::graphics * pgraphics, char iCreate) override;
       void destroy() override;
 
 

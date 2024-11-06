@@ -74,7 +74,7 @@ namespace windowing_win32
    }
 
 
-   void cursor::_create_from_image(::image::image * pimage, ::i32 xHotspot, ::i32 yHotspot)
+   void cursor::_create_from_image(::image::image * pimage, int xHotspot, int yHotspot)
    {
 
       HCURSOR hcursor = (HCURSOR)::windows::create_alpha_cursor(pimage, xHotspot, yHotspot);

@@ -16,7 +16,7 @@ namespace windowing_win32
       }
 
       //   HDC hMemDC;
-      ::u32 dwWidth, dwHeight;
+      unsigned int dwWidth, dwHeight;
       BITMAPV5HEADER bi;
       // HBITMAP hOldBitmap;
       HBITMAP hBitmap;
@@ -30,7 +30,7 @@ namespace windowing_win32
       ZeroMemory(&bi, sizeof(BITMAPV5HEADER));
       bi.bV5Size = sizeof(BITMAPV5HEADER);
       bi.bV5Width = dwWidth;
-      bi.bV5Height = -(::i32)dwHeight;
+      bi.bV5Height = -(int)dwHeight;
       bi.bV5Planes = 1;
       bi.bV5BitCount = 32;
       bi.bV5Compression = BI_BITFIELDS;
@@ -45,7 +45,7 @@ namespace windowing_win32
       hdc = GetDC(nullptr);
 
       // Create the DIB section with an alpha channel.
-      hBitmap = CreateDIBSection(hdc, (BITMAPINFO *)&bi, DIB_RGB_COLORS, (void **)&pBits, nullptr, (::u32)0);
+      hBitmap = CreateDIBSection(hdc, (BITMAPINFO *)&bi, DIB_RGB_COLORS, (void **)&pBits, nullptr, (unsigned int)0);
 
 
       //hMemDC = CreateCompatibleDC(hdc);
@@ -163,7 +163,7 @@ namespace windowing_win32
       ZeroMemory(&bminfo, sizeof(bminfo));
       bminfo.bmiHeader.biSize = sizeof(BITMAPINFOHEADER);
       bminfo.bmiHeader.biWidth = ppixmap->width();
-      bminfo.bmiHeader.biHeight = -((::i32)ppixmap->height());
+      bminfo.bmiHeader.biHeight = -((int)ppixmap->height());
       bminfo.bmiHeader.biPlanes = 1;
       bminfo.bmiHeader.biBitCount = 32;
       bminfo.bmiHeader.biCompression = BI_RGB;
@@ -232,7 +232,7 @@ namespace windowing_win32
 
 
 
-   CLASS_DECL_WINDOWING_WIN32 HBITMAP create_windows_dib(const ::size_i32 & size, i32 * piScan, color32_t ** ppdata)
+   CLASS_DECL_WINDOWING_WIN32 HBITMAP create_windows_dib(const ::size_i32 & size, int * piScan, color32_t ** ppdata)
    {
 
       BITMAPINFO bitmapinfo;
@@ -242,12 +242,12 @@ namespace windowing_win32
       auto iScan = size.cx() * 4;
 
       bitmapinfo.bmiHeader.biSize = sizeof(BITMAPINFOHEADER);
-      bitmapinfo.bmiHeader.biWidth = (::i32)size.cx();
-      bitmapinfo.bmiHeader.biHeight = (::i32)-size.cy();
+      bitmapinfo.bmiHeader.biWidth = (int)size.cx();
+      bitmapinfo.bmiHeader.biHeight = (int)-size.cy();
       bitmapinfo.bmiHeader.biPlanes = 1;
       bitmapinfo.bmiHeader.biBitCount = 32;
       bitmapinfo.bmiHeader.biCompression = BI_RGB;
-      bitmapinfo.bmiHeader.biSizeImage = (::i32)(size.cy() * iScan);
+      bitmapinfo.bmiHeader.biSizeImage = (int)(size.cy() * iScan);
 
       color32_t * pimage32 = nullptr;
 

@@ -76,12 +76,12 @@ public:
 
    /* Process helper functions */
    static BOOL ReadEnvironmentBlock(HANDLE hProcess,_ENVSTRING_t& stEnvData);
-   static HANDLE OpenProcessToRead(::u32 dwPID);
+   static HANDLE OpenProcessToRead(unsigned int dwPID);
    static void ReleaseHandle(HANDLE hHandle);
    static BOOL HasReadAccess(HANDLE hProcess,void* pAddress,int& nSize);
    static void EnumProcessInfo(ProcessInfoArray& arrProcessInfo);
    static string GetProcessNameFromHandle(HANDLE hProcess);
-   static string GetProcessNameFromID(::u32 dwPID);
+   static string GetProcessNameFromID(unsigned int dwPID);
 
    /* GDI helper functions */
    static void LoadIconFromProcess(HANDLE hProcess,HICON& hIconSmall,HICON& hIconLarge);

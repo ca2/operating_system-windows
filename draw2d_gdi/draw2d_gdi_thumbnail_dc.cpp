@@ -606,7 +606,7 @@ size_i32 preview_dc::ComputeDeltas(int& x, const ::string & lpszString, UINT &nC
          *lpszOutputString++ = *lpszCurChar;
          if (_istlead(*lpszCurChar))
          {
-            *lpszOutputString++ = *(lpszCurChar+1); // copy trailing ::u8
+            *lpszOutputString++ = *(lpszCurChar+1); // copy trailing unsigned char
             *(pnCurDelta + 1) = *pnCurDelta;        // double wide
             nCurrentPos += *pnCurDelta;
             pnCurDelta++;
@@ -705,7 +705,7 @@ size_i32 preview_dc::TabbedTextOut(int x, int y, const ::string & lpszString, in
             false));
 
    if (nCount <= 0)
-      return (u32) 0;         // nCount is zero, there is nothing to print
+      return (unsigned int) 0;         // nCount is zero, there is nothing to print
 
    int* pDeltas = nullptr;
    LPTSTR pOutputString = nullptr;
@@ -720,7 +720,7 @@ size_i32 preview_dc::TabbedTextOut(int x, int y, const ::string & lpszString, in
    {
       delete[] pDeltas;
       // Note: DELETE_EXCEPTION(e) not required
-      return (u32) 0;           // signify error
+      return (unsigned int) 0;           // signify error
    }
    
 

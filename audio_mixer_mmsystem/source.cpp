@@ -39,7 +39,7 @@
          MMRESULT mmresult;
 
          m_bHasV001Controls = false;
-         i32 iControlCount = m_mixerline.cControls;
+         int iControlCount = m_mixerline.cControls;
          if (0 == iControlCount)
          {
             //        message_box(nullptr, MB_OK | e_message_box_icon_exclamation,
@@ -67,7 +67,7 @@
          m_mixerlinecontrols.cbmxctrl       = sizeof(*m_mixerlinecontrols.pamxctrl);
          m_mixerlinecontrols.pamxctrl       = ___new MIXERCONTROL[m_mixerline.cControls];
 
-         for (i32 i = 0; i < iControlCount; i++)
+         for (int i = 0; i < iControlCount; i++)
          {
             m_mixerlinecontrols.pamxctrl[i].cbStruct = sizeof(MIXERCONTROL);
          }
@@ -96,8 +96,8 @@
          {
             //        char       ach[128];
             //      char       szControlType[64];
-            //        u32        u;
-            //    i32         nIndex;
+            //        unsigned int        u;
+            //    int         nIndex;
             PMIXERCONTROL       pamxctrl;
             //        LPMIXERCONTROLDETAILS lpmcd;
             ::pointer<::audio_mixer_mmsystem::control>    lpMixerControl;
@@ -105,7 +105,7 @@
             //        if (0 != (APP_OPTF_DEBUGLOG & gfuAppOptions))
             //          MixAppDebugLog(nullptr);
 
-            for (i32 i = 0; (u32) i < m_mixerlinecontrols.cControls; i++)
+            for (int i = 0; (unsigned int) i < m_mixerlinecontrols.cControls; i++)
             {
                lpMixerControl = m_mixercontrola[i];
                lpMixerControl->m_pmixersource = this;
@@ -167,14 +167,14 @@
 
       }
 
-      /*void     source::GetControl(u32 dwControlType, u32 dwControlFlags,  ::audio_mixer::control ** ppControl)
+      /*void     source::GetControl(unsigned int dwControlType, unsigned int dwControlFlags,  ::audio_mixer::control ** ppControl)
       {
       ::audio_mixer::control_array & controla = m_mixercontrola;
       if(controla.get_size() <= 0)
       GetLineControls();
       if(controla.get_size() <= 0)
       return MMSYSERR_ERROR;
-      for(i32 i = 0; i < controla.get_size(); i++)
+      for(int i = 0; i < controla.get_size(); i++)
       {
       if((dwControlType != 0 && controla[i].GetControlType() == dwControlType)
       || (dwControlType == 0 && ((controla[i].GetControlType() & dwControlFlags) != 0)))
@@ -201,7 +201,7 @@
       void source::update_all_controls()
       {
          ::audio_mixer::control_array & controla = get_control_array();
-         for(i32 i = 0; i < controla.get_size(); i++)
+         for(int i = 0; i < controla.get_size(); i++)
          {
             controla[i]->OnMixerControlChange();
          }
@@ -241,7 +241,7 @@
       }
 
 
-      void source::get_line_info(u32 dwSource, u32 dwDestination, u32 fdwInfo)
+      void source::get_line_info(unsigned int dwSource, unsigned int dwDestination, unsigned int fdwInfo)
       {
 
          m_mixerline.cbStruct       = sizeof(MIXERLINE);
@@ -272,7 +272,7 @@
       }
 
 
-      void source::get_line_info(u32 dwSource, ::audio_mixer::destination * pdestination)
+      void source::get_line_info(unsigned int dwSource, ::audio_mixer::destination * pdestination)
       {
 
          ::pointer<::audio_mixer_mmsystem::destination>destination = pdestination;

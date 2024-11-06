@@ -35,7 +35,7 @@ namespace multimedia
          pitem->m_posdata              = &wavehdr;
 
          wavehdr.lpData                = (LPSTR) pitem->m_pData;
-         wavehdr.dwBufferLength        = (u32) (pwavebuffer->m_uiBufferSize);
+         wavehdr.dwBufferLength        = (unsigned int) (pwavebuffer->m_uiBufferSize);
          wavehdr.dwBytesRecorded       = 0;
          wavehdr.dwUser                = pitem->m_iIndex;
          wavehdr.dwFlags               = 0;

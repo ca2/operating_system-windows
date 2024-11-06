@@ -42,7 +42,7 @@ public:
    virtual void win_sync_out(string str,string strRepos);
 
 
-   virtual i32 run();
+   virtual int run();
 
    string call(string str);
 
@@ -233,7 +233,7 @@ void app_t::win_sync_out(string strLocal,string strRepos)
 
 
 
-i32 app_t::run()
+int app_t::run()
 {
    /*printf("I am the post-commit wizard and oracle!!\n");
    printf("First: Be patient!! Keep calm, take it easy and try to enjoy the ride!!\n");
@@ -342,7 +342,7 @@ string app_t::call(string str)
       process->create_child_process(str, true, nullptr, ::e_priority_highest);
 auto tickStart = ::tick::now();
 
-      u32 dwExitCode;
+      unsigned int dwExitCode;
 
       bool bTimeout = false;
 

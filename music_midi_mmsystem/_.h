@@ -41,7 +41,7 @@ namespace music
 
 } // namespace music
 
-#define MIDIMSG(status,channel,data1,data2) ( (u32)((status<<4) | channel | (data1<<8) | (data2<<16)) )
+#define MIDIMSG(status,channel,data1,data2) ( (unsigned int)((status<<4) | channel | (data1<<8) | (data2<<16)) )
 
 inline HMIDISTRM __hmidistream(const wparam & wparam) { return wparam.scast < HMIDISTRM >(); }
 inline LPMIDIHDR __lpmidihdr(const wparam & wparam) { return wparam.scast < LPMIDIHDR >(); }

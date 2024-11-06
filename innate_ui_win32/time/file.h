@@ -1,11 +1,11 @@
 #pragma once
 
 
-typedef u32 (WINAPI* GetFinalPathNameByHandleDef)(
+typedef unsigned int (WINAPI* GetFinalPathNameByHandleDef)(
 	HANDLE hFile,
 	LPWSTR lpszFilePath,
-	u32 cchFilePath,
-	u32 dwFlags	);
+	unsigned int cchFilePath,
+	unsigned int dwFlags	);
 
 
 

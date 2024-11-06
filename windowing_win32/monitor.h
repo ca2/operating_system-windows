@@ -25,8 +25,8 @@ namespace windowing_win32
       virtual void update_cache() override;
 
 
-      virtual ::u32 get_monitor_color_temperature();
-      virtual bool adjust_monitor(::u32 dwTemperature, double dBrightness, double dGamma) override;
+      virtual unsigned int get_monitor_color_temperature();
+      virtual bool adjust_monitor(unsigned int dwTemperature, double dBrightness, double dGamma) override;
 
 
 

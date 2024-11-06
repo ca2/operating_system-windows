@@ -84,7 +84,7 @@ namespace windows
    Carray < ::windowing::window *, ::windowing::window * > wndpa3;
    Carray < ::windowing::window *, ::windowing::window * > wndpa4;
 
-   for(i32 i = 0; i < wndpa2.get_size(); i++)
+   for(int i = 0; i < wndpa2.get_size(); i++)
    {
    if(wndpa.find_first(wndpa2[i]) >= 0)
    {
@@ -133,7 +133,7 @@ namespace windows
    Carray < HWND, HWND > hwnda3;
    Carray < HWND, HWND > hwnda4;
 
-   for(i32 i = 0; i < hwnda2.get_size(); i++)
+   for(int i = 0; i < hwnda2.get_size(); i++)
    {
    if(hwnda.find_first(hwnda2[i]) >= 0)
    {
@@ -174,7 +174,7 @@ namespace windows
 
    EnumChildren(hwnd, hwnda);
 
-   for(i32 i = 0; i < hwnda.get_size(); i++)
+   for(int i = 0; i < hwnda.get_size(); i++)
    {
    HWND hwndChild = hwnda[i];
    ::rectangle_i32 rectangleChild;
@@ -281,10 +281,10 @@ namespace windows
 
       HWND hwndSwap;
 
-      for (i32 i = 0; i < this->get_size(); i++)
+      for (int i = 0; i < this->get_size(); i++)
       {
 
-         for (i32 j = i + 1; j < this->get_size(); j++)
+         for (int j = i + 1; j < this->get_size(); j++)
          {
 
             if (window_util::GetZOrder(this->element_at(i)) > window_util::GetZOrder(this->element_at(j)))
@@ -336,7 +336,7 @@ namespace windows
    void hwnd_tree::Array::EnumDescendants()
    {
 
-      for (i32 i = 0; i < this->get_size(); i++)
+      for (int i = 0; i < this->get_size(); i++)
       {
 
          this->element_at(i)->EnumDescendants();
@@ -392,7 +392,7 @@ namespace windows
    {
       if (hwnd == nullptr)
          return true;
-      i32 i;
+      int i;
       for (i = 0; i < this->get_size();)
       {
          hwnd_tree & tree = *this->element_at(i);
@@ -423,7 +423,7 @@ namespace windows
    {
       erase_all();
       hwnd_tree hwndtree;
-      for (i32 i = 0; i < hwnda.get_size(); i++)
+      for (int i = 0; i < hwnda.get_size(); i++)
       {
          hwndtree.m_hwnd = hwnda[i];
          add(___new hwnd_tree(hwndtree));
@@ -465,7 +465,7 @@ namespace windows
    interaction_pointer_array wndpa3;
    interaction_pointer_array wndpa4;
 
-   i32 i;
+   int i;
    for( i = 0; i < wndpa2.get_size(); i++)
    {
    if(wndpa.find_first(wndpa2[i]) >= 0)
@@ -489,7 +489,7 @@ namespace windows
    /*void window_util::ExcludeChild(interaction_pointer_array & wndpa)
    {
 
-   for(i32 i = 0; i < wndpa.get_size();)
+   for(int i = 0; i < wndpa.get_size();)
    {
    if(wndpa[i]->get_parent() != nullptr)
    {
@@ -636,7 +636,7 @@ namespace windows
    }*/
 
 
-   void window_util::send_message_to_descendants(HWND hwnd, ::u32 message, wparam wParam, lparam lParam, bool bDeep)
+   void window_util::send_message_to_descendants(HWND hwnd, unsigned int message, wparam wParam, lparam lParam, bool bDeep)
    {
 
 #if defined(WINDOWS_DESKTOP)
@@ -699,9 +699,9 @@ namespace windows
       ::i32_array ia2;
       HWND hwndSwap;
 
-      for (i32 i = 0; i < hwnda.get_size(); i++)
+      for (int i = 0; i < hwnda.get_size(); i++)
       {
-         for (i32 j = i + 1; j < hwnda.get_size(); j++)
+         for (int j = i + 1; j < hwnda.get_size(); j++)
          {
             try
             {
@@ -722,7 +722,7 @@ namespace windows
 
    }
 
-   i32 window_util::GetZOrder(HWND hwnd)
+   int window_util::GetZOrder(HWND hwnd)
    {
 
 #ifdef UNIVERSAL_WINDOWS
@@ -764,7 +764,7 @@ namespace windows
 
       }
 
-      i32 iOrder = 0;
+      int iOrder = 0;
 
       while (hwndOrder != nullptr && ::IsWindow(hwndOrder))
       {
@@ -795,7 +795,7 @@ namespace windows
 
       }
 
-      i32 iOrder;
+      int iOrder;
       ia.erase_all();
       while (true)
       {
@@ -845,7 +845,7 @@ namespace windows
    //
    //      EnumChildren(hwnd, hwnda);
    //
-   //      for (i32 i = 0; i < hwnda.get_size(); i++)
+   //      for (int i = 0; i < hwnda.get_size(); i++)
    //      {
    //
    //         HWND hwndChild = hwnda[i];
@@ -961,7 +961,7 @@ namespace windows
    void hwnd_array::top_windows_by_z_order()
    {
 
-      i32 iOrder = 0;
+      int iOrder = 0;
       HWND hwndOrder = ::GetDesktopWindow();
       hwndOrder = ::GetWindow(hwndOrder, GW_CHILD);
       while (hwndOrder != nullptr
@@ -986,7 +986,7 @@ namespace windows
 
       hwnd_array hwnda;
 
-      for (i32 i = 0; i < a.interaction_count(); i++)
+      for (int i = 0; i < a.interaction_count(); i++)
       {
 
          hwnda.add(__hwnd(((::user::interaction *)a.interaction_at(i))->oswindow()));
@@ -1005,7 +1005,7 @@ namespace windows
 
       ::windows::hwnd_array hwnda;
 
-      for (i32 i = 0; i < ptra.get_size(); i++)
+      for (int i = 0; i < ptra.get_size(); i++)
       {
 
          hwnda.add(__hwnd(ptra.element_at(i)->oswindow()));

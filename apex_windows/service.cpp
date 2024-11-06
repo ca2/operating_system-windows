@@ -3,7 +3,7 @@
 
 
 #ifdef WINDOWS
-u32 Win32FromHResult(HRESULT value);
+unsigned int Win32FromHResult(HRESULT value);
 #endif
 
 
@@ -14,7 +14,7 @@ namespace windows
    service * service::s_pservice = nullptr;
 
 
-   service::service(u32 controlsAccepted) :
+   service::service(unsigned int controlsAccepted) :
       m_handle(0)
    {
 
@@ -35,7 +35,7 @@ namespace windows
    }
 
 
-   void service::Start(u32)
+   void service::Start(unsigned int)
    {
 
       queue_user_work_item();
@@ -145,12 +145,12 @@ namespace windows
    }
 
 
-   void service::Stop(u32 u)
+   void service::Stop(unsigned int u)
    {
 
       m_bStopping = true;
 
-      m_stopped.wait(::time((u32)m_dwStopTimeout));
+      m_stopped.wait(::time((unsigned int)m_dwStopTimeout));
 
    }
 
@@ -254,7 +254,7 @@ namespace windows
    }
 
 
-   void service::_main_server(::u32 argumentCount, PWSTR * arguments)
+   void service::_main_server(unsigned int argumentCount, PWSTR * arguments)
    {
 
       if (1 != argumentCount || 0 == arguments || 0 == arguments[0])
@@ -313,7 +313,7 @@ namespace windows
    //                      and notifies the service control manager of the machine.
    //
    //*****************************************************************************
-   void service::UpdateState(u32 state, HRESULT errorCode)
+   void service::UpdateState(unsigned int state, HRESULT errorCode)
    {
 
 
@@ -349,7 +349,7 @@ namespace windows
 #ifdef WINDOWS
 
 
-u32 Win32FromHResult(HRESULT value)
+unsigned int Win32FromHResult(HRESULT value)
 {
 
    ASSERT(FACILITY_WIN32 == HRESULT_FACILITY(value));

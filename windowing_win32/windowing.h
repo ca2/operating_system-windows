@@ -91,7 +91,7 @@ namespace windowing_win32
       virtual ::windowing::window * get_active_window(::thread * pthread) override;
 
 
-      virtual void __synthesizes_creates_styles(::user::interaction * pinteraction, ::u32 & nExStyle, ::u32 & nStyle);
+      virtual void __synthesizes_creates_styles(::user::interaction * pinteraction, unsigned int & nExStyle, unsigned int & nStyle);
 
       
       virtual zorder zorder_from_hwnd(HWND hwnd);
@@ -161,17 +161,17 @@ namespace windowing_win32
 
       virtual void lock_set_foreground_window(bool bLock) override;
 
-      virtual wstring _windows_register_window_class(::u32 nClassStyle, HCURSOR hCursor = 0, HBRUSH hbrBackground = 0, HICON hIcon = 0);
-      //CLASS_DECL_WINDOWING_WIN32 wstring windows_register_window_class(::particle * pparticle, ::u32 nClassStyle, hcursor hCursor = 0, HBRUSH hbrBackground = 0, hicon hIcon = 0);
+      virtual wstring _windows_register_window_class(unsigned int nClassStyle, HCURSOR hCursor = 0, HBRUSH hbrBackground = 0, HICON hIcon = 0);
+      //CLASS_DECL_WINDOWING_WIN32 wstring windows_register_window_class(::particle * pparticle, unsigned int nClassStyle, hcursor hCursor = 0, HBRUSH hbrBackground = 0, hicon hIcon = 0);
       virtual bool _windows_register_class(WNDCLASSEXW* puserinteractionclass);
       //
-      virtual wstring _windows_calc_icon_window_class(::user::interaction* pinteraction, u32 dwDefaultStyle, const ::string & pszMatter) override;
+      virtual wstring _windows_calc_icon_window_class(::user::interaction* pinteraction, unsigned int dwDefaultStyle, const ::string & pszMatter) override;
       virtual wstring _windows_get_user_interaction_window_class(::user::interaction* pinteraction) override;
-      virtual bool _windows_register_with_icon(WNDCLASSEXW* puserinteractionclass, const unichar* pszClassName, ::u32 nIDIcon);
+      virtual bool _windows_register_with_icon(WNDCLASSEXW* puserinteractionclass, const unichar* pszClassName, unsigned int nIDIcon);
 
       virtual void _window_create_caret(HWND hwnd, HBITMAP hbitmap);
-      virtual void _window_create_solid_caret(HWND hwnd, i32 nWidth, i32 nHeight);
-      virtual void _window_create_gray_caret(HWND hwnd, i32 nWidth, i32 nHeight);
+      virtual void _window_create_solid_caret(HWND hwnd, int nWidth, int nHeight);
+      virtual void _window_create_gray_caret(HWND hwnd, int nWidth, int nHeight);
 
 
       //template < typename PRED >

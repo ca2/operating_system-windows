@@ -25,7 +25,7 @@ namespace acme_windows
          OVERLAPPED m_overlapped;
          inline overlapped * from(OVERLAPPED * poverlapped)
          {
-            return (overlapped *)((::u8 *)poverlapped - sizeof(pipe *));
+            return (overlapped *)((unsigned char *)poverlapped - sizeof(pipe *));
          }
       };
 
@@ -59,8 +59,8 @@ namespace acme_windows
 
 
       static void WINAPI read_complete(
-         u32 dwErrorCode,
-         u32 dwNumberOfBytesTransfered,
+         unsigned int dwErrorCode,
+         unsigned int dwNumberOfBytesTransfered,
          LPOVERLAPPED pOverlapped
 
          );

@@ -228,7 +228,7 @@ namespace backup
       }
 
       DWORD dwExitCode;
-      i32 i = 1;
+      int i = 1;
       while(true)
       {
          if(!GetExitCodeProcess(pi.hProcess, &dwExitCode))
@@ -275,7 +275,7 @@ namespace backup
       }
 
       DWORD dwExitCode;
-      i32 i = 1;
+      int i = 1;
       while(true)
       {
          if(!GetExitCodeProcess(pi.hProcess, &dwExitCode))
@@ -319,7 +319,7 @@ namespace backup
       }
 
       DWORD dwExitCode;
-      i32 i = 1;
+      int i = 1;
       while(true)
       {
          if(!GetExitCodeProcess(pi.hProcess, &dwExitCode))

@@ -2,7 +2,7 @@
 #include "acme/operating_system.h"
 
 
-i32 _c_lock_is_active(const char * lpszName)
+int _c_lock_is_active(const char * lpszName)
 {
 
    HANDLE h;
@@ -18,7 +18,7 @@ i32 _c_lock_is_active(const char * lpszName)
 }
 
 
-i32 _c_lock(const char * lpszName, void ** pdata)
+int _c_lock(const char * lpszName, void ** pdata)
 {
 
    HANDLE hmutex = ::CreateMutexW(nullptr, false, L"Global\\::ca::account::ca2_spa::7807e510-5579-11dd-ae16-0800200c7784");
@@ -42,7 +42,7 @@ i32 _c_lock(const char * lpszName, void ** pdata)
 }
 
 
-i32 _c_unlock(void ** pdata)
+int _c_unlock(void ** pdata)
 {
 
    HANDLE * phandle = (HANDLE *) *pdata;

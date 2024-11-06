@@ -37,21 +37,21 @@ namespace audio_mixer_mmsystem
 
       bool control_type(::audio_mixer::e_control econtrol) const;
       bool OnCommand(WPARAM wParam, LPARAM lParam);
-      //::audio_mixer::control_data * GetWindowDataByDlgCtrlID(u32 nID);
-      //::audio_mixer::user_control * GetControlByDlgCtrlID(u32 nID);
-      //   bool OnNotify(u32 nID, LPNMHDR lpnmhdr);
-      void OnVHScroll(u32 nSBCode, u32 nPos, ::pointer<::user::interaction>pScrollBar);
-      //::audio_mixer::control_data * GetWindowData(i32 iType);
+      //::audio_mixer::control_data * GetWindowDataByDlgCtrlID(unsigned int nID);
+      //::audio_mixer::user_control * GetControlByDlgCtrlID(unsigned int nID);
+      //   bool OnNotify(unsigned int nID, LPNMHDR lpnmhdr);
+      void OnVHScroll(unsigned int nSBCode, unsigned int nPos, ::pointer<::user::interaction>pScrollBar);
+      //::audio_mixer::control_data * GetWindowData(int iType);
       void OnMixerControlChange();
-      //::audio_mixer::user_control * GetControl(i32 iType);
+      //::audio_mixer::user_control * GetControl(int iType);
       //::audio_mixer::user_control * GetControlByIndex(::collection::index iIndex);
       void Prepare();
-      bool CreateWindowsVolumeV001(::pointer<::user::interaction>pParent, u32 nStartID, u32 * nNextID);
+      bool CreateWindowsVolumeV001(::pointer<::user::interaction>pParent, unsigned int nStartID, unsigned int * nNextID);
 
-      //  bool _001CreateMuteControl(::pointer<::user::interaction>pParent, CRuntimeClass * pruntimeclassMuteControl, u32 nStartID, u32 * nNextID);
-      bool _001CreateMuteControl(::pointer<::user::interaction>pParent, u32 nStartID, u32 * nNextID);
+      //  bool _001CreateMuteControl(::pointer<::user::interaction>pParent, CRuntimeClass * pruntimeclassMuteControl, unsigned int nStartID, unsigned int * nNextID);
+      bool _001CreateMuteControl(::pointer<::user::interaction>pParent, unsigned int nStartID, unsigned int * nNextID);
 
-      bool CreateWindows(::pointer<::user::interaction>pParent, i32 iStyle);
+      bool CreateWindows(::pointer<::user::interaction>pParent, int iStyle);
 
       MIXERCONTROL & GetMixerControl();
       MIXERCONTROLDETAILS & GetMixerControlDetails();

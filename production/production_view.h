@@ -15,28 +15,28 @@ namespace production
 
 
       //size_i32                          m_sizeTotal;
-      i32                     m_iStep;
+      int                     m_iStep;
       bool                    m_bLayout;
 
-      i32                     m_iLineHeight;
+      int                     m_iLineHeight;
 
       production *      m_pproduction;
       tick m_tickLastSnapshotUpdate;
-      i32                     m_iW;
-      i32                     m_iH;
-      i32                     m_iWScreen;
-      i32                     m_iHScreen;
-      i32                     m_iArea;
-      i32                     m_iItemHeight;
-      i32                     m_iTaskOffset;
+      int                     m_iW;
+      int                     m_iH;
+      int                     m_iWScreen;
+      int                     m_iHScreen;
+      int                     m_iArea;
+      int                     m_iItemHeight;
+      int                     m_iTaskOffset;
 
       ::collection::index                     m_iV;
-      i32                     m_iVH;
-      i32                     m_iVW;
+      int                     m_iVH;
+      int                     m_iVW;
       // veriwell ca2os ca2 out world stage
       ::collection::index                     m_iVs;
-      i32                     m_iVsH;
-      i32                     m_iVsW;
+      int                     m_iVsH;
+      int                     m_iVsW;
       ::image::image_pointer             m_pimageV;
       ::image::image_pointer             m_pimageVs;
       ::draw2d::brush_pointer          m_pbrushBkActive;
@@ -67,19 +67,19 @@ namespace production
 
 
 
-      void GetAreaThumbRect(LPRECT lprect, i32 iArea);
+      void GetAreaThumbRect(LPRECT lprect, int iArea);
       void on_hit_test(::item & item);
 
 
       void release_production();
       void make_production();
-      void production_loop(i32 iLoopCount);
+      void production_loop(int iLoopCount);
 
 
 
       virtual void _001OnDraw(::draw2d::graphics_pointer & pgraphics);
 
-      virtual void _001OnTabClick(i32 iTab);
+      virtual void _001OnTabClick(int iTab);
       void install_message_routing(::channel * pchannel) override;
       virtual bool pre_create_window(::user::system * pusersystem);
       void handle(::topic * ptopic, ::context * pcontext) override;

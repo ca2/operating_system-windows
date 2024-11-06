@@ -50,7 +50,7 @@ namespace production
 
          manual_reset_event * m_pevFinished;
          production *   m_pproduction;
-         u32                m_dwThreadAffinityMask;
+         unsigned int                m_dwThreadAffinityMask;
          virtual void     run() override;
       };
 
@@ -59,8 +59,8 @@ namespace production
       ::mutex                   m_mutexStatus;
       string_array                 m_straStatus;
       bool                    m_bLoop;
-      i32                     m_iLoop;
-      i32                     m_iLoopCount;
+      int                     m_iLoop;
+      int                     m_iLoopCount;
       string                  m_strSubversionRevision;
       string_array                 m_straCompress;
       ::mutex                   m_mutexCompress;
@@ -75,7 +75,7 @@ namespace production
       string                  m_strEmpPostColor;
       string                  m_strConfiguration;
       string                  m_strStatusEmail;
-      i32                 m_iGlobalRetry;
+      int                 m_iGlobalRetry;
       string                  m_strTry;
       string                  m_strDownloadSite;
 
@@ -84,7 +84,7 @@ namespace production
 
       ::mutex                   m_mutexRelease;
       string_array                 m_straRelease;
-      i32                 m_iRelease;
+      int                 m_iRelease;
 
       e_version               m_eversion;
 
@@ -93,7 +93,7 @@ namespace production
 
       string_array                 m_straStageDirAcceptedFileExtensions;
 
-      i32                     m_iStep;
+      int                     m_iStep;
                               
       ::pointer<::user::impact>               m_pimpact;
       bool                    m_bFinished;
@@ -141,7 +141,7 @@ namespace production
 
 
       void start_production(e_version eversion);
-      void start_loop(e_version eversion, i32 iLoopCount);
+      void start_loop(e_version eversion, int iLoopCount);
       void step();
 
       void defer_quit();
@@ -158,7 +158,7 @@ namespace production
       virtual void     produce();
 
       bool get_file_list(const ::string & pszBase, const ::string & pszDir, ::file::listing & stra, bool bFileSet = false);
-      // bool ftp_put_dir(CFtpConnection & ftpconn, const ::string & pszBase, const ::string & pszDir, i32 iMode);
+      // bool ftp_put_dir(CFtpConnection & ftpconn, const ::string & pszBase, const ::string & pszDir, int iMode);
 
       virtual void compress();
       virtual bool compress_next();

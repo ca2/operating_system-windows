@@ -7,7 +7,7 @@ void * g_pvoidPluginSystem = nullptr;
 HANDLE g_hmutex = nullptr;
 
 
-u32 plugin_container_app(const ::string & strChannel)
+unsigned int plugin_container_app(const ::string & strChannel)
 {
 
    ::plugin::system * psystem = ___new ::plugin::system(nullptr, nullptr);
@@ -89,7 +89,7 @@ u32 plugin_container_app(const ::string & strChannel)
 }
 
 
-i32 __win_main(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmdLine, i32 nCmdShow)
+int __win_main(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmdLine, int nCmdShow)
 {
 
    __UNREFERENCED_PARAMETER(lpCmdLine);
@@ -109,7 +109,7 @@ i32 __win_main(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmdLine, i
 
    //}
 
-   i32 nReturnCode = 0;
+   int nReturnCode = 0;
 
    string strChannel(get_command_line_parameter(string(::GetCommandLineW()), "channel"));
 
@@ -148,7 +148,7 @@ i32 __win_main(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmdLine, i
 }
 
 
-extern "C" i32 WINAPI _tWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmdLine, i32 nCmdShow)
+extern "C" int WINAPI _tWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmdLine, int nCmdShow)
 {
 
    return __win_main(hInstance, hPrevInstance, lpCmdLine, nCmdShow);

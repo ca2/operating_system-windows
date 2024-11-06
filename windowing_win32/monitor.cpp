@@ -16,9 +16,9 @@
 CLASS_DECL_ACME void TRACELASTERROR();
 
 
-::u32 mc_color_kelvin(MC_COLOR_TEMPERATURE e);
-CLASS_DECL_AURA void black_body(float * r, float * g, float * b, ::u32 dwTemp);
-MC_COLOR_TEMPERATURE kelvin_mc_color(::u32 kelvin);
+unsigned int mc_color_kelvin(MC_COLOR_TEMPERATURE e);
+CLASS_DECL_AURA void black_body(float * r, float * g, float * b, unsigned int dwTemp);
+MC_COLOR_TEMPERATURE kelvin_mc_color(unsigned int kelvin);
 
 
 namespace windowing_win32
@@ -62,7 +62,7 @@ namespace windowing_win32
    }
 
 
-   ::u32 monitor::get_monitor_color_temperature()
+   unsigned int monitor::get_monitor_color_temperature()
    {
 
 #ifdef UNIVERSAL_WINDOWS
@@ -104,7 +104,7 @@ namespace windowing_win32
 
 
 
-   bool monitor::adjust_monitor(::u32 dwTemperature, double dBrightness, double dGamma)
+   bool monitor::adjust_monitor(unsigned int dwTemperature, double dBrightness, double dGamma)
    {
 
       if (dBrightness <= 0.0)
@@ -255,9 +255,9 @@ namespace windowing_win32
       //    SetMonitorRedGreenOrBlueGain(monitor.hPhysicalMonitor, MC_RED_GAIN, dwMinGainR);
       //    SetMonitorRedGreenOrBlueGain(monitor.hPhysicalMonitor, MC_GREEN_GAIN, dwMinGainG);
       //    SetMonitorRedGreenOrBlueGain(monitor.hPhysicalMonitor, MC_BLUE_GAIN, dwMinGainB);
-      //SetMonitorRedGreenOrBlueDrive(monitor.hPhysicalMonitor, MC_RED_DRIVE, (::u32)(dwMinDriveR + (dwMaxDriveR - dwMinDriveR) * r));
-      //SetMonitorRedGreenOrBlueDrive(monitor.hPhysicalMonitor, MC_GREEN_DRIVE, (::u32)(dwMinDriveG + (dwMaxDriveG - dwMinDriveG) * g));
-      //SetMonitorRedGreenOrBlueDrive(monitor.hPhysicalMonitor, MC_BLUE_DRIVE, (::u32)(dwMinDriveB + (dwMaxDriveB - dwMinDriveB) * b));
+      //SetMonitorRedGreenOrBlueDrive(monitor.hPhysicalMonitor, MC_RED_DRIVE, (unsigned int)(dwMinDriveR + (dwMaxDriveR - dwMinDriveR) * r));
+      //SetMonitorRedGreenOrBlueDrive(monitor.hPhysicalMonitor, MC_GREEN_DRIVE, (unsigned int)(dwMinDriveG + (dwMaxDriveG - dwMinDriveG) * g));
+      //SetMonitorRedGreenOrBlueDrive(monitor.hPhysicalMonitor, MC_BLUE_DRIVE, (unsigned int)(dwMinDriveB + (dwMaxDriveB - dwMinDriveB) * b));
       //SetMonitorRedGreenOrBlueGain(monitor.hPhysicalMonitor, MC_RED_GAIN, dwMaxGainR);
       //SetMonitorRedGreenOrBlueGain(monitor.hPhysicalMonitor, MC_GREEN_GAIN, dwMaxGainG);
       //SetMonitorRedGreenOrBlueGain(monitor.hPhysicalMonitor, MC_BLUE_GAIN, dwMaxGainB);
@@ -283,9 +283,9 @@ namespace windowing_win32
    //#define F(Y, C)  pow(dBrightness * C, 1.0 / dGamma)
 #define F(C)  pow(dBrightness * C, 1.0 / dGamma)
 
-      ::u32 dwR = (::u32)(dwMinGainR + (dwMaxGainR - dwMinGainR) * F(fR));
-      ::u32 dwG = (::u32)(dwMinGainG + (dwMaxGainG - dwMinGainG) * F(fG));
-      ::u32 dwB = (::u32)(dwMinGainB + (dwMaxGainB - dwMinGainB) * F(fB));
+      unsigned int dwR = (unsigned int)(dwMinGainR + (dwMaxGainR - dwMinGainR) * F(fR));
+      unsigned int dwG = (unsigned int)(dwMinGainG + (dwMaxGainG - dwMinGainG) * F(fG));
+      unsigned int dwB = (unsigned int)(dwMinGainB + (dwMaxGainB - dwMinGainB) * F(fB));
 
       if (dwR != dwCurGainR)
       {
@@ -449,7 +449,7 @@ namespace windowing_win32
    //}
 
 
-//   ::u32 monitor::get_monitor_color_temperature()
+//   unsigned int monitor::get_monitor_color_temperature()
 //   {
 //
 //#ifdef UNIVERSAL_WINDOWS
@@ -519,7 +519,7 @@ namespace windowing_win32
 
 
 
-::u32 mc_color_kelvin(MC_COLOR_TEMPERATURE e)
+unsigned int mc_color_kelvin(MC_COLOR_TEMPERATURE e)
 {
    switch (e)
    {
@@ -545,9 +545,9 @@ namespace windowing_win32
 }
 
 
-MC_COLOR_TEMPERATURE kelvin_mc_color(::u32 kelvin);
+MC_COLOR_TEMPERATURE kelvin_mc_color(unsigned int kelvin);
 
-MC_COLOR_TEMPERATURE kelvin_mc_color(::u32 kelvin)
+MC_COLOR_TEMPERATURE kelvin_mc_color(unsigned int kelvin)
 {
 
    if (kelvin < 4500)

@@ -113,7 +113,7 @@ namespace music
 
             DWORD dwRounded = (block.size() + 3) & ~3;
 
-            m.set_size(3 * sizeof(u32) + dwRounded);
+            m.set_size(3 * sizeof(unsigned int) + dwRounded);
 
             midihdr.lpData = (LPSTR) m.data();
 

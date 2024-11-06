@@ -25,7 +25,7 @@ namespace audio_mixer_mmsystem
       virtual ~destination();
 
 
-      u32 get_component_type();
+      unsigned int get_component_type();
       void update_all_controls();
       void     initialize_all_controls();
       void     initialize_source_info();
@@ -36,7 +36,7 @@ namespace audio_mixer_mmsystem
       void set_device(::audio_mixer::device * pdevice);
 
 
-      virtual u32 get_mixer_line_id();
+      virtual unsigned int get_mixer_line_id();
 
    };
 

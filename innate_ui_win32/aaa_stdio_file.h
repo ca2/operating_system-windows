@@ -27,7 +27,7 @@ namespace windows
 
       virtual void write_string(const ::string & psz);
 
-      virtual char * read_string(char * psz, ::u32 nMax);
+      virtual char * read_string(char * psz, unsigned int nMax);
 
       virtual bool read_string(string & rString);
 

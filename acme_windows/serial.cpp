@@ -55,7 +55,7 @@ namespace acme_windows
 
    void serial::initialize_serial(
       const string& port,
-      ::u32 baudrate,
+      unsigned int baudrate,
       ::serial::timeout timeout,
       ::serial::enum_byte_size ebytesize,
       ::serial::enum_parity eparity, ::serial::enum_stop_bit estopbit,
@@ -404,13 +404,13 @@ namespace acme_windows
             if (m_estopbit == ::serial::e_stop_bit_one_point_five)
             {
 
-               m_uiByteTimeNs = (u32)(((((u64)1000LL * 1000LL * 1000LL) * (1 + m_ebytesize + m_eparity)) + (1500LL * 1000LL * 1000LL)) / ((u64)(m_ulBaudrate)));
+               m_uiByteTimeNs = (unsigned int)(((((u64)1000LL * 1000LL * 1000LL) * (1 + m_ebytesize + m_eparity)) + (1500LL * 1000LL * 1000LL)) / ((u64)(m_ulBaudrate)));
 
             }
             else
             {
 
-               m_uiByteTimeNs = (u32)((((u64)1000LL * 1000LL * 1000LL) * (1 + m_ebytesize + m_eparity + m_estopbit)) / ((u64)(m_ulBaudrate)));
+               m_uiByteTimeNs = (unsigned int)((((u64)1000LL * 1000LL * 1000LL) * (1 + m_ebytesize + m_eparity + m_estopbit)) / ((u64)(m_ulBaudrate)));
 
             }
 
@@ -527,7 +527,7 @@ namespace acme_windows
 
       DWORD bytes_read;
 
-      if (!ReadFile(m_hFile, buf, static_cast<::u32>(size), &bytes_read, nullptr))
+      if (!ReadFile(m_hFile, buf, static_cast<unsigned int>(size), &bytes_read, nullptr))
       {
 
          string ss;
@@ -557,7 +557,7 @@ namespace acme_windows
 
       DWORD bytes_written;
 
-      if (!WriteFile(m_hFile, data, static_cast<::u32>(length), &bytes_written, nullptr))
+      if (!WriteFile(m_hFile, data, static_cast<unsigned int>(length), &bytes_written, nullptr))
       {
 
          string str;
@@ -605,7 +605,7 @@ namespace acme_windows
 
             }
 
-            // time_out occured on reading 1 ::u8
+            // time_out occured on reading 1 unsigned char
             preempt(maximum(100_ηs, m_timeout.m_timeReadTimeoutConstant / 10));
 
             if (!::task_get_run())
@@ -683,7 +683,7 @@ namespace acme_windows
    }
 
 
-   void serial::setBaudrate(::u32 baudrate)
+   void serial::setBaudrate(unsigned int baudrate)
    {
       
       m_ulBaudrate = baudrate;
@@ -698,7 +698,7 @@ namespace acme_windows
    }
 
 
-   ::u32 serial::getBaudrate() const
+   unsigned int serial::getBaudrate() const
    {
 
       return m_ulBaudrate;

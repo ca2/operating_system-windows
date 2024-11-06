@@ -3,7 +3,7 @@
 
 #define  VERSION_MINOR              0x00
 #define  VERSION_MAJOR              0x04
-#define  SEQ_VERSION                ((u32)(WORD)((BYTE)VERSION_MINOR | (((WORD)(BYTE)VERSION_MAJOR) << 8)))
+#define  SEQ_VERSION                ((unsigned int)(WORD)((BYTE)VERSION_MINOR | (((WORD)(BYTE)VERSION_MAJOR) << 8)))
 
 #define MMSG_DONE                   (WM_USER+20)
 
@@ -38,9 +38,9 @@ namespace music
             ::pointer<file>                  m_pfile;
             ::pointer<sequence_thread>       m_psequencethread;
 
-            u32                        m_cbPreroll;         
+            unsigned int                        m_cbPreroll;         
 
-            u32                        m_cbPrerollNominalMax;
+            unsigned int                        m_cbPrerollNominalMax;
 
             buffer_array               m_buffera;
 
@@ -48,7 +48,7 @@ namespace music
 
             midi_callback_data         m_midicallbackdata;
 
-            i32                        m_iBuffersInMMSYSTEM;
+            int                        m_iBuffersInMMSYSTEM;
 
 
 
@@ -71,27 +71,27 @@ namespace music
 
 
 
-            void MuteAll(bool bMute = true, i32 iExcludeTrack = -1);
-            void MuteTrack(i32 iIndex, bool bMute = true);
+            void MuteAll(bool bMute = true, int iExcludeTrack = -1);
+            void MuteTrack(int iIndex, bool bMute = true);
 
 
-            virtual i32 GetDefaultCodePage();
+            virtual int GetDefaultCodePage();
 
             void Prepare(::ikaraoke::data & data);
-            void Prepare(i32 iTrack, ::ikaraoke::data & data);
+            void Prepare(int iTrack, ::ikaraoke::data & data);
             void Prepare(
             string_array_array & straa,
             imedia_position_2darray & tickaaTokensTicks,
-            i32 iMelodyTrack,
+            int iMelodyTrack,
             int2a & ia2TokenLine,
             ::ikaraoke::data & data);
 
-            void SetLevelMeter(i32 iLevel);
+            void SetLevelMeter(int iLevel);
             void     CloseStream();
             void     close_device();
-            //bool SetMidiOutDevice(u32 uiDevice);
-            i32 SetKeyShift(i32 iKeyShift);
-            i32 GetKeyShift();
+            //bool SetMidiOutDevice(unsigned int uiDevice);
+            int SetKeyShift(int iKeyShift);
+            int GetKeyShift();
 
             void on_midi_playback_end(::music::midi::sequence::event * pevent);
             virtual void     SetTempoShift(double dTempoShift);

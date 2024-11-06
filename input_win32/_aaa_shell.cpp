@@ -77,7 +77,7 @@ bool IsDibSection(HBITMAP bmp)
 //   int h = bitmap.bmHeight;
 //
 //   //   HDC hMemDC;
-//   ::u32 dwWidth, dwHeight;
+//   unsigned int dwWidth, dwHeight;
 //   BITMAPV5HEADER bi;
 //   // HBITMAP hOldBitmap;
 //   HBITMAP hBitmap;
@@ -91,7 +91,7 @@ bool IsDibSection(HBITMAP bmp)
 //   ZeroMemory(&bi, sizeof(BITMAPV5HEADER));
 //   bi.bV5Size = sizeof(BITMAPV5HEADER);
 //   bi.bV5Width = dwWidth;
-//   bi.bV5Height = -(::i32)dwHeight;
+//   bi.bV5Height = -(int)dwHeight;
 //   bi.bV5Planes = 1;
 //   bi.bV5BitCount = 32;
 //   bi.bV5Compression = BI_BITFIELDS;
@@ -108,7 +108,7 @@ bool IsDibSection(HBITMAP bmp)
 //   hdc = GetDC(nullptr);
 //
 //   // Create the DIB section with an alpha channel.
-//   hBitmap = CreateDIBSection(hdc, (BITMAPINFO *)&bi, DIB_RGB_COLORS, (void **)&pBits, nullptr, (::u32)0);
+//   hBitmap = CreateDIBSection(hdc, (BITMAPINFO *)&bi, DIB_RGB_COLORS, (void **)&pBits, nullptr, (unsigned int)0);
 //
 //
 //   HDC sourceHdc = ::CreateCompatibleDC(hdc);
@@ -289,7 +289,7 @@ namespace windowing_win32
    }
 
 
-   //      i32 shell::thread::get_image_by_file_extension(oswindow image_key & imagekey, ::color::color colorBackground)
+   //      int shell::thread::get_image_by_file_extension(oswindow image_key & imagekey, ::color::color colorBackground)
    //      {
    //
    //#ifdef WINDOWS_DESKTOP
@@ -524,7 +524,7 @@ namespace windowing_win32
 
 
 
-      i32 iType;
+      int iType;
 
       switch (getfileimage.m_imagekey.m_eicon)
       {
@@ -841,7 +841,7 @@ namespace windowing_win32
 
       }
 
-      ::u32 uExtractIconLocationFlags = 0;
+      unsigned int uExtractIconLocationFlags = 0;
 
       string strIconLocation;
 
@@ -1212,7 +1212,7 @@ namespace windowing_win32
    //{
    //   LPITEMIDLIST ppidl;
 
-   //   i32 csidla[] =
+   //   int csidla[] =
    //   {
    //      CSIDL_DESKTOP,
    //      CSIDL_DRIVES,
@@ -1223,7 +1223,7 @@ namespace windowing_win32
    //      -1,
    //   };
 
-   //   i32 * pcsidl = csidla;
+   //   int * pcsidl = csidla;
 
    //   while (*pcsidl != -1)
    //   {
@@ -1316,7 +1316,7 @@ namespace windowing_win32
    }
 
 
-   //i32 shell::_get_file_image(const image_key & key)
+   //int shell::_get_file_image(const image_key & key)
    bool shell::_get_file_image(::user::shell::_get_file_image_ & getfileimage)
    {
 
@@ -1533,7 +1533,7 @@ namespace windowing_win32
 
       //   string strProtocol = imagekey.m_strPath.left()(maximum(iFind, iFind2));
 
-      //   i32 i = 0;
+      //   int i = 0;
 
       //   while (i < strProtocol.length() && character_isalnum(strProtocol[i]))
       //   {
@@ -1650,7 +1650,7 @@ namespace windowing_win32
    }
 
 
-   //i32 _017ItemIDListGetLen(LPITEMIDLIST piidl)
+   //int _017ItemIDListGetLen(LPITEMIDLIST piidl)
 
    //{
    //   if (piidl == nullptr)
@@ -1661,7 +1661,7 @@ namespace windowing_win32
    //   LPSHITEMID  pshiidLast = nullptr;
 
    //   USHORT cb;
-   //   i32 iLen = 0;
+   //   int iLen = 0;
    //   while (true)
    //   {
    //      cb = pshiid->cb;
@@ -1671,7 +1671,7 @@ namespace windowing_win32
    //         break;
    //      pshiidLast = lpshiid;
 
-   //      pshiid = (LPSHITEMID)(((::u8 *)lpshiid) + cb);
+   //      pshiid = (LPSHITEMID)(((unsigned char *)lpshiid) + cb);
 
 
    //   }
@@ -1801,7 +1801,7 @@ namespace windowing_win32
             if (hicon == nullptr)
             {
 
-               ::u32 dwLastError = ::GetLastError();
+               unsigned int dwLastError = ::GetLastError();
 
                output_debug_string("LastError = " + ::as_string(dwLastError));
 

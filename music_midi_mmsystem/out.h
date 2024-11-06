@@ -22,7 +22,7 @@ namespace music
 
             
             HMIDIOUT       m_hmidiout;
-            u32            m_uDeviceID;
+            unsigned int            m_uDeviceID;
 
 
             out();

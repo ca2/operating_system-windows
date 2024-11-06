@@ -335,7 +335,7 @@ namespace acme_user_win32
 
       ::acme_windows::registry::key key(HKEY_CURRENT_USER, "Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize", true);
 
-      ::u32 dwSystemUseLightTheme;
+      unsigned int dwSystemUseLightTheme;
       if (bSet)
       {
          dwSystemUseLightTheme = 0;
@@ -356,7 +356,7 @@ namespace acme_user_win32
 
       ::acme_windows::registry::key key(HKEY_CURRENT_USER, "Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize", true);
 
-      ::u32 dwAppsUseLightTheme;
+      unsigned int dwAppsUseLightTheme;
       if (bSet)
       {
          dwAppsUseLightTheme = 0;

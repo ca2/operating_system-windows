@@ -67,7 +67,7 @@ namespace production
    void application::term_instance()
    {
 
-      i32 iExitCode = 0;
+      int iExitCode = 0;
 
       try
       {

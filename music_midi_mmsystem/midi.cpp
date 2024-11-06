@@ -510,13 +510,13 @@ namespace music
 
             synchronous_lock synchronouslock(synchronization());
 
-            u32 uDeviceCount = midiOutGetNumDevs();
+            unsigned int uDeviceCount = midiOutGetNumDevs();
 
             MIDIOUTCAPSW midioutcaps;
 
             string str;
 
-            for (u32 uDev = 0; uDev < uDeviceCount; uDev++)
+            for (unsigned int uDev = 0; uDev < uDeviceCount; uDev++)
             {
 
                if (MMSYSERR_NOERROR == midiOutGetDevCapsW(uDev, &midioutcaps, sizeof(midioutcaps)))
@@ -544,13 +544,13 @@ namespace music
 
             synchronous_lock synchronouslock(synchronization());
 
-            u32 uDeviceCount = midiInGetNumDevs();
+            unsigned int uDeviceCount = midiInGetNumDevs();
 
             MIDIINCAPSW midiincaps;
 
             string str;
 
-            for (u32 uDev = 0; uDev < uDeviceCount; uDev++)
+            for (unsigned int uDev = 0; uDev < uDeviceCount; uDev++)
             {
 
                if (MMSYSERR_NOERROR == midiInGetDevCapsW(uDev, &midiincaps, sizeof(midiincaps)))

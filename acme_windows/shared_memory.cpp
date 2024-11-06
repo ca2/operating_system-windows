@@ -17,7 +17,7 @@ shared_memory::shared_memory(const memory_base & s)
 
 }
 
-shared_memory::shared_memory(memory_container * pcontainer, double dAllocationRateUp, ::u32 nAllocFlags)
+shared_memory::shared_memory(memory_container * pcontainer, double dAllocationRateUp, unsigned int nAllocFlags)
 {
 
    m_nAllocFlags = nAllocFlags;
@@ -79,7 +79,7 @@ shared_memory::~shared_memory()
 }
 
 
-::u8 * shared_memory::detach_shared_memory(HGLOBAL & hglobal)
+unsigned char * shared_memory::detach_shared_memory(HGLOBAL & hglobal)
 {
 
    if (this->offset() > 0)
@@ -99,7 +99,7 @@ shared_memory::~shared_memory()
 
    }
 
-   ::u8 * pbStorage = m_beginStorage;
+   unsigned char * pbStorage = m_beginStorage;
 
    m_hGlobalMemory = nullptr;
    m_beginStorage = nullptr;
@@ -130,7 +130,7 @@ void shared_memory::SetHandle(HGLOBAL hGlobalMemory, bool bAllowGrow)
 
    m_hGlobalMemory = hGlobalMemory;
 
-   m_beginStorage = (::u8 *)::GlobalLock(m_hGlobalMemory);
+   m_beginStorage = (unsigned char *)::GlobalLock(m_hGlobalMemory);
 
    m_begin = m_beginStorage;
 
@@ -141,7 +141,7 @@ void shared_memory::SetHandle(HGLOBAL hGlobalMemory, bool bAllowGrow)
 }
 
 
-::u8 * shared_memory::impl_alloc(memsize nBytes)
+unsigned char * shared_memory::impl_alloc(memsize nBytes)
 {
 
    ASSERT(m_hGlobalMemory == nullptr);        // do once only
@@ -151,12 +151,12 @@ void shared_memory::SetHandle(HGLOBAL hGlobalMemory, bool bAllowGrow)
    if (m_hGlobalMemory == nullptr)
       return nullptr;
 
-   return (::u8 *) ::GlobalLock(m_hGlobalMemory);
+   return (unsigned char *) ::GlobalLock(m_hGlobalMemory);
 
 }
 
 
-::u8 * shared_memory::impl_realloc(void *, memsize nBytes)
+unsigned char * shared_memory::impl_realloc(void *, memsize nBytes)
 {
 
    if (!m_bAllowGrow)
@@ -175,12 +175,12 @@ void shared_memory::SetHandle(HGLOBAL hGlobalMemory, bool bAllowGrow)
 
    m_hGlobalMemory = hNew;
 
-   return (::u8 *) ::GlobalLock(m_hGlobalMemory);
+   return (unsigned char *) ::GlobalLock(m_hGlobalMemory);
 
 }
 
 
-void shared_memory::impl_free(::u8 *)
+void shared_memory::impl_free(unsigned char *)
 {
 
    ASSERT(m_hGlobalMemory != nullptr);
@@ -192,7 +192,7 @@ void shared_memory::impl_free(::u8 *)
 }
 
 
-//::u8 * * shared_memory::detach()
+//unsigned char * * shared_memory::detach()
 //{
 
 //   throw ::exception(not_supported_exception("not valid for Global Memory(\"HGLOBAL\")"));
@@ -271,7 +271,7 @@ void shared_memory::set_data(void *pdata, memsize uiSize)
 void shared_memory::From(const ::string & psz)
 {
    char ch;
-   i32 iLen = strlen(psz);
+   int iLen = strlen(psz);
    allocate(iLen / 2);
    char * pch = (char *) get_data();
    while(*psz != '\0')
@@ -299,8 +299,8 @@ void shared_memory::ToAsc(string & str)
    string strTo;
    To(strTo);
    char ch;
-   i32 iLen = strTo.length() - 1;
-   for(i32 i = 0; i < iLen; i+=2)
+   int iLen = strTo.length() - 1;
+   for(int i = 0; i < iLen; i+=2)
    {
       if(strTo[i] <= '9')
          ch = (strTo[i] - '0') << 4;

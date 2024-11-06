@@ -26,15 +26,15 @@ namespace draw2d_gdiplus
 
 #endif
 
-      /*virtual void construct(i32 nPenStyle, double nWidth, ::color::color crColor);
-      virtual void construct(i32 nPenStyle, double nWidth, const LOGBRUSH* pLogBrush, i32 nStyleCount = 0, const DWORD* pStyle = nullptr);
+      /*virtual void construct(int nPenStyle, double nWidth, ::color::color crColor);
+      virtual void construct(int nPenStyle, double nWidth, const LOGBRUSH* pLogBrush, int nStyleCount = 0, const DWORD* pStyle = nullptr);
 
-      bool CreatePen(i32 nPenStyle, double nWidth, ::color::color crColor);
-      bool CreatePen(i32 nPenStyle, double nWidth, const LOGBRUSH* pLogBrush, i32 nStyleCount = 0, const DWORD* pStyle = nullptr);*/
+      bool CreatePen(int nPenStyle, double nWidth, ::color::color crColor);
+      bool CreatePen(int nPenStyle, double nWidth, const LOGBRUSH* pLogBrush, int nStyleCount = 0, const DWORD* pStyle = nullptr);*/
 
 
 
-      virtual bool create(::draw2d::graphics * pgraphics, ::i8 iCreate) override;
+      virtual bool create(::draw2d::graphics * pgraphics, char iCreate) override;
       virtual void destroy() override;
 
 

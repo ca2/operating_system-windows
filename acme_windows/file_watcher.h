@@ -39,7 +39,7 @@ namespace acme_windows
 
       OVERLAPPED           m_overlapped;
       HANDLE               m_hDirectory;
-      ::u8                 m_buffer[32 * 1024];
+      unsigned char                 m_buffer[32 * 1024];
       LPARAM               m_lparam;
       DWORD                m_dwNotify;
       bool                 m_bRefresh;

@@ -86,7 +86,7 @@ namespace draw2d_gdiplus
    }
 
 
-   bool region::create(::draw2d::graphics * pgraphics, ::i8 iCreate)
+   bool region::create(::draw2d::graphics * pgraphics, char iCreate)
    {
 
       m_pregion = get(pgraphics);
@@ -171,7 +171,7 @@ namespace draw2d_gdiplus
 
       array < Gdiplus::PointF > pa;
 
-      for(i32 i = 0; i < m_nCount; i++)
+      for(int i = 0; i < m_nCount; i++)
       {
          pa.add(Gdiplus::PointF((Gdiplus::REAL) m_lppoints[i].x(), (Gdiplus::REAL) m_lppoints[i].y()));
       }
@@ -185,7 +185,7 @@ namespace draw2d_gdiplus
          path.SetFillMode(Gdiplus::FillModeWinding);
       }
 
-      path.AddPolygon(pa.get_data(), (i32) pa.get_count());
+      path.AddPolygon(pa.get_data(), (int) pa.get_count());
 
       return ___new Gdiplus::Region(&path);
 
@@ -208,18 +208,18 @@ namespace draw2d_gdiplus
          path.SetFillMode(Gdiplus::FillModeWinding);
       }
 
-      i32 n = 0;
+      int n = 0;
 
-      for(i32 i = 0; i < m_nCount; i++)
+      for(int i = 0; i < m_nCount; i++)
       {
-         i32 jCount = m_lppolycounts[i];
+         int jCount = m_lppolycounts[i];
          pa.erase_all();
-         for(i32 j = 0; j < jCount; j++)
+         for(int j = 0; j < jCount; j++)
          {
             pa.add(Gdiplus::PointF((Gdiplus::REAL) m_lppoints[n].x(), (Gdiplus::REAL) m_lppoints[n].y()));
             n++;
          }
-         path.AddPolygon(pa.get_data(), (i32) pa.get_count());
+         path.AddPolygon(pa.get_data(), (int) pa.get_count());
          path.CloseFigure();
       }
 

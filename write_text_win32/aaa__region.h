@@ -18,7 +18,7 @@ namespace draw2d_gdiplus
       virtual ~region();
 
 
-      virtual bool create(::draw2d::graphics * pgraphics, ::i8 iCreate) override;
+      virtual bool create(::draw2d::graphics * pgraphics, char iCreate) override;
       virtual void destroy() override;
 
 

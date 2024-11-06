@@ -60,7 +60,7 @@ pacmedir->create(::file_path_folder(pszFileName));
       //ASSERT(m_hFile != hFileNull);
 
       char szMode[4]; // C-runtime open string
-      i32 nMode = 0;
+      int nMode = 0;
 
       // determine read/write mode depending on file_pointer mode
       if (eopen & ::file::e_open_create)
@@ -84,7 +84,7 @@ pacmedir->create(::file_path_folder(pszFileName));
       }
 
       // will be inverted if not necessary
-      i32 nFlags = _O_RDONLY|_O_TEXT;
+      int nFlags = _O_RDONLY|_O_TEXT;
       if (eopen & (::file::e_open_write|::file::e_open_read_write))
          nFlags ^= _O_RDONLY;
 
@@ -136,7 +136,7 @@ pacmedir->create(::file_path_folder(pszFileName));
 
       memsize nRead = 0;
 
-      if ((nRead = fread(pdata, sizeof(::u8), (size_t) nCount, m_pStream)) == 0 && !feof(m_pStream))
+      if ((nRead = fread(pdata, sizeof(unsigned char), (size_t) nCount, m_pStream)) == 0 && !feof(m_pStream))
       {
 
          throw ::file::exception(error_file, _doserrno, m_path);
@@ -162,7 +162,7 @@ pacmedir->create(::file_path_folder(pszFileName));
       ASSERT(is_memory_segment_ok(pdata, nCount, false));
 
 
-      if (fwrite(pdata, sizeof(::u8), (size_t)nCount, m_pStream) != nCount)
+      if (fwrite(pdata, sizeof(unsigned char), (size_t)nCount, m_pStream) != nCount)
 
          throw ::file::exception(error_file, _doserrno, m_path);
    }
@@ -179,7 +179,7 @@ pacmedir->create(::file_path_folder(pszFileName));
          throw ::file::exception(error_disk_full, _doserrno, m_path);
    }
 
-   char * stdio_file::read_string(char * psz, ::u32 nMax)
+   char * stdio_file::read_string(char * psz, unsigned int nMax)
 
    {
       ASSERT(psz != nullptr);
@@ -208,7 +208,7 @@ pacmedir->create(::file_path_folder(pszFileName));
 
       rString.empty();
 
-      const i32 nMaxSize = 128;
+      const int nMaxSize = 128;
 
       char * psz = rString.get_buffer(nMaxSize);
 
@@ -272,7 +272,7 @@ pacmedir->create(::file_path_folder(pszFileName));
    throw ::file::exception(error_disk_full, _doserrno, m_path);
    }*/
 
-   /*unichar * stdio_file::read_string(unichar * psz, ::u32 nMax)
+   /*unichar * stdio_file::read_string(unichar * psz, unsigned int nMax)
 
    {
    ASSERT(psz != nullptr);
@@ -331,7 +331,7 @@ pacmedir->create(::file_path_folder(pszFileName));
       ASSERT_VALID(this);
       ASSERT(m_pStream != nullptr);
 
-      i32 nErr = 0;
+      int nErr = 0;
 
       if(m_iFile != iFileNull)
          ::_close(m_iFile);
@@ -416,9 +416,9 @@ pacmedir->create(::file_path_folder(pszFileName));
    {
       ASSERT_VALID(this);
 
-      ::i32 nCurrent;
-      ::i32 nLength;
-      ::i32 nResult;
+      int nCurrent;
+      int nLength;
+      int nResult;
 
       nCurrent = ftell(m_pStream);
       if (nCurrent == -1)

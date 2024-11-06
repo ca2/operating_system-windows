@@ -126,7 +126,7 @@ namespace user_service
          {
             //         outheader("Cache-control") = "public";
             //         outheader("Pragma") = "public";
-            //         i32 iPathCount;
+            //         int iPathCount;
             //         outheader("Expires") = http()->gmdate(pdatetime->strtotime(nullptr, "+1 day", 0, iPathCount));
             //#ifdef WINDOWS
             //         simple_file_server(::file::path("Z:\\") / m_request.m_strRequestUri);
@@ -183,7 +183,7 @@ namespace user_service
       }
 
 
-      i32 iStatusCode;
+      int iStatusCode;
 
       string strStatus;
 
@@ -299,7 +299,7 @@ auto tickExecuteEnd = ::tick::now();
             string strUnit = straItem[0];
             string_array stra;
             stra.explode(",", straItem[1]);
-            for (i32 i = 0; i < stra.get_count(); i++)
+            for (int i = 0; i < stra.get_count(); i++)
             {
                string_array straRange;
                straRange.explode("-", stra[i]);
@@ -358,7 +358,7 @@ auto tickExecuteEnd = ::tick::now();
 
 /*         ::image::image_pointer pimage;
 
-/*         pimage = create_image({(i32)(pimage->width() * dRate),  (i32)(pimage->height() * dRate)});
+/*         pimage = create_image({(int)(pimage->width() * dRate),  (int)(pimage->height() * dRate)});
 
 /*         pimage->stretch_image(pimage);
 

@@ -17,7 +17,7 @@
 //
 //      virtual bool watch(const ::string & pszPath);
 //
-//      virtual e_action translate_os_action(i32 iAction);
+//      virtual e_action translate_os_action(int iAction);
 //
 //      virtual void     run() override;
 //

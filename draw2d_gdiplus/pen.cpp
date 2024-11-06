@@ -144,7 +144,7 @@ namespace draw2d_gdiplus
       }
    }
 
-   void __draw_gray_bitmap(::aura::application * papp, ::draw2d::graphics * pgraphics, i32 x, i32 y, const ::draw2d::bitmap &rSrc, ::color::color crBackground)
+   void __draw_gray_bitmap(::aura::application * papp, ::draw2d::graphics * pgraphics, int x, int y, const ::draw2d::bitmap &rSrc, ::color::color crBackground)
    {
       ASSERT(pgraphics);
       ASSERT_KINDOF(::draw2d::graphics_pointer, pgraphics);
@@ -261,7 +261,7 @@ namespace draw2d_gdiplus
       }
    }
 
-   void __draw_dithered_bitmap(::aura::application * papp, ::draw2d::graphics * pgraphics, i32 x, i32 y, const ::draw2d::bitmap &rSrc, const ::color::color & color1, const ::color::color & color2)
+   void __draw_dithered_bitmap(::aura::application * papp, ::draw2d::graphics * pgraphics, int x, int y, const ::draw2d::bitmap &rSrc, const ::color::color & color1, const ::color::color & color2)
    {
       ASSERT(pgraphics);
       ASSERT_KINDOF(::draw2d::graphics_pointer, pgraphics);
@@ -321,7 +321,7 @@ namespace draw2d_gdiplus
    */
 
 
-   void pen::create(::draw2d::graphics * pgraphics, ::i8 iCreate)
+   void pen::create(::draw2d::graphics * pgraphics, char iCreate)
    {
 
       if (m_epen == ::draw2d::e_pen_brush)

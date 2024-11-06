@@ -73,7 +73,7 @@
 //public:
 //
 //
-//   ::u32 m_u32;
+//   unsigned int m_u32;
 //
 //
 //   x11color32_t(){m_u32=0;}

@@ -526,7 +526,7 @@ pacmedir->roaming();
 
    //   string strCandidate;
 
-   //   for (i32 i = 0; i < stra.get_count(); i++)
+   //   for (int i = 0; i < stra.get_count(); i++)
    //   {
 
    //      strCandidate = stra[i] / pszTopic;
@@ -563,7 +563,7 @@ pacmedir->roaming();
    }
 
 
-   bool directory_system::_shell_get_special_folder_path(HWND hwnd, ::file::path& str, i32 csidl, bool fCreate)
+   bool directory_system::_shell_get_special_folder_path(HWND hwnd, ::file::path& str, int csidl, bool fCreate)
    {
 
       return ::SHGetSpecialFolderPathW(hwnd, wstring_adaptor(str, MAX_PATH * 8), csidl, fCreate) != false;
@@ -571,7 +571,7 @@ pacmedir->roaming();
    }
 
 
-   ::file::path directory_system::_shell_get_special_folder_path(i32 csidl, bool fCreate, ::windowing::window* pwindow)
+   ::file::path directory_system::_shell_get_special_folder_path(int csidl, bool fCreate, ::windowing::window* pwindow)
    {
 
       ::file::path path;
@@ -625,7 +625,7 @@ pacmedir->roaming();
 //      //str.case_insensitive_ends_eat("\\");
 //      //str.case_insensitive_ends_eat("/");
 //
-//      u32 dwFileAttributes = ::windows_get_file_attributes(path1);
+//      unsigned int dwFileAttributes = ::windows_get_file_attributes(path1);
 //
 //      if (dwFileAttributes != INVALID_FILE_ATTRIBUTES)
 //      {
@@ -636,7 +636,7 @@ pacmedir->roaming();
 //      else
 //      {
 //
-//         ::u32 dwLastError = ::GetLastError();
+//         unsigned int dwLastError = ::GetLastError();
 //
 //         string strPrefix;
 //
@@ -860,7 +860,7 @@ bool windows_file_find_is_dots(const WIN32_FIND_DATAW & data)
 //
 //         }
 //
-//         if (!GetModuleFileNameW(hmodule, wstrModuleFilePath, (::u32)wstrModuleFilePath.length()))
+//         if (!GetModuleFileNameW(hmodule, wstrModuleFilePath, (unsigned int)wstrModuleFilePath.length()))
 //         {
 //
 //            return "";
@@ -869,7 +869,7 @@ bool windows_file_find_is_dots(const WIN32_FIND_DATAW & data)
 //
 //         LPWSTR pszModuleFileName;
 //
-//         if (!GetFullPathNameW(wstrModuleFilePath, (::u32)wstrModuleFilePath.length(), wstrModuleFolder, &pszModuleFileName))
+//         if (!GetFullPathNameW(wstrModuleFilePath, (unsigned int)wstrModuleFilePath.length(), wstrModuleFolder, &pszModuleFileName))
 //         {
 //
 //            return "";
@@ -897,7 +897,7 @@ bool windows_file_find_is_dots(const WIN32_FIND_DATAW & data)
 //      }
 //
 
-      // bool eat_end_level(string & str, i32 iLevelCount, const char * pSeparator)
+      // bool eat_end_level(string & str, int iLevelCount, const char * pSeparator)
       // {
 
       //    strsize iLast = str.length() - 1;
@@ -908,7 +908,7 @@ bool windows_file_find_is_dots(const WIN32_FIND_DATAW & data)
       //    while(str[iLast] == '/' || str[iLast] == '\\')
       //       iLast--;
 
-      //    for(i32 i = 0; i < iLevelCount; i++)
+      //    for(int i = 0; i < iLevelCount; i++)
       //    {
 
       //       strsize iFind1 = str.rear_find('/', iLast);
@@ -1221,7 +1221,7 @@ pacmedir->create CreateDirectoryW last error(%d)=%s", dwError, pszError);
 
          auto p = path.get_buffer(MAX_PATH * 8);
 
-         if (!GetModuleFileNameW(nullptr, p, (::u32)path.size()))
+         if (!GetModuleFileNameW(nullptr, p, (unsigned int)path.size()))
          {
 
             return "";
@@ -1710,7 +1710,7 @@ pacmedir->create CreateDirectoryW last error(%d)=%s", dwError, pszError);
 //
 //         auto a = folder->GetItemsAsync().get();
 //
-//         for (u32 u = 0; u < a->Size; u++)
+//         for (unsigned int u = 0; u < a->Size; u++)
 //         {
 //
 //            string strPath = string(begin(a->GetAt(u)->Path));
@@ -1805,7 +1805,7 @@ pacmedir->create CreateDirectoryW last error(%d)=%s", dwError, pszError);
 //
 //         ::winrt::Windows::Foundation::Collections::IVectorImpact < ::winrt::Windows::Storage::StorageFolder ^ > ^ a = wait(folder->GetFoldersAsync());
 //
-//         for (u32 u = 0; u < a->Size; u++)
+//         for (unsigned int u = 0; u < a->Size; u++)
 //         {
 //            stra.add(begin(a->GetAt(u)->Path));
 //         }
@@ -1887,7 +1887,7 @@ pacmedir->create CreateDirectoryW last error(%d)=%s", dwError, pszError);
 //
 //         ::winrt::Windows::Foundation::Collections::IVectorImpact < ::winrt::Windows::Storage::StorageFolder ^ > ^ a = wait(folder->GetFoldersAsync());
 //
-//         for (u32 u = 0; u < a->Size; u++)
+//         for (unsigned int u = 0; u < a->Size; u++)
 //         {
 //            stra.add(begin(a->GetAt(u)->Path));
 //         }
@@ -1939,7 +1939,7 @@ pacmedir->create CreateDirectoryW last error(%d)=%s", dwError, pszError);
 
          string strCandidate;
 
-         for (i32 i = 0; i < stra.get_count(); i++)
+         for (int i = 0; i < stra.get_count(); i++)
          {
 
             if (stra[i].is_empty())

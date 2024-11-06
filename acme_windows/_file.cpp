@@ -12,7 +12,7 @@
 CLASS_DECL_ACME_WINDOWS const void * get_resource_pointer(HINSTANCE hinst, DWORD nID, const char * pcszType, memsize & memsize);
 
 
-HICON extract_icon(HINSTANCE hInst, const ::string& pszExeFileName, ::u32 nIconIndex)
+HICON extract_icon(HINSTANCE hInst, const ::string& pszExeFileName, unsigned int nIconIndex)
 {
 
    return ::ExtractIconW(hInst, utf8_to_unicode(pszExeFileName), nIconIndex);
@@ -121,7 +121,7 @@ CLASS_DECL_ACME_WINDOWS bool read_resource_as_memory(memory& memory, HINSTANCE h
 }
 
 
-bool CLASS_DECL_ACME_WINDOWS shell_get_special_folder_path(HWND hwnd, ::file::path& str, i32 csidl, bool fCreate)
+bool CLASS_DECL_ACME_WINDOWS shell_get_special_folder_path(HWND hwnd, ::file::path& str, int csidl, bool fCreate)
 {
 
    return ::SHGetSpecialFolderPathW(hwnd, wstring_adaptor(str, MAX_PATH * 8), csidl, fCreate) != false;
@@ -129,7 +129,7 @@ bool CLASS_DECL_ACME_WINDOWS shell_get_special_folder_path(HWND hwnd, ::file::pa
 }
 
 
-::file::path CLASS_DECL_ACME_WINDOWS shell_get_special_folder_path(i32 csidl, bool fCreate, ::windowing::window* pwindow)
+::file::path CLASS_DECL_ACME_WINDOWS shell_get_special_folder_path(int csidl, bool fCreate, ::windowing::window* pwindow)
 {
 
    ::file::path path;

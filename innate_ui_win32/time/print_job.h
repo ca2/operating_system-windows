@@ -15,7 +15,7 @@ namespace windows
 	   virtual ~print_task();
 
 
-	   virtual i32 run();
+	   virtual int run();
 
 	};
 

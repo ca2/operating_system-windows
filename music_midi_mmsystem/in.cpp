@@ -42,7 +42,7 @@ namespace music
 
             //MMRESULT estatus;
 
-            u32 uDeviceID = iDeviceId;
+            unsigned int uDeviceID = iDeviceId;
 
             m_hmidiin = nullptr;
 
@@ -128,7 +128,7 @@ namespace music
 
          }
 
-         void in::on_os_message(::u8 b, ::u8 b1, ::u8 b2)
+         void in::on_os_message(unsigned char b, unsigned char b1, unsigned char b2)
          {
 
             //fork([this, b, b1, b2]()
@@ -155,9 +155,9 @@ namespace music
             if (wMsg == MIM_DATA)
             {
 
-               BYTE b = (::u8)dwParam1;
-               BYTE b1 = (::u8)(dwParam1 >> 8);
-               BYTE b2 = (::u8)(dwParam1 >> 16);
+               BYTE b = (unsigned char)dwParam1;
+               BYTE b1 = (unsigned char)(dwParam1 >> 8);
+               BYTE b2 = (unsigned char)(dwParam1 >> 16);
 
                on_os_message(b, b1, b2);
 

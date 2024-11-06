@@ -1830,7 +1830,7 @@
 //
 // MessageText:
 //
-// Output from service %1 was detected as being in UTF-16 format but an attempt to write an appropriate ::u8 order marker failed.
+// Output from service %1 was detected as being in UTF-16 format but an attempt to write an appropriate unsigned char order marker failed.
 // It is likely that subsequent attempts to write data to %2 will fail.  If they succeed, the file may not be recognised as being
 // in UTF-16 format by applications which attempt to read it.
 // WriteFile(): %3

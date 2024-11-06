@@ -42,8 +42,8 @@ inline auto copy(Gdiplus::RectF * prectTarget, const ::rectangle_f64 * prectSour
 inline void copy(Gdiplus::Point * ppoint1, const ::point_f64 * ppoint2)
 {
 
-   ppoint1->X = (::i32)ppoint2->x;
-   ppoint1->Y = (::i32)ppoint2->y;
+   ppoint1->X = (int)ppoint2->x;
+   ppoint1->Y = (int)ppoint2->y;
 
 }
 
@@ -51,8 +51,8 @@ inline void copy(Gdiplus::Point * ppoint1, const ::point_f64 * ppoint2)
 inline void copy(Gdiplus::Point * ppoint1, const ::point_i32 * ppoint2)
 {
 
-   ppoint1->X = (::i32)ppoint2->x;
-   ppoint1->Y = (::i32)ppoint2->y;
+   ppoint1->X = (int)ppoint2->x;
+   ppoint1->Y = (int)ppoint2->y;
 
 }
 

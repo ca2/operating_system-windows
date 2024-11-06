@@ -99,7 +99,7 @@ namespace acme_windows
                                  FILE_SHARE_READ | FILE_SHARE_WRITE | FILE_SHARE_DELETE, nullptr,
                                  OPEN_EXISTING, FILE_FLAG_BACKUP_SEMANTICS | FILE_FLAG_OVERLAPPED, nullptr);
 
-      ::u32 dwLen = GetFinalPathNameByHandleW(m_hDirectory, nullptr, 0, 0);
+      unsigned int dwLen = GetFinalPathNameByHandleW(m_hDirectory, nullptr, 0, 0);
 
       if (dwLen > 0)
       {

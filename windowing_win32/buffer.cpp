@@ -31,7 +31,7 @@ namespace windowing_win32
 {
 
 
-   //CLASS_DECL_WINDOWING_WIN32 HBITMAP create_windows_dib(const ::size_i32 & size, i32 * piScan, ::color32_t ** ppdata);
+   //CLASS_DECL_WINDOWING_WIN32 HBITMAP create_windows_dib(const ::size_i32 & size, int * piScan, ::color32_t ** ppdata);
 
 
    buffer::layered_window_buffer::layered_window_buffer()
@@ -1177,7 +1177,7 @@ namespace windowing_win32
             //#endif
             //               {
             //
-            //                  u32 uFlags = SWP_NOREDRAW
+            //                  unsigned int uFlags = SWP_NOREDRAW
             //                     | SWP_NOCOPYBITS
             //                     | SWP_NOACTIVATE
             //                     | SWP_NOOWNERZORDER

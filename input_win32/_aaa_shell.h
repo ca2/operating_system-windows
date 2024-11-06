@@ -74,23 +74,23 @@ namespace windowing_win32
 
       bool _internal_get_file_image(_get_file_image_ & getfileimage);
 
-      //i32 get_image_by_file_extension(image_key & key);
+      //int get_image_by_file_extension(image_key & key);
 
       void get_image_by_file_extension(_get_file_image_ & getfileimage);
 
 
       void add_system_icon(int iIcon, _get_file_image_ & getfileimage);
-      //i32 add_icon_info(int iSize, SHFILEINFOW * pinfo16, SHFILEINFOW * pinfo48, ::color::color crBk, bool & bUsedImageList16, bool & bUsedImageList48, int iImage);
+      //int add_icon_info(int iSize, SHFILEINFOW * pinfo16, SHFILEINFOW * pinfo48, ::color::color crBk, bool & bUsedImageList16, bool & bUsedImageList48, int iImage);
       void add_system_icon(int iSize, int iIcon, _get_file_image_ & getfileimage);
 
 
-      //i32 get_file_image(image_key key, const unichar * pcszExtra, ::color::color crBk);
+      //int get_file_image(image_key key, const unichar * pcszExtra, ::color::color crBk);
 
 
 
 
 
-      ///         virtual i32 get_extension_image(const ::string & strExtension, e_file_attribute eattribute, e_icon eicon, ::color::color crBk = 0) override;
+      ///         virtual int get_extension_image(const ::string & strExtension, e_file_attribute eattribute, e_icon eicon, ::color::color crBk = 0) override;
 
       void add_icon(int iSize, HICON hicon, _get_file_image_ & getfileimage);
 

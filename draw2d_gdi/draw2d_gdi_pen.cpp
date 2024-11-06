@@ -42,7 +42,7 @@ namespace draw2d_gdi
    }
 
 
-   bool pen::CreatePen(int nPenStyle, int nWidth, const LOGBRUSH* pLogBrush, int nStyleCount, const u32* lpStyle)
+   bool pen::CreatePen(int nPenStyle, int nWidth, const LOGBRUSH* pLogBrush, int nStyleCount, const unsigned int* lpStyle)
    {
 
       return Attach(::ExtCreatePen(nPenStyle, nWidth, pLogBrush, nStyleCount, (DWORD *) lpStyle));
@@ -79,7 +79,7 @@ namespace draw2d_gdi
 
    }
 
-   void pen::construct(int nPenStyle, int nWidth, const LOGBRUSH* pLogBrush, int nStyleCount, const u32* lpStyle)
+   void pen::construct(int nPenStyle, int nWidth, const LOGBRUSH* pLogBrush, int nStyleCount, const unsigned int* lpStyle)
    {
 
       if (!Attach(::ExtCreatePen(nPenStyle, nWidth, pLogBrush, nStyleCount, (DWORD *) lpStyle)))
@@ -121,13 +121,13 @@ namespace draw2d_gdi
       if(m_bProcess)
       {
 
-         CreatePen(PS_SOLID, (i32) m_dWidth, rgb(255, 255, 255));
+         CreatePen(PS_SOLID, (int) m_dWidth, rgb(255, 255, 255));
 
       }
       else if(m_epen == type_solid)
       {
 
-         CreatePen(PS_SOLID, (i32) m_dWidth, m_color.get_rgb());
+         CreatePen(PS_SOLID, (int) m_dWidth, m_color.get_rgb());
 
       }
 

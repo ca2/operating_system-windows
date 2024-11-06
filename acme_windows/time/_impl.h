@@ -37,7 +37,7 @@ void string_base < TYPE_CHAR >::FormatMessageV(const CHAR_TYPE * pszFormat, va_l
 
    CHAR_TYPE * pszTemp;
 
-   u32 dwResult = ::str().format_message(FORMAT_MESSAGE_FROM_STRING | FORMAT_MESSAGE_ALLOCATE_BUFFER, pszFormat, 0, 0, reinterpret_cast<CHAR_TYPE *>(&pszTemp), 0, &argList);
+   unsigned int dwResult = ::str().format_message(FORMAT_MESSAGE_FROM_STRING | FORMAT_MESSAGE_ALLOCATE_BUFFER, pszFormat, 0, 0, reinterpret_cast<CHAR_TYPE *>(&pszTemp), 0, &argList);
 
    if (dwResult == 0)
    {

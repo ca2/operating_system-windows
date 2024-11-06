@@ -47,7 +47,7 @@ namespace music
 
             bool IsPrepared();
             void Reset();
-            void Initialize(i32 iSize, buffer_array* pbuffera);
+            void Initialize(int iSize, buffer_array* pbuffera);
 
 
             ::e_status midiStreamOut(HMIDISTRM hmidiout);
@@ -88,7 +88,7 @@ namespace music
             virtual ~buffer_array();
 
             void Reset();
-            void Initialize(i32 iCount, i32 iSize, midi_callback_data* pcallbackdata);
+            void Initialize(int iCount, int iSize, midi_callback_data* pcallbackdata);
 
 
             ::e_status midiStreamOut(HMIDISTRM hmidiout);

@@ -44,8 +44,8 @@ namespace aura_windows
 
 
    HDDEDATA CALLBACK shell_open::DdeCallback(
-      u32 uType,
-      u32 uFmt,
+      unsigned int uType,
+      unsigned int uFmt,
       HCONV hconv,
       HDDEDATA hsz1,
       HDDEDATA hsz2,
@@ -97,7 +97,7 @@ namespace aura_windows
       case XTYP_EXECUTE:
       {
          // get the command string
-         u32 dwSize = DdeGetData(
+         unsigned int dwSize = DdeGetData(
             hdata,
             nullptr,
             0,

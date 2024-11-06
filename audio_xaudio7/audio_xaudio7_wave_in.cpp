@@ -37,7 +37,7 @@ namespace multimedia
          return true;
       }
 
-      i32 in::exit_thread()
+      int in::exit_thread()
       {
          m_eventExitInstance.SetEvent();
          return thread::exit_thread();
@@ -58,7 +58,7 @@ namespace multimedia
          return thread::pre_translate_message(pusermessage);
       }
 
-      void     in::in_open(i32 iBufferCount, i32 iBufferSampleCount)
+      void     in::in_open(int iBufferCount, int iBufferSampleCount)
       {
 
 //         if(m_hwavein != nullptr && m_estate != e_state_initial)
@@ -89,7 +89,7 @@ namespace multimedia
 //            audiowave->m_uiWaveInDevice,
 //            wave_format(),
 //            get_os_int(),
-//            (u32) 0,
+//            (unsigned int) 0,
 //            CALLBACK_THREAD))))
 //            goto Opened;
 //
@@ -99,8 +99,8 @@ namespace multimedia
 //            &m_hwavein,
 //            WAVE_MAPPER,
 //            wave_format(),
-//            (u32) get_os_int(),
-//            (u32) 0,
+//            (unsigned int) get_os_int(),
+//            (unsigned int) 0,
 //            CALLBACK_THREAD))))
 //            goto Opened;
 //         m_pwaveformat->nSamplesPerSec = 11025;
@@ -109,8 +109,8 @@ namespace multimedia
 //            &m_hwavein,
 //            WAVE_MAPPER,
 //            wave_format(),
-//            (u32) get_os_int(),
-//            (u32) 0,
+//            (unsigned int) get_os_int(),
+//            (unsigned int) 0,
 //            CALLBACK_THREAD))))
 //            goto Opened;
 //
@@ -133,12 +133,12 @@ namespace multimedia
 //         }
 //
 //Opened:
-//         u32 uiBufferSizeLog2;
-//         u32 uiBufferSize;
-//         u32 uiAnalysisSize;
-//         u32 uiAllocationSize;
-//         u32 uiInterestSize;
-//         u32 uiSkippedSamplesCount;
+//         unsigned int uiBufferSizeLog2;
+//         unsigned int uiBufferSize;
+//         unsigned int uiAnalysisSize;
+//         unsigned int uiAllocationSize;
+//         unsigned int uiInterestSize;
+//         unsigned int uiSkippedSamplesCount;
 //
 //         if(m_pwaveformat->nSamplesPerSec == 44100)
 //         {
@@ -181,9 +181,9 @@ namespace multimedia
 //            uiInterestSize,
 //            uiSkippedSamplesCount);
 //
-//         i32 i, iSize;
+//         int i, iSize;
 //
-//         iSize = (i32) in_get_buffer()->GetBufferCount();
+//         iSize = (int) in_get_buffer()->GetBufferCount();
 //
 //         for(i = 0; i < iSize; i++)
 //         {
@@ -228,9 +228,9 @@ namespace multimedia
 
          //mmr = in_reset();
 
-         //i32 i, iSize;
+         //int i, iSize;
 
-         //iSize = (i32) in_get_buffer()->GetBufferCount();
+         //iSize = (int) in_get_buffer()->GetBufferCount();
 
          //for(i = 0; i < iSize; i++)
          //{
@@ -331,7 +331,7 @@ namespace multimedia
       //   if(uMsg == WIM_DATA)
       //   {
       //      ASSERT(false);
-      //      /*      u32 msSampleTime = timeGetTime();
+      //      /*      unsigned int msSampleTime = timeGetTime();
       //      thread * pthread = (thread *) dwInstance;
       //      ASSERT(pthread != nullptr);
       //      LPWAVEHDR lpWaveHdr = (LPWAVEHDR) dwParam1;
@@ -421,13 +421,13 @@ namespace multimedia
          //
          //   m_iBuffer--;
          //
-         //   u32 msSampleTime = timeGetTime();
+         //   unsigned int msSampleTime = timeGetTime();
          //
          //   LPWAVEHDR lpwavehdr = (LPWAVEHDR) pusermessage->m_lparam.m_lparam;
 
-         //   in_get_buffer()->get_buffer((i32) lpwavehdr->dwUser)->OnMultimediaDone();
+         //   in_get_buffer()->get_buffer((int) lpwavehdr->dwUser)->OnMultimediaDone();
 
-         //   m_listenerset.in_data_proc(this, msSampleTime, (i32) lpwavehdr->dwUser);
+         //   m_listenerset.in_data_proc(this, msSampleTime, (int) lpwavehdr->dwUser);
 
          //   if(m_pencoder != nullptr)
          //   {
@@ -436,7 +436,7 @@ namespace multimedia
 
          //   if(!in_is_resetting() && in_is_recording())
          //   {
-         //      in_add_buffer((i32) lpwavehdr->dwUser);
+         //      in_add_buffer((int) lpwavehdr->dwUser);
          //   }
 
          //}
@@ -446,7 +446,7 @@ namespace multimedia
       }
 
 
-      void     in::in_add_buffer(i32 iBuffer)
+      void     in::in_add_buffer(int iBuffer)
       {
 
          //return in_add_buffer(wave_hdr(iBuffer));

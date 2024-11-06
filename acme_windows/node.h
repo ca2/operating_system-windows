@@ -158,12 +158,12 @@ namespace acme_windows
 
       void set_environment_variable(const ::scoped_string & scopedstrEnvironmentVariable, const ::scoped_string & scopedstrValue) override;
 
-      //virtual ::u32       get_file_attributes(const ::string & pFileName);
+      //virtual unsigned int       get_file_attributes(const ::string & pFileName);
       //virtual ::file::path       get_current_directory();
-      virtual ::i32              reg_query_value(HKEY hkey, const ::string & pszSubKey, string & str);
-      virtual  HICON             extract_icon(HINSTANCE hInst, const ::string & pszExeFileName, ::u32 nIconIndex);
+      virtual int              reg_query_value(HKEY hkey, const ::string & pszSubKey, string & str);
+      virtual  HICON             extract_icon(HINSTANCE hInst, const ::string & pszExeFileName, unsigned int nIconIndex);
       virtual  void              delete_file(const ::file::path & path);
-      //virtual  i32     get_menu_string(HMENU hMenu, ::u32 uDItem, string& str, ::u32 flags);
+      //virtual  int     get_menu_string(HMENU hMenu, unsigned int uDItem, string& str, unsigned int flags);
       //virtual  void        time_to_filetime(::matter* pobject, const ::earth::time& time, LPFILETIME pFileTime);
 
 
@@ -218,11 +218,11 @@ namespace acme_windows
       void flush_stdin() override;
 
       //void defer_initialize_callstack() override;
-      //string get_callstack(const scoped_string & strFormat, i32 iSkip, void * caller_address, int iCount) override;
+      //string get_callstack(const scoped_string & strFormat, int iSkip, void * caller_address, int iCount) override;
 
 
       ::pointer < ::acme::exclusive > _get_exclusive(::particle * pparticleContext, const ::string & strName, ::security_attributes * psecurityattributes = nullptr) override;
-      i32 get_current_process_affinity_order() override;
+      int get_current_process_affinity_order() override;
 
 
       void call_async(const ::string & pszPath, const ::string & pszParam, const ::string & pszDir, ::e_display edisplay, bool bPrivileged, unsigned int * puiPid = nullptr) override;
@@ -252,11 +252,11 @@ namespace acme_windows
       bool set_process_priority(::enum_priority epriority) override;
       ::string get_command_line() override;
 
-      i32 get_current_processor_index() override;
-      i32 get_current_process_maximum_affinity() override;
+      int get_current_processor_index() override;
+      int get_current_process_maximum_affinity() override;
 
-      //i32 get_current_process_affinity_order() override;
-      ::u64 translate_processor_affinity(::i32 i) override;
+      //int get_current_process_affinity_order() override;
+      ::u64 translate_processor_affinity(int i) override;
 
 
       void _node_file_dialog(::file::file_dialog * pdialog) override;
@@ -353,7 +353,7 @@ namespace acme_windows
       int command(const ::scoped_string& scopedstr, const trace_function& tracefunction) override;
 
       
-      //::i32 get_command_output(::string& strOutput, const ::scoped_string& scopedstr, const class ::time& timeOut) override;
+      //int get_command_output(::string& strOutput, const ::scoped_string& scopedstr, const class ::time& timeOut) override;
       ::file::path _get_power_shell_path() override;
 
       ::file::path _get_cmd_path() override;

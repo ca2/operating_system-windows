@@ -28,12 +28,12 @@
          void initialize(::particle * pparticle) override;
             
             
-         void set_new_device(u32 uiMixerId);
+         void set_new_device(unsigned int uiMixerId);
 
 
          virtual void on_message(::message::message * pmessage);
-         void OnMixerControlChange(HMIXER hMixer, u32 dwControlID);
-         void OnMixerLineChange(HMIXER hMixer, u32 dwLineID);
+         void OnMixerControlChange(HMIXER hMixer, unsigned int dwControlID);
+         void OnMixerLineChange(HMIXER hMixer, unsigned int dwLineID);
 
 
          static bool get_component_name(LPMIXERLINE pmxl, string & strComponent);

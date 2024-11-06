@@ -29,8 +29,8 @@
          ~source() override;
 
 
-         void     get_line_info(u32 dwSource, u32 dwDestination, u32 fdwInfo);
-         void     get_line_info(u32 dwSource, ::audio_mixer::destination * pdestination);
+         void     get_line_info(unsigned int dwSource, unsigned int dwDestination, unsigned int fdwInfo);
+         void     get_line_info(unsigned int dwSource, ::audio_mixer::destination * pdestination);
 
          virtual ::atom GetLineID() override;
 
@@ -49,7 +49,7 @@
 
          void OnMixerLineChange();
          //void OnArrayReallocation(void *pNewPointer);
-         //void     GetControl(u32 dwControlType, u32 dwControlFlags, ::audio_mixer::control ** ppControl);
+         //void     GetControl(unsigned int dwControlType, unsigned int dwControlFlags, ::audio_mixer::control ** ppControl);
          void     GetLineControls();
 
          inline bool HasV001Controls();

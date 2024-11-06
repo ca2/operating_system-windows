@@ -183,7 +183,7 @@ wparam MapLeftRightKeys(wparam vk, lparam lParam)
 
    wparam new_vk = vk;
 
-   ::u32 scancode = (lParam & 0x00ff0000) >> 16;
+   unsigned int scancode = (lParam & 0x00ff0000) >> 16;
 
    int extended = (lParam & 0x01000000) != 0;
 
@@ -209,7 +209,7 @@ wparam MapLeftRightKeys(wparam vk, lparam lParam)
 
 
 
-bool is_registered_windows_message(::u32 message)
+bool is_registered_windows_message(unsigned int message)
 {
 
    return message >= 0xc000 && message <= 0xffff;
@@ -217,7 +217,7 @@ bool is_registered_windows_message(::u32 message)
 }
 
 
-lresult CALLBACK WndProc(HWND hwnd, ::u32 message, wparam wparam, lparam lparam);
+lresult CALLBACK WndProc(HWND hwnd, unsigned int message, wparam wparam, lparam lparam);
 
 
 int g_iCol = 0;
@@ -525,7 +525,7 @@ namespace windowing_win32
 {
 
 
-wstring windowing::_windows_calc_icon_window_class(::user::interaction * puserinteraction, u32 dwDefaultStyle, const ::string & pszMatter)
+wstring windowing::_windows_calc_icon_window_class(::user::interaction * puserinteraction, unsigned int dwDefaultStyle, const ::string & pszMatter)
 {
 
    auto papplication = application();
@@ -607,7 +607,7 @@ wstring windowing::_windows_get_user_interaction_window_class(::user::interactio
 
 }
 
-bool windowing::_windows_register_with_icon(WNDCLASSEXW * puserinteractionclass, const unichar * pszClassName, ::u32 nIDIcon)
+bool windowing::_windows_register_with_icon(WNDCLASSEXW * puserinteractionclass, const unichar * pszClassName, unsigned int nIDIcon)
 {
 
    puserinteractionclass->lpszClassName = pszClassName;
@@ -622,7 +622,7 @@ bool windowing::_windows_register_with_icon(WNDCLASSEXW * puserinteractionclass,
 //CLASS_DECL_WINDOWING_WIN32 WNDPROC get_window_procedure();
 
 
-wstring windowing::_windows_register_window_class(::u32 nClassStyle, HCURSOR hCursor, HBRUSH hbrBackground, HICON hIcon)
+wstring windowing::_windows_register_window_class(unsigned int nClassStyle, HCURSOR hCursor, HBRUSH hbrBackground, HICON hIcon)
 {
 
    //auto papp = pobject->get_application();
@@ -779,13 +779,13 @@ namespace windowing_win32
       if (!::RegisterClassExW(puserinteractionclass))
       {
 
-         ::u32 dw = GetLastError();
+         unsigned int dw = GetLastError();
 
          return false;
 
       }
 
-      ::u32 dw = GetLastError();
+      unsigned int dw = GetLastError();
 
       bool bRet = true;
 

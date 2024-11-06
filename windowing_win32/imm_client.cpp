@@ -706,8 +706,8 @@ int imm_client::on_text_composition_message(int iMessage)
 
       //_001GetSel(iBeg, iEnd);
 
-      //i32 x;
-      //i32 iLine = SelToLineX(iEnd, x);
+      //int x;
+      //int iLine = SelToLineX(iEnd, x);
 
 
 

@@ -5,12 +5,12 @@
 
 
 
-//__STATIC bool CLASS_DECL_WINDOWING_WIN32 __modify_style(HWND hwnd, i32 nStyleOffset,
-//   u32 dwRemove, u32 dwAdd, ::u32 nFlags)
+//__STATIC bool CLASS_DECL_WINDOWING_WIN32 __modify_style(HWND hwnd, int nStyleOffset,
+//   unsigned int dwRemove, unsigned int dwAdd, unsigned int nFlags)
 //{
 //   ASSERT(oswindow != nullptr);
-//   u32 uStyle = ::GetWindowLong(oswindow, nStyleOffset);
-//   u32 dwNewStyle = (uStyle & ~dwRemove) | dwAdd;
+//   unsigned int uStyle = ::GetWindowLong(oswindow, nStyleOffset);
+//   unsigned int dwNewStyle = (uStyle & ~dwRemove) | dwAdd;
 //   if (uStyle == dwNewStyle)
 //      return false;
 //

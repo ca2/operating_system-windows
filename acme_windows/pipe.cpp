@@ -95,7 +95,7 @@ namespace acme_windows
    bool pipe::write(const ::string & psz)
    {
 
-      u32 dwLen = (u32)strlen(psz);
+      unsigned int dwLen = (unsigned int)strlen(psz);
 
       bool bSuccess = false;
 
@@ -113,7 +113,7 @@ namespace acme_windows
 
       string str;
 
-      const i32 BUFSIZE = 1024 * 8;
+      const int BUFSIZE = 1024 * 8;
 
       DWORD dwRead;
 
@@ -158,7 +158,7 @@ namespace acme_windows
 
       string str;
 
-      const i32 BUFSIZE = 1024 * 8;
+      const int BUFSIZE = 1024 * 8;
 
       DWORD dwRead;
 
@@ -218,8 +218,8 @@ namespace acme_windows
 
 
    void WINAPI pipe::read_complete(
-   u32 dwErrorCode,
-   u32 dwNumberOfBytesTransfered,
+   unsigned int dwErrorCode,
+   unsigned int dwNumberOfBytesTransfered,
    LPOVERLAPPED pOverlapped
 
    )
@@ -231,7 +231,7 @@ namespace acme_windows
 
       plap = plap->from(pOverlapped);
 
-      i32 iLimit = minimum(dwNumberOfBytesTransfered,1024u);
+      int iLimit = minimum(dwNumberOfBytesTransfered,1024u);
 
       plap->m_ppipe->m_pchBuf[iLimit] = '\0';
 

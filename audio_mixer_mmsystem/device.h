@@ -37,8 +37,8 @@
          void MapDlgCtrlIDToLineControls(::audio_mixer::source * pSource);
          void MapDlgCtrlIDToControls();
          void MapLineControls(::audio_mixer::source * pSource);
-         void OnMixerControlChange(u32 dwControlID);
-         void OnMixerLineChange(u32 dwLineID);
+         void OnMixerControlChange(unsigned int dwControlID);
+         void OnMixerLineChange(unsigned int dwLineID);
          void map_lines();
          void map_controls();
          
@@ -46,7 +46,7 @@
 
          void     initialize_destinations();
          void     initialize_capabilities();
-         void     open(u32 uiMixerId, UINT_PTR dwCallback, u32 dwInstance, u32 fdwOpen);
+         void     open(unsigned int uiMixerId, UINT_PTR dwCallback, unsigned int dwInstance, unsigned int fdwOpen);
 
 
       };

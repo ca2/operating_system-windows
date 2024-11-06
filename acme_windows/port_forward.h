@@ -46,7 +46,7 @@ namespace acme_windows
 			   return m_dwRef;
 		   }
 		
-		   ::u32		m_dwRef;
+		   unsigned int		m_dwRef;
 		   ::net::port_forward_change_callbacks*	m_pointer;
 	   };
 	
@@ -72,7 +72,7 @@ namespace acme_windows
 			   return m_dwRef;
 		   }
 		
-		   ::u32		m_dwRef;
+		   unsigned int		m_dwRef;
 		   ::net::port_forward_change_callbacks*	m_pointer;
 	   };
 	
@@ -106,11 +106,11 @@ namespace acme_windows
 	   HRESULT GetNextMapping( IEnumVARIANT* piEnumerator, port_map & mappingContainer );
 	   HRESULT SetChangeEventCallbackPointer(::net::port_forward_change_callbacks *pCallbacks);
 	
-	   static ::u32 ThreadForPortRetrieval( LPVOID pVoid );
-	   static ::u32 ThreadForDeviceInformationRetrieval( LPVOID pVoid );
-	   static ::u32 ThreadToEditMapping( LPVOID pVoid );
-	   static ::u32 ThreadToAddMapping( LPVOID pVoid );
-	   static ::u32 ThreadToDeleteMapping( LPVOID pVoid );
+	   static unsigned int ThreadForPortRetrieval( LPVOID pVoid );
+	   static unsigned int ThreadForDeviceInformationRetrieval( LPVOID pVoid );
+	   static unsigned int ThreadToEditMapping( LPVOID pVoid );
+	   static unsigned int ThreadToAddMapping( LPVOID pVoid );
+	   static unsigned int ThreadToDeleteMapping( LPVOID pVoid );
 	
 	
 	

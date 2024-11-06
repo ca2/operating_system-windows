@@ -135,7 +135,7 @@ namespace aura_windows
    }
 
 
-   void node::set_console_colors(::u32 dwScreenColors, ::u32 dwPopupColors, ::u32 dwWindowAlpha)
+   void node::set_console_colors(unsigned int dwScreenColors, unsigned int dwPopupColors, unsigned int dwWindowAlpha)
    {
 
       ::acme_windows::registry::key key(HKEY_CURRENT_USER, "Console", true);
@@ -161,7 +161,7 @@ namespace aura_windows
 
          DYNAMIC_TIME_ZONE_INFORMATION i = {};
 
-         ::u32 dw = GetDynamicTimeZoneInformation(&i);
+         unsigned int dw = GetDynamicTimeZoneInformation(&i);
 
          if (dw == TIME_ZONE_ID_STANDARD)
          {
@@ -310,7 +310,7 @@ namespace aura_windows
       set["privileged"] = true;
 
 
-      ::i32 iExitCode = 0;
+      int iExitCode = 0;
 
       call_sync(path, strParam, path.folder(), ::e_display_none, 3_min, set, &iExitCode);
 

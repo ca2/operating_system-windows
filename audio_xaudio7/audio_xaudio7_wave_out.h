@@ -138,7 +138,7 @@ namespace multimedia
 
             run_step_thread(out * pout);
 
-            virtual i32 run();
+            virtual int run();
 
          };
 
@@ -167,8 +167,8 @@ namespace multimedia
          virtual void out_buffer_ready(int iBuffer);
          //virtual void out_buffer_ready(LPWAVEHDR lpwavehdr);
 
-         virtual void     out_open(::thread * pthreadCallback, i32 iBufferCount, i32 iBufferSampleCount);
-         virtual void     out_open_ex(::thread * pthreadCallback, i32 iBufferCount, i32 iBufferSampleCount, u32 uiSamplesPerSec, u32 uiChannelCount, u32 uiBitsPerSample);
+         virtual void     out_open(::thread * pthreadCallback, int iBufferCount, int iBufferSampleCount);
+         virtual void     out_open_ex(::thread * pthreadCallback, int iBufferCount, int iBufferSampleCount, unsigned int uiSamplesPerSec, unsigned int uiChannelCount, unsigned int uiBitsPerSample);
          virtual void     out_stop();
          virtual void     out_close();
          virtual void     out_pause();
@@ -181,9 +181,9 @@ namespace multimedia
          //virtual void out_free(LPWAVEHDR lpwavehdr);
 
          virtual bool initialize_thread() override;
-         virtual i32 exit_instance();
+         virtual int exit_instance();
 
-         virtual i32 run();
+         virtual int run();
 
          //DECLARE_MESSAGE_HANDLER(OnMultimediaOpen);
          //DECLARE_MESSAGE_HANDLER(OnMultimediaDone);

@@ -24,21 +24,21 @@ struct extract_resource_icon
 
 typedef struct
 {
-   ::u8        bWidth;          // Width, in pixels, of the image
-   ::u8        bHeight;         // Height, in pixels, of the image
-   ::u8        bColorCount;     // Number of colors in image (0 if >=8bpp)
-   ::u8        bReserved;       // Reserved ( must be 0)
-   ::u16        wPlanes;         // Color Planes
-   ::u16        wBitCount;       // Bits per pixel
-   ::u32       dwBytesInRes;    // How many bytes in this resource?
-   ::u32       dwImageOffset;   // Where in the file is this image?
+   unsigned char        bWidth;          // Width, in pixels, of the image
+   unsigned char        bHeight;         // Height, in pixels, of the image
+   unsigned char        bColorCount;     // Number of colors in image (0 if >=8bpp)
+   unsigned char        bReserved;       // Reserved ( must be 0)
+   unsigned short        wPlanes;         // Color Planes
+   unsigned short        wBitCount;       // Bits per pixel
+   unsigned int       dwBytesInRes;    // How many bytes in this resource?
+   unsigned int       dwImageOffset;   // Where in the file is this image?
 } ICONDIRENTRY, * LPICONDIRENTRY;
 
 typedef struct
 {
-   ::u16           idReserved;   // Reserved (must be 0)
-   ::u16           idType;       // Resource Type (1 for icons)
-   ::u16           idCount;      // How many images?
+   unsigned short           idReserved;   // Reserved (must be 0)
+   unsigned short           idType;       // Resource Type (1 for icons)
+   unsigned short           idCount;      // How many images?
    ICONDIRENTRY   idEntries[1]; // An entry for each image (idCount of 'em)
 } ICONDIR, * LPICONDIR;
 
@@ -46,22 +46,22 @@ typedef struct
 {
    BITMAPINFOHEADER   icHeader;      // DIB header
    RGBQUAD         icColors[1];   // Color table
-   ::u8            icXOR[1];      // DIB bits for XOR mask
-   ::u8            icAND[1];      // DIB bits for AND mask
+   unsigned char            icXOR[1];      // DIB bits for XOR mask
+   unsigned char            icAND[1];      // DIB bits for AND mask
 } ICONIMAGE, * LPICONIMAGE;
 
 #pragma pack( push )
 #pragma pack( 2 )
 typedef struct
 {
-   ::u8   bWidth;               // Width, in pixels, of the image
-   ::u8   bHeight;              // Height, in pixels, of the image
-   ::u8   bColorCount;          // Number of colors in image (0 if >=8bpp)
-   ::u8   bReserved;            // Reserved
-   ::u16   wPlanes;              // Color Planes
-   ::u16   wBitCount;            // Bits per pixel
-   ::u32   dwBytesInRes;         // how many bytes in this resource?
-   ::u16   nID;                  // the ID
+   unsigned char   bWidth;               // Width, in pixels, of the image
+   unsigned char   bHeight;              // Height, in pixels, of the image
+   unsigned char   bColorCount;          // Number of colors in image (0 if >=8bpp)
+   unsigned char   bReserved;            // Reserved
+   unsigned short   wPlanes;              // Color Planes
+   unsigned short   wBitCount;            // Bits per pixel
+   unsigned int   dwBytesInRes;         // how many bytes in this resource?
+   unsigned short   nID;                  // the ID
 } GRPICONDIRENTRY, * LPGRPICONDIRENTRY;
 #pragma pack( pop )
 // #pragmas are used here to insure that the structure's
@@ -70,9 +70,9 @@ typedef struct
 #pragma pack( 2 )
 typedef struct
 {
-   ::u16            idReserved;   // Reserved (must be 0)
-   ::u16            idType;       // Resource type (1 for icons)
-   ::u16            idCount;      // How many images?
+   unsigned short            idReserved;   // Reserved (must be 0)
+   unsigned short            idType;       // Resource type (1 for icons)
+   unsigned short            idCount;      // How many images?
    GRPICONDIRENTRY   idEntries[1]; // The entries for each image
 } GRPICONDIR, * LPGRPICONDIR;
 #pragma pack( pop )
@@ -282,7 +282,7 @@ retry:
 
                e->dwBytesInRes,
                true,
-               0x00030000,//::u32 dwVersion,
+               0x00030000,//unsigned int dwVersion,
                e->bWidth,
                e->bHeight,
                0);
@@ -339,7 +339,7 @@ retry:
 
             e->dwBytesInRes,
             true,
-            0x00030000,//::u32 dwVersion,
+            0x00030000,//unsigned int dwVersion,
             e->bWidth,
             e->bHeight,
             0);
@@ -375,7 +375,7 @@ retry:
 
             e->dwBytesInRes,
             true,
-            0x00030000,//::u32 dwVersion,
+            0x00030000,//unsigned int dwVersion,
             e->bWidth,
             e->bHeight,
             0);
@@ -409,7 +409,7 @@ retry:
 
             e->dwBytesInRes,
             true,
-            0x00030000,//::u32 dwVersion,
+            0x00030000,//unsigned int dwVersion,
             e->bWidth,
             e->bHeight,
             0);
@@ -444,7 +444,7 @@ retry:
 
             e->dwBytesInRes,
             true,
-            0x00030000,//::u32 dwVersion,
+            0x00030000,//unsigned int dwVersion,
             e->bWidth,
             e->bHeight,
             0);
@@ -479,7 +479,7 @@ retry:
 
             e->dwBytesInRes,
             true,
-            0x00030000,//::u32 dwVersion,
+            0x00030000,//unsigned int dwVersion,
             e->bWidth,
             e->bHeight,
             0);
@@ -514,7 +514,7 @@ retry:
 
             e->dwBytesInRes,
             true,
-            0x00030000,//::u32 dwVersion,
+            0x00030000,//unsigned int dwVersion,
             e->bWidth,
             e->bHeight,
             0);
@@ -549,7 +549,7 @@ retry:
 
             e->dwBytesInRes,
             true,
-            0x00030000,//::u32 dwVersion,
+            0x00030000,//unsigned int dwVersion,
             e->bWidth,
             e->bHeight,
             0);
@@ -584,7 +584,7 @@ retry:
 
             e->dwBytesInRes,
             true,
-            0x00030000,//::u32 dwVersion,
+            0x00030000,//unsigned int dwVersion,
             e->bWidth,
             e->bHeight,
             0);
@@ -619,7 +619,7 @@ retry:
 
             e->dwBytesInRes,
             true,
-            0x00030000,//::u32 dwVersion,
+            0x00030000,//unsigned int dwVersion,
             e->bWidth,
             e->bHeight,
             0);

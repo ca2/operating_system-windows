@@ -24,7 +24,7 @@ CLASS_DECL_ACME bool is_verbose();
 
 
 
-CLASS_DECL_ACME i32 __cdecl _memory_type(const void * p);
+CLASS_DECL_ACME int __cdecl _memory_type(const void * p);
 
 
 string key_to_char(wparam wparam, lparam lparam)
@@ -34,11 +34,11 @@ string key_to_char(wparam wparam, lparam lparam)
 
    unichar wsz[32];
 
-   ::u8 baState[256];
+   unsigned char baState[256];
 
    for(int i = 0; i < 256; i++)
    {
-      baState[i] = (::u8) GetAsyncKeyState(i);
+      baState[i] = (unsigned char) GetAsyncKeyState(i);
    }
 
    if((GetAsyncKeyState(VK_SHIFT) & I32_MINIMUM) != 0)
@@ -47,7 +47,7 @@ string key_to_char(wparam wparam, lparam lparam)
    }
 
 
-   i32 iRet = ToUnicodeEx((::u32) wparam, (::u32) lparam, baState, wsz, 32, 0, GetKeyboardLayout(GetCurrentThreadId()));
+   int iRet = ToUnicodeEx((unsigned int) wparam, (unsigned int) lparam, baState, wsz, 32, 0, GetKeyboardLayout(GetCurrentThreadId()));
 
 
    if(iRet > 0)
@@ -93,7 +93,7 @@ string key_to_char(wparam wparam, lparam lparam)
 }
 
 
-//string get_last_error_message(u32 dwError)
+//string get_last_error_message(unsigned int dwError)
 //{
 //
 //   LPWSTR pBuffer;
@@ -156,9 +156,9 @@ string key_to_char(wparam wparam, lparam lparam)
 // (which means Windows NT, 2000, XP).
 int GetVersion_ex1()
 {
-   ::u32    dwVersion = GetVersion();
+   unsigned int    dwVersion = GetVersion();
    // Get major and minor version numbers of Windows
-   ::u16 loword = LOWORD(dwVersion);
+   unsigned short loword = LOWORD(dwVersion);
    int lowbyte = lower_u8(loword);
    int hibyte = HIBYTE(loword);
 
@@ -361,21 +361,21 @@ int_bool is_windows_native_unicode()
    if (bNativeUnicode == -1)
    {
 
-      ::u32 dwVersion = GetVersion();
+      unsigned int dwVersion = GetVersion();
 
       // get the Windows version.
 
-      ::u32 dwWindowsMajorVersion = (::u32)(lower_u8(LOWORD(dwVersion)));
-      ::u32 dwWindowsMinorVersion = (::u32)(HIBYTE(LOWORD(dwVersion)));
+      unsigned int dwWindowsMajorVersion = (unsigned int)(lower_u8(LOWORD(dwVersion)));
+      unsigned int dwWindowsMinorVersion = (unsigned int)(HIBYTE(LOWORD(dwVersion)));
 
       // get the build number.
 
-      ::u32 dwBuild;
+      unsigned int dwBuild;
 
       if (dwVersion < I32_MINIMUM)              // Windows NT
-         dwBuild = (::u32)(HIWORD(dwVersion));
+         dwBuild = (unsigned int)(HIWORD(dwVersion));
       else if (dwWindowsMajorVersion < 4)      // Win32s
-         dwBuild = (::u32)(HIWORD(dwVersion) & ~0x8000);
+         dwBuild = (unsigned int)(HIWORD(dwVersion) & ~0x8000);
       else                                     // Windows Me/98/95
          dwBuild = 0;
 
@@ -631,7 +631,7 @@ namespace windows
                   m_hwnd,
                   wstring(m_strMessage),
                   wstring(m_strTitle),
-                  (i32)m_emessagebox.m_eenum);
+                  (int)m_emessagebox.m_eenum);
 
          }
 

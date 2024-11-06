@@ -19,7 +19,7 @@ namespace acme_windows
 
       }
 
-      // Variable strings are separated by NULL ::u8, and the block is terminated by a NULL ::u8.
+      // Variable strings are separated by NULL unsigned char, and the block is terminated by a NULL unsigned char.
 
       for (auto lpszVariable = (LPWSTR)lpvEnv; *lpszVariable; lpszVariable++)
       {

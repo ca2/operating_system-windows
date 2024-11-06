@@ -51,7 +51,7 @@ namespace apex_windows
 
       virtual ::color::color get_default_color(::u64 u);
 
-      virtual void set_console_colors(::u32 dwScreenColors, ::u32 dwPopupColors, ::u32 dwWindowAlpha);
+      virtual void set_console_colors(unsigned int dwScreenColors, unsigned int dwPopupColors, unsigned int dwWindowAlpha);
 
       virtual double get_time_zone();
 
@@ -84,13 +84,13 @@ namespace apex_windows
       //virtual bool set_last_run_application_path(string strAppId) override;
 
 
-      //virtual ::u32       get_file_attributes(const ::string & pFileName);
-      virtual ::u32       get_current_directory(string& str);
-      virtual ::u32       get_temp_path(string& str);
-      virtual ::i32        reg_query_value(HKEY hkey, const ::string& pszSubKey, string& str);
-      virtual  HICON       extract_icon(HINSTANCE hInst, const ::string& pszExeFileName, ::u32 nIconIndex);
+      //virtual unsigned int       get_file_attributes(const ::string & pFileName);
+      virtual unsigned int       get_current_directory(string& str);
+      virtual unsigned int       get_temp_path(string& str);
+      virtual int        reg_query_value(HKEY hkey, const ::string& pszSubKey, string& str);
+      virtual  HICON       extract_icon(HINSTANCE hInst, const ::string& pszExeFileName, unsigned int nIconIndex);
       virtual  void        delete_file(const ::string& pFileName);
-      // virtual  i32     get_menu_string(HMENU hMenu, ::u32 uDItem, string& str, ::u32 flags);
+      // virtual  int     get_menu_string(HMENU hMenu, unsigned int uDItem, string& str, unsigned int flags);
       //virtual  void        time_to_filetime(::matter* pobject, const ::earth::time& time, LPFILETIME pFileTime);
 
       virtual string get_version();
@@ -104,7 +104,7 @@ namespace apex_windows
       void on_start_application(::apex::application * papplication) override;
 
 
-      virtual error_code _windows_create_link(const ::wide_character* pszPathObj, const ::wide_character* pszPathLink, const ::wide_character* pszDesc, const ::wide_character* pszIconPath, ::i32 iIcon);
+      virtual error_code _windows_create_link(const ::wide_character* pszPathObj, const ::wide_character* pszPathLink, const ::wide_character* pszDesc, const ::wide_character* pszIconPath, int iIcon);
 
 
       void on_create_app_shortcut(::platform::application* papplication) override;
@@ -192,7 +192,7 @@ namespace apex_windows
       bool is_alias(const ::file::path& path) override;
 
 
-      void raise_exception(u32 dwExceptionCode, u32 dwExceptionFlags);
+      void raise_exception(unsigned int dwExceptionCode, unsigned int dwExceptionFlags);
 
       bool is_remote_session() override;
 

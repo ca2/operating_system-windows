@@ -70,7 +70,7 @@ namespace acme_windows
 
    // maximum mumber of lines the output console should have
 
-   static const ::u16 MAX_CONSOLE_LINES = 500;
+   static const unsigned short MAX_CONSOLE_LINES = 500;
 
    void console::redirect_io()
    {

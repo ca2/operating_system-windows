@@ -16,7 +16,7 @@ namespace acme_windows
    public:
 
 
-      ::u32                         m_dwLastError;
+      unsigned int                         m_dwLastError;
       bool                          m_bResourceException;
       ::pointer < ::mutex >         m_pmutex;
 

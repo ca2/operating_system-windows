@@ -58,7 +58,7 @@ namespace acme_windows
    }
 
 
-   bool file_find::find_file(const ::string & strNameParam /* = nullptr */, ::u32 dwUnused /* = 0 */)
+   bool file_find::find_file(const ::string & strNameParam /* = nullptr */, unsigned int dwUnused /* = 0 */)
    {
 
       close();

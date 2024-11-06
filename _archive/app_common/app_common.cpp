@@ -2,12 +2,12 @@
 #include "aura/node/windows/windows.h"
 
 
-CLASS_DECL_AURA i32 __win_main(::pointer<::aura::system>psystem,::windows::command * pmaininitdata);
+CLASS_DECL_AURA int __win_main(::pointer<::aura::system>psystem,::windows::command * pmaininitdata);
 
 typedef bool DEFER_INIT();
 typedef DEFER_INIT * PFN_DEFER_INIT;
 
-extern "C" i32 app_common_main(HINSTANCE hinstance, HINSTANCE hPrevInstance, LPTSTR lpCmdLine, i32 nCmdShow, app_core & appcore)
+extern "C" int app_common_main(HINSTANCE hinstance, HINSTANCE hPrevInstance, LPTSTR lpCmdLine, int nCmdShow, app_core & appcore)
 {
 
    //MessageBox(nullptr, lpCmdLine, "msg", 0);
@@ -79,7 +79,7 @@ extern "C" i32 app_common_main(HINSTANCE hinstance, HINSTANCE hPrevInstance, LPT
    pmaininitdata->m_nCmdShow                    = nCmdShow;
 
 
-   i32 nReturnCode                          = __win_main(psystem, pmaininitdata);
+   int nReturnCode                          = __win_main(psystem, pmaininitdata);
 
    appcore.m_dwAfterApplicationFirstRequest     = psystem->m_dwAfterApplicationFirstRequest;
 

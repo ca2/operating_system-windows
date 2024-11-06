@@ -1203,7 +1203,7 @@ namespace draw2d_gdi
    }
 
 
-   bool graphics::PatBlt(int x, int y, int nWidth, int nHeight, u32 dwRop)
+   bool graphics::PatBlt(int x, int y, int nWidth, int nHeight, unsigned int dwRop)
    {
 
       ASSERT(get_handle1() != nullptr);
@@ -1213,15 +1213,15 @@ namespace draw2d_gdi
    }
 
 
-   bool graphics::draw(const ::rectangle_i32 & rectangle, ::draw2d::graphics * pgraphicsSrc, const ::point_i32 & point, u32 dwRop)
+   bool graphics::draw(const ::rectangle_i32 & rectangle, ::draw2d::graphics * pgraphicsSrc, const ::point_i32 & point, unsigned int dwRop)
    {
 
-      i32 x = rectangle.left();
-      i32 y = rectangle.top();
-      i32 nWidth = ::width(rectangle);
-      i32 nHeight = ::height(rectangle);
-      i32 xSrc = point.x();
-      i32 ySrc = point.y();
+      int x = rectangle.left();
+      int y = rectangle.top();
+      int nWidth = ::width(rectangle);
+      int nHeight = ::height(rectangle);
+      int xSrc = point.x();
+      int ySrc = point.y();
 
       synchronous_lock ml(synchronization());
 
@@ -1307,14 +1307,14 @@ namespace draw2d_gdi
             bf.AlphaFormat = AC_SRC_ALPHA;
             /*
             ::color::color * pimage32 = GDI_GRAPHICS(pgraphicsSrc)->m_pimage->m_pcolorref;
-            i32 cx = GDI_GRAPHICS(pgraphicsSrc)->m_pimage->cx;
-            i32 cy = GDI_GRAPHICS(pgraphicsSrc)->m_pimage->cy;
-            i32 scan = GDI_GRAPHICS(pgraphicsSrc)->m_pimage->scan;
+            int cx = GDI_GRAPHICS(pgraphicsSrc)->m_pimage->cx;
+            int cy = GDI_GRAPHICS(pgraphicsSrc)->m_pimage->cy;
+            int scan = GDI_GRAPHICS(pgraphicsSrc)->m_pimage->scan;
 
             ::color::color * pimage321 = m_pimage->m_pcolorref;
-            i32 cx1 = m_pimage->cx;
-            i32 cy1 = m_pimage->cy;
-            i32 scan1 = m_pimage->scan;
+            int cx1 = m_pimage->cx;
+            int cy1 = m_pimage->cy;
+            int scan1 = m_pimage->scan;
 
             ::point_i32 point = GetViewportOrg();
             x += point.x();
@@ -1325,8 +1325,8 @@ namespace draw2d_gdi
 
             for(int i = 0; i < nHeight; i++)
             {
-            ::u8 * p = &((::u8 *) pimage32)[scan * (i + ySrc) + xSrc * sizeof(::color::color)];
-            ::u8 * p1 = &((::u8 *) pimage321)[scan1 * (i + y) + x * sizeof(::color::color)];
+            unsigned char * p = &((unsigned char *) pimage32)[scan * (i + ySrc) + xSrc * sizeof(::color::color)];
+            unsigned char * p1 = &((unsigned char *) pimage321)[scan1 * (i + y) + x * sizeof(::color::color)];
             for(int j = 0; j < nWidth; j++)
             {
             p1[0] = ((p[0] * p[3]) + ((255 - p[3]) * p1[0]))/ 255;
@@ -1357,13 +1357,13 @@ namespace draw2d_gdi
 
             /*      i64 iArea = pimage->area();
 
-            ::u8 * pimage32 = (::u8 *) pimage->get_data();
+            unsigned char * pimage32 = (unsigned char *) pimage->get_data();
 
             GdiFlush();
 
             for(int y = 0; y < pimage->cy; y++)
             {
-            ::u8 * p = &pimage32[pimage->scan * y];
+            unsigned char * p = &pimage32[pimage->scan * y];
             for(int x = 0; x < pimage->cx; x++)
             {
             p[0] = (p[0] * p[3] / 255);
@@ -1379,7 +1379,7 @@ namespace draw2d_gdi
 
             /*for(int y = 0; y < nHeight; y++)
             {
-            ::u8 * p = &((::u8 *) pimage32)[scan * (y + ySrc) + xSrc * sizeof(::color::color)];
+            unsigned char * p = &((unsigned char *) pimage32)[scan * (y + ySrc) + xSrc * sizeof(::color::color)];
             for(int x = 0; x < nWidth; x++)
             {
             if(p[3] == 0)
@@ -1400,7 +1400,7 @@ namespace draw2d_gdi
 
             /*            for(int i = 0; i < nHeight; i++)
             {
-            ::u8 * p1 = &((::u8 *) pimage321)[scan1 * (i + y) + x * sizeof(::color::color)];
+            unsigned char * p1 = &((unsigned char *) pimage321)[scan1 * (i + y) + x * sizeof(::color::color)];
             for(int j = 0; j < nWidth;jx++)
             {
             if(p1[3] == 0)
@@ -1439,7 +1439,7 @@ namespace draw2d_gdi
 
 
 
-   bool graphics::StretchBlt(double x, double y, double nWidth, double nHeight, ::draw2d::graphics * pgraphicsSrc, int xSrc, int ySrc, int nSrcWidth, int nSrcHeight, u32 dwRop)
+   bool graphics::StretchBlt(double x, double y, double nWidth, double nHeight, ::draw2d::graphics * pgraphicsSrc, int xSrc, int ySrc, int nSrcWidth, int nSrcHeight, unsigned int dwRop)
    {
 
       synchronous_lock ml(synchronization());
@@ -1699,26 +1699,26 @@ namespace draw2d_gdi
    }
 
 
-   ::size_i32 graphics::TabbedTextOut(int x, int y, const ::string & lpszString, strsize nCount, ::collection::count nTabPositions, LPINT lpnTabStopPositions, i32 nTabOrigin)
+   ::size_i32 graphics::TabbedTextOut(int x, int y, const ::string & lpszString, strsize nCount, ::collection::count nTabPositions, LPINT lpnTabStopPositions, int nTabOrigin)
    {
 
       ASSERT(get_handle1() != nullptr);
 
       wstring wstr(lpszString);
 
-      return (u32) ::TabbedTextOutW(get_handle1(), x, y, wstr,wstr.get_length(), (int) nTabPositions, lpnTabStopPositions, nTabOrigin);
+      return (unsigned int) ::TabbedTextOutW(get_handle1(), x, y, wstr,wstr.get_length(), (int) nTabPositions, lpnTabStopPositions, nTabOrigin);
 
    }
 
 
-   ::size_i32 graphics::TabbedTextOut(int x, int y, const ::string & str, ::collection::count nTabPositions, LPINT lpnTabStopPositions, i32 nTabOrigin)
+   ::size_i32 graphics::TabbedTextOut(int x, int y, const ::string & str, ::collection::count nTabPositions, LPINT lpnTabStopPositions, int nTabOrigin)
    {
 
       ASSERT(get_handle1() != nullptr);
 
       wstring wstr(str);
 
-      return (u32) ::TabbedTextOutW(get_handle1(), x, y, wstr, (int)wstr.get_length(), (int) nTabPositions, lpnTabStopPositions, nTabOrigin);
+      return (unsigned int) ::TabbedTextOutW(get_handle1(), x, y, wstr, (int)wstr.get_length(), (int) nTabPositions, lpnTabStopPositions, nTabOrigin);
 
    }
 
@@ -1763,7 +1763,7 @@ namespace draw2d_gdi
       ASSERT(get_handle2() != nullptr);
       wstring wstr(string(lpszString, nCount));
 
-      return (u32) ::GetTabbedTextExtent(get_handle2(), wstr, (int)wstr.get_length() , (int)nTabPositions, lpnTabStopPositions);
+      return (unsigned int) ::GetTabbedTextExtent(get_handle2(), wstr, (int)wstr.get_length() , (int)nTabPositions, lpnTabStopPositions);
 
    }
 
@@ -1775,7 +1775,7 @@ namespace draw2d_gdi
 
       wstring wstr(str);
 
-      return (u32) ::GetTabbedTextExtentW(get_handle2(), wstr, (int)wstr.get_length(), (int) nTabPositions, lpnTabStopPositions);
+      return (unsigned int) ::GetTabbedTextExtentW(get_handle2(), wstr, (int)wstr.get_length(), (int) nTabPositions, lpnTabStopPositions);
 
    }
 
@@ -1787,7 +1787,7 @@ namespace draw2d_gdi
 
       wstring wstr(string(lpszString, nCount));
 
-      return (u32) ::GetTabbedTextExtent(get_handle1(), wstr, (int) wstr.get_length(), (int) nTabPositions, lpnTabStopPositions);
+      return (unsigned int) ::GetTabbedTextExtent(get_handle1(), wstr, (int) wstr.get_length(), (int) nTabPositions, lpnTabStopPositions);
 
    }
 
@@ -1799,7 +1799,7 @@ namespace draw2d_gdi
 
       wstring wstr(str);
 
-      return (u32) ::GetTabbedTextExtent(get_handle1(), wstr, (int)wstr.get_length(), (int) nTabPositions, lpnTabStopPositions);
+      return (unsigned int) ::GetTabbedTextExtent(get_handle1(), wstr, (int)wstr.get_length(), (int) nTabPositions, lpnTabStopPositions);
 
    }
 
@@ -1950,7 +1950,7 @@ namespace draw2d_gdi
    }
 
 
-   u32 graphics::GetFontLanguageInfo()
+   unsigned int graphics::GetFontLanguageInfo()
    {
 
       ASSERT(get_handle1() != nullptr);
@@ -1961,7 +1961,7 @@ namespace draw2d_gdi
 
 
 
-   u32 graphics::GetCharacterPlacement(const ::string & lpString, strsize nCount, strsize nMaxExtent, LPGCP_RESULTS lpResults, u32 dwFlags)
+   unsigned int graphics::GetCharacterPlacement(const ::string & lpString, strsize nCount, strsize nMaxExtent, LPGCP_RESULTS lpResults, unsigned int dwFlags)
    {
 
       ASSERT(get_handle1() != nullptr);
@@ -1973,7 +1973,7 @@ namespace draw2d_gdi
    }
 
 
-   u32 graphics::GetCharacterPlacement(string & str, strsize nMaxExtent, LPGCP_RESULTS lpResults, u32 dwFlags)
+   unsigned int graphics::GetCharacterPlacement(string & str, strsize nMaxExtent, LPGCP_RESULTS lpResults, unsigned int dwFlags)
    {
 
       ASSERT(get_handle1() != nullptr);
@@ -2051,8 +2051,8 @@ namespace draw2d_gdi
    }
 
 
-   u32 graphics::GetFontData(u32 dwTable, u32 dwOffset, LPVOID lpData,
-                                  u32 cbData)
+   unsigned int graphics::GetFontData(unsigned int dwTable, unsigned int dwOffset, LPVOID lpData,
+                                  unsigned int cbData)
    {
       ASSERT(get_handle2() != nullptr); return ::GetFontData(get_handle2(), dwTable, dwOffset, lpData, cbData);
 
@@ -2066,8 +2066,8 @@ namespace draw2d_gdi
    }
 
 
-   u32 graphics::GetGlyphOutline(UINT nChar, const ::e_align & ealign, const ::e_draw_text & edrawtext, LPGLYPHMETRICS lpgm,
-                                      u32 cbBuffer, LPVOID lpBuffer, const MAT2* lpmat2)
+   unsigned int graphics::GetGlyphOutline(UINT nChar, const ::e_align & ealign, const ::e_draw_text & edrawtext, LPGLYPHMETRICS lpgm,
+                                      unsigned int cbBuffer, LPVOID lpBuffer, const MAT2* lpmat2)
    {
       ASSERT(get_handle2() != nullptr); return ::GetGlyphOutline(get_handle2(), nChar, nFormat,
             lpgm, cbBuffer, lpBuffer, lpmat2);
@@ -2139,7 +2139,7 @@ namespace draw2d_gdi
 
 
    bool graphics::MaskBlt(int x, int y, int nWidth, int nHeight, ::draw2d::graphics * pgraphicsSrc,
-                          int xSrc, int ySrc, ::draw2d::bitmap& maskBitmap, int xMask, int yMask, u32 dwRop)
+                          int xSrc, int ySrc, ::draw2d::bitmap& maskBitmap, int xMask, int yMask, unsigned int dwRop)
    {
 
       ASSERT(get_handle1() != nullptr);
@@ -2696,7 +2696,7 @@ namespace draw2d_gdi
    }
 
 
-   int graphics::GetPath(LPPOINT lpPoints, ::u8 * lpTypes, ::collection::count nCount)
+   int graphics::GetPath(LPPOINT lpPoints, unsigned char * lpTypes, ::collection::count nCount)
    {
 
       ASSERT(get_handle1() != nullptr);
@@ -2795,10 +2795,10 @@ namespace draw2d_gdi
 
          ::rectangle_i32 rectangle(rectangleBound);
 
-         rectangle.left()   -= (i32) floor(pen.m_dWidth / 2.0);
-         rectangle.right()  += (i32) ceil(pen.m_dWidth / 2.0);
-         rectangle.top()    -= (i32) floor(pen.m_dWidth / 2.0);
-         rectangle.bottom() += (i32) ceil(pen.m_dWidth / 2.0);
+         rectangle.left()   -= (int) floor(pen.m_dWidth / 2.0);
+         rectangle.right()  += (int) ceil(pen.m_dWidth / 2.0);
+         rectangle.top()    -= (int) floor(pen.m_dWidth / 2.0);
+         rectangle.bottom() += (int) ceil(pen.m_dWidth / 2.0);
 
          BLENDFUNCTION bf;
          bf.BlendOp     = AC_SRC_OVER;
@@ -2872,10 +2872,10 @@ namespace draw2d_gdi
 
          ::rectangle_i32 rectangle(rectangleBound);
 
-         rectangle.left()   -= (i32) floor(pen.m_dWidth / 2.0);
-         rectangle.right()  += (i32) floor(pen.m_dWidth / 2.0);
-         rectangle.top()    -= (i32) floor(pen.m_dWidth / 2.0);
-         rectangle.bottom() += (i32) floor(pen.m_dWidth / 2.0);
+         rectangle.left()   -= (int) floor(pen.m_dWidth / 2.0);
+         rectangle.right()  += (int) floor(pen.m_dWidth / 2.0);
+         rectangle.top()    -= (int) floor(pen.m_dWidth / 2.0);
+         rectangle.bottom() += (int) floor(pen.m_dWidth / 2.0);
 
          BLENDFUNCTION bf;
          bf.BlendOp     = AC_SRC_OVER;
@@ -2893,7 +2893,7 @@ namespace draw2d_gdi
 
             pimage->g()->SelectObject(&brush);
 
-            GDI_GRAPHICS(pimage->g())->SetViewportOrg(-rectangle.top_left() + ::size_i32((i32) floor(pen.m_dWidth / 2.0), (i32) floor(pen.m_dWidth / 2.0)));
+            GDI_GRAPHICS(pimage->g())->SetViewportOrg(-rectangle.top_left() + ::size_i32((int) floor(pen.m_dWidth / 2.0), (int) floor(pen.m_dWidth / 2.0)));
 
             (GDI_GRAPHICS(pimage->g())->*pfnInternalSetPath)(pparam);
 
@@ -2929,7 +2929,7 @@ namespace draw2d_gdi
          if(GDI_DIB(pimage.m_p)->process_initialize(&pen))
          {
 
-            // pimage2->from(point_i32((i32) floor(pen.m_dWidth / 2.0), (i32) floor(pen.m_dWidth / 2.0)), pimage, ::point_i32(), rectangle.size());
+            // pimage2->from(point_i32((int) floor(pen.m_dWidth / 2.0), (int) floor(pen.m_dWidth / 2.0)), pimage, ::point_i32(), rectangle.size());
 
             pimage->g()->SelectObject(&pen);
 
@@ -3189,7 +3189,7 @@ namespace draw2d_gdi
 
 
    bool graphics::GradientFill(TRIVERTEX* pVertices, ULONG nVertices,
-                               void * pMesh, ULONG nMeshElements, u32 dwMode)
+                               void * pMesh, ULONG nMeshElements, unsigned int dwMode)
    {
 
       ASSERT(get_handle1() != nullptr);
@@ -4047,7 +4047,7 @@ namespace draw2d_gdi
       return nRetVal;
    }
 
-   bool graphics::ModifyWorldTransform(const XFORM* pXform,u32 iMode)
+   bool graphics::ModifyWorldTransform(const XFORM* pXform,unsigned int iMode)
    {
       bool nRetVal = 0;
       if(get_handle1() != nullptr && get_handle1() != get_handle2())
@@ -4320,10 +4320,10 @@ namespace draw2d_gdi
       return nRetVal;
    }
 
-   u32 graphics::SetMapperFlags(u32 dwFlag)
+   unsigned int graphics::SetMapperFlags(unsigned int dwFlag)
    {
       ASSERT(get_handle1() != nullptr);
-      u32 dwRetVal = GDI_ERROR;
+      unsigned int dwRetVal = GDI_ERROR;
       if(get_handle1() != nullptr && get_handle1() != get_handle2())
          dwRetVal = ::SetMapperFlags(get_handle1(), dwFlag);
       if(get_handle2() != nullptr)
@@ -4331,11 +4331,11 @@ namespace draw2d_gdi
       return dwRetVal;
    }
 
-   typedef u32 (CALLBACK* WINDOWS_DEFINITION_GDIGETLAYOUTPROC)(HDC);
-   typedef u32 (CALLBACK* WINDOWS_DEFINITION_GDISETLAYOUTPROC)(HDC, u32);
+   typedef unsigned int (CALLBACK* WINDOWS_DEFINITION_GDIGETLAYOUTPROC)(HDC);
+   typedef unsigned int (CALLBACK* WINDOWS_DEFINITION_GDISETLAYOUTPROC)(HDC, unsigned int);
 
    
-   u32 graphics::GetLayout()
+   unsigned int graphics::GetLayout()
    {
       
       return ::GetLayout(get_handle1());
@@ -4343,7 +4343,7 @@ namespace draw2d_gdi
    }
 
 
-   u32 graphics::SetLayout(u32 dwSetLayout)
+   unsigned int graphics::SetLayout(unsigned int dwSetLayout)
    {
       
       return ::SetLayout(get_handle1(), dwSetLayout);
@@ -4851,7 +4851,7 @@ namespace draw2d_gdi
    bool graphics::set(::draw2d::path::line & line)
    {
 
-      return ::LineTo(m_hdc, (i32) line.m_x, (i32) line.m_y) != false;
+      return ::LineTo(m_hdc, (int) line.m_x, (int) line.m_y) != false;
 
    }
 
@@ -4888,7 +4888,7 @@ namespace draw2d_gdi
    bool graphics::set(::draw2d::path::move & move)
    {
 
-      ::MoveToEx(m_hdc, (i32) move.m_x, (i32) move.m_y, nullptr);
+      ::MoveToEx(m_hdc, (int) move.m_x, (int) move.m_y, nullptr);
 
       return true;
 

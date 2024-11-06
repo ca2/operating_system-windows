@@ -79,14 +79,14 @@ namespace draw2d_gdi
    }
 
 
-   bool region::create_polygon(LPPOINT lpPoints, i32 nCount, ::draw2d::e_fill_mode efillmode)
+   bool region::create_polygon(LPPOINT lpPoints, int nCount, ::draw2d::e_fill_mode efillmode)
    {
 
       return Attach(::CreatePolygonRgn(lpPoints, nCount, get_os_fill_mode(efillmode)));
 
    }
 
-   bool region::create_poly_polygon(LPPOINT lpPoints, LPINT lpPolyCounts, i32 nCount, ::draw2d::e_fill_mode efillmode)
+   bool region::create_poly_polygon(LPPOINT lpPoints, LPINT lpPolyCounts, int nCount, ::draw2d::e_fill_mode efillmode)
    {
 
       return Attach(::CreatePolyPolygonRgn(lpPoints, lpPolyCounts, nCount, get_os_fill_mode(efillmode)));

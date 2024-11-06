@@ -64,7 +64,7 @@ public:
 
 
 //// if MSVC CRT is used
-//extern "C" i32 WINAPI _tWinMain(HINSTANCE hInstance,HINSTANCE hPrevInstance,LPTSTR lpCmdLine,i32 nCmdShow)
+//extern "C" int WINAPI _tWinMain(HINSTANCE hInstance,HINSTANCE hPrevInstance,LPTSTR lpCmdLine,int nCmdShow)
 //{
 //
 //   __UNREFERENCED_PARAMETER(lpCmdLine);

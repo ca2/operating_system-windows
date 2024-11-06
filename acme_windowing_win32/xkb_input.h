@@ -21,8 +21,8 @@ namespace xkb_input
 
 
       ::string          m_strXkbKeymapString;
-      ::i32             m_iXkbKeymapFormat;
-      ::i32             m_iXkbKeymapFlags;
+      int             m_iXkbKeymapFormat;
+      int             m_iXkbKeymapFlags;
       bool              m_bNewXkbKeymap;
 
       ::xkb_context *   m_pxkbcontext;

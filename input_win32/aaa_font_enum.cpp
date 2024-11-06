@@ -92,10 +92,10 @@ namespace windowing_win32
       }
 
 
-      static BOOL CALLBACK callback(LPLOGFONTW plf, LPNEWTEXTMETRICW lpntm, ::u32 FontType, LPVOID point_i32);
+      static BOOL CALLBACK callback(LPLOGFONTW plf, LPNEWTEXTMETRICW lpntm, unsigned int FontType, LPVOID point_i32);
 
 
-      static BOOL CALLBACK callback_cs(LPLOGFONTW plf, LPNEWTEXTMETRICW lpntm, ::u32 FontType, LPVOID point_i32);
+      static BOOL CALLBACK callback_cs(LPLOGFONTW plf, LPNEWTEXTMETRICW lpntm, unsigned int FontType, LPVOID point_i32);
 
 
    };
@@ -103,7 +103,7 @@ namespace windowing_win32
 
 
 
-   BOOL CALLBACK wingdi_font_enum::callback(LPLOGFONTW plf, LPNEWTEXTMETRICW lpntm, ::u32 dwFontType, LPVOID p)
+   BOOL CALLBACK wingdi_font_enum::callback(LPLOGFONTW plf, LPNEWTEXTMETRICW lpntm, unsigned int dwFontType, LPVOID p)
    {
 
       wingdi_font_enum * penum = (wingdi_font_enum *)p;
@@ -151,7 +151,7 @@ namespace windowing_win32
    }
 
 
-   BOOL CALLBACK wingdi_font_enum::callback_cs(LPLOGFONTW plf, LPNEWTEXTMETRICW lpntm, ::u32 dwFontType, LPVOID p)
+   BOOL CALLBACK wingdi_font_enum::callback_cs(LPLOGFONTW plf, LPNEWTEXTMETRICW lpntm, unsigned int dwFontType, LPVOID p)
    {
 
       ::write_text::font_enumeration_item * pitem = (::write_text::font_enumeration_item *)p;

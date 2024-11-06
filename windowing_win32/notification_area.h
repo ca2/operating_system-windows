@@ -31,8 +31,8 @@ namespace windowing_win32
    {
 
       HWND           m_hwnd;
-      ::u32          m_uID;
-      ::u32          m_uCallbackMessage;
+      unsigned int          m_uID;
+      unsigned int          m_uCallbackMessage;
       string         m_strTip;
       string         m_strProcessPath;
       bool           m_bVisible;
@@ -65,15 +65,15 @@ namespace windowing_win32
 
       virtual void Initialize(::particle * pparticle);
 
-      void ListTrayIcons(i32 defindex = 0);
-      void EditCopy(i32 iItem);
-      void DoubleClick(i32 iItem);
-      void RightClick(i32 iItem);
-      void LeftClick(i32 iItem);
-      void MoveLeft(i32 iItem);
-      void MoveRight(i32 iItem);
+      void ListTrayIcons(int defindex = 0);
+      void EditCopy(int iItem);
+      void DoubleClick(int iItem);
+      void RightClick(int iItem);
+      void LeftClick(int iItem);
+      void MoveLeft(int iItem);
+      void MoveRight(int iItem);
       void Refresh();
-      void PostMessageToTrayIcon(i32 iItem, LPARAM lParam);
+      void PostMessageToTrayIcon(int iItem, LPARAM lParam);
 
 
    };

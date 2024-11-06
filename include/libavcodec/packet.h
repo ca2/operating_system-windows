@@ -126,7 +126,7 @@ enum AVPacketSideDataType {
      * u32le quality factor of the compressed frame. Allowed range is between 1 (good) and FF_LAMBDA_MAX (bad).
      * u8    picture type
      * u8    error count
-     * u16   reserved
+     * unsigned short   reserved
      * u64le[error count] sum of squared differences between encoder in and output
      * @endcode
      */

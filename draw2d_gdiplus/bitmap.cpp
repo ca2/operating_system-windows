@@ -41,7 +41,7 @@ namespace draw2d_gdiplus
    }
 
 
-   bool bitmap::CreateBitmap(::draw2d::graphics * pgraphics, i32 nWidth, i32 nHeight, UINT nPlanes, UINT nBitcount, const void * pBits, i32 stride)
+   bool bitmap::CreateBitmap(::draw2d::graphics * pgraphics, int nWidth, int nHeight, UINT nPlanes, UINT nBitcount, const void * pBits, int stride)
 
    {
 
@@ -185,13 +185,13 @@ namespace draw2d_gdiplus
    }
 
 
-   void bitmap::CreateDIBitmap(::draw2d::graphics * pgraphics, int cx, int cy, u32 flInit, const void *pjBits, UINT iUsage)
+   void bitmap::CreateDIBitmap(::draw2d::graphics * pgraphics, int cx, int cy, unsigned int flInit, const void *pjBits, UINT iUsage)
    {
       //return false;
    }
 
 
-   u32 bitmap::SetBitmapBits(u32 dwCount, const void * pBits)
+   unsigned int bitmap::SetBitmapBits(unsigned int dwCount, const void * pBits)
 
    {
 
@@ -200,7 +200,7 @@ namespace draw2d_gdiplus
       return 0;
 
    }
-   u32 bitmap::GetBitmapBits(u32 dwCount, LPVOID pBits) const
+   unsigned int bitmap::GetBitmapBits(unsigned int dwCount, LPVOID pBits) const
 
    {
       //return ::GetBitmapBits((HBITMAP)get_handle(), dwCount, pBits);
@@ -217,7 +217,7 @@ namespace draw2d_gdiplus
 
    }
 
-   size_i32 bitmap::SetBitmapDimension(i32 nWidth, i32 nHeight)
+   size_i32 bitmap::SetBitmapDimension(int nWidth, int nHeight)
    {
 
 
@@ -259,7 +259,7 @@ namespace draw2d_gdiplus
    }
 
 
-   void bitmap::CreateCompatibleBitmap(::draw2d::graphics * pgraphics, i32 nWidth, i32 nHeight)
+   void bitmap::CreateCompatibleBitmap(::draw2d::graphics * pgraphics, int nWidth, int nHeight)
    {
 
       {
@@ -277,7 +277,7 @@ namespace draw2d_gdiplus
    }
 
 
-   void bitmap::CreateDiscardableBitmap(::draw2d::graphics * pgraphics, i32 nWidth, i32 nHeight)
+   void bitmap::CreateDiscardableBitmap(::draw2d::graphics * pgraphics, int nWidth, int nHeight)
    {
 
       ::acme::del(m_pbitmap);
@@ -291,7 +291,7 @@ namespace draw2d_gdiplus
    }
 
 
-   i32 bitmap::GetBitmap(BITMAP* pBitMap)
+   int bitmap::GetBitmap(BITMAP* pBitMap)
    {
       //   ASSERT(get_handle() != nullptr);
       // return ::GetObject(get_handle(), sizeof(BITMAP), pBitMap);

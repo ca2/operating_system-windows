@@ -70,11 +70,11 @@ CREDUIAPI
 BOOL
 WINAPI
 CredPackAuthenticationBufferWfoo(
-_In_ u32                                      dwFlags,
+_In_ unsigned int                                      dwFlags,
 _In_ LPWSTR                                     pszUserName,
 _In_ LPWSTR                                     pszPassword,
 _Out_writes_bytes_opt_(*pcbPackedCredentials) PBYTE   pPackedCredentials,
-_Inout_ u32 * pcbPackedCredentials
+_Inout_ unsigned int * pcbPackedCredentials
 );
 
 
@@ -213,7 +213,7 @@ namespace apex_windows
             HANDLE hProcess = ::OpenProcess(PROCESS_QUERY_INFORMATION |
                                              PROCESS_VM_READ,
                                              false, dwProcess);
-            TerminateProcess(hProcess, (::u32)-1);
+            TerminateProcess(hProcess, (unsigned int)-1);
             CloseHandle(hProcess);
             /*::EnumWindows((WNDENUMPROC)
             CKillProcessHelper::TerminateAppEnum,
@@ -336,7 +336,7 @@ namespace apex_windows
    {
 
       return node()->processes_identifiers();
-      //ASSERT(sizeof(::u32) == sizeof(u32));
+      //ASSERT(sizeof(unsigned int) == sizeof(unsigned int));
 
       //ua.allocate(0);
 
@@ -347,14 +347,14 @@ namespace apex_windows
 
       //   ua.allocate(ua.get_count() + 1024);
 
-      //   if(!EnumProcesses((DWORD *) ua.m_begin, (DWORD) (ua.get_count() * sizeof(::u32)), &cbNeeded))
+      //   if(!EnumProcesses((DWORD *) ua.m_begin, (DWORD) (ua.get_count() * sizeof(unsigned int)), &cbNeeded))
       //   {
 
       //      return;
 
       //   }
 
-      //   ua.allocate(cbNeeded / sizeof(u32));
+      //   ua.allocate(cbNeeded / sizeof(unsigned int));
 
       //}
 
@@ -366,7 +366,7 @@ namespace apex_windows
    //   
    //   wstring wstrPath;
    //   
-   //   u32 dwSize = 1;
+   //   unsigned int dwSize = 1;
 
    //   while(natural(wstrPath.length() + 1) == dwSize)
    //   {
@@ -397,7 +397,7 @@ namespace apex_windows
 
          key1.get("DefaultConnectionSettings", mem);
 
-         bool bAutoDetect = (((::u8 *)mem.data())[8] & 0x08) != 0;
+         bool bAutoDetect = (((unsigned char *)mem.data())[8] & 0x08) != 0;
 
          if (!bAutoDetect)
          {
@@ -996,7 +996,7 @@ namespace apex_windows
    struct TOKEN_INFO
    {
       TOKEN_USER tokenUser;
-      ::u8 buffer[SECURITY_MAX_SID_SIZE];
+      unsigned char buffer[SECURITY_MAX_SID_SIZE];
    };
 
 
@@ -1018,7 +1018,7 @@ namespace apex_windows
          &tokenHandle))                  // Access token handle
       {
 
-         u32 win32Status = GetLastError();
+         unsigned int win32Status = GetLastError();
 
          //debug_print("Cannot open token handle: %d\n",win32Status);
 
@@ -1039,7 +1039,7 @@ namespace apex_windows
          &bytesReturned))                // Size needed
       {
 
-         u32 win32Status = GetLastError();
+         unsigned int win32Status = GetLastError();
 
          //debug_print("Cannot query token information: %d\n",win32Status);
 
@@ -1160,7 +1160,7 @@ namespace apex_windows
    {
 
       HRESULT hr = S_OK;
-      u32   dwResult;
+      unsigned int   dwResult;
       sec_cotaskptr < PVOID > pvInAuthBlob;
       sec_cotaskptr < PVOID > pvAuthBlob;
       CREDUI_INFOW u{};
@@ -1170,9 +1170,9 @@ namespace apex_windows
       WCHAR szDomain[CREDUI_MAX_DOMAIN_TARGET_LENGTH + 1];
       //      TOKEN_INFO ti;
 
-      u32 maxLenName = CREDUI_MAX_USERNAME_LENGTH + 1;
-      u32 maxLenPass = CREDUI_MAX_PASSWORD_LENGTH + 1;
-      u32 maxLenDomain = CREDUI_MAX_DOMAIN_TARGET_LENGTH + 1;
+      unsigned int maxLenName = CREDUI_MAX_USERNAME_LENGTH + 1;
+      unsigned int maxLenPass = CREDUI_MAX_PASSWORD_LENGTH + 1;
+      unsigned int maxLenDomain = CREDUI_MAX_DOMAIN_TARGET_LENGTH + 1;
 
       HICON hicon = nullptr;
 
@@ -1183,18 +1183,18 @@ namespace apex_windows
 
       // Retrieve the user name and domain name.
       // SID_NAME_USE    SidUse;
-      u32           cchTmpUsername = CREDUI_MAX_USERNAME_LENGTH + 1;
-      u32           cchTmpDomain = CREDUI_MAX_DOMAIN_TARGET_LENGTH + 1;
-      u32           cchDomainAndUser = CREDUI_MAX_USERNAME_LENGTH + CREDUI_MAX_DOMAIN_TARGET_LENGTH + 1;
+      unsigned int           cchTmpUsername = CREDUI_MAX_USERNAME_LENGTH + 1;
+      unsigned int           cchTmpDomain = CREDUI_MAX_DOMAIN_TARGET_LENGTH + 1;
+      unsigned int           cchDomainAndUser = CREDUI_MAX_USERNAME_LENGTH + CREDUI_MAX_DOMAIN_TARGET_LENGTH + 1;
 
       wstring wstrCaption("\"ca2 : " + strService + "\" Authentication");
       wstring wstrMessage("The Service \"ca2 : " + strService + "\" requires current user password for installing Windows Service.");
 
-      u32 lenUserName = CREDUI_MAX_USERNAME_LENGTH + 1;
+      unsigned int lenUserName = CREDUI_MAX_USERNAME_LENGTH + 1;
 
       //::GetUserNameW(szUsername,&lenUserName);
 
-      u32 dwLastError = 0;
+      unsigned int dwLastError = 0;
 
       bool bOk;
 
@@ -1297,10 +1297,10 @@ namespace apex_windows
                  &u,             // Customizing information
                  dwLastError,               // Error code to display
                  &ulAuthPackage,  // Authorization package
-                 pvInAuthBlob,    // Credential ::u8 array
+                 pvInAuthBlob,    // Credential unsigned char array
                  pvInAuthBlob.m_size,    // Size of credential input buffer
-                 &pvAuthBlob,     // Output credential ::u8 array
-                 &pvAuthBlob.m_size,     // Size of credential ::u8 array
+                 &pvAuthBlob,     // Output credential unsigned char array
+                 &pvAuthBlob.m_size,     // Size of credential unsigned char array
                  &fSave,          // Select the save check box.
                  //CREDUIWIN_SECURE_PROMPT |
                  CREDUIWIN_IN_CRED_ONLY |
@@ -1454,7 +1454,7 @@ namespace apex_windows
       if (hdlSCM == 0)
       {
 
-         u32 lasterror = ::GetLastError();
+         unsigned int lasterror = ::GetLastError();
 
          ::windows::throw_last_error(lasterror);
 
@@ -1586,7 +1586,7 @@ namespace apex_windows
       if (!hdlServ)
       {
 
-         u32 lasterror = ::GetLastError();
+         unsigned int lasterror = ::GetLastError();
 
          CloseServiceHandle(hdlSCM);
 
@@ -1631,7 +1631,7 @@ namespace apex_windows
 
       if (!hdlServ)
       {
-         u32 lasterror = ::GetLastError();
+         unsigned int lasterror = ::GetLastError();
          CloseServiceHandle(hdlSCM);
          if (lasterror == 1060) // Service already doesn't exist.
             return; // do self-healing
@@ -1640,7 +1640,7 @@ namespace apex_windows
 
       if (!::DeleteService(hdlServ))
       {
-         u32 lasterror = ::GetLastError();
+         unsigned int lasterror = ::GetLastError();
          CloseServiceHandle(hdlServ);
          CloseServiceHandle(hdlSCM);
          ::windows::throw_last_error(lasterror);
@@ -1757,7 +1757,7 @@ namespace apex_windows
    }
 
 
-   void os_context::raise_exception(u32 dwExceptionCode, u32 dwExceptionFlags)
+   void os_context::raise_exception(unsigned int dwExceptionCode, unsigned int dwExceptionFlags)
    {
 
       RaiseException(dwExceptionCode, dwExceptionFlags, 0, nullptr);
@@ -1776,7 +1776,7 @@ namespace apex_windows
    void os_context::set_file_status(const ::file::path & path, const ::file::file_status & status)
    {
 
-      u32 wAttr;
+      unsigned int wAttr;
 
       FILETIME creationTime;
       FILETIME lastAccessTime;
@@ -1914,7 +1914,7 @@ namespace apex_windows
 
       //}
 
-      if ((u32)status.m_attribute != wAttr && (status.m_attribute & FILE_ATTRIBUTE_READONLY))
+      if ((unsigned int)status.m_attribute != wAttr && (status.m_attribute & FILE_ATTRIBUTE_READONLY))
       {
 
          ::windows::set_file_attributes(path, status.m_attribute);
@@ -2115,7 +2115,7 @@ namespace apex_windows
 
       ::acme_windows::registry::key key(HKEY_CURRENT_USER, "Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize", true);
 
-      ::u32 dwSystemUseLightTheme;
+      unsigned int dwSystemUseLightTheme;
       if (bSet)
       {
          dwSystemUseLightTheme = 0;
@@ -2138,7 +2138,7 @@ namespace apex_windows
 
       ::acme_windows::registry::key key(HKEY_CURRENT_USER, "Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize", true);
 
-      ::u32 dwAppsUseLightTheme;
+      unsigned int dwAppsUseLightTheme;
       if (bSet)
       {
          dwAppsUseLightTheme = 0;
@@ -2185,7 +2185,7 @@ namespace apex_windows
       manual_reset_event manualresetevent;
 
       ::e_status estatusFileOpen = ::success;
-      ::i32 iShellExecuteExitCode = 33;
+      int iShellExecuteExitCode = 33;
       DWORD dwLastError = 0;
       const char * pszShellExecuteError = nullptr;
 
@@ -3406,7 +3406,7 @@ namespace apex_windows
    //         if (rgSpec.get_size() > 0)
    //         {
 
-   //            pfileopen->SetFileTypes(::u32(rgSpec.get_size()), rgSpec.m_begin);
+   //            pfileopen->SetFileTypes(unsigned int(rgSpec.get_size()), rgSpec.m_begin);
 
    //         }
 
@@ -3484,7 +3484,7 @@ namespace apex_windows
    //                  auto & straDest = set["file_name"].string_array_reference();
 
    //                  // Loop through IShellItemArray and construct string for display
-   //                  for (u32 i = 0; i < dwNumItems; i++)
+   //                  for (unsigned int i = 0; i < dwNumItems; i++)
    //                  {
    //                     comptr < IShellItem > pitem;
 
@@ -3656,7 +3656,7 @@ namespace apex_windows
    //         if (rgSpec.get_size() > 0)
    //         {
 
-   //            pfilesave->SetFileTypes(::u32 (rgSpec.get_size()), rgSpec.m_begin);
+   //            pfilesave->SetFileTypes(unsigned int (rgSpec.get_size()), rgSpec.m_begin);
 
    //         }
 
@@ -3996,7 +3996,7 @@ namespace apex_windows
    /*void os_context::list_process(::file::path_array & patha, ::process_identifier_array & uaPid)
    {
 
-      ASSERT(sizeof(::u32) == sizeof(u32));
+      ASSERT(sizeof(unsigned int) == sizeof(unsigned int));
 
       uaPid = this->processes_identifiers();
 

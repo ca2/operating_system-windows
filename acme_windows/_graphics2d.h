@@ -41,8 +41,8 @@ rectangle_type(const Gdiplus::RectF & t) noexcept { copy(*this, t); }
 inline void copy(Gdiplus::Point * ppoint1, const ::point_f64 * ppoint2)
 {
 
-   ppoint1->X = (::i32)ppoint2->x;
-   ppoint1->Y = (::i32)ppoint2->y;
+   ppoint1->X = (int)ppoint2->x;
+   ppoint1->Y = (int)ppoint2->y;
 
 }
 
@@ -50,8 +50,8 @@ inline void copy(Gdiplus::Point * ppoint1, const ::point_f64 * ppoint2)
 inline void copy(Gdiplus::Point * ppoint1, const ::point_i32 * ppoint2)
 {
 
-   ppoint1->X = (::i32)ppoint2->x;
-   ppoint1->Y = (::i32)ppoint2->y;
+   ppoint1->X = (int)ppoint2->x;
+   ppoint1->Y = (int)ppoint2->y;
 
 }
 

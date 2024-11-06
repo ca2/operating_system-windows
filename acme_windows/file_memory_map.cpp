@@ -44,7 +44,7 @@ namespace acme_windows
 
          m_fileinstance.m_handle = INVALID_HANDLE_VALUE;
 
-         m_hfilemap = CreateFileMappingW(INVALID_HANDLE_VALUE, nullptr, PAGE_READWRITE, 0, (::u32)m_size, windowspath);
+         m_hfilemap = CreateFileMappingW(INVALID_HANDLE_VALUE, nullptr, PAGE_READWRITE, 0, (unsigned int)m_size, windowspath);
 
       }
       else

@@ -29,7 +29,7 @@ namespace ca2plugin_container
 
       virtual oswindow get_host_window();
       virtual bool is_ok();
-      virtual void post_message(u32 emessage, wparam wparam, lparam lparam);
+      virtual void post_message(unsigned int emessage, wparam wparam, lparam lparam);
       
 
       bool init();
@@ -54,8 +54,8 @@ namespace ca2plugin_container
       virtual void * get_context_system();
       virtual void set_system(void * pvoidPluginSystem);
 
-      virtual void on_receive(::aura::ipc::rx * prx, i32 message, void * pdata, i32 len);
-      virtual bool set_window_position(iptr z,i32 x,i32 y,i32 cx,i32 cy,UINT nFlags);
+      virtual void on_receive(::aura::ipc::rx * prx, int message, void * pdata, int len);
+      virtual bool set_window_position(iptr z,int x,int y,int cx,int cy,UINT nFlags);
 
       virtual void start_ca2();
 

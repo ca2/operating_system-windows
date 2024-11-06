@@ -24,10 +24,10 @@ namespace draw2d_gdi
 
 
       virtual void construct(int nPenStyle, int nWidth, ::color::color crColor);
-      virtual void construct(int nPenStyle, int nWidth, const LOGBRUSH* pLogBrush, int nStyleCount = 0, const u32* lpStyle = nullptr);
+      virtual void construct(int nPenStyle, int nWidth, const LOGBRUSH* pLogBrush, int nStyleCount = 0, const unsigned int* lpStyle = nullptr);
       bool CreatePen(int nPenStyle, int nWidth, ::color::color crColor);
       bool CreatePen(int nPenStyle, int nWidth, const LOGBRUSH* pLogBrush,
-                     int nStyleCount = 0, const u32* lpStyle = nullptr);
+                     int nStyleCount = 0, const unsigned int* lpStyle = nullptr);
       bool CreatePenIndirect(LPLOGPEN lpLogPen);
 
 

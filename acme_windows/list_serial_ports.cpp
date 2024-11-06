@@ -65,12 +65,12 @@ namespace acme_windows
 			TCHAR port_name[port_name_max_length];
 			DWORD port_name_length = port_name_max_length;
 
-			::i32 return_code = RegQueryValueEx(
+			int return_code = RegQueryValueEx(
 				hkey,
 				_T("PortName"),
 				nullptr,
 				nullptr,
-				(::u8*)port_name,
+				(unsigned char*)port_name,
 				&port_name_length);
 
 			RegCloseKey(hkey);

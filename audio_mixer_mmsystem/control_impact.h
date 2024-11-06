@@ -59,16 +59,16 @@
          color32_t                     m_colorForeground;
          color32_t                     m_colorBackground;
          ::draw2d::brush_pointer       m_pbrushBackground;
-         u32                           m_uiUpdateTimer;
-         u32                           m_uiUpdateState;
+         unsigned int                           m_uiUpdateTimer;
+         unsigned int                           m_uiUpdateState;
          //::thread_pointer              m_pthreadContextMenu;
-         //u32                           m_dwThreadIdContextMenu;
+         //unsigned int                           m_dwThreadIdContextMenu;
          bool                          m_bInitialized;
-         u32                           m_uiNextSliderID;
-         u32                           m_dwUpdateTime;
+         unsigned int                           m_uiNextSliderID;
+         unsigned int                           m_dwUpdateTime;
          string                        m_strSearch;
 
-         static const i32              cnListCount;
+         static const int              cnListCount;
 
          
          pointer_array < ::audio_mixer::control >     m_controla;
@@ -97,7 +97,7 @@
 
 
 
-         void LayoutLine(i32 iSource, ::audio_mixer::source * pSource, i32 iStartX, i32 iStartY, i32 * iEndX, i32 *iEndY);
+         void LayoutLine(int iSource, ::audio_mixer::source * pSource, int iStartX, int iStartY, int * iEndX, int *iEndY);
          void set_title();
          void on_layout(::draw2d::graphics_pointer & pgraphics) override;
          bool create_control(::audio_mixer::control * pControl);

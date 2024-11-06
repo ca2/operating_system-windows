@@ -97,7 +97,7 @@ namespace apex_windows
       bool is_alias(const ::file::path & path) override;
 
 
-      void raise_exception(u32 dwExceptionCode, u32 dwExceptionFlags);
+      void raise_exception(unsigned int dwExceptionCode, unsigned int dwExceptionFlags);
 
       bool is_remote_session() override;
 

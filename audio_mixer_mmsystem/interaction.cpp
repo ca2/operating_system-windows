@@ -39,7 +39,7 @@ namespace audio_mixer_mmsystem
 
       auto paudiomixer = m_paudiomixer;
 
-      paudiomixer->OnMixerControlChange((HMIXER)pmessage->m_wparam.m_number, (u32)pmessage->m_lparam);
+      paudiomixer->OnMixerControlChange((HMIXER)pmessage->m_wparam.m_number, (unsigned int)pmessage->m_lparam);
 
       pmessage->m_lresult = 0;
 
@@ -51,7 +51,7 @@ namespace audio_mixer_mmsystem
 
       auto paudiomixer = m_paudiomixer;
 
-      paudiomixer->OnMixerLineChange((HMIXER)pmessage->m_wparam.m_number, (u32)pmessage->m_lparam);
+      paudiomixer->OnMixerLineChange((HMIXER)pmessage->m_wparam.m_number, (unsigned int)pmessage->m_lparam);
 
       pmessage->m_lresult = 0;
 

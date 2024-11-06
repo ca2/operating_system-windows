@@ -202,7 +202,7 @@ namespace windowing_win32
 
       strsize iLen = 0;
 
-      for (i32 i = 0; i < patha.get_size(); i++)
+      for (int i = 0; i < patha.get_size(); i++)
       {
 
          iLen += utf8_to_unicode_count(patha[i]) + 1;
@@ -224,7 +224,7 @@ namespace windowing_win32
       unichar * pwsz = (unichar *)psz;
 
 
-      for (i32 i = 0; i < patha.get_size(); i++)
+      for (int i = 0; i < patha.get_size(); i++)
       {
 
          ::collection::count c = utf8_to_unicode_count(patha[i]) + 1;
@@ -281,7 +281,7 @@ namespace windowing_win32
    HGLOBAL copydesk::hglobal_get_image(const ::image::image * pimage)
    {
 
-      ::u32 dwWidth, dwHeight;
+      unsigned int dwWidth, dwHeight;
       BITMAPINFOHEADER bi;
       HCURSOR hAlphaCursor = nullptr;
 
@@ -291,7 +291,7 @@ namespace windowing_win32
       ZeroMemory(&bi, sizeof(BITMAPINFOHEADER));
       bi.biSize = sizeof(BITMAPINFOHEADER);
       bi.biWidth = dwWidth;
-      bi.biHeight = -(::i32)dwHeight;
+      bi.biHeight = -(int)dwHeight;
       bi.biPlanes = 1;
       bi.biBitCount = 32;
       bi.biCompression = BI_RGB;
@@ -306,7 +306,7 @@ namespace windowing_win32
 
       }
 
-      ::u8 * p = (::u8 *) ::GlobalLock(hglb);
+      unsigned char * p = (unsigned char *) ::GlobalLock(hglb);
 
 
       pimage->map();
@@ -328,9 +328,9 @@ namespace windowing_win32
       if(m_iPriorityTextFormat == -2)
       {
 
-         ::u32 iCfShellInternetUrlW = ::RegisterClipboardFormat(CFSTR_INETURLW);
+         unsigned int iCfShellInternetUrlW = ::RegisterClipboardFormat(CFSTR_INETURLW);
 
-         ::u32 uaFormatPriorityList[] =
+         unsigned int uaFormatPriorityList[] =
          {
             iCfShellInternetUrlW,
             CF_UNICODETEXT,
@@ -425,13 +425,13 @@ namespace windowing_win32
       for (::collection::index i = 0; i < c; i++)
       {
 
-         ::u32 uLen = ::DragQueryFileW(hdrop, (::u32) i, nullptr, 0);
+         unsigned int uLen = ::DragQueryFileW(hdrop, (unsigned int) i, nullptr, 0);
 
          wstring wstr;
          
          auto psz = wstr.get_buffer(uLen);
 
-         ::DragQueryFileW(hdrop, (::u32) i, psz, uLen + 1);
+         ::DragQueryFileW(hdrop, (unsigned int) i, psz, uLen + 1);
 
          wstr.release_buffer();
 

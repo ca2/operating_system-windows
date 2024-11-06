@@ -117,7 +117,7 @@ namespace draw2d_gdi
       LOGBRUSH lb;
       VERIFY(get_object(sizeof(lb), &lb));
       dumpcontext << "lb.lbStyle = " << lb.lbStyle;
-      dumpcontext << "\nlb.lbHatch = " << (u32) lb.lbHatch;
+      dumpcontext << "\nlb.lbHatch = " << (unsigned int) lb.lbHatch;
       dumpcontext << "\nlb.lbColor = " << (void *)(DWORD_PTR)lb.lbColor;
 
       dumpcontext << "\n";

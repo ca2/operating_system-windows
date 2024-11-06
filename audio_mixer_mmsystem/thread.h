@@ -33,7 +33,7 @@
 //
 //
 //         static LRESULT CALLBACK MessageProc(
-//         i32 code,       // hook code
+//         int code,       // hook code
 //         WPARAM wParam,  // undefined
 //         LPARAM lParam   // address of structure with message data
 //         );

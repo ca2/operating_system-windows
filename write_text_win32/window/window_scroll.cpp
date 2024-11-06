@@ -6,7 +6,7 @@ namespace windowing_win32
 {
 
 
-   //i32 window::SetScrollPos(i32 nBar, i32 nPos, bool bRedraw)
+   //int window::SetScrollPos(int nBar, int nPos, bool bRedraw)
    //{
 
    //   return ::SetScrollPos(get_handle(), nBar, nPos, bRedraw);
@@ -14,7 +14,7 @@ namespace windowing_win32
    //}
 
 
-   //i32 window::GetScrollPos(i32 nBar) const
+   //int window::GetScrollPos(int nBar) const
    //{
 
    //   return ::GetScrollPos(((::windows::interaction_impl *)this)->get_handle(), nBar);
@@ -22,7 +22,7 @@ namespace windowing_win32
    //}
 
 
-   //void window::SetScrollRange(i32 nBar, i32 nMinPos, i32 nMaxPos, bool bRedraw)
+   //void window::SetScrollRange(int nBar, int nMinPos, int nMaxPos, bool bRedraw)
    //{
 
    //   ::SetScrollRange(get_handle(), nBar, nMinPos, nMaxPos, bRedraw);
@@ -30,7 +30,7 @@ namespace windowing_win32
    //}
 
    
-   //void window::GetScrollRange(i32 nBar, LPINT pMinPos, LPINT lpMaxPos) const
+   //void window::GetScrollRange(int nBar, LPINT pMinPos, LPINT lpMaxPos) const
    //{
 
    //   ::GetScrollRange(((::windows::interaction_impl *)this)->get_handle(), nBar, pMinPos, lpMaxPos);
@@ -40,7 +40,7 @@ namespace windowing_win32
    //// Turn on/off non-control scrollbars
    ////   for WS_?SCROLL scrollbars - show/hide them
    ////   for control scrollbar - enable/disable them
-   //void interaction_impl::EnableScrollBarCtrl(i32 nBar, bool bEnable)
+   //void interaction_impl::EnableScrollBarCtrl(int nBar, bool bEnable)
    //{
    //   // WS_?SCROLL scrollbar - show or hide
    //   ShowScrollBar(nBar, bEnable);
@@ -48,7 +48,7 @@ namespace windowing_win32
    //}
 
 
-   //bool interaction_impl::SetScrollInfo(i32 nBar, LPSCROLLINFO pScrollInfo, bool bRedraw)
+   //bool interaction_impl::SetScrollInfo(int nBar, LPSCROLLINFO pScrollInfo, bool bRedraw)
    //{
 
    //   ASSERT(pScrollInfo != nullptr);
@@ -63,7 +63,7 @@ namespace windowing_win32
    //}
 
 
-   //bool interaction_impl::GetScrollInfo(i32 nBar, LPSCROLLINFO pScrollInfo, ::u32 nMask)
+   //bool interaction_impl::GetScrollInfo(int nBar, LPSCROLLINFO pScrollInfo, unsigned int nMask)
    //{
 
    //   __UNREFERENCED_PARAMETER(nMask);
@@ -75,9 +75,9 @@ namespace windowing_win32
 
    //}
 
-   //i32 interaction_impl::GetScrollLimit(i32 nBar)
+   //int interaction_impl::GetScrollLimit(int nBar)
    //{
-   //   i32 nMin, nMax;
+   //   int nMin, nMax;
    //   GetScrollRange(nBar, &nMin, &nMax);
    //   SCROLLINFO info;
    //   if (GetScrollInfo(nBar, &info, SIF_PAGE))
@@ -87,7 +87,7 @@ namespace windowing_win32
    //   return nMax;
    //}
 
-   //void interaction_impl::ScrollWindow(i32 xAmount, i32 yAmount,
+   //void interaction_impl::ScrollWindow(int xAmount, int yAmount,
    //   const ::rectangle_i32 * rectangle, const ::rectangle_i32 * lpClipRect)
 
    //{

@@ -17,11 +17,11 @@ namespace apex_windows
       m_bWinsockInitialized = false;
 
       //Initialise the winsock stack
-      ::u16 wVersionRequested = MAKEWORD(1, 1);
+      unsigned short wVersionRequested = MAKEWORD(1, 1);
       
       WSADATA wsaData;
       
-      i32 err = WSAStartup(wVersionRequested, &wsaData);
+      int err = WSAStartup(wVersionRequested, &wsaData);
 
       if (err != 0)
       {
@@ -80,7 +80,7 @@ namespace apex_windows
 
    //call the virtual callback function in a loop
 
-   i32 nAdapter = 0;
+   int nAdapter = 0;
 
    while(pHostEnt->h_addr_list[nAdapter])
    {
@@ -126,7 +126,7 @@ namespace apex_windows
 
          string str;
 
-         ::u32 dwRetval = getaddrinfo(szHostname, nullptr, &hints, &result);
+         unsigned int dwRetval = getaddrinfo(szHostname, nullptr, &hints, &result);
          if (dwRetval != 0)
          {
             printf("getaddrinfo failed with error: %d\n", dwRetval);
@@ -176,7 +176,7 @@ namespace apex_windows
                //// The buffer length is changed by each call to WSAAddresstoString
                //// So we need to set it for each iteration through the loop for safety
                //ipbufferlength = 46;
-               //iRetval = WSAAddressToString(sockaddr_ip, (::u32)ptr->ai_addrlen, nullptr,
+               //iRetval = WSAAddressToString(sockaddr_ip, (unsigned int)ptr->ai_addrlen, nullptr,
                // ipstringbuffer, &ipbufferlength);
                //if (iRetval)
                // printf("WSAAddressToString failed with %u\n", WSAGetLastError());
@@ -205,7 +205,7 @@ namespace apex_windows
          //hints.ai_flags = AI_NUMERICHOST;
          int i = 0;
 
-         ::u32 dwRetval = getaddrinfo(szHostname, nullptr, &hints, &result);
+         unsigned int dwRetval = getaddrinfo(szHostname, nullptr, &hints, &result);
          if (dwRetval != 0)
          {
             printf("getaddrinfo failed with error: %d\n", dwRetval);
@@ -259,7 +259,7 @@ namespace apex_windows
                //// The buffer length is changed by each call to WSAAddresstoString
                //// So we need to set it for each iteration through the loop for safety
                //ipbufferlength = 46;
-               //iRetval = WSAAddressToString(sockaddr_ip, (::u32)ptr->ai_addrlen, nullptr,
+               //iRetval = WSAAddressToString(sockaddr_ip, (unsigned int)ptr->ai_addrlen, nullptr,
                // ipstringbuffer, &ipbufferlength);
                //if (iRetval)
                // printf("WSAAddressToString failed with %u\n", WSAGetLastError());

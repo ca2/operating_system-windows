@@ -233,13 +233,13 @@ bool position_desk_toolbar1()
 
             k.get("TaskbarWinXP", m2);
 
-            ::u8 * pFound;
+            unsigned char * pFound;
 
             string strAddUp;
 
             DWORD dwOther;
 
-            if ((pFound = (::u8 *)memory_find_memory(m2.get_data(), m2.get_size(), &CLSID_DeskBandSample, sizeof(CLSID_DeskBandSample))) != nullptr)
+            if ((pFound = (unsigned char *)memory_find_memory(m2.get_data(), m2.get_size(), &CLSID_DeskBandSample, sizeof(CLSID_DeskBandSample))) != nullptr)
             {
 
                auto iStart = pFound - m2.get_data();
@@ -286,7 +286,7 @@ bool position_desk_toolbar1()
 
             m.from_hex(str);
 
-            m.splice((::u8 *)&CLSID_DeskBandSample, sizeof(CLSID_DeskBandSample));
+            m.splice((unsigned char *)&CLSID_DeskBandSample, sizeof(CLSID_DeskBandSample));
 
             m2.splice(m, 16);
 
@@ -343,7 +343,7 @@ ready:
    //   0, KEY_READ | KEY_WRITE, &hKey);
    //if (result == ERROR_SUCCESS)
    //{
-   //   std::vector<::u8> data;
+   //   std::vector<unsigned char> data;
    //   data.resize(256);
    //TCHAR settingValue[] = _T("Settings");
    //DWORD dwKeyDataType = 0;
@@ -365,7 +365,7 @@ ready:
    //   case REG_BINARY:
    //      if (data.size() == 40)
    //      {
-   //         ::u8 taskbarPosition = data[12];
+   //         unsigned char taskbarPosition = data[12];
    //         taskbarPosition = edge;
    //         data[12] = taskbarPosition;
    //         ::rectangle_i32* taskbarRect = (::rectangle_i32*)&data[24];
@@ -412,7 +412,7 @@ bool position_desk_toolbar2()
                DWORD * pdwArraySize = (DWORD *)&m.get_data()[0x18];
 
                m.splice(
-                  (::u8 *)&CLSID_DeskBandSample,
+                  (unsigned char *)&CLSID_DeskBandSample,
                   sizeof(CLSID_DeskBandSample),
                   0x18 + minimum((*pdwArraySize) * 16, 32));
 
@@ -492,7 +492,7 @@ bool position_desk_toolbar2()
 
             DWORD * pdw = (DWORD *)m2.get_data();
 
-            m.splice((::u8 *)&CLSID_DeskBandSample, sizeof(CLSID_DeskBandSample));
+            m.splice((unsigned char *)&CLSID_DeskBandSample, sizeof(CLSID_DeskBandSample));
 
             pdw[2]++;
 
@@ -579,7 +579,7 @@ bool position_desk_toolbar2()
    //   0, KEY_READ | KEY_WRITE, &hKey);
    //if (result == ERROR_SUCCESS)
    //{
-   //   std::vector<::u8> data;
+   //   std::vector<unsigned char> data;
    //   data.resize(256);
    //TCHAR settingValue[] = _T("Settings");
    //DWORD dwKeyDataType = 0;
@@ -601,7 +601,7 @@ bool position_desk_toolbar2()
    //   case REG_BINARY:
    //      if (data.size() == 40)
    //      {
-   //         ::u8 taskbarPosition = data[12];
+   //         unsigned char taskbarPosition = data[12];
    //         taskbarPosition = edge;
    //         data[12] = taskbarPosition;
    //         ::rectangle_i32* taskbarRect = (::rectangle_i32*)&data[24];

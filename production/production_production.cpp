@@ -36,7 +36,7 @@ namespace production
    {
    }
 
-   void production::start_loop(e_version eversion, i32 iLoopCount)
+   void production::start_loop(e_version eversion, int iLoopCount)
    {
       m_bLoop = true;
       if (m_iRelease > 0)
@@ -307,7 +307,7 @@ pacmedir->system() / "config/production/mirror_status.txt";
       string str;
 
 
-      i32 iRetry = 0;
+      int iRetry = 0;
 
 //restart:
 
@@ -468,7 +468,7 @@ pacmedir->system() / "config/production/mirror_status.txt";
             //if (!bSkip1 && m_iGlobalRetry <= 0)
             //{
 
-            //   for (i32 i = 0; i < m_straRoot.get_size(); i++)
+            //   for (int i = 0; i < m_straRoot.get_size(); i++)
             //   {
 
             //      if (!sync_source(m_straRoot[i], nullptr))
@@ -568,7 +568,7 @@ pacmedir->system() / "config/production/mirror_status.txt";
             //if (!bSkip1)
             //{
 
-            //   for (i32 i = 1; i < m_straRoot.get_size(); i++)
+            //   for (int i = 1; i < m_straRoot.get_size(); i++)
             //   {
 
             //      strSvnVersionCmd.Format("svnversion %s", m_strBase / m_straRoot[i]);
@@ -706,7 +706,7 @@ pacmedir->system() / "config/production/mirror_status.txt";
             m_strCCVrel = "C:\\home\\ca2_spa\\" + m_strConfiguration + "";
             m_strCCVrelNew = "C:\\home\\ca2_spa\\ccvrelnew\\" + m_strConfiguration + "\\" + m_strFormatBuild;
 
-            i32 i;
+            int i;
             if (m_bClean)
             {
                add_status("Cleaning ca2 fontopus ...");
@@ -726,7 +726,7 @@ pacmedir->system() / "config/production/mirror_status.txt";
                strPath = dir().install() / "platform\\stage\\script\\stage_clean.bat";
                if (!process->create_child_process(strPath, false))
                {
-                  u32 dw = GetLastError();
+                  unsigned int dw = GetLastError();
                   string str;
                   str.formatf("Error creating clean process: %d", dw);
                   add_status(str);
@@ -794,7 +794,7 @@ pacmedir->system() / "config/production/mirror_status.txt";
             file().put_contents(strPath, "rmdir /s /q C:\\ca2\\vrel\\" + m_strConfiguration);
             if (!process->create_child_process(strPath, false))
             {
-               u32 dw = GetLastError();
+               unsigned int dw = GetLastError();
                string str;
                str.formatf("Error creating process: %d", dw);
                add_status(str);
@@ -826,7 +826,7 @@ pacmedir->system() / "config/production/mirror_status.txt";
 
 
          ::collection::count iCount = m_straFiles.get_size();
-         for (i32 i = 0; i < iCount;)
+         for (int i = 0; i < iCount;)
          {
             if (m_straFiles[i].find("\\.svn\\") >= 0 || (m_straFiles[i].get_length() < 5 || m_straFiles[i].right()(5) == "\\.svn"))
             {
@@ -858,7 +858,7 @@ pacmedir->system() / "config/production/mirror_status.txt";
 
          ::file::path pathFolder;
 
-         for (i32 i = 0; i < m_straFiles.get_size(); i++)
+         for (int i = 0; i < m_straFiles.get_size(); i++)
          {
             //const char * lpcsz = m_straFiles[i];
 
@@ -1047,14 +1047,14 @@ pacmedir->create(pathTarget.folder()))
             file().put_contents(strPath, strCommand);
             if (!process->create_child_process(strPath, false))
             {
-               u32 dw = GetLastError();
+               unsigned int dw = GetLastError();
                string str;
                str.formatf("Error creating process: %d", dw);
                add_status(str);
                return error_failed;
             }
 
-            i32 i = 1;
+            int i = 1;
 
             string str;
 
@@ -1083,14 +1083,14 @@ pacmedir->create(pathTarget.folder()))
             file().put_contents(strPath, strCommand);
             if (!process->create_child_process(strPath, false))
             {
-               u32 dw = GetLastError();
+               unsigned int dw = GetLastError();
                string str;
                str.formatf("Error creating process: %d", dw);
                add_status(str);
                return error_failed;
             }
 
-            i32 i = 1;
+            int i = 1;
 
             string str;
 
@@ -1423,7 +1423,7 @@ pacmedir->create(pathTarget.folder()))
       //   add_status("Signing driver code ...");
 
       //}
-      i32 iRetry = 0;
+      int iRetry = 0;
 
       while (true)
       {
@@ -1482,7 +1482,7 @@ pacmedir->create(pathTarget.folder()))
       string strRelative;
       string strBz;
       string strUn;
-      i32 i = 0;
+      int i = 0;
       single_lock synchronouslock(&m_mutexCompress, true);
       for (; i < m_straFiles.get_size(); i++)
       {
@@ -1508,7 +1508,7 @@ pacmedir->create(pathTarget.folder()))
       }
       synchronouslock.unlock();
 
-      u32 uiProcessorCount = get_current_process_affinity_order();
+      unsigned int uiProcessorCount = get_current_process_affinity_order();
       //uiProcessorCount = 0;
       array < compress_thread * > threada;
       if (uiProcessorCount == 0)
@@ -1598,7 +1598,7 @@ pacmedir->create(pathTarget.folder()))
    strStatus = "Compressing";
    add_status(strStatus);
 
-   i32 i = 0;
+   int i = 0;
    while(i < m_straCC.get_size())
    {
    string strUrl;
@@ -1652,7 +1652,7 @@ pacmedir->create(pathTarget.folder()))
       }
 
       DWORD dwExitCode;
-      i32 i = 1;
+      int i = 1;
       while (true)
       {
          if (!GetExitCodeProcess(pi.hProcess, &dwExitCode))
@@ -1675,7 +1675,7 @@ pacmedir->create(pathTarget.folder()))
       add_status(strStatus);
 
 
-      for (i32 i = 0; i < m_straRoot.get_size(); i++)
+      for (int i = 0; i < m_straRoot.get_size(); i++)
       {
 
          if (!commit_source(m_straRoot[i]))
@@ -1703,7 +1703,7 @@ pacmedir->create(pathTarget.folder()))
       si.wShowWindow = SW_HIDE;
 
       DWORD dwExitCode;
-      i32 i = 1;
+      int i = 1;
       ::file::path pathDir = strBase;
       pathDir /= psz;
 
@@ -1843,7 +1843,7 @@ pacmedir->create(pathTarget.folder()))
 
          stra1.rls_file(strRelease);
 
-         for (i32 i = 0; i < stra1.get_size();)
+         for (int i = 0; i < stra1.get_size();)
          {
             if (stra1[i].find("\\.svn\\") >= 0 || (stra1[i].get_length() < 5 || stra1[i].right()(5) == "\\.svn"))
             {
@@ -1896,7 +1896,7 @@ pacmedir->create(pathTarget.folder()))
       string strMd5;
       var varBzSize;
       string strContents;
-      i32 i = 0;
+      int i = 0;
       for (; i < m_straFiles.get_size(); i++)
       {
          ::file::path & strFile = m_straFiles[i];
@@ -2008,7 +2008,7 @@ pacmedir->create(pathTarget.folder()))
    void production::generate_appmatter_spa()
    {
 
-      for (i32 i = 0; i < m_straRoot.get_size(); i++)
+      for (int i = 0; i < m_straRoot.get_size(); i++)
       {
          generate_appmatter_spa(m_straRoot[i]);
       }
@@ -2024,7 +2024,7 @@ pacmedir->create(pathTarget.folder()))
 
       listing.ls_dir(strBase);
 
-      for (i32 i = 0; i < listing.get_count(); i++)
+      for (int i = 0; i < listing.get_count(); i++)
       {
          if (::str().begins(listing[i].name(), "_"))
          {
@@ -2049,7 +2049,7 @@ pacmedir->create(pathTarget.folder()))
 
       listing.ls_dir(strBase);
 
-      for (i32 i = 0; i < listing.get_count(); i++)
+      for (int i = 0; i < listing.get_count(); i++)
       {
          if (::str().begins(listing[i].relative(), "_") && listing[i].relative() != "_std")
          {
@@ -2074,7 +2074,7 @@ pacmedir->create(pathTarget.folder()))
 
       listing.ls_dir(strBase);
 
-      for (i32 i = 0; i < listing.get_count(); i++)
+      for (int i = 0; i < listing.get_count(); i++)
       {
 
          generate_appmatter_spa_style(pszRoot, pszRelative / listing[i].name());
@@ -2094,7 +2094,7 @@ pacmedir->create(pathTarget.folder()))
 
       listing.ls_dir(strBase);
 
-      for (i32 i = 0; i < listing.get_count(); i++)
+      for (int i = 0; i < listing.get_count(); i++)
       {
 
          generate_appmatter_spa(pszRoot, pszRelative / listing[i].name());
@@ -2132,7 +2132,7 @@ pacmedir->create(pathTarget.folder()))
       string strMd5;
       var varBzSize;
       string strContents;
-      i32 i = 0;
+      int i = 0;
       for (; i < straFiles.get_size(); i++)
       {
          ::file::path & strFile = straFiles[i];
@@ -2383,7 +2383,7 @@ pacmedir->create(pathTarget.folder()))
 
       memory mem;
 
-      for (i32 i = 0; i < m_straPath.get_count(); i++)
+      for (int i = 0; i < m_straPath.get_count(); i++)
       {
          ::file::path strRelative = m_straPath[i].relative();
          if (strRelative.case_insensitive_begins("META-INF\\"))
@@ -2615,12 +2615,12 @@ pacmedir->create(pathTarget.folder()))
 
       ::process::process_pointer process(e_create);
 
-      for (i32 i = 0; i < m_straPath.get_count(); i++)
+      for (int i = 0; i < m_straPath.get_count(); i++)
       {
          strPath = "zip -9 \"" + strXpi + "\" \"" + m_straPath[i].relative() + "\"";
          if (!process->create_child_process(strPath, false, strDir / "npca2"))
          {
-            u32 dw = GetLastError();
+            unsigned int dw = GetLastError();
             string str;
             str.formatf("Error compressing npca2: %d is zip command line utility installed?", dw);
             add_status(str);
@@ -2644,20 +2644,20 @@ pacmedir->create(pathTarget.folder()))
       string strDir;
       strDir = m_strBase / "time/npca2" / strPlatform;
 
-      add_status("Creating u32 extension ...");
+      add_status("Creating unsigned int extension ...");
       string str;
       string strXpi = strDir / "npca2.xpi";
       ::process::process_pointer process(e_create);
       string strPath = "zip -9 -r -D \"" + strXpi + "\" * ";
       if (!process->create_child_process(strPath, false, strDir / "npca2"))
       {
-         u32 dw = GetLastError();
+         unsigned int dw = GetLastError();
          string str;
          str.formatf("Error compressing npca2: %d is zip command line utilty installed?", dw);
          add_status(str);
          return 0;
       }
-      i32 i = 1;
+      int i = 1;
       while (!process->has_exited())
       {
          Sleep(300);
@@ -2708,13 +2708,13 @@ pacmedir->create(pathTarget.folder()))
       strPath = m_strBase / "platform\\stage\\script\\makecab" + string(pszPlatform) + "_" + m_strConfiguration + ".bat";
       if (!process->create_child_process(strPath, false, strPath.folder()))
       {
-         u32 dw = GetLastError();
+         unsigned int dw = GetLastError();
          string str;
          str.formatf("Error creating iexca2.cab: %d", dw);
          add_status(str);
          return 0;
       }
-      i32 i;
+      int i;
       i = 1;
       while (!process->has_exited())
       {
@@ -3153,7 +3153,7 @@ pacmedir->create(pathTarget.folder()))
    string production::twitter_twit(const ::string & pszMessage)
    {
 
-      i32 iRetry = 0;
+      int iRetry = 0;
 
 Retry2:
 
@@ -3244,7 +3244,7 @@ retry1:
    string production::facebook_status(const ::string & pszMessage)
    {
 
-      i32 iRetry = 0;
+      int iRetry = 0;
 
 Retry2:
 
@@ -3449,13 +3449,13 @@ retry1:
       }
       if (!process->create_child_process(strPath, true))
       {
-         u32 dw = GetLastError();
+         unsigned int dw = GetLastError();
          string str;
          str.formatf("Error creating build process: %d for build of " + strApp, dw);
          add_status(str);
          return;
       }
-      i32 i = 1;
+      int i = 1;
       string str;
       string strAccumul;
       while (!process->has_exited())

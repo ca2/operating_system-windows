@@ -12,7 +12,7 @@ Author: Andrei Belogortseff [ http://www.winability.com ]
 
 TERMS OF USE: You are free to use this file in any way you like,
 for both the commercial and non-commercial purposes, royalty-free,
-AS ::i32 AS you agree with the warranty disclaimer above,
+AS int AS you agree with the warranty disclaimer above,
 EXCEPT that you may not remov or modify this or any of the
 preceeding paragraphs. If you make any changes, please document
 them in the MODIFICATIONS section below. If the changes are of general
@@ -350,7 +350,7 @@ namespace uac_tools
    HHOOK   hVEHook                     = nullptr;
 
    __declspec(allocate("ve_shared"))
-   ::u32   uVEMsg                     = 0;
+   unsigned int   uVEMsg                     = 0;
 
    __declspec(allocate("ve_shared"))
    bool   bVESuccess                  = false;
@@ -374,7 +374,7 @@ namespace uac_tools
    // the hook callback procedure, it is called in the context of th shell proces
 
    LRESULT CALLBACK
-   VistaEelevator_HookProc_MsgRet(i32 code,WPARAM wParam,LPARAM lParam)
+   VistaEelevator_HookProc_MsgRet(int code,WPARAM wParam,LPARAM lParam)
    {
       if(code >= 0 && lParam)
       {
@@ -406,7 +406,7 @@ namespace uac_tools
    bool
    (WINAPI
     *PGetModuleHandleExW)(
-    __in        ::u32    dwFlags,
+    __in        unsigned int    dwFlags,
     __in_opt    const unichar * pModuleName,
 
     __out HMODULE* phModule

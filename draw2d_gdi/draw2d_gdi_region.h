@@ -21,8 +21,8 @@ namespace draw2d_gdi
       bool create_rect(const ::rectangle_i32 & rectangle);
       bool create_oval(int x1, int y1, int x2, int y2);
       bool create_oval(const ::rectangle_i32 & rectangle);
-      bool create_polygon(LPPOINT lpPoints, i32 nCount, ::draw2d::e_fill_mode efillmode);
-      bool create_poly_polygon(LPPOINT lpPoints, LPINT lpPolyCounts, i32 nCount, ::draw2d::e_fill_mode efillmode);
+      bool create_polygon(LPPOINT lpPoints, int nCount, ::draw2d::e_fill_mode efillmode);
+      bool create_poly_polygon(LPPOINT lpPoints, LPINT lpPolyCounts, int nCount, ::draw2d::e_fill_mode efillmode);
       bool CreateRoundRectRgn(int x1, int y1, int x2, int y2, int x3, int y3);
       bool CreateFromPath(::draw2d::graphics_pointer & pgraphics);
       bool CreateFromData(const XFORM* lpXForm, int nCount,

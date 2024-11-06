@@ -4,7 +4,7 @@
 //#include "exception.h"
 
 
-string get_error_message(::u32 dwError);
+string get_error_message(unsigned int dwError);
 
 
 //CLASS_DECL_ACME_WINDOWS bool __initialize();
@@ -30,9 +30,9 @@ string get_error_message(::u32 dwError);
 
 
 //void CLASS_DECL_ACME_WINDOWS __cdecl _ca2_purecall();
-void CLASS_DECL_ACME_WINDOWS __cdecl _null_se_translator(u32 uiCode, EXCEPTION_POINTERS * ppointers);
+void CLASS_DECL_ACME_WINDOWS __cdecl _null_se_translator(unsigned int uiCode, EXCEPTION_POINTERS * ppointers);
 bool CLASS_DECL_ACME_WINDOWS __windows_init();
-//i32 CLASS_DECL_ACME_WINDOWS __windows_main(::platform::system * psystem, ::create * pmaininitdata);
+//int CLASS_DECL_ACME_WINDOWS __windows_main(::platform::system * psystem, ::create * pmaininitdata);
 
 
 
@@ -55,7 +55,7 @@ CLASS_DECL_ACME_WINDOWS bool __is_valid_atom(const wchar_t * psz);
 
 /////////////////////////////////////////////////////////////////////////////
 // locale-invariant comparison helpers till CRT gets that support
-inline i32 __invariant_stricmp(const ::string &pszLeft, const ::string &pszRight)
+inline int __invariant_stricmp(const ::string &pszLeft, const ::string &pszRight)
 {
 #ifdef WINDOWS_DESKTOP
    return ::CompareStringA(MAKELCID(MAKELANGID(LANG_ENGLISH,SUBLANG_ENGLISH_US),SORT_DEFAULT),
@@ -69,7 +69,7 @@ inline i32 __invariant_stricmp(const ::string &pszLeft, const ::string &pszRight
 #endif
 }
 
-inline i32 __invariant_stricmp(const unichar *pwszLeft,const unichar *pwszRight)
+inline int __invariant_stricmp(const unichar *pwszLeft,const unichar *pwszRight)
 {
 #ifdef WINDOWS_DESKTOP
    return ::CompareStringW(MAKELCID(MAKELANGID(LANG_ENGLISH,SUBLANG_ENGLISH_US),SORT_DEFAULT),
@@ -88,8 +88,8 @@ inline i32 __invariant_stricmp(const unichar *pwszLeft,const unichar *pwszRight)
 //
 //#define __set_dialog_control_id(oswindow, nID)     SetWindowLong(oswindow, GWL_ID, nID)
 //#define __set_dialog_control_id_(oswindow, nID)     oswindow->SetWindowLong(GWL_ID, nID)
-//#define __get_dialog_control_id(oswindow)         ((::u32)(::u16)::GetDlgCtrlID(oswindow))
-//#define __get_dialog_control_id_(oswindow)         ((::u32)(::u16)oswindow->GetDlgCtrlId())
+//#define __get_dialog_control_id(oswindow)         ((unsigned int)(unsigned short)::GetDlgCtrlID(oswindow))
+//#define __get_dialog_control_id_(oswindow)         ((unsigned int)(unsigned short)oswindow->GetDlgCtrlId())
 
 
 //#include "pipe.h"
@@ -107,7 +107,7 @@ inline i32 __invariant_stricmp(const unichar *pwszLeft,const unichar *pwszRight)
 
 
 
-CLASS_DECL_ACME_WINDOWS ::i32 delete_registry_tree_helper(HKEY hParentKey, const ::string & strKeyName);
+CLASS_DECL_ACME_WINDOWS int delete_registry_tree_helper(HKEY hParentKey, const ::string & strKeyName);
 
 
 //CLASS_DECL_ACME_WINDOWS ::pointer<::platform::application>__get_app();
@@ -115,11 +115,11 @@ CLASS_DECL_ACME_WINDOWS HINSTANCE __get_resource_handle();
 CLASS_DECL_ACME_WINDOWS void __set_resource_handle(HINSTANCE hInstResource);
 
 CLASS_DECL_ACME_WINDOWS HINSTANCE __get_resource_handle();
-CLASS_DECL_ACME_WINDOWS HINSTANCE __find_string_resource_handle(::u32 nID);
+CLASS_DECL_ACME_WINDOWS HINSTANCE __find_string_resource_handle(unsigned int nID);
 
 
 
-//CLASS_DECL_ACME_WINDOWS i32 app_main(::platform::system * psystem, HINSTANCE hInstance, HINSTANCE hPrevInstance, char * pCmdLine, ::e_display edisplay);
+//CLASS_DECL_ACME_WINDOWS int app_main(::platform::system * psystem, HINSTANCE hInstance, HINSTANCE hPrevInstance, char * pCmdLine, ::e_display edisplay);
 
 
 

@@ -356,7 +356,7 @@ namespace acme_windows
    //
    //         key.open(HKEY_CURRENT_USER, "Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize");
    //
-   //         ::u32 dw;
+   //         unsigned int dw;
    //
    //         auto estatus = key._get("AppsUseLightTheme", dw);
    //
@@ -397,7 +397,7 @@ namespace acme_windows
    //
    //         key.open(HKEY_CURRENT_USER, "Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize");
    //
-   //         ::u32 dw;
+   //         unsigned int dw;
    //
    //         auto estatus = key._get("SystemUseLightTheme", dw);
    //
@@ -454,7 +454,7 @@ namespace acme_windows
    //   }
    //
    //   
-   //   void node::set_console_colors(::u32 dwScreenColors, ::u32 dwPopupColors, ::u32 dwWindowAlpha)
+   //   void node::set_console_colors(unsigned int dwScreenColors, unsigned int dwPopupColors, unsigned int dwWindowAlpha)
    //   {
    //
    //      ::acme_windows::registry::key key(HKEY_CURRENT_USER, "Console", true);
@@ -472,7 +472,7 @@ namespace acme_windows
    //
    //      ::acme_windows::registry::key key(HKEY_CURRENT_USER, "Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize", true);
    //
-   //      ::u32 dwSystemUseLightTheme;
+   //      unsigned int dwSystemUseLightTheme;
    //      if (bSet)
    //      {
    //         dwSystemUseLightTheme = 0;
@@ -493,7 +493,7 @@ namespace acme_windows
    //
    //      ::acme_windows::registry::key key(HKEY_CURRENT_USER, "Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize", true);
    //
-   //      ::u32 dwAppsUseLightTheme;
+   //      unsigned int dwAppsUseLightTheme;
    //      if (bSet)
    //      {
    //         dwAppsUseLightTheme = 0;
@@ -523,7 +523,7 @@ namespace acme_windows
    //
    //         DYNAMIC_TIME_ZONE_INFORMATION i = {};
    //
-   //         ::u32 dw = GetDynamicTimeZoneInformation(&i);
+   //         unsigned int dw = GetDynamicTimeZoneInformation(&i);
    //
    //         if (dw == TIME_ZONE_ID_STANDARD)
    //         {
@@ -869,11 +869,11 @@ namespace acme_windows
       {
          ::file::path str = directory_system()->userconfig() / "CrashDumps" / strModuleNameWithTheExeExtension;
          wstring wstr = str;
-         RegSetValueExW(k.m_hkeySub, L"DumpFolder", 0, REG_EXPAND_SZ, (::u8*)wstr.c_str(), ::u32((wcslen(wstr) + 1) * sizeof(wchar_t)));
-         ::u32 dw = 10;
-         RegSetValueExW(k.m_hkeySub, L"DumpCount", 0, REG_DWORD, (::u8*)&dw, sizeof(dw));
+         RegSetValueExW(k.m_hkeySub, L"DumpFolder", 0, REG_EXPAND_SZ, (unsigned char*)wstr.c_str(), unsigned int((wcslen(wstr) + 1) * sizeof(wchar_t)));
+         unsigned int dw = 10;
+         RegSetValueExW(k.m_hkeySub, L"DumpCount", 0, REG_DWORD, (unsigned char*)&dw, sizeof(dw));
          dw = 2;
-         RegSetValueExW(k.m_hkeySub, L"DumpType", 0, REG_DWORD, (::u8*)&dw, sizeof(dw));
+         RegSetValueExW(k.m_hkeySub, L"DumpType", 0, REG_DWORD, (unsigned char*)&dw, sizeof(dw));
 
       }
 
@@ -945,12 +945,12 @@ namespace acme_windows
 
    //   SYSTEMTIME sysTime;
 
-   //   sysTime.wYear = (::u16)time.year();
-   //   sysTime.wMonth = (::u16)time.month();
-   //   sysTime.wDay = (::u16)time.day();
-   //   sysTime.wHour = (::u16)time.hour();
-   //   sysTime.wMinute = (::u16)time.minute();
-   //   sysTime.wSecond = (::u16)time.second();
+   //   sysTime.wYear = (unsigned short)time.year();
+   //   sysTime.wMonth = (unsigned short)time.month();
+   //   sysTime.wDay = (unsigned short)time.day();
+   //   sysTime.wHour = (unsigned short)time.hour();
+   //   sysTime.wMinute = (unsigned short)time.minute();
+   //   sysTime.wSecond = (unsigned short)time.second();
    //   sysTime.wMilliseconds = 0;
 
    //   // convert system time to local file time
@@ -1059,7 +1059,7 @@ namespace acme_windows
 
       HANDLE hProcess;
 
-      //u32 i;
+      //unsigned int i;
 
       DWORD dwProcess = (DWORD)processidentifier;
 
@@ -1072,7 +1072,7 @@ namespace acme_windows
 
       }
 
-      const i32 iMaxModuleCount = 1024 * 8;
+      const int iMaxModuleCount = 1024 * 8;
 
       ::array < HMODULE > hmodulea;
 
@@ -1165,7 +1165,7 @@ namespace acme_windows
 
       }
 
-      for (i32 i = 0; i < straOld.get_count(); i++)
+      for (int i = 0; i < straOld.get_count(); i++)
       {
 
          bFound = false;
@@ -1187,7 +1187,7 @@ namespace acme_windows
 
          }
 
-         for (i32 j = 0; j < straNew.get_count(); j++)
+         for (int j = 0; j < straNew.get_count(); j++)
          {
 
             if (case_insensitive_ansi_compare(straOld[i], straNew[j]) == 0)
@@ -1462,13 +1462,13 @@ namespace acme_windows
       if (nullptr == hProcess)
          return false;
 
-      const i32 iMaxModuleCount = 1024;
+      const int iMaxModuleCount = 1024;
 
       array < HMODULE > hmods;
 
       hmods.set_size(iMaxModuleCount);
 
-      const i32 iImageSize = MAX_PATH * 8;
+      const int iImageSize = MAX_PATH * 8;
 
       ::memory memory;
 
@@ -1550,7 +1550,7 @@ namespace acme_windows
 
 
 
-   //CLASS_DECL_ACME ::u32 get_current_process_id()
+   //CLASS_DECL_ACME unsigned int get_current_process_id()
    //{
    //
    //   return ::GetCurrentProcessId();
@@ -2128,7 +2128,7 @@ namespace acme_windows
 
       }
 
-      i32 processId;
+      int processId;
 
       if (!create_process(strCmdLine, &processId))
       {
@@ -2381,8 +2381,8 @@ namespace acme_windows
          output_debug_string("Could not create or open a registrty key\n");
          throw ::exception(error_resource);
       }
-      RegSetValueExW(hkey, L"", 0, REG_SZ, (::u8*)desc.c_str(), ::u32(desc.length() * sizeof(wchar_t))); // default vlaue is description of file extension
-      RegSetValueExW(hkey, L"ContentType", 0, REG_SZ, (::u8*)content_type.c_str(), ::u32(content_type.length() * sizeof(wchar_t))); // default vlaue is description of file extension
+      RegSetValueExW(hkey, L"", 0, REG_SZ, (unsigned char*)desc.c_str(), unsigned int(desc.length() * sizeof(wchar_t))); // default vlaue is description of file extension
+      RegSetValueExW(hkey, L"ContentType", 0, REG_SZ, (unsigned char*)content_type.c_str(), unsigned int(content_type.length() * sizeof(wchar_t))); // default vlaue is description of file extension
       RegCloseKey(hkey);
 
 
@@ -2394,7 +2394,7 @@ namespace acme_windows
          output_debug_string("Could not create or open a registrty key\n");
          throw ::exception(error_resource);
       }
-      RegSetValueExW(hkey, L"", 0, REG_SZ, (::u8*)app.c_str(), ::u32(app.length() * sizeof(wchar_t)));
+      RegSetValueExW(hkey, L"", 0, REG_SZ, (unsigned char*)app.c_str(), unsigned int(app.length() * sizeof(wchar_t)));
       RegCloseKey(hkey);
 
 
@@ -2405,7 +2405,7 @@ namespace acme_windows
          output_debug_string("Could not create or open a registrty key\n");
          throw ::exception(error_resource);
       }
-      RegSetValueExW(hkey, L"", 0, REG_SZ, (::u8*)icon.c_str(), ::u32(icon.length() * sizeof(wchar_t)));
+      RegSetValueExW(hkey, L"", 0, REG_SZ, (unsigned char*)icon.c_str(), unsigned int(icon.length() * sizeof(wchar_t)));
       RegCloseKey(hkey);
 
       ::file::path pathFile(directory_system()->stage(strAppIdHandler, process_platform_name(), process_configuration_name()) / "spa_register.txt");
@@ -2533,7 +2533,7 @@ namespace acme_windows
 
 
 
-   HICON node::extract_icon(HINSTANCE hInst, const ::string& pszExeFileName, ::u32 nIconIndex)
+   HICON node::extract_icon(HINSTANCE hInst, const ::string& pszExeFileName, unsigned int nIconIndex)
 
    {
 
@@ -2543,12 +2543,12 @@ namespace acme_windows
    }
 
 
-   ::i32 node::reg_query_value(HKEY hkey, const ::string& pszSubKey, string& str)
+   int node::reg_query_value(HKEY hkey, const ::string& pszSubKey, string& str)
    {
 
       DWORD dwType = 0;
       DWORD dwSize = 0;
-      ::i32 lResult = RegQueryValueExW(hkey, wstring(pszSubKey), nullptr, &dwType, nullptr, &dwSize);
+      int lResult = RegQueryValueExW(hkey, wstring(pszSubKey), nullptr, &dwType, nullptr, &dwSize);
 
       if (lResult != ERROR_SUCCESS)
          return lResult;
@@ -2560,7 +2560,7 @@ namespace acme_windows
 
          auto pwsz = wstr.get_buffer(dwSize);
 
-         lResult = RegQueryValueExW(hkey, wstring(pszSubKey), nullptr, &dwType, (::u8*)(unichar*)pwsz, &dwSize);
+         lResult = RegQueryValueExW(hkey, wstring(pszSubKey), nullptr, &dwType, (unsigned char*)(unichar*)pwsz, &dwSize);
 
          wstr.release_buffer(dwSize);
 
@@ -2581,7 +2581,7 @@ namespace acme_windows
    }
 
 
-   //HICON node::extract_icon(HINSTANCE hInst, const ::string & pszExeFileName, ::u32 nIconIndex)
+   //HICON node::extract_icon(HINSTANCE hInst, const ::string & pszExeFileName, unsigned int nIconIndex)
 
    //{
 
@@ -2649,7 +2649,7 @@ namespace acme_windows
       set["privileged"] = true;
 
       //if (!call_sync(path, strParam, path.folder(), ::e_display_none, 3_minute, set))
-      i32 iExitCode = -1;
+      int iExitCode = -1;
       call_sync(path, strParam, path.folder(), ::e_display_none, 3_minute, set, &iExitCode);
       //{
 
@@ -3510,9 +3510,9 @@ namespace acme_windows
       {
          return 0;
       }
-      i32 j = 0;
+      int j = 0;
       uptr dwMask = 1;
-      for (i32 i = 0; i < sizeof(dwProcessAffinityMask) * 8; i++)
+      for (int i = 0; i < sizeof(dwProcessAffinityMask) * 8; i++)
       {
          if ((dwMask & dwProcessAffinityMask) != 0)
          {
@@ -3530,7 +3530,7 @@ namespace acme_windows
    }
 
 
-   i32 node::get_current_process_affinity_order()
+   int node::get_current_process_affinity_order()
    {
 
 
@@ -3544,9 +3544,9 @@ namespace acme_windows
 
       }
 
-      i32 iCount = 0;
+      int iCount = 0;
       uptr dwMask = 1;
-      for (i32 i = 0; i < sizeof(dwProcessAffinityMask) * 8; i++)
+      for (int i = 0; i < sizeof(dwProcessAffinityMask) * 8; i++)
       {
          if ((dwMask & dwProcessAffinityMask) != 0)
          {
@@ -3560,7 +3560,7 @@ namespace acme_windows
    }
 
 
-   i32 node::get_current_process_maximum_affinity()
+   int node::get_current_process_maximum_affinity()
    {
 
       DWORD_PTR dwProcessAffinityMask;
@@ -3569,9 +3569,9 @@ namespace acme_windows
       {
          return 0;
       }
-      i32 iMax = -1;
+      int iMax = -1;
       uptr dwMask = 1;
-      for (i32 i = 0; i < sizeof(dwProcessAffinityMask) * 8; i++)
+      for (int i = 0; i < sizeof(dwProcessAffinityMask) * 8; i++)
       {
          if ((dwMask & dwProcessAffinityMask) != 0)
          {
@@ -3585,7 +3585,7 @@ namespace acme_windows
    }
 
 
-   i32 node::get_current_processor_index()
+   int node::get_current_processor_index()
    {
 
 
@@ -3777,7 +3777,7 @@ namespace acme_windows
 
       }
 
-      set["pid"] = (::u32) ::GetProcessId(infoa.hProcess);
+      set["pid"] = (unsigned int) ::GetProcessId(infoa.hProcess);
 
       DWORD dwExitCode = (DWORD)-1;
 
@@ -3819,7 +3819,7 @@ namespace acme_windows
             auto TerminateProcess_GetLastError = ::GetLastError();
 
             set["TerminateProcess_return"] = TerminateProcess_return;
-            set["TerminateProcess_GetLastError"] = (::u32)TerminateProcess_GetLastError;
+            set["TerminateProcess_GetLastError"] = (unsigned int)TerminateProcess_GetLastError;
 
          }
 
@@ -4701,7 +4701,7 @@ namespace acme_windows
 
       DWORD dw;
 
-      ::u32 dwResSize = GetFileVersionInfoSizeW(
+      unsigned int dwResSize = GetFileVersionInfoSizeW(
          wstrModulePath,
          &dw);
 
@@ -4716,11 +4716,11 @@ namespace acme_windows
             dwResSize,
             memory.data()))
          {
-            ::u32 cbTranslate;
+            unsigned int cbTranslate;
             struct LANGANDCODEPAGE
             {
-               ::u16 wLanguage;
-               ::u16 wCodePage;
+               unsigned short wLanguage;
+               unsigned short wCodePage;
             } *lpTranslate;
 
             // read the list of languages and code pages.
@@ -4735,7 +4735,7 @@ namespace acme_windows
             for (int i = 0; i < 1; i++)
             {
                wchar_t* lpwsz;
-               ::u32 uSize;
+               unsigned int uSize;
 
                wstrKey.formatf(
                   TEXT("\\StringFileInfo\\%04x%04x\\FileDescription"),

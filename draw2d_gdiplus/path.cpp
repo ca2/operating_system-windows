@@ -411,7 +411,7 @@ namespace draw2d_gdiplus
    //}
 
 
-   void path::create(::draw2d::graphics * pgraphicsParam, ::i8 iCreate)
+   void path::create(::draw2d::graphics * pgraphicsParam, char iCreate)
    {
 
       //auto pgdiplusgraphics = __graphics(pgraphicsParam);
@@ -458,7 +458,7 @@ namespace draw2d_gdiplus
          //internal_begin_figure(m_bFill,m_efillmode);
       }
 
-      //for(i32 i = 0; i < m_elementa.get_count(); i++)
+      //for(int i = 0; i < m_elementa.get_count(); i++)
       //{
 
         // set(pgraphicsParam, m_elementa(i));
@@ -522,7 +522,7 @@ namespace draw2d_gdiplus
    }
 
 
-   bool path::internal_add_text_out(::draw2d::graphics * pgraphics,i32 x,i32 y, const ::string & strText,::write_text::font * pfont)
+   bool path::internal_add_text_out(::draw2d::graphics * pgraphics,int x,int y, const ::string & strText,::write_text::font * pfont)
    {
 
       if (m_ppath == nullptr)
@@ -749,8 +749,8 @@ namespace draw2d_gdiplus
 
       return internal_add_text_out(
          pgraphics,
-         (i32)textout.m_point.x(),
-         (i32)textout.m_point.y(),
+         (int)textout.m_point.x(),
+         (int)textout.m_point.y(),
          textout.m_strText,
          textout.m_pfont);
 

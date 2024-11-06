@@ -90,11 +90,11 @@ CREDUIAPI
 BOOL
 WINAPI
 CredPackAuthenticationBufferWfoo(
-   _In_ u32                                      dwFlags,
+   _In_ unsigned int                                      dwFlags,
    _In_ LPWSTR                                     pszUserName,
    _In_ LPWSTR                                     pszPassword,
    _Out_writes_bytes_opt_(*pcbPackedCredentials) PBYTE   pPackedCredentials,
-   _Inout_ u32* pcbPackedCredentials
+   _Inout_ unsigned int* pcbPackedCredentials
 );
 
 
@@ -109,7 +109,7 @@ CLASS_DECL_APEX_WINDOWS HBITMAP get_icon_hbitmap(HICON hICON);
 #include <iphlpapi.h>
 
 
-//CLASS_DECL_APEX_WINDOWS HRESULT win_create_link(const ::wide_character * pszPathObj, const ::wide_character * pszPathLink, const ::wide_character * pszDesc, const ::wide_character * pszIconPath, ::i32 iIcon);
+//CLASS_DECL_APEX_WINDOWS HRESULT win_create_link(const ::wide_character * pszPathObj, const ::wide_character * pszPathLink, const ::wide_character * pszDesc, const ::wide_character * pszIconPath, int iIcon);
 CLASS_DECL_ACME_WINDOWS void shell_notify_folder_change(const wchar_t* pwsz);
 CLASS_DECL_ACME_WINDOWS void shell_notify_item_change(const wchar_t* pwsz);
 CLASS_DECL_ACME_WINDOWS void shell_notify_assoc_change();
@@ -289,7 +289,7 @@ namespace apex_windows
 
    //      key.open(HKEY_CURRENT_USER, "Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize");
 
-   //      ::u32 dw;
+   //      unsigned int dw;
 
    //      auto estatus = key._get("AppsUseLightTheme", dw);
 
@@ -330,7 +330,7 @@ namespace apex_windows
 
    //      key.open(HKEY_CURRENT_USER, "Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize");
 
-   //      ::u32 dw;
+   //      unsigned int dw;
 
    //      auto estatus = key._get("SystemUseLightTheme", dw);
 
@@ -387,7 +387,7 @@ namespace apex_windows
    }
 
 
-   void node::set_console_colors(::u32 dwScreenColors, ::u32 dwPopupColors, ::u32 dwWindowAlpha)
+   void node::set_console_colors(unsigned int dwScreenColors, unsigned int dwPopupColors, unsigned int dwWindowAlpha)
    {
 
       ::acme_windows::registry::key key(HKEY_CURRENT_USER, "Console", true);
@@ -415,7 +415,7 @@ namespace apex_windows
 
          DYNAMIC_TIME_ZONE_INFORMATION i = {};
 
-         ::u32 dw = GetDynamicTimeZoneInformation(&i);
+         unsigned int dw = GetDynamicTimeZoneInformation(&i);
 
          if (dw == TIME_ZONE_ID_STANDARD)
          {
@@ -567,7 +567,7 @@ namespace apex_windows
       set["privileged"] = true;
 
 
-      ::i32 iExitCode = -1;
+      int iExitCode = -1;
 
       //if (!call_sync(path, strParam, path.folder(), ::e_display_none, 3_minute, set))
       call_sync(path, strParam, path.folder(), ::e_display_none, 3_minute, set, &iExitCode);
@@ -907,7 +907,7 @@ namespace apex_windows
 
       DWORD dw;
 
-      ::u32 dwResSize = GetFileVersionInfoSizeW(
+      unsigned int dwResSize = GetFileVersionInfoSizeW(
          pszModuleFilePath,
          &dw);
 
@@ -926,11 +926,11 @@ namespace apex_windows
             memory.data()))
 
          {
-            ::u32 cbTranslate;
+            unsigned int cbTranslate;
             struct LANGANDCODEPAGE
             {
-               ::u16 wLanguage;
-               ::u16 wCodePage;
+               unsigned short wLanguage;
+               unsigned short wCodePage;
             } *pTranslate;
 
 
@@ -943,7 +943,7 @@ namespace apex_windows
 
             string strKey;
 
-            for (::u32 u = 0; u < (cbTranslate / sizeof(struct LANGANDCODEPAGE)); u++)
+            for (unsigned int u = 0; u < (cbTranslate / sizeof(struct LANGANDCODEPAGE)); u++)
             {
 
                WCHAR* psz;
@@ -1014,7 +1014,7 @@ namespace apex_windows
 
 
 
-   ::u32 node::get_current_directory(string& str)
+   unsigned int node::get_current_directory(string& str)
    {
 
       return ::GetCurrentDirectoryW(MAX_PATH * 8, wstring_adaptor(str, MAX_PATH * 8));
@@ -1022,7 +1022,7 @@ namespace apex_windows
    }
 
 
-   ::u32 node::get_temp_path(string& str)
+   unsigned int node::get_temp_path(string& str)
    {
 
       return ::GetTempPathW(MAX_PATH * 8, wstring_adaptor(str, MAX_PATH * 8));
@@ -1030,12 +1030,12 @@ namespace apex_windows
    }
 
 
-   ::i32 node::reg_query_value(HKEY hkey, const ::string& pszSubKey, string& str)
+   int node::reg_query_value(HKEY hkey, const ::string& pszSubKey, string& str)
    {
 
       DWORD dwType = 0;
       DWORD dwSize = 0;
-      ::i32 lResult = RegQueryValueExW(hkey, wstring(pszSubKey), nullptr, &dwType, nullptr, &dwSize);
+      int lResult = RegQueryValueExW(hkey, wstring(pszSubKey), nullptr, &dwType, nullptr, &dwSize);
 
       if (lResult != ERROR_SUCCESS)
       {
@@ -1052,7 +1052,7 @@ namespace apex_windows
          
          auto pwsz = wstr.get_buffer(dwSize);
 
-         lResult = RegQueryValueExW(hkey, wstring(pszSubKey), nullptr, &dwType, (::u8*)(unichar*)pwsz, &dwSize);
+         lResult = RegQueryValueExW(hkey, wstring(pszSubKey), nullptr, &dwType, (unsigned char*)(unichar*)pwsz, &dwSize);
 
          wstr.release_buffer(dwSize);
 
@@ -1071,7 +1071,7 @@ namespace apex_windows
    }
 
 
-   HICON node::extract_icon(HINSTANCE hInst, const ::string& pszExeFileName, ::u32 nIconIndex)
+   HICON node::extract_icon(HINSTANCE hInst, const ::string& pszExeFileName, unsigned int nIconIndex)
    {
 
       return ::ExtractIconW(hInst, utf8_to_unicode(pszExeFileName), nIconIndex);
@@ -1467,7 +1467,7 @@ namespace apex_windows
             HANDLE hProcess = ::OpenProcess(PROCESS_QUERY_INFORMATION |
                PROCESS_VM_READ,
                false, dwProcess);
-            TerminateProcess(hProcess, (::u32)-1);
+            TerminateProcess(hProcess, (unsigned int)-1);
             CloseHandle(hProcess);
             /*::EnumWindows((WNDENUMPROC)
             CKillProcessHelper::TerminateAppEnum,
@@ -1597,7 +1597,7 @@ namespace apex_windows
 
       ::raw_array < DWORD > ua;
 
-      ASSERT(sizeof(::u32) == sizeof(u32));
+      ASSERT(sizeof(unsigned int) == sizeof(unsigned int));
 
       ua.set_size(0);
 
@@ -1608,14 +1608,14 @@ namespace apex_windows
 
          ua.set_size(ua.get_count() + 1024);
 
-         if(!EnumProcesses((DWORD *) ua.m_begin, (DWORD) (ua.get_count() * sizeof(::u32)), &cbNeeded))
+         if(!EnumProcesses((DWORD *) ua.m_begin, (DWORD) (ua.get_count() * sizeof(unsigned int)), &cbNeeded))
          {
 
             return{};
 
          }
 
-         ua.set_size(cbNeeded / sizeof(u32));
+         ua.set_size(cbNeeded / sizeof(unsigned int));
 
       }
 
@@ -1636,7 +1636,7 @@ namespace apex_windows
    //   
    //   wstring wstrPath;
    //   
-   //   u32 dwSize = 1;
+   //   unsigned int dwSize = 1;
 
    //   while(natural(wstrPath.length() + 1) == dwSize)
    //   {
@@ -1667,7 +1667,7 @@ namespace apex_windows
 
          key1.get("DefaultConnectionSettings", mem);
 
-         bool bAutoDetect = (((::u8*)mem.data())[8] & 0x08) != 0;
+         bool bAutoDetect = (((unsigned char*)mem.data())[8] & 0x08) != 0;
 
          if (!bAutoDetect)
          {
@@ -2266,7 +2266,7 @@ namespace apex_windows
    struct TOKEN_INFO
    {
       TOKEN_USER tokenUser;
-      ::u8 buffer[SECURITY_MAX_SID_SIZE];
+      unsigned char buffer[SECURITY_MAX_SID_SIZE];
    };
 
 
@@ -2288,7 +2288,7 @@ namespace apex_windows
          &tokenHandle))                  // Access token handle
       {
 
-         u32 win32Status = GetLastError();
+         unsigned int win32Status = GetLastError();
 
          //debug_print("Cannot open token handle: %d\n",win32Status);
 
@@ -2309,7 +2309,7 @@ namespace apex_windows
          &bytesReturned))                // Size needed
       {
 
-         u32 win32Status = GetLastError();
+         unsigned int win32Status = GetLastError();
 
          //debug_print("Cannot query token information: %d\n",win32Status);
 
@@ -2430,7 +2430,7 @@ namespace apex_windows
    {
 
       HRESULT hr = S_OK;
-      u32   dwResult;
+      unsigned int   dwResult;
       sec_cotaskptr < PVOID > pvInAuthBlob;
       sec_cotaskptr < PVOID > pvAuthBlob;
       CREDUI_INFOW u{};
@@ -2440,9 +2440,9 @@ namespace apex_windows
       WCHAR szDomain[CREDUI_MAX_DOMAIN_TARGET_LENGTH + 1];
       //      TOKEN_INFO ti;
 
-      u32 maxLenName = CREDUI_MAX_USERNAME_LENGTH + 1;
-      u32 maxLenPass = CREDUI_MAX_PASSWORD_LENGTH + 1;
-      u32 maxLenDomain = CREDUI_MAX_DOMAIN_TARGET_LENGTH + 1;
+      unsigned int maxLenName = CREDUI_MAX_USERNAME_LENGTH + 1;
+      unsigned int maxLenPass = CREDUI_MAX_PASSWORD_LENGTH + 1;
+      unsigned int maxLenDomain = CREDUI_MAX_DOMAIN_TARGET_LENGTH + 1;
 
       HICON hicon = nullptr;
 
@@ -2453,18 +2453,18 @@ namespace apex_windows
 
       // Retrieve the user name and domain name.
       // SID_NAME_USE    SidUse;
-      u32           cchTmpUsername = CREDUI_MAX_USERNAME_LENGTH + 1;
-      u32           cchTmpDomain = CREDUI_MAX_DOMAIN_TARGET_LENGTH + 1;
-      u32           cchDomainAndUser = CREDUI_MAX_USERNAME_LENGTH + CREDUI_MAX_DOMAIN_TARGET_LENGTH + 1;
+      unsigned int           cchTmpUsername = CREDUI_MAX_USERNAME_LENGTH + 1;
+      unsigned int           cchTmpDomain = CREDUI_MAX_DOMAIN_TARGET_LENGTH + 1;
+      unsigned int           cchDomainAndUser = CREDUI_MAX_USERNAME_LENGTH + CREDUI_MAX_DOMAIN_TARGET_LENGTH + 1;
 
       wstring wstrCaption("\"ca2 : " + strService + "\" Authentication");
       wstring wstrMessage("The Service \"ca2 : " + strService + "\" requires current user password for installing Windows Service.");
 
-      u32 lenUserName = CREDUI_MAX_USERNAME_LENGTH + 1;
+      unsigned int lenUserName = CREDUI_MAX_USERNAME_LENGTH + 1;
 
       //::GetUserNameW(szUsername,&lenUserName);
 
-      u32 dwLastError = 0;
+      unsigned int dwLastError = 0;
 
       bool bOk;
 
@@ -2567,10 +2567,10 @@ namespace apex_windows
          &u,             // Customizing information
          dwLastError,               // Error code to display
          &ulAuthPackage,  // Authorization package
-         pvInAuthBlob,    // Credential ::u8 array
+         pvInAuthBlob,    // Credential unsigned char array
          pvInAuthBlob.m_size,    // Size of credential input buffer
-         &pvAuthBlob,     // Output credential ::u8 array
-         &pvAuthBlob.m_size,     // Size of credential ::u8 array
+         &pvAuthBlob,     // Output credential unsigned char array
+         &pvAuthBlob.m_size,     // Size of credential unsigned char array
          &fSave,          // Select the save check box.
          //CREDUIWIN_SECURE_PROMPT |
          CREDUIWIN_IN_CRED_ONLY |
@@ -2724,7 +2724,7 @@ namespace apex_windows
       if (hdlSCM == 0)
       {
 
-         u32 lasterror = ::GetLastError();
+         unsigned int lasterror = ::GetLastError();
 
          ::windows::throw_last_error(lasterror);
 
@@ -2856,7 +2856,7 @@ namespace apex_windows
       if (!hdlServ)
       {
 
-         u32 lasterror = ::GetLastError();
+         unsigned int lasterror = ::GetLastError();
 
          CloseServiceHandle(hdlSCM);
 
@@ -2901,7 +2901,7 @@ namespace apex_windows
 
       if (!hdlServ)
       {
-         u32 lasterror = ::GetLastError();
+         unsigned int lasterror = ::GetLastError();
          CloseServiceHandle(hdlSCM);
          if (lasterror == 1060) // Service already doesn't exist.
             return; // do self-healing
@@ -2910,7 +2910,7 @@ namespace apex_windows
 
       if (!::DeleteService(hdlServ))
       {
-         u32 lasterror = ::GetLastError();
+         unsigned int lasterror = ::GetLastError();
          CloseServiceHandle(hdlServ);
          CloseServiceHandle(hdlSCM);
          ::windows::throw_last_error(lasterror);
@@ -3027,7 +3027,7 @@ namespace apex_windows
    }
 
 
-   void node::raise_exception(u32 dwExceptionCode, u32 dwExceptionFlags)
+   void node::raise_exception(unsigned int dwExceptionCode, unsigned int dwExceptionFlags)
    {
 
       RaiseException(dwExceptionCode, dwExceptionFlags, 0, nullptr);
@@ -3046,7 +3046,7 @@ namespace apex_windows
    void node::set_file_status(const ::file::path& path, const ::file::file_status& status)
    {
 
-      u32 wAttr;
+      unsigned int wAttr;
 
       FILETIME creationTime;
       FILETIME lastAccessTime;
@@ -3184,7 +3184,7 @@ namespace apex_windows
 
       //}
 
-      if ((u32)status.m_attribute != wAttr && (status.m_attribute & FILE_ATTRIBUTE_READONLY))
+      if ((unsigned int)status.m_attribute != wAttr && (status.m_attribute & FILE_ATTRIBUTE_READONLY))
       {
 
          ::windows::set_file_attributes(path, status.m_attribute);
@@ -3372,7 +3372,7 @@ namespace apex_windows
 
    //   ::acme_windows::registry::key key(HKEY_CURRENT_USER, "Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize", true);
 
-   //   ::u32 dwSystemUseLightTheme;
+   //   unsigned int dwSystemUseLightTheme;
    //   if (bSet)
    //   {
    //      dwSystemUseLightTheme = 0;
@@ -3395,7 +3395,7 @@ namespace apex_windows
 
    //   ::acme_windows::registry::key key(HKEY_CURRENT_USER, "Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize", true);
 
-   //   ::u32 dwAppsUseLightTheme;
+   //   unsigned int dwAppsUseLightTheme;
    //   if (bSet)
    //   {
    //      dwAppsUseLightTheme = 0;
@@ -3442,7 +3442,7 @@ namespace apex_windows
       manual_reset_event manualresetevent;
 
       ::e_status estatusFileOpen = ::success;
-      ::i32 iShellExecuteExitCode = 33;
+      int iShellExecuteExitCode = 33;
       DWORD dwLastError = 0;
       const char* pszShellExecuteError = nullptr;
 
@@ -4688,7 +4688,7 @@ namespace apex_windows
    //         if (rgSpec.get_size() > 0)
    //         {
 
-   //            pfileopen->SetFileTypes(::u32(rgSpec.get_size()), rgSpec.m_begin);
+   //            pfileopen->SetFileTypes(unsigned int(rgSpec.get_size()), rgSpec.m_begin);
 
    //         }
 
@@ -4766,7 +4766,7 @@ namespace apex_windows
    //                  auto & straDest = set["file_name"].string_array_reference();
 
    //                  // Loop through IShellItemArray and construct string for display
-   //                  for (u32 i = 0; i < dwNumItems; i++)
+   //                  for (unsigned int i = 0; i < dwNumItems; i++)
    //                  {
    //                     comptr < IShellItem > pitem;
 
@@ -4938,7 +4938,7 @@ namespace apex_windows
    //         if (rgSpec.get_size() > 0)
    //         {
 
-   //            pfilesave->SetFileTypes(::u32 (rgSpec.get_size()), rgSpec.m_begin);
+   //            pfilesave->SetFileTypes(unsigned int (rgSpec.get_size()), rgSpec.m_begin);
 
    //         }
 
@@ -5278,7 +5278,7 @@ namespace apex_windows
    /*void node::list_process(::file::path_array & patha, ::process_identifier_array & uaPid)
    {
 
-      ASSERT(sizeof(::u32) == sizeof(u32));
+      ASSERT(sizeof(unsigned int) == sizeof(unsigned int));
 
       uaPid = this->processes_identifiers();
 

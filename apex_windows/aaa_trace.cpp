@@ -8,7 +8,7 @@
 //
 //struct CLASS_DECL_APEX_WINDOWS __MAP_MESSAGE
 //{
-//   ::u32    nMsg;
+//   unsigned int    nMsg;
 //   const char *  pszMsg;
 
 //};

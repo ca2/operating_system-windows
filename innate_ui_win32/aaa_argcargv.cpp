@@ -11,7 +11,7 @@
 //static wchar_t* _rawCmd = 0;
 //
 //
-//i32 _init_args()
+//int _init_args()
 //{
 //	_argv[0] = 0;
 //
@@ -50,7 +50,7 @@
 //			*cmd++ = 0;
 //	}
 //
-//	i32 argc = 1;
+//	int argc = 1;
 //	for (;;)
 //	{
 //		while (*cmd && ansi_char_isspace(*cmd))		// Skip over any whitespace

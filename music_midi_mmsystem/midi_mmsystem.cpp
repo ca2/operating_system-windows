@@ -14,18 +14,18 @@ namespace music
    {
 
 
-      u32 const DefaultTempo = 500000L;
+      unsigned int const DefaultTempo = 500000L;
 
-      const u32 grbChanMsgLen[] =
+      const unsigned int grbChanMsgLen[] =
       {
-         0,                      /* 0x   not a status ::u8   */
-         0,                      /* 1x   not a status ::u8   */
-         0,                      /* 2x   not a status ::u8   */
-         0,                      /* 3x   not a status ::u8   */
-         0,                      /* 4x   not a status ::u8   */
-         0,                      /* 5x   not a status ::u8   */
-         0,                      /* 6x   not a status ::u8   */
-         0,                      /* 7x   not a status ::u8   */
+         0,                      /* 0x   not a status unsigned char   */
+         0,                      /* 1x   not a status unsigned char   */
+         0,                      /* 2x   not a status unsigned char   */
+         0,                      /* 3x   not a status unsigned char   */
+         0,                      /* 4x   not a status unsigned char   */
+         0,                      /* 5x   not a status unsigned char   */
+         0,                      /* 6x   not a status unsigned char   */
+         0,                      /* 7x   not a status unsigned char   */
          3,                      /* 8x   Note off            */
          3,                      /* 9x   Note on             */
          3,                      /* Ax   Poly pressure       */
@@ -182,7 +182,7 @@ namespace music
       };
 
 
-      /*const u32 voiceText[]
+      /*const unsigned int voiceText[]
       =
       {
       IDS_VOICE_1   ,
@@ -330,7 +330,7 @@ namespace music
 
          string str;
          str.load_string(IDS_MIDI_NOTEOFF);
-         i32 iItem = lpcombo->AddString(str);
+         int iItem = lpcombo->AddString(str);
          lpcombo->SetItemData(iItem, NoteOff);
 
          str.load_string(IDS_MIDI_NOTEON);
@@ -360,9 +360,9 @@ namespace music
          __UNREFERENCED_PARAMETER(pcombo);
          /*    lpcombo->reset_content();
 
-         for(i32 i = 0; i < 128; i++)
+         for(int i = 0; i < 128; i++)
          {
-         i32 iItem = lpcombo->AddString(pitchText[i]);
+         int iItem = lpcombo->AddString(pitchText[i]);
          lpcombo->SetItemData(iItem, i);
          }
          */
@@ -372,7 +372,7 @@ namespace music
       }
 
 
-      i32 GetMessageLen(BYTE bEvent)
+      int GetMessageLen(BYTE bEvent)
       {
 
          return grbChanMsgLen[(bEvent >> 4) & 0x0F];
@@ -381,13 +381,13 @@ namespace music
 
 
       // returns the midi stream var dword
-      u32 GetVDWord(::u8 * &hpbMidiStream, u32 dwLeft, u32 &dwValueParam)
+      unsigned int GetVDWord(unsigned char * &hpbMidiStream, unsigned int dwLeft, unsigned int &dwValueParam)
       {
 
          BYTE                    b;
-         u32                   dwUsed  = 0;
-         ::u8 * &            hpbImage = hpbMidiStream;
-         u32               dwValue;
+         unsigned int                   dwUsed  = 0;
+         unsigned char * &            hpbImage = hpbMidiStream;
+         unsigned int               dwValue;
 
          ASSERT(hpbImage != nullptr);
 
@@ -429,13 +429,13 @@ namespace music
       * Returns the state size_i32 in bytes.
       *
       *****************************************************************************/
-      u32 GetStateMaxSize(
+      unsigned int GetStateMaxSize(
       VOID)
       {
-         return  3*sizeof(u32) +           /* Tempo                */
-                 3*16*sizeof(u32) +        /* Patch changes        */
-                 3*16*120*sizeof(u32) +    /* Controller changes   */
-                 3*sizeof(u32);            /* time alignment NOP   */
+         return  3*sizeof(unsigned int) +           /* Tempo                */
+                 3*16*sizeof(unsigned int) +        /* Patch changes        */
+                 3*16*120*sizeof(unsigned int) +    /* Controller changes   */
+                 3*sizeof(unsigned int);            /* time alignment NOP   */
       }
 
 

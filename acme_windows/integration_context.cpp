@@ -562,7 +562,7 @@ namespace acme_windows
          //
          //#ifdef WINDOWS_DESKTOP
          //   {
-         //      u32 dwSize = GetEnvironmentVariable("PATH", nullptr, 0);
+         //      unsigned int dwSize = GetEnvironmentVariable("PATH", nullptr, 0);
          //      char * lpsz = ___new char[dwSize + 1];
          //      dwSize = GetEnvironmentVariable("PATH", lpsz, dwSize + 1);
          //      delete lpsz;
@@ -577,7 +577,7 @@ namespace acme_windows
          //
          //   //   ::time tickStart= ::time::now();
          //
-         //   //   u32 dwExitCode;
+         //   //   unsigned int dwExitCode;
          //
          //   //   string strLog;
          //
@@ -606,8 +606,8 @@ namespace acme_windows
          //   //      CProcessEnvReader::ReleaseHandle(hProcess);
          //   //   }
          //   //process->write("\n");
-         //   u32 dwExitCode;
-         //   ::u32 tickStart= ::time::now();
+         //   unsigned int dwExitCode;
+         //   unsigned int tickStart= ::time::now();
          //   while(::task_get_run() && task_get_run())
          //   {
          //
@@ -636,7 +636,7 @@ namespace acme_windows
          //
          //   #ifdef WINDOWS_DESKTOP
          //   {
-         //      u32 dwSize = GetEnvironmentVariable("PATH", nullptr, 0);
+         //      unsigned int dwSize = GetEnvironmentVariable("PATH", nullptr, 0);
          //      char * lpsz = ___new char[dwSize + 1];
          //      dwSize = GetEnvironmentVariable("PATH", lpsz, dwSize + 1);
          //      delete lpsz;
@@ -849,7 +849,7 @@ namespace acme_windows
       //}
 
 
-      ::i32 context::bash(const ::scoped_string& scopedstr, const class ::time & timeTimeout)
+      int context::bash(const ::scoped_string& scopedstr, const class ::time & timeTimeout)
       {
 
          string strEscaped = scopedstr;
@@ -892,7 +892,7 @@ namespace acme_windows
       }
 
 
-      ::i32 context::git_bash(const ::scoped_string& scopedstr, const class ::time& timeTimeout)
+      int context::git_bash(const ::scoped_string& scopedstr, const class ::time& timeTimeout)
       {
 
          string strEscaped = scopedstr;
@@ -915,7 +915,7 @@ namespace acme_windows
 
       }
 
-      ::i32 context::zsh(const ::scoped_string& scopedstr, const class ::time& timeTimeout)
+      int context::zsh(const ::scoped_string& scopedstr, const class ::time& timeTimeout)
       {
 
          string strEscaped = scopedstr;

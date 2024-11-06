@@ -50,7 +50,7 @@ namespace windows
 
 
       HWND           m_hwnd;
-      u32            m_dwUser;
+      unsigned int            m_dwUser;
       HWND           m_pvoidUser;
       Array          m_hwndtreea;
 
@@ -91,10 +91,10 @@ namespace windows
 
       /*static void send_message_to_descendants(hwnd hwnd, const ::atom & atom,
       wparam wParam, lparam lParam, bool bDeep, bool bOnlyPerm);*/
-      static void send_message_to_descendants(HWND hwnd, ::u32 message, wparam wParam, lparam lParam, bool bDeep);
+      static void send_message_to_descendants(HWND hwnd, unsigned int message, wparam wParam, lparam lParam, bool bDeep);
       static bool IsAscendant(HWND hwndAscendant, HWND hwndDescendant);
 
-      static i32 GetZOrder(HWND hwnd);
+      static int GetZOrder(HWND hwnd);
       static void GetZOrder(HWND hwnd, ::i32_array & ia);
 
       //      static HRGN GetAClipRgn(hwnd hwnd, const point_i32 & pointOffset, bool bExludeChilren);
