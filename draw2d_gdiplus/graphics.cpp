@@ -147,7 +147,7 @@ void trilinearImageScaling(
             ((H.u8_opacity())) * (w2_diff) * (h2_diff) * (h3_diff);
 
 
-         lineRet->m_u32 =
+         lineRet->m_ui =
             (int)(blue) |
             ((int)(green)) << 8 |
             ((int)(red)) << 16 |
@@ -2353,9 +2353,9 @@ namespace draw2d_gdiplus
 
          ::color::color color = m_pimage->image32()[(int)point.x() + (int)point.y() * m_pimage->scan_size()].color(m_pimage->color_indexes());
 
-         color.m_u8Red = (int)(color.m_u8Red * (1.0 - colorChange.f64_opacity()) + colorChange.m_u8Red * colorChange.f64_opacity());
-         color.m_u8Green = (int)(color.m_u8Green * (1.0 - colorChange.f64_opacity()) + colorChange.m_u8Green * colorChange.f64_opacity());
-         color.m_u8Blue = (int)(color.m_u8Blue * (1.0 - colorChange.f64_opacity()) + colorChange.m_u8Blue * colorChange.f64_opacity());
+         color.m_uchRed = (int)(color.m_uchRed * (1.0 - colorChange.f64_opacity()) + colorChange.m_uchRed * colorChange.f64_opacity());
+         color.m_uchGreen = (int)(color.m_uchGreen * (1.0 - colorChange.f64_opacity()) + colorChange.m_uchGreen * colorChange.f64_opacity());
+         color.m_uchBlue = (int)(color.m_uchBlue * (1.0 - colorChange.f64_opacity()) + colorChange.m_uchBlue * colorChange.f64_opacity());
 
          m_pimage->image32()[(int)point.x() + (int)point.y() * m_pimage->scan_size()].assign(color, m_pimage->color_indexes());
          //colorCurrent.m_iA = colorCurrent.m_iA * (1.0 - color.da()) + color.m_iR * color.da();
@@ -3959,10 +3959,10 @@ namespace draw2d_gdiplus
          copy(rectangle, rectangleParam);
 
          Gdiplus::SolidBrush b(Gdiplus::Color(
-            color.m_u8Opacity,
-            color.m_u8Red,
-            color.m_u8Green,
-            color.m_u8Blue));
+            color.m_uchOpacity,
+            color.m_uchRed,
+            color.m_uchGreen,
+            color.m_uchBlue));
 
          auto status = m_pgraphics->FillRectangle(&b, rectangle);
 

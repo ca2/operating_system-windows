@@ -33,10 +33,10 @@ inline auto gdiplus_color(const ::color::color & color)
 {
 
    return Gdiplus::Color(
-      color.m_u8Opacity,
-      color.m_u8Red,
-      color.m_u8Green,
-      color.m_u8Blue);
+      color.m_uchOpacity,
+      color.m_uchRed,
+      color.m_uchGreen,
+      color.m_uchBlue);
 
 }
 

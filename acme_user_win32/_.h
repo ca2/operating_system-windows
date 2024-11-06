@@ -73,16 +73,16 @@
 //public:
 //
 //
-//   unsigned int m_u32;
+//   unsigned int m_ui;
 //
 //
-//   x11color32_t(){m_u32=0;}
+//   x11color32_t(){m_ui=0;}
 //   x11color32_t(const ::color::color & color)
 //   {
 //
 //      auto opacity = color.u8_opacity();
 //
-//      m_u32 = make_u32(
+//      m_ui = make_u32(
 //              color.u8_blue() * opacity / 255,
 //              color.u8_green() * opacity / 255,
 //              color.u8_red() * opacity / 255,
@@ -91,7 +91,7 @@
 //   }
 //
 //
-//   operator unsigned long () const { return m_u32; }
+//   operator unsigned long () const { return m_ui; }
 //
 //
 //};

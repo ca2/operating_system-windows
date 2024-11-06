@@ -308,7 +308,7 @@ namespace win32
 
             string str;
 
-            str.formatf("\n\n\nWindow Background Color rgb(%d,%d,%d)\n\n", colorWindowBackground.m_u8Red, colorWindowBackground.m_u8Green, colorWindowBackground.m_u8Blue);
+            str.formatf("\n\n\nWindow Background Color rgb(%d,%d,%d)\n\n", colorWindowBackground.m_uchRed, colorWindowBackground.m_uchGreen, colorWindowBackground.m_uchBlue);
 
             ::output_debug_string(str);
 
