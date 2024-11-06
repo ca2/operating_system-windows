@@ -1048,7 +1048,7 @@
 //
 // MessageText:
 //
-// The service is configured with a 64-bit file size_i32 threshold for file
+// The service is configured with a 64-bit file int_size threshold for file
 // rotation.  This GUI can only display 32-bit settings.  Check the registry
 // after editing the service to confirm its file rotation settings.
 //

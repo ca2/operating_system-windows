@@ -820,7 +820,7 @@ enum aiComponent
                                 /** @brief Configures the terragen import plugin to compute uv's for
                                  *  terrains, if not given. Furthermore a default texture is assigned.
                                  *
-                                 * UV coordinates for terrains are so simple to compute that you'll usually
+                                 * UV coordinates for terrains are so simple to compute that you'hi usually
                                  * want to compute them on your own, if you need them. This option is intended
                                  * for model viewers which want to offer an easy way to apply textures to
                                  * terrains.

@@ -98,7 +98,7 @@ CLASS_DECL_ACME_WINDOWS const void* get_resource_pointer(HINSTANCE hinstance, DW
 }
 
 
-CLASS_DECL_ACME_WINDOWS bool read_resource_as_memory(memory& memory, HINSTANCE hinstance, DWORD nID, const char* pcszType, strsize iReadAtMostByteCount)
+CLASS_DECL_ACME_WINDOWS bool read_resource_as_memory(memory& memory, HINSTANCE hinstance, DWORD nID, const char* pcszType, character_count iReadAtMostByteCount)
 {
 
    memsize memsize;

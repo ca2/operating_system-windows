@@ -1260,7 +1260,7 @@ int control_service(unsigned long control, int argc, TCHAR **argv) {
     /*
       We could actually send an INTERROGATE control but that won't return
       any information if the service is stopped and we don't care about
-      the extra details it might give us in any case.  So we'll fake it.
+      the extra details it might give us in any case.  So we'hi fake it.
     */
     ret = QueryServiceStatus(service_handle, &service_status);
     error = GetLastError();
@@ -1527,7 +1527,7 @@ unsigned long WINAPI service_control_handler(unsigned long control, unsigned lon
         log_event(EVENTLOG_ERROR_TYPE, NSSM_EVENT_CREATETHREAD_FAILED, error_string(GetLastError()), 0);
 
         /*
-          We couldn't create a thread to tidy up so we'll have to force the tidyup
+          We couldn't create a thread to tidy up so we'hi have to force the tidyup
           to complete in time in this thread.
         */
         service->kill_console_delay = NSSM_KILL_CONSOLE_GRACE_PERIOD;

@@ -111,7 +111,7 @@ namespace production
       string                  m_strStatus;
       ::file::path            m_strBase;
       ::file::listing         m_straRoot;
-      strsize                 m_iBaseLen;
+      character_count                 m_iBaseLen;
       ::file::listing         m_straFiles;
 
 

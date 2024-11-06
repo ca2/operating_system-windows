@@ -629,7 +629,7 @@ namespace input_win32
    //
    //      //pmouse->m_nFlags = wparam;
    //
-   //      //pmouse->m_point = ::point_i32(lparam);
+   //      //pmouse->m_point = ::int_point(lparam);
    //
    //      //pmouse->m_bTranslated = true; // not in root coordinates
    //
@@ -790,7 +790,7 @@ namespace input_win32
    //   //}
    //
    //
-   //   void windowing::get_cursor_pos(::point_i32* ppoint)
+   //   void windowing::get_cursor_pos(::int_point* ppoint)
    //   {
    //
    //
@@ -817,7 +817,7 @@ namespace input_win32
    //   }
    //
    //
-   //   void windowing::set_cursor_position(const ::point_i32& point)
+   //   void windowing::set_cursor_position(const ::int_point& point)
    //   {
    //
    //      if (!::SetCursorPos(point.x(), point.y()))
@@ -899,7 +899,7 @@ namespace input_win32
    //   //   }
    //
    //
-   //   int_bool windowing::point_is_window_origin(::point_i32 ptHitTest, oswindow oswindowExclude, int iMargin)
+   //   int_bool windowing::point_is_window_origin(::int_point ptHitTest, oswindow oswindowExclude, int iMargin)
    //   {
    //
    //      HWND hwndExclude = __hwnd(oswindowExclude);
@@ -931,7 +931,7 @@ namespace input_win32
    //            if (::GetWindowRect(hwnd, &rectWindow))
    //            {
    //
-   //               ::rectangle_i32 rectangleHitTest;
+   //               ::int_rectangle rectangleHitTest;
    //
    //               rectangleHitTest = rectWindow;
    //
@@ -976,7 +976,7 @@ namespace input_win32
    //   }
    //
    //
-   //   ::pointer<::windowing::window>windowing::window_from_point(::aura::application* papp, const ::point_i32& point)
+   //   ::pointer<::windowing::window>windowing::window_from_point(::aura::application* papp, const ::int_point& point)
    //   {
    //
    //      auto uia = *papp->m_puserinteractiona;
@@ -1181,7 +1181,7 @@ namespace input_win32
    //   }
    //
    //
-   //   //void windowing::get_cursor_position(::point_i32* ppoint)
+   //   //void windowing::get_cursor_position(::int_point* ppoint)
    //   //{
    //
    //   //   ::GetCursorPos((POINT *) ppoint);

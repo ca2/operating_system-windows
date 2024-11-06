@@ -228,7 +228,7 @@ namespace acme_windows
 //
 //         dwWrite = (unsigned int)minimum(nCount - uiWrittenTotal, 0xffffffffu);
 //
-//         dw = (unsigned int)(fwrite(&((u8 *)pdata)[pos], 1, dwWrite, file));
+//         dw = (unsigned int)(fwrite(&((unsigned char *)pdata)[pos], 1, dwWrite, file));
 //
 //
 //         if (dw != dwWrite)

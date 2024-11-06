@@ -229,7 +229,7 @@ namespace apex
 
       }
 
-      if (str.has_char())
+      if (str.has_character())
          return "audio_" + str;
       else
          return system()->implementation_name("audio", "mmsystem");

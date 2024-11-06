@@ -44,16 +44,16 @@ namespace draw2d_gdi
 
 
 
-      virtual bool create(const ::size_i32 & size, ::eobject eobjectCreate = DEFAULT_CREATE_IMAGE_OBJECT_FLAG, int iGoodStride = -1) override;
+      virtual bool create(const ::int_size & size, ::eobject eobjectCreate = DEFAULT_CREATE_IMAGE_OBJECT_FLAG, int iGoodStride = -1) override;
       virtual bool create(::draw2d::graphics_pointer & pgraphics) override;
       virtual bool destroy() override;
 
 
 
       bool from(::draw2d::graphics_pointer & pgraphics);
-      bool from(const ::point_i32 & pointDest, ::draw2d::graphics_pointer & pgraphics, const ::point_i32 & point, const ::size_i32 & sz) override;
+      bool from(const ::int_point & pointDest, ::draw2d::graphics_pointer & pgraphics, const ::int_point & point, const ::int_size & sz) override;
 
-      bool to(::draw2d::graphics_pointer & pgraphics, const ::point_i32 & point, const ::size_i32 & size, const ::point_i32 & pointSrc) override;
+      bool to(::draw2d::graphics_pointer & pgraphics, const ::int_point & point, const ::int_size & size, const ::int_point & pointSrc) override;
 
       //virtual bool update_window(::aura::draw_interface * puserinteraction,::message::message * pmessage,bool bTransferBuffer = true);
       //virtual bool print_window(::aura::draw_interface * puserinteraction,::message::message * pmessage);

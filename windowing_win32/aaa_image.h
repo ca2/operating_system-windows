@@ -12,7 +12,7 @@ namespace draw2d_gdiplus
 
 
       HBITMAP                    m_hbitmap;
-      ::size_i64                   m_sizeWnd;
+      ::huge_integer_size                   m_sizeWnd;
       BITMAPINFO                 m_bitmapinfo;
 
 
@@ -43,7 +43,7 @@ namespace draw2d_gdiplus
       virtual bool _unmap() override;
 
 
-      virtual void create(const ::size_i32 & size, ::eobject eobjectCreate = DEFAULT_CREATE_IMAGE_OBJECT_FLAG, int iGoodStride = -1, bool bPreserve = false) override;
+      virtual void create(const ::int_size & size, ::eobject eobjectCreate = DEFAULT_CREATE_IMAGE_OBJECT_FLAG, int iGoodStride = -1, bool bPreserve = false) override;
       virtual bool host(const ::pixmap * pixmap) override;
       virtual bool on_host_read_pixels(const ::pixmap* pixmap) override;
       virtual void create(::draw2d::graphics * pgraphics) override;
@@ -52,7 +52,7 @@ namespace draw2d_gdiplus
 
       //cvirtual bool stretch(::draw2d::graphics * pgraphics) override;
       //virtual bool draw(const ::image::image * pimage) override;
-      virtual bool _draw_raw(const ::rectangle_i32 & rectangleTarget, ::image::image * pimageSrc, const ::point_i32 & pointSrc) override;
+      virtual bool _draw_raw(const ::int_rectangle & rectangleTarget, ::image::image * pimageSrc, const ::int_point & pointSrc) override;
 
 
       virtual void SetIconMask(::image::icon * picon, int cx, int cy) override;

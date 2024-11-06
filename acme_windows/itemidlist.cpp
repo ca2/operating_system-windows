@@ -1049,7 +1049,7 @@ HRESULT itemidlist::get_item_in_known_folder(itemidlist & idl, const string & st
       if (SUCCEEDED(hr))
       {
 
-         if (strPath.has_char())
+         if (strPath.has_character())
          {
 
             itemidlist itemidlistRelative(strPath);

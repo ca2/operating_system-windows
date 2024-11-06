@@ -98,9 +98,9 @@ namespace acme_windows
 
       virtual void waitByteTimes (size_t count) override;
 
-      virtual size_t _read (u8 *buf, size_t size = 1) override;
+      virtual size_t _read (unsigned char *buf, size_t size = 1) override;
 
-      virtual size_t _write (const u8 *data, size_t length) override;
+      virtual size_t _write (const unsigned char *data, size_t length) override;
 
       virtual void _flush () override;
 

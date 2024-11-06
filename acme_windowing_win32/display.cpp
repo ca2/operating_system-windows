@@ -111,7 +111,7 @@ namespace win32
          // }
 
 
-         ::size_i32 display::get_main_screen_size()
+         ::int_size display::get_main_screen_size()
          {
 
             auto hwnd = ::GetDesktopWindow();
@@ -163,7 +163,7 @@ RECT r;
             g_edisplaytype = edisplaytype;
 
          }
-         //::size_i32 display::get_main_screen_size()
+         //::int_size display::get_main_screen_size()
          //{
 
          //   HWND hwndDesktop = ::GetDesktopWindow();

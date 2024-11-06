@@ -651,7 +651,7 @@ FT_BEGIN_HEADER
   *     Return an error code if it fails.
   *
   *     Else, if `*length' is~0, exit immediately while returning the
-  *     table's (or file) full size_i32 in it.
+  *     table's (or file) full int_size in it.
   *
   *     Else the number of bytes to read from the table or file, from the
   *     starting offset.
@@ -680,7 +680,7 @@ FT_BEGIN_HEADER
   *   Note that structures like @TT_Header or @TT_OS2 can't be used with
   *   this function; they are limited to @FT_Get_Sfnt_Table.  Reason is that
   *   those structures depend on the processor architecture, with varying
-  *   size_i32 (e.g. 32bit vs. 64bit) or order (big endian vs. little endian).
+  *   int_size (e.g. 32bit vs. 64bit) or order (big endian vs. little endian).
   *
   */
   FT_EXPORT( FT_Error )

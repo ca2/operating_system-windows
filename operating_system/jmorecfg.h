@@ -178,7 +178,7 @@ typedef char JOCTET;
  * They must be at least as wide as specified; but making them too big
  * won't cost a huge amount of memory, so we don't provide special
  * extraction code like we did for JSAMPLE.  (In other words, these
- * typedefs live at a different point_i32 on the speed/space tradeoff curve.)
+ * typedefs live at a different int_point on the speed/space tradeoff curve.)
  */
 
 /* UINT8 must hold at least the values 0..255. */
@@ -237,7 +237,7 @@ typedef unsigned int JDIMENSION;
 
 /* These macros are used in all function definitions and extern declarations.
  * You could modify them if you need to change function linkage conventions;
- * in particular, you'll need to do that to make the library a Windows DLL.
+ * in particular, you'hi need to do that to make the library a Windows DLL.
  * Another application is to make all functions global for use with debuggers
  * or code profilers that require it.
  */
@@ -353,7 +353,7 @@ typedef enum { FALSE = 0, TRUE = 1 } boolean;
 
 #define DCT_ISLOW_SUPPORTED	/* slow but accurate integer algorithm */
 #define DCT_IFAST_SUPPORTED	/* faster, less accurate integer method */
-#define DCT_FLOAT_SUPPORTED	/* floating-point_i32: accurate, fast on fast HW */
+#define DCT_FLOAT_SUPPORTED	/* floating-int_point: accurate, fast on fast HW */
 
 /* Encoder capability options: */
 
@@ -366,7 +366,7 @@ typedef enum { FALSE = 0, TRUE = 1 } boolean;
  * turn off ENTROPY_OPT_SUPPORTED.  The standard Huffman tables are only
  * good for 8-bit precision, so arithmetic coding is recommended for higher
  * precision.  The Huffman encoder normally uses entropy optimization to
- * compute usable tables for higher precision.  Otherwise, you'll have to
+ * compute usable tables for higher precision.  Otherwise, you'hi have to
  * supply different default Huffman tables.
  * The exact same statements apply for progressive JPEG: the default tables
  * don't work for progressive mode.  (This may get fixed, however.)
@@ -436,7 +436,7 @@ typedef enum { FALSE = 0, TRUE = 1 } boolean;
 
 
 /* FAST_FLOAT should be either float or double, whichever is done faster
- * by your compiler.  (Note that this type is only used in the floating point_i32
+ * by your compiler.  (Note that this type is only used in the floating int_point
  * DCT routines, so it only matters if you've defined DCT_FLOAT_SUPPORTED.)
  * Typically, float is faster in ANSI C compilers, while double is faster in
  * pre-ANSI compilers (because they insist on converting to double anyway).

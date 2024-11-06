@@ -41,9 +41,9 @@ namespace windows
 
             void attach(void * posdata) override;
 
-            void _draw_text(const ::string& str, const ::rectangle_i32& rectangleText, const ::e_align& ealign, const ::e_draw_text& edrawtext, ::nano::graphics::brush* pnanobrushBack, ::nano::graphics::brush* pnanobrushText, ::nano::graphics::font* pnanofont) override;
-            ::size_i32 get_text_extents(const ::string& str, ::nano::graphics::font* pnanofont) override;
-            void rectangle(const ::rectangle_i32& rectangle, ::nano::graphics::brush* pnanobrush, ::nano::graphics::pen* pnanopen) override;
+            void _draw_text(const ::string& str, const ::int_rectangle& rectangleText, const ::e_align& ealign, const ::e_draw_text& edrawtext, ::nano::graphics::brush* pnanobrushBack, ::nano::graphics::brush* pnanobrushText, ::nano::graphics::font* pnanofont) override;
+            ::int_size get_text_extents(const ::string& str, ::nano::graphics::font* pnanofont) override;
+            void rectangle(const ::int_rectangle& rectangle, ::nano::graphics::brush* pnanobrush, ::nano::graphics::pen* pnanopen) override;
 
 
             void draw(::nano::graphics::icon * picon, int x, int y, int cx, int cy) override;

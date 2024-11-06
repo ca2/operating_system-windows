@@ -24,7 +24,7 @@ CLASS_DECL_ACME itask_t get_main_ithread();
 
 //CLASS_DECL_ACME HMONITOR GetUiMonitorHandle(HWND hwnd);
 //CLASS_DECL_ACME HMONITOR GetPrimaryMonitorHandle();
-//CLASS_DECL_ACME bool GetPrimaryMonitorRect(::rectangle_i32 * prectangle);
+//CLASS_DECL_ACME bool GetPrimaryMonitorRect(::int_rectangle * prectangle);
 
 
 

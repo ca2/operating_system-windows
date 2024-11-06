@@ -240,7 +240,7 @@ namespace acme_windows
 
       string strFolder;
 
-      strsize iFind = strAppId.find_index('/');
+      character_count iFind = strAppId.find_index('/');
 
       if (strPlatform.case_insensitive_order("win32") == 0 || strPlatform.case_insensitive_order("x86") == 0)
       {
@@ -306,7 +306,7 @@ pacmedir->roaming();
 
       string strFolder;
 
-      strsize iFind = strAppId.find_index('/');
+      character_count iFind = strAppId.find_index('/');
 
       path = ca2roaming();
 
@@ -900,7 +900,7 @@ bool windows_file_find_is_dots(const WIN32_FIND_DATAW & data)
       // bool eat_end_level(string & str, int iLevelCount, const char * pSeparator)
       // {
 
-      //    strsize iLast = str.length() - 1;
+      //    character_count iLast = str.length() - 1;
 
       //    if(iLast < 0)
       //       return iLevelCount <= 0;
@@ -911,11 +911,11 @@ bool windows_file_find_is_dots(const WIN32_FIND_DATAW & data)
       //    for(int i = 0; i < iLevelCount; i++)
       //    {
 
-      //       strsize iFind1 = str.rear_find('/', iLast);
+      //       character_count iFind1 = str.rear_find('/', iLast);
 
-      //       strsize iFind2 = str.rear_find('\\', iLast);
+      //       character_count iFind2 = str.rear_find('\\', iLast);
 
-      //       strsize iFind = maximum(iFind1, iFind2);
+      //       character_count iFind = maximum(iFind1, iFind2);
 
       //       if(iFind >= iLast)
       //          return false;
@@ -986,25 +986,25 @@ bool windows_file_find_is_dots(const WIN32_FIND_DATAW & data)
       //
       //         str = get_exe_path();
       //
-      //         if(str.has_char())
+      //         if(str.has_character())
       //         {
       //
       //            goto found;
       //
       //         }
       //
-      //         str = ::dir::pathfind(::file::path(str).folder(), "libacme.dylib", "rfs"); // readable - normal file - non zero size_f64
+      //         str = ::dir::pathfind(::file::path(str).folder(), "libacme.dylib", "rfs"); // readable - normal file - non zero double_size
       //
-      //         if(str.has_char())
+      //         if(str.has_character())
       //         {
       //
       //            goto found;
       //
       //         }
       //
-      //         str = ::dir::pathfind(getenv("DYLD_LIBRARY_PATH"), "libacme.dylib", "rfs"); // readable - normal file - non zero size_f64
+      //         str = ::dir::pathfind(getenv("DYLD_LIBRARY_PATH"), "libacme.dylib", "rfs"); // readable - normal file - non zero double_size
       //
-      //         if(str.has_char())
+      //         if(str.has_character())
       //         {
       //
       //            goto found;
@@ -1013,16 +1013,16 @@ bool windows_file_find_is_dots(const WIN32_FIND_DATAW & data)
       //
       //         str = get_exe_path();
       //
-      //         if(str.has_char())
+      //         if(str.has_character())
       //         {
       //
       //            goto found;
       //
       //         }
       //
-      //         str = ::dir::pathfind(getenv("DYLD_FALLBACK_LIBRARY_PATH"), "libacme.dylib", "rfs"); // readable - normal file - non zero size_f64
+      //         str = ::dir::pathfind(getenv("DYLD_FALLBACK_LIBRARY_PATH"), "libacme.dylib", "rfs"); // readable - normal file - non zero double_size
       //
-      //         if(str.has_char())
+      //         if(str.has_character())
       //         {
       //
       //            goto found;
@@ -1069,7 +1069,7 @@ bool windows_file_find_is_dots(const WIN32_FIND_DATAW & data)
 
          ::file::path pathDir;
 
-         strsize iLastPos;
+         character_count iLastPos;
 
 #ifdef UNIVERSAL_WINDOWS
 
@@ -1652,7 +1652,7 @@ pacmedir->create CreateDirectoryW last error(%d)=%s", dwError, pszError);
 //
 //               }
 //
-//               if (strPrefix.has_char())
+//               if (strPrefix.has_character())
 //               {
 //
 //                  string_array stra;
@@ -1666,7 +1666,7 @@ pacmedir->create CreateDirectoryW last error(%d)=%s", dwError, pszError);
 //
 //                     str = stra[0];
 //
-//                     if (str.has_char())
+//                     if (str.has_character())
 //                     {
 //
 //                        folder = wait(folder->GetFolderAsync(str));
@@ -2017,7 +2017,7 @@ pacmedir->create CreateDirectoryW last error(%d)=%s", dwError, pszError);
 //
 //         ::file::path pathDir;
 //
-//         strsize iLastPo = -1;
+//         character_count iLastPo = -1;
 //
 //         ::file::path_array stra;
 //
@@ -2345,9 +2345,9 @@ pacmedir->create CreateDirectoryW last error(%d)=%s", dwError, pszError);
          //index iFind = strRelative.find(':');
          //if (iFind >= 0)
          //{
-         //   strsize iFind1 = strRelative.rear_find("\\", iFind);
-         //   strsize iFind2 = strRelative.rear_find("/", iFind);
-         //   strsize iStart = maximum(iFind1 + 1, iFind2 + 1);
+         //   character_count iFind1 = strRelative.rear_find("\\", iFind);
+         //   character_count iFind2 = strRelative.rear_find("/", iFind);
+         //   character_count iStart = maximum(iFind1 + 1, iFind2 + 1);
          //   strRelative = strRelative.left()(iFind - 1) + "_" + strRelative.substr(iStart, iFind - iStart) + strRelative.substr(iFind + 1);
          //}
 

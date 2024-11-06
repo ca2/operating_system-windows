@@ -362,7 +362,7 @@ pacmedir->system() / "config/production/mirror_status.txt";
 
             m_timeEnd.FormatGmt(strEndTime, "%Y-%m-%d %H-%M-%S");
 
-            m_strBuild = "\"This a long build version string text description that makes really trigger a size_i32 that is will end up making this status rquired and needed to be recorded and written to another set of records or table...\"";
+            m_strBuild = "\"This a long build version string text description that makes really trigger a int_size that is will end up making this status rquired and needed to be recorded and written to another set of records or table...\"";
 
             //string str;
 
@@ -1876,7 +1876,7 @@ pacmedir->create(pathTarget.folder()))
       add_status(m_strStatus);
 
 
-      strsize iBaseLen = m_strBase.get_length();
+      character_count iBaseLen = m_strBase.get_length();
       if (m_strBase.right()(1) != "/" && m_strBase.right()(1) != "\\")
          iBaseLen++;
 
@@ -2119,7 +2119,7 @@ pacmedir->create(pathTarget.folder()))
 
       straFiles.rls(m_strBase / pszRoot / "appmatter" / pszRelative);
 
-      strsize iBaseLen = m_strBase.get_length();
+      character_count iBaseLen = m_strBase.get_length();
 
       if (m_strBase.right()(1) != "/" && m_strBase.right()(1) != "\\")
          iBaseLen++;
@@ -3108,7 +3108,7 @@ pacmedir->create(pathTarget.folder()))
       string myOAuthAccessTokenKey = file().as_string(strPathKey);
       string myOAuthAccessTokenSecret = file().as_string(strPathSecret);
 
-      if (myOAuthAccessTokenKey.has_char() && myOAuthAccessTokenSecret.has_char())
+      if (myOAuthAccessTokenKey.has_character() && myOAuthAccessTokenSecret.has_character())
       {
          /* If we already have these keys, then no need to go through auth again */
          twitterObj.get_oauth().setOAuthTokenKey(myOAuthAccessTokenKey);
@@ -3173,7 +3173,7 @@ Retry2:
       string myOAuthAccessTokenKey = file().as_string(strPathKey);
       string myOAuthAccessTokenSecret = file().as_string(strPathSecret);
 
-      if (myOAuthAccessTokenKey.has_char() && myOAuthAccessTokenSecret.has_char())
+      if (myOAuthAccessTokenKey.has_character() && myOAuthAccessTokenSecret.has_character())
       {
          /* If we already have these keys, then no need to go through auth again */
          twitterObj.get_oauth().setOAuthTokenKey(myOAuthAccessTokenKey);
@@ -3264,7 +3264,7 @@ Retry2:
       string myOAuthAccessTokenKey = file().as_string(strPathKey);
       string myOAuthAccessTokenSecret = file().as_string(strPathSecret);
 
-      if (myOAuthAccessTokenKey.has_char() && myOAuthAccessTokenSecret.has_char())
+      if (myOAuthAccessTokenKey.has_character() && myOAuthAccessTokenSecret.has_character())
       {
          /* If we already have these keys, then no need to go through auth again */
          twitterObj.get_oauth().setOAuthTokenKey(myOAuthAccessTokenKey);
@@ -3466,7 +3466,7 @@ retry1:
          {
             str = process->read();
             strAccumul += str;
-            if (!str.has_char())
+            if (!str.has_character())
                break;
          }
          ::collection::index iFind;
@@ -3482,7 +3482,7 @@ retry1:
       {
          str = process->read();
          strAccumul += str;
-         if (!str.has_char())
+         if (!str.has_character())
             break;
       }
       ::collection::index iFind;

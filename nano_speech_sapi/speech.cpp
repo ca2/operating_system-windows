@@ -276,7 +276,7 @@ namespace sapi
 
             }
 
-            if (scopedstrLang.has_char())
+            if (scopedstrLang.has_character())
             {
 
                hr = _SpGetDefaultTokenFromCategoryId__LangAndGender
@@ -353,7 +353,7 @@ namespace sapi
 
                }
 
-               if (set[str].has_char())
+               if (set[str].has_character())
                {
 
                   strLang = set[str];

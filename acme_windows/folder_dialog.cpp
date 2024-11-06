@@ -80,7 +80,7 @@ namespace acme_windows
             if (SUCCEEDED(hr))
             {
 
-               if (pdialog->m_path.has_char())
+               if (pdialog->m_path.has_character())
                {
 
                   wstring wstr(pdialog->m_path);

@@ -198,7 +198,7 @@ void imm_client::_001OnIme(::message::message * pmessage)
 
          ::output_debug_string("\nWM_IME_COMPOSITION Cancellation...");
 
-         if (m_strImeComposition.has_char())
+         if (m_strImeComposition.has_character())
          {
 
             m_puserinteraction->edit_undo();
@@ -211,7 +211,7 @@ void imm_client::_001OnIme(::message::message * pmessage)
       else
       {
 
-         ::output_debug_string("\nWM_IME_COMPOSITION " + ::as_string((::i64)pusermessage->m_lparam.m_lparam));
+         ::output_debug_string("\nWM_IME_COMPOSITION " + ::as_string((huge_integer)pusermessage->m_lparam.m_lparam));
 
          if ((pmessage->m_lparam & GCS_RESULTSTR) != 0)
          {
@@ -341,7 +341,7 @@ void imm_client::_001OnIme(::message::message * pmessage)
 
       set_text_composition_active();
 
-      if (m_strImeComposition.has_char())
+      if (m_strImeComposition.has_character())
       {
 
          imm_context imm(m_puserinteraction);
@@ -584,7 +584,7 @@ void imm_client::on_message_key_down(::message::message * pmessage)
 
       }
 
-      if (m_strImeComposition.has_char())
+      if (m_strImeComposition.has_character())
       {
 
          clear_ime_composition();
@@ -701,8 +701,8 @@ int imm_client::on_text_composition_message(int iMessage)
    if (iMessage == TEXT_COMPOSITION_MESSAGE_UPDATE_CARET)
    {
 
-      //strsize iBeg;
-      //strsize iEnd;
+      //character_count iBeg;
+      //character_count iEnd;
 
       //_001GetSel(iBeg, iEnd);
 
@@ -714,8 +714,8 @@ int imm_client::on_text_composition_message(int iMessage)
 
       //int y = (iLine)* m_iLineHeight - get_context_offset().y();
       //int y2 = y + m_iLineHeight;
-      // ::point_i32 point(x, y);
-      //::rectangle_i32 r;
+      // ::int_point point(x, y);
+      //::int_rectangle r;
       //this->rectangle(rectangle);
       //rectangle.left() = x;
       //rectangle.top() = y;
@@ -739,7 +739,7 @@ int imm_client::on_text_composition_message(int iMessage)
 
       }
 
-      ::rectangle_i32 rectangle;
+      ::int_rectangle rectangle;
 
       m_puserinteraction->get_text_composition_area(rectangle);
 
@@ -751,7 +751,7 @@ int imm_client::on_text_composition_message(int iMessage)
 
       compositionform.ptCurrentPos.y -= 100;
 
-      ::rectangle_i32 rect2(rectangle);
+      ::int_rectangle rect2(rectangle);
 
       rect2.offset_y(-100);
 

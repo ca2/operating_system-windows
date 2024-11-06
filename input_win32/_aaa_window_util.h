@@ -79,8 +79,8 @@ namespace windows
 
 
       //#ifdef WINDOWS
-      //      static HRGN GetAClipRgn(hwnd hwnd, const point_i32 & pointOffset, bool bExludeChilren);
-      //      static void ExcludeChildren(hwnd hwnd, HRGN hrgn, const point_i32 & pointOffset);
+      //      static HRGN GetAClipRgn(hwnd hwnd, const int_point & pointOffset, bool bExludeChilren);
+      //      static void ExcludeChildren(hwnd hwnd, HRGN hrgn, const int_point & pointOffset);
       //#endif
 
 
@@ -97,8 +97,8 @@ namespace windows
       static int GetZOrder(HWND hwnd);
       static void GetZOrder(HWND hwnd, ::i32_array & ia);
 
-      //      static HRGN GetAClipRgn(hwnd hwnd, const point_i32 & pointOffset, bool bExludeChilren);
-      //      static void ExcludeChildren(hwnd hwnd, HRGN hrgn, const point_i32 & pointOffset);
+      //      static HRGN GetAClipRgn(hwnd hwnd, const int_point & pointOffset, bool bExludeChilren);
+      //      static void ExcludeChildren(hwnd hwnd, HRGN hrgn, const int_point & pointOffset);
 
       //static void SortByZOrder(comparable_array < ::windowing::window *, ::windowing::window * > & wndpa);
       //static void SortByZOrder(comparable_array < hwnd, hwnd > & hwnda);

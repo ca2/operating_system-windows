@@ -26,7 +26,7 @@ namespace windows
 
 	   interface IDerivedNATExternalIPAddressCallback : public INATExternalIPAddressCallback
 	   {
-		   IDerivedNATExternalIPAddressCallback( ::net::port_forward_change_callbacks * point_i32 ) : m_pointer( point_i32 ), m_dwRef( 0 ) { };
+		   IDerivedNATExternalIPAddressCallback( ::net::port_forward_change_callbacks * int_point ) : m_pointer( int_point ), m_dwRef( 0 ) { };
 		
 		   HRESULT STDMETHODCALLTYPE NewExternalIPAddress( BSTR bstrNewExternalIPAddress )
 		   {
@@ -53,7 +53,7 @@ namespace windows
 	
 	   interface IDerivedNATNumberOfEntriesCallback : public INATNumberOfEntriesCallback
 	   {
-		   IDerivedNATNumberOfEntriesCallback( ::net::port_forward_change_callbacks* point_i32 ) : m_pointer( point_i32 ), m_dwRef( 0 ) { };
+		   IDerivedNATNumberOfEntriesCallback( ::net::port_forward_change_callbacks* int_point ) : m_pointer( int_point ), m_dwRef( 0 ) { };
 		
 		   HRESULT STDMETHODCALLTYPE NewNumberOfEntries( long lNewNumberOfEntries )
 		   {

@@ -767,7 +767,7 @@ namespace acme_windows
 
       LPCWSTR pszWorkingDirectory = nullptr;
 
-      if (wstrWorkingDirectory.has_char())
+      if (wstrWorkingDirectory.has_character())
       {
 
          pszWorkingDirectory = wstrWorkingDirectory;

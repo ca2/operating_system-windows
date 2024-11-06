@@ -1,6 +1,6 @@
 
 
-void interaction_impl::CalcWindowRect(::rectangle_i32 * pClientRect, unsigned int nAdjustType)
+void interaction_impl::CalcWindowRect(::int_rectangle * pClientRect, unsigned int nAdjustType)
 {
 
    unsigned int dwExStyle = GetExStyle();

@@ -223,7 +223,7 @@ namespace acme_windows
          catch (const ::e_status & estatus)
          {
 
-            output_debug_string("failed to setup visual studio environment " + ::as_string(estatus.as_i64()));
+            output_debug_string("failed to setup visual studio environment " + ::as_string(estatus.as_huge_integer()));
 
          }
 

@@ -508,9 +508,9 @@ pacmedir->system() / "config/plugin/appfy_beg_debug_box.txt"))
 
       string strCoreApp;
 
-      if (strRoot.has_char())
+      if (strRoot.has_character())
       {
-         if (strDomain.has_char())
+         if (strDomain.has_character())
          {
             strCoreApp = strRoot + "/" + strDomain;
          }
@@ -521,12 +521,12 @@ pacmedir->system() / "config/plugin/appfy_beg_debug_box.txt"))
       }
       else
       {
-         if (strDomain.has_char())
+         if (strDomain.has_character())
          {
             strCoreApp = strDomain;
          }
       }
-      if (strCoreApp.has_char())
+      if (strCoreApp.has_character())
       {
          UpdateResourceW(hupdate, L"APPID", MAKEINTRESOURCE(1), MAKELANGID(LANG_NEUTRAL, SUBLANG_NEUTRAL), (LPVOID)(LPCSTR)strCoreApp, (DWORD)(strCoreApp.length()));
          dprint("APPID should be updated");
@@ -556,9 +556,9 @@ pacmedir->system() / "config/plugin/appfy_beg_debug_box.txt"))
       if (strDir.ends(PATH_SEP2))
          return strDir;
 
-      strsize iFind1 = strDir.rear_find(PATH_SEP1);
-      strsize iFind2 = strDir.rear_find(PATH_SEP2);
-      strsize iFind = maximum(iFind1, iFind2);
+      character_count iFind1 = strDir.rear_find(PATH_SEP1);
+      character_count iFind2 = strDir.rear_find(PATH_SEP2);
+      character_count iFind = maximum(iFind1, iFind2);
 
       if (iFind < 0)
          return PATH_SEP1;

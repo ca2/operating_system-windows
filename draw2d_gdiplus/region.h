@@ -28,13 +28,13 @@ namespace draw2d_gdiplus
       void destroy() override;
 
 
-      bool translate(const ::point_i32 & point, ::draw2d::graphics * pgraphics = nullptr) override;
+      bool translate(const ::int_point & point, ::draw2d::graphics * pgraphics = nullptr) override;
 
-      bool contains(const ::point_i32 & point, ::draw2d::graphics * pgraphics = nullptr) override;
+      bool contains(const ::int_point & point, ::draw2d::graphics * pgraphics = nullptr) override;
 
-      bool get_bounding_box(::rectangle_i32 & rectangle, ::draw2d::graphics * pgraphics = nullptr) override;
+      bool get_bounding_box(::int_rectangle & rectangle, ::draw2d::graphics * pgraphics = nullptr) override;
 
-      void expand_bounding_box(::rectangle_f64 & rectangle, ::draw2d::graphics * pgraphics) override;
+      void expand_bounding_box(::double_rectangle & rectangle, ::draw2d::graphics * pgraphics) override;
 
       Gdiplus::Region * get(::draw2d::graphics * pgraphics);
       Gdiplus::Region * get_rectangle(::draw2d::graphics * pgraphics);

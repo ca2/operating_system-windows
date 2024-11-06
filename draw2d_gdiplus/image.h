@@ -18,7 +18,7 @@ namespace draw2d_gdiplus
 
 
       HBITMAP                    m_hbitmap;
-      ::size_i64                 m_sizeWnd;
+      ::huge_integer_size                 m_sizeWnd;
       BITMAPINFO                 m_bitmapinfo;
 
 
@@ -48,9 +48,9 @@ namespace draw2d_gdiplus
       virtual void _map(bool) override;
       virtual void _unmap() override;
 
-      virtual void create_ex(const ::size_i32 & size, ::image32_t * pimage32, int iScan, ::enum_flag eflagCreate = DEFAULT_CREATE_IMAGE_FLAG, int iGoodStride = -1, bool bPreserve = false);
-      //void create(const ::size_i32 & size, ::enum_flag eflagCreate = DEFAULT_CREATE_IMAGE_OBJECT_FLAG, int iGoodStride = -1, bool bPreserve = false) override;
-      //void initialize(const ::size_i32 & size, ::image32_t * pimage32, int iScan, ::enum_flag eflagCreate = DEFAULT_CREATE_IMAGE_OBJECT_FLAG) override;
+      virtual void create_ex(const ::int_size & size, ::image32_t * pimage32, int iScan, ::enum_flag eflagCreate = DEFAULT_CREATE_IMAGE_FLAG, int iGoodStride = -1, bool bPreserve = false);
+      //void create(const ::int_size & size, ::enum_flag eflagCreate = DEFAULT_CREATE_IMAGE_OBJECT_FLAG, int iGoodStride = -1, bool bPreserve = false) override;
+      //void initialize(const ::int_size & size, ::image32_t * pimage32, int iScan, ::enum_flag eflagCreate = DEFAULT_CREATE_IMAGE_OBJECT_FLAG) override;
       virtual bool host(::pixmap * pixmap) override;
       bool on_host_read_pixels(::pixmap* pixmap) const override;
       using ::image::image::create;
@@ -60,7 +60,7 @@ namespace draw2d_gdiplus
 
       //cvirtual bool stretch(::draw2d::graphics * pgraphics) override;
       //virtual bool draw(const ::image::image * pimage) override;
-      virtual void _draw_raw(const ::rectangle_i32 & rectangleTarget, ::image::image * pimageSrc, const ::point_i32 & pointSrc) override;
+      virtual void _draw_raw(const ::int_rectangle & rectangleTarget, ::image::image * pimageSrc, const ::int_point & pointSrc) override;
 
 
       virtual void SetIconMask(::image::icon * picon, int cx, int cy) override;

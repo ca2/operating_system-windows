@@ -302,7 +302,7 @@ namespace acme_windows
 
       }
 
-      if (pathWriteAs.has_char())
+      if (pathWriteAs.has_character())
       {
 
          m_path = pathWriteAs;

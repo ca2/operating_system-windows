@@ -299,7 +299,7 @@ namespace music
                if (estatus != ::success)
                {
 
-                  informationf("midiStreamProperty() -> %04X", (WORD)estatus.as_i64());
+                  informationf("midiStreamProperty() -> %04X", (WORD)estatus.as_huge_integer());
 
                   close_device();
 
@@ -479,7 +479,7 @@ namespace music
                if (::success != m_psequence->m_estatusLastError)
                {
 
-                  warning() <<"::music::midi::sequencer::stop -> midiStreamStop returned %lu", (unsigned int)m_psequence->m_estatusLastError.as_i64();
+                  warning() <<"::music::midi::sequencer::stop -> midiStreamStop returned %lu", (unsigned int)m_psequence->m_estatusLastError.as_huge_integer();
 
                   m_psequence->m_flags.erase(sequence::e_flag_waiting);
 
@@ -549,7 +549,7 @@ namespace music
                         if (!estatus)
                         {
 
-                           warning() <<"midiStreamPosition() returned :" << estatus.as_i64();
+                           warning() <<"midiStreamPosition() returned :" << estatus.as_huge_integer();
 
                            return estatus;
 
@@ -640,7 +640,7 @@ namespace music
                         if (::success != estatus)
                         {
 
-                           informationf("midiStreamPosition() returned %lu", (unsigned int)estatus.as_i64());
+                           informationf("midiStreamPosition() returned %lu", (unsigned int)estatus.as_huge_integer());
 
                            return error_not_ready;
 
@@ -902,7 +902,7 @@ namespace music
 
                estatus = WorkStreamRender(lpmidihdr, m_psequence->m_tkEnd, m_iBufferNominalMax);
 
-               switch (estatus.as_i64())
+               switch (estatus.as_huge_integer())
                {
                case ::success:
 
@@ -919,7 +919,7 @@ namespace music
                default:
 
 
-                  informationf("smfReadEvents returned %lu in callback!", (unsigned int)estatus.as_i64());
+                  informationf("smfReadEvents returned %lu in callback!", (unsigned int)estatus.as_huge_integer());
 
                   m_psequence->set_state(sequence::e_state_stopping);
 
@@ -995,7 +995,7 @@ namespace music
 
                auto estatus = fill_buffer(lpmidihdr);
 
-               switch (estatus.as_i64())
+               switch (estatus.as_huge_integer())
                {
                case ::success:
 
@@ -1011,7 +1011,7 @@ namespace music
 
                default:
 
-                  information() << "sequencer::fill_buffer returned %lu", (unsigned int)estatus.as_i64();
+                  information() << "sequencer::fill_buffer returned %lu", (unsigned int)estatus.as_huge_integer();
 
                   m_psequence->set_state(sequence::e_state_stopping);
 
@@ -1033,7 +1033,7 @@ namespace music
                   else
                   {
 
-                     information() << "e_event_midi_stream_out : midiStreamOut returned %lu", (unsigned int)estatus.as_i64();
+                     information() << "e_event_midi_stream_out : midiStreamOut returned %lu", (unsigned int)estatus.as_huge_integer();
 
                      m_psequence->set_state(sequence::e_state_stopping);
 
@@ -1211,7 +1211,7 @@ namespace music
             if (!estatus)
             {
 
-               informationf("midiOutUnprepareHeader failed in seqBufferDone! (%lu)", (unsigned int)estatus.as_i64());
+               informationf("midiOutUnprepareHeader failed in seqBufferDone! (%lu)", (unsigned int)estatus.as_huge_integer());
 
             }
 
@@ -1857,7 +1857,7 @@ namespace music
             if (!estatus)
             {
 
-               warning() <<"smfInsertParmData[2] : " << estatus.as_i64();
+               warning() <<"smfInsertParmData[2] : " << estatus.as_huge_integer();
 
             }
 
@@ -2177,7 +2177,7 @@ namespace music
                   if (!estatus)
                   {
 
-                     warning() <<"smfInsertParmData[2] : " << estatus.as_i64();
+                     warning() <<"smfInsertParmData[2] : " << estatus.as_huge_integer();
 
                      return estatus;
 
@@ -2464,7 +2464,7 @@ namespace music
                if (!estatus)
                {
 
-                  warning() <<"smfInsertParmData() -> : " << estatus.as_i64();
+                  warning() <<"smfInsertParmData() -> : " << estatus.as_huge_integer();
 
                   return estatus;
 

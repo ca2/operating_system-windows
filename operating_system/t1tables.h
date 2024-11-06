@@ -625,7 +625,7 @@ FT_BEGIN_HEADER
    *    various types.
    *
    *    If either `value' is NULL or `value_len' is too small, just the
-   *    required memory size_i32 for the requested entry is returned.
+   *    required memory int_size for the requested entry is returned.
    *
    *    The `idx' parameter is used, not only to retrieve elements of, for
    *    example, the FontMatrix or FontBBox, but also to retrieve name keys

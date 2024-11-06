@@ -244,7 +244,7 @@ namespace hi5
    bool facebook::statusUpdate(string & newStatus)
    {
       bool retVal = false;
-      if (true && newStatus.has_char())
+      if (true && newStatus.has_character())
       {
          /* Prepare ___new status message */
          property_set post;
@@ -1484,7 +1484,7 @@ namespace hi5
       {
          /* Get OAuth header for request token */
          property_set set;
-         i64 iTime = ::time(nullptr);
+         huge_integer iTime = ::time(nullptr);
          if (m_oauth.getOAuthHeader(eOAuthHttpPost, "https://twitter.com/oauth/request_token", set))
          {
             if (performPost("https://twitter.com/oauth/request_token", set))

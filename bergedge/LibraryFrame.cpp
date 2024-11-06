@@ -272,7 +272,7 @@ void CLibraryFrame::NotifyFloatingWindows(DWORD dwFlags)
 }
 
 
-void CLibraryFrame::OnNcLButtonDown(UINT nHitTest,CPoint point_i32)
+void CLibraryFrame::OnNcLButtonDown(UINT nHitTest,CPoint int_point)
 {
    //if(nHitTest == HTCAPTION)
    //{
@@ -310,16 +310,16 @@ void CLibraryFrame::OnNcLButtonDown(UINT nHitTest,CPoint point_i32)
 
    //   //// CBRS_SIZE_DYNAMIC toolbars cannot have the CBRS_FLOAT_MULTI style
    //   //ASSERT((m_wndDockBar.m_dwStyle & CBRS_FLOAT_MULTI) == 0);
-   //   //pBar->m_pDockContext->StartResize(nHitTest,point_i32);
+   //   //pBar->m_pDockContext->StartResize(nHitTest,int_point);
    //   return;
    //}
    m_bTracking = true;
-   CMiniFrameWnd::OnNcLButtonDown(nHitTest,point_i32);
+   CMiniFrameWnd::OnNcLButtonDown(nHitTest,int_point);
 
    //Default();
 }
 
-void CLibraryFrame::OnNcLButtonDblClk(UINT nHitTest,CPoint point_i32)
+void CLibraryFrame::OnNcLButtonDblClk(UINT nHitTest,CPoint int_point)
 {
    if(nHitTest == HTCAPTION)
    {
@@ -341,7 +341,7 @@ void CLibraryFrame::OnNcLButtonDblClk(UINT nHitTest,CPoint point_i32)
       //   return;
       //}
    }
-   CMiniFrameWnd::OnNcLButtonDblClk(nHitTest,point_i32);
+   CMiniFrameWnd::OnNcLButtonDblClk(nHitTest,int_point);
 }
 
 BOOL CLibraryFrame::Create(CWnd* pParent,DWORD dwBarStyle, PVOID p)
@@ -442,9 +442,9 @@ BOOL CLibraryFrame::LoadFrame(UINT nIDResource,DWORD dwDefaultStyle,
 }
 
 
-void CLibraryFrame::OnNcLButtonUp(UINT nHitTest,CPoint point_i32)
+void CLibraryFrame::OnNcLButtonUp(UINT nHitTest,CPoint int_point)
 {
-   CMiniFrameWnd::OnNcLButtonUp(nHitTest,point_i32);
+   CMiniFrameWnd::OnNcLButtonUp(nHitTest,int_point);
 
    m_bTracking = false;
 }

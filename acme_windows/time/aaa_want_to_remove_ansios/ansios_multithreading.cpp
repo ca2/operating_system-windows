@@ -449,7 +449,7 @@ bool on_term_thread()
 }
 
 
-CLASS_DECL_ACME ::u64 translate_processor_affinity(int iOrder)
+CLASS_DECL_ACME huge_natural translate_processor_affinity(int iOrder)
 {
 
    return 1 << iOrder;

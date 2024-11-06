@@ -108,7 +108,7 @@ namespace windowing_win32
       synchronous_lock synchronouslock(synchronization());
 
       if (pkey->m_ekey == ::user::e_key_refer_to_text_member
-         && pkey->m_strText.has_char())
+         && pkey->m_strText.has_character())
       {
 
          return;

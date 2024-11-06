@@ -67,7 +67,7 @@ namespace apex_windows
 
       }
 
-      return { e_error_code_type_hresult, (::i64)hresult };
+      return { e_error_code_type_hresult, (huge_integer)hresult };
 
    }
 

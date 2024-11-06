@@ -89,7 +89,7 @@ namespace windowing_win32
    }
 
 
-   ::collection::index display::get_main_monitor(::rectangle_i32 & rectangle)
+   ::collection::index display::get_main_monitor(::int_rectangle & rectangle)
    {
 
       auto iMainMonitor = get_main_monitor_index();
@@ -129,7 +129,7 @@ namespace windowing_win32
    }
 
 
-   //   bool display::get_monitor_rectangle(::collection::index iMonitor, ::rectangle_i32 * prectangle)
+   //   bool display::get_monitor_rectangle(::collection::index iMonitor, ::int_rectangle * prectangle)
    //   {
    //
    //#ifdef UNIVERSAL_WINDOWS
@@ -224,7 +224,7 @@ namespace windowing_win32
    }
 
 
-   //bool display::get_desk_monitor_rect(::collection::index iMonitor, ::rectangle_i32 * prectangle)
+   //bool display::get_desk_monitor_rect(::collection::index iMonitor, ::int_rectangle * prectangle)
 
    //{
 
@@ -234,7 +234,7 @@ namespace windowing_win32
    //}
 
 
-   ::collection::index display::get_main_workspace(::rectangle_i32 & rectangle)
+   ::collection::index display::get_main_workspace(::int_rectangle & rectangle)
    {
 
       ::collection::index iMainWkspace = 0;
@@ -287,7 +287,7 @@ namespace windowing_win32
 //   }
 
 
-   //   bool display::get_wkspace_rect(::collection::index iWkspace, ::rectangle_i32 * prectangle)
+   //   bool display::get_wkspace_rect(::collection::index iWkspace, ::int_rectangle * prectangle)
    //   {
    //
    //#ifdef WINDOWS_DESKTOP
@@ -364,7 +364,7 @@ namespace windowing_win32
    //}
 
 
-   //bool display::get_desk_wkspace_rect(::collection::index iWkspace, ::rectangle_i32 * prectangle)
+   //bool display::get_desk_wkspace_rect(::collection::index iWkspace, ::int_rectangle * prectangle)
 
    //{
 
@@ -403,12 +403,12 @@ namespace windowing_win32
    }
 
 
-   //bool display::wkspace_to_monitor(::rectangle_i32 * prectangle, ::collection::index iMonitor, ::collection::index iWkspace)
+   //bool display::wkspace_to_monitor(::int_rectangle * prectangle, ::collection::index iMonitor, ::collection::index iWkspace)
    //{
 
-   //   ::rectangle_i32 rectangle(*prectangle);
+   //   ::int_rectangle rectangle(*prectangle);
 
-   //   ::rectangle_i32 rectangleWkspace;
+   //   ::int_rectangle rectangleWkspace;
 
    //   if (!get_wkspace_rect(iWkspace, rectangleWkspace))
    //   {
@@ -419,7 +419,7 @@ namespace windowing_win32
 
    //   rectangle -= rectangleWkspace.top_left();
 
-   //   ::rectangle_i32 rectangleMonitor;
+   //   ::int_rectangle rectangleMonitor;
 
    //   if (!get_monitor_rect(iMonitor, rectangleMonitor))
    //   {
@@ -437,32 +437,32 @@ namespace windowing_win32
    //}
 
 
-   //bool display::wkspace_to_monitor(::rectangle_i32 * prectangle)
+   //bool display::wkspace_to_monitor(::int_rectangle * prectangle)
    //{
 
-   //   index iWkspace = get_best_wkspace(nullptr, rectangle_i32(prectangle));
+   //   index iWkspace = get_best_wkspace(nullptr, int_rectangle(prectangle));
 
    //   return wkspace_to_monitor(prectangle, iWkspace, iWkspace);
 
    //}
 
 
-   //bool display::monitor_to_wkspace(::rectangle_i32 * prectangle)
+   //bool display::monitor_to_wkspace(::int_rectangle * prectangle)
    //{
 
-   //   index iMonitor = get_best_monitor(nullptr, rectangle_i32(prectangle));
+   //   index iMonitor = get_best_monitor(nullptr, int_rectangle(prectangle));
 
    //   return monitor_to_wkspace(prectangle, iMonitor, iMonitor);
 
    //}
 
 
-   //bool display::monitor_to_wkspace(::rectangle_i32 * prectangle, ::collection::index iWkspace, ::collection::index iMonitor)
+   //bool display::monitor_to_wkspace(::int_rectangle * prectangle, ::collection::index iWkspace, ::collection::index iMonitor)
    //{
 
-   //   ::rectangle_i32 rectangle(prectangle);
+   //   ::int_rectangle rectangle(prectangle);
 
-   //   ::rectangle_i32 rectangleMonitor;
+   //   ::int_rectangle rectangleMonitor;
 
    //   if (!get_monitor_rect(iMonitor, rectangleMonitor))
    //   {
@@ -473,7 +473,7 @@ namespace windowing_win32
 
    //   rectangle -= rectangleMonitor.top_left();
 
-   //   ::rectangle_i32 rectangleWkspace;
+   //   ::int_rectangle rectangleWkspace;
 
    //   if (!get_wkspace_rect(iWkspace, rectangleWkspace))
    //   {
@@ -491,15 +491,15 @@ namespace windowing_win32
    //}
 
 
-   void display::_get_monitor(rectangle_i32_array & rectaMonitor, rectangle_i32_array & rectaIntersect, const rectangle_i32 & rectangleParam)
+   void display::_get_monitor(::int_rectangle_array & rectaMonitor, ::int_rectangle_array & rectaIntersect, const int_rectangle & rectangleParam)
    {
 
       for (::collection::index iMonitor = 0; iMonitor < get_monitor_count(); iMonitor++)
       {
 
-         ::rectangle_i32 rectangleIntersect;
+         ::int_rectangle rectangleIntersect;
 
-         ::rectangle_i32 rectangleMonitor;
+         ::int_rectangle rectangleMonitor;
 
          auto pmonitor = get_monitor(iMonitor);
 
@@ -535,15 +535,15 @@ namespace windowing_win32
 
 #define ZONEING_COMPARE ::comparison
 
-   i64 g_i_get_best_zoneing = 0;
+   huge_integer g_i_get_best_zoneing = 0;
 
 
-   ::collection::index display::_get_best_zoneing(::e_display * pedisplay, ::rectangle_i32 * prectangle, const ::rectangle_i32 & rectangleRequest, bool bPreserveSize)
+   ::collection::index display::_get_best_zoneing(::e_display * pedisplay, ::int_rectangle * prectangle, const ::int_rectangle & rectangleRequest, bool bPreserveSize)
    {
 
-      ::rectangle_i32 rectangle(rectangleRequest);
+      ::int_rectangle rectangle(rectangleRequest);
 
-      ::rectangle_i32 rectangleWkspace;
+      ::int_rectangle rectangleWkspace;
 
       ::collection::index iBestWkspace = get_best_workspace(&rectangleWkspace, rectangle);
 
@@ -816,21 +816,21 @@ namespace windowing_win32
    }
 
 
-   ::collection::index display::get_best_monitor(::rectangle_i32 * prectangle, const rectangle_i32 & rectangleParam, ::e_activation eactivation, ::user::interaction * puserinteractionCursorPosition)
+   ::collection::index display::get_best_monitor(::int_rectangle * prectangle, const int_rectangle & rectangleParam, ::e_activation eactivation, ::user::interaction * puserinteractionCursorPosition)
    {
 
       ::collection::index iMatchingMonitor = -1;
 
-      i64 iBestArea = -1;
+      huge_integer iBestArea = -1;
 
-      ::rectangle_i32 rectangleMatch;
+      ::int_rectangle rectangleMatch;
 
-      ::rectangle_i32 rectangle(rectangleParam);
+      ::int_rectangle rectangle(rectangleParam);
 
       if (eactivation & e_activation_under_mouse_cursor || rectangle.is_null())
       {
 
-         ::point_i32 pointCursor;
+         ::int_point pointCursor;
 
          if (::is_null(puserinteractionCursorPosition))
          {
@@ -845,16 +845,16 @@ namespace windowing_win32
 
          }
 
-         rectangle.set(pointCursor - ::size_i32(5, 5), ::size_i32(10, 10));
+         rectangle.set(pointCursor - ::int_size(5, 5), ::int_size(10, 10));
 
       }
 
       for (::collection::index iMonitor = 0; iMonitor < get_monitor_count(); iMonitor++)
       {
 
-         ::rectangle_i32 rectangleIntersect;
+         ::int_rectangle rectangleIntersect;
 
-         ::rectangle_i32 rectangleMonitor;
+         ::int_rectangle rectangleMonitor;
 
          auto pmonitor = get_monitor(iMonitor);
 
@@ -912,21 +912,21 @@ namespace windowing_win32
    }
 
 
-   ::collection::index display::get_best_workspace(::rectangle_i32 * prectangle, const rectangle_i32 & rectangleParam, ::e_activation eactivation, ::user::interaction * puserinteractionCursorPosition)
+   ::collection::index display::get_best_workspace(::int_rectangle * prectangle, const int_rectangle & rectangleParam, ::e_activation eactivation, ::user::interaction * puserinteractionCursorPosition)
    {
 
       ::collection::index iMatchingWkspace = -1;
 
-      i64 iBestArea = -1;
+      huge_integer iBestArea = -1;
 
-      ::rectangle_i32 rectangleMatch;
+      ::int_rectangle rectangleMatch;
 
-      ::rectangle_i32 rectangle(rectangleParam);
+      ::int_rectangle rectangle(rectangleParam);
 
       if (eactivation & e_activation_under_mouse_cursor)
       {
 
-         ::point_i32 pointCursor;
+         ::int_point pointCursor;
 
          if (::is_null(puserinteractionCursorPosition))
          {
@@ -941,7 +941,7 @@ namespace windowing_win32
 
          }
 
-         rectangle.set(pointCursor - ::size_i32(5, 5), ::size_i32(10, 10));
+         rectangle.set(pointCursor - ::int_size(5, 5), ::int_size(10, 10));
 
       }
 
@@ -957,9 +957,9 @@ namespace windowing_win32
       for (::collection::index iWorkspace = 0; iWorkspace < get_monitor_count(); iWorkspace++)
       {
 
-         ::rectangle_i32 rectangleIntersect;
+         ::int_rectangle rectangleIntersect;
 
-         ::rectangle_i32 rectangleMonitor;
+         ::int_rectangle rectangleMonitor;
 
          auto pmonitor = get_monitor(iWorkspace);
 
@@ -1017,10 +1017,10 @@ namespace windowing_win32
    }
 
 
-   ::collection::index display::get_good_iconify(::rectangle_i32 * prectangle, const rectangle_i32 & rectangleParam)
+   ::collection::index display::get_good_iconify(::int_rectangle * prectangle, const int_rectangle & rectangleParam)
    {
 
-      ::rectangle_i32 rectangleMonitor;
+      ::int_rectangle rectangleMonitor;
 
       ::collection::index iMatchingMonitor = get_best_monitor(&rectangleMonitor, rectangleParam);
 
@@ -1122,7 +1122,7 @@ namespace windowing_win32
    }
 
 
-   //::collection::index display::get_main_monitor(::rectangle_i32 * prectangle)
+   //::collection::index display::get_main_monitor(::int_rectangle * prectangle)
    //{
 
    //   const POINT pointZero = { 0, 0 };
@@ -1215,25 +1215,25 @@ namespace windowing_win32
    }
 
 
-   ::point_i32 display::_get_mouse_cursor_position()
+   ::int_point display::_get_mouse_cursor_position()
    {
 
       POINT point;
 
       ::GetCursorPos(&point);
 
-      ::point_i32 point_i32;
+      ::int_point int_point;
 
-      point_i32.x() = point.x;
+      int_point.x() = point.x;
 
-      point_i32.y() = point.y;
+      int_point.y() = point.y;
 
-      return point_i32;
+      return int_point;
 
    }
    
 
-   bool display::_get_monitor_rectangle(::collection::index iMonitor, ::rectangle_i32 & rectangle)
+   bool display::_get_monitor_rectangle(::collection::index iMonitor, ::int_rectangle & rectangle)
    {
 
       if (iMonitor < 0 || iMonitor >= m_monitorinfoa.size())
@@ -1250,7 +1250,7 @@ namespace windowing_win32
    }
 
 
-   bool display::_get_workspace_rectangle(::collection::index iMonitor, ::rectangle_i32 & rectangle)
+   bool display::_get_workspace_rectangle(::collection::index iMonitor, ::int_rectangle & rectangle)
    {
 
       if (iMonitor < 0 || iMonitor >= m_monitorinfoa.size())

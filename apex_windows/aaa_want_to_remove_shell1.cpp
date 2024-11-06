@@ -524,7 +524,7 @@ namespace windows
    //   LPWORD pCharType)
 
    //{
-   //   strsize iCount = cchSrc;
+   //   character_count iCount = cchSrc;
    //   if(iCount < 0)
    //      iCount = UnicodeToMultiByteCount(uCodePage, pSrcStr);
 

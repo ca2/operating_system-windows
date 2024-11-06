@@ -20,7 +20,7 @@
 // {
 
 //    pmsg->hwnd = (HWND)(pmessage->oswindow);
-//    pmsg->message = (UINT) pmessage->m_atom.i64();
+//    pmsg->message = (UINT) pmessage->m_atom.huge_integer();
 //    pmsg->wParam = pmessage->wParam;
 //    pmsg->lParam = pmessage->lParam;
 //    pmsg->pt.x() = pmessage->pt.x();
@@ -69,7 +69,7 @@
 
 // }
 
-// CLASS_DECL_ACME int_bool HFILE_set_size(HANDLE h, u64 iSize);
+// CLASS_DECL_ACME int_bool HFILE_set_size(HANDLE h, huge_natural iSize);
 
 // #ifdef WINDOWS
 // CLASS_DECL_ACME int_bool read_resource_as_file(const scoped_string & strFile, HINSTANCE hinst, unsigned int nID, LPCTSTR pcszType);
@@ -108,15 +108,15 @@
 
 // #ifdef WINDOWS
 //    // wd16
-//    CLASS_DECL_ACME  BSTR               AllocSysString(const ::ansi_character * pchData, strsize nDataLength) noexcept;
-//    CLASS_DECL_ACME  bool               ReAllocSysString(BSTR * pbstr, const ::ansi_character * pchData, strsize nDataLength) noexcept;
+//    CLASS_DECL_ACME  BSTR               AllocSysString(const ::ansi_character * pchData, character_count nDataLength) noexcept;
+//    CLASS_DECL_ACME  bool               ReAllocSysString(BSTR * pbstr, const ::ansi_character * pchData, character_count nDataLength) noexcept;
 
 // #endif
 
 // #ifdef WINDOWS
 //    // wd32
-//    inline  BSTR               AllocSysString(const ::wd32_character * pchData, strsize nDataLength) noexcept;
-//    inline  bool               ReAllocSysString(BSTR * pbstr, const ::wd32_character * pchData, strsize nDataLength) noexcept;
+//    inline  BSTR               AllocSysString(const ::wd32_character * pchData, character_count nDataLength) noexcept;
+//    inline  bool               ReAllocSysString(BSTR * pbstr, const ::wd32_character * pchData, character_count nDataLength) noexcept;
 
 // #endif
 
@@ -177,7 +177,7 @@
 // inline void __copy(long * plong, const payload * ppayload)
 // {
 
-//    *plong = (long) ppayload->i64();
+//    *plong = (long) ppayload->huge_integer();
 
 // }
 
@@ -192,8 +192,8 @@
 
 
 // CLASS_DECL_ACME ::file::path module(HMODULE pmoduleosdata = nullptr);
-// CLASS_DECL_ACME string read_resource_as_string(hinstance hinst, unsigned int nID, const char * pcszType, strsize iReadAtMostByteCount = -1);
-// CLASS_DECL_ACME bool read_resource_as_memory(memory & m, HINSTANCE hinst, DWORD nID, const char * pcszType, strsize iReadAtMostByteCount = -1);
+// CLASS_DECL_ACME string read_resource_as_string(hinstance hinst, unsigned int nID, const char * pcszType, character_count iReadAtMostByteCount = -1);
+// CLASS_DECL_ACME bool read_resource_as_memory(memory & m, HINSTANCE hinst, DWORD nID, const char * pcszType, character_count iReadAtMostByteCount = -1);
 
 
 // CLASS_DECL_ACME HANDLE dup_handle(HANDLE h);

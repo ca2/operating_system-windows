@@ -15,11 +15,11 @@
 
 //typedef struct _PROCESS_BASIC_INFORMATION64
 //{
-//   u64  Reserved1;
-//   u64  PebBaseAddress;
-//   u64  Reserved2[2];
-//   u64  UniqueProcessId;
-//   u64  Reserved3;
+//   huge_natural  Reserved1;
+//   huge_natural  PebBaseAddress;
+//   huge_natural  Reserved2[2];
+//   huge_natural  UniqueProcessId;
+//   huge_natural  Reserved3;
 //} PROCESS_BASIC_INFORMATION64;
 
 //typedef NTSTATUS(NTAPI *_NtQueryInformationProcess)(HANDLE ProcessHandle, unsigned int ProcessInformationClass, PVOID ProcessInformation, unsigned int ProcessInformationLength, PDWORD ReturnLength);

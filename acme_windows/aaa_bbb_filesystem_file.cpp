@@ -8,7 +8,7 @@ string file_extension_dup(const char * path)
 
    string str = file_path_name(path);
 
-   strsize iPos = str.find('.');
+   character_count iPos = str.find('.');
 
    if (iPos >= 0)
    {
@@ -30,7 +30,7 @@ string file_final_extension_dup(const char * path)
 
    string str = file_path_name(path);
 
-   strsize iPos = str.rear_find('.');
+   character_count iPos = str.rear_find('.');
 
    if (iPos >= 0)
    {
@@ -58,7 +58,7 @@ string url_dir_name_for_relative(const scoped_string & strPath)
 
    strDir.ends_eat("/");
 
-   strsize iFind = strDir.rear_find("/");
+   character_count iFind = strDir.rear_find("/");
 
    if (iFind < 0)
       return "/";
@@ -77,7 +77,7 @@ CLASS_DECL_ACME string solve_relative(const ::string & strParam, bool * pbUrl)
 
    bool bOnlyNativeFileSep;
 
-   strsize iaSlash[512];
+   character_count iaSlash[512];
 
    int iSlashCount = 512;
 
@@ -119,7 +119,7 @@ if (bOnlyNativeFileSep && psz[iPos] == '/') \
 #endif
 
 
-CLASS_DECL_ACME bool solve_relative_inline(string & str, bool & bUrl, bool & bOnlyNativeFileSep, strsize * iaSlash, int * piSlashCount)
+CLASS_DECL_ACME bool solve_relative_inline(string & str, bool & bUrl, bool & bOnlyNativeFileSep, character_count * iaSlash, int * piSlashCount)
 {
 
    bOnlyNativeFileSep = true;
@@ -130,17 +130,17 @@ CLASS_DECL_ACME bool solve_relative_inline(string & str, bool & bUrl, bool & bOn
 
    bool bDup = false;
 
-   strsize iLen = str.length();
+   character_count iLen = str.length();
 
    char * psz = str.get_buffer(iLen);
 
    //string strAbsolute(strParam);
 
-   strsize iNewPos;
+   character_count iNewPos;
 
    bool bDynIa = false;
 
-   //strsize * iaSlash = *iaSlash;
+   //character_count * iaSlash = *iaSlash;
 
    int & iSlashCount = *piSlashCount;
 
@@ -148,7 +148,7 @@ CLASS_DECL_ACME bool solve_relative_inline(string & str, bool & bUrl, bool & bOn
 
    iaSlash[0] = 0;
 
-   strsize iPos = 0;
+   character_count iPos = 0;
 
    if (iLen >= 2)
    {

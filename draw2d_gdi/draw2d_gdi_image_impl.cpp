@@ -59,7 +59,7 @@ namespace draw2d_gdi
    }
 
 
-   bool image::create(const ::size_i32 & size, ::eobject eobjectCreate, int iGoodStride)
+   bool image::create(const ::int_size & size, ::eobject eobjectCreate, int iGoodStride)
    {
 
       synchronous_lock ml(&draw2d_gdi_mutex());
@@ -214,7 +214,7 @@ namespace draw2d_gdi
    }
 
 
-   bool image::to(::draw2d::graphics_pointer & pgraphics, const ::point_i32  & point, const ::size_i32 & size, const ::point_i32 & pointSrc)
+   bool image::to(::draw2d::graphics_pointer & pgraphics, const ::int_point  & point, const ::int_size & size, const ::int_point & pointSrc)
    {
 
       return SetDIBitsToDevice(
@@ -268,7 +268,7 @@ namespace draw2d_gdi
    }
 
 
-   bool image::from(const ::point_i32 & pointDest, ::draw2d::graphics_pointer & pgraphics, const ::point_i32 & point, const ::size_i32 & sz)
+   bool image::from(const ::int_point & pointDest, ::draw2d::graphics_pointer & pgraphics, const ::int_point & point, const ::int_size & sz)
    {
 
       return m_spgraphics->BitBlt(pointDest.x(), pointDest.y(), sz.cx(), sz.cy(), pgraphics, point.x(), point.y(), SRCCOPY) != false;
@@ -278,7 +278,7 @@ namespace draw2d_gdi
    //void image::Fill ( int R, int G, int B )
    //{
    //   ::color::color color=rgb ( B, G, R );
-   //   int size_i32=this->cx*this->cy;
+   //   int int_size=this->cx*this->cy;
 
    //   ::color::color * pcr;
 
@@ -321,7 +321,7 @@ namespace draw2d_gdi
    //      pcr[31] = color;
    //   }
 
-   //   for (i=0; i<size_i32; i++ )
+   //   for (i=0; i<int_size; i++ )
    //   {
    //      m_pcolorref[i]=color;
    //   }
@@ -329,12 +329,12 @@ namespace draw2d_gdi
 
    //void image::set_rgb(int R, int G, int B)
    //{
-   //   int size_i32=this->cx*this->cy;
+   //   int int_size=this->cx*this->cy;
 
    //   BYTE * pbyte = (BYTE *) m_pcolorref;
 
    //   int i;
-   //   for (i=0; i<size_i32; i++ )
+   //   for (i=0; i<int_size; i++ )
    //   {
    //      *pbyte++ = (BYTE) R;
    //      *pbyte++ = (BYTE) G;
@@ -346,7 +346,7 @@ namespace draw2d_gdi
    //void image::ToAlpha(int i)
    //{
    //   BYTE *dst=(BYTE*)m_pcolorref;
-   //   int size_i32=this->cx*this->cy;
+   //   int int_size=this->cx*this->cy;
 
    //   while ( size-- )
    //   {
@@ -414,7 +414,7 @@ namespace draw2d_gdi
    //void image::Map(int ToRgb, int FromRgb)
    //{
    //   BYTE *dst=(BYTE*)m_pcolorref;
-   //   int size_i32=this->cx*this->cy;
+   //   int int_size=this->cx*this->cy;
 
    //   while ( size-- )
    //   {
@@ -427,7 +427,7 @@ namespace draw2d_gdi
    //void image::ToAlphaAndFill(int i, ::color::color color32)
    //{
    //   BYTE *dst=(BYTE*)m_pcolorref;
-   //   int size_i32=this->cx*this->cy;
+   //   int int_size=this->cx*this->cy;
 
    //   BYTE uchB = ::blue(color32);
    //   BYTE uchG = ::green(color32);
@@ -446,7 +446,7 @@ namespace draw2d_gdi
    //void image::GrayToARGB(::color::color color32)
    //{
    //   BYTE *dst=(BYTE*)m_pcolorref;
-   //   int size_i32=this->cx*this->cy;
+   //   int int_size=this->cx*this->cy;
 
    //   unsigned int dwB = ::blue(color32);
    //   unsigned int dwG = ::green(color32);
@@ -519,9 +519,9 @@ namespace draw2d_gdi
 
    //void image::Invert()
    //{
-   //   int size_i32=this->cx*this->cy;
+   //   int int_size=this->cx*this->cy;
    //   unsigned char * lpb = (unsigned char *) m_pcolorref;
-   //   for ( int i=0; i<size_i32; i++ )
+   //   for ( int i=0; i<int_size; i++ )
    //   {
    //      lpb[0] = 255 - lpb[0];
    //      lpb[1] = 255 - lpb[1];
@@ -532,10 +532,10 @@ namespace draw2d_gdi
 
    //void image::color::e_channel_invert(color::color::color::rgba::echannel echannel)
    //{
-   //   __int64 size_i32=area();
+   //   __int64 int_size=area();
    //   unsigned char * lpb = (unsigned char *) m_pcolorref;
    //   lpb += ((int)echannel) % 4;
-   //   for ( int i=0; i<size_i32; i++ )
+   //   for ( int i=0; i<int_size; i++ )
    //   {
    //      *lpb = 255 - *lpb;
    //      lpb += 4;
@@ -562,7 +562,7 @@ namespace draw2d_gdi
    //void image::FillGlass ( int R, int G, int B, int A )
    //{
    //   BYTE *dst=(BYTE*)m_pcolorref;
-   //   int size_i32=this->cx*this->cy;
+   //   int int_size=this->cx*this->cy;
    //
    //   while ( size-- )
    //   {
@@ -611,7 +611,7 @@ namespace draw2d_gdi
    //{
 
    //   BYTE *dst=(BYTE*)m_pcolorref;
-   //   int size_i32=this->cx*this->cy;
+   //   int int_size=this->cx*this->cy;
 
    //   unsigned int dwB = ::blue(color32);
    //   unsigned int dwG = ::green(color32);
@@ -639,7 +639,7 @@ namespace draw2d_gdi
 
    //   BYTE *src=(BYTE*)pimage->get_data();
    //   BYTE *dst=(BYTE*)m_pcolorref;
-   //   int size_i32=this->cx*this->cy;
+   //   int int_size=this->cx*this->cy;
    //
    //   while ( size-- )
    //   {
@@ -660,7 +660,7 @@ namespace draw2d_gdi
    //   BYTE *src=(BYTE*)pimage->get_data();
    //   BYTE *dst=(BYTE*)m_pcolorref;
    //   BYTE *alf=(BYTE*)imageA.m_pcolorref;
-   //   int size_i32=this->cx*this->cy;
+   //   int int_size=this->cx*this->cy;
 
    //   A = 2 - A;
    //
@@ -684,7 +684,7 @@ namespace draw2d_gdi
 
    //   BYTE *src=(BYTE*)pimage->get_data();
    //   BYTE *dst=(BYTE*)m_pcolorref;
-   //   int size_i32=this->cx*this->cy;
+   //   int int_size=this->cx*this->cy;
    //
    //   while ( size-- )
    //   {
@@ -703,7 +703,7 @@ namespace draw2d_gdi
 
    //   BYTE *src=(BYTE*)pimage->get_data();
    //   BYTE *dst=(BYTE*)m_pcolorref;
-   //   int size_i32=this->cx*this->cy;
+   //   int int_size=this->cx*this->cy;
    //
    //   while ( size-- )
    //   {
@@ -726,7 +726,7 @@ namespace draw2d_gdi
 
    //   BYTE *src=(BYTE*)pimage->get_data();
    //   BYTE *dst=(BYTE*)m_pcolorref;
-   //   int size_i32=this->cx*this->cy;
+   //   int int_size=this->cx*this->cy;
    //
    //   while ( size-- )
    //   {
@@ -746,7 +746,7 @@ namespace draw2d_gdi
 
    //   BYTE *src=(BYTE*)pimage->get_data();
    //   BYTE *dst=(BYTE*)m_pcolorref;
-   //   int size_i32=this->cx*this->cy;
+   //   int int_size=this->cx*this->cy;
    //
    //   while ( size-- )
    //   {
@@ -765,7 +765,7 @@ namespace draw2d_gdi
 
    //   BYTE *src=(BYTE*)pimage->get_data();
    //   BYTE *dst=(BYTE*)m_pcolorref;
-   //   int size_i32=this->cx*this->cy;
+   //   int int_size=this->cx*this->cy;
    //
    //   while ( size-- )
    //   {
@@ -1275,9 +1275,9 @@ namespace draw2d_gdi
 //      ::color::color crSet = rgb(::blue(crInMask), ::green(crInMask), ::red(crInMask));
 //      ::color::color crUnset  = rgb(::blue(crOutMask), ::green(crOutMask), ::red(crOutMask));
 //
-//      int size_i32=this->cx*this->cy;
+//      int int_size=this->cx*this->cy;
 //
-//      for ( int i=0; i<size_i32; i++ )
+//      for ( int i=0; i<int_size; i++ )
 //         if(m_pcolorref[i]== crFind)
 //            m_pcolorref[i] = crSet;
 //         else
@@ -1290,7 +1290,7 @@ namespace draw2d_gdi
 //      ::color::color crFind = color.get_rgb();
 //      __int64 size = area();
 //
-//      for ( int i=0; i<size_i32; i++ )
+//      for ( int i=0; i<int_size; i++ )
 //         if((m_pcolorref[i] & 0x00ffffff) == crFind)
 //            ((unsigned char *)&m_pcolorref[i])[3] = 255;
 //         else
@@ -1347,7 +1347,7 @@ namespace draw2d_gdi
 //
 //         BYTE *dst = ((BYTE*)(m_pcolorref + xL + yL * m_Size.cx()));
 //         unsigned int dwAdd = ((m_Size.cx() - 1 - xU) + xL) * 4;
-//         int size_i32=m_Size.cx()*m_Size.cy();
+//         int int_size=m_Size.cx()*m_Size.cy();
 //         double iLevel;
 //
 //         int dx, dy;
@@ -1454,7 +1454,7 @@ namespace draw2d_gdi
 //
 //         BYTE *dst = ((BYTE*)(m_pcolorref + xL + yL * this->cx));
 //         unsigned int dwAdd = ((this->cx - 1 - xU) + xL) * 4;
-////         int size_i32=this->cx*this->cy;
+////         int int_size=this->cx*this->cy;
 //
 //         int dx, dy;
 //
@@ -1507,7 +1507,7 @@ namespace draw2d_gdi
 //
 //         BYTE *dst = ((BYTE*)(m_pcolorref + xL + yL * m_Size.cx()));
 //         unsigned int dwAdd = ((m_Size.cx() - 1 - xU) + xL) * 4;
-//         int size_i32=m_Size.cx()*m_Size.cy();
+//         int int_size=m_Size.cx()*m_Size.cy();
 //         double iLevel;
 //
 //         int dx, dy;
@@ -1614,7 +1614,7 @@ namespace draw2d_gdi
 //
 //         BYTE *dst = ((BYTE*)(m_pcolorref + xL + yL * this->cx));
 //         unsigned int dwAdd = ((this->cx - 1 - xU) + xL) * 4;
-////         int size_i32=this->cx*this->cy;
+////         int int_size=this->cx*this->cy;
 //
 //         int dx, dy;
 //
@@ -1709,7 +1709,7 @@ namespace draw2d_gdi
       BYTE * rect2=(BYTE*)pimage2->colorref();
       BYTE * srcM=(BYTE*)imageM.colorref();
       BYTE * dest=(BYTE*)colorref();
-      i64 iSize = area();
+      huge_integer iSize = area();
 
       BYTE b;
       BYTE bMax;
@@ -1904,7 +1904,7 @@ namespace draw2d_gdi
 
    //void image::rotate(
    //   image_impl image_impl,
-   //   const ::rectangle_i32 & rectangle,
+   //   const ::int_rectangle & rectangle,
    //   double dAngle,
    //   double dScale)
    //{
@@ -1913,7 +1913,7 @@ namespace draw2d_gdi
 
 
 
-   //   ::rectangle_i32 rectangle(rectangle);
+   //   ::int_rectangle rectangle(rectangle);
 
    //   int cx = rectangle.width();
    //   int cy = rectangle.height();
@@ -2011,7 +2011,7 @@ namespace draw2d_gdi
    //void image::Fill (int A, int R, int G, int B )
    //{
    //   ::color::color color = rgb ( B, G, R ) | (A << 24);
-   //   int size_i32=this->cx*this->cy;
+   //   int int_size=this->cx*this->cy;
 
    //   ::color::color * pcr;
 
@@ -2054,7 +2054,7 @@ namespace draw2d_gdi
    //      pcr[31] = color;
    //   }
 
-   //   for (i=0; i<size_i32; i++ )
+   //   for (i=0; i<int_size; i++ )
    //   {
    //      m_pcolorref[i]=color;
    //   }
@@ -2120,7 +2120,7 @@ namespace draw2d_gdi
    //   }
    //}
 
-   //void image::create_frame(::size_i32 size, int iFrameCount)
+   //void image::create_frame(::int_size size, int iFrameCount)
    //{
    //   int iSliceCount = (int) sqrt((double) iFrameCount);
    //   int iFrameWidth = size.cx() / iSliceCount;
@@ -2358,7 +2358,7 @@ namespace draw2d_gdi
    // void image::fill_channel(int intensity, color::color::color::rgba::echannel echannel)
    // {
    //     int offset = ((int)echannel) % 4;
-   //    int size_i32=this->cx*this->cy;
+   //    int int_size=this->cx*this->cy;
 
    //    BYTE * pb;
 
@@ -2401,7 +2401,7 @@ namespace draw2d_gdi
    //       pb[31 * 4] = (unsigned char) intensity;
    //    }
 
-   //    for (i=0; i<size_i32; i++ )
+   //    for (i=0; i<int_size; i++ )
    //    {
    //       *(((BYTE * ) &m_pcolorref[i]) + offset) = (unsigned char) intensity;
    //    }
@@ -2442,7 +2442,7 @@ namespace draw2d_gdi
    //bool image::update_window(::aura::draw_interface * puserinteraction, ::message::message * pmessage, bool bTransferBuffer)
    //{
 
-   //   rectangle_i64 rectangleWindow;
+   //   huge_integer_rectangle rectangleWindow;
 
    //   puserinteraction->GetWindowRect(rectangleWindow);
 
@@ -2452,7 +2452,7 @@ namespace draw2d_gdi
 
 
    //   BYTE *dst=(BYTE*)get_data();
-   //   i64 size = area();
+   //   huge_integer size = area();
 
 
    //   // >> 8 instead of / 255 subsequent alpha_blend operations say thanks on true_blend because (255) * (1/254) + (255) * (254/255) > 255
@@ -2460,51 +2460,51 @@ namespace draw2d_gdi
    //   /*
    //   while (size >= 8)
    //      {
-   //         dst[0] = lower_u8(((int)dst[0] * (int)dst[3])>> 8);
-   //         dst[1] = lower_u8(((int)dst[1] * (int)dst[3])>> 8);
-   //         dst[2] = lower_u8(((int)dst[2] * (int)dst[3])>> 8);
+   //         dst[0] = lower_unsigned_char(((int)dst[0] * (int)dst[3])>> 8);
+   //         dst[1] = lower_unsigned_char(((int)dst[1] * (int)dst[3])>> 8);
+   //         dst[2] = lower_unsigned_char(((int)dst[2] * (int)dst[3])>> 8);
 
-   //         dst[4+0] = lower_u8(((int)dst[4+0] * (int)dst[4+3])>> 8);
-   //         dst[4+1] = lower_u8(((int)dst[4+1] * (int)dst[4+3])>> 8);
-   //         dst[4+2] = lower_u8(((int)dst[4+2] * (int)dst[4+3])>> 8);
+   //         dst[4+0] = lower_unsigned_char(((int)dst[4+0] * (int)dst[4+3])>> 8);
+   //         dst[4+1] = lower_unsigned_char(((int)dst[4+1] * (int)dst[4+3])>> 8);
+   //         dst[4+2] = lower_unsigned_char(((int)dst[4+2] * (int)dst[4+3])>> 8);
 
-   //         dst[8+0] = lower_u8(((int)dst[8+0] * (int)dst[8+3])>> 8);
-   //         dst[8+1] = lower_u8(((int)dst[8+1] * (int)dst[8+3])>> 8);
-   //         dst[8+2] = lower_u8(((int)dst[8+2] * (int)dst[8+3])>> 8);
+   //         dst[8+0] = lower_unsigned_char(((int)dst[8+0] * (int)dst[8+3])>> 8);
+   //         dst[8+1] = lower_unsigned_char(((int)dst[8+1] * (int)dst[8+3])>> 8);
+   //         dst[8+2] = lower_unsigned_char(((int)dst[8+2] * (int)dst[8+3])>> 8);
 
-   //         dst[12+0] = lower_u8(((int)dst[12+0] * (int)dst[12+3])>> 8);
-   //         dst[12+1] = lower_u8(((int)dst[12+1] * (int)dst[12+3])>> 8);
-   //         dst[12+2] = lower_u8(((int)dst[12+2] * (int)dst[12+3])>> 8);
+   //         dst[12+0] = lower_unsigned_char(((int)dst[12+0] * (int)dst[12+3])>> 8);
+   //         dst[12+1] = lower_unsigned_char(((int)dst[12+1] * (int)dst[12+3])>> 8);
+   //         dst[12+2] = lower_unsigned_char(((int)dst[12+2] * (int)dst[12+3])>> 8);
 
-   //         dst[16+0] = lower_u8(((int)dst[16+0] * (int)dst[16+3])>> 8);
-   //         dst[16+1] = lower_u8(((int)dst[16+1] * (int)dst[16+3])>> 8);
-   //         dst[16+2] = lower_u8(((int)dst[16+2] * (int)dst[16+3])>> 8);
+   //         dst[16+0] = lower_unsigned_char(((int)dst[16+0] * (int)dst[16+3])>> 8);
+   //         dst[16+1] = lower_unsigned_char(((int)dst[16+1] * (int)dst[16+3])>> 8);
+   //         dst[16+2] = lower_unsigned_char(((int)dst[16+2] * (int)dst[16+3])>> 8);
 
-   //         dst[20+0] = lower_u8(((int)dst[20+0] * (int)dst[20+3])>> 8);
-   //         dst[20+1] = lower_u8(((int)dst[20+1] * (int)dst[20+3])>> 8);
-   //         dst[20+2] = lower_u8(((int)dst[20+2] * (int)dst[20+3])>> 8);
+   //         dst[20+0] = lower_unsigned_char(((int)dst[20+0] * (int)dst[20+3])>> 8);
+   //         dst[20+1] = lower_unsigned_char(((int)dst[20+1] * (int)dst[20+3])>> 8);
+   //         dst[20+2] = lower_unsigned_char(((int)dst[20+2] * (int)dst[20+3])>> 8);
 
-   //         dst[24+0] = lower_u8(((int)dst[24+0] * (int)dst[24+3])>> 8);
-   //         dst[24+1] = lower_u8(((int)dst[24+1] * (int)dst[24+3])>> 8);
-   //         dst[24+2] = lower_u8(((int)dst[24+2] * (int)dst[24+3])>> 8);
+   //         dst[24+0] = lower_unsigned_char(((int)dst[24+0] * (int)dst[24+3])>> 8);
+   //         dst[24+1] = lower_unsigned_char(((int)dst[24+1] * (int)dst[24+3])>> 8);
+   //         dst[24+2] = lower_unsigned_char(((int)dst[24+2] * (int)dst[24+3])>> 8);
 
-   //         dst[28+0] = lower_u8(((int)dst[28+0] * (int)dst[28+3])>> 8);
-   //         dst[28+1] = lower_u8(((int)dst[28+1] * (int)dst[28+3])>> 8);
-   //         dst[28+2] = lower_u8(((int)dst[28+2] * (int)dst[28+3])>> 8);
+   //         dst[28+0] = lower_unsigned_char(((int)dst[28+0] * (int)dst[28+3])>> 8);
+   //         dst[28+1] = lower_unsigned_char(((int)dst[28+1] * (int)dst[28+3])>> 8);
+   //         dst[28+2] = lower_unsigned_char(((int)dst[28+2] * (int)dst[28+3])>> 8);
 
    //         dst += 4 * 8;
    //         size -= 8;
    //      }
    //      while(size--)
    //      {
-   //         dst[0] = lower_u8(((int)dst[0] * (int)dst[3])>> 8);
-   //         dst[1] = lower_u8(((int)dst[1] * (int)dst[3])>> 8);
-   //         dst[2] = lower_u8(((int)dst[2] * (int)dst[3])>> 8);
+   //         dst[0] = lower_unsigned_char(((int)dst[0] * (int)dst[3])>> 8);
+   //         dst[1] = lower_unsigned_char(((int)dst[1] * (int)dst[3])>> 8);
+   //         dst[2] = lower_unsigned_char(((int)dst[2] * (int)dst[3])>> 8);
    //         dst += 4;
    //      }
    //   */
 
-   //   class ::rectangle_i32 rectangle(rectangleWindow);
+   //   class ::int_rectangle rectangle(rectangleWindow);
 
    //   //papplication->window_graphics_update_window(puserinteraction->get_window_graphics(),puserinteraction->get_handle(),m_pcolorref,rectangle,m_size.cx(),m_size.cy(),m_iScan, bTransferBuffer);
 
@@ -2556,7 +2556,7 @@ namespace draw2d_gdi
 
       }
 
-      i64 iArea = area();
+      huge_integer iArea = area();
 
       unsigned char * p = (unsigned char *)m_pimage32Raw;
 
@@ -2598,14 +2598,14 @@ namespace draw2d_gdi
 
    //   m_spgraphics->attach((HDC) pusermessage->m_wparam);
 
-   //   ::rectangle_i32 rectx;
+   //   ::int_rectangle rectx;
 
    //   ::draw2d::bitmap * pbitmap = m_spgraphics->get_current_bitmap();
 
    //   ::GetCurrentObject((HDC) pusermessage->m_wparam, OBJ_BITMAP);
 
    //   //      unsigned int dw = ::GetLastError();
-   //   ::size_i32 size = pbitmap->get_size();
+   //   ::int_size size = pbitmap->get_size();
 
    //   rectx.left() = 0;
    //   rectx.top() = 0;
@@ -2615,7 +2615,7 @@ namespace draw2d_gdi
    //   try
    //   {
 
-   //      ::rectangle_i32 rectangleWindow;
+   //      ::int_rectangle rectangleWindow;
 
    //      puserinteraction->GetWindowRect(rectangleWindow);
 
@@ -2637,8 +2637,8 @@ namespace draw2d_gdi
 
    //      }
 
-   //      ::rectangle_i32 rectanglePaint;
-   //      ::rectangle_i32 rectangleUpdate;
+   //      ::int_rectangle rectanglePaint;
+   //      ::int_rectangle rectangleUpdate;
    //      rectangleUpdate = rectangleWindow;
    //      rectanglePaint = rectangleWindow;
    //      rectanglePaint.offset(-rectanglePaint.top_left());
@@ -2646,14 +2646,14 @@ namespace draw2d_gdi
    //      puserinteraction->_001OnDeferPaintLayeredWindowBackground(pimage->g());
    //      m_spgraphics->SelectClipRgn(nullptr);
 
-   //      m_spgraphics-> SetViewportOrg(::point_i32());
+   //      m_spgraphics-> SetViewportOrg(::int_point());
 
    //      puserinteraction->_000OnDraw(pimage->g());
 
-   //      m_spgraphics->SetViewportOrg(::point_i32());
+   //      m_spgraphics->SetViewportOrg(::int_point());
    //      //(dynamic_cast<::win::graphics * >(pgraphics))->FillSolidRect(rectangleUpdate.left(), rectangleUpdate.top(), 100, 100, 255);
    //      m_spgraphics->SelectClipRgn(nullptr);
-   //      m_spgraphics->SetViewportOrg(::point_i32());
+   //      m_spgraphics->SetViewportOrg(::int_point());
 
    //      m_spgraphics->SelectClipRgn( nullptr);
    //      m_spgraphics->BitBlt(rectanglePaint.left(), rectanglePaint.top(),
@@ -2747,7 +2747,7 @@ namespace draw2d_gdi
          bTune = color32_u8_blue(clr);
       }
 
-      i64 size = area();
+      huge_integer size = area();
 
       unsigned char * pb = (unsigned char *)m_pimage32Raw;
       unsigned char * pbTune = ((unsigned char *)m_pimage32Raw) + ((int) echannel);
@@ -2765,7 +2765,7 @@ namespace draw2d_gdi
       if(bTune == 0)
       {
 
-         rectangle_i32 *= a;
+         int_rectangle *= a;
          g *= a;
          b *= a;
 
@@ -2773,7 +2773,7 @@ namespace draw2d_gdi
          {
             if(pb[3] == 0)
             {
-               pb[0] = rectangle_i32 * pb[0] / (255 * 255);
+               pb[0] = int_rectangle * pb[0] / (255 * 255);
                pb[1] = g * pb[1] / (255 * 255);
                pb[2] = b * pb[2] / (255 * 255);
                pb[3] = a;
@@ -2798,7 +2798,7 @@ namespace draw2d_gdi
                   pb[3] = u8_clip(a * (pb[0] + pb[1] + pb[2]) / bTune);
                   pb[0] = b * pb[3] / 255;
                   pb[1] = g * pb[3] / 255;
-                  pb[2] = rectangle_i32 * pb[3] / 255;
+                  pb[2] = int_rectangle * pb[3] / 255;
                }
                //else
                {
@@ -2816,9 +2816,9 @@ namespace draw2d_gdi
             int s = pimageSrc->m_iScan - width() * sizeof(::color::color);
             int c = width();
 
-            ::rectangle_i32 rect1(x, y,  x  + width(), y + height());
-            ::rectangle_i32 rect2(0, 0, pimageSrc->width(), pimageSrc->height());
-            ::rectangle_i32 rect3;
+            ::int_rectangle rect1(x, y,  x  + width(), y + height());
+            ::int_rectangle rect2(0, 0, pimageSrc->width(), pimageSrc->height());
+            ::int_rectangle rect3;
 
             rect3.intersect(rect1, rect2);
 
@@ -2830,7 +2830,7 @@ namespace draw2d_gdi
                   ps[3] = u8_clip(a * (pb[0] + pb[1] + pb[2]) / bTune);
                   ps[0] = (unsigned char) b;
                   ps[1] = (unsigned char) g;
-                  ps[2] = (unsigned char) rectangle_i32;
+                  ps[2] = (unsigned char) int_rectangle;
                }
                else
                {
@@ -2977,8 +2977,8 @@ namespace draw2d_gdi
 
          pimage1 = create_image(get_size());
 
-         point_i32 p1 = pbrush->m_point1;
-         point_i32 p2 = pbrush->m_point2;
+         int_point p1 = pbrush->m_point1;
+         int_point p2 = pbrush->m_point2;
          p1.offset(-x, -y);
          p2.offset(-x, -y);
          pimage1->gradient_fill(pbrush->m_color1, pbrush->m_color2, p1, p2);

@@ -454,7 +454,7 @@
 /* Define to `int' if <sys/types.h> does not define. */
 #undef int32_t
 
-/* Define to `long long' if <sys/types.h> does not define. */
+/* Define to `huge_integer' if <sys/types.h> does not define. */
 #undef int64_t
 
 /* Define to the native offset type (long or actually off_t). */

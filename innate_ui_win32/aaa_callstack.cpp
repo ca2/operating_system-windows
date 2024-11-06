@@ -47,7 +47,7 @@ bool engine_get_line_from_address(HANDLE hprocess, OS_DWORD uiAddress, unsigned 
    // "Debugging Applications" John Robbins
    // The problem is that the symbol callstack finds only those source
    // line addresses (after the first lookup) that fall exactly on
-   // a zero displacement. I'll walk backward 100 bytes to
+   // a zero displacement. I'hi walk backward 100 bytes to
    // find the line and return the proper displacement.
    DWORD dwDisplacement = 0;
 
@@ -561,7 +561,7 @@ namespace windows
       //      // "Debugging Applications" John Robbins
       //      // The problem is that the symbol callstack finds only those source
       //      // line addresses (after the first lookup) that fall exactly on
-      //      // a zero displacement. I'll walk backward 100 bytes to
+      //      // a zero displacement. I'hi walk backward 100 bytes to
       //      // find the line and return the proper displacement.
       //      unsigned int dwDisplacement = 0 ;
       //      while (!SymGetLineFromAddr (hprocess, uiAddress - dwDisplacement, puiDisplacement, pline))
@@ -589,7 +589,7 @@ namespace windows
    //      // "Debugging Applications" John Robbins
    //      // The problem is that the symbol callstack finds only those source
    //      // line addresses (after the first lookup) that fall exactly on
-   //      // a zero displacement. I'll walk backward 100 bytes to
+   //      // a zero displacement. I'hi walk backward 100 bytes to
    //      // find the line and return the proper displacement.
    //      unsigned int dwDisplacement = 0;
    //      while (!SymGetLineFromAddr64(hprocess, uiAddress - dwDisplacement, puiDisplacement, pline))
@@ -1361,13 +1361,13 @@ namespace windows
    //            }
    //            if (*(p + 1) == 'd')
    //            {
-   //               ansi_from_u64(_strBuf, uiLineDisplacement, 10);
+   //               ansi_from_huge_natural(_strBuf, uiLineDisplacement, 10);
    //               ansi_concatenate(_str, _strBuf);
    //               ++p;
    //            }
    //            else
    //            {
-   //               ansi_from_u64(_strBuf, uiLineNumber, 10);
+   //               ansi_from_huge_natural(_strBuf, uiLineNumber, 10);
    //               ansi_concatenate(_str, _strBuf);
    //            }
    //            break;
@@ -1381,7 +1381,7 @@ namespace windows
    //            }
    //            if (*(p + 1) == 'd')
    //            {
-   //               ansi_concatenate_i64(_str, uiSymbolDisplacement);
+   //               ansi_concatenate_huge_integer(_str, uiSymbolDisplacement);
    //               ++p;
    //            }
    //            else
@@ -1550,13 +1550,13 @@ namespace  windows
                }
                if (*(p + 1) == 'd')
                {
-                  ansi_from_u64(_strBuf, uiLineDisplacement, 10);
+                  ansi_from_huge_natural(_strBuf, uiLineDisplacement, 10);
                   ansi_concatenate(_str, _strBuf);
                   ++p;
                }
                else
                {
-                  ansi_from_u64(_strBuf, uiLineNumber, 10);
+                  ansi_from_huge_natural(_strBuf, uiLineNumber, 10);
                   ansi_concatenate(_str, _strBuf);
                }
                break;
@@ -1570,7 +1570,7 @@ namespace  windows
                }
                if (*(p + 1) == 'd')
                {
-                  ansi_concatenate_i64(_str, uiSymbolDisplacement);
+                  ansi_concatenate_huge_integer(_str, uiSymbolDisplacement);
                   ++p;
                }
                else

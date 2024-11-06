@@ -33,13 +33,13 @@ template <  typename L, typename T, typename W, typename H >
 inline auto _001SetRectDim(Gdiplus::RectF * p, L l, T t, W w, H h) { return set_XYWH_dim(p, l, t, w, h); }
 
 
-inline auto copy(Gdiplus::Rect * prectTarget, const ::rectangle_i32 * prectSource) { return ::_001CopyRect(prectTarget, prectSource); }
-inline auto copy(Gdiplus::Rect * prectTarget, const ::rectangle_f64 * prectSource) { return _001CopyRect(prectTarget, prectSource); }
-inline auto copy(Gdiplus::RectF * prectTarget, const ::rectangle_i32 * prectSource) { return ::_001CopyRect(prectTarget, prectSource); }
-inline auto copy(Gdiplus::RectF * prectTarget, const ::rectangle_f64 * prectSource) { return ::_001CopyRect(prectTarget, prectSource); }
+inline auto copy(Gdiplus::Rect * prectTarget, const ::int_rectangle * prectSource) { return ::_001CopyRect(prectTarget, prectSource); }
+inline auto copy(Gdiplus::Rect * prectTarget, const ::double_rectangle * prectSource) { return _001CopyRect(prectTarget, prectSource); }
+inline auto copy(Gdiplus::RectF * prectTarget, const ::int_rectangle * prectSource) { return ::_001CopyRect(prectTarget, prectSource); }
+inline auto copy(Gdiplus::RectF * prectTarget, const ::double_rectangle * prectSource) { return ::_001CopyRect(prectTarget, prectSource); }
 
 
-inline void copy(Gdiplus::Point * ppoint1, const ::point_f64 * ppoint2)
+inline void copy(Gdiplus::Point * ppoint1, const ::double_point * ppoint2)
 {
 
    ppoint1->X = (int)ppoint2->x;
@@ -48,7 +48,7 @@ inline void copy(Gdiplus::Point * ppoint1, const ::point_f64 * ppoint2)
 }
 
 
-inline void copy(Gdiplus::Point * ppoint1, const ::point_i32 * ppoint2)
+inline void copy(Gdiplus::Point * ppoint1, const ::int_point * ppoint2)
 {
 
    ppoint1->X = (int)ppoint2->x;
@@ -57,7 +57,7 @@ inline void copy(Gdiplus::Point * ppoint1, const ::point_i32 * ppoint2)
 }
 
 
-inline void copy(Gdiplus::PointF * ppoint1, const ::point_f64 * ppoint2)
+inline void copy(Gdiplus::PointF * ppoint1, const ::double_point * ppoint2)
 {
 
    ppoint1->X = (Gdiplus::REAL)ppoint2->x;

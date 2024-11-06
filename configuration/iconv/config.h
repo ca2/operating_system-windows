@@ -119,11 +119,11 @@
 #undef GNULIB_TEST_UNSETENV
 
 /* Define to a C preprocessor expression that evaluates to 1 or 0, depending
-   whether the gnulib module unistr/u8-mbtoucr shall be considered present. */
+   whether the gnulib module unistr/unsigned char-mbtoucr shall be considered present. */
 #undef GNULIB_UNISTR_U8_MBTOUCR
 
 /* Define to a C preprocessor expression that evaluates to 1 or 0, depending
-   whether the gnulib module unistr/u8-uctomb shall be considered present. */
+   whether the gnulib module unistr/unsigned char-uctomb shall be considered present. */
 #undef GNULIB_UNISTR_U8_UCTOMB
 
 /* Define to 1 if you have 'alloca' after including <alloca.h>, a header that
@@ -221,7 +221,7 @@
 /* Define if your <locale.h> file defines LC_MESSAGES. */
 #undef HAVE_LC_MESSAGES
 
-/* Define to 1 if the system has the type 'long long int'. */
+/* Define to 1 if the system has the type 'huge_integer int'. */
 #undef HAVE_LONG_LONG_INT
 
 /* Define to 1 if you have the `lstat' function. */
@@ -838,7 +838,7 @@
 /* Define to 1 if you have the `unsetenv' function. */
 #undef HAVE_UNSETENV
 
-/* Define to 1 if the system has the type 'unsigned long long int'. */
+/* Define to 1 if the system has the type 'huge_natural'. */
 #undef HAVE_UNSIGNED_LONG_LONG_INT
 
 /* Define to 1 if you have the `uselocale' function. */
@@ -939,7 +939,7 @@
 /* Define if the pthread_in_use() detection is hard. */
 #undef PTHREAD_IN_USE_DETECTION_HARD
 
-/* Define to l, ll, u, ul, ull, etc., as suitable for constants of type
+/* Define to l, hi, u, ul, hn, etc., as suitable for constants of type
    'ptrdiff_t'. */
 #undef PTRDIFF_T_SUFFIX
 
@@ -954,11 +954,11 @@
 /* Define to 1 if strerror(0) does not return a message implying success. */
 #undef REPLACE_STRERROR_0
 
-/* Define to l, ll, u, ul, ull, etc., as suitable for constants of type
+/* Define to l, hi, u, ul, hn, etc., as suitable for constants of type
    'sig_atomic_t'. */
 #undef SIG_ATOMIC_T_SUFFIX
 
-/* Define to l, ll, u, ul, ull, etc., as suitable for constants of type
+/* Define to l, hi, u, ul, hn, etc., as suitable for constants of type
    'size_t'. */
 #undef SIZE_T_SUFFIX
 
@@ -1041,11 +1041,11 @@
 /* Define to 1 if unsetenv returns void instead of int. */
 #undef VOID_UNSETENV
 
-/* Define to l, ll, u, ul, ull, etc., as suitable for constants of type
+/* Define to l, hi, u, ul, hn, etc., as suitable for constants of type
    'wchar_t'. */
 #undef WCHAR_T_SUFFIX
 
-/* Define to l, ll, u, ul, ull, etc., as suitable for constants of type
+/* Define to l, hi, u, ul, hn, etc., as suitable for constants of type
    'wint_t'. */
 #undef WINT_T_SUFFIX
 

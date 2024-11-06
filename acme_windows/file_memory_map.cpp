@@ -4,7 +4,7 @@
 #include "acme/parallelization/synchronous_lock.h"
 
 
-//CLASS_DECL_ACME bool ensure_file_size_handle(HANDLE h, u64 iSize);
+//CLASS_DECL_ACME bool ensure_file_size_handle(HANDLE h, huge_natural iSize);
 
 
 namespace acme_windows

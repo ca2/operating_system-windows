@@ -105,7 +105,7 @@ public:
    static bool _is_empty_or_unitary(LPCITEMIDLIST pidl);
    static bool _has_child(LPCITEMIDLIST pidl); // has count >= 2
    static int _len(LPCITEMIDLIST pidl);
-   static int _len(LPCITEMIDLIST pidl, int nCount);//Get pidl size_i32 throught the specified count.
+   static int _len(LPCITEMIDLIST pidl, int nCount);//Get pidl int_size throught the specified count.
    static void _free(LPITEMIDLIST& pidl);
    static LPITEMIDLIST _full(IShellFolder * psf, LPCITEMIDLIST lpi);
 

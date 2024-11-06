@@ -347,7 +347,7 @@ namespace audio_mmsystem
          if(estatus.succeeded())
          {
 
-            error() <<"ERROR OPENING Unpreparing INPUT DEVICE buffer : " << estatus.as_i64();
+            error() <<"ERROR OPENING Unpreparing INPUT DEVICE buffer : " << estatus.as_huge_integer();
 
          }
 
@@ -555,7 +555,7 @@ namespace audio_mmsystem
       if (::success != estatus)
       {
 
-         informationf( "waveOutGetPosition() returned %llu", estatus.as_i64());
+         informationf( "waveOutGetPosition() returned %llu", estatus.as_huge_integer());
 
          return 0_s;
 

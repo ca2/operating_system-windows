@@ -39,8 +39,8 @@ namespace windows
       //      string m_strTitle;
       //      bool m_bNcActive;
 
-      //      rectangle_i32 m_rectangle;
-      //      rectangle_i32 m_rectangleX;
+      //      int_rectangle m_rectangle;
+      //      int_rectangle m_rectangleX;
       //
       //      pointer_array < ::micro::child > m_childa;
       //      ::atom m_atomLeftButtonDown;
@@ -75,7 +75,7 @@ namespace windows
 
             void update_drawing_objects() override;
 
-            //::micro::child * on_hit_test(const ::point_i32 & point, ::user::e_zorder ezorder) override;
+            //::micro::child * on_hit_test(const ::int_point & point, ::user::e_zorder ezorder) override;
 
             void add_child(::micro::child* pchild) override;
 
@@ -97,7 +97,7 @@ namespace windows
 
             virtual LRESULT window_procedure(UINT message, WPARAM wparam, LPARAM lparam);
 
-            void move_to(const ::point_i32& point) override;
+            void move_to(const ::int_point& point) override;
 
             //void _destroy_window();
 
@@ -106,13 +106,13 @@ namespace windows
             void redraw() override;
 
 
-            ::point_i32 try_absolute_mouse_position(const ::point_i32& point) override;
+            ::int_point try_absolute_mouse_position(const ::int_point& point) override;
 
 
 
-            void get_client_rectangle(::rectangle_i32& rectangle) override;
+            void get_client_rectangle(::int_rectangle& rectangle) override;
 
-            void get_window_rectangle(::rectangle_i32& rectangle) override;
+            void get_window_rectangle(::int_rectangle& rectangle) override;
 
             void set_capture() override;
 
@@ -125,7 +125,7 @@ namespace windows
             static bool _is_light_theme();
 
 
-            ::size_i32 get_main_screen_size() override;
+            ::int_size get_main_screen_size() override;
 
 
             void user_post(const ::procedure& procedure) override;
@@ -133,7 +133,7 @@ namespace windows
 
             void implementation_message_loop_step() override;
 
-            void defer_show_system_menu(const ::point_i32 & pointAbsolute) override;
+            void defer_show_system_menu(const ::int_point & pointAbsolute) override;
 
          };
 

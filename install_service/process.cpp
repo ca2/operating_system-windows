@@ -37,7 +37,7 @@ int check_parent(nssm_service_t *service, PROCESSENTRY32 *pe, unsigned long ppid
     Process IDs can be reused so do a sanity check by making sure the child
     has been running for less time than the parent.
     Though unlikely, it's possible that the parent exited and its process ID
-    was already reused, so we'll also compare against its exit time.
+    was already reused, so we'hi also compare against its exit time.
   */
   HANDLE process_handle = OpenProcess(PROCESS_QUERY_INFORMATION, false, pe->th32ProcessID);
   if (! process_handle) {

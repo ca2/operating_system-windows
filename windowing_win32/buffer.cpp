@@ -23,15 +23,15 @@
 #include <gdiplus.h>
 #endif
 
-CLASS_DECL_AURA::point_i32 __get_bottom_right();
-CLASS_DECL_AURA void __set_bottom_right(const ::point_i32 & pointBottomRight);
+CLASS_DECL_AURA::int_point __get_bottom_right();
+CLASS_DECL_AURA void __set_bottom_right(const ::int_point & pointBottomRight);
 
 
 namespace windowing_win32
 {
 
 
-   //CLASS_DECL_WINDOWING_WIN32 HBITMAP create_windows_dib(const ::size_i32 & size, int * piScan, ::color32_t ** ppdata);
+   //CLASS_DECL_WINDOWING_WIN32 HBITMAP create_windows_dib(const ::int_size & size, int * piScan, ::color32_t ** ppdata);
 
 
    buffer::layered_window_buffer::layered_window_buffer()
@@ -149,7 +149,7 @@ namespace windowing_win32
    }
 
 
-   bool buffer::create_window_device_context(const ::size_i32 & size, int iStrideParam)
+   bool buffer::create_window_device_context(const ::int_size & size, int iStrideParam)
    {
 
       if (m_hdcScreen != NULL && m_pwindow)
@@ -311,7 +311,7 @@ namespace windowing_win32
 
       int iScan = -1;
 
-      ::size_i32 sizeAllocate;
+      ::int_size sizeAllocate;
 
       auto pwindowing = m_pwindow->m_puserinteraction->windowing();
 
@@ -505,7 +505,7 @@ namespace windowing_win32
    }
 
 
-   ::point_i32 g_pointLastBottomRight;
+   ::int_point g_pointLastBottomRight;
 
 
    bool buffer::on_update_screen(::graphics::buffer_item * pbufferitem)
@@ -680,7 +680,7 @@ namespace windowing_win32
 
             ::pointer < ::windowing_win32::window > pwindow = m_pwindow;
 
-            ::point_i32 pointSrc = { 0 };
+            ::int_point pointSrc = { 0 };
 
             BLENDFUNCTION blendPixelFunction = { AC_SRC_OVER, 0, pwindow->m_uOpacity, AC_SRC_ALPHA };
 
@@ -931,7 +931,7 @@ namespace windowing_win32
 
                //string str;
 
-               //rectangle_i32 rectangleDrawing(point, size);
+               //int_rectangle rectangleDrawing(point, size);
 
 
                   //if (rectangleDrawing.size() == pimage->m_rectangleTag.size())
@@ -953,7 +953,7 @@ namespace windowing_win32
                      if (p.is_set())
                      {
 
-                        auto r = ::rectangle_i32(point, size);
+                        auto r = ::int_rectangle(point, size);
 
                         auto Δ = r.bottom_right() - p;
 
@@ -1019,7 +1019,7 @@ namespace windowing_win32
 
                //}
 
-               ::point_i32 pointBottomRight = point + size;
+               ::int_point pointBottomRight = point + size;
 
                //if (::IsWindowVisible(hwnd) && !::IsIconic(hwnd))
                {
@@ -1029,7 +1029,7 @@ namespace windowing_win32
                   //if (!p2->m_bSizeMoveMode)
                   {
 
-                     ::rectangle_i32 rectangleWindow;
+                     ::int_rectangle rectangleWindow;
 
                      RECT rectWindow;
 
@@ -1037,7 +1037,7 @@ namespace windowing_win32
 
                      rectangleWindow = rectWindow;
 
-                     ::rectangle_i32 rectangleRequest(point, size);
+                     ::int_rectangle rectangleRequest(point, size);
 
                      //if (rectangleWindow.size() != size)
                      //{
@@ -1121,7 +1121,7 @@ namespace windowing_win32
                      if (::IsWindowVisible(pwindow->m_hwnd))
                      {
 
-                        ::UpdateLayeredWindow(hwnd, m_hdcScreen, (POINT *)&point, (SIZE *)&size, playeredwindowbuffer->m_hdc, (POINT *)&pointSrc, make_u32(0, 0, 0, 0), &blendPixelFunction, ULW_ALPHA);
+                        ::UpdateLayeredWindow(hwnd, m_hdcScreen, (POINT *)&point, (SIZE *)&size, playeredwindowbuffer->m_hdc, (POINT *)&pointSrc, make_unsigned_int(0, 0, 0, 0), &blendPixelFunction, ULW_ALPHA);
 
                      }
 
@@ -1131,7 +1131,7 @@ namespace windowing_win32
 
                      rectangleWindow = rectWindow;
 
-                     ::rectangle_i32 rectangleCache(pwindow->m_pointWindow, pwindow->m_sizeWindow);
+                     ::int_rectangle rectangleCache(pwindow->m_pointWindow, pwindow->m_sizeWindow);
 
                      if (rectangleCache != rectangleWindow)
                      {
@@ -1189,11 +1189,11 @@ namespace windowing_win32
             //
             //               }
 
-                           //::rectangle_i32 r3;
+                           //::int_rectangle r3;
 
                            //GetWindowRect(m_oswindow, &r3);
 
-                           //::rectangle_i32 r4;
+                           //::int_rectangle r4;
 
                            //GetClientRect(m_oswindow, &r4);
 

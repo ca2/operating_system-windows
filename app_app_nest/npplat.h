@@ -147,8 +147,8 @@ NPError Private_SetValue(NPP instance, NPNVariable variable, void *value);
 // #define HIBYTE(i) (i >> 8)
 // #endif
 
-// #ifndef lower_u8
-// #define lower_u8(i) (i & 0xff)
+// #ifndef lower_unsigned_char
+// #define lower_unsigned_char(i) (i & 0xff)
 // #endif
 
 

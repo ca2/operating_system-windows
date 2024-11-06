@@ -3,12 +3,12 @@
 #include "acme/_operating_system.h"
 
 
-BSTR AllocSysString(const ::wd32_character * pchData, strsize nDataLength) noexcept
+BSTR AllocSysString(const ::wd32_character * pchData, character_count nDataLength) noexcept
 {
 
    BSTR bstr = nullptr;
 
-   strsize nLen = utf_to_utf_length(bstr, pchData, nDataLength);
+   character_count nLen = utf_to_utf_length(bstr, pchData, nDataLength);
 
    bstr = ::SysAllocStringLen(nullptr, (unsigned int)nLen);
 
@@ -25,10 +25,10 @@ BSTR AllocSysString(const ::wd32_character * pchData, strsize nDataLength) noexc
 
 
 // pbstr is [in,out] BSTR string
-bool ReAllocSysString(BSTR * pbstr, const ::wd32_character * pchData, strsize nDataLength) noexcept
+bool ReAllocSysString(BSTR * pbstr, const ::wd32_character * pchData, character_count nDataLength) noexcept
 {
 
-   strsize nLen = utf_to_utf_length((wchar_t *) pbstr, pchData, nDataLength);
+   character_count nLen = utf_to_utf_length((wchar_t *) pbstr, pchData, nDataLength);
 
    bool bSuccess = ::SysReAllocStringLen(pbstr, nullptr, (unsigned int)nLen) != 0;
 

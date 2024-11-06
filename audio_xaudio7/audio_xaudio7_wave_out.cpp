@@ -307,7 +307,7 @@ Opened:
 
          unsigned int uiBufferSize = iBufferSampleCount * m_pwaveformat->nChannels * 2;
 
-         ASSERT((uiBufferSize % 2048) == 0);// Streaming size_i32 must be 2K aligned to use for async I/O
+         ASSERT((uiBufferSize % 2048) == 0);// Streaming int_size must be 2K aligned to use for async I/O
 
 
 
@@ -551,13 +551,13 @@ Opened:
 
       /*::time out::GetPositionMillisForSynch()
       {
-         i64 dwMillis = GetPositionMillis();
-         i64 dwPosition = m_pprebuffer->m_position * 8;
+         huge_integer dwMillis = GetPositionMillis();
+         huge_integer dwPosition = m_pprebuffer->m_position * 8;
          dwPosition /= m_pwaveformat->wBitsPerSample;
          dwPosition *= 1000;
          dwPosition /= m_pwaveformat->nChannels * m_pwaveformat->nSamplesPerSec;
          if(m_pprebuffer != nullptr && m_pprebuffer->m_pdecoder != nullptr)
-            return dwMillis + dwPosition - m_pprebuffer->m_pdecoder->audio_plugin_get_lost_millis(dwMillis + dwPosition) - (((i64) m_dwLostSampleCount) /  ((i64) m_pwaveformat->nSamplesPerSec));
+            return dwMillis + dwPosition - m_pprebuffer->m_pdecoder->audio_plugin_get_lost_millis(dwMillis + dwPosition) - (((huge_integer) m_dwLostSampleCount) /  ((huge_integer) m_pwaveformat->nSamplesPerSec));
          else
             return dwMillis + dwPosition - ((m_dwLostSampleCount) * 1000 / m_pwaveformat->nSamplesPerSec);
       }*/
@@ -596,7 +596,7 @@ Opened:
          //   }
          //   if(mmt.wType == TIME_BYTES)
          //   {
-         //      i64 i = mmt.u.cb;
+         //      huge_integer i = mmt.u.cb;
          //      i *= 8 * 1000;
          //      i /= m_pwaveformat->wBitsPerSample * m_pwaveformat->nChannels * m_pwaveformat->nSamplesPerSec;
          //      return i;

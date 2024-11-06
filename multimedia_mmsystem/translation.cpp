@@ -19,7 +19,7 @@ namespace multimedia
          waveformatex.nChannels           = pwaveformat->m_waveformat.nChannels;            /* number of channels (i.e. mono, stereo...) */
          waveformatex.nSamplesPerSec      = pwaveformat->m_waveformat.nSamplesPerSec;       /* sample rate */
          waveformatex.nAvgBytesPerSec     = pwaveformat->m_waveformat.nAvgBytesPerSec;      /* for buffer estimation */
-         waveformatex.nBlockAlign         = pwaveformat->m_waveformat.nBlockAlign;          /* block size_i32 of data */
+         waveformatex.nBlockAlign         = pwaveformat->m_waveformat.nBlockAlign;          /* block int_size of data */
          waveformatex.wBitsPerSample      = pwaveformat->m_waveformat.wBitsPerSample;       /* number of bits per sample of mono data */
          waveformatex.cbSize              = sizeof(waveformatex);
          /* extra information (after cbSize) */

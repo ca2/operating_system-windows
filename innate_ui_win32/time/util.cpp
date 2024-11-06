@@ -31,12 +31,12 @@
 //}
 
 
-//HWND CLASS_DECL_ACME __child_window_from_point(HWND hwnd, const ::point_i32 & pointParam)
+//HWND CLASS_DECL_ACME __child_window_from_point(HWND hwnd, const ::int_point & pointParam)
 //{
 //   
 //   ASSERT(hwnd != nullptr);
 //   
-//   ::point_i32 point(pointParam);
+//   ::int_point point(pointParam);
 //   
 //   // check child windows
 //   ::ClientToScreen(hwnd, (POINT *) &point);
@@ -47,8 +47,8 @@
 //      if (::GetDlgCtrlID(oswindow_Child) != (unsigned short)0 &&
 //            (::GetWindowLong(oswindow_Child, GWL_STYLE) & WS_VISIBLE))
 //      {
-//         // see if point_i32 hits the child interaction_impl
-//         ::rectangle_i32 rectangle;
+//         // see if int_point hits the child interaction_impl
+//         ::int_rectangle rectangle;
 //         ::GetWindowRect(oswindow_Child, (RECT *) &rectangle);
 //         if (rectangle.contains(point))
 //            return oswindow_Child;

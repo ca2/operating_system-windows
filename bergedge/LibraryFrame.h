@@ -30,9 +30,9 @@ public:
    DECLARE_MESSAGE_HANDLER(on_message_create);
    void OnActivate(UINT nState,CWnd* pWndOther,BOOL bMinimized);
    BOOL OnNcActivate(BOOL bActive);
-   void OnNcLButtonDblClk(UINT nHitTest,CPoint point_i32);
-   void OnNcLButtonDown(UINT nHitTest,CPoint point_i32);
-   void OnNcLButtonUp(UINT nHitTest,CPoint point_i32);
+   void OnNcLButtonDblClk(UINT nHitTest,CPoint int_point);
+   void OnNcLButtonDown(UINT nHitTest,CPoint int_point);
+   void OnNcLButtonUp(UINT nHitTest,CPoint int_point);
    void OnGetMinMaxInfo(MINMAXINFO* lpMMI);
    void OnFileNewlibrary();
    void OnFileOpenlibrary();

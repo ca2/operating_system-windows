@@ -376,7 +376,7 @@
 /* The size of `long', as computed by sizeof. */
 #undef SIZEOF_LONG
 
-/* The size of `long long', as computed by sizeof. */
+/* The size of `huge_integer', as computed by sizeof. */
 #undef SIZEOF_LONG_LONG
 
 /* The size of `size_t', as computed by sizeof. */

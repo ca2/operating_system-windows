@@ -371,7 +371,7 @@ namespace windows
          //
          //   for (int i = 0; i < m_iButtonCount; i++)
          //   {
-         //      if (m_buttona[i].m_rectangle.contains(point_i32(x, y)))
+         //      if (m_buttona[i].m_rectangle.contains(int_point(x, y)))
          //      {
          //
          //         return m_buttona[i].m_edialogresult;
@@ -399,7 +399,7 @@ namespace windows
 
             //   m_pdragmove->m_bDrag = false;
 
-            //   point_i32 pointCursor(x, y);
+            //   int_point pointCursor(x, y);
 
             //   pointCursor += m_rectangle.origin();
 
@@ -460,7 +460,7 @@ namespace windows
 
             //      m_pdragmove->m_bDrag = true;
 
-            //      point_i32 pointCursor(x, y);
+            //      int_point pointCursor(x, y);
 
             //      pointCursor += m_rectangle.origin();
 
@@ -495,7 +495,7 @@ namespace windows
 
             //   m_pdragmove->m_bDrag = false;
 
-            //   point_i32 pointCursor(x, y);
+            //   int_point pointCursor(x, y);
 
             //   pointCursor += m_rectangle.origin();
 
@@ -555,7 +555,7 @@ namespace windows
 
 
 
-         //::micro::child * window::hit_test(const ::point_i32 & point, ::user::e_zorder ezorder)
+         //::micro::child * window::hit_test(const ::int_point & point, ::user::e_zorder ezorder)
          //{
 
          //   return m_pinterface->hit_test(point);
@@ -699,7 +699,7 @@ namespace windows
             case WM_LBUTTONDOWN:
             {
 
-               POINT point{ i32_x(lparam), i32_y(lparam) };
+               POINT point{ lparam_int_x(lparam), lparam_int_y(lparam) };
 
                auto pmouse = __create_new < ::user::mouse >();
 
@@ -716,7 +716,7 @@ namespace windows
             case WM_MOUSEMOVE:
             {
 
-               POINT point{ i32_x(lparam), i32_y(lparam) };
+               POINT point{ lparam_int_x(lparam), lparam_int_y(lparam) };
 
                auto pmouse = __create_new < ::user::mouse >();
 
@@ -733,7 +733,7 @@ namespace windows
             case WM_LBUTTONUP:
             {
 
-               POINT point{ i32_x(lparam), i32_y(lparam) };
+               POINT point{ lparam_int_x(lparam), lparam_int_y(lparam) };
 
                auto pmouse = __create_new < ::user::mouse >();
 
@@ -750,7 +750,7 @@ namespace windows
             case WM_RBUTTONDOWN:
             {
 
-               POINT point{ i32_x(lparam), i32_y(lparam) };
+               POINT point{ lparam_int_x(lparam), lparam_int_y(lparam) };
 
                auto pmouse = __create_new < ::user::mouse >();
 
@@ -767,7 +767,7 @@ namespace windows
             case WM_RBUTTONUP:
             {
 
-               POINT point{ i32_x(lparam), i32_y(lparam) };
+               POINT point{ lparam_int_x(lparam), lparam_int_y(lparam) };
 
                auto pmouse = __create_new < ::user::mouse >();
 
@@ -794,7 +794,7 @@ namespace windows
 
                HDC hdc = ::CreateCompatibleDC(hdcWindow);
 
-               ::rectangle_i32 rectangleX;
+               ::int_rectangle rectangleX;
 
                ::GetClientRect(m_hwnd, (LPRECT)&rectangleX);
 
@@ -1014,11 +1014,11 @@ namespace windows
          //   }
          //   break;
          //   case WM_LBUTTONDOWN:
-         //      on_left_button_down(i32_x(lparam), i32_y(lparam));
+         //      on_left_button_down(lparam_int_x(lparam), lparam_int_y(lparam));
          //      break;
          //   case WM_LBUTTONUP:
          //   {
-         //      on_left_button_up(i32_x(lparam), i32_y(lparam));
+         //      on_left_button_up(lparam_int_x(lparam), lparam_int_y(lparam));
          //   }
          //
          //   break;
@@ -1068,7 +1068,7 @@ namespace windows
          }
 
 
-         void window::move_to(const ::point_i32& point)
+         void window::move_to(const ::int_point& point)
          {
 
             ::SetWindowPos(m_hwnd, nullptr, point.x(), point.y(), 0, 0, SWP_NOSIZE | SWP_NOZORDER);
@@ -1078,7 +1078,7 @@ namespace windows
          }
 
 
-         ::point_i32 window::try_absolute_mouse_position(const ::point_i32& point)
+         ::int_point window::try_absolute_mouse_position(const ::int_point& point)
          {
 
             return point;
@@ -1086,7 +1086,7 @@ namespace windows
          }
 
 
-         void window::get_client_rectangle(::rectangle_i32& rectangle)
+         void window::get_client_rectangle(::int_rectangle& rectangle)
          {
 
             ::GetClientRect(m_hwnd, (LPRECT)&rectangle);
@@ -1094,7 +1094,7 @@ namespace windows
          }
 
 
-         void window::get_window_rectangle(::rectangle_i32& rectangle)
+         void window::get_window_rectangle(::int_rectangle& rectangle)
          {
 
             ::GetWindowRect(m_hwnd, (LPRECT)&rectangle);
@@ -1140,7 +1140,7 @@ namespace windows
 
 
 
-         ::size_i32 window::get_main_screen_size()
+         ::int_size window::get_main_screen_size()
          {
 
             HWND hwndDesktop = ::GetDesktopWindow();
@@ -1189,7 +1189,7 @@ namespace windows
          }
 
 
-         void window::defer_show_system_menu(const ::point_i32 & pointAbsolute)
+         void window::defer_show_system_menu(const ::int_point & pointAbsolute)
          {
 
             //::pointer < ::windows::micro::user > pnanouser = system()->acme_windowing();

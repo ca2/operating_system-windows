@@ -767,7 +767,7 @@ bool is_good_active_w(HWND w)
 ////
 ////
 ////   const SHORT Vk = VkKeyScanExW(ch, hkl);
-////   //const unsigned int VKey = ::MapVirtualKey(lower_u8(Vk), 0);
+////   //const unsigned int VKey = ::MapVirtualKey(lower_unsigned_char(Vk), 0);
 ////
 ////   if (HIBYTE(Vk) == 1) // Check if shift key needs to be pressed for this key
 ////   {
@@ -828,7 +828,7 @@ bool is_good_active_w(HWND w)
 ////   sleep(iSleep);
 ////
 ////   //const SHORT Vk = VkKeyScanExW(ch, hkl);
-////   ////const unsigned int VKey = ::MapVirtualKey(lower_u8(Vk), 0);
+////   ////const unsigned int VKey = ::MapVirtualKey(lower_unsigned_char(Vk), 0);
 ////
 ////   //if (HIBYTE(Vk) == 1) // Check if shift key needs to be pressed for this key
 ////   //{

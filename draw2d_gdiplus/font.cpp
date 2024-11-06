@@ -124,12 +124,12 @@ namespace draw2d_gdiplus
 
       //}
 
-      if (m_path.has_char())
+      if (m_path.has_character())
       {
 
          ::pointer<::draw2d_gdiplus::draw2d>pdraw2d = system()->draw2d();
 
-         if (m_pfontfamily && m_pfontfamily->m_strBranch.has_char())
+         if (m_pfontfamily && m_pfontfamily->m_strBranch.has_character())
          {
 
             pdraw2d->write_text()->fonts()->enumeration(m_pfontfamily->m_strBranch)->defer_download_font(m_path);
@@ -154,7 +154,7 @@ namespace draw2d_gdiplus
 
                WCHAR wszGetFamilyName[LF_FACESIZE];
 
-               if (::write_text::font::m_pfontfamily->m_strFamilyName.has_char())
+               if (::write_text::font::m_pfontfamily->m_strFamilyName.has_character())
                {
 
                   for (int iFamily = 0; iFamily < pprivatefont->m_iFamilyCount; iFamily++)

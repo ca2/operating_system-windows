@@ -112,7 +112,7 @@ namespace draw2d_gdiplus
    }
 
 
-   void bitmap::create_bitmap(::draw2d::graphics* pgraphics, const ::size_i32& size, void** ppvBits, int* stride)
+   void bitmap::create_bitmap(::draw2d::graphics* pgraphics, const ::int_size& size, void** ppvBits, int* stride)
    {
 
       if (size == m_size)
@@ -217,31 +217,31 @@ namespace draw2d_gdiplus
 
    }
 
-   size_i32 bitmap::SetBitmapDimension(int nWidth, int nHeight)
+   int_size bitmap::SetBitmapDimension(int nWidth, int nHeight)
    {
 
 
       throw ::interface_only();
 
-      //::size_i32 size;
+      //::int_size size;
       //VERIFY(::SetBitmapDimensionEx((HBITMAP)get_handle(), nWidth, nHeight, &size));
       //return size;
-      return ::size_i32(0, 0);
+      return ::int_size(0, 0);
 
    }
 
    
-   size_i32 bitmap::GetBitmapDimension() const
+   int_size bitmap::GetBitmapDimension() const
    {
 
       if (m_pbitmap == nullptr)
       {
 
-         return ::size_i32(0, 0);
+         return ::int_size(0, 0);
 
       }
 
-      return ::size_i32(m_pbitmap->GetWidth(), m_pbitmap->GetHeight());
+      return ::int_size(m_pbitmap->GetWidth(), m_pbitmap->GetHeight());
 
    }
 

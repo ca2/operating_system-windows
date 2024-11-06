@@ -108,7 +108,7 @@ namespace acme_windows
 
          lpFile = m_wstrFile;
 
-         if (strParams.has_char())
+         if (strParams.has_character())
          {
 
             m_wstrParams = strParams;
@@ -117,7 +117,7 @@ namespace acme_windows
 
          }
 
-         if (pathWorkingDirectory.has_char())
+         if (pathWorkingDirectory.has_character())
          {
 
             m_wstrWorkingDirectory = pathWorkingDirectory.windows_path();
@@ -273,7 +273,7 @@ namespace acme_windows
 
       wstring wstrParams(strParams);
 
-      if (wstrParams.has_char())
+      if (wstrParams.has_character())
       {
 
          pwszParams = wstrParams;
@@ -284,7 +284,7 @@ namespace acme_windows
 
       wstring wstrFolder(pathFolder.windows_path());
 
-      if (wstrFolder.has_char())
+      if (wstrFolder.has_character())
       {
 
          pwszFolder = wstrFolder;
@@ -428,7 +428,7 @@ namespace acme_windows
    //   }
    //
    //
-   //   ::color::color node::get_default_color(::u64 u)
+   //   ::color::color node::get_default_color(huge_natural u)
    //   {
    //
    //      switch (u)
@@ -846,7 +846,7 @@ namespace acme_windows
    //
    //      }
    //
-   //      if (str.has_char())
+   //      if (str.has_character())
    //         return "audio_" + str;
    //      else
    //         return "audio_mmsystem";
@@ -1152,7 +1152,7 @@ namespace acme_windows
 
       ::collection::count iLenExcept;
 
-      if (strExceptDir.has_char())
+      if (strExceptDir.has_character())
       {
 
          iLenExcept = strExceptDir.length();
@@ -1311,7 +1311,7 @@ namespace acme_windows
    //      if (entry.th32ProcessID != 0 && strPath.case_insensitive_order(pathModule) == 0)
    //      {
 
-   //         iaPid.add((::i64)entry.th32ProcessID);
+   //         iaPid.add((huge_integer)entry.th32ProcessID);
 
    //      }
 
@@ -1322,7 +1322,7 @@ namespace acme_windows
    //      if (entry.th32ProcessID != 0 && ::file::path(strPath) == pathModule)
    //      {
 
-   //         iaPid.add((::i64)entry.th32ProcessID);
+   //         iaPid.add((huge_integer)entry.th32ProcessID);
 
    //      }
 
@@ -2781,7 +2781,7 @@ namespace acme_windows
    }
 
 
-   ::i64 node::current_process_identifier()
+   huge_integer node::current_process_identifier()
    {
 
       return ::GetCurrentProcessId();
@@ -3501,7 +3501,7 @@ namespace acme_windows
    //}
 
 
-   ::u64 node::translate_processor_affinity(int iOrder)
+   huge_natural node::translate_processor_affinity(int iOrder)
    {
 
       DWORD_PTR dwProcessAffinityMask;
@@ -4010,10 +4010,10 @@ namespace acme_windows
       if (scopedstr == "PATH")
       {
 
-         if (strUser.has_char())
+         if (strUser.has_character())
          {
 
-            if (strSystem.has_char())
+            if (strSystem.has_character())
             {
 
                str = strUser + ";" + strSystem;
@@ -4038,7 +4038,7 @@ namespace acme_windows
       else
       {
 
-         if (strUser.has_char())
+         if (strUser.has_character())
          {
 
             str = strUser;
@@ -4287,7 +4287,7 @@ namespace acme_windows
 
          auto iExitCode = get_posix_shell_command_output(strOutput, strCheckCommand, eposixshell, 1_min);
 
-         return iExitCode == 0 || strOutput.has_char();
+         return iExitCode == 0 || strOutput.has_character();
 
       }
       catch (...)

@@ -22,7 +22,7 @@ namespace windows
 
       virtual void * on_interprocess_receive(rx * prx, const ::string & pszMessage);
       virtual void * on_interprocess_receive(rx * prx, int message, void * pdata, memsize len);
-      virtual void * on_interprocess_post(rx * prx, i64 a, i64 b);
+      virtual void * on_interprocess_post(rx * prx, huge_integer a, huge_integer b);
 
 
       virtual bool on_idle();

@@ -35,7 +35,7 @@ namespace windowing_win32
       //   // the COleDataObject.  Note that the false lparam means that
       //   // GetIDataObject will not AddRef() the returned interface, so
       //   // we do not Release() it.
-      //   ::point_i32 point(m.point.x(), m.point.y());
+      //   ::int_point point(m.point.x(), m.point.y());
 
       //   m_piDropHelper->DragEnter(get_handle(), m.pDataObj, &point, m.dwEffect);
       //}
@@ -75,7 +75,7 @@ namespace windowing_win32
       //   // the COleDataObject.  Note that the false lparam means that
       //   // GetIDataObject will not AddRef() the returned interface, so
       //   // we do not Release() it.
-      //   ::point_i32 point(m.point.x(), m.point.y());
+      //   ::int_point point(m.point.x(), m.point.y());
       //   m_piDropHelper->DragOver(&point, m.dwEffect);
       //}
 
@@ -147,7 +147,7 @@ namespace windowing_win32
       //   // the COleDataObject.  Note that the false lparam means that
       //   // GetIDataObject will not AddRef() the returned interface, so
       //   // we do not Release() it.
-      //   ::point_i32 point(m.point.x(), m.point.y());
+      //   ::int_point point(m.point.x(), m.point.y());
       //   m_piDropHelper->Drop(m.pDataObj, &point, m.dwEffect);
       //}
 

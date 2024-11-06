@@ -361,7 +361,7 @@ namespace apex_windows
    //}
 
 
-   ::color::color node::get_default_color(::u64 u)
+   ::color::color node::get_default_color(huge_natural u)
    {
 
       switch (u)
@@ -890,7 +890,7 @@ namespace apex_windows
 
       }
 
-      if (str.has_char())
+      if (str.has_character())
          return "audio_" + str;
       else
          return "audio_mmsystem";
@@ -1121,7 +1121,7 @@ namespace apex_windows
 
             string strAppId = papp->m_strAppId;
 
-            if (strAppId.has_char())
+            if (strAppId.has_character())
             {
 
                auto pnode = system()->node()->m_papexnode;
@@ -1134,7 +1134,7 @@ namespace apex_windows
 
                //strAppIdUnderscore.find_replace("-", "_");
 
-               //if (papp->m_strAppName.has_char())
+               //if (papp->m_strAppName.has_character())
                //{
 
                //   strAppName = papp->m_strAppName;
@@ -2146,7 +2146,7 @@ namespace apex_windows
 
       //string strMappedProfile;
 
-      //if (strProfile.has_char())
+      //if (strProfile.has_character())
       //{
 
       //   auto path = system()->dir().config() / "config/browser" / strBrowser / (strProfile + ".txt");
@@ -2156,7 +2156,7 @@ namespace apex_windows
       //}
 
 
-      if (strProfile.has_char() && strBrowser == "chrome")
+      if (strProfile.has_character() && strBrowser == "chrome")
       {
 
          ::acme_windows::registry::key key;
@@ -2339,7 +2339,7 @@ namespace apex_windows
 
       LPTSTR ReferencedDomain = nullptr;
       DWORD cbSid = 128;    // initial allocation attempt
-      DWORD cchReferencedDomain = 16; // initial allocation size_i32
+      DWORD cchReferencedDomain = 16; // initial allocation int_size
       SID_NAME_USE peUse;
       BOOL bSuccess = false; // assume this function will fail
 
@@ -2368,7 +2368,7 @@ namespace apex_windows
             SystemName,         // machine to lookup account on
             AccountName,        // account to lookup
             *Sid,               // SID of interest
-            &cbSid,             // size_i32 of SID
+            &cbSid,             // int_size of SID
             ReferencedDomain,   // domain account was found on
             &cchReferencedDomain,
             &peUse
@@ -2849,8 +2849,8 @@ namespace apex_windows
          0,                      // no load ordering group
          0,                      // no tag identifier
          0,                      // no dependencies
-         strUser.has_char() ? lpszName : nullptr,                      // LocalSystem account
-         strPass.has_char() ? pszPass : nullptr);                     // no password
+         strUser.has_character() ? lpszName : nullptr,                      // LocalSystem account
+         strPass.has_character() ? pszPass : nullptr);                     // no password
 
 
       if (!hdlServ)
@@ -3243,7 +3243,7 @@ namespace apex_windows
 
       key._get("ProgId", strProgId);
 
-      if (strProgId.begins("App") && strHash.has_char())
+      if (strProgId.begins("App") && strHash.has_character())
       {
 
          strId = "edge";
@@ -3307,7 +3307,7 @@ namespace apex_windows
 
       bool bQuote = strDefault.case_insensitive_begins_eat("\"");
 
-      strsize iFind = strDefault.case_insensitive_find_index(".exe");
+      character_count iFind = strDefault.case_insensitive_find_index(".exe");
 
       if (iFind <= 0)
       {
@@ -3846,7 +3846,7 @@ namespace apex_windows
          if (keyKar._get(strAppId, strValue))
          {
 
-            if (strValue.has_char())
+            if (strValue.has_character())
             {
 
                return true;
@@ -3879,7 +3879,7 @@ namespace apex_windows
          if (key._get("", strDefault))
          {
 
-            if (strDefault.has_char())
+            if (strDefault.has_character())
             {
 
                return strDefault;

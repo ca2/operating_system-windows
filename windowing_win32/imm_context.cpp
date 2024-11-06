@@ -114,7 +114,7 @@ string imm_context::_get_candidate(int iList)
 
    int iTest = pc->dwOffset[0];
 
-   auto iTest2 = (unsigned char *)&pc->dwOffset[pc->dwCount] - (u8 *)pc;
+   auto iTest2 = (unsigned char *)&pc->dwOffset[pc->dwCount] - (unsigned char *)pc;
 
    unichar * pwsz = (unichar *)(mem.data() + pc->dwOffset[pc->dwSelection]);
 
@@ -131,7 +131,7 @@ string imm_context::get_candidate()
 
       string str = _get_candidate((int)i);
 
-      if (str.has_char())
+      if (str.has_character())
       {
 
          return str;

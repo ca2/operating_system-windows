@@ -105,7 +105,7 @@ namespace windows
 
 
 
-   //string directory_context::path(const ::string & pszFolder, strsize iLenFolder, const ::string & pszRelative, strsize iLenRelative, const ::string & psz2, strsize iLen2, bool bUrl)
+   //string directory_context::path(const ::string & pszFolder, character_count iLenFolder, const ::string & pszRelative, character_count iLenRelative, const ::string & psz2, character_count iLen2, bool bUrl)
    //{
 
    //   bool bEmptyRelative = iLenRelative == 0 || pszRelative == nullptr || *pszRelative == '\0';
@@ -767,7 +767,7 @@ namespace windows
    bool directory_context::name_is(const ::file::path & str)
    {
 
-      strsize iLast = str.length() - 1;
+      character_count iLast = str.length() - 1;
 
       while (iLast >= 0)
       {
@@ -1085,7 +1085,7 @@ namespace windows
    ::file::path directory_context::name(const ::file::path & str)
    {
 
-      strsize iLast = str.length() - 1;
+      character_count iLast = str.length() - 1;
 
       while (iLast >= 0)
       {
@@ -1255,7 +1255,7 @@ namespace windows
    //   // strip attribute of NORMAL bit, our API doesn't have a "normal" bit.
    //   rStatus.m_attribute = (unsigned char)(findFileData.dwFileAttributes & ~FILE_ATTRIBUTE_NORMAL);
 
-   //   // get just the low unsigned int of the file size_i32
+   //   // get just the low unsigned int of the file int_size
    //   ASSERT(findFileData.nFileSizeHigh == 0);
    //   rStatus.m_size = (int)findFileData.nFileSizeLow;
 

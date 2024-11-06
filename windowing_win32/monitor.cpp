@@ -429,7 +429,7 @@ namespace windowing_win32
    }
 
 
-   //::rectangle_i32 monitor::monitor_rectangle()
+   //::int_rectangle monitor::monitor_rectangle()
    //{
 
    //   m_pdisplay->get_monitor_rectangle(m_iIndex, m_rectangle);
@@ -439,7 +439,7 @@ namespace windowing_win32
    //}
 
 
-   //::rectangle_i32 monitor::workspace_rectangle()
+   //::int_rectangle monitor::workspace_rectangle()
    //{
 
    //   m_pdisplay->get_monitor_rectangle(m_iIndex, m_rectangleWorkspace);

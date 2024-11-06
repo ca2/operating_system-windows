@@ -413,9 +413,9 @@ namespace acme_windows
 
       }
 
-      strsize iLen = wcslen(m_pFoundInfo->cFileName);
+      character_count iLen = wcslen(m_pFoundInfo->cFileName);
 
-      strsize i = iLen - 1;
+      character_count i = iLen - 1;
 
       while (i >= 0 && m_pFoundInfo->cFileName[i] == '\\')
       {

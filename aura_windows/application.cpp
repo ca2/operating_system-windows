@@ -225,7 +225,7 @@ pacmedir->system() / "config\\system\\audio.txt");
 
    //   }
 
-   //   if (str.has_char())
+   //   if (str.has_character())
    //      return "audio_" + str;
    //   else
    //      return "audio_mmsystem";

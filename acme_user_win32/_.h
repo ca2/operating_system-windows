@@ -82,7 +82,7 @@
 //
 //      auto opacity = color.u8_opacity();
 //
-//      m_ui = make_u32(
+//      m_ui = make_unsigned_int(
 //              color.u8_blue() * opacity / 255,
 //              color.u8_green() * opacity / 255,
 //              color.u8_red() * opacity / 255,

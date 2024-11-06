@@ -49,7 +49,7 @@ namespace apex_windows
 
       //virtual bool _os_calc_system_dark_mode();
 
-      virtual ::color::color get_default_color(::u64 u);
+      virtual ::color::color get_default_color(huge_natural u);
 
       virtual void set_console_colors(unsigned int dwScreenColors, unsigned int dwPopupColors, unsigned int dwWindowAlpha);
 

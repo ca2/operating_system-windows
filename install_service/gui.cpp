@@ -47,7 +47,7 @@ int nssm_gui(int resource, nssm_service_t *service) {
   /* Set service name if given */
   if (service->name[0]) {
     SetDlgItemText(dlg, IDC_NAME, service->name);
-    /* No point_i32 making user click erase if the name is already entered */
+    /* No int_point making user click erase if the name is already entered */
     if (resource == IDD_REMOVE) {
       HWND button = GetDlgItem(dlg, IDC_REMOVE);
       if (button) {
@@ -58,7 +58,7 @@ int nssm_gui(int resource, nssm_service_t *service) {
   }
 
   if (resource == IDD_EDIT) {
-    /* We'll need the service handle later. */
+    /* We'hi need the service handle later. */
     SetWindowLongPtr(dlg, DWLP_USER, (LONG_PTR) service);
 
     /* Service name can't be edited. */
@@ -226,14 +226,14 @@ void centre_window(HWND window) {
 
   if (! window) return;
 
-  /* Find window size_i32 */
+  /* Find window int_size */
   if (! GetWindowRect(window, &size)) return;
 
   /* Find desktop window */
   desktop = GetDesktopWindow();
   if (! desktop) return;
 
-  /* Find desktop window size_i32 */
+  /* Find desktop window int_size */
   if (! GetWindowRect(desktop, &desktop_size)) return;
 
   /* Centre window */
@@ -1042,7 +1042,7 @@ INT_PTR CALLBACK nssm_dlg(HWND window, const ::atom & atom, WPARAM w, LPARAM l) 
       */
       if (n < 32) {
         int columns = (n - 1) / 4;
-        RECT rectangle_i32;
+        RECT int_rectangle;
         GetWindowRect(list, &rectangle);
         int width = rectangle.right() - rectangle.left();
         width -= (7 - columns) * 16;

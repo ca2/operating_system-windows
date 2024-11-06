@@ -52,7 +52,7 @@ namespace windowing_win32
       HDC                           m_hdcScreen;
       bool                          m_bWindowDC;
       oswindow                      m_hwndIpc;
-      ::rectangle_i32               m_rectangleLast;
+      ::int_rectangle               m_rectangleLast;
       ::task_pointer                m_ptaskUpdateScreen;
       ::manual_reset_event          m_eventUpdateScreen;
       bool                          m_bSingleBufferMode;
@@ -82,7 +82,7 @@ namespace windowing_win32
       bool _on_begin_draw(::graphics::buffer_item * pbufferitem) override;
 
 
-      bool create_window_device_context(const ::size_i32 & size, int iStride = -1);
+      bool create_window_device_context(const ::int_size & size, int iStride = -1);
       void destroy_window_device_context();
 
 

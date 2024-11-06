@@ -28,7 +28,7 @@
 //
 //      ::file::path pathDir;
 //
-//      strsize iLastPo = -1;
+//      character_count iLastPo = -1;
 //
 //      ::file::path_array stra;
 //

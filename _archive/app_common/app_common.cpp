@@ -16,7 +16,7 @@ extern "C" int app_common_main(HINSTANCE hinstance, HINSTANCE hPrevInstance, LPT
 
    string strAppId = read_resource_as_string(nullptr, 2000, "APPID");
 
-   if (strAppId.has_char())
+   if (strAppId.has_character())
    {
 
       string strLibrary = ::process::app_id_to_app_name(strAppId);

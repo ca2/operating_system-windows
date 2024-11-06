@@ -99,7 +99,7 @@ void app_t::win_sync_out(string strLocal,string strRepos)
 
    //		str.trim();
 
-   //		if(str.has_char())
+   //		if(str.has_character())
    //		{
 
    //			strLog += "Found spurious transactions";
@@ -281,7 +281,7 @@ int app_t::run()
 
          for (auto str : stra)
          {
-            if (str.has_char())
+            if (str.has_character())
             {
 
                ::system("C:\\bergedge\\hi5\\program\\hstart /NOCONSOLE \"svnsync --non-interactive --synchronization_object-username " + strUser + " --synchronization_object-password " + strPass + " --source-username " + strUser + " --source-password " + strPass + " synchronization_object https://" + str + "-repos.ca2.cc:8443/" + strRepos + "\"");
@@ -301,7 +301,7 @@ int app_t::run()
 
       for (auto str : stra)
       {
-         if (str.has_char())
+         if (str.has_character())
          {
             iCount++;
             ::fork(this, [&]()

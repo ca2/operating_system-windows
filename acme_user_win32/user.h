@@ -31,7 +31,7 @@ namespace windows
             ~user() override;
 
 
-            //virtual void _defer_show_system_menu(HWND hwnd, HMENU * phmenuSystem, const ::point_i32 & pointAbsolute);
+            //virtual void _defer_show_system_menu(HWND hwnd, HMENU * phmenuSystem, const ::int_point & pointAbsolute);
             //virtual bool _on_command(LRESULT & lresult, HWND hwnd, WPARAM wparam, LPARAM lparam);
             //virtual void _erase_minimize_box_style(HWND hwnd);
 

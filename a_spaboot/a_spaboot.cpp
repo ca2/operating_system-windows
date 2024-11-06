@@ -45,7 +45,7 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
                                             false );
       if ( bSetOk )
       {
-         // Make the security attributes point_i32
+         // Make the security attributes int_point
          // to the security descriptor
          MutexAttributes.lpSecurityDescriptor = &SD;
          g_hmutexBoot = ::CreateMutex(&MutexAttributes, false, "Global\\ca2::fontopus::ca2_spa_boot::7807e510-5579-11dd-ae16-0800200c7784");
@@ -100,7 +100,7 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
 
    if(numargs >= 2)
    {
-      std::string str(u8(argv[1]));
+      std::string str(unsigned char(argv[1]));
       if(parse_installer_start(str.c_str()))
       {
          return start();
@@ -122,7 +122,7 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
 
    if(numargs >= 2)
    {
-      std::string str(u8(argv[1]));
+      std::string str(unsigned char(argv[1]));
       int i = str.find("starter_start=");
       if(i != std::string::npos)
       {
@@ -142,7 +142,7 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
       }
       else
       {
-         std::string str(u8(argv[1]));
+         std::string str(unsigned char(argv[1]));
          strParameters = "\""+ str + "\"";
          parse_installer(str.c_str());
       }

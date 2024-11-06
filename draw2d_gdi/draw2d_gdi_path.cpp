@@ -27,7 +27,7 @@ namespace draw2d_gdi
 
       wstring wstr(p.m_strText);
 
-      ::size_i32 size;
+      ::int_size size;
 
       if(::GetTextExtentPoint32W(hdc,wstr,(int)wstr.get_length(),&size))
       {

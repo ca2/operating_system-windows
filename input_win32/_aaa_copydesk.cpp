@@ -200,7 +200,7 @@ namespace windowing_win32
    HGLOBAL copydesk::hglobal_get_filea(const ::file::path_array & patha)
    {
 
-      strsize iLen = 0;
+      character_count iLen = 0;
 
       for (int i = 0; i < patha.get_size(); i++)
       {
@@ -635,7 +635,7 @@ namespace windowing_win32
 
             ::GetObject(hbitmap, sizeof(bm), &bm);
 
-            pimage->create(::size_i32(bm.bmWidth, bm.bmHeight), NOK_IMAGE);
+            pimage->create(::int_size(bm.bmWidth, bm.bmHeight), NOK_IMAGE);
 
             if (pimage->area() > 0)
             {

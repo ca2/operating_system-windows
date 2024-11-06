@@ -178,7 +178,7 @@ namespace draw2d_gdiplus
    }
 
 
-   void image::create_ex(const ::size_i32& size, ::image32_t * pimage32, int iScan, ::enum_flag eflagCreate, int iGoodStride, bool bPreserve)
+   void image::create_ex(const ::int_size& size, ::image32_t * pimage32, int iScan, ::enum_flag eflagCreate, int iGoodStride, bool bPreserve)
    {
 
       if (m_pbitmap.is_set()
@@ -228,7 +228,7 @@ namespace draw2d_gdiplus
 
       //destroy();
 
-      //if (!size_i32)
+      //if (!int_size)
       //{
 
       //   return true;
@@ -342,7 +342,7 @@ namespace draw2d_gdiplus
 
    }
 
-   //void image::create(const ::size_i32 & size, ::eobject eobjectCreate, int iGoodStride, bool bPreserve)
+   //void image::create(const ::int_size & size, ::eobject eobjectCreate, int iGoodStride, bool bPreserve)
    //{
 
    //   //if (m_pbitmap.is_set()
@@ -381,7 +381,7 @@ namespace draw2d_gdiplus
 
    //   ////destroy();
 
-   //   ////if (!size_i32)
+   //   ////if (!int_size)
    //   ////{
 
    //   ////   return true;
@@ -497,7 +497,7 @@ namespace draw2d_gdiplus
    }
 
 
-   //bool image::to(::draw2d::graphics * pgraphics, const ::point_i32 & point, const ::size_i32 & size, const ::point_i32 & pointSrc)
+   //bool image::to(::draw2d::graphics * pgraphics, const ::int_point & point, const ::int_size & size, const ::int_point & pointSrc)
    //{
 
    //   return pgraphics->draw(point, size, get_graphics(), pointSrc);
@@ -512,7 +512,7 @@ namespace draw2d_gdiplus
 
    ////   bitmap->CreateCompatibleBitmap(pgraphics, 1, 1);
 
-   ////   const ::size_i32 & size = bitmap->get_size();
+   ////   const ::int_size & size = bitmap->get_size();
 
    ////   if (!create(size))
    ////   {
@@ -545,7 +545,7 @@ namespace draw2d_gdiplus
    //}
 
 
-   //bool image::draw(const ::point_i32 & pointDest, ::image::image * pimage, const ::rectangle_i32 & rectangleSource)
+   //bool image::draw(const ::int_point & pointDest, ::image::image * pimage, const ::int_rectangle & rectangleSource)
    //{
 
    //   return m_pgraphics->draw(pointDest, pimage, rectangleSource) != false;
@@ -553,14 +553,14 @@ namespace draw2d_gdiplus
    //}
 
 
-   void image::_draw_raw(const ::rectangle_i32 & rectangleDstParam, ::image::image * pimageSrc, const ::point_i32 & pointSrcParam)
+   void image::_draw_raw(const ::int_rectangle & rectangleDstParam, ::image::image * pimageSrc, const ::int_point & pointSrcParam)
    {
 
-      ::rectangle_i32 rectangleTarget(rectangleDstParam);
+      ::int_rectangle rectangleTarget(rectangleDstParam);
 
-      ::point_i32 pointSrc(pointSrcParam);
+      ::int_point pointSrc(pointSrcParam);
 
-      ::size_i32 size(rectangleTarget.size());
+      ::int_size size(rectangleTarget.size());
 
       ::image::image * pimageDst = this;
 
@@ -645,9 +645,9 @@ namespace draw2d_gdiplus
 
          int scanSrc = pimageSrc->scan_size();
 
-         u8 * pdst = &((u8 *)pimageDst->image32())[scanDst * rectangleTarget.top() + rectangleTarget.left() * sizeof(::color::color)];
+         unsigned char * pdst = &((unsigned char *)pimageDst->image32())[scanDst * rectangleTarget.top() + rectangleTarget.left() * sizeof(::color::color)];
 
-         u8 * psrc = &((u8 *)pimageSrc->image32())[scanSrc * pointSrc.y() + pointSrc.x() * sizeof(::color::color)];
+         unsigned char * psrc = &((unsigned char *)pimageSrc->image32())[scanSrc * pointSrc.y() + pointSrc.x() * sizeof(::color::color)];
 
          ::color::color * pdst2;
 
@@ -668,9 +668,9 @@ namespace draw2d_gdiplus
       else
       {
 
-         ::image::image_source imagesource(pimageSrc, ::rectangle_f64(pointSrc, size));
+         ::image::image_source imagesource(pimageSrc, ::double_rectangle(pointSrc, size));
 
-         ::image::image_drawing_options imagedrawingoptions(::rectangle_f64(rectangleTarget.top_left(), size));
+         ::image::image_drawing_options imagedrawingoptions(::double_rectangle(rectangleTarget.top_left(), size));
 
          ::image::image_drawing imagedrawing(imagedrawingoptions, imagesource);
 
@@ -683,7 +683,7 @@ namespace draw2d_gdiplus
    }
 
 
- /*  bool image::draw(const ::rectangle_i32 & rectangleTarget, ::image::image * pimage, const ::point_i32 & pointSrc)
+ /*  bool image::draw(const ::int_rectangle & rectangleTarget, ::image::image * pimage, const ::int_point & pointSrc)
    {
 
       return ::image::draw(rectangleTarget, pimage, pointSrc);
@@ -747,7 +747,7 @@ namespace draw2d_gdiplus
       
          ::image::image_source imagesource(picon);
 
-         ::image::image_drawing_options imagedrawingoptions(rectangle_i32_dimension(0, 0, cx, cy));
+         ::image::image_drawing_options imagedrawingoptions(::int_rectangle_dimension(0, 0, cx, cy));
 
          ::image::image_drawing imagedrawing(imagedrawingoptions, imagesource);
 
@@ -787,7 +787,7 @@ namespace draw2d_gdiplus
 
          ::image::image_source imagesource(picon);
 
-         ::image::image_drawing_options imagedrawingoptions(rectangle_i32_dimension(0, 0, cx, cy));
+         ::image::image_drawing_options imagedrawingoptions(::int_rectangle_dimension(0, 0, cx, cy));
 
          ::image::image_drawing imagedrawing(imagedrawingoptions, imagesource);
 
@@ -828,7 +828,7 @@ namespace draw2d_gdiplus
 
          ::image::image_source imagesource(picon);
 
-         ::image::image_drawing_options imagedrawingoptions(rectangle_i32_dimension(0, 0, cx, cy));
+         ::image::image_drawing_options imagedrawingoptions(::int_rectangle_dimension(0, 0, cx, cy));
 
          ::image::image_drawing imagedrawing(imagedrawingoptions, imagesource);
 
@@ -836,10 +836,10 @@ namespace draw2d_gdiplus
 
       }
 
-      u8 * r1 = (u8 *)pimage1->image32();
-      u8 * r2 = (u8 *)pimage2->image32();
-      u8 * srcM = (u8 *)pimageM->image32();
-      u8 * dest = (u8 *)image32();
+      unsigned char * r1 = (unsigned char *)pimage1->image32();
+      unsigned char * r2 = (unsigned char *)pimage2->image32();
+      unsigned char * srcM = (unsigned char *)pimageM->image32();
+      unsigned char * dest = (unsigned char *)image32();
       int iSize = cx*cy;
 
       unsigned char b;
@@ -889,7 +889,7 @@ namespace draw2d_gdiplus
       m_pbitmap.release();
       m_pgraphics.release();
       m_hbitmap               = nullptr;
-      m_sizeWnd               = ::size_i64(0, 0);
+      m_sizeWnd               = ::huge_integer_size(0, 0);
       memset(&m_bitmapinfo, 0, sizeof(m_bitmapinfo));
 
    }

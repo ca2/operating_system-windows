@@ -149,7 +149,7 @@ namespace draw2d_gdiplus
 
             pgraphics->__construct(ppath);
 
-            ::rectangle_f64 rectangleRoundRect(m_point, m_size);
+            ::double_rectangle rectangleRoundRect(m_point, m_size);
 
             double dDiameter = m_dRadius * 2.0;
 

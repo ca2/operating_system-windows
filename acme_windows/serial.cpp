@@ -71,7 +71,7 @@ namespace acme_windows
       m_estopbit = estopbit;
       m_eflowcontrol = eflowcontrol;
 
-      if (m_wstrPort.has_char())
+      if (m_wstrPort.has_character())
       {
 
          open();
@@ -404,13 +404,13 @@ namespace acme_windows
             if (m_estopbit == ::serial::e_stop_bit_one_point_five)
             {
 
-               m_uiByteTimeNs = (unsigned int)(((((u64)1000LL * 1000LL * 1000LL) * (1 + m_ebytesize + m_eparity)) + (1500LL * 1000LL * 1000LL)) / ((u64)(m_ulBaudrate)));
+               m_uiByteTimeNs = (unsigned int)(((((huge_natural)1000LL * 1000LL * 1000LL) * (1 + m_ebytesize + m_eparity)) + (1500LL * 1000LL * 1000LL)) / ((huge_natural)(m_ulBaudrate)));
 
             }
             else
             {
 
-               m_uiByteTimeNs = (unsigned int)((((u64)1000LL * 1000LL * 1000LL) * (1 + m_ebytesize + m_eparity + m_estopbit)) / ((u64)(m_ulBaudrate)));
+               m_uiByteTimeNs = (unsigned int)((((huge_natural)1000LL * 1000LL * 1000LL) * (1 + m_ebytesize + m_eparity + m_estopbit)) / ((huge_natural)(m_ulBaudrate)));
 
             }
 
@@ -515,7 +515,7 @@ namespace acme_windows
    }
 
 
-   size_t serial::_read(u8* buf, size_t size)
+   size_t serial::_read(unsigned char* buf, size_t size)
    {
 
       if (!m_bOpened)
@@ -545,7 +545,7 @@ namespace acme_windows
    }
 
 
-   size_t serial::_write(const u8* data, size_t length)
+   size_t serial::_write(const unsigned char* data, size_t length)
    {
 
       if (m_bOpened == false)
@@ -582,7 +582,7 @@ namespace acme_windows
 
       size_t eol_len = (size_t)eol.length();
 
-      u8* buffer_ = static_cast <u8*> (alloca(size * sizeof(u8)));
+      unsigned char* buffer_ = static_cast <unsigned char*> (alloca(size * sizeof(unsigned char)));
 
       auto timeStart = ::time::now();
 

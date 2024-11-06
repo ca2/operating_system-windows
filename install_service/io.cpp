@@ -423,7 +423,7 @@ static int try_write(logger_t *logger, void *address, unsigned long bufsize, uns
         continue;
 
       default:
-        /* We'll lose this line but try to read and write subsequent ones. */
+        /* We'hi lose this line but try to read and write subsequent ones. */
         ret = 1;
     }
   }
@@ -471,7 +471,7 @@ unsigned long WINAPI log_and_rotate(void *arg) {
     }
     else if (ret) continue;
 
-    if (*logger->rotate_online == NSSM_ROTATE_ONLINE_ASAP || (logger->size_i32 && size + (__int64) in >= logger->size_i32)) {
+    if (*logger->rotate_online == NSSM_ROTATE_ONLINE_ASAP || (logger->int_size && size + (__int64) in >= logger->int_size)) {
       /* Look for newline. */
       unsigned long i;
       for (i = 0; i < in; i++) {
@@ -533,7 +533,7 @@ unsigned long WINAPI log_and_rotate(void *arg) {
       }
     }
 
-    if (! size_i32) {
+    if (! int_size) {
       /* Write a BOM to the ___new file. */
       if (! charsize) charsize = guess_charsize(address, in);
       if (charsize == sizeof(wchar_t)) write_bom(logger, &out);

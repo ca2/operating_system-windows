@@ -57,7 +57,7 @@ namespace user_service
 
       }
 
-      if (strPrefix.has_char())
+      if (strPrefix.has_character())
       {
 
          strPrefix.ends_eat_ci("/");
@@ -80,7 +80,7 @@ namespace user_service
 
             strRequest.case_insensitive_begins_eat(strStart);
 
-            strsize iFind = strRequest.case_insensitive_find('?');
+            character_count iFind = strRequest.case_insensitive_find('?');
 
             string strApp = strRequest;
 

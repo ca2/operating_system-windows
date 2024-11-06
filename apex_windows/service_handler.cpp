@@ -180,7 +180,7 @@ namespace apex_windows
 
       }
 
-      return (DWORD) estatus.as_i64();
+      return (DWORD) estatus.as_huge_integer();
 
    }
 

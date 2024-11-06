@@ -5,7 +5,7 @@
 #include "buffer.h"
 
 
-extern point_i32 g_pointLastBottomRight;
+extern int_point g_pointLastBottomRight;
 
 
 #include "__debug_power.h"

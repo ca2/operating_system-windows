@@ -21,7 +21,7 @@
 
 
 CLASS_DECL_ACME_WINDOWS const void * get_resource_pointer(HINSTANCE hinst, DWORD nID, const char * pcszType, memsize & memsize);
-CLASS_DECL_ACME_WINDOWS bool read_resource_as_memory(memory & m, HINSTANCE hinst, DWORD nID, const char * pcszType, strsize iReadAtMostByteCount = -1);
+CLASS_DECL_ACME_WINDOWS bool read_resource_as_memory(memory & m, HINSTANCE hinst, DWORD nID, const char * pcszType, character_count iReadAtMostByteCount = -1);
 CLASS_DECL_ACME::file::path get_module_path(HMODULE hmodule);
 CLASS_DECL_ACME FILETIME & copy(FILETIME & filetime, const ::earth::time & time);
 

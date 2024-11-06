@@ -31,9 +31,9 @@
 //CLASS_DECL_ACME_WINDOWS void windows_registry_initialize();
 //
 //
-//CLASS_DECL_ACME_WINDOWS string read_resource_as_string(hinstance hinst, unsigned int nID, const char * pcszType, strsize iReadAtMostByteCount = -1);
+//CLASS_DECL_ACME_WINDOWS string read_resource_as_string(hinstance hinst, unsigned int nID, const char * pcszType, character_count iReadAtMostByteCount = -1);
 //CLASS_DECL_ACME_WINDOWS const void * get_resource_pointer(HINSTANCE hinst, DWORD nID, const char * pcszType, memsize & memsize);
-//CLASS_DECL_ACME_WINDOWS bool read_resource_as_memory(memory & m, HINSTANCE hinst, DWORD nID, const char * pcszType, strsize iReadAtMostByteCount = -1);
+//CLASS_DECL_ACME_WINDOWS bool read_resource_as_memory(memory & m, HINSTANCE hinst, DWORD nID, const char * pcszType, character_count iReadAtMostByteCount = -1);
 
 //
 //
@@ -85,7 +85,7 @@
 //
 //}
 //
-//CLASS_DECL_ACME int_bool HFILE_set_size(HANDLE h, u64 iSize);
+//CLASS_DECL_ACME int_bool HFILE_set_size(HANDLE h, huge_natural iSize);
 //
 //#ifdef WINDOWS
 //CLASS_DECL_ACME int_bool read_resource_as_file(const scoped_string & strFile, HINSTANCE hinst, unsigned int nID, LPCTSTR pcszType);

@@ -203,7 +203,7 @@ namespace windows
    }
 
 
-   CLASS_DECL_WINDOWING_WIN32 HBITMAP create_windows_dib(const ::size_i32 & size, int * piScan, ::image32_t ** ppdata)
+   CLASS_DECL_WINDOWING_WIN32 HBITMAP create_windows_dib(const ::int_size & size, int * piScan, ::image32_t ** ppdata)
    {
 
       BITMAPINFO bitmapinfo{};

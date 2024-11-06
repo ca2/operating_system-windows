@@ -14,7 +14,7 @@
 #include "aura/platform/node.h"
 
 
-// http ://stackoverflow.com/questions/1913468/how-to-determine-the-size_i32-of-an-icon-from-a-hicon
+// http ://stackoverflow.com/questions/1913468/how-to-determine-the-int_size-of-an-icon-from-a-hicon
 // http://stackoverflow.com/users/739731/sergey
 
 
@@ -368,9 +368,9 @@ uint32_t GetColorMonochrome(uint8_t * xordata, uint8_t * anddata, int x, int y, 
 //   return results;
 //}
 
-array< ::size_i32 > ico_file_sizes(const ::block & block)
+array< ::int_size > ico_file_sizes(const ::block & block)
 {
-   array< ::size_i32 > sizea;
+   array< ::int_size > sizea;
    ICONDIR * gd = (ICONDIR *)block.data();
    if (gd->idType == 1)
    {
@@ -550,7 +550,7 @@ namespace windowing_win32
    }
 
 
-   void * icon::get_os_data(const ::size_i32 & size) const
+   void * icon::get_os_data(const ::int_size & size) const
    {
 
       auto & iconitem = ((icon *)this)->m_iconmap[size];
@@ -560,7 +560,7 @@ namespace windowing_win32
 
          iconitem.m_bCalculated = true;
 
-         if (m_pathProcessed.has_char())
+         if (m_pathProcessed.has_character())
          {
 
             string strPath = m_pathProcessed;
@@ -630,7 +630,7 @@ namespace windowing_win32
          if (!m_iconmap.is_empty())
          {
 
-            ::size_i32 size1 = size;
+            ::int_size size1 = size;
 
             for (auto& pair : m_iconmap)
             {
@@ -769,13 +769,13 @@ namespace windowing_win32
       //   if (hicon != nullptr)
       //   {
 
-      //      m_iconmap[::size_i32(i, i)] = hicon;
+      //      m_iconmap[::int_size(i, i)] = hicon;
 
       //   }
 
       //}
 
-      //return m_pathProcessed.has_char();
+      //return m_pathProcessed.has_character();
 
 //      return !m_iconmap.is_empty();
 
@@ -809,7 +809,7 @@ namespace windowing_win32
    }
 
 
-   ::pointer < ::innate_ui::icon > icon::innate_ui_icon(const ::size_i32 & size)
+   ::pointer < ::innate_ui::icon > icon::innate_ui_icon(const ::int_size & size)
    {
 
       auto hicon = (HICON) get_os_data(size);
@@ -837,7 +837,7 @@ namespace windowing_win32
 
    }
 
-   ::image::image_pointer icon::get_image(const ::size_i32 & size)
+   ::image::image_pointer icon::get_image(const ::int_size & size)
    {
 
       auto& pimage  = m_imagemap[size];
@@ -856,7 +856,7 @@ namespace windowing_win32
    }
 
 
-   ::image::image_pointer icon::_create_image(const ::size_i32 & size)
+   ::image::image_pointer icon::_create_image(const ::int_size & size)
    {
 
       HICON hicon = (HICON) get_os_data(size);
@@ -1032,7 +1032,7 @@ namespace windowing_win32
 
 #ifdef WINDOWS_DESKTOP
 
-// http ://stackoverflow.com/questions/1913468/how-to-determine-the-size_i32-of-an-icon-from-a-hicon
+// http ://stackoverflow.com/questions/1913468/how-to-determine-the-int_size-of-an-icon-from-a-hicon
 // http://stackoverflow.com/users/739731/sergey
 
 MYICON_INFO MyGetIconInfo(HICON hIcon)

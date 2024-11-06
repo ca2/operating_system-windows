@@ -65,7 +65,7 @@ int APIENTRY ca2_cube_install(const ::string & pszId)
                                             false );
       if ( bSetOk )
       {
-         // Make the security attributes point_i32
+         // Make the security attributes int_point
          // to the security descriptor
          MutexAttributes.lpSecurityDescriptor = &SD;
          g_hmutexBoot = ::CreateMutex(&MutexAttributes, false, "Global\\ca2::fontopus::ca2_spa::7807e510-5579-11dd-ae16-0800200c7784");

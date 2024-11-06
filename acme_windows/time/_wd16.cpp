@@ -9,12 +9,12 @@ namespace str
 #ifdef WINDOWS
 
 
-   BSTR AllocSysString(const ::wd16_character * pchData, strsize nDataLength) noexcept
+   BSTR AllocSysString(const ::wd16_character * pchData, character_count nDataLength) noexcept
    {
 
       BSTR bstr = nullptr;
 
-      strsize nLen = utf_to_utf_length(bstr, pchData, nDataLength);
+      character_count nLen = utf_to_utf_length(bstr, pchData, nDataLength);
 
       bstr = ::SysAllocStringLen(nullptr, (unsigned int)nLen);
 
@@ -31,10 +31,10 @@ namespace str
 
 
    // pbstr is [in,out] BSTR string
-   bool ReAllocSysString(BSTR * pbstr, const ::wd16_character * pchData, strsize nDataLength) noexcept
+   bool ReAllocSysString(BSTR * pbstr, const ::wd16_character * pchData, character_count nDataLength) noexcept
    {
 
-      strsize nLen = utf_to_utf_length(pbstr, pchData, nDataLength);
+      character_count nLen = utf_to_utf_length(pbstr, pchData, nDataLength);
 
       bool bSuccess = ::SysReAllocStringLen(pbstr, nullptr, (unsigned int)nLen) != 0;
 
@@ -69,30 +69,30 @@ namespace str
    }
 
 
-   //strsize  char_traits::SafeStringLen(const ::wd16_character * psz) noexcept
+   //character_count  char_traits::SafeStringLen(const ::wd16_character * psz) noexcept
    //{
    //   // returns length in bytes
-   //   return (psz != nullptr) ? strsize(strlen(psz)) : 0;
+   //   return (psz != nullptr) ? character_count(strlen(psz)) : 0;
    //}
    //
-   //strsize  char_traits::SafeStringLen(const ::wd16_character * psz) noexcept
+   //character_count  char_traits::SafeStringLen(const ::wd16_character * psz) noexcept
    //{
    //   // returns length in wchar_ts
    //#ifdef WINDOWS
-   //   return (psz != nullptr) ? strsize(wd16_len(psz)) : 0;
+   //   return (psz != nullptr) ? character_count(wd16_len(psz)) : 0;
    //#else
-   //   return (psz != nullptr) ? strsize(wd16__length(psz)) : 0;
+   //   return (psz != nullptr) ? character_count(wd16__length(psz)) : 0;
    //#endif
    //}
    //
-   //strsize  char_traits::GetCharLen(const ::wd16_character* pch) noexcept
+   //character_count  char_traits::GetCharLen(const ::wd16_character* pch) noexcept
    //{
    //   (void)pch;
    //   // returns ::wd16_character length
    //   return 1;
    //}
    //
-   //strsize  char_traits::GetCharLen(const ::wd16_character* pch) noexcept
+   //character_count  char_traits::GetCharLen(const ::wd16_character* pch) noexcept
    //{
    //   // returns ::wd16_character length
    //   return  ::str().get_utf8_char(pch).get_length();

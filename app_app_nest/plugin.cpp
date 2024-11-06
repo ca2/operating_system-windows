@@ -121,7 +121,7 @@ install:
       int cx = rectangleWindow.right() - rectangleWindow.left();
       int cy = rectangleWindow.bottom() - rectangleWindow.top();
 
-      RECT rectangle_i32;
+      RECT int_rectangle;
       rectangle.left()         = 0;
       rectangle.top()          = 0;
       rectangle.right()        = cx;
@@ -141,7 +141,7 @@ install:
       }
       else if(!is_ca2_installed())
       {
-         RECT rectangle_i32;
+         RECT int_rectangle;
          rectangle.left()      = 0;
          rectangle.top()       = 0;
          rectangle.bottom()    = cx;

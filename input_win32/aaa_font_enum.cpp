@@ -92,10 +92,10 @@ namespace windowing_win32
       }
 
 
-      static BOOL CALLBACK callback(LPLOGFONTW plf, LPNEWTEXTMETRICW lpntm, unsigned int FontType, LPVOID point_i32);
+      static BOOL CALLBACK callback(LPLOGFONTW plf, LPNEWTEXTMETRICW lpntm, unsigned int FontType, LPVOID int_point);
 
 
-      static BOOL CALLBACK callback_cs(LPLOGFONTW plf, LPNEWTEXTMETRICW lpntm, unsigned int FontType, LPVOID point_i32);
+      static BOOL CALLBACK callback_cs(LPLOGFONTW plf, LPNEWTEXTMETRICW lpntm, unsigned int FontType, LPVOID int_point);
 
 
    };
