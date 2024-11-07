@@ -35,7 +35,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{9273D94E-BF81-41ED-9CB2-83D981450C9B}</ProjectGuid>
+    <ProjectGuid>{6F9D65BF-6754-47F4-869D-EDFB705F4BAF}</ProjectGuid>
     <RootNamespace>platform</RootNamespace>
     <Keyword>Win32Proj</Keyword>
     <ProjectName>acme_windowing_win32</ProjectName>

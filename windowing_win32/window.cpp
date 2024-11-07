@@ -4616,6 +4616,13 @@ namespace windowing_win32
 
       ::pointer < buffer > pbuffer = m_pgraphicsgraphics;
 
+      if (!pbuffer)
+      {
+
+         return;
+
+      }
+
       {
 
          auto pitem = pbuffer->get_buffer_item();
