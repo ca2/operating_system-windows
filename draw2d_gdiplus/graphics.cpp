@@ -107,44 +107,44 @@ void trilinearImageScaling(
 
 
          // trilinear interpolate blue matter
-         blue = (A.u8_blue()) * (1 - w_diff) * (1 - h_diff) * (1 - h3_diff) +
-            (B.u8_blue()) * (w_diff) * (1 - h_diff) * (1 - h3_diff) +
-            (C.u8_blue()) * (h_diff) * (1 - w_diff) * (1 - h3_diff) +
-            (D.u8_blue()) * (w_diff) * (h_diff) * (1 - h3_diff) +
-            (E.u8_blue()) * (1 - w2_diff) * (1 - h2_diff) * (h3_diff)+
-            (F.u8_blue()) * (w2_diff) * (1 - h2_diff) * (h3_diff)+
-            (G.u8_blue()) * (h2_diff) * (1 - w2_diff) * (h3_diff)+
-            (H.u8_blue()) * (w2_diff) * (h2_diff) * (h3_diff);
+         blue = (A.byte_blue()) * (1 - w_diff) * (1 - h_diff) * (1 - h3_diff) +
+            (B.byte_blue()) * (w_diff) * (1 - h_diff) * (1 - h3_diff) +
+            (C.byte_blue()) * (h_diff) * (1 - w_diff) * (1 - h3_diff) +
+            (D.byte_blue()) * (w_diff) * (h_diff) * (1 - h3_diff) +
+            (E.byte_blue()) * (1 - w2_diff) * (1 - h2_diff) * (h3_diff)+
+            (F.byte_blue()) * (w2_diff) * (1 - h2_diff) * (h3_diff)+
+            (G.byte_blue()) * (h2_diff) * (1 - w2_diff) * (h3_diff)+
+            (H.byte_blue()) * (w2_diff) * (h2_diff) * (h3_diff);
 
          // trilinear interpolate green matter
-         green = ((A.u8_green())) * (1 - w_diff) * (1 - h_diff) * (1 - h3_diff) +
-            ((B.u8_green())) * (w_diff) * (1 - h_diff) * (1 - h3_diff) +
-            ((C.u8_green())) * (h_diff) * (1 - w_diff) * (1 - h3_diff) +
-            ((D.u8_green())) * (w_diff) * (h_diff) * (1 - h3_diff) +
-            ((E.u8_green())) * (1 - w2_diff) * (1 - h2_diff) * (h3_diff)+
-            ((F.u8_green())) * (w2_diff) * (1 - h2_diff) * (h3_diff)+
-            ((G.u8_green())) * (h2_diff) * (1 - w2_diff) * (h3_diff)+
-            ((H.u8_green())) * (w2_diff) * (h2_diff) * (h3_diff);
+         green = ((A.byte_green())) * (1 - w_diff) * (1 - h_diff) * (1 - h3_diff) +
+            ((B.byte_green())) * (w_diff) * (1 - h_diff) * (1 - h3_diff) +
+            ((C.byte_green())) * (h_diff) * (1 - w_diff) * (1 - h3_diff) +
+            ((D.byte_green())) * (w_diff) * (h_diff) * (1 - h3_diff) +
+            ((E.byte_green())) * (1 - w2_diff) * (1 - h2_diff) * (h3_diff)+
+            ((F.byte_green())) * (w2_diff) * (1 - h2_diff) * (h3_diff)+
+            ((G.byte_green())) * (h2_diff) * (1 - w2_diff) * (h3_diff)+
+            ((H.byte_green())) * (w2_diff) * (h2_diff) * (h3_diff);
 
          // trilinear interpolate red matter
-         red = ((A.u8_red())) * (1 - w_diff) * (1 - h_diff) * (1 - h3_diff) +
-            ((B.u8_red())) * (w_diff) * (1 - h_diff) * (1 - h3_diff) +
-            ((C.u8_red())) * (h_diff) * (1 - w_diff) * (1 - h3_diff) +
-            ((D.u8_red())) * (w_diff) * (h_diff) * (1 - h3_diff) +
-            ((E.u8_red())) * (1 - w2_diff) * (1 - h2_diff) * (h3_diff)+
-            ((F.u8_red())) * (w2_diff) * (1 - h2_diff) * (h3_diff)+
-            ((G.u8_red())) * (h2_diff) * (1 - w2_diff) * (h3_diff)+
-            ((H.u8_red())) * (w2_diff) * (h2_diff) * (h3_diff);
+         red = ((A.byte_red())) * (1 - w_diff) * (1 - h_diff) * (1 - h3_diff) +
+            ((B.byte_red())) * (w_diff) * (1 - h_diff) * (1 - h3_diff) +
+            ((C.byte_red())) * (h_diff) * (1 - w_diff) * (1 - h3_diff) +
+            ((D.byte_red())) * (w_diff) * (h_diff) * (1 - h3_diff) +
+            ((E.byte_red())) * (1 - w2_diff) * (1 - h2_diff) * (h3_diff)+
+            ((F.byte_red())) * (w2_diff) * (1 - h2_diff) * (h3_diff)+
+            ((G.byte_red())) * (h2_diff) * (1 - w2_diff) * (h3_diff)+
+            ((H.byte_red())) * (w2_diff) * (h2_diff) * (h3_diff);
 
          // trilinear interpolate alpha matter
-         alpha = ((A.u8_opacity())) * (1 - w_diff) * (1 - h_diff) * (1 - h3_diff) +
-            ((B.u8_opacity())) * (w_diff) * (1 - h_diff) * (1 - h3_diff) +
-            ((C.u8_opacity())) * (h_diff) * (1 - w_diff) * (1 - h3_diff) +
-            ((D.u8_opacity())) * (w_diff) * (h_diff) * (1 - h3_diff) +
-            ((E.u8_opacity())) * (1 - w2_diff) * (1 - h2_diff) * (h3_diff)+
-            ((F.u8_opacity())) * (w2_diff) * (1 - h2_diff) * (h3_diff)+
-            ((G.u8_opacity())) * (h2_diff) * (1 - w2_diff) * (h3_diff)+
-            ((H.u8_opacity())) * (w2_diff) * (h2_diff) * (h3_diff);
+         alpha = ((A.byte_opacity())) * (1 - w_diff) * (1 - h_diff) * (1 - h3_diff) +
+            ((B.byte_opacity())) * (w_diff) * (1 - h_diff) * (1 - h3_diff) +
+            ((C.byte_opacity())) * (h_diff) * (1 - w_diff) * (1 - h3_diff) +
+            ((D.byte_opacity())) * (w_diff) * (h_diff) * (1 - h3_diff) +
+            ((E.byte_opacity())) * (1 - w2_diff) * (1 - h2_diff) * (h3_diff)+
+            ((F.byte_opacity())) * (w2_diff) * (1 - h2_diff) * (h3_diff)+
+            ((G.byte_opacity())) * (h2_diff) * (1 - w2_diff) * (h3_diff)+
+            ((H.byte_opacity())) * (w2_diff) * (h2_diff) * (h3_diff);
 
 
          lineRet->m_ui =
@@ -849,7 +849,7 @@ namespace draw2d_gdiplus
       //if (rectangleParam.height() > 400)
       //{
 
-      //   if (ppen->m_color.u8_red() > 180)
+      //   if (ppen->m_color.byte_red() > 180)
       //   {
 
       //      information() << "draw_rectangle,400+,red180+ " << rectangleParam;
@@ -2334,7 +2334,7 @@ namespace draw2d_gdiplus
       else
       {
 
-         fill_rectangle(::rectangle_f64_dimension(point.x(), point.y(), 1, 1), color);
+         fill_rectangle(::double_rectangle_dimension(point.x(), point.y(), 1, 1), color);
 
       }
 
@@ -2364,7 +2364,7 @@ namespace draw2d_gdiplus
       else
       {
 
-         fill_rectangle(::rectangle_f64_dimension(point.x(), point.y(), 1, 1), colorChange);
+         fill_rectangle(::double_rectangle_dimension(point.x(), point.y(), 1, 1), colorChange);
 
       }
 

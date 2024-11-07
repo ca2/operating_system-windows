@@ -288,7 +288,7 @@ auto tickExecuteEnd = ::tick::now();
    void socket::simple_file_server(const ::string & pszPath)
    {
 
-      pointer_array < ::i32_array > rangea;
+      pointer_array < ::int_array > rangea;
 
       if (strlen(inheader("range")) > 0)
       {
@@ -305,7 +305,7 @@ auto tickExecuteEnd = ::tick::now();
                straRange.explode("-", stra[i]);
                if (straRange.get_count() == 2)
                {
-                  rangea.add(___new ::i32_array());
+                  rangea.add(___new ::int_array());
                   rangea.last_ptr()->add(atoi(straRange[0]));
                   straRange[1].trim();
                   if (strlen(straRange[1]) == 0)

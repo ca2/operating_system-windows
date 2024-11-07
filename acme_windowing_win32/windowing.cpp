@@ -390,12 +390,12 @@ namespace win32
          void windowing::set_finish()
          {
 
-            if (m_itask)
-            {
+            //if (m_itask)
+            //{
 
-               ::PostThreadMessage((DWORD)m_itask, e_message_quit, 0, 0);
+            //   ::PostThreadMessage((DWORD)m_itask, e_message_quit, 0, 0);
 
-            }
+            //}
 
             ::acme::windowing::windowing::set_finish();
 

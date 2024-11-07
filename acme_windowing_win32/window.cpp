@@ -4,14 +4,18 @@
 #include "window.h"
 //#include "user.h"
 #include "acme/parallelization/task.h"
+#include "acme/parallelization/task.h"
 //#include "acme/nano/nano.h"
 //#include "acme/nano/user/button.h"
 //#include "acme/nano/user/message_box.h"
 #include "acme/platform/system.h"
 #include "acme/user/micro/elemental.h"
+#include "acme/user/user/frame_interaction.h"
 #include "acme/user/user/interaction.h"
 #include "acme/user/user/mouse.h"
 #include "acme/windowing/windowing.h"
+
+
 
 
 CLASS_DECL_ACME bool _c_simple_message_loop_step();
@@ -211,8 +215,19 @@ namespace win32
 
             auto r = m_pacmeuserinteraction->get_rectangle();
 
+            ::cast < ::acme::user::frame_interaction > pframeinteraction = m_pacmeuserinteraction;
+
+            DWORD dwExStyle = 0;
+
+            if (pframeinteraction && pframeinteraction->m_bTopMost)
+            {
+
+               dwExStyle |= WS_EX_TOPMOST;
+
+            }
+
             HWND hwnd = CreateWindowEx(
-               m_bTopMost ? WS_EX_TOPMOST : 0,
+               dwExStyle,
                _T(ACME_WINDOW_CLASS),
                wstrTitle,
                WS_POPUP | WS_SYSMENU,
@@ -716,9 +731,8 @@ namespace win32
             case WM_CLOSE:
             {
                //DestroyWindow(m_hwnd);
-               ::pointer < ::micro::elemental > pelemental;
 
-               pelemental = m_pacmeuserinteraction;
+               ::cast < ::micro::elemental > pelemental = m_pacmeuserinteraction;
 
                if (pelemental)
                {
@@ -761,9 +775,8 @@ namespace win32
             break;
             case WM_CHAR:
             {
-               ::pointer < ::micro::elemental > pelemental;
 
-               pelemental = m_pacmeuserinteraction;
+               ::cast < ::micro::elemental > pelemental = m_pacmeuserinteraction;
 
                if (pelemental)
                {
@@ -777,19 +790,13 @@ namespace win32
             case WM_LBUTTONDOWN:
             {
 
-               ::int_point point(lparam);
-
                auto pmouse = __create_new < ::user::mouse >();
 
-               pmouse->m_pointHost = point;
+               pmouse->m_pointHost = lparam;
 
-               ::ClientToScreen(m_hwnd, (POINT *) & point);
+               pmouse->m_pointAbsolute = client_to_screen(lparam);
 
-               pmouse->m_pointAbsolute = point;
-
-               ::pointer < ::micro::elemental > pelemental;
-
-               pelemental = m_pacmeuserinteraction;
+               ::cast < ::micro::elemental > pelemental = m_pacmeuserinteraction;
 
                if (pelemental)
                {
@@ -803,19 +810,13 @@ namespace win32
             case WM_MOUSEMOVE:
             {
 
-               ::int_point point(lparam);
-
                auto pmouse = __create_new < ::user::mouse >();
 
-               pmouse->m_pointHost = point;
+               pmouse->m_pointHost = lparam;
 
-               ::ClientToScreen(m_hwnd, (POINT *) & point);
+               pmouse->m_pointAbsolute = client_to_screen(lparam);
 
-               pmouse->m_pointAbsolute = point;
-
-               ::pointer < ::micro::elemental > pelemental;
-
-               pelemental = m_pacmeuserinteraction;
+               ::cast < ::micro::elemental > pelemental = m_pacmeuserinteraction;
 
                if (pelemental)
                {
@@ -829,19 +830,13 @@ namespace win32
             case WM_LBUTTONUP:
             {
 
-               ::int_point point(lparam);
-
                auto pmouse = __create_new < ::user::mouse >();
 
-               pmouse->m_pointHost = point;
+               pmouse->m_pointHost = lparam;
 
-               ::ClientToScreen(m_hwnd, (POINT *) & point);
+               pmouse->m_pointAbsolute = client_to_screen(lparam);
 
-               pmouse->m_pointAbsolute = point;
-
-               ::pointer < ::micro::elemental > pelemental;
-
-               pelemental = m_pacmeuserinteraction;
+               ::cast < ::micro::elemental > pelemental = m_pacmeuserinteraction;
 
                if (pelemental)
                {
@@ -855,19 +850,13 @@ namespace win32
             case WM_RBUTTONDOWN:
             {
 
-               ::int_point point(lparam);
-
                auto pmouse = __create_new < ::user::mouse >();
 
-               pmouse->m_pointHost = point;
+               pmouse->m_pointHost = lparam;
 
-               ::ClientToScreen(m_hwnd, (POINT *) & point);
+               pmouse->m_pointAbsolute = client_to_screen(lparam);
 
-               pmouse->m_pointAbsolute = point;
-
-               ::pointer < ::micro::elemental > pelemental;
-
-               pelemental = m_pacmeuserinteraction;
+               ::cast < ::micro::elemental > pelemental = m_pacmeuserinteraction;
 
                if (pelemental)
                {
@@ -881,19 +870,13 @@ namespace win32
             case WM_RBUTTONUP:
             {
 
-               ::int_point point(lparam);
-
                auto pmouse = __create_new < ::user::mouse >();
 
-               pmouse->m_pointHost = { point.x, point.y };
+               pmouse->m_pointHost = lparam;
 
-               ::ClientToScreen(m_hwnd, &point);
+               pmouse->m_pointAbsolute = client_to_screen(lparam);
 
-               pmouse->m_pointAbsolute = { point.x, point.y };
-
-               ::pointer < ::micro::elemental > pelemental;
-
-               pelemental = m_pacmeuserinteraction;
+               ::cast < ::micro::elemental > pelemental = m_pacmeuserinteraction;
 
                if (pelemental)
                {
@@ -1133,6 +1116,18 @@ namespace win32
          }
 
 
+         ::int_point window::client_to_screen(const ::int_point & point)
+         {
+
+            POINT p{point.x(), point.y()};
+
+            ::ClientToScreen(m_hwnd, &p);
+
+            return { p.x, p.y };
+
+         }
+
+
          //void window::_destroy_window()
          //{
          //
@@ -1232,7 +1227,37 @@ namespace win32
          void window::set_position(const ::int_point& point)
          {
 
-            ::SetWindowPos(m_hwnd, nullptr, point.x(), point.y(), 0, 0, SWP_NOSIZE | SWP_NOZORDER);
+            auto pacmeuserinteractionOwner = m_pacmeuserinteractionOwner;
+
+            HWND hwndParent = nullptr;
+
+            if (pacmeuserinteractionOwner)
+            {
+
+               ::cast < ::win32::acme::windowing::window > pwindowOwner = pacmeuserinteractionOwner->m_pacmewindowingwindow;
+
+               hwndParent = pwindowOwner->m_hwnd;
+
+            }
+
+            ::cast < ::acme::user::frame_interaction > pframeinteraction = m_pacmeuserinteraction;
+
+            DWORD dwFlags = SWP_NOSIZE;
+
+            if(pframeinteraction && pframeinteraction->m_bTopMost)
+            { 
+            
+               hwndParent = HWND_TOPMOST;
+            
+            }
+            else if (!hwndParent)
+            {
+
+               dwFlags |= SWP_NOZORDER;
+
+            }
+
+            ::SetWindowPos(m_hwnd, hwndParent, point.x(), point.y(), 0, 0, dwFlags);
 
          }
 

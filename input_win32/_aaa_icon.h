@@ -48,7 +48,7 @@ namespace windowing_win32
 
       virtual bool add_icon(HICON hicon);
 
-      void get_sizes(::size_i32_array & a) override;
+      void get_sizes(::int_size_array & a) override;
 
       ::image::image_pointer get_image(const ::int_size & size) override;
 

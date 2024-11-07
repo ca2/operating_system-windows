@@ -1631,7 +1631,7 @@ namespace windowing_win32
       if (::is_set(pwindowParent))
       {
 
-         hwndParent = __hwnd(pwindowParent->oswindow());
+         hwndParent = as_hwnd(pwindowParent->oswindow());
 
       }
 
@@ -4072,7 +4072,7 @@ namespace windowing_win32
       if (::is_set(pWndNewOwner))
       {
 
-         hwndOwner = __hwnd(pWndNewOwner->oswindow());
+         hwndOwner = as_hwnd(pWndNewOwner->oswindow());
 
       }
 
@@ -4151,7 +4151,7 @@ namespace windowing_win32
    void window::default_message_handler(::message::message * pmessage)
    {
 
-      HWND hwnd = __hwnd(pmessage->m_oswindow);
+      HWND hwnd = as_hwnd(pmessage->m_oswindow);
 
       UINT message = pmessage->m_atom.as_emessage();
 

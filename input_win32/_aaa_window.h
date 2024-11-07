@@ -962,7 +962,7 @@ namespace windowing_win32
 //}
 
 
-//inline HWND __hwnd(::windowing::window * pwindow)
+//inline HWND as_hwnd(::windowing::window * pwindow)
 //{
 //
 //   auto pwindowWin32 = __window(pwindow);

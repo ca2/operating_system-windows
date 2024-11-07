@@ -302,7 +302,7 @@ namespace windowing_win32
    ::windowing::window* windowing::window(oswindow oswindow)
    {
 
-      HWND hwnd = __hwnd(oswindow);
+      HWND hwnd = as_hwnd(oswindow);
 
       auto pwindow = _window(hwnd);
 
@@ -679,7 +679,7 @@ namespace windowing_win32
    //void windowing::set_focus(::windowing::window * pwindow)
    //{
 
-   //   auto pwindowFocus = __hwnd(pwindow);
+   //   auto pwindowFocus = as_hwnd(pwindow);
 
    //   HWND hwnd  = pwindow->m_
    //   if (pinteraction == nullptr)
@@ -873,7 +873,7 @@ namespace windowing_win32
    void windowing::erase_window(::windowing::window* pwindow)
    {
 
-      if (!m_windowmap.erase_item(__hwnd(pwindow->oswindow())))
+      if (!m_windowmap.erase_item(as_hwnd(pwindow->oswindow())))
       {
 
          //return ::error_failed;
@@ -940,7 +940,7 @@ namespace windowing_win32
    int_bool windowing::point_is_window_origin(::int_point ptHitTest, oswindow oswindowExclude, int iMargin)
    {
 
-      HWND hwndExclude = __hwnd(oswindowExclude);
+      HWND hwndExclude = as_hwnd(oswindowExclude);
 
       auto phwnda = ::windows::get_top_level_windows();
 

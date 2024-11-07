@@ -363,7 +363,7 @@ namespace windowing_win32
 
             _synchronous_lock synchronouslock(synchronization());
 
-            if (!::OpenClipboard(__hwnd(oswindow())))
+            if (!::OpenClipboard(as_hwnd(oswindow())))
             //if(!OpenClipboard())
             {
 
@@ -413,7 +413,7 @@ namespace windowing_win32
 
       _synchronous_lock synchronouslock(synchronization());
 
-      if (!::OpenClipboard(__hwnd(oswindow())))
+      if (!::OpenClipboard(as_hwnd(oswindow())))
       {
 
          return false;
@@ -451,7 +451,7 @@ namespace windowing_win32
 
       _synchronous_lock synchronouslock(synchronization());
 
-      if (!::OpenClipboard(__hwnd(oswindow())))
+      if (!::OpenClipboard(as_hwnd(oswindow())))
       {
 
          return false;
@@ -497,7 +497,7 @@ namespace windowing_win32
 
       _synchronous_lock synchronouslock(synchronization());
 
-      if (!::OpenClipboard(__hwnd(oswindow())))
+      if (!::OpenClipboard(as_hwnd(oswindow())))
       {
 
          return false;
@@ -549,7 +549,7 @@ namespace windowing_win32
 
       _synchronous_lock synchronouslock(synchronization());
 
-      if (!::OpenClipboard(__hwnd(oswindow())))
+      if (!::OpenClipboard(as_hwnd(oswindow())))
       {
 
          return false;
@@ -615,7 +615,7 @@ namespace windowing_win32
 
       _synchronous_lock synchronouslock(synchronization());
 
-      if (!::OpenClipboard(__hwnd(oswindow())))
+      if (!::OpenClipboard(as_hwnd(oswindow())))
       {
 
          DWORD dwLastError = ::GetLastError();
@@ -715,7 +715,7 @@ namespace windowing_win32
 
       _synchronous_lock synchronouslock(synchronization());
 
-      if (!::OpenClipboard(__hwnd(oswindow())))
+      if (!::OpenClipboard(as_hwnd(oswindow())))
       {
 
          return false;

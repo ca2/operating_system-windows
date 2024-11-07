@@ -767,9 +767,9 @@ bool is_good_active_w(HWND w)
 ////
 ////
 ////   const SHORT Vk = VkKeyScanExW(ch, hkl);
-////   //const unsigned int VKey = ::MapVirtualKey(lower_unsigned_char(Vk), 0);
+////   //const unsigned int VKey = ::MapVirtualKey(lower_byte(Vk), 0);
 ////
-////   if (HIBYTE(Vk) == 1) // Check if shift key needs to be pressed for this key
+////   if (higher_byte(Vk) == 1) // Check if shift key needs to be pressed for this key
 ////   {
 ////      // Press shift key
 ////      ::ZeroMemory(&Event, sizeof(Event));
@@ -793,7 +793,7 @@ bool is_good_active_w(HWND w)
 ////   Event.ki.wVk = Vk;
 ////   ia.add(Event);
 ////
-////   if (HIBYTE(Vk) == 1)// Release if previouly pressed
+////   if (higher_byte(Vk) == 1)// Release if previouly pressed
 ////   {
 ////      // Release shift key
 ////      ::ZeroMemory(&Event, sizeof(Event));
@@ -828,9 +828,9 @@ bool is_good_active_w(HWND w)
 ////   sleep(iSleep);
 ////
 ////   //const SHORT Vk = VkKeyScanExW(ch, hkl);
-////   ////const unsigned int VKey = ::MapVirtualKey(lower_unsigned_char(Vk), 0);
+////   ////const unsigned int VKey = ::MapVirtualKey(lower_byte(Vk), 0);
 ////
-////   //if (HIBYTE(Vk) == 1) // Check if shift key needs to be pressed for this key
+////   //if (higher_byte(Vk) == 1) // Check if shift key needs to be pressed for this key
 ////   //{
 ////   //   // Press shift key
 ////   //   ::ZeroMemory(&Event, sizeof(Event));
@@ -854,7 +854,7 @@ bool is_good_active_w(HWND w)
 ////   //Event.ki.wScan = MapVirtualKeyEx(Vk, 0, hkl);
 ////   //ia.add(Event);
 ////
-////   //if (HIBYTE(Vk) == 1)// Release if previouly pressed
+////   //if (higher_byte(Vk) == 1)// Release if previouly pressed
 ////   //{
 ////   //   // Release shift key
 ////   //   ::ZeroMemory(&Event, sizeof(Event));

@@ -118,6 +118,10 @@ namespace win32
 
             bool _is_window() override;
 
+            
+            ::int_point client_to_screen(const ::int_point & point);
+
+
             //::int_point try_absolute_mouse_position(const ::int_point& point) override;
 
 

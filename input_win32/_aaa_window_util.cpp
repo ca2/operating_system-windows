@@ -695,8 +695,8 @@ namespace windows
       if (hwnda.get_size() <= 0)
          return;
 
-      ::i32_array ia1;
-      ::i32_array ia2;
+      ::int_array ia1;
+      ::int_array ia2;
       HWND hwndSwap;
 
       for (int i = 0; i < hwnda.get_size(); i++)
@@ -785,7 +785,7 @@ namespace windows
    }
 
 
-   void window_util::GetZOrder(HWND hwnd, ::i32_array & ia)
+   void window_util::GetZOrder(HWND hwnd, ::int_array & ia)
    {
 
       if (!IsWindow(hwnd))
@@ -989,7 +989,7 @@ namespace windows
       for (int i = 0; i < a.interaction_count(); i++)
       {
 
-         hwnda.add(__hwnd(((::user::interaction *)a.interaction_at(i))->oswindow()));
+         hwnda.add(as_hwnd(((::user::interaction *)a.interaction_at(i))->oswindow()));
 
       }
 
@@ -1008,7 +1008,7 @@ namespace windows
       for (int i = 0; i < ptra.get_size(); i++)
       {
 
-         hwnda.add(__hwnd(ptra.element_at(i)->oswindow()));
+         hwnda.add(as_hwnd(ptra.element_at(i)->oswindow()));
 
       }
 

@@ -589,7 +589,7 @@ namespace windowing_win32
 
       ::pointer < windowing > pwindowing = system()->windowing();
 
-      HWND hwnd = __hwnd(pwindowing->system_interaction()->oswindow());
+      HWND hwnd = as_hwnd(pwindowing->system_interaction()->oswindow());
 
       comptr < IExtractIconW > piextracticon;
 

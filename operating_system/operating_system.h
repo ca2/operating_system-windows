@@ -69,7 +69,7 @@
 #undef MAKEWORD
 #undef LOWORD
 #undef HIWORD
-#undef HIBYTE
+#undef higher_byte
 
 
 #ifndef WIN32

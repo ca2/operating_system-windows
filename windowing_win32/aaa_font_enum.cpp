@@ -17,7 +17,7 @@ namespace windowing_win32
       bool                                m_bTrueType;
       bool                                m_bOther;
       wstring                             m_wstrTopicFaceName;
-      ::i32_array                           m_iaCharSet;
+      ::int_array                           m_iaCharSet;
 
 
       wingdi_font_enum(::write_text::font_enumeration_item_array & itema, bool bRaster, bool bTrueType, bool bOther) :

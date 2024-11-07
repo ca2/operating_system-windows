@@ -254,7 +254,7 @@ namespace draw2d_gdiplus
          if (strFamilyName.case_insensitive_equals("Segoe UI"))
          {
 
-            auto efontweight = m_fontweight.sink(m_fontweight.int());
+            auto efontweight = m_fontweight.sink(m_fontweight.as_int());
 
             if (efontweight == e_font_weight_thin)
             {

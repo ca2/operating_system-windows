@@ -591,7 +591,7 @@ namespace windowing_win32
 
       auto psysteminteraction = pwindowing->system_interaction();
 
-      HWND hwnd = __hwnd(psysteminteraction->oswindow());
+      HWND hwnd = as_hwnd(psysteminteraction->oswindow());
 
       comptr < IExtractIconW > piextracticon;
 
