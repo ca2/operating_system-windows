@@ -10,10 +10,13 @@
 #include "config_memdleak.h"
 
 
-#define NTDDI_VERSION   0x0A000000 // NTDDI_WIN10
-#define _WIN32_WINNT    0x0A00 // _WIN32_WINNT_WIN10
-#define WINVER          0x0A00 // _WIN32_WINNT_WIN10
-#define _WIN32_IE       0x0A00 // _WIN32_IE_IE110
+#include <sdkddkver.h>
+
+
+//#define NTDDI_VERSION   NTDDI_WIN10_CO // NTDDI_WIN10
+//#define _WIN32_WINNT    _WIN32_WINNT_WIN10 // _WIN32_WINNT_WIN10
+//#define WINVER          _WIN32_WINNT_WIN10 // _WIN32_WINNT_WIN10
+//#define _WIN32_IE       _WIN32_IE_IE110 // _WIN32_IE_IE110
 
 
 #define WCHAR_T_SIZE 16

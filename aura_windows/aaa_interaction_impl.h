@@ -242,10 +242,10 @@ namespace aura_windows
       //virtual void BringToTop(::e_display edisplay);
       //virtual bool BringWindowToTop();
       //using ::windowing::window::window_rectangle;
-      //virtual bool window_rectangle(::i64_rectangle * prectangle);
+      //virtual bool window_rectangle(::huge_integer_rectangle * prectangle);
 
       //using ::windowing::window::this->rectangle;
-      //virtual bool this->rectangle(::i64_rectangle * prectangle);
+      //virtual bool this->rectangle(::huge_integer_rectangle * prectangle);
 
 
       virtual void rects_from_os();

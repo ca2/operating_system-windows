@@ -60,6 +60,8 @@ namespace win32
             virtual void _set_system_dark_mode1(bool bSet = true);
             virtual void _set_app_dark_mode1(bool bSet = true);
 
+            ::color::color get_operating_system_background_color() override;
+
             void on_start_system() override;
 
             void set_finish() override;

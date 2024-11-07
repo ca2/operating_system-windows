@@ -512,6 +512,14 @@ namespace win32
 
          //}
 
+         ::color::color windowing::get_operating_system_background_color()
+         {
+
+            auto colorWindowBackground = reinterpreted_background_color();
+
+            return colorWindowBackground;
+
+         }
 
       } // namespace windowing
 
