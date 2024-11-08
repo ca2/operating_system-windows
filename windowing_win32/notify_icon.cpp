@@ -183,18 +183,23 @@ namespace windowing_win32
 
       }
 
-      m_bCreated = false;
+      main_send([this]()
+         {
 
-      m_nid.uFlags = 0;
+            m_bCreated = false;
 
-      if (!Shell_NotifyIcon(NIM_DELETE, &m_nid))
-      {
+            m_nid.uFlags = 0;
 
-         //return false;
+            if (!Shell_NotifyIcon(NIM_DELETE, &m_nid))
+            {
 
-      }
+               //return false;
 
-      ::user::interaction::destroy_window();
+            }
+
+            ::user::interaction::destroy_window();
+
+         });
 
    }
 
