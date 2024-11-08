@@ -32,7 +32,7 @@ namespace acme_windows
       void term_system() override;
 
 
-      void finalize() override;
+      void destroy() override;
 
 
 

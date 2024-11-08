@@ -107,14 +107,14 @@ namespace acme_windows
    }
 
 
-   void file_context::finalize()
+   void file_context::destroy()
    {
 
       m_pfilesystem.release();
 
       m_pdirectorysystem.release();
 
-      ::acme_windows_common::file_context::finalize();
+      ::acme_windows_common::file_context::destroy();
 
    }
 
