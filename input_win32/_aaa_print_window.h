@@ -50,7 +50,7 @@ namespace windowing_win32
 
          }
 
-         m_happening.set_event();
+         m_happening.set_happening();
 
          return ::success;
 

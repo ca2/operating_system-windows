@@ -498,7 +498,7 @@ namespace win32
             if (::system()->m_pmanualresethappeningMainLoopEnd)
             {
 
-               ::system()->m_pmanualresethappeningMainLoopEnd->set_event();
+               ::system()->m_pmanualresethappeningMainLoopEnd->set_happening();
 
             }
 

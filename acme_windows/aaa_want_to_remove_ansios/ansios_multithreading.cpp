@@ -391,7 +391,7 @@ CLASS_DECL_ACME int_bool WINAPI PostThreadMessage(itask_t iThreadId,unsigned int
 
    pmq->ma.add(msg);
 
-   pmq->m_happeningNewMessage.set_event();
+   pmq->m_happeningNewMessage.set_happening();
 
    return true;
 
