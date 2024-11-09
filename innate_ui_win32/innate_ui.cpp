@@ -97,7 +97,7 @@ namespace innate_ui_win32
       }
       manual_reset_happening event;
 
-      event.ResetEvent();
+      event.reset_happening();
 
       system()->application()->fork([this, &event]()
          {
@@ -121,7 +121,7 @@ namespace innate_ui_win32
 
                   __check_refdbg
 
-                  event.SetEvent();
+                  event.set_happening();
 
                   __check_refdbg
 

@@ -1373,7 +1373,7 @@ pacmedir->create(pathTarget.folder()))
 
          Sleep(5000);
 
-         m_evFinish.SetEvent();
+         m_evFinish.set_happening();
 
       }
 
@@ -1568,7 +1568,7 @@ pacmedir->create(pathTarget.folder()))
       m_pevFinished(peventFinished)
    {
 
-      m_pevFinished->ResetEvent();
+      m_pevFinished->reset_happening();
 
       m_pproduction = pproduction;
 
@@ -1586,7 +1586,7 @@ pacmedir->create(pathTarget.folder()))
       {
       }
 
-      m_pevFinished->SetEvent();
+      m_pevFinished->set_happening();
 
       return ::success;
 
@@ -3012,7 +3012,7 @@ pacmedir->create(pathTarget.folder()))
       {
          m_bEndStatus = true;
          m_evFinish.wait();
-         m_evFinish.ResetEvent();
+         m_evFinish.reset_happening();
          add_status("All releases have been commanded and production has deemed ended!!.!.!!.");
 
 

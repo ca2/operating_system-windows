@@ -120,7 +120,7 @@ namespace win32
 
                          procedure();
 
-                         pevent->SetEvent();
+                         pevent->set_happening();
 
                       });
 

@@ -30,7 +30,7 @@
 //   ::thread_impl(pobject)
 //{
 
-//      m_evFinish.SetEvent();
+//      m_evFinish.set_happening();
 //      m_pThreadParams = nullptr;
 //      m_pfnThreadProc = nullptr;
 
@@ -40,7 +40,7 @@
 
 //void thread::construct(__THREADPROC pfnThreadProc,LPVOID pParam)
 //{
-//   m_evFinish.SetEvent();
+//   m_evFinish.set_happening();
 //   m_pfnThreadProc = pfnThreadProc;
 //   m_pThreadParams = pParam;
 

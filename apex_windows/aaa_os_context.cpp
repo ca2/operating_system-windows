@@ -2200,7 +2200,7 @@ namespace apex_windows
          at_end_of_scope
          {
 
-            manualresetevent.SetEvent();
+            manualresetevent.set_happening();
 
             ::CoUninitialize();
 
@@ -2545,7 +2545,7 @@ namespace apex_windows
 
             }
 
-            pevent->SetEvent();
+            pevent->set_happening();
 
             ::CloseHandle(si.hProcess);
 

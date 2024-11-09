@@ -1451,7 +1451,7 @@ namespace music
 
             UINT uDeviceID = (UINT)m_iDevice;
 
-            m_happeningLongMessage.ResetEvent();
+            m_happeningLongMessage.reset_happening();
 
             MMRESULT mmresult = midiOutOpen(&m_hmidiout, uDeviceID, (DWORD_PTR)m_happeningLongMessage.m_handle, 0, CALLBACK_EVENT);
 
@@ -1553,7 +1553,7 @@ namespace music
 
             m_estatusMidiOut = ::success;
 
-            m_happeningLongMessage.ResetEvent();
+            m_happeningLongMessage.reset_happening();
 
          }
 
@@ -1683,7 +1683,7 @@ namespace music
 
             manual_reset_happening event;
 
-            event.ResetEvent();
+            event.reset_happening();
 
             mmresult = midiOutOpen(&hmidiout, uDeviceID, (DWORD_PTR)event.m_handle, 0, CALLBACK_THREAD);
 

@@ -33,13 +33,13 @@ namespace multimedia
          //SetMainWnd(nullptr);
          //ASSERT(GetMainWnd() == nullptr);
          set_thread_priority(::e_priority_highest);
-         m_evInitialized.SetEvent();
+         m_evInitialized.set_happening();
          return true;
       }
 
       int in::exit_thread()
       {
-         m_happeningExitInstance.SetEvent();
+         m_happeningExitInstance.set_happening();
          return thread::exit_thread();
       }
 
@@ -314,7 +314,7 @@ namespace multimedia
 
          m_estate = state_stopped;
 
-         m_happeningStopped.SetEvent();
+         m_happeningStopped.set_happening();
 
          return ::success;
 
