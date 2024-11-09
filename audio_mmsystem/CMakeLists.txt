@@ -17,8 +17,8 @@ elseif (WIN32)
 endif ()
 
 
-set(LIBRARY_OUTPUT_PATH ${CMAKE_CURRENT_SOURCE_DIR}/../../../time-${OPERATING_SYSTEM_NAME}/cmake)
-set(EXECUTABLE_OUTPUT_PATH ${CMAKE_CURRENT_SOURCE_DIR}/../../../time-${OPERATING_SYSTEM_NAME}/cmake)
+#set(LIBRARY_OUTPUT_PATH ${CMAKE_CURRENT_SOURCE_DIR}/../../../time-${OPERATING_SYSTEM_NAME}/cmake)
+#set(EXECUTABLE_OUTPUT_PATH ${CMAKE_CURRENT_SOURCE_DIR}/../../../time-${OPERATING_SYSTEM_NAME}/cmake)
 
 
 list(APPEND audio_mmsystem_source
@@ -53,7 +53,7 @@ if (MSVC)
    target_link_options(audio_mmsystem PRIVATE "/DEFAULTLIB:msvcrt$<$<CONFIG:Debug>:d>")
    target_link_options(audio_mmsystem PRIVATE "/IMPLIB:${LIBRARY_OUTPUT_PATH}/audio_mmsystem.lib")
    target_link_options(audio_mmsystem PRIVATE "/DEF:${CMAKE_CURRENT_SOURCE_DIR}/audio_mmsystem.def")
-   target_link_libraries(audio_mmsystem PRIVATE acme apex aqua aura Gdiplus)
+   target_link_libraries(audio_mmsystem PRIVATE acme apex aqua audio acme_windows multimedia_mmsystem winmm)
 elseif (LINUX)
 
    if(NOT DONT_USE_PKG_CONFIG)
@@ -83,12 +83,9 @@ target_include_directories(audio_mmsystem PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/..
 target_include_directories(audio_mmsystem PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../../../source/include)
 target_include_directories(audio_mmsystem PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../../../operating_system/operating_system-${OPERATING_SYSTEM_NAME})
 target_include_directories(audio_mmsystem PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../../../operating_system/operating_system-${OPERATING_SYSTEM_NAME}/_include)
-target_include_directories(audio_mmsystem PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../../../operating_system/third-${OPERATING_SYSTEM_NAME}/include)
-target_include_directories(audio_mmsystem PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../../../operating_system/third-${OPERATING_SYSTEM_NAME}/third/include)
-target_include_directories(audio_mmsystem PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../../../operating_system/third-${OPERATING_SYSTEM_NAME}/third/include/include)
 target_include_directories(audio_mmsystem PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
 
 
 target_compile_definitions(${PROJECT_NAME} PRIVATE _${PROJECT_NAME}_project)
-target_compile_definitions(audio_mmsystem PRIVATE UNICODE)
-target_compile_definitions(audio_mmsystem PRIVATE _UNICODE)
+target_compile_definitions(${PROJECT_NAME} PRIVATE UNICODE)
+target_compile_definitions(${PROJECT_NAME} PRIVATE _UNICODE)
