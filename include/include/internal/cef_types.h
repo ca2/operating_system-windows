@@ -2216,7 +2216,7 @@ typedef enum {
   DOM_EVENT_CATEGORY_POPSTATE = 0x2000,
   DOM_EVENT_CATEGORY_PROGRESS = 0x4000,
   DOM_EVENT_CATEGORY_XMLHTTPREQUEST_PROGRESS = 0x8000,
-} cef_dom_event_category_t;
+} cef_dom_happening_category_t;
 
 ///
 /// DOM event processing phases.
@@ -2226,7 +2226,7 @@ typedef enum {
   DOM_EVENT_PHASE_CAPTURING,
   DOM_EVENT_PHASE_AT_TARGET,
   DOM_EVENT_PHASE_BUBBLING,
-} cef_dom_event_phase_t;
+} cef_dom_happening_phase_t;
 
 ///
 /// DOM node types.

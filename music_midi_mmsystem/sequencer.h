@@ -32,7 +32,7 @@ namespace music
             int                        m_iBufferSize;
             
             
-            manual_reset_happening         m_eventLongMessage;
+            manual_reset_happening         m_happeningLongMessage;
             HMIDIOUT                   m_hmidiout;
 
 

@@ -42,7 +42,7 @@ namespace multimedia
       void in::term_thread()
       {
 
-         m_eventExitInstance.SetEvent();
+         m_happeningExitInstance.SetEvent();
 
          thread::term_thread();
 
@@ -320,7 +320,7 @@ namespace multimedia
 
          m_estate = state_stopped;
 
-         m_eventStopped.SetEvent();
+         m_happeningStopped.SetEvent();
 
          return ::success;
 

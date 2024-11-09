@@ -424,7 +424,7 @@ Opened:
          if(m_estate != e_state_playing && m_estate != e_state_paused)
             return error_failed;
 
-         m_eventStopped.ResetEvent();
+         m_happeningStopped.ResetEvent();
 
          m_pprebuffer->Stop();
 
@@ -701,7 +701,7 @@ Opened:
          //   delete peffect;
          //}
 
-         m_eventStopped.SetEvent();
+         m_happeningStopped.SetEvent();
 
          m_pplayer->OnEvent(::wave::player::EventPlaybackEnd);
 

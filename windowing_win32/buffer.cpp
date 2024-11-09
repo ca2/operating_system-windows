@@ -484,7 +484,7 @@ namespace windowing_win32
 
             };
 
-         m_eventUpdateScreen.SetEvent();
+         m_happeningUpdateScreen.SetEvent();
 
          return true;
 
@@ -1309,9 +1309,9 @@ namespace windowing_win32
       while (::task_get_run())
       {
 
-         m_eventUpdateScreen.wait(1_s);
+         m_happeningUpdateScreen.wait(1_s);
 
-         m_eventUpdateScreen.ResetEvent();
+         m_happeningUpdateScreen.ResetEvent();
 
          m_ptaskUpdateScreen->task_iteration();
 

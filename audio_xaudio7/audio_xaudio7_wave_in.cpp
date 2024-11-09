@@ -39,7 +39,7 @@ namespace multimedia
 
       int in::exit_thread()
       {
-         m_eventExitInstance.SetEvent();
+         m_happeningExitInstance.SetEvent();
          return thread::exit_thread();
       }
 
@@ -314,7 +314,7 @@ namespace multimedia
 
          m_estate = state_stopped;
 
-         m_eventStopped.SetEvent();
+         m_happeningStopped.SetEvent();
 
          return ::success;
 

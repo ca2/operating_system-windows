@@ -54,7 +54,7 @@ namespace windowing_win32
       oswindow                      m_hwndIpc;
       ::int_rectangle               m_rectangleLast;
       ::task_pointer                m_ptaskUpdateScreen;
-      ::manual_reset_happening          m_eventUpdateScreen;
+      ::manual_reset_happening          m_happeningUpdateScreen;
       bool                          m_bSingleBufferMode;
 
 

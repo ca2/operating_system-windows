@@ -1055,7 +1055,7 @@ namespace music
             ASSERT(lpmidihdr != nullptr);
             LPBYTE lpbData = (LPBYTE)(lpmidihdr->lpData + lpmidihdr->dwOffset);
             MIDIEVENT * lpme = (MIDIEVENT *)lpbData;
-            file::midi_stream_event_header * pheader = (file::midi_stream_event_header *)&lpme->dwParms[0];
+            file::midi_stream_happening_header * pheader = (file::midi_stream_happening_header *)&lpme->dwParms[0];
             lpbData = (LPBYTE)pheader;
             LPDWORD lpdwParam;
 
@@ -1066,10 +1066,10 @@ namespace music
             {
                array < ::ikaraoke::lyric_event_v1, ::ikaraoke::lyric_event_v1 &> * plyriceventa = nullptr;
                array < ::ikaraoke::lyric_event_v1, ::ikaraoke::lyric_event_v1 &> lyriceventa;
-               for (int i = sizeof(file::midi_stream_event_header); i < iSize;)
+               for (int i = sizeof(file::midi_stream_happening_header); i < iSize;)
                {
-                  pheader = (file::midi_stream_event_header *)&lpbData[i];
-                  lpdwParam = (LPDWORD)&lpbData[i + sizeof(file::midi_stream_event_header)];
+                  pheader = (file::midi_stream_happening_header *)&lpbData[i];
+                  lpdwParam = (LPDWORD)&lpbData[i + sizeof(file::midi_stream_happening_header)];
                   ASSERT(*lpdwParam == pheader->m_dwType);
                   switch (pheader->m_dwType)
                   {
@@ -1112,7 +1112,7 @@ namespace music
                   }
                   break;
                   }
-                  i += pheader->m_dwLength + sizeof(file::midi_stream_event_header);
+                  i += pheader->m_dwLength + sizeof(file::midi_stream_happening_header);
                }
                /*         if(plyriceventa != nullptr)
                {
@@ -1451,9 +1451,9 @@ namespace music
 
             UINT uDeviceID = (UINT)m_iDevice;
 
-            m_eventLongMessage.ResetEvent();
+            m_happeningLongMessage.ResetEvent();
 
-            MMRESULT mmresult = midiOutOpen(&m_hmidiout, uDeviceID, (DWORD_PTR)m_eventLongMessage.m_handle, 0, CALLBACK_EVENT);
+            MMRESULT mmresult = midiOutOpen(&m_hmidiout, uDeviceID, (DWORD_PTR)m_happeningLongMessage.m_handle, 0, CALLBACK_EVENT);
 
             auto estatus = mmresult_status(mmresult);
 
@@ -1534,7 +1534,7 @@ namespace music
             while (!(pmidihdr->dwFlags & MHDR_DONE))
             {
 
-               m_eventLongMessage.wait();
+               m_happeningLongMessage.wait();
 
             }
 
@@ -1553,7 +1553,7 @@ namespace music
 
             m_estatusMidiOut = ::success;
 
-            m_eventLongMessage.ResetEvent();
+            m_happeningLongMessage.ResetEvent();
 
          }
 
@@ -1813,37 +1813,37 @@ namespace music
             }
 
             ::music::midi::event * pevent;
-            int iSize = sizeof(file::midi_stream_event_header);
+            int iSize = sizeof(file::midi_stream_happening_header);
             int i;
             for (i = 0; i < eventptra.get_size(); i++)
             {
                pevent = eventptra[i];
                ASSERT(pevent->GetFlags() & 1);
                iSize += (int)pevent->size();
-               iSize += sizeof(file::midi_stream_event_header);
+               iSize += sizeof(file::midi_stream_happening_header);
             }
 
             m_psequence->m_pfile->m_memstorageF1.set_size(iSize);
             unsigned char * lpbParam;
             LPDWORD lpdwType;
-            file::midi_stream_event_header * pheader;
-            pheader = (file::midi_stream_event_header *)&m_psequence->m_pfile->m_memstorageF1.data()[0];
-            pheader->m_dwLength = iSize - sizeof(file::midi_stream_event_header);
+            file::midi_stream_happening_header * pheader;
+            pheader = (file::midi_stream_happening_header *)&m_psequence->m_pfile->m_memstorageF1.data()[0];
+            pheader->m_dwLength = iSize - sizeof(file::midi_stream_happening_header);
             pheader->m_dwType = 0;
-            iSize = sizeof(file::midi_stream_event_header);
+            iSize = sizeof(file::midi_stream_happening_header);
             for (i = 0; i < eventptra.get_size(); i++)
             {
                pevent = eventptra[i];
                lpbParam = pevent->data();
                lpdwType = (LPDWORD)lpbParam;
-               pheader = (file::midi_stream_event_header *)&m_psequence->m_pfile->m_memstorageF1.data()[iSize];
+               pheader = (file::midi_stream_happening_header *)&m_psequence->m_pfile->m_memstorageF1.data()[iSize];
                pheader->m_dwLength = (DWORD)pevent->size();
                pheader->m_dwType = *lpdwType;
                memory_copy(
-                  &m_psequence->m_pfile->m_memstorageF1.data()[iSize + sizeof(file::midi_stream_event_header)],
+                  &m_psequence->m_pfile->m_memstorageF1.data()[iSize + sizeof(file::midi_stream_happening_header)],
                   lpbParam,
                   pheader->m_dwLength);
-               iSize += pheader->m_dwLength + sizeof(file::midi_stream_event_header);
+               iSize += pheader->m_dwLength + sizeof(file::midi_stream_happening_header);
             }
 
             m_psequence->m_pfile->m_cbPendingUserEvent = (unsigned int)m_psequence->m_pfile->m_memstorageF1.size();
@@ -2283,18 +2283,18 @@ namespace music
             //   if(m_cbPendingLyricEventV1 >= (3 * sizeof(DWORD)))
             //   {
             //      // offset Lyric CallBack Event Code
-            //      *lpdw++ = m_pPendingLyricEventV1->m_Union.m_pevent->m_nType;
+            //      *lpdw++ = m_pPendingLyricEventV1->m_Union.m_phappening->m_nType;
             //   }
             //   if(m_cbPendingLyricEventV1 >= (2 * sizeof(DWORD)))
             //   {
             //      // offset Lyric CallBack Event Code
-            //      *lpdw++ = m_pPendingLyricEventV1->m_Union.m_pevent->m_nTrack;
+            //      *lpdw++ = m_pPendingLyricEventV1->m_Union.m_phappening->m_nTrack;
             //   }
             //   if(m_cbPendingLyricEventV1 >= (1 * sizeof(DWORD)))
             //   {
             //      // offset Lyric CallBack Event Code
-            //      *lpdw++ = m_pPendingLyricEventV1->m_Union.m_pevent->m_nCurrentIndex;
-            //      m_pPendingLyricEventV1->m_Union.m_pevent->m_nCurrentIndex++;
+            //      *lpdw++ = m_pPendingLyricEventV1->m_Union.m_phappening->m_nCurrentIndex;
+            //      m_pPendingLyricEventV1->m_Union.m_phappening->m_nCurrentIndex++;
             //   }
             //   m_pPendingLyricEventV1->ToData(lpdw, m_cbPendingLyricEventV1);
             //   if (0 == (m_cbPendingLyricEventV1 -= dwLength))

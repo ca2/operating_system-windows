@@ -11,7 +11,7 @@ namespace windowing_win32
    public:
 
 
-      manual_reset_happening m_event;
+      manual_reset_happening m_happening;
       oswindow m_oswindow;
       HDC m_hdc;
 
@@ -26,7 +26,7 @@ namespace windowing_win32
 
          start();
 
-         if (m_event.wait(tickTimeout).timeout())
+         if (m_happening.wait(tickTimeout).timeout())
          {
 
             information() << "print_window::time_out";
@@ -50,7 +50,7 @@ namespace windowing_win32
 
          }
 
-         m_event.set_event();
+         m_happening.set_event();
 
          return ::success;
 
