@@ -66,7 +66,7 @@
 class CefClient : public virtual CefBaseRefCounted {
  public:
   ///
-  /// Return the handler for audio rendering events.
+  /// Return the handler for audio rendering happenings.
   ///
   /*--cef()--*/
   virtual CefRefPtr<CefAudioHandler> GetAudioHandler() { return nullptr; }
@@ -95,38 +95,38 @@ class CefClient : public virtual CefBaseRefCounted {
   virtual CefRefPtr<CefDialogHandler> GetDialogHandler() { return nullptr; }
 
   ///
-  /// Return the handler for browser display state events.
+  /// Return the handler for browser display state happenings.
   ///
   /*--cef()--*/
   virtual CefRefPtr<CefDisplayHandler> GetDisplayHandler() { return nullptr; }
 
   ///
-  /// Return the handler for download events. If no handler is returned
+  /// Return the handler for download happenings. If no handler is returned
   /// downloads will not be allowed.
   ///
   /*--cef()--*/
   virtual CefRefPtr<CefDownloadHandler> GetDownloadHandler() { return nullptr; }
 
   ///
-  /// Return the handler for drag events.
+  /// Return the handler for drag happenings.
   ///
   /*--cef()--*/
   virtual CefRefPtr<CefDragHandler> GetDragHandler() { return nullptr; }
 
   ///
-  /// Return the handler for find result events.
+  /// Return the handler for find result happenings.
   ///
   /*--cef()--*/
   virtual CefRefPtr<CefFindHandler> GetFindHandler() { return nullptr; }
 
   ///
-  /// Return the handler for focus events.
+  /// Return the handler for focus happenings.
   ///
   /*--cef()--*/
   virtual CefRefPtr<CefFocusHandler> GetFocusHandler() { return nullptr; }
 
   ///
-  /// Return the handler for events related to CefFrame lifespan. This method
+  /// Return the handler for happenings related to CefFrame lifespan. This method
   /// will be called once during CefBrowser creation and the result will be
   /// cached for performance reasons.
   ///
@@ -149,19 +149,19 @@ class CefClient : public virtual CefBaseRefCounted {
   virtual CefRefPtr<CefJSDialogHandler> GetJSDialogHandler() { return nullptr; }
 
   ///
-  /// Return the handler for keyboard events.
+  /// Return the handler for keyboard happenings.
   ///
   /*--cef()--*/
   virtual CefRefPtr<CefKeyboardHandler> GetKeyboardHandler() { return nullptr; }
 
   ///
-  /// Return the handler for browser life span events.
+  /// Return the handler for browser life span happenings.
   ///
   /*--cef()--*/
   virtual CefRefPtr<CefLifeSpanHandler> GetLifeSpanHandler() { return nullptr; }
 
   ///
-  /// Return the handler for browser load status events.
+  /// Return the handler for browser load status happenings.
   ///
   /*--cef()--*/
   virtual CefRefPtr<CefLoadHandler> GetLoadHandler() { return nullptr; }
@@ -174,13 +174,13 @@ class CefClient : public virtual CefBaseRefCounted {
   virtual CefRefPtr<CefPrintHandler> GetPrintHandler() { return nullptr; }
 
   ///
-  /// Return the handler for off-screen rendering events.
+  /// Return the handler for off-screen rendering happenings.
   ///
   /*--cef()--*/
   virtual CefRefPtr<CefRenderHandler> GetRenderHandler() { return nullptr; }
 
   ///
-  /// Return the handler for browser request events.
+  /// Return the handler for browser request happenings.
   ///
   /*--cef()--*/
   virtual CefRefPtr<CefRequestHandler> GetRequestHandler() { return nullptr; }

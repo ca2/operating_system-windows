@@ -49,7 +49,7 @@ extern "C" {
 struct _cef_menu_model_t;
 
 ///
-/// Implement this structure to handle menu model events. The functions of this
+/// Implement this structure to handle menu model happenings. The functions of this
 /// structure will be called on the browser process UI thread unless otherwise
 /// indicated.
 ///

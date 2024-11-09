@@ -27,7 +27,7 @@ typedef struct VkPhysicalDevicePortabilitySubsetFeaturesKHR {
     VkStructureType    sType;
     void*              pNext;
     VkBool32           constantAlphaColorBlendFactors;
-    VkBool32           events;
+    VkBool32           happenings;
     VkBool32           imageViewFormatReinterpretation;
     VkBool32           imageViewFormatSwizzle;
     VkBool32           imageView2DOn3DImage;

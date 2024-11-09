@@ -45,7 +45,7 @@ class CefBrowser;
 class CefBrowserView;
 
 ///
-/// Implement this interface to handle BrowserView events. The methods of this
+/// Implement this interface to handle BrowserView happenings. The methods of this
 /// class will be called on the browser process UI thread unless otherwise
 /// indicated.
 ///

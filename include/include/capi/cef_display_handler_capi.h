@@ -49,7 +49,7 @@ extern "C" {
 #endif
 
 ///
-/// Implement this structure to handle events related to browser display state.
+/// Implement this structure to handle happenings related to browser display state.
 /// The functions of this structure will be called on the UI thread.
 ///
 typedef struct _cef_display_handler_t {

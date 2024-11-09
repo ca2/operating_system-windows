@@ -42,7 +42,7 @@
 #include "include/cef_browser.h"
 
 ///
-/// Implement this interface to handle events related to find results. The
+/// Implement this interface to handle happenings related to find results. The
 /// methods of this class will be called on the UI thread.
 ///
 /*--cef(source=client)--*/

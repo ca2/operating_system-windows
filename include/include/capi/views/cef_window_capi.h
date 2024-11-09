@@ -261,7 +261,7 @@ typedef struct _cef_window_t {
       struct _cef_window_t* self);
 
   ///
-  /// Set the regions where mouse events will be intercepted by this Window to
+  /// Set the regions where mouse happenings will be intercepted by this Window to
   /// support drag operations. Call this function with an NULL vector to clear
   /// the draggable regions. The draggable region bounds should be in window
   /// coordinates.
@@ -279,7 +279,7 @@ typedef struct _cef_window_t {
 
   ///
   /// Simulate a key press. |key_code| is the VKEY_* value from Chromium's
-  /// ui/events/keycodes/keyboard_codes.h header (VK_* values on Windows).
+  /// ui/happenings/keycodes/keyboard_codes.h header (VK_* values on Windows).
   /// |event_flags| is some combination of EVENTFLAG_SHIFT_DOWN,
   /// EVENTFLAG_CONTROL_DOWN and/or EVENTFLAG_ALT_DOWN. This function is exposed
   /// primarily for testing purposes.
@@ -298,11 +298,11 @@ typedef struct _cef_window_t {
                                       int screen_y);
 
   ///
-  /// Simulate mouse down and/or mouse up events. |button| is the mouse button
-  /// type. If |mouse_down| is true (1) a mouse down event will be sent. If
-  /// |mouse_up| is true (1) a mouse up event will be sent. If both are true (1)
-  /// a mouse down event will be sent followed by a mouse up event (equivalent
-  /// to clicking the mouse button). The events will be sent using the current
+  /// Simulate mouse down and/or mouse up happenings. |button| is the mouse button
+  /// type. If |mouse_down| is true (1) a mouse down happening will be sent. If
+  /// |mouse_up| is true (1) a mouse up happening will be sent. If both are true (1)
+  /// a mouse down happening will be sent followed by a mouse up happening (equivalent
+  /// to clicking the mouse button). The happenings will be sent using the current
   /// cursor position so make sure to call send_mouse_move() first to position
   /// the mouse. This function is exposed primarily for testing purposes.
   ///

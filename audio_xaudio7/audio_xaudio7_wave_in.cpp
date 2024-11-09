@@ -33,7 +33,7 @@ namespace multimedia
          //SetMainWnd(nullptr);
          //ASSERT(GetMainWnd() == nullptr);
          set_thread_priority(::e_priority_highest);
-         m_evInitialized.set_happening();
+         m_happeningInitialized.set_happening();
          return true;
       }
 

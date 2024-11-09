@@ -44,7 +44,7 @@
 class CefClient;
 
 ///
-/// Implement this interface to handle events related to browser life span. The
+/// Implement this interface to handle happenings related to browser life span. The
 /// methods of this class will be called on the UI thread unless otherwise
 /// indicated.
 ///
@@ -62,7 +62,7 @@ class CefLifeSpanHandler : public virtual CefBaseRefCounted {
   /// to open the popup (e.g. current tab, new tab, etc). The |user_gesture|
   /// value will be true if the popup was opened via explicit user gesture (e.g.
   /// clicking a link) or false if the popup opened automatically (e.g. via the
-  /// DomContentLoaded event). The |popupFeatures| structure contains additional
+  /// DomContentLoaded happening). The |popupFeatures| structure contains additional
   /// information about the requested popup window. To allow creation of the
   /// popup browser optionally modify |windowInfo|, |client|, |settings| and
   /// |no_javascript_access| and return false. To cancel creation of the popup
@@ -108,14 +108,14 @@ class CefLifeSpanHandler : public virtual CefBaseRefCounted {
   /// directly from a call to CefBrowserHost::*CloseBrowser() or indirectly if
   /// the browser is parented to a top-level window created by CEF and the user
   /// attempts to close that window (by clicking the 'X', for example). The
-  /// DoClose() method will be called after the JavaScript 'onunload' event has
+  /// DoClose() method will be called after the JavaScript 'onunload' happening has
   /// been fired.
   ///
   /// An application should handle top-level owner window close notifications by
   /// calling CefBrowserHost::TryCloseBrowser() or
   /// CefBrowserHost::CloseBrowser(false) instead of allowing the window to
   /// close immediately (see the examples below). This gives CEF an opportunity
-  /// to process the 'onbeforeunload' event and optionally cancel the close
+  /// to process the 'onbeforeunload' happening and optionally cancel the close
   /// before DoClose() is called.
   ///
   /// When windowed rendering is enabled CEF will internally create a window or

@@ -2217,7 +2217,7 @@ typedef struct AVSubtitleRect {
     char *text;                     ///< 0 terminated plain UTF-8 text
 
     /**
-     * 0 terminated ASS/SSA compatible event line.
+     * 0 terminated ASS/SSA compatible happening line.
      * The presentation of this is unaffected by the other values in this
      * struct.
      */

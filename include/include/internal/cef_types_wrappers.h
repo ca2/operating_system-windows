@@ -309,7 +309,7 @@ class CefScreenInfo : public cef_screen_info_t {
 };
 
 ///
-/// Class representing a a keyboard event.
+/// Class representing a a keyboard happening.
 ///
 class CefKeyEvent : public cef_key_event_t {
  public:
@@ -318,7 +318,7 @@ class CefKeyEvent : public cef_key_event_t {
 };
 
 ///
-/// Class representing a mouse event.
+/// Class representing a mouse happening.
 ///
 class CefMouseEvent : public cef_mouse_event_t {
  public:
@@ -327,7 +327,7 @@ class CefMouseEvent : public cef_mouse_event_t {
 };
 
 ///
-/// Class representing a touch event.
+/// Class representing a touch happening.
 ///
 class CefTouchEvent : public cef_touch_event_t {
  public:

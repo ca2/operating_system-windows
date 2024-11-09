@@ -66,7 +66,7 @@ class CefGetExtensionResourceCallback : public CefBaseRefCounted {
 };
 
 ///
-/// Implement this interface to handle events related to browser extensions.
+/// Implement this interface to handle happenings related to browser extensions.
 /// The methods of this class will be called on the UI thread. See
 /// CefRequestContext::LoadExtension for information about extension loading.
 ///

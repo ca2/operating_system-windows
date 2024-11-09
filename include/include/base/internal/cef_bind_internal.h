@@ -205,7 +205,7 @@ decltype(auto) Unwrap(T&& o) {
 
 // IsWeakMethod is a helper that determine if we are binding a WeakPtr<> to a
 // method.  It is used internally by Bind() to select the correct
-// InvokeHelper that will no-op itself in the event the WeakPtr<> for
+// InvokeHelper that will no-op itself in the happening the WeakPtr<> for
 // the target object is invalidated.
 //
 // The first argument should be the type of the object that will be received by

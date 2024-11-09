@@ -301,12 +301,12 @@ typedef struct _cef_browser_host_t {
       struct _cef_browser_host_t* self);
 
   ///
-  /// Request that the browser close. The JavaScript 'onbeforeunload' event will
-  /// be fired. If |force_close| is false (0) the event handler, if any, will be
+  /// Request that the browser close. The JavaScript 'onbeforeunload' happening will
+  /// be fired. If |force_close| is false (0) the happening handler, if any, will be
   /// allowed to prompt the user and the user can optionally cancel the close.
   /// If |force_close| is true (1) the prompt will not be displayed and the
   /// close will proceed. Results in a call to
-  /// cef_life_span_handler_t::do_close() if the event handler allows the close
+  /// cef_life_span_handler_t::do_close() if the happening handler allows the close
   /// or if |force_close| is true (1). See cef_life_span_handler_t::do_close()
   /// documentation for additional usage information.
   ///
@@ -551,7 +551,7 @@ typedef struct _cef_browser_host_t {
 
   ///
   /// Add an observer for DevTools protocol messages (function results and
-  /// events). The observer will remain registered until the returned
+  /// happenings). The observer will remain registered until the returned
   /// Registration object is destroyed. See the SendDevToolsMessage
   /// documentation for additional usage information.
   ///
@@ -631,31 +631,31 @@ typedef struct _cef_browser_host_t {
       struct _cef_browser_host_t* self);
 
   ///
-  /// Send a key event to the browser.
+  /// Send a key happening to the browser.
   ///
   void(CEF_CALLBACK* send_key_event)(struct _cef_browser_host_t* self,
-                                     const cef_key_event_t* event);
+                                     const cef_key_event_t* happening);
 
   ///
-  /// Send a mouse click event to the browser. The |x| and |y| coordinates are
+  /// Send a mouse click happening to the browser. The |x| and |y| coordinates are
   /// relative to the upper-left corner of the view.
   ///
   void(CEF_CALLBACK* send_mouse_click_event)(struct _cef_browser_host_t* self,
-                                             const cef_mouse_event_t* event,
+                                             const cef_mouse_event_t* happening,
                                              cef_mouse_button_type_t type,
                                              int mouseUp,
                                              int clickCount);
 
   ///
-  /// Send a mouse move event to the browser. The |x| and |y| coordinates are
+  /// Send a mouse move happening to the browser. The |x| and |y| coordinates are
   /// relative to the upper-left corner of the view.
   ///
   void(CEF_CALLBACK* send_mouse_move_event)(struct _cef_browser_host_t* self,
-                                            const cef_mouse_event_t* event,
+                                            const cef_mouse_event_t* happening,
                                             int mouseLeave);
 
   ///
-  /// Send a mouse wheel event to the browser. The |x| and |y| coordinates are
+  /// Send a mouse wheel happening to the browser. The |x| and |y| coordinates are
   /// relative to the upper-left corner of the view. The |deltaX| and |deltaY|
   /// values represent the movement delta in the X and Y directions
   /// respectively. In order to scroll inside select popups with window
@@ -663,18 +663,18 @@ typedef struct _cef_browser_host_t {
   /// implemented properly.
   ///
   void(CEF_CALLBACK* send_mouse_wheel_event)(struct _cef_browser_host_t* self,
-                                             const cef_mouse_event_t* event,
+                                             const cef_mouse_event_t* happening,
                                              int deltaX,
                                              int deltaY);
 
   ///
-  /// Send a touch event to the browser for a windowless browser.
+  /// Send a touch happening to the browser for a windowless browser.
   ///
   void(CEF_CALLBACK* send_touch_event)(struct _cef_browser_host_t* self,
-                                       const cef_touch_event_t* event);
+                                       const cef_touch_event_t* happening);
 
   ///
-  /// Send a capture lost event to the browser.
+  /// Send a capture lost happening to the browser.
   ///
   void(CEF_CALLBACK* send_capture_lost_event)(struct _cef_browser_host_t* self);
 
@@ -783,7 +783,7 @@ typedef struct _cef_browser_host_t {
   void(CEF_CALLBACK* drag_target_drag_enter)(
       struct _cef_browser_host_t* self,
       struct _cef_drag_data_t* drag_data,
-      const cef_mouse_event_t* event,
+      const cef_mouse_event_t* happening,
       cef_drag_operations_mask_t allowed_ops);
 
   ///
@@ -794,7 +794,7 @@ typedef struct _cef_browser_host_t {
   ///
   void(CEF_CALLBACK* drag_target_drag_over)(
       struct _cef_browser_host_t* self,
-      const cef_mouse_event_t* event,
+      const cef_mouse_event_t* happening,
       cef_drag_operations_mask_t allowed_ops);
 
   ///
@@ -812,7 +812,7 @@ typedef struct _cef_browser_host_t {
   /// is disabled.
   ///
   void(CEF_CALLBACK* drag_target_drop)(struct _cef_browser_host_t* self,
-                                       const cef_mouse_event_t* event);
+                                       const cef_mouse_event_t* happening);
 
   ///
   /// Call this function when the drag operation started by a
@@ -867,7 +867,7 @@ typedef struct _cef_browser_host_t {
   /// For windowless browsers accessibility will be enabled in TreeOnly mode
   /// (which corresponds to kAccessibilityModeWebContentsOnly in Chromium). In
   /// this mode renderer accessibility is enabled, the full tree is computed,
-  /// and events are passed to CefAccessibiltyHandler, but platform
+  /// and happenings are passed to CefAccessibiltyHandler, but platform
   /// accessibility objects are not created. The client may implement platform
   /// accessibility objects using CefAccessibiltyHandler callbacks if desired.
   ///

@@ -61,7 +61,7 @@ class CefEndTracingCallback : public virtual CefBaseRefCounted {
 };
 
 ///
-/// Start tracing events on all processes. Tracing is initialized asynchronously
+/// Start tracing happenings on all processes. Tracing is initialized asynchronously
 /// and |callback| will be executed on the UI thread after initialization is
 /// complete.
 ///
@@ -84,7 +84,7 @@ bool CefBeginTracing(const CefString& categories,
                      CefRefPtr<CefCompletionCallback> callback);
 
 ///
-/// Stop tracing events on all processes.
+/// Stop tracing happenings on all processes.
 ///
 /// This function will fail and return false if a previous call to
 /// CefEndTracingAsync is already pending or if CefBeginTracing was not called.
@@ -103,7 +103,7 @@ bool CefEndTracing(const CefString& tracing_file,
 ///
 /// Returns the current system trace time or, if none is defined, the current
 /// high-res time. Can be used by clients to synchronize with the time
-/// information in trace events.
+/// information in trace happenings.
 ///
 /*--cef()--*/
 int64 CefNowFromSystemTraceTime();

@@ -71,7 +71,7 @@ typedef struct _cef_file_dialog_callback_t {
 } cef_file_dialog_callback_t;
 
 ///
-/// Implement this structure to handle dialog events. The functions of this
+/// Implement this structure to handle dialog happenings. The functions of this
 /// structure will be called on the browser process UI thread.
 ///
 typedef struct _cef_dialog_handler_t {

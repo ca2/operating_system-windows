@@ -277,7 +277,7 @@ class CefWindow : public CefPanel {
   virtual CefRect GetClientAreaBoundsInScreen() = 0;
 
   ///
-  /// Set the regions where mouse events will be intercepted by this Window to
+  /// Set the regions where mouse happenings will be intercepted by this Window to
   /// support drag operations. Call this method with an empty vector to clear
   /// the draggable regions. The draggable region bounds should be in window
   /// coordinates.
@@ -294,7 +294,7 @@ class CefWindow : public CefPanel {
 
   ///
   /// Simulate a key press. |key_code| is the VKEY_* value from Chromium's
-  /// ui/events/keycodes/keyboard_codes.h header (VK_* values on Windows).
+  /// ui/happenings/keycodes/keyboard_codes.h header (VK_* values on Windows).
   /// |event_flags| is some combination of EVENTFLAG_SHIFT_DOWN,
   /// EVENTFLAG_CONTROL_DOWN and/or EVENTFLAG_ALT_DOWN. This method is exposed
   /// primarily for testing purposes.
@@ -311,11 +311,11 @@ class CefWindow : public CefPanel {
   virtual void SendMouseMove(int screen_x, int screen_y) = 0;
 
   ///
-  /// Simulate mouse down and/or mouse up events. |button| is the mouse button
-  /// type. If |mouse_down| is true a mouse down event will be sent. If
-  /// |mouse_up| is true a mouse up event will be sent. If both are true a mouse
-  /// down event will be sent followed by a mouse up event (equivalent to
-  /// clicking the mouse button). The events will be sent using the current
+  /// Simulate mouse down and/or mouse up happenings. |button| is the mouse button
+  /// type. If |mouse_down| is true a mouse down happening will be sent. If
+  /// |mouse_up| is true a mouse up happening will be sent. If both are true a mouse
+  /// down happening will be sent followed by a mouse up happening (equivalent to
+  /// clicking the mouse button). The happenings will be sent using the current
   /// cursor position so make sure to call SendMouseMove() first to position the
   /// mouse. This method is exposed primarily for testing purposes.
   ///

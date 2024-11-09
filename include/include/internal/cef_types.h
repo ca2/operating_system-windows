@@ -1404,7 +1404,7 @@ typedef enum {
   UR_FLAG_ALLOW_STORED_CREDENTIALS = 1 << 3,
 
   ///
-  /// If set upload progress events will be generated when a request has a body.
+  /// If set upload progress happenings will be generated when a request has a body.
   ///
   UR_FLAG_REPORT_UPLOAD_PROGRESS = 1 << 4,
 
@@ -1583,7 +1583,7 @@ typedef enum {
 } cef_thread_priority_t;
 
 ///
-/// Message loop types. Indicates the set of asynchronous events that a message
+/// Message loop types. Indicates the set of asynchronous happenings that a message
 /// loop can process.
 ///
 typedef enum {
@@ -1593,12 +1593,12 @@ typedef enum {
   ML_TYPE_DEFAULT,
 
   ///
-  /// Supports tasks, timers and native UI events (e.g. Windows messages).
+  /// Supports tasks, timers and native UI happenings (e.g. Windows messages).
   ///
   ML_TYPE_UI,
 
   ///
-  /// Supports tasks, timers and asynchronous IO events.
+  /// Supports tasks, timers and asynchronous IO happenings.
   ///
   ML_TYPE_IO,
 } cef_message_loop_type_t;
@@ -1761,7 +1761,7 @@ typedef enum {
 } cef_mouse_button_type_t;
 
 ///
-/// Structure representing mouse event information.
+/// Structure representing mouse happening information.
 ///
 typedef struct _cef_mouse_event_t {
   ///
@@ -1792,7 +1792,7 @@ typedef enum {
 } cef_touch_event_type_t;
 
 ///
-/// The device type that caused the event.
+/// The device type that caused the happening.
 ///
 typedef enum {
   CEF_POINTER_TYPE_TOUCH = 0,
@@ -1803,7 +1803,7 @@ typedef enum {
 } cef_pointer_type_t;
 
 ///
-/// Structure representing touch event information.
+/// Structure representing touch happening information.
 ///
 typedef struct _cef_touch_event_t {
   ///
@@ -1845,9 +1845,9 @@ typedef struct _cef_touch_event_t {
   float pressure;
 
   ///
-  /// The state of the touch point. Touches begin with one CEF_TET_PRESSED event
-  /// followed by zero or more CEF_TET_MOVED events and finally one
-  /// CEF_TET_RELEASED or CEF_TET_CANCELLED event. Events not respecting this
+  /// The state of the touch point. Touches begin with one CEF_TET_PRESSED happening
+  /// followed by zero or more CEF_TET_MOVED happenings and finally one
+  /// CEF_TET_RELEASED or CEF_TET_CANCELLED happening. Events not respecting this
   /// order will be ignored.
   ///
   cef_touch_event_type_t type;
@@ -1859,7 +1859,7 @@ typedef struct _cef_touch_event_t {
   uint32 modifiers;
 
   ///
-  /// The device type that caused the event.
+  /// The device type that caused the happening.
   ///
   cef_pointer_type_t pointer_type;
 
@@ -1874,7 +1874,7 @@ typedef enum {
 } cef_paint_element_type_t;
 
 ///
-/// Supported event bit flags.
+/// Supported happening bit flags.
 ///
 typedef enum {
   EVENTFLAG_NONE = 0,
@@ -2028,7 +2028,7 @@ typedef enum {
 } cef_quick_menu_edit_state_flags_t;
 
 ///
-/// Key event types.
+/// Key happening types.
 ///
 typedef enum {
   ///
@@ -2050,18 +2050,18 @@ typedef enum {
 
   ///
   /// Notification that a character was typed. Use this for text input. Key
-  /// down events may generate 0, 1, or more than one character event depending
+  /// down happenings may generate 0, 1, or more than one character happening depending
   /// on the key, locale, and operating system.
   ///
   KEYEVENT_CHAR
 } cef_key_event_type_t;
 
 ///
-/// Structure representing keyboard event information.
+/// Structure representing keyboard happening information.
 ///
 typedef struct _cef_key_event_t {
   ///
-  /// The type of keyboard event.
+  /// The type of keyboard happening.
   ///
   cef_key_event_type_t type;
 
@@ -2072,8 +2072,8 @@ typedef struct _cef_key_event_t {
   uint32 modifiers;
 
   ///
-  /// The Windows key code for the key event. This value is used by the DOM
-  /// specification. Sometimes it comes directly from the event (i.e. on
+  /// The Windows key code for the key happening. This value is used by the DOM
+  /// specification. Sometimes it comes directly from the happening (i.e. on
   /// Windows) and sometimes it's determined using a mapping function. See
   /// WebCore/platform/chromium/KeyboardCodes.h for the list of values.
   ///
@@ -2085,7 +2085,7 @@ typedef struct _cef_key_event_t {
   int native_key_code;
 
   ///
-  /// Indicates whether the event is considered a "system key" event (see
+  /// Indicates whether the happening is considered a "system key" happening (see
   /// http://msdn.microsoft.com/en-us/library/ms646286(VS.85).aspx for details).
   /// This value will always be false on non-Windows platforms.
   ///
@@ -2104,7 +2104,7 @@ typedef struct _cef_key_event_t {
 
   ///
   /// True if the focus is currently on an editable field on the page. This is
-  /// useful for determining if standard key events should be intercepted.
+  /// useful for determining if standard key happenings should be intercepted.
   ///
   int focus_on_editable_field;
 } cef_key_event_t;
@@ -2118,7 +2118,7 @@ typedef enum {
   ///
   FOCUS_SOURCE_NAVIGATION = 0,
   ///
-  /// The source is a system-generated focus event.
+  /// The source is a system-generated focus happening.
   ///
   FOCUS_SOURCE_SYSTEM,
 } cef_focus_source_t;
@@ -2196,7 +2196,7 @@ typedef enum {
 } cef_dom_document_type_t;
 
 ///
-/// DOM event category flags.
+/// DOM happening category flags.
 ///
 typedef enum {
   DOM_EVENT_CATEGORY_UNKNOWN = 0x0,
@@ -2219,7 +2219,7 @@ typedef enum {
 } cef_dom_happening_category_t;
 
 ///
-/// DOM event processing phases.
+/// DOM happening processing phases.
 ///
 typedef enum {
   DOM_EVENT_PHASE_UNKNOWN = 0,

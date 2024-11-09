@@ -703,7 +703,7 @@ Opened:
 
          m_happeningStopped.set_happening();
 
-         m_pplayer->OnEvent(::wave::player::EventPlaybackEnd);
+         m_pplayer->OnHappening(::wave::player::EventPlaybackEnd);
 
       }
 

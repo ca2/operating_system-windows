@@ -46,7 +46,7 @@ namespace music
             virtual void OnMidiOutDeviceChange() override;
 
             //virtual var get_midi_out_device() override;
-            virtual void PostNotifyEvent(::music::midi::e_notify_event eevent) override;
+            virtual void PostNotifyEvent(::music::midi::e_notify_event ehappening) override;
 
             virtual ::duration RateToTicks(double dRate) override;
 

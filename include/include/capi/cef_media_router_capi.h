@@ -67,7 +67,7 @@ typedef struct _cef_media_router_t {
   cef_base_ref_counted_t base;
 
   ///
-  /// Add an observer for MediaRouter events. The observer will remain
+  /// Add an observer for MediaRouter happenings. The observer will remain
   /// registered until the returned Registration object is destroyed.
   ///
   struct _cef_registration_t*(CEF_CALLBACK* add_observer)(
@@ -121,7 +121,7 @@ CEF_EXPORT cef_media_router_t* cef_media_router_get_global(
     struct _cef_completion_callback_t* callback);
 
 ///
-/// Implemented by the client to observe MediaRouter events and registered via
+/// Implemented by the client to observe MediaRouter happenings and registered via
 /// cef_media_router_t::AddObserver. The functions of this structure will be
 /// called on the browser process UI thread.
 ///

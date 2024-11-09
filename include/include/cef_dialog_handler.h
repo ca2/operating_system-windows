@@ -63,7 +63,7 @@ class CefFileDialogCallback : public virtual CefBaseRefCounted {
 };
 
 ///
-/// Implement this interface to handle dialog events. The methods of this class
+/// Implement this interface to handle dialog happenings. The methods of this class
 /// will be called on the browser process UI thread.
 ///
 /*--cef(source=client)--*/

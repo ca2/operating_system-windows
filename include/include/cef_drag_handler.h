@@ -44,7 +44,7 @@
 #include "include/cef_frame.h"
 
 ///
-/// Implement this interface to handle events related to dragging. The methods
+/// Implement this interface to handle happenings related to dragging. The methods
 /// of this class will be called on the UI thread.
 ///
 /*--cef(source=client)--*/
@@ -53,10 +53,10 @@ class CefDragHandler : public virtual CefBaseRefCounted {
   typedef cef_drag_operations_mask_t DragOperationsMask;
 
   ///
-  /// Called when an external drag event enters the browser window. |dragData|
-  /// contains the drag event data and |mask| represents the type of drag
+  /// Called when an external drag happening enters the browser window. |dragData|
+  /// contains the drag happening data and |mask| represents the type of drag
   /// operation. Return false for default drag handling behavior or true to
-  /// cancel the drag event.
+  /// cancel the drag happening.
   ///
   /*--cef()--*/
   virtual bool OnDragEnter(CefRefPtr<CefBrowser> browser,

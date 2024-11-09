@@ -59,7 +59,7 @@ typedef struct _cef_menu_button_pressed_lock_t {
 } cef_menu_button_pressed_lock_t;
 
 ///
-/// Implement this structure to handle MenuButton events. The functions of this
+/// Implement this structure to handle MenuButton happenings. The functions of this
 /// structure will be called on the browser process UI thread unless otherwise
 /// indicated.
 ///

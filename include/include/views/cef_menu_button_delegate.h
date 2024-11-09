@@ -49,7 +49,7 @@ class CefMenuButton;
 class CefMenuButtonPressedLock : public CefBaseRefCounted {};
 
 ///
-/// Implement this interface to handle MenuButton events. The methods of this
+/// Implement this interface to handle MenuButton happenings. The methods of this
 /// class will be called on the browser process UI thread unless otherwise
 /// indicated.
 ///

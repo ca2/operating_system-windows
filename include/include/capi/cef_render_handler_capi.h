@@ -50,7 +50,7 @@ extern "C" {
 #endif
 
 ///
-/// Implement this structure to handle events when window rendering is disabled.
+/// Implement this structure to handle happenings when window rendering is disabled.
 /// The functions of this structure will be called on the UI thread.
 ///
 typedef struct _cef_render_handler_t {

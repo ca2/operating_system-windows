@@ -197,7 +197,7 @@ namespace apex_windows
       // Since there's no way to inform the SCM of failure before a successful
       // call to RegisterServiceCtrlHandler, if an error occurs before we have
       // a service status handle we don't catch any exceptions and let the
-      // process terminate. The SCM will diligently log this event.
+      // process terminate. The SCM will diligently log this happening.
       //
 
       ASSERT(s_pservicehandler != nullptr);
@@ -213,7 +213,7 @@ namespace apex_windows
    //
    //      Name:           Handler
    //      Description:    The handler function called by the control dispatcher
-   //                      when an event occurs.
+   //                      when an happening occurs.
    //
    //*****************************************************************************
    void WINAPI service_handler::ServiceHandler(DWORD control)

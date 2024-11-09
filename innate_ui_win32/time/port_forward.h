@@ -21,7 +21,7 @@ namespace windows
 	   interface IDerivedNATNumberOfEntriesCallback;
 	
 	
-	   // protected interfaces, which were forward-declared above, and which are used for event notifications from COM
+	   // protected interfaces, which were forward-declared above, and which are used for happening notifications from COM
 	   // most of the code is here in this .h file, except for the QueryInterface method which is in the .cpp file
 
 	   interface IDerivedNATExternalIPAddressCallback : public INATExternalIPAddressCallback
@@ -83,7 +83,7 @@ namespace windows
 	   virtual ~port_forward();
 	
 	   virtual HRESULT ListenForUpnpChanges(::net::port_forward_change_callbacks *pCallbacks = nullptr);  // nullptr==default matter; if you provide your own pointer to a port_forward_change_callbacks-derived matter it is deleted for you automatically
-	   virtual HRESULT StopListeningForUpnpChanges( );  // Stops listenting for UPnP machine events on the router and deletes any port_forward_change_callbacks-derived objects
+	   virtual HRESULT StopListeningForUpnpChanges( );  // Stops listenting for UPnP machine happenings on the router and deletes any port_forward_change_callbacks-derived objects
 	
 	   virtual bool GetDeviceInformationUsingThread( ::windowing::window * pwindow );  // starts a thread that will get IGD (router) device information; the thread posts a UWM_PORT_FORWARD_ENGINE_THREAD_NOTIFICATION message to oswindow when it's done
 	   virtual bool GetMappingsUsingThread( ::windowing::window * pwindow );  // starts a thread that will get all mappings; the thread posts a UWM_PORT_FORWARD_ENGINE_THREAD_NOTIFICATION message to oswindow when it's done

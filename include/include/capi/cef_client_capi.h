@@ -75,7 +75,7 @@ typedef struct _cef_client_t {
   cef_base_ref_counted_t base;
 
   ///
-  /// Return the handler for audio rendering events.
+  /// Return the handler for audio rendering happenings.
   ///
   struct _cef_audio_handler_t*(CEF_CALLBACK* get_audio_handler)(
       struct _cef_client_t* self);
@@ -102,38 +102,38 @@ typedef struct _cef_client_t {
       struct _cef_client_t* self);
 
   ///
-  /// Return the handler for browser display state events.
+  /// Return the handler for browser display state happenings.
   ///
   struct _cef_display_handler_t*(CEF_CALLBACK* get_display_handler)(
       struct _cef_client_t* self);
 
   ///
-  /// Return the handler for download events. If no handler is returned
+  /// Return the handler for download happenings. If no handler is returned
   /// downloads will not be allowed.
   ///
   struct _cef_download_handler_t*(CEF_CALLBACK* get_download_handler)(
       struct _cef_client_t* self);
 
   ///
-  /// Return the handler for drag events.
+  /// Return the handler for drag happenings.
   ///
   struct _cef_drag_handler_t*(CEF_CALLBACK* get_drag_handler)(
       struct _cef_client_t* self);
 
   ///
-  /// Return the handler for find result events.
+  /// Return the handler for find result happenings.
   ///
   struct _cef_find_handler_t*(CEF_CALLBACK* get_find_handler)(
       struct _cef_client_t* self);
 
   ///
-  /// Return the handler for focus events.
+  /// Return the handler for focus happenings.
   ///
   struct _cef_focus_handler_t*(CEF_CALLBACK* get_focus_handler)(
       struct _cef_client_t* self);
 
   ///
-  /// Return the handler for events related to cef_frame_t lifespan. This
+  /// Return the handler for happenings related to cef_frame_t lifespan. This
   /// function will be called once during cef_browser_t creation and the result
   /// will be cached for performance reasons.
   ///
@@ -154,19 +154,19 @@ typedef struct _cef_client_t {
       struct _cef_client_t* self);
 
   ///
-  /// Return the handler for keyboard events.
+  /// Return the handler for keyboard happenings.
   ///
   struct _cef_keyboard_handler_t*(CEF_CALLBACK* get_keyboard_handler)(
       struct _cef_client_t* self);
 
   ///
-  /// Return the handler for browser life span events.
+  /// Return the handler for browser life span happenings.
   ///
   struct _cef_life_span_handler_t*(CEF_CALLBACK* get_life_span_handler)(
       struct _cef_client_t* self);
 
   ///
-  /// Return the handler for browser load status events.
+  /// Return the handler for browser load status happenings.
   ///
   struct _cef_load_handler_t*(CEF_CALLBACK* get_load_handler)(
       struct _cef_client_t* self);
@@ -179,13 +179,13 @@ typedef struct _cef_client_t {
       struct _cef_client_t* self);
 
   ///
-  /// Return the handler for off-screen rendering events.
+  /// Return the handler for off-screen rendering happenings.
   ///
   struct _cef_render_handler_t*(CEF_CALLBACK* get_render_handler)(
       struct _cef_client_t* self);
 
   ///
-  /// Return the handler for browser request events.
+  /// Return the handler for browser request happenings.
   ///
   struct _cef_request_handler_t*(CEF_CALLBACK* get_request_handler)(
       struct _cef_client_t* self);

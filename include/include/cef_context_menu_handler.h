@@ -86,7 +86,7 @@ class CefRunQuickMenuCallback : public virtual CefBaseRefCounted {
 };
 
 ///
-/// Implement this interface to handle context menu events. The methods of this
+/// Implement this interface to handle context menu happenings. The methods of this
 /// class will be called on the UI thread.
 ///
 /*--cef(source=client)--*/

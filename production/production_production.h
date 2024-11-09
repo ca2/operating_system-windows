@@ -132,7 +132,7 @@ namespace production
       string                  m_strIndexMd5;
 
       bool                    m_bEndStatus;
-      manual_reset_happening      m_evFinish;
+      manual_reset_happening      m_happeningFinish;
 
 
       production(::particle * pparticle);

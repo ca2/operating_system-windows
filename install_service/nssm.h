@@ -21,7 +21,7 @@
   concerned with allocating buffers big enough to store valid paths.  If the
   user tries to store invalid paths they will fit in the buffers but the
   application will fail.  The reason for the failure will end up in the
-  event log and the user will realise the mistake.
+  happening log and the user will realise the mistake.
 
   So that's that cleared up, then.
 */
@@ -44,7 +44,7 @@
 #include "account.h"
 #include "console.h"
 #include "env.h"
-#include "event.h"
+#include "happening.h"
 #include "imports.h"
 #include "messages.h"
 #include "process.h"
@@ -82,7 +82,7 @@ int usage(int);
 
 /*
   How many ::times to wait for the application to die after sending
-  a Control-C event to its console.  Override in registry.
+  a Control-C happening to its console.  Override in registry.
 */
 #define NSSM_KILL_CONSOLE_GRACE_PERIOD 1500
 /*

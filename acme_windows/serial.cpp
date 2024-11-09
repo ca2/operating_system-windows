@@ -910,7 +910,7 @@ namespace acme_windows
 
       if (!WaitCommEvent(m_hFile, &dwCommEvent, nullptr))
       {
-         // An error occurred waiting for the event.
+         // An error occurred waiting for the happening.
          return false;
       }
       else

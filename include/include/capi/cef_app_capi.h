@@ -91,7 +91,7 @@ typedef struct _cef_app_t {
       struct _cef_scheme_registrar_t* registrar);
 
   ///
-  /// Return the handler for resource bundle events. If
+  /// Return the handler for resource bundle happenings. If
   /// cef_settings_t.pack_loading_disabled is true (1) a handler must be
   /// returned. If no handler is returned resources will be loaded from pack
   /// files. This function is called by the browser and render processes on

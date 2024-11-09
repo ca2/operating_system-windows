@@ -875,15 +875,15 @@ typedef struct AVStream {
 #endif
 
     /**
-     * Flags indicating events happening on the stream, a combination of
+     * Flags indicating happenings happening on the stream, a combination of
      * AVSTREAM_EVENT_FLAG_*.
      *
      * - demuxing: may be set by the demuxer in avformat_open_input(),
      *   avformat_find_stream_info() and av_read_frame(). Flags must be cleared
-     *   by the user once the event has been handled.
+     *   by the user once the happening has been handled.
      * - muxing: may be set by the user after avformat_write_header(). to
-     *   indicate a user-triggered event.  The muxer will clear the flags for
-     *   events it has handled in av_[interleaved]_write_frame().
+     *   indicate a user-triggered happening.  The muxer will clear the flags for
+     *   happenings it has handled in av_[interleaved]_write_frame().
      */
     int event_flags;
 /**
@@ -895,7 +895,7 @@ typedef struct AVStream {
 #define AVSTREAM_EVENT_FLAG_METADATA_UPDATED 0x0001
 /**
  * - demuxing: new packets for this stream were read from the file. This
- *   event is informational only and does not guarantee that new packets
+ *   happening is informational only and does not guarantee that new packets
  *   for this stream will necessarily be returned from av_read_frame().
  */
 #define AVSTREAM_EVENT_FLAG_NEW_PACKETS (1 << 1)
@@ -1614,15 +1614,15 @@ typedef struct AVFormatContext {
     int strict_std_compliance;
 
     /**
-     * Flags indicating events happening on the file, a combination of
+     * Flags indicating happenings happening on the file, a combination of
      * AVFMT_EVENT_FLAG_*.
      *
      * - demuxing: may be set by the demuxer in avformat_open_input(),
      *   avformat_find_stream_info() and av_read_frame(). Flags must be cleared
-     *   by the user once the event has been handled.
+     *   by the user once the happening has been handled.
      * - muxing: may be set by the user after avformat_write_header() to
-     *   indicate a user-triggered event.  The muxer will clear the flags for
-     *   events it has handled in av_[interleaved]_write_frame().
+     *   indicate a user-triggered happening.  The muxer will clear the flags for
+     *   happenings it has handled in av_[interleaved]_write_frame().
      */
     int event_flags;
 /**

@@ -13,7 +13,7 @@
 #include "app-veriwell/multimedia/ikaraoke/lyric_event_v1.h"
 #include "app-veriwell/multimedia/music/midi/file.h"
 #include "app-veriwell/multimedia/music/midi/player_command.h"
-#include "app-veriwell/multimedia/music/midi/event.h"
+#include "app-veriwell/multimedia/music/midi/happening.h"
 #include "acme_windows/mmresult.h"
 
 
@@ -684,7 +684,7 @@ namespace music
                if (m_iPrerollPhase == 0)
                {
 
-                  // Tempo change event
+                  // Tempo change happening
                   if (KF_EMPTY != m_keyframe.rbTempo[0] || KF_EMPTY != m_keyframe.rbTempo[1] || KF_EMPTY != m_keyframe.rbTempo[2])
                   {
 
@@ -712,7 +712,7 @@ namespace music
 
                   int idx = m_iPrerollPhase - 1;
 
-                  // Program change events
+                  // Program change happenings
                   if (KF_EMPTY != m_keyframe.rbProgram[idx])
                   {
 
@@ -731,7 +731,7 @@ namespace music
                else if (m_iPrerollPhase < 1 + 16 + 120 * 16)
                {
 
-                  // Controller events
+                  // Controller happenings
 
                   int i = m_iPrerollPhase - 17;
 
@@ -881,11 +881,11 @@ namespace music
                else if (m_psequence->has_operation(e_operation_tempo_change))
                {
 
-                  ::music::midi::event event;
+                  ::music::midi::happening happening;
 
-                  m_psequence->m_pfile->GetTempoEvent(event);
+                  m_psequence->m_pfile->GetTempoEvent(happening);
 
-                  StreamEvent(event.GetDelta(), &event, lpmidihdr, I32_MAXIMUM, 256);
+                  StreamEvent(happening.GetDelta(), &happening, lpmidihdr, I32_MAXIMUM, 256);
 
                   m_psequence->clear_operation(e_operation_tempo_change);
 
@@ -1022,7 +1022,7 @@ namespace music
                if (m_hstream != nullptr && m_psequence->get_state() == sequence::e_state_playing)
                {
 
-                  estatus = translate_os_result(midiStreamOut(m_hstream, lpmidihdr, sizeof(*lpmidihdr)), "OnEvent", "midiStreamOut");
+                  estatus = translate_os_result(midiStreamOut(m_hstream, lpmidihdr, sizeof(*lpmidihdr)), "OnHappening", "midiStreamOut");
 
                   if (estatus == ::success)
                   {
@@ -1224,7 +1224,7 @@ namespace music
          }
 
 
-         //void sequencer::on_midi_playback_end(sequence::event * pevent)
+         //void sequencer::on_midi_playback_end(sequence::happening * pevent)
          //{
 
 
@@ -1232,10 +1232,10 @@ namespace music
          //}
 
 
-         void sequencer::OnEvent(sequence::event * pevent)
+         void sequencer::OnHappening(sequence::happening * pevent)
          {
 
-            ::music::midi::sequencer::OnEvent(pevent);
+            ::music::midi::sequencer::OnHappening(pevent);
 
             switch (pevent->m_eevent)
             {
@@ -1291,7 +1291,7 @@ namespace music
                //if (m_hstream != nullptr && m_psequence->get_state() == sequence::e_state_playing)
                //{
 
-               //   estatus = translate_os_result(midiStreamOut(m_hstream, lpmidihdr, sizeof(*lpmidihdr)), "OnEvent", "midiStreamOut");
+               //   estatus = translate_os_result(midiStreamOut(m_hstream, lpmidihdr, sizeof(*lpmidihdr)), "OnHappening", "midiStreamOut");
 
                //   if (estatus == ::success)
                //   {
@@ -1426,14 +1426,14 @@ namespace music
          }
 
 
-         //::music::midi::sequencer::event* sequencer::create_new_event(::music::midi::sequencer::e_event eevent, LPMIDIHDR lpmidihdr)
+         //::music::midi::sequencer::happening* sequencer::create_new_event(::music::midi::sequencer::e_happening ehappening, LPMIDIHDR lpmidihdr)
          //{
 
          //   ASSERT(this != nullptr);
 
-         //   event * pevent = ___new event();
+         //   happening * pevent = ___new happening();
 
-         //   ptopic->m_atom = eevent;
+         //   ptopic->m_atom = ehappening;
          //   ptopic->m_psequence = this;
          //   ptopic->m_puserdata = lpmidihdr;
 
@@ -1681,11 +1681,11 @@ namespace music
 
             UINT uDeviceID = (UINT)m_iDevice;
 
-            manual_reset_happening event;
+            manual_reset_happening happening;
 
-            event.reset_happening();
+            happening.reset_happening();
 
-            mmresult = midiOutOpen(&hmidiout, uDeviceID, (DWORD_PTR)event.m_handle, 0, CALLBACK_THREAD);
+            mmresult = midiOutOpen(&hmidiout, uDeviceID, (DWORD_PTR)happening.m_handle, 0, CALLBACK_THREAD);
 
             auto estatus = mmresult_status(mmresult);
 
@@ -1741,7 +1741,7 @@ namespace music
             while (!(mh.dwFlags & MHDR_DONE))
             {
 
-               event.wait();
+               happening.wait();
 
             }
 
@@ -1795,7 +1795,7 @@ namespace music
 
 
          ::e_status sequencer::StreamEventF1(musical_tick tickDelta,
-            array < ::music::midi::event *, ::music::midi::event * > & eventptra,
+            array < ::music::midi::happening *, ::music::midi::happening * > & eventptra,
             LPMIDIHDR lpmh,
             musical_tick tickMax,
             unsigned int cbPrerollNomimalMax
@@ -1812,7 +1812,7 @@ namespace music
                return ::success;
             }
 
-            ::music::midi::event * pevent;
+            ::music::midi::happening * pevent;
             int iSize = sizeof(file::midi_stream_happening_header);
             int i;
             for (i = 0; i < eventptra.get_size(); i++)
@@ -1868,7 +1868,7 @@ namespace music
 
          ::e_status sequencer::StreamEvent(
             musical_tick tickDelta,
-            ::music::midi::event * pevent,
+            ::music::midi::happening * pevent,
             LPMIDIHDR lpmh,
             musical_tick tickMax,
             unsigned int cbPrerollNominalMax)
@@ -2023,7 +2023,7 @@ namespace music
                if (pevent->size() != 3)
                {
 
-                  informationf("smfReadEvents: Corrupt tempo event");
+                  informationf("smfReadEvents: Corrupt tempo happening");
 
                   return error_invalid_file;
 
@@ -2197,8 +2197,8 @@ namespace music
             else // Meta
             {
 
-               // if the meta event has tickDelta > 0,
-               // the meta event is inserted in the stream
+               // if the meta happening has tickDelta > 0,
+               // the meta happening is inserted in the stream
                // so syncing is maintained.
                if (tickDelta > 0)
                {
@@ -2234,7 +2234,7 @@ namespace music
             ASSERT(tickDelta >= 0);
             ASSERT(lpmh != nullptr);
 
-            /* Can't fit 4 DWORD's? (tickDelta + stream-atom + event + some data)
+            /* Can't fit 4 DWORD's? (tickDelta + stream-atom + happening + some data)
             ** Can't do anything.
             */
             ASSERT(lpmh->dwBufferLength >= lpmh->dwBytesRecorded);
@@ -2322,7 +2322,7 @@ namespace music
             //    assert(pSmf != nullptr);
             ASSERT(lpmh != nullptr);
 
-            /* Can't fit 4 DWORD's? (tickDelta + stream-atom + event + some data)
+            /* Can't fit 4 DWORD's? (tickDelta + stream-atom + happening + some data)
             ** Can't do anything.
             */
             ASSERT(lpmh->dwBufferLength >= lpmh->dwBytesRecorded);
@@ -2499,11 +2499,11 @@ namespace music
                }
 
                // If we know ahead of time we won't have room for the
-               // event, just break out now. We need 2 DWORD's for the
-               // terminator event and at least 2 DWORD's for any
-               // event we might store - this will allow us a full
-               // short event or the delta time and stub for a long
-               // event to be split.
+               // happening, just break out now. We need 2 DWORD's for the
+               // terminator happening and at least 2 DWORD's for any
+               // happening we might store - this will allow us a full
+               // short happening or the delta time and stub for a long
+               // happening to be split.
                //
                //
 
@@ -2517,7 +2517,7 @@ namespace music
 
                }
 
-               ::music::midi::event * pevent = nullptr;
+               ::music::midi::happening * pevent = nullptr;
 
                int iLeft = iBufferNominalMax - lpmh->dwBytesRecorded;
 

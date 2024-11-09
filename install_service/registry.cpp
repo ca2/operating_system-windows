@@ -429,7 +429,7 @@ int unformat_double_null(TCHAR *dn, unsigned long dnlen, TCHAR **unformatted, un
   return 0;
 }
 
-void override_::times(TCHAR *service_name, HKEY key, TCHAR *value, unsigned long *buffer, unsigned long default_value, unsigned long event) {
+void override_::times(TCHAR *service_name, HKEY key, TCHAR *value, unsigned long *buffer, unsigned long default_value, unsigned long happening) {
   unsigned long type = REG_DWORD;
   unsigned long buflen = sizeof(unsigned long);
   bool ok = false;
@@ -439,7 +439,7 @@ void override_::times(TCHAR *service_name, HKEY key, TCHAR *value, unsigned long
       if (type != REG_DWORD) {
         TCHAR ::times[16];
         _sntprintf_s(::times, _countof(::times), _TRUNCATE, _T("%lu"), default_value);
-        log_event(EVENTLOG_WARNING_TYPE, event, service_name, value, ::times, 0);
+        log_event(EVENTLOG_WARNING_TYPE, happening, service_name, value, ::times, 0);
       }
       else log_event(EVENTLOG_ERROR_TYPE, NSSM_EVENT_QUERYVALUE_FAILED, value, error_string(GetLastError()), 0);
     }

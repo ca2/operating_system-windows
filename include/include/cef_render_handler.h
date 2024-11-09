@@ -46,7 +46,7 @@
 #include "include/cef_drag_data.h"
 
 ///
-/// Implement this interface to handle events when window rendering is disabled.
+/// Implement this interface to handle happenings when window rendering is disabled.
 /// The methods of this class will be called on the UI thread.
 ///
 /*--cef(source=client)--*/

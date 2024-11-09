@@ -48,7 +48,7 @@ extern "C" {
 #endif
 
 ///
-/// Implement this structure to handle audio events.
+/// Implement this structure to handle audio happenings.
 ///
 typedef struct _cef_audio_handler_t {
   ///

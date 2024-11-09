@@ -47,7 +47,7 @@ extern "C" {
 #endif
 
 ///
-/// Implement this structure to handle Panel events. The functions of this
+/// Implement this structure to handle Panel happenings. The functions of this
 /// structure will be called on the browser process UI thread unless otherwise
 /// indicated.
 ///

@@ -42,7 +42,7 @@
 #include "include/cef_browser.h"
 
 ///
-/// Implement this interface to handle audio events.
+/// Implement this interface to handle audio happenings.
 ///
 /*--cef(source=client)--*/
 class CefAudioHandler : public virtual CefBaseRefCounted {

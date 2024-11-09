@@ -170,7 +170,7 @@ typedef struct VkExportMetalSharedEventInfoEXT {
     VkStructureType      sType;
     const void*          pNext;
     VkSemaphore          semaphore;
-    VkEvent              event;
+    VkEvent              happening;
     MTLSharedEvent_id    mtlSharedEvent;
 } VkExportMetalSharedEventInfoEXT;
 

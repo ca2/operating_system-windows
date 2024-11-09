@@ -68,7 +68,7 @@ typedef struct _cef_jsdialog_callback_t {
 } cef_jsdialog_callback_t;
 
 ///
-/// Implement this structure to handle events related to JavaScript dialogs. The
+/// Implement this structure to handle happenings related to JavaScript dialogs. The
 /// functions of this structure will be called on the UI thread.
 ///
 typedef struct _cef_jsdialog_handler_t {
@@ -120,7 +120,7 @@ typedef struct _cef_jsdialog_handler_t {
 
   ///
   /// Called to cancel any pending dialogs and reset any saved dialog state.
-  /// Will be called due to events like page navigation irregardless of whether
+  /// Will be called due to happenings like page navigation irregardless of whether
   /// any dialogs are currently pending.
   ///
   void(CEF_CALLBACK* on_reset_dialog_state)(

@@ -48,7 +48,7 @@ extern "C" {
 #endif
 
 ///
-/// Implement this structure to handle events related to find results. The
+/// Implement this structure to handle happenings related to find results. The
 /// functions of this structure will be called on the UI thread.
 ///
 typedef struct _cef_find_handler_t {

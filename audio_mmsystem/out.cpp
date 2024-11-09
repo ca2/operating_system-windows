@@ -680,7 +680,7 @@ namespace audio_mmsystem
 
       m_pprebuffer->m_pstreameffectOut.release();
 
-      m_pplayer->post_event(::wave::e_player_event_playback_end);
+      m_pplayer->post_event(::wave::e_player_happening_playback_end);
 
    }
 

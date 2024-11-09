@@ -49,7 +49,7 @@ extern "C" {
 struct _cef_button_t;
 
 ///
-/// Implement this structure to handle Button events. The functions of this
+/// Implement this structure to handle Button happenings. The functions of this
 /// structure will be called on the browser process UI thread unless otherwise
 /// indicated.
 ///

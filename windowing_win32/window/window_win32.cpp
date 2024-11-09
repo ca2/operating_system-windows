@@ -176,7 +176,7 @@ namespace windows
 
 
 
-// https://stackoverflow.com/questions/15966642/how-do-you-tell-lshift-apart-from-rshift-in-wm-keydown-events
+// https://stackoverflow.com/questions/15966642/how-do-you-tell-lshift-apart-from-rshift-in-wm-keydown-happenings
 
 wparam MapLeftRightKeys(wparam vk, lparam lParam)
 {

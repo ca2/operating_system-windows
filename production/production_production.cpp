@@ -1373,7 +1373,7 @@ pacmedir->create(pathTarget.folder()))
 
          Sleep(5000);
 
-         m_evFinish.set_happening();
+         m_happeningFinish.set_happening();
 
       }
 
@@ -3011,8 +3011,8 @@ pacmedir->create(pathTarget.folder()))
       if (m_iRelease == 0 && m_bEndProduction && !m_bEndStatus)
       {
          m_bEndStatus = true;
-         m_evFinish.wait();
-         m_evFinish.reset_happening();
+         m_happeningFinish.wait();
+         m_happeningFinish.reset_happening();
          add_status("All releases have been commanded and production has deemed ended!!.!.!!.");
 
 

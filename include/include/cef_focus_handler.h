@@ -44,7 +44,7 @@
 #include "include/cef_frame.h"
 
 ///
-/// Implement this interface to handle events related to focus. The methods of
+/// Implement this interface to handle happenings related to focus. The methods of
 /// this class will be called on the UI thread.
 ///
 /*--cef(source=client)--*/

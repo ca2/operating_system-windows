@@ -50,7 +50,7 @@
 class CefCookieAccessFilter;
 
 ///
-/// Implement this interface to handle events related to browser requests. The
+/// Implement this interface to handle happenings related to browser requests. The
 /// methods of this class will be called on the IO thread unless otherwise
 /// indicated.
 ///

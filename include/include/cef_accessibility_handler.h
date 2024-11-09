@@ -42,7 +42,7 @@
 
 ///
 /// Implement this interface to receive accessibility notification when
-/// accessibility events have been registered. The methods of this class will
+/// accessibility happenings have been registered. The methods of this class will
 /// be called on the UI thread.
 ///
 /*--cef(source=client)--*/

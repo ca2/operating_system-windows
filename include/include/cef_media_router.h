@@ -69,7 +69,7 @@ class CefMediaRouter : public virtual CefBaseRefCounted {
       CefRefPtr<CefCompletionCallback> callback);
 
   ///
-  /// Add an observer for MediaRouter events. The observer will remain
+  /// Add an observer for MediaRouter happenings. The observer will remain
   /// registered until the returned Registration object is destroyed.
   ///
   /*--cef()--*/
@@ -113,7 +113,7 @@ class CefMediaRouter : public virtual CefBaseRefCounted {
 };
 
 ///
-/// Implemented by the client to observe MediaRouter events and registered via
+/// Implemented by the client to observe MediaRouter happenings and registered via
 /// CefMediaRouter::AddObserver. The methods of this class will be called on the
 /// browser process UI thread.
 ///

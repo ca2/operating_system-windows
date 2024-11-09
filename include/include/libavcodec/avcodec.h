@@ -1316,7 +1316,7 @@ enum AVPacketSideDataType {
     AV_PKT_DATA_STRINGS_METADATA,
 
     /**
-     * Subtitle event position
+     * Subtitle happening position
      * @code
      * u32le x1
      * u32le y1
@@ -3921,7 +3921,7 @@ typedef struct AVSubtitleRect {
     char *text;                     ///< 0 terminated plain UTF-8 text
 
     /**
-     * 0 terminated ASS/SSA compatible event line.
+     * 0 terminated ASS/SSA compatible happening line.
      * The presentation of this is unaffected by the other values in this
      * struct.
      */

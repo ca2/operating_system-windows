@@ -57,7 +57,7 @@ class CefJSDialogCallback : public virtual CefBaseRefCounted {
 };
 
 ///
-/// Implement this interface to handle events related to JavaScript dialogs. The
+/// Implement this interface to handle happenings related to JavaScript dialogs. The
 /// methods of this class will be called on the UI thread.
 ///
 /*--cef(source=client)--*/
@@ -111,7 +111,7 @@ class CefJSDialogHandler : public virtual CefBaseRefCounted {
 
   ///
   /// Called to cancel any pending dialogs and reset any saved dialog state.
-  /// Will be called due to events like page navigation irregardless of whether
+  /// Will be called due to happenings like page navigation irregardless of whether
   /// any dialogs are currently pending.
   ///
   /*--cef()--*/

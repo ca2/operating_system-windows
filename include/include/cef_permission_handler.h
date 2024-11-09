@@ -80,7 +80,7 @@ class CefPermissionPromptCallback : public virtual CefBaseRefCounted {
 };
 
 ///
-/// Implement this interface to handle events related to permission requests.
+/// Implement this interface to handle happenings related to permission requests.
 /// The methods of this class will be called on the browser process UI thread.
 ///
 /*--cef(source=client)--*/

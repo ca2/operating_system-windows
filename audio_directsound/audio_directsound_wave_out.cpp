@@ -789,7 +789,7 @@ namespace multimedia
          //   delete peffect;
          //}
 
-         m_pplayer->OnEvent(::wave::player::EventPlaybackEnd);
+         m_pplayer->OnHappening(::wave::player::EventPlaybackEnd);
 
       }
 

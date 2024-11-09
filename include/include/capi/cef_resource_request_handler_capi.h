@@ -56,7 +56,7 @@ extern "C" {
 struct _cef_cookie_access_filter_t;
 
 ///
-/// Implement this structure to handle events related to browser requests. The
+/// Implement this structure to handle happenings related to browser requests. The
 /// functions of this structure will be called on the IO thread unless otherwise
 /// indicated.
 ///

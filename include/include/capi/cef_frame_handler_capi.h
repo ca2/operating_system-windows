@@ -49,7 +49,7 @@ extern "C" {
 #endif
 
 ///
-/// Implement this structure to handle events related to cef_frame_t life span.
+/// Implement this structure to handle happenings related to cef_frame_t life span.
 /// The order of callbacks is:
 ///
 /// (1) During initial cef_browser_host_t creation and navigation of the main

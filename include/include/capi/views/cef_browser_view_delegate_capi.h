@@ -51,7 +51,7 @@ struct _cef_browser_t;
 struct _cef_browser_view_t;
 
 ///
-/// Implement this structure to handle BrowserView events. The functions of this
+/// Implement this structure to handle BrowserView happenings. The functions of this
 /// structure will be called on the browser process UI thread unless otherwise
 /// indicated.
 ///

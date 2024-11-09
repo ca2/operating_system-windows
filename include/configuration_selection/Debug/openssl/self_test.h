@@ -17,14 +17,14 @@
 extern "C" {
 # endif
 
-/* The test event phases */
+/* The test happening phases */
 # define OSSL_SELF_TEST_PHASE_NONE     "None"
 # define OSSL_SELF_TEST_PHASE_START    "Start"
 # define OSSL_SELF_TEST_PHASE_CORRUPT  "Corrupt"
 # define OSSL_SELF_TEST_PHASE_PASS     "Pass"
 # define OSSL_SELF_TEST_PHASE_FAIL     "Fail"
 
-/* Test event categories */
+/* Test happening categories */
 # define OSSL_SELF_TEST_TYPE_NONE               "None"
 # define OSSL_SELF_TEST_TYPE_MODULE_INTEGRITY   "Module_Integrity"
 # define OSSL_SELF_TEST_TYPE_INSTALL_INTEGRITY  "Install_Integrity"
@@ -41,7 +41,7 @@ extern "C" {
 # define OSSL_SELF_TEST_TYPE_KAT_KA             "KAT_KA"
 # define OSSL_SELF_TEST_TYPE_DRBG               "DRBG"
 
-/* Test event sub categories */
+/* Test happening sub categories */
 # define OSSL_SELF_TEST_DESC_NONE           "None"
 # define OSSL_SELF_TEST_DESC_INTEGRITY_HMAC "HMAC"
 # define OSSL_SELF_TEST_DESC_PCT_RSA_PKCS1  "RSA"

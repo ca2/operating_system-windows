@@ -716,7 +716,7 @@ enum aiComponent
 #define AI_CONFIG_IMPORT_MDL_HL1_READ_ANIMATIONS "IMPORT_MDL_HL1_READ_ANIMATIONS"
 
                     // ---------------------------------------------------------------------------
-                    /** @brief Set whether the MDL (HL1) importer will read animation events.
+                    /** @brief Set whether the MDL (HL1) importer will read animation happenings.
                      * \note This property requires AI_CONFIG_IMPORT_MDL_HL1_READ_ANIMATIONS to be set to true.
                      *
                      * The default value is true (1)

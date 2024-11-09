@@ -50,7 +50,7 @@ extern "C" {
 #endif
 
 ///
-/// Implement this structure to handle events related to focus. The functions of
+/// Implement this structure to handle happenings related to focus. The functions of
 /// this structure will be called on the UI thread.
 ///
 typedef struct _cef_focus_handler_t {

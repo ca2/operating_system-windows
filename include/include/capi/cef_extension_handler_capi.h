@@ -75,7 +75,7 @@ typedef struct _cef_get_extension_resource_callback_t {
 } cef_get_extension_resource_callback_t;
 
 ///
-/// Implement this structure to handle events related to browser extensions. The
+/// Implement this structure to handle happenings related to browser extensions. The
 /// functions of this structure will be called on the UI thread. See
 /// cef_request_context_t::LoadExtension for information about extension
 /// loading.

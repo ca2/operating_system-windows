@@ -49,7 +49,7 @@ extern "C" {
 struct _cef_view_t;
 
 ///
-/// Implement this structure to handle view events. All size and position values
+/// Implement this structure to handle view happenings. All size and position values
 /// are in density independent pixels (DIP) unless otherwise indicated. The
 /// functions of this structure will be called on the browser process UI thread
 /// unless otherwise indicated.

@@ -43,7 +43,7 @@
 class CefMenuModel;
 
 ///
-/// Implement this interface to handle menu model events. The methods of this
+/// Implement this interface to handle menu model happenings. The methods of this
 /// class will be called on the browser process UI thread unless otherwise
 /// indicated.
 ///

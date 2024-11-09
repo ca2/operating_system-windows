@@ -41,7 +41,7 @@
 #include "include/views/cef_view_delegate.h"
 
 ///
-/// Implement this interface to handle Panel events. The methods of this class
+/// Implement this interface to handle Panel happenings. The methods of this class
 /// will be called on the browser process UI thread unless otherwise indicated.
 ///
 /*--cef(source=client)--*/

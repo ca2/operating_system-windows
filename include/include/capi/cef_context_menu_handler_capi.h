@@ -98,7 +98,7 @@ typedef struct _cef_run_quick_menu_callback_t {
 } cef_run_quick_menu_callback_t;
 
 ///
-/// Implement this structure to handle context menu events. The functions of
+/// Implement this structure to handle context menu happenings. The functions of
 /// this structure will be called on the UI thread.
 ///
 typedef struct _cef_context_menu_handler_t {

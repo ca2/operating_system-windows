@@ -266,7 +266,7 @@ const UI_METHOD *UI_null(void);
 
         0       on error.
         1       on success.
-        -1      on out-of-band events, for example if some prompting has
+        -1      on out-of-band happenings, for example if some prompting has
                 been canceled (by pressing Ctrl-C, for example).  This is
                 only checked when returned by the flusher or the reader.
 
@@ -276,7 +276,7 @@ const UI_METHOD *UI_null(void);
    line interface, the best is to have the reader also write the prompts
    instead of having the writer do it.  If you want to prompt from a dialog
    box, the writer can be used to build up the contents of the box, and the
-   flusher to actually display the box and run the event loop until all data
+   flusher to actually display the box and run the happening loop until all data
    has been given, after which the reader only grabs the given data and puts
    them back into the UI strings.
 

@@ -43,7 +43,7 @@
 class CefWindow;
 
 ///
-/// Implement this interface to handle window events. The methods of this class
+/// Implement this interface to handle window happenings. The methods of this class
 /// will be called on the browser process UI thread unless otherwise indicated.
 ///
 /*--cef(source=client)--*/
@@ -165,12 +165,12 @@ class CefWindowDelegate : public CefPanelDelegate {
 
   ///
   /// Called after all other controls in the window have had a chance to
-  /// handle the event. |event| contains information about the keyboard event.
-  /// Return true if the keyboard event was handled or false otherwise.
+  /// handle the happening. |happening| contains information about the keyboard happening.
+  /// Return true if the keyboard happening was handled or false otherwise.
   ///
   /*--cef()--*/
   virtual bool OnKeyEvent(CefRefPtr<CefWindow> window,
-                          const CefKeyEvent& event) {
+                          const CefKeyEvent& happening) {
     return false;
   }
 };

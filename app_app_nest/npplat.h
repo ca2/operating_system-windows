@@ -135,7 +135,7 @@ int32   Private_WriteReady(NPP instance, NPStream* stream);
 int32   Private_Write(NPP instance, NPStream* stream, int32 offset, int32 len, void* buffer);
 void    Private_StreamAsFile(NPP instance, NPStream* stream, const ::string & fname);
 void    Private_Print(NPP instance, NPPrint* platformPrint);
-int16   Private_HandleEvent(NPP instance, void* event);
+int16   Private_HandleEvent(NPP instance, void* happening);
 void    Private_URLNotify(NPP instance, const ::string & url, NPReason reason, void* notifyData);
 jref    Private_GetJavaClass(void);
 NPError Private_GetValue(NPP instance, NPPVariable variable, void *result);

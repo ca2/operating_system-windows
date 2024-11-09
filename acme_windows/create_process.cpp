@@ -167,7 +167,7 @@
 //   BOOL bResult = FALSE;
 //   BOOL bContinue = TRUE;
 //
-//// Set up overlapped structure event. Other members are already 
+//// Set up overlapped structure happening. Other members are already 
 //// initialized to zero.
 ////stOverlapped.hEvent = hEvent;
 //
@@ -206,7 +206,7 @@
 //         BOOL bPending = TRUE;
 //
 //         // Loop until the I/O is complete, that is: the overlapped 
-//         // event is signaled.
+//         // happening is signaled.
 //
 //         while (bPending)
 //         {
@@ -261,7 +261,7 @@
 //            {
 //               printf("ReadFile operation completed\n");
 //
-//               // Manual-reset event should be reset since it is now signaled.
+//               // Manual-reset happening should be reset since it is now signaled.
 //               ResetEvent(stOverlapped.hEvent);
 //            }
 //         }
@@ -844,7 +844,7 @@ namespace acme_windows
 //      BOOL bResult = FALSE;
 //      BOOL bContinue = TRUE;
 //
-//      // Set up overlapped structure event. Other members are already 
+//      // Set up overlapped structure happening. Other members are already 
 //      // initialized to zero.
 //      //stOverlapped.hEvent = hEvent;
 //
@@ -896,7 +896,7 @@ namespace acme_windows
 //               BOOL bPending = TRUE;
 //
 //               // Loop until the I/O is complete, that is: the overlapped 
-//               // event is signaled.
+//               // happening is signaled.
 //
 //               while (bPending)
 //               {
@@ -953,7 +953,7 @@ namespace acme_windows
 //                  {
 //                     printf("ReadFile operation completed\n");
 //
-//                     // Manual-reset event should be reset since it is now signaled.
+//                     // Manual-reset happening should be reset since it is now signaled.
 //                     ResetEvent(stOverlapped.hEvent);
 //                  }
 //               }

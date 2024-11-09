@@ -73,7 +73,7 @@ typedef struct _cef_select_client_certificate_callback_t {
 } cef_select_client_certificate_callback_t;
 
 ///
-/// Implement this structure to handle events related to browser requests. The
+/// Implement this structure to handle happenings related to browser requests. The
 /// functions of this structure will be called on the thread indicated.
 ///
 typedef struct _cef_request_handler_t {
@@ -93,7 +93,7 @@ typedef struct _cef_request_handler_t {
   /// |errorCode| value of ERR_ABORTED. The |user_gesture| value will be true
   /// (1) if the browser navigated via explicit user gesture (e.g. clicking a
   /// link) or false (0) if it navigated automatically (e.g. via the
-  /// DomContentLoaded event).
+  /// DomContentLoaded happening).
   ///
   int(CEF_CALLBACK* on_before_browse)(struct _cef_request_handler_t* self,
                                       struct _cef_browser_t* browser,
@@ -114,7 +114,7 @@ typedef struct _cef_request_handler_t {
   /// the browser based on standard Chromium behaviors (e.g. current tab, new
   /// tab, etc). The |user_gesture| value will be true (1) if the browser
   /// navigated via explicit user gesture (e.g. clicking a link) or false (0) if
-  /// it navigated automatically (e.g. via the DomContentLoaded event). Return
+  /// it navigated automatically (e.g. via the DomContentLoaded happening). Return
   /// true (1) to cancel the navigation or false (0) to allow the navigation to
   /// proceed in the source browser's top-level frame.
   ///

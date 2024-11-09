@@ -43,7 +43,7 @@
 class CefView;
 
 ///
-/// Implement this interface to handle view events. All size and position values
+/// Implement this interface to handle view happenings. All size and position values
 /// are in density independent pixels (DIP) unless otherwise indicated. The
 /// methods of this class will be called on the browser process UI thread unless
 /// otherwise indicated.

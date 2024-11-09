@@ -49,7 +49,7 @@
                                          /* host                           */
 #define SRB_DIR_OUT               0x10   /* Transfer from host to SCSI     */
                                          /* target                         */
-#define SRB_EVENT_NOTIFY          0x40   /* Enable ASPI event notification */
+#define SRB_EVENT_NOTIFY          0x40   /* Enable ASPI happening notification */
 #define RESIDUAL_COUNT_SUPPORTED  0x02   /* Extended buffer flag           */
 #define MAX_SRB_TIMEOUT       1080001u   /* 30 hour maximum timeout in sec */
 #define DEFAULT_SRB_TIMEOUT   1080001u   /* use max.timeout by default     */

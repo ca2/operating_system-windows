@@ -48,7 +48,7 @@ extern "C" {
 #endif
 
 ///
-/// Implement this structure to handle events related to commands. The functions
+/// Implement this structure to handle happenings related to commands. The functions
 /// of this structure will be called on the UI thread.
 ///
 typedef struct _cef_command_handler_t {

@@ -150,7 +150,7 @@ int kill_process(nssm_service_t *service, HANDLE process_handle, unsigned long p
 
   kill_t k = { pid, exitcode, 0 };
 
-  /* Try to send a Control-C event to the console. */
+  /* Try to send a Control-C happening to the console. */
   if (service->stop_method & NSSM_STOP_METHOD_CONSOLE) {
     if (! kill_console(service, &k)) return 1;
   }
@@ -186,7 +186,7 @@ int kill_process(nssm_service_t *service, HANDLE process_handle, unsigned long p
   return 0;
 }
 
-/* Simulate a Control-C event to our console (shared with the app). */
+/* Simulate a Control-C happening to our console (shared with the app). */
 int kill_console(nssm_service_t *service, kill_t *k) {
   unsigned long ret;
 
@@ -216,14 +216,14 @@ int kill_console(nssm_service_t *service, kill_t *k) {
     }
   }
 
-  /* Ignore the event ourselves. */
+  /* Ignore the happening ourselves. */
   ret = 0;
   if (! SetConsoleCtrlHandler(0, true)) {
     log_event(EVENTLOG_ERROR_TYPE, NSSM_EVENT_SETCONSOLECTRLHANDLER_FAILED, service->name, error_string(GetLastError()), 0);
     ret = 4;
   }
 
-  /* Send the event. */
+  /* Send the happening. */
   if (! ret) {
     if (! GenerateConsoleCtrlEvent(CTRL_C_EVENT, 0)) {
       log_event(EVENTLOG_ERROR_TYPE, NSSM_EVENT_GENERATECONSOLECTRLEVENT_FAILED, service->name, error_string(GetLastError()), 0);

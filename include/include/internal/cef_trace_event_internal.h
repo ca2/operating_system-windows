@@ -48,7 +48,7 @@ extern "C" {
 // - |copy| is used to avoid memory scoping issues with the |name| and
 //   |arg_name| parameters by copying them
 // - |id| is used to disambiguate counters with the same name, or match async
-//   trace events
+//   trace happenings
 
 CEF_EXPORT void cef_trace_event_instant(const char* category,
                                         const char* name,

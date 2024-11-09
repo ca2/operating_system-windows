@@ -48,7 +48,7 @@ extern "C" {
 
 ///
 /// Implement this structure to receive accessibility notification when
-/// accessibility events have been registered. The functions of this structure
+/// accessibility happenings have been registered. The functions of this structure
 /// will be called on the UI thread.
 ///
 typedef struct _cef_accessibility_handler_t {

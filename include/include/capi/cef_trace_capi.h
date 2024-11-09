@@ -69,7 +69,7 @@ typedef struct _cef_end_tracing_callback_t {
 } cef_end_tracing_callback_t;
 
 ///
-/// Start tracing events on all processes. Tracing is initialized asynchronously
+/// Start tracing happenings on all processes. Tracing is initialized asynchronously
 /// and |callback| will be executed on the UI thread after initialization is
 /// complete.
 ///
@@ -89,7 +89,7 @@ CEF_EXPORT int cef_begin_tracing(const cef_string_t* categories,
                                  struct _cef_completion_callback_t* callback);
 
 ///
-/// Stop tracing events on all processes.
+/// Stop tracing happenings on all processes.
 ///
 /// This function will fail and return false (0) if a previous call to
 /// CefEndTracingAsync is already pending or if CefBeginTracing was not called.
@@ -107,7 +107,7 @@ CEF_EXPORT int cef_end_tracing(const cef_string_t* tracing_file,
 ///
 /// Returns the current system trace time or, if none is defined, the current
 /// high-res time. Can be used by clients to synchronize with the time
-/// information in trace events.
+/// information in trace happenings.
 ///
 CEF_EXPORT int64 cef_now_from_system_trace_time(void);
 

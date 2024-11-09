@@ -173,7 +173,7 @@ enum AVPacketSideDataType {
     AV_PKT_DATA_STRINGS_METADATA,
 
     /**
-     * Subtitle event position
+     * Subtitle happening position
      * @code
      * u32le x1
      * u32le y1

@@ -43,7 +43,7 @@
 #include "include/cef_frame.h"
 
 ///
-/// Implement this interface to handle events related to CefFrame life span. The
+/// Implement this interface to handle happenings related to CefFrame life span. The
 /// order of callbacks is:
 ///
 /// (1) During initial CefBrowserHost creation and navigation of the main frame:

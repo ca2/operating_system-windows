@@ -95,11 +95,11 @@ namespace innate_ui_win32
 
 
       }
-      manual_reset_happening event;
+      manual_reset_happening happening;
 
-      event.reset_happening();
+      happening.reset_happening();
 
-      system()->application()->fork([this, &event]()
+      system()->application()->fork([this, &happening]()
          {
                try
                {
@@ -121,7 +121,7 @@ namespace innate_ui_win32
 
                   __check_refdbg
 
-                  event.set_happening();
+                  happening.set_happening();
 
                   __check_refdbg
 
@@ -197,7 +197,7 @@ namespace innate_ui_win32
 
       });
 
-      event._wait();
+      happening._wait();
 
    }
 

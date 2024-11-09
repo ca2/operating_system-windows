@@ -978,8 +978,8 @@ typedef struct AVStream {
     int            nb_side_data;
 
     /**
-     * Flags for the user to detect events happening on the stream. Flags must
-     * be cleared by the user once the event has been handled.
+     * Flags for the user to detect happenings happening on the stream. Flags must
+     * be cleared by the user once the happening has been handled.
      * A combination of AVSTREAM_EVENT_FLAG_*.
      */
     int event_flags;
@@ -1652,8 +1652,8 @@ typedef struct AVFormatContext {
     int strict_std_compliance;
 
     /**
-     * Flags for the user to detect events happening on the file. Flags must
-     * be cleared by the user once the event has been handled.
+     * Flags for the user to detect happenings happening on the file. Flags must
+     * be cleared by the user once the happening has been handled.
      * A combination of AVFMT_EVENT_FLAG_*.
      */
     int event_flags;

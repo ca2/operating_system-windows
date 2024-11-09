@@ -30,7 +30,7 @@
 
 ///
 /// \file
-/// Trace events are for tracking application performance and resource usage.
+/// Trace happenings are for tracking application performance and resource usage.
 /// Macros are provided to track:
 ///    Begin and end of function calls
 ///    Counters
@@ -60,7 +60,7 @@
 ///   }
 /// </pre>
 ///
-/// Additional parameters can be associated with an event:
+/// Additional parameters can be associated with an happening:
 /// <pre>
 ///   void doSomethingCostly2(int howMuch) {
 ///     TRACE_EVENT1("MY_SUBSYSTEM", "doSomethingCostly",
@@ -102,7 +102,7 @@
 ///   }
 /// </pre>
 ///
-/// The trace event also supports counters, which is a way to track a quantity
+/// The trace happening also supports counters, which is a way to track a quantity
 /// as it varies over time. Counters are created with the following macro:
 /// <pre>
 ///   TRACE_COUNTER1("MY_SUBSYSTEM", "myCounter", g_myCounterValue);
@@ -173,7 +173,7 @@
 #include "include/internal/cef_trace_event_internal.h"
 
 ///
-/// Records a pair of begin and end events called "name" for the current
+/// Records a pair of begin and end happenings called "name" for the current
 /// scope, with 0, 1 or 2 associated arguments. If the category is not
 /// enabled, then this does nothing.
 /// - category and name strings must have application lifetime (statics or
@@ -190,7 +190,7 @@
                         arg2_val, false);                                      \
   CEF_INTERNAL_TRACE_END_ON_SCOPE_CLOSE(category, name)
 
-// Implementation detail: trace event macros create temporary variable names.
+// Implementation detail: trace happening macros create temporary variable names.
 // These macros give each temporary variable a unique name based on the line
 // number to prevent name collisions.
 #define CEF_INTERNAL_TRACE_EVENT_UID3(a, b) cef_trace_event_unique_##a##b
@@ -198,13 +198,13 @@
 #define CEF_INTERNAL_TRACE_EVENT_UID(name_prefix) \
   CEF_INTERNAL_TRACE_EVENT_UID2(name_prefix, __LINE__)
 
-// Implementation detail: internal macro to end end event when the scope ends.
+// Implementation detail: internal macro to end end happening when the scope ends.
 #define CEF_INTERNAL_TRACE_END_ON_SCOPE_CLOSE(category, name)            \
   cef_trace_event::CefTraceEndOnScopeClose CEF_INTERNAL_TRACE_EVENT_UID( \
       profileScope)(category, name)
 
 ///
-/// Records a single event called "name" immediately, with 0, 1 or 2
+/// Records a single happening called "name" immediately, with 0, 1 or 2
 /// associated arguments. If the category is not enabled, then this
 /// does nothing.
 /// - category and name strings must have application lifetime (statics or
@@ -228,7 +228,7 @@
                           arg2_val, true)
 
 ///
-/// Records a single BEGIN event called "name" immediately, with 0, 1 or 2
+/// Records a single BEGIN happening called "name" immediately, with 0, 1 or 2
 /// associated arguments. If the category is not enabled, then this
 /// does nothing.
 /// - category and name strings must have application lifetime (statics or
@@ -252,7 +252,7 @@
                         arg2_val, true)
 
 ///
-/// Records a single END event for "name" immediately. If the category
+/// Records a single END happening for "name" immediately. If the category
 /// is not enabled, then this does nothing.
 /// - category and name strings must have application lifetime (statics or
 ///   literals). They may not include " chars.
@@ -337,21 +337,21 @@
                        value2_name, value2_val, true)
 
 ///
-/// Records a single ASYNC_BEGIN event called "name" immediately, with 0, 1 or 2
+/// Records a single ASYNC_BEGIN happening called "name" immediately, with 0, 1 or 2
 /// associated arguments. If the category is not enabled, then this
 /// does nothing.
 /// - category and name strings must have application lifetime (statics or
 ///   literals). They may not include " chars.
-/// - |id| is used to match the ASYNC_BEGIN event with the ASYNC_END event.
-///   ASYNC events are considered to match if their category, name and id values
+/// - |id| is used to match the ASYNC_BEGIN happening with the ASYNC_END happening.
+///   ASYNC happenings are considered to match if their category, name and id values
 ///   all match. |id| must either be a pointer or an integer value up to 64
 ///   bits. If it's a pointer, the bits will be xored with a hash of the process
 ///   ID sothat the same pointer on two different processes will not collide.
 /// An asynchronous operation can consist of multiple phases. The first phase is
 /// defined by the ASYNC_BEGIN calls. Additional phases can be defined using the
 /// ASYNC_STEP_BEGIN macros. When the operation completes, call ASYNC_END.
-/// An async operation can span threads and processes, but all events in that
-/// operation must use the same |name| and |id|. Each event can have its own
+/// An async operation can span threads and processes, but all happenings in that
+/// operation must use the same |name| and |id|. Each happening can have its own
 /// args.
 ///
 #define TRACE_EVENT_ASYNC_BEGIN0(category, name, id) \
@@ -374,12 +374,12 @@
                               arg2_name, arg2_val, true)
 
 ///
-/// Records a single ASYNC_STEP_INTO event for |step| immediately. If the
+/// Records a single ASYNC_STEP_INTO happening for |step| immediately. If the
 /// category is not enabled, then this does nothing. The |name| and |id| must
-/// match the ASYNC_BEGIN event above. The |step| param identifies this step
-/// within the async event. This should be called at the beginning of the next
-/// phase of an asynchronous operation. The ASYNC_BEGIN event must not have any
-/// ASYNC_STEP_PAST events.
+/// match the ASYNC_BEGIN happening above. The |step| param identifies this step
+/// within the async happening. This should be called at the beginning of the next
+/// phase of an asynchronous operation. The ASYNC_BEGIN happening must not have any
+/// ASYNC_STEP_PAST happenings.
 ///
 #define TRACE_EVENT_ASYNC_STEP_INTO0(category, name, id, step) \
   cef_trace_event_async_step_into(category, name, id, step, NULL, 0, false)
@@ -395,12 +395,12 @@
                                   arg1_val, true)
 
 ///
-/// Records a single ASYNC_STEP_PAST event for |step| immediately. If the
+/// Records a single ASYNC_STEP_PAST happening for |step| immediately. If the
 /// category is not enabled, then this does nothing. The |name| and |id| must
-/// match the ASYNC_BEGIN event above. The |step| param identifies this step
-/// within the async event. This should be called at the beginning of the next
-/// phase of an asynchronous operation. The ASYNC_BEGIN event must not have any
-/// ASYNC_STEP_INTO events.
+/// match the ASYNC_BEGIN happening above. The |step| param identifies this step
+/// within the async happening. This should be called at the beginning of the next
+/// phase of an asynchronous operation. The ASYNC_BEGIN happening must not have any
+/// ASYNC_STEP_INTO happenings.
 ///
 #define TRACE_EVENT_ASYNC_STEP_PAST0(category, name, id, step) \
   cef_trace_event_async_step_past(category, name, id, step, NULL, 0, false)
@@ -416,7 +416,7 @@
                                   arg1_val, true)
 
 ///
-/// Records a single ASYNC_END event for "name" immediately. If the category
+/// Records a single ASYNC_END happening for "name" immediately. If the category
 /// is not enabled, then this does nothing.
 ///
 #define TRACE_EVENT_ASYNC_END0(category, name, id) \

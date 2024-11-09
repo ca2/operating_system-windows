@@ -91,7 +91,7 @@ typedef struct _cef_permission_prompt_callback_t {
 } cef_permission_prompt_callback_t;
 
 ///
-/// Implement this structure to handle events related to permission requests.
+/// Implement this structure to handle happenings related to permission requests.
 /// The functions of this structure will be called on the browser process UI
 /// thread.
 ///

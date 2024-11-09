@@ -92,7 +92,7 @@ typedef struct _cef_render_process_handler_t {
       struct _cef_browser_t* browser);
 
   ///
-  /// Return the handler for browser load status events.
+  /// Return the handler for browser load status happenings.
   ///
   struct _cef_load_handler_t*(CEF_CALLBACK* get_load_handler)(
       struct _cef_render_process_handler_t* self);

@@ -114,7 +114,7 @@ namespace windowing_win32
       NotificationFilter.dbcc_classguid = guid;
 
       auto hdevnotify = RegisterDeviceNotification(
-         m_hwnd,                     // events recipient
+         m_hwnd,                     // happenings recipient
          &NotificationFilter,        // type of device
          DEVICE_NOTIFY_WINDOW_HANDLE // type of recipient handle
       );

@@ -101,7 +101,7 @@ namespace music
             virtual void SetTempoChangeFlag(bool bSet = true);
             virtual bool IsChangingTempo();
 
-            virtual void OnEvent(::music::midi::sequence::event* pevent);
+            virtual void OnHappening(::music::midi::sequence::happening* pevent);
 
 
             void     close_file();
@@ -151,9 +151,9 @@ namespace music
 
             ::e_status WorkSeek(musical_tick tickPosition, LPMIDIHDR lpmh);
 
-            ::e_status StreamEvent(musical_tick tickDelta, ::music::midi::event* Event, LPMIDIHDR lpmh, musical_tick tickMax, unsigned int cbPrerollNomimalMax);
+            ::e_status StreamEvent(musical_tick tickDelta, ::music::midi::happening* Event, LPMIDIHDR lpmh, musical_tick tickMax, unsigned int cbPrerollNomimalMax);
 
-            ::e_status StreamEventF1(musical_tick tickDelta, array < ::music::midi::event*, ::music::midi::event* >& eventptra, LPMIDIHDR lpmh, musical_tick tickMax, unsigned int cbPrerollNomimalMax);
+            ::e_status StreamEventF1(musical_tick tickDelta, array < ::music::midi::happening*, ::music::midi::happening* >& eventptra, LPMIDIHDR lpmh, musical_tick tickMax, unsigned int cbPrerollNomimalMax);
 
             ::e_status InsertParmData(musical_tick tickDelta, LPMIDIHDR lpmh);
 

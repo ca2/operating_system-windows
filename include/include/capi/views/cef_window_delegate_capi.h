@@ -49,7 +49,7 @@ extern "C" {
 struct _cef_window_t;
 
 ///
-/// Implement this structure to handle window events. The functions of this
+/// Implement this structure to handle window happenings. The functions of this
 /// structure will be called on the browser process UI thread unless otherwise
 /// indicated.
 ///
@@ -173,12 +173,12 @@ typedef struct _cef_window_delegate_t {
 
   ///
   /// Called after all other controls in the window have had a chance to handle
-  /// the event. |event| contains information about the keyboard event. Return
-  /// true (1) if the keyboard event was handled or false (0) otherwise.
+  /// the happening. |happening| contains information about the keyboard happening. Return
+  /// true (1) if the keyboard happening was handled or false (0) otherwise.
   ///
   int(CEF_CALLBACK* on_key_event)(struct _cef_window_delegate_t* self,
                                   struct _cef_window_t* window,
-                                  const cef_key_event_t* event);
+                                  const cef_key_event_t* happening);
 } cef_window_delegate_t;
 
 #ifdef __cplusplus

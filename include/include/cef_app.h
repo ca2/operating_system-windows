@@ -158,7 +158,7 @@ class CefApp : public virtual CefBaseRefCounted {
       CefRawPtr<CefSchemeRegistrar> registrar) {}
 
   ///
-  /// Return the handler for resource bundle events. If
+  /// Return the handler for resource bundle happenings. If
   /// cef_settings_t.pack_loading_disabled is true a handler must be returned.
   /// If no handler is returned resources will be loaded from pack files. This
   /// method is called by the browser and render processes on multiple threads.

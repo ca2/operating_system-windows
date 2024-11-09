@@ -82,7 +82,7 @@ class CefRenderProcessHandler : public virtual CefBaseRefCounted {
   virtual void OnBrowserDestroyed(CefRefPtr<CefBrowser> browser) {}
 
   ///
-  /// Return the handler for browser load status events.
+  /// Return the handler for browser load status happenings.
   ///
   /*--cef()--*/
   virtual CefRefPtr<CefLoadHandler> GetLoadHandler() { return nullptr; }

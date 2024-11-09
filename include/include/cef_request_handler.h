@@ -65,7 +65,7 @@ class CefSelectClientCertificateCallback : public virtual CefBaseRefCounted {
 };
 
 ///
-/// Implement this interface to handle events related to browser requests. The
+/// Implement this interface to handle happenings related to browser requests. The
 /// methods of this class will be called on the thread indicated.
 ///
 /*--cef(source=client)--*/
@@ -85,7 +85,7 @@ class CefRequestHandler : public virtual CefBaseRefCounted {
   /// CefLoadHandler::OnLoadError will be called with an |errorCode| value of
   /// ERR_ABORTED. The |user_gesture| value will be true if the browser
   /// navigated via explicit user gesture (e.g. clicking a link) or false if it
-  /// navigated automatically (e.g. via the DomContentLoaded event).
+  /// navigated automatically (e.g. via the DomContentLoaded happening).
   ///
   /*--cef()--*/
   virtual bool OnBeforeBrowse(CefRefPtr<CefBrowser> browser,
@@ -108,7 +108,7 @@ class CefRequestHandler : public virtual CefBaseRefCounted {
   /// the browser based on standard Chromium behaviors (e.g. current tab,
   /// new tab, etc). The |user_gesture| value will be true if the browser
   /// navigated via explicit user gesture (e.g. clicking a link) or false if it
-  /// navigated automatically (e.g. via the DomContentLoaded event). Return true
+  /// navigated automatically (e.g. via the DomContentLoaded happening). Return true
   /// to cancel the navigation or false to allow the navigation to proceed in
   /// the source browser's top-level frame.
   ///

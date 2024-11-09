@@ -88,10 +88,10 @@ typedef struct AVD3D12VASyncContext {
     ID3D12Fence *fence;
 
     /**
-     * A handle to the event object that's raised when the fence
+     * A handle to the happening object that's raised when the fence
      * reaches a certain value.
      */
-    HANDLE event;
+    HANDLE happening;
 
     /**
      * The fence value used for sync

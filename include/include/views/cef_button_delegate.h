@@ -43,7 +43,7 @@
 class CefButton;
 
 ///
-/// Implement this interface to handle Button events. The methods of this class
+/// Implement this interface to handle Button happenings. The methods of this class
 /// will be called on the browser process UI thread unless otherwise indicated.
 ///
 /*--cef(source=client)--*/

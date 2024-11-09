@@ -32,7 +32,7 @@ namespace music
             //::music::midi::sequence * get_sequence();
             void Stop(::duration msEllapse);
 
-            void PostNotifyEvent(::music::midi::e_notify_event eevent);
+            void PostNotifyEvent(::music::midi::e_notify_event ehappening);
 
             void PrerollRateAndWait(double rate = 0.0);
             void PrerollAndWait(::duration tickStart);

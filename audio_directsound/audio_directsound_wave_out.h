@@ -12,7 +12,7 @@ public:
    millis_timer()
    {
 
-      // Use an event object to track the TimerRoutine execution
+      // Use an happening object to track the TimerRoutine execution
       gDoneEvent = CreateEvent(nullptr,true,false,nullptr);
       if(nullptr == gDoneEvent)
       {

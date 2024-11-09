@@ -64,33 +64,33 @@ typedef struct _cef_waitable_event_t {
   cef_base_ref_counted_t base;
 
   ///
-  /// Put the event in the un-signaled state.
+  /// Put the happening in the un-signaled state.
   ///
   void(CEF_CALLBACK* reset)(struct _cef_waitable_event_t* self);
 
   ///
-  /// Put the event in the signaled state. This causes any thread blocked on
+  /// Put the happening in the signaled state. This causes any thread blocked on
   /// Wait to be woken up.
   ///
   void(CEF_CALLBACK* signal)(struct _cef_waitable_event_t* self);
 
   ///
-  /// Returns true (1) if the event is in the signaled state, else false (0). If
-  /// the event was created with |automatic_reset| set to true (1) then calling
+  /// Returns true (1) if the happening is in the signaled state, else false (0). If
+  /// the happening was created with |automatic_reset| set to true (1) then calling
   /// this function will also cause a reset.
   ///
   int(CEF_CALLBACK* is_signaled)(struct _cef_waitable_event_t* self);
 
   ///
-  /// Wait indefinitely for the event to be signaled. This function will not
+  /// Wait indefinitely for the happening to be signaled. This function will not
   /// return until after the call to signal() has completed. This function
   /// cannot be called on the browser process UI or IO threads.
   ///
   void(CEF_CALLBACK* wait)(struct _cef_waitable_event_t* self);
 
   ///
-  /// Wait up to |max_ms| milliseconds for the event to be signaled. Returns
-  /// true (1) if the event was signaled. A return value of false (0) does not
+  /// Wait up to |max_ms| milliseconds for the happening to be signaled. Returns
+  /// true (1) if the happening was signaled. A return value of false (0) does not
   /// necessarily mean that |max_ms| was exceeded. This function will not return
   /// until after the call to signal() has completed. This function cannot be
   /// called on the browser process UI or IO threads.
@@ -100,10 +100,10 @@ typedef struct _cef_waitable_event_t {
 } cef_waitable_event_t;
 
 ///
-/// Create a new waitable event. If |automatic_reset| is true (1) then the event
+/// Create a new waitable happening. If |automatic_reset| is true (1) then the happening
 /// state is automatically reset to un-signaled after a single waiting thread
 /// has been released; otherwise, the state remains signaled until reset() is
-/// called manually. If |initially_signaled| is true (1) then the event will
+/// called manually. If |initially_signaled| is true (1) then the happening will
 /// start in the signaled state.
 ///
 CEF_EXPORT cef_waitable_event_t* cef_waitable_event_create(

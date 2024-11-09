@@ -48,7 +48,7 @@ extern "C" {
 #endif
 
 ///
-/// Implement this structure to handle events related to keyboard input. The
+/// Implement this structure to handle happenings related to keyboard input. The
 /// functions of this structure will be called on the UI thread.
 ///
 typedef struct _cef_keyboard_handler_t {
@@ -58,28 +58,28 @@ typedef struct _cef_keyboard_handler_t {
   cef_base_ref_counted_t base;
 
   ///
-  /// Called before a keyboard event is sent to the renderer. |event| contains
-  /// information about the keyboard event. |os_event| is the operating system
-  /// event message, if any. Return true (1) if the event was handled or false
-  /// (0) otherwise. If the event will be handled in on_key_event() as a
+  /// Called before a keyboard happening is sent to the renderer. |happening| contains
+  /// information about the keyboard happening. |os_event| is the operating system
+  /// happening message, if any. Return true (1) if the happening was handled or false
+  /// (0) otherwise. If the happening will be handled in on_key_event() as a
   /// keyboard shortcut set |is_keyboard_shortcut| to true (1) and return false
   /// (0).
   ///
   int(CEF_CALLBACK* on_pre_key_event)(struct _cef_keyboard_handler_t* self,
                                       struct _cef_browser_t* browser,
-                                      const cef_key_event_t* event,
+                                      const cef_key_event_t* happening,
                                       cef_event_handle_t os_event,
                                       int* is_keyboard_shortcut);
 
   ///
   /// Called after the renderer and JavaScript in the page has had a chance to
-  /// handle the event. |event| contains information about the keyboard event.
-  /// |os_event| is the operating system event message, if any. Return true (1)
-  /// if the keyboard event was handled or false (0) otherwise.
+  /// handle the happening. |happening| contains information about the keyboard happening.
+  /// |os_event| is the operating system happening message, if any. Return true (1)
+  /// if the keyboard happening was handled or false (0) otherwise.
   ///
   int(CEF_CALLBACK* on_key_event)(struct _cef_keyboard_handler_t* self,
                                   struct _cef_browser_t* browser,
-                                  const cef_key_event_t* event,
+                                  const cef_key_event_t* happening,
                                   cef_event_handle_t os_event);
 } cef_keyboard_handler_t;
 

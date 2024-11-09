@@ -61,7 +61,7 @@ typedef struct _cef_dev_tools_message_observer_t {
   ///
   /// Method that will be called on receipt of a DevTools protocol message.
   /// |browser| is the originating browser instance. |message| is a UTF8-encoded
-  /// JSON dictionary representing either a function result or an event.
+  /// JSON dictionary representing either a function result or an happening.
   /// |message| is only valid for the scope of this callback and should be
   /// copied if necessary. Return true (1) if the message was handled or false
   /// (0) if the message should be further processed and passed to the
@@ -107,7 +107,7 @@ typedef struct _cef_dev_tools_message_observer_t {
       size_t result_size);
 
   ///
-  /// Method that will be called on receipt of a DevTools protocol event.
+  /// Method that will be called on receipt of a DevTools protocol happening.
   /// |browser| is the originating browser instance. |function| is the
   /// "function" value. |params| is the UTF8-encoded JSON "params" dictionary
   /// value (which may be NULL). |params| is only valid for the scope of this
@@ -134,7 +134,7 @@ typedef struct _cef_dev_tools_message_observer_t {
   /// Method that will be called when the DevTools agent has detached. |browser|
   /// is the originating browser instance. Any function results that were
   /// pending before the agent became detached will not be delivered, and any
-  /// active event subscriptions will be canceled.
+  /// active happening subscriptions will be canceled.
   ///
   void(CEF_CALLBACK* on_dev_tools_agent_detached)(
       struct _cef_dev_tools_message_observer_t* self,

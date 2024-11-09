@@ -329,12 +329,12 @@ class CefBrowserHost : public virtual CefBaseRefCounted {
   virtual CefRefPtr<CefBrowser> GetBrowser() = 0;
 
   ///
-  /// Request that the browser close. The JavaScript 'onbeforeunload' event will
-  /// be fired. If |force_close| is false the event handler, if any, will be
+  /// Request that the browser close. The JavaScript 'onbeforeunload' happening will
+  /// be fired. If |force_close| is false the happening handler, if any, will be
   /// allowed to prompt the user and the user can optionally cancel the close.
   /// If |force_close| is true the prompt will not be displayed and the close
   /// will proceed. Results in a call to CefLifeSpanHandler::DoClose() if the
-  /// event handler allows the close or if |force_close| is true. See
+  /// happening handler allows the close or if |force_close| is true. See
   /// CefLifeSpanHandler::DoClose() documentation for additional usage
   /// information.
   ///
@@ -582,7 +582,7 @@ class CefBrowserHost : public virtual CefBaseRefCounted {
 
   ///
   /// Add an observer for DevTools protocol messages (method results and
-  /// events). The observer will remain registered until the returned
+  /// happenings). The observer will remain registered until the returned
   /// Registration object is destroyed. See the SendDevToolsMessage
   /// documentation for additional usage information.
   ///
@@ -663,31 +663,31 @@ class CefBrowserHost : public virtual CefBaseRefCounted {
   virtual void SendExternalBeginFrame() = 0;
 
   ///
-  /// Send a key event to the browser.
+  /// Send a key happening to the browser.
   ///
   /*--cef()--*/
-  virtual void SendKeyEvent(const CefKeyEvent& event) = 0;
+  virtual void SendKeyEvent(const CefKeyEvent& happening) = 0;
 
   ///
-  /// Send a mouse click event to the browser. The |x| and |y| coordinates are
+  /// Send a mouse click happening to the browser. The |x| and |y| coordinates are
   /// relative to the upper-left corner of the view.
   ///
   /*--cef()--*/
-  virtual void SendMouseClickEvent(const CefMouseEvent& event,
+  virtual void SendMouseClickEvent(const CefMouseEvent& happening,
                                    MouseButtonType type,
                                    bool mouseUp,
                                    int clickCount) = 0;
 
   ///
-  /// Send a mouse move event to the browser. The |x| and |y| coordinates are
+  /// Send a mouse move happening to the browser. The |x| and |y| coordinates are
   /// relative to the upper-left corner of the view.
   ///
   /*--cef()--*/
-  virtual void SendMouseMoveEvent(const CefMouseEvent& event,
+  virtual void SendMouseMoveEvent(const CefMouseEvent& happening,
                                   bool mouseLeave) = 0;
 
   ///
-  /// Send a mouse wheel event to the browser. The |x| and |y| coordinates are
+  /// Send a mouse wheel happening to the browser. The |x| and |y| coordinates are
   /// relative to the upper-left corner of the view. The |deltaX| and |deltaY|
   /// values represent the movement delta in the X and Y directions
   /// respectively. In order to scroll inside select popups with window
@@ -695,18 +695,18 @@ class CefBrowserHost : public virtual CefBaseRefCounted {
   /// properly.
   ///
   /*--cef()--*/
-  virtual void SendMouseWheelEvent(const CefMouseEvent& event,
+  virtual void SendMouseWheelEvent(const CefMouseEvent& happening,
                                    int deltaX,
                                    int deltaY) = 0;
 
   ///
-  /// Send a touch event to the browser for a windowless browser.
+  /// Send a touch happening to the browser for a windowless browser.
   ///
   /*--cef()--*/
-  virtual void SendTouchEvent(const CefTouchEvent& event) = 0;
+  virtual void SendTouchEvent(const CefTouchEvent& happening) = 0;
 
   ///
-  /// Send a capture lost event to the browser.
+  /// Send a capture lost happening to the browser.
   ///
   /*--cef()--*/
   virtual void SendCaptureLostEvent() = 0;
@@ -813,7 +813,7 @@ class CefBrowserHost : public virtual CefBaseRefCounted {
   ///
   /*--cef()--*/
   virtual void DragTargetDragEnter(CefRefPtr<CefDragData> drag_data,
-                                   const CefMouseEvent& event,
+                                   const CefMouseEvent& happening,
                                    DragOperationsMask allowed_ops) = 0;
 
   ///
@@ -823,7 +823,7 @@ class CefBrowserHost : public virtual CefBaseRefCounted {
   /// This method is only used when window rendering is disabled.
   ///
   /*--cef()--*/
-  virtual void DragTargetDragOver(const CefMouseEvent& event,
+  virtual void DragTargetDragOver(const CefMouseEvent& happening,
                                   DragOperationsMask allowed_ops) = 0;
 
   ///
@@ -842,7 +842,7 @@ class CefBrowserHost : public virtual CefBaseRefCounted {
   /// This method is only used when window rendering is disabled.
   ///
   /*--cef()--*/
-  virtual void DragTargetDrop(const CefMouseEvent& event) = 0;
+  virtual void DragTargetDrop(const CefMouseEvent& happening) = 0;
 
   ///
   /// Call this method when the drag operation started by a
@@ -897,7 +897,7 @@ class CefBrowserHost : public virtual CefBaseRefCounted {
   /// For windowless browsers accessibility will be enabled in TreeOnly mode
   /// (which corresponds to kAccessibilityModeWebContentsOnly in Chromium). In
   /// this mode renderer accessibility is enabled, the full tree is computed,
-  /// and events are passed to CefAccessibiltyHandler, but platform
+  /// and happenings are passed to CefAccessibiltyHandler, but platform
   /// accessibility objects are not created. The client may implement platform
   /// accessibility objects using CefAccessibiltyHandler callbacks if desired.
   ///

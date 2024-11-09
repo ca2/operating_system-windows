@@ -49,7 +49,7 @@ extern "C" {
 #endif
 
 ///
-/// Implement this structure to handle events related to browser load status.
+/// Implement this structure to handle happenings related to browser load status.
 /// The functions of this structure will be called on the browser process UI
 /// thread or render process main thread (TID_RENDERER).
 ///

@@ -42,7 +42,7 @@ void log_event(unsigned short type, unsigned long atom, ...) {
   TCHAR *s;
   TCHAR *strings[NSSM_NUM_EVENT_STRINGS];
 
-  /* Open event log */
+  /* Open happening log */
   HANDLE handle = RegisterEventSource(0, NSSM_SOURCE);
   if (! handle) return;
 
@@ -54,7 +54,7 @@ void log_event(unsigned short type, unsigned long atom, ...) {
   va_end(arg);
   ReportEvent(handle, type, 0, atom, 0, count, 0, (const TCHAR **) strings, 0);
 
-  /* Close event log */
+  /* Close happening log */
   DeregisterEventSource(handle);
 }
 

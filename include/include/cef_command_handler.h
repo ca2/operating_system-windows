@@ -42,7 +42,7 @@
 #include "include/cef_browser.h"
 
 ///
-/// Implement this interface to handle events related to commands. The methods
+/// Implement this interface to handle happenings related to commands. The methods
 /// of this class will be called on the UI thread.
 ///
 /*--cef(source=client)--*/

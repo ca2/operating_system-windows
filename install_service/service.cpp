@@ -1479,7 +1479,7 @@ TCHAR *service_status_text(unsigned long status) {
 
 void log_service_control(TCHAR *service_name, unsigned long control, bool handled) {
   TCHAR *text = service_control_text(control);
-  unsigned long event;
+  unsigned long happening;
 
   if (! text) {
     /* "0x" + 8 x hex + nullptr */
@@ -1494,20 +1494,20 @@ void log_service_control(TCHAR *service_name, unsigned long control, bool handle
       return;
     }
 
-    event = NSSM_EVENT_SERVICE_CONTROL_UNKNOWN;
+    happening = NSSM_EVENT_SERVICE_CONTROL_UNKNOWN;
   }
-  else if (handled) event = NSSM_EVENT_SERVICE_CONTROL_HANDLED;
-  else event = NSSM_EVENT_SERVICE_CONTROL_NOT_HANDLED;
+  else if (handled) happening = NSSM_EVENT_SERVICE_CONTROL_HANDLED;
+  else happening = NSSM_EVENT_SERVICE_CONTROL_NOT_HANDLED;
 
-  log_event(EVENTLOG_INFORMATION_TYPE, event, service_name, text, 0);
+  log_event(EVENTLOG_INFORMATION_TYPE, happening, service_name, text, 0);
 
-  if (event == NSSM_EVENT_SERVICE_CONTROL_UNKNOWN) {
+  if (happening == NSSM_EVENT_SERVICE_CONTROL_UNKNOWN) {
     HeapFree(GetProcessHeap(), 0, text);
   }
 }
 
 /* Service control handler */
-unsigned long WINAPI service_control_handler(unsigned long control, unsigned long event, void *data, void *context) {
+unsigned long WINAPI service_control_handler(unsigned long control, unsigned long happening, void *data, void *context) {
   nssm_service_t *service = (nssm_service_t *) context;
 
   switch (control) {

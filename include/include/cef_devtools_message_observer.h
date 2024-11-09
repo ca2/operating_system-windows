@@ -52,7 +52,7 @@ class CefDevToolsMessageObserver : public virtual CefBaseRefCounted {
   ///
   /// Method that will be called on receipt of a DevTools protocol message.
   /// |browser| is the originating browser instance. |message| is a UTF8-encoded
-  /// JSON dictionary representing either a method result or an event. |message|
+  /// JSON dictionary representing either a method result or an happening. |message|
   /// is only valid for the scope of this callback and should be copied if
   /// necessary. Return true if the message was handled or false if the message
   /// should be further processed and passed to the OnDevToolsMethodResult or
@@ -98,7 +98,7 @@ class CefDevToolsMessageObserver : public virtual CefBaseRefCounted {
                                       size_t result_size) {}
 
   ///
-  /// Method that will be called on receipt of a DevTools protocol event.
+  /// Method that will be called on receipt of a DevTools protocol happening.
   /// |browser| is the originating browser instance. |method| is the "method"
   /// value. |params| is the UTF8-encoded JSON "params" dictionary value (which
   /// may be empty). |params| is only valid for the scope of this callback and
@@ -123,7 +123,7 @@ class CefDevToolsMessageObserver : public virtual CefBaseRefCounted {
   /// Method that will be called when the DevTools agent has detached. |browser|
   /// is the originating browser instance. Any method results that were pending
   /// before the agent became detached will not be delivered, and any active
-  /// event subscriptions will be canceled.
+  /// happening subscriptions will be canceled.
   ///
   /*--cef()--*/
   virtual void OnDevToolsAgentDetached(CefRefPtr<CefBrowser> browser) {}

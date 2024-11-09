@@ -59,7 +59,7 @@ class CefThread : public CefBaseRefCounted {
   /// Create and start a new thread. This method does not block waiting for the
   /// thread to run initialization. |display_name| is the name that will be used
   /// to identify the thread. |priority| is the thread execution priority.
-  /// |message_loop_type| indicates the set of asynchronous events that the
+  /// |message_loop_type| indicates the set of asynchronous happenings that the
   /// thread can process. If |stoppable| is true the thread will stopped and
   /// joined on destruction or when Stop() is called; otherwise, the thread
   /// cannot be stopped and will be leaked on shutdown. On Windows the

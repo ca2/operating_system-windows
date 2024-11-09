@@ -1522,7 +1522,7 @@
 //
 // MessageText:
 //
-// Error setting null handler for Control-C events sent to service %1.
+// Error setting null handler for Control-C happenings sent to service %1.
 // SetConsoleCtrlHandler() failed:
 // %2
 //
@@ -1533,7 +1533,7 @@
 //
 // MessageText:
 //
-// Error generating Control-C event for service %1.
+// Error generating Control-C happening for service %1.
 // GenerateConsoleCtrlEvent() failed:
 // %2
 //
@@ -1626,7 +1626,7 @@
 //
 // MessageText:
 //
-// The registry value %2, used to specify the maximum number of ::times to wait for service %1 to stop after sending a Control-C event, was not of type REG_DWORD.  The default time of %3 ::times will be used.
+// The registry value %2, used to specify the maximum number of ::times to wait for service %1 to stop after sending a Control-C happening, was not of type REG_DWORD.  The default time of %3 ::times will be used.
 //
 #define NSSM_EVENT_BOGUS_KILL_CONSOLE_GRACE_PERIOD 0x80000420L
 

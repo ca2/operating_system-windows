@@ -32,9 +32,9 @@ namespace music
 
             void     WorkSeek(::duration tickPosition, LPMIDIHDR lpmh);
 
-            void     StreamEvent(::duration tickDelta, ::music::midi::event * Event, LPMIDIHDR lpmh, ::duration tickMax, unsigned int cbPrerollNomimalMax);
+            void     StreamEvent(::duration tickDelta, ::music::midi::happening * Event, LPMIDIHDR lpmh, ::duration tickMax, unsigned int cbPrerollNomimalMax);
 
-            void     StreamEventF1(::duration tickDelta, array < ::music::midi::event *, ::music::midi::event * > & eventptra, LPMIDIHDR lpmh, ::duration tickMax, unsigned int cbPrerollNomimalMax);
+            void     StreamEventF1(::duration tickDelta, array < ::music::midi::happening *, ::music::midi::happening * > & eventptra, LPMIDIHDR lpmh, ::duration tickMax, unsigned int cbPrerollNomimalMax);
 
             void     InsertParmData(::duration tickDelta, LPMIDIHDR lpmh);
 

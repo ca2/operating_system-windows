@@ -55,10 +55,10 @@
 class CefWaitableEvent : public CefBaseRefCounted {
  public:
   ///
-  /// Create a new waitable event. If |automatic_reset| is true then the event
+  /// Create a new waitable happening. If |automatic_reset| is true then the happening
   /// state is automatically reset to un-signaled after a single waiting thread
   /// has been released; otherwise, the state remains signaled until Reset() is
-  /// called manually. If |initially_signaled| is true then the event will start
+  /// called manually. If |initially_signaled| is true then the happening will start
   /// in the signaled state.
   ///
   /*--cef()--*/
@@ -67,28 +67,28 @@ class CefWaitableEvent : public CefBaseRefCounted {
       bool initially_signaled);
 
   ///
-  /// Put the event in the un-signaled state.
+  /// Put the happening in the un-signaled state.
   ///
   /*--cef()--*/
   virtual void Reset() = 0;
 
   ///
-  /// Put the event in the signaled state. This causes any thread blocked on
+  /// Put the happening in the signaled state. This causes any thread blocked on
   /// Wait to be woken up.
   ///
   /*--cef()--*/
   virtual void Signal() = 0;
 
   ///
-  /// Returns true if the event is in the signaled state, else false. If the
-  /// event was created with |automatic_reset| set to true then calling this
+  /// Returns true if the happening is in the signaled state, else false. If the
+  /// happening was created with |automatic_reset| set to true then calling this
   /// method will also cause a reset.
   ///
   /*--cef()--*/
   virtual bool IsSignaled() = 0;
 
   ///
-  /// Wait indefinitely for the event to be signaled. This method will not
+  /// Wait indefinitely for the happening to be signaled. This method will not
   /// return until after the call to Signal() has completed. This method cannot
   /// be called on the browser process UI or IO threads.
   ///
@@ -96,8 +96,8 @@ class CefWaitableEvent : public CefBaseRefCounted {
   virtual void Wait() = 0;
 
   ///
-  /// Wait up to |max_ms| milliseconds for the event to be signaled. Returns
-  /// true if the event was signaled. A return value of false does not
+  /// Wait up to |max_ms| milliseconds for the happening to be signaled. Returns
+  /// true if the happening was signaled. A return value of false does not
   /// necessarily mean that |max_ms| was exceeded. This method will not return
   /// until after the call to Signal() has completed. This method cannot be
   /// called on the browser process UI or IO threads.
