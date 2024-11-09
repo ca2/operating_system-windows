@@ -18,7 +18,7 @@
 //
 #include "framework.h"
 #include "file_watcher.h"
-#include "acme/parallelization/event.h"
+#include "acme/parallelization/happening.h"
 #include "acme/filesystem/watcher/action.h"
 #include "acme/filesystem/watcher/listener.h"
 #include "acme/_operating_system.h"
