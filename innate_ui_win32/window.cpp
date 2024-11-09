@@ -6,7 +6,7 @@
 #include "acme/platform/platform.h"
 #include "acme/platform/application.h"
 #include "acme/platform/system.h"
-#include "acme/parallelization/manual_reset_event.h"
+#include "acme/parallelization/manual_reset_happening.h"
 #include "acme/prototype/geometry2d/size.h"
 //#include "acme/operating_system/windows/nano/user/user.h"
 #include "acme/user/user/mouse.h"

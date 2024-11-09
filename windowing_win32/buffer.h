@@ -3,7 +3,7 @@
 #pragma once
 
 
-#include "acme/parallelization/manual_reset_event.h"
+#include "acme/parallelization/manual_reset_happening.h"
 #include "aura/graphics/graphics/double_buffer.h"
 #include "aura/graphics/graphics/bitmap_source_buffer.h"
 #include "acme/graphics/image/pixmap.h"
@@ -54,7 +54,7 @@ namespace windowing_win32
       oswindow                      m_hwndIpc;
       ::int_rectangle               m_rectangleLast;
       ::task_pointer                m_ptaskUpdateScreen;
-      ::manual_reset_event          m_eventUpdateScreen;
+      ::manual_reset_happening          m_eventUpdateScreen;
       bool                          m_bSingleBufferMode;
 
 

@@ -18,7 +18,7 @@ namespace audio_mmsystem
       WAVEFORMATEX                     m_waveformatex;
       class ::time                       m_time;
       class ::time                       m_timePosition;
-      manual_reset_event               m_evFree;
+      manual_reset_happening               m_evFree;
       ::int_array                        m_iaFree;
       ::particle                       m_pparticleMutexFree;
 

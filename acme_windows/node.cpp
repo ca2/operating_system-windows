@@ -18,7 +18,7 @@
 #include "acme/operating_system/process.h"
 #include "acme/operating_system/summary.h"
 #include "acme/parallelization/install_mutex.h"
-#include "acme/parallelization/manual_reset_event.h"
+#include "acme/parallelization/manual_reset_happening.h"
 #include "acme/parallelization/synchronous_lock.h"
 #include "acme/platform/scoped_restore.h"
 #include "acme/platform/application.h"

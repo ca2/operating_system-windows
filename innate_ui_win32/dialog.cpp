@@ -5,7 +5,7 @@
 #include "acme/platform/platform.h"
 #include "acme/platform/system.h"
 #include "acme/platform/application.h"
-#include "acme/parallelization/manual_reset_event.h"
+#include "acme/parallelization/manual_reset_happening.h"
 
 
 namespace innate_ui_win32

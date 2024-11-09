@@ -3,7 +3,7 @@
 #include "midi.h"
 #include "acme/filesystem/file/binary_stream.h"
 #include "acme/filesystem/file/memory_file.h"
-#include "acme/parallelization/manual_reset_event.h"
+#include "acme/parallelization/manual_reset_happening.h"
 #include "acme/parallelization/synchronous_lock.h"
 #include "acme/prototype/mathematics/clip.h"
 #include "acme/prototype/string/hex.h"
@@ -1681,7 +1681,7 @@ namespace music
 
             UINT uDeviceID = (UINT)m_iDevice;
 
-            manual_reset_event event;
+            manual_reset_happening event;
 
             event.ResetEvent();
 

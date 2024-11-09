@@ -1519,7 +1519,7 @@ pacmedir->create(pathTarget.folder()))
       }
       else
       {
-         pointer_array < manual_reset_event > eventa(this);
+         pointer_array < manual_reset_happening > eventa(this);
          eventa.set_size_create(this,uiProcessorCount);
          synchronization_array ptra;
          for (index u = 0; u < uiProcessorCount; u++)
@@ -1562,7 +1562,7 @@ pacmedir->create(pathTarget.folder()))
    }
 
 
-   production::compress_thread::compress_thread(production * pproduction, manual_reset_event * peventFinished) :
+   production::compress_thread::compress_thread(production * pproduction, manual_reset_happening * peventFinished) :
       ::object(pproduction->get_application()),
       thread(pproduction->get_application()),
       m_pevFinished(peventFinished)

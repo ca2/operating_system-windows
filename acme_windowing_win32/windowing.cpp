@@ -6,7 +6,7 @@
 #include "acme/constant/message.h"
 #include "acme/nano/nano.h"
 #include "acme/user/micro/user.h"
-#include "acme/parallelization/manual_reset_event.h"
+#include "acme/parallelization/manual_reset_happening.h"
 #include "acme/platform/node.h"
 #include "acme/platform/system.h"
 #include "acme/_operating_system.h"
@@ -113,7 +113,7 @@ namespace win32
       //      CLASS_DECL_ACME bool main_synchronous(const class time & time, const ::procedure & function)
       //      {
 
-            auto pevent = __allocate manual_reset_event();
+            auto pevent = __allocate manual_reset_happening();
 
             _user_post([procedure, pevent]
                       {

@@ -11,7 +11,7 @@ namespace windowing_win32
    public:
 
 
-      manual_reset_event m_event;
+      manual_reset_happening m_event;
       oswindow m_oswindow;
       HDC m_hdc;
 

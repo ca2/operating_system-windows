@@ -1,7 +1,7 @@
 #pragma once
 
 
-#include "acme/parallelization/manual_reset_event.h"
+#include "acme/parallelization/manual_reset_happening.h"
 #include "app-veriwell/multimedia/music/midi/sequencer.h"
 #include "buffer.h"
 
@@ -32,7 +32,7 @@ namespace music
             int                        m_iBufferSize;
             
             
-            manual_reset_event         m_eventLongMessage;
+            manual_reset_happening         m_eventLongMessage;
             HMIDIOUT                   m_hmidiout;
 
 

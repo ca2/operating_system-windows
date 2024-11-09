@@ -46,9 +46,9 @@ namespace production
          virtual public thread
       {
       public:
-         compress_thread(production * pproduction, manual_reset_event * peventFinished);
+         compress_thread(production * pproduction, manual_reset_happening * peventFinished);
 
-         manual_reset_event * m_pevFinished;
+         manual_reset_happening * m_pevFinished;
          production *   m_pproduction;
          unsigned int                m_dwThreadAffinityMask;
          virtual void     run() override;
@@ -132,7 +132,7 @@ namespace production
       string                  m_strIndexMd5;
 
       bool                    m_bEndStatus;
-      manual_reset_event      m_evFinish;
+      manual_reset_happening      m_evFinish;
 
 
       production(::particle * pparticle);

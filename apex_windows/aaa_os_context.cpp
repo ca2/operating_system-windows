@@ -9,7 +9,7 @@
 #include "acme/filesystem/filesystem/directory_system.h"
 #include "acme/filesystem/filesystem/path_system.h"
 
-#include "acme/parallelization/manual_reset_event.h"
+#include "acme/parallelization/manual_reset_happening.h"
 #include "acme/parallelization/task_flag.h"
 #include "acme/platform/node.h"
 #include "acme/prototype/collection/_container.h"
@@ -2182,7 +2182,7 @@ namespace apex_windows
 
       auto path = m_papplication->defer_process_matter_path(pathParam);
 
-      manual_reset_event manualresetevent;
+      manual_reset_happening manualresetevent;
 
       ::e_status estatusFileOpen = ::success;
       int iShellExecuteExitCode = 33;
@@ -2457,7 +2457,7 @@ namespace apex_windows
    void os_context::hidden_run(const class time & timeWait, const ::file::path & pathParam, const string & strParams, const ::file::path & pathFolder)
    {
 
-      auto pevent = __allocate manual_reset_event();
+      auto pevent = __allocate manual_reset_happening();
 
       auto path = m_papplication->defer_process_matter_path(pathParam);
 
