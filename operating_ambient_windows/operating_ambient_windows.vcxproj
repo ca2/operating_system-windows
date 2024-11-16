@@ -758,6 +758,9 @@
     <ProjectReference Include="..\aura_windows\aura_windows.vcxproj">
       <Project>{94c3715a-7fbf-4455-917b-20cb7f40c58c}</Project>
     </ProjectReference>
+    <ProjectReference Include="..\node_windows\node_windows.vcxproj">
+      <Project>{c1ccdf2e-9f27-45d3-b67a-b2eeb1754e72}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\windowing_win32\windowing_win32.vcxproj">
       <Project>{77d5757e-2923-40f8-9cc0-a07fa5bcc236}</Project>
     </ProjectReference>

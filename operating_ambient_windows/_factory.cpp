@@ -8,7 +8,7 @@
 
 
 //__FACTORY_EXPORT void windowing_win32_factory(::factory::factory * pfactory);
-__FACTORY_IMPORT void operating_ambient_windows_factory(::factory::factory * pfactory);
+__FACTORY_IMPORT void node_windows_factory(::factory::factory * pfactory);
 
 
 
@@ -17,7 +17,7 @@ __FACTORY_EXPORT void operating_ambient_windows_factory(::factory::factory * pfa
 {
 
 
-   operating_ambient_windows_factory(pfactory);
+   node_windows_factory(pfactory);
 
    //windowing_win32_factory(pfactory);
 
