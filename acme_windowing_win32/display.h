@@ -24,7 +24,7 @@ namespace win32
             //::array < ::procedure >      m_procedureaPost;
             ::int_point                   m_pointCursor2;
 
-            enum_display_type          m_edisplaytype;
+            //enum_display_type          m_edisplaytype;
 
 
             //inline static display * g_p = nullptr;
@@ -39,8 +39,8 @@ namespace win32
 
             virtual void open_display();
 
-            virtual enum_display_type get_display_type();
-            virtual void initialize_display_type(enum_display_type edisplaytype);
+            //virtual enum_display_type get_display_type();
+            //virtual void initialize_display_type(enum_display_type edisplaytype);
 
             void kick_idle() override;
             virtual void display_post(const ::procedure & procedure);

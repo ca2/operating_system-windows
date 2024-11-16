@@ -159,7 +159,7 @@ namespace draw2d_gdiplus
 
       //}
 
-      init(ppixmap->m_sizeRaw, ppixmap->image32(), ppixmap->m_iScan);
+      pixmap::initialize(ppixmap->m_sizeRaw, ppixmap->image32(), ppixmap->m_iScan);
 
       m_size = ppixmap->m_size;
 
@@ -320,7 +320,7 @@ namespace draw2d_gdiplus
 
       m_pgraphics = pgraphics;
 
-      pixmap::init(size, pimage32, iScan);
+      pixmap::initialize(size, pimage32, iScan);
 
       m_pgraphics->m_pimage = this;
       //m_sizeRaw.cx() = width;

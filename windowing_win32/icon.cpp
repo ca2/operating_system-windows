@@ -903,7 +903,7 @@ namespace windowing_win32
 
          ::pixmap pixmap;
 
-         pixmap.init(size, pimage32, iScan);
+         pixmap.initialize(size, pimage32, iScan);
 
          hdc = ::CreateCompatibleDC(nullptr);
 

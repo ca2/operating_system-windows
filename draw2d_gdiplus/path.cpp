@@ -484,7 +484,7 @@ namespace draw2d_gdiplus
    }
 
 
-   bool path::internal_add_arc(const ::double_rectangle & rectangle, const ::angle_double & angleBeg, const ::angle_double & angleEnd)
+   bool path::internal_add_arc(const ::double_rectangle & rectangle, const ::double_angle & angleBeg, const ::double_angle & angleEnd)
    {
 
       if (m_ppath == nullptr)
@@ -652,7 +652,7 @@ namespace draw2d_gdiplus
    }
 
 
-   bool path::_set(::draw2d::graphics * pgraphics, const ::arc_double & arc)
+   bool path::_set(::draw2d::graphics * pgraphics, const ::double_arc & arc)
    {
 
       ::double_rectangle rectangle;
@@ -702,7 +702,7 @@ namespace draw2d_gdiplus
    }
 
 
-   bool path::_set(::draw2d::graphics* pgraphics, const ::lines_double & lines)
+   bool path::_set(::draw2d::graphics* pgraphics, const ::double_lines & lines)
    {
 
       ::array < Gdiplus::PointF > pointa;

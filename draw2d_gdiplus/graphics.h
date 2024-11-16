@@ -264,9 +264,9 @@ namespace draw2d_gdiplus
       void arc(double x1,double y1,double x2,double y2,double x3,double y3,double x4,double y4) override;
 
       //bool arc(int x1,int y1,int x2,int y2, angle start, angle extends) override;
-      void arc(double x1,double y1,double x2,double y2, ::angle_double start, ::angle_double extends) override;
+      void arc(double x1,double y1,double x2,double y2, ::double_angle start, ::double_angle extends) override;
 
-      void angle_arc(double x,double y, double nRadius, ::angle_double fStartAngle, ::angle_double fSweepAngle) override;
+      void angle_arc(double x,double y, double nRadius, ::double_angle fStartAngle, ::double_angle fSweepAngle) override;
       //bool arc_to(int x1, int y1, int x2, int y2, int x3, int y3, int x4, int y4) override;
       void arc_to(const double_rectangle &  prectangle, const double_point & pointStart, const double_point & pointEnd) override;
 

@@ -805,7 +805,7 @@ namespace draw2d_gdiplus
    //}
 
 
-   void graphics::arc(double x1, double y1, double w, double h, ::angle_double start, ::angle_double extends)
+   void graphics::arc(double x1, double y1, double w, double h, ::double_angle start, ::double_angle extends)
    {
 
       ::Gdiplus::RectF float_rectangle((Gdiplus::REAL)x1, (Gdiplus::REAL)y1, (Gdiplus::REAL)w, (Gdiplus::REAL)h);
@@ -3025,7 +3025,7 @@ namespace draw2d_gdiplus
 
    //}
 
-   void graphics::angle_arc(double x, double y, double nRadius, ::angle_double fStartAngle, ::angle_double fSweepAngle)
+   void graphics::angle_arc(double x, double y, double nRadius, ::double_angle fStartAngle, ::double_angle fSweepAngle)
    {
       //   //ASSERT(get_handle1() != nullptr);
       //   //return ::AngleArc(get_handle1(), x, y, nRadius, fStartAngle, fSweepAngle) != false;

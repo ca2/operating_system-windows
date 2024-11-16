@@ -27,7 +27,7 @@ namespace draw2d_gdiplus
       virtual ~path();
 
 
-      virtual bool internal_add_arc(const ::double_rectangle & rectangle, const ::angle_double & angleBeg, const ::angle_double & angleEnd);
+      virtual bool internal_add_arc(const ::double_rectangle & rectangle, const ::double_angle & angleBeg, const ::double_angle & angleEnd);
 
       virtual double_point internal_last_point();
 
@@ -55,11 +55,11 @@ namespace draw2d_gdiplus
 
       virtual bool _set(::draw2d::graphics* pgraphics, const ::draw2d::enum_item & eshape);
 
-      virtual bool _set(::draw2d::graphics* pgraphics, const ::arc_double & parc);
+      virtual bool _set(::draw2d::graphics* pgraphics, const ::double_arc & parc);
 
       virtual bool _set(::draw2d::graphics* pgraphics, const ::double_line & pline);
 
-      virtual bool _set(::draw2d::graphics* pgraphics, const ::lines_double & pline);
+      virtual bool _set(::draw2d::graphics* pgraphics, const ::double_lines & pline);
 
       virtual bool _set(::draw2d::graphics* pgraphics, const ::double_rectangle & rectangle);
 

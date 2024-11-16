@@ -29,7 +29,7 @@ namespace win32
 
             defer_create_synchronization();
 
-            m_edisplaytype = e_display_type_none;
+            //m_edisplaytype = e_display_type_none;
 
 
          }
@@ -128,41 +128,41 @@ RECT r;
          }
 
 
-         enum_display_type display::get_display_type()
-         {
+         //enum_display_type display::get_display_type()
+         //{
 
-            return m_edisplaytype;
+         //   return m_edisplaytype;
 
-         }
-
-
-         void display::initialize_display_type(enum_display_type edisplaytype)
-         {
-
-            m_edisplaytype = edisplaytype;
-
-         }
+         //}
 
 
+         //void display::initialize_display_type(enum_display_type edisplaytype)
+         //{
+
+         //   m_edisplaytype = edisplaytype;
+
+         //}
 
 
-         enum_display_type g_edisplaytype = e_display_type_none;
 
 
-         enum_display_type get_display_type()
-         {
-
-            return g_edisplaytype;
-
-         }
+         //enum_display_type g_edisplaytype = e_display_type_none;
 
 
-         void initialize_display_type(enum_display_type edisplaytype)
-         {
+         //enum_display_type get_display_type()
+         //{
 
-            g_edisplaytype = edisplaytype;
+         //   return g_edisplaytype;
 
-         }
+         //}
+
+
+         //void initialize_display_type(enum_display_type edisplaytype)
+         //{
+
+         //   g_edisplaytype = edisplaytype;
+
+         //}
          //::int_size display::get_main_screen_size()
          //{
 

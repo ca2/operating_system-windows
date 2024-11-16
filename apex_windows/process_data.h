@@ -26,7 +26,7 @@ public:
          dwProcessId ? dwProcessId : GetCurrentProcessId());
       if (m_hProcess)
       {
-         m_lpData = VirtualAllocEx(m_hProcess, nullptr, sizeof T,
+         m_lpData = VirtualAllocEx(m_hProcess, nullptr, sizeof(T),
             flAllocationType, flProtect);
          ASSERT(m_lpData);
       }
@@ -52,13 +52,13 @@ public:
    bool WriteData(const T & data)
    {
       return (m_hProcess && m_lpData) ? WriteProcessMemory(m_hProcess, m_lpData,
-         (const void *)&data, sizeof T, nullptr) : false;
+         (const void *)&data, sizeof(T), nullptr) : false;
    }
 
    //ReadData reads back data from memory in the foreign process
    bool ReadData(T * data)
    {
-      return (m_hProcess && m_lpData) ? ReadProcessMemory(m_hProcess, m_lpData, (LPVOID)data, sizeof T, nullptr) != false : false;
+      return (m_hProcess && m_lpData) ? ReadProcessMemory(m_hProcess, m_lpData, (LPVOID)data, sizeof(T), nullptr) != false : false;
    }
 
    //Templated ReadData that's used to read a specific data type from

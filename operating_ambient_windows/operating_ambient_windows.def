@@ -1,0 +1,5 @@
+LIBRARY "operating_ambient_windows"
+
+EXPORTS
+operating_ambient_windows_factory
+
