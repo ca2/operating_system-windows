@@ -32,6 +32,8 @@ namespace win32
          {
 
             m_bKeepRunningPostedProcedures = true;
+            m_bMessageThread = true;
+
          }
 
 
