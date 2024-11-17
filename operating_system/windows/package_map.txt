@@ -9,6 +9,7 @@ default_input=operating_system-windows/input_win32
 port/libcrypto=port/libcrypto-3-x64
 port/libssl=port/libssl-3-x64
 default_imaging=operating_system-windows_common/imaging_wic
+default_nano_graphics=operating_system-windows/nano_graphics_gdi
 default_write_text=operating_system-windows/write_text_win32
 default_acme_platform1=operating_system-windows/acme_windows
 default_acme_platform2=operating_system-windows_common/acme_windows_common
