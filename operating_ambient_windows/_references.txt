@@ -1,2 +1,3 @@
 app/aura
 operating_system-windows/windowing_win32
+operating_system-windows/node_windows
