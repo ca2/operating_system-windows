@@ -61,7 +61,7 @@ namespace ca2plugin_container
 
       virtual void restart_aura_ipc();
 
-      virtual void _001OnTimer(::timer * ptimer);
+      virtual void on_timer(::timer * ptimer);
 
       void _001Print(::draw2d::graphics_pointer & pgraphics);
 

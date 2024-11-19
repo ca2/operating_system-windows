@@ -1391,6 +1391,7 @@ namespace windowing_win32
    void windowing::set_dark_mode(bool bDarkMode)
    {
 
+      ::win32::acme::windowing::windowing::set_dark_mode(bDarkMode);
 
    }
 

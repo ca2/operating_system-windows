@@ -64,15 +64,15 @@ namespace ca2plugin_container
 
       ::hotplugin::host::install_message_routing(pchannel);
 
-      ////MESSAGE_LINK(WM_TIMER, pchannel, this,&host::_001OnTimer);
+      ////MESSAGE_LINK(WM_TIMER, pchannel, this,&host::on_timer);
 
    }
 
 
-   void host::_001OnTimer(::timer * ptimer)
+   void host::on_timer(::timer * ptimer)
    {
 
-      ::hotplugin::host::_001OnTimer(ptimer);
+      ::hotplugin::host::on_timer(ptimer);
 
       if(ptimer->m_uEvent == 2000 + 77 + 3)
       {

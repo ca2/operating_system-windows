@@ -89,7 +89,7 @@ namespace production
       //void handle(::topic * ptopic, ::context * pcontext) override;
       DECLARE_MESSAGE_HANDLER(_001OnLButtonDown);
       DECLARE_MESSAGE_HANDLER(_001OnLButtonUp);
-      virtual void _001OnTimer(::timer * ptimer);
+      virtual void on_timer(::timer * ptimer);
       DECLARE_MESSAGE_HANDLER(on_message_right_button_up);
       DECLARE_MESSAGE_HANDLER(on_message_destroy);
       DECLARE_MESSAGE_HANDLER(on_message_size);

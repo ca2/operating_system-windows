@@ -451,9 +451,9 @@ namespace production
 
 
 
-   void impact::_001OnTimer(::timer * ptimer)
+   void impact::on_timer(::timer * ptimer)
    {
-      ::user::scroll_impact::_001OnTimer(ptimer);
+      ::user::scroll_impact::on_timer(ptimer);
       if(ptimer->m_uEvent == e_timer_update_current_area)
       {
          if(is_window_visible())
