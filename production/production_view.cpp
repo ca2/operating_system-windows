@@ -202,7 +202,7 @@ namespace production
       pgraphics->SelectClipRgn(rgnClip);
       //single_lock synchronouslock(&m_pproduction->m_mutexStatus, true);
       //pgraphics->set_color(argb(0xcc, 90, 90, 90));
-      auto pbrush = __create < ::draw2d::brush >();
+      auto pbrush = __øcreate < ::draw2d::brush >();
       pbrush->create_solid(argb(0xcc, 90, 90, 90));
       pgraphics->SelectObject(brush);
       for(int i = iStart; i < m_pproduction->m_straStatus.get_size() && y < rectangleText.bottom(); i++)

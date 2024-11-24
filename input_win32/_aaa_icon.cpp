@@ -607,7 +607,7 @@ namespace windowing_win32
                if (bOk)
                {
 
-                  iconitem.m_hicon = (HICON)((icon *)this)->system()->node()->m_pauranode->HICON_from_image(pimageResized);
+                  iconitem.m_hicon = (HICON)((icon *)this)->system()->node()->HICON_from_image(pimageResized);
 
                }
 
@@ -855,7 +855,7 @@ namespace windowing_win32
 
       ::pointer<::image>pimage;
 
-      ::__construct(this, pimage);
+      ::__øconstruct(this, pimage);
 
       bool bOk = false;
 

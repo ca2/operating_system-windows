@@ -10,7 +10,7 @@ namespace node_windows
    node::node()
    {
 
-      m_pauranode = this;
+      //m_pauranode = this;
 
    }
 

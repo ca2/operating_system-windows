@@ -4661,7 +4661,7 @@ namespace acme_windows
    ::pointer < ::operating_system::application > node::module_path_application(const ::scoped_string& scopedstr)
    {
 
-      auto papplication = __create < ::operating_system::application >();
+      auto papplication = __øcreate < ::operating_system::application >();
 
       papplication->open_by_module_path(scopedstr);
 

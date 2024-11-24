@@ -2001,7 +2001,7 @@ pacmedir->create CreateDirectoryW last error(%d)=%s", dwError, pszError);
       //}
 
 
-//      void directory_system::__create(const char * pathParam)
+//      void directory_system::__øcreate(const char * pathParam)
 //      {
 //
 //         if (is(pathParam))

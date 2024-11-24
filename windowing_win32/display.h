@@ -124,6 +124,9 @@ namespace windowing_win32
       virtual bool _get_workspace_rectangle(::collection::index iMonitor, ::int_rectangle & rectangle);
 
 
+      ::int_size get_main_screen_size() override;
+
+
    };
 
 

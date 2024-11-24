@@ -186,7 +186,7 @@ namespace draw2d_gdiplus
             && size == m_sizeRaw)
       {
 
-         //auto ppen = __create < ::draw2d::pen > ();         return true;
+         //auto ppen = __øcreate < ::draw2d::pen > ();         return true;
 
          return;
 
@@ -236,9 +236,9 @@ namespace draw2d_gdiplus
       //}
 
       
-      auto pbitmap = __create < ::draw2d::bitmap >();
+      auto pbitmap = __øcreate < ::draw2d::bitmap >();
 
-      auto pgraphics = __create < ::draw2d::graphics >();
+      auto pgraphics = __øcreate < ::draw2d::graphics >();
 
       if (pbitmap.is_null() || pgraphics.is_null())
       {
@@ -719,7 +719,7 @@ namespace draw2d_gdiplus
 
       //estatus = 
       
-      __construct(pimage1);
+      __øconstruct(pimage1);
 
       //if (!estatus)
       //{
@@ -760,7 +760,7 @@ namespace draw2d_gdiplus
 
       //estatus = 
       
-      __construct(pimage2);
+      __øconstruct(pimage2);
       
       //if (!estatus)
       //{
@@ -803,7 +803,7 @@ namespace draw2d_gdiplus
 
       //estatus = 
       
-      __construct(pimageM);
+      __øconstruct(pimageM);
 
       //if (!estatus)
       //{

@@ -4856,7 +4856,7 @@ namespace draw2d_gdiplus
    //   //if (!shaperegion.holdee())
    //   //{
 
-   //   //   auto pregion = __create < ::draw2d::region >();
+   //   //   auto pregion = __øcreate < ::draw2d::region >();
 
    //   //   //pregion->m_pointOffset = m_pointAddShapeTranslate;
 
@@ -4916,7 +4916,7 @@ namespace draw2d_gdiplus
    //   //if (!shaperegion.holdee())
    //   //{
 
-   //   //   auto pregion= __create < ::draw2d::region >();
+   //   //   auto pregion= __øcreate < ::draw2d::region >();
 
    //   //   //pregion->m_pointOffset = m_pointAddShapeTranslate;
 
@@ -4979,7 +4979,7 @@ namespace draw2d_gdiplus
    //   //if (!shaperegion.holdee())
    //   //{
 
-   //   //   auto pregion = __create < ::draw2d::region >();
+   //   //   auto pregion = __øcreate < ::draw2d::region >();
 
    //   //   //pregion->m_pointOffset = m_pointAddShapeTranslate;
 
@@ -5724,14 +5724,14 @@ namespace draw2d_gdiplus
       //         break;
       //      case META_SETBKCOLOR:
       //      {
-      //         auto pbrush = __create < ::draw2d::brush >();
+      //         auto pbrush = __øcreate < ::draw2d::brush >();
       //         pbrush->create_solid(*(UNALIGNED ::color::color*)&pMetaRec->rdParm[0]);
       //         set(pbrush);
       //      }
       //      break;
       //      case META_SETTEXTCOLOR:
       //      {
-      //         auto pbrush = __create < ::draw2d::brush >();
+      //         auto pbrush = __øcreate < ::draw2d::brush >();
       //
       //         pbrush->create_solid(*(UNALIGNED ::color::color*)&pMetaRec->rdParm[0]);
       //         set(pbrush);
@@ -6964,7 +6964,7 @@ namespace draw2d_gdiplus
          ::double_point p1(x, y+a);
          ::double_point p2(x + s.cx(), y+a);
 
-         auto ppen = __create < ::draw2d::pen >();
+         auto ppen = __øcreate < ::draw2d::pen >();
 
          ppen->m_color = ::color::red;
 
@@ -8044,7 +8044,7 @@ namespace draw2d_gdiplus
 
    //            ::image::image_pointer pimage1;
    //            
-   //            auto estatus = __construct(pimage1);
+   //            auto estatus = __øconstruct(pimage1);
 
    //            if (!estatus)
    //            {

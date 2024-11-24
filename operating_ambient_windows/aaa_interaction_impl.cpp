@@ -167,7 +167,7 @@ namespace windows
    void interaction_impl::native_create_host()
    {
 
-      auto estatus = __construct(m_pwindow);
+      auto estatus = __øconstruct(m_pwindow);
 
       if (!estatus)
       {
@@ -2003,7 +2003,7 @@ namespace windows
 
    //   ASSERT(_is_window());
 
-   //   auto pgraphics = __create < ::draw2d::graphics > ();
+   //   auto pgraphics = __øcreate < ::draw2d::graphics > ();
 
    //   throw ::exception(todo);
 

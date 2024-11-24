@@ -1267,6 +1267,14 @@ namespace windowing_win32
    }
 
 
+   ::int_size display::get_main_screen_size()
+   {
+
+      return ::win32::acme::windowing::display::get_main_screen_size();
+
+   }
+
+
 } // namespace windowing_win32
 
 

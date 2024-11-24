@@ -10,7 +10,7 @@ namespace operating_ambient_windows
    node::node()
    {
 
-      m_pauranode = this;
+      //m_pauranode = this;
 
    }
 

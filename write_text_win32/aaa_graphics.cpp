@@ -5218,14 +5218,14 @@ namespace draw2d_gdiplus
 //         break;
 //      case META_SETBKCOLOR:
 //      {
-//         auto pbrush = __create < ::draw2d::brush >();
+//         auto pbrush = __øcreate < ::draw2d::brush >();
 //         pbrush->create_solid(*(UNALIGNED ::color::color*)&pMetaRec->rdParm[0]);
 //         set(pbrush);
 //      }
 //      break;
 //      case META_SETTEXTCOLOR:
 //      {
-//         auto pbrush = __create < ::draw2d::brush >();
+//         auto pbrush = __øcreate < ::draw2d::brush >();
 //
 //         pbrush->create_solid(*(UNALIGNED ::color::color*)&pMetaRec->rdParm[0]);
 //         set(pbrush);
@@ -7259,7 +7259,7 @@ namespace draw2d_gdiplus
 
    //            ::image::image_pointer pimage1;
    //            
-   //            auto estatus = __construct(pimage1);
+   //            auto estatus = __øconstruct(pimage1);
 
    //            if (!estatus)
    //            {

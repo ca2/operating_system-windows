@@ -68,7 +68,7 @@ namespace input_win32
    //
    //      //estatus = 
    //
-   //      __construct(m_pdisplay);
+   //      __øconstruct(m_pdisplay);
    //
    //      //if (!estatus)
    //      //{

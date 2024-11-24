@@ -264,7 +264,7 @@ namespace windowing_win32
       //MESSAGE_LINK(e_message_create, pchannel, pimpl, &::windowing::window::_001OnPrioCreate);
       auto psystem = system();
 
-      //auto pnode = psystem->m_pnode->m_pauranode->m_pWindowingWin32Node;
+      //auto pnode = psystem->m_pnode->m_pWindowingWin32Node;
 
       //auto emessageTaskbarCreated = pnode->m_emessageWindowsTaskbarCreatedMessage;
 
@@ -3776,7 +3776,7 @@ namespace windowing_win32
 
       ASSERT(::IsWindow(get_hwnd()));
 
-      auto pgraphics = __create < ::draw2d::graphics >();
+      auto pgraphics = __øcreate < ::draw2d::graphics >();
 
       throw ::exception(todo);
 

@@ -605,7 +605,7 @@ namespace apex_windows
       acme_windows::node::system_main();
 
       ////auto estatus = 
-      //system()->m_pnode->m_papexnode->thread_initialize(system());
+      //system()->m_pnode->thread_initialize(system());
 
       ////if (!estatus)
       ////{
@@ -1124,7 +1124,7 @@ namespace apex_windows
             if (strAppId.has_character())
             {
 
-               auto pnode = system()->node()->m_papexnode;
+               auto pnode = system()->node();
 
                string strAppName = papp->app_name();
 
@@ -1254,7 +1254,7 @@ namespace apex_windows
 
       //   directory_system()->create(pathLnk.folder());
 
-      //   system()->m_pnode->m_papexnode->shell_create_link(pathObj, pathLnk, "app=" + papplication->m_strAppName);
+      //   system()->m_pnode->shell_create_link(pathObj, pathLnk, "app=" + papplication->m_strAppName);
 
       //}
 
