@@ -311,7 +311,9 @@ namespace win32
                if (pelemental)
                {
 
-                  pelemental->draw(m_pnanodevice);
+                  pelemental->draw_background(m_pnanodevice);
+
+                  pelemental->draw_foreground(m_pnanodevice);
 
                }
 
@@ -655,6 +657,12 @@ namespace win32
       //}
 
 
+   ::oswindow window::oswindow()
+   {
+
+      return as_oswindow(m_hwnd);
+
+   }
 
          bool window::_is_light_theme()
          {
@@ -801,7 +809,20 @@ namespace win32
                if (pelemental)
                {
 
-                  pelemental->on_left_button_down(pmouse);
+                  pelemental->fore_on_left_button_down(pmouse);
+
+               }
+
+               if (!pmouse->m_bRet)
+               {
+
+
+                  if (pelemental)
+                  {
+
+                     pelemental->back_on_left_button_down(pmouse);
+
+                  }
 
                }
 
@@ -821,9 +842,23 @@ namespace win32
                if (pelemental)
                {
 
-                  pelemental->on_mouse_move(pmouse);
+                  pelemental->fore_on_mouse_move(pmouse);
 
                }
+
+               if (!pmouse->m_bRet)
+               {
+
+
+                  if (pelemental)
+                  {
+
+                     pelemental->fore_on_mouse_move(pmouse);
+
+                  }
+
+               }
+
 
             }
             break;
@@ -841,9 +876,23 @@ namespace win32
                if (pelemental)
                {
 
-                  pelemental->on_left_button_up(pmouse);
+                  pelemental->fore_on_left_button_up(pmouse);
 
                }
+
+               if (!pmouse->m_bRet)
+               {
+
+
+                  if (pelemental)
+                  {
+
+                     pelemental->back_on_left_button_up(pmouse);
+
+                  }
+
+               }
+
 
             }
             break;
@@ -861,9 +910,23 @@ namespace win32
                if (pelemental)
                {
 
-                  pelemental->on_right_button_down(pmouse);
+                  pelemental->fore_on_right_button_down(pmouse);
 
                }
+
+               if (!pmouse->m_bRet)
+               {
+
+
+                  if (pelemental)
+                  {
+
+                     pelemental->back_on_right_button_down(pmouse);
+
+                  }
+
+               }
+
 
             }
             break;
@@ -881,9 +944,23 @@ namespace win32
                if (pelemental)
                {
 
-                  pelemental->on_right_button_up(pmouse);
+                  pelemental->fore_on_right_button_up(pmouse);
 
                }
+
+               if (!pmouse->m_bRet)
+               {
+
+
+                  if (pelemental)
+                  {
+
+                     pelemental->back_on_right_button_up(pmouse);
+
+                  }
+
+               }
+
 
             }
             break;

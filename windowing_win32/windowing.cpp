@@ -299,7 +299,7 @@ namespace windowing_win32
 
 
 
-   ::windowing::window* windowing::window(oswindow oswindow)
+   ::acme::windowing::window* windowing::window(oswindow oswindow)
    {
 
       HWND hwnd = as_hwnd(oswindow);
@@ -706,7 +706,7 @@ namespace windowing_win32
    //}
 
 
-   ::windowing::window* windowing::get_mouse_capture(::thread* pthread)
+   ::acme::windowing::window* windowing::get_mouse_capture(::thread* pthread)
    {
 
       itask_t itask;
@@ -740,7 +740,7 @@ namespace windowing_win32
    }
 
 
-   bool windowing::defer_release_mouse_capture(::thread* pthread, ::windowing::window* pwindowDeferRelease)
+   bool windowing::defer_release_mouse_capture(::thread* pthread, ::acme::windowing::window* pwindowDeferRelease)
    {
 
       itask_t itask;

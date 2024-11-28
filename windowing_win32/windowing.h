@@ -67,7 +67,7 @@ namespace windowing_win32
 
       virtual ::windows::hwnd_array _get_hwnda(const ::user::interaction_array& userinteractiona);
 
-      virtual ::windowing::window * window(oswindow oswindow) override;
+      virtual ::acme::windowing::window * window(oswindow oswindow) override;
 
       virtual ::windowing_win32::window * _window(HWND hwnd);
 
@@ -104,13 +104,13 @@ namespace windowing_win32
       ::acme::windowing::window * get_keyboard_focus(::thread * pthread) override;
 
 
-      ::windowing::window * get_mouse_capture(::thread * pthread) override;
+      ::acme::windowing::window * get_mouse_capture(::thread * pthread) override;
 
       
       //HWND _get_mouse_capture(itask_t itask);
 
 
-      bool defer_release_mouse_capture(::thread* pthread, ::windowing::window* pwindowDeferRelease) override;
+      bool defer_release_mouse_capture(::thread* pthread, ::acme::windowing::window* pwindowDeferRelease) override;
       
 
       virtual void erase_window(::windowing::window * pwindow);

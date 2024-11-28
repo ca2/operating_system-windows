@@ -21,7 +21,7 @@ namespace innate_ui_win32
       dialog();
       ~dialog() override;
 
-
+      void create() override;
       void _create() override;
       void _get_class(WNDCLASSEXW & wcex);
 

@@ -41,6 +41,15 @@ namespace innate_ui_win32
 
    }
 
+
+   void dialog::create()
+   {
+
+      return ::innate_ui_win32::window::create();
+
+   }
+
+
    void dialog::_create()
    {
 
