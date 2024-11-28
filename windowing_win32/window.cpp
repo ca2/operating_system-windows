@@ -4024,9 +4024,11 @@ namespace windowing_win32
 
       ::oswindow oswindow = get_owner_oswindow();
 
-      auto pwindow = win32_windowing()->window(oswindow);
+      auto pacmewindowingwindow = win32_windowing()->window(oswindow);
 
-      return pwindow;
+      ::cast < ::windowing::window > pwindowingwindow = pacmewindowingwindow;
+
+      return pwindowingwindow;
 
    }
 
@@ -4057,7 +4059,7 @@ namespace windowing_win32
 
       }
 
-      return __oswindow(hwndOwner);
+      return as_oswindow(hwndOwner);
 
    }
 

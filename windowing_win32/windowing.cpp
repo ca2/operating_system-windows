@@ -1028,7 +1028,7 @@ namespace windowing_win32
       for (int i = 0; i < hwnda.get_count(); i++)
       {
 
-         auto puieWindow = uia.find_first(__oswindow(hwnda[i]));
+         auto puieWindow = uia.find_first(as_oswindow(hwnda[i]));
 
          auto puie = puieWindow->_001FromPoint(point);
 

@@ -103,7 +103,7 @@ namespace windowing_win32
 
 
       inline HWND get_hwnd() const { return (HWND)oswindow(); }
-      inline void set_hwnd(HWND hwnd) { set_oswindow(__oswindow(hwnd)); }
+      inline void set_hwnd(HWND hwnd) { set_oswindow(as_oswindow(hwnd)); }
 
       ::oswindow oswindow() const override;
       void _set_oswindow(::oswindow oswindow) override;

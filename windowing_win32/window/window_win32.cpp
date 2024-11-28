@@ -343,7 +343,7 @@ LRESULT CALLBACK __window_procedure(HWND hwnd, UINT message, WPARAM wparam, LPAR
 
          }
 
-         pwindow->set_oswindow(__oswindow(hwnd));
+         pwindow->set_oswindow(as_oswindow(hwnd));
 
          pwindow->set_os_data(hwnd);
 
