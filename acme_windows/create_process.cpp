@@ -999,9 +999,9 @@ namespace acme_windows
    void create_process::wait_process(const trace_function& tracefunction)
    {
 
-      //auto peventEndOut = __create_new < manual_reset_happening >();
+      //auto phappeningEndOut = __create_new < manual_reset_happening >();
 
-      //application()->fork([this, tracefunction, peventEndOut]()
+      //application()->fork([this, tracefunction, phappeningEndOut]()
 
       char szOut[4096];
       char szErr[4096];
@@ -1184,7 +1184,7 @@ namespace acme_windows
       //while (true)
       //{
 
-      //   if (peventEndOut->_wait(100_ms) && peventEndErr->_wait(100_ms))
+      //   if (phappeningEndOut->_wait(100_ms) && phappeningEndErr->_wait(100_ms))
       //   {
 
       //      break;

@@ -115,25 +115,25 @@ namespace win32
       //      CLASS_DECL_ACME bool main_synchronous(const class time & time, const ::procedure & function)
       //      {
 
-            auto pevent = __allocate manual_reset_happening();
+            auto phappening = __allocate manual_reset_happening();
 
-            _user_post([procedure, pevent]
+            _user_post([procedure, phappening]
                       {
 
                          procedure();
 
-                         pevent->set_happening();
+                         phappening->set_happening();
 
                       });
 
 
             auto timeout = procedure.timeout();
 
-            if (!pevent->wait(timeout))
+            if (!phappening->wait(timeout))
             {
 
                throw ::exception(error_timeout);
-               //pevent.release();
+               //phappening.release();
 
                //return false;
 

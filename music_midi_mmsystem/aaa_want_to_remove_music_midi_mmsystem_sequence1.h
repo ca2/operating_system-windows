@@ -93,7 +93,7 @@ namespace music
             int SetKeyShift(int iKeyShift);
             int GetKeyShift();
 
-            void on_midi_playback_end(::music::midi::sequence::happening * pevent);
+            void on_midi_playback_end(::music::midi::sequence::happening * phappening);
             virtual void     SetTempoShift(double dTempoShift);
 
             void OnPositionCB(LPMIDIHDR lpmidihdr);
@@ -118,7 +118,7 @@ namespace music
             //virtual bool is_in_operation();
             //virtual bool WasInSpecialModeV001();
 
-            virtual void OnHappening(::music::midi::sequence::happening * pevent);
+            virtual void OnHappening(::music::midi::sequence::happening * phappening);
 
 
             void     close_file() override;

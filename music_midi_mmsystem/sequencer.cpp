@@ -991,7 +991,7 @@ namespace music
                //post_midi_sequence_event(sequence::e_event_midi_stream_out, lpmidihdr);
                _synchronous_lock synchronouslock(synchronization());
 
-               //LPMIDIHDR lpmidihdr = (LPMIDIHDR)pevent->m_puserdata;
+               //LPMIDIHDR lpmidihdr = (LPMIDIHDR)phappening->m_puserdata;
 
                auto estatus = fill_buffer(lpmidihdr);
 
@@ -1224,7 +1224,7 @@ namespace music
          }
 
 
-         //void sequencer::on_midi_playback_end(sequence::happening * pevent)
+         //void sequencer::on_midi_playback_end(sequence::happening * phappening)
          //{
 
 
@@ -1232,12 +1232,12 @@ namespace music
          //}
 
 
-         void sequencer::OnHappening(sequence::happening * pevent)
+         void sequencer::OnHappening(sequence::happening * phappening)
          {
 
-            ::music::midi::sequencer::OnHappening(pevent);
+            ::music::midi::sequencer::OnHappening(phappening);
 
-            switch (pevent->m_eevent)
+            switch (phappening->m_ehappening)
             {
             case sequence::e_event_operation:
             {
@@ -1260,7 +1260,7 @@ namespace music
 
                //_synchronous_lock synchronouslock(synchronization());
 
-               //LPMIDIHDR lpmidihdr = (LPMIDIHDR)pevent->m_puserdata;
+               //LPMIDIHDR lpmidihdr = (LPMIDIHDR)phappening->m_puserdata;
 
                //void     estatus = fill_buffer(lpmidihdr);
 
@@ -1431,13 +1431,13 @@ namespace music
 
          //   ASSERT(this != nullptr);
 
-         //   happening * pevent = ___new happening();
+         //   happening * phappening = ___new happening();
 
          //   ptopic->m_atom = ehappening;
          //   ptopic->m_psequence = this;
          //   ptopic->m_puserdata = lpmidihdr;
 
-         //   return pevent;
+         //   return phappening;
 
          //}
 
@@ -1812,14 +1812,14 @@ namespace music
                return ::success;
             }
 
-            ::music::midi::happening * pevent;
+            ::music::midi::happening * phappening;
             int iSize = sizeof(file::midi_stream_happening_header);
             int i;
             for (i = 0; i < eventptra.get_size(); i++)
             {
-               pevent = eventptra[i];
-               ASSERT(pevent->GetFlags() & 1);
-               iSize += (int)pevent->size();
+               phappening = eventptra[i];
+               ASSERT(phappening->GetFlags() & 1);
+               iSize += (int)phappening->size();
                iSize += sizeof(file::midi_stream_happening_header);
             }
 
@@ -1833,11 +1833,11 @@ namespace music
             iSize = sizeof(file::midi_stream_happening_header);
             for (i = 0; i < eventptra.get_size(); i++)
             {
-               pevent = eventptra[i];
-               lpbParam = pevent->data();
+               phappening = eventptra[i];
+               lpbParam = phappening->data();
                lpdwType = (LPDWORD)lpbParam;
                pheader = (file::midi_stream_happening_header *)&m_psequence->m_pfile->m_memstorageF1.data()[iSize];
-               pheader->m_dwLength = (DWORD)pevent->size();
+               pheader->m_dwLength = (DWORD)phappening->size();
                pheader->m_dwType = *lpdwType;
                memory_copy(
                   &m_psequence->m_pfile->m_memstorageF1.data()[iSize + sizeof(file::midi_stream_happening_header)],
@@ -1868,7 +1868,7 @@ namespace music
 
          ::e_status sequencer::StreamEvent(
             musical_tick tickDelta,
-            ::music::midi::happening * pevent,
+            ::music::midi::happening * phappening,
             LPMIDIHDR lpmh,
             musical_tick tickMax,
             unsigned int cbPrerollNominalMax)
@@ -1876,7 +1876,7 @@ namespace music
 
             __UNREFERENCED_PARAMETER(tickMax);
 
-            if (pevent->GetFlags() & 1)
+            if (phappening->GetFlags() & 1)
             {
 
                return ::success;
@@ -1889,39 +1889,39 @@ namespace music
 
             lpdw = (LPDWORD)(lpmh->lpData + lpmh->dwBytesRecorded);
 
-            if (pevent->GetFlags() & 1)
+            if (phappening->GetFlags() & 1)
             {
 
                ASSERT(false);
 
             }
-            else if (pevent->GetFullType() < msg)
+            else if (phappening->GetFullType() < msg)
             {
 
                output_debug_string("Running Status");
 
             }
-            else if (pevent->GetFullType() < sys_ex)
+            else if (phappening->GetFullType() < sys_ex)
             {
 
-               if (pevent->GetType() == program_change)
+               if (phappening->GetType() == program_change)
                {
 
-                  int iTrack = pevent->GetTrack();
+                  int iTrack = phappening->GetTrack();
 
-                  int iProgramChange = pevent->GetChB1();
+                  int iProgramChange = phappening->GetChB1();
 
                   m_keyframe.rbProgram[iTrack] = (unsigned char)iProgramChange;
 
                }
-               else if (pevent->GetType() == control_change)
+               else if (phappening->GetType() == control_change)
                {
 
-                  int iTrack = pevent->GetTrack();
+                  int iTrack = phappening->GetTrack();
 
-                  int iController = pevent->GetChB1();
+                  int iController = phappening->GetChB1();
 
-                  int iControllerValue = pevent->GetChB2();
+                  int iControllerValue = phappening->GetChB2();
 
                   if (iController >= 0 && iController < 120)
                   {
@@ -1953,7 +1953,7 @@ namespace music
                if (!m_bHadNoteOn)
                {
 
-                  if (pevent->GetType() == note_on)
+                  if (phappening->GetType() == note_on)
                   {
 
                      m_bHadNoteOn = true;
@@ -1965,11 +1965,11 @@ namespace music
                if (m_psequence->m_pfile->m_iKeyShift)
                {
 
-                  if ((pevent->GetType() == note_on || pevent->GetType() == note_off)
-                     && !((m_keyframe.rbProgram[pevent->GetTrack()] == 0)))
+                  if ((phappening->GetType() == note_on || phappening->GetType() == note_off)
+                     && !((m_keyframe.rbProgram[phappening->GetTrack()] == 0)))
                   {
 
-                     int iNotePitch = pevent->GetNotePitch();
+                     int iNotePitch = phappening->GetNotePitch();
 
                      iNotePitch += m_psequence->m_pfile->m_iKeyShift;
 
@@ -1987,7 +1987,7 @@ namespace music
 
                      }
 
-                     pevent->SetNotePitch((unsigned char)iNotePitch);
+                     phappening->SetNotePitch((unsigned char)iNotePitch);
 
                   }
 
@@ -2003,24 +2003,24 @@ namespace music
                *lpdw++ = (DWORD)tickDelta;
                *lpdw++ = 0;
                *lpdw++ = (((DWORD)MEVT_SHORTMSG) << 24) |
-                  ((DWORD)pevent->GetFullType()) |
-                  (((DWORD)pevent->GetChB1()) << 8) |
-                  (((DWORD)pevent->GetChB2()) << 16);
+                  ((DWORD)phappening->GetFullType()) |
+                  (((DWORD)phappening->GetChB1()) << 8) |
+                  (((DWORD)phappening->GetChB2()) << 16);
 
                lpmh->dwBytesRecorded += 3 * sizeof(DWORD);
 
             }
-            else if (pevent->GetFullType() == ::music::midi::meta &&
-               pevent->GetMetaType() == e_meta_end_of_track)
+            else if (phappening->GetFullType() == ::music::midi::meta &&
+               phappening->GetMetaType() == e_meta_end_of_track)
             {
                /* These are ignoreable since smfReadNextEvent()
                ** takes care of track merging
                */
             }
-            else if (::music::midi::meta == pevent->GetFullType() && e_meta_tempo == pevent->GetMetaType())
+            else if (::music::midi::meta == phappening->GetFullType() && e_meta_tempo == phappening->GetMetaType())
             {
 
-               if (pevent->size() != 3)
+               if (phappening->size() != 3)
                {
 
                   informationf("smfReadEvents: Corrupt tempo happening");
@@ -2036,9 +2036,9 @@ namespace music
 
                }
 
-               dwTempo = (((DWORD)pevent->data()[0]) << 16) |
-                  (((DWORD)pevent->data()[1]) << 8) |
-                  ((DWORD)pevent->data()[2]);
+               dwTempo = (((DWORD)phappening->data()[0]) << 16) |
+                  (((DWORD)phappening->data()[1]) << 8) |
+                  ((DWORD)phappening->data()[2]);
 
                dwTempo = (DWORD)((double)dwTempo / m_psequence->m_pfile->GetTempoShiftRate());
 
@@ -2097,10 +2097,10 @@ namespace music
             //_RPT0(_CRT_WARN, "\n");
 
             //    }
-            else if (pevent->GetFullType() != ::music::midi::meta)
+            else if (phappening->GetFullType() != ::music::midi::meta)
             {
 
-               int iFullType = pevent->GetFullType();
+               int iFullType = phappening->GetFullType();
             
                //if (iFullType == sys_ex || iFullType == sys_ex_end)
                if (iFullType == sys_ex)
@@ -2114,15 +2114,15 @@ namespace music
                   //** that we didn't recognize
                   //*/
 
-                  if (3 * sizeof(DWORD) + pevent->size() > cbPrerollNominalMax)
+                  if (3 * sizeof(DWORD) + phappening->size() > cbPrerollNominalMax)
                   {
 
                      return error_would_reach_buffer_limit;
 
                   }
 
-                  int iSize = (DWORD)pevent->size();
-                  auto pdata = pevent->data();
+                  int iSize = (DWORD)phappening->size();
+                  auto pdata = phappening->data();
 
                   m_psequence->m_pfile->m_cbPendingUserEvent = iSize;
                   m_psequence->m_pfile->m_hpbPendingUserEvent = pdata;
@@ -2517,11 +2517,11 @@ namespace music
 
                }
 
-               ::music::midi::happening * pevent = nullptr;
+               ::music::midi::happening * phappening = nullptr;
 
                int iLeft = iBufferNominalMax - lpmh->dwBytesRecorded;
 
-               estatus = m_psequence->m_pfile->WorkGetNextEvent(pevent, tickMax, true, &iLeft);
+               estatus = m_psequence->m_pfile->WorkGetNextEvent(phappening, tickMax, true, &iLeft);
 
                if (estatus == ::error_would_reach_buffer_limit)
                {
@@ -2676,7 +2676,7 @@ namespace music
 
                iLeft = lpmh->dwBufferLength - lpmh->dwBytesRecorded;
 
-               estatus = StreamEvent(tickDelta, pevent, lpmh, tickMax, minimum(iBufferNominalMax, iLeft));
+               estatus = StreamEvent(tickDelta, phappening, lpmh, tickMax, minimum(iBufferNominalMax, iLeft));
 
                if (estatus == ::error_would_reach_buffer_limit)
                {

@@ -3714,7 +3714,7 @@ namespace apex_windows
    void node::hidden_run(const class time& timeWait, const ::file::path& pathParam, const string& strParams, const ::file::path& pathFolder)
    {
 
-      auto pevent = __allocate manual_reset_happening();
+      auto phappening = __allocate manual_reset_happening();
 
       auto path = m_papplication->defer_process_matter_path(pathParam);
 
@@ -3724,7 +3724,7 @@ namespace apex_windows
 
       bool bSuccess = true;
 
-      fork([pevent, &bSuccess, timeStart, timeWait, path, pathFolder, strParams]()
+      fork([phappening, &bSuccess, timeStart, timeWait, path, pathFolder, strParams]()
          {
 
             ::CoInitializeEx(nullptr, COINIT_APARTMENTTHREADED | COINIT_DISABLE_OLE1DDE);
@@ -3802,7 +3802,7 @@ namespace apex_windows
 
             }
 
-            pevent->set_happening();
+            phappening->set_happening();
 
             ::CloseHandle(si.hProcess);
 
@@ -3810,7 +3810,7 @@ namespace apex_windows
 
          });
 
-      pevent->wait(timeWait);
+      phappening->wait(timeWait);
 
       if (bSuccess)
       {

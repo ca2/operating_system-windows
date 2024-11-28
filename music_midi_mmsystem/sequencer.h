@@ -101,7 +101,7 @@ namespace music
             virtual void SetTempoChangeFlag(bool bSet = true);
             virtual bool IsChangingTempo();
 
-            virtual void OnHappening(::music::midi::sequence::happening* pevent);
+            virtual void OnHappening(::music::midi::sequence::happening* phappening);
 
 
             void     close_file();

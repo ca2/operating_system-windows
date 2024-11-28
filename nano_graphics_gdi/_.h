@@ -65,7 +65,7 @@
 //void x11_handle_just_hooks();
 //void x11_defer_handle_just_hooks();
 //int x11_message_box(const string & str, const string & strTitle, const ::e_message_box & emessagebox);
-//bool __x11_hook_process_event(Display * pdisplay, XEvent * pevent, XGenericEventCookie * cookie);
+//bool __x11_hook_process_event(Display * pdisplay, XEvent * phappening, XGenericEventCookie * cookie);
 
 
 //class x11color32_t

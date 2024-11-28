@@ -566,6 +566,13 @@ namespace windowing_win32
          if (sizeLayeredWindowBuffer != sizeBufferImage)
          {
 
+            if (m_timeLastDrawGuard1.elapsed() > 1_s)
+            {
+
+               throw ::exception(error_failed);
+
+            }
+
             return false;
 
          }
@@ -611,6 +618,13 @@ namespace windowing_win32
          if (size != sizeBuffer)
          {
 
+            if (m_timeLastDrawGuard1.elapsed() > 1_s)
+            {
+
+               throw ::exception(error_failed);
+
+            }
+
             error() << "Requested size is different of buffer size.";
             error() << "Requested size: " << size;
             error() << "Buffer size: " << sizeBuffer;
@@ -626,6 +640,13 @@ namespace windowing_win32
          else if (sizeLayeredWindowBuffer != sizeBuffer)
          {
 
+            if (m_timeLastDrawGuard1.elapsed() > 1_s)
+            {
+
+               throw ::exception(error_failed);
+
+            }
+
             error() << "Os buffer size is different of buffer size.";
             error() << "Os buffer size: " << sizeLayeredWindowBuffer;
             error() << "Buffer size: " << sizeBuffer;
@@ -635,13 +656,20 @@ namespace windowing_win32
             return false;
 
          }
+         
          //else
          //{
+
+
+         //pbufferitem->m_pimage2->fill_channel(1, color::e_channel_opacity);
+         //pbufferitem->m_pimage2->fill_channel(0, color::e_channel_red);
+         //pbufferitem->m_pimage2->fill_channel(0, color::e_channel_green);
+         //pbufferitem->m_pimage2->fill_channel(0, color::e_channel_blue);
 
          if (!create_window_device_context(size, playeredwindowbuffer->m_pixmap.m_iScan))
          {
 
-            return false;
+            throw ::exception(error_failed);
 
          }
 
@@ -1122,6 +1150,8 @@ namespace windowing_win32
                      {
 
                         ::UpdateLayeredWindow(hwnd, m_hdcScreen, (POINT *)&point, (SIZE *)&size, playeredwindowbuffer->m_hdc, (POINT *)&pointSrc, make_unsigned_int(0, 0, 0, 0), &blendPixelFunction, ULW_ALPHA);
+
+                        m_timeLastDrawGuard1.Now();
 
                      }
 
