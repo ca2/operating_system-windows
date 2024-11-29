@@ -191,6 +191,14 @@ namespace windows
          }
 
 
+         void device::translate(int x, int y)
+         {
+
+            OffsetViewportOrgEx(m_hdc, x, y, nullptr);
+
+         }
+
+
       } // namespace graphics
 
 

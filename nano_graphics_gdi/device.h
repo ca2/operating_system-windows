@@ -49,6 +49,9 @@ namespace windows
             void draw(::nano::graphics::icon * picon, int x, int y, int cx, int cy) override;
 
 
+            void translate(int x, int y) override;
+
+
          };
 
 
