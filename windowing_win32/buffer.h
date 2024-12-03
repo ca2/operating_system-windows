@@ -68,14 +68,17 @@ namespace windowing_win32
       bool is_single_buffer_mode() const override;
 
 
+      virtual void _defer_update_screen_task();
+
+
       bool update_buffer(::graphics::buffer_item * pitem) override;
       void destroy_buffer() override;
-      bool update_screen() override;
+      void update_screen() override;
 
 
       void destroy() override;
 
-      bool on_update_screen(::graphics::buffer_item * pitem) override;
+      void on_update_screen(::graphics::buffer_item * pitem) override;
 
       virtual void update_screen_task();
 

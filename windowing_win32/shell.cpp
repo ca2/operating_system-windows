@@ -1938,9 +1938,7 @@ namespace windowing_win32
       if (reserve_image(getfileimage))
       {
 
-         auto psystem = system();
-
-         auto pnode = psystem->node()->m_pAuraPlatform;
+         ::cast < aura_windows::node > pnode = node();
 
          _synchronous_lock synchronouslock(synchronization());
 

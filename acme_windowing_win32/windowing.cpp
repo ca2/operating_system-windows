@@ -314,7 +314,7 @@ namespace win32
 
             ::output_debug_string(str);
 
-            system()->background_color(colorWindowBackground);
+            system()->set_background_color(colorWindowBackground);
 
 
          }

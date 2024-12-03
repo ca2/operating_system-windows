@@ -15,7 +15,7 @@ namespace aura_windows
    {
 
       //m_pauranode = this;
-      m_pAuraPlatform = this;
+      //m_pAuraPlatform = this;
 
    }
 

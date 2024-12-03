@@ -259,7 +259,7 @@ namespace windowing_win32
    }
 
 
-   bool buffer::update_buffer(::graphics::buffer_item * pbufferitem)
+   void buffer::_defer_update_screen_task()
    {
 
       if (is_single_buffer_mode() && m_ptaskUpdateScreen)
@@ -281,6 +281,14 @@ namespace windowing_win32
          });
 
       }
+
+   }
+
+
+   bool buffer::update_buffer(::graphics::buffer_item * pbufferitem)
+   {
+
+      _defer_update_screen_task();
 
       if (get_hwnd() == nullptr || ::is_null(m_pwindow))
       {
@@ -470,7 +478,7 @@ namespace windowing_win32
    }
 
 
-   bool buffer::update_screen()
+   void buffer::update_screen()
    {
 
       if (m_ptaskUpdateScreen)
@@ -486,7 +494,9 @@ namespace windowing_win32
 
          m_happeningUpdateScreen.set_happening();
 
-         return true;
+         //return true;
+
+         return;
 
       }
 
@@ -508,13 +518,13 @@ namespace windowing_win32
    ::int_point g_pointLastBottomRight;
 
 
-   bool buffer::on_update_screen(::graphics::buffer_item * pbufferitem)
+   void buffer::on_update_screen(::graphics::buffer_item * pbufferitem)
    {
 
       if (!pbufferitem->m_pimage2.ok())
       {
 
-         return false;
+         throw ::exception(error_wrong_state);
 
       }
 
@@ -523,7 +533,7 @@ namespace windowing_win32
       if (::is_null(pinteraction))
       {
 
-         return false;
+         throw ::exception(error_wrong_state);
 
       }
 
@@ -573,7 +583,7 @@ namespace windowing_win32
 
             }
 
-            return false;
+            return;
 
          }
 
@@ -592,7 +602,7 @@ namespace windowing_win32
 
          //ShowCaret(get_hwnd());
 
-         return true;
+         return;
 
 
       }
@@ -634,7 +644,7 @@ namespace windowing_win32
 
             m_pwindow->m_puserinteraction->post_redraw();
 
-            return false;
+            return;
 
          }
          else if (sizeLayeredWindowBuffer != sizeBuffer)
@@ -653,7 +663,7 @@ namespace windowing_win32
 
             m_pwindow->m_puserinteraction->post_redraw();
 
-            return false;
+            return;
 
          }
          
@@ -1022,7 +1032,7 @@ namespace windowing_win32
                      || !m_pwindow->m_puserinteraction)
                   {
 
-                     return false;
+                     throw ::exception(error_wrong_state);
 
                   }
 
@@ -1328,7 +1338,7 @@ namespace windowing_win32
 
       }
 
-      return true;
+      //return true;
 
    }
 
