@@ -3691,39 +3691,13 @@ namespace windowing_win32
          if (puserinteraction)
          {
 
-            //if (puserinteraction->layout().m_statea[::user::e_layout_normal].m_bProdevian)
-            //{
-
-            //   //puserinteraction->set_auto_refresh();
-
-            //}
-
-            //if (puserinteraction->layout().m_statea[::user::e_layout_normal].display() == e_display_zoomed)
-            //{
-
-            //   puserinteraction->_001Maximize();
-
-            //}
-            //else
-            //{
-
-            //   puserinteraction->_001Restore();
-
-            //}
-
-            puserinteraction->display_previous(true);
-
-            puserinteraction->set_need_layout();
-
-            puserinteraction->set_need_redraw();
-
-            puserinteraction->post_redraw();
-
-            pmessage->m_bRet = true;
-
-            pmessage->m_lresult = 0;
+            puserinteraction->on_display_restore();
 
          }
+
+         pmessage->m_bRet = true;
+
+         pmessage->m_lresult = 0;
 
          return;
 
