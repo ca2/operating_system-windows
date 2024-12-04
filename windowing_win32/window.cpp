@@ -3702,6 +3702,25 @@ namespace windowing_win32
          return;
 
       }
+      else if (wparam == SC_TASKLIST)
+      {
+
+         auto puserinteraction = m_puserinteraction;
+
+         if (puserinteraction)
+         {
+
+            puserinteraction->on_display_task_list();
+
+         }
+
+         pmessage->m_bRet = true;
+
+         pmessage->m_lresult = 0;
+
+         return;
+
+      }
       else if (wparam == SC_MINIMIZE)
       {
 

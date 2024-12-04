@@ -576,7 +576,7 @@ namespace windowing_win32
          if (sizeLayeredWindowBuffer != sizeBufferImage)
          {
 
-            if (m_timeLastDrawGuard1.elapsed() > 1_s)
+            if (m_pwindow->m_timeLastDrawGuard1.elapsed() > 1_s)
             {
 
                throw ::exception(error_failed);
@@ -628,7 +628,7 @@ namespace windowing_win32
          if (size != sizeBuffer)
          {
 
-            if (m_timeLastDrawGuard1.elapsed() > 1_s)
+            if (m_pwindow->m_timeLastDrawGuard1.elapsed() > 1_s)
             {
 
                throw ::exception(error_failed);
@@ -650,7 +650,7 @@ namespace windowing_win32
          else if (sizeLayeredWindowBuffer != sizeBuffer)
          {
 
-            if (m_timeLastDrawGuard1.elapsed() > 1_s)
+            if (m_pwindow->m_timeLastDrawGuard1.elapsed() > 1_s)
             {
 
                throw ::exception(error_failed);
@@ -1142,12 +1142,14 @@ namespace windowing_win32
 
                            }
 
+                           auto cx = rectangleRequest.width();
+
                            ::SetWindowPos(
                               hwnd,
                               hwndInsertAfter,
                               rectangleRequest.left(),
                               rectangleRequest.top(),
-                              rectangleRequest.width(),
+                              cx,
                               rectangleRequest.height(),
                               nFlags);
 
@@ -1156,12 +1158,14 @@ namespace windowing_win32
                      }
 
                      //GdiFlush();
-                     if (::IsWindowVisible(pwindow->m_hwnd))
+                     if (::IsWindowVisible(pwindow->m_hwnd)
+                        && point.x() >-16384
+                        && point.y() >-16384)
                      {
 
                         ::UpdateLayeredWindow(hwnd, m_hdcScreen, (POINT *)&point, (SIZE *)&size, playeredwindowbuffer->m_hdc, (POINT *)&pointSrc, make_unsigned_int(0, 0, 0, 0), &blendPixelFunction, ULW_ALPHA);
 
-                        m_timeLastDrawGuard1.Now();
+                        m_pwindow->m_timeLastDrawGuard1.Now();
 
                      }
 

@@ -56,7 +56,6 @@ namespace windowing_win32
       ::task_pointer                m_ptaskUpdateScreen;
       ::manual_reset_happening          m_happeningUpdateScreen;
       bool                          m_bSingleBufferMode;
-      class ::time                  m_timeLastDrawGuard1;
 
       buffer();
       ~buffer() override;
