@@ -691,14 +691,14 @@ namespace windowing_win32
 
 
          m_uExtraFlagsSetWindowPos =
-            //SWP_NOZORDER |
+            SWP_NOZORDER |
             SWP_ASYNCWINDOWPOS
             //| SWP_FRAMECHANGED
             //| SWP_NOSENDCHANGING
             | SWP_NOREDRAW
-            | SWP_NOCOPYBITS;
-         //| SWP_DEFERERASE
-         //| SWP_NOACTIVATE
+            | SWP_NOCOPYBITS
+            //| SWP_DEFERERASE
+            | SWP_NOACTIVATE;
          //| SWP_SHOWWINDOW;
       }
 
@@ -2415,6 +2415,22 @@ namespace windowing_win32
          zorder, x, y, cx, cy,
          eactivation, bNoZorder, bNoMove, bNoSize,
          bShow, bHide);
+
+   }
+
+
+   void window::_set_window_position_unchanged()
+   {
+
+      if (_get_ex_style() & WS_EX_LAYERED)
+      {
+
+         // If the window is layered, SetWindowPos gonna be called
+         // very close to UpdateLayeredWindow call.
+
+         m_uSetWindowPosLastFlags = m_uExtraFlagsSetWindowPos;
+
+      }
 
    }
 
@@ -8311,13 +8327,14 @@ namespace windowing_win32
    void window::_user_send(const ::procedure & procedure)
    {
 
-      if (m_hwnd)
-      {
+      //if (m_hwnd)
+      //{
 
-         ::SendMessage(m_hwnd, WM_USER + 1297, 0, (lparam)(::uptr)(::subparticle *)procedure.m_pbase.m_p);
+      //   ::SendMessage(m_hwnd, WM_USER + 1297, 0, (lparam)(::uptr)(::subparticle *)procedure.m_pbase.m_p);
 
-      }
-      else if (m_puserthread)
+      //}
+      //else
+      if (m_puserthread)
       {
 
          m_puserthread->send(procedure);

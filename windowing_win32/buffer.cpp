@@ -1109,19 +1109,29 @@ namespace windowing_win32
 
                      bool bWindowVisible = ::IsWindowVisible(pwindow->m_hwnd) ? true : false;
 
+                     bool bExTopMost = (::GetWindowLongPtr(pwindow->m_hwnd, GWL_EXSTYLE) & WS_EX_TOPMOST) != 0;
+
+                     bool bSwpShowWindow = (pwindow->m_uSetWindowPosLastFlags & SWP_SHOWWINDOW) != 0;
+
+                     bool bSwpHideWindow = (pwindow->m_uSetWindowPosLastFlags & SWP_HIDEWINDOW) != 0;
+
+                     auto nFlags = pwindow->m_uSetWindowPosLastFlags;
+
+                     bool bZOrder = !(nFlags & SWP_NOZORDER);
+
+                     bool bActivate = !(nFlags & SWP_NOACTIVATE);
+
                      if (rectangleWindow != rectangleRequest
-                        || (hwndInsertAfter == HWND_TOPMOST
-                           && !(::GetWindowLongPtr(pwindow->m_hwnd,
-                              GWL_EXSTYLE) & WS_EX_TOPMOST))
-                        || !is_equivalent(bWindowVisible,
-                           (pwindow->m_uSetWindowPosLastFlags & SWP_SHOWWINDOW)
-                        || !(pwindow->m_uSetWindowPosLastFlags & SWP_HIDEWINDOW)))
+                        //|| (hwndInsertAfter == HWND_TOPMOST && !bExTopMost)
+                        || bZOrder
+                        || bActivate
+                        || (bWindowVisible && bSwpHideWindow)
+                        || (!bWindowVisible && bSwpShowWindow))
                      {
 
                         if (!::IsIconic(hwnd))
                         {
 
-                           auto nFlags = pwindow->m_uSetWindowPosLastFlags;
                            nFlags &= ~SWP_NOMOVE;
                            nFlags &= ~SWP_NOSIZE;
                            //nFlags |= SWP_NOZORDER;
@@ -1144,14 +1154,19 @@ namespace windowing_win32
 
                            auto cx = rectangleRequest.width();
 
-                           ::SetWindowPos(
-                              hwnd,
-                              hwndInsertAfter,
-                              rectangleRequest.left(),
-                              rectangleRequest.top(),
-                              cx,
-                              rectangleRequest.height(),
-                              nFlags);
+                           pwindow->_main_send([&]()
+                              {
+
+                                 ::SetWindowPos(
+                                    hwnd,
+                                    hwndInsertAfter,
+                                    rectangleRequest.left(),
+                                    rectangleRequest.top(),
+                                    cx,
+                                    rectangleRequest.height(),
+                                    nFlags);
+
+                           });
 
                         }
 

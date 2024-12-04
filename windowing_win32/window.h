@@ -228,6 +228,8 @@ namespace windowing_win32
 
       bool _set_window_position_unlocked(const class ::zorder & zorder, int x, int y, int cx, int cy, const ::e_activation & eactivation, bool bNoZorder, bool bNoMove, bool bNoSize, ::e_display edisplay) override;
 
+      void _set_window_position_unchanged() override;
+
       void window_update_screen() override;
 
       //bool strict_set_window_position_unlocked() override;
