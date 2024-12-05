@@ -24,7 +24,6 @@ namespace innate_ui_win32
       //ATOM m_atom;
 
 
-      map < HWND, ::pointer < window > >     m_windowmap;
       string_map < ATOM >                    m_classmap;
 
       innate_ui();
@@ -37,14 +36,14 @@ namespace innate_ui_win32
       void _main_post(const ::procedure & procedure) override;
 
 
-      virtual LRESULT _window_procedure(HWND hwnd, UINT message, WPARAM wparam, LPARAM lparam);
+      //virtual LRESULT _window_procedure(HWND hwnd, UINT message, WPARAM wparam, LPARAM lparam);
 
       //virtual void _defer_show_system_menu(HWND hwnd, const ::int_point & pointAbsolute);
 
 
    };
 
-   LRESULT CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM);
+   //LRESULT CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM);
 
 } // namespace innate_ui
 

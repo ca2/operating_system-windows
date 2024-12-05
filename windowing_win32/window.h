@@ -1018,7 +1018,7 @@ namespace windowing_win32
 
       //void default_set(::message::message * pmessage, const ::atom & atom, wparam wparam, lparam lparam);
 
-      virtual LRESULT __window_procedure(HWND hwnd, UINT message, WPARAM wparam, LPARAM lparam);
+      LRESULT window_procedure(unsigned int message, wparam wparam, lparam lparam) override;
 
 
       void set_opacity(double dOpacity) override;

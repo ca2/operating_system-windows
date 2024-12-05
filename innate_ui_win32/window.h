@@ -59,6 +59,7 @@ namespace innate_ui_win32
       ::innate_ui_win32::innate_ui * innate_ui();
 
       virtual ::pointer < window > _get_child_with_id(int iId);
+      bool on_window_procedure(LRESULT & lresult, UINT message, WPARAM wparam, LPARAM lparam) override;
       virtual LRESULT _window_procedure(UINT message, WPARAM wparam, LPARAM lparam);
 
       virtual bool _on_command();
@@ -66,6 +67,9 @@ namespace innate_ui_win32
       virtual int _get_id();
 
       void defer_show_system_menu(::user::mouse * pmouse) override;
+
+
+
 
    };
 

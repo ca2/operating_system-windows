@@ -68,22 +68,22 @@ namespace innate_ui_win32
    }
 
 
-   LRESULT innate_ui::_window_procedure(HWND hwnd, UINT message, WPARAM wparam, LPARAM lparam)
-   {
+   //LRESULT innate_ui::_window_procedure(HWND hwnd, UINT message, WPARAM wparam, LPARAM lparam)
+   //{
 
-      auto pwindow = m_windowmap[hwnd];
+   //   auto pwindow = m_windowmap[hwnd];
 
-      if (pwindow)
-      {
+   //   if (pwindow)
+   //   {
 
-         return pwindow->_window_procedure(message, wparam, lparam);
+   //      return pwindow->_window_procedure(message, wparam, lparam);
 
-      }
+   //   }
 
-      return DefWindowProc(hwnd, message, wparam, lparam);
+   //   return DefWindowProc(hwnd, message, wparam, lparam);
 
 
-   }
+   //}
 
 
    void innate_ui::_defer_run_innate_ui_win32_user_loop()
@@ -203,14 +203,14 @@ namespace innate_ui_win32
 
 
 
-   LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
-   {
+   //LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
+   //{
 
-      ::pointer <::innate_ui_win32::innate_ui> pinnateui = system()->innate_ui();
+   //   ::pointer <::innate_ui_win32::innate_ui> pinnateui = system()->innate_ui();
 
-      return pinnateui->_window_procedure(hWnd, message, wParam, lParam);
+   //   return pinnateui->_window_procedure(hWnd, message, wParam, lParam);
 
-   }
+   //}
 
    
 

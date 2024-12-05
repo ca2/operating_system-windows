@@ -2,6 +2,8 @@
 #include "framework.h"
 #include "icon.h"
 #include "still.h"
+#include "acme/operating_system/windows/windowing.h"
+
 
 
 ::Gdiplus::Image * LoadImageFromMemory(const void * imageData, memsize size)
@@ -33,7 +35,7 @@
 namespace innate_ui_win32
 {
 
-   LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
+   //LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
 
    still::still()
    {
@@ -62,6 +64,8 @@ namespace innate_ui_win32
    void still::_create_child(window * pwindowParent)
    {
 
+      HINSTANCE hinstanceParent = (HINSTANCE)GetWindowLongPtr(pwindowParent->m_hwnd, GWLP_HINSTANCE);
+
       m_hwnd = CreateWindow(
          L"STATIC",  // Predefined class; Unicode assumed 
          L"",      // Button text 
@@ -72,13 +76,17 @@ namespace innate_ui_win32
          100,        // Button height
          pwindowParent->m_hwnd,     // Parent window
          NULL,       // No menu.
-         (HINSTANCE)GetWindowLongPtr(pwindowParent->m_hwnd, GWLP_HINSTANCE),
+         (HINSTANCE)hinstanceParent,
          NULL);
 
       if (m_bIcon)
       {
 
-         SetWindowLongPtr(m_hwnd, GWLP_WNDPROC, (LPARAM)WndProc);
+         ::cast < ::windows::windowing > pwindowing = system()->acme_windowing();
+
+         pwindowing->m_windowmap[(::oswindow)m_hwnd] = this;
+
+         SetWindowLongPtr(m_hwnd, GWLP_WNDPROC, (LPARAM)&::windows::window_procedure);
 
       }
 
@@ -88,6 +96,8 @@ namespace innate_ui_win32
    {
 
       m_bIcon = true;
+
+      m_iDebugAtom = 123;
 
       m_iCreateStyle = WS_TABSTOP | WS_VISIBLE | WS_CHILD | SS_OWNERDRAW;
 
@@ -104,6 +114,7 @@ namespace innate_ui_win32
 
       main_send([this, picon]()
       {
+
          
          //::SendMessage(m_hwnd, STM_SETICON, (WPARAM) picon->m_hicon, 0);
 

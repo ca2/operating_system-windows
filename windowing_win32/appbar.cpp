@@ -20,7 +20,7 @@
 #endif
 
 
-CLASS_DECL_WINDOWING_WIN32 WNDPROC windows_user_interaction_impl_get_window_procedure();
+//CLASS_DECL_WINDOWING_WIN32 WNDPROC windows_user_interaction_impl_get_window_procedure();
 
 
 CLASS_DECL_WINDOWING_WIN32 wstring windows_register_window_class(::particle * pparticle, unsigned int nClassStyle, HICON hCursor, HBRUSH hbrBackground, HICON hIcon);

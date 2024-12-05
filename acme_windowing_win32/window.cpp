@@ -85,30 +85,13 @@ namespace win32
 
 
 
-         LRESULT CALLBACK acme_window_procedure(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam);
+         //CLASS_DECL_ACME_WINDOWING_WIN32 LRESULT CALLBACK acme_window_procedure(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam);
 
 
 #define ACME_WINDOW_CLASS "acme_window_class"
 
 
 
-
-
-         HINSTANCE acme_message_box_hinstance()
-         {
-
-            HINSTANCE hinstanceWndProc = (HINSTANCE) ::GetModuleHandleA("acme_windowing_win32.dll");
-
-            if (hinstanceWndProc == nullptr)
-            {
-
-               hinstanceWndProc = (HINSTANCE)::GetModuleHandleA(NULL);
-
-            }
-
-            return hinstanceWndProc;
-
-         }
 
 
          void register_nano_window_class()
@@ -121,14 +104,14 @@ namespace win32
 
             }
 
-            auto hinstanceWndProc = acme_message_box_hinstance();
+            auto hinstanceWndProc = ::windows::get_window_procedure_hinstance();
 
             WNDCLASSEX wndclassex{};
 
             //Step 1: Registering the Window Class
             wndclassex.cbSize = sizeof(WNDCLASSEX);
             wndclassex.style = CS_DBLCLKS;
-            wndclassex.lpfnWndProc = &acme_window_procedure;
+            wndclassex.lpfnWndProc = &windows::window_procedure;
             wndclassex.cbClsExtra = 0;
             wndclassex.cbWndExtra = 0;
             wndclassex.hInstance = hinstanceWndProc;
@@ -151,41 +134,6 @@ namespace win32
          }
 
 
-         // Step 4: the Window Procedure
-         LRESULT CALLBACK acme_window_procedure(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
-         {
-
-            ::win32::acme::windowing::window* pwindow = nullptr;
-
-            if (msg == WM_NCCREATE)
-            {
-
-               CREATESTRUCT* pcreatestruct = (CREATESTRUCT*)lParam;
-
-               pwindow = (::win32::acme::windowing::window *)pcreatestruct->lpCreateParams;
-
-               SetWindowLongPtr(hwnd, GWLP_USERDATA, (LONG_PTR)pwindow);
-
-               pwindow->m_hwnd = hwnd;
-
-            }
-            else
-            {
-
-               pwindow = (::win32::acme::windowing::window*)GetWindowLongPtr(hwnd, GWLP_USERDATA);
-
-            }
-
-            if (!pwindow)
-            {
-
-               return DefWindowProc(hwnd, msg, wParam, lParam);
-
-            }
-
-            return pwindow->window_procedure(msg, wParam, lParam);
-
-         }
 
 
          void window::create_window()
@@ -209,7 +157,7 @@ namespace win32
 
             wstring wstrTitle(m_pacmeuserinteraction->get_title());
 
-            auto hinstanceWndProc = acme_message_box_hinstance();
+            auto hinstanceWndProc = ::windows::get_window_procedure_hinstance();
 
             m_ptask = ::get_task();
 
@@ -235,7 +183,8 @@ namespace win32
                r.top(),
                r.width(),
                r.height(),
-               NULL, NULL, hinstanceWndProc, this);
+               NULL, NULL, hinstanceWndProc,
+               (::windows::window *) this);
 
             if (hwnd == NULL)
             {
@@ -692,21 +641,39 @@ namespace win32
          }
 
 
+         bool window::on_window_procedure(LRESULT & lresult, UINT message, WPARAM wparam, LPARAM lparam)
+         {
+
+            if (::windows::window::on_window_procedure(lresult, message, wparam, lparam))
+            {
+
+               return true;
+
+            }
+
+            lresult = window_procedure(message, wparam, lparam);
+
+            return true;
+
+         }
+
+
+
          LRESULT window::window_procedure(unsigned int message, wparam wparam, lparam lparam)
          {
 
-            {
+            //{
 
-               LRESULT lresult = 0;
+            //   LRESULT lresult = 0;
 
-               if (on_window_procedure(lresult, message, wparam, lparam))
-               {
+            //   if (on_window_procedure(lresult, message, wparam, lparam))
+            //   {
 
-                  return lresult;
+            //      return lresult;
 
-               }
+            //   }
 
-            }
+            //}
 
             switch (message)
             {
@@ -1491,6 +1458,7 @@ namespace win32
 
          }
 
+         
 
       } // namespace windowing
 

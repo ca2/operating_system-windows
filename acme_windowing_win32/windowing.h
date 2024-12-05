@@ -4,7 +4,7 @@
 #pragma once
 
 
-#include "acme/windowing/windowing.h"
+#include "acme/operating_system/windows/windowing.h"
 
 
 namespace win32
@@ -20,12 +20,11 @@ namespace win32
 
 
          class CLASS_DECL_ACME_WINDOWING_WIN32 windowing :
-            virtual public ::acme::windowing::windowing
+            virtual public ::windows::windowing
          {
          public:
 
-
-
+            
             windowing();
             ~windowing() override;
 

@@ -6,6 +6,8 @@
 #include "acme/platform/system.h"
 #include "acme/platform/application.h"
 #include "acme/parallelization/manual_reset_happening.h"
+#include "acme/operating_system/windows/window.h"
+#include "acme/operating_system/windows/windowing.h"
 
 
 namespace innate_ui_win32
@@ -22,22 +24,27 @@ namespace innate_ui_win32
    {
 
    }
-   void dialog::_get_class(WNDCLASSEXW & wcex)
+   void dialog::_get_class(WNDCLASSEXW & wndclassex)
    {
 
-      wcex.style = CS_HREDRAW | CS_VREDRAW;
-      wcex.lpfnWndProc = WndProc;
-      wcex.cbClsExtra = 0;
-      wcex.cbWndExtra = 0;
-      wcex.hInstance = (HINSTANCE) ::platform::get()->m_hinstanceThis;
-      //wcex.hIcon = LoadIcon(hInstance, MAKEINTRESOURCE(IDI_WINDOWSPROJECT1));
-      wcex.hIcon = nullptr;
-      wcex.hCursor = LoadCursor(nullptr, IDC_ARROW);
-      wcex.hbrBackground = ::GetSysColorBrush(COLOR_3DFACE);
-      //wcex.lpszMenuName = MAKEINTRESOURCEW(IDC_WINDOWSPROJECT1);
-      wcex.lpszMenuName = nullptr;
-      //wcex.hIconSm = LoadIcon(wcex.hInstance, MAKEINTRESOURCE(IDI_SMALL));
-      wcex.hIconSm = nullptr;
+
+      auto hinstanceWndProc = ::windows::get_window_procedure_hinstance();
+
+      wndclassex.hInstance = (HINSTANCE)hinstanceWndProc;
+      wndclassex.lpfnWndProc = &::windows::window_procedure;
+      wndclassex.style = CS_HREDRAW | CS_VREDRAW;
+      //wndclassex.lpfnWndProc = WndProc;
+      wndclassex.cbClsExtra = 0;
+      wndclassex.cbWndExtra = 0;
+      //wndclassex.hInstance = (HINSTANCE) ::platform::get()->m_hinstanceThis;
+      //wndclassex.hIcon = LoadIcon(hInstance, MAKEINTRESOURCE(IDI_WINDOWSPROJECT1));
+      wndclassex.hIcon = nullptr;
+      wndclassex.hCursor = LoadCursor(nullptr, IDC_ARROW);
+      wndclassex.hbrBackground = ::GetSysColorBrush(COLOR_3DFACE);
+      //wndclassex.lpszMenuName = MAKEINTRESOURCEW(IDC_WINDOWSPROJECT1);
+      wndclassex.lpszMenuName = nullptr;
+      //wndclassex.hIconSm = LoadIcon(wndclassex.hInstance, MAKEINTRESOURCE(IDI_SMALL));
+      wndclassex.hIconSm = nullptr;
 
    }
 
@@ -53,9 +60,9 @@ namespace innate_ui_win32
    void dialog::_create()
    {
 
-      m_hwnd = CreateWindowW(_get_class_name(), L"", WS_DLGFRAME | WS_CAPTION | WS_POPUPWINDOW,
-              CW_USEDEFAULT, 0, CW_USEDEFAULT, 0, nullptr, nullptr, (HINSTANCE) ::platform::get()->m_hinstanceThis,
-              nullptr);
+      ::CreateWindowW(_get_class_name(), L"", WS_DLGFRAME | WS_CAPTION | WS_POPUPWINDOW,
+              CW_USEDEFAULT, 0, CW_USEDEFAULT, 0, nullptr, nullptr, (HINSTANCE) ::windows::get_window_procedure_hinstance(),
+              (::windows::window *)this);
 
       if (m_hwnd)
       {

@@ -10,7 +10,8 @@
 #include "acme/prototype/geometry2d/size.h"
 //#include "acme/operating_system/windows/nano/user/user.h"
 #include "acme/user/user/mouse.h"
-
+#include "acme/operating_system/windows/window.h"
+#include "acme/operating_system/windows/windowing.h"
 
 
 namespace innate_ui_win32
@@ -108,22 +109,25 @@ namespace innate_ui_win32
    }
 
 
-   void window::_get_class(WNDCLASSEXW & wcex)
+   void window::_get_class(WNDCLASSEXW & wndclassex)
    {
 
-      wcex.style = CS_HREDRAW | CS_VREDRAW;
-      wcex.lpfnWndProc = WndProc;
-      wcex.cbClsExtra = 0;
-      wcex.cbWndExtra = 0;
-      wcex.hInstance = (HINSTANCE) ::platform::get()->m_hinstanceThis;
-      //wcex.hIcon = LoadIcon(hInstance, MAKEINTRESOURCE(IDI_WINDOWSPROJECT1));
-      wcex.hIcon = nullptr;
-      wcex.hCursor = LoadCursor(nullptr, IDC_ARROW);
-      wcex.hbrBackground = (HBRUSH)(COLOR_WINDOW + 1);
-      //wcex.lpszMenuName = MAKEINTRESOURCEW(IDC_WINDOWSPROJECT1);
-      wcex.lpszMenuName = nullptr;
-      //wcex.hIconSm = LoadIcon(wcex.hInstance, MAKEINTRESOURCE(IDI_SMALL));
-      wcex.hIconSm = nullptr;
+      auto hinstanceWndProc = ::windows::get_window_procedure_hinstance();
+
+      wndclassex.hInstance = (HINSTANCE)hinstanceWndProc;
+      wndclassex.lpfnWndProc = &::windows::window_procedure;
+      wndclassex.style = CS_HREDRAW | CS_VREDRAW;
+      //wndclassex.lpfnWndProc = WndProc;
+      wndclassex.cbClsExtra = 0;
+      wndclassex.cbWndExtra = 0;
+      //wndclassex.hIcon = LoadIcon(hInstance, MAKEINTRESOURCE(IDI_WINDOWSPROJECT1));
+      wndclassex.hIcon = nullptr;
+      wndclassex.hCursor = LoadCursor(nullptr, IDC_ARROW);
+      wndclassex.hbrBackground = (HBRUSH)(COLOR_WINDOW + 1);
+      //wndclassex.lpszMenuName = MAKEINTRESOURCEW(IDC_WINDOWSPROJECT1);
+      wndclassex.lpszMenuName = nullptr;
+      //wndclassex.hIconSm = LoadIcon(wndclassex.hInstance, MAKEINTRESOURCE(IDI_SMALL));
+      wndclassex.hIconSm = nullptr;
 
    }
 
@@ -162,14 +166,16 @@ namespace innate_ui_win32
             
             _create();
 
-            innate_ui()->m_windowmap[m_hwnd] = this;
+            //innate_ui()->m_windowmap[m_hwnd] = this;
 
 
       });
 
       if (!m_hwnd)
       {
+         
          throw ::exception(error_failed);
+
       }
 
 
@@ -206,6 +212,24 @@ namespace innate_ui_win32
       return {};
 
    }
+
+
+   bool window::on_window_procedure(LRESULT & lresult, UINT message, WPARAM wparam, LPARAM lparam)
+   {
+
+      if (::windows::window::on_window_procedure(lresult, message, wparam, lparam))
+      {
+
+         return true;
+
+      }
+
+      lresult = _window_procedure(message, wparam, lparam);
+
+      return true;
+
+   }
+
 
    LRESULT window::_window_procedure(UINT message, WPARAM wparam, LPARAM lparam)
    {
@@ -332,7 +356,6 @@ namespace innate_ui_win32
 
             _create_child(pwindowImpl);
 
-            innate_ui()->m_windowmap[m_hwnd] = this;
             pwindowImpl->m_childa.add(this);
             pwindowImpl->m_iChildIdSeed++;
             ::SetWindowLong(m_hwnd, GWL_ID, pwindowImpl->m_iChildIdSeed);
@@ -374,7 +397,9 @@ namespace innate_ui_win32
 
          ::DestroyWindow(m_hwnd);
 
-         innate_ui()->m_windowmap[m_hwnd].release();
+         ::cast < ::windows::windowing > pwindowing = system()->acme_windowing();
+         
+         pwindowing->m_windowmap[(::oswindow) m_hwnd].release();
 
          m_hwnd = nullptr;
 

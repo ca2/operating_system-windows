@@ -19,7 +19,7 @@ CLASS_DECL_ACME void acme_set_main_hwnd(HWND hwnd);
 CLASS_DECL_ACME HWND acme_get_main_hwnd();
 
 
-CLASS_DECL_WINDOWING_WIN32 WNDPROC windows_user_interaction_impl_get_window_procedure();
+//CLASS_DECL_WINDOWING_WIN32 WNDPROC windows_user_interaction_impl_get_window_procedure();
 
 
 namespace windows
@@ -217,159 +217,159 @@ bool is_registered_windows_message(unsigned int message)
 }
 
 
-lresult CALLBACK WndProc(HWND hwnd, unsigned int message, wparam wparam, lparam lparam);
-
-
-int g_iCol = 0;
-
-
-LRESULT CALLBACK __window_procedure(HWND hwnd, UINT message, WPARAM wparam, LPARAM lparam)
-{
-
-   if (message == WM_SYSCOMMAND)
-   {
-
-      informationf("WM_SYSCOMMAND");
-
-   }
-   else if (message == WM_LBUTTONUP)
-   {
-
-      informationf("WM_LBUTTONUP");
-
-   }
-   else if (message == WM_NCDESTROY)
-   {
-
-      informationf("WM_NCDESTROY");
-
-   }
-   else if (message == WM_COMMAND)
-   {
-
-      informationf("WM_COMMAND");
-
-   }
-   else if (message == WM_MOUSEMOVE)
-   {
-
-      //informationf("WM_MOUSEMOVE");
-
-   }
-   else if (message == WM_NCMOUSEMOVE)
-   {
-
-      informationf("WM_NCMOUSEMOVE");
-
-   }
-   else if (message == WM_KILLFOCUS)
-   {
-
-      informationf("WM_KILLFOCUS");
-
-   }
-   else if (message == WM_MOUSEWHEEL)
-   {
-
-      informationf("WM_MOUSEWHEEL");
-
-   }
-   else if (message == WM_SHOWWINDOW)
-   {
-
-      if (wparam)
-      {
-
-         if(!acme_get_main_hwnd() || !::IsWindow(acme_get_main_hwnd()))
-         {
-
-            acme_set_main_hwnd(hwnd);
-
-         }
-
-      }
-
-   }
-
-   if (message == WM_APP + 12345)
-   {
-
-      ::procedure p;
-
-      p.m_pbase.m_p = (decltype(p.m_pbase.m_p)) lparam;
-
-      p();
-
-      return 0;
-
-   }
-
-   ::windowing_win32::window * pwindow = (::windowing_win32::window *) ::GetWindowLongPtr(hwnd, 0);
-
-   if (!pwindow)
-   {
-
-      if (message == WM_NCCREATE)
-      {
-
-         LPCREATESTRUCTW pcreatestructw = (LPCREATESTRUCTW)lparam;
-
-         ::user::system * psystem = (::user::system *)pcreatestructw->lpCreateParams;
-
-         pwindow = psystem->m_pwindow.cast < ::windowing_win32::window >();
-
-         if (!pwindow)
-         {
-
-            return ::DefWindowProcW(hwnd, message, wparam, lparam);
-
-         }
-
-         ::SetLastError(0);
-
-         auto lResult = ::SetWindowLongPtr(hwnd, 0, (LONG_PTR)pwindow);
-
-         if (lResult == 0)
-         {
-
-            auto dwResult = ::GetLastError();
-
-            if (dwResult)
-            {
-
-               pwindow->informationf("__window_procedure SetWindowLongPtr Failed");
-
-            }
-
-         }
-
-         pwindow->set_oswindow(as_oswindow(hwnd));
-
-         pwindow->set_os_data(hwnd);
-
-         auto pwin32windowing = pwindow->win32_windowing();
-
-         critical_section_lock synchronouslock(&pwin32windowing->m_criticalsection);
-
-         pwin32windowing->m_windowmap[hwnd] = pwindow;
-
-         //pwindow->m_pimpl2->m_hwnd = hwnd;
-
-      }
-      else
-      {
-
-         return ::DefWindowProcW(hwnd, message, wparam, lparam);
-
-      }
-
-   }
-
-   auto lresult = pwindow->__window_procedure(hwnd, message, wparam, lparam);
-
-   return lresult;
-
-}
+//lresult CALLBACK WndProc(HWND hwnd, unsigned int message, wparam wparam, lparam lparam);
+//
+//
+//int g_iCol = 0;
+//
+//
+//LRESULT CALLBACK __window_procedure(HWND hwnd, UINT message, WPARAM wparam, LPARAM lparam)
+//{
+//
+//   if (message == WM_SYSCOMMAND)
+//   {
+//
+//      informationf("WM_SYSCOMMAND");
+//
+//   }
+//   else if (message == WM_LBUTTONUP)
+//   {
+//
+//      informationf("WM_LBUTTONUP");
+//
+//   }
+//   else if (message == WM_NCDESTROY)
+//   {
+//
+//      informationf("WM_NCDESTROY");
+//
+//   }
+//   else if (message == WM_COMMAND)
+//   {
+//
+//      informationf("WM_COMMAND");
+//
+//   }
+//   else if (message == WM_MOUSEMOVE)
+//   {
+//
+//      //informationf("WM_MOUSEMOVE");
+//
+//   }
+//   else if (message == WM_NCMOUSEMOVE)
+//   {
+//
+//      informationf("WM_NCMOUSEMOVE");
+//
+//   }
+//   else if (message == WM_KILLFOCUS)
+//   {
+//
+//      informationf("WM_KILLFOCUS");
+//
+//   }
+//   else if (message == WM_MOUSEWHEEL)
+//   {
+//
+//      informationf("WM_MOUSEWHEEL");
+//
+//   }
+//   else if (message == WM_SHOWWINDOW)
+//   {
+//
+//      if (wparam)
+//      {
+//
+//         if(!acme_get_main_hwnd() || !::IsWindow(acme_get_main_hwnd()))
+//         {
+//
+//            acme_set_main_hwnd(hwnd);
+//
+//         }
+//
+//      }
+//
+//   }
+//
+//   if (message == WM_APP + 12345)
+//   {
+//
+//      ::procedure p;
+//
+//      p.m_pbase.m_p = (decltype(p.m_pbase.m_p)) lparam;
+//
+//      p();
+//
+//      return 0;
+//
+//   }
+//
+//   ::windowing_win32::window * pwindow = (::windowing_win32::window *) ::GetWindowLongPtr(hwnd, 0);
+//
+//   if (!pwindow)
+//   {
+//
+//      if (message == WM_NCCREATE)
+//      {
+//
+//         LPCREATESTRUCTW pcreatestructw = (LPCREATESTRUCTW)lparam;
+//
+//         ::user::system * psystem = (::user::system *)pcreatestructw->lpCreateParams;
+//
+//         pwindow = psystem->m_pwindow.cast < ::windowing_win32::window >();
+//
+//         if (!pwindow)
+//         {
+//
+//            return ::DefWindowProcW(hwnd, message, wparam, lparam);
+//
+//         }
+//
+//         ::SetLastError(0);
+//
+//         auto lResult = ::SetWindowLongPtr(hwnd, 0, (LONG_PTR)pwindow);
+//
+//         if (lResult == 0)
+//         {
+//
+//            auto dwResult = ::GetLastError();
+//
+//            if (dwResult)
+//            {
+//
+//               pwindow->informationf("__window_procedure SetWindowLongPtr Failed");
+//
+//            }
+//
+//         }
+//
+//         pwindow->set_oswindow(as_oswindow(hwnd));
+//
+//         pwindow->set_os_data(hwnd);
+//
+//         auto pwin32windowing = pwindow->win32_windowing();
+//
+//         critical_section_lock synchronouslock(&pwin32windowing->m_criticalsection);
+//
+//         pwin32windowing->m_windowmap[hwnd] = pwindow;
+//
+//         //pwindow->m_pimpl2->m_hwnd = hwnd;
+//
+//      }
+//      else
+//      {
+//
+//         return ::DefWindowProcW(hwnd, message, wparam, lparam);
+//
+//      }
+//
+//   }
+//
+//   auto lresult = pwindow->__window_procedure(hwnd, message, wparam, lparam);
+//
+//   return lresult;
+//
+//}
 
 
 namespace windowing_win32
@@ -579,9 +579,9 @@ wstring windowing::_windows_get_user_interaction_window_class(::user::interactio
 
    memory_set(&wndcls, 0, sizeof(WNDCLASSEXW));   // start with nullptr defaults
 
-   wndcls.lpfnWndProc = windows_user_interaction_impl_get_window_procedure();
+   wndcls.lpfnWndProc = &windows::window_procedure;
 
-   wndcls.hInstance = GetModuleHandleW(L"windowing_win32.dll");
+   wndcls.hInstance = ::windows::get_window_procedure_hinstance();
 
    wndcls.cbWndExtra = wndcls.cbClsExtra = 40;
 
@@ -683,7 +683,7 @@ wstring windowing::_windows_register_window_class(unsigned int nClassStyle, HCUR
    wndcls.cbSize = sizeof(wndcls);
    // otherwise we need to register a ___new class
    wndcls.style = nClassStyle;
-   wndcls.lpfnWndProc = windows_user_interaction_impl_get_window_procedure();
+   wndcls.lpfnWndProc = &::windows::window_procedure;
 
    wndcls.cbClsExtra = wndcls.cbWndExtra = 40;
    wndcls.hInstance = hinstance;
@@ -798,12 +798,12 @@ namespace windowing_win32
 
 
 
-CLASS_DECL_WINDOWING_WIN32 WNDPROC windows_user_interaction_impl_get_window_procedure()
-{
-
-   return &__window_procedure;
-
-}
+//CLASS_DECL_WINDOWING_WIN32 WNDPROC windows_user_interaction_impl_get_window_procedure()
+//{
+//
+//   return &__window_procedure;
+//
+//}
 
 
 

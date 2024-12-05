@@ -118,3 +118,11 @@ namespace win32
 
 } // namespace win32
 
+
+namespace windows
+{
+
+   class window;
+
+
+} // namespace windows

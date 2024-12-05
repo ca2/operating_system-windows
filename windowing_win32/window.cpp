@@ -577,13 +577,13 @@ namespace windowing_win32
 
       }
 
-      pusersystem->m_pwindow = this;
+      //pusersystem->m_pwindow = this;
 
       HMENU hmenu = nullptr;
 
-      HINSTANCE hinstance = (HINSTANCE)GetModuleHandleW(L"windowing_win32.dll");
+      HINSTANCE hinstance = windows::get_window_procedure_hinstance();
 
-      void * lpCreateParams = pusersystem;
+      void * lpCreateParams = (::windows::window*)this;
 
       bool bWsChildStyle = dwStyle & WS_CHILD;
 
@@ -604,7 +604,7 @@ namespace windowing_win32
 
       }
 
-      HWND hwnd = ::CreateWindowExW(
+      ::CreateWindowExW(
          dwExStyle,
          wstrClassName,
          wstrWindowName,
@@ -620,7 +620,7 @@ namespace windowing_win32
 
 #endif
 
-      if (hwnd == nullptr)
+      if (m_hwnd == nullptr)
       {
 
          unsigned int dwLastError = ::GetLastError();
@@ -652,18 +652,18 @@ namespace windowing_win32
 
       }
 
-      SendMessage(hwnd, e_message_pos_create, 0, 0);
+      SendMessage(m_hwnd, e_message_pos_create, 0, 0);
 
       if (puserinteraction->m_bEdgeGestureDisableTouchWhenFullscreen)
       {
 
-         SetTouchDisableProperty(hwnd, true);
+         SetTouchDisableProperty(m_hwnd, true);
 
       }
 
       puserinteraction->m_ewindowflag += ::e_window_flag_is_window;
 
-      bool bUnicode = ::IsWindowUnicode(hwnd) != false;
+      bool bUnicode = ::IsWindowUnicode(m_hwnd) != false;
 
       if (bUnicode)
       {
@@ -678,10 +678,10 @@ namespace windowing_win32
 
       }
 
-      if (hwnd != get_hwnd())
+      if (m_hwnd != get_hwnd())
       {
 
-         set_hwnd(hwnd);
+         set_hwnd(m_hwnd);
 
       }
 
@@ -7859,7 +7859,7 @@ namespace windowing_win32
    }
 
 
-   LRESULT window::__window_procedure(HWND hwnd, UINT message, WPARAM wparam, LPARAM lparam)
+   LRESULT window::window_procedure(unsigned int message, wparam wparam, lparam lparam)
    {
 
       if (message == WM_USER + 1297)
@@ -7875,12 +7875,12 @@ namespace windowing_win32
 
       lresult lresult = 0;
 
-      if (hwnd == m_hwnd && on_window_procedure(lresult, message, wparam, lparam))
-      {
+      //if (hwnd == m_hwnd && on_window_procedure(lresult, message, wparam, lparam))
+      //{
 
-         return lresult;
+      //   return lresult;
 
-      }
+      //}
 
       //if (message == WM_WINDOWPOSCHANGED)
       //{
@@ -7997,7 +7997,7 @@ namespace windowing_win32
          if (wparam > 0)
          {
 
-            information() << "activation window " << (iptr)hwnd;
+            information() << "activation window " << (iptr)m_hwnd;
 
             information() << "GetCapture " << (iptr)::GetCapture();
 
@@ -8005,20 +8005,20 @@ namespace windowing_win32
          else
          {
 
-            information() << "(2) activation window " << (iptr)hwnd;
+            information() << "(2) activation window " << (iptr)m_hwnd;
 
             information() << "(2) GetCapture " << (iptr)::GetCapture();
 
          }
 
-         information() << "e_message_activate wparam : " << wparam;
+         information() << "e_message_activate wparam : " << wparam.m_number;
 
       }
 
       if (is_registered_windows_message(message))
       {
 
-         lresult = ::DefWindowProcW(hwnd, message, wparam, lparam);
+         lresult = ::DefWindowProcW(m_hwnd, message, wparam, lparam);
 
          return lresult;
 
@@ -8055,7 +8055,7 @@ namespace windowing_win32
 
                RECT r;
 
-               GetWindowRect(hwnd, &r);
+               GetWindowRect(m_hwnd, &r);
 
                auto pmouse = __create_new < ::message::mouse >();
 
@@ -8149,7 +8149,7 @@ namespace windowing_win32
          if (message == e_message_mouse_move)
          {
 
-            if (lparam == m_lparamLastMouseMove)
+            if (lparam.m_lparam == m_lparamLastMouseMove.m_lparam)
             {
 
                return 0;
@@ -8246,19 +8246,19 @@ namespace windowing_win32
             if (message == WM_GETTEXT)
             {
 
-               return ::DefWindowProcW(hwnd, message, wparam, lparam);
+               return ::DefWindowProcW(m_hwnd, message, wparam, lparam);
 
             }
             else if (message == WM_GETTEXTLENGTH)
             {
 
-               return ::DefWindowProcW(hwnd, message, wparam, lparam);
+               return ::DefWindowProcW(m_hwnd, message, wparam, lparam);
 
             }
             else if (message == WM_SETTEXT)
             {
 
-               return ::DefWindowProcW(hwnd, message, wparam, lparam);
+               return ::DefWindowProcW(m_hwnd, message, wparam, lparam);
 
             }
             if (message == 34831)
@@ -8299,7 +8299,7 @@ namespace windowing_win32
          else
          {
 
-            lresult = ::DefWindowProcW(hwnd, message, wparam, lparam);
+            lresult = ::DefWindowProcW(m_hwnd, message, wparam, lparam);
 
          }
 
