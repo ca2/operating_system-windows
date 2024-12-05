@@ -604,7 +604,7 @@ namespace windowing_win32
 
       }
 
-      ::CreateWindowExW(
+      HWND hwnd = ::CreateWindowExW(
          dwExStyle,
          wstrClassName,
          wstrWindowName,
@@ -617,6 +617,17 @@ namespace windowing_win32
          hmenu,
          hinstance,
          lpCreateParams);
+
+      if (!m_hwnd && ::is_set(hwnd) && ::is_set(hwndParent))
+      {
+
+         m_hwnd = hwnd;
+
+         ::cast < ::windows::windowing > pwindowing = system()->acme_windowing();
+
+         pwindowing->m_windowmap[(::oswindow)hwnd] = this;
+
+      }
 
 #endif
 

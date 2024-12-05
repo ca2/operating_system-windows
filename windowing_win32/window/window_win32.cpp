@@ -684,9 +684,9 @@ wstring windowing::_windows_register_window_class(unsigned int nClassStyle, HCUR
    // otherwise we need to register a ___new class
    wndcls.style = nClassStyle;
    wndcls.lpfnWndProc = &::windows::window_procedure;
-
+   auto hinstanceWindowProcedure = ::windows::get_window_procedure_hinstance();
    wndcls.cbClsExtra = wndcls.cbWndExtra = 40;
-   wndcls.hInstance = hinstance;
+   wndcls.hInstance = hinstanceWindowProcedure;
    //wndcls.hIcon = hIcon;
    //wndcls.hCursor = hCursor;
    wndcls.hCursor = nullptr;
