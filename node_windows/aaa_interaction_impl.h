@@ -278,7 +278,7 @@ namespace windows
       virtual bool display(::e_display edisplay);
 
 
-      virtual void sketch_prepare_window_minimize(::e_activation eactivation) override;
+      virtual void sketch_prepare_window_minimize(const ::user::activation & useractivation) override;
       virtual void sketch_prepare_window_maximize() override;
       virtual void sketch_prepare_window_full_screen(const ::int_rectangle & rectangleHint = nullptr) override;
       virtual void sketch_prepare_window_restore(edisplay edisplay) override;
@@ -732,7 +732,7 @@ namespace windows
       virtual bool get_rect_normal(::int_rectangle * prectangle);
       virtual void register_drop_target();
       virtual void show_task(bool bShow);
-      virtual void window_show_change_visibility(::e_display edisplay, ::e_activation eactivation) override;
+      virtual void window_show_change_visibility(::e_display edisplay, const ::user::activation & useractivation) override;
 
 
       //virtual void non_top_most_upper_window_rects(::int_rectangle_array& recta) override;

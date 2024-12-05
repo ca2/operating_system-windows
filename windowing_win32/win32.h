@@ -24,8 +24,8 @@ namespace windows
    CLASS_DECL_WINDOWING_WIN32 HICON load_icon(::particle * pparticle, string_array & straMatter, string strIcon, int cx, int cy);
 
 
-   CLASS_DECL_WINDOWING_WIN32 int show_window(enum_display edisplay, enum_activation eactivation);
-   CLASS_DECL_WINDOWING_WIN32 enum_display show_window_to_edisplay(int iShowWindow, enum_activation & eactivation);
+   CLASS_DECL_WINDOWING_WIN32 int show_window(enum_display edisplay, const ::user::activation & useractivation);
+   CLASS_DECL_WINDOWING_WIN32 enum_display show_window_to_edisplay(int iShowWindow, const ::user::activation & useractivation);
 
    CLASS_DECL_WINDOWING_WIN32 HWND get_mouse_capture(itask_t itask);
    CLASS_DECL_WINDOWING_WIN32 bool set_mouse_capture(itask_t itask, HWND hwnd);

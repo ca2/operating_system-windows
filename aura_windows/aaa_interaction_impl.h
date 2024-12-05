@@ -285,7 +285,7 @@ namespace aura_windows
       virtual bool display(::e_display edisplay);
 
 
-      //virtual void design_window_minimize(::e_activation eactivation) override;
+      //virtual void design_window_minimize(const ::user::activation & useractivation) override;
       //virtual void design_window_maximize() override;
       //virtual void design_window_full_screen(const ::int_rectangle & rectangleHint = nullptr) override;
       //virtual void design_window_normal(::e_display edisplay) override;
@@ -750,7 +750,7 @@ namespace aura_windows
       virtual void get_rect_normal(::int_rectangle * prectangle);
       virtual void register_drop_target();
       virtual void show_task(bool bShow);
-      //void _window_show_change_visibility_unlocked(::e_display edisplay, ::e_activation eactivation) override;
+      //void _window_show_change_visibility_unlocked(::e_display edisplay, const ::user::activation & useractivation) override;
 
 
       //virtual void non_top_most_upper_window_rects(::int_rectangle_array& recta) override;

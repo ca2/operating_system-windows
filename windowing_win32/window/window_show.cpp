@@ -9,10 +9,10 @@ namespace windows
 {
 
 
-   CLASS_DECL_WINDOWING_WIN32 int show_window(enum_display edisplay, enum_activation eactivation)
+   CLASS_DECL_WINDOWING_WIN32 int show_window(enum_display edisplay, const ::user::activation & useractivation)
    {
 
-      auto bNoActivate = eactivation & e_activation_no_activate;
+      auto bNoActivate = useractivation & ::user::e_activation_no_activate;
 
       switch (edisplay)
       {
@@ -43,10 +43,10 @@ namespace windows
    }
 
 
-   CLASS_DECL_WINDOWING_WIN32 enum_display show_window_to_edisplay(int iShowWindow, enum_activation & eactivation)
+   CLASS_DECL_WINDOWING_WIN32 enum_display show_window_to_edisplay(int iShowWindow, ::user::activation & useractivation)
    {
 
-      eactivation = e_activation_default;
+      useractivation = { ::user::e_activation_default } ;
 
       if (iShowWindow <= SW_HIDE)
       {
@@ -68,10 +68,10 @@ namespace windows
       case SW_MAXIMIZE:
          return e_display_zoomed;
       case SW_SHOWNA:
-         eactivation = e_activation_no_activate;
+         useractivation = { ::user::e_activation_no_activate };
          return e_display_normal;
       case SW_SHOWMINNOACTIVE:
-         eactivation = e_activation_no_activate;
+         useractivation = { ::user::e_activation_no_activate };
          return e_display_iconic;
       default:
          return e_display_normal;

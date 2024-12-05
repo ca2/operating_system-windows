@@ -1596,10 +1596,10 @@ namespace windows
    }
 
 
-   void interaction_impl::sketch_prepare_window_minimize(::e_activation eactivation)
+   void interaction_impl::sketch_prepare_window_minimize(const ::user::activation & useractivation)
    {
 
-      primitive_impl::sketch_prepare_window_minimize(eactivation);
+      primitive_impl::sketch_prepare_window_minimize(useractivation);
 
    }
 
@@ -3644,10 +3644,10 @@ namespace windows
 */
 
 
-   void interaction_impl::window_show_change_visibility(::e_display edisplay, ::e_activation eactivation)
+   void interaction_impl::window_show_change_visibility(::e_display edisplay, const ::user::activation & useractivation)
    {
 
-      ::windowing::window::window_show_change_visibility(edisplay, eactivation);
+      ::windowing::window::window_show_change_visibility(edisplay, useractivation);
 
    }
 

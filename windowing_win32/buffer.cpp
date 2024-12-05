@@ -1132,6 +1132,10 @@ namespace windowing_win32
                         if (!::IsIconic(hwnd))
                         {
 
+                           information() << "windowing_win32::buffer !IsIconic";
+                           information() << "windowing_win32::buffer bZOrder = " << bZOrder;
+                           information() << "windowing_win32::buffer bActivate = " << bActivate;
+
                            nFlags &= ~SWP_NOMOVE;
                            nFlags &= ~SWP_NOSIZE;
                            //nFlags |= SWP_NOZORDER;
@@ -1165,6 +1169,34 @@ namespace windowing_win32
                                     cx,
                                     rectangleRequest.height(),
                                     nFlags);
+
+                                 if (pwindow->m_activationSetWindowPosLast & ::user::e_activation_set_foreground)
+                                 {
+
+                                    if (pwindow->m_activationSetWindowPosLast.m_ptaskForeground)
+                                    {
+
+                                       pwindow->m_activationSetWindowPosLast.m_ptaskForeground->post([pwindow,hwnd]()
+                                          {
+
+                                             ::SetForegroundWindow(hwnd);
+                                             pwindow->m_activationSetWindowPosLast.clear();
+
+
+});
+
+                                    }
+                                    else
+                                    {
+
+                                       ::SetForegroundWindow(hwnd);
+                                       pwindow->m_activationSetWindowPosLast.clear();
+
+                                    }
+
+                                 }
+
+                                 pwindow->m_uSetWindowPosLastFlags &= ~SWP_NOACTIVATE;
 
                            });
 

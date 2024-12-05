@@ -1375,10 +1375,10 @@ namespace windowing_win32
    }
 
 
-   bool window::_configure_window_unlocked(const class ::zorder & zorder, const ::e_activation & eactivation, bool bNoZorder, ::e_display edisplay)
+   bool window::_configure_window_unlocked(const class ::zorder & zorder, const ::user::e_activation & useractivation, bool bNoZorder, ::e_display edisplay)
    {
 
-      auto iShowWindow = windows::show_window(edisplay, eactivation);
+      auto iShowWindow = windows::show_window(edisplay, useractivation);
 
       HWND hwnd = get_hwnd();
 
@@ -1853,10 +1853,10 @@ namespace windowing_win32
    }
 
 
-   //void window::show_window(const ::e_display & edisplay, const ::e_activation & eactivation)
+   //void window::show_window(const ::e_display & edisplay, const ::user::e_activation & useractivation)
    //{
 
-   //   int nCmdShow = windows_show_window(edisplay, eactivation);
+   //   int nCmdShow = windows_show_window(edisplay, useractivation);
 
    //   if(!::XXXShowWindow(get_hwnd(), nCmdShow))
    //   {
@@ -1882,7 +1882,7 @@ namespace windowing_win32
    }
 
 
-   bool window::_set_window_position_unlocked(const class ::zorder & zorder, int x, int y, int cx, int cy, const ::e_activation & eactivation, bool bNoZorder, bool bNoMove, bool bNoSize, ::e_display edisplay)
+   bool window::_set_window_position_unlocked(const class ::zorder & zorder, int x, int y, int cx, int cy, const ::user::e_activation & useractivation, bool bNoZorder, bool bNoMove, bool bNoSize, ::e_display edisplay)
    {
 
       HWND hwnd = get_hwnd();
@@ -1941,9 +1941,9 @@ namespace windowing_win32
          if (is_equivalent_in_equivalence_sink(edisplayOutput, e_display_normal))
          {
 
-            if (eactivation & e_activation_set_active
-               || eactivation & e_activation_set_foreground
-               || eactivation & e_activation_on_center_of_screen)
+            if (useractivation & ::user::e_activation_set_active
+               || useractivation & ::user::e_activation_set_foreground
+               || useractivation & ::user::e_activation_on_center_of_screen)
             {
 
                ::ShowWindow(hwnd, SW_NORMAL);
@@ -1990,7 +1990,7 @@ namespace windowing_win32
 
       return __set_window_position(
          zorder, x, y, cx, cy,
-         eactivation, bNoZorder, bNoMove, bNoSize, 
+         useractivation, bNoZorder, bNoMove, bNoSize, 
          bShow, bHide);
 
    }
@@ -2262,13 +2262,13 @@ namespace windowing_win32
    }
 
 
-   //bool window::on_set_window_position(const class ::zorder& zorder, int x, int y, int cx, int cy, const ::e_activation& eactivation, bool bNoZorder, bool bNoMove, bool bNoSize, bool bShow, bool bHide)
+   //bool window::on_set_window_position(const class ::zorder& zorder, int x, int y, int cx, int cy, const ::user::e_activation& useractivation, bool bNoZorder, bool bNoMove, bool bNoSize, bool bShow, bool bHide)
    //{
 
    //   //if (!(_get_ex_style() & WS_EX_LAYERED))
    //   {
 
-   //      ::windowing::window::on_set_window_position(zorder, x, y, cx, cy, eactivation, 
+   //      ::windowing::window::on_set_window_position(zorder, x, y, cx, cy, useractivation, 
    //         bNoZorder, bNoMove, bNoSize, bShow, bHide);
 
    //   }
@@ -2281,7 +2281,7 @@ namespace windowing_win32
 #undef SET_WINDOW_POS_LOG
 
 
-   bool window::__set_window_position(const class ::zorder & zorder, int x, int y, int cx, int cy, const ::e_activation & eactivation, bool bNoZorder, bool bNoMove, bool bNoSize, bool bShow, bool bHide, unsigned int nOverrideFlags)
+   bool window::__set_window_position(const class ::zorder & zorder, int x, int y, int cx, int cy, const ::user::e_activation & useractivation, bool bNoZorder, bool bNoMove, bool bNoSize, bool bShow, bool bHide, unsigned int nOverrideFlags)
    {
 
       HWND hwnd = get_hwnd();
@@ -2292,7 +2292,7 @@ namespace windowing_win32
 
       UINT nFlags = m_uExtraFlagsSetWindowPos;
 
-      if (eactivation & e_activation_no_activate)
+      if (useractivation & ::user::e_activation_no_activate)
       {
 
          nFlags |= SWP_NOACTIVATE;
@@ -2384,8 +2384,8 @@ namespace windowing_win32
    }
 
 
-   ////bool window::_set_window_position(const class ::zorder& zorder, int x, int y, int cx, int cy, const ::e_activation& eactivation, bool bNoZorder, bool bNoMove, bool bNoSize, bool bShow, bool bHide, unsigned int nOverrideFlags)
-   //bool window::_configure_window_unlocked(const class ::zorder & zorder, const ::e_activation & eactivation, bool bNoZorder, ::e_display edisplay)
+   ////bool window::_set_window_position(const class ::zorder& zorder, int x, int y, int cx, int cy, const ::user::e_activation& useractivation, bool bNoZorder, bool bNoMove, bool bNoSize, bool bShow, bool bHide, unsigned int nOverrideFlags)
+   //bool window::_configure_window_unlocked(const class ::zorder & zorder, const ::user::e_activation & useractivation, bool bNoZorder, ::e_display edisplay)
    //{
 
    //   //::int_rectangle rectangle;
@@ -2437,14 +2437,14 @@ namespace windowing_win32
 
    //   //}
 
-   //   //if (eactivation.eflag() & ::e_activation_no_activate)
+   //   //if (useractivation.eflag() & ::user::e_activation_no_activate)
    //   //{
 
    //   //   nOverrideFlags |= SWP_NOACTIVATE;
 
    //   //}
 
-   //   //if (eactivation.eflag() & ::e_activation_set_popup)
+   //   //if (useractivation.eflag() & ::user::e_activation_set_popup)
    //   //{
 
    //   //   _modify_style(0, WS_POPUP);
@@ -2476,7 +2476,7 @@ namespace windowing_win32
 
    //   }*/
 
-   //   if (eactivation & e_activation_set_foreground)
+   //   if (useractivation & ::user::e_activation_set_foreground)
    //   {
 
    //      ::SetForegroundWindow(hwnd);
@@ -5408,7 +5408,7 @@ namespace windowing_win32
     //
 
 
-    void window::_window_show_change_visibility(::e_display edisplay, ::e_activation eactivation)
+    void window::_window_show_change_visibility(::e_display edisplay, const ::user::activation & useractivation)
     {
 
        throw ::interface_only();
@@ -5558,10 +5558,10 @@ namespace windowing_win32
 */
 
 
-   //void window::window_show_change_visibility(::e_display edisplay, ::e_activation eactivation)
+   //void window::window_show_change_visibility(::e_display edisplay, const ::user::activation & useractivation)
    //{
 
-   //   ::user::window::window_show_change_visibility(edisplay, eactivation);
+   //   ::user::window::window_show_change_visibility(edisplay, useractivation);
 
    //}
 

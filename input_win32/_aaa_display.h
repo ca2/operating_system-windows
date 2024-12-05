@@ -98,9 +98,9 @@ namespace windowing_win32
 
       virtual ::collection::index _get_best_zoneing(::e_display * pedisplay, ::int_rectangle * prectangle, const ::int_rectangle & rectangle, bool bPreserveSize = false);
 
-      ::collection::index get_best_monitor(::int_rectangle * prectangle, const ::int_rectangle & rectangle, ::e_activation eactivation = e_activation_default, ::windowing::window * pwindowCursorPosition = nullptr);
+      ::collection::index get_best_monitor(::int_rectangle * prectangle, const ::int_rectangle & rectangle, const ::user::activation & useractivation = {}, ::windowing::window * pwindowCursorPosition = nullptr);
 
-      ::collection::index get_best_workspace(::int_rectangle * prectangle, const ::int_rectangle & rectangle, ::e_activation eactivation = e_activation_default, ::windowing::window * pwindowCursorPosition = nullptr) override;
+      ::collection::index get_best_workspace(::int_rectangle * prectangle, const ::int_rectangle & rectangle, const ::user::activation & useractivation = {}, ::windowing::window * pwindowCursorPosition = nullptr) override;
 
       ::collection::index get_good_iconify(::int_rectangle * prectangle, const ::int_rectangle & rectangle) override;
 

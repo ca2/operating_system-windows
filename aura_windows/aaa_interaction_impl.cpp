@@ -1379,10 +1379,10 @@ namespace aura_windows
    }
 
 
-   //void interaction_impl::design_window_minimize(::e_activation eactivation)
+   //void interaction_impl::design_window_minimize(const ::user::activation & useractivation)
    //{
 
-   //   primitive_impl::design_window_minimize(eactivation);
+   //   primitive_impl::design_window_minimize(useractivation);
 
    //}
 
@@ -3624,10 +3624,10 @@ void interaction_impl::on_message_size(::message::message* pmessage)
 */
 
 
-   //void interaction_impl::_window_show_change_visibility_unlocked(::e_display edisplay, ::e_activation eactivation)
+   //void interaction_impl::_window_show_change_visibility_unlocked(::e_display edisplay, const ::user::activation & useractivation)
    //{
 
-   //   ::windowing::window::_window_show_change_visibility_unlocked(edisplay, eactivation);
+   //   ::windowing::window::_window_show_change_visibility_unlocked(edisplay, useractivation);
 
    //}
 
