@@ -44,7 +44,7 @@ namespace acme_windows
 
          m_fileinstance.m_handle = INVALID_HANDLE_VALUE;
 
-         m_hfilemap = CreateFileMappingW(INVALID_HANDLE_VALUE, nullptr, PAGE_READWRITE, 0, (unsigned int)m_size, windowspath);
+         m_hfilemap = CreateFileMappingW(INVALID_HANDLE_VALUE, nullptr, PAGE_READWRITE, 0, (unsigned int)m_size, windowspath.extended_path());
 
       }
       else
@@ -52,11 +52,7 @@ namespace acme_windows
 
          auto pathFolder = path.folder();
 
-         auto strWindowsPathFolder = pathFolder.windows_path();
-
-         ::windows_path windowspathFolder = strWindowsPathFolder;
-
-         directory_system()->create(windowspathFolder);
+         directory_system()->create(pathFolder);
 
          int iOpen;
 

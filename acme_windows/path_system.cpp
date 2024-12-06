@@ -217,7 +217,7 @@ namespace acme_windows
 
       ::windows_path windowspath = strWindowsPath;
 
-      if (FAILED(hr = ppersistfile->Load(windowspath, STGM_WRITE)))
+      if (FAILED(hr = ppersistfile->Load(windowspath.extended_path(), STGM_WRITE)))
       {
 
          return nullptr;
@@ -279,9 +279,9 @@ namespace acme_windows
 
       auto windowspathNew = pathNewName.windows_path();
 
-      ::wstring wstrOld = windowspathOld;
+      ::wstring wstrOld = windowspathOld.extended_path();
 
-      ::wstring wstrNew = windowspathNew;
+      ::wstring wstrNew = windowspathNew.extended_path();
 
       if (!::MoveFileW(wstrOld, wstrNew))
       {
@@ -302,13 +302,13 @@ namespace acme_windows
 
       auto windowspathSource = pathSource.windows_path();
 
-      windowspathTarget = "\\\\?\\" + windowspathTarget;
+      windowspathTarget = windowspathTarget.extended_path();
 
-      windowspathSource = "\\\\?\\" + windowspathSource;
+      windowspathSource = windowspathSource.extended_path();
 
-      ::wstring wstrTarget = windowspathTarget;
+      ::wstring wstrTarget = windowspathTarget.extended_path();
       
-      ::wstring wstrSource = windowspathSource;
+      ::wstring wstrSource = windowspathSource.extended_path();
 
       DWORD dwFlag = 0;
 

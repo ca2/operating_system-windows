@@ -1344,7 +1344,7 @@ pacmedir->create CreateDirectoryW last error(%d)=%s", dwError, pszError);
 
          ::windows::find_file findfile;
 
-         auto windowsPath = listing.m_pathFinal.windows_path();
+         auto windowsPath = listing.m_pathFinal.windows_path().path();
 
          if(!findfile.find_first_file(windowsPath + L"\\*"))
          {
@@ -2136,11 +2136,9 @@ pacmedir->create CreateDirectoryW last error(%d)=%s", dwError, pszError);
 
       auto path = m_papplication->defer_process_path(pathParam);
 
-      auto strWindowsPath = path.windows_path();
+      auto windowspath = path.windows_path();
 
-      ::windows_path windowspath = path.windows_path();
-
-      if (!::SetCurrentDirectoryW(windowspath))
+      if (!::SetCurrentDirectoryW(windowspath.extended_path()))
       {
 
          throw_last_error_exception();

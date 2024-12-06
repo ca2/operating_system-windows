@@ -867,7 +867,7 @@ namespace acme_windows
 
             auto windowspath = pathMsys2.windows_path();
             strEscaped.find_replace("\"", "\\\"");
-            strCommand = "\"" + windowspath + "\\usr\\bin\\bash.exe\" -l -c \"" + strEscaped + "\"";
+            strCommand = "\"" + windowspath.path() + "\\usr\\bin\\bash.exe\" -l -c \"" + strEscaped + "\"";
             //strCommand = "\"" + windowspath + "\\usr\\bin\\bash.exe\" -l -c \'" + strEscaped + "; exit $?\'";
             //strCommand = "\"" + windowspath + "\\msys2_shell.cmd\" -c \'" + strEscaped + "\'";
 
@@ -1009,7 +1009,7 @@ namespace acme_windows
 
             ::string strMessage;
             
-            strMessage = "MSYS2 should be installed at \"" + pathMsys2.windows_path() + "\"";
+            strMessage = "MSYS2 should be installed at \"" + pathMsys2.windows_path().path() + "\"";
 
             throw ::exception(::error_file_not_found, strMessage);
 
@@ -1042,7 +1042,7 @@ namespace acme_windows
 
 //               strCommand = "\"" + windowspath + "\\usr\\bin\\bash.exe\" -l -c \'" + strEscaped + "\'";
                strEscaped.find_replace("\"", "\\\"");
-               strCommand = "\"" + windowspath + "\\usr\\bin\\bash.exe\" -l -c \"" + strEscaped + "\"";
+               strCommand = "\"" + windowspath.path() + "\\usr\\bin\\bash.exe\" -l -c \"" + strEscaped + "\"";
 
             }
             else

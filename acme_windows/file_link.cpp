@@ -80,7 +80,7 @@ namespace acme_windows
       else
       {
 
-         dw = SHGetFileInfoW(windowspath, 0, &info, sizeof(info), SHGFI_ATTRIBUTES);
+         dw = SHGetFileInfoW(windowspath.extended_path(), 0, &info, sizeof(info), SHGFI_ATTRIBUTES);
 
       }
 
@@ -221,11 +221,9 @@ namespace acme_windows
       if (m_elink & ::file::e_link_target)
       {
 
-         auto strWindowsPath = m_pathTarget.windows_path();
+         auto windowspath = m_pathTarget.windows_path();
 
-         ::windows_path windowspath = strWindowsPath;
-
-         HRESULT hresult = m_pshelllink->SetPath(windowspath);
+         HRESULT hresult = m_pshelllink->SetPath(windowspath.extended_path());
 
          if (SUCCEEDED(hresult))
          {
@@ -239,11 +237,9 @@ namespace acme_windows
       if (m_elink & ::file::e_link_folder)
       {
 
-         auto strWindowsPath = m_pathFolder.windows_path();
+         auto windowspath = m_pathFolder.windows_path();
 
-         ::windows_path windowspath = strWindowsPath;
-
-         HRESULT hresult = m_pshelllink->SetWorkingDirectory(windowspath);
+         HRESULT hresult = m_pshelllink->SetWorkingDirectory(windowspath.extended_path());
 
          if (SUCCEEDED(hresult))
          {
@@ -257,9 +253,9 @@ namespace acme_windows
       if (m_elink & ::file::e_link_icon)
       {
 
-         auto strWindowsPath = m_pathIcon.windows_path();
+         auto windowspath = m_pathIcon.windows_path();
 
-         if (strWindowsPath.is_empty())
+         if (windowspath.is_empty())
          {
 
             HRESULT hresult = m_pshelllink->SetIconLocation(nullptr, 0);
@@ -275,10 +271,7 @@ namespace acme_windows
          else
          {
 
-
-            ::windows_path windowspath = strWindowsPath;
-
-            HRESULT hresult = m_pshelllink->SetIconLocation(windowspath, m_iIcon);
+            HRESULT hresult = m_pshelllink->SetIconLocation(windowspath.extended_path(), m_iIcon);
 
             if (SUCCEEDED(hresult))
             {
@@ -309,11 +302,9 @@ namespace acme_windows
 
       }
 
-      auto strWindowsPath = m_path.windows_path();
+      auto windowspath = m_path.windows_path();
 
-      ::windows_path windowspath = strWindowsPath;
-
-      ppersistfile->Save(windowspath, TRUE);
+      ppersistfile->Save(windowspath.extended_path(), TRUE);
 
       return elinkWritten;
 

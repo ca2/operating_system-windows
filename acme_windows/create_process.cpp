@@ -713,7 +713,7 @@ namespace acme_windows
       if (str.begins_eat("powershell://"))
       {
 
-         auto strPowerShell = node()->_get_power_shell_path().windows_path();
+         auto strPowerShell = node()->_get_power_shell_path().windows_path().path();
 
          str1 = strPowerShell;
 
@@ -732,7 +732,7 @@ namespace acme_windows
       else if (str1.is_empty() || str1.case_insensitive_ends(".cmd"))
       {
 
-         ::string strCmd = node()->_get_cmd_path().windows_path();
+         ::string strCmd = node()->_get_cmd_path().windows_path().path();
 
          str1 = strCmd;
 
@@ -763,7 +763,7 @@ namespace acme_windows
 
       ::wstring wstrWorkingDirectory;
 
-      wstrWorkingDirectory = m_pathWorkingDirectory.windows_path();
+      wstrWorkingDirectory = m_pathWorkingDirectory.windows_path().path();
 
       LPCWSTR pszWorkingDirectory = nullptr;
 

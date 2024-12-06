@@ -120,7 +120,7 @@ namespace acme_windows
          if (pathWorkingDirectory.has_character())
          {
 
-            m_wstrWorkingDirectory = pathWorkingDirectory.windows_path();
+            m_wstrWorkingDirectory = pathWorkingDirectory.windows_path().extended_path();
 
             lpDirectory = m_wstrWorkingDirectory;
 
@@ -267,7 +267,7 @@ namespace acme_windows
    void node::shell_open(const ::file::path& pathFile, const ::string& strParams, const ::file::path& pathFolder)
    {
 
-      wstring wstrFile(pathFile.windows_path());
+      wstring wstrFile(pathFile.windows_path().extended_path());
 
       const wchar_t* pwszParams = nullptr;
 
@@ -282,7 +282,7 @@ namespace acme_windows
 
       const wchar_t* pwszFolder = nullptr;
 
-      wstring wstrFolder(pathFolder.windows_path());
+      wstring wstrFolder(pathFolder.windows_path().extended_path());
 
       if (wstrFolder.has_character())
       {
