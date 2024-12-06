@@ -26,7 +26,7 @@ namespace windowing_win32
 
 
       ::critical_section               m_criticalsection;
-      ::windows::window_map            m_windowmap;
+      //::windows::window_map            m_windowmap;
       //::pointer<class display>         m_pdisplay;
 
 //#ifdef WINDOWS_DESKTOP
