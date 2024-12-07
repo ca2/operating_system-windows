@@ -55,6 +55,8 @@ namespace windowing_win32
 
       ::windowing::windowing::initialize_windowing();
 
+      fetch_system_background_color();
+
       //if (!estatus)
       //{
 

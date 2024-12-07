@@ -28,6 +28,7 @@ namespace win32
             windowing();
             ~windowing() override;
 
+
             //::e_status defer_initialize_windowing() override;
             void initialize_windowing() override;
             //void * get_display() override;

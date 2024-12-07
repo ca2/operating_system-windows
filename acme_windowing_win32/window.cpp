@@ -1008,6 +1008,8 @@ namespace win32
                if (strLparamString == "ImmersiveColorSet")
                {
 
+                  //system()->acme_windowing()->fetch_dark_mode();
+                  
                   //update_drawing_objects();
 
                   //redraw();

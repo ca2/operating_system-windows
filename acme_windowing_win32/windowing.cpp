@@ -75,6 +75,8 @@ namespace win32
 
             }
 
+            fetch_system_background_color();
+
             // gdk_x11 does error handling?!?!?!
             //XSetErrorHandler(_c_XErrorHandler);
 
@@ -316,6 +318,7 @@ namespace win32
 
             system()->set_background_color(colorWindowBackground);
 
+            set_dark_mode_time(::time::now());
 
          }
 

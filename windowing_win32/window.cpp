@@ -245,6 +245,9 @@ namespace windowing_win32
       MESSAGE_LINK(e_message_destroy, pchannel, this, &window::on_message_destroy);
       MESSAGE_LINK(e_message_non_client_destroy, pchannel, this, &window::on_message_non_client_destroy);
       MESSAGE_LINK(WM_GETICON, pchannel, this, &window::on_message_get_icon);
+      //MESSAGE_LINK(WM_SETTINGCHANGE, pchannel, this, &window::_001OnMessage);
+      //MESSAGE_LINK(WM_FONTCHANGE, pchannel, this, &window::_001OnMessage);
+
 
       //MESSAGE_LINK(e_message_create, pchannel, pimpl, &::windowing::window::_001OnPrioCreate);
       auto psystem = system();
@@ -821,96 +824,96 @@ namespace windowing_win32
    //}
 
 
-   void window::_001OnMessage(::message::message * pmessage)
-   {
+   //void window::_001OnMessage(::message::message * pmessage)
+   //{
 
-      if (pmessage != nullptr)
-      {
+   //   if (pmessage != nullptr)
+   //   {
 
-         wparam wparam = pmessage->m_wparam;
+   //      wparam wparam = pmessage->m_wparam;
 
-         lparam lparam = pmessage->m_lparam;
+   //      lparam lparam = pmessage->m_lparam;
 
-         string strLparamString;
+   //      string strLparamString;
 
-         if (pmessage->m_atom == WM_SETTINGCHANGE && wparam == 0)
-         {
+   //      if (pmessage->m_atom == WM_SETTINGCHANGE && wparam == 0)
+   //      {
 
-            strLparamString = (const WCHAR *)(LPARAM(lparam));
+   //         strLparamString = (const WCHAR *)(LPARAM(lparam));
 
-         }
+   //      }
 
-         if (pmessage->m_atom == WM_FONTCHANGE)
-         {
+   //      if (pmessage->m_atom == WM_FONTCHANGE)
+   //      {
 
-            auto psystem = system();
+   //         auto psystem = system();
 
-            ::cast < ::manager > pmanager = psystem;
+   //         ::cast < ::manager > pmanager = psystem;
 
-            if (pmanager)
-            {
+   //         if (pmanager)
+   //         {
 
-               pmanager->signal(id_operating_system_font_list_change);
+   //            pmanager->signal(id_operating_system_font_list_change);
 
-            }
+   //         }
 
-            //auto ptopic = psystem->topic(id_os_font_change);
+   //         //auto ptopic = psystem->topic(id_os_font_change);
 
-            //psystem->handle_subject(ptopic);
+   //         //psystem->handle_subject(ptopic);
 
-            //fork([this]()
-              // {
+   //         //fork([this]()
+   //           // {
 
-                 // psession->call(e_routine_font_change);
+   //              // psession->call(e_routine_font_change);
 
-               //});
+   //            //});
 
-         //}
-         }
-         else if (pmessage->m_atom == WM_SETTINGCHANGE && strLparamString == "ImmersiveColorSet")
-         {
+   //      //}
+   //      }
+   //      else if (pmessage->m_atom == WM_SETTINGCHANGE && strLparamString == "ImmersiveColorSet")
+   //      {
 
-            //auto pnode = system()->m_pnode;
+   //         //auto pnode = system()->m_pnode;
 
-            //pnode->fetch_user_color();
+   //         //pnode->fetch_user_color();
 
-            system()->acme_windowing()->fetch_system_background_color();
+   //         system()->acme_windowing()->fetch_system_background_color();
 
-         }
-         else if (pmessage->m_atom == e_message_display_change ||
-            (pmessage->m_atom == WM_SETTINGCHANGE &&
-               (pmessage->m_wparam == SPI_SETWORKAREA)))
-         {
+   //      }
+   //      else if (pmessage->m_atom == e_message_display_change ||
+   //         (pmessage->m_atom == WM_SETTINGCHANGE &&
+   //            (pmessage->m_wparam == SPI_SETWORKAREA)))
+   //      {
 
-            output_debug_string("WM_SETTINGCHANGE SPI_SETWORKAREA");
+   //         output_debug_string("WM_SETTINGCHANGE SPI_SETWORKAREA");
 
-            //throw_todo();
+   //         //throw_todo();
 
-            //psystem->enum_display_monitors();
+   //         //psystem->enum_display_monitors();
 
-            //::pointer<::user::interaction>puserinteraction;
+   //         //::pointer<::user::interaction>puserinteraction;
 
-            //while(psystem->get_frame(puserinteraction))
-            //{
+   //         //while(psystem->get_frame(puserinteraction))
+   //         //{
 
-            //   try
-            //   {
+   //         //   try
+   //         //   {
 
-            //      puserinteraction->post_message(e_message_display_change);
+   //         //      puserinteraction->post_message(e_message_display_change);
 
-            //   }
-            //   catch(...)
-            //   {
-            //   }
+   //         //   }
+   //         //   catch(...)
+   //         //   {
+   //         //   }
 
-            //}
+   //         //}
 
 
-         }
+   //      }
 
-      }
+   //   }
 
-   }
+   //}
 
 
    void window::_001OnTaskbarCreated(::message::message * pmessage)
