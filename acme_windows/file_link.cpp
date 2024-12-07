@@ -59,9 +59,7 @@ namespace acme_windows
 
       }
 
-      auto strWindowsPath = m_path.windows_path();
-
-      ::windows_path windowspath = strWindowsPath;
+      auto windowspath = m_path.windows_path();
 
       SHFILEINFOW info{};
 
@@ -80,7 +78,7 @@ namespace acme_windows
       else
       {
 
-         dw = SHGetFileInfoW(windowspath.extended_path(), 0, &info, sizeof(info), SHGFI_ATTRIBUTES);
+         dw = SHGetFileInfoW(windowspath.path(), 0, &info, sizeof(info), SHGFI_ATTRIBUTES);
 
       }
 
