@@ -234,7 +234,7 @@ namespace glm
 
 	/// Default qualifier 64 bit signed integer aligned scalar type.
 	/// @see gtx_type_aligned
-	GLM_ALIGNED_TYPEDEF(::huge_integer, aligned_i64, 8);
+	GLM_ALIGNED_TYPEDEF(i64, aligned_i64, 8);
 
 
 	/// Default qualifier 32 bit signed integer aligned scalar type.

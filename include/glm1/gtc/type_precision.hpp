@@ -225,7 +225,7 @@ namespace glm
 
 	/// 64 bit signed integer type.
 	/// @see gtc_type_precision
-	typedef detail::int64 ::huge_integer;
+	typedef detail::int64 i64;
 
 
 
@@ -444,70 +444,70 @@ namespace glm
 
 	/// Low qualifier 64 bit signed integer scalar type.
 	/// @see gtc_type_precision
-	typedef vec<1, ::huge_integer, lowp>		lowp_i64vec1;
+	typedef vec<1, i64, lowp>		lowp_i64vec1;
 
 	/// Low qualifier 64 bit signed integer vector of 2 components type.
 	/// @see gtc_type_precision
-	typedef vec<2, ::huge_integer, lowp>		lowp_i64vec2;
+	typedef vec<2, i64, lowp>		lowp_i64vec2;
 
 	/// Low qualifier 64 bit signed integer vector of 3 components type.
 	/// @see gtc_type_precision
-	typedef vec<3, ::huge_integer, lowp>		lowp_i64vec3;
+	typedef vec<3, i64, lowp>		lowp_i64vec3;
 
 	/// Low qualifier 64 bit signed integer vector of 4 components type.
 	/// @see gtc_type_precision
-	typedef vec<4, ::huge_integer, lowp>		lowp_i64vec4;
+	typedef vec<4, i64, lowp>		lowp_i64vec4;
 
 
 	/// Medium qualifier 64 bit signed integer scalar type.
 	/// @see gtc_type_precision
-	typedef vec<1, ::huge_integer, mediump>		mediump_i64vec1;
+	typedef vec<1, i64, mediump>		mediump_i64vec1;
 
 	/// Medium qualifier 64 bit signed integer vector of 2 components type.
 	/// @see gtc_type_precision
-	typedef vec<2, ::huge_integer, mediump>		mediump_i64vec2;
+	typedef vec<2, i64, mediump>		mediump_i64vec2;
 
 	/// Medium qualifier 64 bit signed integer vector of 3 components type.
 	/// @see gtc_type_precision
-	typedef vec<3, ::huge_integer, mediump>		mediump_i64vec3;
+	typedef vec<3, i64, mediump>		mediump_i64vec3;
 
 	/// Medium qualifier 64 bit signed integer vector of 4 components type.
 	/// @see gtc_type_precision
-	typedef vec<4, ::huge_integer, mediump>		mediump_i64vec4;
+	typedef vec<4, i64, mediump>		mediump_i64vec4;
 
 
 	/// High qualifier 64 bit signed integer scalar type.
 	/// @see gtc_type_precision
-	typedef vec<1, ::huge_integer, highp>		highp_i64vec1;
+	typedef vec<1, i64, highp>		highp_i64vec1;
 
 	/// High qualifier 64 bit signed integer vector of 2 components type.
 	/// @see gtc_type_precision
-	typedef vec<2, ::huge_integer, highp>		highp_i64vec2;
+	typedef vec<2, i64, highp>		highp_i64vec2;
 
 	/// High qualifier 64 bit signed integer vector of 3 components type.
 	/// @see gtc_type_precision
-	typedef vec<3, ::huge_integer, highp>		highp_i64vec3;
+	typedef vec<3, i64, highp>		highp_i64vec3;
 
 	/// High qualifier 64 bit signed integer vector of 4 components type.
 	/// @see gtc_type_precision
-	typedef vec<4, ::huge_integer, highp>		highp_i64vec4;
+	typedef vec<4, i64, highp>		highp_i64vec4;
 
 
 	/// 64 bit signed integer scalar type.
 	/// @see gtc_type_precision
-	typedef vec<1, ::huge_integer, defaultp> i64vec1;
+	typedef vec<1, i64, defaultp> i64vec1;
 
 	/// 64 bit signed integer vector of 2 components type.
 	/// @see gtc_type_precision
-	typedef vec<2, ::huge_integer, defaultp> i64vec2;
+	typedef vec<2, i64, defaultp> i64vec2;
 
 	/// 64 bit signed integer vector of 3 components type.
 	/// @see gtc_type_precision
-	typedef vec<3, ::huge_integer, defaultp> i64vec3;
+	typedef vec<3, i64, defaultp> i64vec3;
 
 	/// 64 bit signed integer vector of 4 components type.
 	/// @see gtc_type_precision
-	typedef vec<4, ::huge_integer, defaultp> i64vec4;
+	typedef vec<4, i64, defaultp> i64vec4;
 
 
 	/////////////////////////////

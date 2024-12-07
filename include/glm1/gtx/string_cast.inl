@@ -133,7 +133,7 @@ namespace detail
 	template<>
 	struct prefix<int64_t>
 	{
-		GLM_FUNC_QUALIFIER static char const * value() {return "::huge_integer";}
+		GLM_FUNC_QUALIFIER static char const * value() {return "i64";}
 	};
 
 	template<typename matType>
