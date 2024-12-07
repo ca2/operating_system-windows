@@ -373,6 +373,11 @@ namespace acme_windows
       bool defer_component_factory(const ::scoped_string & scopedstrComponent) override;
 
       void realize(::particle_pointer pparticle) override;
+
+
+      void calculate_onedrive_installed() override;
+
+
    };
 
 

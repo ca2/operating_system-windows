@@ -30,7 +30,6 @@
 #include "acme/prototype/string/international.h"
 #include "acme/prototype/string/str.h"
 
-
 #include "acme/_operating_system.h"
 
 
@@ -42,6 +41,7 @@
 #include "acme_windows_common/variant.h"
 #include <Shldisp.h>
 #include <shellapi.h>
+#include <Shlobj.h>
 
 
 #pragma comment(lib, "Version.lib")
@@ -4989,6 +4989,81 @@ namespace acme_windows
 
 
    }
+
+
+   void node::calculate_onedrive_installed()
+   {
+
+      m_bOneDrive = false;
+
+      m_pathOneDrive.empty();
+
+      m_bOneDriveCalculated = true;
+
+      __check_refdbg
+
+      ::cast < acme_windows::directory_system > pdirectorysystem = directory_system();
+
+      auto pathSkyDrive = pdirectorysystem->_get_known_folder(FOLDERID_OneDrive);
+
+      __check_refdbg
+
+      if (!directory_system()->is(pathSkyDrive))
+      {
+
+         if (platform()->is_desktop_system())
+         {
+
+            auto pathHome = directory()->home();
+
+            auto pathTxt = pathHome / "onedrive.txt";
+
+            if (file()->exists(pathTxt))
+            {
+
+               string strPath = file()->safe_get_string(pathTxt);
+
+               strPath.trim();
+
+               if (strPath.has_character() && directory()->is(strPath))
+               {
+
+                  m_pathOneDrive = strPath;
+
+                  m_bOneDrive = true;
+
+               }
+
+            }
+
+         }
+         else
+         {
+
+            m_pathOneDrive.empty();
+
+         }
+
+      }
+      else
+      {
+
+         m_pathOneDrive = pathSkyDrive;
+
+      }
+
+      if (directory()->is(m_pathOneDrive))
+      {
+
+         m_bOneDrive = true;
+
+      }
+
+      m_bOneDriveCalculated = true;
+
+
+   }
+
 
 } // namespace acme_windows
 
