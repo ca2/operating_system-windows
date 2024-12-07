@@ -381,7 +381,7 @@ FT_BEGIN_HEADER
 
   /**************************************************************************
    *
-   * The size_i32 in bytes of the render pool used by the scan-line converter to
+   * The int_size in bytes of the render pool used by the scan-line converter to
    * do all of its work.
    */
 #define FT_RENDER_POOL_SIZE  16384L
@@ -499,7 +499,7 @@ FT_BEGIN_HEADER
    *
    *   If this macro is set, `FT_Error_String` will return meaningful
    *   descriptions.  This is not enabled by default to reduce the overall
-   *   size_i32 of FreeType.
+   *   int_size of FreeType.
    *
    *   More details can be found in the file `fterrors.h`.
    */
@@ -837,7 +837,7 @@ FT_BEGIN_HEADER
    * There are many PCF fonts just called 'Fixed' which look completely
    * different, and which have nothing to do with each other.  When selecting
    * 'Fixed' in KDE or Gnome one gets results that appear rather random, the
-   * style changes often if one changes the size_i32 and one cannot select some
+   * style changes often if one changes the int_size and one cannot select some
    * fonts at all.  This option makes the 'pcf' module prepend the foundry
    * name (plus a space) to the family name.
    *
@@ -896,7 +896,7 @@ FT_BEGIN_HEADER
 
   /**************************************************************************
    *
-   * Use TrueType-like size_i32 metrics for 'light' auto-hinting.
+   * Use TrueType-like int_size metrics for 'light' auto-hinting.
    *
    * It is strongly recommended to avoid this option, which exists only to
    * help some legacy applications retain its appearance and behaviour with
@@ -909,7 +909,7 @@ FT_BEGIN_HEADER
    * ```
    *   2011-07-16  Steven Chu  <steven.f.chu@gmail.com>
    *
-   *     [truetype] Fix metrics on size_i32 request for scalable fonts.
+   *     [truetype] Fix metrics on int_size request for scalable fonts.
    * ```
    *
    * This problematic commit is now reverted (more or less).

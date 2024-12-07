@@ -89,7 +89,7 @@
 #define SS_FAILED_INIT            0xE4   /* ASPI for windows failed init   */
 #define SS_ASPI_IS_BUSY           0xE5   /* No resources available to      */
                                          /* execute command                */
-#define SS_BUFFER_TO_BIG          0xE6   /* buffer size_i32 too big to handle  */
+#define SS_BUFFER_TO_BIG          0xE6   /* buffer int_size too big to handle  */
 #define SS_BUFFER_TOO_BIG         0xE6   /* Correct spelling of 'too'      */
 #define SS_MISMATCHED_COMPONENTS  0xE7   /* The DLLs/EXEs of ASPI don't    */
                                          /* version check                  */
