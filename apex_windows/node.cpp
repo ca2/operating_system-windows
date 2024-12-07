@@ -1722,11 +1722,10 @@ namespace apex_windows
 
          ::acme_windows::registry::key keyKar(HKEY_LOCAL_MACHINE, "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
 
-
          if (bSet)
          {
 
-            auto windowspath = pathExecutable.windows_path();
+            auto windowspath = pathExecutable.windows_path().path();
 
             keyKar.set(strKey, windowspath);
 
@@ -1762,7 +1761,7 @@ namespace apex_windows
          if (bSet)
          {
 
-            auto windowspath = pathExecutable.windows_path();
+            auto windowspath = pathExecutable.windows_path().path();
 
             keyKar.set(pszKey, windowspath);
 
@@ -1803,7 +1802,7 @@ namespace apex_windows
 
             auto windowspath = pathExecutable.windows_path();
 
-            str = "\"" + string(windowspath) + "\"" + ::str::has_char(strArguments, " ");
+            str = "\"" + string(windowspath.path()) + "\"" + ::str::has_char(strArguments, " ");
 
             keyKar.set(pszKey, str);
 
@@ -1840,7 +1839,7 @@ namespace apex_windows
          if (bSet)
          {
 
-            auto windowspath = pathExecutable.windows_path();
+            auto windowspath = pathExecutable.windows_path().extended_path();
 
             keyKar.set(pszKey, windowspath);
 
@@ -3467,9 +3466,9 @@ namespace apex_windows
 
             //PeekMessage(nullptr, nullptr, 0, 0, 0);
 
-            ::windows_path windowspathTarget(path.windows_path());
+            ::wstring windowspathTarget(path.windows_path().extended_path());
 
-            ::windows_path windowspathFolder(pathFolder.windows_path());
+            ::wstring windowspathFolder(pathFolder.windows_path().extended_path());
 
             wstring wstrParams(strParams);
 
