@@ -73,7 +73,7 @@ namespace glm
 	typedef int64					lowp_i64;
 	typedef int64					mediump_i64;
 	typedef int64					highp_i64;
-	typedef int64					i64;
+	typedef int64					::huge_integer;
 
 	typedef int64					lowp_int64;
 	typedef int64					mediump_int64;
@@ -279,25 +279,25 @@ namespace glm
 	typedef vec<3, i32, defaultp>	i32vec3;
 	typedef vec<4, i32, defaultp>	i32vec4;
 
-	typedef vec<1, i64, lowp>		lowp_i64vec1;
-	typedef vec<2, i64, lowp>		lowp_i64vec2;
-	typedef vec<3, i64, lowp>		lowp_i64vec3;
-	typedef vec<4, i64, lowp>		lowp_i64vec4;
+	typedef vec<1, ::huge_integer, lowp>		lowp_i64vec1;
+	typedef vec<2, ::huge_integer, lowp>		lowp_i64vec2;
+	typedef vec<3, ::huge_integer, lowp>		lowp_i64vec3;
+	typedef vec<4, ::huge_integer, lowp>		lowp_i64vec4;
 
-	typedef vec<1, i64, mediump>	mediump_i64vec1;
-	typedef vec<2, i64, mediump>	mediump_i64vec2;
-	typedef vec<3, i64, mediump>	mediump_i64vec3;
-	typedef vec<4, i64, mediump>	mediump_i64vec4;
+	typedef vec<1, ::huge_integer, mediump>	mediump_i64vec1;
+	typedef vec<2, ::huge_integer, mediump>	mediump_i64vec2;
+	typedef vec<3, ::huge_integer, mediump>	mediump_i64vec3;
+	typedef vec<4, ::huge_integer, mediump>	mediump_i64vec4;
 
-	typedef vec<1, i64, highp>		highp_i64vec1;
-	typedef vec<2, i64, highp>		highp_i64vec2;
-	typedef vec<3, i64, highp>		highp_i64vec3;
-	typedef vec<4, i64, highp>		highp_i64vec4;
+	typedef vec<1, ::huge_integer, highp>		highp_i64vec1;
+	typedef vec<2, ::huge_integer, highp>		highp_i64vec2;
+	typedef vec<3, ::huge_integer, highp>		highp_i64vec3;
+	typedef vec<4, ::huge_integer, highp>		highp_i64vec4;
 
-	typedef vec<1, i64, defaultp>	i64vec1;
-	typedef vec<2, i64, defaultp>	i64vec2;
-	typedef vec<3, i64, defaultp>	i64vec3;
-	typedef vec<4, i64, defaultp>	i64vec4;
+	typedef vec<1, ::huge_integer, defaultp>	i64vec1;
+	typedef vec<2, ::huge_integer, defaultp>	i64vec2;
+	typedef vec<3, ::huge_integer, defaultp>	i64vec3;
+	typedef vec<4, ::huge_integer, defaultp>	i64vec4;
 
 	// Vector uint
 

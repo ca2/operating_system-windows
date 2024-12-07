@@ -10471,7 +10471,7 @@ typedef struct VkPipelineExecutableInfoKHR {
 
 typedef union VkPipelineExecutableStatisticValueKHR {
     VkBool32    b32;
-    int64_t     i64;
+    int64_t     ::huge_integer;
     uint64_t    u64;
     double      f64;
 } VkPipelineExecutableStatisticValueKHR;
