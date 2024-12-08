@@ -1404,7 +1404,7 @@ namespace windows
 
       const ::id & id;
 
-      emessage = UINT(pbase->m_id.i64());
+      emessage = UINT(pbase->m_id.::huge_integer());
 
       m_uiMessage = emessage;
       m_wparam = pbase->m_wparam;
@@ -2151,7 +2151,7 @@ namespace windows
 
       const ::id & id;
 
-      emessage = UINT(pbase->m_id.i64());
+      emessage = UINT(pbase->m_id.::huge_integer());
 
       switch (emessage)
       {

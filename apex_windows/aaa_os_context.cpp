@@ -533,7 +533,7 @@ namespace apex_windows
 
             auto windowspath = pathExecutable.windows_path();
 
-            str = "\"" + string(windowspath) + "\"" + ::str::has_char(strArguments, " ");
+            str = "\"" + string(windowspath) + "\"" + ::str::has_character(strArguments, " ");
 
             keyKar.set(pszKey, str);
 
