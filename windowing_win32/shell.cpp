@@ -922,6 +922,8 @@ namespace windowing_win32
 
          }
 
+         pathTarget = plink->m_pathTarget;
+
          if (FAILED(hrIconLocation) && FAILED(hrGetLocation))
          {
 

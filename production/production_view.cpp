@@ -454,25 +454,25 @@ namespace production
    void impact::on_timer(::timer * ptimer)
    {
       ::user::scroll_impact::on_timer(ptimer);
-      if(ptimer->m_uEvent == e_timer_update_current_area)
+      if(ptimer->m_uTimer == e_timer_update_current_area)
       {
          if(is_window_visible())
          {
             //set_need_redraw();
          }
       }
-      else if(ptimer->m_uEvent == ::e_timer_update_current_area)
+      else if(ptimer->m_uTimer == ::e_timer_update_current_area)
       {
-         KillTimer(ptimer->m_uEvent);
+         KillTimer(ptimer->m_uTimer);
       }
-      else if(ptimer->m_uEvent == 5432180)
+      else if(ptimer->m_uTimer == 5432180)
       {
-         KillTimer(ptimer->m_uEvent);
+         KillTimer(ptimer->m_uTimer);
       }
-      else if(ptimer->m_uEvent == 3003)
+      else if(ptimer->m_uTimer == 3003)
       {
       }
-      else if(ptimer->m_uEvent == 31)
+      else if(ptimer->m_uTimer == 31)
       {
          if(!m_pproduction->m_bFinished)
          {
