@@ -917,15 +917,36 @@ namespace windowing_win32
 
             get_image_by_file_extension(getfileimage);
 
-            //return getfileimage.m_iImage;
             return true;
 
          }
 
          pathTarget = plink->m_pathTarget;
 
-         if (FAILED(hrIconLocation) && FAILED(hrGetLocation))
+         if (plink->m_elink & ::file::e_link_icon && file()->exists(plink->m_pathIcon))
          {
+
+            if (plink->m_pathIcon.case_insensitive_ends(".ico"))
+            {
+
+               set_image_ico(plink->m_pathIcon, getfileimage);
+
+            }
+            else
+            {
+
+               getfileimage.m_imagekey.m_iIcon = plink->m_iIcon;
+
+               set_image_resource(plink->m_pathIcon, getfileimage);
+
+            }
+
+            return true;
+
+         }
+
+         //if (FAILED(hrIconLocation) && FAILED(hrGetLocation))
+         //{
 
             getfileimage.m_imagekey.set_path(pathTarget);
 
@@ -936,7 +957,7 @@ namespace windowing_win32
             //return getfileimage.m_iImage;
             return true;
 
-         }
+         //}
 
       }
       else
