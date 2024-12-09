@@ -897,27 +897,33 @@ namespace windowing_win32
 
          auto plink = path_system()->resolve_link(strFileParam);
 
-         if (plink
-            && !m_papplication->file()->exists(plink->m_pathTarget)
-            && !m_papplication->directory()->is(plink->m_pathTarget))
+         if (plink)
          {
 
-            if (pathTarget.case_insensitive_ends(".exe"))
+            auto pathTarget = plink->m_pathTarget;
+
+            if (!m_papplication->file()->exists(pathTarget)
+            && !m_papplication->directory()->is(pathTarget))
             {
 
-               getfileimage.m_imagekey.set_path(pathTarget);
+               if (pathTarget.case_insensitive_ends(".exe"))
+               {
+
+                  getfileimage.m_imagekey.set_path(pathTarget);
+
+               }
+               else
+               {
+
+                  getfileimage.m_imagekey.set_path("");
+
+               }
+
+               get_image_by_file_extension(getfileimage);
+
+               return true;
 
             }
-            else
-            {
-
-               getfileimage.m_imagekey.set_path("");
-
-            }
-
-            get_image_by_file_extension(getfileimage);
-
-            return true;
 
          }
 
