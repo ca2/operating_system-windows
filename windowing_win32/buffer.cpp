@@ -716,7 +716,7 @@ namespace windowing_win32
             //else
             //{
 
-            ::pointer < ::windowing_win32::window > pwindow = m_pwindow;
+            ::cast < ::windowing_win32::window > pwindow = m_pwindow;
 
             ::int_point pointSrc = { 0 };
 
@@ -1085,26 +1085,34 @@ namespace windowing_win32
                      //}
 
                      bool bDifferent = rectangleWindow != rectangleRequest;
+
                      auto hwndInsertAfter = pwindow->m_hwndSetWindowPosLastInsertAfter;
 
                      auto pOwner = pwindow->m_puserinteraction->m_puserinteractionOwner;
+                     
                      if (pOwner)
                      {
+                        
                         auto pwnd = pOwner->get_wnd();
+
                         if (pwnd)
                         {
 
-                           ::pointer <::windowing_win32::window > pwindow2;
+                           ::cast <::windowing_win32::window > pwindow2;
 
                            pwindow2 = pwnd->m_pacmewindowingwindow;
 
                            if (pwindow2)
                            {
+                              
                               hwndInsertAfter = pwindow2->m_hwnd;
+                              
                               hwndInsertAfter = HWND_TOPMOST;
+
                            }
 
                         }
+
                      }
 
                      bool bWindowVisible = ::IsWindowVisible(pwindow->m_hwnd) ? true : false;
@@ -1180,8 +1188,8 @@ namespace windowing_win32
                                           {
 
                                              ::SetForegroundWindow(hwnd);
-                                             pwindow->m_activationSetWindowPosLast.clear();
 
+                                             pwindow.m_p->m_activationSetWindowPosLast.clear();
 
 });
 

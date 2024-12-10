@@ -90,6 +90,16 @@ namespace windowing_win32
       //void install_message_routing(channel* pchannel) override;
 
 
+#ifdef _DEBUG
+
+
+      ::huge_integer increment_reference_count() override;
+      ::huge_integer decrement_reference_count() override;
+
+
+#endif
+
+
       void prio_install_message_routing(::channel * pchannel) override;
       void last_install_message_routing(::channel * pchannel) override;
 

@@ -284,7 +284,9 @@ namespace windowing_win32
 
       }
 
-      return pwindow.cast< ::windowing_win32::window>();
+      ::cast < ::windowing_win32::window > p = pwindow;
+
+      return p;
 
    }
 
