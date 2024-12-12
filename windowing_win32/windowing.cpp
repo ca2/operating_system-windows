@@ -1554,6 +1554,46 @@ namespace windowing_win32
    }
 
 
+   int windowing::system_metrics_get_cx_icon_spacing()
+   {
+
+      return ::GetSystemMetrics(SM_CXICONSPACING);
+
+   }
+
+
+   int windowing::system_metrics_get_cy_icon_spacing()
+   {
+
+      return ::GetSystemMetrics(SM_CYICONSPACING);
+
+   }
+
+
+   int windowing::system_metrics_get_cx_icon()
+   {
+
+      return ::GetSystemMetrics(SM_CXICON);
+
+   }
+
+
+   int windowing::system_metrics_get_cy_icon()
+   {
+
+      return ::GetSystemMetrics(SM_CYICON);
+
+   }
+
+
+   int windowing::system_metrics_get_cy_caption()
+   {
+
+      return ::GetSystemMetrics(SM_CYCAPTION);
+
+   }
+
+
 } // namespace windowing_win32
 
 
