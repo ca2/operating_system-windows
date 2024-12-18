@@ -8458,7 +8458,7 @@ namespace windowing_win32
       if (m_puserthread)
       {
 
-         m_puserthread->send(procedure);
+         m_puserthread->_send(procedure);
 
       }
       else
