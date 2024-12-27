@@ -110,8 +110,8 @@ namespace windowing_win32
       //virtual ::collection::index get_good_move(::int_rectangle * prectangle, const ::int_rectangle & rectangle, ::user::interaction * pinteraction);
 
 
-      virtual bool impl_set_wallpaper(::collection::index iScreen, string strLocalImagePath) override;
-      virtual string impl_get_wallpaper(::collection::index iScreen) override;
+      void impl_set_wallpaper(::collection::index iScreen, const ::scoped_string & scopedstrLocalImagePath) override;
+      string impl_get_wallpaper(::collection::index iScreen) override;
 
       void on_device_plugged(::hardware::enum_device edevice) override;
       void on_device_unplugged(::hardware::enum_device edevice) override;

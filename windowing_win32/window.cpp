@@ -37,13 +37,11 @@
 #include "aura/platform/system.h"
 #include "aura/windowing/placement_log.h"
 #include "acme_windows_common/comptr.h"
-
-
-
-
+#include "acme_windowing_win32/activation_token.h"
 
 #include "acme/_operating_system.h"
 #include "acme/operating_system/windows_common/_string.h"
+#include "acme/operating_system/windows/windows.h"
 
 
 #include <dwmapi.h>
@@ -2045,23 +2043,8 @@ namespace windowing_win32
 
    void window::set_mouse_capture()
    {
-
-      HWND hwnd = get_hwnd();
-
-      HWND hwndPreviouslyCapturedIfAny = ::SetCapture(hwnd);
-
-      HWND hwndGet = ::GetCapture();
-
-      if (hwndGet != hwnd && hwndGet != nullptr)
-      {
-
-         //return ::error_failed;
-
-         throw ::exception(error_failed);
-
-      }
-
-      //return ::success;
+      
+      ::win32::acme::windowing::window::set_mouse_capture();
 
    }
 
@@ -2069,20 +2052,7 @@ namespace windowing_win32
    bool window::has_mouse_capture()
    {
 
-      itask_t itask = get_itask();
-
-      HWND hwndCapture = ::windows::get_mouse_capture(itask);
-
-      HWND hwnd = get_hwnd();
-
-      if (hwndCapture == hwnd)
-      {
-
-         return true;
-
-      }
-
-      return false;
+      return ::win32::acme::windowing::window::has_mouse_capture();
 
    }
 
@@ -3729,29 +3699,50 @@ namespace windowing_win32
    }
 
 
-   void window::set_foreground_window()
+   void window::set_foreground_window(::user::activation_token * puseractivationtoken)
    {
 
-      return _set_foreground_window_unlocked();
+      return _set_foreground_window_unlocked(puseractivationtoken);
 
    }
 
 
-   void window::_set_foreground_window_unlocked()
+   void window::_set_foreground_window_unlocked(::user::activation_token * puseractivationtoken)
    {
 
-      HWND hwnd = get_hwnd();
+      bool bPosted = false;
 
-      ::SetForegroundWindow(hwnd);
-      //{
+      if (puseractivationtoken)
+      {
 
-      //   //return ::error_failed;
+         ::cast < ::win32::acme::windowing::activation_token > pactivationtoken = puseractivationtoken;
 
-      //   throw ::exception(error_failed);
+         if (pactivationtoken)
+         {
 
-      //}
+            pactivationtoken->m_ptaskForeground->post([this]()
+            {
 
-      //return ::success;
+               HWND hwnd = get_hwnd();
+
+               ::SetForegroundWindow(hwnd);
+
+            });
+
+            bPosted = true;
+
+         }
+
+      }
+
+      if (!bPosted)
+      {
+
+         HWND hwnd = get_hwnd();
+
+         ::SetForegroundWindow(hwnd);
+
+      }
 
       //// special activate logic for floating toolbars and palettes
       //auto pActiveWnd = GetForegroundWindow();
@@ -3828,7 +3819,7 @@ namespace windowing_win32
          if (puserinteraction)
          {
 
-            puserinteraction->on_display_restore();
+            puserinteraction->on_display_restore(pmessage->m_puseractivationtoken);
 
          }
 
@@ -3847,7 +3838,7 @@ namespace windowing_win32
          if (puserinteraction)
          {
 
-            puserinteraction->on_display_task_list();
+            puserinteraction->on_display_task_list(pmessage->m_puseractivationtoken);
 
          }
 

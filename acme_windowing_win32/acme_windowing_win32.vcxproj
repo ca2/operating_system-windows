@@ -646,6 +646,7 @@
     </Bscmake>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="activation_token.h" />
     <ClInclude Include="display.h" />
     <ClInclude Include="window.h" />
     <ClInclude Include="_.h" />
@@ -653,6 +654,7 @@
     <ClInclude Include="framework.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="activation_token.cpp" />
     <ClCompile Include="display.cpp" />
     <ClCompile Include="message_box.cpp" />
     <ClCompile Include="window.cpp" />

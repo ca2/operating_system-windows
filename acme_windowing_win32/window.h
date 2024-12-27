@@ -159,8 +159,11 @@ namespace win32
             /// ::user::primitive_impl
 
 
+            using ::acme::windowing::window::set_mouse_capture;
 
+            void set_mouse_capture() override;
 
+            bool has_mouse_capture() override;
 
 
          };

@@ -12,6 +12,7 @@
 #include "acme/parallelization/mutex.h"
 #include "acme/parallelization/task.h"
 #include "acme/prototype/geometry2d/_text_stream.h"
+#include "acme_windowing_win32/activation_token.h"
 #include "acme/user/user/_string.h"
 #include "aura/graphics/draw2d/draw2d.h"
 #include "aura/graphics/image/image.h"
@@ -1181,30 +1182,37 @@ namespace windowing_win32
                                  if (pwindow->m_activationSetWindowPosLast & ::user::e_activation_set_foreground)
                                  {
 
-                                    if (pwindow->m_activationSetWindowPosLast.m_ptaskForeground)
+                                    if (pwindow->m_activationSetWindowPosLast.m_pactivationtoken)
                                     {
 
-                                       pwindow->m_activationSetWindowPosLast.m_ptaskForeground->post([pwindow,hwnd]()
-                                          {
+                                       ::cast < ::win32::acme::windowing::activation_token > pactivationtoken = pwindow->m_activationSetWindowPosLast.m_pactivationtoken;
 
-                                             ::SetForegroundWindow(hwnd);
+                                       if (pactivationtoken)
+                                       {
 
-                                             pwindow.m_p->m_activationSetWindowPosLast.clear();
+                                          pactivationtoken->m_ptaskForeground->post([pwindow, hwnd]()
+                                             {
 
-});
+                                                   ::SetForegroundWindow(hwnd);
+
+                                                   pwindow.m_p->m_activationSetWindowPosLast.clear();
+
+   });
+
+                                       }
+                                       else
+                                       {
+
+                                          ::SetForegroundWindow(hwnd);
+                                          pwindow->m_activationSetWindowPosLast.clear();
+
+                                       }
 
                                     }
-                                    else
-                                    {
 
-                                       ::SetForegroundWindow(hwnd);
-                                       pwindow->m_activationSetWindowPosLast.clear();
-
-                                    }
+                                    pwindow->m_uSetWindowPosLastFlags &= ~SWP_NOACTIVATE;
 
                                  }
-
-                                 pwindow->m_uSetWindowPosLastFlags &= ~SWP_NOACTIVATE;
 
                            });
 

@@ -14,14 +14,13 @@
 #include "acme/user/user/interaction.h"
 #include "acme/user/user/mouse.h"
 #include "acme/windowing/windowing.h"
-
-
+#include "acme/operating_system/windows/windows.h"
 
 
 CLASS_DECL_ACME bool _c_simple_message_loop_step();
 
 CLASS_DECL_ACME string task_get_name();
-CLASS_DECL_ACME void task_set_name(const char* pszName);
+CLASS_DECL_ACME void task_set_name(const char * pszName);
 
 
 class CLASS_DECL_ACME scoped_task_name
@@ -30,7 +29,7 @@ public:
 
    ::string       m_strTask;
 
-   scoped_task_name(const ::string& strTask)
+   scoped_task_name(const ::string & strTask)
    {
 
       m_strTask = ::task_get_name();
@@ -184,7 +183,7 @@ namespace win32
                r.width(),
                r.height(),
                NULL, NULL, hinstanceWndProc,
-               (::windows::window *) this);
+               (::windows::window *)this);
 
             if (hwnd == NULL)
             {
@@ -251,7 +250,7 @@ namespace win32
 
                __øconstruct(m_pnanodevice);
 
-               m_pnanodevice->attach(hdc, {::width(r), ::height(r)});
+               m_pnanodevice->attach(hdc, { ::width(r), ::height(r) });
 
                ::pointer < ::micro::elemental > pelemental;
 
@@ -606,12 +605,12 @@ namespace win32
       //}
 
 
-   ::oswindow window::oswindow()
-   {
+         ::oswindow window::oswindow()
+         {
 
-      return as_oswindow(m_hwnd);
+            return as_oswindow(m_hwnd);
 
-   }
+         }
 
          bool window::_is_light_theme()
          {
@@ -717,25 +716,25 @@ namespace win32
                }
 
             }
-               return 0;
-               break;
+            return 0;
+            break;
             case WM_NCDESTROY:
                break;
-            //case WM_INITMENU:
-            //   {
-            //   ::pointer < ::windows::micro::user > pnanouser = system()->acme_windowing();
+               //case WM_INITMENU:
+               //   {
+               //   ::pointer < ::windows::micro::user > pnanouser = system()->acme_windowing();
 
-            //   LRESULT lresult = 0;
+               //   LRESULT lresult = 0;
 
-            //   if (pnanouser->_on_default_system_menu_init_menu(lresult, m_hwnd, m_hmenuSystem, wparam))
-            //   {
+               //   if (pnanouser->_on_default_system_menu_init_menu(lresult, m_hwnd, m_hmenuSystem, wparam))
+               //   {
 
-            //      return lresult;
+               //      return lresult;
 
-            //   }
+               //   }
 
-            //   }
-            //   break;
+               //   }
+               //   break;
             case WM_DESTROY:
                //PostQuitMessage(0);
                system()->acme_windowing()->m_windowa.erase(this);
@@ -1001,7 +1000,7 @@ namespace win32
                if (wparam == 0)
                {
 
-                  strLparamString = (const WCHAR*)(LPARAM(lparam));
+                  strLparamString = (const WCHAR *)(LPARAM(lparam));
 
                }
 
@@ -1009,7 +1008,7 @@ namespace win32
                {
 
                   //system()->acme_windowing()->fetch_dark_mode();
-                  
+
                   //update_drawing_objects();
 
                   //redraw();
@@ -1165,7 +1164,7 @@ namespace win32
          ::int_point window::client_to_screen(const ::int_point & point)
          {
 
-            POINT p{point.x(), point.y()};
+            POINT p{ point.x(), point.y() };
 
             ::ClientToScreen(m_hwnd, &p);
 
@@ -1270,7 +1269,7 @@ namespace win32
          //}
 
 
-         void window::set_position(const ::int_point& point)
+         void window::set_position(const ::int_point & point)
          {
 
             auto pacmeuserinteractionOwner = m_pacmeuserinteractionOwner;
@@ -1290,11 +1289,11 @@ namespace win32
 
             DWORD dwFlags = SWP_NOSIZE;
 
-            if(pframeinteraction && pframeinteraction->m_bTopMost)
-            { 
-            
+            if (pframeinteraction && pframeinteraction->m_bTopMost)
+            {
+
                hwndParent = HWND_TOPMOST;
-            
+
             }
             else if (!hwndParent)
             {
@@ -1381,7 +1380,7 @@ namespace win32
 
 
 
-         void window::_user_post(const ::procedure& procedure)
+         void window::_user_post(const ::procedure & procedure)
          {
 
             if (m_ptask)
@@ -1409,7 +1408,7 @@ namespace win32
          }
 
 
-         void window::defer_show_system_menu(::user::mouse *pmouse)
+         void window::defer_show_system_menu(::user::mouse * pmouse)
          {
 
             //::pointer < ::windows::micro::user > pnanouser = system()->acme_windowing();
@@ -1417,7 +1416,7 @@ namespace win32
             //pnanouser->_defer_show_system_menu(m_hwnd, &m_hmenuSystem, pointAbsolute);
 
             _defer_show_system_menu(pmouse);
-            
+
 
          }
 
@@ -1460,7 +1459,48 @@ namespace win32
 
          }
 
-         
+
+         void window::set_mouse_capture()
+         {
+
+            HWND hwnd = m_hwnd;
+
+            HWND hwndPreviouslyCapturedIfAny = ::SetCapture(hwnd);
+
+            HWND hwndGet = ::GetCapture();
+
+            if (hwndGet != hwnd && hwndGet != nullptr)
+            {
+
+               //return ::error_failed;
+
+               throw ::exception(error_failed);
+
+            }
+
+         }
+
+
+         bool window::has_mouse_capture()
+         {
+
+            itask_t itask = get_itask();
+
+            HWND hwndCapture = ::windows::get_mouse_capture(itask);
+
+            HWND hwnd = m_hwnd;
+
+            if (hwndCapture == hwnd)
+            {
+
+               return true;
+
+            }
+
+            return false;
+
+         }
+
 
       } // namespace windowing
 
