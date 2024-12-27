@@ -39,7 +39,7 @@ namespace windows
             ~device() override;
 
 
-            void attach(void * posdata) override;
+            void attach(void * posdata, const ::int_size & size) override;
 
             void _draw_text(const ::string& str, const ::int_rectangle& rectangleText, const ::e_align& ealign, const ::e_draw_text& edrawtext, ::nano::graphics::brush* pnanobrushBack, ::nano::graphics::brush* pnanobrushText, ::nano::graphics::font* pnanofont) override;
             ::int_size get_text_extents(const ::string& str, ::nano::graphics::font* pnanofont) override;

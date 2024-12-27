@@ -251,7 +251,7 @@ namespace win32
 
                __øconstruct(m_pnanodevice);
 
-               m_pnanodevice->attach(hdc);
+               m_pnanodevice->attach(hdc, {::width(r), ::height(r)});
 
                ::pointer < ::micro::elemental > pelemental;
 

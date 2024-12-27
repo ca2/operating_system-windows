@@ -53,13 +53,15 @@ namespace windows
          }
 
 
-         void device::attach(void * posdata)
+         void device::attach(void * posdata, const ::int_size & size)
          {
 
             auto hdc = (HDC)posdata;
 
             m_hdc = hdc;
             m_bDelete = false;
+
+            m_size = size;
 
          }
 
