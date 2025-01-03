@@ -7887,6 +7887,13 @@ namespace windowing_win32
 
       }
 
+      if (message == WM_USER + 123)
+      {
+
+         output_debug_string("let's see");
+
+      }
+
       lresult lresult = 0;
 
       //if (hwnd == m_hwnd && on_window_procedure(lresult, message, wparam, lparam))

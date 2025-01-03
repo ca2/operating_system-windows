@@ -95,11 +95,15 @@ namespace windowing_win32
       //
       // }
 
-      initialize_system_interaction();
+#if 000
 
-      auto pdisplay = dynamic_cast <class display*>(display());
+      initialize_system_interaction();
+      auto pdisplay = dynamic_cast <class display *>(display());
 
       pdisplay->register_device_listener(::hardware::e_device_monitor);
+
+#endif
+
 
 
 

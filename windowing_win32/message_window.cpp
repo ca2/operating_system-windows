@@ -56,19 +56,19 @@ namespace windowing_win32
    }
 
 
-   void message_window::message_handler(::user::message * pusermessage)
+   void message_window::message_handler(::message::message * pmessage)
    {
 
-      message_window_message_handler(pusermessage);
+      message_window_message_handler(pmessage);
 
-      if (pusermessage->m_bRet)
+      if (pmessage->m_bRet)
       {
 
          return;
 
       }
 
-      ::user::interaction::message_handler(pusermessage);
+      ::user::interaction::message_handler(pmessage);
 
    }
 

@@ -26,7 +26,7 @@ namespace windowing_win32
 
       virtual void create_message_window(const ::string & pszName,::user::interaction_listener * plistener = nullptr);
 
-      virtual void message_handler(::user::message * pusermessage);
+      void message_handler(::message::message * pmessage) override;
 
       virtual void message_window_message_handler(::message::message * pmessage);
 
