@@ -322,7 +322,7 @@ namespace windowing_win32
 
       ::int_size sizeAllocate;
 
-      auto pwindowing = m_pwindow->m_puserinteraction->windowing();
+      auto pwindowing = m_pwindow->user_interaction()->windowing();
 
       auto pdisplay = pwindowing->display();
 
@@ -529,7 +529,7 @@ namespace windowing_win32
 
       }
 
-      ::user::interaction * pinteraction = m_pwindow->m_puserinteraction;
+      ::user::interaction * pinteraction = m_pwindow->user_interaction();
 
       if (::is_null(pinteraction))
       {
@@ -612,7 +612,7 @@ namespace windowing_win32
       try
       {
 
-         //auto & layout = m_pwindow->m_puserinteraction->const_layout();
+         //auto & layout = m_pwindow->user_interaction()->const_layout();
 
          //auto point = layout.output().origin();
 
@@ -641,9 +641,9 @@ namespace windowing_win32
             error() << "Buffer size: " << sizeBuffer;
             //error() <<"Design size: " << sizeDesign;
 
-            //m_pwindow->m_puserinteraction->set_need_redraw();
+            //m_pwindow->user_interaction()->set_need_redraw();
 
-            m_pwindow->m_puserinteraction->post_redraw();
+            m_pwindow->user_interaction()->post_redraw();
 
             return;
 
@@ -662,7 +662,7 @@ namespace windowing_win32
             error() << "Os buffer size: " << sizeLayeredWindowBuffer;
             error() << "Buffer size: " << sizeBuffer;
 
-            m_pwindow->m_puserinteraction->post_redraw();
+            m_pwindow->user_interaction()->post_redraw();
 
             return;
 
@@ -702,8 +702,8 @@ namespace windowing_win32
 
          //if (bLayered)
          //   //&& m_pwindow != nullptr
-         //   //&& m_pwindow->m_puserinteraction != nullptr
-         //   //&& m_pwindow->m_puserinteraction->_is_window_visible())
+         //   //&& m_pwindow->user_interaction() != nullptr
+         //   //&& m_pwindow->user_interaction()->_is_window_visible())
          {
 
             //if (!m_pwindow->m_bOkToUpdateScreen)
@@ -711,7 +711,7 @@ namespace windowing_win32
 
             //   output_debug_string("nok yet to update the screen \n");
 
-            //   m_pwindow->m_puserinteraction->set_need_redraw();
+            //   m_pwindow->user_interaction()->set_need_redraw();
 
             //}
             //else
@@ -876,7 +876,7 @@ namespace windowing_win32
 
             //::SetWindowPos(get_hwnd(), HWND_TOPMOST, point.x(), point.y(), size.cx(), size.cy(), SWP_NOZORDER);
 
-            string strType = ::type(m_pwindow->m_puserinteraction).name();
+            string strType = ::type(m_pwindow->user_interaction()).name();
 
             if (strType.case_insensitive_contains("font_format"))
             {
@@ -937,7 +937,7 @@ namespace windowing_win32
 
                }
 
-               auto edisplay = m_pwindow->m_puserinteraction->const_layout().sketch().display();
+               auto edisplay = m_pwindow->user_interaction()->const_layout().sketch().display();
 
 
                information() << "list_box display is : " << ::as_string(edisplay.m_eenum);
@@ -984,7 +984,7 @@ namespace windowing_win32
                             //::SendMessage((HWND) m_pwindow->oswindow(),
              //WM_APP + 12345, 0, (LPARAM) p.m_pbase.m_p);
 
-                            //if (m_pwindow->m_puserinteraction->get_parent() == nullptr)
+                            //if (m_pwindow->user_interaction()->get_parent() == nullptr)
                   {
 
                      auto p = __get_bottom_right();
@@ -1010,44 +1010,44 @@ namespace windowing_win32
 
                   //if (rectangleWindowCurrent.top_left() != point
                   //   || rectangleWindowCurrent.size() != size
-                  //   || m_pwindow->m_puserinteraction->const_layout().design().has_activation_request())
+                  //   || m_pwindow->user_interaction()->const_layout().design().has_activation_request())
                   //{
 
                   //   m_pwindow->m_pwindow->_set_window_position(
-                  //      m_pwindow->m_puserinteraction->const_layout().design().zorder(),
+                  //      m_pwindow->user_interaction()->const_layout().design().zorder(),
                   //      point.x(),
                   //      point.y(),
                   //      size.cx(),
                   //      size.cy(),
-                  //      m_pwindow->m_puserinteraction->const_layout().design().activation(),
+                  //      m_pwindow->user_interaction()->const_layout().design().activation(),
                   //      true, false, false, true, false, 
                   //      uFlagsSetWindowPos);
 
-                  //   m_pwindow->m_puserinteraction->reset_pending();
+                  //   m_pwindow->user_interaction()->reset_pending();
 
                   //   bSizeOrPositionChanged = true;
 
                   //}
 
                   if (!m_pwindow
-                     || !m_pwindow->m_puserinteraction)
+                     || !m_pwindow->user_interaction())
                   {
 
                      throw ::exception(error_wrong_state);
 
                   }
 
-                  if (m_pwindow->m_puserinteraction->const_layout().window().origin() != point)
+                  if (m_pwindow->user_interaction()->const_layout().window().origin() != point)
                   {
 
-                     m_pwindow->m_puserinteraction->post_message(e_message_reposition, 0, point);
+                     m_pwindow->user_interaction()->post_message(e_message_reposition, 0, point);
 
                   }
 
-                  if (m_pwindow->m_puserinteraction->const_layout().window().size() != size)
+                  if (m_pwindow->user_interaction()->const_layout().window().size() != size)
                   {
 
-                     m_pwindow->m_puserinteraction->post_message(e_message_size, 0, size);
+                     m_pwindow->user_interaction()->post_message(e_message_size, 0, size);
 
                   }
 
@@ -1089,7 +1089,7 @@ namespace windowing_win32
 
                      auto hwndInsertAfter = pwindow->m_hwndSetWindowPosLastInsertAfter;
 
-                     auto pOwner = pwindow->m_puserinteraction->m_puserinteractionOwner;
+                     auto pOwner = pwindow->owner_window();
                      
                      if (pOwner)
                      {
@@ -1268,19 +1268,19 @@ namespace windowing_win32
 
             }
 
-            //m_pwindow->m_puserinteraction->post_message(message_do_show_window);
+            //m_pwindow->user_interaction()->post_message(message_do_show_window);
 
-            //m_pwindow->m_puserinteraction->_window_show_change_visibility_unlocked();
+            //m_pwindow->user_interaction()->_window_show_change_visibility_unlocked();
 
             //if (bSizeOrPositionChanged)
             //{
 
-            //   m_pwindow->m_puserinteraction->on_visual_applied();
+            //   m_pwindow->user_interaction()->on_visual_applied();
 
             //}
 
             //#ifdef WINDOWS_DESKTOP
-            //               if ((m_pwindow->m_puserinteraction->GetExStyle() & WS_EX_LAYERED))
+            //               if ((m_pwindow->user_interaction()->GetExStyle() & WS_EX_LAYERED))
             //#endif
             //               {
             //
