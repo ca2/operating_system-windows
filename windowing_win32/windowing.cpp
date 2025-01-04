@@ -22,7 +22,7 @@
 #include "aura/platform/application.h"
 #include "aura/user/user/interaction_array.h"
 #include "aura/windowing/cursor.h"
-
+#include "acme/operating_system/windows/windows.h"
 
 wparam MapLeftRightKeys(wparam vk, lparam lParam);
 
@@ -288,7 +288,9 @@ namespace windowing_win32
 
       }
 
-      return pwindow.cast< ::windowing_win32::window>();
+      ::cast < ::windowing_win32::window > p = pwindow;
+
+      return p;
 
    }
 
@@ -1552,6 +1554,46 @@ namespace windowing_win32
       // similar apis in other platforms behave the same?
 
       ::SetCursor(hcursor);
+
+   }
+
+
+   int windowing::system_metrics_get_cx_icon_spacing()
+   {
+
+      return ::GetSystemMetrics(SM_CXICONSPACING);
+
+   }
+
+
+   int windowing::system_metrics_get_cy_icon_spacing()
+   {
+
+      return ::GetSystemMetrics(SM_CYICONSPACING);
+
+   }
+
+
+   int windowing::system_metrics_get_cx_icon()
+   {
+
+      return ::GetSystemMetrics(SM_CXICON);
+
+   }
+
+
+   int windowing::system_metrics_get_cy_icon()
+   {
+
+      return ::GetSystemMetrics(SM_CYICON);
+
+   }
+
+
+   int windowing::system_metrics_get_cy_caption()
+   {
+
+      return ::GetSystemMetrics(SM_CYCAPTION);
 
    }
 

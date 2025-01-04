@@ -56,6 +56,9 @@
     <ClInclude Include="_library.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="internal_font.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="framework.cpp">
@@ -98,6 +101,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="draw2d.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="internal_font.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

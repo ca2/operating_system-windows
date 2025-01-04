@@ -1143,12 +1143,19 @@ namespace windowing_win32
    //}
 
 
-   bool display::impl_set_wallpaper(::collection::index iScreen, string strLocalImagePath)
+   void display::impl_set_wallpaper(::collection::index iScreen, const ::scoped_string & scopedstrLocalImagePath)
    {
 
-      wstring wstrLocalImagetPath(strLocalImagePath);
+      wstring wstrLocalImagetPath(scopedstrLocalImagePath);
 
-      return SystemParametersInfoW(SPI_SETDESKWALLPAPER, 0, (PVOID)wstrLocalImagetPath.c_str(), SPIF_UPDATEINIFILE | SPIF_SENDCHANGE) != false;
+      BOOL bOk = SystemParametersInfoW(SPI_SETDESKWALLPAPER, 0, (PVOID)wstrLocalImagetPath.c_str(), SPIF_UPDATEINIFILE | SPIF_SENDCHANGE) != false;
+
+      if (!bOk)
+      {
+
+         warning() << "failed to set wallpaper";
+
+      }
 
    }
 

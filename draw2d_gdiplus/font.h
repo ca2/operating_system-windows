@@ -9,6 +9,9 @@ namespace draw2d_gdiplus
 {
 
 
+   
+
+
    class CLASS_DECL_DRAW2D_GDIPLUS font :
       virtual public ::write_text::font
    {
@@ -17,7 +20,7 @@ namespace draw2d_gdiplus
 
       auto_pointer < Gdiplus::PrivateFontCollection >    m_pprivateFontCollection;
       auto_pointer < Gdiplus::FontFamily >               m_pgdiplusfontfamily;
-
+      int m_iStyle;
       //__creatable_from_base(font, ::write_text::font);
 
 
@@ -43,6 +46,9 @@ namespace draw2d_gdiplus
 
 
       virtual enum_character_set calculate_character_set(::draw2d::graphics * pgraphics);
+
+
+      void on_create_internal_font(::draw2d::graphics * pgraphics, ::write_text::internal_font * pinternalfont) override;
 
 
    };

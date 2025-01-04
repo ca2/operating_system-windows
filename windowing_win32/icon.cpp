@@ -924,48 +924,60 @@ namespace windowing_win32
          if (!GetIconInfo(hicon, &iconInfo)) {
             return nullptr;
          }
-
-         // Step 3: Prepare compatible DCs and select bitmaps
-         HDC hMaskDC = CreateCompatibleDC(nullptr);
-         HGDIOBJ oldMask = SelectObject(hMaskDC, iconInfo.hbmMask);
-
-
-         for (int y = 0; y < size.cy(); ++y) 
+         BITMAP bitmapColor{};
+         if (!::GetObject(iconInfo.hbmColor, sizeof(bitmapColor), &bitmapColor))
          {
 
-            for (int x = 0; x < size.cx(); ++x) 
-            {
+            return nullptr;
 
-               // Get mask pixel
-               COLORREF maskPixel = GetPixel(hMaskDC, x, y);
-
-               // Determine transparency
-               if (maskPixel == RGB(255, 255, 255)) 
-               { 
-                  // Transparent area
-
-                  pixmap.set_pixel( x, y, ::color::transparent);
-
-               }
-               else
-               { 
-                  
-                  // Opaque area
-                  
-                  auto color = pixmap.raw_pixel( x, y );
-                  
-                  color.set_opacity(255);
-
-                  pixmap.set_raw_pixel( x, y , color);
-
-               }
-               
-            }
          }
 
-         // Step 5: Cleanup
-         SelectObject(hMaskDC, oldMask);
-         DeleteDC(hMaskDC);
+         if (bitmapColor.bmBitsPixel < 32)
+         {
+
+            // Step 3: Prepare compatible DCs and select bitmaps
+            HDC hMaskDC = CreateCompatibleDC(nullptr);
+            HGDIOBJ oldMask = SelectObject(hMaskDC, iconInfo.hbmMask);
+
+
+            for (int y = 0; y < size.cy(); ++y)
+            {
+
+               for (int x = 0; x < size.cx(); ++x)
+               {
+
+                  // Get mask pixel
+                  COLORREF maskPixel = GetPixel(hMaskDC, x, y);
+
+                  // Determine transparency
+                  if (maskPixel == RGB(255, 255, 255))
+                  {
+                     // Transparent area
+
+                     pixmap.set_pixel(x, y, ::color::transparent);
+
+                  }
+                  else
+                  {
+
+                     // Opaque area
+
+                     auto color = pixmap.raw_pixel(x, y);
+
+                     color.set_opacity(255);
+
+                     pixmap.set_raw_pixel(x, y, color);
+
+                  }
+
+               }
+            }
+
+            // Step 5: Cleanup
+            SelectObject(hMaskDC, oldMask);
+            DeleteDC(hMaskDC);
+
+         }
 
          DeleteObject(iconInfo.hbmColor);
          DeleteObject(iconInfo.hbmMask);

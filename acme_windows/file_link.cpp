@@ -221,7 +221,7 @@ namespace acme_windows
 
          auto windowspath = m_pathTarget.windows_path();
 
-         HRESULT hresult = m_pshelllink->SetPath(windowspath.extended_path());
+         HRESULT hresult = m_pshelllink->SetPath(windowspath.path());
 
          if (SUCCEEDED(hresult))
          {
@@ -237,7 +237,7 @@ namespace acme_windows
 
          auto windowspath = m_pathFolder.windows_path();
 
-         HRESULT hresult = m_pshelllink->SetWorkingDirectory(windowspath.extended_path());
+         HRESULT hresult = m_pshelllink->SetWorkingDirectory(windowspath.path());
 
          if (SUCCEEDED(hresult))
          {
@@ -269,7 +269,7 @@ namespace acme_windows
          else
          {
 
-            HRESULT hresult = m_pshelllink->SetIconLocation(windowspath.extended_path(), m_iIcon);
+            HRESULT hresult = m_pshelllink->SetIconLocation(windowspath.path(), m_iIcon);
 
             if (SUCCEEDED(hresult))
             {

@@ -202,6 +202,13 @@ namespace windowing_win32
 
       void set_mouse_cursor2(::windowing::cursor* pcursor) override;
 
+      
+      int system_metrics_get_cx_icon_spacing() override;
+      int system_metrics_get_cy_icon_spacing() override;
+      int system_metrics_get_cx_icon() override;
+      int system_metrics_get_cy_icon() override;
+      int system_metrics_get_cy_caption() override;
+
 
    };
 

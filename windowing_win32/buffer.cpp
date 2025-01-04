@@ -12,6 +12,7 @@
 #include "acme/parallelization/mutex.h"
 #include "acme/parallelization/task.h"
 #include "acme/prototype/geometry2d/_text_stream.h"
+#include "acme_windowing_win32/activation_token.h"
 #include "acme/user/user/_string.h"
 #include "aura/graphics/draw2d/draw2d.h"
 #include "aura/graphics/image/image.h"
@@ -716,7 +717,7 @@ namespace windowing_win32
             //else
             //{
 
-            ::pointer < ::windowing_win32::window > pwindow = m_pwindow;
+            ::cast < ::windowing_win32::window > pwindow = m_pwindow;
 
             ::int_point pointSrc = { 0 };
 
@@ -1085,26 +1086,34 @@ namespace windowing_win32
                      //}
 
                      bool bDifferent = rectangleWindow != rectangleRequest;
+
                      auto hwndInsertAfter = pwindow->m_hwndSetWindowPosLastInsertAfter;
 
                      auto pOwner = pwindow->m_puserinteraction->m_puserinteractionOwner;
+                     
                      if (pOwner)
                      {
+                        
                         auto pwnd = pOwner->get_wnd();
+
                         if (pwnd)
                         {
 
-                           ::pointer <::windowing_win32::window > pwindow2;
+                           ::cast <::windowing_win32::window > pwindow2;
 
                            pwindow2 = pwnd->m_pacmewindowingwindow;
 
                            if (pwindow2)
                            {
+                              
                               hwndInsertAfter = pwindow2->m_hwnd;
+                              
                               hwndInsertAfter = HWND_TOPMOST;
+
                            }
 
                         }
+
                      }
 
                      bool bWindowVisible = ::IsWindowVisible(pwindow->m_hwnd) ? true : false;
@@ -1173,30 +1182,37 @@ namespace windowing_win32
                                  if (pwindow->m_activationSetWindowPosLast & ::user::e_activation_set_foreground)
                                  {
 
-                                    if (pwindow->m_activationSetWindowPosLast.m_ptaskForeground)
+                                    if (pwindow->m_activationSetWindowPosLast.m_pactivationtoken)
                                     {
 
-                                       pwindow->m_activationSetWindowPosLast.m_ptaskForeground->post([pwindow,hwnd]()
-                                          {
+                                       ::cast < ::win32::acme::windowing::activation_token > pactivationtoken = pwindow->m_activationSetWindowPosLast.m_pactivationtoken;
 
-                                             ::SetForegroundWindow(hwnd);
-                                             pwindow->m_activationSetWindowPosLast.clear();
+                                       if (pactivationtoken)
+                                       {
 
+                                          pactivationtoken->m_ptaskForeground->post([pwindow, hwnd]()
+                                             {
 
-});
+                                                   ::SetForegroundWindow(hwnd);
+
+                                                   pwindow.m_p->m_activationSetWindowPosLast.clear();
+
+   });
+
+                                       }
+                                       else
+                                       {
+
+                                          ::SetForegroundWindow(hwnd);
+                                          pwindow->m_activationSetWindowPosLast.clear();
+
+                                       }
 
                                     }
-                                    else
-                                    {
 
-                                       ::SetForegroundWindow(hwnd);
-                                       pwindow->m_activationSetWindowPosLast.clear();
-
-                                    }
+                                    pwindow->m_uSetWindowPosLastFlags &= ~SWP_NOACTIVATE;
 
                                  }
-
-                                 pwindow->m_uSetWindowPosLastFlags &= ~SWP_NOACTIVATE;
 
                            });
 

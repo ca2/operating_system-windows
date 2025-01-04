@@ -37,13 +37,11 @@
 #include "aura/platform/system.h"
 #include "aura/windowing/placement_log.h"
 #include "acme_windows_common/comptr.h"
-
-
-
-
+#include "acme_windowing_win32/activation_token.h"
 
 #include "acme/_operating_system.h"
 #include "acme/operating_system/windows_common/_string.h"
+#include "acme/operating_system/windows/windows.h"
 
 
 #include <dwmapi.h>
@@ -152,6 +150,27 @@ namespace windowing_win32
 
    }
 
+
+#ifdef _DEBUG
+
+
+   ::huge_integer window::increment_reference_count()
+   {
+
+      return ::windowing::window::increment_reference_count();
+
+   }
+
+
+   ::huge_integer window::decrement_reference_count()
+   {
+
+      return ::windowing::window::decrement_reference_count();
+
+   }
+
+
+#endif
 
    //void window::assert_ok() const
    //{
@@ -2024,23 +2043,8 @@ namespace windowing_win32
 
    void window::set_mouse_capture()
    {
-
-      HWND hwnd = get_hwnd();
-
-      HWND hwndPreviouslyCapturedIfAny = ::SetCapture(hwnd);
-
-      HWND hwndGet = ::GetCapture();
-
-      if (hwndGet != hwnd && hwndGet != nullptr)
-      {
-
-         //return ::error_failed;
-
-         throw ::exception(error_failed);
-
-      }
-
-      //return ::success;
+      
+      ::win32::acme::windowing::window::set_mouse_capture();
 
    }
 
@@ -2048,20 +2052,7 @@ namespace windowing_win32
    bool window::has_mouse_capture()
    {
 
-      itask_t itask = get_itask();
-
-      HWND hwndCapture = ::windows::get_mouse_capture(itask);
-
-      HWND hwnd = get_hwnd();
-
-      if (hwndCapture == hwnd)
-      {
-
-         return true;
-
-      }
-
-      return false;
+      return ::win32::acme::windowing::window::has_mouse_capture();
 
    }
 
@@ -2224,10 +2215,19 @@ namespace windowing_win32
    void window::destroy_window()
    {
 
+      if (has_destroying_flag())
+      {
+
+         return;
+
+      }
+
+      ::string strType = ::type(m_puserinteraction).name();
+
       set_destroying_flag();
 
       main_send()
-         << [this]()
+         << [this, strType]()
          {
 
             if (::IsWindowVisible(m_hwnd))
@@ -2294,143 +2294,200 @@ namespace windowing_win32
    }
 
 
-   bool window::_set_window_position_unlocked(const class ::zorder & zorder, int x, int y, int cx, int cy, const ::user::activation & useractivation, bool bNoZorder, bool bNoMove, bool bNoSize, ::e_display edisplay)
+   bool window::_set_window_position_unlocked(
+      const class ::zorder & zorderParam,
+      int xParam,
+      int yParam,
+      int cxParam,
+      int cyParam,
+      const ::user::activation & useractivationParam,
+      bool bNoZorderParam,
+      bool bNoMoveParam,
+      bool bNoSizeParam,
+      ::e_display edisplayParam)
    {
 
-      information() << "windowing_win32::window::_set_window_position_unlocked";
-
-      HWND hwnd = get_hwnd();
-
-      ::e_display edisplayOutput = e_display_none;
-
-      ::e_display edisplayWindow = e_display_none;
-
-      if (::IsWindowVisible(hwnd))
+      if (!is_window())
       {
 
-         if (::IsIconic(hwnd))
-         {
-
-            edisplayWindow = e_display_iconic;
-
-         }
-         else if (::IsZoomed(hwnd))
-         {
-
-            edisplayWindow = e_display_zoomed;
-
-         }
-         else
-         {
-
-            edisplayWindow = e_display_normal;
-
-         }
+         return false;
 
       }
 
-      if (edisplay == e_display_iconic)
-      {
+      auto hwnd = get_hwnd();
+      auto zorder = zorderParam;
+      auto x = xParam;
+      auto y = yParam;
+      auto cx = cxParam;
+      auto cy = cyParam;
+      auto useractivation = useractivationParam;
+      auto bNoZorder = bNoZorderParam;
+      auto bNoMove = bNoMoveParam;
+      auto bNoSize = bNoSizeParam;
+      auto edisplay = edisplayParam;
 
-         edisplayOutput = edisplay;
+      bool bOk = false;
 
-      }
-      else if (edisplay == e_display_zoomed)
-      {
-
-         edisplayOutput = edisplay;
-
-      }
-      else if (windowing()->is_screen_visible(edisplay))
-      {
-
-         edisplayOutput = e_display_normal;
-
-      }
-
-      if (!is_equivalent_in_equivalence_sink(edisplayOutput, edisplayWindow))
-      {
-
-         if (is_equivalent_in_equivalence_sink(edisplayOutput, e_display_normal))
+      main_send([
+         this,
+            hwnd,
+            zorder,
+            x,
+            y,
+            cx,
+            cy,
+            useractivation,
+            bNoZorder,
+            bNoMove,
+            bNoSize,
+            edisplay,
+      &bOk]()
          {
 
-            if (edisplayWindow == e_display_zoomed)
+            if (!is_window())
             {
 
-               ::ShowWindow(hwnd, SW_RESTORE);
+               return;
 
             }
-            else
+
+            information() << "windowing_win32::window::_set_window_position_unlocked";
+
+            ::e_display edisplayOutput = e_display_none;
+
+            ::e_display edisplayWindow = e_display_none;
+
+            if (::IsWindowVisible(hwnd))
             {
 
-               if (useractivation & ::user::e_activation_set_active
-               || useractivation & ::user::e_activation_set_foreground
-               || useractivation & ::user::e_activation_on_center_of_screen)
+               if (::IsIconic(hwnd))
                {
 
-                  if (::IsZoomed(hwnd) || ::IsIconic(hwnd))
-                  {
+                  edisplayWindow = e_display_iconic;
 
-                     ::ShowWindow(hwnd, SW_NORMAL);
+               }
+               else if (::IsZoomed(hwnd))
+               {
 
-                  }
+                  edisplayWindow = e_display_zoomed;
 
                }
                else
                {
 
-                  if (::IsZoomed(hwnd) || ::IsIconic(hwnd))
-                  {
-
-                     ::ShowWindow(hwnd, SW_SHOWNOACTIVATE);
-
-                  }
+                  edisplayWindow = e_display_normal;
 
                }
 
             }
 
-         }
-         else if (edisplayOutput == e_display_zoomed)
-         {
+            if (edisplay == e_display_iconic)
+            {
 
-            ::ShowWindow(hwnd, SW_MAXIMIZE);
+               edisplayOutput = edisplay;
 
-         }
-         else if (edisplayOutput == e_display_iconic)
-         {
+            }
+            else if (edisplay == e_display_zoomed)
+            {
 
-            ::ShowWindow(hwnd, SW_MINIMIZE);
+               edisplayOutput = edisplay;
 
-         }
-         else
-         {
+            }
+            else if (windowing()->is_screen_visible(edisplay))
+            {
 
-            ::ShowWindow(hwnd, SW_HIDE);
+               edisplayOutput = e_display_normal;
 
-         }
+            }
 
-      }
+            if (!is_equivalent_in_equivalence_sink(edisplayOutput, edisplayWindow))
+            {
 
-      bool bShow = windowing()->is_screen_visible(edisplayOutput) || edisplay == e_display_iconic;
+               if (is_equivalent_in_equivalence_sink(edisplayOutput, e_display_normal))
+               {
 
-      bool bHide = !windowing()->is_screen_visible(edisplayOutput) && edisplay != e_display_iconic;
+                  if (edisplayWindow == e_display_zoomed)
+                  {
 
-      ::string strType;
+                     ::ShowWindow(hwnd, SW_RESTORE);
 
-      strType = ::type(m_puserinteraction).name();
+                  }
+                  else
+                  {
 
-      if (strType.contains("list_box"))
-      {
+                     if (useractivation & ::user::e_activation_set_active
+                     || useractivation & ::user::e_activation_set_foreground
+                     || useractivation & ::user::e_activation_on_center_of_screen)
+                     {
 
-         output_debug_string("list_box");
+                        if (::IsZoomed(hwnd) || ::IsIconic(hwnd))
+                        {
 
-      }
+                           ::ShowWindow(hwnd, SW_NORMAL);
 
-      return __set_window_position(
-         zorder, x, y, cx, cy,
-         useractivation, bNoZorder, bNoMove, bNoSize,
-         bShow, bHide);
+                        }
+
+                     }
+                     else
+                     {
+
+                        if (::IsZoomed(hwnd) || ::IsIconic(hwnd))
+                        {
+
+                           ::ShowWindow(hwnd, SW_SHOWNOACTIVATE);
+
+                        }
+
+                     }
+
+                  }
+
+               }
+               else if (edisplayOutput == e_display_zoomed)
+               {
+
+                  ::ShowWindow(hwnd, SW_MAXIMIZE);
+
+               }
+               else if (edisplayOutput == e_display_iconic)
+               {
+
+                  ::ShowWindow(hwnd, SW_MINIMIZE);
+
+               }
+               else
+               {
+
+                  ::ShowWindow(hwnd, SW_HIDE);
+
+               }
+
+            }
+
+            bool bShow = windowing()->is_screen_visible(edisplayOutput) || edisplay == e_display_iconic;
+
+            bool bHide = !windowing()->is_screen_visible(edisplayOutput) && edisplay != e_display_iconic;
+
+            ::string strType;
+
+            strType = ::type(m_puserinteraction).name();
+
+            if (strType.contains("list_box"))
+            {
+
+               output_debug_string("list_box");
+
+            }
+
+            bOk = __set_window_position(
+               zorder, x, y, cx, cy,
+               useractivation, bNoZorder, bNoMove, bNoSize,
+               bShow, bHide);
+
+
+});
+
+      return bOk;
 
    }
 
@@ -2881,6 +2938,13 @@ namespace windowing_win32
       {
 
          return true;
+
+      }
+
+      if (!is_window())
+      {
+
+         return false;
 
       }
 
@@ -3635,29 +3699,50 @@ namespace windowing_win32
    }
 
 
-   void window::set_foreground_window()
+   void window::set_foreground_window(::user::activation_token * puseractivationtoken)
    {
 
-      return _set_foreground_window_unlocked();
+      return _set_foreground_window_unlocked(puseractivationtoken);
 
    }
 
 
-   void window::_set_foreground_window_unlocked()
+   void window::_set_foreground_window_unlocked(::user::activation_token * puseractivationtoken)
    {
 
-      HWND hwnd = get_hwnd();
+      bool bPosted = false;
 
-      ::SetForegroundWindow(hwnd);
-      //{
+      if (puseractivationtoken)
+      {
 
-      //   //return ::error_failed;
+         ::cast < ::win32::acme::windowing::activation_token > pactivationtoken = puseractivationtoken;
 
-      //   throw ::exception(error_failed);
+         if (pactivationtoken)
+         {
 
-      //}
+            pactivationtoken->m_ptaskForeground->post([this]()
+            {
 
-      //return ::success;
+               HWND hwnd = get_hwnd();
+
+               ::SetForegroundWindow(hwnd);
+
+            });
+
+            bPosted = true;
+
+         }
+
+      }
+
+      if (!bPosted)
+      {
+
+         HWND hwnd = get_hwnd();
+
+         ::SetForegroundWindow(hwnd);
+
+      }
 
       //// special activate logic for floating toolbars and palettes
       //auto pActiveWnd = GetForegroundWindow();
@@ -3734,7 +3819,7 @@ namespace windowing_win32
          if (puserinteraction)
          {
 
-            puserinteraction->on_display_restore();
+            puserinteraction->on_display_restore(pmessage->m_puseractivationtoken);
 
          }
 
@@ -3753,7 +3838,7 @@ namespace windowing_win32
          if (puserinteraction)
          {
 
-            puserinteraction->on_display_task_list();
+            puserinteraction->on_display_task_list(pmessage->m_puseractivationtoken);
 
          }
 
@@ -8371,7 +8456,7 @@ namespace windowing_win32
       if (m_puserthread)
       {
 
-         m_puserthread->send(procedure);
+         m_puserthread->_send(procedure);
 
       }
       else

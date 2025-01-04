@@ -1,6 +1,7 @@
 #include "framework.h"
 #include "font.h"
 #include "draw2d.h"
+#include "internal_font.h"
 #include "acme/exception/exception.h"
 #include "acme/parallelization/synchronous_lock.h"
 #include "acme/prototype/string/international.h"
@@ -51,10 +52,119 @@ namespace draw2d_gdiplus
    }
 
 
+   void font::on_create_internal_font(::draw2d::graphics * pgraphics, ::write_text::internal_font * pinternalfont)
+   {
+
+      ::write_text::font::on_create_internal_font(pgraphics, pinternalfont);
+
+      //::cast < ::draw2d_gdiplus::internal_font> pgdiplusinternalfont = pinternalfont;
+
+      //if (pgdiplusinternalfont->m_iFamilyCount <= 0)
+      //{
+
+      //   throw exception(error_resource);
+
+      //}
+
+      //int iFoundFamily = -1;
+
+      //WCHAR wszGetFamilyName[LF_FACESIZE];
+
+      //auto & pgdiplusfontfamily = m_pgdiplusfontfamily;
+
+      //if (::write_text::font::m_pfontfamily->m_strFamilyName.has_character())
+      //{
+
+      //   for (int iFamily = 0; iFamily < pgdiplusinternalfont->m_iFamilyCount; iFamily++)
+      //   {
+
+      //      auto & fontfamily = pgdiplusinternalfont->m_familya[iFamily];
+
+      //      if (fontfamily.GetFamilyName(wszGetFamilyName) == Gdiplus::Ok)
+      //      {
+
+      //         string strFontFamily = wszGetFamilyName;
+
+      //         if (strFontFamily.case_insensitive_order(::write_text::font::m_pfontfamily->m_strFamilyName) == 0)
+      //         {
+
+      //            pgdiplusfontfamily = fontfamily.Clone();
+
+      //            break;
+
+      //         }
+
+      //      }
+
+      //   }
+
+      //}
+
+      //if (::is_null(pgdiplusfontfamily))
+      //{
+
+      //   pgdiplusfontfamily = pprivatefont->m_familya.first().Clone();
+
+      //}
+
+      //if (::is_set(pgdiplusfontfamily))
+      //{
+
+      //   //pfontfamily = &pprivatefont->m_familya[iFoundFamily];
+
+      //   ////if (pfontfamily->GetFamilyName(wszGetFamilyName) != Gdiplus::Ok)
+      //   ////{
+
+      //   ////   throw exception(error_resource);
+
+      //   ////}
+
+      //   ////auto pfont = ___new Gdiplus::Font(
+      //   ////   wszGetFamilyName,
+      //   ////   (Gdiplus::REAL)m_dFontSize,
+      //   ////   iStyle,
+      //   ////   unit,
+      //   ////   pprivatefont->m_pcollection);
+
+      //   //pfontfamily
+
+      //   //set_gdiplus_font(pfont);
+
+      //   //bFont = true;
+
+      //   auto pgdiplusfont = __raw_new Gdiplus::Font(
+      //      pgdiplusfontfamily,
+      //      gdiplus_font_size(m_fontsize),
+      //      iStyle,
+      //      gdiplus_font_unit(m_fontsize));
+
+      //   set_gdiplus_font(pgdiplusfont);
+
+      //   bFont = true;
+
+      //}
+      ////else
+      ////{
+
+      ////   auto pfont = ___new Gdiplus::Font(
+      ////      &pprivatefont->m_familya.first(),
+      ////      (Gdiplus::REAL)m_dFontSize,
+      ////      iStyle,
+      ////      unit);
+
+      ////   set_gdiplus_font(pfont);
+
+      ////   bFont = true;
+
+      ////}
+
+   }
+
+
    void font::create(::draw2d::graphics * pgraphics, char iCreate)
    {
 
-      int iStyle = 0;
+      auto & iStyle = m_iStyle;
 
       if (m_fontweight > e_font_weight_semibold)
       {
@@ -124,127 +234,129 @@ namespace draw2d_gdiplus
 
       //}
 
-      if (m_path.has_character())
-      {
+      bFont = defer_load_internal_font(pgraphics);
 
-         ::pointer<::draw2d_gdiplus::draw2d>pdraw2d = system()->draw2d();
+      //if (m_path.has_character())
+      //{
 
-         if (m_pfontfamily && m_pfontfamily->m_strBranch.has_character())
-         {
+      //   ::pointer<::draw2d_gdiplus::draw2d>pdraw2d = system()->draw2d();
 
-            pdraw2d->write_text()->fonts()->enumeration(m_pfontfamily->m_strBranch)->defer_download_font(m_path);
+      //   if (m_pfontfamily && m_pfontfamily->m_strBranch.has_character())
+      //   {
 
-         }
+      //      pdraw2d->write_text()->fonts()->enumeration(m_pfontfamily->m_strBranch)->defer_download_font(m_path);
 
-         auto pprivatefont = pdraw2d->get_file_private_font(pgraphics->m_papplication, m_path);
+      //   }
 
-         if (pprivatefont)
-         {
+      //   auto pprivatefont = pdraw2d->get_file_private_font(pgraphics->m_papplication, m_path);
 
-            if (pprivatefont->m_iFamilyCount <= 0)
-            {
+      //   if (pprivatefont)
+      //   {
 
-               throw exception(error_resource);
+      //      if (pprivatefont->m_iFamilyCount <= 0)
+      //      {
 
-            }
-            else
-            {
+      //         throw exception(error_resource);
 
-               int iFoundFamily = -1;
+      //      }
+      //      else
+      //      {
 
-               WCHAR wszGetFamilyName[LF_FACESIZE];
+      //         int iFoundFamily = -1;
 
-               if (::write_text::font::m_pfontfamily->m_strFamilyName.has_character())
-               {
+      //         WCHAR wszGetFamilyName[LF_FACESIZE];
 
-                  for (int iFamily = 0; iFamily < pprivatefont->m_iFamilyCount; iFamily++)
-                  {
+      //         if (::write_text::font::m_pfontfamily->m_strFamilyName.has_character())
+      //         {
 
-                     auto & fontfamily = pprivatefont->m_familya[iFamily];
+      //            for (int iFamily = 0; iFamily < pprivatefont->m_iFamilyCount; iFamily++)
+      //            {
 
-                     if (fontfamily.GetFamilyName(wszGetFamilyName) == Gdiplus::Ok)
-                     {
+      //               auto & fontfamily = pprivatefont->m_familya[iFamily];
 
-                        string strFontFamily = wszGetFamilyName;
+      //               if (fontfamily.GetFamilyName(wszGetFamilyName) == Gdiplus::Ok)
+      //               {
 
-                        if (strFontFamily.case_insensitive_order(::write_text::font::m_pfontfamily->m_strFamilyName) == 0)
-                        {
+      //                  string strFontFamily = wszGetFamilyName;
 
-                           pgdiplusfontfamily = fontfamily.Clone();
+      //                  if (strFontFamily.case_insensitive_order(::write_text::font::m_pfontfamily->m_strFamilyName) == 0)
+      //                  {
 
-                           break;
+      //                     pgdiplusfontfamily = fontfamily.Clone();
 
-                        }
+      //                     break;
 
-                     }
+      //                  }
 
-                  }
+      //               }
 
-               }
+      //            }
 
-               if (::is_null(pgdiplusfontfamily))
-               {
+      //         }
 
-                  pgdiplusfontfamily = pprivatefont->m_familya.first().Clone();
+      //         if (::is_null(pgdiplusfontfamily))
+      //         {
 
-               }
+      //            pgdiplusfontfamily = pprivatefont->m_familya.first().Clone();
 
-               if (::is_set(pgdiplusfontfamily))
-               {
+      //         }
 
-                  //pfontfamily = &pprivatefont->m_familya[iFoundFamily];
+      //         if (::is_set(pgdiplusfontfamily))
+      //         {
 
-                  ////if (pfontfamily->GetFamilyName(wszGetFamilyName) != Gdiplus::Ok)
-                  ////{
+      //            //pfontfamily = &pprivatefont->m_familya[iFoundFamily];
 
-                  ////   throw exception(error_resource);
+      //            ////if (pfontfamily->GetFamilyName(wszGetFamilyName) != Gdiplus::Ok)
+      //            ////{
 
-                  ////}
+      //            ////   throw exception(error_resource);
 
-                  ////auto pfont = ___new Gdiplus::Font(
-                  ////   wszGetFamilyName,
-                  ////   (Gdiplus::REAL)m_dFontSize,
-                  ////   iStyle,
-                  ////   unit,
-                  ////   pprivatefont->m_pcollection);
+      //            ////}
 
-                  //pfontfamily
+      //            ////auto pfont = ___new Gdiplus::Font(
+      //            ////   wszGetFamilyName,
+      //            ////   (Gdiplus::REAL)m_dFontSize,
+      //            ////   iStyle,
+      //            ////   unit,
+      //            ////   pprivatefont->m_pcollection);
 
-                  //set_gdiplus_font(pfont);
+      //            //pfontfamily
 
-                  //bFont = true;
+      //            //set_gdiplus_font(pfont);
 
-                  auto pgdiplusfont = __raw_new Gdiplus::Font(
-                     pgdiplusfontfamily,
-                     gdiplus_font_size(m_fontsize),
-                     iStyle,
-                     gdiplus_font_unit(m_fontsize));
+      //            //bFont = true;
 
-                  set_gdiplus_font(pgdiplusfont);
+      //            auto pgdiplusfont = __raw_new Gdiplus::Font(
+      //               pgdiplusfontfamily,
+      //               gdiplus_font_size(m_fontsize),
+      //               iStyle,
+      //               gdiplus_font_unit(m_fontsize));
 
-                  bFont = true;
+      //            set_gdiplus_font(pgdiplusfont);
 
-               }
-               //else
-               //{
+      //            bFont = true;
 
-               //   auto pfont = ___new Gdiplus::Font(
-               //      &pprivatefont->m_familya.first(),
-               //      (Gdiplus::REAL)m_dFontSize,
-               //      iStyle,
-               //      unit);
+      //         }
+      //         //else
+      //         //{
 
-               //   set_gdiplus_font(pfont);
+      //         //   auto pfont = ___new Gdiplus::Font(
+      //         //      &pprivatefont->m_familya.first(),
+      //         //      (Gdiplus::REAL)m_dFontSize,
+      //         //      iStyle,
+      //         //      unit);
 
-               //   bFont = true;
+      //         //   set_gdiplus_font(pfont);
 
-               //}
+      //         //   bFont = true;
 
-            }
+      //         //}
 
-         }
+      //      }
 
-      }
+      //   }
+
+      //}
 
       if (!bFont)
       {

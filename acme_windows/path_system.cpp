@@ -246,7 +246,7 @@ namespace acme_windows
 
          plink = resolve_lnk_link(path, elink);
 
-         if (plink && plink->m_elink & ::file::e_link_target)
+         if (plink)
          {
 
             return plink;
