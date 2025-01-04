@@ -1272,7 +1272,7 @@ namespace win32
          void window::set_position(const ::int_point & point)
          {
 
-            auto pacmeuserinteractionOwner = m_pacmeuserinteractionOwner;
+            auto pacmeuserinteractionOwner = owner_interaction();
 
             HWND hwndParent = nullptr;
 
