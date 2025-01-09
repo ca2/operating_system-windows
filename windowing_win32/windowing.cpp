@@ -520,12 +520,12 @@ namespace windowing_win32
    }
 
 
-   void windowing::clear_keyboard_focus(::user::element* pelementGainingFocusIfAny)
-   {
+   //void windowing::clear_keyboard_focus(::user::element* pelementGainingFocusIfAny)
+   //{
 
 
 
-   }
+   //}
 
 
    ::acme::windowing::window* windowing::get_keyboard_focus(::thread* pthread)

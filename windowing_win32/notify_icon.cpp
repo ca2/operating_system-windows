@@ -5,6 +5,7 @@
 #include "acme/constant/message.h"
 #include "acme/exception/exception.h"
 #include "acme/handler/topic.h"
+#include "acme_windowing_win32/activation_token.h"
 
 
 static ::user::notify_icon * g_pnotifyiconLast = nullptr;
@@ -349,6 +350,13 @@ namespace windowing_win32
       }
 
       ptopic->m_puserelement = this;
+
+      if (!pmessage->m_actioncontext.m_puseractivationtoken)
+      {
+
+         pmessage->m_actioncontext.m_puseractivationtoken = __allocate::win32::acme::windowing::activation_token(::get_task());
+
+      }
 
       ptopic->m_actioncontext.m_pmessage = pmessage;
 

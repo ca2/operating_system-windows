@@ -378,6 +378,9 @@ namespace acme_windows
       void calculate_onedrive_installed() override;
 
 
+      void defer_register_server_library(const ::platform::uuid & uuid, const ::file::path & path) override;
+
+
    };
 
 

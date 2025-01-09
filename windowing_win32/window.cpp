@@ -685,7 +685,7 @@ namespace windowing_win32
 
       }
 
-      SendMessage(m_hwnd, e_message_pos_create, 0, 0);
+      //SendMessage(m_hwnd, e_message_after_create, 0, 0);
 
       if (puserinteraction->m_bEdgeGestureDisableTouchWhenFullscreen)
       {
@@ -2086,7 +2086,12 @@ namespace windowing_win32
       if (hwndFocus == get_hwnd())
       {
 
-         return true;
+         if (::GetForegroundWindow() == hwndFocus)
+         {
+
+            return true;
+
+         }
 
       }
 
@@ -2393,6 +2398,12 @@ namespace windowing_win32
                edisplayOutput = edisplay;
 
             }
+            else if (edisplay == e_display_notify_icon)
+            {
+
+               edisplayOutput = edisplay;
+
+            }
             else if (edisplay == e_display_zoomed)
             {
 
@@ -2408,6 +2419,17 @@ namespace windowing_win32
 
             if (!is_equivalent_in_equivalence_sink(edisplayOutput, edisplayWindow))
             {
+
+               //bool bToolWindow = (edisplayOutput == e_display_notify_icon);
+
+               //if (is_different(bToolWindow, is_tool_window()))
+               //{
+
+               //   bool bShowTask = !bToolWindow;
+
+               //   show_task(bShowTask);
+
+               //}
 
                if (is_equivalent_in_equivalence_sink(edisplayOutput, e_display_normal))
                {
@@ -2426,7 +2448,9 @@ namespace windowing_win32
                      || useractivation & ::user::e_activation_on_center_of_screen)
                      {
 
-                        if (::IsZoomed(hwnd) || ::IsIconic(hwnd))
+                        if (::IsZoomed(hwnd) 
+                           || ::IsIconic(hwnd)
+                           || !::IsWindowVisible(hwnd))
                         {
 
                            ::ShowWindow(hwnd, SW_NORMAL);
@@ -2437,7 +2461,10 @@ namespace windowing_win32
                      else
                      {
 
-                        if (::IsZoomed(hwnd) || ::IsIconic(hwnd))
+                        if (
+                           ::IsZoomed(hwnd) 
+                           || ::IsIconic(hwnd)
+                           || !::IsWindowVisible(hwnd))
                         {
 
                            ::ShowWindow(hwnd, SW_SHOWNOACTIVATE);
@@ -2459,6 +2486,14 @@ namespace windowing_win32
                {
 
                   ::ShowWindow(hwnd, SW_MINIMIZE);
+
+               }
+               else if (edisplayOutput == e_display_notify_icon)
+               {
+
+                  ::ShowWindow(hwnd, SW_HIDE);
+
+                  //bToolWindow = false;
 
                }
                else
@@ -3827,7 +3862,7 @@ namespace windowing_win32
          if (puserinteraction)
          {
 
-            puserinteraction->on_display_restore(pmessage->m_puseractivationtoken);
+            puserinteraction->on_display_restore(pmessage->user_activation_token());
 
          }
 
@@ -3846,7 +3881,7 @@ namespace windowing_win32
          if (puserinteraction)
          {
 
-            puserinteraction->on_display_task_list(pmessage->m_puseractivationtoken);
+            puserinteraction->on_display_task_list(pmessage->user_activation_token());
 
          }
 
@@ -3881,7 +3916,7 @@ namespace windowing_win32
             //else
             //{
 
-            puserinteraction->_001Minimize();
+            puserinteraction->on_system_command(e_system_command_minimize);
 
             //            }
 
@@ -3926,7 +3961,6 @@ namespace windowing_win32
       }
       else if (wparam == 123)
       {
-
 
          application()->show_about_box();
 
@@ -6569,6 +6603,7 @@ namespace windowing_win32
    }
 
 
+
    /*bool window::set_window_position(class ::user::zorder zorder, int x, int y, int cx, int cy, unsigned int nFlags)
    {
 
@@ -7589,8 +7624,6 @@ namespace windowing_win32
    }
 
 
-
-
    void window::set_tool_window(bool bSet)
    {
 
@@ -7608,6 +7641,14 @@ namespace windowing_win32
       }
 
       //return ::success;
+
+   }
+
+
+   bool window::is_tool_window()
+   {
+
+      return _get_ex_style() & WS_EX_TOOLWINDOW;
 
    }
 
@@ -8387,6 +8428,18 @@ namespace windowing_win32
             try
             {
 
+               if (message == WM_LBUTTONDOWN
+                  || message == WM_LBUTTONUP
+                  || message == WM_RBUTTONDOWN
+                  || message == WM_RBUTTONUP
+                  || message == WM_MBUTTONDOWN
+                  || message == WM_MBUTTONUP)
+               {
+
+                  pmessage->m_actioncontext.m_puseractivationtoken = __allocate::win32::acme::windowing::activation_token(::get_task());
+
+               }
+
                //puserinteraction->message_handler(pmessage);
                message_handler(pmessage);
 
@@ -8512,7 +8565,6 @@ namespace windowing_win32
       _user_post(procedure);
 
    }
-
 
 
 } // namespace windowing_win32

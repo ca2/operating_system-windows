@@ -474,7 +474,7 @@ namespace input_win32
    //   }
    //
    //
-   //   void windowing::clear_keyboard_focus(::user::element* pelementGainingFocusIfAny)
+   //   void windowing::aaa_clear_keyboard_focus(::user::element* pelementGainingFocusIfAny)
    //   {
    //
    //

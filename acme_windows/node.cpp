@@ -23,6 +23,7 @@
 #include "acme/platform/scoped_restore.h"
 #include "acme/platform/application.h"
 #include "acme/platform/system.h"
+#include "acme/platform/uuid.h"
 #include "acme/prototype/prototype/memory.h"
 #include "acme/prototype/string/__wide.h"
 #include "acme/prototype/string/str.h"
@@ -5061,6 +5062,46 @@ namespace acme_windows
 
       m_bOneDriveCalculated = true;
 
+
+   }
+
+
+   void node::defer_register_server_library(const ::platform::uuid & uuid, const ::file::path & path)
+   {
+
+      auto windowspath = path.windows_path();
+
+      ::acme_windows::registry::key key;
+
+      ::string strKey;
+
+      //WCHAR szCLSID[MAX_PATH];
+
+      //StringFromGUID2(CLSID_DeskBand, szCLSID, ARRAYSIZE(szCLSID));
+
+      strKey.formatf("CLSID\\%s\\InprocServer32", uuid.as_string().c_str());
+
+      //::string strKey(wstrKey);
+
+      ::string strPath;
+
+      bool bUnregister = false;
+
+      if (!key._open(HKEY_CLASSES_ROOT, strKey, false)
+         || !key._get("", strPath)
+         || (bUnregister = !strPath.case_insensitive_equals(windowspath.path())))
+      {
+
+         if (bUnregister)
+         {
+
+            auto hinst = ShellExecuteW(NULL, _T("RunAs"), L"regsvr32.exe", wstring("/u ") + windowspath.path(), NULL, SW_SHOWNORMAL);
+
+         }
+
+         auto hinst = ShellExecuteW(NULL, _T("RunAs"), L"regsvr32.exe", windowspath.path(), NULL, SW_SHOWNORMAL);
+
+      }
 
    }
 

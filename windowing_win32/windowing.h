@@ -98,7 +98,7 @@ namespace windowing_win32
       virtual HWND zorder_to_hwnd(const zorder & zorder);
 
 
-      void clear_keyboard_focus(::user::element * pelementGainingFocusIfAny) override;
+      //void clear_keyboard_focus(::user::element * pelementGainingFocusIfAny) override;
 
       
       ::acme::windowing::window * get_keyboard_focus(::thread * pthread) override;

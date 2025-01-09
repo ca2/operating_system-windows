@@ -102,7 +102,7 @@ namespace input_win32
       //virtual HWND zorder_to_hwnd(const zorder & zorder);
 
 
-      //void clear_keyboard_focus(::user::element * pelementGainingFocusIfAny) override;
+      //void aaa_clear_keyboard_focus(::user::element * pelementGainingFocusIfAny) override;
 
       //
       //::windowing::window * get_keyboard_focus(::thread * pthread) override;

@@ -452,9 +452,11 @@ namespace windowing_win32
       //virtual void Print(::draw2d::graphics_pointer & pgraphics, unsigned int dwFlags) const;
       //virtual void PrintClient(::draw2d::graphics_pointer & pgraphics, unsigned int dwFlags) const;
 
-      virtual void on_redraw_window(unsigned int flags) override;
+      void on_redraw_window(unsigned int flags) override;
 
-      virtual void show_task(bool bShowTask) override;
+      void show_task(bool bShowTask) override;
+
+      bool is_tool_window() override;
 
       virtual void UpdateWindow();
       virtual void SetRedraw(bool bRedraw = true);

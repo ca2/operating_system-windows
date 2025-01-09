@@ -5301,7 +5301,7 @@ void interaction_impl::set_tool_window(bool bSet)
 //
 //         ::pointer<::user::interaction>puiFocus;
 //         
-//         puiFocus = m_puserinteractionKeyboardFocus;
+//         puiFocus = aaa_m_pacmeuserinteractionKeyboardFocus;
 //
 //         ///auto pkey = pmessage->m_pkey;
 //
