@@ -95,14 +95,14 @@ namespace windowing_win32
       //
       // }
 
-#if 000
+//#if 000
 
-      initialize_system_interaction();
+      //initialize_system_interaction();
       auto pdisplay = dynamic_cast <class display *>(display());
 
       pdisplay->register_device_listener(::hardware::e_device_monitor);
 
-#endif
+//#endif
 
 
 
@@ -112,7 +112,7 @@ namespace windowing_win32
    }
 
 
-   void windowing::initialize_system_interaction()
+   void windowing::defer_initialize_system_interaction()
    {
 
       if (m_psysteminteraction)
@@ -175,7 +175,7 @@ namespace windowing_win32
       if(!m_psysteminteraction)
       {
 
-         initialize_system_interaction();
+         defer_initialize_system_interaction();
 
       }
 
@@ -1392,6 +1392,21 @@ namespace windowing_win32
             return strWindowText.case_insensitive_contains(str);
 
          });
+
+   }
+
+
+   bool windowing::dark_mode()
+   {
+
+      if (!m_psysteminteraction)
+      {
+
+         defer_initialize_system_interaction();
+
+      }
+
+      return ::win32::acme::windowing::windowing::dark_mode();
 
    }
 

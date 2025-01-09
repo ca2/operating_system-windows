@@ -53,7 +53,7 @@ namespace windowing_win32
 
       //void get_cursor_position(::int_point* ppoint) override;
 
-      virtual void initialize_system_interaction();
+      virtual void defer_initialize_system_interaction();
       //virtual ::pointer<::user::interaction>create_system_window();
       ::pointer<system_interaction>create_system_interaction();
       
@@ -181,6 +181,7 @@ namespace windowing_win32
       //template < typename PREDICATE >
       //bool _top_level_contains_bool_member(PREDICATE predicate);
 
+      bool dark_mode() override;
       void set_dark_mode(bool bDarkMode) override;
 
       bool _visible_top_level_contains_all_names(const string_array& stra) override;
