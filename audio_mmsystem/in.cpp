@@ -151,7 +151,7 @@ namespace audio_mmsystem
             &m_hwavein,
             audiowave->m_uiWaveInDevice,
             wave_format(),
-            get_itask(),
+            get_itask().m_i,
             (unsigned int)0,
             CALLBACK_THREAD);
 
