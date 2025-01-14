@@ -111,7 +111,7 @@ namespace input_win32
       //::windowing::window * get_mouse_capture(::thread * pthread) override;
 
       //
-      ////HWND _get_mouse_capture(itask_t itask);
+      ////HWND _get_mouse_capture(itask itask);
 
 
       //bool defer_release_mouse_capture(::thread* pthread, ::windowing::window* pwindowDeferRelease) override;

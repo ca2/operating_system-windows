@@ -18,7 +18,7 @@ namespace mouse_hook
 
    HHOOK g_hhook = nullptr;
 
-   itask_t g_itask = 0;
+   itask g_itask = 0;
 
    LRESULT CALLBACK LowLevelMouseProc(int nCode, WPARAM wParam, LPARAM lParam)
    {

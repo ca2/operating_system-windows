@@ -42,7 +42,7 @@ namespace acme_windows
       if (strPath.case_insensitive_begins("Local\\") || strPath.case_insensitive_begins("Global\\"))
       {
 
-         m_fileinstance.m_handle = INVALID_HANDLE_VALUE;
+         m_fileinstance.m_u = (::uptr) INVALID_HANDLE_VALUE;
 
          m_hfilemap = CreateFileMappingW(INVALID_HANDLE_VALUE, nullptr, PAGE_READWRITE, 0, (unsigned int)m_size, windowspath.extended_path());
 
@@ -92,7 +92,7 @@ namespace acme_windows
 
          m_fileinstance.ensure_file_size(m_size);
 
-         m_hfilemap = CreateFileMappingW(m_fileinstance, nullptr, PAGE_READWRITE, 0, 0, nullptr);
+         m_hfilemap = CreateFileMappingW((HANDLE) m_fileinstance.m_u, nullptr, PAGE_READWRITE, 0, 0, nullptr);
 
       }
 

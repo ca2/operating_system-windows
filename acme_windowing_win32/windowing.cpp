@@ -410,7 +410,7 @@ namespace win32
          void windowing::kick_idle()
          {
 
-            ::PostThreadMessage((DWORD)m_itask, e_message_kick_idle, 0, 0);
+            ::PostThreadMessage((DWORD)m_itask.m_i, e_message_kick_idle, 0, 0);
 
          }
 

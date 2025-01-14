@@ -2070,7 +2070,7 @@ namespace windowing_win32
 
       HWND hwndFocus;
 
-      if (GetGUIThreadInfo((DWORD)itask, &info))
+      if (GetGUIThreadInfo((DWORD)itask.m_i, &info))
       {
 
          hwndFocus = info.hwndFocus;
@@ -2103,7 +2103,7 @@ namespace windowing_win32
    bool window::is_active_window()
    {
 
-      itask_t itask = 0;
+      itask itask;
 
       auto puserinteraction = user_interaction();
 
@@ -2120,7 +2120,7 @@ namespace windowing_win32
 
       HWND hwndActive;
 
-      if (GetGUIThreadInfo((DWORD)itask, &info))
+      if (GetGUIThreadInfo((DWORD)itask.m_i, &info))
       {
 
          hwndActive = info.hwndActive;

@@ -107,7 +107,7 @@ namespace windowing_win32
       ::acme::windowing::window * get_mouse_capture(::thread * pthread) override;
 
       
-      //HWND _get_mouse_capture(itask_t itask);
+      //HWND _get_mouse_capture(itask itask);
 
 
       bool defer_release_mouse_capture(::thread* pthread, ::acme::windowing::window* pwindowDeferRelease) override;

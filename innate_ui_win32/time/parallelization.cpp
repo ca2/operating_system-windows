@@ -3,9 +3,9 @@
 
 
 static HANDLE g_hMainThread = nullptr;
-static itask_t g_iMainThread = -1;
+static itask g_iMainThread = -1;
 
-void set_main_hthread(htask_t htask)
+void set_main_hthread(htask htask)
 {
 
    MSG msg;
@@ -17,7 +17,7 @@ void set_main_hthread(htask_t htask)
 }
 
 
-void set_main_ithread(itask_t itask)
+void set_main_ithread(itask itask)
 {
 
    MSG msg;
@@ -29,34 +29,34 @@ void set_main_ithread(itask_t itask)
 }
 
 
-htask_t get_main_hthread()
+htask get_main_hthread()
 {
 
-   return (htask_t) g_hMainThread;
+   return (htask) g_hMainThread;
 
 }
 
 
-itask_t get_main_ithread()
+itask get_main_ithread()
 {
 
-   return (itask_t) g_iMainThread;
+   return (itask) g_iMainThread;
 
 }
 
 
-htask_t current_htask()
+htask current_htask()
 {
 
-   return (htask_t) ::GetCurrentThread();
+   return (htask) ::GetCurrentThread();
 
 }
 
 
-itask_t current_itask()
+itask current_itask()
 {
 
-   return (itask_t) ::GetCurrentThreadId();
+   return (itask) ::GetCurrentThreadId();
 
 }
 

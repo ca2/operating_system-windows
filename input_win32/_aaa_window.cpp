@@ -1716,7 +1716,7 @@ namespace windowing_win32
    bool window::has_mouse_capture() const
    {
 
-      itask_t itask = get_itask();
+      itask itask = get_itask();
 
       HWND hwndCapture = ::windows::get_mouse_capture(itask);
 
@@ -1773,7 +1773,7 @@ namespace windowing_win32
    bool window::is_active_window() const
    {
 
-      itask_t itask = 0;
+      itask itask = 0;
 
       auto puserinteraction = m_pwindow->m_puserinteraction;
 
@@ -6910,7 +6910,7 @@ namespace windows
 {
 
 
-   HWND get_mouse_capture(itask_t itask)
+   HWND get_mouse_capture(itask itask)
    {
 
       GUITHREADINFO info = {};
@@ -6938,7 +6938,7 @@ namespace windows
    }
 
 
-   bool set_mouse_capture(itask_t itask, HWND hwnd)
+   bool set_mouse_capture(itask itask, HWND hwnd)
    {
 
       GUITHREADINFO info = {};
@@ -6995,7 +6995,7 @@ namespace windows
    }
 
 
-   bool defer_release_mouse_capture(itask_t itask, HWND hwnd)
+   bool defer_release_mouse_capture(itask itask, HWND hwnd)
    {
 
       GUITHREADINFO info = {};

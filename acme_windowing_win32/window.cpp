@@ -1484,7 +1484,7 @@ namespace win32
          bool window::has_mouse_capture()
          {
 
-            itask_t itask = get_itask();
+            itask itask = get_itask();
 
             HWND hwndCapture = ::windows::get_mouse_capture(itask);
 

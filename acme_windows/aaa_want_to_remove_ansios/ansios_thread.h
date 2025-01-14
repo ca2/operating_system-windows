@@ -9,19 +9,19 @@
 //class message_queue;
 
 
-//CLASS_DECL_ACME ::pointer<message_queue>__get_mq(itask_t atom);
+//CLASS_DECL_ACME ::pointer<message_queue>__get_mq(itask atom);
 
 //CLASS_DECL_ACME int_bool WINAPI GetMessage(LPMESSAGE lpMsg, oswindow oswindow, unsigned int wMsgFilterMin, unsigned int wMsgFilterMax);
 
 //CLASS_DECL_ACME int_bool WINAPI PeekMessage(LPMESSAGE lpMsg, oswindow oswindow, unsigned int wMsgFilterMin, unsigned int wMsgFilterMax, unsigned int wRemoveMsg);
 
-//CLASS_DECL_ACME int_bool WINAPI PostThreadMessage(itask_t idthread, unsigned int Msg, WPARAM wParam, LPARAM lParam);
+//CLASS_DECL_ACME int_bool WINAPI PostThreadMessage(itask idthread, unsigned int Msg, WPARAM wParam, LPARAM lParam);
 
-//CLASS_DECL_ACME unsigned int WINAPI GetThreadId(htask_t Thread);
+//CLASS_DECL_ACME unsigned int WINAPI GetThreadId(htask Thread);
 
-//CLASS_DECL_ACME htask_t GetCurrentThread();
+//CLASS_DECL_ACME htask GetCurrentThread();
 
-//CLASS_DECL_ACME itask_t GetCurrentThreadId();
+//CLASS_DECL_ACME itask GetCurrentThreadId();
 
 
 //#endif // AXIS_ANSIOS_THREAD_H

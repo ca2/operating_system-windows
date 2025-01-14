@@ -432,7 +432,7 @@ namespace input_win32
    //   ::windowing::window* windowing::get_active_window(::thread* pthread)
    //   {
    //
-   //      itask_t itask = 0;
+   //      itask itask = 0;
    //
    //      if (pthread)
    //      {
@@ -485,7 +485,7 @@ namespace input_win32
    //   ::windowing::window* windowing::get_keyboard_focus(::thread* pthread)
    //   {
    //
-   //      itask_t itask = 0;
+   //      itask itask = 0;
    //
    //      if (pthread)
    //      {
@@ -671,7 +671,7 @@ namespace input_win32
    //   ::windowing::window* windowing::get_mouse_capture(::thread* pthread)
    //   {
    //
-   //      itask_t itask;
+   //      itask itask;
    //
    //      if (pthread)
    //      {
@@ -705,7 +705,7 @@ namespace input_win32
    //   bool windowing::defer_release_mouse_capture(::thread* pthread, ::windowing::window* pwindowDeferRelease)
    //   {
    //
-   //      itask_t itask;
+   //      itask itask;
    //
    //      if (pthread)
    //      {
@@ -752,7 +752,7 @@ namespace input_win32
    //   }
    //
    //
-   //   //HWND windowing::_get_mouse_capture(itask_t itask)
+   //   //HWND windowing::_get_mouse_capture(itask itask)
    //   //{
    //
    //   //   GUITHREADINFO info = {};
