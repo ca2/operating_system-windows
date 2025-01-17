@@ -112,11 +112,9 @@ namespace windowing_win32
             if (pmanager)
             {
 
-               pmanager->signal(id_operating_system_font_list_change);
+               pmanager->send_signal(id_operating_system_font_list_change);
 
             }
-
-
 
             //psystem->handle_subject(ptopic);
 
