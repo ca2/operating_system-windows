@@ -476,6 +476,11 @@ namespace win32
          void windowing::windowing_application_main_loop()
          {
 
+            __task_init();
+
+
+            init_task();
+
             //set_current_handles();
 
             //::set_main_thread();

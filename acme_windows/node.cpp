@@ -5079,7 +5079,7 @@ namespace acme_windows
 
       //StringFromGUID2(CLSID_DeskBand, szCLSID, ARRAYSIZE(szCLSID));
 
-      strKey.formatf("CLSID\\%s\\InprocServer32", uuid.as_string().c_str());
+      strKey.formatf("CLSID\\{%s}\\InprocServer32", uuid.as_string().uppered().c_str());
 
       //::string strKey(wstrKey);
 
@@ -5095,13 +5095,83 @@ namespace acme_windows
          if (bUnregister)
          {
 
-            auto hinst = ShellExecuteW(NULL, _T("RunAs"), L"regsvr32.exe", wstring("/u ") + windowspath.path(), NULL, SW_SHOWNORMAL);
+            auto hinst = ShellExecuteW(NULL, _T("RunAs"), L"regsvr32.exe", wstring("/s /u ") + windowspath.path(), NULL, SW_SHOWNORMAL);
 
          }
 
-         auto hinst = ShellExecuteW(NULL, _T("RunAs"), L"regsvr32.exe", windowspath.path(), NULL, SW_SHOWNORMAL);
+         auto hinst = ShellExecuteW(NULL, _T("RunAs"), L"regsvr32.exe", wstring("/s ") + windowspath.path(), NULL, SW_SHOWNORMAL);
 
       }
+
+   }
+
+
+   void node::defer_unregister_server_library(const ::platform::uuid & uuid, const ::file::path & path)
+   {
+
+      auto windowspath = path.windows_path();
+
+      ::acme_windows::registry::key key;
+
+      ::string strKey;
+
+      //WCHAR szCLSID[MAX_PATH];
+
+      //StringFromGUID2(CLSID_DeskBand, szCLSID, ARRAYSIZE(szCLSID));
+
+      strKey.formatf("CLSID\\{%s}\\InprocServer32", uuid.as_string().uppered().c_str());
+
+      //::string strKey(wstrKey);
+
+      ::string strPath;
+
+      bool bUnregister = false;
+
+      if (key._open(HKEY_CLASSES_ROOT, strKey, false))
+      {
+
+         auto hinst = ShellExecuteW(NULL, _T("RunAs"), L"regsvr32.exe", wstring("/s /u ") + windowspath.path(), NULL, SW_SHOWNORMAL);
+
+      }
+
+   }
+
+
+   bool node::is_server_library_registered(::file::path & path,const ::platform::uuid & uuid)
+   {
+
+      auto windowspath = path.windows_path();
+
+      ::acme_windows::registry::key key;
+
+      ::string strKey;
+
+      //WCHAR szCLSID[MAX_PATH];
+
+      //StringFromGUID2(CLSID_DeskBand, szCLSID, ARRAYSIZE(szCLSID));
+
+      strKey.formatf("CLSID\\{%s}\\InprocServer32", uuid.as_string().uppered().c_str());
+
+      //::string strKey(wstrKey);
+
+      ::string strPath;
+
+      bool bUnregister = false;
+
+      bool bRegistered = key._open(HKEY_CLASSES_ROOT, strKey, false);
+
+      if (!bRegistered)
+      {
+
+         return false;
+
+      }
+
+      key._get("", strPath);
+
+      path = strPath;
+
+      return true;
 
    }
 
