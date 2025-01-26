@@ -505,12 +505,12 @@ namespace win32
 
             //}
 
-            if (::system()->m_pmanualresethappeningMainLoopEnd)
-            {
+            //if (::system()->m_pmanualresethappeningMainLoopEnd)
+            //{
 
-               ::system()->m_pmanualresethappeningMainLoopEnd->set_happening();
+            //   ::system()->m_pmanualresethappeningMainLoopEnd->set_happening();
 
-            }
+            //}
 
          }
 
