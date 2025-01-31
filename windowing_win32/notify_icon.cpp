@@ -93,7 +93,7 @@ namespace windowing_win32
 
       //}
 
-      m_atom = atom;
+      id() = atom;
 
       m_nid.hWnd = as_hwnd(oswindow());
       m_nid.uID = as_hash32((const ::string &) atom).m_u;

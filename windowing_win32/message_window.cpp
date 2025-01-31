@@ -110,18 +110,18 @@ namespace windowing_win32
    }
 
 
-   void message_window::message_window_post_message(const ::atom & atom,wparam wparam,lparam lparam)
+   void message_window::message_window_post_message(::enum_message emessage, ::wparam wparam, ::lparam lparam)
    {
 
-      post_message(atom, wparam, lparam);
+      post_message(emessage, wparam, lparam);
 
    }
 
 
-   lresult message_window::message_window_send_message(const ::atom& atom,wparam wparam,lparam lparam)
+   lresult message_window::message_window_send_message(::enum_message emessage, ::wparam wparam, ::lparam lparam)
    {
 
-      return send_message(atom, wparam, lparam);
+      return send_message(emessage, wparam, lparam);
 
    }
 

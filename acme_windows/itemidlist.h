@@ -113,7 +113,7 @@ public:
 
    static HRESULT _GetUIObjectOf(REFIID riid, LPVOID* ppOut, LPITEMIDLIST pidlf, HWND hWnd);
    static LPITEMIDLIST _copy(LPCITEMIDLIST pidlOrg, int nCount);
-   static int _order(LPCITEMIDLIST pidlf1, LPCITEMIDLIST pidlf2, IShellFolder * psfFolder = nullptr, LPARAM lParam = 0);//return zero means same,non-zero means different.
+   static int _order(LPCITEMIDLIST pidlf1, LPCITEMIDLIST pidlf2, IShellFolder * psfFolder = nullptr, LPARAM lparam = 0);//return zero means same,non-zero means different.
    //static HRESULT _parse(itemidlist & idl, const ::string & strPath, IShellFolder * psfFolder);
    static HRESULT _parse(itemidlist & idl, const ::string & strPath);
    static HRESULT get_item_in_known_folder(itemidlist & idl, const string & strPath);

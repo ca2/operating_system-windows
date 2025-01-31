@@ -219,7 +219,7 @@ namespace input_win32
 
       auto pkeyboard = __create_new < ::message::key >();
 
-      pkeyboard->m_atom = emessage;
+      pkeyboard->id() = emessage;
 
       if (iVirtualKeyCode == VK_RETURN)
       {

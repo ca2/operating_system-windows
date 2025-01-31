@@ -423,7 +423,7 @@ namespace acme_windows
          for (auto & property : setEnvironment)
          {
 
-            auto strAtom = property.m_atom.as_string();
+            auto strAtom = property.name().as_string();
 
             wstring wstrItem(strAtom);
 

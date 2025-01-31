@@ -48,7 +48,7 @@ namespace windowing_win32
       /// windows::interaction_impl
 
 
-      //HWND                                      m_hwnd;
+      //HWND                                    m_hwnd;
       bool                                      m_bClipboardOpened : 1;
       bool                                      m_bFocusImpl : 1;
       bool                                      m_bSystemCaret : 1;
@@ -61,19 +61,19 @@ namespace windowing_win32
 
       int_point                                 m_point;
 
-      ::user::interaction_base * m_pbasewnd;
+      ::user::interaction_base *                m_pbasewnd;
 
-      unsigned int                                       m_uiLastRedrawRequest;
+      unsigned int                              m_uiLastRedrawRequest;
 
-      IDropTargetHelper * m_piDropHelper;
+      IDropTargetHelper *                       m_piDropHelper;
 
       bool                                      m_bUseDnDHelper;
 
-      //WNDPROC                                   m_pfnSuper; // for subclassing of controls
+      //WNDPROC                                 m_pfnSuper; // for subclassing of controls
 
       ::e_display                               m_edisplayLayout;
-      huge_integer_rectangle                             m_rectangleLastPos;
-      class ::time                                m_timeLastPos;
+      huge_integer_rectangle                    m_rectangleLastPos;
+      class ::time                              m_timeLastPos;
       string                                    m_strDebug;
 
       ::int_point                               m_pointCursor;
@@ -185,7 +185,7 @@ namespace windowing_win32
       void _set_foreground_window_unlocked(::user::activation_token * puseractivationtoken) override;
 
       void set_mouse_capture() override;
-
+      void release_mouse_capture() override;
 
 
       bool has_mouse_capture() override;
@@ -379,9 +379,9 @@ namespace windowing_win32
       //
       //#endif   // WINVER >= 0x0500
 
-      lresult send_message(const ::atom & atom, wparam wParam = 0, lparam lParam = nullptr) override;
+      lresult send_message(::enum_message emessage, ::wparam wparam = {}, ::lparam lparam = {}) override;
 
-      void post_message(const ::atom & atom, wparam wParam = 0, lparam lParam = nullptr) override;
+      void post_message(::enum_message emessage, ::wparam wparam = {}, ::lparam lparam = {}) override;
 
 
       //bool SendNotifyMessage(unsigned int message, wparam wParam, lparam lParam);
@@ -578,7 +578,7 @@ namespace windowing_win32
       //virtual ::user::interaction * GetNextDlgGroupItem(::user::interaction * pWndCtl, bool bPrevious = false) const;
       //virtual ::user::interaction * GetNextDlgTabItem(::user::interaction * pWndCtl, bool bPrevious = false) const;
       //virtual unsigned int IsDlgButtonChecked(int nIDButton) const;
-      //virtual lresult SendDlgItemMessage(int nID, unsigned int message, wparam wParam = 0, lparam lParam = 0);
+      //virtual lresult SendDlgItemMessage(int nID, unsigned int message, const ::wparam & wparam = {}, const ::lparam & lparam = {});
       //virtual void SetDlgItemInt(int nID, unsigned int nValue, bool bSigned = true);
       //virtual void SetDlgItemText(int nID, const ::string & pszString);
 
@@ -876,7 +876,7 @@ namespace windowing_win32
       //virtual void message_handler(::message::message * pusermessage);
 
 
-      //virtual bool OnWndMsg(const ::atom & atom, wparam wParam, lparam lParam, lresult* pResult);
+      //virtual bool OnWndMsg(::enum_message emessage, ::wparam wparam, ::lparam lparam, lresult* pResult);
 
       // for handling default processing
       //lresult Default();
@@ -1026,9 +1026,9 @@ namespace windowing_win32
       void defer_show_system_menu(::user::mouse * pmouse) override;
 
 
-      //::pointer<::message::message> get_message(const ::atom & atom, wparam wparam, lparam lparam);
+      //::pointer<::message::message> get_message(::enum_message emessage, ::wparam wparam, ::lparam lparam);
 
-      //void default_set(::message::message * pmessage, const ::atom & atom, wparam wparam, lparam lparam);
+      //void default_set(::message::message * pmessage, ::enum_message emessage, ::wparam wparam, ::lparam lparam);
 
       LRESULT window_procedure(unsigned int message, wparam wparam, lparam lparam) override;
 

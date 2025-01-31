@@ -225,7 +225,7 @@ namespace windowing_win32
 {
 
 
-//void window::default_set(::message::message * pmessage, const ::atom & atom, wparam wparam, lparam lparam)
+//void window::default_set(::message::message * pmessage, ::enum_message emessage, ::wparam wparam, ::lparam lparam)
 //{
 //
 //
@@ -561,7 +561,7 @@ wstring windowing::_windows_register_window_class(unsigned int nClassStyle, HCUR
 }//namespace windowing_win32
 
 
-lresult CALLBACK WndProc(HWND hWnd, const ::atom & atom, wparam wParam, lparam lParam);
+lresult CALLBACK WndProc(HWND hWnd, ::enum_message emessage, ::wparam wparam, ::lparam lparam);
 
 //bool windows_register_class(HINSTANCE hinstance)
 //{

@@ -31,7 +31,7 @@ namespace x11
    };
 
 
-   const char * atom_name(enum_atom eatom)
+   const char * atom_name(enuid() eatom)
    {
 
       int iAtom = (int) eatom;

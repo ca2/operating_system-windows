@@ -135,7 +135,7 @@ namespace windows
 
 
 
-//LRESULT CALLBACK __window_procedure(HWND oswindow, const ::atom & atom, wparam wparam, lparam lparam);
+//LRESULT CALLBACK __window_procedure(HWND oswindow, ::enum_message emessage, ::wparam wparam, ::lparam lparam);
 //
 //WNDPROC get_window_procedure()
 //{

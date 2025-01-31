@@ -190,9 +190,9 @@ namespace windows
 //
 //#endif   // WINVER >= 0x0500
 
-      lresult send_message(const ::atom & atom, wparam wParam = 0, lparam lParam = nullptr);
+      lresult send_message(::enum_message emessage, ::wparam wparam = {}, ::lparam lparam = {});
 
-      bool post_message(const ::atom & atom, wparam wParam = 0, lparam lParam = nullptr);
+      bool post_message(::enum_message emessage, ::wparam wparam = {}, ::lparam lparam = {});
 
 
       //bool SendNotifyMessage(unsigned int message, wparam wParam, lparam lParam);
@@ -370,7 +370,7 @@ namespace windows
       ////virtual ::user::interaction * GetNextDlgGroupItem(::user::interaction * pWndCtl, bool bPrevious = false) const;
       ////virtual ::user::interaction * GetNextDlgTabItem(::user::interaction * pWndCtl, bool bPrevious = false) const;
       //virtual unsigned int IsDlgButtonChecked(int nIDButton) const;
-      //virtual lresult SendDlgItemMessage(int nID, unsigned int message, wparam wParam = 0, lparam lParam = 0);
+      //virtual lresult SendDlgItemMessage(int nID, unsigned int message, const ::wparam & wparam = {}, const ::lparam & lparam = {});
       //virtual void SetDlgItemInt(int nID, unsigned int nValue, bool bSigned = true);
       //virtual void SetDlgItemText(int nID, const ::string & pszString);
 
@@ -662,7 +662,7 @@ namespace windows
       //virtual void message_handler(::message::message * pmessage);
 
 
-      //virtual bool OnWndMsg(const ::atom & atom, wparam wParam, lparam lParam, lresult* pResult);
+      //virtual bool OnWndMsg(::enum_message emessage, ::wparam wparam, ::lparam lparam, lresult* pResult);
 
       // for handling default processing
       //lresult Default();

@@ -16,7 +16,7 @@ int start();
 
 ATOM installer_RegisterClass(HINSTANCE hInstance);
 
-LRESULT CALLBACK installer_WndProc(HWND hWnd,const ::atom & atom,WPARAM wParam,LPARAM lParam);
+LRESULT CALLBACK installer_WndProc(HWND hWnd,::enum_message emessage, ::wparam wparam, ::lparam lparam);
 
 int APIENTRY _tWinMain(HINSTANCE hInstance,
                      HINSTANCE hPrevInstance,
@@ -466,7 +466,7 @@ ATOM installer_RegisterClass(HINSTANCE hInstance)
 //  e_message_destroy	- post a quit message and return
 //
 //
-LRESULT CALLBACK installer_WndProc(HWND hWnd, const ::atom & atom, WPARAM wParam, LPARAM lParam)
+LRESULT CALLBACK installer_WndProc(HWND hWnd, ::enum_message emessage, ::wparam wparam, ::lparam lparam)
 {
 	switch (message)
 	{

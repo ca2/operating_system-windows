@@ -195,7 +195,7 @@ namespace input_win32
 
       auto pmouse = __create_new < ::message::mouse >();
 
-      pmouse->m_atom = emessage;
+      pmouse->m_emessage = emessage;
 
       handle_message(pmouse);
 

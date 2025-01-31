@@ -857,14 +857,14 @@ namespace windowing_win32
 
    //      string strLparamString;
 
-   //      if (pmessage->m_atom == WM_SETTINGCHANGE && wparam == 0)
+   //      if (pmessage->m_emessage == WM_SETTINGCHANGE && wparam == 0)
    //      {
 
    //         strLparamString = (const WCHAR *)(LPARAM(lparam));
 
    //      }
 
-   //      if (pmessage->m_atom == WM_FONTCHANGE)
+   //      if (pmessage->m_emessage == WM_FONTCHANGE)
    //      {
 
    //         auto psystem = system();
@@ -891,7 +891,7 @@ namespace windowing_win32
 
    //      //}
    //      }
-   //      else if (pmessage->m_atom == WM_SETTINGCHANGE && strLparamString == "ImmersiveColorSet")
+   //      else if (pmessage->m_emessage == WM_SETTINGCHANGE && strLparamString == "ImmersiveColorSet")
    //      {
 
    //         //auto pnode = system()->m_pnode;
@@ -901,8 +901,8 @@ namespace windowing_win32
    //         system()->acme_windowing()->fetch_system_background_color();
 
    //      }
-   //      else if (pmessage->m_atom == e_message_display_change ||
-   //         (pmessage->m_atom == WM_SETTINGCHANGE &&
+   //      else if (pmessage->m_emessage == e_message_display_change ||
+   //         (pmessage->m_emessage == WM_SETTINGCHANGE &&
    //            (pmessage->m_wparam == SPI_SETWORKAREA)))
    //      {
 
@@ -2047,6 +2047,14 @@ namespace windowing_win32
    {
       
       ::win32::acme::windowing::window::set_mouse_capture();
+
+   }
+
+
+   void window::release_mouse_capture()
+   {
+
+      ::win32::acme::windowing::window::release_mouse_capture();
 
    }
 
@@ -3628,7 +3636,7 @@ namespace windowing_win32
    //void window::message_handler(::message::message * pmessage)
    //{
    //   
-   //   if (pmessage->m_atom == (enum_message)WM_SYSCOMMAND)
+   //   if (pmessage->m_emessage == (enum_message)WM_SYSCOMMAND)
    //   {
 
    //      if (pmessage->m_wparam == SC_SCREENSAVE)
@@ -4318,7 +4326,7 @@ namespace windowing_win32
 
       HWND hwnd = as_hwnd(pmessage->m_oswindow);
 
-      UINT message = pmessage->m_atom.as_emessage();
+      UINT message = pmessage->m_emessage;
 
       WPARAM wparam = pmessage->m_wparam;
 
@@ -4442,24 +4450,20 @@ namespace windowing_win32
    //}
 
 
-   lresult window::send_message(const ::atom & atom, wparam wParam, lparam lParam)
+   lresult window::send_message(::enum_message emessage, ::wparam wparam, ::lparam lparam)
    {
 
-      return ::SendMessage(get_hwnd(), atom.as_emessage(), wParam, lParam);
+      return ::SendMessage(get_hwnd(), emessage, wparam, lparam);
 
    }
 
 
-   void window::post_message(const ::atom & atom, wparam wParam, lparam lParam)
+   void window::post_message(::enum_message emessage, ::wparam wparam, ::lparam lparam)
    {
 
       HWND hwnd = get_hwnd();
 
-      unsigned int message = atom.as_emessage();
-
-      wparam wparam = wParam;
-
-      BOOL bOk = ::PostMessage(hwnd, message, wparam, lParam.m_lparam);
+      BOOL bOk = ::PostMessage(hwnd, emessage, wparam, lparam);
 
       if (!bOk)
       {
@@ -6856,13 +6860,13 @@ namespace windowing_win32
    //   if (pfnWndProc == nullptr)
    //   {
 
-   //      lresult = ::DefWindowProcW(m_oswindow, (unsigned int)pmessage->m_atom.huge_integer(), pmessage->m_wparam, pmessage->m_lparam);
+   //      lresult = ::DefWindowProcW(m_oswindow, (unsigned int)pmessage->m_emessage.huge_integer(), pmessage->m_wparam, pmessage->m_lparam);
 
    //   }
    //   else
    //   {
 
-   //      lresult = ::CallWindowProc(pfnWndProc, m_oswindow, (unsigned int)pmessage->m_atom.huge_integer(), pmessage->m_wparam, pmessage->m_lparam);
+   //      lresult = ::CallWindowProc(pfnWndProc, m_oswindow, (unsigned int)pmessage->m_emessage.huge_integer(), pmessage->m_wparam, pmessage->m_lparam);
 
    //   }
 
@@ -6921,7 +6925,7 @@ namespace windowing_win32
 
          {
             //HWND hwnd = get_hwnd();
-            user_interaction()->post_message(WM_SETICON, ICON_SMALL, (LPARAM)hiconSmall);
+            user_interaction()->post_message((::enum_message) WM_SETICON, ICON_SMALL, (LPARAM)hiconSmall);
             //DWORD dwLastError = ::GetLastError();
             //information() << "ICON_BIT_SMALLER" << dwLastError;
          }
@@ -6970,7 +6974,7 @@ namespace windowing_win32
    //
    //      unsigned int message;
    //
-   //      message = pmessage->m_atom.umessage();
+   //      message = pmessage->m_emessage.umessage();
    //
    //      m_uiMessage = message;
    //
@@ -7505,7 +7509,7 @@ namespace windowing_win32
    //      //   else
    //      //   {
    //      //      
-   //      //      pmessage->set_lresult(::DefWindowProcW(m_oswindow, pmessage->m_atom, pmessage->m_wparam, pmessage->m_lparam));
+   //      //      pmessage->set_lresult(::DefWindowProcW(m_oswindow, pmessage->m_emessage, pmessage->m_wparam, pmessage->m_lparam));
    //
    //      //   }
    //

@@ -47,9 +47,9 @@ namespace multimedia
       {
          ::pointer<::user::message>pusermessage(pmessage);
          //ASSERT(GetMainWnd() == nullptr);
-         //if(pusermessage->m_atom == MM_WIM_OPEN ||
-         //   pusermessage->m_atom == MM_WIM_CLOSE ||
-         //   pusermessage->m_atom == MM_WIM_DATA)
+         //if(pusermessage->id() == MM_WIM_OPEN ||
+         //   pusermessage->id() == MM_WIM_CLOSE ||
+         //   pusermessage->id() == MM_WIM_DATA)
          //{
          //   translate_in_message(pusermessage);
          //   if(pusermessage->m_bRet)
@@ -414,9 +414,9 @@ namespace multimedia
 
          ::pointer<::user::message>pusermessage(pmessage);
 
-         //ASSERT(pusermessage->m_atom == MM_WIM_OPEN || pusermessage->m_atom == MM_WIM_CLOSE || pusermessage->m_atom == MM_WIM_DATA);
+         //ASSERT(pusermessage->id() == MM_WIM_OPEN || pusermessage->id() == MM_WIM_CLOSE || pusermessage->id() == MM_WIM_DATA);
 
-         //if(pusermessage->m_atom == MM_WIM_DATA)
+         //if(pusermessage->id() == MM_WIM_DATA)
          //{
          //
          //   m_iBuffer--;

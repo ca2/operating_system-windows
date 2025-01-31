@@ -754,7 +754,7 @@ namespace aura_windows
 
    //   unsigned int message;
 
-   //   message = ::message::translate_to_os_message(pusermessage->m_atom);
+   //   message = ::message::translate_to_os_message(pusermessage->id());
 
    //   switch (message)
    //   {
@@ -1581,7 +1581,7 @@ namespace aura_windows
    //}
 
 
-   lresult interaction_impl::send_message(const ::atom & atom, wparam wparam, lparam lparam, const ::int_point & point)
+   lresult interaction_impl::send_message(::enum_message emessage, ::wparam wparam, ::lparam lparam, const ::int_point & point)
    {
 
       auto pwindow = m_pwindow;
@@ -1593,7 +1593,7 @@ namespace aura_windows
    }
 
 
-   void interaction_impl::post_message(const ::atom & atom, wparam wparam, lparam lparam)
+   void interaction_impl::post_message(::enum_message emessage, ::wparam wparam, ::lparam lparam)
    {
 
       if (!m_pwindow)
@@ -1603,7 +1603,7 @@ namespace aura_windows
 
       }
       
-      m_pwindow->post_message(atom, wparam, lparam);
+      m_pwindow->post_message(emessage, wparam, lparam);
 
    }
 
@@ -4285,13 +4285,13 @@ void interaction_impl::set_tool_window(bool bSet)
 //      if (pfnWndProc == nullptr)
 //      {
 //
-//         lresult = ::DefWindowProcW(m_hwnd, (unsigned int) pmessage->m_atom.huge_integer(), pmessage->m_wparam, pmessage->m_lparam);
+//         lresult = ::DefWindowProcW(m_hwnd, (unsigned int) pmessage->m_emessage.huge_integer(), pmessage->m_wparam, pmessage->m_lparam);
 //
 //      }
 //      else
 //      {
 //
-//         lresult = ::CallWindowProc(pfnWndProc, m_hwnd, (unsigned int) pmessage->m_atom.huge_integer(), pmessage->m_wparam, pmessage->m_lparam);
+//         lresult = ::CallWindowProc(pfnWndProc, m_hwnd, (unsigned int) pmessage->m_emessage.huge_integer(), pmessage->m_wparam, pmessage->m_lparam);
 //
 //      }
 //
@@ -4356,7 +4356,7 @@ void interaction_impl::set_tool_window(bool bSet)
 //
 //      unsigned int message;
 //
-//      message = pusermessage->m_atom.umessage();
+//      message = pusermessage->id().umessage();
 //
 //      m_uiMessage = message;
 //
@@ -4891,7 +4891,7 @@ void interaction_impl::set_tool_window(bool bSet)
 //      //   else
 //      //   {
 //      //      
-//      //      pusermessage->set_lresult(::DefWindowProcW(m_hwnd, pusermessage->m_atom, pusermessage->m_wparam, pusermessage->m_lparam));
+//      //      pusermessage->set_lresult(::DefWindowProcW(m_hwnd, pusermessage->id(), pusermessage->m_wparam, pusermessage->m_lparam));
 //
 //      //   }
 //
@@ -4970,8 +4970,8 @@ void interaction_impl::set_tool_window(bool bSet)
    bool interaction_impl::on_mouse_message(::message::mouse * pmouse)
    {
 
-      /*if (pmouse->m_atom >= e_message_mouse_first
-         && pmouse->m_atom <= e_message_mouse_last
+      /*if (pmouse->m_emessage >= e_message_mouse_first
+         && pmouse->m_emessage <= e_message_mouse_last
          && m_bTranslateMouseMessageCursor
          && !pmouse->m_bTranslated)
       {
@@ -5012,7 +5012,7 @@ void interaction_impl::set_tool_window(bool bSet)
 //
 //      }
 //
-//      auto message = pmessage->m_atom.unsigned int();
+//      auto message = pmessage->m_emessage.unsigned int();
 //
 //      m_uiMessage = message;
 //
@@ -5387,7 +5387,7 @@ void interaction_impl::set_tool_window(bool bSet)
 //      //   else
 //      //   {
 //      //      
-//      //      pmessage->set_lresult(::DefWindowProcW(m_hwnd, pmessage->m_atom, pmessage->m_wparam, pmessage->m_lparam));
+//      //      pmessage->set_lresult(::DefWindowProcW(m_hwnd, pmessage->m_emessage, pmessage->m_wparam, pmessage->m_lparam));
 //
 //      //   }
 //

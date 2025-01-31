@@ -80,7 +80,7 @@ namespace production
 
    void pane_impact::on_create_impact(::user::impact_data * pcreatordata)
    {
-      switch(pcreatordata->m_atom)
+      switch(pcreatordata->id())
       {
       case CONTEXT_MENU_IMPACT:
       {
@@ -193,14 +193,14 @@ namespace production
 
          auto pupdate = topic(id_browse);
          pupdate->m_actioncontext = ::e_source_system;
-         ptopic->m_atom = ;
+         ptopic->id() = ;
          ptopic->payload(id_form) = "production\\options.xhtml";
          pdocument->update_all_impacts(ptopic);
 
-         ptopic->m_atom = id_get_form_impact;
+         ptopic->id() = id_get_form_impact;
          pdocument->update_all_impacts(ptopic);
 
-         ptopic->m_atom = id_after_browse;
+         ptopic->id() = id_after_browse;
          pdocument->update_all_impacts(ptopic);
 
 
@@ -223,7 +223,7 @@ namespace production
    void pane_impact::_001OnMenuMessage(::message::message * pmessage)
    {
       __UNREFERENCED_PARAMETER(pmessage);
-      set_current_tab_by_id(m_pimpactdataOld->m_atom);
+      set_current_tab_by_id(m_pimpactdataOld->id());
    }
 
    void pane_impact::install_message_routing(::channel * pchannel)
@@ -253,7 +253,7 @@ namespace production
 
    void pane_impact::handle(::topic * ptopic, ::context * pcontext)
    {
-      if(ptopic->m_atom == ::id_set_check)
+      if(ptopic->id() == ::id_set_check)
       {
          if(ptopic->user_interaction_id() == "clean")
          {

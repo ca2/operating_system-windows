@@ -1433,7 +1433,7 @@ namespace music
 
          //   happening * phappening = ___new happening();
 
-         //   ptopic->m_atom = ehappening;
+         //   ptopic->id() = ehappening;
          //   ptopic->m_psequence = this;
          //   ptopic->m_puserdata = lpmidihdr;
 

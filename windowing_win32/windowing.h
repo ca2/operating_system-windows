@@ -153,8 +153,8 @@ namespace windowing_win32
       static BOOL CALLBACK GetAppsEnumWindowsProc(HWND hwnd, LPARAM lParam);
 
 
-      virtual void set(::message::key * pkey, oswindow oswindow, ::windowing::window * pwindow, const ::atom & atom, wparam wparam, ::lparam lparam) override;
-      virtual void set(::message::mouse * pmouse, oswindow oswindow, ::windowing::window * pwindow, const ::atom & atom, wparam wparam, ::lparam lparam) override;
+      virtual void set(::message::key * pkey, oswindow oswindow, ::windowing::window * pwindow, ::enum_message emessage, ::wparam wparam, ::lparam lparam) override;
+      virtual void set(::message::mouse * pmouse, oswindow oswindow, ::windowing::window * pwindow, ::enum_message emessage, ::wparam wparam, ::lparam lparam) override;
 
 
       virtual void initialize_keyboard(::windowing::keyboard * pkeyboard) override;

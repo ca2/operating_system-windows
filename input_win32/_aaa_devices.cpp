@@ -154,7 +154,7 @@ namespace windowing_win32
    //void devices::on_message_device_change(::message::message * pmessage)
    //{
 
-   //   ASSERT(pmessage->m_atom == e_message_device_change);
+   //   ASSERT(pmessage->m_emessage == e_message_device_change);
 
    //   wparam wparam = pmessage->m_wparam;
 

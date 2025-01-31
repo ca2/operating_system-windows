@@ -64,7 +64,7 @@ namespace backup
    void pane_impact::on_create_impact(::user::impact_data * pcreatordata)
    {
 
-      switch(pcreatordata->m_atom)
+      switch(pcreatordata->id())
       {
       case impact_backup:
       {
@@ -83,14 +83,14 @@ namespace backup
          ::pointer<::user::impact>pimpact = pdocument->get_impact();
          auto pupdate = new_update();
          pupdate->m_actioncontext = ::e_source_system;
-         ptopic->m_atom = id_browse;
+         ptopic->id() = id_browse;
          ptopic->payload(id_form) = "filemanager\\replace_name_in_file_system.xhtml";
          pdocument->update_all_impacts(ptopic);
 
-         ptopic->m_atom = id_get_form_impact;
+         ptopic->id() = id_get_form_impact;
          pdocument->update_all_impacts(ptopic);
 
-         ptopic->m_atom = id_after_browse;
+         ptopic->id() = id_after_browse;
          pdocument->update_all_impacts(ptopic);
 
 

@@ -1339,23 +1339,23 @@ namespace win32
          }
 
 
-         void window::set_capture()
-         {
+         //void window::set_mouse_capture()
+         //{
 
-            SetCapture(m_hwnd);
+         //   SetCapture(m_hwnd);
 
-         }
-
-
-         bool window::has_capture()
-         {
-
-            return ::GetCapture() == m_hwnd;
-
-         }
+         //}
 
 
-         void window::release_capture()
+         //bool window::has_mouse_capture()
+         //{
+
+         //   return ::GetCapture() == m_hwnd;
+
+         //}
+
+
+         void window::release_mouse_capture()
          {
 
             ReleaseCapture();

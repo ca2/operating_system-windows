@@ -134,11 +134,11 @@ namespace win32
 
             ::int_rectangle get_window_rectangle() override;
 
-            void set_capture() override;
+            void set_mouse_capture() override;
 
-            bool has_capture() override;
+            bool has_mouse_capture() override;
 
-            void release_capture() override;
+            void release_mouse_capture() override;
 
             void set_cursor(enum_cursor ecursor) override;
 
@@ -161,9 +161,9 @@ namespace win32
 
             using ::acme::windowing::window::set_mouse_capture;
 
-            void set_mouse_capture() override;
+            //void set_mouse_capture() override;
 
-            bool has_mouse_capture() override;
+            //bool has_mouse_capture() override;
 
 
          };

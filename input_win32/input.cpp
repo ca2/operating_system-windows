@@ -597,14 +597,14 @@ namespace input_win32
    //
    //   //   }
    //
-   //   //   pusermessage->set(pmsg->oswindow, pwindow, pmsg->m_atom, pmsg->wParam, pmsg->lParam);
+   //   //   pusermessage->set(pmsg->oswindow, pwindow, pmsg->id(), pmsg->wParam, pmsg->lParam);
    //
    //   //   return pusermessage;
    //
    //   //}
    //
    //
-   //   void windowing::set(message::key* pkey, oswindow oswindow, ::windowing::window* pwindow, const ::atom& atom, wparam wparam, ::lparam lparam)
+   //   void windowing::set(message::key* pkey, oswindow oswindow, ::windowing::window* pwindow, ::enum_message emessage, ::wparam wparam, ::lparam lparam)
    //   {
    //
    //      pkey->m_nChar = static_cast<unsigned int>(wparam);
@@ -619,12 +619,12 @@ namespace input_win32
    //
    //      pkey->m_iVirtualKey = (int)MapLeftRightKeys(wparam, lparam);
    //
-   //      ::windowing::windowing::set(pkey, oswindow, pwindow, atom, wparam, lparam);
+   //      ::windowing::windowing::set(pkey, oswindow, pwindow, emessage, wparam, lparam);
    //
    //   }
    //
    //
-   //   void windowing::set(::message::mouse* pmouse, oswindow oswindow, ::windowing::window* pwindow, const ::atom& atom, wparam wparam, ::lparam lparam)
+   //   void windowing::set(::message::mouse* pmouse, oswindow oswindow, ::windowing::window* pwindow, ::enum_message emessage, ::wparam wparam, ::lparam lparam)
    //   {
    //
    //      //pmouse->m_nFlags = wparam;
@@ -1062,14 +1062,14 @@ namespace input_win32
    //   }
    //
    //
-   //   //void windowing::set(::message::key * pkey, oswindow oswindow, ::windowing::window * pwindow, const ::atom & atom, wparam wparam, ::lparam lparam)
+   //   //void windowing::set(::message::key * pkey, oswindow oswindow, ::windowing::window * pwindow, ::enum_message emessage, ::wparam wparam, ::lparam lparam)
    //   //{
    //
    //
    //   //}
    //
    //
-   //   //void windowing::set(::message::mouse * pmouse, oswindow oswindow, ::windowing::window * pwindow, const ::atom & atom, wparam wparam, ::lparam lparam)
+   //   //void windowing::set(::message::mouse * pmouse, oswindow oswindow, ::windowing::window * pwindow, ::enum_message emessage, ::wparam wparam, ::lparam lparam)
    //   //{
    //
    //
@@ -1533,11 +1533,11 @@ namespace input_win32
    void input::handle_message(::message::message * pmessage)
    {
 
-      if (pmessage->m_atom.m_etype == atom::e_type_message)
+      if (pmessage->m_emessage.m_etype == atom::e_type_message)
       {
 
-         if (pmessage->m_atom.m_emessage >= e_message_mouse_first
-            && pmessage->m_atom.m_emessage <= e_message_mouse_last)
+         if (pmessage->m_emessage >= e_message_mouse_first
+            && pmessage->m_emessage <= e_message_mouse_last)
          {
 
             for (auto & pparticle : m_particleaMouseHandler)
@@ -1548,8 +1548,8 @@ namespace input_win32
             }
 
          }
-         else if (pmessage->m_atom.m_emessage >= e_message_key_first
-            && pmessage->m_atom.m_emessage <= e_message_key_last)
+         else if (pmessage->m_emessage >= e_message_key_first
+            && pmessage->m_emessage <= e_message_key_last)
          {
 
             for (auto & pparticle : m_particleaKeyboardHandler)
