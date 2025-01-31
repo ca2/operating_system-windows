@@ -217,30 +217,30 @@ namespace input_win32
    void keyboard_hook::keyboard_proc(enum_message emessage, int iVirtualKeyCode, int iScanCode)
    {
 
-      auto pkeyboard = __create_new < ::message::key >();
+      auto pkey = __create_new < ::message::key >();
 
-      pkeyboard->id() = emessage;
+      pkey->m_emessage = emessage;
 
       if (iVirtualKeyCode == VK_RETURN)
       {
 
-         pkeyboard->m_ekey = ::user::e_key_return;
+         pkey->m_ekey = ::user::e_key_return;
 
       }
       else if (iVirtualKeyCode == VK_SPACE)
       {
 
-         pkeyboard->m_ekey = ::user::e_key_space;
+         pkey->m_ekey = ::user::e_key_space;
 
       }
       else
       {
 
-         pkeyboard->m_ekey = ::user::e_key_a;
+         pkey->m_ekey = ::user::e_key_a;
 
       }
 
-      handle_message(pkeyboard);
+      handle_message(pkey);
 
    }
 

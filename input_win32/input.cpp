@@ -1533,7 +1533,7 @@ namespace input_win32
    void input::handle_message(::message::message * pmessage)
    {
 
-      if (pmessage->m_emessage.m_etype == atom::e_type_message)
+      if (pmessage->m_emessage == atom::e_type_message)
       {
 
          if (pmessage->m_emessage >= e_message_mouse_first
