@@ -4799,7 +4799,7 @@ namespace windowing_win32
          if (pitem)
          {
 
-            pitem->m_point = p;
+            pitem->m_pointBufferItemWindow = p;
 
          }
 
@@ -4812,7 +4812,7 @@ namespace windowing_win32
          if (pitem)
          {
 
-            pitem->m_point = p;
+            pitem->m_pointBufferItemWindow = p;
 
          }
 

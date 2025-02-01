@@ -236,7 +236,7 @@ namespace windowing_win32
 
       auto pimageBuffer = pbufferitem->m_pimage2;
 
-      if (pimageBuffer->m_size != pbufferitem->m_size)
+      if (pimageBuffer->m_size != pbufferitem->m_sizeBufferItemDraw)
       {
 
          if (!update_buffer(pbufferitem))
@@ -309,7 +309,7 @@ namespace windowing_win32
 
       ::pointer < layered_window_buffer > playeredwindowbuffer = pparticleData;
 
-      if (pbufferitem->m_size == playeredwindowbuffer->m_pixmap.size())
+      if (pbufferitem->m_sizeBufferItemDraw == playeredwindowbuffer->m_pixmap.size())
       {
 
          return false;
@@ -330,17 +330,17 @@ namespace windowing_win32
 
       auto sizeLargeInternalBitmap = rectangleUnion.size();
 
-      if (pbufferitem->m_size.cx() > sizeLargeInternalBitmap.cx())
+      if (pbufferitem->m_sizeBufferItemDraw.cx() > sizeLargeInternalBitmap.cx())
       {
 
-         sizeLargeInternalBitmap.cx() = pbufferitem->m_size.cx();
+         sizeLargeInternalBitmap.cx() = pbufferitem->m_sizeBufferItemDraw.cx();
 
       }
 
-      if (pbufferitem->m_size.cy() > sizeLargeInternalBitmap.cy())
+      if (pbufferitem->m_sizeBufferItemDraw.cy() > sizeLargeInternalBitmap.cy())
       {
 
-         sizeLargeInternalBitmap.cy() = pbufferitem->m_size.cy();
+         sizeLargeInternalBitmap.cy() = pbufferitem->m_sizeBufferItemDraw.cy();
 
       }
 
@@ -420,7 +420,7 @@ namespace windowing_win32
 
       }
 
-      playeredwindowbuffer->m_pixmap.m_size = pbufferitem->m_size;
+      playeredwindowbuffer->m_pixmap.m_size = pbufferitem->m_sizeBufferItemDraw;
 
       if (pbufferitem->m_pimage2->host(playeredwindowbuffer->m_pixmap))
       {
@@ -618,15 +618,15 @@ namespace windowing_win32
 
          //auto size = layout.output().size();
 
-         auto point = pbufferitem->m_point;
+         auto pointBufferItemWindow = pbufferitem->m_pointBufferItemWindow;
 
-         auto size = pbufferitem->m_size;
+         auto sizeBufferItemWindow = pbufferitem->m_sizeBufferItemWindow;
 
          auto sizeBuffer = pbufferitem->m_pimage2->size();
 
          //if (size.cx() < sizeDrawn.cx() && size.cy() < sizeDrawn.cy())
          //if (size != sizeDrawn || sizeDesign != size)
-         if (size != sizeBuffer)
+         if (sizeBufferItemWindow != sizeBuffer)
          {
 
             if (m_pwindow->m_timeLastDrawGuard1.elapsed() > 1_s)
@@ -637,7 +637,7 @@ namespace windowing_win32
             }
 
             error() << "Requested size is different of buffer size.";
-            error() << "Requested size: " << size;
+            error() << "Requested size: " << sizeBufferItemWindow;
             error() << "Buffer size: " << sizeBuffer;
             //error() <<"Design size: " << sizeDesign;
 
@@ -677,7 +677,7 @@ namespace windowing_win32
          //pbufferitem->m_pimage2->fill_channel(0, color::e_channel_green);
          //pbufferitem->m_pimage2->fill_channel(0, color::e_channel_blue);
 
-         if (!create_window_device_context(size, playeredwindowbuffer->m_pixmap.m_iScan))
+         if (!create_window_device_context(sizeBufferItemWindow, playeredwindowbuffer->m_pixmap.m_iScan))
          {
 
             throw ::exception(error_failed);
@@ -992,7 +992,7 @@ namespace windowing_win32
                      if (p.is_set())
                      {
 
-                        auto r = ::int_rectangle(point, size);
+                        auto r = ::int_rectangle(pointBufferItemWindow, sizeBufferItemWindow);
 
                         auto Δ = r.bottom_right() - p;
 
@@ -1037,19 +1037,19 @@ namespace windowing_win32
 
                   }
 
-                  if (m_pwindow->user_interaction()->const_layout().window().origin() != point)
-                  {
+                  //if (m_pwindow->user_interaction()->const_layout().window().origin() != pointBufferItemWindow)
+                  //{
 
-                     m_pwindow->user_interaction()->post_message(e_message_reposition, 0, point);
+                  //   m_pwindow->user_interaction()->post_message(e_message_reposition, 0, pointBufferItemWindow);
 
-                  }
+                  //}
 
-                  if (m_pwindow->user_interaction()->const_layout().window().size() != size)
-                  {
+                  //if (m_pwindow->user_interaction()->const_layout().window().size() != sizeBufferItemWindow)
+                  //{
 
-                     m_pwindow->user_interaction()->post_message(e_message_size, 0, size);
+                  //   m_pwindow->user_interaction()->post_message(e_message_size, 0, sizeBufferItemWindow);
 
-                  }
+                  //}
 
                }
                //else
@@ -1058,7 +1058,7 @@ namespace windowing_win32
 
                //}
 
-               ::int_point pointBottomRight = point + size;
+               ::int_point pointBottomRight = pointBufferItemWindow + sizeBufferItemWindow;
 
                //if (::IsWindowVisible(hwnd) && !::IsIconic(hwnd))
                {
@@ -1076,7 +1076,7 @@ namespace windowing_win32
 
                      rectangleWindow = rectWindow;
 
-                     ::int_rectangle rectangleRequest(point, size);
+                     ::int_rectangle rectangleRequest(pointBufferItemWindow, sizeBufferItemWindow);
 
                      //if (rectangleWindow.size() != size)
                      //{
@@ -1170,6 +1170,20 @@ namespace windowing_win32
                            pwindow->_main_send([&]()
                               {
 
+                                 if (!(nFlags & SWP_NOMOVE))
+                                 {
+
+                                    pwindow->m_pointDesignRequest = rectangleRequest.top_left();
+
+                                 }
+
+                                 if (!(nFlags & SWP_NOSIZE))
+                                 {
+
+                                    pwindow->m_sizeDesignRequest = rectangleRequest.size();
+
+                                 }
+
                                  ::SetWindowPos(
                                     hwnd,
                                     hwndInsertAfter,
@@ -1222,11 +1236,20 @@ namespace windowing_win32
 
                      //GdiFlush();
                      if (::IsWindowVisible(pwindow->m_hwnd)
-                        && point.x() >-16384
-                        && point.y() >-16384)
+                        && pointBufferItemWindow.x() >-16384
+                        && pointBufferItemWindow.y() >-16384)
                      {
 
-                        ::UpdateLayeredWindow(hwnd, m_hdcScreen, (POINT *)&point, (SIZE *)&size, playeredwindowbuffer->m_hdc, (POINT *)&pointSrc, make_unsigned_int(0, 0, 0, 0), &blendPixelFunction, ULW_ALPHA);
+                        ::UpdateLayeredWindow(
+                           hwnd,
+                           m_hdcScreen,
+                           (POINT *)&pointBufferItemWindow, 
+                           (SIZE *)&sizeBufferItemWindow,
+                           playeredwindowbuffer->m_hdc,
+                           (POINT *)&pointSrc,
+                           make_unsigned_int(0, 0, 0, 0),
+                           &blendPixelFunction,
+                           ULW_ALPHA);
 
                         m_pwindow->m_timeLastDrawGuard1.Now();
 
