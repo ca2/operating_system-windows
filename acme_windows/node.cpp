@@ -5005,11 +5005,26 @@ namespace acme_windows
 
       ::cast < acme_windows::directory_system > pdirectorysystem = directory_system();
 
-      auto pathSkyDrive = pdirectorysystem->_get_known_folder(FOLDERID_OneDrive);
+      ::file::path pathSkyDrive;
+
+      bool bException = false;
+
+      try
+      {
+
+         pathSkyDrive = pdirectorysystem->_get_known_folder(FOLDERID_OneDrive);
+
+      }
+      catch (...)
+      {
+
+         bException = true;
+
+      }
 
       __check_refdbg
 
-      if (!directory_system()->is(pathSkyDrive))
+      if (bException || !directory_system()->is(pathSkyDrive))
       {
 
          if (platform()->is_desktop_system())

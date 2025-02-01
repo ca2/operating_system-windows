@@ -159,8 +159,7 @@ namespace windowing_win32
 
       auto psysteminteraction = pwin32windowing->system_interaction();
       
-      psysteminteraction->add_message_handler(e_message_device_change, { plistener, &master_device_listener::on_message_device_change }, false);
-
+      psysteminteraction->add_message_handler(e_message_device_change, { plistener, &master_device_listener::on_message_device_change });
 
    }
 
