@@ -2,6 +2,7 @@
 // Created by camilo on 2024-05-26 22:03 <3ThomasBorregaardSorensen!!
 //
 #include "framework.h"
+#include "activation_token.h"
 #include "windowing.h"
 #include "acme/constant/message.h"
 #include "acme/nano/nano.h"
@@ -489,6 +490,8 @@ namespace win32
 
             //run();
 
+            on_activate();
+
             system()->defer_post_initial_request();
 
             main();
@@ -530,6 +533,21 @@ namespace win32
             return colorWindowBackground;
 
          }
+
+
+         ::pointer < ::user::activation_token > windowing::get_user_activation_token()
+         {
+
+            auto puseractivationtoken = __allocate ::win32::acme::windowing::activation_token(::get_task());
+
+            puseractivationtoken->initialize(this);
+
+            return puseractivationtoken;
+
+
+         }
+
+
 
       } // namespace windowing
 

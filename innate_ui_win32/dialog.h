@@ -25,6 +25,9 @@ namespace innate_ui_win32
       void _create() override;
       void _get_class(WNDCLASSEXW & wcex);
 
+
+      //void _show();
+
    };
 
 

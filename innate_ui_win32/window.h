@@ -51,6 +51,7 @@ namespace innate_ui_win32
 
       void show() override;
       void hide() override;
+      void show_front(::user::activation_token * puseractivationtoken)override;
 
       void set_position(const ::int_point & point) override;
       void set_size(const ::int_size & size) override;
@@ -68,7 +69,7 @@ namespace innate_ui_win32
 
       void defer_show_system_menu(::user::mouse * pmouse) override;
 
-
+      
 
 
    };

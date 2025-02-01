@@ -55,6 +55,12 @@ namespace windowing_win32
 
       ::windowing::windowing::initialize_windowing();
 
+   }
+
+   
+   void windowing::on_activate()
+   {
+
       fetch_system_background_color();
 
       //if (!estatus)
@@ -102,12 +108,13 @@ namespace windowing_win32
 
       pdisplay->register_device_listener(::hardware::e_device_monitor);
 
-//#endif
+      //#endif
 
 
 
 
-      //return estatus;
+            //return estatus;
+
 
    }
 

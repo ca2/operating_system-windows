@@ -75,4 +75,12 @@ namespace innate_ui_win32
    }
 
 
+   //void dialog::_show()
+   //{
+
+   //   ::innate_ui_win32::window::_show();
+
+   //}
+
+
 } // namespace innate_ui

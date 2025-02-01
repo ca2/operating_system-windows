@@ -12,6 +12,7 @@
 #include "acme/user/user/mouse.h"
 #include "acme/operating_system/windows/window.h"
 #include "acme/operating_system/windows/windowing.h"
+#include "acme_windowing_win32/activation_token.h"
 
 
 namespace innate_ui_win32
@@ -269,7 +270,7 @@ namespace innate_ui_win32
          int wmId = LOWORD(wparam);
          if (wmId == 123)
          {
-            application()->show_about_box();
+            application()->show_about_box(system()->acme_windowing()->get_user_activation_token());
             return 0;
          }
          return DefWindowProc(m_hwnd, message, wparam, lparam);
@@ -280,7 +281,7 @@ namespace innate_ui_win32
          int wmId = LOWORD(wparam);
          if (wmId == 123)
          {
-            application()->show_about_box();
+            application()->show_about_box(system()->acme_windowing()->get_user_activation_token());
             return 0;
          }
          auto pchild = _get_child_with_id(wmId);
@@ -417,8 +418,47 @@ namespace innate_ui_win32
             ShowWindow(m_hwnd, SW_SHOW);
             UpdateWindow(m_hwnd);
 
+
       });
 
+
+
+   }
+
+
+   void window::show_front(::user::activation_token * puseractivationtokenParameter)
+   {
+
+      auto puseractivationtoken = ::as_pointer(puseractivationtokenParameter);
+
+      
+      main_post([this, puseractivationtoken]()
+        {
+
+          ShowWindow(m_hwnd, SW_SHOW);
+          UpdateWindow(m_hwnd);
+
+          ::cast < ::win32::acme::windowing::activation_token> pwin32activationtoken = puseractivationtoken;
+
+          if (pwin32activationtoken)
+          {
+
+             if (pwin32activationtoken->m_ptaskForeground)
+             {
+
+                pwin32activationtoken->m_ptaskForeground->_post([this]()
+                   {
+
+                         ::SetForegroundWindow(m_hwnd);
+
+                      });
+
+
+             }
+
+
+          }
+     });
 
 
    }

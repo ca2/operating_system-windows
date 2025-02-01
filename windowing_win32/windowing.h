@@ -43,6 +43,8 @@ namespace windowing_win32
 
       void initialize_windowing() override;
 
+      void on_activate() override;
+
       void defer_term_ui() override;
 
       void finalize_windowing() override;

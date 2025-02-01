@@ -8,7 +8,9 @@
 namespace innate_ui_win32
 {
 
+   
    class window;
+
 
    class CLASS_DECL_INNATE_UI_WIN32 innate_ui :
       virtual public ::innate_ui::innate_ui

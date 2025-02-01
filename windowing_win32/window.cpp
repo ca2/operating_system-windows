@@ -3970,7 +3970,7 @@ namespace windowing_win32
       else if (wparam == 123)
       {
 
-         application()->show_about_box();
+         application()->show_about_box(pmessage->user_activation_token());
 
       }
 

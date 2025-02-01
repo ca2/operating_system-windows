@@ -80,6 +80,9 @@ namespace win32
 
             bool handle_messages() override;
 
+            
+            ::pointer < ::user::activation_token > get_user_activation_token() override;
+
 
          };
 
