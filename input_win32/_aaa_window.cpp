@@ -266,11 +266,9 @@ namespace windowing_win32
 
       //auto pnode = psystem->m_pnode->m_pWindowingWin32Node;
 
-      //auto emessageTaskbarCreated = pnode->m_emessageWindowsTaskbarCreatedMessage;
-
       auto pwindowing = (::windowing_win32::windowing*)windowing()->m_pWindowing4;
 
-      auto emessageTaskbarCreated = pwindowing->m_emessageWindowsTaskbarCreatedMessage;
+      auto emessageTaskbarCreated = pwindowing->m_emessageXXXWindowsTaskbarCreatedMessage;
 
       if (emessageTaskbarCreated != e_message_undefined)
       {

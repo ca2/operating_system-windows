@@ -279,6 +279,8 @@ namespace acme_windows
 
       }
 
+      ::task_iteration();
+
       return true;
 
    }

@@ -12,7 +12,6 @@
 //
 //      m_pWindowingWin32Node = this;
 //
-//      m_emessageWindowsTaskbarCreatedMessage = e_message_undefined;
 //
 //
 //   }

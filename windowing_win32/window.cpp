@@ -8016,6 +8016,17 @@ namespace windowing_win32
    LRESULT window::window_procedure(unsigned int message, wparam wparam, lparam lparam)
    {
 
+      auto pwin32windowing = win32_windowing();
+
+      auto emessageTaskbarCreated = pwin32windowing->m_emessageWindowsTaskbarCreatedMessage;
+
+      if (message == emessageTaskbarCreated)
+      {
+
+         output_debug_string("TaskbarCreateMessage");
+
+      }
+
       if (message == WM_USER + 1297)
       {
 
@@ -8176,14 +8187,14 @@ namespace windowing_win32
 
       }
 
-      if (is_registered_windows_message(message))
-      {
+      //if (is_registered_windows_message(message))
+      //{
 
-         lresult = ::DefWindowProcW(m_hwnd, message, wparam, lparam);
+      //   lresult = ::DefWindowProcW(m_hwnd, message, wparam, lparam);
 
-         return lresult;
+      //   return lresult;
 
-      }
+      //}
 
       //auto pimpl = m_pwindow;
 

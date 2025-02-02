@@ -12,7 +12,7 @@
 //   public:
 //
 //
-//      enum_message                                       m_emessageWindowsTaskbarCreatedMessage;
+//      enum_message                                       m_emessageWindowsXXXTaskbarCreatedMessage;
 //
 //
 //      node();

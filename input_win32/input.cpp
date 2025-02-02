@@ -38,10 +38,6 @@ namespace input_win32
    input::input()
    {
 
-      //m_pWindowing4 = this;
-
-      //      set_layer(LAYERED_IMPL, this);
-      //m_emessageWindowsTaskbarCreatedMessage = e_message_undefined;
 
    }
 
@@ -1421,12 +1417,6 @@ namespace input_win32
    //   void windowing::register_windows_message()
    //   {
    //
-   //      if (m_emessageWindowsTaskbarCreatedMessage == e_message_undefined)
-   //      {
-   //
-   //         m_emessageWindowsTaskbarCreatedMessage = (enum_message)RegisterWindowMessageW(L"TaskbarCreated");
-   //
-   //      }
    //
    //   }
    //

@@ -19,8 +19,6 @@ namespace input_win32
    public:
 
 
-      //enum_message                                       m_emessageWindowsTaskbarCreatedMessage;
-      //__creatable_from_base(windowing, ::windowing::windowing);
 
 
       //i64_map < ::user::enum_key >     m_mapKey;

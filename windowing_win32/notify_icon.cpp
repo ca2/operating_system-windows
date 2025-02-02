@@ -71,29 +71,41 @@ namespace windowing_win32
    void notify_icon::create_notify_icon(const ::atom & atom, ::user::interaction * puserinteractionNotify, ::windowing::icon * picon)
    {
 
-      if (m_bCreated)
+      if (!is_window())
       {
 
-         return;
+         string strId = "notify_icon_" + atom;
+
+         m_strId = "ca2-" + picon->get_tray_icon_name() + "-" + strId;
+
+         create_message_queue(m_strId);
+
+         //if (!create_message_queue(m_strId))
+         //{
+
+         //   return false;
+
+         //}
+
+         id() = atom;
 
       }
 
-      string strId = "notify_icon_" + atom;
+      if (m_bCreated)
+      {
 
-      m_strId = "ca2-" + picon->get_tray_icon_name() + "-" + strId;
+         m_nid.uFlags = 0;
 
-      
+         if (!Shell_NotifyIcon(NIM_DELETE, &m_nid))
+         {
 
-      create_message_queue(m_strId);
+            ::output_debug_string("failed to delete existing Shell Notify Icon");
 
-      //if (!create_message_queue(m_strId))
-      //{
+         }
 
-      //   return false;
+      }
 
-      //}
 
-      id() = atom;
 
       m_nid.hWnd = as_hwnd(oswindow());
       m_nid.uID = as_hash32((const ::string &) atom).m_u;

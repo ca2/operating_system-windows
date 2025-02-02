@@ -12,8 +12,6 @@
 //   public:
 //
 //
-//      enum_message                                       m_emessageWindowsTaskbarCreatedMessage;
-//
 //
 //      node();
 //      ~node() override;

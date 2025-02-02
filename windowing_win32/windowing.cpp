@@ -51,9 +51,9 @@ namespace windowing_win32
    void windowing::initialize_windowing()
    {
 
-      //auto estatus = 
-
       ::windowing::windowing::initialize_windowing();
+
+      register_windows_message();
 
    }
 
