@@ -4637,12 +4637,12 @@ namespace acme_windows
 
          m_poperatingsystemsummary = psummary;
 
-         psummary->m_strOperatingSystem = "windows";
-         psummary->m_strOperatingSystemBranch = "windows";
-         psummary->m_strOperatingSystemFamily = "windows";
-         psummary->m_strOperatingSystemRelease = "10";
-         psummary->m_strSlashedIntegration = "windows";
-         psummary->m_strSlashedStore = "windows";
+         psummary->m_strSystem = "windows";
+         psummary->m_strSystemBranch = "windows";
+         psummary->m_strSystemFamily = "windows";
+         psummary->m_strSystemRelease = "10";
+         psummary->m_strSystemAmbientRelease = "windows";
+         //psummary->m_strSlashedStore = "windows";
 
       }
 
