@@ -85,7 +85,7 @@
 //
 //}
 //
-//CLASS_DECL_ACME int_bool HFILE_set_size(HANDLE h, huge_natural iSize);
+//CLASS_DECL_ACME int_bool HFILE_set_size(HANDLE h, unsigned long long iSize);
 //
 //#ifdef WINDOWS
 //CLASS_DECL_ACME int_bool read_resource_as_file(const scoped_string & strFile, HINSTANCE hinst, unsigned int nID, LPCTSTR pcszType);

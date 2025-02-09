@@ -638,13 +638,13 @@ namespace multimedia
 
       /*::time out::GetPositionMillisForSynch()
       {
-         huge_integer dwMillis = GetPositionMillis();
-         huge_integer dwPosition = m_pprebuffer->m_position * 8;
+         long long dwMillis = GetPositionMillis();
+         long long dwPosition = m_pprebuffer->m_position * 8;
          dwPosition /= m_pwaveformat->wBitsPerSample;
          dwPosition *= 1000;
          dwPosition /= m_pwaveformat->nChannels * m_pwaveformat->nSamplesPerSec;
          if(m_pprebuffer != nullptr && m_pprebuffer->m_pdecoder != nullptr)
-            return dwMillis + dwPosition - m_pprebuffer->m_pdecoder->audio_plugin_get_lost_millis(dwMillis + dwPosition) - (((huge_integer) m_dwLostSampleCount) /  ((huge_integer) m_pwaveformat->nSamplesPerSec));
+            return dwMillis + dwPosition - m_pprebuffer->m_pdecoder->audio_plugin_get_lost_millis(dwMillis + dwPosition) - (((long long) m_dwLostSampleCount) /  ((long long) m_pwaveformat->nSamplesPerSec));
          else
             return dwMillis + dwPosition - ((m_dwLostSampleCount) * 1000 / m_pwaveformat->nSamplesPerSec);
       }*/
@@ -683,7 +683,7 @@ namespace multimedia
          //   }
          //   if(mmt.wType == TIME_BYTES)
          //   {
-         //      huge_integer i = mmt.u.cb;
+         //      long long i = mmt.u.cb;
          //      i *= 8 * 1000;
          //      i /= m_pwaveformat->wBitsPerSample * m_pwaveformat->nChannels * m_pwaveformat->nSamplesPerSec;
          //      return i;

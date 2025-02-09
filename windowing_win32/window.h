@@ -72,7 +72,7 @@ namespace windowing_win32
       //WNDPROC                                 m_pfnSuper; // for subclassing of controls
 
       ::e_display                               m_edisplayLayout;
-      huge_integer_rectangle                    m_rectangleLastPos;
+      long_long_rectangle                    m_rectangleLastPos;
       class ::time                              m_timeLastPos;
       string                                    m_strDebug;
 
@@ -93,8 +93,8 @@ namespace windowing_win32
 #ifdef _DEBUG
 
 
-      ::huge_integer increment_reference_count() override;
-      ::huge_integer decrement_reference_count() override;
+      long long increment_reference_count() override;
+      long long decrement_reference_count() override;
 
 
 #endif
@@ -424,10 +424,10 @@ namespace windowing_win32
       //virtual void BringToTop(::e_display edisplay);
       //virtual bool BringWindowToTop();
       //using ::windowing::window::window_rectangle;
-      //virtual bool window_rectangle(::huge_integer_rectangle * prectangle);
+      //virtual bool window_rectangle(::long_long_rectangle * prectangle);
 
       //using ::windowing::window::this->rectangle;
-      //virtual bool this->rectangle(::huge_integer_rectangle * prectangle);
+      //virtual bool this->rectangle(::long_long_rectangle * prectangle);
 
 
       //virtual void rects_from_os();
@@ -627,8 +627,8 @@ namespace windowing_win32
 
       //   virtual ::windowing::window * FindWindowEx(::windowing::window * pwindowParent,::windowing::window * pwindowChildAfter, const ::string & lpszClass, const ::string & pszWindow);
 
-      //virtual ::huge_integer_point _client_parent_top_left() override;
-      //virtual ::huge_integer_point _client_screen_top_left() override;
+      //virtual ::long_long_point _client_parent_top_left() override;
+      //virtual ::long_long_point _client_screen_top_left() override;
 
 
       virtual ::windowing::window * get_next_window(unsigned int nFlag = GW_HWNDNEXT);

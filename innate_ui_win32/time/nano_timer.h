@@ -13,7 +13,7 @@ public:
    ~nano_timer();
 
 
-   void wait(huge_natural uWait);
+   void wait(unsigned long long uWait);
 
 
    void close_timer();

@@ -136,9 +136,9 @@ filesize file_length_dup(const char * path)
 
    DWORD dwHi = 0;
 
-   huge_natural u = GetFileSize(hfile, &dwHi);
+   unsigned long long u = GetFileSize(hfile, &dwHi);
 
-   u |= ((huge_natural)dwHi) << 32ULL;
+   u |= ((unsigned long long)dwHi) << 32ULL;
 
    CloseHandle(hfile);
 

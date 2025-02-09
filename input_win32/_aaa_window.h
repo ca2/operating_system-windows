@@ -347,10 +347,10 @@ namespace windowing_win32
       //virtual void BringToTop(::e_display edisplay);
       //virtual bool BringWindowToTop();
       //using ::windowing::window::window_rectangle;
-      //virtual bool window_rectangle(::huge_integer_rectangle * prectangle);
+      //virtual bool window_rectangle(::long_long_rectangle * prectangle);
 
       //using ::windowing::window::this->rectangle;
-      //virtual bool this->rectangle(::huge_integer_rectangle * prectangle);
+      //virtual bool this->rectangle(::long_long_rectangle * prectangle);
 
 
       //virtual void rects_from_os();
@@ -548,8 +548,8 @@ namespace windowing_win32
 
       //   virtual ::windowing::window * FindWindowEx(::windowing::window * pwindowParent,::windowing::window * pwindowChildAfter, const ::string & lpszClass, const ::string & pszWindow);
 
-      //virtual ::huge_integer_point _client_parent_top_left() override;
-      //virtual ::huge_integer_point _client_screen_top_left() override;
+      //virtual ::long_long_point _client_parent_top_left() override;
+      //virtual ::long_long_point _client_screen_top_left() override;
 
 
       virtual ::windowing::window * get_next_window(unsigned int nFlag = GW_HWNDNEXT);

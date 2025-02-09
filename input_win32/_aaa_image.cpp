@@ -648,7 +648,7 @@ namespace draw2d_gdiplus
       m_pbitmap.release();
       m_pgraphics.release();
       m_hbitmap               = nullptr;
-      m_sizeWnd               = ::huge_integer_size(0, 0);
+      m_sizeWnd               = ::long_long_size(0, 0);
       zero(m_bitmapinfo);
 
    }

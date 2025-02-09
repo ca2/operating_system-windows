@@ -5904,7 +5904,7 @@ namespace draw2d_gdiplus
    //      return ::double_size(0, 0);
    //   }
 
-   //   return ::double_size((huge_integer) (box.Width * m_fontxyz.m_dFontWidth), (huge_integer) box.Height);*/
+   //   return ::double_size((long long) (box.Width * m_fontxyz.m_dFontWidth), (long long) box.Height);*/
 
    //}
 
@@ -7222,7 +7222,7 @@ namespace draw2d_gdiplus
 
    //      ::int_rectangle rectangleIntersect(m_pointAlphaBlend, m_pimageAlphaBlend->::double_size());
 
-   //      ::int_rectangle rectangleBlt(int_point((huge_integer)x, (huge_integer)y), ::double_size(nWidth, nHeight));
+   //      ::int_rectangle rectangleBlt(int_point((long long)x, (long long)y), ::double_size(nWidth, nHeight));
 
    //      if (rectangleIntersect.intersect(rectangleIntersect, rectangleBlt))
    //      {

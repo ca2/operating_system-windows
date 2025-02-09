@@ -31,7 +31,7 @@ namespace apex_windows
 
       //void * on_interprocess_receive(const ::string & pszMessage) override;
       //void * on_interprocess_receive(int message, void * pdata, memsize len) override;
-      //void * on_interprocess_post(huge_integer a, huge_integer b) override;
+      //void * on_interprocess_post(long long a, long long b) override;
 
 
       virtual bool on_idle() override;

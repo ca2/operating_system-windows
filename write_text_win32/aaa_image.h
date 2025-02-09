@@ -12,7 +12,7 @@ namespace draw2d_gdiplus
 
 
       HBITMAP                    m_hbitmap;
-      ::huge_integer_size                   m_sizeWnd;
+      ::long_long_size                   m_sizeWnd;
       BITMAPINFO                 m_bitmapinfo;
 
 

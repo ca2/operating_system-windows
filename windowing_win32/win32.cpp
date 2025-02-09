@@ -110,7 +110,7 @@ namespace windowing_win32
    int desktop1_main(HINSTANCE hInstance, int nCmdShow);
 
 
-   ::color::color get_default_sys_color(huge_natural u)
+   ::color::color get_default_sys_color(unsigned long long u)
    {
 
       switch (u)

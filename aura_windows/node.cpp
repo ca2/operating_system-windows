@@ -109,7 +109,7 @@ namespace aura_windows
    }
 
 
-   ::color::color node::get_default_color(huge_natural u)
+   ::color::color node::get_default_color(unsigned long long u)
    {
 
       switch (u)

@@ -20,7 +20,7 @@
 // {
 
 //    pmsg->hwnd = (HWND)(pmessage->oswindow);
-//    pmsg->message = (UINT) pmessage->m_emessage.huge_integer();
+//    pmsg->message = (UINT) pmessage->m_emessage.long_long();
 //    pmsg->wParam = pmessage->wParam;
 //    pmsg->lParam = pmessage->lParam;
 //    pmsg->pt.x() = pmessage->pt.x();
@@ -69,7 +69,7 @@
 
 // }
 
-// CLASS_DECL_ACME int_bool HFILE_set_size(HANDLE h, huge_natural iSize);
+// CLASS_DECL_ACME int_bool HFILE_set_size(HANDLE h, unsigned long long iSize);
 
 // #ifdef WINDOWS
 // CLASS_DECL_ACME int_bool read_resource_as_file(const scoped_string & strFile, HINSTANCE hinst, unsigned int nID, LPCTSTR pcszType);
@@ -177,7 +177,7 @@
 // inline void __copy(long * plong, const payload * ppayload)
 // {
 
-//    *plong = (long) ppayload->huge_integer();
+//    *plong = (long) ppayload->long_long();
 
 // }
 
