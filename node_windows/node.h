@@ -36,7 +36,7 @@ namespace node_windows
       // virtual bool _os_calc_system_dark_mode() override;
       //
       //
-      virtual ::color::color get_default_color(huge_natural u) override;
+      virtual ::color::color get_default_color(unsigned long long u) override;
 
 
       //virtual void set_console_colors(unsigned int dwScreenColors, unsigned int dwPopupColors, unsigned int dwWindowAlpha) override;

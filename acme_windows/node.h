@@ -256,7 +256,7 @@ namespace acme_windows
       int get_current_process_maximum_affinity() override;
 
       //int get_current_process_affinity_order() override;
-      huge_natural translate_processor_affinity(int i) override;
+      unsigned long long translate_processor_affinity(int i) override;
 
 
       void _node_file_dialog(::file::file_dialog * pdialog) override;

@@ -1116,6 +1116,7 @@
     <ClInclude Include="nano_timer.h" />
     <ClInclude Include="node.h" />
     <ClInclude Include="path.h" />
+    <ClInclude Include="path_system.h" />
     <ClInclude Include="pipe.h" />
     <ClInclude Include="port_forward.h" />
     <ClInclude Include="printer.h" />

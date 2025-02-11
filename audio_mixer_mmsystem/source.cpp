@@ -226,7 +226,7 @@
 
       ::atom source::GetLineID()
       {
-         return (huge_integer) m_mixerline.dwLineID;
+         return (long long) m_mixerline.dwLineID;
       }
 
 

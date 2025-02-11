@@ -1709,7 +1709,7 @@ namespace draw2d_gdi
       BYTE * rect2=(BYTE*)pimage2->colorref();
       BYTE * srcM=(BYTE*)imageM.colorref();
       BYTE * dest=(BYTE*)colorref();
-      huge_integer iSize = area();
+      long long iSize = area();
 
       BYTE b;
       BYTE bMax;
@@ -2442,7 +2442,7 @@ namespace draw2d_gdi
    //bool image::update_window(::aura::draw_interface * puserinteraction, ::message::message * pmessage, bool bTransferBuffer)
    //{
 
-   //   huge_integer_rectangle rectangleWindow;
+   //   long_long_rectangle rectangleWindow;
 
    //   puserinteraction->GetWindowRect(rectangleWindow);
 
@@ -2452,7 +2452,7 @@ namespace draw2d_gdi
 
 
    //   BYTE *dst=(BYTE*)get_data();
-   //   huge_integer size = area();
+   //   long long size = area();
 
 
    //   // >> 8 instead of / 255 subsequent alpha_blend operations say thanks on true_blend because (255) * (1/254) + (255) * (254/255) > 255
@@ -2556,7 +2556,7 @@ namespace draw2d_gdi
 
       }
 
-      huge_integer iArea = area();
+      long long iArea = area();
 
       unsigned char * p = (unsigned char *)m_pimage32Raw;
 
@@ -2747,7 +2747,7 @@ namespace draw2d_gdi
          bTune = color32_u8_blue(clr);
       }
 
-      huge_integer size = area();
+      long long size = area();
 
       unsigned char * pb = (unsigned char *)m_pimage32Raw;
       unsigned char * pbTune = ((unsigned char *)m_pimage32Raw) + ((int) echannel);

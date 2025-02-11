@@ -211,7 +211,7 @@ void imm_client::_001OnIme(::message::message * pmessage)
       else
       {
 
-         ::output_debug_string("\nWM_IME_COMPOSITION " + ::as_string((huge_integer)pusermessage->m_lparam.m_lparam));
+         ::output_debug_string("\nWM_IME_COMPOSITION " + ::as_string((long long)pusermessage->m_lparam.m_lparam));
 
          if ((pmessage->m_lparam & GCS_RESULTSTR) != 0)
          {

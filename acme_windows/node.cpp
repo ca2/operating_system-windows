@@ -429,7 +429,7 @@ namespace acme_windows
    //   }
    //
    //
-   //   ::color::color node::get_default_color(huge_natural u)
+   //   ::color::color node::get_default_color(unsigned long long u)
    //   {
    //
    //      switch (u)
@@ -1312,7 +1312,7 @@ namespace acme_windows
    //      if (entry.th32ProcessID != 0 && strPath.case_insensitive_order(pathModule) == 0)
    //      {
 
-   //         iaPid.add((huge_integer)entry.th32ProcessID);
+   //         iaPid.add((long long)entry.th32ProcessID);
 
    //      }
 
@@ -1323,7 +1323,7 @@ namespace acme_windows
    //      if (entry.th32ProcessID != 0 && ::file::path(strPath) == pathModule)
    //      {
 
-   //         iaPid.add((huge_integer)entry.th32ProcessID);
+   //         iaPid.add((long long)entry.th32ProcessID);
 
    //      }
 
@@ -2782,7 +2782,7 @@ namespace acme_windows
    }
 
 
-   huge_integer node::current_process_identifier()
+   long long node::current_process_identifier()
    {
 
       return ::GetCurrentProcessId();
@@ -3502,7 +3502,7 @@ namespace acme_windows
    //}
 
 
-   huge_natural node::translate_processor_affinity(int iOrder)
+   unsigned long long node::translate_processor_affinity(int iOrder)
    {
 
       DWORD_PTR dwProcessAffinityMask;

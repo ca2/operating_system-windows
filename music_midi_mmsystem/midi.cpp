@@ -381,7 +381,7 @@ namespace music
          }
 
 
-         ::e_status midi::midi_in_translate_os_result(string & strMessage, string & strOsMessage, ::music::midi::object * pmidiobject, huge_integer iOsResult, const ::string & strContext, const ::string & strText)
+         ::e_status midi::midi_in_translate_os_result(string & strMessage, string & strOsMessage, ::music::midi::object * pmidiobject, long long iOsResult, const ::string & strContext, const ::string & strText)
          {
 
             auto estatus = midi_in_get_error_text((MMRESULT) iOsResult, strOsMessage, strMessage);

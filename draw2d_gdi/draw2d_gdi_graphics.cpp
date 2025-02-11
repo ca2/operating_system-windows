@@ -1355,7 +1355,7 @@ namespace draw2d_gdi
 
             pimage->mult_alpha();
 
-            /*      huge_integer iArea = pimage->area();
+            /*      long long iArea = pimage->area();
 
             unsigned char * pimage32 = (unsigned char *) pimage->get_data();
 

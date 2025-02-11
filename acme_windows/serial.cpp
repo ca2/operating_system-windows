@@ -404,13 +404,13 @@ namespace acme_windows
             if (m_estopbit == ::serial::e_stop_bit_one_point_five)
             {
 
-               m_uiByteTimeNs = (unsigned int)(((((huge_natural)1000LL * 1000LL * 1000LL) * (1 + m_ebytesize + m_eparity)) + (1500LL * 1000LL * 1000LL)) / ((huge_natural)(m_ulBaudrate)));
+               m_uiByteTimeNs = (unsigned int)(((((unsigned long long)1000LL * 1000LL * 1000LL) * (1 + m_ebytesize + m_eparity)) + (1500LL * 1000LL * 1000LL)) / ((unsigned long long)(m_ulBaudrate)));
 
             }
             else
             {
 
-               m_uiByteTimeNs = (unsigned int)((((huge_natural)1000LL * 1000LL * 1000LL) * (1 + m_ebytesize + m_eparity + m_estopbit)) / ((huge_natural)(m_ulBaudrate)));
+               m_uiByteTimeNs = (unsigned int)((((unsigned long long)1000LL * 1000LL * 1000LL) * (1 + m_ebytesize + m_eparity + m_estopbit)) / ((unsigned long long)(m_ulBaudrate)));
 
             }
 

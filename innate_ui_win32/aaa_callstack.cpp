@@ -1361,13 +1361,13 @@ namespace windows
    //            }
    //            if (*(p + 1) == 'd')
    //            {
-   //               ansi_from_huge_natural(_strBuf, uiLineDisplacement, 10);
+   //               ansi_from_unsigned_long_long(_strBuf, uiLineDisplacement, 10);
    //               ansi_concatenate(_str, _strBuf);
    //               ++p;
    //            }
    //            else
    //            {
-   //               ansi_from_huge_natural(_strBuf, uiLineNumber, 10);
+   //               ansi_from_unsigned_long_long(_strBuf, uiLineNumber, 10);
    //               ansi_concatenate(_str, _strBuf);
    //            }
    //            break;
@@ -1381,7 +1381,7 @@ namespace windows
    //            }
    //            if (*(p + 1) == 'd')
    //            {
-   //               ansi_concatenate_huge_integer(_str, uiSymbolDisplacement);
+   //               ansi_concatenate_long_long(_str, uiSymbolDisplacement);
    //               ++p;
    //            }
    //            else
@@ -1550,13 +1550,13 @@ namespace  windows
                }
                if (*(p + 1) == 'd')
                {
-                  ansi_from_huge_natural(_strBuf, uiLineDisplacement, 10);
+                  ansi_from_unsigned_long_long(_strBuf, uiLineDisplacement, 10);
                   ansi_concatenate(_str, _strBuf);
                   ++p;
                }
                else
                {
-                  ansi_from_huge_natural(_strBuf, uiLineNumber, 10);
+                  ansi_from_unsigned_long_long(_strBuf, uiLineNumber, 10);
                   ansi_concatenate(_str, _strBuf);
                }
                break;
@@ -1570,7 +1570,7 @@ namespace  windows
                }
                if (*(p + 1) == 'd')
                {
-                  ansi_concatenate_huge_integer(_str, uiSymbolDisplacement);
+                  ansi_concatenate_long_long(_str, uiSymbolDisplacement);
                   ++p;
                }
                else

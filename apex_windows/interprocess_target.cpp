@@ -454,7 +454,7 @@ namespace apex_windows
    //}
 
 
-   //void * interprocess_target::on_interprocess_post(::inteprocess::handler * prx, huge_integer int a, huge_integer int b)
+   //void * interprocess_target::on_interprocess_post(::inteprocess::handler * prx, long long int a, long long int b)
    //{
 
    //   if (m_preceiver != nullptr)
