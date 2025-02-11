@@ -294,5 +294,8 @@
     <ClInclude Include="create_process.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="path_system.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
