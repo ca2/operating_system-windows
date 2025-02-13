@@ -276,12 +276,6 @@
     <ClInclude Include="file_link.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="dir_context.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="dir_system.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="file_context.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -295,6 +289,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="path_system.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="directory_context.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="directory_system.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

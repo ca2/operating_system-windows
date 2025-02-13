@@ -51,6 +51,7 @@ namespace acme_windows
       ::file::path ca2appdata() override; // writable root (non-bin, non-exe)
       ::file::path roaming() override;
       ::file::path program_data() override;
+      ::file::path application_data_base() override;
       ::file::path public_root() override; // writable common root (non-bin, non-exe)
       ::file::path bookmark() override;
       ::file::path home() override;

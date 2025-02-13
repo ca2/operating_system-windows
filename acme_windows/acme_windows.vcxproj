@@ -1094,8 +1094,8 @@
     <ClInclude Include="application.h" />
     <ClInclude Include="console.h" />
     <ClInclude Include="d2d1_1.h" />
-    <ClInclude Include="dir_context.h" />
-    <ClInclude Include="dir_system.h" />
+    <ClInclude Include="directory_context.h" />
+    <ClInclude Include="directory_system.h" />
     <ClInclude Include="exclusive.h" />
     <ClInclude Include="file_change_event.h" />
     <ClInclude Include="aaa_file_exception.h" />
