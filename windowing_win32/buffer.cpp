@@ -1170,19 +1170,19 @@ namespace windowing_win32
                            pwindow->_main_send([&]()
                               {
 
-                                 if (!(nFlags & SWP_NOMOVE))
-                                 {
+                                 //if (!(nFlags & SWP_NOMOVE))
+                                 //{
 
-                                    pwindow->m_pointDesignRequest = rectangleRequest.top_left();
+                                 //   pwindow->m_pointDesignRequest = rectangleRequest.top_left();
 
-                                 }
+                                 //}
 
-                                 if (!(nFlags & SWP_NOSIZE))
-                                 {
+                                 //if (!(nFlags & SWP_NOSIZE))
+                                 //{
 
-                                    pwindow->m_sizeDesignRequest = rectangleRequest.size();
+                                 //   pwindow->m_sizeDesignRequest = rectangleRequest.size();
 
-                                 }
+                                 //}
 
                                  ::SetWindowPos(
                                     hwnd,

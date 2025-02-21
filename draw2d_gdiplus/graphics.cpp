@@ -6983,7 +6983,9 @@ namespace draw2d_gdiplus
 
       Gdiplus::StringFormat format(Gdiplus::StringFormat::GenericTypographic());
 
-      format.SetFormatFlags(format.GetFormatFlags()
+
+      format.SetFormatFlags((format.GetFormatFlags()
+         & ~Gdiplus::StringFormatFlagsLineLimit)
          | Gdiplus::StringFormatFlagsNoClip
       );
 
