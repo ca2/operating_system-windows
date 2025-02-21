@@ -1143,7 +1143,7 @@ namespace windowing_win32
    //}
 
 
-   void display::impl_set_wallpaper(::collection::index iScreen, const ::scoped_string & scopedstrLocalImagePath)
+   void display::_set_wallpaper(::collection::index iScreen, const ::scoped_string & scopedstrLocalImagePath)
    {
 
       wstring wstrLocalImagetPath(scopedstrLocalImagePath);
@@ -1160,7 +1160,7 @@ namespace windowing_win32
    }
 
 
-   string display::impl_get_wallpaper(::collection::index iScreen)
+   string display::_get_wallpaper(::collection::index iScreen)
    {
 
       wstring wstr;
