@@ -166,15 +166,7 @@ namespace acme_windows
    ::file::path directory_system::sensitive()
    {
 
-   #ifdef WINDOWS
-
-      return "C:\\sensitive\\sensitive";
-
-   #else
-
-      return "/sensitive/sensitive";
-
-   #endif
+      return acme_windows_common::directory_system::sensitive();
 
    }
 
