@@ -8455,8 +8455,8 @@ namespace windowing_win32
 
                }
 
-               //puserinteraction->message_handler(pmessage);
-               message_handler(pmessage);
+               puserinteraction->message_handler(pmessage);
+               //message_handler(pmessage);
 
             }
             catch (::exception & e)

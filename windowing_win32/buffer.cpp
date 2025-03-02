@@ -1195,32 +1195,27 @@ namespace windowing_win32
 
                                  if (pwindow->m_activationSetWindowPosLast & ::user::e_activation_set_foreground)
                                  {
+                                    
+                                    ::cast < ::win32::acme::windowing::activation_token > pactivationtoken = pwindow->m_activationSetWindowPosLast.m_pactivationtoken;
 
-                                    if (pwindow->m_activationSetWindowPosLast.m_pactivationtoken)
+                                    if (pactivationtoken)
                                     {
 
-                                       ::cast < ::win32::acme::windowing::activation_token > pactivationtoken = pwindow->m_activationSetWindowPosLast.m_pactivationtoken;
+                                       pactivationtoken->m_ptaskForeground->post([pwindow, hwnd]()
+                                          {
 
-                                       if (pactivationtoken)
-                                       {
+                                                ::SetForegroundWindow(hwnd);
 
-                                          pactivationtoken->m_ptaskForeground->post([pwindow, hwnd]()
-                                             {
+                                                pwindow.m_p->m_activationSetWindowPosLast.clear();
 
-                                                   ::SetForegroundWindow(hwnd);
+});
 
-                                                   pwindow.m_p->m_activationSetWindowPosLast.clear();
+                                    }
+                                    else
+                                    {
 
-   });
-
-                                       }
-                                       else
-                                       {
-
-                                          ::SetForegroundWindow(hwnd);
-                                          pwindow->m_activationSetWindowPosLast.clear();
-
-                                       }
+                                       ::SetForegroundWindow(hwnd);
+                                       pwindow->m_activationSetWindowPosLast.clear();
 
                                     }
 

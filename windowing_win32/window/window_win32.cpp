@@ -225,12 +225,12 @@ namespace windowing_win32
 {
 
 
-//void window::default_set(::message::message * pmessage, ::enum_message emessage, ::wparam wparam, ::lparam lparam)
-//{
-//
-//
-//
-//}
+   //void window::default_set(::message::message * pmessage, ::enum_message emessage, ::wparam wparam, ::lparam lparam)
+   //{
+   //
+   //
+   //
+   //}
 
 
 } // namespace windowing_win32
@@ -374,187 +374,200 @@ namespace windowing_win32
 {
 
 
-wstring windowing::_windows_calc_icon_window_class(::user::interaction * puserinteraction, unsigned int dwDefaultStyle, const ::string & pszMatter)
-{
-
-   auto papplication = application();
-
-   ::file::path pathFolder(pszMatter);
-
-   ::file::path pathIcon;
-
-   pathIcon = pathFolder / "icon.ico";
-
-   string strPath = directory()->matter(pathIcon);
-
-   HICON hIcon = (HICON) ::LoadImageW(nullptr, wstring(papplication->get_matter_path(strPath)), IMAGE_ICON, 256, 256, LR_LOADFROMFILE);
-
-   wstring strClass = _windows_get_user_interaction_window_class(puserinteraction);
-
-   if (hIcon != nullptr)
+   wstring windowing::_windows_calc_icon_window_class(::user::interaction * puserinteraction, unsigned int dwDefaultStyle, const ::string & pszMatter)
    {
 
-      auto psystem = system();
-      // will fill pszClassName with default WNDCLASS name
+      auto papplication = application();
 
-      // ignore instance handle from pre_create_window.
+      ::file::path pathFolder(pszMatter);
+
+      ::file::path pathIcon;
+
+      pathIcon = pathFolder / "icon.ico";
+
+      string strPath = directory()->matter(pathIcon);
+
+      HICON hIcon = (HICON) ::LoadImageW(nullptr, wstring(papplication->get_matter_path(strPath)), IMAGE_ICON, 256, 256, LR_LOADFROMFILE);
+
+      wstring strClass = _windows_get_user_interaction_window_class(puserinteraction);
+
+      if (hIcon != nullptr)
+      {
+
+         auto psystem = system();
+
+         // will fill pszClassName with default WNDCLASS name
+
+         // ignore instance handle from pre_create_window.
+
+         WNDCLASSEXW wndcls;
+
+         if (strClass.length() > 0 && GetClassInfoExW((HINSTANCE)psystem->m_hinstanceThis, strClass, &wndcls) && wndcls.hIcon != hIcon)
+         {
+
+            // register a very similar WNDCLASS
+
+            return _windows_register_window_class(wndcls.style, strClass, wndcls.hCursor, wndcls.hbrBackground, hIcon);
+
+         }
+
+      }
+
+      return strClass;
+
+   }
+
+
+
+
+   wstring windowing::_windows_get_user_interaction_window_class(::user::interaction * puserinteraction)
+   {
+
+      ::user::enum_window_type ewindowtype = puserinteraction->get_window_type();
+
+      ::wstring wstrClassName = puserinteraction->payload("class_name").as_string();
 
       WNDCLASSEXW wndcls;
 
-      if (strClass.length() > 0 && GetClassInfoExW((HINSTANCE)psystem->m_hinstanceThis, strClass, &wndcls) && wndcls.hIcon != hIcon)
+      memory_set(&wndcls, 0, sizeof(WNDCLASSEXW));   // start with nullptr defaults
+
+      wndcls.lpfnWndProc = &windows::window_procedure;
+
+      wndcls.hInstance = ::windows::get_window_procedure_hinstance();
+
+      wndcls.cbWndExtra = wndcls.cbClsExtra = 40;
+
+      if (ewindowtype == ::user::e_window_type_frame
+         || ewindowtype == ::user::e_window_type_impact)
       {
 
-         // register a very similar WNDCLASS
+         wndcls.style = CS_DBLCLKS | CS_HREDRAW | CS_VREDRAW | CS_OWNDC;
 
-         return _windows_register_window_class(wndcls.style, wndcls.hCursor, wndcls.hbrBackground, hIcon);
+         wndcls.hbrBackground = (HBRUSH)(COLOR_WINDOW + 1);
+
+         if (wstrClassName.is_empty())
+         {
+
+            wstrClassName = "ca2_frame";
+
+         }
+
+         if (_windows_register_with_icon(&wndcls, wstrClassName, 0))
+         {
+
+            return wndcls.lpszClassName;
+
+         }
 
       }
 
+      return _windows_register_window_class(0, wstrClassName);
+
    }
 
-   return strClass;
-
-}
-
-
-
-
-wstring windowing::_windows_get_user_interaction_window_class(::user::interaction * puserinteraction)
-{
-
-   ::user::enum_window_type ewindowtype = puserinteraction->get_window_type();
-
-   WNDCLASSEXW wndcls;
-
-   memory_set(&wndcls, 0, sizeof(WNDCLASSEXW));   // start with nullptr defaults
-
-   wndcls.lpfnWndProc = &windows::window_procedure;
-
-   wndcls.hInstance = ::windows::get_window_procedure_hinstance();
-
-   wndcls.cbWndExtra = wndcls.cbClsExtra = 40;
-
-   if (ewindowtype == ::user::e_window_type_frame
-      || ewindowtype == ::user::e_window_type_impact)
+   bool windowing::_windows_register_with_icon(WNDCLASSEXW * puserinteractionclass, const unichar * pszClassName, unsigned int nIDIcon)
    {
 
-      wndcls.style = CS_DBLCLKS | CS_HREDRAW | CS_VREDRAW | CS_OWNDC;
+      puserinteractionclass->lpszClassName = pszClassName;
 
-      wndcls.hbrBackground = (HBRUSH)(COLOR_WINDOW + 1);
+      puserinteractionclass->hIcon = ::LoadIconW(nullptr, MAKEINTRESOURCEW(32512));
 
-      if (_windows_register_with_icon(&wndcls, L"ca2_frame", 0))
-      {
-
-         return wndcls.lpszClassName;
-
-      }
+      return _windows_register_class(puserinteractionclass);
 
    }
 
 
-   return _windows_register_window_class(0);
-
-}
-
-bool windowing::_windows_register_with_icon(WNDCLASSEXW * puserinteractionclass, const unichar * pszClassName, unsigned int nIDIcon)
-{
-
-   puserinteractionclass->lpszClassName = pszClassName;
-
-   puserinteractionclass->hIcon = ::LoadIconW(nullptr, MAKEINTRESOURCEW(32512));
-
-   return _windows_register_class(puserinteractionclass);
-
-}
+   //CLASS_DECL_WINDOWING_WIN32 WNDPROC get_window_procedure();
 
 
-//CLASS_DECL_WINDOWING_WIN32 WNDPROC get_window_procedure();
+   wstring windowing::_windows_register_window_class(unsigned int nClassStyle, const WCHAR * pwszClassName, HCURSOR hCursor, HBRUSH hbrBackground, HICON hIcon)
+   {
 
+      //auto papp = pobject->get_application();
 
-wstring windowing::_windows_register_window_class(unsigned int nClassStyle, HCURSOR hCursor, HBRUSH hbrBackground, HICON hIcon)
-{
+      const int iLen = 4096;
 
-   //auto papp = pobject->get_application();
-
-   const int iLen = 4096;
-
-   wstring wstrClassName;
+      wstring wstrClassName;
 
 #ifdef CUBE
 
-   HINSTANCE hinstance = ::GetModuleHandleW(nullptr);
+      HINSTANCE hinstance = ::GetModuleHandleW(nullptr);
 
 #else 
 
-   HINSTANCE hinstance = ::GetModuleHandleW(L"windowing_win32.dll");
+      HINSTANCE hinstance = ::GetModuleHandleW(L"windowing_win32.dll");
 
 #endif
 
-  
-
-
-   {
-
-      LPWSTR lpwsz = wstrClassName.get_buffer(iLen);
-
-      if (hCursor == nullptr && hbrBackground == nullptr && hIcon == nullptr)
+      if (pwszClassName && *pwszClassName)
       {
 
-         _snwprintf_s(lpwsz, iLen, iLen - 1, L"windows_interaction_impl:%p,%x", hinstance, nClassStyle);
+         wstrClassName = pwszClassName;
 
       }
       else
       {
 
-         _snwprintf_s(lpwsz, iLen, iLen - 1, L"windows_interaction_impl:%p,%x,%p,%p,%p", hinstance, nClassStyle, hCursor, hbrBackground, hIcon);
+         LPWSTR lpwsz = wstrClassName.get_buffer(iLen);
+
+         if (hCursor == nullptr && hbrBackground == nullptr && hIcon == nullptr)
+         {
+
+            _snwprintf_s(lpwsz, iLen, iLen - 1, L"windows_interaction_impl:%p,%x", hinstance, nClassStyle);
+
+         }
+         else
+         {
+
+            _snwprintf_s(lpwsz, iLen, iLen - 1, L"windows_interaction_impl:%p,%x,%p,%p,%p", hinstance, nClassStyle, hCursor, hbrBackground, hIcon);
+
+         }
+
+         wstrClassName.release_buffer();
 
       }
 
-      wstrClassName.release_buffer();
+      // see if the class already exists
+      WNDCLASSEXW wndcls = {};
 
-   }
+      if (::GetClassInfoExW((HINSTANCE)hinstance, wstrClassName, &wndcls))
+      {
+         // already registered, assert everything is good
+         ASSERT(wndcls.style == nClassStyle);
 
-   // see if the class already exists
-   WNDCLASSEXW wndcls = {};
+         // NOTE: We have to trust that the hIcon, hbrBackground, and the
+         //  hCursor are semantically the same, because sometimes Windows does
+         //  some internal translation or copying of those handles before
+         //  storing them in the internal WNDCLASS retrieved by GetClassInfo.
+         return wstrClassName;
 
-   if (::GetClassInfoExW((HINSTANCE)hinstance, wstrClassName, &wndcls))
-   {
-      // already registered, assert everything is good
-      ASSERT(wndcls.style == nClassStyle);
+      }
+      wndcls.cbSize = sizeof(wndcls);
+      // otherwise we need to register a ___new class
+      wndcls.style = nClassStyle;
+      wndcls.lpfnWndProc = &::windows::window_procedure;
+      auto hinstanceWindowProcedure = ::windows::get_window_procedure_hinstance();
+      wndcls.cbClsExtra = wndcls.cbWndExtra = 40;
+      wndcls.hInstance = hinstanceWindowProcedure;
+      //wndcls.hIcon = hIcon;
+      //wndcls.hCursor = hCursor;
+      wndcls.hCursor = nullptr;
+      wndcls.hbrBackground = hbrBackground;
+      wndcls.lpszMenuName = nullptr;
 
-      // NOTE: We have to trust that the hIcon, hbrBackground, and the
-      //  hCursor are semantically the same, because sometimes Windows does
-      //  some internal translation or copying of those handles before
-      //  storing them in the internal WNDCLASS retrieved by GetClassInfo.
+      wndcls.lpszClassName = wstrClassName;
+
+      if (!_windows_register_class(&wndcls))
+      {
+
+         throw ::exception(error_resource);
+
+      }
+
+      // return thread-local pointer
       return wstrClassName;
 
    }
-   wndcls.cbSize = sizeof(wndcls);
-   // otherwise we need to register a ___new class
-   wndcls.style = nClassStyle;
-   wndcls.lpfnWndProc = &::windows::window_procedure;
-   auto hinstanceWindowProcedure = ::windows::get_window_procedure_hinstance();
-   wndcls.cbClsExtra = wndcls.cbWndExtra = 40;
-   wndcls.hInstance = hinstanceWindowProcedure;
-   //wndcls.hIcon = hIcon;
-   //wndcls.hCursor = hCursor;
-   wndcls.hCursor = nullptr;
-   wndcls.hbrBackground = hbrBackground;
-   wndcls.lpszMenuName = nullptr;
-
-   wndcls.lpszClassName = wstrClassName;
-
-   if (!_windows_register_class(&wndcls))
-   {
-
-      throw ::exception(error_resource);
-
-   }
-
-   // return thread-local pointer
-   return wstrClassName;
-
-}
 
 
 
@@ -594,7 +607,7 @@ namespace windowing_win32
 {
 
 
-   bool windowing::_windows_register_class(WNDCLASSEXW* puserinteractionclass)
+   bool windowing::_windows_register_class(WNDCLASSEXW * puserinteractionclass)
    {
 
       WNDCLASSEXW wndcls{};
@@ -619,7 +632,7 @@ namespace windowing_win32
       else
       {
 
-         output_debug_string("GetClassInfoExW failed with error number '"+ ::as_string(dwLastError) + "'");
+         output_debug_string("GetClassInfoExW failed with error number '" + ::as_string(dwLastError) + "'");
 
       }
 
