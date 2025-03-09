@@ -110,3 +110,13 @@ add_custom_target(copy_libraries_step
    "${EXECUTABLE_OUTPUT_PATH}"
    COMMENT "copy_libraries_step"
 )
+
+
+list(APPEND acme_libraries acme_windows_common acme_windows)
+list(APPEND apex_libraries apex_windows_common apex_windows)
+list(APPEND aura_libraries apex_windows_common aura_windows)
+
+
+
+list(APPEND acme_windowing_libraries acme_windowing_win32)
+list(APPEND innate_ui_libraries innate_ui_win32)
