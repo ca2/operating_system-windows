@@ -420,17 +420,17 @@ namespace acme_windows
 
          setEnvironment.parse_environment_variable(straOut);
 
-         for (auto & property : setEnvironment)
+         for (auto & pproperty : setEnvironment)
          {
 
-            auto strAtom = property.name().as_string();
+            auto strAtom = pproperty->name().as_string();
 
             wstring wstrItem(strAtom);
 
             if (m_bMsys2 && strAtom.case_insensitive_equals("PATH"))
             {
 
-               ::string strPath = property.as_string();
+               ::string strPath = pproperty->as_string();
 
                strPath = "C:\\msys64\\usr\\bin;" + strPath;
 
@@ -476,7 +476,7 @@ namespace acme_windows
             else
             {
 
-               wstring wstrPayload(property.as_string());
+               wstring wstrPayload(pproperty->as_string());
 
                auto pszItem = wstrItem.c_str();
 

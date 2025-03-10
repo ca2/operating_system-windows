@@ -5190,6 +5190,24 @@ namespace acme_windows
 
    }
 
+   ::string node::get_host_name()
+   {
+
+
+      TCHAR computerName[MAX_COMPUTERNAME_LENGTH + 256];
+      DWORD size = sizeof(computerName) / sizeof(TCHAR);
+
+      if (GetComputerNameEx(ComputerNamePhysicalDnsFullyQualified, computerName, &size)) {
+         printf("Computer Name: %s\n", computerName);
+      }
+      else {
+         printf("GetComputerNameEx failed with error: %lu\n", GetLastError());
+      }
+
+      return computerName;
+
+   }
+
 
 } // namespace acme_windows
 

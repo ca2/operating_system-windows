@@ -382,6 +382,9 @@ namespace acme_windows
       void defer_unregister_server_library(const ::platform::uuid & uuid, const ::file::path & path) override;
       bool is_server_library_registered(::file::path & path, const ::platform::uuid & uuid) override;
 
+
+      ::string get_host_name() override;
+
    };
 
 

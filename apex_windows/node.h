@@ -230,6 +230,7 @@ namespace apex_windows
       
       void defer_innate_ui() override;
 
+      ::string get_host_name() override;
 
    };
 

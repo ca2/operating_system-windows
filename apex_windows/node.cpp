@@ -45,6 +45,12 @@
 
 #include "acme/_operating_system.h"
 
+#include <winsock2.h>
+#include <windows.h>
+
+#pragma comment(lib, "ws2_32.lib") // Link with Winsock library
+
+//int main() {
 
 #include "acme_windows_common/cotaskptr.h"
 
@@ -5313,6 +5319,32 @@ namespace apex_windows
 
    }
 
+
+   ::string node::get_host_name()
+   {
+
+   //WSADATA wsaData;
+   //      char hostname[256];
+
+   //      // Initialize Winsock
+   //      if (WSAStartup(MAKEWORD(2, 2), &wsaData) != 0) {
+   //         printf("WSAStartup failed\n");
+            return ::acme_windows::node::get_host_name();
+         //}
+
+         //// Get the hostname
+         //if (gethostname(hostname, sizeof(hostname)) == 0) {
+         //   printf("Host name: %s\n", hostname);
+         //}
+         //else {
+         //   printf("gethostname failed with error: %d\n", WSAGetLastError());
+         //}
+
+         //// Cleanup Winsock
+         //WSACleanup();
+         //return hostname;
+
+   }
 
 } // namespace windows
 
