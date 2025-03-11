@@ -93,12 +93,12 @@ namespace acme_windows
       file_pointer get_file(const ::payload & payloadFile, ::file::e_open eopen, ::pointer < ::file::exception > * ppfileexception) override;
 
 
-      ::file::path dropbox_info_network_payload() override;
+      //s::file::path dropbox_info_network_payload() override;
 
 
       //virtual ::file::path onedrive_global_ini(::particle * pparticle) override;
       //virtual ::file::path onedrive_cid_ini(::particle * pparticle) override;
-      ::file::path dropbox_client() override;
+      //::file::path dropbox_client() override;
 
    };
 
