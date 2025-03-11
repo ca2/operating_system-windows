@@ -730,33 +730,33 @@ namespace acme_windows
    }
 
 
-   ::file::path file_context::dropbox_info_network_payload()
-   {
+   //::file::path file_context::dropbox_info_network_payload()
+   //{
 
-      ::file::path pathNetworkPayload;
+   //   ::file::path pathNetworkPayload;
 
-      pathNetworkPayload = directory_system()->user_appdata_local() / "Dropbox/info" NETWORK_PAYLOAD_DEFAULT_EXTENSION;
+   //   pathNetworkPayload = directory_system()->user_appdata_local() / "Dropbox/info" NETWORK_PAYLOAD_DEFAULT_EXTENSION;
 
-      return pathNetworkPayload;
+   //   return pathNetworkPayload;
 
-   }
+   //}
 
 
-   ::file::path file_context::dropbox_client()
-   {
+   //::file::path file_context::dropbox_client()
+   //{
 
-      auto pathClientFolder = directory()->dropbox_client();
+   //   auto pathClientFolder = directory()->dropbox_client();
 
-      if (pathClientFolder.is_empty() || !directory()->is(pathClientFolder))
-      {
+   //   if (pathClientFolder.is_empty() || !directory()->is(pathClientFolder))
+   //   {
 
-         return {};
+   //      return {};
 
-      }
+   //   }
 
-      return pathClientFolder / "Dropbox.exe";
+   //   return pathClientFolder / "Dropbox.exe";
 
-   }
+   //}
 
 
 } // namespace apex_windows

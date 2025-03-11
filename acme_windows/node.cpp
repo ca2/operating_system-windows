@@ -5198,10 +5198,10 @@ namespace acme_windows
       DWORD size = sizeof(computerName) / sizeof(TCHAR);
 
       if (GetComputerNameEx(ComputerNamePhysicalDnsFullyQualified, computerName, &size)) {
-         printf("Computer Name: %s\n", computerName);
+         //printf("Computer Name: %s\n", computerName);
       }
       else {
-         printf("GetComputerNameEx failed with error: %lu\n", GetLastError());
+         //printf("GetComputerNameEx failed with error: %lu\n", GetLastError());
       }
 
       return computerName;

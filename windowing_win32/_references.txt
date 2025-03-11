@@ -1,2 +1,2 @@
-app/aura
-operating_system-windows/aura_windows
+default_aura
+operating_system-windows/innate_ui_win32
