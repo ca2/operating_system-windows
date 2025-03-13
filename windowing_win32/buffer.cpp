@@ -1231,6 +1231,7 @@ namespace windowing_win32
 
                      //GdiFlush();
                      if (::IsWindowVisible(pwindow->m_hwnd)
+                        && !::IsIconic(pwindow->m_hwnd)
                         && pointBufferItemWindow.x() >-16384
                         && pointBufferItemWindow.y() >-16384)
                      {
