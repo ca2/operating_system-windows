@@ -105,7 +105,7 @@ namespace keyboard_hook
 
       g_hhook = SetWindowsHookEx(WH_KEYBOARD_LL, LowLevelKeyboardProc, ::LoadLibraryW(L"app_core_auratype.dll"), 0);
 
-      SetTimer(NULL, NULL, 250, NULL);
+      set_timer(NULL, NULL, 250, NULL);
 
       while (::task_get_run() && g_bRun)
       {

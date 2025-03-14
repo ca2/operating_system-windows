@@ -95,7 +95,7 @@ namespace windowing_win32
    void message_window::message_window_set_timer(uptr uId, const class time & time)
    {
 
-      SetTimer(uId, time, nullptr);
+      set_timer(uId, time, nullptr);
 
    }
 
@@ -103,7 +103,7 @@ namespace windowing_win32
    void message_window::message_window_del_timer(uptr uId)
    {
 
-      KillTimer(uId);
+      kill_timer(uId);
 
    }
 

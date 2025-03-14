@@ -161,7 +161,7 @@ namespace ca2plugin_container
 
       m_bInitialized = false;
 
-      ::KillTimer(m_oswindowMessage, (uptr) this);
+      ::kill_timer(m_oswindowMessage, (uptr) this);
 
       plugin_finalize();
 
@@ -243,7 +243,7 @@ namespace ca2plugin_container
    bool host::plugin_finalize()
    {
 
-      ::KillTimer(m_oswindowMessage, (uptr) this);
+      ::kill_timer(m_oswindowMessage, (uptr) this);
 
       return ::hotplugin::host::plugin_finalize();
 

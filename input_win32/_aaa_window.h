@@ -448,8 +448,8 @@ namespace windowing_win32
 
 
             // timer Functions
-      //      virtual bool SetTimer(uptr uEvent, unsigned int nElapse, PFN_TIMER pfnTimer);
-            //    virtual bool KillTimer(uptr uEvent);
+      //      virtual bool set_timer(uptr uEvent, unsigned int nElapse, PFN_TIMER pfnTimer);
+            //    virtual bool kill_timer(uptr uEvent);
 
             // Window State Functions
       virtual bool is_this_enabled();

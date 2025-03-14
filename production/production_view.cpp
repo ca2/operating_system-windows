@@ -102,7 +102,7 @@ namespace production
       if(update == ::id_update_current_area)
       {
 
-         SetTimer(::e_timer_update_current_area, 100, nullptr);
+         set_timer(::e_timer_update_current_area, 100, nullptr);
 
       }
       else if(ptopic->id() == id_clean)
@@ -286,9 +286,9 @@ namespace production
       // return;
       //  }
 
-      SetTimer(31, 230, nullptr);
-      SetTimer(3003, 300, nullptr);
-      SetTimer(543218, 200, nullptr);
+      set_timer(31, 230, nullptr);
+      set_timer(3003, 300, nullptr);
+      set_timer(543218, 200, nullptr);
       //m_pimageV->load_image("wild_mountains_and_valleys-123.png");
       //pdraw2d->imaging().free(pfi);
 
@@ -463,11 +463,11 @@ namespace production
       }
       else if(ptimer->m_uTimer == ::e_timer_update_current_area)
       {
-         KillTimer(ptimer->m_uTimer);
+         kill_timer(ptimer->m_uTimer);
       }
       else if(ptimer->m_uTimer == 5432180)
       {
-         KillTimer(ptimer->m_uTimer);
+         kill_timer(ptimer->m_uTimer);
       }
       else if(ptimer->m_uTimer == 3003)
       {

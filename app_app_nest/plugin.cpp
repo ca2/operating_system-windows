@@ -286,7 +286,7 @@ install:
             {
             case 8477:
                {
-                  KillTimer(get_host_window(), 8477);
+                  kill_timer(get_host_window(), 8477);
                   start_ca2();
                }
                break;

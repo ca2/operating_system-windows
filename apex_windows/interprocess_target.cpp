@@ -371,7 +371,7 @@ namespace apex_windows
 
       }
 
-      SetTimer((HWND)get_hwnd(), 888888, 84, nullptr);
+      ::SetTimer((HWND)get_hwnd(), 888888, 84, nullptr);
 
       SetWindowLongPtr((HWND)get_hwnd(), GWLP_USERDATA, (LONG_PTR)this);
 
