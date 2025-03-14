@@ -1138,7 +1138,7 @@ namespace windowing_win32
                         || (!bWindowVisible && bSwpShowWindow))
                      {
 
-                        if (!::IsIconic(hwnd))
+                        if (!::IsIconic(hwnd) && !::IsZoomed(hwnd))
                         {
 
                            information() << "windowing_win32::buffer !IsIconic";
@@ -1183,6 +1183,13 @@ namespace windowing_win32
                                  //   pwindow->m_sizeDesignRequest = rectangleRequest.size();
 
                                  //}
+
+                                 if (rectangleRequest.left() > 100)
+                                 {
+
+                                    informationf("test");
+
+                                 }
 
                                  ::SetWindowPos(
                                     hwnd,
