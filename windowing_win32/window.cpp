@@ -4781,42 +4781,42 @@ namespace windowing_win32
 
       }
 
-      auto p = rectangle.origin();
+      //auto p = rectangle.origin();
 
-      ::pointer < buffer > pbuffer = m_pgraphicsgraphics;
+      //::pointer < buffer > pbuffer = m_pgraphicsgraphics;
 
-      if (!pbuffer)
-      {
+      //if (!pbuffer)
+      //{
 
-         return;
+      //   return;
 
-      }
+      //}
 
-      {
+      //{
 
-         auto pitem = pbuffer->get_buffer_item();
+      //   auto pitem = pbuffer->get_buffer_item();
 
-         if (pitem)
-         {
+      //   if (pitem)
+      //   {
 
-            pitem->m_pointBufferItemWindow = p;
+      //      pitem->m_pointBufferItemWindow = p;
 
-         }
+      //   }
 
-      }
+      //}
 
-      {
+      //{
 
-         auto pitem = pbuffer->get_screen_item();
+      //   auto pitem = pbuffer->get_screen_item();
 
-         if (pitem)
-         {
+      //   if (pitem)
+      //   {
 
-            pitem->m_pointBufferItemWindow = p;
+      //      pitem->m_pointBufferItemWindow = p;
 
-         }
+      //   }
 
-      }
+      //}
 
       ::windowing::window::_on_configure_notify_unlocked(rectangle);
 
@@ -8578,6 +8578,22 @@ namespace windowing_win32
    {
 
       _user_post(procedure);
+
+   }
+
+
+   void window::_raw_client_to_screen(::int_point & point)
+   {
+
+      ::ClientToScreen(get_hwnd(),(POINT *)&point);
+
+   }
+
+
+   void window::_raw_screen_to_client(::int_point & point)
+   {
+
+      ::ScreenToClient(get_hwnd(),(POINT *)&point);
 
    }
 

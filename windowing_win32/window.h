@@ -1042,6 +1042,10 @@ namespace windowing_win32
       void _main_post(const ::procedure & procedure) override;
       
 
+      void _raw_client_to_screen(::int_point & point) override;
+      void _raw_screen_to_client(::int_point & point) override;
+
+
    };
 
 
