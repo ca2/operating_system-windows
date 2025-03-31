@@ -31,6 +31,7 @@ if (MSVC)
        apex_windows
        aura_windows_common
        aura_windows
+       node_windows
        )
 elseif(LINUX)
 

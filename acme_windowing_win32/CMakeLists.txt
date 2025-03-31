@@ -5,7 +5,6 @@ project(acme_windowing_win32 CXX)
 message(STATUS "CMAKE_SYSTEM_NAME is ${CMAKE_SYSTEM_NAME}")
 
 
-
 if (MSVC)
    set(LIBCXX_TARGETING_MSVC ON)
 else ()
@@ -13,35 +12,35 @@ else ()
 endif ()
 
 
-
 list(APPEND library_source
-        _.cpp
-        _.h
-        _factory.cpp
+   _.cpp
+   _.h
+   _factory.cpp
+   activation_token.cpp
+   activation_token.h
    display.cpp
    display.h
-        framework.cpp
-        framework.h
-        keyboard.cpp
-        keyboard.h
+   framework.cpp
+   framework.h
+   keyboard.cpp
+   keyboard.h
    message_box.cpp
-        #xkb_input.cpp
-        #xkb_input.h
+   #xkb_input.cpp
+   #xkb_input.h
    window.cpp
    window.h
-        windowing.cpp
-        windowing.h
-        )
+   windowing.cpp
+   windowing.h
+)
 
-if(MSVC)
-list(APPEND library_source deployment.rc)
-endif()
+if (MSVC)
+   list(APPEND library_source deployment.rc)
+endif ()
 
 add_library(${PROJECT_NAME} SHARED ${library_source})
 target_precompile_headers(${PROJECT_NAME} PRIVATE framework.h)
 
 set_target_properties(${PROJECT_NAME} PROPERTIES LINKER_LANGUAGE CXX)
-
 
 
 if (MSVC)

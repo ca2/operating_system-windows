@@ -53,6 +53,7 @@ list(APPEND app_common_dependencies
    aura_windows
    node_windows
    windowing_win32
+   operating_ambient_windows
 )
 
 
