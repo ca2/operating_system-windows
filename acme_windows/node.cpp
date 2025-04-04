@@ -5027,7 +5027,7 @@ namespace acme_windows
       if (bException || !directory_system()->is(pathSkyDrive))
       {
 
-         if (platform()->is_desktop_system())
+         if (::system()->is_desktop_system())
          {
 
             auto pathHome = directory()->home();
