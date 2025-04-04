@@ -53,10 +53,10 @@ namespace production
    }
 
 
-   void pane_impact::handle(::topic * ptopic, ::context * pcontext)
+   void pane_impact::handle(::topic * ptopic, ::handler_context * phandlercontext)
    {
 
-      ::user::tab_impact::handle(ptopic, pcontext);
+      ::user::tab_impact::handle(ptopic, phandlercontext);
 
    }
 
@@ -251,7 +251,7 @@ namespace production
       get_parent_frame()->hide();
    }
 
-   void pane_impact::handle(::topic * ptopic, ::context * pcontext)
+   void pane_impact::handle(::topic * ptopic, ::handler_context * phandlercontext)
    {
       if(ptopic->id() == ::id_set_check)
       {

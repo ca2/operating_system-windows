@@ -82,11 +82,11 @@ namespace production
       virtual void _001OnTabClick(int iTab);
       void install_message_routing(::channel * pchannel) override;
       virtual bool pre_create_window(::user::system * pusersystem);
-      void handle(::topic * ptopic, ::context * pcontext) override;
+      void handle(::topic * ptopic, ::handler_context * phandlercontext) override;
 
       ::user::document * get_document();
 
-      //void handle(::topic * ptopic, ::context * pcontext) override;
+      //void handle(::topic * ptopic, ::handler_context * phandlercontext) override;
       DECLARE_MESSAGE_HANDLER(_001OnLButtonDown);
       DECLARE_MESSAGE_HANDLER(_001OnLButtonUp);
       virtual void on_timer(::timer * ptimer);

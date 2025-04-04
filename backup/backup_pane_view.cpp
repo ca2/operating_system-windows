@@ -53,10 +53,10 @@ namespace backup
    }
 
 
-   void pane_impact::handle(::topic * ptopic, ::context * pcontext)
+   void pane_impact::handle(::topic * ptopic, ::handler_context * phandlercontext)
    {
 
-      ::user::tab_impact::handle(ptopic, pcontext);
+      ::user::tab_impact::handle(ptopic, phandlercontext);
 
    }
 
@@ -115,10 +115,10 @@ namespace backup
    }
 
 
-   void pane_impact::handle(::topic * ptopic, ::context * pcontext)
+   void pane_impact::handle(::topic * ptopic, ::handler_context * phandlercontext)
    {
 
-      ::userex::pane_tab_impact::handle(ptopic, pcontext);
+      ::userex::pane_tab_impact::handle(ptopic, phandlercontext);
 
       if (ptopic->m_bRet)
       {
@@ -127,7 +127,7 @@ namespace backup
 
       }
 
-      ::production::form_callback::handle(ptopic, pcontext);
+      ::production::form_callback::handle(ptopic, phandlercontext);
 
       if (ptopic->m_bRet)
       {
