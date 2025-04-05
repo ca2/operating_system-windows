@@ -59,7 +59,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "resident", "..\..\..\source
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "irc", "..\..\..\source\app-core\irc\irc.vcxproj", "{19845177-6A40-4458-848A-019220E88C80}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_core_resident", "..\..\..\source\app-core\resident\resident.vcxproj", "{C61BE1EB-B0DF-412F-8CD8-68B4B86CC514}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "resident_resident", "..\..\..\source\app-core\resident\resident.vcxproj", "{C61BE1EB-B0DF-412F-8CD8-68B4B86CC514}"
 	ProjectSection(ProjectDependencies) = postProject
 		{84517714-2000-419D-A87F-4338C9DDE3FA} = {84517714-2000-419D-A87F-4338C9DDE3FA}
 		{19841115-1984-0411-1977-021977151984} = {19841115-1984-0411-1977-021977151984}

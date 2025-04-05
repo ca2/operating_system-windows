@@ -816,7 +816,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_core_hi", "..\..\..\sou
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "xmpp", "..\..\..\source\app-core\xmpp\xmpp.vcxproj", "{20005177-2551-5184-7805-849220E88C80}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_core_resident", "..\..\..\source\app-core\resident\resident.vcxproj", "{C61BE1EB-B0DF-412F-8CD8-68B4B86CC514}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "resident_resident", "..\..\..\source\app-core\resident\resident.vcxproj", "{C61BE1EB-B0DF-412F-8CD8-68B4B86CC514}"
 	ProjectSection(ProjectDependencies) = postProject
 		{20005177-6A40-4458-848A-019220E88C80} = {20005177-6A40-4458-848A-019220E88C80}
 		{20005177-2551-5184-7805-849220E88C80} = {20005177-2551-5184-7805-849220E88C80}
@@ -861,7 +861,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_core_announce", "..\..\
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "resident_beampro", "..\..\..\source\app-core\resident_beampro\resident_beampro.vcxproj", "{B6291FD9-450A-443C-9878-2BE58E47C1F4}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_core_resident_client", "..\..\..\source\app-core\resident_client\resident_client.vcxproj", "{E83442B4-7904-4D57-A184-ADED2BA2F9D0}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "resident_resident_client", "..\..\..\source\app-core\resident_client\resident_client.vcxproj", "{E83442B4-7904-4D57-A184-ADED2BA2F9D0}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "resident_liveedutv", "..\..\..\source\app-core\resident_liveedutv\resident_liveedutv.vcxproj", "{9A034FA7-1F6B-4510-89E1-C2F322BA90CC}"
 EndProject
