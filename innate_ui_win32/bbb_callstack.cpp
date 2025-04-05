@@ -150,14 +150,14 @@ size_t engine_symbol(char* sz, int n, OS_DWORD* pdisplacement, OS_DWORD dwAddres
 // #undef VERIFY
 // #endif // VERIFY
 
-// #ifdef __DEBUG
+// #ifdef _DEBUG
 // #define VERIFY(x) ASSERT(x)
 // #else //__DEBUG
 // #define VERIFY(x) (x)
 // #endif //!__DEBUG
 
 
-// #ifdef __DEBUG
+// #ifdef _DEBUG
 // //#if 1
 // // #define SYM_ENGINE_TRACE_SPIN_COUNT
 // #endif //__DEBUG

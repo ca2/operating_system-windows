@@ -316,7 +316,7 @@ CT* handle_map < HT, CT >::from_handle(HANDLE h, CT * (*pfnAllocator) (::pointer
    return pTemp;
 }
 
-#ifdef __DEBUG   // out-of-line version for memory tracking
+#ifdef _DEBUG   // out-of-line version for memory tracking
 template < class HT, class CT >
 void handle_map < HT, CT >::set_permanent(HANDLE h, CT * permOb)
 {
@@ -330,7 +330,7 @@ void handle_map < HT, CT >::set_permanent(HANDLE h, CT * permOb)
 }
 #endif //__DEBUG
 
-#ifdef __DEBUG
+#ifdef _DEBUG
 template < class HT, class CT >
 void handle_map < HT, CT > ::erase_handle(HANDLE h)
 {

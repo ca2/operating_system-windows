@@ -7092,7 +7092,7 @@ namespace windowing_win32
    //      else
    //      {
    //
-   //#ifdef __DEBUG
+   //#ifdef _DEBUG
    //
    //         if (0)
    //         {

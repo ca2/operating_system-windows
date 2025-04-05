@@ -1072,7 +1072,7 @@ namespace aura_windows
 //      }
 //
 //
-//#ifdef __DEBUG
+//#ifdef _DEBUG
 //
 //      else if (*plpfn != oldWndProc)
 //      {
@@ -4474,7 +4474,7 @@ void interaction_impl::set_tool_window(bool bSet)
 //      else
 //      {
 //
-//#ifdef __DEBUG
+//#ifdef _DEBUG
 //
 //         if (0)
 //         {
@@ -5137,7 +5137,7 @@ void interaction_impl::set_tool_window(bool bSet)
 //      else
 //      {
 //
-//#ifdef __DEBUG
+//#ifdef _DEBUG
 //
 //         if (0)
 //         {
