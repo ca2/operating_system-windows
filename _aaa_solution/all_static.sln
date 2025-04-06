@@ -31,7 +31,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "audio_decode_windows_media"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "announcecom", "..\..\..\source\app-core\announcecom\announcecom.vcxproj", "{5ED15647-DACE-4333-A520-C943C1FFA4B2}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_core_resident_client", "..\..\..\source\app-core\resident_client\resident_client.vcxproj", "{E83442B4-7904-4D57-A184-ADED2BA2F9D0}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "resident_resident_client", "..\..\..\source\app-core\resident_client\resident_client.vcxproj", "{E83442B4-7904-4D57-A184-ADED2BA2F9D0}"
 	ProjectSection(ProjectDependencies) = postProject
 		{BBD27926-6936-42DD-8172-2D74D226A488} = {BBD27926-6936-42DD-8172-2D74D226A488}
 	EndProjectSection
@@ -57,7 +57,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "audio_decode_youtube_player
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "youtube", "..\..\..\source\app-core\youtube\youtube.vcxproj", "{A7AB2C1C-0A17-4BC8-B091-75044F64C063}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_core_resident_desktop", "..\..\..\source\app-core\resident_desktop\resident_desktop.vcxproj", "{C61BE1EB-B0DF-412F-8CD8-68B4B86CC514}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "resident_resident_desktop", "..\..\..\source\app-core\resident_desktop\resident_desktop.vcxproj", "{C61BE1EB-B0DF-412F-8CD8-68B4B86CC514}"
 	ProjectSection(ProjectDependencies) = postProject
 		{CC8E8200-00A9-414E-9829-7CA3F1091ADD} = {CC8E8200-00A9-414E-9829-7CA3F1091ADD}
 		{19CC0015-A667-40EF-A04C-D02D15FDD64C} = {19CC0015-A667-40EF-A04C-D02D15FDD64C}
@@ -138,7 +138,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "imaging_wic", "..\..\operat
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "veriwell", "..\..\..\source\app-veriwell\veriwell\veriwell.vcxproj", "{D2EAA013-C127-4D44-9C2D-C70B4E705196}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "static_app_core_resident_desktop", "..\..\..\source\app-core\resident_desktop\static_app_core_resident_desktop.vcxproj", "{B3C2FC2F-00B5-4B57-BA6A-5BAE18CE8761}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "static_resident_resident_desktop", "..\..\..\source\app-core\resident_desktop\static_resident_resident_desktop.vcxproj", "{B3C2FC2F-00B5-4B57-BA6A-5BAE18CE8761}"
 	ProjectSection(ProjectDependencies) = postProject
 		{A69CC125-E38A-4F77-9677-8860D43AB3B0} = {A69CC125-E38A-4F77-9677-8860D43AB3B0}
 		{C1CCDF2E-9F27-45D3-B67A-B2EEB1754E72} = {C1CCDF2E-9F27-45D3-B67A-B2EEB1754E72}

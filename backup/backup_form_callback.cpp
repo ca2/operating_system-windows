@@ -20,7 +20,7 @@ namespace backup
    }
 
 
-   void form_callback::handle(::topic * ptopic, ::context * pcontext)
+   void form_callback::handle(::topic * ptopic, ::handler_context * phandlercontext)
    {
 
       //auto pimpact = ptopic->get_form();

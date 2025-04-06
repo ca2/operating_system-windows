@@ -115,7 +115,7 @@
          virtual void pre_translate_message(::message::message * pmessage) override;
          virtual void OnInitialUpdate();
          virtual bool pre_create_window(::user::system * pusersystem) override;
-         void handle(::topic * ptopic, ::context * pcontext) override;
+         void handle(::topic * ptopic, ::handler_context * phandlercontext) override;
          virtual void OnDraw(::image::image * pimage);
          //virtual bool OnNotify(::user::message * pusermessage) override;
          //virtual bool OnCommand(::user::message * pusermessage) override;

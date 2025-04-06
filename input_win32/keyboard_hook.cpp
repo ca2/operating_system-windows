@@ -151,7 +151,7 @@ namespace input_win32
 
       s_hhookKeyboard = SetWindowsHookEx(WH_KEYBOARD_LL, LowLevelKeyboardProc, ::LoadLibraryW(L"app_core_auratype.dll"), 0);
 
-      set_timer(NULL, NULL, 250, NULL);
+      ::SetTimer(NULL, NULL, 250, NULL);
 
       while (::task_get_run())
       {

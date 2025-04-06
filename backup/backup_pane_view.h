@@ -20,13 +20,13 @@ namespace backup
       void on_create_impact(::user::impact_data * pcreatordata);
       void install_message_routing(::channel * pchannel);
 
-      void handle(::topic * ptopic, ::context * pcontext) override;
+      void handle(::topic * ptopic, ::handler_context * phandlercontext) override;
 
 
 
       DECLARE_MESSAGE_HANDLER(_001OnCreate);
 
-      void handle(::topic * ptopic, ::context * pcontext) override;
+      void handle(::topic * ptopic, ::handler_context * phandlercontext) override;
 
 
    };

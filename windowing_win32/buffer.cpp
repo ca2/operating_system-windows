@@ -802,7 +802,7 @@ namespace windowing_win32
 
 #endif
 
-#ifdef __DEBUG
+#ifdef _DEBUG
 
             //               {
 
@@ -1332,7 +1332,7 @@ namespace windowing_win32
 
                            //::SendMessage(get_hwnd(), WM_PRINT, (wparam)m_hdcScreen, PRF_OWNED | PRF_CHILDREN);
 
-#ifdef __DEBUG
+#ifdef _DEBUG
 
             HBITMAP b1 = (HBITMAP) ::GetCurrentObject(playeredwindowbuffer->m_hdc, OBJ_BITMAP);
 
