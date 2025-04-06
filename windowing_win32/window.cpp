@@ -640,10 +640,10 @@ namespace windowing_win32
          hinstance,
          lpCreateParams);
 
-      if (!m_hwnd && ::is_set(hwnd) && ::is_set(hwndParent))
-      {
+      m_hwnd = hwnd;
 
-         m_hwnd = hwnd;
+      if (::is_set(hwnd) && ::is_set(hwndParent))
+      {
 
          ::cast < ::windows::windowing > pwindowing = system()->acme_windowing();
 
@@ -8464,9 +8464,44 @@ namespace windowing_win32
 
                get_task()->handle_exception(e);
 
+               ::pointer < ::exception > pexception = e.clone();
+
+               if (pexception)
+               {
+
+                  ::string str;
+
+                  str.formatf("Exception while handling message %d", message);
+
+                  pexception->m_strMessage += ", " + str;
+
+                  m_exceptiona.add(pexception);
+
+               }
+
+               if (message == WM_CREATE)
+               {
+
+                  return -1;
+
+               }
+
             }
             catch (...)
             {
+
+               ::string str;
+
+               str.formatf("Exception while handling message %d", message);
+
+               m_exceptiona.add(__allocate::exception(error_catch_all_exception, str));
+
+               if (message == WM_CREATE)
+               {
+
+                  return -1;
+
+               }
 
             }
 
