@@ -133,7 +133,7 @@ namespace production
 
       string str;
 
-      property_set set;
+      ::property_set set;
 
       void     estatusProduce;
 
@@ -352,7 +352,7 @@ pacmedir->system() / "config/production/mirror_status.txt";
 
             //{
 
-            //   property_set set;
+            //   ::property_set set;
 
             //   http()->get("http://api.ca2.cc/status/insert", set);
 
@@ -368,7 +368,7 @@ pacmedir->system() / "config/production/mirror_status.txt";
 
             //{
 
-            //   property_set set;
+            //   ::property_set set;
 
             //   if (m_eversion == version_basis)
             //   {
@@ -518,7 +518,7 @@ pacmedir->system() / "config/production/mirror_status.txt";
 
             //   //{
 
-            //   //   property_set set;
+            //   //   ::property_set set;
 
             //   //   http()->get("http://api.ca2.cc/status/insert",set);
 
@@ -526,7 +526,7 @@ pacmedir->system() / "config/production/mirror_status.txt";
 
             //   //{
 
-            //   //   property_set set;
+            //   //   ::property_set set;
 
             //   //   if(m_eversion == version_basis)
             //   //   {
@@ -607,7 +607,7 @@ pacmedir->system() / "config/production/mirror_status.txt";
 
             //   {
 
-            //      property_set set;
+            //      ::property_set set;
 
             //      http()->get("http://api.ca2.cc/status/insert",set);
 
@@ -615,7 +615,7 @@ pacmedir->system() / "config/production/mirror_status.txt";
 
             //{
 
-            //   property_set set;
+            //   ::property_set set;
 
             //   if(m_eversion == version_basis)
             //   {
@@ -632,7 +632,7 @@ pacmedir->system() / "config/production/mirror_status.txt";
 
             //{
 
-            //   property_set set;
+            //   ::property_set set;
 
             //   string str;
 
@@ -714,7 +714,7 @@ pacmedir->system() / "config/production/mirror_status.txt";
                //   string str;
 
 
-               //   property_set set;
+               //   ::property_set set;
 
                //   set["post"]["new_status"] = "<div style=\"display: block; " + m_strBackPostColor + "\"><h5 style=\"margin-bottom:0px; " + m_strEmpPostColor + "\">" + version_to_international_datetime(m_strStartTime) + "</h5><span style=\"" + m_strStdPostColor + m_strBackPostColor + " display: block; margin-bottom: 0.95em;\">" + version_to_international_datetime(::earth::time::now().FormatGmt("%Y-%m-%d %H-%M-%S")) + " Cleaning...</span></div>";
 
@@ -775,7 +775,7 @@ pacmedir->system() / "config/production/mirror_status.txt";
             //   string str;
 
 
-            //   property_set set;
+            //   ::property_set set;
 
             //   set["post"]["new_status"] = "<div style=\"display: block; " + m_strBackPostColor + "\"><h5 style=\"margin-bottom:0px; " + m_strEmpPostColor + "\">" + version_to_international_datetime(m_strStartTime) + "</h5><span style=\"" + m_strStdPostColor + m_strBackPostColor + " display: block; margin-bottom: 0.95em;\">" + version_to_international_datetime(::earth::time::now().FormatGmt("%Y-%m-%d %H-%M-%S")) + " Cleaning...</span></div>";
 
@@ -943,7 +943,7 @@ pacmedir->create(pathTarget.folder()))
          //   string str;
 
 
-         //   property_set set;
+         //   ::property_set set;
 
          //   set["post"]["new_status"] = "<div style=\"display: block; " + m_strBackPostColor + "\"><h5 style=\"margin-bottom:0px; " + m_strEmpPostColor + "\">" + version_to_international_datetime(m_strStartTime) + "</h5><span style=\"" + m_strStdPostColor + m_strBackPostColor + " display: block; margin-bottom: 0.95em;\">" + version_to_international_datetime(::earth::time::now().FormatGmt("%Y-%m-%d %H-%M-%S")) + " Copying...</span></div>";
 
@@ -959,7 +959,7 @@ pacmedir->create(pathTarget.folder()))
          //   string str;
 
 
-         //   property_set set;
+         //   ::property_set set;
 
          //   set["post"]["new_status"] = "<div style=\"display: block; " + m_strBackPostColor + "\"><h5 style=\"margin-bottom:0px; " + m_strEmpPostColor + "\">" + version_to_international_datetime(m_strStartTime) + "</h5><span style=\"" + m_strStdPostColor + m_strBackPostColor + " display: block; margin-bottom: 0.95em;\">" + version_to_international_datetime(::earth::time::now().FormatGmt("%Y-%m-%d %H-%M-%S")) + " Compressing...</span></div>";
 
@@ -971,7 +971,7 @@ pacmedir->create(pathTarget.folder()))
          //   string str;
 
 
-         //   property_set set;
+         //   ::property_set set;
 
          //   set["post"]["new_status"] = "<div style=\"display: block; " + m_strBackPostColor + "\"><h5 style=\"margin-bottom:0px; " + m_strEmpPostColor + "\">" + version_to_international_datetime(m_strStartTime) + "</h5><span style=\"" + m_strStdPostColor + m_strBackPostColor + " display: block; margin-bottom: 0.95em;\">" + version_to_international_datetime(::earth::time::now().FormatGmt("%Y-%m-%d %H-%M-%S")) + " Resources...</span></div>";
 
@@ -1017,7 +1017,7 @@ pacmedir->create(pathTarget.folder()))
          //   string str;
 
 
-         //   property_set set;
+         //   ::property_set set;
 
          //   set["post"]["new_status"] = "<div style=\"display: block; " + m_strBackPostColor + "\"><h5 style=\"margin-bottom:0px; " + m_strEmpPostColor + "\">" + version_to_international_datetime(m_strStartTime) + "</h5><span style=\"" + m_strStdPostColor + m_strBackPostColor + " display: block; margin-bottom: 0.95em;\">" + version_to_international_datetime(::earth::time::now().FormatGmt("%Y-%m-%d %H-%M-%S")) + " Storing Symbols...</span></div>";
 
@@ -1114,7 +1114,7 @@ pacmedir->create(pathTarget.folder()))
          //   string str;
 
 
-         //   property_set set;
+         //   ::property_set set;
 
          //   set["post"]["new_status"] = "<div style=\"display: block; " + m_strBackPostColor + "\"><h5 style=\"margin-bottom:0px; " + m_strEmpPostColor + "\">" + version_to_international_datetime(m_strStartTime) + "</h5><span style=\"" + m_strStdPostColor + m_strBackPostColor + " display: block; margin-bottom: 0.95em;\">" + version_to_international_datetime(::earth::time::now().FormatGmt("%Y-%m-%d %H-%M-%S")) + " Packaging...</span></div>";
 
@@ -1302,7 +1302,7 @@ pacmedir->create(pathTarget.folder()))
 
                //   string str;
 
-               //   property_set set;
+               //   ::property_set set;
 
                //   set["post"]["new_status"] = "<div style=\"display: block; " + m_strBackPostColor + "\"><h5 style=\"margin-bottom:0px; " + m_strEmpPostColor + "\">" + version_to_international_datetime(m_strStartTime) + "</h5><span style=\"" + m_strStdPostColor + m_strBackPostColor + " display: block; margin-bottom: 0.95em;\">" + version_to_international_datetime(::earth::time::now().FormatGmt("%Y-%m-%d %H-%M-%S")) + " " + strStatus + "</span></div>";
 
@@ -1321,7 +1321,7 @@ pacmedir->create(pathTarget.folder()))
          //   string str;
 
 
-         //   property_set set;
+         //   ::property_set set;
 
          //   set["post"]["new_status"] = "<div style=\"display: block; " + m_strBackPostColor + "\"><h5 style=\"margin-bottom:0px; " + m_strEmpPostColor + "\">" + version_to_international_datetime(m_strStartTime) + "</h5><span style=\"" + m_strStdPostColor + m_strBackPostColor + " display: block; margin-bottom: 0.95em;\">" + version_to_international_datetime(::earth::time::now().FormatGmt("%Y-%m-%d %H-%M-%S")) + " Releasing...</span></div>";
 
@@ -2969,7 +2969,7 @@ pacmedir->create(pathTarget.folder()))
 
       string str;
 
-      property_set set;
+      ::property_set set;
 
       set["disable_ca2_sessid"] = true;
 
@@ -3016,7 +3016,7 @@ pacmedir->create(pathTarget.folder()))
          add_status("All releases have been commanded and production has deemed ended!!.!.!!.");
 
 
-         property_set set;
+         ::property_set set;
 
          string strEndTime;
 
@@ -3197,7 +3197,7 @@ Retry2:
       {
          //replyMsg=twitterObj.get_response(  );
 
-         //property_set set;
+         //::property_set set;
 
          //set.parse_network_payload(replyMsg);
 
@@ -3288,7 +3288,7 @@ Retry2:
       {
          //replyMsg=twitterObj.get_response(  );
 
-         //property_set set;
+         //::property_set set;
 
          //set.parse_network_payload(replyMsg);
 
@@ -3430,7 +3430,7 @@ retry1:
       //   string str;
 
 
-      //   property_set set;
+      //   ::property_set set;
 
       //   set["post"]["new_status"] = "<div style=\"display: block; " + m_strBackPostColor + "\"><h5 style=\"margin-bottom:0px; " + m_strEmpPostColor + "\">" + version_to_international_datetime(m_strStartTime) + "</h5><span style=\"" + m_strStdPostColor + m_strBackPostColor + " display: block; margin-bottom: 0.95em;\">" + version_to_international_datetime(::earth::time::now().FormatGmt("%Y-%m-%d %H-%M-%S")) + " Building " + strApp + "...</span></div>";
 

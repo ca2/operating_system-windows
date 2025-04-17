@@ -305,7 +305,7 @@ namespace aura_windows
 
       path /= "regsvr32.exe";
 
-      property_set set;
+      ::property_set set;
 
       set["privileged"] = true;
 

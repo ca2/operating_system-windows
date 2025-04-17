@@ -568,7 +568,7 @@ namespace apex_windows
 
       path /= "regsvr32.exe";
 
-      property_set set;
+      ::property_set set;
 
       set["privileged"] = true;
 
@@ -4616,7 +4616,7 @@ namespace apex_windows
    }
 
 
-   //void node::browse_file_open(property_set & set)
+   //void node::browse_file_open(::property_set & set)
    //{
 
    //   //::user::interaction* pinteraction = nullptr;
@@ -4871,7 +4871,7 @@ namespace apex_windows
    //}
 
 
-   //void node::browse_file_save(property_set & set)
+   //void node::browse_file_save(::property_set & set)
    //{
 
    //   //::user::interaction* pinteraction = puiOwner->get_wnd();
@@ -5044,7 +5044,7 @@ namespace apex_windows
 
 
 
-//   void node::browse_folder( property_set & set)
+//   void node::browse_folder( ::property_set & set)
 //   {
 //
 //      //::user::interaction* pinteraction = puiOwner->get_wnd();
@@ -5162,7 +5162,7 @@ namespace apex_windows
 //   }
 
 
-   //void node::browse_file_or_folder(property_set & set)
+   //void node::browse_file_or_folder(::property_set & set)
    //{
 
    //   //::user::interaction* pinteraction = puiOwner->get_wnd();

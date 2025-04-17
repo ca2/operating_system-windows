@@ -667,7 +667,7 @@ namespace acme_windows
    //         
    //      path /= "regsvr32.exe";
    //         
-   //      property_set set;
+   //      ::property_set set;
    //         
    //      set["privileged"] = true;
    //         
@@ -2645,7 +2645,7 @@ namespace acme_windows
 
       path /= "regsvr32.exe";
 
-      property_set set;
+      ::property_set set;
 
       set["privileged"] = true;
 
@@ -3738,7 +3738,7 @@ namespace acme_windows
    }
 
 
-   void node::call_sync(const ::string& strPath, const ::string& strParam, const ::string& strDir, ::e_display edisplay, const class time& timeTimeout, ::property_set& set, int* piExitCode)
+   void node::call_sync(const ::string& strPath, const ::string& strParam, const ::string& strDir, ::e_display edisplay, const class time& timeTimeout, ::property_set & set, int* piExitCode)
    {
 
       SHELLEXECUTEINFOW infoa;

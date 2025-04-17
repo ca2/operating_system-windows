@@ -1239,7 +1239,7 @@ namespace hi5
    bool facebook::performGet(const string & getUrl)
    {
 
-      property_set set;
+      ::property_set set;
 
       /* set OAuth header */
       m_oauth.getOAuthHeader(eOAuthHttpGet, getUrl, set);
@@ -1270,7 +1270,7 @@ namespace hi5
 
       string dataStrDummy("");
 
-      property_set set;
+      ::property_set set;
 
       set["headers"] = headers;
 
@@ -1284,7 +1284,7 @@ namespace hi5
 
    string dataStrDummy( "" );
 
-   property_set set;
+   ::property_set set;
 
    if (headers.m_propertya.get_count() > 0)
    {
@@ -1322,7 +1322,7 @@ namespace hi5
    bool facebook::performDelete(const string & deleteUrl)
    {
 
-      property_set set;
+      ::property_set set;
 
       /* set OAuth header */
       m_oauth.getOAuthHeader(eOAuthHttpDelete, deleteUrl, set);
@@ -1350,7 +1350,7 @@ namespace hi5
    * @remarks: internal method
    *
    *--*/
-   bool facebook::performPost(const string & postUrl, property_set & set)
+   bool facebook::performPost(const string & postUrl, ::property_set & set)
    {
 
       if (set.has_property("headers"))
@@ -1371,7 +1371,7 @@ namespace hi5
       else
       {
 
-         property_set setHttp;
+         ::property_set setHttp;
 
          setHttp["post"] = set;
 
@@ -1483,7 +1483,7 @@ namespace hi5
       if (true)
       {
          /* Get OAuth header for request token */
-         property_set set;
+         ::property_set set;
          long long iTime = ::time(nullptr);
          if (m_oauth.getOAuthHeader(eOAuthHttpPost, "https://twitter.com/oauth/request_token", set))
          {
@@ -1528,7 +1528,7 @@ namespace hi5
       if (true)
       {
          /* Get OAuth header for access token */
-         property_set set;
+         ::property_set set;
          if (m_oauth.getOAuthHeader(eOAuthHttpGet, m_oauth.OAUTHLIB_TWITTER_ACCESS_TOKEN_URL, set, true))
          {
             if (performGet(m_oauth.OAUTHLIB_TWITTER_ACCESS_TOKEN_URL, set["headers"].propset()))
