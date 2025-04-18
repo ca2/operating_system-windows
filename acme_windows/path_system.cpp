@@ -28,7 +28,7 @@ namespace acme_windows
    ::string path_system::shell_path(const ::file::path& path)
    {
 
-      auto strShellPath = path.windows_path().path();
+      ::string strShellPath = path.windows_path().path();
 
       if (strShellPath.contains(' '))
       {

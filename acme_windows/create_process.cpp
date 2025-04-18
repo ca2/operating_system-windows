@@ -713,7 +713,7 @@ namespace acme_windows
       if (str.begins_eat("powershell://"))
       {
 
-         auto strPowerShell = node()->_get_power_shell_path().windows_path().path();
+         ::string strPowerShell = node()->_get_power_shell_path().windows_path().path();
 
          str1 = strPowerShell;
 

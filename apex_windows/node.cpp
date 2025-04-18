@@ -3941,7 +3941,7 @@ namespace apex_windows
 
          string strValue;
 
-         regkey.set("", get_app()->find_string("ApplicationName"));
+         regkey.set("", get_app()->get_string("ApplicationName"));
 
       }
 
@@ -3951,9 +3951,9 @@ namespace apex_windows
 
          string strValue;
 
-         regkey.set("ApplicationDescription", get_app()->find_string("ApplicationDescription"));
-         regkey.set("ApplicationIcon", get_app()->find_string("ApplicationIcon"));
-         regkey.set("ApplicationName", get_app()->find_string("ApplicationName"));
+         regkey.set("ApplicationDescription", get_app()->get_string("ApplicationDescription"));
+         regkey.set("ApplicationIcon", get_app()->get_string("ApplicationIcon"));
+         regkey.set("ApplicationName", get_app()->get_string("ApplicationName"));
 
       }
 
@@ -4047,25 +4047,25 @@ namespace apex_windows
          ::acme_windows::registry::key regkey(HKEY_CLASSES_ROOT, strTargetProgId, true);
 
          regkey.set("", strTargetProgId + " HTML Document");
-         regkey.set("AppUserModelId", get_app()->find_string("AppUserModelId"));
+         regkey.set("AppUserModelId", get_app()->get_string("AppUserModelId"));
 
       }
       {
 
          ::acme_windows::registry::key regkey(HKEY_CLASSES_ROOT, strTargetProgId + "\\papplication", true);
 
-         regkey.set("ApplicationCompany", get_app()->find_string("ApplicationCompany"));
-         regkey.set("ApplicationDescription", get_app()->find_string("ApplicationDescription"));
-         regkey.set("ApplicationIcon", get_app()->find_string("ApplicationIcon"));
-         regkey.set("ApplicationName", get_app()->find_string("ApplicationName"));
-         regkey.set("AppUserModelId", get_app()->find_string("AppUserModelId"));
+         regkey.set("ApplicationCompany", get_app()->get_string("ApplicationCompany"));
+         regkey.set("ApplicationDescription", get_app()->get_string("ApplicationDescription"));
+         regkey.set("ApplicationIcon", get_app()->get_string("ApplicationIcon"));
+         regkey.set("ApplicationName", get_app()->get_string("ApplicationName"));
+         regkey.set("AppUserModelId", get_app()->get_string("AppUserModelId"));
 
       }
       {
 
          ::acme_windows::registry::key regkey(HKEY_CLASSES_ROOT, strTargetProgId + "\\DefaultIcon", true);
 
-         regkey.set("", get_app()->find_string("DefaultIcon"));
+         regkey.set("", get_app()->get_string("DefaultIcon"));
 
       }
 
@@ -4186,7 +4186,7 @@ namespace apex_windows
 
       string strModule = solve_relative(file_system()->module());
 
-      string strApplicationRegistryPath = find_string("ApplicationRegistryPath");
+      string strApplicationRegistryPath = get_string("ApplicationRegistryPath");
 
       ::file::path pathApplication;
 
@@ -4207,7 +4207,7 @@ namespace apex_windows
          string strValue;
 
          //auto estatusRegistry =
-         regkey._set("", get_app()->find_string("ApplicationName"));
+         regkey._set("", get_app()->get_string("ApplicationName"));
 
          //if(!estatusRegistry)
          //{
@@ -4334,13 +4334,13 @@ namespace apex_windows
          string strValue;
 
          //auto estatusRegistry = 
-         regkey._set("ApplicationDescription", get_app()->find_string("ApplicationDescription"));
+         regkey._set("ApplicationDescription", get_app()->get_string("ApplicationDescription"));
 
          //if(estatusRegistry.succeeded())
          //{
 
             //estatusRegistry =
-         regkey._set("ApplicationIcon", get_app()->find_string("ApplicationIcon"));
+         regkey._set("ApplicationIcon", get_app()->get_string("ApplicationIcon"));
 
          //}
 
@@ -4348,7 +4348,7 @@ namespace apex_windows
          //{
 
             //estatusRegistry = 
-         regkey._set("ApplicationName", get_app()->find_string("ApplicationName"));
+         regkey._set("ApplicationName", get_app()->get_string("ApplicationName"));
 
          //}
 
@@ -4442,16 +4442,16 @@ namespace apex_windows
 
          ::acme_windows::registry::key regkey(HKEY_CURRENT_USER, "Software\\Classes\\" + strTargetProgId + "\\Application", true);
 
-         regkey._set("ApplicationCompany", get_app()->find_string("ApplicationCompany"));
+         regkey._set("ApplicationCompany", get_app()->get_string("ApplicationCompany"));
 
-         regkey._set("ApplicationDescription", get_app()->find_string("ApplicationDescription"));
+         regkey._set("ApplicationDescription", get_app()->get_string("ApplicationDescription"));
 
 
-         regkey._set("ApplicationIcon", get_app()->find_string("ApplicationIcon"));
+         regkey._set("ApplicationIcon", get_app()->get_string("ApplicationIcon"));
 
-         regkey._set("ApplicationName", get_app()->find_string("ApplicationName"));
+         regkey._set("ApplicationName", get_app()->get_string("ApplicationName"));
 
-         regkey._set("AppUserModelId", get_app()->find_string("AppUserModelId"));
+         regkey._set("AppUserModelId", get_app()->get_string("AppUserModelId"));
 
          //}
 
@@ -4469,7 +4469,7 @@ namespace apex_windows
 
          ::acme_windows::registry::key regkey(HKEY_CURRENT_USER, "Software\\Classes\\" + strTargetProgId + "\\DefaultIcon", true);
 
-         regkey._set("", get_app()->find_string("DefaultIcon"));
+         regkey._set("", get_app()->get_string("DefaultIcon"));
 
          //if (!estatusRegistry)
          //{

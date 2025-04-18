@@ -5110,11 +5110,11 @@ namespace acme_windows
          if (bUnregister)
          {
 
-            auto hinst = ShellExecuteW(NULL, _T("RunAs"), L"regsvr32.exe", wstring("/s /u ") + windowspath.path(), NULL, SW_SHOWNORMAL);
+            auto hinst = ShellExecuteW(NULL, _T("RunAs"), L"regsvr32.exe", "/s /u " + windowspath.path(), NULL, SW_SHOWNORMAL);
 
          }
 
-         auto hinst = ShellExecuteW(NULL, _T("RunAs"), L"regsvr32.exe", wstring("/s ") + windowspath.path(), NULL, SW_SHOWNORMAL);
+         auto hinst = ShellExecuteW(NULL, _T("RunAs"), L"regsvr32.exe", "/s " + windowspath.path(), NULL, SW_SHOWNORMAL);
 
       }
 
@@ -5145,7 +5145,7 @@ namespace acme_windows
       if (key._open(HKEY_CLASSES_ROOT, strKey, false))
       {
 
-         auto hinst = ShellExecuteW(NULL, _T("RunAs"), L"regsvr32.exe", wstring("/s /u ") + windowspath.path(), NULL, SW_SHOWNORMAL);
+         auto hinst = ShellExecuteW(NULL, _T("RunAs"), L"regsvr32.exe", "/s /u " + windowspath.path(), NULL, SW_SHOWNORMAL);
 
       }
 
