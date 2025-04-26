@@ -234,7 +234,7 @@ namespace apex_windows
 
       HANDLE h = nullptr;
 
-      ::parse parse(pszCmdLine,strlen(pszCmdLine), "= ");
+      ::parse parse(pszCmdLine,strlen(pszCmdLine), "= "_ansi);
 
       parse.EnableQuote(true);
 
