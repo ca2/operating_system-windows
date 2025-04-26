@@ -247,7 +247,7 @@ namespace hi5
       if (true && newStatus.has_character())
       {
          /* Prepare ___new status message */
-         property_set post;
+         ::property_set post;
          post["status"] = newStatus;
 
          /* Perform POST */
@@ -549,7 +549,7 @@ namespace hi5
       if (true && userInfo.get_length() && dMsg.get_length())
       {
          /* Prepare ___new direct message */
-         property_set post;
+         ::property_set post;
          post["text"] = dMsg;
 
          /* Prepare URL */
@@ -634,7 +634,7 @@ namespace hi5
          strUrl = build_url(TWIT_FRIENDSHIPSCREATE_URL, userInfo, isUserId);
 
          /* Send some dummy data in POST */
-         property_set post;
+         ::property_set post;
          post["text"] = "dummy";
 
          /* Perform POST */
@@ -831,7 +831,7 @@ namespace hi5
          strUrl.append(TWIT_EXTENSIONFORMAT);
 
          /* Send some dummy data in POST */
-         property_set post;
+         ::property_set post;
          post["text"] = "dummy";
 
          /* Perform POST */
@@ -891,7 +891,7 @@ namespace hi5
          strUrl.append(TWIT_EXTENSIONFORMAT);
 
          /* Send some dummy data in POST */
-         property_set post;
+         ::property_set post;
          post["text"] = "dummy";
 
          /* Perform POST */
@@ -1000,7 +1000,7 @@ namespace hi5
          strUrl = TWIT_SAVEDSEARCHCREATE_URL;
 
          /* Send some dummy data in POST */
-         property_set post;
+         ::property_set post;
          post["query"] = query;
 
          /* Perform POST */
@@ -1265,7 +1265,7 @@ namespace hi5
    * @remarks: internal method
    *
    *--*/
-   bool facebook::performGet(const string & getUrl, property_set & headers)
+   bool facebook::performGet(const string & getUrl, ::property_set & headers)
    {
 
       string dataStrDummy("");
@@ -1279,7 +1279,7 @@ namespace hi5
 
    }
 
-   /*   bool facebook::performPost( const string & getUrl, property_set & headers, property_set & post)
+   /*   bool facebook::performPost( const string & getUrl, ::property_set & headers, ::property_set & post)
    {
 
    string dataStrDummy( "" );
