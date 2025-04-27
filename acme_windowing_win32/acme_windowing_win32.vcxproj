@@ -333,8 +333,8 @@
       <EnableParallelCodeGeneration>false</EnableParallelCodeGeneration>
       <CreateHotpatchableImage>false</CreateHotpatchableImage>
       <Optimization>Disabled</Optimization>
-      <InlineFunctionExpansion>Disabled</InlineFunctionExpansion>
-      <IntrinsicFunctions>false</IntrinsicFunctions>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
     </ClCompile>
     <ResourceCompile>
       <AdditionalIncludeDirectories>$(SolutionDir)../../../source</AdditionalIncludeDirectories>
@@ -814,8 +814,8 @@
       <CreateHotpatchableImage>false</CreateHotpatchableImage>
       <OmitFramePointers>false</OmitFramePointers>
       <Optimization>Disabled</Optimization>
-      <InlineFunctionExpansion>Disabled</InlineFunctionExpansion>
-      <IntrinsicFunctions>false</IntrinsicFunctions>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
     </ClCompile>
     <ResourceCompile>
       <AdditionalIncludeDirectories>$(SolutionDir)../../../source</AdditionalIncludeDirectories>
