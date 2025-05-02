@@ -386,9 +386,9 @@ namespace win32
          void windowing::on_start_system()
          {
 
-            auto * psystem = this->system();
+            //auto * psystem = this->system();
 
-            psystem->defer_post_initial_request();
+            //psystem->defer_post_initial_request();
 
          }
 
@@ -492,7 +492,11 @@ namespace win32
 
             on_activate();
 
-            system()->defer_post_initial_request();
+            //system()->defer_post_initial_request();
+
+            system()->post_application_start();
+            system()->defer_post_file_open();
+            system()->post_application_started();
 
             main();
 
