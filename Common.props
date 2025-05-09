@@ -38,7 +38,7 @@
       <Command>application_build_helper --defer-prepare-folder $(ProjectDir) $(PlatformName) $(ConfigurationName)</Command>
     </PreBuildEvent>
     <Link>
-      <AdditionalLibraryDirectories>$(RootParentDir)operating_system\storage-windows\$(PlatformName)\$(Configuration)\library\;$(RootParentDir)operating_system\storage-windows\$(PlatformName)\$(Configuration)\third\library\;$(OutDir)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(RootParentDir)operating_system\storage-windows\$(PlatformName)\$(Configuration)\library\;$(RootParentDir)operating_system\storage-windows\$(PlatformName)\$(Configuration)\third\library\;$(OutDir);$(RootParentDir)operating_system\storage-windows\$(PlatformName)\library\</AdditionalLibraryDirectories>
       <MapFileName>$(TargetDir)$(TargetName).map</MapFileName>
     </Link>
     <Manifest>
