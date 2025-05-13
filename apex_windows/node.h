@@ -149,7 +149,7 @@ namespace apex_windows
       void file_association_set_shell_open_command(const ::string& pszExtension, const ::string& pszExtensionNamingClass, const ::string& pszCommand, const ::string& pszParam) override;
       void file_association_get_shell_open_command(const ::string& pszExtension, string& strExtensionNamingClass, string& strCommand, string& strParam) override;
 
-      void open_url_link_at_system_browser(const string& strUrl, const string& strProfile) override;
+      void open_internet_link(const ::scoped_string& scopedstrUrl, const ::scoped_string& scopedstrProfile, const ::scoped_string& scopedstTarget) override;
 
       bool open_in_ie(const ::string& pcsz);
 

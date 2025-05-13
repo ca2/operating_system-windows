@@ -2750,7 +2750,7 @@ namespace acme_windows
    }
 
 
-   void node::open_internet_link_in_system_browser(const ::string& strUrl, const ::string& strProfile)
+   void node::open_internet_link(const ::scoped_string& scopedstrUrl, const ::scoped_string& scopedstrProfile, const ::scoped_string& scopedstrTarget)
    {
 
       //#ifdef DEBUG
@@ -2763,7 +2763,7 @@ namespace acme_windows
       //
       //#else
 
-      wstring wstrUrl(strUrl);
+      wstring wstrUrl(scopedstrUrl);
 
       ::ShellExecuteW(nullptr, L"open", wstrUrl, nullptr, nullptr, SW_SHOWNORMAL);
 

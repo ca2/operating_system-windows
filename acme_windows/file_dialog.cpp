@@ -35,8 +35,9 @@
 #include "acme_windows_common/variant.h"
 #include <Shldisp.h>
 #include <shellapi.h>
-
-
+#include <commdlg.h>
+#include <shlwapi.h>  // for PathFindExtension
+#include <dlgs.h>
 
 #if defined(_WIN32)
 #  ifndef NOMINMAX
@@ -56,6 +57,114 @@
 namespace acme_windows
 {
 
+   thread_local OPENFILENAME * t_popenfilename;
+
+   UINT_PTR CustomOFNHookProc(
+      HWND unnamedParam1,
+      UINT unnamedParam2,
+      WPARAM unnamedParam3,
+      LPARAM unnamedParam4
+   )
+   {
+      if (unnamedParam2 == WM_INITDIALOG)
+      {
+
+         t_popenfilename = (OPENFILENAME*)(void*)(uptr)unnamedParam4;
+
+      }
+
+      ::file::file_dialog* pfiledialog = nullptr;
+
+      if (t_popenfilename)
+      {
+
+         pfiledialog = (::file::file_dialog*)t_popenfilename->lCustData;
+
+      }
+
+      if (unnamedParam2 == WM_NOTIFY)
+      {
+
+         auto lpnmhdr = (LPNMHDR)unnamedParam4;
+
+         UINT code = lpnmhdr->code;
+
+//         CDN_TYPECHANGE             uint32 = 0xfffffda1
+
+         /*typedef struct _OFNOTIFYA {
+            NMHDR           hdr;
+            LPOPENFILENAMEA lpOFN;
+            LPSTR           pszFile;
+         } OFNOTIFYA, * */;
+
+         if (code == CDN_TYPECHANGE)
+         {
+
+            //printf_line("CDN_TYPECHANGE code %d", code);
+
+            auto pofnotify = (LPOFNOTIFYW)lpnmhdr;
+
+            auto iFilterIndex = t_popenfilename->nFilterIndex;
+
+            iFilterIndex--;
+
+            auto & filter = pfiledialog->m_filedialogfiltera[iFilterIndex];
+
+            auto strExtension = filter.m_strPatternList;
+
+            if (strExtension.begins_eat("*."))
+            {
+
+               auto strExt = strExtension.get_word(";");
+
+               if (strExt.has_character() && !strExt.contains("*"))
+               {
+
+                  // Get file name from edit control
+                  WCHAR fileName[MAX_PATH * 4];
+                  HWND hwndParent = GetParent(unnamedParam1);
+                  //GetDlgItemText(hwndParent, edt1, fileName, MAX_PATH);
+                  CommDlg_OpenSave_GetFilePathW(hwndParent, fileName, MAX_PATH *4);
+
+                  wstring wstrFileName(fileName);
+
+                  ::file::path path(wstrFileName);
+
+                  auto strTitle = path.title();
+
+                  auto strName = strTitle + "." + strExt;
+
+                  //::file::path pathFolder = path;
+                  
+                  //::file::path pathNew(pathFolder / strName);
+
+                  wstrFileName = strName;
+
+
+                  // Set updated file name
+                  CommDlg_OpenSave_SetControlText(hwndParent, edt1, wstrFileName.c_str());
+
+                  //// Append new extension based on selected filter
+                  //switch (iFilterIndex)
+                  //{
+                  //case 1: _tcscat_s(fileName, _T(".txt")); break;
+                  //case 2: _tcscat_s(fileName, _T(".csv")); break;
+                  //}
+
+               }
+
+            }
+
+            //printf_line("WM_NOTIFY code %d", code);
+
+         }
+         
+
+      }
+
+      return 0;
+
+   }
 
    void node::_node_file_dialog(::file::file_dialog* pdialogParameter)
    {
@@ -148,6 +257,10 @@ namespace acme_windows
                __wide_append_null(memoryFilter);
 
             }
+
+            wstring wstrDefExt;
+
+            bool bHasAllFiles = false;
             
             for (auto pair : pdialog->m_filedialogfiltera) 
             {
@@ -165,26 +278,94 @@ namespace acme_windows
                __wide_append(memoryFilter, pair.m_strPatternList.c_str());
                __wide_append_null(memoryFilter);
 
+               string strDefExt = pair.m_strPatternList;
+
+               strDefExt.begins_eat("*.");
+
+               if (wstrDefExt.is_empty())
+               {
+                  
+                  wstrDefExt = strDefExt;
+
+               }
+
+               if (strDefExt == "*")
+               {
+
+                  bHasAllFiles = true;
+
+               }
+
             }
 
             __wide_append_null(memoryFilter);
 
+            openfilename.lCustData = (LPARAM) pdialog.m_p;
+
+            openfilename.lpfnHook = &CustomOFNHookProc;
+
             openfilename.lpstrFilter = (LPWSTR)memoryFilter.data();
 
-            openfilename.lpstrDefExt = L"";
+            if (bHasAllFiles)
+            {
+
+               openfilename.lpstrDefExt = NULL;
+
+            }
+            else
+            {
+
+               openfilename.lpstrDefExt = wstrDefExt;
+
+            }
 
             if (pdialog->m_bSave) 
             {
 
                //openfilename.Flags = OFN_EXPLORER | OFN_PATHMUSTEXIST | OFN_OVERWRITEPROMPT;
-               openfilename.Flags = OFN_EXTENSIONDIFFERENT | OFN_EXPLORER | OFN_NOVALIDATE | OFN_OVERWRITEPROMPT;
+               
+               openfilename.Flags = OFN_EXPLORER | OFN_NOVALIDATE | OFN_OVERWRITEPROMPT | OFN_ENABLEHOOK;
+
+               if (bHasAllFiles)
+               {
+
+                  openfilename.Flags |= OFN_EXTENSIONDIFFERENT;
+
+               }
 
                if (GetSaveFileNameW(&openfilename) == FALSE)
                {
 
+                  t_popenfilename = nullptr;
+
                   pdialog->m_function({});
 
                   return;
+
+               }
+
+               if (openfilename.nFilterIndex >= 1)
+               {
+
+                  auto iFilterIndex = openfilename.nFilterIndex - 1;
+
+                  auto & filter = pdialog->m_filedialogfiltera[iFilterIndex];
+
+                  auto strPatternList = filter.m_strPatternList;
+
+                  if (strPatternList.begins_eat("*."))
+                  {
+
+                     auto strExt = strPatternList.get_word(";");
+
+                     if (strExt)
+                     {
+
+                        pdialog->m_strExtension = strExt;
+
+                     }
+
+                  }
 
                }
 
@@ -204,6 +385,8 @@ namespace acme_windows
                if (GetOpenFileNameW(&openfilename) == FALSE)
                {
 
+                  t_popenfilename = nullptr;
+
                   DWORD dwError = CommDlgExtendedError();
 
                   pdialog->m_function({});
@@ -213,6 +396,8 @@ namespace acme_windows
                }
 
             }
+
+            t_popenfilename = nullptr;
 
             if (openfilename.Flags & OFN_ALLOWMULTISELECT)
             {

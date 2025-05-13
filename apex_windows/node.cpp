@@ -2137,12 +2137,12 @@ namespace apex_windows
    }
 
 
-   void node::open_url_link_at_system_browser(const string& strUrl, const string& strProfile)
+   void node::open_internet_link(const scoped_string& scopedstrUrl, const scoped_string& scopedstrProfile, const ::scoped_string& scopedstrTarget)
    {
 
       string strBrowser = "chrome";
 
-      if (strProfile.contains("\\Chrome\\"))
+      if (scopedstrProfile.contains("\\Chrome\\"))
       {
 
          strBrowser = "chrome";
@@ -2161,7 +2161,7 @@ namespace apex_windows
       //}
 
 
-      if (strProfile.has_character() && strBrowser == "chrome")
+      if (scopedstrProfile.has_character() && strBrowser == "chrome")
       {
 
          ::acme_windows::registry::key key;
@@ -2175,7 +2175,7 @@ namespace apex_windows
 
             ::file::path path = range.consume_quoted_value();
 
-            string strCommand = "\"" + path + "\" \"" + strUrl + "\" --profile-directory=\"" + strProfile + "\"";
+            string strCommand = "\"" + path + "\" \"" + scopedstrUrl + "\" --profile-directory=\"" + scopedstrProfile + "\"";
 
             //string strOutput;
 
@@ -2196,7 +2196,7 @@ namespace apex_windows
 
       }
 
-      return ::acme_windows::node::open_url_link_at_system_browser(strUrl, strProfile);
+      return ::acme_windows::node::open_internet_link(scopedstrUrl, scopedstrProfile, scopedstrTarget);
 
    }
 
