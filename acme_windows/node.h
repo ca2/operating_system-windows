@@ -209,7 +209,7 @@ namespace acme_windows
       //string get_global_id_mutex_name(const ::string& strAppId, const ::string& strId) override;
 
 
-      void open_url_link_at_system_browser(const ::string& strUrl, const ::string& strProfile = {}) override;
+      void open_internet_link_in_system_browser(const ::string& strUrl, const ::string& strProfile = {}) override;
       void shell_launch(const ::string & strUrl) override;
 
 
