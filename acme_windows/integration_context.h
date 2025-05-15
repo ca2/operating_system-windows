@@ -28,7 +28,7 @@ namespace acme_windows
          ::string          m_strPlat1;
          ::string          m_strPlat2;
          //::string          m_strVsTools; // payload("vstools")
-         ::string          m_strStagePlatform;
+         //::string          m_strStagePlatform;
          ::string          m_strLibPlatform;
          ::file::path      m_pathProjectDir;
          //::string_array    m_straLog;
