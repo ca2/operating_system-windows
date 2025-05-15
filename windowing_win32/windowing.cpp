@@ -445,7 +445,12 @@ namespace windowing_win32
       if (pinteraction->m_bCompositedFrameWindow)
       {
 
-         nExStyle |= WS_EX_LAYERED;
+         if (!m_papplication->m_bUseDraw2dProtoWindow)
+         {
+
+            nExStyle |= WS_EX_LAYERED;
+
+         }
 
          nStyle |= WS_POPUP;
 

@@ -25,7 +25,11 @@ namespace windowing_win32
       virtual public IDropTarget
    {
    public:
-
+      HBITMAP m_hbitmapProto;
+      HDC m_hdcProto;
+      BITMAPINFOHEADER m_bitmapinfoheaderProto;
+      void * m_pbitsProto;
+      HGLRC m_hglrcProto;
       //;; bool                                            m_bSizeMoveMode;
       unsigned char                                            m_uOpacity;
       //HICON                                         m_hiconSmall;
@@ -291,6 +295,7 @@ namespace windowing_win32
 
       //virtual void window_apply_visual(const ::user::window_state & windowstate) override;
 
+      DECLARE_MESSAGE_HANDLER(on_message_paint);
       DECLARE_MESSAGE_HANDLER(on_message_destroy);
       DECLARE_MESSAGE_HANDLER(on_message_non_client_destroy);
       DECLARE_MESSAGE_HANDLER(_001OnCreate);

@@ -461,7 +461,16 @@ namespace windowing_win32
 
       }
 
-      return _windows_register_window_class(0, wstrClassName);
+      HBRUSH hbrushBackground = nullptr;
+
+      if (m_papplication->m_bUseDraw2dProtoWindow)
+      {
+
+         hbrushBackground = (HBRUSH)CreateSolidBrush(0x00000000);
+
+      }
+
+      return _windows_register_window_class(0, wstrClassName, nullptr, hbrushBackground);
 
    }
 

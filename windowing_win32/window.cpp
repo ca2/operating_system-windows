@@ -25,6 +25,7 @@
 #include "acme/prototype/geometry2d/_text_stream.h"
 #include "acme/windowing/windowing.h"
 //#include "aura_windows/interaction_impl.h"
+#include "aura/graphics/draw2d/draw2d.h"
 #include "aura/graphics/draw2d/graphics.h"
 #include "aura/graphics/graphics/graphics.h"
 #include "aura/user/user/interaction_graphics_thread.h"
@@ -90,6 +91,11 @@ namespace windowing_win32
 
    window::window()
    {
+
+      m_hbitmapProto = nullptr;
+      m_hdcProto = nullptr;
+      m_pbitsProto = nullptr;
+      m_hglrcProto = nullptr;
       //m_bSizeMoveMode = false;
       m_uOpacity = 255;
 
@@ -261,6 +267,7 @@ namespace windowing_win32
 
       ::windowing::window::prio_install_message_routing(pchannel);
 
+      MESSAGE_LINK(e_message_paint, pchannel, this, &window::on_message_paint);
       MESSAGE_LINK(e_message_destroy, pchannel, this, &window::on_message_destroy);
       MESSAGE_LINK(e_message_non_client_destroy, pchannel, this, &window::on_message_non_client_destroy);
       MESSAGE_LINK(WM_GETICON, pchannel, this, &window::on_message_get_icon);
@@ -626,6 +633,11 @@ namespace windowing_win32
 
       }
 
+
+      //dwStyle = WS_VISIBLE | WS_POPUP;
+
+      //dwExStyle = 0;
+
       HWND hwnd = ::CreateWindowExW(
          dwExStyle,
          wstrClassName,
@@ -684,6 +696,8 @@ namespace windowing_win32
          throw ::exception(error_failed);
 
       }
+
+      draw2d()->on_create_window(this);
 
       //SendMessage(m_hwnd, e_message_after_create, 0, 0);
 
@@ -7762,6 +7776,38 @@ namespace windowing_win32
    }
 
 
+   void window::on_message_paint(::message::message * pmessage)
+   {
+
+      //PAINTSTRUCT ps;
+      //HDC hdc = BeginPaint(m_hwnd, &ps);
+      //RECT rc{100, 100, 200, 200};
+      //auto hbr = ::CreateSolidBrush(RGB(100, 160, 220));
+      //FillRect(hdc, &rc, hbr);
+      //::GetWindowRect(m_hwnd, &rc);
+      //::DeleteObject(hbr);
+      ////display();                                              // OpenGL -> DIB
+      ////BitBlt(hdc, 0, 0, width(rc), height(rc), m_hdcProto, 0, 0, SRCCOPY); // DIB -> hDC// можно и так:// 
+
+      ////BITMAPINFOHEADER BIH;            // и заголовок// …// создаем DIB section// создаем структуру BITMAPINFOHEADER, описывающую наш DIBint iSize = sizeof(BITMAPINFOHEADER);  // размер
+      ////memset(&BIH, 0, iSize);
+
+      ////BIH.biSize = iSize;        // размер структуры
+      ////BIH.biWidth = cxDIB;       // геометрия
+      ////BIH.biHeight = cyDIB;      // битмапа
+      ////BIH.biPlanes = 1;          // один план
+      ////BIH.biBitCount = 24;       // 24 bits per pixel
+      ////BIH.biCompression = BI_RGB;// без сжатия// создаем новый DC в памяти
+      //BITMAPINFO bmp_info;
+      //memset(&bmp_info, 0x0, sizeof(bmp_info));
+      //bmp_info.bmiHeader=m_bitmapinfoheaderProto;
+      //SetDIBitsToDevice(hdc, 0, 0, width(rc), height(rc),
+      //   0, 0, 0, height(rc), &m_pbitsProto, &bmp_info, DIB_RGB_COLORS);
+      //EndPaint(m_hwnd, &ps);
+
+   }
+
+
    void window::on_message_destroy(::message::message * pmessage)
    {
 
@@ -8015,6 +8061,18 @@ namespace windowing_win32
 
    LRESULT window::window_procedure(unsigned int message, wparam wparam, lparam lparam)
    {
+
+      if (message == WM_PAINT)
+      {
+
+         if (m_papplication->m_bUseDraw2dProtoWindow)
+         {
+
+            return ::DefWindowProc(m_hwnd, message, wparam, lparam);
+
+         }
+
+      }
 
       auto pwin32windowing = win32_windowing();
 

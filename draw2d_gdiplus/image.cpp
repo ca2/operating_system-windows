@@ -72,7 +72,7 @@ namespace draw2d_gdiplus
    }
 
 
-   bool image::host(::pixmap * ppixmap)
+   bool image::host(::pixmap * ppixmap, ::windowing::window * pwindow)
    {
 
       if (!ppixmap->is_ok())
