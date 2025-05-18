@@ -120,6 +120,13 @@ namespace acme_windows
                if (strExt.has_character() && !strExt.contains("*"))
                {
 
+                  if (pfiledialog)
+                  {
+
+                     pfiledialog->m_strExtension = strExt;
+
+                  }
+
                   // Get file name from edit control
                   WCHAR fileName[MAX_PATH * 4];
                   HWND hwndParent = GetParent(unnamedParam1);
@@ -208,6 +215,15 @@ namespace acme_windows
             openfilename.nFilterIndex = 1;
 
             memory memoryFilter;
+
+            if (pdialog->m_bSave && pdialog->m_filedialogfiltera.has_element())
+            {
+
+               ::string strExtension = pdialog->m_filedialogfiltera.first().get_extension();
+
+               pdialog->m_strExtension = strExtension;
+
+            }
 
             if (!pdialog->m_bSave && pdialog->m_filedialogfiltera.size() > 1) 
             {
