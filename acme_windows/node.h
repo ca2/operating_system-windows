@@ -60,6 +60,7 @@ namespace acme_windows
 
 
       //bool dark_mode() const override;
+      void defer_add_to_system_recent_file_list(const ::file::path& pathRecentFile) override;
 
 
       ::file::path get_default_base_integration_folder() override;

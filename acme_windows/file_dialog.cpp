@@ -9,6 +9,7 @@
 #include "exclusive.h"
 #include "application.h"
 #include "acme/exception/exception.h"
+#include "acme/filesystem/filesystem/file_context.h"
 #include "acme/filesystem/filesystem/file_dialog.h"
 #include "acme/filesystem/filesystem/folder_dialog.h"
 #include "acme/operating_system/process.h"
@@ -51,7 +52,84 @@
 //#include <ShellApi.h>
 //#include <Security.h>
 //#include <wincred.h>
-#include <shobjidl_core.h>
+#include <windows.h>
+#include <shlobj.h>  // For SHGetKnownFolderPath
+#include <iostream>
+#include <filesystem>
+void NotifyRecentItemsChanged();
+bool EraseRecentItem(const ::wstring& fileName) {
+   PWSTR recentPath = nullptr;
+   HRESULT hr = SHGetKnownFolderPath(FOLDERID_Recent, 0, NULL, &recentPath);
+   if (FAILED(hr)) {
+      std::wcerr << L"Failed to get Recent folder path\n";
+      return false;
+   }
+
+   std::filesystem::path recentFolder(recentPath);
+   CoTaskMemFree(recentPath);
+
+   auto name = std::filesystem::path(fileName.c_str()).filename();
+
+   for (const auto& entry : std::filesystem::directory_iterator(recentFolder)) {
+      if (entry.path().extension() == L".lnk") {
+         if (entry.path().filename().wstring().find(name) != std::wstring::npos) {
+            std::filesystem::remove(entry.path());
+            std::wcout << L"Removed: " << entry.path() << std::endl;
+            return true;
+         }
+      }
+   }
+
+   std::wcout << L"Item not found in recent items\n";
+   return false;
+}
+#include <shlobj.h>
+#include <iostream>
+
+void NotifyRecentItemsChanged() {
+   PWSTR recentPath = nullptr;
+   if (SUCCEEDED(SHGetKnownFolderPath(FOLDERID_Recent, 0, nullptr, &recentPath))) {
+      SHChangeNotify(SHCNE_UPDATEDIR, SHCNF_PATH, recentPath, NULL);
+      CoTaskMemFree(recentPath);
+   }
+}
+
+bool AddToRecentItems(const ::wstring& targetPath, const ::wstring& title = L"") 
+{
+
+   HRESULT hr;
+   CoInitialize(NULL);
+
+   // Get the Recent Items folder path
+   PWSTR pszRecent = nullptr;
+   hr = SHGetKnownFolderPath(FOLDERID_Recent, 0, NULL, &pszRecent);
+   if (FAILED(hr)) {
+      std::wcerr << L"Failed to get Recent folder path\n";
+      return false;
+   }
+
+   ::file::path recentFolder(pszRecent);
+   CoTaskMemFree(pszRecent);
+
+   // Build shortcut path
+   ::wstring linkName = title.is_empty() ? ::wstring(::file::path(targetPath).name()) : title;
+   ::file::path linkPath = recentFolder / (linkName + L".lnk");
+
+   // Create shortcut
+   comptr<IShellLink> pShellLink;
+   hr = CoCreateInstance(CLSID_ShellLink, NULL, CLSCTX_INPROC_SERVER, IID_PPV_ARGS(&pShellLink));
+   if (FAILED(hr)) return false;
+
+   pShellLink->SetPath(targetPath.c_str());
+   pShellLink->SetDescription(L"Recent item");
+
+   auto pPersistFile=pShellLink.as< IPersistFile>();
+   if (!pPersistFile) return false;
+
+   hr = pPersistFile->Save(linkPath.windows_path().path().c_str(), TRUE);
+   return SUCCEEDED(hr);
+
+}
 
 
 namespace acme_windows
@@ -96,7 +174,7 @@ namespace acme_windows
             LPOPENFILENAMEA lpOFN;
             LPSTR           pszFile;
          } OFNOTIFYA, * */;
-
+         HWND hwndParent = GetParent(unnamedParam1);
          if (code == CDN_TYPECHANGE)
          {
 
@@ -108,48 +186,29 @@ namespace acme_windows
 
             iFilterIndex--;
 
-            auto & filter = pfiledialog->m_filedialogfiltera[iFilterIndex];
+            auto & filter = pfiledialog->m_filedialogfilter[iFilterIndex];
 
-            auto strExtension = filter.m_strPatternList;
+            // Get file name from edit control
+            WCHAR fileName[MAX_PATH * 4];
+            
+            //GetDlgItemText(hwndParent, edt1, fileName, MAX_PATH);
+            CommDlg_OpenSave_GetFilePathW(hwndParent, fileName, MAX_PATH *4);
 
-            if (strExtension.begins_eat("*."))
-            {
+            wstring wstrFileName(fileName);
 
-               auto strExt = strExtension.get_word(";");
+            ::file::path path(wstrFileName);
 
-               if (strExt.has_character() && !strExt.contains("*"))
-               {
+            path.defer_set_extension(filter.get_preserve_extensions(),
+               pfiledialog->m_filedialogfilter.get_all_related_extensions());
 
-                  if (pfiledialog)
-                  {
+            auto strName = path.name();
 
-                     pfiledialog->m_strExtension = strExt;
+            ::wstring wstrName;
 
-                  }
+            wstrName = strName;
 
-                  // Get file name from edit control
-                  WCHAR fileName[MAX_PATH * 4];
-                  HWND hwndParent = GetParent(unnamedParam1);
-                  //GetDlgItemText(hwndParent, edt1, fileName, MAX_PATH);
-                  CommDlg_OpenSave_GetFilePathW(hwndParent, fileName, MAX_PATH *4);
-
-                  wstring wstrFileName(fileName);
-
-                  ::file::path path(wstrFileName);
-
-                  auto strTitle = path.title();
-
-                  auto strName = strTitle + "." + strExt;
-
-                  //::file::path pathFolder = path;
-                  
-                  //::file::path pathNew(pathFolder / strName);
-
-                  wstrFileName = strName;
-
-
-                  // Set updated file name
-                  CommDlg_OpenSave_SetControlText(hwndParent, edt1, wstrFileName.c_str());
+            // Set updated file name
+            CommDlg_OpenSave_SetControlText(hwndParent, edt1, wstrName.c_str());
 
                   //// Append new extension based on selected filter
                   //switch (iFilterIndex)
@@ -158,9 +217,9 @@ namespace acme_windows
                   //case 2: _tcscat_s(fileName, _T(".csv")); break;
                   //}
 
-               }
+               //}
 
-            }
+//            }
 
             //printf_line("WM_NOTIFY code %d", code);
 
@@ -172,6 +231,22 @@ namespace acme_windows
       return 0;
 
    }
+
+
+   void node::defer_add_to_system_recent_file_list(const ::file::path& pathNew)
+   {
+
+      if (file()->exists(pathNew))
+      {
+
+         auto wstrNew = pathNew.windows_path().path();
+
+         SHAddToRecentDocs(SHARD_PATHW, wstrNew); 
+
+      }
+
+   }
+
 
    void node::_node_file_dialog(::file::file_dialog* pdialogParameter)
    {
@@ -216,30 +291,39 @@ namespace acme_windows
 
             memory memoryFilter;
 
-            if (pdialog->m_bSave && pdialog->m_filedialogfiltera.has_element())
+            if (pdialog->m_bSave)
             {
 
-               ::string strExtension = pdialog->m_filedialogfiltera.first().get_extension();
+               if (pdialog->m_filedialogfilter.has_element())
+               {
 
-               pdialog->m_strExtension = strExtension;
+                  pdialog->m_iFilter = 0;
+
+               }
+               else
+               {
+
+                  pdialog->m_iFilter = -1;
+
+               }
 
             }
 
-            if (!pdialog->m_bSave && pdialog->m_filedialogfiltera.size() > 1) 
+            if (!pdialog->m_bSave && pdialog->m_filedialogfilter.size() > 1) 
             {
 
                __wide_append(memoryFilter, "Supported file types (");
 
-               for (::collection::index i = 0; i < pdialog->m_filedialogfiltera.size(); ++i) 
+               for (::collection::index i = 0; i < pdialog->m_filedialogfilter.size(); ++i) 
                {
                   
                   //__wide_append(memoryFilter, "*.");
 
-                  ::string strPatternList = pdialog->m_filedialogfiltera[i].m_strPatternList;
+                  ::string strPatternList = pdialog->m_filedialogfilter[i].m_strPatternList;
                   
                   __wide_append(memoryFilter, strPatternList);
 
-                  if (i + 1 < pdialog->m_filedialogfiltera.size())
+                  if (i + 1 < pdialog->m_filedialogfilter.size())
                   {
 
                      __wide_append(memoryFilter, ";");
@@ -252,16 +336,16 @@ namespace acme_windows
 
                __wide_append_null(memoryFilter);
 
-               for (::collection::index i = 0; i < pdialog->m_filedialogfiltera.size(); ++i) 
+               for (::collection::index i = 0; i < pdialog->m_filedialogfilter.size(); ++i) 
                {
                
                   //__wide_append(memoryFilter, "*.");
 
-                  ::string strPatternList = pdialog->m_filedialogfiltera[i].m_strPatternList;
+                  ::string strPatternList = pdialog->m_filedialogfilter[i].m_strPatternList;
 
                   __wide_append(memoryFilter, strPatternList);
 
-                  if (i + 1 < pdialog->m_filedialogfiltera.size())
+                  if (i + 1 < pdialog->m_filedialogfilter.size())
                   {
 
                      __wide_append(memoryFilter, ";");
@@ -278,7 +362,7 @@ namespace acme_windows
 
             bool bHasAllFiles = false;
             
-            for (auto pair : pdialog->m_filedialogfiltera) 
+            for (auto pair : pdialog->m_filedialogfilter) 
             {
 
                __wide_append(memoryFilter, pair.m_strName.c_str());
@@ -349,12 +433,14 @@ namespace acme_windows
 
                }
 
+               openfilename.Flags |= OFN_DONTADDTORECENT;
+
                if (GetSaveFileNameW(&openfilename) == FALSE)
                {
 
                   t_popenfilename = nullptr;
 
-                  pdialog->m_function({});
+                  pdialog->do_callback();
 
                   return;
 
@@ -365,23 +451,7 @@ namespace acme_windows
 
                   auto iFilterIndex = openfilename.nFilterIndex - 1;
 
-                  auto & filter = pdialog->m_filedialogfiltera[iFilterIndex];
-
-                  auto strPatternList = filter.m_strPatternList;
-
-                  if (strPatternList.begins_eat("*."))
-                  {
-
-                     auto strExt = strPatternList.get_word(";");
-
-                     if (strExt)
-                     {
-
-                        pdialog->m_strExtension = strExt;
-
-                     }
-
-                  }
+                  pdialog->m_iFilter = iFilterIndex;
 
                }
 
@@ -397,6 +467,8 @@ namespace acme_windows
                   openfilename.Flags |= OFN_ALLOWMULTISELECT;
 
                }
+
+               openfilename.Flags |= OFN_DONTADDTORECENT;
                
                if (GetOpenFileNameW(&openfilename) == FALSE)
                {
@@ -405,13 +477,15 @@ namespace acme_windows
 
                   DWORD dwError = CommDlgExtendedError();
 
-                  pdialog->m_function({});
+                  pdialog->do_callback();
 
                   return;
 
                }
 
             }
+
+            pdialog->set_ok_flag();
 
             t_popenfilename = nullptr;
 
@@ -535,7 +609,7 @@ namespace acme_windows
       //
       //#endif
             //pdialog->m_patha = patha;
-            pdialog->m_function(pdialog);
+            pdialog->do_callback();
 
          });
 
