@@ -145,8 +145,8 @@ namespace apex_windows
       void file_extension_get_open_with_list_keys(string_array& straKey, const ::string& pszExtension) override;
       void file_extension_get_open_with_list_commands(string_array& straCommand, const ::string& pszExtension) override;
 
-      void file_association_set_default_icon(const ::string& pszExtension, const ::string& pszExtensionNamingClass, const ::string& pszIconPath) override;
-      void file_association_set_shell_open_command(const ::string& pszExtension, const ::string& pszExtensionNamingClass, const ::string& pszCommand, const ::string& pszParam) override;
+      void file_association_set_default_icon(const ::string& pszExtension, const ::string& pszExtensionNamingClass, const ::file::path & pathIcon) override;
+      void file_association_set_shell_open_command(const ::string& pszExtension, const ::string& pszExtensionNamingClass, const ::file::path & pathExecutable, const ::string& pszParam) override;
       void file_association_get_shell_open_command(const ::string& pszExtension, string& strExtensionNamingClass, string& strCommand, string& strParam) override;
 
       void open_internet_link(const ::scoped_string& scopedstrUrl, const ::scoped_string& scopedstrProfile, const ::scoped_string& scopedstTarget) override;

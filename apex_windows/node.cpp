@@ -1952,7 +1952,7 @@ namespace apex_windows
    }
 
 
-   void node::file_association_set_default_icon(const ::string& pszExtension, const ::string& pszExtensionNamingClass, const ::string& pszIconPath)
+   void node::file_association_set_default_icon(const ::string& pszExtension, const ::string& pszExtensionNamingClass, const ::file::path & pathIcon)
    {
 
       //try
@@ -1962,7 +1962,11 @@ namespace apex_windows
 
       ::acme_windows::registry::key keyLink3(HKEY_CLASSES_ROOT, strExtensionNamingClass, true);
 
-      keyLink3.set("DefaultIcon", pszIconPath);
+      ::string strIconPath;
+
+      strIconPath = path_system()->shell_path(pathIcon);
+
+      keyLink3.set("DefaultIcon", strIconPath);
 
       //}
       //catch (...)
@@ -1978,7 +1982,7 @@ namespace apex_windows
    }
 
 
-   void node::file_association_set_shell_open_command(const ::string& pszExtension, const ::string& pszExtensionNamingClass, const ::string& pszCommand, const ::string& pszParam)
+   void node::file_association_set_shell_open_command(const ::string& pszExtension, const ::string& pszExtensionNamingClass, const ::file::path & pathExecutable, const ::string& pszParam)
    {
 
       //::e_status estatus = ::success;
@@ -2005,16 +2009,15 @@ namespace apex_windows
 
          keyLink3._set("", "open");
 
-
          ::acme_windows::registry::key keyLink2(keyLink3, "open", true);
 
          keyLink2._set("", "");
 
          ::acme_windows::registry::key keyLink1(keyLink2, "command", true);
 
-         string strCommand(pszCommand);
+         string strCommand;
 
-         strCommand = solve_relative(strCommand);
+         strCommand = path_system()->shell_path(pathExecutable);
 
          string strFormat;
 
@@ -2066,7 +2069,9 @@ namespace apex_windows
 
          ::acme_windows::registry::key keyLink1(keyLink2, "command", true);
 
-         string strCommand(pszCommand);
+         string strCommand;
+
+         strCommand = path_system()->shell_path(pathExecutable);
 
          strCommand = solve_relative(strCommand);
 
