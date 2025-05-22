@@ -2021,9 +2021,7 @@ namespace apex_windows
 
          string strFormat;
 
-         strFormat = "\"" + strCommand + "\"";
-
-         strFormat += pszParam;
+         strFormat = strCommand + " " + pszParam;
 
          keyLink1._set("", strFormat);
 
@@ -2062,7 +2060,6 @@ namespace apex_windows
 
          keyLink3._set("", "open");
 
-
          ::acme_windows::registry::key keyLink2(keyLink3, "open", true);
 
          keyLink2._set("", "");
@@ -2073,11 +2070,9 @@ namespace apex_windows
 
          strCommand = path_system()->shell_path(pathExecutable);
 
-         strCommand = solve_relative(strCommand);
-
          string strFormat;
 
-         strFormat.formatf("\"%s\" %s", strCommand.c_str(), pszParam);
+         strFormat.formatf("%s %s", strCommand.c_str(), pszParam);
 
          keyLink1._set("", strFormat);
       }

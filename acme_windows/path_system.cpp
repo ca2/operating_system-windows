@@ -25,10 +25,20 @@ namespace acme_windows
    }
 
 
+   ::string path_system::discrete_shell_path(const ::file::path& path)
+   {
+
+      ::string strDiscreteShellPath = path.windows_path().path();
+
+      return strDiscreteShellPath;
+
+   }
+
+
    ::string path_system::shell_path(const ::file::path& path)
    {
 
-      ::string strShellPath = path.windows_path().path();
+      ::string strShellPath = discrete_shell_path(path);
 
       if (strShellPath.contains(' '))
       {

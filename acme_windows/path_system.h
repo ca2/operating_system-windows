@@ -26,6 +26,7 @@ namespace acme_windows
       ~path_system() override;
 
 
+      ::string discrete_shell_path(const ::file::path& path) override;
       ::string shell_path(const ::file::path& path) override;
 
       //virtual bool __win_find_is_dots(WIN32_FIND_DATAW & data);
