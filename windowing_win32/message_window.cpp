@@ -27,7 +27,7 @@ namespace windowing_win32
 
       m_pinteractionlistener = pinteractionlistener;
 
-      m_bMessageWindow = true;
+      m_bMessageOnlyWindow = true;
 
       m_strWindowText2 = pszName;
 

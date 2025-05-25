@@ -23,7 +23,7 @@ namespace windowing_win32
 
       m_ewindowflag -= e_window_flag_graphical;
       m_bCompositedFrameWindow = false;
-      //m_bMessageWindow = true;
+      m_bMessageOnlyWindow = true;
 
 
    }

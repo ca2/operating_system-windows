@@ -655,24 +655,23 @@ namespace windowing_win32
       if (!bLayered && !pwindow->m_hglrcProto)
       {
 
-   //      ::cast < ::windowing_win32::window  > pwindow = m_pwindow;
+         //::cast < ::windowing_win32::window  > pwindow = m_pwindow;
 
-   //      if (pwindow && pwindow->m_hglrcProto)
-   //      {
+         //if (pwindow && m_papplication->m_bUseDraw2dProtoWindow)
+         //{
 
+         //   auto pgraphics = pbufferitem->g();
 
-   //         auto pgraphics = pbufferitem->g();
+         //   pgraphics->do_on_context([this, pgraphics,
+         //      pbufferitem]
+         //   {
 
-   //         pgraphics->do_on_context([this, pgraphics,
-   //            pbufferitem]
-   //            {
+         //      pgraphics->on_present();
 
-   //pgraphics->on_present();
+         //   });
 
-   //         });
-
-   //      }
-   //      else
+         //}
+         //else
          {
             //HideCaret(get_hwnd());
 

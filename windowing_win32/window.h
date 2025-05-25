@@ -25,10 +25,10 @@ namespace windowing_win32
       virtual public IDropTarget
    {
    public:
-      HBITMAP m_hbitmapProto;
-      HDC m_hdcProto;
-      BITMAPINFOHEADER m_bitmapinfoheaderProto;
-      void * m_pbitsProto;
+      //HBITMAP m_hbitmapProto;
+      //HDC m_hdcProto;
+      //BITMAPINFOHEADER m_bitmapinfoheaderProto;
+      //void * m_pbitsProto;
       HGLRC m_hglrcProto;
       //;; bool                                            m_bSizeMoveMode;
       unsigned char                                            m_uOpacity;

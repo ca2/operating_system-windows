@@ -92,9 +92,9 @@ namespace windowing_win32
    window::window()
    {
 
-      m_hbitmapProto = nullptr;
-      m_hdcProto = nullptr;
-      m_pbitsProto = nullptr;
+      //m_hbitmapProto = nullptr;
+      //m_hdcProto = nullptr;
+      //m_pbitsProto = nullptr;
       m_hglrcProto = nullptr;
       //m_bSizeMoveMode = false;
       m_uOpacity = 255;
@@ -516,7 +516,7 @@ namespace windowing_win32
 
       //puserinteraction->m_pwindow = this;
 
-      if (puserinteraction->m_bMessageWindow)
+      if (puserinteraction->m_bMessageOnlyWindow)
       {
 
          puserinteraction->m_ewindowflag -= e_window_flag_graphical;
@@ -586,7 +586,7 @@ namespace windowing_win32
 
       HWND hwndParent = nullptr;
 
-      if (user_interaction()->m_bMessageWindow)
+      if (user_interaction()->m_bMessageOnlyWindow)
       {
 
          hwndParent = HWND_MESSAGE;
@@ -697,7 +697,12 @@ namespace windowing_win32
 
       }
 
-      draw2d()->on_create_window(this);
+      if (puserinteraction->is_graphical())
+      {
+
+         draw2d()->on_create_window(this);
+
+      }
 
       //SendMessage(m_hwnd, e_message_after_create, 0, 0);
 
