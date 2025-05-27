@@ -493,11 +493,15 @@ namespace windowing_win32
 
             __øconstruct(pbufferitem->m_pgraphics);
 
-            pbufferitem->m_pgraphics->create_window_graphics(m_pwindow);
+            pbufferitem->m_pgraphics->m_puserinteraction = dynamic_cast < ::user::interaction * >( m_pwindow->m_pacmeuserinteraction.m_p);
+
+            pbufferitem->m_pgraphics->create_memory_graphics(pbufferitem->m_sizeBufferItemDraw);
+
+            //pbufferitem->m_pgraphics->create_window_graphics(m_pwindow);
 
          }
 
-         }
+      }
 
       return true;
 
