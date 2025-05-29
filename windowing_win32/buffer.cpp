@@ -656,7 +656,8 @@ namespace windowing_win32
 
       }
       ::cast < ::windowing_win32::window  > pwindow = m_pwindow;
-      if (!bLayered && !pwindow->m_hglrcProto)
+      //if (!bLayered && !pwindow->m_hglrcProto)
+      if (!bLayered && !m_papplication->m_bUseDraw2dProtoWindow)
       {
 
          //::cast < ::windowing_win32::window  > pwindow = m_pwindow;
