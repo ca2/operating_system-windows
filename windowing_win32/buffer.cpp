@@ -497,6 +497,8 @@ namespace windowing_win32
 
             pbufferitem->m_pgraphics->create_memory_graphics(pbufferitem->m_sizeBufferItemDraw);
 
+            pbufferitem->m_pgraphics->set_hint_window_output();
+
             //pbufferitem->m_pgraphics->create_window_graphics(m_pwindow);
 
          }
