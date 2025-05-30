@@ -588,7 +588,7 @@ namespace acme_windows
       //      //         cmd += "\"";
       //      //         FILE * output = popen(cmd.c_str(), "r");
       //      //         if (output == nullptr)
-      //      //            throw std::runtime_error("popen() failed -- could not launch zenity!");
+      //      //            throw ::exception(error_failed, "popen() failed -- could not launch zenity!");
       //      //         while (fgets(buffer, FILE_DIALOG_MAX_BUFFER, output) != NULL)
       //      //            ;
       //      //         pclose(output);
