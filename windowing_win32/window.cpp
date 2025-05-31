@@ -8078,6 +8078,12 @@ namespace windowing_win32
          }
 
       }
+      else if (message == WM_ERASEBKGND)
+      {
+
+         return TRUE;
+
+      }
 
       auto pwin32windowing = win32_windowing();
 
