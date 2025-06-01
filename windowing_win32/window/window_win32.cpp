@@ -463,7 +463,7 @@ namespace windowing_win32
 
       HBRUSH hbrushBackground = nullptr;
 
-      if (m_papplication->m_bUseDraw2dProtoWindow)
+      if (m_papplication->m_bUseSwapChainWindow)
       {
 
          hbrushBackground = (HBRUSH)CreateSolidBrush(0x00000000);

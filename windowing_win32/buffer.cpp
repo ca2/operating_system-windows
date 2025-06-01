@@ -154,7 +154,7 @@ namespace windowing_win32
    bool buffer::create_window_device_context(const ::int_size & size, int iStrideParam)
    {
 
-      if (m_papplication->m_bUseDraw2dProtoWindow)
+      if (m_papplication->m_bUseSwapChainWindow)
       {
 
          return true;
@@ -216,7 +216,7 @@ namespace windowing_win32
    void buffer::destroy_window_device_context()
    {
 
-      if (m_papplication->m_bUseDraw2dProtoWindow)
+      if (m_papplication->m_bUseSwapChainWindow)
       {
 
          return;
@@ -263,7 +263,7 @@ namespace windowing_win32
 
       }
 
-      if (!m_papplication->m_bUseDraw2dProtoWindow)
+      if (!m_papplication->m_bUseSwapChainWindow)
       {
 
          if (!double_buffer::_on_begin_draw(pbufferitem))
@@ -659,12 +659,12 @@ namespace windowing_win32
       }
       ::cast < ::windowing_win32::window  > pwindow = m_pwindow;
       //if (!bLayered && !pwindow->m_hglrcProto)
-      if (!bLayered && !m_papplication->m_bUseDraw2dProtoWindow)
+      if (!bLayered && !m_papplication->m_bUseSwapChainWindow)
       {
 
          //::cast < ::windowing_win32::window  > pwindow = m_pwindow;
 
-         //if (pwindow && m_papplication->m_bUseDraw2dProtoWindow)
+         //if (pwindow && m_papplication->m_bUseSwapChainWindow)
          //{
 
          //   auto pgraphics = pbufferitem->g();
@@ -1335,7 +1335,7 @@ namespace windowing_win32
                      {
 
 
-                        if (m_papplication->m_bUseDraw2dProtoWindow)
+                        if (m_papplication->m_bUseSwapChainWindow)
                         {
 
                            auto pgraphics = pbufferitem->g();

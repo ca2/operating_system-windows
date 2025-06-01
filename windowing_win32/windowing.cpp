@@ -445,7 +445,7 @@ namespace windowing_win32
       if (pinteraction->m_bCompositedFrameWindow)
       {
 
-         if (!m_papplication->m_bUseDraw2dProtoWindow)
+         if (!m_papplication->m_bUseSwapChainWindow)
          {
 
             nExStyle |= WS_EX_LAYERED;

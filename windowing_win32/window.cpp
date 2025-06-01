@@ -8070,7 +8070,7 @@ namespace windowing_win32
       if (message == WM_PAINT)
       {
 
-         if (m_papplication->m_bUseDraw2dProtoWindow)
+         if (m_papplication->m_bUseSwapChainWindow)
          {
 
             return ::DefWindowProc(m_hwnd, message, wparam, lparam);
