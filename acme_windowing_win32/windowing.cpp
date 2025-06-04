@@ -9,6 +9,7 @@
 #include "acme/user/micro/user.h"
 #include "acme/parallelization/manual_reset_happening.h"
 #include "acme/platform/node.h"
+#include "acme/platform/session.h"
 #include "acme/platform/system.h"
 #include "acme/_operating_system.h"
 #include "acme_windows/registry.h"
@@ -494,9 +495,14 @@ namespace win32
 
             //system()->defer_post_initial_request();
 
+
             system()->post_application_start();
             system()->defer_post_file_open();
             system()->post_application_started();
+
+            ::string strAppId = m_papplication->m_strAppId;
+
+            session()->get_application(strAppId, true);
 
             main();
 
