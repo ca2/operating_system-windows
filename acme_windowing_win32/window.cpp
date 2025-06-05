@@ -1099,7 +1099,7 @@ namespace win32
          void window::show_window()
          {
 
-            main_send([this]()
+            main_post([this]()
                {
 
                   if (!::IsWindow(m_hwnd))
