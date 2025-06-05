@@ -326,7 +326,7 @@ namespace windowing_win32
 
       ::pointer < layered_window_buffer > playeredwindowbuffer;
 
-      if (bLayered)
+      if (bLayered && ! m_papplication->m_bUseSwapChainWindow)
       {
 
          auto & pparticleData = pbufferitem->m_pparticleData;
@@ -502,6 +502,13 @@ namespace windowing_win32
             //pbufferitem->m_pgraphics->create_window_graphics(m_pwindow);
 
          }
+         else
+         {
+
+            pbufferitem->m_pgraphics->defer_set_size(pbufferitem->m_sizeBufferItemDraw);
+
+         }
+
 
       }
 

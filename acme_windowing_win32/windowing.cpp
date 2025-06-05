@@ -501,8 +501,15 @@ namespace win32
             system()->post_application_started();
 
             ::string strAppId = m_papplication->m_strAppId;
+//
+            //session()->get_application(strAppId, true);
 
-            session()->get_application(strAppId, true);
+            m_papplication->_post([this]()
+               {
+
+                  m_papplication->m_bReadyToAttendRequests = true;
+
+               });
 
             main();
 

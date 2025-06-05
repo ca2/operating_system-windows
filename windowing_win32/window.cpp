@@ -638,6 +638,19 @@ namespace windowing_win32
 
       //dwExStyle = 0;
 
+       //dwExStyle &=~ WS_EX_TRANSPARENT | WS_EX_LAYERED | WS_EX_TOPMOST; // Using WS_EX_LAYERED loses the GPU-friendliness
+       //dwExStyle &=  ~WS_EX_LAYERED ; // Using WS_EX_LAYERED loses the GPU-friendliness
+      //dwStyle |= WS_EX_NOREDIRECTIONBITMAP;
+      //dwExStyle |= WS_EX_NOREDIRECTIONBITMAP;
+      //dwExStyle |= WS_EX_LAYERED;
+
+      if (dwExStyle & WS_EX_LAYERED)
+      {
+
+         warning() << "layered";
+
+      }
+
       HWND hwnd = ::CreateWindowExW(
          dwExStyle,
          wstrClassName,

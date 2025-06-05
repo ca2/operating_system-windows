@@ -445,11 +445,17 @@ namespace windowing_win32
       if (pinteraction->m_bCompositedFrameWindow)
       {
 
-         if (!m_papplication->m_bUseSwapChainWindow)
+         //if (!m_papplication->m_bUseSwapChainWindow)
          {
 
             nExStyle |= WS_EX_LAYERED;
 
+         }
+         if (m_papplication->m_bUseSwapChainWindow)
+         {
+
+            nExStyle |= WS_EX_NOREDIRECTIONBITMAP;
+            //nExStyle |= WS_EX_TRANSPARENT;
          }
 
          nStyle |= WS_POPUP;
