@@ -18,6 +18,7 @@
 #include "acme/exception/exception.h"
 #include "apex/platform/system.h"
 #include "aura/message/user.h"
+#include "aura/graphics/draw2d/draw2d.h"
 #include "aura/platform/session.h"
 #include "aura/platform/application.h"
 #include "aura/user/user/interaction_array.h"
@@ -445,18 +446,7 @@ namespace windowing_win32
       if (pinteraction->m_bCompositedFrameWindow)
       {
 
-         //if (!m_papplication->m_bUseSwapChainWindow)
-         {
-
-            nExStyle |= WS_EX_LAYERED;
-
-         }
-         if (m_papplication->m_bUseSwapChainWindow)
-         {
-
-            nExStyle |= WS_EX_NOREDIRECTIONBITMAP;
-            //nExStyle |= WS_EX_TRANSPARENT;
-         }
+         draw2d()->adjust_composited_window_styles(nExStyle, nStyle);
 
          nStyle |= WS_POPUP;
 

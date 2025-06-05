@@ -28,6 +28,7 @@ namespace draw2d_gdiplus
 
 
       //virtual ::write_text::internal_font * internal_font_from_file(::platform::context * pcontext, const ::file::path & path);
+      void adjust_composited_window_styles(unsigned int& nExStyle, unsigned int& nStyle) override;
 
 
    };

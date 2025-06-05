@@ -66,7 +66,12 @@ namespace draw2d_gdiplus
    }
 
 
+   void draw2d::adjust_composited_window_styles(unsigned int& nExStyle, unsigned int& nStyle)
+   {
 
+      nExStyle |= WS_EX_LAYERED;
+
+   }
 
 
 } // namespace draw2d_gdiplus
