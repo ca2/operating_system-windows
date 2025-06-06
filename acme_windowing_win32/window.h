@@ -27,7 +27,6 @@ namespace win32
          {
          public:
 
-
             bool m_bNcActive;
             //CreatableFromBase(window, ::micro::window_implementation);
             //bool m_bSizeMoveMode;

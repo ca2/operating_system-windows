@@ -64,6 +64,7 @@ namespace win32
          window::window()
          {
 
+            
             m_bSizeMoveMode = false;
             //      m_bDestroy = false;
             m_hwnd = nullptr;
@@ -794,8 +795,41 @@ namespace win32
 
             }
             break;
+            case WM_MOUSELEAVE:
+            {
+
+               //::cast < ::micro::elemental > pelemental = m_pacmeuserinteraction;
+
+               //if (pelemental)
+               {
+
+                 // pelemental->on_mouse_leave();
+
+                  on_mouse_leave();
+
+                  m_bMouseOn = false;
+
+               }
+
+
+            }
+            break;
             case WM_MOUSEMOVE:
             {
+
+               if (!m_bMouseOn)
+               {
+
+                  m_bMouseOn = true;
+
+                  TRACKMOUSEEVENT trackmouseevent = { sizeof(TRACKMOUSEEVENT) };
+                  trackmouseevent.dwFlags = TME_LEAVE;
+                  trackmouseevent.hwndTrack = m_hwnd;
+                  ::TrackMouseEvent(&trackmouseevent);
+
+                  on_mouse_enter();
+
+               }
 
                auto pmouse = __create_new < ::user::mouse >();
 
@@ -803,25 +837,27 @@ namespace win32
 
                pmouse->m_pointAbsolute = client_to_screen(lparam);
 
-               ::cast < ::micro::elemental > pelemental = m_pacmeuserinteraction;
+               fore_on_mouse_move(pmouse);
 
-               if (pelemental)
-               {
+               //::cast < ::micro::elemental > pelemental = m_pacmeuserinteraction;
 
-                  pelemental->fore_on_mouse_move(pmouse);
+               //if (pelemental)
+               //{
 
-               }
+               //   pelemental->fore_on_mouse_move(pmouse);
+
+               //}
 
                if (!pmouse->m_bRet)
                {
 
 
-                  if (pelemental)
-                  {
+                  //if (pelemental)
+                  //{
 
-                     pelemental->fore_on_mouse_move(pmouse);
+                     back_on_mouse_move(pmouse);
 
-                  }
+                  //}
 
                }
 
