@@ -504,12 +504,12 @@ namespace win32
 //
             //session()->get_application(strAppId, true);
 
-            m_papplication->_post([this]()
-               {
+            //m_papplication->_post([this]()
+            //   {
 
-                  m_papplication->m_bReadyToAttendRequests = true;
+            //      m_papplication->m_bReadyToAttendRequests = true;
 
-               });
+            //   });
 
             main();
 
