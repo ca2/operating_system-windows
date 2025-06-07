@@ -17,6 +17,29 @@
 #include "acme/operating_system/windows/windows.h"
 
 
+void win32_post(HWND hwnd, const ::procedure& procedure)
+{
+
+   auto p = procedure.m_pbase.m_p;
+
+   p->increment_reference_count();
+
+   PostMessage(hwnd, WM_APP+ 876, 0, (LPARAM) p);
+
+}
+
+
+void win32_send(HWND hwnd, const ::procedure& procedure)
+{
+
+   auto p = procedure.m_pbase.m_p;
+
+   p->increment_reference_count();
+
+   SendMessage(hwnd, WM_APP + 876, 0, (LPARAM)p);
+
+}
+
 CLASS_DECL_ACME bool _c_simple_message_loop_step();
 
 CLASS_DECL_ACME string task_get_name();
@@ -814,6 +837,13 @@ namespace win32
 
             }
             break;
+            case WM_NCMOUSEMOVE:
+            {
+
+               debug() << "WM_NCMOUSEMOVE";
+
+            }
+               break;
             case WM_MOUSEMOVE:
             {
 
@@ -1135,7 +1165,7 @@ namespace win32
          void window::show_window()
          {
 
-            main_post([this]()
+            main_send([this]()
                {
 
                   if (!::IsWindow(m_hwnd))
@@ -1145,11 +1175,68 @@ namespace win32
 
                   }
 
-                  ::ShowWindow(m_hwnd, SW_SHOW);
+                  DWORD dwPid;
+                  HWND hwndForeground = ::GetForegroundWindow();
+                  DWORD dwThread = GetWindowThreadProcessId(
+                     hwndForeground,
+                     &dwPid
+                  );
+                  auto dwCurrentPid = GetCurrentProcessId();
+                  warning() << "dwThread = " << dwThread;
+                  warning() << "hwndForeground = " << (iptr) hwndForeground;
+                  warning() << "m_hwnd         = " << (iptr) m_hwnd;
+                  warning() << "dwPid          = " << dwPid;
+                  warning() << "dwCurrentPid   = " << dwCurrentPid;
 
-                  ::UpdateWindow(m_hwnd);
 
-                  ::BringWindowToTop(m_hwnd);
+                  if(dwThread && hwndForeground != m_hwnd && dwPid == dwCurrentPid)
+                  { 
+
+                     ::ShowWindow(m_hwnd, SW_SHOWNOACTIVATE);
+
+                     warning() << "ShowWindow  SW_SHOWNOACTIVATE at thread " << ::GetCurrentThreadId();
+
+                     win32_post(hwndForeground, [this]()
+                        {
+
+                           warning() << "Before SetForegroundWindow  At thread " << ::GetCurrentThreadId();
+
+                           ::SetForegroundWindow(m_hwnd);
+
+                           warning() << "SetForegroundWindow  At thread " << ::GetCurrentThreadId();
+
+                           win32_post(m_hwnd, [this]()
+                              {
+
+                                 warning() << "SetActiveWindow  At thread " << ::GetCurrentThreadId();
+
+                                 ::SetActiveWindow(m_hwnd);
+
+                                 ::SetFocus(m_hwnd);
+
+                                 ::UpdateWindow(m_hwnd);
+
+                                 ::BringWindowToTop(m_hwnd);
+
+                                 debug() << "Show window";
+
+                              });
+
+                        });
+
+
+                  }
+                  else
+                  {
+                     ::SetForegroundWindow(m_hwnd);
+
+                     ::ShowWindow(m_hwnd, SW_SHOW);
+
+                     ::UpdateWindow(m_hwnd);
+
+                     ::BringWindowToTop(m_hwnd);
+                  }
+
 
             });
 
