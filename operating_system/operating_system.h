@@ -9,12 +9,15 @@
 #undef ERROR
 
 
+#define ISOLATION_AWARE_ENABLED 1
+
+
 #define NOMINMAX
 
 
-#ifdef USUAL_OPERATING_SYSTEM_SUPPRESSIONS
-#define NOGDI
-#endif
+//#ifdef USUAL_OPERATING_SYSTEM_SUPPRESSIONS
+//#define NOGDI
+//#endif
 
 
 //

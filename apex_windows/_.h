@@ -24,7 +24,4 @@ namespace apex_windows
 } // namespace apex_windows
 
 
-//CLASS_DECL_APEX_WINDOWS HRESULT win_create_link(const ::wide_character * pszPathObj, const ::wide_character * pszPathLink, const ::wide_character * pszDesc, const ::wide_character * pszIconPath, int iIcon);
-
-
 
