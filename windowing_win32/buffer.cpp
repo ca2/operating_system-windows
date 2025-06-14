@@ -154,7 +154,7 @@ namespace windowing_win32
    bool buffer::create_window_device_context(const ::int_size & size, int iStrideParam)
    {
 
-      if (m_papplication->m_bUseSwapChainWindow)
+      if (m_papplication->m_gpu.m_bUseSwapChainWindow)
       {
 
          return true;
@@ -216,7 +216,7 @@ namespace windowing_win32
    void buffer::destroy_window_device_context()
    {
 
-      if (m_papplication->m_bUseSwapChainWindow)
+      if (m_papplication->m_gpu.m_bUseSwapChainWindow)
       {
 
          return;
@@ -263,7 +263,7 @@ namespace windowing_win32
 
       }
 
-      if (!m_papplication->m_bUseSwapChainWindow)
+      if (!m_papplication->m_gpu.m_bUseSwapChainWindow)
       {
 
          if (!double_buffer::_on_begin_draw(pbufferitem))
@@ -326,7 +326,7 @@ namespace windowing_win32
 
       ::pointer < layered_window_buffer > playeredwindowbuffer;
 
-      if (bLayered && ! m_papplication->m_bUseSwapChainWindow)
+      if (bLayered && ! m_papplication->m_gpu.m_bUseSwapChainWindow)
       {
 
          auto & pparticleData = pbufferitem->m_pparticleData;
@@ -495,7 +495,20 @@ namespace windowing_win32
 
             pbufferitem->m_pgraphics->m_puserinteraction = dynamic_cast < ::user::interaction * >( m_pwindow->m_pacmeuserinteraction.m_p);
 
-            pbufferitem->m_pgraphics->create_memory_graphics(pbufferitem->m_sizeBufferItemDraw);
+            //if (m_papplication->m_gpu.m_bUseSwapChainWindow)
+            //{
+
+            //   pbufferitem->m_pgraphics->create_offscreen_graphics_for_swap_chain_blitting(pbufferitem->m_sizeBufferItemDraw);
+
+            //}
+            //else
+            //{
+
+            pbufferitem->m_pgraphics->create_for_window_drawing(pbufferitem->m_sizeBufferItemDraw);
+
+               //pbufferitem->m_pgraphics->create_memory_graphics(pbufferitem->m_sizeBufferItemDraw);
+
+//            }
 
             //pbufferitem->m_pgraphics->set_hint_window_output();
 
@@ -666,7 +679,7 @@ namespace windowing_win32
       }
       ::cast < ::windowing_win32::window  > pwindow = m_pwindow;
       //if (!bLayered && !pwindow->m_hglrcProto)
-      if (!bLayered && !m_papplication->m_bUseSwapChainWindow)
+      if (!bLayered && !m_papplication->m_gpu.m_bUseSwapChainWindow)
       {
 
          //::cast < ::windowing_win32::window  > pwindow = m_pwindow;
@@ -1342,18 +1355,18 @@ namespace windowing_win32
                      {
 
 
-                        if (m_papplication->m_bUseSwapChainWindow)
+                        if (m_papplication->m_gpu.m_bUseSwapChainWindow)
                         {
 
-                           auto pgraphics = pbufferitem->g();
+                           //auto pgraphics = pbufferitem->g();
 
-                           pgraphics->do_on_context([this, pgraphics,
-                              pbufferitem]
-                              {
+                           //pgraphics->do_on_context([this, pgraphics,
+                           //   pbufferitem]
+                           //   {
 
-                                 pgraphics->on_present();
+                           //      pgraphics->on_present();
 
-                           });
+                           //});
 
                         }
                         else

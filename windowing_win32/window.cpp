@@ -8083,7 +8083,7 @@ namespace windowing_win32
       if (message == WM_PAINT)
       {
 
-         if (m_papplication->m_bUseSwapChainWindow)
+         if (m_papplication->m_gpu.m_bUseSwapChainWindow)
          {
 
             return ::DefWindowProc(m_hwnd, message, wparam, lparam);
