@@ -19,6 +19,7 @@ namespace acme_windows
       public:
 
 
+
          bool              m_bMsys2;
          ::string          m_strVs;
          ::string          m_strContext;
