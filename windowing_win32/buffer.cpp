@@ -1196,6 +1196,13 @@ namespace windowing_win32
 
                      //}
 
+                     if (rectangleRequest.is_empty())
+                     {
+
+                        return;
+
+                     }
+
                      bool bDifferent = rectangleWindow != rectangleRequest;
 
                      auto hwndInsertAfter = pwindow->m_hwndSetWindowPosLastInsertAfter;
