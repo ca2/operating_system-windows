@@ -559,6 +559,21 @@ namespace windowing_win32
    void buffer::update_screen()
    {
 
+      //if (m_pwindow->m_ptaskUpdateScreen)
+      //{
+
+      //   m_pwindow->m_ptaskUpdateScreen->_post([this]()
+      //      {
+
+      //         double_buffer::update_screen();
+
+      //      });
+
+      //   m_happeningUpdateScreen.set_happening();
+
+      //   return;
+      //}
+
       if (m_ptaskUpdateScreen)
       {
 
