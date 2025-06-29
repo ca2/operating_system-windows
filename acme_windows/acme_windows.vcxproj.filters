@@ -297,5 +297,8 @@
     <ClInclude Include="directory_system.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="dxgi_device_source.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

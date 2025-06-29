@@ -24,6 +24,7 @@ namespace acme_windows
       context::context()
       {
 
+
          m_bMsys2 = false;
 
 #ifdef WINDOWS

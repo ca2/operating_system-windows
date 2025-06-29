@@ -592,7 +592,9 @@ namespace windowing_win32
 
                   ::image::image_drawing imagedrawing(imagedrawingoptions, imagesource);
 
-                  pimageResized->g()->set_compositing_quality(::draw2d::e_compositing_quality_high_quality);
+                  auto pgraphicsImageResized = pimageResized->g();
+
+                  pgraphicsImageResized->set_compositing_quality(::draw2d::e_compositing_quality_high_quality);
 
                   pimageResized->draw(imagedrawing);
 

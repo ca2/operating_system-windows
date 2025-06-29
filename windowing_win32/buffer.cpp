@@ -493,7 +493,7 @@ namespace windowing_win32
 
             __øconstruct(pbufferitem->m_pgraphics);
 
-            pbufferitem->m_pgraphics->m_puserinteraction = dynamic_cast < ::user::interaction * >( m_pwindow->m_pacmeuserinteraction.m_p);
+            auto puserinteraction = dynamic_cast < ::user::interaction * >( m_pwindow->m_pacmeuserinteraction.m_p);
 
             //if (m_papplication->m_gpu.m_bUseSwapChainWindow)
             //{
@@ -504,7 +504,7 @@ namespace windowing_win32
             //else
             //{
 
-            pbufferitem->m_pgraphics->create_for_window_drawing(pbufferitem->m_sizeBufferItemDraw);
+            pbufferitem->m_pgraphics->create_for_window_draw2d(puserinteraction, pbufferitem->m_sizeBufferItemDraw);
 
                //pbufferitem->m_pgraphics->create_memory_graphics(pbufferitem->m_sizeBufferItemDraw);
 
@@ -558,6 +558,21 @@ namespace windowing_win32
 
    void buffer::update_screen()
    {
+
+      //if (m_pwindow->m_ptaskUpdateScreen)
+      //{
+
+      //   m_pwindow->m_ptaskUpdateScreen->_post([this]()
+      //      {
+
+      //         double_buffer::update_screen();
+
+      //      });
+
+      //   m_happeningUpdateScreen.set_happening();
+
+      //   return;
+      //}
 
       if (m_ptaskUpdateScreen)
       {
@@ -1195,6 +1210,13 @@ namespace windowing_win32
                      //   return false;
 
                      //}
+
+                     if (rectangleRequest.is_empty())
+                     {
+
+                        return;
+
+                     }
 
                      bool bDifferent = rectangleWindow != rectangleRequest;
 
