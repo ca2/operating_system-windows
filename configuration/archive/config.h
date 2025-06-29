@@ -7,3 +7,8 @@
 
 #include "configuration/config.h"
 
+#define ARCHIVE_CRYPTO_MD5_WIN 1
+#define ARCHIVE_CRYPTO_SHA1_WIN 1
+#define ARCHIVE_CRYPTO_SHA256_WIN 1
+#define ARCHIVE_CRYPTO_SHA384_WIN 1
+#define ARCHIVE_CRYPTO_SHA512_WIN 1
