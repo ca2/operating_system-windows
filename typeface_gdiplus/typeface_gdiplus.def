@@ -1,0 +1,5 @@
+LIBRARY "typeface_gdiplus"
+
+EXPORTS
+typeface_gdiplus_factory
+
