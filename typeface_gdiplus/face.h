@@ -31,7 +31,7 @@ namespace typeface_gdiplus
 
       virtual void create_character(::typeface::character& ch, const ::scoped_string& scopedstr);
 
-      void create_draw_buffers();
+      //void create_draw_buffers();
 
       //void create_texture(::typeface::character& ch, const unsigned char* p);
 
