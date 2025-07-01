@@ -633,6 +633,13 @@ namespace windowing_win32
 
       }
 
+      if (puserinteraction->is_graphical())
+      {
+
+         draw2d()->on_before_create_window(this);
+
+      }
+
 
       //dwStyle = WS_VISIBLE | WS_POPUP;
 
