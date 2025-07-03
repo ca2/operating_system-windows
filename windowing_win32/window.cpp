@@ -25,6 +25,7 @@
 #include "acme/prototype/geometry2d/_text_stream.h"
 #include "acme/windowing/windowing.h"
 //#include "aura_windows/interaction_impl.h"
+#include "apex/gpu/approach.h"
 #include "aura/graphics/draw2d/draw2d.h"
 #include "aura/graphics/draw2d/graphics.h"
 #include "aura/graphics/graphics/graphics.h"
@@ -636,7 +637,16 @@ namespace windowing_win32
       if (puserinteraction->is_graphical())
       {
 
-         draw2d()->on_before_create_window(this);
+         if(m_papplication->m_bGpu)
+         {
+            
+            auto pgpuapproach = m_papplication->get_gpu_approach();
+
+            pgpuapproach->on_before_create_window(this);
+
+         }
+
+         //draw2d()->on_before_create_window(this);
 
       }
 
@@ -720,7 +730,12 @@ namespace windowing_win32
       if (puserinteraction->is_graphical())
       {
 
-         draw2d()->on_create_window(this);
+         if(m_papplication->m_bGpu)
+         {
+            auto pgpuapproach = m_papplication->get_gpu_approach();
+            pgpuapproach->on_create_window(this);
+         }
+         //draw2d()->on_create_window(this);
 
       }
 
