@@ -124,7 +124,7 @@ namespace typeface_gdiplus
          //FontFamily* m_pfamily(L"Segoe UI");
          m_pfont = new Font(m_pfamily, m_iPixelSize, FontStyleRegular, UnitPixel);
 
-         create_draw_buffers();
+         //create_draw_buffers();
 
       }
 
