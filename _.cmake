@@ -15,6 +15,7 @@ set(CONFIGURATION_NAME ${CMAKE_BUILD_TYPE})
 
 set(PLATFORM_NAME "windows")
 set(OPERATING_SYSTEM_NAME "windows")
+set(OPERATING_SYSTEM_LOWERED_NAME "windows")
 set(WIN32 TRUE)
 set(UWP FALSE)
 set(LINUX FALSE)
@@ -54,6 +55,7 @@ list(APPEND app_common_dependencies
    node_windows
    windowing_win32
    operating_ambient_windows
+        draw2d_cairo
 )
 
 
@@ -71,6 +73,7 @@ message(STATUS "CMAKE_BINARY_DIR is ${CMAKE_BINARY_DIR}")
 message(STATUS "LIBRARY_OUTPUT_PATH is ${LIBRARY_OUTPUT_PATH}")
 
 link_directories(${LIBRARY_OUTPUT_PATH})
+link_directories(${WORKSPACE_FOLDER}/../operating_system/storage-${OPERATING_SYSTEM_NAME}/${PLATFORM_CONFIGURATION}/library)
 link_directories(${WORKSPACE_FOLDER}/../operating_system/storage-${OPERATING_SYSTEM_NAME}/${PLATFORM_CONFIGURATION}/${CMAKE_BUILD_TYPE}/library)
 link_directories(${WORKSPACE_FOLDER}/../operating_system/storage-${OPERATING_SYSTEM_NAME}/${PLATFORM_CONFIGURATION}/${CMAKE_BUILD_TYPE}/third/library)
 
