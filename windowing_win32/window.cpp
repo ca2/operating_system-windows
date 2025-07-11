@@ -38,7 +38,7 @@
 #include "aura/platform/session.h"
 #include "aura/platform/system.h"
 #include "aura/windowing/placement_log.h"
-#include "acme_windows_common/comptr.h"
+#include "acme/operating_system/windows_common/com/comptr.h"
 #include "acme_windowing_win32/activation_token.h"
 
 #include "acme/_operating_system.h"

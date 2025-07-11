@@ -2,7 +2,7 @@
 #pragma once
 
 
-#include "configuration/config.h"
+#include "configuration/config.h.h"
 
 
 #undef Z_HAVE_UNISTD_H

@@ -9,8 +9,8 @@
 #include "acme/platform/node.h"
 #include "acme/prototype/string/adaptor.h"
 #include "acme/prototype/string/str.h"
-#include "acme_windows_common/cotaskptr.h"
-#include "acme_windows_common/hresult_exception.h"
+#include "acme/operating_system/windows_common/com/cotaskptr.h"
+#include "acme/operating_system/windows_common/com/hresult_exception.h"
 
 #include "acme/_operating_system.h"
 #include <Shlobj.h>

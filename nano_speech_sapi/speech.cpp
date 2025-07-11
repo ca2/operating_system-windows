@@ -7,7 +7,7 @@
 #include "acme/parallelization/synchronous_lock.h"
 #include "acme/platform/node.h"
 #include "acme/_operating_system.h"
-#include "acme_windows_common/cotaskptr.h"
+#include "acme/operating_system/windows_common/com/cotaskptr.h"
 #include <sapi.h>
 
 

@@ -3,7 +3,7 @@
 
 
 #include "acme_windows_common/path_system.h"
-#include "acme_windows_common/comptr.h"
+#include "acme/operating_system/windows_common/com/comptr.h"
 
 
 #include <shobjidl_core.h>

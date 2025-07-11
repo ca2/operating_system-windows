@@ -27,12 +27,12 @@
 #include "acme/_operating_system.h"
 
 
-#include "acme_windows_common/hresult_exception.h"
-#include "acme_windows_common/comptr.h"
-#include "acme_windows_common/cotaskptr.h"
+#include "acme/operating_system/windows_common/com/hresult_exception.h"
+#include "acme/operating_system/windows_common/com/comptr.h"
+#include "acme/operating_system/windows_common/com/cotaskptr.h"
 #include "acme_windows_common/security_attributes.h"
-#include "acme_windows_common/bstring.h"
-#include "acme_windows_common/variant.h"
+#include "acme/operating_system/windows_common/com/bstring.h"
+#include "acme/operating_system/windows_common/com/variant.h"
 #include <Shldisp.h>
 #include <shellapi.h>
 

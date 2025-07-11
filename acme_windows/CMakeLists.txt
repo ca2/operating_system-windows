@@ -76,18 +76,21 @@ list(APPEND library_source
 
 set_source_files_properties(_no_pch.cpp PROPERTIES SKIP_PRECOMPILE_HEADERS ON)
 
-add_library(acme_windows SHARED ${library_source})
+add_library(${PROJECT_NAME} SHARED ${library_source})
+add_library(static_${PROJECT_NAME} STATIC ${library_source})
 
-target_precompile_headers(acme_windows PRIVATE framework.h)
+target_precompile_headers(${PROJECT_NAME} PRIVATE framework.h)
+target_precompile_headers(static_${PROJECT_NAME} PRIVATE framework.h)
 
-set_target_properties(acme_windows PROPERTIES LINKER_LANGUAGE CXX)
+set_target_properties(${PROJECT_NAME} PROPERTIES LINKER_LANGUAGE CXX)
+target_compile_definitions(static_${PROJECT_NAME} PRIVATE CUBE)
 
 if (MSVC)
-    target_compile_options(acme_windows PRIVATE "/MD$<$<CONFIG:Debug>:d>")
-    target_link_options(acme_windows PRIVATE "/DEFAULTLIB:msvcrt$<$<CONFIG:Debug>:d>")
-    target_link_options(acme_windows PRIVATE "/IMPLIB:${LIBRARY_OUTPUT_PATH}/acme_windows.lib")
-    target_link_options(acme_windows PRIVATE "/DEF:${CMAKE_CURRENT_SOURCE_DIR}/acme_windows.def")
-    target_link_libraries(acme_windows PRIVATE
+    target_compile_options(${PROJECT_NAME} PRIVATE "/MD$<$<CONFIG:Debug>:d>")
+    target_link_options(${PROJECT_NAME} PRIVATE "/DEFAULTLIB:msvcrt$<$<CONFIG:Debug>:d>")
+    target_link_options(${PROJECT_NAME} PRIVATE "/IMPLIB:${LIBRARY_OUTPUT_PATH}/${PROJECT_NAME}.lib")
+    target_link_options(${PROJECT_NAME} PRIVATE "/DEF:${CMAKE_CURRENT_SOURCE_DIR}/${PROJECT_NAME}.def")
+    target_link_libraries(${PROJECT_NAME} PRIVATE
        acme_windows_common
        acme
        apex
@@ -102,20 +105,25 @@ elseif(LINUX)
         #pkg_check_modules(PKGCONFIG glib-2.0 gtk+-3.0 gdk-3.0 appindicator-0.1)
         pkg_check_modules(PKGCONFIG glib-2.0 freetype2 gtk+-3.0 gdk-3.0)
     endif()
-    target_compile_options(acme_windows PRIVATE ${PKGCONFIG_CFLAGS})
-    #target_compile_options(acme_windows PRIVATE -std=c++14)
-    #target_link_options(acme_windows PRIVATE ${GTK_LDFLAGS})
-    target_link_options(acme_windows PRIVATE -Wl,-rpath=\$ORIGIN)
-    target_link_libraries(acme_windows PRIVATE z dl pthread ncurses X11 Xrender Xinerama Xft ${PKGCONFIG_LIBRARIES})
-    target_link_options(acme_windows PRIVATE -Wl,-z,defs)
+    target_compile_options(${PROJECT_NAME} PRIVATE ${PKGCONFIG_CFLAGS})
+    #target_compile_options(${PROJECT_NAME} PRIVATE -std=c++14)
+    #target_link_options(${PROJECT_NAME} PRIVATE ${GTK_LDFLAGS})
+    target_link_options(${PROJECT_NAME} PRIVATE -Wl,-rpath=\$ORIGIN)
+    target_link_libraries(${PROJECT_NAME} PRIVATE z dl pthread ncurses X11 Xrender Xinerama Xft ${PKGCONFIG_LIBRARIES})
+    target_link_options(${PROJECT_NAME} PRIVATE -Wl,-z,defs)
     message("PKGCONFIG_LIBRARIES is " ${PKGCONFIG_LIBRARIES})
 endif()
 
 
 
-target_include_directories(acme_windows PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../..)
-target_include_directories(acme_windows PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/..)
-target_include_directories(acme_windows PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
+list(APPEND library_include_directories ${CMAKE_CURRENT_SOURCE_DIR}/../..)
+list(APPEND library_include_directories ${CMAKE_CURRENT_SOURCE_DIR}/..)
+list(APPEND library_include_directories ${CMAKE_CURRENT_SOURCE_DIR})
+
+
+target_include_directories(${PROJECT_NAME} PRIVATE ${library_include_directories})
+target_include_directories(static_${PROJECT_NAME} PRIVATE ${library_include_directories})
+
 
 
 target_compile_definitions(${PROJECT_NAME} PRIVATE _${PROJECT_NAME}_project)

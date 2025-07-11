@@ -52,7 +52,7 @@
 
 //int main() {
 
-#include "acme_windows_common/cotaskptr.h"
+#include "acme/operating_system/windows_common/com/cotaskptr.h"
 
 #include "acme_windows/registry.h"
 #include "acme_windows/itemidlist.h"

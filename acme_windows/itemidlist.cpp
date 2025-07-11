@@ -2,7 +2,7 @@
 #include "itemidlist.h"
 #include "known_folder_struct.h"
 #include "acme/exception/exception.h"
-#include "acme_windows_common/cotaskptr.h"
+#include "acme/operating_system/windows_common/com/cotaskptr.h"
 
 
 itemidlist::itemidlist() :

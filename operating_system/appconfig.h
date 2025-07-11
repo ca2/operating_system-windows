@@ -14,6 +14,8 @@
 #define default_networking networking_bsd
 #define acme_node acme_windows
 #define apex_node apex_windows
+#define default_nano_http nano_http_wininet
+#define default_nano_compress nano_compress_windows
 
 
 

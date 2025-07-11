@@ -16,7 +16,7 @@
 #include <cstring>
 
 //using serial::port_info;
-
+#pragma comment(lib, "setupapi.lib")
 static const DWORD port_name_max_length = 256;
 static const DWORD friendly_name_max_length = 256;
 static const DWORD hardware_id_max_length = 256;

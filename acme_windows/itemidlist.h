@@ -14,7 +14,7 @@
 --------------------------------------*/
 
 #include "acme/prototype/prototype/particle.h"
-#include "acme_windows_common/comptr.h"
+#include "acme/operating_system/windows_common/com/comptr.h"
 #include "acme/_operating_system.h"
 #include <Shlobj.h>
 #include <shellapi.h>
