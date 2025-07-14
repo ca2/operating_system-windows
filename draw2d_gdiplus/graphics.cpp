@@ -574,12 +574,12 @@ namespace draw2d_gdiplus
    }
 
 
-   double_size graphics::set_window_ext(const ::double_size & size)
-   {
+   //double_size graphics::set_window_ext(const ::double_size & size)
+   //{
 
-      return set_window_ext(size.cx(), size.cy());
+   //   return set_window_ext(size.cx(), size.cy());
 
-   }
+   //}
 
 
    //void graphics::DPtoLP(::double_point * pPoints, ::collection::count nCount)
@@ -4746,28 +4746,28 @@ namespace draw2d_gdiplus
    }
 
 
-   double_size graphics::set_window_ext(double x, double y)
-   {
-      ::double_size size(0, 0);
-      //if(get_handle1() != nullptr && get_handle1() != get_handle2())
-      //   ::SetWindowExtEx(get_handle1(), x, y, &::double_size);
-      //if(get_handle2() != nullptr)
-      //   ::SetWindowExtEx(get_handle2(), x, y, &::double_size);
-      return size;
-   }
+   //double_size graphics::set_window_ext(double x, double y)
+   //{
+   //   ::double_size size(0, 0);
+   //   //if(get_handle1() != nullptr && get_handle1() != get_handle2())
+   //   //   ::SetWindowExtEx(get_handle1(), x, y, &::double_size);
+   //   //if(get_handle2() != nullptr)
+   //   //   ::SetWindowExtEx(get_handle2(), x, y, &::double_size);
+   //   return size;
+   //}
 
 
-   double_size graphics::scale_window_ext(double xNum, double xDenom, double yNum, double yDenom)
-   {
+   //double_size graphics::scale_window_ext(double xNum, double xDenom, double yNum, double yDenom)
+   //{
 
-      ::double_size size(0, 0);
-      //if(get_handle1() != nullptr && get_handle1() != get_handle2())
-      //   ::ScaleWindowExtEx(get_handle1(), xNum, xDenom, yNum, yDenom, &::double_size);
-      //if(get_handle2() != nullptr)
-      //   ::ScaleWindowExtEx(get_handle2(), xNum, xDenom, yNum, yDenom, &::double_size);
-      return size;
+   //   ::double_size size(0, 0);
+   //   //if(get_handle1() != nullptr && get_handle1() != get_handle2())
+   //   //   ::ScaleWindowExtEx(get_handle1(), xNum, xDenom, yNum, yDenom, &::double_size);
+   //   //if(get_handle2() != nullptr)
+   //   //   ::ScaleWindowExtEx(get_handle2(), xNum, xDenom, yNum, yDenom, &::double_size);
+   //   return size;
 
-   }
+   //}
 
 
    int graphics::get_clip_box(::double_rectangle & rectangle)

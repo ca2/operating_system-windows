@@ -6509,14 +6509,14 @@ namespace windowing_win32
    }
 
 
-   void window::set_origin(::draw2d::graphics_pointer & pgraphics)
-   {
+   //void window::set_origin(::draw2d::graphics_pointer & pgraphics)
+   //{
 
-      // graphics will be already set its impact port to the window for linux - cairo with xlib
+   //   // graphics will be already set its impact port to the window for linux - cairo with xlib
 
-      pgraphics->set_origin(::int_point());
+   //   pgraphics->set_origin(::int_point());
 
-   }
+   //}
 
 
    void window::on_set_parent(::user::interaction * puserinteraction) {

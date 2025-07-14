@@ -167,9 +167,9 @@ namespace draw2d_gdiplus
 
       // Window extent
       virtual double_size GetWindowExt() override;
-      virtual double_size set_window_ext(double cx, double cy) override;
-      virtual double_size set_window_ext(const ::double_size & size) override;
-      virtual double_size scale_window_ext(double xNum, double xDenom, double yNum, double yDenom) override;
+      //virtual double_size set_window_ext(double cx, double cy) override;
+      //virtual double_size set_window_ext(const ::double_size & size) override;
+      //virtual double_size scale_window_ext(double xNum, double xDenom, double yNum, double yDenom) override;
 
       // Coordinate Functions
       //void DPtoLP(::double_point * pPoints,count nCount = 1) override;

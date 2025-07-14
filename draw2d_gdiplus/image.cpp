@@ -167,9 +167,9 @@ namespace draw2d_gdiplus
 
       m_pgraphics->m_pimage = this;
 
-      m_pgraphics->set_origin(0, 0);
+      m_pgraphics->reset_impact_area();
 
-      m_sizeAlloc = ppixmap->size();
+      m_sizeRaw = ppixmap->size();
 
       set_ok_flag();
 
@@ -286,7 +286,7 @@ namespace draw2d_gdiplus
 
       //}
 
-      pgraphics->set_origin(origin());
+      pgraphics->place_impact_area(0., 0., m_sizeRaw.cx(), m_sizeRaw.cy());
       //
       //if (!)
       //{
@@ -325,7 +325,7 @@ namespace draw2d_gdiplus
       m_pgraphics->m_pimage = this;
       //m_sizeRaw.cx() = width;
       //m_sizeRaw.cy() = height;
-      m_sizeAlloc = size;
+      m_sizeRaw = size;
       //m_sizeAlloc.cy() = height;
 
       //if (pbitmapPrevious && pgraphicsPrevious)
