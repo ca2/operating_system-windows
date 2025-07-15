@@ -386,6 +386,11 @@ namespace acme_windows
 
       ::string get_host_name() override;
 
+
+      ::file::path _get_font_path_from_name(const ::scoped_string & scopedstrName) override;
+      virtual ::file::path __get_font_path_from_name(const ::scoped_string& scopedstrName, bool bTrueType);
+
+
    };
 
 

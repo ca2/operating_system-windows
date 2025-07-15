@@ -5210,6 +5210,83 @@ namespace acme_windows
    }
 
 
+   ::file::path node::_get_font_path_from_name(const ::scoped_string & scopedstrName) 
+   {
+      
+      auto path = __get_font_path_from_name(scopedstrName, true);
+
+      if (path.is_empty())
+      {
+
+         path = __get_font_path_from_name(scopedstrName, false);
+
+         if (path.is_empty())
+         {
+
+            path = __get_font_path_from_name(scopedstrName + " Regular", true);
+
+         }
+
+      }
+
+      return path;
+
+   }
+
+
+   ::file::path node::__get_font_path_from_name(const ::scoped_string& scopedstrName, bool bTrueType)
+   {
+      HKEY hKey;
+      const char* fonts_reg_path = "SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Fonts";
+
+      // Open the Fonts registry key
+      if (RegOpenKeyExA(HKEY_LOCAL_MACHINE, fonts_reg_path, 0, KEY_READ, &hKey) != ERROR_SUCCESS)
+         return {};
+
+      DWORD index = 0;
+      CHAR value_name[256];
+      BYTE data[260];
+      DWORD value_name_len, data_len, type;
+      BOOL found = FALSE;
+
+      ::string str;
+
+
+
+      ::string strName(scopedstrName);
+
+      if (bTrueType)
+      {
+
+         strName += " (TrueType)";
+
+      }
+
+      while (!found) {
+         value_name_len = sizeof(value_name);
+         data_len = sizeof(data);
+         if (RegEnumValueA(hKey, index++, value_name, &value_name_len, NULL, &type, data, &data_len) != ERROR_SUCCESS)
+            break;
+
+         if (type == REG_SZ && strName.case_insensitive_equals(value_name)) {
+            // Found the matching font
+            char windows_dir[MAX_PATH];
+            GetWindowsDirectoryA(windows_dir, MAX_PATH);
+
+
+            str.formatf("%s\\Fonts\\%s", windows_dir, (char*)data);
+
+            // Combine with Fonts path
+
+            found = TRUE;
+         }
+      }
+
+      RegCloseKey(hKey);
+      return str;
+   }
+
+
 } // namespace acme_windows
 
 
