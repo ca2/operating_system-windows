@@ -1,5 +1,5 @@
 // Created by camilo on 2023-03-11 00:05 BRT <3ThomasBorregaardSorensen!!
-#include "configuration/config.h"
+#include "configuration/common_configuration.h"
 
 
 #define _CRT_SECURE_NO_WARNINGS
