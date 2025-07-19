@@ -252,8 +252,8 @@ namespace draw2d_gdiplus
       double_point current_position() override;
 //      int_point move_to(double x, double y) override;
       //    int_point move_to(const ::int_point & point) override;
-      using ::draw2d::graphics::line_to;
-      virtual void line_to(double x, double y) override;
+      using ::draw2d::graphics::line;
+      void line(double x1, double y1, double x2, double y2) override;
       //bool line_to(const ::double_point& point) override;
       //  bool line_to(const ::int_point & point) override;
       virtual void polyline(const ::double_point * ppoint, ::collection::count nCount) override;
@@ -644,7 +644,7 @@ namespace draw2d_gdiplus
       void sync_flush() override;
 
       //void draw_line(double x1, double y1, double x2, double y2) override;
-      void draw_line(double x1, double y1, double x2, double y2, ::draw2d::pen * ppen) override;
+      void line(double x1, double y1, double x2, double y2, ::draw2d::pen * ppen) override;
 
       //void draw_line(const ::double_point & point1, const ::double_point & point2, ::draw2d::pen * ppen) override;
 

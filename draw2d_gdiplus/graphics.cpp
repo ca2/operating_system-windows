@@ -7129,7 +7129,7 @@ namespace draw2d_gdiplus
    }
 
 
-   void graphics::line_to(double x, double y)
+   void graphics::line(double x1, double y1, double x2, double y2)
    {
 
       if (::is_null(m_pgraphics))
@@ -7153,11 +7153,14 @@ namespace draw2d_gdiplus
 
       }
 
-      m_pgraphics->DrawLine(m_ppen->get_os_data < Gdiplus::Pen * >(this), Gdiplus::PointF((Gdiplus::REAL)m_point.x(), (Gdiplus::REAL)m_point.y()), Gdiplus::PointF((Gdiplus::REAL)x, (Gdiplus::REAL)y));
+      m_pgraphics->DrawLine(
+         m_ppen->get_os_data < Gdiplus::Pen * >(this),
+         Gdiplus::PointF((Gdiplus::REAL)x1, (Gdiplus::REAL)y1), 
+         Gdiplus::PointF((Gdiplus::REAL)x2, (Gdiplus::REAL)y2));
 
 
-      m_point.x() = x;
-      m_point.y() = y;
+      m_point.x() = x2;
+      m_point.y() = y2;
 
 
       //return true;
@@ -7209,7 +7212,7 @@ namespace draw2d_gdiplus
    //}
 
 
-   void graphics::draw_line(double x1, double y1, double x2, double y2, ::draw2d::pen * ppenParam)
+   void graphics::line(double x1, double y1, double x2, double y2, ::draw2d::pen * ppenParam)
    {
 
       if (::is_null(ppenParam))
