@@ -97,6 +97,13 @@ namespace acme_windows
 
       m_pshelllink = pacmepath->_get_IShellLinkW(m_path);
 
+      if (!m_pshelllink)
+      {
+
+         return;
+
+      }
+
       if (elink & ::file::e_link_target)
       {
 

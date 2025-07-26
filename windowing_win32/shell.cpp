@@ -1916,6 +1916,13 @@ namespace windowing_win32
 
          HICON hicon = nullptr;
 
+         if (iIcon == 356)
+         {
+
+            warning() << "iIcon == 356";
+
+         }
+
          HRESULT hr = pil->GetIcon(iIcon, ILD_TRANSPARENT, &hicon);
 
          if (hicon != nullptr)
