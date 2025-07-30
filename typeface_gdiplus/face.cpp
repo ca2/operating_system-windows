@@ -2,6 +2,7 @@
 // 2025-06-01 23:29 <3ThomasBorregaardSorensen!!
 #include "framework.h"
 #include "face.h"
+#include "aura/graphics/write_text/text_metric.h"
 
 #pragma comment(lib, "gdiplus.lib")
 
@@ -110,8 +111,8 @@ namespace typeface_gdiplus
 
    }
 
-   void face::create_character(::typeface::character& ch, const ::scoped_string& scopedstr)
-      //Character& face_freetype::get_character(const ::scoped_string& scopedstr)
+
+   void face::_defer_gdiplus_font_and_family()
    {
 
       if (!m_pfamily || !m_pfont)
@@ -127,6 +128,14 @@ namespace typeface_gdiplus
          //create_draw_buffers();
 
       }
+
+   }
+
+   void face::create_character(::typeface::character& ch, const ::scoped_string& scopedstr)
+      //Character& face_freetype::get_character(const ::scoped_string& scopedstr)
+   {
+
+      _defer_gdiplus_font_and_family();
 
       int fontSize = m_iPixelSize;
       wd32_character ia[2];
@@ -241,6 +250,78 @@ namespace typeface_gdiplus
 
       //auto grayscale = ExtractGrayscaleFromBitmap(bmp);
 
+
+   }
+
+
+   void face::get_text_metric(::write_text::text_metric* pmetric)
+   {
+
+      _defer_gdiplus_font_and_family();
+
+      Gdiplus::Font* pgdiplusfont = m_pfont;
+
+      if (pgdiplusfont == nullptr)
+      {
+
+         //return false;
+
+         throw ::exception(error_null_pointer);
+
+      }
+
+      Gdiplus::FontFamily* pgdiplusfontfamily = m_pfamily;
+
+      if (pgdiplusfontfamily == nullptr)
+      {
+
+         //return false;
+
+         throw ::exception(error_null_pointer);
+
+      }
+
+      INT iStyle = pgdiplusfont->GetStyle();
+
+      //Gdiplus::FontFamily family;
+
+      //pfont->GetFamily(&family);
+
+      double dEmHeight = pgdiplusfontfamily->GetEmHeight(iStyle);
+
+      double dCellAscent = pgdiplusfontfamily->GetCellAscent(iStyle);
+
+      double dCellDescent = pgdiplusfontfamily->GetCellDescent(iStyle);
+
+      double dLineSpacing = pgdiplusfontfamily->GetLineSpacing(iStyle);
+
+      double dFontSize = pgdiplusfont->GetSize();
+
+      HDC screenDC = GetDC(NULL);
+      Graphics measureGraphics(screenDC);
+      measureGraphics.SetTextRenderingHint(TextRenderingHintAntiAliasGridFit);
+
+
+      auto pg = (Gdiplus::Graphics*)&measureGraphics;
+
+      double dFontHeight = pgdiplusfont->GetHeight(pg);
+
+      auto dpiY = pg->GetDpiY();
+
+      //m_pgraphics->DrawLine(m_ppen->get_os_data < Gdiplus::Pen* >(this), Gdiplus::PointF((Gdiplus::REAL)m_point.x(), (Gdiplus::REAL)m_point.y()), Gdiplus::PointF((Gdiplus::REAL)x, (Gdiplus::REAL)y));
+      pmetric->m_dAscent = dFontSize * dCellAscent * pg->GetDpiY() / (dEmHeight * 72.0 + 0.5);
+
+      pmetric->m_dDescent = dFontSize * dCellDescent * pg->GetDpiY() / (dEmHeight * 72.0 + 0.5);
+
+      pmetric->m_dHeight = dFontHeight;
+
+      double dLineSpacing2 = maximum(dFontHeight, dFontSize * dLineSpacing * pg->GetDpiY() / (dEmHeight * 72.0 + 0.5));
+
+      pmetric->m_dInternalLeading = 0;
+
+      pmetric->m_dExternalLeading = dLineSpacing2 - (pmetric->m_dAscent + pmetric->m_dDescent);
+
+      ::ReleaseDC(NULL, screenDC);
 
    }
 

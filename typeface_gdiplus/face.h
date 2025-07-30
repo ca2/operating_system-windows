@@ -26,6 +26,9 @@ namespace typeface_gdiplus
       face();
       ~face() override;
 
+
+      virtual void _defer_gdiplus_font_and_family();
+
       //virtual character& get_character(const ::scoped_string& scopedstr);
 
 
@@ -34,6 +37,9 @@ namespace typeface_gdiplus
       //void create_draw_buffers();
 
       //void create_texture(::typeface::character& ch, const unsigned char* p);
+
+      void get_text_metric(::write_text::text_metric* ptextmetric);
+
 
 
    };
