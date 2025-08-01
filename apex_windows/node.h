@@ -77,9 +77,9 @@ namespace apex_windows
       virtual string multimedia_audio_get_default_implementation_name() override;
 
 
-      //virtual bool is_application_installed(const ::file::path& pathExe, string strAppId, string& strBuild, const ::string & pszPlatform, const ::string & pszConfiguration, const ::string & pszLocale, const ::string & pszSchema) override;
+      //virtual bool is_application_installed(const ::file::path& pathExe, string strAppId, string& strBuild, const ::scoped_string & scopedstrPlatform, const ::scoped_string & scopedstrConfiguration, const ::scoped_string & scopedstrLocale, const ::scoped_string & scopedstrSchema) override;
 
-      //virtual bool set_application_installed(const ::file::path& pathExe, string strAppId, const ::string & pszBuild, const ::string & pszPlatform, const ::string & pszConfiguration, const ::string & pszLocale, const ::string & pszSchema) override;
+      //virtual bool set_application_installed(const ::file::path& pathExe, string strAppId, const ::scoped_string & scopedstrBuild, const ::scoped_string & scopedstrPlatform, const ::scoped_string & scopedstrConfiguration, const ::scoped_string & scopedstrLocale, const ::scoped_string & scopedstrSchema) override;
 
       //virtual bool set_last_run_application_path(string strAppId) override;
 
@@ -136,10 +136,10 @@ namespace apex_windows
       ::payload connection_settings_get_auto_config_url() override;
 
 
-      void local_machine_set_run(const ::scoped_string & scopedstrKey, const ::file::path& pathExecutable, const ::string& strArguments, bool bSet) override;
-      void local_machine_set_run_once(const ::scoped_string & scopedstrKey, const ::file::path& pathExecutable, const ::string& strArguments, bool bSet) override;
-      void current_user_set_run(const ::scoped_string & scopedstrKey, const ::file::path& pathExecutable, const ::string& strArguments, bool bSet) override;
-      void current_user_set_run_once(const ::scoped_string & scopedstrKey, const ::file::path& pathExecutable, const ::string& strArguments, bool bSet) override;
+      void local_machine_set_run(const ::scoped_string & scopedstrKey, const ::file::path& pathExecutable, const ::scoped_string & scopedstrArguments, bool bSet) override;
+      void local_machine_set_run_once(const ::scoped_string & scopedstrKey, const ::file::path& pathExecutable, const ::scoped_string & scopedstrArguments, bool bSet) override;
+      void current_user_set_run(const ::scoped_string & scopedstrKey, const ::file::path& pathExecutable, const ::scoped_string & scopedstrArguments, bool bSet) override;
+      void current_user_set_run_once(const ::scoped_string & scopedstrKey, const ::file::path& pathExecutable, const ::scoped_string & scopedstrArguments, bool bSet) override;
       void defer_register_ca2_plugin_for_mozilla() override;
 
       void file_extension_get_open_with_list_keys(string_array& straKey, const ::scoped_string & scopedstrExtension) override;
@@ -171,11 +171,11 @@ namespace apex_windows
 
       void _getCredentialsForService(const ::scoped_string & scopedstrService, ::string& strUsername, ::string& strPassword);
 
-      void enable_service(const ::string& strServiceName, const ::string& strDisplayName, const ::string& strCommand, const ::string& strUser = "", const ::string& strPass = "") override;
-      void disable_service(const ::string& strServiceName) override;
+      void enable_service(const ::scoped_string & scopedstrServiceName, const ::scoped_string & scopedstrDisplayName, const ::scoped_string & scopedstrCommand, const ::scoped_string & scopedstrUser = "", const ::scoped_string & scopedstrPass = "") override;
+      void disable_service(const ::scoped_string & scopedstrServiceName) override;
 
-      void start_service(const ::string& strServiceName) override;
-      void stop_service(const ::string& strServiceName) override;
+      void start_service(const ::scoped_string & scopedstrServiceName) override;
+      void stop_service(const ::scoped_string & scopedstrServiceName) override;
 
       string calc_service_name();
 
@@ -208,9 +208,9 @@ namespace apex_windows
 
       void register_user_auto_start(::platform::application * papplication, const ::scoped_string & scopedstrArguments, bool bRegister) override;
 
-      bool is_user_auto_start(const ::string& strAppId) override;
+      bool is_user_auto_start(const ::scoped_string & scopedstrAppId) override;
 
-      ::file::path get_app_path(const ::string& strAppId) override;
+      ::file::path get_app_path(const ::scoped_string & scopedstrAppId) override;
 
       void set_default_browser() override;
 

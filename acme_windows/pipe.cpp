@@ -92,18 +92,16 @@ namespace acme_windows
    }
 
 
-   bool pipe::write(const ::string & psz)
+   bool pipe::write(const ::scoped_string & scopedstr)
    {
-
-      unsigned int dwLen = (unsigned int)strlen(psz);
 
       bool bSuccess = false;
 
       DWORD dwWritten;
 
-      bSuccess = WriteFile(m_hWrite, (const ::string &)psz,dwLen,&dwWritten,nullptr) != false;
+      bSuccess = WriteFile(m_hWrite, scopedstr.data(),scopedstr.size(),&dwWritten,nullptr) != false;
 
-      return bSuccess != false && dwWritten == dwLen;
+      return bSuccess != false && dwWritten == scopedstr.size();
 
    }
 

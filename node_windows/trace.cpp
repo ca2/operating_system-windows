@@ -203,7 +203,7 @@
 /////////////////////////////////////////////////////////////////////////////
 // DDE special case
 
-void TraceDDE(const ::string & pszPrefix, const MSG* pMsg)
+void TraceDDE(const ::scoped_string & scopedstrPrefix, const MSG* pMsg)
 
 {
    ENSURE_ARG(pMsg != nullptr);

@@ -14,14 +14,14 @@ namespace cross_windows
 
 
       file_memory_map();
-      file_memory_map(const ::string & psz, bool bRead, bool bWrite, bool bCreate, memsize size);
+      file_memory_map(const ::scoped_string & scopedstr, bool bRead, bool bWrite, bool bCreate, memsize size);
       virtual ~file_memory_map();
 
 
       void construct();
 
       bool open();
-      bool open(const ::string & psz, bool bRead, bool bWrite, bool bCreate, memsize size);
+      bool open(const ::scoped_string & scopedstr, bool bRead, bool bWrite, bool bCreate, memsize size);
       bool close();
 
       void * get_data();

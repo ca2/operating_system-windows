@@ -71,22 +71,22 @@ namespace windows
 
       static critical_section* s_pcriticalsection;
 
-      callstack(const ::string & pszFormat = default_format(), int iSkip = CALLSTACK_DEFAULT_SKIP_TRIGGER, void* caller_address = nullptr, int iCount = -1);
+      callstack(const ::scoped_string & scopedstrFormat = default_format(), int iSkip = CALLSTACK_DEFAULT_SKIP_TRIGGER, void* caller_address = nullptr, int iCount = -1);
       virtual ~callstack();
 
 
       //static void global_enable_stack_trace(bool bEnable = true);
       static const char* default_format() { return "%f(%l) %s\n"; }
 
-      //const char* get_dup(const ::string & pszFormat = default_format(), int uiSkip = CALLSTACK_DEFAULT_SKIP_TRIGGER, int iCount = -1);
+      //const char* get_dup(const ::scoped_string & scopedstrFormat = default_format(), int uiSkip = CALLSTACK_DEFAULT_SKIP_TRIGGER, int iCount = -1);
 
       //const char* stack_trace() const;
 
 
-      //bool stack_trace(CONTEXT*, iptr iSkip = 0, const ::string & pszFormat = default_format(), int iCount = -1);
-      //bool stack_trace(iptr iSkip = 1, const ::string & pszFormat = default_format(), int iCount = -1);
-      //bool stack_trace(CONTEXT*, iptr iSkip = 1, bool bSkip = false, const ::string & pszFormat = default_format(), int iCount = -1);
-      //char* stack_trace(OS_DWORD* pinteraction, int c, const ::string & pszFormat = default_format(), int iCount = -1);
+      //bool stack_trace(CONTEXT*, iptr iSkip = 0, const ::scoped_string & scopedstrFormat = default_format(), int iCount = -1);
+      //bool stack_trace(iptr iSkip = 1, const ::scoped_string & scopedstrFormat = default_format(), int iCount = -1);
+      //bool stack_trace(CONTEXT*, iptr iSkip = 1, bool bSkip = false, const ::scoped_string & scopedstrFormat = default_format(), int iCount = -1);
+      //char* stack_trace(OS_DWORD* pinteraction, int c, const ::scoped_string & scopedstrFormat = default_format(), int iCount = -1);
 
       void reset();
 

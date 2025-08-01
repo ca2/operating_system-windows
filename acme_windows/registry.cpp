@@ -401,7 +401,7 @@ namespace acme_windows
    }
 
 
-   //void registry::key::_set(const ::scoped_string & scopedstrName, const ::string & pszData)
+   //void registry::key::_set(const ::scoped_string & scopedstrName, const ::scoped_string & scopedstrData)
    //{
 
    //   return _set(pcszDataName, string(pszData));
@@ -680,7 +680,7 @@ namespace acme_windows
    }
 
 
-   //int reg_query_data(HKEY hkey, const ::string & pszSubKey, string & str)
+   //int reg_query_data(HKEY hkey, const ::scoped_string & scopedstrSubKey, string & str)
    //{
 
    //   DWORD dwType = 0;
@@ -937,7 +937,7 @@ ret1:
 }
 
 
-bool CLASS_DECL_ACME_WINDOWS windows_get_in_proc_server(const ::string & pszCLSID, string & str)
+bool CLASS_DECL_ACME_WINDOWS windows_get_in_proc_server(const ::scoped_string & scopedstrCLSID, string & str)
 {
 
    HKEY hKey = nullptr;
@@ -945,7 +945,7 @@ bool CLASS_DECL_ACME_WINDOWS windows_get_in_proc_server(const ::string & pszCLSI
    if (RegOpenKeyW(HKEY_CLASSES_ROOT, L"CLSID", &hKey) == ERROR_SUCCESS)
    {
       HKEY hKeyCLSID = nullptr;
-      if (RegOpenKeyW(hKey, wstring(pszCLSID), &hKeyCLSID) == ERROR_SUCCESS)
+      if (RegOpenKeyW(hKey, wstring(scopedstrCLSID), &hKeyCLSID) == ERROR_SUCCESS)
 
       {
          HKEY hKeyInProc = nullptr;

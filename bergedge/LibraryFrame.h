@@ -36,7 +36,7 @@ public:
    void OnGetMinMaxInfo(MINMAXINFO* lpMMI);
    void OnFileNewlibrary();
    void OnFileOpenlibrary();
-   bool ValidateNewName(const ::string & psz, CString & strCandidateNewPath);
+   bool ValidateNewName(const ::scoped_string & scopedstr, CString & strCandidateNewPath);
    virtual HRESULT STDMETHODCALLTYPE QueryInterface(const IID &,void **);
    virtual ULONG STDMETHODCALLTYPE AddRef();
    virtual ULONG STDMETHODCALLTYPE Release();

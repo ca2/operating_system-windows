@@ -18,14 +18,14 @@ namespace backup
 
       virtual void     run() override;
 
-      bool hotcopy_repos(const ::string & psz);
-      bool compress_repos(const ::string & psz);
+      bool hotcopy_repos(const ::scoped_string & scopedstr);
+      bool compress_repos(const ::scoped_string & scopedstr);
 
       bool all_db_dump();
       bool db_copy();
 
-      string get_new_repos_local_path(const ::string & psz);
-      string get_new_db_local_path(const ::string & psz);
+      string get_new_repos_local_path(const ::scoped_string & scopedstr);
+      string get_new_db_local_path(const ::scoped_string & scopedstr);
 
 
 

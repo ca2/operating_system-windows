@@ -515,7 +515,7 @@ int CALLBACK LibraryFrameBrowseCallbackProc(HWND hwnd, UINT uMsg, LPARAM lParam,
 
 }
 
-bool CLibraryFrame::ValidateNewName(const ::string & pszNewName,CString & strCandidateNewPath)
+bool CLibraryFrame::ValidateNewName(const ::scoped_string & scopedstrNewName,CString & strCandidateNewPath)
 {
    CString & strNewPath = strCandidateNewPath;
 

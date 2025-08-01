@@ -29,8 +29,8 @@ namespace app_app
 
 
 
-      virtual void simple_file_server(const ::string & pszPath);
-      virtual void simple_image_server(const ::string & pszPath, int iMaxWidth = -1, int iMaxHeight = -1);
+      virtual void simple_file_server(const ::scoped_string & scopedstrPath);
+      virtual void simple_image_server(const ::scoped_string & scopedstrPath, int iMaxWidth = -1, int iMaxHeight = -1);
 
       virtual bool http_filter_response_header(atom key, string_array & straValue);
 

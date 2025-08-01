@@ -72,7 +72,7 @@ namespace acme_windows
 
       m_bGotLast = false;
 
-      string strName(strNameParam);
+      string strName(scopedstrNameParam);
 
       if (strName.is_empty())
       {

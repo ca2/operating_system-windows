@@ -31,11 +31,11 @@ itemidlist::itemidlist(itemidlist && iidl)
 }
 
 
-itemidlist::itemidlist(const ::string & pszPath) :
+itemidlist::itemidlist(const ::scoped_string & scopedstrPath) :
    m_pidl(nullptr)
 {
 
-   parse(pszPath);
+   parse(scopedstrPath);
 
 }
 
@@ -141,12 +141,12 @@ void itemidlist::free()
 
 
 
-bool itemidlist::parse(const ::string & pszPath)
+bool itemidlist::parse(const ::scoped_string & scopedstrPath)
 {
 
    free();
 
-   if(FAILED(_parse(*this, pszPath)))
+   if(FAILED(_parse(*this, scopedstrPath)))
    {
 
       return false;
@@ -326,13 +326,13 @@ itemidlist itemidlist::operator/(const itemidlist & piidl) const
 }
 
 
-itemidlist & itemidlist::operator=(const ::string & pszPath)
+itemidlist & itemidlist::operator=(const ::scoped_string & scopedstrPath)
 {
 
-   if (!parse(pszPath))
+   if (!parse(scopedstrPath))
    {
 
-      throw ::exception(error_resource, "Failed to parse the path " + string (pszPath));
+      throw ::exception(error_resource, "Failed to parse the path " + string (scopedstrPath));
 
    }
 
@@ -1006,7 +1006,7 @@ int itemidlist::_order(LPCITEMIDLIST pidlf1, LPCITEMIDLIST pidlf2,
 bool itemidlist::get_refid_for_known_folder(KNOWNFOLDERID & refid, const ::scoped_string & scopedstrKnownFolder)
 {
 
-   auto pknownfolderstruct = get_known_folder_struct(strKnownFolder);
+   auto pknownfolderstruct = get_known_folder_struct(scopedstrKnownFolder);
 
    if(::is_set(pknownfolderstruct))
    {
@@ -1022,10 +1022,10 @@ bool itemidlist::get_refid_for_known_folder(KNOWNFOLDERID & refid, const ::scope
 }
 
 
-HRESULT itemidlist::get_item_in_known_folder(itemidlist & idl, const string & strPathParam)
+HRESULT itemidlist::get_item_in_known_folder(itemidlist & idl, const ::scoped_string & scopedstrPathParam)
 {
 
-   string strPath(strPathParam);
+   string strPath(scopedstrPathParam);
 
    HRESULT hr = E_FAIL;
 
@@ -1080,7 +1080,7 @@ HRESULT itemidlist::get_item_in_known_folder(itemidlist & idl, const string & st
 HRESULT itemidlist::_parse(itemidlist & idl, const ::scoped_string & scopedstrPath)
 {
 
-   HRESULT hr = get_item_in_known_folder(idl, strPath);
+   HRESULT hr = get_item_in_known_folder(idl, scopedstrPath);
 
    if(SUCCEEDED(hr))
    {
@@ -1089,7 +1089,7 @@ HRESULT itemidlist::_parse(itemidlist & idl, const ::scoped_string & scopedstrPa
 
    }
 
-   wstring wstrPath(strPath);
+   wstring wstrPath(scopedstrPath);
 
    comptr < IShellFolder > pshellfolderDesktop;
 

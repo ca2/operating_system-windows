@@ -64,7 +64,7 @@ const char * skip_file_name(const char * psz)
 sz_known_folder_struct * get_known_folder_struct(const ::scoped_string & scopedstrKnownFolder)
 {
 
-   string strKnownFolderCandidate = get_known_folder_name_candidate(strKnownFolder);
+   string strKnownFolderCandidate = get_known_folder_name_candidate(scopedstrKnownFolder);
 
    auto pknownfolderstruct = g_knownfolderstructa;
 

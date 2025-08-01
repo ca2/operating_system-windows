@@ -420,7 +420,7 @@ namespace windowing_win32
 //   }
 //
 //
-//   void notify_icon::call_notification_area_action(const ::string & pszId)
+//   void notify_icon::call_notification_area_action(const ::scoped_string & scopedstrId)
 //   {
 //
 //      m_plistener->call_notification_area_action(pszId);

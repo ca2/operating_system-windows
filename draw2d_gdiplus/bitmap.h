@@ -33,7 +33,7 @@ namespace draw2d_gdiplus
 
       void destroy() override;
 
-      bool LoadBitmap(const ::string & pszResourceName);
+      bool LoadBitmap(const ::scoped_string & scopedstrResourceName);
 
       bool LoadBitmap(UINT nIDResource);
       bool LoadOEMBitmap(UINT nIDBitmap); // for OBM_/OCR_/OIC_

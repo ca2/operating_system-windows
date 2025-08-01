@@ -118,7 +118,7 @@ namespace acme_windows
 
    }
 
-   //bool file_context::FullPath(string & str, const ::string & pszFileIn)
+   //bool file_context::FullPath(string & str, const ::scoped_string & scopedstrFileIn)
    //{
 
 
@@ -174,7 +174,7 @@ namespace acme_windows
    //}
 
 
-   //unsigned int file_context::GetFileName(const ::string & pszPathName, string & str)
+   //unsigned int file_context::GetFileName(const ::scoped_string & scopedstrPathName, string & str)
 
    //{
    //   int nMax = MAX_PATH * 8;
@@ -191,7 +191,7 @@ namespace acme_windows
    string file_context::get_short_file_name(const ::scoped_string & scopedstr)
    {
 
-      return windows_get_short_file_name(str);
+      return windows_get_short_file_name(scopedstr);
 
    }
 
@@ -269,8 +269,8 @@ namespace acme_windows
 #ifdef WINDOWS_DESKTOP
 
       if (!::MoveFileW(
-         utf8_to_unicode(psz),
-         utf8_to_unicode(pszNew)))
+         utf8_to_unicode(path),
+         utf8_to_unicode(pathNew)))
       {
 
          DWORD dwError = ::GetLastError();
@@ -279,19 +279,21 @@ namespace acme_windows
          {
 
             if (::CopyFileW(
-               utf8_to_unicode(psz),
-               utf8_to_unicode(pszNew),
+               utf8_to_unicode(path),
+               utf8_to_unicode(pathNew),
                false))
             {
 
-               if (!::DeleteFileW(utf8_to_unicode(psz)))
+               if (!::DeleteFileW(utf8_to_unicode(path)))
                {
 
                   dwError = ::GetLastError();
 
                   string strError;
 
-                  strError.formatf("Failed to delete the file to move \"%s\" error=%d", psz, dwError);
+                  ::string strFile = utf8_to_unicode(path);
+
+                  strError.formatf("Failed to delete the file to move \"%s\" error=%d", strFile.c_str(), dwError);
 
                   information() << "%s", strError;
 
@@ -307,7 +309,7 @@ namespace acme_windows
 
          string strError;
 
-         strError.formatf("Failed to move file \"%s\" to \"%s\" error=%d", psz, pszNew, dwError);
+         strError.formatf("Failed to move file \"%s\" to \"%s\" error=%d", path.c_str(), pathNew.c_str(), dwError);
 
          throw ::exception(::error_io, strError);
 
@@ -452,7 +454,7 @@ namespace acme_windows
 
 #ifdef WINDOWS_DESKTOP
 
-      unsigned int dwAttrib = ::windows::get_file_attributes(psz);
+      unsigned int dwAttrib = ::windows::get_file_attributes(path);
 
       if (dwAttrib & FILE_ATTRIBUTE_READONLY)
       {
@@ -535,7 +537,7 @@ namespace acme_windows
 
       WIN32_FILE_ATTRIBUTE_DATA data{};
 
-      if (!GetFileAttributesExW(wstring(strFilename), GetFileExInfoStandard, &data))
+      if (!GetFileAttributesExW(wstring(scopedstrFilename), GetFileExInfoStandard, &data))
       {
 
          return false;
@@ -627,7 +629,7 @@ namespace acme_windows
    //}
 
 
-   //void file::SetStatus(const ::string & pszFileName,const ::file::file_status& status)
+   //void file::SetStatus(const ::scoped_string & scopedstrFileName,const ::file::file_status& status)
 
    //{
    //   unsigned int wAttr;

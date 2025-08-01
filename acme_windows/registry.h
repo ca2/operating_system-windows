@@ -82,8 +82,8 @@ namespace acme_windows
          //void _set(const ::scoped_string & scopedstrName, const ::scoped_string & scopedstrData);
 
 
-         //void set(const ::scoped_string & scopedstrName, const ::string & pszData);
-         //void _set(const ::scoped_string & scopedstrName, const ::string & pszData);
+         //void set(const ::scoped_string & scopedstrName, const ::scoped_string & scopedstrData);
+         //void _set(const ::scoped_string & scopedstrName, const ::scoped_string & scopedstrData);
 
 
          void set_binary(const ::scoped_string & scopedstrName, const memory & mem);

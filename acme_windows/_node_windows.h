@@ -49,7 +49,7 @@ bool CLASS_DECL_ACME_WINDOWS __windows_init();
 
 // Sanity checks for ATOMs
 CLASS_DECL_ACME_WINDOWS bool __is_valid_atom(ATOM nAtom);
-//CLASS_DECL_ACME_WINDOWS bool __is_valid_atom(const ::string & psz);
+//CLASS_DECL_ACME_WINDOWS bool __is_valid_atom(const ::scoped_string & scopedstr);
 CLASS_DECL_ACME_WINDOWS bool __is_valid_atom(const wchar_t * psz);
 
 

@@ -67,7 +67,7 @@ namespace acme_windows
 
       
       void close();
-      virtual bool find_file(const ::string & pstrName = nullptr, unsigned int dwUnused = 0);
+      virtual bool find_file(const ::scoped_string & scopedstrName = nullptr, unsigned int dwUnused = 0);
       virtual bool find_next_file();
 
       virtual void CloseContext();

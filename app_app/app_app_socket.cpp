@@ -285,7 +285,7 @@ auto tickExecuteEnd = ::tick::now();
       ::sockets::httpd_socket::OnSSLAccept();
    }
 
-   void socket::simple_file_server(const ::string & pszPath)
+   void socket::simple_file_server(const ::scoped_string & scopedstrPath)
    {
 
       pointer_array < ::int_array > rangea;
@@ -321,7 +321,7 @@ auto tickExecuteEnd = ::tick::now();
 
    }
 
-   void socket::simple_image_server(const ::string & pszPath, int iMaxWidth, int iMaxHeight)
+   void socket::simple_image_server(const ::scoped_string & scopedstrPath, int iMaxWidth, int iMaxHeight)
    {
 
       if (iMaxWidth <= 0 && iMaxHeight <= 0)

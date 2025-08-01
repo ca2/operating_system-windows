@@ -20,14 +20,14 @@ namespace backup
    {
    }
 
-   string backup::get_new_repos_local_path(const ::string & psz)
+   string backup::get_new_repos_local_path(const ::scoped_string & scopedstr)
    {
       string strNewRepos;
       strNewRepos.Format("V:\\ca2\\bk\\%s\\repos\\%s", m_strTag, psz);
       return strNewRepos;
    }
 
-   string backup::get_new_db_local_path(const ::string & psz)
+   string backup::get_new_db_local_path(const ::scoped_string & scopedstr)
    {
       string strNewRepos;
       strNewRepos.Format("V:\\ca2\\bk\\%s\\db\\%s", m_strTag, psz);
@@ -201,7 +201,7 @@ namespace backup
    }
 
 
-   bool  backup::hotcopy_repos(const ::string & psz)
+   bool  backup::hotcopy_repos(const ::scoped_string & scopedstr)
    {
       string strStatus;
       strStatus.Format("hotcopy repository: %s ...", psz);
@@ -290,7 +290,7 @@ namespace backup
       return true;
    }
 
-   bool  backup::compress_repos(const ::string & psz)
+   bool  backup::compress_repos(const ::scoped_string & scopedstr)
    {
       string strStatus;
       strStatus.Format("compressing repository: %s ...", psz);

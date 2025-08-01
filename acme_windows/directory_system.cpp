@@ -460,10 +460,10 @@ pacmedir->roaming();
 
 
 
-   void directory_system::set_path_install_folder(const ::string & pszPath)
+   void directory_system::set_path_install_folder(const ::scoped_string & scopedstrPath)
    {
 
-      m_pathInstallFolder = pszPath;
+      m_pathInstallFolder = scopedstrPath;
 
    }
 
@@ -1067,7 +1067,7 @@ bool windows_file_find_is_dots(const WIN32_FIND_DATAW & data)
 
          string strName;
 
-         ::file::path pathDir;
+         ::file::path pathFolder;
 
          character_count iLastPos;
 
@@ -1081,7 +1081,7 @@ bool windows_file_find_is_dots(const WIN32_FIND_DATAW & data)
 
             winrt_folder(strPath, strPrefix);
 
-            pathDir = strPrefix;
+            pathFolder = strPrefix;
 
             iLastPos = strPrefix.length();
 
@@ -1930,12 +1930,12 @@ pacmedir->create CreateDirectoryW last error(%d)=%s", dwError, pszError);
 //      }
 //
 //
-      ::file::path directory_system::pathfind(const string & pszEnv, const string & pszTopic, const string & pszMode)
+      ::file::path directory_system::pathfind(const ::scoped_string & scopedstrEnv, const ::scoped_string & scopedstrTopic, const ::scoped_string & scopedstrMode)
       {
 
          string_array stra;
 
-         stra.add_tokens(pszEnv, ":");
+         stra.add_tokens(scopedstrEnv, ":");
 
          string strCandidate;
 
@@ -1945,7 +1945,7 @@ pacmedir->create CreateDirectoryW last error(%d)=%s", dwError, pszError);
             if (stra[i].is_empty())
                continue;
 
-            strCandidate = ::file::path(stra[i]) / pszTopic;
+            strCandidate = ::file::path(stra[i]) / scopedstrTopic;
 
             if (m_pfilesystem->exists(strCandidate))
             {
@@ -2015,7 +2015,7 @@ pacmedir->create CreateDirectoryW last error(%d)=%s", dwError, pszError);
 //
 //         string strName;
 //
-//         ::file::path pathDir;
+//         ::file::path pathFolder;
 //
 //         character_count iLastPo = -1;
 //

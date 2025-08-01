@@ -16,11 +16,11 @@ namespace windows
       virtual ~interprocess_handler();
 
 
-      bool create(const ::string & pszChannel);
+      bool create(const ::scoped_string & scopedstrChannel);
       bool destroy();
 
 
-      virtual void * on_interprocess_receive(rx * prx, const ::string & pszMessage);
+      virtual void * on_interprocess_receive(rx * prx, const ::scoped_string & scopedstrMessage);
       virtual void * on_interprocess_receive(rx * prx, int message, void * pdata, memsize len);
       virtual void * on_interprocess_post(rx * prx, long long a, long long b);
 

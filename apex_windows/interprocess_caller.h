@@ -25,7 +25,7 @@ namespace apex_windows
       ~interprocess_caller() override;
 
 
-      void open(const ::string & pszChannel, ::launcher * plauncher = nullptr) override;
+      void open(const ::scoped_string & scopedstrChannel, ::launcher * plauncher = nullptr) override;
       void close() override;
 
 

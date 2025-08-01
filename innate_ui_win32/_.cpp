@@ -12,7 +12,7 @@
 //{
 //
 //
-//   HINSTANCE load_library(const ::string & psz)
+//   HINSTANCE load_library(const ::scoped_string & scopedstr)
 //   {
 //
 //      return ::LoadLibraryW(utf8_to_unicode(psz));
@@ -63,7 +63,7 @@
 //   }
 //
 //
-//   //int reg_query_value(HKEY hkey, const ::string & pszSubKey, string& str)
+//   //int reg_query_value(HKEY hkey, const ::scoped_string & scopedstrSubKey, string& str)
 //   //{
 //
 //   //   DWORD dwType = 0;
@@ -97,7 +97,7 @@
 //   //}
 //
 //
-//   HICON extract_icon(HINSTANCE hInst, const ::string & pszExeFileName, unsigned int nIconIndex)
+//   HICON extract_icon(HINSTANCE hInst, const ::scoped_string & scopedstrExeFileName, unsigned int nIconIndex)
 //
 //   {
 //

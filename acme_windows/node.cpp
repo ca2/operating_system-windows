@@ -265,7 +265,7 @@ namespace acme_windows
 
 
 
-   void node::shell_open(const ::file::path& pathFile, const ::string& strParams, const ::file::path& pathFolder)
+   void node::shell_open(const ::file::path& pathFile, const ::scoped_string & scopedstrParams, const ::file::path& pathFolder)
    {
 
       wstring wstrFile(pathFile.windows_path().extended_path());
@@ -1144,7 +1144,7 @@ namespace acme_windows
    //}
 
 
-   bool node::load_modules_diff(string_array& straOld, string_array& straNew, const ::string& strExceptDir)
+   bool node::load_modules_diff(string_array& straOld, string_array& straNew, const ::scoped_string & scopedstrExceptDir)
    {
 
       bool bFound;
@@ -1563,7 +1563,7 @@ namespace acme_windows
 
 
 
-   //CLASS_DECL_ACME BOOL LaunchAppIntoDifferentSession(const ::string & pszProcess, const ::string & pszCommand, const ::string & pszDir, STARTUPINFOW* psi, PROCESS_INFORMATION* ppi, int iSession)
+   //CLASS_DECL_ACME BOOL LaunchAppIntoDifferentSession(const ::scoped_string & scopedstrProcess, const ::scoped_string & scopedstrCommand, const ::scoped_string & scopedstrDir, STARTUPINFOW* psi, PROCESS_INFORMATION* ppi, int iSession)
    //{
    //   //PROCESS_INFORMATION pi;
    //   //STARTUPINFO si;
@@ -1753,7 +1753,7 @@ namespace acme_windows
    //
    //}
    //
-   //CLASS_DECL_ACME BOOL LaunchAppIntoSystemAcc(const ::string & pszProcess, const ::string & pszCommand, const ::string & pszDir, STARTUPINFOW* psi, PROCESS_INFORMATION* ppi)
+   //CLASS_DECL_ACME BOOL LaunchAppIntoSystemAcc(const ::scoped_string & scopedstrProcess, const ::scoped_string & scopedstrCommand, const ::scoped_string & scopedstrDir, STARTUPINFOW* psi, PROCESS_INFORMATION* ppi)
    //{
    //   //PROCESS_INFORMATION pi;
    //   //STARTUPINFO si;
@@ -2020,7 +2020,7 @@ namespace acme_windows
    }
 
 
-   void node::run_silent(const ::string& strFunct, const ::string& strstrParams)
+   void node::run_silent(const ::scoped_string & scopedstrFunct, const ::scoped_string & scopedstrstrParams)
    {
 
 #if defined(UNIVERSAL_WINDOWS)
@@ -2351,7 +2351,7 @@ namespace acme_windows
    }
 
 
-   void node::register_spa_file_type(const ::string& strAppIdHandler)
+   void node::register_spa_file_type(const ::scoped_string & scopedstrAppIdHandler)
    {
 
 #ifdef WINDOWS_DESKTOP
@@ -2582,7 +2582,7 @@ namespace acme_windows
    }
 
 
-   //HICON node::extract_icon(HINSTANCE hInst, const ::string & pszExeFileName, unsigned int nIconIndex)
+   //HICON node::extract_icon(HINSTANCE hInst, const ::scoped_string & scopedstrExeFileName, unsigned int nIconIndex)
 
    //{
 
@@ -2772,7 +2772,7 @@ namespace acme_windows
    }
 
 
-   void node::shell_launch(const ::string& strUrl)
+   void node::shell_launch(const ::scoped_string & scopedstrUrl)
    {
 
       wstring wstrUrl(strUrl);
@@ -2868,7 +2868,7 @@ namespace acme_windows
    }
 
 
-   ::pointer < ::acme::exclusive > node::_get_exclusive(::particle* pparticleContext, const ::string& strName, ::security_attributes* psecurityattributes)
+   ::pointer < ::acme::exclusive > node::_get_exclusive(::particle* pparticleContext, const ::scoped_string & scopedstrName, ::security_attributes* psecurityattributes)
    {
 
       return __allocate exclusive(pparticleContext, strName, psecurityattributes);
@@ -3667,7 +3667,7 @@ namespace acme_windows
    }
 
 
-   void node::call_async(const ::string& strPath, const ::string& strParam, const ::string& strDir, ::e_display edisplay, bool bPrivileged, unsigned int* puiPid)
+   void node::call_async(const ::scoped_string & scopedstrPath, const ::scoped_string & scopedstrParam, const ::scoped_string & scopedstrDir, ::e_display edisplay, bool bPrivileged, unsigned int* puiPid)
    {
 
       SHELLEXECUTEINFOW info = {};
@@ -3738,7 +3738,7 @@ namespace acme_windows
    }
 
 
-   void node::call_sync(const ::string& strPath, const ::string& strParam, const ::string& strDir, ::e_display edisplay, const class time& timeTimeout, ::property_set & set, int* piExitCode)
+   void node::call_sync(const ::scoped_string & scopedstrPath, const ::scoped_string & scopedstrParam, const ::scoped_string & scopedstrDir, ::e_display edisplay, const class time& timeTimeout, ::property_set & set, int* piExitCode)
    {
 
       SHELLEXECUTEINFOW infoa;
@@ -3861,7 +3861,7 @@ namespace acme_windows
    }
 
 
-   void node::launch_application(::particle* pparticle, const ::string& strAppId, const ::string& strParams, int iBitCount)
+   void node::launch_application(::particle* pparticle, const ::scoped_string & scopedstrAppId, const ::scoped_string & scopedstrParams, int iBitCount)
    {
 
 

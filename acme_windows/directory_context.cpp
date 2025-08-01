@@ -189,7 +189,7 @@ namespace acme_windows
 
 
 
-   //string directory_context::path(const ::string & pszFolder, character_count iLenFolder, const ::string & pszRelative, character_count iLenRelative, const ::string & psz2, character_count iLen2, bool bUrl)
+   //string directory_context::path(const ::scoped_string & scopedstrFolder, character_count iLenFolder, const ::scoped_string & scopedstrRelative, character_count iLenRelative, const ::scoped_string & scopedstr2, character_count iLen2, bool bUrl)
    //{
 
    //   bool bEmptyRelative = iLenRelative == 0 || pszRelative == nullptr || *pszRelative == '\0';
@@ -371,7 +371,7 @@ namespace acme_windows
    //}
 
 
-   //string directory_context::relpath(const string & pcszSource, const string & lpcszRelative, const string & psz2)
+   //string directory_context::relpath(const string & pcszSource, const string & lpcszRelative, const ::scoped_string & scopedstr2)
 
    //{
    //   const scoped_string & strRequest;
@@ -945,8 +945,8 @@ namespace acme_windows
    ::file::path directory_context::time_square(const ::scoped_string & scopedstrPrefix, const ::scoped_string & scopedstrSuffix)
    {
 
-      __UNREFERENCED_PARAMETER(strPrefix);
-      __UNREFERENCED_PARAMETER(strSuffix);
+      __UNREFERENCED_PARAMETER(scopedstrPrefix);
+      __UNREFERENCED_PARAMETER(scopedstrSuffix);
       return time() / "time";
 
    }
@@ -1203,12 +1203,14 @@ namespace acme_windows
 
    ::file::path directory_context::trash_that_is_not_trash(const ::file::path & path)
    {
-      if (psz.is_empty())
-         return "";
-
-      if (psz[1] == ':')
+      if (path.is_empty())
       {
-         string strDir = name(psz);
+         return "";
+      }
+
+      if (path[1] == ':')
+      {
+         string strDir = name(path);
          string str;
          str = strDir.left(2);
          str += "\\trash_that_is_not_trash\\";
@@ -1274,27 +1276,27 @@ namespace acme_windows
    bool directory_context::is_inside_time(const ::file::path & path)
    {
 
-      return is_inside(time(), pszPath);
+      return is_inside(time(), path);
 
    }
 
 
-   bool directory_context::is_inside(const ::file::path & pathDir, const ::file::path & path)
+   bool directory_context::is_inside(const ::file::path & pathFolder, const ::file::path & path)
    {
 
-      return pszDir.case_insensitive_begins(pszPath);
+      return pathFolder.case_insensitive_begins(path);
 
    }
 
 
-   bool directory_context::has_subdir(const ::file::path & pathDir)
+   bool directory_context::has_subdir(const ::file::path & pathFolder)
    {
 
       ::acme_windows::file_find file_find;
 
       bool bWorking;
 
-      bWorking = file_find.find_file(pszDir / "*.*");
+      bWorking = file_find.find_file(pathFolder / "*.*");
 
       while (bWorking)
       {
@@ -1314,7 +1316,7 @@ namespace acme_windows
 
    }
 
-   //bool file::GetStatus(const ::string & pszFileName,::file::file_status& rStatus)
+   //bool file::GetStatus(const ::scoped_string & scopedstrFileName,::file::file_status& rStatus)
 
    //{
    //   // attempt to fully qualify path first

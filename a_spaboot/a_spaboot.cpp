@@ -7,8 +7,8 @@ extern std::string g_strVersion;
 HWND g_hwndMessage = nullptr;
 //MSG g_msg;
 
-void parse_installer(const ::string & psz);
-bool parse_installer_start(const ::string & psz);
+void parse_installer(const ::scoped_string & scopedstr);
+bool parse_installer_start(const ::scoped_string & scopedstr);
 SPALIB_API std::string read_resource_as_string(HINSTANCE hinst, UINT nID, LPCTSTR lpcszType);
 
 
@@ -255,7 +255,7 @@ bool file_system()->exists(const ::string & path1)
 //   }
 //}
 //
-//void parse_installer(const ::string & psz)
+//void parse_installer(const ::scoped_string & scopedstr)
 //{
 //   XNode node;
 //   node.Load(file::get_contents(psz).c_str());
@@ -329,14 +329,14 @@ bool file_system()->exists(const ::string & path1)
 //
 //
 //
-//bool parse_installer_start(const ::string & psz)
+//bool parse_installer_start(const ::scoped_string & scopedstr)
 //{
 //   XNode node;
 //   node.Load(file::get_contents(psz).c_str());
 //   return parse_installer_start(node);
 //}
 //
-//void trace(const ::string & psz)
+//void trace(const ::scoped_string & scopedstr)
 //{
 //   printf("%s", psz);
 //}

@@ -79,7 +79,7 @@ namespace acme_windows
       ::file::path inplace_matter_install(string strAppId, string strPlatform, string strConfiguration) override;
 
 
-      void set_path_install_folder(const ::string & pszPath) override;
+      void set_path_install_folder(const ::scoped_string & scopedstrPath) override;
 
       bool _shell_get_special_folder_path(HWND hwnd, ::file::path& str, int csidl, bool fCreate);
       ::file::path _shell_get_special_folder_path(int csidl, bool fCreate = true, ::windowing::window* pwindow = nullptr);

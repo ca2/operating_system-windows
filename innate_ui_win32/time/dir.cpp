@@ -26,7 +26,7 @@ namespace dir
 
       string strName;
 
-      ::file::path pathDir;
+      ::file::path pathFolder;
 
       character_count iLastPo = -1;
 

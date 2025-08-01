@@ -67,9 +67,9 @@ bool has_autohide_appbar(unsigned int edge, const int_rectangle & mon);
 
 
 CLASS_DECL_WINDOWING_WIN32 bool __is_combo_box_control(HWND hwnd, unsigned int nStyle);
-CLASS_DECL_WINDOWING_WIN32 bool __check_center_dialog(const ::string & pszResource);
+CLASS_DECL_WINDOWING_WIN32 bool __check_center_dialog(const ::scoped_string & scopedstrResource);
 
-CLASS_DECL_WINDOWING_WIN32 bool __compare_class_name(HWND hwnd, const ::string & pszClassName);
+CLASS_DECL_WINDOWING_WIN32 bool __compare_class_name(HWND hwnd, const ::scoped_string & scopedstrClassName);
 
 CLASS_DECL_WINDOWING_WIN32 bool hook_window_create(::windowing_win32::window * pwindow);
 CLASS_DECL_WINDOWING_WIN32 bool unhook_window_create();
@@ -736,7 +736,7 @@ namespace windowing_win32
    //}
 
 
-   //void window::set_wm_class(const ::string & psz)
+   //void window::set_wm_class(const ::scoped_string & scopedstr)
    //{
 
    //   //      m_strWMClass = psz;
@@ -1037,7 +1037,7 @@ namespace windowing_win32
    //}
 
 
-   //Atom window::intern_atom(const ::string & pszAtomName, bool bCreate)
+   //Atom window::intern_atom(const ::scoped_string & scopedstrAtomName, bool bCreate)
    //{
 
    //   return m_osdisplay->intern_atom(pszAtomName, bCreate);
@@ -1237,7 +1237,7 @@ namespace windowing_win32
 //   }
 //
 
-   //int window::store_name(const ::string & psz)
+   //int window::store_name(const ::scoped_string & scopedstr)
    //{
 
    //   windowing_output_debug_string("\nwindow::store_name");
@@ -4154,7 +4154,7 @@ namespace windowing_win32
    //   ASSERT(::IsWindow(get_hwnd()));
    //   ::SetDlgItemInt(get_hwnd(), nID, nValue, bSigned);
    //}
-   //void window::SetDlgItemText(int nID, const ::string & pszString)
+   //void window::SetDlgItemText(int nID, const ::scoped_string & scopedstrString)
 
    //{
    //   ASSERT(::IsWindow(get_hwnd()));
@@ -5108,7 +5108,7 @@ namespace windowing_win32
       { m_nIdleFlags |= (idleLayout | (bNotify ? idleNotify : 0)); };
       bool frame_window::InModalState() const
       { return m_cModalStack != 0; }
-      void frame_window::set_title(const ::string & pszTitle)
+      void frame_window::set_title(const ::scoped_string & scopedstrTitle)
 
       { m_strTitle = pszTitle; }
 

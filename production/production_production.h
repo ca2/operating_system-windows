@@ -31,7 +31,7 @@ namespace production
          string         m_strServer;
 
 
-         release(production * pproduction, const ::string & pszRelease, const ::string & pszServer);
+         release(production * pproduction, const ::scoped_string & scopedstrRelease, const ::scoped_string & scopedstrServer);
 
          virtual bool init_thread() override;
 
@@ -146,10 +146,10 @@ namespace production
 
       void defer_quit();
 
-      void add_status(const ::string & psz);
-      void change_status(const ::string & psz);
+      void add_status(const ::scoped_string & scopedstr);
+      void change_status(const ::scoped_string & scopedstr);
 
-      string version_to_international_datetime(const ::string & psz);
+      string version_to_international_datetime(const ::scoped_string & scopedstr);
 
 
       virtual void     run() override;
@@ -157,8 +157,8 @@ namespace production
 
       virtual void     produce();
 
-      bool get_file_list(const ::string & pszBase, const ::string & pszDir, ::file::listing & stra, bool bFileSet = false);
-      // bool ftp_put_dir(CFtpConnection & ftpconn, const ::string & pszBase, const ::string & pszDir, int iMode);
+      bool get_file_list(const ::scoped_string & scopedstrBase, const ::scoped_string & scopedstrDir, ::file::listing & stra, bool bFileSet = false);
+      // bool ftp_put_dir(CFtpConnection & ftpconn, const ::scoped_string & scopedstrBase, const ::scoped_string & scopedstrDir, int iMode);
 
       virtual void compress();
       virtual bool compress_next();
@@ -171,22 +171,22 @@ namespace production
       virtual void generate_appmatter_spa(const ::file::path & pathRoot,const ::file::path & pathRelative);
 
       virtual void release_production();
-      virtual bool release_npca2(const ::string & pszPlatform);
-      virtual bool release_iexca2(const ::string & pszPlatform);
-      virtual bool release_crxca2(const ::string & pszPlatform);
+      virtual bool release_npca2(const ::scoped_string & scopedstrPlatform);
+      virtual bool release_iexca2(const ::scoped_string & scopedstrPlatform);
+      virtual bool release_crxca2(const ::scoped_string & scopedstrPlatform);
 
-      virtual void add_path(const ::file::path & pathDir, const ::file::path & pathRelative);
+      virtual void add_path(const ::file::path & pathFolder, const ::file::path & pathRelative);
 
-      bool sync_source(const ::string & psz, const ::string & pszRevision);
+      bool sync_source(const ::scoped_string & scopedstr, const ::scoped_string & scopedstrRevision);
       bool commit_for_new_build_and_new_release();
-      bool commit_source(const ::string & psz);
+      bool commit_source(const ::scoped_string & scopedstr);
 
 
       virtual bool twitter_auth();
-      virtual string twitter_twit(const ::string & pszMessage);
+      virtual string twitter_twit(const ::scoped_string & scopedstrMessage);
 
       virtual bool facebook_auth();
-      virtual string facebook_status(const ::string & pszMessage);
+      virtual string facebook_status(const ::scoped_string & scopedstrMessage);
 
       void compress(const ::file::path & lpszRelative);
 
@@ -194,16 +194,16 @@ namespace production
 
       string xpi_digest(memory & mem);
 
-      void xpi_sign_dir(const ::string & pszPlatform, const ::file::path & pathDir);
-      void xpi_section(const ::string & pszManifest, const ::string & pszSignature);
+      void xpi_sign_dir(const ::scoped_string & scopedstrPlatform, const ::file::path & pathFolder);
+      void xpi_section(const ::scoped_string & scopedstrManifest, const ::scoped_string & scopedstrSignature);
 
-      bool create_xpi(const ::string & pszPlatform, bool bSigned = true);
-      bool create_unsigned_xpi(const ::string & pszPlatform);
-      bool create_signed_xpi(const ::string & pszPlatform);
+      bool create_xpi(const ::scoped_string & scopedstrPlatform, bool bSigned = true);
+      bool create_unsigned_xpi(const ::scoped_string & scopedstrPlatform);
+      bool create_signed_xpi(const ::scoped_string & scopedstrPlatform);
 
-      void build(const ::string & psz);
+      void build(const ::scoped_string & scopedstr);
 
-      virtual void update_rc_file_version(const ::string & pszUrl);
+      virtual void update_rc_file_version(const ::scoped_string & scopedstrUrl);
 
       virtual string stage_platform(string strPlatform);
 

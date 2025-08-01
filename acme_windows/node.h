@@ -71,7 +71,7 @@ namespace acme_windows
       //void fetch_user_color() override;
 
 
-      virtual void install_crash_dump_reporting(const string & strModuleNameWithTheExeExtension) override;
+      virtual void install_crash_dump_reporting(const ::scoped_string & scopedstrModuleNameWithTheExeExtension) override;
 
 
 
@@ -92,7 +92,7 @@ namespace acme_windows
       virtual string audio_get_default_implementation_name() override;
 
 
-      ::process_identifier create_process(const ::string & pszCommandLine) override;
+      ::process_identifier create_process(const ::scoped_string & scopedstrCommandLine) override;
 
 
       void run_silent(const ::scoped_string & scopedstrFunct, const ::scoped_string & scopedstrstrParams) override;
@@ -104,10 +104,10 @@ namespace acme_windows
       //::file::path_array modules_paths() override;
 
 
-      bool load_modules_diff(string_array & straOld, string_array & straNew, const ::string & pszExceptDir) override;
+      bool load_modules_diff(string_array & straOld, string_array & straNew, const ::scoped_string & scopedstrExceptDir) override;
 
 
-      ::process_identifier_array module_path_processes_identifiers(const ::string & pszModulePath, bool bModuleNameIsPropertyFormatted) override;
+      ::process_identifier_array module_path_processes_identifiers(const ::scoped_string & scopedstrModulePath, bool bModuleNameIsPropertyFormatted) override;
 
       ::file::path process_identifier_module_path(::process_identifier processidentifier) override;
 
@@ -145,9 +145,9 @@ namespace acme_windows
 
 
 
-      bool process_contains_module(string & strImage, ::process_identifier processidentifier, const ::string & pszLibrary) override;
+      bool process_contains_module(string & strImage, ::process_identifier processidentifier, const ::scoped_string & scopedstrLibrary) override;
 
-      ::process_identifier_array shared_library_process(string_array & straProcesses, const ::string & pszLibrary) override;
+      ::process_identifier_array shared_library_process(string_array & straProcesses, const ::scoped_string & scopedstrLibrary) override;
 
       bool is_process_running(::process_identifier processidentifier) override;
 
@@ -161,8 +161,8 @@ namespace acme_windows
 
       //virtual unsigned int       get_file_attributes(const ::string & pFileName);
       //virtual ::file::path       get_current_directory();
-      virtual int              reg_query_value(HKEY hkey, const ::string & pszSubKey, string & str);
-      virtual  HICON             extract_icon(HINSTANCE hInst, const ::string & pszExeFileName, unsigned int nIconIndex);
+      virtual int              reg_query_value(HKEY hkey, const ::scoped_string & scopedstrSubKey, string & str);
+      virtual  HICON             extract_icon(HINSTANCE hInst, const ::scoped_string & scopedstrExeFileName, unsigned int nIconIndex);
       virtual  void              delete_file(const ::file::path & path);
       //virtual  int     get_menu_string(HMENU hMenu, unsigned int uDItem, string& str, unsigned int flags);
       //virtual  void        time_to_filetime(::matter* pobject, const ::earth::time& time, LPFILETIME pFileTime);
@@ -204,10 +204,10 @@ namespace acme_windows
       void create_app_shortcut(::platform::application * papp) override;
 
 
-      //string get_local_mutex_name(const ::string& strAppId) override;
-      //string get_local_id_mutex_name(const ::string& strAppId, const ::string& strId) override;
-      //string get_global_mutex_name(const ::string& strAppId) override;
-      //string get_global_id_mutex_name(const ::string& strAppId, const ::string& strId) override;
+      //string get_local_mutex_name(const ::scoped_string & scopedstrAppId) override;
+      //string get_local_id_mutex_name(const ::scoped_string & scopedstrAppId, const ::scoped_string & scopedstrId) override;
+      //string get_global_mutex_name(const ::scoped_string & scopedstrAppId) override;
+      //string get_global_id_mutex_name(const ::scoped_string & scopedstrAppId, const ::scoped_string & scopedstrId) override;
 
 
       void open_internet_link(const ::scoped_string& scopedstrUrl, const ::scoped_string& scopedstrProfile = {}, const ::scoped_string& scopedstrTarget = {}) override;
@@ -226,14 +226,14 @@ namespace acme_windows
       int get_current_process_affinity_order() override;
 
 
-      void call_async(const ::string & pszPath, const ::string & pszParam, const ::string & pszDir, ::e_display edisplay, bool bPrivileged, unsigned int * puiPid = nullptr) override;
-      void call_sync(const ::string & pszPath, const ::string & pszParam, const ::string & pszDir, ::e_display edisplay, const class time & timeTimeout, ::property_set & set, int * piExitCode) override;
+      void call_async(const ::scoped_string & scopedstrPath, const ::scoped_string & scopedstrParam, const ::scoped_string & scopedstrDir, ::e_display edisplay, bool bPrivileged, unsigned int * puiPid = nullptr) override;
+      void call_sync(const ::scoped_string & scopedstrPath, const ::scoped_string & scopedstrParam, const ::scoped_string & scopedstrDir, ::e_display edisplay, const class time & timeTimeout, ::property_set & set, int * piExitCode) override;
 
 
       void launch_application(::particle * pparticle, const ::scoped_string & scopedstrAppId, const ::scoped_string & scopedstrParams, int iBitCount) override;
 
 
-      //void shell_open(const ::file::path & path, const string & strParams = "", const ::file::path & pathFolder = {}) override;
+      //void shell_open(const ::file::path & path, const ::scoped_string & scopedstrParams = "", const ::file::path & pathFolder = {}) override;
       //void open_url(const ::scoped_string & scopedstrUrl) override; //
       //void command_system(string_array & straOutput, int & iExitCode, const scoped_string & str, enum_command_system ecommandsystem = e_command_system_none, const class time & timeTimeout = ::time::infinity(), ::particle * pparticleSynchronization = nullptr, ::file::file * pfileLog = nullptr) override;
       int command_system(const ::scoped_string& scopedstr, const trace_function& tracefunction = nullptr, const ::file::path& pathWorkingDirectory = {}, ::e_display edisplay = e_display_none) override;
@@ -329,7 +329,7 @@ namespace acme_windows
    
       ::pointer <::operating_system::summary > operating_system_summary() override;
 
-      void launch_app(const ::string & psz, const char ** argv, int iFlags) override;
+      void launch_app(const ::scoped_string & scopedstr, const char ** argv, int iFlags) override;
 
 
       ::pointer < ::operating_system::application > module_path_application(const ::scoped_string & scopestr) override;

@@ -21,14 +21,14 @@ namespace ca2plugin_container
       ::plugin::system *         system();
 
 
-      application(::plugin::system * psystem, const ::string & pszChannel);
+      application(::plugin::system * psystem, const ::scoped_string & scopedstrChannel);
       ~application() override;
       
       __DECLARE_APPLICATION_RELEASE_TIME();
 
 
 
-      virtual void on_receive(::aura::ipc::rx * prx, const ::string & pszMessage);
+      virtual void on_receive(::aura::ipc::rx * prx, const ::scoped_string & scopedstrMessage);
 
       virtual void on_receive(::aura::ipc::rx * prx, int message, void * pdata, int len);
 

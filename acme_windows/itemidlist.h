@@ -116,7 +116,7 @@ public:
    static int _order(LPCITEMIDLIST pidlf1, LPCITEMIDLIST pidlf2, IShellFolder * psfFolder = nullptr, LPARAM lparam = 0);//return zero means same,non-zero means different.
    //static HRESULT _parse(itemidlist & idl, const ::scoped_string & scopedstrPath, IShellFolder * psfFolder);
    static HRESULT _parse(itemidlist & idl, const ::scoped_string & scopedstrPath);
-   static HRESULT get_item_in_known_folder(itemidlist & idl, const string & strPath);
+   static HRESULT get_item_in_known_folder(itemidlist & idl, const ::scoped_string & scopedstrPath);
    static bool get_refid_for_known_folder(KNOWNFOLDERID & refid, const ::scoped_string & scopedstrKnownFolder);
    static int _overlay_icon_index(IShellFolder * psfFolder, LPCITEMIDLIST pidl);
 

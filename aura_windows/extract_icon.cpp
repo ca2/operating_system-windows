@@ -11,7 +11,7 @@
 BOOL ExtractResourceIcon_EnumNamesFunc(HMODULE hModule, const ::wide_character* pType, LPWSTR lpName, LONG_PTR lParam);
 
 
-CLASS_DECL_ACME HICON ExtractResourceIcon(const ::string& strPath, int& cx, int& cy, int iIcon);
+CLASS_DECL_ACME HICON ExtractResourceIcon(const ::scoped_string & scopedstrPath, int& cx, int& cy, int iIcon);
 
 
 struct extract_resource_icon
@@ -87,7 +87,7 @@ BOOL ExtractResourceIcon_EnumNamesFunc(HMODULE hModule, const ::wide_character* 
 namespace aura_windows
 {
 
-   HICON node::extract_resource_icon(const ::string& strPath, int& cx, int& cy, int iIcon)
+   HICON node::extract_resource_icon(const ::scoped_string & scopedstrPath, int& cx, int& cy, int iIcon)
    {
 
       HMODULE hLib = nullptr;

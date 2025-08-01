@@ -15,10 +15,10 @@ namespace acme_windows
 {
 
 
-   exclusive::exclusive(::particle * pparticle, const string & strId, security_attributes * psecurityattributes)
+   exclusive::exclusive(::particle * pparticle, const ::scoped_string & scopedstrId, security_attributes * psecurityattributes)
    {
 
-      m_strId = strId;
+      m_strId = scopedstrId;
 
       m_bResourceException = false;
 
@@ -27,7 +27,7 @@ namespace acme_windows
 
          ::pointer <::acme_windows_common::node>pnode = pparticle->node();
 
-         m_pmutex = pnode->create_named_mutex(pparticle, false, strId);
+         m_pmutex = pnode->create_named_mutex(pparticle, false,scopedstrId);
 
          //m_pmutex = //__allocate ::pointer < ::mutex > (pparticle, false, strId ADD_PARAM_SEC_ATTRS);
 
@@ -40,7 +40,7 @@ namespace acme_windows
          try
          {
 
-            m_pmutex = __allocate ::acme_windows_common::mutex(pparticle, false, strId);
+            m_pmutex = __allocate ::acme_windows_common::mutex(pparticle, false, scopedstrId);
 
             m_dwLastError = ::GetLastError();
 

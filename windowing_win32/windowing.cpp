@@ -935,7 +935,7 @@ namespace windowing_win32
    }
 
 
-   //   enum_dialog_result windowing::message_box(const ::string & pszMessage, const ::string & pszTitle, const ::e_message_box & emessagebox)
+   //   enum_dialog_result windowing::message_box(const ::scoped_string & scopedstrMessage, const ::scoped_string & scopedstrTitle, const ::e_message_box & emessagebox)
    //   {
    //
    //      wstring wstrMessage(pszMessage);

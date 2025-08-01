@@ -25,11 +25,11 @@ namespace apex_windows
       ~interprocess_target() override;
 
 
-      void create(const ::string & pszChannel) override;
+      void create(const ::scoped_string & scopedstrChannel) override;
       void destroy() override;
 
 
-      //void * on_interprocess_receive(const ::string & pszMessage) override;
+      //void * on_interprocess_receive(const ::scoped_string & scopedstrMessage) override;
       //void * on_interprocess_receive(int message, void * pdata, memsize len) override;
       //void * on_interprocess_post(long long a, long long b) override;
 

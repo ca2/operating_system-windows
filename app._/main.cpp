@@ -15,9 +15,9 @@
 #define IDI_CC_CA2_SPA       107
 #define IDI_CC_CA2_LEVEL    108
 
-string path_dir_name_for_relative(const ::string & pszPath);
-//string solve_relative(const ::string & pszAbsolute);
-//string path_defer_solve_relative_name(const ::string & pszRelative, const ::string & pszAbsolute);
+string path_dir_name_for_relative(const ::scoped_string & scopedstrPath);
+//string solve_relative(const ::scoped_string & scopedstrAbsolute);
+//string path_defer_solve_relative_name(const ::scoped_string & scopedstrRelative, const ::scoped_string & scopedstrAbsolute);
 
 
 // These next two structs represent how the icon information is stored
@@ -42,7 +42,7 @@ struct ICON_HEADER
 };
 
 
-void dprint(const ::string & psz)
+void dprint(const ::scoped_string & scopedstr)
 {
 
 
@@ -546,7 +546,7 @@ pacmedir->system() / "config/plugin/appfy_beg_debug_box.txt"))
 #define PATH_SEP2 "/"
 
 
-   string path_url_dir_name_for_relative(const ::string & pszPath)
+   string path_url_dir_name_for_relative(const ::scoped_string & scopedstrPath)
    {
       string strDir(pszPath);
 

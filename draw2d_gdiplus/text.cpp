@@ -15,10 +15,10 @@ namespace draw2d_gdiplus
 {
 
 
-   void graphics::_gdiplus_draw_text(::draw2d::path * ppathParam, const string & str, double_rectangle & rectangleParam, const ::e_align & ealign, const ::e_draw_text & edrawtext, ::write_text::font * pfontParam, double dFontWidth, ::draw2d::brush * pbrushParam, bool bMeasure)
+   void graphics::_gdiplus_draw_text(::draw2d::path * ppathParam, const ::scoped_string & scopedstr, double_rectangle & rectangleParam, const ::e_align & ealign, const ::e_draw_text & edrawtext, ::write_text::font * pfontParam, double dFontWidth, ::draw2d::brush * pbrushParam, bool bMeasure)
    {
 
-      if (str.is_empty())
+      if (scopedstr.is_empty())
       {
 
          //return ::success;
@@ -185,7 +185,7 @@ namespace draw2d_gdiplus
       if (pfontParam->m_bCacheLayout)
       {
 
-         ptext = &pfontParam->m_mapFontText[str];
+         ptext = &pfontParam->m_mapFontText[scopedstr];
 
       }
       else
@@ -198,7 +198,7 @@ namespace draw2d_gdiplus
       if (ptext->m_wstr.is_empty())
       {
 
-         ptext->m_wstr = str;
+         ptext->m_wstr = scopedstr;
 
       }
 

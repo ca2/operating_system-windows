@@ -368,7 +368,7 @@ namespace windows
    }
 
 
-   bool os_context::local_machine_set_run(const ::string & pszKey, const ::string & pszCommand, bool bSet)
+   bool os_context::local_machine_set_run(const ::scoped_string & scopedstrKey, const ::scoped_string & scopedstrCommand, bool bSet)
    {
 
       try
@@ -403,7 +403,7 @@ namespace windows
    }
 
 
-   bool os_context::local_machine_set_run_once(const ::string & pszKey, const ::string & pszCommand, bool bSet)
+   bool os_context::local_machine_set_run_once(const ::scoped_string & scopedstrKey, const ::scoped_string & scopedstrCommand, bool bSet)
    {
 
       try
@@ -437,7 +437,7 @@ namespace windows
    }
 
 
-   bool os_context::current_user_set_run(const ::string & pszKey, const ::string & pszCommand, bool bSet)
+   bool os_context::current_user_set_run(const ::scoped_string & scopedstrKey, const ::scoped_string & scopedstrCommand, bool bSet)
    {
 
       try
@@ -473,7 +473,7 @@ namespace windows
    }
 
 
-   bool os_context::current_user_set_run_once(const ::string & pszKey, const ::string & pszCommand, bool bSet)
+   bool os_context::current_user_set_run_once(const ::scoped_string & scopedstrKey, const ::scoped_string & scopedstrCommand, bool bSet)
    {
 
       try
@@ -539,7 +539,7 @@ namespace windows
       return true;
    }
 
-   bool os_context::file_extension_get_open_with_list_keys(string_array & straKey, const ::string & pszExtension)
+   bool os_context::file_extension_get_open_with_list_keys(string_array & straKey, const ::scoped_string & scopedstrExtension)
    {
 
       try
@@ -570,7 +570,7 @@ namespace windows
    }
 
 
-   bool os_context::file_extension_get_open_with_list_commands(string_array & straCommand, const ::string & pszExtension)
+   bool os_context::file_extension_get_open_with_list_commands(string_array & straCommand, const ::scoped_string & scopedstrExtension)
    {
 
       string_array straKey;
@@ -588,7 +588,7 @@ namespace windows
    }
 
 
-   bool os_context::file_association_set_default_icon(const ::string & pszExtension, const ::string & pszExtensionNamingClass, const ::string & pszIconPath)
+   bool os_context::file_association_set_default_icon(const ::scoped_string & scopedstrExtension, const ::scoped_string & scopedstrExtensionNamingClass, const ::scoped_string & scopedstrIconPath)
    {
 
       try
@@ -614,7 +614,7 @@ namespace windows
    }
 
 
-   bool os_context::file_association_set_shell_open_command(const ::string & pszExtension, const ::string & pszExtensionNamingClass,  const scoped_string & strCommand, const ::string & pszParam)
+   bool os_context::file_association_set_shell_open_command(const ::scoped_string & scopedstrExtension, const ::scoped_string & scopedstrExtensionNamingClass,  const scoped_string & strCommand, const ::scoped_string & scopedstrParam)
    {
 
       ::e_status estatus = ::success;
@@ -701,7 +701,7 @@ namespace windows
    }
 
 
-   bool os_context::file_association_get_shell_open_command(const ::string & pszExtension, string & strExtensionNamingClass, string & strCommand, string & strParam)
+   bool os_context::file_association_get_shell_open_command(const ::scoped_string & scopedstrExtension, string & strExtensionNamingClass, string & strCommand, string & strParam)
    {
 
       try
@@ -1558,7 +1558,7 @@ retry:
 
 
 
-   void os_context::set_file_status(const ::string & pszFileName, const ::file::file_status& status)
+   void os_context::set_file_status(const ::scoped_string & scopedstrFileName, const ::file::file_status& status)
 
    {
 

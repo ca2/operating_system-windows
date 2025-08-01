@@ -5,7 +5,7 @@ namespace ca2plugin_container
 {
 
 
-   application::application(::plugin::system * psystem, const ::string & pszChannel) :
+   application::application(::plugin::system * psystem, const ::scoped_string & scopedstrChannel) :
       ::object(psystem),
       ::thread(psystem),
       ::aura::application(psystem),
@@ -65,7 +65,7 @@ namespace ca2plugin_container
    }
 
 
-   void application::on_receive(::aura::ipc::rx * prx, const ::string & pszMessage)
+   void application::on_receive(::aura::ipc::rx * prx, const ::scoped_string & scopedstrMessage)
    {
 
       __UNREFERENCED_PARAMETER(pszMessage);

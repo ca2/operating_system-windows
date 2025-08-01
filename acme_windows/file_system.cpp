@@ -103,7 +103,7 @@ namespace acme_windows
    }
 
 
-   ::file::path file_system::time_put_contents(const ::file::path& pathFolder, const ::string& strPrefix, const ::string& strExtension, const ::string& str)
+   ::file::path file_system::time_put_contents(const ::file::path& pathFolder, const ::scoped_string & scopedstrPrefix, const ::scoped_string & scopedstrExtension, const ::scoped_string & scopedstr)
    {
 
       ::file::path path;
@@ -117,7 +117,7 @@ namespace acme_windows
 
          strHexadecimal.formatf("%08x", i);
 
-         path = pathFolder / (strPrefix + "-" + strHexadecimal + "." + strExtension);
+         path = pathFolder / (scopedstrPrefix + "-" + strHexadecimal + "." + scopedstrExtension);
 
          if (exists(path))
          {
@@ -128,7 +128,7 @@ namespace acme_windows
 
          }
 
-         put_contents(path, str);
+         put_contents(path, scopedstrExtension);
 
          break;
 

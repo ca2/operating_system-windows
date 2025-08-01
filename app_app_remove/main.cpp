@@ -36,29 +36,29 @@ public:
 
    virtual ~removal();
 
-   bool is_user_using(const ::string & pszDll);
+   bool is_user_using(const ::scoped_string & scopedstrDll);
 
    INT cube_run(const ::string & atom);
 
    bool are_there_user_files_in_use();
 
-   bool is_user_using(UINT processid, const ::string & pszDll);
+   bool is_user_using(UINT processid, const ::scoped_string & scopedstrDll);
 
    virtual void     run() override;
 
    virtual bool destroy();
 
 
-   virtual void system(const ::string & pszCmd);
+   virtual void system(const ::scoped_string & scopedstrCmd);
 
    virtual ::file::path get_known_folder_dir(const KNOWNFOLDERID & rfid, const ::string & lpcsz);
 
 
-   virtual void rmdir(const ::string & pszDir);
+   virtual void rmdir(const ::scoped_string & scopedstrDir);
 
-   virtual void rmdir_n_v(const ::string & pszDir);
+   virtual void rmdir_n_v(const ::scoped_string & scopedstrDir);
 
-   virtual void g_n_rmdir_n_v(const KNOWNFOLDERID & rfid, const ::string & pszDir);
+   virtual void g_n_rmdir_n_v(const KNOWNFOLDERID & rfid, const ::scoped_string & scopedstrDir);
 
 };
 
@@ -137,7 +137,7 @@ removal::~removal()
 
 
 
-void removal::system(const ::string & pszCmd)
+void removal::system(const ::scoped_string & scopedstrCmd)
 {
 
    psystem->process().synch(pszCmd);
@@ -163,7 +163,7 @@ void removal::system(const ::string & pszCmd)
 }
 
 
-void removal::rmdir(const ::string & pszDir)
+void removal::rmdir(const ::scoped_string & scopedstrDir)
 {
 
    system(("cmd.exe /C rmdir /S /Q \"" + string(pszDir) + "\"").c_str());
@@ -171,7 +171,7 @@ void removal::rmdir(const ::string & pszDir)
 }
 
 
-void removal::rmdir_n_v(const ::string & pszDir)
+void removal::rmdir_n_v(const ::scoped_string & scopedstrDir)
 {
 
    string str(pszDir);
@@ -189,7 +189,7 @@ void removal::rmdir_n_v(const ::string & pszDir)
 }
 
 
-void removal::g_n_rmdir_n_v(const KNOWNFOLDERID & rfid, const ::string & pszDir)
+void removal::g_n_rmdir_n_v(const KNOWNFOLDERID & rfid, const ::scoped_string & scopedstrDir)
 {
 
    string strDir = get_known_folder_dir(rfid,pszDir);
@@ -362,7 +362,7 @@ void     removal::run()
 
 
 // non-thread safe
-bool removal::is_user_using(UINT processid, const ::string & pszDll)
+bool removal::is_user_using(UINT processid, const ::scoped_string & scopedstrDll)
 {
 
    HANDLE hModuleSnap = INVALID_HANDLE_VALUE;
@@ -403,7 +403,7 @@ bool removal::is_user_using(UINT processid, const ::string & pszDll)
 }
 
 // non-thread safe
-bool removal::is_user_using(const ::string & pszDll)
+bool removal::is_user_using(const ::scoped_string & scopedstrDll)
 {
    HANDLE hProcessSnap;
    PROCESSENTRY32 pe32;

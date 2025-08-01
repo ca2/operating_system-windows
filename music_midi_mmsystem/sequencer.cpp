@@ -38,7 +38,7 @@ namespace music
       {
 
 
-         sequencer::sequencer(sequence * psequence, const string & strDevice) :
+         sequencer::sequencer(sequence * psequence, const ::scoped_string & scopedstrDevice) :
             ::music::midi::sequencer(psequence, strDevice)
          {
 

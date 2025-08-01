@@ -654,7 +654,7 @@ namespace draw2d_gdiplus
    }
 
 
-   bool image::_load_thumbnail(const ::string & psz)
+   bool image::_load_thumbnail(const ::scoped_string & scopedstr)
    {
 
       ::Gdiplus::Graphics * pgraphics = (::Gdiplus::Graphics *)get_graphics()->get_os_data();

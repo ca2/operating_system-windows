@@ -37,7 +37,7 @@ namespace acme_windows
       void SetCursorPosition(int y,int x);
       void SetTextColor(int color);
       void SetScreenColor(enum_dos_color edoscolor, int iLineStart = 0, int iLineCount = -1);
-      void write(const ::string & psz);
+      void write(const ::scoped_string & scopedstr);
 
    };
 

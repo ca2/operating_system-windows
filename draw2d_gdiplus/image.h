@@ -42,7 +42,7 @@ namespace draw2d_gdiplus
       virtual void on_exif_orientation();
 
 
-      virtual bool _load_thumbnail(const ::string & psz);
+      virtual bool _load_thumbnail(const ::scoped_string & scopedstr);
 
 
       virtual void _map(bool) override;

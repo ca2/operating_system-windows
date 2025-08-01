@@ -21,7 +21,7 @@ namespace acme_windows
       ::pointer < ::mutex >         m_pmutex;
 
 
-      exclusive(::particle * pparticle, const string & strName, security_attributes * psecurityattributes);
+      exclusive(::particle * pparticle, const ::scoped_string & scopedstrName, security_attributes * psecurityattributes);
       ~exclusive() override;
 
 

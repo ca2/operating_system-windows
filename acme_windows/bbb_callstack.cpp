@@ -256,7 +256,7 @@ namespace windows
    critical_section* callstack::s_pcriticalsection = nullptr;
 
 
-   callstack::callstack(const ::string & pszFormat, int iSkip, void* caller_address, int iCount) :
+   callstack::callstack(const ::scoped_string & scopedstrFormat, int iSkip, void* caller_address, int iCount) :
       m_iSkip(iSkip),
       m_iCount(iCount),
       m_bOk(false),
@@ -1008,7 +1008,7 @@ namespace windows
    }
 
 
-   //bool callstack::stack_trace(CONTEXT* pcontext, iptr iSkip, const ::string & pszFormat, int iCount)
+   //bool callstack::stack_trace(CONTEXT* pcontext, iptr iSkip, const ::scoped_string & scopedstrFormat, int iCount)
    //{
 
    //   if (!pszFormat)
@@ -1117,7 +1117,7 @@ namespace windows
 //   }
 
 
-//   bool callstack::stack_trace(iptr iSkip, const ::string & pszFormat, int iCount)
+//   bool callstack::stack_trace(iptr iSkip, const ::scoped_string & scopedstrFormat, int iCount)
 //   {
 //
 //      if (iSkip >= 0)
@@ -1169,7 +1169,7 @@ namespace windows
 //   }
 
 
-   //bool callstack::stack_trace(CONTEXT* pcontext, iptr iSkip, bool bSkip, const ::string & pszFormat, int iCount)
+   //bool callstack::stack_trace(CONTEXT* pcontext, iptr iSkip, bool bSkip, const ::scoped_string & scopedstrFormat, int iCount)
    //{
 
    //   if (iSkip >= 0)
@@ -1259,7 +1259,7 @@ namespace windows
    //}
 
 
-   //char * callstack::stack_trace(OS_DWORD * pinteraction, int c, const ::string & pszFormat, int iCount)
+   //char * callstack::stack_trace(OS_DWORD * pinteraction, int c, const ::scoped_string & scopedstrFormat, int iCount)
    //{
 
    //   critical_section_lock csl(s_pcriticalsection);
@@ -1297,7 +1297,7 @@ namespace windows
 
 
 
-   //char * callstack::get_frame(const ::string & pszFormat, int & iLine)
+   //char * callstack::get_frame(const ::scoped_string & scopedstrFormat, int & iLine)
    //{
 
 
@@ -1439,14 +1439,14 @@ namespace  windows
    static LPVOID s_readMemoryFunction_UserData = nullptr;
 
 
-   //bool callstack::stack_trace(iptr iSkip, const ::string & pszFormat, int iCount)
+   //bool callstack::stack_trace(iptr iSkip, const ::scoped_string & scopedstrFormat, int iCount)
    //{
 
    //   return false;
 
    //}
 
-   //char* callstack::stack_trace(OS_DWORD* pinteraction, int c, const ::string & pszFormat, int iCount)
+   //char* callstack::stack_trace(OS_DWORD* pinteraction, int c, const ::scoped_string & scopedstrFormat, int iCount)
    //{
 
    //   critical_section_lock csl(s_pcriticalsection);
@@ -1599,7 +1599,7 @@ namespace  windows
    //}
 
 
-   const char* callstack::get_dup(const ::string & pszFormat, int iSkip, int iCount)
+   const char* callstack::get_dup(const ::scoped_string & scopedstrFormat, int iSkip, int iCount)
    {
 
       if (iSkip >= 0)

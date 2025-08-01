@@ -105,7 +105,7 @@ namespace windowing_win32
 //      virtual const char * _get_notification_area_action_label(int iIndex) override;
 //      virtual const char * _get_notification_area_action_accelerator(int iIndex) override;
 //      virtual const char * _get_notification_area_action_description(int iIndex) override;
-//      virtual void call_notification_area_action(const ::string & pszId) override;
+//      virtual void call_notification_area_action(const ::scoped_string & scopedstrId) override;
 //#endif
 
 

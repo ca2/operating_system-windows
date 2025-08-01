@@ -1621,7 +1621,7 @@ pacmedir->create(pathTarget.folder()))
    }*/
 
 
-   bool  production::sync_source(const ::string & psz, const ::string & pszRevision)
+   bool  production::sync_source(const ::scoped_string & scopedstr, const ::scoped_string & scopedstrRevision)
    {
       string strStatus;
       strStatus.Format("Updating source: %s ...", psz);
@@ -1686,7 +1686,7 @@ pacmedir->create(pathTarget.folder()))
       return true;
    }
 
-   bool production::commit_source(const ::string & psz)
+   bool production::commit_source(const ::scoped_string & scopedstr)
    {
       string strStatus;
       strStatus = unitext("Commit ") + psz;
@@ -1704,15 +1704,15 @@ pacmedir->create(pathTarget.folder()))
 
       DWORD dwExitCode;
       int i = 1;
-      ::file::path pathDir = strBase;
-      pathDir /= psz;
+      ::file::path pathFolder = strBase;
+      pathFolder /= psz;
 
       if (string(psz).find(":\\") <= 0)
       {
          str.formatf("git stage .");
 
          wstring wstr(str);
-         if (!::CreateProcessW(nullptr, (LPWSTR)(const wchar_t *)wstr, nullptr, nullptr, false, CREATE_NEW_CONSOLE, nullptr, wstring(pathDir), &si, &pi))
+         if (!::CreateProcessW(nullptr, (LPWSTR)(const wchar_t *)wstr, nullptr, nullptr, false, CREATE_NEW_CONSOLE, nullptr, wstring(pathFolder), &si, &pi))
          {
             strStatus.Format("     Error: Check svn installation!!");
             add_status(strStatus);
@@ -1816,7 +1816,7 @@ pacmedir->create(pathTarget.folder()))
       return true;
    }
 
-   bool production::get_file_list(const ::string & pszBase, const ::string & pszDir, ::file::listing & stra, bool bFileSet)
+   bool production::get_file_list(const ::scoped_string & scopedstrBase, const ::scoped_string & scopedstrDir, ::file::listing & stra, bool bFileSet)
    {
       ::file::path strBase(pszBase);
       ::file::path strRelease;
@@ -2303,20 +2303,20 @@ pacmedir->create(pathTarget.folder()))
    }
 
 
-   void production::xpi_section(const ::string & pszManifest, const ::string & pszSignature)
+   void production::xpi_section(const ::scoped_string & scopedstrManifest, const ::scoped_string & scopedstrSignature)
    {
       m_straManifest.add(pszManifest);
       memory memManifest(pszManifest);
       m_straSignature.add(string(pszSignature) + xpi_digest(memManifest));
    }
 
-   void production::add_path(const ::file::path & pathDir, const ::file::path & pathRelative)
+   void production::add_path(const ::file::path & pathFolder, const ::file::path & pathRelative)
    {
       m_straPath.add(pszDir / pszRelative);
       m_straPath.last().m_iRelative = strlen(pszDir) + 1;
    }
 
-   void production::xpi_sign_dir(const ::string & pszPlatform, const ::file::path & pathDir)
+   void production::xpi_sign_dir(const ::scoped_string & scopedstrPlatform, const ::file::path & pathFolder)
    {
 
       m_straPath.erase_all();
@@ -2407,7 +2407,7 @@ pacmedir->create(pathTarget.folder()))
 
 
 
-   bool production::release_npca2(const ::string & pszPlatform)
+   bool production::release_npca2(const ::scoped_string & scopedstrPlatform)
    {
 
       string strPlatform(pszPlatform);
@@ -2571,7 +2571,7 @@ pacmedir->create(pathTarget.folder()))
       return true;
    }
 
-   bool production::create_xpi(const ::string & pszPlatform, bool bSigned)
+   bool production::create_xpi(const ::scoped_string & scopedstrPlatform, bool bSigned)
    {
 
       string strPlatform(pszPlatform);
@@ -2594,7 +2594,7 @@ pacmedir->create(pathTarget.folder()))
 
    }
 
-   bool production::create_signed_xpi(const ::string & pszPlatform)
+   bool production::create_signed_xpi(const ::scoped_string & scopedstrPlatform)
    {
 
       string strPlatform(pszPlatform);
@@ -2636,7 +2636,7 @@ pacmedir->create(pathTarget.folder()))
       return true;
    }
 
-   bool production::create_unsigned_xpi(const ::string & pszPlatform)
+   bool production::create_unsigned_xpi(const ::scoped_string & scopedstrPlatform)
    {
 
       string strPlatform(pszPlatform);
@@ -2670,7 +2670,7 @@ pacmedir->create(pathTarget.folder()))
 
    }
 
-   bool production::release_iexca2(const ::string & pszPlatform)
+   bool production::release_iexca2(const ::scoped_string & scopedstrPlatform)
    {
 
       string strStatus;
@@ -2730,7 +2730,7 @@ pacmedir->create(pathTarget.folder()))
 
    }
 
-   bool production::release_crxca2(const ::string & pszPlatform)
+   bool production::release_crxca2(const ::scoped_string & scopedstrPlatform)
    {
 
       string strPlatform(pszPlatform);
@@ -2905,7 +2905,7 @@ pacmedir->create(pathTarget.folder()))
    }
 
 
-   void production::add_status(const ::string & psz)
+   void production::add_status(const ::scoped_string & scopedstr)
    {
       {
          single_lock synchronouslock(&m_mutexStatus, true);
@@ -2915,7 +2915,7 @@ pacmedir->create(pathTarget.folder()))
       m_pimpact->post_message(WM_USER, 1);
    }
 
-   void production::change_status(const ::string & psz)
+   void production::change_status(const ::scoped_string & scopedstr)
    {
       {
          single_lock synchronouslock(&m_mutexStatus, true);
@@ -2933,7 +2933,7 @@ pacmedir->create(pathTarget.folder()))
 
 
 
-   production::release::release(production * pproduction, const ::string & pszRelease, const ::string & pszServer) :
+   production::release::release(production * pproduction, const ::scoped_string & scopedstrRelease, const ::scoped_string & scopedstrServer) :
       ::object(pproduction->get_application()),
       thread(pproduction->get_application()),
       m_strRelease(pszRelease),
@@ -3150,7 +3150,7 @@ pacmedir->create(pathTarget.folder()))
 
 
 
-   string production::twitter_twit(const ::string & pszMessage)
+   string production::twitter_twit(const ::scoped_string & scopedstrMessage)
    {
 
       int iRetry = 0;
@@ -3241,7 +3241,7 @@ retry1:
 
    }
 
-   string production::facebook_status(const ::string & pszMessage)
+   string production::facebook_status(const ::scoped_string & scopedstrMessage)
    {
 
       int iRetry = 0;
@@ -3413,7 +3413,7 @@ retry1:
 
 
 
-   void production::build(const ::string & psz)
+   void production::build(const ::scoped_string & scopedstr)
    {
 
       // Build before production!!
@@ -3495,7 +3495,7 @@ retry1:
 
    }
 
-   string production::version_to_international_datetime(const ::string & psz)
+   string production::version_to_international_datetime(const ::scoped_string & scopedstr)
    {
       string str(psz);
       str.replace("-", ":", 11);
@@ -3503,7 +3503,7 @@ retry1:
    }
 
 
-   void production::update_rc_file_version(const ::string & pszUrl)
+   void production::update_rc_file_version(const ::scoped_string & scopedstrUrl)
    {
 
       string str = file().as_string(pszUrl);

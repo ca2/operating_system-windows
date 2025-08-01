@@ -22,7 +22,7 @@ namespace windowing_win32
    }
 
 
-   void message_window::create_message_window(const ::string & pszName,::user::interaction_listener * pinteractionlistener)
+   void message_window::create_message_window(const ::scoped_string & scopedstrName,::user::interaction_listener * pinteractionlistener)
    {
 
       m_pinteractionlistener = pinteractionlistener;
