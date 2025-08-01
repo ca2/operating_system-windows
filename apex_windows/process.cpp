@@ -48,14 +48,14 @@ namespace apex_windows
    bool process::create_child_process(const ::scoped_string & scopedstrCmdLine, bool bPiped, const ::scoped_string & scopedstrDir, ::enum_priority epriority)
    {
 
-      if (!::operating_system::process::create_child_process(pszCmdLine, bPiped, strDir, epriority))
+      if (!::operating_system::process::create_child_process(scopedstrCmdLine, bPiped, scopedstrDir, epriority))
       {
 
          return false;
 
       }
 
-      string szCmdline = pszCmdLine;
+      string szCmdline = scopedstrCmdLine;
 
       bool bSuccess = false;
 
@@ -92,11 +92,11 @@ namespace apex_windows
 
       unsigned int dwPriorityClass = ::get_os_priority_class(epriority);
 
-      wstring wstrDir(strDir);
+      wstring wstrDir(scopedstrDir);
 
       const unichar * pwszDir;
 
-      if (strDir.is_empty())
+      if (scopedstrDir.is_empty())
       {
 
          pwszDir = nullptr;
@@ -234,7 +234,7 @@ namespace apex_windows
 
       HANDLE h = nullptr;
 
-      ::parse parse(pszCmdLine,strlen(pszCmdLine), "= "_ansi);
+      ::parse parse(scopedstrCmdLine,strlen(scopedstrCmdLine), "= "_ansi);
 
       parse.EnableQuote(true);
 

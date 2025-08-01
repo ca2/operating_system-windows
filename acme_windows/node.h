@@ -159,7 +159,7 @@ namespace acme_windows
 
       void set_environment_variable(const ::scoped_string & scopedstrEnvironmentVariable, const ::scoped_string & scopedstrValue) override;
 
-      //virtual unsigned int       get_file_attributes(const ::string & pFileName);
+      //virtual unsigned int       get_file_attributes(const ::scoped_string & scopedstrFileName);
       //virtual ::file::path       get_current_directory();
       virtual int              reg_query_value(HKEY hkey, const ::scoped_string & scopedstrSubKey, string & str);
       virtual  HICON             extract_icon(HINSTANCE hInst, const ::scoped_string & scopedstrExeFileName, unsigned int nIconIndex);
@@ -306,7 +306,7 @@ namespace acme_windows
 
       bool _is_strawberry_perl_installed() override;
 
-      bool _is_code_exe_user_path_environment_variable_ok(::string* pstrCorrectPath = nullptr, const char * pszPath = nullptr) override;
+      bool _is_code_exe_user_path_environment_variable_ok(::string* pstrCorrectPath = nullptr, const_char_pointer pszPath = nullptr) override;
 
       bool _is_coder_mode_enabled() override;
 
@@ -325,11 +325,11 @@ namespace acme_windows
       //// replace __try __finally with at_end_of_scope
       //// changed arguments to ansi_character * and used bstring class for string conversion
       //// use of comptr to guard COM objets and variant to guard VARIANTs
-      //virtual void _unzip_to_folder(const char* pszZip, const char* pszFolder);
+      //virtual void _unzip_to_folder(const_char_pointer pszZip, const_char_pointer pszFolder);
    
       ::pointer <::operating_system::summary > operating_system_summary() override;
 
-      void launch_app(const ::scoped_string & scopedstr, const char ** argv, int iFlags) override;
+      void launch_app(const ::scoped_string & scopedstr, const_char_pointer * argv, int iFlags) override;
 
 
       ::pointer < ::operating_system::application > module_path_application(const ::scoped_string & scopestr) override;

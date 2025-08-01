@@ -395,9 +395,9 @@ namespace aura_windows
 
       int iMessageBox = emessagebox.m_eenum & 0x7f;
 
-      wstring wstrText(pszMessage);
+      wstring wstrText(scopedstrMessage);
 
-      wstring wstrTitle(pszTitle);
+      wstring wstrTitle(scopedstrTitle);
 
       int iResult = ::MessageBox(nullptr, wstrText, wstrTitle, iMessageBox);
 

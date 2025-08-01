@@ -860,7 +860,7 @@ pacmedir->system() / "config/production/mirror_status.txt";
 
          for (int i = 0; i < m_straFiles.get_size(); i++)
          {
-            //const char * lpcsz = m_straFiles[i];
+            //const_char_pointer lpcsz = m_straFiles[i];
 
             strStatus.empty();
 

@@ -13,7 +13,7 @@
 #define WINDOWS
 #include <tlhelp32.h>
 
-void reg_delete_tree_dup(HKEY hkey, const ::string & name);
+void reg_delete_tree_dup(HKEY hkey, const ::scoped_string & scopedstrName);
 
 class removal :
    public ::aura::application
@@ -51,7 +51,7 @@ public:
 
    virtual void system(const ::scoped_string & scopedstrCmd);
 
-   virtual ::file::path get_known_folder_dir(const KNOWNFOLDERID & rfid, const ::string & lpcsz);
+   virtual ::file::path get_known_folder_dir(const KNOWNFOLDERID & rfid, const ::scoped_string & scopedstr);
 
 
    virtual void rmdir(const ::scoped_string & scopedstrDir);
@@ -119,7 +119,7 @@ removal::~removal()
 }
 
 
-::file::path removal::get_known_folder_dir(const KNOWNFOLDERID & rfid, const ::string & lpcsz)
+::file::path removal::get_known_folder_dir(const KNOWNFOLDERID & rfid, const ::scoped_string & scopedstr)
 {
 
    wchar_t * buf = nullptr;

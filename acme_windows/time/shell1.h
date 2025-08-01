@@ -263,7 +263,7 @@
 //      static bool  GetStringTypeEx(      
 //         LCID Locale,
 //         unsigned int dwInfoType,
-//         const char * pSrcStr,
+//         const_char_pointer pSrcStr,
 //
 //         int cchSrc,
 //         LPWORD pCharType);
@@ -347,7 +347,7 @@
 //         unsigned int uUnique,
 //         string & str);
 //
-//      static bool MoveFile(const char * pExistingFileName, const char * lpNewFileName);
+//      static bool MoveFile(const_char_pointer pExistingFileName, const_char_pointer lpNewFileName);
 //
 //
 //   };
@@ -599,7 +599,7 @@
 //      return uiResult;
 //   }
 //
-//   inline bool shell::MoveFile(const char * pExistingFileName, const char * lpNewFileName)
+//   inline bool shell::MoveFile(const_char_pointer pExistingFileName, const_char_pointer lpNewFileName)
 //
 //   {
 //      return MoveFile(utf8_to_unicode(pExistingFileName), utf8_to_unicode(lpNewFileName));

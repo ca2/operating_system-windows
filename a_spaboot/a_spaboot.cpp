@@ -222,7 +222,7 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
 
 
 
-bool file_system()->exists(const ::string & path1)
+bool file_system()->exists(const ::scoped_string & scopedstrPath1)
 {
    DWORD dwFileAttributes = ::GetFileAttributes(path1);
    if(dwFileAttributes != INVALID_FILE_ATTRIBUTES &&

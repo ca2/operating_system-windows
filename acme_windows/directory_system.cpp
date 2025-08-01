@@ -608,7 +608,7 @@ pacmedir->roaming();
    }
 
    
-//   bool directory_system::_is(const char * path1)
+//   bool directory_system::_is(const_char_pointer path1)
 //   {
 //
 //#ifdef UNIVERSAL_WINDOWS
@@ -897,7 +897,7 @@ bool windows_file_find_is_dots(const WIN32_FIND_DATAW & data)
 //      }
 //
 
-      // bool eat_end_level(string & str, int iLevelCount, const char * pSeparator)
+      // bool eat_end_level(string & str, int iLevelCount, const_char_pointer pSeparator)
       // {
 
       //    character_count iLast = str.length() - 1;
@@ -1044,7 +1044,7 @@ bool windows_file_find_is_dots(const WIN32_FIND_DATAW & data)
       //   }
 
 
-      //bool directory_system::create(const char * path)
+      //bool directory_system::create(const_char_pointer path)
       //{
 
       //   return _create(path);
@@ -1055,7 +1055,7 @@ bool windows_file_find_is_dots(const WIN32_FIND_DATAW & data)
 #ifndef WINDOWS_DESKTOP
 
 
-      bool directory_system::_mk(const char * path)
+      bool directory_system::_mk(const_char_pointer path)
       {
 
          if (is(path))
@@ -1247,7 +1247,7 @@ pacmedir->create CreateDirectoryW last error(%d)=%s", dwError, pszError);
       }
 
 
-      //bool directory_system::is(const char * path)
+      //bool directory_system::is(const_char_pointer path)
       //{
 
       //   //if (::file::system_dir::g_pthis == nullptr)
@@ -2001,7 +2001,7 @@ pacmedir->create CreateDirectoryW last error(%d)=%s", dwError, pszError);
       //}
 
 
-//      void directory_system::__øcreate(const char * pathParam)
+//      void directory_system::__øcreate(const_char_pointer pathParam)
 //      {
 //
 //         if (is(pathParam))

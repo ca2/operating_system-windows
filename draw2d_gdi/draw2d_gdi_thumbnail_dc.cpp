@@ -515,8 +515,8 @@ int_size preview_dc::ComputeDeltas(int& x, const ::scoped_string & scopedstrStri
       x = pointCurrent.x();
    }
 
-   const char * lpszCurChar = lpszString;
-   const char * lpszStartRun = lpszString;
+   const_char_pointer lpszCurChar = lpszString;
+   const_char_pointer lpszStartRun = lpszString;
    int* pnCurDelta = pnDxWidths;
    int nStartRunPos = x;
    int nCurrentPos = x;
@@ -641,7 +641,7 @@ bool preview_dc::text_out(int x, int y, const ::scoped_string & scopedstrString,
 }
 
 bool preview_dc::ExtTextOut(int x, int y, UINT nOptions, const ::int_rectangle & rectangle,
-   const char * lpszString, UINT nCount, LPINT lpDxWidths)
+   const_char_pointer lpszString, UINT nCount, LPINT lpDxWidths)
 {
    ASSERT(get_os_data() != nullptr);
    ASSERT(get_handle2() != nullptr);

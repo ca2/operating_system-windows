@@ -92,7 +92,7 @@ namespace aura_windows
 
       HMODULE hLib = nullptr;
 
-      ::string strExpanded = expand_environment_variables((const ::scoped_string &) strPath);
+      ::string strExpanded = expand_environment_variables((const ::scoped_string &) scopedstrPath);
 
       ::file::path path(strExpanded);
 

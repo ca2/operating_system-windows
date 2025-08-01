@@ -71,7 +71,7 @@ pacmedir->create(::file_path_folder(pszFile));
 }
 
 
-int_bool file_system()->exists(const char * path1)
+int_bool file_system()->exists(const_char_pointer path1)
 {
 
    unsigned int dwFileAttributes = windows_get_file_attributes(path1);
@@ -88,7 +88,7 @@ int_bool file_system()->exists(const char * path1)
 }
 
 
-int_bool file_system()->put_contents(const char * path, const char * contents, memsize len)
+int_bool file_system()->put_contents(const_char_pointer path, const_char_pointer contents, memsize len)
 {
 
             auto psystem = system();
@@ -126,7 +126,7 @@ pacmedir->create(::file_path_folder(path));
 }
 
 
-filesize file_length_dup(const char * path)
+filesize file_length_dup(const_char_pointer path)
 {
 
    HANDLE hfile = CreateFileW(wstring(path), GENERIC_READ, FILE_SHARE_WRITE | FILE_SHARE_READ | FILE_SHARE_DELETE, nullptr, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, nullptr);
@@ -432,7 +432,7 @@ struct PROCESS_INFO_t
 ////      nFileType = XP_FILETYPE;
 ////   }
 ////
-////   const char * pPath = csPath;
+////   const_char_pointer pPath = csPath;
 ////
 ////   wstring csShortName;
 ////   GetShortPathNameW( wstring(csPath), csShortName.get_buffer( MAX_PATH), MAX_PATH );
@@ -440,7 +440,7 @@ struct PROCESS_INFO_t
 ////   string strShortName(csShortName);
 ////   strShortName.make_lower();
 ////   bool bShortPath = false;
-////   const char * pShortPath = strShortName;
+////   const_char_pointer pShortPath = strShortName;
 ////
 ////   if(string( csShortName )!= csPath && false == csShortName.is_empty())
 ////   {
@@ -830,7 +830,7 @@ int_bool FILE_set_size(FILE * file, size_t iSize)
 
 
 
-int_bool file_set_length(const char * lpszName, size_t iSize)
+int_bool file_set_length(const_char_pointer lpszName, size_t iSize)
 {
 
    wstring wstr(lpszName);
@@ -893,7 +893,7 @@ int_bool file_delete(const scoped_string & strFileName)
 
 
 
-char get_drive_letter(const char * pDevicePath)
+char get_drive_letter(const_char_pointer pDevicePath)
 {
 
    wchar_t d = 'A';
@@ -926,7 +926,7 @@ char get_drive_letter(const char * pDevicePath)
 }
 
 
-memory file_as_memory(const char * path, memsize iReadAtMostByteCount)
+memory file_as_memory(const_char_pointer path, memsize iReadAtMostByteCount)
 {
 
    memory mem;
@@ -1234,7 +1234,7 @@ namespace file
 
 //
 //
-//int_bool file_exists_raw(const char * path1)
+//int_bool file_exists_raw(const_char_pointer path1)
 //{
 //
 //

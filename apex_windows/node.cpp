@@ -1041,7 +1041,7 @@ namespace apex_windows
 
       DWORD dwType = 0;
       DWORD dwSize = 0;
-      int lResult = RegQueryValueExW(hkey, wstring(pszSubKey), nullptr, &dwType, nullptr, &dwSize);
+      int lResult = RegQueryValueExW(hkey, wstring(scopedstrSubKey), nullptr, &dwType, nullptr, &dwSize);
 
       if (lResult != ERROR_SUCCESS)
       {
@@ -1058,7 +1058,7 @@ namespace apex_windows
          
          auto pwsz = wstr.get_buffer(dwSize);
 
-         lResult = RegQueryValueExW(hkey, wstring(pszSubKey), nullptr, &dwType, (unsigned char*)(unichar*)pwsz, &dwSize);
+         lResult = RegQueryValueExW(hkey, wstring(scopedstrSubKey), nullptr, &dwType, (unsigned char*)(unichar*)pwsz, &dwSize);
 
          wstr.release_buffer(dwSize);
 
@@ -1080,7 +1080,7 @@ namespace apex_windows
    HICON node::extract_icon(HINSTANCE hInst, const ::scoped_string & scopedstrExeFileName, unsigned int nIconIndex)
    {
 
-      return ::ExtractIconW(hInst, utf8_to_unicode(pszExeFileName), nIconIndex);
+      return ::ExtractIconW(hInst, utf8_to_unicode(scopedstrExeFileName), nIconIndex);
 
    }
 
@@ -1456,7 +1456,7 @@ namespace apex_windows
       while (true)
       {
 
-         auto processidentifiera = title_processes_identifiers(lpszName);
+         auto processidentifiera = title_processes_identifiers(scopedstrName);
 
          if (processidentifiera.is_empty())
          {
@@ -1733,13 +1733,13 @@ namespace apex_windows
 
             auto windowspath = pathExecutable.windows_path().path();
 
-            keyKar.set(strKey, windowspath);
+            keyKar.set(scopedstrKey, windowspath);
 
          }
          else
          {
 
-            keyKar.erase_data(strKey);
+            keyKar.erase_data(scopedstrKey);
 
          }
 
@@ -1769,13 +1769,13 @@ namespace apex_windows
 
             auto windowspath = pathExecutable.windows_path().path();
 
-            keyKar.set(pszKey, windowspath);
+            keyKar.set(scopedstrKey, windowspath);
 
          }
          else
          {
 
-            keyKar.erase_data(pszKey);
+            keyKar.erase_data(scopedstrKey);
 
          }
 
@@ -1808,15 +1808,15 @@ namespace apex_windows
 
             auto windowspath = pathExecutable.windows_path();
 
-            str = "\"" + string(windowspath.path()) + "\"" + ::str::has_character(strArguments, " ");
+            str = "\"" + string(windowspath.path()) + "\"" + ::str::has_character(scopedstrArguments, " ");
 
-            keyKar.set(pszKey, str);
+            keyKar.set(scopedstrKey, str);
 
          }
          else
          {
 
-            keyKar.erase_data(pszKey);
+            keyKar.erase_data(scopedstrKey);
 
          }
 
@@ -1847,13 +1847,13 @@ namespace apex_windows
 
             auto windowspath = pathExecutable.windows_path().extended_path();
 
-            keyKar.set(pszKey, windowspath);
+            keyKar.set(scopedstrKey, windowspath);
 
          }
          else
          {
 
-            keyKar.erase_data(pszKey);
+            keyKar.erase_data(scopedstrKey);
 
          }
 
@@ -1913,7 +1913,7 @@ namespace apex_windows
       string strExt;
 
       strExt = ".";
-      strExt += pszExtension;
+      strExt += scopedstrExtension;
 
       string strOpenWithKey;
       strOpenWithKey = strExt + "\\OpenWithList";
@@ -1940,7 +1940,7 @@ namespace apex_windows
 
       string_array straKey;
 
-      file_extension_get_open_with_list_keys(straKey, pszExtension);
+      file_extension_get_open_with_list_keys(straKey, scopedstrExtension);
       /*{
 
          __throw_failed(error_failed);
@@ -1958,7 +1958,7 @@ namespace apex_windows
       //try
       //{
 
-      string strExtensionNamingClass(pszExtensionNamingClass);
+      string strExtensionNamingClass(scopedstrExtensionNamingClass);
 
       ::acme_windows::registry::key keyLink3(HKEY_CLASSES_ROOT, strExtensionNamingClass, true);
 
@@ -1997,13 +1997,13 @@ namespace apex_windows
 
          string strExt;
 
-         strExt += pszExtension;
+         strExt += scopedstrExtension;
 
-         string strExtensionNamingClass(pszExtensionNamingClass);
+         string strExtensionNamingClass(scopedstrExtensionNamingClass);
 
          ::acme_windows::registry::key key(HKEY_CURRENT_USER, "Software\\Classes\\" + strExt, true);
 
-         key._set(nullptr, strExtensionNamingClass);
+         key._set(nullptr, scopedstrExtensionNamingClass);
 
          ::acme_windows::registry::key keyLink3(HKEY_CURRENT_USER, "Software\\Classes\\" + strExtensionNamingClass + "\\shell", true);
 
@@ -2021,7 +2021,7 @@ namespace apex_windows
 
          string strFormat;
 
-         strFormat = strCommand + " " + pszParam;
+         strFormat = strCommand + " " + scopedstrParam;
 
          keyLink1._set("", strFormat);
 
@@ -2048,9 +2048,9 @@ namespace apex_windows
 
          string strExt;
 
-         strExt += pszExtension;
+         strExt += scopedstrExtension;
 
-         string strExtensionNamingClass(pszExtensionNamingClass);
+         string strExtensionNamingClass(scopedstrExtensionNamingClass);
 
          ::acme_windows::registry::key key(HKEY_CLASSES_ROOT, strExt, true);
 
@@ -2072,7 +2072,7 @@ namespace apex_windows
 
          string strFormat;
 
-         strFormat.formatf("%s %s", strCommand.c_str(), pszParam);
+         strFormat.formatf("%s %s", strCommand.c_str(),scopedstrParam);
 
          keyLink1._set("", strFormat);
       }
@@ -2089,7 +2089,7 @@ namespace apex_windows
       string strExt;
 
       strExt = ".";
-      strExt += pszExtension;
+      strExt += scopedstrExtension;
 
       ::acme_windows::registry::key key(HKEY_CLASSES_ROOT, strExt, false);
       key.get(nullptr, strExtensionNamingClass);
@@ -2225,7 +2225,7 @@ namespace apex_windows
 
                string strCommand(str2);
 
-               strCommand.replace_with(pcsz, "%1");
+               strCommand.replace_with(scopedstr, "%1");
 
                WinExec(strCommand, e_display_normal);
 
@@ -2242,7 +2242,7 @@ namespace apex_windows
 
                string strCommand(str2);
 
-               strCommand.replace_with(pcsz, "%1");
+               strCommand.replace_with(scopedstr, "%1");
 
                WinExec(strCommand, e_display_normal);
 
@@ -2462,8 +2462,8 @@ namespace apex_windows
       unsigned int           cchTmpDomain = CREDUI_MAX_DOMAIN_TARGET_LENGTH + 1;
       unsigned int           cchDomainAndUser = CREDUI_MAX_USERNAME_LENGTH + CREDUI_MAX_DOMAIN_TARGET_LENGTH + 1;
 
-      wstring wstrCaption("\"ca2 : " + strService + "\" Authentication");
-      wstring wstrMessage("The Service \"ca2 : " + strService + "\" requires current user password for installing Windows Service.");
+      wstring wstrCaption("\"ca2 : " + scopedstrService + "\" Authentication");
+      wstring wstrMessage("The Service \"ca2 : " + scopedstrService + "\" requires current user password for installing Windows Service.");
 
       unsigned int lenUserName = CREDUI_MAX_USERNAME_LENGTH + 1;
 
@@ -2820,7 +2820,7 @@ namespace apex_windows
    void node::enable_service(const ::scoped_string & scopedstrServiceName, const ::scoped_string & scopedstrDisplayName, const ::scoped_string & scopedstrCommand, const ::scoped_string & scopedstrUser, const ::scoped_string & scopedstrPass)
    {
 
-      if (strServiceName.is_empty())
+      if (scopedstrServiceName.is_empty())
       {
 
          throw ::exception(error_bad_argument);
@@ -2839,23 +2839,23 @@ namespace apex_windows
       WCHAR lpszName[CREDUI_MAX_USERNAME_LENGTH + CREDUI_MAX_DOMAIN_TARGET_LENGTH + 1];
       WCHAR pszPass[CREDUI_MAX_PASSWORD_LENGTH + 1];
 
-      wcscpy(lpszName, wstring(strUser));
-      wcscpy(pszPass, wstring(strPass));
+      wcscpy(lpszName, wstring(scopedstrUser));
+      wcscpy(pszPass, wstring(scopedstrPass));
 
       SC_HANDLE hdlServ = ::CreateServiceW(
          hdlSCM,                    // SCManager database
-         wstring(strServiceName),
-         wstring(strDisplayName),        // service name to display
+         wstring(scopedstrServiceName),
+         wstring(scopedstrDisplayName),        // service name to display
          STANDARD_RIGHTS_REQUIRED,  // desired access
          SERVICE_WIN32_OWN_PROCESS, // service type
          SERVICE_AUTO_START,      // start type
          SERVICE_ERROR_NORMAL,      // error control type
-         wstring(strCommand),                   // service's binary Path name
+         wstring(scopedstrCommand),                   // service's binary Path name
          0,                      // no load ordering group
          0,                      // no tag identifier
          0,                      // no dependencies
-         strUser.has_character() ? lpszName : nullptr,                      // LocalSystem account
-         strPass.has_character() ? pszPass : nullptr);                     // no password
+         scopedstrUser.has_character() ? lpszName : nullptr,                      // LocalSystem account
+         scopedstrPass.has_character() ? pszPass : nullptr);                     // no password
 
 
       if (!hdlServ)
@@ -2884,7 +2884,7 @@ namespace apex_windows
    void node::disable_service(const ::scoped_string & scopedstrServiceName)
    {
 
-      if (strServiceName.is_empty())
+      if (scopedstrServiceName.is_empty())
       {
 
          throw ::exception(error_bad_argument);
@@ -2901,7 +2901,7 @@ namespace apex_windows
 
       SC_HANDLE hdlServ = ::OpenServiceW(
          hdlSCM,                    // SCManager database
-         wstring(strServiceName),
+         wstring(scopedstrServiceName),
          DELETE);
 
       if (!hdlServ)
@@ -2949,7 +2949,7 @@ namespace apex_windows
    void node::start_service(const ::scoped_string & scopedstrServiceName)
    {
 
-      if (strServiceName.is_empty())
+      if (scopedstrServiceName.is_empty())
       {
 
          throw ::exception(error_failed);
@@ -2967,7 +2967,7 @@ namespace apex_windows
 
       SC_HANDLE hdlServ = ::OpenServiceW(
          hdlSCM,                    // SCManager database
-         wstring(strServiceName),
+         wstring(scopedstrServiceName),
          SERVICE_START);                     // no password
 
 
@@ -2990,7 +2990,7 @@ namespace apex_windows
    void node::stop_service(const ::scoped_string & scopedstrServiceName)
    {
 
-      if (strServiceName.is_empty())
+      if (scopedstrServiceName.is_empty())
       {
          throw ::exception(error_failed);
 
@@ -3006,7 +3006,7 @@ namespace apex_windows
 
       SC_HANDLE hdlServ = ::OpenServiceW(
          hdlSCM,                    // SCManager database
-         wstring(strServiceName),
+         wstring(scopedstrServiceName),
          SERVICE_STOP);                     // no password
 
       if (!hdlServ)
@@ -3449,7 +3449,7 @@ namespace apex_windows
       ::e_status estatusFileOpen = ::success;
       int iShellExecuteExitCode = 33;
       DWORD dwLastError = 0;
-      const char* pszShellExecuteError = nullptr;
+      const_char_pointer pszShellExecuteError = nullptr;
 
       fork([=, &manualresetevent, &estatusFileOpen,
          &dwLastError, &iShellExecuteExitCode, &pszShellExecuteError]()
@@ -3476,7 +3476,7 @@ namespace apex_windows
 
             ::wstring windowspathFolder(pathFolder.windows_path().extended_path());
 
-            wstring wstrParams(strParams);
+            wstring wstrParams(scopedstrParams);
 
             const wchar_t* pwszParams = wstrParams.c_str();
 
@@ -3662,7 +3662,7 @@ namespace apex_windows
 
             wstring wstrFolder(pathFolder);
 
-            wstring wstrParams(strParams);
+            wstring wstrParams(scopedstrParams);
 
             const wchar_t* pwszParams = wstrParams.c_str();
 
@@ -3729,7 +3729,7 @@ namespace apex_windows
 
       bool bSuccess = true;
 
-      fork([phappening, &bSuccess, timeStart, timeWait, path, pathFolder, strParams]()
+      fork([phappening, &bSuccess, timeStart, timeWait, path, pathFolder, scopedstrParams]()
          {
 
             ::CoInitializeEx(nullptr, COINIT_APARTMENTTHREADED | COINIT_DISABLE_OLE1DDE);
@@ -3742,7 +3742,7 @@ namespace apex_windows
 
             wstring wstrFolder(pathFolder);
 
-            wstring wstrParams(strParams);
+            wstring wstrParams(scopedstrParams);
 
             const wchar_t* pwszParams = wstrParams.c_str();
 
@@ -3831,7 +3831,7 @@ namespace apex_windows
    {
 
       current_user_set_run(papplication->m_strAppId,
-         papplication->get_module_path(), strArguments, bRegister);
+         papplication->get_module_path(), scopedstrArguments, bRegister);
 
       //return true;
 
@@ -3848,7 +3848,7 @@ namespace apex_windows
 
          string strValue;
 
-         if (keyKar._get(strAppId, strValue))
+         if (keyKar._get(scopedstrAppId, strValue))
          {
 
             if (strValue.has_character())
@@ -3870,7 +3870,7 @@ namespace apex_windows
    ::file::path node::get_app_path(const ::scoped_string & scopedstrApp)
    {
 
-      string str(strApp);
+      string str(scopedstrApp);
 
       ::acme_windows::registry::key key;
 

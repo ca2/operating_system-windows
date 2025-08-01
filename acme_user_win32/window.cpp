@@ -15,7 +15,7 @@
 CLASS_DECL_ACME bool _c_simple_message_loop_step();
 
 CLASS_DECL_ACME string task_get_name();
-CLASS_DECL_ACME void task_set_name(const char* pszName);
+CLASS_DECL_ACME void task_set_name(const_char_pointer pszName);
 
 
 class CLASS_DECL_ACME scoped_task_name

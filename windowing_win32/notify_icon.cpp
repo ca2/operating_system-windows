@@ -414,7 +414,7 @@ namespace windowing_win32
 //   }
 //
 //
-//   const char * notify_icon::_get_notification_area_action_name(int iIndex)
+//   const_char_pointer notify_icon::_get_notification_area_action_name(int iIndex)
 //   {
 //
 //      return m_plistener->_get_notification_area_action_name(iIndex);
@@ -422,7 +422,7 @@ namespace windowing_win32
 //   }
 //
 //
-//   const char * notify_icon::_get_notification_area_action_id(int iIndex)
+//   const_char_pointer notify_icon::_get_notification_area_action_id(int iIndex)
 //   {
 //
 //      return m_plistener->_get_notification_area_action_id(iIndex);
@@ -430,7 +430,7 @@ namespace windowing_win32
 //   }
 //
 //
-//   const char * notify_icon::_get_notification_area_action_label(int iIndex)
+//   const_char_pointer notify_icon::_get_notification_area_action_label(int iIndex)
 //   {
 //
 //      return m_plistener->_get_notification_area_action_label(iIndex);
@@ -438,7 +438,7 @@ namespace windowing_win32
 //   }
 //
 //
-//   const char * notify_icon::_get_notification_area_action_accelerator(int iIndex)
+//   const_char_pointer notify_icon::_get_notification_area_action_accelerator(int iIndex)
 //   {
 //
 //      return m_plistener->_get_notification_area_action_accelerator(iIndex);
@@ -446,7 +446,7 @@ namespace windowing_win32
 //   }
 //
 //
-//   const char * notify_icon::_get_notification_area_action_description(int iIndex)
+//   const_char_pointer notify_icon::_get_notification_area_action_description(int iIndex)
 //   {
 //
 //      return m_plistener->_get_notification_area_action_description(iIndex);

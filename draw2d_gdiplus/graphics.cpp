@@ -2706,7 +2706,7 @@ namespace draw2d_gdiplus
    //}
 
 
-   //unsigned int graphics::GetCharacterPlacement(const ::string & pString, character_count nCount, character_count nMaxExtent, LPGCP_RESULTS lpResults, unsigned int dwFlags)
+   //unsigned int graphics::GetCharacterPlacement(const ::scoped_string & scopedstrString, character_count nCount, character_count nMaxExtent, LPGCP_RESULTS lpResults, unsigned int dwFlags)
 
    //{
 
@@ -6545,7 +6545,7 @@ namespace draw2d_gdiplus
    //   character_count iRange = 0;
    //   character_count i = 0;
    //   character_count iLen;
-   //   const char * psz = strString.begin();
+   //   const_char_pointer psz = strString.begin();
 
    //   while (i < iIndex)
    //   {

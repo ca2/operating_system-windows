@@ -351,7 +351,7 @@ namespace apex_windows
 
       ATOM atom = rx_register_class(hinstance);
 
-      wstring wstrKey(strKey);
+      wstring wstrKey(scopedstrKey);
 
       set_hwnd(::CreateWindowExW(0, L"small_ipc_rx_::color::e_channel_message_queue_class", wstrKey, 0, 0, 0, 0, 0, HWND_MESSAGE, nullptr, hinstance, nullptr));
 
@@ -545,7 +545,7 @@ namespace apex_windows
          else if (pcopydatastruct->dwData == I32_MINIMUM)
          {
 
-            auto pszData = (const char *)pcopydatastruct->lpData;
+            auto pszData = (const_char_pointer )pcopydatastruct->lpData;
 
             auto szLen = (character_count)pcopydatastruct->cbData;
 

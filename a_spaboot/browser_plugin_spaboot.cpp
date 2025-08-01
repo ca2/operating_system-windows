@@ -23,7 +23,7 @@ extern std::string get_starter_version();
 int bzuncompress_dup(LPCTSTR lpcszUncompressed, LPCTSTR lpcszGzFileCompressed);
 bool read_resource_as_file(const ::scoped_string & scopedstrFile, HINSTANCE hinst, UINT nID, LPCTSTR lpcszType);
 std::string get_temp_file_name_dup(const ::scoped_string & scopedstrName, const ::scoped_string & scopedstrExtension);
-bool file_system()->exists(const ::string & path1);
+bool file_system()->exists(const ::scoped_string & scopedstrPath1);
 
 
 
@@ -159,7 +159,7 @@ int APIENTRY ca2_cube_install(const ::scoped_string & scopedstrId)
 
 
 
-bool file_system()->exists(const ::string & path1)
+bool file_system()->exists(const ::scoped_string & scopedstrPath1)
 {
    DWORD dwFileAttributes = ::GetFileAttributes(path1);
    if(dwFileAttributes != INVALID_FILE_ATTRIBUTES &&
@@ -446,7 +446,7 @@ std::string get_temp_file_name_dup(const ::scoped_string & scopedstrName, const 
    return "";
 }
 
-bool file_system()->exists(const ::string & path1)
+bool file_system()->exists(const ::scoped_string & scopedstrPath1)
 {
    DWORD dwFileAttributes = ::GetFileAttributes(path1);
    if(dwFileAttributes != INVALID_FILE_ATTRIBUTES &&

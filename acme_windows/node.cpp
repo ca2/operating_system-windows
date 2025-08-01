@@ -272,7 +272,7 @@ namespace acme_windows
 
       const wchar_t* pwszParams = nullptr;
 
-      wstring wstrParams(strParams);
+      wstring wstrParams(scopedstrParams);
 
       if (wstrParams.has_character())
       {
@@ -864,11 +864,11 @@ namespace acme_windows
 
       ::acme_windows::registry::key k;
 
-      string strKey = "SOFTWARE\\Microsoft\\Windows\\Windows Error Reporting\\LocalDumps\\" + strModuleNameWithTheExeExtension;
+      string strKey = "SOFTWARE\\Microsoft\\Windows\\Windows Error Reporting\\LocalDumps\\" + scopedstrModuleNameWithTheExeExtension;
 
       if (k._open(HKEY_LOCAL_MACHINE, strKey, true))
       {
-         ::file::path str = directory_system()->userconfig() / "CrashDumps" / strModuleNameWithTheExeExtension;
+         ::file::path str = directory_system()->userconfig() / "CrashDumps" / scopedstrModuleNameWithTheExeExtension;
          wstring wstr = str;
          RegSetValueExW(k.m_hkeySub, L"DumpFolder", 0, REG_EXPAND_SZ, (unsigned char*)wstr.c_str(), unsigned int((wcslen(wstr) + 1) * sizeof(wchar_t)));
          unsigned int dw = 10;
@@ -1153,10 +1153,10 @@ namespace acme_windows
 
       ::collection::count iLenExcept;
 
-      if (strExceptDir.has_character())
+      if (scopedstrExceptDir.has_character())
       {
 
-         iLenExcept = strExceptDir.length();
+         iLenExcept = scopedstrExceptDir.length();
 
       }
       else
@@ -1177,7 +1177,7 @@ namespace acme_windows
             if (ansi_length(straOld[i]) > iLenExcept)
             {
 
-               if (_strnicmp(straOld[i], strExceptDir.begin(), (size_t)iLenExcept) == 0)
+               if (_strnicmp(straOld[i], scopedstrExceptDir.begin(), (size_t)iLenExcept) == 0)
                {
 
                   continue;
@@ -1238,7 +1238,7 @@ namespace acme_windows
    ::process_identifier_array node::module_path_processes_identifiers(const ::scoped_string & scopedstrModulePath, bool bModuleNameIsPropertyFormatted)
    {
 
-      ::file::path pathModule(pszModulePath);
+      ::file::path pathModule(scopedstrModulePath);
 
       process_identifier_array processesidentifiers;
 
@@ -1479,7 +1479,7 @@ namespace acme_windows
 
       strImage = (const wchar_t*)memory.data();
 
-      wstring wstrLibrary(pszLibrary);
+      wstring wstrLibrary(scopedstrLibrary);
 
       bool bFound = false;
 
@@ -1528,7 +1528,7 @@ namespace acme_windows
       for (auto& dwProcess : dwaProcesses)
       {
 
-         if (process_contains_module(strImage, dwProcess, pszLibrary))
+         if (process_contains_module(strImage, dwProcess, scopedstrLibrary))
          {
 
             straProcesses.add(strImage);
@@ -1975,7 +1975,7 @@ namespace acme_windows
 
       StartupInfo.wShowWindow = SW_HIDE;
 
-      wstring wstrCommandLine(pszCommandLine);
+      wstring wstrCommandLine(scopedstrCommandLine);
 
       if (!CreateProcessW(nullptr, (WCHAR*)wstrCommandLine.c_str(), nullptr, nullptr, false,
          CREATE_NEW_CONSOLE,
@@ -2037,7 +2037,7 @@ namespace acme_windows
 
       char* pEnvCMD = nullptr;
 
-      const char* pDefaultCMD = "CMD.EXE";
+      const_char_pointer pDefaultCMD = "CMD.EXE";
 
       ULONG rc;
 
@@ -2069,10 +2069,10 @@ namespace acme_windows
       // "/c" option - Do the command then terminate the command window
       ansi_concatenate(Args, " /c ");
       //the application you would like to run from the command window
-      ansi_concatenate(Args, strFunct);
+      ansi_concatenate(Args, scopedstrFunct);
       ansi_concatenate(Args, " ");
       //the parameters passed to the application being run from the command window.
-      ansi_concatenate(Args, strstrParams);
+      ansi_concatenate(Args, scopedstrstrParams);
 
       wstring wstrArguments(Args);
 
@@ -2362,7 +2362,7 @@ namespace acme_windows
       wstring desc = L"spafile";          // file type description
       wstring content_type = L"application/x-spa";
 
-      wstring app(directory_system()->stage(strAppIdHandler, process_platform_name(), process_configuration_name()));
+      wstring app(directory_system()->stage(scopedstrAppIdHandler, process_platform_name(), process_configuration_name()));
 
       wstring icon(app);
 
@@ -2409,7 +2409,7 @@ namespace acme_windows
       RegSetValueExW(hkey, L"", 0, REG_SZ, (unsigned char*)icon.c_str(), unsigned int(icon.length() * sizeof(wchar_t)));
       RegCloseKey(hkey);
 
-      ::file::path pathFile(directory_system()->stage(strAppIdHandler, process_platform_name(), process_configuration_name()) / "spa_register.txt");
+      ::file::path pathFile(directory_system()->stage(scopedstrAppIdHandler, process_platform_name(), process_configuration_name()) / "spa_register.txt");
 
       int iRetry = 9;
 
@@ -2538,7 +2538,7 @@ namespace acme_windows
 
    {
 
-      return ::ExtractIconW(hInst, utf8_to_unicode(pszExeFileName), nIconIndex);
+      return ::ExtractIconW(hInst, utf8_to_unicode(scopedstrExeFileName), nIconIndex);
 
 
    }
@@ -2549,7 +2549,7 @@ namespace acme_windows
 
       DWORD dwType = 0;
       DWORD dwSize = 0;
-      int lResult = RegQueryValueExW(hkey, wstring(pszSubKey), nullptr, &dwType, nullptr, &dwSize);
+      int lResult = RegQueryValueExW(hkey, wstring(scopedstrSubKey), nullptr, &dwType, nullptr, &dwSize);
 
       if (lResult != ERROR_SUCCESS)
          return lResult;
@@ -2561,7 +2561,7 @@ namespace acme_windows
 
          auto pwsz = wstr.get_buffer(dwSize);
 
-         lResult = RegQueryValueExW(hkey, wstring(pszSubKey), nullptr, &dwType, (unsigned char*)(unichar*)pwsz, &dwSize);
+         lResult = RegQueryValueExW(hkey, wstring(scopedstrSubKey), nullptr, &dwType, (unsigned char*)(unichar*)pwsz, &dwSize);
 
          wstr.release_buffer(dwSize);
 
@@ -2775,7 +2775,7 @@ namespace acme_windows
    void node::shell_launch(const ::scoped_string & scopedstrUrl)
    {
 
-      wstring wstrUrl(strUrl);
+      wstring wstrUrl(scopedstrUrl);
 
       ::ShellExecuteW(nullptr, L"open", wstrUrl, nullptr, nullptr, SW_SHOWNORMAL);
 
@@ -2871,7 +2871,7 @@ namespace acme_windows
    ::pointer < ::acme::exclusive > node::_get_exclusive(::particle* pparticleContext, const ::scoped_string & scopedstrName, ::security_attributes* psecurityattributes)
    {
 
-      return __allocate exclusive(pparticleContext, strName, psecurityattributes);
+      return __allocate exclusive(pparticleContext, scopedstrName, psecurityattributes);
 
    }
 
@@ -3672,9 +3672,9 @@ namespace acme_windows
 
       SHELLEXECUTEINFOW info = {};
 
-      wstring wstrFile = strPath;
-      wstring wstrParam = strParam;
-      wstring wstrDir = strDir;
+      wstring wstrFile = scopedstrPath;
+      wstring wstrParam = scopedstrParam;
+      wstring wstrDir =scopedstrDir;
 
       info.cbSize = sizeof(SHELLEXECUTEINFOW);
 
@@ -3745,9 +3745,9 @@ namespace acme_windows
 
       memory_set(&infoa, 0, sizeof(infoa));
 
-      wstring wstrFile(strPath);
-      wstring wstrParam(strParam);
-      wstring wstrDir(strDir);
+      wstring wstrFile(scopedstrPath);
+      wstring wstrParam(scopedstrParam);
+      wstring wstrDir(scopedstrDir);
 
       infoa.cbSize = sizeof(infoa);
       infoa.lpFile = wstrFile;
@@ -4380,7 +4380,7 @@ namespace acme_windows
    }
 
 
-   bool node::_is_code_exe_user_path_environment_variable_ok(::string* pstrCorrectPath, const char * pszPath)
+   bool node::_is_code_exe_user_path_environment_variable_ok(::string* pstrCorrectPath, const_char_pointer pszPath)
    {
 
       ::string str;
@@ -4530,7 +4530,7 @@ namespace acme_windows
    //// replace __try __finally with at_end_of_scope
    //// changed arguments to ansi_character * and used bstring class for string conversion
    //// use of comptr to guard COM objets and variant to guard VARIANTs
-   //void node::_unzip_to_folder(const char* pszZip, const char* pszFolder)
+   //void node::_unzip_to_folder(const_char_pointer pszZip, const_char_pointer pszFolder)
    //{
 
    //   comptr < IShellDispatch> pISD;
@@ -4651,10 +4651,10 @@ namespace acme_windows
 
    }
 
-   void node::launch_app(const ::scoped_string & scopedstr, const char** argv, int iFlags)
+   void node::launch_app(const ::scoped_string & scopedstr, const_char_pointer * argv, int iFlags)
    {
 
-      shell_open(psz);
+      shell_open(scopedstr);
 
    }
 
@@ -5237,7 +5237,7 @@ namespace acme_windows
    ::file::path node::__get_font_path_from_name(const ::scoped_string& scopedstrName, bool bTrueType)
    {
       HKEY hKey;
-      const char* fonts_reg_path = "SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Fonts";
+      const_char_pointer fonts_reg_path = "SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Fonts";
 
       // Open the Fonts registry key
       if (RegOpenKeyExA(HKEY_LOCAL_MACHINE, fonts_reg_path, 0, KEY_READ, &hKey) != ERROR_SUCCESS)

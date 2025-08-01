@@ -66,7 +66,7 @@ namespace apex_windows
          for (int j = 0; j < jCount; j++)
          {
 
-            set_hwnd(::FindWindowW(nullptr, wstring(strKey)));
+            set_hwnd(::FindWindowW(nullptr, wstring(scopedstrKey)));
 
             if (get_hwnd() != nullptr)
             {
@@ -131,7 +131,7 @@ namespace apex_windows
 
       }
       
-      m_strBaseChannel = strKey;
+      m_strBaseChannel = scopedstrKey;
 
       //return ::success;
 
@@ -172,8 +172,8 @@ namespace apex_windows
       COPYDATASTRUCT cds;
 
       cds.dwData = I32_MINIMUM;
-      cds.cbData = (unsigned int) strUri.length();
-      cds.lpData = (void *) strUri.c_str();
+      cds.cbData = (unsigned int) scopedstrUri.length();
+      cds.lpData = (void *) scopedstrUri.c_str();
 
       HWND hwnd = get_hwnd();
 

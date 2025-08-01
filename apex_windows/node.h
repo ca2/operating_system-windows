@@ -84,7 +84,7 @@ namespace apex_windows
       //virtual bool set_last_run_application_path(string strAppId) override;
 
 
-      //virtual unsigned int       get_file_attributes(const ::string & pFileName);
+      //virtual unsigned int       get_file_attributes(const ::scoped_string & scopedstrFileName);
       virtual unsigned int       get_current_directory(string& str);
       virtual unsigned int       get_temp_path(string& str);
       virtual int        reg_query_value(HKEY hkey, const ::scoped_string & scopedstrSubKey, string& str);

@@ -41,7 +41,7 @@ namespace windowing_win32
    };
 
 
-   CLASS_DECL_WINDOWING_WIN32 char GetDriveLetter(const ::string & pDevicePath);
+   CLASS_DECL_WINDOWING_WIN32 char GetDriveLetter(const ::scoped_string & scopedstrDevicePath);
 
    CLASS_DECL_WINDOWING_WIN32 HWND find_tray_toolbar_window();
 

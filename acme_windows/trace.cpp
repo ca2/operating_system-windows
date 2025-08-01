@@ -10,7 +10,7 @@
 //struct CLASS_DECL_ACME_WINDOWS __MAP_MESSAGE
 //{
 //   unsigned int    nMsg;
-//   const char *  pszMsg;
+//   const_char_pointer pszMsg;
 
 //};
 //
@@ -221,7 +221,7 @@ void TraceDDE(const ::scoped_string & scopedstrPrefix, const MSG* pMsg)
       }
       ASSERT(hCommands != nullptr);
 
-      const char * pszCommands = (const char *)::GlobalLock(hCommands);
+      const_char_pointer pszCommands = (const_char_pointer )::GlobalLock(hCommands);
 
       ENSURE_THROW(pszCommands != nullptr, throw ::exception(error_no_memory));
 

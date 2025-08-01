@@ -17,7 +17,7 @@ struct sz_known_folder_struct g_knownfolderstructa[] =
 
 };
 
-const char * skip_file_name(const char * psz)
+const_char_pointer skip_file_name(const_char_pointer psz)
 {
 
    while (character_isalnum(*psz) || *psz == '_' || *psz == '-' || *psz == '.')

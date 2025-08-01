@@ -2431,7 +2431,7 @@ namespace draw2d_gdiplus
    //}
 
 
-   //unsigned int graphics::GetCharacterPlacement(const ::string & pString, character_count nCount, character_count nMaxExtent, LPGCP_RESULTS lpResults, unsigned int dwFlags)
+   //unsigned int graphics::GetCharacterPlacement(const ::scoped_string & scopedstrString, character_count nCount, character_count nMaxExtent, LPGCP_RESULTS lpResults, unsigned int dwFlags)
 
    //{
 

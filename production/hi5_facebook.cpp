@@ -1426,7 +1426,7 @@ namespace hi5
    * @remarks: internal method
    *
    *--*/
-   string facebook::build_url(const ::string & baseUrl, const ::string & userInfo, bool isUserId)
+   string facebook::build_url(const ::string & baseUrl, const ::scoped_string & scopedstrUserInfo, bool isUserId)
    {
       /* Copy base URL */
       string outUrl = baseUrl;
