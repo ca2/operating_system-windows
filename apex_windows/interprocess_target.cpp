@@ -545,7 +545,7 @@ namespace apex_windows
          else if (pcopydatastruct->dwData == I32_MINIMUM)
          {
 
-            auto pszData = (const_char_pointer )pcopydatastruct->lpData;
+            auto pszData = (const_char_pointer  )pcopydatastruct->lpData;
 
             auto szLen = (character_count)pcopydatastruct->cbData;
 

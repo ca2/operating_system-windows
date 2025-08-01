@@ -9,7 +9,7 @@
 
 
 
-CLASS_DECL_ACME_WINDOWS const void * get_resource_pointer(HINSTANCE hinst, DWORD nID, const_char_pointer pcszType, memsize & memsize);
+CLASS_DECL_ACME_WINDOWS const void * get_resource_pointer(HINSTANCE hinst, DWORD nID, const_char_pointer  pcszType, memsize & memsize);
 
 
 HICON extract_icon(HINSTANCE hInst, const ::scoped_string & scopedstrExeFileName, unsigned int nIconIndex)
@@ -20,7 +20,7 @@ HICON extract_icon(HINSTANCE hInst, const ::scoped_string & scopedstrExeFileName
 }
 
 
-CLASS_DECL_ACME_WINDOWS const void* get_resource_pointer(HINSTANCE hinstance, DWORD nID, const_char_pointer pcszType, memsize& memsize)
+CLASS_DECL_ACME_WINDOWS const void* get_resource_pointer(HINSTANCE hinstance, DWORD nID, const_char_pointer  pcszType, memsize& memsize)
 {
 
    HRSRC hrsrc;
@@ -98,7 +98,7 @@ CLASS_DECL_ACME_WINDOWS const void* get_resource_pointer(HINSTANCE hinstance, DW
 }
 
 
-CLASS_DECL_ACME_WINDOWS bool read_resource_as_memory(memory& memory, HINSTANCE hinstance, DWORD nID, const_char_pointer pcszType, character_count iReadAtMostByteCount)
+CLASS_DECL_ACME_WINDOWS bool read_resource_as_memory(memory& memory, HINSTANCE hinstance, DWORD nID, const_char_pointer  pcszType, character_count iReadAtMostByteCount)
 {
 
    memsize memsize;

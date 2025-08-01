@@ -9,7 +9,7 @@
 struct sz_known_folder_struct
 {
 
-   const_char_pointer        m_pszKnownFolder;
+   const_char_pointer         m_pszKnownFolder;
    KNOWNFOLDERID        m_knownfolderid;
 
 };

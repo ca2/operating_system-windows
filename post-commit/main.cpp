@@ -146,7 +146,7 @@ void app_t::win_sync_out(string strLocal,string strRepos)
 
    //		string strUni = unitext("");
 
-   //		const_char_pointer textoBunitin = strUni;
+   //		const_char_pointer  textoBunitin = strUni;
 
    //		char ch0 = *(textoBunitin + 0);
 

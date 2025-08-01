@@ -3449,7 +3449,7 @@ namespace apex_windows
       ::e_status estatusFileOpen = ::success;
       int iShellExecuteExitCode = 33;
       DWORD dwLastError = 0;
-      const_char_pointer pszShellExecuteError = nullptr;
+      const_char_pointer  pszShellExecuteError = nullptr;
 
       fork([=, &manualresetevent, &estatusFileOpen,
          &dwLastError, &iShellExecuteExitCode, &pszShellExecuteError]()

@@ -89,7 +89,7 @@ namespace acme_windows
 
       ::file::path user_appdata_local() override;
 
-      // bool _is(const_char_pointer path1) override;
+      // bool _is(const_char_pointer  path1) override;
 
 
 
@@ -112,20 +112,20 @@ namespace acme_windows
 // directory_system();
 // ~directory_system() override;
 
-      //virtual string name(const_char_pointer path1) override;
+      //virtual string name(const_char_pointer  path1) override;
 
 
       //virtual ::file::path module_folder() override;
       
-      //bool create(const_char_pointer path) override;
+      //bool create(const_char_pointer  path) override;
 
-      //void __øcreate(const_char_pointer path) override;
+      //void __øcreate(const_char_pointer  path) override;
 
-      //bool create_directory(const_char_pointer path) override;
+      //bool create_directory(const_char_pointer  path) override;
 
-      //void _create_directory(const_char_pointer path) override;
+      //void _create_directory(const_char_pointer  path) override;
 
-      //bool is(const_char_pointer path) override;
+      //bool is(const_char_pointer  path) override;
 
       //bool _enumerates(::file::listing & listing) override;
       bool enumerate(::file::listing & listing) override;

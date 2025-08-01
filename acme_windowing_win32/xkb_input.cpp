@@ -58,7 +58,7 @@ namespace xkb_input
    }
 
 
-   void xkb_input::xkb_keymap_new_from_string(const_char_pointer p, int format, int flags)
+   void xkb_input::xkb_keymap_new_from_string(const_char_pointer  p, int format, int flags)
    {
 
       m_strXkbKeymapString = p;
@@ -87,7 +87,7 @@ namespace xkb_input
    }
 
 
-   void xkb_input::__xkb_keymap_new_from_string(const_char_pointer p, int iFormat, int iFlags)
+   void xkb_input::__xkb_keymap_new_from_string(const_char_pointer  p, int iFormat, int iFlags)
    {
 
       if(!m_pxkbcontext)
@@ -120,7 +120,7 @@ namespace xkb_input
       auto flags = (xkb_keymap_compile_flags) iFlags;
 
       m_pxkbkeymap = ::xkb_keymap_new_from_string(
-            m_pxkbcontext, (const_char_pointer ) p, format,
+            m_pxkbcontext, (const_char_pointer  ) p, format,
             flags);
 
       if(!m_pxkbkeymap)

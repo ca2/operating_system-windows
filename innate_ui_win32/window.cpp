@@ -64,7 +64,7 @@ namespace innate_ui_win32
 
    }
 
-   const_char_pointer window::__get_class_name()
+   const_char_pointer  window::__get_class_name()
    {
 
       return typeid(*this).name();

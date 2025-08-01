@@ -12,7 +12,7 @@ typedef unsigned int (WINAPI* GetFinalPathNameByHandleDef)(
 #ifdef __cplusplus
 
 
-bool GetDrive(const_char_pointer lpDeviceFileName, string & fsFileName, bool bDriveLetterOnly );
+bool GetDrive(const_char_pointer  lpDeviceFileName, string & fsFileName, bool bDriveLetterOnly );
 
 
 #endif

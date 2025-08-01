@@ -109,9 +109,9 @@ namespace uac_tools
    bool CLASS_DECL_ACME_WINDOWS
    run_elevated(
    __in      HWND hwnd,
-   __in      const_char_pointer pszPath,
-   __in_opt   const_char_pointer pszParameters   = nullptr,
-   __in_opt   const_char_pointer pszDirectory   = nullptr,
+   __in      const_char_pointer  pszPath,
+   __in_opt   const_char_pointer  pszParameters   = nullptr,
+   __in_opt   const_char_pointer  pszDirectory   = nullptr,
    __out_opt   HANDLE *phProcess      = nullptr);
 
    /*

@@ -823,7 +823,7 @@ int WinRegGetDataW(HKEY hkey, const ::wide_character * pSubKey, const ::wide_cha
 }
 
 
-CLASS_DECL_ACME_WINDOWS void reg_delete_tree_dup(HKEY hkey, const_char_pointer name)
+CLASS_DECL_ACME_WINDOWS void reg_delete_tree_dup(HKEY hkey, const_char_pointer  name)
 {
 
    HKEY hkeySub = nullptr;

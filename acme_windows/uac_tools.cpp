@@ -147,10 +147,10 @@ namespace uac_tools
 
    bool
    shell_execute(HWND hwnd,
-               const_char_pointer pszVerb,
-               const_char_pointer pszPath,
-               const_char_pointer pszParameters,   // = nullptr
-               const_char_pointer pszDirectory,   // = nullptr
+               const_char_pointer  pszVerb,
+               const_char_pointer  pszPath,
+               const_char_pointer  pszParameters,   // = nullptr
+               const_char_pointer  pszDirectory,   // = nullptr
                HANDLE * phProcess)   // = nullptr
    {
       SHELLEXECUTEINFOW shex;
@@ -322,9 +322,9 @@ namespace uac_tools
    bool
    run_elevated(
    __in      HWND hwnd,
-   __in      const_char_pointer pszPath,
-   __in_opt   const_char_pointer pszParameters,   //   = nullptr,
-   __in_opt   const_char_pointer pszDirectory,   //   = nullptr,
+   __in      const_char_pointer  pszPath,
+   __in_opt   const_char_pointer  pszParameters,   //   = nullptr,
+   __in_opt   const_char_pointer  pszDirectory,   //   = nullptr,
    __out_opt   HANDLE *phProcess)      //   = nullptr );
    {
       return shell_execute(
@@ -417,9 +417,9 @@ namespace uac_tools
    bool
    RunNonElevated(
    __in      HWND hwnd,
-   __in      const_char_pointer pszPath,
-   __in_opt   const_char_pointer pszParameters,   //   = nullptr,
-   __in_opt   const_char_pointer pszDirectory,   //   = nullptr,
+   __in      const_char_pointer  pszPath,
+   __in_opt   const_char_pointer  pszParameters,   //   = nullptr,
+   __in_opt   const_char_pointer  pszDirectory,   //   = nullptr,
    __out_opt   HANDLE *phProcess)      //   = nullptr );
    {
       ASSERT(pszPath && *pszPath);   // other args are optional
