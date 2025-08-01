@@ -859,7 +859,7 @@ namespace acme_windows
    // enzymes: Liveedu.tv, Twitch.tv and Mixer.com streamers and viewers
    // Mummi and bilbo!!
    // create call to :
-   void node::install_crash_dump_reporting(const string& strModuleNameWithTheExeExtension)
+   void node::install_crash_dump_reporting(const ::scoped_string & scopedstrModuleNameWithTheExeExtension)
    {
 
       ::acme_windows::registry::key k;
@@ -1235,7 +1235,7 @@ namespace acme_windows
    }
 
 
-   ::process_identifier_array node::module_path_processes_identifiers(const ::string& pszModulePath, bool bModuleNameIsPropertyFormatted)
+   ::process_identifier_array node::module_path_processes_identifiers(const ::scoped_string & scopedstrModulePath, bool bModuleNameIsPropertyFormatted)
    {
 
       ::file::path pathModule(pszModulePath);
@@ -1449,7 +1449,7 @@ namespace acme_windows
    //end;
 
 
-   bool node::process_contains_module(string& strImage, ::process_identifier processidentifier, const ::string& pszLibrary)
+   bool node::process_contains_module(string& strImage, ::process_identifier processidentifier, const ::scoped_string & scopedstrLibrary)
    {
 
       HANDLE hProcess;
@@ -1516,7 +1516,7 @@ namespace acme_windows
    }
 
 
-   ::process_identifier_array node::shared_library_process(string_array& straProcesses, const ::string& pszLibrary)
+   ::process_identifier_array node::shared_library_process(string_array& straProcesses, const ::scoped_string & scopedstrLibrary)
    {
 
       process_identifier_array processidentifiera;
@@ -1958,7 +1958,7 @@ namespace acme_windows
    }
 
 
-   ::process_identifier node::create_process(const ::string& pszCommandLine)
+   ::process_identifier node::create_process(const ::scoped_string & scopedstrCommandLine)
    {
 
       STARTUPINFO StartupInfo;
@@ -2534,7 +2534,7 @@ namespace acme_windows
 
 
 
-   HICON node::extract_icon(HINSTANCE hInst, const ::string& pszExeFileName, unsigned int nIconIndex)
+   HICON node::extract_icon(HINSTANCE hInst, const ::scoped_string & scopedstrExeFileName, unsigned int nIconIndex)
 
    {
 
@@ -2544,7 +2544,7 @@ namespace acme_windows
    }
 
 
-   int node::reg_query_value(HKEY hkey, const ::string& pszSubKey, string& str)
+   int node::reg_query_value(HKEY hkey, const ::scoped_string & scopedstrSubKey, string& str)
    {
 
       DWORD dwType = 0;
@@ -4651,7 +4651,7 @@ namespace acme_windows
 
    }
 
-   void node::launch_app(const ::string& psz, const char** argv, int iFlags)
+   void node::launch_app(const ::scoped_string & scopedstr, const char** argv, int iFlags)
    {
 
       shell_open(psz);

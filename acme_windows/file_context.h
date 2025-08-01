@@ -71,11 +71,11 @@ namespace acme_windows
       ::payload length(const ::file::path & path) override;
       ::payload length(const ::file::path & path, ::payload * pvarQuery) override;
 
-      void transfer(const ::file::path & pszNew, const ::file::path & psz) override;
+      void transfer(const ::file::path & pathNew, const ::file::path & path) override;
 
-      void erase(const ::file::path & psz) override;
+      void erase(const ::file::path & path) override;
 
-      bool is_read_only(const ::file::path & psz) override;
+      bool is_read_only(const ::file::path & path) override;
 
 
       ::block get_main_resource_block() override;

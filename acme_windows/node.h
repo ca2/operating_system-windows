@@ -49,7 +49,7 @@ namespace acme_windows
       //virtual ::file::path roaming() override;
 
 
-      //void call_async(const ::string& pszPath, const ::string& pszParam, const ::string& pszDir, ::e_display edisplay, bool bPrivileged, unsigned int* puiPid = nullptr) override;
+      //void call_async(const ::scoped_string & scopedstrPath, const ::scoped_string & scopedstrParam, const ::scoped_string & scopedstrDir, ::e_display edisplay, bool bPrivileged, unsigned int* puiPid = nullptr) override;
 
 
       //void initialize_integration();

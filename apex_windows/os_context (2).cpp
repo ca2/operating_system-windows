@@ -152,7 +152,7 @@ namespace windows
       return true;
    }
 
-   void os_context::terminate_processes_by_title(const ::string & lpszName)
+   void os_context::terminate_processes_by_title(const ::scoped_string & scopedstrName)
    {
 
       unsigned int uPid;
@@ -183,7 +183,7 @@ namespace windows
       }
    }
 
-   bool os_context::get_pid_by_path(const ::string & lpszName, unsigned int & dwPid)
+   bool os_context::get_pid_by_path(const ::scoped_string & scopedstrName, unsigned int & dwPid)
    {
       unsigned_int_array dwa;
       get_all_processes(dwa);
@@ -198,7 +198,7 @@ namespace windows
       return false;
    }
 
-   bool os_context::get_pid_by_title(const ::string & lpszName, unsigned int & dwPid)
+   bool os_context::get_pid_by_title(const ::scoped_string & scopedstrName, unsigned int & dwPid)
    {
       unsigned_int_array dwa;
       get_all_processes(dwa);

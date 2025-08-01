@@ -630,7 +630,7 @@ namespace windowing_win32
       //virtual ::user::interaction * ChildWindowFromPoint(const ::int_point & point, unsigned int nFlags);
       ///      virtual ::windowing::window * FindWindow(const ::string & pszClassName, const ::string & pszWindowName);
 
-      //   virtual ::windowing::window * FindWindowEx(::windowing::window * pwindowParent,::windowing::window * pwindowChildAfter, const ::string & lpszClass, const ::string & pszWindow);
+      //   virtual ::windowing::window * FindWindowEx(::windowing::window * pwindowParent,::windowing::window * pwindowChildAfter, const ::scoped_string & scopedstrClass, const ::string & pszWindow);
 
       //virtual ::long_long_point _client_parent_top_left() override;
       //virtual ::long_long_point _client_screen_top_left() override;

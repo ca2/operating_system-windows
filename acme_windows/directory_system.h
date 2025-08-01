@@ -55,7 +55,7 @@ namespace acme_windows
       ::file::path public_root() override; // writable common root (non-bin, non-exe)
       ::file::path bookmark() override;
       ::file::path home() override;
-      ::file::path pathfind(const string& pszEnv, const string& pszTopic, const string& pszMode) override;
+      ::file::path pathfind(const ::scoped_string & scopedstrEnv, const ::scoped_string & scopedstrTopic, const ::scoped_string & scopedstrMode) override;
       ::file::path program_files_x86() override;
       ::file::path program_files() override;
       //::file::path program_data() override;
@@ -85,7 +85,7 @@ namespace acme_windows
       ::file::path _shell_get_special_folder_path(int csidl, bool fCreate = true, ::windowing::window* pwindow = nullptr);
       ::file::path _get_known_folder(REFKNOWNFOLDERID kfid);
 
-      //::file::path pathfind(const string& pszEnv, const string& pszTopic, const string& pszMode) override;
+      //::file::path pathfind(const ::scoped_string & scopedstrEnv, const ::scoped_string & scopedstrTopic, const ::scoped_string & scopedstrMode) override;
 
       ::file::path user_appdata_local() override;
 

@@ -164,18 +164,18 @@ namespace production
       virtual bool compress_next();
 
       virtual void generate_appmatter_spa();
-      virtual void generate_appmatter_spa(const ::file::path & pszRoot);
-      virtual void generate_appmatter_spa_folder(const ::file::path & pszRoot,const ::file::path & pszRelative);
-      virtual void generate_appmatter_spa_locale(const ::file::path & pszRoot,const ::file::path & pszRelative);
-      virtual void generate_appmatter_spa_style(const ::file::path & pszRoot,const ::file::path & pszRelative);
-      virtual void generate_appmatter_spa(const ::file::path & pszRoot,const ::file::path & pszRelative);
+      virtual void generate_appmatter_spa(const ::file::path & pathRoot);
+      virtual void generate_appmatter_spa_folder(const ::file::path & pathRoot,const ::file::path & pathRelative);
+      virtual void generate_appmatter_spa_locale(const ::file::path & pathRoot,const ::file::path & pathRelative);
+      virtual void generate_appmatter_spa_style(const ::file::path & pathRoot,const ::file::path & pathRelative);
+      virtual void generate_appmatter_spa(const ::file::path & pathRoot,const ::file::path & pathRelative);
 
       virtual void release_production();
       virtual bool release_npca2(const ::string & pszPlatform);
       virtual bool release_iexca2(const ::string & pszPlatform);
       virtual bool release_crxca2(const ::string & pszPlatform);
 
-      virtual void add_path(const ::file::path & pszDir, const ::file::path & pszRelative);
+      virtual void add_path(const ::file::path & pathDir, const ::file::path & pathRelative);
 
       bool sync_source(const ::string & psz, const ::string & pszRevision);
       bool commit_for_new_build_and_new_release();
@@ -194,7 +194,7 @@ namespace production
 
       string xpi_digest(memory & mem);
 
-      void xpi_sign_dir(const ::string & pszPlatform, const ::file::path & pszDir);
+      void xpi_sign_dir(const ::string & pszPlatform, const ::file::path & pathDir);
       void xpi_section(const ::string & pszManifest, const ::string & pszSignature);
 
       bool create_xpi(const ::string & pszPlatform, bool bSigned = true);

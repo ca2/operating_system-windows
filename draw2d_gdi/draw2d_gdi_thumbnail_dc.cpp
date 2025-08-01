@@ -492,7 +492,7 @@ static int CLASS_DECL_DRAW2D_GDI _::windows_definition::ComputeNextTab(int x, UI
 
 // Compute a character delta table for correctly positioning the screen
 // font characters where the printer characters will appear on the page
-int_size preview_dc::ComputeDeltas(int& x, const ::string & lpszString, UINT &nCount,
+int_size preview_dc::ComputeDeltas(int& x, const ::scoped_string & scopedstrString, UINT &nCount,
    bool bTabbed, UINT nTabStops, LPINT lpnTabStops, int nTabOrigin,
    __out_z LPTSTR lpszOutputString, int* pnDxWidths, int& nRightFixup)
 {
@@ -635,7 +635,7 @@ int_size preview_dc::ComputeDeltas(int& x, const ::string & lpszString, UINT &nC
    return sizeExtent;
 }
 
-bool preview_dc::text_out(int x, int y, const ::string & lpszString, int nCount)
+bool preview_dc::text_out(int x, int y, const ::scoped_string & scopedstrString, int nCount)
 {
    return ExtTextOut(x, y, 0, nullptr, lpszString, nCount, nullptr);
 }
@@ -693,7 +693,7 @@ bool preview_dc::ExtTextOut(int x, int y, UINT nOptions, const ::int_rectangle &
    return bSuccess;
 }
 
-int_size preview_dc::TabbedTextOut(int x, int y, const ::string & lpszString, int nCount,
+int_size preview_dc::TabbedTextOut(int x, int y, const ::scoped_string & scopedstrString, int nCount,
    int nTabPositions, LPINT lpnTabStopPositions, int nTabOrigin)
 {
    ASSERT(get_handle2() != nullptr);
@@ -746,7 +746,7 @@ int_size preview_dc::TabbedTextOut(int x, int y, const ::string & lpszString, in
 
 // This one is too complicated to do character-by-character output positioning
 // All we really need to do here is mirror the current position
-int preview_dc::draw_text(const ::string & lpszString, int nCount, RECT * prectangle,
+int preview_dc::draw_text(const ::scoped_string & scopedstrString, int nCount, RECT * prectangle,
    UINT nFormat)
 {
    ASSERT(get_handle2() != nullptr);
@@ -794,7 +794,7 @@ bool preview_dc::GrayString(::draw2d::brush*,
    return text_out(x, y, (const ::string &)lpData, nCount);
 }
 
-int preview_dc::Escape(int nEscape, int nCount, const ::string & lpszInData, void * lpOutData)
+int preview_dc::Escape(int nEscape, int nCount, const ::scoped_string & scopedstrInData, void * lpOutData)
 {
    // The tact here is to NOT allow any of the document control escapes
    // to be passed through.  Elimination of StartDoc and EndDoc should

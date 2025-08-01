@@ -1421,7 +1421,7 @@ namespace input_win32
    //   }
    //
    //
-   //   ::pointer < ::user::interaction > windowing::create_message_window(const ::string& pszName, ::user::interaction_listener* pinteractionlistener)
+   //   ::pointer < ::user::interaction > windowing::create_message_window(const ::scoped_string & scopedstrName, ::user::interaction_listener* pinteractionlistener)
    //   {
    //
    //      auto pmessagewindow = __create_new < message_window >();

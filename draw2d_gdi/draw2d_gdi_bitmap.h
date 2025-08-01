@@ -20,7 +20,7 @@ namespace draw2d_gdi
       int GetBitmap(BITMAP* pBitMap);
 
 
-      bool LoadBitmap(const ::string & lpszResourceName);
+      bool LoadBitmap(const ::scoped_string & scopedstrResourceName);
       bool LoadBitmap(UINT nIDResource);
       bool LoadOEMBitmap(UINT nIDBitmap); // for OBM_/OCR_/OIC_
       bool CreateBitmap(::draw2d::graphics_pointer & pgraphics, int nWidth, int nHeight, UINT nPlanes, UINT nBitcount, const void * lpBits, int stride);

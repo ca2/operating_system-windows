@@ -5439,7 +5439,7 @@ namespace draw2d_gdiplus
    //}
 
 
-   //bool graphics::draw_text_ex(const string& str, const ::double_rectangle &rectangleParam, const ::e_align & ealign, const ::e_draw_text & edrawtext)
+   //bool graphics::draw_text_ex(const ::scoped_string & scopedstr, const ::double_rectangle &rectangleParam, const ::e_align & ealign, const ::e_draw_text & edrawtext)
    //{
 
    //   if (::is_null(m_pgraphics))

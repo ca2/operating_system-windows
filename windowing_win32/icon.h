@@ -44,7 +44,7 @@ namespace windowing_win32
       
       void load_file(const ::string & strPath) override;
 
-      void load_app_tray_icon(const string& strApp) override;
+      void load_app_tray_icon(const ::scoped_string & scopedstrApp) override;
 
       virtual bool add_icon(HICON hicon);
 

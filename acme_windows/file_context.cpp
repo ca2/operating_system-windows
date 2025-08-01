@@ -263,7 +263,7 @@ namespace acme_windows
    }
 
 
-   void file_context::transfer(const ::file::path & pszNew, const ::file::path & psz)
+   void file_context::transfer(const ::file::path & pathNew, const ::file::path & path)
    {
 
 #ifdef WINDOWS_DESKTOP
@@ -447,7 +447,7 @@ namespace acme_windows
    }
 
 
-   bool file_context::is_read_only(const ::file::path & psz)
+   bool file_context::is_read_only(const ::file::path & path)
    {
 
 #ifdef WINDOWS_DESKTOP

@@ -86,7 +86,7 @@ namespace draw2d_gdi
    }
 
 
-   bool bitmap::LoadBitmap(const ::string & lpszResourceName)
+   bool bitmap::LoadBitmap(const ::scoped_string & scopedstrResourceName)
    {
 
       //      return Attach(::LoadBitmap(::windows_definition::FindResourceHandle(lpszResourceName, RT_BITMAP), lpszResourceName));

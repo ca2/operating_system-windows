@@ -2015,7 +2015,7 @@ pacmedir->create(pathTarget.folder()))
 
    }
 
-   void production::generate_appmatter_spa(const ::file::path & pszRoot)
+   void production::generate_appmatter_spa(const ::file::path & pathRoot)
    {
 
       ::file::listing listing(get_application());
@@ -2038,7 +2038,7 @@ pacmedir->create(pathTarget.folder()))
 
    }
 
-   void production::generate_appmatter_spa_folder(const ::file::path & pszRoot, const ::file::path & pszRelative)
+   void production::generate_appmatter_spa_folder(const ::file::path & pathRoot, const ::file::path & pathRelative)
    {
 
       ::file::listing listing(get_application());
@@ -2063,7 +2063,7 @@ pacmedir->create(pathTarget.folder()))
 
    }
 
-   void production::generate_appmatter_spa_locale(const ::file::path & pszRoot, const ::file::path & pszRelative)
+   void production::generate_appmatter_spa_locale(const ::file::path & pathRoot, const ::file::path & pathRelative)
    {
 
       ::file::listing listing(get_application());
@@ -2083,7 +2083,7 @@ pacmedir->create(pathTarget.folder()))
 
    }
 
-   void production::generate_appmatter_spa_style(const ::file::path & pszRoot, const ::file::path & pszRelative)
+   void production::generate_appmatter_spa_style(const ::file::path & pathRoot, const ::file::path & pathRelative)
    {
 
       ::file::listing listing(get_application());
@@ -2104,7 +2104,7 @@ pacmedir->create(pathTarget.folder()))
    }
 
 
-   void production::generate_appmatter_spa(const ::file::path & pszRoot, const ::file::path & pszRelative)
+   void production::generate_appmatter_spa(const ::file::path & pathRoot, const ::file::path & pathRelative)
    {
 
       string strStatus;
@@ -2310,13 +2310,13 @@ pacmedir->create(pathTarget.folder()))
       m_straSignature.add(string(pszSignature) + xpi_digest(memManifest));
    }
 
-   void production::add_path(const ::file::path & pszDir, const ::file::path & pszRelative)
+   void production::add_path(const ::file::path & pathDir, const ::file::path & pathRelative)
    {
       m_straPath.add(pszDir / pszRelative);
       m_straPath.last().m_iRelative = strlen(pszDir) + 1;
    }
 
-   void production::xpi_sign_dir(const ::string & pszPlatform, const ::file::path & pszDir)
+   void production::xpi_sign_dir(const ::string & pszPlatform, const ::file::path & pathDir)
    {
 
       m_straPath.erase_all();
