@@ -170,7 +170,7 @@ namespace ca2plugin_container
    }
 
 
-   bool host::open_link(const ::string & strLink, const ::string & strTarget)
+   bool host::open_link(const ::scoped_string & scopedstrLink, const ::scoped_string & scopedstrTarget)
    {
 
       ensure_tx(::hotplugin::message_open_url,(void *)strLink.c_str(),(int)strLink.length(), 2000);

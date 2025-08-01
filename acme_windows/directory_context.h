@@ -63,7 +63,7 @@ namespace acme_windows
 
       virtual ::file::path module();
       //virtual ::file::path ca2module();
-      virtual ::file::path time_square(const ::string & strPrefix = nullptr, const ::string & strSuffix = nullptr);
+      virtual ::file::path time_square(const ::scoped_string & scopedstrPrefix = nullptr, const ::scoped_string & scopedstrSuffix = nullptr);
       virtual ::file::path time_log();
 
 
@@ -74,7 +74,7 @@ namespace acme_windows
       virtual ::file::path appdata();
       virtual ::file::path commonappdata_root();
 
-      //virtual ::file::path usersystemappdata(const ::string & pcszPrefix);
+      //virtual ::file::path usersystemappdata(const ::scoped_string & scopedstrPrefix);
 
       //virtual ::file::path userappdata();
       //virtual ::file::path userdata();

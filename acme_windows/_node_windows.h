@@ -107,7 +107,7 @@ inline int __invariant_stricmp(const unichar *pwszLeft,const unichar *pwszRight)
 
 
 
-CLASS_DECL_ACME_WINDOWS int delete_registry_tree_helper(HKEY hParentKey, const ::string & strKeyName);
+CLASS_DECL_ACME_WINDOWS int delete_registry_tree_helper(HKEY hParentKey, const ::scoped_string & scopedstrKeyName);
 
 
 //CLASS_DECL_ACME_WINDOWS ::pointer<::platform::application>__get_app();

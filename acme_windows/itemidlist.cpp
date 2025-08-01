@@ -1003,7 +1003,7 @@ int itemidlist::_order(LPCITEMIDLIST pidlf1, LPCITEMIDLIST pidlf2,
 }
 
 
-bool itemidlist::get_refid_for_known_folder(KNOWNFOLDERID & refid, const ::string & strKnownFolder)
+bool itemidlist::get_refid_for_known_folder(KNOWNFOLDERID & refid, const ::scoped_string & scopedstrKnownFolder)
 {
 
    auto pknownfolderstruct = get_known_folder_struct(strKnownFolder);
@@ -1077,7 +1077,7 @@ HRESULT itemidlist::get_item_in_known_folder(itemidlist & idl, const string & st
 }
 
 
-HRESULT itemidlist::_parse(itemidlist & idl, const ::string & strPath)
+HRESULT itemidlist::_parse(itemidlist & idl, const ::scoped_string & scopedstrPath)
 {
 
    HRESULT hr = get_item_in_known_folder(idl, strPath);
@@ -1109,7 +1109,7 @@ HRESULT itemidlist::_parse(itemidlist & idl, const ::string & strPath)
 }
 
 
-//HRESULT itemidlist::_parse(itemidlist & idl, const ::string & pcszPath)
+//HRESULT itemidlist::_parse(itemidlist & idl, const ::scoped_string & scopedstrPath)
 //{
 //
 //   return _parse(idl, pcszPath, psfDesktop);

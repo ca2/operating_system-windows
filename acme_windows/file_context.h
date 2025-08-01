@@ -13,7 +13,7 @@
 
 //CLASS_DECL_APEX_WINDOWS string windows_get_module_path(HINSTANCE hInst);
 
-CLASS_DECL_ACME_WINDOWS string windows_get_short_file_name(const ::string & str);
+CLASS_DECL_ACME_WINDOWS string windows_get_short_file_name(const ::scoped_string & scopedstr);
 ///CLASS_DECL_APEX_WINDOWS void vfxGetModuleShortFileName(HINSTANCE hInst, string & strShortName);
 
 
@@ -64,7 +64,7 @@ namespace acme_windows
       //virtual bool FullPath(wstring & wstrFullPath, const wstring & wstrPath);
       //virtual unsigned int GetFileName(const ::string & pszPathName, string & str);
 
-      virtual string get_short_file_name(const ::string & str);
+      virtual string get_short_file_name(const ::scoped_string & scopedstr);
       virtual string get_module_short_file_name(HINSTANCE hinstance);
 
       
@@ -86,7 +86,7 @@ namespace acme_windows
 
       file_pointer resource_get_file(const ::file::path & path) override;
 
-      virtual bool get_last_write_time(FILETIME * pfiletime, const ::string & strFilename);
+      virtual bool get_last_write_time(FILETIME * pfiletime, const ::scoped_string & scopedstrFilename);
 
       //void update_module_path() override;
 

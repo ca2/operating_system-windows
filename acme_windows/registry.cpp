@@ -383,7 +383,7 @@ namespace acme_windows
    }
 
 
-   //void registry::key::_set(const ::string & strDataName, const scoped_string & scopedstrData)
+   //void registry::key::_set(const ::scoped_string & scopedstrDataName, const scoped_string & scopedstrData)
    //{
 
    //   return this->_set(strDataName, (const ::string &)scopedstrData);
@@ -465,7 +465,7 @@ namespace acme_windows
    
    }
 
-   //void registry::key::set(const ::string & strDataName, const scoped_string & strData)
+   //void registry::key::set(const ::scoped_string & scopedstrDataName, const scoped_string & strData)
    //{
 
    //   this->set(strDataName, (const string &)strData);
@@ -482,7 +482,7 @@ namespace acme_windows
    }
 
 
-   //void registry::key::set(const ::string & strDataName, const ::string & strData)
+   //void registry::key::set(const ::scoped_string & scopedstrDataName, const ::scoped_string & scopedstrData)
    //{
 
    //   auto estatus = _set(strDataName, strData);

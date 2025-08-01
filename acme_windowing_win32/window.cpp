@@ -52,7 +52,7 @@ public:
 
    ::string       m_strTask;
 
-   scoped_task_name(const ::string & strTask)
+   scoped_task_name(const ::scoped_string & scopedstrTask)
    {
 
       m_strTask = ::task_get_name();

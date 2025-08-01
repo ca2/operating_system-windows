@@ -5,7 +5,7 @@ namespace hi5
 {
 
 
-   string prepare_basic_authentication(::pointer<base_application>papp, const ::string & inParam1, const ::string & inParam2);
+   string prepare_basic_authentication(::pointer<base_application>papp, const ::scoped_string & scopedstrInputParameter1, const ::scoped_string & scopedstrInputParameter2);
 
 
    namespace oAuthTwitterApiUrls
@@ -1403,7 +1403,7 @@ namespace hi5
    * @remarks: internal method
    *
    *--*/
-   string facebook::prepare_basic_authentication(const ::string & inParam1, const ::string & inParam2)
+   string facebook::prepare_basic_authentication(const ::scoped_string & scopedstrInputParameter1, const ::scoped_string & scopedstrInputParameter2)
    {
       string outStr = inParam1;
       outStr += TWIT_COLON;

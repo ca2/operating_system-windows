@@ -55,7 +55,7 @@ namespace music
             ::e_status                 m_estatusMidiOut;
 
 
-            sequencer( sequence * psequence, const ::string & strDevice);
+            sequencer( sequence * psequence, const ::scoped_string & scopedstrDevice);
             ~sequencer() override;
 
 

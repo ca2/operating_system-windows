@@ -64,7 +64,7 @@ bool IsDibSection(HBITMAP bmp)
 }
 //::pointer<::image>create_image_from_hbitmap1(HBITMAP hbitmap)
 //{
-//   //comptr < IKnownFolder > get_known_folder(const ::string & strPath);
+//   //comptr < IKnownFolder > get_known_folder(const ::scoped_string & scopedstrPath);
 //
 //
 //   
@@ -235,7 +235,7 @@ bool IsDibSection(HBITMAP bmp)
 
 }
 
-//CLASS_DECL_AURA HICON ExtractResourceIcon(const ::string & strPath, int & cx, int & cy, int iIcon);
+//CLASS_DECL_AURA HICON ExtractResourceIcon(const ::scoped_string & scopedstrPath, int & cx, int & cy, int iIcon);
 
 
 namespace windowing_win32
@@ -1299,7 +1299,7 @@ namespace windowing_win32
    //}
 
 
-   shell::enum_folder shell::get_folder_type(::particle * pparticle, const ::string & pcsz)
+   shell::enum_folder shell::get_folder_type(::particle * pparticle, const ::scoped_string & scopedstr)
    {
 
       return get_folder_type(pparticle, utf8_to_unicode(pcsz));

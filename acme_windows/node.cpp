@@ -247,7 +247,7 @@ namespace acme_windows
    }
 
 
-   //void node::call_async(const ::string & strPath, const ::string & strParam, const ::string & strDir, ::e_display edisplay, bool bPrivileged, unsigned int * puiPid)
+   //void node::call_async(const ::scoped_string & scopedstrPath, const ::scoped_string & scopedstrParam, const ::scoped_string & scopedstrDir, ::e_display edisplay, bool bPrivileged, unsigned int * puiPid)
    //{
 
    //   /*auto estatus =*/ ::call_async(strPath, strParam, strDir, edisplay, bPrivileged, puiPid);
@@ -2680,7 +2680,7 @@ namespace acme_windows
    }
 
 
-   //::string node::expand_environment_variables(const ::string & str)
+   //::string node::expand_environment_variables(const ::scoped_string & scopedstr)
    //{
 
    //   wstring wstrSource(str);

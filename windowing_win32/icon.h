@@ -42,7 +42,7 @@ namespace windowing_win32
 
       virtual void * get_os_data(const ::int_size & size) const;
       
-      void load_file(const ::string & strPath) override;
+      void load_file(const ::scoped_string & scopedstrPath) override;
 
       void load_app_tray_icon(const ::scoped_string & scopedstrApp) override;
 

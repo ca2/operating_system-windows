@@ -30,7 +30,7 @@ public:
 
 
    itemidlist();
-   itemidlist(const ::string & strPath);
+   itemidlist(const ::scoped_string & scopedstrPath);
    itemidlist(LPCITEMIDLIST pidl, bool bAttach = true);
    itemidlist(const itemidlist & iidl);
    itemidlist(itemidlist && iidl);
@@ -38,7 +38,7 @@ public:
 
    //comptr < IShellFolder> _017GetParentShellFolder(LPITEMIDLIST piidlChild);
 
-   //comptr < IShellFolder> _017GetShellFolder(const ::string & str, LPITEMIDLIST piidlChild);
+   //comptr < IShellFolder> _017GetShellFolder(const ::scoped_string & scopedstr, LPITEMIDLIST piidlChild);
 
    comptr < IShellFolder> get_shell_folder() const;
 
@@ -71,14 +71,14 @@ public:
    inline int len() const;
    inline void free();
    string path() const;//Retrieve full path.(only available for full-quality pidl)
-   bool parse(const ::string & strPath);
+   bool parse(const ::scoped_string & scopedstrPath);
 
    itemidlist operator/(const itemidlist & piidl) const ;//Concat two pidls.
    inline operator LPITEMIDLIST() const { return m_pidl; }
    inline operator LPCITEMIDLIST() const { return (LPCITEMIDLIST)m_pidl; }
    inline operator LPITEMIDLIST*() { return &m_pidl; }
    inline operator LPCITEMIDLIST*() { return (LPCITEMIDLIST*)&m_pidl; }
-   itemidlist & operator=(const ::string & strPath);
+   itemidlist & operator=(const ::scoped_string & scopedstrPath);
    itemidlist & operator=(const itemidlist & pidl);
    itemidlist & operator=(LPCITEMIDLIST pidl);
    itemidlist & operator/=(const itemidlist & ciidl);//Add a ___new pidl to tail.
@@ -114,10 +114,10 @@ public:
    static HRESULT _GetUIObjectOf(REFIID riid, LPVOID* ppOut, LPITEMIDLIST pidlf, HWND hWnd);
    static LPITEMIDLIST _copy(LPCITEMIDLIST pidlOrg, int nCount);
    static int _order(LPCITEMIDLIST pidlf1, LPCITEMIDLIST pidlf2, IShellFolder * psfFolder = nullptr, LPARAM lparam = 0);//return zero means same,non-zero means different.
-   //static HRESULT _parse(itemidlist & idl, const ::string & strPath, IShellFolder * psfFolder);
-   static HRESULT _parse(itemidlist & idl, const ::string & strPath);
+   //static HRESULT _parse(itemidlist & idl, const ::scoped_string & scopedstrPath, IShellFolder * psfFolder);
+   static HRESULT _parse(itemidlist & idl, const ::scoped_string & scopedstrPath);
    static HRESULT get_item_in_known_folder(itemidlist & idl, const string & strPath);
-   static bool get_refid_for_known_folder(KNOWNFOLDERID & refid, const ::string & strKnownFolder);
+   static bool get_refid_for_known_folder(KNOWNFOLDERID & refid, const ::scoped_string & scopedstrKnownFolder);
    static int _overlay_icon_index(IShellFolder * psfFolder, LPCITEMIDLIST pidl);
 
    static string _display_name(STRRET& str, LPCITEMIDLIST pidl);

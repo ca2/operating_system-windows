@@ -151,7 +151,7 @@ namespace apex_windows
 
       void open_internet_link(const ::scoped_string& scopedstrUrl, const ::scoped_string& scopedstrProfile, const ::scoped_string& scopedstTarget) override;
 
-      bool open_in_ie(const ::string& pcsz);
+      bool open_in_ie(const ::scoped_string & scopedstr);
 
 
       void file_open(const ::file::path& path, const ::scoped_string & scopedstrParams = "", const ::file::path& pathFolder = "") override;

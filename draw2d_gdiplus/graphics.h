@@ -402,28 +402,28 @@ namespace draw2d_gdiplus
       virtual void TextOutRaw(double x, double y, const ::scoped_string & scopedstr);
       //void ExtTextOut(double x, double y, UINT nOptions, const double_rectangle &  prectangle, const ::string & pszString,character_count nCount, LPINT lpDxWidths) override;
 
-      //void ExtTextOut(double x, double y, UINT nOptions, const double_rectangle &  prectangle, const ::string & str, LPINT lpDxWidths) override;
+      //void ExtTextOut(double x, double y, UINT nOptions, const double_rectangle &  prectangle, const ::scoped_string & scopedstr, LPINT lpDxWidths) override;
 
       //virtual double_size TabbedTextOut(double x, double y, const ::string & pszString, character_count nCount,count nTabPositions, LPINT lpnTabStopPositions, int nTabOrigin) override;
 
-      //virtual double_size TabbedTextOut(double x, double y, const ::string & str,count nTabPositions, LPINT pnTabStopPositions, int nTabOrigin) override;
+      //virtual double_size TabbedTextOut(double x, double y, const ::scoped_string & scopedstr,count nTabPositions, LPINT pnTabStopPositions, int nTabOrigin) override;
 
 
       //using ::draw2d::graphics::draw;
       //void draw(const ::int_point & point, ::draw2d::graphics * pgraphicsSrc, const ::int_rectangle & rectangleSource) override;
 
-      void _001DrawText(const ::string & str, double_rectangle & rectangleParam, const ::e_align & ealign = e_align_top_left, const ::e_draw_text & edrawtext = e_draw_text_none, bool bMeasure = false) override;
+      void _001DrawText(const ::scoped_string & scopedstr, double_rectangle & rectangleParam, const ::e_align & ealign = e_align_top_left, const ::e_draw_text & edrawtext = e_draw_text_none, bool bMeasure = false) override;
 
       //void draw_text_ex(const ::string & pszString,character_count nCount,const ::int_rectangle & rectangle, const ::e_align & ealign = e_align_top_left, const ::e_draw_text & edrawtext = e_draw_text_none,LPDRAWTEXTPARAMS lpDTParams) override;
 
-      //void draw_text_ex(const ::string & str,const ::int_rectangle & rectangle, const ::e_align & ealign = e_align_top_left, const ::e_draw_text & edrawtext = e_draw_text_none) override;
+      //void draw_text_ex(const ::scoped_string & scopedstr,const ::int_rectangle & rectangle, const ::e_align & ealign = e_align_top_left, const ::e_draw_text & edrawtext = e_draw_text_none) override;
 
 
       //void draw_text_ex(const ::string & pszString,character_count nCount,const ::double_rectangle & rectangle, const ::e_align & ealign = e_align_top_left, const ::e_draw_text & edrawtext = e_draw_text_none,LPDRAWTEXTPARAMS lpDTParams) override;
 
-      void draw_text_ex(const ::string & str,const ::double_rectangle & rectangle, const ::e_align & ealign = e_align_top_left, const ::e_draw_text & edrawtext = e_draw_text_none) override;
+      void draw_text_ex(const ::scoped_string & scopedstr,const ::double_rectangle & rectangle, const ::e_align & ealign = e_align_top_left, const ::e_draw_text & edrawtext = e_draw_text_none) override;
 
-      virtual ::collection::count get_character_extent(::double_array & daLeft, ::double_array& daRight, const ::string & str, character_count iStart = 0, character_count iEnd = -1) override;
+      virtual ::collection::count get_character_extent(::double_array & daLeft, ::double_array& daRight, const ::scoped_string & scopedstr, character_count iStart = 0, character_count iEnd = -1) override;
 
       //virtual double_size get_text_extent(const scoped_string & strString, character_count iIndex) override;
 
@@ -440,14 +440,14 @@ namespace draw2d_gdiplus
       double_size get_text_extent(const scoped_string & strString) override;
       //virtual double_size GetOutputTextExtent(const scoped_string & strString, character_count nCount) override;
 
-      //virtual double_size GetOutputTextExtent(const ::string & str) override;
+      //virtual double_size GetOutputTextExtent(const ::scoped_string & scopedstr) override;
       ////virtual double_size GetTabbedTextExtent(const ::string & pszString, character_count nCount,count nTabPositions, LPINT lpnTabStopPositions) override;
 
-      ////virtual double_size GetTabbedTextExtent(const ::string & str,count nTabPositions, LPINT pnTabStopPositions) override;
+      ////virtual double_size GetTabbedTextExtent(const ::scoped_string & scopedstr,count nTabPositions, LPINT pnTabStopPositions) override;
 
       //virtual double_size GetOutputTabbedTextExtent(const ::string & pszString, character_count nCount,count nTabPositions, LPINT lpnTabStopPositions) override;
 
-      //virtual double_size GetOutputTabbedTextExtent(const ::string & str,count nTabPositions, LPINT pnTabStopPositions) override;
+      //virtual double_size GetOutputTabbedTextExtent(const ::scoped_string & scopedstr,count nTabPositions, LPINT pnTabStopPositions) override;
 
       //void GrayString(::draw2d::brush* pBrush, bool (CALLBACK* pfnOutput)(HDC, LPARAM, int), LPARAM lpData, int nCount, double x, double y, int nWidth, int nHeight) override;
 

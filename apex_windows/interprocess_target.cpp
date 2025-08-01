@@ -51,7 +51,7 @@ namespace apex_windows
    //}
 
 
-   //void interprocess_caller::open(const ::string & strKey, ::launcher * plauncher)
+   //void interprocess_caller::open(const ::scoped_string & scopedstrKey, ::launcher * plauncher)
    //{
 
    //   if (get_hwnd() != nullptr)
@@ -178,7 +178,7 @@ namespace apex_windows
    //}
 
 
-   //void interprocess_caller::send(const ::string & strMessage, const class time & timeTimeout)
+   //void interprocess_caller::send(const ::scoped_string & scopedstrMessage, const class time & timeTimeout)
    //{
 
    //   if (!is_tx_ok())
@@ -323,7 +323,7 @@ namespace apex_windows
    }
 
 
-   void interprocess_target::create(const ::string & strKey)
+   void interprocess_target::create(const ::scoped_string & scopedstrKey)
    {
 
 
@@ -399,7 +399,7 @@ namespace apex_windows
    }
 
 
-   //void * interprocess_target::on_interprocess_receive(::inteprocess::handler * prx, const ::string & strMessage)
+   //void * interprocess_target::on_interprocess_receive(::inteprocess::handler * prx, const ::scoped_string & scopedstrMessage)
    //{
 
    //   if (strMessage.case_insensitive_begins("synch_"))

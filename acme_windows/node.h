@@ -55,7 +55,7 @@ namespace acme_windows
       //void initialize_integration();
 
 
-      void shell_open(const ::file::path & path, const ::string & strParams = "", const ::file::path & pathFolder = "") override;
+      void shell_open(const ::file::path & path, const ::scoped_string & scopedstrParams = "", const ::file::path & pathFolder = "") override;
 
 
 
@@ -95,7 +95,7 @@ namespace acme_windows
       ::process_identifier create_process(const ::string & pszCommandLine) override;
 
 
-      void run_silent(const ::string & strFunct, const ::string & strstrParams) override;
+      void run_silent(const ::scoped_string & scopedstrFunct, const ::scoped_string & scopedstrstrParams) override;
 
 
       ::file::path_array process_identifier_modules_paths(::process_identifier processidentifier) override;
@@ -176,7 +176,7 @@ namespace acme_windows
       ::pointer < security_attributes > get_application_exclusivity_security_attributes() override;
 
 
-      void register_spa_file_type(const ::string & strAppIdHandler) override;
+      void register_spa_file_type(const ::scoped_string & scopedstrAppIdHandler) override;
       void start_program_files_app_app_admin(string strPlatform, string strConfiguration) override;
 
 
@@ -186,7 +186,7 @@ namespace acme_windows
       void register_dll(const ::file::path & pathDll);
 
 
-      //::string expand_environment_variables(const ::string & str) override;
+      //::string expand_environment_variables(const ::scoped_string & scopedstr) override;
 
       virtual ::wstring expand_environment_variables(const ::wstring & wstr);
 
@@ -211,7 +211,7 @@ namespace acme_windows
 
 
       void open_internet_link(const ::scoped_string& scopedstrUrl, const ::scoped_string& scopedstrProfile = {}, const ::scoped_string& scopedstrTarget = {}) override;
-      void shell_launch(const ::string & strUrl) override;
+      void shell_launch(const ::scoped_string & scopedstrUrl) override;
 
 
       bool stdin_has_input_events() override;
@@ -222,7 +222,7 @@ namespace acme_windows
       //string get_callstack(const scoped_string & strFormat, int iSkip, void * caller_address, int iCount) override;
 
 
-      ::pointer < ::acme::exclusive > _get_exclusive(::particle * pparticleContext, const ::string & strName, ::security_attributes * psecurityattributes = nullptr) override;
+      ::pointer < ::acme::exclusive > _get_exclusive(::particle * pparticleContext, const ::scoped_string & scopedstrName, ::security_attributes * psecurityattributes = nullptr) override;
       int get_current_process_affinity_order() override;
 
 
@@ -230,11 +230,11 @@ namespace acme_windows
       void call_sync(const ::string & pszPath, const ::string & pszParam, const ::string & pszDir, ::e_display edisplay, const class time & timeTimeout, ::property_set & set, int * piExitCode) override;
 
 
-      void launch_application(::particle * pparticle, const ::string & strAppId, const ::string & strParams, int iBitCount) override;
+      void launch_application(::particle * pparticle, const ::scoped_string & scopedstrAppId, const ::scoped_string & scopedstrParams, int iBitCount) override;
 
 
       //void shell_open(const ::file::path & path, const string & strParams = "", const ::file::path & pathFolder = {}) override;
-      //void open_url(const ::string & strUrl) override; //
+      //void open_url(const ::scoped_string & scopedstrUrl) override; //
       //void command_system(string_array & straOutput, int & iExitCode, const scoped_string & str, enum_command_system ecommandsystem = e_command_system_none, const class time & timeTimeout = ::time::infinity(), ::particle * pparticleSynchronization = nullptr, ::file::file * pfileLog = nullptr) override;
       int command_system(const ::scoped_string& scopedstr, const trace_function& tracefunction = nullptr, const ::file::path& pathWorkingDirectory = {}, ::e_display edisplay = e_display_none) override;
       //int command_system(const ::scoped_string& scopedstr, const class ::time& timeOut = 15_min) override;

@@ -220,10 +220,10 @@
 // CLASS_DECL_ACME bool is_valid_FILETIME(const FILETIME & ft) noexcept;
 
 
-// CLASS_DECL_ACME BSTR AllocSysString(const ::string & str);
+// CLASS_DECL_ACME BSTR AllocSysString(const ::scoped_string & scopedstr);
 
 
-// CLASS_DECL_ACME BSTR SetSysString(BSTR * pbstr, const ::string & str);
+// CLASS_DECL_ACME BSTR SetSysString(BSTR * pbstr, const ::scoped_string & scopedstr);
 
 
 // CLASS_DECL_ACME int_bool read_resource_as_file(const scoped_string & strFile, HINSTANCE hinst, unsigned int nID, LPCTSTR pcszType);

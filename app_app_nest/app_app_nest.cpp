@@ -7,7 +7,7 @@ void * g_pvoidPluginSystem = nullptr;
 HANDLE g_hmutex = nullptr;
 
 
-unsigned int plugin_container_app(const ::string & strChannel)
+unsigned int plugin_container_app(const ::scoped_string & scopedstrChannel)
 {
 
    ::plugin::system * psystem = ___new ::plugin::system(nullptr, nullptr);

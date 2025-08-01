@@ -31,7 +31,7 @@ namespace apex_windows
    }
 
 
-   void interprocess_caller::open(const ::string & strKey, ::launcher * plauncher)
+   void interprocess_caller::open(const ::scoped_string & scopedstrKey, ::launcher * plauncher)
    {
 
       if (get_hwnd() != nullptr)
@@ -158,7 +158,7 @@ namespace apex_windows
    }
 
 
-   void interprocess_caller::call(const ::string & strUri, const class time & timeTimeout)
+   void interprocess_caller::call(const ::scoped_string & scopedstrUri, const class time & timeTimeout)
    {
 
       if (!is_caller_ok())

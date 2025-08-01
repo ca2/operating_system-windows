@@ -1668,7 +1668,7 @@ namespace draw2d_gdi
    // double blend
    //// COLOR_DEST = SRC_ALPHA * BLEND_ALPHA * COLOR_SRC  + (1 - SRC_ALPHA * BLEND_ALPHA) * COLOR_DST
 
-   bool graphics::text_out(int x, int y, const ::string & str)
+   bool graphics::text_out(int x, int y, const ::scoped_string & scopedstr)
    {
 
       return text_out(x, y, str, (int) str.length());
@@ -1687,7 +1687,7 @@ namespace draw2d_gdi
    }
 
 
-   bool graphics::ExtTextOut(int x, int y, UINT nOptions, const ::int_rectangle & rectangle, const ::string & str, LPINT lpDxWidths)
+   bool graphics::ExtTextOut(int x, int y, UINT nOptions, const ::int_rectangle & rectangle, const ::scoped_string & scopedstr, LPINT lpDxWidths)
    {
 
       ASSERT(get_handle1() != nullptr);
@@ -1711,7 +1711,7 @@ namespace draw2d_gdi
    }
 
 
-   ::int_size graphics::TabbedTextOut(int x, int y, const ::string & str, ::collection::count nTabPositions, LPINT lpnTabStopPositions, int nTabOrigin)
+   ::int_size graphics::TabbedTextOut(int x, int y, const ::scoped_string & scopedstr, ::collection::count nTabPositions, LPINT lpnTabStopPositions, int nTabOrigin)
    {
 
       ASSERT(get_handle1() != nullptr);
@@ -1731,7 +1731,7 @@ namespace draw2d_gdi
    }
 
 
-   bool graphics::draw_text(const ::string & str,const ::int_rectangle & rectangle, const ::e_align & ealign, const ::e_draw_text & edrawtext)
+   bool graphics::draw_text(const ::scoped_string & scopedstr,const ::int_rectangle & rectangle, const ::e_align & ealign, const ::e_draw_text & edrawtext)
    {
 
       return draw_text(str, (int) str.length(), rectangle, nFormat);
@@ -1749,7 +1749,7 @@ namespace draw2d_gdi
    }
 
 
-   bool graphics::draw_text_ex(const ::string & str,const ::int_rectangle & rectangle, const ::e_align & ealign, const ::e_draw_text & edrawtext,LPDRAWTEXTPARAMS lpDTParams)
+   bool graphics::draw_text_ex(const ::scoped_string & scopedstr,const ::int_rectangle & rectangle, const ::e_align & ealign, const ::e_draw_text & edrawtext,LPDRAWTEXTPARAMS lpDTParams)
    {
 
       return draw_text_ex((char *) (const ::string &) str, (int) str.length(), rectangle, nFormat, lpDTParams);
@@ -1768,7 +1768,7 @@ namespace draw2d_gdi
    }
 
 
-   ::int_size graphics::GetTabbedTextExtent(const ::string & str, ::collection::count nTabPositions, LPINT lpnTabStopPositions)
+   ::int_size graphics::GetTabbedTextExtent(const ::scoped_string & scopedstr, ::collection::count nTabPositions, LPINT lpnTabStopPositions)
    {
 
       ASSERT(get_handle2() != nullptr);
@@ -1792,7 +1792,7 @@ namespace draw2d_gdi
    }
 
 
-   ::int_size graphics::GetOutputTabbedTextExtent(const ::string & str, ::collection::count nTabPositions, LPINT lpnTabStopPositions)
+   ::int_size graphics::GetOutputTabbedTextExtent(const ::scoped_string & scopedstr, ::collection::count nTabPositions, LPINT lpnTabStopPositions)
    {
 
       ASSERT(get_handle1() != nullptr);
@@ -4706,7 +4706,7 @@ namespace draw2d_gdi
    }
 
 
-   double_size graphics::get_text_extent(const ::string & str)
+   double_size graphics::get_text_extent(const ::scoped_string & scopedstr)
    {
 
       if (get_handle2() == nullptr)
@@ -4743,7 +4743,7 @@ namespace draw2d_gdi
       VERIFY(::GetTextExtentPoint32W(get_handle1(), wstr, (int)wstr.get_length(), &size));
       return size;
    }
-   int_size graphics::GetOutputTextExtent(const ::string & str)
+   int_size graphics::GetOutputTextExtent(const ::scoped_string & scopedstr)
    {
       ASSERT(get_handle1() != nullptr);
       ::int_size size;

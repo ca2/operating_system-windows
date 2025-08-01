@@ -353,26 +353,26 @@ namespace draw2d_gdi
 
       // Text Functions
       virtual bool text_out(double x, double y, const ::scoped_string & scopedstrString, character_count nCount) override;
-      virtual bool text_out(int x, int y, const ::string & str) override;
+      virtual bool text_out(int x, int y, const ::scoped_string & scopedstr) override;
       virtual bool ExtTextOut(int x, int y, UINT nOptions, const ::int_rectangle & rectangle, const ::scoped_string & scopedstrString, ::collection::count nCount, INT * lpDxWidths) override;
-      virtual bool ExtTextOut(int x, int y, UINT nOptions, const ::int_rectangle & rectangle, const ::string & str, INT * lpDxWidths) override;
+      virtual bool ExtTextOut(int x, int y, UINT nOptions, const ::int_rectangle & rectangle, const ::scoped_string & scopedstr, INT * lpDxWidths) override;
       virtual ::int_size TabbedTextOut(int x, int y, const ::scoped_string & scopedstrString, character_count nCount, ::collection::count nTabPositions, INT * lpnTabStopPositions, int nTabOrigin) override;
-      virtual ::int_size TabbedTextOut(int x, int y, const ::string & str, ::collection::count nTabPositions, INT * lpnTabStopPositions, int nTabOrigin) override;
+      virtual ::int_size TabbedTextOut(int x, int y, const ::scoped_string & scopedstr, ::collection::count nTabPositions, INT * lpnTabStopPositions, int nTabOrigin) override;
 
       virtual bool draw_text(const ::scoped_string & scopedstrString,character_count nCount,const ::int_rectangle & rectangle, const ::e_align & ealign = e_align_top_left, const ::e_draw_text & edrawtext = e_draw_text_none) override;
-      virtual bool draw_text(const ::string & str,const ::int_rectangle & rectangle, const ::e_align & ealign = e_align_top_left, const ::e_draw_text & edrawtext = e_draw_text_none) override;
+      virtual bool draw_text(const ::scoped_string & scopedstr,const ::int_rectangle & rectangle, const ::e_align & ealign = e_align_top_left, const ::e_draw_text & edrawtext = e_draw_text_none) override;
 
       virtual bool draw_text_ex(const ::scoped_string & scopedstrString,character_count nCount,const ::int_rectangle & rectangle, const ::e_align & ealign = e_align_top_left, const ::e_draw_text & edrawtext = e_draw_text_none, LPDRAWTEXTPARAMS lpDTParams) override;
-      virtual bool draw_text_ex(const ::string & str,const ::int_rectangle & rectangle, const ::e_align & ealign = e_align_top_left, const ::e_draw_text & edrawtext = e_draw_text_none,LPDRAWTEXTPARAMS lpDTParams) override;
+      virtual bool draw_text_ex(const ::scoped_string & scopedstr,const ::int_rectangle & rectangle, const ::e_align & ealign = e_align_top_left, const ::e_draw_text & edrawtext = e_draw_text_none,LPDRAWTEXTPARAMS lpDTParams) override;
 
       virtual double_size get_text_extent(const ::scoped_string & scopedstrString, character_count nCount) override;
-      virtual double_size get_text_extent(const ::string & str) override;
+      virtual double_size get_text_extent(const ::scoped_string & scopedstr) override;
       virtual ::int_size GetOutputTextExtent(const ::scoped_string & scopedstrString,character_count nCount) override;
-      virtual ::int_size GetOutputTextExtent(const ::string & str) override;
+      virtual ::int_size GetOutputTextExtent(const ::scoped_string & scopedstr) override;
       virtual ::int_size GetTabbedTextExtent(const ::scoped_string & scopedstrString,character_count nCount, ::collection::count nTabPositions, INT * lpnTabStopPositions) override;
-      virtual ::int_size GetTabbedTextExtent(const ::string & str, ::collection::count nTabPositions, INT * lpnTabStopPositions) override;
+      virtual ::int_size GetTabbedTextExtent(const ::scoped_string & scopedstr, ::collection::count nTabPositions, INT * lpnTabStopPositions) override;
       virtual ::int_size GetOutputTabbedTextExtent(const ::scoped_string & scopedstrString,character_count nCount, ::collection::count nTabPositions, INT * lpnTabStopPositions) override;
-      virtual ::int_size GetOutputTabbedTextExtent(const ::string & str, ::collection::count nTabPositions, INT * lpnTabStopPositions) override;
+      virtual ::int_size GetOutputTabbedTextExtent(const ::scoped_string & scopedstr, ::collection::count nTabPositions, INT * lpnTabStopPositions) override;
       virtual bool GrayString(::draw2d::brush* pBrush, bool (CALLBACK* lpfnOutput)(HDC, LPARAM, int), LPARAM lpData, int nCount, int x, int y, int nWidth, int nHeight) override;
       virtual UINT GetTextAlign() override;
       virtual UINT SetTextAlign(UINT nFlags) override;

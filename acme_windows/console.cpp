@@ -204,7 +204,7 @@ namespace acme_windows
    }
 
 
-   void console::write(const ::string & str)
+   void console::write(const ::scoped_string & scopedstr)
    {
 
       m_pfileOut->write( str.c_str(),str.length() );

@@ -15,10 +15,10 @@ struct sz_known_folder_struct
 };
 
 
-CLASS_DECL_ACME_WINDOWS sz_known_folder_struct * get_known_folder_struct(const ::string & strKnownFolder);
+CLASS_DECL_ACME_WINDOWS sz_known_folder_struct * get_known_folder_struct(const ::scoped_string & scopedstrKnownFolder);
 
 CLASS_DECL_ACME_WINDOWS sz_known_folder_struct * case_insensitive_path_begins_eat_known_folder_struct(::string & strPath);
 
-//comptr < IKnownFolder > get_IKnownFolder(const ::string & strPath);
+//comptr < IKnownFolder > get_IKnownFolder(const ::scoped_string & scopedstrPath);
 
 

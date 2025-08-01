@@ -41,9 +41,9 @@ namespace music
 
 
 
-            ::collection::index get_os_out_device_id(const ::string & strDevice);
+            ::collection::index get_os_out_device_id(const ::scoped_string & scopedstrDevice);
 
-            ::collection::index get_os_in_device_id(const ::string & strDevice);
+            ::collection::index get_os_in_device_id(const ::scoped_string & scopedstrDevice);
 
 
             virtual ::pointer<::music::midi::sequencer>create_midi_sequencer(sequence * psequence, const ::scoped_string & scopedstrDevice) override;
@@ -58,7 +58,7 @@ namespace music
             void mmsystem_GetMidiOutDeviceInterface(UINT_PTR i);
 
             using ::music::midi::midi::translate_os_result;
-            virtual ::e_status midi_in_translate_os_result(string & strMessage, string & strOsMessage, ::music::midi::object * pmidiobject, long long iOsResult, const ::string & strContext, const ::string & strText);
+            virtual ::e_status midi_in_translate_os_result(string & strMessage, string & strOsMessage, ::music::midi::object * pmidiobject, long long iOsResult, const ::scoped_string & scopedstrContext, const ::scoped_string & scopedstrText);
 
 
             virtual void enumerate_midi_out_devices() override;

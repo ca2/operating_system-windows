@@ -45,7 +45,7 @@ namespace apex_windows
    }
 
 
-   bool process::create_child_process(const ::string & pszCmdLine, bool bPiped, const ::string & strDir, ::enum_priority epriority)
+   bool process::create_child_process(const ::string & pszCmdLine, bool bPiped, const ::scoped_string & scopedstrDir, ::enum_priority epriority)
    {
 
       if (!::operating_system::process::create_child_process(pszCmdLine, bPiped, strDir, epriority))

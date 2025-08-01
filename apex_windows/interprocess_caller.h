@@ -29,7 +29,7 @@ namespace apex_windows
       void close() override;
 
 
-      void call(const ::string & strUri, const class time & timeTimeout) override;
+      void call(const ::scoped_string & scopedstrUri, const class time & timeTimeout) override;
       //void send(int message, void * pdata, int len, const class time & timeTimeout) override;
 
 

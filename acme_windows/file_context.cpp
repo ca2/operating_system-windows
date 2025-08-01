@@ -188,7 +188,7 @@ namespace acme_windows
    //}
 
 
-   string file_context::get_short_file_name(const ::string & str)
+   string file_context::get_short_file_name(const ::scoped_string & scopedstr)
    {
 
       return windows_get_short_file_name(str);
@@ -530,7 +530,7 @@ namespace acme_windows
    }
 
 
-   bool file_context::get_last_write_time(FILETIME * pfiletime, const ::string & strFilename)
+   bool file_context::get_last_write_time(FILETIME * pfiletime, const ::scoped_string & scopedstrFilename)
    {
 
       WIN32_FILE_ATTRIBUTE_DATA data{};

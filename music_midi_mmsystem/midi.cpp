@@ -381,7 +381,7 @@ namespace music
          }
 
 
-         ::e_status midi::midi_in_translate_os_result(string & strMessage, string & strOsMessage, ::music::midi::object * pmidiobject, long long iOsResult, const ::string & strContext, const ::string & strText)
+         ::e_status midi::midi_in_translate_os_result(string & strMessage, string & strOsMessage, ::music::midi::object * pmidiobject, long long iOsResult, const ::scoped_string & scopedstrContext, const ::scoped_string & scopedstrText)
          {
 
             auto estatus = midi_in_get_error_text((MMRESULT) iOsResult, strOsMessage, strMessage);
@@ -489,7 +489,7 @@ namespace music
          }
 
 
-         ::collection::index midi::get_os_out_device_id(const ::string & strDevice)
+         ::collection::index midi::get_os_out_device_id(const ::scoped_string & scopedstrDevice)
          {
 
             return m_straDeviceOut.find_first(strDevice);
@@ -497,7 +497,7 @@ namespace music
          }
 
 
-         ::collection::index midi::get_os_in_device_id(const ::string & strDevice)
+         ::collection::index midi::get_os_in_device_id(const ::scoped_string & scopedstrDevice)
          {
 
             return m_straDeviceIn.find_first(strDevice);

@@ -123,7 +123,7 @@ namespace str
 
 
 
-CLASS_DECL_ACME BSTR AllocSysString(const ::string & str)
+CLASS_DECL_ACME BSTR AllocSysString(const ::scoped_string & scopedstr)
 {
 
    return ::str().AllocSysString(str.c_str(), str.length());
@@ -131,7 +131,7 @@ CLASS_DECL_ACME BSTR AllocSysString(const ::string & str)
 }
 
 
-CLASS_DECL_ACME BSTR SetSysString(BSTR * pbstr, const ::string & str)
+CLASS_DECL_ACME BSTR SetSysString(BSTR * pbstr, const ::scoped_string & scopedstr)
 {
 
    ::str().ReAllocSysString(pbstr, str.c_str(), str.length());
