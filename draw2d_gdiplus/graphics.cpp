@@ -5888,7 +5888,7 @@ namespace draw2d_gdiplus
 
       //::pointer < graphics > p = 
 
-      _gdiplus_draw_text(nullptr, str, rectangleParam, ealign, edrawtext, m_pfont, m_pfont->m_dFontWidth, m_pbrush, bMeasure);
+      _gdiplus_draw_text(nullptr, scopedstr, rectangleParam, ealign, edrawtext, m_pfont, m_pfont->m_dFontWidth, m_pbrush, bMeasure);
 
    }
 
@@ -6017,7 +6017,7 @@ namespace draw2d_gdiplus
    ::collection::count graphics::get_character_extent(::double_array & daLeft, ::double_array & daRight, const ::scoped_string & scopedstr, character_count iStartParam, character_count iCountParam)
    {
 
-      if (str.is_empty())
+      if (scopedstr.is_empty())
       {
 
          return 0;
@@ -6027,7 +6027,7 @@ namespace draw2d_gdiplus
       if (iCountParam < 0)
       {
 
-         iCountParam += str.length() - iStartParam + 1;
+         iCountParam += scopedstr.length() - iStartParam + 1;
 
       }
 
@@ -6037,18 +6037,18 @@ namespace draw2d_gdiplus
 
       daRight.erase_all();
 
-      wstring wstrBefore(str.left(iStartParam));
+      wstring wstrBefore(scopedstr.left(iStartParam));
 
-      wstring wstrMiddle(str.substr(iStartParam, iCountParam));
+      wstring wstrMiddle(scopedstr.substr(iStartParam, iCountParam));
 
       m_pfont->defer_update(this, 0);
 
-      auto & text = m_pfont->m_mapFontText[str];
+      auto & text = m_pfont->m_mapFontText[scopedstr];
 
       if (text.m_wstr.is_empty())
       {
 
-         text.m_wstr = str;
+         text.m_wstr =scopedstr;
 
       }
 

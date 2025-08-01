@@ -301,7 +301,7 @@ namespace acme_windows
       }
 
 
-      void context::prepare1(const ::scoped_string & scopedstrSource, const ::string & scopedstrTarget)
+      void context::prepare1(const ::scoped_string & scopedstrSource, const ::scoped_string & scopedstrTarget)
       {
 
          //string_array stra;

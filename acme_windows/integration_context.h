@@ -44,7 +44,7 @@ namespace acme_windows
          void prepare_compile_and_link_environment() override;
 
 
-         virtual void prepare1(const ::scoped_string & scopedstrSource, const ::string & scopedstrTarget);
+         virtual void prepare1(const ::scoped_string & scopedstrSource, const ::scoped_string & scopedstrTarget);
 
 
          ::string prepare_path(const ::file::path & path) override;

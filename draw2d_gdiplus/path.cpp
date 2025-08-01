@@ -539,7 +539,7 @@ namespace draw2d_gdiplus
 
          Gdiplus::StringFormat format(Gdiplus::StringFormat::GenericTypographic());
 
-         wstring wstr(strText);
+         wstring wstr(scopedstrText);
 
          Gdiplus::REAL dSize = (Gdiplus::REAL) pfont->m_fontsize.as_double();
 
@@ -605,7 +605,7 @@ namespace draw2d_gdiplus
 
       ::pointer < graphics > p = pgraphics;
       
-      p->_gdiplus_draw_text(this, strText, rectangle, ealign, edrawtext, pfont, 1.0);
+      p->_gdiplus_draw_text(this, scopedstrText, rectangle, ealign, edrawtext, pfont, 1.0);
 
       ///return !estatus;
 
