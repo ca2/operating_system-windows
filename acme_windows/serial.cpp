@@ -621,7 +621,7 @@ namespace acme_windows
 
          auto tickStart = ::time::now();
 
-         if (string(reinterpret_cast<const_char_pointer  > (buffer_ + read_so_far - eol_len), eol_len) == eol)
+         if (string(reinterpret_cast<const_char_pointer >(buffer_ + read_so_far - eol_len), eol_len) == eol)
          {
 
             break; // EOL found
@@ -637,7 +637,7 @@ namespace acme_windows
 
       }
 
-      buffer.append(reinterpret_cast<const_char_pointer  > (buffer_), read_so_far);
+      buffer.append(reinterpret_cast<const_char_pointer >(buffer_), read_so_far);
 
       return read_so_far;
 

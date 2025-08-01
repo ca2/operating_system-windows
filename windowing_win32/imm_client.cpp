@@ -602,7 +602,7 @@ void imm_client::on_message_key_down(::message::message * pmessage)
 }
 
 
-void imm_client::on_text_composition(string str)
+void imm_client::on_text_composition(const ::scoped_string & scopedstr)
 {
 
    //text_composition_client::on_text_composition(str);

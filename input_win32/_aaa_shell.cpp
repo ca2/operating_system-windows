@@ -1927,7 +1927,7 @@ namespace windowing_win32
    }
 
 
-   void shell::set_image_ico(string strIconLocation, _get_file_image_ & getfileimage)
+   void shell::set_image_ico(const ::scoped_string & scopedstrIconLocation, _get_file_image_ & getfileimage)
    {
 
       ASSERT(strIconLocation.case_insensitive_ends(".ico"));
@@ -1946,7 +1946,7 @@ namespace windowing_win32
    }
 
 
-   void shell::set_image_resource(string strIconLocation, _get_file_image_ & getfileimage)
+   void shell::set_image_resource(const ::scoped_string & scopedstrIconLocation, _get_file_image_ & getfileimage)
    {
 
       ASSERT(!strIconLocation.case_insensitive_ends(".ico"));

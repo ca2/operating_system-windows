@@ -124,7 +124,7 @@ void imm_client::_011OnChar(::message::message * pmessage)
 }
 
 
-void imm_client::insert_text(string str, bool bForceNewStep, const ::action_context & context)
+void imm_client::insert_text(const ::scoped_string & scopedstr, bool bForceNewStep, const ::action_context & context)
 {
 
    text_composition_client::insert_text(str, bForceNewStep, context);
@@ -597,7 +597,7 @@ void imm_client::on_message_key_down(::message::message * pmessage)
 }
 
 
-void imm_client::on_text_composition(string str)
+void imm_client::on_text_composition(const ::scoped_string & scopedstr)
 {
 
    //text_composition_client::on_text_composition(str);

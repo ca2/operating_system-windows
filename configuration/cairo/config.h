@@ -480,7 +480,7 @@
 //struct lconv
 //{
 //
-//   const_char_pointer  decimal_point;
+//   const_char_pointer decimal_point;
 //
 //};
 //

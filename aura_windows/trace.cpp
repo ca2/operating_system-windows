@@ -9,7 +9,7 @@
 //struct CLASS_DECL_AURA __MAP_MESSAGE
 //{
 //   unsigned int    nMsg;
-//   const_char_pointer  pszMsg;
+//   const_char_pointer pszMsg;
 
 //};
 //

@@ -29,7 +29,7 @@ namespace windows
       if(is_opened())
          close();
 
-      if(!OpenPrinter((char *) (const_char_pointer  ) pszDeviceName, &m_hPrinter, nullptr))
+      if(!OpenPrinter((char *) (const_char_pointer )pszDeviceName, &m_hPrinter, nullptr))
          return false;
 
       if(m_hPrinter == nullptr)
@@ -85,9 +85,9 @@ namespace windows
          return false;
       if(m_hdc != nullptr)
          return false;
-      int iSize = DocumentProperties(nullptr, pprinter->m_hPrinter, (char *)(const_char_pointer  ) pprinter->m_strName, nullptr, nullptr, 0);
+      int iSize = DocumentProperties(nullptr, pprinter->m_hPrinter, (char *)(const_char_pointer )pprinter->m_strName, nullptr, nullptr, 0);
       m_pdevmode = (DEVMODE *) malloc(iSize);
-      if(!DocumentProperties(nullptr, pprinter->m_hPrinter, (char *) (const_char_pointer  ) pprinter->m_strName, m_pdevmode, nullptr, DM_OUT_BUFFER))
+      if(!DocumentProperties(nullptr, pprinter->m_hPrinter, (char *) (const_char_pointer )pprinter->m_strName, m_pdevmode, nullptr, DM_OUT_BUFFER))
       {
          throw ::exception(::exception("failed to get printer DocumentProperties"));
          return false;
@@ -116,7 +116,7 @@ namespace windows
          return nullptr;
       if(m_hdc != nullptr)
          return nullptr;
-      m_hdc = ::CreateDC("WINSPOOL", (const_char_pointer  ) m_pdevmode->dmDeviceName, nullptr, m_pdevmode);
+      m_hdc = ::CreateDC("WINSPOOL", (const_char_pointer )m_pdevmode->dmDeviceName, nullptr, m_pdevmode);
       ::draw2d::graphics_pointer g(e_create);
       g.cast < graphics > ()->Attach(m_hdc);
       return g.detach();

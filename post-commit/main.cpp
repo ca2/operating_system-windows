@@ -4,8 +4,8 @@
 #include "aura/os/windows/windows_app_console.inl"
 
 #include <stdio.h>
-//SPALIB_API string spa_version(string strVersion= "");
-//SPALIB_API string spa_title(string strTitle= "");
+//SPALIB_API string spa_version(const ::scoped_string & scopedstrVersion= "");
+//SPALIB_API string spa_title(const ::scoped_string & scopedstrTitle= "");
 
 class app_t:
    public ::aura::platform::application
@@ -39,17 +39,17 @@ public:
    virtual ~app_t() {}
 
 
-   virtual void win_sync_out(string str,string strRepos);
+   virtual void win_sync_out(const ::scoped_string & scopedstr,const ::scoped_string & scopedstrRepos);
 
 
    virtual int run();
 
-   string call(string str);
+   string call(const ::scoped_string & scopedstr);
 
 
 } ;
 
-void app_t::win_sync_out(string strLocal,string strRepos)
+void app_t::win_sync_out(const ::scoped_string & scopedstrLocal,const ::scoped_string & scopedstrRepos)
 {
 
    //::earth::time timeNow = ::earth::time::now();
@@ -146,7 +146,7 @@ void app_t::win_sync_out(string strLocal,string strRepos)
 
    //		string strUni = unitext("");
 
-   //		const_char_pointer  textoBunitin = strUni;
+   //		const_char_pointer textoBunitin = strUni;
 
    //		char ch0 = *(textoBunitin + 0);
 
@@ -327,7 +327,7 @@ int app_t::run()
    return 0;
 }
 
-string app_t::call(string str)
+string app_t::call(const ::scoped_string & scopedstr)
 {
 
    string strLog;

@@ -6545,7 +6545,7 @@ namespace draw2d_gdiplus
    //   character_count iRange = 0;
    //   character_count i = 0;
    //   character_count iLen;
-   //   const_char_pointer  psz = strString.begin();
+   //   const_char_pointer psz = strString.begin();
 
    //   while (i < iIndex)
    //   {

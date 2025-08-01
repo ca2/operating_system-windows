@@ -10,7 +10,7 @@
 
 // http://nogeekhere.blogspot.com.br/2009/05/how-to-extracting-embedded-album-art.html
 
-string extract_mccdi(string str)
+string extract_mccdi(const ::scoped_string & scopedstr)
 {
 
    wstring wszAudioFile(str);

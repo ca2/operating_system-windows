@@ -2006,7 +2006,7 @@ retry:
 //#else
 
 
-   bool os_context::file_open(::file::path path, string strParams, string strFolder)
+   bool os_context::file_open(::file::path path, const ::scoped_string & scopedstrParams, const ::scoped_string & scopedstrFolder)
    {
 
       path = get_context()->defer_process_path(path);
@@ -2132,7 +2132,7 @@ retry:
    }
 
 
-   bool os_context::register_user_auto_start(string strId, string strCommand, bool bRegister)
+   bool os_context::register_user_auto_start(const ::scoped_string & scopedstrId, const ::scoped_string & scopedstrCommand, bool bRegister)
    {
 
       current_user_set_run(strId, strCommand, bRegister);
@@ -2142,7 +2142,7 @@ retry:
    }
 
 
-   bool os_context::is_user_auto_start(string strId)
+   bool os_context::is_user_auto_start(const ::scoped_string & scopedstrId)
    {
 
       registry::key keyKar;
@@ -3684,7 +3684,7 @@ HRESULT win_create_link(const ::wide_character * pszPathObj, const ::wide_charac
 }
 
 
-CLASS_DECL_APEX_WINDOWS void os_create_link(::file::path pathObj, ::file::path pathLnk, string strDesc, ::file::path pathIco, int iIcon)
+CLASS_DECL_APEX_WINDOWS void os_create_link(::file::path pathObj, ::file::path pathLnk, const ::scoped_string & scopedstrDesc, ::file::path pathIco, int iIcon)
 {
 
    wstring wstrObj(pathObj);

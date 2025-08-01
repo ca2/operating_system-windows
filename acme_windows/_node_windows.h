@@ -55,7 +55,7 @@ CLASS_DECL_ACME_WINDOWS bool __is_valid_atom(const wchar_t * psz);
 
 /////////////////////////////////////////////////////////////////////////////
 // locale-invariant comparison helpers till CRT gets that support
-inline int __invariant_stricmp(const ::string &pszLeft, const ::string &pszRight)
+inline int __invariant_stricmp(const ::scoped_string & scopedstrLeft, const ::scoped_string & scopedstrRight)
 {
 #ifdef WINDOWS_DESKTOP
    return ::CompareStringA(MAKELCID(MAKELANGID(LANG_ENGLISH,SUBLANG_ENGLISH_US),SORT_DEFAULT),

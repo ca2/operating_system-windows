@@ -412,7 +412,7 @@ namespace hi5
    *          response by twitter. Use get_response() for that.
    *
    *--*/
-   bool facebook::timelineUserGet(string userInfo, bool isUserId)
+   bool facebook::timelineUserGet(const ::scoped_string & scopedstrUserInfo, bool isUserId)
    {
       bool retVal = false;
       if (true)
@@ -466,7 +466,7 @@ namespace hi5
    *          response by twitter. Use get_response() for that.
    *
    *--*/
-   bool facebook::friendsGet(string userInfo, bool isUserId)
+   bool facebook::friendsGet(const ::scoped_string & scopedstrUserInfo, bool isUserId)
    {
       bool retVal = false;
       if (true)
@@ -493,7 +493,7 @@ namespace hi5
    *          response by twitter. Use get_response() for that.
    *
    *--*/
-   bool facebook::followersGet(string userInfo, bool isUserId)
+   bool facebook::followersGet(const ::scoped_string & scopedstrUserInfo, bool isUserId)
    {
       bool retVal = false;
       if (true)

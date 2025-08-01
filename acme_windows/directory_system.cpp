@@ -231,7 +231,7 @@ namespace acme_windows
 
 
 
-   ::file::path directory_system::inplace_install(string strAppId, string strPlatform, string strConfiguration)
+   ::file::path directory_system::inplace_install(const ::scoped_string & scopedstrAppId, const ::scoped_string & scopedstrPlatform, const ::scoped_string & scopedstrConfiguration)
    {
 
    #ifdef WINDOWS_DESKTOP
@@ -240,9 +240,9 @@ namespace acme_windows
 
       string strFolder;
 
-      character_count iFind = strAppId.find_index('/');
+      character_count iFind = scopedstrAppId.find_index('/');
 
-      if (strPlatform.case_insensitive_order("win32") == 0 || strPlatform.case_insensitive_order("x86") == 0)
+      if (scopedstrPlatform.case_insensitive_order("win32") == 0 || scopedstrPlatform.case_insensitive_order("x86") == 0)
       {
 
          path = program_files_x86();
@@ -260,15 +260,15 @@ namespace acme_windows
       if (iFind < 0)
       {
 
-         path /= strAppId;
+         path /= scopedstrAppId;
 
       }
       else
       {
 
-         path /= strAppId.left(iFind);
+         path /= scopedstrAppId.left(iFind);
 
-         path /= strAppId.substr(iFind + 1);
+         path /= scopedstrAppId.substr(iFind + 1);
 
       }
 
@@ -297,7 +297,7 @@ pacmedir->roaming();
    }
 
 
-   ::file::path directory_system::inplace_matter_install(string strAppId, string strPlatform, string strConfiguration)
+   ::file::path directory_system::inplace_matter_install(const ::scoped_string & scopedstrAppId, const ::scoped_string & scopedstrPlatform, const ::scoped_string & scopedstrConfiguration)
    {
 
    #ifdef WINDOWS_DESKTOP
@@ -306,7 +306,7 @@ pacmedir->roaming();
 
       string strFolder;
 
-      character_count iFind = strAppId.find_index('/');
+      character_count iFind = scopedstrAppId.find_index('/');
 
       path = ca2roaming();
 
@@ -451,10 +451,10 @@ pacmedir->roaming();
    }
 
 
-   ::file::path directory_system::stage(string strAppId, string strPlatform, string strConfiguration)
+   ::file::path directory_system::stage(const ::scoped_string & scopedstrAppId, const ::scoped_string & scopedstrPlatform, const ::scoped_string & scopedstrConfiguration)
    {
 
-      return inplace_install(strAppId, strPlatform, strConfiguration) / "time" / node()->time_binary_platform(strPlatform) / strConfiguration;
+      return inplace_install(scopedstrAppId, scopedstrPlatform, scopedstrConfiguration) / "time" / node()->time_binary_platform(scopedstrPlatform) / scopedstrConfiguration;
 
    }
 
@@ -608,7 +608,7 @@ pacmedir->roaming();
    }
 
    
-//   bool directory_system::_is(const_char_pointer  path1)
+//   bool directory_system::_is(const_char_pointer path1)
 //   {
 //
 //#ifdef UNIVERSAL_WINDOWS
@@ -897,7 +897,7 @@ bool windows_file_find_is_dots(const WIN32_FIND_DATAW & data)
 //      }
 //
 
-      // bool eat_end_level(string & str, int iLevelCount, const_char_pointer  pSeparator)
+      // bool eat_end_level(string & str, int iLevelCount, const_char_pointer pSeparator)
       // {
 
       //    character_count iLast = str.length() - 1;
@@ -1044,7 +1044,7 @@ bool windows_file_find_is_dots(const WIN32_FIND_DATAW & data)
       //   }
 
 
-      //bool directory_system::create(const_char_pointer  path)
+      //bool directory_system::create(const_char_pointer path)
       //{
 
       //   return _create(path);
@@ -1055,7 +1055,7 @@ bool windows_file_find_is_dots(const WIN32_FIND_DATAW & data)
 #ifndef WINDOWS_DESKTOP
 
 
-      bool directory_system::_mk(const_char_pointer  path)
+      bool directory_system::_mk(const_char_pointer path)
       {
 
          if (is(path))
@@ -1247,7 +1247,7 @@ pacmedir->create CreateDirectoryW last error(%d)=%s", dwError, pszError);
       }
 
 
-      //bool directory_system::is(const_char_pointer  path)
+      //bool directory_system::is(const_char_pointer path)
       //{
 
       //   //if (::file::system_dir::g_pthis == nullptr)
@@ -2001,7 +2001,7 @@ pacmedir->create CreateDirectoryW last error(%d)=%s", dwError, pszError);
       //}
 
 
-//      void directory_system::__øcreate(const_char_pointer  pathParam)
+//      void directory_system::__øcreate(const_char_pointer pathParam)
 //      {
 //
 //         if (is(pathParam))

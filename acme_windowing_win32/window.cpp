@@ -57,9 +57,10 @@ public:
 
       m_strTask = ::task_get_name();
 
-      ::task_set_name(strTask);
+      ::task_set_name(scopedstrTask);
 
    }
+
 
    ~scoped_task_name()
    {

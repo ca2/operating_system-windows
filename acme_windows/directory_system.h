@@ -59,7 +59,7 @@ namespace acme_windows
       ::file::path program_files_x86() override;
       ::file::path program_files() override;
       //::file::path program_data() override;
-      ::file::path stage(string strAppId, string strPlatform, string strConfiguration) override;
+      ::file::path stage(const ::scoped_string & scopedstrAppId, const ::scoped_string & scopedstrPlatform, const ::scoped_string & scopedstrConfiguration) override;
       ::file::path sys_temp() override;
       ::string dir_root() override;
       ::file::path temp() override;
@@ -73,10 +73,10 @@ namespace acme_windows
       string system_short_name() override;
 
 
-      //::file::path inplace_install(string strAppId, string strPlatform, string strConfiguration) override;
-      //::file::path inplace_install(string strAppId, string strPlatform, string strConfiguration) override;
-      ::file::path inplace_install(string strAppId, string strPlatform, string strConfiguration) override;
-      ::file::path inplace_matter_install(string strAppId, string strPlatform, string strConfiguration) override;
+      //::file::path inplace_install(const ::scoped_string & scopedstrAppId, const ::scoped_string & scopedstrPlatform, const ::scoped_string & scopedstrConfiguration) override;
+      //::file::path inplace_install(const ::scoped_string & scopedstrAppId, const ::scoped_string & scopedstrPlatform, const ::scoped_string & scopedstrConfiguration) override;
+      ::file::path inplace_install(const ::scoped_string & scopedstrAppId, const ::scoped_string & scopedstrPlatform, const ::scoped_string & scopedstrConfiguration) override;
+      ::file::path inplace_matter_install(const ::scoped_string & scopedstrAppId, const ::scoped_string & scopedstrPlatform, const ::scoped_string & scopedstrConfiguration) override;
 
 
       void set_path_install_folder(const ::scoped_string & scopedstrPath) override;
@@ -89,7 +89,7 @@ namespace acme_windows
 
       ::file::path user_appdata_local() override;
 
-      // bool _is(const_char_pointer  path1) override;
+      // bool _is(const_char_pointer path1) override;
 
 
 
@@ -112,20 +112,20 @@ namespace acme_windows
 // directory_system();
 // ~directory_system() override;
 
-      //virtual string name(const_char_pointer  path1) override;
+      //virtual string name(const_char_pointer path1) override;
 
 
       //virtual ::file::path module_folder() override;
       
-      //bool create(const_char_pointer  path) override;
+      //bool create(const_char_pointer path) override;
 
-      //void __øcreate(const_char_pointer  path) override;
+      //void __øcreate(const_char_pointer path) override;
 
-      //bool create_directory(const_char_pointer  path) override;
+      //bool create_directory(const_char_pointer path) override;
 
-      //void _create_directory(const_char_pointer  path) override;
+      //void _create_directory(const_char_pointer path) override;
 
-      //bool is(const_char_pointer  path) override;
+      //bool is(const_char_pointer path) override;
 
       //bool _enumerates(::file::listing & listing) override;
       bool enumerate(::file::listing & listing) override;

@@ -1116,7 +1116,7 @@ namespace windowing_win32
    //}
 
 
-   bool display::impl_set_wallpaper(::collection::index iScreen, string strLocalImagePath)
+   bool display::impl_set_wallpaper(::collection::index iScreen, const ::scoped_string & scopedstrLocalImagePath)
    {
 
       wstring wstrLocalImagetPath(strLocalImagePath);
@@ -1157,7 +1157,7 @@ namespace windowing_win32
    //}
 
 
-   //bool user::impl_set_os_desktop_theme(string strTheme)
+   //bool user::impl_set_os_desktop_theme(const ::scoped_string & scopedstrTheme)
    //{
 
    //   __UNREFERENCED_PARAMETER(strTheme);

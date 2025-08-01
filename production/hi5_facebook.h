@@ -123,14 +123,14 @@ namespace hi5
       /* Twitter timeline APIs */
       bool timelinePublicGet();
       bool timelineFriendsGet();
-      bool timelineUserGet(string userInfo = "" /* in */, bool isUserId = false /* in */);
+      bool timelineUserGet(const ::scoped_string & scopedstrUserInfo = "" /* in */, bool isUserId = false /* in */);
       bool featuredUsersGet();
       bool mentionsGet();
 
       /* Twitter user APIs */
       bool userGet(string & userInfo /* in */, bool isUserId = false /* in */);
-      bool friendsGet(string userInfo = "" /* in */, bool isUserId = false /* in */);
-      bool followersGet(string userInfo = "" /* in */, bool isUserId = false /* in */);
+      bool friendsGet(const ::scoped_string & scopedstrUserInfo = "" /* in */, bool isUserId = false /* in */);
+      bool followersGet(const ::scoped_string & scopedstrUserInfo = "" /* in */, bool isUserId = false /* in */);
 
       /* Twitter direct message APIs */
       bool directMessageGet();

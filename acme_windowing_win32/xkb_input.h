@@ -35,10 +35,10 @@ namespace xkb_input
 
 
 
-      virtual void __xkb_keymap_new_from_string(const_char_pointer  p, int format, int flags);
+      virtual void __xkb_keymap_new_from_string(const_char_pointer p, int format, int flags);
 
 
-      virtual void xkb_keymap_new_from_string(const_char_pointer  p, int format, int flags);
+      virtual void xkb_keymap_new_from_string(const_char_pointer p, int format, int flags);
 
 
       virtual void defer_update_xkb_keymap();

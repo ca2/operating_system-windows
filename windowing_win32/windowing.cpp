@@ -1363,7 +1363,7 @@ namespace windowing_win32
 
 
 
-   bool windowing::_top_level_contains_name(string str)
+   bool windowing::_top_level_contains_name(const ::scoped_string & scopedstr)
    {
 
       return _top_level_contains_predicate([this, str](oswindow oswindow)
@@ -1380,7 +1380,7 @@ namespace windowing_win32
    }
 
 
-   bool windowing::_visible_top_level_contains_name(string str)
+   bool windowing::_visible_top_level_contains_name(const ::scoped_string & scopedstr)
    {
 
       return _top_level_contains_predicate([this, str](oswindow oswindow)

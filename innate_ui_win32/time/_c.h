@@ -11,7 +11,7 @@
 
 
 
-CLASS_DECL_ACME char get_drive_letter(const_char_pointer  pDevicePath);
+CLASS_DECL_ACME char get_drive_letter(const_char_pointer pDevicePath);
 
 
 CLASS_DECL_ACME void set_main_hthread(htask htask);

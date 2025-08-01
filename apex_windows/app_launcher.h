@@ -24,7 +24,7 @@ namespace apex_windows
 
       app_launcher();
 
-      virtual void initialize_app_launcher(::particle * pparticle, string strPlatform, string strApp);
+      virtual void initialize_app_launcher(::particle * pparticle, const ::scoped_string & scopedstrPlatform, const ::scoped_string & scopedstrApp);
 
       virtual string get_executable_extension();
 

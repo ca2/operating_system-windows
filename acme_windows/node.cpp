@@ -2037,7 +2037,7 @@ namespace acme_windows
 
       char* pEnvCMD = nullptr;
 
-      const_char_pointer  pDefaultCMD = "CMD.EXE";
+      const_char_pointer pDefaultCMD = "CMD.EXE";
 
       ULONG rc;
 
@@ -2433,14 +2433,14 @@ namespace acme_windows
    }
 
 
-   void node::start_program_files_app_app_admin(string strPlatform, string strConfiguration)
+   void node::start_program_files_app_app_admin(const ::scoped_string & scopedstrPlatform, const ::scoped_string & scopedstrConfiguration)
    {
 
 #ifdef WINDOWS_DESKTOP
 
       SHELLEXECUTEINFOW sei = {};
 
-      string str = directory_system()->app_app_admin(strPlatform, strConfiguration);
+      string str = directory_system()->app_app_admin(scopedstrPlatform, scopedstrConfiguration);
 
       if (!file_system()->exists(str))
       {
@@ -4380,7 +4380,7 @@ namespace acme_windows
    }
 
 
-   bool node::_is_code_exe_user_path_environment_variable_ok(::string* pstrCorrectPath, const_char_pointer  pszPath)
+   bool node::_is_code_exe_user_path_environment_variable_ok(::string* pstrCorrectPath, const_char_pointer pszPath)
    {
 
       ::string str;
@@ -4530,7 +4530,7 @@ namespace acme_windows
    //// replace __try __finally with at_end_of_scope
    //// changed arguments to ansi_character * and used bstring class for string conversion
    //// use of comptr to guard COM objets and variant to guard VARIANTs
-   //void node::_unzip_to_folder(const_char_pointer  pszZip, const_char_pointer  pszFolder)
+   //void node::_unzip_to_folder(const_char_pointer pszZip, const_char_pointer pszFolder)
    //{
 
    //   comptr < IShellDispatch> pISD;
@@ -4651,7 +4651,7 @@ namespace acme_windows
 
    }
 
-   void node::launch_app(const ::scoped_string & scopedstr, const_char_pointer  * argv, int iFlags)
+   void node::launch_app(const ::scoped_string & scopedstr, const_char_pointer *argv, int iFlags)
    {
 
       shell_open(scopedstr);
@@ -5237,7 +5237,7 @@ namespace acme_windows
    ::file::path node::__get_font_path_from_name(const ::scoped_string& scopedstrName, bool bTrueType)
    {
       HKEY hKey;
-      const_char_pointer  fonts_reg_path = "SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Fonts";
+      const_char_pointer fonts_reg_path = "SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Fonts";
 
       // Open the Fonts registry key
       if (RegOpenKeyExA(HKEY_LOCAL_MACHINE, fonts_reg_path, 0, KEY_READ, &hKey) != ERROR_SUCCESS)

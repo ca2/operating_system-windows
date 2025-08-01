@@ -76,11 +76,11 @@ namespace windows
 
 
       //static void global_enable_stack_trace(bool bEnable = true);
-      static const_char_pointer  default_format() { return "%f(%l) %s\n"; }
+      static const_char_pointer default_format() { return "%f(%l) %s\n"; }
 
-      //const_char_pointer  get_dup(const ::scoped_string & scopedstrFormat = default_format(), int uiSkip = CALLSTACK_DEFAULT_SKIP_TRIGGER, int iCount = -1);
+      //const_char_pointer get_dup(const ::scoped_string & scopedstrFormat = default_format(), int uiSkip = CALLSTACK_DEFAULT_SKIP_TRIGGER, int iCount = -1);
 
-      //const_char_pointer  stack_trace() const;
+      //const_char_pointer stack_trace() const;
 
 
       //bool stack_trace(CONTEXT*, iptr iSkip = 0, const ::scoped_string & scopedstrFormat = default_format(), int iCount = -1);

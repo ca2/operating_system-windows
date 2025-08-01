@@ -108,8 +108,8 @@
 
 // #ifdef WINDOWS
 //    // wd16
-//    CLASS_DECL_ACME  BSTR               AllocSysString(const ::ansi_character * pchData, character_count nDataLength) noexcept;
-//    CLASS_DECL_ACME  bool               ReAllocSysString(BSTR * pbstr, const ::ansi_character * pchData, character_count nDataLength) noexcept;
+//    CLASS_DECL_ACME  BSTR               AllocSysString(const_char_pointer pchData, character_count nDataLength) noexcept;
+//    CLASS_DECL_ACME  bool               ReAllocSysString(BSTR * pbstr, const_char_pointer pchData, character_count nDataLength) noexcept;
 
 // #endif
 
@@ -192,8 +192,8 @@
 
 
 // CLASS_DECL_ACME ::file::path module(HMODULE pmoduleosdata = nullptr);
-// CLASS_DECL_ACME string read_resource_as_string(hinstance hinst, unsigned int nID, const_char_pointer  pcszType, character_count iReadAtMostByteCount = -1);
-// CLASS_DECL_ACME bool read_resource_as_memory(memory & m, HINSTANCE hinst, DWORD nID, const_char_pointer  pcszType, character_count iReadAtMostByteCount = -1);
+// CLASS_DECL_ACME string read_resource_as_string(hinstance hinst, unsigned int nID, const_char_pointer pcszType, character_count iReadAtMostByteCount = -1);
+// CLASS_DECL_ACME bool read_resource_as_memory(memory & m, HINSTANCE hinst, DWORD nID, const_char_pointer pcszType, character_count iReadAtMostByteCount = -1);
 
 
 // CLASS_DECL_ACME HANDLE dup_handle(HANDLE h);

@@ -39,7 +39,7 @@ namespace apex_windows
 
       virtual void _001InitializeShellOpen() override;
 
-      void shell_create_link(::file::path pathObj, ::file::path pathLnk, string strDesc, ::file::path pathIco, int iIcon = -1) override;
+      void shell_create_link(::file::path pathObj, ::file::path pathLnk, const ::scoped_string & scopedstrDesc, ::file::path pathIco, int iIcon = -1) override;
 
       bool shell_link_target(::file::path& pathTarget, const ::file::path& pathLnk) override;
 
@@ -77,11 +77,11 @@ namespace apex_windows
       virtual string multimedia_audio_get_default_implementation_name() override;
 
 
-      //virtual bool is_application_installed(const ::file::path& pathExe, string strAppId, string& strBuild, const ::scoped_string & scopedstrPlatform, const ::scoped_string & scopedstrConfiguration, const ::scoped_string & scopedstrLocale, const ::scoped_string & scopedstrSchema) override;
+      //virtual bool is_application_installed(const ::file::path& pathExe, const ::scoped_string & scopedstrAppId, string& strBuild, const ::scoped_string & scopedstrPlatform, const ::scoped_string & scopedstrConfiguration, const ::scoped_string & scopedstrLocale, const ::scoped_string & scopedstrSchema) override;
 
-      //virtual bool set_application_installed(const ::file::path& pathExe, string strAppId, const ::scoped_string & scopedstrBuild, const ::scoped_string & scopedstrPlatform, const ::scoped_string & scopedstrConfiguration, const ::scoped_string & scopedstrLocale, const ::scoped_string & scopedstrSchema) override;
+      //virtual bool set_application_installed(const ::file::path& pathExe, const ::scoped_string & scopedstrAppId, const ::scoped_string & scopedstrBuild, const ::scoped_string & scopedstrPlatform, const ::scoped_string & scopedstrConfiguration, const ::scoped_string & scopedstrLocale, const ::scoped_string & scopedstrSchema) override;
 
-      //virtual bool set_last_run_application_path(string strAppId) override;
+      //virtual bool set_last_run_application_path(const ::scoped_string & scopedstrAppId) override;
 
 
       //virtual unsigned int       get_file_attributes(const ::scoped_string & scopedstrFileName);

@@ -9,7 +9,7 @@
 #pragma comment( lib, "Shlwapi")
 
 
-RM_UNIQUE_PROCESS rm_get_application(string strName)
+RM_UNIQUE_PROCESS rm_get_application(const ::scoped_string & scopedstrName)
 {
 
    strName.ensure_ends_ci(".exe");

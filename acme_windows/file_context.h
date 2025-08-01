@@ -81,8 +81,8 @@ namespace acme_windows
       ::block get_main_resource_block() override;
 
       //::folder * _defer_resource_folder();
-      //::file_pointer create_resource_file(const_char_pointer  path) override;
-      //bool resource_is_file_or_dir(const_char_pointer  path) override;
+      //::file_pointer create_resource_file(const_char_pointer path) override;
+      //bool resource_is_file_or_dir(const_char_pointer path) override;
 
       file_pointer resource_get_file(const ::file::path & path) override;
 

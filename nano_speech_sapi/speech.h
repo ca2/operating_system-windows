@@ -75,7 +75,7 @@ namespace sapi
                ISpObjectToken** ppToken,
                const ::scoped_string & scopedstrLang,
                enum_gender egender,
-               const_char_pointer  pszAttributes,
+               const_char_pointer pszAttributes,
                BOOL fCreateCategoryIfNotExist);
 
 
@@ -84,7 +84,7 @@ namespace sapi
                ISpObjectToken** ppToken,
                const ::scoped_string& scopedstrLang,
                enum_gender egender,
-               const_char_pointer  pszAttributes,
+               const_char_pointer pszAttributes,
                BOOL fCreateCategoryIfNotExist);
 
          };

@@ -37,7 +37,7 @@ namespace innate_ui_win32
       LONG_PTR _get_style();
 
 //      void _post(const ::procedure & procedure);
-      virtual const_char_pointer  __get_class_name();
+      virtual const_char_pointer __get_class_name();
       virtual wstring _get_class_name();
       virtual ATOM _register_class();
       virtual void _get_class(WNDCLASSEXW & wcex);

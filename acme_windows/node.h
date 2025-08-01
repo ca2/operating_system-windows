@@ -177,7 +177,7 @@ namespace acme_windows
 
 
       void register_spa_file_type(const ::scoped_string & scopedstrAppIdHandler) override;
-      void start_program_files_app_app_admin(string strPlatform, string strConfiguration) override;
+      void start_program_files_app_app_admin(const ::scoped_string & scopedstrPlatform, const ::scoped_string & scopedstrConfiguration) override;
 
 
       void get_folder_path_from_user(::file::path & pathFolder) override;
@@ -306,7 +306,7 @@ namespace acme_windows
 
       bool _is_strawberry_perl_installed() override;
 
-      bool _is_code_exe_user_path_environment_variable_ok(::string* pstrCorrectPath = nullptr, const_char_pointer  pszPath = nullptr) override;
+      bool _is_code_exe_user_path_environment_variable_ok(::string* pstrCorrectPath = nullptr, const_char_pointer pszPath = nullptr) override;
 
       bool _is_coder_mode_enabled() override;
 
@@ -325,11 +325,11 @@ namespace acme_windows
       //// replace __try __finally with at_end_of_scope
       //// changed arguments to ansi_character * and used bstring class for string conversion
       //// use of comptr to guard COM objets and variant to guard VARIANTs
-      //virtual void _unzip_to_folder(const_char_pointer  pszZip, const_char_pointer  pszFolder);
+      //virtual void _unzip_to_folder(const_char_pointer pszZip, const_char_pointer pszFolder);
    
       ::pointer <::operating_system::summary > operating_system_summary() override;
 
-      void launch_app(const ::scoped_string & scopedstr, const_char_pointer  * argv, int iFlags) override;
+      void launch_app(const ::scoped_string & scopedstr, const_char_pointer *argv, int iFlags) override;
 
 
       ::pointer < ::operating_system::application > module_path_application(const ::scoped_string & scopestr) override;

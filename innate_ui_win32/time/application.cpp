@@ -13,7 +13,7 @@ unsigned int TerminateGuiApp(unsigned int dwPID, unsigned int tickTimeout);
 
 //#endif
 //int SendCtrlShiftQToChrome(HWND chrome, int iSleep, ::platform::application * papp);
-//int SendURLToChrome(HWND chrome, string strUrl, ::platform::application * papp);
+//int SendURLToChrome(HWND chrome, const ::scoped_string & scopedstrUrl, ::platform::application * papp);
 class block_input :
    virtual public matter
 {
@@ -857,7 +857,7 @@ bool is_good_active_w(HWND w)
 ////}
 //
 //
-//bool send_input_string(string str, int iSleep)
+//bool send_input_string(const ::scoped_string & scopedstr, int iSleep)
 //{
 //
 //   const scoped_string & str = str;
@@ -878,7 +878,7 @@ bool is_good_active_w(HWND w)
 //}
 //
 //
-//int SendURLToChrome(HWND chrome, string strUrl, ::platform::application * papp)
+//int SendURLToChrome(HWND chrome, const ::scoped_string & scopedstrUrl, ::platform::application * papp)
 //{
 //
 //   App(pbapp).message_box_timeout(nullptr, "Sending URL to browser...", seconds(3), MB_ICONASTERISK);

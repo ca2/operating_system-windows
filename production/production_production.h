@@ -205,7 +205,7 @@ namespace production
 
       virtual void update_rc_file_version(const ::scoped_string & scopedstrUrl);
 
-      virtual string stage_platform(string strPlatform);
+      virtual string stage_platform(const ::scoped_string & scopedstrPlatform);
 
    };
 

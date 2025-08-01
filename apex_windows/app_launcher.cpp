@@ -27,7 +27,7 @@ namespace apex_windows
    }
 
 
-   void app_launcher::initialize_app_launcher(::particle * pparticle, string strPlatform, string strApp)
+   void app_launcher::initialize_app_launcher(::particle * pparticle, const ::scoped_string & scopedstrPlatform, const ::scoped_string & scopedstrApp)
    {
 
       //auto estatus = ::object::initialize(pparticle);
@@ -41,9 +41,9 @@ namespace apex_windows
 
       //}
 
-      m_strPlatform = strPlatform;
+      m_strPlatform = scopedstrPlatform;
 
-      m_strApp = strApp;
+      m_strApp = scopedstrApp;
 
       //return estatus;
 

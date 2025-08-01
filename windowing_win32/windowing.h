@@ -65,7 +65,7 @@ namespace windowing_win32
 
       virtual system_interaction * system_interaction();
 
-      virtual HICON _load_icon(string_array& straMatter, string strIcon, int cx, int cy);
+      virtual HICON _load_icon(string_array& straMatter, const ::scoped_string & scopedstrIcon, int cx, int cy);
 
       virtual ::windows::hwnd_array _get_hwnda(const ::user::interaction_array& userinteractiona);
 
@@ -187,8 +187,8 @@ namespace windowing_win32
       void set_dark_mode(bool bDarkMode) override;
 
       bool _visible_top_level_contains_all_names(const string_array& stra) override;
-      bool _visible_top_level_contains_name(string str) override;
-      virtual bool _top_level_contains_name(string str);
+      bool _visible_top_level_contains_name(const ::scoped_string & scopedstr) override;
+      virtual bool _top_level_contains_name(const ::scoped_string & scopedstr);
       virtual string _get_window_text_timeout(oswindow oswindow, const class time & time = 1_s);
 
 

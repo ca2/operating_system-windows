@@ -699,7 +699,7 @@ namespace apex_windows
    }
 
 
-   void node::shell_create_link(::file::path pathObj, ::file::path pathLnkParam, string strDesc, ::file::path pathIco, int iIcon)
+   void node::shell_create_link(::file::path pathObj, ::file::path pathLnkParam, const ::scoped_string & scopedstrDesc, ::file::path pathIco, int iIcon)
    {
 
       auto pathLnk = pathLnkParam;
@@ -715,7 +715,7 @@ namespace apex_windows
 
       wstring wstrObj(pathObj);
       wstring wstrLnk(pathLnk);
-      wstring wstrDsc(strDesc);
+      wstring wstrDsc(scopedstrDesc);
       wstring wstrIco(pathIco);
 
       auto errorcode = _windows_create_link(wstrObj, wstrLnk, wstrDsc, wstrIco, iIcon);
@@ -3449,7 +3449,7 @@ namespace apex_windows
       ::e_status estatusFileOpen = ::success;
       int iShellExecuteExitCode = 33;
       DWORD dwLastError = 0;
-      const_char_pointer  pszShellExecuteError = nullptr;
+      const_char_pointer pszShellExecuteError = nullptr;
 
       fork([=, &manualresetevent, &estatusFileOpen,
          &dwLastError, &iShellExecuteExitCode, &pszShellExecuteError]()

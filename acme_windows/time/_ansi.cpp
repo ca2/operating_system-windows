@@ -6,7 +6,7 @@ namespace str
 {
 
 
-   BSTR AllocSysString(const ::ansi_character * pchData, character_count nDataLength) noexcept
+   BSTR AllocSysString(const_char_pointer pchData, character_count nDataLength) noexcept
    {
 
       BSTR bstr = nullptr;
@@ -28,7 +28,7 @@ namespace str
 
 
    // pbstr is [in,out] BSTR string
-   bool ReAllocSysString(BSTR * pbstr, const ::ansi_character * pchData, character_count nDataLength) noexcept
+   bool ReAllocSysString(BSTR * pbstr, const_char_pointer pchData, character_count nDataLength) noexcept
    {
 
       character_count nLen = utf_to_utf_length(pbstr, pchData, nDataLength);
@@ -77,7 +77,7 @@ namespace str
    }
 
    
-//    unsigned int xxxget_environment_variable(const ::ansi_character * pszVar, ::ansi_character * pszBuffer, unsigned int dwSize)
+//    unsigned int xxxget_environment_variable(const_char_pointer pszVar, ::ansi_character * pszBuffer, unsigned int dwSize)
 //    {
 
 // #ifdef UNIVERSAL_WINDOWS
@@ -90,7 +90,7 @@ namespace str
 
 // #else
 
-//          const ::ansi_character * pszEnv = getenv(pszVar);
+//          const_char_pointer pszEnv = getenv(pszVar);
 
 //          if (pszBuffer == nullptr)
 //          {

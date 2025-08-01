@@ -860,7 +860,7 @@ pacmedir->system() / "config/production/mirror_status.txt";
 
          for (int i = 0; i < m_straFiles.get_size(); i++)
          {
-            //const_char_pointer  lpcsz = m_straFiles[i];
+            //const_char_pointer lpcsz = m_straFiles[i];
 
             strStatus.empty();
 
@@ -3558,7 +3558,7 @@ retry1:
    }
 
 
-   string production::stage_platform(string strPlatform)
+   string production::stage_platform(const ::scoped_string & scopedstrPlatform)
    {
 
       if (strPlatform.case_insensitive_order("x86") == 0
