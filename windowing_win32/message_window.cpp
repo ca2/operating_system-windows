@@ -29,7 +29,7 @@ namespace windowing_win32
 
       m_bMessageOnlyWindow = true;
 
-      m_strWindowText2 = pszName;
+      m_strWindowText2 = scopedstrName;
 
       //create_host(e_parallelization_synchronous);
 

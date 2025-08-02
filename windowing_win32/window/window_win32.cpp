@@ -379,7 +379,7 @@ namespace windowing_win32
 
       auto papplication = application();
 
-      ::file::path pathFolder(pszMatter);
+      ::file::path pathFolder(scopedstrMatter);
 
       ::file::path pathIcon;
 

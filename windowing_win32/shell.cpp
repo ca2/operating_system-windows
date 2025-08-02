@@ -1302,17 +1302,17 @@ namespace windowing_win32
    shell::enum_folder shell::get_folder_type(::particle * pparticle, const ::scoped_string & scopedstr)
    {
 
-      return get_folder_type(pparticle, utf8_to_unicode(pcsz));
+   //    return get_folder_type(pparticle, utf8_to_unicode(scopedstr));
+   //
+   // }
+   //
+   //
+   // shell::enum_folder shell::get_folder_type(::particle * pparticle, const ::wstring & wstrPath)
+   // {
 
-   }
+      string strPath(scopedstr);
 
-
-   shell::enum_folder shell::get_folder_type(::particle * pparticle, const ::wstring & wstrPath)
-   {
-
-      string strPath;
-
-      unicode_to_utf8(strPath, wstrPath);
+      //unicode_to_utf8(strPath, wstrPath);
 
       auto psystem = system();
 
@@ -1944,16 +1944,16 @@ namespace windowing_win32
    void shell::set_image_ico(const ::scoped_string & scopedstrIconLocation, _get_file_image_ & getfileimage)
    {
 
-      ASSERT(strIconLocation.case_insensitive_ends(".ico"));
+      ASSERT(scopedstrIconLocation.case_insensitive_ends(".ico"));
 
-      getfileimage.m_imagekey.set_path(strIconLocation, false);
+      getfileimage.m_imagekey.set_path(scopedstrIconLocation, false);
 
       getfileimage.m_imagekey.m_iIcon = 0;
 
       if (reserve_image(getfileimage))
       {
 
-         set_icon(strIconLocation, getfileimage);
+         set_icon(scopedstrIconLocation, getfileimage);
 
       }
 
@@ -1963,11 +1963,11 @@ namespace windowing_win32
    void shell::set_image_resource(const ::scoped_string & scopedstrIconLocation, _get_file_image_ & getfileimage)
    {
 
-      ASSERT(!strIconLocation.case_insensitive_ends(".ico"));
+      ASSERT(!scopedstrIconLocation.case_insensitive_ends(".ico"));
 
       //image_key imagekeyIco;
 
-      getfileimage.m_imagekey.set_path(strIconLocation, false);
+      getfileimage.m_imagekey.set_path(scopedstrIconLocation, false);
 
       //getfileimage.m_imagekey.m_iIcon = imagekey.m_iIcon;
 
@@ -1987,12 +1987,12 @@ namespace windowing_win32
 
             int iSizeOut = iSize;
 
-            HICON hicon = pnode->extract_resource_icon(strIconLocation, iSizeOut, iSizeOut, getfileimage.m_imagekey.m_iIcon);
+            HICON hicon = pnode->extract_resource_icon(scopedstrIconLocation, iSizeOut, iSizeOut, getfileimage.m_imagekey.m_iIcon);
 
             if (hicon == nullptr && getfileimage.m_imagekey.m_iIcon == 0)
             {
 
-               hicon = pnode->extract_resource_icon(strIconLocation, iSizeOut, iSizeOut, I32_MINIMUM);
+               hicon = pnode->extract_resource_icon(scopedstrIconLocation, iSizeOut, iSizeOut, I32_MINIMUM);
 
             }
 

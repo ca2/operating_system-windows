@@ -100,7 +100,7 @@ namespace windowing_win32
 
 
 
-      ::user::shell::enum_folder get_folder_type(::particle * pparticle, const ::wstring & wstrPath) override;
+      //::user::shell::enum_folder get_folder_type(::particle * pparticle, const ::wstring & wstrPath) override;
 
       ::user::shell::enum_folder get_folder_type(::particle * pparticle, const ::scoped_string & scopedstrPath) override;
 

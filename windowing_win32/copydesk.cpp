@@ -250,11 +250,11 @@ namespace windowing_win32
    HGLOBAL copydesk::hglobal_get_wide_text(const ::scoped_string & scopedstr)
    {
 
-      ::collection::count c = utf8_to_unicode_count(str) + 1;
+      ::collection::count c = utf8_to_unicode_count(scopedstr) + 1;
       HGLOBAL hglb = ::GlobalAlloc(GMEM_MOVEABLE, (SIZE_T) (c * sizeof(WCHAR)));
       unichar * pwsz = (unichar *) ::GlobalLock(hglb);
 
-      utf8_to_unicode(pwsz, c, str);
+      utf8_to_unicode(pwsz, c, scopedstr);
 
       ::GlobalUnlock(hglb);
 
@@ -266,10 +266,10 @@ namespace windowing_win32
    HGLOBAL copydesk::hglobal_get_utf8_text(const ::scoped_string & scopedstr)
    {
 
-      HGLOBAL hglb = ::GlobalAlloc(GMEM_MOVEABLE, (SIZE_T) (sizeof(char) * (str.length() + 1)));
+      HGLOBAL hglb = ::GlobalAlloc(GMEM_MOVEABLE, (SIZE_T) (sizeof(char) * (scopedstr.length() + 1)));
       char * psz = (char *) ::GlobalLock(hglb);
 
-      strcpy(psz, str);
+      strcpy(psz, scopedstr);
 
       ::GlobalUnlock(hglb);
 
@@ -506,16 +506,16 @@ namespace windowing_win32
 
       EmptyClipboard();
 
-      SetClipboardData(CF_UNICODETEXT, hglobal_get_wide_text(str));
+      SetClipboardData(CF_UNICODETEXT, hglobal_get_wide_text(scopedstr));
 
-      SetClipboardData(CF_TEXT, hglobal_get_utf8_text(str));
+      SetClipboardData(CF_TEXT, hglobal_get_utf8_text(scopedstr));
 
       try
       {
 
          ::file::path_array patha;
 
-         if (string_to_filea(&patha, str))
+         if (string_to_filea(&patha, scopedstr))
          {
 
             SetClipboardData(CF_TEXT, hglobal_get_filea(patha));

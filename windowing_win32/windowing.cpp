@@ -1366,14 +1366,14 @@ namespace windowing_win32
    bool windowing::_top_level_contains_name(const ::scoped_string & scopedstr)
    {
 
-      return _top_level_contains_predicate([this, str](oswindow oswindow)
+      return _top_level_contains_predicate([this, scopedstr](oswindow oswindow)
          {
 
             //PSEUDO-Code char sz[1024]; GetWindowTextA(sz,1024, oswindow); return !strcmp(sz, str.c_str());
 
             string strWindowText = _get_window_text_timeout(oswindow, 200_ms);
 
-            return strWindowText.case_insensitive_contains(str);
+            return strWindowText.case_insensitive_contains(scopedstr);
 
          });
 
@@ -1383,7 +1383,7 @@ namespace windowing_win32
    bool windowing::_visible_top_level_contains_name(const ::scoped_string & scopedstr)
    {
 
-      return _top_level_contains_predicate([this, str](oswindow oswindow)
+      return _top_level_contains_predicate([this, scopedstr](oswindow oswindow)
          {
 
             //PSEUDO-Code char sz[1024]; GetWindowTextA(sz,1024, oswindow); return !strcmp(sz, str.c_str());
@@ -1397,7 +1397,7 @@ namespace windowing_win32
 
             string strWindowText = _get_window_text_timeout(oswindow, 50_ms);
 
-            return strWindowText.case_insensitive_contains(str);
+            return strWindowText.case_insensitive_contains(scopedstr);
 
          });
 
@@ -1529,7 +1529,7 @@ namespace windowing_win32
 
       auto pmessagewindow = __create_new < message_window >();
 
-      pmessagewindow->create_message_window(pszName, pinteractionlistener);
+      pmessagewindow->create_message_window(scopedstrName, pinteractionlistener);
 
       return pmessagewindow;
 

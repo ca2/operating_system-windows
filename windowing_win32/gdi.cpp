@@ -269,7 +269,7 @@ namespace windowing_win32
 
          path = strMatter;
 
-         path = directory()->matter(path / strIcon);
+         path = directory()->matter(path / scopedstrIcon);
 
          path = application()->get_matter_cache_path(path);
 

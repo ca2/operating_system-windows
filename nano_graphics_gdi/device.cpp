@@ -81,7 +81,7 @@ namespace windows
 
             SetBkMode(m_hdc, OPAQUE);
 
-            wstring wstrMessage(str);
+            wstring wstrMessage(scopedstr);
 
             pnanofont->update(this);
 
@@ -107,7 +107,7 @@ namespace windows
 
             ::SelectObject(m_hdc, (HFONT)pnanofont->operating_system_data());
 
-            wstring wstr(str);
+            wstring wstr(scopedstr);
 
             ::SIZE size;
 

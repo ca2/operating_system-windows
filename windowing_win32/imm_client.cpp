@@ -607,7 +607,7 @@ void imm_client::on_text_composition(const ::scoped_string & scopedstr)
 
    //text_composition_client::on_text_composition(str);
 
-   m_puserinteraction->on_text_composition(str);
+   m_puserinteraction->on_text_composition(scopedstr);
 
 }
 
