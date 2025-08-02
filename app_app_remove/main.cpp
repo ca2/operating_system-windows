@@ -38,7 +38,7 @@ public:
 
    bool is_user_using(const ::scoped_string & scopedstrDll);
 
-   INT cube_run(const ::string & atom);
+   INT cube_run(const ::scoped_string & scopedstr);
 
    bool are_there_user_files_in_use();
 
