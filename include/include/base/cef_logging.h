@@ -158,8 +158,8 @@
 
 #if defined(USING_CHROMIUM_INCLUDES)
 // When building CEF include the Chromium header directly.
-#include "base/logging.h"
-#include "base/notreached.h"
+#include "berg/logging.h"
+#include "berg/notreached.h"
 #elif defined(DCHECK)
 // Do nothing if the macros provided by this header already exist.
 // This can happen in cases where Chromium code is used directly by the

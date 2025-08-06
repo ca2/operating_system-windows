@@ -164,7 +164,7 @@
 
 #if defined(USING_CHROMIUM_INCLUDES)
 /// When building CEF include the Chromium header directly.
-#include "base/trace_event/trace_event.h"
+#include "berg/trace_event/trace_event.h"
 #else  // !USING_CHROMIUM_INCLUDES
 // The following is substantially similar to the Chromium implementation.
 // If the Chromium implementation diverges the below implementation should be

@@ -34,7 +34,7 @@
 
 #if defined(USING_CHROMIUM_INCLUDES)
 // When building CEF include the Chromium header directly.
-#include "base/synchronization/atomic_flag.h"
+#include "berg/synchronization/atomic_flag.h"
 
 #else  // !USING_CHROMIUM_INCLUDES
 // The following is substantially similar to the Chromium implementation.

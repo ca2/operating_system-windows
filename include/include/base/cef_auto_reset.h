@@ -43,7 +43,7 @@
 
 #if defined(USING_CHROMIUM_INCLUDES)
 // When building CEF include the Chromium header directly.
-#include "base/auto_reset.h"
+#include "berg/auto_reset.h"
 #else  // !USING_CHROMIUM_INCLUDES
 // The following is substantially similar to the Chromium implementation.
 // If the Chromium implementation diverges the below implementation should be
