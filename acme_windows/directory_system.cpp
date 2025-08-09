@@ -1262,7 +1262,7 @@ pacmedir->create CreateDirectoryW last error(%d)=%s", dwError, pszError);
       //}
 
 
-      void defer_add(::file::listing & listing, const WIN32_FIND_DATAW & finddata)
+      void defer_add(::file::listing_base & listing, const WIN32_FIND_DATAW & finddata)
       {
 
 
@@ -1311,7 +1311,7 @@ pacmedir->create CreateDirectoryW last error(%d)=%s", dwError, pszError);
       }
 
 
-      bool directory_system::enumerate(::file::listing & listing)
+      bool directory_system::enumerate(::file::listing_base & listing)
       {
 
          if (listing.m_pathFinal.is_empty())
