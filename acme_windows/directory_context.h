@@ -38,8 +38,8 @@ namespace acme_windows
 
       using ::directory_context::enumerate;
       // rls fetchs should set a meaningful m_iRelative value at each returned path
-      virtual bool enumerate(::file::listing & path);
-      //virtual bool ls_relative_name(::file::listing & path);
+      virtual bool enumerate(::file::listing_base & path);
+      //virtual bool ls_relative_name(::file::listing_base & path);
 
 
       //virtual bool  is_impl(const ::file::path & path) override;
@@ -48,7 +48,7 @@ namespace acme_windows
       virtual bool  name_is(const ::file::path & path);
       virtual bool  has_subdir(const ::file::path & path);
 
-      virtual ::file::listing & root_ones(::file::listing & listing);
+      virtual ::file::listing_base & root_ones(::file::listing_base & listing);
       //virtual void mk(const ::file::path & path);
       //virtual void rm(const ::file::path & path, bool bRecursive = true);
 

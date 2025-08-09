@@ -313,7 +313,7 @@ pacmedir->system() / "config/plugin/appfy_beg_debug_box.txt"))
          else
          {
 
-            ::file::listing listing;
+            ::file::listing_base listing;
 
             string strListing = strBuild;
             

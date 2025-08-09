@@ -98,10 +98,10 @@ namespace acme_windows
       void run_silent(const ::scoped_string & scopedstrFunct, const ::scoped_string & scopedstrstrParams) override;
 
 
-      ::file::path_array process_identifier_modules_paths(::process_identifier processidentifier) override;
+      ::file::path_array_base process_identifier_modules_paths(::process_identifier processidentifier) override;
 
       
-      //::file::path_array modules_paths() override;
+      //::file::path_array_base modules_paths() override;
 
 
       bool load_modules_diff(string_array & straOld, string_array & straNew, const ::scoped_string & scopedstrExceptDir) override;

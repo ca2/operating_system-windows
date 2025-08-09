@@ -328,7 +328,7 @@ namespace windows
    //   }
    //}
 
-   ::file::listing & directory_context::root_ones(::file::listing & listing)
+   ::file::listing_base & directory_context::root_ones(::file::listing_base & listing)
    {
 
       unsigned int dwSize = ::GetLogicalDriveStringsW(0, nullptr);
@@ -379,7 +379,7 @@ namespace windows
 
 
 
-   ::file::listing & directory_context::ls(::file::listing & listing)
+   ::file::listing_base & directory_context::ls(::file::listing_base & listing)
    {
 
       if (listing.m_bRecursive)
@@ -408,7 +408,7 @@ namespace windows
 
             listing.m_statusresult.clear();
 
-            ::file::listing dira;
+            ::file::listing_base dira;
 
             ls_dir(dira, listing.m_pathUser);
 
@@ -564,7 +564,7 @@ namespace windows
    }
 
 
-   ::file::listing & directory_context::ls_relative_name(::file::listing & listing)
+   ::file::listing_base & directory_context::ls_relative_name(::file::listing_base & listing)
    {
 
 
@@ -593,7 +593,7 @@ namespace windows
             }
 
 
-            ::file::listing dira;
+            ::file::listing_base dira;
 
             ls_dir(dira, listing.m_pathUser);
 
@@ -901,7 +901,7 @@ namespace windows
 
       }
 
-      ::file::path_array stra;
+      ::file::path_array_base stra;
 
       path.ascendants_path(stra);
 
@@ -1021,7 +1021,7 @@ namespace windows
       if (bRecursive)
       {
          
-         ::file::listing patha;
+         ::file::listing_base patha;
 
          ls(patha, path);
 

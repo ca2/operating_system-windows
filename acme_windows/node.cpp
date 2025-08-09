@@ -1055,7 +1055,7 @@ namespace acme_windows
    //}
 
 
-   ::file::path_array node::process_identifier_modules_paths(::process_identifier processidentifier)
+   ::file::path_array_base node::process_identifier_modules_paths(::process_identifier processidentifier)
    {
 
       HANDLE hProcess;
@@ -1079,7 +1079,7 @@ namespace acme_windows
 
       hmodulea.set_size(iMaxModuleCount);
 
-      ::file::path_array patha;
+      ::file::path_array_base patha;
 
       DWORD cbNeeded;
 
@@ -1123,12 +1123,12 @@ namespace acme_windows
    }
 
 
-   //::file::path_array node::modules_paths()
+   //::file::path_array_base node::modules_paths()
    //{
 
    //   auto processidentifiera = processes_identifiers();
 
-   //   ::file::path_array patha;
+   //   ::file::path_array_base patha;
 
    //   for (auto processidentifier : processidentifiera)
    //   {

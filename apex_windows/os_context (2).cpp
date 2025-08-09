@@ -3588,7 +3588,7 @@ repeat:
    }
 
 
-   void os_context::list_process(::file::path_array & patha, unsigned_int_array & uaPid)
+   void os_context::list_process(::file::path_array_base & patha, unsigned_int_array & uaPid)
    {
 
       ASSERT(sizeof(unsigned int) == sizeof(unsigned int));

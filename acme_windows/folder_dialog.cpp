@@ -66,7 +66,7 @@ namespace acme_windows
          {
 
 
-            ::file::path_array patha;
+            ::file::path_array_base patha;
 
             bool bOk = false;
 

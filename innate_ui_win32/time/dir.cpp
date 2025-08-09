@@ -30,7 +30,7 @@ namespace dir
 
       character_count iLastPo = -1;
 
-      ::file::path_array stra;
+      ::file::path_array_base stra;
 
       path.ascendants_path(stra);
 

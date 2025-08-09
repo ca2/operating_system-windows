@@ -216,7 +216,7 @@ namespace apex_windows
 
       void set_file_extension_mime_type(string_array& straExtension, string_array& straMimeType) override;
 
-      //void list_process(::file::path_array & patha, ::process_identifier_array & uaPid) override;
+      //void list_process(::file::path_array_base & patha, ::process_identifier_array & uaPid) override;
 
       //virtual icon_pointer load_icon(const ::payload & payloadFile) override;
 

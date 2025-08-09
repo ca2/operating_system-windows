@@ -263,7 +263,7 @@ namespace acme_windows
       user_post([pdialog]
          {
 
-            //::file::path_array patha;
+            //::file::path_array_base patha;
 
             OPENFILENAME openfilename;
 

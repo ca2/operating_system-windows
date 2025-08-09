@@ -435,7 +435,7 @@ pacmedir->system() / "config/production/mirror_status.txt";
 
          {
 
-            ::file::listing listing(get_application());
+            ::file::listing_base listing(get_application());
 
             listing.ls_dir(m_strBase);
 
@@ -1135,7 +1135,7 @@ pacmedir->create(pathTarget.folder()))
 
             add_status("");
 
-            ::file::listing straRoot;
+            ::file::listing_base straRoot;
 
             straRoot = m_straRoot;
 
@@ -1816,7 +1816,7 @@ pacmedir->create(pathTarget.folder()))
       return true;
    }
 
-   bool production::get_file_list(const ::scoped_string & scopedstrBase, const ::scoped_string & scopedstrDir, ::file::listing & stra, bool bFileSet)
+   bool production::get_file_list(const ::scoped_string & scopedstrBase, const ::scoped_string & scopedstrDir, ::file::listing_base & stra, bool bFileSet)
    {
       ::file::path strBase(pszBase);
       ::file::path strRelease;
@@ -1839,7 +1839,7 @@ pacmedir->create(pathTarget.folder()))
          strRelative = strLocal + ".expand_fileset";
          strRelative.replace("/", "\\");
 
-         ::file::listing stra1(get_application());
+         ::file::listing_base stra1(get_application());
 
          stra1.rls_file(strRelease);
 
@@ -2018,7 +2018,7 @@ pacmedir->create(pathTarget.folder()))
    void production::generate_appmatter_spa(const ::file::path & pathRoot)
    {
 
-      ::file::listing listing(get_application());
+      ::file::listing_base listing(get_application());
 
       string strBase = m_strBase / pszRoot / "appmatter";
 
@@ -2041,7 +2041,7 @@ pacmedir->create(pathTarget.folder()))
    void production::generate_appmatter_spa_folder(const ::file::path & pathRoot, const ::file::path & pathRelative)
    {
 
-      ::file::listing listing(get_application());
+      ::file::listing_base listing(get_application());
 
       ::file::path strBase = m_strBase / pszRoot / "appmatter";
 
@@ -2066,7 +2066,7 @@ pacmedir->create(pathTarget.folder()))
    void production::generate_appmatter_spa_locale(const ::file::path & pathRoot, const ::file::path & pathRelative)
    {
 
-      ::file::listing listing(get_application());
+      ::file::listing_base listing(get_application());
 
       ::file::path strBase = m_strBase / pszRoot / "appmatter";
 
@@ -2086,7 +2086,7 @@ pacmedir->create(pathTarget.folder()))
    void production::generate_appmatter_spa_style(const ::file::path & pathRoot, const ::file::path & pathRelative)
    {
 
-      ::file::listing listing(get_application());
+      ::file::listing_base listing(get_application());
 
       ::file::path strBase = m_strBase / pszRoot / "appmatter";
 
@@ -2113,9 +2113,9 @@ pacmedir->create(pathTarget.folder()))
 
       add_status(strStatus);
 
-      ::file::listing straFiles(get_application());
+      ::file::listing_base straFiles(get_application());
 
-      ::file::listing stra1;
+      ::file::listing_base stra1;
 
       straFiles.rls(m_strBase / pszRoot / "appmatter" / pszRelative);
 
@@ -2327,7 +2327,7 @@ pacmedir->create(pathTarget.folder()))
       add_path(pszDir, "chrome.manifest");
       add_path(pszDir, "plugins\\npca2.dll");
 
-      ::file::listing straBase;
+      ::file::listing_base straBase;
 
       //::generic::container::copy(straBase, ::install::get_app_app_install_module_list(pszPlatform, m_strConfiguration));
       //::generic::container::copy(straBase, ::install::get_app_app_install_module_list());
@@ -2499,7 +2499,7 @@ pacmedir->create(pathTarget.folder()))
       //strCmd = "\"" + m_strSignTool + "\" sign /f \"" + m_strSpc + "\" /p " + m_strSignPass + " \"" + strFile + "\"";
       //psystem->process().synch(strCmd);
 
-      ::file::listing straBase;
+      ::file::listing_base straBase;
 
       //::generic::container::copy(straBase,::install::get_app_app_install_module_list(strPlatform, m_strConfiguration));
 //      ::generic::container::copy(straBase, ::install::get_app_app_install_module_list());
@@ -2796,7 +2796,7 @@ pacmedir->create(pathTarget.folder()))
       file().copy(strDir / strIconName, strIcon);
 
 
-      ::file::listing straBase;
+      ::file::listing_base straBase;
 
       //::generic::container::copy(straBase,::install::get_app_app_install_module_list(strPlatform, m_strConfiguration));
       //::generic::container::copy(straBase, ::install::get_app_app_install_module_list());

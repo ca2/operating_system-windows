@@ -110,15 +110,15 @@ namespace production
                               
       string                  m_strStatus;
       ::file::path            m_strBase;
-      ::file::listing         m_straRoot;
+      ::file::listing_base         m_straRoot;
       character_count                 m_iBaseLen;
-      ::file::listing         m_straFiles;
+      ::file::listing_base         m_straFiles;
 
 
 
       string_array                 m_straManifest;
       string_array                 m_straSignature;
-      ::file::listing         m_straPath;
+      ::file::listing_base         m_straPath;
 
 
       bool                    m_bClean;
@@ -157,7 +157,7 @@ namespace production
 
       virtual void     produce();
 
-      bool get_file_list(const ::scoped_string & scopedstrBase, const ::scoped_string & scopedstrDir, ::file::listing & stra, bool bFileSet = false);
+      bool get_file_list(const ::scoped_string & scopedstrBase, const ::scoped_string & scopedstrDir, ::file::listing_base & stra, bool bFileSet = false);
       // bool ftp_put_dir(CFtpConnection & ftpconn, const ::scoped_string & scopedstrBase, const ::scoped_string & scopedstrDir, int iMode);
 
       virtual void compress();

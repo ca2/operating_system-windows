@@ -130,13 +130,13 @@ namespace acme_windows
       //bool _enumerates(::file::listing_base & listing) override;
       bool enumerate(::file::listing_base & listing) override;
 
-      //void rls_dir(::file::path_array & stra, const scoped_string & str) override;
+      //void rls_dir(::file::path_array_base & stra, const scoped_string & str) override;
 
-      //void ls(::file::path_array & stra, const scoped_string & str) override;
+      //void ls(::file::path_array_base & stra, const scoped_string & str) override;
 
-      //void ls_dir(::file::path_array & stra, const scoped_string & str) override;
+      //void ls_dir(::file::path_array_base & stra, const scoped_string & str) override;
 
-      //void ls_file(::file::path_array & stra, const scoped_string & str) override;
+      //void ls_file(::file::path_array_base & stra, const scoped_string & str) override;
 
       //int make_path(const scoped_string & str) override;
 

@@ -197,7 +197,7 @@ namespace windowing_win32
    }
 
 
-   HGLOBAL copydesk::hglobal_get_filea(const ::file::path_array & patha)
+   HGLOBAL copydesk::hglobal_get_filea(const ::file::path_array_base & patha)
    {
 
       character_count iLen = 0;
@@ -399,7 +399,7 @@ namespace windowing_win32
    }
 
 
-   bool copydesk::_get_filea(::file::path_array & patha, enum_op & eop)
+   bool copydesk::_get_filea(::file::path_array_base & patha, enum_op & eop)
    {
 
       ::collection::count c = _get_file_count();
@@ -446,7 +446,7 @@ namespace windowing_win32
    }
 
 
-   bool copydesk::_set_filea(const ::file::path_array & patha, enum_op eop)
+   bool copydesk::_set_filea(const ::file::path_array_base & patha, enum_op eop)
    {
 
       synchronous_lock synchronouslock(synchronization());
@@ -510,7 +510,7 @@ namespace windowing_win32
 
       SetClipboardData(CF_TEXT, hglobal_get_utf8_text(str));
 
-      ::file::path_array patha;
+      ::file::path_array_base patha;
 
       if (string_to_filea(&patha, str))
       {

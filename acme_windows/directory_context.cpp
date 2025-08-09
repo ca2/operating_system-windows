@@ -413,7 +413,7 @@ namespace acme_windows
    //}
 
 
-   ::file::listing & directory_context::root_ones(::file::listing & listing)
+   ::file::listing_base & directory_context::root_ones(::file::listing_base & listing)
    {
 
       listing.fix_flag();
@@ -466,7 +466,7 @@ namespace acme_windows
    }
 
 
-   bool directory_context::enumerate(::file::listing & listing)
+   bool directory_context::enumerate(::file::listing_base & listing)
    {
 
       if (::directory_context::enumerate(listing))
@@ -488,7 +488,7 @@ namespace acme_windows
 
       //      __scoped_restore(listing.m_eextract);
 
-      //      ::file::listing dira;
+      //      ::file::listing_base dira;
 
       //      enumerate(dira, listing.m_pathUser);
 
@@ -639,7 +639,7 @@ namespace acme_windows
    }
 
 
-   //bool directory_context::ls_relative_name(::file::listing & listing)
+   //bool directory_context::ls_relative_name(::file::listing_base & listing)
    //{
 
    //   if (::directory_context::ls_relative_name(listing))
@@ -665,7 +665,7 @@ namespace acme_windows
    //         __scoped_restore(listing.m_eextract);
 
 
-   //         ::file::listing dira;
+   //         ::file::listing_base dira;
 
    //         ls_dir(dira, listing.m_pathUser);
 
@@ -980,7 +980,7 @@ namespace acme_windows
 
    //   //}
 
-   //   //::file::path_array stra;
+   //   //::file::path_array_base stra;
 
    //   //path.ascendants_path(stra);
 
@@ -1105,7 +1105,7 @@ namespace acme_windows
    //   if (bRecursive)
    //   {
    //      
-   //      ::file::listing patha;
+   //      ::file::listing_base patha;
 
    //      ls(patha, path);
 
