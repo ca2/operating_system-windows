@@ -39,9 +39,9 @@ namespace windowing_win32
       ::int_rectangle_array                                               m_rectangleaWkspace;
 #endif
       //#pragma message("at macos??")
-      raw_array < MONITORINFO >                          m_monitorinfoa;
+      raw_array_base < MONITORINFO >                     m_monitorinfoa;
       comparable_array < HMONITOR >                      m_hmonitora;
-      raw_array < MONITORINFO >                          m_monitorinfoaDesk;
+      raw_array_base < MONITORINFO >                     m_monitorinfoaDesk;
 
 
       display();

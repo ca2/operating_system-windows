@@ -127,8 +127,8 @@ namespace acme_windows
 
       //bool is(const_char_pointer path) override;
 
-      //bool _enumerates(::file::listing & listing) override;
-      bool enumerate(::file::listing & listing) override;
+      //bool _enumerates(::file::listing_base & listing) override;
+      bool enumerate(::file::listing_base & listing) override;
 
       //void rls_dir(::file::path_array & stra, const scoped_string & str) override;
 

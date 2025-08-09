@@ -1601,7 +1601,7 @@ namespace apex_windows
 
       //return node()->processes_identifiers();
 
-      ::raw_array < DWORD > ua;
+      ::raw_array_base < DWORD > ua;
 
       ASSERT(sizeof(unsigned int) == sizeof(unsigned int));
 

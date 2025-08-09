@@ -97,9 +97,11 @@ namespace acme_windows
 
       bool bSuccess = false;
 
+      DWORD dwWrite = (DWORD)scopedstr.size();
+
       DWORD dwWritten;
 
-      bSuccess = WriteFile(m_hWrite, scopedstr.data(),scopedstr.size(),&dwWritten,nullptr) != false;
+      bSuccess = WriteFile(m_hWrite, scopedstr.data(), dwWrite, &dwWritten, nullptr) != false;
 
       return bSuccess != false && dwWritten == scopedstr.size();
 
