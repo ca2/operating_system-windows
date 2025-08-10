@@ -522,7 +522,7 @@ namespace acme_windows
    }
 
 
-   void registry::key::ls_key(string_array & stra)
+   void registry::key::ls_key(string_array_base & stra)
    { 
 
       /*auto estatus = */ _ls_key(stra);
@@ -532,7 +532,7 @@ namespace acme_windows
    }
 
 
-   void registry::key::ls_data(string_array & stra)
+   void registry::key::ls_data(string_array_base & stra)
    {
 
       /*auto estatus = */ _ls_data(stra);
@@ -578,7 +578,7 @@ namespace acme_windows
    }
 
 
-   void registry::key::_ls_key(string_array & stra)
+   void registry::key::_ls_key(string_array_base & stra)
    {
 
       DWORD dwMaxSubKeyLen;
@@ -609,10 +609,10 @@ namespace acme_windows
    }
 
 
-   ::string_array registry::key::ls_key()
+   ::string_array_base registry::key::ls_key()
    { 
       
-      string_array stra; 
+      string_array_base stra;
       
       ls_key(stra); 
       
@@ -629,7 +629,7 @@ namespace acme_windows
    }
 
 
-   void registry::key::_ls_data(string_array & stra)
+   void registry::key::_ls_data(string_array_base & stra)
    {
       
       DWORD dwMaxDataNameLen = 16384;
@@ -668,10 +668,10 @@ namespace acme_windows
    }
 
 
-   ::string_array registry::key::ls_data()
+   ::string_array_base registry::key::ls_data()
    { 
       
-      string_array stra; 
+      string_array_base stra;
       
       ls_data(stra); 
       

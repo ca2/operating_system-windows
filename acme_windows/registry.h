@@ -101,14 +101,14 @@ namespace acme_windows
          void erase_tree();
 
          
-         void ls_key(string_array & stra);
-         ::string_array ls_key();
-         void _ls_key(string_array & stra);
+         void ls_key(string_array_base & stra);
+         ::string_array_base ls_key();
+         void _ls_key(string_array_base & stra);
 
 
-         void ls_data(string_array & stra);
-         ::string_array ls_data();
-         void _ls_data(string_array & stra);
+         void ls_data(string_array_base & stra);
+         ::string_array_base ls_data();
+         void _ls_data(string_array_base & stra);
 
 
       };

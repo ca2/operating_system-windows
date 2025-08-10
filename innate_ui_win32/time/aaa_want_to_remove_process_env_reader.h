@@ -89,12 +89,12 @@ public:
    /* String helper functions */
    static void ConvertUnicodeToMBCS(const ::wide_character * pStringToConvert,int nLen,string& csMBCSStr);
 
-   static void ParseEnvironmentStrings(const ::wide_character * pStringToConvert,int nLen,string_array& EnvStrArr);
+   static void ParseEnvironmentStrings(const ::wide_character * pStringToConvert,int nLen,string_array_base& EnvStrArr);
 
-   static void SeparateVariablesAndValues(const string_array& EnvStrArray,EnvVarValArray& varValArr);
+   static void SeparateVariablesAndValues(const string_array_base& EnvStrArray,EnvVarValArray& varValArr);
 
    /* Export functions */
-   //   static void ExportEnvStrings(const string_array& csArrEnvStr,COPY_DEST_e Dest,HWND hClipboardOwner);
+   //   static void ExportEnvStrings(const string_array_base& csArrEnvStr,COPY_DEST_e Dest,HWND hClipboardOwner);
    static void UpdateProcessMiscInfo(HANDLE hProcess,int nItemSelected);
 };
 

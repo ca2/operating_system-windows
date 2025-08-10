@@ -304,7 +304,7 @@ namespace acme_windows
       void context::prepare1(const ::scoped_string & scopedstrSource, const ::scoped_string & scopedstrTarget)
       {
 
-         //string_array stra;
+         //string_array_base stra;
 
 
          //string strLog;
@@ -373,8 +373,8 @@ namespace acme_windows
          ::string strCmd = node()->get_environment_variable("ComSpec");
          strCommand = "\""+strCmd+"\" /c \"@call " + strBuildCmd + " && @set\"";
 
-         string_array straOut;
-         string_array straErr;
+         string_array_base straOut;
+         string_array_base straErr;
 
          auto functionTrace = [&](auto etracelevel, auto& str, bool bCarriage)
          {
@@ -582,7 +582,7 @@ namespace acme_windows
          //
          //   //   string strLog;
          //
-         //   //   string_array m_strArray;
+         //   //   string_array_base m_strArray;
          //   //   // Open the process for further operations
          //   //   HANDLE hProcess = CProcessEnvReader::OpenProcessToRead(process->m_iPid);
          //   //   if(hProcess)
@@ -631,7 +631,7 @@ namespace acme_windows
          //   }
          //
          //   strLog += process->read();
-         //   string_array stra;
+         //   string_array_base stra;
          //
          //   stra.add_lines(strLog);
          //
@@ -966,7 +966,7 @@ namespace acme_windows
 
       //   auto pathHostIntegrationFolder = host_integration_folder();
 
-      //   ::string_array straPattern;
+      //   ::string_array_base straPattern;
 
       //   straPattern.add("????-??-?? ??-??-??");
 

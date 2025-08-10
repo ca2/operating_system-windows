@@ -1144,7 +1144,7 @@ namespace acme_windows
    //}
 
 
-   bool node::load_modules_diff(string_array& straOld, string_array& straNew, const ::scoped_string & scopedstrExceptDir)
+   bool node::load_modules_diff(string_array_base& straOld, string_array_base& straNew, const ::scoped_string & scopedstrExceptDir)
    {
 
       bool bFound;
@@ -1516,7 +1516,7 @@ namespace acme_windows
    }
 
 
-   ::process_identifier_array node::shared_library_process(string_array& straProcesses, const ::scoped_string & scopedstrLibrary)
+   ::process_identifier_array node::shared_library_process(string_array_base& straProcesses, const ::scoped_string & scopedstrLibrary)
    {
 
       process_identifier_array processidentifiera;
@@ -2269,7 +2269,7 @@ namespace acme_windows
 
       //#ifdef UNIVERSAL_WINDOWS
       //
-      //      string_array stra;
+      //      string_array_base stra;
       //
       //      try
       //      {
@@ -2755,7 +2755,7 @@ namespace acme_windows
 
       //#ifdef DEBUG
       //
-      //      ::string_array straOutput;
+      //      ::string_array_base straOutput;
       //
       //      int iExitCode = 0;
       //
@@ -2876,7 +2876,7 @@ namespace acme_windows
    }
 
 
-   //void node::command_system(string_array & straOutput, int & iExitCode, const scoped_string & scopedstr, enum_command_system ecommandsystem, const class time & timeTimeout, ::particle * pparticleSynchronization, ::file::file * pfileLines)
+   //void node::command_system(string_array_base & straOutput, int & iExitCode, const scoped_string & scopedstr, enum_command_system ecommandsystem, const class time & timeTimeout, ::particle * pparticleSynchronization, ::file::file * pfileLines)
    //{
 
    //   //straOutput.clear();

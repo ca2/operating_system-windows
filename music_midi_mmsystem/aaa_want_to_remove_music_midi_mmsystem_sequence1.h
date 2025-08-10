@@ -80,7 +80,7 @@ namespace music
             void Prepare(::ikaraoke::data & data);
             void Prepare(int iTrack, ::ikaraoke::data & data);
             void Prepare(
-            string_array_array & straa,
+            string_array_array_base & straa,
             imedia_position_2darray & tickaaTokensTicks,
             int iMelodyTrack,
             int2a & ia2TokenLine,

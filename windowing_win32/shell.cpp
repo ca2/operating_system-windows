@@ -1466,7 +1466,7 @@ namespace windowing_win32
 
                      string strResource = definition.pszIcon;
 
-                     string_array stra;
+                     string_array_base stra;
 
                      stra.explode(",", strResource);
 

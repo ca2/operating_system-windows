@@ -21,7 +21,7 @@ namespace production
       m_iRelease = 0;
 
       {
-         string_array & stra = m_straStageDirAcceptedFileExtensions;
+         string_array_base & stra = m_straStageDirAcceptedFileExtensions;
          stra.add("exe");
          stra.add("dll");
          stra.add("manifest");
@@ -1185,8 +1185,8 @@ pacmedir->create(pathTarget.folder()))
 
          class release * prelease = nullptr;
 
-         string_array straStatus;
-         string_array straServer;
+         string_array_base straStatus;
+         string_array_base straServer;
 
 
 
@@ -1880,7 +1880,7 @@ pacmedir->create(pathTarget.folder()))
       if (m_strBase.right()(1) != "/" && m_strBase.right()(1) != "\\")
          iBaseLen++;
 
-      string_array straStageDir;
+      string_array_base straStageDir;
 
       straStageDir.add(m_strBase / "time/Win32" / +m_strConfiguration);
       straStageDir.add(m_strBase / "time/x64" / +m_strConfiguration);

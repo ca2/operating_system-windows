@@ -5,4 +5,4 @@
 //using environment_variable_value_array = ::array < environment_variable_value >;
 //
 //
-//CLASS_DECL_ACME void parse(environment_variable_value_array & array, const string_array & straEnvironment);
+//CLASS_DECL_ACME void parse(environment_variable_value_array & array, const string_array_base & straEnvironment);

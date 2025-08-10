@@ -62,7 +62,7 @@ namespace backup
          {
             /*         if(pimpact->m_strPathName == "filemanager_add_location_lfs.xhtml")
                      {
-                        string_array wstra;
+                        string_array_base wstra;
                         //VmsDataGet(m_pmanager->get_filemanager_template()->m_strDataKeyStatic, 0, 0, wstra);
                         Ex1VirtualGuie * pinteraction = pimpact->get_child_by_name("lfs");
                         ::pointer<::user::edit_text>ptext =pinteraction;

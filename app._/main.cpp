@@ -104,7 +104,7 @@ void copy(MEM_ICON_ITEM * dst, ICON_ITEM * pitem)
 //
 //      //{
 //
-//      //   string_array stra;
+//      //   string_array_base stra;
 //
 //      //   stra.add("C:\\a\\b\\c\\..\\..\\..\\d\\");
 //      //   stra.add("C:\\");
@@ -327,7 +327,7 @@ pacmedir->system() / "config/plugin/appfy_beg_debug_box.txt"))
 
             dir.ls_dir(listing, pathListing);
 
-            string_array straPrefix;
+            string_array_base straPrefix;
 
             for (auto& path : listing)
             {

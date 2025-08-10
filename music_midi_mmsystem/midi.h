@@ -22,8 +22,8 @@ namespace music
          public:
 
 
-            string_array         m_straDeviceOut;
-            string_array         m_straDeviceIn;
+            string_array_base         m_straDeviceOut;
+            string_array_base         m_straDeviceIn;
 
             ::particle_pointer      m_pparticleMidiMutex;
 

@@ -26,7 +26,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "aqua", "..\..\..\source\app
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "axis", "..\..\..\source\app\axis\axis.vcxproj", "{A2CBD4ED-ED0F-482B-9B16-F48F21C32835}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "base", "..\..\..\source\app\base\base.vcxproj", "{A216ABD4-26C4-4746-96B3-9D30ED28CF92}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "base", "..\..\..\source\app\berg\berg.vcxproj", "{A216ABD4-26C4-4746-96B3-9D30ED28CF92}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "bred", "..\..\..\source\app\bred\bred.vcxproj", "{DFBF067F-AFF9-4BD6-A5E1-72AF984D1476}"
 EndProject

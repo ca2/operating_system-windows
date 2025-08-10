@@ -695,8 +695,8 @@ namespace windows
       if (hwnda.get_size() <= 0)
          return;
 
-      ::int_array ia1;
-      ::int_array ia2;
+      ::int_array_base ia1;
+      ::int_array_base ia2;
       HWND hwndSwap;
 
       for (int i = 0; i < hwnda.get_size(); i++)
@@ -785,7 +785,7 @@ namespace windows
    }
 
 
-   void window_util::GetZOrder(HWND hwnd, ::int_array & ia)
+   void window_util::GetZOrder(HWND hwnd, ::int_array_base & ia)
    {
 
       if (!IsWindow(hwnd))

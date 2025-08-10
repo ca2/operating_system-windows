@@ -19,7 +19,7 @@ namespace audio_mmsystem
       class ::time                       m_time;
       class ::time                       m_timePosition;
       manual_reset_happening               m_happeningFree;
-      ::int_array                        m_iaFree;
+      ::int_array_base                        m_iaFree;
       ::particle                       m_pparticleMutexFree;
 
 

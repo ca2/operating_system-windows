@@ -109,7 +109,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "aqua", "..\..\..\source\app
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "axiscrypto", "..\..\..\source\app\axis\crypto\axiscrypto.vcxproj", "{39807406-816F-4C0D-A632-4BB8AB13887B}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "base", "..\..\..\source\app\base\base.vcxproj", "{4D7D3626-ADA6-4CA2-9566-ED7B131E3D51}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "base", "..\..\..\source\app\berg\berg.vcxproj", "{4D7D3626-ADA6-4CA2-9566-ED7B131E3D51}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "axisfreeimage", "..\..\..\source\app\axis\freeimage\axisfreeimage.vcxproj", "{B39ED2B3-D53A-4077-B957-930979A3577D}"
 	ProjectSection(ProjectDependencies) = postProject

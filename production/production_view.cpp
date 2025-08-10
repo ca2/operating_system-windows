@@ -544,9 +544,9 @@ namespace production
       else if(pusermessage->m_wparam == 2)
       {
 
-         string_array stra;
-         string_array straRelative;
-         string_array straTitle;
+         string_array_base stra;
+         string_array_base straRelative;
+         string_array_base straTitle;
          string strRemote;
 
          ::pointer<pane_impact>pimpact = get_typed_parent < pane_impact > ();

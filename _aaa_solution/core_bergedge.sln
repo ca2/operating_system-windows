@@ -123,7 +123,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "audio_mmsystem", "..\audio_
 		{3DDD6C31-218E-4979-B095-8AF22563D9C1} = {3DDD6C31-218E-4979-B095-8AF22563D9C1}
 	EndProjectSection
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "base", "..\..\..\source\app\base\base.vcxproj", "{4D7D3626-ADA6-4CA2-9566-ED7B131E3D51}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "base", "..\..\..\source\app\berg\berg.vcxproj", "{4D7D3626-ADA6-4CA2-9566-ED7B131E3D51}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "aura", "..\..\..\source\app\aura\aura.vcxproj", "{E000FFAF-392F-4E32-BF51-FD7ED638991F}"
 EndProject

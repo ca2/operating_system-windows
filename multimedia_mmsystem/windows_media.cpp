@@ -13,7 +13,7 @@
 string extract_mccdi(const ::scoped_string & scopedstr)
 {
 
-   wstring wszAudioFile(str);
+   wstring wstrAudioFile(scopedstr);
 
    bool bOK = false;
 
@@ -28,7 +28,7 @@ string extract_mccdi(const ::scoped_string & scopedstr)
 
       if (FAILED(WMCreateSyncReader(nullptr, 0, &pIWMSyncReader))) break;
 
-      if (FAILED(pIWMSyncReader->Open(wszAudioFile))) break;
+      if (FAILED(pIWMSyncReader->Open(wstrAudioFile))) break;
 
       comptr<IWMHeaderInfo3> pIWMHeaderInfo3;
 

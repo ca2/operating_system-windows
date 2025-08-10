@@ -142,8 +142,8 @@ namespace apex_windows
       void current_user_set_run_once(const ::scoped_string & scopedstrKey, const ::file::path& pathExecutable, const ::scoped_string & scopedstrArguments, bool bSet) override;
       void defer_register_ca2_plugin_for_mozilla() override;
 
-      void file_extension_get_open_with_list_keys(string_array& straKey, const ::scoped_string & scopedstrExtension) override;
-      void file_extension_get_open_with_list_commands(string_array& straCommand, const ::scoped_string & scopedstrExtension) override;
+      void file_extension_get_open_with_list_keys(string_array_base& straKey, const ::scoped_string & scopedstrExtension) override;
+      void file_extension_get_open_with_list_commands(string_array_base& straCommand, const ::scoped_string & scopedstrExtension) override;
 
       void file_association_set_default_icon(const ::scoped_string & scopedstrExtension, const ::scoped_string & scopedstrExtensionNamingClass, const ::file::path & pathIcon) override;
       void file_association_set_shell_open_command(const ::scoped_string & scopedstrExtension, const ::scoped_string & scopedstrExtensionNamingClass, const ::file::path & pathExecutable, const ::scoped_string & scopedstrParam) override;
@@ -214,7 +214,7 @@ namespace apex_windows
 
       void set_default_browser() override;
 
-      void set_file_extension_mime_type(string_array& straExtension, string_array& straMimeType) override;
+      void set_file_extension_mime_type(string_array_base& straExtension, string_array_base& straMimeType) override;
 
       //void list_process(::file::path_array_base & patha, ::process_identifier_array & uaPid) override;
 

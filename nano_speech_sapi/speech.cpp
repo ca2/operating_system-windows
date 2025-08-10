@@ -370,7 +370,7 @@ namespace sapi
 
             string strAttributes(pszAttributes);
 
-            string_array straAttributes;
+            string_array_base straAttributes;
 
             straAttributes.add_smallest_tokens(strAttributes, { ";" });
 

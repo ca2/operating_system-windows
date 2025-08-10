@@ -50,7 +50,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "netnode_dynamic_source_libr
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "draw2d_gdiplus", "..\draw2d_gdiplus\draw2d_gdiplus.vcxproj", "{9A5FBFB1-76E6-4F7E-933A-328C1EEC95AF}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "base", "..\..\..\source\app\base\base.vcxproj", "{4D7D3626-ADA6-4CA2-9566-ED7B131E3D51}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "base", "..\..\..\source\app\berg\berg.vcxproj", "{4D7D3626-ADA6-4CA2-9566-ED7B131E3D51}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "boot", "..\..\..\source\app\boot\boot.vcxproj", "{AB77745A-AF30-4253-9E4B-961BF2D98641}"
 EndProject

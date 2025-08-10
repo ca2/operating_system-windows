@@ -5,10 +5,10 @@
 //#include <Tlhelp32.h>
 
 
-//CLASS_DECL_ACME bool process_modules(string_array & stra, unsigned int processID);
+//CLASS_DECL_ACME bool process_modules(string_array_base & stra, unsigned int processID);
 //
 //   
-//CLASS_DECL_ACME bool load_modules_diff(string_array & straOld, string_array & straNew, const scoped_string & strExceptDir);
+//CLASS_DECL_ACME bool load_modules_diff(string_array_base & straOld, string_array_base & straNew, const scoped_string & strExceptDir);
 //
 //
 //namespace acme_windows

@@ -269,7 +269,7 @@ void     removal::run()
    }
 
    string strOnlyDrives = file_system()->as_string("C:\\ca2\\config\\app-removal\\only_drives.txt");
-   string_array straDrives;
+   string_array_base straDrives;
    if(strOnlyDrives.has_character())
    {
       straDrives.explode(",",strOnlyDrives);

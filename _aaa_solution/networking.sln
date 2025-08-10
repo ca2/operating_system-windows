@@ -50,7 +50,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_simple_networking_appli
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "static_app_simple_networking_application", "..\..\..\source\app-simple\networking_application\static_app_simple_networking_application.vcxproj", "{3C7A00E5-3956-492F-9921-C646DF0C2AA0}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "base", "..\..\..\source\app\base\base.vcxproj", "{A216ABD4-26C4-4746-96B3-9D30ED28CF92}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "base", "..\..\..\source\app\berg\berg.vcxproj", "{A216ABD4-26C4-4746-96B3-9D30ED28CF92}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "axis", "..\..\..\source\app\axis\axis.vcxproj", "{A2CBD4ED-ED0F-482B-9B16-F48F21C32835}"
 EndProject

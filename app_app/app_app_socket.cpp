@@ -34,7 +34,7 @@ namespace user_service
 
       string strReferer = inheader("referer");
 
-      string_array stra;
+      string_array_base stra;
 
       stra.add("http://store.ca2.cc/");
       stra.add("https://store.ca2.cc/");
@@ -258,7 +258,7 @@ auto tickExecuteEnd = ::tick::now();
    }
 
 
-   bool socket::http_filter_response_header(atom key, string_array & straValue)
+   bool socket::http_filter_response_header(atom key, string_array_base & straValue)
    {
       if (key == "location" && straValue.get_count() >= 1)
       {
@@ -288,24 +288,24 @@ auto tickExecuteEnd = ::tick::now();
    void socket::simple_file_server(const ::scoped_string & scopedstrPath)
    {
 
-      pointer_array < ::int_array > rangea;
+      pointer_array < ::int_array_base > rangea;
 
       if (strlen(inheader("range")) > 0)
       {
-         string_array straItem;
+         string_array_base straItem;
          straItem.explode("=", inheader("range"));
          if (straItem.get_count() == 2)
          {
             string strUnit = straItem[0];
-            string_array stra;
+            string_array_base stra;
             stra.explode(",", straItem[1]);
             for (int i = 0; i < stra.get_count(); i++)
             {
-               string_array straRange;
+               string_array_base straRange;
                straRange.explode("-", stra[i]);
                if (straRange.get_count() == 2)
                {
-                  rangea.add(___new ::int_array());
+                  rangea.add(___new ::int_array_base());
                   rangea.last_ptr()->add(atoi(straRange[0]));
                   straRange[1].trim();
                   if (strlen(straRange[1]) == 0)

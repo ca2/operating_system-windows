@@ -32,7 +32,7 @@ namespace acme_windows
          //::string          m_strStagePlatform;
          ::string          m_strLibPlatform;
          ::file::path      m_pathProjectDir;
-         //::string_array    m_straLog;
+         //::string_array_base    m_straLog;
 
 
          context();

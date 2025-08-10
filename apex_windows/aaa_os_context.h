@@ -47,8 +47,8 @@ namespace apex_windows
       void current_user_set_run_once(const ::string & pszKey, const ::file::path & pathExecutable, const ::string& strArguments, bool bSet) override;
       void defer_register_ca2_plugin_for_mozilla() override;
 
-      void file_extension_get_open_with_list_keys(string_array & straKey, const ::string & pszExtension) override;
-      void file_extension_get_open_with_list_commands(string_array & straCommand, const ::string & pszExtension) override;
+      void file_extension_get_open_with_list_keys(string_array_base & straKey, const ::string & pszExtension) override;
+      void file_extension_get_open_with_list_commands(string_array_base & straCommand, const ::string & pszExtension) override;
 
       void file_association_set_default_icon(const ::string & pszExtension, const ::string & pszExtensionNamingClass, const ::string & pszIconPath) override;
       void file_association_set_shell_open_command(const ::string & pszExtension, const ::string & pszExtensionNamingClass, const ::string & pszCommand, const ::string & pszParam) override;
@@ -120,7 +120,7 @@ namespace apex_windows
 
       void set_default_browser() override;
 
-      void set_file_extension_mime_type(string_array & straExtension, string_array & straMimeType) override;
+      void set_file_extension_mime_type(string_array_base & straExtension, string_array_base & straMimeType) override;
 
       //void list_process(::file::path_array & patha, ::process_identifier_array & uaPid) override;
 

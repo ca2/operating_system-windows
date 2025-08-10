@@ -46,7 +46,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "programming", "..\..\..\sou
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "time", "..\..\..\source\app\time\time.vcxproj", "{5B03FC53-5184-7715-1100-000000000000}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "base", "..\..\..\source\app\base\base.vcxproj", "{4D7D3626-ADA6-4CA2-9566-ED7B131E3D51}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "base", "..\..\..\source\app\berg\berg.vcxproj", "{4D7D3626-ADA6-4CA2-9566-ED7B131E3D51}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "aura", "..\..\..\source\app\aura\aura.vcxproj", "{E000FFAF-392F-4E32-BF51-FD7ED638991F}"
 EndProject

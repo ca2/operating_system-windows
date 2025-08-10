@@ -466,7 +466,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "draw2d_direct2d", "..\..\..
 		{E000FFAF-392F-4E32-BF51-FD7ED638991F} = {E000FFAF-392F-4E32-BF51-FD7ED638991F}
 	EndProjectSection
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "base", "..\..\..\source\app\base\base.vcxproj", "{4D7D3626-ADA6-4CA2-9566-ED7B131E3D51}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "base", "..\..\..\source\app\berg\berg.vcxproj", "{4D7D3626-ADA6-4CA2-9566-ED7B131E3D51}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "aura", "..\..\..\source\app\aura\aura.vcxproj", "{E000FFAF-392F-4E32-BF51-FD7ED638991F}"
 EndProject

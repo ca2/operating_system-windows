@@ -104,17 +104,17 @@ namespace acme_windows
       //::file::path_array_base modules_paths() override;
 
 
-      bool load_modules_diff(string_array & straOld, string_array & straNew, const ::scoped_string & scopedstrExceptDir) override;
+      bool load_modules_diff(string_array_base & straOld, string_array_base & straNew, const ::scoped_string & scopedstrExceptDir) override;
 
 
       ::process_identifier_array module_path_processes_identifiers(const ::scoped_string & scopedstrModulePath, bool bModuleNameIsPropertyFormatted) override;
 
       ::file::path process_identifier_module_path(::process_identifier processidentifier) override;
 
-      ////bool is_shared_library_busy(::process_identifier processidentifier, const string_array & stra) override;
+      ////bool is_shared_library_busy(::process_identifier processidentifier, const string_array_base & stra) override;
 
-      ////bool is_shared_library_busy(const string_array & stra) override;
-      //bool node::is_shared_library_busy(::process_identifier processidentifier, const string_array & stra)
+      ////bool is_shared_library_busy(const string_array_base & stra) override;
+      //bool node::is_shared_library_busy(::process_identifier processidentifier, const string_array_base & stra)
       //{
 
       //   process_modules
@@ -131,7 +131,7 @@ namespace acme_windows
       //}
 
 
-      //bool node::is_shared_library_busy(const string_array & stra)
+      //bool node::is_shared_library_busy(const string_array_base & stra)
       //{
 
       //   return ::acme_windows::predicate_process([&](auto pid)
@@ -147,7 +147,7 @@ namespace acme_windows
 
       bool process_contains_module(string & strImage, ::process_identifier processidentifier, const ::scoped_string & scopedstrLibrary) override;
 
-      ::process_identifier_array shared_library_process(string_array & straProcesses, const ::scoped_string & scopedstrLibrary) override;
+      ::process_identifier_array shared_library_process(string_array_base & straProcesses, const ::scoped_string & scopedstrLibrary) override;
 
       bool is_process_running(::process_identifier processidentifier) override;
 
@@ -235,7 +235,7 @@ namespace acme_windows
 
       //void shell_open(const ::file::path & path, const ::scoped_string & scopedstrParams = "", const ::file::path & pathFolder = {}) override;
       //void open_url(const ::scoped_string & scopedstrUrl) override; //
-      //void command_system(string_array & straOutput, int & iExitCode, const scoped_string & str, enum_command_system ecommandsystem = e_command_system_none, const class time & timeTimeout = ::time::infinity(), ::particle * pparticleSynchronization = nullptr, ::file::file * pfileLog = nullptr) override;
+      //void command_system(string_array_base & straOutput, int & iExitCode, const scoped_string & str, enum_command_system ecommandsystem = e_command_system_none, const class time & timeTimeout = ::time::infinity(), ::particle * pparticleSynchronization = nullptr, ::file::file * pfileLog = nullptr) override;
       int command_system(const ::scoped_string& scopedstr, const trace_function& tracefunction = nullptr, const ::file::path& pathWorkingDirectory = {}, ::e_display edisplay = e_display_none) override;
       //int command_system(const ::scoped_string& scopedstr, const class ::time& timeOut = 15_min) override;
 

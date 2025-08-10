@@ -35,7 +35,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "app_simple_os_drag_and_drop
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "axis", "..\..\..\source\app\axis\axis.vcxproj", "{A2CBD4ED-ED0F-482B-9B16-F48F21C32835}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "base", "..\..\..\source\app\base\base.vcxproj", "{A216ABD4-26C4-4746-96B3-9D30ED28CF92}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "base", "..\..\..\source\app\berg\berg.vcxproj", "{A216ABD4-26C4-4746-96B3-9D30ED28CF92}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "acme", "..\..\..\source\app\acme\acme.vcxproj", "{638B242F-0F21-41C3-9F66-724660046133}"
 EndProject

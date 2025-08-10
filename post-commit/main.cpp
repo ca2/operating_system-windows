@@ -79,7 +79,7 @@ void app_t::win_sync_out(const ::scoped_string & scopedstrLocal,const ::scoped_s
 
    //string str;
 
-   //string_array stra;
+   //string_array_base stra;
 
    //try
    //{
@@ -254,7 +254,7 @@ int app_t::run()
 
    string str;
 
-   string_array stra;
+   string_array_base stra;
 
    if (m_argc >= 2)
    {

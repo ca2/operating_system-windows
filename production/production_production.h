@@ -54,15 +54,15 @@ namespace production
          virtual void     run() override;
       };
 
-      string_array                 m_straMirror;
-      string_array                 m_straMirrorStatus;
+      string_array_base                 m_straMirror;
+      string_array_base                 m_straMirrorStatus;
       ::mutex                   m_mutexStatus;
-      string_array                 m_straStatus;
+      string_array_base                 m_straStatus;
       bool                    m_bLoop;
       int                     m_iLoop;
       int                     m_iLoopCount;
       string                  m_strSubversionRevision;
-      string_array                 m_straCompress;
+      string_array_base                 m_straCompress;
       ::mutex                   m_mutexCompress;
       string                  m_strBuildTook;
       string                  m_strSpc;
@@ -83,7 +83,7 @@ namespace production
       string                  m_strTwitterConsumerSecret;
 
       ::mutex                   m_mutexRelease;
-      string_array                 m_straRelease;
+      string_array_base                 m_straRelease;
       int                 m_iRelease;
 
       e_version               m_eversion;
@@ -91,7 +91,7 @@ namespace production
       ::earth::time        m_timeStart;
       ::earth::time        m_timeEnd;
 
-      string_array                 m_straStageDirAcceptedFileExtensions;
+      string_array_base                 m_straStageDirAcceptedFileExtensions;
 
       int                     m_iStep;
                               
@@ -99,8 +99,8 @@ namespace production
       bool                    m_bFinished;
       tick m_tickStart;
       tick m_tickEnd;
-      string_array                 m_straCC;
-      string_array                 m_straBB;
+      string_array_base                 m_straCC;
+      string_array_base                 m_straBB;
       string                  m_strBuild;
       string                  m_strFormatBuild;
       bool                    m_bEndProduction;
@@ -116,8 +116,8 @@ namespace production
 
 
 
-      string_array                 m_straManifest;
-      string_array                 m_straSignature;
+      string_array_base                 m_straManifest;
+      string_array_base                 m_straSignature;
       ::file::listing_base         m_straPath;
 
 

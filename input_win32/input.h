@@ -65,7 +65,7 @@ namespace input_win32
 
       //inline system_interaction * system_interaction() { return m_psysteminteraction; }
 
-      //virtual HICON _load_icon(string_array& straMatter, const ::scoped_string & scopedstrIcon, int cx, int cy);
+      //virtual HICON _load_icon(string_array_base& straMatter, const ::scoped_string & scopedstrIcon, int cx, int cy);
 
       //virtual ::windows::hwnd_array _get_hwnda(const ::user::primitive_pointer_array& primitivepointera);
 
@@ -184,7 +184,7 @@ namespace input_win32
       ////bool _top_level_contains_bool_member(PREDICATE predicate);
 
 
-      //bool _visible_top_level_contains_all_names(const string_array& stra) override;
+      //bool _visible_top_level_contains_all_names(const string_array_base& stra) override;
       //bool _visible_top_level_contains_name(const ::scoped_string & scopedstr) override;
       //virtual bool _top_level_contains_name(const ::scoped_string & scopedstr);
       //virtual string _get_window_text_timeout(oswindow oswindow, const class time & time = 1_s);
