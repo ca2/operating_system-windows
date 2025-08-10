@@ -4282,7 +4282,7 @@ namespace acme_windows
 
          ::string strCheckCommand;
 
-         strCheckCommand.formatf("command -v %s", scopedstr.c_str());
+         strCheckCommand.formatf("command -v %s", scopedstr.as_string().c_str());
 
          ::string strOutput;
 
@@ -4326,7 +4326,7 @@ namespace acme_windows
          ::string strOutput;
 
          strOutput.formatf("install_posix_shell_command failed for command %s: installation method not standard, inexistent or not implemented for shell %d",
-            scopedstr.c_str(),
+            scopedstr.as_string().c_str(),
             eposixshell);
 
          tracefunction(e_trace_level_error, strOutput, false);

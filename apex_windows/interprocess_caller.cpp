@@ -173,7 +173,7 @@ namespace apex_windows
 
       cds.dwData = I32_MINIMUM;
       cds.cbData = (unsigned int) scopedstrUri.length();
-      cds.lpData = (void *) scopedstrUri.c_str();
+      cds.lpData = (void *) scopedstrUri.data();
 
       HWND hwnd = get_hwnd();
 

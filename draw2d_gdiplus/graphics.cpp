@@ -6155,7 +6155,7 @@ namespace draw2d_gdiplus
    }
 
 
-   double_size graphics::get_text_extent(const scoped_string & strString, character_count iIndex)
+   double_size graphics::get_text_extent(const scoped_string & scopedstrString, character_count iIndex)
    {
 
       if (::is_null(m_pgraphics))
@@ -6165,25 +6165,24 @@ namespace draw2d_gdiplus
 
       }
 
-      if (strString.is_empty())
+      if (scopedstrString.is_empty())
       {
 
          return double_size(0, 0);
 
       }
 
-
-      if (iIndex > strString.size())
+      if (iIndex > scopedstrString.size())
          return double_size(0, 0);
 
       if (iIndex < 0)
          return double_size(0, 0);
 
-      string str(strString);
+      string str(scopedstrString);
 
       wstring wstr(str);
 
-      wstring wstrRange = utf8_to_unicode({ strString.c_str(), iIndex });
+      wstring wstrRange = utf8_to_unicode({ scopedstrString.data(), iIndex });
 
       Gdiplus::CharacterRange charRanges[1] = { Gdiplus::CharacterRange(0, (INT)wstrRange.length()) };
 
@@ -6204,7 +6203,7 @@ namespace draw2d_gdiplus
 
          Gdiplus::RectF box(0.0f, 0.0f, 0.0f, 0.0f);
 
-         wstring wstrRange = utf8_to_unicode({ strString.c_str(), iIndex });
+         wstring wstrRange = utf8_to_unicode({ scopedstrString.data(), iIndex });
 
          m_pgraphics->MeasureString(wstrRange, (int)wstrRange.length(), m_pfont->get_os_data < Gdiplus::Font * >(this), origin, Gdiplus::StringFormat::GenericTypographic(), &box);
 
