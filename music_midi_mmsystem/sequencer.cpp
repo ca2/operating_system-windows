@@ -39,7 +39,7 @@ namespace music
 
 
          sequencer::sequencer(sequence * psequence, const ::scoped_string & scopedstrDevice) :
-            ::music::midi::sequencer(psequence, strDevice)
+            ::music::midi::sequencer(psequence, scopedstrDevice)
          {
 
             initialize(psequence);
@@ -56,7 +56,7 @@ namespace music
 
             auto pmultimedia = psystem->multimedia()->m_pveriwellmultimediaThis;
 
-            m_pmidi = pmultimedia->midi()->get_device_midi(strDevice);
+            m_pmidi = pmultimedia->midi()->get_device_midi(scopedstrDevice);
 
             //m_pmessageout = pmultimedia->midi()->get_message_out(strDevice);
 

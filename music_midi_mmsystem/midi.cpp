@@ -82,16 +82,16 @@ namespace music
          ::pointer<::music::midi::sequencer>midi::create_midi_sequencer(sequence* psequence, const ::scoped_string & scopedstrDevice)
          {
 
-            string strEngine = device_engine(strDevice);
+            string strEngine = device_engine(scopedstrDevice);
 
             if (strEngine.case_insensitive_equals(m_strName))
             {
 
-               return __allocate sequencer(psequence, strDevice);
+               return __allocate sequencer(psequence, scopedstrDevice);
 
             }
 
-            auto psequencer = ::music::midi::midi::create_midi_sequencer(psequence, strDevice);
+            auto psequencer = ::music::midi::midi::create_midi_sequencer(psequence, scopedstrDevice);
 
             if (psequencer)
             {
@@ -100,7 +100,7 @@ namespace music
 
             }
 
-            return __allocate sequencer(psequence, strDevice);
+            return __allocate sequencer(psequence, scopedstrDevice);
 
          }
 
@@ -435,14 +435,14 @@ namespace music
          ::pointer<::music::midi::message_out>midi::get_message_out(const ::scoped_string & scopedstrDeviceId)
          {
 
-            auto & pmessageout = m_mapMessageOut[strDeviceId];
+            auto & pmessageout = m_mapMessageOut[scopedstrDeviceId];
 
             if (!pmessageout)
             {
 
                auto pout = __allocate out();
 
-               pout->initialize_message_out(this, strDeviceId);
+               pout->initialize_message_out(this, scopedstrDeviceId);
 
                pout->open(false);
 
@@ -458,14 +458,14 @@ namespace music
          ::pointer<::music::midi::message_in>midi::get_message_in(const ::scoped_string & scopedstrDevice)
          {
 
-            if (strDevice.is_empty())
+            if (scopedstrDevice.is_empty())
             {
 
                return nullptr;
 
             }
 
-            string strMMSystemDevice = strDevice;
+            string strMMSystemDevice = scopedstrDevice;
 
             auto& pmessagein = m_mapMessageIn[strMMSystemDevice];
 
@@ -492,7 +492,7 @@ namespace music
          ::collection::index midi::get_os_out_device_id(const ::scoped_string & scopedstrDevice)
          {
 
-            return m_straDeviceOut.find_first(strDevice);
+            return m_straDeviceOut.find_first(scopedstrDevice);
 
          }
 
@@ -500,7 +500,7 @@ namespace music
          ::collection::index midi::get_os_in_device_id(const ::scoped_string & scopedstrDevice)
          {
 
-            return m_straDeviceIn.find_first(strDevice);
+            return m_straDeviceIn.find_first(scopedstrDevice);
 
          }
 
