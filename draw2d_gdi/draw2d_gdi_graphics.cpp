@@ -3326,7 +3326,7 @@ namespace draw2d_gdi
       if (this != nullptr && (nMapMode = GetMapMode()) < MM_ISOTROPIC &&
             nMapMode != MM_TEXT)
       {
-         // when using a constrained ::collection::map mode, ::collection::map against physical inch
+         // when using a constrained ::collection::map_base mode, ::collection::map_base against physical inch
          ((::draw2d::graphics *)this)->SetMapMode(MM_HIMETRIC);
          DPtoLP(lpSize);
          ((::draw2d::graphics *)this)->SetMapMode(nMapMode);
@@ -3336,7 +3336,7 @@ namespace draw2d_gdi
 
       else
       {
-         // ::collection::map against logical inch for non-constrained mapping modes
+         // ::collection::map_base against logical inch for non-constrained mapping modes
          int cxPerInch, cyPerInch;
          if (this != nullptr)
          {
@@ -3370,7 +3370,7 @@ namespace draw2d_gdi
       if (this != nullptr && (nMapMode = GetMapMode()) < MM_ISOTROPIC &&
             nMapMode != MM_TEXT)
       {
-         // when using a constrained ::collection::map mode, ::collection::map against physical inch
+         // when using a constrained ::collection::map_base mode, ::collection::map_base against physical inch
          ((::draw2d::graphics *)this)->SetMapMode(MM_HIMETRIC);
          LPtoDP(lpSize);
          ((::draw2d::graphics *)this)->SetMapMode(nMapMode);
@@ -3380,7 +3380,7 @@ namespace draw2d_gdi
 
       else
       {
-         // ::collection::map against logical inch for non-constrained mapping modes
+         // ::collection::map_base against logical inch for non-constrained mapping modes
          int cxPerInch, cyPerInch;
          if (this != nullptr)
          {

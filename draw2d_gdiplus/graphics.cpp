@@ -19,7 +19,7 @@
 #include "aura/graphics/draw2d/draw2d.h"
 #include "aura/graphics/image/context.h"
 #include "aura/graphics/image/drawing.h"
-#include "aura/graphics/image/map.h"
+#include "aura/graphics/image/map_base.h"
 #include "aura/platform/system.h"
 //#include "acme/prototype/geometry2d/_enhanced.h"
 //#include "acme/prototype/geometry2d/_collection_enhanced.h"
@@ -2326,7 +2326,7 @@ namespace draw2d_gdiplus
       if (m_pimage->is_ok())
       {
 
-         m_pimage->map();
+         m_pimage->map_base();
 
          m_pimage->image32()[(int)point.x() + (int)point.y() * m_pimage->scan_size()].assign(color, m_pimage->color_indexes());
 
@@ -2349,7 +2349,7 @@ namespace draw2d_gdiplus
       if (m_pimage->is_ok())
       {
 
-         m_pimage->map();
+         m_pimage->map_base();
 
          ::color::color color = m_pimage->image32()[(int)point.x() + (int)point.y() * m_pimage->scan_size()].color(m_pimage->color_indexes());
 
@@ -3707,7 +3707,7 @@ namespace draw2d_gdiplus
 //      if (this != nullptr && (nMapMode = GetMapMode()) < MM_ISOTROPIC &&
 //            nMapMode != MM_TEXT)
 //      {
-//         // when using a constrained map mode, map against physical inch
+//         // when using a constrained map_base mode, map_base against physical inch
 //         ((::draw2d::graphics *)this)->SetMapMode(MM_HIMETRIC);
 //         DPtoLP(psize);
 //
@@ -3746,7 +3746,7 @@ namespace draw2d_gdiplus
 //      if (this != nullptr && (nMapMode = GetMapMode()) < MM_ISOTROPIC &&
 //            nMapMode != MM_TEXT)
 //      {
-//         // when using a constrained map mode, map against physical inch
+//         // when using a constrained map_base mode, map_base against physical inch
 //         ((::draw2d::graphics *)this)->SetMapMode(MM_HIMETRIC);
 //         LPtoDP(psize);
 //

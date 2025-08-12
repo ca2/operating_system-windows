@@ -29,7 +29,7 @@ namespace windows
 
 
 
-   using window_map = map < HWND, ::pointer<::windowing_win32::window >>;
+   using window_map = map_base < HWND, ::pointer<::windowing_win32::window >>;
 
 
 

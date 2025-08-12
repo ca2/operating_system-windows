@@ -4,8 +4,8 @@
 
 
 #include "acme/filesystem/filesystem/path.h"
-#include "acme/prototype/collection/map.h"
-#include "aura/graphics/image/map.h"
+#include "acme/prototype/collection/map_base.h"
+#include "aura/graphics/image/map_base.h"
 #include "aura/windowing/icon.h"
 
 
@@ -29,11 +29,11 @@ namespace windowing_win32
 
       };
 
-      map < ::int_size, icon_item >              m_iconmap;
+      map_base < ::int_size, icon_item >              m_iconmap;
 
       ::file::path                           m_pathProcessed;
 
-      map < ::int_size, ::image::image_pointer >      m_imagemap;
+      map_base < ::int_size, ::image::image_pointer >      m_imagemap;
 
       
       icon();

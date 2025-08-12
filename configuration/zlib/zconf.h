@@ -522,19 +522,19 @@ typedef uLong FAR uLongf;
 
 /* MVS linker does not support external names larger than 8 bytes */
 #if defined(__MVS__)
-  #pragma map(deflateInit_,"DEIN")
-  #pragma map(deflateInit2_,"DEIN2")
-  #pragma map(deflateEnd,"DEEND")
-  #pragma map(deflateBound,"DEBND")
-  #pragma map(inflateInit_,"ININ")
-  #pragma map(inflateInit2_,"ININ2")
-  #pragma map(inflateEnd,"INEND")
-  #pragma map(inflateSync,"INSY")
-  #pragma map(inflateSetDictionary,"INSEDI")
-  #pragma map(compressBound,"CMBND")
-  #pragma map(inflate_table,"INTABL")
-  #pragma map(inflate_fast,"INFA")
-  #pragma map(inflate_copyright,"INCOPY")
+  #pragma map_base(deflateInit_,"DEIN")
+  #pragma map_base(deflateInit2_,"DEIN2")
+  #pragma map_base(deflateEnd,"DEEND")
+  #pragma map_base(deflateBound,"DEBND")
+  #pragma map_base(inflateInit_,"ININ")
+  #pragma map_base(inflateInit2_,"ININ2")
+  #pragma map_base(inflateEnd,"INEND")
+  #pragma map_base(inflateSync,"INSY")
+  #pragma map_base(inflateSetDictionary,"INSEDI")
+  #pragma map_base(compressBound,"CMBND")
+  #pragma map_base(inflate_table,"INTABL")
+  #pragma map_base(inflate_fast,"INFA")
+  #pragma map_base(inflate_copyright,"INCOPY")
 #endif
 
 #endif /* ZCONF_H */

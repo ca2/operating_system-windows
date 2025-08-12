@@ -41,7 +41,7 @@ namespace draw2d_gdiplus
    }
 
 
-   bool image::map(bool)
+   bool image::map_base(bool)
    {
 
       return true;

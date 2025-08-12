@@ -4460,7 +4460,7 @@ namespace windowing_win32
    //}
 
 
-   // Default message map implementations
+   // Default message map_base implementations
       //void window::OnActivateApp(bool, unsigned int)
       //{
       //   Default();

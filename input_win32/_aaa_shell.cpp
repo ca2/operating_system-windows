@@ -14,7 +14,7 @@
 #include "acme/filesystem/filesystem/file_context.h"
 #include "aura/graphics/image/context.h"
 #include "aura/graphics/image/drawing.h"
-#include "aura/graphics/image/list.h"
+#include "aura/graphics/image/list_base.h"
 #include "aura/graphics/image/icon.h"
 #include "aura/platform/context.h"
 #include "aura/platform/session.h"

@@ -7,7 +7,7 @@
 
 #include "include/cef_client.h"
 
-#include <list>
+#include <list_base>
 
 class SimpleHandler : public CefClient,
                       public CefDisplayHandler,
@@ -59,7 +59,7 @@ class SimpleHandler : public CefClient,
   const bool use_impacts_;
 
   // List of existing browser windows. Only accessed on the CEF UI thread.
-  typedef std::list<CefRefPtr<CefBrowser>> BrowserList;
+  typedef std::list_base<CefRefPtr<CefBrowser>> BrowserList;
   BrowserList browser_list_;
 
   bool is_closing_;

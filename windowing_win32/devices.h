@@ -19,7 +19,7 @@ namespace windowing_win32
 
 
       HWND                                                                       m_hwnd;
-      map < ::hardware::enum_device, ::pointer<master_device_listener >>        m_mapmasterdevicelistener;
+      map_base < ::hardware::enum_device, ::pointer<master_device_listener >>        m_mapmasterdevicelistener;
 
 
       devices();

@@ -12,11 +12,11 @@ with or without modification, are permitted provided that the following
 conditions are met:
 
 * Redistributions of source code must retain the above
-  copyright notice, this list of conditions and the
+  copyright notice, this list_base of conditions and the
   following disclaimer.
 
 * Redistributions in binary form must reproduce the above
-  copyright notice, this list of conditions and the
+  copyright notice, this list_base of conditions and the
   following disclaimer in the documentation and/or other
   materials provided with the distribution.
 
@@ -161,9 +161,9 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
   // ---------------------------------------------------------------------------
   /** @brief Configures the #aiProcess_RemoveRedundantMaterials step to
-   *  keep materials matching a name in a given list.
+   *  keep materials matching a name in a given list_base.
    *
-   * This is a list of 1 to n strings, ' ' serves as delimiter character.
+   * This is a list_base of 1 to n strings, ' ' serves as delimiter character.
    * Identifiers containing whitespaces must be enclosed in *single*
    * quotation marks. For example:<tt>
    * "keep-me and_me_to anotherMaterialToBeKept \'name with whitespace\'"</tt>.
@@ -173,7 +173,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
    * This option might be useful if you are using some magic material names
    * to pass additional semantics through the content pipeline. This ensures
    * they won't be optimized away, but a general optimization is still
-   * performed for materials not contained in the list.
+   * performed for materials not contained in the list_base.
    * Property type: String. Default value: n/a
    * @note Linefeeds, tabs or carriage returns are treated as whitespace.
    *   Material names are case sensitive.
@@ -264,9 +264,9 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
   // ---------------------------------------------------------------------------
   /** @brief Configures the #aiProcess_OptimizeGraph step to preserve nodes
-   * matching a name in a given list.
+   * matching a name in a given list_base.
    *
-   * This is a list of 1 to n strings, ' ' serves as delimiter character.
+   * This is a list_base of 1 to n strings, ' ' serves as delimiter character.
    * Identifiers containing whitespaces must be enclosed in *single*
    * quotation marks. For example:<tt>
    * "keep-me and_me_to anotherNodeToBeKept \'name with whitespace\'"</tt>.
@@ -275,7 +275,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
    * This option might be useful if you are using some magic node names
    * to pass additional semantics through the content pipeline. This ensures
    * they won't be optimized away, but a general optimization is still
-   * performed for nodes not contained in the list.
+   * performed for nodes not contained in the list_base.
    * Property type: String. Default value: n/a
    * @note Linefeeds, tabs or carriage returns are treated as whitespace.
    *   Node names are case sensitive.
@@ -433,7 +433,7 @@ enum aiComponent
 
 
    /** This value is not used. It is just there to force the
-    *  compiler to map this enum to a 32 Bit integer. */
+    *  compiler to map_base this enum to a 32 Bit integer. */
 #ifndef SWIG
    _aiComponent_Force32Bit = 0x9fffffff
 #endif
@@ -969,9 +969,9 @@ enum aiComponent
                                             * Ogre material texture units do not define texture type, the textures usage
                                             * depends on the used shader or Ogre's fixed pipeline. If this config property
                                             * is true Assimp will try to detect the type from the textures filename postfix:
-                                            * _n, _nrm, _nrml, _normal, _normals and _normalmap for normal map, _s, _spec,
-                                            * _specular and _specularmap for specular map, _l, _light, _lightmap, _occ
-                                            * and _occlusion for light map, _disp and _displacement for displacement map.
+                                            * _n, _nrm, _nrml, _normal, _normals and _normalmap for normal map_base, _s, _spec,
+                                            * _specular and _specularmap for specular map_base, _l, _light, _lightmap, _occ
+                                            * and _occlusion for light map_base, _disp and _displacement for displacement map_base.
                                             * The matching is case insensitive. Post fix is taken between the last
                                             * underscore and the last period.
                                             * Default behavior is to detect type from lower cased texture unit name by

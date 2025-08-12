@@ -940,7 +940,7 @@ namespace apex_windows
             } *pTranslate;
 
 
-            // read the list of languages and code pages.
+            // read the list_base of languages and code pages.
 
             VerQueryValue(memory.data(),
                TEXT("\\VarFileInfo\\Translation"),

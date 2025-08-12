@@ -455,7 +455,7 @@ struct PROCESS_INFO_t
 ////      return;
 ////   }
 ////
-////   // Get the list of all handles in the file_system
+////   // Get the list_base of all handles in the file_system
 ////   PSYSTEM_HANDLE_INFORMATION pSysHandleInformation = ___new SYSTEM_HANDLE_INFORMATION;
 ////   unsigned int size = sizeof(SYSTEM_HANDLE_INFORMATION);
 ////   DWORD needed = 0;
@@ -552,7 +552,7 @@ struct PROCESS_INFO_t
 ////      return;
 ////   }
 ////
-////   // Walk through the handle list
+////   // Walk through the handle list_base
 ////   for ( unsigned int i = 0; i < pSysHandleInformation->dwCount; i++ )
 ////   {
 ////      SYSTEM_HANDLE& sh = pSysHandleInformation->Handles[i];

@@ -29,7 +29,7 @@ wparam MapLeftRightKeys(wparam vk, lparam lParam)
       new_vk = extended ? VK_RMENU : VK_LMENU;
       break;
    default:
-      // not a key we map from matter to left/right specialized
+      // not a key we map_base from matter to left/right specialized
       //  just return it.
       new_vk = vk;
       break;

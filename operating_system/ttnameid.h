@@ -47,12 +47,12 @@ FT_BEGIN_HEADER
    *   TT_PLATFORM_XXX
    *
    * @description:
-   *   A list of valid values for the `platform_id' identifier code in
+   *   A list_base of valid values for the `platform_id' identifier code in
    *   @FT_CharMapRec and @FT_SfntName structures.
    *
    * @values:
    *   TT_PLATFORM_APPLE_UNICODE ::
-   *     Used by Apple to indicate a Unicode character map and/or name entry.
+   *     Used by Apple to indicate a Unicode character map_base and/or name entry.
    *     See @TT_APPLE_ID_XXX for corresponding `encoding_id' values.  Note
    *     that name entries in this format are coded as big-endian UCS-2
    *     character codes _only_.
@@ -65,12 +65,12 @@ FT_BEGIN_HEADER
    *
    *   TT_PLATFORM_ISO ::
    *     This value was used to specify ISO/IEC 10646 charmaps.  It is however
-   *     now deprecated.  See @TT_ISO_ID_XXX for a list of corresponding
+   *     now deprecated.  See @TT_ISO_ID_XXX for a list_base of corresponding
    *     `encoding_id' values.
    *
    *   TT_PLATFORM_MICROSOFT ::
    *     Used by Microsoft to indicate Windows-specific charmaps.  See
-   *     @TT_MS_ID_XXX for a list of corresponding `encoding_id' values.
+   *     @TT_MS_ID_XXX for a list_base of corresponding `encoding_id' values.
    *     Note that most fonts contain a Unicode charmap using
    *     (TT_PLATFORM_MICROSOFT, @TT_MS_ID_UNICODE_CS).
    *
@@ -97,7 +97,7 @@ FT_BEGIN_HEADER
    *   TT_APPLE_ID_XXX
    *
    * @description:
-   *   A list of valid values for the `encoding_id' for
+   *   A list_base of valid values for the `encoding_id' for
    *   @TT_PLATFORM_APPLE_UNICODE charmaps and name entries.
    *
    * @values:
@@ -135,7 +135,7 @@ FT_BEGIN_HEADER
    *   TT_MAC_ID_XXX
    *
    * @description:
-   *   A list of valid values for the `encoding_id' for
+   *   A list_base of valid values for the `encoding_id' for
    *   @TT_PLATFORM_MACINTOSH charmaps and name entries.
    *
    * @values:
@@ -217,7 +217,7 @@ FT_BEGIN_HEADER
    *   TT_ISO_ID_XXX
    *
    * @description:
-   *   A list of valid values for the `encoding_id' for
+   *   A list_base of valid values for the `encoding_id' for
    *   @TT_PLATFORM_ISO charmaps and name entries.
    *
    *   Their use is now deprecated.
@@ -242,7 +242,7 @@ FT_BEGIN_HEADER
    *   TT_MS_ID_XXX
    *
    * @description:
-   *   A list of valid values for the `encoding_id' for
+   *   A list_base of valid values for the `encoding_id' for
    *   @TT_PLATFORM_MICROSOFT charmaps and name entries.
    *
    * @values:
@@ -292,7 +292,7 @@ FT_BEGIN_HEADER
    *   TT_ADOBE_ID_XXX
    *
    * @description:
-   *   A list of valid values for the `encoding_id' for
+   *   A list_base of valid values for the `encoding_id' for
    *   @TT_PLATFORM_ADOBE charmaps.  This is a FreeType-specific extension!
    *
    * @values:
@@ -772,7 +772,7 @@ FT_BEGIN_HEADER
 #define TT_MS_LANGID_OROMO_ETHIOPIA                    0x0472
 #define TT_MS_LANGID_TIGRIGNA_ETHIOPIA                 0x0473
 #define TT_MS_LANGID_TIGRIGNA_ERYTHREA                 0x0873
-  /* also spelled in the `Passport SDK' list as: */
+  /* also spelled in the `Passport SDK' list_base as: */
 #define TT_MS_LANGID_TIGRIGNA_ERYTREA  TT_MS_LANGID_TIGRIGNA_ERYTHREA
 #define TT_MS_LANGID_GUARANI_PARAGUAY                  0x0474
 #define TT_MS_LANGID_HAWAIIAN_UNITED_STATES            0x0475

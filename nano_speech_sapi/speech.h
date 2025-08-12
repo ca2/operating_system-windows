@@ -45,8 +45,8 @@ namespace sapi
          {
          public:
 
-            string_map < map < enum_gender, comptr < ISpVoice > > >           m_voicemap;
-            string_map < map < enum_gender, comptr < ISpObjectToken > > >     m_tokenmap;
+            string_map < map_base < enum_gender, comptr < ISpVoice > > >           m_voicemap;
+            string_map < map_base < enum_gender, comptr < ISpObjectToken > > >     m_tokenmap;
 
 
 

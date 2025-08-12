@@ -161,8 +161,8 @@ public:
    ::mutex                   m_mutex;
    void (* m_pfnConstructObject)(CT* pObject);
    void (* m_pfnDestructObject)(CT* pObject);
-   map < HANDLE, HANDLE, CT *, CT *> m_permanentMap;
-   map < HANDLE, HANDLE, CT *, CT *> m_temporaryMap;
+   map_base < HANDLE, HANDLE, CT *, CT *> m_permanentMap;
+   map_base < HANDLE, HANDLE, CT *, CT *> m_temporaryMap;
 
    handle_map(::matter * pobject);
    virtual ~handle_map()
@@ -289,7 +289,7 @@ CT* handle_map < HT, CT >::from_handle(HANDLE h, CT * (*pfnAllocator) (::pointer
          (*m_pfnConstructObject)(pTemp);
       }
 
-      // set it in the map
+      // set it in the map_base
       m_temporaryMap.set_at(h, pTemp);
    }
    catch(::exception::acme * pe)
@@ -356,7 +356,7 @@ void handle_map < HT, CT > ::erase_handle(HANDLE h)
       ASSERT(ph[0] == h);
       // permanent matter may have secondary handles that are different
    }
-   // erase only from permanent map -- temporary objects are erased
+   // erase only from permanent map_base -- temporary objects are erased
    //  at idle in CHandleMap::delete_temp, always!
    m_permanentMap.erase_key((LPVOID)h);
 }
@@ -408,7 +408,7 @@ inline void handle_map < HT, CT >::set_permanent(HANDLE h, CT * permOb)
 template < class HT, class CT >
 inline void handle_map < HT, CT >::erase_handle(HANDLE h)
 {
-   // erase only from permanent map -- temporary objects are erased
+   // erase only from permanent map_base -- temporary objects are erased
    //  at idle in CHandleMap::delete_temp, always!
    m_permanentMap.erase_key((HANDLE)h);
 }

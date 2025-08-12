@@ -192,7 +192,7 @@
 //***************************************************************************
 typedef struct {
 
-    BYTE    ErrorCode;          // Error Code (70H map 71H)
+    BYTE    ErrorCode;          // Error Code (70H map_base 71H)
     BYTE    SegmentNum;         // Number of current segment descriptor
     BYTE    SenseKey;           // Sense Key(See bit definitions too)
     BYTE    InfoByte0;          // Information MSB
@@ -263,12 +263,12 @@ typedef struct {
 #define DTYPE_COMM      0x09    // Communications device
 #define DTYPE_RESL      0x0A    // Reserved (low)
 #define DTYPE_RESH      0x1E    // Reserved (high)
-#define DTYPE_UNKNOWN   0x1F    // Unknown map no device type
+#define DTYPE_UNKNOWN   0x1F    // Unknown map_base no device type
 
 //***************************************************************************
 //                %%% ANSI APPROVED VERSION DEFINITIONS %%%
 //***************************************************************************
-#define ANSI_MAYBE      0x0     // Device may map may not be ANSI approved stand
+#define ANSI_MAYBE      0x0     // Device may map_base may not be ANSI approved stand
 #define ANSI_SCSI1      0x1     // Device complies to ANSI X3.131-1986 (SCSI-1)
 #define ANSI_SCSI2      0x2     // Device complies to SCSI-2
 #define ANSI_RESLO      0x3     // Reserved (low)

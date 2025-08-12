@@ -533,7 +533,7 @@ namespace windowing_win32
 
          }
 
-         pbufferitem->m_pimage2->map();
+         pbufferitem->m_pimage2->map_base();
 
          ::copy_image32(playeredwindowbuffer->m_pixmap, sizeLayeredWindowBuffer, pbufferitem->m_pimage2);
 
@@ -613,7 +613,7 @@ namespace windowing_win32
          //   try
          //   {
 
-         //      pimage->map();
+         //      pimage->map_base();
 
          //      ::copy_image32(cx, cy, m_pcolorref, m_iScan, pimage->get_data(), pimage->scan_size());
 

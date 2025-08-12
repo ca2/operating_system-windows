@@ -123,7 +123,7 @@
  *                callbacks (PNGCBAPI).  This is no longer required
  *                in any known environment - if it has to be used
  *                please post an explanation of the problem to the
- *                libpng mailing list.
+ *                libpng mailing list_base.
  *
  * These cases only differ if the operating system does not use the C
  * calling convention, at present this just means the above cases
@@ -305,7 +305,7 @@
 /* ANSI-C (C90) does not permit a macro to be invoked with an empty argument,
  * so make something non-empty to satisfy the requirement:
  */
-#define PNG_EMPTY /*empty list*/
+#define PNG_EMPTY /*empty list_base*/
 
 #define PNG_EXPORT(ordinal, type, name, args) \
    PNG_EXPORTA(ordinal, type, name, args, PNG_EMPTY)

@@ -2208,7 +2208,7 @@ pacmedir->create(pathTarget.folder()))
    def signDir(source_dir, key_file, output_file):
    source_dir = os.path.abspath(source_dir)
 
-   # Build file list
+   # Build file list_base
    filelist = []
    for dirpath, dirs, files in os.walk(source_dir):
    for file in files:
@@ -3078,7 +3078,7 @@ pacmedir->create(pathTarget.folder()))
       {
          synchronous_lock synchronouslock(&m_mutexRelease);
          string strStatus;
-         strStatus.Format("There are %d releases in command list!! (%s)", m_iRelease, m_straRelease.implode(";"));
+         strStatus.Format("There are %d releases in command list_base!! (%s)", m_iRelease, m_straRelease.implode(";"));
          add_status(strStatus);
 
       }

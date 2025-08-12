@@ -2448,7 +2448,7 @@ namespace draw2d_gdi
 
    //   m_spgraphics->SetViewportOrg(0, 0);
 
-   //   map();
+   //   map_base();
 
 
    //   BYTE *dst=(BYTE*)get_data();
@@ -2513,7 +2513,7 @@ namespace draw2d_gdi
    //}
 
 
-   bool image::map(bool bApplyAlphaTransform)
+   bool image::map_base(bool bApplyAlphaTransform)
    {
 
       if (m_bMapped)

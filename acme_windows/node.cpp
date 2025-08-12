@@ -4724,7 +4724,7 @@ namespace acme_windows
                unsigned short wCodePage;
             } *lpTranslate;
 
-            // read the list of languages and code pages.
+            // read the list_base of languages and code pages.
 
             VerQueryValueW(memory.data(),
                TEXT("\\VarFileInfo\\Translation"),

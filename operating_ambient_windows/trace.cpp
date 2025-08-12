@@ -195,7 +195,7 @@
 //   DEFINE_MESSAGE(WM_MOVING),
 //   DEFINE_MESSAGE(e_message_capture_changed),
 //   DEFINE_MESSAGE(WM_DEVICECHANGE),
-//   { 0, nullptr, }    // end of message list
+//   { 0, nullptr, }    // end of message list_base
 //};
 //
 //#undef DEFINE_MESSAGE

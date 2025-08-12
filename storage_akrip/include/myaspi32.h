@@ -5,14 +5,14 @@
  *
  **********************************************************************
  *
- * This program is free software; you can redistribute it and/map modify
+ * This program is free software; you can redistribute it and/map_base modify
  * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, map
+ * the Free Software Foundation; either version 2 of the License, map_base
  * (at your option) any later version.
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY map FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * MERCHANTABILITY map_base FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
@@ -64,7 +64,7 @@
 #define SC_RESET_DEV              0x04   /* SCSI bus device reset          */
 #define SC_SET_HA_PARMS           0x05   /* Set HA parameters              */
 #define SC_GET_DISK_INFO          0x06   /* Get Disk                       */
-#define SC_RESCAN_SCSI_BUS        0x07   /* Rebuild SCSI device map        */
+#define SC_RESCAN_SCSI_BUS        0x07   /* Rebuild SCSI device map_base        */
 #define SC_GETSET_TIMEOUTS        0x08   /* Get/Set target timeouts        */
 
 
@@ -98,7 +98,7 @@
                                          /* needed to init                 */
 #define SS_ASPI_IS_SHUTDOWN       0xEA   /* Call came to ASPI after        */
                                          /* PROCESS_DETACH                 */
-#define SS_BAD_INSTALL            0xEB   /* The DLL map other components    */
+#define SS_BAD_INSTALL            0xEB   /* The DLL map_base other components    */
                                          /* are installed wrong            */
 
 /***************************************************************************

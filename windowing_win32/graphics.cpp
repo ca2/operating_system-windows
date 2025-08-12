@@ -2078,7 +2078,7 @@ namespace draw2d_gdiplus
       if (m_pimage->is_ok())
       {
 
-         m_pimage->map();
+         m_pimage->map_base();
 
          m_pimage->image32()[(int) point.x() + (int) point.y() * m_pimage->scan_size()] = color;
 
@@ -2101,7 +2101,7 @@ namespace draw2d_gdiplus
       if (m_pimage->is_ok())
       {
 
-         m_pimage->map();
+         m_pimage->map_base();
 
          ::color::color color = m_pimage->image32()[(int) point.x() + (int) point.y() * m_pimage->scan_size()];
 
@@ -3327,7 +3327,7 @@ namespace draw2d_gdiplus
       if (this != nullptr && (nMapMode = GetMapMode()) < MM_ISOTROPIC &&
             nMapMode != MM_TEXT)
       {
-         // when using a constrained map mode, map against physical inch
+         // when using a constrained map_base mode, map_base against physical inch
          ((::draw2d::graphics *)this)->SetMapMode(MM_HIMETRIC);
          DPtoLP(psize);
 
@@ -3366,7 +3366,7 @@ namespace draw2d_gdiplus
       if (this != nullptr && (nMapMode = GetMapMode()) < MM_ISOTROPIC &&
             nMapMode != MM_TEXT)
       {
-         // when using a constrained map mode, map against physical inch
+         // when using a constrained map_base mode, map_base against physical inch
          ((::draw2d::graphics *)this)->SetMapMode(MM_HIMETRIC);
          LPtoDP(psize);
 
@@ -4153,7 +4153,7 @@ namespace draw2d_gdiplus
       }
       // remember early to avoid leak
       set_handle1(hDC);
-      hdc_map* pMap = ::windows_definition::MapHDC(true); // create map if not exist
+      hdc_map* pMap = ::windows_definition::MapHDC(true); // create map_base if not exist
       ASSERT(pMap != nullptr);
       pMap->set_permanent(get_handle1(), this);
 

@@ -32,7 +32,7 @@ namespace windows
    CLASS_DECL_WINDOWING_WIN32 bool defer_release_mouse_capture(itask itask, HWND hwnd);
 
 
-   using window_map = map < HWND, ::pointer<::windowing_win32::window >>;
+   using window_map = map_base < HWND, ::pointer<::windowing_win32::window >>;
 
 
 

@@ -72,7 +72,7 @@
 
          
          pointer_array < ::audio_mixer::control >     m_controla;
-         atom_map < ::pointer<::user::still >>               m_labelmap;
+         atom_map_base < ::pointer<::user::still >>               m_labelmap;
 
 
          control_impact();

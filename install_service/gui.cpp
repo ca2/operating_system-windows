@@ -67,7 +67,7 @@ int nssm_gui(int resource, nssm_service_t *service) {
 
     /* Set existing details. */
     HWND combo;
-    HWND list;
+    HWND list_base;
 
     /* papplication tab. */
     if (service->native) SetDlgItemText(tablist[NSSM_TAB_APPLICATION], IDC_PATH, service->image);
@@ -116,7 +116,7 @@ int nssm_gui(int resource, nssm_service_t *service) {
     }
 
     if (service->affinity) {
-      list = GetDlgItem(tablist[NSSM_TAB_PROCESS], IDC_AFFINITY);
+      list_base = GetDlgItem(tablist[NSSM_TAB_PROCESS], IDC_AFFINITY);
       SendDlgItemMessage(tablist[NSSM_TAB_PROCESS], IDC_AFFINITY_ALL, BM_SETCHECK, BST_UNCHECKED, 0);
       EnableWindow(GetDlgItem(tablist[NSSM_TAB_PROCESS], IDC_AFFINITY), 1);
 
@@ -126,7 +126,7 @@ int nssm_gui(int resource, nssm_service_t *service) {
       }
 
       for (int i = 0; i < num_cpus(); i++) {
-        if (! (service->affinity & (1LL << (__int64) i))) SendMessage(list, LB_SETSEL, 0, i);
+        if (! (service->affinity & (1LL << (__int64) i))) SendMessage(list_base, LB_SETSEL, 0, i);
       }
     }
 
@@ -520,16 +520,16 @@ int configure(HWND window, nssm_service_t *service, nssm_service_t *orig_service
 
   service->affinity = 0LL;
   if (! (SendDlgItemMessage(tablist[NSSM_TAB_PROCESS], IDC_AFFINITY_ALL, BM_GETCHECK, 0, 0) & BST_CHECKED)) {
-    HWND list = GetDlgItem(tablist[NSSM_TAB_PROCESS], IDC_AFFINITY);
-    int selected = (int) SendMessage(list, LB_GETSELCOUNT, 0, 0);
-    int count = (int) SendMessage(list, LB_GETCOUNT, 0, 0);
+    HWND list_base = GetDlgItem(tablist[NSSM_TAB_PROCESS], IDC_AFFINITY);
+    int selected = (int) SendMessage(list_base, LB_GETSELCOUNT, 0, 0);
+    int count = (int) SendMessage(list_base, LB_GETCOUNT, 0, 0);
     if (! selected) {
       popup_message(window, MB_OK | e_message_box_icon_exclamation, NSSM_GUI_WARN_AFFINITY_NONE);
       return 5;
     }
     else if (selected < count) {
       for (int i = 0; i < count; i++) {
-        if (SendMessage(list, LB_GETSEL, i, 0)) service->affinity |= (1LL << (__int64) i);
+        if (SendMessage(list_base, LB_GETSEL, i, 0)) service->affinity |= (1LL << (__int64) i);
       }
     }
   }
@@ -944,7 +944,7 @@ INT_PTR CALLBACK nssm_dlg(HWND window, const ::atom & atom, WPARAM w, LPARAM l) 
 
       HWND tabs;
       HWND combo;
-      HWND list;
+      HWND list_base;
       int i, n;
       tabs = GetDlgItem(window, IDC_TAB1);
       if (! tabs) return 0;
@@ -1024,13 +1024,13 @@ INT_PTR CALLBACK nssm_dlg(HWND window, const ::atom & atom, WPARAM w, LPARAM l) 
 
       SendDlgItemMessage(tablist[NSSM_TAB_PROCESS], IDC_CONSOLE, BM_SETCHECK, BST_CHECKED, 0);
 
-      list = GetDlgItem(tablist[NSSM_TAB_PROCESS], IDC_AFFINITY);
+      list_base = GetDlgItem(tablist[NSSM_TAB_PROCESS], IDC_AFFINITY);
       n = num_cpus();
-      SendMessage(list, LB_SETCOLUMNWIDTH, 16, 0);
+      SendMessage(list_base, LB_SETCOLUMNWIDTH, 16, 0);
       for (i = 0; i < n; i++) {
         TCHAR buffer[3];
         _sntprintf_s(buffer, _countof(buffer), _TRUNCATE, _T("%d"), i);
-        SendMessage(list, LB_ADDSTRING, 0, (LPARAM) buffer);
+        SendMessage(list_base, LB_ADDSTRING, 0, (LPARAM) buffer);
       }
 
       /*
@@ -1043,14 +1043,14 @@ INT_PTR CALLBACK nssm_dlg(HWND window, const ::atom & atom, WPARAM w, LPARAM l) 
       if (n < 32) {
         int columns = (n - 1) / 4;
         RECT int_rectangle;
-        GetWindowRect(list, &rectangle);
+        GetWindowRect(list_base, &rectangle);
         int width = rectangle.right() - rectangle.left();
         width -= (7 - columns) * 16;
         int height = rectangle.bottom() - rectangle.top();
-        if (n < 4) height -= (int) SendMessage(list, LB_GETITEMHEIGHT, 0, 0) * (4 - n);
-        set_window_position(list, 0, 0, 0, width, height, SWP_NOMOVE | SWP_NOOWNERZORDER);
+        if (n < 4) height -= (int) SendMessage(list_base, LB_GETITEMHEIGHT, 0, 0) * (4 - n);
+        set_window_position(list_base, 0, 0, 0, width, height, SWP_NOMOVE | SWP_NOOWNERZORDER);
       }
-      SendMessage(list, LB_SELITEMRANGE, 1, MAKELPARAM(0, n));
+      SendMessage(list_base, LB_SELITEMRANGE, 1, MAKELPARAM(0, n));
 
       SendDlgItemMessage(tablist[NSSM_TAB_PROCESS], IDC_AFFINITY_ALL, BM_SETCHECK, BST_CHECKED, 0);
       set_affinity_enabled(0);

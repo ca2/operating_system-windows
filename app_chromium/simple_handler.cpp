@@ -57,7 +57,7 @@ void SimpleHandler::OnTitleChange(CefRefPtr<CefBrowser> browser,
 void SimpleHandler::OnAfterCreated(CefRefPtr<CefBrowser> browser) {
   CEF_REQUIRE_UI_THREAD();
 
-  // Add to the list of existing browsers.
+  // Add to the list_base of existing browsers.
   browser_list_.push_back(browser);
 }
 
@@ -80,7 +80,7 @@ bool SimpleHandler::DoClose(CefRefPtr<CefBrowser> browser) {
 void SimpleHandler::OnBeforeClose(CefRefPtr<CefBrowser> browser) {
   CEF_REQUIRE_UI_THREAD();
 
-  // Remove from the list of existing browsers.
+  // Remove from the list_base of existing browsers.
   BrowserList::iterator bit = browser_list_.begin();
   for (; bit != browser_list_.end(); ++bit) {
     if ((*bit)->IsSame(browser)) {

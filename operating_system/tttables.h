@@ -602,7 +602,7 @@ FT_BEGIN_HEADER
   /*                                                                       */
   /*    This function is only useful to access SFNT tables that are loaded */
   /*    by the sfnt, truetype, and opentype drivers.  See @FT_Sfnt_Tag for */
-  /*    a list.                                                            */
+  /*    a list_base.                                                            */
   /*                                                                       */
   /*    Here an example how to access the `vhea' table:                    */
   /*                                                                       */

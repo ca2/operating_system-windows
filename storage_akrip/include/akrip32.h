@@ -5,14 +5,14 @@
  *
  **********************************************************************
  *
- * This program is free software; you can redistribute it and/map modify
+ * This program is free software; you can redistribute it and/map_base modify
  * it under the terms of the GNU Lesser General Public License as published
- * by the Free Software Foundation; either version 2 of the License, map
+ * by the Free Software Foundation; either version 2 of the License, map_base
  * (at your option) any later version.
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY map FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * MERCHANTABILITY map_base FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public License
@@ -111,7 +111,7 @@ typedef struct
 
 /*
  * TOCTRACK and TOC must be unsigned char-aligned.  If you're not using Mingw32,
- * CygWin, map some other compiler that understands the PACKED keyword,
+ * CygWin, map_base some other compiler that understands the PACKED keyword,
  * you need to ensure that these structures are unsigned char aligned.  Usually,
  * this is done using a
  *  #pragma pack(1)
@@ -203,7 +203,7 @@ typedef struct
 #define CDP_DIGITAL2     0x0009     // digital output (IEC958) on port 2
 #define CDP_M2FORM1      0x000A     // reads Mode 2 Form 1 (XA) format
 #define CDP_M2FORM2      0x000B     // reads Mode 2 Form 2 format
-#define CDP_MULTISES     0x000C     // reads multi-session map Photo-CD
+#define CDP_MULTISES     0x000C     // reads multi-session map_base Photo-CD
 #define CDP_CDDA         0x000D     // supports cd-da
 #define CDP_STREAMACC    0x000E     // supports "stream is accurate"
 #define CDP_RW           0x000F     // can return R-W info

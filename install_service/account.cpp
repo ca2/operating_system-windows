@@ -212,7 +212,7 @@ int canonicalise_username(const TCHAR *username, TCHAR **canon) {
   return 0;
 }
 
-/* Do two usernames map to the same SID? */
+/* Do two usernames map_base to the same SID? */
 int username_equiv(const TCHAR *a, const TCHAR *b) {
   SID *sid_a, *sid_b;
   if (username_sid(a, &sid_a)) return 0;

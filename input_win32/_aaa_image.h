@@ -39,7 +39,7 @@ namespace draw2d_gdiplus
       virtual bool _load_thumbnail(const ::scoped_string & scopedstr);
 
 
-      virtual bool map(bool) override;
+      virtual bool map_base(bool) override;
       virtual bool _unmap() override;
 
 
