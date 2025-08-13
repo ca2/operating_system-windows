@@ -197,7 +197,7 @@ namespace windowing_win32
 
       }
 
-      m_mapmasterdevicelistener.erase_item(plistener->m_edevice);
+      m_mapmasterdevicelistener.erase_key(plistener->m_edevice);
 
    }
 
