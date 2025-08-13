@@ -26,7 +26,7 @@ namespace innate_ui_win32
       //ATOM id();
 
 
-      string_map < ATOM >                    m_classmap;
+      string_map_base < ATOM >                    m_classmap;
 
       innate_ui();
       ~innate_ui() override;

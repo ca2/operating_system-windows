@@ -19,7 +19,7 @@
 #include "aura/graphics/draw2d/draw2d.h"
 #include "aura/graphics/image/context.h"
 #include "aura/graphics/image/drawing.h"
-#include "aura/graphics/image/map_base.h"
+#include "aura/graphics/image/map.h"
 #include "aura/platform/system.h"
 //#include "acme/prototype/geometry2d/_enhanced.h"
 //#include "acme/prototype/geometry2d/_collection_enhanced.h"
@@ -3719,7 +3719,7 @@ namespace draw2d_gdiplus
 //         int cxPerInch, cyPerInch;
 //         if (this != nullptr)
 //         {
-//            ASSERT_VALID(this);
+//            ASSERT_OK(this);
 //            
 //            cxPerInch = GetDeviceCaps(LOGPIXELSX);
 //            cyPerInch = GetDeviceCaps(LOGPIXELSY);
@@ -3758,7 +3758,7 @@ namespace draw2d_gdiplus
 //         int cxPerInch, cyPerInch;
 //         if (this != nullptr)
 //         {
-//            ASSERT_VALID(this);
+//            ASSERT_OK(this);
 //            
 //            cxPerInch = GetDeviceCaps(LOGPIXELSX);
 //            cyPerInch = GetDeviceCaps(LOGPIXELSY);
@@ -5670,7 +5670,7 @@ namespace draw2d_gdiplus
    {
       graphics * pgraphics = (graphics *)lParam;
 
-      ASSERT_VALID(pgraphics);
+      ASSERT_OK(pgraphics);
 
       return pgraphics->meta_file_procedure(hDC, pHandleTable, pMetaRec, nHandles);
 

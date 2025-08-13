@@ -373,7 +373,7 @@ void preview_dc::MirrorFont()
       return nullptr;
 
    ASSERT(get_handle2() != nullptr);
-   ASSERT_VALID(pFont);
+   ASSERT_OK(pFont);
 
    ::write_text::font* pOldFont = (::write_text::font*) ::draw2d_gdi::object::from_handle(
             ::SelectObject(get_handle2(), pFont->get_handle()));
@@ -496,7 +496,7 @@ int_size preview_dc::ComputeDeltas(int& x, const ::scoped_string & scopedstrStri
    bool bTabbed, UINT nTabStops, LPINT lpnTabStops, int nTabOrigin,
    __out_z LPTSTR lpszOutputString, int* pnDxWidths, int& nRightFixup)
 {
-   ASSERT_VALID(this);
+   ASSERT_OK(this);
 
    TEXTMETRICW tmAttrib;
    TEXTMETRICW tmScreen;

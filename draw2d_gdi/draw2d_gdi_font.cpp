@@ -134,7 +134,7 @@ namespace draw2d_gdi
       HDC hDC;
       if (pgraphics != nullptr)
       {
-         ASSERT_VALID(pgraphics);
+         ASSERT_OK(pgraphics);
          ASSERT((dynamic_cast<::draw2d_gdi::graphics * >(pgraphics))->get_handle2() != nullptr);
          hDC = (dynamic_cast<::draw2d_gdi::graphics * >(pgraphics))->get_handle2();
       }

@@ -235,7 +235,7 @@ BOOL CLibraryFrame::OnNcCreate(LPCREATESTRUCT lpcs)
 
 void CLibraryFrame::NotifyFloatingWindows(DWORD dwFlags)
 {
-   ASSERT_VALID(this);
+   ASSERT_OK(this);
    ASSERT(m_hWnd != nullptr);
 
    // get top level parent frame window first unless this is a child window

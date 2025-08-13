@@ -651,7 +651,7 @@ namespace acme_windows
          //   // Seperate values and variables
          //   CProcessEnvReader::SeparateVariablesAndValues(stra,arrEnvVarVal);
          //
-         //   string_to_string map_base;
+         //   string_to_string_base map_base;
          //
          //   for(auto pair : arrEnvVarVal)
          //   {

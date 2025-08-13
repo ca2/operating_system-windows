@@ -3340,7 +3340,7 @@ namespace draw2d_gdi
          int cxPerInch, cyPerInch;
          if (this != nullptr)
          {
-            ASSERT_VALID(this);
+            ASSERT_OK(this);
             ASSERT(get_handle1() != nullptr);  // no HDC attached or created?
             cxPerInch = GetDeviceCaps(LOGPIXELSX);
             cyPerInch = GetDeviceCaps(LOGPIXELSY);
@@ -3384,7 +3384,7 @@ namespace draw2d_gdi
          int cxPerInch, cyPerInch;
          if (this != nullptr)
          {
-            ASSERT_VALID(this);
+            ASSERT_OK(this);
             ASSERT(get_handle1() != nullptr);  // no HDC attached or created?
             cxPerInch = GetDeviceCaps(LOGPIXELSX);
             cyPerInch = GetDeviceCaps(LOGPIXELSY);
@@ -4536,7 +4536,7 @@ namespace draw2d_gdi
                                     HANDLETABLE* pHandleTable, METARECORD* pMetaRec, int nHandles, LPARAM lParam)
    {
       ::draw2d::graphics_pointer & pgraphics = (::draw2d::graphics *)lParam;
-      ASSERT_VALID(pgraphics);
+      ASSERT_OK(pgraphics);
 
       switch (pMetaRec->rdFunction)
       {

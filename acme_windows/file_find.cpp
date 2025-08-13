@@ -164,7 +164,7 @@ namespace acme_windows
 
       ASSERT(m_hContext != nullptr);
       ASSERT(pTimeStamp != nullptr);
-      ASSERT_VALID(this);
+      ASSERT_OK(this);
 
       if (m_pFoundInfo != nullptr && pTimeStamp != nullptr)
       {
@@ -181,7 +181,7 @@ namespace acme_windows
 
       ASSERT(m_hContext != nullptr);
       ASSERT(pTimeStamp != nullptr);
-      ASSERT_VALID(this);
+      ASSERT_OK(this);
 
       if (m_pFoundInfo != nullptr && pTimeStamp != nullptr)
       {
@@ -198,7 +198,7 @@ namespace acme_windows
    {
 
       ASSERT(m_hContext != nullptr);
-      ASSERT_VALID(this);
+      ASSERT_OK(this);
 
       if (m_pFoundInfo != nullptr && pTimeStamp != nullptr)
       {
@@ -215,7 +215,7 @@ namespace acme_windows
    {
 
       ASSERT(m_hContext != nullptr);
-      ASSERT_VALID(this);
+      ASSERT_OK(this);
 
       if (m_pFoundInfo != nullptr)
       {
@@ -235,7 +235,7 @@ namespace acme_windows
    {
 
       ASSERT(m_hContext != nullptr);
-      ASSERT_VALID(this);
+      ASSERT_OK(this);
 
       if (::is_null(m_pFoundInfo))
       {
@@ -255,7 +255,7 @@ namespace acme_windows
    {
 
       ASSERT(m_hContext != nullptr);
-      ASSERT_VALID(this);
+      ASSERT_OK(this);
 
       if (::is_null(m_pFoundInfo))
       {
@@ -275,7 +275,7 @@ namespace acme_windows
    {
 
       ASSERT(m_hContext != nullptr);
-      ASSERT_VALID(this);
+      ASSERT_OK(this);
 
       // return true if the file name is "." or ".." and
       // the file is a directory
@@ -323,7 +323,7 @@ namespace acme_windows
 
       }
 
-      //ASSERT_VALID(this);
+      //ASSERT_OK(this);
 
       WIN32_FIND_DATAW * pTemp = m_pFoundInfo;
 
@@ -340,7 +340,7 @@ namespace acme_windows
    {
 
       ASSERT(m_hContext != nullptr);
-      ASSERT_VALID(this);
+      ASSERT_OK(this);
 
       string strResult(L"file://");
 
@@ -356,7 +356,7 @@ namespace acme_windows
 
       ASSERT(m_hContext != nullptr);
 
-      ASSERT_VALID(this);
+      ASSERT_OK(this);
 
       return m_strRoot;
 
@@ -367,7 +367,7 @@ namespace acme_windows
    {
 
       ASSERT(m_hContext != nullptr);
-      ASSERT_VALID(this);
+      ASSERT_OK(this);
 
       string strResult = GetRoot();
 
@@ -386,7 +386,7 @@ namespace acme_windows
    {
 
       ASSERT(m_hContext != nullptr);
-      ASSERT_VALID(this);
+      ASSERT_OK(this);
 
       string strFullName = GetFileName();
 
@@ -404,7 +404,7 @@ namespace acme_windows
    {
 
       //ASSERT(m_hContext != nullptr);
-      //ASSERT_VALID(this);
+      //ASSERT_OK(this);
 
       if (m_pFoundInfo == nullptr)
       {

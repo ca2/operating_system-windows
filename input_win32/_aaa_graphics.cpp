@@ -3339,7 +3339,7 @@ namespace draw2d_gdiplus
          int cxPerInch, cyPerInch;
          if (this != nullptr)
          {
-            ASSERT_VALID(this);
+            ASSERT_OK(this);
             
             cxPerInch = GetDeviceCaps(LOGPIXELSX);
             cyPerInch = GetDeviceCaps(LOGPIXELSY);
@@ -3378,7 +3378,7 @@ namespace draw2d_gdiplus
          int cxPerInch, cyPerInch;
          if (this != nullptr)
          {
-            ASSERT_VALID(this);
+            ASSERT_OK(this);
             
             cxPerInch = GetDeviceCaps(LOGPIXELSX);
             cyPerInch = GetDeviceCaps(LOGPIXELSY);
@@ -5164,7 +5164,7 @@ namespace draw2d_gdiplus
    {
       graphics * pgraphics = (graphics *)lParam;
 
-      ASSERT_VALID(pgraphics);
+      ASSERT_OK(pgraphics);
 
       return pgraphics->meta_file_procedure(hDC, pHandleTable, pMetaRec, nHandles);
 

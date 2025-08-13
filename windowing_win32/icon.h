@@ -4,8 +4,8 @@
 
 
 #include "acme/filesystem/filesystem/path.h"
-#include "acme/prototype/collection/map_base.h"
-#include "aura/graphics/image/map_base.h"
+#include "acme/prototype/collection/map.h"
+#include "aura/graphics/image/map.h"
 #include "aura/windowing/icon.h"
 
 

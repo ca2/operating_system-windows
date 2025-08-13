@@ -84,7 +84,7 @@ namespace draw2d_gdi
 
    void brush::construct(::draw2d::bitmap* pBitmap)
    {
-//      ASSERT_VALID(pBitmap);
+//      ASSERT_OK(pBitmap);
 
       if (!Attach(::CreatePatternBrush((HBITMAP)pBitmap->get_os_data())))
          throw resource_exception();
