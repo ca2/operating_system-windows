@@ -2370,8 +2370,8 @@ namespace apex_windows
          // Obtain the SID of the specified account on the specified system.
          //
          while (!LookupAccountName(
-            SystemName,         // machine to lookup account on
-            AccountName,        // account to lookup
+            SystemName,         // machine to find account on
+            AccountName,        // account to find
             *Sid,               // SID of interest
             &cbSid,             // int_size of SID
             ReferencedDomain,   // domain account was found on

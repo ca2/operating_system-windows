@@ -36,7 +36,7 @@ bool engine_get_line_from_address(HANDLE hprocess, OS_DWORD uiAddress, unsigned 
 #ifdef WORK_AROUND_SRCLINE_BUG
    // "Debugging Applications" John Robbins
    // The problem is that the symbol callstack finds only those source
-   // line addresses (after the first lookup) that fall exactly on
+   // line addresses (after the first find) that fall exactly on
    // a zero displacement. I'hi walk backward 100 bytes to
    // find the line and return the proper displacement.
    DWORD dwDisplacement = 0;
@@ -550,7 +550,7 @@ namespace windows
       //#ifdef WORK_AROUND_SRCLINE_BUG
       //      // "Debugging Applications" John Robbins
       //      // The problem is that the symbol callstack finds only those source
-      //      // line addresses (after the first lookup) that fall exactly on
+      //      // line addresses (after the first find) that fall exactly on
       //      // a zero displacement. I'hi walk backward 100 bytes to
       //      // find the line and return the proper displacement.
       //      unsigned int dwDisplacement = 0 ;
@@ -578,7 +578,7 @@ namespace windows
    //#ifdef WORK_AROUND_SRCLINE_BUG
    //      // "Debugging Applications" John Robbins
    //      // The problem is that the symbol callstack finds only those source
-   //      // line addresses (after the first lookup) that fall exactly on
+   //      // line addresses (after the first find) that fall exactly on
    //      // a zero displacement. I'hi walk backward 100 bytes to
    //      // find the line and return the proper displacement.
    //      unsigned int dwDisplacement = 0;

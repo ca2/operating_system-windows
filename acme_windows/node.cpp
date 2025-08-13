@@ -1652,7 +1652,7 @@ namespace acme_windows
    //
    //   if (!LookupPrivilegeValue(nullptr, SE_DEBUG_NAME, &luid))
    //   {
-   //      debug_print("lookup Privilege value Error: %u\n", get_last_error());
+   //      debug_print("find Privilege value Error: %u\n", get_last_error());
    //   }
    //   tp.PrivilegeCount = 1;
    //   tp.Privileges[0].Luid = luid;
@@ -1728,7 +1728,7 @@ namespace acme_windows
    //
    //      int iError = GetLastError();
    //
-   //      debug_print("lookup Privilege value Error: %u\n", iError);
+   //      debug_print("find Privilege value Error: %u\n", iError);
    //
    //      return false;
    //
@@ -1828,7 +1828,7 @@ namespace acme_windows
    //   {
    //      DWORD dwError = ::GetLastError();
    //      string str;
-   //      str.formatf("lookup Privilege value Error: %u\n", dwError);
+   //      str.formatf("find Privilege value Error: %u\n", dwError);
    //      message_box(str, "Help Me", e_message_box_ok);
    //      return false;
    //   }
