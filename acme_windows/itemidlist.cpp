@@ -1089,7 +1089,7 @@ HRESULT itemidlist::_parse(itemidlist & idl, const ::scoped_string & scopedstrPa
 
    }
 
-   wstring wstrPath(scopedstrPath);
+   ::file::path path(scopedstrPath);
 
    comptr < IShellFolder > pshellfolderDesktop;
 
@@ -1101,6 +1101,8 @@ HRESULT itemidlist::_parse(itemidlist & idl, const ::scoped_string & scopedstrPa
    }
 
    ULONG chEaten = 0;
+
+   auto wstrPath = path.windows_path();
 
    hr = pshellfolderDesktop->ParseDisplayName(nullptr, nullptr, (WCHAR *) wstrPath.c_str(), &chEaten, &idl.m_pidl, nullptr);
 
