@@ -2448,7 +2448,7 @@ namespace draw2d_gdi
 
    //   m_spgraphics->SetViewportOrg(0, 0);
 
-   //   map_base();
+   //   map();
 
 
    //   BYTE *dst=(BYTE*)get_data();

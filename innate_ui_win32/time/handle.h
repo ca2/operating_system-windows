@@ -356,7 +356,7 @@ void handle_map < HT, CT > ::erase_handle(HANDLE h)
       ASSERT(ph[0] == h);
       // permanent matter may have secondary handles that are different
    }
-   // erase only from permanent map_base -- temporary objects are erased
+   // erase only from permanent map -- temporary objects are erased
    //  at idle in CHandleMap::delete_temp, always!
    m_permanentMap.erase_key((LPVOID)h);
 }
@@ -408,7 +408,7 @@ inline void handle_map < HT, CT >::set_permanent(HANDLE h, CT * permOb)
 template < class HT, class CT >
 inline void handle_map < HT, CT >::erase_handle(HANDLE h)
 {
-   // erase only from permanent map_base -- temporary objects are erased
+   // erase only from permanent map -- temporary objects are erased
    //  at idle in CHandleMap::delete_temp, always!
    m_permanentMap.erase_key((HANDLE)h);
 }

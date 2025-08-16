@@ -309,7 +309,7 @@ namespace windowing_win32
       unsigned char * p = (unsigned char *) ::GlobalLock(hglb);
 
 
-      pimage->map_base();
+      pimage->map();
 
       ::memory_copy(p, &bi, sizeof(bi));
 
@@ -660,7 +660,7 @@ namespace windowing_win32
                bi.bmiHeader.biClrUsed = 0;
                bi.bmiHeader.biClrImportant = 0;
 
-               pimage->map_base();
+               pimage->map();
 
                bOk = GetDIBits(hdcMem, hbitmap, 0, bm.bmHeight, pimage->data(), &bi, DIB_RGB_COLORS) != false;
 

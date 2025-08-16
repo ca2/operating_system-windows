@@ -906,7 +906,7 @@ namespace windowing_win32
          //bool bAllZeroAlpha = true;
          //bool bTheresUint32 = false;
 
-         //pixmap.map_base();
+         //pixmap.map();
 
          //int area = size.area();
 
@@ -948,7 +948,7 @@ namespace windowing_win32
 
             pimage->create(size);
 
-            pimage->map_base();
+            pimage->map();
 
             ::copy_image32(pimage, pixmap);
 

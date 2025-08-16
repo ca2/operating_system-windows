@@ -7624,7 +7624,7 @@ namespace windowing_win32
    }
 
 
-   void window::non_top_most_upper_window_rects(::int_rectangle_array &recta)
+   void window::non_top_most_upper_window_rects(::int_rectangle_array_base &recta)
    {
 
       /// from top to bottom

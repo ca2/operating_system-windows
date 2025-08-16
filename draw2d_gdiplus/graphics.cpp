@@ -2326,7 +2326,7 @@ namespace draw2d_gdiplus
       if (m_pimage->is_ok())
       {
 
-         m_pimage->map_base();
+         m_pimage->map();
 
          m_pimage->image32()[(int)point.x() + (int)point.y() * m_pimage->scan_size()].assign(color, m_pimage->color_indexes());
 
@@ -2349,7 +2349,7 @@ namespace draw2d_gdiplus
       if (m_pimage->is_ok())
       {
 
-         m_pimage->map_base();
+         m_pimage->map();
 
          ::color::color color = m_pimage->image32()[(int)point.x() + (int)point.y() * m_pimage->scan_size()].color(m_pimage->color_indexes());
 
