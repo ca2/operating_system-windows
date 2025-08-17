@@ -334,7 +334,7 @@ namespace windowing_win32
          if (!pparticleData)
          {
 
-            pparticleData = __create_new < layered_window_buffer >();
+            pparticleData = øcreate_new < layered_window_buffer >();
 
          }
 
@@ -491,7 +491,7 @@ namespace windowing_win32
          if (!pbufferitem->m_pgraphics)
          {
 
-            __øconstruct(pbufferitem->m_pgraphics);
+            øconstruct(pbufferitem->m_pgraphics);
 
             auto puserinteraction = dynamic_cast < ::user::interaction * >( m_pwindow->m_pacmeuserinteraction.m_p);
 

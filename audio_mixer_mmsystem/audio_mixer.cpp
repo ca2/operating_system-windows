@@ -51,7 +51,7 @@
 
          ::audio_mixer::audio_mixer::initialize(pparticle);
 
-         __construct_new(m_pinteraction);
+         øconstruct_new(m_pinteraction);
 
          m_pinteraction->m_paudiomixer = this;
 

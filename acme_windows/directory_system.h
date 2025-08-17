@@ -119,7 +119,7 @@ namespace acme_windows
       
       //bool create(const_char_pointer path) override;
 
-      //void __øcreate(const_char_pointer path) override;
+      //void øcreate(const_char_pointer path) override;
 
       //bool create_directory(const_char_pointer path) override;
 

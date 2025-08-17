@@ -472,7 +472,7 @@ namespace music
             if (!pmessagein)
             {
 
-               auto pin = __create_new<in>();
+               auto pin = øcreate_new<in>();
 
                pin->m_pmidi = this;
 

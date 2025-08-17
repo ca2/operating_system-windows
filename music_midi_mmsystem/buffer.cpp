@@ -42,7 +42,7 @@ namespace music
             for (int i = 0; i < this->buffer_count(); i++)
             {
 
-               this->buffer_at(i) = __create_new<buffer>();
+               this->buffer_at(i) = øcreate_new<buffer>();
 
                this->buffer_at(i)->Initialize(iSize, this);
 

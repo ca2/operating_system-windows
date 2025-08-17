@@ -290,7 +290,7 @@ namespace acme_windows
    ::pointer < ::file::link > path_system::resolve_lnk_link(const ::file::path & path, ::file::e_link elink)
    {
 
-      auto plink = __create_new < ::acme_windows::file_link >();
+      auto plink = øcreate_new < ::acme_windows::file_link >();
 
       plink->open(path, elink);
 

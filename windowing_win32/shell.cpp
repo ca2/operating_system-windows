@@ -1733,7 +1733,7 @@ namespace windowing_win32
 
       //}
 
-      //estatus = __construct_new(m_pmessagequeue);
+      //estatus = øconstruct_new(m_pmessagequeue);
 
 
       //if (!estatus)
@@ -1860,11 +1860,11 @@ namespace windowing_win32
    void shell::add_icon(int iSize, HICON hicon, _get_file_image_ & getfileimage)
    {
 
-      auto pwindowingicon = __create_new < ::windowing_win32::icon >();
+      auto pwindowingicon = øcreate_new < ::windowing_win32::icon >();
 
       pwindowingicon->add_icon(hicon);
 
-      auto pdrawicon = __øcreate < ::image::icon >();
+      auto pdrawicon = øcreate < ::image::icon >();
      
       pdrawicon->initialize_with_windowing_icon(pwindowingicon);
 

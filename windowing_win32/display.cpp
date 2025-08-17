@@ -44,7 +44,7 @@ namespace windowing_win32
       for (::collection::index iMonitor = 0; iMonitor < m_monitorinfoa.get_count(); iMonitor++)
       {
 
-         auto pmonitor = __create_new < ::windowing_win32::monitor >();
+         auto pmonitor = øcreate_new < ::windowing_win32::monitor >();
 
          pmonitor->m_pdisplay = this;
 

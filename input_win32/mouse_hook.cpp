@@ -193,7 +193,7 @@ namespace input_win32
    void mouse_hook::mouse_proc(enum_message emessage)
    {
 
-      auto pmouse = __create_new < ::message::mouse >();
+      auto pmouse = øcreate_new < ::message::mouse >();
 
       pmouse->m_emessage = emessage;
 

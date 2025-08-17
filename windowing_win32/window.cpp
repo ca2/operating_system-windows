@@ -2981,7 +2981,7 @@ namespace windowing_win32
          if (GetWindowRect(hwnd, &r))
          {
 
-            auto ptaskbar = __create_new<task_bar>();
+            auto ptaskbar = øcreate_new<task_bar>();
 
             ptaskbar->m_hwnd = hwnd;
 
@@ -4899,7 +4899,7 @@ namespace windowing_win32
 
       ASSERT(::IsWindow(get_hwnd()));
 
-      auto pgraphics = __øcreate<::draw2d::graphics>();
+      auto pgraphics = øcreate<::draw2d::graphics>();
 
       throw ::exception(todo);
 
@@ -8334,7 +8334,7 @@ namespace windowing_win32
 
             GetWindowRect(m_hwnd, &r);
 
-            auto pmouse = __create_new<::message::mouse>();
+            auto pmouse = øcreate_new<::message::mouse>();
 
             pmouse->m_pointAbsolute.x() = r.left;
             pmouse->m_pointAbsolute.y() = r.top;

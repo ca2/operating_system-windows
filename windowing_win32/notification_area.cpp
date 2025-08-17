@@ -180,7 +180,7 @@ namespace windowing_win32
 
             ::pointer<::image::icon>picon;
 
-            __øconstruct(picon);
+            øconstruct(picon);
 
             picon->initialize_with_windowing_icon(pwindowingicon);
 

@@ -816,7 +816,7 @@ namespace windowing_win32
 
       auto hicon = (HICON) get_os_data(size);
 
-      auto picon = __create_new < ::innate_ui_win32::icon>();
+      auto picon = øcreate_new < ::innate_ui_win32::icon>();
 
       picon->m_hicon = hicon;
 
@@ -872,7 +872,7 @@ namespace windowing_win32
 
       ::image::image_pointer pimage;
 
-      __øconstruct(pimage);
+      øconstruct(pimage);
 
       bool bOk = false;
 

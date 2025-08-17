@@ -273,7 +273,7 @@ namespace win32
 
                //nano()->graphics();
 
-               __øconstruct(m_pnanodevice);
+               øconstruct(m_pnanodevice);
 
                m_pnanodevice->attach(hdc, { ::width(r), ::height(r) });
 
@@ -789,7 +789,7 @@ namespace win32
             case WM_LBUTTONDOWN:
             {
 
-               auto pmouse = __create_new < ::user::mouse >();
+               auto pmouse = øcreate_new < ::user::mouse >();
 
                pmouse->m_pointHost = lparam;
 
@@ -862,7 +862,7 @@ namespace win32
 
                }
 
-               auto pmouse = __create_new < ::user::mouse >();
+               auto pmouse = øcreate_new < ::user::mouse >();
 
                pmouse->m_pointHost = lparam;
 
@@ -898,7 +898,7 @@ namespace win32
             case WM_LBUTTONUP:
             {
 
-               auto pmouse = __create_new < ::user::mouse >();
+               auto pmouse = øcreate_new < ::user::mouse >();
 
                pmouse->m_pointHost = lparam;
 
@@ -932,7 +932,7 @@ namespace win32
             case WM_RBUTTONDOWN:
             {
 
-               auto pmouse = __create_new < ::user::mouse >();
+               auto pmouse = øcreate_new < ::user::mouse >();
 
                pmouse->m_pointHost = lparam;
 
@@ -966,7 +966,7 @@ namespace win32
             case WM_RBUTTONUP:
             {
 
-               auto pmouse = __create_new < ::user::mouse >();
+               auto pmouse = øcreate_new < ::user::mouse >();
 
                pmouse->m_pointHost = lparam;
 

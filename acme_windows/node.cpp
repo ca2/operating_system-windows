@@ -2305,7 +2305,7 @@ namespace acme_windows
 
       bool bSetOk = false;
 
-      auto psecurityattributes = __create_new<::acme_windows_common::security_attributes>();
+      auto psecurityattributes = øcreate_new<::acme_windows_common::security_attributes>();
 
       psecurityattributes->m_memory.set_size(sizeof(SECURITY_ATTRIBUTES) + sizeof(SECURITY_DESCRIPTOR));
 
@@ -3140,7 +3140,7 @@ namespace acme_windows
    int node::command_system(const ::scoped_string& scopedstr, const ::trace_function& tracefunction, const ::file::path& pathWorkingDirectory, ::e_display edisplay)
    {
 
-      auto pcreateprocess = __create_new < ::acme_windows::create_process>();
+      auto pcreateprocess = øcreate_new < ::acme_windows::create_process>();
 
       pcreateprocess->m_pathWorkingDirectory = pathWorkingDirectory;
 
@@ -3240,7 +3240,7 @@ namespace acme_windows
    void node::launch_command_system(const ::scoped_string& scopedstr, const ::file::path& pathWorkingDirectory, ::e_display edisplay)
    {
 
-      auto pcreateprocess = __create_new < ::acme_windows::create_process>();
+      auto pcreateprocess = øcreate_new < ::acme_windows::create_process>();
 
 
       pcreateprocess->m_pathWorkingDirectory = pathWorkingDirectory;
@@ -4633,7 +4633,7 @@ namespace acme_windows
       if (!m_poperatingsystemsummary)
       {
 
-         auto psummary = __create_new < ::operating_system::summary >();
+         auto psummary = øcreate_new < ::operating_system::summary >();
 
          m_poperatingsystemsummary = psummary;
 
@@ -4662,7 +4662,7 @@ namespace acme_windows
    ::pointer < ::operating_system::application > node::module_path_application(const ::scoped_string& scopedstr)
    {
 
-      auto papplication = __øcreate < ::operating_system::application >();
+      auto papplication = øcreate < ::operating_system::application >();
 
       papplication->open_by_module_path(scopedstr);
 
@@ -4902,7 +4902,7 @@ namespace acme_windows
 
          }
 
-         auto plink = __create_new<::acme_windows::file_link>();
+         auto plink = øcreate_new<::acme_windows::file_link>();
 
          plink->open(pathVsLnk, ::file::e_link_target);
 

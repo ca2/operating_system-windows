@@ -999,7 +999,7 @@ namespace acme_windows
    void create_process::wait_process(const trace_function& tracefunction)
    {
 
-      //auto phappeningEndOut = __create_new < manual_reset_happening >();
+      //auto phappeningEndOut = øcreate_new < manual_reset_happening >();
 
       //application()->fork([this, tracefunction, phappeningEndOut]()
 

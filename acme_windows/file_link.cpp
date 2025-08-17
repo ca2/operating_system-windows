@@ -38,7 +38,7 @@ namespace acme_windows
    ::pointer < ::file::link > file_link::create_clean_new() const
    {
 
-      return ((::acme_windows::file_link *)this)->__create_new < ::acme_windows::file_link >();
+      return ((::acme_windows::file_link *)this)->øcreate_new < ::acme_windows::file_link >();
 
    }
 

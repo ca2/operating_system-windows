@@ -44,7 +44,7 @@ namespace music
 
             initialize(psequence);
 
-            __construct_new(m_pbuffera);
+            øconstruct_new(m_pbuffera);
 
             m_pbuffera->m_psequencer = this;
 
