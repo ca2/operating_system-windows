@@ -152,7 +152,7 @@ RepeatingCallback<void(Args...)> AdaptCallbackForRepeating(
     OnceCallback<void(Args...)> callback) {
   using Helper = internal::OnceCallbackHolder<Args...>;
   return base::BindRepeating(
-      &Helper::Run, std::make_unique<Helper>(std::move(callback),
+      &Helper::Run, øcreate_pointer<Helper>(std::move(callback),
                                              /*ignore_extra_runs=*/true));
 }
 
@@ -166,7 +166,7 @@ std::pair<OnceCallback<void(Args...)>, OnceCallback<void(Args...)>>
 SplitOnceCallback(OnceCallback<void(Args...)> callback) {
   using Helper = internal::OnceCallbackHolder<Args...>;
   auto wrapped_once = base::BindRepeating(
-      &Helper::Run, std::make_unique<Helper>(std::move(callback),
+      &Helper::Run, øcreate_pointer<Helper>(std::move(callback),
                                              /*ignore_extra_runs=*/false));
   return std::make_pair(wrapped_once, wrapped_once);
 }

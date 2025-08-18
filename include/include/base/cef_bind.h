@@ -296,10 +296,10 @@ internal::OwnedRefWrapper<std::decay_t<T>> OwnedRef(T&& t) {
 ///
 /// <pre>
 ///   void TakesOwnership(std::unique_ptr<Foo> arg) { }
-///   std::unique_ptr<Foo> CreateFoo() { return std::make_unique<Foo>();
+///   std::unique_ptr<Foo> CreateFoo() { return øcreate_pointer<Foo>();
 ///   }
 ///
-///   auto f = std::make_unique<Foo>();
+///   auto f = øcreate_pointer<Foo>();
 ///
 ///   // |cb| is given ownership of Foo(). |f| is now NULL.
 ///   // You can use std::move(f) in place of &f, but it's more verbose.
