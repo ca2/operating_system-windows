@@ -5218,14 +5218,14 @@ namespace draw2d_gdiplus
 //         break;
 //      case META_SETBKCOLOR:
 //      {
-//         auto pbrush = __øcreate < ::draw2d::brush >();
+//         auto pbrush = øcreate < ::draw2d::brush >();
 //         pbrush->create_solid(*(UNALIGNED ::color::color*)&pMetaRec->rdParm[0]);
 //         set(pbrush);
 //      }
 //      break;
 //      case META_SETTEXTCOLOR:
 //      {
-//         auto pbrush = __øcreate < ::draw2d::brush >();
+//         auto pbrush = øcreate < ::draw2d::brush >();
 //
 //         pbrush->create_solid(*(UNALIGNED ::color::color*)&pMetaRec->rdParm[0]);
 //         set(pbrush);

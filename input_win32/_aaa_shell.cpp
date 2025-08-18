@@ -1837,7 +1837,7 @@ namespace windowing_win32
 
       pwindowingicon->add_icon(hicon);
 
-      auto pdrawicon = __øcreate < ::image::icon >();
+      auto pdrawicon = øcreate < ::image::icon >();
      
       pdrawicon->initialize_with_windowing_icon(pwindowingicon);
 
