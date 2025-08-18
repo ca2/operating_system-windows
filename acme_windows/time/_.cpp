@@ -649,7 +649,7 @@ namespace windows
 
 //    wstring wstrTitle(strTitle);
 
-//    auto pmessagebox = __allocate windows::message_box();
+//    auto pmessagebox = øallocate windows::message_box();
 
 //    auto pfuture = pmessagebox->::extended::asynchronous <::conversation>::future();
 

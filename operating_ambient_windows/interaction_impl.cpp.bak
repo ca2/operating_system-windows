@@ -501,9 +501,9 @@ namespace windows
       if (wstrClassName.get_length() > 0 && GetClassInfoW(System.m_hinstance, wstrClassName, &wndcls) && wndcls.hIcon != nullptr)
       {
 
-         Application.set_icon(m_puserinteraction, __allocate(::draw2d::icon(get_app(), wndcls.hIcon)), false);
+         Application.set_icon(m_puserinteraction, øallocate(::draw2d::icon(get_app(), wndcls.hIcon)), false);
 
-         Application.set_icon(m_puserinteraction, __allocate(::draw2d::icon(get_app(), wndcls.hIcon)), true);
+         Application.set_icon(m_puserinteraction, øallocate(::draw2d::icon(get_app(), wndcls.hIcon)), true);
 
       }
 

@@ -123,7 +123,7 @@ namespace typeface_gdiplus
          //return ch;
          m_pfamily = new FontFamily(::wstring(m_strFontName));
          //FontFamily* m_pfamily(L"Segoe UI");
-         m_pfont = new Font(m_pfamily, m_iPixelSize, FontStyleRegular, UnitPixel);
+         m_pfont = new Font(m_pfamily, (Gdiplus::REAL) m_iPixelSize, FontStyleRegular, UnitPixel);
 
          //create_draw_buffers();
 

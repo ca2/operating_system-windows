@@ -485,7 +485,7 @@ namespace windowing_win32
       //if (!puserinteraction->m_pusersystem)
       //{
 
-      //   puserinteraction->m_pusersystem = __allocate ::user::system();
+      //   puserinteraction->m_pusersystem = øallocate ::user::system();
 
       //}
 
@@ -494,7 +494,7 @@ namespace windowing_win32
       if (user_interaction()->is_system_message_window())
       {
 
-         pusersystem = __allocate::user::system();
+         pusersystem = øallocate::user::system();
 
       }
       else
@@ -509,7 +509,7 @@ namespace windowing_win32
          else
          {
 
-            pusersystem = __allocate ::user::system();
+            pusersystem = øallocate ::user::system();
 
          }
 
@@ -8557,7 +8557,7 @@ namespace windowing_win32
                {
 
                   pmessage->m_actioncontext.m_puseractivationtoken =
-                     __allocate::win32::acme::windowing::activation_token(::get_task());
+                     øallocate::win32::acme::windowing::activation_token(::get_task());
 
                }
 
@@ -8600,7 +8600,7 @@ namespace windowing_win32
 
                str.formatf("Exception while handling message %d", message);
 
-               m_exceptiona.add(__allocate::exception(error_catch_all_exception, str));
+               m_exceptiona.add(øallocate::exception(error_catch_all_exception, str));
 
                if (message == WM_CREATE)
                {

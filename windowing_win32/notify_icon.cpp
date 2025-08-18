@@ -366,7 +366,7 @@ namespace windowing_win32
       if (!pmessage->m_actioncontext.m_puseractivationtoken)
       {
 
-         pmessage->m_actioncontext.m_puseractivationtoken = __allocate::win32::acme::windowing::activation_token(::get_task());
+         pmessage->m_actioncontext.m_puseractivationtoken = øallocate::win32::acme::windowing::activation_token(::get_task());
 
       }
 

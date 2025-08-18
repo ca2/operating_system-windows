@@ -238,7 +238,7 @@ namespace input_win32
    //      if (!pwindow)
    //      {
    //
-   //         pwindow = __allocate ::windowing_win32::window();
+   //         pwindow = øallocate ::windowing_win32::window();
    //
    //      }
    //
@@ -584,7 +584,7 @@ namespace input_win32
    //
    //   //   //}
    //
-   //   //   auto pusermessage = __allocate ::user::message();
+   //   //   auto pusermessage = øallocate ::user::message();
    //
    //   //   if (!pusermessage)
    //   //   {
