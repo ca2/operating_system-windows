@@ -855,7 +855,7 @@ namespace windowing_win32
 
       ::pointer<::image>pimage;
 
-      ::__øconstruct(this, pimage);
+      ::øconstruct(this, pimage);
 
       bool bOk = false;
 

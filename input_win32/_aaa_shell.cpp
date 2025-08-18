@@ -1702,7 +1702,7 @@ namespace windowing_win32
 
       //}
 
-      //estatus = __construct_new(m_pmessagequeue);
+      //estatus = øconstruct_new(m_pmessagequeue);
 
 
       //if (!estatus)
@@ -1833,7 +1833,7 @@ namespace windowing_win32
 
       synchronous_lock slHover(m_pimagelistHover[iSize]->synchronization());
 
-      auto pwindowingicon = __create_new < ::windowing_win32::icon >();
+      auto pwindowingicon = øcreate_new < ::windowing_win32::icon >();
 
       pwindowingicon->add_icon(hicon);
 

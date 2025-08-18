@@ -7259,7 +7259,7 @@ namespace draw2d_gdiplus
 
    //            ::image::image_pointer pimage1;
    //            
-   //            auto estatus = __øconstruct(pimage1);
+   //            auto estatus = øconstruct(pimage1);
 
    //            if (!estatus)
    //            {
