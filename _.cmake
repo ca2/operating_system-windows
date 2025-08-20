@@ -55,9 +55,13 @@ list(APPEND app_common_dependencies
    node_windows
    windowing_win32
    operating_ambient_windows
-        draw2d_cairo
 )
 
+if(${INCLUDE_DRAW2D_CAIRO})
+   list(APPEND app_common_dependencies
+           draw2d_cairo
+   )
+endif()
 
 #set(LIBRARY_OUTPUT_PATH ${CMAKE_CURRENT_SOURCE_DIR}/time-${OPERATING_SYSTEM_NAME}/x64/basis)
 set(LIBRARY_OUTPUT_PATH ${CMAKE_BINARY_DIR}/library)
