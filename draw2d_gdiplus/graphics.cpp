@@ -4972,7 +4972,7 @@ namespace draw2d_gdiplus
    //}
 
 
-   //void graphics::_add_clipping_shape(const ::double_polygon & polygon, ::draw2d::region * pregion)
+   //void graphics::_add_clipping_shape(const ::double_polygon_base & polygon, ::draw2d::region * pregion)
    //{
 
    //   //if (!shaperegion.holdee() || shaperegion.holdee()->m_pointOffset != m_pointAddShapeTranslate)
@@ -5065,7 +5065,7 @@ namespace draw2d_gdiplus
    }
 
 
-   void graphics::_add_shape(Gdiplus::GraphicsPath * ppath, const ::double_polygon & polygon)
+   void graphics::_add_shape(Gdiplus::GraphicsPath * ppath, const ::double_polygon_base & polygon)
    {
 
       ::array<Gdiplus::PointF>pointa;
@@ -5179,7 +5179,7 @@ namespace draw2d_gdiplus
    }
 
 
-   void graphics::intersect_clip(const ::double_polygon & polygon)
+   void graphics::intersect_clip(const ::double_polygon_base & polygon)
    {
 
       auto_pointer < Gdiplus::GraphicsPath > ppath(create_new_t{});
@@ -5215,7 +5215,7 @@ namespace draw2d_gdiplus
    }
 
 
-   void graphics::_add_shape(const ::double_polygon & polygon)
+   void graphics::_add_shape(const ::double_polygon_base & polygon)
    {
 
       throw ::exception(error_not_supported);

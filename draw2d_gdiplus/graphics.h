@@ -210,7 +210,7 @@ namespace draw2d_gdiplus
       void _intersect_clip() override;
       void _add_shape(const ::double_rectangle & rectangle) override;
       void _add_shape(const ::double_ellipse & ellipse) override;
-      void _add_shape(const ::double_polygon & polygon) override;
+      void _add_shape(const ::double_polygon_base & polygon) override;
 
 
       virtual void intersect_clip(const ::draw2d::clip_group & clipgroup);
@@ -221,12 +221,12 @@ namespace draw2d_gdiplus
       virtual void _add_clip_item(Gdiplus::GraphicsPath * ppath, ::draw2d::clip_item * pclipitem);
       virtual void _add_shape(Gdiplus::GraphicsPath * ppath, const ::double_rectangle & rectangle);
       virtual void _add_shape(Gdiplus::GraphicsPath * ppath, const ::double_ellipse & ellipse);
-      virtual void _add_shape(Gdiplus::GraphicsPath * ppath, const ::double_polygon & polygon);
+      virtual void _add_shape(Gdiplus::GraphicsPath * ppath, const ::double_polygon_base & polygon);
 
 
       void intersect_clip(const ::double_rectangle & rectangle) override;
       void intersect_clip(const ::double_ellipse & rectangle) override;
-      void intersect_clip(const ::double_polygon & rectangle) override;
+      void intersect_clip(const ::double_polygon_base & rectangle) override;
 
       virtual void set_clipping(::draw2d::region* pregion);
 
