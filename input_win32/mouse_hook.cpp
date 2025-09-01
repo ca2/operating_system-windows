@@ -1,7 +1,7 @@
 // Moved from app_core_auraclick by camilo 2021-09-12 15:52 BRT <3ThomasBS_!!
 #include "framework.h"
 #include "mouse_hook.h"
-#include "acme/constant/message.h"
+#include "acme/constant/user_message.h"
 #include "acme/exception/exception.h"
 #include "acme/parallelization/task.h"
 #include "acme/platform/scoped_restore.h"

@@ -4,7 +4,7 @@
 #include "master_device_listener.h"
 #include "windowing.h"
 #include "system_interaction.h"
-#include "acme/constant/message.h"
+#include "acme/constant/user_message.h"
 #include "acme/exception/exception.h"
 #include "acme/platform/system.h"
 #include "aura/hardware/device_group.h"

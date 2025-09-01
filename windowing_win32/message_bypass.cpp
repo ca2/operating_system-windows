@@ -1,5 +1,5 @@
 #include "framework.h"
-#include "acme/constant/message.h"
+#include "acme/constant/user_message.h"
 #include "window.h"
 #include "windowing.h"
 
@@ -240,7 +240,7 @@ namespace windowing_win32
 
       string str;
 
-      string strMessageText = ::operating_system::get_message_text((::enum_message)message);
+      string strMessageText = ::operating_system::get_message_text((::user::enum_message)message);
 
       str.formatf("%s %d", strMessageText.c_str(), message, wparam, lparam);
 

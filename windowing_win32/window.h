@@ -384,9 +384,9 @@ namespace windowing_win32
       //
       //#endif   // WINVER >= 0x0500
 
-      lresult send_message(::enum_message emessage, ::wparam wparam = {}, ::lparam lparam = {}) override;
+      lresult send_message(::user::enum_message eusermessage, ::wparam wparam = {}, ::lparam lparam = {}) override;
 
-      void post_message(::enum_message emessage, ::wparam wparam = {}, ::lparam lparam = {}) override;
+      void post_message(::user::enum_message eusermessage, ::wparam wparam = {}, ::lparam lparam = {}) override;
 
 
       //bool SendNotifyMessage(unsigned int message, wparam wParam, lparam lParam);
@@ -881,7 +881,7 @@ namespace windowing_win32
       //virtual void message_handler(::message::message * pusermessage);
 
 
-      //virtual bool OnWndMsg(::enum_message emessage, ::wparam wparam, ::lparam lparam, lresult* pResult);
+      //virtual bool OnWndMsg(::user::enum_message eusermessage, ::wparam wparam, ::lparam lparam, lresult* pResult);
 
       // for handling default processing
       //lresult Default();
@@ -1031,9 +1031,9 @@ namespace windowing_win32
       void defer_show_system_menu(::user::mouse * pmouse) override;
 
 
-      //::pointer<::message::message> get_message(::enum_message emessage, ::wparam wparam, ::lparam lparam);
+      //::pointer<::message::message> get_message(::user::enum_message eusermessage, ::wparam wparam, ::lparam lparam);
 
-      //void default_set(::message::message * pmessage, ::enum_message emessage, ::wparam wparam, ::lparam lparam);
+      //void default_set(::message::message * pmessage, ::user::enum_message eusermessage, ::wparam wparam, ::lparam lparam);
 
       LRESULT window_procedure(unsigned int message, wparam wparam, lparam lparam) override;
 

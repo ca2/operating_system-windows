@@ -13,7 +13,7 @@
 #include "top_level_enum.h"
 #include "win32.h"
 #include "window_util.h"
-#include "acme/constant/message.h"
+#include "acme/constant/user_message.h"
 #include "acme/constant/user_key.h"
 #include "acme/exception/exception.h"
 #include "apex/platform/system.h"
@@ -658,7 +658,7 @@ namespace windowing_win32
    //}
 
 
-   void windowing::set(message::key* pkey, oswindow oswindow, ::windowing::window* pwindow, ::enum_message emessage, ::wparam wparam, ::lparam lparam)
+   void windowing::set(message::key* pkey, oswindow oswindow, ::windowing::window* pwindow, ::user::enum_message eusermessage, ::wparam wparam, ::lparam lparam)
    {
 
       pkey->m_nChar = static_cast<unsigned int>(wparam);
@@ -678,7 +678,7 @@ namespace windowing_win32
    }
 
 
-   void windowing::set(::message::mouse* pmouse, oswindow oswindow, ::windowing::window* pwindow, ::enum_message emessage, ::wparam wparam, ::lparam lparam)
+   void windowing::set(::message::mouse* pmouse, oswindow oswindow, ::windowing::window* pwindow, ::user::enum_message eusermessage, ::wparam wparam, ::lparam lparam)
    {
 
       //pmouse->m_nFlags = wparam;
@@ -1116,14 +1116,14 @@ namespace windowing_win32
    }
 
 
-   //void windowing::set(::message::key * pkey, oswindow oswindow, ::windowing::window * pwindow, ::enum_message emessage, ::wparam wparam, ::lparam lparam)
+   //void windowing::set(::message::key * pkey, oswindow oswindow, ::windowing::window * pwindow, ::user::enum_message eusermessage, ::wparam wparam, ::lparam lparam)
    //{
 
 
    //}
 
 
-   //void windowing::set(::message::mouse * pmouse, oswindow oswindow, ::windowing::window * pwindow, ::enum_message emessage, ::wparam wparam, ::lparam lparam)
+   //void windowing::set(::message::mouse * pmouse, oswindow oswindow, ::windowing::window * pwindow, ::user::enum_message eusermessage, ::wparam wparam, ::lparam lparam)
    //{
 
 

@@ -1,5 +1,5 @@
 #include "framework.h"
-#include "acme/constant/message.h"
+#include "acme/constant/user_message.h"
 #include "acme/constant/message_prototype.h"
 #include "acme/constant/timer.h"
 #include "acme/exception/exception.h"
@@ -225,7 +225,7 @@ namespace windowing_win32
 {
 
 
-   //void window::default_set(::message::message * pmessage, ::enum_message emessage, ::wparam wparam, ::lparam lparam)
+   //void window::default_set(::message::message * pmessage, ::user::enum_message eusermessage, ::wparam wparam, ::lparam lparam)
    //{
    //
    //
@@ -583,7 +583,7 @@ namespace windowing_win32
 }//namespace windowing_win32
 
 
-lresult CALLBACK WndProc(HWND hWnd, ::enum_message emessage, ::wparam wparam, ::lparam lparam);
+lresult CALLBACK WndProc(HWND hWnd, ::user::enum_message eusermessage, ::wparam wparam, ::lparam lparam);
 
 //bool windows_register_class(HINSTANCE hinstance)
 //{

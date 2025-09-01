@@ -10,7 +10,7 @@
 #include "window_util.h"
 #include "acme/constant/activate.h"
 #include "acme/constant/id.h"
-#include "acme/constant/message.h"
+#include "acme/constant/user_message.h"
 #include "acme/constant/timer.h"
 #include "acme/exception/exception.h"
 #include "acme/exception/interface_only.h"
@@ -3433,7 +3433,7 @@ namespace windowing_win32
    //}
 
 
-   lresult window::send_message(::enum_message emessage, ::wparam wparam, ::lparam lparam)
+   lresult window::send_message(::user::enum_message eusermessage, ::wparam wparam, ::lparam lparam)
    {
 
       return ::SendMessage(get_hwnd(), atom.as_emessage(), wParam, lParam);
@@ -3441,7 +3441,7 @@ namespace windowing_win32
    }
 
 
-   bool window::post_message(::enum_message emessage, ::wparam wparam, ::lparam lparam)
+   bool window::post_message(::user::enum_message eusermessage, ::wparam wparam, ::lparam lparam)
    {
 
       HWND hwnd = get_hwnd();

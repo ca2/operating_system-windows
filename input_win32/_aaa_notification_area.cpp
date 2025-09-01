@@ -9,7 +9,7 @@ Contact : nish@voidnish.com
 #undef USUAL_OPERATING_SYSTEM_SUPPRESSIONS
 #include "notification_area.h"
 #include "icon.h"
-#include "acme/constant/message.h"
+#include "acme/constant/user_message.h"
 #include "acme/platform/node.h"
 #include "acme/platform/system.h"
 #include "acme/prototype/string/international.h"

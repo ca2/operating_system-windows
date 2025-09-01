@@ -1,7 +1,7 @@
 #include "framework.h"
 #include "system_interaction.h"
 #include "acme/constant/id.h"
-#include "acme/constant/message.h"
+#include "acme/constant/user_message.h"
 #include "acme/platform/node.h"
 #include "aura/message/user.h"
 #include "aura/platform/system.h"

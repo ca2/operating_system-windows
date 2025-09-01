@@ -7,7 +7,7 @@
 #include "display.h"
 #include "window.h"
 #include "monitor.h"
-#include "acme/constant/message.h"
+#include "acme/constant/user_message.h"
 #include "acme/exception/exception.h"
 #include "acme/parallelization/mutex.h"
 #include "acme/parallelization/task.h"

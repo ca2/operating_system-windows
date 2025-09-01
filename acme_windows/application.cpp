@@ -3,7 +3,7 @@
 #include "framework.h"
 #include "node.h"
 #include "application.h"
-#include "acme/constant/message.h"
+#include "acme/constant/user_message.h"
 #include "acme/parallelization/mutex.h"
 #include "acme/_operating_system.h"
 
