@@ -544,7 +544,7 @@ namespace input_win32
    //   //   //   if (pmsg->message == 126)
    //   //   //   {
    //
-   //   //   //      informationf("e_message_display_change");
+   //   //   //      informationf("::user::e_message_display_change");
    //
    //   //   //   }
    //
@@ -615,7 +615,7 @@ namespace input_win32
    //
    //      pkey->m_iVirtualKey = (int)MapLeftRightKeys(wparam, lparam);
    //
-   //      ::windowing::windowing::set(pkey, oswindow, pwindow, emessage, wparam, lparam);
+   //      ::windowing::windowing::set(pkey, oswindow, pwindow, eusermessage, wparam, lparam);
    //
    //   }
    //
@@ -877,7 +877,7 @@ namespace input_win32
    //   }
    //
    //
-   //   //   enum_dialog_result windowing::message_box(const ::scoped_string & scopedstrMessage, const ::scoped_string & scopedstrTitle, const ::e_message_box & emessagebox)
+   //   //   enum_dialog_result windowing::message_box(const ::scoped_string & scopedstrMessage, const ::scoped_string & scopedstrTitle, const ::user::e_message_box & emessagebox)
    //   //   {
    //   //
    //   //      wstring wstrMessage(pszMessage);
@@ -1523,11 +1523,11 @@ namespace input_win32
    void input::handle_message(::message::message * pmessage)
    {
 
-      if (pmessage->m_emessage == atom::e_type_message)
+      if (pmessage->m_eusermessage == atom::e_type_message)
       {
 
-         if (pmessage->m_emessage >= e_message_mouse_first
-            && pmessage->m_emessage <= e_message_mouse_last)
+         if (pmessage->m_eusermessage >= ::user::e_message_mouse_first
+            && pmessage->m_eusermessage <= ::user::e_message_mouse_last)
          {
 
             for (auto & pparticle : m_particleaMouseHandler)
@@ -1538,8 +1538,8 @@ namespace input_win32
             }
 
          }
-         else if (pmessage->m_emessage >= e_message_key_first
-            && pmessage->m_emessage <= e_message_key_last)
+         else if (pmessage->m_eusermessage >= ::user::e_message_key_first
+            && pmessage->m_eusermessage <= ::user::e_message_key_last)
          {
 
             for (auto & pparticle : m_particleaKeyboardHandler)

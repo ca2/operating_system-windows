@@ -118,9 +118,9 @@ CLASS_DECL_ACME_WINDOWS ATOM MyRegisterClass(HINSTANCE hInstance)
 //
 //  PURPOSE: Processes messages for the main window.
 //
-//  e_message_command  - process the application menu
-//  e_message_paint    - Paint the main window
-//  e_message_destroy  - post a quit message and return
+//  ::user::e_message_command  - process the application menu
+//  ::user::e_message_paint    - Paint the main window
+//  ::user::e_message_destroy  - post a quit message and return
 //
 //
 LRESULT CALLBACK WndProc(HWND hWnd, unsigned int message, WPARAM wParam, LPARAM lParam)
@@ -128,7 +128,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, unsigned int message, WPARAM wParam, LPARAM 
    switch (message)
    {
 
-   //case e_message_paint:
+   //case ::user::e_message_paint:
    //{
    //   PAINTSTRUCT ps;
    //   HDC hdc = BeginPaint(hWnd, &ps);
@@ -136,7 +136,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, unsigned int message, WPARAM wParam, LPARAM 
    //   EndPaint(hWnd, &ps);
    //}
    break;
-   case e_message_destroy:
+   case ::user::e_message_destroy:
       PostQuitMessage(0);
       break;
    default:
@@ -156,7 +156,7 @@ INT_PTR CALLBACK About(HWND hDlg, unsigned int message, WPARAM wParam, LPARAM lP
    case WM_INITDIALOG:
       return (INT_PTR)true;
 
-   case e_message_command:
+   case ::user::e_message_command:
       if (LOWORD(wParam) == e_dialog_result_ok || LOWORD(wParam) == e_dialog_result_cancel)
       {
          EndDialog(hDlg, LOWORD(wParam));

@@ -62,8 +62,8 @@ namespace windowing_win32
 
       ::user::interaction::install_message_routing(pchannel);
 
-      MESSAGE_LINK(e_message_notify_icon, pchannel, this, &notify_icon::on_message_notify_icon);
-      MESSAGE_LINK(e_message_destroy, pchannel, this, &notify_icon::on_message_destroy);
+      USER_MESSAGE_LINK(::user::e_message_notify_icon, pchannel, this, &notify_icon::on_message_notify_icon);
+      USER_MESSAGE_LINK(::user::e_message_destroy, pchannel, this, &notify_icon::on_message_destroy);
 
    }
 
@@ -111,7 +111,7 @@ namespace windowing_win32
       m_nid.uID = as_hash32((const ::string &) atom).m_u;
       m_nid.hIcon = (HICON) picon->get_os_data(::int_size(16, 16));
       m_nid.uFlags = NIF_ICON | NIF_MESSAGE;
-      m_nid.uCallbackMessage = ::e_message_notify_icon;
+      m_nid.uCallbackMessage = ::user::e_message_notify_icon;
 
       m_puserinteractionNotify = puserinteractionNotify;
 
@@ -298,7 +298,7 @@ namespace windowing_win32
 
       enum_message emessage = (enum_message) pmessage->m_lparam.m_lparam;
 
-      if (emessage == e_message_left_button_down)
+      if (emessage == ::user::e_message_left_button_down)
       {
 
          while (m_userinteractionaHidden.get_size() > 0)
@@ -336,19 +336,19 @@ namespace windowing_win32
 
       ::topic_pointer ptopic;
 
-      if (emessage == e_message_right_button_down)
+      if (emessage == ::user::e_message_right_button_down)
       {
 
          ptopic = create_topic(::id_context_menu);
 
       }
-      else if (emessage == e_message_left_button_double_click)
+      else if (emessage == ::user::e_message_left_button_double_click)
       {
 
          ptopic = create_topic(::id_left_button_double_click);
 
       }
-      else if (emessage == e_message_left_button_down)
+      else if (emessage == ::user::e_message_left_button_down)
       {
 
          ptopic = create_topic(::id_left_button_down);

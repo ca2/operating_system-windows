@@ -64,7 +64,7 @@ namespace ca2plugin_container
 
       ::hotplugin::host::install_message_routing(pchannel);
 
-      ////MESSAGE_LINK(WM_TIMER, pchannel, this,&host::on_timer);
+      ////USER_MESSAGE_LINK(WM_TIMER, pchannel, this,&host::on_timer);
 
    }
 
@@ -151,7 +151,7 @@ namespace ca2plugin_container
    void host::post_message(unsigned int emessage, wparam wparam, lparam lparam)
    {
 
-      ::PostMessage(m_oswindow, emessage, wparam, lparam);
+      ::PostMessage(m_oswindow, eusermessage, wparam, lparam);
 
    }
 
@@ -499,7 +499,7 @@ namespace ca2plugin_container
 
             MSG * pmsg = (MSG *) pdata;
 
-            if(pmsg->message == e_message_activate)
+            if(pmsg->message == ::user::e_message_activate)
             {
 
                if(LOWORD(pmsg->wParam) == WA_ACTIVE)
@@ -518,7 +518,7 @@ namespace ca2plugin_container
                return;
 
             }
-            else if(pmsg->message == e_message_set_focus)
+            else if(pmsg->message == ::user::e_message_set_focus)
             {
 
                psession->set_keyboard_focus(this);
@@ -526,7 +526,7 @@ namespace ca2plugin_container
                return;
 
             }
-            else if(pmsg->message == e_message_kill_focus)
+            else if(pmsg->message == ::user::e_message_kill_focus)
             {
 
                psession->set_keyboard_focus(nullptr);
@@ -534,7 +534,7 @@ namespace ca2plugin_container
                return;
 
             }
-            else if(pmsg->message == e_message_close)
+            else if(pmsg->message == ::user::e_message_close)
             {
 
                m_pcontainerapp->set_finish();

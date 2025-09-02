@@ -42,7 +42,7 @@
          int iControlCount = m_mixerline.cControls;
          if (0 == iControlCount)
          {
-            //        message_box(nullptr, MB_OK | e_message_box_icon_exclamation,
+            //        message_box(nullptr, MB_OK | ::user::e_message_box_icon_exclamation,
             //"There are no controls associated with the selected line.");
             //        EndDialog(oswindow, false);
             //return ::success;
@@ -87,7 +87,7 @@
             //                  m_mixerline.dwLineID, device->m_hMixer, mmrc);
 
 
-            ////message_box(strMessage, nullptr, e_message_box_icon_exclamation);
+            ////message_box(strMessage, nullptr, ::user::e_message_box_icon_exclamation);
 
             throw ::exception(estatus);
 
@@ -261,7 +261,7 @@
 
             //strMessage.formatf("mixerGetLineInfo(src=%u) failed on hmx=%.04Xh, mmr=%u!",
             //                  dwSource, device->m_hMixer, mmrc);
-            ////message_box(strMessage, nullptr, e_message_box_icon_exclamation);
+            ////message_box(strMessage, nullptr, ::user::e_message_box_icon_exclamation);
 
             throw ::exception(estatus);
 

@@ -6,7 +6,7 @@ namespace aura
 {
 
 //
-//   pointer< ::extended::future < ::conversation > > system::message_box(const ::scoped_string & scopedstrMessage, const ::scoped_string & scopedstrTitle, const ::e_message_box & emessagebox)
+//   pointer< ::extended::future < ::conversation > > system::message_box(const ::scoped_string & scopedstrMessage, const ::scoped_string & scopedstrTitle, const ::user::e_message_box & emessagebox)
 //   {
 //
 //      
@@ -32,7 +32,7 @@ namespace aura
 //   }
 
 
-   //void system::message_box_timeout(const ::scoped_string & scopedstrMessage, const ::scoped_string & scopedstrTitle, const class time & timeTimeout, const ::e_message_box & emessagebox, const future & process)
+   //void system::message_box_timeout(const ::scoped_string & scopedstrMessage, const ::scoped_string & scopedstrTitle, const class time & timeTimeout, const ::user::e_message_box & emessagebox, const future & process)
    //{
 
    //   

@@ -18,7 +18,7 @@ namespace windowing_win32
    public:
 
 
-      enum_message                                       m_emessageWindowsTaskbarCreatedMessage;
+      ::user::enum_message             m_emessageWindowsTaskbarCreatedMessage;
       //__creatable_from_base(windowing, ::windowing::windowing);
 
 
@@ -125,7 +125,7 @@ namespace windowing_win32
       virtual ::windowing::cursor * get_default_cursor();
 
 
-      //virtual enum_dialog_result message_box(const ::scoped_string & scopedstrMessage, const ::scoped_string & scopedstrTitle, const ::e_message_box & emessagebox);
+      //virtual enum_dialog_result message_box(const ::scoped_string & scopedstrMessage, const ::scoped_string & scopedstrTitle, const ::user::e_message_box & emessagebox);
 
 
       //virtual void get_cursor_pos(::int_point * ppoint);

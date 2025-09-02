@@ -215,8 +215,8 @@ namespace windowing_win32
 
    //   auto pchannel = puserinteraction->m_pwindow;
 
-   //   MESSAGE_LINK(WM_SETTINGCHANGE, pchannel, this, &window::_001OnMessage);
-   //   MESSAGE_LINK(WM_FONTCHANGE, pchannel, this, &window::_001OnMessage);
+   //   USER_MESSAGE_LINK(WM_SETTINGCHANGE, pchannel, this, &window::_001OnMessage);
+   //   USER_MESSAGE_LINK(WM_FONTCHANGE, pchannel, this, &window::_001OnMessage);
 
    //}
 
@@ -226,7 +226,7 @@ namespace windowing_win32
 
       ::windowing::window::install_message_routing(pchannel);
 
-      MESSAGE_LINK(e_message_create, pchannel, this, &window::_001OnCreate);
+      USER_MESSAGE_LINK(::user::e_message_create, pchannel, this, &window::_001OnCreate);
 
       auto puserinteraction = m_pwindow->m_puserinteraction;
 
@@ -235,33 +235,33 @@ namespace windowing_win32
       if (!puserinteraction->m_bMessageWindow)
       {
 
-         //MESSAGE_LINK(e_message_redraw, pchannel, pimpl, &::windowing::window::_001OnRedraw);
-         //MESSAGE_LINK(e_message_apply_visual, pchannel, pimpl, &::windowing::window::_001OnApplyVisual);
+         //USER_MESSAGE_LINK(::user::e_message_redraw, pchannel, pimpl, &::windowing::window::_001OnRedraw);
+         //USER_MESSAGE_LINK(::user::e_message_apply_visual, pchannel, pimpl, &::windowing::window::_001OnApplyVisual);
 
 
          //#ifndef LINUX
-         //MESSAGE_LINK(e_message_move, pchannel, this, &window::on_message_move);
-         //MESSAGE_LINK(e_message_size, pchannel, this, &window::on_message_size);
+         //USER_MESSAGE_LINK(::user::e_message_move, pchannel, this, &window::on_message_move);
+         //USER_MESSAGE_LINK(::user::e_message_size, pchannel, this, &window::on_message_size);
          //#endif
 
 
-         //MESSAGE_LINK(e_message_show_window, pchannel, this, &window::on_message_show_window);
-         //MESSAGE_LINK(e_message_kill_focus, pchannel, this, &window::on_message_kill_focus);
-         //MESSAGE_LINK(e_message_set_focus, pchannel, this, &window::on_message_set_focus);
-         //MESSAGE_LINK(e_message_set_cursor, pchannel, this, &window::on_message_set_cursor);
+         //USER_MESSAGE_LINK(::user::e_message_show_window, pchannel, this, &window::on_message_show_window);
+         //USER_MESSAGE_LINK(::user::e_message_kill_focus, pchannel, this, &window::on_message_kill_focus);
+         //USER_MESSAGE_LINK(::user::e_message_set_focus, pchannel, this, &window::on_message_set_focus);
+         //USER_MESSAGE_LINK(::user::e_message_set_cursor, pchannel, this, &window::on_message_set_cursor);
 
       }
 
-      MESSAGE_LINK(WM_ACTIVATE, pchannel, this, &window::_001OnActivate);
-      MESSAGE_LINK(WM_DWMNCRENDERINGCHANGED, pchannel, this, &window::_001OnDwmNcRenderingChanged);
+      USER_MESSAGE_LINK(WM_ACTIVATE, pchannel, this, &window::_001OnActivate);
+      USER_MESSAGE_LINK(WM_DWMNCRENDERINGCHANGED, pchannel, this, &window::_001OnDwmNcRenderingChanged);
 
       pimpl->install_message_routing(pchannel);
 
 
-      MESSAGE_LINK(e_message_destroy, pchannel, this, &window::on_message_destroy);
-      MESSAGE_LINK(WM_GETICON, pchannel, this, &window::on_message_get_icon);
+      USER_MESSAGE_LINK(::user::e_message_destroy, pchannel, this, &window::on_message_destroy);
+      USER_MESSAGE_LINK(WM_GETICON, pchannel, this, &window::on_message_get_icon);
 
-      //MESSAGE_LINK(e_message_create, pchannel, pimpl, &::windowing::window::_001OnPrioCreate);
+      //USER_MESSAGE_LINK(::user::e_message_create, pchannel, pimpl, &::windowing::window::_001OnPrioCreate);
       auto psystem = system();
 
       //auto pnode = psystem->m_pnode->m_pWindowingWin32Node;
@@ -270,10 +270,10 @@ namespace windowing_win32
 
       auto emessageTaskbarCreated = pwindowing->m_emessageXXXWindowsTaskbarCreatedMessage;
 
-      if (emessageTaskbarCreated != e_message_undefined)
+      if (emessageTaskbarCreated != ::user::e_message_undefined)
       {
 
-         MESSAGE_LINK(emessageTaskbarCreated, pchannel, this, & window::_001OnTaskbarCreated);
+         USER_MESSAGE_LINK(emessageTaskbarCreated, pchannel, this, & window::_001OnTaskbarCreated);
 
       }
 
@@ -595,14 +595,14 @@ namespace windowing_win32
 
          string strLparamString;
 
-         if (pmessage->m_emessage == WM_SETTINGCHANGE && wparam == 0)
+         if (pmessage->m_eusermessage == WM_SETTINGCHANGE && wparam == 0)
          {
 
             strLparamString = (const WCHAR *) (LPARAM(lparam));
 
          }
 
-         if (pmessage->m_emessage == WM_FONTCHANGE)
+         if (pmessage->m_eusermessage == WM_FONTCHANGE)
          {
 
             auto psystem = system();
@@ -622,7 +622,7 @@ namespace windowing_win32
 
          //}
          }
-         else if (pmessage->m_emessage == WM_SETTINGCHANGE && strLparamString == "ImmersiveColorSet")
+         else if (pmessage->m_eusermessage == WM_SETTINGCHANGE && strLparamString == "ImmersiveColorSet")
          {
 
             auto pnode = system()->m_pnode;
@@ -630,8 +630,8 @@ namespace windowing_win32
             pnode->fetch_user_color();
 
          }
-         else if (pmessage->m_emessage == e_message_display_change ||
-            (pmessage->m_emessage == WM_SETTINGCHANGE &&
+         else if (pmessage->m_eusermessage == ::user::e_message_display_change ||
+            (pmessage->m_eusermessage == WM_SETTINGCHANGE &&
                (pmessage->m_wparam == SPI_SETWORKAREA)))
          {
 
@@ -649,7 +649,7 @@ namespace windowing_win32
             //   try
             //   {
 
-            //      puserinteraction->post_message(e_message_display_change);
+            //      puserinteraction->post_message(::user::e_message_display_change);
 
             //   }
             //   catch(...)
@@ -2826,7 +2826,7 @@ namespace windowing_win32
    //void window::message_handler(::message::message * pmessage)
    //{
    //   
-   //   if (pmessage->m_emessage == (enum_message)WM_SYSCOMMAND)
+   //   if (pmessage->m_eusermessage == (enum_message)WM_SYSCOMMAND)
    //   {
 
    //      if (pmessage->m_wparam == SC_SCREENSAVE)
@@ -3332,7 +3332,7 @@ namespace windowing_win32
 
       HWND hwnd = as_hwnd(pmessage->m_oswindow);
 
-      UINT message = pmessage->m_emessage.as_emessage();
+      UINT message = pmessage->m_eusermessage.as_emessage();
 
       WPARAM wparam = pmessage->m_wparam;
 
@@ -5705,7 +5705,7 @@ namespace windowing_win32
          ::GetWindowInfo(hwnd, &wi);
 
          /* Maximized windows always have a non-client border that hangs over
-         the edge of the screen, so the int_size proposed by e_message_non_client_calc_size is
+         the edge of the screen, so the int_size proposed by ::user::e_message_non_client_calc_size is
          fine. Just adjust the top border to erase the u title. */
          pncsp->rgrc[0].left = client.left();
 
@@ -5749,7 +5749,7 @@ namespace windowing_win32
       {
 
          /* For the non-maximized case, set the output const int_rectangle & to what it was
-         before e_message_non_client_calc_size modified it. This will make the client int_size the
+         before ::user::e_message_non_client_calc_size modified it. This will make the client int_size the
          same as the non-client size. */
          ::copy(&pncsp->rgrc[0], &nonclient);
 
@@ -5779,13 +5779,13 @@ namespace windowing_win32
    //   if (pfnWndProc == nullptr)
    //   {
 
-   //      lresult = ::DefWindowProcW(m_oswindow, (unsigned int)pmessage->m_emessage.long_long(), pmessage->m_wparam, pmessage->m_lparam);
+   //      lresult = ::DefWindowProcW(m_oswindow, (unsigned int)pmessage->m_eusermessage.long_long(), pmessage->m_wparam, pmessage->m_lparam);
 
    //   }
    //   else
    //   {
 
-   //      lresult = ::CallWindowProc(pfnWndProc, m_oswindow, (unsigned int)pmessage->m_emessage.long_long(), pmessage->m_wparam, pmessage->m_lparam);
+   //      lresult = ::CallWindowProc(pfnWndProc, m_oswindow, (unsigned int)pmessage->m_eusermessage.long_long(), pmessage->m_wparam, pmessage->m_lparam);
 
    //   }
 
@@ -5893,7 +5893,7 @@ namespace windowing_win32
 //
 //      unsigned int message;
 //
-//      message = pmessage->m_emessage.umessage();
+//      message = pmessage->m_eusermessage.umessage();
 //
 //      m_uiMessage = message;
 //
@@ -5921,12 +5921,12 @@ namespace windowing_win32
 //
 //      bool bUserElementalOk = !m_bDestroyImplOnly && puserinteraction && puserinteraction->m_bUserElementOk;
 //
-//      if (message == e_message_key_down ||
-//         message == e_message_key_up ||
-//         message == e_message_char ||
-//         message == e_message_sys_key_down ||
-//         message == e_message_sys_key_up ||
-//         message == e_message_sys_char ||
+//      if (message == ::user::e_message_key_down ||
+//         message == ::user::e_message_key_up ||
+//         message == ::user::e_message_char ||
+//         message == ::user::e_message_sys_key_down ||
+//         message == ::user::e_message_sys_key_up ||
+//         message == ::user::e_message_sys_char ||
 //         message == WM_IME_KEYDOWN ||
 //         message == WM_IME_SETCONTEXT ||
 //         message == WM_IME_SELECT ||
@@ -5941,7 +5941,7 @@ namespace windowing_win32
 //
 //         auto pkey = pmessage->m_pkey;
 //
-//         if (message == e_message_key_down)
+//         if (message == ::user::e_message_key_down)
 //         {
 //
 //            output_debug_string("\n Key Down Event ");
@@ -5950,7 +5950,7 @@ namespace windowing_win32
 //
 //         
 //
-//         if (message == e_message_key_down || message == e_message_sys_key_down)
+//         if (message == ::user::e_message_key_down || message == ::user::e_message_sys_key_down)
 //         {
 //            try
 //            {
@@ -5960,7 +5960,7 @@ namespace windowing_win32
 //            {
 //            }
 //         }
-//         else if (message == e_message_key_up || message == e_message_sys_key_up)
+//         else if (message == ::user::e_message_key_up || message == ::user::e_message_sys_key_up)
 //         {
 //
 //            try
@@ -5978,11 +5978,11 @@ namespace windowing_win32
 //
 //      }
 //
-//      if (message == e_message_timer)
+//      if (message == ::user::e_message_timer)
 //      {
 //         //         puserinteraction->get_application()->step_timer();
 //      }
-//      else if (message == e_message_left_button_down)
+//      else if (message == ::user::e_message_left_button_down)
 //      {
 //         ::int_rectangle rectangleX;
 //         ::GetClientRect(get_hwnd(), rectangleX);
@@ -6003,8 +6003,8 @@ namespace windowing_win32
 //         bool bZoomed = ::IsZoomed(get_hwnd()) != false;
 //         bool bIconic = ::IsIconic(get_hwnd()) != false;
 //      }
-//      else if (message == e_message_set_cursor
-//         || message == e_message_non_client_mouse_move)
+//      else if (message == ::user::e_message_set_cursor
+//         || message == ::user::e_message_non_client_mouse_move)
 //      {
 //         //output_debug_string(".");
 //      }
@@ -6017,48 +6017,48 @@ namespace windowing_win32
 //         {
 //            switch (message)
 //            {
-//            case e_message_create:
-//               informationf("e_message_create wparam=%08x lparam=%08x", pmessage->m_wparam, pmessage->m_lparam);
+//            case ::user::e_message_create:
+//               informationf("::user::e_message_create wparam=%08x lparam=%08x", pmessage->m_wparam, pmessage->m_lparam);
 //
 //               break;
-//            case e_message_window_position_changing:
-//               informationf("e_message_window_position_changing wparam=%08x lparam=%08x", pmessage->m_wparam, pmessage->m_lparam);
+//            case ::user::e_message_window_position_changing:
+//               informationf("::user::e_message_window_position_changing wparam=%08x lparam=%08x", pmessage->m_wparam, pmessage->m_lparam);
 //
 //               break;
-//            case e_message_window_position_changed:
-//               informationf("e_message_window_position_changed wparam=%08x lparam=%08x", pmessage->m_wparam, pmessage->m_lparam);
+//            case ::user::e_message_window_position_changed:
+//               informationf("::user::e_message_window_position_changed wparam=%08x lparam=%08x", pmessage->m_wparam, pmessage->m_lparam);
 //
 //               break;
-//            case e_message_activate:
-//               informationf("e_message_activate wparam=%08x lparam=%08x", pmessage->m_wparam, pmessage->m_lparam);
+//            case ::user::e_message_activate:
+//               informationf("::user::e_message_activate wparam=%08x lparam=%08x", pmessage->m_wparam, pmessage->m_lparam);
 //
 //               break;
 //            case WM_ACTIVATEAPP:
 //               informationf("WM_ACTIVATEAPP wparam=%08x lparam=%08x", pmessage->m_wparam, pmessage->m_lparam);
 //
 //               break;
-//            case e_message_mouse_activate:
-//               informationf("e_message_mouse_activate wparam=%08x lparam=%08x", pmessage->m_wparam, pmessage->m_lparam);
+//            case ::user::e_message_mouse_activate:
+//               informationf("::user::e_message_mouse_activate wparam=%08x lparam=%08x", pmessage->m_wparam, pmessage->m_lparam);
 //
 //               break;
-//            case e_message_non_client_activate:
-//               informationf("e_message_non_client_activate wparam=%08x lparam=%08x", pmessage->m_wparam, pmessage->m_lparam);
+//            case ::user::e_message_non_client_activate:
+//               informationf("::user::e_message_non_client_activate wparam=%08x lparam=%08x", pmessage->m_wparam, pmessage->m_lparam);
 //
 //               break;
-//            case e_message_set_focus:
-//               informationf("e_message_set_focus wparam=%08x lparam=%08x", pmessage->m_wparam, pmessage->m_lparam);
+//            case ::user::e_message_set_focus:
+//               informationf("::user::e_message_set_focus wparam=%08x lparam=%08x", pmessage->m_wparam, pmessage->m_lparam);
 //
 //               break;
-//            case e_message_kill_focus:
-//               informationf("e_message_kill_focus wparam=%08x lparam=%08x", pmessage->m_wparam, pmessage->m_lparam);
+//            case ::user::e_message_kill_focus:
+//               informationf("::user::e_message_kill_focus wparam=%08x lparam=%08x", pmessage->m_wparam, pmessage->m_lparam);
 //
 //               break;
-//            case e_message_move:
-//               informationf("e_message_move wparam=%08x lparam=%08x", pmessage->m_wparam, pmessage->m_lparam);
+//            case ::user::e_message_move:
+//               informationf("::user::e_message_move wparam=%08x lparam=%08x", pmessage->m_wparam, pmessage->m_lparam);
 //
 //               break;
-//            case e_message_size:
-//               informationf("e_message_size wparam=%08x lparam=%08x", pmessage->m_wparam, pmessage->m_lparam);
+//            case ::user::e_message_size:
+//               informationf("::user::e_message_size wparam=%08x lparam=%08x", pmessage->m_wparam, pmessage->m_lparam);
 //
 //               break;
 //            default:
@@ -6089,7 +6089,7 @@ namespace windowing_win32
 //      }*/
 //      //pmessage->set_lresult(0);
 //
-//      if (message == e_message_mouse_leave)
+//      if (message == ::user::e_message_mouse_leave)
 //      {
 //
 //         auto papexsession = get_session();
@@ -6120,16 +6120,16 @@ namespace windowing_win32
 //
 //      }
 //
-//      if (message == e_message_left_button_down ||
-//         message == e_message_left_button_up ||
-//         message == e_message_middle_button_down ||
-//         message == e_message_middle_button_up ||
-//         message == e_message_right_button_down ||
-//         message == e_message_right_button_up ||
-//         message == e_message_left_button_double_click ||
-//         message == e_message_mouse_move ||
-//         message == e_message_non_client_mouse_move ||
-//         message == e_message_mouse_wheel)
+//      if (message == ::user::e_message_left_button_down ||
+//         message == ::user::e_message_left_button_up ||
+//         message == ::user::e_message_middle_button_down ||
+//         message == ::user::e_message_middle_button_up ||
+//         message == ::user::e_message_right_button_down ||
+//         message == ::user::e_message_right_button_up ||
+//         message == ::user::e_message_left_button_double_click ||
+//         message == ::user::e_message_mouse_move ||
+//         message == ::user::e_message_non_client_mouse_move ||
+//         message == ::user::e_message_mouse_wheel)
 //      {
 //
 //         message::mouse * pmouse = dynamic_cast <::message::mouse *> (pmessage);
@@ -6146,44 +6146,44 @@ namespace windowing_win32
 //
 //         }
 //
-//         if (message == e_message_left_button_down)
+//         if (message == ::user::e_message_left_button_down)
 //         {
 //
-//            informationf("e_message_left_button_down");
+//            informationf("::user::e_message_left_button_down");
 //
 //            string strType = ::str().demangle(puserinteraction->type_name());
 //
 //            if (strType.case_insensitive_contains("list_box"))
 //            {
 //
-//               ::output_debug_string("list_box e_message_left_button_down");
+//               ::output_debug_string("list_box ::user::e_message_left_button_down");
 //
 //            }
 //
 //         }
-//         else if (message == e_message_left_button_up)
+//         else if (message == ::user::e_message_left_button_up)
 //         {
 //
-//            informationf("e_message_left_button_up");
+//            informationf("::user::e_message_left_button_up");
 //
 //         }
-//         else if (message == e_message_non_client_left_button_up)
+//         else if (message == ::user::e_message_non_client_left_button_up)
 //         {
 //
-//            informationf("e_message_non_client_left_button_up");
+//            informationf("::user::e_message_non_client_left_button_up");
 //
 //         }
-//         else if (message == e_message_non_client_left_button_down)
+//         else if (message == ::user::e_message_non_client_left_button_down)
 //         {
 //
-//            informationf("e_message_non_client_left_button_down");
+//            informationf("::user::e_message_non_client_left_button_down");
 //
 //            string strType;
 //
 //            if (strType.case_insensitive_contains("list_box"))
 //            {
 //
-//               ::output_debug_string("list_box e_message_non_client_left_button_down");
+//               ::output_debug_string("list_box ::user::e_message_non_client_left_button_down");
 //
 //            }
 //
@@ -6207,7 +6207,7 @@ namespace windowing_win32
 //
 //         }
 //
-//         if (message == e_message_mouse_move)
+//         if (message == ::user::e_message_mouse_move)
 //         {
 //            // We are at the message handler procedure.
 //            // mouse messages originated from message handler and that are mouse move happenings should end up with the correct cursor.
@@ -6216,7 +6216,7 @@ namespace windowing_win32
 //            // handler has set it to another one.
 //            pmouse->m_ecursor = cursor_default;
 //
-//            //information() << "windows::e_message_mouse_move(%d,%d)", pmouse->m_point.x(), pmouse->m_point.y();
+//            //information() << "windows::user::e_message_mouse_move(%d,%d)", pmouse->m_point.x(), pmouse->m_point.y();
 //
 //            string strType;
 //
@@ -6228,14 +6228,14 @@ namespace windowing_win32
 //               if (strType.case_insensitive_contains("list_box"))
 //               {
 //
-//                  //::output_debug_string("list_box e_message_mouse_move");
+//                  //::output_debug_string("list_box ::user::e_message_mouse_move");
 //
 //               }
 //
 //            }
 //
 //         }
-//         else if (message == e_message_non_client_mouse_move)
+//         else if (message == ::user::e_message_non_client_mouse_move)
 //         {
 //            // We are at the message handler procedure.
 //            // mouse messages originated from message handler and that are mouse move happenings should end up with the correct cursor.
@@ -6299,12 +6299,12 @@ namespace windowing_win32
 //              }*/
 //         return;
 //      }
-//      if (message == e_message_key_down ||
-//         message == e_message_key_up ||
-//         message == e_message_char ||
-//         message == e_message_sys_key_down ||
-//         message == e_message_sys_key_up ||
-//         message == e_message_sys_char ||
+//      if (message == ::user::e_message_key_down ||
+//         message == ::user::e_message_key_up ||
+//         message == ::user::e_message_char ||
+//         message == ::user::e_message_sys_key_down ||
+//         message == ::user::e_message_sys_key_up ||
+//         message == ::user::e_message_sys_char ||
 //         message == WM_IME_KEYDOWN ||
 //         message == WM_IME_KEYUP ||
 //         message == WM_IME_CHAR ||
@@ -6383,7 +6383,7 @@ namespace windowing_win32
 //
 //      }
 //
-//      if (message == e_message_event)
+//      if (message == ::user::e_message_event)
 //      {
 //
 //         puserinteraction->handle_event(pmessage);
@@ -6428,7 +6428,7 @@ namespace windowing_win32
 //      //   else
 //      //   {
 //      //      
-//      //      pmessage->set_lresult(::DefWindowProcW(m_oswindow, pmessage->m_emessage, pmessage->m_wparam, pmessage->m_lparam));
+//      //      pmessage->set_lresult(::DefWindowProcW(m_oswindow, pmessage->m_eusermessage, pmessage->m_wparam, pmessage->m_lparam));
 //
 //      //   }
 //
@@ -6646,7 +6646,7 @@ namespace windowing_win32
             if (m_bTrackMouseLeave)
             {
 
-               m_pwindow->m_puserinteraction->post_message(e_message_mouse_leave);
+               m_pwindow->m_puserinteraction->post_message(::user::e_message_mouse_leave);
 
             }
 
@@ -6660,11 +6660,11 @@ namespace windowing_win32
 
          m_timeLastMouseMove.Now();
 
-         //pimpl->m_puserinteraction->post_message(e_message_mouse_move, 0, lparam);
+         //pimpl->m_puserinteraction->post_message(::user::e_message_mouse_move, 0, lparam);
          
-         pimpl->m_puserinteraction->send_message(e_message_mouse_move, 0, lparam);
+         pimpl->m_puserinteraction->send_message(::user::e_message_mouse_move, 0, lparam);
 
-         //::SendMessage(hwnd, e_message_mouse_move, 0, lparam);
+         //::SendMessage(hwnd, ::user::e_message_mouse_move, 0, lparam);
 
          ::preempt(5_ms);
 

@@ -46,7 +46,7 @@ namespace windows
    bool interaction_impl::__windows_message_bypass(oswindow oswindow, ::user::enum_message eusermessage, ::wparam wparam, ::lparam lparam, LRESULT & lresult)
    {
 
-      //if (message == e_message_mouse_move)
+      //if (message == ::user::e_message_mouse_move)
       //{
 
       //   //output_debug_string("mm.");
@@ -56,7 +56,7 @@ namespace windows
       //   return true;
 
       //}
-      //else if (message == e_message_set_cursor)
+      //else if (message == ::user::e_message_set_cursor)
       //{
 
       //   //output_debug_string("sc.");
@@ -66,7 +66,7 @@ namespace windows
       //   return true;
 
       //}
-      //else if (message == e_message_non_client_hit_test)
+      //else if (message == ::user::e_message_non_client_hit_test)
       //{
 
       //   //output_debug_string("ht.");
@@ -93,7 +93,7 @@ namespace windows
          if (__windows_message_bypass(oswindow, message, wparam, lparam, lresult, g_puiaMessageTopLevelCreation))
          {
 
-            if (message == e_message_paint)
+            if (message == ::user::e_message_paint)
             {
 
                pimpl->m_iState1 = STATE_WINDOW_CREATED;
@@ -121,7 +121,7 @@ namespace windows
             pimpl->m_iState1 = STATE_INPUT_LANGUAGE_CHANGING;
 
          }
-         else if (message == e_message_non_client_activate && wparam == 0)
+         else if (message == ::user::e_message_non_client_activate && wparam == 0)
          {
 
             pimpl->m_iState1 = STATE_WINDOW_DEACTIVATING;
@@ -151,7 +151,7 @@ namespace windows
             return true;
 
          }
-         else if (message == e_message_non_client_activate && wparam == 0)
+         else if (message == ::user::e_message_non_client_activate && wparam == 0)
          {
 
             pimpl->m_iState1 = STATE_WINDOW_DEACTIVATING;
@@ -170,7 +170,7 @@ namespace windows
 
          }
 
-         if (message == e_message_window_position_changing)
+         if (message == ::user::e_message_window_position_changing)
          {
 
             pimpl->m_iState1 = STATE_WINDOW_ACTIVATING;
@@ -186,7 +186,7 @@ namespace windows
          if (__windows_message_bypass(oswindow, message, wparam, lparam, lresult, g_puiaMessageWindowActivating))
          {
 
-            if (message == e_message_set_focus)
+            if (message == ::user::e_message_set_focus)
             {
 
                pimpl->m_iState1 = STATE_WINDOW_CREATED;
@@ -222,7 +222,7 @@ namespace windows
 
       str.formatf("%s", get_message_text(message, true).c_str(), wparam, lparam);
 
-      if (message == e_message_activate)
+      if (message == ::user::e_message_activate)
       {
 
          if (LOWORD(wparam) == WA_ACTIVE)

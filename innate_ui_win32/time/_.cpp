@@ -604,12 +604,12 @@ namespace windows
       HWND                 m_hwnd;
       string               m_strMessage;
       string               m_strTitle;
-      ::e_message_box      m_emessagebox;
+      ::user::e_message_box      m_emessagebox;
 
       
-      message_box() { m_hwnd = nullptr; m_emessagebox = e_message_box_ok; }
+      message_box() { m_hwnd = nullptr; m_emessagebox = ::user::e_message_box_ok; }
 
-      ::enum_dialog_result show(HWND hwnd, const scoped_string & strMessage, const scoped_string & strTitle, const ::e_message_box& emessagebox)
+      ::enum_dialog_result show(HWND hwnd, const scoped_string & strMessage, const scoped_string & strTitle, const ::user::e_message_box& emessagebox)
       {
 
          m_hwnd = hwnd;
@@ -642,7 +642,7 @@ namespace windows
 
 
 
-// pointer< ::extended::future < ::conversation > > xxxshow_error_message(const ::scoped_string & scopedstrMessage, const ::scoped_string & scopedstrTitle, const ::e_message_box & emessagebox)
+// pointer< ::extended::future < ::conversation > > xxxshow_error_message(const ::scoped_string & scopedstrMessage, const ::scoped_string & scopedstrTitle, const ::user::e_message_box & emessagebox)
 // {
 
 //    wstring wstrMessage(strMessage);

@@ -573,7 +573,7 @@ namespace windowing_win32
 
       // virtual bool FlashWindow(bool bInvert);
 
-      //virtual void message_box(const ::scoped_string & scopedstrText, const ::scoped_string & scopedstrTitle = nullptr, unsigned int nType = e_message_box_ok, const function_arg & functionarg = function_arg());
+      //virtual void message_box(const ::scoped_string & scopedstrText, const ::scoped_string & scopedstrTitle = nullptr, unsigned int nType = ::user::e_message_box_ok, const function_arg & functionarg = function_arg());
 
 
 //

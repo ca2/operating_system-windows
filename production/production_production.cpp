@@ -121,7 +121,7 @@ namespace production
       if (!m_bReleased)
          return;
 
-      papplication->post_to_all_threads(e_message_quit, 0, 0);
+      papplication->post_to_all_threads(::user::e_message_quit, 0, 0);
 
    }
 
@@ -157,7 +157,7 @@ pacmedir->system() / "config/production/mirror_status.txt";
                || !file_system()->exists(pathMirrorStatus))
          {
 
-            os_message_box(nullptr, "both " + pathMirror + " and " + pathMirrorStatus + " files must exist and maybe empty...", "The h***!!", e_message_box_icon_exclamation);
+            os_message_box(nullptr, "both " + pathMirror + " and " + pathMirrorStatus + " files must exist and maybe empty...", "The h***!!", ::user::e_message_box_icon_exclamation);
             m_result.add(error_failed);
             return error_failed;
 
@@ -283,7 +283,7 @@ pacmedir->system() / "config/production/mirror_status.txt";
       /*if(psystem->directrix()->has_property("quit_on_finish"))
       {
 
-      pcontext->os().post_to_all_threads(e_message_quit, 0, 0);
+      pcontext->os().post_to_all_threads(::user::e_message_quit, 0, 0);
 
       }*/
 

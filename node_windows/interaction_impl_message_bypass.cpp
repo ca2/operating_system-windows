@@ -7,11 +7,11 @@
 //
 //unsigned int g_puiaMessageTrace[] =
 //{
-//   e_message_move,
-//   e_message_size,
-//   e_message_activate,
-//   e_message_set_focus,
-//   e_message_kill_focus,
+//   ::user::e_message_move,
+//   ::user::e_message_size,
+//   ::user::e_message_activate,
+//   ::user::e_message_set_focus,
+//   ::user::e_message_kill_focus,
 //   (unsigned int)-1
 //};
 //
@@ -67,7 +67,7 @@
 //   bool interaction_impl::__windows_message_bypass(HWND oswindow, unsigned int message, wparam wparam, lparam lparam, lresult & lresult)
 //   {
 //
-//      //if (message == e_message_mouse_move)
+//      //if (message == ::user::e_message_mouse_move)
 //      //{
 //
 //      //   //output_debug_string("mm.");
@@ -77,7 +77,7 @@
 //      //   return true;
 //
 //      //}
-//      //else if (message == e_message_set_cursor)
+//      //else if (message == ::user::e_message_set_cursor)
 //      //{
 //
 //      //   //output_debug_string("sc.");
@@ -87,7 +87,7 @@
 //      //   return true;
 //
 //      //}
-//      //else if (message == e_message_non_client_hit_test)
+//      //else if (message == ::user::e_message_non_client_hit_test)
 //      //{
 //
 //      //   //output_debug_string("ht.");
@@ -114,7 +114,7 @@
 //         if (__windows_message_bypass(oswindow, message, wparam, lparam, lresult, g_puiaMessageTopLevelCreation))
 //         {
 //
-//            if (message == e_message_paint)
+//            if (message == ::user::e_message_paint)
 //            {
 //
 //               pimpl->m_iState1 = STATE_WINDOW_CREATED;
@@ -142,7 +142,7 @@
 //            pimpl->m_iState1 = STATE_INPUT_LANGUAGE_CHANGING;
 //
 //         }
-//         else if (message == e_message_non_client_activate && wparam == 0)
+//         else if (message == ::user::e_message_non_client_activate && wparam == 0)
 //         {
 //
 //            pimpl->m_iState1 = STATE_WINDOW_DEACTIVATING;
@@ -172,7 +172,7 @@
 //            return true;
 //
 //         }
-//         else if (message == e_message_non_client_activate && wparam == 0)
+//         else if (message == ::user::e_message_non_client_activate && wparam == 0)
 //         {
 //
 //            pimpl->m_iState1 = STATE_WINDOW_DEACTIVATING;
@@ -191,7 +191,7 @@
 //
 //         }
 //
-//         if (message == e_message_window_position_changing)
+//         if (message == ::user::e_message_window_position_changing)
 //         {
 //
 //            pimpl->m_iState1 = STATE_WINDOW_ACTIVATING;
@@ -207,7 +207,7 @@
 //         if (__windows_message_bypass(oswindow, message, wparam, lparam, lresult, g_puiaMessageWindowActivating))
 //         {
 //
-//            if (message == e_message_set_focus)
+//            if (message == ::user::e_message_set_focus)
 //            {
 //
 //               pimpl->m_iState1 = STATE_WINDOW_CREATED;
@@ -243,7 +243,7 @@
 //
 //      str.formatf("%s", get_message_text(message, true).c_str(), wparam, lparam);
 //
-//      if (message == e_message_activate)
+//      if (message == ::user::e_message_activate)
 //      {
 //
 //         if (LOWORD(wparam) == WA_ACTIVE)

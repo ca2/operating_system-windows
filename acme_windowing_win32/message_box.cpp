@@ -3,7 +3,7 @@
 #include "acme/_operating_system.h"
 
 
-CLASS_DECL_ACME int message_box_to_windows_message_box(enum_message_box emessagebox);
+CLASS_DECL_ACME int message_box_to_windows_message_box(::user::enum_message_box emessagebox);
 CLASS_DECL_ACME enum_dialog_result windows_message_box_result_to_dialog_result(int iResult);
 
 
@@ -46,7 +46,7 @@ namespace win32
                   //   public:
 
                   //      //::atom do_modal(const ::scoped_string & scopedstrMessage,
-                  //      //                               const ::scoped_string & scopedstrTitle, const ::e_message_box & emessagebox,
+                  //      //                               const ::scoped_string & scopedstrTitle, const ::user::e_message_box & emessagebox,
                   //      //                               const ::scoped_string & scopedstrDetails) override
                   //      ::enum_dialog_result m_edialogresult;
                   //      void run() override

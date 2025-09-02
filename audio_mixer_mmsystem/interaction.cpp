@@ -28,8 +28,8 @@ namespace audio_mixer_mmsystem
 
       ::user::interaction::install_message_routing(pchannel);
 
-      MESSAGE_LINK(MM_MIXM_CONTROL_CHANGE, pchannel, this, &interaction::_001OnMixerControlChange);
-      MESSAGE_LINK(MM_MIXM_LINE_CHANGE, pchannel, this, &interaction::_001OnMixerLineChange);
+      USER_MESSAGE_LINK(MM_MIXM_CONTROL_CHANGE, pchannel, this, &interaction::_001OnMixerControlChange);
+      USER_MESSAGE_LINK(MM_MIXM_LINE_CHANGE, pchannel, this, &interaction::_001OnMixerLineChange);
 
    }
 

@@ -1166,14 +1166,14 @@ namespace windowing_win32
                   //if (m_pwindow->user_interaction()->const_layout().window().origin() != pointBufferItemWindow)
                   //{
 
-                  //   m_pwindow->user_interaction()->post_message(e_message_reposition, 0, pointBufferItemWindow);
+                  //   m_pwindow->user_interaction()->post_message(::user::e_message_reposition, 0, pointBufferItemWindow);
 
                   //}
 
                   //if (m_pwindow->user_interaction()->const_layout().window().size() != sizeBufferItemWindow)
                   //{
 
-                  //   m_pwindow->user_interaction()->post_message(e_message_size, 0, sizeBufferItemWindow);
+                  //   m_pwindow->user_interaction()->post_message(::user::e_message_size, 0, sizeBufferItemWindow);
 
                   //}
 

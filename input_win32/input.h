@@ -125,7 +125,7 @@ namespace input_win32
       //virtual ::windowing::cursor * get_default_cursor();
 
 
-      ////virtual enum_dialog_result message_box(const ::scoped_string & scopedstrMessage, const ::scoped_string & scopedstrTitle, const ::e_message_box & emessagebox);
+      ////virtual enum_dialog_result message_box(const ::scoped_string & scopedstrMessage, const ::scoped_string & scopedstrTitle, const ::user::e_message_box & emessagebox);
 
 
       //virtual void get_cursor_pos(::int_point * ppoint);

@@ -3325,7 +3325,7 @@ namespace apex_windows
 
       path += ".exe";
 
-      //MessageBox(nullptr, path, "pathProgram", e_message_box_ok);
+      //MessageBox(nullptr, path, "pathProgram", ::user::e_message_box_ok);
 
       strParam = strDefault.substr(iFind + 5);
 

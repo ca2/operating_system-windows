@@ -463,7 +463,7 @@ ATOM installer_RegisterClass(HINSTANCE hInstance)
 //
 //  WM_COMMAND	- process the application menu
 //  WM_PAINT	- Paint the main window
-//  e_message_destroy	- post a quit message and return
+//  ::user::e_message_destroy	- post a quit message and return
 //
 //
 LRESULT CALLBACK installer_WndProc(HWND hWnd, ::user::enum_message eusermessage, ::wparam wparam, ::lparam lparam)

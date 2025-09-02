@@ -111,7 +111,7 @@ namespace windowing_win32
    void message_window::message_window_post_message(::user::enum_message eusermessage, ::wparam wparam, ::lparam lparam)
    {
 
-      post_message(emessage, wparam, lparam);
+      post_message(eusermessage, wparam, lparam);
 
    }
 
@@ -119,7 +119,7 @@ namespace windowing_win32
    lresult message_window::message_window_send_message(::user::enum_message eusermessage, ::wparam wparam, ::lparam lparam)
    {
 
-      return send_message(emessage, wparam, lparam);
+      return send_message(eusermessage, wparam, lparam);
 
    }
 

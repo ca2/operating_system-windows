@@ -72,8 +72,8 @@ int CALLBACK kill_window(HWND window, LPARAM arg) {
   if (! GetWindowThreadProcessId(window, &pid)) return 1;
   if (pid != k->pid) return 1;
 
-  /* First try sending e_message_close to request that the window close. */
-  k->signalled |= PostMessage(window, e_message_close, k->exitcode, 0);
+  /* First try sending ::user::e_message_close to request that the window close. */
+  k->signalled |= PostMessage(window, ::user::e_message_close, k->exitcode, 0);
 
   /*
     Then tell the window that the user is logging off and it should exit
@@ -113,7 +113,7 @@ int kill_threads(TCHAR *service_name, kill_t *k) {
 
   /* This thread belongs to the doomed process so signal it. */
   if (te.th32OwnerProcessID == k->pid) {
-    ret |= PostThreadMessage(te.th32ThreadID, e_message_quit, k->exitcode, 0);
+    ret |= PostThreadMessage(te.th32ThreadID, ::user::e_message_quit, k->exitcode, 0);
   }
 
   while (true) {
@@ -127,7 +127,7 @@ int kill_threads(TCHAR *service_name, kill_t *k) {
     }
 
     if (te.th32OwnerProcessID == k->pid) {
-      ret |= PostThreadMessage(te.th32ThreadID, e_message_quit, k->exitcode, 0);
+      ret |= PostThreadMessage(te.th32ThreadID, ::user::e_message_quit, k->exitcode, 0);
     }
   }
 

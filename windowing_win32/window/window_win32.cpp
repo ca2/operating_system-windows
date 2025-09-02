@@ -1,6 +1,6 @@
 #include "framework.h"
 #include "acme/constant/user_message.h"
-#include "acme/constant/message_prototype.h"
+#include "acme/constant/user_message_prototype.h"
 #include "acme/constant/timer.h"
 #include "acme/exception/exception.h"
 #include "acme/filesystem/filesystem/directory_context.h"
@@ -327,8 +327,8 @@ namespace windowing_win32
 //
 //      if (pTopLevel && (!pWndOther || !::IsWindow((pWndOther)->get_hwnd()) || pTopLevel != (pWndOther)->get_top_level()))
 //      {
-//         // lParam points to window getting the e_message_activate message and
-//         //  oswindow_Other from the e_message_activate.
+//         // lParam points to window getting the ::user::e_message_activate message and
+//         //  oswindow_Other from the ::user::e_message_activate.
 //         hwnd oswindow_2[2];
 //         oswindow_2[0] = (pwindow)->get_hwnd();
 //         if (!pWndOther)

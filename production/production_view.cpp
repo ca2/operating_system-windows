@@ -50,27 +50,27 @@ namespace production
    {
       ::user::scroll_impact::install_message_routing(pchannel);
 
-      MESSAGE_LINK(e_message_destroy, pchannel, this, &impact::on_message_destroy);
-      MESSAGE_LINK(e_message_size, pchannel, this, &impact::on_message_size);
-      //MESSAGE_LINK(WM_PAINT, pchannel, this, &impact::_001OnPaint);
-      MESSAGE_LINK(e_message_create, pchannel, this, &impact::_001OnCreate);
-      MESSAGE_LINK(WM_CONTEXTMENU, pchannel, this, &impact::on_message_context_menu);
-      //MESSAGE_LINK(WM_SETCURSOR, pchannel, this, &impact::on_message_set_cursor);
+      USER_MESSAGE_LINK(::user::e_message_destroy, pchannel, this, &impact::on_message_destroy);
+      USER_MESSAGE_LINK(::user::e_message_size, pchannel, this, &impact::on_message_size);
+      //USER_MESSAGE_LINK(WM_PAINT, pchannel, this, &impact::_001OnPaint);
+      USER_MESSAGE_LINK(::user::e_message_create, pchannel, this, &impact::_001OnCreate);
+      USER_MESSAGE_LINK(WM_CONTEXTMENU, pchannel, this, &impact::on_message_context_menu);
+      //USER_MESSAGE_LINK(WM_SETCURSOR, pchannel, this, &impact::on_message_set_cursor);
 
-      //   MESSAGE_LINK(e_message_lbutton_down, pchannel, this, &::user::interaction::_001OnLButtonDown);
-      //   MESSAGE_LINK(e_message_lbutton_up, pchannel, this, &::user::interaction::_001OnLButtonUp);
-      MESSAGE_LINK(e_message_key_down, pchannel, this, &impact::on_message_key_down);
-      MESSAGE_LINK(e_message_key_up, pchannel, this, &impact::on_message_key_up);
+      //   USER_MESSAGE_LINK(::user::e_message_lbutton_down, pchannel, this, &::user::interaction::_001OnLButtonDown);
+      //   USER_MESSAGE_LINK(::user::e_message_lbutton_up, pchannel, this, &::user::interaction::_001OnLButtonUp);
+      USER_MESSAGE_LINK(::user::e_message_key_down, pchannel, this, &impact::on_message_key_down);
+      USER_MESSAGE_LINK(::user::e_message_key_up, pchannel, this, &impact::on_message_key_up);
 
-      MESSAGE_LINK(e_message_lbutton_down, pchannel, this, &impact::_001OnLButtonDown);
-      MESSAGE_LINK(e_message_lbutton_up, pchannel, this, &impact::_001OnLButtonUp);
-      MESSAGE_LINK(e_message_rbutton_up, pchannel, this, &impact::on_message_right_button_up);
+      USER_MESSAGE_LINK(::user::e_message_lbutton_down, pchannel, this, &impact::_001OnLButtonDown);
+      USER_MESSAGE_LINK(::user::e_message_lbutton_up, pchannel, this, &impact::_001OnLButtonUp);
+      USER_MESSAGE_LINK(::user::e_message_rbutton_up, pchannel, this, &impact::on_message_right_button_up);
 
 
-      MESSAGE_LINK(e_message_show_window, pchannel, this, &impact::on_message_show_window);
-      MESSAGE_LINK(e_message_destroy, pchannel, this, &impact::on_message_destroy);
+      USER_MESSAGE_LINK(::user::e_message_show_window, pchannel, this, &impact::on_message_show_window);
+      USER_MESSAGE_LINK(::user::e_message_destroy, pchannel, this, &impact::on_message_destroy);
 
-      MESSAGE_LINK(WM_USER, pchannel, this, &impact::_001OnUser);
+      USER_MESSAGE_LINK(WM_USER, pchannel, this, &impact::_001OnUser);
 
 
 

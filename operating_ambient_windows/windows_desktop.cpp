@@ -119,9 +119,9 @@
 ////
 ////  PURPOSE: Processes messages for the main window.
 ////
-////  e_message_command  - process the application menu
-////  e_message_paint    - Paint the main window
-////  e_message_destroy  - post a quit message and return
+////  ::user::e_message_command  - process the application menu
+////  ::user::e_message_paint    - Paint the main window
+////  ::user::e_message_destroy  - post a quit message and return
 ////
 ////
 //lresult CALLBACK WndProc(HWND hWnd, unsigned int message, wparam wParam, lparam lParam)
@@ -130,7 +130,7 @@
 //   switch (message)
 //   {
 //
-//   //case e_message_paint:
+//   //case ::user::e_message_paint:
 //   //{
 //   //   PAINTSTRUCT ps;
 //   //   HDC hdc = BeginPaint(hWnd, &ps);
@@ -138,7 +138,7 @@
 //   //   EndPaint(hWnd, &ps);
 //   //}
 //   break;
-//   case e_message_destroy:
+//   case ::user::e_message_destroy:
 //      PostQuitMessage(0);
 //      break;
 //   default:
@@ -156,7 +156,7 @@
 //   case WM_INITDIALOG:
 //      return (INT_PTR)true;
 //
-//   case e_message_command:
+//   case ::user::e_message_command:
 //      if (LOWORD(wParam) == e_dialog_result_ok || LOWORD(wParam) == e_dialog_result_cancel)
 //      {
 //         EndDialog(hDlg, LOWORD(wParam));

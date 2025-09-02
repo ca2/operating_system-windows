@@ -32,22 +32,22 @@ void imm_client::initialize_text_composition_client(::channel * pchannel, ::user
 
    m_puserinteraction = puserinteraction;
 
-   MESSAGE_LINK(e_message_set_focus, pchannel, this, &::imm_client::on_message_set_focus);
-   MESSAGE_LINK(e_message_kill_focus, pchannel, this, &::imm_client::on_message_kill_focus);
-   MESSAGE_LINK(WM_IME_SETCONTEXT, pchannel, this, &::imm_client::_001OnIme);
-   MESSAGE_LINK(WM_IME_STARTCOMPOSITION, pchannel, this, &::imm_client::_001OnIme);
-   MESSAGE_LINK(WM_IME_COMPOSITION, pchannel, this, &::imm_client::_001OnIme);
-   MESSAGE_LINK(WM_IME_ENDCOMPOSITION, pchannel, this, &::imm_client::_001OnIme);
-   MESSAGE_LINK(WM_IME_NOTIFY, pchannel, this, &::imm_client::_001OnIme);
-   MESSAGE_LINK(WM_IME_KEYDOWN, pchannel, this, &::imm_client::_001OnIme);
-   MESSAGE_LINK(WM_IME_KEYUP, pchannel, this, &::imm_client::_001OnIme);
-   MESSAGE_LINK(WM_IME_SELECT, pchannel, this, &::imm_client::_001OnIme);
-   MESSAGE_LINK(WM_INPUTLANGCHANGE, pchannel, this, &::imm_client::_001OnIme);
+   USER_MESSAGE_LINK(::user::e_message_set_focus, pchannel, this, &::imm_client::on_message_set_focus);
+   USER_MESSAGE_LINK(::user::e_message_kill_focus, pchannel, this, &::imm_client::on_message_kill_focus);
+   USER_MESSAGE_LINK(WM_IME_SETCONTEXT, pchannel, this, &::imm_client::_001OnIme);
+   USER_MESSAGE_LINK(WM_IME_STARTCOMPOSITION, pchannel, this, &::imm_client::_001OnIme);
+   USER_MESSAGE_LINK(WM_IME_COMPOSITION, pchannel, this, &::imm_client::_001OnIme);
+   USER_MESSAGE_LINK(WM_IME_ENDCOMPOSITION, pchannel, this, &::imm_client::_001OnIme);
+   USER_MESSAGE_LINK(WM_IME_NOTIFY, pchannel, this, &::imm_client::_001OnIme);
+   USER_MESSAGE_LINK(WM_IME_KEYDOWN, pchannel, this, &::imm_client::_001OnIme);
+   USER_MESSAGE_LINK(WM_IME_KEYUP, pchannel, this, &::imm_client::_001OnIme);
+   USER_MESSAGE_LINK(WM_IME_SELECT, pchannel, this, &::imm_client::_001OnIme);
+   USER_MESSAGE_LINK(WM_INPUTLANGCHANGE, pchannel, this, &::imm_client::_001OnIme);
 
-   MESSAGE_LINK(e_message_char, pchannel, this, &::imm_client::_011OnChar);
-   MESSAGE_LINK(WM_IME_CHAR, pchannel, this, &::imm_client::_011OnChar);
+   USER_MESSAGE_LINK(::user::e_message_char, pchannel, this, &::imm_client::_011OnChar);
+   USER_MESSAGE_LINK(WM_IME_CHAR, pchannel, this, &::imm_client::_011OnChar);
 
-   MESSAGE_LINK(e_message_key_down, pchannel, this, &::imm_client::on_message_key_down);
+   USER_MESSAGE_LINK(::user::e_message_key_down, pchannel, this, &::imm_client::on_message_key_down);
 
 
 }
@@ -75,7 +75,7 @@ void imm_client::_011OnChar(::message::message * pmessage)
 
    ::pointer<::user::message>pusermessage(pmessage);
 
-   if (pmessage->m_emessage == e_message_char)
+   if (pmessage->m_eusermessage == ::user::e_message_char)
    {
 
       auto psession = m_puserinteraction->get_session();
@@ -141,7 +141,7 @@ void imm_client::_001OnIme(::message::message * pmessage)
 
    ::pointer<::user::message>pusermessage(pmessage);
 
-   if (pmessage->m_emessage == WM_INPUTLANGCHANGE)
+   if (pmessage->m_eusermessage == WM_INPUTLANGCHANGE)
    {
 
       ::output_debug_string("WM_INPUTLANGCHANGE");
@@ -170,14 +170,14 @@ void imm_client::_001OnIme(::message::message * pmessage)
       //   });
 
    }
-   else if (pmessage->m_emessage == WM_IME_SELECT)
+   else if (pmessage->m_eusermessage == WM_IME_SELECT)
    {
 
       //SetInputLanguage();
       ::output_debug_string("\nWM_IME_SELECT");
 
    }
-   else if (pmessage->m_emessage == WM_IME_SETCONTEXT)
+   else if (pmessage->m_eusermessage == WM_IME_SETCONTEXT)
    {
 
       //EnableIME();
@@ -185,7 +185,7 @@ void imm_client::_001OnIme(::message::message * pmessage)
       ::output_debug_string("\nWM_IME_SETCONTEXT");
 
    }
-   else if (pmessage->m_emessage == WM_IME_COMPOSITION)
+   else if (pmessage->m_eusermessage == WM_IME_COMPOSITION)
    {
 
       if (pmessage->m_lparam == 0)
@@ -278,13 +278,13 @@ void imm_client::_001OnIme(::message::message * pmessage)
       pusermessage->m_bRet = true;
 
    }
-   else if (pmessage->m_emessage == WM_IME_KEYDOWN)
+   else if (pmessage->m_eusermessage == WM_IME_KEYDOWN)
    {
 
       ::output_debug_string("\nWM_IME_KEYDOWN");
 
    }
-   else if (pmessage->m_emessage == WM_IME_ENDCOMPOSITION)
+   else if (pmessage->m_eusermessage == WM_IME_ENDCOMPOSITION)
    {
 
       //::output_debug_string("WM_IME_ENDCOMPOSITION");
@@ -327,7 +327,7 @@ void imm_client::_001OnIme(::message::message * pmessage)
       }
 
    }
-   else if (pmessage->m_emessage == WM_IME_STARTCOMPOSITION)
+   else if (pmessage->m_eusermessage == WM_IME_STARTCOMPOSITION)
    {
 
       ::output_debug_string("\nWM_IME_STARTCOMPOSITION");
@@ -350,7 +350,7 @@ void imm_client::_001OnIme(::message::message * pmessage)
       pusermessage->m_bRet = true;
 
    }
-   else if (pmessage->m_emessage == WM_IME_NOTIFY)
+   else if (pmessage->m_eusermessage == WM_IME_NOTIFY)
    {
 
       if (pusermessage->m_wparam == IMN_CHANGECANDIDATE)

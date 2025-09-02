@@ -78,7 +78,7 @@ int popup_message(HWND owner, unsigned int type, unsigned long atom, ...) {
 
   TCHAR *format = message_string(atom);
   if (! format) {
-    return MessageBox(0, _T("The message which was supposed to go here is missing!"), NSSM, MB_OK | e_message_box_icon_exclamation);
+    return MessageBox(0, _T("The message which was supposed to go here is missing!"), NSSM, MB_OK | ::user::e_message_box_icon_exclamation);
   }
 
   TCHAR blurb[NSSM_ERROR_BUFSIZE];
@@ -86,7 +86,7 @@ int popup_message(HWND owner, unsigned int type, unsigned long atom, ...) {
   if (_vsntprintf_s(blurb, _countof(blurb), _TRUNCATE, format, arg) < 0) {
     va_end(arg);
     LocalFree(format);
-    return MessageBox(0, _T("The message which was supposed to go here is too big!"), NSSM, MB_OK | e_message_box_icon_exclamation);
+    return MessageBox(0, _T("The message which was supposed to go here is too big!"), NSSM, MB_OK | ::user::e_message_box_icon_exclamation);
   }
   va_end(arg);
 

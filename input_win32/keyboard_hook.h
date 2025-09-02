@@ -35,7 +35,7 @@ namespace input_win32
 
       static LRESULT CALLBACK LowLevelKeyboardProc(int nCode, WPARAM wParam, LPARAM lParam);
 
-      virtual void keyboard_proc(enum_message emessage, int iVirtualKeyCode, int iScanCode);
+      virtual void keyboard_proc(::user::enum_message emessage, int iVirtualKeyCode, int iScanCode);
 
 
    };

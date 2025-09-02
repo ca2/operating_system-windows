@@ -35,7 +35,7 @@ namespace input_win32
 
       static LRESULT CALLBACK LowLevelMouseProc(int nCode, WPARAM wParam, LPARAM lParam);
 
-      virtual void mouse_proc(enum_message emessage);
+      virtual void mouse_proc(::user::enum_message emessage);
 
    };
 

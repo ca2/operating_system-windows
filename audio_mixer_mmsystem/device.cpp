@@ -74,7 +74,7 @@ namespace audio_mixer_mmsystem
 
             //strMessage.formatf("mixerClose() failed on hmx=%.04Xh, mmr=%u!", m_hMixer, mmrct);
 
-            //message_box(strMessage, nullptr, e_message_box_icon_exclamation);
+            //message_box(strMessage, nullptr, ::user::e_message_box_icon_exclamation);
 
          //}
 
@@ -91,7 +91,7 @@ namespace audio_mixer_mmsystem
 
          //strMessage.formatf("mixerGetDevCaps() failed on uMxId=%u, mmr=%u!", uiMixerId, mmrc);
 
-         ////message_box(strMessage, nullptr, e_message_box_icon_exclamation);
+         ////message_box(strMessage, nullptr, ::user::e_message_box_icon_exclamation);
 
          //return mmrc;
 
@@ -110,7 +110,7 @@ namespace audio_mixer_mmsystem
 
          //strMessage.formatf("mixerOpen() failed on uMxId=%u, mmr=%u!", uiMixerId, mmrc);
 
-         //message_box(strMessage, nullptr, e_message_box_icon_exclamation);
+         //message_box(strMessage, nullptr, ::user::e_message_box_icon_exclamation);
 
          //return mmrc;
 
@@ -145,7 +145,7 @@ namespace audio_mixer_mmsystem
 
          //strMessage.formatf("mixerGetDevCaps() failed on uMxId=%u, mmr=%u!", m_uiMixerID, mmrc);
 
-         ////message_box(strMessage, nullptr, e_message_box_icon_exclamation);
+         ////message_box(strMessage, nullptr, ::user::e_message_box_icon_exclamation);
 
          //return mmrc;
 

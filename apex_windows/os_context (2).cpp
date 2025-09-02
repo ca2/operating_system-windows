@@ -1942,7 +1942,7 @@ retry:
 
          path += ".exe";
 
-         //MessageBox(nullptr, path, "pathProgram", e_message_box_ok);
+         //MessageBox(nullptr, path, "pathProgram", ::user::e_message_box_ok);
 
          strParam = strDefault.substr(iFind + 5);
 
@@ -2121,7 +2121,7 @@ retry:
          //      SE_ERR_SHARE
          //      A sharing violation occurred.*/
 
-         //   message_box(nullptr, "Error opening file \"" + path + "\"", "Could not open file", e_message_box_icon_exclamation);
+         //   message_box(nullptr, "Error opening file \"" + path + "\"", "Could not open file", ::user::e_message_box_icon_exclamation);
 
          //}
 

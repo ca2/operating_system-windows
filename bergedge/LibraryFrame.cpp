@@ -505,7 +505,7 @@ int CALLBACK LibraryFrameBrowseCallbackProc(HWND hwnd, UINT uMsg, LPARAM lParam,
 
       if(!pframe->ValidateNewName(str, strCandidateNewPath))
       {
-         show_a_message_box("A library with this name already exists at the specified location (" + strCandidateNewPath + "). Please choose another location or another name.",e_message_box_icon_information);
+         show_a_message_box("A library with this name already exists at the specified location (" + strCandidateNewPath + "). Please choose another location or another name.",::user::e_message_box_icon_information);
          return 1;
       }
 

@@ -78,7 +78,7 @@ namespace windowing_win32
 
       ::windowing_win32::message_window::install_message_routing(pchannel);
 
-      MESSAGE_LINK(WM_CLIPBOARDUPDATE, pchannel, this, &copydesk::_001OnClipboardUpdate);
+      USER_MESSAGE_LINK(WM_CLIPBOARDUPDATE, pchannel, this, &copydesk::_001OnClipboardUpdate);
 
    }
 

@@ -52,8 +52,8 @@
 //
 //      void thread::install_message_routing(::channel * pchannel)
 //      {
-//         MESSAGE_LINK(thread::MessageMixerThread, pchannel, this, &thread::OnMixerMessage);
-//         MESSAGE_LINK(WM_USER, pchannel, this, &thread::OnUserMessage);
+//         USER_MESSAGE_LINK(thread::MessageMixerThread, pchannel, this, &thread::OnMixerMessage);
+//         USER_MESSAGE_LINK(WM_USER, pchannel, this, &thread::OnUserMessage);
 //      }
 //
 //      //    ON_THREAD_MESSAGE(thread::MessageMixerThread, OnMixerMessage)

@@ -399,7 +399,7 @@ namespace audio_mixer_mmsystem
 
       if (!estatus)
       {
-         //        message_box(nullptr, MB_OK | e_message_box_icon_exclamation,
+         //        message_box(nullptr, MB_OK | ::user::e_message_box_icon_exclamation,
          //                "mixerGetControlDetails(ctrlid=%.08lXh) failed on hmx=%.04Xh, mmr=%u!",
          //              m_mixercontrol.dwControlID, m_pmixersource->get_device()->m_hMixer, mmrc);
          //return;
@@ -617,7 +617,7 @@ namespace audio_mixer_mmsystem
    }
    else
    {
-   //                                message_box(nullptr, MB_OK | e_message_box_icon_exclamation,
+   //                                message_box(nullptr, MB_OK | ::user::e_message_box_icon_exclamation,
    //                                        "mixerGetControlDetails(ctrlid=%.08lXh) failed on hmx=%.04Xh, mmr=%u!",
    //                                      m_mixercontrol.dwControlID, m_pmixersource->get_device()->m_hMixer, mmrc);
    }
@@ -641,7 +641,7 @@ namespace audio_mixer_mmsystem
    }
    else
    {
-   //                                message_box(nullptr, MB_OK | e_message_box_icon_exclamation,
+   //                                message_box(nullptr, MB_OK | ::user::e_message_box_icon_exclamation,
    ///                                        "mixerGetControlDetails(ctrlid=%.08lXh) failed on hmx=%.04Xh, mmr=%u!",
    //                                     m_mixercontrol.dwControlID, m_pmixersource->get_device()->m_hMixer, mmrc);
    }
@@ -830,7 +830,7 @@ namespace audio_mixer_mmsystem
                         //}
                         //else
                         //{
-                        //   //                                message_box(nullptr, MB_OK | e_message_box_icon_exclamation,
+                        //   //                                message_box(nullptr, MB_OK | ::user::e_message_box_icon_exclamation,
                         //   //                                        "mixerGetControlDetails(ctrlid=%.08lXh) failed on hmx=%.04Xh, mmr=%u!",
                         //   //                                      m_mixercontrol.dwControlID, m_pmixersource->get_device()->m_hMixer, mmrc);
                         //}
@@ -871,7 +871,7 @@ namespace audio_mixer_mmsystem
                         //   string strMessage;
                         //   strMessage.formatf("mixerGetControlDetails(ctrlid=%.08lXh) failed on hmx=%.04Xh, mmr=%u!",
                         //                     m_mixercontrol.dwControlID, device->m_hMixer, mmrc);
-                        //   //pScrollBar->message_box(strMessage, nullptr, e_message_box_icon_exclamation);
+                        //   //pScrollBar->message_box(strMessage, nullptr, ::user::e_message_box_icon_exclamation);
                         //}
                      }
 
@@ -955,7 +955,7 @@ namespace audio_mixer_mmsystem
 
                   //   strMessage.formatf("mixerGetControlDetails(ctrlid=%.08lXh) failed on hmx=%.04Xh, mmr=%u!",
                   //                     m_mixercontrol.dwControlID, device->m_hMixer, mmrc);
-                  //   //pmutecontrol->message_box(strMessage, nullptr, e_message_box_icon_exclamation);
+                  //   //pmutecontrol->message_box(strMessage, nullptr, ::user::e_message_box_icon_exclamation);
                   //}
                   // 
 

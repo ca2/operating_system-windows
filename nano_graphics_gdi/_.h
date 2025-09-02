@@ -64,7 +64,7 @@
 //::e_status deferx_initializex_x11();
 //void x11_handle_just_hooks();
 //void x11_defer_handle_just_hooks();
-//int x11_message_box(const ::scoped_string & scopedstr, const ::scoped_string & scopedstrTitle, const ::e_message_box & emessagebox);
+//int x11_message_box(const ::scoped_string & scopedstr, const ::scoped_string & scopedstrTitle, const ::user::e_message_box & emessagebox);
 //bool __x11_hook_process_event(Display * pdisplay, XEvent * phappening, XGenericEventCookie * cookie);
 
 

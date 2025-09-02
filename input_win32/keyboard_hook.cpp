@@ -75,12 +75,12 @@ namespace input_win32
 
          LPKBDLLHOOKSTRUCT pk = (LPKBDLLHOOKSTRUCT)lParam;
 
-         if (wParam == e_message_key_down || wParam == e_message_sys_key_down)
+         if (wParam == ::user::e_message_key_down || wParam == ::user::e_message_sys_key_down)
          {
 
-            auto emessage = (enum_message)wParam;
+            auto eusermessage = (::user::enum_message)wParam;
 
-            s_pkeyboardhook->keyboard_proc(emessage, pk->vkCode, pk->scanCode);
+            s_pkeyboardhook->keyboard_proc(eusermessage, pk->vkCode, pk->scanCode);
 
             //output_debug_string("X");
 
@@ -115,12 +115,12 @@ namespace input_win32
             //}
 
          }
-         else if (wParam == e_message_key_up || wParam == e_message_sys_key_up)
+         else if (wParam == ::user::e_message_key_up || wParam == ::user::e_message_sys_key_up)
          {
 
-            auto emessage = (enum_message)wParam;
+            auto eusermessage = (::user::enum_message)wParam;
 
-            s_pkeyboardhook->keyboard_proc(emessage, pk->vkCode, pk->scanCode);
+            s_pkeyboardhook->keyboard_proc(eusermessage, pk->vkCode, pk->scanCode);
 
             //output_debug_string("Y");
 
@@ -214,12 +214,12 @@ namespace input_win32
    }
 
 
-   void keyboard_hook::keyboard_proc(enum_message emessage, int iVirtualKeyCode, int iScanCode)
+   void keyboard_hook::keyboard_proc(::user::enum_message eusermessage, int iVirtualKeyCode, int iScanCode)
    {
 
       auto pkey = øcreate_new < ::message::key >();
 
-      pkey->m_emessage = emessage;
+      pkey->m_eusermessage = eusermessage;
 
       if (iVirtualKeyCode == VK_RETURN)
       {

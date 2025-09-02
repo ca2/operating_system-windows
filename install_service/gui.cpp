@@ -51,8 +51,8 @@ int nssm_gui(int resource, nssm_service_t *service) {
     if (resource == IDD_REMOVE) {
       HWND button = GetDlgItem(dlg, IDC_REMOVE);
       if (button) {
-        SendMessage(button, e_message_lbutton_down, 0, 0);
-        SendMessage(button, e_message_lbutton_up, 0, 0);
+        SendMessage(button, ::user::e_message_lbutton_down, 0, 0);
+        SendMessage(button, ::user::e_message_lbutton_up, 0, 0);
       }
     }
   }
@@ -100,7 +100,7 @@ int nssm_gui(int resource, nssm_service_t *service) {
       TCHAR *formatted;
       unsigned long newlen;
       if (format_double_null(service->dependencies, service->dependencieslen, &formatted, &newlen)) {
-        popup_message(dlg, MB_OK | e_message_box_icon_exclamation, NSSM_EVENT_OUT_OF_MEMORY, _T("dependencies"), _T("nssm_dlg()"));
+        popup_message(dlg, MB_OK | ::user::e_message_box_icon_exclamation, NSSM_EVENT_OUT_OF_MEMORY, _T("dependencies"), _T("nssm_dlg()"));
       }
       else {
         SetDlgItemText(tablist[NSSM_TAB_DEPENDENCIES], IDC_DEPENDENCIES, formatted);
@@ -122,7 +122,7 @@ int nssm_gui(int resource, nssm_service_t *service) {
 
       DWORD_PTR affinity, system_affinity;
       if (GetProcessAffinityMask(GetCurrentProcess(), &affinity, &system_affinity)) {
-        if ((service->affinity & (__int64) system_affinity) != service->affinity) popup_message(dlg, MB_OK | e_message_box_icon_warning, NSSM_GUI_WARN_AFFINITY);
+        if ((service->affinity & (__int64) system_affinity) != service->affinity) popup_message(dlg, MB_OK | ::user::e_message_box_icon_warning, NSSM_GUI_WARN_AFFINITY);
       }
 
       for (int i = 0; i < num_cpus(); i++) {
@@ -178,8 +178,8 @@ int nssm_gui(int resource, nssm_service_t *service) {
     if (! service->rotate_bytes_high) SetDlgItemInt(tablist[NSSM_TAB_ROTATION], IDC_ROTATE_BYTES_LOW, service->rotate_bytes_low, 0);
 
     /* Check if advanced settings are in use. */
-    if (service->stdout_disposition != service->stderr_disposition || (service->stdout_disposition && service->stdout_disposition != NSSM_STDOUT_DISPOSITION && service->stdout_disposition != CREATE_ALWAYS) || (service->stderr_disposition && service->stderr_disposition != NSSM_STDERR_DISPOSITION && service->stderr_disposition != CREATE_ALWAYS)) popup_message(dlg, MB_OK | e_message_box_icon_warning, NSSM_GUI_WARN_STDIO);
-    if (service->rotate_bytes_high) popup_message(dlg, MB_OK | e_message_box_icon_warning, NSSM_GUI_WARN_ROTATE_BYTES);
+    if (service->stdout_disposition != service->stderr_disposition || (service->stdout_disposition && service->stdout_disposition != NSSM_STDOUT_DISPOSITION && service->stdout_disposition != CREATE_ALWAYS) || (service->stderr_disposition && service->stderr_disposition != NSSM_STDERR_DISPOSITION && service->stderr_disposition != CREATE_ALWAYS)) popup_message(dlg, MB_OK | ::user::e_message_box_icon_warning, NSSM_GUI_WARN_STDIO);
+    if (service->rotate_bytes_high) popup_message(dlg, MB_OK | ::user::e_message_box_icon_warning, NSSM_GUI_WARN_ROTATE_BYTES);
 
     /* Environment tab. */
     TCHAR *env;
@@ -198,14 +198,14 @@ int nssm_gui(int resource, nssm_service_t *service) {
       TCHAR *formatted;
       unsigned long newlen;
       if (format_double_null(env, envlen, &formatted, &newlen)) {
-        popup_message(dlg, MB_OK | e_message_box_icon_exclamation, NSSM_EVENT_OUT_OF_MEMORY, _T("environment"), _T("nssm_dlg()"));
+        popup_message(dlg, MB_OK | ::user::e_message_box_icon_exclamation, NSSM_EVENT_OUT_OF_MEMORY, _T("environment"), _T("nssm_dlg()"));
       }
       else {
         SetDlgItemText(tablist[NSSM_TAB_ENVIRONMENT], IDC_ENVIRONMENT, formatted);
         HeapFree(GetProcessHeap(), 0, formatted);
       }
     }
-    if (service->envlen && service->env_extralen) popup_message(dlg, MB_OK | e_message_box_icon_warning, NSSM_GUI_WARN_ENVIRONMENT);
+    if (service->envlen && service->env_extralen) popup_message(dlg, MB_OK | ::user::e_message_box_icon_warning, NSSM_GUI_WARN_ENVIRONMENT);
   }
 
   /* Go! */
@@ -279,7 +279,7 @@ static inline void set_rotation_enabled(unsigned char enabled) {
 static inline void check_io(HWND owner, TCHAR *name, TCHAR *buffer, unsigned long len, unsigned long control) {
   if (! SendMessage(GetDlgItem(tablist[NSSM_TAB_IO], control), WM_GETTEXTLENGTH, 0, 0)) return;
   if (GetDlgItemText(tablist[NSSM_TAB_IO], control, buffer, (int) len)) return;
-  popup_message(owner, MB_OK | e_message_box_icon_exclamation, NSSM_MESSAGE_PATH_TOO_LONG, name);
+  popup_message(owner, MB_OK | ::user::e_message_box_icon_exclamation, NSSM_MESSAGE_PATH_TOO_LONG, name);
   ZeroMemory(buffer, len * sizeof(TCHAR));
 }
 
@@ -296,7 +296,7 @@ int configure(HWND window, nssm_service_t *service, nssm_service_t *orig_service
 
   /* Get service name. */
   if (! GetDlgItemText(window, IDC_NAME, service->name, _countof(service->name))) {
-    popup_message(window, MB_OK | e_message_box_icon_exclamation, NSSM_GUI_MISSING_SERVICE_NAME);
+    popup_message(window, MB_OK | ::user::e_message_box_icon_exclamation, NSSM_GUI_MISSING_SERVICE_NAME);
     cleanup_nssm_service(service);
     return 2;
   }
@@ -304,7 +304,7 @@ int configure(HWND window, nssm_service_t *service, nssm_service_t *orig_service
   /* Get executable name */
   if (! service->native) {
     if (! GetDlgItemText(tablist[NSSM_TAB_APPLICATION], IDC_PATH, service->exe, _countof(service->exe))) {
-      popup_message(window, MB_OK | e_message_box_icon_exclamation, NSSM_GUI_MISSING_PATH);
+      popup_message(window, MB_OK | ::user::e_message_box_icon_exclamation, NSSM_GUI_MISSING_PATH);
       return 3;
     }
 
@@ -317,7 +317,7 @@ int configure(HWND window, nssm_service_t *service, nssm_service_t *orig_service
     /* Get flags. */
     if (SendMessage(GetDlgItem(tablist[NSSM_TAB_APPLICATION], IDC_FLAGS), WM_GETTEXTLENGTH, 0, 0)) {
       if (! GetDlgItemText(tablist[NSSM_TAB_APPLICATION], IDC_FLAGS, service->flags, _countof(service->flags))) {
-        popup_message(window, MB_OK | e_message_box_icon_exclamation, NSSM_GUI_INVALID_OPTIONS);
+        popup_message(window, MB_OK | ::user::e_message_box_icon_exclamation, NSSM_GUI_INVALID_OPTIONS);
         return 4;
       }
     }
@@ -326,14 +326,14 @@ int configure(HWND window, nssm_service_t *service, nssm_service_t *orig_service
   /* Get details. */
   if (SendMessage(GetDlgItem(tablist[NSSM_TAB_DETAILS], IDC_DISPLAYNAME), WM_GETTEXTLENGTH, 0, 0)) {
     if (! GetDlgItemText(tablist[NSSM_TAB_DETAILS], IDC_DISPLAYNAME, service->displayname, _countof(service->displayname))) {
-      popup_message(window, MB_OK | e_message_box_icon_exclamation, NSSM_GUI_INVALID_DISPLAYNAME);
+      popup_message(window, MB_OK | ::user::e_message_box_icon_exclamation, NSSM_GUI_INVALID_DISPLAYNAME);
       return 5;
     }
   }
 
   if (SendMessage(GetDlgItem(tablist[NSSM_TAB_DETAILS], IDC_DESCRIPTION), WM_GETTEXTLENGTH, 0, 0)) {
     if (! GetDlgItemText(tablist[NSSM_TAB_DETAILS], IDC_DESCRIPTION, service->description, _countof(service->description))) {
-      popup_message(window, MB_OK | e_message_box_icon_exclamation, NSSM_GUI_INVALID_DESCRIPTION);
+      popup_message(window, MB_OK | ::user::e_message_box_icon_exclamation, NSSM_GUI_INVALID_DESCRIPTION);
       return 5;
     }
   }
@@ -361,21 +361,21 @@ int configure(HWND window, nssm_service_t *service, nssm_service_t *orig_service
     /* Username. */
     service->usernamelen = SendMessage(GetDlgItem(tablist[NSSM_TAB_LOGON], IDC_USERNAME), WM_GETTEXTLENGTH, 0, 0);
     if (! service->usernamelen) {
-      popup_message(window, MB_OK | e_message_box_icon_exclamation, NSSM_GUI_MISSING_USERNAME);
+      popup_message(window, MB_OK | ::user::e_message_box_icon_exclamation, NSSM_GUI_MISSING_USERNAME);
       return 6;
     }
     service->usernamelen++;
 
     service->username = (TCHAR *) HeapAlloc(GetProcessHeap(), 0, service->usernamelen * sizeof(TCHAR));
     if (! service->username) {
-      popup_message(window, MB_OK | e_message_box_icon_exclamation, NSSM_EVENT_OUT_OF_MEMORY, _T("account name"), _T("install()"));
+      popup_message(window, MB_OK | ::user::e_message_box_icon_exclamation, NSSM_EVENT_OUT_OF_MEMORY, _T("account name"), _T("install()"));
       return 6;
     }
     if (! GetDlgItemText(tablist[NSSM_TAB_LOGON], IDC_USERNAME, service->username, (int) service->usernamelen)) {
       HeapFree(GetProcessHeap(), 0, service->username);
       service->username = 0;
       service->usernamelen = 0;
-      popup_message(window, MB_OK | e_message_box_icon_exclamation, NSSM_GUI_INVALID_USERNAME);
+      popup_message(window, MB_OK | ::user::e_message_box_icon_exclamation, NSSM_GUI_INVALID_USERNAME);
       return 6;
     }
 
@@ -407,11 +407,11 @@ int configure(HWND window, nssm_service_t *service, nssm_service_t *orig_service
 
       if (! orig_service || ! orig_service->username || ! str_equiv(service->username, orig_service->username) || service->passwordlen || passwordlen) {
         if (! service->passwordlen) {
-          popup_message(window, MB_OK | e_message_box_icon_exclamation, NSSM_GUI_MISSING_PASSWORD);
+          popup_message(window, MB_OK | ::user::e_message_box_icon_exclamation, NSSM_GUI_MISSING_PASSWORD);
           return 6;
         }
         if (passwordlen != service->passwordlen) {
-          popup_message(window, MB_OK | e_message_box_icon_exclamation, NSSM_GUI_MISSING_PASSWORD);
+          popup_message(window, MB_OK | ::user::e_message_box_icon_exclamation, NSSM_GUI_MISSING_PASSWORD);
           return 6;
         }
         service->passwordlen++;
@@ -422,7 +422,7 @@ int configure(HWND window, nssm_service_t *service, nssm_service_t *orig_service
           HeapFree(GetProcessHeap(), 0, service->username);
           service->username = 0;
           service->usernamelen = 0;
-          popup_message(window, MB_OK | e_message_box_icon_exclamation, NSSM_EVENT_OUT_OF_MEMORY, _T("password confirmation"), _T("install()"));
+          popup_message(window, MB_OK | ::user::e_message_box_icon_exclamation, NSSM_EVENT_OUT_OF_MEMORY, _T("password confirmation"), _T("install()"));
           return 6;
         }
 
@@ -433,7 +433,7 @@ int configure(HWND window, nssm_service_t *service, nssm_service_t *orig_service
           HeapFree(GetProcessHeap(), 0, service->username);
           service->username = 0;
           service->usernamelen = 0;
-          popup_message(window, MB_OK | e_message_box_icon_exclamation, NSSM_EVENT_OUT_OF_MEMORY, _T("password"), _T("install()"));
+          popup_message(window, MB_OK | ::user::e_message_box_icon_exclamation, NSSM_EVENT_OUT_OF_MEMORY, _T("password"), _T("install()"));
           return 6;
         }
 
@@ -447,7 +447,7 @@ int configure(HWND window, nssm_service_t *service, nssm_service_t *orig_service
           HeapFree(GetProcessHeap(), 0, service->username);
           service->username = 0;
           service->usernamelen = 0;
-          popup_message(window, MB_OK | e_message_box_icon_exclamation, NSSM_GUI_INVALID_PASSWORD);
+          popup_message(window, MB_OK | ::user::e_message_box_icon_exclamation, NSSM_GUI_INVALID_PASSWORD);
           return 6;
         }
 
@@ -462,13 +462,13 @@ int configure(HWND window, nssm_service_t *service, nssm_service_t *orig_service
           HeapFree(GetProcessHeap(), 0, service->username);
           service->username = 0;
           service->usernamelen = 0;
-          popup_message(window, MB_OK | e_message_box_icon_exclamation, NSSM_GUI_INVALID_PASSWORD);
+          popup_message(window, MB_OK | ::user::e_message_box_icon_exclamation, NSSM_GUI_INVALID_PASSWORD);
           return 6;
         }
 
         /* compare. */
         if (_tcsncmp(password, service->password, service->passwordlen)) {
-          popup_message(window, MB_OK | e_message_box_icon_exclamation, NSSM_GUI_MISSING_PASSWORD);
+          popup_message(window, MB_OK | ::user::e_message_box_icon_exclamation, NSSM_GUI_MISSING_PASSWORD);
           SecureZeroMemory(password, service->passwordlen);
           HeapFree(GetProcessHeap(), 0, password);
           SecureZeroMemory(service->password, service->passwordlen);
@@ -489,13 +489,13 @@ int configure(HWND window, nssm_service_t *service, nssm_service_t *orig_service
   if (dependencieslen) {
     TCHAR *dependencies = (TCHAR *) HeapAlloc(GetProcessHeap(), HEAP_ZERO_MEMORY, (dependencieslen + 2) * sizeof(TCHAR));
     if (! dependencies) {
-      popup_message(window, MB_OK | e_message_box_icon_exclamation, NSSM_EVENT_OUT_OF_MEMORY, _T("dependencies"), _T("install()"));
+      popup_message(window, MB_OK | ::user::e_message_box_icon_exclamation, NSSM_EVENT_OUT_OF_MEMORY, _T("dependencies"), _T("install()"));
       cleanup_nssm_service(service);
       return 6;
     }
 
     if (! GetDlgItemText(tablist[NSSM_TAB_DEPENDENCIES], IDC_DEPENDENCIES, dependencies, dependencieslen + 1)) {
-      popup_message(window, MB_OK | e_message_box_icon_exclamation, NSSM_GUI_INVALID_DEPENDENCIES);
+      popup_message(window, MB_OK | ::user::e_message_box_icon_exclamation, NSSM_GUI_INVALID_DEPENDENCIES);
       HeapFree(GetProcessHeap(), 0, dependencies);
       cleanup_nssm_service(service);
       return 6;
@@ -503,7 +503,7 @@ int configure(HWND window, nssm_service_t *service, nssm_service_t *orig_service
 
     if (unformat_double_null(dependencies, dependencieslen, &service->dependencies, &service->dependencieslen)) {
       HeapFree(GetProcessHeap(), 0, dependencies);
-      popup_message(window, MB_OK | e_message_box_icon_exclamation, NSSM_EVENT_OUT_OF_MEMORY, _T("dependencies"), _T("install()"));
+      popup_message(window, MB_OK | ::user::e_message_box_icon_exclamation, NSSM_EVENT_OUT_OF_MEMORY, _T("dependencies"), _T("install()"));
       cleanup_nssm_service(service);
       return 6;
     }
@@ -524,7 +524,7 @@ int configure(HWND window, nssm_service_t *service, nssm_service_t *orig_service
     int selected = (int) SendMessage(list_base, LB_GETSELCOUNT, 0, 0);
     int count = (int) SendMessage(list_base, LB_GETCOUNT, 0, 0);
     if (! selected) {
-      popup_message(window, MB_OK | e_message_box_icon_exclamation, NSSM_GUI_WARN_AFFINITY_NONE);
+      popup_message(window, MB_OK | ::user::e_message_box_icon_exclamation, NSSM_GUI_WARN_AFFINITY_NONE);
       return 5;
     }
     else if (selected < count) {
@@ -577,13 +577,13 @@ int configure(HWND window, nssm_service_t *service, nssm_service_t *orig_service
   if (envlen) {
     TCHAR *env = (TCHAR *) HeapAlloc(GetProcessHeap(), HEAP_ZERO_MEMORY, (envlen + 2) * sizeof(TCHAR));
     if (! env) {
-      popup_message(window, MB_OK | e_message_box_icon_exclamation, NSSM_EVENT_OUT_OF_MEMORY, _T("environment"), _T("install()"));
+      popup_message(window, MB_OK | ::user::e_message_box_icon_exclamation, NSSM_EVENT_OUT_OF_MEMORY, _T("environment"), _T("install()"));
       cleanup_nssm_service(service);
       return 5;
     }
 
     if (! GetDlgItemText(tablist[NSSM_TAB_ENVIRONMENT], IDC_ENVIRONMENT, env, envlen + 1)) {
-      popup_message(window, MB_OK | e_message_box_icon_exclamation, NSSM_GUI_INVALID_ENVIRONMENT);
+      popup_message(window, MB_OK | ::user::e_message_box_icon_exclamation, NSSM_GUI_INVALID_ENVIRONMENT);
       HeapFree(GetProcessHeap(), 0, env);
       cleanup_nssm_service(service);
       return 5;
@@ -593,7 +593,7 @@ int configure(HWND window, nssm_service_t *service, nssm_service_t *orig_service
     unsigned long newlen;
     if (unformat_double_null(env, envlen, &newenv, &newlen)) {
       HeapFree(GetProcessHeap(), 0, env);
-      popup_message(window, MB_OK | e_message_box_icon_exclamation, NSSM_EVENT_OUT_OF_MEMORY, _T("environment"), _T("install()"));
+      popup_message(window, MB_OK | ::user::e_message_box_icon_exclamation, NSSM_EVENT_OUT_OF_MEMORY, _T("environment"), _T("install()"));
       cleanup_nssm_service(service);
       return 5;
     }
@@ -604,7 +604,7 @@ int configure(HWND window, nssm_service_t *service, nssm_service_t *orig_service
 
     /* Test the environment is valid. */
     if (test_environment(env)) {
-      popup_message(window, MB_OK | e_message_box_icon_exclamation, NSSM_GUI_INVALID_ENVIRONMENT);
+      popup_message(window, MB_OK | ::user::e_message_box_icon_exclamation, NSSM_GUI_INVALID_ENVIRONMENT);
       HeapFree(GetProcessHeap(), 0, env);
       cleanup_nssm_service(service);
       return 5;
@@ -636,32 +636,32 @@ int install(HWND window) {
   /* See if it works. */
   switch (install_service(service)) {
     case 1:
-      popup_message(window, MB_OK | e_message_box_icon_exclamation, NSSM_EVENT_OUT_OF_MEMORY, _T("service"), _T("install()"));
+      popup_message(window, MB_OK | ::user::e_message_box_icon_exclamation, NSSM_EVENT_OUT_OF_MEMORY, _T("service"), _T("install()"));
       cleanup_nssm_service(service);
       return 1;
 
     case 2:
-      popup_message(window, MB_OK | e_message_box_icon_exclamation, NSSM_MESSAGE_OPEN_SERVICE_MANAGER_FAILED);
+      popup_message(window, MB_OK | ::user::e_message_box_icon_exclamation, NSSM_MESSAGE_OPEN_SERVICE_MANAGER_FAILED);
       cleanup_nssm_service(service);
       return 2;
 
     case 3:
-      popup_message(window, MB_OK | e_message_box_icon_exclamation, NSSM_MESSAGE_PATH_TOO_LONG, NSSM);
+      popup_message(window, MB_OK | ::user::e_message_box_icon_exclamation, NSSM_MESSAGE_PATH_TOO_LONG, NSSM);
       cleanup_nssm_service(service);
       return 3;
 
     case 4:
-      popup_message(window, MB_OK | e_message_box_icon_exclamation, NSSM_GUI_OUT_OF_MEMORY_FOR_IMAGEPATH);
+      popup_message(window, MB_OK | ::user::e_message_box_icon_exclamation, NSSM_GUI_OUT_OF_MEMORY_FOR_IMAGEPATH);
       cleanup_nssm_service(service);
       return 4;
 
     case 5:
-      popup_message(window, MB_OK | e_message_box_icon_exclamation, NSSM_GUI_INSTALL_SERVICE_FAILED);
+      popup_message(window, MB_OK | ::user::e_message_box_icon_exclamation, NSSM_GUI_INSTALL_SERVICE_FAILED);
       cleanup_nssm_service(service);
       return 5;
 
     case 6:
-      popup_message(window, MB_OK | e_message_box_icon_exclamation, NSSM_GUI_CREATE_PARAMETERS_FAILED);
+      popup_message(window, MB_OK | ::user::e_message_box_icon_exclamation, NSSM_GUI_CREATE_PARAMETERS_FAILED);
       cleanup_nssm_service(service);
       return 6;
   }
@@ -680,7 +680,7 @@ int erase(HWND window) {
   if (service) {
     /* Get service name */
     if (! GetDlgItemText(window, IDC_NAME, service->name, _countof(service->name))) {
-      popup_message(window, MB_OK | e_message_box_icon_exclamation, NSSM_GUI_MISSING_SERVICE_NAME);
+      popup_message(window, MB_OK | ::user::e_message_box_icon_exclamation, NSSM_GUI_MISSING_SERVICE_NAME);
       cleanup_nssm_service(service);
       return 2;
     }
@@ -694,22 +694,22 @@ int erase(HWND window) {
 
   switch (erase_service(service)) {
     case 1:
-      popup_message(window, MB_OK | e_message_box_icon_exclamation, NSSM_EVENT_OUT_OF_MEMORY, _T("service"), _T("erase()"));
+      popup_message(window, MB_OK | ::user::e_message_box_icon_exclamation, NSSM_EVENT_OUT_OF_MEMORY, _T("service"), _T("erase()"));
       cleanup_nssm_service(service);
       return 1;
 
     case 2:
-      popup_message(window, MB_OK | e_message_box_icon_exclamation, NSSM_MESSAGE_OPEN_SERVICE_MANAGER_FAILED);
+      popup_message(window, MB_OK | ::user::e_message_box_icon_exclamation, NSSM_MESSAGE_OPEN_SERVICE_MANAGER_FAILED);
       cleanup_nssm_service(service);
       return 2;
 
     case 3:
-      popup_message(window, MB_OK | e_message_box_icon_exclamation, NSSM_GUI_SERVICE_NOT_INSTALLED);
+      popup_message(window, MB_OK | ::user::e_message_box_icon_exclamation, NSSM_GUI_SERVICE_NOT_INSTALLED);
       return 3;
       cleanup_nssm_service(service);
 
     case 4:
-      popup_message(window, MB_OK | e_message_box_icon_exclamation, NSSM_GUI_REMOVE_SERVICE_FAILED);
+      popup_message(window, MB_OK | ::user::e_message_box_icon_exclamation, NSSM_GUI_REMOVE_SERVICE_FAILED);
       cleanup_nssm_service(service);
       return 4;
   }
@@ -730,23 +730,23 @@ int edit(HWND window, nssm_service_t *orig_service) {
 
   switch (edit_service(service, true)) {
     case 1:
-      popup_message(window, MB_OK | e_message_box_icon_exclamation, NSSM_EVENT_OUT_OF_MEMORY, _T("service"), _T("edit()"));
+      popup_message(window, MB_OK | ::user::e_message_box_icon_exclamation, NSSM_EVENT_OUT_OF_MEMORY, _T("service"), _T("edit()"));
       cleanup_nssm_service(service);
       return 1;
 
     case 3:
-      popup_message(window, MB_OK | e_message_box_icon_exclamation, NSSM_MESSAGE_PATH_TOO_LONG, NSSM);
+      popup_message(window, MB_OK | ::user::e_message_box_icon_exclamation, NSSM_MESSAGE_PATH_TOO_LONG, NSSM);
       cleanup_nssm_service(service);
       return 3;
 
     case 4:
-      popup_message(window, MB_OK | e_message_box_icon_exclamation, NSSM_GUI_OUT_OF_MEMORY_FOR_IMAGEPATH);
+      popup_message(window, MB_OK | ::user::e_message_box_icon_exclamation, NSSM_GUI_OUT_OF_MEMORY_FOR_IMAGEPATH);
       cleanup_nssm_service(service);
       return 4;
 
     case 5:
     case 6:
-      popup_message(window, MB_OK | e_message_box_icon_exclamation, NSSM_GUI_EDIT_PARAMETERS_FAILED);
+      popup_message(window, MB_OK | ::user::e_message_box_icon_exclamation, NSSM_GUI_EDIT_PARAMETERS_FAILED);
       cleanup_nssm_service(service);
       return 6;
   }
@@ -1166,10 +1166,10 @@ INT_PTR CALLBACK nssm_dlg(HWND window, const ::atom & atom, WPARAM w, LPARAM l) 
       return 1;
 
     /* Window closing */
-    case e_message_close:
+    case ::user::e_message_close:
       DestroyWindow(window);
       return 0;
-    case e_message_destroy:
+    case ::user::e_message_destroy:
       PostQuitMessage(0);
   }
   return 0;

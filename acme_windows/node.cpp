@@ -1829,7 +1829,7 @@ namespace acme_windows
    //      DWORD dwError = ::GetLastError();
    //      string str;
    //      str.formatf("find Privilege value Error: %u\n", dwError);
-   //      message_box(str, "Help Me", e_message_box_ok);
+   //      message_box(str, "Help Me", ::user::e_message_box_ok);
    //      return false;
    //   }
    //   if (!DuplicateTokenEx(hUserToken, TOKEN_ALL_ACCESS, nullptr, SecurityDelegation, TokenPrimary, &hUserTokenDup))

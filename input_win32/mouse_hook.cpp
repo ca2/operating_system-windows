@@ -93,18 +93,18 @@ namespace input_win32
       if (nCode == 0)
       {
 
-         if (wParam == e_message_left_button_down
-            || wParam == e_message_left_button_up
-            || wParam == e_message_middle_button_down
-            || wParam == e_message_middle_button_up
-            || wParam == e_message_right_button_down
-            || wParam == e_message_right_button_up
+         if (wParam == ::user::e_message_left_button_down
+            || wParam == ::user::e_message_left_button_up
+            || wParam == ::user::e_message_middle_button_down
+            || wParam == ::user::e_message_middle_button_up
+            || wParam == ::user::e_message_right_button_down
+            || wParam == ::user::e_message_right_button_up
             )
          {
 
-            enum_message emessage = (enum_message)wParam;
+            ::user::enum_message eusermessage = (::user::enum_message)wParam;
 
-            s_pmousehook->mouse_proc(emessage);
+            s_pmousehook->mouse_proc(eusermessage);
 
          }
 
@@ -190,12 +190,12 @@ namespace input_win32
    }
 
 
-   void mouse_hook::mouse_proc(enum_message emessage)
+   void mouse_hook::mouse_proc(::user::enum_message eusermessage)
    {
 
       auto pmouse = øcreate_new < ::message::mouse >();
 
-      pmouse->m_emessage = emessage;
+      pmouse->m_eusermessage = eusermessage;
 
       handle_message(pmouse);
 

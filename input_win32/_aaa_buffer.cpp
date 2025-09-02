@@ -919,14 +919,14 @@ namespace windowing_win32
                   if (m_pimpl->m_puserinteraction->const_layout().window().origin() != point)
                   {
 
-                     m_pimpl->m_puserinteraction->post_message(e_message_reposition, 0, point);
+                     m_pimpl->m_puserinteraction->post_message(::user::e_message_reposition, 0, point);
 
                   }
 
                   if (m_pimpl->m_puserinteraction->const_layout().window().size() != size)
                   {
 
-                     m_pimpl->m_puserinteraction->post_message(e_message_size, 0, size);
+                     m_pimpl->m_puserinteraction->post_message(::user::e_message_size, 0, size);
 
                   }
 

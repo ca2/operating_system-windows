@@ -200,7 +200,7 @@ pacmedir->system() / "config/plugin/appfy_beg_debug_box.txt"))
       if (__argc < 4)
       {
 
-         os_output_error_message("Incorrect Number of Arguments passed to appfy. Expected 3 or 4; passed " + ::as_string(__argc - 1), "", e_message_box_ok);
+         os_output_error_message("Incorrect Number of Arguments passed to appfy. Expected 3 or 4; passed " + ::as_string(__argc - 1), "", ::user::e_message_box_ok);
 
          papplication->m_result.add(error_bad_argument);
 
@@ -452,7 +452,7 @@ pacmedir->system() / "config/plugin/appfy_beg_debug_box.txt"))
 
          papplication->m_result.add(error_failed);
 
-         output_error_message("Couldn't update resources for \"" + strApp + "\".\n\nDoes the file \"" + strSrc + "\" exists at the moment of this application call and is it valid so far?", nullptr, e_message_box_icon_exclamation);
+         output_error_message("Couldn't update resources for \"" + strApp + "\".\n\nDoes the file \"" + strSrc + "\" exists at the moment of this application call and is it valid so far?", nullptr, ::user::e_message_box_icon_exclamation);
 
          return;
 

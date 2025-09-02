@@ -114,7 +114,7 @@ namespace acme_windows
    void main_window::post_application_exit()
    {
 
-      ::PostMessage(m_hwnd, e_message_application_exit, 0, 0);
+      ::PostMessage(m_hwnd, ::user::e_message_application_exit, 0, 0);
 
    }
 

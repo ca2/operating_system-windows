@@ -38,7 +38,7 @@ namespace windowing_win32
       //m_pWindowing4 = this;
 
       //      set_layer(LAYERED_IMPL, this);
-      m_emessageWindowsTaskbarCreatedMessage = e_message_undefined;
+      m_emessageWindowsTaskbarCreatedMessage = ::user::e_message_undefined;
 
    }
 
@@ -602,7 +602,7 @@ namespace windowing_win32
    //   //   if (pmsg->message == 126)
    //   //   {
 
-   //   //      informationf("e_message_display_change");
+   //   //      informationf("::user::e_message_display_change");
 
    //   //   }
 
@@ -673,7 +673,7 @@ namespace windowing_win32
 
       pkey->m_iVirtualKey = (int)MapLeftRightKeys(wparam, lparam);
 
-      ::windowing::windowing::set(pkey, oswindow, pwindow, emessage, wparam, lparam);
+      ::windowing::windowing::set(pkey, oswindow, pwindow, eusermessage, wparam, lparam);
 
    }
 
@@ -935,7 +935,7 @@ namespace windowing_win32
    }
 
 
-   //   enum_dialog_result windowing::message_box(const ::scoped_string & scopedstrMessage, const ::scoped_string & scopedstrTitle, const ::e_message_box & emessagebox)
+   //   enum_dialog_result windowing::message_box(const ::scoped_string & scopedstrMessage, const ::scoped_string & scopedstrTitle, const ::user::e_message_box & emessagebox)
    //   {
    //
    //      wstring wstrMessage(pszMessage);
@@ -1514,10 +1514,10 @@ namespace windowing_win32
    void windowing::register_windows_message()
    {
 
-      if (m_emessageWindowsTaskbarCreatedMessage == e_message_undefined)
+      if (m_emessageWindowsTaskbarCreatedMessage == ::user::e_message_undefined)
       {
 
-         m_emessageWindowsTaskbarCreatedMessage = (enum_message)RegisterWindowMessageW(L"TaskbarCreated");
+         m_emessageWindowsTaskbarCreatedMessage = (::user::enum_message)RegisterWindowMessageW(L"TaskbarCreated");
 
       }
 

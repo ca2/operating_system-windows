@@ -52,7 +52,7 @@ __STATIC bool CLASS_DECL_AURA IsHelpKey(LPMSG pMsg)
 
 // return true only for non-repeat F1 keydowns.
 {
-   return pMsg->message == e_message_key_down &&
+   return pMsg->message == ::user::e_message_key_down &&
 
           pMsg->wParam == VK_F1 &&
 
@@ -66,14 +66,14 @@ __STATIC bool CLASS_DECL_AURA IsHelpKey(LPMSG pMsg)
 __STATIC inline bool IsEnterKey(LPMSG pMsg)
 
 {
-   return pMsg->message == e_message_key_down && pMsg->wParam == VK_RETURN;
+   return pMsg->message == ::user::e_message_key_down && pMsg->wParam == VK_RETURN;
 
 }
 
 __STATIC inline bool IsButtonUp(LPMSG pMsg)
 
 {
-   return pMsg->message == e_message_left_button_up;
+   return pMsg->message == ::user::e_message_left_button_up;
 
 }
 

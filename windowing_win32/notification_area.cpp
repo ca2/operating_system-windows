@@ -236,19 +236,19 @@ namespace windowing_win32
 
    void notification_area::DoubleClick(int iItem)
    {
-      PostMessageToTrayIcon(iItem, e_message_left_button_double_click);
+      PostMessageToTrayIcon(iItem, ::user::e_message_left_button_double_click);
    }
 
    void notification_area::LeftClick(int iItem)
    {
-      PostMessageToTrayIcon(iItem, e_message_left_button_down);
-      PostMessageToTrayIcon(iItem, e_message_left_button_up);
+      PostMessageToTrayIcon(iItem, ::user::e_message_left_button_down);
+      PostMessageToTrayIcon(iItem, ::user::e_message_left_button_up);
    }
 
    void notification_area::RightClick(int iItem)
    {
-      PostMessageToTrayIcon(iItem, e_message_right_button_down);
-      PostMessageToTrayIcon(iItem, e_message_right_button_up);
+      PostMessageToTrayIcon(iItem, ::user::e_message_right_button_down);
+      PostMessageToTrayIcon(iItem, ::user::e_message_right_button_up);
    }
 
    void notification_area::PostMessageToTrayIcon(int iItem, LPARAM lParam)

@@ -943,7 +943,7 @@ bool is_good_active_w(HWND w)
 //      return TGA_FAILED;
 //   }
 //
-//   // TerminateAppEnum() posts e_message_close to all windows whose PID
+//   // TerminateAppEnum() posts ::user::e_message_close to all windows whose PID
 //   // matches your process's.
 //   EnumWindows((WNDENUMPROC)TerminateGuiAppEnum, (LPARAM)dwPID);
 //
@@ -971,7 +971,7 @@ bool is_good_active_w(HWND w)
 //   if (dwID == (unsigned int)lParam)
 //   {
 //
-//      PostMessage(hwnd, e_message_close, 0, 0);
+//      PostMessage(hwnd, ::user::e_message_close, 0, 0);
 //
 //   }
 //

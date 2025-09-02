@@ -230,10 +230,10 @@ namespace production
    {
       ::user::tab_impact::install_message_routing(pchannel);
 
-      MESSAGE_LINK(WM_USER, pchannel, this, &pane_impact::_001OnUserMessage);
-      MESSAGE_LINK(e_message_create, pchannel, this, &pane_impact::_001OnCreate);
-      //	MESSAGE_LINK(e_message_size, pchannel, this, &pane_impact::on_message_size);
-      MESSAGE_LINK(WM_USER + 1122, pchannel, this, &pane_impact::_001OnMenuMessage);
+      USER_MESSAGE_LINK(WM_USER, pchannel, this, &pane_impact::_001OnUserMessage);
+      USER_MESSAGE_LINK(::user::e_message_create, pchannel, this, &pane_impact::_001OnCreate);
+      //	USER_MESSAGE_LINK(::user::e_message_size, pchannel, this, &pane_impact::on_message_size);
+      USER_MESSAGE_LINK(WM_USER + 1122, pchannel, this, &pane_impact::_001OnMenuMessage);
 
 
    }
