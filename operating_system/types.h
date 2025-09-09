@@ -1,10 +1,10 @@
 #pragma once
 
 
-typedef char                     ansi_character;
-typedef wchar_t                  wd16_character;
-typedef char32_t                 wd32_character;
-typedef wd16_character           wide_character;
+using ansi_character = char;
+using wd16_character = wchar_t;
+using wd32_character = char32_t;
+using wide_character = wd16_character;
 
 
 //using oswindow = oswindow;
