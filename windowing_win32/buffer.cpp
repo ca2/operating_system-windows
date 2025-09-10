@@ -1004,6 +1004,13 @@ namespace windowing_win32
 
             string strType = ::type(m_pwindow->user_interaction()).name();
 
+            if (!strType.case_insensitive_contains("main_frame"))
+            {
+
+               information() << "not main_frame";
+
+            }
+
             if (strType.case_insensitive_contains("font_format"))
             {
 
