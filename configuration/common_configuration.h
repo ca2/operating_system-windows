@@ -16,6 +16,7 @@
 #define HAVE_STDLIB_H 1
 #define HAVE_WINCRYPT_H 1
 #define HAVE_STDARG_H 1
+#define HAVE_STDINT_H 1
 
 #include <BaseTsd.h>
 #define HAVE_DECL_SIZE_MAX 1
