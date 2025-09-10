@@ -2,6 +2,8 @@
 
 #define HAVE_READLINK 1
 
+#define _CRT_SECURE_NO_WARNINGS
+
 /* Define to the number of bits in type 'ptrdiff_t'. */
 #undef BITSIZEOF_PTRDIFF_T
 
