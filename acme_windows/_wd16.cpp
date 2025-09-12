@@ -8,7 +8,7 @@ BSTR AllocSysString(const ::wd16_character * pchData, character_count nDataLengt
 
    BSTR bstr = nullptr;
 
-   character_count nLen = utf_to_utf_length(bstr, pchData, nDataLength);
+   character_count nLen = utf_to_utf_length2(bstr, pchData, nDataLength);
 
    bstr = ::SysAllocStringLen(nullptr, (unsigned int)nLen);
 
@@ -28,7 +28,7 @@ BSTR AllocSysString(const ::wd16_character * pchData, character_count nDataLengt
 bool ReAllocSysString(BSTR * pbstr, const ::wd16_character * pchData, character_count nDataLength) noexcept
 {
 
-   character_count nLen = utf_to_utf_length((wchar_t* ) pbstr, pchData, nDataLength);
+   character_count nLen = utf_to_utf_length2((wchar_t* ) pbstr, pchData, nDataLength);
 
    bool bSuccess = ::SysReAllocStringLen(pbstr, nullptr, (unsigned int)nLen) != 0;
 
