@@ -13,6 +13,11 @@
 #include <sdkddkver.h>
 
 
+#define USE_PORT_FREEIMAGE
+#define USE_PORT_JPEG
+#define USE_PORT_PNG
+
+
 //#define NTDDI_VERSION   NTDDI_WIN10_CO // NTDDI_WIN10
 //#define _WIN32_WINNT    _WIN32_WINNT_WIN10 // _WIN32_WINNT_WIN10
 //#define WINVER          _WIN32_WINNT_WIN10 // _WIN32_WINNT_WIN10
