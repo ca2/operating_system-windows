@@ -13,9 +13,7 @@
 #include <sdkddkver.h>
 
 
-#define USE_PORT_FREEIMAGE
-#define USE_PORT_JPEG
-#define USE_PORT_PNG
+#include "configuration/common/config.h"
 
 
 //#define NTDDI_VERSION   NTDDI_WIN10_CO // NTDDI_WIN10

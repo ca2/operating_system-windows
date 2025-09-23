@@ -2,7 +2,13 @@
 #pragma once
 
 
+#include "configuration/common/config.h"
+
+
 #define NOMINMAX
+
+
+
 
 
 

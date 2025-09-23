@@ -5,6 +5,9 @@
 //#include "operating_system/third_private_config.h"
 
 
+#include "configuration/common/config.h"
+
+
 #ifdef _WIN32
 #ifndef _CRT_SECURE_NO_WARNINGS
 #define _CRT_SECURE_NO_WARNINGS
