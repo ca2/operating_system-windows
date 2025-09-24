@@ -1,6 +1,6 @@
 #pragma once
 
-#include "app-core/multimedia/multimedia.h"
+#include "app-multimedia/multimedia/multimedia.h"
 //#include <Mmreg.h>
 //#define STRINGIFY(x) #x
 //#define TOSTRING(x) STRINGIFY(x)
