@@ -676,7 +676,7 @@
     <ResourceCompile Include="deployment.rc" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\source\app-core\multimedia\multimedia.vcxproj">
+    <ProjectReference Include="..\..\..\source\app-multimedia\multimedia\multimedia.vcxproj">
       <Project>{2ee483c6-650e-463d-89d1-0fce7dfd604c}</Project>
     </ProjectReference>
     <ProjectReference Include="..\..\..\source\app-veriwell\multimedia\veriwell_multimedia.vcxproj">

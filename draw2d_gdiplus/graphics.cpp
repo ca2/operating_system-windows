@@ -6388,7 +6388,7 @@ namespace draw2d_gdiplus
 
       ::wstring wstr(scopedstr);
 
-      auto status = m_pgraphics->MeasureString(wstr.c_str(), wstr.size(), pfont, origin, &stringformat, &box);
+      auto status = m_pgraphics->MeasureString(wstr.c_str(), (INT) wstr.size(), pfont, origin, &stringformat, &box);
 
       if (status != Gdiplus::Ok)
       {
