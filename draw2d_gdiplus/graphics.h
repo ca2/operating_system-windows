@@ -438,6 +438,8 @@ namespace draw2d_gdiplus
       double_size get_text_extent(const scoped_string & strString, character_count iIndex) override;
 
       double_size get_text_extent(const scoped_string & strString) override;
+
+      double_size _get_text_extent(const scoped_string & strString) override;
       //virtual double_size GetOutputTextExtent(const scoped_string & strString, character_count nCount) override;
 
       //virtual double_size GetOutputTextExtent(const ::scoped_string & scopedstr) override;

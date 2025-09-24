@@ -6031,7 +6031,7 @@ namespace draw2d_gdiplus
 
       }
 
-      _synchronous_lock synchronouslock(system()->draw2d()->write_text()->m_pparticleFontTextMapSynchronization);
+      _synchronous_lock synchronouslockFontTextMap(::write_text::font::s_pmutexFontTextMap);
 
       daLeft.erase_all();
 
@@ -6045,14 +6045,14 @@ namespace draw2d_gdiplus
 
       auto & text = m_pfont->m_mapFontText[scopedstr];
 
-      if (text.m_wstr.is_empty())
+      if (text.get_item(::write_text::font::text::e_size_backend_draw_text)->get_text().is_empty())
       {
 
-         text.m_wstr =scopedstr;
+         text.get_item(::write_text::font::text::e_size_backend_draw_text)->set_text(scopedstr);
 
       }
 
-      ::collection::count cLength = text.m_wstr.length();
+      ::collection::count cLength = text.get_item(::write_text::font::text::e_size_backend_draw_text)->get_text().length();
 
       ::collection::count cBeg = wstrBefore.length();
 
@@ -6120,7 +6120,7 @@ namespace draw2d_gdiplus
 
          Gdiplus::PointF origin(0.f, 0.f);
 
-         m_pgraphics->MeasureCharacterRanges(text.m_wstr, (INT)cLength, m_pfont->get_os_data < Gdiplus::Font * >(this), box, &strFormat, count, regiona.data());
+         m_pgraphics->MeasureCharacterRanges(text.get_item(::write_text::font::text::e_size_backend_draw_text)->get_text(), (INT)cLength, m_pfont->get_os_data < Gdiplus::Font * >(this), box, &strFormat, count, regiona.data());
 
          Gdiplus::RectF rectangleBound;
 
@@ -6129,7 +6129,7 @@ namespace draw2d_gdiplus
 
             regiona[i].GetBounds(&rectangleBound, m_pgraphics);
 
-            wchar_t wch = text.m_wstr.c_str()[i + iStart];
+            wchar_t wch = text.get_item(::write_text::font::text::e_size_backend_draw_text)->get_text().c_str()[i + iStart];
 
             auto iUtf8Length = unicode_to_utf8_length(wch);
 
@@ -6328,42 +6328,44 @@ namespace draw2d_gdiplus
 
       }
 
-      m_pfont->defer_update(this, 0);
-
-      auto psystem = system();
-
-      auto paurasystem = psystem;
-
-      auto pdraw2d = paurasystem->draw2d();
-
-      auto pwritetext = pdraw2d->write_text();
-
-      ::particle * psynchronization = nullptr;
-
-      if (::is_set(pwritetext))
-      {
-
-         psynchronization = pwritetext->m_pparticleFontTextMapSynchronization;
-
-      }
-
-      _synchronous_lock synchronouslock(psynchronization ? psynchronization : nullptr);
+      _synchronous_lock synchronouslockFontTextMap(::write_text::font::s_pmutexFontTextMap);
 
       auto & text = m_pfont->m_mapFontText[scopedstr];
 
-      if (text.m_bSize)
+      if (text.get_item(::write_text::font::text::e_size_unbounded)->has_size())
       {
 
-         return text.m_size;
+         return text.get_item(::write_text::font::text::e_size_unbounded)->get_size();
 
       }
 
-      if (text.m_wstr.is_empty())
+      if (text.get_item(::write_text::font::text::e_size_backend_draw_text)->get_text().is_empty())
       {
 
-         text.m_wstr = scopedstr;
+         text.get_item(::write_text::font::text::e_size_backend_draw_text)->set_text(scopedstr);
 
       }
+
+      auto size = this->_get_text_extent(scopedstr);
+
+      text.get_item(::write_text::font::text::e_size_unbounded)->set_size(size);
+
+      return text.get_item(::write_text::font::text::e_size_unbounded)->get_size();
+
+   }
+
+
+   double_size graphics::_get_text_extent(const ::scoped_string & scopedstr)
+   {
+
+      if (!m_pfont || scopedstr.is_empty())
+      {
+
+         return ::double_size(0, 0);
+
+      }
+
+      m_pfont->defer_update(this, 0);
 
       Gdiplus::RectF box;
 
@@ -6384,13 +6386,9 @@ namespace draw2d_gdiplus
 
       }
 
-      const WCHAR * psz = text.m_wstr;
+      ::wstring wstr(scopedstr);
 
-      int iLen = (int)text.m_wstr.length();
-
-//#undef ___new
-
-      auto status = m_pgraphics->MeasureString(psz, iLen, pfont, origin, &stringformat, &box);
+      auto status = m_pgraphics->MeasureString(wstr.c_str(), wstr.size(), pfont, origin, &stringformat, &box);
 
       if (status != Gdiplus::Ok)
       {
@@ -6399,11 +6397,9 @@ namespace draw2d_gdiplus
 
       }
 
-      text.m_size = double_size((double)(box.Width * m_pfont->m_dFontWidth), (double)(box.Height));
+      auto size = ::double_size((double)(box.Width * m_pfont->m_dFontWidth), (double)(box.Height));
 
-      text.m_bSize = true;
-
-      return text.m_size;
+      return size;
 
       /*if(get_handle2() == nullptr)
          return ::double_size(0, 0);
@@ -6851,16 +6847,7 @@ namespace draw2d_gdiplus
 
       auto pwritetext = pdraw2d->write_text();
 
-      ::particle * psynchronization = nullptr;
-
-      if (::is_set(pwritetext))
-      {
-
-         psynchronization = pwritetext->m_pparticleFontTextMapSynchronization;
-
-      }
-
-      _synchronous_lock synchronouslock(psynchronization ? psynchronization : nullptr);
+      _synchronous_lock synchronouslockFontTextMap(::write_text::font::s_pmutexFontTextMap);
 
       ::write_text::font::text* ptext = nullptr;
 
@@ -6879,10 +6866,10 @@ namespace draw2d_gdiplus
 
       }
 
-      if (ptext->m_wstr.is_empty())
+      if (ptext->get_item(::write_text::font::text::e_size_backend_draw_text)->get_text().is_empty())
       {
 
-         ptext->m_wstr = scopedstr;
+         ptext->get_item(::write_text::font::text::e_size_backend_draw_text)->set_text(scopedstr);
 
       }
 
@@ -7012,7 +6999,7 @@ namespace draw2d_gdiplus
 
             double d3 = d1 * d2;
 
-            status = path.AddString(ptext->m_wstr, (INT)ptext->m_wstr.length(), &fontfamily, pfont->GetStyle(), (Gdiplus::REAL)d1, origin, &format);
+            status = path.AddString(ptext->get_item(::write_text::font::text::e_size_backend_draw_text)->get_text(), (INT)ptext->get_item(::write_text::font::text::e_size_backend_draw_text)->get_text().length(), &fontfamily, pfont->GetStyle(), (Gdiplus::REAL)d1, origin, &format);
 
             m_ppath->AddPath(&path, false);
 
@@ -7036,7 +7023,7 @@ namespace draw2d_gdiplus
 
             }
 
-            status = m_pgraphics->DrawString(ptext->m_wstr, (INT)ptext->m_wstr.length(), pfont, origin, &format, pbrush);
+            status = m_pgraphics->DrawString(ptext->get_item(::write_text::font::text::e_size_backend_draw_text)->get_text(), (INT)ptext->get_item(::write_text::font::text::e_size_backend_draw_text)->get_text().length(), pfont, origin, &format, pbrush);
 
             if (eCompositingMode == Gdiplus::CompositingModeSourceCopy)
             {
@@ -7104,7 +7091,7 @@ namespace draw2d_gdiplus
 
             double d3 = d1 * d2;
 
-            status = path.AddString(ptext->m_wstr, (INT)ptext->m_wstr.length(), &fontfamily, pfont->GetStyle(), (Gdiplus::REAL)d1, origin, &format);
+            status = path.AddString(ptext->get_item(::write_text::font::text::e_size_backend_draw_text)->get_text(), (INT)ptext->get_item(::write_text::font::text::e_size_backend_draw_text)->get_text().length(), &fontfamily, pfont->GetStyle(), (Gdiplus::REAL)d1, origin, &format);
 
             path.Transform(pmNew);
 
@@ -7116,7 +7103,7 @@ namespace draw2d_gdiplus
 
             m_pgraphics->SetTransform(pmNew);
 
-            status = m_pgraphics->DrawString(ptext->m_wstr, (INT)ptext->m_wstr.length(), pfont, origin, &format, pbrush);
+            status = m_pgraphics->DrawString(ptext->get_item(::write_text::font::text::e_size_backend_draw_text)->get_text(), (INT)ptext->get_item(::write_text::font::text::e_size_backend_draw_text)->get_text().length(), pfont, origin, &format, pbrush);
 
             m_pgraphics->SetTransform(&m);
 
