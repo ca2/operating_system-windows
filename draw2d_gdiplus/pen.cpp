@@ -327,13 +327,13 @@ namespace draw2d_gdiplus
       if (m_epen == ::draw2d::e_pen_brush)
       {
 
-         m_ppen = __raw_new Gdiplus::Pen(m_pbrush->get_os_data <Gdiplus::Brush *>(pgraphics), (Gdiplus::REAL) m_dWidth);
+         m_ppen = øraw_new Gdiplus::Pen(m_pbrush->get_os_data <Gdiplus::Brush *>(pgraphics), (Gdiplus::REAL) m_dWidth);
 
       }
       else
       {
 
-         m_ppen = __raw_new Gdiplus::Pen(gdiplus_color(m_color), (Gdiplus::REAL) m_dWidth);
+         m_ppen = øraw_new Gdiplus::Pen(gdiplus_color(m_color), (Gdiplus::REAL) m_dWidth);
 
       }
 

@@ -49,7 +49,7 @@ namespace draw2d_gdiplus
 
       ::acme::del(m_pbitmap);
 
-      m_pbitmap = __raw_new ::Gdiplus::Bitmap(nWidth, nHeight, Gdiplus::PixelOffsetModeHighQuality);
+      m_pbitmap = øraw_new ::Gdiplus::Bitmap(nWidth, nHeight, Gdiplus::PixelOffsetModeHighQuality);
 
       m_osdata[0] = m_pbitmap;
 
@@ -92,7 +92,7 @@ namespace draw2d_gdiplus
 
       }
 
-      m_pbitmap = __raw_new Gdiplus::Bitmap(ppixmap->m_sizeRaw.cx(), ppixmap->m_sizeRaw.cy(), m_iStride, PixelFormat32bppPARGB, (BYTE *) ppixmap->image32());
+      m_pbitmap = øraw_new Gdiplus::Bitmap(ppixmap->m_sizeRaw.cx(), ppixmap->m_sizeRaw.cy(), m_iStride, PixelFormat32bppPARGB, (BYTE *) ppixmap->image32());
 
       if (m_pbitmap == nullptr)
       {
@@ -153,7 +153,7 @@ namespace draw2d_gdiplus
 
       }
 
-      m_pbitmap = __raw_new Gdiplus::Bitmap(abs(pbmi->bmiHeader.biWidth), abs(pbmi->bmiHeader.biHeight),m_iStride, PixelFormat32bppPARGB, (BYTE *)m_mem.data());
+      m_pbitmap = øraw_new Gdiplus::Bitmap(abs(pbmi->bmiHeader.biWidth), abs(pbmi->bmiHeader.biHeight),m_iStride, PixelFormat32bppPARGB, (BYTE *)m_mem.data());
 
       if(m_pbitmap == nullptr)
       {
@@ -266,7 +266,7 @@ namespace draw2d_gdiplus
 
          ::acme::del(m_pbitmap);
 
-         m_pbitmap = __raw_new ::Gdiplus::Bitmap(nWidth, nHeight, Gdiplus::PixelOffsetModeHighQuality);
+         m_pbitmap = øraw_new ::Gdiplus::Bitmap(nWidth, nHeight, Gdiplus::PixelOffsetModeHighQuality);
 
       }
 
@@ -282,7 +282,7 @@ namespace draw2d_gdiplus
 
       ::acme::del(m_pbitmap);
 
-      m_pbitmap = __raw_new ::Gdiplus::Bitmap(nWidth, nHeight, Gdiplus::PixelOffsetModeHighQuality);
+      m_pbitmap = øraw_new ::Gdiplus::Bitmap(nWidth, nHeight, Gdiplus::PixelOffsetModeHighQuality);
 
       m_osdata[0] = m_pbitmap;
 

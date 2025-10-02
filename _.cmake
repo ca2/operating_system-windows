@@ -109,6 +109,10 @@ message(STATUS "CMAKE_BUILD_TYPE is ${CMAKE_BUILD_TYPE}")
 message(STATUS "OPERATING_SYSTEM_NAME is ${OPERATING_SYSTEM_NAME}")
 
 
+set(APPLICATION_BUILD_HELPER_BINARY "$ENV{USERPROFILE}/code/operating_system/tool/bin/application_build_helper")
+
+message(STATUS "APPLICATION_BUILD_HELPER_BINARY is ${APPLICATION_BUILD_HELPER_BINARY}")
+
 
 add_custom_target(copy_libraries_step
    COMMAND ${CMAKE_COMMAND} -E copy_directory_if_different

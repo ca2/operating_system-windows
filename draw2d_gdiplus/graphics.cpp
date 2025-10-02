@@ -283,7 +283,7 @@ namespace draw2d_gdiplus
 
       m_hdcGraphics = hdc;
 
-      m_pgraphics = __raw_new Gdiplus::Graphics(m_hdcGraphics);
+      m_pgraphics = øraw_new Gdiplus::Graphics(m_hdcGraphics);
 
       m_pgraphics->SetPageUnit(Gdiplus::UnitPixel);
 
@@ -2877,7 +2877,7 @@ namespace draw2d_gdiplus
 
       ::StartPage(m_hdc);
 
-      m_pgraphics = __raw_new Gdiplus::Graphics(m_hdc);
+      m_pgraphics = øraw_new Gdiplus::Graphics(m_hdc);
 
       m_pgraphics->SetPageUnit(Gdiplus::UnitPixel);
 
@@ -3192,7 +3192,7 @@ namespace draw2d_gdiplus
 
       }
 
-      m_ppath = __raw_new Gdiplus::GraphicsPath;
+      m_ppath = øraw_new Gdiplus::GraphicsPath;
 
       //return m_ppath != nullptr;
 
@@ -5100,7 +5100,7 @@ namespace draw2d_gdiplus
             if (!pregion)
             {
 
-               pregion = __raw_new Gdiplus::Region(rect);
+               pregion = øraw_new Gdiplus::Region(rect);
 
             }
             else
@@ -5123,7 +5123,7 @@ namespace draw2d_gdiplus
             if (!pregion)
             {
 
-               pregion = __raw_new Gdiplus::Region(ppath);
+               pregion = øraw_new Gdiplus::Region(ppath);
 
             }
             else
@@ -6215,7 +6215,7 @@ namespace draw2d_gdiplus
 
       //#undef ___new
 
-      Gdiplus::Region * pCharRangeRegions = __raw_new Gdiplus::Region[count];
+      Gdiplus::Region * pCharRangeRegions = øraw_new Gdiplus::Region[count];
 
       //#define ___new ACME_NEW
 
@@ -6294,7 +6294,7 @@ namespace draw2d_gdiplus
 
       //#undef ___new
 
-      Gdiplus::Region * pCharRangeRegions = __raw_new Gdiplus::Region[count];
+      Gdiplus::Region * pCharRangeRegions = øraw_new Gdiplus::Region[count];
 
       //#define ___new ACME_NEW
 
@@ -7060,7 +7060,7 @@ namespace draw2d_gdiplus
 
             //#undef ___new
 
-            pmNew = __raw_new Gdiplus::Matrix();
+            pmNew = øraw_new Gdiplus::Matrix();
 
             //#define ___new ACME_NEW
 

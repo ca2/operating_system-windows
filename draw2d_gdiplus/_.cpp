@@ -22,9 +22,9 @@ CLASS_DECL_DRAW2D_GDIPLUS void initialize_gdiplus()
 
    }
 
-   g_pgdiplusStartupInput = __raw_new Gdiplus::GdiplusStartupInput ();
+   g_pgdiplusStartupInput = øraw_new Gdiplus::GdiplusStartupInput ();
 
-   g_pgdiplusStartupOutput = __raw_new Gdiplus::GdiplusStartupOutput ();
+   g_pgdiplusStartupOutput = øraw_new Gdiplus::GdiplusStartupOutput ();
 
    g_gdiplusToken = NULL;
 

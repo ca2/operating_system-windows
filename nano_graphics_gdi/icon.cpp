@@ -189,7 +189,7 @@ Gdiplus::Image * LoadGdiplusImageFromMemory(BYTE * buffer, size_t bufferSize)
    }
 
    // Load the image from the stream
-   Gdiplus::Image * pImage = __raw_new Gdiplus::Image(pStream, FALSE);
+   Gdiplus::Image * pImage = øraw_new Gdiplus::Image(pStream, FALSE);
 
    // Clean up
    pStream->Release();

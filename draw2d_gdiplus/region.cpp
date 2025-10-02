@@ -119,7 +119,7 @@ namespace draw2d_gdiplus
       case ::draw2d::e_item_none:
       {
 
-         return __raw_new Gdiplus::Region();
+         return øraw_new Gdiplus::Region();
 
       }
       case ::draw2d::e_item_rectangle:
@@ -154,7 +154,7 @@ namespace draw2d_gdiplus
 
       //path.AddRectangle(rectangle);
 
-      return __raw_new Gdiplus::Region(rectangle);
+      return øraw_new Gdiplus::Region(rectangle);
 
    }
 
@@ -171,7 +171,7 @@ namespace draw2d_gdiplus
          (INT) pitem->m_item.width(),
          (INT) pitem->m_item.height());
 
-      return __raw_new Gdiplus::Region(&path);
+      return øraw_new Gdiplus::Region(&path);
 
    }
 
@@ -201,7 +201,7 @@ namespace draw2d_gdiplus
 
       path.AddPolygon(pa.data(), (int) pa.get_count());
 
-      return __raw_new Gdiplus::Region(&path);
+      return øraw_new Gdiplus::Region(&path);
 
    }
 
@@ -252,7 +252,7 @@ namespace draw2d_gdiplus
 
       }
 
-      return __raw_new Gdiplus::Region(&path);
+      return øraw_new Gdiplus::Region(&path);
 
    }
 
