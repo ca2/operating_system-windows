@@ -116,7 +116,7 @@
   </ItemGroup>
   
   <ItemGroup>
-    <ProjectReference Include="..\..\..\source\app\base\m_base.vcxproj">
+    <ProjectReference Include="..\..\..\source\app\base\m_berg.vcxproj">
       <Project>{5487686f-8a2f-401a-a38e-fda8900e1984}</Project>
     </ProjectReference>
     <ProjectReference Include="..\..\..\source\app\aura\m_core.vcxproj">
