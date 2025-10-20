@@ -185,7 +185,7 @@ namespace acme_windows
    ::file::path path_system::get_absolute_path(const ::scoped_string & scopedstr)
    {
 
-      ::string result = scopedstr; //filesystemcacheitem() fails if path is already absolute
+      ::string result = scopedstr; //pfilesystemcacheitem() fails if path is already absolute
 
       wstring wstrPath(scopedstr);
 
