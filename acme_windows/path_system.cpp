@@ -57,17 +57,19 @@ namespace acme_windows
 
       ::windows::file_instance fileinstance;
 
-      auto etype = get_file_system_item_type(path);
+      auto etype = safe_get_file_system_item_type(path);
 
       if (etype & ::file::e_type_folder2)
       {
 
          if (!fileinstance.safe_create_file(path,
             GENERIC_READ,          // open for reading
-            FILE_SHARE_READ,       // share for reading
+            FILE_SHARE_READ |
+            FILE_SHARE_WRITE |
+            FILE_SHARE_DELETE,       // share for reading
             nullptr,
             OPEN_EXISTING,         // existing file only
-            0,
+            FILE_FLAG_BACKUP_SEMANTICS,
             nullptr))              // no ext. properties
          {
 
@@ -84,8 +86,10 @@ namespace acme_windows
       {
 
          if (!fileinstance.safe_create_file(path,
-            FILE_LIST_DIRECTORY,   // open for reading
-            FILE_SHARE_READ,       // share for reading
+            GENERIC_READ,   // open for reading
+            FILE_SHARE_READ |
+            FILE_SHARE_WRITE |
+            FILE_SHARE_DELETE,       // share for reading
             nullptr,
             OPEN_EXISTING,         // existing file only
             0,
@@ -110,6 +114,8 @@ namespace acme_windows
       }
 
       auto pathFinal = fileinstance.get_final_path_by_handle();
+
+      pathFinal.set_type(etype);
 
       return pathFinal;
 
