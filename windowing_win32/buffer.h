@@ -77,6 +77,8 @@ namespace windowing_win32
 
       void destroy() override;
 
+      void _on_configure_window(::graphics::buffer_item *pbufferitem) override;
+
       void on_update_screen(::graphics::buffer_item * pitem) override;
 
       virtual void update_screen_task();
