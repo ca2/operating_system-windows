@@ -611,6 +611,292 @@ namespace windowing_win32
    ::int_point g_pointLastBottomRight;
 
 
+   void buffer::_on_configure_window(::graphics::buffer_item *pbufferitem)
+   {
+
+      ::cast < ::windowing_win32::window > pwindow = m_pwindow;
+
+      try
+      {
+
+         pwindow->set_window_position_unlocked();
+
+      }
+      catch (...)
+      {
+
+      }
+
+      HWND hwnd = get_hwnd();
+
+      auto pointBufferItemWindow = pbufferitem->m_pointBufferItemWindow;
+
+      auto sizeBufferItemWindow = pbufferitem->m_sizeBufferItemWindow;
+
+      string strType = ::type(m_pwindow->user_interaction()).name();
+
+      // bool bOk = true;
+
+      // bool bSizeOrPositionChanged = false;
+
+      // if (layout.design().is_screen_visible())
+      {
+
+         // HWND hwnd = get_hwnd();
+
+         // string str;
+
+         // int_rectangle rectangleDrawing(point, size);
+
+
+         // if (rectangleDrawing.size() == pimage->m_rectangleTag.size())
+         {
+
+
+            /*             };
+
+                      p();*/
+
+            //::SendMessage((HWND) m_pwindow->oswindow(),
+            // WM_APP + 12345, 0, (LPARAM) p.m_pbase.m_p);
+
+            // if (m_pwindow->user_interaction()->get_parent() == nullptr)
+            {
+
+               auto p = __get_bottom_right();
+
+               if (p.is_set())
+               {
+
+                  auto r = ::int_rectangle(pointBufferItemWindow, sizeBufferItemWindow);
+
+                  auto Δ = r.bottom_right() - p;
+
+                  if (Δ.cx() != 0 || Δ.cy() != 0)
+                  {
+
+                     // information() << "sketch_to_lading top right offset not null " << Δ;
+                  }
+               }
+            }
+
+
+            // if (rectangleWindowCurrent.top_left() != point
+            //    || rectangleWindowCurrent.size() != size
+            //    || m_pwindow->user_interaction()->const_layout().design().has_activation_request())
+            //{
+
+            //   m_pwindow->m_pwindow->_set_window_position(
+            //      m_pwindow->user_interaction()->const_layout().design().zorder(),
+            //      point.x(),
+            //      point.y(),
+            //      size.cx(),
+            //      size.cy(),
+            //      m_pwindow->user_interaction()->const_layout().design().activation(),
+            //      true, false, false, true, false,
+            //      uFlagsSetWindowPos);
+
+            //   m_pwindow->user_interaction()->reset_pending();
+
+            //   bSizeOrPositionChanged = true;
+
+            //}
+
+            if (!m_pwindow || !m_pwindow->user_interaction())
+            {
+
+               throw ::exception(error_wrong_state);
+            }
+
+            // if (m_pwindow->user_interaction()->const_layout().window().origin() != pointBufferItemWindow)
+            //{
+
+            //   m_pwindow->user_interaction()->post_message(::user::e_message_reposition, 0, pointBufferItemWindow);
+
+            //}
+
+            // if (m_pwindow->user_interaction()->const_layout().window().size() != sizeBufferItemWindow)
+            //{
+
+            //   m_pwindow->user_interaction()->post_message(::user::e_message_size, 0, sizeBufferItemWindow);
+
+            //}
+         }
+         // else
+         //{
+         //    informationf("Update discarded");
+
+         //}
+
+         ::int_point pointBottomRight = pointBufferItemWindow + sizeBufferItemWindow;
+
+         // if (::IsWindowVisible(hwnd) && !::IsIconic(hwnd))
+         {
+
+            //::pointer < ::windowing_win32::window > p2 = m_pwindow;
+
+            // if (!p2->m_bSizeMoveMode)
+            {
+
+               ::int_rectangle rectangleWindow;
+
+               RECT rectWindow;
+
+               ::GetWindowRect(hwnd, &rectWindow);
+
+               rectangleWindow = rectWindow;
+
+               ::int_rectangle rectangleRequest(pointBufferItemWindow, sizeBufferItemWindow);
+
+               // if (rectangleWindow.size() != size)
+               //{
+
+               //   return false;
+
+               //}
+
+               if (rectangleRequest.is_empty())
+               {
+
+                  return;
+               }
+
+               bool bDifferent = rectangleWindow != rectangleRequest;
+
+               auto hwndInsertAfter = pwindow->m_hwndSetWindowPosLastInsertAfter;
+
+               auto pOwner = pwindow->owner_window();
+
+               if (pOwner)
+               {
+
+                  auto pwnd = pOwner->get_wnd();
+
+                  if (pwnd)
+                  {
+
+                     ::cast<::windowing_win32::window> pwindow2;
+
+                     pwindow2 = pwnd->m_pacmewindowingwindow;
+
+                     if (pwindow2)
+                     {
+
+                        hwndInsertAfter = pwindow2->m_hwnd;
+
+                        hwndInsertAfter = HWND_TOPMOST;
+                     }
+                  }
+               }
+
+               bool bWindowVisible = ::IsWindowVisible(pwindow->m_hwnd) ? true : false;
+
+               bool bExTopMost = (::GetWindowLongPtr(pwindow->m_hwnd, GWL_EXSTYLE) & WS_EX_TOPMOST) != 0;
+
+               bool bSwpShowWindow = (pwindow->m_uSetWindowPosLastFlags & SWP_SHOWWINDOW) != 0;
+
+               bool bSwpHideWindow = (pwindow->m_uSetWindowPosLastFlags & SWP_HIDEWINDOW) != 0;
+
+               auto nFlags = pwindow->m_uSetWindowPosLastFlags;
+
+               bool bZOrder = !(nFlags & SWP_NOZORDER);
+
+               bool bActivate = !(nFlags & SWP_NOACTIVATE);
+
+               if (rectangleWindow != rectangleRequest
+                   //|| (hwndInsertAfter == HWND_TOPMOST && !bExTopMost)
+                   || bZOrder || bActivate || (bWindowVisible && bSwpHideWindow) || (!bWindowVisible && bSwpShowWindow))
+               {
+
+                  if (!::IsIconic(hwnd) && !::IsZoomed(hwnd))
+                  {
+
+                     information() << "windowing_win32::buffer !IsIconic";
+                     information() << "windowing_win32::buffer bZOrder = " << bZOrder;
+                     information() << "windowing_win32::buffer bActivate = " << bActivate;
+
+                     nFlags &= ~SWP_NOMOVE;
+                     nFlags &= ~SWP_NOSIZE;
+                     // nFlags |= SWP_NOZORDER;
+                     if (strType.case_insensitive_contains("list_box"))
+                     {
+
+                        if (nFlags & SWP_SHOWWINDOW)
+                        {
+
+                           print_line("nFlags & SWP_SHOWWINDOW");
+                        }
+
+                        if (nFlags & SWP_HIDEWINDOW)
+                        {
+
+                           print_line("nFlags & SWP_HIDEWINDOW");
+                        }
+                     }
+
+                     auto cx = rectangleRequest.width();
+
+                     pwindow->_main_send(
+                        [&]()
+                        {
+                           // if (!(nFlags & SWP_NOMOVE))
+                           //{
+
+                           //   pwindow->m_pointDesignRequest = rectangleRequest.top_left();
+
+                           //}
+
+                           // if (!(nFlags & SWP_NOSIZE))
+                           //{
+
+                           //   pwindow->m_sizeDesignRequest = rectangleRequest.size();
+
+                           //}
+
+                           if (rectangleRequest.left() > 100)
+                           {
+
+                              informationf("test");
+                           }
+
+                           ::SetWindowPos(hwnd, hwndInsertAfter, rectangleRequest.left(), rectangleRequest.top(), cx,
+                                          rectangleRequest.height(), nFlags);
+
+                           if (pwindow->m_activationSetWindowPosLast & ::user::e_activation_set_foreground)
+                           {
+
+                              ::cast<::win32::acme::windowing::activation_token> pactivationtoken =
+                                 pwindow->m_activationSetWindowPosLast.m_pactivationtoken;
+
+                              if (pactivationtoken)
+                              {
+
+                                 pactivationtoken->m_ptaskForeground->post(
+                                    [pwindow, hwnd]()
+                                    {
+                                       ::SetForegroundWindow(hwnd);
+
+                                       pwindow.m_p->m_activationSetWindowPosLast.clear();
+                                    });
+                              }
+                              else
+                              {
+
+                                 ::SetForegroundWindow(hwnd);
+                                 pwindow->m_activationSetWindowPosLast.clear();
+                              }
+
+                              pwindow->m_uSetWindowPosLastFlags &= ~SWP_NOACTIVATE;
+                           }
+                        });
+                  }
+               }
+            }
+         }
+      }
+   }
+
+
    void buffer::on_update_screen(::graphics::buffer_item * pbufferitem)
    {
 
@@ -1080,301 +1366,7 @@ namespace windowing_win32
 
             //::pointer < ::windowing_win32::window > pwindow = m_pwindow->m_pwindow;
 
-            try
-            {
-
-               pwindow->set_window_position_unlocked();
-
-            }
-            catch (...)
-            {
-
-            }
-
-
-            //bool bOk = true;
-
-            //bool bSizeOrPositionChanged = false;
-
-            //if (layout.design().is_screen_visible())
-            {
-
-               //HWND hwnd = get_hwnd();
-
-               //string str;
-
-               //int_rectangle rectangleDrawing(point, size);
-
-
-                  //if (rectangleDrawing.size() == pimage->m_rectangleTag.size())
-               {
-
-
-                  /*             };
-
-                            p();*/
-
-                            //::SendMessage((HWND) m_pwindow->oswindow(),
-             //WM_APP + 12345, 0, (LPARAM) p.m_pbase.m_p);
-
-                            //if (m_pwindow->user_interaction()->get_parent() == nullptr)
-                  {
-
-                     auto p = __get_bottom_right();
-
-                     if (p.is_set())
-                     {
-
-                        auto r = ::int_rectangle(pointBufferItemWindow, sizeBufferItemWindow);
-
-                        auto Δ = r.bottom_right() - p;
-
-                        if (Δ.cx() != 0 || Δ.cy() != 0)
-                        {
-
-                           //information() << "sketch_to_lading top right offset not null " << Δ;
-
-                        }
-
-                     }
-
-                  }
-
-
-                  //if (rectangleWindowCurrent.top_left() != point
-                  //   || rectangleWindowCurrent.size() != size
-                  //   || m_pwindow->user_interaction()->const_layout().design().has_activation_request())
-                  //{
-
-                  //   m_pwindow->m_pwindow->_set_window_position(
-                  //      m_pwindow->user_interaction()->const_layout().design().zorder(),
-                  //      point.x(),
-                  //      point.y(),
-                  //      size.cx(),
-                  //      size.cy(),
-                  //      m_pwindow->user_interaction()->const_layout().design().activation(),
-                  //      true, false, false, true, false, 
-                  //      uFlagsSetWindowPos);
-
-                  //   m_pwindow->user_interaction()->reset_pending();
-
-                  //   bSizeOrPositionChanged = true;
-
-                  //}
-
-                  if (!m_pwindow
-                     || !m_pwindow->user_interaction())
-                  {
-
-                     throw ::exception(error_wrong_state);
-
-                  }
-
-                  //if (m_pwindow->user_interaction()->const_layout().window().origin() != pointBufferItemWindow)
-                  //{
-
-                  //   m_pwindow->user_interaction()->post_message(::user::e_message_reposition, 0, pointBufferItemWindow);
-
-                  //}
-
-                  //if (m_pwindow->user_interaction()->const_layout().window().size() != sizeBufferItemWindow)
-                  //{
-
-                  //   m_pwindow->user_interaction()->post_message(::user::e_message_size, 0, sizeBufferItemWindow);
-
-                  //}
-
-               }
-               //else
-               //{
-               //   informationf("Update discarded");
-
-               //}
-
-               ::int_point pointBottomRight = pointBufferItemWindow + sizeBufferItemWindow;
-
-               //if (::IsWindowVisible(hwnd) && !::IsIconic(hwnd))
-               {
-
-                  //::pointer < ::windowing_win32::window > p2 = m_pwindow;
-
-                  //if (!p2->m_bSizeMoveMode)
-                  {
-
-                     ::int_rectangle rectangleWindow;
-
-                     RECT rectWindow;
-
-                     ::GetWindowRect(hwnd, &rectWindow);
-
-                     rectangleWindow = rectWindow;
-
-                     ::int_rectangle rectangleRequest(pointBufferItemWindow, sizeBufferItemWindow);
-
-                     //if (rectangleWindow.size() != size)
-                     //{
-
-                     //   return false;
-
-                     //}
-
-                     if (rectangleRequest.is_empty())
-                     {
-
-                        return;
-
-                     }
-
-                     bool bDifferent = rectangleWindow != rectangleRequest;
-
-                     auto hwndInsertAfter = pwindow->m_hwndSetWindowPosLastInsertAfter;
-
-                     auto pOwner = pwindow->owner_window();
-                     
-                     if (pOwner)
-                     {
-                        
-                        auto pwnd = pOwner->get_wnd();
-
-                        if (pwnd)
-                        {
-
-                           ::cast <::windowing_win32::window > pwindow2;
-
-                           pwindow2 = pwnd->m_pacmewindowingwindow;
-
-                           if (pwindow2)
-                           {
-                              
-                              hwndInsertAfter = pwindow2->m_hwnd;
-                              
-                              hwndInsertAfter = HWND_TOPMOST;
-
-                           }
-
-                        }
-
-                     }
-
-                     bool bWindowVisible = ::IsWindowVisible(pwindow->m_hwnd) ? true : false;
-
-                     bool bExTopMost = (::GetWindowLongPtr(pwindow->m_hwnd, GWL_EXSTYLE) & WS_EX_TOPMOST) != 0;
-
-                     bool bSwpShowWindow = (pwindow->m_uSetWindowPosLastFlags & SWP_SHOWWINDOW) != 0;
-
-                     bool bSwpHideWindow = (pwindow->m_uSetWindowPosLastFlags & SWP_HIDEWINDOW) != 0;
-
-                     auto nFlags = pwindow->m_uSetWindowPosLastFlags;
-
-                     bool bZOrder = !(nFlags & SWP_NOZORDER);
-
-                     bool bActivate = !(nFlags & SWP_NOACTIVATE);
-
-                     if (rectangleWindow != rectangleRequest
-                        //|| (hwndInsertAfter == HWND_TOPMOST && !bExTopMost)
-                        || bZOrder
-                        || bActivate
-                        || (bWindowVisible && bSwpHideWindow)
-                        || (!bWindowVisible && bSwpShowWindow))
-                     {
-
-                        if (!::IsIconic(hwnd) && !::IsZoomed(hwnd))
-                        {
-
-                           information() << "windowing_win32::buffer !IsIconic";
-                           information() << "windowing_win32::buffer bZOrder = " << bZOrder;
-                           information() << "windowing_win32::buffer bActivate = " << bActivate;
-
-                           nFlags &= ~SWP_NOMOVE;
-                           nFlags &= ~SWP_NOSIZE;
-                           //nFlags |= SWP_NOZORDER;
-                           if (strType.case_insensitive_contains("list_box"))
-                           {
-
-                              if (nFlags & SWP_SHOWWINDOW)
-                              {
-
-                                 print_line("nFlags & SWP_SHOWWINDOW");
-                              }
-
-                              if (nFlags & SWP_HIDEWINDOW)
-                              {
-
-                                 print_line("nFlags & SWP_HIDEWINDOW");
-                              }
-
-                           }
-
-                           auto cx = rectangleRequest.width();
-                           
-                           pwindow->_main_send([&]()
-                              {
-
-                                 //if (!(nFlags & SWP_NOMOVE))
-                                 //{
-
-                                 //   pwindow->m_pointDesignRequest = rectangleRequest.top_left();
-
-                                 //}
-
-                                 //if (!(nFlags & SWP_NOSIZE))
-                                 //{
-
-                                 //   pwindow->m_sizeDesignRequest = rectangleRequest.size();
-
-                                 //}
-
-                                 if (rectangleRequest.left() > 100)
-                                 {
-
-                                    informationf("test");
-
-                                 }
-
-                                 ::SetWindowPos(
-                                    hwnd,
-                                    hwndInsertAfter,
-                                    rectangleRequest.left(),
-                                    rectangleRequest.top(),
-                                    cx,
-                                    rectangleRequest.height(),
-                                    nFlags);
-
-                                 if (pwindow->m_activationSetWindowPosLast & ::user::e_activation_set_foreground)
-                                 {
-                                    
-                                    ::cast < ::win32::acme::windowing::activation_token > pactivationtoken = pwindow->m_activationSetWindowPosLast.m_pactivationtoken;
-
-                                    if (pactivationtoken)
-                                    {
-
-                                       pactivationtoken->m_ptaskForeground->post([pwindow, hwnd]()
-                                          {
-
-                                                ::SetForegroundWindow(hwnd);
-
-                                                pwindow.m_p->m_activationSetWindowPosLast.clear();
-
-});
-
-                                    }
-                                    else
-                                    {
-
-                                       ::SetForegroundWindow(hwnd);
-                                       pwindow->m_activationSetWindowPosLast.clear();
-
-                                    }
-
-                                    pwindow->m_uSetWindowPosLastFlags &= ~SWP_NOACTIVATE;
-
-                                 }
-
-                           });
-
-                        }
-
-                     }
+            _on_configure_window(pbufferitem);
 
                      //GdiFlush();
                      if (::IsWindowVisible(pwindow->m_hwnd)
@@ -1421,6 +1413,10 @@ namespace windowing_win32
 
                      //GdiFlush();
 
+                     ::int_rectangle rectangleWindow;
+
+                     RECT rectWindow;
+
                      ::GetWindowRect(hwnd, &rectWindow);
 
                      rectangleWindow = rectWindow;
@@ -1438,7 +1434,104 @@ namespace windowing_win32
 
                   }
 
+                  
+#ifdef _DEBUG
+
+                  if (playeredwindowbuffer)
+                  {
+
+                     HBITMAP b1 = (HBITMAP)::GetCurrentObject(playeredwindowbuffer->m_hdc, OBJ_BITMAP);
+
+                     // if (b1 != buffer.m_hbitmap)
+                     //{
+
+                     //   output_debug_string("damn0");
+
+                     //}
+
+                     // BITMAP bmp1;
+
+                     //::GetObject(b1, sizeof(BITMAP), &bmp1);
+
+                     // if (bmp1.bmHeight != size.cy())
+                     //{
+
+                     //   output_debug_string("damn1");
+                     //}
+
+                     //{
+
+                     //   RECT rClipScreen;
+
+                     //   int iResult = ::GetClipBox(m_hdcScreen, &rClipScreen);
+
+                     //   if (iResult == ERROR_REGION || iResult == NULLREGION)
+                     //   {
+
+                     //   }
+                     //   else
+                     //   {
+
+                     //      if (::height(rClipScreen) != size.cy())
+                     //      {
+
+                     //         output_debug_string("damn2");
+
+                     //      }
+
+                     //   }
+
+                     //}
+
+                     //{
+
+                     //   RECT rClip;
+
+                     //   int iResult = ::GetClipBox(buffer.m_hdc, &rClip);
+
+                     //   if (iResult == ERROR_REGION || iResult == NULLREGION)
+                     //   {
+                     //   }
+                     //   else
+                     //   {
+
+                     //      if (::height(rClip) != size.cy())
+                     //      {
+
+                     //         output_debug_string("damn3");
+
+                     //      }
+
+                     //   }
+
+                     //}
+
+                     /*       if (!bOk)
+                            {
+
+                               output_debug_string("UpdateLayeredWindow failed");
+
+                            }*/
+
+                     //}
+
+#endif // __DEBUG
+
+                     //}
+                     // else
+                     //{
+
+                     //}
+
+                     //}
+                  }
+
                }
+               catch (...)
+               {
+
+
+      }
 
 
                //if (g_pointLastBottomRight != pointBottomRight)
@@ -1453,7 +1546,7 @@ namespace windowing_win32
                //informationf("UpdateLayeredWindow Bottom Right (%d, %d)", pointBottomRight.x(), pointBottomRight.y());
 
 
-            }
+            //}
 
             //m_pwindow->user_interaction()->post_message(message_do_show_window);
 
@@ -1492,103 +1585,6 @@ namespace windowing_win32
                            //GetClientRect(m_oswindow, &r4);
 
                            //::SendMessage(get_hwnd(), WM_PRINT, (wparam)m_hdcScreen, PRF_OWNED | PRF_CHILDREN);
-
-#ifdef _DEBUG
-
-            if (playeredwindowbuffer)
-            {
-
-               HBITMAP b1 = (HBITMAP) ::GetCurrentObject(playeredwindowbuffer->m_hdc, OBJ_BITMAP);
-
-               //if (b1 != buffer.m_hbitmap)
-               //{
-
-               //   output_debug_string("damn0");
-
-               //}
-
-               //BITMAP bmp1;
-
-               //::GetObject(b1, sizeof(BITMAP), &bmp1);
-
-               //if (bmp1.bmHeight != size.cy())
-               //{
-
-               //   output_debug_string("damn1");
-               //}
-
-               //{
-
-               //   RECT rClipScreen;
-
-               //   int iResult = ::GetClipBox(m_hdcScreen, &rClipScreen);
-
-               //   if (iResult == ERROR_REGION || iResult == NULLREGION)
-               //   {
-
-               //   }
-               //   else
-               //   {
-
-               //      if (::height(rClipScreen) != size.cy())
-               //      {
-
-               //         output_debug_string("damn2");
-
-               //      }
-
-               //   }
-
-               //}
-
-               //{
-
-               //   RECT rClip;
-
-               //   int iResult = ::GetClipBox(buffer.m_hdc, &rClip);
-
-               //   if (iResult == ERROR_REGION || iResult == NULLREGION)
-               //   {
-               //   }
-               //   else
-               //   {
-
-               //      if (::height(rClip) != size.cy())
-               //      {
-
-               //         output_debug_string("damn3");
-
-               //      }
-
-               //   }
-
-               //}
-
-        /*       if (!bOk)
-               {
-
-                  output_debug_string("UpdateLayeredWindow failed");
-
-               }*/
-
-            }
-
-#endif // __DEBUG
-
-         }
-         //else
-         //{
-
-         //}
-
-         //}
-
-      }
-      catch (...)
-      {
-
-
-      }
 
       if (!m_bWindowDC)
       {
