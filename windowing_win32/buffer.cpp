@@ -1524,8 +1524,7 @@ namespace windowing_win32
                      //}
 
                      //}
-                  }
-
+                  
                }
                catch (...)
                {
