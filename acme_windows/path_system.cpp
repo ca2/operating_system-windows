@@ -109,7 +109,7 @@ namespace acme_windows
       if (fileinstance.nok())
       {
 
-         return {};
+         return { "", ::e_path_none, etype };
 
       }
 
