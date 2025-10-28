@@ -1116,7 +1116,7 @@ namespace windowing_win32
          //   //&& m_pwindow != nullptr
          //   //&& m_pwindow->user_interaction() != nullptr
          //   //&& m_pwindow->user_interaction()->_is_window_visible())
-         {
+         //{
 
             //if (!m_pwindow->m_bOkToUpdateScreen)
             //{
@@ -1432,7 +1432,7 @@ namespace windowing_win32
 
                      }
 
-                  }
+                  //}
 
                   
 #ifdef _DEBUG
@@ -1513,7 +1513,7 @@ namespace windowing_win32
 
                             }*/
 
-                     //}
+                     }
 
 #endif // __DEBUG
 
