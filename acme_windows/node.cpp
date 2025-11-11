@@ -4641,7 +4641,8 @@ namespace acme_windows
          psummary->m_strSystemBranch = "windows";
          psummary->m_strSystemFamily = "windows";
          psummary->m_strSystemRelease = "10";
-         psummary->m_strSystemAmbientRelease = "windows";
+         psummary->m_strSystemArchitecture = "x64";
+         psummary->m_strSystemAmbientReleaseArchitecture = "windows/x64";
          //psummary->m_strSlashedStore = "windows";
 
       }
