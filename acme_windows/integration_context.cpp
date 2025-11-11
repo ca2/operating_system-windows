@@ -118,7 +118,7 @@ namespace acme_windows
 
          //m_strVs = file_system()->as_string(path);
 
-         m_strVs = "2022";
+         m_strVs = "2026";
 
          m_strVs.trim();
 
@@ -154,6 +154,14 @@ namespace acme_windows
             payload("sdk1") = "vc143";
 
          }
+         else if (m_strVs == "2026")
+         {
+
+            payload("vstools") = "145";
+
+            payload("sdk1") = "vc145";
+
+         }
          else
          {
 
@@ -175,7 +183,15 @@ namespace acme_windows
          try
          {
 
-            if (m_strVs == "2022")
+            if (m_strVs == "2026")
+            {
+
+               m_strContext = "C:/Program Files/Microsoft Visual Studio/18/Community/VC/Auxiliary/Build/vcvarsall.bat";
+
+               m_strVCVersion = papp->get_visual_studio_build();
+
+            }
+            else if (m_strVs == "2022")
             {
 
                m_strContext = "C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Auxiliary/Build/vcvarsall.bat";
@@ -342,6 +358,14 @@ namespace acme_windows
             //strBuildCmd = "\"" + strBuildCmd + "\" " + m_strPlat2 + " " + papp->get_visual_studio_build();
 
             strBuildCmd = "\""+m_strContext+"\" " + m_strStagePlatform;
+
+         }
+         else if (m_strVs == "2026")
+         {
+
+            //strBuildCmd = "\"" + strBuildCmd + "\" " + m_strPlat2 + " " + papp->get_visual_studio_build();
+
+            strBuildCmd = "\"" + m_strContext + "\" " + m_strStagePlatform;
 
          }
 
