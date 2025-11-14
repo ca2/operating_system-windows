@@ -512,7 +512,7 @@ int_size preview_dc::ComputeDeltas(int& x, const ::scoped_string & scopedstrStri
    if (bUpdateCP)
    {
       ::GetCurrentPositionEx(get_os_data(), &pointCurrent);
-      x = pointCurrent.x();
+      x = pointCurrent.x;
    }
 
    const_char_pointer lpszCurChar = lpszString;
@@ -629,7 +629,7 @@ int_size preview_dc::ComputeDeltas(int& x, const ::scoped_string & scopedstrStri
       nRightFixup = nStartOffset; // Right adjust needed later if TA_UPDATECP
 
    if (bUpdateCP)
-      ::MoveToEx(get_os_data(), x, pointCurrent.y(), nullptr);
+      ::MoveToEx(get_os_data(), x, pointCurrent.y, nullptr);
 
    nCount = (UINT)(pnCurDelta - pnDxWidths);   // number of characters output
    return sizeExtent;
@@ -685,7 +685,7 @@ bool preview_dc::ExtTextOut(int x, int y, UINT nOptions, const ::int_rectangle &
    {
       ::int_point point;
       ::GetCurrentPositionEx(get_os_data(), &point);
-      MoveTo(point.x() - nRightFixup, point.y());
+      MoveTo(point.x - nRightFixup, point.y);
    }
    delete[] pDeltas;
    delete[] pOutputString;
@@ -738,7 +738,7 @@ int_size preview_dc::TabbedTextOut(int x, int y, const ::scoped_string & scopeds
    {
       ::int_point point;
       ::GetCurrentPositionEx(get_os_data(), &point);
-      MoveTo(point.x() - nRightFixup, point.y());
+      MoveTo(point.x - nRightFixup, point.y);
    }
 
    return sizeFinalExtent;
@@ -762,7 +762,7 @@ int preview_dc::draw_text(const ::scoped_string & scopedstrString, int nCount, R
 
    int_point pos;
    ::GetCurrentPositionEx(get_os_data(), &pos);
-   ::MoveToEx(get_handle2(), pos.x(), pos.y(), nullptr);
+   ::MoveToEx(get_handle2(), pos.x, pos.y, nullptr);
    return retVal;
 }
 
@@ -782,7 +782,7 @@ int preview_dc::draw_text_ex(__in_ecount(nCount) LPTSTR lpszString, int nCount, 
 
    int_point pos;
    ::GetCurrentPositionEx(get_os_data(), &pos);
-   ::MoveToEx(get_handle2(), pos.x(), pos.y(), nullptr);
+   ::MoveToEx(get_handle2(), pos.x, pos.y, nullptr);
    return retVal;
 }
 
@@ -922,11 +922,11 @@ void preview_dc::MirrorViewportOrg()
    VERIFY(::GetViewportOrgEx(get_handle2(), &pointVpOrg));
    PrinterDPtoScreenDP(&pointVpOrg);
    pointVpOrg += m_sizeTopLeft;
-   ::SetViewportOrgEx(get_os_data(), pointVpOrg.x(), pointVpOrg.y(), nullptr);
+   ::SetViewportOrgEx(get_os_data(), pointVpOrg.x, pointVpOrg.y, nullptr);
 
    ::int_point pointWinOrg;
    VERIFY(::GetWindowOrgEx(get_handle2(), &pointWinOrg));
-   ::SetWindowOrgEx(get_os_data(), pointWinOrg.x(), pointWinOrg.y(), nullptr);
+   ::SetWindowOrgEx(get_os_data(), pointWinOrg.x, pointWinOrg.y, nullptr);
 }
 
 void preview_dc::SetTopLeftOffset(const ::int_size & sizeTopLeft)
@@ -954,7 +954,7 @@ void preview_dc::ClipToPage()
    ::SetMapMode(get_os_data(), MM_TEXT);
    ::SetWindowOrgEx(get_os_data(), 0, 0, nullptr);
    ::SetViewportOrgEx(get_os_data(), m_sizeTopLeft.cx(), m_sizeTopLeft.cy(), nullptr);
-   ::IntersectClipRect(get_os_data(), -1, -1, point.x() + 2, point.y() + 2);
+   ::IntersectClipRect(get_os_data(), -1, -1, point.x + 2, point.y + 2);
 
    // Resynchronize the mapping mode
    MirrorMappingMode(false);

@@ -1231,9 +1231,9 @@ namespace windowing_win32
 
       ::int_point int_point;
 
-      int_point.x() = point.x;
+      int_point.x = point.x;
 
-      int_point.y() = point.y;
+      int_point.y = point.y;
 
       return int_point;
 

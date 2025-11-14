@@ -788,15 +788,15 @@ namespace windowing_win32
 #endif // __DEBUG
 
 
-            //point.x() = 100;
+            //point.x = 100;
 
-            //point.y() = 100;
+            //point.y = 100;
 
             //size.cx() = 200;
 
             //size.cy() = 200;
 
-            //::SetWindowPos(get_hwnd(), HWND_TOPMOST, point.x(), point.y(), size.cx(), size.cy(), SWP_NOZORDER);
+            //::SetWindowPos(get_hwnd(), HWND_TOPMOST, point.x, point.y, size.cx(), size.cy(), SWP_NOZORDER);
 
             string strType = __type_name(m_pimpl->m_puserinteraction);
 
@@ -902,8 +902,8 @@ namespace windowing_win32
 
                   //   m_pimpl->m_pwindow->_set_window_position(
                   //      m_pimpl->m_puserinteraction->const_layout().design().zorder(),
-                  //      point.x(),
-                  //      point.y(),
+                  //      point.x,
+                  //      point.y,
                   //      size.cx(),
                   //      size.cy(),
                   //      m_pimpl->m_puserinteraction->const_layout().design().activation(),
@@ -956,7 +956,7 @@ namespace windowing_win32
 
                //}
 
-               //informationf("UpdateLayeredWindow Bottom Right (%d, %d)", pointBottomRight.x(), pointBottomRight.y());
+               //informationf("UpdateLayeredWindow Bottom Right (%d, %d)", pointBottomRight.x, pointBottomRight.y);
 
 
             }
@@ -983,7 +983,7 @@ namespace windowing_win32
             //                     | SWP_NOOWNERZORDER
             //                     | SWP_DEFERERASE
             //                  | SWP_NOZORDER;
-            //                  ::SetWindowPos(get_hwnd(), NULL, point.x(), point.y(), size.cx(), size.cy(), 
+            //                  ::SetWindowPos(get_hwnd(), NULL, point.x, point.y, size.cx(), size.cy(), 
             //                     uFlags);
             //                  m_pimpl->on_visual_applied();
             //

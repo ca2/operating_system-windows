@@ -1164,7 +1164,7 @@ namespace windows
          void window::set_position(const ::int_point& point)
          {
 
-            ::SetWindowPos(m_hwnd, nullptr, point.x(), point.y(), 0, 0, SWP_NOSIZE | SWP_NOZORDER);
+            ::SetWindowPos(m_hwnd, nullptr, point.x, point.y, 0, 0, SWP_NOSIZE | SWP_NOZORDER);
 
          }
 

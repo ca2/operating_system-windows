@@ -372,8 +372,8 @@ CLASS_DECL_ACME int_bool WINAPI PostThreadMessage(itask iThreadId,unsigned int M
    msg.message = Msg;
    msg.wParam  = wParam;
    msg.lParam  = lParam;
-   msg.pt.x()    = I32_MINIMUM;
-   msg.pt.y()    = I32_MINIMUM;
+   msg.pt.x    = I32_MINIMUM;
+   msg.pt.y    = I32_MINIMUM;
    msg.hwnd    = nullptr;
 
    pmq->ma.add(msg);

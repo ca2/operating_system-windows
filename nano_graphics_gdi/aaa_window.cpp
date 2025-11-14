@@ -1071,7 +1071,7 @@ namespace windows
          void window::move_to(const ::int_point& point)
          {
 
-            ::SetWindowPos(m_hwnd, nullptr, point.x(), point.y(), 0, 0, SWP_NOSIZE | SWP_NOZORDER);
+            ::SetWindowPos(m_hwnd, nullptr, point.x, point.y, 0, 0, SWP_NOSIZE | SWP_NOZORDER);
 
             ::GetWindowRect(m_hwnd, (RECT*)&m_pinterface->m_rectangle);
 

@@ -182,7 +182,7 @@ namespace draw2d_gdi
 
       ASSERT(get_os_data() != nullptr);
 
-      return ::OffsetRgn((HRGN)get_os_data(), point.x(), point.y());
+      return ::OffsetRgn((HRGN)get_os_data(), point.x, point.y);
 
    }
 
@@ -211,7 +211,7 @@ namespace draw2d_gdi
    {
       ASSERT(get_os_data() != nullptr);
 
-      return ::PtInRegion((HRGN)get_os_data(), point.x(), point.y()) != false;
+      return ::PtInRegion((HRGN)get_os_data(), point.x, point.y) != false;
 
    }
 

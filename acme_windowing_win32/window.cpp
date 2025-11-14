@@ -1288,7 +1288,7 @@ namespace win32
          ::int_point window::client_to_screen(const ::int_point & point)
          {
 
-            POINT p{ point.x(), point.y() };
+            POINT p{ point.x, point.y };
 
             ::ClientToScreen(m_hwnd, &p);
 
@@ -1426,7 +1426,7 @@ namespace win32
 
             }
 
-            ::SetWindowPos(m_hwnd, hwndParent, point.x(), point.y(), 0, 0, dwFlags);
+            ::SetWindowPos(m_hwnd, hwndParent, point.x, point.y, 0, 0, dwFlags);
 
          }
 

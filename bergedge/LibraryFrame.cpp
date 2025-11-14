@@ -456,8 +456,8 @@ void CLibraryFrame::OnGetMinMaxInfo(MINMAXINFO* lpMMI)
 
    CMiniFrameWnd::OnGetMinMaxInfo(lpMMI);
 
-   lpMMI->ptMinTrackSize.x() = 320;
-   lpMMI->ptMinTrackSize.y() = 450;
+   lpMMI->ptMinTrackSize.x = 320;
+   lpMMI->ptMinTrackSize.y = 450;
 }
 
 

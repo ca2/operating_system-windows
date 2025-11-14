@@ -226,8 +226,8 @@ namespace typeface_gdiplus
       // now store character for later use
       //aracter = {
         //  texture,
-      ch.Size = glm::ivec2(bmpWidth, bmpHeight);
-      ch.Bearing = glm::ivec2(bearingX, bearingY);
+      ch.Size = {bmpWidth, bmpHeight};
+      ch.Bearing = {bearingX, bearingY};
       ch.Advance = advance;
 
 
@@ -308,7 +308,7 @@ namespace typeface_gdiplus
 
       auto dpiY = pg->GetDpiY();
 
-      //m_pgraphics->DrawLine(m_ppen->get_os_data < Gdiplus::Pen* >(this), Gdiplus::PointF((Gdiplus::REAL)m_point.x(), (Gdiplus::REAL)m_point.y()), Gdiplus::PointF((Gdiplus::REAL)x, (Gdiplus::REAL)y));
+      //m_pgraphics->DrawLine(m_ppen->get_os_data < Gdiplus::Pen* >(this), Gdiplus::PointF((Gdiplus::REAL)m_point.x, (Gdiplus::REAL)m_point.y), Gdiplus::PointF((Gdiplus::REAL)x, (Gdiplus::REAL)y));
       pmetric->m_dAscent = dFontSize * dCellAscent * pg->GetDpiY() / (dEmHeight * 72.0 + 0.5);
 
       pmetric->m_dDescent = dFontSize * dCellDescent * pg->GetDpiY() / (dEmHeight * 72.0 + 0.5);

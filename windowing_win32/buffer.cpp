@@ -688,8 +688,8 @@ namespace windowing_win32
 
             //   m_pwindow->m_pwindow->_set_window_position(
             //      m_pwindow->user_interaction()->const_layout().design().zorder(),
-            //      point.x(),
-            //      point.y(),
+            //      point.x,
+            //      point.y,
             //      size.cx(),
             //      size.cy(),
             //      m_pwindow->user_interaction()->const_layout().design().activation(),
@@ -1278,15 +1278,15 @@ namespace windowing_win32
 #endif // __DEBUG
 
 
-            //point.x() = 100;
+            //point.x = 100;
 
-            //point.y() = 100;
+            //point.y = 100;
 
             //size.cx() = 200;
 
             //size.cy() = 200;
 
-            //::SetWindowPos(get_hwnd(), HWND_TOPMOST, point.x(), point.y(), size.cx(), size.cy(), SWP_NOZORDER);
+            //::SetWindowPos(get_hwnd(), HWND_TOPMOST, point.x, point.y, size.cx(), size.cy(), SWP_NOZORDER);
 
             string strType = ::type(m_pwindow->user_interaction()).name();
 
@@ -1371,8 +1371,8 @@ namespace windowing_win32
                      //GdiFlush();
                      if (::IsWindowVisible(pwindow->m_hwnd)
                         && !::IsIconic(pwindow->m_hwnd)
-                        && pointBufferItemWindow.x() >-16384
-                        && pointBufferItemWindow.y() >-16384)
+                        && pointBufferItemWindow.x >-16384
+                        && pointBufferItemWindow.y >-16384)
                      {
 
 
@@ -1542,7 +1542,7 @@ namespace windowing_win32
 
                //}
 
-               //informationf("UpdateLayeredWindow Bottom Right (%d, %d)", pointBottomRight.x(), pointBottomRight.y());
+               //informationf("UpdateLayeredWindow Bottom Right (%d, %d)", pointBottomRight.x, pointBottomRight.y);
 
 
             //}
@@ -1569,7 +1569,7 @@ namespace windowing_win32
             //                     | SWP_NOOWNERZORDER
             //                     | SWP_DEFERERASE
             //                  | SWP_NOZORDER;
-            //                  ::SetWindowPos(get_hwnd(), NULL, point.x(), point.y(), size.cx(), size.cy(), 
+            //                  ::SetWindowPos(get_hwnd(), NULL, point.x, point.y, size.cx(), size.cy(), 
             //                     uFlags);
             //                  m_pwindow->on_visual_applied();
             //

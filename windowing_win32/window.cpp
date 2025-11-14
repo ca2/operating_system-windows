@@ -550,7 +550,7 @@ namespace windowing_win32
       wcscpy(szWindowClass, L"WindowsDestkop1");
 
       //HWND hwnd = CreateWindowExW(pusersystem->m_createstruct.dwExStyle, szWindowClass, wstrWindowName, pusersystem->m_createstruct.style,
-        // pusersystem->m_createstruct.x(), pusersystem->m_createstruct.y(), pusersystem->m_createstruct.cx(), pusersystem->m_createstruct.cy(), pusersystem->m_createstruct.hwndParent, pusersystem->m_createstruct.hMenu, pusersystem->m_createstruct.hInstance, pusersystem->m_createstruct.lpCreateParams);
+        // pusersystem->m_createstruct.x, pusersystem->m_createstruct.y, pusersystem->m_createstruct.cx(), pusersystem->m_createstruct.cy(), pusersystem->m_createstruct.hwndParent, pusersystem->m_createstruct.hMenu, pusersystem->m_createstruct.hInstance, pusersystem->m_createstruct.lpCreateParams);
       HWND hwnd = CreateWindowW(szWindowClass, szTitle, WS_OVERLAPPED,
          CW_USEDEFAULT, 0, CW_USEDEFAULT, 0, nullptr, nullptr, pusersystem->m_createstruct.hInstance, nullptr);
       //if (!hwnd)
@@ -613,8 +613,8 @@ namespace windowing_win32
 
          win32_windowing()->__synthesizes_creates_styles(puserinteraction, dwExStyle, dwStyle);
 
-         x = puserinteraction->const_layout().sketch().origin().x();
-         y = puserinteraction->const_layout().sketch().origin().y();
+         x = puserinteraction->const_layout().sketch().origin().x;
+         y = puserinteraction->const_layout().sketch().origin().y;
          cx = puserinteraction->const_layout().sketch().size().cx();
          cy = puserinteraction->const_layout().sketch().size().cy();
 
@@ -1841,10 +1841,10 @@ namespace windowing_win32
 
       //::int_rectangle rWindow;
 
-      //rWindow.left() = attr.x();
-      //rWindow.top() = attr.y();
-      //rWindow.right() = attr.x() + attr.width;
-      //rWindow.bottom() = attr.y() + attr.height;
+      //rWindow.left() = attr.x;
+      //rWindow.top() = attr.y;
+      //rWindow.right() = attr.x + attr.width;
+      //rWindow.bottom() = attr.y + attr.height;
 
       //if (rBest != rWindow)
       //{
@@ -2714,8 +2714,8 @@ namespace windowing_win32
    //
    //         __set_window_position(
    //            m_pimpl->user_interaction()->const_layout().design().zorder(),
-   //            point.x(),
-   //            point.y(),
+   //            point.x,
+   //            point.y,
    //            size.cx(),
    //            size.cy(),
    //            m_pimpl->user_interaction()->const_layout().design().activation(),
@@ -3165,9 +3165,9 @@ namespace windowing_win32
       if (!(nFlags & SWP_NOMOVE))
       {
 
-         m_pointWindow.x() = x;
+         m_pointWindow.x = x;
 
-         m_pointWindow.y() = y;
+         m_pointWindow.y = y;
 
       }
 
@@ -3655,9 +3655,9 @@ namespace windowing_win32
 
    //   ::int_point int_point;
 
-   //   int_point.x() = point.x;
+   //   int_point.x = point.x;
 
-   //   int_point.y() = point.y;
+   //   int_point.y = point.y;
 
    //   return int_point;
 
@@ -3673,9 +3673,9 @@ namespace windowing_win32
 
    //   ::int_point int_point;
 
-   //   int_point.x() = point.x;
+   //   int_point.x = point.x;
 
-   //   int_point.y() = point.y;
+   //   int_point.y = point.y;
 
    //   return int_point;
 
@@ -5516,7 +5516,7 @@ namespace windowing_win32
    void window::SetCaretPos(const ::int_point &point)
    {
 
-      ::SetCaretPos(point.x(), point.y());
+      ::SetCaretPos(point.x, point.y);
 
    }
 
@@ -7352,7 +7352,7 @@ namespace windowing_win32
    //            // handler has set it to another one.
    //            pmouse->m_ecursor = cursor_default;
    //
-   //            //information() << "windows::user::e_message_mouse_move(%d,%d)", pmouse->m_point.x(), pmouse->m_point.y();
+   //            //information() << "windows::user::e_message_mouse_move(%d,%d)", pmouse->m_point.x, pmouse->m_point.y;
    //
    //            string strType;
    //
@@ -7798,7 +7798,7 @@ namespace windowing_win32
 
          }
 
-         lparam = MAKELPARAM(pointMouseMove.x(), pointMouseMove.y());
+         lparam = MAKELPARAM(pointMouseMove.x, pointMouseMove.y);
 
          m_timeLastMouseMove.Now();
 
@@ -8081,7 +8081,7 @@ namespace windowing_win32
    //void window::set_cursor_position(const ::int_point & pointCursor)
    //{
 
-   //   ::SetCursorPos(pointCursor.x(), pointCursor.y());
+   //   ::SetCursorPos(pointCursor.x, pointCursor.y);
 
    //}
 
@@ -8336,8 +8336,8 @@ namespace windowing_win32
 
             auto pmouse = øcreate_new<::message::mouse>();
 
-            pmouse->m_pointAbsolute.x() = r.left;
-            pmouse->m_pointAbsolute.y() = r.top;
+            pmouse->m_pointAbsolute.x = r.left;
+            pmouse->m_pointAbsolute.y = r.top;
 
             defer_show_system_menu(pmouse);
 
@@ -8473,7 +8473,7 @@ namespace windowing_win32
 
             //   m_pointCursor = pointCursor;
 
-            //   lparam = MAKELPARAM(pointCursor.x(), pointCursor.y());
+            //   lparam = MAKELPARAM(pointCursor.x, pointCursor.y);
 
             //   call_message_handler(::user::e_message_mouse_move, 0, lparam);
 

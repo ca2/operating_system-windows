@@ -187,9 +187,9 @@ namespace production
 
       ::int_point pointOffset = get_context_offset();
 
-      int iStart = pointOffset.y() / m_iLineHeight;
-      int y = m_iLineHeight - pointOffset.y() % m_iLineHeight;
-      if(pointOffset.y() > m_iLineHeight)
+      int iStart = pointOffset.y / m_iLineHeight;
+      int y = m_iLineHeight - pointOffset.y % m_iLineHeight;
+      if(pointOffset.y > m_iLineHeight)
       {
          iStart--;
          y -= m_iLineHeight;
@@ -443,7 +443,7 @@ namespace production
             menu.set_app(get_application());
             ::aura::menu menuPopup(menu.GetSubMenu(0));
             menuPopup.set_app(get_application());
-            menuPopup.track_popup_menu(0, pmouse->m_point.x(), pmouse->m_point.y(), get_parent_frame().GetSafeoswindow_());
+            menuPopup.track_popup_menu(0, pmouse->m_point.x, pmouse->m_point.y, get_parent_frame().GetSafeoswindow_());
          }
         */
    }

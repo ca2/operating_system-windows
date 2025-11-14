@@ -340,7 +340,7 @@ namespace draw2d_gdiplus
    {
       //ASSERT(get_handle1() != nullptr);
       //::int_point
-      //VERIFY(::SetBrushOrgEx(get_handle1(), point.x(), point.y(), &point));
+      //VERIFY(::SetBrushOrgEx(get_handle1(), point.x, point.y, &point));
       //return point;
 
       throw ::interface_only();
@@ -569,7 +569,7 @@ namespace draw2d_gdiplus
    double_point graphics::SetWindowOrg(const ::double_point & point)
    {
 
-      return SetWindowOrg(point.x(), point.y());
+      return SetWindowOrg(point.x, point.y);
 
    }
 
@@ -679,7 +679,7 @@ namespace draw2d_gdiplus
    //void graphics::PtVisible(const ::int_point & point)
    //{
    //   //ASSERT(get_handle1() != nullptr);   // call virtual
-   //   return PtVisible(point.x(), point.y());
+   //   return PtVisible(point.x, point.y);
    //}
 
 
@@ -731,8 +731,8 @@ namespace draw2d_gdiplus
          for (int i = 0; i < nCount; i++)
          {
 
-            pointa[i].X = (Gdiplus::REAL)ppointsParam[i].x();
-            pointa[i].Y = (Gdiplus::REAL)ppointsParam[i].y();
+            pointa[i].X = (Gdiplus::REAL)ppointsParam[i].x;
+            pointa[i].Y = (Gdiplus::REAL)ppointsParam[i].y;
 
          }
 
@@ -917,8 +917,8 @@ namespace draw2d_gdiplus
 
       //ASSERT(get_handle1() != nullptr);
       //return ::Chord(get_handle1(),rectangleParam.left(),rectangleParam.top(),
-      //               rectangleParam.right(),rectangleParam.bottom(),pointStart.x(),pointStart.y(),
-      //               pointEnd.x(), pointEnd.y()) != false;
+      //               rectangleParam.right(),rectangleParam.bottom(),pointStart.x,pointStart.y,
+      //               pointEnd.x, pointEnd.y) != false;
       throw ::not_implemented();
 
       //return false;
@@ -1187,8 +1187,8 @@ namespace draw2d_gdiplus
 
       //ASSERT(get_handle1() != nullptr);
       //return ::Pie(get_handle1(), rectangleParam.left(), rectangleParam.top(),
-      //             rectangleParam.right(), rectangleParam.bottom(), pointStart.x(), pointStart.y(),
-      //             pointEnd.x(), pointEnd.y()) != false;
+      //             rectangleParam.right(), rectangleParam.bottom(), pointStart.x, pointStart.y,
+      //             pointEnd.x, pointEnd.y) != false;
       throw ::not_implemented();
 
       //return false;
@@ -1219,9 +1219,9 @@ namespace draw2d_gdiplus
       for (::collection::index i = 0; i < nCount; i++)
       {
 
-         pa[i].X = (FLOAT)ppointParam[i].x();
+         pa[i].X = (FLOAT)ppointParam[i].x;
 
-         pa[i].Y = (FLOAT)ppointParam[i].y();
+         pa[i].Y = (FLOAT)ppointParam[i].y;
 
       }
 
@@ -1298,8 +1298,8 @@ namespace draw2d_gdiplus
       for (int i = 0; i < nCount; i++)
       {
 
-         pointa[i].X = (Gdiplus::REAL)ppointParam[i].x();
-         pointa[i].Y = (Gdiplus::REAL)ppointParam[i].y();
+         pointa[i].X = (Gdiplus::REAL)ppointParam[i].x;
+         pointa[i].Y = (Gdiplus::REAL)ppointParam[i].y;
 
       }
 
@@ -1507,8 +1507,8 @@ namespace draw2d_gdiplus
 //         //      //single_lock synchronouslock(::get_thread_toolset(::thread::tool_draw2d)->mutex());
 //
 //         //      if (nHeight >= get_processor_count() * 4 && (nWidth * nHeight) >= (get_processor_count() * 64)
-//         //            &&   m_pimage->fork_blend(int_point(x + GetViewportOrg().x(), y + GetViewportOrg().y()), pgraphicsSrc->m_pimage,
-//         //                  int_point(xSrc + pgraphicsSrc->GetViewportOrg().x(), ySrc + pgraphicsSrc->GetViewportOrg().y()),
+//         //            &&   m_pimage->fork_blend(int_point(x + GetViewportOrg().x, y + GetViewportOrg().y), pgraphicsSrc->m_pimage,
+//         //                  int_point(xSrc + pgraphicsSrc->GetViewportOrg().x, ySrc + pgraphicsSrc->GetViewportOrg().y),
 //         //                  ::double_size(nWidth, nHeight)))
 //         //      {
 //
@@ -1524,8 +1524,8 @@ namespace draw2d_gdiplus
 //         //      }
 //         //      //else
 //         //      //{
-//         //      //   m_pimage->blend(int_point(x + GetViewportOrg().x(), y + GetViewportOrg().y()), pgraphicsSrc->m_pimage,
-//         //      //                                     int_point(xSrc + pgraphicsSrc->GetViewportOrg().x(), ySrc + pgraphicsSrc->GetViewportOrg().y()),
+//         //      //   m_pimage->blend(int_point(x + GetViewportOrg().x, y + GetViewportOrg().y), pgraphicsSrc->m_pimage,
+//         //      //                                     int_point(xSrc + pgraphicsSrc->GetViewportOrg().x, ySrc + pgraphicsSrc->GetViewportOrg().y),
 //         //      //                                     ::double_size(nWidth, nHeight));
 //
 //         //      //}
@@ -1533,8 +1533,8 @@ namespace draw2d_gdiplus
 //         //   //else
 //         //   //{
 //
-//         //   //   m_pimage->from(int_point(x + GetViewportOrg().x(), y + GetViewportOrg().y()), pgraphicsSrc->m_pimage,
-//         //   //                                    int_point(xSrc + pgraphicsSrc->GetViewportOrg().x(), ySrc + pgraphicsSrc->GetViewportOrg().y()),
+//         //   //   m_pimage->from(int_point(x + GetViewportOrg().x, y + GetViewportOrg().y), pgraphicsSrc->m_pimage,
+//         //   //                                    int_point(xSrc + pgraphicsSrc->GetViewportOrg().x, ySrc + pgraphicsSrc->GetViewportOrg().y),
 //         //   //                                    ::double_size(nWidth, nHeight));
 //
 //
@@ -1563,8 +1563,8 @@ namespace draw2d_gdiplus
 //            ret = m_pgraphics->DrawImage(
 //                  pbitmap,
 //                  rectangle, 
-//               (INT) (rectangleSource.left() + pgraphicsSrc->GetViewportOrg().x()), 
-//               (INT) (rectangleSource.top() + pgraphicsSrc->GetViewportOrg().y()), 
+//               (INT) (rectangleSource.left() + pgraphicsSrc->GetViewportOrg().x), 
+//               (INT) (rectangleSource.top() + pgraphicsSrc->GetViewportOrg().y), 
 //               (INT) (rectangleSource.width()),
 //               (INT) (rectangleSource.height()), 
 //               Gdiplus::UnitPixel, &imageattributes);
@@ -1573,9 +1573,9 @@ namespace draw2d_gdiplus
 //         else
 //         {
 //
-//            int xSrcViewport = (int) pgraphicsSrc->GetViewportOrg().x();
+//            int xSrcViewport = (int) pgraphicsSrc->GetViewportOrg().x;
 //
-//            int ySrcViewport = (int) pgraphicsSrc->GetViewportOrg().y();
+//            int ySrcViewport = (int) pgraphicsSrc->GetViewportOrg().y;
 //
 //            ret = m_pgraphics->DrawImage(
 //               pbitmap,
@@ -1632,7 +1632,7 @@ namespace draw2d_gdiplus
 ////         rectangleTarget.left(), rectangleTarget.top(),
 ////         rectangleTarget.width(), rectangleTarget.height(),
 ////         hdcSrc,
-////         pointSrc.x(), pointSrc.y(), SRCCOPY) != false;
+////         pointSrc.x, pointSrc.y, SRCCOPY) != false;
 ////
 ////      __graphics(pgraphicsSrc)->release_hdc(hdcSrc);
 ////
@@ -2304,7 +2304,7 @@ namespace draw2d_gdiplus
    ::color::color graphics::GetPixel(const ::double_point & point)
    {
       //ASSERT(get_handle1() != nullptr);
-      //return ::GetPixel(get_handle1(), point.x(), point.y());
+      //return ::GetPixel(get_handle1(), point.x, point.y);
       throw ::not_implemented();
 
       return color::transparent;
@@ -2328,13 +2328,13 @@ namespace draw2d_gdiplus
 
          m_pimage->map();
 
-         m_pimage->image32()[(int)point.x() + (int)point.y() * m_pimage->scan_size()].assign(color, m_pimage->color_indexes());
+         m_pimage->image32()[(int)point.x + (int)point.y * m_pimage->scan_size()].assign(color, m_pimage->color_indexes());
 
       }
       else
       {
 
-         fill_rectangle(::double_rectangle_dimension(point.x(), point.y(), 1, 1), color);
+         fill_rectangle(::double_rectangle_dimension(point.x, point.y, 1, 1), color);
 
       }
 
@@ -2351,20 +2351,20 @@ namespace draw2d_gdiplus
 
          m_pimage->map();
 
-         ::color::color color = m_pimage->image32()[(int)point.x() + (int)point.y() * m_pimage->scan_size()].color(m_pimage->color_indexes());
+         ::color::color color = m_pimage->image32()[(int)point.x + (int)point.y * m_pimage->scan_size()].color(m_pimage->color_indexes());
 
          color.m_uchRed = (int)(color.m_uchRed * (1.0 - colorChange.f64_opacity()) + colorChange.m_uchRed * colorChange.f64_opacity());
          color.m_uchGreen = (int)(color.m_uchGreen * (1.0 - colorChange.f64_opacity()) + colorChange.m_uchGreen * colorChange.f64_opacity());
          color.m_uchBlue = (int)(color.m_uchBlue * (1.0 - colorChange.f64_opacity()) + colorChange.m_uchBlue * colorChange.f64_opacity());
 
-         m_pimage->image32()[(int)point.x() + (int)point.y() * m_pimage->scan_size()].assign(color, m_pimage->color_indexes());
+         m_pimage->image32()[(int)point.x + (int)point.y * m_pimage->scan_size()].assign(color, m_pimage->color_indexes());
          //colorCurrent.m_iA = colorCurrent.m_iA * (1.0 - color.da()) + color.m_iR * color.da();
 
       }
       else
       {
 
-         fill_rectangle(::double_rectangle_dimension(point.x(), point.y(), 1, 1), colorChange);
+         fill_rectangle(::double_rectangle_dimension(point.x, point.y, 1, 1), colorChange);
 
       }
 
@@ -2636,7 +2636,7 @@ namespace draw2d_gdiplus
       double dFontHeight = pgdiplusfont->GetHeight(pg);
 
       auto dpiY = pg->GetDpiY();
-      //m_pgraphics->DrawLine(m_ppen->get_os_data < Gdiplus::Pen* >(this), Gdiplus::PointF((Gdiplus::REAL)m_point.x(), (Gdiplus::REAL)m_point.y()), Gdiplus::PointF((Gdiplus::REAL)x, (Gdiplus::REAL)y));
+      //m_pgraphics->DrawLine(m_ppen->get_os_data < Gdiplus::Pen* >(this), Gdiplus::PointF((Gdiplus::REAL)m_point.x, (Gdiplus::REAL)m_point.y), Gdiplus::PointF((Gdiplus::REAL)x, (Gdiplus::REAL)y));
       pmetric->m_dAscent = dFontSize * dCellAscent * pg->GetDpiY() / (dEmHeight * 72.0 + 0.5);
 
       pmetric->m_dDescent = dFontSize * dCellDescent * pg->GetDpiY() / (dEmHeight * 72.0 + 0.5);
@@ -2968,17 +2968,17 @@ namespace draw2d_gdiplus
 
    //      Gdiplus::Point int_point[3];
 
-   //      int_point[0].X = pPoint[0].x();
+   //      int_point[0].X = pPoint[0].x;
 
-   //      int_point[0].Y = pPoint[0].y();
+   //      int_point[0].Y = pPoint[0].y;
 
-   //      int_point[1].X = pPoint[1].x();
+   //      int_point[1].X = pPoint[1].x;
 
-   //      int_point[1].Y = pPoint[1].y();
+   //      int_point[1].Y = pPoint[1].y;
 
-   //      int_point[2].X = pPoint[2].x();
+   //      int_point[2].X = pPoint[2].x;
 
-   //      int_point[2].Y = pPoint[2].y();
+   //      int_point[2].Y = pPoint[2].y;
 
 
    //      ret = m_pgraphics->DrawImage((Gdiplus::Bitmap *) pgraphicsSrc->get_current_bitmap()->get_os_data(), point, 3);
@@ -3018,7 +3018,7 @@ namespace draw2d_gdiplus
    //void graphics::SetPixelV(const ::double_point & point, const ::color::color & color)
    //{
    //   //ASSERT(get_handle1() != nullptr);
-   //   //return ::SetPixelV(get_handle1(), point.x(), point.y(), color) != false;
+   //   //return ::SetPixelV(get_handle1(), point.x, point.y, color) != false;
    //   throw ::not_implemented();
 
    //   return false;
@@ -3040,7 +3040,7 @@ namespace draw2d_gdiplus
    {
       ////      ASSERT(get_handle1() != nullptr);
             //return ArcTo(rectangleParam.left(), rectangleParam.top(), rectangleParam.right(),
-              //           rectangleParam.bottom(), pointStart.x(), pointStart.y(), pointEnd.x(), pointEnd.y());
+              //           rectangleParam.bottom(), pointStart.x, pointStart.y, pointEnd.x, pointEnd.y);
                //   if (::is_null(m_pgraphics))
          //   {
 
@@ -3054,7 +3054,7 @@ namespace draw2d_gdiplus
          //   //{
          //   //   ::int_point point;
          //   //   VERIFY(::GetCurrentPositionEx(get_handle1(), &point));
-         //   //   VERIFY(::MoveToEx(get_handle2(), point.x(), point.y(), nullptr));
+         //   //   VERIFY(::MoveToEx(get_handle2(), point.x, point.y, nullptr));
          //   //}
          //   //return bResult;
          //   throw ::not_implemented();
@@ -3572,8 +3572,8 @@ namespace draw2d_gdiplus
    //   //      if (nDestHeight >= cProcessor * 4 && (nDestWidth * nDestHeight) >= (cProcessor * 64))
    //   //      {
 
-   //   //         m_pimage->fork_blend(int_point(xDest + GetViewportOrg().x(), yDest + GetViewportOrg().y()), pgraphicsSrc->m_pimage,
-   //   //                                                int_point(xSrc + pgraphicsSrc->GetViewportOrg().x(), ySrc + pgraphicsSrc->GetViewportOrg().y()),
+   //   //         m_pimage->fork_blend(int_point(xDest + GetViewportOrg().x, yDest + GetViewportOrg().y), pgraphicsSrc->m_pimage,
+   //   //                                                int_point(xSrc + pgraphicsSrc->GetViewportOrg().x, ySrc + pgraphicsSrc->GetViewportOrg().y),
    //   //                                                ::double_size(nSrcWidth, nDestHeight), (unsigned char)(dRate * 255.0f));
 
    //   //         g_cForkBlend++;
@@ -3587,8 +3587,8 @@ namespace draw2d_gdiplus
    //   //      else
    //   //      {
 
-   //   //         m_pimage->blend(int_point(xDest + GetViewportOrg().x(), yDest + GetViewportOrg().y()), pgraphicsSrc->m_pimage,
-   //   //                                           int_point(xSrc+pgraphicsSrc->GetViewportOrg().x(), ySrc + pgraphicsSrc->GetViewportOrg().y()),
+   //   //         m_pimage->blend(int_point(xDest + GetViewportOrg().x, yDest + GetViewportOrg().y), pgraphicsSrc->m_pimage,
+   //   //                                           int_point(xSrc+pgraphicsSrc->GetViewportOrg().x, ySrc + pgraphicsSrc->GetViewportOrg().y),
    //   //                                           ::double_size(nSrcWidth, nDestHeight), (unsigned char)(dRate * 255.0f));
 
    //   //      }
@@ -3597,8 +3597,8 @@ namespace draw2d_gdiplus
    //   //   else
    //   //   {
 
-   //   //      m_pimage->from(int_point(xDest + GetViewportOrg().x(), yDest + GetViewportOrg().y()), pgraphicsSrc->m_pimage,
-   //   //                                       int_point(xSrc + pgraphicsSrc->GetViewportOrg().x(), ySrc + pgraphicsSrc->GetViewportOrg().y()),
+   //   //      m_pimage->from(int_point(xDest + GetViewportOrg().x, yDest + GetViewportOrg().y), pgraphicsSrc->m_pimage,
+   //   //                                       int_point(xSrc + pgraphicsSrc->GetViewportOrg().x, ySrc + pgraphicsSrc->GetViewportOrg().y),
    //   //                                       ::double_size(nSrcWidth, nDestHeight), (unsigned char) (dRate * 255.0f));
 
 
@@ -4886,9 +4886,9 @@ namespace draw2d_gdiplus
 
    //   __copy(r, rectangle);
 
-   //   r.X += (Gdiplus::REAL)m_pointAddShapeTranslate.x();
+   //   r.X += (Gdiplus::REAL)m_pointAddShapeTranslate.x;
 
-   //   r.Y += (Gdiplus::REAL)m_pointAddShapeTranslate.y();
+   //   r.Y += (Gdiplus::REAL)m_pointAddShapeTranslate.y;
 
    //   m_pgraphics->IntersectClip(r);
 
@@ -4959,9 +4959,9 @@ namespace draw2d_gdiplus
 
    //   __copy(r, oval);
 
-   //   r.X += (Gdiplus::REAL)m_pointAddShapeTranslate.x();
+   //   r.X += (Gdiplus::REAL)m_pointAddShapeTranslate.x;
 
-   //   r.Y += (Gdiplus::REAL)m_pointAddShapeTranslate.y();
+   //   r.Y += (Gdiplus::REAL)m_pointAddShapeTranslate.y;
 
    //   ppath->AddArc(r, 0.f, 360.0f);
 
@@ -5001,7 +5001,7 @@ namespace draw2d_gdiplus
 
    //   for (int i = 0; i < polygon.get_size(); i++)
    //   {
-   //      pa.add(Gdiplus::PointF((Gdiplus::REAL)polygon[i].x(), (Gdiplus::REAL)polygon[i].y()));
+   //      pa.add(Gdiplus::PointF((Gdiplus::REAL)polygon[i].x, (Gdiplus::REAL)polygon[i].y));
    //   }
 
    //   if (m_efillmode == ::draw2d::e_fill_mode_alternate)
@@ -5073,7 +5073,7 @@ namespace draw2d_gdiplus
       for (auto & point : polygon)
       {
 
-         pointa.add({ (Gdiplus::REAL) point.x(), (Gdiplus::REAL) point.y() });
+         pointa.add({ (Gdiplus::REAL) point.x, (Gdiplus::REAL) point.y });
 
       }
 
@@ -5443,7 +5443,7 @@ namespace draw2d_gdiplus
    //   //{
    //   //   ::int_point point;
    //   //   VERIFY(::GetCurrentPositionEx(get_handle1(), &point));
-   //   //   VERIFY(::MoveToEx(get_handle2(), point.x(), point.y(), nullptr));
+   //   //   VERIFY(::MoveToEx(get_handle2(), point.x, point.y, nullptr));
    //   //}
    //   //return bResult;
    //   throw ::not_implemented();
@@ -5487,7 +5487,7 @@ namespace draw2d_gdiplus
       //{
       //   ::int_point point;
       //   VERIFY(::GetCurrentPositionEx(get_handle1(), &point));
-      //   VERIFY(::MoveToEx(get_handle2(), point.x(), point.y(), nullptr));
+      //   VERIFY(::MoveToEx(get_handle2(), point.x, point.y, nullptr));
       //}
       //return bResult;
       throw ::not_implemented();
@@ -5514,7 +5514,7 @@ namespace draw2d_gdiplus
       //{
       //   ::int_point point;
       //   VERIFY(::GetCurrentPositionEx(get_handle1(), &point));
-      //   VERIFY(::MoveToEx(get_handle2(), point.x(), point.y(), nullptr));
+      //   VERIFY(::MoveToEx(get_handle2(), point.x, point.y, nullptr));
       //}
       //return bResult;
       throw ::not_implemented();
@@ -5568,7 +5568,7 @@ namespace draw2d_gdiplus
       //{
       //   ::int_point point;
       //   VERIFY(::GetCurrentPositionEx(get_handle1(), &point));
-      //   VERIFY(::MoveToEx(get_handle2(), point.x(), point.y(), nullptr));
+      //   VERIFY(::MoveToEx(get_handle2(), point.x, point.y, nullptr));
       //}
       //return bResult;
       throw ::not_implemented();
@@ -7145,8 +7145,8 @@ namespace draw2d_gdiplus
          Gdiplus::PointF((Gdiplus::REAL)x2, (Gdiplus::REAL)y2));
 
 
-      m_point.x() = x2;
-      m_point.y() = y2;
+      m_point.x = x2;
+      m_point.y = y2;
 
 
       //return true;
@@ -7174,24 +7174,24 @@ namespace draw2d_gdiplus
 
    //   auto ppen = m_ppen->get_os_data < Pen* >(this);
 
-   //   if (fmod(m_point.x(), 1.0) != 0.0 || fmod(m_point.y(), 1.0) != 0)
+   //   if (fmod(m_point.x, 1.0) != 0.0 || fmod(m_point.y, 1.0) != 0)
    //   {
 
-   //      m_pgraphics->DrawLine(ppen, Gdiplus::PointF((Gdiplus::REAL)m_point.x(), (Gdiplus::REAL)m_point.y()), Gdiplus::PointF((Gdiplus::REAL)point.x(), (Gdiplus::REAL) point.y()));
+   //      m_pgraphics->DrawLine(ppen, Gdiplus::PointF((Gdiplus::REAL)m_point.x, (Gdiplus::REAL)m_point.y), Gdiplus::PointF((Gdiplus::REAL)point.x, (Gdiplus::REAL) point.y));
 
 
    //   }
    //   else
    //   {
 
-   //      m_pgraphics->DrawLine(ppen, Gdiplus::Point((INT)m_point.x(), (INT)m_point.y()), Gdiplus::Point((INT)point.x(), (INT)point.y()));
+   //      m_pgraphics->DrawLine(ppen, Gdiplus::Point((INT)m_point.x, (INT)m_point.y), Gdiplus::Point((INT)point.x, (INT)point.y));
 
 
    //   }
 
-   //   m_point.x() = point.x();
+   //   m_point.x = point.x;
 
-   //   m_point.y() = point.y();
+   //   m_point.y = point.y;
 
    //   return true;
 
@@ -7219,9 +7219,9 @@ namespace draw2d_gdiplus
 
       m_pgraphics->DrawLine(ppen, Gdiplus::PointF((Gdiplus::REAL)x1, (Gdiplus::REAL)y1), Gdiplus::PointF((Gdiplus::REAL)x2, (Gdiplus::REAL)y2));
 
-      m_point.x() = x2;
+      m_point.x = x2;
 
-      m_point.y() = y2;
+      m_point.y = y2;
 
       //return true;
 
@@ -7244,11 +7244,11 @@ namespace draw2d_gdiplus
 
    //   ppen->SetAlignment(Gdiplus::PenAlignment::PenAlignmentCenter);
 
-   //   m_pgraphics->DrawLine(ppen, Gdiplus::Point(point1.x(), point1.y()), Gdiplus::Point(point2.x(), point2.y()));
+   //   m_pgraphics->DrawLine(ppen, Gdiplus::Point(point1.x, point1.y), Gdiplus::Point(point2.x, point2.y));
 
-   //   m_point.x() = point2.x();
+   //   m_point.x = point2.x;
 
-   //   m_point.y() = point2.y();
+   //   m_point.y = point2.y;
 
    //   return true;
 
@@ -7936,15 +7936,15 @@ namespace draw2d_gdiplus
 
    //         int_point pointDst;
 
-   //         pointDst.y() = (int)maximum(0, rectangleIntersect.top() - y);
+   //         pointDst.y = (int)maximum(0, rectangleIntersect.top() - y);
 
-   //         pointDst.x() = (int)maximum(0, rectangleIntersect.left() - x);
+   //         pointDst.x = (int)maximum(0, rectangleIntersect.left() - x);
 
    //         int_point pointSrc;
 
-   //         pointSrc.y() = (int)maximum(0, y - rectangleAlphaBlend.top());
+   //         pointSrc.y = (int)maximum(0, y - rectangleAlphaBlend.top());
 
-   //         pointSrc.x() = (int)maximum(0, x - rectangleAlphaBlend.left());
+   //         pointSrc.x = (int)maximum(0, x - rectangleAlphaBlend.left());
 
    //         pimage1->blend2(pointDst, m_pimageAlphaBlend, pointSrc, rectangleIntersect.size(), 255);
 
@@ -8003,16 +8003,16 @@ namespace draw2d_gdiplus
    //      if (rectangleIntersect.intersect(rectangleIntersect, rectangleBlt))
    //      {
 
-   //         //if (m_pointAlphaBlend.x() < 0)
+   //         //if (m_pointAlphaBlend.x < 0)
    //         //{
 
-   //         //   xSrc += -m_pointAlphaBlend.x();
+   //         //   xSrc += -m_pointAlphaBlend.x;
 
    //         //}
-   //         //if (m_pointAlphaBlend.y() < 0)
+   //         //if (m_pointAlphaBlend.y < 0)
    //         //{
 
-   //         //   ySrc += -m_pointAlphaBlend.y();
+   //         //   ySrc += -m_pointAlphaBlend.y;
 
    //         //}
 
@@ -8023,11 +8023,11 @@ namespace draw2d_gdiplus
 
    //         //   const ::int_point & pointOff = GetViewportOrg();
 
-   //         //   x += pointOff.x();
+   //         //   x += pointOff.x;
 
-   //         //   y += pointOff.y();
+   //         //   y += pointOff.y;
 
-   //         //   return m_pimage->blend(::int_point(x, y), pgraphicsSrc->m_pimage, ::int_point(xSrc, ySrc), m_pimageAlphaBlend, int_point(m_pointAlphaBlend.x() - x, m_pointAlphaBlend.y() - y), rectangleBlt.::double_size());
+   //         //   return m_pimage->blend(::int_point(x, y), pgraphicsSrc->m_pimage, ::int_point(xSrc, ySrc), m_pimageAlphaBlend, int_point(m_pointAlphaBlend.x - x, m_pointAlphaBlend.y - y), rectangleBlt.::double_size());
 
    //         //}
    //         //else
@@ -8058,7 +8058,7 @@ namespace draw2d_gdiplus
    //            if (!pimage1->from(nullptr, pgraphicsSrc, ::int_point(xSrc, ySrc), rectangleBlt.::double_size()))
    //               return false;
 
-   //            pimage1->blend2(::int_point(), m_pimageAlphaBlend, int_point(x - m_pointAlphaBlend.x(), y - m_pointAlphaBlend.y()), rectangleBlt.::double_size(), 255);
+   //            pimage1->blend2(::int_point(), m_pimageAlphaBlend, int_point(x - m_pointAlphaBlend.x, y - m_pointAlphaBlend.y), rectangleBlt.::double_size(), 255);
 
    //            BitBltRaw(x, y, nWidth, nHeight, pimage1->get_graphics(), 0, 0, dwRop);
 

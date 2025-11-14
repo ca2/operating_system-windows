@@ -49,7 +49,7 @@ namespace draw2d_gdiplus
 
             dumpcontext << "lgpn.lopnStyle = " << point.lopnStyle;
 
-            dumpcontext << "\nlgpn.lopnWidth.x() (width) = " << point.lopnWidth.x();
+            dumpcontext << "\nlgpn.lopnWidth.x (width) = " << point.lopnWidth.x;
 
             dumpcontext << "\nlgpn.lopnColor = " << (void *)(uptr)point.lopnColor;
 

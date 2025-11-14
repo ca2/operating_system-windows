@@ -79,7 +79,7 @@ namespace draw2d_gdiplus
 
       }
 
-      Gdiplus::PointF float_point((Gdiplus::REAL) point.x(), (Gdiplus::REAL) point.y());
+      Gdiplus::PointF float_point((Gdiplus::REAL) point.x, (Gdiplus::REAL) point.y);
 
       return m_pregion->IsVisible(float_point)  != false;
 
@@ -173,7 +173,7 @@ namespace draw2d_gdiplus
 
       for(int i = 0; i < m_nCount; i++)
       {
-         pa.add(Gdiplus::PointF((Gdiplus::REAL) m_lppoints[i].x(), (Gdiplus::REAL) m_lppoints[i].y()));
+         pa.add(Gdiplus::PointF((Gdiplus::REAL) m_lppoints[i].x, (Gdiplus::REAL) m_lppoints[i].y));
       }
 
       if(m_efillmode == ::draw2d::e_fill_mode_alternate)
@@ -216,7 +216,7 @@ namespace draw2d_gdiplus
          pa.erase_all();
          for(int j = 0; j < jCount; j++)
          {
-            pa.add(Gdiplus::PointF((Gdiplus::REAL) m_lppoints[n].x(), (Gdiplus::REAL) m_lppoints[n].y()));
+            pa.add(Gdiplus::PointF((Gdiplus::REAL) m_lppoints[n].x, (Gdiplus::REAL) m_lppoints[n].y));
             n++;
          }
          path.AddPolygon(pa.get_data(), (int) pa.get_count());

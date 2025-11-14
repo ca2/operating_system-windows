@@ -1461,9 +1461,9 @@ namespace windows
 
       ////m_puserinteraction->m_sizeScreen = rectangleScreen.size();
 
-      ////m_puserinteraction->m_pointScreenClient.x() = 0;
+      ////m_puserinteraction->m_pointScreenClient.x = 0;
 
-      ////m_puserinteraction->m_pointScreenClient.y() = 0;
+      ////m_puserinteraction->m_pointScreenClient.y = 0;
 
       ////::ScreenToClient(m_oswindow, m_puserinteraction->m_pointScreenClient);
 
@@ -1472,9 +1472,9 @@ namespace windows
       ////if (hwndParent != NULL)
       ////{
 
-      ////   m_puserinteraction->m_pointParentClient.x() = 0;
+      ////   m_puserinteraction->m_pointParentClient.x = 0;
 
-      ////   m_puserinteraction->m_pointParentClient.y() = 0;
+      ////   m_puserinteraction->m_pointParentClient.y = 0;
 
       ////   ::ClientToScreen(m_oswindow, m_puserinteraction->m_pointParentClient);
 
@@ -1502,7 +1502,7 @@ namespace windows
 
    //   ::ClientToScreen(m_oswindow, &point);
 
-   //   return double_point(point.x(), point.y());
+   //   return double_point(point.x, point.y);
 
    //}
 
@@ -3992,7 +3992,7 @@ void interaction_impl::set_tool_window(bool bSet)
 //
 //         ::ScreenToClient(oswindow, pointCursor);
 //
-//         lparam = MAKELPARAM(pointCursor.x(), pointCursor.y());
+//         lparam = MAKELPARAM(pointCursor.x, pointCursor.y);
 //
 //         pimpl->call_message_handler(e_message_mouse_move, 0, lparam);
 //
@@ -4647,7 +4647,7 @@ void interaction_impl::set_tool_window(bool bSet)
 //            // handler has set it to another one.
 //            pmouse->m_ecursor = cursor_default;
 //
-//            //information() << "windows::e_message_mouse_move(%d,%d)", pmouse->m_point.x(), pmouse->m_point.y();
+//            //information() << "windows::e_message_mouse_move(%d,%d)", pmouse->m_point.x, pmouse->m_point.y;
 //
 //            string strType;
 //

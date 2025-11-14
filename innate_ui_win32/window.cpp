@@ -479,25 +479,25 @@ namespace innate_ui_win32
 
             auto p = point;
 
-            if (p.x() < 0 || p.y() < 0)
+            if (p.x < 0 || p.y < 0)
             {
                auto hwndParent  = GetParent(m_hwnd);
                RECT rParentClient;
                GetClientRect(hwndParent, &rParentClient);
                RECT rThis;
                GetClientRect(m_hwnd, &rParentClient);
-               if (p.x() < 0)
+               if (p.x < 0)
                {
-                  p.x() += ::width(rParentClient) - ::width(rThis);
+                  p.x += ::width(rParentClient) - ::width(rThis);
                }
 
-               if (p.y() < 0)
+               if (p.y < 0)
                {
-                  p.y() += ::height(rParentClient) - ::height(rThis);
+                  p.y += ::height(rParentClient) - ::height(rThis);
                }
             }
 
-            ::SetWindowPos(m_hwnd, nullptr, p.x(), p.y(), 0, 0, SWP_NOSIZE);
+            ::SetWindowPos(m_hwnd, nullptr, p.x, p.y, 0, 0, SWP_NOSIZE);
 
          });
 
