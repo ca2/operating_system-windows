@@ -138,10 +138,6 @@ int CLASS_DECL_APEX_WINDOWS __windows_main(::apex::system * psystem, ::create * 
 //
 //} // namespace windows
 //
-//
-//
-//
-//
 //CLASS_DECL_APEX_WINDOWS int delete_registry_tree_helper(HKEY hParentKey, const ::string & strKeyName);
 //
 //

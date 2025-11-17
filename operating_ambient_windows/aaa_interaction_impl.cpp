@@ -4504,11 +4504,7 @@ void interaction_impl::set_tool_window(bool bSet)
 //
 //      }
 //      
-//      //
-//
-//
-//
-//      /*      else if(message == CA2M_BERGEDGE)
+//      //      /*      else if(message == CA2M_BERGEDGE)
 //      {
 //      if(pusermessage->m_wparam == BERGEDGE_GETAPP)
 //      {
@@ -4930,10 +4926,6 @@ void interaction_impl::set_tool_window(bool bSet)
 //      return estatus;
 //
 //   }
-//
-//
-//
-//
 
 //
 //

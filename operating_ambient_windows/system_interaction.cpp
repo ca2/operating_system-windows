@@ -62,12 +62,4 @@
 //      ::output_debug_string("system_interaction::on_message_destroy");
 //
 //   }
-//
-//
-//
-//
 //} // namespace base
-//
-//
-//
-//

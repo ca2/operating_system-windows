@@ -13,10 +13,6 @@
 //#if defined (__APPLE__)
 //#include "notify_icon_mm_bridge.h"
 //#endif
-//
-//
-//
-//
 //#ifdef LINUX
 //#include "apex/user/notify_icon_bridge.h"
 //namespace linux { class appindicator; }

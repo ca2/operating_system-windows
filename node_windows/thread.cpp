@@ -111,10 +111,6 @@ void __term_threading()
 //   return true;
 //
 //}
-//
-//
-//
-//
 //bool __node_term_thread(::thread * pthread)
 //{
 //

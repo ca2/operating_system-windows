@@ -125,10 +125,6 @@
 //         //}
 //         //}
 //      }
-//
-//
-//
-//
 //      //bool thread::on_idle(LONG lCount)
 //      //{
 //      //   // TODO: add your specialized code here and/or call the base class
@@ -298,9 +294,5 @@
 //
 //
 //} // namespace multimedia
-//
-//
-//
-//
 //
 //

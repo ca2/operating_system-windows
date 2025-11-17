@@ -43,10 +43,6 @@
 //      return path;
 //
 //   }
-//
-//
-//
-//
 //   unsigned int get_current_directory(string& str)
 //   {
 //

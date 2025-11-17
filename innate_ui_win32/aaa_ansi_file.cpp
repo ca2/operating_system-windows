@@ -4,10 +4,6 @@
 //
 //#include <io.h>
 //#include <fcntl.h>
-//
-//
-//
-//
 //int ansi_open(const scoped_string & str,int i)
 //{
 //   return _wopen(utf8_to_unicode(psz),i);
@@ -72,13 +68,5 @@
 //   _unlink(psz);
 //
 //}
-//
-//
-//
-//
-//
-//
-//
-//
 
 

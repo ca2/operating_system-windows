@@ -2049,10 +2049,6 @@ namespace windowing_win32
 //
 //                     //if (rectangleDrawing.size() == pimage->m_rectangleTag.size())
 //                     //{
-//
-//
-//
-//
 //      UINT uFlagsSetWindowPos = SWP_NOZORDER
 //         | SWP_ASYNCWINDOWPOS
 //         //| SWP_FRAMECHANGED
@@ -6073,11 +6069,7 @@ namespace windowing_win32
 //
 //      }
 //
-//      //
-//
-//
-//
-//      /*      else if(message == CA2M_BERGEDGE)
+//      //      /*      else if(message == CA2M_BERGEDGE)
 //      {
 //      if(pmessage->m_wparam == BERGEDGE_GETAPP)
 //      {

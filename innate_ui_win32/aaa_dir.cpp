@@ -2,14 +2,6 @@
 //#include "acme/operating_system.h"
 //#include <Shlobj.h>
 //
-//
-//
-//
-//
-//
-//
-//
-//
 //namespace dir
 //{
 //
@@ -146,14 +138,6 @@
 //
 //
 //} // namespace dir
-//
-//
-//
-//
-//
-//
-//
-//
 //string get_current_directory_name()
 //{
 //
