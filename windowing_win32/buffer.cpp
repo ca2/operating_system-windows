@@ -811,9 +811,9 @@ namespace windowing_win32
                   if (!::IsIconic(hwnd) && !::IsZoomed(hwnd))
                   {
 
-                     information() << "windowing_win32::buffer !IsIconic";
-                     information() << "windowing_win32::buffer bZOrder = " << bZOrder;
-                     information() << "windowing_win32::buffer bActivate = " << bActivate;
+                     //information() << "windowing_win32::buffer !IsIconic";
+                     //information() << "windowing_win32::buffer bZOrder = " << bZOrder;
+                     //information() << "windowing_win32::buffer bActivate = " << bActivate;
 
                      nFlags &= ~SWP_NOMOVE;
                      nFlags &= ~SWP_NOSIZE;
@@ -856,7 +856,7 @@ namespace windowing_win32
                            if (rectangleRequest.left() > 100)
                            {
 
-                              informationf("test");
+                              //informationf("test");
                            }
 
                            ::SetWindowPos(hwnd, hwndInsertAfter, rectangleRequest.left(), rectangleRequest.top(), cx,
