@@ -1114,7 +1114,7 @@ namespace acme_windows
    void node::integration_factory()
    {
 
-      if (!system()->m_pfactory->has(::type < ::integration::context >()))
+      if (!system()->m_pfactory->has< ::integration::context >())
       {
 
          system()->m_pfactory->add_factory_item < ::acme_windows::integration::context, ::integration::context >();
