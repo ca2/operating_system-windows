@@ -1443,17 +1443,17 @@ namespace windowing_win32
 
       //::int_rectangle rWindow;
 
-      //rWindow.left() = attr.x;
-      //rWindow.top() = attr.y;
-      //rWindow.right() = attr.x + attr.width;
-      //rWindow.bottom() = attr.y + attr.height;
+      //rWindow.left = attr.x;
+      //rWindow.top = attr.y;
+      //rWindow.right = attr.x + attr.width;
+      //rWindow.bottom = attr.y + attr.height;
 
       //if (rBest != rWindow)
       //{
 
       //   puserinteraction->place(rBest);
 
-      //   XMoveResizeWindow(d, m_window, rBest.left(), rBest.top(), rBest.width(), rBest.height());
+      //   XMoveResizeWindow(d, m_window, rBest.left, rBest.top, rBest.width(), rBest.height());
 
       //}
 
@@ -2384,8 +2384,8 @@ namespace windowing_win32
 
    //   //::int_rectangle rectangle;
 
-   //   //rectangle.left() = x;
-   //   //rectangle.top() = y;
+   //   //rectangle.left = x;
+   //   //rectangle.top = y;
    //   //rectangle.set_width(cx);
    //   //rectangle.set_height(cy);
 
@@ -3055,7 +3055,7 @@ namespace windowing_win32
 
       //auto & buffer = pbuffer->m_osbuffera[!pbuffer->m_iCurrentBuffer];
 
-      //::BitBlt(hdc, rectangleUpdate.left(), rectangleUpdate.top(), rectangleUpdate.width(), rectangleUpdate.height(), buffer.m_hdc, 0, 0, SRCCOPY);
+      //::BitBlt(hdc, rectangleUpdate.left, rectangleUpdate.top, rectangleUpdate.width(), rectangleUpdate.height(), buffer.m_hdc, 0, 0, SRCCOPY);
 
 
 
@@ -3094,7 +3094,7 @@ namespace windowing_win32
 
       //            pgraphics->SetViewportOrg(0, 0);
 
-      //            g->BitBlt(rectanglePaint.left(), rectanglePaint.top(), rectanglePaint.width(), rectanglePaint.height(), pgraphics, rectangleUpdate.left(), rectangleUpdate.top());
+      //            g->BitBlt(rectanglePaint.left, rectanglePaint.top, rectanglePaint.width(), rectanglePaint.height(), pgraphics, rectangleUpdate.left, rectangleUpdate.top);
 
       //         }
 
@@ -5664,23 +5664,23 @@ namespace windowing_win32
       //if(bCalcValidRects)
       //{
       //   informationf("1");
-      //   pncsp->rgrc[0].left() = lpncsp->lppos->x + 1;
+      //   pncsp->rgrc[0].left = lpncsp->lppos->x + 1;
 
-      //   pncsp->rgrc[0].right() = lpncsp->lppos->x + lpncsp->lppos->cx - 1;
+      //   pncsp->rgrc[0].right = lpncsp->lppos->x + lpncsp->lppos->cx - 1;
 
-      //   pncsp->rgrc[0].top() = lpncsp->lppos->y + 32;
+      //   pncsp->rgrc[0].top = lpncsp->lppos->y + 32;
 
-      //   pncsp->rgrc[0].bottom() = lpncsp->lppos->y + lpncsp->lppos->cy - 1;
+      //   pncsp->rgrc[0].bottom = lpncsp->lppos->y + lpncsp->lppos->cy - 1;
 
       //}
       //else
       //{
       //   CRect * prectangle = (CRect *) pncsp;
 
-      //   prectangle->top() += 32;
-      //   prectangle->left()++;
-      //   prectangle->bottom()--;
-      //   prectangle->right()--;
+      //   prectangle->top += 32;
+      //   prectangle->left++;
+      //   prectangle->bottom--;
+      //   prectangle->right--;
 
       //   informationf("2");
       //}
@@ -5703,13 +5703,13 @@ namespace windowing_win32
          /* Maximized windows always have a non-client border that hangs over
          the edge of the screen, so the int_size proposed by ::user::e_message_non_client_calc_size is
          fine. Just adjust the top border to erase the u title. */
-         pncsp->rgrc[0].left = client.left();
+         pncsp->rgrc[0].left = client.left;
 
-         pncsp->rgrc[0].top = nonclient.top() + wi.cyWindowBorders;
+         pncsp->rgrc[0].top = nonclient.top + wi.cyWindowBorders;
 
-         pncsp->rgrc[0].right = client.right();
+         pncsp->rgrc[0].right = client.right;
 
-         pncsp->rgrc[0].bottom = client.bottom();
+         pncsp->rgrc[0].bottom = client.bottom;
 
 
          HMONITOR mon = MonitorFromWindow(hwnd, MONITOR_DEFAULTTOPRIMARY);

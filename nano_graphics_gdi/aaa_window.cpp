@@ -203,8 +203,8 @@ namespace windows
                _T(NANO_WINDOW_CLASS),
                wstrTitle,
                WS_POPUP | WS_SYSMENU,
-               m_pinterface->m_rectangle.left(),
-               m_pinterface->m_rectangle.top(),
+               m_pinterface->m_rectangle.left,
+               m_pinterface->m_rectangle.top,
                m_pinterface->m_rectangle.width(),
                m_pinterface->m_rectangle.height(),
                NULL, NULL, hinstanceWndProc, this);

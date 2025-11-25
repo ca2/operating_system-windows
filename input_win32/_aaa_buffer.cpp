@@ -654,10 +654,10 @@ namespace windowing_win32
 
                //rectangle r;
 
-               //rectangle.left() = 10;
-               //rectangle.right() = 20;
-               //rectangle.top() = 0;
-               //rectangle.bottom() = sz.cy();
+               //rectangle.left = 10;
+               //rectangle.right = 20;
+               //rectangle.top = 0;
+               //rectangle.bottom = sz.cy();
 
                //::FillRect(m_hdc, rectangle, h);
 
@@ -698,10 +698,10 @@ namespace windowing_win32
 
                //rectangle r;
 
-               //rectangle.left() = 20;
-               //rectangle.right() = 30;
-               //rectangle.top() = 0;
-               //rectangle.bottom() = sz.cy();
+               //rectangle.left = 20;
+               //rectangle.right = 30;
+               //rectangle.top = 0;
+               //rectangle.bottom = sz.cy();
 
                //::FillRect(m_hdc, rectangle, h);
 
@@ -732,10 +732,10 @@ namespace windowing_win32
 
                               //rectangle r;
 
-                              //rectangle.left() = 20;
-                              //rectangle.right() = 30;
-                              //rectangle.top() = 0;
-                              //rectangle.bottom() = sz.cy();
+                              //rectangle.left = 20;
+                              //rectangle.right = 30;
+                              //rectangle.top = 0;
+                              //rectangle.bottom = sz.cy();
 
                               //::FillRect(m_hdc, rectangle, h);
 

@@ -38,10 +38,10 @@ bool has_autohide_appbar(unsigned int edge, const int_rectangle & mon)
 
       data.uEdge = edge;
 
-      data.rc.left = mon.left();
-      data.rc.top = mon.top();
-      data.rc.right = mon.right();
-      data.rc.bottom = mon.bottom();
+      data.rc.left = mon.left;
+      data.rc.top = mon.top;
+      data.rc.right = mon.right;
+      data.rc.bottom = mon.bottom;
 
       return SHAppBarMessage(0x0000000b, &data);
 
@@ -50,7 +50,7 @@ bool has_autohide_appbar(unsigned int edge, const int_rectangle & mon)
 
    /* Before Windows 8.1, it was not possible to specify a monitor when
     checking for hidden appbars, so check only on the primary monitor */
-   if (mon.left() != 0 || mon.top() != 0)
+   if (mon.left != 0 || mon.top != 0)
       return false;
    APPBARDATA data = {};
    data.cbSize = sizeof(APPBARDATA);

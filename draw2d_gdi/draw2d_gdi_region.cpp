@@ -131,7 +131,7 @@ namespace draw2d_gdi
    void region::SetRectRgn(const ::int_rectangle & rectangle)
    {
 
-      ::SetRectRgn((HRGN)get_os_data(), rectangle.left(), rectangle.top(), rectangle.right(), rectangle.bottom());
+      ::SetRectRgn((HRGN)get_os_data(), rectangle.left, rectangle.top, rectangle.right, rectangle.bottom);
 
    }
 

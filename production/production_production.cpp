@@ -678,7 +678,7 @@ pacmedir->system() / "config/production/mirror_status.txt";
             __keep(&m_bFinished, false, true, true);
             string str;
             m_iBaseLen = m_strBase.get_length();
-            if (m_strBase.right()(1) != "/" && m_strBase.right()(1) != "\\")
+            if (m_strBase.right(1) != "/" && m_strBase.right(1) != "\\")
                m_iBaseLen++;
 
 
@@ -828,7 +828,7 @@ pacmedir->system() / "config/production/mirror_status.txt";
          ::collection::count iCount = m_straFiles.get_size();
          for (int i = 0; i < iCount;)
          {
-            if (m_straFiles[i].find("\\.svn\\") >= 0 || (m_straFiles[i].get_length() < 5 || m_straFiles[i].right()(5) == "\\.svn"))
+            if (m_straFiles[i].find("\\.svn\\") >= 0 || (m_straFiles[i].get_length() < 5 || m_straFiles[i].right(5) == "\\.svn"))
             {
                m_straFiles.erase_at(i);
             }
@@ -1823,7 +1823,7 @@ pacmedir->create(pathTarget.folder()))
       string strDirParam(pszDir);
       string strLocal(strDirParam);
       strLocal.replace("/", "\\");
-      if (strLocal.right()(1) != "\\") strLocal += "\\";
+      if (strLocal.right(1) != "\\") strLocal += "\\";
       strRelease = strBase / strLocal;
       if (bFileSet)
       {
@@ -1845,7 +1845,7 @@ pacmedir->create(pathTarget.folder()))
 
          for (int i = 0; i < stra1.get_size();)
          {
-            if (stra1[i].find("\\.svn\\") >= 0 || (stra1[i].get_length() < 5 || stra1[i].right()(5) == "\\.svn"))
+            if (stra1[i].find("\\.svn\\") >= 0 || (stra1[i].get_length() < 5 || stra1[i].right(5) == "\\.svn"))
             {
                stra1.erase_at(i);
             }
@@ -1877,7 +1877,7 @@ pacmedir->create(pathTarget.folder()))
 
 
       character_count iBaseLen = m_strBase.get_length();
-      if (m_strBase.right()(1) != "/" && m_strBase.right()(1) != "\\")
+      if (m_strBase.right(1) != "/" && m_strBase.right(1) != "\\")
          iBaseLen++;
 
       string_array_base straStageDir;
@@ -2121,7 +2121,7 @@ pacmedir->create(pathTarget.folder()))
 
       character_count iBaseLen = m_strBase.get_length();
 
-      if (m_strBase.right()(1) != "/" && m_strBase.right()(1) != "\\")
+      if (m_strBase.right(1) != "/" && m_strBase.right(1) != "\\")
          iBaseLen++;
 
       string strRelative;
@@ -3472,7 +3472,7 @@ retry1:
          ::collection::index iFind;
          while ((iFind = strAccumul.find("\r\n")) >= 0)
          {
-            add_status(strAccumul.left()(iFind));
+            add_status(strAccumul.left(iFind));
             strAccumul = strAccumul.substr(iFind + 2);
          }
 
@@ -3488,7 +3488,7 @@ retry1:
       ::collection::index iFind;
       while ((iFind = strAccumul.find("\r\n")) >= 0)
       {
-         add_status(strAccumul.left()(iFind));
+         add_status(strAccumul.left(iFind));
          strAccumul = strAccumul.substr(iFind + 2);
       }
       add_status(strAccumul);
@@ -3526,7 +3526,7 @@ retry1:
          atoi(m_strFormatBuild.substr(17, 2))
          );
 
-         str = str.left()(iFind1) + strVersion1 + str.substr(iFind2);
+         str = str.left(iFind1) + strVersion1 + str.substr(iFind2);
 
       }
 
@@ -3548,7 +3548,7 @@ retry1:
          atoi(m_strFormatBuild.substr(17, 2))
          );
 
-         str = str.left()(iFind1) + strVersion2 + str.substr(iFind2);
+         str = str.left(iFind1) + strVersion2 + str.substr(iFind2);
 
       }
 

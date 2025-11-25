@@ -2346,7 +2346,7 @@ pacmedir->create CreateDirectoryW last error(%d)=%s", dwError, pszError);
          //   character_count iFind1 = strRelative.rear_find("\\", iFind);
          //   character_count iFind2 = strRelative.rear_find("/", iFind);
          //   character_count iStart = maximum(iFind1 + 1, iFind2 + 1);
-         //   strRelative = strRelative.left()(iFind - 1) + "_" + strRelative.substr(iStart, iFind - iStart) + strRelative.substr(iFind + 1);
+         //   strRelative = strRelative.left(iFind - 1) + "_" + strRelative.substr(iStart, iFind - iStart) + strRelative.substr(iFind + 1);
          //}
 
 

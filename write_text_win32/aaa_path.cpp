@@ -410,7 +410,7 @@ namespace draw2d_gdiplus
       {
 
 
-         ::Gdiplus::RectF float_rectangle((Gdiplus::REAL) rectangle.left(), (Gdiplus::REAL) rectangle.top(), (Gdiplus::REAL) width(rectangle), (Gdiplus::REAL) height(rectangle));
+         ::Gdiplus::RectF float_rectangle((Gdiplus::REAL) rectangle.left, (Gdiplus::REAL) rectangle.top, (Gdiplus::REAL) width(rectangle), (Gdiplus::REAL) height(rectangle));
 
 
          m_ppath->AddArc(float_rectangle, (Gdiplus::REAL) angleBeg.degree(), (Gdiplus::REAL) (angleEnd - angleBeg).degree());
@@ -552,10 +552,10 @@ namespace draw2d_gdiplus
 
       ::double_rectangle rectangle;
 
-      rectangle.left()      = arc.m_pointCenter.x - arc.m_sizeRadius.cx();
-      rectangle.right()     = arc.m_pointCenter.x + arc.m_sizeRadius.cx();
-      rectangle.top()       = arc.m_pointCenter.y - arc.m_sizeRadius.cy();
-      rectangle.bottom()    = arc.m_pointCenter.y + arc.m_sizeRadius.cy();
+      rectangle.left      = arc.m_pointCenter.x - arc.m_sizeRadius.cx();
+      rectangle.right     = arc.m_pointCenter.x + arc.m_sizeRadius.cx();
+      rectangle.top       = arc.m_pointCenter.y - arc.m_sizeRadius.cy();
+      rectangle.bottom    = arc.m_pointCenter.y + arc.m_sizeRadius.cy();
 
       //if (!m_bHasPath && m_bHasPointInternal)
       //{
@@ -574,7 +574,7 @@ namespace draw2d_gdiplus
    bool path::_set(::draw2d::graphics * pgraphics, const ::int_rectangle & rectangle)
    {
 
-      return internal_add_rect(rectangle.left(), rectangle.top(),  rectangle.width(), rectangle.height());
+      return internal_add_rect(rectangle.left, rectangle.top,  rectangle.width(), rectangle.height());
 
    }
 
@@ -582,7 +582,7 @@ namespace draw2d_gdiplus
    bool path::_set(::draw2d::graphics* pgraphics, const ::double_rectangle& rectangle)
    {
 
-      return internal_add_rect(rectangle.left(), rectangle.top(), rectangle.width(), rectangle.height());
+      return internal_add_rect(rectangle.left, rectangle.top, rectangle.width(), rectangle.height());
 
    }
 

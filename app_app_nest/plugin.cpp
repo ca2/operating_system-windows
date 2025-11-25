@@ -118,20 +118,20 @@ install:
       RECT rectangleWindow;
       window_rectangle(&rectangleWindow);
 
-      int cx = rectangleWindow.right() - rectangleWindow.left();
-      int cy = rectangleWindow.bottom() - rectangleWindow.top();
+      int cx = rectangleWindow.right - rectangleWindow.left;
+      int cy = rectangleWindow.bottom - rectangleWindow.top;
 
       RECT int_rectangle;
-      rectangle.left()         = 0;
-      rectangle.top()          = 0;
-      rectangle.right()        = cx;
-      rectangle.bottom()       = cy;
+      rectangle.left         = 0;
+      rectangle.top          = 0;
+      rectangle.right        = cx;
+      rectangle.bottom       = cy;
 
       HBITMAP hbmp      = ::CreateCompatibleBitmap(hdcWindow, cx, cy);
       HDC hdc           = ::CreateCompatibleDC(hdcWindow);
       HBITMAP hbmpOld   =  (HBITMAP) ::SelectObject(hdc, (HGDIOBJ) hbmp);
    
-      ::BitBlt(hdc, 0, 0, cx, cy, hdcWindow, m_rectangle.left(), m_rectangle.top(), SRCCOPY);
+      ::BitBlt(hdc, 0, 0, cx, cy, hdcWindow, m_rectangle.left, m_rectangle.top, SRCCOPY);
 
       HFONT hfontOld = nullptr;
       HFONT hfont = nullptr;
@@ -142,10 +142,10 @@ install:
       else if(!is_ca2_installed())
       {
          RECT int_rectangle;
-         rectangle.left()      = 0;
-         rectangle.top()       = 0;
-         rectangle.bottom()    = cx;
-         rectangle.right()     = cy;
+         rectangle.left      = 0;
+         rectangle.top       = 0;
+         rectangle.bottom    = cx;
+         rectangle.right     = cy;
          ::FillSolidRect_dup(hdc, &rectangle, rgb(255, 255, 255));
          ::SetTextColor(hdc, rgb(255, 0, 255));
          const scoped_string & str = "ca2 is not installed! You may try to install using low level installer_install.exe.";
@@ -156,8 +156,8 @@ install:
       }
       POINT pointViewport;
       ::SetViewportOrgEx(hdc, 0, 0, &pointViewport);
-      ::BitBlt(hdcWindow, lprect->left(), lprect->top(), lprect->right() - lprect->left(), lprect->bottom() - lprect->top(), 
-               hdc,       lprect->left() - m_rectangle.left(), lprect.top() - m_rectangle.top(), SRCCOPY);
+      ::BitBlt(hdcWindow, lprect->left, lprect->top, lprect->right - lprect->left, lprect->bottom - lprect->top, 
+               hdc,       lprect->left - m_rectangle.left, lprect.top - m_rectangle.top, SRCCOPY);
       ::SelectObject(hdc, (HGDIOBJ) hbmpOld);
       if(hfontOld != nullptr)
       {

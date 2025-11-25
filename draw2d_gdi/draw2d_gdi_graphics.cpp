@@ -607,7 +607,7 @@ namespace draw2d_gdi
 
       ASSERT(get_handle1() != nullptr);
 
-      return ::Arc(get_handle1(), rectangle.left(), rectangle.top(), rectangle.right(), rectangle.bottom(), pointStart.x, pointStart.y, pointEnd.x, pointEnd.y) != false;
+      return ::Arc(get_handle1(), rectangle.left, rectangle.top, rectangle.right, rectangle.bottom, pointStart.x, pointStart.y, pointEnd.x, pointEnd.y) != false;
 
    }
 
@@ -653,7 +653,7 @@ namespace draw2d_gdi
          bf.SourceConstantAlpha = 0xFF;
          bf.AlphaFormat = AC_SRC_ALPHA;
 
-         ::AlphaBlend(m_hdc, rectangle.left(), rectangle.top(), ::width(rectangle), ::height(rectangle), (HDC)pimage->g()->get_os_data(), 0, 0, ::width(rectangle), ::height(rectangle), bf);
+         ::AlphaBlend(m_hdc, rectangle.left, rectangle.top, ::width(rectangle), ::height(rectangle), (HDC)pimage->g()->get_os_data(), 0, 0, ::width(rectangle), ::height(rectangle), bf);
 
       }
 
@@ -872,7 +872,7 @@ namespace draw2d_gdi
 
       ASSERT(get_handle1() != nullptr);
 
-      return ::Chord(get_handle1(), rectangle.left(), rectangle.top(), rectangle.right(), rectangle.bottom(), pointStart.x, pointStart.y, pointEnd.x, pointEnd.y) != false;
+      return ::Chord(get_handle1(), rectangle.left, rectangle.top, rectangle.right, rectangle.bottom, pointStart.x, pointStart.y, pointEnd.x, pointEnd.y) != false;
 
    }
 
@@ -1186,8 +1186,8 @@ namespace draw2d_gdi
 
       ASSERT(get_handle1() != nullptr);
 
-      return ::Pie(get_handle1(), rectangle.left(), rectangle.top(),
-                   rectangle.right(), rectangle.bottom(), pointStart.x, pointStart.y,
+      return ::Pie(get_handle1(), rectangle.left, rectangle.top,
+                   rectangle.right, rectangle.bottom, pointStart.x, pointStart.y,
                    pointEnd.x, pointEnd.y) != false;
 
    }
@@ -1198,7 +1198,7 @@ namespace draw2d_gdi
 
       ASSERT(get_handle1() != nullptr);
 
-      return ::RoundRect(get_handle1(), rectangle.left(), rectangle.top(), ::width(rectangle), ::height(rectangle), point.x, point.y) != false;
+      return ::RoundRect(get_handle1(), rectangle.left, rectangle.top, ::width(rectangle), ::height(rectangle), point.x, point.y) != false;
 
    }
 
@@ -1216,8 +1216,8 @@ namespace draw2d_gdi
    bool graphics::draw(const ::int_rectangle & rectangle, ::draw2d::graphics * pgraphicsSrc, const ::int_point & point, unsigned int dwRop)
    {
 
-      int x = rectangle.left();
-      int y = rectangle.top();
+      int x = rectangle.left;
+      int y = rectangle.top;
       int nWidth = ::width(rectangle);
       int nHeight = ::height(rectangle);
       int xSrc = point.x;
@@ -2198,7 +2198,7 @@ namespace draw2d_gdi
    bool graphics::ArcTo(const ::int_rectangle & rectangle, const ::int_point & pointStart, const ::int_point & pointEnd)
    {
 
-      ASSERT(get_handle1() != nullptr); return ArcTo(rectangle.left(), rectangle.top(), rectangle.right(), rectangle.bottom(), pointStart.x, pointStart.y, pointEnd.x, pointEnd.y) != false;
+      ASSERT(get_handle1() != nullptr); return ArcTo(rectangle.left, rectangle.top, rectangle.right, rectangle.bottom, pointStart.x, pointStart.y, pointEnd.x, pointEnd.y) != false;
 
    }
 
@@ -2494,11 +2494,11 @@ namespace draw2d_gdi
 
       ::FillPath((HDC) pimage->g()->get_os_data());
 
-      GDI_DIB(pimage.m_p)->process_blend(&brush, rectangle.left(), rectangle.top(), m_ealphamode);
+      GDI_DIB(pimage.m_p)->process_blend(&brush, rectangle.left, rectangle.top, m_ealphamode);
 
       GDI_GRAPHICS(pimage->g())->SetViewportOrg(0, 0);
 
-      ::AlphaBlend(m_hdc, rectangle.left(), rectangle.top(), rectangle.width(), rectangle.height(), (HDC) pimage->g()->get_os_data(), 0, 0, rectangle.width(), rectangle.height(), bf);
+      ::AlphaBlend(m_hdc, rectangle.left, rectangle.top, rectangle.width(), rectangle.height(), (HDC) pimage->g()->get_os_data(), 0, 0, rectangle.width(), rectangle.height(), bf);
 
       return true;
 
@@ -2538,7 +2538,7 @@ namespace draw2d_gdi
 
       begin_path();
 
-      ::Ellipse(m_hdc, lprect->left(), lprect->top(), lprect->right(), lprect->bottom());
+      ::Ellipse(m_hdc, lprect->left, lprect->top, lprect->right, lprect->bottom);
 
       end_path();
 
@@ -2552,7 +2552,7 @@ namespace draw2d_gdi
 
       begin_path();
 
-      ::rectangle(m_hdc, lprect->left(), lprect->top(), lprect->right(), lprect->bottom());
+      ::rectangle(m_hdc, lprect->left, lprect->top, lprect->right, lprect->bottom);
 
       end_path();
 
@@ -2566,9 +2566,9 @@ namespace draw2d_gdi
 
       begin_path();
 
-      ::MoveToEx(m_hdc, lprect->left(), lprect->top(), nullptr);
+      ::MoveToEx(m_hdc, lprect->left, lprect->top, nullptr);
 
-      ::LineTo(m_hdc, lprect->right(), lprect->bottom());
+      ::LineTo(m_hdc, lprect->right, lprect->bottom);
 
       end_path();
 
@@ -2654,14 +2654,14 @@ namespace draw2d_gdi
 
          ::FillPath((HDC) pimage->g()->get_os_data());
 
-         GDI_DIB(pimage.m_p)->process_blend(&brush, rectangle.left(), rectangle.top(), m_ealphamode, m_pimage);
+         GDI_DIB(pimage.m_p)->process_blend(&brush, rectangle.left, rectangle.top, m_ealphamode, m_pimage);
 
          if(m_ealphamode == ::draw2d::e_alpha_mode_blend)
          {
 
             GDI_GRAPHICS(pimage->g())->SetViewportOrg(0, 0);
 
-            ::AlphaBlend(m_hdc, rectangle.left(), rectangle.top(), rectangle.width(), rectangle.height(), (HDC) pimage->g()->get_os_data(), 0, 0, rectangle.width(), rectangle.height(), bf);
+            ::AlphaBlend(m_hdc, rectangle.left, rectangle.top, rectangle.width(), rectangle.height(), (HDC) pimage->g()->get_os_data(), 0, 0, rectangle.width(), rectangle.height(), bf);
 
          }
 
@@ -2795,10 +2795,10 @@ namespace draw2d_gdi
 
          ::int_rectangle rectangle(rectangleBound);
 
-         rectangle.left()   -= (int) floor(pen.m_dWidth / 2.0);
-         rectangle.right()  += (int) ceil(pen.m_dWidth / 2.0);
-         rectangle.top()    -= (int) floor(pen.m_dWidth / 2.0);
-         rectangle.bottom() += (int) ceil(pen.m_dWidth / 2.0);
+         rectangle.left   -= (int) floor(pen.m_dWidth / 2.0);
+         rectangle.right  += (int) ceil(pen.m_dWidth / 2.0);
+         rectangle.top    -= (int) floor(pen.m_dWidth / 2.0);
+         rectangle.bottom += (int) ceil(pen.m_dWidth / 2.0);
 
          BLENDFUNCTION bf;
          bf.BlendOp     = AC_SRC_OVER;
@@ -2822,14 +2822,14 @@ namespace draw2d_gdi
 
          ::StrokePath(GDI_HDC(pimage->g()));
 
-         GDI_DIB(pimage.m_p)->process_blend(&pen, rectangle.left(), rectangle.top(), m_ealphamode, m_pimage);
+         GDI_DIB(pimage.m_p)->process_blend(&pen, rectangle.left, rectangle.top, m_ealphamode, m_pimage);
 
          if(m_ealphamode == ::draw2d::e_alpha_mode_blend)
          {
 
             GDI_GRAPHICS(pimage->g())->SetViewportOrg(0, 0);
 
-            ::AlphaBlend(m_hdc, rectangle.left(), rectangle.top(), rectangle.width(), rectangle.height(), (HDC) pimage->g()->get_os_data(), 0, 0, rectangle.width(), rectangle.height(), bf);
+            ::AlphaBlend(m_hdc, rectangle.left, rectangle.top, rectangle.width(), rectangle.height(), (HDC) pimage->g()->get_os_data(), 0, 0, rectangle.width(), rectangle.height(), bf);
 
          }
 
@@ -2872,10 +2872,10 @@ namespace draw2d_gdi
 
          ::int_rectangle rectangle(rectangleBound);
 
-         rectangle.left()   -= (int) floor(pen.m_dWidth / 2.0);
-         rectangle.right()  += (int) floor(pen.m_dWidth / 2.0);
-         rectangle.top()    -= (int) floor(pen.m_dWidth / 2.0);
-         rectangle.bottom() += (int) floor(pen.m_dWidth / 2.0);
+         rectangle.left   -= (int) floor(pen.m_dWidth / 2.0);
+         rectangle.right  += (int) floor(pen.m_dWidth / 2.0);
+         rectangle.top    -= (int) floor(pen.m_dWidth / 2.0);
+         rectangle.bottom += (int) floor(pen.m_dWidth / 2.0);
 
          BLENDFUNCTION bf;
          bf.BlendOp     = AC_SRC_OVER;
@@ -2899,7 +2899,7 @@ namespace draw2d_gdi
 
             ::FillPath((HDC) pimage->g()->get_os_data());
 
-            if(GDI_DIB(pimage.m_p)->process_blend(&brush, rectangle.left(), rectangle.top(), m_ealphamode, m_pimage))
+            if(GDI_DIB(pimage.m_p)->process_blend(&brush, rectangle.left, rectangle.top, m_ealphamode, m_pimage))
             {
 
                if(m_ealphamode == ::draw2d::e_alpha_mode_blend)
@@ -2907,7 +2907,7 @@ namespace draw2d_gdi
 
                   GDI_GRAPHICS(pimage->g())->SetViewportOrg(0, 0);
 
-                  ::AlphaBlend(m_hdc, rectangle.left(), rectangle.top(), rectangle.width(), rectangle.height(), (HDC) pimage->g()->get_os_data(), 0, 0, rectangle.width(), rectangle.height(), bf);
+                  ::AlphaBlend(m_hdc, rectangle.left, rectangle.top, rectangle.width(), rectangle.height(), (HDC) pimage->g()->get_os_data(), 0, 0, rectangle.width(), rectangle.height(), bf);
 
                }
                /*
@@ -2939,7 +2939,7 @@ namespace draw2d_gdi
 
             ::StrokePath(GDI_HDC(pimage->g()));
 
-            if(GDI_DIB(pimage.m_p)->process_blend(&pen, rectangle.left(), rectangle.top(), m_ealphamode, m_pimage))
+            if(GDI_DIB(pimage.m_p)->process_blend(&pen, rectangle.left, rectangle.top, m_ealphamode, m_pimage))
             {
 
                if(m_ealphamode == ::draw2d::e_alpha_mode_blend)
@@ -2947,7 +2947,7 @@ namespace draw2d_gdi
 
                   GDI_GRAPHICS(pimage->g())->SetViewportOrg(0, 0);
 
-                  ::AlphaBlend(m_hdc, rectangle.left(), rectangle.top(), rectangle.width(), rectangle.height(), (HDC) pimage->g()->get_os_data(), 0, 0, rectangle.width(), rectangle.height(), bf);
+                  ::AlphaBlend(m_hdc, rectangle.left, rectangle.top, rectangle.width(), rectangle.height(), (HDC) pimage->g()->get_os_data(), 0, 0, rectangle.width(), rectangle.height(), bf);
 
                }
                /*
@@ -3518,7 +3518,7 @@ namespace draw2d_gdi
    //      SelectClipRgn(rgnLast);
    //      get_clip_box(&rectangle);
    //      pBrushOld = SelectObject(pBrushLast);
-   //      PatBlt(rectangle.left(), rectangle.top(), rectangle.width(), rectangle.height(), PATINVERT);
+   //      PatBlt(rectangle.left, rectangle.top, rectangle.width(), rectangle.height(), PATINVERT);
    //      SelectObject(pBrushOld);
    //      pBrushOld = nullptr;
    //   }
@@ -3527,7 +3527,7 @@ namespace draw2d_gdi
    //   SelectClipRgn(rgnUpdate->get_os_data() != nullptr ? rgnUpdate : rgnNew);
    //   get_clip_box(&rectangle);
    //   pBrushOld = SelectObject(pBrush);
-   //   PatBlt(rectangle.left(), rectangle.top(), rectangle.width(), rectangle.height(), PATINVERT);
+   //   PatBlt(rectangle.left, rectangle.top, rectangle.width(), rectangle.height(), PATINVERT);
 
    //   // cleanup DC
    //   if (pBrushOld != nullptr)
@@ -3630,9 +3630,9 @@ namespace draw2d_gdi
       else
       {
 
-         int x = rectangle.left();
+         int x = rectangle.left;
 
-         int y = rectangle.top();
+         int y = rectangle.top;
 
          int cx = ::width(rectangle);
 
@@ -3656,8 +3656,8 @@ namespace draw2d_gdi
    void graphics::draw_inset_3d_rectangle(const ::int_rectangle & rectangle, ::color::color crTopLeft, ::color::color crBottomRight, const ::e_border & eborder)
    {
 
-      int x = rectangle.left();
-      int y = rectangle.top();
+      int x = rectangle.left;
+      int y = rectangle.top;
       int cx = ::width(rectangle);
       int cy = ::height(rectangle);
 
@@ -3678,14 +3678,14 @@ namespace draw2d_gdi
       if (eborder & e_border_right)
       {
 
-         fill_solid_rect_dim(rectangle.right(), y, -1, cy, crBottomRight);
+         fill_solid_rect_dim(rectangle.right, y, -1, cy, crBottomRight);
 
       }
 
       if (eborder & e_border_bottom)
       {
 
-         fill_solid_rect_dim(x, rectangle.bottom(), cx, -1, crBottomRight);
+         fill_solid_rect_dim(x, rectangle.bottom, cx, -1, crBottomRight);
 
       }
 
@@ -4190,11 +4190,11 @@ namespace draw2d_gdi
    {
       int nRetVal = ERROR;
       if(get_handle1() != nullptr && get_handle1() != get_handle2())
-         nRetVal = ::ExcludeClipRect(get_handle1(), rectangle.left(), rectangle.top(),
-                                     rectangle.right(), rectangle.bottom());
+         nRetVal = ::ExcludeClipRect(get_handle1(), rectangle.left, rectangle.top,
+                                     rectangle.right, rectangle.bottom);
       if(get_handle2() != nullptr)
-         nRetVal = ::ExcludeClipRect(get_handle2(), rectangle.left(), rectangle.top(),
-                                     rectangle.right(), rectangle.bottom());
+         nRetVal = ::ExcludeClipRect(get_handle2(), rectangle.left, rectangle.top,
+                                     rectangle.right, rectangle.bottom);
       return nRetVal;
    }
 
@@ -4212,9 +4212,9 @@ namespace draw2d_gdi
    {
       int nRetVal = ERROR;
       if(get_handle1() != nullptr && get_handle1() != get_handle2())
-         nRetVal = ::IntersectClipRect(get_handle1(), rectangle.left(), rectangle.top(), rectangle.right(), rectangle.bottom());
+         nRetVal = ::IntersectClipRect(get_handle1(), rectangle.left, rectangle.top, rectangle.right, rectangle.bottom);
       if(get_handle2() != nullptr)
-         nRetVal = ::IntersectClipRect(get_handle2(), rectangle.left(), rectangle.top(), rectangle.right(), rectangle.bottom());
+         nRetVal = ::IntersectClipRect(get_handle2(), rectangle.left, rectangle.top, rectangle.right, rectangle.bottom);
       return nRetVal;
    }
 
@@ -4275,13 +4275,13 @@ namespace draw2d_gdi
 
       ::int_rectangle rectangleBound(rectangle);
 
-      __sort(rectangleBound.left(), rectangleBound.right());
+      __sort(rectangleBound.left, rectangleBound.right);
 
-      __sort(rectangleBound.top(), rectangleBound.bottom());
+      __sort(rectangleBound.top, rectangleBound.bottom);
 
       internal_stroke_path(&::draw2d_gdi::graphics::internal_set_path_line, &rectangle, rectangleBound, m_ppen);
 
-      ::MoveToEx(m_hdc, rectangle.right(), rectangle.bottom(), nullptr);
+      ::MoveToEx(m_hdc, rectangle.right, rectangle.bottom, nullptr);
 
       return true;
 
@@ -4861,10 +4861,10 @@ namespace draw2d_gdi
 
       ::int_rectangle rectangle;
 
-      rectangle.left()         = (LONG) (arc.m_xCenter - arc.m_dRadiusX);
-      rectangle.right()        = (LONG) (arc.m_xCenter + arc.m_dRadiusX);
-      rectangle.top()          = (LONG) (arc.m_yCenter - arc.m_dRadiusY);
-      rectangle.bottom()       = (LONG) (arc.m_yCenter + arc.m_dRadiusY);
+      rectangle.left         = (LONG) (arc.m_xCenter - arc.m_dRadiusX);
+      rectangle.right        = (LONG) (arc.m_xCenter + arc.m_dRadiusX);
+      rectangle.top          = (LONG) (arc.m_yCenter - arc.m_dRadiusY);
+      rectangle.bottom       = (LONG) (arc.m_yCenter + arc.m_dRadiusY);
 
       ::int_point point1;
 
@@ -4881,7 +4881,7 @@ namespace draw2d_gdi
       point2.x          = (LONG) (arc.m_xCenter + arc.m_dRadiusX * cos(f2));
       point2.y          = (LONG) (arc.m_yCenter - arc.m_dRadiusY * sin(f2));
 
-      return ::ArcTo(m_hdc, rectangle.left(), rectangle.top(), rectangle.right() - rectangle.left(), rectangle.bottom() - rectangle.top(), point1.x, point1.y, point2.x, point2.y) != false;
+      return ::ArcTo(m_hdc, rectangle.left, rectangle.top, rectangle.right - rectangle.left, rectangle.bottom - rectangle.top, point1.x, point1.y, point2.x, point2.y) != false;
 
    }
 

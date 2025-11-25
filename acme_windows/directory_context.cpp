@@ -867,7 +867,7 @@ namespace acme_windows
       if (::task_flag().is_set(e_task_flag_compress_is_dir) && iLast >= 3 && !case_insensitive_ansi_count_compare( & ((const ::string &)str)[iLast - 3], ".zip", 4))
       {
 
-         //m_isdirmap.set(str.left()(iLast + 1), true, 0);
+         //m_isdirmap.set(str.left(iLast + 1), true, 0);
 
          return true;
 
@@ -879,7 +879,7 @@ namespace acme_windows
 
       bIsDir = (dwAttrib != INVALID_FILE_ATTRIBUTES) && (dwAttrib & FILE_ATTRIBUTE_DIRECTORY);
 
-      //      m_isdirmap.set(str.left()(iLast + 1), bIsDir, bIsDir ? 0 : ::GetLastError());
+      //      m_isdirmap.set(str.left(iLast + 1), bIsDir, bIsDir ? 0 : ::GetLastError());
 
       return bIsDir;
 

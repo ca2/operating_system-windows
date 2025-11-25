@@ -137,14 +137,14 @@ namespace windows
 
             auto r = rectangle;
 
-            r.left() += pnanopen->m_iWidth - 1;
-            r.top() += pnanopen->m_iWidth - 1;
+            r.left += pnanopen->m_iWidth - 1;
+            r.top += pnanopen->m_iWidth - 1;
 
             ::Rectangle(m_hdc,
-               r.left(),
-               r.top(),
-               r.right(),
-               r.bottom());
+               r.left,
+               r.top,
+               r.right,
+               r.bottom);
 
 
          }

@@ -3758,23 +3758,23 @@ namespace windows
 //      //if(bCalcValidRects)
 //      //{
 //      //   informationf("1");
-//      //   pncsp->rgrc[0].left() = lpncsp->lppos->x + 1;
+//      //   pncsp->rgrc[0].left = lpncsp->lppos->x + 1;
 //
-//      //   pncsp->rgrc[0].right() = lpncsp->lppos->x + lpncsp->lppos->cx - 1;
+//      //   pncsp->rgrc[0].right = lpncsp->lppos->x + lpncsp->lppos->cx - 1;
 //
-//      //   pncsp->rgrc[0].top() = lpncsp->lppos->y + 32;
+//      //   pncsp->rgrc[0].top = lpncsp->lppos->y + 32;
 //
-//      //   pncsp->rgrc[0].bottom() = lpncsp->lppos->y + lpncsp->lppos->cy - 1;
+//      //   pncsp->rgrc[0].bottom = lpncsp->lppos->y + lpncsp->lppos->cy - 1;
 //
 //      //}
 //      //else
 //      //{
 //      //   CRect * prectangle = (CRect *) pncsp;
 //
-//      //   prectangle->top() += 32;
-//      //   prectangle->left()++;
-//      //   prectangle->bottom()--;
-//      //   prectangle->right()--;
+//      //   prectangle->top += 32;
+//      //   prectangle->left++;
+//      //   prectangle->bottom--;
+//      //   prectangle->right--;
 //
 //      //   informationf("2");
 //      //}
@@ -3793,13 +3793,13 @@ namespace windows
 //         /* Maximized windows always have a non-client border that hangs over
 //         the edge of the screen, so the int_size proposed by e_message_non_client_calcsize is
 //         fine. Just adjust the top border to erase the u title. */
-//         pncsp->rgrc[0].left() = client.left();
+//         pncsp->rgrc[0].left = client.left;
 //
-//         pncsp->rgrc[0].top() = nonclient.top() + wi.cyWindowBorders;
+//         pncsp->rgrc[0].top = nonclient.top + wi.cyWindowBorders;
 //
-//         pncsp->rgrc[0].right() = client.right();
+//         pncsp->rgrc[0].right = client.right;
 //
-//         pncsp->rgrc[0].bottom() = client.bottom();
+//         pncsp->rgrc[0].bottom = client.bottom;
 //
 //
 //         HMONITOR mon = MonitorFromWindow(get_safe_handle(), MONITOR_DEFAULTTOPRIMARY);
@@ -3818,16 +3818,16 @@ namespace windows
 //
 //         {
 //            if (has_autohide_appbar(ABE_BOTTOM, mi.rcMonitor))
-//               pncsp->rgrc[0].bottom()--;
+//               pncsp->rgrc[0].bottom--;
 //
 //            else if (has_autohide_appbar(ABE_LEFT, mi.rcMonitor))
-//               pncsp->rgrc[0].left()++;
+//               pncsp->rgrc[0].left++;
 //
 //            else if (has_autohide_appbar(ABE_TOP, mi.rcMonitor))
-//               pncsp->rgrc[0].top()++;
+//               pncsp->rgrc[0].top++;
 //
 //            else if (has_autohide_appbar(ABE_RIGHT, mi.rcMonitor))
-//               pncsp->rgrc[0].right()--;
+//               pncsp->rgrc[0].right--;
 //
 //         }
 //      }

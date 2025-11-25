@@ -237,9 +237,9 @@ void centre_window(HWND window) {
   if (! GetWindowRect(desktop, &desktop_size)) return;
 
   /* Centre window */
-  x = (desktop_size.right() - size.right()) / 2;
-  y = (desktop_size.bottom() - size.bottom()) / 2;
-  MoveWindow(window, x, y, size.right() - size.left(), size.bottom() - size.top(), 0);
+  x = (desktop_size.right - size.right) / 2;
+  y = (desktop_size.bottom - size.bottom) / 2;
+  MoveWindow(window, x, y, size.right - size.left, size.bottom - size.top, 0);
 }
 
 static inline void check_stop_method(nssm_service_t *service, unsigned long method, unsigned long control) {
@@ -1044,9 +1044,9 @@ INT_PTR CALLBACK nssm_dlg(HWND window, const ::atom & atom, WPARAM w, LPARAM l) 
         int columns = (n - 1) / 4;
         RECT int_rectangle;
         GetWindowRect(list_base, &rectangle);
-        int width = rectangle.right() - rectangle.left();
+        int width = rectangle.right - rectangle.left;
         width -= (7 - columns) * 16;
-        int height = rectangle.bottom() - rectangle.top();
+        int height = rectangle.bottom - rectangle.top;
         if (n < 4) height -= (int) SendMessage(list_base, LB_GETITEMHEIGHT, 0, 0) * (4 - n);
         set_window_position(list_base, 0, 0, 0, width, height, SWP_NOMOVE | SWP_NOOWNERZORDER);
       }

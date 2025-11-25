@@ -213,8 +213,8 @@ namespace windows
                _T(NANO_WINDOW_CLASS),
                wstrTitle,
                WS_POPUP | WS_SYSMENU,
-               r.left(),
-               r.top(),
+               r.left,
+               r.top,
                r.width(),
                r.height(),
                NULL, NULL, hinstanceWndProc, this);

@@ -364,8 +364,8 @@ BOOL CLibraryFrame::Create(CWnd* pParent,DWORD dwBarStyle, PVOID p)
 
    CRect rectangle = rectangleDefault;
    if(!CWnd::CreateEx(dwExStyle,::windows_definition::RegisterWndClass(CS_DBLCLKS,::LoadCursor(nullptr,IDC_ARROW)),
-      m_strCaption,dwStyle,rectangle.left(),rectangle.top(),rectangle.right() - rectangle.left(),
-      rectangle.bottom() - rectangle.top(),pParent->GetSafeHwnd(),(HMENU)(UINT_PTR)0,p))
+      m_strCaption,dwStyle,rectangle.left,rectangle.top,rectangle.right - rectangle.left,
+      rectangle.bottom - rectangle.top,pParent->GetSafeHwnd(),(HMENU)(UINT_PTR)0,p))
    {
       return false;
    }
@@ -526,7 +526,7 @@ bool CLibraryFrame::ValidateNewName(const ::scoped_string & scopedstrNewName,CSt
 
    strNewPath += "\\" + CString(pszNewName);
    CString strExt = ".spotlibrary";
-   if(strNewPath.right()(strExt.GetLength()).CompareNoCase(strExt) != 0)
+   if(strNewPath.right(strExt.GetLength()).CompareNoCase(strExt) != 0)
    {
 
       strNewPath += ".spotlibrary";

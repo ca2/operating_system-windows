@@ -205,7 +205,7 @@ namespace draw2d_gdiplus
       if (dFontWidth == 1.0)
       {
 
-         Gdiplus::RectF float_rectangle((Gdiplus::REAL)rectangleParam.left(), (Gdiplus::REAL)rectangleParam.top(), (Gdiplus::REAL)(width(rectangleParam) * dFontWidth), (Gdiplus::REAL)(height(rectangleParam)));
+         Gdiplus::RectF float_rectangle((Gdiplus::REAL)rectangleParam.left, (Gdiplus::REAL)rectangleParam.top, (Gdiplus::REAL)(width(rectangleParam) * dFontWidth), (Gdiplus::REAL)(height(rectangleParam)));
 
          character_count iSize = ptext->get_item(::write_text::font::text::e_size_backend_draw_text)->get_text().length();
 
@@ -291,7 +291,7 @@ namespace draw2d_gdiplus
 
          auto pmNew = as_auto_pointer(m.Clone());
 
-         status = pmNew->Translate((Gdiplus::REAL)rectangleParam.left(), (Gdiplus::REAL)rectangleParam.top());
+         status = pmNew->Translate((Gdiplus::REAL)rectangleParam.left, (Gdiplus::REAL)rectangleParam.top);
 
          status = pmNew->Scale((Gdiplus::REAL)dFontWidth, (Gdiplus::REAL)1.0, Gdiplus::MatrixOrderAppend);
 
@@ -325,7 +325,7 @@ namespace draw2d_gdiplus
 
          //ap(Gdiplus::Matrix) pmNew = m.Clone();
 
-         //status = pmNew->Translate((Gdiplus::REAL) rectangleParam.left(), (Gdiplus::REAL) rectangleParam.top());
+         //status = pmNew->Translate((Gdiplus::REAL) rectangleParam.left, (Gdiplus::REAL) rectangleParam.top);
 
          //status = pmNew->Scale((Gdiplus::REAL) m_pfont->m_dFontWidth, (Gdiplus::REAL) 1.0, Gdiplus::MatrixOrderAppend);
 

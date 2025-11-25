@@ -717,14 +717,14 @@ int imm_client::on_text_composition_message(int iMessage)
       // ::int_point point(x, y);
       //::int_rectangle r;
       //this->rectangle(rectangle);
-      //rectangle.left() = x;
-      //rectangle.top() = y;
-      //rectangle.bottom() = y2;
+      //rectangle.left = x;
+      //rectangle.top = y;
+      //rectangle.bottom = y2;
       //_001ClientToScreen(rectangle);
       //get_wnd()->_001ScreenToClient(rectangle);
 
 
-      //SetCaretPos(rectangle.left(), rectangle.top());
+      //SetCaretPos(rectangle.left, rectangle.top);
       //ShowCaret(get_handle());
    }
    else if (iMessage == TEXT_COMPOSITION_MESSAGE_UPDATE_CANDIDATE_WINDOW_POSITION)
@@ -747,7 +747,7 @@ int imm_client::on_text_composition_message(int iMessage)
 
       compositionform.dwStyle = CFS_FORCE_POSITION;
 
-      compositionform.ptCurrentPos.x = rectangle.top();
+      compositionform.ptCurrentPos.x = rectangle.top;
 
       compositionform.ptCurrentPos.y -= 100;
 
@@ -757,10 +757,10 @@ int imm_client::on_text_composition_message(int iMessage)
 
       compositionform.dwStyle = CFS_RECT;
 
-      compositionform.rcArea.left = rect2.left();
-      compositionform.rcArea.top = rect2.top();
-      compositionform.rcArea.right = rect2.right();
-      compositionform.rcArea.bottom = rect2.bottom();
+      compositionform.rcArea.left = rect2.left;
+      compositionform.rcArea.top = rect2.top;
+      compositionform.rcArea.right = rect2.right;
+      compositionform.rcArea.bottom = rect2.bottom;
 
       //copy(com.rcArea, rect2);
 
@@ -802,9 +802,9 @@ int imm_client::on_text_composition_message(int iMessage)
 
       candidateform.dwStyle = CFS_CANDIDATEPOS;
 
-      candidateform.ptCurrentPos.x = rectangle.left();
+      candidateform.ptCurrentPos.x = rectangle.left;
 
-      candidateform.ptCurrentPos.y = rectangle.bottom();
+      candidateform.ptCurrentPos.y = rectangle.bottom;
 
       if (::ImmSetCandidateWindow(imm, &candidateform))
       {
